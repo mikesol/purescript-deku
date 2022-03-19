@@ -1,0 +1,24 @@
+{
+  "name": "purescript-wags",
+  "version": "0.7.4",
+  "description": "Web DOM Graphs as a Stream",
+  "scripts": {
+    "build": "spago build",
+    "format": "purs-tidy format-in-place src/**/*.purs",
+    "pulp-publish": "pulp publish",
+    "docs": "pulp docs",
+    "test": "spago -x test.dhall test && npx spago -x examples.dhall build"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "psc-package": "^4.0.1",
+    "pulp": "^15.0.0",
+    "purescript": "^0.14.4",
+    "spago": "^0.20.3"
+  },
+  "dependencies": {
+    "purs-tidy": "^0.4.6"
+  }
+}
