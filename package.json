@@ -1,7 +1,7 @@
 {
-  "name": "purescript-wags",
+  "name": "purescript-deku",
   "version": "0.7.4",
-  "description": "Web DOM Graphs as a Stream",
+  "description": "A friendly tree-like structure",
   "scripts": {
     "build": "spago build",
     "format": "purs-tidy format-in-place src/**/*.purs",

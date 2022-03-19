@@ -10,3 +10,4 @@
 /.spago
 /examples/**/index.js
 packages.json
+.venv

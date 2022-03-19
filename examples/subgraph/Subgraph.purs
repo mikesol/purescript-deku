@@ -12,7 +12,7 @@ import Deku.Control.Functions.Subgraph as SG
 import Deku.Control.Types (Frame0, Scene)
 import Deku.Create (icreate)
 import Deku.Graph.Attribute (Cb(..))
-import Deku.Graph.DOM (AsSubgraph(..), Click(..), Href(..), XSubgraph(..), a, a'attr, root, subgraph, text, (:=))
+import Deku.Graph.DOM (AsSubgraph(..), OnClick(..), Href_(..), XSubgraph(..), a, a'attr, root, subgraph, text, (:=))
 import Deku.Interpret (makeFFIDOMSnapshot)
 import Deku.Run (RunDOM, RunEngine, TriggeredScene, defaultOptions, run)
 import Effect (Effect)
@@ -30,15 +30,15 @@ scene elt =
   ( \_ push0 ->
       ( icreate $
           root elt
-            { hello: a [ Href := "#", Click := Cb (const $ push0 unit) ]
+            { hello: a [ Href_ := "#", OnClick := Cb (const $ push0 unit) ]
                 { ht: text "click" }
             , helloA: subgraph (fill (const false) :: Vec D40 Boolean)
                 ( AsSubgraph \i -> SG.istart
                     ( \_ push ->
                         ( icreate
                             { myA: a
-                                [ Href := "#"
-                                , Click := Cb
+                                [ Href_ := "#"
+                                , OnClick := Cb
                                     ( const $ do
                                         push false
                                         when (i == 4) (push0 unit)
@@ -54,7 +54,7 @@ scene elt =
                             ichange_ { "myA.myTxt": "banana" }
                           Right tf -> ichange_
                             { "myA": a'attr
-                                [ Click := Cb (const $ push (not tf)) ]
+                                [ OnClick := Cb (const $ push (not tf)) ]
                             , "myA.myTxt": if tf then " me " else " em "
                             }
                     )
