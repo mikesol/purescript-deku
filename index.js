@@ -3181,6 +3181,14 @@ var PS = {};
 		  };
 	  };
   };
+  var doSortingOnSubgraphs = function (unit, sorting) {
+	  for (var i = 0; i < sorting.length; i++) {
+		  unit.main.insertBefore(
+			  unit.children[sorting[i][0]].units[unit.terminalPtr].main,
+			  unit.main.firstChild
+		  );
+	  }
+  };
   exports.makeSubgraph_ = function (ptr) {
 	  return function (terminalPtr) {
 		  return function (envs) {
@@ -3204,10 +3212,12 @@ var PS = {};
 								  main: document.createElement("div"),
 								  children: children,
 								  funk: funk,
+								  terminalPtr: terminalPtr,
 								  isSubgraph: true,
 								  scenes: scenes,
 							  };
 							  state.units[ptr].main.setAttribute("style", "display:contents;");
+							  var sortable = [];
 							  for (var i = 0; i < scenes.length; i++) {
 								  var applied = funk[i](envs[i])(scenes[i]);
 								  for (var j = 0; j < applied.instructions.length; j++) {
@@ -3215,7 +3225,11 @@ var PS = {};
 									  applied.instructions[j](children[i])();
 								  }
 								  scenes[i] = applied.nextScene;
+								  sortable.push([i, applied.forOrdering]);
 							  }
+							  // last DOM elements first
+							  sortable.sort((a, b) => b[1] - a[1]);
+							  doSortingOnSubgraphs(state.units[ptr], sortable);
 							  for (var i = 0; i < children.length; i++) {
 								  connectXToY(false)(terminalPtr)(ptr)(children[i])(state)();
 							  }
@@ -3347,14 +3361,18 @@ var PS = {};
 			  return function () {
 				  var scenes = state.units[ptr].scenes;
 				  var children = state.units[ptr].children;
+				  var sortable = [];
 				  for (var i = 0; i < scenes.length; i++) {
 					  var applied = state.units[ptr].funk[i](envs[i])(scenes[i]);
 					  for (var j = 0; j < applied.instructions.length; j++) {
 						  // thunk
 						  applied.instructions[j](children[i])();
 					  }
+					  sortable.push([i, applied.forOrdering]);
 					  scenes[i] = applied.nextScene;
 				  }
+				  sortable.sort((a, b) => b[1] - a[1]);
+				  doSortingOnSubgraphs(state.units[ptr], sortable);
 			  };
 		  };
 	  };
@@ -3413,8 +3431,11 @@ var PS = {};
 							  entries[i][0] +
 							  "." +
 							  children[j][0];
-						  var toId =$prefix + ($prefix === "" ? "" : ".") + entries[i][0]
-						  if (state.units[fromId].isSubgraph || state.units[fromId].isTumult) {
+						  var toId = $prefix + ($prefix === "" ? "" : ".") + entries[i][0];
+						  if (
+							  state.units[fromId].isSubgraph ||
+							  state.units[fromId].isTumult
+						  ) {
 							  // the connection has already occurred
 							  //continue;
 						  }
@@ -5541,7 +5562,7 @@ var PS = {};
           if (v instanceof Data_Maybe.Just) {
               return Data_Functor.map(Data_Functor.functorArray)(interpretInstruction(effectfulDOMInterpret))(Data_Array.fromFoldable(Data_Set.foldableSet)(Deku_Tumult_Reconciliation.reconcileTumult(Data_Set.fromFoldable(Data_Foldable.foldableArray)(Deku_Rendered.ordInstruction)(a))(Data_Set.fromFoldable(Data_Foldable.foldableArray)(Deku_Rendered.ordInstruction)(v.value0))));
           };
-          throw new Error("Failed pattern match at Deku.Interpret (line 296, column 31 - line 301, column 6): " + [ v.constructor.name ]);
+          throw new Error("Failed pattern match at Deku.Interpret (line 300, column 31 - line 305, column 6): " + [ v.constructor.name ]);
       };
   };
   var effectfulDOMInterpret = {
@@ -5564,7 +5585,8 @@ var PS = {};
                               var res = Deku_Control_Types.oneSubFrame(scene)(eop)(evt.push);
                               return {
                                   instructions: res.instructions,
-                                  nextScene: res.next
+                                  nextScene: res.next,
+                                  forOrdering: Data_Newtype.unwrap()(res.res)
                               };
                           };
                       };
@@ -5777,10 +5799,10 @@ var PS = {};
   var ichange_ = function (dictDOMInterpret) {
       return function (dictChange_) {
           return function (r) {
-              var $1075 = change_(dictChange_)(dictDOMInterpret);
-              var $1076 = Data_Functor.voidRight(Deku_Control_Types.functorDOM)(r);
-              return function ($1077) {
-                  return $1075($1076($1077));
+              var $1087 = change_(dictChange_)(dictDOMInterpret);
+              var $1088 = Data_Functor.voidRight(Deku_Control_Types.functorDOM)(r);
+              return function ($1089) {
+                  return $1087($1088($1089));
               };
           };
       };
@@ -6210,28 +6232,30 @@ var PS = {};
       };
   })();                                                                      
   var makeElt = function (elt) {
-      var $2003 = Control_Semigroupoid.compose(Control_Semigroupoid.semigroupoidFn)(Element);
-      return function ($2004) {
-          return $2003((function (v) {
-              return function (v1) {
-                  return {
-                      element: v,
-                      children: v1
+      return function (tag) {
+          var $2003 = Control_Semigroupoid.compose(Control_Semigroupoid.semigroupoidFn)(Element);
+          return function ($2004) {
+              return $2003((function (v) {
+                  return function (v1) {
+                      return {
+                          element: v,
+                          children: v1
+                      };
                   };
-              };
-          })(elt((function (v) {
-              return {
-                  tag: "a",
-                  attributes: v
-              };
-          })($2004))));
+              })(elt((function (v) {
+                  return {
+                      tag: tag,
+                      attributes: v
+                  };
+              })($2004))));
+          };
       };
-  };                         
+  };                                  
   var attr = function (dict) {
       return dict.attr;
-  };                       
+  };                               
   var a$primeattr = Control_Category.identity(Control_Category.categoryFn);
-  var a = makeElt(A);
+  var a = makeElt(A)("a");
   exports["attr"] = attr;
   exports["text"] = text;
   exports["root"] = root;
