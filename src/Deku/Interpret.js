@@ -164,6 +164,14 @@ exports.setText_ = function (a) {
 		};
 	};
 };
+var doSortingOnSubgraphs = function (unit, sorting) {
+	for (var i = 0; i < sorting.length; i++) {
+		unit.main.insertBefore(
+			unit.children[sorting[i][0]].units[unit.terminalPtr].main,
+			unit.main.firstChild
+		);
+	}
+};
 exports.makeSubgraph_ = function (ptr) {
 	return function (terminalPtr) {
 		return function (envs) {
@@ -187,10 +195,12 @@ exports.makeSubgraph_ = function (ptr) {
 								main: document.createElement("div"),
 								children: children,
 								funk: funk,
+								terminalPtr: terminalPtr,
 								isSubgraph: true,
 								scenes: scenes,
 							};
 							state.units[ptr].main.setAttribute("style", "display:contents;");
+							var sortable = [];
 							for (var i = 0; i < scenes.length; i++) {
 								var applied = funk[i](envs[i])(scenes[i]);
 								for (var j = 0; j < applied.instructions.length; j++) {
@@ -198,7 +208,11 @@ exports.makeSubgraph_ = function (ptr) {
 									applied.instructions[j](children[i])();
 								}
 								scenes[i] = applied.nextScene;
+								sortable.push([i, applied.forOrdering]);
 							}
+							// last DOM elements first
+							sortable.sort((a, b) => b[1] - a[1]);
+							doSortingOnSubgraphs(state.units[ptr], sortable);
 							for (var i = 0; i < children.length; i++) {
 								connectXToY(false)(terminalPtr)(ptr)(children[i])(state)();
 							}
@@ -330,14 +344,18 @@ exports.setSubgraph_ = function (ptr) {
 			return function () {
 				var scenes = state.units[ptr].scenes;
 				var children = state.units[ptr].children;
+				var sortable = [];
 				for (var i = 0; i < scenes.length; i++) {
 					var applied = state.units[ptr].funk[i](envs[i])(scenes[i]);
 					for (var j = 0; j < applied.instructions.length; j++) {
 						// thunk
 						applied.instructions[j](children[i])();
 					}
+					sortable.push([i, applied.forOrdering]);
 					scenes[i] = applied.nextScene;
 				}
+				sortable.sort((a, b) => b[1] - a[1]);
+				doSortingOnSubgraphs(state.units[ptr], sortable);
 			};
 		};
 	};
@@ -396,8 +414,11 @@ var massiveCreateConnectStep_ = function ($prefix) {
 							entries[i][0] +
 							"." +
 							children[j][0];
-						var toId =$prefix + ($prefix === "" ? "" : ".") + entries[i][0]
-						if (state.units[fromId].isSubgraph || state.units[fromId].isTumult) {
+						var toId = $prefix + ($prefix === "" ? "" : ".") + entries[i][0];
+						if (
+							state.units[fromId].isSubgraph ||
+							state.units[fromId].isTumult
+						) {
 							// the connection has already occurred
 							//continue;
 						}

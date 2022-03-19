@@ -27,6 +27,7 @@ import Data.Either (Either(..))
 import Data.FoldableWithIndex (traverseWithIndex_)
 import Data.Lazy (defer)
 import Data.Maybe (Maybe(..))
+import Data.Monoid.Additive (Additive)
 import Data.Newtype (unwrap)
 import Data.Set as Set
 import Data.Traversable (sequence)
@@ -54,7 +55,7 @@ type SubgraphInput (terminus :: Symbol) (n :: Type) env push dom engine =
   , terminus :: String
   , envs :: V.Vec n env
   , scenes ::
-      Int -> SubScene terminus env dom engine Frame0 push Unit
+      Int -> SubScene terminus env dom engine Frame0 push (Additive Int)
   }
 
 type SetSubgraphInput (n :: Type) env =
@@ -189,6 +190,7 @@ foreign import makeSubgraph_
        ( Either env push
          -> scene
          -> { instructions :: Array (FFIDOMSnapshot -> Effect Unit)
+            , forOrdering :: Int
             , nextScene :: scene
             }
        )
@@ -283,10 +285,12 @@ interpretInstruction = unwrap >>> match
   , setText: \a -> setText a
   , massiveChange: \a -> massiveChange a
   , setAttribute: \a -> setAttribute a
-  , setSubgraph: \{ id } -> setAttribute { id, key: "devnull", value: prop "true" }
+  , setSubgraph: \{ id } -> setAttribute
+      { id, key: "devnull", value: prop "true" }
   , setSingleSubgraph: \{ id } -> setAttribute
       { id, key: "devnull", value: prop "true" }
-  , setTumult: \{ id } -> setAttribute { id, key: "devnull", value: prop "true" }
+  , setTumult: \{ id } -> setAttribute
+      { id, key: "devnull", value: prop "true" }
   }
 
 makeInstructionsEffectful
@@ -321,7 +325,10 @@ instance effectfulDOMInterpret ::
             let
               res = oneSubFrame scene eop evt.push
             in
-              { instructions: res.instructions, nextScene: res.next }
+              { instructions: res.instructions
+              , nextScene: res.next
+              , forOrdering: unwrap res.res
+              }
         )
     evts # traverseWithIndex_ \i evt -> subscribe evt.event \p ->
       setSingleSubgraph_ id i (Right p) dom
@@ -342,7 +349,9 @@ instance effectfulDOMInterpret ::
       toFFI
   setAttribute = setAttribute_
   setText = setText_
-  massiveChange noEta = massiveChange_ setSubgraph setAttribute setText setTumult noEta
+  massiveChange noEta = massiveChange_ setSubgraph setAttribute setText
+    setTumult
+    noEta
   setSubgraph { id, envs } dom = setSubgraph_ id (map Left $ Vec.toArray envs)
     (dom)
   setSingleSubgraph { id, index, env } dom = setSingleSubgraph_ id

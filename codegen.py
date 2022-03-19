@@ -7,7 +7,7 @@ GENERATE_PATCHES = 5
 GENERATE_VALIDATION = 6
 GENERATE_ATTR_DECL = 7
 GENERATE_ATTR_DEFS = 8
-CODEGEN_TARGET = GENERATE_ATTR_DECL
+CODEGEN_TARGET = GENERATE_DOM_DEFS
 
 from bs4 import BeautifulSoup
 import requests
@@ -75,7 +75,7 @@ instance typeToSym{term} ::
    . Array (Attribute {term})
   -> {{ | children }}
   -> Element {term} children
-{x} = makeElt {term}
+{x} = makeElt {term} "{x}"
 
 {x}'attr
   :: Array (Attribute {term})

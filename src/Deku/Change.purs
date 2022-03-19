@@ -188,13 +188,40 @@ instance changeSubgraph1 ::
   , IsSymbol terminus
   , R.Cons ptr (NodeC (CTOR.TSubgraph n terminus env) edges) ignore graph
   , Pos n
+  ) =>
+  Change' ptr (CTOR.XSubgraph n env) graph where
+  change' ptr w = o
+    where
+    { context: i, value: (CTOR.XSubgraph { envs }) } = unsafeUnDOM w
+
+    id = reflectSymbol ptr
+
+    o =
+      unsafeDOM
+        { context:
+            i
+              { instructions = i.instructions <>
+                  [ setSubgraph
+                      { id
+                      , envs
+                      }
+                  ]
+              }
+        , value: unit
+        }
+
+instance changeSubgraph2 ::
+  ( IsSymbol ptr
+  , IsSymbol terminus
+  , R.Cons ptr (NodeC (CTOR.TSubgraph n terminus env) edges) ignore graph
+  , Pos n
   , Nat i
   , Lt i n
   ) =>
-  Change' ptr (CTOR.XSubgraph i env) graph where
+  Change' ptr (CTOR.X1Subgraph i env) graph where
   change' ptr w = o
     where
-    { context: i, value: (CTOR.XSubgraph { index, env }) } = unsafeUnDOM w
+    { context: i, value: (CTOR.X1Subgraph { index, env }) } = unsafeUnDOM w
 
     id = reflectSymbol ptr
 
@@ -212,7 +239,6 @@ instance changeSubgraph1 ::
               }
         , value: unit
         }
-
 instance changeTumult ::
   ( IsSymbol ptr
   , IsSymbol terminus

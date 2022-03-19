@@ -22,6 +22,8 @@ module Deku.Graph.DOM
   , unsafeUnSubgraph
   , XSubgraph'
   , XSubgraph(..)
+  , X1Subgraph'
+  , X1Subgraph(..)
   , Tumult
   , TTumult
   , tumult
@@ -861,6 +863,7 @@ module Deku.Graph.DOM
 
 import Prelude
 
+import Data.Monoid.Additive (Additive)
 import Data.Symbol (class IsSymbol, reflectSymbol)
 import Data.Tuple.Nested (type (/\))
 import Data.Typelevel.Num (class Pos, D1)
@@ -898,13 +901,14 @@ makeElt
        }
        -> tag
      )
+  -> String
   -> attributes
   -> { | children }
   -> Element tag children
-makeElt elt = compose Element
+makeElt elt tag = compose Element
   <<< { element: _, children: _ }
   <<< elt
-  <<< { tag: "a", attributes: _ }
+  <<< { tag, attributes: _ }
 --------- other
 type Root' = (element :: Web.DOM.Element)
 newtype Root = Root { | Root' }
@@ -945,7 +949,7 @@ newtype AsSubgraph terminus env push = AsSubgraph
   ( forall dom engine
      . DOMInterpret dom engine
     => Int
-    -> SubScene terminus env dom engine Frame0 push Unit
+    -> SubScene terminus env dom engine Frame0 push (Additive Int)
   )
 
 unAsSubGraph
@@ -954,7 +958,7 @@ unAsSubGraph
   -> ( forall dom engine
         . DOMInterpret dom engine
        => Int
-       -> SubScene terminus env dom engine Frame0 push Unit
+       -> SubScene terminus env dom engine Frame0 push (Additive Int)
      )
 unAsSubGraph (AsSubgraph sg) = sg
 
@@ -994,15 +998,22 @@ unsafeUnSubgraph
   -> { | Subgraph' subgraphMaker envs }
 unsafeUnSubgraph (Subgraph unsafe) = unsafe
 
-type XSubgraph' (index :: Type) (env :: Type) =
-  (index :: index, env :: env)
+type XSubgraph'  (n :: Type) (env :: Type) =
+  ( envs :: Vec n env )
 newtype XSubgraph index env = XSubgraph { | XSubgraph' index env }
 
 instance typeToSymSubgraph ::
   TypeToSym (Subgraph subgraphMaker env) "Subgraph"
 
 instance typeToSymXSubgraph ::
-  TypeToSym (XSubgraph index env) "Subgraph"
+  TypeToSym (XSubgraph n envs) "Subgraph"
+
+type X1Subgraph' (index :: Type) (env :: Type) =
+  (index :: index, env :: env)
+newtype X1Subgraph index env = X1Subgraph { | X1Subgraph' index env }
+
+instance typeToSymX1Subgraph ::
+  TypeToSym (X1Subgraph index env) "Subgraph"
 
 type Tumult' (n :: Type) (terminus :: Symbol) =
   ( tumult :: Tumultuous n terminus
@@ -2346,7 +2357,7 @@ a
    . Array (Attribute A)
   -> { | children }
   -> Element A children
-a = makeElt A
+a = makeElt A "a"
 
 a'attr
   :: Array (Attribute A)
@@ -2381,7 +2392,7 @@ abbr
    . Array (Attribute Abbr)
   -> { | children }
   -> Element Abbr children
-abbr = makeElt Abbr
+abbr = makeElt Abbr "abbr"
 
 abbr'attr
   :: Array (Attribute Abbr)
@@ -2416,7 +2427,7 @@ acronym
    . Array (Attribute Acronym)
   -> { | children }
   -> Element Acronym children
-acronym = makeElt Acronym
+acronym = makeElt Acronym "acronym"
 
 acronym'attr
   :: Array (Attribute Acronym)
@@ -2451,7 +2462,7 @@ address
    . Array (Attribute Address)
   -> { | children }
   -> Element Address children
-address = makeElt Address
+address = makeElt Address "address"
 
 address'attr
   :: Array (Attribute Address)
@@ -2486,7 +2497,7 @@ applet
    . Array (Attribute Applet)
   -> { | children }
   -> Element Applet children
-applet = makeElt Applet
+applet = makeElt Applet "applet"
 
 applet'attr
   :: Array (Attribute Applet)
@@ -2521,7 +2532,7 @@ area
    . Array (Attribute Area)
   -> { | children }
   -> Element Area children
-area = makeElt Area
+area = makeElt Area "area"
 
 area'attr
   :: Array (Attribute Area)
@@ -2556,7 +2567,7 @@ article
    . Array (Attribute Article)
   -> { | children }
   -> Element Article children
-article = makeElt Article
+article = makeElt Article "article"
 
 article'attr
   :: Array (Attribute Article)
@@ -2591,7 +2602,7 @@ aside
    . Array (Attribute Aside)
   -> { | children }
   -> Element Aside children
-aside = makeElt Aside
+aside = makeElt Aside "aside"
 
 aside'attr
   :: Array (Attribute Aside)
@@ -2626,7 +2637,7 @@ audio
    . Array (Attribute Audio)
   -> { | children }
   -> Element Audio children
-audio = makeElt Audio
+audio = makeElt Audio "audio"
 
 audio'attr
   :: Array (Attribute Audio)
@@ -2661,7 +2672,7 @@ b
    . Array (Attribute B)
   -> { | children }
   -> Element B children
-b = makeElt B
+b = makeElt B "b"
 
 b'attr
   :: Array (Attribute B)
@@ -2696,7 +2707,7 @@ base
    . Array (Attribute Base)
   -> { | children }
   -> Element Base children
-base = makeElt Base
+base = makeElt Base "base"
 
 base'attr
   :: Array (Attribute Base)
@@ -2731,7 +2742,7 @@ basefont
    . Array (Attribute Basefont)
   -> { | children }
   -> Element Basefont children
-basefont = makeElt Basefont
+basefont = makeElt Basefont "basefont"
 
 basefont'attr
   :: Array (Attribute Basefont)
@@ -2766,7 +2777,7 @@ bdi
    . Array (Attribute Bdi)
   -> { | children }
   -> Element Bdi children
-bdi = makeElt Bdi
+bdi = makeElt Bdi "bdi"
 
 bdi'attr
   :: Array (Attribute Bdi)
@@ -2801,7 +2812,7 @@ bdo
    . Array (Attribute Bdo)
   -> { | children }
   -> Element Bdo children
-bdo = makeElt Bdo
+bdo = makeElt Bdo "bdo"
 
 bdo'attr
   :: Array (Attribute Bdo)
@@ -2836,7 +2847,7 @@ big
    . Array (Attribute Big)
   -> { | children }
   -> Element Big children
-big = makeElt Big
+big = makeElt Big "big"
 
 big'attr
   :: Array (Attribute Big)
@@ -2871,7 +2882,7 @@ blockquote
    . Array (Attribute Blockquote)
   -> { | children }
   -> Element Blockquote children
-blockquote = makeElt Blockquote
+blockquote = makeElt Blockquote "blockquote"
 
 blockquote'attr
   :: Array (Attribute Blockquote)
@@ -2906,7 +2917,7 @@ body
    . Array (Attribute Body)
   -> { | children }
   -> Element Body children
-body = makeElt Body
+body = makeElt Body "body"
 
 body'attr
   :: Array (Attribute Body)
@@ -2941,7 +2952,7 @@ br
    . Array (Attribute Br)
   -> { | children }
   -> Element Br children
-br = makeElt Br
+br = makeElt Br "br"
 
 br'attr
   :: Array (Attribute Br)
@@ -2976,7 +2987,7 @@ button
    . Array (Attribute Button)
   -> { | children }
   -> Element Button children
-button = makeElt Button
+button = makeElt Button "button"
 
 button'attr
   :: Array (Attribute Button)
@@ -3011,7 +3022,7 @@ canvas
    . Array (Attribute Canvas)
   -> { | children }
   -> Element Canvas children
-canvas = makeElt Canvas
+canvas = makeElt Canvas "canvas"
 
 canvas'attr
   :: Array (Attribute Canvas)
@@ -3046,7 +3057,7 @@ caption
    . Array (Attribute Caption)
   -> { | children }
   -> Element Caption children
-caption = makeElt Caption
+caption = makeElt Caption "caption"
 
 caption'attr
   :: Array (Attribute Caption)
@@ -3081,7 +3092,7 @@ center
    . Array (Attribute Center)
   -> { | children }
   -> Element Center children
-center = makeElt Center
+center = makeElt Center "center"
 
 center'attr
   :: Array (Attribute Center)
@@ -3116,7 +3127,7 @@ cite
    . Array (Attribute Cite)
   -> { | children }
   -> Element Cite children
-cite = makeElt Cite
+cite = makeElt Cite "cite"
 
 cite'attr
   :: Array (Attribute Cite)
@@ -3151,7 +3162,7 @@ code
    . Array (Attribute Code)
   -> { | children }
   -> Element Code children
-code = makeElt Code
+code = makeElt Code "code"
 
 code'attr
   :: Array (Attribute Code)
@@ -3186,7 +3197,7 @@ col
    . Array (Attribute Col)
   -> { | children }
   -> Element Col children
-col = makeElt Col
+col = makeElt Col "col"
 
 col'attr
   :: Array (Attribute Col)
@@ -3221,7 +3232,7 @@ colgroup
    . Array (Attribute Colgroup)
   -> { | children }
   -> Element Colgroup children
-colgroup = makeElt Colgroup
+colgroup = makeElt Colgroup "colgroup"
 
 colgroup'attr
   :: Array (Attribute Colgroup)
@@ -3256,7 +3267,7 @@ xdata
    . Array (Attribute Data)
   -> { | children }
   -> Element Data children
-xdata = makeElt Data
+xdata = makeElt Data "data"
 
 xdata'attr
   :: Array (Attribute Data)
@@ -3291,7 +3302,7 @@ datalist
    . Array (Attribute Datalist)
   -> { | children }
   -> Element Datalist children
-datalist = makeElt Datalist
+datalist = makeElt Datalist "datalist"
 
 datalist'attr
   :: Array (Attribute Datalist)
@@ -3326,7 +3337,7 @@ dd
    . Array (Attribute Dd)
   -> { | children }
   -> Element Dd children
-dd = makeElt Dd
+dd = makeElt Dd "dd"
 
 dd'attr
   :: Array (Attribute Dd)
@@ -3361,7 +3372,7 @@ del
    . Array (Attribute Del)
   -> { | children }
   -> Element Del children
-del = makeElt Del
+del = makeElt Del "del"
 
 del'attr
   :: Array (Attribute Del)
@@ -3396,7 +3407,7 @@ details
    . Array (Attribute Details)
   -> { | children }
   -> Element Details children
-details = makeElt Details
+details = makeElt Details "details"
 
 details'attr
   :: Array (Attribute Details)
@@ -3431,7 +3442,7 @@ dfn
    . Array (Attribute Dfn)
   -> { | children }
   -> Element Dfn children
-dfn = makeElt Dfn
+dfn = makeElt Dfn "dfn"
 
 dfn'attr
   :: Array (Attribute Dfn)
@@ -3466,7 +3477,7 @@ dialog
    . Array (Attribute Dialog)
   -> { | children }
   -> Element Dialog children
-dialog = makeElt Dialog
+dialog = makeElt Dialog "dialog"
 
 dialog'attr
   :: Array (Attribute Dialog)
@@ -3501,7 +3512,7 @@ dir
    . Array (Attribute Dir)
   -> { | children }
   -> Element Dir children
-dir = makeElt Dir
+dir = makeElt Dir "dir"
 
 dir'attr
   :: Array (Attribute Dir)
@@ -3536,7 +3547,7 @@ div
    . Array (Attribute Div)
   -> { | children }
   -> Element Div children
-div = makeElt Div
+div = makeElt Div "div"
 
 div'attr
   :: Array (Attribute Div)
@@ -3571,7 +3582,7 @@ dl
    . Array (Attribute Dl)
   -> { | children }
   -> Element Dl children
-dl = makeElt Dl
+dl = makeElt Dl "dl"
 
 dl'attr
   :: Array (Attribute Dl)
@@ -3606,7 +3617,7 @@ dt
    . Array (Attribute Dt)
   -> { | children }
   -> Element Dt children
-dt = makeElt Dt
+dt = makeElt Dt "dt"
 
 dt'attr
   :: Array (Attribute Dt)
@@ -3641,7 +3652,7 @@ em
    . Array (Attribute Em)
   -> { | children }
   -> Element Em children
-em = makeElt Em
+em = makeElt Em "em"
 
 em'attr
   :: Array (Attribute Em)
@@ -3676,7 +3687,7 @@ embed
    . Array (Attribute Embed)
   -> { | children }
   -> Element Embed children
-embed = makeElt Embed
+embed = makeElt Embed "embed"
 
 embed'attr
   :: Array (Attribute Embed)
@@ -3711,7 +3722,7 @@ fieldset
    . Array (Attribute Fieldset)
   -> { | children }
   -> Element Fieldset children
-fieldset = makeElt Fieldset
+fieldset = makeElt Fieldset "fieldset"
 
 fieldset'attr
   :: Array (Attribute Fieldset)
@@ -3746,7 +3757,7 @@ figcaption
    . Array (Attribute Figcaption)
   -> { | children }
   -> Element Figcaption children
-figcaption = makeElt Figcaption
+figcaption = makeElt Figcaption "figcaption"
 
 figcaption'attr
   :: Array (Attribute Figcaption)
@@ -3781,7 +3792,7 @@ figure
    . Array (Attribute Figure)
   -> { | children }
   -> Element Figure children
-figure = makeElt Figure
+figure = makeElt Figure "figure"
 
 figure'attr
   :: Array (Attribute Figure)
@@ -3816,7 +3827,7 @@ font
    . Array (Attribute Font)
   -> { | children }
   -> Element Font children
-font = makeElt Font
+font = makeElt Font "font"
 
 font'attr
   :: Array (Attribute Font)
@@ -3851,7 +3862,7 @@ footer
    . Array (Attribute Footer)
   -> { | children }
   -> Element Footer children
-footer = makeElt Footer
+footer = makeElt Footer "footer"
 
 footer'attr
   :: Array (Attribute Footer)
@@ -3886,7 +3897,7 @@ form
    . Array (Attribute Form)
   -> { | children }
   -> Element Form children
-form = makeElt Form
+form = makeElt Form "form"
 
 form'attr
   :: Array (Attribute Form)
@@ -3921,7 +3932,7 @@ frame
    . Array (Attribute Frame)
   -> { | children }
   -> Element Frame children
-frame = makeElt Frame
+frame = makeElt Frame "frame"
 
 frame'attr
   :: Array (Attribute Frame)
@@ -3956,7 +3967,7 @@ frameset
    . Array (Attribute Frameset)
   -> { | children }
   -> Element Frameset children
-frameset = makeElt Frameset
+frameset = makeElt Frameset "frameset"
 
 frameset'attr
   :: Array (Attribute Frameset)
@@ -3991,7 +4002,7 @@ h1
    . Array (Attribute H1)
   -> { | children }
   -> Element H1 children
-h1 = makeElt H1
+h1 = makeElt H1 "h1"
 
 h1'attr
   :: Array (Attribute H1)
@@ -4026,7 +4037,7 @@ h2
    . Array (Attribute H2)
   -> { | children }
   -> Element H2 children
-h2 = makeElt H2
+h2 = makeElt H2 "h2"
 
 h2'attr
   :: Array (Attribute H2)
@@ -4061,7 +4072,7 @@ h3
    . Array (Attribute H3)
   -> { | children }
   -> Element H3 children
-h3 = makeElt H3
+h3 = makeElt H3 "h3"
 
 h3'attr
   :: Array (Attribute H3)
@@ -4096,7 +4107,7 @@ h4
    . Array (Attribute H4)
   -> { | children }
   -> Element H4 children
-h4 = makeElt H4
+h4 = makeElt H4 "h4"
 
 h4'attr
   :: Array (Attribute H4)
@@ -4131,7 +4142,7 @@ h5
    . Array (Attribute H5)
   -> { | children }
   -> Element H5 children
-h5 = makeElt H5
+h5 = makeElt H5 "h5"
 
 h5'attr
   :: Array (Attribute H5)
@@ -4166,7 +4177,7 @@ h6
    . Array (Attribute H6)
   -> { | children }
   -> Element H6 children
-h6 = makeElt H6
+h6 = makeElt H6 "h6"
 
 h6'attr
   :: Array (Attribute H6)
@@ -4201,7 +4212,7 @@ head
    . Array (Attribute Head)
   -> { | children }
   -> Element Head children
-head = makeElt Head
+head = makeElt Head "head"
 
 head'attr
   :: Array (Attribute Head)
@@ -4236,7 +4247,7 @@ header
    . Array (Attribute Header)
   -> { | children }
   -> Element Header children
-header = makeElt Header
+header = makeElt Header "header"
 
 header'attr
   :: Array (Attribute Header)
@@ -4271,7 +4282,7 @@ hr
    . Array (Attribute Hr)
   -> { | children }
   -> Element Hr children
-hr = makeElt Hr
+hr = makeElt Hr "hr"
 
 hr'attr
   :: Array (Attribute Hr)
@@ -4306,7 +4317,7 @@ html
    . Array (Attribute Html)
   -> { | children }
   -> Element Html children
-html = makeElt Html
+html = makeElt Html "html"
 
 html'attr
   :: Array (Attribute Html)
@@ -4341,7 +4352,7 @@ i
    . Array (Attribute I)
   -> { | children }
   -> Element I children
-i = makeElt I
+i = makeElt I "i"
 
 i'attr
   :: Array (Attribute I)
@@ -4376,7 +4387,7 @@ iframe
    . Array (Attribute Iframe)
   -> { | children }
   -> Element Iframe children
-iframe = makeElt Iframe
+iframe = makeElt Iframe "iframe"
 
 iframe'attr
   :: Array (Attribute Iframe)
@@ -4411,7 +4422,7 @@ img
    . Array (Attribute Img)
   -> { | children }
   -> Element Img children
-img = makeElt Img
+img = makeElt Img "img"
 
 img'attr
   :: Array (Attribute Img)
@@ -4446,7 +4457,7 @@ input
    . Array (Attribute Input)
   -> { | children }
   -> Element Input children
-input = makeElt Input
+input = makeElt Input "input"
 
 input'attr
   :: Array (Attribute Input)
@@ -4481,7 +4492,7 @@ ins
    . Array (Attribute Ins)
   -> { | children }
   -> Element Ins children
-ins = makeElt Ins
+ins = makeElt Ins "ins"
 
 ins'attr
   :: Array (Attribute Ins)
@@ -4516,7 +4527,7 @@ kbd
    . Array (Attribute Kbd)
   -> { | children }
   -> Element Kbd children
-kbd = makeElt Kbd
+kbd = makeElt Kbd "kbd"
 
 kbd'attr
   :: Array (Attribute Kbd)
@@ -4551,7 +4562,7 @@ label
    . Array (Attribute Label)
   -> { | children }
   -> Element Label children
-label = makeElt Label
+label = makeElt Label "label"
 
 label'attr
   :: Array (Attribute Label)
@@ -4586,7 +4597,7 @@ legend
    . Array (Attribute Legend)
   -> { | children }
   -> Element Legend children
-legend = makeElt Legend
+legend = makeElt Legend "legend"
 
 legend'attr
   :: Array (Attribute Legend)
@@ -4621,7 +4632,7 @@ li
    . Array (Attribute Li)
   -> { | children }
   -> Element Li children
-li = makeElt Li
+li = makeElt Li "li"
 
 li'attr
   :: Array (Attribute Li)
@@ -4656,7 +4667,7 @@ link
    . Array (Attribute Link)
   -> { | children }
   -> Element Link children
-link = makeElt Link
+link = makeElt Link "link"
 
 link'attr
   :: Array (Attribute Link)
@@ -4691,7 +4702,7 @@ main
    . Array (Attribute Main)
   -> { | children }
   -> Element Main children
-main = makeElt Main
+main = makeElt Main "main"
 
 main'attr
   :: Array (Attribute Main)
@@ -4726,7 +4737,7 @@ map
    . Array (Attribute Map)
   -> { | children }
   -> Element Map children
-map = makeElt Map
+map = makeElt Map "map"
 
 map'attr
   :: Array (Attribute Map)
@@ -4761,7 +4772,7 @@ mark
    . Array (Attribute Mark)
   -> { | children }
   -> Element Mark children
-mark = makeElt Mark
+mark = makeElt Mark "mark"
 
 mark'attr
   :: Array (Attribute Mark)
@@ -4796,7 +4807,7 @@ meta
    . Array (Attribute Meta)
   -> { | children }
   -> Element Meta children
-meta = makeElt Meta
+meta = makeElt Meta "meta"
 
 meta'attr
   :: Array (Attribute Meta)
@@ -4831,7 +4842,7 @@ meter
    . Array (Attribute Meter)
   -> { | children }
   -> Element Meter children
-meter = makeElt Meter
+meter = makeElt Meter "meter"
 
 meter'attr
   :: Array (Attribute Meter)
@@ -4866,7 +4877,7 @@ nav
    . Array (Attribute Nav)
   -> { | children }
   -> Element Nav children
-nav = makeElt Nav
+nav = makeElt Nav "nav"
 
 nav'attr
   :: Array (Attribute Nav)
@@ -4901,7 +4912,7 @@ noframes
    . Array (Attribute Noframes)
   -> { | children }
   -> Element Noframes children
-noframes = makeElt Noframes
+noframes = makeElt Noframes "noframes"
 
 noframes'attr
   :: Array (Attribute Noframes)
@@ -4936,7 +4947,7 @@ noscript
    . Array (Attribute Noscript)
   -> { | children }
   -> Element Noscript children
-noscript = makeElt Noscript
+noscript = makeElt Noscript "noscript"
 
 noscript'attr
   :: Array (Attribute Noscript)
@@ -4971,7 +4982,7 @@ object
    . Array (Attribute Object)
   -> { | children }
   -> Element Object children
-object = makeElt Object
+object = makeElt Object "object"
 
 object'attr
   :: Array (Attribute Object)
@@ -5006,7 +5017,7 @@ ol
    . Array (Attribute Ol)
   -> { | children }
   -> Element Ol children
-ol = makeElt Ol
+ol = makeElt Ol "ol"
 
 ol'attr
   :: Array (Attribute Ol)
@@ -5041,7 +5052,7 @@ optgroup
    . Array (Attribute Optgroup)
   -> { | children }
   -> Element Optgroup children
-optgroup = makeElt Optgroup
+optgroup = makeElt Optgroup "optgroup"
 
 optgroup'attr
   :: Array (Attribute Optgroup)
@@ -5076,7 +5087,7 @@ option
    . Array (Attribute Option)
   -> { | children }
   -> Element Option children
-option = makeElt Option
+option = makeElt Option "option"
 
 option'attr
   :: Array (Attribute Option)
@@ -5111,7 +5122,7 @@ output
    . Array (Attribute Output)
   -> { | children }
   -> Element Output children
-output = makeElt Output
+output = makeElt Output "output"
 
 output'attr
   :: Array (Attribute Output)
@@ -5146,7 +5157,7 @@ p
    . Array (Attribute P)
   -> { | children }
   -> Element P children
-p = makeElt P
+p = makeElt P "p"
 
 p'attr
   :: Array (Attribute P)
@@ -5181,7 +5192,7 @@ param
    . Array (Attribute Param)
   -> { | children }
   -> Element Param children
-param = makeElt Param
+param = makeElt Param "param"
 
 param'attr
   :: Array (Attribute Param)
@@ -5216,7 +5227,7 @@ picture
    . Array (Attribute Picture)
   -> { | children }
   -> Element Picture children
-picture = makeElt Picture
+picture = makeElt Picture "picture"
 
 picture'attr
   :: Array (Attribute Picture)
@@ -5251,7 +5262,7 @@ pre
    . Array (Attribute Pre)
   -> { | children }
   -> Element Pre children
-pre = makeElt Pre
+pre = makeElt Pre "pre"
 
 pre'attr
   :: Array (Attribute Pre)
@@ -5286,7 +5297,7 @@ progress
    . Array (Attribute Progress)
   -> { | children }
   -> Element Progress children
-progress = makeElt Progress
+progress = makeElt Progress "progress"
 
 progress'attr
   :: Array (Attribute Progress)
@@ -5321,7 +5332,7 @@ q
    . Array (Attribute Q)
   -> { | children }
   -> Element Q children
-q = makeElt Q
+q = makeElt Q "q"
 
 q'attr
   :: Array (Attribute Q)
@@ -5356,7 +5367,7 @@ rp
    . Array (Attribute Rp)
   -> { | children }
   -> Element Rp children
-rp = makeElt Rp
+rp = makeElt Rp "rp"
 
 rp'attr
   :: Array (Attribute Rp)
@@ -5391,7 +5402,7 @@ rt
    . Array (Attribute Rt)
   -> { | children }
   -> Element Rt children
-rt = makeElt Rt
+rt = makeElt Rt "rt"
 
 rt'attr
   :: Array (Attribute Rt)
@@ -5426,7 +5437,7 @@ ruby
    . Array (Attribute Ruby)
   -> { | children }
   -> Element Ruby children
-ruby = makeElt Ruby
+ruby = makeElt Ruby "ruby"
 
 ruby'attr
   :: Array (Attribute Ruby)
@@ -5461,7 +5472,7 @@ s
    . Array (Attribute S)
   -> { | children }
   -> Element S children
-s = makeElt S
+s = makeElt S "s"
 
 s'attr
   :: Array (Attribute S)
@@ -5496,7 +5507,7 @@ samp
    . Array (Attribute Samp)
   -> { | children }
   -> Element Samp children
-samp = makeElt Samp
+samp = makeElt Samp "samp"
 
 samp'attr
   :: Array (Attribute Samp)
@@ -5531,7 +5542,7 @@ script
    . Array (Attribute Script)
   -> { | children }
   -> Element Script children
-script = makeElt Script
+script = makeElt Script "script"
 
 script'attr
   :: Array (Attribute Script)
@@ -5566,7 +5577,7 @@ section
    . Array (Attribute Section)
   -> { | children }
   -> Element Section children
-section = makeElt Section
+section = makeElt Section "section"
 
 section'attr
   :: Array (Attribute Section)
@@ -5601,7 +5612,7 @@ select
    . Array (Attribute Select)
   -> { | children }
   -> Element Select children
-select = makeElt Select
+select = makeElt Select "select"
 
 select'attr
   :: Array (Attribute Select)
@@ -5636,7 +5647,7 @@ small
    . Array (Attribute Small)
   -> { | children }
   -> Element Small children
-small = makeElt Small
+small = makeElt Small "small"
 
 small'attr
   :: Array (Attribute Small)
@@ -5671,7 +5682,7 @@ source
    . Array (Attribute Source)
   -> { | children }
   -> Element Source children
-source = makeElt Source
+source = makeElt Source "source"
 
 source'attr
   :: Array (Attribute Source)
@@ -5706,7 +5717,7 @@ span
    . Array (Attribute Span)
   -> { | children }
   -> Element Span children
-span = makeElt Span
+span = makeElt Span "span"
 
 span'attr
   :: Array (Attribute Span)
@@ -5741,7 +5752,7 @@ strike
    . Array (Attribute Strike)
   -> { | children }
   -> Element Strike children
-strike = makeElt Strike
+strike = makeElt Strike "strike"
 
 strike'attr
   :: Array (Attribute Strike)
@@ -5776,7 +5787,7 @@ strong
    . Array (Attribute Strong)
   -> { | children }
   -> Element Strong children
-strong = makeElt Strong
+strong = makeElt Strong "strong"
 
 strong'attr
   :: Array (Attribute Strong)
@@ -5811,7 +5822,7 @@ style
    . Array (Attribute Style)
   -> { | children }
   -> Element Style children
-style = makeElt Style
+style = makeElt Style "style"
 
 style'attr
   :: Array (Attribute Style)
@@ -5846,7 +5857,7 @@ sub
    . Array (Attribute Sub)
   -> { | children }
   -> Element Sub children
-sub = makeElt Sub
+sub = makeElt Sub "sub"
 
 sub'attr
   :: Array (Attribute Sub)
@@ -5881,7 +5892,7 @@ summary
    . Array (Attribute Summary)
   -> { | children }
   -> Element Summary children
-summary = makeElt Summary
+summary = makeElt Summary "summary"
 
 summary'attr
   :: Array (Attribute Summary)
@@ -5916,7 +5927,7 @@ sup
    . Array (Attribute Sup)
   -> { | children }
   -> Element Sup children
-sup = makeElt Sup
+sup = makeElt Sup "sup"
 
 sup'attr
   :: Array (Attribute Sup)
@@ -5951,7 +5962,7 @@ svg
    . Array (Attribute Svg)
   -> { | children }
   -> Element Svg children
-svg = makeElt Svg
+svg = makeElt Svg "svg"
 
 svg'attr
   :: Array (Attribute Svg)
@@ -5986,7 +5997,7 @@ table
    . Array (Attribute Table)
   -> { | children }
   -> Element Table children
-table = makeElt Table
+table = makeElt Table "table"
 
 table'attr
   :: Array (Attribute Table)
@@ -6021,7 +6032,7 @@ tbody
    . Array (Attribute Tbody)
   -> { | children }
   -> Element Tbody children
-tbody = makeElt Tbody
+tbody = makeElt Tbody "tbody"
 
 tbody'attr
   :: Array (Attribute Tbody)
@@ -6056,7 +6067,7 @@ td
    . Array (Attribute Td)
   -> { | children }
   -> Element Td children
-td = makeElt Td
+td = makeElt Td "td"
 
 td'attr
   :: Array (Attribute Td)
@@ -6091,7 +6102,7 @@ template
    . Array (Attribute Template)
   -> { | children }
   -> Element Template children
-template = makeElt Template
+template = makeElt Template "template"
 
 template'attr
   :: Array (Attribute Template)
@@ -6126,7 +6137,7 @@ textarea
    . Array (Attribute Textarea)
   -> { | children }
   -> Element Textarea children
-textarea = makeElt Textarea
+textarea = makeElt Textarea "textarea"
 
 textarea'attr
   :: Array (Attribute Textarea)
@@ -6161,7 +6172,7 @@ tfoot
    . Array (Attribute Tfoot)
   -> { | children }
   -> Element Tfoot children
-tfoot = makeElt Tfoot
+tfoot = makeElt Tfoot "tfoot"
 
 tfoot'attr
   :: Array (Attribute Tfoot)
@@ -6196,7 +6207,7 @@ th
    . Array (Attribute Th)
   -> { | children }
   -> Element Th children
-th = makeElt Th
+th = makeElt Th "th"
 
 th'attr
   :: Array (Attribute Th)
@@ -6231,7 +6242,7 @@ thead
    . Array (Attribute Thead)
   -> { | children }
   -> Element Thead children
-thead = makeElt Thead
+thead = makeElt Thead "thead"
 
 thead'attr
   :: Array (Attribute Thead)
@@ -6266,7 +6277,7 @@ time
    . Array (Attribute Time)
   -> { | children }
   -> Element Time children
-time = makeElt Time
+time = makeElt Time "time"
 
 time'attr
   :: Array (Attribute Time)
@@ -6301,7 +6312,7 @@ title
    . Array (Attribute Title)
   -> { | children }
   -> Element Title children
-title = makeElt Title
+title = makeElt Title "title"
 
 title'attr
   :: Array (Attribute Title)
@@ -6336,7 +6347,7 @@ tr
    . Array (Attribute Tr)
   -> { | children }
   -> Element Tr children
-tr = makeElt Tr
+tr = makeElt Tr "tr"
 
 tr'attr
   :: Array (Attribute Tr)
@@ -6371,7 +6382,7 @@ track
    . Array (Attribute Track)
   -> { | children }
   -> Element Track children
-track = makeElt Track
+track = makeElt Track "track"
 
 track'attr
   :: Array (Attribute Track)
@@ -6406,7 +6417,7 @@ tt
    . Array (Attribute Tt)
   -> { | children }
   -> Element Tt children
-tt = makeElt Tt
+tt = makeElt Tt "tt"
 
 tt'attr
   :: Array (Attribute Tt)
@@ -6441,7 +6452,7 @@ u
    . Array (Attribute U)
   -> { | children }
   -> Element U children
-u = makeElt U
+u = makeElt U "u"
 
 u'attr
   :: Array (Attribute U)
@@ -6476,7 +6487,7 @@ ul
    . Array (Attribute Ul)
   -> { | children }
   -> Element Ul children
-ul = makeElt Ul
+ul = makeElt Ul "ul"
 
 ul'attr
   :: Array (Attribute Ul)
@@ -6511,7 +6522,7 @@ var
    . Array (Attribute Var)
   -> { | children }
   -> Element Var children
-var = makeElt Var
+var = makeElt Var "var"
 
 var'attr
   :: Array (Attribute Var)
@@ -6546,7 +6557,7 @@ video
    . Array (Attribute Video)
   -> { | children }
   -> Element Video children
-video = makeElt Video
+video = makeElt Video "video"
 
 video'attr
   :: Array (Attribute Video)
@@ -6581,7 +6592,7 @@ wbr
    . Array (Attribute Wbr)
   -> { | children }
   -> Element Wbr children
-wbr = makeElt Wbr
+wbr = makeElt Wbr "wbr"
 
 wbr'attr
   :: Array (Attribute Wbr)
