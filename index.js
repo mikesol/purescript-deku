@@ -5777,10 +5777,10 @@ var PS = {};
   var ichange_ = function (dictDOMInterpret) {
       return function (dictChange_) {
           return function (r) {
-              var $107 = change_(dictChange_)(dictDOMInterpret);
-              var $108 = Data_Functor.voidRight(Deku_Control_Types.functorDOM)(r);
-              return function ($109) {
-                  return $107($108($109));
+              var $1075 = change_(dictChange_)(dictDOMInterpret);
+              var $1076 = Data_Functor.voidRight(Deku_Control_Types.functorDOM)(r);
+              return function ($1077) {
+                  return $1075($1076($1077));
               };
           };
       };
@@ -6109,10 +6109,10 @@ var PS = {};
   var icreate = function (dictDOMInterpret) {
       return function (dictCreate) {
           return function (r) {
-              var $97 = create(dictCreate)(dictDOMInterpret);
-              var $98 = Data_Functor.voidRight(Deku_Control_Types.functorDOM)(r);
-              return function ($99) {
-                  return $97($98($99));
+              var $1670 = create(dictCreate)(dictDOMInterpret);
+              var $1671 = Data_Functor.voidRight(Deku_Control_Types.functorDOM)(r);
+              return function ($1672) {
+                  return $1670($1671($1672));
               };
           };
       };
@@ -6130,41 +6130,31 @@ var PS = {};
   var Deku_Graph_Attribute = $PS["Deku.Graph.Attribute"];
   var Text = function (x) {
       return x;
-  };
+  };   
   var Root = function (x) {
       return x;
   };   
-  var Href = (function () {
-      function Href() {
+  var OnClick = (function () {
+      function OnClick() {
 
       };
-      Href.value = new Href();
-      return Href;
+      OnClick.value = new OnClick();
+      return OnClick;
+  })();
+  var Href_ = (function () {
+      function Href_() {
+
+      };
+      Href_.value = new Href_();
+      return Href_;
   })();
   var Element = function (x) {
       return x;
   };
-  var Click = (function () {
-      function Click() {
-
-      };
-      Click.value = new Click();
-      return Click;
-  })();
   var A = function (x) {
       return x;
   };
-  var attrAHrefString = {
-      attr: function (v) {
-          return function (value) {
-              return Deku_Graph_Attribute.unsafeAttribute({
-                  key: "href",
-                  value: Deku_Graph_Attribute.prop(value)
-              });
-          };
-      }
-  };
-  var attrAClickCb = {
+  var attrOnClickCb = {
       attr: function (v) {
           return function (value) {
               return Deku_Graph_Attribute.unsafeAttribute({
@@ -6174,7 +6164,17 @@ var PS = {};
           };
       }
   };
-  var text = function ($52) {
+  var attrAHref_String = {
+      attr: function (v) {
+          return function (value) {
+              return Deku_Graph_Attribute.unsafeAttribute({
+                  key: "href",
+                  value: Deku_Graph_Attribute.prop(value)
+              });
+          };
+      }
+  };                                                                              
+  var text = function ($1997) {
       return Element((function (v) {
           return {
               element: v,
@@ -6184,18 +6184,18 @@ var PS = {};
           return {
               text: v
           };
-      })($52))));
-  };
+      })($1997))));
+  };                                                                        
   var root = (function () {
-      var $53 = Control_Semigroupoid.compose(Control_Semigroupoid.semigroupoidFn)(function ($55) {
+      var $2000 = Control_Semigroupoid.compose(Control_Semigroupoid.semigroupoidFn)(function ($2002) {
           return (function (v) {
               return {
                   root: v
               };
-          })(Element($55));
+          })(Element($2002));
       });
-      return function ($54) {
-          return $53((function (v) {
+      return function ($2001) {
+          return $2000((function (v) {
               return function (v1) {
                   return {
                       element: v,
@@ -6206,13 +6206,13 @@ var PS = {};
               return {
                   element: v
               };
-          })($54))));
+          })($2001))));
       };
-  })();
+  })();                                                                      
   var makeElt = function (elt) {
-      var $56 = Control_Semigroupoid.compose(Control_Semigroupoid.semigroupoidFn)(Element);
-      return function ($57) {
-          return $56((function (v) {
+      var $2003 = Control_Semigroupoid.compose(Control_Semigroupoid.semigroupoidFn)(Element);
+      return function ($2004) {
+          return $2003((function (v) {
               return function (v1) {
                   return {
                       element: v,
@@ -6224,23 +6224,23 @@ var PS = {};
                   tag: "a",
                   attributes: v
               };
-          })($57))));
+          })($2004))));
       };
-  };
+  };                         
   var attr = function (dict) {
       return dict.attr;
-  };
+  };                       
   var a$primeattr = Control_Category.identity(Control_Category.categoryFn);
   var a = makeElt(A);
   exports["attr"] = attr;
   exports["text"] = text;
   exports["root"] = root;
-  exports["Href"] = Href;
-  exports["Click"] = Click;
+  exports["Href_"] = Href_;
+  exports["OnClick"] = OnClick;
   exports["a"] = a;
   exports["a'attr"] = a$primeattr;
-  exports["attrAHrefString"] = attrAHrefString;
-  exports["attrAClickCb"] = attrAClickCb;
+  exports["attrAHref_String"] = attrAHref_String;
+  exports["attrOnClickCb"] = attrOnClickCb;
 })(PS);
 (function($PS) {
   // Generated by purs version 0.14.4
@@ -6546,7 +6546,7 @@ var PS = {};
           return function (push) {
               return Deku_Create.icreate(Deku_Interpret.mixedDOMInterpret)(Deku_Create.createAll())(Deku_Graph_DOM.root(elt)({
                   hello: Deku_Graph_DOM.text("click "),
-                  helloA: Deku_Graph_DOM.a([ Deku_Graph_DOM.attr(Deku_Graph_DOM.attrAHrefString)(Deku_Graph_DOM.Href.value)("#"), Deku_Graph_DOM.attr(Deku_Graph_DOM.attrAClickCb)(Deku_Graph_DOM.Click.value)(Data_Function["const"](push(false))) ])({
+                  helloA: Deku_Graph_DOM.a([ Deku_Graph_DOM.attr(Deku_Graph_DOM.attrAHref_String)(Deku_Graph_DOM.Href_.value)("#"), Deku_Graph_DOM.attr(Deku_Graph_DOM.attrOnClickCb)(Deku_Graph_DOM.OnClick.value)(Data_Function["const"](push(false))) ])({
                       world: Deku_Graph_DOM.text("me")
                   })
               }));
@@ -6581,7 +6581,7 @@ var PS = {};
                               };
                               return "kcilc ";
                           })(),
-                          "root.helloA": Deku_Graph_DOM["a'attr"]([ Deku_Graph_DOM.attr(Deku_Graph_DOM.attrAClickCb)(Deku_Graph_DOM.Click.value)(Data_Function["const"](push(!e.value0))) ])
+                          "root.helloA": Deku_Graph_DOM["a'attr"]([ Deku_Graph_DOM.attr(Deku_Graph_DOM.attrOnClickCb)(Deku_Graph_DOM.OnClick.value)(Data_Function["const"](push(!e.value0))) ])
                       });
                   };
                   throw new Error("Failed pattern match at Deku.Example.HelloWorld (line 36, column 5 - line 41, column 10): " + [ e.constructor.name ]);
