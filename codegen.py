@@ -204,7 +204,7 @@ instance toGraphEffectsMake{term} ::
             print_(f'''data {term} = {term}''')
         for k, v in AMAP.items():
             term = bigat(k)
-            if v == [GLOBAL_ATTRIBUTE]:
+            if v == []:
                 v = TAGS
             for att in v:
                 term2 = bigtag(att)

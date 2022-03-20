@@ -133,7 +133,7 @@ istart
    . Monoid res
   => DOMInterpret dom engine
   => IsScene scene
-  => ( Either env push
+  => ( env
        -> (push -> Effect Unit)
        -> IxDOM dom engine Frame0 res () graph control
      )
@@ -142,7 +142,16 @@ istart
        -> scene env dom engine proofB push res
      )
   -> scene env dom engine Frame0 push res
-istart m = makeSceneR (\e p -> let IxDOM f = m e p in f start)
+istart m ct = makeScene
+  ( \e p -> case e of
+      Left en -> let IxDOM f = m en p in Left $ makeSceneR' (f start) ct
+      -- this will lead to a freeze
+      -- it's the comonad version of bottom
+      -- but as we can never start with a push from our own component
+      -- this will "never" happen... until it does...
+      Right _ -> Right start
+  )
+  freeze
 
 infixr 6 istart as @!>
 
@@ -155,7 +164,7 @@ startUsing
   => GetTumults graph tumults
   => Patch subgraphs tumults () graph
   => PatchInfo subgraphs tumults
-  -> (Either env push -> (push -> Effect Unit) -> control)
+  -> (env -> (push -> Effect Unit) -> control)
   -> ( forall proofA
         . DOM dom engine proofA res graph control
        -> scene env dom engine proofA push res
@@ -186,7 +195,7 @@ startUsingWithHint
   => GetTumults graph tumults
   => hintable
   -> PatchInfo subgraphs tumults
-  -> (Either env push -> (push -> Effect Unit) -> control)
+  -> (env -> (push -> Effect Unit) -> control)
   -> ( forall proofA
         . DOM dom engine proofA res graph control
        -> scene env dom engine proofA push res
@@ -202,15 +211,32 @@ loopUsingScene
   => IsScene scene
   => Create sn () graph
   => Change sn graph
-  => ( Either env push
+  => ( env
        -> (push -> Effect Unit)
        -> control
        -> { scene :: { | sn }, control :: control }
      )
-  -> (Either env push -> (push -> Effect Unit) -> control)
+  -> ( Either env push
+       -> (push -> Effect Unit)
+       -> control
+       -> { scene :: { | sn }, control :: control }
+     )
+  -> (env -> (push -> Effect Unit) -> control)
   -> scene env dom engine Frame0 push res
-loopUsingScene = loopUsingSceneWithRes <<< f
+loopUsingScene a b = loopUsingSceneWithRes (f a) (f b)
   where
+  f
+    :: forall a b c
+     . ( a
+         -> b
+         -> c
+         -> { scene :: { | sn }, control :: control }
+       )
+    -> ( a
+         -> b
+         -> c
+         -> { scene :: { | sn }, control :: control, res :: res }
+       )
   f = (map <<< map <<< map) (R.union { res: mempty :: res })
 
 loopUsingSceneWithRes
@@ -220,17 +246,22 @@ loopUsingSceneWithRes
   => IsScene scene
   => Create sn () graph
   => Change sn graph
-  => ( Either env push
+  => ( env
        -> (push -> Effect Unit)
        -> control
        -> { scene :: { | sn }, control :: control, res :: res }
      )
-  -> (Either env push -> (push -> Effect Unit) -> control)
+  -> ( Either env push
+       -> (push -> Effect Unit)
+       -> control
+       -> { scene :: { | sn }, control :: control, res :: res }
+     )
+  -> (env -> (push -> Effect Unit) -> control)
   -> scene env dom engine Frame0 push res
-loopUsingSceneWithRes sceneF initialControl =
+loopUsingSceneWithRes sceneF0 sceneF initialControl =
   ( \env push ->
       let
-        { scene, control, res } = sceneF env push (initialControl env push)
+        { scene, control, res } = sceneF0 env push (initialControl env push)
       in
         icreate scene :*> imodifyRes (const res) $> control
   ) @!>

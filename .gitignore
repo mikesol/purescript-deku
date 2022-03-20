@@ -11,3 +11,7 @@
 /examples/**/index.js
 packages.json
 .venv
+/test-results/
+/test/test.js
+/test/.spago
+/test/output/

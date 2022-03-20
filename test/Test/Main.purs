@@ -1,6 +1,6 @@
-module Test.Main where
+module Test.Main (main) where
 
-import Prelude
+import Prelude hiding (compare)
 
 import Effect (Effect)
 import Effect.Aff (launchAff_)
@@ -9,9 +9,7 @@ import Test.Spec.Reporter (consoleReporter)
 import Test.Spec.Runner (runSpec)
 
 main :: Effect Unit
-main = do
-  launchAff_
-    $ runSpec [ consoleReporter ] do
-      describe "Author" do
-        it "Should write some tests" do
-          pure unit
+main = launchAff_ $ runSpec [ consoleReporter ] do
+  describe "Tests" do
+    it "Lacks them" do
+      pure unit
