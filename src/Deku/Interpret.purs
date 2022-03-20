@@ -17,26 +17,22 @@ module Deku.Interpret
   , setTumult
   , renderDOM
   , setText
-  , setSingleSubgraph
   ) where
 
 import Prelude
 
 import Data.Array as Array
 import Data.Either (Either(..))
-import Data.FoldableWithIndex (traverseWithIndex_)
-import Data.Lazy (defer)
+import Data.Map as Map
 import Data.Maybe (Maybe(..))
 import Data.Monoid.Additive (Additive)
 import Data.Newtype (unwrap)
+import Data.Nullable (Nullable, toNullable)
 import Data.Set as Set
-import Data.Traversable (sequence)
 import Data.Tuple (fst, snd)
 import Data.Tuple.Nested (type (/\), (/\))
 import Data.Typelevel.Undefined (undefined)
 import Data.Variant (match)
-import Data.Vec as V
-import Data.Vec as Vec
 import Deku.Control.Types (Frame0, SubScene(..), oneSubFrame)
 import Deku.Graph.Attribute (prop)
 import Deku.Rendered (Instruction)
@@ -50,23 +46,16 @@ data FFIDOMSnapshot
 foreign import makeFFIDOMSnapshot :: Effect FFIDOMSnapshot
 foreign import renderDOM :: Array (Effect Unit) -> Effect Unit
 
-type SubgraphInput (terminus :: Symbol) (n :: Type) env push dom engine =
+type SubgraphInput (terminus :: Symbol) env push dom engine =
   { id :: String
   , terminus :: String
-  , envs :: V.Vec n env
   , scenes ::
       Int -> SubScene terminus env dom engine Frame0 push (Additive Int)
   }
 
-type SetSubgraphInput (n :: Type) env =
+type SetSubgraphInput env =
   { id :: String
-  , envs :: V.Vec n env
-  }
-
-type SetSingleSubgraphInput env =
-  { id :: String
-  , index :: Int
-  , env :: env
+  , envs :: Map.Map Int (Maybe env)
   }
 
 class DOMInterpret dom engine where
@@ -79,8 +68,8 @@ class DOMInterpret dom engine where
   makeElement :: R.MakeElement -> dom -> engine
   makeText :: R.MakeText -> dom -> engine
   makeSubgraph
-    :: forall terminus env push n
-     . SubgraphInput terminus n env push dom engine
+    :: forall terminus env push
+     . SubgraphInput terminus env push dom engine
     -> dom
     -> engine
   -- | Make tumult.
@@ -89,13 +78,8 @@ class DOMInterpret dom engine where
   setAttribute :: R.SetAttribute -> dom -> engine
   -- | Set subgraph.
   setSubgraph
-    :: forall env n
-     . SetSubgraphInput n env
-    -> dom
-    -> engine
-  setSingleSubgraph
     :: forall env
-     . SetSingleSubgraphInput env
+     . SetSubgraphInput env
     -> dom
     -> engine
   setText :: R.SetText -> dom -> engine
@@ -111,9 +95,8 @@ instance freeDOMInterpret :: DOMInterpret Unit Instruction where
   makeTumult = const <<< R.iMakeTumult
   massiveCreate = const <<< R.iMassiveCreate
   -- todo: FIX
-  makeSubgraph { id } _ = R.iMakeSubgraph { id, instructions: defer \_ -> [] }
+  makeSubgraph { id } _ = R.iMakeSubgraph { id, instructions: Map.empty }
   setAttribute = const <<< R.iSetAttribute
-  setSingleSubgraph { id } _ = R.iSetSingleSubgraph { id }
   setSubgraph { id } _ = R.iSetSubgraph { id }
   massiveChange = const <<< R.iMassiveChange
   setText = const <<< R.iSetText
@@ -167,8 +150,8 @@ foreign import massiveCreate_
        -> Int
        -> SubScene terminus env FFIDOMSnapshot (Effect Unit) Frame0 push Unit
      )
-  -> ( forall terminus env push n
-        . SubgraphInput terminus n env push FFIDOMSnapshot (Effect Unit)
+  -> ( forall terminus env push
+        . SubgraphInput terminus env push FFIDOMSnapshot (Effect Unit)
        -> FFIDOMSnapshot
        -> (Effect Unit)
      )
@@ -184,23 +167,29 @@ foreign import makeSubgraph_
   :: forall env push scene
    . String
   -> String
-  -> Array env
+  -- this is the generic function for how to interpret a scene
   -> (Int -> scene)
-  -> Array
-       ( Either env push
-         -> scene
-         -> { instructions :: Array (FFIDOMSnapshot -> Effect Unit)
-            , forOrdering :: Int
-            , nextScene :: scene
+  -- this is how to spawn a specific scene loop
+  -- effectful because it starts a subscription to an event
+  -> ( Int
+       -> Effect
+            { loop ::
+                Either env push
+                -> scene
+                -> { instructions :: Array (FFIDOMSnapshot -> Effect Unit)
+                   , forOrdering :: Int
+                   , nextScene :: scene
+                   }
+            , unsubscribe :: Effect Unit
             }
-       )
+     )
   -> FFIDOMSnapshot
   -> Effect Unit
 
 foreign import makeTumult_
   :: String
   -> String
-  -> Array (Array Instruction)
+  -> Array { pos :: Int, instructions :: Nullable (Array Instruction) }
   -> Maybe (Array Instruction)
   -> (Array Instruction -> Maybe (Array Instruction))
   -> ( Array Instruction
@@ -214,7 +203,7 @@ foreign import setText_
   -> FFIDOMSnapshot
   -> Effect Unit
 foreign import massiveChange_
-  :: (forall n env. SetSubgraphInput n env -> FFIDOMSnapshot -> Effect Unit)
+  :: (forall env. SetSubgraphInput env -> FFIDOMSnapshot -> Effect Unit)
   -> (R.SetAttribute -> FFIDOMSnapshot -> Effect Unit)
   -> (R.SetText -> FFIDOMSnapshot -> Effect Unit)
   -> (R.SetTumult -> FFIDOMSnapshot -> Effect Unit)
@@ -225,7 +214,7 @@ foreign import massiveChange_
 foreign import setTumult_
   :: String
   -> String
-  -> Array (Array Instruction)
+  -> Array { pos :: Int, instructions :: Nullable (Array Instruction) }
   -> Maybe (Array Instruction)
   -> (Array Instruction -> Maybe (Array Instruction))
   -> ( Array Instruction
@@ -241,15 +230,7 @@ foreign import setAttribute_
 foreign import setSubgraph_
   :: forall env push
    . String
-  -> Array (Either env push)
-  -> FFIDOMSnapshot
-  -> Effect Unit
-
-foreign import setSingleSubgraph_
-  :: forall env push
-   . String
-  -> Int
-  -> Either env push
+  -> Array { pos :: Int, env :: Nullable (Either env push) }
   -> FFIDOMSnapshot
   -> Effect Unit
 
@@ -287,8 +268,6 @@ interpretInstruction = unwrap >>> match
   , setAttribute: \a -> setAttribute a
   , setSubgraph: \{ id } -> setAttribute
       { id, key: "devnull", value: prop "true" }
-  , setSingleSubgraph: \{ id } -> setAttribute
-      { id, key: "devnull", value: prop "true" }
   , setTumult: \{ id } -> setAttribute
       { id, key: "devnull", value: prop "true" }
   }
@@ -317,32 +296,30 @@ instance effectfulDOMInterpret ::
     makeText
     noEta
   makeText = makeText_
-  makeSubgraph { id, terminus, envs, scenes } dom = do
-    evts <- sequence (envs $> create)
-    let
-      funks = evts <#>
-        ( \evt eop scene ->
-            let
-              res = oneSubFrame scene eop evt.push
-            in
-              { instructions: res.instructions
-              , nextScene: res.next
-              , forOrdering: unwrap res.res
-              }
-        )
-    evts # traverseWithIndex_ \i evt -> subscribe evt.event \p ->
-      setSingleSubgraph_ id i (Right p) dom
-    makeSubgraph_ id
-      terminus
-      (Vec.toArray envs)
-      scenes
-      (V.toArray funks)
-      dom
+  makeSubgraph { id, terminus, scenes } dom =
+    flip (makeSubgraph_ id terminus scenes) dom \i -> do
+      -- todo: would makeEvent have a better memory profile here?
+      evt <- create
+      let
+        loop = \eop scene ->
+          let
+            res = oneSubFrame scene eop evt.push
+          in
+            { instructions: res.instructions
+            , nextScene: res.next
+            , forOrdering: unwrap res.res
+            }
+      unsubscribe <- subscribe evt.event \p ->
+        setSubgraph_ id [ { pos: i, env: toNullable $ Just (Right p) } ] dom
+      pure { loop, unsubscribe }
+
   makeTumult { id, terminus, instructions } toFFI =
     makeTumult_
       id
       terminus
-      instructions
+      ( map (\(a /\ b) -> { pos: a, instructions: toNullable b })
+          (Map.toUnfoldable instructions)
+      )
       Nothing
       Just
       makeInstructionsEffectful
@@ -352,16 +329,18 @@ instance effectfulDOMInterpret ::
   massiveChange noEta = massiveChange_ setSubgraph setAttribute setText
     setTumult
     noEta
-  setSubgraph { id, envs } dom = setSubgraph_ id (map Left $ Vec.toArray envs)
-    (dom)
-  setSingleSubgraph { id, index, env } dom = setSingleSubgraph_ id
-    index
-    (Left env)
+  -- todo - can we avoid the double map?
+  setSubgraph { id, envs } dom = setSubgraph_ id
+    ( map (\(a /\ b) -> { pos: a, env: b })
+        (Map.toUnfoldable (map (toNullable <<< map Left) envs))
+    )
     (dom)
   setTumult { id, terminus, instructions } toFFI = setTumult_
     id
     terminus
-    instructions
+    ( map (\(a /\ b) -> { pos: a, instructions: toNullable b })
+        (Map.toUnfoldable instructions)
+    )
     Nothing
     Just
     makeInstructionsEffectful
@@ -417,9 +396,9 @@ instance mixedDOMInterpret ::
   connectXToY a (x /\ y) = connectXToY a x /\ connectXToY a y
   disconnectXFromY a (x /\ y) = disconnectXFromY a x /\ disconnectXFromY a y
   destroyUnit a (x /\ y) = destroyUnit a x /\ destroyUnit a y
-  makeSubgraph { id, terminus, envs, scenes } (x /\ y) =
-    makeSubgraph { id, terminus, envs, scenes: map domEngine1st scenes } x /\
-      makeSubgraph { id, terminus, envs, scenes: map domEngine2nd scenes } y
+  makeSubgraph { id, terminus, scenes } (x /\ y) =
+    makeSubgraph { id, terminus, scenes: map domEngine1st scenes } x /\
+      makeSubgraph { id, terminus, scenes: map domEngine2nd scenes } y
   massiveCreate a (x /\ y) = massiveCreate a x /\ massiveCreate a y
   makeText a (x /\ y) = makeText a x /\ makeText a y
   makeRoot a (x /\ y) = makeRoot a x /\ makeRoot a y
@@ -431,8 +410,4 @@ instance mixedDOMInterpret ::
   setSubgraph { id, envs } (x /\ y) = setSubgraph { id, envs } x /\ setSubgraph
     { id, envs }
     y
-  setSingleSubgraph { id, index, env } (x /\ y) =
-    setSingleSubgraph { id, index, env } x /\ setSingleSubgraph
-      { id, index, env }
-      y
   setTumult a (x /\ y) = setTumult a x /\ setTumult a y

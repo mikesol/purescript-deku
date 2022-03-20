@@ -4,11 +4,10 @@ import Prelude
 
 import Control.Monad.State (State, evalState, get, put)
 import Data.Either (Either(..))
+import Data.Map (Map)
 import Data.Maybe (Maybe(..), maybe)
 import Data.Traversable (traverse)
 import Data.Tuple.Nested ((/\), type (/\))
-import Data.Typelevel.Num (class Pos)
-import Data.Vec (Vec, toArray)
 import Deku.Control.Functions (start)
 import Deku.Control.Functions.Subgraph ((@||>), freeze)
 import Deku.Control.Types (Frame0, SubScene, DOM, oneSubFrame)
@@ -25,11 +24,9 @@ data Indecent
   | T String
 
 indecently
-  :: forall n
-   . Pos n
-  => Vec n Indecent
-  -> Tumultuous n "0"
-indecently v = unsafeTumult (map mk (toArray v))
+  :: Map Int (Maybe Indecent)
+  -> Tumultuous "0"
+indecently v = unsafeTumult ((map <<< map) mk v)
   where
   tv :: Maybe (Int /\ String) -> Indecent -> State Int (Array Instruction)
   tv parent (E tag attributes rest) = do
@@ -71,15 +68,14 @@ indecently v = unsafeTumult (map mk (toArray v))
   mk i = evalState (tv Nothing i) 0
 
 tumultuously
-  :: forall n terminus scene graph graphRL
-   . Pos n
-  => RowToList graph graphRL
+  :: forall terminus scene graph graphRL
+   . RowToList graph graphRL
   => Create scene () graph
   => SubgraphIsRenderable graph terminus
   => NodesCanBeTumultuous graphRL
-  => Vec n { | scene }
-  -> Tumultuous n terminus
-tumultuously scenes = unsafeTumult (map go (toArray scenes))
+  => Map Int (Maybe { | scene })
+  -> Tumultuous terminus
+tumultuously scenes = unsafeTumult ((map <<< map) go scenes)
   where
   go :: { | scene } -> Array Instruction
   go scene = map ((#) unit) tmt

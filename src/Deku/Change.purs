@@ -3,17 +3,15 @@ module Deku.Change where
 import Prelude
 
 import Data.Symbol (class IsSymbol, reflectSymbol)
-import Data.Typelevel.Num (class Lt, class Nat, class Pos, toInt)
-import Data.Vec as V
 import Deku.Control.Indexed (IxDOM(..))
 import Deku.Control.Types (DOM, DOMState', unsafeDOM, unsafeUnDOM)
 import Deku.CreateT (class CreateT)
 import Deku.Graph.Attribute (Attribute, AttributeValue, unsafeUnAttribute)
-import Deku.Graph.DOM (unsafeUnSubgraph, unsafeUnText)
+import Deku.Graph.DOM (unsafeUnText)
 import Deku.Graph.DOM as CTOR
 import Deku.Graph.Graph (Graph)
 import Deku.Graph.Node (NodeC)
-import Deku.Interpret (class DOMInterpret, massiveChange, setAttribute, setSingleSubgraph, setSubgraph, setText, setTumult)
+import Deku.Interpret (class DOMInterpret, massiveChange, setAttribute, setSubgraph, setText, setTumult)
 import Deku.Rendered (ToChange(..))
 import Deku.Tumult (Tumultuous, safeUntumult)
 import Prim.Row (class Cons, class Lacks)
@@ -156,40 +154,12 @@ instance changeRoot ::
   Change' "root" CTOR.Root graph where
   change' _ w = w $> unit
 
-instance changeSubgraph0 ::
-  ( IsSymbol ptr
-  , IsSymbol terminus
-  , R.Cons ptr (NodeC (CTOR.TSubgraph n terminus env) edges) ignore graph
-  , Pos n
-  ) =>
-  Change' ptr (CTOR.Subgraph notImportant (V.Vec n env)) graph where
-  change' ptr w = o
-    where
-    { context: i, value } = unsafeUnDOM w
-
-    id = reflectSymbol ptr
-
-    o =
-      unsafeDOM
-        { context:
-            i
-              { instructions = i.instructions <>
-                  [ setSubgraph
-                      { id
-                      , envs: (unsafeUnSubgraph value).envs
-                      }
-                  ]
-              }
-        , value: unit
-        }
-
 instance changeSubgraph1 ::
   ( IsSymbol ptr
   , IsSymbol terminus
-  , R.Cons ptr (NodeC (CTOR.TSubgraph n terminus env) edges) ignore graph
-  , Pos n
+  , R.Cons ptr (NodeC (CTOR.TSubgraph terminus env) edges) ignore graph
   ) =>
-  Change' ptr (CTOR.XSubgraph n env) graph where
+  Change' ptr (CTOR.XSubgraph env) graph where
   change' ptr w = o
     where
     { context: i, value: (CTOR.XSubgraph { envs }) } = unsafeUnDOM w
@@ -210,42 +180,13 @@ instance changeSubgraph1 ::
         , value: unit
         }
 
-instance changeSubgraph2 ::
-  ( IsSymbol ptr
-  , IsSymbol terminus
-  , R.Cons ptr (NodeC (CTOR.TSubgraph n terminus env) edges) ignore graph
-  , Pos n
-  , Nat i
-  , Lt i n
-  ) =>
-  Change' ptr (CTOR.X1Subgraph i env) graph where
-  change' ptr w = o
-    where
-    { context: i, value: (CTOR.X1Subgraph { index, env }) } = unsafeUnDOM w
 
-    id = reflectSymbol ptr
-
-    o =
-      unsafeDOM
-        { context:
-            i
-              { instructions = i.instructions <>
-                  [ setSingleSubgraph
-                      { id
-                      , index: toInt index
-                      , env
-                      }
-                  ]
-              }
-        , value: unit
-        }
 instance changeTumult ::
   ( IsSymbol ptr
   , IsSymbol terminus
-  , Pos n
-  , R.Cons ptr (NodeC (CTOR.TTumult n terminus) edges) ignore graph
+  , R.Cons ptr (NodeC (CTOR.TTumult terminus) edges) ignore graph
   ) =>
-  Change' ptr (Tumultuous n terminus) graph where
+  Change' ptr (Tumultuous terminus) graph where
   change' ptr w = o
     where
     { context: i, value } = unsafeUnDOM w

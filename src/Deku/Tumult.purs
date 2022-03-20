@@ -2,24 +2,25 @@ module Deku.Tumult (Tumultuous, unsafeTumult, safeUntumult) where
 
 import Prelude
 
+import Data.Map (Map)
+import Data.Maybe (Maybe)
 import Deku.Rendered (Instruction)
 
-newtype Tumultuous :: forall k1 k2. k1 -> k2 -> Type
-newtype Tumultuous n terminus = Tumultuous (Array (Array Instruction))
+newtype Tumultuous (terminus :: Symbol) = Tumultuous (Map Int (Maybe (Array Instruction)))
 
-derive instance eqTumult :: Eq (Tumultuous n terminus)
-derive instance ordTumult :: Ord (Tumultuous n terminus)
-instance showTumult :: Show (Tumultuous n terminus) where
+derive instance eqTumult :: Eq (Tumultuous terminus)
+derive instance ordTumult :: Ord (Tumultuous terminus)
+instance showTumult :: Show (Tumultuous terminus) where
   show (Tumultuous tumult) = "Tumult <" <> show tumult <> ">"
 
 unsafeTumult
-  :: forall n terminus
-   . Array (Array Instruction)
-  -> Tumultuous n terminus
+  :: forall terminus
+   . Map Int (Maybe (Array Instruction))
+  -> Tumultuous terminus
 unsafeTumult = Tumultuous
 
 safeUntumult
-  :: forall n terminus
-   . Tumultuous n terminus
-  -> Array (Array Instruction)
+  :: forall terminus
+   . Tumultuous terminus
+  -> Map Int (Maybe (Array Instruction))
 safeUntumult (Tumultuous tumult) = tumult

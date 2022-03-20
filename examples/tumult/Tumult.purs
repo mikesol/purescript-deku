@@ -2,10 +2,12 @@ module Deku.Example.Tumult where
 
 import Prelude
 
+import Data.Array ((..))
 import Data.Either (Either(..))
 import Data.Foldable (for_)
-import Data.Typelevel.Num (D10)
-import Data.Vec (Vec, fill)
+import Data.Map as Map
+import Data.Maybe (Maybe(..))
+import Data.Tuple.Nested ((/\))
 import Deku.Change (ichange_)
 import Deku.Control.Functions.Graph (iloop, (@!>))
 import Deku.Control.Types (Frame0, Scene)
@@ -33,21 +35,35 @@ scene elt =
             { hello: a [ Href := "#", OnClick := Cb (const $ push0 unit) ]
                 { ht: text "click" }
             , helloTum0: tumult
-                (tumultuously (fill (const { myTxt: text "foo" }) :: Vec D10 _))
+                ( tumultuously
+                    ( Map.fromFoldable
+                        (map (\i -> i /\ Just { myTxt: text "foo" }) (0 .. 9))
+                    )
+                )
             , helloTum1: tumult
                 ( indecently
-                    (fill (const (E "button" [] [ T "foo" ])) :: Vec D10 _)
+                    ( Map.fromFoldable
+                        ( map (\i -> i /\ Just (E "button" [] [ T "foo" ]))
+                            (0 .. 9)
+                        )
+                    )
                 )
             }
-      )
-  ) @!> iloop \e _ _ ->
-    case e of
+      ) $> 0
+  ) @!> iloop \e _ lmt ->
+    lmt + 1 <$ case e of
       Left _ -> pure unit
       Right _ -> ichange_
-        { "root.helloTum0": tumultuously
-            (fill (const { myTxt: text "bar" }) :: Vec D10 _)
+        { "root.helloTum0":
+            ( tumultuously
+                ( Map.fromFoldable
+                    (map (\i -> i /\ Just { myTxt: text "bar" }) (0 .. 9))
+                )
+            )
         , "root.helloTum1": indecently
-            (fill (const (E "button" [] [ T "bar" ])) :: Vec D10 _)
+            ( Map.fromFoldable
+                (map (\i -> i /\ if i < lmt `mod` 10 then Nothing else Just (E "button" [] [ T "bar" ])) (0 .. 9))
+            )
         }
 
 main :: Effect Unit
