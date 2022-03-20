@@ -28,7 +28,7 @@ module Deku.Graph.DOM
   , TTumult
   , tumult
   , unsafeUnTumult
-  -- codegen attr
+  -- codegen 7
     , Accept_(..)
   , AcceptCharset_(..)
   , Accesskey_(..)
@@ -247,7 +247,8 @@ module Deku.Graph.DOM
   , OnTransitionrun(..)
   , OnTransitionstart(..)
   , OnWaiting(..)
-  -- codegen dom
+  -- codegen 7
+  -- codegen 0
   , A
   , TA
   , a
@@ -858,7 +859,7 @@ module Deku.Graph.DOM
   , wbr
   , wbr'attr
   , unsafeUnWbr
-
+  -- codegen 0
   ) where
 
 import Prelude
@@ -1105,7 +1106,7 @@ instance monoidTRoot :: Monoid TRoot where
 instance reifyTRoot :: ReifyAU Root TRoot where
   reifyAU = const mempty
 
--- codegen attrs
+-- codegen 8
 data Accept_ = Accept_
 data AcceptCharset_ = AcceptCharset_
 data Accesskey_ = Accesskey_
@@ -2339,8 +2340,8 @@ instance Attr anything OnTransitionstart Cb where
   attr OnTransitionstart value = unsafeAttribute { key: "transitionstart", value: cb value }
 instance Attr anything OnWaiting Cb where
   attr OnWaiting value = unsafeAttribute { key: "waiting", value: cb value }
-
--- codegen dom
+-- codegen 8
+-- codegen 1
 type A' =
   ( tag :: String
   , attributes :: Array (Attribute A)
@@ -6611,3 +6612,4 @@ instance monoidTWbr :: Monoid TWbr where
 
 instance reifyTWbr :: ReifyAU Wbr TWbr where
   reifyAU = const mempty
+-- codegen 1

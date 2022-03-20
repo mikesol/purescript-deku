@@ -296,7 +296,7 @@ unsafeChange' ptr i attributes = o
       , value: unit
       }
 
------ codegen
+-- codegen 4
 instance changeA ::
   ( IsSymbol ptr
   , R.Cons ptr (NodeC CTOR.TA ignore0) ignore1 graph
@@ -1273,3 +1273,4 @@ instance changeWbr ::
   change' ptr w = unsafeChange' ptr i value
     where
     { context: i, value } = unsafeUnDOM w
+-- codegen 4

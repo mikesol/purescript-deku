@@ -678,8 +678,7 @@ instance patchAll ::
 
     n = toGraphEffects (Proxy :: _ (instructions)) newCache { instructions }
 
--- codegen
-
+-- codegen 5
 data MakeA (ptr :: Symbol) = MakeA (Proxy ptr)
 instance doCreateMakeA :: DoCreate ptr CTOR.TA (MakeA ptr)
 instance toGraphEffectsMakeA ::
@@ -2144,3 +2143,4 @@ instance toGraphEffectsMakeWbr ::
     cache
     i
     "wbr"
+-- codegen 5
