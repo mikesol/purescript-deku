@@ -166,7 +166,7 @@ istart
    . GraphIsRenderable graph
   => Monoid res
   => DOMInterpret dom engine
-  => ( Either env push
+  => ( env
        -> (push -> Effect Unit)
        -> IxDOM dom engine Frame0 res () graph a
      )
@@ -188,7 +188,7 @@ startUsing
   => GetTumults graph tumults
   => Patch subgraphs tumults () graph
   => PatchInfo subgraphs tumults
-  -> (Either env push -> (push -> Effect Unit) -> control)
+  -> (env -> (push -> Effect Unit) -> control)
   -> ( forall proofA
         . DOM dom engine proofA res graph control
        -> Scene env dom engine proofA push res
@@ -209,7 +209,7 @@ startUsingWithHint
   => Patch subgraphs tumults () graph
   => hintable
   -> PatchInfo subgraphs tumults
-  -> (Either env push -> (push -> Effect Unit) -> control)
+  -> (env -> (push -> Effect Unit) -> control)
   -> ( forall proofA
         . DOM dom engine proofA res graph control
        -> Scene env dom engine proofA push res
@@ -224,12 +224,17 @@ loopUsingScene
   => Create scene () graph
   => Change scene graph
   => GraphIsRenderable graph
-  => ( Either env push
+  => ( env
        -> (push -> Effect Unit)
        -> control
        -> { scene :: { | scene }, control :: control }
      )
-  -> (Either env push -> (push -> Effect Unit) -> control)
+  -> ( Either env push
+       -> (push -> Effect Unit)
+       -> control
+       -> { scene :: { | scene }, control :: control }
+     )
+  -> (env -> (push -> Effect Unit) -> control)
   -> Scene env dom engine Frame0 push res
 loopUsingScene = Functions.loopUsingScene
 
@@ -240,12 +245,17 @@ loopUsingSceneWithRes
   => Create scene () graph
   => Change scene graph
   => GraphIsRenderable graph
-  => ( Either env push
+  => ( env
        -> (push -> Effect Unit)
        -> control
        -> { scene :: { | scene }, control :: control, res :: res }
      )
-  -> (Either env push -> (push -> Effect Unit) -> control)
+  -> ( Either env push
+       -> (push -> Effect Unit)
+       -> control
+       -> { scene :: { | scene }, control :: control, res :: res }
+     )
+  -> (env -> (push -> Effect Unit) -> control)
   -> Scene env dom engine Frame0 push res
 loopUsingSceneWithRes = Functions.loopUsingSceneWithRes
 

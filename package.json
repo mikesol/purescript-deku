@@ -1,24 +1,33 @@
 {
-  "name": "purescript-deku",
-  "version": "0.7.4",
-  "description": "A friendly tree-like structure",
-  "scripts": {
-    "build": "spago build",
-    "format": "purs-tidy format-in-place src/**/*.purs",
-    "pulp-publish": "pulp publish",
-    "docs": "pulp docs",
-    "test": "spago -x test.dhall test && npx spago -x examples.dhall build"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "devDependencies": {
-    "psc-package": "^4.0.1",
-    "pulp": "^15.0.0",
-    "purescript": "^0.14.4",
-    "spago": "^0.20.3"
-  },
-  "dependencies": {
-    "purs-tidy": "^0.4.6"
-  }
+	"name": "purescript-deku",
+	"version": "0.7.4",
+	"description": "A friendly tree-like structure",
+	"scripts": {
+		"postinstall": "node node_modules/puppeteer/install.js",
+		"clean": "rm -rf .spago output node_modules *.lock",
+		"build": "spago build",
+		"build:examples": "spago -x examples.dhall build",
+		"build:test": "spago -x test/test.dhall build",
+		"snapshot": "npm run bundle:performance && spago -x test/test.dhall run --main Performance.Snapshot.Write",
+		"test": "spago -x test/test.dhall test",
+		"test:performance": "npm run bundle:performance && spago -x test/test.dhall run --main Performance.Main",
+		"bundle:examples": "spago -x examples.dhall bundle-app --main Deku.Example.HelloWorld --to examples/hello-world/index.js",
+		"bundle:performance": "spago -x test/test.dhall bundle-app --main Performance.Test.App --to test/test.js --no-build"
+	},
+	"keywords": [],
+	"author": "",
+	"license": "ISC",
+	"devDependencies": {
+		"psc-package": "^4.0.1",
+		"pulp": "^15.0.0",
+		"purescript": "^0.14.4",
+		"spago": "^0.20.3",
+		"filter-console": "^0.1.1",
+		"headless-devtools": "^2.0.1",
+		"puppeteer": "^5.2.0",
+		"tracealyzer": "^0.10.3"
+	},
+	"dependencies": {
+		"purs-tidy": "^0.4.6"
+	}
 }

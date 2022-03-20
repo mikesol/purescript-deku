@@ -1312,6 +1312,372 @@ instance Attr Input_ Accept String where
 instance Attr Form_ AcceptCharset String where
   attr AcceptCharset value = unsafeAttribute { key: "accept-charset", value: prop value }
 
+instance Attr A_ Accesskey String where
+  attr Accesskey value = unsafeAttribute { key: "accesskey", value: prop value }
+
+instance Attr Abbr_ Accesskey String where
+  attr Accesskey value = unsafeAttribute { key: "accesskey", value: prop value }
+
+instance Attr Acronym_ Accesskey String where
+  attr Accesskey value = unsafeAttribute { key: "accesskey", value: prop value }
+
+instance Attr Address_ Accesskey String where
+  attr Accesskey value = unsafeAttribute { key: "accesskey", value: prop value }
+
+instance Attr Applet_ Accesskey String where
+  attr Accesskey value = unsafeAttribute { key: "accesskey", value: prop value }
+
+instance Attr Area_ Accesskey String where
+  attr Accesskey value = unsafeAttribute { key: "accesskey", value: prop value }
+
+instance Attr Article_ Accesskey String where
+  attr Accesskey value = unsafeAttribute { key: "accesskey", value: prop value }
+
+instance Attr Aside_ Accesskey String where
+  attr Accesskey value = unsafeAttribute { key: "accesskey", value: prop value }
+
+instance Attr Audio_ Accesskey String where
+  attr Accesskey value = unsafeAttribute { key: "accesskey", value: prop value }
+
+instance Attr B_ Accesskey String where
+  attr Accesskey value = unsafeAttribute { key: "accesskey", value: prop value }
+
+instance Attr Base_ Accesskey String where
+  attr Accesskey value = unsafeAttribute { key: "accesskey", value: prop value }
+
+instance Attr Basefont_ Accesskey String where
+  attr Accesskey value = unsafeAttribute { key: "accesskey", value: prop value }
+
+instance Attr Bdi_ Accesskey String where
+  attr Accesskey value = unsafeAttribute { key: "accesskey", value: prop value }
+
+instance Attr Bdo_ Accesskey String where
+  attr Accesskey value = unsafeAttribute { key: "accesskey", value: prop value }
+
+instance Attr Big_ Accesskey String where
+  attr Accesskey value = unsafeAttribute { key: "accesskey", value: prop value }
+
+instance Attr Blockquote_ Accesskey String where
+  attr Accesskey value = unsafeAttribute { key: "accesskey", value: prop value }
+
+instance Attr Body_ Accesskey String where
+  attr Accesskey value = unsafeAttribute { key: "accesskey", value: prop value }
+
+instance Attr Br_ Accesskey String where
+  attr Accesskey value = unsafeAttribute { key: "accesskey", value: prop value }
+
+instance Attr Button_ Accesskey String where
+  attr Accesskey value = unsafeAttribute { key: "accesskey", value: prop value }
+
+instance Attr Canvas_ Accesskey String where
+  attr Accesskey value = unsafeAttribute { key: "accesskey", value: prop value }
+
+instance Attr Caption_ Accesskey String where
+  attr Accesskey value = unsafeAttribute { key: "accesskey", value: prop value }
+
+instance Attr Center_ Accesskey String where
+  attr Accesskey value = unsafeAttribute { key: "accesskey", value: prop value }
+
+instance Attr Cite_ Accesskey String where
+  attr Accesskey value = unsafeAttribute { key: "accesskey", value: prop value }
+
+instance Attr Code_ Accesskey String where
+  attr Accesskey value = unsafeAttribute { key: "accesskey", value: prop value }
+
+instance Attr Col_ Accesskey String where
+  attr Accesskey value = unsafeAttribute { key: "accesskey", value: prop value }
+
+instance Attr Colgroup_ Accesskey String where
+  attr Accesskey value = unsafeAttribute { key: "accesskey", value: prop value }
+
+instance Attr Xdata_ Accesskey String where
+  attr Accesskey value = unsafeAttribute { key: "accesskey", value: prop value }
+
+instance Attr Datalist_ Accesskey String where
+  attr Accesskey value = unsafeAttribute { key: "accesskey", value: prop value }
+
+instance Attr Dd_ Accesskey String where
+  attr Accesskey value = unsafeAttribute { key: "accesskey", value: prop value }
+
+instance Attr Del_ Accesskey String where
+  attr Accesskey value = unsafeAttribute { key: "accesskey", value: prop value }
+
+instance Attr Details_ Accesskey String where
+  attr Accesskey value = unsafeAttribute { key: "accesskey", value: prop value }
+
+instance Attr Dfn_ Accesskey String where
+  attr Accesskey value = unsafeAttribute { key: "accesskey", value: prop value }
+
+instance Attr Dialog_ Accesskey String where
+  attr Accesskey value = unsafeAttribute { key: "accesskey", value: prop value }
+
+instance Attr Dir_ Accesskey String where
+  attr Accesskey value = unsafeAttribute { key: "accesskey", value: prop value }
+
+instance Attr Div_ Accesskey String where
+  attr Accesskey value = unsafeAttribute { key: "accesskey", value: prop value }
+
+instance Attr Dl_ Accesskey String where
+  attr Accesskey value = unsafeAttribute { key: "accesskey", value: prop value }
+
+instance Attr Dt_ Accesskey String where
+  attr Accesskey value = unsafeAttribute { key: "accesskey", value: prop value }
+
+instance Attr Em_ Accesskey String where
+  attr Accesskey value = unsafeAttribute { key: "accesskey", value: prop value }
+
+instance Attr Embed_ Accesskey String where
+  attr Accesskey value = unsafeAttribute { key: "accesskey", value: prop value }
+
+instance Attr Fieldset_ Accesskey String where
+  attr Accesskey value = unsafeAttribute { key: "accesskey", value: prop value }
+
+instance Attr Figcaption_ Accesskey String where
+  attr Accesskey value = unsafeAttribute { key: "accesskey", value: prop value }
+
+instance Attr Figure_ Accesskey String where
+  attr Accesskey value = unsafeAttribute { key: "accesskey", value: prop value }
+
+instance Attr Font_ Accesskey String where
+  attr Accesskey value = unsafeAttribute { key: "accesskey", value: prop value }
+
+instance Attr Footer_ Accesskey String where
+  attr Accesskey value = unsafeAttribute { key: "accesskey", value: prop value }
+
+instance Attr Form_ Accesskey String where
+  attr Accesskey value = unsafeAttribute { key: "accesskey", value: prop value }
+
+instance Attr Frame_ Accesskey String where
+  attr Accesskey value = unsafeAttribute { key: "accesskey", value: prop value }
+
+instance Attr Frameset_ Accesskey String where
+  attr Accesskey value = unsafeAttribute { key: "accesskey", value: prop value }
+
+instance Attr H1_ Accesskey String where
+  attr Accesskey value = unsafeAttribute { key: "accesskey", value: prop value }
+
+instance Attr H2_ Accesskey String where
+  attr Accesskey value = unsafeAttribute { key: "accesskey", value: prop value }
+
+instance Attr H3_ Accesskey String where
+  attr Accesskey value = unsafeAttribute { key: "accesskey", value: prop value }
+
+instance Attr H4_ Accesskey String where
+  attr Accesskey value = unsafeAttribute { key: "accesskey", value: prop value }
+
+instance Attr H5_ Accesskey String where
+  attr Accesskey value = unsafeAttribute { key: "accesskey", value: prop value }
+
+instance Attr H6_ Accesskey String where
+  attr Accesskey value = unsafeAttribute { key: "accesskey", value: prop value }
+
+instance Attr Head_ Accesskey String where
+  attr Accesskey value = unsafeAttribute { key: "accesskey", value: prop value }
+
+instance Attr Header_ Accesskey String where
+  attr Accesskey value = unsafeAttribute { key: "accesskey", value: prop value }
+
+instance Attr Hr_ Accesskey String where
+  attr Accesskey value = unsafeAttribute { key: "accesskey", value: prop value }
+
+instance Attr Html_ Accesskey String where
+  attr Accesskey value = unsafeAttribute { key: "accesskey", value: prop value }
+
+instance Attr I_ Accesskey String where
+  attr Accesskey value = unsafeAttribute { key: "accesskey", value: prop value }
+
+instance Attr Iframe_ Accesskey String where
+  attr Accesskey value = unsafeAttribute { key: "accesskey", value: prop value }
+
+instance Attr Img_ Accesskey String where
+  attr Accesskey value = unsafeAttribute { key: "accesskey", value: prop value }
+
+instance Attr Input_ Accesskey String where
+  attr Accesskey value = unsafeAttribute { key: "accesskey", value: prop value }
+
+instance Attr Ins_ Accesskey String where
+  attr Accesskey value = unsafeAttribute { key: "accesskey", value: prop value }
+
+instance Attr Kbd_ Accesskey String where
+  attr Accesskey value = unsafeAttribute { key: "accesskey", value: prop value }
+
+instance Attr Label_ Accesskey String where
+  attr Accesskey value = unsafeAttribute { key: "accesskey", value: prop value }
+
+instance Attr Legend_ Accesskey String where
+  attr Accesskey value = unsafeAttribute { key: "accesskey", value: prop value }
+
+instance Attr Li_ Accesskey String where
+  attr Accesskey value = unsafeAttribute { key: "accesskey", value: prop value }
+
+instance Attr Link_ Accesskey String where
+  attr Accesskey value = unsafeAttribute { key: "accesskey", value: prop value }
+
+instance Attr Main_ Accesskey String where
+  attr Accesskey value = unsafeAttribute { key: "accesskey", value: prop value }
+
+instance Attr Map_ Accesskey String where
+  attr Accesskey value = unsafeAttribute { key: "accesskey", value: prop value }
+
+instance Attr Mark_ Accesskey String where
+  attr Accesskey value = unsafeAttribute { key: "accesskey", value: prop value }
+
+instance Attr Meta_ Accesskey String where
+  attr Accesskey value = unsafeAttribute { key: "accesskey", value: prop value }
+
+instance Attr Meter_ Accesskey String where
+  attr Accesskey value = unsafeAttribute { key: "accesskey", value: prop value }
+
+instance Attr Nav_ Accesskey String where
+  attr Accesskey value = unsafeAttribute { key: "accesskey", value: prop value }
+
+instance Attr Noframes_ Accesskey String where
+  attr Accesskey value = unsafeAttribute { key: "accesskey", value: prop value }
+
+instance Attr Noscript_ Accesskey String where
+  attr Accesskey value = unsafeAttribute { key: "accesskey", value: prop value }
+
+instance Attr Object_ Accesskey String where
+  attr Accesskey value = unsafeAttribute { key: "accesskey", value: prop value }
+
+instance Attr Ol_ Accesskey String where
+  attr Accesskey value = unsafeAttribute { key: "accesskey", value: prop value }
+
+instance Attr Optgroup_ Accesskey String where
+  attr Accesskey value = unsafeAttribute { key: "accesskey", value: prop value }
+
+instance Attr Option_ Accesskey String where
+  attr Accesskey value = unsafeAttribute { key: "accesskey", value: prop value }
+
+instance Attr Output_ Accesskey String where
+  attr Accesskey value = unsafeAttribute { key: "accesskey", value: prop value }
+
+instance Attr P_ Accesskey String where
+  attr Accesskey value = unsafeAttribute { key: "accesskey", value: prop value }
+
+instance Attr Param_ Accesskey String where
+  attr Accesskey value = unsafeAttribute { key: "accesskey", value: prop value }
+
+instance Attr Picture_ Accesskey String where
+  attr Accesskey value = unsafeAttribute { key: "accesskey", value: prop value }
+
+instance Attr Pre_ Accesskey String where
+  attr Accesskey value = unsafeAttribute { key: "accesskey", value: prop value }
+
+instance Attr Progress_ Accesskey String where
+  attr Accesskey value = unsafeAttribute { key: "accesskey", value: prop value }
+
+instance Attr Q_ Accesskey String where
+  attr Accesskey value = unsafeAttribute { key: "accesskey", value: prop value }
+
+instance Attr Rp_ Accesskey String where
+  attr Accesskey value = unsafeAttribute { key: "accesskey", value: prop value }
+
+instance Attr Rt_ Accesskey String where
+  attr Accesskey value = unsafeAttribute { key: "accesskey", value: prop value }
+
+instance Attr Ruby_ Accesskey String where
+  attr Accesskey value = unsafeAttribute { key: "accesskey", value: prop value }
+
+instance Attr S_ Accesskey String where
+  attr Accesskey value = unsafeAttribute { key: "accesskey", value: prop value }
+
+instance Attr Samp_ Accesskey String where
+  attr Accesskey value = unsafeAttribute { key: "accesskey", value: prop value }
+
+instance Attr Script_ Accesskey String where
+  attr Accesskey value = unsafeAttribute { key: "accesskey", value: prop value }
+
+instance Attr Section_ Accesskey String where
+  attr Accesskey value = unsafeAttribute { key: "accesskey", value: prop value }
+
+instance Attr Select_ Accesskey String where
+  attr Accesskey value = unsafeAttribute { key: "accesskey", value: prop value }
+
+instance Attr Small_ Accesskey String where
+  attr Accesskey value = unsafeAttribute { key: "accesskey", value: prop value }
+
+instance Attr Source_ Accesskey String where
+  attr Accesskey value = unsafeAttribute { key: "accesskey", value: prop value }
+
+instance Attr Span_ Accesskey String where
+  attr Accesskey value = unsafeAttribute { key: "accesskey", value: prop value }
+
+instance Attr Strike_ Accesskey String where
+  attr Accesskey value = unsafeAttribute { key: "accesskey", value: prop value }
+
+instance Attr Strong_ Accesskey String where
+  attr Accesskey value = unsafeAttribute { key: "accesskey", value: prop value }
+
+instance Attr Style_ Accesskey String where
+  attr Accesskey value = unsafeAttribute { key: "accesskey", value: prop value }
+
+instance Attr Sub_ Accesskey String where
+  attr Accesskey value = unsafeAttribute { key: "accesskey", value: prop value }
+
+instance Attr Summary_ Accesskey String where
+  attr Accesskey value = unsafeAttribute { key: "accesskey", value: prop value }
+
+instance Attr Sup_ Accesskey String where
+  attr Accesskey value = unsafeAttribute { key: "accesskey", value: prop value }
+
+instance Attr Svg_ Accesskey String where
+  attr Accesskey value = unsafeAttribute { key: "accesskey", value: prop value }
+
+instance Attr Table_ Accesskey String where
+  attr Accesskey value = unsafeAttribute { key: "accesskey", value: prop value }
+
+instance Attr Tbody_ Accesskey String where
+  attr Accesskey value = unsafeAttribute { key: "accesskey", value: prop value }
+
+instance Attr Td_ Accesskey String where
+  attr Accesskey value = unsafeAttribute { key: "accesskey", value: prop value }
+
+instance Attr Template_ Accesskey String where
+  attr Accesskey value = unsafeAttribute { key: "accesskey", value: prop value }
+
+instance Attr Textarea_ Accesskey String where
+  attr Accesskey value = unsafeAttribute { key: "accesskey", value: prop value }
+
+instance Attr Tfoot_ Accesskey String where
+  attr Accesskey value = unsafeAttribute { key: "accesskey", value: prop value }
+
+instance Attr Th_ Accesskey String where
+  attr Accesskey value = unsafeAttribute { key: "accesskey", value: prop value }
+
+instance Attr Thead_ Accesskey String where
+  attr Accesskey value = unsafeAttribute { key: "accesskey", value: prop value }
+
+instance Attr Time_ Accesskey String where
+  attr Accesskey value = unsafeAttribute { key: "accesskey", value: prop value }
+
+instance Attr Title_ Accesskey String where
+  attr Accesskey value = unsafeAttribute { key: "accesskey", value: prop value }
+
+instance Attr Tr_ Accesskey String where
+  attr Accesskey value = unsafeAttribute { key: "accesskey", value: prop value }
+
+instance Attr Track_ Accesskey String where
+  attr Accesskey value = unsafeAttribute { key: "accesskey", value: prop value }
+
+instance Attr Tt_ Accesskey String where
+  attr Accesskey value = unsafeAttribute { key: "accesskey", value: prop value }
+
+instance Attr U_ Accesskey String where
+  attr Accesskey value = unsafeAttribute { key: "accesskey", value: prop value }
+
+instance Attr Ul_ Accesskey String where
+  attr Accesskey value = unsafeAttribute { key: "accesskey", value: prop value }
+
+instance Attr Var_ Accesskey String where
+  attr Accesskey value = unsafeAttribute { key: "accesskey", value: prop value }
+
+instance Attr Video_ Accesskey String where
+  attr Accesskey value = unsafeAttribute { key: "accesskey", value: prop value }
+
+instance Attr Wbr_ Accesskey String where
+  attr Accesskey value = unsafeAttribute { key: "accesskey", value: prop value }
+
 instance Attr Form_ Action String where
   attr Action value = unsafeAttribute { key: "action", value: prop value }
 
@@ -1374,6 +1740,372 @@ instance Attr Input_ Alt String where
 
 instance Attr Script_ Async String where
   attr Async value = unsafeAttribute { key: "async", value: prop value }
+
+instance Attr A_ Autocapitalize String where
+  attr Autocapitalize value = unsafeAttribute { key: "autocapitalize", value: prop value }
+
+instance Attr Abbr_ Autocapitalize String where
+  attr Autocapitalize value = unsafeAttribute { key: "autocapitalize", value: prop value }
+
+instance Attr Acronym_ Autocapitalize String where
+  attr Autocapitalize value = unsafeAttribute { key: "autocapitalize", value: prop value }
+
+instance Attr Address_ Autocapitalize String where
+  attr Autocapitalize value = unsafeAttribute { key: "autocapitalize", value: prop value }
+
+instance Attr Applet_ Autocapitalize String where
+  attr Autocapitalize value = unsafeAttribute { key: "autocapitalize", value: prop value }
+
+instance Attr Area_ Autocapitalize String where
+  attr Autocapitalize value = unsafeAttribute { key: "autocapitalize", value: prop value }
+
+instance Attr Article_ Autocapitalize String where
+  attr Autocapitalize value = unsafeAttribute { key: "autocapitalize", value: prop value }
+
+instance Attr Aside_ Autocapitalize String where
+  attr Autocapitalize value = unsafeAttribute { key: "autocapitalize", value: prop value }
+
+instance Attr Audio_ Autocapitalize String where
+  attr Autocapitalize value = unsafeAttribute { key: "autocapitalize", value: prop value }
+
+instance Attr B_ Autocapitalize String where
+  attr Autocapitalize value = unsafeAttribute { key: "autocapitalize", value: prop value }
+
+instance Attr Base_ Autocapitalize String where
+  attr Autocapitalize value = unsafeAttribute { key: "autocapitalize", value: prop value }
+
+instance Attr Basefont_ Autocapitalize String where
+  attr Autocapitalize value = unsafeAttribute { key: "autocapitalize", value: prop value }
+
+instance Attr Bdi_ Autocapitalize String where
+  attr Autocapitalize value = unsafeAttribute { key: "autocapitalize", value: prop value }
+
+instance Attr Bdo_ Autocapitalize String where
+  attr Autocapitalize value = unsafeAttribute { key: "autocapitalize", value: prop value }
+
+instance Attr Big_ Autocapitalize String where
+  attr Autocapitalize value = unsafeAttribute { key: "autocapitalize", value: prop value }
+
+instance Attr Blockquote_ Autocapitalize String where
+  attr Autocapitalize value = unsafeAttribute { key: "autocapitalize", value: prop value }
+
+instance Attr Body_ Autocapitalize String where
+  attr Autocapitalize value = unsafeAttribute { key: "autocapitalize", value: prop value }
+
+instance Attr Br_ Autocapitalize String where
+  attr Autocapitalize value = unsafeAttribute { key: "autocapitalize", value: prop value }
+
+instance Attr Button_ Autocapitalize String where
+  attr Autocapitalize value = unsafeAttribute { key: "autocapitalize", value: prop value }
+
+instance Attr Canvas_ Autocapitalize String where
+  attr Autocapitalize value = unsafeAttribute { key: "autocapitalize", value: prop value }
+
+instance Attr Caption_ Autocapitalize String where
+  attr Autocapitalize value = unsafeAttribute { key: "autocapitalize", value: prop value }
+
+instance Attr Center_ Autocapitalize String where
+  attr Autocapitalize value = unsafeAttribute { key: "autocapitalize", value: prop value }
+
+instance Attr Cite_ Autocapitalize String where
+  attr Autocapitalize value = unsafeAttribute { key: "autocapitalize", value: prop value }
+
+instance Attr Code_ Autocapitalize String where
+  attr Autocapitalize value = unsafeAttribute { key: "autocapitalize", value: prop value }
+
+instance Attr Col_ Autocapitalize String where
+  attr Autocapitalize value = unsafeAttribute { key: "autocapitalize", value: prop value }
+
+instance Attr Colgroup_ Autocapitalize String where
+  attr Autocapitalize value = unsafeAttribute { key: "autocapitalize", value: prop value }
+
+instance Attr Xdata_ Autocapitalize String where
+  attr Autocapitalize value = unsafeAttribute { key: "autocapitalize", value: prop value }
+
+instance Attr Datalist_ Autocapitalize String where
+  attr Autocapitalize value = unsafeAttribute { key: "autocapitalize", value: prop value }
+
+instance Attr Dd_ Autocapitalize String where
+  attr Autocapitalize value = unsafeAttribute { key: "autocapitalize", value: prop value }
+
+instance Attr Del_ Autocapitalize String where
+  attr Autocapitalize value = unsafeAttribute { key: "autocapitalize", value: prop value }
+
+instance Attr Details_ Autocapitalize String where
+  attr Autocapitalize value = unsafeAttribute { key: "autocapitalize", value: prop value }
+
+instance Attr Dfn_ Autocapitalize String where
+  attr Autocapitalize value = unsafeAttribute { key: "autocapitalize", value: prop value }
+
+instance Attr Dialog_ Autocapitalize String where
+  attr Autocapitalize value = unsafeAttribute { key: "autocapitalize", value: prop value }
+
+instance Attr Dir_ Autocapitalize String where
+  attr Autocapitalize value = unsafeAttribute { key: "autocapitalize", value: prop value }
+
+instance Attr Div_ Autocapitalize String where
+  attr Autocapitalize value = unsafeAttribute { key: "autocapitalize", value: prop value }
+
+instance Attr Dl_ Autocapitalize String where
+  attr Autocapitalize value = unsafeAttribute { key: "autocapitalize", value: prop value }
+
+instance Attr Dt_ Autocapitalize String where
+  attr Autocapitalize value = unsafeAttribute { key: "autocapitalize", value: prop value }
+
+instance Attr Em_ Autocapitalize String where
+  attr Autocapitalize value = unsafeAttribute { key: "autocapitalize", value: prop value }
+
+instance Attr Embed_ Autocapitalize String where
+  attr Autocapitalize value = unsafeAttribute { key: "autocapitalize", value: prop value }
+
+instance Attr Fieldset_ Autocapitalize String where
+  attr Autocapitalize value = unsafeAttribute { key: "autocapitalize", value: prop value }
+
+instance Attr Figcaption_ Autocapitalize String where
+  attr Autocapitalize value = unsafeAttribute { key: "autocapitalize", value: prop value }
+
+instance Attr Figure_ Autocapitalize String where
+  attr Autocapitalize value = unsafeAttribute { key: "autocapitalize", value: prop value }
+
+instance Attr Font_ Autocapitalize String where
+  attr Autocapitalize value = unsafeAttribute { key: "autocapitalize", value: prop value }
+
+instance Attr Footer_ Autocapitalize String where
+  attr Autocapitalize value = unsafeAttribute { key: "autocapitalize", value: prop value }
+
+instance Attr Form_ Autocapitalize String where
+  attr Autocapitalize value = unsafeAttribute { key: "autocapitalize", value: prop value }
+
+instance Attr Frame_ Autocapitalize String where
+  attr Autocapitalize value = unsafeAttribute { key: "autocapitalize", value: prop value }
+
+instance Attr Frameset_ Autocapitalize String where
+  attr Autocapitalize value = unsafeAttribute { key: "autocapitalize", value: prop value }
+
+instance Attr H1_ Autocapitalize String where
+  attr Autocapitalize value = unsafeAttribute { key: "autocapitalize", value: prop value }
+
+instance Attr H2_ Autocapitalize String where
+  attr Autocapitalize value = unsafeAttribute { key: "autocapitalize", value: prop value }
+
+instance Attr H3_ Autocapitalize String where
+  attr Autocapitalize value = unsafeAttribute { key: "autocapitalize", value: prop value }
+
+instance Attr H4_ Autocapitalize String where
+  attr Autocapitalize value = unsafeAttribute { key: "autocapitalize", value: prop value }
+
+instance Attr H5_ Autocapitalize String where
+  attr Autocapitalize value = unsafeAttribute { key: "autocapitalize", value: prop value }
+
+instance Attr H6_ Autocapitalize String where
+  attr Autocapitalize value = unsafeAttribute { key: "autocapitalize", value: prop value }
+
+instance Attr Head_ Autocapitalize String where
+  attr Autocapitalize value = unsafeAttribute { key: "autocapitalize", value: prop value }
+
+instance Attr Header_ Autocapitalize String where
+  attr Autocapitalize value = unsafeAttribute { key: "autocapitalize", value: prop value }
+
+instance Attr Hr_ Autocapitalize String where
+  attr Autocapitalize value = unsafeAttribute { key: "autocapitalize", value: prop value }
+
+instance Attr Html_ Autocapitalize String where
+  attr Autocapitalize value = unsafeAttribute { key: "autocapitalize", value: prop value }
+
+instance Attr I_ Autocapitalize String where
+  attr Autocapitalize value = unsafeAttribute { key: "autocapitalize", value: prop value }
+
+instance Attr Iframe_ Autocapitalize String where
+  attr Autocapitalize value = unsafeAttribute { key: "autocapitalize", value: prop value }
+
+instance Attr Img_ Autocapitalize String where
+  attr Autocapitalize value = unsafeAttribute { key: "autocapitalize", value: prop value }
+
+instance Attr Input_ Autocapitalize String where
+  attr Autocapitalize value = unsafeAttribute { key: "autocapitalize", value: prop value }
+
+instance Attr Ins_ Autocapitalize String where
+  attr Autocapitalize value = unsafeAttribute { key: "autocapitalize", value: prop value }
+
+instance Attr Kbd_ Autocapitalize String where
+  attr Autocapitalize value = unsafeAttribute { key: "autocapitalize", value: prop value }
+
+instance Attr Label_ Autocapitalize String where
+  attr Autocapitalize value = unsafeAttribute { key: "autocapitalize", value: prop value }
+
+instance Attr Legend_ Autocapitalize String where
+  attr Autocapitalize value = unsafeAttribute { key: "autocapitalize", value: prop value }
+
+instance Attr Li_ Autocapitalize String where
+  attr Autocapitalize value = unsafeAttribute { key: "autocapitalize", value: prop value }
+
+instance Attr Link_ Autocapitalize String where
+  attr Autocapitalize value = unsafeAttribute { key: "autocapitalize", value: prop value }
+
+instance Attr Main_ Autocapitalize String where
+  attr Autocapitalize value = unsafeAttribute { key: "autocapitalize", value: prop value }
+
+instance Attr Map_ Autocapitalize String where
+  attr Autocapitalize value = unsafeAttribute { key: "autocapitalize", value: prop value }
+
+instance Attr Mark_ Autocapitalize String where
+  attr Autocapitalize value = unsafeAttribute { key: "autocapitalize", value: prop value }
+
+instance Attr Meta_ Autocapitalize String where
+  attr Autocapitalize value = unsafeAttribute { key: "autocapitalize", value: prop value }
+
+instance Attr Meter_ Autocapitalize String where
+  attr Autocapitalize value = unsafeAttribute { key: "autocapitalize", value: prop value }
+
+instance Attr Nav_ Autocapitalize String where
+  attr Autocapitalize value = unsafeAttribute { key: "autocapitalize", value: prop value }
+
+instance Attr Noframes_ Autocapitalize String where
+  attr Autocapitalize value = unsafeAttribute { key: "autocapitalize", value: prop value }
+
+instance Attr Noscript_ Autocapitalize String where
+  attr Autocapitalize value = unsafeAttribute { key: "autocapitalize", value: prop value }
+
+instance Attr Object_ Autocapitalize String where
+  attr Autocapitalize value = unsafeAttribute { key: "autocapitalize", value: prop value }
+
+instance Attr Ol_ Autocapitalize String where
+  attr Autocapitalize value = unsafeAttribute { key: "autocapitalize", value: prop value }
+
+instance Attr Optgroup_ Autocapitalize String where
+  attr Autocapitalize value = unsafeAttribute { key: "autocapitalize", value: prop value }
+
+instance Attr Option_ Autocapitalize String where
+  attr Autocapitalize value = unsafeAttribute { key: "autocapitalize", value: prop value }
+
+instance Attr Output_ Autocapitalize String where
+  attr Autocapitalize value = unsafeAttribute { key: "autocapitalize", value: prop value }
+
+instance Attr P_ Autocapitalize String where
+  attr Autocapitalize value = unsafeAttribute { key: "autocapitalize", value: prop value }
+
+instance Attr Param_ Autocapitalize String where
+  attr Autocapitalize value = unsafeAttribute { key: "autocapitalize", value: prop value }
+
+instance Attr Picture_ Autocapitalize String where
+  attr Autocapitalize value = unsafeAttribute { key: "autocapitalize", value: prop value }
+
+instance Attr Pre_ Autocapitalize String where
+  attr Autocapitalize value = unsafeAttribute { key: "autocapitalize", value: prop value }
+
+instance Attr Progress_ Autocapitalize String where
+  attr Autocapitalize value = unsafeAttribute { key: "autocapitalize", value: prop value }
+
+instance Attr Q_ Autocapitalize String where
+  attr Autocapitalize value = unsafeAttribute { key: "autocapitalize", value: prop value }
+
+instance Attr Rp_ Autocapitalize String where
+  attr Autocapitalize value = unsafeAttribute { key: "autocapitalize", value: prop value }
+
+instance Attr Rt_ Autocapitalize String where
+  attr Autocapitalize value = unsafeAttribute { key: "autocapitalize", value: prop value }
+
+instance Attr Ruby_ Autocapitalize String where
+  attr Autocapitalize value = unsafeAttribute { key: "autocapitalize", value: prop value }
+
+instance Attr S_ Autocapitalize String where
+  attr Autocapitalize value = unsafeAttribute { key: "autocapitalize", value: prop value }
+
+instance Attr Samp_ Autocapitalize String where
+  attr Autocapitalize value = unsafeAttribute { key: "autocapitalize", value: prop value }
+
+instance Attr Script_ Autocapitalize String where
+  attr Autocapitalize value = unsafeAttribute { key: "autocapitalize", value: prop value }
+
+instance Attr Section_ Autocapitalize String where
+  attr Autocapitalize value = unsafeAttribute { key: "autocapitalize", value: prop value }
+
+instance Attr Select_ Autocapitalize String where
+  attr Autocapitalize value = unsafeAttribute { key: "autocapitalize", value: prop value }
+
+instance Attr Small_ Autocapitalize String where
+  attr Autocapitalize value = unsafeAttribute { key: "autocapitalize", value: prop value }
+
+instance Attr Source_ Autocapitalize String where
+  attr Autocapitalize value = unsafeAttribute { key: "autocapitalize", value: prop value }
+
+instance Attr Span_ Autocapitalize String where
+  attr Autocapitalize value = unsafeAttribute { key: "autocapitalize", value: prop value }
+
+instance Attr Strike_ Autocapitalize String where
+  attr Autocapitalize value = unsafeAttribute { key: "autocapitalize", value: prop value }
+
+instance Attr Strong_ Autocapitalize String where
+  attr Autocapitalize value = unsafeAttribute { key: "autocapitalize", value: prop value }
+
+instance Attr Style_ Autocapitalize String where
+  attr Autocapitalize value = unsafeAttribute { key: "autocapitalize", value: prop value }
+
+instance Attr Sub_ Autocapitalize String where
+  attr Autocapitalize value = unsafeAttribute { key: "autocapitalize", value: prop value }
+
+instance Attr Summary_ Autocapitalize String where
+  attr Autocapitalize value = unsafeAttribute { key: "autocapitalize", value: prop value }
+
+instance Attr Sup_ Autocapitalize String where
+  attr Autocapitalize value = unsafeAttribute { key: "autocapitalize", value: prop value }
+
+instance Attr Svg_ Autocapitalize String where
+  attr Autocapitalize value = unsafeAttribute { key: "autocapitalize", value: prop value }
+
+instance Attr Table_ Autocapitalize String where
+  attr Autocapitalize value = unsafeAttribute { key: "autocapitalize", value: prop value }
+
+instance Attr Tbody_ Autocapitalize String where
+  attr Autocapitalize value = unsafeAttribute { key: "autocapitalize", value: prop value }
+
+instance Attr Td_ Autocapitalize String where
+  attr Autocapitalize value = unsafeAttribute { key: "autocapitalize", value: prop value }
+
+instance Attr Template_ Autocapitalize String where
+  attr Autocapitalize value = unsafeAttribute { key: "autocapitalize", value: prop value }
+
+instance Attr Textarea_ Autocapitalize String where
+  attr Autocapitalize value = unsafeAttribute { key: "autocapitalize", value: prop value }
+
+instance Attr Tfoot_ Autocapitalize String where
+  attr Autocapitalize value = unsafeAttribute { key: "autocapitalize", value: prop value }
+
+instance Attr Th_ Autocapitalize String where
+  attr Autocapitalize value = unsafeAttribute { key: "autocapitalize", value: prop value }
+
+instance Attr Thead_ Autocapitalize String where
+  attr Autocapitalize value = unsafeAttribute { key: "autocapitalize", value: prop value }
+
+instance Attr Time_ Autocapitalize String where
+  attr Autocapitalize value = unsafeAttribute { key: "autocapitalize", value: prop value }
+
+instance Attr Title_ Autocapitalize String where
+  attr Autocapitalize value = unsafeAttribute { key: "autocapitalize", value: prop value }
+
+instance Attr Tr_ Autocapitalize String where
+  attr Autocapitalize value = unsafeAttribute { key: "autocapitalize", value: prop value }
+
+instance Attr Track_ Autocapitalize String where
+  attr Autocapitalize value = unsafeAttribute { key: "autocapitalize", value: prop value }
+
+instance Attr Tt_ Autocapitalize String where
+  attr Autocapitalize value = unsafeAttribute { key: "autocapitalize", value: prop value }
+
+instance Attr U_ Autocapitalize String where
+  attr Autocapitalize value = unsafeAttribute { key: "autocapitalize", value: prop value }
+
+instance Attr Ul_ Autocapitalize String where
+  attr Autocapitalize value = unsafeAttribute { key: "autocapitalize", value: prop value }
+
+instance Attr Var_ Autocapitalize String where
+  attr Autocapitalize value = unsafeAttribute { key: "autocapitalize", value: prop value }
+
+instance Attr Video_ Autocapitalize String where
+  attr Autocapitalize value = unsafeAttribute { key: "autocapitalize", value: prop value }
+
+instance Attr Wbr_ Autocapitalize String where
+  attr Autocapitalize value = unsafeAttribute { key: "autocapitalize", value: prop value }
 
 instance Attr Form_ Autocomplete String where
   attr Autocomplete value = unsafeAttribute { key: "autocomplete", value: prop value }
@@ -1462,6 +2194,372 @@ instance Attr Video_ Buffered String where
 instance Attr Input_ Capture String where
   attr Capture value = unsafeAttribute { key: "capture", value: prop value }
 
+instance Attr A_ Challenge String where
+  attr Challenge value = unsafeAttribute { key: "challenge", value: prop value }
+
+instance Attr Abbr_ Challenge String where
+  attr Challenge value = unsafeAttribute { key: "challenge", value: prop value }
+
+instance Attr Acronym_ Challenge String where
+  attr Challenge value = unsafeAttribute { key: "challenge", value: prop value }
+
+instance Attr Address_ Challenge String where
+  attr Challenge value = unsafeAttribute { key: "challenge", value: prop value }
+
+instance Attr Applet_ Challenge String where
+  attr Challenge value = unsafeAttribute { key: "challenge", value: prop value }
+
+instance Attr Area_ Challenge String where
+  attr Challenge value = unsafeAttribute { key: "challenge", value: prop value }
+
+instance Attr Article_ Challenge String where
+  attr Challenge value = unsafeAttribute { key: "challenge", value: prop value }
+
+instance Attr Aside_ Challenge String where
+  attr Challenge value = unsafeAttribute { key: "challenge", value: prop value }
+
+instance Attr Audio_ Challenge String where
+  attr Challenge value = unsafeAttribute { key: "challenge", value: prop value }
+
+instance Attr B_ Challenge String where
+  attr Challenge value = unsafeAttribute { key: "challenge", value: prop value }
+
+instance Attr Base_ Challenge String where
+  attr Challenge value = unsafeAttribute { key: "challenge", value: prop value }
+
+instance Attr Basefont_ Challenge String where
+  attr Challenge value = unsafeAttribute { key: "challenge", value: prop value }
+
+instance Attr Bdi_ Challenge String where
+  attr Challenge value = unsafeAttribute { key: "challenge", value: prop value }
+
+instance Attr Bdo_ Challenge String where
+  attr Challenge value = unsafeAttribute { key: "challenge", value: prop value }
+
+instance Attr Big_ Challenge String where
+  attr Challenge value = unsafeAttribute { key: "challenge", value: prop value }
+
+instance Attr Blockquote_ Challenge String where
+  attr Challenge value = unsafeAttribute { key: "challenge", value: prop value }
+
+instance Attr Body_ Challenge String where
+  attr Challenge value = unsafeAttribute { key: "challenge", value: prop value }
+
+instance Attr Br_ Challenge String where
+  attr Challenge value = unsafeAttribute { key: "challenge", value: prop value }
+
+instance Attr Button_ Challenge String where
+  attr Challenge value = unsafeAttribute { key: "challenge", value: prop value }
+
+instance Attr Canvas_ Challenge String where
+  attr Challenge value = unsafeAttribute { key: "challenge", value: prop value }
+
+instance Attr Caption_ Challenge String where
+  attr Challenge value = unsafeAttribute { key: "challenge", value: prop value }
+
+instance Attr Center_ Challenge String where
+  attr Challenge value = unsafeAttribute { key: "challenge", value: prop value }
+
+instance Attr Cite_ Challenge String where
+  attr Challenge value = unsafeAttribute { key: "challenge", value: prop value }
+
+instance Attr Code_ Challenge String where
+  attr Challenge value = unsafeAttribute { key: "challenge", value: prop value }
+
+instance Attr Col_ Challenge String where
+  attr Challenge value = unsafeAttribute { key: "challenge", value: prop value }
+
+instance Attr Colgroup_ Challenge String where
+  attr Challenge value = unsafeAttribute { key: "challenge", value: prop value }
+
+instance Attr Xdata_ Challenge String where
+  attr Challenge value = unsafeAttribute { key: "challenge", value: prop value }
+
+instance Attr Datalist_ Challenge String where
+  attr Challenge value = unsafeAttribute { key: "challenge", value: prop value }
+
+instance Attr Dd_ Challenge String where
+  attr Challenge value = unsafeAttribute { key: "challenge", value: prop value }
+
+instance Attr Del_ Challenge String where
+  attr Challenge value = unsafeAttribute { key: "challenge", value: prop value }
+
+instance Attr Details_ Challenge String where
+  attr Challenge value = unsafeAttribute { key: "challenge", value: prop value }
+
+instance Attr Dfn_ Challenge String where
+  attr Challenge value = unsafeAttribute { key: "challenge", value: prop value }
+
+instance Attr Dialog_ Challenge String where
+  attr Challenge value = unsafeAttribute { key: "challenge", value: prop value }
+
+instance Attr Dir_ Challenge String where
+  attr Challenge value = unsafeAttribute { key: "challenge", value: prop value }
+
+instance Attr Div_ Challenge String where
+  attr Challenge value = unsafeAttribute { key: "challenge", value: prop value }
+
+instance Attr Dl_ Challenge String where
+  attr Challenge value = unsafeAttribute { key: "challenge", value: prop value }
+
+instance Attr Dt_ Challenge String where
+  attr Challenge value = unsafeAttribute { key: "challenge", value: prop value }
+
+instance Attr Em_ Challenge String where
+  attr Challenge value = unsafeAttribute { key: "challenge", value: prop value }
+
+instance Attr Embed_ Challenge String where
+  attr Challenge value = unsafeAttribute { key: "challenge", value: prop value }
+
+instance Attr Fieldset_ Challenge String where
+  attr Challenge value = unsafeAttribute { key: "challenge", value: prop value }
+
+instance Attr Figcaption_ Challenge String where
+  attr Challenge value = unsafeAttribute { key: "challenge", value: prop value }
+
+instance Attr Figure_ Challenge String where
+  attr Challenge value = unsafeAttribute { key: "challenge", value: prop value }
+
+instance Attr Font_ Challenge String where
+  attr Challenge value = unsafeAttribute { key: "challenge", value: prop value }
+
+instance Attr Footer_ Challenge String where
+  attr Challenge value = unsafeAttribute { key: "challenge", value: prop value }
+
+instance Attr Form_ Challenge String where
+  attr Challenge value = unsafeAttribute { key: "challenge", value: prop value }
+
+instance Attr Frame_ Challenge String where
+  attr Challenge value = unsafeAttribute { key: "challenge", value: prop value }
+
+instance Attr Frameset_ Challenge String where
+  attr Challenge value = unsafeAttribute { key: "challenge", value: prop value }
+
+instance Attr H1_ Challenge String where
+  attr Challenge value = unsafeAttribute { key: "challenge", value: prop value }
+
+instance Attr H2_ Challenge String where
+  attr Challenge value = unsafeAttribute { key: "challenge", value: prop value }
+
+instance Attr H3_ Challenge String where
+  attr Challenge value = unsafeAttribute { key: "challenge", value: prop value }
+
+instance Attr H4_ Challenge String where
+  attr Challenge value = unsafeAttribute { key: "challenge", value: prop value }
+
+instance Attr H5_ Challenge String where
+  attr Challenge value = unsafeAttribute { key: "challenge", value: prop value }
+
+instance Attr H6_ Challenge String where
+  attr Challenge value = unsafeAttribute { key: "challenge", value: prop value }
+
+instance Attr Head_ Challenge String where
+  attr Challenge value = unsafeAttribute { key: "challenge", value: prop value }
+
+instance Attr Header_ Challenge String where
+  attr Challenge value = unsafeAttribute { key: "challenge", value: prop value }
+
+instance Attr Hr_ Challenge String where
+  attr Challenge value = unsafeAttribute { key: "challenge", value: prop value }
+
+instance Attr Html_ Challenge String where
+  attr Challenge value = unsafeAttribute { key: "challenge", value: prop value }
+
+instance Attr I_ Challenge String where
+  attr Challenge value = unsafeAttribute { key: "challenge", value: prop value }
+
+instance Attr Iframe_ Challenge String where
+  attr Challenge value = unsafeAttribute { key: "challenge", value: prop value }
+
+instance Attr Img_ Challenge String where
+  attr Challenge value = unsafeAttribute { key: "challenge", value: prop value }
+
+instance Attr Input_ Challenge String where
+  attr Challenge value = unsafeAttribute { key: "challenge", value: prop value }
+
+instance Attr Ins_ Challenge String where
+  attr Challenge value = unsafeAttribute { key: "challenge", value: prop value }
+
+instance Attr Kbd_ Challenge String where
+  attr Challenge value = unsafeAttribute { key: "challenge", value: prop value }
+
+instance Attr Label_ Challenge String where
+  attr Challenge value = unsafeAttribute { key: "challenge", value: prop value }
+
+instance Attr Legend_ Challenge String where
+  attr Challenge value = unsafeAttribute { key: "challenge", value: prop value }
+
+instance Attr Li_ Challenge String where
+  attr Challenge value = unsafeAttribute { key: "challenge", value: prop value }
+
+instance Attr Link_ Challenge String where
+  attr Challenge value = unsafeAttribute { key: "challenge", value: prop value }
+
+instance Attr Main_ Challenge String where
+  attr Challenge value = unsafeAttribute { key: "challenge", value: prop value }
+
+instance Attr Map_ Challenge String where
+  attr Challenge value = unsafeAttribute { key: "challenge", value: prop value }
+
+instance Attr Mark_ Challenge String where
+  attr Challenge value = unsafeAttribute { key: "challenge", value: prop value }
+
+instance Attr Meta_ Challenge String where
+  attr Challenge value = unsafeAttribute { key: "challenge", value: prop value }
+
+instance Attr Meter_ Challenge String where
+  attr Challenge value = unsafeAttribute { key: "challenge", value: prop value }
+
+instance Attr Nav_ Challenge String where
+  attr Challenge value = unsafeAttribute { key: "challenge", value: prop value }
+
+instance Attr Noframes_ Challenge String where
+  attr Challenge value = unsafeAttribute { key: "challenge", value: prop value }
+
+instance Attr Noscript_ Challenge String where
+  attr Challenge value = unsafeAttribute { key: "challenge", value: prop value }
+
+instance Attr Object_ Challenge String where
+  attr Challenge value = unsafeAttribute { key: "challenge", value: prop value }
+
+instance Attr Ol_ Challenge String where
+  attr Challenge value = unsafeAttribute { key: "challenge", value: prop value }
+
+instance Attr Optgroup_ Challenge String where
+  attr Challenge value = unsafeAttribute { key: "challenge", value: prop value }
+
+instance Attr Option_ Challenge String where
+  attr Challenge value = unsafeAttribute { key: "challenge", value: prop value }
+
+instance Attr Output_ Challenge String where
+  attr Challenge value = unsafeAttribute { key: "challenge", value: prop value }
+
+instance Attr P_ Challenge String where
+  attr Challenge value = unsafeAttribute { key: "challenge", value: prop value }
+
+instance Attr Param_ Challenge String where
+  attr Challenge value = unsafeAttribute { key: "challenge", value: prop value }
+
+instance Attr Picture_ Challenge String where
+  attr Challenge value = unsafeAttribute { key: "challenge", value: prop value }
+
+instance Attr Pre_ Challenge String where
+  attr Challenge value = unsafeAttribute { key: "challenge", value: prop value }
+
+instance Attr Progress_ Challenge String where
+  attr Challenge value = unsafeAttribute { key: "challenge", value: prop value }
+
+instance Attr Q_ Challenge String where
+  attr Challenge value = unsafeAttribute { key: "challenge", value: prop value }
+
+instance Attr Rp_ Challenge String where
+  attr Challenge value = unsafeAttribute { key: "challenge", value: prop value }
+
+instance Attr Rt_ Challenge String where
+  attr Challenge value = unsafeAttribute { key: "challenge", value: prop value }
+
+instance Attr Ruby_ Challenge String where
+  attr Challenge value = unsafeAttribute { key: "challenge", value: prop value }
+
+instance Attr S_ Challenge String where
+  attr Challenge value = unsafeAttribute { key: "challenge", value: prop value }
+
+instance Attr Samp_ Challenge String where
+  attr Challenge value = unsafeAttribute { key: "challenge", value: prop value }
+
+instance Attr Script_ Challenge String where
+  attr Challenge value = unsafeAttribute { key: "challenge", value: prop value }
+
+instance Attr Section_ Challenge String where
+  attr Challenge value = unsafeAttribute { key: "challenge", value: prop value }
+
+instance Attr Select_ Challenge String where
+  attr Challenge value = unsafeAttribute { key: "challenge", value: prop value }
+
+instance Attr Small_ Challenge String where
+  attr Challenge value = unsafeAttribute { key: "challenge", value: prop value }
+
+instance Attr Source_ Challenge String where
+  attr Challenge value = unsafeAttribute { key: "challenge", value: prop value }
+
+instance Attr Span_ Challenge String where
+  attr Challenge value = unsafeAttribute { key: "challenge", value: prop value }
+
+instance Attr Strike_ Challenge String where
+  attr Challenge value = unsafeAttribute { key: "challenge", value: prop value }
+
+instance Attr Strong_ Challenge String where
+  attr Challenge value = unsafeAttribute { key: "challenge", value: prop value }
+
+instance Attr Style_ Challenge String where
+  attr Challenge value = unsafeAttribute { key: "challenge", value: prop value }
+
+instance Attr Sub_ Challenge String where
+  attr Challenge value = unsafeAttribute { key: "challenge", value: prop value }
+
+instance Attr Summary_ Challenge String where
+  attr Challenge value = unsafeAttribute { key: "challenge", value: prop value }
+
+instance Attr Sup_ Challenge String where
+  attr Challenge value = unsafeAttribute { key: "challenge", value: prop value }
+
+instance Attr Svg_ Challenge String where
+  attr Challenge value = unsafeAttribute { key: "challenge", value: prop value }
+
+instance Attr Table_ Challenge String where
+  attr Challenge value = unsafeAttribute { key: "challenge", value: prop value }
+
+instance Attr Tbody_ Challenge String where
+  attr Challenge value = unsafeAttribute { key: "challenge", value: prop value }
+
+instance Attr Td_ Challenge String where
+  attr Challenge value = unsafeAttribute { key: "challenge", value: prop value }
+
+instance Attr Template_ Challenge String where
+  attr Challenge value = unsafeAttribute { key: "challenge", value: prop value }
+
+instance Attr Textarea_ Challenge String where
+  attr Challenge value = unsafeAttribute { key: "challenge", value: prop value }
+
+instance Attr Tfoot_ Challenge String where
+  attr Challenge value = unsafeAttribute { key: "challenge", value: prop value }
+
+instance Attr Th_ Challenge String where
+  attr Challenge value = unsafeAttribute { key: "challenge", value: prop value }
+
+instance Attr Thead_ Challenge String where
+  attr Challenge value = unsafeAttribute { key: "challenge", value: prop value }
+
+instance Attr Time_ Challenge String where
+  attr Challenge value = unsafeAttribute { key: "challenge", value: prop value }
+
+instance Attr Title_ Challenge String where
+  attr Challenge value = unsafeAttribute { key: "challenge", value: prop value }
+
+instance Attr Tr_ Challenge String where
+  attr Challenge value = unsafeAttribute { key: "challenge", value: prop value }
+
+instance Attr Track_ Challenge String where
+  attr Challenge value = unsafeAttribute { key: "challenge", value: prop value }
+
+instance Attr Tt_ Challenge String where
+  attr Challenge value = unsafeAttribute { key: "challenge", value: prop value }
+
+instance Attr U_ Challenge String where
+  attr Challenge value = unsafeAttribute { key: "challenge", value: prop value }
+
+instance Attr Ul_ Challenge String where
+  attr Challenge value = unsafeAttribute { key: "challenge", value: prop value }
+
+instance Attr Var_ Challenge String where
+  attr Challenge value = unsafeAttribute { key: "challenge", value: prop value }
+
+instance Attr Video_ Challenge String where
+  attr Challenge value = unsafeAttribute { key: "challenge", value: prop value }
+
+instance Attr Wbr_ Challenge String where
+  attr Challenge value = unsafeAttribute { key: "challenge", value: prop value }
+
 instance Attr Meta_ Charset String where
   attr Charset value = unsafeAttribute { key: "charset", value: prop value }
 
@@ -1482,6 +2580,372 @@ instance Attr Ins_ Cite String where
 
 instance Attr Q_ Cite String where
   attr Cite value = unsafeAttribute { key: "cite", value: prop value }
+
+instance Attr A_ Class String where
+  attr Class value = unsafeAttribute { key: "class", value: prop value }
+
+instance Attr Abbr_ Class String where
+  attr Class value = unsafeAttribute { key: "class", value: prop value }
+
+instance Attr Acronym_ Class String where
+  attr Class value = unsafeAttribute { key: "class", value: prop value }
+
+instance Attr Address_ Class String where
+  attr Class value = unsafeAttribute { key: "class", value: prop value }
+
+instance Attr Applet_ Class String where
+  attr Class value = unsafeAttribute { key: "class", value: prop value }
+
+instance Attr Area_ Class String where
+  attr Class value = unsafeAttribute { key: "class", value: prop value }
+
+instance Attr Article_ Class String where
+  attr Class value = unsafeAttribute { key: "class", value: prop value }
+
+instance Attr Aside_ Class String where
+  attr Class value = unsafeAttribute { key: "class", value: prop value }
+
+instance Attr Audio_ Class String where
+  attr Class value = unsafeAttribute { key: "class", value: prop value }
+
+instance Attr B_ Class String where
+  attr Class value = unsafeAttribute { key: "class", value: prop value }
+
+instance Attr Base_ Class String where
+  attr Class value = unsafeAttribute { key: "class", value: prop value }
+
+instance Attr Basefont_ Class String where
+  attr Class value = unsafeAttribute { key: "class", value: prop value }
+
+instance Attr Bdi_ Class String where
+  attr Class value = unsafeAttribute { key: "class", value: prop value }
+
+instance Attr Bdo_ Class String where
+  attr Class value = unsafeAttribute { key: "class", value: prop value }
+
+instance Attr Big_ Class String where
+  attr Class value = unsafeAttribute { key: "class", value: prop value }
+
+instance Attr Blockquote_ Class String where
+  attr Class value = unsafeAttribute { key: "class", value: prop value }
+
+instance Attr Body_ Class String where
+  attr Class value = unsafeAttribute { key: "class", value: prop value }
+
+instance Attr Br_ Class String where
+  attr Class value = unsafeAttribute { key: "class", value: prop value }
+
+instance Attr Button_ Class String where
+  attr Class value = unsafeAttribute { key: "class", value: prop value }
+
+instance Attr Canvas_ Class String where
+  attr Class value = unsafeAttribute { key: "class", value: prop value }
+
+instance Attr Caption_ Class String where
+  attr Class value = unsafeAttribute { key: "class", value: prop value }
+
+instance Attr Center_ Class String where
+  attr Class value = unsafeAttribute { key: "class", value: prop value }
+
+instance Attr Cite_ Class String where
+  attr Class value = unsafeAttribute { key: "class", value: prop value }
+
+instance Attr Code_ Class String where
+  attr Class value = unsafeAttribute { key: "class", value: prop value }
+
+instance Attr Col_ Class String where
+  attr Class value = unsafeAttribute { key: "class", value: prop value }
+
+instance Attr Colgroup_ Class String where
+  attr Class value = unsafeAttribute { key: "class", value: prop value }
+
+instance Attr Xdata_ Class String where
+  attr Class value = unsafeAttribute { key: "class", value: prop value }
+
+instance Attr Datalist_ Class String where
+  attr Class value = unsafeAttribute { key: "class", value: prop value }
+
+instance Attr Dd_ Class String where
+  attr Class value = unsafeAttribute { key: "class", value: prop value }
+
+instance Attr Del_ Class String where
+  attr Class value = unsafeAttribute { key: "class", value: prop value }
+
+instance Attr Details_ Class String where
+  attr Class value = unsafeAttribute { key: "class", value: prop value }
+
+instance Attr Dfn_ Class String where
+  attr Class value = unsafeAttribute { key: "class", value: prop value }
+
+instance Attr Dialog_ Class String where
+  attr Class value = unsafeAttribute { key: "class", value: prop value }
+
+instance Attr Dir_ Class String where
+  attr Class value = unsafeAttribute { key: "class", value: prop value }
+
+instance Attr Div_ Class String where
+  attr Class value = unsafeAttribute { key: "class", value: prop value }
+
+instance Attr Dl_ Class String where
+  attr Class value = unsafeAttribute { key: "class", value: prop value }
+
+instance Attr Dt_ Class String where
+  attr Class value = unsafeAttribute { key: "class", value: prop value }
+
+instance Attr Em_ Class String where
+  attr Class value = unsafeAttribute { key: "class", value: prop value }
+
+instance Attr Embed_ Class String where
+  attr Class value = unsafeAttribute { key: "class", value: prop value }
+
+instance Attr Fieldset_ Class String where
+  attr Class value = unsafeAttribute { key: "class", value: prop value }
+
+instance Attr Figcaption_ Class String where
+  attr Class value = unsafeAttribute { key: "class", value: prop value }
+
+instance Attr Figure_ Class String where
+  attr Class value = unsafeAttribute { key: "class", value: prop value }
+
+instance Attr Font_ Class String where
+  attr Class value = unsafeAttribute { key: "class", value: prop value }
+
+instance Attr Footer_ Class String where
+  attr Class value = unsafeAttribute { key: "class", value: prop value }
+
+instance Attr Form_ Class String where
+  attr Class value = unsafeAttribute { key: "class", value: prop value }
+
+instance Attr Frame_ Class String where
+  attr Class value = unsafeAttribute { key: "class", value: prop value }
+
+instance Attr Frameset_ Class String where
+  attr Class value = unsafeAttribute { key: "class", value: prop value }
+
+instance Attr H1_ Class String where
+  attr Class value = unsafeAttribute { key: "class", value: prop value }
+
+instance Attr H2_ Class String where
+  attr Class value = unsafeAttribute { key: "class", value: prop value }
+
+instance Attr H3_ Class String where
+  attr Class value = unsafeAttribute { key: "class", value: prop value }
+
+instance Attr H4_ Class String where
+  attr Class value = unsafeAttribute { key: "class", value: prop value }
+
+instance Attr H5_ Class String where
+  attr Class value = unsafeAttribute { key: "class", value: prop value }
+
+instance Attr H6_ Class String where
+  attr Class value = unsafeAttribute { key: "class", value: prop value }
+
+instance Attr Head_ Class String where
+  attr Class value = unsafeAttribute { key: "class", value: prop value }
+
+instance Attr Header_ Class String where
+  attr Class value = unsafeAttribute { key: "class", value: prop value }
+
+instance Attr Hr_ Class String where
+  attr Class value = unsafeAttribute { key: "class", value: prop value }
+
+instance Attr Html_ Class String where
+  attr Class value = unsafeAttribute { key: "class", value: prop value }
+
+instance Attr I_ Class String where
+  attr Class value = unsafeAttribute { key: "class", value: prop value }
+
+instance Attr Iframe_ Class String where
+  attr Class value = unsafeAttribute { key: "class", value: prop value }
+
+instance Attr Img_ Class String where
+  attr Class value = unsafeAttribute { key: "class", value: prop value }
+
+instance Attr Input_ Class String where
+  attr Class value = unsafeAttribute { key: "class", value: prop value }
+
+instance Attr Ins_ Class String where
+  attr Class value = unsafeAttribute { key: "class", value: prop value }
+
+instance Attr Kbd_ Class String where
+  attr Class value = unsafeAttribute { key: "class", value: prop value }
+
+instance Attr Label_ Class String where
+  attr Class value = unsafeAttribute { key: "class", value: prop value }
+
+instance Attr Legend_ Class String where
+  attr Class value = unsafeAttribute { key: "class", value: prop value }
+
+instance Attr Li_ Class String where
+  attr Class value = unsafeAttribute { key: "class", value: prop value }
+
+instance Attr Link_ Class String where
+  attr Class value = unsafeAttribute { key: "class", value: prop value }
+
+instance Attr Main_ Class String where
+  attr Class value = unsafeAttribute { key: "class", value: prop value }
+
+instance Attr Map_ Class String where
+  attr Class value = unsafeAttribute { key: "class", value: prop value }
+
+instance Attr Mark_ Class String where
+  attr Class value = unsafeAttribute { key: "class", value: prop value }
+
+instance Attr Meta_ Class String where
+  attr Class value = unsafeAttribute { key: "class", value: prop value }
+
+instance Attr Meter_ Class String where
+  attr Class value = unsafeAttribute { key: "class", value: prop value }
+
+instance Attr Nav_ Class String where
+  attr Class value = unsafeAttribute { key: "class", value: prop value }
+
+instance Attr Noframes_ Class String where
+  attr Class value = unsafeAttribute { key: "class", value: prop value }
+
+instance Attr Noscript_ Class String where
+  attr Class value = unsafeAttribute { key: "class", value: prop value }
+
+instance Attr Object_ Class String where
+  attr Class value = unsafeAttribute { key: "class", value: prop value }
+
+instance Attr Ol_ Class String where
+  attr Class value = unsafeAttribute { key: "class", value: prop value }
+
+instance Attr Optgroup_ Class String where
+  attr Class value = unsafeAttribute { key: "class", value: prop value }
+
+instance Attr Option_ Class String where
+  attr Class value = unsafeAttribute { key: "class", value: prop value }
+
+instance Attr Output_ Class String where
+  attr Class value = unsafeAttribute { key: "class", value: prop value }
+
+instance Attr P_ Class String where
+  attr Class value = unsafeAttribute { key: "class", value: prop value }
+
+instance Attr Param_ Class String where
+  attr Class value = unsafeAttribute { key: "class", value: prop value }
+
+instance Attr Picture_ Class String where
+  attr Class value = unsafeAttribute { key: "class", value: prop value }
+
+instance Attr Pre_ Class String where
+  attr Class value = unsafeAttribute { key: "class", value: prop value }
+
+instance Attr Progress_ Class String where
+  attr Class value = unsafeAttribute { key: "class", value: prop value }
+
+instance Attr Q_ Class String where
+  attr Class value = unsafeAttribute { key: "class", value: prop value }
+
+instance Attr Rp_ Class String where
+  attr Class value = unsafeAttribute { key: "class", value: prop value }
+
+instance Attr Rt_ Class String where
+  attr Class value = unsafeAttribute { key: "class", value: prop value }
+
+instance Attr Ruby_ Class String where
+  attr Class value = unsafeAttribute { key: "class", value: prop value }
+
+instance Attr S_ Class String where
+  attr Class value = unsafeAttribute { key: "class", value: prop value }
+
+instance Attr Samp_ Class String where
+  attr Class value = unsafeAttribute { key: "class", value: prop value }
+
+instance Attr Script_ Class String where
+  attr Class value = unsafeAttribute { key: "class", value: prop value }
+
+instance Attr Section_ Class String where
+  attr Class value = unsafeAttribute { key: "class", value: prop value }
+
+instance Attr Select_ Class String where
+  attr Class value = unsafeAttribute { key: "class", value: prop value }
+
+instance Attr Small_ Class String where
+  attr Class value = unsafeAttribute { key: "class", value: prop value }
+
+instance Attr Source_ Class String where
+  attr Class value = unsafeAttribute { key: "class", value: prop value }
+
+instance Attr Span_ Class String where
+  attr Class value = unsafeAttribute { key: "class", value: prop value }
+
+instance Attr Strike_ Class String where
+  attr Class value = unsafeAttribute { key: "class", value: prop value }
+
+instance Attr Strong_ Class String where
+  attr Class value = unsafeAttribute { key: "class", value: prop value }
+
+instance Attr Style_ Class String where
+  attr Class value = unsafeAttribute { key: "class", value: prop value }
+
+instance Attr Sub_ Class String where
+  attr Class value = unsafeAttribute { key: "class", value: prop value }
+
+instance Attr Summary_ Class String where
+  attr Class value = unsafeAttribute { key: "class", value: prop value }
+
+instance Attr Sup_ Class String where
+  attr Class value = unsafeAttribute { key: "class", value: prop value }
+
+instance Attr Svg_ Class String where
+  attr Class value = unsafeAttribute { key: "class", value: prop value }
+
+instance Attr Table_ Class String where
+  attr Class value = unsafeAttribute { key: "class", value: prop value }
+
+instance Attr Tbody_ Class String where
+  attr Class value = unsafeAttribute { key: "class", value: prop value }
+
+instance Attr Td_ Class String where
+  attr Class value = unsafeAttribute { key: "class", value: prop value }
+
+instance Attr Template_ Class String where
+  attr Class value = unsafeAttribute { key: "class", value: prop value }
+
+instance Attr Textarea_ Class String where
+  attr Class value = unsafeAttribute { key: "class", value: prop value }
+
+instance Attr Tfoot_ Class String where
+  attr Class value = unsafeAttribute { key: "class", value: prop value }
+
+instance Attr Th_ Class String where
+  attr Class value = unsafeAttribute { key: "class", value: prop value }
+
+instance Attr Thead_ Class String where
+  attr Class value = unsafeAttribute { key: "class", value: prop value }
+
+instance Attr Time_ Class String where
+  attr Class value = unsafeAttribute { key: "class", value: prop value }
+
+instance Attr Title_ Class String where
+  attr Class value = unsafeAttribute { key: "class", value: prop value }
+
+instance Attr Tr_ Class String where
+  attr Class value = unsafeAttribute { key: "class", value: prop value }
+
+instance Attr Track_ Class String where
+  attr Class value = unsafeAttribute { key: "class", value: prop value }
+
+instance Attr Tt_ Class String where
+  attr Class value = unsafeAttribute { key: "class", value: prop value }
+
+instance Attr U_ Class String where
+  attr Class value = unsafeAttribute { key: "class", value: prop value }
+
+instance Attr Ul_ Class String where
+  attr Class value = unsafeAttribute { key: "class", value: prop value }
+
+instance Attr Var_ Class String where
+  attr Class value = unsafeAttribute { key: "class", value: prop value }
+
+instance Attr Video_ Class String where
+  attr Class value = unsafeAttribute { key: "class", value: prop value }
+
+instance Attr Wbr_ Class String where
+  attr Class value = unsafeAttribute { key: "class", value: prop value }
 
 instance Attr Applet_ Code String where
   attr Code value = unsafeAttribute { key: "code", value: prop value }
@@ -1509,6 +2973,738 @@ instance Attr Th_ Colspan String where
 
 instance Attr Meta_ Content String where
   attr Content value = unsafeAttribute { key: "content", value: prop value }
+
+instance Attr A_ Contenteditable String where
+  attr Contenteditable value = unsafeAttribute { key: "contenteditable", value: prop value }
+
+instance Attr Abbr_ Contenteditable String where
+  attr Contenteditable value = unsafeAttribute { key: "contenteditable", value: prop value }
+
+instance Attr Acronym_ Contenteditable String where
+  attr Contenteditable value = unsafeAttribute { key: "contenteditable", value: prop value }
+
+instance Attr Address_ Contenteditable String where
+  attr Contenteditable value = unsafeAttribute { key: "contenteditable", value: prop value }
+
+instance Attr Applet_ Contenteditable String where
+  attr Contenteditable value = unsafeAttribute { key: "contenteditable", value: prop value }
+
+instance Attr Area_ Contenteditable String where
+  attr Contenteditable value = unsafeAttribute { key: "contenteditable", value: prop value }
+
+instance Attr Article_ Contenteditable String where
+  attr Contenteditable value = unsafeAttribute { key: "contenteditable", value: prop value }
+
+instance Attr Aside_ Contenteditable String where
+  attr Contenteditable value = unsafeAttribute { key: "contenteditable", value: prop value }
+
+instance Attr Audio_ Contenteditable String where
+  attr Contenteditable value = unsafeAttribute { key: "contenteditable", value: prop value }
+
+instance Attr B_ Contenteditable String where
+  attr Contenteditable value = unsafeAttribute { key: "contenteditable", value: prop value }
+
+instance Attr Base_ Contenteditable String where
+  attr Contenteditable value = unsafeAttribute { key: "contenteditable", value: prop value }
+
+instance Attr Basefont_ Contenteditable String where
+  attr Contenteditable value = unsafeAttribute { key: "contenteditable", value: prop value }
+
+instance Attr Bdi_ Contenteditable String where
+  attr Contenteditable value = unsafeAttribute { key: "contenteditable", value: prop value }
+
+instance Attr Bdo_ Contenteditable String where
+  attr Contenteditable value = unsafeAttribute { key: "contenteditable", value: prop value }
+
+instance Attr Big_ Contenteditable String where
+  attr Contenteditable value = unsafeAttribute { key: "contenteditable", value: prop value }
+
+instance Attr Blockquote_ Contenteditable String where
+  attr Contenteditable value = unsafeAttribute { key: "contenteditable", value: prop value }
+
+instance Attr Body_ Contenteditable String where
+  attr Contenteditable value = unsafeAttribute { key: "contenteditable", value: prop value }
+
+instance Attr Br_ Contenteditable String where
+  attr Contenteditable value = unsafeAttribute { key: "contenteditable", value: prop value }
+
+instance Attr Button_ Contenteditable String where
+  attr Contenteditable value = unsafeAttribute { key: "contenteditable", value: prop value }
+
+instance Attr Canvas_ Contenteditable String where
+  attr Contenteditable value = unsafeAttribute { key: "contenteditable", value: prop value }
+
+instance Attr Caption_ Contenteditable String where
+  attr Contenteditable value = unsafeAttribute { key: "contenteditable", value: prop value }
+
+instance Attr Center_ Contenteditable String where
+  attr Contenteditable value = unsafeAttribute { key: "contenteditable", value: prop value }
+
+instance Attr Cite_ Contenteditable String where
+  attr Contenteditable value = unsafeAttribute { key: "contenteditable", value: prop value }
+
+instance Attr Code_ Contenteditable String where
+  attr Contenteditable value = unsafeAttribute { key: "contenteditable", value: prop value }
+
+instance Attr Col_ Contenteditable String where
+  attr Contenteditable value = unsafeAttribute { key: "contenteditable", value: prop value }
+
+instance Attr Colgroup_ Contenteditable String where
+  attr Contenteditable value = unsafeAttribute { key: "contenteditable", value: prop value }
+
+instance Attr Xdata_ Contenteditable String where
+  attr Contenteditable value = unsafeAttribute { key: "contenteditable", value: prop value }
+
+instance Attr Datalist_ Contenteditable String where
+  attr Contenteditable value = unsafeAttribute { key: "contenteditable", value: prop value }
+
+instance Attr Dd_ Contenteditable String where
+  attr Contenteditable value = unsafeAttribute { key: "contenteditable", value: prop value }
+
+instance Attr Del_ Contenteditable String where
+  attr Contenteditable value = unsafeAttribute { key: "contenteditable", value: prop value }
+
+instance Attr Details_ Contenteditable String where
+  attr Contenteditable value = unsafeAttribute { key: "contenteditable", value: prop value }
+
+instance Attr Dfn_ Contenteditable String where
+  attr Contenteditable value = unsafeAttribute { key: "contenteditable", value: prop value }
+
+instance Attr Dialog_ Contenteditable String where
+  attr Contenteditable value = unsafeAttribute { key: "contenteditable", value: prop value }
+
+instance Attr Dir_ Contenteditable String where
+  attr Contenteditable value = unsafeAttribute { key: "contenteditable", value: prop value }
+
+instance Attr Div_ Contenteditable String where
+  attr Contenteditable value = unsafeAttribute { key: "contenteditable", value: prop value }
+
+instance Attr Dl_ Contenteditable String where
+  attr Contenteditable value = unsafeAttribute { key: "contenteditable", value: prop value }
+
+instance Attr Dt_ Contenteditable String where
+  attr Contenteditable value = unsafeAttribute { key: "contenteditable", value: prop value }
+
+instance Attr Em_ Contenteditable String where
+  attr Contenteditable value = unsafeAttribute { key: "contenteditable", value: prop value }
+
+instance Attr Embed_ Contenteditable String where
+  attr Contenteditable value = unsafeAttribute { key: "contenteditable", value: prop value }
+
+instance Attr Fieldset_ Contenteditable String where
+  attr Contenteditable value = unsafeAttribute { key: "contenteditable", value: prop value }
+
+instance Attr Figcaption_ Contenteditable String where
+  attr Contenteditable value = unsafeAttribute { key: "contenteditable", value: prop value }
+
+instance Attr Figure_ Contenteditable String where
+  attr Contenteditable value = unsafeAttribute { key: "contenteditable", value: prop value }
+
+instance Attr Font_ Contenteditable String where
+  attr Contenteditable value = unsafeAttribute { key: "contenteditable", value: prop value }
+
+instance Attr Footer_ Contenteditable String where
+  attr Contenteditable value = unsafeAttribute { key: "contenteditable", value: prop value }
+
+instance Attr Form_ Contenteditable String where
+  attr Contenteditable value = unsafeAttribute { key: "contenteditable", value: prop value }
+
+instance Attr Frame_ Contenteditable String where
+  attr Contenteditable value = unsafeAttribute { key: "contenteditable", value: prop value }
+
+instance Attr Frameset_ Contenteditable String where
+  attr Contenteditable value = unsafeAttribute { key: "contenteditable", value: prop value }
+
+instance Attr H1_ Contenteditable String where
+  attr Contenteditable value = unsafeAttribute { key: "contenteditable", value: prop value }
+
+instance Attr H2_ Contenteditable String where
+  attr Contenteditable value = unsafeAttribute { key: "contenteditable", value: prop value }
+
+instance Attr H3_ Contenteditable String where
+  attr Contenteditable value = unsafeAttribute { key: "contenteditable", value: prop value }
+
+instance Attr H4_ Contenteditable String where
+  attr Contenteditable value = unsafeAttribute { key: "contenteditable", value: prop value }
+
+instance Attr H5_ Contenteditable String where
+  attr Contenteditable value = unsafeAttribute { key: "contenteditable", value: prop value }
+
+instance Attr H6_ Contenteditable String where
+  attr Contenteditable value = unsafeAttribute { key: "contenteditable", value: prop value }
+
+instance Attr Head_ Contenteditable String where
+  attr Contenteditable value = unsafeAttribute { key: "contenteditable", value: prop value }
+
+instance Attr Header_ Contenteditable String where
+  attr Contenteditable value = unsafeAttribute { key: "contenteditable", value: prop value }
+
+instance Attr Hr_ Contenteditable String where
+  attr Contenteditable value = unsafeAttribute { key: "contenteditable", value: prop value }
+
+instance Attr Html_ Contenteditable String where
+  attr Contenteditable value = unsafeAttribute { key: "contenteditable", value: prop value }
+
+instance Attr I_ Contenteditable String where
+  attr Contenteditable value = unsafeAttribute { key: "contenteditable", value: prop value }
+
+instance Attr Iframe_ Contenteditable String where
+  attr Contenteditable value = unsafeAttribute { key: "contenteditable", value: prop value }
+
+instance Attr Img_ Contenteditable String where
+  attr Contenteditable value = unsafeAttribute { key: "contenteditable", value: prop value }
+
+instance Attr Input_ Contenteditable String where
+  attr Contenteditable value = unsafeAttribute { key: "contenteditable", value: prop value }
+
+instance Attr Ins_ Contenteditable String where
+  attr Contenteditable value = unsafeAttribute { key: "contenteditable", value: prop value }
+
+instance Attr Kbd_ Contenteditable String where
+  attr Contenteditable value = unsafeAttribute { key: "contenteditable", value: prop value }
+
+instance Attr Label_ Contenteditable String where
+  attr Contenteditable value = unsafeAttribute { key: "contenteditable", value: prop value }
+
+instance Attr Legend_ Contenteditable String where
+  attr Contenteditable value = unsafeAttribute { key: "contenteditable", value: prop value }
+
+instance Attr Li_ Contenteditable String where
+  attr Contenteditable value = unsafeAttribute { key: "contenteditable", value: prop value }
+
+instance Attr Link_ Contenteditable String where
+  attr Contenteditable value = unsafeAttribute { key: "contenteditable", value: prop value }
+
+instance Attr Main_ Contenteditable String where
+  attr Contenteditable value = unsafeAttribute { key: "contenteditable", value: prop value }
+
+instance Attr Map_ Contenteditable String where
+  attr Contenteditable value = unsafeAttribute { key: "contenteditable", value: prop value }
+
+instance Attr Mark_ Contenteditable String where
+  attr Contenteditable value = unsafeAttribute { key: "contenteditable", value: prop value }
+
+instance Attr Meta_ Contenteditable String where
+  attr Contenteditable value = unsafeAttribute { key: "contenteditable", value: prop value }
+
+instance Attr Meter_ Contenteditable String where
+  attr Contenteditable value = unsafeAttribute { key: "contenteditable", value: prop value }
+
+instance Attr Nav_ Contenteditable String where
+  attr Contenteditable value = unsafeAttribute { key: "contenteditable", value: prop value }
+
+instance Attr Noframes_ Contenteditable String where
+  attr Contenteditable value = unsafeAttribute { key: "contenteditable", value: prop value }
+
+instance Attr Noscript_ Contenteditable String where
+  attr Contenteditable value = unsafeAttribute { key: "contenteditable", value: prop value }
+
+instance Attr Object_ Contenteditable String where
+  attr Contenteditable value = unsafeAttribute { key: "contenteditable", value: prop value }
+
+instance Attr Ol_ Contenteditable String where
+  attr Contenteditable value = unsafeAttribute { key: "contenteditable", value: prop value }
+
+instance Attr Optgroup_ Contenteditable String where
+  attr Contenteditable value = unsafeAttribute { key: "contenteditable", value: prop value }
+
+instance Attr Option_ Contenteditable String where
+  attr Contenteditable value = unsafeAttribute { key: "contenteditable", value: prop value }
+
+instance Attr Output_ Contenteditable String where
+  attr Contenteditable value = unsafeAttribute { key: "contenteditable", value: prop value }
+
+instance Attr P_ Contenteditable String where
+  attr Contenteditable value = unsafeAttribute { key: "contenteditable", value: prop value }
+
+instance Attr Param_ Contenteditable String where
+  attr Contenteditable value = unsafeAttribute { key: "contenteditable", value: prop value }
+
+instance Attr Picture_ Contenteditable String where
+  attr Contenteditable value = unsafeAttribute { key: "contenteditable", value: prop value }
+
+instance Attr Pre_ Contenteditable String where
+  attr Contenteditable value = unsafeAttribute { key: "contenteditable", value: prop value }
+
+instance Attr Progress_ Contenteditable String where
+  attr Contenteditable value = unsafeAttribute { key: "contenteditable", value: prop value }
+
+instance Attr Q_ Contenteditable String where
+  attr Contenteditable value = unsafeAttribute { key: "contenteditable", value: prop value }
+
+instance Attr Rp_ Contenteditable String where
+  attr Contenteditable value = unsafeAttribute { key: "contenteditable", value: prop value }
+
+instance Attr Rt_ Contenteditable String where
+  attr Contenteditable value = unsafeAttribute { key: "contenteditable", value: prop value }
+
+instance Attr Ruby_ Contenteditable String where
+  attr Contenteditable value = unsafeAttribute { key: "contenteditable", value: prop value }
+
+instance Attr S_ Contenteditable String where
+  attr Contenteditable value = unsafeAttribute { key: "contenteditable", value: prop value }
+
+instance Attr Samp_ Contenteditable String where
+  attr Contenteditable value = unsafeAttribute { key: "contenteditable", value: prop value }
+
+instance Attr Script_ Contenteditable String where
+  attr Contenteditable value = unsafeAttribute { key: "contenteditable", value: prop value }
+
+instance Attr Section_ Contenteditable String where
+  attr Contenteditable value = unsafeAttribute { key: "contenteditable", value: prop value }
+
+instance Attr Select_ Contenteditable String where
+  attr Contenteditable value = unsafeAttribute { key: "contenteditable", value: prop value }
+
+instance Attr Small_ Contenteditable String where
+  attr Contenteditable value = unsafeAttribute { key: "contenteditable", value: prop value }
+
+instance Attr Source_ Contenteditable String where
+  attr Contenteditable value = unsafeAttribute { key: "contenteditable", value: prop value }
+
+instance Attr Span_ Contenteditable String where
+  attr Contenteditable value = unsafeAttribute { key: "contenteditable", value: prop value }
+
+instance Attr Strike_ Contenteditable String where
+  attr Contenteditable value = unsafeAttribute { key: "contenteditable", value: prop value }
+
+instance Attr Strong_ Contenteditable String where
+  attr Contenteditable value = unsafeAttribute { key: "contenteditable", value: prop value }
+
+instance Attr Style_ Contenteditable String where
+  attr Contenteditable value = unsafeAttribute { key: "contenteditable", value: prop value }
+
+instance Attr Sub_ Contenteditable String where
+  attr Contenteditable value = unsafeAttribute { key: "contenteditable", value: prop value }
+
+instance Attr Summary_ Contenteditable String where
+  attr Contenteditable value = unsafeAttribute { key: "contenteditable", value: prop value }
+
+instance Attr Sup_ Contenteditable String where
+  attr Contenteditable value = unsafeAttribute { key: "contenteditable", value: prop value }
+
+instance Attr Svg_ Contenteditable String where
+  attr Contenteditable value = unsafeAttribute { key: "contenteditable", value: prop value }
+
+instance Attr Table_ Contenteditable String where
+  attr Contenteditable value = unsafeAttribute { key: "contenteditable", value: prop value }
+
+instance Attr Tbody_ Contenteditable String where
+  attr Contenteditable value = unsafeAttribute { key: "contenteditable", value: prop value }
+
+instance Attr Td_ Contenteditable String where
+  attr Contenteditable value = unsafeAttribute { key: "contenteditable", value: prop value }
+
+instance Attr Template_ Contenteditable String where
+  attr Contenteditable value = unsafeAttribute { key: "contenteditable", value: prop value }
+
+instance Attr Textarea_ Contenteditable String where
+  attr Contenteditable value = unsafeAttribute { key: "contenteditable", value: prop value }
+
+instance Attr Tfoot_ Contenteditable String where
+  attr Contenteditable value = unsafeAttribute { key: "contenteditable", value: prop value }
+
+instance Attr Th_ Contenteditable String where
+  attr Contenteditable value = unsafeAttribute { key: "contenteditable", value: prop value }
+
+instance Attr Thead_ Contenteditable String where
+  attr Contenteditable value = unsafeAttribute { key: "contenteditable", value: prop value }
+
+instance Attr Time_ Contenteditable String where
+  attr Contenteditable value = unsafeAttribute { key: "contenteditable", value: prop value }
+
+instance Attr Title_ Contenteditable String where
+  attr Contenteditable value = unsafeAttribute { key: "contenteditable", value: prop value }
+
+instance Attr Tr_ Contenteditable String where
+  attr Contenteditable value = unsafeAttribute { key: "contenteditable", value: prop value }
+
+instance Attr Track_ Contenteditable String where
+  attr Contenteditable value = unsafeAttribute { key: "contenteditable", value: prop value }
+
+instance Attr Tt_ Contenteditable String where
+  attr Contenteditable value = unsafeAttribute { key: "contenteditable", value: prop value }
+
+instance Attr U_ Contenteditable String where
+  attr Contenteditable value = unsafeAttribute { key: "contenteditable", value: prop value }
+
+instance Attr Ul_ Contenteditable String where
+  attr Contenteditable value = unsafeAttribute { key: "contenteditable", value: prop value }
+
+instance Attr Var_ Contenteditable String where
+  attr Contenteditable value = unsafeAttribute { key: "contenteditable", value: prop value }
+
+instance Attr Video_ Contenteditable String where
+  attr Contenteditable value = unsafeAttribute { key: "contenteditable", value: prop value }
+
+instance Attr Wbr_ Contenteditable String where
+  attr Contenteditable value = unsafeAttribute { key: "contenteditable", value: prop value }
+
+instance Attr A_ Contextmenu String where
+  attr Contextmenu value = unsafeAttribute { key: "contextmenu", value: prop value }
+
+instance Attr Abbr_ Contextmenu String where
+  attr Contextmenu value = unsafeAttribute { key: "contextmenu", value: prop value }
+
+instance Attr Acronym_ Contextmenu String where
+  attr Contextmenu value = unsafeAttribute { key: "contextmenu", value: prop value }
+
+instance Attr Address_ Contextmenu String where
+  attr Contextmenu value = unsafeAttribute { key: "contextmenu", value: prop value }
+
+instance Attr Applet_ Contextmenu String where
+  attr Contextmenu value = unsafeAttribute { key: "contextmenu", value: prop value }
+
+instance Attr Area_ Contextmenu String where
+  attr Contextmenu value = unsafeAttribute { key: "contextmenu", value: prop value }
+
+instance Attr Article_ Contextmenu String where
+  attr Contextmenu value = unsafeAttribute { key: "contextmenu", value: prop value }
+
+instance Attr Aside_ Contextmenu String where
+  attr Contextmenu value = unsafeAttribute { key: "contextmenu", value: prop value }
+
+instance Attr Audio_ Contextmenu String where
+  attr Contextmenu value = unsafeAttribute { key: "contextmenu", value: prop value }
+
+instance Attr B_ Contextmenu String where
+  attr Contextmenu value = unsafeAttribute { key: "contextmenu", value: prop value }
+
+instance Attr Base_ Contextmenu String where
+  attr Contextmenu value = unsafeAttribute { key: "contextmenu", value: prop value }
+
+instance Attr Basefont_ Contextmenu String where
+  attr Contextmenu value = unsafeAttribute { key: "contextmenu", value: prop value }
+
+instance Attr Bdi_ Contextmenu String where
+  attr Contextmenu value = unsafeAttribute { key: "contextmenu", value: prop value }
+
+instance Attr Bdo_ Contextmenu String where
+  attr Contextmenu value = unsafeAttribute { key: "contextmenu", value: prop value }
+
+instance Attr Big_ Contextmenu String where
+  attr Contextmenu value = unsafeAttribute { key: "contextmenu", value: prop value }
+
+instance Attr Blockquote_ Contextmenu String where
+  attr Contextmenu value = unsafeAttribute { key: "contextmenu", value: prop value }
+
+instance Attr Body_ Contextmenu String where
+  attr Contextmenu value = unsafeAttribute { key: "contextmenu", value: prop value }
+
+instance Attr Br_ Contextmenu String where
+  attr Contextmenu value = unsafeAttribute { key: "contextmenu", value: prop value }
+
+instance Attr Button_ Contextmenu String where
+  attr Contextmenu value = unsafeAttribute { key: "contextmenu", value: prop value }
+
+instance Attr Canvas_ Contextmenu String where
+  attr Contextmenu value = unsafeAttribute { key: "contextmenu", value: prop value }
+
+instance Attr Caption_ Contextmenu String where
+  attr Contextmenu value = unsafeAttribute { key: "contextmenu", value: prop value }
+
+instance Attr Center_ Contextmenu String where
+  attr Contextmenu value = unsafeAttribute { key: "contextmenu", value: prop value }
+
+instance Attr Cite_ Contextmenu String where
+  attr Contextmenu value = unsafeAttribute { key: "contextmenu", value: prop value }
+
+instance Attr Code_ Contextmenu String where
+  attr Contextmenu value = unsafeAttribute { key: "contextmenu", value: prop value }
+
+instance Attr Col_ Contextmenu String where
+  attr Contextmenu value = unsafeAttribute { key: "contextmenu", value: prop value }
+
+instance Attr Colgroup_ Contextmenu String where
+  attr Contextmenu value = unsafeAttribute { key: "contextmenu", value: prop value }
+
+instance Attr Xdata_ Contextmenu String where
+  attr Contextmenu value = unsafeAttribute { key: "contextmenu", value: prop value }
+
+instance Attr Datalist_ Contextmenu String where
+  attr Contextmenu value = unsafeAttribute { key: "contextmenu", value: prop value }
+
+instance Attr Dd_ Contextmenu String where
+  attr Contextmenu value = unsafeAttribute { key: "contextmenu", value: prop value }
+
+instance Attr Del_ Contextmenu String where
+  attr Contextmenu value = unsafeAttribute { key: "contextmenu", value: prop value }
+
+instance Attr Details_ Contextmenu String where
+  attr Contextmenu value = unsafeAttribute { key: "contextmenu", value: prop value }
+
+instance Attr Dfn_ Contextmenu String where
+  attr Contextmenu value = unsafeAttribute { key: "contextmenu", value: prop value }
+
+instance Attr Dialog_ Contextmenu String where
+  attr Contextmenu value = unsafeAttribute { key: "contextmenu", value: prop value }
+
+instance Attr Dir_ Contextmenu String where
+  attr Contextmenu value = unsafeAttribute { key: "contextmenu", value: prop value }
+
+instance Attr Div_ Contextmenu String where
+  attr Contextmenu value = unsafeAttribute { key: "contextmenu", value: prop value }
+
+instance Attr Dl_ Contextmenu String where
+  attr Contextmenu value = unsafeAttribute { key: "contextmenu", value: prop value }
+
+instance Attr Dt_ Contextmenu String where
+  attr Contextmenu value = unsafeAttribute { key: "contextmenu", value: prop value }
+
+instance Attr Em_ Contextmenu String where
+  attr Contextmenu value = unsafeAttribute { key: "contextmenu", value: prop value }
+
+instance Attr Embed_ Contextmenu String where
+  attr Contextmenu value = unsafeAttribute { key: "contextmenu", value: prop value }
+
+instance Attr Fieldset_ Contextmenu String where
+  attr Contextmenu value = unsafeAttribute { key: "contextmenu", value: prop value }
+
+instance Attr Figcaption_ Contextmenu String where
+  attr Contextmenu value = unsafeAttribute { key: "contextmenu", value: prop value }
+
+instance Attr Figure_ Contextmenu String where
+  attr Contextmenu value = unsafeAttribute { key: "contextmenu", value: prop value }
+
+instance Attr Font_ Contextmenu String where
+  attr Contextmenu value = unsafeAttribute { key: "contextmenu", value: prop value }
+
+instance Attr Footer_ Contextmenu String where
+  attr Contextmenu value = unsafeAttribute { key: "contextmenu", value: prop value }
+
+instance Attr Form_ Contextmenu String where
+  attr Contextmenu value = unsafeAttribute { key: "contextmenu", value: prop value }
+
+instance Attr Frame_ Contextmenu String where
+  attr Contextmenu value = unsafeAttribute { key: "contextmenu", value: prop value }
+
+instance Attr Frameset_ Contextmenu String where
+  attr Contextmenu value = unsafeAttribute { key: "contextmenu", value: prop value }
+
+instance Attr H1_ Contextmenu String where
+  attr Contextmenu value = unsafeAttribute { key: "contextmenu", value: prop value }
+
+instance Attr H2_ Contextmenu String where
+  attr Contextmenu value = unsafeAttribute { key: "contextmenu", value: prop value }
+
+instance Attr H3_ Contextmenu String where
+  attr Contextmenu value = unsafeAttribute { key: "contextmenu", value: prop value }
+
+instance Attr H4_ Contextmenu String where
+  attr Contextmenu value = unsafeAttribute { key: "contextmenu", value: prop value }
+
+instance Attr H5_ Contextmenu String where
+  attr Contextmenu value = unsafeAttribute { key: "contextmenu", value: prop value }
+
+instance Attr H6_ Contextmenu String where
+  attr Contextmenu value = unsafeAttribute { key: "contextmenu", value: prop value }
+
+instance Attr Head_ Contextmenu String where
+  attr Contextmenu value = unsafeAttribute { key: "contextmenu", value: prop value }
+
+instance Attr Header_ Contextmenu String where
+  attr Contextmenu value = unsafeAttribute { key: "contextmenu", value: prop value }
+
+instance Attr Hr_ Contextmenu String where
+  attr Contextmenu value = unsafeAttribute { key: "contextmenu", value: prop value }
+
+instance Attr Html_ Contextmenu String where
+  attr Contextmenu value = unsafeAttribute { key: "contextmenu", value: prop value }
+
+instance Attr I_ Contextmenu String where
+  attr Contextmenu value = unsafeAttribute { key: "contextmenu", value: prop value }
+
+instance Attr Iframe_ Contextmenu String where
+  attr Contextmenu value = unsafeAttribute { key: "contextmenu", value: prop value }
+
+instance Attr Img_ Contextmenu String where
+  attr Contextmenu value = unsafeAttribute { key: "contextmenu", value: prop value }
+
+instance Attr Input_ Contextmenu String where
+  attr Contextmenu value = unsafeAttribute { key: "contextmenu", value: prop value }
+
+instance Attr Ins_ Contextmenu String where
+  attr Contextmenu value = unsafeAttribute { key: "contextmenu", value: prop value }
+
+instance Attr Kbd_ Contextmenu String where
+  attr Contextmenu value = unsafeAttribute { key: "contextmenu", value: prop value }
+
+instance Attr Label_ Contextmenu String where
+  attr Contextmenu value = unsafeAttribute { key: "contextmenu", value: prop value }
+
+instance Attr Legend_ Contextmenu String where
+  attr Contextmenu value = unsafeAttribute { key: "contextmenu", value: prop value }
+
+instance Attr Li_ Contextmenu String where
+  attr Contextmenu value = unsafeAttribute { key: "contextmenu", value: prop value }
+
+instance Attr Link_ Contextmenu String where
+  attr Contextmenu value = unsafeAttribute { key: "contextmenu", value: prop value }
+
+instance Attr Main_ Contextmenu String where
+  attr Contextmenu value = unsafeAttribute { key: "contextmenu", value: prop value }
+
+instance Attr Map_ Contextmenu String where
+  attr Contextmenu value = unsafeAttribute { key: "contextmenu", value: prop value }
+
+instance Attr Mark_ Contextmenu String where
+  attr Contextmenu value = unsafeAttribute { key: "contextmenu", value: prop value }
+
+instance Attr Meta_ Contextmenu String where
+  attr Contextmenu value = unsafeAttribute { key: "contextmenu", value: prop value }
+
+instance Attr Meter_ Contextmenu String where
+  attr Contextmenu value = unsafeAttribute { key: "contextmenu", value: prop value }
+
+instance Attr Nav_ Contextmenu String where
+  attr Contextmenu value = unsafeAttribute { key: "contextmenu", value: prop value }
+
+instance Attr Noframes_ Contextmenu String where
+  attr Contextmenu value = unsafeAttribute { key: "contextmenu", value: prop value }
+
+instance Attr Noscript_ Contextmenu String where
+  attr Contextmenu value = unsafeAttribute { key: "contextmenu", value: prop value }
+
+instance Attr Object_ Contextmenu String where
+  attr Contextmenu value = unsafeAttribute { key: "contextmenu", value: prop value }
+
+instance Attr Ol_ Contextmenu String where
+  attr Contextmenu value = unsafeAttribute { key: "contextmenu", value: prop value }
+
+instance Attr Optgroup_ Contextmenu String where
+  attr Contextmenu value = unsafeAttribute { key: "contextmenu", value: prop value }
+
+instance Attr Option_ Contextmenu String where
+  attr Contextmenu value = unsafeAttribute { key: "contextmenu", value: prop value }
+
+instance Attr Output_ Contextmenu String where
+  attr Contextmenu value = unsafeAttribute { key: "contextmenu", value: prop value }
+
+instance Attr P_ Contextmenu String where
+  attr Contextmenu value = unsafeAttribute { key: "contextmenu", value: prop value }
+
+instance Attr Param_ Contextmenu String where
+  attr Contextmenu value = unsafeAttribute { key: "contextmenu", value: prop value }
+
+instance Attr Picture_ Contextmenu String where
+  attr Contextmenu value = unsafeAttribute { key: "contextmenu", value: prop value }
+
+instance Attr Pre_ Contextmenu String where
+  attr Contextmenu value = unsafeAttribute { key: "contextmenu", value: prop value }
+
+instance Attr Progress_ Contextmenu String where
+  attr Contextmenu value = unsafeAttribute { key: "contextmenu", value: prop value }
+
+instance Attr Q_ Contextmenu String where
+  attr Contextmenu value = unsafeAttribute { key: "contextmenu", value: prop value }
+
+instance Attr Rp_ Contextmenu String where
+  attr Contextmenu value = unsafeAttribute { key: "contextmenu", value: prop value }
+
+instance Attr Rt_ Contextmenu String where
+  attr Contextmenu value = unsafeAttribute { key: "contextmenu", value: prop value }
+
+instance Attr Ruby_ Contextmenu String where
+  attr Contextmenu value = unsafeAttribute { key: "contextmenu", value: prop value }
+
+instance Attr S_ Contextmenu String where
+  attr Contextmenu value = unsafeAttribute { key: "contextmenu", value: prop value }
+
+instance Attr Samp_ Contextmenu String where
+  attr Contextmenu value = unsafeAttribute { key: "contextmenu", value: prop value }
+
+instance Attr Script_ Contextmenu String where
+  attr Contextmenu value = unsafeAttribute { key: "contextmenu", value: prop value }
+
+instance Attr Section_ Contextmenu String where
+  attr Contextmenu value = unsafeAttribute { key: "contextmenu", value: prop value }
+
+instance Attr Select_ Contextmenu String where
+  attr Contextmenu value = unsafeAttribute { key: "contextmenu", value: prop value }
+
+instance Attr Small_ Contextmenu String where
+  attr Contextmenu value = unsafeAttribute { key: "contextmenu", value: prop value }
+
+instance Attr Source_ Contextmenu String where
+  attr Contextmenu value = unsafeAttribute { key: "contextmenu", value: prop value }
+
+instance Attr Span_ Contextmenu String where
+  attr Contextmenu value = unsafeAttribute { key: "contextmenu", value: prop value }
+
+instance Attr Strike_ Contextmenu String where
+  attr Contextmenu value = unsafeAttribute { key: "contextmenu", value: prop value }
+
+instance Attr Strong_ Contextmenu String where
+  attr Contextmenu value = unsafeAttribute { key: "contextmenu", value: prop value }
+
+instance Attr Style_ Contextmenu String where
+  attr Contextmenu value = unsafeAttribute { key: "contextmenu", value: prop value }
+
+instance Attr Sub_ Contextmenu String where
+  attr Contextmenu value = unsafeAttribute { key: "contextmenu", value: prop value }
+
+instance Attr Summary_ Contextmenu String where
+  attr Contextmenu value = unsafeAttribute { key: "contextmenu", value: prop value }
+
+instance Attr Sup_ Contextmenu String where
+  attr Contextmenu value = unsafeAttribute { key: "contextmenu", value: prop value }
+
+instance Attr Svg_ Contextmenu String where
+  attr Contextmenu value = unsafeAttribute { key: "contextmenu", value: prop value }
+
+instance Attr Table_ Contextmenu String where
+  attr Contextmenu value = unsafeAttribute { key: "contextmenu", value: prop value }
+
+instance Attr Tbody_ Contextmenu String where
+  attr Contextmenu value = unsafeAttribute { key: "contextmenu", value: prop value }
+
+instance Attr Td_ Contextmenu String where
+  attr Contextmenu value = unsafeAttribute { key: "contextmenu", value: prop value }
+
+instance Attr Template_ Contextmenu String where
+  attr Contextmenu value = unsafeAttribute { key: "contextmenu", value: prop value }
+
+instance Attr Textarea_ Contextmenu String where
+  attr Contextmenu value = unsafeAttribute { key: "contextmenu", value: prop value }
+
+instance Attr Tfoot_ Contextmenu String where
+  attr Contextmenu value = unsafeAttribute { key: "contextmenu", value: prop value }
+
+instance Attr Th_ Contextmenu String where
+  attr Contextmenu value = unsafeAttribute { key: "contextmenu", value: prop value }
+
+instance Attr Thead_ Contextmenu String where
+  attr Contextmenu value = unsafeAttribute { key: "contextmenu", value: prop value }
+
+instance Attr Time_ Contextmenu String where
+  attr Contextmenu value = unsafeAttribute { key: "contextmenu", value: prop value }
+
+instance Attr Title_ Contextmenu String where
+  attr Contextmenu value = unsafeAttribute { key: "contextmenu", value: prop value }
+
+instance Attr Tr_ Contextmenu String where
+  attr Contextmenu value = unsafeAttribute { key: "contextmenu", value: prop value }
+
+instance Attr Track_ Contextmenu String where
+  attr Contextmenu value = unsafeAttribute { key: "contextmenu", value: prop value }
+
+instance Attr Tt_ Contextmenu String where
+  attr Contextmenu value = unsafeAttribute { key: "contextmenu", value: prop value }
+
+instance Attr U_ Contextmenu String where
+  attr Contextmenu value = unsafeAttribute { key: "contextmenu", value: prop value }
+
+instance Attr Ul_ Contextmenu String where
+  attr Contextmenu value = unsafeAttribute { key: "contextmenu", value: prop value }
+
+instance Attr Var_ Contextmenu String where
+  attr Contextmenu value = unsafeAttribute { key: "contextmenu", value: prop value }
+
+instance Attr Video_ Contextmenu String where
+  attr Contextmenu value = unsafeAttribute { key: "contextmenu", value: prop value }
+
+instance Attr Wbr_ Contextmenu String where
+  attr Contextmenu value = unsafeAttribute { key: "contextmenu", value: prop value }
 
 instance Attr Audio_ Controls String where
   attr Controls value = unsafeAttribute { key: "controls", value: prop value }
@@ -1558,6 +3754,372 @@ instance Attr Track_ Default String where
 instance Attr Script_ Defer String where
   attr Defer value = unsafeAttribute { key: "defer", value: prop value }
 
+instance Attr A_ Dir String where
+  attr Dir value = unsafeAttribute { key: "dir", value: prop value }
+
+instance Attr Abbr_ Dir String where
+  attr Dir value = unsafeAttribute { key: "dir", value: prop value }
+
+instance Attr Acronym_ Dir String where
+  attr Dir value = unsafeAttribute { key: "dir", value: prop value }
+
+instance Attr Address_ Dir String where
+  attr Dir value = unsafeAttribute { key: "dir", value: prop value }
+
+instance Attr Applet_ Dir String where
+  attr Dir value = unsafeAttribute { key: "dir", value: prop value }
+
+instance Attr Area_ Dir String where
+  attr Dir value = unsafeAttribute { key: "dir", value: prop value }
+
+instance Attr Article_ Dir String where
+  attr Dir value = unsafeAttribute { key: "dir", value: prop value }
+
+instance Attr Aside_ Dir String where
+  attr Dir value = unsafeAttribute { key: "dir", value: prop value }
+
+instance Attr Audio_ Dir String where
+  attr Dir value = unsafeAttribute { key: "dir", value: prop value }
+
+instance Attr B_ Dir String where
+  attr Dir value = unsafeAttribute { key: "dir", value: prop value }
+
+instance Attr Base_ Dir String where
+  attr Dir value = unsafeAttribute { key: "dir", value: prop value }
+
+instance Attr Basefont_ Dir String where
+  attr Dir value = unsafeAttribute { key: "dir", value: prop value }
+
+instance Attr Bdi_ Dir String where
+  attr Dir value = unsafeAttribute { key: "dir", value: prop value }
+
+instance Attr Bdo_ Dir String where
+  attr Dir value = unsafeAttribute { key: "dir", value: prop value }
+
+instance Attr Big_ Dir String where
+  attr Dir value = unsafeAttribute { key: "dir", value: prop value }
+
+instance Attr Blockquote_ Dir String where
+  attr Dir value = unsafeAttribute { key: "dir", value: prop value }
+
+instance Attr Body_ Dir String where
+  attr Dir value = unsafeAttribute { key: "dir", value: prop value }
+
+instance Attr Br_ Dir String where
+  attr Dir value = unsafeAttribute { key: "dir", value: prop value }
+
+instance Attr Button_ Dir String where
+  attr Dir value = unsafeAttribute { key: "dir", value: prop value }
+
+instance Attr Canvas_ Dir String where
+  attr Dir value = unsafeAttribute { key: "dir", value: prop value }
+
+instance Attr Caption_ Dir String where
+  attr Dir value = unsafeAttribute { key: "dir", value: prop value }
+
+instance Attr Center_ Dir String where
+  attr Dir value = unsafeAttribute { key: "dir", value: prop value }
+
+instance Attr Cite_ Dir String where
+  attr Dir value = unsafeAttribute { key: "dir", value: prop value }
+
+instance Attr Code_ Dir String where
+  attr Dir value = unsafeAttribute { key: "dir", value: prop value }
+
+instance Attr Col_ Dir String where
+  attr Dir value = unsafeAttribute { key: "dir", value: prop value }
+
+instance Attr Colgroup_ Dir String where
+  attr Dir value = unsafeAttribute { key: "dir", value: prop value }
+
+instance Attr Xdata_ Dir String where
+  attr Dir value = unsafeAttribute { key: "dir", value: prop value }
+
+instance Attr Datalist_ Dir String where
+  attr Dir value = unsafeAttribute { key: "dir", value: prop value }
+
+instance Attr Dd_ Dir String where
+  attr Dir value = unsafeAttribute { key: "dir", value: prop value }
+
+instance Attr Del_ Dir String where
+  attr Dir value = unsafeAttribute { key: "dir", value: prop value }
+
+instance Attr Details_ Dir String where
+  attr Dir value = unsafeAttribute { key: "dir", value: prop value }
+
+instance Attr Dfn_ Dir String where
+  attr Dir value = unsafeAttribute { key: "dir", value: prop value }
+
+instance Attr Dialog_ Dir String where
+  attr Dir value = unsafeAttribute { key: "dir", value: prop value }
+
+instance Attr Dir_ Dir String where
+  attr Dir value = unsafeAttribute { key: "dir", value: prop value }
+
+instance Attr Div_ Dir String where
+  attr Dir value = unsafeAttribute { key: "dir", value: prop value }
+
+instance Attr Dl_ Dir String where
+  attr Dir value = unsafeAttribute { key: "dir", value: prop value }
+
+instance Attr Dt_ Dir String where
+  attr Dir value = unsafeAttribute { key: "dir", value: prop value }
+
+instance Attr Em_ Dir String where
+  attr Dir value = unsafeAttribute { key: "dir", value: prop value }
+
+instance Attr Embed_ Dir String where
+  attr Dir value = unsafeAttribute { key: "dir", value: prop value }
+
+instance Attr Fieldset_ Dir String where
+  attr Dir value = unsafeAttribute { key: "dir", value: prop value }
+
+instance Attr Figcaption_ Dir String where
+  attr Dir value = unsafeAttribute { key: "dir", value: prop value }
+
+instance Attr Figure_ Dir String where
+  attr Dir value = unsafeAttribute { key: "dir", value: prop value }
+
+instance Attr Font_ Dir String where
+  attr Dir value = unsafeAttribute { key: "dir", value: prop value }
+
+instance Attr Footer_ Dir String where
+  attr Dir value = unsafeAttribute { key: "dir", value: prop value }
+
+instance Attr Form_ Dir String where
+  attr Dir value = unsafeAttribute { key: "dir", value: prop value }
+
+instance Attr Frame_ Dir String where
+  attr Dir value = unsafeAttribute { key: "dir", value: prop value }
+
+instance Attr Frameset_ Dir String where
+  attr Dir value = unsafeAttribute { key: "dir", value: prop value }
+
+instance Attr H1_ Dir String where
+  attr Dir value = unsafeAttribute { key: "dir", value: prop value }
+
+instance Attr H2_ Dir String where
+  attr Dir value = unsafeAttribute { key: "dir", value: prop value }
+
+instance Attr H3_ Dir String where
+  attr Dir value = unsafeAttribute { key: "dir", value: prop value }
+
+instance Attr H4_ Dir String where
+  attr Dir value = unsafeAttribute { key: "dir", value: prop value }
+
+instance Attr H5_ Dir String where
+  attr Dir value = unsafeAttribute { key: "dir", value: prop value }
+
+instance Attr H6_ Dir String where
+  attr Dir value = unsafeAttribute { key: "dir", value: prop value }
+
+instance Attr Head_ Dir String where
+  attr Dir value = unsafeAttribute { key: "dir", value: prop value }
+
+instance Attr Header_ Dir String where
+  attr Dir value = unsafeAttribute { key: "dir", value: prop value }
+
+instance Attr Hr_ Dir String where
+  attr Dir value = unsafeAttribute { key: "dir", value: prop value }
+
+instance Attr Html_ Dir String where
+  attr Dir value = unsafeAttribute { key: "dir", value: prop value }
+
+instance Attr I_ Dir String where
+  attr Dir value = unsafeAttribute { key: "dir", value: prop value }
+
+instance Attr Iframe_ Dir String where
+  attr Dir value = unsafeAttribute { key: "dir", value: prop value }
+
+instance Attr Img_ Dir String where
+  attr Dir value = unsafeAttribute { key: "dir", value: prop value }
+
+instance Attr Input_ Dir String where
+  attr Dir value = unsafeAttribute { key: "dir", value: prop value }
+
+instance Attr Ins_ Dir String where
+  attr Dir value = unsafeAttribute { key: "dir", value: prop value }
+
+instance Attr Kbd_ Dir String where
+  attr Dir value = unsafeAttribute { key: "dir", value: prop value }
+
+instance Attr Label_ Dir String where
+  attr Dir value = unsafeAttribute { key: "dir", value: prop value }
+
+instance Attr Legend_ Dir String where
+  attr Dir value = unsafeAttribute { key: "dir", value: prop value }
+
+instance Attr Li_ Dir String where
+  attr Dir value = unsafeAttribute { key: "dir", value: prop value }
+
+instance Attr Link_ Dir String where
+  attr Dir value = unsafeAttribute { key: "dir", value: prop value }
+
+instance Attr Main_ Dir String where
+  attr Dir value = unsafeAttribute { key: "dir", value: prop value }
+
+instance Attr Map_ Dir String where
+  attr Dir value = unsafeAttribute { key: "dir", value: prop value }
+
+instance Attr Mark_ Dir String where
+  attr Dir value = unsafeAttribute { key: "dir", value: prop value }
+
+instance Attr Meta_ Dir String where
+  attr Dir value = unsafeAttribute { key: "dir", value: prop value }
+
+instance Attr Meter_ Dir String where
+  attr Dir value = unsafeAttribute { key: "dir", value: prop value }
+
+instance Attr Nav_ Dir String where
+  attr Dir value = unsafeAttribute { key: "dir", value: prop value }
+
+instance Attr Noframes_ Dir String where
+  attr Dir value = unsafeAttribute { key: "dir", value: prop value }
+
+instance Attr Noscript_ Dir String where
+  attr Dir value = unsafeAttribute { key: "dir", value: prop value }
+
+instance Attr Object_ Dir String where
+  attr Dir value = unsafeAttribute { key: "dir", value: prop value }
+
+instance Attr Ol_ Dir String where
+  attr Dir value = unsafeAttribute { key: "dir", value: prop value }
+
+instance Attr Optgroup_ Dir String where
+  attr Dir value = unsafeAttribute { key: "dir", value: prop value }
+
+instance Attr Option_ Dir String where
+  attr Dir value = unsafeAttribute { key: "dir", value: prop value }
+
+instance Attr Output_ Dir String where
+  attr Dir value = unsafeAttribute { key: "dir", value: prop value }
+
+instance Attr P_ Dir String where
+  attr Dir value = unsafeAttribute { key: "dir", value: prop value }
+
+instance Attr Param_ Dir String where
+  attr Dir value = unsafeAttribute { key: "dir", value: prop value }
+
+instance Attr Picture_ Dir String where
+  attr Dir value = unsafeAttribute { key: "dir", value: prop value }
+
+instance Attr Pre_ Dir String where
+  attr Dir value = unsafeAttribute { key: "dir", value: prop value }
+
+instance Attr Progress_ Dir String where
+  attr Dir value = unsafeAttribute { key: "dir", value: prop value }
+
+instance Attr Q_ Dir String where
+  attr Dir value = unsafeAttribute { key: "dir", value: prop value }
+
+instance Attr Rp_ Dir String where
+  attr Dir value = unsafeAttribute { key: "dir", value: prop value }
+
+instance Attr Rt_ Dir String where
+  attr Dir value = unsafeAttribute { key: "dir", value: prop value }
+
+instance Attr Ruby_ Dir String where
+  attr Dir value = unsafeAttribute { key: "dir", value: prop value }
+
+instance Attr S_ Dir String where
+  attr Dir value = unsafeAttribute { key: "dir", value: prop value }
+
+instance Attr Samp_ Dir String where
+  attr Dir value = unsafeAttribute { key: "dir", value: prop value }
+
+instance Attr Script_ Dir String where
+  attr Dir value = unsafeAttribute { key: "dir", value: prop value }
+
+instance Attr Section_ Dir String where
+  attr Dir value = unsafeAttribute { key: "dir", value: prop value }
+
+instance Attr Select_ Dir String where
+  attr Dir value = unsafeAttribute { key: "dir", value: prop value }
+
+instance Attr Small_ Dir String where
+  attr Dir value = unsafeAttribute { key: "dir", value: prop value }
+
+instance Attr Source_ Dir String where
+  attr Dir value = unsafeAttribute { key: "dir", value: prop value }
+
+instance Attr Span_ Dir String where
+  attr Dir value = unsafeAttribute { key: "dir", value: prop value }
+
+instance Attr Strike_ Dir String where
+  attr Dir value = unsafeAttribute { key: "dir", value: prop value }
+
+instance Attr Strong_ Dir String where
+  attr Dir value = unsafeAttribute { key: "dir", value: prop value }
+
+instance Attr Style_ Dir String where
+  attr Dir value = unsafeAttribute { key: "dir", value: prop value }
+
+instance Attr Sub_ Dir String where
+  attr Dir value = unsafeAttribute { key: "dir", value: prop value }
+
+instance Attr Summary_ Dir String where
+  attr Dir value = unsafeAttribute { key: "dir", value: prop value }
+
+instance Attr Sup_ Dir String where
+  attr Dir value = unsafeAttribute { key: "dir", value: prop value }
+
+instance Attr Svg_ Dir String where
+  attr Dir value = unsafeAttribute { key: "dir", value: prop value }
+
+instance Attr Table_ Dir String where
+  attr Dir value = unsafeAttribute { key: "dir", value: prop value }
+
+instance Attr Tbody_ Dir String where
+  attr Dir value = unsafeAttribute { key: "dir", value: prop value }
+
+instance Attr Td_ Dir String where
+  attr Dir value = unsafeAttribute { key: "dir", value: prop value }
+
+instance Attr Template_ Dir String where
+  attr Dir value = unsafeAttribute { key: "dir", value: prop value }
+
+instance Attr Textarea_ Dir String where
+  attr Dir value = unsafeAttribute { key: "dir", value: prop value }
+
+instance Attr Tfoot_ Dir String where
+  attr Dir value = unsafeAttribute { key: "dir", value: prop value }
+
+instance Attr Th_ Dir String where
+  attr Dir value = unsafeAttribute { key: "dir", value: prop value }
+
+instance Attr Thead_ Dir String where
+  attr Dir value = unsafeAttribute { key: "dir", value: prop value }
+
+instance Attr Time_ Dir String where
+  attr Dir value = unsafeAttribute { key: "dir", value: prop value }
+
+instance Attr Title_ Dir String where
+  attr Dir value = unsafeAttribute { key: "dir", value: prop value }
+
+instance Attr Tr_ Dir String where
+  attr Dir value = unsafeAttribute { key: "dir", value: prop value }
+
+instance Attr Track_ Dir String where
+  attr Dir value = unsafeAttribute { key: "dir", value: prop value }
+
+instance Attr Tt_ Dir String where
+  attr Dir value = unsafeAttribute { key: "dir", value: prop value }
+
+instance Attr U_ Dir String where
+  attr Dir value = unsafeAttribute { key: "dir", value: prop value }
+
+instance Attr Ul_ Dir String where
+  attr Dir value = unsafeAttribute { key: "dir", value: prop value }
+
+instance Attr Var_ Dir String where
+  attr Dir value = unsafeAttribute { key: "dir", value: prop value }
+
+instance Attr Video_ Dir String where
+  attr Dir value = unsafeAttribute { key: "dir", value: prop value }
+
+instance Attr Wbr_ Dir String where
+  attr Dir value = unsafeAttribute { key: "dir", value: prop value }
+
 instance Attr Input_ Dirname String where
   attr Dirname value = unsafeAttribute { key: "dirname", value: prop value }
 
@@ -1590,6 +4152,372 @@ instance Attr A_ Download String where
 
 instance Attr Area_ Download String where
   attr Download value = unsafeAttribute { key: "download", value: prop value }
+
+instance Attr A_ Draggable String where
+  attr Draggable value = unsafeAttribute { key: "draggable", value: prop value }
+
+instance Attr Abbr_ Draggable String where
+  attr Draggable value = unsafeAttribute { key: "draggable", value: prop value }
+
+instance Attr Acronym_ Draggable String where
+  attr Draggable value = unsafeAttribute { key: "draggable", value: prop value }
+
+instance Attr Address_ Draggable String where
+  attr Draggable value = unsafeAttribute { key: "draggable", value: prop value }
+
+instance Attr Applet_ Draggable String where
+  attr Draggable value = unsafeAttribute { key: "draggable", value: prop value }
+
+instance Attr Area_ Draggable String where
+  attr Draggable value = unsafeAttribute { key: "draggable", value: prop value }
+
+instance Attr Article_ Draggable String where
+  attr Draggable value = unsafeAttribute { key: "draggable", value: prop value }
+
+instance Attr Aside_ Draggable String where
+  attr Draggable value = unsafeAttribute { key: "draggable", value: prop value }
+
+instance Attr Audio_ Draggable String where
+  attr Draggable value = unsafeAttribute { key: "draggable", value: prop value }
+
+instance Attr B_ Draggable String where
+  attr Draggable value = unsafeAttribute { key: "draggable", value: prop value }
+
+instance Attr Base_ Draggable String where
+  attr Draggable value = unsafeAttribute { key: "draggable", value: prop value }
+
+instance Attr Basefont_ Draggable String where
+  attr Draggable value = unsafeAttribute { key: "draggable", value: prop value }
+
+instance Attr Bdi_ Draggable String where
+  attr Draggable value = unsafeAttribute { key: "draggable", value: prop value }
+
+instance Attr Bdo_ Draggable String where
+  attr Draggable value = unsafeAttribute { key: "draggable", value: prop value }
+
+instance Attr Big_ Draggable String where
+  attr Draggable value = unsafeAttribute { key: "draggable", value: prop value }
+
+instance Attr Blockquote_ Draggable String where
+  attr Draggable value = unsafeAttribute { key: "draggable", value: prop value }
+
+instance Attr Body_ Draggable String where
+  attr Draggable value = unsafeAttribute { key: "draggable", value: prop value }
+
+instance Attr Br_ Draggable String where
+  attr Draggable value = unsafeAttribute { key: "draggable", value: prop value }
+
+instance Attr Button_ Draggable String where
+  attr Draggable value = unsafeAttribute { key: "draggable", value: prop value }
+
+instance Attr Canvas_ Draggable String where
+  attr Draggable value = unsafeAttribute { key: "draggable", value: prop value }
+
+instance Attr Caption_ Draggable String where
+  attr Draggable value = unsafeAttribute { key: "draggable", value: prop value }
+
+instance Attr Center_ Draggable String where
+  attr Draggable value = unsafeAttribute { key: "draggable", value: prop value }
+
+instance Attr Cite_ Draggable String where
+  attr Draggable value = unsafeAttribute { key: "draggable", value: prop value }
+
+instance Attr Code_ Draggable String where
+  attr Draggable value = unsafeAttribute { key: "draggable", value: prop value }
+
+instance Attr Col_ Draggable String where
+  attr Draggable value = unsafeAttribute { key: "draggable", value: prop value }
+
+instance Attr Colgroup_ Draggable String where
+  attr Draggable value = unsafeAttribute { key: "draggable", value: prop value }
+
+instance Attr Xdata_ Draggable String where
+  attr Draggable value = unsafeAttribute { key: "draggable", value: prop value }
+
+instance Attr Datalist_ Draggable String where
+  attr Draggable value = unsafeAttribute { key: "draggable", value: prop value }
+
+instance Attr Dd_ Draggable String where
+  attr Draggable value = unsafeAttribute { key: "draggable", value: prop value }
+
+instance Attr Del_ Draggable String where
+  attr Draggable value = unsafeAttribute { key: "draggable", value: prop value }
+
+instance Attr Details_ Draggable String where
+  attr Draggable value = unsafeAttribute { key: "draggable", value: prop value }
+
+instance Attr Dfn_ Draggable String where
+  attr Draggable value = unsafeAttribute { key: "draggable", value: prop value }
+
+instance Attr Dialog_ Draggable String where
+  attr Draggable value = unsafeAttribute { key: "draggable", value: prop value }
+
+instance Attr Dir_ Draggable String where
+  attr Draggable value = unsafeAttribute { key: "draggable", value: prop value }
+
+instance Attr Div_ Draggable String where
+  attr Draggable value = unsafeAttribute { key: "draggable", value: prop value }
+
+instance Attr Dl_ Draggable String where
+  attr Draggable value = unsafeAttribute { key: "draggable", value: prop value }
+
+instance Attr Dt_ Draggable String where
+  attr Draggable value = unsafeAttribute { key: "draggable", value: prop value }
+
+instance Attr Em_ Draggable String where
+  attr Draggable value = unsafeAttribute { key: "draggable", value: prop value }
+
+instance Attr Embed_ Draggable String where
+  attr Draggable value = unsafeAttribute { key: "draggable", value: prop value }
+
+instance Attr Fieldset_ Draggable String where
+  attr Draggable value = unsafeAttribute { key: "draggable", value: prop value }
+
+instance Attr Figcaption_ Draggable String where
+  attr Draggable value = unsafeAttribute { key: "draggable", value: prop value }
+
+instance Attr Figure_ Draggable String where
+  attr Draggable value = unsafeAttribute { key: "draggable", value: prop value }
+
+instance Attr Font_ Draggable String where
+  attr Draggable value = unsafeAttribute { key: "draggable", value: prop value }
+
+instance Attr Footer_ Draggable String where
+  attr Draggable value = unsafeAttribute { key: "draggable", value: prop value }
+
+instance Attr Form_ Draggable String where
+  attr Draggable value = unsafeAttribute { key: "draggable", value: prop value }
+
+instance Attr Frame_ Draggable String where
+  attr Draggable value = unsafeAttribute { key: "draggable", value: prop value }
+
+instance Attr Frameset_ Draggable String where
+  attr Draggable value = unsafeAttribute { key: "draggable", value: prop value }
+
+instance Attr H1_ Draggable String where
+  attr Draggable value = unsafeAttribute { key: "draggable", value: prop value }
+
+instance Attr H2_ Draggable String where
+  attr Draggable value = unsafeAttribute { key: "draggable", value: prop value }
+
+instance Attr H3_ Draggable String where
+  attr Draggable value = unsafeAttribute { key: "draggable", value: prop value }
+
+instance Attr H4_ Draggable String where
+  attr Draggable value = unsafeAttribute { key: "draggable", value: prop value }
+
+instance Attr H5_ Draggable String where
+  attr Draggable value = unsafeAttribute { key: "draggable", value: prop value }
+
+instance Attr H6_ Draggable String where
+  attr Draggable value = unsafeAttribute { key: "draggable", value: prop value }
+
+instance Attr Head_ Draggable String where
+  attr Draggable value = unsafeAttribute { key: "draggable", value: prop value }
+
+instance Attr Header_ Draggable String where
+  attr Draggable value = unsafeAttribute { key: "draggable", value: prop value }
+
+instance Attr Hr_ Draggable String where
+  attr Draggable value = unsafeAttribute { key: "draggable", value: prop value }
+
+instance Attr Html_ Draggable String where
+  attr Draggable value = unsafeAttribute { key: "draggable", value: prop value }
+
+instance Attr I_ Draggable String where
+  attr Draggable value = unsafeAttribute { key: "draggable", value: prop value }
+
+instance Attr Iframe_ Draggable String where
+  attr Draggable value = unsafeAttribute { key: "draggable", value: prop value }
+
+instance Attr Img_ Draggable String where
+  attr Draggable value = unsafeAttribute { key: "draggable", value: prop value }
+
+instance Attr Input_ Draggable String where
+  attr Draggable value = unsafeAttribute { key: "draggable", value: prop value }
+
+instance Attr Ins_ Draggable String where
+  attr Draggable value = unsafeAttribute { key: "draggable", value: prop value }
+
+instance Attr Kbd_ Draggable String where
+  attr Draggable value = unsafeAttribute { key: "draggable", value: prop value }
+
+instance Attr Label_ Draggable String where
+  attr Draggable value = unsafeAttribute { key: "draggable", value: prop value }
+
+instance Attr Legend_ Draggable String where
+  attr Draggable value = unsafeAttribute { key: "draggable", value: prop value }
+
+instance Attr Li_ Draggable String where
+  attr Draggable value = unsafeAttribute { key: "draggable", value: prop value }
+
+instance Attr Link_ Draggable String where
+  attr Draggable value = unsafeAttribute { key: "draggable", value: prop value }
+
+instance Attr Main_ Draggable String where
+  attr Draggable value = unsafeAttribute { key: "draggable", value: prop value }
+
+instance Attr Map_ Draggable String where
+  attr Draggable value = unsafeAttribute { key: "draggable", value: prop value }
+
+instance Attr Mark_ Draggable String where
+  attr Draggable value = unsafeAttribute { key: "draggable", value: prop value }
+
+instance Attr Meta_ Draggable String where
+  attr Draggable value = unsafeAttribute { key: "draggable", value: prop value }
+
+instance Attr Meter_ Draggable String where
+  attr Draggable value = unsafeAttribute { key: "draggable", value: prop value }
+
+instance Attr Nav_ Draggable String where
+  attr Draggable value = unsafeAttribute { key: "draggable", value: prop value }
+
+instance Attr Noframes_ Draggable String where
+  attr Draggable value = unsafeAttribute { key: "draggable", value: prop value }
+
+instance Attr Noscript_ Draggable String where
+  attr Draggable value = unsafeAttribute { key: "draggable", value: prop value }
+
+instance Attr Object_ Draggable String where
+  attr Draggable value = unsafeAttribute { key: "draggable", value: prop value }
+
+instance Attr Ol_ Draggable String where
+  attr Draggable value = unsafeAttribute { key: "draggable", value: prop value }
+
+instance Attr Optgroup_ Draggable String where
+  attr Draggable value = unsafeAttribute { key: "draggable", value: prop value }
+
+instance Attr Option_ Draggable String where
+  attr Draggable value = unsafeAttribute { key: "draggable", value: prop value }
+
+instance Attr Output_ Draggable String where
+  attr Draggable value = unsafeAttribute { key: "draggable", value: prop value }
+
+instance Attr P_ Draggable String where
+  attr Draggable value = unsafeAttribute { key: "draggable", value: prop value }
+
+instance Attr Param_ Draggable String where
+  attr Draggable value = unsafeAttribute { key: "draggable", value: prop value }
+
+instance Attr Picture_ Draggable String where
+  attr Draggable value = unsafeAttribute { key: "draggable", value: prop value }
+
+instance Attr Pre_ Draggable String where
+  attr Draggable value = unsafeAttribute { key: "draggable", value: prop value }
+
+instance Attr Progress_ Draggable String where
+  attr Draggable value = unsafeAttribute { key: "draggable", value: prop value }
+
+instance Attr Q_ Draggable String where
+  attr Draggable value = unsafeAttribute { key: "draggable", value: prop value }
+
+instance Attr Rp_ Draggable String where
+  attr Draggable value = unsafeAttribute { key: "draggable", value: prop value }
+
+instance Attr Rt_ Draggable String where
+  attr Draggable value = unsafeAttribute { key: "draggable", value: prop value }
+
+instance Attr Ruby_ Draggable String where
+  attr Draggable value = unsafeAttribute { key: "draggable", value: prop value }
+
+instance Attr S_ Draggable String where
+  attr Draggable value = unsafeAttribute { key: "draggable", value: prop value }
+
+instance Attr Samp_ Draggable String where
+  attr Draggable value = unsafeAttribute { key: "draggable", value: prop value }
+
+instance Attr Script_ Draggable String where
+  attr Draggable value = unsafeAttribute { key: "draggable", value: prop value }
+
+instance Attr Section_ Draggable String where
+  attr Draggable value = unsafeAttribute { key: "draggable", value: prop value }
+
+instance Attr Select_ Draggable String where
+  attr Draggable value = unsafeAttribute { key: "draggable", value: prop value }
+
+instance Attr Small_ Draggable String where
+  attr Draggable value = unsafeAttribute { key: "draggable", value: prop value }
+
+instance Attr Source_ Draggable String where
+  attr Draggable value = unsafeAttribute { key: "draggable", value: prop value }
+
+instance Attr Span_ Draggable String where
+  attr Draggable value = unsafeAttribute { key: "draggable", value: prop value }
+
+instance Attr Strike_ Draggable String where
+  attr Draggable value = unsafeAttribute { key: "draggable", value: prop value }
+
+instance Attr Strong_ Draggable String where
+  attr Draggable value = unsafeAttribute { key: "draggable", value: prop value }
+
+instance Attr Style_ Draggable String where
+  attr Draggable value = unsafeAttribute { key: "draggable", value: prop value }
+
+instance Attr Sub_ Draggable String where
+  attr Draggable value = unsafeAttribute { key: "draggable", value: prop value }
+
+instance Attr Summary_ Draggable String where
+  attr Draggable value = unsafeAttribute { key: "draggable", value: prop value }
+
+instance Attr Sup_ Draggable String where
+  attr Draggable value = unsafeAttribute { key: "draggable", value: prop value }
+
+instance Attr Svg_ Draggable String where
+  attr Draggable value = unsafeAttribute { key: "draggable", value: prop value }
+
+instance Attr Table_ Draggable String where
+  attr Draggable value = unsafeAttribute { key: "draggable", value: prop value }
+
+instance Attr Tbody_ Draggable String where
+  attr Draggable value = unsafeAttribute { key: "draggable", value: prop value }
+
+instance Attr Td_ Draggable String where
+  attr Draggable value = unsafeAttribute { key: "draggable", value: prop value }
+
+instance Attr Template_ Draggable String where
+  attr Draggable value = unsafeAttribute { key: "draggable", value: prop value }
+
+instance Attr Textarea_ Draggable String where
+  attr Draggable value = unsafeAttribute { key: "draggable", value: prop value }
+
+instance Attr Tfoot_ Draggable String where
+  attr Draggable value = unsafeAttribute { key: "draggable", value: prop value }
+
+instance Attr Th_ Draggable String where
+  attr Draggable value = unsafeAttribute { key: "draggable", value: prop value }
+
+instance Attr Thead_ Draggable String where
+  attr Draggable value = unsafeAttribute { key: "draggable", value: prop value }
+
+instance Attr Time_ Draggable String where
+  attr Draggable value = unsafeAttribute { key: "draggable", value: prop value }
+
+instance Attr Title_ Draggable String where
+  attr Draggable value = unsafeAttribute { key: "draggable", value: prop value }
+
+instance Attr Tr_ Draggable String where
+  attr Draggable value = unsafeAttribute { key: "draggable", value: prop value }
+
+instance Attr Track_ Draggable String where
+  attr Draggable value = unsafeAttribute { key: "draggable", value: prop value }
+
+instance Attr Tt_ Draggable String where
+  attr Draggable value = unsafeAttribute { key: "draggable", value: prop value }
+
+instance Attr U_ Draggable String where
+  attr Draggable value = unsafeAttribute { key: "draggable", value: prop value }
+
+instance Attr Ul_ Draggable String where
+  attr Draggable value = unsafeAttribute { key: "draggable", value: prop value }
+
+instance Attr Var_ Draggable String where
+  attr Draggable value = unsafeAttribute { key: "draggable", value: prop value }
+
+instance Attr Video_ Draggable String where
+  attr Draggable value = unsafeAttribute { key: "draggable", value: prop value }
+
+instance Attr Wbr_ Draggable String where
+  attr Draggable value = unsafeAttribute { key: "draggable", value: prop value }
 
 instance Attr Form_ Enctype String where
   attr Enctype value = unsafeAttribute { key: "enctype", value: prop value }
@@ -1690,6 +4618,372 @@ instance Attr Object_ Height String where
 instance Attr Video_ Height String where
   attr Height value = unsafeAttribute { key: "height", value: prop value }
 
+instance Attr A_ Hidden String where
+  attr Hidden value = unsafeAttribute { key: "hidden", value: prop value }
+
+instance Attr Abbr_ Hidden String where
+  attr Hidden value = unsafeAttribute { key: "hidden", value: prop value }
+
+instance Attr Acronym_ Hidden String where
+  attr Hidden value = unsafeAttribute { key: "hidden", value: prop value }
+
+instance Attr Address_ Hidden String where
+  attr Hidden value = unsafeAttribute { key: "hidden", value: prop value }
+
+instance Attr Applet_ Hidden String where
+  attr Hidden value = unsafeAttribute { key: "hidden", value: prop value }
+
+instance Attr Area_ Hidden String where
+  attr Hidden value = unsafeAttribute { key: "hidden", value: prop value }
+
+instance Attr Article_ Hidden String where
+  attr Hidden value = unsafeAttribute { key: "hidden", value: prop value }
+
+instance Attr Aside_ Hidden String where
+  attr Hidden value = unsafeAttribute { key: "hidden", value: prop value }
+
+instance Attr Audio_ Hidden String where
+  attr Hidden value = unsafeAttribute { key: "hidden", value: prop value }
+
+instance Attr B_ Hidden String where
+  attr Hidden value = unsafeAttribute { key: "hidden", value: prop value }
+
+instance Attr Base_ Hidden String where
+  attr Hidden value = unsafeAttribute { key: "hidden", value: prop value }
+
+instance Attr Basefont_ Hidden String where
+  attr Hidden value = unsafeAttribute { key: "hidden", value: prop value }
+
+instance Attr Bdi_ Hidden String where
+  attr Hidden value = unsafeAttribute { key: "hidden", value: prop value }
+
+instance Attr Bdo_ Hidden String where
+  attr Hidden value = unsafeAttribute { key: "hidden", value: prop value }
+
+instance Attr Big_ Hidden String where
+  attr Hidden value = unsafeAttribute { key: "hidden", value: prop value }
+
+instance Attr Blockquote_ Hidden String where
+  attr Hidden value = unsafeAttribute { key: "hidden", value: prop value }
+
+instance Attr Body_ Hidden String where
+  attr Hidden value = unsafeAttribute { key: "hidden", value: prop value }
+
+instance Attr Br_ Hidden String where
+  attr Hidden value = unsafeAttribute { key: "hidden", value: prop value }
+
+instance Attr Button_ Hidden String where
+  attr Hidden value = unsafeAttribute { key: "hidden", value: prop value }
+
+instance Attr Canvas_ Hidden String where
+  attr Hidden value = unsafeAttribute { key: "hidden", value: prop value }
+
+instance Attr Caption_ Hidden String where
+  attr Hidden value = unsafeAttribute { key: "hidden", value: prop value }
+
+instance Attr Center_ Hidden String where
+  attr Hidden value = unsafeAttribute { key: "hidden", value: prop value }
+
+instance Attr Cite_ Hidden String where
+  attr Hidden value = unsafeAttribute { key: "hidden", value: prop value }
+
+instance Attr Code_ Hidden String where
+  attr Hidden value = unsafeAttribute { key: "hidden", value: prop value }
+
+instance Attr Col_ Hidden String where
+  attr Hidden value = unsafeAttribute { key: "hidden", value: prop value }
+
+instance Attr Colgroup_ Hidden String where
+  attr Hidden value = unsafeAttribute { key: "hidden", value: prop value }
+
+instance Attr Xdata_ Hidden String where
+  attr Hidden value = unsafeAttribute { key: "hidden", value: prop value }
+
+instance Attr Datalist_ Hidden String where
+  attr Hidden value = unsafeAttribute { key: "hidden", value: prop value }
+
+instance Attr Dd_ Hidden String where
+  attr Hidden value = unsafeAttribute { key: "hidden", value: prop value }
+
+instance Attr Del_ Hidden String where
+  attr Hidden value = unsafeAttribute { key: "hidden", value: prop value }
+
+instance Attr Details_ Hidden String where
+  attr Hidden value = unsafeAttribute { key: "hidden", value: prop value }
+
+instance Attr Dfn_ Hidden String where
+  attr Hidden value = unsafeAttribute { key: "hidden", value: prop value }
+
+instance Attr Dialog_ Hidden String where
+  attr Hidden value = unsafeAttribute { key: "hidden", value: prop value }
+
+instance Attr Dir_ Hidden String where
+  attr Hidden value = unsafeAttribute { key: "hidden", value: prop value }
+
+instance Attr Div_ Hidden String where
+  attr Hidden value = unsafeAttribute { key: "hidden", value: prop value }
+
+instance Attr Dl_ Hidden String where
+  attr Hidden value = unsafeAttribute { key: "hidden", value: prop value }
+
+instance Attr Dt_ Hidden String where
+  attr Hidden value = unsafeAttribute { key: "hidden", value: prop value }
+
+instance Attr Em_ Hidden String where
+  attr Hidden value = unsafeAttribute { key: "hidden", value: prop value }
+
+instance Attr Embed_ Hidden String where
+  attr Hidden value = unsafeAttribute { key: "hidden", value: prop value }
+
+instance Attr Fieldset_ Hidden String where
+  attr Hidden value = unsafeAttribute { key: "hidden", value: prop value }
+
+instance Attr Figcaption_ Hidden String where
+  attr Hidden value = unsafeAttribute { key: "hidden", value: prop value }
+
+instance Attr Figure_ Hidden String where
+  attr Hidden value = unsafeAttribute { key: "hidden", value: prop value }
+
+instance Attr Font_ Hidden String where
+  attr Hidden value = unsafeAttribute { key: "hidden", value: prop value }
+
+instance Attr Footer_ Hidden String where
+  attr Hidden value = unsafeAttribute { key: "hidden", value: prop value }
+
+instance Attr Form_ Hidden String where
+  attr Hidden value = unsafeAttribute { key: "hidden", value: prop value }
+
+instance Attr Frame_ Hidden String where
+  attr Hidden value = unsafeAttribute { key: "hidden", value: prop value }
+
+instance Attr Frameset_ Hidden String where
+  attr Hidden value = unsafeAttribute { key: "hidden", value: prop value }
+
+instance Attr H1_ Hidden String where
+  attr Hidden value = unsafeAttribute { key: "hidden", value: prop value }
+
+instance Attr H2_ Hidden String where
+  attr Hidden value = unsafeAttribute { key: "hidden", value: prop value }
+
+instance Attr H3_ Hidden String where
+  attr Hidden value = unsafeAttribute { key: "hidden", value: prop value }
+
+instance Attr H4_ Hidden String where
+  attr Hidden value = unsafeAttribute { key: "hidden", value: prop value }
+
+instance Attr H5_ Hidden String where
+  attr Hidden value = unsafeAttribute { key: "hidden", value: prop value }
+
+instance Attr H6_ Hidden String where
+  attr Hidden value = unsafeAttribute { key: "hidden", value: prop value }
+
+instance Attr Head_ Hidden String where
+  attr Hidden value = unsafeAttribute { key: "hidden", value: prop value }
+
+instance Attr Header_ Hidden String where
+  attr Hidden value = unsafeAttribute { key: "hidden", value: prop value }
+
+instance Attr Hr_ Hidden String where
+  attr Hidden value = unsafeAttribute { key: "hidden", value: prop value }
+
+instance Attr Html_ Hidden String where
+  attr Hidden value = unsafeAttribute { key: "hidden", value: prop value }
+
+instance Attr I_ Hidden String where
+  attr Hidden value = unsafeAttribute { key: "hidden", value: prop value }
+
+instance Attr Iframe_ Hidden String where
+  attr Hidden value = unsafeAttribute { key: "hidden", value: prop value }
+
+instance Attr Img_ Hidden String where
+  attr Hidden value = unsafeAttribute { key: "hidden", value: prop value }
+
+instance Attr Input_ Hidden String where
+  attr Hidden value = unsafeAttribute { key: "hidden", value: prop value }
+
+instance Attr Ins_ Hidden String where
+  attr Hidden value = unsafeAttribute { key: "hidden", value: prop value }
+
+instance Attr Kbd_ Hidden String where
+  attr Hidden value = unsafeAttribute { key: "hidden", value: prop value }
+
+instance Attr Label_ Hidden String where
+  attr Hidden value = unsafeAttribute { key: "hidden", value: prop value }
+
+instance Attr Legend_ Hidden String where
+  attr Hidden value = unsafeAttribute { key: "hidden", value: prop value }
+
+instance Attr Li_ Hidden String where
+  attr Hidden value = unsafeAttribute { key: "hidden", value: prop value }
+
+instance Attr Link_ Hidden String where
+  attr Hidden value = unsafeAttribute { key: "hidden", value: prop value }
+
+instance Attr Main_ Hidden String where
+  attr Hidden value = unsafeAttribute { key: "hidden", value: prop value }
+
+instance Attr Map_ Hidden String where
+  attr Hidden value = unsafeAttribute { key: "hidden", value: prop value }
+
+instance Attr Mark_ Hidden String where
+  attr Hidden value = unsafeAttribute { key: "hidden", value: prop value }
+
+instance Attr Meta_ Hidden String where
+  attr Hidden value = unsafeAttribute { key: "hidden", value: prop value }
+
+instance Attr Meter_ Hidden String where
+  attr Hidden value = unsafeAttribute { key: "hidden", value: prop value }
+
+instance Attr Nav_ Hidden String where
+  attr Hidden value = unsafeAttribute { key: "hidden", value: prop value }
+
+instance Attr Noframes_ Hidden String where
+  attr Hidden value = unsafeAttribute { key: "hidden", value: prop value }
+
+instance Attr Noscript_ Hidden String where
+  attr Hidden value = unsafeAttribute { key: "hidden", value: prop value }
+
+instance Attr Object_ Hidden String where
+  attr Hidden value = unsafeAttribute { key: "hidden", value: prop value }
+
+instance Attr Ol_ Hidden String where
+  attr Hidden value = unsafeAttribute { key: "hidden", value: prop value }
+
+instance Attr Optgroup_ Hidden String where
+  attr Hidden value = unsafeAttribute { key: "hidden", value: prop value }
+
+instance Attr Option_ Hidden String where
+  attr Hidden value = unsafeAttribute { key: "hidden", value: prop value }
+
+instance Attr Output_ Hidden String where
+  attr Hidden value = unsafeAttribute { key: "hidden", value: prop value }
+
+instance Attr P_ Hidden String where
+  attr Hidden value = unsafeAttribute { key: "hidden", value: prop value }
+
+instance Attr Param_ Hidden String where
+  attr Hidden value = unsafeAttribute { key: "hidden", value: prop value }
+
+instance Attr Picture_ Hidden String where
+  attr Hidden value = unsafeAttribute { key: "hidden", value: prop value }
+
+instance Attr Pre_ Hidden String where
+  attr Hidden value = unsafeAttribute { key: "hidden", value: prop value }
+
+instance Attr Progress_ Hidden String where
+  attr Hidden value = unsafeAttribute { key: "hidden", value: prop value }
+
+instance Attr Q_ Hidden String where
+  attr Hidden value = unsafeAttribute { key: "hidden", value: prop value }
+
+instance Attr Rp_ Hidden String where
+  attr Hidden value = unsafeAttribute { key: "hidden", value: prop value }
+
+instance Attr Rt_ Hidden String where
+  attr Hidden value = unsafeAttribute { key: "hidden", value: prop value }
+
+instance Attr Ruby_ Hidden String where
+  attr Hidden value = unsafeAttribute { key: "hidden", value: prop value }
+
+instance Attr S_ Hidden String where
+  attr Hidden value = unsafeAttribute { key: "hidden", value: prop value }
+
+instance Attr Samp_ Hidden String where
+  attr Hidden value = unsafeAttribute { key: "hidden", value: prop value }
+
+instance Attr Script_ Hidden String where
+  attr Hidden value = unsafeAttribute { key: "hidden", value: prop value }
+
+instance Attr Section_ Hidden String where
+  attr Hidden value = unsafeAttribute { key: "hidden", value: prop value }
+
+instance Attr Select_ Hidden String where
+  attr Hidden value = unsafeAttribute { key: "hidden", value: prop value }
+
+instance Attr Small_ Hidden String where
+  attr Hidden value = unsafeAttribute { key: "hidden", value: prop value }
+
+instance Attr Source_ Hidden String where
+  attr Hidden value = unsafeAttribute { key: "hidden", value: prop value }
+
+instance Attr Span_ Hidden String where
+  attr Hidden value = unsafeAttribute { key: "hidden", value: prop value }
+
+instance Attr Strike_ Hidden String where
+  attr Hidden value = unsafeAttribute { key: "hidden", value: prop value }
+
+instance Attr Strong_ Hidden String where
+  attr Hidden value = unsafeAttribute { key: "hidden", value: prop value }
+
+instance Attr Style_ Hidden String where
+  attr Hidden value = unsafeAttribute { key: "hidden", value: prop value }
+
+instance Attr Sub_ Hidden String where
+  attr Hidden value = unsafeAttribute { key: "hidden", value: prop value }
+
+instance Attr Summary_ Hidden String where
+  attr Hidden value = unsafeAttribute { key: "hidden", value: prop value }
+
+instance Attr Sup_ Hidden String where
+  attr Hidden value = unsafeAttribute { key: "hidden", value: prop value }
+
+instance Attr Svg_ Hidden String where
+  attr Hidden value = unsafeAttribute { key: "hidden", value: prop value }
+
+instance Attr Table_ Hidden String where
+  attr Hidden value = unsafeAttribute { key: "hidden", value: prop value }
+
+instance Attr Tbody_ Hidden String where
+  attr Hidden value = unsafeAttribute { key: "hidden", value: prop value }
+
+instance Attr Td_ Hidden String where
+  attr Hidden value = unsafeAttribute { key: "hidden", value: prop value }
+
+instance Attr Template_ Hidden String where
+  attr Hidden value = unsafeAttribute { key: "hidden", value: prop value }
+
+instance Attr Textarea_ Hidden String where
+  attr Hidden value = unsafeAttribute { key: "hidden", value: prop value }
+
+instance Attr Tfoot_ Hidden String where
+  attr Hidden value = unsafeAttribute { key: "hidden", value: prop value }
+
+instance Attr Th_ Hidden String where
+  attr Hidden value = unsafeAttribute { key: "hidden", value: prop value }
+
+instance Attr Thead_ Hidden String where
+  attr Hidden value = unsafeAttribute { key: "hidden", value: prop value }
+
+instance Attr Time_ Hidden String where
+  attr Hidden value = unsafeAttribute { key: "hidden", value: prop value }
+
+instance Attr Title_ Hidden String where
+  attr Hidden value = unsafeAttribute { key: "hidden", value: prop value }
+
+instance Attr Tr_ Hidden String where
+  attr Hidden value = unsafeAttribute { key: "hidden", value: prop value }
+
+instance Attr Track_ Hidden String where
+  attr Hidden value = unsafeAttribute { key: "hidden", value: prop value }
+
+instance Attr Tt_ Hidden String where
+  attr Hidden value = unsafeAttribute { key: "hidden", value: prop value }
+
+instance Attr U_ Hidden String where
+  attr Hidden value = unsafeAttribute { key: "hidden", value: prop value }
+
+instance Attr Ul_ Hidden String where
+  attr Hidden value = unsafeAttribute { key: "hidden", value: prop value }
+
+instance Attr Var_ Hidden String where
+  attr Hidden value = unsafeAttribute { key: "hidden", value: prop value }
+
+instance Attr Video_ Hidden String where
+  attr Hidden value = unsafeAttribute { key: "hidden", value: prop value }
+
+instance Attr Wbr_ Hidden String where
+  attr Hidden value = unsafeAttribute { key: "hidden", value: prop value }
+
 instance Attr Meter_ High String where
   attr High value = unsafeAttribute { key: "high", value: prop value }
 
@@ -1716,6 +5010,738 @@ instance Attr Link_ Hreflang String where
 
 instance Attr Meta_ HttpEquiv String where
   attr HttpEquiv value = unsafeAttribute { key: "http-equiv", value: prop value }
+
+instance Attr A_ Icon String where
+  attr Icon value = unsafeAttribute { key: "icon", value: prop value }
+
+instance Attr Abbr_ Icon String where
+  attr Icon value = unsafeAttribute { key: "icon", value: prop value }
+
+instance Attr Acronym_ Icon String where
+  attr Icon value = unsafeAttribute { key: "icon", value: prop value }
+
+instance Attr Address_ Icon String where
+  attr Icon value = unsafeAttribute { key: "icon", value: prop value }
+
+instance Attr Applet_ Icon String where
+  attr Icon value = unsafeAttribute { key: "icon", value: prop value }
+
+instance Attr Area_ Icon String where
+  attr Icon value = unsafeAttribute { key: "icon", value: prop value }
+
+instance Attr Article_ Icon String where
+  attr Icon value = unsafeAttribute { key: "icon", value: prop value }
+
+instance Attr Aside_ Icon String where
+  attr Icon value = unsafeAttribute { key: "icon", value: prop value }
+
+instance Attr Audio_ Icon String where
+  attr Icon value = unsafeAttribute { key: "icon", value: prop value }
+
+instance Attr B_ Icon String where
+  attr Icon value = unsafeAttribute { key: "icon", value: prop value }
+
+instance Attr Base_ Icon String where
+  attr Icon value = unsafeAttribute { key: "icon", value: prop value }
+
+instance Attr Basefont_ Icon String where
+  attr Icon value = unsafeAttribute { key: "icon", value: prop value }
+
+instance Attr Bdi_ Icon String where
+  attr Icon value = unsafeAttribute { key: "icon", value: prop value }
+
+instance Attr Bdo_ Icon String where
+  attr Icon value = unsafeAttribute { key: "icon", value: prop value }
+
+instance Attr Big_ Icon String where
+  attr Icon value = unsafeAttribute { key: "icon", value: prop value }
+
+instance Attr Blockquote_ Icon String where
+  attr Icon value = unsafeAttribute { key: "icon", value: prop value }
+
+instance Attr Body_ Icon String where
+  attr Icon value = unsafeAttribute { key: "icon", value: prop value }
+
+instance Attr Br_ Icon String where
+  attr Icon value = unsafeAttribute { key: "icon", value: prop value }
+
+instance Attr Button_ Icon String where
+  attr Icon value = unsafeAttribute { key: "icon", value: prop value }
+
+instance Attr Canvas_ Icon String where
+  attr Icon value = unsafeAttribute { key: "icon", value: prop value }
+
+instance Attr Caption_ Icon String where
+  attr Icon value = unsafeAttribute { key: "icon", value: prop value }
+
+instance Attr Center_ Icon String where
+  attr Icon value = unsafeAttribute { key: "icon", value: prop value }
+
+instance Attr Cite_ Icon String where
+  attr Icon value = unsafeAttribute { key: "icon", value: prop value }
+
+instance Attr Code_ Icon String where
+  attr Icon value = unsafeAttribute { key: "icon", value: prop value }
+
+instance Attr Col_ Icon String where
+  attr Icon value = unsafeAttribute { key: "icon", value: prop value }
+
+instance Attr Colgroup_ Icon String where
+  attr Icon value = unsafeAttribute { key: "icon", value: prop value }
+
+instance Attr Xdata_ Icon String where
+  attr Icon value = unsafeAttribute { key: "icon", value: prop value }
+
+instance Attr Datalist_ Icon String where
+  attr Icon value = unsafeAttribute { key: "icon", value: prop value }
+
+instance Attr Dd_ Icon String where
+  attr Icon value = unsafeAttribute { key: "icon", value: prop value }
+
+instance Attr Del_ Icon String where
+  attr Icon value = unsafeAttribute { key: "icon", value: prop value }
+
+instance Attr Details_ Icon String where
+  attr Icon value = unsafeAttribute { key: "icon", value: prop value }
+
+instance Attr Dfn_ Icon String where
+  attr Icon value = unsafeAttribute { key: "icon", value: prop value }
+
+instance Attr Dialog_ Icon String where
+  attr Icon value = unsafeAttribute { key: "icon", value: prop value }
+
+instance Attr Dir_ Icon String where
+  attr Icon value = unsafeAttribute { key: "icon", value: prop value }
+
+instance Attr Div_ Icon String where
+  attr Icon value = unsafeAttribute { key: "icon", value: prop value }
+
+instance Attr Dl_ Icon String where
+  attr Icon value = unsafeAttribute { key: "icon", value: prop value }
+
+instance Attr Dt_ Icon String where
+  attr Icon value = unsafeAttribute { key: "icon", value: prop value }
+
+instance Attr Em_ Icon String where
+  attr Icon value = unsafeAttribute { key: "icon", value: prop value }
+
+instance Attr Embed_ Icon String where
+  attr Icon value = unsafeAttribute { key: "icon", value: prop value }
+
+instance Attr Fieldset_ Icon String where
+  attr Icon value = unsafeAttribute { key: "icon", value: prop value }
+
+instance Attr Figcaption_ Icon String where
+  attr Icon value = unsafeAttribute { key: "icon", value: prop value }
+
+instance Attr Figure_ Icon String where
+  attr Icon value = unsafeAttribute { key: "icon", value: prop value }
+
+instance Attr Font_ Icon String where
+  attr Icon value = unsafeAttribute { key: "icon", value: prop value }
+
+instance Attr Footer_ Icon String where
+  attr Icon value = unsafeAttribute { key: "icon", value: prop value }
+
+instance Attr Form_ Icon String where
+  attr Icon value = unsafeAttribute { key: "icon", value: prop value }
+
+instance Attr Frame_ Icon String where
+  attr Icon value = unsafeAttribute { key: "icon", value: prop value }
+
+instance Attr Frameset_ Icon String where
+  attr Icon value = unsafeAttribute { key: "icon", value: prop value }
+
+instance Attr H1_ Icon String where
+  attr Icon value = unsafeAttribute { key: "icon", value: prop value }
+
+instance Attr H2_ Icon String where
+  attr Icon value = unsafeAttribute { key: "icon", value: prop value }
+
+instance Attr H3_ Icon String where
+  attr Icon value = unsafeAttribute { key: "icon", value: prop value }
+
+instance Attr H4_ Icon String where
+  attr Icon value = unsafeAttribute { key: "icon", value: prop value }
+
+instance Attr H5_ Icon String where
+  attr Icon value = unsafeAttribute { key: "icon", value: prop value }
+
+instance Attr H6_ Icon String where
+  attr Icon value = unsafeAttribute { key: "icon", value: prop value }
+
+instance Attr Head_ Icon String where
+  attr Icon value = unsafeAttribute { key: "icon", value: prop value }
+
+instance Attr Header_ Icon String where
+  attr Icon value = unsafeAttribute { key: "icon", value: prop value }
+
+instance Attr Hr_ Icon String where
+  attr Icon value = unsafeAttribute { key: "icon", value: prop value }
+
+instance Attr Html_ Icon String where
+  attr Icon value = unsafeAttribute { key: "icon", value: prop value }
+
+instance Attr I_ Icon String where
+  attr Icon value = unsafeAttribute { key: "icon", value: prop value }
+
+instance Attr Iframe_ Icon String where
+  attr Icon value = unsafeAttribute { key: "icon", value: prop value }
+
+instance Attr Img_ Icon String where
+  attr Icon value = unsafeAttribute { key: "icon", value: prop value }
+
+instance Attr Input_ Icon String where
+  attr Icon value = unsafeAttribute { key: "icon", value: prop value }
+
+instance Attr Ins_ Icon String where
+  attr Icon value = unsafeAttribute { key: "icon", value: prop value }
+
+instance Attr Kbd_ Icon String where
+  attr Icon value = unsafeAttribute { key: "icon", value: prop value }
+
+instance Attr Label_ Icon String where
+  attr Icon value = unsafeAttribute { key: "icon", value: prop value }
+
+instance Attr Legend_ Icon String where
+  attr Icon value = unsafeAttribute { key: "icon", value: prop value }
+
+instance Attr Li_ Icon String where
+  attr Icon value = unsafeAttribute { key: "icon", value: prop value }
+
+instance Attr Link_ Icon String where
+  attr Icon value = unsafeAttribute { key: "icon", value: prop value }
+
+instance Attr Main_ Icon String where
+  attr Icon value = unsafeAttribute { key: "icon", value: prop value }
+
+instance Attr Map_ Icon String where
+  attr Icon value = unsafeAttribute { key: "icon", value: prop value }
+
+instance Attr Mark_ Icon String where
+  attr Icon value = unsafeAttribute { key: "icon", value: prop value }
+
+instance Attr Meta_ Icon String where
+  attr Icon value = unsafeAttribute { key: "icon", value: prop value }
+
+instance Attr Meter_ Icon String where
+  attr Icon value = unsafeAttribute { key: "icon", value: prop value }
+
+instance Attr Nav_ Icon String where
+  attr Icon value = unsafeAttribute { key: "icon", value: prop value }
+
+instance Attr Noframes_ Icon String where
+  attr Icon value = unsafeAttribute { key: "icon", value: prop value }
+
+instance Attr Noscript_ Icon String where
+  attr Icon value = unsafeAttribute { key: "icon", value: prop value }
+
+instance Attr Object_ Icon String where
+  attr Icon value = unsafeAttribute { key: "icon", value: prop value }
+
+instance Attr Ol_ Icon String where
+  attr Icon value = unsafeAttribute { key: "icon", value: prop value }
+
+instance Attr Optgroup_ Icon String where
+  attr Icon value = unsafeAttribute { key: "icon", value: prop value }
+
+instance Attr Option_ Icon String where
+  attr Icon value = unsafeAttribute { key: "icon", value: prop value }
+
+instance Attr Output_ Icon String where
+  attr Icon value = unsafeAttribute { key: "icon", value: prop value }
+
+instance Attr P_ Icon String where
+  attr Icon value = unsafeAttribute { key: "icon", value: prop value }
+
+instance Attr Param_ Icon String where
+  attr Icon value = unsafeAttribute { key: "icon", value: prop value }
+
+instance Attr Picture_ Icon String where
+  attr Icon value = unsafeAttribute { key: "icon", value: prop value }
+
+instance Attr Pre_ Icon String where
+  attr Icon value = unsafeAttribute { key: "icon", value: prop value }
+
+instance Attr Progress_ Icon String where
+  attr Icon value = unsafeAttribute { key: "icon", value: prop value }
+
+instance Attr Q_ Icon String where
+  attr Icon value = unsafeAttribute { key: "icon", value: prop value }
+
+instance Attr Rp_ Icon String where
+  attr Icon value = unsafeAttribute { key: "icon", value: prop value }
+
+instance Attr Rt_ Icon String where
+  attr Icon value = unsafeAttribute { key: "icon", value: prop value }
+
+instance Attr Ruby_ Icon String where
+  attr Icon value = unsafeAttribute { key: "icon", value: prop value }
+
+instance Attr S_ Icon String where
+  attr Icon value = unsafeAttribute { key: "icon", value: prop value }
+
+instance Attr Samp_ Icon String where
+  attr Icon value = unsafeAttribute { key: "icon", value: prop value }
+
+instance Attr Script_ Icon String where
+  attr Icon value = unsafeAttribute { key: "icon", value: prop value }
+
+instance Attr Section_ Icon String where
+  attr Icon value = unsafeAttribute { key: "icon", value: prop value }
+
+instance Attr Select_ Icon String where
+  attr Icon value = unsafeAttribute { key: "icon", value: prop value }
+
+instance Attr Small_ Icon String where
+  attr Icon value = unsafeAttribute { key: "icon", value: prop value }
+
+instance Attr Source_ Icon String where
+  attr Icon value = unsafeAttribute { key: "icon", value: prop value }
+
+instance Attr Span_ Icon String where
+  attr Icon value = unsafeAttribute { key: "icon", value: prop value }
+
+instance Attr Strike_ Icon String where
+  attr Icon value = unsafeAttribute { key: "icon", value: prop value }
+
+instance Attr Strong_ Icon String where
+  attr Icon value = unsafeAttribute { key: "icon", value: prop value }
+
+instance Attr Style_ Icon String where
+  attr Icon value = unsafeAttribute { key: "icon", value: prop value }
+
+instance Attr Sub_ Icon String where
+  attr Icon value = unsafeAttribute { key: "icon", value: prop value }
+
+instance Attr Summary_ Icon String where
+  attr Icon value = unsafeAttribute { key: "icon", value: prop value }
+
+instance Attr Sup_ Icon String where
+  attr Icon value = unsafeAttribute { key: "icon", value: prop value }
+
+instance Attr Svg_ Icon String where
+  attr Icon value = unsafeAttribute { key: "icon", value: prop value }
+
+instance Attr Table_ Icon String where
+  attr Icon value = unsafeAttribute { key: "icon", value: prop value }
+
+instance Attr Tbody_ Icon String where
+  attr Icon value = unsafeAttribute { key: "icon", value: prop value }
+
+instance Attr Td_ Icon String where
+  attr Icon value = unsafeAttribute { key: "icon", value: prop value }
+
+instance Attr Template_ Icon String where
+  attr Icon value = unsafeAttribute { key: "icon", value: prop value }
+
+instance Attr Textarea_ Icon String where
+  attr Icon value = unsafeAttribute { key: "icon", value: prop value }
+
+instance Attr Tfoot_ Icon String where
+  attr Icon value = unsafeAttribute { key: "icon", value: prop value }
+
+instance Attr Th_ Icon String where
+  attr Icon value = unsafeAttribute { key: "icon", value: prop value }
+
+instance Attr Thead_ Icon String where
+  attr Icon value = unsafeAttribute { key: "icon", value: prop value }
+
+instance Attr Time_ Icon String where
+  attr Icon value = unsafeAttribute { key: "icon", value: prop value }
+
+instance Attr Title_ Icon String where
+  attr Icon value = unsafeAttribute { key: "icon", value: prop value }
+
+instance Attr Tr_ Icon String where
+  attr Icon value = unsafeAttribute { key: "icon", value: prop value }
+
+instance Attr Track_ Icon String where
+  attr Icon value = unsafeAttribute { key: "icon", value: prop value }
+
+instance Attr Tt_ Icon String where
+  attr Icon value = unsafeAttribute { key: "icon", value: prop value }
+
+instance Attr U_ Icon String where
+  attr Icon value = unsafeAttribute { key: "icon", value: prop value }
+
+instance Attr Ul_ Icon String where
+  attr Icon value = unsafeAttribute { key: "icon", value: prop value }
+
+instance Attr Var_ Icon String where
+  attr Icon value = unsafeAttribute { key: "icon", value: prop value }
+
+instance Attr Video_ Icon String where
+  attr Icon value = unsafeAttribute { key: "icon", value: prop value }
+
+instance Attr Wbr_ Icon String where
+  attr Icon value = unsafeAttribute { key: "icon", value: prop value }
+
+instance Attr A_ Id String where
+  attr Id value = unsafeAttribute { key: "id", value: prop value }
+
+instance Attr Abbr_ Id String where
+  attr Id value = unsafeAttribute { key: "id", value: prop value }
+
+instance Attr Acronym_ Id String where
+  attr Id value = unsafeAttribute { key: "id", value: prop value }
+
+instance Attr Address_ Id String where
+  attr Id value = unsafeAttribute { key: "id", value: prop value }
+
+instance Attr Applet_ Id String where
+  attr Id value = unsafeAttribute { key: "id", value: prop value }
+
+instance Attr Area_ Id String where
+  attr Id value = unsafeAttribute { key: "id", value: prop value }
+
+instance Attr Article_ Id String where
+  attr Id value = unsafeAttribute { key: "id", value: prop value }
+
+instance Attr Aside_ Id String where
+  attr Id value = unsafeAttribute { key: "id", value: prop value }
+
+instance Attr Audio_ Id String where
+  attr Id value = unsafeAttribute { key: "id", value: prop value }
+
+instance Attr B_ Id String where
+  attr Id value = unsafeAttribute { key: "id", value: prop value }
+
+instance Attr Base_ Id String where
+  attr Id value = unsafeAttribute { key: "id", value: prop value }
+
+instance Attr Basefont_ Id String where
+  attr Id value = unsafeAttribute { key: "id", value: prop value }
+
+instance Attr Bdi_ Id String where
+  attr Id value = unsafeAttribute { key: "id", value: prop value }
+
+instance Attr Bdo_ Id String where
+  attr Id value = unsafeAttribute { key: "id", value: prop value }
+
+instance Attr Big_ Id String where
+  attr Id value = unsafeAttribute { key: "id", value: prop value }
+
+instance Attr Blockquote_ Id String where
+  attr Id value = unsafeAttribute { key: "id", value: prop value }
+
+instance Attr Body_ Id String where
+  attr Id value = unsafeAttribute { key: "id", value: prop value }
+
+instance Attr Br_ Id String where
+  attr Id value = unsafeAttribute { key: "id", value: prop value }
+
+instance Attr Button_ Id String where
+  attr Id value = unsafeAttribute { key: "id", value: prop value }
+
+instance Attr Canvas_ Id String where
+  attr Id value = unsafeAttribute { key: "id", value: prop value }
+
+instance Attr Caption_ Id String where
+  attr Id value = unsafeAttribute { key: "id", value: prop value }
+
+instance Attr Center_ Id String where
+  attr Id value = unsafeAttribute { key: "id", value: prop value }
+
+instance Attr Cite_ Id String where
+  attr Id value = unsafeAttribute { key: "id", value: prop value }
+
+instance Attr Code_ Id String where
+  attr Id value = unsafeAttribute { key: "id", value: prop value }
+
+instance Attr Col_ Id String where
+  attr Id value = unsafeAttribute { key: "id", value: prop value }
+
+instance Attr Colgroup_ Id String where
+  attr Id value = unsafeAttribute { key: "id", value: prop value }
+
+instance Attr Xdata_ Id String where
+  attr Id value = unsafeAttribute { key: "id", value: prop value }
+
+instance Attr Datalist_ Id String where
+  attr Id value = unsafeAttribute { key: "id", value: prop value }
+
+instance Attr Dd_ Id String where
+  attr Id value = unsafeAttribute { key: "id", value: prop value }
+
+instance Attr Del_ Id String where
+  attr Id value = unsafeAttribute { key: "id", value: prop value }
+
+instance Attr Details_ Id String where
+  attr Id value = unsafeAttribute { key: "id", value: prop value }
+
+instance Attr Dfn_ Id String where
+  attr Id value = unsafeAttribute { key: "id", value: prop value }
+
+instance Attr Dialog_ Id String where
+  attr Id value = unsafeAttribute { key: "id", value: prop value }
+
+instance Attr Dir_ Id String where
+  attr Id value = unsafeAttribute { key: "id", value: prop value }
+
+instance Attr Div_ Id String where
+  attr Id value = unsafeAttribute { key: "id", value: prop value }
+
+instance Attr Dl_ Id String where
+  attr Id value = unsafeAttribute { key: "id", value: prop value }
+
+instance Attr Dt_ Id String where
+  attr Id value = unsafeAttribute { key: "id", value: prop value }
+
+instance Attr Em_ Id String where
+  attr Id value = unsafeAttribute { key: "id", value: prop value }
+
+instance Attr Embed_ Id String where
+  attr Id value = unsafeAttribute { key: "id", value: prop value }
+
+instance Attr Fieldset_ Id String where
+  attr Id value = unsafeAttribute { key: "id", value: prop value }
+
+instance Attr Figcaption_ Id String where
+  attr Id value = unsafeAttribute { key: "id", value: prop value }
+
+instance Attr Figure_ Id String where
+  attr Id value = unsafeAttribute { key: "id", value: prop value }
+
+instance Attr Font_ Id String where
+  attr Id value = unsafeAttribute { key: "id", value: prop value }
+
+instance Attr Footer_ Id String where
+  attr Id value = unsafeAttribute { key: "id", value: prop value }
+
+instance Attr Form_ Id String where
+  attr Id value = unsafeAttribute { key: "id", value: prop value }
+
+instance Attr Frame_ Id String where
+  attr Id value = unsafeAttribute { key: "id", value: prop value }
+
+instance Attr Frameset_ Id String where
+  attr Id value = unsafeAttribute { key: "id", value: prop value }
+
+instance Attr H1_ Id String where
+  attr Id value = unsafeAttribute { key: "id", value: prop value }
+
+instance Attr H2_ Id String where
+  attr Id value = unsafeAttribute { key: "id", value: prop value }
+
+instance Attr H3_ Id String where
+  attr Id value = unsafeAttribute { key: "id", value: prop value }
+
+instance Attr H4_ Id String where
+  attr Id value = unsafeAttribute { key: "id", value: prop value }
+
+instance Attr H5_ Id String where
+  attr Id value = unsafeAttribute { key: "id", value: prop value }
+
+instance Attr H6_ Id String where
+  attr Id value = unsafeAttribute { key: "id", value: prop value }
+
+instance Attr Head_ Id String where
+  attr Id value = unsafeAttribute { key: "id", value: prop value }
+
+instance Attr Header_ Id String where
+  attr Id value = unsafeAttribute { key: "id", value: prop value }
+
+instance Attr Hr_ Id String where
+  attr Id value = unsafeAttribute { key: "id", value: prop value }
+
+instance Attr Html_ Id String where
+  attr Id value = unsafeAttribute { key: "id", value: prop value }
+
+instance Attr I_ Id String where
+  attr Id value = unsafeAttribute { key: "id", value: prop value }
+
+instance Attr Iframe_ Id String where
+  attr Id value = unsafeAttribute { key: "id", value: prop value }
+
+instance Attr Img_ Id String where
+  attr Id value = unsafeAttribute { key: "id", value: prop value }
+
+instance Attr Input_ Id String where
+  attr Id value = unsafeAttribute { key: "id", value: prop value }
+
+instance Attr Ins_ Id String where
+  attr Id value = unsafeAttribute { key: "id", value: prop value }
+
+instance Attr Kbd_ Id String where
+  attr Id value = unsafeAttribute { key: "id", value: prop value }
+
+instance Attr Label_ Id String where
+  attr Id value = unsafeAttribute { key: "id", value: prop value }
+
+instance Attr Legend_ Id String where
+  attr Id value = unsafeAttribute { key: "id", value: prop value }
+
+instance Attr Li_ Id String where
+  attr Id value = unsafeAttribute { key: "id", value: prop value }
+
+instance Attr Link_ Id String where
+  attr Id value = unsafeAttribute { key: "id", value: prop value }
+
+instance Attr Main_ Id String where
+  attr Id value = unsafeAttribute { key: "id", value: prop value }
+
+instance Attr Map_ Id String where
+  attr Id value = unsafeAttribute { key: "id", value: prop value }
+
+instance Attr Mark_ Id String where
+  attr Id value = unsafeAttribute { key: "id", value: prop value }
+
+instance Attr Meta_ Id String where
+  attr Id value = unsafeAttribute { key: "id", value: prop value }
+
+instance Attr Meter_ Id String where
+  attr Id value = unsafeAttribute { key: "id", value: prop value }
+
+instance Attr Nav_ Id String where
+  attr Id value = unsafeAttribute { key: "id", value: prop value }
+
+instance Attr Noframes_ Id String where
+  attr Id value = unsafeAttribute { key: "id", value: prop value }
+
+instance Attr Noscript_ Id String where
+  attr Id value = unsafeAttribute { key: "id", value: prop value }
+
+instance Attr Object_ Id String where
+  attr Id value = unsafeAttribute { key: "id", value: prop value }
+
+instance Attr Ol_ Id String where
+  attr Id value = unsafeAttribute { key: "id", value: prop value }
+
+instance Attr Optgroup_ Id String where
+  attr Id value = unsafeAttribute { key: "id", value: prop value }
+
+instance Attr Option_ Id String where
+  attr Id value = unsafeAttribute { key: "id", value: prop value }
+
+instance Attr Output_ Id String where
+  attr Id value = unsafeAttribute { key: "id", value: prop value }
+
+instance Attr P_ Id String where
+  attr Id value = unsafeAttribute { key: "id", value: prop value }
+
+instance Attr Param_ Id String where
+  attr Id value = unsafeAttribute { key: "id", value: prop value }
+
+instance Attr Picture_ Id String where
+  attr Id value = unsafeAttribute { key: "id", value: prop value }
+
+instance Attr Pre_ Id String where
+  attr Id value = unsafeAttribute { key: "id", value: prop value }
+
+instance Attr Progress_ Id String where
+  attr Id value = unsafeAttribute { key: "id", value: prop value }
+
+instance Attr Q_ Id String where
+  attr Id value = unsafeAttribute { key: "id", value: prop value }
+
+instance Attr Rp_ Id String where
+  attr Id value = unsafeAttribute { key: "id", value: prop value }
+
+instance Attr Rt_ Id String where
+  attr Id value = unsafeAttribute { key: "id", value: prop value }
+
+instance Attr Ruby_ Id String where
+  attr Id value = unsafeAttribute { key: "id", value: prop value }
+
+instance Attr S_ Id String where
+  attr Id value = unsafeAttribute { key: "id", value: prop value }
+
+instance Attr Samp_ Id String where
+  attr Id value = unsafeAttribute { key: "id", value: prop value }
+
+instance Attr Script_ Id String where
+  attr Id value = unsafeAttribute { key: "id", value: prop value }
+
+instance Attr Section_ Id String where
+  attr Id value = unsafeAttribute { key: "id", value: prop value }
+
+instance Attr Select_ Id String where
+  attr Id value = unsafeAttribute { key: "id", value: prop value }
+
+instance Attr Small_ Id String where
+  attr Id value = unsafeAttribute { key: "id", value: prop value }
+
+instance Attr Source_ Id String where
+  attr Id value = unsafeAttribute { key: "id", value: prop value }
+
+instance Attr Span_ Id String where
+  attr Id value = unsafeAttribute { key: "id", value: prop value }
+
+instance Attr Strike_ Id String where
+  attr Id value = unsafeAttribute { key: "id", value: prop value }
+
+instance Attr Strong_ Id String where
+  attr Id value = unsafeAttribute { key: "id", value: prop value }
+
+instance Attr Style_ Id String where
+  attr Id value = unsafeAttribute { key: "id", value: prop value }
+
+instance Attr Sub_ Id String where
+  attr Id value = unsafeAttribute { key: "id", value: prop value }
+
+instance Attr Summary_ Id String where
+  attr Id value = unsafeAttribute { key: "id", value: prop value }
+
+instance Attr Sup_ Id String where
+  attr Id value = unsafeAttribute { key: "id", value: prop value }
+
+instance Attr Svg_ Id String where
+  attr Id value = unsafeAttribute { key: "id", value: prop value }
+
+instance Attr Table_ Id String where
+  attr Id value = unsafeAttribute { key: "id", value: prop value }
+
+instance Attr Tbody_ Id String where
+  attr Id value = unsafeAttribute { key: "id", value: prop value }
+
+instance Attr Td_ Id String where
+  attr Id value = unsafeAttribute { key: "id", value: prop value }
+
+instance Attr Template_ Id String where
+  attr Id value = unsafeAttribute { key: "id", value: prop value }
+
+instance Attr Textarea_ Id String where
+  attr Id value = unsafeAttribute { key: "id", value: prop value }
+
+instance Attr Tfoot_ Id String where
+  attr Id value = unsafeAttribute { key: "id", value: prop value }
+
+instance Attr Th_ Id String where
+  attr Id value = unsafeAttribute { key: "id", value: prop value }
+
+instance Attr Thead_ Id String where
+  attr Id value = unsafeAttribute { key: "id", value: prop value }
+
+instance Attr Time_ Id String where
+  attr Id value = unsafeAttribute { key: "id", value: prop value }
+
+instance Attr Title_ Id String where
+  attr Id value = unsafeAttribute { key: "id", value: prop value }
+
+instance Attr Tr_ Id String where
+  attr Id value = unsafeAttribute { key: "id", value: prop value }
+
+instance Attr Track_ Id String where
+  attr Id value = unsafeAttribute { key: "id", value: prop value }
+
+instance Attr Tt_ Id String where
+  attr Id value = unsafeAttribute { key: "id", value: prop value }
+
+instance Attr U_ Id String where
+  attr Id value = unsafeAttribute { key: "id", value: prop value }
+
+instance Attr Ul_ Id String where
+  attr Id value = unsafeAttribute { key: "id", value: prop value }
+
+instance Attr Var_ Id String where
+  attr Id value = unsafeAttribute { key: "id", value: prop value }
+
+instance Attr Video_ Id String where
+  attr Id value = unsafeAttribute { key: "id", value: prop value }
+
+instance Attr Wbr_ Id String where
+  attr Id value = unsafeAttribute { key: "id", value: prop value }
 
 instance Attr Iframe_ Importance String where
   attr Importance value = unsafeAttribute { key: "importance", value: prop value }
@@ -1744,6 +5770,738 @@ instance Attr Textarea_ Inputmode String where
 instance Attr Img_ Ismap String where
   attr Ismap value = unsafeAttribute { key: "ismap", value: prop value }
 
+instance Attr A_ Itemprop String where
+  attr Itemprop value = unsafeAttribute { key: "itemprop", value: prop value }
+
+instance Attr Abbr_ Itemprop String where
+  attr Itemprop value = unsafeAttribute { key: "itemprop", value: prop value }
+
+instance Attr Acronym_ Itemprop String where
+  attr Itemprop value = unsafeAttribute { key: "itemprop", value: prop value }
+
+instance Attr Address_ Itemprop String where
+  attr Itemprop value = unsafeAttribute { key: "itemprop", value: prop value }
+
+instance Attr Applet_ Itemprop String where
+  attr Itemprop value = unsafeAttribute { key: "itemprop", value: prop value }
+
+instance Attr Area_ Itemprop String where
+  attr Itemprop value = unsafeAttribute { key: "itemprop", value: prop value }
+
+instance Attr Article_ Itemprop String where
+  attr Itemprop value = unsafeAttribute { key: "itemprop", value: prop value }
+
+instance Attr Aside_ Itemprop String where
+  attr Itemprop value = unsafeAttribute { key: "itemprop", value: prop value }
+
+instance Attr Audio_ Itemprop String where
+  attr Itemprop value = unsafeAttribute { key: "itemprop", value: prop value }
+
+instance Attr B_ Itemprop String where
+  attr Itemprop value = unsafeAttribute { key: "itemprop", value: prop value }
+
+instance Attr Base_ Itemprop String where
+  attr Itemprop value = unsafeAttribute { key: "itemprop", value: prop value }
+
+instance Attr Basefont_ Itemprop String where
+  attr Itemprop value = unsafeAttribute { key: "itemprop", value: prop value }
+
+instance Attr Bdi_ Itemprop String where
+  attr Itemprop value = unsafeAttribute { key: "itemprop", value: prop value }
+
+instance Attr Bdo_ Itemprop String where
+  attr Itemprop value = unsafeAttribute { key: "itemprop", value: prop value }
+
+instance Attr Big_ Itemprop String where
+  attr Itemprop value = unsafeAttribute { key: "itemprop", value: prop value }
+
+instance Attr Blockquote_ Itemprop String where
+  attr Itemprop value = unsafeAttribute { key: "itemprop", value: prop value }
+
+instance Attr Body_ Itemprop String where
+  attr Itemprop value = unsafeAttribute { key: "itemprop", value: prop value }
+
+instance Attr Br_ Itemprop String where
+  attr Itemprop value = unsafeAttribute { key: "itemprop", value: prop value }
+
+instance Attr Button_ Itemprop String where
+  attr Itemprop value = unsafeAttribute { key: "itemprop", value: prop value }
+
+instance Attr Canvas_ Itemprop String where
+  attr Itemprop value = unsafeAttribute { key: "itemprop", value: prop value }
+
+instance Attr Caption_ Itemprop String where
+  attr Itemprop value = unsafeAttribute { key: "itemprop", value: prop value }
+
+instance Attr Center_ Itemprop String where
+  attr Itemprop value = unsafeAttribute { key: "itemprop", value: prop value }
+
+instance Attr Cite_ Itemprop String where
+  attr Itemprop value = unsafeAttribute { key: "itemprop", value: prop value }
+
+instance Attr Code_ Itemprop String where
+  attr Itemprop value = unsafeAttribute { key: "itemprop", value: prop value }
+
+instance Attr Col_ Itemprop String where
+  attr Itemprop value = unsafeAttribute { key: "itemprop", value: prop value }
+
+instance Attr Colgroup_ Itemprop String where
+  attr Itemprop value = unsafeAttribute { key: "itemprop", value: prop value }
+
+instance Attr Xdata_ Itemprop String where
+  attr Itemprop value = unsafeAttribute { key: "itemprop", value: prop value }
+
+instance Attr Datalist_ Itemprop String where
+  attr Itemprop value = unsafeAttribute { key: "itemprop", value: prop value }
+
+instance Attr Dd_ Itemprop String where
+  attr Itemprop value = unsafeAttribute { key: "itemprop", value: prop value }
+
+instance Attr Del_ Itemprop String where
+  attr Itemprop value = unsafeAttribute { key: "itemprop", value: prop value }
+
+instance Attr Details_ Itemprop String where
+  attr Itemprop value = unsafeAttribute { key: "itemprop", value: prop value }
+
+instance Attr Dfn_ Itemprop String where
+  attr Itemprop value = unsafeAttribute { key: "itemprop", value: prop value }
+
+instance Attr Dialog_ Itemprop String where
+  attr Itemprop value = unsafeAttribute { key: "itemprop", value: prop value }
+
+instance Attr Dir_ Itemprop String where
+  attr Itemprop value = unsafeAttribute { key: "itemprop", value: prop value }
+
+instance Attr Div_ Itemprop String where
+  attr Itemprop value = unsafeAttribute { key: "itemprop", value: prop value }
+
+instance Attr Dl_ Itemprop String where
+  attr Itemprop value = unsafeAttribute { key: "itemprop", value: prop value }
+
+instance Attr Dt_ Itemprop String where
+  attr Itemprop value = unsafeAttribute { key: "itemprop", value: prop value }
+
+instance Attr Em_ Itemprop String where
+  attr Itemprop value = unsafeAttribute { key: "itemprop", value: prop value }
+
+instance Attr Embed_ Itemprop String where
+  attr Itemprop value = unsafeAttribute { key: "itemprop", value: prop value }
+
+instance Attr Fieldset_ Itemprop String where
+  attr Itemprop value = unsafeAttribute { key: "itemprop", value: prop value }
+
+instance Attr Figcaption_ Itemprop String where
+  attr Itemprop value = unsafeAttribute { key: "itemprop", value: prop value }
+
+instance Attr Figure_ Itemprop String where
+  attr Itemprop value = unsafeAttribute { key: "itemprop", value: prop value }
+
+instance Attr Font_ Itemprop String where
+  attr Itemprop value = unsafeAttribute { key: "itemprop", value: prop value }
+
+instance Attr Footer_ Itemprop String where
+  attr Itemprop value = unsafeAttribute { key: "itemprop", value: prop value }
+
+instance Attr Form_ Itemprop String where
+  attr Itemprop value = unsafeAttribute { key: "itemprop", value: prop value }
+
+instance Attr Frame_ Itemprop String where
+  attr Itemprop value = unsafeAttribute { key: "itemprop", value: prop value }
+
+instance Attr Frameset_ Itemprop String where
+  attr Itemprop value = unsafeAttribute { key: "itemprop", value: prop value }
+
+instance Attr H1_ Itemprop String where
+  attr Itemprop value = unsafeAttribute { key: "itemprop", value: prop value }
+
+instance Attr H2_ Itemprop String where
+  attr Itemprop value = unsafeAttribute { key: "itemprop", value: prop value }
+
+instance Attr H3_ Itemprop String where
+  attr Itemprop value = unsafeAttribute { key: "itemprop", value: prop value }
+
+instance Attr H4_ Itemprop String where
+  attr Itemprop value = unsafeAttribute { key: "itemprop", value: prop value }
+
+instance Attr H5_ Itemprop String where
+  attr Itemprop value = unsafeAttribute { key: "itemprop", value: prop value }
+
+instance Attr H6_ Itemprop String where
+  attr Itemprop value = unsafeAttribute { key: "itemprop", value: prop value }
+
+instance Attr Head_ Itemprop String where
+  attr Itemprop value = unsafeAttribute { key: "itemprop", value: prop value }
+
+instance Attr Header_ Itemprop String where
+  attr Itemprop value = unsafeAttribute { key: "itemprop", value: prop value }
+
+instance Attr Hr_ Itemprop String where
+  attr Itemprop value = unsafeAttribute { key: "itemprop", value: prop value }
+
+instance Attr Html_ Itemprop String where
+  attr Itemprop value = unsafeAttribute { key: "itemprop", value: prop value }
+
+instance Attr I_ Itemprop String where
+  attr Itemprop value = unsafeAttribute { key: "itemprop", value: prop value }
+
+instance Attr Iframe_ Itemprop String where
+  attr Itemprop value = unsafeAttribute { key: "itemprop", value: prop value }
+
+instance Attr Img_ Itemprop String where
+  attr Itemprop value = unsafeAttribute { key: "itemprop", value: prop value }
+
+instance Attr Input_ Itemprop String where
+  attr Itemprop value = unsafeAttribute { key: "itemprop", value: prop value }
+
+instance Attr Ins_ Itemprop String where
+  attr Itemprop value = unsafeAttribute { key: "itemprop", value: prop value }
+
+instance Attr Kbd_ Itemprop String where
+  attr Itemprop value = unsafeAttribute { key: "itemprop", value: prop value }
+
+instance Attr Label_ Itemprop String where
+  attr Itemprop value = unsafeAttribute { key: "itemprop", value: prop value }
+
+instance Attr Legend_ Itemprop String where
+  attr Itemprop value = unsafeAttribute { key: "itemprop", value: prop value }
+
+instance Attr Li_ Itemprop String where
+  attr Itemprop value = unsafeAttribute { key: "itemprop", value: prop value }
+
+instance Attr Link_ Itemprop String where
+  attr Itemprop value = unsafeAttribute { key: "itemprop", value: prop value }
+
+instance Attr Main_ Itemprop String where
+  attr Itemprop value = unsafeAttribute { key: "itemprop", value: prop value }
+
+instance Attr Map_ Itemprop String where
+  attr Itemprop value = unsafeAttribute { key: "itemprop", value: prop value }
+
+instance Attr Mark_ Itemprop String where
+  attr Itemprop value = unsafeAttribute { key: "itemprop", value: prop value }
+
+instance Attr Meta_ Itemprop String where
+  attr Itemprop value = unsafeAttribute { key: "itemprop", value: prop value }
+
+instance Attr Meter_ Itemprop String where
+  attr Itemprop value = unsafeAttribute { key: "itemprop", value: prop value }
+
+instance Attr Nav_ Itemprop String where
+  attr Itemprop value = unsafeAttribute { key: "itemprop", value: prop value }
+
+instance Attr Noframes_ Itemprop String where
+  attr Itemprop value = unsafeAttribute { key: "itemprop", value: prop value }
+
+instance Attr Noscript_ Itemprop String where
+  attr Itemprop value = unsafeAttribute { key: "itemprop", value: prop value }
+
+instance Attr Object_ Itemprop String where
+  attr Itemprop value = unsafeAttribute { key: "itemprop", value: prop value }
+
+instance Attr Ol_ Itemprop String where
+  attr Itemprop value = unsafeAttribute { key: "itemprop", value: prop value }
+
+instance Attr Optgroup_ Itemprop String where
+  attr Itemprop value = unsafeAttribute { key: "itemprop", value: prop value }
+
+instance Attr Option_ Itemprop String where
+  attr Itemprop value = unsafeAttribute { key: "itemprop", value: prop value }
+
+instance Attr Output_ Itemprop String where
+  attr Itemprop value = unsafeAttribute { key: "itemprop", value: prop value }
+
+instance Attr P_ Itemprop String where
+  attr Itemprop value = unsafeAttribute { key: "itemprop", value: prop value }
+
+instance Attr Param_ Itemprop String where
+  attr Itemprop value = unsafeAttribute { key: "itemprop", value: prop value }
+
+instance Attr Picture_ Itemprop String where
+  attr Itemprop value = unsafeAttribute { key: "itemprop", value: prop value }
+
+instance Attr Pre_ Itemprop String where
+  attr Itemprop value = unsafeAttribute { key: "itemprop", value: prop value }
+
+instance Attr Progress_ Itemprop String where
+  attr Itemprop value = unsafeAttribute { key: "itemprop", value: prop value }
+
+instance Attr Q_ Itemprop String where
+  attr Itemprop value = unsafeAttribute { key: "itemprop", value: prop value }
+
+instance Attr Rp_ Itemprop String where
+  attr Itemprop value = unsafeAttribute { key: "itemprop", value: prop value }
+
+instance Attr Rt_ Itemprop String where
+  attr Itemprop value = unsafeAttribute { key: "itemprop", value: prop value }
+
+instance Attr Ruby_ Itemprop String where
+  attr Itemprop value = unsafeAttribute { key: "itemprop", value: prop value }
+
+instance Attr S_ Itemprop String where
+  attr Itemprop value = unsafeAttribute { key: "itemprop", value: prop value }
+
+instance Attr Samp_ Itemprop String where
+  attr Itemprop value = unsafeAttribute { key: "itemprop", value: prop value }
+
+instance Attr Script_ Itemprop String where
+  attr Itemprop value = unsafeAttribute { key: "itemprop", value: prop value }
+
+instance Attr Section_ Itemprop String where
+  attr Itemprop value = unsafeAttribute { key: "itemprop", value: prop value }
+
+instance Attr Select_ Itemprop String where
+  attr Itemprop value = unsafeAttribute { key: "itemprop", value: prop value }
+
+instance Attr Small_ Itemprop String where
+  attr Itemprop value = unsafeAttribute { key: "itemprop", value: prop value }
+
+instance Attr Source_ Itemprop String where
+  attr Itemprop value = unsafeAttribute { key: "itemprop", value: prop value }
+
+instance Attr Span_ Itemprop String where
+  attr Itemprop value = unsafeAttribute { key: "itemprop", value: prop value }
+
+instance Attr Strike_ Itemprop String where
+  attr Itemprop value = unsafeAttribute { key: "itemprop", value: prop value }
+
+instance Attr Strong_ Itemprop String where
+  attr Itemprop value = unsafeAttribute { key: "itemprop", value: prop value }
+
+instance Attr Style_ Itemprop String where
+  attr Itemprop value = unsafeAttribute { key: "itemprop", value: prop value }
+
+instance Attr Sub_ Itemprop String where
+  attr Itemprop value = unsafeAttribute { key: "itemprop", value: prop value }
+
+instance Attr Summary_ Itemprop String where
+  attr Itemprop value = unsafeAttribute { key: "itemprop", value: prop value }
+
+instance Attr Sup_ Itemprop String where
+  attr Itemprop value = unsafeAttribute { key: "itemprop", value: prop value }
+
+instance Attr Svg_ Itemprop String where
+  attr Itemprop value = unsafeAttribute { key: "itemprop", value: prop value }
+
+instance Attr Table_ Itemprop String where
+  attr Itemprop value = unsafeAttribute { key: "itemprop", value: prop value }
+
+instance Attr Tbody_ Itemprop String where
+  attr Itemprop value = unsafeAttribute { key: "itemprop", value: prop value }
+
+instance Attr Td_ Itemprop String where
+  attr Itemprop value = unsafeAttribute { key: "itemprop", value: prop value }
+
+instance Attr Template_ Itemprop String where
+  attr Itemprop value = unsafeAttribute { key: "itemprop", value: prop value }
+
+instance Attr Textarea_ Itemprop String where
+  attr Itemprop value = unsafeAttribute { key: "itemprop", value: prop value }
+
+instance Attr Tfoot_ Itemprop String where
+  attr Itemprop value = unsafeAttribute { key: "itemprop", value: prop value }
+
+instance Attr Th_ Itemprop String where
+  attr Itemprop value = unsafeAttribute { key: "itemprop", value: prop value }
+
+instance Attr Thead_ Itemprop String where
+  attr Itemprop value = unsafeAttribute { key: "itemprop", value: prop value }
+
+instance Attr Time_ Itemprop String where
+  attr Itemprop value = unsafeAttribute { key: "itemprop", value: prop value }
+
+instance Attr Title_ Itemprop String where
+  attr Itemprop value = unsafeAttribute { key: "itemprop", value: prop value }
+
+instance Attr Tr_ Itemprop String where
+  attr Itemprop value = unsafeAttribute { key: "itemprop", value: prop value }
+
+instance Attr Track_ Itemprop String where
+  attr Itemprop value = unsafeAttribute { key: "itemprop", value: prop value }
+
+instance Attr Tt_ Itemprop String where
+  attr Itemprop value = unsafeAttribute { key: "itemprop", value: prop value }
+
+instance Attr U_ Itemprop String where
+  attr Itemprop value = unsafeAttribute { key: "itemprop", value: prop value }
+
+instance Attr Ul_ Itemprop String where
+  attr Itemprop value = unsafeAttribute { key: "itemprop", value: prop value }
+
+instance Attr Var_ Itemprop String where
+  attr Itemprop value = unsafeAttribute { key: "itemprop", value: prop value }
+
+instance Attr Video_ Itemprop String where
+  attr Itemprop value = unsafeAttribute { key: "itemprop", value: prop value }
+
+instance Attr Wbr_ Itemprop String where
+  attr Itemprop value = unsafeAttribute { key: "itemprop", value: prop value }
+
+instance Attr A_ Keytype String where
+  attr Keytype value = unsafeAttribute { key: "keytype", value: prop value }
+
+instance Attr Abbr_ Keytype String where
+  attr Keytype value = unsafeAttribute { key: "keytype", value: prop value }
+
+instance Attr Acronym_ Keytype String where
+  attr Keytype value = unsafeAttribute { key: "keytype", value: prop value }
+
+instance Attr Address_ Keytype String where
+  attr Keytype value = unsafeAttribute { key: "keytype", value: prop value }
+
+instance Attr Applet_ Keytype String where
+  attr Keytype value = unsafeAttribute { key: "keytype", value: prop value }
+
+instance Attr Area_ Keytype String where
+  attr Keytype value = unsafeAttribute { key: "keytype", value: prop value }
+
+instance Attr Article_ Keytype String where
+  attr Keytype value = unsafeAttribute { key: "keytype", value: prop value }
+
+instance Attr Aside_ Keytype String where
+  attr Keytype value = unsafeAttribute { key: "keytype", value: prop value }
+
+instance Attr Audio_ Keytype String where
+  attr Keytype value = unsafeAttribute { key: "keytype", value: prop value }
+
+instance Attr B_ Keytype String where
+  attr Keytype value = unsafeAttribute { key: "keytype", value: prop value }
+
+instance Attr Base_ Keytype String where
+  attr Keytype value = unsafeAttribute { key: "keytype", value: prop value }
+
+instance Attr Basefont_ Keytype String where
+  attr Keytype value = unsafeAttribute { key: "keytype", value: prop value }
+
+instance Attr Bdi_ Keytype String where
+  attr Keytype value = unsafeAttribute { key: "keytype", value: prop value }
+
+instance Attr Bdo_ Keytype String where
+  attr Keytype value = unsafeAttribute { key: "keytype", value: prop value }
+
+instance Attr Big_ Keytype String where
+  attr Keytype value = unsafeAttribute { key: "keytype", value: prop value }
+
+instance Attr Blockquote_ Keytype String where
+  attr Keytype value = unsafeAttribute { key: "keytype", value: prop value }
+
+instance Attr Body_ Keytype String where
+  attr Keytype value = unsafeAttribute { key: "keytype", value: prop value }
+
+instance Attr Br_ Keytype String where
+  attr Keytype value = unsafeAttribute { key: "keytype", value: prop value }
+
+instance Attr Button_ Keytype String where
+  attr Keytype value = unsafeAttribute { key: "keytype", value: prop value }
+
+instance Attr Canvas_ Keytype String where
+  attr Keytype value = unsafeAttribute { key: "keytype", value: prop value }
+
+instance Attr Caption_ Keytype String where
+  attr Keytype value = unsafeAttribute { key: "keytype", value: prop value }
+
+instance Attr Center_ Keytype String where
+  attr Keytype value = unsafeAttribute { key: "keytype", value: prop value }
+
+instance Attr Cite_ Keytype String where
+  attr Keytype value = unsafeAttribute { key: "keytype", value: prop value }
+
+instance Attr Code_ Keytype String where
+  attr Keytype value = unsafeAttribute { key: "keytype", value: prop value }
+
+instance Attr Col_ Keytype String where
+  attr Keytype value = unsafeAttribute { key: "keytype", value: prop value }
+
+instance Attr Colgroup_ Keytype String where
+  attr Keytype value = unsafeAttribute { key: "keytype", value: prop value }
+
+instance Attr Xdata_ Keytype String where
+  attr Keytype value = unsafeAttribute { key: "keytype", value: prop value }
+
+instance Attr Datalist_ Keytype String where
+  attr Keytype value = unsafeAttribute { key: "keytype", value: prop value }
+
+instance Attr Dd_ Keytype String where
+  attr Keytype value = unsafeAttribute { key: "keytype", value: prop value }
+
+instance Attr Del_ Keytype String where
+  attr Keytype value = unsafeAttribute { key: "keytype", value: prop value }
+
+instance Attr Details_ Keytype String where
+  attr Keytype value = unsafeAttribute { key: "keytype", value: prop value }
+
+instance Attr Dfn_ Keytype String where
+  attr Keytype value = unsafeAttribute { key: "keytype", value: prop value }
+
+instance Attr Dialog_ Keytype String where
+  attr Keytype value = unsafeAttribute { key: "keytype", value: prop value }
+
+instance Attr Dir_ Keytype String where
+  attr Keytype value = unsafeAttribute { key: "keytype", value: prop value }
+
+instance Attr Div_ Keytype String where
+  attr Keytype value = unsafeAttribute { key: "keytype", value: prop value }
+
+instance Attr Dl_ Keytype String where
+  attr Keytype value = unsafeAttribute { key: "keytype", value: prop value }
+
+instance Attr Dt_ Keytype String where
+  attr Keytype value = unsafeAttribute { key: "keytype", value: prop value }
+
+instance Attr Em_ Keytype String where
+  attr Keytype value = unsafeAttribute { key: "keytype", value: prop value }
+
+instance Attr Embed_ Keytype String where
+  attr Keytype value = unsafeAttribute { key: "keytype", value: prop value }
+
+instance Attr Fieldset_ Keytype String where
+  attr Keytype value = unsafeAttribute { key: "keytype", value: prop value }
+
+instance Attr Figcaption_ Keytype String where
+  attr Keytype value = unsafeAttribute { key: "keytype", value: prop value }
+
+instance Attr Figure_ Keytype String where
+  attr Keytype value = unsafeAttribute { key: "keytype", value: prop value }
+
+instance Attr Font_ Keytype String where
+  attr Keytype value = unsafeAttribute { key: "keytype", value: prop value }
+
+instance Attr Footer_ Keytype String where
+  attr Keytype value = unsafeAttribute { key: "keytype", value: prop value }
+
+instance Attr Form_ Keytype String where
+  attr Keytype value = unsafeAttribute { key: "keytype", value: prop value }
+
+instance Attr Frame_ Keytype String where
+  attr Keytype value = unsafeAttribute { key: "keytype", value: prop value }
+
+instance Attr Frameset_ Keytype String where
+  attr Keytype value = unsafeAttribute { key: "keytype", value: prop value }
+
+instance Attr H1_ Keytype String where
+  attr Keytype value = unsafeAttribute { key: "keytype", value: prop value }
+
+instance Attr H2_ Keytype String where
+  attr Keytype value = unsafeAttribute { key: "keytype", value: prop value }
+
+instance Attr H3_ Keytype String where
+  attr Keytype value = unsafeAttribute { key: "keytype", value: prop value }
+
+instance Attr H4_ Keytype String where
+  attr Keytype value = unsafeAttribute { key: "keytype", value: prop value }
+
+instance Attr H5_ Keytype String where
+  attr Keytype value = unsafeAttribute { key: "keytype", value: prop value }
+
+instance Attr H6_ Keytype String where
+  attr Keytype value = unsafeAttribute { key: "keytype", value: prop value }
+
+instance Attr Head_ Keytype String where
+  attr Keytype value = unsafeAttribute { key: "keytype", value: prop value }
+
+instance Attr Header_ Keytype String where
+  attr Keytype value = unsafeAttribute { key: "keytype", value: prop value }
+
+instance Attr Hr_ Keytype String where
+  attr Keytype value = unsafeAttribute { key: "keytype", value: prop value }
+
+instance Attr Html_ Keytype String where
+  attr Keytype value = unsafeAttribute { key: "keytype", value: prop value }
+
+instance Attr I_ Keytype String where
+  attr Keytype value = unsafeAttribute { key: "keytype", value: prop value }
+
+instance Attr Iframe_ Keytype String where
+  attr Keytype value = unsafeAttribute { key: "keytype", value: prop value }
+
+instance Attr Img_ Keytype String where
+  attr Keytype value = unsafeAttribute { key: "keytype", value: prop value }
+
+instance Attr Input_ Keytype String where
+  attr Keytype value = unsafeAttribute { key: "keytype", value: prop value }
+
+instance Attr Ins_ Keytype String where
+  attr Keytype value = unsafeAttribute { key: "keytype", value: prop value }
+
+instance Attr Kbd_ Keytype String where
+  attr Keytype value = unsafeAttribute { key: "keytype", value: prop value }
+
+instance Attr Label_ Keytype String where
+  attr Keytype value = unsafeAttribute { key: "keytype", value: prop value }
+
+instance Attr Legend_ Keytype String where
+  attr Keytype value = unsafeAttribute { key: "keytype", value: prop value }
+
+instance Attr Li_ Keytype String where
+  attr Keytype value = unsafeAttribute { key: "keytype", value: prop value }
+
+instance Attr Link_ Keytype String where
+  attr Keytype value = unsafeAttribute { key: "keytype", value: prop value }
+
+instance Attr Main_ Keytype String where
+  attr Keytype value = unsafeAttribute { key: "keytype", value: prop value }
+
+instance Attr Map_ Keytype String where
+  attr Keytype value = unsafeAttribute { key: "keytype", value: prop value }
+
+instance Attr Mark_ Keytype String where
+  attr Keytype value = unsafeAttribute { key: "keytype", value: prop value }
+
+instance Attr Meta_ Keytype String where
+  attr Keytype value = unsafeAttribute { key: "keytype", value: prop value }
+
+instance Attr Meter_ Keytype String where
+  attr Keytype value = unsafeAttribute { key: "keytype", value: prop value }
+
+instance Attr Nav_ Keytype String where
+  attr Keytype value = unsafeAttribute { key: "keytype", value: prop value }
+
+instance Attr Noframes_ Keytype String where
+  attr Keytype value = unsafeAttribute { key: "keytype", value: prop value }
+
+instance Attr Noscript_ Keytype String where
+  attr Keytype value = unsafeAttribute { key: "keytype", value: prop value }
+
+instance Attr Object_ Keytype String where
+  attr Keytype value = unsafeAttribute { key: "keytype", value: prop value }
+
+instance Attr Ol_ Keytype String where
+  attr Keytype value = unsafeAttribute { key: "keytype", value: prop value }
+
+instance Attr Optgroup_ Keytype String where
+  attr Keytype value = unsafeAttribute { key: "keytype", value: prop value }
+
+instance Attr Option_ Keytype String where
+  attr Keytype value = unsafeAttribute { key: "keytype", value: prop value }
+
+instance Attr Output_ Keytype String where
+  attr Keytype value = unsafeAttribute { key: "keytype", value: prop value }
+
+instance Attr P_ Keytype String where
+  attr Keytype value = unsafeAttribute { key: "keytype", value: prop value }
+
+instance Attr Param_ Keytype String where
+  attr Keytype value = unsafeAttribute { key: "keytype", value: prop value }
+
+instance Attr Picture_ Keytype String where
+  attr Keytype value = unsafeAttribute { key: "keytype", value: prop value }
+
+instance Attr Pre_ Keytype String where
+  attr Keytype value = unsafeAttribute { key: "keytype", value: prop value }
+
+instance Attr Progress_ Keytype String where
+  attr Keytype value = unsafeAttribute { key: "keytype", value: prop value }
+
+instance Attr Q_ Keytype String where
+  attr Keytype value = unsafeAttribute { key: "keytype", value: prop value }
+
+instance Attr Rp_ Keytype String where
+  attr Keytype value = unsafeAttribute { key: "keytype", value: prop value }
+
+instance Attr Rt_ Keytype String where
+  attr Keytype value = unsafeAttribute { key: "keytype", value: prop value }
+
+instance Attr Ruby_ Keytype String where
+  attr Keytype value = unsafeAttribute { key: "keytype", value: prop value }
+
+instance Attr S_ Keytype String where
+  attr Keytype value = unsafeAttribute { key: "keytype", value: prop value }
+
+instance Attr Samp_ Keytype String where
+  attr Keytype value = unsafeAttribute { key: "keytype", value: prop value }
+
+instance Attr Script_ Keytype String where
+  attr Keytype value = unsafeAttribute { key: "keytype", value: prop value }
+
+instance Attr Section_ Keytype String where
+  attr Keytype value = unsafeAttribute { key: "keytype", value: prop value }
+
+instance Attr Select_ Keytype String where
+  attr Keytype value = unsafeAttribute { key: "keytype", value: prop value }
+
+instance Attr Small_ Keytype String where
+  attr Keytype value = unsafeAttribute { key: "keytype", value: prop value }
+
+instance Attr Source_ Keytype String where
+  attr Keytype value = unsafeAttribute { key: "keytype", value: prop value }
+
+instance Attr Span_ Keytype String where
+  attr Keytype value = unsafeAttribute { key: "keytype", value: prop value }
+
+instance Attr Strike_ Keytype String where
+  attr Keytype value = unsafeAttribute { key: "keytype", value: prop value }
+
+instance Attr Strong_ Keytype String where
+  attr Keytype value = unsafeAttribute { key: "keytype", value: prop value }
+
+instance Attr Style_ Keytype String where
+  attr Keytype value = unsafeAttribute { key: "keytype", value: prop value }
+
+instance Attr Sub_ Keytype String where
+  attr Keytype value = unsafeAttribute { key: "keytype", value: prop value }
+
+instance Attr Summary_ Keytype String where
+  attr Keytype value = unsafeAttribute { key: "keytype", value: prop value }
+
+instance Attr Sup_ Keytype String where
+  attr Keytype value = unsafeAttribute { key: "keytype", value: prop value }
+
+instance Attr Svg_ Keytype String where
+  attr Keytype value = unsafeAttribute { key: "keytype", value: prop value }
+
+instance Attr Table_ Keytype String where
+  attr Keytype value = unsafeAttribute { key: "keytype", value: prop value }
+
+instance Attr Tbody_ Keytype String where
+  attr Keytype value = unsafeAttribute { key: "keytype", value: prop value }
+
+instance Attr Td_ Keytype String where
+  attr Keytype value = unsafeAttribute { key: "keytype", value: prop value }
+
+instance Attr Template_ Keytype String where
+  attr Keytype value = unsafeAttribute { key: "keytype", value: prop value }
+
+instance Attr Textarea_ Keytype String where
+  attr Keytype value = unsafeAttribute { key: "keytype", value: prop value }
+
+instance Attr Tfoot_ Keytype String where
+  attr Keytype value = unsafeAttribute { key: "keytype", value: prop value }
+
+instance Attr Th_ Keytype String where
+  attr Keytype value = unsafeAttribute { key: "keytype", value: prop value }
+
+instance Attr Thead_ Keytype String where
+  attr Keytype value = unsafeAttribute { key: "keytype", value: prop value }
+
+instance Attr Time_ Keytype String where
+  attr Keytype value = unsafeAttribute { key: "keytype", value: prop value }
+
+instance Attr Title_ Keytype String where
+  attr Keytype value = unsafeAttribute { key: "keytype", value: prop value }
+
+instance Attr Tr_ Keytype String where
+  attr Keytype value = unsafeAttribute { key: "keytype", value: prop value }
+
+instance Attr Track_ Keytype String where
+  attr Keytype value = unsafeAttribute { key: "keytype", value: prop value }
+
+instance Attr Tt_ Keytype String where
+  attr Keytype value = unsafeAttribute { key: "keytype", value: prop value }
+
+instance Attr U_ Keytype String where
+  attr Keytype value = unsafeAttribute { key: "keytype", value: prop value }
+
+instance Attr Ul_ Keytype String where
+  attr Keytype value = unsafeAttribute { key: "keytype", value: prop value }
+
+instance Attr Var_ Keytype String where
+  attr Keytype value = unsafeAttribute { key: "keytype", value: prop value }
+
+instance Attr Video_ Keytype String where
+  attr Keytype value = unsafeAttribute { key: "keytype", value: prop value }
+
+instance Attr Wbr_ Keytype String where
+  attr Keytype value = unsafeAttribute { key: "keytype", value: prop value }
+
 instance Attr Track_ Kind String where
   attr Kind value = unsafeAttribute { key: "kind", value: prop value }
 
@@ -1755,6 +6513,372 @@ instance Attr Option_ Label String where
 
 instance Attr Track_ Label String where
   attr Label value = unsafeAttribute { key: "label", value: prop value }
+
+instance Attr A_ Lang String where
+  attr Lang value = unsafeAttribute { key: "lang", value: prop value }
+
+instance Attr Abbr_ Lang String where
+  attr Lang value = unsafeAttribute { key: "lang", value: prop value }
+
+instance Attr Acronym_ Lang String where
+  attr Lang value = unsafeAttribute { key: "lang", value: prop value }
+
+instance Attr Address_ Lang String where
+  attr Lang value = unsafeAttribute { key: "lang", value: prop value }
+
+instance Attr Applet_ Lang String where
+  attr Lang value = unsafeAttribute { key: "lang", value: prop value }
+
+instance Attr Area_ Lang String where
+  attr Lang value = unsafeAttribute { key: "lang", value: prop value }
+
+instance Attr Article_ Lang String where
+  attr Lang value = unsafeAttribute { key: "lang", value: prop value }
+
+instance Attr Aside_ Lang String where
+  attr Lang value = unsafeAttribute { key: "lang", value: prop value }
+
+instance Attr Audio_ Lang String where
+  attr Lang value = unsafeAttribute { key: "lang", value: prop value }
+
+instance Attr B_ Lang String where
+  attr Lang value = unsafeAttribute { key: "lang", value: prop value }
+
+instance Attr Base_ Lang String where
+  attr Lang value = unsafeAttribute { key: "lang", value: prop value }
+
+instance Attr Basefont_ Lang String where
+  attr Lang value = unsafeAttribute { key: "lang", value: prop value }
+
+instance Attr Bdi_ Lang String where
+  attr Lang value = unsafeAttribute { key: "lang", value: prop value }
+
+instance Attr Bdo_ Lang String where
+  attr Lang value = unsafeAttribute { key: "lang", value: prop value }
+
+instance Attr Big_ Lang String where
+  attr Lang value = unsafeAttribute { key: "lang", value: prop value }
+
+instance Attr Blockquote_ Lang String where
+  attr Lang value = unsafeAttribute { key: "lang", value: prop value }
+
+instance Attr Body_ Lang String where
+  attr Lang value = unsafeAttribute { key: "lang", value: prop value }
+
+instance Attr Br_ Lang String where
+  attr Lang value = unsafeAttribute { key: "lang", value: prop value }
+
+instance Attr Button_ Lang String where
+  attr Lang value = unsafeAttribute { key: "lang", value: prop value }
+
+instance Attr Canvas_ Lang String where
+  attr Lang value = unsafeAttribute { key: "lang", value: prop value }
+
+instance Attr Caption_ Lang String where
+  attr Lang value = unsafeAttribute { key: "lang", value: prop value }
+
+instance Attr Center_ Lang String where
+  attr Lang value = unsafeAttribute { key: "lang", value: prop value }
+
+instance Attr Cite_ Lang String where
+  attr Lang value = unsafeAttribute { key: "lang", value: prop value }
+
+instance Attr Code_ Lang String where
+  attr Lang value = unsafeAttribute { key: "lang", value: prop value }
+
+instance Attr Col_ Lang String where
+  attr Lang value = unsafeAttribute { key: "lang", value: prop value }
+
+instance Attr Colgroup_ Lang String where
+  attr Lang value = unsafeAttribute { key: "lang", value: prop value }
+
+instance Attr Xdata_ Lang String where
+  attr Lang value = unsafeAttribute { key: "lang", value: prop value }
+
+instance Attr Datalist_ Lang String where
+  attr Lang value = unsafeAttribute { key: "lang", value: prop value }
+
+instance Attr Dd_ Lang String where
+  attr Lang value = unsafeAttribute { key: "lang", value: prop value }
+
+instance Attr Del_ Lang String where
+  attr Lang value = unsafeAttribute { key: "lang", value: prop value }
+
+instance Attr Details_ Lang String where
+  attr Lang value = unsafeAttribute { key: "lang", value: prop value }
+
+instance Attr Dfn_ Lang String where
+  attr Lang value = unsafeAttribute { key: "lang", value: prop value }
+
+instance Attr Dialog_ Lang String where
+  attr Lang value = unsafeAttribute { key: "lang", value: prop value }
+
+instance Attr Dir_ Lang String where
+  attr Lang value = unsafeAttribute { key: "lang", value: prop value }
+
+instance Attr Div_ Lang String where
+  attr Lang value = unsafeAttribute { key: "lang", value: prop value }
+
+instance Attr Dl_ Lang String where
+  attr Lang value = unsafeAttribute { key: "lang", value: prop value }
+
+instance Attr Dt_ Lang String where
+  attr Lang value = unsafeAttribute { key: "lang", value: prop value }
+
+instance Attr Em_ Lang String where
+  attr Lang value = unsafeAttribute { key: "lang", value: prop value }
+
+instance Attr Embed_ Lang String where
+  attr Lang value = unsafeAttribute { key: "lang", value: prop value }
+
+instance Attr Fieldset_ Lang String where
+  attr Lang value = unsafeAttribute { key: "lang", value: prop value }
+
+instance Attr Figcaption_ Lang String where
+  attr Lang value = unsafeAttribute { key: "lang", value: prop value }
+
+instance Attr Figure_ Lang String where
+  attr Lang value = unsafeAttribute { key: "lang", value: prop value }
+
+instance Attr Font_ Lang String where
+  attr Lang value = unsafeAttribute { key: "lang", value: prop value }
+
+instance Attr Footer_ Lang String where
+  attr Lang value = unsafeAttribute { key: "lang", value: prop value }
+
+instance Attr Form_ Lang String where
+  attr Lang value = unsafeAttribute { key: "lang", value: prop value }
+
+instance Attr Frame_ Lang String where
+  attr Lang value = unsafeAttribute { key: "lang", value: prop value }
+
+instance Attr Frameset_ Lang String where
+  attr Lang value = unsafeAttribute { key: "lang", value: prop value }
+
+instance Attr H1_ Lang String where
+  attr Lang value = unsafeAttribute { key: "lang", value: prop value }
+
+instance Attr H2_ Lang String where
+  attr Lang value = unsafeAttribute { key: "lang", value: prop value }
+
+instance Attr H3_ Lang String where
+  attr Lang value = unsafeAttribute { key: "lang", value: prop value }
+
+instance Attr H4_ Lang String where
+  attr Lang value = unsafeAttribute { key: "lang", value: prop value }
+
+instance Attr H5_ Lang String where
+  attr Lang value = unsafeAttribute { key: "lang", value: prop value }
+
+instance Attr H6_ Lang String where
+  attr Lang value = unsafeAttribute { key: "lang", value: prop value }
+
+instance Attr Head_ Lang String where
+  attr Lang value = unsafeAttribute { key: "lang", value: prop value }
+
+instance Attr Header_ Lang String where
+  attr Lang value = unsafeAttribute { key: "lang", value: prop value }
+
+instance Attr Hr_ Lang String where
+  attr Lang value = unsafeAttribute { key: "lang", value: prop value }
+
+instance Attr Html_ Lang String where
+  attr Lang value = unsafeAttribute { key: "lang", value: prop value }
+
+instance Attr I_ Lang String where
+  attr Lang value = unsafeAttribute { key: "lang", value: prop value }
+
+instance Attr Iframe_ Lang String where
+  attr Lang value = unsafeAttribute { key: "lang", value: prop value }
+
+instance Attr Img_ Lang String where
+  attr Lang value = unsafeAttribute { key: "lang", value: prop value }
+
+instance Attr Input_ Lang String where
+  attr Lang value = unsafeAttribute { key: "lang", value: prop value }
+
+instance Attr Ins_ Lang String where
+  attr Lang value = unsafeAttribute { key: "lang", value: prop value }
+
+instance Attr Kbd_ Lang String where
+  attr Lang value = unsafeAttribute { key: "lang", value: prop value }
+
+instance Attr Label_ Lang String where
+  attr Lang value = unsafeAttribute { key: "lang", value: prop value }
+
+instance Attr Legend_ Lang String where
+  attr Lang value = unsafeAttribute { key: "lang", value: prop value }
+
+instance Attr Li_ Lang String where
+  attr Lang value = unsafeAttribute { key: "lang", value: prop value }
+
+instance Attr Link_ Lang String where
+  attr Lang value = unsafeAttribute { key: "lang", value: prop value }
+
+instance Attr Main_ Lang String where
+  attr Lang value = unsafeAttribute { key: "lang", value: prop value }
+
+instance Attr Map_ Lang String where
+  attr Lang value = unsafeAttribute { key: "lang", value: prop value }
+
+instance Attr Mark_ Lang String where
+  attr Lang value = unsafeAttribute { key: "lang", value: prop value }
+
+instance Attr Meta_ Lang String where
+  attr Lang value = unsafeAttribute { key: "lang", value: prop value }
+
+instance Attr Meter_ Lang String where
+  attr Lang value = unsafeAttribute { key: "lang", value: prop value }
+
+instance Attr Nav_ Lang String where
+  attr Lang value = unsafeAttribute { key: "lang", value: prop value }
+
+instance Attr Noframes_ Lang String where
+  attr Lang value = unsafeAttribute { key: "lang", value: prop value }
+
+instance Attr Noscript_ Lang String where
+  attr Lang value = unsafeAttribute { key: "lang", value: prop value }
+
+instance Attr Object_ Lang String where
+  attr Lang value = unsafeAttribute { key: "lang", value: prop value }
+
+instance Attr Ol_ Lang String where
+  attr Lang value = unsafeAttribute { key: "lang", value: prop value }
+
+instance Attr Optgroup_ Lang String where
+  attr Lang value = unsafeAttribute { key: "lang", value: prop value }
+
+instance Attr Option_ Lang String where
+  attr Lang value = unsafeAttribute { key: "lang", value: prop value }
+
+instance Attr Output_ Lang String where
+  attr Lang value = unsafeAttribute { key: "lang", value: prop value }
+
+instance Attr P_ Lang String where
+  attr Lang value = unsafeAttribute { key: "lang", value: prop value }
+
+instance Attr Param_ Lang String where
+  attr Lang value = unsafeAttribute { key: "lang", value: prop value }
+
+instance Attr Picture_ Lang String where
+  attr Lang value = unsafeAttribute { key: "lang", value: prop value }
+
+instance Attr Pre_ Lang String where
+  attr Lang value = unsafeAttribute { key: "lang", value: prop value }
+
+instance Attr Progress_ Lang String where
+  attr Lang value = unsafeAttribute { key: "lang", value: prop value }
+
+instance Attr Q_ Lang String where
+  attr Lang value = unsafeAttribute { key: "lang", value: prop value }
+
+instance Attr Rp_ Lang String where
+  attr Lang value = unsafeAttribute { key: "lang", value: prop value }
+
+instance Attr Rt_ Lang String where
+  attr Lang value = unsafeAttribute { key: "lang", value: prop value }
+
+instance Attr Ruby_ Lang String where
+  attr Lang value = unsafeAttribute { key: "lang", value: prop value }
+
+instance Attr S_ Lang String where
+  attr Lang value = unsafeAttribute { key: "lang", value: prop value }
+
+instance Attr Samp_ Lang String where
+  attr Lang value = unsafeAttribute { key: "lang", value: prop value }
+
+instance Attr Script_ Lang String where
+  attr Lang value = unsafeAttribute { key: "lang", value: prop value }
+
+instance Attr Section_ Lang String where
+  attr Lang value = unsafeAttribute { key: "lang", value: prop value }
+
+instance Attr Select_ Lang String where
+  attr Lang value = unsafeAttribute { key: "lang", value: prop value }
+
+instance Attr Small_ Lang String where
+  attr Lang value = unsafeAttribute { key: "lang", value: prop value }
+
+instance Attr Source_ Lang String where
+  attr Lang value = unsafeAttribute { key: "lang", value: prop value }
+
+instance Attr Span_ Lang String where
+  attr Lang value = unsafeAttribute { key: "lang", value: prop value }
+
+instance Attr Strike_ Lang String where
+  attr Lang value = unsafeAttribute { key: "lang", value: prop value }
+
+instance Attr Strong_ Lang String where
+  attr Lang value = unsafeAttribute { key: "lang", value: prop value }
+
+instance Attr Style_ Lang String where
+  attr Lang value = unsafeAttribute { key: "lang", value: prop value }
+
+instance Attr Sub_ Lang String where
+  attr Lang value = unsafeAttribute { key: "lang", value: prop value }
+
+instance Attr Summary_ Lang String where
+  attr Lang value = unsafeAttribute { key: "lang", value: prop value }
+
+instance Attr Sup_ Lang String where
+  attr Lang value = unsafeAttribute { key: "lang", value: prop value }
+
+instance Attr Svg_ Lang String where
+  attr Lang value = unsafeAttribute { key: "lang", value: prop value }
+
+instance Attr Table_ Lang String where
+  attr Lang value = unsafeAttribute { key: "lang", value: prop value }
+
+instance Attr Tbody_ Lang String where
+  attr Lang value = unsafeAttribute { key: "lang", value: prop value }
+
+instance Attr Td_ Lang String where
+  attr Lang value = unsafeAttribute { key: "lang", value: prop value }
+
+instance Attr Template_ Lang String where
+  attr Lang value = unsafeAttribute { key: "lang", value: prop value }
+
+instance Attr Textarea_ Lang String where
+  attr Lang value = unsafeAttribute { key: "lang", value: prop value }
+
+instance Attr Tfoot_ Lang String where
+  attr Lang value = unsafeAttribute { key: "lang", value: prop value }
+
+instance Attr Th_ Lang String where
+  attr Lang value = unsafeAttribute { key: "lang", value: prop value }
+
+instance Attr Thead_ Lang String where
+  attr Lang value = unsafeAttribute { key: "lang", value: prop value }
+
+instance Attr Time_ Lang String where
+  attr Lang value = unsafeAttribute { key: "lang", value: prop value }
+
+instance Attr Title_ Lang String where
+  attr Lang value = unsafeAttribute { key: "lang", value: prop value }
+
+instance Attr Tr_ Lang String where
+  attr Lang value = unsafeAttribute { key: "lang", value: prop value }
+
+instance Attr Track_ Lang String where
+  attr Lang value = unsafeAttribute { key: "lang", value: prop value }
+
+instance Attr Tt_ Lang String where
+  attr Lang value = unsafeAttribute { key: "lang", value: prop value }
+
+instance Attr U_ Lang String where
+  attr Lang value = unsafeAttribute { key: "lang", value: prop value }
+
+instance Attr Ul_ Lang String where
+  attr Lang value = unsafeAttribute { key: "lang", value: prop value }
+
+instance Attr Var_ Lang String where
+  attr Lang value = unsafeAttribute { key: "lang", value: prop value }
+
+instance Attr Video_ Lang String where
+  attr Lang value = unsafeAttribute { key: "lang", value: prop value }
+
+instance Attr Wbr_ Lang String where
+  attr Lang value = unsafeAttribute { key: "lang", value: prop value }
 
 instance Attr Script_ Language String where
   attr Language value = unsafeAttribute { key: "language", value: prop value }
@@ -1909,6 +7033,372 @@ instance Attr Audio_ Preload String where
 instance Attr Video_ Preload String where
   attr Preload value = unsafeAttribute { key: "preload", value: prop value }
 
+instance Attr A_ Radiogroup String where
+  attr Radiogroup value = unsafeAttribute { key: "radiogroup", value: prop value }
+
+instance Attr Abbr_ Radiogroup String where
+  attr Radiogroup value = unsafeAttribute { key: "radiogroup", value: prop value }
+
+instance Attr Acronym_ Radiogroup String where
+  attr Radiogroup value = unsafeAttribute { key: "radiogroup", value: prop value }
+
+instance Attr Address_ Radiogroup String where
+  attr Radiogroup value = unsafeAttribute { key: "radiogroup", value: prop value }
+
+instance Attr Applet_ Radiogroup String where
+  attr Radiogroup value = unsafeAttribute { key: "radiogroup", value: prop value }
+
+instance Attr Area_ Radiogroup String where
+  attr Radiogroup value = unsafeAttribute { key: "radiogroup", value: prop value }
+
+instance Attr Article_ Radiogroup String where
+  attr Radiogroup value = unsafeAttribute { key: "radiogroup", value: prop value }
+
+instance Attr Aside_ Radiogroup String where
+  attr Radiogroup value = unsafeAttribute { key: "radiogroup", value: prop value }
+
+instance Attr Audio_ Radiogroup String where
+  attr Radiogroup value = unsafeAttribute { key: "radiogroup", value: prop value }
+
+instance Attr B_ Radiogroup String where
+  attr Radiogroup value = unsafeAttribute { key: "radiogroup", value: prop value }
+
+instance Attr Base_ Radiogroup String where
+  attr Radiogroup value = unsafeAttribute { key: "radiogroup", value: prop value }
+
+instance Attr Basefont_ Radiogroup String where
+  attr Radiogroup value = unsafeAttribute { key: "radiogroup", value: prop value }
+
+instance Attr Bdi_ Radiogroup String where
+  attr Radiogroup value = unsafeAttribute { key: "radiogroup", value: prop value }
+
+instance Attr Bdo_ Radiogroup String where
+  attr Radiogroup value = unsafeAttribute { key: "radiogroup", value: prop value }
+
+instance Attr Big_ Radiogroup String where
+  attr Radiogroup value = unsafeAttribute { key: "radiogroup", value: prop value }
+
+instance Attr Blockquote_ Radiogroup String where
+  attr Radiogroup value = unsafeAttribute { key: "radiogroup", value: prop value }
+
+instance Attr Body_ Radiogroup String where
+  attr Radiogroup value = unsafeAttribute { key: "radiogroup", value: prop value }
+
+instance Attr Br_ Radiogroup String where
+  attr Radiogroup value = unsafeAttribute { key: "radiogroup", value: prop value }
+
+instance Attr Button_ Radiogroup String where
+  attr Radiogroup value = unsafeAttribute { key: "radiogroup", value: prop value }
+
+instance Attr Canvas_ Radiogroup String where
+  attr Radiogroup value = unsafeAttribute { key: "radiogroup", value: prop value }
+
+instance Attr Caption_ Radiogroup String where
+  attr Radiogroup value = unsafeAttribute { key: "radiogroup", value: prop value }
+
+instance Attr Center_ Radiogroup String where
+  attr Radiogroup value = unsafeAttribute { key: "radiogroup", value: prop value }
+
+instance Attr Cite_ Radiogroup String where
+  attr Radiogroup value = unsafeAttribute { key: "radiogroup", value: prop value }
+
+instance Attr Code_ Radiogroup String where
+  attr Radiogroup value = unsafeAttribute { key: "radiogroup", value: prop value }
+
+instance Attr Col_ Radiogroup String where
+  attr Radiogroup value = unsafeAttribute { key: "radiogroup", value: prop value }
+
+instance Attr Colgroup_ Radiogroup String where
+  attr Radiogroup value = unsafeAttribute { key: "radiogroup", value: prop value }
+
+instance Attr Xdata_ Radiogroup String where
+  attr Radiogroup value = unsafeAttribute { key: "radiogroup", value: prop value }
+
+instance Attr Datalist_ Radiogroup String where
+  attr Radiogroup value = unsafeAttribute { key: "radiogroup", value: prop value }
+
+instance Attr Dd_ Radiogroup String where
+  attr Radiogroup value = unsafeAttribute { key: "radiogroup", value: prop value }
+
+instance Attr Del_ Radiogroup String where
+  attr Radiogroup value = unsafeAttribute { key: "radiogroup", value: prop value }
+
+instance Attr Details_ Radiogroup String where
+  attr Radiogroup value = unsafeAttribute { key: "radiogroup", value: prop value }
+
+instance Attr Dfn_ Radiogroup String where
+  attr Radiogroup value = unsafeAttribute { key: "radiogroup", value: prop value }
+
+instance Attr Dialog_ Radiogroup String where
+  attr Radiogroup value = unsafeAttribute { key: "radiogroup", value: prop value }
+
+instance Attr Dir_ Radiogroup String where
+  attr Radiogroup value = unsafeAttribute { key: "radiogroup", value: prop value }
+
+instance Attr Div_ Radiogroup String where
+  attr Radiogroup value = unsafeAttribute { key: "radiogroup", value: prop value }
+
+instance Attr Dl_ Radiogroup String where
+  attr Radiogroup value = unsafeAttribute { key: "radiogroup", value: prop value }
+
+instance Attr Dt_ Radiogroup String where
+  attr Radiogroup value = unsafeAttribute { key: "radiogroup", value: prop value }
+
+instance Attr Em_ Radiogroup String where
+  attr Radiogroup value = unsafeAttribute { key: "radiogroup", value: prop value }
+
+instance Attr Embed_ Radiogroup String where
+  attr Radiogroup value = unsafeAttribute { key: "radiogroup", value: prop value }
+
+instance Attr Fieldset_ Radiogroup String where
+  attr Radiogroup value = unsafeAttribute { key: "radiogroup", value: prop value }
+
+instance Attr Figcaption_ Radiogroup String where
+  attr Radiogroup value = unsafeAttribute { key: "radiogroup", value: prop value }
+
+instance Attr Figure_ Radiogroup String where
+  attr Radiogroup value = unsafeAttribute { key: "radiogroup", value: prop value }
+
+instance Attr Font_ Radiogroup String where
+  attr Radiogroup value = unsafeAttribute { key: "radiogroup", value: prop value }
+
+instance Attr Footer_ Radiogroup String where
+  attr Radiogroup value = unsafeAttribute { key: "radiogroup", value: prop value }
+
+instance Attr Form_ Radiogroup String where
+  attr Radiogroup value = unsafeAttribute { key: "radiogroup", value: prop value }
+
+instance Attr Frame_ Radiogroup String where
+  attr Radiogroup value = unsafeAttribute { key: "radiogroup", value: prop value }
+
+instance Attr Frameset_ Radiogroup String where
+  attr Radiogroup value = unsafeAttribute { key: "radiogroup", value: prop value }
+
+instance Attr H1_ Radiogroup String where
+  attr Radiogroup value = unsafeAttribute { key: "radiogroup", value: prop value }
+
+instance Attr H2_ Radiogroup String where
+  attr Radiogroup value = unsafeAttribute { key: "radiogroup", value: prop value }
+
+instance Attr H3_ Radiogroup String where
+  attr Radiogroup value = unsafeAttribute { key: "radiogroup", value: prop value }
+
+instance Attr H4_ Radiogroup String where
+  attr Radiogroup value = unsafeAttribute { key: "radiogroup", value: prop value }
+
+instance Attr H5_ Radiogroup String where
+  attr Radiogroup value = unsafeAttribute { key: "radiogroup", value: prop value }
+
+instance Attr H6_ Radiogroup String where
+  attr Radiogroup value = unsafeAttribute { key: "radiogroup", value: prop value }
+
+instance Attr Head_ Radiogroup String where
+  attr Radiogroup value = unsafeAttribute { key: "radiogroup", value: prop value }
+
+instance Attr Header_ Radiogroup String where
+  attr Radiogroup value = unsafeAttribute { key: "radiogroup", value: prop value }
+
+instance Attr Hr_ Radiogroup String where
+  attr Radiogroup value = unsafeAttribute { key: "radiogroup", value: prop value }
+
+instance Attr Html_ Radiogroup String where
+  attr Radiogroup value = unsafeAttribute { key: "radiogroup", value: prop value }
+
+instance Attr I_ Radiogroup String where
+  attr Radiogroup value = unsafeAttribute { key: "radiogroup", value: prop value }
+
+instance Attr Iframe_ Radiogroup String where
+  attr Radiogroup value = unsafeAttribute { key: "radiogroup", value: prop value }
+
+instance Attr Img_ Radiogroup String where
+  attr Radiogroup value = unsafeAttribute { key: "radiogroup", value: prop value }
+
+instance Attr Input_ Radiogroup String where
+  attr Radiogroup value = unsafeAttribute { key: "radiogroup", value: prop value }
+
+instance Attr Ins_ Radiogroup String where
+  attr Radiogroup value = unsafeAttribute { key: "radiogroup", value: prop value }
+
+instance Attr Kbd_ Radiogroup String where
+  attr Radiogroup value = unsafeAttribute { key: "radiogroup", value: prop value }
+
+instance Attr Label_ Radiogroup String where
+  attr Radiogroup value = unsafeAttribute { key: "radiogroup", value: prop value }
+
+instance Attr Legend_ Radiogroup String where
+  attr Radiogroup value = unsafeAttribute { key: "radiogroup", value: prop value }
+
+instance Attr Li_ Radiogroup String where
+  attr Radiogroup value = unsafeAttribute { key: "radiogroup", value: prop value }
+
+instance Attr Link_ Radiogroup String where
+  attr Radiogroup value = unsafeAttribute { key: "radiogroup", value: prop value }
+
+instance Attr Main_ Radiogroup String where
+  attr Radiogroup value = unsafeAttribute { key: "radiogroup", value: prop value }
+
+instance Attr Map_ Radiogroup String where
+  attr Radiogroup value = unsafeAttribute { key: "radiogroup", value: prop value }
+
+instance Attr Mark_ Radiogroup String where
+  attr Radiogroup value = unsafeAttribute { key: "radiogroup", value: prop value }
+
+instance Attr Meta_ Radiogroup String where
+  attr Radiogroup value = unsafeAttribute { key: "radiogroup", value: prop value }
+
+instance Attr Meter_ Radiogroup String where
+  attr Radiogroup value = unsafeAttribute { key: "radiogroup", value: prop value }
+
+instance Attr Nav_ Radiogroup String where
+  attr Radiogroup value = unsafeAttribute { key: "radiogroup", value: prop value }
+
+instance Attr Noframes_ Radiogroup String where
+  attr Radiogroup value = unsafeAttribute { key: "radiogroup", value: prop value }
+
+instance Attr Noscript_ Radiogroup String where
+  attr Radiogroup value = unsafeAttribute { key: "radiogroup", value: prop value }
+
+instance Attr Object_ Radiogroup String where
+  attr Radiogroup value = unsafeAttribute { key: "radiogroup", value: prop value }
+
+instance Attr Ol_ Radiogroup String where
+  attr Radiogroup value = unsafeAttribute { key: "radiogroup", value: prop value }
+
+instance Attr Optgroup_ Radiogroup String where
+  attr Radiogroup value = unsafeAttribute { key: "radiogroup", value: prop value }
+
+instance Attr Option_ Radiogroup String where
+  attr Radiogroup value = unsafeAttribute { key: "radiogroup", value: prop value }
+
+instance Attr Output_ Radiogroup String where
+  attr Radiogroup value = unsafeAttribute { key: "radiogroup", value: prop value }
+
+instance Attr P_ Radiogroup String where
+  attr Radiogroup value = unsafeAttribute { key: "radiogroup", value: prop value }
+
+instance Attr Param_ Radiogroup String where
+  attr Radiogroup value = unsafeAttribute { key: "radiogroup", value: prop value }
+
+instance Attr Picture_ Radiogroup String where
+  attr Radiogroup value = unsafeAttribute { key: "radiogroup", value: prop value }
+
+instance Attr Pre_ Radiogroup String where
+  attr Radiogroup value = unsafeAttribute { key: "radiogroup", value: prop value }
+
+instance Attr Progress_ Radiogroup String where
+  attr Radiogroup value = unsafeAttribute { key: "radiogroup", value: prop value }
+
+instance Attr Q_ Radiogroup String where
+  attr Radiogroup value = unsafeAttribute { key: "radiogroup", value: prop value }
+
+instance Attr Rp_ Radiogroup String where
+  attr Radiogroup value = unsafeAttribute { key: "radiogroup", value: prop value }
+
+instance Attr Rt_ Radiogroup String where
+  attr Radiogroup value = unsafeAttribute { key: "radiogroup", value: prop value }
+
+instance Attr Ruby_ Radiogroup String where
+  attr Radiogroup value = unsafeAttribute { key: "radiogroup", value: prop value }
+
+instance Attr S_ Radiogroup String where
+  attr Radiogroup value = unsafeAttribute { key: "radiogroup", value: prop value }
+
+instance Attr Samp_ Radiogroup String where
+  attr Radiogroup value = unsafeAttribute { key: "radiogroup", value: prop value }
+
+instance Attr Script_ Radiogroup String where
+  attr Radiogroup value = unsafeAttribute { key: "radiogroup", value: prop value }
+
+instance Attr Section_ Radiogroup String where
+  attr Radiogroup value = unsafeAttribute { key: "radiogroup", value: prop value }
+
+instance Attr Select_ Radiogroup String where
+  attr Radiogroup value = unsafeAttribute { key: "radiogroup", value: prop value }
+
+instance Attr Small_ Radiogroup String where
+  attr Radiogroup value = unsafeAttribute { key: "radiogroup", value: prop value }
+
+instance Attr Source_ Radiogroup String where
+  attr Radiogroup value = unsafeAttribute { key: "radiogroup", value: prop value }
+
+instance Attr Span_ Radiogroup String where
+  attr Radiogroup value = unsafeAttribute { key: "radiogroup", value: prop value }
+
+instance Attr Strike_ Radiogroup String where
+  attr Radiogroup value = unsafeAttribute { key: "radiogroup", value: prop value }
+
+instance Attr Strong_ Radiogroup String where
+  attr Radiogroup value = unsafeAttribute { key: "radiogroup", value: prop value }
+
+instance Attr Style_ Radiogroup String where
+  attr Radiogroup value = unsafeAttribute { key: "radiogroup", value: prop value }
+
+instance Attr Sub_ Radiogroup String where
+  attr Radiogroup value = unsafeAttribute { key: "radiogroup", value: prop value }
+
+instance Attr Summary_ Radiogroup String where
+  attr Radiogroup value = unsafeAttribute { key: "radiogroup", value: prop value }
+
+instance Attr Sup_ Radiogroup String where
+  attr Radiogroup value = unsafeAttribute { key: "radiogroup", value: prop value }
+
+instance Attr Svg_ Radiogroup String where
+  attr Radiogroup value = unsafeAttribute { key: "radiogroup", value: prop value }
+
+instance Attr Table_ Radiogroup String where
+  attr Radiogroup value = unsafeAttribute { key: "radiogroup", value: prop value }
+
+instance Attr Tbody_ Radiogroup String where
+  attr Radiogroup value = unsafeAttribute { key: "radiogroup", value: prop value }
+
+instance Attr Td_ Radiogroup String where
+  attr Radiogroup value = unsafeAttribute { key: "radiogroup", value: prop value }
+
+instance Attr Template_ Radiogroup String where
+  attr Radiogroup value = unsafeAttribute { key: "radiogroup", value: prop value }
+
+instance Attr Textarea_ Radiogroup String where
+  attr Radiogroup value = unsafeAttribute { key: "radiogroup", value: prop value }
+
+instance Attr Tfoot_ Radiogroup String where
+  attr Radiogroup value = unsafeAttribute { key: "radiogroup", value: prop value }
+
+instance Attr Th_ Radiogroup String where
+  attr Radiogroup value = unsafeAttribute { key: "radiogroup", value: prop value }
+
+instance Attr Thead_ Radiogroup String where
+  attr Radiogroup value = unsafeAttribute { key: "radiogroup", value: prop value }
+
+instance Attr Time_ Radiogroup String where
+  attr Radiogroup value = unsafeAttribute { key: "radiogroup", value: prop value }
+
+instance Attr Title_ Radiogroup String where
+  attr Radiogroup value = unsafeAttribute { key: "radiogroup", value: prop value }
+
+instance Attr Tr_ Radiogroup String where
+  attr Radiogroup value = unsafeAttribute { key: "radiogroup", value: prop value }
+
+instance Attr Track_ Radiogroup String where
+  attr Radiogroup value = unsafeAttribute { key: "radiogroup", value: prop value }
+
+instance Attr Tt_ Radiogroup String where
+  attr Radiogroup value = unsafeAttribute { key: "radiogroup", value: prop value }
+
+instance Attr U_ Radiogroup String where
+  attr Radiogroup value = unsafeAttribute { key: "radiogroup", value: prop value }
+
+instance Attr Ul_ Radiogroup String where
+  attr Radiogroup value = unsafeAttribute { key: "radiogroup", value: prop value }
+
+instance Attr Var_ Radiogroup String where
+  attr Radiogroup value = unsafeAttribute { key: "radiogroup", value: prop value }
+
+instance Attr Video_ Radiogroup String where
+  attr Radiogroup value = unsafeAttribute { key: "radiogroup", value: prop value }
+
+instance Attr Wbr_ Radiogroup String where
+  attr Radiogroup value = unsafeAttribute { key: "radiogroup", value: prop value }
+
 instance Attr Input_ Readonly String where
   attr Readonly value = unsafeAttribute { key: "readonly", value: prop value }
 
@@ -1996,11 +7486,743 @@ instance Attr Img_ Sizes String where
 instance Attr Source_ Sizes String where
   attr Sizes value = unsafeAttribute { key: "sizes", value: prop value }
 
+instance Attr A_ Slot String where
+  attr Slot value = unsafeAttribute { key: "slot", value: prop value }
+
+instance Attr Abbr_ Slot String where
+  attr Slot value = unsafeAttribute { key: "slot", value: prop value }
+
+instance Attr Acronym_ Slot String where
+  attr Slot value = unsafeAttribute { key: "slot", value: prop value }
+
+instance Attr Address_ Slot String where
+  attr Slot value = unsafeAttribute { key: "slot", value: prop value }
+
+instance Attr Applet_ Slot String where
+  attr Slot value = unsafeAttribute { key: "slot", value: prop value }
+
+instance Attr Area_ Slot String where
+  attr Slot value = unsafeAttribute { key: "slot", value: prop value }
+
+instance Attr Article_ Slot String where
+  attr Slot value = unsafeAttribute { key: "slot", value: prop value }
+
+instance Attr Aside_ Slot String where
+  attr Slot value = unsafeAttribute { key: "slot", value: prop value }
+
+instance Attr Audio_ Slot String where
+  attr Slot value = unsafeAttribute { key: "slot", value: prop value }
+
+instance Attr B_ Slot String where
+  attr Slot value = unsafeAttribute { key: "slot", value: prop value }
+
+instance Attr Base_ Slot String where
+  attr Slot value = unsafeAttribute { key: "slot", value: prop value }
+
+instance Attr Basefont_ Slot String where
+  attr Slot value = unsafeAttribute { key: "slot", value: prop value }
+
+instance Attr Bdi_ Slot String where
+  attr Slot value = unsafeAttribute { key: "slot", value: prop value }
+
+instance Attr Bdo_ Slot String where
+  attr Slot value = unsafeAttribute { key: "slot", value: prop value }
+
+instance Attr Big_ Slot String where
+  attr Slot value = unsafeAttribute { key: "slot", value: prop value }
+
+instance Attr Blockquote_ Slot String where
+  attr Slot value = unsafeAttribute { key: "slot", value: prop value }
+
+instance Attr Body_ Slot String where
+  attr Slot value = unsafeAttribute { key: "slot", value: prop value }
+
+instance Attr Br_ Slot String where
+  attr Slot value = unsafeAttribute { key: "slot", value: prop value }
+
+instance Attr Button_ Slot String where
+  attr Slot value = unsafeAttribute { key: "slot", value: prop value }
+
+instance Attr Canvas_ Slot String where
+  attr Slot value = unsafeAttribute { key: "slot", value: prop value }
+
+instance Attr Caption_ Slot String where
+  attr Slot value = unsafeAttribute { key: "slot", value: prop value }
+
+instance Attr Center_ Slot String where
+  attr Slot value = unsafeAttribute { key: "slot", value: prop value }
+
+instance Attr Cite_ Slot String where
+  attr Slot value = unsafeAttribute { key: "slot", value: prop value }
+
+instance Attr Code_ Slot String where
+  attr Slot value = unsafeAttribute { key: "slot", value: prop value }
+
+instance Attr Col_ Slot String where
+  attr Slot value = unsafeAttribute { key: "slot", value: prop value }
+
+instance Attr Colgroup_ Slot String where
+  attr Slot value = unsafeAttribute { key: "slot", value: prop value }
+
+instance Attr Xdata_ Slot String where
+  attr Slot value = unsafeAttribute { key: "slot", value: prop value }
+
+instance Attr Datalist_ Slot String where
+  attr Slot value = unsafeAttribute { key: "slot", value: prop value }
+
+instance Attr Dd_ Slot String where
+  attr Slot value = unsafeAttribute { key: "slot", value: prop value }
+
+instance Attr Del_ Slot String where
+  attr Slot value = unsafeAttribute { key: "slot", value: prop value }
+
+instance Attr Details_ Slot String where
+  attr Slot value = unsafeAttribute { key: "slot", value: prop value }
+
+instance Attr Dfn_ Slot String where
+  attr Slot value = unsafeAttribute { key: "slot", value: prop value }
+
+instance Attr Dialog_ Slot String where
+  attr Slot value = unsafeAttribute { key: "slot", value: prop value }
+
+instance Attr Dir_ Slot String where
+  attr Slot value = unsafeAttribute { key: "slot", value: prop value }
+
+instance Attr Div_ Slot String where
+  attr Slot value = unsafeAttribute { key: "slot", value: prop value }
+
+instance Attr Dl_ Slot String where
+  attr Slot value = unsafeAttribute { key: "slot", value: prop value }
+
+instance Attr Dt_ Slot String where
+  attr Slot value = unsafeAttribute { key: "slot", value: prop value }
+
+instance Attr Em_ Slot String where
+  attr Slot value = unsafeAttribute { key: "slot", value: prop value }
+
+instance Attr Embed_ Slot String where
+  attr Slot value = unsafeAttribute { key: "slot", value: prop value }
+
+instance Attr Fieldset_ Slot String where
+  attr Slot value = unsafeAttribute { key: "slot", value: prop value }
+
+instance Attr Figcaption_ Slot String where
+  attr Slot value = unsafeAttribute { key: "slot", value: prop value }
+
+instance Attr Figure_ Slot String where
+  attr Slot value = unsafeAttribute { key: "slot", value: prop value }
+
+instance Attr Font_ Slot String where
+  attr Slot value = unsafeAttribute { key: "slot", value: prop value }
+
+instance Attr Footer_ Slot String where
+  attr Slot value = unsafeAttribute { key: "slot", value: prop value }
+
+instance Attr Form_ Slot String where
+  attr Slot value = unsafeAttribute { key: "slot", value: prop value }
+
+instance Attr Frame_ Slot String where
+  attr Slot value = unsafeAttribute { key: "slot", value: prop value }
+
+instance Attr Frameset_ Slot String where
+  attr Slot value = unsafeAttribute { key: "slot", value: prop value }
+
+instance Attr H1_ Slot String where
+  attr Slot value = unsafeAttribute { key: "slot", value: prop value }
+
+instance Attr H2_ Slot String where
+  attr Slot value = unsafeAttribute { key: "slot", value: prop value }
+
+instance Attr H3_ Slot String where
+  attr Slot value = unsafeAttribute { key: "slot", value: prop value }
+
+instance Attr H4_ Slot String where
+  attr Slot value = unsafeAttribute { key: "slot", value: prop value }
+
+instance Attr H5_ Slot String where
+  attr Slot value = unsafeAttribute { key: "slot", value: prop value }
+
+instance Attr H6_ Slot String where
+  attr Slot value = unsafeAttribute { key: "slot", value: prop value }
+
+instance Attr Head_ Slot String where
+  attr Slot value = unsafeAttribute { key: "slot", value: prop value }
+
+instance Attr Header_ Slot String where
+  attr Slot value = unsafeAttribute { key: "slot", value: prop value }
+
+instance Attr Hr_ Slot String where
+  attr Slot value = unsafeAttribute { key: "slot", value: prop value }
+
+instance Attr Html_ Slot String where
+  attr Slot value = unsafeAttribute { key: "slot", value: prop value }
+
+instance Attr I_ Slot String where
+  attr Slot value = unsafeAttribute { key: "slot", value: prop value }
+
+instance Attr Iframe_ Slot String where
+  attr Slot value = unsafeAttribute { key: "slot", value: prop value }
+
+instance Attr Img_ Slot String where
+  attr Slot value = unsafeAttribute { key: "slot", value: prop value }
+
+instance Attr Input_ Slot String where
+  attr Slot value = unsafeAttribute { key: "slot", value: prop value }
+
+instance Attr Ins_ Slot String where
+  attr Slot value = unsafeAttribute { key: "slot", value: prop value }
+
+instance Attr Kbd_ Slot String where
+  attr Slot value = unsafeAttribute { key: "slot", value: prop value }
+
+instance Attr Label_ Slot String where
+  attr Slot value = unsafeAttribute { key: "slot", value: prop value }
+
+instance Attr Legend_ Slot String where
+  attr Slot value = unsafeAttribute { key: "slot", value: prop value }
+
+instance Attr Li_ Slot String where
+  attr Slot value = unsafeAttribute { key: "slot", value: prop value }
+
+instance Attr Link_ Slot String where
+  attr Slot value = unsafeAttribute { key: "slot", value: prop value }
+
+instance Attr Main_ Slot String where
+  attr Slot value = unsafeAttribute { key: "slot", value: prop value }
+
+instance Attr Map_ Slot String where
+  attr Slot value = unsafeAttribute { key: "slot", value: prop value }
+
+instance Attr Mark_ Slot String where
+  attr Slot value = unsafeAttribute { key: "slot", value: prop value }
+
+instance Attr Meta_ Slot String where
+  attr Slot value = unsafeAttribute { key: "slot", value: prop value }
+
+instance Attr Meter_ Slot String where
+  attr Slot value = unsafeAttribute { key: "slot", value: prop value }
+
+instance Attr Nav_ Slot String where
+  attr Slot value = unsafeAttribute { key: "slot", value: prop value }
+
+instance Attr Noframes_ Slot String where
+  attr Slot value = unsafeAttribute { key: "slot", value: prop value }
+
+instance Attr Noscript_ Slot String where
+  attr Slot value = unsafeAttribute { key: "slot", value: prop value }
+
+instance Attr Object_ Slot String where
+  attr Slot value = unsafeAttribute { key: "slot", value: prop value }
+
+instance Attr Ol_ Slot String where
+  attr Slot value = unsafeAttribute { key: "slot", value: prop value }
+
+instance Attr Optgroup_ Slot String where
+  attr Slot value = unsafeAttribute { key: "slot", value: prop value }
+
+instance Attr Option_ Slot String where
+  attr Slot value = unsafeAttribute { key: "slot", value: prop value }
+
+instance Attr Output_ Slot String where
+  attr Slot value = unsafeAttribute { key: "slot", value: prop value }
+
+instance Attr P_ Slot String where
+  attr Slot value = unsafeAttribute { key: "slot", value: prop value }
+
+instance Attr Param_ Slot String where
+  attr Slot value = unsafeAttribute { key: "slot", value: prop value }
+
+instance Attr Picture_ Slot String where
+  attr Slot value = unsafeAttribute { key: "slot", value: prop value }
+
+instance Attr Pre_ Slot String where
+  attr Slot value = unsafeAttribute { key: "slot", value: prop value }
+
+instance Attr Progress_ Slot String where
+  attr Slot value = unsafeAttribute { key: "slot", value: prop value }
+
+instance Attr Q_ Slot String where
+  attr Slot value = unsafeAttribute { key: "slot", value: prop value }
+
+instance Attr Rp_ Slot String where
+  attr Slot value = unsafeAttribute { key: "slot", value: prop value }
+
+instance Attr Rt_ Slot String where
+  attr Slot value = unsafeAttribute { key: "slot", value: prop value }
+
+instance Attr Ruby_ Slot String where
+  attr Slot value = unsafeAttribute { key: "slot", value: prop value }
+
+instance Attr S_ Slot String where
+  attr Slot value = unsafeAttribute { key: "slot", value: prop value }
+
+instance Attr Samp_ Slot String where
+  attr Slot value = unsafeAttribute { key: "slot", value: prop value }
+
+instance Attr Script_ Slot String where
+  attr Slot value = unsafeAttribute { key: "slot", value: prop value }
+
+instance Attr Section_ Slot String where
+  attr Slot value = unsafeAttribute { key: "slot", value: prop value }
+
+instance Attr Select_ Slot String where
+  attr Slot value = unsafeAttribute { key: "slot", value: prop value }
+
+instance Attr Small_ Slot String where
+  attr Slot value = unsafeAttribute { key: "slot", value: prop value }
+
+instance Attr Source_ Slot String where
+  attr Slot value = unsafeAttribute { key: "slot", value: prop value }
+
+instance Attr Span_ Slot String where
+  attr Slot value = unsafeAttribute { key: "slot", value: prop value }
+
+instance Attr Strike_ Slot String where
+  attr Slot value = unsafeAttribute { key: "slot", value: prop value }
+
+instance Attr Strong_ Slot String where
+  attr Slot value = unsafeAttribute { key: "slot", value: prop value }
+
+instance Attr Style_ Slot String where
+  attr Slot value = unsafeAttribute { key: "slot", value: prop value }
+
+instance Attr Sub_ Slot String where
+  attr Slot value = unsafeAttribute { key: "slot", value: prop value }
+
+instance Attr Summary_ Slot String where
+  attr Slot value = unsafeAttribute { key: "slot", value: prop value }
+
+instance Attr Sup_ Slot String where
+  attr Slot value = unsafeAttribute { key: "slot", value: prop value }
+
+instance Attr Svg_ Slot String where
+  attr Slot value = unsafeAttribute { key: "slot", value: prop value }
+
+instance Attr Table_ Slot String where
+  attr Slot value = unsafeAttribute { key: "slot", value: prop value }
+
+instance Attr Tbody_ Slot String where
+  attr Slot value = unsafeAttribute { key: "slot", value: prop value }
+
+instance Attr Td_ Slot String where
+  attr Slot value = unsafeAttribute { key: "slot", value: prop value }
+
+instance Attr Template_ Slot String where
+  attr Slot value = unsafeAttribute { key: "slot", value: prop value }
+
+instance Attr Textarea_ Slot String where
+  attr Slot value = unsafeAttribute { key: "slot", value: prop value }
+
+instance Attr Tfoot_ Slot String where
+  attr Slot value = unsafeAttribute { key: "slot", value: prop value }
+
+instance Attr Th_ Slot String where
+  attr Slot value = unsafeAttribute { key: "slot", value: prop value }
+
+instance Attr Thead_ Slot String where
+  attr Slot value = unsafeAttribute { key: "slot", value: prop value }
+
+instance Attr Time_ Slot String where
+  attr Slot value = unsafeAttribute { key: "slot", value: prop value }
+
+instance Attr Title_ Slot String where
+  attr Slot value = unsafeAttribute { key: "slot", value: prop value }
+
+instance Attr Tr_ Slot String where
+  attr Slot value = unsafeAttribute { key: "slot", value: prop value }
+
+instance Attr Track_ Slot String where
+  attr Slot value = unsafeAttribute { key: "slot", value: prop value }
+
+instance Attr Tt_ Slot String where
+  attr Slot value = unsafeAttribute { key: "slot", value: prop value }
+
+instance Attr U_ Slot String where
+  attr Slot value = unsafeAttribute { key: "slot", value: prop value }
+
+instance Attr Ul_ Slot String where
+  attr Slot value = unsafeAttribute { key: "slot", value: prop value }
+
+instance Attr Var_ Slot String where
+  attr Slot value = unsafeAttribute { key: "slot", value: prop value }
+
+instance Attr Video_ Slot String where
+  attr Slot value = unsafeAttribute { key: "slot", value: prop value }
+
+instance Attr Wbr_ Slot String where
+  attr Slot value = unsafeAttribute { key: "slot", value: prop value }
+
 instance Attr Col_ Span String where
   attr Span value = unsafeAttribute { key: "span", value: prop value }
 
 instance Attr Colgroup_ Span String where
   attr Span value = unsafeAttribute { key: "span", value: prop value }
+
+instance Attr A_ Spellcheck String where
+  attr Spellcheck value = unsafeAttribute { key: "spellcheck", value: prop value }
+
+instance Attr Abbr_ Spellcheck String where
+  attr Spellcheck value = unsafeAttribute { key: "spellcheck", value: prop value }
+
+instance Attr Acronym_ Spellcheck String where
+  attr Spellcheck value = unsafeAttribute { key: "spellcheck", value: prop value }
+
+instance Attr Address_ Spellcheck String where
+  attr Spellcheck value = unsafeAttribute { key: "spellcheck", value: prop value }
+
+instance Attr Applet_ Spellcheck String where
+  attr Spellcheck value = unsafeAttribute { key: "spellcheck", value: prop value }
+
+instance Attr Area_ Spellcheck String where
+  attr Spellcheck value = unsafeAttribute { key: "spellcheck", value: prop value }
+
+instance Attr Article_ Spellcheck String where
+  attr Spellcheck value = unsafeAttribute { key: "spellcheck", value: prop value }
+
+instance Attr Aside_ Spellcheck String where
+  attr Spellcheck value = unsafeAttribute { key: "spellcheck", value: prop value }
+
+instance Attr Audio_ Spellcheck String where
+  attr Spellcheck value = unsafeAttribute { key: "spellcheck", value: prop value }
+
+instance Attr B_ Spellcheck String where
+  attr Spellcheck value = unsafeAttribute { key: "spellcheck", value: prop value }
+
+instance Attr Base_ Spellcheck String where
+  attr Spellcheck value = unsafeAttribute { key: "spellcheck", value: prop value }
+
+instance Attr Basefont_ Spellcheck String where
+  attr Spellcheck value = unsafeAttribute { key: "spellcheck", value: prop value }
+
+instance Attr Bdi_ Spellcheck String where
+  attr Spellcheck value = unsafeAttribute { key: "spellcheck", value: prop value }
+
+instance Attr Bdo_ Spellcheck String where
+  attr Spellcheck value = unsafeAttribute { key: "spellcheck", value: prop value }
+
+instance Attr Big_ Spellcheck String where
+  attr Spellcheck value = unsafeAttribute { key: "spellcheck", value: prop value }
+
+instance Attr Blockquote_ Spellcheck String where
+  attr Spellcheck value = unsafeAttribute { key: "spellcheck", value: prop value }
+
+instance Attr Body_ Spellcheck String where
+  attr Spellcheck value = unsafeAttribute { key: "spellcheck", value: prop value }
+
+instance Attr Br_ Spellcheck String where
+  attr Spellcheck value = unsafeAttribute { key: "spellcheck", value: prop value }
+
+instance Attr Button_ Spellcheck String where
+  attr Spellcheck value = unsafeAttribute { key: "spellcheck", value: prop value }
+
+instance Attr Canvas_ Spellcheck String where
+  attr Spellcheck value = unsafeAttribute { key: "spellcheck", value: prop value }
+
+instance Attr Caption_ Spellcheck String where
+  attr Spellcheck value = unsafeAttribute { key: "spellcheck", value: prop value }
+
+instance Attr Center_ Spellcheck String where
+  attr Spellcheck value = unsafeAttribute { key: "spellcheck", value: prop value }
+
+instance Attr Cite_ Spellcheck String where
+  attr Spellcheck value = unsafeAttribute { key: "spellcheck", value: prop value }
+
+instance Attr Code_ Spellcheck String where
+  attr Spellcheck value = unsafeAttribute { key: "spellcheck", value: prop value }
+
+instance Attr Col_ Spellcheck String where
+  attr Spellcheck value = unsafeAttribute { key: "spellcheck", value: prop value }
+
+instance Attr Colgroup_ Spellcheck String where
+  attr Spellcheck value = unsafeAttribute { key: "spellcheck", value: prop value }
+
+instance Attr Xdata_ Spellcheck String where
+  attr Spellcheck value = unsafeAttribute { key: "spellcheck", value: prop value }
+
+instance Attr Datalist_ Spellcheck String where
+  attr Spellcheck value = unsafeAttribute { key: "spellcheck", value: prop value }
+
+instance Attr Dd_ Spellcheck String where
+  attr Spellcheck value = unsafeAttribute { key: "spellcheck", value: prop value }
+
+instance Attr Del_ Spellcheck String where
+  attr Spellcheck value = unsafeAttribute { key: "spellcheck", value: prop value }
+
+instance Attr Details_ Spellcheck String where
+  attr Spellcheck value = unsafeAttribute { key: "spellcheck", value: prop value }
+
+instance Attr Dfn_ Spellcheck String where
+  attr Spellcheck value = unsafeAttribute { key: "spellcheck", value: prop value }
+
+instance Attr Dialog_ Spellcheck String where
+  attr Spellcheck value = unsafeAttribute { key: "spellcheck", value: prop value }
+
+instance Attr Dir_ Spellcheck String where
+  attr Spellcheck value = unsafeAttribute { key: "spellcheck", value: prop value }
+
+instance Attr Div_ Spellcheck String where
+  attr Spellcheck value = unsafeAttribute { key: "spellcheck", value: prop value }
+
+instance Attr Dl_ Spellcheck String where
+  attr Spellcheck value = unsafeAttribute { key: "spellcheck", value: prop value }
+
+instance Attr Dt_ Spellcheck String where
+  attr Spellcheck value = unsafeAttribute { key: "spellcheck", value: prop value }
+
+instance Attr Em_ Spellcheck String where
+  attr Spellcheck value = unsafeAttribute { key: "spellcheck", value: prop value }
+
+instance Attr Embed_ Spellcheck String where
+  attr Spellcheck value = unsafeAttribute { key: "spellcheck", value: prop value }
+
+instance Attr Fieldset_ Spellcheck String where
+  attr Spellcheck value = unsafeAttribute { key: "spellcheck", value: prop value }
+
+instance Attr Figcaption_ Spellcheck String where
+  attr Spellcheck value = unsafeAttribute { key: "spellcheck", value: prop value }
+
+instance Attr Figure_ Spellcheck String where
+  attr Spellcheck value = unsafeAttribute { key: "spellcheck", value: prop value }
+
+instance Attr Font_ Spellcheck String where
+  attr Spellcheck value = unsafeAttribute { key: "spellcheck", value: prop value }
+
+instance Attr Footer_ Spellcheck String where
+  attr Spellcheck value = unsafeAttribute { key: "spellcheck", value: prop value }
+
+instance Attr Form_ Spellcheck String where
+  attr Spellcheck value = unsafeAttribute { key: "spellcheck", value: prop value }
+
+instance Attr Frame_ Spellcheck String where
+  attr Spellcheck value = unsafeAttribute { key: "spellcheck", value: prop value }
+
+instance Attr Frameset_ Spellcheck String where
+  attr Spellcheck value = unsafeAttribute { key: "spellcheck", value: prop value }
+
+instance Attr H1_ Spellcheck String where
+  attr Spellcheck value = unsafeAttribute { key: "spellcheck", value: prop value }
+
+instance Attr H2_ Spellcheck String where
+  attr Spellcheck value = unsafeAttribute { key: "spellcheck", value: prop value }
+
+instance Attr H3_ Spellcheck String where
+  attr Spellcheck value = unsafeAttribute { key: "spellcheck", value: prop value }
+
+instance Attr H4_ Spellcheck String where
+  attr Spellcheck value = unsafeAttribute { key: "spellcheck", value: prop value }
+
+instance Attr H5_ Spellcheck String where
+  attr Spellcheck value = unsafeAttribute { key: "spellcheck", value: prop value }
+
+instance Attr H6_ Spellcheck String where
+  attr Spellcheck value = unsafeAttribute { key: "spellcheck", value: prop value }
+
+instance Attr Head_ Spellcheck String where
+  attr Spellcheck value = unsafeAttribute { key: "spellcheck", value: prop value }
+
+instance Attr Header_ Spellcheck String where
+  attr Spellcheck value = unsafeAttribute { key: "spellcheck", value: prop value }
+
+instance Attr Hr_ Spellcheck String where
+  attr Spellcheck value = unsafeAttribute { key: "spellcheck", value: prop value }
+
+instance Attr Html_ Spellcheck String where
+  attr Spellcheck value = unsafeAttribute { key: "spellcheck", value: prop value }
+
+instance Attr I_ Spellcheck String where
+  attr Spellcheck value = unsafeAttribute { key: "spellcheck", value: prop value }
+
+instance Attr Iframe_ Spellcheck String where
+  attr Spellcheck value = unsafeAttribute { key: "spellcheck", value: prop value }
+
+instance Attr Img_ Spellcheck String where
+  attr Spellcheck value = unsafeAttribute { key: "spellcheck", value: prop value }
+
+instance Attr Input_ Spellcheck String where
+  attr Spellcheck value = unsafeAttribute { key: "spellcheck", value: prop value }
+
+instance Attr Ins_ Spellcheck String where
+  attr Spellcheck value = unsafeAttribute { key: "spellcheck", value: prop value }
+
+instance Attr Kbd_ Spellcheck String where
+  attr Spellcheck value = unsafeAttribute { key: "spellcheck", value: prop value }
+
+instance Attr Label_ Spellcheck String where
+  attr Spellcheck value = unsafeAttribute { key: "spellcheck", value: prop value }
+
+instance Attr Legend_ Spellcheck String where
+  attr Spellcheck value = unsafeAttribute { key: "spellcheck", value: prop value }
+
+instance Attr Li_ Spellcheck String where
+  attr Spellcheck value = unsafeAttribute { key: "spellcheck", value: prop value }
+
+instance Attr Link_ Spellcheck String where
+  attr Spellcheck value = unsafeAttribute { key: "spellcheck", value: prop value }
+
+instance Attr Main_ Spellcheck String where
+  attr Spellcheck value = unsafeAttribute { key: "spellcheck", value: prop value }
+
+instance Attr Map_ Spellcheck String where
+  attr Spellcheck value = unsafeAttribute { key: "spellcheck", value: prop value }
+
+instance Attr Mark_ Spellcheck String where
+  attr Spellcheck value = unsafeAttribute { key: "spellcheck", value: prop value }
+
+instance Attr Meta_ Spellcheck String where
+  attr Spellcheck value = unsafeAttribute { key: "spellcheck", value: prop value }
+
+instance Attr Meter_ Spellcheck String where
+  attr Spellcheck value = unsafeAttribute { key: "spellcheck", value: prop value }
+
+instance Attr Nav_ Spellcheck String where
+  attr Spellcheck value = unsafeAttribute { key: "spellcheck", value: prop value }
+
+instance Attr Noframes_ Spellcheck String where
+  attr Spellcheck value = unsafeAttribute { key: "spellcheck", value: prop value }
+
+instance Attr Noscript_ Spellcheck String where
+  attr Spellcheck value = unsafeAttribute { key: "spellcheck", value: prop value }
+
+instance Attr Object_ Spellcheck String where
+  attr Spellcheck value = unsafeAttribute { key: "spellcheck", value: prop value }
+
+instance Attr Ol_ Spellcheck String where
+  attr Spellcheck value = unsafeAttribute { key: "spellcheck", value: prop value }
+
+instance Attr Optgroup_ Spellcheck String where
+  attr Spellcheck value = unsafeAttribute { key: "spellcheck", value: prop value }
+
+instance Attr Option_ Spellcheck String where
+  attr Spellcheck value = unsafeAttribute { key: "spellcheck", value: prop value }
+
+instance Attr Output_ Spellcheck String where
+  attr Spellcheck value = unsafeAttribute { key: "spellcheck", value: prop value }
+
+instance Attr P_ Spellcheck String where
+  attr Spellcheck value = unsafeAttribute { key: "spellcheck", value: prop value }
+
+instance Attr Param_ Spellcheck String where
+  attr Spellcheck value = unsafeAttribute { key: "spellcheck", value: prop value }
+
+instance Attr Picture_ Spellcheck String where
+  attr Spellcheck value = unsafeAttribute { key: "spellcheck", value: prop value }
+
+instance Attr Pre_ Spellcheck String where
+  attr Spellcheck value = unsafeAttribute { key: "spellcheck", value: prop value }
+
+instance Attr Progress_ Spellcheck String where
+  attr Spellcheck value = unsafeAttribute { key: "spellcheck", value: prop value }
+
+instance Attr Q_ Spellcheck String where
+  attr Spellcheck value = unsafeAttribute { key: "spellcheck", value: prop value }
+
+instance Attr Rp_ Spellcheck String where
+  attr Spellcheck value = unsafeAttribute { key: "spellcheck", value: prop value }
+
+instance Attr Rt_ Spellcheck String where
+  attr Spellcheck value = unsafeAttribute { key: "spellcheck", value: prop value }
+
+instance Attr Ruby_ Spellcheck String where
+  attr Spellcheck value = unsafeAttribute { key: "spellcheck", value: prop value }
+
+instance Attr S_ Spellcheck String where
+  attr Spellcheck value = unsafeAttribute { key: "spellcheck", value: prop value }
+
+instance Attr Samp_ Spellcheck String where
+  attr Spellcheck value = unsafeAttribute { key: "spellcheck", value: prop value }
+
+instance Attr Script_ Spellcheck String where
+  attr Spellcheck value = unsafeAttribute { key: "spellcheck", value: prop value }
+
+instance Attr Section_ Spellcheck String where
+  attr Spellcheck value = unsafeAttribute { key: "spellcheck", value: prop value }
+
+instance Attr Select_ Spellcheck String where
+  attr Spellcheck value = unsafeAttribute { key: "spellcheck", value: prop value }
+
+instance Attr Small_ Spellcheck String where
+  attr Spellcheck value = unsafeAttribute { key: "spellcheck", value: prop value }
+
+instance Attr Source_ Spellcheck String where
+  attr Spellcheck value = unsafeAttribute { key: "spellcheck", value: prop value }
+
+instance Attr Span_ Spellcheck String where
+  attr Spellcheck value = unsafeAttribute { key: "spellcheck", value: prop value }
+
+instance Attr Strike_ Spellcheck String where
+  attr Spellcheck value = unsafeAttribute { key: "spellcheck", value: prop value }
+
+instance Attr Strong_ Spellcheck String where
+  attr Spellcheck value = unsafeAttribute { key: "spellcheck", value: prop value }
+
+instance Attr Style_ Spellcheck String where
+  attr Spellcheck value = unsafeAttribute { key: "spellcheck", value: prop value }
+
+instance Attr Sub_ Spellcheck String where
+  attr Spellcheck value = unsafeAttribute { key: "spellcheck", value: prop value }
+
+instance Attr Summary_ Spellcheck String where
+  attr Spellcheck value = unsafeAttribute { key: "spellcheck", value: prop value }
+
+instance Attr Sup_ Spellcheck String where
+  attr Spellcheck value = unsafeAttribute { key: "spellcheck", value: prop value }
+
+instance Attr Svg_ Spellcheck String where
+  attr Spellcheck value = unsafeAttribute { key: "spellcheck", value: prop value }
+
+instance Attr Table_ Spellcheck String where
+  attr Spellcheck value = unsafeAttribute { key: "spellcheck", value: prop value }
+
+instance Attr Tbody_ Spellcheck String where
+  attr Spellcheck value = unsafeAttribute { key: "spellcheck", value: prop value }
+
+instance Attr Td_ Spellcheck String where
+  attr Spellcheck value = unsafeAttribute { key: "spellcheck", value: prop value }
+
+instance Attr Template_ Spellcheck String where
+  attr Spellcheck value = unsafeAttribute { key: "spellcheck", value: prop value }
+
+instance Attr Textarea_ Spellcheck String where
+  attr Spellcheck value = unsafeAttribute { key: "spellcheck", value: prop value }
+
+instance Attr Tfoot_ Spellcheck String where
+  attr Spellcheck value = unsafeAttribute { key: "spellcheck", value: prop value }
+
+instance Attr Th_ Spellcheck String where
+  attr Spellcheck value = unsafeAttribute { key: "spellcheck", value: prop value }
+
+instance Attr Thead_ Spellcheck String where
+  attr Spellcheck value = unsafeAttribute { key: "spellcheck", value: prop value }
+
+instance Attr Time_ Spellcheck String where
+  attr Spellcheck value = unsafeAttribute { key: "spellcheck", value: prop value }
+
+instance Attr Title_ Spellcheck String where
+  attr Spellcheck value = unsafeAttribute { key: "spellcheck", value: prop value }
+
+instance Attr Tr_ Spellcheck String where
+  attr Spellcheck value = unsafeAttribute { key: "spellcheck", value: prop value }
+
+instance Attr Track_ Spellcheck String where
+  attr Spellcheck value = unsafeAttribute { key: "spellcheck", value: prop value }
+
+instance Attr Tt_ Spellcheck String where
+  attr Spellcheck value = unsafeAttribute { key: "spellcheck", value: prop value }
+
+instance Attr U_ Spellcheck String where
+  attr Spellcheck value = unsafeAttribute { key: "spellcheck", value: prop value }
+
+instance Attr Ul_ Spellcheck String where
+  attr Spellcheck value = unsafeAttribute { key: "spellcheck", value: prop value }
+
+instance Attr Var_ Spellcheck String where
+  attr Spellcheck value = unsafeAttribute { key: "spellcheck", value: prop value }
+
+instance Attr Video_ Spellcheck String where
+  attr Spellcheck value = unsafeAttribute { key: "spellcheck", value: prop value }
+
+instance Attr Wbr_ Spellcheck String where
+  attr Spellcheck value = unsafeAttribute { key: "spellcheck", value: prop value }
 
 instance Attr Audio_ Src String where
   attr Src value = unsafeAttribute { key: "src", value: prop value }
@@ -2047,8 +8269,740 @@ instance Attr Ol_ Start String where
 instance Attr Input_ Step String where
   attr Step value = unsafeAttribute { key: "step", value: prop value }
 
+instance Attr A_ Style String where
+  attr Style value = unsafeAttribute { key: "style", value: prop value }
+
+instance Attr Abbr_ Style String where
+  attr Style value = unsafeAttribute { key: "style", value: prop value }
+
+instance Attr Acronym_ Style String where
+  attr Style value = unsafeAttribute { key: "style", value: prop value }
+
+instance Attr Address_ Style String where
+  attr Style value = unsafeAttribute { key: "style", value: prop value }
+
+instance Attr Applet_ Style String where
+  attr Style value = unsafeAttribute { key: "style", value: prop value }
+
+instance Attr Area_ Style String where
+  attr Style value = unsafeAttribute { key: "style", value: prop value }
+
+instance Attr Article_ Style String where
+  attr Style value = unsafeAttribute { key: "style", value: prop value }
+
+instance Attr Aside_ Style String where
+  attr Style value = unsafeAttribute { key: "style", value: prop value }
+
+instance Attr Audio_ Style String where
+  attr Style value = unsafeAttribute { key: "style", value: prop value }
+
+instance Attr B_ Style String where
+  attr Style value = unsafeAttribute { key: "style", value: prop value }
+
+instance Attr Base_ Style String where
+  attr Style value = unsafeAttribute { key: "style", value: prop value }
+
+instance Attr Basefont_ Style String where
+  attr Style value = unsafeAttribute { key: "style", value: prop value }
+
+instance Attr Bdi_ Style String where
+  attr Style value = unsafeAttribute { key: "style", value: prop value }
+
+instance Attr Bdo_ Style String where
+  attr Style value = unsafeAttribute { key: "style", value: prop value }
+
+instance Attr Big_ Style String where
+  attr Style value = unsafeAttribute { key: "style", value: prop value }
+
+instance Attr Blockquote_ Style String where
+  attr Style value = unsafeAttribute { key: "style", value: prop value }
+
+instance Attr Body_ Style String where
+  attr Style value = unsafeAttribute { key: "style", value: prop value }
+
+instance Attr Br_ Style String where
+  attr Style value = unsafeAttribute { key: "style", value: prop value }
+
+instance Attr Button_ Style String where
+  attr Style value = unsafeAttribute { key: "style", value: prop value }
+
+instance Attr Canvas_ Style String where
+  attr Style value = unsafeAttribute { key: "style", value: prop value }
+
+instance Attr Caption_ Style String where
+  attr Style value = unsafeAttribute { key: "style", value: prop value }
+
+instance Attr Center_ Style String where
+  attr Style value = unsafeAttribute { key: "style", value: prop value }
+
+instance Attr Cite_ Style String where
+  attr Style value = unsafeAttribute { key: "style", value: prop value }
+
+instance Attr Code_ Style String where
+  attr Style value = unsafeAttribute { key: "style", value: prop value }
+
+instance Attr Col_ Style String where
+  attr Style value = unsafeAttribute { key: "style", value: prop value }
+
+instance Attr Colgroup_ Style String where
+  attr Style value = unsafeAttribute { key: "style", value: prop value }
+
+instance Attr Xdata_ Style String where
+  attr Style value = unsafeAttribute { key: "style", value: prop value }
+
+instance Attr Datalist_ Style String where
+  attr Style value = unsafeAttribute { key: "style", value: prop value }
+
+instance Attr Dd_ Style String where
+  attr Style value = unsafeAttribute { key: "style", value: prop value }
+
+instance Attr Del_ Style String where
+  attr Style value = unsafeAttribute { key: "style", value: prop value }
+
+instance Attr Details_ Style String where
+  attr Style value = unsafeAttribute { key: "style", value: prop value }
+
+instance Attr Dfn_ Style String where
+  attr Style value = unsafeAttribute { key: "style", value: prop value }
+
+instance Attr Dialog_ Style String where
+  attr Style value = unsafeAttribute { key: "style", value: prop value }
+
+instance Attr Dir_ Style String where
+  attr Style value = unsafeAttribute { key: "style", value: prop value }
+
+instance Attr Div_ Style String where
+  attr Style value = unsafeAttribute { key: "style", value: prop value }
+
+instance Attr Dl_ Style String where
+  attr Style value = unsafeAttribute { key: "style", value: prop value }
+
+instance Attr Dt_ Style String where
+  attr Style value = unsafeAttribute { key: "style", value: prop value }
+
+instance Attr Em_ Style String where
+  attr Style value = unsafeAttribute { key: "style", value: prop value }
+
+instance Attr Embed_ Style String where
+  attr Style value = unsafeAttribute { key: "style", value: prop value }
+
+instance Attr Fieldset_ Style String where
+  attr Style value = unsafeAttribute { key: "style", value: prop value }
+
+instance Attr Figcaption_ Style String where
+  attr Style value = unsafeAttribute { key: "style", value: prop value }
+
+instance Attr Figure_ Style String where
+  attr Style value = unsafeAttribute { key: "style", value: prop value }
+
+instance Attr Font_ Style String where
+  attr Style value = unsafeAttribute { key: "style", value: prop value }
+
+instance Attr Footer_ Style String where
+  attr Style value = unsafeAttribute { key: "style", value: prop value }
+
+instance Attr Form_ Style String where
+  attr Style value = unsafeAttribute { key: "style", value: prop value }
+
+instance Attr Frame_ Style String where
+  attr Style value = unsafeAttribute { key: "style", value: prop value }
+
+instance Attr Frameset_ Style String where
+  attr Style value = unsafeAttribute { key: "style", value: prop value }
+
+instance Attr H1_ Style String where
+  attr Style value = unsafeAttribute { key: "style", value: prop value }
+
+instance Attr H2_ Style String where
+  attr Style value = unsafeAttribute { key: "style", value: prop value }
+
+instance Attr H3_ Style String where
+  attr Style value = unsafeAttribute { key: "style", value: prop value }
+
+instance Attr H4_ Style String where
+  attr Style value = unsafeAttribute { key: "style", value: prop value }
+
+instance Attr H5_ Style String where
+  attr Style value = unsafeAttribute { key: "style", value: prop value }
+
+instance Attr H6_ Style String where
+  attr Style value = unsafeAttribute { key: "style", value: prop value }
+
+instance Attr Head_ Style String where
+  attr Style value = unsafeAttribute { key: "style", value: prop value }
+
+instance Attr Header_ Style String where
+  attr Style value = unsafeAttribute { key: "style", value: prop value }
+
+instance Attr Hr_ Style String where
+  attr Style value = unsafeAttribute { key: "style", value: prop value }
+
+instance Attr Html_ Style String where
+  attr Style value = unsafeAttribute { key: "style", value: prop value }
+
+instance Attr I_ Style String where
+  attr Style value = unsafeAttribute { key: "style", value: prop value }
+
+instance Attr Iframe_ Style String where
+  attr Style value = unsafeAttribute { key: "style", value: prop value }
+
+instance Attr Img_ Style String where
+  attr Style value = unsafeAttribute { key: "style", value: prop value }
+
+instance Attr Input_ Style String where
+  attr Style value = unsafeAttribute { key: "style", value: prop value }
+
+instance Attr Ins_ Style String where
+  attr Style value = unsafeAttribute { key: "style", value: prop value }
+
+instance Attr Kbd_ Style String where
+  attr Style value = unsafeAttribute { key: "style", value: prop value }
+
+instance Attr Label_ Style String where
+  attr Style value = unsafeAttribute { key: "style", value: prop value }
+
+instance Attr Legend_ Style String where
+  attr Style value = unsafeAttribute { key: "style", value: prop value }
+
+instance Attr Li_ Style String where
+  attr Style value = unsafeAttribute { key: "style", value: prop value }
+
+instance Attr Link_ Style String where
+  attr Style value = unsafeAttribute { key: "style", value: prop value }
+
+instance Attr Main_ Style String where
+  attr Style value = unsafeAttribute { key: "style", value: prop value }
+
+instance Attr Map_ Style String where
+  attr Style value = unsafeAttribute { key: "style", value: prop value }
+
+instance Attr Mark_ Style String where
+  attr Style value = unsafeAttribute { key: "style", value: prop value }
+
+instance Attr Meta_ Style String where
+  attr Style value = unsafeAttribute { key: "style", value: prop value }
+
+instance Attr Meter_ Style String where
+  attr Style value = unsafeAttribute { key: "style", value: prop value }
+
+instance Attr Nav_ Style String where
+  attr Style value = unsafeAttribute { key: "style", value: prop value }
+
+instance Attr Noframes_ Style String where
+  attr Style value = unsafeAttribute { key: "style", value: prop value }
+
+instance Attr Noscript_ Style String where
+  attr Style value = unsafeAttribute { key: "style", value: prop value }
+
+instance Attr Object_ Style String where
+  attr Style value = unsafeAttribute { key: "style", value: prop value }
+
+instance Attr Ol_ Style String where
+  attr Style value = unsafeAttribute { key: "style", value: prop value }
+
+instance Attr Optgroup_ Style String where
+  attr Style value = unsafeAttribute { key: "style", value: prop value }
+
+instance Attr Option_ Style String where
+  attr Style value = unsafeAttribute { key: "style", value: prop value }
+
+instance Attr Output_ Style String where
+  attr Style value = unsafeAttribute { key: "style", value: prop value }
+
+instance Attr P_ Style String where
+  attr Style value = unsafeAttribute { key: "style", value: prop value }
+
+instance Attr Param_ Style String where
+  attr Style value = unsafeAttribute { key: "style", value: prop value }
+
+instance Attr Picture_ Style String where
+  attr Style value = unsafeAttribute { key: "style", value: prop value }
+
+instance Attr Pre_ Style String where
+  attr Style value = unsafeAttribute { key: "style", value: prop value }
+
+instance Attr Progress_ Style String where
+  attr Style value = unsafeAttribute { key: "style", value: prop value }
+
+instance Attr Q_ Style String where
+  attr Style value = unsafeAttribute { key: "style", value: prop value }
+
+instance Attr Rp_ Style String where
+  attr Style value = unsafeAttribute { key: "style", value: prop value }
+
+instance Attr Rt_ Style String where
+  attr Style value = unsafeAttribute { key: "style", value: prop value }
+
+instance Attr Ruby_ Style String where
+  attr Style value = unsafeAttribute { key: "style", value: prop value }
+
+instance Attr S_ Style String where
+  attr Style value = unsafeAttribute { key: "style", value: prop value }
+
+instance Attr Samp_ Style String where
+  attr Style value = unsafeAttribute { key: "style", value: prop value }
+
+instance Attr Script_ Style String where
+  attr Style value = unsafeAttribute { key: "style", value: prop value }
+
+instance Attr Section_ Style String where
+  attr Style value = unsafeAttribute { key: "style", value: prop value }
+
+instance Attr Select_ Style String where
+  attr Style value = unsafeAttribute { key: "style", value: prop value }
+
+instance Attr Small_ Style String where
+  attr Style value = unsafeAttribute { key: "style", value: prop value }
+
+instance Attr Source_ Style String where
+  attr Style value = unsafeAttribute { key: "style", value: prop value }
+
+instance Attr Span_ Style String where
+  attr Style value = unsafeAttribute { key: "style", value: prop value }
+
+instance Attr Strike_ Style String where
+  attr Style value = unsafeAttribute { key: "style", value: prop value }
+
+instance Attr Strong_ Style String where
+  attr Style value = unsafeAttribute { key: "style", value: prop value }
+
+instance Attr Style_ Style String where
+  attr Style value = unsafeAttribute { key: "style", value: prop value }
+
+instance Attr Sub_ Style String where
+  attr Style value = unsafeAttribute { key: "style", value: prop value }
+
+instance Attr Summary_ Style String where
+  attr Style value = unsafeAttribute { key: "style", value: prop value }
+
+instance Attr Sup_ Style String where
+  attr Style value = unsafeAttribute { key: "style", value: prop value }
+
+instance Attr Svg_ Style String where
+  attr Style value = unsafeAttribute { key: "style", value: prop value }
+
+instance Attr Table_ Style String where
+  attr Style value = unsafeAttribute { key: "style", value: prop value }
+
+instance Attr Tbody_ Style String where
+  attr Style value = unsafeAttribute { key: "style", value: prop value }
+
+instance Attr Td_ Style String where
+  attr Style value = unsafeAttribute { key: "style", value: prop value }
+
+instance Attr Template_ Style String where
+  attr Style value = unsafeAttribute { key: "style", value: prop value }
+
+instance Attr Textarea_ Style String where
+  attr Style value = unsafeAttribute { key: "style", value: prop value }
+
+instance Attr Tfoot_ Style String where
+  attr Style value = unsafeAttribute { key: "style", value: prop value }
+
+instance Attr Th_ Style String where
+  attr Style value = unsafeAttribute { key: "style", value: prop value }
+
+instance Attr Thead_ Style String where
+  attr Style value = unsafeAttribute { key: "style", value: prop value }
+
+instance Attr Time_ Style String where
+  attr Style value = unsafeAttribute { key: "style", value: prop value }
+
+instance Attr Title_ Style String where
+  attr Style value = unsafeAttribute { key: "style", value: prop value }
+
+instance Attr Tr_ Style String where
+  attr Style value = unsafeAttribute { key: "style", value: prop value }
+
+instance Attr Track_ Style String where
+  attr Style value = unsafeAttribute { key: "style", value: prop value }
+
+instance Attr Tt_ Style String where
+  attr Style value = unsafeAttribute { key: "style", value: prop value }
+
+instance Attr U_ Style String where
+  attr Style value = unsafeAttribute { key: "style", value: prop value }
+
+instance Attr Ul_ Style String where
+  attr Style value = unsafeAttribute { key: "style", value: prop value }
+
+instance Attr Var_ Style String where
+  attr Style value = unsafeAttribute { key: "style", value: prop value }
+
+instance Attr Video_ Style String where
+  attr Style value = unsafeAttribute { key: "style", value: prop value }
+
+instance Attr Wbr_ Style String where
+  attr Style value = unsafeAttribute { key: "style", value: prop value }
+
 instance Attr Table_ Summary String where
   attr Summary value = unsafeAttribute { key: "summary", value: prop value }
+
+instance Attr A_ Tabindex String where
+  attr Tabindex value = unsafeAttribute { key: "tabindex", value: prop value }
+
+instance Attr Abbr_ Tabindex String where
+  attr Tabindex value = unsafeAttribute { key: "tabindex", value: prop value }
+
+instance Attr Acronym_ Tabindex String where
+  attr Tabindex value = unsafeAttribute { key: "tabindex", value: prop value }
+
+instance Attr Address_ Tabindex String where
+  attr Tabindex value = unsafeAttribute { key: "tabindex", value: prop value }
+
+instance Attr Applet_ Tabindex String where
+  attr Tabindex value = unsafeAttribute { key: "tabindex", value: prop value }
+
+instance Attr Area_ Tabindex String where
+  attr Tabindex value = unsafeAttribute { key: "tabindex", value: prop value }
+
+instance Attr Article_ Tabindex String where
+  attr Tabindex value = unsafeAttribute { key: "tabindex", value: prop value }
+
+instance Attr Aside_ Tabindex String where
+  attr Tabindex value = unsafeAttribute { key: "tabindex", value: prop value }
+
+instance Attr Audio_ Tabindex String where
+  attr Tabindex value = unsafeAttribute { key: "tabindex", value: prop value }
+
+instance Attr B_ Tabindex String where
+  attr Tabindex value = unsafeAttribute { key: "tabindex", value: prop value }
+
+instance Attr Base_ Tabindex String where
+  attr Tabindex value = unsafeAttribute { key: "tabindex", value: prop value }
+
+instance Attr Basefont_ Tabindex String where
+  attr Tabindex value = unsafeAttribute { key: "tabindex", value: prop value }
+
+instance Attr Bdi_ Tabindex String where
+  attr Tabindex value = unsafeAttribute { key: "tabindex", value: prop value }
+
+instance Attr Bdo_ Tabindex String where
+  attr Tabindex value = unsafeAttribute { key: "tabindex", value: prop value }
+
+instance Attr Big_ Tabindex String where
+  attr Tabindex value = unsafeAttribute { key: "tabindex", value: prop value }
+
+instance Attr Blockquote_ Tabindex String where
+  attr Tabindex value = unsafeAttribute { key: "tabindex", value: prop value }
+
+instance Attr Body_ Tabindex String where
+  attr Tabindex value = unsafeAttribute { key: "tabindex", value: prop value }
+
+instance Attr Br_ Tabindex String where
+  attr Tabindex value = unsafeAttribute { key: "tabindex", value: prop value }
+
+instance Attr Button_ Tabindex String where
+  attr Tabindex value = unsafeAttribute { key: "tabindex", value: prop value }
+
+instance Attr Canvas_ Tabindex String where
+  attr Tabindex value = unsafeAttribute { key: "tabindex", value: prop value }
+
+instance Attr Caption_ Tabindex String where
+  attr Tabindex value = unsafeAttribute { key: "tabindex", value: prop value }
+
+instance Attr Center_ Tabindex String where
+  attr Tabindex value = unsafeAttribute { key: "tabindex", value: prop value }
+
+instance Attr Cite_ Tabindex String where
+  attr Tabindex value = unsafeAttribute { key: "tabindex", value: prop value }
+
+instance Attr Code_ Tabindex String where
+  attr Tabindex value = unsafeAttribute { key: "tabindex", value: prop value }
+
+instance Attr Col_ Tabindex String where
+  attr Tabindex value = unsafeAttribute { key: "tabindex", value: prop value }
+
+instance Attr Colgroup_ Tabindex String where
+  attr Tabindex value = unsafeAttribute { key: "tabindex", value: prop value }
+
+instance Attr Xdata_ Tabindex String where
+  attr Tabindex value = unsafeAttribute { key: "tabindex", value: prop value }
+
+instance Attr Datalist_ Tabindex String where
+  attr Tabindex value = unsafeAttribute { key: "tabindex", value: prop value }
+
+instance Attr Dd_ Tabindex String where
+  attr Tabindex value = unsafeAttribute { key: "tabindex", value: prop value }
+
+instance Attr Del_ Tabindex String where
+  attr Tabindex value = unsafeAttribute { key: "tabindex", value: prop value }
+
+instance Attr Details_ Tabindex String where
+  attr Tabindex value = unsafeAttribute { key: "tabindex", value: prop value }
+
+instance Attr Dfn_ Tabindex String where
+  attr Tabindex value = unsafeAttribute { key: "tabindex", value: prop value }
+
+instance Attr Dialog_ Tabindex String where
+  attr Tabindex value = unsafeAttribute { key: "tabindex", value: prop value }
+
+instance Attr Dir_ Tabindex String where
+  attr Tabindex value = unsafeAttribute { key: "tabindex", value: prop value }
+
+instance Attr Div_ Tabindex String where
+  attr Tabindex value = unsafeAttribute { key: "tabindex", value: prop value }
+
+instance Attr Dl_ Tabindex String where
+  attr Tabindex value = unsafeAttribute { key: "tabindex", value: prop value }
+
+instance Attr Dt_ Tabindex String where
+  attr Tabindex value = unsafeAttribute { key: "tabindex", value: prop value }
+
+instance Attr Em_ Tabindex String where
+  attr Tabindex value = unsafeAttribute { key: "tabindex", value: prop value }
+
+instance Attr Embed_ Tabindex String where
+  attr Tabindex value = unsafeAttribute { key: "tabindex", value: prop value }
+
+instance Attr Fieldset_ Tabindex String where
+  attr Tabindex value = unsafeAttribute { key: "tabindex", value: prop value }
+
+instance Attr Figcaption_ Tabindex String where
+  attr Tabindex value = unsafeAttribute { key: "tabindex", value: prop value }
+
+instance Attr Figure_ Tabindex String where
+  attr Tabindex value = unsafeAttribute { key: "tabindex", value: prop value }
+
+instance Attr Font_ Tabindex String where
+  attr Tabindex value = unsafeAttribute { key: "tabindex", value: prop value }
+
+instance Attr Footer_ Tabindex String where
+  attr Tabindex value = unsafeAttribute { key: "tabindex", value: prop value }
+
+instance Attr Form_ Tabindex String where
+  attr Tabindex value = unsafeAttribute { key: "tabindex", value: prop value }
+
+instance Attr Frame_ Tabindex String where
+  attr Tabindex value = unsafeAttribute { key: "tabindex", value: prop value }
+
+instance Attr Frameset_ Tabindex String where
+  attr Tabindex value = unsafeAttribute { key: "tabindex", value: prop value }
+
+instance Attr H1_ Tabindex String where
+  attr Tabindex value = unsafeAttribute { key: "tabindex", value: prop value }
+
+instance Attr H2_ Tabindex String where
+  attr Tabindex value = unsafeAttribute { key: "tabindex", value: prop value }
+
+instance Attr H3_ Tabindex String where
+  attr Tabindex value = unsafeAttribute { key: "tabindex", value: prop value }
+
+instance Attr H4_ Tabindex String where
+  attr Tabindex value = unsafeAttribute { key: "tabindex", value: prop value }
+
+instance Attr H5_ Tabindex String where
+  attr Tabindex value = unsafeAttribute { key: "tabindex", value: prop value }
+
+instance Attr H6_ Tabindex String where
+  attr Tabindex value = unsafeAttribute { key: "tabindex", value: prop value }
+
+instance Attr Head_ Tabindex String where
+  attr Tabindex value = unsafeAttribute { key: "tabindex", value: prop value }
+
+instance Attr Header_ Tabindex String where
+  attr Tabindex value = unsafeAttribute { key: "tabindex", value: prop value }
+
+instance Attr Hr_ Tabindex String where
+  attr Tabindex value = unsafeAttribute { key: "tabindex", value: prop value }
+
+instance Attr Html_ Tabindex String where
+  attr Tabindex value = unsafeAttribute { key: "tabindex", value: prop value }
+
+instance Attr I_ Tabindex String where
+  attr Tabindex value = unsafeAttribute { key: "tabindex", value: prop value }
+
+instance Attr Iframe_ Tabindex String where
+  attr Tabindex value = unsafeAttribute { key: "tabindex", value: prop value }
+
+instance Attr Img_ Tabindex String where
+  attr Tabindex value = unsafeAttribute { key: "tabindex", value: prop value }
+
+instance Attr Input_ Tabindex String where
+  attr Tabindex value = unsafeAttribute { key: "tabindex", value: prop value }
+
+instance Attr Ins_ Tabindex String where
+  attr Tabindex value = unsafeAttribute { key: "tabindex", value: prop value }
+
+instance Attr Kbd_ Tabindex String where
+  attr Tabindex value = unsafeAttribute { key: "tabindex", value: prop value }
+
+instance Attr Label_ Tabindex String where
+  attr Tabindex value = unsafeAttribute { key: "tabindex", value: prop value }
+
+instance Attr Legend_ Tabindex String where
+  attr Tabindex value = unsafeAttribute { key: "tabindex", value: prop value }
+
+instance Attr Li_ Tabindex String where
+  attr Tabindex value = unsafeAttribute { key: "tabindex", value: prop value }
+
+instance Attr Link_ Tabindex String where
+  attr Tabindex value = unsafeAttribute { key: "tabindex", value: prop value }
+
+instance Attr Main_ Tabindex String where
+  attr Tabindex value = unsafeAttribute { key: "tabindex", value: prop value }
+
+instance Attr Map_ Tabindex String where
+  attr Tabindex value = unsafeAttribute { key: "tabindex", value: prop value }
+
+instance Attr Mark_ Tabindex String where
+  attr Tabindex value = unsafeAttribute { key: "tabindex", value: prop value }
+
+instance Attr Meta_ Tabindex String where
+  attr Tabindex value = unsafeAttribute { key: "tabindex", value: prop value }
+
+instance Attr Meter_ Tabindex String where
+  attr Tabindex value = unsafeAttribute { key: "tabindex", value: prop value }
+
+instance Attr Nav_ Tabindex String where
+  attr Tabindex value = unsafeAttribute { key: "tabindex", value: prop value }
+
+instance Attr Noframes_ Tabindex String where
+  attr Tabindex value = unsafeAttribute { key: "tabindex", value: prop value }
+
+instance Attr Noscript_ Tabindex String where
+  attr Tabindex value = unsafeAttribute { key: "tabindex", value: prop value }
+
+instance Attr Object_ Tabindex String where
+  attr Tabindex value = unsafeAttribute { key: "tabindex", value: prop value }
+
+instance Attr Ol_ Tabindex String where
+  attr Tabindex value = unsafeAttribute { key: "tabindex", value: prop value }
+
+instance Attr Optgroup_ Tabindex String where
+  attr Tabindex value = unsafeAttribute { key: "tabindex", value: prop value }
+
+instance Attr Option_ Tabindex String where
+  attr Tabindex value = unsafeAttribute { key: "tabindex", value: prop value }
+
+instance Attr Output_ Tabindex String where
+  attr Tabindex value = unsafeAttribute { key: "tabindex", value: prop value }
+
+instance Attr P_ Tabindex String where
+  attr Tabindex value = unsafeAttribute { key: "tabindex", value: prop value }
+
+instance Attr Param_ Tabindex String where
+  attr Tabindex value = unsafeAttribute { key: "tabindex", value: prop value }
+
+instance Attr Picture_ Tabindex String where
+  attr Tabindex value = unsafeAttribute { key: "tabindex", value: prop value }
+
+instance Attr Pre_ Tabindex String where
+  attr Tabindex value = unsafeAttribute { key: "tabindex", value: prop value }
+
+instance Attr Progress_ Tabindex String where
+  attr Tabindex value = unsafeAttribute { key: "tabindex", value: prop value }
+
+instance Attr Q_ Tabindex String where
+  attr Tabindex value = unsafeAttribute { key: "tabindex", value: prop value }
+
+instance Attr Rp_ Tabindex String where
+  attr Tabindex value = unsafeAttribute { key: "tabindex", value: prop value }
+
+instance Attr Rt_ Tabindex String where
+  attr Tabindex value = unsafeAttribute { key: "tabindex", value: prop value }
+
+instance Attr Ruby_ Tabindex String where
+  attr Tabindex value = unsafeAttribute { key: "tabindex", value: prop value }
+
+instance Attr S_ Tabindex String where
+  attr Tabindex value = unsafeAttribute { key: "tabindex", value: prop value }
+
+instance Attr Samp_ Tabindex String where
+  attr Tabindex value = unsafeAttribute { key: "tabindex", value: prop value }
+
+instance Attr Script_ Tabindex String where
+  attr Tabindex value = unsafeAttribute { key: "tabindex", value: prop value }
+
+instance Attr Section_ Tabindex String where
+  attr Tabindex value = unsafeAttribute { key: "tabindex", value: prop value }
+
+instance Attr Select_ Tabindex String where
+  attr Tabindex value = unsafeAttribute { key: "tabindex", value: prop value }
+
+instance Attr Small_ Tabindex String where
+  attr Tabindex value = unsafeAttribute { key: "tabindex", value: prop value }
+
+instance Attr Source_ Tabindex String where
+  attr Tabindex value = unsafeAttribute { key: "tabindex", value: prop value }
+
+instance Attr Span_ Tabindex String where
+  attr Tabindex value = unsafeAttribute { key: "tabindex", value: prop value }
+
+instance Attr Strike_ Tabindex String where
+  attr Tabindex value = unsafeAttribute { key: "tabindex", value: prop value }
+
+instance Attr Strong_ Tabindex String where
+  attr Tabindex value = unsafeAttribute { key: "tabindex", value: prop value }
+
+instance Attr Style_ Tabindex String where
+  attr Tabindex value = unsafeAttribute { key: "tabindex", value: prop value }
+
+instance Attr Sub_ Tabindex String where
+  attr Tabindex value = unsafeAttribute { key: "tabindex", value: prop value }
+
+instance Attr Summary_ Tabindex String where
+  attr Tabindex value = unsafeAttribute { key: "tabindex", value: prop value }
+
+instance Attr Sup_ Tabindex String where
+  attr Tabindex value = unsafeAttribute { key: "tabindex", value: prop value }
+
+instance Attr Svg_ Tabindex String where
+  attr Tabindex value = unsafeAttribute { key: "tabindex", value: prop value }
+
+instance Attr Table_ Tabindex String where
+  attr Tabindex value = unsafeAttribute { key: "tabindex", value: prop value }
+
+instance Attr Tbody_ Tabindex String where
+  attr Tabindex value = unsafeAttribute { key: "tabindex", value: prop value }
+
+instance Attr Td_ Tabindex String where
+  attr Tabindex value = unsafeAttribute { key: "tabindex", value: prop value }
+
+instance Attr Template_ Tabindex String where
+  attr Tabindex value = unsafeAttribute { key: "tabindex", value: prop value }
+
+instance Attr Textarea_ Tabindex String where
+  attr Tabindex value = unsafeAttribute { key: "tabindex", value: prop value }
+
+instance Attr Tfoot_ Tabindex String where
+  attr Tabindex value = unsafeAttribute { key: "tabindex", value: prop value }
+
+instance Attr Th_ Tabindex String where
+  attr Tabindex value = unsafeAttribute { key: "tabindex", value: prop value }
+
+instance Attr Thead_ Tabindex String where
+  attr Tabindex value = unsafeAttribute { key: "tabindex", value: prop value }
+
+instance Attr Time_ Tabindex String where
+  attr Tabindex value = unsafeAttribute { key: "tabindex", value: prop value }
+
+instance Attr Title_ Tabindex String where
+  attr Tabindex value = unsafeAttribute { key: "tabindex", value: prop value }
+
+instance Attr Tr_ Tabindex String where
+  attr Tabindex value = unsafeAttribute { key: "tabindex", value: prop value }
+
+instance Attr Track_ Tabindex String where
+  attr Tabindex value = unsafeAttribute { key: "tabindex", value: prop value }
+
+instance Attr Tt_ Tabindex String where
+  attr Tabindex value = unsafeAttribute { key: "tabindex", value: prop value }
+
+instance Attr U_ Tabindex String where
+  attr Tabindex value = unsafeAttribute { key: "tabindex", value: prop value }
+
+instance Attr Ul_ Tabindex String where
+  attr Tabindex value = unsafeAttribute { key: "tabindex", value: prop value }
+
+instance Attr Var_ Tabindex String where
+  attr Tabindex value = unsafeAttribute { key: "tabindex", value: prop value }
+
+instance Attr Video_ Tabindex String where
+  attr Tabindex value = unsafeAttribute { key: "tabindex", value: prop value }
+
+instance Attr Wbr_ Tabindex String where
+  attr Tabindex value = unsafeAttribute { key: "tabindex", value: prop value }
 
 instance Attr A_ Target String where
   attr Target value = unsafeAttribute { key: "target", value: prop value }
@@ -2061,6 +9015,738 @@ instance Attr Base_ Target String where
 
 instance Attr Form_ Target String where
   attr Target value = unsafeAttribute { key: "target", value: prop value }
+
+instance Attr A_ Title String where
+  attr Title value = unsafeAttribute { key: "title", value: prop value }
+
+instance Attr Abbr_ Title String where
+  attr Title value = unsafeAttribute { key: "title", value: prop value }
+
+instance Attr Acronym_ Title String where
+  attr Title value = unsafeAttribute { key: "title", value: prop value }
+
+instance Attr Address_ Title String where
+  attr Title value = unsafeAttribute { key: "title", value: prop value }
+
+instance Attr Applet_ Title String where
+  attr Title value = unsafeAttribute { key: "title", value: prop value }
+
+instance Attr Area_ Title String where
+  attr Title value = unsafeAttribute { key: "title", value: prop value }
+
+instance Attr Article_ Title String where
+  attr Title value = unsafeAttribute { key: "title", value: prop value }
+
+instance Attr Aside_ Title String where
+  attr Title value = unsafeAttribute { key: "title", value: prop value }
+
+instance Attr Audio_ Title String where
+  attr Title value = unsafeAttribute { key: "title", value: prop value }
+
+instance Attr B_ Title String where
+  attr Title value = unsafeAttribute { key: "title", value: prop value }
+
+instance Attr Base_ Title String where
+  attr Title value = unsafeAttribute { key: "title", value: prop value }
+
+instance Attr Basefont_ Title String where
+  attr Title value = unsafeAttribute { key: "title", value: prop value }
+
+instance Attr Bdi_ Title String where
+  attr Title value = unsafeAttribute { key: "title", value: prop value }
+
+instance Attr Bdo_ Title String where
+  attr Title value = unsafeAttribute { key: "title", value: prop value }
+
+instance Attr Big_ Title String where
+  attr Title value = unsafeAttribute { key: "title", value: prop value }
+
+instance Attr Blockquote_ Title String where
+  attr Title value = unsafeAttribute { key: "title", value: prop value }
+
+instance Attr Body_ Title String where
+  attr Title value = unsafeAttribute { key: "title", value: prop value }
+
+instance Attr Br_ Title String where
+  attr Title value = unsafeAttribute { key: "title", value: prop value }
+
+instance Attr Button_ Title String where
+  attr Title value = unsafeAttribute { key: "title", value: prop value }
+
+instance Attr Canvas_ Title String where
+  attr Title value = unsafeAttribute { key: "title", value: prop value }
+
+instance Attr Caption_ Title String where
+  attr Title value = unsafeAttribute { key: "title", value: prop value }
+
+instance Attr Center_ Title String where
+  attr Title value = unsafeAttribute { key: "title", value: prop value }
+
+instance Attr Cite_ Title String where
+  attr Title value = unsafeAttribute { key: "title", value: prop value }
+
+instance Attr Code_ Title String where
+  attr Title value = unsafeAttribute { key: "title", value: prop value }
+
+instance Attr Col_ Title String where
+  attr Title value = unsafeAttribute { key: "title", value: prop value }
+
+instance Attr Colgroup_ Title String where
+  attr Title value = unsafeAttribute { key: "title", value: prop value }
+
+instance Attr Xdata_ Title String where
+  attr Title value = unsafeAttribute { key: "title", value: prop value }
+
+instance Attr Datalist_ Title String where
+  attr Title value = unsafeAttribute { key: "title", value: prop value }
+
+instance Attr Dd_ Title String where
+  attr Title value = unsafeAttribute { key: "title", value: prop value }
+
+instance Attr Del_ Title String where
+  attr Title value = unsafeAttribute { key: "title", value: prop value }
+
+instance Attr Details_ Title String where
+  attr Title value = unsafeAttribute { key: "title", value: prop value }
+
+instance Attr Dfn_ Title String where
+  attr Title value = unsafeAttribute { key: "title", value: prop value }
+
+instance Attr Dialog_ Title String where
+  attr Title value = unsafeAttribute { key: "title", value: prop value }
+
+instance Attr Dir_ Title String where
+  attr Title value = unsafeAttribute { key: "title", value: prop value }
+
+instance Attr Div_ Title String where
+  attr Title value = unsafeAttribute { key: "title", value: prop value }
+
+instance Attr Dl_ Title String where
+  attr Title value = unsafeAttribute { key: "title", value: prop value }
+
+instance Attr Dt_ Title String where
+  attr Title value = unsafeAttribute { key: "title", value: prop value }
+
+instance Attr Em_ Title String where
+  attr Title value = unsafeAttribute { key: "title", value: prop value }
+
+instance Attr Embed_ Title String where
+  attr Title value = unsafeAttribute { key: "title", value: prop value }
+
+instance Attr Fieldset_ Title String where
+  attr Title value = unsafeAttribute { key: "title", value: prop value }
+
+instance Attr Figcaption_ Title String where
+  attr Title value = unsafeAttribute { key: "title", value: prop value }
+
+instance Attr Figure_ Title String where
+  attr Title value = unsafeAttribute { key: "title", value: prop value }
+
+instance Attr Font_ Title String where
+  attr Title value = unsafeAttribute { key: "title", value: prop value }
+
+instance Attr Footer_ Title String where
+  attr Title value = unsafeAttribute { key: "title", value: prop value }
+
+instance Attr Form_ Title String where
+  attr Title value = unsafeAttribute { key: "title", value: prop value }
+
+instance Attr Frame_ Title String where
+  attr Title value = unsafeAttribute { key: "title", value: prop value }
+
+instance Attr Frameset_ Title String where
+  attr Title value = unsafeAttribute { key: "title", value: prop value }
+
+instance Attr H1_ Title String where
+  attr Title value = unsafeAttribute { key: "title", value: prop value }
+
+instance Attr H2_ Title String where
+  attr Title value = unsafeAttribute { key: "title", value: prop value }
+
+instance Attr H3_ Title String where
+  attr Title value = unsafeAttribute { key: "title", value: prop value }
+
+instance Attr H4_ Title String where
+  attr Title value = unsafeAttribute { key: "title", value: prop value }
+
+instance Attr H5_ Title String where
+  attr Title value = unsafeAttribute { key: "title", value: prop value }
+
+instance Attr H6_ Title String where
+  attr Title value = unsafeAttribute { key: "title", value: prop value }
+
+instance Attr Head_ Title String where
+  attr Title value = unsafeAttribute { key: "title", value: prop value }
+
+instance Attr Header_ Title String where
+  attr Title value = unsafeAttribute { key: "title", value: prop value }
+
+instance Attr Hr_ Title String where
+  attr Title value = unsafeAttribute { key: "title", value: prop value }
+
+instance Attr Html_ Title String where
+  attr Title value = unsafeAttribute { key: "title", value: prop value }
+
+instance Attr I_ Title String where
+  attr Title value = unsafeAttribute { key: "title", value: prop value }
+
+instance Attr Iframe_ Title String where
+  attr Title value = unsafeAttribute { key: "title", value: prop value }
+
+instance Attr Img_ Title String where
+  attr Title value = unsafeAttribute { key: "title", value: prop value }
+
+instance Attr Input_ Title String where
+  attr Title value = unsafeAttribute { key: "title", value: prop value }
+
+instance Attr Ins_ Title String where
+  attr Title value = unsafeAttribute { key: "title", value: prop value }
+
+instance Attr Kbd_ Title String where
+  attr Title value = unsafeAttribute { key: "title", value: prop value }
+
+instance Attr Label_ Title String where
+  attr Title value = unsafeAttribute { key: "title", value: prop value }
+
+instance Attr Legend_ Title String where
+  attr Title value = unsafeAttribute { key: "title", value: prop value }
+
+instance Attr Li_ Title String where
+  attr Title value = unsafeAttribute { key: "title", value: prop value }
+
+instance Attr Link_ Title String where
+  attr Title value = unsafeAttribute { key: "title", value: prop value }
+
+instance Attr Main_ Title String where
+  attr Title value = unsafeAttribute { key: "title", value: prop value }
+
+instance Attr Map_ Title String where
+  attr Title value = unsafeAttribute { key: "title", value: prop value }
+
+instance Attr Mark_ Title String where
+  attr Title value = unsafeAttribute { key: "title", value: prop value }
+
+instance Attr Meta_ Title String where
+  attr Title value = unsafeAttribute { key: "title", value: prop value }
+
+instance Attr Meter_ Title String where
+  attr Title value = unsafeAttribute { key: "title", value: prop value }
+
+instance Attr Nav_ Title String where
+  attr Title value = unsafeAttribute { key: "title", value: prop value }
+
+instance Attr Noframes_ Title String where
+  attr Title value = unsafeAttribute { key: "title", value: prop value }
+
+instance Attr Noscript_ Title String where
+  attr Title value = unsafeAttribute { key: "title", value: prop value }
+
+instance Attr Object_ Title String where
+  attr Title value = unsafeAttribute { key: "title", value: prop value }
+
+instance Attr Ol_ Title String where
+  attr Title value = unsafeAttribute { key: "title", value: prop value }
+
+instance Attr Optgroup_ Title String where
+  attr Title value = unsafeAttribute { key: "title", value: prop value }
+
+instance Attr Option_ Title String where
+  attr Title value = unsafeAttribute { key: "title", value: prop value }
+
+instance Attr Output_ Title String where
+  attr Title value = unsafeAttribute { key: "title", value: prop value }
+
+instance Attr P_ Title String where
+  attr Title value = unsafeAttribute { key: "title", value: prop value }
+
+instance Attr Param_ Title String where
+  attr Title value = unsafeAttribute { key: "title", value: prop value }
+
+instance Attr Picture_ Title String where
+  attr Title value = unsafeAttribute { key: "title", value: prop value }
+
+instance Attr Pre_ Title String where
+  attr Title value = unsafeAttribute { key: "title", value: prop value }
+
+instance Attr Progress_ Title String where
+  attr Title value = unsafeAttribute { key: "title", value: prop value }
+
+instance Attr Q_ Title String where
+  attr Title value = unsafeAttribute { key: "title", value: prop value }
+
+instance Attr Rp_ Title String where
+  attr Title value = unsafeAttribute { key: "title", value: prop value }
+
+instance Attr Rt_ Title String where
+  attr Title value = unsafeAttribute { key: "title", value: prop value }
+
+instance Attr Ruby_ Title String where
+  attr Title value = unsafeAttribute { key: "title", value: prop value }
+
+instance Attr S_ Title String where
+  attr Title value = unsafeAttribute { key: "title", value: prop value }
+
+instance Attr Samp_ Title String where
+  attr Title value = unsafeAttribute { key: "title", value: prop value }
+
+instance Attr Script_ Title String where
+  attr Title value = unsafeAttribute { key: "title", value: prop value }
+
+instance Attr Section_ Title String where
+  attr Title value = unsafeAttribute { key: "title", value: prop value }
+
+instance Attr Select_ Title String where
+  attr Title value = unsafeAttribute { key: "title", value: prop value }
+
+instance Attr Small_ Title String where
+  attr Title value = unsafeAttribute { key: "title", value: prop value }
+
+instance Attr Source_ Title String where
+  attr Title value = unsafeAttribute { key: "title", value: prop value }
+
+instance Attr Span_ Title String where
+  attr Title value = unsafeAttribute { key: "title", value: prop value }
+
+instance Attr Strike_ Title String where
+  attr Title value = unsafeAttribute { key: "title", value: prop value }
+
+instance Attr Strong_ Title String where
+  attr Title value = unsafeAttribute { key: "title", value: prop value }
+
+instance Attr Style_ Title String where
+  attr Title value = unsafeAttribute { key: "title", value: prop value }
+
+instance Attr Sub_ Title String where
+  attr Title value = unsafeAttribute { key: "title", value: prop value }
+
+instance Attr Summary_ Title String where
+  attr Title value = unsafeAttribute { key: "title", value: prop value }
+
+instance Attr Sup_ Title String where
+  attr Title value = unsafeAttribute { key: "title", value: prop value }
+
+instance Attr Svg_ Title String where
+  attr Title value = unsafeAttribute { key: "title", value: prop value }
+
+instance Attr Table_ Title String where
+  attr Title value = unsafeAttribute { key: "title", value: prop value }
+
+instance Attr Tbody_ Title String where
+  attr Title value = unsafeAttribute { key: "title", value: prop value }
+
+instance Attr Td_ Title String where
+  attr Title value = unsafeAttribute { key: "title", value: prop value }
+
+instance Attr Template_ Title String where
+  attr Title value = unsafeAttribute { key: "title", value: prop value }
+
+instance Attr Textarea_ Title String where
+  attr Title value = unsafeAttribute { key: "title", value: prop value }
+
+instance Attr Tfoot_ Title String where
+  attr Title value = unsafeAttribute { key: "title", value: prop value }
+
+instance Attr Th_ Title String where
+  attr Title value = unsafeAttribute { key: "title", value: prop value }
+
+instance Attr Thead_ Title String where
+  attr Title value = unsafeAttribute { key: "title", value: prop value }
+
+instance Attr Time_ Title String where
+  attr Title value = unsafeAttribute { key: "title", value: prop value }
+
+instance Attr Title_ Title String where
+  attr Title value = unsafeAttribute { key: "title", value: prop value }
+
+instance Attr Tr_ Title String where
+  attr Title value = unsafeAttribute { key: "title", value: prop value }
+
+instance Attr Track_ Title String where
+  attr Title value = unsafeAttribute { key: "title", value: prop value }
+
+instance Attr Tt_ Title String where
+  attr Title value = unsafeAttribute { key: "title", value: prop value }
+
+instance Attr U_ Title String where
+  attr Title value = unsafeAttribute { key: "title", value: prop value }
+
+instance Attr Ul_ Title String where
+  attr Title value = unsafeAttribute { key: "title", value: prop value }
+
+instance Attr Var_ Title String where
+  attr Title value = unsafeAttribute { key: "title", value: prop value }
+
+instance Attr Video_ Title String where
+  attr Title value = unsafeAttribute { key: "title", value: prop value }
+
+instance Attr Wbr_ Title String where
+  attr Title value = unsafeAttribute { key: "title", value: prop value }
+
+instance Attr A_ Translate String where
+  attr Translate value = unsafeAttribute { key: "translate", value: prop value }
+
+instance Attr Abbr_ Translate String where
+  attr Translate value = unsafeAttribute { key: "translate", value: prop value }
+
+instance Attr Acronym_ Translate String where
+  attr Translate value = unsafeAttribute { key: "translate", value: prop value }
+
+instance Attr Address_ Translate String where
+  attr Translate value = unsafeAttribute { key: "translate", value: prop value }
+
+instance Attr Applet_ Translate String where
+  attr Translate value = unsafeAttribute { key: "translate", value: prop value }
+
+instance Attr Area_ Translate String where
+  attr Translate value = unsafeAttribute { key: "translate", value: prop value }
+
+instance Attr Article_ Translate String where
+  attr Translate value = unsafeAttribute { key: "translate", value: prop value }
+
+instance Attr Aside_ Translate String where
+  attr Translate value = unsafeAttribute { key: "translate", value: prop value }
+
+instance Attr Audio_ Translate String where
+  attr Translate value = unsafeAttribute { key: "translate", value: prop value }
+
+instance Attr B_ Translate String where
+  attr Translate value = unsafeAttribute { key: "translate", value: prop value }
+
+instance Attr Base_ Translate String where
+  attr Translate value = unsafeAttribute { key: "translate", value: prop value }
+
+instance Attr Basefont_ Translate String where
+  attr Translate value = unsafeAttribute { key: "translate", value: prop value }
+
+instance Attr Bdi_ Translate String where
+  attr Translate value = unsafeAttribute { key: "translate", value: prop value }
+
+instance Attr Bdo_ Translate String where
+  attr Translate value = unsafeAttribute { key: "translate", value: prop value }
+
+instance Attr Big_ Translate String where
+  attr Translate value = unsafeAttribute { key: "translate", value: prop value }
+
+instance Attr Blockquote_ Translate String where
+  attr Translate value = unsafeAttribute { key: "translate", value: prop value }
+
+instance Attr Body_ Translate String where
+  attr Translate value = unsafeAttribute { key: "translate", value: prop value }
+
+instance Attr Br_ Translate String where
+  attr Translate value = unsafeAttribute { key: "translate", value: prop value }
+
+instance Attr Button_ Translate String where
+  attr Translate value = unsafeAttribute { key: "translate", value: prop value }
+
+instance Attr Canvas_ Translate String where
+  attr Translate value = unsafeAttribute { key: "translate", value: prop value }
+
+instance Attr Caption_ Translate String where
+  attr Translate value = unsafeAttribute { key: "translate", value: prop value }
+
+instance Attr Center_ Translate String where
+  attr Translate value = unsafeAttribute { key: "translate", value: prop value }
+
+instance Attr Cite_ Translate String where
+  attr Translate value = unsafeAttribute { key: "translate", value: prop value }
+
+instance Attr Code_ Translate String where
+  attr Translate value = unsafeAttribute { key: "translate", value: prop value }
+
+instance Attr Col_ Translate String where
+  attr Translate value = unsafeAttribute { key: "translate", value: prop value }
+
+instance Attr Colgroup_ Translate String where
+  attr Translate value = unsafeAttribute { key: "translate", value: prop value }
+
+instance Attr Xdata_ Translate String where
+  attr Translate value = unsafeAttribute { key: "translate", value: prop value }
+
+instance Attr Datalist_ Translate String where
+  attr Translate value = unsafeAttribute { key: "translate", value: prop value }
+
+instance Attr Dd_ Translate String where
+  attr Translate value = unsafeAttribute { key: "translate", value: prop value }
+
+instance Attr Del_ Translate String where
+  attr Translate value = unsafeAttribute { key: "translate", value: prop value }
+
+instance Attr Details_ Translate String where
+  attr Translate value = unsafeAttribute { key: "translate", value: prop value }
+
+instance Attr Dfn_ Translate String where
+  attr Translate value = unsafeAttribute { key: "translate", value: prop value }
+
+instance Attr Dialog_ Translate String where
+  attr Translate value = unsafeAttribute { key: "translate", value: prop value }
+
+instance Attr Dir_ Translate String where
+  attr Translate value = unsafeAttribute { key: "translate", value: prop value }
+
+instance Attr Div_ Translate String where
+  attr Translate value = unsafeAttribute { key: "translate", value: prop value }
+
+instance Attr Dl_ Translate String where
+  attr Translate value = unsafeAttribute { key: "translate", value: prop value }
+
+instance Attr Dt_ Translate String where
+  attr Translate value = unsafeAttribute { key: "translate", value: prop value }
+
+instance Attr Em_ Translate String where
+  attr Translate value = unsafeAttribute { key: "translate", value: prop value }
+
+instance Attr Embed_ Translate String where
+  attr Translate value = unsafeAttribute { key: "translate", value: prop value }
+
+instance Attr Fieldset_ Translate String where
+  attr Translate value = unsafeAttribute { key: "translate", value: prop value }
+
+instance Attr Figcaption_ Translate String where
+  attr Translate value = unsafeAttribute { key: "translate", value: prop value }
+
+instance Attr Figure_ Translate String where
+  attr Translate value = unsafeAttribute { key: "translate", value: prop value }
+
+instance Attr Font_ Translate String where
+  attr Translate value = unsafeAttribute { key: "translate", value: prop value }
+
+instance Attr Footer_ Translate String where
+  attr Translate value = unsafeAttribute { key: "translate", value: prop value }
+
+instance Attr Form_ Translate String where
+  attr Translate value = unsafeAttribute { key: "translate", value: prop value }
+
+instance Attr Frame_ Translate String where
+  attr Translate value = unsafeAttribute { key: "translate", value: prop value }
+
+instance Attr Frameset_ Translate String where
+  attr Translate value = unsafeAttribute { key: "translate", value: prop value }
+
+instance Attr H1_ Translate String where
+  attr Translate value = unsafeAttribute { key: "translate", value: prop value }
+
+instance Attr H2_ Translate String where
+  attr Translate value = unsafeAttribute { key: "translate", value: prop value }
+
+instance Attr H3_ Translate String where
+  attr Translate value = unsafeAttribute { key: "translate", value: prop value }
+
+instance Attr H4_ Translate String where
+  attr Translate value = unsafeAttribute { key: "translate", value: prop value }
+
+instance Attr H5_ Translate String where
+  attr Translate value = unsafeAttribute { key: "translate", value: prop value }
+
+instance Attr H6_ Translate String where
+  attr Translate value = unsafeAttribute { key: "translate", value: prop value }
+
+instance Attr Head_ Translate String where
+  attr Translate value = unsafeAttribute { key: "translate", value: prop value }
+
+instance Attr Header_ Translate String where
+  attr Translate value = unsafeAttribute { key: "translate", value: prop value }
+
+instance Attr Hr_ Translate String where
+  attr Translate value = unsafeAttribute { key: "translate", value: prop value }
+
+instance Attr Html_ Translate String where
+  attr Translate value = unsafeAttribute { key: "translate", value: prop value }
+
+instance Attr I_ Translate String where
+  attr Translate value = unsafeAttribute { key: "translate", value: prop value }
+
+instance Attr Iframe_ Translate String where
+  attr Translate value = unsafeAttribute { key: "translate", value: prop value }
+
+instance Attr Img_ Translate String where
+  attr Translate value = unsafeAttribute { key: "translate", value: prop value }
+
+instance Attr Input_ Translate String where
+  attr Translate value = unsafeAttribute { key: "translate", value: prop value }
+
+instance Attr Ins_ Translate String where
+  attr Translate value = unsafeAttribute { key: "translate", value: prop value }
+
+instance Attr Kbd_ Translate String where
+  attr Translate value = unsafeAttribute { key: "translate", value: prop value }
+
+instance Attr Label_ Translate String where
+  attr Translate value = unsafeAttribute { key: "translate", value: prop value }
+
+instance Attr Legend_ Translate String where
+  attr Translate value = unsafeAttribute { key: "translate", value: prop value }
+
+instance Attr Li_ Translate String where
+  attr Translate value = unsafeAttribute { key: "translate", value: prop value }
+
+instance Attr Link_ Translate String where
+  attr Translate value = unsafeAttribute { key: "translate", value: prop value }
+
+instance Attr Main_ Translate String where
+  attr Translate value = unsafeAttribute { key: "translate", value: prop value }
+
+instance Attr Map_ Translate String where
+  attr Translate value = unsafeAttribute { key: "translate", value: prop value }
+
+instance Attr Mark_ Translate String where
+  attr Translate value = unsafeAttribute { key: "translate", value: prop value }
+
+instance Attr Meta_ Translate String where
+  attr Translate value = unsafeAttribute { key: "translate", value: prop value }
+
+instance Attr Meter_ Translate String where
+  attr Translate value = unsafeAttribute { key: "translate", value: prop value }
+
+instance Attr Nav_ Translate String where
+  attr Translate value = unsafeAttribute { key: "translate", value: prop value }
+
+instance Attr Noframes_ Translate String where
+  attr Translate value = unsafeAttribute { key: "translate", value: prop value }
+
+instance Attr Noscript_ Translate String where
+  attr Translate value = unsafeAttribute { key: "translate", value: prop value }
+
+instance Attr Object_ Translate String where
+  attr Translate value = unsafeAttribute { key: "translate", value: prop value }
+
+instance Attr Ol_ Translate String where
+  attr Translate value = unsafeAttribute { key: "translate", value: prop value }
+
+instance Attr Optgroup_ Translate String where
+  attr Translate value = unsafeAttribute { key: "translate", value: prop value }
+
+instance Attr Option_ Translate String where
+  attr Translate value = unsafeAttribute { key: "translate", value: prop value }
+
+instance Attr Output_ Translate String where
+  attr Translate value = unsafeAttribute { key: "translate", value: prop value }
+
+instance Attr P_ Translate String where
+  attr Translate value = unsafeAttribute { key: "translate", value: prop value }
+
+instance Attr Param_ Translate String where
+  attr Translate value = unsafeAttribute { key: "translate", value: prop value }
+
+instance Attr Picture_ Translate String where
+  attr Translate value = unsafeAttribute { key: "translate", value: prop value }
+
+instance Attr Pre_ Translate String where
+  attr Translate value = unsafeAttribute { key: "translate", value: prop value }
+
+instance Attr Progress_ Translate String where
+  attr Translate value = unsafeAttribute { key: "translate", value: prop value }
+
+instance Attr Q_ Translate String where
+  attr Translate value = unsafeAttribute { key: "translate", value: prop value }
+
+instance Attr Rp_ Translate String where
+  attr Translate value = unsafeAttribute { key: "translate", value: prop value }
+
+instance Attr Rt_ Translate String where
+  attr Translate value = unsafeAttribute { key: "translate", value: prop value }
+
+instance Attr Ruby_ Translate String where
+  attr Translate value = unsafeAttribute { key: "translate", value: prop value }
+
+instance Attr S_ Translate String where
+  attr Translate value = unsafeAttribute { key: "translate", value: prop value }
+
+instance Attr Samp_ Translate String where
+  attr Translate value = unsafeAttribute { key: "translate", value: prop value }
+
+instance Attr Script_ Translate String where
+  attr Translate value = unsafeAttribute { key: "translate", value: prop value }
+
+instance Attr Section_ Translate String where
+  attr Translate value = unsafeAttribute { key: "translate", value: prop value }
+
+instance Attr Select_ Translate String where
+  attr Translate value = unsafeAttribute { key: "translate", value: prop value }
+
+instance Attr Small_ Translate String where
+  attr Translate value = unsafeAttribute { key: "translate", value: prop value }
+
+instance Attr Source_ Translate String where
+  attr Translate value = unsafeAttribute { key: "translate", value: prop value }
+
+instance Attr Span_ Translate String where
+  attr Translate value = unsafeAttribute { key: "translate", value: prop value }
+
+instance Attr Strike_ Translate String where
+  attr Translate value = unsafeAttribute { key: "translate", value: prop value }
+
+instance Attr Strong_ Translate String where
+  attr Translate value = unsafeAttribute { key: "translate", value: prop value }
+
+instance Attr Style_ Translate String where
+  attr Translate value = unsafeAttribute { key: "translate", value: prop value }
+
+instance Attr Sub_ Translate String where
+  attr Translate value = unsafeAttribute { key: "translate", value: prop value }
+
+instance Attr Summary_ Translate String where
+  attr Translate value = unsafeAttribute { key: "translate", value: prop value }
+
+instance Attr Sup_ Translate String where
+  attr Translate value = unsafeAttribute { key: "translate", value: prop value }
+
+instance Attr Svg_ Translate String where
+  attr Translate value = unsafeAttribute { key: "translate", value: prop value }
+
+instance Attr Table_ Translate String where
+  attr Translate value = unsafeAttribute { key: "translate", value: prop value }
+
+instance Attr Tbody_ Translate String where
+  attr Translate value = unsafeAttribute { key: "translate", value: prop value }
+
+instance Attr Td_ Translate String where
+  attr Translate value = unsafeAttribute { key: "translate", value: prop value }
+
+instance Attr Template_ Translate String where
+  attr Translate value = unsafeAttribute { key: "translate", value: prop value }
+
+instance Attr Textarea_ Translate String where
+  attr Translate value = unsafeAttribute { key: "translate", value: prop value }
+
+instance Attr Tfoot_ Translate String where
+  attr Translate value = unsafeAttribute { key: "translate", value: prop value }
+
+instance Attr Th_ Translate String where
+  attr Translate value = unsafeAttribute { key: "translate", value: prop value }
+
+instance Attr Thead_ Translate String where
+  attr Translate value = unsafeAttribute { key: "translate", value: prop value }
+
+instance Attr Time_ Translate String where
+  attr Translate value = unsafeAttribute { key: "translate", value: prop value }
+
+instance Attr Title_ Translate String where
+  attr Translate value = unsafeAttribute { key: "translate", value: prop value }
+
+instance Attr Tr_ Translate String where
+  attr Translate value = unsafeAttribute { key: "translate", value: prop value }
+
+instance Attr Track_ Translate String where
+  attr Translate value = unsafeAttribute { key: "translate", value: prop value }
+
+instance Attr Tt_ Translate String where
+  attr Translate value = unsafeAttribute { key: "translate", value: prop value }
+
+instance Attr U_ Translate String where
+  attr Translate value = unsafeAttribute { key: "translate", value: prop value }
+
+instance Attr Ul_ Translate String where
+  attr Translate value = unsafeAttribute { key: "translate", value: prop value }
+
+instance Attr Var_ Translate String where
+  attr Translate value = unsafeAttribute { key: "translate", value: prop value }
+
+instance Attr Video_ Translate String where
+  attr Translate value = unsafeAttribute { key: "translate", value: prop value }
+
+instance Attr Wbr_ Translate String where
+  attr Translate value = unsafeAttribute { key: "translate", value: prop value }
 
 instance Attr Img_ Usemap String where
   attr Usemap value = unsafeAttribute { key: "usemap", value: prop value }
