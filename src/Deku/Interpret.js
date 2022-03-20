@@ -174,49 +174,28 @@ var doSortingOnSubgraphs = function (unit, sorting) {
 };
 exports.makeSubgraph_ = function (ptr) {
 	return function (terminalPtr) {
-		return function (envs) {
-			return function (sceneM) {
-				return function (funk) {
-					return function (state) {
-						return function () {
-							var children = [];
-							var scenes = [];
-							for (var i = 0; i < envs.length; i++) {
-								children[i] = {
-									units: {},
-									unqidfr: makeid(10),
-									parent: state,
-								};
-								scenes[i] = sceneM(i);
-							}
-							state.units[ptr] = {
-								outgoing: [],
-								incoming: [],
-								main: document.createElement("div"),
-								children: children,
-								funk: funk,
-								terminalPtr: terminalPtr,
-								isSubgraph: true,
-								scenes: scenes,
-							};
-							state.units[ptr].main.setAttribute("style", "display:contents;");
-							var sortable = [];
-							for (var i = 0; i < scenes.length; i++) {
-								var applied = funk[i](envs[i])(scenes[i]);
-								for (var j = 0; j < applied.instructions.length; j++) {
-									// thunk
-									applied.instructions[j](children[i])();
-								}
-								scenes[i] = applied.nextScene;
-								sortable.push([i, applied.forOrdering]);
-							}
-							// last DOM elements first
-							sortable.sort((a, b) => b[1] - a[1]);
-							doSortingOnSubgraphs(state.units[ptr], sortable);
-							for (var i = 0; i < children.length; i++) {
-								connectXToY(false)(terminalPtr)(ptr)(children[i])(state)();
-							}
+		return function (sceneM) {
+			return function (funkyFx) {
+				return function (state) {
+					return function () {
+						var children = {};
+						var scenes = {};
+						var funk = {};
+						var unsu = {};
+						state.units[ptr] = {
+							outgoing: [],
+							incoming: [],
+							sceneM: sceneM,
+							main: document.createElement("div"),
+							funkyFx: funkyFx,
+							terminalPtr: terminalPtr,
+							isSubgraph: true,
+							scenes: scenes,
+							children: children,
+							funk: funk,
+							unsu: unsu,
 						};
+						state.units[ptr].main.setAttribute("style", "display:contents;");
 					};
 				};
 			};
@@ -227,45 +206,26 @@ exports.makeTumult_ = function (ptr) {
 	return function (terminalPtr) {
 		return function (scenes) {
 			return function (nothing) {
-				return function () {
+				return function (just) {
 					return function (arrMaker) {
 						return function (state) {
 							return function () {
-								var children = [];
-								for (var i = 0; i < scenes.length; i++) {
-									children[i] = {
-										units: {},
-										parent: state,
-										unqidfr: makeid(10),
-									};
-								}
 								state.units[ptr] = {
 									outgoing: [],
 									incoming: [],
 									main: document.createElement("div"),
-									children: children,
 									isTumult: true,
-									scenes: scenes,
+									terminalPtr: terminalPtr,
+									children: {},
+									scenes: {},
 								};
 								state.units[ptr].main.setAttribute(
 									"style",
 									"display:contents;"
 								);
-								for (var i = 0; i < scenes.length; i++) {
-									var curScene = arrMaker(scenes[i])(nothing);
-									for (var j = 0; j < curScene.length; j++) {
-										// thunk
-										curScene[j](children[i])();
-									}
-								}
-								var heads = [];
-								for (var i = 0; i < children.length; i++) {
-									heads[i] = children[i].units[terminalPtr];
-								}
-								state.units[ptr].heads = heads;
-								for (var i = 0; i < children.length; i++) {
-									connectXToY(false)(terminalPtr)(ptr)(children[i])(state)();
-								}
+								setTumult_(ptr)(terminalPtr)(scenes)(nothing)(just)(arrMaker)(
+									state
+								)();
 							};
 						};
 					};
@@ -274,48 +234,75 @@ exports.makeTumult_ = function (ptr) {
 		};
 	};
 };
-exports.setTumult_ = function (ptr) {
+var setTumult_ = function (ptr) {
 	return function (terminalPtr) {
-		return function (scenes) {
+		return function (newScenes) {
 			return function (nothing) {
 				return function (just) {
 					return function (arrMaker) {
 						return function (state) {
 							return function () {
-								var needsCreation = !(
-									state.units[ptr] &&
-									state.units[ptr].children &&
-									state.units[ptr].scenes
-								);
-								if (needsCreation) {
-									var children = [];
-									for (var i = 0; i < scenes.length; i++) {
-										children[i] = {
-											units: {},
-											parent: state,
-											unqidfr: makeid(10),
-										};
-									}
-									state.units[ptr].incoming = [];
-									state.units[ptr].outgoing = [];
-									state.units[ptr].children = children;
-									state.units[ptr].isTumult = true;
-								}
-								var oldScenes = state.units[ptr].scenes;
+								var scenes = state.units[ptr].scenes;
 								var children = state.units[ptr].children;
-								for (var i = 0; i < scenes.length; i++) {
+								var needsConnecting = [];
+								var newScenesAsObj = {};
+								var preserved = [];
+								for (var i = 0; i < newScenes.length; i++) {
+									var j = newScenes[i].pos;
+									if (newScenes[i].instructions !== null) {
+										newScenesAsObj[j] = newScenes[i].instructions;
+									}
+									if (
+										newScenes[i].instructions === null &&
+										scenes[j] === undefined
+									) {
+									} else if (
+										newScenes[i].instructions !== null &&
+										scenes[j] !== undefined
+									) {
+										preserved.push(j);
+									} else if (
+										newScenes[i].instructions !== null &&
+										scenes[j] === undefined
+									) {
+										children[j] = {
+											units: {},
+											unqidfr: makeid(10),
+											parent: state,
+										};
+										scenes[j] = newScenes[i].instructions;
+										needsConnecting.push(j);
+									} else {
+										disconnectXFromY(false)(state.units[ptr].terminalPtr)(ptr)(
+											children[j]
+										)(state)();
+										// delete unused
+										delete scenes[j];
+										delete children[j];
+									}
+								}
+								for (var i = 0; i < newScenes.length; i++) {
+									if (newScenes[i].instructions === null) {
+										continue;
+									}
 									var oldScene =
-										oldScenes && oldScenes[i] ? just(oldScenes[i]) : nothing;
-									var curScene = arrMaker(scenes[i])(oldScene);
+										// if it does not need connecting
+										needsConnecting.indexOf(newScenes[i].pos) === -1
+											? // then we use the scene as the old scene
+											  just(scenes[newScenes[i].pos])
+											: // otherwise we use nothing
+											  nothing;
+									var curScene = arrMaker(newScenes[i].instructions)(oldScene);
 									for (var j = 0; j < curScene.length; j++) {
 										// thunk
-										curScene[j](children[i])();
+										curScene[j](children[newScenes[i].pos])();
 									}
 								}
-								state.units[ptr].scenes = scenes;
+								state.units[ptr].scenes = newScenesAsObj;
 								// todo - add this logic to subgraph
-								var heads = [];
-								for (var i = 0; i < children.length; i++) {
+								var heads = {};
+								for (var m = 0; m < preserved.length; m++) {
+									var i = preserved[m];
 									heads[i] = children[i].units[terminalPtr];
 									if (state.units[ptr].heads[i] !== heads[i]) {
 										var tmp = { units: {} };
@@ -324,12 +311,12 @@ exports.setTumult_ = function (ptr) {
 										connectXToY(false)(terminalPtr)(ptr)(children[i])(state)();
 									}
 								}
-								state.units[ptr].heads = heads;
-								if (needsCreation) {
-									for (var i = 0; i < children.length; i++) {
-										connectXToY(false)(terminalPtr)(ptr)(children[i])(state)();
-									}
+								for (var i = 0; i < needsConnecting.length; i++) {
+									var j = needsConnecting[i];
+									connectXToY(false)(terminalPtr)(ptr)(children[j])(state)();
+									heads[j] = children[j].units[terminalPtr];
 								}
+								state.units[ptr].heads = heads;
 							};
 						};
 					};
@@ -338,42 +325,70 @@ exports.setTumult_ = function (ptr) {
 		};
 	};
 };
+exports.setTumult_ = setTumult_;
 exports.setSubgraph_ = function (ptr) {
 	return function (envs) {
 		return function (state) {
 			return function () {
 				var scenes = state.units[ptr].scenes;
 				var children = state.units[ptr].children;
+				var funk = state.units[ptr].funk;
+				var unsu = state.units[ptr].unsu;
+				var needsConnecting = [];
+				for (var i = 0; i < envs.length; i++) {
+					var j = envs[i].pos;
+					if (envs[i].env === null && scenes[j] === undefined) {
+					} else if (envs[i].env !== null && scenes[j] !== undefined) {
+					} else if (envs[i].env !== null && scenes[j] === undefined) {
+						children[j] = {
+							units: {},
+							unqidfr: makeid(10),
+							parent: state,
+						};
+						scenes[j] = state.units[ptr].sceneM(j);
+						var funkworthy = state.units[ptr].funkyFx(j)();
+						funk[j] = funkworthy.loop;
+						unsu[j] = funkworthy.unsubscribe;
+						needsConnecting.push(j);
+					} else {
+						disconnectXFromY(false)(state.units[ptr].terminalPtr)(ptr)(
+							children[j]
+						)(state)();
+						// unsubscribe
+						unsu[j]();
+						// delete unused
+						delete scenes[j];
+						delete children[j];
+						delete funk[j];
+						delete unsu[j];
+					}
+				}
 				var sortable = [];
-				for (var i = 0; i < scenes.length; i++) {
-					var applied = state.units[ptr].funk[i](envs[i])(scenes[i]);
+				var needsSorting = false;
+				for (var m = 0; m < envs.length; m++) {
+					if (envs[m].env === null) {
+						continue;
+					}
+					var i = envs[m].pos;
+					var applied = funk[i](envs[m].env)(scenes[i]);
 					for (var j = 0; j < applied.instructions.length; j++) {
 						// thunk
 						applied.instructions[j](children[i])();
 					}
+					needsSorting = needsSorting || applied.forOrdering !== 0;
 					sortable.push([i, applied.forOrdering]);
 					scenes[i] = applied.nextScene;
 				}
-				sortable.sort((a, b) => b[1] - a[1]);
-				doSortingOnSubgraphs(state.units[ptr], sortable);
-			};
-		};
-	};
-};
-exports.setSingleSubgraph_ = function (ptr) {
-	return function (i) {
-		return function (env) {
-			return function (state) {
-				return function () {
-					var scenes = state.units[ptr].scenes;
-					var children = state.units[ptr].children;
-					var applied = state.units[ptr].funk[i](env)(scenes[i]);
-					for (var j = 0; j < applied.instructions.length; j++) {
-						// thunk
-						applied.instructions[j](children[i])();
-					}
-					scenes[i] = applied.nextScene;
-				};
+				if (needsSorting) {
+					sortable.sort((a, b) => b[1] - a[1]);
+					doSortingOnSubgraphs(state.units[ptr], sortable);
+				}
+				for (var i = 0; i < needsConnecting.length; i++) {
+					var j = needsConnecting[i];
+					connectXToY(false)(state.units[ptr].terminalPtr)(ptr)(children[j])(
+						state
+					)();
+				}
 			};
 		};
 	};
@@ -474,11 +489,10 @@ var massiveCreateCreateStep_ = function ($prefix) {
 													id: key,
 													text: value.element.text,
 												})(state)();
-											} else if (value.element.envs !== undefined) {
+											} else if (value.element.subgraphMaker !== undefined) {
 												// it's a subgraph
 												$makeSubgraph({
 													id: key,
-													envs: value.element.envs,
 													terminus: value.element.terminus,
 													scenes: $unSubgraph(value.element.subgraphMaker),
 												})(state)();
@@ -490,7 +504,10 @@ var massiveCreateCreateStep_ = function ($prefix) {
 												})(state)();
 											} else {
 												throw new Error(
-													"Don't know how to handle " + key + " " + value
+													"Don't know how to handle " +
+														key +
+														" " +
+														Object.keys(value.element)
 												);
 											}
 											massiveCreateCreateStep_(key)($unSubgraph)($makeSubgraph)(

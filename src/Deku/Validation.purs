@@ -234,13 +234,13 @@ instance allNodesAreSaturatedConsTSubgraph::
   ( RowToList r RL.Nil
   , AllNodesAreSaturatedNL tail
   ) =>
-  AllNodesAreSaturatedNL (RL.Cons iSym (NodeC (CTOR.TSubgraph arity terminus env) { | r }) tail)
+  AllNodesAreSaturatedNL (RL.Cons iSym (NodeC (CTOR.TSubgraph terminus env) { | r }) tail)
 
 instance allNodesAreSaturatedConsTTumult::
   ( RowToList r RL.Nil
   , AllNodesAreSaturatedNL tail
   ) =>
-  AllNodesAreSaturatedNL (RL.Cons iSym (NodeC (CTOR.TTumult arity terminus) { | r }) tail)
+  AllNodesAreSaturatedNL (RL.Cons iSym (NodeC (CTOR.TTumult terminus) { | r }) tail)
 
 instance allNodesAreSaturatedCons_TRoot ::
   AllNodesAreSaturatedNL tail =>
@@ -316,10 +316,10 @@ class NodeCanBeTumultuous (node :: Type)
 
 instance nodeCanBeTumultuousSubgraph ::
   Fail (Text "Subgraph cannot be tumultuous") =>
-  NodeCanBeTumultuous (CTOR.TSubgraph a b c)
+  NodeCanBeTumultuous (CTOR.TSubgraph b c)
 else instance nodeCanBeTumultuousTumult ::
   Fail (Text "Tumult cannot be tumultuous") =>
-  NodeCanBeTumultuous (CTOR.TTumult a b)
+  NodeCanBeTumultuous (CTOR.TTumult b)
 else instance nodeCanBeTumultuousTumultAll :: NodeCanBeTumultuous node
 
 class NodesCanBeTumultuous (rl :: RowList Type)

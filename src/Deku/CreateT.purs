@@ -5,7 +5,6 @@ module Deku.CreateT where
 
 import Prelude
 
-import Data.Vec as V
 import Deku.Connect (class ConnectT)
 import Deku.Graph.DOM (Element)
 import Deku.Graph.DOM as CTOR
@@ -96,7 +95,10 @@ instance connectAfterCreateTCons ::
   , ConnectAfterCreateT fullPath edgesList graph1 graph2
   , ConnectAfterCreateT prefix rest graph2 graph3
   ) =>
-  ConnectAfterCreateT prefix (RL.Cons sym (Element node edges) rest) graph0 graph3
+  ConnectAfterCreateT prefix
+    (RL.Cons sym (Element node edges) rest)
+    graph0
+    graph3
 
 class
   CreateInternalT
@@ -143,19 +145,19 @@ instance createTText ::
 
 instance createTSubgraph ::
   ( R.Lacks ptr graphi
-  , R.Cons ptr (NodeC (CTOR.TSubgraph n terminus env) {}) graphi grapho
+  , R.Cons ptr (NodeC (CTOR.TSubgraph terminus env) {}) graphi grapho
   ) =>
   CreateT' ptr
-    (CTOR.Subgraph (CTOR.AsSubgraph terminus env push) (V.Vec n env))
+    (CTOR.Subgraph (CTOR.AsSubgraph terminus env push))
     graphi
     grapho
 
 instance createTTumult ::
   ( R.Lacks ptr graphi
-  , R.Cons ptr (NodeC (CTOR.TTumult n terminus) {}) graphi grapho
+  , R.Cons ptr (NodeC (CTOR.TTumult terminus) {}) graphi grapho
   ) =>
   CreateT' ptr
-    (CTOR.Tumult n terminus)
+    (CTOR.Tumult terminus)
     graphi
     grapho
 

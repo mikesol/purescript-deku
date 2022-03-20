@@ -18,12 +18,9 @@ module Deku.Graph.DOM
   , Subgraph
   , TSubgraph
   , subgraph
-  , subgraph1
   , unsafeUnSubgraph
   , XSubgraph'
   , XSubgraph(..)
-  , X1Subgraph'
-  , X1Subgraph(..)
   , Tumult
   , TTumult
   , tumult
@@ -864,11 +861,11 @@ module Deku.Graph.DOM
 
 import Prelude
 
+import Data.Map (Map)
+import Data.Maybe (Maybe)
 import Data.Monoid.Additive (Additive)
 import Data.Symbol (class IsSymbol, reflectSymbol)
 import Data.Tuple.Nested (type (/\))
-import Data.Typelevel.Num (class Pos, D1)
-import Data.Vec (Vec, singleton)
 import Deku.Control.Types (Frame0, SubScene)
 import Deku.Graph.Attribute (Attribute, Cb, cb, prop, unsafeAttribute)
 import Deku.Interpret (class DOMInterpret)
@@ -963,71 +960,53 @@ unAsSubGraph
      )
 unAsSubGraph (AsSubgraph sg) = sg
 
-type Subgraph' subgraphMaker envs =
+type Subgraph' subgraphMaker =
   ( subgraphMaker :: subgraphMaker
-  , envs :: envs
   , terminus :: String
   )
-newtype Subgraph subgraphMaker envs = Subgraph
-  { | Subgraph' subgraphMaker envs }
-
-subgraph1
-  :: forall env terminus push
-   . IsSymbol terminus
-  => env
-  -> AsSubgraph terminus env push
-  -> Element (Subgraph (AsSubgraph terminus env push) (Vec D1 env)) ()
-subgraph1 = subgraph <<< singleton
+newtype Subgraph subgraphMaker = Subgraph
+  { | Subgraph' subgraphMaker }
 
 subgraph
-  :: forall n env terminus push
+  :: forall env terminus push
    . IsSymbol terminus
-  => Pos n
-  => Vec n env
-  -> AsSubgraph terminus env push
-  -> Element (Subgraph (AsSubgraph terminus env push) (Vec n env)) ()
-subgraph envs subgraphMaker =
+  => AsSubgraph terminus env push
+  -> Element (Subgraph (AsSubgraph terminus env push) ) ()
+subgraph subgraphMaker =
   Element
     { element: Subgraph
-        { subgraphMaker, envs, terminus: reflectSymbol (Proxy :: _ terminus) }
+        { subgraphMaker, terminus: reflectSymbol (Proxy :: _ terminus) }
     , children: {}
     }
 
 unsafeUnSubgraph
-  :: forall subgraphMaker envs
-   . Subgraph subgraphMaker envs
-  -> { | Subgraph' subgraphMaker envs }
+  :: forall subgraphMaker
+   . Subgraph subgraphMaker
+  -> { | Subgraph' subgraphMaker }
 unsafeUnSubgraph (Subgraph unsafe) = unsafe
 
-type XSubgraph'  (n :: Type) (env :: Type) =
-  ( envs :: Vec n env )
-newtype XSubgraph index env = XSubgraph { | XSubgraph' index env }
+type XSubgraph' (env :: Type) =
+  ( envs :: Map Int (Maybe env) )
+newtype XSubgraph env = XSubgraph { | XSubgraph' env }
 
 instance typeToSymSubgraph ::
-  TypeToSym (Subgraph subgraphMaker env) "Subgraph"
+  TypeToSym (Subgraph subgraphMaker) "Subgraph"
 
 instance typeToSymXSubgraph ::
-  TypeToSym (XSubgraph n envs) "Subgraph"
+  TypeToSym (XSubgraph envs) "Subgraph"
 
-type X1Subgraph' (index :: Type) (env :: Type) =
-  (index :: index, env :: env)
-newtype X1Subgraph index env = X1Subgraph { | X1Subgraph' index env }
-
-instance typeToSymX1Subgraph ::
-  TypeToSym (X1Subgraph index env) "Subgraph"
-
-type Tumult' (n :: Type) (terminus :: Symbol) =
-  ( tumult :: Tumultuous n terminus
+type Tumult' (terminus :: Symbol) =
+  ( tumult :: Tumultuous terminus
   , terminus :: String
   )
-newtype Tumult n terminus = Tumult
-  { | Tumult' n terminus }
+newtype Tumult terminus = Tumult
+  { | Tumult' terminus }
 
 tumult
-  :: forall n terminus
+  :: forall terminus
    . IsSymbol terminus
-  => Tumultuous n terminus
-  -> Element (Tumult n terminus) ()
+  => Tumultuous terminus
+  -> Element (Tumult terminus) ()
 tumult tumultuous = Element
   { element: Tumult
       { terminus: reflectSymbol (Proxy :: _ terminus)
@@ -1037,12 +1016,12 @@ tumult tumultuous = Element
   }
 
 unsafeUnTumult
-  :: forall n terminus
-   . Tumult n terminus
-  -> { | Tumult' n terminus }
+  :: forall terminus
+   . Tumult terminus
+  -> { | Tumult' terminus }
 unsafeUnTumult (Tumult unsafe) = unsafe
 
-instance typeToSymTumult :: TypeToSym (Tumult n terminus) "Tumult"
+instance typeToSymTumult :: TypeToSym (Tumult terminus) "Tumult"
 
 class ReifyAU a b | a -> b where
   reifyAU :: a -> b
@@ -1050,34 +1029,33 @@ class ReifyAU a b | a -> b where
 
 -- | Type-level constructor for a subgraph.
 data TSubgraph
-  (arity :: Type)
   (terminus :: Symbol)
   (env :: Type) = TSubgraph
 
 instance typeToSymTSubgraph ::
-  TypeToSym (TSubgraph arity terminus env) "TSubgraph"
+  TypeToSym (TSubgraph terminus env) "TSubgraph"
 
-instance semigroupTSubgraph :: Semigroup (TSubgraph arity terminus env) where
+instance semigroupTSubgraph :: Semigroup (TSubgraph terminus env) where
   append _ _ = TSubgraph
 
-instance monoidTSubgraph :: Monoid (TSubgraph arity terminus env) where
+instance monoidTSubgraph :: Monoid (TSubgraph terminus env) where
   mempty = TSubgraph
 
-instance reifyTSubgraph :: ReifyAU (Subgraph a b) (TSubgraph x y z) where
+instance reifyTSubgraph :: ReifyAU (Subgraph b) (TSubgraph y z) where
   reifyAU = const mempty
 
 -- | Type-level constructor for a subgraph.
-data TTumult (arity :: Type) (terminus :: Symbol) = TTumult
+data TTumult(terminus :: Symbol) = TTumult
 
-instance typeToSymTTumult :: TypeToSym (TTumult arity terminus) "TTumult"
+instance typeToSymTTumult :: TypeToSym (TTumult terminus) "TTumult"
 
-instance semigroupTTumult :: Semigroup (TTumult arity terminus) where
+instance semigroupTTumult :: Semigroup (TTumult terminus) where
   append _ _ = TTumult
 
-instance monoidTTumult :: Monoid (TTumult arity terminus) where
+instance monoidTTumult :: Monoid (TTumult terminus) where
   mempty = TTumult
 
-instance reifyTTumult :: ReifyAU (Tumult n terminus) (TTumult w x) where
+instance reifyTTumult :: ReifyAU (Tumult terminus) (TTumult x) where
   reifyAU = const mempty
 
 data TText = TText

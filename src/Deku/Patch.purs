@@ -6,8 +6,6 @@ import Data.Maybe (maybe)
 import Data.Symbol (class IsSymbol, reflectSymbol)
 import Data.Tuple.Nested (type (/\))
 import Data.Typelevel.Bool (False, True)
-import Data.Typelevel.Num (class Pos)
-import Data.Vec (Vec)
 import Foreign.Object (Object, lookup)
 import Foreign.Object as Object
 import Prim.Ordering (Ordering, LT, GT, EQ)
@@ -109,10 +107,10 @@ instance doCreateMakeText :: DoCreate ptr CTOR.TText (MakeText ptr)
 --
 
 instance doCreateMakeSubgraph ::
-  DoCreate ptr (CTOR.TSubgraph arity terminus env) (MakeSubgraph ptr)
+  DoCreate ptr (CTOR.TSubgraph terminus env) (MakeSubgraph ptr)
 
 instance doCreateMakeTumult ::
-  DoCreate ptr (CTOR.TTumult arity terminus) (MakeTumult ptr)
+  DoCreate ptr (CTOR.TTumult terminus) (MakeTumult ptr)
 
 class
   DisconnectAll (to :: Symbol) (froms :: RL.RowList Type) (i :: Type)
@@ -525,24 +523,22 @@ instance getSubgraphsRLNil :: GetSubgraphsRL RL.Nil subgraphs where
 instance getSubgraphsRLTumult ::
   ( IsSymbol id
   , IsSymbol terminus
-  , Pos n
   , Row.Cons id
-      (CTOR.Subgraph (CTOR.AsSubgraph terminus env push) (Vec n env))
+      (CTOR.Subgraph (CTOR.AsSubgraph terminus env push))
       r'
       subgraphs
   , GetSubgraphsRL rest subgraphs
   ) =>
-  GetSubgraphsRL (RL.Cons id (TSubgraph n terminus env /\ whatever) rest)
+  GetSubgraphsRL (RL.Cons id (TSubgraph terminus env /\ whatever) rest)
     subgraphs where
   getSubgraphsRL _ t = Object.insert id
     ( AE
         ( let
-            { subgraphMaker, envs } = unsafeUnSubgraph (get (Proxy :: _ id) t)
+            { subgraphMaker } = unsafeUnSubgraph (get (Proxy :: _ id) t)
           in
             makeSubgraph
               { id
               , terminus: reflectSymbol (Proxy :: _ terminus)
-              , envs
               , scenes: unAsSubGraph subgraphMaker
               }
         )
@@ -582,10 +578,10 @@ instance getTumultsRLNil :: GetTumultsRL RL.Nil tumults where
 instance getTumultsRLTumult ::
   ( IsSymbol id
   , IsSymbol terminus
-  , Row.Cons id (Tumultuous n terminus) r' tumults
+  , Row.Cons id (Tumultuous terminus) r' tumults
   , GetTumultsRL rest tumults
   ) =>
-  GetTumultsRL (RL.Cons id (TTumult n terminus /\ whatever) rest) tumults where
+  GetTumultsRL (RL.Cons id (TTumult terminus /\ whatever) rest) tumults where
   getTumultsRL _ t = Object.insert id
     ( AE
         ( makeTumult

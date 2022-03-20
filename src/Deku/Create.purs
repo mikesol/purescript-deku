@@ -4,8 +4,6 @@ import Prelude
 
 import Data.Functor (voidRight)
 import Data.Symbol (class IsSymbol, reflectSymbol)
-import Data.Typelevel.Num (class Pos)
-import Data.Vec as V
 import Deku.Control.Indexed (IxDOM(..))
 import Deku.Control.Types (DOM, DOMState', unsafeDOM, unsafeUnDOM)
 import Deku.CreateT (class CreateT)
@@ -121,18 +119,17 @@ instance createRoot ::
 instance createSubgraph ::
   ( IsSymbol ptr
   , IsSymbol terminus
-  , Pos n
   , R.Lacks ptr graphi
-  , R.Cons ptr (NodeC (CTOR.TSubgraph n terminus env) {}) graphi grapho
+  , R.Cons ptr (NodeC (CTOR.TSubgraph terminus env) {}) graphi grapho
   ) =>
   Create' ptr
-    (CTOR.Subgraph (CTOR.AsSubgraph terminus env push) (V.Vec n env))
+    (CTOR.Subgraph (CTOR.AsSubgraph terminus env push))
     graphi
     grapho where
   create' ptr w = o
     where
     { context: i, value } = unsafeUnDOM w
-    { subgraphMaker, envs, terminus } = unsafeUnSubgraph value
+    { subgraphMaker, terminus } = unsafeUnSubgraph value
     id = reflectSymbol ptr
     o =
       unsafeDOM
@@ -142,7 +139,6 @@ instance createSubgraph ::
                   [ makeSubgraph
                       { id
                       , terminus
-                      , envs
                       , scenes: unAsSubGraph subgraphMaker
                       }
                   ]
@@ -153,11 +149,10 @@ instance createSubgraph ::
 instance createTumult ::
   ( IsSymbol ptr
   , IsSymbol terminus
-  , Pos n
   , R.Lacks ptr graphi
-  , R.Cons ptr (NodeC (CTOR.TTumult n terminus) {}) graphi grapho
+  , R.Cons ptr (NodeC (CTOR.TTumult terminus) {}) graphi grapho
   ) =>
-  Create' ptr (CTOR.Tumult n terminus) graphi grapho where
+  Create' ptr (CTOR.Tumult terminus) graphi grapho where
   create' ptr w = o
     where
     { context: i, value } = unsafeUnDOM w

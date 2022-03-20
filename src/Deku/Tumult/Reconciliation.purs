@@ -37,7 +37,6 @@ derogative = unwrap >>> match
   -- todo: is this correct??
   , massiveChange: const identity
   , setSubgraph: const identity
-  , setSingleSubgraph: const identity
   , setTumult: const identity
   , setText: const identity
   }
@@ -164,7 +163,6 @@ reconcileTumult new old = result
             )
         , setAttribute: \_ -> i1 # udef
         , setSubgraph: \_ -> i1 # udef
-        , setSingleSubgraph: \_ -> i1 # udef
         , setTumult: \_ -> i1 # udef
         , setText: \_ -> i1 # udef
         -- todo: is this correct??
