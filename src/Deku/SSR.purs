@@ -12,12 +12,34 @@ import Data.Maybe (Maybe(..))
 import Data.Traversable (sequence)
 import Data.Tuple.Nested ((/\))
 import Data.Variant (on)
-import Deku.Control.Types (oneSubFrame)
+import Deku.Control.Types (Frame0, SubScene, oneSubFrame)
 import Deku.Graph.Attribute (AttributeValue, prop)
+import Deku.Interpret (AsSubgraphHack(..), SubgraphInput, connectXToY, makeElement, makeRoot, makeSubgraph, makeText, makeTumult)
 import Deku.Rendered (Instruction(..), PureEnvs(..), PureScenes(..))
+import Deku.Rendered as R
 import Deku.Tumult.Make (Indecent(..))
 import Foreign.Object (Object, empty, lookup, insert, singleton, union, update)
 import Type.Proxy (Proxy(..))
+
+foreign import massiveCreate_
+  :: ( forall terminus env push
+        . AsSubgraphHack terminus env
+       -> Int
+       -> SubScene terminus env Unit Instruction Frame0 push Unit
+     )
+  -> ( forall terminus env push
+        . SubgraphInput terminus env push Unit Instruction
+       -> Unit
+       -> Instruction
+     )
+  -> (R.MakeTumult -> Unit -> Instruction)
+  -> (R.MakeRoot -> Unit -> Instruction)
+  -> (R.MakeElement -> Unit -> Instruction)
+  -> (R.MakeText -> Unit -> Instruction)
+  -> (R.ConnectXToY -> Unit -> Instruction)
+  -> R.MassiveCreate
+  -> Unit
+  -> Array Instruction
 
 applySubgraph
   :: String -> String -> PureScenes -> List Instruction -> Object Indecent
@@ -146,14 +168,39 @@ adjacenciesToGraph needle adjacencies indecents =
 ssr :: Array Instruction -> Maybe Indecent
 ssr a = ssr' "root" true a
 
+mcUnsubgraph
+  :: forall terminus env push
+   . AsSubgraphHack terminus env
+  -> Int
+  -> SubScene terminus env Unit Instruction Frame0 push Unit
+mcUnsubgraph (AsSubgraphHack i) = i
+
+expandMassiveCreate :: List Instruction -> List Instruction
+expandMassiveCreate (a@(Instruction aa) : b) =
+  on
+    (Proxy :: Proxy "massiveCreate")
+    ( \tc -> List.fromFoldable
+        ( massiveCreate_ mcUnsubgraph makeSubgraph makeTumult
+            makeRoot
+            makeElement
+            makeText
+            connectXToY
+            tc
+            unit
+        )
+    )
+    (\_ -> pure a)
+    aa <> expandMassiveCreate b
+expandMassiveCreate Nil = Nil
+
 ssr' :: String -> Boolean -> Array Instruction -> Maybe Indecent
 ssr' tmus hd a = o
   where
-  asList = List.fromFoldable a
+  asList' = List.fromFoldable a
+  asList = expandMassiveCreate asList'
   indecentSubgraphs = resolveAllSubgraphs asList
   makeStep = doMakeStep asList
-  connectStep = doConnectStep asList makeStep
-  o = adjacenciesToGraph tmus
+  connectStep = doConnectStep asList
     ( if hd then insert "root"
         ( Right
             { tag: "div"
@@ -161,7 +208,7 @@ ssr' tmus hd a = o
             , incoming: Nil
             }
         )
-        connectStep
-      else connectStep
+        makeStep
+      else makeStep
     )
-    indecentSubgraphs
+  o = adjacenciesToGraph tmus connectStep indecentSubgraphs

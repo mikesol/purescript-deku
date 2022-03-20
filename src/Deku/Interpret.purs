@@ -1,6 +1,8 @@
 module Deku.Interpret
   ( class DOMInterpret
   , FFIDOMSnapshot
+  , AsSubgraphHack(..)
+  , SubgraphInput
   , makeRoot
   , makeFFIDOMSnapshot
   , massiveCreate
