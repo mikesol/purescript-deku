@@ -5747,6 +5747,7 @@ var PS = {};
   var exports = $PS["Deku.Control.Functions"];
   var Control_Comonad = $PS["Control.Comonad"];
   var Data_Either = $PS["Data.Either"];
+  var Data_Function = $PS["Data.Function"];
   var Data_Functor = $PS["Data.Functor"];
   var Data_Monoid = $PS["Data.Monoid"];
   var Data_Unit = $PS["Data.Unit"];
@@ -5796,6 +5797,17 @@ var PS = {};
           };
       };
   };
+  var makeSceneR$prime = function (dictMonoid) {
+      return function (dictDOMInterpret) {
+          return function (dictIsScene) {
+              return function (a) {
+                  return function (b) {
+                      return makeSceneR(dictMonoid)(dictDOMInterpret)(dictIsScene)(Data_Function["const"](Data_Function["const"](a)))(b);
+                  };
+              };
+          };
+      };
+  };
   var loop = function (dictMonoid) {
       return function (dictDOMInterpret) {
           return function (dictIsScene) {
@@ -5821,20 +5833,6 @@ var PS = {};
           });
       };
   };
-  var istart = function (dictMonoid) {
-      return function (dictDOMInterpret) {
-          return function (dictIsScene) {
-              return function (m) {
-                  return makeSceneR(dictMonoid)(dictDOMInterpret)(dictIsScene)(function (e) {
-                      return function (p) {
-                          var v = m(e)(p);
-                          return v(start(dictMonoid)(dictDOMInterpret));
-                      };
-                  });
-              };
-          };
-      };
-  };
   var iloop = function (dictMonoid) {
       return function (dictDOMInterpret) {
           return function (dictIsScene) {
@@ -5847,6 +5845,37 @@ var PS = {};
                           };
                       };
                   });
+              };
+          };
+      };
+  };
+  var freeze = function (dictMonoid) {
+      return function (dictDOMInterpret) {
+          return function (dictIsScene) {
+              return function (s) {
+                  return makeScene(dictMonoid)(dictIsScene)(dictDOMInterpret)(Data_Function["const"](Data_Function["const"](new Data_Either.Right(s))))(freeze(dictMonoid)(dictDOMInterpret)(dictIsScene));
+              };
+          };
+      };
+  };
+  var istart = function (dictMonoid) {
+      return function (dictDOMInterpret) {
+          return function (dictIsScene) {
+              return function (m) {
+                  return function (ct) {
+                      return makeScene(dictMonoid)(dictIsScene)(dictDOMInterpret)(function (e) {
+                          return function (p) {
+                              if (e instanceof Data_Either.Left) {
+                                  var v = m(e.value0)(p);
+                                  return Data_Either.Left.create(makeSceneR$prime(dictMonoid)(dictDOMInterpret)(dictIsScene)(v(start(dictMonoid)(dictDOMInterpret)))(ct));
+                              };
+                              if (e instanceof Data_Either.Right) {
+                                  return new Data_Either.Right(start(dictMonoid)(dictDOMInterpret));
+                              };
+                              throw new Error("Failed pattern match at Deku.Control.Functions (line 146, column 13 - line 152, column 29): " + [ e.constructor.name ]);
+                          };
+                      })(freeze(dictMonoid)(dictDOMInterpret)(dictIsScene));
+                  };
               };
           };
       };
@@ -6039,7 +6068,7 @@ var PS = {};
           };
       }
   };                                                                              
-  var text = function ($1991) {
+  var text = function ($12239) {
       return Element((function (v) {
           return {
               element: v,
@@ -6049,18 +6078,18 @@ var PS = {};
           return {
               text: v
           };
-      })($1991))));
+      })($12239))));
   };                                                                        
   var root = (function () {
-      var $1992 = Control_Semigroupoid.compose(Control_Semigroupoid.semigroupoidFn)(function ($1994) {
+      var $12240 = Control_Semigroupoid.compose(Control_Semigroupoid.semigroupoidFn)(function ($12242) {
           return (function (v) {
               return {
                   root: v
               };
-          })(Element($1994));
+          })(Element($12242));
       });
-      return function ($1993) {
-          return $1992((function (v) {
+      return function ($12241) {
+          return $12240((function (v) {
               return function (v1) {
                   return {
                       element: v,
@@ -6071,14 +6100,14 @@ var PS = {};
               return {
                   element: v
               };
-          })($1993))));
+          })($12241))));
       };
   })();                                                                      
   var makeElt = function (elt) {
       return function (tag) {
-          var $1995 = Control_Semigroupoid.compose(Control_Semigroupoid.semigroupoidFn)(Element);
-          return function ($1996) {
-              return $1995((function (v) {
+          var $12243 = Control_Semigroupoid.compose(Control_Semigroupoid.semigroupoidFn)(Element);
+          return function ($12244) {
+              return $12243((function (v) {
                   return function (v1) {
                       return {
                           element: v,
@@ -6090,7 +6119,7 @@ var PS = {};
                       tag: tag,
                       attributes: v
                   };
-              })($1996))));
+              })($12244))));
           };
       };
   };                                   
