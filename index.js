@@ -3621,210 +3621,244 @@ var PS = {};
   };
   var instructionId = function (v) {
       return Data_Variant.match()()()({
-          disconnectXFromY: function ($50) {
+          disconnectXFromY: function ($60) {
               return Data_Maybe.Just.create((function (v2) {
                   return v2.fromId;
-              })($50));
-          },
-          destroyUnit: function ($51) {
-              return Data_Maybe.Just.create((function (v2) {
-                  return v2.id;
-              })($51));
-          },
-          makeElement: function ($52) {
-              return Data_Maybe.Just.create((function (v2) {
-                  return v2.id;
-              })($52));
-          },
-          makeText: function ($53) {
-              return Data_Maybe.Just.create((function (v2) {
-                  return v2.id;
-              })($53));
-          },
-          makeRoot: function ($54) {
-              return Data_Maybe.Just.create((function (v2) {
-                  return v2.id;
-              })($54));
-          },
-          makeSubgraph: function ($55) {
-              return Data_Maybe.Just.create((function (v2) {
-                  return v2.id;
-              })($55));
-          },
-          massiveCreate: Data_Function["const"](Data_Maybe.Nothing.value),
-          makeTumult: function ($56) {
-              return Data_Maybe.Just.create((function (v2) {
-                  return v2.id;
-              })($56));
-          },
-          connectXToY: function ($57) {
-              return Data_Maybe.Just.create((function (v2) {
-                  return v2.fromId;
-              })($57));
-          },
-          setAttribute: function ($58) {
-              return Data_Maybe.Just.create((function (v2) {
-                  return v2.id;
-              })($58));
-          },
-          setText: function ($59) {
-              return Data_Maybe.Just.create((function (v2) {
-                  return v2.id;
-              })($59));
-          },
-          setSubgraph: function ($60) {
-              return Data_Maybe.Just.create((function (v2) {
-                  return v2.id;
               })($60));
           },
-          massiveChange: Data_Function["const"](Data_Maybe.Nothing.value),
-          setTumult: function ($61) {
+          destroyUnit: function ($61) {
               return Data_Maybe.Just.create((function (v2) {
                   return v2.id;
               })($61));
+          },
+          makeElement: function ($62) {
+              return Data_Maybe.Just.create((function (v2) {
+                  return v2.id;
+              })($62));
+          },
+          makeText: function ($63) {
+              return Data_Maybe.Just.create((function (v2) {
+                  return v2.id;
+              })($63));
+          },
+          makeRoot: function ($64) {
+              return Data_Maybe.Just.create((function (v2) {
+                  return v2.id;
+              })($64));
+          },
+          makeSubgraph: function ($65) {
+              return Data_Maybe.Just.create((function (v2) {
+                  return v2.id;
+              })($65));
+          },
+          massiveCreate: Data_Function["const"](Data_Maybe.Nothing.value),
+          makeTumult: function ($66) {
+              return Data_Maybe.Just.create((function (v2) {
+                  return v2.id;
+              })($66));
+          },
+          connectXToY: function ($67) {
+              return Data_Maybe.Just.create((function (v2) {
+                  return v2.fromId;
+              })($67));
+          },
+          setAttribute: function ($68) {
+              return Data_Maybe.Just.create((function (v2) {
+                  return v2.id;
+              })($68));
+          },
+          setText: function ($69) {
+              return Data_Maybe.Just.create((function (v2) {
+                  return v2.id;
+              })($69));
+          },
+          setSubgraph: function ($70) {
+              return Data_Maybe.Just.create((function (v2) {
+                  return v2.id;
+              })($70));
+          },
+          massiveChange: Data_Function["const"](Data_Maybe.Nothing.value),
+          setTumult: function ($71) {
+              return Data_Maybe.Just.create((function (v2) {
+                  return v2.id;
+              })($71));
           }
       })(v);
   };
   var iSetTumult = (function () {
-      var $62 = Data_Variant.inj()({
-          reflectSymbol: function () {
-              return "setTumult";
-          }
-      })(Type_Proxy["Proxy"].value);
-      return function ($63) {
-          return Instruction($62($63));
-      };
-  })();
-  var iSetText = (function () {
-      var $64 = Data_Variant.inj()({
-          reflectSymbol: function () {
-              return "setText";
-          }
-      })(Type_Proxy["Proxy"].value);
-      return function ($65) {
-          return Instruction($64($65));
-      };
-  })();
-  var iSetSubgraph = (function () {
-      var $66 = Data_Variant.inj()({
-          reflectSymbol: function () {
-              return "setSubgraph";
-          }
-      })(Type_Proxy["Proxy"].value);
-      return function ($67) {
-          return Instruction($66($67));
-      };
-  })();
-  var iSetAttribute = (function () {
-      var $68 = Data_Variant.inj()({
-          reflectSymbol: function () {
-              return "setAttribute";
-          }
-      })(Type_Proxy["Proxy"].value);
-      return function ($69) {
-          return Instruction($68($69));
-      };
-  })();
-  var iMassiveCreate = (function () {
-      var $70 = Data_Variant.inj()({
-          reflectSymbol: function () {
-              return "massiveCreate";
-          }
-      })(Type_Proxy["Proxy"].value);
-      return function ($71) {
-          return Instruction($70($71));
-      };
-  })();
-  var iMassiveChange = (function () {
       var $72 = Data_Variant.inj()({
           reflectSymbol: function () {
-              return "massiveChange";
+              return "setTumult";
           }
       })(Type_Proxy["Proxy"].value);
       return function ($73) {
           return Instruction($72($73));
       };
   })();
-  var iMakeTumult = (function () {
+  var iSetText = (function () {
       var $74 = Data_Variant.inj()({
           reflectSymbol: function () {
-              return "makeTumult";
+              return "setText";
           }
       })(Type_Proxy["Proxy"].value);
       return function ($75) {
           return Instruction($74($75));
       };
   })();
-  var iMakeText = (function () {
+  var iSetSubgraph = (function () {
       var $76 = Data_Variant.inj()({
           reflectSymbol: function () {
-              return "makeText";
+              return "setSubgraph";
           }
       })(Type_Proxy["Proxy"].value);
       return function ($77) {
           return Instruction($76($77));
       };
   })();
-  var iMakeSubgraph = (function () {
+  var iSetAttribute = (function () {
       var $78 = Data_Variant.inj()({
           reflectSymbol: function () {
-              return "makeSubgraph";
+              return "setAttribute";
           }
       })(Type_Proxy["Proxy"].value);
       return function ($79) {
           return Instruction($78($79));
       };
   })();
-  var iMakeRoot = (function () {
+  var iMassiveCreate = (function () {
       var $80 = Data_Variant.inj()({
           reflectSymbol: function () {
-              return "makeRoot";
+              return "massiveCreate";
           }
       })(Type_Proxy["Proxy"].value);
       return function ($81) {
           return Instruction($80($81));
       };
   })();
-  var iMakeElement = (function () {
+  var iMassiveChange = (function () {
       var $82 = Data_Variant.inj()({
           reflectSymbol: function () {
-              return "makeElement";
+              return "massiveChange";
           }
       })(Type_Proxy["Proxy"].value);
       return function ($83) {
           return Instruction($82($83));
       };
   })();
-  var iDisconnectXFromY = (function () {
+  var iMakeTumult = (function () {
       var $84 = Data_Variant.inj()({
           reflectSymbol: function () {
-              return "disconnectXFromY";
+              return "makeTumult";
           }
       })(Type_Proxy["Proxy"].value);
       return function ($85) {
           return Instruction($84($85));
       };
   })();
-  var iDestroyUnit = (function () {
+  var iMakeText = (function () {
       var $86 = Data_Variant.inj()({
           reflectSymbol: function () {
-              return "destroyUnit";
+              return "makeText";
           }
       })(Type_Proxy["Proxy"].value);
       return function ($87) {
           return Instruction($86($87));
       };
   })();
-  var iConnectXToY = (function () {
+  var iMakeSubgraph = (function () {
       var $88 = Data_Variant.inj()({
           reflectSymbol: function () {
-              return "connectXToY";
+              return "makeSubgraph";
           }
       })(Type_Proxy["Proxy"].value);
       return function ($89) {
           return Instruction($88($89));
       };
   })();
+  var iMakeRoot = (function () {
+      var $90 = Data_Variant.inj()({
+          reflectSymbol: function () {
+              return "makeRoot";
+          }
+      })(Type_Proxy["Proxy"].value);
+      return function ($91) {
+          return Instruction($90($91));
+      };
+  })();
+  var iMakeElement = (function () {
+      var $92 = Data_Variant.inj()({
+          reflectSymbol: function () {
+              return "makeElement";
+          }
+      })(Type_Proxy["Proxy"].value);
+      return function ($93) {
+          return Instruction($92($93));
+      };
+  })();
+  var iDisconnectXFromY = (function () {
+      var $94 = Data_Variant.inj()({
+          reflectSymbol: function () {
+              return "disconnectXFromY";
+          }
+      })(Type_Proxy["Proxy"].value);
+      return function ($95) {
+          return Instruction($94($95));
+      };
+  })();
+  var iDestroyUnit = (function () {
+      var $96 = Data_Variant.inj()({
+          reflectSymbol: function () {
+              return "destroyUnit";
+          }
+      })(Type_Proxy["Proxy"].value);
+      return function ($97) {
+          return Instruction($96($97));
+      };
+  })();
+  var iConnectXToY = (function () {
+      var $98 = Data_Variant.inj()({
+          reflectSymbol: function () {
+              return "connectXToY";
+          }
+      })(Type_Proxy["Proxy"].value);
+      return function ($99) {
+          return Instruction($98($99));
+      };
+  })();
+  var eqPureScenes = {
+      eq: function (v) {
+          return function (v1) {
+              return false;
+          };
+      }
+  };
+  var ordPureScenes = {
+      compare: function (v) {
+          return function (v1) {
+              return Data_Ordering.LT.value;
+          };
+      },
+      Eq0: function () {
+          return eqPureScenes;
+      }
+  };
+  var eqPureEnvs = {
+      eq: function (v) {
+          return function (v1) {
+              return false;
+          };
+      }
+  };
+  var ordPureEnvs = {
+      compare: function (v) {
+          return function (v1) {
+              return Data_Ordering.LT.value;
+          };
+      },
+      Eq0: function () {
+          return eqPureEnvs;
+      }
+  };
   var eqInstruction = {
       eq: function (x) {
           return function (y) {
@@ -3904,11 +3938,15 @@ var PS = {};
                   reflectSymbol: function () {
                       return "id";
                   }
-              })(Data_Eq.eqString))))(Data_Eq.eqRec()(Data_Eq.eqRowCons(Data_Eq.eqRowNil)()({
+              })(Data_Eq.eqString))))(Data_Eq.eqRec()(Data_Eq.eqRowCons(Data_Eq.eqRowCons(Data_Eq.eqRowNil)()({
                   reflectSymbol: function () {
                       return "id";
                   }
-              })(Data_Eq.eqString))))(Data_Eq.eqRec()(Data_Eq.eqRowCons(Data_Eq.eqRowCons(Data_Eq.eqRowCons(Data_Eq.eqRowNil)()({
+              })(Data_Eq.eqString))()({
+                  reflectSymbol: function () {
+                      return "envs";
+                  }
+              })(eqPureEnvs))))(Data_Eq.eqRec()(Data_Eq.eqRowCons(Data_Eq.eqRowCons(Data_Eq.eqRowCons(Data_Eq.eqRowNil)()({
                   reflectSymbol: function () {
                       return "value";
                   }
@@ -3956,11 +3994,15 @@ var PS = {};
                   reflectSymbol: function () {
                       return "id";
                   }
-              })(Data_Eq.eqString))))(Data_Eq.eqRec()(Data_Eq.eqRowCons(Data_Eq.eqRowCons(Data_Eq.eqRowNil)()({
+              })(Data_Eq.eqString))))(Data_Eq.eqRec()(Data_Eq.eqRowCons(Data_Eq.eqRowCons(Data_Eq.eqRowCons(Data_Eq.eqRowNil)()({
                   reflectSymbol: function () {
-                      return "instructions";
+                      return "terminus";
                   }
-              })(Data_Map_Internal.eqMap(Data_Eq.eqInt)(Data_Maybe.eqMaybe(Data_Eq.eqArray(eqInstruction)))))()({
+              })(Data_Eq.eqString))()({
+                  reflectSymbol: function () {
+                      return "scenes";
+                  }
+              })(eqPureScenes))()({
                   reflectSymbol: function () {
                       return "id";
                   }
@@ -4130,11 +4172,15 @@ var PS = {};
                           reflectSymbol: function () {
                               return "id";
                           }
-                      })(Data_Eq.eqString))))(Data_Eq.eqRec()(Data_Eq.eqRowCons(Data_Eq.eqRowNil)()({
+                      })(Data_Eq.eqString))))(Data_Eq.eqRec()(Data_Eq.eqRowCons(Data_Eq.eqRowCons(Data_Eq.eqRowNil)()({
                           reflectSymbol: function () {
                               return "id";
                           }
-                      })(Data_Eq.eqString))))(Data_Eq.eqRec()(Data_Eq.eqRowCons(Data_Eq.eqRowCons(Data_Eq.eqRowCons(Data_Eq.eqRowNil)()({
+                      })(Data_Eq.eqString))()({
+                          reflectSymbol: function () {
+                              return "envs";
+                          }
+                      })(eqPureEnvs))))(Data_Eq.eqRec()(Data_Eq.eqRowCons(Data_Eq.eqRowCons(Data_Eq.eqRowCons(Data_Eq.eqRowNil)()({
                           reflectSymbol: function () {
                               return "value";
                           }
@@ -4182,11 +4228,15 @@ var PS = {};
                           reflectSymbol: function () {
                               return "id";
                           }
-                      })(Data_Eq.eqString))))(Data_Eq.eqRec()(Data_Eq.eqRowCons(Data_Eq.eqRowCons(Data_Eq.eqRowNil)()({
+                      })(Data_Eq.eqString))))(Data_Eq.eqRec()(Data_Eq.eqRowCons(Data_Eq.eqRowCons(Data_Eq.eqRowCons(Data_Eq.eqRowNil)()({
                           reflectSymbol: function () {
-                              return "instructions";
+                              return "terminus";
                           }
-                      })(Data_Map_Internal.eqMap(Data_Eq.eqInt)(Data_Maybe.eqMaybe(Data_Eq.eqArray(eqInstruction)))))()({
+                      })(Data_Eq.eqString))()({
+                          reflectSymbol: function () {
+                              return "scenes";
+                          }
+                      })(eqPureScenes))()({
                           reflectSymbol: function () {
                               return "id";
                           }
@@ -4286,11 +4336,15 @@ var PS = {};
                           reflectSymbol: function () {
                               return "id";
                           }
-                      })(Data_Ord.ordString))))(Data_Ord.ordRecord()(Data_Ord.ordRecordCons(Data_Ord.ordRecordNil)()({
+                      })(Data_Ord.ordString))))(Data_Ord.ordRecord()(Data_Ord.ordRecordCons(Data_Ord.ordRecordCons(Data_Ord.ordRecordNil)()({
                           reflectSymbol: function () {
                               return "id";
                           }
-                      })(Data_Ord.ordString))))(Data_Ord.ordRecord()(Data_Ord.ordRecordCons(Data_Ord.ordRecordCons(Data_Ord.ordRecordCons(Data_Ord.ordRecordNil)()({
+                      })(Data_Ord.ordString))()({
+                          reflectSymbol: function () {
+                              return "envs";
+                          }
+                      })(ordPureEnvs))))(Data_Ord.ordRecord()(Data_Ord.ordRecordCons(Data_Ord.ordRecordCons(Data_Ord.ordRecordCons(Data_Ord.ordRecordNil)()({
                           reflectSymbol: function () {
                               return "value";
                           }
@@ -4338,11 +4392,15 @@ var PS = {};
                           reflectSymbol: function () {
                               return "id";
                           }
-                      })(Data_Ord.ordString))))(Data_Ord.ordRecord()(Data_Ord.ordRecordCons(Data_Ord.ordRecordCons(Data_Ord.ordRecordNil)()({
+                      })(Data_Ord.ordString))))(Data_Ord.ordRecord()(Data_Ord.ordRecordCons(Data_Ord.ordRecordCons(Data_Ord.ordRecordCons(Data_Ord.ordRecordNil)()({
                           reflectSymbol: function () {
-                              return "instructions";
+                              return "terminus";
                           }
-                      })(Data_Map_Internal.ordMap(Data_Ord.ordInt)(Data_Maybe.ordMaybe(Data_Ord.ordArray(ordInstruction)))))()({
+                      })(Data_Ord.ordString))()({
+                          reflectSymbol: function () {
+                              return "scenes";
+                          }
+                      })(ordPureScenes))()({
                           reflectSymbol: function () {
                               return "id";
                           }
@@ -5193,6 +5251,9 @@ var PS = {};
   var Deku_Rendered = $PS["Deku.Rendered"];
   var Deku_Tumult_Reconciliation = $PS["Deku.Tumult.Reconciliation"];
   var FRP_Event = $PS["FRP.Event"];
+  var Unsafe_Coerce = $PS["Unsafe.Coerce"];
+  var unsafeStashScene = Unsafe_Coerce.unsafeCoerce;
+  var unsafeStashEnvs = Unsafe_Coerce.unsafeCoerce;
   var setTumult = function (dict) {
       return dict.setTumult;
   };
@@ -5227,56 +5288,58 @@ var PS = {};
       return dict.makeElement;
   };
   var freeDOMInterpret = {
-      connectXToY: function ($158) {
-          return Data_Function["const"](Deku_Rendered.iConnectXToY($158));
+      connectXToY: function ($161) {
+          return Data_Function["const"](Deku_Rendered.iConnectXToY($161));
       },
-      disconnectXFromY: function ($159) {
-          return Data_Function["const"](Deku_Rendered.iDisconnectXFromY($159));
+      disconnectXFromY: function ($162) {
+          return Data_Function["const"](Deku_Rendered.iDisconnectXFromY($162));
       },
-      destroyUnit: function ($160) {
-          return Data_Function["const"](Deku_Rendered.iDestroyUnit($160));
+      destroyUnit: function ($163) {
+          return Data_Function["const"](Deku_Rendered.iDestroyUnit($163));
       },
-      makeElement: function ($161) {
-          return Data_Function["const"](Deku_Rendered.iMakeElement($161));
+      makeElement: function ($164) {
+          return Data_Function["const"](Deku_Rendered.iMakeElement($164));
       },
-      makeRoot: function ($162) {
-          return Data_Function["const"](Deku_Rendered.iMakeRoot($162));
+      makeRoot: function ($165) {
+          return Data_Function["const"](Deku_Rendered.iMakeRoot($165));
       },
-      makeText: function ($163) {
-          return Data_Function["const"](Deku_Rendered.iMakeText($163));
+      makeText: function ($166) {
+          return Data_Function["const"](Deku_Rendered.iMakeText($166));
       },
-      makeTumult: function ($164) {
-          return Data_Function["const"](Deku_Rendered.iMakeTumult($164));
+      makeTumult: function ($167) {
+          return Data_Function["const"](Deku_Rendered.iMakeTumult($167));
       },
-      massiveCreate: function ($165) {
-          return Data_Function["const"](Deku_Rendered.iMassiveCreate($165));
+      massiveCreate: function ($168) {
+          return Data_Function["const"](Deku_Rendered.iMassiveCreate($168));
       },
       makeSubgraph: function (v) {
           return function (v1) {
               return Deku_Rendered.iMakeSubgraph({
                   id: v.id,
-                  instructions: Data_Map_Internal.empty
+                  terminus: v.terminus,
+                  scenes: Data_Functor.map(Data_Functor.functorFn)(unsafeStashScene)(v.scenes)
               });
           };
       },
-      setAttribute: function ($166) {
-          return Data_Function["const"](Deku_Rendered.iSetAttribute($166));
+      setAttribute: function ($169) {
+          return Data_Function["const"](Deku_Rendered.iSetAttribute($169));
       },
       setSubgraph: function (v) {
           return function (v1) {
               return Deku_Rendered.iSetSubgraph({
-                  id: v.id
+                  id: v.id,
+                  envs: unsafeStashEnvs(v.envs)
               });
           };
       },
-      massiveChange: function ($167) {
-          return Data_Function["const"](Deku_Rendered.iMassiveChange($167));
+      massiveChange: function ($170) {
+          return Data_Function["const"](Deku_Rendered.iMassiveChange($170));
       },
-      setText: function ($168) {
-          return Data_Function["const"](Deku_Rendered.iSetText($168));
+      setText: function ($171) {
+          return Data_Function["const"](Deku_Rendered.iSetText($171));
       },
-      setTumult: function ($169) {
-          return Data_Function["const"](Deku_Rendered.iSetTumult($169));
+      setTumult: function ($172) {
+          return Data_Function["const"](Deku_Rendered.iSetTumult($172));
       }
   };
   var domEngine2nd = function (v) {
@@ -5321,7 +5384,7 @@ var PS = {};
       return dict.connectXToY;
   };
   var interpretInstruction = function (dictDOMInterpret) {
-      var $170 = Data_Variant.match()()()({
+      var $173 = Data_Variant.match()()()({
           disconnectXFromY: function (a) {
               return disconnectXFromY(dictDOMInterpret)(a);
           },
@@ -5387,9 +5450,9 @@ var PS = {};
               });
           }
       });
-      var $171 = Data_Newtype.unwrap();
-      return function ($172) {
-          return $170($171($172));
+      var $174 = Data_Newtype.unwrap();
+      return function ($175) {
+          return $173($174($175));
       };
   };
   var mcUnsubgraph = function (v) {
@@ -5403,7 +5466,7 @@ var PS = {};
           if (v instanceof Data_Maybe.Just) {
               return Data_Functor.map(Data_Functor.functorArray)(interpretInstruction(effectfulDOMInterpret))(Data_Array.fromFoldable(Data_Set.foldableSet)(Deku_Tumult_Reconciliation.reconcileTumult(Data_Set.fromFoldable(Data_Foldable.foldableArray)(Deku_Rendered.ordInstruction)(a))(Data_Set.fromFoldable(Data_Foldable.foldableArray)(Deku_Rendered.ordInstruction)(v.value0))));
           };
-          throw new Error("Failed pattern match at Deku.Interpret (line 279, column 31 - line 284, column 6): " + [ v.constructor.name ]);
+          throw new Error("Failed pattern match at Deku.Interpret (line 294, column 31 - line 299, column 6): " + [ v.constructor.name ]);
       };
   };
   var effectfulDOMInterpret = {
@@ -5468,9 +5531,9 @@ var PS = {};
                       env: v1.value1
                   };
               })(Data_Map_Internal.toUnfoldable(Data_Unfoldable.unfoldableArray)(Data_Functor.map(Data_Map_Internal.functorMap)((function () {
-                  var $173 = Data_Functor.map(Data_Maybe.functorMaybe)(Data_Either.Left.create);
-                  return function ($174) {
-                      return Data_Nullable.toNullable($173($174));
+                  var $176 = Data_Functor.map(Data_Maybe.functorMaybe)(Data_Either.Left.create);
+                  return function ($177) {
+                      return Data_Nullable.toNullable($176($177));
                   };
               })())(v.envs))))(dom);
           };
