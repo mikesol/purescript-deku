@@ -5466,7 +5466,7 @@ var PS = {};
           if (v instanceof Data_Maybe.Just) {
               return Data_Functor.map(Data_Functor.functorArray)(interpretInstruction(effectfulDOMInterpret))(Data_Array.fromFoldable(Data_Set.foldableSet)(Deku_Tumult_Reconciliation.reconcileTumult(Data_Set.fromFoldable(Data_Foldable.foldableArray)(Deku_Rendered.ordInstruction)(a))(Data_Set.fromFoldable(Data_Foldable.foldableArray)(Deku_Rendered.ordInstruction)(v.value0))));
           };
-          throw new Error("Failed pattern match at Deku.Interpret (line 294, column 31 - line 299, column 6): " + [ v.constructor.name ]);
+          throw new Error("Failed pattern match at Deku.Interpret (line 296, column 31 - line 301, column 6): " + [ v.constructor.name ]);
       };
   };
   var effectfulDOMInterpret = {
