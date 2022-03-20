@@ -29,135 +29,135 @@ module Deku.Graph.DOM
   , tumult
   , unsafeUnTumult
   -- codegen 7
-    , Accept_(..)
-  , AcceptCharset_(..)
-  , Accesskey_(..)
-  , Action_(..)
-  , Align_(..)
-  , Allow_(..)
-  , Alt_(..)
-  , Async_(..)
-  , Autocapitalize_(..)
-  , Autocomplete_(..)
-  , Autofocus_(..)
-  , Autoplay_(..)
-  , Background_(..)
-  , Bgcolor_(..)
-  , Border_(..)
-  , Buffered_(..)
-  , Capture_(..)
-  , Challenge_(..)
-  , Charset_(..)
-  , Checked_(..)
-  , Cite_(..)
-  , Class_(..)
-  , Code_(..)
-  , Codebase_(..)
-  , Color_(..)
-  , Cols_(..)
-  , Colspan_(..)
-  , Content_(..)
-  , Contenteditable_(..)
-  , Contextmenu_(..)
-  , Controls_(..)
-  , Coords_(..)
-  , Crossorigin_(..)
-  , Csp_(..)
-  , Data_(..)
-  , Datetime_(..)
-  , Decoding_(..)
-  , Default_(..)
-  , Defer_(..)
-  , Dir_(..)
-  , Dirname_(..)
-  , Disabled_(..)
-  , Download_(..)
-  , Draggable_(..)
-  , Enctype_(..)
-  , Enterkeyhint_(..)
-  , For_(..)
-  , Form_(..)
-  , Formaction_(..)
-  , Formenctype_(..)
-  , Formmethod_(..)
-  , Formnovalidate_(..)
-  , Formtarget_(..)
-  , Headers_(..)
-  , Height_(..)
-  , Hidden_(..)
-  , High_(..)
-  , Href_(..)
-  , Hreflang_(..)
-  , HttpEquiv_(..)
-  , Icon_(..)
-  , Id_(..)
-  , Importance_(..)
-  , Integrity_(..)
-  , Intrinsicsize_(..)
-  , Inputmode_(..)
-  , Ismap_(..)
-  , Itemprop_(..)
-  , Keytype_(..)
-  , Kind_(..)
-  , Label_(..)
-  , Lang_(..)
-  , Language_(..)
-  , Loading_(..)
-  , List_(..)
-  , Loop_(..)
-  , Low_(..)
-  , Manifest_(..)
-  , Max_(..)
-  , Maxlength_(..)
-  , Minlength_(..)
-  , Media_(..)
-  , Method_(..)
-  , Min_(..)
-  , Multiple_(..)
-  , Muted_(..)
-  , Name_(..)
-  , Novalidate_(..)
-  , Open_(..)
-  , Optimum_(..)
-  , Pattern_(..)
-  , Ping_(..)
-  , Placeholder_(..)
-  , Poster_(..)
-  , Preload_(..)
-  , Radiogroup_(..)
-  , Readonly_(..)
-  , Referrerpolicy_(..)
-  , Rel_(..)
-  , Required_(..)
-  , Reversed_(..)
-  , Rows_(..)
-  , Rowspan_(..)
-  , Sandbox_(..)
-  , Scope_(..)
-  , Scoped_(..)
-  , Selected_(..)
-  , Shape_(..)
-  , Size_(..)
-  , Sizes_(..)
-  , Slot_(..)
-  , Span_(..)
-  , Spellcheck_(..)
-  , Src_(..)
-  , Srcdoc_(..)
-  , Srclang_(..)
-  , Srcset_(..)
-  , Start_(..)
-  , Step_(..)
-  , Style_(..)
-  , Summary_(..)
-  , Tabindex_(..)
-  , Target_(..)
-  , Title_(..)
-  , Translate_(..)
-  , Type_(..)
-  , Usemap_(..)
-  , Value_(..)
-  , Width_(..)
+  , Accept(..)
+  , AcceptCharset(..)
+  , Accesskey(..)
+  , Action(..)
+  , Align(..)
+  , Allow(..)
+  , Alt(..)
+  , Async(..)
+  , Autocapitalize(..)
+  , Autocomplete(..)
+  , Autofocus(..)
+  , Autoplay(..)
+  , Background(..)
+  , Bgcolor(..)
+  , Border(..)
+  , Buffered(..)
+  , Capture(..)
+  , Challenge(..)
+  , Charset(..)
+  , Checked(..)
+  , Cite(..)
+  , Class(..)
+  , Code(..)
+  , Codebase(..)
+  , Color(..)
+  , Cols(..)
+  , Colspan(..)
+  , Content(..)
+  , Contenteditable(..)
+  , Contextmenu(..)
+  , Controls(..)
+  , Coords(..)
+  , Crossorigin(..)
+  , Csp(..)
+  , Data(..)
+  , Datetime(..)
+  , Decoding(..)
+  , Default(..)
+  , Defer(..)
+  , Dir(..)
+  , Dirname(..)
+  , Disabled(..)
+  , Download(..)
+  , Draggable(..)
+  , Enctype(..)
+  , Enterkeyhint(..)
+  , For(..)
+  , Form(..)
+  , Formaction(..)
+  , Formenctype(..)
+  , Formmethod(..)
+  , Formnovalidate(..)
+  , Formtarget(..)
+  , Headers(..)
+  , Height(..)
+  , Hidden(..)
+  , High(..)
+  , Href(..)
+  , Hreflang(..)
+  , HttpEquiv(..)
+  , Icon(..)
+  , Id(..)
+  , Importance(..)
+  , Integrity(..)
+  , Intrinsicsize(..)
+  , Inputmode(..)
+  , Ismap(..)
+  , Itemprop(..)
+  , Keytype(..)
+  , Kind(..)
+  , Label(..)
+  , Lang(..)
+  , Language(..)
+  , Loading(..)
+  , List(..)
+  , Loop(..)
+  , Low(..)
+  , Manifest(..)
+  , Max(..)
+  , Maxlength(..)
+  , Minlength(..)
+  , Media(..)
+  , Method(..)
+  , Min(..)
+  , Multiple(..)
+  , Muted(..)
+  , Name(..)
+  , Novalidate(..)
+  , Open(..)
+  , Optimum(..)
+  , Pattern(..)
+  , Ping(..)
+  , Placeholder(..)
+  , Poster(..)
+  , Preload(..)
+  , Radiogroup(..)
+  , Readonly(..)
+  , Referrerpolicy(..)
+  , Rel(..)
+  , Required(..)
+  , Reversed(..)
+  , Rows(..)
+  , Rowspan(..)
+  , Sandbox(..)
+  , Scope(..)
+  , Scoped(..)
+  , Selected(..)
+  , Shape(..)
+  , Size(..)
+  , Sizes(..)
+  , Slot(..)
+  , Span(..)
+  , Spellcheck(..)
+  , Src(..)
+  , Srcdoc(..)
+  , Srclang(..)
+  , Srcset(..)
+  , Start(..)
+  , Step(..)
+  , Style(..)
+  , Summary(..)
+  , Tabindex(..)
+  , Target(..)
+  , Title(..)
+  , Translate(..)
+  , Usemap(..)
+  , Value(..)
+  , Width(..)
+  , Xtype(..)
   , OnAbort(..)
   , OnAnimationcancel (..)
   , OnAnimationend (..)
@@ -249,616 +249,616 @@ module Deku.Graph.DOM
   , OnWaiting(..)
   -- codegen 7
   -- codegen 0
-  , A
-  , TA
+  , A_
+  , TA_
   , a
   , a'attr
-  , unsafeUnA
-  , Abbr
-  , TAbbr
+  , unsafeUnA_
+  , Abbr_
+  , TAbbr_
   , abbr
   , abbr'attr
-  , unsafeUnAbbr
-  , Acronym
-  , TAcronym
+  , unsafeUnAbbr_
+  , Acronym_
+  , TAcronym_
   , acronym
   , acronym'attr
-  , unsafeUnAcronym
-  , Address
-  , TAddress
+  , unsafeUnAcronym_
+  , Address_
+  , TAddress_
   , address
   , address'attr
-  , unsafeUnAddress
-  , Applet
-  , TApplet
+  , unsafeUnAddress_
+  , Applet_
+  , TApplet_
   , applet
   , applet'attr
-  , unsafeUnApplet
-  , Area
-  , TArea
+  , unsafeUnApplet_
+  , Area_
+  , TArea_
   , area
   , area'attr
-  , unsafeUnArea
-  , Article
-  , TArticle
+  , unsafeUnArea_
+  , Article_
+  , TArticle_
   , article
   , article'attr
-  , unsafeUnArticle
-  , Aside
-  , TAside
+  , unsafeUnArticle_
+  , Aside_
+  , TAside_
   , aside
   , aside'attr
-  , unsafeUnAside
-  , Audio
-  , TAudio
+  , unsafeUnAside_
+  , Audio_
+  , TAudio_
   , audio
   , audio'attr
-  , unsafeUnAudio
-  , B
-  , TB
+  , unsafeUnAudio_
+  , B_
+  , TB_
   , b
   , b'attr
-  , unsafeUnB
-  , Base
-  , TBase
+  , unsafeUnB_
+  , Base_
+  , TBase_
   , base
   , base'attr
-  , unsafeUnBase
-  , Basefont
-  , TBasefont
+  , unsafeUnBase_
+  , Basefont_
+  , TBasefont_
   , basefont
   , basefont'attr
-  , unsafeUnBasefont
-  , Bdi
-  , TBdi
+  , unsafeUnBasefont_
+  , Bdi_
+  , TBdi_
   , bdi
   , bdi'attr
-  , unsafeUnBdi
-  , Bdo
-  , TBdo
+  , unsafeUnBdi_
+  , Bdo_
+  , TBdo_
   , bdo
   , bdo'attr
-  , unsafeUnBdo
-  , Big
-  , TBig
+  , unsafeUnBdo_
+  , Big_
+  , TBig_
   , big
   , big'attr
-  , unsafeUnBig
-  , Blockquote
-  , TBlockquote
+  , unsafeUnBig_
+  , Blockquote_
+  , TBlockquote_
   , blockquote
   , blockquote'attr
-  , unsafeUnBlockquote
-  , Body
-  , TBody
+  , unsafeUnBlockquote_
+  , Body_
+  , TBody_
   , body
   , body'attr
-  , unsafeUnBody
-  , Br
-  , TBr
+  , unsafeUnBody_
+  , Br_
+  , TBr_
   , br
   , br'attr
-  , unsafeUnBr
-  , Button
-  , TButton
+  , unsafeUnBr_
+  , Button_
+  , TButton_
   , button
   , button'attr
-  , unsafeUnButton
-  , Canvas
-  , TCanvas
+  , unsafeUnButton_
+  , Canvas_
+  , TCanvas_
   , canvas
   , canvas'attr
-  , unsafeUnCanvas
-  , Caption
-  , TCaption
+  , unsafeUnCanvas_
+  , Caption_
+  , TCaption_
   , caption
   , caption'attr
-  , unsafeUnCaption
-  , Center
-  , TCenter
+  , unsafeUnCaption_
+  , Center_
+  , TCenter_
   , center
   , center'attr
-  , unsafeUnCenter
-  , Cite
-  , TCite
+  , unsafeUnCenter_
+  , Cite_
+  , TCite_
   , cite
   , cite'attr
-  , unsafeUnCite
-  , Code
-  , TCode
+  , unsafeUnCite_
+  , Code_
+  , TCode_
   , code
   , code'attr
-  , unsafeUnCode
-  , Col
-  , TCol
+  , unsafeUnCode_
+  , Col_
+  , TCol_
   , col
   , col'attr
-  , unsafeUnCol
-  , Colgroup
-  , TColgroup
+  , unsafeUnCol_
+  , Colgroup_
+  , TColgroup_
   , colgroup
   , colgroup'attr
-  , unsafeUnColgroup
-  , Data
-  , TData
+  , unsafeUnColgroup_
+  , Xdata_
+  , TXdata_
   , xdata
   , xdata'attr
-  , unsafeUnData
-  , Datalist
-  , TDatalist
+  , unsafeUnXdata_
+  , Datalist_
+  , TDatalist_
   , datalist
   , datalist'attr
-  , unsafeUnDatalist
-  , Dd
-  , TDd
+  , unsafeUnDatalist_
+  , Dd_
+  , TDd_
   , dd
   , dd'attr
-  , unsafeUnDd
-  , Del
-  , TDel
+  , unsafeUnDd_
+  , Del_
+  , TDel_
   , del
   , del'attr
-  , unsafeUnDel
-  , Details
-  , TDetails
+  , unsafeUnDel_
+  , Details_
+  , TDetails_
   , details
   , details'attr
-  , unsafeUnDetails
-  , Dfn
-  , TDfn
+  , unsafeUnDetails_
+  , Dfn_
+  , TDfn_
   , dfn
   , dfn'attr
-  , unsafeUnDfn
-  , Dialog
-  , TDialog
+  , unsafeUnDfn_
+  , Dialog_
+  , TDialog_
   , dialog
   , dialog'attr
-  , unsafeUnDialog
-  , Dir
-  , TDir
+  , unsafeUnDialog_
+  , Dir_
+  , TDir_
   , dir
   , dir'attr
-  , unsafeUnDir
-  , Div
-  , TDiv
+  , unsafeUnDir_
+  , Div_
+  , TDiv_
   , div
   , div'attr
-  , unsafeUnDiv
-  , Dl
-  , TDl
+  , unsafeUnDiv_
+  , Dl_
+  , TDl_
   , dl
   , dl'attr
-  , unsafeUnDl
-  , Dt
-  , TDt
+  , unsafeUnDl_
+  , Dt_
+  , TDt_
   , dt
   , dt'attr
-  , unsafeUnDt
-  , Em
-  , TEm
+  , unsafeUnDt_
+  , Em_
+  , TEm_
   , em
   , em'attr
-  , unsafeUnEm
-  , Embed
-  , TEmbed
+  , unsafeUnEm_
+  , Embed_
+  , TEmbed_
   , embed
   , embed'attr
-  , unsafeUnEmbed
-  , Fieldset
-  , TFieldset
+  , unsafeUnEmbed_
+  , Fieldset_
+  , TFieldset_
   , fieldset
   , fieldset'attr
-  , unsafeUnFieldset
-  , Figcaption
-  , TFigcaption
+  , unsafeUnFieldset_
+  , Figcaption_
+  , TFigcaption_
   , figcaption
   , figcaption'attr
-  , unsafeUnFigcaption
-  , Figure
-  , TFigure
+  , unsafeUnFigcaption_
+  , Figure_
+  , TFigure_
   , figure
   , figure'attr
-  , unsafeUnFigure
-  , Font
-  , TFont
+  , unsafeUnFigure_
+  , Font_
+  , TFont_
   , font
   , font'attr
-  , unsafeUnFont
-  , Footer
-  , TFooter
+  , unsafeUnFont_
+  , Footer_
+  , TFooter_
   , footer
   , footer'attr
-  , unsafeUnFooter
-  , Form
-  , TForm
+  , unsafeUnFooter_
+  , Form_
+  , TForm_
   , form
   , form'attr
-  , unsafeUnForm
-  , Frame
-  , TFrame
+  , unsafeUnForm_
+  , Frame_
+  , TFrame_
   , frame
   , frame'attr
-  , unsafeUnFrame
-  , Frameset
-  , TFrameset
+  , unsafeUnFrame_
+  , Frameset_
+  , TFrameset_
   , frameset
   , frameset'attr
-  , unsafeUnFrameset
-  , H1
-  , TH1
+  , unsafeUnFrameset_
+  , H1_
+  , TH1_
   , h1
   , h1'attr
-  , unsafeUnH1
-  , H2
-  , TH2
+  , unsafeUnH1_
+  , H2_
+  , TH2_
   , h2
   , h2'attr
-  , unsafeUnH2
-  , H3
-  , TH3
+  , unsafeUnH2_
+  , H3_
+  , TH3_
   , h3
   , h3'attr
-  , unsafeUnH3
-  , H4
-  , TH4
+  , unsafeUnH3_
+  , H4_
+  , TH4_
   , h4
   , h4'attr
-  , unsafeUnH4
-  , H5
-  , TH5
+  , unsafeUnH4_
+  , H5_
+  , TH5_
   , h5
   , h5'attr
-  , unsafeUnH5
-  , H6
-  , TH6
+  , unsafeUnH5_
+  , H6_
+  , TH6_
   , h6
   , h6'attr
-  , unsafeUnH6
-  , Head
-  , THead
+  , unsafeUnH6_
+  , Head_
+  , THead_
   , head
   , head'attr
-  , unsafeUnHead
-  , Header
-  , THeader
+  , unsafeUnHead_
+  , Header_
+  , THeader_
   , header
   , header'attr
-  , unsafeUnHeader
-  , Hr
-  , THr
+  , unsafeUnHeader_
+  , Hr_
+  , THr_
   , hr
   , hr'attr
-  , unsafeUnHr
-  , Html
-  , THtml
+  , unsafeUnHr_
+  , Html_
+  , THtml_
   , html
   , html'attr
-  , unsafeUnHtml
-  , I
-  , TI
+  , unsafeUnHtml_
+  , I_
+  , TI_
   , i
   , i'attr
-  , unsafeUnI
-  , Iframe
-  , TIframe
+  , unsafeUnI_
+  , Iframe_
+  , TIframe_
   , iframe
   , iframe'attr
-  , unsafeUnIframe
-  , Img
-  , TImg
+  , unsafeUnIframe_
+  , Img_
+  , TImg_
   , img
   , img'attr
-  , unsafeUnImg
-  , Input
-  , TInput
+  , unsafeUnImg_
+  , Input_
+  , TInput_
   , input
   , input'attr
-  , unsafeUnInput
-  , Ins
-  , TIns
+  , unsafeUnInput_
+  , Ins_
+  , TIns_
   , ins
   , ins'attr
-  , unsafeUnIns
-  , Kbd
-  , TKbd
+  , unsafeUnIns_
+  , Kbd_
+  , TKbd_
   , kbd
   , kbd'attr
-  , unsafeUnKbd
-  , Label
-  , TLabel
+  , unsafeUnKbd_
+  , Label_
+  , TLabel_
   , label
   , label'attr
-  , unsafeUnLabel
-  , Legend
-  , TLegend
+  , unsafeUnLabel_
+  , Legend_
+  , TLegend_
   , legend
   , legend'attr
-  , unsafeUnLegend
-  , Li
-  , TLi
+  , unsafeUnLegend_
+  , Li_
+  , TLi_
   , li
   , li'attr
-  , unsafeUnLi
-  , Link
-  , TLink
+  , unsafeUnLi_
+  , Link_
+  , TLink_
   , link
   , link'attr
-  , unsafeUnLink
-  , Main
-  , TMain
+  , unsafeUnLink_
+  , Main_
+  , TMain_
   , main
   , main'attr
-  , unsafeUnMain
-  , Map
-  , TMap
+  , unsafeUnMain_
+  , Map_
+  , TMap_
   , map
   , map'attr
-  , unsafeUnMap
-  , Mark
-  , TMark
+  , unsafeUnMap_
+  , Mark_
+  , TMark_
   , mark
   , mark'attr
-  , unsafeUnMark
-  , Meta
-  , TMeta
+  , unsafeUnMark_
+  , Meta_
+  , TMeta_
   , meta
   , meta'attr
-  , unsafeUnMeta
-  , Meter
-  , TMeter
+  , unsafeUnMeta_
+  , Meter_
+  , TMeter_
   , meter
   , meter'attr
-  , unsafeUnMeter
-  , Nav
-  , TNav
+  , unsafeUnMeter_
+  , Nav_
+  , TNav_
   , nav
   , nav'attr
-  , unsafeUnNav
-  , Noframes
-  , TNoframes
+  , unsafeUnNav_
+  , Noframes_
+  , TNoframes_
   , noframes
   , noframes'attr
-  , unsafeUnNoframes
-  , Noscript
-  , TNoscript
+  , unsafeUnNoframes_
+  , Noscript_
+  , TNoscript_
   , noscript
   , noscript'attr
-  , unsafeUnNoscript
-  , Object
-  , TObject
+  , unsafeUnNoscript_
+  , Object_
+  , TObject_
   , object
   , object'attr
-  , unsafeUnObject
-  , Ol
-  , TOl
+  , unsafeUnObject_
+  , Ol_
+  , TOl_
   , ol
   , ol'attr
-  , unsafeUnOl
-  , Optgroup
-  , TOptgroup
+  , unsafeUnOl_
+  , Optgroup_
+  , TOptgroup_
   , optgroup
   , optgroup'attr
-  , unsafeUnOptgroup
-  , Option
-  , TOption
+  , unsafeUnOptgroup_
+  , Option_
+  , TOption_
   , option
   , option'attr
-  , unsafeUnOption
-  , Output
-  , TOutput
+  , unsafeUnOption_
+  , Output_
+  , TOutput_
   , output
   , output'attr
-  , unsafeUnOutput
-  , P
-  , TP
+  , unsafeUnOutput_
+  , P_
+  , TP_
   , p
   , p'attr
-  , unsafeUnP
-  , Param
-  , TParam
+  , unsafeUnP_
+  , Param_
+  , TParam_
   , param
   , param'attr
-  , unsafeUnParam
-  , Picture
-  , TPicture
+  , unsafeUnParam_
+  , Picture_
+  , TPicture_
   , picture
   , picture'attr
-  , unsafeUnPicture
-  , Pre
-  , TPre
+  , unsafeUnPicture_
+  , Pre_
+  , TPre_
   , pre
   , pre'attr
-  , unsafeUnPre
-  , Progress
-  , TProgress
+  , unsafeUnPre_
+  , Progress_
+  , TProgress_
   , progress
   , progress'attr
-  , unsafeUnProgress
-  , Q
-  , TQ
+  , unsafeUnProgress_
+  , Q_
+  , TQ_
   , q
   , q'attr
-  , unsafeUnQ
-  , Rp
-  , TRp
+  , unsafeUnQ_
+  , Rp_
+  , TRp_
   , rp
   , rp'attr
-  , unsafeUnRp
-  , Rt
-  , TRt
+  , unsafeUnRp_
+  , Rt_
+  , TRt_
   , rt
   , rt'attr
-  , unsafeUnRt
-  , Ruby
-  , TRuby
+  , unsafeUnRt_
+  , Ruby_
+  , TRuby_
   , ruby
   , ruby'attr
-  , unsafeUnRuby
-  , S
-  , TS
+  , unsafeUnRuby_
+  , S_
+  , TS_
   , s
   , s'attr
-  , unsafeUnS
-  , Samp
-  , TSamp
+  , unsafeUnS_
+  , Samp_
+  , TSamp_
   , samp
   , samp'attr
-  , unsafeUnSamp
-  , Script
-  , TScript
+  , unsafeUnSamp_
+  , Script_
+  , TScript_
   , script
   , script'attr
-  , unsafeUnScript
-  , Section
-  , TSection
+  , unsafeUnScript_
+  , Section_
+  , TSection_
   , section
   , section'attr
-  , unsafeUnSection
-  , Select
-  , TSelect
+  , unsafeUnSection_
+  , Select_
+  , TSelect_
   , select
   , select'attr
-  , unsafeUnSelect
-  , Small
-  , TSmall
+  , unsafeUnSelect_
+  , Small_
+  , TSmall_
   , small
   , small'attr
-  , unsafeUnSmall
-  , Source
-  , TSource
+  , unsafeUnSmall_
+  , Source_
+  , TSource_
   , source
   , source'attr
-  , unsafeUnSource
-  , Span
-  , TSpan
+  , unsafeUnSource_
+  , Span_
+  , TSpan_
   , span
   , span'attr
-  , unsafeUnSpan
-  , Strike
-  , TStrike
+  , unsafeUnSpan_
+  , Strike_
+  , TStrike_
   , strike
   , strike'attr
-  , unsafeUnStrike
-  , Strong
-  , TStrong
+  , unsafeUnStrike_
+  , Strong_
+  , TStrong_
   , strong
   , strong'attr
-  , unsafeUnStrong
-  , Style
-  , TStyle
+  , unsafeUnStrong_
+  , Style_
+  , TStyle_
   , style
   , style'attr
-  , unsafeUnStyle
-  , Sub
-  , TSub
+  , unsafeUnStyle_
+  , Sub_
+  , TSub_
   , sub
   , sub'attr
-  , unsafeUnSub
-  , Summary
-  , TSummary
+  , unsafeUnSub_
+  , Summary_
+  , TSummary_
   , summary
   , summary'attr
-  , unsafeUnSummary
-  , Sup
-  , TSup
+  , unsafeUnSummary_
+  , Sup_
+  , TSup_
   , sup
   , sup'attr
-  , unsafeUnSup
-  , Svg
-  , TSvg
+  , unsafeUnSup_
+  , Svg_
+  , TSvg_
   , svg
   , svg'attr
-  , unsafeUnSvg
-  , Table
-  , TTable
+  , unsafeUnSvg_
+  , Table_
+  , TTable_
   , table
   , table'attr
-  , unsafeUnTable
-  , Tbody
-  , TTbody
+  , unsafeUnTable_
+  , Tbody_
+  , TTbody_
   , tbody
   , tbody'attr
-  , unsafeUnTbody
-  , Td
-  , TTd
+  , unsafeUnTbody_
+  , Td_
+  , TTd_
   , td
   , td'attr
-  , unsafeUnTd
-  , Template
-  , TTemplate
+  , unsafeUnTd_
+  , Template_
+  , TTemplate_
   , template
   , template'attr
-  , unsafeUnTemplate
-  , Textarea
-  , TTextarea
+  , unsafeUnTemplate_
+  , Textarea_
+  , TTextarea_
   , textarea
   , textarea'attr
-  , unsafeUnTextarea
-  , Tfoot
-  , TTfoot
+  , unsafeUnTextarea_
+  , Tfoot_
+  , TTfoot_
   , tfoot
   , tfoot'attr
-  , unsafeUnTfoot
-  , Th
-  , TTh
+  , unsafeUnTfoot_
+  , Th_
+  , TTh_
   , th
   , th'attr
-  , unsafeUnTh
-  , Thead
-  , TThead
+  , unsafeUnTh_
+  , Thead_
+  , TThead_
   , thead
   , thead'attr
-  , unsafeUnThead
-  , Time
-  , TTime
+  , unsafeUnThead_
+  , Time_
+  , TTime_
   , time
   , time'attr
-  , unsafeUnTime
-  , Title
-  , TTitle
+  , unsafeUnTime_
+  , Title_
+  , TTitle_
   , title
   , title'attr
-  , unsafeUnTitle
-  , Tr
-  , TTr
+  , unsafeUnTitle_
+  , Tr_
+  , TTr_
   , tr
   , tr'attr
-  , unsafeUnTr
-  , Track
-  , TTrack
+  , unsafeUnTr_
+  , Track_
+  , TTrack_
   , track
   , track'attr
-  , unsafeUnTrack
-  , Tt
-  , TTt
+  , unsafeUnTrack_
+  , Tt_
+  , TTt_
   , tt
   , tt'attr
-  , unsafeUnTt
-  , U
-  , TU
+  , unsafeUnTt_
+  , U_
+  , TU_
   , u
   , u'attr
-  , unsafeUnU
-  , Ul
-  , TUl
+  , unsafeUnU_
+  , Ul_
+  , TUl_
   , ul
   , ul'attr
-  , unsafeUnUl
-  , Var
-  , TVar
+  , unsafeUnUl_
+  , Var_
+  , TVar_
   , var
   , var'attr
-  , unsafeUnVar
-  , Video
-  , TVideo
+  , unsafeUnVar_
+  , Video_
+  , TVideo_
   , video
   , video'attr
-  , unsafeUnVideo
-  , Wbr
-  , TWbr
+  , unsafeUnVideo_
+  , Wbr_
+  , TWbr_
   , wbr
   , wbr'attr
-  , unsafeUnWbr
+  , unsafeUnWbr_
   -- codegen 0
   ) where
 
@@ -1107,141 +1107,141 @@ instance reifyTRoot :: ReifyAU Root TRoot where
   reifyAU = const mempty
 
 -- codegen 8
-data Accept_ = Accept_
-data AcceptCharset_ = AcceptCharset_
-data Accesskey_ = Accesskey_
-data Action_ = Action_
-data Align_ = Align_
-data Allow_ = Allow_
-data Alt_ = Alt_
-data Async_ = Async_
-data Autocapitalize_ = Autocapitalize_
-data Autocomplete_ = Autocomplete_
-data Autofocus_ = Autofocus_
-data Autoplay_ = Autoplay_
-data Background_ = Background_
-data Bgcolor_ = Bgcolor_
-data Border_ = Border_
-data Buffered_ = Buffered_
-data Capture_ = Capture_
-data Challenge_ = Challenge_
-data Charset_ = Charset_
-data Checked_ = Checked_
-data Cite_ = Cite_
-data Class_ = Class_
-data Code_ = Code_
-data Codebase_ = Codebase_
-data Color_ = Color_
-data Cols_ = Cols_
-data Colspan_ = Colspan_
-data Content_ = Content_
-data Contenteditable_ = Contenteditable_
-data Contextmenu_ = Contextmenu_
-data Controls_ = Controls_
-data Coords_ = Coords_
-data Crossorigin_ = Crossorigin_
-data Csp_ = Csp_
-data Data_ = Data_
-data Datetime_ = Datetime_
-data Decoding_ = Decoding_
-data Default_ = Default_
-data Defer_ = Defer_
-data Dir_ = Dir_
-data Dirname_ = Dirname_
-data Disabled_ = Disabled_
-data Download_ = Download_
-data Draggable_ = Draggable_
-data Enctype_ = Enctype_
-data Enterkeyhint_ = Enterkeyhint_
-data For_ = For_
-data Form_ = Form_
-data Formaction_ = Formaction_
-data Formenctype_ = Formenctype_
-data Formmethod_ = Formmethod_
-data Formnovalidate_ = Formnovalidate_
-data Formtarget_ = Formtarget_
-data Headers_ = Headers_
-data Height_ = Height_
-data Hidden_ = Hidden_
-data High_ = High_
-data Href_ = Href_
-data Hreflang_ = Hreflang_
-data HttpEquiv_ = HttpEquiv_
-data Icon_ = Icon_
-data Id_ = Id_
-data Importance_ = Importance_
-data Integrity_ = Integrity_
-data Intrinsicsize_ = Intrinsicsize_
-data Inputmode_ = Inputmode_
-data Ismap_ = Ismap_
-data Itemprop_ = Itemprop_
-data Keytype_ = Keytype_
-data Kind_ = Kind_
-data Label_ = Label_
-data Lang_ = Lang_
-data Language_ = Language_
-data Loading_ = Loading_
-data List_ = List_
-data Loop_ = Loop_
-data Low_ = Low_
-data Manifest_ = Manifest_
-data Max_ = Max_
-data Maxlength_ = Maxlength_
-data Minlength_ = Minlength_
-data Media_ = Media_
-data Method_ = Method_
-data Min_ = Min_
-data Multiple_ = Multiple_
-data Muted_ = Muted_
-data Name_ = Name_
-data Novalidate_ = Novalidate_
-data Open_ = Open_
-data Optimum_ = Optimum_
-data Pattern_ = Pattern_
-data Ping_ = Ping_
-data Placeholder_ = Placeholder_
-data Poster_ = Poster_
-data Preload_ = Preload_
-data Radiogroup_ = Radiogroup_
-data Readonly_ = Readonly_
-data Referrerpolicy_ = Referrerpolicy_
-data Rel_ = Rel_
-data Required_ = Required_
-data Reversed_ = Reversed_
-data Rows_ = Rows_
-data Rowspan_ = Rowspan_
-data Sandbox_ = Sandbox_
-data Scope_ = Scope_
-data Scoped_ = Scoped_
-data Selected_ = Selected_
-data Shape_ = Shape_
-data Size_ = Size_
-data Sizes_ = Sizes_
-data Slot_ = Slot_
-data Span_ = Span_
-data Spellcheck_ = Spellcheck_
-data Src_ = Src_
-data Srcdoc_ = Srcdoc_
-data Srclang_ = Srclang_
-data Srcset_ = Srcset_
-data Start_ = Start_
-data Step_ = Step_
-data Style_ = Style_
-data Summary_ = Summary_
-data Tabindex_ = Tabindex_
-data Target_ = Target_
-data Title_ = Title_
-data Translate_ = Translate_
-data Type_ = Type_
-data Usemap_ = Usemap_
-data Value_ = Value_
-data Width_ = Width_
+data Accept = Accept
+data AcceptCharset = AcceptCharset
+data Accesskey = Accesskey
+data Action = Action
+data Align = Align
+data Allow = Allow
+data Alt = Alt
+data Async = Async
+data Autocapitalize = Autocapitalize
+data Autocomplete = Autocomplete
+data Autofocus = Autofocus
+data Autoplay = Autoplay
+data Background = Background
+data Bgcolor = Bgcolor
+data Border = Border
+data Buffered = Buffered
+data Capture = Capture
+data Challenge = Challenge
+data Charset = Charset
+data Checked = Checked
+data Cite = Cite
+data Class = Class
+data Code = Code
+data Codebase = Codebase
+data Color = Color
+data Cols = Cols
+data Colspan = Colspan
+data Content = Content
+data Contenteditable = Contenteditable
+data Contextmenu = Contextmenu
+data Controls = Controls
+data Coords = Coords
+data Crossorigin = Crossorigin
+data Csp = Csp
+data Data = Data
+data Datetime = Datetime
+data Decoding = Decoding
+data Default = Default
+data Defer = Defer
+data Dir = Dir
+data Dirname = Dirname
+data Disabled = Disabled
+data Download = Download
+data Draggable = Draggable
+data Enctype = Enctype
+data Enterkeyhint = Enterkeyhint
+data For = For
+data Form = Form
+data Formaction = Formaction
+data Formenctype = Formenctype
+data Formmethod = Formmethod
+data Formnovalidate = Formnovalidate
+data Formtarget = Formtarget
+data Headers = Headers
+data Height = Height
+data Hidden = Hidden
+data High = High
+data Href = Href
+data Hreflang = Hreflang
+data HttpEquiv = HttpEquiv
+data Icon = Icon
+data Id = Id
+data Importance = Importance
+data Integrity = Integrity
+data Intrinsicsize = Intrinsicsize
+data Inputmode = Inputmode
+data Ismap = Ismap
+data Itemprop = Itemprop
+data Keytype = Keytype
+data Kind = Kind
+data Label = Label
+data Lang = Lang
+data Language = Language
+data Loading = Loading
+data List = List
+data Loop = Loop
+data Low = Low
+data Manifest = Manifest
+data Max = Max
+data Maxlength = Maxlength
+data Minlength = Minlength
+data Media = Media
+data Method = Method
+data Min = Min
+data Multiple = Multiple
+data Muted = Muted
+data Name = Name
+data Novalidate = Novalidate
+data Open = Open
+data Optimum = Optimum
+data Pattern = Pattern
+data Ping = Ping
+data Placeholder = Placeholder
+data Poster = Poster
+data Preload = Preload
+data Radiogroup = Radiogroup
+data Readonly = Readonly
+data Referrerpolicy = Referrerpolicy
+data Rel = Rel
+data Required = Required
+data Reversed = Reversed
+data Rows = Rows
+data Rowspan = Rowspan
+data Sandbox = Sandbox
+data Scope = Scope
+data Scoped = Scoped
+data Selected = Selected
+data Shape = Shape
+data Size = Size
+data Sizes = Sizes
+data Slot = Slot
+data Span = Span
+data Spellcheck = Spellcheck
+data Src = Src
+data Srcdoc = Srcdoc
+data Srclang = Srclang
+data Srcset = Srcset
+data Start = Start
+data Step = Step
+data Style = Style
+data Summary = Summary
+data Tabindex = Tabindex
+data Target = Target
+data Title = Title
+data Translate = Translate
+data Usemap = Usemap
+data Value = Value
+data Width = Width
+data Xtype = Xtype
 data OnAbort = OnAbort
-data OnAnimationcancel  = OnAnimationcancel
-data OnAnimationend  = OnAnimationend
-data OnAnimationiteration  = OnAnimationiteration
-data OnAnimationstart  = OnAnimationstart
-data OnAuxclick  = OnAuxclick
+data OnAnimationcancel  = OnAnimationcancel 
+data OnAnimationend  = OnAnimationend 
+data OnAnimationiteration  = OnAnimationiteration 
+data OnAnimationstart  = OnAnimationstart 
+data OnAuxclick  = OnAuxclick 
 data OnBlur = OnBlur
 data OnError = OnError
 data OnFocus = OnFocus
@@ -1283,7 +1283,7 @@ data OnMousemove = OnMousemove
 data OnMouseout = OnMouseout
 data OnMouseover = OnMouseover
 data OnMouseup = OnMouseup
-data OnMousewheel   = OnMousewheel
+data OnMousewheel   = OnMousewheel  
 data OnWheel = OnWheel
 data OnPause = OnPause
 data OnPlay = OnPlay
@@ -1296,8 +1296,8 @@ data OnPointerover = OnPointerover
 data OnPointerout = OnPointerout
 data OnPointerenter = OnPointerenter
 data OnPointerleave = OnPointerleave
-data OnPointerlockchange  = OnPointerlockchange
-data OnPointerlockerror  = OnPointerlockerror
+data OnPointerlockchange  = OnPointerlockchange 
+data OnPointerlockerror  = OnPointerlockerror 
 data OnProgress = OnProgress
 data OnRatechange = OnRatechange
 data OnReset = OnReset
@@ -1309,858 +1309,855 @@ data OnSeeking = OnSeeking
 data OnSelect = OnSelect
 data OnSelectstart = OnSelectstart
 data OnSelectionchange = OnSelectionchange
-data OnShow  = OnShow
+data OnShow  = OnShow 
 data OnSlotchange = OnSlotchange
 data OnStalled = OnStalled
 data OnSubmit = OnSubmit
 data OnSuspend = OnSuspend
 data OnTimeupdate = OnTimeupdate
 data OnVolumechange = OnVolumechange
-data OnTouchcancel   = OnTouchcancel
-data OnTouchend   = OnTouchend
-data OnTouchmove   = OnTouchmove
-data OnTouchstart   = OnTouchstart
+data OnTouchcancel   = OnTouchcancel  
+data OnTouchend   = OnTouchend  
+data OnTouchmove   = OnTouchmove  
+data OnTouchstart   = OnTouchstart  
 data OnTransitioncancel = OnTransitioncancel
 data OnTransitionend = OnTransitionend
 data OnTransitionrun = OnTransitionrun
 data OnTransitionstart = OnTransitionstart
 data OnWaiting = OnWaiting
-instance Attr Form Accept_ String where
-  attr Accept_ value = unsafeAttribute { key: "accept", value: prop value }
+instance Attr Form_ Accept String where
+  attr Accept value = unsafeAttribute { key: "accept", value: prop value }
 
-instance Attr Input Accept_ String where
-  attr Accept_ value = unsafeAttribute { key: "accept", value: prop value }
+instance Attr Input_ Accept String where
+  attr Accept value = unsafeAttribute { key: "accept", value: prop value }
 
-instance Attr Form AcceptCharset_ String where
-  attr AcceptCharset_ value = unsafeAttribute { key: "accept-charset", value: prop value }
+instance Attr Form_ AcceptCharset String where
+  attr AcceptCharset value = unsafeAttribute { key: "accept-charset", value: prop value }
 
-instance Attr Form Action_ String where
-  attr Action_ value = unsafeAttribute { key: "action", value: prop value }
+instance Attr Form_ Action String where
+  attr Action value = unsafeAttribute { key: "action", value: prop value }
 
-instance Attr Applet Align_ String where
-  attr Align_ value = unsafeAttribute { key: "align", value: prop value }
+instance Attr Applet_ Align String where
+  attr Align value = unsafeAttribute { key: "align", value: prop value }
 
-instance Attr Caption Align_ String where
-  attr Align_ value = unsafeAttribute { key: "align", value: prop value }
+instance Attr Caption_ Align String where
+  attr Align value = unsafeAttribute { key: "align", value: prop value }
 
-instance Attr Col Align_ String where
-  attr Align_ value = unsafeAttribute { key: "align", value: prop value }
+instance Attr Col_ Align String where
+  attr Align value = unsafeAttribute { key: "align", value: prop value }
 
-instance Attr Colgroup Align_ String where
-  attr Align_ value = unsafeAttribute { key: "align", value: prop value }
+instance Attr Colgroup_ Align String where
+  attr Align value = unsafeAttribute { key: "align", value: prop value }
 
-instance Attr Hr Align_ String where
-  attr Align_ value = unsafeAttribute { key: "align", value: prop value }
+instance Attr Hr_ Align String where
+  attr Align value = unsafeAttribute { key: "align", value: prop value }
 
-instance Attr Iframe Align_ String where
-  attr Align_ value = unsafeAttribute { key: "align", value: prop value }
+instance Attr Iframe_ Align String where
+  attr Align value = unsafeAttribute { key: "align", value: prop value }
 
-instance Attr Img Align_ String where
-  attr Align_ value = unsafeAttribute { key: "align", value: prop value }
+instance Attr Img_ Align String where
+  attr Align value = unsafeAttribute { key: "align", value: prop value }
 
-instance Attr Table Align_ String where
-  attr Align_ value = unsafeAttribute { key: "align", value: prop value }
+instance Attr Table_ Align String where
+  attr Align value = unsafeAttribute { key: "align", value: prop value }
 
-instance Attr Tbody Align_ String where
-  attr Align_ value = unsafeAttribute { key: "align", value: prop value }
+instance Attr Tbody_ Align String where
+  attr Align value = unsafeAttribute { key: "align", value: prop value }
 
-instance Attr Td Align_ String where
-  attr Align_ value = unsafeAttribute { key: "align", value: prop value }
+instance Attr Td_ Align String where
+  attr Align value = unsafeAttribute { key: "align", value: prop value }
 
-instance Attr Tfoot Align_ String where
-  attr Align_ value = unsafeAttribute { key: "align", value: prop value }
+instance Attr Tfoot_ Align String where
+  attr Align value = unsafeAttribute { key: "align", value: prop value }
 
-instance Attr Th Align_ String where
-  attr Align_ value = unsafeAttribute { key: "align", value: prop value }
+instance Attr Th_ Align String where
+  attr Align value = unsafeAttribute { key: "align", value: prop value }
 
-instance Attr Thead Align_ String where
-  attr Align_ value = unsafeAttribute { key: "align", value: prop value }
+instance Attr Thead_ Align String where
+  attr Align value = unsafeAttribute { key: "align", value: prop value }
 
-instance Attr Tr Align_ String where
-  attr Align_ value = unsafeAttribute { key: "align", value: prop value }
+instance Attr Tr_ Align String where
+  attr Align value = unsafeAttribute { key: "align", value: prop value }
 
-instance Attr Iframe Allow_ String where
-  attr Allow_ value = unsafeAttribute { key: "allow", value: prop value }
+instance Attr Iframe_ Allow String where
+  attr Allow value = unsafeAttribute { key: "allow", value: prop value }
 
-instance Attr Applet Alt_ String where
-  attr Alt_ value = unsafeAttribute { key: "alt", value: prop value }
+instance Attr Applet_ Alt String where
+  attr Alt value = unsafeAttribute { key: "alt", value: prop value }
 
-instance Attr Area Alt_ String where
-  attr Alt_ value = unsafeAttribute { key: "alt", value: prop value }
+instance Attr Area_ Alt String where
+  attr Alt value = unsafeAttribute { key: "alt", value: prop value }
 
-instance Attr Img Alt_ String where
-  attr Alt_ value = unsafeAttribute { key: "alt", value: prop value }
+instance Attr Img_ Alt String where
+  attr Alt value = unsafeAttribute { key: "alt", value: prop value }
 
-instance Attr Input Alt_ String where
-  attr Alt_ value = unsafeAttribute { key: "alt", value: prop value }
+instance Attr Input_ Alt String where
+  attr Alt value = unsafeAttribute { key: "alt", value: prop value }
 
-instance Attr Script Async_ String where
-  attr Async_ value = unsafeAttribute { key: "async", value: prop value }
+instance Attr Script_ Async String where
+  attr Async value = unsafeAttribute { key: "async", value: prop value }
 
-instance Attr Form Autocomplete_ String where
-  attr Autocomplete_ value = unsafeAttribute { key: "autocomplete", value: prop value }
+instance Attr Form_ Autocomplete String where
+  attr Autocomplete value = unsafeAttribute { key: "autocomplete", value: prop value }
 
-instance Attr Input Autocomplete_ String where
-  attr Autocomplete_ value = unsafeAttribute { key: "autocomplete", value: prop value }
+instance Attr Input_ Autocomplete String where
+  attr Autocomplete value = unsafeAttribute { key: "autocomplete", value: prop value }
 
-instance Attr Select Autocomplete_ String where
-  attr Autocomplete_ value = unsafeAttribute { key: "autocomplete", value: prop value }
+instance Attr Select_ Autocomplete String where
+  attr Autocomplete value = unsafeAttribute { key: "autocomplete", value: prop value }
 
-instance Attr Textarea Autocomplete_ String where
-  attr Autocomplete_ value = unsafeAttribute { key: "autocomplete", value: prop value }
+instance Attr Textarea_ Autocomplete String where
+  attr Autocomplete value = unsafeAttribute { key: "autocomplete", value: prop value }
 
-instance Attr Button Autofocus_ String where
-  attr Autofocus_ value = unsafeAttribute { key: "autofocus", value: prop value }
+instance Attr Button_ Autofocus String where
+  attr Autofocus value = unsafeAttribute { key: "autofocus", value: prop value }
 
-instance Attr Input Autofocus_ String where
-  attr Autofocus_ value = unsafeAttribute { key: "autofocus", value: prop value }
+instance Attr Input_ Autofocus String where
+  attr Autofocus value = unsafeAttribute { key: "autofocus", value: prop value }
 
-instance Attr Select Autofocus_ String where
-  attr Autofocus_ value = unsafeAttribute { key: "autofocus", value: prop value }
+instance Attr Select_ Autofocus String where
+  attr Autofocus value = unsafeAttribute { key: "autofocus", value: prop value }
 
-instance Attr Textarea Autofocus_ String where
-  attr Autofocus_ value = unsafeAttribute { key: "autofocus", value: prop value }
+instance Attr Textarea_ Autofocus String where
+  attr Autofocus value = unsafeAttribute { key: "autofocus", value: prop value }
 
-instance Attr Audio Autoplay_ String where
-  attr Autoplay_ value = unsafeAttribute { key: "autoplay", value: prop value }
+instance Attr Audio_ Autoplay String where
+  attr Autoplay value = unsafeAttribute { key: "autoplay", value: prop value }
 
-instance Attr Video Autoplay_ String where
-  attr Autoplay_ value = unsafeAttribute { key: "autoplay", value: prop value }
+instance Attr Video_ Autoplay String where
+  attr Autoplay value = unsafeAttribute { key: "autoplay", value: prop value }
 
-instance Attr Body Background_ String where
-  attr Background_ value = unsafeAttribute { key: "background", value: prop value }
+instance Attr Body_ Background String where
+  attr Background value = unsafeAttribute { key: "background", value: prop value }
 
-instance Attr Table Background_ String where
-  attr Background_ value = unsafeAttribute { key: "background", value: prop value }
+instance Attr Table_ Background String where
+  attr Background value = unsafeAttribute { key: "background", value: prop value }
 
-instance Attr Td Background_ String where
-  attr Background_ value = unsafeAttribute { key: "background", value: prop value }
+instance Attr Td_ Background String where
+  attr Background value = unsafeAttribute { key: "background", value: prop value }
 
-instance Attr Th Background_ String where
-  attr Background_ value = unsafeAttribute { key: "background", value: prop value }
+instance Attr Th_ Background String where
+  attr Background value = unsafeAttribute { key: "background", value: prop value }
 
-instance Attr Body Bgcolor_ String where
-  attr Bgcolor_ value = unsafeAttribute { key: "bgcolor", value: prop value }
+instance Attr Body_ Bgcolor String where
+  attr Bgcolor value = unsafeAttribute { key: "bgcolor", value: prop value }
 
-instance Attr Col Bgcolor_ String where
-  attr Bgcolor_ value = unsafeAttribute { key: "bgcolor", value: prop value }
+instance Attr Col_ Bgcolor String where
+  attr Bgcolor value = unsafeAttribute { key: "bgcolor", value: prop value }
 
-instance Attr Colgroup Bgcolor_ String where
-  attr Bgcolor_ value = unsafeAttribute { key: "bgcolor", value: prop value }
+instance Attr Colgroup_ Bgcolor String where
+  attr Bgcolor value = unsafeAttribute { key: "bgcolor", value: prop value }
 
-instance Attr Table Bgcolor_ String where
-  attr Bgcolor_ value = unsafeAttribute { key: "bgcolor", value: prop value }
+instance Attr Table_ Bgcolor String where
+  attr Bgcolor value = unsafeAttribute { key: "bgcolor", value: prop value }
 
-instance Attr Tbody Bgcolor_ String where
-  attr Bgcolor_ value = unsafeAttribute { key: "bgcolor", value: prop value }
+instance Attr Tbody_ Bgcolor String where
+  attr Bgcolor value = unsafeAttribute { key: "bgcolor", value: prop value }
 
-instance Attr Tfoot Bgcolor_ String where
-  attr Bgcolor_ value = unsafeAttribute { key: "bgcolor", value: prop value }
+instance Attr Tfoot_ Bgcolor String where
+  attr Bgcolor value = unsafeAttribute { key: "bgcolor", value: prop value }
 
-instance Attr Td Bgcolor_ String where
-  attr Bgcolor_ value = unsafeAttribute { key: "bgcolor", value: prop value }
+instance Attr Td_ Bgcolor String where
+  attr Bgcolor value = unsafeAttribute { key: "bgcolor", value: prop value }
 
-instance Attr Th Bgcolor_ String where
-  attr Bgcolor_ value = unsafeAttribute { key: "bgcolor", value: prop value }
+instance Attr Th_ Bgcolor String where
+  attr Bgcolor value = unsafeAttribute { key: "bgcolor", value: prop value }
 
-instance Attr Tr Bgcolor_ String where
-  attr Bgcolor_ value = unsafeAttribute { key: "bgcolor", value: prop value }
+instance Attr Tr_ Bgcolor String where
+  attr Bgcolor value = unsafeAttribute { key: "bgcolor", value: prop value }
 
-instance Attr Img Border_ String where
-  attr Border_ value = unsafeAttribute { key: "border", value: prop value }
+instance Attr Img_ Border String where
+  attr Border value = unsafeAttribute { key: "border", value: prop value }
 
-instance Attr Object Border_ String where
-  attr Border_ value = unsafeAttribute { key: "border", value: prop value }
+instance Attr Object_ Border String where
+  attr Border value = unsafeAttribute { key: "border", value: prop value }
 
-instance Attr Table Border_ String where
-  attr Border_ value = unsafeAttribute { key: "border", value: prop value }
+instance Attr Table_ Border String where
+  attr Border value = unsafeAttribute { key: "border", value: prop value }
 
-instance Attr Audio Buffered_ String where
-  attr Buffered_ value = unsafeAttribute { key: "buffered", value: prop value }
+instance Attr Audio_ Buffered String where
+  attr Buffered value = unsafeAttribute { key: "buffered", value: prop value }
 
-instance Attr Video Buffered_ String where
-  attr Buffered_ value = unsafeAttribute { key: "buffered", value: prop value }
+instance Attr Video_ Buffered String where
+  attr Buffered value = unsafeAttribute { key: "buffered", value: prop value }
 
-instance Attr Input Capture_ String where
-  attr Capture_ value = unsafeAttribute { key: "capture", value: prop value }
+instance Attr Input_ Capture String where
+  attr Capture value = unsafeAttribute { key: "capture", value: prop value }
 
-instance Attr Meta Charset_ String where
-  attr Charset_ value = unsafeAttribute { key: "charset", value: prop value }
+instance Attr Meta_ Charset String where
+  attr Charset value = unsafeAttribute { key: "charset", value: prop value }
 
-instance Attr Script Charset_ String where
-  attr Charset_ value = unsafeAttribute { key: "charset", value: prop value }
+instance Attr Script_ Charset String where
+  attr Charset value = unsafeAttribute { key: "charset", value: prop value }
 
-instance Attr Input Checked_ String where
-  attr Checked_ value = unsafeAttribute { key: "checked", value: prop value }
+instance Attr Input_ Checked String where
+  attr Checked value = unsafeAttribute { key: "checked", value: prop value }
 
-instance Attr Blockquote Cite_ String where
-  attr Cite_ value = unsafeAttribute { key: "cite", value: prop value }
+instance Attr Blockquote_ Cite String where
+  attr Cite value = unsafeAttribute { key: "cite", value: prop value }
 
-instance Attr Del Cite_ String where
-  attr Cite_ value = unsafeAttribute { key: "cite", value: prop value }
+instance Attr Del_ Cite String where
+  attr Cite value = unsafeAttribute { key: "cite", value: prop value }
 
-instance Attr Ins Cite_ String where
-  attr Cite_ value = unsafeAttribute { key: "cite", value: prop value }
+instance Attr Ins_ Cite String where
+  attr Cite value = unsafeAttribute { key: "cite", value: prop value }
 
-instance Attr Q Cite_ String where
-  attr Cite_ value = unsafeAttribute { key: "cite", value: prop value }
+instance Attr Q_ Cite String where
+  attr Cite value = unsafeAttribute { key: "cite", value: prop value }
 
-instance Attr Applet Code_ String where
-  attr Code_ value = unsafeAttribute { key: "code", value: prop value }
+instance Attr Applet_ Code String where
+  attr Code value = unsafeAttribute { key: "code", value: prop value }
 
-instance Attr Applet Codebase_ String where
-  attr Codebase_ value = unsafeAttribute { key: "codebase", value: prop value }
+instance Attr Applet_ Codebase String where
+  attr Codebase value = unsafeAttribute { key: "codebase", value: prop value }
 
-instance Attr Basefont Color_ String where
-  attr Color_ value = unsafeAttribute { key: "color", value: prop value }
+instance Attr Basefont_ Color String where
+  attr Color value = unsafeAttribute { key: "color", value: prop value }
 
-instance Attr Font Color_ String where
-  attr Color_ value = unsafeAttribute { key: "color", value: prop value }
+instance Attr Font_ Color String where
+  attr Color value = unsafeAttribute { key: "color", value: prop value }
 
-instance Attr Hr Color_ String where
-  attr Color_ value = unsafeAttribute { key: "color", value: prop value }
+instance Attr Hr_ Color String where
+  attr Color value = unsafeAttribute { key: "color", value: prop value }
 
-instance Attr Textarea Cols_ String where
-  attr Cols_ value = unsafeAttribute { key: "cols", value: prop value }
+instance Attr Textarea_ Cols String where
+  attr Cols value = unsafeAttribute { key: "cols", value: prop value }
 
-instance Attr Td Colspan_ String where
-  attr Colspan_ value = unsafeAttribute { key: "colspan", value: prop value }
+instance Attr Td_ Colspan String where
+  attr Colspan value = unsafeAttribute { key: "colspan", value: prop value }
 
-instance Attr Th Colspan_ String where
-  attr Colspan_ value = unsafeAttribute { key: "colspan", value: prop value }
+instance Attr Th_ Colspan String where
+  attr Colspan value = unsafeAttribute { key: "colspan", value: prop value }
 
-instance Attr Meta Content_ String where
-  attr Content_ value = unsafeAttribute { key: "content", value: prop value }
+instance Attr Meta_ Content String where
+  attr Content value = unsafeAttribute { key: "content", value: prop value }
 
-instance Attr Audio Controls_ String where
-  attr Controls_ value = unsafeAttribute { key: "controls", value: prop value }
+instance Attr Audio_ Controls String where
+  attr Controls value = unsafeAttribute { key: "controls", value: prop value }
 
-instance Attr Video Controls_ String where
-  attr Controls_ value = unsafeAttribute { key: "controls", value: prop value }
+instance Attr Video_ Controls String where
+  attr Controls value = unsafeAttribute { key: "controls", value: prop value }
 
-instance Attr Area Coords_ String where
-  attr Coords_ value = unsafeAttribute { key: "coords", value: prop value }
+instance Attr Area_ Coords String where
+  attr Coords value = unsafeAttribute { key: "coords", value: prop value }
 
-instance Attr Audio Crossorigin_ String where
-  attr Crossorigin_ value = unsafeAttribute { key: "crossorigin", value: prop value }
+instance Attr Audio_ Crossorigin String where
+  attr Crossorigin value = unsafeAttribute { key: "crossorigin", value: prop value }
 
-instance Attr Img Crossorigin_ String where
-  attr Crossorigin_ value = unsafeAttribute { key: "crossorigin", value: prop value }
+instance Attr Img_ Crossorigin String where
+  attr Crossorigin value = unsafeAttribute { key: "crossorigin", value: prop value }
 
-instance Attr Link Crossorigin_ String where
-  attr Crossorigin_ value = unsafeAttribute { key: "crossorigin", value: prop value }
+instance Attr Link_ Crossorigin String where
+  attr Crossorigin value = unsafeAttribute { key: "crossorigin", value: prop value }
 
-instance Attr Script Crossorigin_ String where
-  attr Crossorigin_ value = unsafeAttribute { key: "crossorigin", value: prop value }
+instance Attr Script_ Crossorigin String where
+  attr Crossorigin value = unsafeAttribute { key: "crossorigin", value: prop value }
 
-instance Attr Video Crossorigin_ String where
-  attr Crossorigin_ value = unsafeAttribute { key: "crossorigin", value: prop value }
+instance Attr Video_ Crossorigin String where
+  attr Crossorigin value = unsafeAttribute { key: "crossorigin", value: prop value }
 
-instance Attr Iframe Csp_ String where
-  attr Csp_ value = unsafeAttribute { key: "csp", value: prop value }
+instance Attr Iframe_ Csp String where
+  attr Csp value = unsafeAttribute { key: "csp", value: prop value }
 
-instance Attr Object Data_ String where
-  attr Data_ value = unsafeAttribute { key: "data", value: prop value }
+instance Attr Object_ Data String where
+  attr Data value = unsafeAttribute { key: "data", value: prop value }
 
-instance Attr Del Datetime_ String where
-  attr Datetime_ value = unsafeAttribute { key: "datetime", value: prop value }
+instance Attr Del_ Datetime String where
+  attr Datetime value = unsafeAttribute { key: "datetime", value: prop value }
 
-instance Attr Ins Datetime_ String where
-  attr Datetime_ value = unsafeAttribute { key: "datetime", value: prop value }
+instance Attr Ins_ Datetime String where
+  attr Datetime value = unsafeAttribute { key: "datetime", value: prop value }
 
-instance Attr Time Datetime_ String where
-  attr Datetime_ value = unsafeAttribute { key: "datetime", value: prop value }
+instance Attr Time_ Datetime String where
+  attr Datetime value = unsafeAttribute { key: "datetime", value: prop value }
 
-instance Attr Img Decoding_ String where
-  attr Decoding_ value = unsafeAttribute { key: "decoding", value: prop value }
+instance Attr Img_ Decoding String where
+  attr Decoding value = unsafeAttribute { key: "decoding", value: prop value }
 
-instance Attr Track Default_ String where
-  attr Default_ value = unsafeAttribute { key: "default", value: prop value }
+instance Attr Track_ Default String where
+  attr Default value = unsafeAttribute { key: "default", value: prop value }
 
-instance Attr Script Defer_ String where
-  attr Defer_ value = unsafeAttribute { key: "defer", value: prop value }
+instance Attr Script_ Defer String where
+  attr Defer value = unsafeAttribute { key: "defer", value: prop value }
 
-instance Attr Input Dirname_ String where
-  attr Dirname_ value = unsafeAttribute { key: "dirname", value: prop value }
+instance Attr Input_ Dirname String where
+  attr Dirname value = unsafeAttribute { key: "dirname", value: prop value }
 
-instance Attr Textarea Dirname_ String where
-  attr Dirname_ value = unsafeAttribute { key: "dirname", value: prop value }
+instance Attr Textarea_ Dirname String where
+  attr Dirname value = unsafeAttribute { key: "dirname", value: prop value }
 
-instance Attr Button Disabled_ String where
-  attr Disabled_ value = unsafeAttribute { key: "disabled", value: prop value }
+instance Attr Button_ Disabled String where
+  attr Disabled value = unsafeAttribute { key: "disabled", value: prop value }
 
-instance Attr Fieldset Disabled_ String where
-  attr Disabled_ value = unsafeAttribute { key: "disabled", value: prop value }
+instance Attr Fieldset_ Disabled String where
+  attr Disabled value = unsafeAttribute { key: "disabled", value: prop value }
 
-instance Attr Input Disabled_ String where
-  attr Disabled_ value = unsafeAttribute { key: "disabled", value: prop value }
+instance Attr Input_ Disabled String where
+  attr Disabled value = unsafeAttribute { key: "disabled", value: prop value }
 
-instance Attr Optgroup Disabled_ String where
-  attr Disabled_ value = unsafeAttribute { key: "disabled", value: prop value }
+instance Attr Optgroup_ Disabled String where
+  attr Disabled value = unsafeAttribute { key: "disabled", value: prop value }
 
-instance Attr Option Disabled_ String where
-  attr Disabled_ value = unsafeAttribute { key: "disabled", value: prop value }
+instance Attr Option_ Disabled String where
+  attr Disabled value = unsafeAttribute { key: "disabled", value: prop value }
 
-instance Attr Select Disabled_ String where
-  attr Disabled_ value = unsafeAttribute { key: "disabled", value: prop value }
+instance Attr Select_ Disabled String where
+  attr Disabled value = unsafeAttribute { key: "disabled", value: prop value }
 
-instance Attr Textarea Disabled_ String where
-  attr Disabled_ value = unsafeAttribute { key: "disabled", value: prop value }
+instance Attr Textarea_ Disabled String where
+  attr Disabled value = unsafeAttribute { key: "disabled", value: prop value }
 
-instance Attr A Download_ String where
-  attr Download_ value = unsafeAttribute { key: "download", value: prop value }
+instance Attr A_ Download String where
+  attr Download value = unsafeAttribute { key: "download", value: prop value }
 
-instance Attr Area Download_ String where
-  attr Download_ value = unsafeAttribute { key: "download", value: prop value }
+instance Attr Area_ Download String where
+  attr Download value = unsafeAttribute { key: "download", value: prop value }
 
-instance Attr Form Enctype_ String where
-  attr Enctype_ value = unsafeAttribute { key: "enctype", value: prop value }
+instance Attr Form_ Enctype String where
+  attr Enctype value = unsafeAttribute { key: "enctype", value: prop value }
 
-instance Attr Textarea Enterkeyhint_ String where
-  attr Enterkeyhint_ value = unsafeAttribute { key: "enterkeyhint", value: prop value }
+instance Attr Textarea_ Enterkeyhint String where
+  attr Enterkeyhint value = unsafeAttribute { key: "enterkeyhint", value: prop value }
 
-instance Attr Label For_ String where
-  attr For_ value = unsafeAttribute { key: "for", value: prop value }
+instance Attr Label_ For String where
+  attr For value = unsafeAttribute { key: "for", value: prop value }
 
-instance Attr Output For_ String where
-  attr For_ value = unsafeAttribute { key: "for", value: prop value }
+instance Attr Output_ For String where
+  attr For value = unsafeAttribute { key: "for", value: prop value }
 
-instance Attr Button Form_ String where
-  attr Form_ value = unsafeAttribute { key: "form", value: prop value }
+instance Attr Button_ Form String where
+  attr Form value = unsafeAttribute { key: "form", value: prop value }
 
-instance Attr Fieldset Form_ String where
-  attr Form_ value = unsafeAttribute { key: "form", value: prop value }
+instance Attr Fieldset_ Form String where
+  attr Form value = unsafeAttribute { key: "form", value: prop value }
 
-instance Attr Input Form_ String where
-  attr Form_ value = unsafeAttribute { key: "form", value: prop value }
+instance Attr Input_ Form String where
+  attr Form value = unsafeAttribute { key: "form", value: prop value }
 
-instance Attr Label Form_ String where
-  attr Form_ value = unsafeAttribute { key: "form", value: prop value }
+instance Attr Label_ Form String where
+  attr Form value = unsafeAttribute { key: "form", value: prop value }
 
-instance Attr Meter Form_ String where
-  attr Form_ value = unsafeAttribute { key: "form", value: prop value }
+instance Attr Meter_ Form String where
+  attr Form value = unsafeAttribute { key: "form", value: prop value }
 
-instance Attr Object Form_ String where
-  attr Form_ value = unsafeAttribute { key: "form", value: prop value }
+instance Attr Object_ Form String where
+  attr Form value = unsafeAttribute { key: "form", value: prop value }
 
-instance Attr Output Form_ String where
-  attr Form_ value = unsafeAttribute { key: "form", value: prop value }
+instance Attr Output_ Form String where
+  attr Form value = unsafeAttribute { key: "form", value: prop value }
 
-instance Attr Progress Form_ String where
-  attr Form_ value = unsafeAttribute { key: "form", value: prop value }
+instance Attr Progress_ Form String where
+  attr Form value = unsafeAttribute { key: "form", value: prop value }
 
-instance Attr Select Form_ String where
-  attr Form_ value = unsafeAttribute { key: "form", value: prop value }
+instance Attr Select_ Form String where
+  attr Form value = unsafeAttribute { key: "form", value: prop value }
 
-instance Attr Textarea Form_ String where
-  attr Form_ value = unsafeAttribute { key: "form", value: prop value }
+instance Attr Textarea_ Form String where
+  attr Form value = unsafeAttribute { key: "form", value: prop value }
 
-instance Attr Input Formaction_ String where
-  attr Formaction_ value = unsafeAttribute { key: "formaction", value: prop value }
+instance Attr Input_ Formaction String where
+  attr Formaction value = unsafeAttribute { key: "formaction", value: prop value }
 
-instance Attr Button Formaction_ String where
-  attr Formaction_ value = unsafeAttribute { key: "formaction", value: prop value }
+instance Attr Button_ Formaction String where
+  attr Formaction value = unsafeAttribute { key: "formaction", value: prop value }
 
-instance Attr Button Formenctype_ String where
-  attr Formenctype_ value = unsafeAttribute { key: "formenctype", value: prop value }
+instance Attr Button_ Formenctype String where
+  attr Formenctype value = unsafeAttribute { key: "formenctype", value: prop value }
 
-instance Attr Input Formenctype_ String where
-  attr Formenctype_ value = unsafeAttribute { key: "formenctype", value: prop value }
+instance Attr Input_ Formenctype String where
+  attr Formenctype value = unsafeAttribute { key: "formenctype", value: prop value }
 
-instance Attr Button Formmethod_ String where
-  attr Formmethod_ value = unsafeAttribute { key: "formmethod", value: prop value }
+instance Attr Button_ Formmethod String where
+  attr Formmethod value = unsafeAttribute { key: "formmethod", value: prop value }
 
-instance Attr Input Formmethod_ String where
-  attr Formmethod_ value = unsafeAttribute { key: "formmethod", value: prop value }
+instance Attr Input_ Formmethod String where
+  attr Formmethod value = unsafeAttribute { key: "formmethod", value: prop value }
 
-instance Attr Button Formnovalidate_ String where
-  attr Formnovalidate_ value = unsafeAttribute { key: "formnovalidate", value: prop value }
+instance Attr Button_ Formnovalidate String where
+  attr Formnovalidate value = unsafeAttribute { key: "formnovalidate", value: prop value }
 
-instance Attr Input Formnovalidate_ String where
-  attr Formnovalidate_ value = unsafeAttribute { key: "formnovalidate", value: prop value }
+instance Attr Input_ Formnovalidate String where
+  attr Formnovalidate value = unsafeAttribute { key: "formnovalidate", value: prop value }
 
-instance Attr Button Formtarget_ String where
-  attr Formtarget_ value = unsafeAttribute { key: "formtarget", value: prop value }
+instance Attr Button_ Formtarget String where
+  attr Formtarget value = unsafeAttribute { key: "formtarget", value: prop value }
 
-instance Attr Input Formtarget_ String where
-  attr Formtarget_ value = unsafeAttribute { key: "formtarget", value: prop value }
+instance Attr Input_ Formtarget String where
+  attr Formtarget value = unsafeAttribute { key: "formtarget", value: prop value }
 
-instance Attr Td Headers_ String where
-  attr Headers_ value = unsafeAttribute { key: "headers", value: prop value }
+instance Attr Td_ Headers String where
+  attr Headers value = unsafeAttribute { key: "headers", value: prop value }
 
-instance Attr Th Headers_ String where
-  attr Headers_ value = unsafeAttribute { key: "headers", value: prop value }
+instance Attr Th_ Headers String where
+  attr Headers value = unsafeAttribute { key: "headers", value: prop value }
 
-instance Attr Canvas Height_ String where
-  attr Height_ value = unsafeAttribute { key: "height", value: prop value }
+instance Attr Canvas_ Height String where
+  attr Height value = unsafeAttribute { key: "height", value: prop value }
 
-instance Attr Embed Height_ String where
-  attr Height_ value = unsafeAttribute { key: "height", value: prop value }
+instance Attr Embed_ Height String where
+  attr Height value = unsafeAttribute { key: "height", value: prop value }
 
-instance Attr Iframe Height_ String where
-  attr Height_ value = unsafeAttribute { key: "height", value: prop value }
+instance Attr Iframe_ Height String where
+  attr Height value = unsafeAttribute { key: "height", value: prop value }
 
-instance Attr Img Height_ String where
-  attr Height_ value = unsafeAttribute { key: "height", value: prop value }
+instance Attr Img_ Height String where
+  attr Height value = unsafeAttribute { key: "height", value: prop value }
 
-instance Attr Input Height_ String where
-  attr Height_ value = unsafeAttribute { key: "height", value: prop value }
+instance Attr Input_ Height String where
+  attr Height value = unsafeAttribute { key: "height", value: prop value }
 
-instance Attr Object Height_ String where
-  attr Height_ value = unsafeAttribute { key: "height", value: prop value }
+instance Attr Object_ Height String where
+  attr Height value = unsafeAttribute { key: "height", value: prop value }
 
-instance Attr Video Height_ String where
-  attr Height_ value = unsafeAttribute { key: "height", value: prop value }
+instance Attr Video_ Height String where
+  attr Height value = unsafeAttribute { key: "height", value: prop value }
 
-instance Attr Meter High_ String where
-  attr High_ value = unsafeAttribute { key: "high", value: prop value }
+instance Attr Meter_ High String where
+  attr High value = unsafeAttribute { key: "high", value: prop value }
 
-instance Attr A Href_ String where
-  attr Href_ value = unsafeAttribute { key: "href", value: prop value }
+instance Attr A_ Href String where
+  attr Href value = unsafeAttribute { key: "href", value: prop value }
 
-instance Attr Area Href_ String where
-  attr Href_ value = unsafeAttribute { key: "href", value: prop value }
+instance Attr Area_ Href String where
+  attr Href value = unsafeAttribute { key: "href", value: prop value }
 
-instance Attr Base Href_ String where
-  attr Href_ value = unsafeAttribute { key: "href", value: prop value }
+instance Attr Base_ Href String where
+  attr Href value = unsafeAttribute { key: "href", value: prop value }
 
-instance Attr Link Href_ String where
-  attr Href_ value = unsafeAttribute { key: "href", value: prop value }
+instance Attr Link_ Href String where
+  attr Href value = unsafeAttribute { key: "href", value: prop value }
 
-instance Attr A Hreflang_ String where
-  attr Hreflang_ value = unsafeAttribute { key: "hreflang", value: prop value }
+instance Attr A_ Hreflang String where
+  attr Hreflang value = unsafeAttribute { key: "hreflang", value: prop value }
 
-instance Attr Area Hreflang_ String where
-  attr Hreflang_ value = unsafeAttribute { key: "hreflang", value: prop value }
+instance Attr Area_ Hreflang String where
+  attr Hreflang value = unsafeAttribute { key: "hreflang", value: prop value }
 
-instance Attr Link Hreflang_ String where
-  attr Hreflang_ value = unsafeAttribute { key: "hreflang", value: prop value }
+instance Attr Link_ Hreflang String where
+  attr Hreflang value = unsafeAttribute { key: "hreflang", value: prop value }
 
-instance Attr Meta HttpEquiv_ String where
-  attr HttpEquiv_ value = unsafeAttribute { key: "http-equiv", value: prop value }
+instance Attr Meta_ HttpEquiv String where
+  attr HttpEquiv value = unsafeAttribute { key: "http-equiv", value: prop value }
 
-instance Attr Iframe Importance_ String where
-  attr Importance_ value = unsafeAttribute { key: "importance", value: prop value }
+instance Attr Iframe_ Importance String where
+  attr Importance value = unsafeAttribute { key: "importance", value: prop value }
 
-instance Attr Img Importance_ String where
-  attr Importance_ value = unsafeAttribute { key: "importance", value: prop value }
+instance Attr Img_ Importance String where
+  attr Importance value = unsafeAttribute { key: "importance", value: prop value }
 
-instance Attr Link Importance_ String where
-  attr Importance_ value = unsafeAttribute { key: "importance", value: prop value }
+instance Attr Link_ Importance String where
+  attr Importance value = unsafeAttribute { key: "importance", value: prop value }
 
-instance Attr Script Importance_ String where
-  attr Importance_ value = unsafeAttribute { key: "importance", value: prop value }
+instance Attr Script_ Importance String where
+  attr Importance value = unsafeAttribute { key: "importance", value: prop value }
 
-instance Attr Link Integrity_ String where
-  attr Integrity_ value = unsafeAttribute { key: "integrity", value: prop value }
+instance Attr Link_ Integrity String where
+  attr Integrity value = unsafeAttribute { key: "integrity", value: prop value }
 
-instance Attr Script Integrity_ String where
-  attr Integrity_ value = unsafeAttribute { key: "integrity", value: prop value }
+instance Attr Script_ Integrity String where
+  attr Integrity value = unsafeAttribute { key: "integrity", value: prop value }
 
-instance Attr Img Intrinsicsize_ String where
-  attr Intrinsicsize_ value = unsafeAttribute { key: "intrinsicsize", value: prop value }
+instance Attr Img_ Intrinsicsize String where
+  attr Intrinsicsize value = unsafeAttribute { key: "intrinsicsize", value: prop value }
 
-instance Attr Textarea Inputmode_ String where
-  attr Inputmode_ value = unsafeAttribute { key: "inputmode", value: prop value }
+instance Attr Textarea_ Inputmode String where
+  attr Inputmode value = unsafeAttribute { key: "inputmode", value: prop value }
 
-instance Attr Img Ismap_ String where
-  attr Ismap_ value = unsafeAttribute { key: "ismap", value: prop value }
+instance Attr Img_ Ismap String where
+  attr Ismap value = unsafeAttribute { key: "ismap", value: prop value }
 
-instance Attr Track Kind_ String where
-  attr Kind_ value = unsafeAttribute { key: "kind", value: prop value }
+instance Attr Track_ Kind String where
+  attr Kind value = unsafeAttribute { key: "kind", value: prop value }
 
-instance Attr Optgroup Label_ String where
-  attr Label_ value = unsafeAttribute { key: "label", value: prop value }
+instance Attr Optgroup_ Label String where
+  attr Label value = unsafeAttribute { key: "label", value: prop value }
 
-instance Attr Option Label_ String where
-  attr Label_ value = unsafeAttribute { key: "label", value: prop value }
+instance Attr Option_ Label String where
+  attr Label value = unsafeAttribute { key: "label", value: prop value }
 
-instance Attr Track Label_ String where
-  attr Label_ value = unsafeAttribute { key: "label", value: prop value }
+instance Attr Track_ Label String where
+  attr Label value = unsafeAttribute { key: "label", value: prop value }
 
-instance Attr Script Language_ String where
-  attr Language_ value = unsafeAttribute { key: "language", value: prop value }
+instance Attr Script_ Language String where
+  attr Language value = unsafeAttribute { key: "language", value: prop value }
 
-instance Attr Img Loading_ String where
-  attr Loading_ value = unsafeAttribute { key: "loading", value: prop value }
+instance Attr Img_ Loading String where
+  attr Loading value = unsafeAttribute { key: "loading", value: prop value }
 
-instance Attr Iframe Loading_ String where
-  attr Loading_ value = unsafeAttribute { key: "loading", value: prop value }
+instance Attr Iframe_ Loading String where
+  attr Loading value = unsafeAttribute { key: "loading", value: prop value }
 
-instance Attr Input List_ String where
-  attr List_ value = unsafeAttribute { key: "list", value: prop value }
+instance Attr Input_ List String where
+  attr List value = unsafeAttribute { key: "list", value: prop value }
 
-instance Attr Audio Loop_ String where
-  attr Loop_ value = unsafeAttribute { key: "loop", value: prop value }
+instance Attr Audio_ Loop String where
+  attr Loop value = unsafeAttribute { key: "loop", value: prop value }
 
-instance Attr Video Loop_ String where
-  attr Loop_ value = unsafeAttribute { key: "loop", value: prop value }
+instance Attr Video_ Loop String where
+  attr Loop value = unsafeAttribute { key: "loop", value: prop value }
 
-instance Attr Meter Low_ String where
-  attr Low_ value = unsafeAttribute { key: "low", value: prop value }
+instance Attr Meter_ Low String where
+  attr Low value = unsafeAttribute { key: "low", value: prop value }
 
-instance Attr Html Manifest_ String where
-  attr Manifest_ value = unsafeAttribute { key: "manifest", value: prop value }
+instance Attr Html_ Manifest String where
+  attr Manifest value = unsafeAttribute { key: "manifest", value: prop value }
 
-instance Attr Input Max_ String where
-  attr Max_ value = unsafeAttribute { key: "max", value: prop value }
+instance Attr Input_ Max String where
+  attr Max value = unsafeAttribute { key: "max", value: prop value }
 
-instance Attr Meter Max_ String where
-  attr Max_ value = unsafeAttribute { key: "max", value: prop value }
+instance Attr Meter_ Max String where
+  attr Max value = unsafeAttribute { key: "max", value: prop value }
 
-instance Attr Progress Max_ String where
-  attr Max_ value = unsafeAttribute { key: "max", value: prop value }
+instance Attr Progress_ Max String where
+  attr Max value = unsafeAttribute { key: "max", value: prop value }
 
-instance Attr Input Maxlength_ String where
-  attr Maxlength_ value = unsafeAttribute { key: "maxlength", value: prop value }
+instance Attr Input_ Maxlength String where
+  attr Maxlength value = unsafeAttribute { key: "maxlength", value: prop value }
 
-instance Attr Textarea Maxlength_ String where
-  attr Maxlength_ value = unsafeAttribute { key: "maxlength", value: prop value }
+instance Attr Textarea_ Maxlength String where
+  attr Maxlength value = unsafeAttribute { key: "maxlength", value: prop value }
 
-instance Attr Input Minlength_ String where
-  attr Minlength_ value = unsafeAttribute { key: "minlength", value: prop value }
+instance Attr Input_ Minlength String where
+  attr Minlength value = unsafeAttribute { key: "minlength", value: prop value }
 
-instance Attr Textarea Minlength_ String where
-  attr Minlength_ value = unsafeAttribute { key: "minlength", value: prop value }
+instance Attr Textarea_ Minlength String where
+  attr Minlength value = unsafeAttribute { key: "minlength", value: prop value }
 
-instance Attr A Media_ String where
-  attr Media_ value = unsafeAttribute { key: "media", value: prop value }
+instance Attr A_ Media String where
+  attr Media value = unsafeAttribute { key: "media", value: prop value }
 
-instance Attr Area Media_ String where
-  attr Media_ value = unsafeAttribute { key: "media", value: prop value }
+instance Attr Area_ Media String where
+  attr Media value = unsafeAttribute { key: "media", value: prop value }
 
-instance Attr Link Media_ String where
-  attr Media_ value = unsafeAttribute { key: "media", value: prop value }
+instance Attr Link_ Media String where
+  attr Media value = unsafeAttribute { key: "media", value: prop value }
 
-instance Attr Source Media_ String where
-  attr Media_ value = unsafeAttribute { key: "media", value: prop value }
+instance Attr Source_ Media String where
+  attr Media value = unsafeAttribute { key: "media", value: prop value }
 
-instance Attr Style Media_ String where
-  attr Media_ value = unsafeAttribute { key: "media", value: prop value }
+instance Attr Style_ Media String where
+  attr Media value = unsafeAttribute { key: "media", value: prop value }
 
-instance Attr Form Method_ String where
-  attr Method_ value = unsafeAttribute { key: "method", value: prop value }
+instance Attr Form_ Method String where
+  attr Method value = unsafeAttribute { key: "method", value: prop value }
 
-instance Attr Input Min_ String where
-  attr Min_ value = unsafeAttribute { key: "min", value: prop value }
+instance Attr Input_ Min String where
+  attr Min value = unsafeAttribute { key: "min", value: prop value }
 
-instance Attr Meter Min_ String where
-  attr Min_ value = unsafeAttribute { key: "min", value: prop value }
+instance Attr Meter_ Min String where
+  attr Min value = unsafeAttribute { key: "min", value: prop value }
 
-instance Attr Input Multiple_ String where
-  attr Multiple_ value = unsafeAttribute { key: "multiple", value: prop value }
+instance Attr Input_ Multiple String where
+  attr Multiple value = unsafeAttribute { key: "multiple", value: prop value }
 
-instance Attr Select Multiple_ String where
-  attr Multiple_ value = unsafeAttribute { key: "multiple", value: prop value }
+instance Attr Select_ Multiple String where
+  attr Multiple value = unsafeAttribute { key: "multiple", value: prop value }
 
-instance Attr Audio Muted_ String where
-  attr Muted_ value = unsafeAttribute { key: "muted", value: prop value }
+instance Attr Audio_ Muted String where
+  attr Muted value = unsafeAttribute { key: "muted", value: prop value }
 
-instance Attr Video Muted_ String where
-  attr Muted_ value = unsafeAttribute { key: "muted", value: prop value }
+instance Attr Video_ Muted String where
+  attr Muted value = unsafeAttribute { key: "muted", value: prop value }
 
-instance Attr Button Name_ String where
-  attr Name_ value = unsafeAttribute { key: "name", value: prop value }
+instance Attr Button_ Name String where
+  attr Name value = unsafeAttribute { key: "name", value: prop value }
 
-instance Attr Form Name_ String where
-  attr Name_ value = unsafeAttribute { key: "name", value: prop value }
+instance Attr Form_ Name String where
+  attr Name value = unsafeAttribute { key: "name", value: prop value }
 
-instance Attr Fieldset Name_ String where
-  attr Name_ value = unsafeAttribute { key: "name", value: prop value }
+instance Attr Fieldset_ Name String where
+  attr Name value = unsafeAttribute { key: "name", value: prop value }
 
-instance Attr Iframe Name_ String where
-  attr Name_ value = unsafeAttribute { key: "name", value: prop value }
+instance Attr Iframe_ Name String where
+  attr Name value = unsafeAttribute { key: "name", value: prop value }
 
-instance Attr Input Name_ String where
-  attr Name_ value = unsafeAttribute { key: "name", value: prop value }
+instance Attr Input_ Name String where
+  attr Name value = unsafeAttribute { key: "name", value: prop value }
 
-instance Attr Object Name_ String where
-  attr Name_ value = unsafeAttribute { key: "name", value: prop value }
+instance Attr Object_ Name String where
+  attr Name value = unsafeAttribute { key: "name", value: prop value }
 
-instance Attr Output Name_ String where
-  attr Name_ value = unsafeAttribute { key: "name", value: prop value }
+instance Attr Output_ Name String where
+  attr Name value = unsafeAttribute { key: "name", value: prop value }
 
-instance Attr Select Name_ String where
-  attr Name_ value = unsafeAttribute { key: "name", value: prop value }
+instance Attr Select_ Name String where
+  attr Name value = unsafeAttribute { key: "name", value: prop value }
 
-instance Attr Textarea Name_ String where
-  attr Name_ value = unsafeAttribute { key: "name", value: prop value }
+instance Attr Textarea_ Name String where
+  attr Name value = unsafeAttribute { key: "name", value: prop value }
 
-instance Attr Map Name_ String where
-  attr Name_ value = unsafeAttribute { key: "name", value: prop value }
+instance Attr Map_ Name String where
+  attr Name value = unsafeAttribute { key: "name", value: prop value }
 
-instance Attr Meta Name_ String where
-  attr Name_ value = unsafeAttribute { key: "name", value: prop value }
+instance Attr Meta_ Name String where
+  attr Name value = unsafeAttribute { key: "name", value: prop value }
 
-instance Attr Param Name_ String where
-  attr Name_ value = unsafeAttribute { key: "name", value: prop value }
+instance Attr Param_ Name String where
+  attr Name value = unsafeAttribute { key: "name", value: prop value }
 
-instance Attr Form Novalidate_ String where
-  attr Novalidate_ value = unsafeAttribute { key: "novalidate", value: prop value }
+instance Attr Form_ Novalidate String where
+  attr Novalidate value = unsafeAttribute { key: "novalidate", value: prop value }
 
-instance Attr Details Open_ String where
-  attr Open_ value = unsafeAttribute { key: "open", value: prop value }
+instance Attr Details_ Open String where
+  attr Open value = unsafeAttribute { key: "open", value: prop value }
 
-instance Attr Dialog Open_ String where
-  attr Open_ value = unsafeAttribute { key: "open", value: prop value }
+instance Attr Dialog_ Open String where
+  attr Open value = unsafeAttribute { key: "open", value: prop value }
 
-instance Attr Meter Optimum_ String where
-  attr Optimum_ value = unsafeAttribute { key: "optimum", value: prop value }
+instance Attr Meter_ Optimum String where
+  attr Optimum value = unsafeAttribute { key: "optimum", value: prop value }
 
-instance Attr Input Pattern_ String where
-  attr Pattern_ value = unsafeAttribute { key: "pattern", value: prop value }
+instance Attr Input_ Pattern String where
+  attr Pattern value = unsafeAttribute { key: "pattern", value: prop value }
 
-instance Attr A Ping_ String where
-  attr Ping_ value = unsafeAttribute { key: "ping", value: prop value }
+instance Attr A_ Ping String where
+  attr Ping value = unsafeAttribute { key: "ping", value: prop value }
 
-instance Attr Area Ping_ String where
-  attr Ping_ value = unsafeAttribute { key: "ping", value: prop value }
+instance Attr Area_ Ping String where
+  attr Ping value = unsafeAttribute { key: "ping", value: prop value }
 
-instance Attr Input Placeholder_ String where
-  attr Placeholder_ value = unsafeAttribute { key: "placeholder", value: prop value }
+instance Attr Input_ Placeholder String where
+  attr Placeholder value = unsafeAttribute { key: "placeholder", value: prop value }
 
-instance Attr Textarea Placeholder_ String where
-  attr Placeholder_ value = unsafeAttribute { key: "placeholder", value: prop value }
+instance Attr Textarea_ Placeholder String where
+  attr Placeholder value = unsafeAttribute { key: "placeholder", value: prop value }
 
-instance Attr Video Poster_ String where
-  attr Poster_ value = unsafeAttribute { key: "poster", value: prop value }
+instance Attr Video_ Poster String where
+  attr Poster value = unsafeAttribute { key: "poster", value: prop value }
 
-instance Attr Audio Preload_ String where
-  attr Preload_ value = unsafeAttribute { key: "preload", value: prop value }
+instance Attr Audio_ Preload String where
+  attr Preload value = unsafeAttribute { key: "preload", value: prop value }
 
-instance Attr Video Preload_ String where
-  attr Preload_ value = unsafeAttribute { key: "preload", value: prop value }
+instance Attr Video_ Preload String where
+  attr Preload value = unsafeAttribute { key: "preload", value: prop value }
 
-instance Attr Input Readonly_ String where
-  attr Readonly_ value = unsafeAttribute { key: "readonly", value: prop value }
+instance Attr Input_ Readonly String where
+  attr Readonly value = unsafeAttribute { key: "readonly", value: prop value }
 
-instance Attr Textarea Readonly_ String where
-  attr Readonly_ value = unsafeAttribute { key: "readonly", value: prop value }
+instance Attr Textarea_ Readonly String where
+  attr Readonly value = unsafeAttribute { key: "readonly", value: prop value }
 
-instance Attr A Referrerpolicy_ String where
-  attr Referrerpolicy_ value = unsafeAttribute { key: "referrerpolicy", value: prop value }
+instance Attr A_ Referrerpolicy String where
+  attr Referrerpolicy value = unsafeAttribute { key: "referrerpolicy", value: prop value }
 
-instance Attr Area Referrerpolicy_ String where
-  attr Referrerpolicy_ value = unsafeAttribute { key: "referrerpolicy", value: prop value }
+instance Attr Area_ Referrerpolicy String where
+  attr Referrerpolicy value = unsafeAttribute { key: "referrerpolicy", value: prop value }
 
-instance Attr Iframe Referrerpolicy_ String where
-  attr Referrerpolicy_ value = unsafeAttribute { key: "referrerpolicy", value: prop value }
+instance Attr Iframe_ Referrerpolicy String where
+  attr Referrerpolicy value = unsafeAttribute { key: "referrerpolicy", value: prop value }
 
-instance Attr Img Referrerpolicy_ String where
-  attr Referrerpolicy_ value = unsafeAttribute { key: "referrerpolicy", value: prop value }
+instance Attr Img_ Referrerpolicy String where
+  attr Referrerpolicy value = unsafeAttribute { key: "referrerpolicy", value: prop value }
 
-instance Attr Link Referrerpolicy_ String where
-  attr Referrerpolicy_ value = unsafeAttribute { key: "referrerpolicy", value: prop value }
+instance Attr Link_ Referrerpolicy String where
+  attr Referrerpolicy value = unsafeAttribute { key: "referrerpolicy", value: prop value }
 
-instance Attr Script Referrerpolicy_ String where
-  attr Referrerpolicy_ value = unsafeAttribute { key: "referrerpolicy", value: prop value }
+instance Attr Script_ Referrerpolicy String where
+  attr Referrerpolicy value = unsafeAttribute { key: "referrerpolicy", value: prop value }
 
-instance Attr A Rel_ String where
-  attr Rel_ value = unsafeAttribute { key: "rel", value: prop value }
+instance Attr A_ Rel String where
+  attr Rel value = unsafeAttribute { key: "rel", value: prop value }
 
-instance Attr Area Rel_ String where
-  attr Rel_ value = unsafeAttribute { key: "rel", value: prop value }
+instance Attr Area_ Rel String where
+  attr Rel value = unsafeAttribute { key: "rel", value: prop value }
 
-instance Attr Link Rel_ String where
-  attr Rel_ value = unsafeAttribute { key: "rel", value: prop value }
+instance Attr Link_ Rel String where
+  attr Rel value = unsafeAttribute { key: "rel", value: prop value }
 
-instance Attr Input Required_ String where
-  attr Required_ value = unsafeAttribute { key: "required", value: prop value }
+instance Attr Input_ Required String where
+  attr Required value = unsafeAttribute { key: "required", value: prop value }
 
-instance Attr Select Required_ String where
-  attr Required_ value = unsafeAttribute { key: "required", value: prop value }
+instance Attr Select_ Required String where
+  attr Required value = unsafeAttribute { key: "required", value: prop value }
 
-instance Attr Textarea Required_ String where
-  attr Required_ value = unsafeAttribute { key: "required", value: prop value }
+instance Attr Textarea_ Required String where
+  attr Required value = unsafeAttribute { key: "required", value: prop value }
 
-instance Attr Ol Reversed_ String where
-  attr Reversed_ value = unsafeAttribute { key: "reversed", value: prop value }
+instance Attr Ol_ Reversed String where
+  attr Reversed value = unsafeAttribute { key: "reversed", value: prop value }
 
-instance Attr Textarea Rows_ String where
-  attr Rows_ value = unsafeAttribute { key: "rows", value: prop value }
+instance Attr Textarea_ Rows String where
+  attr Rows value = unsafeAttribute { key: "rows", value: prop value }
 
-instance Attr Td Rowspan_ String where
-  attr Rowspan_ value = unsafeAttribute { key: "rowspan", value: prop value }
+instance Attr Td_ Rowspan String where
+  attr Rowspan value = unsafeAttribute { key: "rowspan", value: prop value }
 
-instance Attr Th Rowspan_ String where
-  attr Rowspan_ value = unsafeAttribute { key: "rowspan", value: prop value }
+instance Attr Th_ Rowspan String where
+  attr Rowspan value = unsafeAttribute { key: "rowspan", value: prop value }
 
-instance Attr Iframe Sandbox_ String where
-  attr Sandbox_ value = unsafeAttribute { key: "sandbox", value: prop value }
+instance Attr Iframe_ Sandbox String where
+  attr Sandbox value = unsafeAttribute { key: "sandbox", value: prop value }
 
-instance Attr Th Scope_ String where
-  attr Scope_ value = unsafeAttribute { key: "scope", value: prop value }
+instance Attr Th_ Scope String where
+  attr Scope value = unsafeAttribute { key: "scope", value: prop value }
 
-instance Attr Style Scoped_ String where
-  attr Scoped_ value = unsafeAttribute { key: "scoped", value: prop value }
+instance Attr Style_ Scoped String where
+  attr Scoped value = unsafeAttribute { key: "scoped", value: prop value }
 
-instance Attr Option Selected_ String where
-  attr Selected_ value = unsafeAttribute { key: "selected", value: prop value }
+instance Attr Option_ Selected String where
+  attr Selected value = unsafeAttribute { key: "selected", value: prop value }
 
-instance Attr A Shape_ String where
-  attr Shape_ value = unsafeAttribute { key: "shape", value: prop value }
+instance Attr A_ Shape String where
+  attr Shape value = unsafeAttribute { key: "shape", value: prop value }
 
-instance Attr Area Shape_ String where
-  attr Shape_ value = unsafeAttribute { key: "shape", value: prop value }
+instance Attr Area_ Shape String where
+  attr Shape value = unsafeAttribute { key: "shape", value: prop value }
 
-instance Attr Input Size_ String where
-  attr Size_ value = unsafeAttribute { key: "size", value: prop value }
+instance Attr Input_ Size String where
+  attr Size value = unsafeAttribute { key: "size", value: prop value }
 
-instance Attr Select Size_ String where
-  attr Size_ value = unsafeAttribute { key: "size", value: prop value }
+instance Attr Select_ Size String where
+  attr Size value = unsafeAttribute { key: "size", value: prop value }
 
-instance Attr Link Sizes_ String where
-  attr Sizes_ value = unsafeAttribute { key: "sizes", value: prop value }
+instance Attr Link_ Sizes String where
+  attr Sizes value = unsafeAttribute { key: "sizes", value: prop value }
 
-instance Attr Img Sizes_ String where
-  attr Sizes_ value = unsafeAttribute { key: "sizes", value: prop value }
+instance Attr Img_ Sizes String where
+  attr Sizes value = unsafeAttribute { key: "sizes", value: prop value }
 
-instance Attr Source Sizes_ String where
-  attr Sizes_ value = unsafeAttribute { key: "sizes", value: prop value }
+instance Attr Source_ Sizes String where
+  attr Sizes value = unsafeAttribute { key: "sizes", value: prop value }
 
-instance Attr Col Span_ String where
-  attr Span_ value = unsafeAttribute { key: "span", value: prop value }
+instance Attr Col_ Span String where
+  attr Span value = unsafeAttribute { key: "span", value: prop value }
 
-instance Attr Colgroup Span_ String where
-  attr Span_ value = unsafeAttribute { key: "span", value: prop value }
+instance Attr Colgroup_ Span String where
+  attr Span value = unsafeAttribute { key: "span", value: prop value }
 
-instance Attr Audio Src_ String where
-  attr Src_ value = unsafeAttribute { key: "src", value: prop value }
+instance Attr Audio_ Src String where
+  attr Src value = unsafeAttribute { key: "src", value: prop value }
 
-instance Attr Embed Src_ String where
-  attr Src_ value = unsafeAttribute { key: "src", value: prop value }
+instance Attr Embed_ Src String where
+  attr Src value = unsafeAttribute { key: "src", value: prop value }
 
-instance Attr Iframe Src_ String where
-  attr Src_ value = unsafeAttribute { key: "src", value: prop value }
+instance Attr Iframe_ Src String where
+  attr Src value = unsafeAttribute { key: "src", value: prop value }
 
-instance Attr Img Src_ String where
-  attr Src_ value = unsafeAttribute { key: "src", value: prop value }
+instance Attr Img_ Src String where
+  attr Src value = unsafeAttribute { key: "src", value: prop value }
 
-instance Attr Input Src_ String where
-  attr Src_ value = unsafeAttribute { key: "src", value: prop value }
+instance Attr Input_ Src String where
+  attr Src value = unsafeAttribute { key: "src", value: prop value }
 
-instance Attr Script Src_ String where
-  attr Src_ value = unsafeAttribute { key: "src", value: prop value }
+instance Attr Script_ Src String where
+  attr Src value = unsafeAttribute { key: "src", value: prop value }
 
-instance Attr Source Src_ String where
-  attr Src_ value = unsafeAttribute { key: "src", value: prop value }
+instance Attr Source_ Src String where
+  attr Src value = unsafeAttribute { key: "src", value: prop value }
 
-instance Attr Track Src_ String where
-  attr Src_ value = unsafeAttribute { key: "src", value: prop value }
+instance Attr Track_ Src String where
+  attr Src value = unsafeAttribute { key: "src", value: prop value }
 
-instance Attr Video Src_ String where
-  attr Src_ value = unsafeAttribute { key: "src", value: prop value }
+instance Attr Video_ Src String where
+  attr Src value = unsafeAttribute { key: "src", value: prop value }
 
-instance Attr Iframe Srcdoc_ String where
-  attr Srcdoc_ value = unsafeAttribute { key: "srcdoc", value: prop value }
+instance Attr Iframe_ Srcdoc String where
+  attr Srcdoc value = unsafeAttribute { key: "srcdoc", value: prop value }
 
-instance Attr Track Srclang_ String where
-  attr Srclang_ value = unsafeAttribute { key: "srclang", value: prop value }
+instance Attr Track_ Srclang String where
+  attr Srclang value = unsafeAttribute { key: "srclang", value: prop value }
 
-instance Attr Img Srcset_ String where
-  attr Srcset_ value = unsafeAttribute { key: "srcset", value: prop value }
+instance Attr Img_ Srcset String where
+  attr Srcset value = unsafeAttribute { key: "srcset", value: prop value }
 
-instance Attr Source Srcset_ String where
-  attr Srcset_ value = unsafeAttribute { key: "srcset", value: prop value }
+instance Attr Source_ Srcset String where
+  attr Srcset value = unsafeAttribute { key: "srcset", value: prop value }
 
-instance Attr Ol Start_ String where
-  attr Start_ value = unsafeAttribute { key: "start", value: prop value }
+instance Attr Ol_ Start String where
+  attr Start value = unsafeAttribute { key: "start", value: prop value }
 
-instance Attr Input Step_ String where
-  attr Step_ value = unsafeAttribute { key: "step", value: prop value }
+instance Attr Input_ Step String where
+  attr Step value = unsafeAttribute { key: "step", value: prop value }
 
-instance Attr Table Summary_ String where
-  attr Summary_ value = unsafeAttribute { key: "summary", value: prop value }
+instance Attr Table_ Summary String where
+  attr Summary value = unsafeAttribute { key: "summary", value: prop value }
 
-instance Attr A Target_ String where
-  attr Target_ value = unsafeAttribute { key: "target", value: prop value }
+instance Attr A_ Target String where
+  attr Target value = unsafeAttribute { key: "target", value: prop value }
 
-instance Attr Area Target_ String where
-  attr Target_ value = unsafeAttribute { key: "target", value: prop value }
+instance Attr Area_ Target String where
+  attr Target value = unsafeAttribute { key: "target", value: prop value }
 
-instance Attr Base Target_ String where
-  attr Target_ value = unsafeAttribute { key: "target", value: prop value }
+instance Attr Base_ Target String where
+  attr Target value = unsafeAttribute { key: "target", value: prop value }
 
-instance Attr Form Target_ String where
-  attr Target_ value = unsafeAttribute { key: "target", value: prop value }
+instance Attr Form_ Target String where
+  attr Target value = unsafeAttribute { key: "target", value: prop value }
 
-instance Attr Button Type_ String where
-  attr Type_ value = unsafeAttribute { key: "type", value: prop value }
+instance Attr Img_ Usemap String where
+  attr Usemap value = unsafeAttribute { key: "usemap", value: prop value }
 
-instance Attr Input Type_ String where
-  attr Type_ value = unsafeAttribute { key: "type", value: prop value }
+instance Attr Input_ Usemap String where
+  attr Usemap value = unsafeAttribute { key: "usemap", value: prop value }
 
-instance Attr Embed Type_ String where
-  attr Type_ value = unsafeAttribute { key: "type", value: prop value }
+instance Attr Object_ Usemap String where
+  attr Usemap value = unsafeAttribute { key: "usemap", value: prop value }
 
-instance Attr Object Type_ String where
-  attr Type_ value = unsafeAttribute { key: "type", value: prop value }
+instance Attr Button_ Value String where
+  attr Value value = unsafeAttribute { key: "value", value: prop value }
 
-instance Attr Script Type_ String where
-  attr Type_ value = unsafeAttribute { key: "type", value: prop value }
+instance Attr Input_ Value String where
+  attr Value value = unsafeAttribute { key: "value", value: prop value }
 
-instance Attr Source Type_ String where
-  attr Type_ value = unsafeAttribute { key: "type", value: prop value }
+instance Attr Li_ Value String where
+  attr Value value = unsafeAttribute { key: "value", value: prop value }
 
-instance Attr Style Type_ String where
-  attr Type_ value = unsafeAttribute { key: "type", value: prop value }
+instance Attr Meter_ Value String where
+  attr Value value = unsafeAttribute { key: "value", value: prop value }
 
-instance Attr Link Type_ String where
-  attr Type_ value = unsafeAttribute { key: "type", value: prop value }
+instance Attr Option_ Value String where
+  attr Value value = unsafeAttribute { key: "value", value: prop value }
 
-instance Attr Img Usemap_ String where
-  attr Usemap_ value = unsafeAttribute { key: "usemap", value: prop value }
+instance Attr Progress_ Value String where
+  attr Value value = unsafeAttribute { key: "value", value: prop value }
 
-instance Attr Input Usemap_ String where
-  attr Usemap_ value = unsafeAttribute { key: "usemap", value: prop value }
+instance Attr Param_ Value String where
+  attr Value value = unsafeAttribute { key: "value", value: prop value }
 
-instance Attr Object Usemap_ String where
-  attr Usemap_ value = unsafeAttribute { key: "usemap", value: prop value }
+instance Attr Canvas_ Width String where
+  attr Width value = unsafeAttribute { key: "width", value: prop value }
 
-instance Attr Button Value_ String where
-  attr Value_ value = unsafeAttribute { key: "value", value: prop value }
+instance Attr Embed_ Width String where
+  attr Width value = unsafeAttribute { key: "width", value: prop value }
 
-instance Attr Data Value_ String where
-  attr Value_ value = unsafeAttribute { key: "value", value: prop value }
+instance Attr Iframe_ Width String where
+  attr Width value = unsafeAttribute { key: "width", value: prop value }
 
-instance Attr Input Value_ String where
-  attr Value_ value = unsafeAttribute { key: "value", value: prop value }
+instance Attr Img_ Width String where
+  attr Width value = unsafeAttribute { key: "width", value: prop value }
 
-instance Attr Li Value_ String where
-  attr Value_ value = unsafeAttribute { key: "value", value: prop value }
+instance Attr Input_ Width String where
+  attr Width value = unsafeAttribute { key: "width", value: prop value }
 
-instance Attr Meter Value_ String where
-  attr Value_ value = unsafeAttribute { key: "value", value: prop value }
+instance Attr Object_ Width String where
+  attr Width value = unsafeAttribute { key: "width", value: prop value }
 
-instance Attr Option Value_ String where
-  attr Value_ value = unsafeAttribute { key: "value", value: prop value }
+instance Attr Video_ Width String where
+  attr Width value = unsafeAttribute { key: "width", value: prop value }
 
-instance Attr Progress Value_ String where
-  attr Value_ value = unsafeAttribute { key: "value", value: prop value }
+instance Attr Button_ Xtype String where
+  attr Xtype value = unsafeAttribute { key: "type", value: prop value }
 
-instance Attr Param Value_ String where
-  attr Value_ value = unsafeAttribute { key: "value", value: prop value }
+instance Attr Input_ Xtype String where
+  attr Xtype value = unsafeAttribute { key: "type", value: prop value }
 
-instance Attr Canvas Width_ String where
-  attr Width_ value = unsafeAttribute { key: "width", value: prop value }
+instance Attr Embed_ Xtype String where
+  attr Xtype value = unsafeAttribute { key: "type", value: prop value }
 
-instance Attr Embed Width_ String where
-  attr Width_ value = unsafeAttribute { key: "width", value: prop value }
+instance Attr Object_ Xtype String where
+  attr Xtype value = unsafeAttribute { key: "type", value: prop value }
 
-instance Attr Iframe Width_ String where
-  attr Width_ value = unsafeAttribute { key: "width", value: prop value }
+instance Attr Script_ Xtype String where
+  attr Xtype value = unsafeAttribute { key: "type", value: prop value }
 
-instance Attr Img Width_ String where
-  attr Width_ value = unsafeAttribute { key: "width", value: prop value }
+instance Attr Source_ Xtype String where
+  attr Xtype value = unsafeAttribute { key: "type", value: prop value }
 
-instance Attr Input Width_ String where
-  attr Width_ value = unsafeAttribute { key: "width", value: prop value }
+instance Attr Style_ Xtype String where
+  attr Xtype value = unsafeAttribute { key: "type", value: prop value }
 
-instance Attr Object Width_ String where
-  attr Width_ value = unsafeAttribute { key: "width", value: prop value }
-
-instance Attr Video Width_ String where
-  attr Width_ value = unsafeAttribute { key: "width", value: prop value }
+instance Attr Link_ Xtype String where
+  attr Xtype value = unsafeAttribute { key: "type", value: prop value }
 
 instance Attr anything OnAbort Cb where
   attr OnAbort value = unsafeAttribute { key: "abort", value: cb value }
@@ -2342,4274 +2339,4274 @@ instance Attr anything OnWaiting Cb where
   attr OnWaiting value = unsafeAttribute { key: "waiting", value: cb value }
 -- codegen 8
 -- codegen 1
-type A' =
+type A_' =
   ( tag :: String
-  , attributes :: Array (Attribute A)
+  , attributes :: Array (Attribute A_)
   )
-newtype A = A { | A' }
-unsafeUnA :: A -> { | A' }
-unsafeUnA (A unsafe) = unsafe
+newtype A_ = A_ { | A_' }
+unsafeUnA_ :: A_ -> { | A_' }
+unsafeUnA_ (A_ unsafe) = unsafe
 
-instance typeToSymA ::
-  TypeToSym A "a"
+instance typeToSymA_ ::
+  TypeToSym A_ "a"
 
 a
   :: forall children
-   . Array (Attribute A)
+   . Array (Attribute A_)
   -> { | children }
-  -> Element A children
-a = makeElt A "a"
+  -> Element A_ children
+a = makeElt A_ "a"
 
 a'attr
-  :: Array (Attribute A)
-  -> Array (Attribute A)
+  :: Array (Attribute A_)
+  -> Array (Attribute A_)
 a'attr = identity
 
-data TA = TA
+data TA_ = TA_
 
-instance typeToSymTA :: TypeToSym TA "TA"
+instance typeToSymTA_ :: TypeToSym TA_ "TA_"
 
-instance semigroupTA :: Semigroup TA where
-  append _ _ = TA
+instance semigroupTA_ :: Semigroup TA_ where
+  append _ _ = TA_
 
-instance monoidTA :: Monoid TA where
-  mempty = TA
+instance monoidTA_ :: Monoid TA_ where
+  mempty = TA_
 
-instance reifyTA :: ReifyAU A TA where
+instance reifyTA_ :: ReifyAU A_ TA_ where
   reifyAU = const mempty
-type Abbr' =
+type Abbr_' =
   ( tag :: String
-  , attributes :: Array (Attribute Abbr)
+  , attributes :: Array (Attribute Abbr_)
   )
-newtype Abbr = Abbr { | Abbr' }
-unsafeUnAbbr :: Abbr -> { | Abbr' }
-unsafeUnAbbr (Abbr unsafe) = unsafe
+newtype Abbr_ = Abbr_ { | Abbr_' }
+unsafeUnAbbr_ :: Abbr_ -> { | Abbr_' }
+unsafeUnAbbr_ (Abbr_ unsafe) = unsafe
 
-instance typeToSymAbbr ::
-  TypeToSym Abbr "abbr"
+instance typeToSymAbbr_ ::
+  TypeToSym Abbr_ "abbr"
 
 abbr
   :: forall children
-   . Array (Attribute Abbr)
+   . Array (Attribute Abbr_)
   -> { | children }
-  -> Element Abbr children
-abbr = makeElt Abbr "abbr"
+  -> Element Abbr_ children
+abbr = makeElt Abbr_ "abbr"
 
 abbr'attr
-  :: Array (Attribute Abbr)
-  -> Array (Attribute Abbr)
+  :: Array (Attribute Abbr_)
+  -> Array (Attribute Abbr_)
 abbr'attr = identity
 
-data TAbbr = TAbbr
+data TAbbr_ = TAbbr_
 
-instance typeToSymTAbbr :: TypeToSym TAbbr "TAbbr"
+instance typeToSymTAbbr_ :: TypeToSym TAbbr_ "TAbbr_"
 
-instance semigroupTAbbr :: Semigroup TAbbr where
-  append _ _ = TAbbr
+instance semigroupTAbbr_ :: Semigroup TAbbr_ where
+  append _ _ = TAbbr_
 
-instance monoidTAbbr :: Monoid TAbbr where
-  mempty = TAbbr
+instance monoidTAbbr_ :: Monoid TAbbr_ where
+  mempty = TAbbr_
 
-instance reifyTAbbr :: ReifyAU Abbr TAbbr where
+instance reifyTAbbr_ :: ReifyAU Abbr_ TAbbr_ where
   reifyAU = const mempty
-type Acronym' =
+type Acronym_' =
   ( tag :: String
-  , attributes :: Array (Attribute Acronym)
+  , attributes :: Array (Attribute Acronym_)
   )
-newtype Acronym = Acronym { | Acronym' }
-unsafeUnAcronym :: Acronym -> { | Acronym' }
-unsafeUnAcronym (Acronym unsafe) = unsafe
+newtype Acronym_ = Acronym_ { | Acronym_' }
+unsafeUnAcronym_ :: Acronym_ -> { | Acronym_' }
+unsafeUnAcronym_ (Acronym_ unsafe) = unsafe
 
-instance typeToSymAcronym ::
-  TypeToSym Acronym "acronym"
+instance typeToSymAcronym_ ::
+  TypeToSym Acronym_ "acronym"
 
 acronym
   :: forall children
-   . Array (Attribute Acronym)
+   . Array (Attribute Acronym_)
   -> { | children }
-  -> Element Acronym children
-acronym = makeElt Acronym "acronym"
+  -> Element Acronym_ children
+acronym = makeElt Acronym_ "acronym"
 
 acronym'attr
-  :: Array (Attribute Acronym)
-  -> Array (Attribute Acronym)
+  :: Array (Attribute Acronym_)
+  -> Array (Attribute Acronym_)
 acronym'attr = identity
 
-data TAcronym = TAcronym
+data TAcronym_ = TAcronym_
 
-instance typeToSymTAcronym :: TypeToSym TAcronym "TAcronym"
+instance typeToSymTAcronym_ :: TypeToSym TAcronym_ "TAcronym_"
 
-instance semigroupTAcronym :: Semigroup TAcronym where
-  append _ _ = TAcronym
+instance semigroupTAcronym_ :: Semigroup TAcronym_ where
+  append _ _ = TAcronym_
 
-instance monoidTAcronym :: Monoid TAcronym where
-  mempty = TAcronym
+instance monoidTAcronym_ :: Monoid TAcronym_ where
+  mempty = TAcronym_
 
-instance reifyTAcronym :: ReifyAU Acronym TAcronym where
+instance reifyTAcronym_ :: ReifyAU Acronym_ TAcronym_ where
   reifyAU = const mempty
-type Address' =
+type Address_' =
   ( tag :: String
-  , attributes :: Array (Attribute Address)
+  , attributes :: Array (Attribute Address_)
   )
-newtype Address = Address { | Address' }
-unsafeUnAddress :: Address -> { | Address' }
-unsafeUnAddress (Address unsafe) = unsafe
+newtype Address_ = Address_ { | Address_' }
+unsafeUnAddress_ :: Address_ -> { | Address_' }
+unsafeUnAddress_ (Address_ unsafe) = unsafe
 
-instance typeToSymAddress ::
-  TypeToSym Address "address"
+instance typeToSymAddress_ ::
+  TypeToSym Address_ "address"
 
 address
   :: forall children
-   . Array (Attribute Address)
+   . Array (Attribute Address_)
   -> { | children }
-  -> Element Address children
-address = makeElt Address "address"
+  -> Element Address_ children
+address = makeElt Address_ "address"
 
 address'attr
-  :: Array (Attribute Address)
-  -> Array (Attribute Address)
+  :: Array (Attribute Address_)
+  -> Array (Attribute Address_)
 address'attr = identity
 
-data TAddress = TAddress
+data TAddress_ = TAddress_
 
-instance typeToSymTAddress :: TypeToSym TAddress "TAddress"
+instance typeToSymTAddress_ :: TypeToSym TAddress_ "TAddress_"
 
-instance semigroupTAddress :: Semigroup TAddress where
-  append _ _ = TAddress
+instance semigroupTAddress_ :: Semigroup TAddress_ where
+  append _ _ = TAddress_
 
-instance monoidTAddress :: Monoid TAddress where
-  mempty = TAddress
+instance monoidTAddress_ :: Monoid TAddress_ where
+  mempty = TAddress_
 
-instance reifyTAddress :: ReifyAU Address TAddress where
+instance reifyTAddress_ :: ReifyAU Address_ TAddress_ where
   reifyAU = const mempty
-type Applet' =
+type Applet_' =
   ( tag :: String
-  , attributes :: Array (Attribute Applet)
+  , attributes :: Array (Attribute Applet_)
   )
-newtype Applet = Applet { | Applet' }
-unsafeUnApplet :: Applet -> { | Applet' }
-unsafeUnApplet (Applet unsafe) = unsafe
+newtype Applet_ = Applet_ { | Applet_' }
+unsafeUnApplet_ :: Applet_ -> { | Applet_' }
+unsafeUnApplet_ (Applet_ unsafe) = unsafe
 
-instance typeToSymApplet ::
-  TypeToSym Applet "applet"
+instance typeToSymApplet_ ::
+  TypeToSym Applet_ "applet"
 
 applet
   :: forall children
-   . Array (Attribute Applet)
+   . Array (Attribute Applet_)
   -> { | children }
-  -> Element Applet children
-applet = makeElt Applet "applet"
+  -> Element Applet_ children
+applet = makeElt Applet_ "applet"
 
 applet'attr
-  :: Array (Attribute Applet)
-  -> Array (Attribute Applet)
+  :: Array (Attribute Applet_)
+  -> Array (Attribute Applet_)
 applet'attr = identity
 
-data TApplet = TApplet
+data TApplet_ = TApplet_
 
-instance typeToSymTApplet :: TypeToSym TApplet "TApplet"
+instance typeToSymTApplet_ :: TypeToSym TApplet_ "TApplet_"
 
-instance semigroupTApplet :: Semigroup TApplet where
-  append _ _ = TApplet
+instance semigroupTApplet_ :: Semigroup TApplet_ where
+  append _ _ = TApplet_
 
-instance monoidTApplet :: Monoid TApplet where
-  mempty = TApplet
+instance monoidTApplet_ :: Monoid TApplet_ where
+  mempty = TApplet_
 
-instance reifyTApplet :: ReifyAU Applet TApplet where
+instance reifyTApplet_ :: ReifyAU Applet_ TApplet_ where
   reifyAU = const mempty
-type Area' =
+type Area_' =
   ( tag :: String
-  , attributes :: Array (Attribute Area)
+  , attributes :: Array (Attribute Area_)
   )
-newtype Area = Area { | Area' }
-unsafeUnArea :: Area -> { | Area' }
-unsafeUnArea (Area unsafe) = unsafe
+newtype Area_ = Area_ { | Area_' }
+unsafeUnArea_ :: Area_ -> { | Area_' }
+unsafeUnArea_ (Area_ unsafe) = unsafe
 
-instance typeToSymArea ::
-  TypeToSym Area "area"
+instance typeToSymArea_ ::
+  TypeToSym Area_ "area"
 
 area
   :: forall children
-   . Array (Attribute Area)
+   . Array (Attribute Area_)
   -> { | children }
-  -> Element Area children
-area = makeElt Area "area"
+  -> Element Area_ children
+area = makeElt Area_ "area"
 
 area'attr
-  :: Array (Attribute Area)
-  -> Array (Attribute Area)
+  :: Array (Attribute Area_)
+  -> Array (Attribute Area_)
 area'attr = identity
 
-data TArea = TArea
+data TArea_ = TArea_
 
-instance typeToSymTArea :: TypeToSym TArea "TArea"
+instance typeToSymTArea_ :: TypeToSym TArea_ "TArea_"
 
-instance semigroupTArea :: Semigroup TArea where
-  append _ _ = TArea
+instance semigroupTArea_ :: Semigroup TArea_ where
+  append _ _ = TArea_
 
-instance monoidTArea :: Monoid TArea where
-  mempty = TArea
+instance monoidTArea_ :: Monoid TArea_ where
+  mempty = TArea_
 
-instance reifyTArea :: ReifyAU Area TArea where
+instance reifyTArea_ :: ReifyAU Area_ TArea_ where
   reifyAU = const mempty
-type Article' =
+type Article_' =
   ( tag :: String
-  , attributes :: Array (Attribute Article)
+  , attributes :: Array (Attribute Article_)
   )
-newtype Article = Article { | Article' }
-unsafeUnArticle :: Article -> { | Article' }
-unsafeUnArticle (Article unsafe) = unsafe
+newtype Article_ = Article_ { | Article_' }
+unsafeUnArticle_ :: Article_ -> { | Article_' }
+unsafeUnArticle_ (Article_ unsafe) = unsafe
 
-instance typeToSymArticle ::
-  TypeToSym Article "article"
+instance typeToSymArticle_ ::
+  TypeToSym Article_ "article"
 
 article
   :: forall children
-   . Array (Attribute Article)
+   . Array (Attribute Article_)
   -> { | children }
-  -> Element Article children
-article = makeElt Article "article"
+  -> Element Article_ children
+article = makeElt Article_ "article"
 
 article'attr
-  :: Array (Attribute Article)
-  -> Array (Attribute Article)
+  :: Array (Attribute Article_)
+  -> Array (Attribute Article_)
 article'attr = identity
 
-data TArticle = TArticle
+data TArticle_ = TArticle_
 
-instance typeToSymTArticle :: TypeToSym TArticle "TArticle"
+instance typeToSymTArticle_ :: TypeToSym TArticle_ "TArticle_"
 
-instance semigroupTArticle :: Semigroup TArticle where
-  append _ _ = TArticle
+instance semigroupTArticle_ :: Semigroup TArticle_ where
+  append _ _ = TArticle_
 
-instance monoidTArticle :: Monoid TArticle where
-  mempty = TArticle
+instance monoidTArticle_ :: Monoid TArticle_ where
+  mempty = TArticle_
 
-instance reifyTArticle :: ReifyAU Article TArticle where
+instance reifyTArticle_ :: ReifyAU Article_ TArticle_ where
   reifyAU = const mempty
-type Aside' =
+type Aside_' =
   ( tag :: String
-  , attributes :: Array (Attribute Aside)
+  , attributes :: Array (Attribute Aside_)
   )
-newtype Aside = Aside { | Aside' }
-unsafeUnAside :: Aside -> { | Aside' }
-unsafeUnAside (Aside unsafe) = unsafe
+newtype Aside_ = Aside_ { | Aside_' }
+unsafeUnAside_ :: Aside_ -> { | Aside_' }
+unsafeUnAside_ (Aside_ unsafe) = unsafe
 
-instance typeToSymAside ::
-  TypeToSym Aside "aside"
+instance typeToSymAside_ ::
+  TypeToSym Aside_ "aside"
 
 aside
   :: forall children
-   . Array (Attribute Aside)
+   . Array (Attribute Aside_)
   -> { | children }
-  -> Element Aside children
-aside = makeElt Aside "aside"
+  -> Element Aside_ children
+aside = makeElt Aside_ "aside"
 
 aside'attr
-  :: Array (Attribute Aside)
-  -> Array (Attribute Aside)
+  :: Array (Attribute Aside_)
+  -> Array (Attribute Aside_)
 aside'attr = identity
 
-data TAside = TAside
+data TAside_ = TAside_
 
-instance typeToSymTAside :: TypeToSym TAside "TAside"
+instance typeToSymTAside_ :: TypeToSym TAside_ "TAside_"
 
-instance semigroupTAside :: Semigroup TAside where
-  append _ _ = TAside
+instance semigroupTAside_ :: Semigroup TAside_ where
+  append _ _ = TAside_
 
-instance monoidTAside :: Monoid TAside where
-  mempty = TAside
+instance monoidTAside_ :: Monoid TAside_ where
+  mempty = TAside_
 
-instance reifyTAside :: ReifyAU Aside TAside where
+instance reifyTAside_ :: ReifyAU Aside_ TAside_ where
   reifyAU = const mempty
-type Audio' =
+type Audio_' =
   ( tag :: String
-  , attributes :: Array (Attribute Audio)
+  , attributes :: Array (Attribute Audio_)
   )
-newtype Audio = Audio { | Audio' }
-unsafeUnAudio :: Audio -> { | Audio' }
-unsafeUnAudio (Audio unsafe) = unsafe
+newtype Audio_ = Audio_ { | Audio_' }
+unsafeUnAudio_ :: Audio_ -> { | Audio_' }
+unsafeUnAudio_ (Audio_ unsafe) = unsafe
 
-instance typeToSymAudio ::
-  TypeToSym Audio "audio"
+instance typeToSymAudio_ ::
+  TypeToSym Audio_ "audio"
 
 audio
   :: forall children
-   . Array (Attribute Audio)
+   . Array (Attribute Audio_)
   -> { | children }
-  -> Element Audio children
-audio = makeElt Audio "audio"
+  -> Element Audio_ children
+audio = makeElt Audio_ "audio"
 
 audio'attr
-  :: Array (Attribute Audio)
-  -> Array (Attribute Audio)
+  :: Array (Attribute Audio_)
+  -> Array (Attribute Audio_)
 audio'attr = identity
 
-data TAudio = TAudio
+data TAudio_ = TAudio_
 
-instance typeToSymTAudio :: TypeToSym TAudio "TAudio"
+instance typeToSymTAudio_ :: TypeToSym TAudio_ "TAudio_"
 
-instance semigroupTAudio :: Semigroup TAudio where
-  append _ _ = TAudio
+instance semigroupTAudio_ :: Semigroup TAudio_ where
+  append _ _ = TAudio_
 
-instance monoidTAudio :: Monoid TAudio where
-  mempty = TAudio
+instance monoidTAudio_ :: Monoid TAudio_ where
+  mempty = TAudio_
 
-instance reifyTAudio :: ReifyAU Audio TAudio where
+instance reifyTAudio_ :: ReifyAU Audio_ TAudio_ where
   reifyAU = const mempty
-type B' =
+type B_' =
   ( tag :: String
-  , attributes :: Array (Attribute B)
+  , attributes :: Array (Attribute B_)
   )
-newtype B = B { | B' }
-unsafeUnB :: B -> { | B' }
-unsafeUnB (B unsafe) = unsafe
+newtype B_ = B_ { | B_' }
+unsafeUnB_ :: B_ -> { | B_' }
+unsafeUnB_ (B_ unsafe) = unsafe
 
-instance typeToSymB ::
-  TypeToSym B "b"
+instance typeToSymB_ ::
+  TypeToSym B_ "b"
 
 b
   :: forall children
-   . Array (Attribute B)
+   . Array (Attribute B_)
   -> { | children }
-  -> Element B children
-b = makeElt B "b"
+  -> Element B_ children
+b = makeElt B_ "b"
 
 b'attr
-  :: Array (Attribute B)
-  -> Array (Attribute B)
+  :: Array (Attribute B_)
+  -> Array (Attribute B_)
 b'attr = identity
 
-data TB = TB
+data TB_ = TB_
 
-instance typeToSymTB :: TypeToSym TB "TB"
+instance typeToSymTB_ :: TypeToSym TB_ "TB_"
 
-instance semigroupTB :: Semigroup TB where
-  append _ _ = TB
+instance semigroupTB_ :: Semigroup TB_ where
+  append _ _ = TB_
 
-instance monoidTB :: Monoid TB where
-  mempty = TB
+instance monoidTB_ :: Monoid TB_ where
+  mempty = TB_
 
-instance reifyTB :: ReifyAU B TB where
+instance reifyTB_ :: ReifyAU B_ TB_ where
   reifyAU = const mempty
-type Base' =
+type Base_' =
   ( tag :: String
-  , attributes :: Array (Attribute Base)
+  , attributes :: Array (Attribute Base_)
   )
-newtype Base = Base { | Base' }
-unsafeUnBase :: Base -> { | Base' }
-unsafeUnBase (Base unsafe) = unsafe
+newtype Base_ = Base_ { | Base_' }
+unsafeUnBase_ :: Base_ -> { | Base_' }
+unsafeUnBase_ (Base_ unsafe) = unsafe
 
-instance typeToSymBase ::
-  TypeToSym Base "base"
+instance typeToSymBase_ ::
+  TypeToSym Base_ "base"
 
 base
   :: forall children
-   . Array (Attribute Base)
+   . Array (Attribute Base_)
   -> { | children }
-  -> Element Base children
-base = makeElt Base "base"
+  -> Element Base_ children
+base = makeElt Base_ "base"
 
 base'attr
-  :: Array (Attribute Base)
-  -> Array (Attribute Base)
+  :: Array (Attribute Base_)
+  -> Array (Attribute Base_)
 base'attr = identity
 
-data TBase = TBase
+data TBase_ = TBase_
 
-instance typeToSymTBase :: TypeToSym TBase "TBase"
+instance typeToSymTBase_ :: TypeToSym TBase_ "TBase_"
 
-instance semigroupTBase :: Semigroup TBase where
-  append _ _ = TBase
+instance semigroupTBase_ :: Semigroup TBase_ where
+  append _ _ = TBase_
 
-instance monoidTBase :: Monoid TBase where
-  mempty = TBase
+instance monoidTBase_ :: Monoid TBase_ where
+  mempty = TBase_
 
-instance reifyTBase :: ReifyAU Base TBase where
+instance reifyTBase_ :: ReifyAU Base_ TBase_ where
   reifyAU = const mempty
-type Basefont' =
+type Basefont_' =
   ( tag :: String
-  , attributes :: Array (Attribute Basefont)
+  , attributes :: Array (Attribute Basefont_)
   )
-newtype Basefont = Basefont { | Basefont' }
-unsafeUnBasefont :: Basefont -> { | Basefont' }
-unsafeUnBasefont (Basefont unsafe) = unsafe
+newtype Basefont_ = Basefont_ { | Basefont_' }
+unsafeUnBasefont_ :: Basefont_ -> { | Basefont_' }
+unsafeUnBasefont_ (Basefont_ unsafe) = unsafe
 
-instance typeToSymBasefont ::
-  TypeToSym Basefont "basefont"
+instance typeToSymBasefont_ ::
+  TypeToSym Basefont_ "basefont"
 
 basefont
   :: forall children
-   . Array (Attribute Basefont)
+   . Array (Attribute Basefont_)
   -> { | children }
-  -> Element Basefont children
-basefont = makeElt Basefont "basefont"
+  -> Element Basefont_ children
+basefont = makeElt Basefont_ "basefont"
 
 basefont'attr
-  :: Array (Attribute Basefont)
-  -> Array (Attribute Basefont)
+  :: Array (Attribute Basefont_)
+  -> Array (Attribute Basefont_)
 basefont'attr = identity
 
-data TBasefont = TBasefont
+data TBasefont_ = TBasefont_
 
-instance typeToSymTBasefont :: TypeToSym TBasefont "TBasefont"
+instance typeToSymTBasefont_ :: TypeToSym TBasefont_ "TBasefont_"
 
-instance semigroupTBasefont :: Semigroup TBasefont where
-  append _ _ = TBasefont
+instance semigroupTBasefont_ :: Semigroup TBasefont_ where
+  append _ _ = TBasefont_
 
-instance monoidTBasefont :: Monoid TBasefont where
-  mempty = TBasefont
+instance monoidTBasefont_ :: Monoid TBasefont_ where
+  mempty = TBasefont_
 
-instance reifyTBasefont :: ReifyAU Basefont TBasefont where
+instance reifyTBasefont_ :: ReifyAU Basefont_ TBasefont_ where
   reifyAU = const mempty
-type Bdi' =
+type Bdi_' =
   ( tag :: String
-  , attributes :: Array (Attribute Bdi)
+  , attributes :: Array (Attribute Bdi_)
   )
-newtype Bdi = Bdi { | Bdi' }
-unsafeUnBdi :: Bdi -> { | Bdi' }
-unsafeUnBdi (Bdi unsafe) = unsafe
+newtype Bdi_ = Bdi_ { | Bdi_' }
+unsafeUnBdi_ :: Bdi_ -> { | Bdi_' }
+unsafeUnBdi_ (Bdi_ unsafe) = unsafe
 
-instance typeToSymBdi ::
-  TypeToSym Bdi "bdi"
+instance typeToSymBdi_ ::
+  TypeToSym Bdi_ "bdi"
 
 bdi
   :: forall children
-   . Array (Attribute Bdi)
+   . Array (Attribute Bdi_)
   -> { | children }
-  -> Element Bdi children
-bdi = makeElt Bdi "bdi"
+  -> Element Bdi_ children
+bdi = makeElt Bdi_ "bdi"
 
 bdi'attr
-  :: Array (Attribute Bdi)
-  -> Array (Attribute Bdi)
+  :: Array (Attribute Bdi_)
+  -> Array (Attribute Bdi_)
 bdi'attr = identity
 
-data TBdi = TBdi
+data TBdi_ = TBdi_
 
-instance typeToSymTBdi :: TypeToSym TBdi "TBdi"
+instance typeToSymTBdi_ :: TypeToSym TBdi_ "TBdi_"
 
-instance semigroupTBdi :: Semigroup TBdi where
-  append _ _ = TBdi
+instance semigroupTBdi_ :: Semigroup TBdi_ where
+  append _ _ = TBdi_
 
-instance monoidTBdi :: Monoid TBdi where
-  mempty = TBdi
+instance monoidTBdi_ :: Monoid TBdi_ where
+  mempty = TBdi_
 
-instance reifyTBdi :: ReifyAU Bdi TBdi where
+instance reifyTBdi_ :: ReifyAU Bdi_ TBdi_ where
   reifyAU = const mempty
-type Bdo' =
+type Bdo_' =
   ( tag :: String
-  , attributes :: Array (Attribute Bdo)
+  , attributes :: Array (Attribute Bdo_)
   )
-newtype Bdo = Bdo { | Bdo' }
-unsafeUnBdo :: Bdo -> { | Bdo' }
-unsafeUnBdo (Bdo unsafe) = unsafe
+newtype Bdo_ = Bdo_ { | Bdo_' }
+unsafeUnBdo_ :: Bdo_ -> { | Bdo_' }
+unsafeUnBdo_ (Bdo_ unsafe) = unsafe
 
-instance typeToSymBdo ::
-  TypeToSym Bdo "bdo"
+instance typeToSymBdo_ ::
+  TypeToSym Bdo_ "bdo"
 
 bdo
   :: forall children
-   . Array (Attribute Bdo)
+   . Array (Attribute Bdo_)
   -> { | children }
-  -> Element Bdo children
-bdo = makeElt Bdo "bdo"
+  -> Element Bdo_ children
+bdo = makeElt Bdo_ "bdo"
 
 bdo'attr
-  :: Array (Attribute Bdo)
-  -> Array (Attribute Bdo)
+  :: Array (Attribute Bdo_)
+  -> Array (Attribute Bdo_)
 bdo'attr = identity
 
-data TBdo = TBdo
+data TBdo_ = TBdo_
 
-instance typeToSymTBdo :: TypeToSym TBdo "TBdo"
+instance typeToSymTBdo_ :: TypeToSym TBdo_ "TBdo_"
 
-instance semigroupTBdo :: Semigroup TBdo where
-  append _ _ = TBdo
+instance semigroupTBdo_ :: Semigroup TBdo_ where
+  append _ _ = TBdo_
 
-instance monoidTBdo :: Monoid TBdo where
-  mempty = TBdo
+instance monoidTBdo_ :: Monoid TBdo_ where
+  mempty = TBdo_
 
-instance reifyTBdo :: ReifyAU Bdo TBdo where
+instance reifyTBdo_ :: ReifyAU Bdo_ TBdo_ where
   reifyAU = const mempty
-type Big' =
+type Big_' =
   ( tag :: String
-  , attributes :: Array (Attribute Big)
+  , attributes :: Array (Attribute Big_)
   )
-newtype Big = Big { | Big' }
-unsafeUnBig :: Big -> { | Big' }
-unsafeUnBig (Big unsafe) = unsafe
+newtype Big_ = Big_ { | Big_' }
+unsafeUnBig_ :: Big_ -> { | Big_' }
+unsafeUnBig_ (Big_ unsafe) = unsafe
 
-instance typeToSymBig ::
-  TypeToSym Big "big"
+instance typeToSymBig_ ::
+  TypeToSym Big_ "big"
 
 big
   :: forall children
-   . Array (Attribute Big)
+   . Array (Attribute Big_)
   -> { | children }
-  -> Element Big children
-big = makeElt Big "big"
+  -> Element Big_ children
+big = makeElt Big_ "big"
 
 big'attr
-  :: Array (Attribute Big)
-  -> Array (Attribute Big)
+  :: Array (Attribute Big_)
+  -> Array (Attribute Big_)
 big'attr = identity
 
-data TBig = TBig
+data TBig_ = TBig_
 
-instance typeToSymTBig :: TypeToSym TBig "TBig"
+instance typeToSymTBig_ :: TypeToSym TBig_ "TBig_"
 
-instance semigroupTBig :: Semigroup TBig where
-  append _ _ = TBig
+instance semigroupTBig_ :: Semigroup TBig_ where
+  append _ _ = TBig_
 
-instance monoidTBig :: Monoid TBig where
-  mempty = TBig
+instance monoidTBig_ :: Monoid TBig_ where
+  mempty = TBig_
 
-instance reifyTBig :: ReifyAU Big TBig where
+instance reifyTBig_ :: ReifyAU Big_ TBig_ where
   reifyAU = const mempty
-type Blockquote' =
+type Blockquote_' =
   ( tag :: String
-  , attributes :: Array (Attribute Blockquote)
+  , attributes :: Array (Attribute Blockquote_)
   )
-newtype Blockquote = Blockquote { | Blockquote' }
-unsafeUnBlockquote :: Blockquote -> { | Blockquote' }
-unsafeUnBlockquote (Blockquote unsafe) = unsafe
+newtype Blockquote_ = Blockquote_ { | Blockquote_' }
+unsafeUnBlockquote_ :: Blockquote_ -> { | Blockquote_' }
+unsafeUnBlockquote_ (Blockquote_ unsafe) = unsafe
 
-instance typeToSymBlockquote ::
-  TypeToSym Blockquote "blockquote"
+instance typeToSymBlockquote_ ::
+  TypeToSym Blockquote_ "blockquote"
 
 blockquote
   :: forall children
-   . Array (Attribute Blockquote)
+   . Array (Attribute Blockquote_)
   -> { | children }
-  -> Element Blockquote children
-blockquote = makeElt Blockquote "blockquote"
+  -> Element Blockquote_ children
+blockquote = makeElt Blockquote_ "blockquote"
 
 blockquote'attr
-  :: Array (Attribute Blockquote)
-  -> Array (Attribute Blockquote)
+  :: Array (Attribute Blockquote_)
+  -> Array (Attribute Blockquote_)
 blockquote'attr = identity
 
-data TBlockquote = TBlockquote
+data TBlockquote_ = TBlockquote_
 
-instance typeToSymTBlockquote :: TypeToSym TBlockquote "TBlockquote"
+instance typeToSymTBlockquote_ :: TypeToSym TBlockquote_ "TBlockquote_"
 
-instance semigroupTBlockquote :: Semigroup TBlockquote where
-  append _ _ = TBlockquote
+instance semigroupTBlockquote_ :: Semigroup TBlockquote_ where
+  append _ _ = TBlockquote_
 
-instance monoidTBlockquote :: Monoid TBlockquote where
-  mempty = TBlockquote
+instance monoidTBlockquote_ :: Monoid TBlockquote_ where
+  mempty = TBlockquote_
 
-instance reifyTBlockquote :: ReifyAU Blockquote TBlockquote where
+instance reifyTBlockquote_ :: ReifyAU Blockquote_ TBlockquote_ where
   reifyAU = const mempty
-type Body' =
+type Body_' =
   ( tag :: String
-  , attributes :: Array (Attribute Body)
+  , attributes :: Array (Attribute Body_)
   )
-newtype Body = Body { | Body' }
-unsafeUnBody :: Body -> { | Body' }
-unsafeUnBody (Body unsafe) = unsafe
+newtype Body_ = Body_ { | Body_' }
+unsafeUnBody_ :: Body_ -> { | Body_' }
+unsafeUnBody_ (Body_ unsafe) = unsafe
 
-instance typeToSymBody ::
-  TypeToSym Body "body"
+instance typeToSymBody_ ::
+  TypeToSym Body_ "body"
 
 body
   :: forall children
-   . Array (Attribute Body)
+   . Array (Attribute Body_)
   -> { | children }
-  -> Element Body children
-body = makeElt Body "body"
+  -> Element Body_ children
+body = makeElt Body_ "body"
 
 body'attr
-  :: Array (Attribute Body)
-  -> Array (Attribute Body)
+  :: Array (Attribute Body_)
+  -> Array (Attribute Body_)
 body'attr = identity
 
-data TBody = TBody
+data TBody_ = TBody_
 
-instance typeToSymTBody :: TypeToSym TBody "TBody"
+instance typeToSymTBody_ :: TypeToSym TBody_ "TBody_"
 
-instance semigroupTBody :: Semigroup TBody where
-  append _ _ = TBody
+instance semigroupTBody_ :: Semigroup TBody_ where
+  append _ _ = TBody_
 
-instance monoidTBody :: Monoid TBody where
-  mempty = TBody
+instance monoidTBody_ :: Monoid TBody_ where
+  mempty = TBody_
 
-instance reifyTBody :: ReifyAU Body TBody where
+instance reifyTBody_ :: ReifyAU Body_ TBody_ where
   reifyAU = const mempty
-type Br' =
+type Br_' =
   ( tag :: String
-  , attributes :: Array (Attribute Br)
+  , attributes :: Array (Attribute Br_)
   )
-newtype Br = Br { | Br' }
-unsafeUnBr :: Br -> { | Br' }
-unsafeUnBr (Br unsafe) = unsafe
+newtype Br_ = Br_ { | Br_' }
+unsafeUnBr_ :: Br_ -> { | Br_' }
+unsafeUnBr_ (Br_ unsafe) = unsafe
 
-instance typeToSymBr ::
-  TypeToSym Br "br"
+instance typeToSymBr_ ::
+  TypeToSym Br_ "br"
 
 br
   :: forall children
-   . Array (Attribute Br)
+   . Array (Attribute Br_)
   -> { | children }
-  -> Element Br children
-br = makeElt Br "br"
+  -> Element Br_ children
+br = makeElt Br_ "br"
 
 br'attr
-  :: Array (Attribute Br)
-  -> Array (Attribute Br)
+  :: Array (Attribute Br_)
+  -> Array (Attribute Br_)
 br'attr = identity
 
-data TBr = TBr
+data TBr_ = TBr_
 
-instance typeToSymTBr :: TypeToSym TBr "TBr"
+instance typeToSymTBr_ :: TypeToSym TBr_ "TBr_"
 
-instance semigroupTBr :: Semigroup TBr where
-  append _ _ = TBr
+instance semigroupTBr_ :: Semigroup TBr_ where
+  append _ _ = TBr_
 
-instance monoidTBr :: Monoid TBr where
-  mempty = TBr
+instance monoidTBr_ :: Monoid TBr_ where
+  mempty = TBr_
 
-instance reifyTBr :: ReifyAU Br TBr where
+instance reifyTBr_ :: ReifyAU Br_ TBr_ where
   reifyAU = const mempty
-type Button' =
+type Button_' =
   ( tag :: String
-  , attributes :: Array (Attribute Button)
+  , attributes :: Array (Attribute Button_)
   )
-newtype Button = Button { | Button' }
-unsafeUnButton :: Button -> { | Button' }
-unsafeUnButton (Button unsafe) = unsafe
+newtype Button_ = Button_ { | Button_' }
+unsafeUnButton_ :: Button_ -> { | Button_' }
+unsafeUnButton_ (Button_ unsafe) = unsafe
 
-instance typeToSymButton ::
-  TypeToSym Button "button"
+instance typeToSymButton_ ::
+  TypeToSym Button_ "button"
 
 button
   :: forall children
-   . Array (Attribute Button)
+   . Array (Attribute Button_)
   -> { | children }
-  -> Element Button children
-button = makeElt Button "button"
+  -> Element Button_ children
+button = makeElt Button_ "button"
 
 button'attr
-  :: Array (Attribute Button)
-  -> Array (Attribute Button)
+  :: Array (Attribute Button_)
+  -> Array (Attribute Button_)
 button'attr = identity
 
-data TButton = TButton
+data TButton_ = TButton_
 
-instance typeToSymTButton :: TypeToSym TButton "TButton"
+instance typeToSymTButton_ :: TypeToSym TButton_ "TButton_"
 
-instance semigroupTButton :: Semigroup TButton where
-  append _ _ = TButton
+instance semigroupTButton_ :: Semigroup TButton_ where
+  append _ _ = TButton_
 
-instance monoidTButton :: Monoid TButton where
-  mempty = TButton
+instance monoidTButton_ :: Monoid TButton_ where
+  mempty = TButton_
 
-instance reifyTButton :: ReifyAU Button TButton where
+instance reifyTButton_ :: ReifyAU Button_ TButton_ where
   reifyAU = const mempty
-type Canvas' =
+type Canvas_' =
   ( tag :: String
-  , attributes :: Array (Attribute Canvas)
+  , attributes :: Array (Attribute Canvas_)
   )
-newtype Canvas = Canvas { | Canvas' }
-unsafeUnCanvas :: Canvas -> { | Canvas' }
-unsafeUnCanvas (Canvas unsafe) = unsafe
+newtype Canvas_ = Canvas_ { | Canvas_' }
+unsafeUnCanvas_ :: Canvas_ -> { | Canvas_' }
+unsafeUnCanvas_ (Canvas_ unsafe) = unsafe
 
-instance typeToSymCanvas ::
-  TypeToSym Canvas "canvas"
+instance typeToSymCanvas_ ::
+  TypeToSym Canvas_ "canvas"
 
 canvas
   :: forall children
-   . Array (Attribute Canvas)
+   . Array (Attribute Canvas_)
   -> { | children }
-  -> Element Canvas children
-canvas = makeElt Canvas "canvas"
+  -> Element Canvas_ children
+canvas = makeElt Canvas_ "canvas"
 
 canvas'attr
-  :: Array (Attribute Canvas)
-  -> Array (Attribute Canvas)
+  :: Array (Attribute Canvas_)
+  -> Array (Attribute Canvas_)
 canvas'attr = identity
 
-data TCanvas = TCanvas
+data TCanvas_ = TCanvas_
 
-instance typeToSymTCanvas :: TypeToSym TCanvas "TCanvas"
+instance typeToSymTCanvas_ :: TypeToSym TCanvas_ "TCanvas_"
 
-instance semigroupTCanvas :: Semigroup TCanvas where
-  append _ _ = TCanvas
+instance semigroupTCanvas_ :: Semigroup TCanvas_ where
+  append _ _ = TCanvas_
 
-instance monoidTCanvas :: Monoid TCanvas where
-  mempty = TCanvas
+instance monoidTCanvas_ :: Monoid TCanvas_ where
+  mempty = TCanvas_
 
-instance reifyTCanvas :: ReifyAU Canvas TCanvas where
+instance reifyTCanvas_ :: ReifyAU Canvas_ TCanvas_ where
   reifyAU = const mempty
-type Caption' =
+type Caption_' =
   ( tag :: String
-  , attributes :: Array (Attribute Caption)
+  , attributes :: Array (Attribute Caption_)
   )
-newtype Caption = Caption { | Caption' }
-unsafeUnCaption :: Caption -> { | Caption' }
-unsafeUnCaption (Caption unsafe) = unsafe
+newtype Caption_ = Caption_ { | Caption_' }
+unsafeUnCaption_ :: Caption_ -> { | Caption_' }
+unsafeUnCaption_ (Caption_ unsafe) = unsafe
 
-instance typeToSymCaption ::
-  TypeToSym Caption "caption"
+instance typeToSymCaption_ ::
+  TypeToSym Caption_ "caption"
 
 caption
   :: forall children
-   . Array (Attribute Caption)
+   . Array (Attribute Caption_)
   -> { | children }
-  -> Element Caption children
-caption = makeElt Caption "caption"
+  -> Element Caption_ children
+caption = makeElt Caption_ "caption"
 
 caption'attr
-  :: Array (Attribute Caption)
-  -> Array (Attribute Caption)
+  :: Array (Attribute Caption_)
+  -> Array (Attribute Caption_)
 caption'attr = identity
 
-data TCaption = TCaption
+data TCaption_ = TCaption_
 
-instance typeToSymTCaption :: TypeToSym TCaption "TCaption"
+instance typeToSymTCaption_ :: TypeToSym TCaption_ "TCaption_"
 
-instance semigroupTCaption :: Semigroup TCaption where
-  append _ _ = TCaption
+instance semigroupTCaption_ :: Semigroup TCaption_ where
+  append _ _ = TCaption_
 
-instance monoidTCaption :: Monoid TCaption where
-  mempty = TCaption
+instance monoidTCaption_ :: Monoid TCaption_ where
+  mempty = TCaption_
 
-instance reifyTCaption :: ReifyAU Caption TCaption where
+instance reifyTCaption_ :: ReifyAU Caption_ TCaption_ where
   reifyAU = const mempty
-type Center' =
+type Center_' =
   ( tag :: String
-  , attributes :: Array (Attribute Center)
+  , attributes :: Array (Attribute Center_)
   )
-newtype Center = Center { | Center' }
-unsafeUnCenter :: Center -> { | Center' }
-unsafeUnCenter (Center unsafe) = unsafe
+newtype Center_ = Center_ { | Center_' }
+unsafeUnCenter_ :: Center_ -> { | Center_' }
+unsafeUnCenter_ (Center_ unsafe) = unsafe
 
-instance typeToSymCenter ::
-  TypeToSym Center "center"
+instance typeToSymCenter_ ::
+  TypeToSym Center_ "center"
 
 center
   :: forall children
-   . Array (Attribute Center)
+   . Array (Attribute Center_)
   -> { | children }
-  -> Element Center children
-center = makeElt Center "center"
+  -> Element Center_ children
+center = makeElt Center_ "center"
 
 center'attr
-  :: Array (Attribute Center)
-  -> Array (Attribute Center)
+  :: Array (Attribute Center_)
+  -> Array (Attribute Center_)
 center'attr = identity
 
-data TCenter = TCenter
+data TCenter_ = TCenter_
 
-instance typeToSymTCenter :: TypeToSym TCenter "TCenter"
+instance typeToSymTCenter_ :: TypeToSym TCenter_ "TCenter_"
 
-instance semigroupTCenter :: Semigroup TCenter where
-  append _ _ = TCenter
+instance semigroupTCenter_ :: Semigroup TCenter_ where
+  append _ _ = TCenter_
 
-instance monoidTCenter :: Monoid TCenter where
-  mempty = TCenter
+instance monoidTCenter_ :: Monoid TCenter_ where
+  mempty = TCenter_
 
-instance reifyTCenter :: ReifyAU Center TCenter where
+instance reifyTCenter_ :: ReifyAU Center_ TCenter_ where
   reifyAU = const mempty
-type Cite' =
+type Cite_' =
   ( tag :: String
-  , attributes :: Array (Attribute Cite)
+  , attributes :: Array (Attribute Cite_)
   )
-newtype Cite = Cite { | Cite' }
-unsafeUnCite :: Cite -> { | Cite' }
-unsafeUnCite (Cite unsafe) = unsafe
+newtype Cite_ = Cite_ { | Cite_' }
+unsafeUnCite_ :: Cite_ -> { | Cite_' }
+unsafeUnCite_ (Cite_ unsafe) = unsafe
 
-instance typeToSymCite ::
-  TypeToSym Cite "cite"
+instance typeToSymCite_ ::
+  TypeToSym Cite_ "cite"
 
 cite
   :: forall children
-   . Array (Attribute Cite)
+   . Array (Attribute Cite_)
   -> { | children }
-  -> Element Cite children
-cite = makeElt Cite "cite"
+  -> Element Cite_ children
+cite = makeElt Cite_ "cite"
 
 cite'attr
-  :: Array (Attribute Cite)
-  -> Array (Attribute Cite)
+  :: Array (Attribute Cite_)
+  -> Array (Attribute Cite_)
 cite'attr = identity
 
-data TCite = TCite
+data TCite_ = TCite_
 
-instance typeToSymTCite :: TypeToSym TCite "TCite"
+instance typeToSymTCite_ :: TypeToSym TCite_ "TCite_"
 
-instance semigroupTCite :: Semigroup TCite where
-  append _ _ = TCite
+instance semigroupTCite_ :: Semigroup TCite_ where
+  append _ _ = TCite_
 
-instance monoidTCite :: Monoid TCite where
-  mempty = TCite
+instance monoidTCite_ :: Monoid TCite_ where
+  mempty = TCite_
 
-instance reifyTCite :: ReifyAU Cite TCite where
+instance reifyTCite_ :: ReifyAU Cite_ TCite_ where
   reifyAU = const mempty
-type Code' =
+type Code_' =
   ( tag :: String
-  , attributes :: Array (Attribute Code)
+  , attributes :: Array (Attribute Code_)
   )
-newtype Code = Code { | Code' }
-unsafeUnCode :: Code -> { | Code' }
-unsafeUnCode (Code unsafe) = unsafe
+newtype Code_ = Code_ { | Code_' }
+unsafeUnCode_ :: Code_ -> { | Code_' }
+unsafeUnCode_ (Code_ unsafe) = unsafe
 
-instance typeToSymCode ::
-  TypeToSym Code "code"
+instance typeToSymCode_ ::
+  TypeToSym Code_ "code"
 
 code
   :: forall children
-   . Array (Attribute Code)
+   . Array (Attribute Code_)
   -> { | children }
-  -> Element Code children
-code = makeElt Code "code"
+  -> Element Code_ children
+code = makeElt Code_ "code"
 
 code'attr
-  :: Array (Attribute Code)
-  -> Array (Attribute Code)
+  :: Array (Attribute Code_)
+  -> Array (Attribute Code_)
 code'attr = identity
 
-data TCode = TCode
+data TCode_ = TCode_
 
-instance typeToSymTCode :: TypeToSym TCode "TCode"
+instance typeToSymTCode_ :: TypeToSym TCode_ "TCode_"
 
-instance semigroupTCode :: Semigroup TCode where
-  append _ _ = TCode
+instance semigroupTCode_ :: Semigroup TCode_ where
+  append _ _ = TCode_
 
-instance monoidTCode :: Monoid TCode where
-  mempty = TCode
+instance monoidTCode_ :: Monoid TCode_ where
+  mempty = TCode_
 
-instance reifyTCode :: ReifyAU Code TCode where
+instance reifyTCode_ :: ReifyAU Code_ TCode_ where
   reifyAU = const mempty
-type Col' =
+type Col_' =
   ( tag :: String
-  , attributes :: Array (Attribute Col)
+  , attributes :: Array (Attribute Col_)
   )
-newtype Col = Col { | Col' }
-unsafeUnCol :: Col -> { | Col' }
-unsafeUnCol (Col unsafe) = unsafe
+newtype Col_ = Col_ { | Col_' }
+unsafeUnCol_ :: Col_ -> { | Col_' }
+unsafeUnCol_ (Col_ unsafe) = unsafe
 
-instance typeToSymCol ::
-  TypeToSym Col "col"
+instance typeToSymCol_ ::
+  TypeToSym Col_ "col"
 
 col
   :: forall children
-   . Array (Attribute Col)
+   . Array (Attribute Col_)
   -> { | children }
-  -> Element Col children
-col = makeElt Col "col"
+  -> Element Col_ children
+col = makeElt Col_ "col"
 
 col'attr
-  :: Array (Attribute Col)
-  -> Array (Attribute Col)
+  :: Array (Attribute Col_)
+  -> Array (Attribute Col_)
 col'attr = identity
 
-data TCol = TCol
+data TCol_ = TCol_
 
-instance typeToSymTCol :: TypeToSym TCol "TCol"
+instance typeToSymTCol_ :: TypeToSym TCol_ "TCol_"
 
-instance semigroupTCol :: Semigroup TCol where
-  append _ _ = TCol
+instance semigroupTCol_ :: Semigroup TCol_ where
+  append _ _ = TCol_
 
-instance monoidTCol :: Monoid TCol where
-  mempty = TCol
+instance monoidTCol_ :: Monoid TCol_ where
+  mempty = TCol_
 
-instance reifyTCol :: ReifyAU Col TCol where
+instance reifyTCol_ :: ReifyAU Col_ TCol_ where
   reifyAU = const mempty
-type Colgroup' =
+type Colgroup_' =
   ( tag :: String
-  , attributes :: Array (Attribute Colgroup)
+  , attributes :: Array (Attribute Colgroup_)
   )
-newtype Colgroup = Colgroup { | Colgroup' }
-unsafeUnColgroup :: Colgroup -> { | Colgroup' }
-unsafeUnColgroup (Colgroup unsafe) = unsafe
+newtype Colgroup_ = Colgroup_ { | Colgroup_' }
+unsafeUnColgroup_ :: Colgroup_ -> { | Colgroup_' }
+unsafeUnColgroup_ (Colgroup_ unsafe) = unsafe
 
-instance typeToSymColgroup ::
-  TypeToSym Colgroup "colgroup"
+instance typeToSymColgroup_ ::
+  TypeToSym Colgroup_ "colgroup"
 
 colgroup
   :: forall children
-   . Array (Attribute Colgroup)
+   . Array (Attribute Colgroup_)
   -> { | children }
-  -> Element Colgroup children
-colgroup = makeElt Colgroup "colgroup"
+  -> Element Colgroup_ children
+colgroup = makeElt Colgroup_ "colgroup"
 
 colgroup'attr
-  :: Array (Attribute Colgroup)
-  -> Array (Attribute Colgroup)
+  :: Array (Attribute Colgroup_)
+  -> Array (Attribute Colgroup_)
 colgroup'attr = identity
 
-data TColgroup = TColgroup
+data TColgroup_ = TColgroup_
 
-instance typeToSymTColgroup :: TypeToSym TColgroup "TColgroup"
+instance typeToSymTColgroup_ :: TypeToSym TColgroup_ "TColgroup_"
 
-instance semigroupTColgroup :: Semigroup TColgroup where
-  append _ _ = TColgroup
+instance semigroupTColgroup_ :: Semigroup TColgroup_ where
+  append _ _ = TColgroup_
 
-instance monoidTColgroup :: Monoid TColgroup where
-  mempty = TColgroup
+instance monoidTColgroup_ :: Monoid TColgroup_ where
+  mempty = TColgroup_
 
-instance reifyTColgroup :: ReifyAU Colgroup TColgroup where
+instance reifyTColgroup_ :: ReifyAU Colgroup_ TColgroup_ where
   reifyAU = const mempty
-type Data' =
+type Xdata_' =
   ( tag :: String
-  , attributes :: Array (Attribute Data)
+  , attributes :: Array (Attribute Xdata_)
   )
-newtype Data = Data { | Data' }
-unsafeUnData :: Data -> { | Data' }
-unsafeUnData (Data unsafe) = unsafe
+newtype Xdata_ = Xdata_ { | Xdata_' }
+unsafeUnXdata_ :: Xdata_ -> { | Xdata_' }
+unsafeUnXdata_ (Xdata_ unsafe) = unsafe
 
-instance typeToSymData ::
-  TypeToSym Data "data"
+instance typeToSymXdata_ ::
+  TypeToSym Xdata_ "data"
 
 xdata
   :: forall children
-   . Array (Attribute Data)
+   . Array (Attribute Xdata_)
   -> { | children }
-  -> Element Data children
-xdata = makeElt Data "data"
+  -> Element Xdata_ children
+xdata = makeElt Xdata_ "data"
 
 xdata'attr
-  :: Array (Attribute Data)
-  -> Array (Attribute Data)
+  :: Array (Attribute Xdata_)
+  -> Array (Attribute Xdata_)
 xdata'attr = identity
 
-data TData = TData
+data TXdata_ = TXdata_
 
-instance typeToSymTData :: TypeToSym TData "TData"
+instance typeToSymTXdata_ :: TypeToSym TXdata_ "TXdata_"
 
-instance semigroupTData :: Semigroup TData where
-  append _ _ = TData
+instance semigroupTXdata_ :: Semigroup TXdata_ where
+  append _ _ = TXdata_
 
-instance monoidTData :: Monoid TData where
-  mempty = TData
+instance monoidTXdata_ :: Monoid TXdata_ where
+  mempty = TXdata_
 
-instance reifyTData :: ReifyAU Data TData where
+instance reifyTXdata_ :: ReifyAU Xdata_ TXdata_ where
   reifyAU = const mempty
-type Datalist' =
+type Datalist_' =
   ( tag :: String
-  , attributes :: Array (Attribute Datalist)
+  , attributes :: Array (Attribute Datalist_)
   )
-newtype Datalist = Datalist { | Datalist' }
-unsafeUnDatalist :: Datalist -> { | Datalist' }
-unsafeUnDatalist (Datalist unsafe) = unsafe
+newtype Datalist_ = Datalist_ { | Datalist_' }
+unsafeUnDatalist_ :: Datalist_ -> { | Datalist_' }
+unsafeUnDatalist_ (Datalist_ unsafe) = unsafe
 
-instance typeToSymDatalist ::
-  TypeToSym Datalist "datalist"
+instance typeToSymDatalist_ ::
+  TypeToSym Datalist_ "datalist"
 
 datalist
   :: forall children
-   . Array (Attribute Datalist)
+   . Array (Attribute Datalist_)
   -> { | children }
-  -> Element Datalist children
-datalist = makeElt Datalist "datalist"
+  -> Element Datalist_ children
+datalist = makeElt Datalist_ "datalist"
 
 datalist'attr
-  :: Array (Attribute Datalist)
-  -> Array (Attribute Datalist)
+  :: Array (Attribute Datalist_)
+  -> Array (Attribute Datalist_)
 datalist'attr = identity
 
-data TDatalist = TDatalist
+data TDatalist_ = TDatalist_
 
-instance typeToSymTDatalist :: TypeToSym TDatalist "TDatalist"
+instance typeToSymTDatalist_ :: TypeToSym TDatalist_ "TDatalist_"
 
-instance semigroupTDatalist :: Semigroup TDatalist where
-  append _ _ = TDatalist
+instance semigroupTDatalist_ :: Semigroup TDatalist_ where
+  append _ _ = TDatalist_
 
-instance monoidTDatalist :: Monoid TDatalist where
-  mempty = TDatalist
+instance monoidTDatalist_ :: Monoid TDatalist_ where
+  mempty = TDatalist_
 
-instance reifyTDatalist :: ReifyAU Datalist TDatalist where
+instance reifyTDatalist_ :: ReifyAU Datalist_ TDatalist_ where
   reifyAU = const mempty
-type Dd' =
+type Dd_' =
   ( tag :: String
-  , attributes :: Array (Attribute Dd)
+  , attributes :: Array (Attribute Dd_)
   )
-newtype Dd = Dd { | Dd' }
-unsafeUnDd :: Dd -> { | Dd' }
-unsafeUnDd (Dd unsafe) = unsafe
+newtype Dd_ = Dd_ { | Dd_' }
+unsafeUnDd_ :: Dd_ -> { | Dd_' }
+unsafeUnDd_ (Dd_ unsafe) = unsafe
 
-instance typeToSymDd ::
-  TypeToSym Dd "dd"
+instance typeToSymDd_ ::
+  TypeToSym Dd_ "dd"
 
 dd
   :: forall children
-   . Array (Attribute Dd)
+   . Array (Attribute Dd_)
   -> { | children }
-  -> Element Dd children
-dd = makeElt Dd "dd"
+  -> Element Dd_ children
+dd = makeElt Dd_ "dd"
 
 dd'attr
-  :: Array (Attribute Dd)
-  -> Array (Attribute Dd)
+  :: Array (Attribute Dd_)
+  -> Array (Attribute Dd_)
 dd'attr = identity
 
-data TDd = TDd
+data TDd_ = TDd_
 
-instance typeToSymTDd :: TypeToSym TDd "TDd"
+instance typeToSymTDd_ :: TypeToSym TDd_ "TDd_"
 
-instance semigroupTDd :: Semigroup TDd where
-  append _ _ = TDd
+instance semigroupTDd_ :: Semigroup TDd_ where
+  append _ _ = TDd_
 
-instance monoidTDd :: Monoid TDd where
-  mempty = TDd
+instance monoidTDd_ :: Monoid TDd_ where
+  mempty = TDd_
 
-instance reifyTDd :: ReifyAU Dd TDd where
+instance reifyTDd_ :: ReifyAU Dd_ TDd_ where
   reifyAU = const mempty
-type Del' =
+type Del_' =
   ( tag :: String
-  , attributes :: Array (Attribute Del)
+  , attributes :: Array (Attribute Del_)
   )
-newtype Del = Del { | Del' }
-unsafeUnDel :: Del -> { | Del' }
-unsafeUnDel (Del unsafe) = unsafe
+newtype Del_ = Del_ { | Del_' }
+unsafeUnDel_ :: Del_ -> { | Del_' }
+unsafeUnDel_ (Del_ unsafe) = unsafe
 
-instance typeToSymDel ::
-  TypeToSym Del "del"
+instance typeToSymDel_ ::
+  TypeToSym Del_ "del"
 
 del
   :: forall children
-   . Array (Attribute Del)
+   . Array (Attribute Del_)
   -> { | children }
-  -> Element Del children
-del = makeElt Del "del"
+  -> Element Del_ children
+del = makeElt Del_ "del"
 
 del'attr
-  :: Array (Attribute Del)
-  -> Array (Attribute Del)
+  :: Array (Attribute Del_)
+  -> Array (Attribute Del_)
 del'attr = identity
 
-data TDel = TDel
+data TDel_ = TDel_
 
-instance typeToSymTDel :: TypeToSym TDel "TDel"
+instance typeToSymTDel_ :: TypeToSym TDel_ "TDel_"
 
-instance semigroupTDel :: Semigroup TDel where
-  append _ _ = TDel
+instance semigroupTDel_ :: Semigroup TDel_ where
+  append _ _ = TDel_
 
-instance monoidTDel :: Monoid TDel where
-  mempty = TDel
+instance monoidTDel_ :: Monoid TDel_ where
+  mempty = TDel_
 
-instance reifyTDel :: ReifyAU Del TDel where
+instance reifyTDel_ :: ReifyAU Del_ TDel_ where
   reifyAU = const mempty
-type Details' =
+type Details_' =
   ( tag :: String
-  , attributes :: Array (Attribute Details)
+  , attributes :: Array (Attribute Details_)
   )
-newtype Details = Details { | Details' }
-unsafeUnDetails :: Details -> { | Details' }
-unsafeUnDetails (Details unsafe) = unsafe
+newtype Details_ = Details_ { | Details_' }
+unsafeUnDetails_ :: Details_ -> { | Details_' }
+unsafeUnDetails_ (Details_ unsafe) = unsafe
 
-instance typeToSymDetails ::
-  TypeToSym Details "details"
+instance typeToSymDetails_ ::
+  TypeToSym Details_ "details"
 
 details
   :: forall children
-   . Array (Attribute Details)
+   . Array (Attribute Details_)
   -> { | children }
-  -> Element Details children
-details = makeElt Details "details"
+  -> Element Details_ children
+details = makeElt Details_ "details"
 
 details'attr
-  :: Array (Attribute Details)
-  -> Array (Attribute Details)
+  :: Array (Attribute Details_)
+  -> Array (Attribute Details_)
 details'attr = identity
 
-data TDetails = TDetails
+data TDetails_ = TDetails_
 
-instance typeToSymTDetails :: TypeToSym TDetails "TDetails"
+instance typeToSymTDetails_ :: TypeToSym TDetails_ "TDetails_"
 
-instance semigroupTDetails :: Semigroup TDetails where
-  append _ _ = TDetails
+instance semigroupTDetails_ :: Semigroup TDetails_ where
+  append _ _ = TDetails_
 
-instance monoidTDetails :: Monoid TDetails where
-  mempty = TDetails
+instance monoidTDetails_ :: Monoid TDetails_ where
+  mempty = TDetails_
 
-instance reifyTDetails :: ReifyAU Details TDetails where
+instance reifyTDetails_ :: ReifyAU Details_ TDetails_ where
   reifyAU = const mempty
-type Dfn' =
+type Dfn_' =
   ( tag :: String
-  , attributes :: Array (Attribute Dfn)
+  , attributes :: Array (Attribute Dfn_)
   )
-newtype Dfn = Dfn { | Dfn' }
-unsafeUnDfn :: Dfn -> { | Dfn' }
-unsafeUnDfn (Dfn unsafe) = unsafe
+newtype Dfn_ = Dfn_ { | Dfn_' }
+unsafeUnDfn_ :: Dfn_ -> { | Dfn_' }
+unsafeUnDfn_ (Dfn_ unsafe) = unsafe
 
-instance typeToSymDfn ::
-  TypeToSym Dfn "dfn"
+instance typeToSymDfn_ ::
+  TypeToSym Dfn_ "dfn"
 
 dfn
   :: forall children
-   . Array (Attribute Dfn)
+   . Array (Attribute Dfn_)
   -> { | children }
-  -> Element Dfn children
-dfn = makeElt Dfn "dfn"
+  -> Element Dfn_ children
+dfn = makeElt Dfn_ "dfn"
 
 dfn'attr
-  :: Array (Attribute Dfn)
-  -> Array (Attribute Dfn)
+  :: Array (Attribute Dfn_)
+  -> Array (Attribute Dfn_)
 dfn'attr = identity
 
-data TDfn = TDfn
+data TDfn_ = TDfn_
 
-instance typeToSymTDfn :: TypeToSym TDfn "TDfn"
+instance typeToSymTDfn_ :: TypeToSym TDfn_ "TDfn_"
 
-instance semigroupTDfn :: Semigroup TDfn where
-  append _ _ = TDfn
+instance semigroupTDfn_ :: Semigroup TDfn_ where
+  append _ _ = TDfn_
 
-instance monoidTDfn :: Monoid TDfn where
-  mempty = TDfn
+instance monoidTDfn_ :: Monoid TDfn_ where
+  mempty = TDfn_
 
-instance reifyTDfn :: ReifyAU Dfn TDfn where
+instance reifyTDfn_ :: ReifyAU Dfn_ TDfn_ where
   reifyAU = const mempty
-type Dialog' =
+type Dialog_' =
   ( tag :: String
-  , attributes :: Array (Attribute Dialog)
+  , attributes :: Array (Attribute Dialog_)
   )
-newtype Dialog = Dialog { | Dialog' }
-unsafeUnDialog :: Dialog -> { | Dialog' }
-unsafeUnDialog (Dialog unsafe) = unsafe
+newtype Dialog_ = Dialog_ { | Dialog_' }
+unsafeUnDialog_ :: Dialog_ -> { | Dialog_' }
+unsafeUnDialog_ (Dialog_ unsafe) = unsafe
 
-instance typeToSymDialog ::
-  TypeToSym Dialog "dialog"
+instance typeToSymDialog_ ::
+  TypeToSym Dialog_ "dialog"
 
 dialog
   :: forall children
-   . Array (Attribute Dialog)
+   . Array (Attribute Dialog_)
   -> { | children }
-  -> Element Dialog children
-dialog = makeElt Dialog "dialog"
+  -> Element Dialog_ children
+dialog = makeElt Dialog_ "dialog"
 
 dialog'attr
-  :: Array (Attribute Dialog)
-  -> Array (Attribute Dialog)
+  :: Array (Attribute Dialog_)
+  -> Array (Attribute Dialog_)
 dialog'attr = identity
 
-data TDialog = TDialog
+data TDialog_ = TDialog_
 
-instance typeToSymTDialog :: TypeToSym TDialog "TDialog"
+instance typeToSymTDialog_ :: TypeToSym TDialog_ "TDialog_"
 
-instance semigroupTDialog :: Semigroup TDialog where
-  append _ _ = TDialog
+instance semigroupTDialog_ :: Semigroup TDialog_ where
+  append _ _ = TDialog_
 
-instance monoidTDialog :: Monoid TDialog where
-  mempty = TDialog
+instance monoidTDialog_ :: Monoid TDialog_ where
+  mempty = TDialog_
 
-instance reifyTDialog :: ReifyAU Dialog TDialog where
+instance reifyTDialog_ :: ReifyAU Dialog_ TDialog_ where
   reifyAU = const mempty
-type Dir' =
+type Dir_' =
   ( tag :: String
-  , attributes :: Array (Attribute Dir)
+  , attributes :: Array (Attribute Dir_)
   )
-newtype Dir = Dir { | Dir' }
-unsafeUnDir :: Dir -> { | Dir' }
-unsafeUnDir (Dir unsafe) = unsafe
+newtype Dir_ = Dir_ { | Dir_' }
+unsafeUnDir_ :: Dir_ -> { | Dir_' }
+unsafeUnDir_ (Dir_ unsafe) = unsafe
 
-instance typeToSymDir ::
-  TypeToSym Dir "dir"
+instance typeToSymDir_ ::
+  TypeToSym Dir_ "dir"
 
 dir
   :: forall children
-   . Array (Attribute Dir)
+   . Array (Attribute Dir_)
   -> { | children }
-  -> Element Dir children
-dir = makeElt Dir "dir"
+  -> Element Dir_ children
+dir = makeElt Dir_ "dir"
 
 dir'attr
-  :: Array (Attribute Dir)
-  -> Array (Attribute Dir)
+  :: Array (Attribute Dir_)
+  -> Array (Attribute Dir_)
 dir'attr = identity
 
-data TDir = TDir
+data TDir_ = TDir_
 
-instance typeToSymTDir :: TypeToSym TDir "TDir"
+instance typeToSymTDir_ :: TypeToSym TDir_ "TDir_"
 
-instance semigroupTDir :: Semigroup TDir where
-  append _ _ = TDir
+instance semigroupTDir_ :: Semigroup TDir_ where
+  append _ _ = TDir_
 
-instance monoidTDir :: Monoid TDir where
-  mempty = TDir
+instance monoidTDir_ :: Monoid TDir_ where
+  mempty = TDir_
 
-instance reifyTDir :: ReifyAU Dir TDir where
+instance reifyTDir_ :: ReifyAU Dir_ TDir_ where
   reifyAU = const mempty
-type Div' =
+type Div_' =
   ( tag :: String
-  , attributes :: Array (Attribute Div)
+  , attributes :: Array (Attribute Div_)
   )
-newtype Div = Div { | Div' }
-unsafeUnDiv :: Div -> { | Div' }
-unsafeUnDiv (Div unsafe) = unsafe
+newtype Div_ = Div_ { | Div_' }
+unsafeUnDiv_ :: Div_ -> { | Div_' }
+unsafeUnDiv_ (Div_ unsafe) = unsafe
 
-instance typeToSymDiv ::
-  TypeToSym Div "div"
+instance typeToSymDiv_ ::
+  TypeToSym Div_ "div"
 
 div
   :: forall children
-   . Array (Attribute Div)
+   . Array (Attribute Div_)
   -> { | children }
-  -> Element Div children
-div = makeElt Div "div"
+  -> Element Div_ children
+div = makeElt Div_ "div"
 
 div'attr
-  :: Array (Attribute Div)
-  -> Array (Attribute Div)
+  :: Array (Attribute Div_)
+  -> Array (Attribute Div_)
 div'attr = identity
 
-data TDiv = TDiv
+data TDiv_ = TDiv_
 
-instance typeToSymTDiv :: TypeToSym TDiv "TDiv"
+instance typeToSymTDiv_ :: TypeToSym TDiv_ "TDiv_"
 
-instance semigroupTDiv :: Semigroup TDiv where
-  append _ _ = TDiv
+instance semigroupTDiv_ :: Semigroup TDiv_ where
+  append _ _ = TDiv_
 
-instance monoidTDiv :: Monoid TDiv where
-  mempty = TDiv
+instance monoidTDiv_ :: Monoid TDiv_ where
+  mempty = TDiv_
 
-instance reifyTDiv :: ReifyAU Div TDiv where
+instance reifyTDiv_ :: ReifyAU Div_ TDiv_ where
   reifyAU = const mempty
-type Dl' =
+type Dl_' =
   ( tag :: String
-  , attributes :: Array (Attribute Dl)
+  , attributes :: Array (Attribute Dl_)
   )
-newtype Dl = Dl { | Dl' }
-unsafeUnDl :: Dl -> { | Dl' }
-unsafeUnDl (Dl unsafe) = unsafe
+newtype Dl_ = Dl_ { | Dl_' }
+unsafeUnDl_ :: Dl_ -> { | Dl_' }
+unsafeUnDl_ (Dl_ unsafe) = unsafe
 
-instance typeToSymDl ::
-  TypeToSym Dl "dl"
+instance typeToSymDl_ ::
+  TypeToSym Dl_ "dl"
 
 dl
   :: forall children
-   . Array (Attribute Dl)
+   . Array (Attribute Dl_)
   -> { | children }
-  -> Element Dl children
-dl = makeElt Dl "dl"
+  -> Element Dl_ children
+dl = makeElt Dl_ "dl"
 
 dl'attr
-  :: Array (Attribute Dl)
-  -> Array (Attribute Dl)
+  :: Array (Attribute Dl_)
+  -> Array (Attribute Dl_)
 dl'attr = identity
 
-data TDl = TDl
+data TDl_ = TDl_
 
-instance typeToSymTDl :: TypeToSym TDl "TDl"
+instance typeToSymTDl_ :: TypeToSym TDl_ "TDl_"
 
-instance semigroupTDl :: Semigroup TDl where
-  append _ _ = TDl
+instance semigroupTDl_ :: Semigroup TDl_ where
+  append _ _ = TDl_
 
-instance monoidTDl :: Monoid TDl where
-  mempty = TDl
+instance monoidTDl_ :: Monoid TDl_ where
+  mempty = TDl_
 
-instance reifyTDl :: ReifyAU Dl TDl where
+instance reifyTDl_ :: ReifyAU Dl_ TDl_ where
   reifyAU = const mempty
-type Dt' =
+type Dt_' =
   ( tag :: String
-  , attributes :: Array (Attribute Dt)
+  , attributes :: Array (Attribute Dt_)
   )
-newtype Dt = Dt { | Dt' }
-unsafeUnDt :: Dt -> { | Dt' }
-unsafeUnDt (Dt unsafe) = unsafe
+newtype Dt_ = Dt_ { | Dt_' }
+unsafeUnDt_ :: Dt_ -> { | Dt_' }
+unsafeUnDt_ (Dt_ unsafe) = unsafe
 
-instance typeToSymDt ::
-  TypeToSym Dt "dt"
+instance typeToSymDt_ ::
+  TypeToSym Dt_ "dt"
 
 dt
   :: forall children
-   . Array (Attribute Dt)
+   . Array (Attribute Dt_)
   -> { | children }
-  -> Element Dt children
-dt = makeElt Dt "dt"
+  -> Element Dt_ children
+dt = makeElt Dt_ "dt"
 
 dt'attr
-  :: Array (Attribute Dt)
-  -> Array (Attribute Dt)
+  :: Array (Attribute Dt_)
+  -> Array (Attribute Dt_)
 dt'attr = identity
 
-data TDt = TDt
+data TDt_ = TDt_
 
-instance typeToSymTDt :: TypeToSym TDt "TDt"
+instance typeToSymTDt_ :: TypeToSym TDt_ "TDt_"
 
-instance semigroupTDt :: Semigroup TDt where
-  append _ _ = TDt
+instance semigroupTDt_ :: Semigroup TDt_ where
+  append _ _ = TDt_
 
-instance monoidTDt :: Monoid TDt where
-  mempty = TDt
+instance monoidTDt_ :: Monoid TDt_ where
+  mempty = TDt_
 
-instance reifyTDt :: ReifyAU Dt TDt where
+instance reifyTDt_ :: ReifyAU Dt_ TDt_ where
   reifyAU = const mempty
-type Em' =
+type Em_' =
   ( tag :: String
-  , attributes :: Array (Attribute Em)
+  , attributes :: Array (Attribute Em_)
   )
-newtype Em = Em { | Em' }
-unsafeUnEm :: Em -> { | Em' }
-unsafeUnEm (Em unsafe) = unsafe
+newtype Em_ = Em_ { | Em_' }
+unsafeUnEm_ :: Em_ -> { | Em_' }
+unsafeUnEm_ (Em_ unsafe) = unsafe
 
-instance typeToSymEm ::
-  TypeToSym Em "em"
+instance typeToSymEm_ ::
+  TypeToSym Em_ "em"
 
 em
   :: forall children
-   . Array (Attribute Em)
+   . Array (Attribute Em_)
   -> { | children }
-  -> Element Em children
-em = makeElt Em "em"
+  -> Element Em_ children
+em = makeElt Em_ "em"
 
 em'attr
-  :: Array (Attribute Em)
-  -> Array (Attribute Em)
+  :: Array (Attribute Em_)
+  -> Array (Attribute Em_)
 em'attr = identity
 
-data TEm = TEm
+data TEm_ = TEm_
 
-instance typeToSymTEm :: TypeToSym TEm "TEm"
+instance typeToSymTEm_ :: TypeToSym TEm_ "TEm_"
 
-instance semigroupTEm :: Semigroup TEm where
-  append _ _ = TEm
+instance semigroupTEm_ :: Semigroup TEm_ where
+  append _ _ = TEm_
 
-instance monoidTEm :: Monoid TEm where
-  mempty = TEm
+instance monoidTEm_ :: Monoid TEm_ where
+  mempty = TEm_
 
-instance reifyTEm :: ReifyAU Em TEm where
+instance reifyTEm_ :: ReifyAU Em_ TEm_ where
   reifyAU = const mempty
-type Embed' =
+type Embed_' =
   ( tag :: String
-  , attributes :: Array (Attribute Embed)
+  , attributes :: Array (Attribute Embed_)
   )
-newtype Embed = Embed { | Embed' }
-unsafeUnEmbed :: Embed -> { | Embed' }
-unsafeUnEmbed (Embed unsafe) = unsafe
+newtype Embed_ = Embed_ { | Embed_' }
+unsafeUnEmbed_ :: Embed_ -> { | Embed_' }
+unsafeUnEmbed_ (Embed_ unsafe) = unsafe
 
-instance typeToSymEmbed ::
-  TypeToSym Embed "embed"
+instance typeToSymEmbed_ ::
+  TypeToSym Embed_ "embed"
 
 embed
   :: forall children
-   . Array (Attribute Embed)
+   . Array (Attribute Embed_)
   -> { | children }
-  -> Element Embed children
-embed = makeElt Embed "embed"
+  -> Element Embed_ children
+embed = makeElt Embed_ "embed"
 
 embed'attr
-  :: Array (Attribute Embed)
-  -> Array (Attribute Embed)
+  :: Array (Attribute Embed_)
+  -> Array (Attribute Embed_)
 embed'attr = identity
 
-data TEmbed = TEmbed
+data TEmbed_ = TEmbed_
 
-instance typeToSymTEmbed :: TypeToSym TEmbed "TEmbed"
+instance typeToSymTEmbed_ :: TypeToSym TEmbed_ "TEmbed_"
 
-instance semigroupTEmbed :: Semigroup TEmbed where
-  append _ _ = TEmbed
+instance semigroupTEmbed_ :: Semigroup TEmbed_ where
+  append _ _ = TEmbed_
 
-instance monoidTEmbed :: Monoid TEmbed where
-  mempty = TEmbed
+instance monoidTEmbed_ :: Monoid TEmbed_ where
+  mempty = TEmbed_
 
-instance reifyTEmbed :: ReifyAU Embed TEmbed where
+instance reifyTEmbed_ :: ReifyAU Embed_ TEmbed_ where
   reifyAU = const mempty
-type Fieldset' =
+type Fieldset_' =
   ( tag :: String
-  , attributes :: Array (Attribute Fieldset)
+  , attributes :: Array (Attribute Fieldset_)
   )
-newtype Fieldset = Fieldset { | Fieldset' }
-unsafeUnFieldset :: Fieldset -> { | Fieldset' }
-unsafeUnFieldset (Fieldset unsafe) = unsafe
+newtype Fieldset_ = Fieldset_ { | Fieldset_' }
+unsafeUnFieldset_ :: Fieldset_ -> { | Fieldset_' }
+unsafeUnFieldset_ (Fieldset_ unsafe) = unsafe
 
-instance typeToSymFieldset ::
-  TypeToSym Fieldset "fieldset"
+instance typeToSymFieldset_ ::
+  TypeToSym Fieldset_ "fieldset"
 
 fieldset
   :: forall children
-   . Array (Attribute Fieldset)
+   . Array (Attribute Fieldset_)
   -> { | children }
-  -> Element Fieldset children
-fieldset = makeElt Fieldset "fieldset"
+  -> Element Fieldset_ children
+fieldset = makeElt Fieldset_ "fieldset"
 
 fieldset'attr
-  :: Array (Attribute Fieldset)
-  -> Array (Attribute Fieldset)
+  :: Array (Attribute Fieldset_)
+  -> Array (Attribute Fieldset_)
 fieldset'attr = identity
 
-data TFieldset = TFieldset
+data TFieldset_ = TFieldset_
 
-instance typeToSymTFieldset :: TypeToSym TFieldset "TFieldset"
+instance typeToSymTFieldset_ :: TypeToSym TFieldset_ "TFieldset_"
 
-instance semigroupTFieldset :: Semigroup TFieldset where
-  append _ _ = TFieldset
+instance semigroupTFieldset_ :: Semigroup TFieldset_ where
+  append _ _ = TFieldset_
 
-instance monoidTFieldset :: Monoid TFieldset where
-  mempty = TFieldset
+instance monoidTFieldset_ :: Monoid TFieldset_ where
+  mempty = TFieldset_
 
-instance reifyTFieldset :: ReifyAU Fieldset TFieldset where
+instance reifyTFieldset_ :: ReifyAU Fieldset_ TFieldset_ where
   reifyAU = const mempty
-type Figcaption' =
+type Figcaption_' =
   ( tag :: String
-  , attributes :: Array (Attribute Figcaption)
+  , attributes :: Array (Attribute Figcaption_)
   )
-newtype Figcaption = Figcaption { | Figcaption' }
-unsafeUnFigcaption :: Figcaption -> { | Figcaption' }
-unsafeUnFigcaption (Figcaption unsafe) = unsafe
+newtype Figcaption_ = Figcaption_ { | Figcaption_' }
+unsafeUnFigcaption_ :: Figcaption_ -> { | Figcaption_' }
+unsafeUnFigcaption_ (Figcaption_ unsafe) = unsafe
 
-instance typeToSymFigcaption ::
-  TypeToSym Figcaption "figcaption"
+instance typeToSymFigcaption_ ::
+  TypeToSym Figcaption_ "figcaption"
 
 figcaption
   :: forall children
-   . Array (Attribute Figcaption)
+   . Array (Attribute Figcaption_)
   -> { | children }
-  -> Element Figcaption children
-figcaption = makeElt Figcaption "figcaption"
+  -> Element Figcaption_ children
+figcaption = makeElt Figcaption_ "figcaption"
 
 figcaption'attr
-  :: Array (Attribute Figcaption)
-  -> Array (Attribute Figcaption)
+  :: Array (Attribute Figcaption_)
+  -> Array (Attribute Figcaption_)
 figcaption'attr = identity
 
-data TFigcaption = TFigcaption
+data TFigcaption_ = TFigcaption_
 
-instance typeToSymTFigcaption :: TypeToSym TFigcaption "TFigcaption"
+instance typeToSymTFigcaption_ :: TypeToSym TFigcaption_ "TFigcaption_"
 
-instance semigroupTFigcaption :: Semigroup TFigcaption where
-  append _ _ = TFigcaption
+instance semigroupTFigcaption_ :: Semigroup TFigcaption_ where
+  append _ _ = TFigcaption_
 
-instance monoidTFigcaption :: Monoid TFigcaption where
-  mempty = TFigcaption
+instance monoidTFigcaption_ :: Monoid TFigcaption_ where
+  mempty = TFigcaption_
 
-instance reifyTFigcaption :: ReifyAU Figcaption TFigcaption where
+instance reifyTFigcaption_ :: ReifyAU Figcaption_ TFigcaption_ where
   reifyAU = const mempty
-type Figure' =
+type Figure_' =
   ( tag :: String
-  , attributes :: Array (Attribute Figure)
+  , attributes :: Array (Attribute Figure_)
   )
-newtype Figure = Figure { | Figure' }
-unsafeUnFigure :: Figure -> { | Figure' }
-unsafeUnFigure (Figure unsafe) = unsafe
+newtype Figure_ = Figure_ { | Figure_' }
+unsafeUnFigure_ :: Figure_ -> { | Figure_' }
+unsafeUnFigure_ (Figure_ unsafe) = unsafe
 
-instance typeToSymFigure ::
-  TypeToSym Figure "figure"
+instance typeToSymFigure_ ::
+  TypeToSym Figure_ "figure"
 
 figure
   :: forall children
-   . Array (Attribute Figure)
+   . Array (Attribute Figure_)
   -> { | children }
-  -> Element Figure children
-figure = makeElt Figure "figure"
+  -> Element Figure_ children
+figure = makeElt Figure_ "figure"
 
 figure'attr
-  :: Array (Attribute Figure)
-  -> Array (Attribute Figure)
+  :: Array (Attribute Figure_)
+  -> Array (Attribute Figure_)
 figure'attr = identity
 
-data TFigure = TFigure
+data TFigure_ = TFigure_
 
-instance typeToSymTFigure :: TypeToSym TFigure "TFigure"
+instance typeToSymTFigure_ :: TypeToSym TFigure_ "TFigure_"
 
-instance semigroupTFigure :: Semigroup TFigure where
-  append _ _ = TFigure
+instance semigroupTFigure_ :: Semigroup TFigure_ where
+  append _ _ = TFigure_
 
-instance monoidTFigure :: Monoid TFigure where
-  mempty = TFigure
+instance monoidTFigure_ :: Monoid TFigure_ where
+  mempty = TFigure_
 
-instance reifyTFigure :: ReifyAU Figure TFigure where
+instance reifyTFigure_ :: ReifyAU Figure_ TFigure_ where
   reifyAU = const mempty
-type Font' =
+type Font_' =
   ( tag :: String
-  , attributes :: Array (Attribute Font)
+  , attributes :: Array (Attribute Font_)
   )
-newtype Font = Font { | Font' }
-unsafeUnFont :: Font -> { | Font' }
-unsafeUnFont (Font unsafe) = unsafe
+newtype Font_ = Font_ { | Font_' }
+unsafeUnFont_ :: Font_ -> { | Font_' }
+unsafeUnFont_ (Font_ unsafe) = unsafe
 
-instance typeToSymFont ::
-  TypeToSym Font "font"
+instance typeToSymFont_ ::
+  TypeToSym Font_ "font"
 
 font
   :: forall children
-   . Array (Attribute Font)
+   . Array (Attribute Font_)
   -> { | children }
-  -> Element Font children
-font = makeElt Font "font"
+  -> Element Font_ children
+font = makeElt Font_ "font"
 
 font'attr
-  :: Array (Attribute Font)
-  -> Array (Attribute Font)
+  :: Array (Attribute Font_)
+  -> Array (Attribute Font_)
 font'attr = identity
 
-data TFont = TFont
+data TFont_ = TFont_
 
-instance typeToSymTFont :: TypeToSym TFont "TFont"
+instance typeToSymTFont_ :: TypeToSym TFont_ "TFont_"
 
-instance semigroupTFont :: Semigroup TFont where
-  append _ _ = TFont
+instance semigroupTFont_ :: Semigroup TFont_ where
+  append _ _ = TFont_
 
-instance monoidTFont :: Monoid TFont where
-  mempty = TFont
+instance monoidTFont_ :: Monoid TFont_ where
+  mempty = TFont_
 
-instance reifyTFont :: ReifyAU Font TFont where
+instance reifyTFont_ :: ReifyAU Font_ TFont_ where
   reifyAU = const mempty
-type Footer' =
+type Footer_' =
   ( tag :: String
-  , attributes :: Array (Attribute Footer)
+  , attributes :: Array (Attribute Footer_)
   )
-newtype Footer = Footer { | Footer' }
-unsafeUnFooter :: Footer -> { | Footer' }
-unsafeUnFooter (Footer unsafe) = unsafe
+newtype Footer_ = Footer_ { | Footer_' }
+unsafeUnFooter_ :: Footer_ -> { | Footer_' }
+unsafeUnFooter_ (Footer_ unsafe) = unsafe
 
-instance typeToSymFooter ::
-  TypeToSym Footer "footer"
+instance typeToSymFooter_ ::
+  TypeToSym Footer_ "footer"
 
 footer
   :: forall children
-   . Array (Attribute Footer)
+   . Array (Attribute Footer_)
   -> { | children }
-  -> Element Footer children
-footer = makeElt Footer "footer"
+  -> Element Footer_ children
+footer = makeElt Footer_ "footer"
 
 footer'attr
-  :: Array (Attribute Footer)
-  -> Array (Attribute Footer)
+  :: Array (Attribute Footer_)
+  -> Array (Attribute Footer_)
 footer'attr = identity
 
-data TFooter = TFooter
+data TFooter_ = TFooter_
 
-instance typeToSymTFooter :: TypeToSym TFooter "TFooter"
+instance typeToSymTFooter_ :: TypeToSym TFooter_ "TFooter_"
 
-instance semigroupTFooter :: Semigroup TFooter where
-  append _ _ = TFooter
+instance semigroupTFooter_ :: Semigroup TFooter_ where
+  append _ _ = TFooter_
 
-instance monoidTFooter :: Monoid TFooter where
-  mempty = TFooter
+instance monoidTFooter_ :: Monoid TFooter_ where
+  mempty = TFooter_
 
-instance reifyTFooter :: ReifyAU Footer TFooter where
+instance reifyTFooter_ :: ReifyAU Footer_ TFooter_ where
   reifyAU = const mempty
-type Form' =
+type Form_' =
   ( tag :: String
-  , attributes :: Array (Attribute Form)
+  , attributes :: Array (Attribute Form_)
   )
-newtype Form = Form { | Form' }
-unsafeUnForm :: Form -> { | Form' }
-unsafeUnForm (Form unsafe) = unsafe
+newtype Form_ = Form_ { | Form_' }
+unsafeUnForm_ :: Form_ -> { | Form_' }
+unsafeUnForm_ (Form_ unsafe) = unsafe
 
-instance typeToSymForm ::
-  TypeToSym Form "form"
+instance typeToSymForm_ ::
+  TypeToSym Form_ "form"
 
 form
   :: forall children
-   . Array (Attribute Form)
+   . Array (Attribute Form_)
   -> { | children }
-  -> Element Form children
-form = makeElt Form "form"
+  -> Element Form_ children
+form = makeElt Form_ "form"
 
 form'attr
-  :: Array (Attribute Form)
-  -> Array (Attribute Form)
+  :: Array (Attribute Form_)
+  -> Array (Attribute Form_)
 form'attr = identity
 
-data TForm = TForm
+data TForm_ = TForm_
 
-instance typeToSymTForm :: TypeToSym TForm "TForm"
+instance typeToSymTForm_ :: TypeToSym TForm_ "TForm_"
 
-instance semigroupTForm :: Semigroup TForm where
-  append _ _ = TForm
+instance semigroupTForm_ :: Semigroup TForm_ where
+  append _ _ = TForm_
 
-instance monoidTForm :: Monoid TForm where
-  mempty = TForm
+instance monoidTForm_ :: Monoid TForm_ where
+  mempty = TForm_
 
-instance reifyTForm :: ReifyAU Form TForm where
+instance reifyTForm_ :: ReifyAU Form_ TForm_ where
   reifyAU = const mempty
-type Frame' =
+type Frame_' =
   ( tag :: String
-  , attributes :: Array (Attribute Frame)
+  , attributes :: Array (Attribute Frame_)
   )
-newtype Frame = Frame { | Frame' }
-unsafeUnFrame :: Frame -> { | Frame' }
-unsafeUnFrame (Frame unsafe) = unsafe
+newtype Frame_ = Frame_ { | Frame_' }
+unsafeUnFrame_ :: Frame_ -> { | Frame_' }
+unsafeUnFrame_ (Frame_ unsafe) = unsafe
 
-instance typeToSymFrame ::
-  TypeToSym Frame "frame"
+instance typeToSymFrame_ ::
+  TypeToSym Frame_ "frame"
 
 frame
   :: forall children
-   . Array (Attribute Frame)
+   . Array (Attribute Frame_)
   -> { | children }
-  -> Element Frame children
-frame = makeElt Frame "frame"
+  -> Element Frame_ children
+frame = makeElt Frame_ "frame"
 
 frame'attr
-  :: Array (Attribute Frame)
-  -> Array (Attribute Frame)
+  :: Array (Attribute Frame_)
+  -> Array (Attribute Frame_)
 frame'attr = identity
 
-data TFrame = TFrame
+data TFrame_ = TFrame_
 
-instance typeToSymTFrame :: TypeToSym TFrame "TFrame"
+instance typeToSymTFrame_ :: TypeToSym TFrame_ "TFrame_"
 
-instance semigroupTFrame :: Semigroup TFrame where
-  append _ _ = TFrame
+instance semigroupTFrame_ :: Semigroup TFrame_ where
+  append _ _ = TFrame_
 
-instance monoidTFrame :: Monoid TFrame where
-  mempty = TFrame
+instance monoidTFrame_ :: Monoid TFrame_ where
+  mempty = TFrame_
 
-instance reifyTFrame :: ReifyAU Frame TFrame where
+instance reifyTFrame_ :: ReifyAU Frame_ TFrame_ where
   reifyAU = const mempty
-type Frameset' =
+type Frameset_' =
   ( tag :: String
-  , attributes :: Array (Attribute Frameset)
+  , attributes :: Array (Attribute Frameset_)
   )
-newtype Frameset = Frameset { | Frameset' }
-unsafeUnFrameset :: Frameset -> { | Frameset' }
-unsafeUnFrameset (Frameset unsafe) = unsafe
+newtype Frameset_ = Frameset_ { | Frameset_' }
+unsafeUnFrameset_ :: Frameset_ -> { | Frameset_' }
+unsafeUnFrameset_ (Frameset_ unsafe) = unsafe
 
-instance typeToSymFrameset ::
-  TypeToSym Frameset "frameset"
+instance typeToSymFrameset_ ::
+  TypeToSym Frameset_ "frameset"
 
 frameset
   :: forall children
-   . Array (Attribute Frameset)
+   . Array (Attribute Frameset_)
   -> { | children }
-  -> Element Frameset children
-frameset = makeElt Frameset "frameset"
+  -> Element Frameset_ children
+frameset = makeElt Frameset_ "frameset"
 
 frameset'attr
-  :: Array (Attribute Frameset)
-  -> Array (Attribute Frameset)
+  :: Array (Attribute Frameset_)
+  -> Array (Attribute Frameset_)
 frameset'attr = identity
 
-data TFrameset = TFrameset
+data TFrameset_ = TFrameset_
 
-instance typeToSymTFrameset :: TypeToSym TFrameset "TFrameset"
+instance typeToSymTFrameset_ :: TypeToSym TFrameset_ "TFrameset_"
 
-instance semigroupTFrameset :: Semigroup TFrameset where
-  append _ _ = TFrameset
+instance semigroupTFrameset_ :: Semigroup TFrameset_ where
+  append _ _ = TFrameset_
 
-instance monoidTFrameset :: Monoid TFrameset where
-  mempty = TFrameset
+instance monoidTFrameset_ :: Monoid TFrameset_ where
+  mempty = TFrameset_
 
-instance reifyTFrameset :: ReifyAU Frameset TFrameset where
+instance reifyTFrameset_ :: ReifyAU Frameset_ TFrameset_ where
   reifyAU = const mempty
-type H1' =
+type H1_' =
   ( tag :: String
-  , attributes :: Array (Attribute H1)
+  , attributes :: Array (Attribute H1_)
   )
-newtype H1 = H1 { | H1' }
-unsafeUnH1 :: H1 -> { | H1' }
-unsafeUnH1 (H1 unsafe) = unsafe
+newtype H1_ = H1_ { | H1_' }
+unsafeUnH1_ :: H1_ -> { | H1_' }
+unsafeUnH1_ (H1_ unsafe) = unsafe
 
-instance typeToSymH1 ::
-  TypeToSym H1 "h1"
+instance typeToSymH1_ ::
+  TypeToSym H1_ "h1"
 
 h1
   :: forall children
-   . Array (Attribute H1)
+   . Array (Attribute H1_)
   -> { | children }
-  -> Element H1 children
-h1 = makeElt H1 "h1"
+  -> Element H1_ children
+h1 = makeElt H1_ "h1"
 
 h1'attr
-  :: Array (Attribute H1)
-  -> Array (Attribute H1)
+  :: Array (Attribute H1_)
+  -> Array (Attribute H1_)
 h1'attr = identity
 
-data TH1 = TH1
+data TH1_ = TH1_
 
-instance typeToSymTH1 :: TypeToSym TH1 "TH1"
+instance typeToSymTH1_ :: TypeToSym TH1_ "TH1_"
 
-instance semigroupTH1 :: Semigroup TH1 where
-  append _ _ = TH1
+instance semigroupTH1_ :: Semigroup TH1_ where
+  append _ _ = TH1_
 
-instance monoidTH1 :: Monoid TH1 where
-  mempty = TH1
+instance monoidTH1_ :: Monoid TH1_ where
+  mempty = TH1_
 
-instance reifyTH1 :: ReifyAU H1 TH1 where
+instance reifyTH1_ :: ReifyAU H1_ TH1_ where
   reifyAU = const mempty
-type H2' =
+type H2_' =
   ( tag :: String
-  , attributes :: Array (Attribute H2)
+  , attributes :: Array (Attribute H2_)
   )
-newtype H2 = H2 { | H2' }
-unsafeUnH2 :: H2 -> { | H2' }
-unsafeUnH2 (H2 unsafe) = unsafe
+newtype H2_ = H2_ { | H2_' }
+unsafeUnH2_ :: H2_ -> { | H2_' }
+unsafeUnH2_ (H2_ unsafe) = unsafe
 
-instance typeToSymH2 ::
-  TypeToSym H2 "h2"
+instance typeToSymH2_ ::
+  TypeToSym H2_ "h2"
 
 h2
   :: forall children
-   . Array (Attribute H2)
+   . Array (Attribute H2_)
   -> { | children }
-  -> Element H2 children
-h2 = makeElt H2 "h2"
+  -> Element H2_ children
+h2 = makeElt H2_ "h2"
 
 h2'attr
-  :: Array (Attribute H2)
-  -> Array (Attribute H2)
+  :: Array (Attribute H2_)
+  -> Array (Attribute H2_)
 h2'attr = identity
 
-data TH2 = TH2
+data TH2_ = TH2_
 
-instance typeToSymTH2 :: TypeToSym TH2 "TH2"
+instance typeToSymTH2_ :: TypeToSym TH2_ "TH2_"
 
-instance semigroupTH2 :: Semigroup TH2 where
-  append _ _ = TH2
+instance semigroupTH2_ :: Semigroup TH2_ where
+  append _ _ = TH2_
 
-instance monoidTH2 :: Monoid TH2 where
-  mempty = TH2
+instance monoidTH2_ :: Monoid TH2_ where
+  mempty = TH2_
 
-instance reifyTH2 :: ReifyAU H2 TH2 where
+instance reifyTH2_ :: ReifyAU H2_ TH2_ where
   reifyAU = const mempty
-type H3' =
+type H3_' =
   ( tag :: String
-  , attributes :: Array (Attribute H3)
+  , attributes :: Array (Attribute H3_)
   )
-newtype H3 = H3 { | H3' }
-unsafeUnH3 :: H3 -> { | H3' }
-unsafeUnH3 (H3 unsafe) = unsafe
+newtype H3_ = H3_ { | H3_' }
+unsafeUnH3_ :: H3_ -> { | H3_' }
+unsafeUnH3_ (H3_ unsafe) = unsafe
 
-instance typeToSymH3 ::
-  TypeToSym H3 "h3"
+instance typeToSymH3_ ::
+  TypeToSym H3_ "h3"
 
 h3
   :: forall children
-   . Array (Attribute H3)
+   . Array (Attribute H3_)
   -> { | children }
-  -> Element H3 children
-h3 = makeElt H3 "h3"
+  -> Element H3_ children
+h3 = makeElt H3_ "h3"
 
 h3'attr
-  :: Array (Attribute H3)
-  -> Array (Attribute H3)
+  :: Array (Attribute H3_)
+  -> Array (Attribute H3_)
 h3'attr = identity
 
-data TH3 = TH3
+data TH3_ = TH3_
 
-instance typeToSymTH3 :: TypeToSym TH3 "TH3"
+instance typeToSymTH3_ :: TypeToSym TH3_ "TH3_"
 
-instance semigroupTH3 :: Semigroup TH3 where
-  append _ _ = TH3
+instance semigroupTH3_ :: Semigroup TH3_ where
+  append _ _ = TH3_
 
-instance monoidTH3 :: Monoid TH3 where
-  mempty = TH3
+instance monoidTH3_ :: Monoid TH3_ where
+  mempty = TH3_
 
-instance reifyTH3 :: ReifyAU H3 TH3 where
+instance reifyTH3_ :: ReifyAU H3_ TH3_ where
   reifyAU = const mempty
-type H4' =
+type H4_' =
   ( tag :: String
-  , attributes :: Array (Attribute H4)
+  , attributes :: Array (Attribute H4_)
   )
-newtype H4 = H4 { | H4' }
-unsafeUnH4 :: H4 -> { | H4' }
-unsafeUnH4 (H4 unsafe) = unsafe
+newtype H4_ = H4_ { | H4_' }
+unsafeUnH4_ :: H4_ -> { | H4_' }
+unsafeUnH4_ (H4_ unsafe) = unsafe
 
-instance typeToSymH4 ::
-  TypeToSym H4 "h4"
+instance typeToSymH4_ ::
+  TypeToSym H4_ "h4"
 
 h4
   :: forall children
-   . Array (Attribute H4)
+   . Array (Attribute H4_)
   -> { | children }
-  -> Element H4 children
-h4 = makeElt H4 "h4"
+  -> Element H4_ children
+h4 = makeElt H4_ "h4"
 
 h4'attr
-  :: Array (Attribute H4)
-  -> Array (Attribute H4)
+  :: Array (Attribute H4_)
+  -> Array (Attribute H4_)
 h4'attr = identity
 
-data TH4 = TH4
+data TH4_ = TH4_
 
-instance typeToSymTH4 :: TypeToSym TH4 "TH4"
+instance typeToSymTH4_ :: TypeToSym TH4_ "TH4_"
 
-instance semigroupTH4 :: Semigroup TH4 where
-  append _ _ = TH4
+instance semigroupTH4_ :: Semigroup TH4_ where
+  append _ _ = TH4_
 
-instance monoidTH4 :: Monoid TH4 where
-  mempty = TH4
+instance monoidTH4_ :: Monoid TH4_ where
+  mempty = TH4_
 
-instance reifyTH4 :: ReifyAU H4 TH4 where
+instance reifyTH4_ :: ReifyAU H4_ TH4_ where
   reifyAU = const mempty
-type H5' =
+type H5_' =
   ( tag :: String
-  , attributes :: Array (Attribute H5)
+  , attributes :: Array (Attribute H5_)
   )
-newtype H5 = H5 { | H5' }
-unsafeUnH5 :: H5 -> { | H5' }
-unsafeUnH5 (H5 unsafe) = unsafe
+newtype H5_ = H5_ { | H5_' }
+unsafeUnH5_ :: H5_ -> { | H5_' }
+unsafeUnH5_ (H5_ unsafe) = unsafe
 
-instance typeToSymH5 ::
-  TypeToSym H5 "h5"
+instance typeToSymH5_ ::
+  TypeToSym H5_ "h5"
 
 h5
   :: forall children
-   . Array (Attribute H5)
+   . Array (Attribute H5_)
   -> { | children }
-  -> Element H5 children
-h5 = makeElt H5 "h5"
+  -> Element H5_ children
+h5 = makeElt H5_ "h5"
 
 h5'attr
-  :: Array (Attribute H5)
-  -> Array (Attribute H5)
+  :: Array (Attribute H5_)
+  -> Array (Attribute H5_)
 h5'attr = identity
 
-data TH5 = TH5
+data TH5_ = TH5_
 
-instance typeToSymTH5 :: TypeToSym TH5 "TH5"
+instance typeToSymTH5_ :: TypeToSym TH5_ "TH5_"
 
-instance semigroupTH5 :: Semigroup TH5 where
-  append _ _ = TH5
+instance semigroupTH5_ :: Semigroup TH5_ where
+  append _ _ = TH5_
 
-instance monoidTH5 :: Monoid TH5 where
-  mempty = TH5
+instance monoidTH5_ :: Monoid TH5_ where
+  mempty = TH5_
 
-instance reifyTH5 :: ReifyAU H5 TH5 where
+instance reifyTH5_ :: ReifyAU H5_ TH5_ where
   reifyAU = const mempty
-type H6' =
+type H6_' =
   ( tag :: String
-  , attributes :: Array (Attribute H6)
+  , attributes :: Array (Attribute H6_)
   )
-newtype H6 = H6 { | H6' }
-unsafeUnH6 :: H6 -> { | H6' }
-unsafeUnH6 (H6 unsafe) = unsafe
+newtype H6_ = H6_ { | H6_' }
+unsafeUnH6_ :: H6_ -> { | H6_' }
+unsafeUnH6_ (H6_ unsafe) = unsafe
 
-instance typeToSymH6 ::
-  TypeToSym H6 "h6"
+instance typeToSymH6_ ::
+  TypeToSym H6_ "h6"
 
 h6
   :: forall children
-   . Array (Attribute H6)
+   . Array (Attribute H6_)
   -> { | children }
-  -> Element H6 children
-h6 = makeElt H6 "h6"
+  -> Element H6_ children
+h6 = makeElt H6_ "h6"
 
 h6'attr
-  :: Array (Attribute H6)
-  -> Array (Attribute H6)
+  :: Array (Attribute H6_)
+  -> Array (Attribute H6_)
 h6'attr = identity
 
-data TH6 = TH6
+data TH6_ = TH6_
 
-instance typeToSymTH6 :: TypeToSym TH6 "TH6"
+instance typeToSymTH6_ :: TypeToSym TH6_ "TH6_"
 
-instance semigroupTH6 :: Semigroup TH6 where
-  append _ _ = TH6
+instance semigroupTH6_ :: Semigroup TH6_ where
+  append _ _ = TH6_
 
-instance monoidTH6 :: Monoid TH6 where
-  mempty = TH6
+instance monoidTH6_ :: Monoid TH6_ where
+  mempty = TH6_
 
-instance reifyTH6 :: ReifyAU H6 TH6 where
+instance reifyTH6_ :: ReifyAU H6_ TH6_ where
   reifyAU = const mempty
-type Head' =
+type Head_' =
   ( tag :: String
-  , attributes :: Array (Attribute Head)
+  , attributes :: Array (Attribute Head_)
   )
-newtype Head = Head { | Head' }
-unsafeUnHead :: Head -> { | Head' }
-unsafeUnHead (Head unsafe) = unsafe
+newtype Head_ = Head_ { | Head_' }
+unsafeUnHead_ :: Head_ -> { | Head_' }
+unsafeUnHead_ (Head_ unsafe) = unsafe
 
-instance typeToSymHead ::
-  TypeToSym Head "head"
+instance typeToSymHead_ ::
+  TypeToSym Head_ "head"
 
 head
   :: forall children
-   . Array (Attribute Head)
+   . Array (Attribute Head_)
   -> { | children }
-  -> Element Head children
-head = makeElt Head "head"
+  -> Element Head_ children
+head = makeElt Head_ "head"
 
 head'attr
-  :: Array (Attribute Head)
-  -> Array (Attribute Head)
+  :: Array (Attribute Head_)
+  -> Array (Attribute Head_)
 head'attr = identity
 
-data THead = THead
+data THead_ = THead_
 
-instance typeToSymTHead :: TypeToSym THead "THead"
+instance typeToSymTHead_ :: TypeToSym THead_ "THead_"
 
-instance semigroupTHead :: Semigroup THead where
-  append _ _ = THead
+instance semigroupTHead_ :: Semigroup THead_ where
+  append _ _ = THead_
 
-instance monoidTHead :: Monoid THead where
-  mempty = THead
+instance monoidTHead_ :: Monoid THead_ where
+  mempty = THead_
 
-instance reifyTHead :: ReifyAU Head THead where
+instance reifyTHead_ :: ReifyAU Head_ THead_ where
   reifyAU = const mempty
-type Header' =
+type Header_' =
   ( tag :: String
-  , attributes :: Array (Attribute Header)
+  , attributes :: Array (Attribute Header_)
   )
-newtype Header = Header { | Header' }
-unsafeUnHeader :: Header -> { | Header' }
-unsafeUnHeader (Header unsafe) = unsafe
+newtype Header_ = Header_ { | Header_' }
+unsafeUnHeader_ :: Header_ -> { | Header_' }
+unsafeUnHeader_ (Header_ unsafe) = unsafe
 
-instance typeToSymHeader ::
-  TypeToSym Header "header"
+instance typeToSymHeader_ ::
+  TypeToSym Header_ "header"
 
 header
   :: forall children
-   . Array (Attribute Header)
+   . Array (Attribute Header_)
   -> { | children }
-  -> Element Header children
-header = makeElt Header "header"
+  -> Element Header_ children
+header = makeElt Header_ "header"
 
 header'attr
-  :: Array (Attribute Header)
-  -> Array (Attribute Header)
+  :: Array (Attribute Header_)
+  -> Array (Attribute Header_)
 header'attr = identity
 
-data THeader = THeader
+data THeader_ = THeader_
 
-instance typeToSymTHeader :: TypeToSym THeader "THeader"
+instance typeToSymTHeader_ :: TypeToSym THeader_ "THeader_"
 
-instance semigroupTHeader :: Semigroup THeader where
-  append _ _ = THeader
+instance semigroupTHeader_ :: Semigroup THeader_ where
+  append _ _ = THeader_
 
-instance monoidTHeader :: Monoid THeader where
-  mempty = THeader
+instance monoidTHeader_ :: Monoid THeader_ where
+  mempty = THeader_
 
-instance reifyTHeader :: ReifyAU Header THeader where
+instance reifyTHeader_ :: ReifyAU Header_ THeader_ where
   reifyAU = const mempty
-type Hr' =
+type Hr_' =
   ( tag :: String
-  , attributes :: Array (Attribute Hr)
+  , attributes :: Array (Attribute Hr_)
   )
-newtype Hr = Hr { | Hr' }
-unsafeUnHr :: Hr -> { | Hr' }
-unsafeUnHr (Hr unsafe) = unsafe
+newtype Hr_ = Hr_ { | Hr_' }
+unsafeUnHr_ :: Hr_ -> { | Hr_' }
+unsafeUnHr_ (Hr_ unsafe) = unsafe
 
-instance typeToSymHr ::
-  TypeToSym Hr "hr"
+instance typeToSymHr_ ::
+  TypeToSym Hr_ "hr"
 
 hr
   :: forall children
-   . Array (Attribute Hr)
+   . Array (Attribute Hr_)
   -> { | children }
-  -> Element Hr children
-hr = makeElt Hr "hr"
+  -> Element Hr_ children
+hr = makeElt Hr_ "hr"
 
 hr'attr
-  :: Array (Attribute Hr)
-  -> Array (Attribute Hr)
+  :: Array (Attribute Hr_)
+  -> Array (Attribute Hr_)
 hr'attr = identity
 
-data THr = THr
+data THr_ = THr_
 
-instance typeToSymTHr :: TypeToSym THr "THr"
+instance typeToSymTHr_ :: TypeToSym THr_ "THr_"
 
-instance semigroupTHr :: Semigroup THr where
-  append _ _ = THr
+instance semigroupTHr_ :: Semigroup THr_ where
+  append _ _ = THr_
 
-instance monoidTHr :: Monoid THr where
-  mempty = THr
+instance monoidTHr_ :: Monoid THr_ where
+  mempty = THr_
 
-instance reifyTHr :: ReifyAU Hr THr where
+instance reifyTHr_ :: ReifyAU Hr_ THr_ where
   reifyAU = const mempty
-type Html' =
+type Html_' =
   ( tag :: String
-  , attributes :: Array (Attribute Html)
+  , attributes :: Array (Attribute Html_)
   )
-newtype Html = Html { | Html' }
-unsafeUnHtml :: Html -> { | Html' }
-unsafeUnHtml (Html unsafe) = unsafe
+newtype Html_ = Html_ { | Html_' }
+unsafeUnHtml_ :: Html_ -> { | Html_' }
+unsafeUnHtml_ (Html_ unsafe) = unsafe
 
-instance typeToSymHtml ::
-  TypeToSym Html "html"
+instance typeToSymHtml_ ::
+  TypeToSym Html_ "html"
 
 html
   :: forall children
-   . Array (Attribute Html)
+   . Array (Attribute Html_)
   -> { | children }
-  -> Element Html children
-html = makeElt Html "html"
+  -> Element Html_ children
+html = makeElt Html_ "html"
 
 html'attr
-  :: Array (Attribute Html)
-  -> Array (Attribute Html)
+  :: Array (Attribute Html_)
+  -> Array (Attribute Html_)
 html'attr = identity
 
-data THtml = THtml
+data THtml_ = THtml_
 
-instance typeToSymTHtml :: TypeToSym THtml "THtml"
+instance typeToSymTHtml_ :: TypeToSym THtml_ "THtml_"
 
-instance semigroupTHtml :: Semigroup THtml where
-  append _ _ = THtml
+instance semigroupTHtml_ :: Semigroup THtml_ where
+  append _ _ = THtml_
 
-instance monoidTHtml :: Monoid THtml where
-  mempty = THtml
+instance monoidTHtml_ :: Monoid THtml_ where
+  mempty = THtml_
 
-instance reifyTHtml :: ReifyAU Html THtml where
+instance reifyTHtml_ :: ReifyAU Html_ THtml_ where
   reifyAU = const mempty
-type I' =
+type I_' =
   ( tag :: String
-  , attributes :: Array (Attribute I)
+  , attributes :: Array (Attribute I_)
   )
-newtype I = I { | I' }
-unsafeUnI :: I -> { | I' }
-unsafeUnI (I unsafe) = unsafe
+newtype I_ = I_ { | I_' }
+unsafeUnI_ :: I_ -> { | I_' }
+unsafeUnI_ (I_ unsafe) = unsafe
 
-instance typeToSymI ::
-  TypeToSym I "i"
+instance typeToSymI_ ::
+  TypeToSym I_ "i"
 
 i
   :: forall children
-   . Array (Attribute I)
+   . Array (Attribute I_)
   -> { | children }
-  -> Element I children
-i = makeElt I "i"
+  -> Element I_ children
+i = makeElt I_ "i"
 
 i'attr
-  :: Array (Attribute I)
-  -> Array (Attribute I)
+  :: Array (Attribute I_)
+  -> Array (Attribute I_)
 i'attr = identity
 
-data TI = TI
+data TI_ = TI_
 
-instance typeToSymTI :: TypeToSym TI "TI"
+instance typeToSymTI_ :: TypeToSym TI_ "TI_"
 
-instance semigroupTI :: Semigroup TI where
-  append _ _ = TI
+instance semigroupTI_ :: Semigroup TI_ where
+  append _ _ = TI_
 
-instance monoidTI :: Monoid TI where
-  mempty = TI
+instance monoidTI_ :: Monoid TI_ where
+  mempty = TI_
 
-instance reifyTI :: ReifyAU I TI where
+instance reifyTI_ :: ReifyAU I_ TI_ where
   reifyAU = const mempty
-type Iframe' =
+type Iframe_' =
   ( tag :: String
-  , attributes :: Array (Attribute Iframe)
+  , attributes :: Array (Attribute Iframe_)
   )
-newtype Iframe = Iframe { | Iframe' }
-unsafeUnIframe :: Iframe -> { | Iframe' }
-unsafeUnIframe (Iframe unsafe) = unsafe
+newtype Iframe_ = Iframe_ { | Iframe_' }
+unsafeUnIframe_ :: Iframe_ -> { | Iframe_' }
+unsafeUnIframe_ (Iframe_ unsafe) = unsafe
 
-instance typeToSymIframe ::
-  TypeToSym Iframe "iframe"
+instance typeToSymIframe_ ::
+  TypeToSym Iframe_ "iframe"
 
 iframe
   :: forall children
-   . Array (Attribute Iframe)
+   . Array (Attribute Iframe_)
   -> { | children }
-  -> Element Iframe children
-iframe = makeElt Iframe "iframe"
+  -> Element Iframe_ children
+iframe = makeElt Iframe_ "iframe"
 
 iframe'attr
-  :: Array (Attribute Iframe)
-  -> Array (Attribute Iframe)
+  :: Array (Attribute Iframe_)
+  -> Array (Attribute Iframe_)
 iframe'attr = identity
 
-data TIframe = TIframe
+data TIframe_ = TIframe_
 
-instance typeToSymTIframe :: TypeToSym TIframe "TIframe"
+instance typeToSymTIframe_ :: TypeToSym TIframe_ "TIframe_"
 
-instance semigroupTIframe :: Semigroup TIframe where
-  append _ _ = TIframe
+instance semigroupTIframe_ :: Semigroup TIframe_ where
+  append _ _ = TIframe_
 
-instance monoidTIframe :: Monoid TIframe where
-  mempty = TIframe
+instance monoidTIframe_ :: Monoid TIframe_ where
+  mempty = TIframe_
 
-instance reifyTIframe :: ReifyAU Iframe TIframe where
+instance reifyTIframe_ :: ReifyAU Iframe_ TIframe_ where
   reifyAU = const mempty
-type Img' =
+type Img_' =
   ( tag :: String
-  , attributes :: Array (Attribute Img)
+  , attributes :: Array (Attribute Img_)
   )
-newtype Img = Img { | Img' }
-unsafeUnImg :: Img -> { | Img' }
-unsafeUnImg (Img unsafe) = unsafe
+newtype Img_ = Img_ { | Img_' }
+unsafeUnImg_ :: Img_ -> { | Img_' }
+unsafeUnImg_ (Img_ unsafe) = unsafe
 
-instance typeToSymImg ::
-  TypeToSym Img "img"
+instance typeToSymImg_ ::
+  TypeToSym Img_ "img"
 
 img
   :: forall children
-   . Array (Attribute Img)
+   . Array (Attribute Img_)
   -> { | children }
-  -> Element Img children
-img = makeElt Img "img"
+  -> Element Img_ children
+img = makeElt Img_ "img"
 
 img'attr
-  :: Array (Attribute Img)
-  -> Array (Attribute Img)
+  :: Array (Attribute Img_)
+  -> Array (Attribute Img_)
 img'attr = identity
 
-data TImg = TImg
+data TImg_ = TImg_
 
-instance typeToSymTImg :: TypeToSym TImg "TImg"
+instance typeToSymTImg_ :: TypeToSym TImg_ "TImg_"
 
-instance semigroupTImg :: Semigroup TImg where
-  append _ _ = TImg
+instance semigroupTImg_ :: Semigroup TImg_ where
+  append _ _ = TImg_
 
-instance monoidTImg :: Monoid TImg where
-  mempty = TImg
+instance monoidTImg_ :: Monoid TImg_ where
+  mempty = TImg_
 
-instance reifyTImg :: ReifyAU Img TImg where
+instance reifyTImg_ :: ReifyAU Img_ TImg_ where
   reifyAU = const mempty
-type Input' =
+type Input_' =
   ( tag :: String
-  , attributes :: Array (Attribute Input)
+  , attributes :: Array (Attribute Input_)
   )
-newtype Input = Input { | Input' }
-unsafeUnInput :: Input -> { | Input' }
-unsafeUnInput (Input unsafe) = unsafe
+newtype Input_ = Input_ { | Input_' }
+unsafeUnInput_ :: Input_ -> { | Input_' }
+unsafeUnInput_ (Input_ unsafe) = unsafe
 
-instance typeToSymInput ::
-  TypeToSym Input "input"
+instance typeToSymInput_ ::
+  TypeToSym Input_ "input"
 
 input
   :: forall children
-   . Array (Attribute Input)
+   . Array (Attribute Input_)
   -> { | children }
-  -> Element Input children
-input = makeElt Input "input"
+  -> Element Input_ children
+input = makeElt Input_ "input"
 
 input'attr
-  :: Array (Attribute Input)
-  -> Array (Attribute Input)
+  :: Array (Attribute Input_)
+  -> Array (Attribute Input_)
 input'attr = identity
 
-data TInput = TInput
+data TInput_ = TInput_
 
-instance typeToSymTInput :: TypeToSym TInput "TInput"
+instance typeToSymTInput_ :: TypeToSym TInput_ "TInput_"
 
-instance semigroupTInput :: Semigroup TInput where
-  append _ _ = TInput
+instance semigroupTInput_ :: Semigroup TInput_ where
+  append _ _ = TInput_
 
-instance monoidTInput :: Monoid TInput where
-  mempty = TInput
+instance monoidTInput_ :: Monoid TInput_ where
+  mempty = TInput_
 
-instance reifyTInput :: ReifyAU Input TInput where
+instance reifyTInput_ :: ReifyAU Input_ TInput_ where
   reifyAU = const mempty
-type Ins' =
+type Ins_' =
   ( tag :: String
-  , attributes :: Array (Attribute Ins)
+  , attributes :: Array (Attribute Ins_)
   )
-newtype Ins = Ins { | Ins' }
-unsafeUnIns :: Ins -> { | Ins' }
-unsafeUnIns (Ins unsafe) = unsafe
+newtype Ins_ = Ins_ { | Ins_' }
+unsafeUnIns_ :: Ins_ -> { | Ins_' }
+unsafeUnIns_ (Ins_ unsafe) = unsafe
 
-instance typeToSymIns ::
-  TypeToSym Ins "ins"
+instance typeToSymIns_ ::
+  TypeToSym Ins_ "ins"
 
 ins
   :: forall children
-   . Array (Attribute Ins)
+   . Array (Attribute Ins_)
   -> { | children }
-  -> Element Ins children
-ins = makeElt Ins "ins"
+  -> Element Ins_ children
+ins = makeElt Ins_ "ins"
 
 ins'attr
-  :: Array (Attribute Ins)
-  -> Array (Attribute Ins)
+  :: Array (Attribute Ins_)
+  -> Array (Attribute Ins_)
 ins'attr = identity
 
-data TIns = TIns
+data TIns_ = TIns_
 
-instance typeToSymTIns :: TypeToSym TIns "TIns"
+instance typeToSymTIns_ :: TypeToSym TIns_ "TIns_"
 
-instance semigroupTIns :: Semigroup TIns where
-  append _ _ = TIns
+instance semigroupTIns_ :: Semigroup TIns_ where
+  append _ _ = TIns_
 
-instance monoidTIns :: Monoid TIns where
-  mempty = TIns
+instance monoidTIns_ :: Monoid TIns_ where
+  mempty = TIns_
 
-instance reifyTIns :: ReifyAU Ins TIns where
+instance reifyTIns_ :: ReifyAU Ins_ TIns_ where
   reifyAU = const mempty
-type Kbd' =
+type Kbd_' =
   ( tag :: String
-  , attributes :: Array (Attribute Kbd)
+  , attributes :: Array (Attribute Kbd_)
   )
-newtype Kbd = Kbd { | Kbd' }
-unsafeUnKbd :: Kbd -> { | Kbd' }
-unsafeUnKbd (Kbd unsafe) = unsafe
+newtype Kbd_ = Kbd_ { | Kbd_' }
+unsafeUnKbd_ :: Kbd_ -> { | Kbd_' }
+unsafeUnKbd_ (Kbd_ unsafe) = unsafe
 
-instance typeToSymKbd ::
-  TypeToSym Kbd "kbd"
+instance typeToSymKbd_ ::
+  TypeToSym Kbd_ "kbd"
 
 kbd
   :: forall children
-   . Array (Attribute Kbd)
+   . Array (Attribute Kbd_)
   -> { | children }
-  -> Element Kbd children
-kbd = makeElt Kbd "kbd"
+  -> Element Kbd_ children
+kbd = makeElt Kbd_ "kbd"
 
 kbd'attr
-  :: Array (Attribute Kbd)
-  -> Array (Attribute Kbd)
+  :: Array (Attribute Kbd_)
+  -> Array (Attribute Kbd_)
 kbd'attr = identity
 
-data TKbd = TKbd
+data TKbd_ = TKbd_
 
-instance typeToSymTKbd :: TypeToSym TKbd "TKbd"
+instance typeToSymTKbd_ :: TypeToSym TKbd_ "TKbd_"
 
-instance semigroupTKbd :: Semigroup TKbd where
-  append _ _ = TKbd
+instance semigroupTKbd_ :: Semigroup TKbd_ where
+  append _ _ = TKbd_
 
-instance monoidTKbd :: Monoid TKbd where
-  mempty = TKbd
+instance monoidTKbd_ :: Monoid TKbd_ where
+  mempty = TKbd_
 
-instance reifyTKbd :: ReifyAU Kbd TKbd where
+instance reifyTKbd_ :: ReifyAU Kbd_ TKbd_ where
   reifyAU = const mempty
-type Label' =
+type Label_' =
   ( tag :: String
-  , attributes :: Array (Attribute Label)
+  , attributes :: Array (Attribute Label_)
   )
-newtype Label = Label { | Label' }
-unsafeUnLabel :: Label -> { | Label' }
-unsafeUnLabel (Label unsafe) = unsafe
+newtype Label_ = Label_ { | Label_' }
+unsafeUnLabel_ :: Label_ -> { | Label_' }
+unsafeUnLabel_ (Label_ unsafe) = unsafe
 
-instance typeToSymLabel ::
-  TypeToSym Label "label"
+instance typeToSymLabel_ ::
+  TypeToSym Label_ "label"
 
 label
   :: forall children
-   . Array (Attribute Label)
+   . Array (Attribute Label_)
   -> { | children }
-  -> Element Label children
-label = makeElt Label "label"
+  -> Element Label_ children
+label = makeElt Label_ "label"
 
 label'attr
-  :: Array (Attribute Label)
-  -> Array (Attribute Label)
+  :: Array (Attribute Label_)
+  -> Array (Attribute Label_)
 label'attr = identity
 
-data TLabel = TLabel
+data TLabel_ = TLabel_
 
-instance typeToSymTLabel :: TypeToSym TLabel "TLabel"
+instance typeToSymTLabel_ :: TypeToSym TLabel_ "TLabel_"
 
-instance semigroupTLabel :: Semigroup TLabel where
-  append _ _ = TLabel
+instance semigroupTLabel_ :: Semigroup TLabel_ where
+  append _ _ = TLabel_
 
-instance monoidTLabel :: Monoid TLabel where
-  mempty = TLabel
+instance monoidTLabel_ :: Monoid TLabel_ where
+  mempty = TLabel_
 
-instance reifyTLabel :: ReifyAU Label TLabel where
+instance reifyTLabel_ :: ReifyAU Label_ TLabel_ where
   reifyAU = const mempty
-type Legend' =
+type Legend_' =
   ( tag :: String
-  , attributes :: Array (Attribute Legend)
+  , attributes :: Array (Attribute Legend_)
   )
-newtype Legend = Legend { | Legend' }
-unsafeUnLegend :: Legend -> { | Legend' }
-unsafeUnLegend (Legend unsafe) = unsafe
+newtype Legend_ = Legend_ { | Legend_' }
+unsafeUnLegend_ :: Legend_ -> { | Legend_' }
+unsafeUnLegend_ (Legend_ unsafe) = unsafe
 
-instance typeToSymLegend ::
-  TypeToSym Legend "legend"
+instance typeToSymLegend_ ::
+  TypeToSym Legend_ "legend"
 
 legend
   :: forall children
-   . Array (Attribute Legend)
+   . Array (Attribute Legend_)
   -> { | children }
-  -> Element Legend children
-legend = makeElt Legend "legend"
+  -> Element Legend_ children
+legend = makeElt Legend_ "legend"
 
 legend'attr
-  :: Array (Attribute Legend)
-  -> Array (Attribute Legend)
+  :: Array (Attribute Legend_)
+  -> Array (Attribute Legend_)
 legend'attr = identity
 
-data TLegend = TLegend
+data TLegend_ = TLegend_
 
-instance typeToSymTLegend :: TypeToSym TLegend "TLegend"
+instance typeToSymTLegend_ :: TypeToSym TLegend_ "TLegend_"
 
-instance semigroupTLegend :: Semigroup TLegend where
-  append _ _ = TLegend
+instance semigroupTLegend_ :: Semigroup TLegend_ where
+  append _ _ = TLegend_
 
-instance monoidTLegend :: Monoid TLegend where
-  mempty = TLegend
+instance monoidTLegend_ :: Monoid TLegend_ where
+  mempty = TLegend_
 
-instance reifyTLegend :: ReifyAU Legend TLegend where
+instance reifyTLegend_ :: ReifyAU Legend_ TLegend_ where
   reifyAU = const mempty
-type Li' =
+type Li_' =
   ( tag :: String
-  , attributes :: Array (Attribute Li)
+  , attributes :: Array (Attribute Li_)
   )
-newtype Li = Li { | Li' }
-unsafeUnLi :: Li -> { | Li' }
-unsafeUnLi (Li unsafe) = unsafe
+newtype Li_ = Li_ { | Li_' }
+unsafeUnLi_ :: Li_ -> { | Li_' }
+unsafeUnLi_ (Li_ unsafe) = unsafe
 
-instance typeToSymLi ::
-  TypeToSym Li "li"
+instance typeToSymLi_ ::
+  TypeToSym Li_ "li"
 
 li
   :: forall children
-   . Array (Attribute Li)
+   . Array (Attribute Li_)
   -> { | children }
-  -> Element Li children
-li = makeElt Li "li"
+  -> Element Li_ children
+li = makeElt Li_ "li"
 
 li'attr
-  :: Array (Attribute Li)
-  -> Array (Attribute Li)
+  :: Array (Attribute Li_)
+  -> Array (Attribute Li_)
 li'attr = identity
 
-data TLi = TLi
+data TLi_ = TLi_
 
-instance typeToSymTLi :: TypeToSym TLi "TLi"
+instance typeToSymTLi_ :: TypeToSym TLi_ "TLi_"
 
-instance semigroupTLi :: Semigroup TLi where
-  append _ _ = TLi
+instance semigroupTLi_ :: Semigroup TLi_ where
+  append _ _ = TLi_
 
-instance monoidTLi :: Monoid TLi where
-  mempty = TLi
+instance monoidTLi_ :: Monoid TLi_ where
+  mempty = TLi_
 
-instance reifyTLi :: ReifyAU Li TLi where
+instance reifyTLi_ :: ReifyAU Li_ TLi_ where
   reifyAU = const mempty
-type Link' =
+type Link_' =
   ( tag :: String
-  , attributes :: Array (Attribute Link)
+  , attributes :: Array (Attribute Link_)
   )
-newtype Link = Link { | Link' }
-unsafeUnLink :: Link -> { | Link' }
-unsafeUnLink (Link unsafe) = unsafe
+newtype Link_ = Link_ { | Link_' }
+unsafeUnLink_ :: Link_ -> { | Link_' }
+unsafeUnLink_ (Link_ unsafe) = unsafe
 
-instance typeToSymLink ::
-  TypeToSym Link "link"
+instance typeToSymLink_ ::
+  TypeToSym Link_ "link"
 
 link
   :: forall children
-   . Array (Attribute Link)
+   . Array (Attribute Link_)
   -> { | children }
-  -> Element Link children
-link = makeElt Link "link"
+  -> Element Link_ children
+link = makeElt Link_ "link"
 
 link'attr
-  :: Array (Attribute Link)
-  -> Array (Attribute Link)
+  :: Array (Attribute Link_)
+  -> Array (Attribute Link_)
 link'attr = identity
 
-data TLink = TLink
+data TLink_ = TLink_
 
-instance typeToSymTLink :: TypeToSym TLink "TLink"
+instance typeToSymTLink_ :: TypeToSym TLink_ "TLink_"
 
-instance semigroupTLink :: Semigroup TLink where
-  append _ _ = TLink
+instance semigroupTLink_ :: Semigroup TLink_ where
+  append _ _ = TLink_
 
-instance monoidTLink :: Monoid TLink where
-  mempty = TLink
+instance monoidTLink_ :: Monoid TLink_ where
+  mempty = TLink_
 
-instance reifyTLink :: ReifyAU Link TLink where
+instance reifyTLink_ :: ReifyAU Link_ TLink_ where
   reifyAU = const mempty
-type Main' =
+type Main_' =
   ( tag :: String
-  , attributes :: Array (Attribute Main)
+  , attributes :: Array (Attribute Main_)
   )
-newtype Main = Main { | Main' }
-unsafeUnMain :: Main -> { | Main' }
-unsafeUnMain (Main unsafe) = unsafe
+newtype Main_ = Main_ { | Main_' }
+unsafeUnMain_ :: Main_ -> { | Main_' }
+unsafeUnMain_ (Main_ unsafe) = unsafe
 
-instance typeToSymMain ::
-  TypeToSym Main "main"
+instance typeToSymMain_ ::
+  TypeToSym Main_ "main"
 
 main
   :: forall children
-   . Array (Attribute Main)
+   . Array (Attribute Main_)
   -> { | children }
-  -> Element Main children
-main = makeElt Main "main"
+  -> Element Main_ children
+main = makeElt Main_ "main"
 
 main'attr
-  :: Array (Attribute Main)
-  -> Array (Attribute Main)
+  :: Array (Attribute Main_)
+  -> Array (Attribute Main_)
 main'attr = identity
 
-data TMain = TMain
+data TMain_ = TMain_
 
-instance typeToSymTMain :: TypeToSym TMain "TMain"
+instance typeToSymTMain_ :: TypeToSym TMain_ "TMain_"
 
-instance semigroupTMain :: Semigroup TMain where
-  append _ _ = TMain
+instance semigroupTMain_ :: Semigroup TMain_ where
+  append _ _ = TMain_
 
-instance monoidTMain :: Monoid TMain where
-  mempty = TMain
+instance monoidTMain_ :: Monoid TMain_ where
+  mempty = TMain_
 
-instance reifyTMain :: ReifyAU Main TMain where
+instance reifyTMain_ :: ReifyAU Main_ TMain_ where
   reifyAU = const mempty
-type Map' =
+type Map_' =
   ( tag :: String
-  , attributes :: Array (Attribute Map)
+  , attributes :: Array (Attribute Map_)
   )
-newtype Map = Map { | Map' }
-unsafeUnMap :: Map -> { | Map' }
-unsafeUnMap (Map unsafe) = unsafe
+newtype Map_ = Map_ { | Map_' }
+unsafeUnMap_ :: Map_ -> { | Map_' }
+unsafeUnMap_ (Map_ unsafe) = unsafe
 
-instance typeToSymMap ::
-  TypeToSym Map "map"
+instance typeToSymMap_ ::
+  TypeToSym Map_ "map"
 
 map
   :: forall children
-   . Array (Attribute Map)
+   . Array (Attribute Map_)
   -> { | children }
-  -> Element Map children
-map = makeElt Map "map"
+  -> Element Map_ children
+map = makeElt Map_ "map"
 
 map'attr
-  :: Array (Attribute Map)
-  -> Array (Attribute Map)
+  :: Array (Attribute Map_)
+  -> Array (Attribute Map_)
 map'attr = identity
 
-data TMap = TMap
+data TMap_ = TMap_
 
-instance typeToSymTMap :: TypeToSym TMap "TMap"
+instance typeToSymTMap_ :: TypeToSym TMap_ "TMap_"
 
-instance semigroupTMap :: Semigroup TMap where
-  append _ _ = TMap
+instance semigroupTMap_ :: Semigroup TMap_ where
+  append _ _ = TMap_
 
-instance monoidTMap :: Monoid TMap where
-  mempty = TMap
+instance monoidTMap_ :: Monoid TMap_ where
+  mempty = TMap_
 
-instance reifyTMap :: ReifyAU Map TMap where
+instance reifyTMap_ :: ReifyAU Map_ TMap_ where
   reifyAU = const mempty
-type Mark' =
+type Mark_' =
   ( tag :: String
-  , attributes :: Array (Attribute Mark)
+  , attributes :: Array (Attribute Mark_)
   )
-newtype Mark = Mark { | Mark' }
-unsafeUnMark :: Mark -> { | Mark' }
-unsafeUnMark (Mark unsafe) = unsafe
+newtype Mark_ = Mark_ { | Mark_' }
+unsafeUnMark_ :: Mark_ -> { | Mark_' }
+unsafeUnMark_ (Mark_ unsafe) = unsafe
 
-instance typeToSymMark ::
-  TypeToSym Mark "mark"
+instance typeToSymMark_ ::
+  TypeToSym Mark_ "mark"
 
 mark
   :: forall children
-   . Array (Attribute Mark)
+   . Array (Attribute Mark_)
   -> { | children }
-  -> Element Mark children
-mark = makeElt Mark "mark"
+  -> Element Mark_ children
+mark = makeElt Mark_ "mark"
 
 mark'attr
-  :: Array (Attribute Mark)
-  -> Array (Attribute Mark)
+  :: Array (Attribute Mark_)
+  -> Array (Attribute Mark_)
 mark'attr = identity
 
-data TMark = TMark
+data TMark_ = TMark_
 
-instance typeToSymTMark :: TypeToSym TMark "TMark"
+instance typeToSymTMark_ :: TypeToSym TMark_ "TMark_"
 
-instance semigroupTMark :: Semigroup TMark where
-  append _ _ = TMark
+instance semigroupTMark_ :: Semigroup TMark_ where
+  append _ _ = TMark_
 
-instance monoidTMark :: Monoid TMark where
-  mempty = TMark
+instance monoidTMark_ :: Monoid TMark_ where
+  mempty = TMark_
 
-instance reifyTMark :: ReifyAU Mark TMark where
+instance reifyTMark_ :: ReifyAU Mark_ TMark_ where
   reifyAU = const mempty
-type Meta' =
+type Meta_' =
   ( tag :: String
-  , attributes :: Array (Attribute Meta)
+  , attributes :: Array (Attribute Meta_)
   )
-newtype Meta = Meta { | Meta' }
-unsafeUnMeta :: Meta -> { | Meta' }
-unsafeUnMeta (Meta unsafe) = unsafe
+newtype Meta_ = Meta_ { | Meta_' }
+unsafeUnMeta_ :: Meta_ -> { | Meta_' }
+unsafeUnMeta_ (Meta_ unsafe) = unsafe
 
-instance typeToSymMeta ::
-  TypeToSym Meta "meta"
+instance typeToSymMeta_ ::
+  TypeToSym Meta_ "meta"
 
 meta
   :: forall children
-   . Array (Attribute Meta)
+   . Array (Attribute Meta_)
   -> { | children }
-  -> Element Meta children
-meta = makeElt Meta "meta"
+  -> Element Meta_ children
+meta = makeElt Meta_ "meta"
 
 meta'attr
-  :: Array (Attribute Meta)
-  -> Array (Attribute Meta)
+  :: Array (Attribute Meta_)
+  -> Array (Attribute Meta_)
 meta'attr = identity
 
-data TMeta = TMeta
+data TMeta_ = TMeta_
 
-instance typeToSymTMeta :: TypeToSym TMeta "TMeta"
+instance typeToSymTMeta_ :: TypeToSym TMeta_ "TMeta_"
 
-instance semigroupTMeta :: Semigroup TMeta where
-  append _ _ = TMeta
+instance semigroupTMeta_ :: Semigroup TMeta_ where
+  append _ _ = TMeta_
 
-instance monoidTMeta :: Monoid TMeta where
-  mempty = TMeta
+instance monoidTMeta_ :: Monoid TMeta_ where
+  mempty = TMeta_
 
-instance reifyTMeta :: ReifyAU Meta TMeta where
+instance reifyTMeta_ :: ReifyAU Meta_ TMeta_ where
   reifyAU = const mempty
-type Meter' =
+type Meter_' =
   ( tag :: String
-  , attributes :: Array (Attribute Meter)
+  , attributes :: Array (Attribute Meter_)
   )
-newtype Meter = Meter { | Meter' }
-unsafeUnMeter :: Meter -> { | Meter' }
-unsafeUnMeter (Meter unsafe) = unsafe
+newtype Meter_ = Meter_ { | Meter_' }
+unsafeUnMeter_ :: Meter_ -> { | Meter_' }
+unsafeUnMeter_ (Meter_ unsafe) = unsafe
 
-instance typeToSymMeter ::
-  TypeToSym Meter "meter"
+instance typeToSymMeter_ ::
+  TypeToSym Meter_ "meter"
 
 meter
   :: forall children
-   . Array (Attribute Meter)
+   . Array (Attribute Meter_)
   -> { | children }
-  -> Element Meter children
-meter = makeElt Meter "meter"
+  -> Element Meter_ children
+meter = makeElt Meter_ "meter"
 
 meter'attr
-  :: Array (Attribute Meter)
-  -> Array (Attribute Meter)
+  :: Array (Attribute Meter_)
+  -> Array (Attribute Meter_)
 meter'attr = identity
 
-data TMeter = TMeter
+data TMeter_ = TMeter_
 
-instance typeToSymTMeter :: TypeToSym TMeter "TMeter"
+instance typeToSymTMeter_ :: TypeToSym TMeter_ "TMeter_"
 
-instance semigroupTMeter :: Semigroup TMeter where
-  append _ _ = TMeter
+instance semigroupTMeter_ :: Semigroup TMeter_ where
+  append _ _ = TMeter_
 
-instance monoidTMeter :: Monoid TMeter where
-  mempty = TMeter
+instance monoidTMeter_ :: Monoid TMeter_ where
+  mempty = TMeter_
 
-instance reifyTMeter :: ReifyAU Meter TMeter where
+instance reifyTMeter_ :: ReifyAU Meter_ TMeter_ where
   reifyAU = const mempty
-type Nav' =
+type Nav_' =
   ( tag :: String
-  , attributes :: Array (Attribute Nav)
+  , attributes :: Array (Attribute Nav_)
   )
-newtype Nav = Nav { | Nav' }
-unsafeUnNav :: Nav -> { | Nav' }
-unsafeUnNav (Nav unsafe) = unsafe
+newtype Nav_ = Nav_ { | Nav_' }
+unsafeUnNav_ :: Nav_ -> { | Nav_' }
+unsafeUnNav_ (Nav_ unsafe) = unsafe
 
-instance typeToSymNav ::
-  TypeToSym Nav "nav"
+instance typeToSymNav_ ::
+  TypeToSym Nav_ "nav"
 
 nav
   :: forall children
-   . Array (Attribute Nav)
+   . Array (Attribute Nav_)
   -> { | children }
-  -> Element Nav children
-nav = makeElt Nav "nav"
+  -> Element Nav_ children
+nav = makeElt Nav_ "nav"
 
 nav'attr
-  :: Array (Attribute Nav)
-  -> Array (Attribute Nav)
+  :: Array (Attribute Nav_)
+  -> Array (Attribute Nav_)
 nav'attr = identity
 
-data TNav = TNav
+data TNav_ = TNav_
 
-instance typeToSymTNav :: TypeToSym TNav "TNav"
+instance typeToSymTNav_ :: TypeToSym TNav_ "TNav_"
 
-instance semigroupTNav :: Semigroup TNav where
-  append _ _ = TNav
+instance semigroupTNav_ :: Semigroup TNav_ where
+  append _ _ = TNav_
 
-instance monoidTNav :: Monoid TNav where
-  mempty = TNav
+instance monoidTNav_ :: Monoid TNav_ where
+  mempty = TNav_
 
-instance reifyTNav :: ReifyAU Nav TNav where
+instance reifyTNav_ :: ReifyAU Nav_ TNav_ where
   reifyAU = const mempty
-type Noframes' =
+type Noframes_' =
   ( tag :: String
-  , attributes :: Array (Attribute Noframes)
+  , attributes :: Array (Attribute Noframes_)
   )
-newtype Noframes = Noframes { | Noframes' }
-unsafeUnNoframes :: Noframes -> { | Noframes' }
-unsafeUnNoframes (Noframes unsafe) = unsafe
+newtype Noframes_ = Noframes_ { | Noframes_' }
+unsafeUnNoframes_ :: Noframes_ -> { | Noframes_' }
+unsafeUnNoframes_ (Noframes_ unsafe) = unsafe
 
-instance typeToSymNoframes ::
-  TypeToSym Noframes "noframes"
+instance typeToSymNoframes_ ::
+  TypeToSym Noframes_ "noframes"
 
 noframes
   :: forall children
-   . Array (Attribute Noframes)
+   . Array (Attribute Noframes_)
   -> { | children }
-  -> Element Noframes children
-noframes = makeElt Noframes "noframes"
+  -> Element Noframes_ children
+noframes = makeElt Noframes_ "noframes"
 
 noframes'attr
-  :: Array (Attribute Noframes)
-  -> Array (Attribute Noframes)
+  :: Array (Attribute Noframes_)
+  -> Array (Attribute Noframes_)
 noframes'attr = identity
 
-data TNoframes = TNoframes
+data TNoframes_ = TNoframes_
 
-instance typeToSymTNoframes :: TypeToSym TNoframes "TNoframes"
+instance typeToSymTNoframes_ :: TypeToSym TNoframes_ "TNoframes_"
 
-instance semigroupTNoframes :: Semigroup TNoframes where
-  append _ _ = TNoframes
+instance semigroupTNoframes_ :: Semigroup TNoframes_ where
+  append _ _ = TNoframes_
 
-instance monoidTNoframes :: Monoid TNoframes where
-  mempty = TNoframes
+instance monoidTNoframes_ :: Monoid TNoframes_ where
+  mempty = TNoframes_
 
-instance reifyTNoframes :: ReifyAU Noframes TNoframes where
+instance reifyTNoframes_ :: ReifyAU Noframes_ TNoframes_ where
   reifyAU = const mempty
-type Noscript' =
+type Noscript_' =
   ( tag :: String
-  , attributes :: Array (Attribute Noscript)
+  , attributes :: Array (Attribute Noscript_)
   )
-newtype Noscript = Noscript { | Noscript' }
-unsafeUnNoscript :: Noscript -> { | Noscript' }
-unsafeUnNoscript (Noscript unsafe) = unsafe
+newtype Noscript_ = Noscript_ { | Noscript_' }
+unsafeUnNoscript_ :: Noscript_ -> { | Noscript_' }
+unsafeUnNoscript_ (Noscript_ unsafe) = unsafe
 
-instance typeToSymNoscript ::
-  TypeToSym Noscript "noscript"
+instance typeToSymNoscript_ ::
+  TypeToSym Noscript_ "noscript"
 
 noscript
   :: forall children
-   . Array (Attribute Noscript)
+   . Array (Attribute Noscript_)
   -> { | children }
-  -> Element Noscript children
-noscript = makeElt Noscript "noscript"
+  -> Element Noscript_ children
+noscript = makeElt Noscript_ "noscript"
 
 noscript'attr
-  :: Array (Attribute Noscript)
-  -> Array (Attribute Noscript)
+  :: Array (Attribute Noscript_)
+  -> Array (Attribute Noscript_)
 noscript'attr = identity
 
-data TNoscript = TNoscript
+data TNoscript_ = TNoscript_
 
-instance typeToSymTNoscript :: TypeToSym TNoscript "TNoscript"
+instance typeToSymTNoscript_ :: TypeToSym TNoscript_ "TNoscript_"
 
-instance semigroupTNoscript :: Semigroup TNoscript where
-  append _ _ = TNoscript
+instance semigroupTNoscript_ :: Semigroup TNoscript_ where
+  append _ _ = TNoscript_
 
-instance monoidTNoscript :: Monoid TNoscript where
-  mempty = TNoscript
+instance monoidTNoscript_ :: Monoid TNoscript_ where
+  mempty = TNoscript_
 
-instance reifyTNoscript :: ReifyAU Noscript TNoscript where
+instance reifyTNoscript_ :: ReifyAU Noscript_ TNoscript_ where
   reifyAU = const mempty
-type Object' =
+type Object_' =
   ( tag :: String
-  , attributes :: Array (Attribute Object)
+  , attributes :: Array (Attribute Object_)
   )
-newtype Object = Object { | Object' }
-unsafeUnObject :: Object -> { | Object' }
-unsafeUnObject (Object unsafe) = unsafe
+newtype Object_ = Object_ { | Object_' }
+unsafeUnObject_ :: Object_ -> { | Object_' }
+unsafeUnObject_ (Object_ unsafe) = unsafe
 
-instance typeToSymObject ::
-  TypeToSym Object "object"
+instance typeToSymObject_ ::
+  TypeToSym Object_ "object"
 
 object
   :: forall children
-   . Array (Attribute Object)
+   . Array (Attribute Object_)
   -> { | children }
-  -> Element Object children
-object = makeElt Object "object"
+  -> Element Object_ children
+object = makeElt Object_ "object"
 
 object'attr
-  :: Array (Attribute Object)
-  -> Array (Attribute Object)
+  :: Array (Attribute Object_)
+  -> Array (Attribute Object_)
 object'attr = identity
 
-data TObject = TObject
+data TObject_ = TObject_
 
-instance typeToSymTObject :: TypeToSym TObject "TObject"
+instance typeToSymTObject_ :: TypeToSym TObject_ "TObject_"
 
-instance semigroupTObject :: Semigroup TObject where
-  append _ _ = TObject
+instance semigroupTObject_ :: Semigroup TObject_ where
+  append _ _ = TObject_
 
-instance monoidTObject :: Monoid TObject where
-  mempty = TObject
+instance monoidTObject_ :: Monoid TObject_ where
+  mempty = TObject_
 
-instance reifyTObject :: ReifyAU Object TObject where
+instance reifyTObject_ :: ReifyAU Object_ TObject_ where
   reifyAU = const mempty
-type Ol' =
+type Ol_' =
   ( tag :: String
-  , attributes :: Array (Attribute Ol)
+  , attributes :: Array (Attribute Ol_)
   )
-newtype Ol = Ol { | Ol' }
-unsafeUnOl :: Ol -> { | Ol' }
-unsafeUnOl (Ol unsafe) = unsafe
+newtype Ol_ = Ol_ { | Ol_' }
+unsafeUnOl_ :: Ol_ -> { | Ol_' }
+unsafeUnOl_ (Ol_ unsafe) = unsafe
 
-instance typeToSymOl ::
-  TypeToSym Ol "ol"
+instance typeToSymOl_ ::
+  TypeToSym Ol_ "ol"
 
 ol
   :: forall children
-   . Array (Attribute Ol)
+   . Array (Attribute Ol_)
   -> { | children }
-  -> Element Ol children
-ol = makeElt Ol "ol"
+  -> Element Ol_ children
+ol = makeElt Ol_ "ol"
 
 ol'attr
-  :: Array (Attribute Ol)
-  -> Array (Attribute Ol)
+  :: Array (Attribute Ol_)
+  -> Array (Attribute Ol_)
 ol'attr = identity
 
-data TOl = TOl
+data TOl_ = TOl_
 
-instance typeToSymTOl :: TypeToSym TOl "TOl"
+instance typeToSymTOl_ :: TypeToSym TOl_ "TOl_"
 
-instance semigroupTOl :: Semigroup TOl where
-  append _ _ = TOl
+instance semigroupTOl_ :: Semigroup TOl_ where
+  append _ _ = TOl_
 
-instance monoidTOl :: Monoid TOl where
-  mempty = TOl
+instance monoidTOl_ :: Monoid TOl_ where
+  mempty = TOl_
 
-instance reifyTOl :: ReifyAU Ol TOl where
+instance reifyTOl_ :: ReifyAU Ol_ TOl_ where
   reifyAU = const mempty
-type Optgroup' =
+type Optgroup_' =
   ( tag :: String
-  , attributes :: Array (Attribute Optgroup)
+  , attributes :: Array (Attribute Optgroup_)
   )
-newtype Optgroup = Optgroup { | Optgroup' }
-unsafeUnOptgroup :: Optgroup -> { | Optgroup' }
-unsafeUnOptgroup (Optgroup unsafe) = unsafe
+newtype Optgroup_ = Optgroup_ { | Optgroup_' }
+unsafeUnOptgroup_ :: Optgroup_ -> { | Optgroup_' }
+unsafeUnOptgroup_ (Optgroup_ unsafe) = unsafe
 
-instance typeToSymOptgroup ::
-  TypeToSym Optgroup "optgroup"
+instance typeToSymOptgroup_ ::
+  TypeToSym Optgroup_ "optgroup"
 
 optgroup
   :: forall children
-   . Array (Attribute Optgroup)
+   . Array (Attribute Optgroup_)
   -> { | children }
-  -> Element Optgroup children
-optgroup = makeElt Optgroup "optgroup"
+  -> Element Optgroup_ children
+optgroup = makeElt Optgroup_ "optgroup"
 
 optgroup'attr
-  :: Array (Attribute Optgroup)
-  -> Array (Attribute Optgroup)
+  :: Array (Attribute Optgroup_)
+  -> Array (Attribute Optgroup_)
 optgroup'attr = identity
 
-data TOptgroup = TOptgroup
+data TOptgroup_ = TOptgroup_
 
-instance typeToSymTOptgroup :: TypeToSym TOptgroup "TOptgroup"
+instance typeToSymTOptgroup_ :: TypeToSym TOptgroup_ "TOptgroup_"
 
-instance semigroupTOptgroup :: Semigroup TOptgroup where
-  append _ _ = TOptgroup
+instance semigroupTOptgroup_ :: Semigroup TOptgroup_ where
+  append _ _ = TOptgroup_
 
-instance monoidTOptgroup :: Monoid TOptgroup where
-  mempty = TOptgroup
+instance monoidTOptgroup_ :: Monoid TOptgroup_ where
+  mempty = TOptgroup_
 
-instance reifyTOptgroup :: ReifyAU Optgroup TOptgroup where
+instance reifyTOptgroup_ :: ReifyAU Optgroup_ TOptgroup_ where
   reifyAU = const mempty
-type Option' =
+type Option_' =
   ( tag :: String
-  , attributes :: Array (Attribute Option)
+  , attributes :: Array (Attribute Option_)
   )
-newtype Option = Option { | Option' }
-unsafeUnOption :: Option -> { | Option' }
-unsafeUnOption (Option unsafe) = unsafe
+newtype Option_ = Option_ { | Option_' }
+unsafeUnOption_ :: Option_ -> { | Option_' }
+unsafeUnOption_ (Option_ unsafe) = unsafe
 
-instance typeToSymOption ::
-  TypeToSym Option "option"
+instance typeToSymOption_ ::
+  TypeToSym Option_ "option"
 
 option
   :: forall children
-   . Array (Attribute Option)
+   . Array (Attribute Option_)
   -> { | children }
-  -> Element Option children
-option = makeElt Option "option"
+  -> Element Option_ children
+option = makeElt Option_ "option"
 
 option'attr
-  :: Array (Attribute Option)
-  -> Array (Attribute Option)
+  :: Array (Attribute Option_)
+  -> Array (Attribute Option_)
 option'attr = identity
 
-data TOption = TOption
+data TOption_ = TOption_
 
-instance typeToSymTOption :: TypeToSym TOption "TOption"
+instance typeToSymTOption_ :: TypeToSym TOption_ "TOption_"
 
-instance semigroupTOption :: Semigroup TOption where
-  append _ _ = TOption
+instance semigroupTOption_ :: Semigroup TOption_ where
+  append _ _ = TOption_
 
-instance monoidTOption :: Monoid TOption where
-  mempty = TOption
+instance monoidTOption_ :: Monoid TOption_ where
+  mempty = TOption_
 
-instance reifyTOption :: ReifyAU Option TOption where
+instance reifyTOption_ :: ReifyAU Option_ TOption_ where
   reifyAU = const mempty
-type Output' =
+type Output_' =
   ( tag :: String
-  , attributes :: Array (Attribute Output)
+  , attributes :: Array (Attribute Output_)
   )
-newtype Output = Output { | Output' }
-unsafeUnOutput :: Output -> { | Output' }
-unsafeUnOutput (Output unsafe) = unsafe
+newtype Output_ = Output_ { | Output_' }
+unsafeUnOutput_ :: Output_ -> { | Output_' }
+unsafeUnOutput_ (Output_ unsafe) = unsafe
 
-instance typeToSymOutput ::
-  TypeToSym Output "output"
+instance typeToSymOutput_ ::
+  TypeToSym Output_ "output"
 
 output
   :: forall children
-   . Array (Attribute Output)
+   . Array (Attribute Output_)
   -> { | children }
-  -> Element Output children
-output = makeElt Output "output"
+  -> Element Output_ children
+output = makeElt Output_ "output"
 
 output'attr
-  :: Array (Attribute Output)
-  -> Array (Attribute Output)
+  :: Array (Attribute Output_)
+  -> Array (Attribute Output_)
 output'attr = identity
 
-data TOutput = TOutput
+data TOutput_ = TOutput_
 
-instance typeToSymTOutput :: TypeToSym TOutput "TOutput"
+instance typeToSymTOutput_ :: TypeToSym TOutput_ "TOutput_"
 
-instance semigroupTOutput :: Semigroup TOutput where
-  append _ _ = TOutput
+instance semigroupTOutput_ :: Semigroup TOutput_ where
+  append _ _ = TOutput_
 
-instance monoidTOutput :: Monoid TOutput where
-  mempty = TOutput
+instance monoidTOutput_ :: Monoid TOutput_ where
+  mempty = TOutput_
 
-instance reifyTOutput :: ReifyAU Output TOutput where
+instance reifyTOutput_ :: ReifyAU Output_ TOutput_ where
   reifyAU = const mempty
-type P' =
+type P_' =
   ( tag :: String
-  , attributes :: Array (Attribute P)
+  , attributes :: Array (Attribute P_)
   )
-newtype P = P { | P' }
-unsafeUnP :: P -> { | P' }
-unsafeUnP (P unsafe) = unsafe
+newtype P_ = P_ { | P_' }
+unsafeUnP_ :: P_ -> { | P_' }
+unsafeUnP_ (P_ unsafe) = unsafe
 
-instance typeToSymP ::
-  TypeToSym P "p"
+instance typeToSymP_ ::
+  TypeToSym P_ "p"
 
 p
   :: forall children
-   . Array (Attribute P)
+   . Array (Attribute P_)
   -> { | children }
-  -> Element P children
-p = makeElt P "p"
+  -> Element P_ children
+p = makeElt P_ "p"
 
 p'attr
-  :: Array (Attribute P)
-  -> Array (Attribute P)
+  :: Array (Attribute P_)
+  -> Array (Attribute P_)
 p'attr = identity
 
-data TP = TP
+data TP_ = TP_
 
-instance typeToSymTP :: TypeToSym TP "TP"
+instance typeToSymTP_ :: TypeToSym TP_ "TP_"
 
-instance semigroupTP :: Semigroup TP where
-  append _ _ = TP
+instance semigroupTP_ :: Semigroup TP_ where
+  append _ _ = TP_
 
-instance monoidTP :: Monoid TP where
-  mempty = TP
+instance monoidTP_ :: Monoid TP_ where
+  mempty = TP_
 
-instance reifyTP :: ReifyAU P TP where
+instance reifyTP_ :: ReifyAU P_ TP_ where
   reifyAU = const mempty
-type Param' =
+type Param_' =
   ( tag :: String
-  , attributes :: Array (Attribute Param)
+  , attributes :: Array (Attribute Param_)
   )
-newtype Param = Param { | Param' }
-unsafeUnParam :: Param -> { | Param' }
-unsafeUnParam (Param unsafe) = unsafe
+newtype Param_ = Param_ { | Param_' }
+unsafeUnParam_ :: Param_ -> { | Param_' }
+unsafeUnParam_ (Param_ unsafe) = unsafe
 
-instance typeToSymParam ::
-  TypeToSym Param "param"
+instance typeToSymParam_ ::
+  TypeToSym Param_ "param"
 
 param
   :: forall children
-   . Array (Attribute Param)
+   . Array (Attribute Param_)
   -> { | children }
-  -> Element Param children
-param = makeElt Param "param"
+  -> Element Param_ children
+param = makeElt Param_ "param"
 
 param'attr
-  :: Array (Attribute Param)
-  -> Array (Attribute Param)
+  :: Array (Attribute Param_)
+  -> Array (Attribute Param_)
 param'attr = identity
 
-data TParam = TParam
+data TParam_ = TParam_
 
-instance typeToSymTParam :: TypeToSym TParam "TParam"
+instance typeToSymTParam_ :: TypeToSym TParam_ "TParam_"
 
-instance semigroupTParam :: Semigroup TParam where
-  append _ _ = TParam
+instance semigroupTParam_ :: Semigroup TParam_ where
+  append _ _ = TParam_
 
-instance monoidTParam :: Monoid TParam where
-  mempty = TParam
+instance monoidTParam_ :: Monoid TParam_ where
+  mempty = TParam_
 
-instance reifyTParam :: ReifyAU Param TParam where
+instance reifyTParam_ :: ReifyAU Param_ TParam_ where
   reifyAU = const mempty
-type Picture' =
+type Picture_' =
   ( tag :: String
-  , attributes :: Array (Attribute Picture)
+  , attributes :: Array (Attribute Picture_)
   )
-newtype Picture = Picture { | Picture' }
-unsafeUnPicture :: Picture -> { | Picture' }
-unsafeUnPicture (Picture unsafe) = unsafe
+newtype Picture_ = Picture_ { | Picture_' }
+unsafeUnPicture_ :: Picture_ -> { | Picture_' }
+unsafeUnPicture_ (Picture_ unsafe) = unsafe
 
-instance typeToSymPicture ::
-  TypeToSym Picture "picture"
+instance typeToSymPicture_ ::
+  TypeToSym Picture_ "picture"
 
 picture
   :: forall children
-   . Array (Attribute Picture)
+   . Array (Attribute Picture_)
   -> { | children }
-  -> Element Picture children
-picture = makeElt Picture "picture"
+  -> Element Picture_ children
+picture = makeElt Picture_ "picture"
 
 picture'attr
-  :: Array (Attribute Picture)
-  -> Array (Attribute Picture)
+  :: Array (Attribute Picture_)
+  -> Array (Attribute Picture_)
 picture'attr = identity
 
-data TPicture = TPicture
+data TPicture_ = TPicture_
 
-instance typeToSymTPicture :: TypeToSym TPicture "TPicture"
+instance typeToSymTPicture_ :: TypeToSym TPicture_ "TPicture_"
 
-instance semigroupTPicture :: Semigroup TPicture where
-  append _ _ = TPicture
+instance semigroupTPicture_ :: Semigroup TPicture_ where
+  append _ _ = TPicture_
 
-instance monoidTPicture :: Monoid TPicture where
-  mempty = TPicture
+instance monoidTPicture_ :: Monoid TPicture_ where
+  mempty = TPicture_
 
-instance reifyTPicture :: ReifyAU Picture TPicture where
+instance reifyTPicture_ :: ReifyAU Picture_ TPicture_ where
   reifyAU = const mempty
-type Pre' =
+type Pre_' =
   ( tag :: String
-  , attributes :: Array (Attribute Pre)
+  , attributes :: Array (Attribute Pre_)
   )
-newtype Pre = Pre { | Pre' }
-unsafeUnPre :: Pre -> { | Pre' }
-unsafeUnPre (Pre unsafe) = unsafe
+newtype Pre_ = Pre_ { | Pre_' }
+unsafeUnPre_ :: Pre_ -> { | Pre_' }
+unsafeUnPre_ (Pre_ unsafe) = unsafe
 
-instance typeToSymPre ::
-  TypeToSym Pre "pre"
+instance typeToSymPre_ ::
+  TypeToSym Pre_ "pre"
 
 pre
   :: forall children
-   . Array (Attribute Pre)
+   . Array (Attribute Pre_)
   -> { | children }
-  -> Element Pre children
-pre = makeElt Pre "pre"
+  -> Element Pre_ children
+pre = makeElt Pre_ "pre"
 
 pre'attr
-  :: Array (Attribute Pre)
-  -> Array (Attribute Pre)
+  :: Array (Attribute Pre_)
+  -> Array (Attribute Pre_)
 pre'attr = identity
 
-data TPre = TPre
+data TPre_ = TPre_
 
-instance typeToSymTPre :: TypeToSym TPre "TPre"
+instance typeToSymTPre_ :: TypeToSym TPre_ "TPre_"
 
-instance semigroupTPre :: Semigroup TPre where
-  append _ _ = TPre
+instance semigroupTPre_ :: Semigroup TPre_ where
+  append _ _ = TPre_
 
-instance monoidTPre :: Monoid TPre where
-  mempty = TPre
+instance monoidTPre_ :: Monoid TPre_ where
+  mempty = TPre_
 
-instance reifyTPre :: ReifyAU Pre TPre where
+instance reifyTPre_ :: ReifyAU Pre_ TPre_ where
   reifyAU = const mempty
-type Progress' =
+type Progress_' =
   ( tag :: String
-  , attributes :: Array (Attribute Progress)
+  , attributes :: Array (Attribute Progress_)
   )
-newtype Progress = Progress { | Progress' }
-unsafeUnProgress :: Progress -> { | Progress' }
-unsafeUnProgress (Progress unsafe) = unsafe
+newtype Progress_ = Progress_ { | Progress_' }
+unsafeUnProgress_ :: Progress_ -> { | Progress_' }
+unsafeUnProgress_ (Progress_ unsafe) = unsafe
 
-instance typeToSymProgress ::
-  TypeToSym Progress "progress"
+instance typeToSymProgress_ ::
+  TypeToSym Progress_ "progress"
 
 progress
   :: forall children
-   . Array (Attribute Progress)
+   . Array (Attribute Progress_)
   -> { | children }
-  -> Element Progress children
-progress = makeElt Progress "progress"
+  -> Element Progress_ children
+progress = makeElt Progress_ "progress"
 
 progress'attr
-  :: Array (Attribute Progress)
-  -> Array (Attribute Progress)
+  :: Array (Attribute Progress_)
+  -> Array (Attribute Progress_)
 progress'attr = identity
 
-data TProgress = TProgress
+data TProgress_ = TProgress_
 
-instance typeToSymTProgress :: TypeToSym TProgress "TProgress"
+instance typeToSymTProgress_ :: TypeToSym TProgress_ "TProgress_"
 
-instance semigroupTProgress :: Semigroup TProgress where
-  append _ _ = TProgress
+instance semigroupTProgress_ :: Semigroup TProgress_ where
+  append _ _ = TProgress_
 
-instance monoidTProgress :: Monoid TProgress where
-  mempty = TProgress
+instance monoidTProgress_ :: Monoid TProgress_ where
+  mempty = TProgress_
 
-instance reifyTProgress :: ReifyAU Progress TProgress where
+instance reifyTProgress_ :: ReifyAU Progress_ TProgress_ where
   reifyAU = const mempty
-type Q' =
+type Q_' =
   ( tag :: String
-  , attributes :: Array (Attribute Q)
+  , attributes :: Array (Attribute Q_)
   )
-newtype Q = Q { | Q' }
-unsafeUnQ :: Q -> { | Q' }
-unsafeUnQ (Q unsafe) = unsafe
+newtype Q_ = Q_ { | Q_' }
+unsafeUnQ_ :: Q_ -> { | Q_' }
+unsafeUnQ_ (Q_ unsafe) = unsafe
 
-instance typeToSymQ ::
-  TypeToSym Q "q"
+instance typeToSymQ_ ::
+  TypeToSym Q_ "q"
 
 q
   :: forall children
-   . Array (Attribute Q)
+   . Array (Attribute Q_)
   -> { | children }
-  -> Element Q children
-q = makeElt Q "q"
+  -> Element Q_ children
+q = makeElt Q_ "q"
 
 q'attr
-  :: Array (Attribute Q)
-  -> Array (Attribute Q)
+  :: Array (Attribute Q_)
+  -> Array (Attribute Q_)
 q'attr = identity
 
-data TQ = TQ
+data TQ_ = TQ_
 
-instance typeToSymTQ :: TypeToSym TQ "TQ"
+instance typeToSymTQ_ :: TypeToSym TQ_ "TQ_"
 
-instance semigroupTQ :: Semigroup TQ where
-  append _ _ = TQ
+instance semigroupTQ_ :: Semigroup TQ_ where
+  append _ _ = TQ_
 
-instance monoidTQ :: Monoid TQ where
-  mempty = TQ
+instance monoidTQ_ :: Monoid TQ_ where
+  mempty = TQ_
 
-instance reifyTQ :: ReifyAU Q TQ where
+instance reifyTQ_ :: ReifyAU Q_ TQ_ where
   reifyAU = const mempty
-type Rp' =
+type Rp_' =
   ( tag :: String
-  , attributes :: Array (Attribute Rp)
+  , attributes :: Array (Attribute Rp_)
   )
-newtype Rp = Rp { | Rp' }
-unsafeUnRp :: Rp -> { | Rp' }
-unsafeUnRp (Rp unsafe) = unsafe
+newtype Rp_ = Rp_ { | Rp_' }
+unsafeUnRp_ :: Rp_ -> { | Rp_' }
+unsafeUnRp_ (Rp_ unsafe) = unsafe
 
-instance typeToSymRp ::
-  TypeToSym Rp "rp"
+instance typeToSymRp_ ::
+  TypeToSym Rp_ "rp"
 
 rp
   :: forall children
-   . Array (Attribute Rp)
+   . Array (Attribute Rp_)
   -> { | children }
-  -> Element Rp children
-rp = makeElt Rp "rp"
+  -> Element Rp_ children
+rp = makeElt Rp_ "rp"
 
 rp'attr
-  :: Array (Attribute Rp)
-  -> Array (Attribute Rp)
+  :: Array (Attribute Rp_)
+  -> Array (Attribute Rp_)
 rp'attr = identity
 
-data TRp = TRp
+data TRp_ = TRp_
 
-instance typeToSymTRp :: TypeToSym TRp "TRp"
+instance typeToSymTRp_ :: TypeToSym TRp_ "TRp_"
 
-instance semigroupTRp :: Semigroup TRp where
-  append _ _ = TRp
+instance semigroupTRp_ :: Semigroup TRp_ where
+  append _ _ = TRp_
 
-instance monoidTRp :: Monoid TRp where
-  mempty = TRp
+instance monoidTRp_ :: Monoid TRp_ where
+  mempty = TRp_
 
-instance reifyTRp :: ReifyAU Rp TRp where
+instance reifyTRp_ :: ReifyAU Rp_ TRp_ where
   reifyAU = const mempty
-type Rt' =
+type Rt_' =
   ( tag :: String
-  , attributes :: Array (Attribute Rt)
+  , attributes :: Array (Attribute Rt_)
   )
-newtype Rt = Rt { | Rt' }
-unsafeUnRt :: Rt -> { | Rt' }
-unsafeUnRt (Rt unsafe) = unsafe
+newtype Rt_ = Rt_ { | Rt_' }
+unsafeUnRt_ :: Rt_ -> { | Rt_' }
+unsafeUnRt_ (Rt_ unsafe) = unsafe
 
-instance typeToSymRt ::
-  TypeToSym Rt "rt"
+instance typeToSymRt_ ::
+  TypeToSym Rt_ "rt"
 
 rt
   :: forall children
-   . Array (Attribute Rt)
+   . Array (Attribute Rt_)
   -> { | children }
-  -> Element Rt children
-rt = makeElt Rt "rt"
+  -> Element Rt_ children
+rt = makeElt Rt_ "rt"
 
 rt'attr
-  :: Array (Attribute Rt)
-  -> Array (Attribute Rt)
+  :: Array (Attribute Rt_)
+  -> Array (Attribute Rt_)
 rt'attr = identity
 
-data TRt = TRt
+data TRt_ = TRt_
 
-instance typeToSymTRt :: TypeToSym TRt "TRt"
+instance typeToSymTRt_ :: TypeToSym TRt_ "TRt_"
 
-instance semigroupTRt :: Semigroup TRt where
-  append _ _ = TRt
+instance semigroupTRt_ :: Semigroup TRt_ where
+  append _ _ = TRt_
 
-instance monoidTRt :: Monoid TRt where
-  mempty = TRt
+instance monoidTRt_ :: Monoid TRt_ where
+  mempty = TRt_
 
-instance reifyTRt :: ReifyAU Rt TRt where
+instance reifyTRt_ :: ReifyAU Rt_ TRt_ where
   reifyAU = const mempty
-type Ruby' =
+type Ruby_' =
   ( tag :: String
-  , attributes :: Array (Attribute Ruby)
+  , attributes :: Array (Attribute Ruby_)
   )
-newtype Ruby = Ruby { | Ruby' }
-unsafeUnRuby :: Ruby -> { | Ruby' }
-unsafeUnRuby (Ruby unsafe) = unsafe
+newtype Ruby_ = Ruby_ { | Ruby_' }
+unsafeUnRuby_ :: Ruby_ -> { | Ruby_' }
+unsafeUnRuby_ (Ruby_ unsafe) = unsafe
 
-instance typeToSymRuby ::
-  TypeToSym Ruby "ruby"
+instance typeToSymRuby_ ::
+  TypeToSym Ruby_ "ruby"
 
 ruby
   :: forall children
-   . Array (Attribute Ruby)
+   . Array (Attribute Ruby_)
   -> { | children }
-  -> Element Ruby children
-ruby = makeElt Ruby "ruby"
+  -> Element Ruby_ children
+ruby = makeElt Ruby_ "ruby"
 
 ruby'attr
-  :: Array (Attribute Ruby)
-  -> Array (Attribute Ruby)
+  :: Array (Attribute Ruby_)
+  -> Array (Attribute Ruby_)
 ruby'attr = identity
 
-data TRuby = TRuby
+data TRuby_ = TRuby_
 
-instance typeToSymTRuby :: TypeToSym TRuby "TRuby"
+instance typeToSymTRuby_ :: TypeToSym TRuby_ "TRuby_"
 
-instance semigroupTRuby :: Semigroup TRuby where
-  append _ _ = TRuby
+instance semigroupTRuby_ :: Semigroup TRuby_ where
+  append _ _ = TRuby_
 
-instance monoidTRuby :: Monoid TRuby where
-  mempty = TRuby
+instance monoidTRuby_ :: Monoid TRuby_ where
+  mempty = TRuby_
 
-instance reifyTRuby :: ReifyAU Ruby TRuby where
+instance reifyTRuby_ :: ReifyAU Ruby_ TRuby_ where
   reifyAU = const mempty
-type S' =
+type S_' =
   ( tag :: String
-  , attributes :: Array (Attribute S)
+  , attributes :: Array (Attribute S_)
   )
-newtype S = S { | S' }
-unsafeUnS :: S -> { | S' }
-unsafeUnS (S unsafe) = unsafe
+newtype S_ = S_ { | S_' }
+unsafeUnS_ :: S_ -> { | S_' }
+unsafeUnS_ (S_ unsafe) = unsafe
 
-instance typeToSymS ::
-  TypeToSym S "s"
+instance typeToSymS_ ::
+  TypeToSym S_ "s"
 
 s
   :: forall children
-   . Array (Attribute S)
+   . Array (Attribute S_)
   -> { | children }
-  -> Element S children
-s = makeElt S "s"
+  -> Element S_ children
+s = makeElt S_ "s"
 
 s'attr
-  :: Array (Attribute S)
-  -> Array (Attribute S)
+  :: Array (Attribute S_)
+  -> Array (Attribute S_)
 s'attr = identity
 
-data TS = TS
+data TS_ = TS_
 
-instance typeToSymTS :: TypeToSym TS "TS"
+instance typeToSymTS_ :: TypeToSym TS_ "TS_"
 
-instance semigroupTS :: Semigroup TS where
-  append _ _ = TS
+instance semigroupTS_ :: Semigroup TS_ where
+  append _ _ = TS_
 
-instance monoidTS :: Monoid TS where
-  mempty = TS
+instance monoidTS_ :: Monoid TS_ where
+  mempty = TS_
 
-instance reifyTS :: ReifyAU S TS where
+instance reifyTS_ :: ReifyAU S_ TS_ where
   reifyAU = const mempty
-type Samp' =
+type Samp_' =
   ( tag :: String
-  , attributes :: Array (Attribute Samp)
+  , attributes :: Array (Attribute Samp_)
   )
-newtype Samp = Samp { | Samp' }
-unsafeUnSamp :: Samp -> { | Samp' }
-unsafeUnSamp (Samp unsafe) = unsafe
+newtype Samp_ = Samp_ { | Samp_' }
+unsafeUnSamp_ :: Samp_ -> { | Samp_' }
+unsafeUnSamp_ (Samp_ unsafe) = unsafe
 
-instance typeToSymSamp ::
-  TypeToSym Samp "samp"
+instance typeToSymSamp_ ::
+  TypeToSym Samp_ "samp"
 
 samp
   :: forall children
-   . Array (Attribute Samp)
+   . Array (Attribute Samp_)
   -> { | children }
-  -> Element Samp children
-samp = makeElt Samp "samp"
+  -> Element Samp_ children
+samp = makeElt Samp_ "samp"
 
 samp'attr
-  :: Array (Attribute Samp)
-  -> Array (Attribute Samp)
+  :: Array (Attribute Samp_)
+  -> Array (Attribute Samp_)
 samp'attr = identity
 
-data TSamp = TSamp
+data TSamp_ = TSamp_
 
-instance typeToSymTSamp :: TypeToSym TSamp "TSamp"
+instance typeToSymTSamp_ :: TypeToSym TSamp_ "TSamp_"
 
-instance semigroupTSamp :: Semigroup TSamp where
-  append _ _ = TSamp
+instance semigroupTSamp_ :: Semigroup TSamp_ where
+  append _ _ = TSamp_
 
-instance monoidTSamp :: Monoid TSamp where
-  mempty = TSamp
+instance monoidTSamp_ :: Monoid TSamp_ where
+  mempty = TSamp_
 
-instance reifyTSamp :: ReifyAU Samp TSamp where
+instance reifyTSamp_ :: ReifyAU Samp_ TSamp_ where
   reifyAU = const mempty
-type Script' =
+type Script_' =
   ( tag :: String
-  , attributes :: Array (Attribute Script)
+  , attributes :: Array (Attribute Script_)
   )
-newtype Script = Script { | Script' }
-unsafeUnScript :: Script -> { | Script' }
-unsafeUnScript (Script unsafe) = unsafe
+newtype Script_ = Script_ { | Script_' }
+unsafeUnScript_ :: Script_ -> { | Script_' }
+unsafeUnScript_ (Script_ unsafe) = unsafe
 
-instance typeToSymScript ::
-  TypeToSym Script "script"
+instance typeToSymScript_ ::
+  TypeToSym Script_ "script"
 
 script
   :: forall children
-   . Array (Attribute Script)
+   . Array (Attribute Script_)
   -> { | children }
-  -> Element Script children
-script = makeElt Script "script"
+  -> Element Script_ children
+script = makeElt Script_ "script"
 
 script'attr
-  :: Array (Attribute Script)
-  -> Array (Attribute Script)
+  :: Array (Attribute Script_)
+  -> Array (Attribute Script_)
 script'attr = identity
 
-data TScript = TScript
+data TScript_ = TScript_
 
-instance typeToSymTScript :: TypeToSym TScript "TScript"
+instance typeToSymTScript_ :: TypeToSym TScript_ "TScript_"
 
-instance semigroupTScript :: Semigroup TScript where
-  append _ _ = TScript
+instance semigroupTScript_ :: Semigroup TScript_ where
+  append _ _ = TScript_
 
-instance monoidTScript :: Monoid TScript where
-  mempty = TScript
+instance monoidTScript_ :: Monoid TScript_ where
+  mempty = TScript_
 
-instance reifyTScript :: ReifyAU Script TScript where
+instance reifyTScript_ :: ReifyAU Script_ TScript_ where
   reifyAU = const mempty
-type Section' =
+type Section_' =
   ( tag :: String
-  , attributes :: Array (Attribute Section)
+  , attributes :: Array (Attribute Section_)
   )
-newtype Section = Section { | Section' }
-unsafeUnSection :: Section -> { | Section' }
-unsafeUnSection (Section unsafe) = unsafe
+newtype Section_ = Section_ { | Section_' }
+unsafeUnSection_ :: Section_ -> { | Section_' }
+unsafeUnSection_ (Section_ unsafe) = unsafe
 
-instance typeToSymSection ::
-  TypeToSym Section "section"
+instance typeToSymSection_ ::
+  TypeToSym Section_ "section"
 
 section
   :: forall children
-   . Array (Attribute Section)
+   . Array (Attribute Section_)
   -> { | children }
-  -> Element Section children
-section = makeElt Section "section"
+  -> Element Section_ children
+section = makeElt Section_ "section"
 
 section'attr
-  :: Array (Attribute Section)
-  -> Array (Attribute Section)
+  :: Array (Attribute Section_)
+  -> Array (Attribute Section_)
 section'attr = identity
 
-data TSection = TSection
+data TSection_ = TSection_
 
-instance typeToSymTSection :: TypeToSym TSection "TSection"
+instance typeToSymTSection_ :: TypeToSym TSection_ "TSection_"
 
-instance semigroupTSection :: Semigroup TSection where
-  append _ _ = TSection
+instance semigroupTSection_ :: Semigroup TSection_ where
+  append _ _ = TSection_
 
-instance monoidTSection :: Monoid TSection where
-  mempty = TSection
+instance monoidTSection_ :: Monoid TSection_ where
+  mempty = TSection_
 
-instance reifyTSection :: ReifyAU Section TSection where
+instance reifyTSection_ :: ReifyAU Section_ TSection_ where
   reifyAU = const mempty
-type Select' =
+type Select_' =
   ( tag :: String
-  , attributes :: Array (Attribute Select)
+  , attributes :: Array (Attribute Select_)
   )
-newtype Select = Select { | Select' }
-unsafeUnSelect :: Select -> { | Select' }
-unsafeUnSelect (Select unsafe) = unsafe
+newtype Select_ = Select_ { | Select_' }
+unsafeUnSelect_ :: Select_ -> { | Select_' }
+unsafeUnSelect_ (Select_ unsafe) = unsafe
 
-instance typeToSymSelect ::
-  TypeToSym Select "select"
+instance typeToSymSelect_ ::
+  TypeToSym Select_ "select"
 
 select
   :: forall children
-   . Array (Attribute Select)
+   . Array (Attribute Select_)
   -> { | children }
-  -> Element Select children
-select = makeElt Select "select"
+  -> Element Select_ children
+select = makeElt Select_ "select"
 
 select'attr
-  :: Array (Attribute Select)
-  -> Array (Attribute Select)
+  :: Array (Attribute Select_)
+  -> Array (Attribute Select_)
 select'attr = identity
 
-data TSelect = TSelect
+data TSelect_ = TSelect_
 
-instance typeToSymTSelect :: TypeToSym TSelect "TSelect"
+instance typeToSymTSelect_ :: TypeToSym TSelect_ "TSelect_"
 
-instance semigroupTSelect :: Semigroup TSelect where
-  append _ _ = TSelect
+instance semigroupTSelect_ :: Semigroup TSelect_ where
+  append _ _ = TSelect_
 
-instance monoidTSelect :: Monoid TSelect where
-  mempty = TSelect
+instance monoidTSelect_ :: Monoid TSelect_ where
+  mempty = TSelect_
 
-instance reifyTSelect :: ReifyAU Select TSelect where
+instance reifyTSelect_ :: ReifyAU Select_ TSelect_ where
   reifyAU = const mempty
-type Small' =
+type Small_' =
   ( tag :: String
-  , attributes :: Array (Attribute Small)
+  , attributes :: Array (Attribute Small_)
   )
-newtype Small = Small { | Small' }
-unsafeUnSmall :: Small -> { | Small' }
-unsafeUnSmall (Small unsafe) = unsafe
+newtype Small_ = Small_ { | Small_' }
+unsafeUnSmall_ :: Small_ -> { | Small_' }
+unsafeUnSmall_ (Small_ unsafe) = unsafe
 
-instance typeToSymSmall ::
-  TypeToSym Small "small"
+instance typeToSymSmall_ ::
+  TypeToSym Small_ "small"
 
 small
   :: forall children
-   . Array (Attribute Small)
+   . Array (Attribute Small_)
   -> { | children }
-  -> Element Small children
-small = makeElt Small "small"
+  -> Element Small_ children
+small = makeElt Small_ "small"
 
 small'attr
-  :: Array (Attribute Small)
-  -> Array (Attribute Small)
+  :: Array (Attribute Small_)
+  -> Array (Attribute Small_)
 small'attr = identity
 
-data TSmall = TSmall
+data TSmall_ = TSmall_
 
-instance typeToSymTSmall :: TypeToSym TSmall "TSmall"
+instance typeToSymTSmall_ :: TypeToSym TSmall_ "TSmall_"
 
-instance semigroupTSmall :: Semigroup TSmall where
-  append _ _ = TSmall
+instance semigroupTSmall_ :: Semigroup TSmall_ where
+  append _ _ = TSmall_
 
-instance monoidTSmall :: Monoid TSmall where
-  mempty = TSmall
+instance monoidTSmall_ :: Monoid TSmall_ where
+  mempty = TSmall_
 
-instance reifyTSmall :: ReifyAU Small TSmall where
+instance reifyTSmall_ :: ReifyAU Small_ TSmall_ where
   reifyAU = const mempty
-type Source' =
+type Source_' =
   ( tag :: String
-  , attributes :: Array (Attribute Source)
+  , attributes :: Array (Attribute Source_)
   )
-newtype Source = Source { | Source' }
-unsafeUnSource :: Source -> { | Source' }
-unsafeUnSource (Source unsafe) = unsafe
+newtype Source_ = Source_ { | Source_' }
+unsafeUnSource_ :: Source_ -> { | Source_' }
+unsafeUnSource_ (Source_ unsafe) = unsafe
 
-instance typeToSymSource ::
-  TypeToSym Source "source"
+instance typeToSymSource_ ::
+  TypeToSym Source_ "source"
 
 source
   :: forall children
-   . Array (Attribute Source)
+   . Array (Attribute Source_)
   -> { | children }
-  -> Element Source children
-source = makeElt Source "source"
+  -> Element Source_ children
+source = makeElt Source_ "source"
 
 source'attr
-  :: Array (Attribute Source)
-  -> Array (Attribute Source)
+  :: Array (Attribute Source_)
+  -> Array (Attribute Source_)
 source'attr = identity
 
-data TSource = TSource
+data TSource_ = TSource_
 
-instance typeToSymTSource :: TypeToSym TSource "TSource"
+instance typeToSymTSource_ :: TypeToSym TSource_ "TSource_"
 
-instance semigroupTSource :: Semigroup TSource where
-  append _ _ = TSource
+instance semigroupTSource_ :: Semigroup TSource_ where
+  append _ _ = TSource_
 
-instance monoidTSource :: Monoid TSource where
-  mempty = TSource
+instance monoidTSource_ :: Monoid TSource_ where
+  mempty = TSource_
 
-instance reifyTSource :: ReifyAU Source TSource where
+instance reifyTSource_ :: ReifyAU Source_ TSource_ where
   reifyAU = const mempty
-type Span' =
+type Span_' =
   ( tag :: String
-  , attributes :: Array (Attribute Span)
+  , attributes :: Array (Attribute Span_)
   )
-newtype Span = Span { | Span' }
-unsafeUnSpan :: Span -> { | Span' }
-unsafeUnSpan (Span unsafe) = unsafe
+newtype Span_ = Span_ { | Span_' }
+unsafeUnSpan_ :: Span_ -> { | Span_' }
+unsafeUnSpan_ (Span_ unsafe) = unsafe
 
-instance typeToSymSpan ::
-  TypeToSym Span "span"
+instance typeToSymSpan_ ::
+  TypeToSym Span_ "span"
 
 span
   :: forall children
-   . Array (Attribute Span)
+   . Array (Attribute Span_)
   -> { | children }
-  -> Element Span children
-span = makeElt Span "span"
+  -> Element Span_ children
+span = makeElt Span_ "span"
 
 span'attr
-  :: Array (Attribute Span)
-  -> Array (Attribute Span)
+  :: Array (Attribute Span_)
+  -> Array (Attribute Span_)
 span'attr = identity
 
-data TSpan = TSpan
+data TSpan_ = TSpan_
 
-instance typeToSymTSpan :: TypeToSym TSpan "TSpan"
+instance typeToSymTSpan_ :: TypeToSym TSpan_ "TSpan_"
 
-instance semigroupTSpan :: Semigroup TSpan where
-  append _ _ = TSpan
+instance semigroupTSpan_ :: Semigroup TSpan_ where
+  append _ _ = TSpan_
 
-instance monoidTSpan :: Monoid TSpan where
-  mempty = TSpan
+instance monoidTSpan_ :: Monoid TSpan_ where
+  mempty = TSpan_
 
-instance reifyTSpan :: ReifyAU Span TSpan where
+instance reifyTSpan_ :: ReifyAU Span_ TSpan_ where
   reifyAU = const mempty
-type Strike' =
+type Strike_' =
   ( tag :: String
-  , attributes :: Array (Attribute Strike)
+  , attributes :: Array (Attribute Strike_)
   )
-newtype Strike = Strike { | Strike' }
-unsafeUnStrike :: Strike -> { | Strike' }
-unsafeUnStrike (Strike unsafe) = unsafe
+newtype Strike_ = Strike_ { | Strike_' }
+unsafeUnStrike_ :: Strike_ -> { | Strike_' }
+unsafeUnStrike_ (Strike_ unsafe) = unsafe
 
-instance typeToSymStrike ::
-  TypeToSym Strike "strike"
+instance typeToSymStrike_ ::
+  TypeToSym Strike_ "strike"
 
 strike
   :: forall children
-   . Array (Attribute Strike)
+   . Array (Attribute Strike_)
   -> { | children }
-  -> Element Strike children
-strike = makeElt Strike "strike"
+  -> Element Strike_ children
+strike = makeElt Strike_ "strike"
 
 strike'attr
-  :: Array (Attribute Strike)
-  -> Array (Attribute Strike)
+  :: Array (Attribute Strike_)
+  -> Array (Attribute Strike_)
 strike'attr = identity
 
-data TStrike = TStrike
+data TStrike_ = TStrike_
 
-instance typeToSymTStrike :: TypeToSym TStrike "TStrike"
+instance typeToSymTStrike_ :: TypeToSym TStrike_ "TStrike_"
 
-instance semigroupTStrike :: Semigroup TStrike where
-  append _ _ = TStrike
+instance semigroupTStrike_ :: Semigroup TStrike_ where
+  append _ _ = TStrike_
 
-instance monoidTStrike :: Monoid TStrike where
-  mempty = TStrike
+instance monoidTStrike_ :: Monoid TStrike_ where
+  mempty = TStrike_
 
-instance reifyTStrike :: ReifyAU Strike TStrike where
+instance reifyTStrike_ :: ReifyAU Strike_ TStrike_ where
   reifyAU = const mempty
-type Strong' =
+type Strong_' =
   ( tag :: String
-  , attributes :: Array (Attribute Strong)
+  , attributes :: Array (Attribute Strong_)
   )
-newtype Strong = Strong { | Strong' }
-unsafeUnStrong :: Strong -> { | Strong' }
-unsafeUnStrong (Strong unsafe) = unsafe
+newtype Strong_ = Strong_ { | Strong_' }
+unsafeUnStrong_ :: Strong_ -> { | Strong_' }
+unsafeUnStrong_ (Strong_ unsafe) = unsafe
 
-instance typeToSymStrong ::
-  TypeToSym Strong "strong"
+instance typeToSymStrong_ ::
+  TypeToSym Strong_ "strong"
 
 strong
   :: forall children
-   . Array (Attribute Strong)
+   . Array (Attribute Strong_)
   -> { | children }
-  -> Element Strong children
-strong = makeElt Strong "strong"
+  -> Element Strong_ children
+strong = makeElt Strong_ "strong"
 
 strong'attr
-  :: Array (Attribute Strong)
-  -> Array (Attribute Strong)
+  :: Array (Attribute Strong_)
+  -> Array (Attribute Strong_)
 strong'attr = identity
 
-data TStrong = TStrong
+data TStrong_ = TStrong_
 
-instance typeToSymTStrong :: TypeToSym TStrong "TStrong"
+instance typeToSymTStrong_ :: TypeToSym TStrong_ "TStrong_"
 
-instance semigroupTStrong :: Semigroup TStrong where
-  append _ _ = TStrong
+instance semigroupTStrong_ :: Semigroup TStrong_ where
+  append _ _ = TStrong_
 
-instance monoidTStrong :: Monoid TStrong where
-  mempty = TStrong
+instance monoidTStrong_ :: Monoid TStrong_ where
+  mempty = TStrong_
 
-instance reifyTStrong :: ReifyAU Strong TStrong where
+instance reifyTStrong_ :: ReifyAU Strong_ TStrong_ where
   reifyAU = const mempty
-type Style' =
+type Style_' =
   ( tag :: String
-  , attributes :: Array (Attribute Style)
+  , attributes :: Array (Attribute Style_)
   )
-newtype Style = Style { | Style' }
-unsafeUnStyle :: Style -> { | Style' }
-unsafeUnStyle (Style unsafe) = unsafe
+newtype Style_ = Style_ { | Style_' }
+unsafeUnStyle_ :: Style_ -> { | Style_' }
+unsafeUnStyle_ (Style_ unsafe) = unsafe
 
-instance typeToSymStyle ::
-  TypeToSym Style "style"
+instance typeToSymStyle_ ::
+  TypeToSym Style_ "style"
 
 style
   :: forall children
-   . Array (Attribute Style)
+   . Array (Attribute Style_)
   -> { | children }
-  -> Element Style children
-style = makeElt Style "style"
+  -> Element Style_ children
+style = makeElt Style_ "style"
 
 style'attr
-  :: Array (Attribute Style)
-  -> Array (Attribute Style)
+  :: Array (Attribute Style_)
+  -> Array (Attribute Style_)
 style'attr = identity
 
-data TStyle = TStyle
+data TStyle_ = TStyle_
 
-instance typeToSymTStyle :: TypeToSym TStyle "TStyle"
+instance typeToSymTStyle_ :: TypeToSym TStyle_ "TStyle_"
 
-instance semigroupTStyle :: Semigroup TStyle where
-  append _ _ = TStyle
+instance semigroupTStyle_ :: Semigroup TStyle_ where
+  append _ _ = TStyle_
 
-instance monoidTStyle :: Monoid TStyle where
-  mempty = TStyle
+instance monoidTStyle_ :: Monoid TStyle_ where
+  mempty = TStyle_
 
-instance reifyTStyle :: ReifyAU Style TStyle where
+instance reifyTStyle_ :: ReifyAU Style_ TStyle_ where
   reifyAU = const mempty
-type Sub' =
+type Sub_' =
   ( tag :: String
-  , attributes :: Array (Attribute Sub)
+  , attributes :: Array (Attribute Sub_)
   )
-newtype Sub = Sub { | Sub' }
-unsafeUnSub :: Sub -> { | Sub' }
-unsafeUnSub (Sub unsafe) = unsafe
+newtype Sub_ = Sub_ { | Sub_' }
+unsafeUnSub_ :: Sub_ -> { | Sub_' }
+unsafeUnSub_ (Sub_ unsafe) = unsafe
 
-instance typeToSymSub ::
-  TypeToSym Sub "sub"
+instance typeToSymSub_ ::
+  TypeToSym Sub_ "sub"
 
 sub
   :: forall children
-   . Array (Attribute Sub)
+   . Array (Attribute Sub_)
   -> { | children }
-  -> Element Sub children
-sub = makeElt Sub "sub"
+  -> Element Sub_ children
+sub = makeElt Sub_ "sub"
 
 sub'attr
-  :: Array (Attribute Sub)
-  -> Array (Attribute Sub)
+  :: Array (Attribute Sub_)
+  -> Array (Attribute Sub_)
 sub'attr = identity
 
-data TSub = TSub
+data TSub_ = TSub_
 
-instance typeToSymTSub :: TypeToSym TSub "TSub"
+instance typeToSymTSub_ :: TypeToSym TSub_ "TSub_"
 
-instance semigroupTSub :: Semigroup TSub where
-  append _ _ = TSub
+instance semigroupTSub_ :: Semigroup TSub_ where
+  append _ _ = TSub_
 
-instance monoidTSub :: Monoid TSub where
-  mempty = TSub
+instance monoidTSub_ :: Monoid TSub_ where
+  mempty = TSub_
 
-instance reifyTSub :: ReifyAU Sub TSub where
+instance reifyTSub_ :: ReifyAU Sub_ TSub_ where
   reifyAU = const mempty
-type Summary' =
+type Summary_' =
   ( tag :: String
-  , attributes :: Array (Attribute Summary)
+  , attributes :: Array (Attribute Summary_)
   )
-newtype Summary = Summary { | Summary' }
-unsafeUnSummary :: Summary -> { | Summary' }
-unsafeUnSummary (Summary unsafe) = unsafe
+newtype Summary_ = Summary_ { | Summary_' }
+unsafeUnSummary_ :: Summary_ -> { | Summary_' }
+unsafeUnSummary_ (Summary_ unsafe) = unsafe
 
-instance typeToSymSummary ::
-  TypeToSym Summary "summary"
+instance typeToSymSummary_ ::
+  TypeToSym Summary_ "summary"
 
 summary
   :: forall children
-   . Array (Attribute Summary)
+   . Array (Attribute Summary_)
   -> { | children }
-  -> Element Summary children
-summary = makeElt Summary "summary"
+  -> Element Summary_ children
+summary = makeElt Summary_ "summary"
 
 summary'attr
-  :: Array (Attribute Summary)
-  -> Array (Attribute Summary)
+  :: Array (Attribute Summary_)
+  -> Array (Attribute Summary_)
 summary'attr = identity
 
-data TSummary = TSummary
+data TSummary_ = TSummary_
 
-instance typeToSymTSummary :: TypeToSym TSummary "TSummary"
+instance typeToSymTSummary_ :: TypeToSym TSummary_ "TSummary_"
 
-instance semigroupTSummary :: Semigroup TSummary where
-  append _ _ = TSummary
+instance semigroupTSummary_ :: Semigroup TSummary_ where
+  append _ _ = TSummary_
 
-instance monoidTSummary :: Monoid TSummary where
-  mempty = TSummary
+instance monoidTSummary_ :: Monoid TSummary_ where
+  mempty = TSummary_
 
-instance reifyTSummary :: ReifyAU Summary TSummary where
+instance reifyTSummary_ :: ReifyAU Summary_ TSummary_ where
   reifyAU = const mempty
-type Sup' =
+type Sup_' =
   ( tag :: String
-  , attributes :: Array (Attribute Sup)
+  , attributes :: Array (Attribute Sup_)
   )
-newtype Sup = Sup { | Sup' }
-unsafeUnSup :: Sup -> { | Sup' }
-unsafeUnSup (Sup unsafe) = unsafe
+newtype Sup_ = Sup_ { | Sup_' }
+unsafeUnSup_ :: Sup_ -> { | Sup_' }
+unsafeUnSup_ (Sup_ unsafe) = unsafe
 
-instance typeToSymSup ::
-  TypeToSym Sup "sup"
+instance typeToSymSup_ ::
+  TypeToSym Sup_ "sup"
 
 sup
   :: forall children
-   . Array (Attribute Sup)
+   . Array (Attribute Sup_)
   -> { | children }
-  -> Element Sup children
-sup = makeElt Sup "sup"
+  -> Element Sup_ children
+sup = makeElt Sup_ "sup"
 
 sup'attr
-  :: Array (Attribute Sup)
-  -> Array (Attribute Sup)
+  :: Array (Attribute Sup_)
+  -> Array (Attribute Sup_)
 sup'attr = identity
 
-data TSup = TSup
+data TSup_ = TSup_
 
-instance typeToSymTSup :: TypeToSym TSup "TSup"
+instance typeToSymTSup_ :: TypeToSym TSup_ "TSup_"
 
-instance semigroupTSup :: Semigroup TSup where
-  append _ _ = TSup
+instance semigroupTSup_ :: Semigroup TSup_ where
+  append _ _ = TSup_
 
-instance monoidTSup :: Monoid TSup where
-  mempty = TSup
+instance monoidTSup_ :: Monoid TSup_ where
+  mempty = TSup_
 
-instance reifyTSup :: ReifyAU Sup TSup where
+instance reifyTSup_ :: ReifyAU Sup_ TSup_ where
   reifyAU = const mempty
-type Svg' =
+type Svg_' =
   ( tag :: String
-  , attributes :: Array (Attribute Svg)
+  , attributes :: Array (Attribute Svg_)
   )
-newtype Svg = Svg { | Svg' }
-unsafeUnSvg :: Svg -> { | Svg' }
-unsafeUnSvg (Svg unsafe) = unsafe
+newtype Svg_ = Svg_ { | Svg_' }
+unsafeUnSvg_ :: Svg_ -> { | Svg_' }
+unsafeUnSvg_ (Svg_ unsafe) = unsafe
 
-instance typeToSymSvg ::
-  TypeToSym Svg "svg"
+instance typeToSymSvg_ ::
+  TypeToSym Svg_ "svg"
 
 svg
   :: forall children
-   . Array (Attribute Svg)
+   . Array (Attribute Svg_)
   -> { | children }
-  -> Element Svg children
-svg = makeElt Svg "svg"
+  -> Element Svg_ children
+svg = makeElt Svg_ "svg"
 
 svg'attr
-  :: Array (Attribute Svg)
-  -> Array (Attribute Svg)
+  :: Array (Attribute Svg_)
+  -> Array (Attribute Svg_)
 svg'attr = identity
 
-data TSvg = TSvg
+data TSvg_ = TSvg_
 
-instance typeToSymTSvg :: TypeToSym TSvg "TSvg"
+instance typeToSymTSvg_ :: TypeToSym TSvg_ "TSvg_"
 
-instance semigroupTSvg :: Semigroup TSvg where
-  append _ _ = TSvg
+instance semigroupTSvg_ :: Semigroup TSvg_ where
+  append _ _ = TSvg_
 
-instance monoidTSvg :: Monoid TSvg where
-  mempty = TSvg
+instance monoidTSvg_ :: Monoid TSvg_ where
+  mempty = TSvg_
 
-instance reifyTSvg :: ReifyAU Svg TSvg where
+instance reifyTSvg_ :: ReifyAU Svg_ TSvg_ where
   reifyAU = const mempty
-type Table' =
+type Table_' =
   ( tag :: String
-  , attributes :: Array (Attribute Table)
+  , attributes :: Array (Attribute Table_)
   )
-newtype Table = Table { | Table' }
-unsafeUnTable :: Table -> { | Table' }
-unsafeUnTable (Table unsafe) = unsafe
+newtype Table_ = Table_ { | Table_' }
+unsafeUnTable_ :: Table_ -> { | Table_' }
+unsafeUnTable_ (Table_ unsafe) = unsafe
 
-instance typeToSymTable ::
-  TypeToSym Table "table"
+instance typeToSymTable_ ::
+  TypeToSym Table_ "table"
 
 table
   :: forall children
-   . Array (Attribute Table)
+   . Array (Attribute Table_)
   -> { | children }
-  -> Element Table children
-table = makeElt Table "table"
+  -> Element Table_ children
+table = makeElt Table_ "table"
 
 table'attr
-  :: Array (Attribute Table)
-  -> Array (Attribute Table)
+  :: Array (Attribute Table_)
+  -> Array (Attribute Table_)
 table'attr = identity
 
-data TTable = TTable
+data TTable_ = TTable_
 
-instance typeToSymTTable :: TypeToSym TTable "TTable"
+instance typeToSymTTable_ :: TypeToSym TTable_ "TTable_"
 
-instance semigroupTTable :: Semigroup TTable where
-  append _ _ = TTable
+instance semigroupTTable_ :: Semigroup TTable_ where
+  append _ _ = TTable_
 
-instance monoidTTable :: Monoid TTable where
-  mempty = TTable
+instance monoidTTable_ :: Monoid TTable_ where
+  mempty = TTable_
 
-instance reifyTTable :: ReifyAU Table TTable where
+instance reifyTTable_ :: ReifyAU Table_ TTable_ where
   reifyAU = const mempty
-type Tbody' =
+type Tbody_' =
   ( tag :: String
-  , attributes :: Array (Attribute Tbody)
+  , attributes :: Array (Attribute Tbody_)
   )
-newtype Tbody = Tbody { | Tbody' }
-unsafeUnTbody :: Tbody -> { | Tbody' }
-unsafeUnTbody (Tbody unsafe) = unsafe
+newtype Tbody_ = Tbody_ { | Tbody_' }
+unsafeUnTbody_ :: Tbody_ -> { | Tbody_' }
+unsafeUnTbody_ (Tbody_ unsafe) = unsafe
 
-instance typeToSymTbody ::
-  TypeToSym Tbody "tbody"
+instance typeToSymTbody_ ::
+  TypeToSym Tbody_ "tbody"
 
 tbody
   :: forall children
-   . Array (Attribute Tbody)
+   . Array (Attribute Tbody_)
   -> { | children }
-  -> Element Tbody children
-tbody = makeElt Tbody "tbody"
+  -> Element Tbody_ children
+tbody = makeElt Tbody_ "tbody"
 
 tbody'attr
-  :: Array (Attribute Tbody)
-  -> Array (Attribute Tbody)
+  :: Array (Attribute Tbody_)
+  -> Array (Attribute Tbody_)
 tbody'attr = identity
 
-data TTbody = TTbody
+data TTbody_ = TTbody_
 
-instance typeToSymTTbody :: TypeToSym TTbody "TTbody"
+instance typeToSymTTbody_ :: TypeToSym TTbody_ "TTbody_"
 
-instance semigroupTTbody :: Semigroup TTbody where
-  append _ _ = TTbody
+instance semigroupTTbody_ :: Semigroup TTbody_ where
+  append _ _ = TTbody_
 
-instance monoidTTbody :: Monoid TTbody where
-  mempty = TTbody
+instance monoidTTbody_ :: Monoid TTbody_ where
+  mempty = TTbody_
 
-instance reifyTTbody :: ReifyAU Tbody TTbody where
+instance reifyTTbody_ :: ReifyAU Tbody_ TTbody_ where
   reifyAU = const mempty
-type Td' =
+type Td_' =
   ( tag :: String
-  , attributes :: Array (Attribute Td)
+  , attributes :: Array (Attribute Td_)
   )
-newtype Td = Td { | Td' }
-unsafeUnTd :: Td -> { | Td' }
-unsafeUnTd (Td unsafe) = unsafe
+newtype Td_ = Td_ { | Td_' }
+unsafeUnTd_ :: Td_ -> { | Td_' }
+unsafeUnTd_ (Td_ unsafe) = unsafe
 
-instance typeToSymTd ::
-  TypeToSym Td "td"
+instance typeToSymTd_ ::
+  TypeToSym Td_ "td"
 
 td
   :: forall children
-   . Array (Attribute Td)
+   . Array (Attribute Td_)
   -> { | children }
-  -> Element Td children
-td = makeElt Td "td"
+  -> Element Td_ children
+td = makeElt Td_ "td"
 
 td'attr
-  :: Array (Attribute Td)
-  -> Array (Attribute Td)
+  :: Array (Attribute Td_)
+  -> Array (Attribute Td_)
 td'attr = identity
 
-data TTd = TTd
+data TTd_ = TTd_
 
-instance typeToSymTTd :: TypeToSym TTd "TTd"
+instance typeToSymTTd_ :: TypeToSym TTd_ "TTd_"
 
-instance semigroupTTd :: Semigroup TTd where
-  append _ _ = TTd
+instance semigroupTTd_ :: Semigroup TTd_ where
+  append _ _ = TTd_
 
-instance monoidTTd :: Monoid TTd where
-  mempty = TTd
+instance monoidTTd_ :: Monoid TTd_ where
+  mempty = TTd_
 
-instance reifyTTd :: ReifyAU Td TTd where
+instance reifyTTd_ :: ReifyAU Td_ TTd_ where
   reifyAU = const mempty
-type Template' =
+type Template_' =
   ( tag :: String
-  , attributes :: Array (Attribute Template)
+  , attributes :: Array (Attribute Template_)
   )
-newtype Template = Template { | Template' }
-unsafeUnTemplate :: Template -> { | Template' }
-unsafeUnTemplate (Template unsafe) = unsafe
+newtype Template_ = Template_ { | Template_' }
+unsafeUnTemplate_ :: Template_ -> { | Template_' }
+unsafeUnTemplate_ (Template_ unsafe) = unsafe
 
-instance typeToSymTemplate ::
-  TypeToSym Template "template"
+instance typeToSymTemplate_ ::
+  TypeToSym Template_ "template"
 
 template
   :: forall children
-   . Array (Attribute Template)
+   . Array (Attribute Template_)
   -> { | children }
-  -> Element Template children
-template = makeElt Template "template"
+  -> Element Template_ children
+template = makeElt Template_ "template"
 
 template'attr
-  :: Array (Attribute Template)
-  -> Array (Attribute Template)
+  :: Array (Attribute Template_)
+  -> Array (Attribute Template_)
 template'attr = identity
 
-data TTemplate = TTemplate
+data TTemplate_ = TTemplate_
 
-instance typeToSymTTemplate :: TypeToSym TTemplate "TTemplate"
+instance typeToSymTTemplate_ :: TypeToSym TTemplate_ "TTemplate_"
 
-instance semigroupTTemplate :: Semigroup TTemplate where
-  append _ _ = TTemplate
+instance semigroupTTemplate_ :: Semigroup TTemplate_ where
+  append _ _ = TTemplate_
 
-instance monoidTTemplate :: Monoid TTemplate where
-  mempty = TTemplate
+instance monoidTTemplate_ :: Monoid TTemplate_ where
+  mempty = TTemplate_
 
-instance reifyTTemplate :: ReifyAU Template TTemplate where
+instance reifyTTemplate_ :: ReifyAU Template_ TTemplate_ where
   reifyAU = const mempty
-type Textarea' =
+type Textarea_' =
   ( tag :: String
-  , attributes :: Array (Attribute Textarea)
+  , attributes :: Array (Attribute Textarea_)
   )
-newtype Textarea = Textarea { | Textarea' }
-unsafeUnTextarea :: Textarea -> { | Textarea' }
-unsafeUnTextarea (Textarea unsafe) = unsafe
+newtype Textarea_ = Textarea_ { | Textarea_' }
+unsafeUnTextarea_ :: Textarea_ -> { | Textarea_' }
+unsafeUnTextarea_ (Textarea_ unsafe) = unsafe
 
-instance typeToSymTextarea ::
-  TypeToSym Textarea "textarea"
+instance typeToSymTextarea_ ::
+  TypeToSym Textarea_ "textarea"
 
 textarea
   :: forall children
-   . Array (Attribute Textarea)
+   . Array (Attribute Textarea_)
   -> { | children }
-  -> Element Textarea children
-textarea = makeElt Textarea "textarea"
+  -> Element Textarea_ children
+textarea = makeElt Textarea_ "textarea"
 
 textarea'attr
-  :: Array (Attribute Textarea)
-  -> Array (Attribute Textarea)
+  :: Array (Attribute Textarea_)
+  -> Array (Attribute Textarea_)
 textarea'attr = identity
 
-data TTextarea = TTextarea
+data TTextarea_ = TTextarea_
 
-instance typeToSymTTextarea :: TypeToSym TTextarea "TTextarea"
+instance typeToSymTTextarea_ :: TypeToSym TTextarea_ "TTextarea_"
 
-instance semigroupTTextarea :: Semigroup TTextarea where
-  append _ _ = TTextarea
+instance semigroupTTextarea_ :: Semigroup TTextarea_ where
+  append _ _ = TTextarea_
 
-instance monoidTTextarea :: Monoid TTextarea where
-  mempty = TTextarea
+instance monoidTTextarea_ :: Monoid TTextarea_ where
+  mempty = TTextarea_
 
-instance reifyTTextarea :: ReifyAU Textarea TTextarea where
+instance reifyTTextarea_ :: ReifyAU Textarea_ TTextarea_ where
   reifyAU = const mempty
-type Tfoot' =
+type Tfoot_' =
   ( tag :: String
-  , attributes :: Array (Attribute Tfoot)
+  , attributes :: Array (Attribute Tfoot_)
   )
-newtype Tfoot = Tfoot { | Tfoot' }
-unsafeUnTfoot :: Tfoot -> { | Tfoot' }
-unsafeUnTfoot (Tfoot unsafe) = unsafe
+newtype Tfoot_ = Tfoot_ { | Tfoot_' }
+unsafeUnTfoot_ :: Tfoot_ -> { | Tfoot_' }
+unsafeUnTfoot_ (Tfoot_ unsafe) = unsafe
 
-instance typeToSymTfoot ::
-  TypeToSym Tfoot "tfoot"
+instance typeToSymTfoot_ ::
+  TypeToSym Tfoot_ "tfoot"
 
 tfoot
   :: forall children
-   . Array (Attribute Tfoot)
+   . Array (Attribute Tfoot_)
   -> { | children }
-  -> Element Tfoot children
-tfoot = makeElt Tfoot "tfoot"
+  -> Element Tfoot_ children
+tfoot = makeElt Tfoot_ "tfoot"
 
 tfoot'attr
-  :: Array (Attribute Tfoot)
-  -> Array (Attribute Tfoot)
+  :: Array (Attribute Tfoot_)
+  -> Array (Attribute Tfoot_)
 tfoot'attr = identity
 
-data TTfoot = TTfoot
+data TTfoot_ = TTfoot_
 
-instance typeToSymTTfoot :: TypeToSym TTfoot "TTfoot"
+instance typeToSymTTfoot_ :: TypeToSym TTfoot_ "TTfoot_"
 
-instance semigroupTTfoot :: Semigroup TTfoot where
-  append _ _ = TTfoot
+instance semigroupTTfoot_ :: Semigroup TTfoot_ where
+  append _ _ = TTfoot_
 
-instance monoidTTfoot :: Monoid TTfoot where
-  mempty = TTfoot
+instance monoidTTfoot_ :: Monoid TTfoot_ where
+  mempty = TTfoot_
 
-instance reifyTTfoot :: ReifyAU Tfoot TTfoot where
+instance reifyTTfoot_ :: ReifyAU Tfoot_ TTfoot_ where
   reifyAU = const mempty
-type Th' =
+type Th_' =
   ( tag :: String
-  , attributes :: Array (Attribute Th)
+  , attributes :: Array (Attribute Th_)
   )
-newtype Th = Th { | Th' }
-unsafeUnTh :: Th -> { | Th' }
-unsafeUnTh (Th unsafe) = unsafe
+newtype Th_ = Th_ { | Th_' }
+unsafeUnTh_ :: Th_ -> { | Th_' }
+unsafeUnTh_ (Th_ unsafe) = unsafe
 
-instance typeToSymTh ::
-  TypeToSym Th "th"
+instance typeToSymTh_ ::
+  TypeToSym Th_ "th"
 
 th
   :: forall children
-   . Array (Attribute Th)
+   . Array (Attribute Th_)
   -> { | children }
-  -> Element Th children
-th = makeElt Th "th"
+  -> Element Th_ children
+th = makeElt Th_ "th"
 
 th'attr
-  :: Array (Attribute Th)
-  -> Array (Attribute Th)
+  :: Array (Attribute Th_)
+  -> Array (Attribute Th_)
 th'attr = identity
 
-data TTh = TTh
+data TTh_ = TTh_
 
-instance typeToSymTTh :: TypeToSym TTh "TTh"
+instance typeToSymTTh_ :: TypeToSym TTh_ "TTh_"
 
-instance semigroupTTh :: Semigroup TTh where
-  append _ _ = TTh
+instance semigroupTTh_ :: Semigroup TTh_ where
+  append _ _ = TTh_
 
-instance monoidTTh :: Monoid TTh where
-  mempty = TTh
+instance monoidTTh_ :: Monoid TTh_ where
+  mempty = TTh_
 
-instance reifyTTh :: ReifyAU Th TTh where
+instance reifyTTh_ :: ReifyAU Th_ TTh_ where
   reifyAU = const mempty
-type Thead' =
+type Thead_' =
   ( tag :: String
-  , attributes :: Array (Attribute Thead)
+  , attributes :: Array (Attribute Thead_)
   )
-newtype Thead = Thead { | Thead' }
-unsafeUnThead :: Thead -> { | Thead' }
-unsafeUnThead (Thead unsafe) = unsafe
+newtype Thead_ = Thead_ { | Thead_' }
+unsafeUnThead_ :: Thead_ -> { | Thead_' }
+unsafeUnThead_ (Thead_ unsafe) = unsafe
 
-instance typeToSymThead ::
-  TypeToSym Thead "thead"
+instance typeToSymThead_ ::
+  TypeToSym Thead_ "thead"
 
 thead
   :: forall children
-   . Array (Attribute Thead)
+   . Array (Attribute Thead_)
   -> { | children }
-  -> Element Thead children
-thead = makeElt Thead "thead"
+  -> Element Thead_ children
+thead = makeElt Thead_ "thead"
 
 thead'attr
-  :: Array (Attribute Thead)
-  -> Array (Attribute Thead)
+  :: Array (Attribute Thead_)
+  -> Array (Attribute Thead_)
 thead'attr = identity
 
-data TThead = TThead
+data TThead_ = TThead_
 
-instance typeToSymTThead :: TypeToSym TThead "TThead"
+instance typeToSymTThead_ :: TypeToSym TThead_ "TThead_"
 
-instance semigroupTThead :: Semigroup TThead where
-  append _ _ = TThead
+instance semigroupTThead_ :: Semigroup TThead_ where
+  append _ _ = TThead_
 
-instance monoidTThead :: Monoid TThead where
-  mempty = TThead
+instance monoidTThead_ :: Monoid TThead_ where
+  mempty = TThead_
 
-instance reifyTThead :: ReifyAU Thead TThead where
+instance reifyTThead_ :: ReifyAU Thead_ TThead_ where
   reifyAU = const mempty
-type Time' =
+type Time_' =
   ( tag :: String
-  , attributes :: Array (Attribute Time)
+  , attributes :: Array (Attribute Time_)
   )
-newtype Time = Time { | Time' }
-unsafeUnTime :: Time -> { | Time' }
-unsafeUnTime (Time unsafe) = unsafe
+newtype Time_ = Time_ { | Time_' }
+unsafeUnTime_ :: Time_ -> { | Time_' }
+unsafeUnTime_ (Time_ unsafe) = unsafe
 
-instance typeToSymTime ::
-  TypeToSym Time "time"
+instance typeToSymTime_ ::
+  TypeToSym Time_ "time"
 
 time
   :: forall children
-   . Array (Attribute Time)
+   . Array (Attribute Time_)
   -> { | children }
-  -> Element Time children
-time = makeElt Time "time"
+  -> Element Time_ children
+time = makeElt Time_ "time"
 
 time'attr
-  :: Array (Attribute Time)
-  -> Array (Attribute Time)
+  :: Array (Attribute Time_)
+  -> Array (Attribute Time_)
 time'attr = identity
 
-data TTime = TTime
+data TTime_ = TTime_
 
-instance typeToSymTTime :: TypeToSym TTime "TTime"
+instance typeToSymTTime_ :: TypeToSym TTime_ "TTime_"
 
-instance semigroupTTime :: Semigroup TTime where
-  append _ _ = TTime
+instance semigroupTTime_ :: Semigroup TTime_ where
+  append _ _ = TTime_
 
-instance monoidTTime :: Monoid TTime where
-  mempty = TTime
+instance monoidTTime_ :: Monoid TTime_ where
+  mempty = TTime_
 
-instance reifyTTime :: ReifyAU Time TTime where
+instance reifyTTime_ :: ReifyAU Time_ TTime_ where
   reifyAU = const mempty
-type Title' =
+type Title_' =
   ( tag :: String
-  , attributes :: Array (Attribute Title)
+  , attributes :: Array (Attribute Title_)
   )
-newtype Title = Title { | Title' }
-unsafeUnTitle :: Title -> { | Title' }
-unsafeUnTitle (Title unsafe) = unsafe
+newtype Title_ = Title_ { | Title_' }
+unsafeUnTitle_ :: Title_ -> { | Title_' }
+unsafeUnTitle_ (Title_ unsafe) = unsafe
 
-instance typeToSymTitle ::
-  TypeToSym Title "title"
+instance typeToSymTitle_ ::
+  TypeToSym Title_ "title"
 
 title
   :: forall children
-   . Array (Attribute Title)
+   . Array (Attribute Title_)
   -> { | children }
-  -> Element Title children
-title = makeElt Title "title"
+  -> Element Title_ children
+title = makeElt Title_ "title"
 
 title'attr
-  :: Array (Attribute Title)
-  -> Array (Attribute Title)
+  :: Array (Attribute Title_)
+  -> Array (Attribute Title_)
 title'attr = identity
 
-data TTitle = TTitle
+data TTitle_ = TTitle_
 
-instance typeToSymTTitle :: TypeToSym TTitle "TTitle"
+instance typeToSymTTitle_ :: TypeToSym TTitle_ "TTitle_"
 
-instance semigroupTTitle :: Semigroup TTitle where
-  append _ _ = TTitle
+instance semigroupTTitle_ :: Semigroup TTitle_ where
+  append _ _ = TTitle_
 
-instance monoidTTitle :: Monoid TTitle where
-  mempty = TTitle
+instance monoidTTitle_ :: Monoid TTitle_ where
+  mempty = TTitle_
 
-instance reifyTTitle :: ReifyAU Title TTitle where
+instance reifyTTitle_ :: ReifyAU Title_ TTitle_ where
   reifyAU = const mempty
-type Tr' =
+type Tr_' =
   ( tag :: String
-  , attributes :: Array (Attribute Tr)
+  , attributes :: Array (Attribute Tr_)
   )
-newtype Tr = Tr { | Tr' }
-unsafeUnTr :: Tr -> { | Tr' }
-unsafeUnTr (Tr unsafe) = unsafe
+newtype Tr_ = Tr_ { | Tr_' }
+unsafeUnTr_ :: Tr_ -> { | Tr_' }
+unsafeUnTr_ (Tr_ unsafe) = unsafe
 
-instance typeToSymTr ::
-  TypeToSym Tr "tr"
+instance typeToSymTr_ ::
+  TypeToSym Tr_ "tr"
 
 tr
   :: forall children
-   . Array (Attribute Tr)
+   . Array (Attribute Tr_)
   -> { | children }
-  -> Element Tr children
-tr = makeElt Tr "tr"
+  -> Element Tr_ children
+tr = makeElt Tr_ "tr"
 
 tr'attr
-  :: Array (Attribute Tr)
-  -> Array (Attribute Tr)
+  :: Array (Attribute Tr_)
+  -> Array (Attribute Tr_)
 tr'attr = identity
 
-data TTr = TTr
+data TTr_ = TTr_
 
-instance typeToSymTTr :: TypeToSym TTr "TTr"
+instance typeToSymTTr_ :: TypeToSym TTr_ "TTr_"
 
-instance semigroupTTr :: Semigroup TTr where
-  append _ _ = TTr
+instance semigroupTTr_ :: Semigroup TTr_ where
+  append _ _ = TTr_
 
-instance monoidTTr :: Monoid TTr where
-  mempty = TTr
+instance monoidTTr_ :: Monoid TTr_ where
+  mempty = TTr_
 
-instance reifyTTr :: ReifyAU Tr TTr where
+instance reifyTTr_ :: ReifyAU Tr_ TTr_ where
   reifyAU = const mempty
-type Track' =
+type Track_' =
   ( tag :: String
-  , attributes :: Array (Attribute Track)
+  , attributes :: Array (Attribute Track_)
   )
-newtype Track = Track { | Track' }
-unsafeUnTrack :: Track -> { | Track' }
-unsafeUnTrack (Track unsafe) = unsafe
+newtype Track_ = Track_ { | Track_' }
+unsafeUnTrack_ :: Track_ -> { | Track_' }
+unsafeUnTrack_ (Track_ unsafe) = unsafe
 
-instance typeToSymTrack ::
-  TypeToSym Track "track"
+instance typeToSymTrack_ ::
+  TypeToSym Track_ "track"
 
 track
   :: forall children
-   . Array (Attribute Track)
+   . Array (Attribute Track_)
   -> { | children }
-  -> Element Track children
-track = makeElt Track "track"
+  -> Element Track_ children
+track = makeElt Track_ "track"
 
 track'attr
-  :: Array (Attribute Track)
-  -> Array (Attribute Track)
+  :: Array (Attribute Track_)
+  -> Array (Attribute Track_)
 track'attr = identity
 
-data TTrack = TTrack
+data TTrack_ = TTrack_
 
-instance typeToSymTTrack :: TypeToSym TTrack "TTrack"
+instance typeToSymTTrack_ :: TypeToSym TTrack_ "TTrack_"
 
-instance semigroupTTrack :: Semigroup TTrack where
-  append _ _ = TTrack
+instance semigroupTTrack_ :: Semigroup TTrack_ where
+  append _ _ = TTrack_
 
-instance monoidTTrack :: Monoid TTrack where
-  mempty = TTrack
+instance monoidTTrack_ :: Monoid TTrack_ where
+  mempty = TTrack_
 
-instance reifyTTrack :: ReifyAU Track TTrack where
+instance reifyTTrack_ :: ReifyAU Track_ TTrack_ where
   reifyAU = const mempty
-type Tt' =
+type Tt_' =
   ( tag :: String
-  , attributes :: Array (Attribute Tt)
+  , attributes :: Array (Attribute Tt_)
   )
-newtype Tt = Tt { | Tt' }
-unsafeUnTt :: Tt -> { | Tt' }
-unsafeUnTt (Tt unsafe) = unsafe
+newtype Tt_ = Tt_ { | Tt_' }
+unsafeUnTt_ :: Tt_ -> { | Tt_' }
+unsafeUnTt_ (Tt_ unsafe) = unsafe
 
-instance typeToSymTt ::
-  TypeToSym Tt "tt"
+instance typeToSymTt_ ::
+  TypeToSym Tt_ "tt"
 
 tt
   :: forall children
-   . Array (Attribute Tt)
+   . Array (Attribute Tt_)
   -> { | children }
-  -> Element Tt children
-tt = makeElt Tt "tt"
+  -> Element Tt_ children
+tt = makeElt Tt_ "tt"
 
 tt'attr
-  :: Array (Attribute Tt)
-  -> Array (Attribute Tt)
+  :: Array (Attribute Tt_)
+  -> Array (Attribute Tt_)
 tt'attr = identity
 
-data TTt = TTt
+data TTt_ = TTt_
 
-instance typeToSymTTt :: TypeToSym TTt "TTt"
+instance typeToSymTTt_ :: TypeToSym TTt_ "TTt_"
 
-instance semigroupTTt :: Semigroup TTt where
-  append _ _ = TTt
+instance semigroupTTt_ :: Semigroup TTt_ where
+  append _ _ = TTt_
 
-instance monoidTTt :: Monoid TTt where
-  mempty = TTt
+instance monoidTTt_ :: Monoid TTt_ where
+  mempty = TTt_
 
-instance reifyTTt :: ReifyAU Tt TTt where
+instance reifyTTt_ :: ReifyAU Tt_ TTt_ where
   reifyAU = const mempty
-type U' =
+type U_' =
   ( tag :: String
-  , attributes :: Array (Attribute U)
+  , attributes :: Array (Attribute U_)
   )
-newtype U = U { | U' }
-unsafeUnU :: U -> { | U' }
-unsafeUnU (U unsafe) = unsafe
+newtype U_ = U_ { | U_' }
+unsafeUnU_ :: U_ -> { | U_' }
+unsafeUnU_ (U_ unsafe) = unsafe
 
-instance typeToSymU ::
-  TypeToSym U "u"
+instance typeToSymU_ ::
+  TypeToSym U_ "u"
 
 u
   :: forall children
-   . Array (Attribute U)
+   . Array (Attribute U_)
   -> { | children }
-  -> Element U children
-u = makeElt U "u"
+  -> Element U_ children
+u = makeElt U_ "u"
 
 u'attr
-  :: Array (Attribute U)
-  -> Array (Attribute U)
+  :: Array (Attribute U_)
+  -> Array (Attribute U_)
 u'attr = identity
 
-data TU = TU
+data TU_ = TU_
 
-instance typeToSymTU :: TypeToSym TU "TU"
+instance typeToSymTU_ :: TypeToSym TU_ "TU_"
 
-instance semigroupTU :: Semigroup TU where
-  append _ _ = TU
+instance semigroupTU_ :: Semigroup TU_ where
+  append _ _ = TU_
 
-instance monoidTU :: Monoid TU where
-  mempty = TU
+instance monoidTU_ :: Monoid TU_ where
+  mempty = TU_
 
-instance reifyTU :: ReifyAU U TU where
+instance reifyTU_ :: ReifyAU U_ TU_ where
   reifyAU = const mempty
-type Ul' =
+type Ul_' =
   ( tag :: String
-  , attributes :: Array (Attribute Ul)
+  , attributes :: Array (Attribute Ul_)
   )
-newtype Ul = Ul { | Ul' }
-unsafeUnUl :: Ul -> { | Ul' }
-unsafeUnUl (Ul unsafe) = unsafe
+newtype Ul_ = Ul_ { | Ul_' }
+unsafeUnUl_ :: Ul_ -> { | Ul_' }
+unsafeUnUl_ (Ul_ unsafe) = unsafe
 
-instance typeToSymUl ::
-  TypeToSym Ul "ul"
+instance typeToSymUl_ ::
+  TypeToSym Ul_ "ul"
 
 ul
   :: forall children
-   . Array (Attribute Ul)
+   . Array (Attribute Ul_)
   -> { | children }
-  -> Element Ul children
-ul = makeElt Ul "ul"
+  -> Element Ul_ children
+ul = makeElt Ul_ "ul"
 
 ul'attr
-  :: Array (Attribute Ul)
-  -> Array (Attribute Ul)
+  :: Array (Attribute Ul_)
+  -> Array (Attribute Ul_)
 ul'attr = identity
 
-data TUl = TUl
+data TUl_ = TUl_
 
-instance typeToSymTUl :: TypeToSym TUl "TUl"
+instance typeToSymTUl_ :: TypeToSym TUl_ "TUl_"
 
-instance semigroupTUl :: Semigroup TUl where
-  append _ _ = TUl
+instance semigroupTUl_ :: Semigroup TUl_ where
+  append _ _ = TUl_
 
-instance monoidTUl :: Monoid TUl where
-  mempty = TUl
+instance monoidTUl_ :: Monoid TUl_ where
+  mempty = TUl_
 
-instance reifyTUl :: ReifyAU Ul TUl where
+instance reifyTUl_ :: ReifyAU Ul_ TUl_ where
   reifyAU = const mempty
-type Var' =
+type Var_' =
   ( tag :: String
-  , attributes :: Array (Attribute Var)
+  , attributes :: Array (Attribute Var_)
   )
-newtype Var = Var { | Var' }
-unsafeUnVar :: Var -> { | Var' }
-unsafeUnVar (Var unsafe) = unsafe
+newtype Var_ = Var_ { | Var_' }
+unsafeUnVar_ :: Var_ -> { | Var_' }
+unsafeUnVar_ (Var_ unsafe) = unsafe
 
-instance typeToSymVar ::
-  TypeToSym Var "var"
+instance typeToSymVar_ ::
+  TypeToSym Var_ "var"
 
 var
   :: forall children
-   . Array (Attribute Var)
+   . Array (Attribute Var_)
   -> { | children }
-  -> Element Var children
-var = makeElt Var "var"
+  -> Element Var_ children
+var = makeElt Var_ "var"
 
 var'attr
-  :: Array (Attribute Var)
-  -> Array (Attribute Var)
+  :: Array (Attribute Var_)
+  -> Array (Attribute Var_)
 var'attr = identity
 
-data TVar = TVar
+data TVar_ = TVar_
 
-instance typeToSymTVar :: TypeToSym TVar "TVar"
+instance typeToSymTVar_ :: TypeToSym TVar_ "TVar_"
 
-instance semigroupTVar :: Semigroup TVar where
-  append _ _ = TVar
+instance semigroupTVar_ :: Semigroup TVar_ where
+  append _ _ = TVar_
 
-instance monoidTVar :: Monoid TVar where
-  mempty = TVar
+instance monoidTVar_ :: Monoid TVar_ where
+  mempty = TVar_
 
-instance reifyTVar :: ReifyAU Var TVar where
+instance reifyTVar_ :: ReifyAU Var_ TVar_ where
   reifyAU = const mempty
-type Video' =
+type Video_' =
   ( tag :: String
-  , attributes :: Array (Attribute Video)
+  , attributes :: Array (Attribute Video_)
   )
-newtype Video = Video { | Video' }
-unsafeUnVideo :: Video -> { | Video' }
-unsafeUnVideo (Video unsafe) = unsafe
+newtype Video_ = Video_ { | Video_' }
+unsafeUnVideo_ :: Video_ -> { | Video_' }
+unsafeUnVideo_ (Video_ unsafe) = unsafe
 
-instance typeToSymVideo ::
-  TypeToSym Video "video"
+instance typeToSymVideo_ ::
+  TypeToSym Video_ "video"
 
 video
   :: forall children
-   . Array (Attribute Video)
+   . Array (Attribute Video_)
   -> { | children }
-  -> Element Video children
-video = makeElt Video "video"
+  -> Element Video_ children
+video = makeElt Video_ "video"
 
 video'attr
-  :: Array (Attribute Video)
-  -> Array (Attribute Video)
+  :: Array (Attribute Video_)
+  -> Array (Attribute Video_)
 video'attr = identity
 
-data TVideo = TVideo
+data TVideo_ = TVideo_
 
-instance typeToSymTVideo :: TypeToSym TVideo "TVideo"
+instance typeToSymTVideo_ :: TypeToSym TVideo_ "TVideo_"
 
-instance semigroupTVideo :: Semigroup TVideo where
-  append _ _ = TVideo
+instance semigroupTVideo_ :: Semigroup TVideo_ where
+  append _ _ = TVideo_
 
-instance monoidTVideo :: Monoid TVideo where
-  mempty = TVideo
+instance monoidTVideo_ :: Monoid TVideo_ where
+  mempty = TVideo_
 
-instance reifyTVideo :: ReifyAU Video TVideo where
+instance reifyTVideo_ :: ReifyAU Video_ TVideo_ where
   reifyAU = const mempty
-type Wbr' =
+type Wbr_' =
   ( tag :: String
-  , attributes :: Array (Attribute Wbr)
+  , attributes :: Array (Attribute Wbr_)
   )
-newtype Wbr = Wbr { | Wbr' }
-unsafeUnWbr :: Wbr -> { | Wbr' }
-unsafeUnWbr (Wbr unsafe) = unsafe
+newtype Wbr_ = Wbr_ { | Wbr_' }
+unsafeUnWbr_ :: Wbr_ -> { | Wbr_' }
+unsafeUnWbr_ (Wbr_ unsafe) = unsafe
 
-instance typeToSymWbr ::
-  TypeToSym Wbr "wbr"
+instance typeToSymWbr_ ::
+  TypeToSym Wbr_ "wbr"
 
 wbr
   :: forall children
-   . Array (Attribute Wbr)
+   . Array (Attribute Wbr_)
   -> { | children }
-  -> Element Wbr children
-wbr = makeElt Wbr "wbr"
+  -> Element Wbr_ children
+wbr = makeElt Wbr_ "wbr"
 
 wbr'attr
-  :: Array (Attribute Wbr)
-  -> Array (Attribute Wbr)
+  :: Array (Attribute Wbr_)
+  -> Array (Attribute Wbr_)
 wbr'attr = identity
 
-data TWbr = TWbr
+data TWbr_ = TWbr_
 
-instance typeToSymTWbr :: TypeToSym TWbr "TWbr"
+instance typeToSymTWbr_ :: TypeToSym TWbr_ "TWbr_"
 
-instance semigroupTWbr :: Semigroup TWbr where
-  append _ _ = TWbr
+instance semigroupTWbr_ :: Semigroup TWbr_ where
+  append _ _ = TWbr_
 
-instance monoidTWbr :: Monoid TWbr where
-  mempty = TWbr
+instance monoidTWbr_ :: Monoid TWbr_ where
+  mempty = TWbr_
 
-instance reifyTWbr :: ReifyAU Wbr TWbr where
+instance reifyTWbr_ :: ReifyAU Wbr_ TWbr_ where
   reifyAU = const mempty
 -- codegen 1

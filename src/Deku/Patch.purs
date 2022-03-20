@@ -679,1465 +679,1465 @@ instance patchAll ::
     n = toGraphEffects (Proxy :: _ (instructions)) newCache { instructions }
 
 -- codegen 5
-data MakeA (ptr :: Symbol) = MakeA (Proxy ptr)
-instance doCreateMakeA :: DoCreate ptr CTOR.TA (MakeA ptr)
-instance toGraphEffectsMakeA ::
+data MakeA_ (ptr :: Symbol) = MakeA_ (Proxy ptr)
+instance doCreateMakeA_ :: DoCreate ptr CTOR.TA_ (MakeA_ ptr)
+instance toGraphEffectsMakeA_ ::
   ( IsSymbol ptr
   , ToGraphEffects rest
   ) =>
-  ToGraphEffects (MakeA ptr /\ rest) where
+  ToGraphEffects (MakeA_ ptr /\ rest) where
   toGraphEffects _ cache i = unsafeToGraphEffects (Proxy :: _ ptr)
     (Proxy :: _ rest)
     cache
     i
     "a"
-data MakeAbbr (ptr :: Symbol) = MakeAbbr (Proxy ptr)
-instance doCreateMakeAbbr :: DoCreate ptr CTOR.TAbbr (MakeAbbr ptr)
-instance toGraphEffectsMakeAbbr ::
+data MakeAbbr_ (ptr :: Symbol) = MakeAbbr_ (Proxy ptr)
+instance doCreateMakeAbbr_ :: DoCreate ptr CTOR.TAbbr_ (MakeAbbr_ ptr)
+instance toGraphEffectsMakeAbbr_ ::
   ( IsSymbol ptr
   , ToGraphEffects rest
   ) =>
-  ToGraphEffects (MakeAbbr ptr /\ rest) where
+  ToGraphEffects (MakeAbbr_ ptr /\ rest) where
   toGraphEffects _ cache i = unsafeToGraphEffects (Proxy :: _ ptr)
     (Proxy :: _ rest)
     cache
     i
     "abbr"
-data MakeAcronym (ptr :: Symbol) = MakeAcronym (Proxy ptr)
-instance doCreateMakeAcronym :: DoCreate ptr CTOR.TAcronym (MakeAcronym ptr)
-instance toGraphEffectsMakeAcronym ::
+data MakeAcronym_ (ptr :: Symbol) = MakeAcronym_ (Proxy ptr)
+instance doCreateMakeAcronym_ :: DoCreate ptr CTOR.TAcronym_ (MakeAcronym_ ptr)
+instance toGraphEffectsMakeAcronym_ ::
   ( IsSymbol ptr
   , ToGraphEffects rest
   ) =>
-  ToGraphEffects (MakeAcronym ptr /\ rest) where
+  ToGraphEffects (MakeAcronym_ ptr /\ rest) where
   toGraphEffects _ cache i = unsafeToGraphEffects (Proxy :: _ ptr)
     (Proxy :: _ rest)
     cache
     i
     "acronym"
-data MakeAddress (ptr :: Symbol) = MakeAddress (Proxy ptr)
-instance doCreateMakeAddress :: DoCreate ptr CTOR.TAddress (MakeAddress ptr)
-instance toGraphEffectsMakeAddress ::
+data MakeAddress_ (ptr :: Symbol) = MakeAddress_ (Proxy ptr)
+instance doCreateMakeAddress_ :: DoCreate ptr CTOR.TAddress_ (MakeAddress_ ptr)
+instance toGraphEffectsMakeAddress_ ::
   ( IsSymbol ptr
   , ToGraphEffects rest
   ) =>
-  ToGraphEffects (MakeAddress ptr /\ rest) where
+  ToGraphEffects (MakeAddress_ ptr /\ rest) where
   toGraphEffects _ cache i = unsafeToGraphEffects (Proxy :: _ ptr)
     (Proxy :: _ rest)
     cache
     i
     "address"
-data MakeApplet (ptr :: Symbol) = MakeApplet (Proxy ptr)
-instance doCreateMakeApplet :: DoCreate ptr CTOR.TApplet (MakeApplet ptr)
-instance toGraphEffectsMakeApplet ::
+data MakeApplet_ (ptr :: Symbol) = MakeApplet_ (Proxy ptr)
+instance doCreateMakeApplet_ :: DoCreate ptr CTOR.TApplet_ (MakeApplet_ ptr)
+instance toGraphEffectsMakeApplet_ ::
   ( IsSymbol ptr
   , ToGraphEffects rest
   ) =>
-  ToGraphEffects (MakeApplet ptr /\ rest) where
+  ToGraphEffects (MakeApplet_ ptr /\ rest) where
   toGraphEffects _ cache i = unsafeToGraphEffects (Proxy :: _ ptr)
     (Proxy :: _ rest)
     cache
     i
     "applet"
-data MakeArea (ptr :: Symbol) = MakeArea (Proxy ptr)
-instance doCreateMakeArea :: DoCreate ptr CTOR.TArea (MakeArea ptr)
-instance toGraphEffectsMakeArea ::
+data MakeArea_ (ptr :: Symbol) = MakeArea_ (Proxy ptr)
+instance doCreateMakeArea_ :: DoCreate ptr CTOR.TArea_ (MakeArea_ ptr)
+instance toGraphEffectsMakeArea_ ::
   ( IsSymbol ptr
   , ToGraphEffects rest
   ) =>
-  ToGraphEffects (MakeArea ptr /\ rest) where
+  ToGraphEffects (MakeArea_ ptr /\ rest) where
   toGraphEffects _ cache i = unsafeToGraphEffects (Proxy :: _ ptr)
     (Proxy :: _ rest)
     cache
     i
     "area"
-data MakeArticle (ptr :: Symbol) = MakeArticle (Proxy ptr)
-instance doCreateMakeArticle :: DoCreate ptr CTOR.TArticle (MakeArticle ptr)
-instance toGraphEffectsMakeArticle ::
+data MakeArticle_ (ptr :: Symbol) = MakeArticle_ (Proxy ptr)
+instance doCreateMakeArticle_ :: DoCreate ptr CTOR.TArticle_ (MakeArticle_ ptr)
+instance toGraphEffectsMakeArticle_ ::
   ( IsSymbol ptr
   , ToGraphEffects rest
   ) =>
-  ToGraphEffects (MakeArticle ptr /\ rest) where
+  ToGraphEffects (MakeArticle_ ptr /\ rest) where
   toGraphEffects _ cache i = unsafeToGraphEffects (Proxy :: _ ptr)
     (Proxy :: _ rest)
     cache
     i
     "article"
-data MakeAside (ptr :: Symbol) = MakeAside (Proxy ptr)
-instance doCreateMakeAside :: DoCreate ptr CTOR.TAside (MakeAside ptr)
-instance toGraphEffectsMakeAside ::
+data MakeAside_ (ptr :: Symbol) = MakeAside_ (Proxy ptr)
+instance doCreateMakeAside_ :: DoCreate ptr CTOR.TAside_ (MakeAside_ ptr)
+instance toGraphEffectsMakeAside_ ::
   ( IsSymbol ptr
   , ToGraphEffects rest
   ) =>
-  ToGraphEffects (MakeAside ptr /\ rest) where
+  ToGraphEffects (MakeAside_ ptr /\ rest) where
   toGraphEffects _ cache i = unsafeToGraphEffects (Proxy :: _ ptr)
     (Proxy :: _ rest)
     cache
     i
     "aside"
-data MakeAudio (ptr :: Symbol) = MakeAudio (Proxy ptr)
-instance doCreateMakeAudio :: DoCreate ptr CTOR.TAudio (MakeAudio ptr)
-instance toGraphEffectsMakeAudio ::
+data MakeAudio_ (ptr :: Symbol) = MakeAudio_ (Proxy ptr)
+instance doCreateMakeAudio_ :: DoCreate ptr CTOR.TAudio_ (MakeAudio_ ptr)
+instance toGraphEffectsMakeAudio_ ::
   ( IsSymbol ptr
   , ToGraphEffects rest
   ) =>
-  ToGraphEffects (MakeAudio ptr /\ rest) where
+  ToGraphEffects (MakeAudio_ ptr /\ rest) where
   toGraphEffects _ cache i = unsafeToGraphEffects (Proxy :: _ ptr)
     (Proxy :: _ rest)
     cache
     i
     "audio"
-data MakeB (ptr :: Symbol) = MakeB (Proxy ptr)
-instance doCreateMakeB :: DoCreate ptr CTOR.TB (MakeB ptr)
-instance toGraphEffectsMakeB ::
+data MakeB_ (ptr :: Symbol) = MakeB_ (Proxy ptr)
+instance doCreateMakeB_ :: DoCreate ptr CTOR.TB_ (MakeB_ ptr)
+instance toGraphEffectsMakeB_ ::
   ( IsSymbol ptr
   , ToGraphEffects rest
   ) =>
-  ToGraphEffects (MakeB ptr /\ rest) where
+  ToGraphEffects (MakeB_ ptr /\ rest) where
   toGraphEffects _ cache i = unsafeToGraphEffects (Proxy :: _ ptr)
     (Proxy :: _ rest)
     cache
     i
     "b"
-data MakeBase (ptr :: Symbol) = MakeBase (Proxy ptr)
-instance doCreateMakeBase :: DoCreate ptr CTOR.TBase (MakeBase ptr)
-instance toGraphEffectsMakeBase ::
+data MakeBase_ (ptr :: Symbol) = MakeBase_ (Proxy ptr)
+instance doCreateMakeBase_ :: DoCreate ptr CTOR.TBase_ (MakeBase_ ptr)
+instance toGraphEffectsMakeBase_ ::
   ( IsSymbol ptr
   , ToGraphEffects rest
   ) =>
-  ToGraphEffects (MakeBase ptr /\ rest) where
+  ToGraphEffects (MakeBase_ ptr /\ rest) where
   toGraphEffects _ cache i = unsafeToGraphEffects (Proxy :: _ ptr)
     (Proxy :: _ rest)
     cache
     i
     "base"
-data MakeBasefont (ptr :: Symbol) = MakeBasefont (Proxy ptr)
-instance doCreateMakeBasefont :: DoCreate ptr CTOR.TBasefont (MakeBasefont ptr)
-instance toGraphEffectsMakeBasefont ::
+data MakeBasefont_ (ptr :: Symbol) = MakeBasefont_ (Proxy ptr)
+instance doCreateMakeBasefont_ :: DoCreate ptr CTOR.TBasefont_ (MakeBasefont_ ptr)
+instance toGraphEffectsMakeBasefont_ ::
   ( IsSymbol ptr
   , ToGraphEffects rest
   ) =>
-  ToGraphEffects (MakeBasefont ptr /\ rest) where
+  ToGraphEffects (MakeBasefont_ ptr /\ rest) where
   toGraphEffects _ cache i = unsafeToGraphEffects (Proxy :: _ ptr)
     (Proxy :: _ rest)
     cache
     i
     "basefont"
-data MakeBdi (ptr :: Symbol) = MakeBdi (Proxy ptr)
-instance doCreateMakeBdi :: DoCreate ptr CTOR.TBdi (MakeBdi ptr)
-instance toGraphEffectsMakeBdi ::
+data MakeBdi_ (ptr :: Symbol) = MakeBdi_ (Proxy ptr)
+instance doCreateMakeBdi_ :: DoCreate ptr CTOR.TBdi_ (MakeBdi_ ptr)
+instance toGraphEffectsMakeBdi_ ::
   ( IsSymbol ptr
   , ToGraphEffects rest
   ) =>
-  ToGraphEffects (MakeBdi ptr /\ rest) where
+  ToGraphEffects (MakeBdi_ ptr /\ rest) where
   toGraphEffects _ cache i = unsafeToGraphEffects (Proxy :: _ ptr)
     (Proxy :: _ rest)
     cache
     i
     "bdi"
-data MakeBdo (ptr :: Symbol) = MakeBdo (Proxy ptr)
-instance doCreateMakeBdo :: DoCreate ptr CTOR.TBdo (MakeBdo ptr)
-instance toGraphEffectsMakeBdo ::
+data MakeBdo_ (ptr :: Symbol) = MakeBdo_ (Proxy ptr)
+instance doCreateMakeBdo_ :: DoCreate ptr CTOR.TBdo_ (MakeBdo_ ptr)
+instance toGraphEffectsMakeBdo_ ::
   ( IsSymbol ptr
   , ToGraphEffects rest
   ) =>
-  ToGraphEffects (MakeBdo ptr /\ rest) where
+  ToGraphEffects (MakeBdo_ ptr /\ rest) where
   toGraphEffects _ cache i = unsafeToGraphEffects (Proxy :: _ ptr)
     (Proxy :: _ rest)
     cache
     i
     "bdo"
-data MakeBig (ptr :: Symbol) = MakeBig (Proxy ptr)
-instance doCreateMakeBig :: DoCreate ptr CTOR.TBig (MakeBig ptr)
-instance toGraphEffectsMakeBig ::
+data MakeBig_ (ptr :: Symbol) = MakeBig_ (Proxy ptr)
+instance doCreateMakeBig_ :: DoCreate ptr CTOR.TBig_ (MakeBig_ ptr)
+instance toGraphEffectsMakeBig_ ::
   ( IsSymbol ptr
   , ToGraphEffects rest
   ) =>
-  ToGraphEffects (MakeBig ptr /\ rest) where
+  ToGraphEffects (MakeBig_ ptr /\ rest) where
   toGraphEffects _ cache i = unsafeToGraphEffects (Proxy :: _ ptr)
     (Proxy :: _ rest)
     cache
     i
     "big"
-data MakeBlockquote (ptr :: Symbol) = MakeBlockquote (Proxy ptr)
-instance doCreateMakeBlockquote :: DoCreate ptr CTOR.TBlockquote (MakeBlockquote ptr)
-instance toGraphEffectsMakeBlockquote ::
+data MakeBlockquote_ (ptr :: Symbol) = MakeBlockquote_ (Proxy ptr)
+instance doCreateMakeBlockquote_ :: DoCreate ptr CTOR.TBlockquote_ (MakeBlockquote_ ptr)
+instance toGraphEffectsMakeBlockquote_ ::
   ( IsSymbol ptr
   , ToGraphEffects rest
   ) =>
-  ToGraphEffects (MakeBlockquote ptr /\ rest) where
+  ToGraphEffects (MakeBlockquote_ ptr /\ rest) where
   toGraphEffects _ cache i = unsafeToGraphEffects (Proxy :: _ ptr)
     (Proxy :: _ rest)
     cache
     i
     "blockquote"
-data MakeBody (ptr :: Symbol) = MakeBody (Proxy ptr)
-instance doCreateMakeBody :: DoCreate ptr CTOR.TBody (MakeBody ptr)
-instance toGraphEffectsMakeBody ::
+data MakeBody_ (ptr :: Symbol) = MakeBody_ (Proxy ptr)
+instance doCreateMakeBody_ :: DoCreate ptr CTOR.TBody_ (MakeBody_ ptr)
+instance toGraphEffectsMakeBody_ ::
   ( IsSymbol ptr
   , ToGraphEffects rest
   ) =>
-  ToGraphEffects (MakeBody ptr /\ rest) where
+  ToGraphEffects (MakeBody_ ptr /\ rest) where
   toGraphEffects _ cache i = unsafeToGraphEffects (Proxy :: _ ptr)
     (Proxy :: _ rest)
     cache
     i
     "body"
-data MakeBr (ptr :: Symbol) = MakeBr (Proxy ptr)
-instance doCreateMakeBr :: DoCreate ptr CTOR.TBr (MakeBr ptr)
-instance toGraphEffectsMakeBr ::
+data MakeBr_ (ptr :: Symbol) = MakeBr_ (Proxy ptr)
+instance doCreateMakeBr_ :: DoCreate ptr CTOR.TBr_ (MakeBr_ ptr)
+instance toGraphEffectsMakeBr_ ::
   ( IsSymbol ptr
   , ToGraphEffects rest
   ) =>
-  ToGraphEffects (MakeBr ptr /\ rest) where
+  ToGraphEffects (MakeBr_ ptr /\ rest) where
   toGraphEffects _ cache i = unsafeToGraphEffects (Proxy :: _ ptr)
     (Proxy :: _ rest)
     cache
     i
     "br"
-data MakeButton (ptr :: Symbol) = MakeButton (Proxy ptr)
-instance doCreateMakeButton :: DoCreate ptr CTOR.TButton (MakeButton ptr)
-instance toGraphEffectsMakeButton ::
+data MakeButton_ (ptr :: Symbol) = MakeButton_ (Proxy ptr)
+instance doCreateMakeButton_ :: DoCreate ptr CTOR.TButton_ (MakeButton_ ptr)
+instance toGraphEffectsMakeButton_ ::
   ( IsSymbol ptr
   , ToGraphEffects rest
   ) =>
-  ToGraphEffects (MakeButton ptr /\ rest) where
+  ToGraphEffects (MakeButton_ ptr /\ rest) where
   toGraphEffects _ cache i = unsafeToGraphEffects (Proxy :: _ ptr)
     (Proxy :: _ rest)
     cache
     i
     "button"
-data MakeCanvas (ptr :: Symbol) = MakeCanvas (Proxy ptr)
-instance doCreateMakeCanvas :: DoCreate ptr CTOR.TCanvas (MakeCanvas ptr)
-instance toGraphEffectsMakeCanvas ::
+data MakeCanvas_ (ptr :: Symbol) = MakeCanvas_ (Proxy ptr)
+instance doCreateMakeCanvas_ :: DoCreate ptr CTOR.TCanvas_ (MakeCanvas_ ptr)
+instance toGraphEffectsMakeCanvas_ ::
   ( IsSymbol ptr
   , ToGraphEffects rest
   ) =>
-  ToGraphEffects (MakeCanvas ptr /\ rest) where
+  ToGraphEffects (MakeCanvas_ ptr /\ rest) where
   toGraphEffects _ cache i = unsafeToGraphEffects (Proxy :: _ ptr)
     (Proxy :: _ rest)
     cache
     i
     "canvas"
-data MakeCaption (ptr :: Symbol) = MakeCaption (Proxy ptr)
-instance doCreateMakeCaption :: DoCreate ptr CTOR.TCaption (MakeCaption ptr)
-instance toGraphEffectsMakeCaption ::
+data MakeCaption_ (ptr :: Symbol) = MakeCaption_ (Proxy ptr)
+instance doCreateMakeCaption_ :: DoCreate ptr CTOR.TCaption_ (MakeCaption_ ptr)
+instance toGraphEffectsMakeCaption_ ::
   ( IsSymbol ptr
   , ToGraphEffects rest
   ) =>
-  ToGraphEffects (MakeCaption ptr /\ rest) where
+  ToGraphEffects (MakeCaption_ ptr /\ rest) where
   toGraphEffects _ cache i = unsafeToGraphEffects (Proxy :: _ ptr)
     (Proxy :: _ rest)
     cache
     i
     "caption"
-data MakeCenter (ptr :: Symbol) = MakeCenter (Proxy ptr)
-instance doCreateMakeCenter :: DoCreate ptr CTOR.TCenter (MakeCenter ptr)
-instance toGraphEffectsMakeCenter ::
+data MakeCenter_ (ptr :: Symbol) = MakeCenter_ (Proxy ptr)
+instance doCreateMakeCenter_ :: DoCreate ptr CTOR.TCenter_ (MakeCenter_ ptr)
+instance toGraphEffectsMakeCenter_ ::
   ( IsSymbol ptr
   , ToGraphEffects rest
   ) =>
-  ToGraphEffects (MakeCenter ptr /\ rest) where
+  ToGraphEffects (MakeCenter_ ptr /\ rest) where
   toGraphEffects _ cache i = unsafeToGraphEffects (Proxy :: _ ptr)
     (Proxy :: _ rest)
     cache
     i
     "center"
-data MakeCite (ptr :: Symbol) = MakeCite (Proxy ptr)
-instance doCreateMakeCite :: DoCreate ptr CTOR.TCite (MakeCite ptr)
-instance toGraphEffectsMakeCite ::
+data MakeCite_ (ptr :: Symbol) = MakeCite_ (Proxy ptr)
+instance doCreateMakeCite_ :: DoCreate ptr CTOR.TCite_ (MakeCite_ ptr)
+instance toGraphEffectsMakeCite_ ::
   ( IsSymbol ptr
   , ToGraphEffects rest
   ) =>
-  ToGraphEffects (MakeCite ptr /\ rest) where
+  ToGraphEffects (MakeCite_ ptr /\ rest) where
   toGraphEffects _ cache i = unsafeToGraphEffects (Proxy :: _ ptr)
     (Proxy :: _ rest)
     cache
     i
     "cite"
-data MakeCode (ptr :: Symbol) = MakeCode (Proxy ptr)
-instance doCreateMakeCode :: DoCreate ptr CTOR.TCode (MakeCode ptr)
-instance toGraphEffectsMakeCode ::
+data MakeCode_ (ptr :: Symbol) = MakeCode_ (Proxy ptr)
+instance doCreateMakeCode_ :: DoCreate ptr CTOR.TCode_ (MakeCode_ ptr)
+instance toGraphEffectsMakeCode_ ::
   ( IsSymbol ptr
   , ToGraphEffects rest
   ) =>
-  ToGraphEffects (MakeCode ptr /\ rest) where
+  ToGraphEffects (MakeCode_ ptr /\ rest) where
   toGraphEffects _ cache i = unsafeToGraphEffects (Proxy :: _ ptr)
     (Proxy :: _ rest)
     cache
     i
     "code"
-data MakeCol (ptr :: Symbol) = MakeCol (Proxy ptr)
-instance doCreateMakeCol :: DoCreate ptr CTOR.TCol (MakeCol ptr)
-instance toGraphEffectsMakeCol ::
+data MakeCol_ (ptr :: Symbol) = MakeCol_ (Proxy ptr)
+instance doCreateMakeCol_ :: DoCreate ptr CTOR.TCol_ (MakeCol_ ptr)
+instance toGraphEffectsMakeCol_ ::
   ( IsSymbol ptr
   , ToGraphEffects rest
   ) =>
-  ToGraphEffects (MakeCol ptr /\ rest) where
+  ToGraphEffects (MakeCol_ ptr /\ rest) where
   toGraphEffects _ cache i = unsafeToGraphEffects (Proxy :: _ ptr)
     (Proxy :: _ rest)
     cache
     i
     "col"
-data MakeColgroup (ptr :: Symbol) = MakeColgroup (Proxy ptr)
-instance doCreateMakeColgroup :: DoCreate ptr CTOR.TColgroup (MakeColgroup ptr)
-instance toGraphEffectsMakeColgroup ::
+data MakeColgroup_ (ptr :: Symbol) = MakeColgroup_ (Proxy ptr)
+instance doCreateMakeColgroup_ :: DoCreate ptr CTOR.TColgroup_ (MakeColgroup_ ptr)
+instance toGraphEffectsMakeColgroup_ ::
   ( IsSymbol ptr
   , ToGraphEffects rest
   ) =>
-  ToGraphEffects (MakeColgroup ptr /\ rest) where
+  ToGraphEffects (MakeColgroup_ ptr /\ rest) where
   toGraphEffects _ cache i = unsafeToGraphEffects (Proxy :: _ ptr)
     (Proxy :: _ rest)
     cache
     i
     "colgroup"
-data MakeData (ptr :: Symbol) = MakeData (Proxy ptr)
-instance doCreateMakeData :: DoCreate ptr CTOR.TData (MakeData ptr)
-instance toGraphEffectsMakeData ::
+data MakeXdata_ (ptr :: Symbol) = MakeXdata_ (Proxy ptr)
+instance doCreateMakeXdata_ :: DoCreate ptr CTOR.TXdata_ (MakeXdata_ ptr)
+instance toGraphEffectsMakeXdata_ ::
   ( IsSymbol ptr
   , ToGraphEffects rest
   ) =>
-  ToGraphEffects (MakeData ptr /\ rest) where
+  ToGraphEffects (MakeXdata_ ptr /\ rest) where
   toGraphEffects _ cache i = unsafeToGraphEffects (Proxy :: _ ptr)
     (Proxy :: _ rest)
     cache
     i
     "data"
-data MakeDatalist (ptr :: Symbol) = MakeDatalist (Proxy ptr)
-instance doCreateMakeDatalist :: DoCreate ptr CTOR.TDatalist (MakeDatalist ptr)
-instance toGraphEffectsMakeDatalist ::
+data MakeDatalist_ (ptr :: Symbol) = MakeDatalist_ (Proxy ptr)
+instance doCreateMakeDatalist_ :: DoCreate ptr CTOR.TDatalist_ (MakeDatalist_ ptr)
+instance toGraphEffectsMakeDatalist_ ::
   ( IsSymbol ptr
   , ToGraphEffects rest
   ) =>
-  ToGraphEffects (MakeDatalist ptr /\ rest) where
+  ToGraphEffects (MakeDatalist_ ptr /\ rest) where
   toGraphEffects _ cache i = unsafeToGraphEffects (Proxy :: _ ptr)
     (Proxy :: _ rest)
     cache
     i
     "datalist"
-data MakeDd (ptr :: Symbol) = MakeDd (Proxy ptr)
-instance doCreateMakeDd :: DoCreate ptr CTOR.TDd (MakeDd ptr)
-instance toGraphEffectsMakeDd ::
+data MakeDd_ (ptr :: Symbol) = MakeDd_ (Proxy ptr)
+instance doCreateMakeDd_ :: DoCreate ptr CTOR.TDd_ (MakeDd_ ptr)
+instance toGraphEffectsMakeDd_ ::
   ( IsSymbol ptr
   , ToGraphEffects rest
   ) =>
-  ToGraphEffects (MakeDd ptr /\ rest) where
+  ToGraphEffects (MakeDd_ ptr /\ rest) where
   toGraphEffects _ cache i = unsafeToGraphEffects (Proxy :: _ ptr)
     (Proxy :: _ rest)
     cache
     i
     "dd"
-data MakeDel (ptr :: Symbol) = MakeDel (Proxy ptr)
-instance doCreateMakeDel :: DoCreate ptr CTOR.TDel (MakeDel ptr)
-instance toGraphEffectsMakeDel ::
+data MakeDel_ (ptr :: Symbol) = MakeDel_ (Proxy ptr)
+instance doCreateMakeDel_ :: DoCreate ptr CTOR.TDel_ (MakeDel_ ptr)
+instance toGraphEffectsMakeDel_ ::
   ( IsSymbol ptr
   , ToGraphEffects rest
   ) =>
-  ToGraphEffects (MakeDel ptr /\ rest) where
+  ToGraphEffects (MakeDel_ ptr /\ rest) where
   toGraphEffects _ cache i = unsafeToGraphEffects (Proxy :: _ ptr)
     (Proxy :: _ rest)
     cache
     i
     "del"
-data MakeDetails (ptr :: Symbol) = MakeDetails (Proxy ptr)
-instance doCreateMakeDetails :: DoCreate ptr CTOR.TDetails (MakeDetails ptr)
-instance toGraphEffectsMakeDetails ::
+data MakeDetails_ (ptr :: Symbol) = MakeDetails_ (Proxy ptr)
+instance doCreateMakeDetails_ :: DoCreate ptr CTOR.TDetails_ (MakeDetails_ ptr)
+instance toGraphEffectsMakeDetails_ ::
   ( IsSymbol ptr
   , ToGraphEffects rest
   ) =>
-  ToGraphEffects (MakeDetails ptr /\ rest) where
+  ToGraphEffects (MakeDetails_ ptr /\ rest) where
   toGraphEffects _ cache i = unsafeToGraphEffects (Proxy :: _ ptr)
     (Proxy :: _ rest)
     cache
     i
     "details"
-data MakeDfn (ptr :: Symbol) = MakeDfn (Proxy ptr)
-instance doCreateMakeDfn :: DoCreate ptr CTOR.TDfn (MakeDfn ptr)
-instance toGraphEffectsMakeDfn ::
+data MakeDfn_ (ptr :: Symbol) = MakeDfn_ (Proxy ptr)
+instance doCreateMakeDfn_ :: DoCreate ptr CTOR.TDfn_ (MakeDfn_ ptr)
+instance toGraphEffectsMakeDfn_ ::
   ( IsSymbol ptr
   , ToGraphEffects rest
   ) =>
-  ToGraphEffects (MakeDfn ptr /\ rest) where
+  ToGraphEffects (MakeDfn_ ptr /\ rest) where
   toGraphEffects _ cache i = unsafeToGraphEffects (Proxy :: _ ptr)
     (Proxy :: _ rest)
     cache
     i
     "dfn"
-data MakeDialog (ptr :: Symbol) = MakeDialog (Proxy ptr)
-instance doCreateMakeDialog :: DoCreate ptr CTOR.TDialog (MakeDialog ptr)
-instance toGraphEffectsMakeDialog ::
+data MakeDialog_ (ptr :: Symbol) = MakeDialog_ (Proxy ptr)
+instance doCreateMakeDialog_ :: DoCreate ptr CTOR.TDialog_ (MakeDialog_ ptr)
+instance toGraphEffectsMakeDialog_ ::
   ( IsSymbol ptr
   , ToGraphEffects rest
   ) =>
-  ToGraphEffects (MakeDialog ptr /\ rest) where
+  ToGraphEffects (MakeDialog_ ptr /\ rest) where
   toGraphEffects _ cache i = unsafeToGraphEffects (Proxy :: _ ptr)
     (Proxy :: _ rest)
     cache
     i
     "dialog"
-data MakeDir (ptr :: Symbol) = MakeDir (Proxy ptr)
-instance doCreateMakeDir :: DoCreate ptr CTOR.TDir (MakeDir ptr)
-instance toGraphEffectsMakeDir ::
+data MakeDir_ (ptr :: Symbol) = MakeDir_ (Proxy ptr)
+instance doCreateMakeDir_ :: DoCreate ptr CTOR.TDir_ (MakeDir_ ptr)
+instance toGraphEffectsMakeDir_ ::
   ( IsSymbol ptr
   , ToGraphEffects rest
   ) =>
-  ToGraphEffects (MakeDir ptr /\ rest) where
+  ToGraphEffects (MakeDir_ ptr /\ rest) where
   toGraphEffects _ cache i = unsafeToGraphEffects (Proxy :: _ ptr)
     (Proxy :: _ rest)
     cache
     i
     "dir"
-data MakeDiv (ptr :: Symbol) = MakeDiv (Proxy ptr)
-instance doCreateMakeDiv :: DoCreate ptr CTOR.TDiv (MakeDiv ptr)
-instance toGraphEffectsMakeDiv ::
+data MakeDiv_ (ptr :: Symbol) = MakeDiv_ (Proxy ptr)
+instance doCreateMakeDiv_ :: DoCreate ptr CTOR.TDiv_ (MakeDiv_ ptr)
+instance toGraphEffectsMakeDiv_ ::
   ( IsSymbol ptr
   , ToGraphEffects rest
   ) =>
-  ToGraphEffects (MakeDiv ptr /\ rest) where
+  ToGraphEffects (MakeDiv_ ptr /\ rest) where
   toGraphEffects _ cache i = unsafeToGraphEffects (Proxy :: _ ptr)
     (Proxy :: _ rest)
     cache
     i
     "div"
-data MakeDl (ptr :: Symbol) = MakeDl (Proxy ptr)
-instance doCreateMakeDl :: DoCreate ptr CTOR.TDl (MakeDl ptr)
-instance toGraphEffectsMakeDl ::
+data MakeDl_ (ptr :: Symbol) = MakeDl_ (Proxy ptr)
+instance doCreateMakeDl_ :: DoCreate ptr CTOR.TDl_ (MakeDl_ ptr)
+instance toGraphEffectsMakeDl_ ::
   ( IsSymbol ptr
   , ToGraphEffects rest
   ) =>
-  ToGraphEffects (MakeDl ptr /\ rest) where
+  ToGraphEffects (MakeDl_ ptr /\ rest) where
   toGraphEffects _ cache i = unsafeToGraphEffects (Proxy :: _ ptr)
     (Proxy :: _ rest)
     cache
     i
     "dl"
-data MakeDt (ptr :: Symbol) = MakeDt (Proxy ptr)
-instance doCreateMakeDt :: DoCreate ptr CTOR.TDt (MakeDt ptr)
-instance toGraphEffectsMakeDt ::
+data MakeDt_ (ptr :: Symbol) = MakeDt_ (Proxy ptr)
+instance doCreateMakeDt_ :: DoCreate ptr CTOR.TDt_ (MakeDt_ ptr)
+instance toGraphEffectsMakeDt_ ::
   ( IsSymbol ptr
   , ToGraphEffects rest
   ) =>
-  ToGraphEffects (MakeDt ptr /\ rest) where
+  ToGraphEffects (MakeDt_ ptr /\ rest) where
   toGraphEffects _ cache i = unsafeToGraphEffects (Proxy :: _ ptr)
     (Proxy :: _ rest)
     cache
     i
     "dt"
-data MakeEm (ptr :: Symbol) = MakeEm (Proxy ptr)
-instance doCreateMakeEm :: DoCreate ptr CTOR.TEm (MakeEm ptr)
-instance toGraphEffectsMakeEm ::
+data MakeEm_ (ptr :: Symbol) = MakeEm_ (Proxy ptr)
+instance doCreateMakeEm_ :: DoCreate ptr CTOR.TEm_ (MakeEm_ ptr)
+instance toGraphEffectsMakeEm_ ::
   ( IsSymbol ptr
   , ToGraphEffects rest
   ) =>
-  ToGraphEffects (MakeEm ptr /\ rest) where
+  ToGraphEffects (MakeEm_ ptr /\ rest) where
   toGraphEffects _ cache i = unsafeToGraphEffects (Proxy :: _ ptr)
     (Proxy :: _ rest)
     cache
     i
     "em"
-data MakeEmbed (ptr :: Symbol) = MakeEmbed (Proxy ptr)
-instance doCreateMakeEmbed :: DoCreate ptr CTOR.TEmbed (MakeEmbed ptr)
-instance toGraphEffectsMakeEmbed ::
+data MakeEmbed_ (ptr :: Symbol) = MakeEmbed_ (Proxy ptr)
+instance doCreateMakeEmbed_ :: DoCreate ptr CTOR.TEmbed_ (MakeEmbed_ ptr)
+instance toGraphEffectsMakeEmbed_ ::
   ( IsSymbol ptr
   , ToGraphEffects rest
   ) =>
-  ToGraphEffects (MakeEmbed ptr /\ rest) where
+  ToGraphEffects (MakeEmbed_ ptr /\ rest) where
   toGraphEffects _ cache i = unsafeToGraphEffects (Proxy :: _ ptr)
     (Proxy :: _ rest)
     cache
     i
     "embed"
-data MakeFieldset (ptr :: Symbol) = MakeFieldset (Proxy ptr)
-instance doCreateMakeFieldset :: DoCreate ptr CTOR.TFieldset (MakeFieldset ptr)
-instance toGraphEffectsMakeFieldset ::
+data MakeFieldset_ (ptr :: Symbol) = MakeFieldset_ (Proxy ptr)
+instance doCreateMakeFieldset_ :: DoCreate ptr CTOR.TFieldset_ (MakeFieldset_ ptr)
+instance toGraphEffectsMakeFieldset_ ::
   ( IsSymbol ptr
   , ToGraphEffects rest
   ) =>
-  ToGraphEffects (MakeFieldset ptr /\ rest) where
+  ToGraphEffects (MakeFieldset_ ptr /\ rest) where
   toGraphEffects _ cache i = unsafeToGraphEffects (Proxy :: _ ptr)
     (Proxy :: _ rest)
     cache
     i
     "fieldset"
-data MakeFigcaption (ptr :: Symbol) = MakeFigcaption (Proxy ptr)
-instance doCreateMakeFigcaption :: DoCreate ptr CTOR.TFigcaption (MakeFigcaption ptr)
-instance toGraphEffectsMakeFigcaption ::
+data MakeFigcaption_ (ptr :: Symbol) = MakeFigcaption_ (Proxy ptr)
+instance doCreateMakeFigcaption_ :: DoCreate ptr CTOR.TFigcaption_ (MakeFigcaption_ ptr)
+instance toGraphEffectsMakeFigcaption_ ::
   ( IsSymbol ptr
   , ToGraphEffects rest
   ) =>
-  ToGraphEffects (MakeFigcaption ptr /\ rest) where
+  ToGraphEffects (MakeFigcaption_ ptr /\ rest) where
   toGraphEffects _ cache i = unsafeToGraphEffects (Proxy :: _ ptr)
     (Proxy :: _ rest)
     cache
     i
     "figcaption"
-data MakeFigure (ptr :: Symbol) = MakeFigure (Proxy ptr)
-instance doCreateMakeFigure :: DoCreate ptr CTOR.TFigure (MakeFigure ptr)
-instance toGraphEffectsMakeFigure ::
+data MakeFigure_ (ptr :: Symbol) = MakeFigure_ (Proxy ptr)
+instance doCreateMakeFigure_ :: DoCreate ptr CTOR.TFigure_ (MakeFigure_ ptr)
+instance toGraphEffectsMakeFigure_ ::
   ( IsSymbol ptr
   , ToGraphEffects rest
   ) =>
-  ToGraphEffects (MakeFigure ptr /\ rest) where
+  ToGraphEffects (MakeFigure_ ptr /\ rest) where
   toGraphEffects _ cache i = unsafeToGraphEffects (Proxy :: _ ptr)
     (Proxy :: _ rest)
     cache
     i
     "figure"
-data MakeFont (ptr :: Symbol) = MakeFont (Proxy ptr)
-instance doCreateMakeFont :: DoCreate ptr CTOR.TFont (MakeFont ptr)
-instance toGraphEffectsMakeFont ::
+data MakeFont_ (ptr :: Symbol) = MakeFont_ (Proxy ptr)
+instance doCreateMakeFont_ :: DoCreate ptr CTOR.TFont_ (MakeFont_ ptr)
+instance toGraphEffectsMakeFont_ ::
   ( IsSymbol ptr
   , ToGraphEffects rest
   ) =>
-  ToGraphEffects (MakeFont ptr /\ rest) where
+  ToGraphEffects (MakeFont_ ptr /\ rest) where
   toGraphEffects _ cache i = unsafeToGraphEffects (Proxy :: _ ptr)
     (Proxy :: _ rest)
     cache
     i
     "font"
-data MakeFooter (ptr :: Symbol) = MakeFooter (Proxy ptr)
-instance doCreateMakeFooter :: DoCreate ptr CTOR.TFooter (MakeFooter ptr)
-instance toGraphEffectsMakeFooter ::
+data MakeFooter_ (ptr :: Symbol) = MakeFooter_ (Proxy ptr)
+instance doCreateMakeFooter_ :: DoCreate ptr CTOR.TFooter_ (MakeFooter_ ptr)
+instance toGraphEffectsMakeFooter_ ::
   ( IsSymbol ptr
   , ToGraphEffects rest
   ) =>
-  ToGraphEffects (MakeFooter ptr /\ rest) where
+  ToGraphEffects (MakeFooter_ ptr /\ rest) where
   toGraphEffects _ cache i = unsafeToGraphEffects (Proxy :: _ ptr)
     (Proxy :: _ rest)
     cache
     i
     "footer"
-data MakeForm (ptr :: Symbol) = MakeForm (Proxy ptr)
-instance doCreateMakeForm :: DoCreate ptr CTOR.TForm (MakeForm ptr)
-instance toGraphEffectsMakeForm ::
+data MakeForm_ (ptr :: Symbol) = MakeForm_ (Proxy ptr)
+instance doCreateMakeForm_ :: DoCreate ptr CTOR.TForm_ (MakeForm_ ptr)
+instance toGraphEffectsMakeForm_ ::
   ( IsSymbol ptr
   , ToGraphEffects rest
   ) =>
-  ToGraphEffects (MakeForm ptr /\ rest) where
+  ToGraphEffects (MakeForm_ ptr /\ rest) where
   toGraphEffects _ cache i = unsafeToGraphEffects (Proxy :: _ ptr)
     (Proxy :: _ rest)
     cache
     i
     "form"
-data MakeFrame (ptr :: Symbol) = MakeFrame (Proxy ptr)
-instance doCreateMakeFrame :: DoCreate ptr CTOR.TFrame (MakeFrame ptr)
-instance toGraphEffectsMakeFrame ::
+data MakeFrame_ (ptr :: Symbol) = MakeFrame_ (Proxy ptr)
+instance doCreateMakeFrame_ :: DoCreate ptr CTOR.TFrame_ (MakeFrame_ ptr)
+instance toGraphEffectsMakeFrame_ ::
   ( IsSymbol ptr
   , ToGraphEffects rest
   ) =>
-  ToGraphEffects (MakeFrame ptr /\ rest) where
+  ToGraphEffects (MakeFrame_ ptr /\ rest) where
   toGraphEffects _ cache i = unsafeToGraphEffects (Proxy :: _ ptr)
     (Proxy :: _ rest)
     cache
     i
     "frame"
-data MakeFrameset (ptr :: Symbol) = MakeFrameset (Proxy ptr)
-instance doCreateMakeFrameset :: DoCreate ptr CTOR.TFrameset (MakeFrameset ptr)
-instance toGraphEffectsMakeFrameset ::
+data MakeFrameset_ (ptr :: Symbol) = MakeFrameset_ (Proxy ptr)
+instance doCreateMakeFrameset_ :: DoCreate ptr CTOR.TFrameset_ (MakeFrameset_ ptr)
+instance toGraphEffectsMakeFrameset_ ::
   ( IsSymbol ptr
   , ToGraphEffects rest
   ) =>
-  ToGraphEffects (MakeFrameset ptr /\ rest) where
+  ToGraphEffects (MakeFrameset_ ptr /\ rest) where
   toGraphEffects _ cache i = unsafeToGraphEffects (Proxy :: _ ptr)
     (Proxy :: _ rest)
     cache
     i
     "frameset"
-data MakeH1 (ptr :: Symbol) = MakeH1 (Proxy ptr)
-instance doCreateMakeH1 :: DoCreate ptr CTOR.TH1 (MakeH1 ptr)
-instance toGraphEffectsMakeH1 ::
+data MakeH1_ (ptr :: Symbol) = MakeH1_ (Proxy ptr)
+instance doCreateMakeH1_ :: DoCreate ptr CTOR.TH1_ (MakeH1_ ptr)
+instance toGraphEffectsMakeH1_ ::
   ( IsSymbol ptr
   , ToGraphEffects rest
   ) =>
-  ToGraphEffects (MakeH1 ptr /\ rest) where
+  ToGraphEffects (MakeH1_ ptr /\ rest) where
   toGraphEffects _ cache i = unsafeToGraphEffects (Proxy :: _ ptr)
     (Proxy :: _ rest)
     cache
     i
     "h1"
-data MakeH2 (ptr :: Symbol) = MakeH2 (Proxy ptr)
-instance doCreateMakeH2 :: DoCreate ptr CTOR.TH2 (MakeH2 ptr)
-instance toGraphEffectsMakeH2 ::
+data MakeH2_ (ptr :: Symbol) = MakeH2_ (Proxy ptr)
+instance doCreateMakeH2_ :: DoCreate ptr CTOR.TH2_ (MakeH2_ ptr)
+instance toGraphEffectsMakeH2_ ::
   ( IsSymbol ptr
   , ToGraphEffects rest
   ) =>
-  ToGraphEffects (MakeH2 ptr /\ rest) where
+  ToGraphEffects (MakeH2_ ptr /\ rest) where
   toGraphEffects _ cache i = unsafeToGraphEffects (Proxy :: _ ptr)
     (Proxy :: _ rest)
     cache
     i
     "h2"
-data MakeH3 (ptr :: Symbol) = MakeH3 (Proxy ptr)
-instance doCreateMakeH3 :: DoCreate ptr CTOR.TH3 (MakeH3 ptr)
-instance toGraphEffectsMakeH3 ::
+data MakeH3_ (ptr :: Symbol) = MakeH3_ (Proxy ptr)
+instance doCreateMakeH3_ :: DoCreate ptr CTOR.TH3_ (MakeH3_ ptr)
+instance toGraphEffectsMakeH3_ ::
   ( IsSymbol ptr
   , ToGraphEffects rest
   ) =>
-  ToGraphEffects (MakeH3 ptr /\ rest) where
+  ToGraphEffects (MakeH3_ ptr /\ rest) where
   toGraphEffects _ cache i = unsafeToGraphEffects (Proxy :: _ ptr)
     (Proxy :: _ rest)
     cache
     i
     "h3"
-data MakeH4 (ptr :: Symbol) = MakeH4 (Proxy ptr)
-instance doCreateMakeH4 :: DoCreate ptr CTOR.TH4 (MakeH4 ptr)
-instance toGraphEffectsMakeH4 ::
+data MakeH4_ (ptr :: Symbol) = MakeH4_ (Proxy ptr)
+instance doCreateMakeH4_ :: DoCreate ptr CTOR.TH4_ (MakeH4_ ptr)
+instance toGraphEffectsMakeH4_ ::
   ( IsSymbol ptr
   , ToGraphEffects rest
   ) =>
-  ToGraphEffects (MakeH4 ptr /\ rest) where
+  ToGraphEffects (MakeH4_ ptr /\ rest) where
   toGraphEffects _ cache i = unsafeToGraphEffects (Proxy :: _ ptr)
     (Proxy :: _ rest)
     cache
     i
     "h4"
-data MakeH5 (ptr :: Symbol) = MakeH5 (Proxy ptr)
-instance doCreateMakeH5 :: DoCreate ptr CTOR.TH5 (MakeH5 ptr)
-instance toGraphEffectsMakeH5 ::
+data MakeH5_ (ptr :: Symbol) = MakeH5_ (Proxy ptr)
+instance doCreateMakeH5_ :: DoCreate ptr CTOR.TH5_ (MakeH5_ ptr)
+instance toGraphEffectsMakeH5_ ::
   ( IsSymbol ptr
   , ToGraphEffects rest
   ) =>
-  ToGraphEffects (MakeH5 ptr /\ rest) where
+  ToGraphEffects (MakeH5_ ptr /\ rest) where
   toGraphEffects _ cache i = unsafeToGraphEffects (Proxy :: _ ptr)
     (Proxy :: _ rest)
     cache
     i
     "h5"
-data MakeH6 (ptr :: Symbol) = MakeH6 (Proxy ptr)
-instance doCreateMakeH6 :: DoCreate ptr CTOR.TH6 (MakeH6 ptr)
-instance toGraphEffectsMakeH6 ::
+data MakeH6_ (ptr :: Symbol) = MakeH6_ (Proxy ptr)
+instance doCreateMakeH6_ :: DoCreate ptr CTOR.TH6_ (MakeH6_ ptr)
+instance toGraphEffectsMakeH6_ ::
   ( IsSymbol ptr
   , ToGraphEffects rest
   ) =>
-  ToGraphEffects (MakeH6 ptr /\ rest) where
+  ToGraphEffects (MakeH6_ ptr /\ rest) where
   toGraphEffects _ cache i = unsafeToGraphEffects (Proxy :: _ ptr)
     (Proxy :: _ rest)
     cache
     i
     "h6"
-data MakeHead (ptr :: Symbol) = MakeHead (Proxy ptr)
-instance doCreateMakeHead :: DoCreate ptr CTOR.THead (MakeHead ptr)
-instance toGraphEffectsMakeHead ::
+data MakeHead_ (ptr :: Symbol) = MakeHead_ (Proxy ptr)
+instance doCreateMakeHead_ :: DoCreate ptr CTOR.THead_ (MakeHead_ ptr)
+instance toGraphEffectsMakeHead_ ::
   ( IsSymbol ptr
   , ToGraphEffects rest
   ) =>
-  ToGraphEffects (MakeHead ptr /\ rest) where
+  ToGraphEffects (MakeHead_ ptr /\ rest) where
   toGraphEffects _ cache i = unsafeToGraphEffects (Proxy :: _ ptr)
     (Proxy :: _ rest)
     cache
     i
     "head"
-data MakeHeader (ptr :: Symbol) = MakeHeader (Proxy ptr)
-instance doCreateMakeHeader :: DoCreate ptr CTOR.THeader (MakeHeader ptr)
-instance toGraphEffectsMakeHeader ::
+data MakeHeader_ (ptr :: Symbol) = MakeHeader_ (Proxy ptr)
+instance doCreateMakeHeader_ :: DoCreate ptr CTOR.THeader_ (MakeHeader_ ptr)
+instance toGraphEffectsMakeHeader_ ::
   ( IsSymbol ptr
   , ToGraphEffects rest
   ) =>
-  ToGraphEffects (MakeHeader ptr /\ rest) where
+  ToGraphEffects (MakeHeader_ ptr /\ rest) where
   toGraphEffects _ cache i = unsafeToGraphEffects (Proxy :: _ ptr)
     (Proxy :: _ rest)
     cache
     i
     "header"
-data MakeHr (ptr :: Symbol) = MakeHr (Proxy ptr)
-instance doCreateMakeHr :: DoCreate ptr CTOR.THr (MakeHr ptr)
-instance toGraphEffectsMakeHr ::
+data MakeHr_ (ptr :: Symbol) = MakeHr_ (Proxy ptr)
+instance doCreateMakeHr_ :: DoCreate ptr CTOR.THr_ (MakeHr_ ptr)
+instance toGraphEffectsMakeHr_ ::
   ( IsSymbol ptr
   , ToGraphEffects rest
   ) =>
-  ToGraphEffects (MakeHr ptr /\ rest) where
+  ToGraphEffects (MakeHr_ ptr /\ rest) where
   toGraphEffects _ cache i = unsafeToGraphEffects (Proxy :: _ ptr)
     (Proxy :: _ rest)
     cache
     i
     "hr"
-data MakeHtml (ptr :: Symbol) = MakeHtml (Proxy ptr)
-instance doCreateMakeHtml :: DoCreate ptr CTOR.THtml (MakeHtml ptr)
-instance toGraphEffectsMakeHtml ::
+data MakeHtml_ (ptr :: Symbol) = MakeHtml_ (Proxy ptr)
+instance doCreateMakeHtml_ :: DoCreate ptr CTOR.THtml_ (MakeHtml_ ptr)
+instance toGraphEffectsMakeHtml_ ::
   ( IsSymbol ptr
   , ToGraphEffects rest
   ) =>
-  ToGraphEffects (MakeHtml ptr /\ rest) where
+  ToGraphEffects (MakeHtml_ ptr /\ rest) where
   toGraphEffects _ cache i = unsafeToGraphEffects (Proxy :: _ ptr)
     (Proxy :: _ rest)
     cache
     i
     "html"
-data MakeI (ptr :: Symbol) = MakeI (Proxy ptr)
-instance doCreateMakeI :: DoCreate ptr CTOR.TI (MakeI ptr)
-instance toGraphEffectsMakeI ::
+data MakeI_ (ptr :: Symbol) = MakeI_ (Proxy ptr)
+instance doCreateMakeI_ :: DoCreate ptr CTOR.TI_ (MakeI_ ptr)
+instance toGraphEffectsMakeI_ ::
   ( IsSymbol ptr
   , ToGraphEffects rest
   ) =>
-  ToGraphEffects (MakeI ptr /\ rest) where
+  ToGraphEffects (MakeI_ ptr /\ rest) where
   toGraphEffects _ cache i = unsafeToGraphEffects (Proxy :: _ ptr)
     (Proxy :: _ rest)
     cache
     i
     "i"
-data MakeIframe (ptr :: Symbol) = MakeIframe (Proxy ptr)
-instance doCreateMakeIframe :: DoCreate ptr CTOR.TIframe (MakeIframe ptr)
-instance toGraphEffectsMakeIframe ::
+data MakeIframe_ (ptr :: Symbol) = MakeIframe_ (Proxy ptr)
+instance doCreateMakeIframe_ :: DoCreate ptr CTOR.TIframe_ (MakeIframe_ ptr)
+instance toGraphEffectsMakeIframe_ ::
   ( IsSymbol ptr
   , ToGraphEffects rest
   ) =>
-  ToGraphEffects (MakeIframe ptr /\ rest) where
+  ToGraphEffects (MakeIframe_ ptr /\ rest) where
   toGraphEffects _ cache i = unsafeToGraphEffects (Proxy :: _ ptr)
     (Proxy :: _ rest)
     cache
     i
     "iframe"
-data MakeImg (ptr :: Symbol) = MakeImg (Proxy ptr)
-instance doCreateMakeImg :: DoCreate ptr CTOR.TImg (MakeImg ptr)
-instance toGraphEffectsMakeImg ::
+data MakeImg_ (ptr :: Symbol) = MakeImg_ (Proxy ptr)
+instance doCreateMakeImg_ :: DoCreate ptr CTOR.TImg_ (MakeImg_ ptr)
+instance toGraphEffectsMakeImg_ ::
   ( IsSymbol ptr
   , ToGraphEffects rest
   ) =>
-  ToGraphEffects (MakeImg ptr /\ rest) where
+  ToGraphEffects (MakeImg_ ptr /\ rest) where
   toGraphEffects _ cache i = unsafeToGraphEffects (Proxy :: _ ptr)
     (Proxy :: _ rest)
     cache
     i
     "img"
-data MakeInput (ptr :: Symbol) = MakeInput (Proxy ptr)
-instance doCreateMakeInput :: DoCreate ptr CTOR.TInput (MakeInput ptr)
-instance toGraphEffectsMakeInput ::
+data MakeInput_ (ptr :: Symbol) = MakeInput_ (Proxy ptr)
+instance doCreateMakeInput_ :: DoCreate ptr CTOR.TInput_ (MakeInput_ ptr)
+instance toGraphEffectsMakeInput_ ::
   ( IsSymbol ptr
   , ToGraphEffects rest
   ) =>
-  ToGraphEffects (MakeInput ptr /\ rest) where
+  ToGraphEffects (MakeInput_ ptr /\ rest) where
   toGraphEffects _ cache i = unsafeToGraphEffects (Proxy :: _ ptr)
     (Proxy :: _ rest)
     cache
     i
     "input"
-data MakeIns (ptr :: Symbol) = MakeIns (Proxy ptr)
-instance doCreateMakeIns :: DoCreate ptr CTOR.TIns (MakeIns ptr)
-instance toGraphEffectsMakeIns ::
+data MakeIns_ (ptr :: Symbol) = MakeIns_ (Proxy ptr)
+instance doCreateMakeIns_ :: DoCreate ptr CTOR.TIns_ (MakeIns_ ptr)
+instance toGraphEffectsMakeIns_ ::
   ( IsSymbol ptr
   , ToGraphEffects rest
   ) =>
-  ToGraphEffects (MakeIns ptr /\ rest) where
+  ToGraphEffects (MakeIns_ ptr /\ rest) where
   toGraphEffects _ cache i = unsafeToGraphEffects (Proxy :: _ ptr)
     (Proxy :: _ rest)
     cache
     i
     "ins"
-data MakeKbd (ptr :: Symbol) = MakeKbd (Proxy ptr)
-instance doCreateMakeKbd :: DoCreate ptr CTOR.TKbd (MakeKbd ptr)
-instance toGraphEffectsMakeKbd ::
+data MakeKbd_ (ptr :: Symbol) = MakeKbd_ (Proxy ptr)
+instance doCreateMakeKbd_ :: DoCreate ptr CTOR.TKbd_ (MakeKbd_ ptr)
+instance toGraphEffectsMakeKbd_ ::
   ( IsSymbol ptr
   , ToGraphEffects rest
   ) =>
-  ToGraphEffects (MakeKbd ptr /\ rest) where
+  ToGraphEffects (MakeKbd_ ptr /\ rest) where
   toGraphEffects _ cache i = unsafeToGraphEffects (Proxy :: _ ptr)
     (Proxy :: _ rest)
     cache
     i
     "kbd"
-data MakeLabel (ptr :: Symbol) = MakeLabel (Proxy ptr)
-instance doCreateMakeLabel :: DoCreate ptr CTOR.TLabel (MakeLabel ptr)
-instance toGraphEffectsMakeLabel ::
+data MakeLabel_ (ptr :: Symbol) = MakeLabel_ (Proxy ptr)
+instance doCreateMakeLabel_ :: DoCreate ptr CTOR.TLabel_ (MakeLabel_ ptr)
+instance toGraphEffectsMakeLabel_ ::
   ( IsSymbol ptr
   , ToGraphEffects rest
   ) =>
-  ToGraphEffects (MakeLabel ptr /\ rest) where
+  ToGraphEffects (MakeLabel_ ptr /\ rest) where
   toGraphEffects _ cache i = unsafeToGraphEffects (Proxy :: _ ptr)
     (Proxy :: _ rest)
     cache
     i
     "label"
-data MakeLegend (ptr :: Symbol) = MakeLegend (Proxy ptr)
-instance doCreateMakeLegend :: DoCreate ptr CTOR.TLegend (MakeLegend ptr)
-instance toGraphEffectsMakeLegend ::
+data MakeLegend_ (ptr :: Symbol) = MakeLegend_ (Proxy ptr)
+instance doCreateMakeLegend_ :: DoCreate ptr CTOR.TLegend_ (MakeLegend_ ptr)
+instance toGraphEffectsMakeLegend_ ::
   ( IsSymbol ptr
   , ToGraphEffects rest
   ) =>
-  ToGraphEffects (MakeLegend ptr /\ rest) where
+  ToGraphEffects (MakeLegend_ ptr /\ rest) where
   toGraphEffects _ cache i = unsafeToGraphEffects (Proxy :: _ ptr)
     (Proxy :: _ rest)
     cache
     i
     "legend"
-data MakeLi (ptr :: Symbol) = MakeLi (Proxy ptr)
-instance doCreateMakeLi :: DoCreate ptr CTOR.TLi (MakeLi ptr)
-instance toGraphEffectsMakeLi ::
+data MakeLi_ (ptr :: Symbol) = MakeLi_ (Proxy ptr)
+instance doCreateMakeLi_ :: DoCreate ptr CTOR.TLi_ (MakeLi_ ptr)
+instance toGraphEffectsMakeLi_ ::
   ( IsSymbol ptr
   , ToGraphEffects rest
   ) =>
-  ToGraphEffects (MakeLi ptr /\ rest) where
+  ToGraphEffects (MakeLi_ ptr /\ rest) where
   toGraphEffects _ cache i = unsafeToGraphEffects (Proxy :: _ ptr)
     (Proxy :: _ rest)
     cache
     i
     "li"
-data MakeLink (ptr :: Symbol) = MakeLink (Proxy ptr)
-instance doCreateMakeLink :: DoCreate ptr CTOR.TLink (MakeLink ptr)
-instance toGraphEffectsMakeLink ::
+data MakeLink_ (ptr :: Symbol) = MakeLink_ (Proxy ptr)
+instance doCreateMakeLink_ :: DoCreate ptr CTOR.TLink_ (MakeLink_ ptr)
+instance toGraphEffectsMakeLink_ ::
   ( IsSymbol ptr
   , ToGraphEffects rest
   ) =>
-  ToGraphEffects (MakeLink ptr /\ rest) where
+  ToGraphEffects (MakeLink_ ptr /\ rest) where
   toGraphEffects _ cache i = unsafeToGraphEffects (Proxy :: _ ptr)
     (Proxy :: _ rest)
     cache
     i
     "link"
-data MakeMain (ptr :: Symbol) = MakeMain (Proxy ptr)
-instance doCreateMakeMain :: DoCreate ptr CTOR.TMain (MakeMain ptr)
-instance toGraphEffectsMakeMain ::
+data MakeMain_ (ptr :: Symbol) = MakeMain_ (Proxy ptr)
+instance doCreateMakeMain_ :: DoCreate ptr CTOR.TMain_ (MakeMain_ ptr)
+instance toGraphEffectsMakeMain_ ::
   ( IsSymbol ptr
   , ToGraphEffects rest
   ) =>
-  ToGraphEffects (MakeMain ptr /\ rest) where
+  ToGraphEffects (MakeMain_ ptr /\ rest) where
   toGraphEffects _ cache i = unsafeToGraphEffects (Proxy :: _ ptr)
     (Proxy :: _ rest)
     cache
     i
     "main"
-data MakeMap (ptr :: Symbol) = MakeMap (Proxy ptr)
-instance doCreateMakeMap :: DoCreate ptr CTOR.TMap (MakeMap ptr)
-instance toGraphEffectsMakeMap ::
+data MakeMap_ (ptr :: Symbol) = MakeMap_ (Proxy ptr)
+instance doCreateMakeMap_ :: DoCreate ptr CTOR.TMap_ (MakeMap_ ptr)
+instance toGraphEffectsMakeMap_ ::
   ( IsSymbol ptr
   , ToGraphEffects rest
   ) =>
-  ToGraphEffects (MakeMap ptr /\ rest) where
+  ToGraphEffects (MakeMap_ ptr /\ rest) where
   toGraphEffects _ cache i = unsafeToGraphEffects (Proxy :: _ ptr)
     (Proxy :: _ rest)
     cache
     i
     "map"
-data MakeMark (ptr :: Symbol) = MakeMark (Proxy ptr)
-instance doCreateMakeMark :: DoCreate ptr CTOR.TMark (MakeMark ptr)
-instance toGraphEffectsMakeMark ::
+data MakeMark_ (ptr :: Symbol) = MakeMark_ (Proxy ptr)
+instance doCreateMakeMark_ :: DoCreate ptr CTOR.TMark_ (MakeMark_ ptr)
+instance toGraphEffectsMakeMark_ ::
   ( IsSymbol ptr
   , ToGraphEffects rest
   ) =>
-  ToGraphEffects (MakeMark ptr /\ rest) where
+  ToGraphEffects (MakeMark_ ptr /\ rest) where
   toGraphEffects _ cache i = unsafeToGraphEffects (Proxy :: _ ptr)
     (Proxy :: _ rest)
     cache
     i
     "mark"
-data MakeMeta (ptr :: Symbol) = MakeMeta (Proxy ptr)
-instance doCreateMakeMeta :: DoCreate ptr CTOR.TMeta (MakeMeta ptr)
-instance toGraphEffectsMakeMeta ::
+data MakeMeta_ (ptr :: Symbol) = MakeMeta_ (Proxy ptr)
+instance doCreateMakeMeta_ :: DoCreate ptr CTOR.TMeta_ (MakeMeta_ ptr)
+instance toGraphEffectsMakeMeta_ ::
   ( IsSymbol ptr
   , ToGraphEffects rest
   ) =>
-  ToGraphEffects (MakeMeta ptr /\ rest) where
+  ToGraphEffects (MakeMeta_ ptr /\ rest) where
   toGraphEffects _ cache i = unsafeToGraphEffects (Proxy :: _ ptr)
     (Proxy :: _ rest)
     cache
     i
     "meta"
-data MakeMeter (ptr :: Symbol) = MakeMeter (Proxy ptr)
-instance doCreateMakeMeter :: DoCreate ptr CTOR.TMeter (MakeMeter ptr)
-instance toGraphEffectsMakeMeter ::
+data MakeMeter_ (ptr :: Symbol) = MakeMeter_ (Proxy ptr)
+instance doCreateMakeMeter_ :: DoCreate ptr CTOR.TMeter_ (MakeMeter_ ptr)
+instance toGraphEffectsMakeMeter_ ::
   ( IsSymbol ptr
   , ToGraphEffects rest
   ) =>
-  ToGraphEffects (MakeMeter ptr /\ rest) where
+  ToGraphEffects (MakeMeter_ ptr /\ rest) where
   toGraphEffects _ cache i = unsafeToGraphEffects (Proxy :: _ ptr)
     (Proxy :: _ rest)
     cache
     i
     "meter"
-data MakeNav (ptr :: Symbol) = MakeNav (Proxy ptr)
-instance doCreateMakeNav :: DoCreate ptr CTOR.TNav (MakeNav ptr)
-instance toGraphEffectsMakeNav ::
+data MakeNav_ (ptr :: Symbol) = MakeNav_ (Proxy ptr)
+instance doCreateMakeNav_ :: DoCreate ptr CTOR.TNav_ (MakeNav_ ptr)
+instance toGraphEffectsMakeNav_ ::
   ( IsSymbol ptr
   , ToGraphEffects rest
   ) =>
-  ToGraphEffects (MakeNav ptr /\ rest) where
+  ToGraphEffects (MakeNav_ ptr /\ rest) where
   toGraphEffects _ cache i = unsafeToGraphEffects (Proxy :: _ ptr)
     (Proxy :: _ rest)
     cache
     i
     "nav"
-data MakeNoframes (ptr :: Symbol) = MakeNoframes (Proxy ptr)
-instance doCreateMakeNoframes :: DoCreate ptr CTOR.TNoframes (MakeNoframes ptr)
-instance toGraphEffectsMakeNoframes ::
+data MakeNoframes_ (ptr :: Symbol) = MakeNoframes_ (Proxy ptr)
+instance doCreateMakeNoframes_ :: DoCreate ptr CTOR.TNoframes_ (MakeNoframes_ ptr)
+instance toGraphEffectsMakeNoframes_ ::
   ( IsSymbol ptr
   , ToGraphEffects rest
   ) =>
-  ToGraphEffects (MakeNoframes ptr /\ rest) where
+  ToGraphEffects (MakeNoframes_ ptr /\ rest) where
   toGraphEffects _ cache i = unsafeToGraphEffects (Proxy :: _ ptr)
     (Proxy :: _ rest)
     cache
     i
     "noframes"
-data MakeNoscript (ptr :: Symbol) = MakeNoscript (Proxy ptr)
-instance doCreateMakeNoscript :: DoCreate ptr CTOR.TNoscript (MakeNoscript ptr)
-instance toGraphEffectsMakeNoscript ::
+data MakeNoscript_ (ptr :: Symbol) = MakeNoscript_ (Proxy ptr)
+instance doCreateMakeNoscript_ :: DoCreate ptr CTOR.TNoscript_ (MakeNoscript_ ptr)
+instance toGraphEffectsMakeNoscript_ ::
   ( IsSymbol ptr
   , ToGraphEffects rest
   ) =>
-  ToGraphEffects (MakeNoscript ptr /\ rest) where
+  ToGraphEffects (MakeNoscript_ ptr /\ rest) where
   toGraphEffects _ cache i = unsafeToGraphEffects (Proxy :: _ ptr)
     (Proxy :: _ rest)
     cache
     i
     "noscript"
-data MakeObject (ptr :: Symbol) = MakeObject (Proxy ptr)
-instance doCreateMakeObject :: DoCreate ptr CTOR.TObject (MakeObject ptr)
-instance toGraphEffectsMakeObject ::
+data MakeObject_ (ptr :: Symbol) = MakeObject_ (Proxy ptr)
+instance doCreateMakeObject_ :: DoCreate ptr CTOR.TObject_ (MakeObject_ ptr)
+instance toGraphEffectsMakeObject_ ::
   ( IsSymbol ptr
   , ToGraphEffects rest
   ) =>
-  ToGraphEffects (MakeObject ptr /\ rest) where
+  ToGraphEffects (MakeObject_ ptr /\ rest) where
   toGraphEffects _ cache i = unsafeToGraphEffects (Proxy :: _ ptr)
     (Proxy :: _ rest)
     cache
     i
     "object"
-data MakeOl (ptr :: Symbol) = MakeOl (Proxy ptr)
-instance doCreateMakeOl :: DoCreate ptr CTOR.TOl (MakeOl ptr)
-instance toGraphEffectsMakeOl ::
+data MakeOl_ (ptr :: Symbol) = MakeOl_ (Proxy ptr)
+instance doCreateMakeOl_ :: DoCreate ptr CTOR.TOl_ (MakeOl_ ptr)
+instance toGraphEffectsMakeOl_ ::
   ( IsSymbol ptr
   , ToGraphEffects rest
   ) =>
-  ToGraphEffects (MakeOl ptr /\ rest) where
+  ToGraphEffects (MakeOl_ ptr /\ rest) where
   toGraphEffects _ cache i = unsafeToGraphEffects (Proxy :: _ ptr)
     (Proxy :: _ rest)
     cache
     i
     "ol"
-data MakeOptgroup (ptr :: Symbol) = MakeOptgroup (Proxy ptr)
-instance doCreateMakeOptgroup :: DoCreate ptr CTOR.TOptgroup (MakeOptgroup ptr)
-instance toGraphEffectsMakeOptgroup ::
+data MakeOptgroup_ (ptr :: Symbol) = MakeOptgroup_ (Proxy ptr)
+instance doCreateMakeOptgroup_ :: DoCreate ptr CTOR.TOptgroup_ (MakeOptgroup_ ptr)
+instance toGraphEffectsMakeOptgroup_ ::
   ( IsSymbol ptr
   , ToGraphEffects rest
   ) =>
-  ToGraphEffects (MakeOptgroup ptr /\ rest) where
+  ToGraphEffects (MakeOptgroup_ ptr /\ rest) where
   toGraphEffects _ cache i = unsafeToGraphEffects (Proxy :: _ ptr)
     (Proxy :: _ rest)
     cache
     i
     "optgroup"
-data MakeOption (ptr :: Symbol) = MakeOption (Proxy ptr)
-instance doCreateMakeOption :: DoCreate ptr CTOR.TOption (MakeOption ptr)
-instance toGraphEffectsMakeOption ::
+data MakeOption_ (ptr :: Symbol) = MakeOption_ (Proxy ptr)
+instance doCreateMakeOption_ :: DoCreate ptr CTOR.TOption_ (MakeOption_ ptr)
+instance toGraphEffectsMakeOption_ ::
   ( IsSymbol ptr
   , ToGraphEffects rest
   ) =>
-  ToGraphEffects (MakeOption ptr /\ rest) where
+  ToGraphEffects (MakeOption_ ptr /\ rest) where
   toGraphEffects _ cache i = unsafeToGraphEffects (Proxy :: _ ptr)
     (Proxy :: _ rest)
     cache
     i
     "option"
-data MakeOutput (ptr :: Symbol) = MakeOutput (Proxy ptr)
-instance doCreateMakeOutput :: DoCreate ptr CTOR.TOutput (MakeOutput ptr)
-instance toGraphEffectsMakeOutput ::
+data MakeOutput_ (ptr :: Symbol) = MakeOutput_ (Proxy ptr)
+instance doCreateMakeOutput_ :: DoCreate ptr CTOR.TOutput_ (MakeOutput_ ptr)
+instance toGraphEffectsMakeOutput_ ::
   ( IsSymbol ptr
   , ToGraphEffects rest
   ) =>
-  ToGraphEffects (MakeOutput ptr /\ rest) where
+  ToGraphEffects (MakeOutput_ ptr /\ rest) where
   toGraphEffects _ cache i = unsafeToGraphEffects (Proxy :: _ ptr)
     (Proxy :: _ rest)
     cache
     i
     "output"
-data MakeP (ptr :: Symbol) = MakeP (Proxy ptr)
-instance doCreateMakeP :: DoCreate ptr CTOR.TP (MakeP ptr)
-instance toGraphEffectsMakeP ::
+data MakeP_ (ptr :: Symbol) = MakeP_ (Proxy ptr)
+instance doCreateMakeP_ :: DoCreate ptr CTOR.TP_ (MakeP_ ptr)
+instance toGraphEffectsMakeP_ ::
   ( IsSymbol ptr
   , ToGraphEffects rest
   ) =>
-  ToGraphEffects (MakeP ptr /\ rest) where
+  ToGraphEffects (MakeP_ ptr /\ rest) where
   toGraphEffects _ cache i = unsafeToGraphEffects (Proxy :: _ ptr)
     (Proxy :: _ rest)
     cache
     i
     "p"
-data MakeParam (ptr :: Symbol) = MakeParam (Proxy ptr)
-instance doCreateMakeParam :: DoCreate ptr CTOR.TParam (MakeParam ptr)
-instance toGraphEffectsMakeParam ::
+data MakeParam_ (ptr :: Symbol) = MakeParam_ (Proxy ptr)
+instance doCreateMakeParam_ :: DoCreate ptr CTOR.TParam_ (MakeParam_ ptr)
+instance toGraphEffectsMakeParam_ ::
   ( IsSymbol ptr
   , ToGraphEffects rest
   ) =>
-  ToGraphEffects (MakeParam ptr /\ rest) where
+  ToGraphEffects (MakeParam_ ptr /\ rest) where
   toGraphEffects _ cache i = unsafeToGraphEffects (Proxy :: _ ptr)
     (Proxy :: _ rest)
     cache
     i
     "param"
-data MakePicture (ptr :: Symbol) = MakePicture (Proxy ptr)
-instance doCreateMakePicture :: DoCreate ptr CTOR.TPicture (MakePicture ptr)
-instance toGraphEffectsMakePicture ::
+data MakePicture_ (ptr :: Symbol) = MakePicture_ (Proxy ptr)
+instance doCreateMakePicture_ :: DoCreate ptr CTOR.TPicture_ (MakePicture_ ptr)
+instance toGraphEffectsMakePicture_ ::
   ( IsSymbol ptr
   , ToGraphEffects rest
   ) =>
-  ToGraphEffects (MakePicture ptr /\ rest) where
+  ToGraphEffects (MakePicture_ ptr /\ rest) where
   toGraphEffects _ cache i = unsafeToGraphEffects (Proxy :: _ ptr)
     (Proxy :: _ rest)
     cache
     i
     "picture"
-data MakePre (ptr :: Symbol) = MakePre (Proxy ptr)
-instance doCreateMakePre :: DoCreate ptr CTOR.TPre (MakePre ptr)
-instance toGraphEffectsMakePre ::
+data MakePre_ (ptr :: Symbol) = MakePre_ (Proxy ptr)
+instance doCreateMakePre_ :: DoCreate ptr CTOR.TPre_ (MakePre_ ptr)
+instance toGraphEffectsMakePre_ ::
   ( IsSymbol ptr
   , ToGraphEffects rest
   ) =>
-  ToGraphEffects (MakePre ptr /\ rest) where
+  ToGraphEffects (MakePre_ ptr /\ rest) where
   toGraphEffects _ cache i = unsafeToGraphEffects (Proxy :: _ ptr)
     (Proxy :: _ rest)
     cache
     i
     "pre"
-data MakeProgress (ptr :: Symbol) = MakeProgress (Proxy ptr)
-instance doCreateMakeProgress :: DoCreate ptr CTOR.TProgress (MakeProgress ptr)
-instance toGraphEffectsMakeProgress ::
+data MakeProgress_ (ptr :: Symbol) = MakeProgress_ (Proxy ptr)
+instance doCreateMakeProgress_ :: DoCreate ptr CTOR.TProgress_ (MakeProgress_ ptr)
+instance toGraphEffectsMakeProgress_ ::
   ( IsSymbol ptr
   , ToGraphEffects rest
   ) =>
-  ToGraphEffects (MakeProgress ptr /\ rest) where
+  ToGraphEffects (MakeProgress_ ptr /\ rest) where
   toGraphEffects _ cache i = unsafeToGraphEffects (Proxy :: _ ptr)
     (Proxy :: _ rest)
     cache
     i
     "progress"
-data MakeQ (ptr :: Symbol) = MakeQ (Proxy ptr)
-instance doCreateMakeQ :: DoCreate ptr CTOR.TQ (MakeQ ptr)
-instance toGraphEffectsMakeQ ::
+data MakeQ_ (ptr :: Symbol) = MakeQ_ (Proxy ptr)
+instance doCreateMakeQ_ :: DoCreate ptr CTOR.TQ_ (MakeQ_ ptr)
+instance toGraphEffectsMakeQ_ ::
   ( IsSymbol ptr
   , ToGraphEffects rest
   ) =>
-  ToGraphEffects (MakeQ ptr /\ rest) where
+  ToGraphEffects (MakeQ_ ptr /\ rest) where
   toGraphEffects _ cache i = unsafeToGraphEffects (Proxy :: _ ptr)
     (Proxy :: _ rest)
     cache
     i
     "q"
-data MakeRp (ptr :: Symbol) = MakeRp (Proxy ptr)
-instance doCreateMakeRp :: DoCreate ptr CTOR.TRp (MakeRp ptr)
-instance toGraphEffectsMakeRp ::
+data MakeRp_ (ptr :: Symbol) = MakeRp_ (Proxy ptr)
+instance doCreateMakeRp_ :: DoCreate ptr CTOR.TRp_ (MakeRp_ ptr)
+instance toGraphEffectsMakeRp_ ::
   ( IsSymbol ptr
   , ToGraphEffects rest
   ) =>
-  ToGraphEffects (MakeRp ptr /\ rest) where
+  ToGraphEffects (MakeRp_ ptr /\ rest) where
   toGraphEffects _ cache i = unsafeToGraphEffects (Proxy :: _ ptr)
     (Proxy :: _ rest)
     cache
     i
     "rp"
-data MakeRt (ptr :: Symbol) = MakeRt (Proxy ptr)
-instance doCreateMakeRt :: DoCreate ptr CTOR.TRt (MakeRt ptr)
-instance toGraphEffectsMakeRt ::
+data MakeRt_ (ptr :: Symbol) = MakeRt_ (Proxy ptr)
+instance doCreateMakeRt_ :: DoCreate ptr CTOR.TRt_ (MakeRt_ ptr)
+instance toGraphEffectsMakeRt_ ::
   ( IsSymbol ptr
   , ToGraphEffects rest
   ) =>
-  ToGraphEffects (MakeRt ptr /\ rest) where
+  ToGraphEffects (MakeRt_ ptr /\ rest) where
   toGraphEffects _ cache i = unsafeToGraphEffects (Proxy :: _ ptr)
     (Proxy :: _ rest)
     cache
     i
     "rt"
-data MakeRuby (ptr :: Symbol) = MakeRuby (Proxy ptr)
-instance doCreateMakeRuby :: DoCreate ptr CTOR.TRuby (MakeRuby ptr)
-instance toGraphEffectsMakeRuby ::
+data MakeRuby_ (ptr :: Symbol) = MakeRuby_ (Proxy ptr)
+instance doCreateMakeRuby_ :: DoCreate ptr CTOR.TRuby_ (MakeRuby_ ptr)
+instance toGraphEffectsMakeRuby_ ::
   ( IsSymbol ptr
   , ToGraphEffects rest
   ) =>
-  ToGraphEffects (MakeRuby ptr /\ rest) where
+  ToGraphEffects (MakeRuby_ ptr /\ rest) where
   toGraphEffects _ cache i = unsafeToGraphEffects (Proxy :: _ ptr)
     (Proxy :: _ rest)
     cache
     i
     "ruby"
-data MakeS (ptr :: Symbol) = MakeS (Proxy ptr)
-instance doCreateMakeS :: DoCreate ptr CTOR.TS (MakeS ptr)
-instance toGraphEffectsMakeS ::
+data MakeS_ (ptr :: Symbol) = MakeS_ (Proxy ptr)
+instance doCreateMakeS_ :: DoCreate ptr CTOR.TS_ (MakeS_ ptr)
+instance toGraphEffectsMakeS_ ::
   ( IsSymbol ptr
   , ToGraphEffects rest
   ) =>
-  ToGraphEffects (MakeS ptr /\ rest) where
+  ToGraphEffects (MakeS_ ptr /\ rest) where
   toGraphEffects _ cache i = unsafeToGraphEffects (Proxy :: _ ptr)
     (Proxy :: _ rest)
     cache
     i
     "s"
-data MakeSamp (ptr :: Symbol) = MakeSamp (Proxy ptr)
-instance doCreateMakeSamp :: DoCreate ptr CTOR.TSamp (MakeSamp ptr)
-instance toGraphEffectsMakeSamp ::
+data MakeSamp_ (ptr :: Symbol) = MakeSamp_ (Proxy ptr)
+instance doCreateMakeSamp_ :: DoCreate ptr CTOR.TSamp_ (MakeSamp_ ptr)
+instance toGraphEffectsMakeSamp_ ::
   ( IsSymbol ptr
   , ToGraphEffects rest
   ) =>
-  ToGraphEffects (MakeSamp ptr /\ rest) where
+  ToGraphEffects (MakeSamp_ ptr /\ rest) where
   toGraphEffects _ cache i = unsafeToGraphEffects (Proxy :: _ ptr)
     (Proxy :: _ rest)
     cache
     i
     "samp"
-data MakeScript (ptr :: Symbol) = MakeScript (Proxy ptr)
-instance doCreateMakeScript :: DoCreate ptr CTOR.TScript (MakeScript ptr)
-instance toGraphEffectsMakeScript ::
+data MakeScript_ (ptr :: Symbol) = MakeScript_ (Proxy ptr)
+instance doCreateMakeScript_ :: DoCreate ptr CTOR.TScript_ (MakeScript_ ptr)
+instance toGraphEffectsMakeScript_ ::
   ( IsSymbol ptr
   , ToGraphEffects rest
   ) =>
-  ToGraphEffects (MakeScript ptr /\ rest) where
+  ToGraphEffects (MakeScript_ ptr /\ rest) where
   toGraphEffects _ cache i = unsafeToGraphEffects (Proxy :: _ ptr)
     (Proxy :: _ rest)
     cache
     i
     "script"
-data MakeSection (ptr :: Symbol) = MakeSection (Proxy ptr)
-instance doCreateMakeSection :: DoCreate ptr CTOR.TSection (MakeSection ptr)
-instance toGraphEffectsMakeSection ::
+data MakeSection_ (ptr :: Symbol) = MakeSection_ (Proxy ptr)
+instance doCreateMakeSection_ :: DoCreate ptr CTOR.TSection_ (MakeSection_ ptr)
+instance toGraphEffectsMakeSection_ ::
   ( IsSymbol ptr
   , ToGraphEffects rest
   ) =>
-  ToGraphEffects (MakeSection ptr /\ rest) where
+  ToGraphEffects (MakeSection_ ptr /\ rest) where
   toGraphEffects _ cache i = unsafeToGraphEffects (Proxy :: _ ptr)
     (Proxy :: _ rest)
     cache
     i
     "section"
-data MakeSelect (ptr :: Symbol) = MakeSelect (Proxy ptr)
-instance doCreateMakeSelect :: DoCreate ptr CTOR.TSelect (MakeSelect ptr)
-instance toGraphEffectsMakeSelect ::
+data MakeSelect_ (ptr :: Symbol) = MakeSelect_ (Proxy ptr)
+instance doCreateMakeSelect_ :: DoCreate ptr CTOR.TSelect_ (MakeSelect_ ptr)
+instance toGraphEffectsMakeSelect_ ::
   ( IsSymbol ptr
   , ToGraphEffects rest
   ) =>
-  ToGraphEffects (MakeSelect ptr /\ rest) where
+  ToGraphEffects (MakeSelect_ ptr /\ rest) where
   toGraphEffects _ cache i = unsafeToGraphEffects (Proxy :: _ ptr)
     (Proxy :: _ rest)
     cache
     i
     "select"
-data MakeSmall (ptr :: Symbol) = MakeSmall (Proxy ptr)
-instance doCreateMakeSmall :: DoCreate ptr CTOR.TSmall (MakeSmall ptr)
-instance toGraphEffectsMakeSmall ::
+data MakeSmall_ (ptr :: Symbol) = MakeSmall_ (Proxy ptr)
+instance doCreateMakeSmall_ :: DoCreate ptr CTOR.TSmall_ (MakeSmall_ ptr)
+instance toGraphEffectsMakeSmall_ ::
   ( IsSymbol ptr
   , ToGraphEffects rest
   ) =>
-  ToGraphEffects (MakeSmall ptr /\ rest) where
+  ToGraphEffects (MakeSmall_ ptr /\ rest) where
   toGraphEffects _ cache i = unsafeToGraphEffects (Proxy :: _ ptr)
     (Proxy :: _ rest)
     cache
     i
     "small"
-data MakeSource (ptr :: Symbol) = MakeSource (Proxy ptr)
-instance doCreateMakeSource :: DoCreate ptr CTOR.TSource (MakeSource ptr)
-instance toGraphEffectsMakeSource ::
+data MakeSource_ (ptr :: Symbol) = MakeSource_ (Proxy ptr)
+instance doCreateMakeSource_ :: DoCreate ptr CTOR.TSource_ (MakeSource_ ptr)
+instance toGraphEffectsMakeSource_ ::
   ( IsSymbol ptr
   , ToGraphEffects rest
   ) =>
-  ToGraphEffects (MakeSource ptr /\ rest) where
+  ToGraphEffects (MakeSource_ ptr /\ rest) where
   toGraphEffects _ cache i = unsafeToGraphEffects (Proxy :: _ ptr)
     (Proxy :: _ rest)
     cache
     i
     "source"
-data MakeSpan (ptr :: Symbol) = MakeSpan (Proxy ptr)
-instance doCreateMakeSpan :: DoCreate ptr CTOR.TSpan (MakeSpan ptr)
-instance toGraphEffectsMakeSpan ::
+data MakeSpan_ (ptr :: Symbol) = MakeSpan_ (Proxy ptr)
+instance doCreateMakeSpan_ :: DoCreate ptr CTOR.TSpan_ (MakeSpan_ ptr)
+instance toGraphEffectsMakeSpan_ ::
   ( IsSymbol ptr
   , ToGraphEffects rest
   ) =>
-  ToGraphEffects (MakeSpan ptr /\ rest) where
+  ToGraphEffects (MakeSpan_ ptr /\ rest) where
   toGraphEffects _ cache i = unsafeToGraphEffects (Proxy :: _ ptr)
     (Proxy :: _ rest)
     cache
     i
     "span"
-data MakeStrike (ptr :: Symbol) = MakeStrike (Proxy ptr)
-instance doCreateMakeStrike :: DoCreate ptr CTOR.TStrike (MakeStrike ptr)
-instance toGraphEffectsMakeStrike ::
+data MakeStrike_ (ptr :: Symbol) = MakeStrike_ (Proxy ptr)
+instance doCreateMakeStrike_ :: DoCreate ptr CTOR.TStrike_ (MakeStrike_ ptr)
+instance toGraphEffectsMakeStrike_ ::
   ( IsSymbol ptr
   , ToGraphEffects rest
   ) =>
-  ToGraphEffects (MakeStrike ptr /\ rest) where
+  ToGraphEffects (MakeStrike_ ptr /\ rest) where
   toGraphEffects _ cache i = unsafeToGraphEffects (Proxy :: _ ptr)
     (Proxy :: _ rest)
     cache
     i
     "strike"
-data MakeStrong (ptr :: Symbol) = MakeStrong (Proxy ptr)
-instance doCreateMakeStrong :: DoCreate ptr CTOR.TStrong (MakeStrong ptr)
-instance toGraphEffectsMakeStrong ::
+data MakeStrong_ (ptr :: Symbol) = MakeStrong_ (Proxy ptr)
+instance doCreateMakeStrong_ :: DoCreate ptr CTOR.TStrong_ (MakeStrong_ ptr)
+instance toGraphEffectsMakeStrong_ ::
   ( IsSymbol ptr
   , ToGraphEffects rest
   ) =>
-  ToGraphEffects (MakeStrong ptr /\ rest) where
+  ToGraphEffects (MakeStrong_ ptr /\ rest) where
   toGraphEffects _ cache i = unsafeToGraphEffects (Proxy :: _ ptr)
     (Proxy :: _ rest)
     cache
     i
     "strong"
-data MakeStyle (ptr :: Symbol) = MakeStyle (Proxy ptr)
-instance doCreateMakeStyle :: DoCreate ptr CTOR.TStyle (MakeStyle ptr)
-instance toGraphEffectsMakeStyle ::
+data MakeStyle_ (ptr :: Symbol) = MakeStyle_ (Proxy ptr)
+instance doCreateMakeStyle_ :: DoCreate ptr CTOR.TStyle_ (MakeStyle_ ptr)
+instance toGraphEffectsMakeStyle_ ::
   ( IsSymbol ptr
   , ToGraphEffects rest
   ) =>
-  ToGraphEffects (MakeStyle ptr /\ rest) where
+  ToGraphEffects (MakeStyle_ ptr /\ rest) where
   toGraphEffects _ cache i = unsafeToGraphEffects (Proxy :: _ ptr)
     (Proxy :: _ rest)
     cache
     i
     "style"
-data MakeSub (ptr :: Symbol) = MakeSub (Proxy ptr)
-instance doCreateMakeSub :: DoCreate ptr CTOR.TSub (MakeSub ptr)
-instance toGraphEffectsMakeSub ::
+data MakeSub_ (ptr :: Symbol) = MakeSub_ (Proxy ptr)
+instance doCreateMakeSub_ :: DoCreate ptr CTOR.TSub_ (MakeSub_ ptr)
+instance toGraphEffectsMakeSub_ ::
   ( IsSymbol ptr
   , ToGraphEffects rest
   ) =>
-  ToGraphEffects (MakeSub ptr /\ rest) where
+  ToGraphEffects (MakeSub_ ptr /\ rest) where
   toGraphEffects _ cache i = unsafeToGraphEffects (Proxy :: _ ptr)
     (Proxy :: _ rest)
     cache
     i
     "sub"
-data MakeSummary (ptr :: Symbol) = MakeSummary (Proxy ptr)
-instance doCreateMakeSummary :: DoCreate ptr CTOR.TSummary (MakeSummary ptr)
-instance toGraphEffectsMakeSummary ::
+data MakeSummary_ (ptr :: Symbol) = MakeSummary_ (Proxy ptr)
+instance doCreateMakeSummary_ :: DoCreate ptr CTOR.TSummary_ (MakeSummary_ ptr)
+instance toGraphEffectsMakeSummary_ ::
   ( IsSymbol ptr
   , ToGraphEffects rest
   ) =>
-  ToGraphEffects (MakeSummary ptr /\ rest) where
+  ToGraphEffects (MakeSummary_ ptr /\ rest) where
   toGraphEffects _ cache i = unsafeToGraphEffects (Proxy :: _ ptr)
     (Proxy :: _ rest)
     cache
     i
     "summary"
-data MakeSup (ptr :: Symbol) = MakeSup (Proxy ptr)
-instance doCreateMakeSup :: DoCreate ptr CTOR.TSup (MakeSup ptr)
-instance toGraphEffectsMakeSup ::
+data MakeSup_ (ptr :: Symbol) = MakeSup_ (Proxy ptr)
+instance doCreateMakeSup_ :: DoCreate ptr CTOR.TSup_ (MakeSup_ ptr)
+instance toGraphEffectsMakeSup_ ::
   ( IsSymbol ptr
   , ToGraphEffects rest
   ) =>
-  ToGraphEffects (MakeSup ptr /\ rest) where
+  ToGraphEffects (MakeSup_ ptr /\ rest) where
   toGraphEffects _ cache i = unsafeToGraphEffects (Proxy :: _ ptr)
     (Proxy :: _ rest)
     cache
     i
     "sup"
-data MakeSvg (ptr :: Symbol) = MakeSvg (Proxy ptr)
-instance doCreateMakeSvg :: DoCreate ptr CTOR.TSvg (MakeSvg ptr)
-instance toGraphEffectsMakeSvg ::
+data MakeSvg_ (ptr :: Symbol) = MakeSvg_ (Proxy ptr)
+instance doCreateMakeSvg_ :: DoCreate ptr CTOR.TSvg_ (MakeSvg_ ptr)
+instance toGraphEffectsMakeSvg_ ::
   ( IsSymbol ptr
   , ToGraphEffects rest
   ) =>
-  ToGraphEffects (MakeSvg ptr /\ rest) where
+  ToGraphEffects (MakeSvg_ ptr /\ rest) where
   toGraphEffects _ cache i = unsafeToGraphEffects (Proxy :: _ ptr)
     (Proxy :: _ rest)
     cache
     i
     "svg"
-data MakeTable (ptr :: Symbol) = MakeTable (Proxy ptr)
-instance doCreateMakeTable :: DoCreate ptr CTOR.TTable (MakeTable ptr)
-instance toGraphEffectsMakeTable ::
+data MakeTable_ (ptr :: Symbol) = MakeTable_ (Proxy ptr)
+instance doCreateMakeTable_ :: DoCreate ptr CTOR.TTable_ (MakeTable_ ptr)
+instance toGraphEffectsMakeTable_ ::
   ( IsSymbol ptr
   , ToGraphEffects rest
   ) =>
-  ToGraphEffects (MakeTable ptr /\ rest) where
+  ToGraphEffects (MakeTable_ ptr /\ rest) where
   toGraphEffects _ cache i = unsafeToGraphEffects (Proxy :: _ ptr)
     (Proxy :: _ rest)
     cache
     i
     "table"
-data MakeTbody (ptr :: Symbol) = MakeTbody (Proxy ptr)
-instance doCreateMakeTbody :: DoCreate ptr CTOR.TTbody (MakeTbody ptr)
-instance toGraphEffectsMakeTbody ::
+data MakeTbody_ (ptr :: Symbol) = MakeTbody_ (Proxy ptr)
+instance doCreateMakeTbody_ :: DoCreate ptr CTOR.TTbody_ (MakeTbody_ ptr)
+instance toGraphEffectsMakeTbody_ ::
   ( IsSymbol ptr
   , ToGraphEffects rest
   ) =>
-  ToGraphEffects (MakeTbody ptr /\ rest) where
+  ToGraphEffects (MakeTbody_ ptr /\ rest) where
   toGraphEffects _ cache i = unsafeToGraphEffects (Proxy :: _ ptr)
     (Proxy :: _ rest)
     cache
     i
     "tbody"
-data MakeTd (ptr :: Symbol) = MakeTd (Proxy ptr)
-instance doCreateMakeTd :: DoCreate ptr CTOR.TTd (MakeTd ptr)
-instance toGraphEffectsMakeTd ::
+data MakeTd_ (ptr :: Symbol) = MakeTd_ (Proxy ptr)
+instance doCreateMakeTd_ :: DoCreate ptr CTOR.TTd_ (MakeTd_ ptr)
+instance toGraphEffectsMakeTd_ ::
   ( IsSymbol ptr
   , ToGraphEffects rest
   ) =>
-  ToGraphEffects (MakeTd ptr /\ rest) where
+  ToGraphEffects (MakeTd_ ptr /\ rest) where
   toGraphEffects _ cache i = unsafeToGraphEffects (Proxy :: _ ptr)
     (Proxy :: _ rest)
     cache
     i
     "td"
-data MakeTemplate (ptr :: Symbol) = MakeTemplate (Proxy ptr)
-instance doCreateMakeTemplate :: DoCreate ptr CTOR.TTemplate (MakeTemplate ptr)
-instance toGraphEffectsMakeTemplate ::
+data MakeTemplate_ (ptr :: Symbol) = MakeTemplate_ (Proxy ptr)
+instance doCreateMakeTemplate_ :: DoCreate ptr CTOR.TTemplate_ (MakeTemplate_ ptr)
+instance toGraphEffectsMakeTemplate_ ::
   ( IsSymbol ptr
   , ToGraphEffects rest
   ) =>
-  ToGraphEffects (MakeTemplate ptr /\ rest) where
+  ToGraphEffects (MakeTemplate_ ptr /\ rest) where
   toGraphEffects _ cache i = unsafeToGraphEffects (Proxy :: _ ptr)
     (Proxy :: _ rest)
     cache
     i
     "template"
-data MakeTextarea (ptr :: Symbol) = MakeTextarea (Proxy ptr)
-instance doCreateMakeTextarea :: DoCreate ptr CTOR.TTextarea (MakeTextarea ptr)
-instance toGraphEffectsMakeTextarea ::
+data MakeTextarea_ (ptr :: Symbol) = MakeTextarea_ (Proxy ptr)
+instance doCreateMakeTextarea_ :: DoCreate ptr CTOR.TTextarea_ (MakeTextarea_ ptr)
+instance toGraphEffectsMakeTextarea_ ::
   ( IsSymbol ptr
   , ToGraphEffects rest
   ) =>
-  ToGraphEffects (MakeTextarea ptr /\ rest) where
+  ToGraphEffects (MakeTextarea_ ptr /\ rest) where
   toGraphEffects _ cache i = unsafeToGraphEffects (Proxy :: _ ptr)
     (Proxy :: _ rest)
     cache
     i
     "textarea"
-data MakeTfoot (ptr :: Symbol) = MakeTfoot (Proxy ptr)
-instance doCreateMakeTfoot :: DoCreate ptr CTOR.TTfoot (MakeTfoot ptr)
-instance toGraphEffectsMakeTfoot ::
+data MakeTfoot_ (ptr :: Symbol) = MakeTfoot_ (Proxy ptr)
+instance doCreateMakeTfoot_ :: DoCreate ptr CTOR.TTfoot_ (MakeTfoot_ ptr)
+instance toGraphEffectsMakeTfoot_ ::
   ( IsSymbol ptr
   , ToGraphEffects rest
   ) =>
-  ToGraphEffects (MakeTfoot ptr /\ rest) where
+  ToGraphEffects (MakeTfoot_ ptr /\ rest) where
   toGraphEffects _ cache i = unsafeToGraphEffects (Proxy :: _ ptr)
     (Proxy :: _ rest)
     cache
     i
     "tfoot"
-data MakeTh (ptr :: Symbol) = MakeTh (Proxy ptr)
-instance doCreateMakeTh :: DoCreate ptr CTOR.TTh (MakeTh ptr)
-instance toGraphEffectsMakeTh ::
+data MakeTh_ (ptr :: Symbol) = MakeTh_ (Proxy ptr)
+instance doCreateMakeTh_ :: DoCreate ptr CTOR.TTh_ (MakeTh_ ptr)
+instance toGraphEffectsMakeTh_ ::
   ( IsSymbol ptr
   , ToGraphEffects rest
   ) =>
-  ToGraphEffects (MakeTh ptr /\ rest) where
+  ToGraphEffects (MakeTh_ ptr /\ rest) where
   toGraphEffects _ cache i = unsafeToGraphEffects (Proxy :: _ ptr)
     (Proxy :: _ rest)
     cache
     i
     "th"
-data MakeThead (ptr :: Symbol) = MakeThead (Proxy ptr)
-instance doCreateMakeThead :: DoCreate ptr CTOR.TThead (MakeThead ptr)
-instance toGraphEffectsMakeThead ::
+data MakeThead_ (ptr :: Symbol) = MakeThead_ (Proxy ptr)
+instance doCreateMakeThead_ :: DoCreate ptr CTOR.TThead_ (MakeThead_ ptr)
+instance toGraphEffectsMakeThead_ ::
   ( IsSymbol ptr
   , ToGraphEffects rest
   ) =>
-  ToGraphEffects (MakeThead ptr /\ rest) where
+  ToGraphEffects (MakeThead_ ptr /\ rest) where
   toGraphEffects _ cache i = unsafeToGraphEffects (Proxy :: _ ptr)
     (Proxy :: _ rest)
     cache
     i
     "thead"
-data MakeTime (ptr :: Symbol) = MakeTime (Proxy ptr)
-instance doCreateMakeTime :: DoCreate ptr CTOR.TTime (MakeTime ptr)
-instance toGraphEffectsMakeTime ::
+data MakeTime_ (ptr :: Symbol) = MakeTime_ (Proxy ptr)
+instance doCreateMakeTime_ :: DoCreate ptr CTOR.TTime_ (MakeTime_ ptr)
+instance toGraphEffectsMakeTime_ ::
   ( IsSymbol ptr
   , ToGraphEffects rest
   ) =>
-  ToGraphEffects (MakeTime ptr /\ rest) where
+  ToGraphEffects (MakeTime_ ptr /\ rest) where
   toGraphEffects _ cache i = unsafeToGraphEffects (Proxy :: _ ptr)
     (Proxy :: _ rest)
     cache
     i
     "time"
-data MakeTitle (ptr :: Symbol) = MakeTitle (Proxy ptr)
-instance doCreateMakeTitle :: DoCreate ptr CTOR.TTitle (MakeTitle ptr)
-instance toGraphEffectsMakeTitle ::
+data MakeTitle_ (ptr :: Symbol) = MakeTitle_ (Proxy ptr)
+instance doCreateMakeTitle_ :: DoCreate ptr CTOR.TTitle_ (MakeTitle_ ptr)
+instance toGraphEffectsMakeTitle_ ::
   ( IsSymbol ptr
   , ToGraphEffects rest
   ) =>
-  ToGraphEffects (MakeTitle ptr /\ rest) where
+  ToGraphEffects (MakeTitle_ ptr /\ rest) where
   toGraphEffects _ cache i = unsafeToGraphEffects (Proxy :: _ ptr)
     (Proxy :: _ rest)
     cache
     i
     "title"
-data MakeTr (ptr :: Symbol) = MakeTr (Proxy ptr)
-instance doCreateMakeTr :: DoCreate ptr CTOR.TTr (MakeTr ptr)
-instance toGraphEffectsMakeTr ::
+data MakeTr_ (ptr :: Symbol) = MakeTr_ (Proxy ptr)
+instance doCreateMakeTr_ :: DoCreate ptr CTOR.TTr_ (MakeTr_ ptr)
+instance toGraphEffectsMakeTr_ ::
   ( IsSymbol ptr
   , ToGraphEffects rest
   ) =>
-  ToGraphEffects (MakeTr ptr /\ rest) where
+  ToGraphEffects (MakeTr_ ptr /\ rest) where
   toGraphEffects _ cache i = unsafeToGraphEffects (Proxy :: _ ptr)
     (Proxy :: _ rest)
     cache
     i
     "tr"
-data MakeTrack (ptr :: Symbol) = MakeTrack (Proxy ptr)
-instance doCreateMakeTrack :: DoCreate ptr CTOR.TTrack (MakeTrack ptr)
-instance toGraphEffectsMakeTrack ::
+data MakeTrack_ (ptr :: Symbol) = MakeTrack_ (Proxy ptr)
+instance doCreateMakeTrack_ :: DoCreate ptr CTOR.TTrack_ (MakeTrack_ ptr)
+instance toGraphEffectsMakeTrack_ ::
   ( IsSymbol ptr
   , ToGraphEffects rest
   ) =>
-  ToGraphEffects (MakeTrack ptr /\ rest) where
+  ToGraphEffects (MakeTrack_ ptr /\ rest) where
   toGraphEffects _ cache i = unsafeToGraphEffects (Proxy :: _ ptr)
     (Proxy :: _ rest)
     cache
     i
     "track"
-data MakeTt (ptr :: Symbol) = MakeTt (Proxy ptr)
-instance doCreateMakeTt :: DoCreate ptr CTOR.TTt (MakeTt ptr)
-instance toGraphEffectsMakeTt ::
+data MakeTt_ (ptr :: Symbol) = MakeTt_ (Proxy ptr)
+instance doCreateMakeTt_ :: DoCreate ptr CTOR.TTt_ (MakeTt_ ptr)
+instance toGraphEffectsMakeTt_ ::
   ( IsSymbol ptr
   , ToGraphEffects rest
   ) =>
-  ToGraphEffects (MakeTt ptr /\ rest) where
+  ToGraphEffects (MakeTt_ ptr /\ rest) where
   toGraphEffects _ cache i = unsafeToGraphEffects (Proxy :: _ ptr)
     (Proxy :: _ rest)
     cache
     i
     "tt"
-data MakeU (ptr :: Symbol) = MakeU (Proxy ptr)
-instance doCreateMakeU :: DoCreate ptr CTOR.TU (MakeU ptr)
-instance toGraphEffectsMakeU ::
+data MakeU_ (ptr :: Symbol) = MakeU_ (Proxy ptr)
+instance doCreateMakeU_ :: DoCreate ptr CTOR.TU_ (MakeU_ ptr)
+instance toGraphEffectsMakeU_ ::
   ( IsSymbol ptr
   , ToGraphEffects rest
   ) =>
-  ToGraphEffects (MakeU ptr /\ rest) where
+  ToGraphEffects (MakeU_ ptr /\ rest) where
   toGraphEffects _ cache i = unsafeToGraphEffects (Proxy :: _ ptr)
     (Proxy :: _ rest)
     cache
     i
     "u"
-data MakeUl (ptr :: Symbol) = MakeUl (Proxy ptr)
-instance doCreateMakeUl :: DoCreate ptr CTOR.TUl (MakeUl ptr)
-instance toGraphEffectsMakeUl ::
+data MakeUl_ (ptr :: Symbol) = MakeUl_ (Proxy ptr)
+instance doCreateMakeUl_ :: DoCreate ptr CTOR.TUl_ (MakeUl_ ptr)
+instance toGraphEffectsMakeUl_ ::
   ( IsSymbol ptr
   , ToGraphEffects rest
   ) =>
-  ToGraphEffects (MakeUl ptr /\ rest) where
+  ToGraphEffects (MakeUl_ ptr /\ rest) where
   toGraphEffects _ cache i = unsafeToGraphEffects (Proxy :: _ ptr)
     (Proxy :: _ rest)
     cache
     i
     "ul"
-data MakeVar (ptr :: Symbol) = MakeVar (Proxy ptr)
-instance doCreateMakeVar :: DoCreate ptr CTOR.TVar (MakeVar ptr)
-instance toGraphEffectsMakeVar ::
+data MakeVar_ (ptr :: Symbol) = MakeVar_ (Proxy ptr)
+instance doCreateMakeVar_ :: DoCreate ptr CTOR.TVar_ (MakeVar_ ptr)
+instance toGraphEffectsMakeVar_ ::
   ( IsSymbol ptr
   , ToGraphEffects rest
   ) =>
-  ToGraphEffects (MakeVar ptr /\ rest) where
+  ToGraphEffects (MakeVar_ ptr /\ rest) where
   toGraphEffects _ cache i = unsafeToGraphEffects (Proxy :: _ ptr)
     (Proxy :: _ rest)
     cache
     i
     "var"
-data MakeVideo (ptr :: Symbol) = MakeVideo (Proxy ptr)
-instance doCreateMakeVideo :: DoCreate ptr CTOR.TVideo (MakeVideo ptr)
-instance toGraphEffectsMakeVideo ::
+data MakeVideo_ (ptr :: Symbol) = MakeVideo_ (Proxy ptr)
+instance doCreateMakeVideo_ :: DoCreate ptr CTOR.TVideo_ (MakeVideo_ ptr)
+instance toGraphEffectsMakeVideo_ ::
   ( IsSymbol ptr
   , ToGraphEffects rest
   ) =>
-  ToGraphEffects (MakeVideo ptr /\ rest) where
+  ToGraphEffects (MakeVideo_ ptr /\ rest) where
   toGraphEffects _ cache i = unsafeToGraphEffects (Proxy :: _ ptr)
     (Proxy :: _ rest)
     cache
     i
     "video"
-data MakeWbr (ptr :: Symbol) = MakeWbr (Proxy ptr)
-instance doCreateMakeWbr :: DoCreate ptr CTOR.TWbr (MakeWbr ptr)
-instance toGraphEffectsMakeWbr ::
+data MakeWbr_ (ptr :: Symbol) = MakeWbr_ (Proxy ptr)
+instance doCreateMakeWbr_ :: DoCreate ptr CTOR.TWbr_ (MakeWbr_ ptr)
+instance toGraphEffectsMakeWbr_ ::
   ( IsSymbol ptr
   , ToGraphEffects rest
   ) =>
-  ToGraphEffects (MakeWbr ptr /\ rest) where
+  ToGraphEffects (MakeWbr_ ptr /\ rest) where
   toGraphEffects _ cache i = unsafeToGraphEffects (Proxy :: _ ptr)
     (Proxy :: _ rest)
     cache

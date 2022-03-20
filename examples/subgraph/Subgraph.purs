@@ -15,7 +15,7 @@ import Deku.Control.Functions.Subgraph as SG
 import Deku.Control.Types (Frame0, Scene)
 import Deku.Create (icreate)
 import Deku.Graph.Attribute (Cb(..))
-import Deku.Graph.DOM (AsSubgraph(..), Href_(..), OnClick(..), Subgraph, X1Subgraph(..), XSubgraph(..), a, a'attr, root, subgraph, text, (:=))
+import Deku.Graph.DOM (AsSubgraph(..), Href(..), OnClick(..), X1Subgraph(..), XSubgraph(..), a, a'attr, root, subgraph, text, (:=))
 import Deku.Graph.DOM as D
 import Deku.Interpret (makeFFIDOMSnapshot)
 import Deku.Run (RunDOM, RunEngine, TriggeredScene, defaultOptions, run)
@@ -37,14 +37,14 @@ scene elt =
       ( icreate $
           root elt
             { hello: D.div []
-                { hello: a [ Href_ := "#", OnClick := Cb (const $ push0 Hello) ]
+                { hello: a [ Href := "#", OnClick := Cb (const $ push0 Hello) ]
                     { ht: text "click" }
                 , helloA: subgraph (fill (const false) :: Vec D40 Boolean)
                     ( AsSubgraph \i -> SG.istart
                         ( \_ push ->
                             ( icreate
                                 { myA: a
-                                    [ Href_ := "#"
+                                    [ Href := "#"
                                     , OnClick := Cb
                                         ( const $ do
                                             push false
@@ -68,14 +68,14 @@ scene elt =
                     )
                 }
             , world: D.div []
-                { wA: a [ Href_ := "#", OnClick := Cb (const $ push0 World) ]
+                { wA: a [ Href := "#", OnClick := Cb (const $ push0 World) ]
                     { ht: text "click" }
                 , wB: subgraph (fill (const false) :: Vec D40 Boolean)
                     ( AsSubgraph \i -> SG.istart
                         ( \_ push ->
                             ( icreate
                                 { myA: a
-                                    [ Href_ := "#"
+                                    [ Href := "#"
                                     , OnClick := Cb
                                         ( const $ do
                                             push false

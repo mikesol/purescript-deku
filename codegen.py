@@ -57,6 +57,15 @@ for row in table.findAll('tr')[1:x]:
 
 # don't need it...
 del AMAP['data-']
+AMAP['xtype'] = AMAP['type']
+del AMAP['type']
+
+def asattr(x):
+    return 'type' if x == 'xtype' else x
+
+
+def astag(x):
+    return 'data' if x == 'xdata' else x
 
 
 def bigat(x):
@@ -94,14 +103,14 @@ unsafeUn{term} :: {term} -> {{ | {term}' }}
 unsafeUn{term} ({term} unsafe) = unsafe
 
 instance typeToSym{term} ::
-  TypeToSym {term} "{x}"
+  TypeToSym {term} "{astag(x)}"
 
 {x}
   :: forall children
    . Array (Attribute {term})
   -> {{ | children }}
   -> Element {term} children
-{x} = makeElt {term} "{x}"
+{x} = makeElt {term} "{astag(x)}"
 
 {x}'attr
   :: Array (Attribute {term})
@@ -130,7 +139,7 @@ instance reify{typ} :: ReifyAU {term} {typ} where
   , R.Cons ptr (NodeC CTOR.{typ} {{}}) graphi grapho
   ) =>
   Create' ptr CTOR.{term} graphi grapho where
-  create' ptr w = unsafeCreate' ptr i attributes "{x}"
+  create' ptr w = unsafeCreate' ptr i attributes "{astag(x)}"
     where
     {{ context: i, value }} = unsafeUnDOM w
     {{ attributes }} = CTOR.unsafeUn{term} value''')
@@ -170,7 +179,7 @@ instance toGraphEffectsMake{term} ::
     (Proxy :: _ rest)
     cache
     i
-    "{x}"''')
+    "{astag(x)}"''')
     elif CODEGEN_TARGET == GENERATE_VALIDATION:
         for x in TAGS:
             term = bigtag(x)
@@ -198,9 +207,9 @@ instance toGraphEffectsMake{term} ::
             if v == [GLOBAL_ATTRIBUTE]:
                 v = TAGS
             for att in v:
-                term2 = att.capitalize()
+                term2 = bigtag(att)
                 print_(f'''instance Attr {term2} {term} String where
-  attr {term} value = unsafeAttribute {{ key: "{k}", value: prop value }}
+  attr {term} value = unsafeAttribute {{ key: "{asattr(k)}", value: prop value }}
 ''')
         for x in GLOBAL_EVENT_HANDLERS:
             term = 'On'+x.capitalize()
