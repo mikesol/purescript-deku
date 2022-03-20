@@ -4,15 +4,17 @@ import Prelude
 
 import Control.Monad.State (State, evalState, get, put)
 import Data.Either (Either(..))
+import Data.Generic.Rep (class Generic)
 import Data.Map (Map)
 import Data.Maybe (Maybe(..), maybe)
+import Data.Show.Generic (genericShow)
 import Data.Traversable (traverse)
 import Data.Tuple.Nested ((/\), type (/\))
 import Deku.Control.Functions (start)
 import Deku.Control.Functions.Subgraph ((@||>), freeze)
 import Deku.Control.Types (Frame0, SubScene, DOM, oneSubFrame)
 import Deku.Create (class Create, create)
-import Deku.Graph.Attribute (Attribute, unsafeUnAttribute)
+import Deku.Graph.Attribute (AttributeValue)
 import Deku.Rendered (Instruction)
 import Deku.Rendered as R
 import Deku.Tumult (Tumultuous, unsafeTumult)
@@ -20,8 +22,15 @@ import Deku.Validation (class NodesCanBeTumultuous, class SubgraphIsRenderable)
 import Prim.RowList (class RowToList)
 
 data Indecent
-  = E String (Array (Attribute Indecent)) (Array Indecent)
+  = E String (Array  {key::String, value::AttributeValue}) (Array Indecent)
   | T String
+
+derive instance genericIndecent :: Generic Indecent _
+derive instance eqIndecent :: Eq Indecent
+derive instance ordIndecent :: Ord Indecent
+
+instance showIndecent :: Show Indecent where
+  show s = genericShow s
 
 indecently
   :: Map Int (Maybe Indecent)
@@ -35,7 +44,7 @@ indecently v = unsafeTumult ((map <<< map) mk v)
     instrs <- traverse (tv (Just (i /\ tag))) rest
     pure
       ( [ R.iMakeElement
-            { tag, attributes: map unsafeUnAttribute attributes, id: show i }
+            { tag, attributes, id: show i }
         ] <> join instrs <> maybe []
           ( \(p /\ u) ->
               [ R.iConnectXToY

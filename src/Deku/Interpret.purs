@@ -35,7 +35,7 @@ import Data.Typelevel.Undefined (undefined)
 import Data.Variant (match)
 import Deku.Control.Types (Frame0, SubScene(..), oneSubFrame)
 import Deku.Graph.Attribute (prop)
-import Deku.Rendered (Instruction)
+import Deku.Rendered (Instruction, PureEnvs(..), PureScenes(..))
 import Deku.Rendered as R
 import Deku.Tumult.Reconciliation (reconcileTumult)
 import Effect (Effect)
@@ -85,6 +85,20 @@ class DOMInterpret dom engine where
   setText :: R.SetText -> dom -> engine
   setTumult :: R.SetTumult -> dom -> engine
 
+unsafeStashScene
+  :: forall terminusA envA pushA
+   . SubScene terminusA envA Unit Instruction Frame0 pushA (Additive Int)
+  -> ( forall terminus env push
+        . SubScene terminus env Unit Instruction Frame0 push (Additive Int)
+     )
+unsafeStashScene = unsafeCoerce
+
+unsafeStashEnvs
+  :: forall envA
+   . Map.Map Int (Maybe envA)
+  -> (forall env. Map.Map Int (Maybe env))
+unsafeStashEnvs = unsafeCoerce
+
 instance freeDOMInterpret :: DOMInterpret Unit Instruction where
   connectXToY = const <<< R.iConnectXToY
   disconnectXFromY = const <<< R.iDisconnectXFromY
@@ -94,10 +108,11 @@ instance freeDOMInterpret :: DOMInterpret Unit Instruction where
   makeText = const <<< R.iMakeText
   makeTumult = const <<< R.iMakeTumult
   massiveCreate = const <<< R.iMassiveCreate
-  -- todo: FIX
-  makeSubgraph { id } _ = R.iMakeSubgraph { id, instructions: Map.empty }
+  makeSubgraph { id, terminus, scenes } _ = R.iMakeSubgraph
+    { id, terminus, scenes: PureScenes (map unsafeStashScene scenes) }
   setAttribute = const <<< R.iSetAttribute
-  setSubgraph { id } _ = R.iSetSubgraph { id }
+  setSubgraph { id, envs } _ = R.iSetSubgraph
+    { id, envs: PureEnvs (unsafeStashEnvs envs) }
   massiveChange = const <<< R.iMassiveChange
   setText = const <<< R.iSetText
   setTumult = const <<< R.iSetTumult

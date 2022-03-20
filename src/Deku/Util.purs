@@ -7,7 +7,7 @@ import Data.Symbol (class IsSymbol)
 import Data.Tuple (Tuple(..))
 import Data.Tuple.Nested ((/\), type (/\))
 import Data.Typelevel.Bool (True, False)
-import Data.Typelevel.Num (class Nat, class Pos, class Pred, class Succ, type (:*), D0, D1, D2, D3, D4, D5, D6, D7, D8, D9, toInt')
+import Data.Typelevel.Num (class Nat, class Succ, type (:*), D0, D1, D2, D3, D4, D5, D6, D7, D8, D9)
 import Prim.Ordering (Ordering, LT, GT, EQ)
 import Prim.Row (class Cons, class Lacks)
 import Prim.RowList (RowList)
@@ -164,37 +164,13 @@ class
   AddPrefixToRowList (s :: Symbol) (i :: RowList Type) (o :: RowList Type)
   | s i -> o
 
-instance sddPrefixToRowListCons ::
+instance addPrefixToRowListCons ::
   ( AddPrefixToRowList sym c x
   , Sym.Append sym a symA
   ) =>
   AddPrefixToRowList sym (RL.Cons a b c) (RL.Cons symA b x)
 
-instance sddPrefixToRowListNil :: AddPrefixToRowList sym RL.Nil RL.Nil
-
-class
-  ValidateOutputChannelCount
-    (numberOfOutputs :: Type)
-    (outputChannelCount :: Type) where
-  toOutputChannelCount
-    :: forall proxy
-     . proxy numberOfOutputs
-    -> proxy outputChannelCount
-    -> Array Int
-
-instance validateOutputChannelCountD1 ::
-  Pos n =>
-  ValidateOutputChannelCount D1 n where
-  toOutputChannelCount _ _ = [ toInt' (Proxy :: _ n) ]
-else instance validateOutputChannelCountN ::
-  ( Pred x xMinus1
-  , Pos n
-  , ValidateOutputChannelCount xMinus1 r
-  ) =>
-  ValidateOutputChannelCount x (n /\ r) where
-  toOutputChannelCount _ _ = [ toInt' (Proxy :: _ n) ] <> toOutputChannelCount
-    (Proxy :: _ xMinus1)
-    (Proxy :: _ r)
+instance addPrefixToRowListNil :: AddPrefixToRowList sym RL.Nil RL.Nil
 
 class Detup (n :: Type) (a :: Type) (b :: Row Type) | n a -> b where
   detup' :: forall proxy. proxy n -> a -> { | b }

@@ -11,7 +11,7 @@ module Deku.Graph.Attribute
 import Prelude
 
 import Data.Newtype (class Newtype)
-import Data.Variant (Variant, inj)
+import Data.Variant (Variant, inj, match)
 import Effect (Effect)
 import Type.Proxy (Proxy(..))
 import Web.Event.Internal.Types (EventTarget)
@@ -36,6 +36,7 @@ newtype Attribute (e :: Type) = Attribute
   { key :: String
   , value :: AttributeValue
   }
+
 unsafeUnAttribute
   :: forall e. Attribute e -> { key :: String, value :: AttributeValue }
 unsafeUnAttribute (Attribute unsafe) = unsafe
@@ -43,3 +44,9 @@ unsafeUnAttribute (Attribute unsafe) = unsafe
 unsafeAttribute
   :: forall e. { key :: String, value :: AttributeValue } -> Attribute e
 unsafeAttribute = Attribute
+
+instance showAttribute :: Show (Attribute x) where
+  show (Attribute {key, value}) =
+    "(" <> key <> "," <> match {prop: \a -> a, cb: \_ -> "(callback)"} value <> ")"
+derive instance eqAttribute :: Eq (Attribute x)
+derive instance ordAttribute :: Ord (Attribute x)
