@@ -1,19 +1,43 @@
 module Deku.Example.Docs.Events where
 
-import Deku.Example.Docs.Types (Page(..))
 import Prelude
 
-import Data.Vec ((+>), empty)
+import Data.Either (Either(..))
+import Data.Foldable (for_)
+import Data.Foldable (for_)
+import Data.Map (singleton)
+import Data.Maybe (Maybe(..))
 import Data.Tuple.Nested ((/\))
-import Deku.Control.Functions (freeze, (@!>))
+import Data.Vec ((+>), empty)
+import Deku.Change (ichange_)
+import Deku.Control.Functions (freeze, iloop, (@!>))
+import Deku.Control.Types (Frame0, Scene)
 import Deku.Create (icreate)
+import Deku.Create (icreate)
+import Deku.Example.Docs.Types (Page(..))
 import Deku.Example.Docs.Util (scrollToTop)
 import Deku.Graph.Attribute (Cb(..))
-import Deku.Graph.DOM (ResolvedSubgraphSig, (:=))
+import Deku.Graph.Attribute (Cb(..))
+import Deku.Graph.DOM (AsSubgraph(..), root, (:=))
+import Deku.Graph.DOM (ResolvedSubgraphSig, SubgraphSig, subgraph, (:=))
+import Deku.Graph.DOM as D
 import Deku.Graph.DOM as D
 import Deku.Graph.DOM.Shorthand as S
+import Deku.Graph.DOM.Shorthand as S
+import Deku.Interpret (class DOMInterpret, makeFFIDOMSnapshot)
+import Deku.Run (defaultOptions, run)
 import Deku.Util (detup, vex)
 import Effect (Effect)
+import Effect (Effect)
+import FRP.Event (subscribe)
+import Web.DOM (Element)
+import Web.DOM.Element (fromEventTarget)
+import Web.Event.Event (target)
+import Web.HTML (window)
+import Web.HTML.HTMLDocument (body)
+import Web.HTML.HTMLElement (toElement)
+import Web.HTML.HTMLInputElement (fromElement, valueAsNumber)
+import Web.HTML.Window (document)
 
 events :: (Page -> Effect Unit) -> ResolvedSubgraphSig "head" Unit Unit
 events dpage =
@@ -23,7 +47,7 @@ events dpage =
               { title: D.h1 [] (S.text "Events")
               , subtitle: D.h3 []
                   ( S.text
-                      "Let's click on stuff!"
+                      "Listening to the DOM"
                   )
               }
           , pars: D.div []
@@ -37,59 +61,85 @@ events dpage =
                         ( D.pre []
                             ( S.code []
                                 ( S.text
-                                    """module Deku.Example.Docs.Example.Component where
+                                    """module Deku.Example.Docs.Example.Events where
 
 import Prelude
 
+import Data.Either (Either(..))
 import Data.Foldable (for_)
-import Data.Vec ((+>), empty)
-import Deku.Graph.DOM ((:=), root)
-import Data.Tuple.Nested ((/\))
-import Deku.Control.Functions.Graph (freeze, (@!>))
+import Deku.Change (ichange_)
+import Deku.Control.Functions.Graph (iloop, (@!>))
 import Deku.Control.Types (Frame0, Scene)
 import Deku.Create (icreate)
+import Deku.Graph.Attribute (Cb(..))
+import Deku.Graph.DOM ((:=), root)
 import Deku.Graph.DOM as D
 import Deku.Graph.DOM.Shorthand as S
 import Deku.Interpret (class DOMInterpret, makeFFIDOMSnapshot)
 import Deku.Run (defaultOptions, run)
-import Deku.Util (detup, vex)
 import Effect (Effect)
 import FRP.Event (subscribe)
 import Web.DOM (Element)
+import Web.DOM.Element (fromEventTarget)
+import Web.Event.Event (target)
 import Web.HTML (window)
 import Web.HTML.HTMLDocument (body)
 import Web.HTML.HTMLElement (toElement)
+import Web.HTML.HTMLInputElement (fromElement, valueAsNumber)
 import Web.HTML.Window (document)
 
+data UIEvents = ButtonClicked | SliderMoved Number
+
 scene
-  :: forall env dom engine push res
+  :: forall env dom engine res
    . Monoid res
   => DOMInterpret dom engine
   => Element
-  -> Scene env dom engine Frame0 push res
+  -> Scene env dom engine Frame0 UIEvents res
 scene elt =
-  ( \_ _ ->
+  ( \_ push ->
       ( icreate $ root elt
-          ( { button: D.button [] { t: D.text "I do nothing" }
-            , list: D.ul []
-                $ vex
-                $ map (D.li [] <<< S.text)
-                  ("A" +> "B" +> "C" +> empty)
-            , rando: D.div []
-                $ detup
-                $ D.a [D.Href := "https://github.com/mikesol/purescript-deku"] (S.text "foo ")
-                  /\ D.i [] (S.text " bar ")
-                  /\ D.span [ D.Style := "font-weight: 800;" ] (S.text " baz")
-                  /\
-                    unit
-            , lotsOfDivs: D.div []
-                $ S.div []
-                $ S.div []
-                $ S.input [ D.Xtype := "range" ] {}
+          ( { div1: D.div []
+                { button: D.button
+                    [ D.OnClick :=
+                        Cb (const $ push ButtonClicked)
+                    ]
+                    (S.text "Click")
+                , count: D.div [] (S.text "Val: 0")
+                }
+            , div2: D.div []
+                { slider: D.input
+                    [ D.Xtype := "range"
+                    , D.OnInput := Cb \e -> for_
+                        ( target e
+                            >>= fromEventTarget
+                            >>= fromElement
+                        )
+                        ( valueAsNumber
+                            >=> push <<< SliderMoved
+                        )
+                    ]
+                    {}
+                , val: D.div [] (S.text "Val: 50")
+                }
             }
           )
-      )
-  ) @!> freeze
+      ) $> 0
+  ) @!> iloop \e _ nclicks -> case e of
+    Left _ -> pure nclicks
+    Right ButtonClicked ->
+      let
+        c = nclicks + 1
+      in
+        ichange_
+          { "root.div1.count.t": "Val: " <> show c
+          , "root.div1.button.t":
+              if mod c 2 == 0 then "Click" else "me"
+          } $> c
+    Right (SliderMoved n) ->
+      ichange_
+        { "root.div2.val.t": "Val: " <> show n
+        } $> nclicks
 
 main :: Effect Unit
 main = do
@@ -115,121 +165,137 @@ main = do
                               /\ unit
                         )
                       /\ D.blockquote []
-                        { button: D.button [] { t: D.text "I do nothing" }
-                        , list: D.ul []
-                            $ vex
-                            $ map (D.li [] <<< S.text)
-                              ("A" +> "B" +> "C" +> empty)
-                        , rando: D.div []
-                            $ detup
-                            $ D.a [D.Href := "https://github.com/mikesol/purescript-deku"] (S.text "foo ")
-                              /\ D.i [] (S.text " bar ")
-                              /\ D.span [ D.Style := "font-weight: 800;" ]
-                                (S.text " baz")
-                              /\
-                                unit
-                        , lotsOfDivs: D.div []
-                            $ S.div []
-                            $ S.div []
-                            $ S.input [ D.Xtype := "range" ] {}
+                        { example: subgraph (singleton 0 (Just unit))
+                            (AsSubgraph sg)
                         }
-                      /\ D.h2 [] (S.text "It's all about records")
+                      /\ D.h2 [] (S.text "Event handling")
                       /\ D.p []
                         ( detup $
                             D.text
-                              """Deku encodes the DOM using records. The functions """
-                              /\ D.code [] (S.text "detup")
+                              """All DOM event handlers, like """
+                              /\ D.code [] (S.text "OnClick")
+                              /\ D.text
+                                """ and """
+                              /\ D.code [] (S.text "OnInput")
+                              /\ D.text
+                                """, can be set with a value of type """
+                              /\ D.code [] (S.text "Cb")
+                              /\ D.text
+                                """. This type is a newtype around"""
+                              /\ D.code [] (S.text "(Event -> Effect Unit)")
+                              /\ D.text
+                                """. In order to actually trigger the event, you'll use the"""
+                              /\ D.code [] (S.text "push")
+                              /\ D.text
+                                """ function passed both to """
+                              /\ D.code [] (S.text "istart")
+                              /\ D.text
+                                """ and """
+                              /\ D.code [] (S.text "iloop")
+                              /\ D.text
+                                """. This function has a signature of """
+                              /\ D.code [] (S.text "(push -> Effect Unit)")
+                              /\ D.text
+                                """, where """
+                              /\ D.code [] (S.text "push")
+                              /\ D.text
+                                """is defined a per-component basis. Here, the type used is """
+                              /\ D.code [] (S.text "UIEvents")
+                              /\ D.text
+                                """. Whenever a push happens, it goes to the right of the next set of DOM instructions emitted by our stream. There are several ways to produce those instructions. Until now, we've just seen """
+                              /\ D.code [] (S.text "freeze")
+                              /\ D.text
+                                """, which effectively ignores all events and reproduces the most recent DOM """
+                              /\ D.i [] (S.text "ad infinitum")
+                              /\ D.text
+                                """. In this case, we use a different stream-producing mechanism called """
+                              /\ D.code [] (S.text "iloop")
+                              /\ D.text "."
+                              /\ unit
+                        )
+                      /\ D.h2 [] (S.text "Loop-de-loop")
+                      /\ D.p []
+                        ( detup $
+                            D.text
+                              """The """
+                              /\ D.code []
+                                ( S.text
+                                    "iloop"
+                                )
+                              /\ D.text
+                                """ function effectively fixes the nodes of the DOM while allowing their content to vary. This means that we'll no longer be able to add or remove nodes, but we can change them."""
+
+                              /\ unit
+                        )
+                      /\ D.p []
+                        ( detup $
+                            D.text
+                              """Changing is done with the function """
+                              /\ D.code []
+                                ( S.text
+                                    "ichange_"
+                                )
+                              /\ D.text
+                                """. """
+                              /\ D.code []
+                                ( S.text
+                                    "ichange_"
+                                )
+                              /\ D.text
+                                """ uses Barlow-style lenses to zoom into the DOM with surgical precision, changing only what needs to be changed. This is what keeps Deku so darn fast and why it is ideally suited to performance-critical webpages. Because it tracks the DOM at """
+                              /\ D.i []
+                                ( S.text
+                                    "compile time"
+                                )
+                              /\ D.text
+                                """, you always know what is and isn't present, which allows for one-off changes without re-rendering a bunch of elements. It's even faster than React, having similar performance profile as Svelte while giving the full power of PureScript's functional language."""
+                              /\ unit
+                        )
+                      /\ D.h2 [] (S.text "Arguments to our loop")
+                      /\ D.p []
+                        ( detup $
+                            D.text
+                              """The first argument to our loop is an """
+                              /\ D.code [] (S.text "Either env push")
+                              /\ D.text
+                                """. We've already seen that"""
+                              /\ D.code [] (S.text "push")
+                              /\ D.text
+                                """ in this example is"""
+                              /\ D.code [] (S.text "UIEvents")
+                              /\ D.text
+                                """. We're not using """
+                              /\ D.code [] (S.text "env")
+                              /\ D.text
+                                """ yet, but we will when we talk about subgraphs in that section."""
+                              /\ unit
+                        )
+                      /\ D.p []
+                        ( detup $
+                            D.text
+                              """The second argument to our loop is the same push function that we got in the initial call to our function. The third argument is a custom accumulator. In our case, we use an """
+                              /\ D.code [] (S.text "Int")
+                              /\ D.text
+                                """ to track the number of clicks. The accumulator must be returned as the value contained in the indexed monad if you are using the monadic syntax ("""
+                              /\ D.code [] (S.text "icreate")
                               /\ D.text
                                 ""","""
-                              /\ D.code [] (S.text "vex")
+                              /\ D.code [] (S.text "ichange")
                               /\ D.text
-                                """, and all of the """
-                              /\ D.code [] (S.text "S")
+                                """, etc)."""
                               /\ D.text
-                                """-prefixed functions produce records."""
-                              /\ unit
-                        )
-                      /\ D.p []
-                        ( detup $
-                            D.text
-                              """Another thing to note is the import of """
-                              /\ D.code []
-                                ( S.text
-                                    "import Deku.Control.Functions.Graph (freeze, (@!>))"
-                                )
+                                """ There is also a comonadic syntax, but it's a bit more verbose. Those versions, """
+                              /\ D.code [] (S.text "create")
                               /\ D.text
-                                """. This works fine for small examples, but for larger ones, you'll want to use """
-                              /\ D.code []
-                                ( S.text
-                                    "import Deku.Control.Functions (freeze, (@!>))"
-                                )
+                                """ and """
+                              /\ D.code [] (S.text "change")
+                              /\ D.text ",live in the files "
+                              /\ D.code [] (S.text "Create.purs")
                               /\ D.text
-                                """. The second version of those functions is much faster to compile at the expense of missing certain subtle bugs in corner cases. In 99% of cases, you'll want to use the second version, using the first only in acceptance testing on a CI platform if needed."""
-                              /\ unit
-                        )
-                      /\ D.h2 [] (S.text "Straight-up records")
-                      /\ D.p []
-                        ( detup $
-                            D.text
-                              """All DOM elements accept a record of child nodes. In the example above, we give """
-                              /\ D.code [] (S.text "root")
+                                """and"""
+                              /\ D.code [] (S.text "Change.purs")
                               /\ D.text
-                                """a record with four keys: button, list, rando and lotsOfDivs."""
-                              /\ unit
-                        )
-                      /\ D.p []
-                        ( detup $
-                            D.text
-                              "Records are cool, but they get tedious. For example, the button needs a record just to add a bit of text. For one-off records, you can use the "
-                              /\ D.code [] (S.text "S")
-                              /\ D.text " family of functions. For example, "
-                              /\ D.code [] (S.text "S.text \"hi\"")
-                              /\ D.text "is equivalent to"
-                              /\ D.code [] (S.text "{ t: D.text \"hi\" }")
-                              /\ D.text "."
-                              /\ unit
-                        )
-                      /\ D.h2 [] (S.text "De-tupling")
-                      /\ D.p []
-                        ( detup $
-                            D.text
-                              "Next up is " /\ D.code [] (S.text "detup")
-                              /\ D.text ". "
-                              /\ D.code [] (S.text "detup")
-                              /\ D.text
-                                " takes a \"list\" of tuples terminated by "
-                              /\ D.code [] (S.text "unit")
-                              /\ D.text
-                                " and turns them into a record with keys that go from 0 to however many elements are in the tuple. This feels a lot more like working with arrays in Halogen and is fast to type. As I'm writing this, I'm using "
-                              /\ D.code [] (S.text "detup")
-                              /\ D.text "(check the source code)."
-                              /\ unit
-                        )
-                      /\ D.h2 [] (S.text "Vectors")
-                      /\ D.p []
-                        ( detup $
-                            D.text
-                              "If all of your elements have the same type, you can use "
-                              /\ D.code [] (S.text "vex")
-                              /\ D.text ". "
-                              /\ D.code [] (S.text "vex")
-                              /\ D.text
-                                " is nice because we can map over the elements, whereas tuples are heterogeneous and require more type-level machinery. In the example above, all of the list items are the same and are stashed in a vector that is processed by"
-                              /\ D.code [] (S.text "vex")
-                              /\ D.text "."
-                              /\ unit
-                        )
-                      /\ D.h2 [] (S.text "Attributes")
-                      /\ D.p []
-                        ( detup $
-                            D.text
-                              "The last thing to address here are attributes. Attributes like an element's style or id are added in the array after element creation. In the example above, we make the input a range slider, for example, using"
-                              /\ D.code [] (S.text "Xtype := \"range\"")
-                              /\ D.text
-                                ". Unlike Halogen, there are no checks to make sure you give a valid string. So if you want your range slider to have the value of "
-                              /\ D.code [] (S.text "true")
-                              /\ D.text
-                                ", you can. One day, I may build some validators, but passing strings works decently well here."
+                                "respectively if you want to see how their signatures differ."
                               /\ unit
                         )
                       /\ D.h2 [] (S.text "Next steps")
@@ -237,21 +303,18 @@ main = do
                         ( detup $
                             D.span []
                               ( S.text
-                                  """In this section, we built a simple component out of records. We used several record-shorthand functions, including the  """
-                              ) /\ D.code [] (S.text "detup") /\ D.text ", the"
-                              /\ D.code [] (S.text "vex")
-                              /\ D.text ", and the "
-                              /\ D.code [] (S.text "S")
-                              /\ D.text
-                                " family of functions. We also saw how to add attributes to elements. In the next section, we'll learn how to respond to "
+                                  """In this section, saw how to react to events using the """
+                              ) /\ D.code [] (S.text "iloop") /\ D.text " function in combination with "
+                              /\ D.code [] (S.text "ichange_")
+                              /\ D.text ". In the next section, we'll use a similar mechanism to deal with arbitrary "
                               /\ D.a
                                 [ D.OnClick := Cb
-                                    ( const $ dpage Events *>
+                                    ( const $ dpage Effects *>
                                         scrollToTop
                                     )
                                 , D.Style := "cursor:pointer;"
                                 ]
-                                (S.text "events")
+                                (S.text "effects")
                               /\ D.span []
                                 ( S.text "."
                                 )
@@ -262,3 +325,43 @@ main = do
           }
       }
   ) @!> freeze
+
+data UIEvents = ButtonClicked | SliderMoved Number
+sg :: SubgraphSig Int "div" Unit UIEvents
+
+sg _ =
+  ( \_ push ->
+      ( icreate $ S.div []
+          ( { div1: D.div []
+                { button: D.button
+                    [ D.OnClick := Cb (const $ push ButtonClicked)
+                    ]
+                    (S.text "Click")
+                , count: D.div [] (S.text "Val: 0")
+                }
+            , div2: D.div []
+                { slider: D.input
+                    [ D.Xtype := "range"
+                    , D.OnInput := Cb \e -> for_
+                        (target e >>= fromEventTarget >>= fromElement)
+                        (valueAsNumber >=> push <<< SliderMoved)
+                    ]
+                    {}
+                , val: D.div [] (S.text "Val: 50")
+                }
+            }
+          )
+      ) $> 0
+  ) @!> iloop \e _ nclicks -> case e of
+    Left _ -> pure nclicks
+    Right ButtonClicked ->
+      let
+        c = nclicks + 1
+      in
+        ichange_
+          { "div.div1.count.t": "Val: " <> show c
+          , "div.div1.button.t":
+              if mod c 2 == 0 then "Click" else "me"
+          } $> c
+    Right (SliderMoved n) -> ichange_ { "div.div2.val.t": "Val: " <> show n }
+      $> nclicks

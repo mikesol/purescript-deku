@@ -868,12 +868,11 @@ import Prelude hiding (map)
 import Data.Functor as Funk
 import Data.Map (Map)
 import Data.Map as Map
-import Data.Tuple.Nested ((/\))
+import Data.Tuple.Nested ((/\), type (/\))
 import Data.Hashable (hash, class Hashable)
 import Data.Maybe (Maybe)
 import Data.Monoid.Additive (Additive)
 import Data.Symbol (class IsSymbol, reflectSymbol)
-import Data.Tuple.Nested (type (/\))
 import Deku.Control.Types (Frame0, SubScene)
 import Deku.Graph.Attribute (Attribute, Cb, cb, prop, unsafeAttribute)
 import Deku.Interpret (class DOMInterpret)

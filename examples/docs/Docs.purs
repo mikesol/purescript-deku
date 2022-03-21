@@ -101,19 +101,22 @@ scene elt =
                                 /\ D.li []
                                   ( detup $
                                       D.a
-                                        [ D.OnClick := Cb (const $ push Control)
+                                        [ D.OnClick := Cb
+                                            (const $ push Subgraph)
                                         , D.Style := "cursor:pointer;"
+
                                         ]
-                                        (S.text "Control") /\ D.text " | " /\
+                                        (S.text "Subgraphs") /\ D.text " | " /\
                                         unit
                                   )
                                 /\ D.li []
-                                  ( S.a
-                                      [ D.OnClick := Cb (const $ push Subgraph)
-                                      , D.Style := "cursor:pointer;"
-
-                                      ]
-                                      (S.text "Subgraphs")
+                                  ( detup $
+                                      D.a
+                                        [ D.OnClick := Cb (const $ push Control)
+                                        , D.Style := "cursor:pointer;"
+                                        ]
+                                        (S.text "Control") /\
+                                        unit
                                   )
                                 /\ unit
                           )
