@@ -1,4 +1,4 @@
-module Deku.Example.Docs.Control where
+module Deku.Example.Docs.SSR where
 
 import Deku.Example.Docs.Types
 import Prelude
@@ -34,8 +34,8 @@ import Web.HTML.HTMLDocument (body)
 import Web.HTML.HTMLElement (toElement)
 import Web.HTML.Window (document)
 
-control :: (Page -> Effect Unit) -> ResolvedSubgraphSig "head" Unit Unit
-control dpage =
+serverSide :: (Page -> Effect Unit) -> ResolvedSubgraphSig "head" Unit Unit
+serverSide dpage =
   ( \_ _ -> icreate
       { head: D.div []
           { header: D.header []

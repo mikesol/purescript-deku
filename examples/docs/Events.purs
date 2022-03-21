@@ -4,40 +4,24 @@ import Prelude
 
 import Data.Either (Either(..))
 import Data.Foldable (for_)
-import Data.Foldable (for_)
 import Data.Map (singleton)
 import Data.Maybe (Maybe(..))
 import Data.Tuple.Nested ((/\))
-import Data.Vec ((+>), empty)
 import Deku.Change (ichange_)
 import Deku.Control.Functions (freeze, iloop, (@!>))
-import Deku.Control.Types (Frame0, Scene)
-import Deku.Create (icreate)
 import Deku.Create (icreate)
 import Deku.Example.Docs.Types (Page(..))
 import Deku.Example.Docs.Util (scrollToTop)
 import Deku.Graph.Attribute (Cb(..))
-import Deku.Graph.Attribute (Cb(..))
-import Deku.Graph.DOM (AsSubgraph(..), root, (:=))
+import Deku.Graph.DOM (AsSubgraph(..), ResolvedSubgraphSig, SubgraphSig, subgraph, (:=))
 import Deku.Graph.DOM (ResolvedSubgraphSig, SubgraphSig, subgraph, (:=))
 import Deku.Graph.DOM as D
-import Deku.Graph.DOM as D
 import Deku.Graph.DOM.Shorthand as S
-import Deku.Graph.DOM.Shorthand as S
-import Deku.Interpret (class DOMInterpret, makeFFIDOMSnapshot)
-import Deku.Run (defaultOptions, run)
-import Deku.Util (detup, vex)
+import Deku.Util (detup)
 import Effect (Effect)
-import Effect (Effect)
-import FRP.Event (subscribe)
-import Web.DOM (Element)
 import Web.DOM.Element (fromEventTarget)
 import Web.Event.Event (target)
-import Web.HTML (window)
-import Web.HTML.HTMLDocument (body)
-import Web.HTML.HTMLElement (toElement)
 import Web.HTML.HTMLInputElement (fromElement, valueAsNumber)
-import Web.HTML.Window (document)
 
 events :: (Page -> Effect Unit) -> ResolvedSubgraphSig "head" Unit Unit
 events dpage =

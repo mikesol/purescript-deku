@@ -21,8 +21,8 @@ import Deku.Example.Docs.Intro as Intro
 import Deku.Example.Docs.SimpleComponent as SimpleComponent
 import Deku.Example.Docs.Events as Events
 import Deku.Example.Docs.Effects as Effects
-import Deku.Example.Docs.Control as Control
-import Deku.Example.Docs.Subgraph as Subgraph
+import Deku.Example.Docs.SSR as SSR
+import Deku.Example.Docs.Subgraphs as Subgraph
 import Deku.Graph.Attribute (Cb(..))
 import Deku.Graph.DOM (AsSubgraph(..), SubgraphSig, subgraph, (:=))
 import Deku.Graph.DOM as D
@@ -112,10 +112,10 @@ scene elt =
                                 /\ D.li []
                                   ( detup $
                                       D.a
-                                        [ D.OnClick := Cb (const $ push Control)
+                                        [ D.OnClick := Cb (const $ push SSR)
                                         , D.Style := "cursor:pointer;"
                                         ]
-                                        (S.text "Control") /\
+                                        (S.text "SSR") /\
                                         unit
                                   )
                                 /\ unit
@@ -150,8 +150,8 @@ page dpage HelloWorld = HelloWorld.helloWorld dpage
 page dpage SimpleComponent = SimpleComponent.simpleComponent dpage
 page dpage Events = Events.events dpage
 page dpage Effects = Effects.effects dpage
-page dpage Control = Control.control dpage
-page dpage Subgraph = Subgraph.subgraph dpage
+page dpage SSR = SSR.serverSide dpage
+page dpage Subgraph = Subgraph.subgraphs dpage
 
 main :: Effect Unit
 main = do
