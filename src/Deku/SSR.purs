@@ -9,7 +9,7 @@ import Data.List (List(..), (:))
 import Data.List as List
 import Data.Maybe (Maybe(..))
 import Data.Traversable (sequence)
-import Data.Variant (on)
+import Data.Variant (match, on)
 import Deku.Control.Types (Frame0, SubScene)
 import Deku.Graph.Attribute (AttributeValue, prop)
 import Deku.Interpret (AsSubgraphHack(..), SubgraphInput, connectXToY, makeElement, makeRoot, makeSubgraph, makeText, makeTumult)
@@ -192,3 +192,23 @@ ssr' tmus hd a = o
       else makeStep
     )
   o = adjacenciesToGraph tmus connectStep indecentSubgraphs
+
+toXML :: Indecent -> String
+toXML (E tag attributes children) =
+  "<" <> tag <> " "
+    <>
+      ( List.intercalate " " $ map
+          ( \{ key, value } -> match
+              { prop: \p -> key <> "=\"" <> p <> "\""
+              , cb: \_ -> ""
+              }
+              value
+          )
+          attributes
+      )
+    <> ">"
+    <> (List.intercalate "" $ map toXML children)
+    <> "</"
+    <> tag
+    <> ">"
+toXML (T text) = text
