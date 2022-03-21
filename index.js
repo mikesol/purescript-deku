@@ -11345,7 +11345,7 @@ var PS = {};
           if (result instanceof Data_Either.Right) {
               return Effect_Class.liftEffect(Effect_Aff.monadEffectAff)(push(Data_Argonaut_Core.stringifyWithIndent(2)(result.value0.body)));
           };
-          throw new Error("Failed pattern match at Deku.Example.Docs.Effects (line 209, column 9 - line 215, column 48): " + [ result.constructor.name ]);
+          throw new Error("Failed pattern match at Deku.Example.Docs.Effects (line 210, column 9 - line 216, column 48): " + [ result.constructor.name ]);
       })));
   };
   var sg = function (dictDOMInterpret) {
@@ -11388,7 +11388,7 @@ var PS = {};
                               "div.div2.pre.code.t": e.value0
                           })))(true);
                       };
-                      throw new Error("Failed pattern match at Deku.Example.Docs.Effects (line 232, column 31 - line 243, column 16): " + [ e.constructor.name ]);
+                      throw new Error("Failed pattern match at Deku.Example.Docs.Effects (line 235, column 31 - line 246, column 16): " + [ e.constructor.name ]);
                   };
               };
           }));
@@ -11701,7 +11701,7 @@ var PS = {};
                               "div.div2.val.t": "Val: " + Data_Show.show(Data_Show.showNumber)(e.value0.value0)
                           }))(nclicks);
                       };
-                      throw new Error("Failed pattern match at Deku.Example.Docs.Events (line 339, column 31 - line 351, column 17): " + [ e.constructor.name ]);
+                      throw new Error("Failed pattern match at Deku.Example.Docs.Events (line 341, column 31 - line 353, column 17): " + [ e.constructor.name ]);
                   };
               };
           }));

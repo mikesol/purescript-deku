@@ -30,7 +30,6 @@ import Web.HTML.HTMLDocument (body)
 import Web.HTML.HTMLElement (toElement)
 import Web.HTML.Window (document)
 
-
 foreign import scrollToTop_ :: Effect Unit
 
 scrollToTop :: Effect Unit

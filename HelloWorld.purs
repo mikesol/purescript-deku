@@ -98,7 +98,7 @@ main = do
                               /\ unit
                         )
                       /\ D.p []
-                        ( S.text   "You gotta start somewhere!"
+                        ( S.text "You gotta start somewhere!"
 
                         )
                       /\ D.h2 [] (S.text "Our top-level component")
