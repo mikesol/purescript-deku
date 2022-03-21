@@ -9,6 +9,7 @@ GENERATE_PATCHES = 5
 GENERATE_VALIDATION = 6
 GENERATE_ATTR_DECL = 7
 GENERATE_ATTR_DEFS = 8
+GENERATE_SHORTHAND = 9
 
 CG_MAP = {GENERATE_DOM_DECL: 'src/Deku/Graph/DOM.purs',
           GENERATE_DOM_DEFS: 'src/Deku/Graph/DOM.purs',
@@ -18,7 +19,8 @@ CG_MAP = {GENERATE_DOM_DECL: 'src/Deku/Graph/DOM.purs',
           GENERATE_PATCHES: 'src/Deku/Patch.purs',
           GENERATE_VALIDATION: 'src/Deku/Validation.purs',
           GENERATE_ATTR_DECL: 'src/Deku/Graph/DOM.purs',
-          GENERATE_ATTR_DEFS: 'src/Deku/Graph/DOM.purs'
+          GENERATE_ATTR_DEFS: 'src/Deku/Graph/DOM.purs',
+          GENERATE_SHORTHAND: 'src/Deku/Graph/DOM/Shorthand.purs'
           }
 
 url = ('https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes')
@@ -90,6 +92,15 @@ def cg(CODEGEN_TARGET):
   , {x}
   , {x}'attr
   , unsafeUn{term}''')
+    elif CODEGEN_TARGET == GENERATE_SHORTHAND:
+      for x in TAGS:
+        term = bigtag(x)
+        print_(f'''{x}
+  :: forall children
+   . Array (Attribute D.{term})
+  -> {{ | children }}
+  -> {{ {x} :: D.Element D.{term} children }}
+{x} attrs children = {{ {x}: _ }} $ D.{x} attrs children''')
     elif CODEGEN_TARGET == GENERATE_DOM_DEFS:
         for x in TAGS:
             term = bigtag(x)
@@ -221,7 +232,7 @@ instance toGraphEffectsMake{term} ::
 
 
 if __name__ == '__main__':
-    for z in range(9):
+    for z in range(10):
       o = cg(z)
       with open(CG_MAP[z], 'r') as rf:
         i = rf.read().split('\n')

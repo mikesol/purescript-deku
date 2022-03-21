@@ -16,7 +16,7 @@ Deku started as an experiment taking [`purescript-wags`](https://github.com/mike
 
 ## Benchmarks
 
-Here are some recent benchmarks from the test suite comparing Deku to Halogen and Halogen Hooks. The test suite is the same one that is used in the Halogen Hooks repo
+Here are some recent benchmarks from the test suite comparing Deku to Halogen and Halogen Hooks. The test suite is the same one that is used in [`halogen-hooks`](https://github.com/thomashoneyman/purescript-halogen-hooks).
 
 ### The State test
 

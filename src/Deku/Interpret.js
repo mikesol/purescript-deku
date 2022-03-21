@@ -120,10 +120,10 @@ exports.makeText_ = function (a) {
 				incoming: [],
 				main: document.createElement("span"),
 			};
-			state.units[ptr].main.setAttribute("style", "white-space: pre;");
-			state.units[ptr].main.innerHTML = a.text
-				.replace(/\n/g, "<br>")
-				.replace(/ /g, "&nbsp;");
+			state.units[ptr].main.setAttribute("style", "white-space: pre-wrap;");
+			state.units[ptr].main.innerText = a.text;
+				//.replace(/\n/g, "<br>")
+				//.replace(/ /g, "&nbsp;");
 		};
 	};
 };
