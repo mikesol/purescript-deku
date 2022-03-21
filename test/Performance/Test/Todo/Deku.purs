@@ -99,8 +99,9 @@ containerD cstate = DOM.subgraph (singleton 0 (Just unit)) $ DOM.AsSubgraph
       Left _ -> pure ln
       Right td -> ln + 1 <$ ichange_
         { "ctr.dv.sg": xsubgraph
-            (singleton ln $ Just
-                { todo: td, completed: cstate.completed })
+            ( singleton ln $ Just
+                { todo: td, completed: cstate.completed }
+            )
 
         , "ctr.btn": DOM.button'attr
             [ DOM.OnClick := Cb (const $ Shared.mkTodo (ln + 1) >>= push)

@@ -809,7 +809,8 @@ instance toGraphEffectsMakeBase_ ::
     i
     "base"
 data MakeBasefont_ (ptr :: Symbol) = MakeBasefont_ (Proxy ptr)
-instance doCreateMakeBasefont_ :: DoCreate ptr CTOR.TBasefont_ (MakeBasefont_ ptr)
+instance doCreateMakeBasefont_ ::
+  DoCreate ptr CTOR.TBasefont_ (MakeBasefont_ ptr)
 instance toGraphEffectsMakeBasefont_ ::
   ( IsSymbol ptr
   , ToGraphEffects rest
@@ -857,7 +858,8 @@ instance toGraphEffectsMakeBig_ ::
     i
     "big"
 data MakeBlockquote_ (ptr :: Symbol) = MakeBlockquote_ (Proxy ptr)
-instance doCreateMakeBlockquote_ :: DoCreate ptr CTOR.TBlockquote_ (MakeBlockquote_ ptr)
+instance doCreateMakeBlockquote_ ::
+  DoCreate ptr CTOR.TBlockquote_ (MakeBlockquote_ ptr)
 instance toGraphEffectsMakeBlockquote_ ::
   ( IsSymbol ptr
   , ToGraphEffects rest
@@ -977,7 +979,8 @@ instance toGraphEffectsMakeCol_ ::
     i
     "col"
 data MakeColgroup_ (ptr :: Symbol) = MakeColgroup_ (Proxy ptr)
-instance doCreateMakeColgroup_ :: DoCreate ptr CTOR.TColgroup_ (MakeColgroup_ ptr)
+instance doCreateMakeColgroup_ ::
+  DoCreate ptr CTOR.TColgroup_ (MakeColgroup_ ptr)
 instance toGraphEffectsMakeColgroup_ ::
   ( IsSymbol ptr
   , ToGraphEffects rest
@@ -1001,7 +1004,8 @@ instance toGraphEffectsMakeXdata_ ::
     i
     "data"
 data MakeDatalist_ (ptr :: Symbol) = MakeDatalist_ (Proxy ptr)
-instance doCreateMakeDatalist_ :: DoCreate ptr CTOR.TDatalist_ (MakeDatalist_ ptr)
+instance doCreateMakeDatalist_ ::
+  DoCreate ptr CTOR.TDatalist_ (MakeDatalist_ ptr)
 instance toGraphEffectsMakeDatalist_ ::
   ( IsSymbol ptr
   , ToGraphEffects rest
@@ -1145,7 +1149,8 @@ instance toGraphEffectsMakeEmbed_ ::
     i
     "embed"
 data MakeFieldset_ (ptr :: Symbol) = MakeFieldset_ (Proxy ptr)
-instance doCreateMakeFieldset_ :: DoCreate ptr CTOR.TFieldset_ (MakeFieldset_ ptr)
+instance doCreateMakeFieldset_ ::
+  DoCreate ptr CTOR.TFieldset_ (MakeFieldset_ ptr)
 instance toGraphEffectsMakeFieldset_ ::
   ( IsSymbol ptr
   , ToGraphEffects rest
@@ -1157,7 +1162,8 @@ instance toGraphEffectsMakeFieldset_ ::
     i
     "fieldset"
 data MakeFigcaption_ (ptr :: Symbol) = MakeFigcaption_ (Proxy ptr)
-instance doCreateMakeFigcaption_ :: DoCreate ptr CTOR.TFigcaption_ (MakeFigcaption_ ptr)
+instance doCreateMakeFigcaption_ ::
+  DoCreate ptr CTOR.TFigcaption_ (MakeFigcaption_ ptr)
 instance toGraphEffectsMakeFigcaption_ ::
   ( IsSymbol ptr
   , ToGraphEffects rest
@@ -1229,7 +1235,8 @@ instance toGraphEffectsMakeFrame_ ::
     i
     "frame"
 data MakeFrameset_ (ptr :: Symbol) = MakeFrameset_ (Proxy ptr)
-instance doCreateMakeFrameset_ :: DoCreate ptr CTOR.TFrameset_ (MakeFrameset_ ptr)
+instance doCreateMakeFrameset_ ::
+  DoCreate ptr CTOR.TFrameset_ (MakeFrameset_ ptr)
 instance toGraphEffectsMakeFrameset_ ::
   ( IsSymbol ptr
   , ToGraphEffects rest
@@ -1553,7 +1560,8 @@ instance toGraphEffectsMakeNav_ ::
     i
     "nav"
 data MakeNoframes_ (ptr :: Symbol) = MakeNoframes_ (Proxy ptr)
-instance doCreateMakeNoframes_ :: DoCreate ptr CTOR.TNoframes_ (MakeNoframes_ ptr)
+instance doCreateMakeNoframes_ ::
+  DoCreate ptr CTOR.TNoframes_ (MakeNoframes_ ptr)
 instance toGraphEffectsMakeNoframes_ ::
   ( IsSymbol ptr
   , ToGraphEffects rest
@@ -1565,7 +1573,8 @@ instance toGraphEffectsMakeNoframes_ ::
     i
     "noframes"
 data MakeNoscript_ (ptr :: Symbol) = MakeNoscript_ (Proxy ptr)
-instance doCreateMakeNoscript_ :: DoCreate ptr CTOR.TNoscript_ (MakeNoscript_ ptr)
+instance doCreateMakeNoscript_ ::
+  DoCreate ptr CTOR.TNoscript_ (MakeNoscript_ ptr)
 instance toGraphEffectsMakeNoscript_ ::
   ( IsSymbol ptr
   , ToGraphEffects rest
@@ -1601,7 +1610,8 @@ instance toGraphEffectsMakeOl_ ::
     i
     "ol"
 data MakeOptgroup_ (ptr :: Symbol) = MakeOptgroup_ (Proxy ptr)
-instance doCreateMakeOptgroup_ :: DoCreate ptr CTOR.TOptgroup_ (MakeOptgroup_ ptr)
+instance doCreateMakeOptgroup_ ::
+  DoCreate ptr CTOR.TOptgroup_ (MakeOptgroup_ ptr)
 instance toGraphEffectsMakeOptgroup_ ::
   ( IsSymbol ptr
   , ToGraphEffects rest
@@ -1685,7 +1695,8 @@ instance toGraphEffectsMakePre_ ::
     i
     "pre"
 data MakeProgress_ (ptr :: Symbol) = MakeProgress_ (Proxy ptr)
-instance doCreateMakeProgress_ :: DoCreate ptr CTOR.TProgress_ (MakeProgress_ ptr)
+instance doCreateMakeProgress_ ::
+  DoCreate ptr CTOR.TProgress_ (MakeProgress_ ptr)
 instance toGraphEffectsMakeProgress_ ::
   ( IsSymbol ptr
   , ToGraphEffects rest
@@ -1961,7 +1972,8 @@ instance toGraphEffectsMakeTd_ ::
     i
     "td"
 data MakeTemplate_ (ptr :: Symbol) = MakeTemplate_ (Proxy ptr)
-instance doCreateMakeTemplate_ :: DoCreate ptr CTOR.TTemplate_ (MakeTemplate_ ptr)
+instance doCreateMakeTemplate_ ::
+  DoCreate ptr CTOR.TTemplate_ (MakeTemplate_ ptr)
 instance toGraphEffectsMakeTemplate_ ::
   ( IsSymbol ptr
   , ToGraphEffects rest
@@ -1973,7 +1985,8 @@ instance toGraphEffectsMakeTemplate_ ::
     i
     "template"
 data MakeTextarea_ (ptr :: Symbol) = MakeTextarea_ (Proxy ptr)
-instance doCreateMakeTextarea_ :: DoCreate ptr CTOR.TTextarea_ (MakeTextarea_ ptr)
+instance doCreateMakeTextarea_ ::
+  DoCreate ptr CTOR.TTextarea_ (MakeTextarea_ ptr)
 instance toGraphEffectsMakeTextarea_ ::
   ( IsSymbol ptr
   , ToGraphEffects rest

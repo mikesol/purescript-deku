@@ -32,7 +32,6 @@ import Web.HTML.HTMLDocument (body)
 import Web.HTML.HTMLElement (toElement)
 import Web.HTML.Window (document)
 
-
 intro :: (Page -> Effect Unit) -> ResolvedSubgraphSig "head" Unit Unit
 intro dpage =
   ( \_ _ -> icreate
@@ -82,10 +81,10 @@ intro dpage =
                                   "https://github.com/mikesol/purescript-deku/tree/main/examples/docs"
                               ]
                               (S.text "here.")
-                              /\ D.span []
-                            ( S.text
-                                """ One good way to follow along is by using the Deku starter repo, which you can clone """
-                            )
+                            /\ D.span []
+                              ( S.text
+                                  """ One good way to follow along is by using the Deku starter repo, which you can clone """
+                              )
                             /\ D.a
                               [ D.Href :=
                                   "https://github.com/mikesol/purescript-deku-starter"
@@ -100,7 +99,8 @@ intro dpage =
                                 """And now, without further ado, check out the """
                             )
                             /\ D.a
-                              [ D.OnClick := Cb (const $ dpage HelloWorld *> scrollToTop)
+                              [ D.OnClick := Cb
+                                  (const $ dpage HelloWorld *> scrollToTop)
                               , D.Style := "cursor:pointer;"
                               ]
                               (S.text "hello world section")

@@ -123,7 +123,7 @@ scene elt =
         }
       Right World -> ichange_
         { "root.world.wB": xsubgraph
-            (Map.fromFoldable
+            ( Map.fromFoldable
                 ( map
                     ( \i -> i /\
                         (if i < lmt `mod` 10 then Just false else Nothing)

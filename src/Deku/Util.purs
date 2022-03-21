@@ -207,8 +207,12 @@ else instance vxneq ::
   , Lacks sym r'
   ) =>
   Vex mx a r where
-  vex v = let uc = uncons v in insert (Proxy :: Proxy sym) uc.head
-    (vex uc.tail)
+  vex v =
+    let
+      uc = uncons v
+    in
+      insert (Proxy :: Proxy sym) uc.head
+        (vex uc.tail)
 
 class N2S (n :: Type) (s :: Symbol) | n -> s
 

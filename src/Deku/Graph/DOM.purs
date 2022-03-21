@@ -958,8 +958,8 @@ type SubgraphSig index terminus env push =
 
 type ResolvedSubgraphSig terminus env push =
   forall dom engine
-   . DOMInterpret dom engine =>
-  SubScene terminus env dom engine Frame0 push (Additive Int)
+   . DOMInterpret dom engine
+  => SubScene terminus env dom engine Frame0 push (Additive Int)
 
 newtype AsSubgraph index terminus env push = AsSubgraph
   ( forall dom engine

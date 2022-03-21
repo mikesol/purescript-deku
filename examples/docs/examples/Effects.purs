@@ -62,7 +62,7 @@ scene elt =
                     [ D.OnClick := clickCb push ]
                     (S.text "Click to get some random user data.")
                 }
-            , div2: D.div [D.Style := "display: none;"]
+            , div2: D.div [ D.Style := "display: none;" ]
                 (S.pre [] (S.code [] (S.text "")))
             }
           )
@@ -72,7 +72,7 @@ scene elt =
     Right str ->
       when (not started)
         ( ichange_
-            { "root.div2": D.div'attr [D.Style := "display: block;"]
+            { "root.div2": D.div'attr [ D.Style := "display: block;" ]
             }
         )
         *> ichange_

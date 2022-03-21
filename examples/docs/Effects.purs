@@ -176,7 +176,8 @@ main = do
                             D.span []
                               ( S.text
                                   """In more complicated apps, like this documentation, we'll want to split up our components into sub-components and create a way for them to communicate back and forth. In the next section, we'll see one way to do this via """
-                              ) /\ D.a
+                              )
+                              /\ D.a
                                 [ D.OnClick := Cb
                                     ( const $ dpage Subgraph *>
                                         scrollToTop
@@ -217,24 +218,26 @@ clickCb push = Cb
 
 sg :: SubgraphSig Int "div" Unit String
 sg _ =
- ( \_ push ->
-      ( icreate  (S.div []
-          ( { div1: D.div []
-                { button: D.button
-                    [ D.OnClick := clickCb push ]
-                    (S.text "Click to get some random user data.")
+  ( \_ push ->
+      ( icreate
+          ( S.div []
+              ( { div1: D.div []
+                    { button: D.button
+                        [ D.OnClick := clickCb push ]
+                        (S.text "Click to get some random user data.")
+                    }
+                , div2: D.div [ D.Style := "display: none;" ]
+                    (S.pre [] (S.code [] (S.text "")))
                 }
-            , div2: D.div [D.Style := "display: none;"]
-                (S.pre [] (S.code [] (S.text "")))
-            }
-          ))
+              )
+          )
       ) $> false
   ) @!> iloop \e _ started -> case e of
     Left _ -> pure true
     Right str ->
       when (not started)
         ( ichange_
-            { "div.div2": D.div'attr [D.Style := "display: block;"]
+            { "div.div2": D.div'attr [ D.Style := "display: block;" ]
             }
         )
         *> ichange_
