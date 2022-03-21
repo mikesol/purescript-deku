@@ -3069,27 +3069,30 @@ var PS = {};
   exports.makeSubgraph_ = function (ptr) {
 	  return function (terminalPtr) {
 		  return function (sceneM) {
-			  return function (funkyFx) {
-				  return function (state) {
-					  return function () {
-						  var children = {};
-						  var scenes = {};
-						  var funk = {};
-						  var unsu = {};
-						  state.units[ptr] = {
-							  outgoing: [],
-							  incoming: [],
-							  sceneM: sceneM,
-							  main: document.createElement("div"),
-							  funkyFx: funkyFx,
-							  terminalPtr: terminalPtr,
-							  isSubgraph: true,
-							  scenes: scenes,
-							  children: children,
-							  funk: funk,
-							  unsu: unsu,
+			  return function (envs) {
+				  return function (funkyFx) {
+					  return function (state) {
+						  return function () {
+							  var children = {};
+							  var scenes = {};
+							  var funk = {};
+							  var unsu = {};
+							  state.units[ptr] = {
+								  outgoing: [],
+								  incoming: [],
+								  sceneM: sceneM,
+								  main: document.createElement("div"),
+								  funkyFx: funkyFx,
+								  terminalPtr: terminalPtr,
+								  isSubgraph: true,
+								  scenes: scenes,
+								  children: children,
+								  funk: funk,
+								  unsu: unsu,
+							  };
+							  state.units[ptr].main.setAttribute("style", "display:contents;");
+							  setSubgraph_(ptr)(envs)(state)();
 						  };
-						  state.units[ptr].main.setAttribute("style", "display:contents;");
 					  };
 				  };
 			  };
@@ -3220,7 +3223,7 @@ var PS = {};
 	  };
   };
   exports.setTumult_ = setTumult_;
-  exports.setSubgraph_ = function (ptr) {
+  var setSubgraph_ = function (ptr) {
 	  return function (envs) {
 		  return function (state) {
 			  return function () {
@@ -3287,6 +3290,7 @@ var PS = {};
 		  };
 	  };
   };
+  exports.setSubgraph_ = setSubgraph_;
   exports.massiveCreate_ = function ($unSubgraph) {
 	  return function ($makeSubgraph) {
 		  return function ($makeTumult) {
@@ -3389,6 +3393,7 @@ var PS = {};
 													  id: key,
 													  terminus: value.element.terminus,
 													  scenes: $unSubgraph(value.element.subgraphMaker),
+													  envs: value.element.envs
 												  })(state)();
 											  } else if (value.element.tumult !== undefined) {
 												  $makeTumult({
@@ -3612,154 +3617,120 @@ var PS = {};
   };
   var instructionId = function (v) {
       return Data_Variant.match()()()({
-          disconnectXFromY: function ($60) {
+          disconnectXFromY: function ($50) {
               return Data_Maybe.Just.create((function (v2) {
                   return v2.fromId;
+              })($50));
+          },
+          destroyUnit: function ($51) {
+              return Data_Maybe.Just.create((function (v2) {
+                  return v2.id;
+              })($51));
+          },
+          makeElement: function ($52) {
+              return Data_Maybe.Just.create((function (v2) {
+                  return v2.id;
+              })($52));
+          },
+          makeText: function ($53) {
+              return Data_Maybe.Just.create((function (v2) {
+                  return v2.id;
+              })($53));
+          },
+          makeRoot: function ($54) {
+              return Data_Maybe.Just.create((function (v2) {
+                  return v2.id;
+              })($54));
+          },
+          makeSubgraph: function ($55) {
+              return Data_Maybe.Just.create((function (v2) {
+                  return v2.id;
+              })($55));
+          },
+          massiveCreate: Data_Function["const"](Data_Maybe.Nothing.value),
+          makeTumult: function ($56) {
+              return Data_Maybe.Just.create((function (v2) {
+                  return v2.id;
+              })($56));
+          },
+          connectXToY: function ($57) {
+              return Data_Maybe.Just.create((function (v2) {
+                  return v2.fromId;
+              })($57));
+          },
+          setAttribute: function ($58) {
+              return Data_Maybe.Just.create((function (v2) {
+                  return v2.id;
+              })($58));
+          },
+          setText: function ($59) {
+              return Data_Maybe.Just.create((function (v2) {
+                  return v2.id;
+              })($59));
+          },
+          setSubgraph: function ($60) {
+              return Data_Maybe.Just.create((function (v2) {
+                  return v2.id;
               })($60));
           },
-          destroyUnit: function ($61) {
+          massiveChange: Data_Function["const"](Data_Maybe.Nothing.value),
+          setTumult: function ($61) {
               return Data_Maybe.Just.create((function (v2) {
                   return v2.id;
               })($61));
-          },
-          makeElement: function ($62) {
-              return Data_Maybe.Just.create((function (v2) {
-                  return v2.id;
-              })($62));
-          },
-          makeText: function ($63) {
-              return Data_Maybe.Just.create((function (v2) {
-                  return v2.id;
-              })($63));
-          },
-          makeRoot: function ($64) {
-              return Data_Maybe.Just.create((function (v2) {
-                  return v2.id;
-              })($64));
-          },
-          makeSubgraph: function ($65) {
-              return Data_Maybe.Just.create((function (v2) {
-                  return v2.id;
-              })($65));
-          },
-          massiveCreate: Data_Function["const"](Data_Maybe.Nothing.value),
-          makeTumult: function ($66) {
-              return Data_Maybe.Just.create((function (v2) {
-                  return v2.id;
-              })($66));
-          },
-          connectXToY: function ($67) {
-              return Data_Maybe.Just.create((function (v2) {
-                  return v2.fromId;
-              })($67));
-          },
-          setAttribute: function ($68) {
-              return Data_Maybe.Just.create((function (v2) {
-                  return v2.id;
-              })($68));
-          },
-          setText: function ($69) {
-              return Data_Maybe.Just.create((function (v2) {
-                  return v2.id;
-              })($69));
-          },
-          setSubgraph: function ($70) {
-              return Data_Maybe.Just.create((function (v2) {
-                  return v2.id;
-              })($70));
-          },
-          massiveChange: Data_Function["const"](Data_Maybe.Nothing.value),
-          setTumult: function ($71) {
-              return Data_Maybe.Just.create((function (v2) {
-                  return v2.id;
-              })($71));
           }
       })(v);
   };   
   var iSetText = (function () {
-      var $74 = Data_Variant.inj()({
+      var $64 = Data_Variant.inj()({
           reflectSymbol: function () {
               return "setText";
           }
       })(Type_Proxy["Proxy"].value);
-      return function ($75) {
-          return Instruction($74($75));
+      return function ($65) {
+          return Instruction($64($65));
       };
   })();
   var iSetAttribute = (function () {
-      var $78 = Data_Variant.inj()({
+      var $68 = Data_Variant.inj()({
           reflectSymbol: function () {
               return "setAttribute";
           }
       })(Type_Proxy["Proxy"].value);
-      return function ($79) {
-          return Instruction($78($79));
+      return function ($69) {
+          return Instruction($68($69));
       };
   })();
   var iDisconnectXFromY = (function () {
-      var $94 = Data_Variant.inj()({
+      var $84 = Data_Variant.inj()({
           reflectSymbol: function () {
               return "disconnectXFromY";
           }
       })(Type_Proxy["Proxy"].value);
-      return function ($95) {
-          return Instruction($94($95));
+      return function ($85) {
+          return Instruction($84($85));
       };
   })();
   var iDestroyUnit = (function () {
-      var $96 = Data_Variant.inj()({
+      var $86 = Data_Variant.inj()({
           reflectSymbol: function () {
               return "destroyUnit";
           }
       })(Type_Proxy["Proxy"].value);
-      return function ($97) {
-          return Instruction($96($97));
+      return function ($87) {
+          return Instruction($86($87));
       };
   })();
   var iConnectXToY = (function () {
-      var $98 = Data_Variant.inj()({
+      var $88 = Data_Variant.inj()({
           reflectSymbol: function () {
               return "connectXToY";
           }
       })(Type_Proxy["Proxy"].value);
-      return function ($99) {
-          return Instruction($98($99));
+      return function ($89) {
+          return Instruction($88($89));
       };
   })();
-  var eqPureScenes = {
-      eq: function (v) {
-          return function (v1) {
-              return false;
-          };
-      }
-  };
-  var ordPureScenes = {
-      compare: function (v) {
-          return function (v1) {
-              return Data_Ordering.LT.value;
-          };
-      },
-      Eq0: function () {
-          return eqPureScenes;
-      }
-  };
-  var eqPureEnvs = {
-      eq: function (v) {
-          return function (v1) {
-              return false;
-          };
-      }
-  };
-  var ordPureEnvs = {
-      compare: function (v) {
-          return function (v1) {
-              return Data_Ordering.LT.value;
-          };
-      },
-      Eq0: function () {
-          return eqPureEnvs;
-      }
-  };
   var eqInstruction = {
       eq: function (x) {
           return function (y) {
@@ -3839,15 +3810,11 @@ var PS = {};
                   reflectSymbol: function () {
                       return "id";
                   }
-              })(Data_Eq.eqString))))(Data_Eq.eqRec()(Data_Eq.eqRowCons(Data_Eq.eqRowCons(Data_Eq.eqRowNil)()({
+              })(Data_Eq.eqString))))(Data_Eq.eqRec()(Data_Eq.eqRowCons(Data_Eq.eqRowNil)()({
                   reflectSymbol: function () {
                       return "id";
                   }
-              })(Data_Eq.eqString))()({
-                  reflectSymbol: function () {
-                      return "envs";
-                  }
-              })(eqPureEnvs))))(Data_Eq.eqRec()(Data_Eq.eqRowCons(Data_Eq.eqRowCons(Data_Eq.eqRowCons(Data_Eq.eqRowNil)()({
+              })(Data_Eq.eqString))))(Data_Eq.eqRec()(Data_Eq.eqRowCons(Data_Eq.eqRowCons(Data_Eq.eqRowCons(Data_Eq.eqRowNil)()({
                   reflectSymbol: function () {
                       return "value";
                   }
@@ -3901,9 +3868,9 @@ var PS = {};
                   }
               })(Data_Eq.eqString))()({
                   reflectSymbol: function () {
-                      return "scenes";
+                      return "instructions";
                   }
-              })(eqPureScenes))()({
+              })(Data_Eq.eqArray(Data_Eq.eqArray(eqInstruction))))()({
                   reflectSymbol: function () {
                       return "id";
                   }
@@ -4073,15 +4040,11 @@ var PS = {};
                           reflectSymbol: function () {
                               return "id";
                           }
-                      })(Data_Eq.eqString))))(Data_Eq.eqRec()(Data_Eq.eqRowCons(Data_Eq.eqRowCons(Data_Eq.eqRowNil)()({
+                      })(Data_Eq.eqString))))(Data_Eq.eqRec()(Data_Eq.eqRowCons(Data_Eq.eqRowNil)()({
                           reflectSymbol: function () {
                               return "id";
                           }
-                      })(Data_Eq.eqString))()({
-                          reflectSymbol: function () {
-                              return "envs";
-                          }
-                      })(eqPureEnvs))))(Data_Eq.eqRec()(Data_Eq.eqRowCons(Data_Eq.eqRowCons(Data_Eq.eqRowCons(Data_Eq.eqRowNil)()({
+                      })(Data_Eq.eqString))))(Data_Eq.eqRec()(Data_Eq.eqRowCons(Data_Eq.eqRowCons(Data_Eq.eqRowCons(Data_Eq.eqRowNil)()({
                           reflectSymbol: function () {
                               return "value";
                           }
@@ -4135,9 +4098,9 @@ var PS = {};
                           }
                       })(Data_Eq.eqString))()({
                           reflectSymbol: function () {
-                              return "scenes";
+                              return "instructions";
                           }
-                      })(eqPureScenes))()({
+                      })(Data_Eq.eqArray(Data_Eq.eqArray(eqInstruction))))()({
                           reflectSymbol: function () {
                               return "id";
                           }
@@ -4237,15 +4200,11 @@ var PS = {};
                           reflectSymbol: function () {
                               return "id";
                           }
-                      })(Data_Ord.ordString))))(Data_Ord.ordRecord()(Data_Ord.ordRecordCons(Data_Ord.ordRecordCons(Data_Ord.ordRecordNil)()({
+                      })(Data_Ord.ordString))))(Data_Ord.ordRecord()(Data_Ord.ordRecordCons(Data_Ord.ordRecordNil)()({
                           reflectSymbol: function () {
                               return "id";
                           }
-                      })(Data_Ord.ordString))()({
-                          reflectSymbol: function () {
-                              return "envs";
-                          }
-                      })(ordPureEnvs))))(Data_Ord.ordRecord()(Data_Ord.ordRecordCons(Data_Ord.ordRecordCons(Data_Ord.ordRecordCons(Data_Ord.ordRecordNil)()({
+                      })(Data_Ord.ordString))))(Data_Ord.ordRecord()(Data_Ord.ordRecordCons(Data_Ord.ordRecordCons(Data_Ord.ordRecordCons(Data_Ord.ordRecordNil)()({
                           reflectSymbol: function () {
                               return "value";
                           }
@@ -4299,9 +4258,9 @@ var PS = {};
                           }
                       })(Data_Ord.ordString))()({
                           reflectSymbol: function () {
-                              return "scenes";
+                              return "instructions";
                           }
-                      })(ordPureScenes))()({
+                      })(Data_Ord.ordArray(Data_Ord.ordArray(ordInstruction))))()({
                           reflectSymbol: function () {
                               return "id";
                           }
@@ -5139,7 +5098,7 @@ var PS = {};
   var Deku_Graph_Attribute = $PS["Deku.Graph.Attribute"];
   var Deku_Rendered = $PS["Deku.Rendered"];
   var Deku_Tumult_Reconciliation = $PS["Deku.Tumult.Reconciliation"];
-  var FRP_Event = $PS["FRP.Event"];                
+  var FRP_Event = $PS["FRP.Event"];
   var setTumult = function (dict) {
       return dict.setTumult;
   };
@@ -5173,6 +5132,19 @@ var PS = {};
   var makeElement = function (dict) {
       return dict.makeElement;
   };
+  var envsToFFI = function (envs) {
+      return Data_Functor.map(Data_Functor.functorArray)(function (v) {
+          return {
+              pos: v.value0,
+              env: v.value1
+          };
+      })(Data_Map_Internal.toUnfoldable(Data_Unfoldable.unfoldableArray)(Data_Functor.map(Data_Map_Internal.functorMap)((function () {
+          var $178 = Data_Functor.map(Data_Maybe.functorMaybe)(Data_Either.Left.create);
+          return function ($179) {
+              return Data_Nullable.toNullable($178($179));
+          };
+      })())(envs)));
+  };
   var disconnectXFromY = function (dict) {
       return dict.disconnectXFromY;
   };
@@ -5183,7 +5155,7 @@ var PS = {};
       return dict.connectXToY;
   };
   var interpretInstruction = function (dictDOMInterpret) {
-      var $173 = Data_Variant.match()()()({
+      var $180 = Data_Variant.match()()()({
           disconnectXFromY: function (a) {
               return disconnectXFromY(dictDOMInterpret)(a);
           },
@@ -5249,9 +5221,9 @@ var PS = {};
               });
           }
       });
-      var $174 = Data_Newtype.unwrap();
-      return function ($175) {
-          return $173($174($175));
+      var $181 = Data_Newtype.unwrap();
+      return function ($182) {
+          return $180($181($182));
       };
   };
   var mcUnsubgraph = function (v) {
@@ -5265,7 +5237,7 @@ var PS = {};
           if (v instanceof Data_Maybe.Just) {
               return Data_Functor.map(Data_Functor.functorArray)(interpretInstruction(effectfulDOMInterpret))(Data_Array.fromFoldable(Data_Set.foldableSet)(Deku_Tumult_Reconciliation.reconcileTumult(Data_Set.fromFoldable(Data_Foldable.foldableArray)(Deku_Rendered.ordInstruction)(a))(Data_Set.fromFoldable(Data_Foldable.foldableArray)(Deku_Rendered.ordInstruction)(v.value0))));
           };
-          throw new Error("Failed pattern match at Deku.Interpret (line 296, column 31 - line 301, column 6): " + [ v.constructor.name ]);
+          throw new Error("Failed pattern match at Deku.Interpret (line 313, column 31 - line 318, column 6): " + [ v.constructor.name ]);
       };
   };
   var effectfulDOMInterpret = {
@@ -5280,7 +5252,7 @@ var PS = {};
       makeText: $foreign.makeText_,
       makeSubgraph: function (v) {
           return function (dom) {
-              return Data_Function.flip($foreign.makeSubgraph_(v.id)(v.terminus)(v.scenes))(dom)(function (i) {
+              return Data_Function.flip($foreign.makeSubgraph_(v.id)(v.terminus)(v.scenes)(envsToFFI(v.envs)))(dom)(function (i) {
                   return function __do() {
                       var evt = FRP_Event.create();
                       var loop = function (eop) {
@@ -5324,17 +5296,7 @@ var PS = {};
       },
       setSubgraph: function (v) {
           return function (dom) {
-              return $foreign.setSubgraph_(v.id)(Data_Functor.map(Data_Functor.functorArray)(function (v1) {
-                  return {
-                      pos: v1.value0,
-                      env: v1.value1
-                  };
-              })(Data_Map_Internal.toUnfoldable(Data_Unfoldable.unfoldableArray)(Data_Functor.map(Data_Map_Internal.functorMap)((function () {
-                  var $176 = Data_Functor.map(Data_Maybe.functorMaybe)(Data_Either.Left.create);
-                  return function ($177) {
-                      return Data_Nullable.toNullable($176($177));
-                  };
-              })())(v.envs))))(dom);
+              return $foreign.setSubgraph_(v.id)(envsToFFI(v.envs))(dom);
           };
       },
       setTumult: function (v) {
@@ -5418,10 +5380,10 @@ var PS = {};
   var ichange_ = function (dictDOMInterpret) {
       return function (dictChange_) {
           return function (r) {
-              var $1059 = change_(dictChange_)(dictDOMInterpret);
-              var $1060 = Data_Functor.voidRight(Deku_Control_Types.functorDOM)(r);
-              return function ($1061) {
-                  return $1059($1060($1061));
+              var $1073 = change_(dictChange_)(dictDOMInterpret);
+              var $1074 = Data_Functor.voidRight(Deku_Control_Types.functorDOM)(r);
+              return function ($1075) {
+                  return $1073($1074($1075));
               };
           };
       };
@@ -5779,10 +5741,10 @@ var PS = {};
   var icreate = function (dictDOMInterpret) {
       return function (dictCreate) {
           return function (r) {
-              var $1667 = create(dictCreate)(dictDOMInterpret);
-              var $1668 = Data_Functor.voidRight(Deku_Control_Types.functorDOM)(r);
-              return function ($1669) {
-                  return $1667($1668($1669));
+              var $1668 = create(dictCreate)(dictDOMInterpret);
+              var $1669 = Data_Functor.voidRight(Deku_Control_Types.functorDOM)(r);
+              return function ($1670) {
+                  return $1668($1669($1670));
               };
           };
       };
