@@ -82,6 +82,15 @@ intro dpage =
                                   "https://github.com/mikesol/purescript-deku/tree/main/examples/docs"
                               ]
                               (S.text "here.")
+                              /\ D.span []
+                            ( S.text
+                                """ One good way to follow along is by using the Deku starter repo, which you can clone """
+                            )
+                            /\ D.a
+                              [ D.Href :=
+                                  "https://github.com/mikesol/purescript-deku-starter"
+                              ]
+                              (S.text "here.")
                             /\ unit
                       )
                     /\ D.p []

@@ -27,19 +27,20 @@ import Web.HTML.Window (document)
 scene
   :: forall env dom engine push
    . DOMInterpret dom engine
-  => Element
+  => Int
+  -> Element
   -> Scene env dom engine Frame0 push Unit
-scene elt =
+scene i elt =
   ( \_ _ ->
       ( icreate $ root elt
           ( detup $ D.p [] (S.text "Here is some XML!") /\ D.pre []
               ( S.code []
-                  ( S.text
+                  ( S.text $ if i > 3 then "<stack-overflow />" else
                       ( maybe "" toXML
                           ( ssr
                               ( map ((#) unit)
                                   ( oneFrame
-                                      (scene elt)
+                                      (scene (i+1) elt)
                                       (Left unit)
                                       (const $ pure unit)
                                   ).instructions
@@ -59,7 +60,7 @@ main = do
     ffi <- makeFFIDOMSnapshot
     subscribe
       ( run (pure unit) (pure unit) defaultOptions ffi
-          (scene elt)
+          (scene 0 elt)
 
       )
       (_.res >>> pure)
