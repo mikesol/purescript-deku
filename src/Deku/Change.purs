@@ -170,7 +170,7 @@ instance changeSubgraph0 ::
   , IsSymbol terminus
   , R.Cons ptr (NodeC (CTOR.TSubgraph terminus env) edges) ignore graph
   ) =>
-  Change' ptr (CTOR.Subgraph terminus env push) graph where
+  Change' ptr (CTOR.Subgraph index terminus env push) graph where
   change' ptr w = o
     where
     { context: i, value } = unsafeUnDOM w
@@ -196,12 +196,13 @@ instance changeSubgraph1 ::
   , IsSymbol terminus
   , R.Cons ptr (NodeC (CTOR.TSubgraph terminus env) edges) ignore graph
   ) =>
-  Change' ptr (CTOR.XSubgraph env) graph where
+  Change' ptr (CTOR.XSubgraph index env) graph where
   change' ptr w = o
     where
-    { context: i, value: (CTOR.XSubgraph { envs }) } = unsafeUnDOM w
+    { context: i, value } = unsafeUnDOM w
 
     id = reflectSymbol ptr
+    { envs } = CTOR.unsafeUnXSubgraph value
 
     o =
       unsafeDOM

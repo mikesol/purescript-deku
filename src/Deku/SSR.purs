@@ -20,13 +20,13 @@ import Foreign.Object (Object, empty, lookup, insert, singleton, union, update)
 import Type.Proxy (Proxy(..))
 
 foreign import massiveCreate_
-  :: ( forall terminus env push
-        . AsSubgraphHack terminus env
-       -> Int
+  :: ( forall index terminus env push
+        . AsSubgraphHack index terminus env
+       -> index
        -> SubScene terminus env Unit Instruction Frame0 push Unit
      )
-  -> ( forall terminus env push
-        . SubgraphInput terminus env push Unit Instruction
+  -> ( forall index terminus env push
+        . SubgraphInput index terminus env push Unit Instruction
        -> Unit
        -> Instruction
      )
@@ -149,9 +149,9 @@ ssr :: Array Instruction -> Maybe Indecent
 ssr a = ssr' "root" true a
 
 mcUnsubgraph
-  :: forall terminus env push
-   . AsSubgraphHack terminus env
-  -> Int
+  :: forall index terminus env push
+   . AsSubgraphHack index terminus env
+  -> index
   -> SubScene terminus env Unit Instruction Frame0 push Unit
 mcUnsubgraph (AsSubgraphHack i) = i
 

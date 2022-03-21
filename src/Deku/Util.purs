@@ -7,7 +7,8 @@ import Data.Symbol (class IsSymbol)
 import Data.Tuple (Tuple(..))
 import Data.Tuple.Nested ((/\), type (/\))
 import Data.Typelevel.Bool (True, False)
-import Data.Typelevel.Num (class Nat, class Succ, type (:*), D0, D1, D2, D3, D4, D5, D6, D7, D8, D9)
+import Data.Typelevel.Num (class Nat, class Pred, class Succ, type (:*), D0, D1, D2, D3, D4, D5, D6, D7, D8, D9)
+import Data.Vec (Vec, uncons)
 import Prim.Ordering (Ordering, LT, GT, EQ)
 import Prim.Row (class Cons, class Lacks)
 import Prim.RowList (RowList)
@@ -188,10 +189,28 @@ instance detupTuple ::
     (detup' (Proxy :: Proxy np1) b)
 instance detupUnit :: Detup n Unit () where
   detup' _ _ = {}
-class N2S (n :: Type) (s :: Symbol) | n -> s
 
 detup :: forall a b. Detup D0 a b => a -> { | b }
 detup = detup' (Proxy :: Proxy D0)
+
+class Vex (n :: Type) (a :: Type) (b :: Row Type) | n a -> b where
+  vex :: Vec n a -> { | b }
+
+instance vx0 :: Vex D0 a () where
+  vex _ = {}
+else instance vxneq ::
+  ( Pred mx mxP1
+  , Vex mxP1 a r'
+  , N2S mx sym
+  , Cons sym a r' r
+  , IsSymbol sym
+  , Lacks sym r'
+  ) =>
+  Vex mx a r where
+  vex v = let uc = uncons v in insert (Proxy :: Proxy sym) uc.head
+    (vex uc.tail)
+
+class N2S (n :: Type) (s :: Symbol) | n -> s
 
 instance N2S D0 "0"
 instance N2S D1 "1"

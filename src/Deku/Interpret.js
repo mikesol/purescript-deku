@@ -348,8 +348,8 @@ var setSubgraph_ = function (ptr) {
 							unqidfr: makeid(10),
 							parent: state,
 						};
-						scenes[j] = state.units[ptr].sceneM(j);
-						var funkworthy = state.units[ptr].funkyFx(j)();
+						scenes[j] = state.units[ptr].sceneM(envs[i].index);
+						var funkworthy = state.units[ptr].funkyFx(j)(envs[i].index)();
 						funk[j] = funkworthy.loop;
 						unsu[j] = funkworthy.unsubscribe;
 						needsConnecting.push(j);
