@@ -14,20 +14,17 @@ import Data.DateTime.Instant (unInstant)
 import Data.Either (Either(..))
 import Data.Newtype (class Newtype)
 import Data.Time.Duration (Milliseconds)
-import Data.Tuple (fst, snd)
-import Data.Tuple.Nested ((/\), type (/\))
 import Deku.Control.Types (Frame0, Scene, oneFrame)
 import Deku.Interpret (FFIDOMSnapshot, renderDOM)
-import Deku.Rendered (Instruction)
 import Effect (Effect)
 import Effect.Ref as Ref
 import FRP.Behavior (Behavior, sampleBy)
 import FRP.Behavior.Time (instant)
 import FRP.Event (Event, create, makeEvent, subscribe)
 
-type RunDOM = Unit /\ FFIDOMSnapshot
+type RunDOM = FFIDOMSnapshot
 
-type RunEngine = Instruction /\ Effect Unit
+type RunEngine = Effect Unit
 
 defaultOptions :: {}
 defaultOptions = {}
@@ -101,21 +98,15 @@ run trigger inWorld _ domInfo scene =
               ee
               evt.push
         let
-          applied = map ((#) (unit /\ domInfo)) fromScene.instructions
-        renderDOM (map snd applied)
+          applied = map ((#) domInfo) fromScene.instructions
+        renderDOM applied
         Ref.write fromScene.next currentScene
-        reporter
-          { instructions: map fst applied
-          , res: fromScene.res
-          }
+        reporter { res: fromScene.res }
     unsubscribe0 <- subscribe eventAndEnv (subFn <<< Left)
     unsubscribe1 <- subscribe evt.event (subFn <<< Right)
     pure (unsubscribe0 *> unsubscribe1)
 
-type TriggeredRun res =
-  { instructions :: Array Instruction
-  , res :: res
-  }
+type TriggeredRun res = { res :: res }
 
 newtype TriggeredScene trigger world = TriggeredScene
   { trigger :: trigger

@@ -11,14 +11,10 @@ jobs:
         uses: actions/checkout@v2
       - name: Install dependencies
         run: npm ci
-      - name: Spago install
-        run: npx spago -x test/test.dhall install
-      - name: Spago build
-        run: npx spago -x test/test.dhall build
       - name: Spago build examples
-        run: npx spago -x examples.dhall build
-      - name: Spago test
-        run: npx spago -x test/test.dhall test
+        run: npm run build:examples
+      - name: Test
+        run: npm t
       - name: Build qc
         run: npx spago -x examples.dhall bundle-app --main Deku.Example.HelloWorld --to examples/hello-world/index.js
       - name: Performance test
