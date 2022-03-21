@@ -39,7 +39,7 @@ events dpage =
                   $
                     D.p []
                       ( S.text
-                          """We'll spice up the previous example by adding an event listener to our button. When we do, an element will reveal itself, and when we click on it again, it will be hidden. There are several ways to accomplish this effect in Deku, including using control structures and subgraphs, but this is the most basic way to do it and a good introduction to the event handling mechanism."""
+                          """We'll spice up the previous example by adding an event listener to our button. When we do, Deku will keep track of how many times we clicked it. The same goes for a range slider, whose current value is displayed underneath it."""
                       )
                       /\
                         ( D.pre []
@@ -186,15 +186,14 @@ main = do
                                 """is defined a per-component basis. Here, the type used is """
                               /\ D.code [] (S.text "UIEvents")
                               /\ D.text
-                                """. Whenever a push happens, it goes to the right of the next set of DOM instructions emitted by our stream. There are several ways to produce those instructions. Until now, we've just seen """
-                              /\ D.code [] (S.text "freeze")
+                                """. Whenever a push happens, it goes to the """
+                              /\ D.code [] (S.text "Right")
                               /\ D.text
-                                """, which effectively ignores all events and reproduces the most recent DOM """
-                              /\ D.i [] (S.text "ad infinitum")
-                              /\ D.text
-                                """. In this case, we use a different stream-producing mechanism called """
+                                """ of the first argument passed to  """
                               /\ D.code [] (S.text "iloop")
-                              /\ D.text "."
+                              /\ D.text """. Let's delve into what """
+                              /\ D.code [] (S.text "iloop")
+                              /\ D.text """ is doing here."""
                               /\ unit
                         )
                       /\ D.h2 [] (S.text "Loop-de-loop")
@@ -232,7 +231,7 @@ main = do
                                     "compile time"
                                 )
                               /\ D.text
-                                """, you always know what is and isn't present, which allows for one-off changes without re-rendering a bunch of elements. It's even faster than React, having similar performance profile as Svelte while giving the full power of PureScript's functional language."""
+                                """, you always know what is and isn't present, which allows for one-off changes without re-rendering a bunch of elements. It's even faster than React, having a similar performance profile as Svelte while giving the full power of PureScript's functional language."""
                               /\ unit
                         )
                       /\ D.h2 [] (S.text "Arguments to our loop")
@@ -251,7 +250,7 @@ main = do
                                 """. We're not using """
                               /\ D.code [] (S.text "env")
                               /\ D.text
-                                """ yet, but we will when we talk about subgraphs in that section."""
+                                """ yet, but we will when we talk about subgraphs."""
                               /\ unit
                         )
                       /\ D.p []

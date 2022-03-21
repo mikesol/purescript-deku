@@ -51,7 +51,7 @@ intro dpage =
                           [ D.Href :=
                               "https://github.com/mikesol/purescript-deku"
                           ]
-                          { t: D.text "Deku " }
+                          { t: D.text "Deku" }
                       , s: D.span []
                           ( S.text
                               """ is the coolest web micro-framework that no one knows about yet. Except you, of course, as you're here. So welcome!"""
@@ -61,7 +61,7 @@ intro dpage =
                       ( detup $
                           D.span []
                             ( S.text
-                                """This is the Deku documentation. Like most documentation, it's radically incomplete, hopelessly biased, and full of unfounded assumptions. That said, I hope it gets you started using Deku. If you have any questions, feel free ping me on the """
+                                """This is the Deku documentation. Like most documentation, it's radically incomplete, hopelessly biased, and full of unfounded assumptions. That said, I hope it gets you started off on the right foot. If you have any questions, feel free ping me on the """
                             )
                             /\ D.a
                               [ D.Href := "https://purescript.org/chat" ]

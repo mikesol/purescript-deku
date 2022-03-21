@@ -31,7 +31,7 @@ simpleComponent dpage =
                   $
                     D.p []
                       ( S.text
-                          """Let's look at an example with several different components. There are also a few different syntax options depending on what tune your fingers wish to type."""
+                          """Let's look at an example with several different DOM tags. There are also a few different syntax options depending on what tune your fingers wish to type."""
                       )
                       /\
                         ( D.pre []
@@ -179,7 +179,19 @@ main = do
                               """All DOM elements accept a record of child nodes. In the example above, we give """
                               /\ D.code [] (S.text "root")
                               /\ D.text
-                                """a record with four keys: button, list, rando and lotsOfDivs."""
+                                """a record with four keys: """
+                              /\ D.code [] (S.text "button")
+                              /\ D.text
+                                """, """
+                              /\ D.code [] (S.text "list")
+                              /\ D.text
+                                """, """
+                              /\ D.code [] (S.text "rando")
+                              /\ D.text
+                                """ and """
+                              /\ D.code [] (S.text "lotsOfDivs")
+                              /\ D.text
+                                """."""
                               /\ unit
                         )
                       /\ D.p []
@@ -228,7 +240,13 @@ main = do
                       /\ D.p []
                         ( detup $
                             D.text
-                              "The last thing to address here are attributes. Attributes like an element's style or id are added in the array after element creation. In the example above, we make the input a range slider, for example, using"
+                              "The last thing to address here are attributes. Attributes like an element's "
+                              /\ D.code [] (S.text "style")
+                              /\ D.text
+                                """ or """
+                              /\ D.code [] (S.text "id")
+                              /\ D.text
+                                " are added in the array after element creation. In the example above, we make the input a range slider, for example, using"
                               /\ D.code [] (S.text "Xtype := \"range\"")
                               /\ D.text
                                 ". Unlike Halogen, there are no checks to make sure you give a valid string. So if you want your range slider to have the value of "
