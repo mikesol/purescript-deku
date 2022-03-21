@@ -2,7 +2,6 @@ module Deku.Patch where
 
 import Prelude hiding (Ordering(..))
 
-import Data.Map as Map
 import Data.Maybe (maybe)
 import Data.Symbol (class IsSymbol, reflectSymbol)
 import Data.Tuple.Nested (type (/\))
@@ -525,7 +524,7 @@ instance getSubgraphsRLTumult ::
   ( IsSymbol id
   , IsSymbol terminus
   , Row.Cons id
-      (CTOR.Subgraph terminus env push)
+      (CTOR.Subgraph index terminus env push)
       r'
       subgraphs
   , GetSubgraphsRL rest subgraphs
@@ -541,7 +540,7 @@ instance getSubgraphsRLTumult ::
               { id
               , terminus: reflectSymbol (Proxy :: _ terminus)
               , scenes: unAsSubGraph subgraphMaker
-              , envs: Map.empty
+              , envs: []
               }
         )
     )

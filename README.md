@@ -2,21 +2,25 @@
 
 ![deku](./deku.gif)
 
-A PureScript web micro-framework.
+A PureScript web micro-framework for apps that need to be fast.
 
-## Why?
+## Documentation
+
+[Here](https://mikesol.github.io/purescript-deku/) is a comprehensive guide to building apps with Deku. The guide is written in Deku and can be found [here](./examples/docs/).
+
+## Why another web framework?
 
 Deku aims to be:
 
 - **fast**: it's up to 2x faster than Halogen for a simple Todo MVC app.
-- **small**: the average Deku program tends to be less lines of code than its React or Halogen counterpart and its bundle sizes are smaller after tree-shaking.
+- **small**: the average Deku program tends to be less lines of code than its React or Halogen counterparts.
 - **ssr-friendly**: Deku has out-of-the-box server-side rendering capabilities.
 
 Deku started as an experiment taking [`purescript-wags`](https://github.com/mikesol/purescritp-wags) and replacing all the Web Audio stuff with DOM stuff. It turns out that the DOM and Web Audio are more alike than different, so the first draft took only a few hours. It uses the same file structure, naming conventions and core concepts as wags, making it ideal for performance-critical apps.
 
 ## Benchmarks
 
-Here are some recent benchmarks from the test suite comparing Deku to Halogen and Halogen Hooks. The test suite is the same one that is used in the Halogen Hooks repo
+Here are some recent benchmarks from the test suite comparing Deku to Halogen and Halogen Hooks. The test suite is the same one that is used in [`halogen-hooks`](https://github.com/thomashoneyman/purescript-halogen-hooks).
 
 ### The State test
 

@@ -17,7 +17,7 @@ import Deku.Control.Functions.Subgraph as SG
 import Deku.Control.Types (Frame0, Scene)
 import Deku.Create (icreate)
 import Deku.Graph.Attribute (Cb(..))
-import Deku.Graph.DOM (AsSubgraph(..), Href(..), OnClick(..), XSubgraph(..), a, a'attr, root, subgraph, text, (:=))
+import Deku.Graph.DOM (AsSubgraph(..), xsubgraph, Href(..), OnClick(..), a, a'attr, root, subgraph, text, (:=))
 import Deku.Graph.DOM as D
 import Deku.Interpret (makeFFIDOMSnapshot)
 import Deku.Run (RunDOM, RunEngine, TriggeredScene, defaultOptions, run)
@@ -119,18 +119,18 @@ scene elt =
     lmt + 1 <$ case e of
       Left _ -> pure unit
       Right Hello -> ichange_
-        { "root.hello.helloA": XSubgraph { envs: Map.singleton 9 (Just true) }
+        { "root.hello.helloA": xsubgraph (Map.singleton 9 (Just true))
         }
       Right World -> ichange_
-        { "root.world.wB": XSubgraph
-            { envs: Map.fromFoldable
+        { "root.world.wB": xsubgraph
+            ( Map.fromFoldable
                 ( map
                     ( \i -> i /\
                         (if i < lmt `mod` 10 then Just false else Nothing)
                     )
                     (0 .. 10)
                 )
-            }
+            )
         }
 
 main :: Effect Unit

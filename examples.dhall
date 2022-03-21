@@ -7,5 +7,9 @@ in      conf
             # [  "arrays"
               , "transformers"
               , "web-html"
+              , "affjax"
+              , "aff"
+              , "argonaut-core"
+              , "http-methods"
               ]
         }

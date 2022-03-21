@@ -14,9 +14,9 @@ import Data.Newtype (class Newtype)
 import Data.Variant (Variant, inj, match)
 import Effect (Effect)
 import Type.Proxy (Proxy(..))
-import Web.Event.Internal.Types (EventTarget)
+import Web.Event.Internal.Types (Event)
 
-newtype Cb = Cb (EventTarget -> Effect Unit)
+newtype Cb = Cb (Event -> Effect Unit)
 derive instance newtypeCb :: Newtype Cb _
 instance eqCb :: Eq Cb where
   eq _ _ = false

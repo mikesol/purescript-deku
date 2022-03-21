@@ -62,7 +62,13 @@ scene elt =
             )
         , "root.helloTum1": indecently
             ( Map.fromFoldable
-                (map (\i -> i /\ if i < lmt `mod` 10 then Nothing else Just (E "button" [] [ T "bar" ])) (0 .. 9))
+                ( map
+                    ( \i -> i /\
+                        if i < lmt `mod` 10 then Nothing
+                        else Just (E "button" [] [ T "bar" ])
+                    )
+                    (0 .. 9)
+                )
             )
         }
 

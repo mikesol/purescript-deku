@@ -3,6 +3,7 @@ module Deku.Interpret
   , FFIDOMSnapshot
   , AsSubgraphHack(..)
   , SubgraphInput
+  , Ie
   , makeRoot
   , makeFFIDOMSnapshot
   , massiveCreate
@@ -41,24 +42,24 @@ import Deku.Rendered (Instruction)
 import Deku.Rendered as R
 import Deku.Tumult.Reconciliation (reconcileTumult)
 import Effect (Effect)
-import FRP.Event (create, subscribe)
+import FRP.Event (create, filterMap, subscribe)
 import Unsafe.Coerce (unsafeCoerce)
 
 data FFIDOMSnapshot
 foreign import makeFFIDOMSnapshot :: Effect FFIDOMSnapshot
 foreign import renderDOM :: Array (Effect Unit) -> Effect Unit
 
-type SubgraphInput (terminus :: Symbol) env push dom engine =
+type SubgraphInput index (terminus :: Symbol) env push dom engine =
   { id :: String
   , terminus :: String
-  , envs :: Map.Map Int (Maybe env)
+  , envs :: Array (Ie index env)
   , scenes ::
-      Int -> SubScene terminus env dom engine Frame0 push (Additive Int)
+      index -> SubScene terminus env dom engine Frame0 push (Additive Int)
   }
 
-type SetSubgraphInput env =
+type SetSubgraphInput index env =
   { id :: String
-  , envs :: Map.Map Int (Maybe env)
+  , envs :: Array (Ie index env)
   }
 
 class DOMInterpret dom engine where
@@ -71,8 +72,8 @@ class DOMInterpret dom engine where
   makeElement :: R.MakeElement -> dom -> engine
   makeText :: R.MakeText -> dom -> engine
   makeSubgraph
-    :: forall terminus env push
-     . SubgraphInput terminus env push dom engine
+    :: forall index terminus env push
+     . SubgraphInput index terminus env push dom engine
     -> dom
     -> engine
   -- | Make tumult.
@@ -81,17 +82,17 @@ class DOMInterpret dom engine where
   setAttribute :: R.SetAttribute -> dom -> engine
   -- | Set subgraph.
   setSubgraph
-    :: forall env
-     . SetSubgraphInput env
+    :: forall index env
+     . SetSubgraphInput index env
     -> dom
     -> engine
   setText :: R.SetText -> dom -> engine
   setTumult :: R.SetTumult -> dom -> engine
 
 handleSubgraph
-  :: forall terminus env push
+  :: forall index terminus env push
    . (R.MakeSubgraph -> Instruction)
-  -> SubgraphInput terminus env push Unit Instruction
+  -> SubgraphInput index terminus env push Unit Instruction
   -> Unit
   -> Instruction
 handleSubgraph f { id, envs, terminus, scenes } = const $ f
@@ -100,10 +101,16 @@ handleSubgraph f { id, envs, terminus, scenes } = const $ f
   , instructions:
       let
         instructions = map
-          ( \(a /\ b) -> map (\z -> z unit)
+          ( \{ index: a, env: b } -> map (\z -> z unit)
               (oneSubFrame (scenes a) (Left b) (const $ pure unit)).instructions
           )
-          (Map.toUnfoldable (Map.catMaybes envs))
+          ( filterMap
+              ( \i -> case i.env of
+                  Nothing -> Nothing
+                  Just env -> Just $ i { env = env }
+              )
+              envs
+          )
       in
         instructions
   }
@@ -152,27 +159,27 @@ foreign import makeText_
   -> Effect Unit
 
 mcUnsubgraph
-  :: forall terminus env push
-   . AsSubgraphHack terminus env
-  -> Int
+  :: forall index terminus env push
+   . AsSubgraphHack index terminus env
+  -> index
   -> SubScene terminus env FFIDOMSnapshot (Effect Unit) Frame0 push Unit
 mcUnsubgraph (AsSubgraphHack i) = i
 
-newtype AsSubgraphHack terminus env = AsSubgraphHack
+newtype AsSubgraphHack index terminus env = AsSubgraphHack
   ( forall push dom engine
      . DOMInterpret dom engine
-    => Int
+    => index
     -> SubScene terminus env dom engine Frame0 push Unit
   )
 
 foreign import massiveCreate_
-  :: ( forall terminus env push
-        . AsSubgraphHack terminus env
-       -> Int
+  :: ( forall index terminus env push
+        . AsSubgraphHack index terminus env
+       -> index
        -> SubScene terminus env FFIDOMSnapshot (Effect Unit) Frame0 push Unit
      )
-  -> ( forall terminus env push
-        . SubgraphInput terminus env push FFIDOMSnapshot (Effect Unit)
+  -> ( forall index terminus env push
+        . SubgraphInput index terminus env push FFIDOMSnapshot (Effect Unit)
        -> FFIDOMSnapshot
        -> (Effect Unit)
      )
@@ -184,16 +191,26 @@ foreign import massiveCreate_
   -> FFIDOMSnapshot
   -> Effect Unit
 
+type Ie index env =
+  { pos :: Int
+  , index :: index
+  , env :: Maybe env
+  }
+
+type Pie push index env =
+  { pos :: Int, index :: index, env :: Nullable (Either env push) }
+
 foreign import makeSubgraph_
-  :: forall env push scene
+  :: forall index env push scene
    . String
   -> String
   -- this is the generic function for how to interpret a scene
-  -> (Int -> scene)
-  -> Array { pos :: Int, env :: Nullable (Either env push) }
+  -> (index -> scene)
+  -> Array (Pie push index env)
   -- this is how to spawn a specific scene loop
   -- effectful because it starts a subscription to an event
   -> ( Int
+       -> index
        -> Effect
             { loop ::
                 Either env push
@@ -225,7 +242,11 @@ foreign import setText_
   -> FFIDOMSnapshot
   -> Effect Unit
 foreign import massiveChange_
-  :: (forall env. SetSubgraphInput env -> FFIDOMSnapshot -> Effect Unit)
+  :: ( forall index env
+        . SetSubgraphInput index env
+       -> FFIDOMSnapshot
+       -> Effect Unit
+     )
   -> (R.SetAttribute -> FFIDOMSnapshot -> Effect Unit)
   -> (R.SetText -> FFIDOMSnapshot -> Effect Unit)
   -> (R.SetTumult -> FFIDOMSnapshot -> Effect Unit)
@@ -250,9 +271,9 @@ foreign import setAttribute_
   :: R.SetAttribute -> FFIDOMSnapshot -> Effect Unit
 
 foreign import setSubgraph_
-  :: forall env push
+  :: forall env push index
    . String
-  -> Array { pos :: Int, env :: Nullable (Either env push) }
+  -> Array (Pie push index env)
   -> FFIDOMSnapshot
   -> Effect Unit
 
@@ -295,16 +316,12 @@ interpretInstruction = unwrap >>> match
   }
 
 envsToFFI
-  :: forall env push
-   . Map.Map Int (Maybe env)
-  -> Array
-       { env :: Nullable (Either env push)
-       , pos :: Int
-       }
-envsToFFI envs =
-  ( map (\(a /\ b) -> { pos: a, env: b })
-      (Map.toUnfoldable (map (toNullable <<< map Left) envs))
-  )
+  :: forall index env push
+   . Array (Ie index env)
+  -> Array (Pie push index env)
+envsToFFI = map go
+  where
+  go { pos, index, env } = { pos, index, env: toNullable $ map Left env }
 
 makeInstructionsEffectful
   :: Array Instruction
@@ -331,21 +348,23 @@ instance effectfulDOMInterpret ::
     noEta
   makeText = makeText_
   makeSubgraph { id, terminus, scenes, envs } dom =
-    flip (makeSubgraph_ id terminus scenes (envsToFFI envs)) dom \i -> do
-      -- todo: would makeEvent have a better memory profile here?
-      evt <- create
-      let
-        loop = \eop scene ->
-          let
-            res = oneSubFrame scene eop evt.push
-          in
-            { instructions: res.instructions
-            , nextScene: res.next
-            , forOrdering: unwrap res.res
-            }
-      unsubscribe <- subscribe evt.event \p ->
-        setSubgraph_ id [ { pos: i, env: toNullable $ Just (Right p) } ] dom
-      pure { loop, unsubscribe }
+    flip (makeSubgraph_ id terminus scenes (envsToFFI envs)) dom \pos index ->
+      do
+        -- todo: would makeEvent have a better memory profile here?
+        evt <- create
+        let
+          loop = \eop scene ->
+            let
+              res = oneSubFrame scene eop evt.push
+            in
+              { instructions: res.instructions
+              , nextScene: res.next
+              , forOrdering: unwrap res.res
+              }
+        unsubscribe <- subscribe evt.event \p ->
+          setSubgraph_ id [ { pos, index, env: toNullable $ Just (Right p) } ]
+            dom
+        pure { loop, unsubscribe }
 
   makeTumult { id, terminus, instructions } toFFI =
     makeTumult_

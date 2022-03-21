@@ -3,6 +3,7 @@ module Deku.Create where
 import Prelude
 
 import Data.Functor (voidRight)
+import Data.Hashable (class Hashable)
 import Data.Symbol (class IsSymbol, reflectSymbol)
 import Deku.Control.Indexed (IxDOM(..))
 import Deku.Control.Types (DOM, DOMState', unsafeDOM, unsafeUnDOM)
@@ -120,10 +121,11 @@ instance createSubgraph ::
   ( IsSymbol ptr
   , IsSymbol terminus
   , R.Lacks ptr graphi
+  , Hashable index
   , R.Cons ptr (NodeC (CTOR.TSubgraph terminus env) {}) graphi grapho
   ) =>
   Create' ptr
-    (CTOR.Subgraph terminus env push)
+    (CTOR.Subgraph index terminus env push)
     graphi
     grapho where
   create' ptr w = o

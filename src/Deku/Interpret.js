@@ -120,10 +120,10 @@ exports.makeText_ = function (a) {
 				incoming: [],
 				main: document.createElement("span"),
 			};
-			state.units[ptr].main.setAttribute("style", "white-space: pre;");
-			state.units[ptr].main.innerHTML = a.text
-				.replace(/\n/g, "<br>")
-				.replace(/ /g, "&nbsp;");
+			state.units[ptr].main.setAttribute("style", "white-space: pre-wrap;");
+			state.units[ptr].main.innerText = a.text;
+				//.replace(/\n/g, "<br>")
+				//.replace(/ /g, "&nbsp;");
 		};
 	};
 };
@@ -348,8 +348,8 @@ var setSubgraph_ = function (ptr) {
 							unqidfr: makeid(10),
 							parent: state,
 						};
-						scenes[j] = state.units[ptr].sceneM(j);
-						var funkworthy = state.units[ptr].funkyFx(j)();
+						scenes[j] = state.units[ptr].sceneM(envs[i].index);
+						var funkworthy = state.units[ptr].funkyFx(j)(envs[i].index)();
 						funk[j] = funkworthy.loop;
 						unsu[j] = funkworthy.unsubscribe;
 						needsConnecting.push(j);

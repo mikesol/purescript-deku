@@ -3,6 +3,7 @@ module Deku.Graph.DOM
   , unsafeUnElement
   , class TypeToSym
   , SubgraphSig
+  , ResolvedSubgraphSig
   , AsSubgraph(..)
   , unAsSubGraph
   , (:=)
@@ -21,7 +22,9 @@ module Deku.Graph.DOM
   , subgraph
   , unsafeUnSubgraph
   , XSubgraph'
-  , XSubgraph(..)
+  , XSubgraph
+  , xsubgraph
+  , unsafeUnXSubgraph
   , Tumult
   , TTumult
   , tumult
@@ -860,13 +863,16 @@ module Deku.Graph.DOM
   -- codegen 0
   ) where
 
-import Prelude
+import Prelude hiding (map)
 
+import Data.Functor as Funk
 import Data.Map (Map)
+import Data.Map as Map
+import Data.Tuple.Nested ((/\), type (/\))
+import Data.Hashable (hash, class Hashable)
 import Data.Maybe (Maybe)
 import Data.Monoid.Additive (Additive)
 import Data.Symbol (class IsSymbol, reflectSymbol)
-import Data.Tuple.Nested (type (/\))
 import Deku.Control.Types (Frame0, SubScene)
 import Deku.Graph.Attribute (Attribute, Cb, cb, prop, unsafeAttribute)
 import Deku.Interpret (class DOMInterpret)
@@ -944,47 +950,60 @@ text = Element
 
 --
 
-type SubgraphSig terminus env push =
+type SubgraphSig index terminus env push =
   forall dom engine
    . DOMInterpret dom engine
-  => Int
+  => index
   -> SubScene terminus env dom engine Frame0 push (Additive Int)
 
-newtype AsSubgraph terminus env push = AsSubgraph
+type ResolvedSubgraphSig terminus env push =
+  forall dom engine
+   . DOMInterpret dom engine
+  => SubScene terminus env dom engine Frame0 push (Additive Int)
+
+newtype AsSubgraph index terminus env push = AsSubgraph
   ( forall dom engine
      . DOMInterpret dom engine
-    => Int
+    => index
     -> SubScene terminus env dom engine Frame0 push (Additive Int)
   )
 
 unAsSubGraph
-  :: forall terminus env push
-   . AsSubgraph terminus env push
+  :: forall index terminus env push
+   . AsSubgraph index terminus env push
   -> ( forall dom engine
         . DOMInterpret dom engine
-       => Int
+       => index
        -> SubScene terminus env dom engine Frame0 push (Additive Int)
      )
 unAsSubGraph (AsSubgraph sg) = sg
 
-type Subgraph' terminus env push =
-  ( subgraphMaker :: AsSubgraph terminus env push
-  , envs :: Map Int (Maybe env)
+type Subgraph' index terminus env push =
+  ( subgraphMaker :: AsSubgraph index terminus env push
+  , envs :: Array { index :: index, pos :: Int, env :: Maybe env }
   , terminus :: String
   )
-newtype Subgraph terminus env push = Subgraph
-  { | Subgraph' terminus env push }
+newtype Subgraph index terminus env push = Subgraph
+  { | Subgraph' index terminus env push }
 
 subgraph
-  :: forall env terminus push
+  :: forall index terminus env push
    . IsSymbol terminus
-  => Map Int (Maybe env)
-  -> AsSubgraph terminus env push
-  -> Element (Subgraph terminus env push) ()
+  => Hashable index
+  => Map index (Maybe env)
+  -> AsSubgraph index terminus env push
+  -> Element (Subgraph index terminus env push) ()
 subgraph envs subgraphMaker =
   Element
     { element: Subgraph
-        { envs
+        { envs: Funk.map
+            ( \(index /\ env) ->
+                { index
+                , env
+                , pos: hash index
+                }
+            )
+            (Map.toUnfoldable envs)
         , subgraphMaker
         , terminus: reflectSymbol (Proxy :: _ terminus)
         }
@@ -992,20 +1011,43 @@ subgraph envs subgraphMaker =
     }
 
 unsafeUnSubgraph
-  :: forall terminus env push
-   . Subgraph terminus env push
-  -> { | Subgraph' terminus env push }
+  :: forall index terminus env push
+   . Subgraph index terminus env push
+  -> { | Subgraph' index terminus env push }
 unsafeUnSubgraph (Subgraph unsafe) = unsafe
 
-type XSubgraph' (env :: Type) =
-  (envs :: Map Int (Maybe env))
-newtype XSubgraph env = XSubgraph { | XSubgraph' env }
+type XSubgraph' index env =
+  (envs :: Array { index :: index, pos :: Int, env :: Maybe env })
+
+newtype XSubgraph index env = XSubgraph { | XSubgraph' index env }
+
+unsafeUnXSubgraph
+  :: forall index env
+   . XSubgraph index env
+  -> { | XSubgraph' index env }
+unsafeUnXSubgraph (XSubgraph unsafe) = unsafe
+
+xsubgraph
+  :: forall index env
+   . Hashable index
+  => Map index (Maybe env)
+  -> XSubgraph index env
+xsubgraph envs = XSubgraph
+  { envs: Funk.map
+      ( \(index /\ env) ->
+          { index
+          , env
+          , pos: hash index
+          }
+      )
+      (Map.toUnfoldable envs)
+  }
 
 instance typeToSymSubgraph ::
-  TypeToSym (Subgraph terminus env push) "Subgraph"
+  TypeToSym (Subgraph index terminus env push) "Subgraph"
 
 instance typeToSymXSubgraph ::
-  TypeToSym (XSubgraph envs) "Subgraph"
+  TypeToSym (XSubgraph index envs) "Subgraph"
 
 type Tumult' (terminus :: Symbol) =
   ( tumult :: Tumultuous terminus
@@ -1054,7 +1096,7 @@ instance monoidTSubgraph :: Monoid (TSubgraph terminus env) where
   mempty = TSubgraph
 
 instance reifyTSubgraph ::
-  ReifyAU (Subgraph terminus env push) (TSubgraph terminus env) where
+  ReifyAU (Subgraph index terminus env push) (TSubgraph terminus env) where
   reifyAU = const mempty
 
 -- | Type-level constructor for a subgraph.

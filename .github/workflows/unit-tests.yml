@@ -16,11 +16,11 @@ jobs:
       - name: Test
         run: npm t
       - name: Build qc
-        run: npx spago -x examples.dhall bundle-app --main Deku.Example.HelloWorld --to examples/hello-world/index.js
+        run: npx spago -x examples.dhall bundle-app --main Deku.Example.Docs --to examples/docs/index.js
       - name: Performance test
         run: npm run test:performance
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GH_TOKEN }}
-          publish_dir: ./examples/hello-world
+          publish_dir: ./examples/docs

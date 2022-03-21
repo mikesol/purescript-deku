@@ -15,7 +15,7 @@ import Deku.Control.Functions.Graph as G
 import Deku.Control.Functions.Subgraph (freeze, iloop, (@!>))
 import Deku.Create (icreate)
 import Deku.Graph.Attribute (Cb(..))
-import Deku.Graph.DOM (XSubgraph(..), (:=))
+import Deku.Graph.DOM (xsubgraph, (:=))
 import Deku.Graph.DOM as DOM
 import Deku.Interpret (makeFFIDOMSnapshot)
 import Deku.Run (TriggeredRun, defaultOptions, run)
@@ -70,7 +70,7 @@ container =
 
 containerD
   :: Shared.ContainerState
-  -> DOM.Element (DOM.Subgraph "ctr" Unit Shared.Todo) ()
+  -> DOM.Element (DOM.Subgraph Int "ctr" Unit Shared.Todo) ()
 containerD cstate = DOM.subgraph (singleton 0 (Just unit)) $ DOM.AsSubgraph
   \_ ->
     ( \_ push ->
@@ -98,10 +98,11 @@ containerD cstate = DOM.subgraph (singleton 0 (Just unit)) $ DOM.AsSubgraph
     ) @!> iloop \e push ln -> case e of
       Left _ -> pure ln
       Right td -> ln + 1 <$ ichange_
-        { "ctr.dv.sg": XSubgraph
-            { envs: singleton ln $ Just
+        { "ctr.dv.sg": xsubgraph
+            ( singleton ln $ Just
                 { todo: td, completed: cstate.completed }
-            }
+            )
+
         , "ctr.btn": DOM.button'attr
             [ DOM.OnClick := Cb (const $ Shared.mkTodo (ln + 1) >>= push)
             ]
@@ -109,7 +110,7 @@ containerD cstate = DOM.subgraph (singleton 0 (Just unit)) $ DOM.AsSubgraph
 
 todoD
   :: Map Int (Maybe TodoInput)
-  -> DOM.Element (DOM.Subgraph "top" TodoInput Unit) ()
+  -> DOM.Element (DOM.Subgraph Int "top" TodoInput Unit) ()
 todoD mp = DOM.subgraph mp $ DOM.AsSubgraph \i ->
   ( \itl _ ->
       icreate
@@ -133,7 +134,7 @@ data CheckboxAction = ReceiveCheckboxInput CheckboxInput | HandleCheck Boolean
 
 checkboxD
   :: Map Int (Maybe CheckboxInput)
-  -> DOM.Element (DOM.Subgraph "input" CheckboxInput Unit) ()
+  -> DOM.Element (DOM.Subgraph Int "input" CheckboxInput Unit) ()
 checkboxD envs = DOM.subgraph envs $ DOM.AsSubgraph \i ->
   ( \itl _ -> icreate
       { input: DOM.input
