@@ -38,7 +38,7 @@ scene elt =
                   ("A" +> "B" +> "C" +> empty)
             , rando: D.div []
                 $ detup
-                $ D.a [] (S.text "foo ")
+                $ D.a [D.Href := "https://github.com/mikesol/purescript-deku"] (S.text "foo ")
                   /\ D.i [] (S.text " bar ")
                   /\ D.span [ D.Style := "font-weight: 800;" ] (S.text " baz")
                   /\
