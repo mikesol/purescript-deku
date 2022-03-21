@@ -42,4 +42,11 @@ main = launchAff_ $ runSpec [ consoleReporter ] do
                 (const $ pure unit)
             ).instructions
         )
-        `shouldEqual`  Just (E "div" [{ key: "style", value: (prop "display:content;") }] [(E "button" [] [(T "hi")])])
+        `shouldEqual` Just
+          ( E "div"
+              [ { key: "style"
+                , value: (prop "display:content;")
+                }
+              ]
+              [ (E "button" [] [ (T "hi") ]) ]
+          )

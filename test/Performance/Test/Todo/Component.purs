@@ -27,7 +27,8 @@ container =
   H.mkComponent
     { initialState: \_ -> Shared.initialContainerState
     , render
-    , eval: H.mkEval $ H.defaultEval { handleAction = handleAction, initialize = Just Initialize }
+    , eval: H.mkEval $ H.defaultEval
+        { handleAction = handleAction, initialize = Just Initialize }
     }
   where
   handleAction = case _ of
@@ -44,9 +45,11 @@ container =
 
       SetCompleted id complete -> do
         if complete then
-          H.modify_ \state -> state { completed = Set.insert id state.completed }
+          H.modify_ \state -> state
+            { completed = Set.insert id state.completed }
         else
-          H.modify_ \state -> state { completed = Set.delete id state.completed }
+          H.modify_ \state -> state
+            { completed = Set.delete id state.completed }
 
     AddNew -> do
       state <- H.get
@@ -56,7 +59,8 @@ container =
   render state = do
     let
       todos = state.todos <#> \t ->
-        HH.slot Shared._todo t.id todo { todo: t, completed: state.completed } HandleTodo
+        HH.slot Shared._todo t.id todo { todo: t, completed: state.completed }
+          HandleTodo
 
     HH.div_
       [ HH.button
@@ -79,14 +83,18 @@ todo :: forall q m. MonadAff m => H.Component q TodoInput TodoOutput m
 todo = H.mkComponent
   { initialState: identity
   , render
-  , eval: H.mkEval $ H.defaultEval { handleAction = handleAction, receive = Just <<< ReceiveTodoInput }
+  , eval: H.mkEval $ H.defaultEval
+      { handleAction = handleAction, receive = Just <<< ReceiveTodoInput }
   }
   where
   handleAction = case _ of
     ReceiveTodoInput input -> do
       state <- H.get
-      unless (state.todo.id == input.todo.id && state.completed == input.completed) do
-        H.modify_ \st -> st { todo { id = input.todo.id }, completed = input.completed }
+      unless
+        (state.todo.id == input.todo.id && state.completed == input.completed)
+        do
+          H.modify_ \st -> st
+            { todo { id = input.todo.id }, completed = input.completed }
 
     UpdateDescription str -> do
       H.modify_ \state -> state { todo { description = str } }
@@ -106,7 +114,9 @@ todo = H.mkComponent
           , HE.onValueInput UpdateDescription
           , HP.value state.todo.description
           ]
-      , HH.slot Shared._checkbox unit checkbox { id: state.todo.id, completed: state.completed } HandleCheckbox
+      , HH.slot Shared._checkbox unit checkbox
+          { id: state.todo.id, completed: state.completed }
+          HandleCheckbox
       , HH.button
           [ HP.id (Shared.saveId state.todo.id)
           , HE.onClick \_ -> SaveUpdate
@@ -116,7 +126,8 @@ todo = H.mkComponent
 
 data CheckboxAction = ReceiveCheckboxInput CheckboxInput | HandleCheck Boolean
 
-checkbox :: forall q m. MonadAff m => H.Component q CheckboxInput CheckboxOutput m
+checkbox
+  :: forall q m. MonadAff m => H.Component q CheckboxInput CheckboxOutput m
 checkbox = H.mkComponent
   { initialState: identity
   , render

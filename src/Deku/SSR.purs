@@ -7,15 +7,13 @@ import Data.Array as Array
 import Data.Either (Either(..))
 import Data.List (List(..), (:))
 import Data.List as List
-import Data.Map (toUnfoldable)
 import Data.Maybe (Maybe(..))
 import Data.Traversable (sequence)
-import Data.Tuple.Nested ((/\))
 import Data.Variant (on)
-import Deku.Control.Types (Frame0, SubScene, oneSubFrame)
+import Deku.Control.Types (Frame0, SubScene)
 import Deku.Graph.Attribute (AttributeValue, prop)
 import Deku.Interpret (AsSubgraphHack(..), SubgraphInput, connectXToY, makeElement, makeRoot, makeSubgraph, makeText, makeTumult)
-import Deku.Rendered (Instruction(..), PureEnvs(..), PureScenes(..))
+import Deku.Rendered (Instruction(..))
 import Deku.Rendered as R
 import Deku.Tumult.Make (Indecent(..))
 import Foreign.Object (Object, empty, lookup, insert, singleton, union, update)
@@ -42,40 +40,20 @@ foreign import massiveCreate_
   -> Array Instruction
 
 applySubgraph
-  :: String -> String -> PureScenes -> List Instruction -> Object Indecent
-applySubgraph terminus idS s@(PureScenes scenes) ((Instruction a) : b) = on
-  ( Proxy
-      :: Proxy
-        "setSubgraph"
-  )
-  ( \{ id, envs: (PureEnvs mp) } ->
-      if idS == id then
-        case
-          ( E "div" [] <$>
-              ( sequence $ map
-                  ( \(ix /\ ev) ->
-                      ssr' terminus false
-                        ( map (\inst -> inst unit)
-                            ( oneSubFrame (scenes ix) (Left ev)
-                                (const $ pure unit)
-                            ).instructions
-                        )
-
-                  )
-                  (toUnfoldable mp)
-              )
-          )
-          of
-          -- should never happen
-          -- should we propagate the error?
-          Nothing -> applySubgraph terminus idS s b
-          Just x -> singleton id x
-
-      else applySubgraph terminus idS s b
-  )
-  (\_ -> applySubgraph terminus idS s b)
-  a
-applySubgraph _ _ _ Nil = empty
+  :: String -> String -> Array (Array Instruction) -> Object Indecent
+applySubgraph terminus id aaI =
+  case
+    ( E "div" [] <$>
+        ( sequence $ map
+            (\iss -> ssr' terminus false iss)
+            aaI
+        )
+    )
+    of
+    -- should never happen
+    -- should we propagate the error?
+    Nothing -> empty
+    Just x -> singleton id x
 
 resolveAllSubgraphs :: List Instruction -> Object Indecent
 resolveAllSubgraphs ((Instruction a) : b) = union
@@ -84,7 +62,9 @@ resolveAllSubgraphs ((Instruction a) : b) = union
           :: Proxy
             "makeSubgraph"
       )
-      (\{ id, scenes, terminus } -> applySubgraph terminus id scenes b)
+      ( \{ id, instructions, terminus } -> applySubgraph terminus id
+          instructions
+      )
       (const empty)
       a
   )

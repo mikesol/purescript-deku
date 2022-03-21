@@ -148,7 +148,7 @@ instance createTSubgraph ::
   , R.Cons ptr (NodeC (CTOR.TSubgraph terminus env) {}) graphi grapho
   ) =>
   CreateT' ptr
-    (CTOR.Subgraph (CTOR.AsSubgraph terminus env push))
+    (CTOR.Subgraph terminus env push)
     graphi
     grapho
 

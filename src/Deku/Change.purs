@@ -7,7 +7,7 @@ import Deku.Control.Indexed (IxDOM(..))
 import Deku.Control.Types (DOM, DOMState', unsafeDOM, unsafeUnDOM)
 import Deku.CreateT (class CreateT)
 import Deku.Graph.Attribute (Attribute, AttributeValue, unsafeUnAttribute)
-import Deku.Graph.DOM (unsafeUnText)
+import Deku.Graph.DOM (unsafeUnSubgraph, unsafeUnText)
 import Deku.Graph.DOM as CTOR
 import Deku.Graph.Graph (Graph)
 import Deku.Graph.Node (NodeC)
@@ -87,16 +87,27 @@ class ChangeRL_ (rl :: RL.RowList Type) (r :: Row Type) (graph :: Graph) where
     -> DOM dom engine proof res graph { | r }
     -> DOM dom engine proof res graph Unit
 
-instance changeRL_Cons :: (IsSymbol key, Cons key val r' r, Lacks key r', Change' key val graph, ChangeRL_ rest r graph) => ChangeRL_ (RL.Cons key val rest) r graph where
-  changeRL_ _ w = changeRL_ (Proxy :: _ rest) ((change' (Proxy :: _ key) (w $> (get (Proxy :: _ key) value))) $> value)
+instance changeRL_Cons ::
+  ( IsSymbol key
+  , Cons key val r' r
+  , Lacks key r'
+  , Change' key val graph
+  , ChangeRL_ rest r graph
+  ) =>
+  ChangeRL_ (RL.Cons key val rest) r graph where
+  changeRL_ _ w = changeRL_ (Proxy :: _ rest)
+    ((change' (Proxy :: _ key) (w $> (get (Proxy :: _ key) value))) $> value)
     where
     { value } = unsafeUnDOM w
 
 instance changeRL_Nil :: ChangeRL_ RL.Nil r graph where
   changeRL_ _ w = w $> unit
 
-
-instance change_All :: (RL.RowToList r rl, ChangeRL_ rl r graph) => Change_ r graph where
+instance change_All ::
+  ( RL.RowToList r rl
+  , ChangeRL_ rl r graph
+  ) =>
+  Change_ r graph where
   change_ = changeRL_ (Proxy :: _ rl)
 
 ichange_
@@ -154,6 +165,32 @@ instance changeRoot ::
   Change' "root" CTOR.Root graph where
   change' _ w = w $> unit
 
+instance changeSubgraph0 ::
+  ( IsSymbol ptr
+  , IsSymbol terminus
+  , R.Cons ptr (NodeC (CTOR.TSubgraph terminus env) edges) ignore graph
+  ) =>
+  Change' ptr (CTOR.Subgraph terminus env push) graph where
+  change' ptr w = o
+    where
+    { context: i, value } = unsafeUnDOM w
+    { envs } = unsafeUnSubgraph value
+    id = reflectSymbol ptr
+
+    o =
+      unsafeDOM
+        { context:
+            i
+              { instructions = i.instructions <>
+                  [ setSubgraph
+                      { id
+                      , envs
+                      }
+                  ]
+              }
+        , value: unit
+        }
+
 instance changeSubgraph1 ::
   ( IsSymbol ptr
   , IsSymbol terminus
@@ -179,7 +216,6 @@ instance changeSubgraph1 ::
               }
         , value: unit
         }
-
 
 instance changeTumult ::
   ( IsSymbol ptr

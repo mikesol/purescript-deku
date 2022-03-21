@@ -2,13 +2,11 @@ module Performance.Test.Todo.Deku where
 
 import Prelude
 
-import Control.Monad.Indexed ((:*>))
 import Data.Array (length)
 import Data.Either (Either(..))
 import Data.Foldable (traverse_)
 import Data.FunctorWithIndex (mapWithIndex)
-import Web.HTML.HTMLElement (toElement)
-import Data.Map (fromFoldable, singleton)
+import Data.Map (Map, fromFoldable, singleton)
 import Data.Maybe (Maybe(..))
 import Data.Set as Set
 import Data.Tuple.Nested ((/\))
@@ -29,6 +27,7 @@ import Halogen.HTML.Properties as HP
 import Performance.Test.Todo.Shared (CheckboxInput, TodoInput)
 import Performance.Test.Todo.Shared as Shared
 import Type.Proxy (Proxy(..))
+import Web.HTML.HTMLElement (toElement)
 
 _todoDeku = Proxy :: Proxy "todoDeku"
 
@@ -60,11 +59,7 @@ container =
                         ( DOM.root (toElement el)
                             { sg: (containerD filled)
                             }
-                        ) :*> ichange_
-                        { "root.sg": XSubgraph
-                            { envs: singleton 0 (Just unit)
-                            }
-                        }
+                        )
                   )
                   G.freeze
               )
@@ -75,45 +70,47 @@ container =
 
 containerD
   :: Shared.ContainerState
-  -> DOM.Element (DOM.Subgraph (DOM.AsSubgraph "ctr" Unit Shared.Todo)) ()
-containerD cstate = DOM.subgraph $ DOM.AsSubgraph \_ ->
-  ( \_ push ->
-      let
-        ln = length cstate.todos
-      in
-        icreate
-          { ctr: DOM.div []
-              { btn: DOM.button
-                  [ DOM.Id := Shared.addNewId
-                  , DOM.OnClick := Cb
-                      (const $ Shared.mkTodo ln >>= push)
-                  ]
-                  { txt: DOM.text "Add New" }
-              , dv: DOM.div
-                  [ DOM.Id := Shared.todosId ]
-                  { sg: todoD }
-              }
-          } :*> ichange_
-          { "ctr.dv.sg": XSubgraph
-              { envs: fromFoldable
-                  ( cstate.todos # mapWithIndex \ix t -> ix /\ Just
-                      { todo: t, completed: cstate.completed }
-                  )
-              }
-          } $> ln
-  ) @!> iloop \e push ln -> case e of
-    Left _ -> pure ln
-    Right td -> ln + 1 <$ ichange_
-      { "ctr.dv.sg": XSubgraph
-          { envs: singleton ln $ Just { todo: td, completed: cstate.completed }
-          }
-      , "ctr.btn": DOM.button'attr
-          [ DOM.OnClick := Cb (const $ Shared.mkTodo (ln + 1) >>= push)
-          ]
-      }
+  -> DOM.Element (DOM.Subgraph "ctr" Unit Shared.Todo) ()
+containerD cstate = DOM.subgraph (singleton 0 (Just unit)) $ DOM.AsSubgraph
+  \_ ->
+    ( \_ push ->
+        let
+          ln = length cstate.todos
+        in
+          icreate
+            { ctr: DOM.div []
+                { btn: DOM.button
+                    [ DOM.Id := Shared.addNewId
+                    , DOM.OnClick := Cb
+                        (const $ Shared.mkTodo ln >>= push)
+                    ]
+                    { txt: DOM.text "Add New" }
+                , dv: DOM.div
+                    [ DOM.Id := Shared.todosId ]
+                    { sg: todoD $ fromFoldable
+                        ( cstate.todos # mapWithIndex \ix t ->
+                            ix /\ Just
+                              { todo: t, completed: cstate.completed }
+                        )
+                    }
+                }
+            } $> ln
+    ) @!> iloop \e push ln -> case e of
+      Left _ -> pure ln
+      Right td -> ln + 1 <$ ichange_
+        { "ctr.dv.sg": XSubgraph
+            { envs: singleton ln $ Just
+                { todo: td, completed: cstate.completed }
+            }
+        , "ctr.btn": DOM.button'attr
+            [ DOM.OnClick := Cb (const $ Shared.mkTodo (ln + 1) >>= push)
+            ]
+        }
 
-todoD :: DOM.Element (DOM.Subgraph (DOM.AsSubgraph "top" TodoInput Unit)) ()
-todoD = DOM.subgraph $ DOM.AsSubgraph \i ->
+todoD
+  :: Map Int (Maybe TodoInput)
+  -> DOM.Element (DOM.Subgraph "top" TodoInput Unit) ()
+todoD mp = DOM.subgraph mp $ DOM.AsSubgraph \i ->
   ( \itl _ ->
       icreate
         { top: DOM.div []
@@ -122,17 +119,12 @@ todoD = DOM.subgraph $ DOM.AsSubgraph \i ->
                 , DOM.Value := itl.todo.description
                 ]
                 {}
-            , chk: checkboxD
+            , chk: checkboxD $ singleton i $ Just
+                { id: itl.todo.id, completed: itl.completed }
             , btn: DOM.button
                 [ DOM.Id := (Shared.saveId itl.todo.id)
                 ]
                 { txt: DOM.text "Save Changes" }
-            }
-        } :*> ichange_
-        { "top.chk": XSubgraph
-            { envs: singleton i $ Just
-                { id: itl.todo.id, completed: itl.completed }
-
             }
         }
   ) @!> freeze
@@ -140,8 +132,9 @@ todoD = DOM.subgraph $ DOM.AsSubgraph \i ->
 data CheckboxAction = ReceiveCheckboxInput CheckboxInput | HandleCheck Boolean
 
 checkboxD
-  :: DOM.Element (DOM.Subgraph (DOM.AsSubgraph "input" CheckboxInput Unit)) ()
-checkboxD = DOM.subgraph $ DOM.AsSubgraph \i ->
+  :: Map Int (Maybe CheckboxInput)
+  -> DOM.Element (DOM.Subgraph "input" CheckboxInput Unit) ()
+checkboxD envs = DOM.subgraph envs $ DOM.AsSubgraph \i ->
   ( \itl _ -> icreate
       { input: DOM.input
           [ DOM.Xtype := "checkbox"

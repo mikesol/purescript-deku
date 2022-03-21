@@ -89,10 +89,12 @@ foreign import clickImpl :: EffectFn1 HTMLElement (Promise Unit)
 click :: HTMLElement -> Aff Unit
 click = toAffE1 clickImpl
 
-foreign import waitForSelectorImpl :: EffectFn2 Page String (Promise (Nullable HTMLElement))
+foreign import waitForSelectorImpl
+  :: EffectFn2 Page String (Promise (Nullable HTMLElement))
 
 waitForSelector :: Page -> String -> Aff (Maybe HTMLElement)
-waitForSelector page selector = map toMaybe (toAffE2 waitForSelectorImpl page selector)
+waitForSelector page selector = map toMaybe
+  (toAffE2 waitForSelectorImpl page selector)
 
 foreign import focusImpl :: EffectFn2 Page String (Promise Unit)
 
@@ -162,7 +164,8 @@ stopTrace = toAffE1 stopTraceImpl
 -- | be used to retrieve the average frames per second over the measured duration
 foreign import data PerformanceModel :: Type
 
-foreign import getPerformanceModelImpl :: EffectFn1 Trace (Promise (Nullable PerformanceModel))
+foreign import getPerformanceModelImpl
+  :: EffectFn1 Trace (Promise (Nullable PerformanceModel))
 
 getPerformanceModel :: Trace -> Aff (Maybe PerformanceModel)
 getPerformanceModel = map toMaybe <<< toAffE1 getPerformanceModelImpl
@@ -192,7 +195,10 @@ instance EncodeJson Kilobytes where
 
 instance DecodeJson Kilobytes where
   decodeJson json = decodeJson json >>= \str -> do
-    pure (Kilobytes (unsafePartial (fromJust (Int.fromString (String.dropRight 2 str)))))
+    pure
+      ( Kilobytes
+          (unsafePartial (fromJust (Int.fromString (String.dropRight 2 str))))
+      )
 
 instance Show Kilobytes where
   show (Kilobytes kb) = show kb <> "kb"
@@ -215,7 +221,10 @@ instance Show Milliseconds where
 
 instance DecodeJson Milliseconds where
   decodeJson json = decodeJson json >>= \str -> do
-    pure (Milliseconds (unsafePartial (fromJust (Int.fromString (String.dropRight 2 str)))))
+    pure
+      ( Milliseconds
+          (unsafePartial (fromJust (Int.fromString (String.dropRight 2 str))))
+      )
 
 -- | A snapshot of current page data
 type PageMetrics =
@@ -226,10 +235,11 @@ type PageMetrics =
 -- | Retrieve a snapshot of the current page metrics, which can be used to see
 -- | current heap usage and execution times
 pageMetrics :: Page -> Aff PageMetrics
-pageMetrics = toAffE1 pageMetricsImpl >>> map \{ "JSHeapUsedSize": heap, "Timestamp": ts } ->
-  { heapUsed: Kilobytes (round (heap / 1000.0))
-  , timestamp: Milliseconds (round (ts * 1000.0))
-  }
+pageMetrics = toAffE1 pageMetricsImpl >>> map
+  \{ "JSHeapUsedSize": heap, "Timestamp": ts } ->
+    { heapUsed: Kilobytes (round (heap / 1000.0))
+    , timestamp: Milliseconds (round (ts * 1000.0))
+    }
 
 -- | Retrieve the time spent in scripting during the execution
 readScriptingTime :: FilePath -> Effect Milliseconds

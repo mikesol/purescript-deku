@@ -115,6 +115,7 @@ var massiveCreateCreateStep_ = function ($prefix) {
 													id: key,
 													terminus: value.element.terminus,
 													scenes: $unSubgraph(value.element.subgraphMaker),
+													envs: value.element.envs
 												})()
 											);
 										} else if (value.element.tumult !== undefined) {

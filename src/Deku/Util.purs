@@ -190,7 +190,7 @@ instance detupUnit :: Detup n Unit () where
   detup' _ _ = {}
 class N2S (n :: Type) (s :: Symbol) | n -> s
 
-detup :: forall a b. Detup D0 a b => a -> {|b}
+detup :: forall a b. Detup D0 a b => a -> { | b }
 detup = detup' (Proxy :: Proxy D0)
 
 instance N2S D0 "0"

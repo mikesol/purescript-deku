@@ -230,17 +230,22 @@ class AllNodesAreSaturatedNL (graph :: NodeList)
 
 instance allNodesAreSaturatedNil :: AllNodesAreSaturatedNL RL.Nil
 
-instance allNodesAreSaturatedConsTSubgraph::
+instance allNodesAreSaturatedConsTSubgraph ::
   ( RowToList r RL.Nil
   , AllNodesAreSaturatedNL tail
   ) =>
-  AllNodesAreSaturatedNL (RL.Cons iSym (NodeC (CTOR.TSubgraph terminus env) { | r }) tail)
+  AllNodesAreSaturatedNL ( RL.Cons iSym
+        (NodeC (CTOR.TSubgraph terminus env) { | r })
+        tail
+    )
 
-instance allNodesAreSaturatedConsTTumult::
+instance allNodesAreSaturatedConsTTumult ::
   ( RowToList r RL.Nil
   , AllNodesAreSaturatedNL tail
   ) =>
-  AllNodesAreSaturatedNL (RL.Cons iSym (NodeC (CTOR.TTumult terminus) { | r }) tail)
+  AllNodesAreSaturatedNL ( RL.Cons iSym (NodeC (CTOR.TTumult terminus) { | r })
+        tail
+    )
 
 instance allNodesAreSaturatedCons_TRoot ::
   AllNodesAreSaturatedNL tail =>
@@ -270,15 +275,22 @@ instance nodeIsRootNodeTSpeaker ::
 
 class NoNodesAreRoots (graph :: Graph)
 
-instance noNodesAreRoots :: (RL.RowToList graph gl, NoNodesAreRootsRL gl) => NoNodesAreRoots graph
+instance noNodesAreRoots ::
+  ( RL.RowToList graph gl
+  , NoNodesAreRootsRL gl
+  ) =>
+  NoNodesAreRoots graph
 
 class NoNodesAreRootsRL (graph :: RL.RowList Type)
 
 instance nodeIsNotRootNodeRest :: NoNodesAreRootsRL RL.Nil
 else instance nodeIsNotRootNodeRoot ::
-  Fail (Text "Roots are not allowed anywhere except at the top of a non-sub-graph") => NoNodesAreRootsRL (RL.Cons sym (NodeC (CTOR.TRoot) x) rest)
+  Fail
+    (Text "Roots are not allowed anywhere except at the top of a non-sub-graph") =>
+  NoNodesAreRootsRL (RL.Cons sym (NodeC (CTOR.TRoot) x) rest)
 else instance nodeIsNotRootNodeRootRest ::
-  NoNodesAreRootsRL rest => NoNodesAreRootsRL (RL.Cons sym x rest)
+  NoNodesAreRootsRL rest =>
+  NoNodesAreRootsRL (RL.Cons sym x rest)
 
 --
 class NodesOnlyAppearOnce (graph :: Graph) (terminus :: Symbol)
@@ -290,16 +302,20 @@ instance nodesOnlyAppearOnce ::
   ) =>
   NodesOnlyAppearOnce graph sym
 
-class NodesOnlyAppearOnceI (graph :: Graph) (terminus :: Symbol) (r :: Row Type) | graph terminus -> r
+class
+  NodesOnlyAppearOnceI (graph :: Graph) (terminus :: Symbol) (r :: Row Type)
+  | graph terminus -> r
 
 instance nodesOnlyAppearOnceI ::
-  (  R.Cons sym (ignore /\ {|newRow}) r' graph
+  ( R.Cons sym (ignore /\ { | newRow }) r' graph
   , RL.RowToList newRow newRowList
   , NodesOnlyAppearOnceRL graph newRowList r
   ) =>
   NodesOnlyAppearOnceI graph sym r
 
-class NodesOnlyAppearOnceRL (graph :: Graph) (rl :: RowList Type) (r :: Row Type) | graph rl -> r
+class
+  NodesOnlyAppearOnceRL (graph :: Graph) (rl :: RowList Type) (r :: Row Type)
+  | graph rl -> r
 
 instance nodesOnlyAppearOnceRLNil ::
   NodesOnlyAppearOnceRL graph RL.Nil ()

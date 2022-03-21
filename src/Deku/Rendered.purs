@@ -9,10 +9,8 @@ import Prelude
 import Data.Function (on)
 import Data.Map (Map)
 import Data.Maybe (Maybe(..))
-import Data.Monoid.Additive (Additive)
 import Data.Newtype (class Newtype)
 import Data.Variant (Variant, inj, match)
-import Deku.Control.Types (Frame0, SubScene)
 import Deku.Graph.Attribute (AttributeValue)
 import Foreign (Foreign)
 import Simple.JSON as JSON
@@ -54,44 +52,26 @@ instance Ord RootDOMElement where
 instance showRootDOMElement :: Show RootDOMElement where
   show _ = "<root>"
 
-newtype PureScenes = PureScenes (forall env terminus push. Int -> SubScene terminus env Unit Instruction Frame0 push (Additive Int))
-
-instance showPureScenes:: Show PureScenes where
-  show _ = "<pure-scenes>"
-
-instance eqPureScenes:: Eq PureScenes where
-  eq _ _ = false
-
-instance ordPureScenes:: Ord PureScenes where
-  compare _ _ = LT
-
-newtype PureEnvs = PureEnvs (forall env. Map Int (Maybe env))
-
-instance showPureEnvs:: Show PureEnvs where
-  show _ = "<pure-envs>"
-
-instance eqPureEnvs:: Eq PureEnvs where
-  eq _ _ = false
-
-instance ordPureEnvs :: Ord PureEnvs where
-  compare _ _ = LT
-
 type DisconnectXFromY =
-  { fromId :: String, fromUnit :: String, toId :: String, toUnit :: String }
+  { fromId :: String
+  , fromUnit :: String
+  , toId :: String
+  , toUnit :: String
+  }
 type MassiveCreate = { toCreate :: ToCreate }
 type MassiveChange = { toChange :: ToChange }
 type DestroyUnit = { id :: String, unit :: String }
 type MakeElement =
   { id :: String
   , tag :: String
-  , attributes :: Array {key :: String, value :: AttributeValue}
+  , attributes :: Array { key :: String, value :: AttributeValue }
   }
 type MakeText = { id :: String, text :: String }
 type MakeRoot = { id :: String, root :: RootDOMElement }
 type MakeSubgraph =
   { id :: String
   , terminus :: String
-  , scenes :: PureScenes
+  , instructions :: Array (Array Instruction)
   }
 type MakeTumult =
   { id :: String
@@ -110,15 +90,12 @@ type SetAttribute =
   , key :: String
   , value :: AttributeValue
   }
--- TODO: we have no idea what set subgraph will hold because we
--- have no idea what the previous state was in the pure model.
--- fix? do we care? so far this is just for visualizations, but
--- if it winds up being semantically interesting we should address this
-type SetSubgraph = { id :: String, envs :: PureEnvs }
+type SetSubgraph = { id :: String }
 type SetTumult =
-  { id :: String,
-terminus :: String
-  , instructions :: Map Int (Maybe (Array Instruction))  }
+  { id :: String
+  , terminus :: String
+  , instructions :: Map Int (Maybe (Array Instruction))
+  }
 
 -- An dom rendering instruction. These instructions are used
 -- for testing purposes during "dry run" simulations of dom rendering.

@@ -77,7 +77,18 @@ updateTodo todo todos = do
   Array.updateAt ix todo todos
 
 descriptions :: Array String
-descriptions = [ "eat", "drink", "sleep", "party", "walk", "run", "hike", "play the drums", "cook", "chill" ]
+descriptions =
+  [ "eat"
+  , "drink"
+  , "sleep"
+  , "party"
+  , "walk"
+  , "run"
+  , "hike"
+  , "play the drums"
+  , "cook"
+  , "chill"
+  ]
 
 addNewId :: String
 addNewId = "add-new"

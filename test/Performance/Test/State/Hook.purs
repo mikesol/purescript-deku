@@ -23,11 +23,16 @@ component = Hooks.memoComponent (\_ _ -> false) \{ outputToken } _ -> Hooks.do
 
   let
     runState = do
-      sequence_ $ replicate stateUpdates $ Hooks.modify_ nId \s -> s { n = s.n + 1 }
-      sequence_ $ replicate stateUpdates $ Hooks.modify_ nId \s -> s { n1 = s.n1 + 1 }
-      sequence_ $ replicate stateUpdates $ Hooks.modify_ nId \s -> s { n2 = s.n2 + 1 }
-      sequence_ $ replicate stateUpdates $ Hooks.modify_ nId \s -> s { n3 = s.n3 + 1 }
-      sequence_ $ replicate stateUpdates $ Hooks.modify_ nId \s -> s { n4 = s.n4 + 1 }
+      sequence_ $ replicate stateUpdates $ Hooks.modify_ nId \s -> s
+        { n = s.n + 1 }
+      sequence_ $ replicate stateUpdates $ Hooks.modify_ nId \s -> s
+        { n1 = s.n1 + 1 }
+      sequence_ $ replicate stateUpdates $ Hooks.modify_ nId \s -> s
+        { n2 = s.n2 + 1 }
+      sequence_ $ replicate stateUpdates $ Hooks.modify_ nId \s -> s
+        { n3 = s.n3 + 1 }
+      sequence_ $ replicate stateUpdates $ Hooks.modify_ nId \s -> s
+        { n4 = s.n4 + 1 }
       Hooks.raise outputToken Done
 
   Hooks.pure do

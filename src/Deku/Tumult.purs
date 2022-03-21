@@ -6,7 +6,8 @@ import Data.Map (Map)
 import Data.Maybe (Maybe)
 import Deku.Rendered (Instruction)
 
-newtype Tumultuous (terminus :: Symbol) = Tumultuous (Map Int (Maybe (Array Instruction)))
+newtype Tumultuous (terminus :: Symbol) = Tumultuous
+  (Map Int (Maybe (Array Instruction)))
 
 derive instance eqTumult :: Eq (Tumultuous terminus)
 derive instance ordTumult :: Ord (Tumultuous terminus)

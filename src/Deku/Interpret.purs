@@ -37,7 +37,7 @@ import Data.Typelevel.Undefined (undefined)
 import Data.Variant (match)
 import Deku.Control.Types (Frame0, SubScene(..), oneSubFrame)
 import Deku.Graph.Attribute (prop)
-import Deku.Rendered (Instruction, PureEnvs(..), PureScenes(..))
+import Deku.Rendered (Instruction)
 import Deku.Rendered as R
 import Deku.Tumult.Reconciliation (reconcileTumult)
 import Effect (Effect)
@@ -51,6 +51,7 @@ foreign import renderDOM :: Array (Effect Unit) -> Effect Unit
 type SubgraphInput (terminus :: Symbol) env push dom engine =
   { id :: String
   , terminus :: String
+  , envs :: Map.Map Int (Maybe env)
   , scenes ::
       Int -> SubScene terminus env dom engine Frame0 push (Additive Int)
   }
@@ -87,20 +88,25 @@ class DOMInterpret dom engine where
   setText :: R.SetText -> dom -> engine
   setTumult :: R.SetTumult -> dom -> engine
 
-unsafeStashScene
-  :: forall terminusA envA pushA
-   . SubScene terminusA envA Unit Instruction Frame0 pushA (Additive Int)
-  -> ( forall terminus env push
-        . SubScene terminus env Unit Instruction Frame0 push (Additive Int)
-     )
-unsafeStashScene = unsafeCoerce
-
-unsafeStashEnvs
-  :: forall envA
-   . Map.Map Int (Maybe envA)
-  -> (forall env. Map.Map Int (Maybe env))
-unsafeStashEnvs = unsafeCoerce
-
+handleSubgraph
+  :: forall terminus env push
+   . (R.MakeSubgraph -> Instruction)
+  -> SubgraphInput terminus env push Unit Instruction
+  -> Unit
+  -> Instruction
+handleSubgraph f { id, envs, terminus, scenes } = const $ f
+  { id
+  , terminus
+  , instructions:
+      let
+        instructions = map
+          ( \(a /\ b) -> map (\z -> z unit)
+              (oneSubFrame (scenes a) (Left b) (const $ pure unit)).instructions
+          )
+          (Map.toUnfoldable (Map.catMaybes envs))
+      in
+        instructions
+  }
 instance freeDOMInterpret :: DOMInterpret Unit Instruction where
   connectXToY = const <<< R.iConnectXToY
   disconnectXFromY = const <<< R.iDisconnectXFromY
@@ -110,11 +116,9 @@ instance freeDOMInterpret :: DOMInterpret Unit Instruction where
   makeText = const <<< R.iMakeText
   makeTumult = const <<< R.iMakeTumult
   massiveCreate = const <<< R.iMassiveCreate
-  makeSubgraph { id, terminus, scenes } _ = R.iMakeSubgraph
-    { id, terminus, scenes: PureScenes (map unsafeStashScene scenes) }
+  makeSubgraph = handleSubgraph R.iMakeSubgraph
   setAttribute = const <<< R.iSetAttribute
-  setSubgraph { id, envs } _ = R.iSetSubgraph
-    { id, envs: PureEnvs (unsafeStashEnvs envs) }
+  setSubgraph { id } _ = R.iSetSubgraph { id }
   massiveChange = const <<< R.iMassiveChange
   setText = const <<< R.iSetText
   setTumult = const <<< R.iSetTumult
@@ -186,6 +190,7 @@ foreign import makeSubgraph_
   -> String
   -- this is the generic function for how to interpret a scene
   -> (Int -> scene)
+  -> Array { pos :: Int, env :: Nullable (Either env push) }
   -- this is how to spawn a specific scene loop
   -- effectful because it starts a subscription to an event
   -> ( Int
@@ -289,6 +294,18 @@ interpretInstruction = unwrap >>> match
       { id, key: "devnull", value: prop "true" }
   }
 
+envsToFFI
+  :: forall env push
+   . Map.Map Int (Maybe env)
+  -> Array
+       { env :: Nullable (Either env push)
+       , pos :: Int
+       }
+envsToFFI envs =
+  ( map (\(a /\ b) -> { pos: a, env: b })
+      (Map.toUnfoldable (map (toNullable <<< map Left) envs))
+  )
+
 makeInstructionsEffectful
   :: Array Instruction
   -> Maybe (Array Instruction)
@@ -313,8 +330,8 @@ instance effectfulDOMInterpret ::
     makeText
     noEta
   makeText = makeText_
-  makeSubgraph { id, terminus, scenes } dom =
-    flip (makeSubgraph_ id terminus scenes) dom \i -> do
+  makeSubgraph { id, terminus, scenes, envs } dom =
+    flip (makeSubgraph_ id terminus scenes (envsToFFI envs)) dom \i -> do
       -- todo: would makeEvent have a better memory profile here?
       evt <- create
       let
@@ -348,9 +365,7 @@ instance effectfulDOMInterpret ::
     noEta
   -- todo - can we avoid the double map?
   setSubgraph { id, envs } dom = setSubgraph_ id
-    ( map (\(a /\ b) -> { pos: a, env: b })
-        (Map.toUnfoldable (map (toNullable <<< map Left) envs))
-    )
+    (envsToFFI envs)
     (dom)
   setTumult { id, terminus, instructions } toFFI = setTumult_
     id
@@ -413,9 +428,9 @@ instance mixedDOMInterpret ::
   connectXToY a (x /\ y) = connectXToY a x /\ connectXToY a y
   disconnectXFromY a (x /\ y) = disconnectXFromY a x /\ disconnectXFromY a y
   destroyUnit a (x /\ y) = destroyUnit a x /\ destroyUnit a y
-  makeSubgraph { id, terminus, scenes } (x /\ y) =
-    makeSubgraph { id, terminus, scenes: map domEngine1st scenes } x /\
-      makeSubgraph { id, terminus, scenes: map domEngine2nd scenes } y
+  makeSubgraph { id, terminus, envs, scenes } (x /\ y) =
+    makeSubgraph { id, terminus, envs, scenes: map domEngine1st scenes } x /\
+      makeSubgraph { id, terminus, envs, scenes: map domEngine2nd scenes } y
   massiveCreate a (x /\ y) = massiveCreate a x /\ massiveCreate a y
   makeText a (x /\ y) = makeText a x /\ makeText a y
   makeRoot a (x /\ y) = makeRoot a x /\ makeRoot a y

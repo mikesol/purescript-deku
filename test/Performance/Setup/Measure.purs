@@ -61,7 +61,14 @@ compare browser n testType = do
     componentAverage = average componentResults
     dekuAverage = average dekuResults
 
-  pure { hookResults, hookAverage, componentResults, componentAverage, dekuResults, dekuAverage }
+  pure
+    { hookResults
+    , hookAverage
+    , componentResults
+    , componentAverage
+    , dekuResults
+    , dekuAverage
+    }
 
 compareOnce
   :: Browser

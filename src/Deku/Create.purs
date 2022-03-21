@@ -123,13 +123,13 @@ instance createSubgraph ::
   , R.Cons ptr (NodeC (CTOR.TSubgraph terminus env) {}) graphi grapho
   ) =>
   Create' ptr
-    (CTOR.Subgraph (CTOR.AsSubgraph terminus env push))
+    (CTOR.Subgraph terminus env push)
     graphi
     grapho where
   create' ptr w = o
     where
     { context: i, value } = unsafeUnDOM w
-    { subgraphMaker, terminus } = unsafeUnSubgraph value
+    { subgraphMaker, terminus, envs } = unsafeUnSubgraph value
     id = reflectSymbol ptr
     o =
       unsafeDOM
@@ -139,6 +139,7 @@ instance createSubgraph ::
                   [ makeSubgraph
                       { id
                       , terminus
+                      , envs
                       , scenes: unAsSubGraph subgraphMaker
                       }
                   ]

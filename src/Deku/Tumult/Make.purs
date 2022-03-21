@@ -22,7 +22,7 @@ import Deku.Validation (class NodesCanBeTumultuous, class SubgraphIsRenderable)
 import Prim.RowList (class RowToList)
 
 data Indecent
-  = E String (Array  {key::String, value::AttributeValue}) (Array Indecent)
+  = E String (Array { key :: String, value :: AttributeValue }) (Array Indecent)
   | T String
 
 derive instance genericIndecent :: Generic Indecent _

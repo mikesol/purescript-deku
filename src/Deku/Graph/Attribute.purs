@@ -46,7 +46,8 @@ unsafeAttribute
 unsafeAttribute = Attribute
 
 instance showAttribute :: Show (Attribute x) where
-  show (Attribute {key, value}) =
-    "(" <> key <> "," <> match {prop: \a -> a, cb: \_ -> "(callback)"} value <> ")"
+  show (Attribute { key, value }) =
+    "(" <> key <> "," <> match { prop: \a -> a, cb: \_ -> "(callback)" } value
+      <> ")"
 derive instance eqAttribute :: Eq (Attribute x)
 derive instance ordAttribute :: Ord (Attribute x)

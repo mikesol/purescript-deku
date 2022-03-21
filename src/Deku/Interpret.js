@@ -175,27 +175,30 @@ var doSortingOnSubgraphs = function (unit, sorting) {
 exports.makeSubgraph_ = function (ptr) {
 	return function (terminalPtr) {
 		return function (sceneM) {
-			return function (funkyFx) {
-				return function (state) {
-					return function () {
-						var children = {};
-						var scenes = {};
-						var funk = {};
-						var unsu = {};
-						state.units[ptr] = {
-							outgoing: [],
-							incoming: [],
-							sceneM: sceneM,
-							main: document.createElement("div"),
-							funkyFx: funkyFx,
-							terminalPtr: terminalPtr,
-							isSubgraph: true,
-							scenes: scenes,
-							children: children,
-							funk: funk,
-							unsu: unsu,
+			return function (envs) {
+				return function (funkyFx) {
+					return function (state) {
+						return function () {
+							var children = {};
+							var scenes = {};
+							var funk = {};
+							var unsu = {};
+							state.units[ptr] = {
+								outgoing: [],
+								incoming: [],
+								sceneM: sceneM,
+								main: document.createElement("div"),
+								funkyFx: funkyFx,
+								terminalPtr: terminalPtr,
+								isSubgraph: true,
+								scenes: scenes,
+								children: children,
+								funk: funk,
+								unsu: unsu,
+							};
+							state.units[ptr].main.setAttribute("style", "display:contents;");
+							setSubgraph_(ptr)(envs)(state)();
 						};
-						state.units[ptr].main.setAttribute("style", "display:contents;");
 					};
 				};
 			};
@@ -326,7 +329,7 @@ var setTumult_ = function (ptr) {
 	};
 };
 exports.setTumult_ = setTumult_;
-exports.setSubgraph_ = function (ptr) {
+var setSubgraph_ = function (ptr) {
 	return function (envs) {
 		return function (state) {
 			return function () {
@@ -393,6 +396,7 @@ exports.setSubgraph_ = function (ptr) {
 		};
 	};
 };
+exports.setSubgraph_ = setSubgraph_;
 exports.massiveCreate_ = function ($unSubgraph) {
 	return function ($makeSubgraph) {
 		return function ($makeTumult) {
@@ -495,6 +499,7 @@ var massiveCreateCreateStep_ = function ($prefix) {
 													id: key,
 													terminus: value.element.terminus,
 													scenes: $unSubgraph(value.element.subgraphMaker),
+													envs: value.element.envs
 												})(state)();
 											} else if (value.element.tumult !== undefined) {
 												$makeTumult({

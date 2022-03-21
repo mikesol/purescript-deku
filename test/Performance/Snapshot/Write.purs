@@ -18,30 +18,31 @@ import Performance.Snapshot (Snapshot)
 
 main :: Effect Unit
 main = launchAff_ do
-  bracket (Puppeteer.launch { headless: true }) Puppeteer.closeBrowser \browser -> do
-    liftEffect do
-      Puppeteer.filterConsole
-      catchException mempty (mkdir "test-results")
+  bracket (Puppeteer.launch { headless: true }) Puppeteer.closeBrowser
+    \browser -> do
+      liftEffect do
+        Puppeteer.filterConsole
+        catchException mempty (mkdir "test-results")
 
-    Console.log "Running state tests..."
-    state <- compare browser 6 StateTest
-    liftEffect do
-      writeSnapshot StateTest
-        { componentAverage: state.componentAverage
-        , hookAverage: state.hookAverage
-        , dekuAverage: state.dekuAverage
-        }
+      Console.log "Running state tests..."
+      state <- compare browser 6 StateTest
+      liftEffect do
+        writeSnapshot StateTest
+          { componentAverage: state.componentAverage
+          , hookAverage: state.hookAverage
+          , dekuAverage: state.dekuAverage
+          }
 
-    Console.log "Running todo tests..."
-    todo <- compare browser 6 TodoTest
-    liftEffect do
-      writeSnapshot TodoTest
-        { componentAverage: todo.componentAverage
-        , hookAverage: todo.hookAverage
-        , dekuAverage: todo.dekuAverage
-        }
+      Console.log "Running todo tests..."
+      todo <- compare browser 6 TodoTest
+      liftEffect do
+        writeSnapshot TodoTest
+          { componentAverage: todo.componentAverage
+          , hookAverage: todo.hookAverage
+          , dekuAverage: todo.dekuAverage
+          }
 
-    Console.log "Done with snapshots!"
+      Console.log "Done with snapshots!"
   where
   writeSnapshot :: TestType -> Snapshot -> Effect Unit
   writeSnapshot test snapshot = do
