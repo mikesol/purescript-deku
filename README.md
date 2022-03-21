@@ -2,9 +2,13 @@
 
 ![deku](./deku.gif)
 
-A PureScript web micro-framework.
+A PureScript web framework for apps that need to be fast.
 
-## Why?
+## Documentation
+
+[Here](https://mikesol.github.io/purescript-deku/) is a comprehensive guide to building apps with Deku. The guide is written in Deku and can be found [here](./examples/docs/).
+
+## Why another web framework?
 
 Deku aims to be:
 

@@ -1,4 +1,4 @@
-module Deku.Example.Docs.Example.Component where
+module Deku.Example.Docs.Example.SSR where
 
 import Prelude
 
