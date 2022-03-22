@@ -9,7 +9,7 @@ import Data.Argonaut.Core (stringifyWithIndent)
 import Data.HTTP.Method (Method(..))
 import Deku.Change (ichange_)
 import Deku.Create (icreate)
-import Deku.Graph.Attribute (Cb(..))
+import Deku.Graph.Attribute (Cb, cb)
 import Deku.Graph.DOM as D
 import Deku.Graph.DOM.Shorthand as S
 import Effect (Effect)
@@ -65,7 +65,7 @@ import Deku.Change (ichange_)
 import Deku.Control.Functions.Graph (iloop, (@!>))
 import Deku.Control.Types (Frame0, Scene)
 import Deku.Create (icreate)
-import Deku.Graph.Attribute (Cb(..))
+import Deku.Graph.Attribute (Cb, cb)
 import Deku.Graph.DOM ((:=), root)
 import Deku.Graph.DOM as D
 import Deku.Graph.DOM.Shorthand as S
@@ -82,7 +82,7 @@ import Web.HTML.HTMLElement (toElement)
 import Web.HTML.Window (document)
 
 clickCb :: (String -> Effect Unit) -> Cb
-clickCb push = Cb
+clickCb push = cb
   ( const do
       launchAff_ $ do
         result <- AX.request
@@ -178,7 +178,7 @@ main = do
                                   """In more complicated apps, like this documentation, we'll want to split up our components into sub-components and create a way for them to communicate back and forth. In the next section, we'll see one way to do this via """
                               )
                               /\ D.a
-                                [ D.OnClick := Cb
+                                [ D.OnClick := cb
                                     ( const $ dpage Subgraph *>
                                         scrollToTop
                                     )
@@ -197,7 +197,7 @@ main = do
   ) @!> freeze
 
 clickCb :: (String -> Effect Unit) -> Cb
-clickCb push = Cb
+clickCb push = cb
   ( const do
       launchAff_ $ do
         result <- AX.request
