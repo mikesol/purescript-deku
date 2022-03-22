@@ -23,7 +23,7 @@ import Deku.Example.Docs.Events as Events
 import Deku.Example.Docs.Effects as Effects
 import Deku.Example.Docs.SSR as SSR
 import Deku.Example.Docs.Subgraphs as Subgraph
-import Deku.Graph.Attribute (Cb(..))
+import Deku.Graph.Attribute (cb)
 import Deku.Graph.DOM (AsSubgraph(..), SubgraphSig, subgraph, (:=))
 import Deku.Graph.DOM as D
 import Deku.Graph.DOM.Shorthand as S
@@ -53,7 +53,7 @@ scene elt =
                               D.li []
                                 ( detup $
                                     D.a
-                                      [ D.OnClick := Cb (const $ push Intro)
+                                      [ D.OnClick := cb (const $ push Intro)
                                       , D.Style := "cursor:pointer;"
                                       ]
                                       (S.text "Home") /\ D.text " | " /\ unit
@@ -61,7 +61,7 @@ scene elt =
                                 /\ D.li []
                                   ( detup $
                                       D.a
-                                        [ D.OnClick := Cb
+                                        [ D.OnClick := cb
                                             (const $ push HelloWorld)
                                         , D.Style := "cursor:pointer;"
                                         ]
@@ -71,7 +71,7 @@ scene elt =
                                 /\ D.li []
                                   ( detup $
                                       D.a
-                                        [ D.OnClick := Cb
+                                        [ D.OnClick := cb
                                             (const $ push SimpleComponent)
                                         , D.Style := "cursor:pointer;"
                                         ]
@@ -81,7 +81,7 @@ scene elt =
                                 /\ D.li []
                                   ( detup $
                                       D.a
-                                        [ D.OnClick := Cb
+                                        [ D.OnClick := cb
                                             (const $ push Events)
                                         , D.Style := "cursor:pointer;"
                                         ]
@@ -91,7 +91,7 @@ scene elt =
                                 /\ D.li []
                                   ( detup $
                                       D.a
-                                        [ D.OnClick := Cb
+                                        [ D.OnClick := cb
                                             (const $ push Effects)
                                         , D.Style := "cursor:pointer;"
                                         ]
@@ -101,7 +101,7 @@ scene elt =
                                 /\ D.li []
                                   ( detup $
                                       D.a
-                                        [ D.OnClick := Cb
+                                        [ D.OnClick := cb
                                             (const $ push Subgraph)
                                         , D.Style := "cursor:pointer;"
 
@@ -112,7 +112,7 @@ scene elt =
                                 /\ D.li []
                                   ( detup $
                                       D.a
-                                        [ D.OnClick := Cb (const $ push SSR)
+                                        [ D.OnClick := cb (const $ push SSR)
                                         , D.Style := "cursor:pointer;"
                                         ]
                                         (S.text "SSR") /\

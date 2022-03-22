@@ -220,12 +220,12 @@ instance toGraphEffectsMake{term} ::
             for att in v:
                 term2 = bigtag(att)
                 print_(f'''instance Attr {term2} {term} String where
-  attr {term} value = unsafeAttribute {{ key: "{asattr(k)}", value: prop value }}
+  attr {term} value = unsafeAttribute {{ key: "{asattr(k)}", value: prop' value }}
 ''')
         for x in GLOBAL_EVENT_HANDLERS:
             term = 'On'+x.capitalize()
             print_(f'''instance Attr anything {term} Cb where
-  attr {term} value = unsafeAttribute {{ key: "{x}", value: cb value }}''')
+  attr {term} value = unsafeAttribute {{ key: "{x}", value: cb' value }}''')
     else:
       raise ValueError('wat')
     return '\n'.join(o)

@@ -3,7 +3,8 @@ module Deku.Graph.Attribute
   , Attribute
   , unsafeUnAttribute
   , unsafeAttribute
-  , prop
+  , prop'
+  , cb'
   , cb
   , Cb(..)
   ) where
@@ -16,7 +17,7 @@ import Effect (Effect)
 import Type.Proxy (Proxy(..))
 import Web.Event.Internal.Types (Event)
 
-newtype Cb = Cb (Event -> Effect Unit)
+newtype Cb = Cb (Event -> Effect Boolean)
 derive instance newtypeCb :: Newtype Cb _
 instance eqCb :: Eq Cb where
   eq _ _ = false
@@ -25,11 +26,14 @@ instance ordCb :: Ord Cb where
 instance showCb :: Show Cb where
   show _ = "{callback}"
 
-prop :: String -> AttributeValue
-prop = inj (Proxy :: _ "prop")
+cb :: (Event -> Effect Unit) -> Cb
+cb = Cb <<< ((map <<< map) (const true))
 
-cb :: Cb -> AttributeValue
-cb = inj (Proxy :: _ "cb")
+prop' :: String -> AttributeValue
+prop' = inj (Proxy :: _ "prop")
+
+cb' :: Cb -> AttributeValue
+cb' = inj (Proxy :: _ "cb")
 
 type AttributeValue = Variant (prop :: String, cb :: Cb)
 newtype Attribute (e :: Type) = Attribute

@@ -10,7 +10,7 @@ import Deku.Change (ichange_)
 import Deku.Control.Functions.Graph (iloop, (@!>))
 import Deku.Control.Types (Frame0, Scene)
 import Deku.Create (icreate)
-import Deku.Graph.Attribute (Cb(..))
+import Deku.Graph.Attribute (cb)
 import Deku.Graph.DOM ((:=))
 import Deku.Graph.DOM as DOM
 import Deku.Interpret (makeFFIDOMSnapshot)
@@ -83,7 +83,7 @@ scene notifyEnd elt =
               { dv: DOM.div []
                   { btn: DOM.button
                       [ DOM.Id := (testToString StateDeku <> startSuffix)
-                      , DOM.OnClick := Cb
+                      , DOM.OnClick := cb
                           ( const $ do
                               ref <- Ref.new state
                               let modify = flip Ref.modify ref

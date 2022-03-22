@@ -8,7 +8,7 @@ import Data.Tuple.Nested ((/\))
 import Deku.Control.Functions (freeze, (@!>))
 import Deku.Create (icreate)
 import Deku.Example.Docs.Util (scrollToTop)
-import Deku.Graph.Attribute (Cb(..))
+import Deku.Graph.Attribute (cb)
 import Deku.Graph.DOM (ResolvedSubgraphSig, (:=))
 import Deku.Graph.DOM as D
 import Deku.Graph.DOM.Shorthand as S
@@ -260,7 +260,7 @@ main = do
                         ( detup $
                             D.span []
                               ( S.text
-                                  """In this section, we built a simple component out of records. We used several record-shorthand functions, including the  """
+                                  """In this section, we built a simple component out of records. We used several record-shorthand functions, including the """
                               ) /\ D.code [] (S.text "detup") /\ D.text ", the"
                               /\ D.code [] (S.text "vex")
                               /\ D.text ", and the "
@@ -268,7 +268,7 @@ main = do
                               /\ D.text
                                 " family of functions. We also saw how to add attributes to elements. In the next section, we'll learn how to respond to "
                               /\ D.a
-                                [ D.OnClick := Cb
+                                [ D.OnClick := cb
                                     ( const $ dpage Events *>
                                         scrollToTop
                                     )

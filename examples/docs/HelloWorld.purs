@@ -7,7 +7,7 @@ import Deku.Control.Functions (freeze, (@!>))
 import Deku.Create (icreate)
 import Deku.Example.Docs.Types (Page(..))
 import Deku.Example.Docs.Util (scrollToTop)
-import Deku.Graph.Attribute (Cb(..))
+import Deku.Graph.Attribute (cb)
 import Deku.Graph.DOM (ResolvedSubgraphSig, (:=))
 import Deku.Graph.DOM as D
 import Deku.Graph.DOM.Shorthand as S
@@ -233,7 +233,7 @@ main = do
                                   """Now that you can say hello to the world, let's explore some classic DOM tags like Anchor and Button by introducing a """
                               )
                               /\ D.a
-                                [ D.OnClick := Cb
+                                [ D.OnClick := cb
                                     ( const $ dpage SimpleComponent *>
                                         scrollToTop
                                     )

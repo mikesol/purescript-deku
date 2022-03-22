@@ -37,7 +37,7 @@ import Data.Tuple.Nested (type (/\), (/\))
 import Data.Typelevel.Undefined (undefined)
 import Data.Variant (match)
 import Deku.Control.Types (Frame0, SubScene(..), oneSubFrame)
-import Deku.Graph.Attribute (prop)
+import Deku.Graph.Attribute (prop')
 import Deku.Rendered (Instruction)
 import Deku.Rendered as R
 import Deku.Tumult.Reconciliation (reconcileTumult)
@@ -297,12 +297,12 @@ interpretInstruction = unwrap >>> match
   , makeSubgraph: \{ id } -> makeElement
       { id
       , tag: "div"
-      , attributes: [ { key: "style", value: prop "display:content;" } ]
+      , attributes: [ { key: "style", value: prop' "display:content;" } ]
       }
   , makeTumult: \{ id } -> makeElement
       { id
       , tag: "div"
-      , attributes: [ { key: "style", value: prop "display:content;" } ]
+      , attributes: [ { key: "style", value: prop' "display:content;" } ]
       }
   -----------------------------------
   , connectXToY: \a -> connectXToY a
@@ -310,9 +310,9 @@ interpretInstruction = unwrap >>> match
   , massiveChange: \a -> massiveChange a
   , setAttribute: \a -> setAttribute a
   , setSubgraph: \{ id } -> setAttribute
-      { id, key: "devnull", value: prop "true" }
+      { id, key: "devnull", value: prop' "true" }
   , setTumult: \{ id } -> setAttribute
-      { id, key: "devnull", value: prop "true" }
+      { id, key: "devnull", value: prop' "true" }
   }
 
 envsToFFI

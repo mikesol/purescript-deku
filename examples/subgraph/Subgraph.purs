@@ -16,7 +16,7 @@ import Deku.Control.Functions.Graph (iloop, (@!>))
 import Deku.Control.Functions.Subgraph as SG
 import Deku.Control.Types (Frame0, Scene)
 import Deku.Create (icreate)
-import Deku.Graph.Attribute (Cb(..))
+import Deku.Graph.Attribute (cb)
 import Deku.Graph.DOM (AsSubgraph(..), xsubgraph, Href(..), OnClick(..), a, a'attr, root, subgraph, text, (:=))
 import Deku.Graph.DOM as D
 import Deku.Interpret (makeFFIDOMSnapshot)
@@ -43,7 +43,7 @@ scene elt =
               root elt
                 { hello: D.div []
                     { hello: a
-                        [ Href := "#", OnClick := Cb (const $ push0 Hello) ]
+                        [ Href := "#", OnClick := cb (const $ push0 Hello) ]
                         { ht: text "click" }
                     , helloA: subgraph (falsy 40)
                         ( AsSubgraph \i -> SG.istart
@@ -51,7 +51,7 @@ scene elt =
                                 ( icreate
                                     { myA: a
                                         [ Href := "#"
-                                        , OnClick := Cb
+                                        , OnClick := cb
                                             ( const $ do
                                                 push false
                                                 when (i == 4) (push0 Hello)
@@ -67,7 +67,7 @@ scene elt =
                                     ichange_ { "myA.myTxt": "banana" }
                                   Right tf -> ichange_
                                     { "myA": a'attr
-                                        [ OnClick := Cb (const $ push (not tf))
+                                        [ OnClick := cb (const $ push (not tf))
                                         ]
                                     , "myA.myTxt": if tf then " me " else " em "
                                     }
@@ -75,7 +75,7 @@ scene elt =
                         )
                     }
                 , world: D.div []
-                    { wA: a [ Href := "#", OnClick := Cb (const $ push0 World) ]
+                    { wA: a [ Href := "#", OnClick := cb (const $ push0 World) ]
                         { ht: text "click" }
                     , wB: subgraph (falsy 10)
                         ( AsSubgraph \i -> SG.istart
@@ -83,7 +83,7 @@ scene elt =
                                 ( icreate
                                     { myA: a
                                         [ Href := "#"
-                                        , OnClick := Cb
+                                        , OnClick := cb
                                             ( const $ do
                                                 push false
                                                 when (i == 11) (push0 Hello)
@@ -101,7 +101,7 @@ scene elt =
                                   Right tf ->
                                     ichange_
                                       { "myA": a'attr
-                                          [ OnClick := Cb
+                                          [ OnClick := cb
                                               (const $ push (not tf))
                                           ]
                                       , "myA.myTxt":

@@ -8,7 +8,7 @@ import Deku.Change (ichange_)
 import Deku.Control.Functions.Graph (iloop, (@!>))
 import Deku.Control.Types (Frame0, Scene)
 import Deku.Create (icreate)
-import Deku.Graph.Attribute (Cb(..))
+import Deku.Graph.Attribute (cb)
 import Deku.Graph.DOM (OnClick(..), Href(..), a, a'attr, root, text, (:=))
 import Deku.Interpret (makeFFIDOMSnapshot)
 import Deku.Run (RunDOM, RunEngine, TriggeredScene, defaultOptions, run)
@@ -28,7 +28,7 @@ scene elt =
       ( icreate $
           root elt
             { hello: text "click "
-            , helloA: a [ Href := "#", OnClick := Cb (const $ push false) ]
+            , helloA: a [ Href := "#", OnClick := cb (const $ push false) ]
                 { world: text "me" }
             }
       )
@@ -37,7 +37,7 @@ scene elt =
       Left _ -> pure unit
       Right tf -> ichange_
         { "root.hello": if tf then "click " else "kcilc "
-        , "root.helloA": a'attr [ OnClick := Cb (const $ push (not tf)) ]
+        , "root.helloA": a'attr [ OnClick := cb (const $ push (not tf)) ]
         }
 
 main :: Effect Unit

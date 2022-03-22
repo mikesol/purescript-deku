@@ -11,7 +11,7 @@ import Deku.Control.Functions (freeze, iloop, (@!>))
 import Deku.Create (icreate)
 import Deku.Example.Docs.Types (Page(..))
 import Deku.Example.Docs.Util (scrollToTop)
-import Deku.Graph.Attribute (Cb(..))
+import Deku.Graph.Attribute (cb)
 import Deku.Graph.DOM (AsSubgraph(..), ResolvedSubgraphSig, SubgraphSig, subgraph, xsubgraph, (:=))
 import Deku.Graph.DOM (ResolvedSubgraphSig, SubgraphSig, subgraph, (:=))
 import Deku.Graph.DOM as D
@@ -40,12 +40,12 @@ sub raise Sg0 =
       ( icreate $ S.div []
           ( { div1: D.div []
                 { button0: D.button
-                    [ D.OnClick := Cb (const $ raise Sg0)
+                    [ D.OnClick := cb (const $ raise Sg0)
                     ]
                     (S.text "Send to B")
                 , count0: D.div [] (S.text ("A: 0"))
                 , button1: D.button
-                    [ D.OnClick := Cb (const $ push unit)
+                    [ D.OnClick := cb (const $ push unit)
                     ]
                     (S.text "Send to C")
                 , count1: D.div [] (S.text ("C: 0"))
@@ -74,14 +74,14 @@ sub raise Sg1 =
       ( icreate $ S.div []
           ( { div1: D.div []
                 { button0: D.a
-                    [ D.OnClick := Cb (const $ raise Sg1)
+                    [ D.OnClick := cb (const $ raise Sg1)
                     , D.Style := "cursor:pointer;"
 
                     ]
                     (S.text "Send to A")
                 , count0: D.div [] (S.text "B: 0")
                 , button1: D.a
-                    [ D.OnClick := Cb (const $ push unit)
+                    [ D.OnClick := cb (const $ push unit)
                     , D.Style := "cursor:pointer;"
 
                     ]
@@ -176,7 +176,7 @@ import Deku.Change (ichange_)
 import Deku.Control.Functions (iloop, (@!>))
 import Deku.Control.Types (Frame0, Scene)
 import Deku.Create (icreate)
-import Deku.Graph.Attribute (Cb(..))
+import Deku.Graph.Attribute (cb)
 import Deku.Graph.DOM (AsSubgraph(..), SubgraphSig, root, xsubgraph, (:=))
 import Deku.Graph.DOM as D
 import Deku.Graph.DOM.Shorthand as S
@@ -205,12 +205,12 @@ sub raise Sg0 =
       ( icreate $ S.div []
           ( { div1: D.div []
                 { button0: D.button
-                    [ D.OnClick := Cb (const $ raise Sg0)
+                    [ D.OnClick := cb (const $ raise Sg0)
                     ]
                     (S.text "Send to B")
                 , count0: D.div [] (S.text ("A: 0"))
                 , button1: D.button
-                    [ D.OnClick := Cb (const $ push unit)
+                    [ D.OnClick := cb (const $ push unit)
                     ]
                     (S.text "Send to C")
                 , count1: D.div [] (S.text ("C: 0"))
@@ -239,14 +239,14 @@ sub raise Sg1 =
       ( icreate $ S.div []
           ( { div1: D.div []
                 { button0: D.a
-                    [ D.OnClick := Cb (const $ raise Sg1)
+                    [ D.OnClick := cb (const $ raise Sg1)
                     , D.Style := "cursor:pointer;"
 
                     ]
                     (S.text "Send to A")
                 , count0: D.div [] (S.text "B: 0")
                 , button1: D.a
-                    [ D.OnClick := Cb (const $ push unit)
+                    [ D.OnClick := cb (const $ push unit)
                     , D.Style := "cursor:pointer;"
 
                     ]
@@ -330,7 +330,7 @@ main = do
                       /\ D.p []
                         ( detup $ D.text "In the "
                             /\ D.a
-                              [ D.OnClick := Cb
+                              [ D.OnClick := cb
                                   ( const $ dpage Events *>
                                       scrollToTop
                                   )
@@ -387,7 +387,7 @@ main = do
                             D.text
                               """In the example above, this is done via the first argument to the """
                               /\ D.code []
-                                ( S.texte
+                                ( S.text
                                     "sub"
                                 )
                               /\ D.text
@@ -520,7 +520,7 @@ main = do
                                 D.text
                                   "In addition to webpage rendering, Deku supports basic server-side rendering capabilities. Let's see how in the "
                                   /\ D.a
-                                    [ D.OnClick := Cb
+                                    [ D.OnClick := cb
                                         ( const $ dpage SSR *>
                                             scrollToTop
                                         )

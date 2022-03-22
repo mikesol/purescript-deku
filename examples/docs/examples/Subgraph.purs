@@ -12,7 +12,7 @@ import Deku.Change (ichange_)
 import Deku.Control.Functions (iloop, (@!>))
 import Deku.Control.Types (Frame0, Scene)
 import Deku.Create (icreate)
-import Deku.Graph.Attribute (Cb(..))
+import Deku.Graph.Attribute (cb)
 import Deku.Graph.DOM (AsSubgraph(..), SubgraphSig, root, xsubgraph, (:=))
 import Deku.Graph.DOM as D
 import Deku.Graph.DOM.Shorthand as S
@@ -41,12 +41,12 @@ sub raise Sg0 =
       ( icreate $ S.div []
           ( { div1: D.div []
                 { button0: D.button
-                    [ D.OnClick := Cb (const $ raise Sg0)
+                    [ D.OnClick := cb (const $ raise Sg0)
                     ]
                     (S.text "Send to B")
                 , count0: D.div [] (S.text ("A: 0"))
                 , button1: D.button
-                    [ D.OnClick := Cb (const $ push unit)
+                    [ D.OnClick := cb (const $ push unit)
                     ]
                     (S.text "Send to C")
                 , count1: D.div [] (S.text ("C: 0"))
@@ -75,14 +75,14 @@ sub raise Sg1 =
       ( icreate $ S.div []
           ( { div1: D.div []
                 { button0: D.a
-                    [ D.OnClick := Cb (const $ raise Sg1)
+                    [ D.OnClick := cb (const $ raise Sg1)
                     , D.Style := "cursor:pointer;"
 
                     ]
                     (S.text "Send to A")
                 , count0: D.div [] (S.text "B: 0")
                 , button1: D.a
-                    [ D.OnClick := Cb (const $ push unit)
+                    [ D.OnClick := cb (const $ push unit)
                     , D.Style := "cursor:pointer;"
 
                     ]

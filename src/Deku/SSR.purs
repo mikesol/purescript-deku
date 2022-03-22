@@ -11,7 +11,7 @@ import Data.Maybe (Maybe(..))
 import Data.Traversable (sequence)
 import Data.Variant (match, on)
 import Deku.Control.Types (Frame0, SubScene)
-import Deku.Graph.Attribute (AttributeValue, prop)
+import Deku.Graph.Attribute (AttributeValue, prop')
 import Deku.Interpret (AsSubgraphHack(..), SubgraphInput, connectXToY, makeElement, makeRoot, makeSubgraph, makeText, makeTumult)
 import Deku.Rendered (Instruction(..))
 import Deku.Rendered as R
@@ -184,7 +184,7 @@ ssr' tmus hd a = o
     ( if hd then insert "root"
         ( Right
             { tag: "div"
-            , attributes: [ { key: "style", value: prop "display:content;" } ]
+            , attributes: [ { key: "style", value: prop' "display:content;" } ]
             , incoming: Nil
             }
         )

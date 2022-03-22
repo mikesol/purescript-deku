@@ -12,7 +12,7 @@ import Deku.Control.Functions (freeze, iloop, (@!>))
 import Deku.Create (icreate)
 import Deku.Example.Docs.Types (Page(..))
 import Deku.Example.Docs.Util (scrollToTop)
-import Deku.Graph.Attribute (Cb(..))
+import Deku.Graph.Attribute (cb)
 import Deku.Graph.DOM (AsSubgraph(..), ResolvedSubgraphSig, SubgraphSig, subgraph, (:=))
 import Deku.Graph.DOM (ResolvedSubgraphSig, SubgraphSig, subgraph, (:=))
 import Deku.Graph.DOM as D
@@ -55,7 +55,7 @@ import Deku.Change (ichange_)
 import Deku.Control.Functions.Graph (iloop, (@!>))
 import Deku.Control.Types (Frame0, Scene)
 import Deku.Create (icreate)
-import Deku.Graph.Attribute (Cb(..))
+import Deku.Graph.Attribute (cb(..))
 import Deku.Graph.DOM ((:=), root)
 import Deku.Graph.DOM as D
 import Deku.Graph.DOM.Shorthand as S
@@ -86,7 +86,7 @@ scene elt =
           ( { div1: D.div []
                 { button: D.button
                     [ D.OnClick :=
-                        Cb (const $ push ButtonClicked)
+                        cb (const $ push ButtonClicked)
                     ]
                     (S.text "Click")
                 , count: D.div [] (S.text "Val: 0")
@@ -94,7 +94,7 @@ scene elt =
             , div2: D.div []
                 { slider: D.input
                     [ D.Xtype := "range"
-                    , D.OnInput := Cb \e -> for_
+                    , D.OnInput := cb \e -> for_
                         ( target e
                             >>= fromEventTarget
                             >>= fromElement
@@ -166,7 +166,7 @@ main = do
                               /\ D.code [] (S.text "Cb")
                               /\ D.text
                                 """. This type is a newtype around"""
-                              /\ D.code [] (S.text "(Event -> Effect Unit)")
+                              /\ D.code [] (S.text "(Event -> Effect Boolean)")
                               /\ D.text
                                 """. In order to actually trigger the event, you'll use the"""
                               /\ D.code [] (S.text "push")
@@ -293,7 +293,7 @@ main = do
                               /\ D.text
                                 ". In the next section, we'll use a similar mechanism to deal with arbitrary "
                               /\ D.a
-                                [ D.OnClick := Cb
+                                [ D.OnClick := cb
                                     ( const $ dpage Effects *>
                                         scrollToTop
                                     )
@@ -319,7 +319,7 @@ sg _ =
       ( icreate $ S.div []
           ( { div1: D.div []
                 { button: D.button
-                    [ D.OnClick := Cb (const $ push ButtonClicked)
+                    [ D.OnClick := cb (const $ push ButtonClicked)
                     ]
                     (S.text "Click")
                 , count: D.div [] (S.text "Val: 0")
@@ -327,7 +327,7 @@ sg _ =
             , div2: D.div []
                 { slider: D.input
                     [ D.Xtype := "range"
-                    , D.OnInput := Cb \e -> for_
+                    , D.OnInput := cb \e -> for_
                         (target e >>= fromEventTarget >>= fromElement)
                         (valueAsNumber >=> push <<< SliderMoved)
                     ]

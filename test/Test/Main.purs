@@ -9,7 +9,7 @@ import Deku.Control.Functions (imodifyRes)
 import Deku.Control.Functions.Graph (freeze, (@!>))
 import Deku.Control.Types (oneFrame)
 import Deku.Create (icreate)
-import Deku.Graph.Attribute (prop)
+import Deku.Graph.Attribute (prop')
 import Deku.Graph.DOM (root)
 import Deku.Graph.DOM as DOM
 import Deku.SSR (ssr)
@@ -45,7 +45,7 @@ main = launchAff_ $ runSpec [ consoleReporter ] do
         `shouldEqual` Just
           ( E "div"
               [ { key: "style"
-                , value: (prop "display:content;")
+                , value: (prop' "display:content;")
                 }
               ]
               [ (E "button" [] [ (T "hi") ]) ]

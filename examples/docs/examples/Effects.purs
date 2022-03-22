@@ -12,7 +12,7 @@ import Deku.Change (ichange_)
 import Deku.Control.Functions.Graph (iloop, (@!>))
 import Deku.Control.Types (Frame0, Scene)
 import Deku.Create (icreate)
-import Deku.Graph.Attribute (Cb(..))
+import Deku.Graph.Attribute (Cb, cb)
 import Deku.Graph.DOM ((:=), root)
 import Deku.Graph.DOM as D
 import Deku.Graph.DOM.Shorthand as S
@@ -29,7 +29,7 @@ import Web.HTML.HTMLElement (toElement)
 import Web.HTML.Window (document)
 
 clickCb :: (String -> Effect Unit) -> Cb
-clickCb push = Cb
+clickCb push = cb
   ( const do
       launchAff_ $ do
         result <- AX.request

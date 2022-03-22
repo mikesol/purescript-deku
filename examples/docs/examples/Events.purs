@@ -8,7 +8,7 @@ import Deku.Change (ichange_)
 import Deku.Control.Functions.Graph (iloop, (@!>))
 import Deku.Control.Types (Frame0, Scene)
 import Deku.Create (icreate)
-import Deku.Graph.Attribute (Cb(..))
+import Deku.Graph.Attribute (cb)
 import Deku.Graph.DOM ((:=), root)
 import Deku.Graph.DOM as D
 import Deku.Graph.DOM.Shorthand as S
@@ -39,7 +39,7 @@ scene elt =
           ( { div1: D.div []
                 { button: D.button
                     [ D.OnClick :=
-                        Cb (const $ push ButtonClicked)
+                        cb (const $ push ButtonClicked)
                     ]
                     (S.text "Click")
                 , count: D.div [] (S.text "Val: 0")
@@ -47,7 +47,7 @@ scene elt =
             , div2: D.div []
                 { slider: D.input
                     [ D.Xtype := "range"
-                    , D.OnInput := Cb \e -> for_
+                    , D.OnInput := cb \e -> for_
                         ( target e
                             >>= fromEventTarget
                             >>= fromElement

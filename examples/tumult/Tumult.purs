@@ -12,7 +12,7 @@ import Deku.Change (ichange_)
 import Deku.Control.Functions.Graph (iloop, (@!>))
 import Deku.Control.Types (Frame0, Scene)
 import Deku.Create (icreate)
-import Deku.Graph.Attribute (Cb(..))
+import Deku.Graph.Attribute (cb)
 import Deku.Graph.DOM (OnClick(..), Href(..), a, root, text, tumult, (:=))
 import Deku.Interpret (makeFFIDOMSnapshot)
 import Deku.Run (RunDOM, RunEngine, TriggeredScene, defaultOptions, run)
@@ -32,7 +32,7 @@ scene elt =
   ( \_ push0 ->
       ( icreate $
           root elt
-            { hello: a [ Href := "#", OnClick := Cb (const $ push0 unit) ]
+            { hello: a [ Href := "#", OnClick := cb (const $ push0 unit) ]
                 { ht: text "click" }
             , helloTum0: tumult
                 ( tumultuously

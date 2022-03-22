@@ -14,7 +14,7 @@ import Deku.Change (ichange_)
 import Deku.Control.Functions.Graph as G
 import Deku.Control.Functions.Subgraph (freeze, iloop, (@!>))
 import Deku.Create (icreate)
-import Deku.Graph.Attribute (Cb(..))
+import Deku.Graph.Attribute (cb)
 import Deku.Graph.DOM (xsubgraph, (:=))
 import Deku.Graph.DOM as DOM
 import Deku.Interpret (makeFFIDOMSnapshot)
@@ -81,7 +81,7 @@ containerD cstate = DOM.subgraph (singleton 0 (Just unit)) $ DOM.AsSubgraph
             { ctr: DOM.div []
                 { btn: DOM.button
                     [ DOM.Id := Shared.addNewId
-                    , DOM.OnClick := Cb
+                    , DOM.OnClick := cb
                         (const $ Shared.mkTodo ln >>= push)
                     ]
                     { txt: DOM.text "Add New" }
@@ -104,7 +104,7 @@ containerD cstate = DOM.subgraph (singleton 0 (Just unit)) $ DOM.AsSubgraph
             )
 
         , "ctr.btn": DOM.button'attr
-            [ DOM.OnClick := Cb (const $ Shared.mkTodo (ln + 1) >>= push)
+            [ DOM.OnClick := cb (const $ Shared.mkTodo (ln + 1) >>= push)
             ]
         }
 
