@@ -4,7 +4,7 @@ import Prelude
 
 import Data.Either (Either(..))
 import Data.Foldable (for_)
-import Deku.Change (ichange_)
+import Deku.Change (ichange)
 import Deku.Control.Functions.Graph (iloop, (@!>))
 import Deku.Control.Types (Frame0, Scene)
 import Deku.Create (icreate)
@@ -35,7 +35,7 @@ scene elt =
   ) @!> iloop \e push _ ->
     case e of
       Left _ -> pure unit
-      Right tf -> ichange_
+      Right tf -> ichange
         { "root.hello": if tf then "click " else "kcilc "
         , "root.helloA": a'attr [ OnClick := cb (const $ push (not tf)) ]
         }

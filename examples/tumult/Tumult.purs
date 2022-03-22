@@ -8,7 +8,7 @@ import Data.Foldable (for_)
 import Data.Map as Map
 import Data.Maybe (Maybe(..))
 import Data.Tuple.Nested ((/\))
-import Deku.Change (ichange_)
+import Deku.Change (ichange)
 import Deku.Control.Functions.Graph (iloop, (@!>))
 import Deku.Control.Types (Frame0, Scene)
 import Deku.Create (icreate)
@@ -53,7 +53,7 @@ scene elt =
   ) @!> iloop \e _ lmt ->
     lmt + 1 <$ case e of
       Left _ -> pure unit
-      Right _ -> ichange_
+      Right _ -> ichange
         { "root.helloTum0":
             ( tumultuously
                 ( Map.fromFoldable

@@ -5,7 +5,6 @@ module Deku.CreateT where
 
 import Prelude
 
-import Deku.Connect (class ConnectT)
 import Deku.Graph.DOM (Element)
 import Deku.Graph.DOM as CTOR
 import Deku.Graph.Graph (Graph)
@@ -15,6 +14,18 @@ import Prim.Row as R
 import Prim.RowList as RL
 import Prim.Symbol as Sym
 
+class
+  ConnectT (source :: Symbol) (dest :: Symbol) (i :: Graph) (o :: Graph)
+  | source dest i -> o
+
+instance connectTInstance ::
+  ( R.Cons from ignore0 ignore1 graphi
+  , R.Cons to (NodeC n { | e }) newg graphi
+  , R.Lacks from e
+  , R.Cons from Unit e e'
+  , R.Cons to (NodeC n { | e' }) newg grapho
+  ) =>
+  ConnectT from to graphi grapho
 class
   CreateStepT
     (prefix :: Symbol)

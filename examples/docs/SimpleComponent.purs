@@ -154,24 +154,6 @@ main = do
                                 """-prefixed functions produce records."""
                               /\ unit
                         )
-                      /\ D.p []
-                        ( detup $
-                            D.text
-                              """Another thing to note is the import of """
-                              /\ D.code []
-                                ( S.text
-                                    "import Deku.Control.Functions.Graph (freeze, (@!>))"
-                                )
-                              /\ D.text
-                                """. This works fine for small examples, but for larger ones, you'll want to use """
-                              /\ D.code []
-                                ( S.text
-                                    "import Deku.Control.Functions (freeze, (@!>))"
-                                )
-                              /\ D.text
-                                """. The second version of those functions is much faster to compile at the expense of missing certain subtle bugs in corner cases. In 99% of cases, you'll want to use the second version, using the first only in acceptance testing on a CI platform if needed."""
-                              /\ unit
-                        )
                       /\ D.h2 [] (S.text "Straight-up records")
                       /\ D.p []
                         ( detup $

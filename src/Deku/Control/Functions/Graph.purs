@@ -44,7 +44,7 @@ makeScene
   :: forall env dom engine proofA push res graph a
    . Monoid res
   => DOMInterpret dom engine
-  => GraphIsRenderable graph
+
   => ( Either env push
        -> (push -> Effect Unit)
        -> Either (Scene env dom engine proofA push res)
@@ -63,7 +63,7 @@ makeSceneFlipped
   :: forall env dom engine proofA push res graph a
    . Monoid res
   => DOMInterpret dom engine
-  => GraphIsRenderable graph
+
   => ( forall proofB
         . DOM dom engine proofB res graph a
        -> Scene env dom engine proofB push res
@@ -99,7 +99,7 @@ infixr 6 makeSceneFlipped as <@
 loop
   :: forall env dom engine proofA push res graph a
    . Monoid res
-  => GraphIsRenderable graph
+
   => DOMInterpret dom engine
   => ( forall proofB
         . DOM dom engine proofB res graph a
@@ -114,7 +114,7 @@ loop = Functions.loop
 iloop
   :: forall env dom engine proofA push res graph a
    . Monoid res
-  => GraphIsRenderable graph
+
   => DOMInterpret dom engine
   => ( forall proofB
         . Either env push
@@ -129,7 +129,7 @@ iloop = Functions.iloop
 branch
   :: forall env dom engine proofA push res graph a
    . Monoid res
-  => GraphIsRenderable graph
+
   => DOMInterpret dom engine
   => ( forall proofB
         . DOM dom engine proofB res graph a
@@ -145,7 +145,7 @@ branch = Functions.branch
 ibranch
   :: forall env dom engine proofA push res graph a
    . Monoid res
-  => GraphIsRenderable graph
+
   => DOMInterpret dom engine
   => ( forall proofB
         . Either env push
@@ -183,7 +183,7 @@ startUsing
   :: forall env dom engine push res subgraphs tumults graph control
    . Monoid res
   => DOMInterpret dom engine
-  => GraphIsRenderable graph
+
   => GetSubgraphs graph subgraphs
   => GetTumults graph tumults
   => Patch subgraphs tumults () graph
@@ -201,7 +201,7 @@ startUsingWithHint
        control
    . Monoid res
   => DOMInterpret dom engine
-  => GraphIsRenderable graph
+
   => GraphHint hintable hint
   => CreateT hint () graph
   => GetSubgraphs graph subgraphs
@@ -223,7 +223,7 @@ loopUsingScene
   => DOMInterpret dom engine
   => Create scene () graph
   => Change scene graph
-  => GraphIsRenderable graph
+
   => ( env
        -> (push -> Effect Unit)
        -> control
@@ -244,7 +244,7 @@ loopUsingSceneWithRes
   => DOMInterpret dom engine
   => Create scene () graph
   => Change scene graph
-  => GraphIsRenderable graph
+
   => ( env
        -> (push -> Effect Unit)
        -> control
@@ -262,7 +262,7 @@ loopUsingSceneWithRes = Functions.loopUsingSceneWithRes
 freeze
   :: forall env dom engine proof push res graph x
    . Monoid res
-  => GraphIsRenderable graph
+
   => DOMInterpret dom engine
   => DOM dom engine proof res graph x
   -> Scene env dom engine proof push res
@@ -271,7 +271,7 @@ freeze = Functions.freeze
 makeSceneR
   :: forall env dom engine proofA push res graph a
    . Monoid res
-  => GraphIsRenderable graph
+
   => DOMInterpret dom engine
   => ( Either env push
        -> (push -> Effect Unit)
@@ -289,7 +289,7 @@ infixr 6 makeSceneR as @|>
 makeSceneRFlipped
   :: forall env dom engine proofA push res graph a
    . Monoid res
-  => GraphIsRenderable graph
+
   => DOMInterpret dom engine
   => ( forall proofB
         . DOM dom engine proofB res graph a
@@ -307,7 +307,7 @@ infixr 6 makeSceneRFlipped as <|@
 makeSceneR'
   :: forall env dom engine proofA push res graph a
    . Monoid res
-  => GraphIsRenderable graph
+
   => DOMInterpret dom engine
   => DOM dom engine proofA res graph a
   -> ( forall proofB
@@ -322,7 +322,7 @@ infixr 6 makeSceneR' as @||>
 makeSceneR'Flipped
   :: forall env dom engine proofA push res graph a
    . Monoid res
-  => GraphIsRenderable graph
+
   => DOMInterpret dom engine
   => ( forall proofB
         . DOM dom engine proofB res graph a

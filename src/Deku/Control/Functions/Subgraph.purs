@@ -44,7 +44,7 @@ makeScene
   :: forall terminus env dom engine proofA push res graph a
    . Monoid res
   => DOMInterpret dom engine
-  => SubgraphIsRenderable graph terminus
+
   => ( Either env push
        -> (push -> Effect Unit)
        -> Either (SubScene terminus env dom engine proofA push res)
@@ -63,7 +63,7 @@ makeSceneFlipped
   :: forall terminus env dom engine proofA push res graph a
    . Monoid res
   => DOMInterpret dom engine
-  => SubgraphIsRenderable graph terminus
+
   => ( forall proofB
         . DOM dom engine proofB res graph a
        -> SubScene terminus env dom engine proofB push res
@@ -81,7 +81,7 @@ infixr 6 makeSceneFlipped as <@
 loop
   :: forall terminus env dom engine proofA push res graph a
    . Monoid res
-  => SubgraphIsRenderable graph terminus
+
   => DOMInterpret dom engine
   => ( forall proofB
         . DOM dom engine proofB res graph a
@@ -96,7 +96,7 @@ loop = Functions.loop
 iloop
   :: forall terminus env dom engine proofA push res graph a
    . Monoid res
-  => SubgraphIsRenderable graph terminus
+
   => DOMInterpret dom engine
   => ( forall proofB
         . Either env push
@@ -111,7 +111,7 @@ iloop = Functions.iloop
 branch
   :: forall terminus env dom engine proofA push res graph a
    . Monoid res
-  => SubgraphIsRenderable graph terminus
+
   => DOMInterpret dom engine
   => ( forall proofB
         . DOM dom engine proofB res graph a
@@ -127,7 +127,7 @@ branch = Functions.branch
 ibranch
   :: forall terminus env dom engine proofA push res graph a
    . Monoid res
-  => SubgraphIsRenderable graph terminus
+
   => DOMInterpret dom engine
   => ( forall proofB
         . Either env push
@@ -165,7 +165,7 @@ startUsing
   :: forall terminus env dom engine push res subgraphs tumults graph control
    . Monoid res
   => DOMInterpret dom engine
-  => SubgraphIsRenderable graph terminus
+
   => GetSubgraphs graph subgraphs
   => GetTumults graph tumults
   => Patch subgraphs tumults () graph
@@ -183,7 +183,7 @@ startUsingWithHint
        graph control
    . Monoid res
   => DOMInterpret dom engine
-  => SubgraphIsRenderable graph terminus
+
   => GraphHint hintable hint
   => CreateT hint () graph
   => GetSubgraphs graph subgraphs
@@ -205,7 +205,7 @@ loopUsingScene
   => DOMInterpret dom engine
   => Create scene () graph
   => Change scene graph
-  => SubgraphIsRenderable graph terminus
+
   => ( env
        -> (push -> Effect Unit)
        -> control
@@ -229,7 +229,7 @@ loopUsingSceneWithRes
   => DOMInterpret dom engine
   => Create scene () graph
   => Change scene graph
-  => SubgraphIsRenderable graph terminus
+
   => ( env
        -> (push -> Effect Unit)
        -> control
@@ -250,7 +250,7 @@ loopUsingSceneWithRes = Functions.loopUsingSceneWithRes
 freeze
   :: forall terminus env dom engine proof push res graph x
    . Monoid res
-  => SubgraphIsRenderable graph terminus
+
   => DOMInterpret dom engine
   => DOM dom engine proof res graph x
   -> SubScene terminus env dom engine proof push res
@@ -259,7 +259,7 @@ freeze = Functions.freeze
 makeSceneR
   :: forall terminus env dom engine proofA push res graph a
    . Monoid res
-  => SubgraphIsRenderable graph terminus
+
   => DOMInterpret dom engine
   => ( Either env push
        -> (push -> Effect Unit)
@@ -277,7 +277,7 @@ infixr 6 makeSceneR as @|>
 makeSceneRFlipped
   :: forall terminus env dom engine proofA push res graph a
    . Monoid res
-  => SubgraphIsRenderable graph terminus
+
   => DOMInterpret dom engine
   => ( forall proofB
         . DOM dom engine proofB res graph a
@@ -295,7 +295,7 @@ infixr 6 makeSceneRFlipped as <|@
 makeSceneR'
   :: forall terminus env dom engine proofA push res graph a
    . Monoid res
-  => SubgraphIsRenderable graph terminus
+
   => DOMInterpret dom engine
   => DOM dom engine proofA res graph a
   -> ( forall proofB
@@ -310,7 +310,7 @@ infixr 6 makeSceneR' as @||>
 makeSceneR'Flipped
   :: forall terminus env dom engine proofA push res graph a
    . Monoid res
-  => SubgraphIsRenderable graph terminus
+
   => DOMInterpret dom engine
   => ( forall proofB
         . DOM dom engine proofB res graph a
