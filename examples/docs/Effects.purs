@@ -81,9 +81,10 @@ import Web.HTML.HTMLDocument (body)
 import Web.HTML.HTMLElement (toElement)
 import Web.HTML.Window (document)
 
-clickCb :: (String -> Effect Unit) -> Cb
+clickCb :: (Either Unit String -> Effect Unit) -> Cb
 clickCb push = cb
   ( const do
+      push (Left unit)
       launchAff_ $ do
         result <- AX.request
           ( AX.defaultRequest
@@ -94,10 +95,11 @@ clickCb push = cb
           )
         case result of
           Left err -> liftEffect $ push
-            ( "GET /api response failed to decode: " <>
-                AX.printError err
-            )
-          Right response -> liftEffect $ push $
+            $ Right
+              ( "GET /api response failed to decode: " <>
+                  AX.printError err
+              )
+          Right response -> liftEffect $ push $ Right $
             stringifyWithIndent 2 response.body
   )
 
@@ -106,7 +108,7 @@ scene
    . Monoid res
   => DOMInterpret dom engine
   => Element
-  -> Scene env dom engine Frame0 String res
+  -> Scene env dom engine Frame0 (Either Unit String) res
 scene elt =
   ( \_ push ->
       ( icreate $ root elt
@@ -115,21 +117,31 @@ scene elt =
                     [ D.OnClick := clickCb push ]
                     (S.text "Click to get some random user data.")
                 }
-            , div2: D.div [D.Style := "display: none;"]
+            , div2: D.div [ D.Style := "display: none;" ]
                 (S.pre [] (S.code [] (S.text "")))
             }
           )
       ) $> false
-  ) @!> iloop \e _ started -> case e of
-    Left _ -> pure true
-    Right str ->
+  ) @!> iloop \e push started -> case e of
+    Left _ -> pure started
+    Right (Left _) ->
+      ichange_
+        { "root.div1.button.t": "Loading..."
+        , "root.div1.button":
+            D.button'attr [ D.OnClick := cb (const $ pure unit) ]
+        } $> started
+    Right (Right str) ->
       when (not started)
         ( ichange_
-            { "root.div2": D.div'attr [D.Style := "display: block;"]
+            { "root.div2": D.div'attr [ D.Style := "display: block;" ]
             }
         )
         *> ichange_
           { "root.div2.pre.code.t": str
+          , "root.div1.button.t":
+              "Click to get some random user data."
+          , "root.div1.button":
+              D.button'attr [ D.OnClick := clickCb push ]
           }
         $> true
 
@@ -170,6 +182,12 @@ main = do
                                 """. The sky's the limit!"""
                               /\ unit
                         )
+                      /\ D.p []
+                        ( detup $
+                            D.text
+                              """Another useful pattern when working with effects is to throttle input. For example, if we are making a network call, we may want to show a loading indicator and prevent additional network calls. This can be achieved by setting the callback to a no-op while the network call is executing, as shown in the example above."""
+                              /\ unit
+                        )
                       /\ D.h2 [] (S.text "Next steps")
                       /\ D.p []
                         ( detup $
@@ -196,9 +214,10 @@ main = do
       }
   ) @!> freeze
 
-clickCb :: (String -> Effect Unit) -> Cb
+clickCb :: (Either Unit String -> Effect Unit) -> Cb
 clickCb push = cb
   ( const do
+      push $ Left unit
       launchAff_ $ do
         result <- AX.request
           ( AX.defaultRequest
@@ -208,15 +227,15 @@ clickCb push = cb
               }
           )
         case result of
-          Left err -> liftEffect $ push
+          Left err -> liftEffect $ push $ Right
             ( "GET /api response failed to decode: " <>
                 AX.printError err
             )
-          Right response -> liftEffect $ push $
+          Right response -> liftEffect $ push $ Right $
             stringifyWithIndent 2 response.body
   )
 
-sg :: SubgraphSig Int "div" Unit String
+sg :: SubgraphSig Int "div" Unit (Either Unit String)
 sg _ =
   ( \_ push ->
       ( icreate
@@ -232,9 +251,15 @@ sg _ =
               )
           )
       ) $> false
-  ) @!> iloop \e _ started -> case e of
-    Left _ -> pure true
-    Right str ->
+  ) @!> iloop \e push started -> case e of
+    Left _ -> pure started
+    Right (Left _) ->
+      ichange_
+        { "div.div1.button.t": "Loading..."
+        , "div.div1.button":
+            D.button'attr [ D.OnClick := cb (const $ pure unit) ]
+        } $> started
+    Right (Right str) ->
       when (not started)
         ( ichange_
             { "div.div2": D.div'attr [ D.Style := "display: block;" ]
@@ -242,5 +267,9 @@ sg _ =
         )
         *> ichange_
           { "div.div2.pre.code.t": str
+          , "div.div1.button.t":
+              "Click to get some random user data."
+          , "div.div1.button":
+              D.button'attr [ D.OnClick := clickCb push ]
           }
         $> true
