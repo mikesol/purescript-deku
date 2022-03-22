@@ -1,6 +1,6 @@
 {
 	"name": "purescript-deku",
-	"version": "0.7.4",
+	"version": "0.0.0",
 	"description": "A friendly tree-like structure",
 	"scripts": {
 		"postinstall": "node node_modules/puppeteer/install.js",
