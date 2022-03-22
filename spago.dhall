@@ -1,4 +1,4 @@
-{ name = "purescript-doms"
+{ name = "purescript-deku"
 , dependencies =
   [ "arrays"
   , "behaviors"
