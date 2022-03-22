@@ -11,17 +11,18 @@ import Data.Map (insert, singleton)
 import Data.Maybe (Maybe(..))
 import Data.Show.Generic (genericShow)
 import Data.Tuple.Nested ((/\))
+import Data.Vec ((+>), empty)
 import Deku.Change (ichange_)
 import Deku.Control.Functions.Graph as G
 import Deku.Control.Functions.Subgraph (freeze, (@!>))
 import Deku.Control.Types (Frame0, Scene)
 import Deku.Create (icreate)
+import Deku.Example.Docs.Effects as Effects
+import Deku.Example.Docs.Events as Events
 import Deku.Example.Docs.HelloWorld as HelloWorld
 import Deku.Example.Docs.Intro as Intro
-import Deku.Example.Docs.SimpleComponent as SimpleComponent
-import Deku.Example.Docs.Events as Events
-import Deku.Example.Docs.Effects as Effects
 import Deku.Example.Docs.SSR as SSR
+import Deku.Example.Docs.SimpleComponent as SimpleComponent
 import Deku.Example.Docs.Subgraphs as Subgraph
 import Deku.Graph.Attribute (cb)
 import Deku.Graph.DOM (AsSubgraph(..), SubgraphSig, subgraph, (:=))
@@ -29,7 +30,7 @@ import Deku.Graph.DOM as D
 import Deku.Graph.DOM.Shorthand as S
 import Deku.Interpret (makeFFIDOMSnapshot)
 import Deku.Run (RunDOM, RunEngine, TriggeredScene, defaultOptions, run)
-import Deku.Util (detup)
+import Deku.Util (detup, vex)
 import Effect (Effect)
 import FRP.Event (subscribe)
 import Web.DOM as WEB.DOM
@@ -47,78 +48,43 @@ scene elt =
         ( icreate $
             D.root elt
               { main: D.main []
-                  { topbar: D.nav []
-                      ( S.ul []
-                          ( detup $
-                              D.li []
-                                ( detup $
-                                    D.a
-                                      [ D.OnClick := cb (const $ push Intro)
-                                      , D.Style := "cursor:pointer;"
-                                      ]
-                                      (S.text "Home") /\ D.text " | " /\ unit
-                                )
-                                /\ D.li []
-                                  ( detup $
-                                      D.a
-                                        [ D.OnClick := cb
-                                            (const $ push HelloWorld)
-                                        , D.Style := "cursor:pointer;"
-                                        ]
-                                        (S.text "Hello world") /\ D.text " | "
-                                        /\ unit
-                                  )
-                                /\ D.li []
-                                  ( detup $
-                                      D.a
-                                        [ D.OnClick := cb
-                                            (const $ push SimpleComponent)
-                                        , D.Style := "cursor:pointer;"
-                                        ]
-                                        (S.text "Component") /\ D.text " | " /\
-                                        unit
-                                  )
-                                /\ D.li []
-                                  ( detup $
-                                      D.a
-                                        [ D.OnClick := cb
-                                            (const $ push Events)
-                                        , D.Style := "cursor:pointer;"
-                                        ]
-                                        (S.text "Events") /\ D.text " | " /\
-                                        unit
-                                  )
-                                /\ D.li []
-                                  ( detup $
-                                      D.a
-                                        [ D.OnClick := cb
-                                            (const $ push Effects)
-                                        , D.Style := "cursor:pointer;"
-                                        ]
-                                        (S.text "Effects") /\ D.text " | " /\
-                                        unit
-                                  )
-                                /\ D.li []
-                                  ( detup $
-                                      D.a
-                                        [ D.OnClick := cb
-                                            (const $ push Subgraph)
-                                        , D.Style := "cursor:pointer;"
-
-                                        ]
-                                        (S.text "Subgraphs") /\ D.text " | " /\
-                                        unit
-                                  )
-                                /\ D.li []
-                                  ( detup $
-                                      D.a
-                                        [ D.OnClick := cb (const $ push SSR)
-                                        , D.Style := "cursor:pointer;"
-                                        ]
-                                        (S.text "SSR") /\
-                                        unit
-                                  )
-                                /\ unit
+                  { topbar: D.div []
+                      ( S.div []
+                          ( let
+                              sections =
+                                map
+                                  ( \(x /\ y /\ z) -> D.span []
+                                      ( detup $
+                                          D.a
+                                            [ D.OnClick := cb (const $ push x)
+                                            , D.Style := "cursor:pointer;"
+                                            ]
+                                            (S.text y)
+                                            /\ D.span
+                                              [ D.Style :=
+                                                  if z then ""
+                                                  else "display:none;"
+                                              ]
+                                              (S.text " | ")
+                                            /\ unit
+                                      )
+                                  ) $ Intro
+                                  /\ "Home"
+                                  /\ true +> HelloWorld
+                                  /\ "Hello world"
+                                  /\ true +> SimpleComponent
+                                  /\ "Component"
+                                  /\ true +> Events
+                                  /\ "Events"
+                                  /\ true +> Effects
+                                  /\ "Effects"
+                                  /\ true +> Subgraph
+                                  /\ "Subgraphs"
+                                  /\ true +> SSR
+                                  /\ "SSR"
+                                  /\ false +> empty
+                            in
+                              vex sections
                           )
                       )
                   , page: subgraph (singleton Intro (Just unit))

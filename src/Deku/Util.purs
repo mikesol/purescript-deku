@@ -3,7 +3,7 @@ module Deku.Util where
 
 import Prelude hiding (Ordering(..))
 
-import Data.Symbol (class IsSymbol)
+import Data.Symbol (class IsSymbol, reflectSymbol)
 import Data.Tuple (Tuple(..))
 import Data.Tuple.Nested ((/\), type (/\))
 import Data.Typelevel.Bool (True, False)
@@ -14,7 +14,6 @@ import Prim.Row (class Cons, class Lacks)
 import Prim.RowList (RowList)
 import Prim.RowList as RL
 import Prim.Symbol as Sym
-import Record (insert)
 import Type.Data.Peano (Nat, Succ, Z)
 import Type.Proxy (Proxy(..))
 
@@ -149,6 +148,19 @@ instance natToSymDCons ::
   ) =>
   NatToSym (x :* y) o
 
+foreign import unsafeLeftBiasedSet :: forall r1 r2 a. String -> a -> Record r1 -> Record r2
+
+insertLeft
+  :: forall proxy r1 r2 l a
+   . IsSymbol l
+  => Lacks l r1
+  => Cons l a r1 r2
+  => proxy l
+  -> a
+  -> Record r1
+  -> Record r2
+insertLeft l a r = unsafeLeftBiasedSet (reflectSymbol l) a r
+
 class MakePrefixIfNeeded (s :: Symbol) (i :: Type) (o :: Symbol) | s i -> o
 
 instance symOrBustProxy :: MakePrefixIfNeeded s (Proxy sym) sym
@@ -179,13 +191,14 @@ class Detup (n :: Type) (a :: Type) (b :: Row Type) | n a -> b where
 instance detupTuple ::
   ( Succ n np1
   , Detup np1 b r'
-  , N2S n sym
+  , N2S n sym'
+  , Sym.Append "@" sym' sym
   , Cons sym a r' r
   , IsSymbol sym
   , Lacks sym r'
   ) =>
   Detup n (Tuple a b) r where
-  detup' _ (Tuple a b) = insert (Proxy :: Proxy sym) a
+  detup' _ (Tuple a b) = insertLeft (Proxy :: Proxy sym) a
     (detup' (Proxy :: Proxy np1) b)
 instance detupUnit :: Detup n Unit () where
   detup' _ _ = {}
@@ -201,7 +214,8 @@ instance vx0 :: Vex D0 a () where
 else instance vxneq ::
   ( Pred mx mxP1
   , Vex mxP1 a r'
-  , N2S mx sym
+  , N2S mx sym'
+  , Sym.Append "@" sym' sym
   , Cons sym a r' r
   , IsSymbol sym
   , Lacks sym r'
@@ -211,7 +225,7 @@ else instance vxneq ::
     let
       uc = uncons v
     in
-      insert (Proxy :: Proxy sym) uc.head
+      insertLeft (Proxy :: Proxy sym) uc.head
         (vex uc.tail)
 
 class N2S (n :: Type) (s :: Symbol) | n -> s
