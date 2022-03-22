@@ -10,7 +10,7 @@ import Data.Map (Map, fromFoldable, singleton)
 import Data.Maybe (Maybe(..))
 import Data.Set as Set
 import Data.Tuple.Nested ((/\))
-import Deku.Change (ichange_)
+import Deku.Change (ichange)
 import Deku.Control.Functions.Graph as G
 import Deku.Control.Functions.Subgraph (freeze, iloop, (@!>))
 import Deku.Create (icreate)
@@ -97,7 +97,7 @@ containerD cstate = DOM.subgraph (singleton 0 (Just unit)) $ DOM.AsSubgraph
             } $> ln
     ) @!> iloop \e push ln -> case e of
       Left _ -> pure ln
-      Right td -> ln + 1 <$ ichange_
+      Right td -> ln + 1 <$ ichange
         { "ctr.dv.sg": xsubgraph
             ( singleton ln $ Just
                 { todo: td, completed: cstate.completed }

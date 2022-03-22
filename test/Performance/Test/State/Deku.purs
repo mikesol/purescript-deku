@@ -6,7 +6,7 @@ import Data.Array.NonEmpty (replicate)
 import Data.Either (Either(..))
 import Data.Foldable (sequence_, traverse_)
 import Data.Maybe (Maybe(..))
-import Deku.Change (ichange_)
+import Deku.Change (ichange)
 import Deku.Control.Functions.Graph (iloop, (@!>))
 import Deku.Control.Types (Frame0, Scene)
 import Deku.Create (icreate)
@@ -114,4 +114,4 @@ scene notifyEnd elt =
   ) @!> iloop \e _ st ->
     case e of
       Left _ -> pure st
-      Right newSt -> ichange_ { "root.dv.msg": show newSt } $> newSt
+      Right newSt -> ichange { "root.dv.msg": show newSt } $> newSt

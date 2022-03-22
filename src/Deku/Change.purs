@@ -5,21 +5,18 @@ import Prelude
 import Data.Symbol (class IsSymbol, reflectSymbol)
 import Deku.Control.Indexed (IxDOM(..))
 import Deku.Control.Types (DOM, DOMState', unsafeDOM, unsafeUnDOM)
-import Deku.CreateT (class CreateT)
 import Deku.Graph.Attribute (Attribute, AttributeValue, unsafeUnAttribute)
 import Deku.Graph.DOM (unsafeUnSubgraph, unsafeUnText)
 import Deku.Graph.DOM as CTOR
 import Deku.Graph.Graph (Graph)
 import Deku.Graph.Node (NodeC)
-import Deku.Interpret (class DOMInterpret, massiveChange, setAttribute, setSubgraph, setText, setTumult)
-import Deku.Rendered (ToChange(..))
+import Deku.Interpret (class DOMInterpret, setAttribute, setSubgraph, setText, setTumult)
 import Deku.Tumult (Tumultuous, safeUntumult)
 import Prim.Row (class Cons, class Lacks)
 import Prim.Row as R
 import Prim.RowList as RL
 import Record (get)
 import Type.Proxy (Proxy(..))
-import Unsafe.Coerce (unsafeCoerce)
 
 type Change'Type (ptr :: Symbol) (a :: Type) (graph :: Graph) =
   forall proxy dom engine proof res
@@ -41,6 +38,7 @@ ichange'
   -> IxDOM dom engine proof res i i Unit
 ichange' ptr a = IxDOM (change' ptr <<< (<$) a)
 
+--
 class Change (r :: Row Type) (graph :: Graph) where
   change
     :: forall dom engine proof res
@@ -48,38 +46,7 @@ class Change (r :: Row Type) (graph :: Graph) where
     => DOM dom engine proof res graph { | r }
     -> DOM dom engine proof res graph Unit
 
-instance changeAll :: CreateT r () graph => Change r graph where
-  change w = o
-    where
-    { context: i, value } = unsafeUnDOM w
-    o =
-      unsafeDOM
-        { context:
-            i
-              { instructions = i.instructions <>
-                  [ massiveChange { toChange: ToChange $ unsafeCoerce value }
-                  ]
-              }
-        , value: unit
-        }
-
-ichange
-  :: forall r dom engine proof res inGraph
-   . DOMInterpret dom engine
-  => Change r inGraph
-  => { | r }
-  -> IxDOM dom engine proof res inGraph inGraph Unit
-ichange r = IxDOM (change <<< (<$) r)
-
---
-class Change_ (r :: Row Type) (graph :: Graph) where
-  change_
-    :: forall dom engine proof res
-     . DOMInterpret dom engine
-    => DOM dom engine proof res graph { | r }
-    -> DOM dom engine proof res graph Unit
-
-class ChangeRL_ (rl :: RL.RowList Type) (r :: Row Type) (graph :: Graph) where
+class ChangeRL (rl :: RL.RowList Type) (r :: Row Type) (graph :: Graph) where
   changeRL_
     :: forall proxy dom engine proof res
      . DOMInterpret dom engine
@@ -92,31 +59,31 @@ instance changeRL_Cons ::
   , Cons key val r' r
   , Lacks key r'
   , Change' key val graph
-  , ChangeRL_ rest r graph
+  , ChangeRL rest r graph
   ) =>
-  ChangeRL_ (RL.Cons key val rest) r graph where
+  ChangeRL (RL.Cons key val rest) r graph where
   changeRL_ _ w = changeRL_ (Proxy :: _ rest)
     ((change' (Proxy :: _ key) (w $> (get (Proxy :: _ key) value))) $> value)
     where
     { value } = unsafeUnDOM w
 
-instance changeRL_Nil :: ChangeRL_ RL.Nil r graph where
+instance changeRL_Nil :: ChangeRL RL.Nil r graph where
   changeRL_ _ w = w $> unit
 
-instance change_All ::
+instance changeAll ::
   ( RL.RowToList r rl
-  , ChangeRL_ rl r graph
+  , ChangeRL rl r graph
   ) =>
-  Change_ r graph where
-  change_ = changeRL_ (Proxy :: _ rl)
+  Change r graph where
+  change = changeRL_ (Proxy :: _ rl)
 
-ichange_
+ichange
   :: forall r dom engine proof res inGraph
    . DOMInterpret dom engine
-  => Change_ r inGraph
+  => Change r inGraph
   => { | r }
   -> IxDOM dom engine proof res inGraph inGraph Unit
-ichange_ r = IxDOM (change_ <<< (<$) r)
+ichange r = IxDOM (change <<< (<$) r)
 
 instance changeText ::
   ( IsSymbol ptr

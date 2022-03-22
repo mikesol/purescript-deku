@@ -12,7 +12,7 @@ import Data.Maybe (Maybe(..))
 import Data.Show.Generic (genericShow)
 import Data.Tuple.Nested ((/\))
 import Data.Vec ((+>), empty)
-import Deku.Change (ichange_)
+import Deku.Change (ichange)
 import Deku.Control.Functions.Graph as G
 import Deku.Control.Functions.Subgraph (freeze, (@!>))
 import Deku.Control.Types (Frame0, Scene)
@@ -98,7 +98,7 @@ scene elt =
             Left _ -> pure oldPg
             Right newPg -> newPg <$ when (oldPg /= newPg)
               ( do
-                  ichange_
+                  ichange
                     { "root.main.page": D.xsubgraph
                         ( insert newPg (Just unit)
                             $ singleton

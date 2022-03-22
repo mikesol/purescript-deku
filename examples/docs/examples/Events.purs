@@ -4,7 +4,7 @@ import Prelude
 
 import Data.Either (Either(..))
 import Data.Foldable (for_)
-import Deku.Change (ichange_)
+import Deku.Change (ichange)
 import Deku.Control.Functions.Graph (iloop, (@!>))
 import Deku.Control.Types (Frame0, Scene)
 import Deku.Create (icreate)
@@ -68,13 +68,13 @@ scene elt =
       let
         c = nclicks + 1
       in
-        ichange_
+        ichange
           { "root.div1.count.t": "Val: " <> show c
           , "root.div1.button.t":
               if mod c 2 == 0 then "Click" else "me"
           } $> c
     Right (SliderMoved n) ->
-      ichange_
+      ichange
         { "root.div2.val.t": "Val: " <> show n
         } $> nclicks
 

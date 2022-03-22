@@ -9,7 +9,7 @@ import Data.Tuple.Nested ((/\))
 import Data.Map as Map
 import Data.Maybe (Maybe(..))
 import Data.Monoid.Additive (Additive(..))
-import Deku.Change (ichange_)
+import Deku.Change (ichange)
 import Data.Array ((..))
 import Deku.Control.Functions (imodifyRes)
 import Deku.Control.Functions.Graph (iloop, (@!>))
@@ -64,8 +64,8 @@ scene elt =
                             ( SG.iloop \e push _ ->
                                 case e of
                                   Left tf -> when tf $ do
-                                    ichange_ { "myA.myTxt": "banana" }
-                                  Right tf -> ichange_
+                                    ichange { "myA.myTxt": "banana" }
+                                  Right tf -> ichange
                                     { "myA": a'attr
                                         [ OnClick := cb (const $ push (not tf))
                                         ]
@@ -99,7 +99,7 @@ scene elt =
                                     imodifyRes
                                       (const $ Additive ((i' + 1) `mod` 40))
                                   Right tf ->
-                                    ichange_
+                                    ichange
                                       { "myA": a'attr
                                           [ OnClick := cb
                                               (const $ push (not tf))
@@ -118,10 +118,10 @@ scene elt =
   ) @!> iloop \e _ lmt ->
     lmt + 1 <$ case e of
       Left _ -> pure unit
-      Right Hello -> ichange_
+      Right Hello -> ichange
         { "root.hello.helloA": xsubgraph (Map.singleton 9 (Just true))
         }
-      Right World -> ichange_
+      Right World -> ichange
         { "root.world.wB": xsubgraph
             ( Map.fromFoldable
                 ( map
