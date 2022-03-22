@@ -7,7 +7,7 @@ import Affjax as AX
 import Affjax.ResponseFormat as ResponseFormat
 import Data.Argonaut.Core (stringifyWithIndent)
 import Data.HTTP.Method (Method(..))
-import Deku.Change (ichange_)
+import Deku.Change (ichange)
 import Deku.Create (icreate)
 import Deku.Graph.Attribute (Cb, cb)
 import Deku.Graph.DOM as D
@@ -61,7 +61,7 @@ import Data.Argonaut.Core (stringifyWithIndent)
 import Data.Either (Either(..))
 import Data.Foldable (for_)
 import Data.HTTP.Method (Method(..))
-import Deku.Change (ichange_)
+import Deku.Change (ichange)
 import Deku.Control.Functions.Graph (iloop, (@!>))
 import Deku.Control.Types (Frame0, Scene)
 import Deku.Create (icreate)
@@ -125,18 +125,18 @@ scene elt =
   ) @!> iloop \e push started -> case e of
     Left _ -> pure started
     Right (Left _) ->
-      ichange_
+      ichange
         { "root.div1.button.t": "Loading..."
         , "root.div1.button":
             D.button'attr [ D.OnClick := cb (const $ pure unit) ]
         } $> started
     Right (Right str) ->
       when (not started)
-        ( ichange_
+        ( ichange
             { "root.div2": D.div'attr [ D.Style := "display: block;" ]
             }
         )
-        *> ichange_
+        *> ichange
           { "root.div2.pre.code.t": str
           , "root.div1.button.t":
               "Click to get some random user data."
@@ -254,18 +254,18 @@ sg _ =
   ) @!> iloop \e push started -> case e of
     Left _ -> pure started
     Right (Left _) ->
-      ichange_
+      ichange
         { "div.div1.button.t": "Loading..."
         , "div.div1.button":
             D.button'attr [ D.OnClick := cb (const $ pure unit) ]
         } $> started
     Right (Right str) ->
       when (not started)
-        ( ichange_
+        ( ichange
             { "div.div2": D.div'attr [ D.Style := "display: block;" ]
             }
         )
-        *> ichange_
+        *> ichange
           { "div.div2.pre.code.t": str
           , "div.div1.button.t":
               "Click to get some random user data."

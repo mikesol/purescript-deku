@@ -7,7 +7,7 @@ import Data.Foldable (for_)
 import Data.Map (singleton)
 import Data.Maybe (Maybe(..))
 import Data.Tuple.Nested ((/\))
-import Deku.Change (ichange_)
+import Deku.Change (ichange)
 import Deku.Control.Functions (freeze, iloop, (@!>))
 import Deku.Create (icreate)
 import Deku.Example.Docs.Types (Page(..))
@@ -51,7 +51,7 @@ import Prelude
 
 import Data.Either (Either(..))
 import Data.Foldable (for_)
-import Deku.Change (ichange_)
+import Deku.Change (ichange)
 import Deku.Control.Functions.Graph (iloop, (@!>))
 import Deku.Control.Types (Frame0, Scene)
 import Deku.Create (icreate)
@@ -115,13 +115,13 @@ scene elt =
       let
         c = nclicks + 1
       in
-        ichange_
+        ichange
           { "root.div1.count.t": "Val: " <> show c
           , "root.div1.button.t":
               if mod c 2 == 0 then "Click" else "me"
           } $> c
     Right (SliderMoved n) ->
-      ichange_
+      ichange
         { "root.div2.val.t": "Val: " <> show n
         } $> nclicks
 
@@ -216,13 +216,13 @@ main = do
                               """Changing is done with the function """
                               /\ D.code []
                                 ( S.text
-                                    "ichange_"
+                                    "ichange"
                                 )
                               /\ D.text
                                 """. """
                               /\ D.code []
                                 ( S.text
-                                    "ichange_"
+                                    "ichange"
                                 )
                               /\ D.text
                                 """ uses Barlow-style lenses to zoom into the DOM with surgical precision, changing only what needs to be changed. This is what keeps Deku so darn fast and why it is ideally suited to performance-critical webpages. Because it tracks the DOM at """
@@ -289,7 +289,7 @@ main = do
                                   """In this section, saw how to react to events using the """
                               ) /\ D.code [] (S.text "iloop")
                               /\ D.text " function in combination with "
-                              /\ D.code [] (S.text "ichange_")
+                              /\ D.code [] (S.text "ichange")
                               /\ D.text
                                 ". In the next section, we'll use a similar mechanism to deal with arbitrary "
                               /\ D.a
@@ -343,10 +343,10 @@ sg _ =
       let
         c = nclicks + 1
       in
-        ichange_
+        ichange
           { "div.div1.count.t": "Val: " <> show c
           , "div.div1.button.t":
               if mod c 2 == 0 then "Click" else "me"
           } $> c
-    Right (SliderMoved n) -> ichange_ { "div.div2.val.t": "Val: " <> show n }
+    Right (SliderMoved n) -> ichange { "div.div2.val.t": "Val: " <> show n }
       $> nclicks

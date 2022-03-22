@@ -10,7 +10,7 @@ import Data.Map (insert, singleton)
 import Data.Maybe (Maybe(..))
 import Data.Show.Generic (genericShow)
 import Data.Tuple.Nested ((/\))
-import Deku.Change (ichange_)
+import Deku.Change (ichange)
 import Deku.Control.Functions.Graph as G
 import Deku.Control.Functions.Subgraph (freeze, (@!>))
 import Deku.Control.Types (Frame0, Scene)

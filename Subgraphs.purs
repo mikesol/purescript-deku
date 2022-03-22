@@ -6,7 +6,7 @@ import Data.Either (Either(..))
 import Data.Map (singleton)
 import Data.Maybe (Maybe(..))
 import Data.Tuple.Nested ((/\))
-import Deku.Change (ichange_)
+import Deku.Change (ichange)
 import Deku.Control.Functions (freeze, iloop, (@!>))
 import Deku.Create (icreate)
 import Deku.Example.Docs.Types (Page(..))
@@ -59,14 +59,14 @@ sub raise Sg0 =
       let
         new = (a + 1) /\ c
       in
-        ichange_
+        ichange
           { "div.div1.count0.t": "A: " <> show (fst new)
           } $> new
     Right _ ->
       let
         new = a /\ (c + 1)
       in
-        ichange_
+        ichange
           { "div.div1.count1.t": "C: " <> show (snd new)
           } $> new
 sub raise Sg1 =
@@ -96,14 +96,14 @@ sub raise Sg1 =
       let
         new = (b + 1) /\ d
       in
-        ichange_
+        ichange
           { "div.div1.count0.t": "B: " <> show (fst new)
           } $> new
     Right _ ->
       let
         new = b /\ (d + 1)
       in
-        ichange_
+        ichange
           { "div.div1.count1.t": "D: " <> show (snd new)
           } $> new
 
@@ -122,10 +122,10 @@ sg _ =
       )
   ) @!> iloop \e _ _ -> case e of
     Left _ -> pure unit
-    Right Sg0 -> ichange_
+    Right Sg0 -> ichange
       { "div.sub": xsubgraph (singleton Sg1 (pure unit))
       }
-    Right Sg1 -> ichange_
+    Right Sg1 -> ichange
       { "div.sub": xsubgraph (singleton Sg0 (pure unit))
       }
 
@@ -172,7 +172,7 @@ import Data.Hashable (class Hashable, hash)
 import Data.Map (insert, singleton)
 import Data.Tuple (fst, snd)
 import Data.Tuple.Nested ((/\))
-import Deku.Change (ichange_)
+import Deku.Change (ichange)
 import Deku.Control.Functions (iloop, (@!>))
 import Deku.Control.Types (Frame0, Scene)
 import Deku.Create (icreate)
@@ -224,14 +224,14 @@ sub raise Sg0 =
       let
         new = (a + 1) /\ c
       in
-        ichange_
+        ichange
           { "div.div1.count0.t": "A: " <> show (fst new)
           } $> new
     Right _ ->
       let
         new = a /\ (c + 1)
       in
-        ichange_
+        ichange
           { "div.div1.count1.t": "C: " <> show (snd new)
           } $> new
 sub raise Sg1 =
@@ -261,14 +261,14 @@ sub raise Sg1 =
       let
         new = (b + 1) /\ d
       in
-        ichange_
+        ichange
           { "div.div1.count0.t": "B: " <> show (fst new)
           } $> new
     Right _ ->
       let
         new = b /\ (d + 1)
       in
-        ichange_
+        ichange
           { "div.div1.count1.t": "D: " <> show (snd new)
           } $> new
 
@@ -292,10 +292,10 @@ scene elt =
       )
   ) @!> iloop \e _ _ -> case e of
     Left _ -> pure unit
-    Right Sg0 -> ichange_
+    Right Sg0 -> ichange
       { "root.sub": xsubgraph (singleton Sg1 (pure unit))
       }
-    Right Sg1 -> ichange_
+    Right Sg1 -> ichange
       { "root.sub": xsubgraph (singleton Sg0 (pure unit))
       }
 
