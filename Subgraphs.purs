@@ -419,7 +419,7 @@ main = do
                       /\ D.p []
                         ( detup $
                             D.text
-                              """There is one major drawback, however, to top-down communication via a pusher. It's fairly rare that a subgraph will launch a task that completes after it and its parent. When this happen, it may be a couple network requests, but they result in no-ops (pushing into the void) and then everything wraps up nicely. Parents, on the other hand, will often exist much longer than any one subgraph. This means that they will have to keep track of what subgraphs are present, which adds complicated internal accounting and is prone to errors."""
+                              """There is one major drawback, however, to top-down communication via a pusher. It's fairly rare that a subgraph will launch a task that completes after its parent has unmounted. These tend to be harmless no-ops that, in the worst case, translate into a slight performance degradation. Parents, on the other hand, will often exist much longer than their children. This means that they will have to keep track of what subgraphs are present on the page, which adds complicated internal accounting and is prone to errors."""
                               /\ unit
                         )
                       /\

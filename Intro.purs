@@ -39,6 +39,18 @@ intro dpage =
                               """ is the coolest web micro-framework that no one knows about yet. Except you, of course, as you're here. So welcome!"""
                           )
                       }
+                    /\ D.p []                       ( detup $
+                          D.span []
+                            ( S.text
+                                """The main goal of Deku is """
+                            )
+                            /\ D.span
+                              [ D.Style := "font-weight: 800;" ]
+                              { t: D.text "speed" }
+                            /\ D.span []
+                              { t: D.text ". I made it for the purpose of creating interactive web-based musical instruments, but it's equally useful as a general-purpose web framework. Its standard event-handling patterns tend to outperform those of React and Vue by a factor of 1.5-2x." }
+                            /\ unit
+                      )
                     /\ D.p []
                       ( detup $
                           D.span []
