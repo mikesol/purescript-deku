@@ -7767,7 +7767,8 @@ var PS = {};
   var h1 = makeElt(H1_)("h1");
   var div$primeattr = Control_Category.identity(Control_Category.categoryFn);
   var div = makeElt(Div_)("div");                                             
-  var code = makeElt(Code_)("code");                                            
+  var code = makeElt(Code_)("code");      
+  var button$primeattr = Control_Category.identity(Control_Category.categoryFn);
   var button = makeElt(Button_)("button");                                          
   var blockquote = makeElt(Blockquote_)("blockquote");
   var attr = function (dict) {
@@ -7788,6 +7789,7 @@ var PS = {};
   exports["a"] = a;
   exports["blockquote"] = blockquote;
   exports["button"] = button;
+  exports["button'attr"] = button$primeattr;
   exports["code"] = code;
   exports["div"] = div;
   exports["div'attr"] = div$primeattr;
@@ -10539,6 +10541,20 @@ var PS = {};
           };
       };
   };
+  var changeButton_ = function (dictIsSymbol) {
+      return function (dictCons) {
+          return {
+              "change'": function (dictDOMInterpret) {
+                  return function (ptr) {
+                      return function (w) {
+                          var v = Deku_Control_Types.unsafeUnDOM(w);
+                          return unsafeChange$prime(dictDOMInterpret)(dictIsSymbol)(ptr)(v.context)(v.value);
+                      };
+                  };
+              }
+          };
+      };
+  };
   var change$prime = function (dict) {
       return dict["change'"];
   };
@@ -10568,6 +10584,7 @@ var PS = {};
   exports["change_All"] = change_All;
   exports["changeTextString"] = changeTextString;
   exports["changeSubgraph1"] = changeSubgraph1;
+  exports["changeButton_"] = changeButton_;
   exports["changeDiv_"] = changeDiv_;
 })(PS);
 (function($PS) {
@@ -11342,25 +11359,28 @@ var PS = {};
   var Effect_Aff = $PS["Effect.Aff"];
   var Effect_Class = $PS["Effect.Class"];                
   var clickCb = function (push) {
-      return Deku_Graph_Attribute.cb(Data_Function["const"](Effect_Aff.launchAff_(Control_Bind.bind(Effect_Aff.bindAff)(Affjax.request({
-          method: new Data_Either.Left(Data_HTTP_Method.GET.value),
-          url: "https://randomuser.me/api/",
-          headers: Affjax.defaultRequest.headers,
-          content: Affjax.defaultRequest.content,
-          username: Affjax.defaultRequest.username,
-          password: Affjax.defaultRequest.password,
-          withCredentials: Affjax.defaultRequest.withCredentials,
-          responseFormat: Affjax_ResponseFormat.json,
-          timeout: Affjax.defaultRequest.timeout
-      }))(function (result) {
-          if (result instanceof Data_Either.Left) {
-              return Effect_Class.liftEffect(Effect_Aff.monadEffectAff)(push("GET /api response failed to decode: " + Affjax.printError(result.value0)));
-          };
-          if (result instanceof Data_Either.Right) {
-              return Effect_Class.liftEffect(Effect_Aff.monadEffectAff)(push(Data_Argonaut_Core.stringifyWithIndent(2)(result.value0.body)));
-          };
-          throw new Error("Failed pattern match at Deku.Example.Docs.Effects (line 210, column 9 - line 216, column 48): " + [ result.constructor.name ]);
-      }))));
+      return Deku_Graph_Attribute.cb(Data_Function["const"](function __do() {
+          push(new Data_Either.Left(Data_Unit.unit))();
+          return Effect_Aff.launchAff_(Control_Bind.bind(Effect_Aff.bindAff)(Affjax.request({
+              method: new Data_Either.Left(Data_HTTP_Method.GET.value),
+              url: "https://randomuser.me/api/",
+              headers: Affjax.defaultRequest.headers,
+              content: Affjax.defaultRequest.content,
+              username: Affjax.defaultRequest.username,
+              password: Affjax.defaultRequest.password,
+              withCredentials: Affjax.defaultRequest.withCredentials,
+              responseFormat: Affjax_ResponseFormat.json,
+              timeout: Affjax.defaultRequest.timeout
+          }))(function (result) {
+              if (result instanceof Data_Either.Left) {
+                  return Effect_Class.liftEffect(Effect_Aff.monadEffectAff)(push(new Data_Either.Right("GET /api response failed to decode: " + Affjax.printError(result.value0))));
+              };
+              if (result instanceof Data_Either.Right) {
+                  return Effect_Class.liftEffect(Effect_Aff.monadEffectAff)(push(Data_Either.Right.create(Data_Argonaut_Core.stringifyWithIndent(2)(result.value0.body))));
+              };
+              throw new Error("Failed pattern match at Deku.Example.Docs.Effects (line 229, column 9 - line 235, column 48): " + [ result.constructor.name ]);
+          }))();
+      }));
   };
   var sg = function (dictDOMInterpret) {
       return function (v) {
@@ -11374,12 +11394,34 @@ var PS = {};
                   })))(false);
               };
           })(Deku_Control_Functions.iloop(Data_Monoid_Additive.monoidAdditive(Data_Semiring.semiringInt))(dictDOMInterpret)(Deku_Control_Types.isSceneSubScene)(function (e) {
-              return function (v1) {
+              return function (push) {
                   return function (started) {
                       if (e instanceof Data_Either.Left) {
-                          return Control_Applicative.pure(Deku_Control_Indexed.applicativeIxDOM)(true);
+                          return Control_Applicative.pure(Deku_Control_Indexed.applicativeIxDOM)(started);
                       };
-                      if (e instanceof Data_Either.Right) {
+                      if (e instanceof Data_Either.Right && e.value0 instanceof Data_Either.Left) {
+                          return Data_Functor.voidLeft(Deku_Control_Indexed.functorIxDOM)(Deku_Change.ichange_(dictDOMInterpret)(Deku_Change.change_All()(Deku_Change.changeRL_Cons({
+                              reflectSymbol: function () {
+                                  return "div.div1.button";
+                              }
+                          })()()(Deku_Change.changeButton_({
+                              reflectSymbol: function () {
+                                  return "div.div1.button";
+                              }
+                          })())(Deku_Change.changeRL_Cons({
+                              reflectSymbol: function () {
+                                  return "div.div1.button.t";
+                              }
+                          })()()(Deku_Change.changeTextString({
+                              reflectSymbol: function () {
+                                  return "div.div1.button.t";
+                              }
+                          })())(Deku_Change.changeRL_Nil))))({
+                              "div.div1.button.t": "Loading...",
+                              "div.div1.button": Deku_Graph_DOM["button'attr"]([ Deku_Graph_DOM.attr(Deku_Graph_DOM.attrOnClickCb)(Deku_Graph_DOM.OnClick.value)(Deku_Graph_Attribute.cb(Data_Function["const"](Control_Applicative.pure(Effect.applicativeEffect)(Data_Unit.unit)))) ])
+                          }))(started);
+                      };
+                      if (e instanceof Data_Either.Right && e.value0 instanceof Data_Either.Right) {
                           return Data_Functor.voidLeft(Deku_Control_Indexed.functorIxDOM)(Control_Apply.applySecond(Deku_Control_Indexed.applyIxDOM)(Control_Applicative.when(Deku_Control_Indexed.applicativeIxDOM)(!started)(Deku_Change.ichange_(dictDOMInterpret)(Deku_Change.change_All()(Deku_Change.changeRL_Cons({
                               reflectSymbol: function () {
                                   return "div.div2";
@@ -11392,17 +11434,35 @@ var PS = {};
                               "div.div2": Deku_Graph_DOM["div'attr"]([ Deku_Graph_DOM.attr(Deku_Graph_DOM.attrDiv_StyleString)(Deku_Graph_DOM.Style.value)("display: block;") ])
                           })))(Deku_Change.ichange_(dictDOMInterpret)(Deku_Change.change_All()(Deku_Change.changeRL_Cons({
                               reflectSymbol: function () {
+                                  return "div.div1.button";
+                              }
+                          })()()(Deku_Change.changeButton_({
+                              reflectSymbol: function () {
+                                  return "div.div1.button";
+                              }
+                          })())(Deku_Change.changeRL_Cons({
+                              reflectSymbol: function () {
+                                  return "div.div1.button.t";
+                              }
+                          })()()(Deku_Change.changeTextString({
+                              reflectSymbol: function () {
+                                  return "div.div1.button.t";
+                              }
+                          })())(Deku_Change.changeRL_Cons({
+                              reflectSymbol: function () {
                                   return "div.div2.pre.code.t";
                               }
                           })()()(Deku_Change.changeTextString({
                               reflectSymbol: function () {
                                   return "div.div2.pre.code.t";
                               }
-                          })())(Deku_Change.changeRL_Nil)))({
-                              "div.div2.pre.code.t": e.value0
+                          })())(Deku_Change.changeRL_Nil)))))({
+                              "div.div2.pre.code.t": e.value0.value0,
+                              "div.div1.button.t": "Click to get some random user data.",
+                              "div.div1.button": Deku_Graph_DOM["button'attr"]([ Deku_Graph_DOM.attr(Deku_Graph_DOM.attrOnClickCb)(Deku_Graph_DOM.OnClick.value)(clickCb(push)) ])
                           })))(true);
                       };
-                      throw new Error("Failed pattern match at Deku.Example.Docs.Effects (line 235, column 31 - line 246, column 16): " + [ e.constructor.name ]);
+                      throw new Error("Failed pattern match at Deku.Example.Docs.Effects (line 254, column 34 - line 275, column 16): " + [ e.constructor.name ]);
                   };
               };
           }));
@@ -11418,7 +11478,11 @@ var PS = {};
                               title: Deku_Graph_DOM.h1([  ])(Deku_Graph_DOM_Shorthand.text("Effects")),
                               subtitle: Deku_Graph_DOM.h3([  ])(Deku_Graph_DOM_Shorthand.text("Let's make a network call"))
                           }),
-                          pars: Deku_Graph_DOM.div([  ])(Deku_Util.detup(Deku_Util.detupTuple(Data_Typelevel_Num_Ops.typelevelSucc(Data_Typelevel_Num_Sets.posD1)()(Data_Typelevel_Num_Ops.divMod10D0D0)()(Data_Typelevel_Num_Ops.divMod10D1D0))(Deku_Util.detupTuple(Data_Typelevel_Num_Ops.typelevelSucc(Data_Typelevel_Num_Sets.posD2)()(Data_Typelevel_Num_Ops.divMod10D1D0)()(Data_Typelevel_Num_Ops.divMod10D2D0))(Deku_Util.detupTuple(Data_Typelevel_Num_Ops.typelevelSucc(Data_Typelevel_Num_Sets.posD3)()(Data_Typelevel_Num_Ops.divMod10D2D0)()(Data_Typelevel_Num_Ops.divMod10D3D0))(Deku_Util.detupTuple(Data_Typelevel_Num_Ops.typelevelSucc(Data_Typelevel_Num_Sets.posD4)()(Data_Typelevel_Num_Ops.divMod10D3D0)()(Data_Typelevel_Num_Ops.divMod10D4D0))(Deku_Util.detupTuple(Data_Typelevel_Num_Ops.typelevelSucc(Data_Typelevel_Num_Sets.posD5)()(Data_Typelevel_Num_Ops.divMod10D4D0)()(Data_Typelevel_Num_Ops.divMod10D5D0))(Deku_Util.detupTuple(Data_Typelevel_Num_Ops.typelevelSucc(Data_Typelevel_Num_Sets.posD6)()(Data_Typelevel_Num_Ops.divMod10D5D0)()(Data_Typelevel_Num_Ops.divMod10D6D0))(Deku_Util.detupTuple(Data_Typelevel_Num_Ops.typelevelSucc(Data_Typelevel_Num_Sets.posD7)()(Data_Typelevel_Num_Ops.divMod10D6D0)()(Data_Typelevel_Num_Ops.divMod10D7D0))(Deku_Util.detupTuple(Data_Typelevel_Num_Ops.typelevelSucc(Data_Typelevel_Num_Sets.posD8)()(Data_Typelevel_Num_Ops.divMod10D7D0)()(Data_Typelevel_Num_Ops.divMod10D8D0))(Deku_Util.detupUnit)()()({
+                          pars: Deku_Graph_DOM.div([  ])(Deku_Util.detup(Deku_Util.detupTuple(Data_Typelevel_Num_Ops.typelevelSucc(Data_Typelevel_Num_Sets.posD1)()(Data_Typelevel_Num_Ops.divMod10D0D0)()(Data_Typelevel_Num_Ops.divMod10D1D0))(Deku_Util.detupTuple(Data_Typelevel_Num_Ops.typelevelSucc(Data_Typelevel_Num_Sets.posD2)()(Data_Typelevel_Num_Ops.divMod10D1D0)()(Data_Typelevel_Num_Ops.divMod10D2D0))(Deku_Util.detupTuple(Data_Typelevel_Num_Ops.typelevelSucc(Data_Typelevel_Num_Sets.posD3)()(Data_Typelevel_Num_Ops.divMod10D2D0)()(Data_Typelevel_Num_Ops.divMod10D3D0))(Deku_Util.detupTuple(Data_Typelevel_Num_Ops.typelevelSucc(Data_Typelevel_Num_Sets.posD4)()(Data_Typelevel_Num_Ops.divMod10D3D0)()(Data_Typelevel_Num_Ops.divMod10D4D0))(Deku_Util.detupTuple(Data_Typelevel_Num_Ops.typelevelSucc(Data_Typelevel_Num_Sets.posD5)()(Data_Typelevel_Num_Ops.divMod10D4D0)()(Data_Typelevel_Num_Ops.divMod10D5D0))(Deku_Util.detupTuple(Data_Typelevel_Num_Ops.typelevelSucc(Data_Typelevel_Num_Sets.posD6)()(Data_Typelevel_Num_Ops.divMod10D5D0)()(Data_Typelevel_Num_Ops.divMod10D6D0))(Deku_Util.detupTuple(Data_Typelevel_Num_Ops.typelevelSucc(Data_Typelevel_Num_Sets.posD7)()(Data_Typelevel_Num_Ops.divMod10D6D0)()(Data_Typelevel_Num_Ops.divMod10D7D0))(Deku_Util.detupTuple(Data_Typelevel_Num_Ops.typelevelSucc(Data_Typelevel_Num_Sets.posD8)()(Data_Typelevel_Num_Ops.divMod10D7D0)()(Data_Typelevel_Num_Ops.divMod10D8D0))(Deku_Util.detupTuple(Data_Typelevel_Num_Ops.typelevelSucc(Data_Typelevel_Num_Sets.posD9)()(Data_Typelevel_Num_Ops.divMod10D8D0)()(Data_Typelevel_Num_Ops.divMod10D9D0))(Deku_Util.detupUnit)()()({
+                              reflectSymbol: function () {
+                                  return "8";
+                              }
+                          })())()()({
                               reflectSymbol: function () {
                                   return "7";
                               }
@@ -11462,7 +11526,7 @@ var PS = {};
                               reflectSymbol: function () {
                                   return "0";
                               }
-                          })())(new Data_Tuple.Tuple(Deku_Graph_DOM.text("This example is similar to the previous one in its design: "), new Data_Tuple.Tuple(Deku_Graph_DOM.code([  ])(Deku_Graph_DOM_Shorthand.text("iloop")), new Data_Tuple.Tuple(Deku_Graph_DOM.text(" is called in response to an event. The difference is that the response isn't immediate. Instead, we wait for the result of a network call."), Data_Unit.unit))))), new Data_Tuple.Tuple(Deku_Graph_DOM.pre([  ])(Deku_Graph_DOM_Shorthand.code([  ])(Deku_Graph_DOM_Shorthand.text("module Deku.Example.Docs.Example.Effects where\x0a\x0aimport Prelude\x0a\x0aimport Affjax as AX\x0aimport Affjax.ResponseFormat as ResponseFormat\x0aimport Data.Argonaut.Core (stringifyWithIndent)\x0aimport Data.Either (Either(..))\x0aimport Data.Foldable (for_)\x0aimport Data.HTTP.Method (Method(..))\x0aimport Deku.Change (ichange_)\x0aimport Deku.Control.Functions.Graph (iloop, (@!>))\x0aimport Deku.Control.Types (Frame0, Scene)\x0aimport Deku.Create (icreate)\x0aimport Deku.Graph.Attribute (Cb, cb)\x0aimport Deku.Graph.DOM ((:=), root)\x0aimport Deku.Graph.DOM as D\x0aimport Deku.Graph.DOM.Shorthand as S\x0aimport Deku.Interpret (class DOMInterpret, makeFFIDOMSnapshot)\x0aimport Deku.Run (defaultOptions, run)\x0aimport Effect (Effect)\x0aimport Effect.Aff (launchAff_)\x0aimport Effect.Class (liftEffect)\x0aimport FRP.Event (subscribe)\x0aimport Web.DOM (Element)\x0aimport Web.HTML (window)\x0aimport Web.HTML.HTMLDocument (body)\x0aimport Web.HTML.HTMLElement (toElement)\x0aimport Web.HTML.Window (document)\x0a\x0aclickCb :: (String -> Effect Unit) -> Cb\x0aclickCb push = cb\x0a  ( const do\x0a      launchAff_ $ do\x0a        result <- AX.request\x0a          ( AX.defaultRequest\x0a              { url = \"https://randomuser.me/api/\"\x0a              , method = Left GET\x0a              , responseFormat = ResponseFormat.json\x0a              }\x0a          )\x0a        case result of\x0a          Left err -> liftEffect $ push\x0a            ( \"GET /api response failed to decode: \" <>\x0a                AX.printError err\x0a            )\x0a          Right response -> liftEffect $ push $\x0a            stringifyWithIndent 2 response.body\x0a  )\x0a\x0ascene\x0a  :: forall env dom engine res\x0a   . Monoid res\x0a  => DOMInterpret dom engine\x0a  => Element\x0a  -> Scene env dom engine Frame0 String res\x0ascene elt =\x0a  ( \\_ push ->\x0a      ( icreate $ root elt\x0a          ( { div1: D.div []\x0a                { button: D.button\x0a                    [ D.OnClick := clickCb push ]\x0a                    (S.text \"Click to get some random user data.\")\x0a                }\x0a            , div2: D.div [D.Style := \"display: none;\"]\x0a                (S.pre [] (S.code [] (S.text \"\")))\x0a            }\x0a          )\x0a      ) $> false\x0a  ) @!> iloop \\e _ started -> case e of\x0a    Left _ -> pure true\x0a    Right str ->\x0a      when (not started)\x0a        ( ichange_\x0a            { \"root.div2\": D.div'attr [D.Style := \"display: block;\"]\x0a            }\x0a        )\x0a        *> ichange_\x0a          { \"root.div2.pre.code.t\": str\x0a          }\x0a        $> true\x0a\x0amain :: Effect Unit\x0amain = do\x0a  b' <- window >>= document >>= body\x0a  for_ (toElement <$> b') \\elt -> do\x0a    ffi <- makeFFIDOMSnapshot\x0a    subscribe\x0a      ( run (pure unit) (pure unit) defaultOptions ffi\x0a          (scene elt)\x0a\x0a      )\x0a      (_.res >>> pure)\x0a"))), new Data_Tuple.Tuple(Deku_Graph_DOM.p([  ])(Deku_Util.detup(Deku_Util.detupTuple(Data_Typelevel_Num_Ops.typelevelSucc(Data_Typelevel_Num_Sets.posD1)()(Data_Typelevel_Num_Ops.divMod10D0D0)()(Data_Typelevel_Num_Ops.divMod10D1D0))(Deku_Util.detupUnit)()()({
+                          })())(new Data_Tuple.Tuple(Deku_Graph_DOM.text("This example is similar to the previous one in its design: "), new Data_Tuple.Tuple(Deku_Graph_DOM.code([  ])(Deku_Graph_DOM_Shorthand.text("iloop")), new Data_Tuple.Tuple(Deku_Graph_DOM.text(" is called in response to an event. The difference is that the response isn't immediate. Instead, we wait for the result of a network call."), Data_Unit.unit))))), new Data_Tuple.Tuple(Deku_Graph_DOM.pre([  ])(Deku_Graph_DOM_Shorthand.code([  ])(Deku_Graph_DOM_Shorthand.text("module Deku.Example.Docs.Example.Effects where\x0a\x0aimport Prelude\x0a\x0aimport Affjax as AX\x0aimport Affjax.ResponseFormat as ResponseFormat\x0aimport Data.Argonaut.Core (stringifyWithIndent)\x0aimport Data.Either (Either(..))\x0aimport Data.Foldable (for_)\x0aimport Data.HTTP.Method (Method(..))\x0aimport Deku.Change (ichange_)\x0aimport Deku.Control.Functions.Graph (iloop, (@!>))\x0aimport Deku.Control.Types (Frame0, Scene)\x0aimport Deku.Create (icreate)\x0aimport Deku.Graph.Attribute (Cb, cb)\x0aimport Deku.Graph.DOM ((:=), root)\x0aimport Deku.Graph.DOM as D\x0aimport Deku.Graph.DOM.Shorthand as S\x0aimport Deku.Interpret (class DOMInterpret, makeFFIDOMSnapshot)\x0aimport Deku.Run (defaultOptions, run)\x0aimport Effect (Effect)\x0aimport Effect.Aff (launchAff_)\x0aimport Effect.Class (liftEffect)\x0aimport FRP.Event (subscribe)\x0aimport Web.DOM (Element)\x0aimport Web.HTML (window)\x0aimport Web.HTML.HTMLDocument (body)\x0aimport Web.HTML.HTMLElement (toElement)\x0aimport Web.HTML.Window (document)\x0a\x0aclickCb :: (Either Unit String -> Effect Unit) -> Cb\x0aclickCb push = cb\x0a  ( const do\x0a      push (Left unit)\x0a      launchAff_ $ do\x0a        result <- AX.request\x0a          ( AX.defaultRequest\x0a              { url = \"https://randomuser.me/api/\"\x0a              , method = Left GET\x0a              , responseFormat = ResponseFormat.json\x0a              }\x0a          )\x0a        case result of\x0a          Left err -> liftEffect $ push\x0a            $ Right\x0a              ( \"GET /api response failed to decode: \" <>\x0a                  AX.printError err\x0a              )\x0a          Right response -> liftEffect $ push $ Right $\x0a            stringifyWithIndent 2 response.body\x0a  )\x0a\x0ascene\x0a  :: forall env dom engine res\x0a   . Monoid res\x0a  => DOMInterpret dom engine\x0a  => Element\x0a  -> Scene env dom engine Frame0 (Either Unit String) res\x0ascene elt =\x0a  ( \\_ push ->\x0a      ( icreate $ root elt\x0a          ( { div1: D.div []\x0a                { button: D.button\x0a                    [ D.OnClick := clickCb push ]\x0a                    (S.text \"Click to get some random user data.\")\x0a                }\x0a            , div2: D.div [ D.Style := \"display: none;\" ]\x0a                (S.pre [] (S.code [] (S.text \"\")))\x0a            }\x0a          )\x0a      ) $> false\x0a  ) @!> iloop \\e push started -> case e of\x0a    Left _ -> pure started\x0a    Right (Left _) ->\x0a      ichange_\x0a        { \"root.div1.button.t\": \"Loading...\"\x0a        , \"root.div1.button\":\x0a            D.button'attr [ D.OnClick := cb (const $ pure unit) ]\x0a        } $> started\x0a    Right (Right str) ->\x0a      when (not started)\x0a        ( ichange_\x0a            { \"root.div2\": D.div'attr [ D.Style := \"display: block;\" ]\x0a            }\x0a        )\x0a        *> ichange_\x0a          { \"root.div2.pre.code.t\": str\x0a          , \"root.div1.button.t\":\x0a              \"Click to get some random user data.\"\x0a          , \"root.div1.button\":\x0a              D.button'attr [ D.OnClick := clickCb push ]\x0a          }\x0a        $> true\x0a\x0amain :: Effect Unit\x0amain = do\x0a  b' <- window >>= document >>= body\x0a  for_ (toElement <$> b') \\elt -> do\x0a    ffi <- makeFFIDOMSnapshot\x0a    subscribe\x0a      ( run (pure unit) (pure unit) defaultOptions ffi\x0a          (scene elt)\x0a\x0a      )\x0a      (_.res >>> pure)\x0a"))), new Data_Tuple.Tuple(Deku_Graph_DOM.p([  ])(Deku_Util.detup(Deku_Util.detupTuple(Data_Typelevel_Num_Ops.typelevelSucc(Data_Typelevel_Num_Sets.posD1)()(Data_Typelevel_Num_Ops.divMod10D0D0)()(Data_Typelevel_Num_Ops.divMod10D1D0))(Deku_Util.detupUnit)()()({
                               reflectSymbol: function () {
                                   return "0";
                               }
@@ -11486,7 +11550,11 @@ var PS = {};
                               reflectSymbol: function () {
                                   return "0";
                               }
-                          })())(new Data_Tuple.Tuple(Deku_Graph_DOM.text("Because all event listeners execute in the effect monad, you can do more or less whatever you want. Make a network call, run a monad transformer stack just for fun, play music using "), new Data_Tuple.Tuple(Deku_Graph_DOM.code([  ])(Deku_Graph_DOM_Shorthand.text("purescript-wags")), new Data_Tuple.Tuple(Deku_Graph_DOM.text(". The sky's the limit!"), Data_Unit.unit))))), new Data_Tuple.Tuple(Deku_Graph_DOM.h2([  ])(Deku_Graph_DOM_Shorthand.text("Next steps")), new Data_Tuple.Tuple(Deku_Graph_DOM.p([  ])(Deku_Util.detup(Deku_Util.detupTuple(Data_Typelevel_Num_Ops.typelevelSucc(Data_Typelevel_Num_Sets.posD1)()(Data_Typelevel_Num_Ops.divMod10D0D0)()(Data_Typelevel_Num_Ops.divMod10D1D0))(Deku_Util.detupTuple(Data_Typelevel_Num_Ops.typelevelSucc(Data_Typelevel_Num_Sets.posD2)()(Data_Typelevel_Num_Ops.divMod10D1D0)()(Data_Typelevel_Num_Ops.divMod10D2D0))(Deku_Util.detupTuple(Data_Typelevel_Num_Ops.typelevelSucc(Data_Typelevel_Num_Sets.posD3)()(Data_Typelevel_Num_Ops.divMod10D2D0)()(Data_Typelevel_Num_Ops.divMod10D3D0))(Deku_Util.detupUnit)()()({
+                          })())(new Data_Tuple.Tuple(Deku_Graph_DOM.text("Because all event listeners execute in the effect monad, you can do more or less whatever you want. Make a network call, run a monad transformer stack just for fun, play music using "), new Data_Tuple.Tuple(Deku_Graph_DOM.code([  ])(Deku_Graph_DOM_Shorthand.text("purescript-wags")), new Data_Tuple.Tuple(Deku_Graph_DOM.text(". The sky's the limit!"), Data_Unit.unit))))), new Data_Tuple.Tuple(Deku_Graph_DOM.p([  ])(Deku_Util.detup(Deku_Util.detupTuple(Data_Typelevel_Num_Ops.typelevelSucc(Data_Typelevel_Num_Sets.posD1)()(Data_Typelevel_Num_Ops.divMod10D0D0)()(Data_Typelevel_Num_Ops.divMod10D1D0))(Deku_Util.detupUnit)()()({
+                              reflectSymbol: function () {
+                                  return "0";
+                              }
+                          })())(new Data_Tuple.Tuple(Deku_Graph_DOM.text("Another useful pattern when working with effects is to throttle input. For example, if we are making a network call, we may want to show a loading indicator and prevent additional network calls. This can be achieved by setting the callback to a no-op while the network call is executing, as shown in the example above."), Data_Unit.unit))), new Data_Tuple.Tuple(Deku_Graph_DOM.h2([  ])(Deku_Graph_DOM_Shorthand.text("Next steps")), new Data_Tuple.Tuple(Deku_Graph_DOM.p([  ])(Deku_Util.detup(Deku_Util.detupTuple(Data_Typelevel_Num_Ops.typelevelSucc(Data_Typelevel_Num_Sets.posD1)()(Data_Typelevel_Num_Ops.divMod10D0D0)()(Data_Typelevel_Num_Ops.divMod10D1D0))(Deku_Util.detupTuple(Data_Typelevel_Num_Ops.typelevelSucc(Data_Typelevel_Num_Sets.posD2)()(Data_Typelevel_Num_Ops.divMod10D1D0)()(Data_Typelevel_Num_Ops.divMod10D2D0))(Deku_Util.detupTuple(Data_Typelevel_Num_Ops.typelevelSucc(Data_Typelevel_Num_Sets.posD3)()(Data_Typelevel_Num_Ops.divMod10D2D0)()(Data_Typelevel_Num_Ops.divMod10D3D0))(Deku_Util.detupUnit)()()({
                               reflectSymbol: function () {
                                   return "2";
                               }
@@ -11498,7 +11566,7 @@ var PS = {};
                               reflectSymbol: function () {
                                   return "0";
                               }
-                          })())(new Data_Tuple.Tuple(Deku_Graph_DOM.span([  ])(Deku_Graph_DOM_Shorthand.text("In more complicated apps, like this documentation, we'll want to split up our components into sub-components and create a way for them to communicate back and forth. In the next section, we'll see one way to do this via ")), new Data_Tuple.Tuple(Deku_Graph_DOM.a([ Deku_Graph_DOM.attr(Deku_Graph_DOM.attrOnClickCb)(Deku_Graph_DOM.OnClick.value)(Deku_Graph_Attribute.cb(Data_Function["const"](Control_Apply.applySecond(Effect.applyEffect)(dpage(Deku_Example_Docs_Types.Subgraph.value))(Deku_Example_Docs_Util.scrollToTop)))), Deku_Graph_DOM.attr(Deku_Graph_DOM.attrA_StyleString)(Deku_Graph_DOM.Style.value)("cursor:pointer;") ])(Deku_Graph_DOM_Shorthand.text("subgraphs")), new Data_Tuple.Tuple(Deku_Graph_DOM.span([  ])(Deku_Graph_DOM_Shorthand.text(".")), Data_Unit.unit))))), Data_Unit.unit))))))))))
+                          })())(new Data_Tuple.Tuple(Deku_Graph_DOM.span([  ])(Deku_Graph_DOM_Shorthand.text("In more complicated apps, like this documentation, we'll want to split up our components into sub-components and create a way for them to communicate back and forth. In the next section, we'll see one way to do this via ")), new Data_Tuple.Tuple(Deku_Graph_DOM.a([ Deku_Graph_DOM.attr(Deku_Graph_DOM.attrOnClickCb)(Deku_Graph_DOM.OnClick.value)(Deku_Graph_Attribute.cb(Data_Function["const"](Control_Apply.applySecond(Effect.applyEffect)(dpage(Deku_Example_Docs_Types.Subgraph.value))(Deku_Example_Docs_Util.scrollToTop)))), Deku_Graph_DOM.attr(Deku_Graph_DOM.attrA_StyleString)(Deku_Graph_DOM.Style.value)("cursor:pointer;") ])(Deku_Graph_DOM_Shorthand.text("subgraphs")), new Data_Tuple.Tuple(Deku_Graph_DOM.span([  ])(Deku_Graph_DOM_Shorthand.text(".")), Data_Unit.unit))))), Data_Unit.unit)))))))))))
                       })
                   });
               };
