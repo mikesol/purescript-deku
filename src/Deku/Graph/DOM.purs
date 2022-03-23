@@ -6,6 +6,8 @@ module Deku.Graph.DOM
   , ResolvedSubgraphSig
   , AsSubgraph(..)
   , unAsSubGraph
+  , myNameIs
+  , MyNameIs
   , (:=)
   , class Attr
   , attr
@@ -876,6 +878,11 @@ import Web.DOM as Web.DOM
 class TypeToSym (a :: Type) (b :: Symbol) | a -> b
 
 instance typeToSymTup :: TypeToSym a c => TypeToSym (a /\ b) c
+
+newtype MyNameIs name item = MyNameIs { unMyNameIs :: item }
+
+myNameIs :: forall proxy name item. proxy name -> item -> MyNameIs name item
+myNameIs _ = MyNameIs <<< { unMyNameIs: _ }
 
 type Element' element children =
   (element :: element, children :: { | children })

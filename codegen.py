@@ -218,6 +218,7 @@ instance reify{typ} :: ReifyAU {term} {typ} where
 if __name__ == '__main__':
     for z in range(10):
       if z == GENERATE_NOOP: continue
+      if z == GENERATE_CREATES: continue
       o = cg(z)
       with open(CG_MAP[z], 'r') as rf:
         i = rf.read().split('\n')
