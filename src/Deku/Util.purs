@@ -148,7 +148,8 @@ instance natToSymDCons ::
   ) =>
   NatToSym (x :* y) o
 
-foreign import unsafeLeftBiasedSet :: forall r1 r2 a. String -> a -> Record r1 -> Record r2
+foreign import unsafeLeftBiasedSet
+  :: forall r1 r2 a. String -> a -> Record r1 -> Record r2
 
 insertLeft
   :: forall proxy r1 r2 l a

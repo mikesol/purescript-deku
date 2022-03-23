@@ -4,10 +4,10 @@ import Prelude
 
 import Data.Either (Either(..))
 import Data.Foldable (for_)
-import Deku.Change (ichange)
-import Deku.Control.Functions.Graph (iloop, (@!>))
+import Deku.Change (change)
+import Data.Tuple.Nested ((/\))
+import Deku.Control.Functions ((@>))
 import Deku.Control.Types (Frame0, Scene)
-import Deku.Create (icreate)
 import Deku.Graph.Attribute (cb)
 import Deku.Graph.DOM ((:=), root)
 import Deku.Graph.DOM as D
@@ -35,46 +35,46 @@ scene
   -> Scene env dom engine Frame0 UIEvents res
 scene elt =
   ( \_ push ->
-      ( icreate $ root elt
-          ( { div1: D.div []
-                { button: D.button
-                    [ D.OnClick :=
-                        cb (const $ push ButtonClicked)
-                    ]
-                    (S.text "Click")
-                , count: D.div [] (S.text "Val: 0")
-                }
-            , div2: D.div []
-                { slider: D.input
-                    [ D.Xtype := "range"
-                    , D.OnInput := cb \e -> for_
-                        ( target e
-                            >>= fromEventTarget
-                            >>= fromElement
-                        )
-                        ( valueAsNumber
-                            >=> push <<< SliderMoved
-                        )
-                    ]
-                    {}
-                , val: D.div [] (S.text "Val: 50")
-                }
-            }
-          )
-      ) $> 0
-  ) @!> iloop \e _ nclicks -> case e of
+      root elt
+        ( { div1: D.div []
+              { button: D.button
+                  [ D.OnClick :=
+                      cb (const $ push ButtonClicked)
+                  ]
+                  (S.text "Click")
+              , count: D.div [] (S.text "Val: 0")
+              }
+          , div2: D.div []
+              { slider: D.input
+                  [ D.Xtype := "range"
+                  , D.OnInput := cb \e -> for_
+                      ( target e
+                          >>= fromEventTarget
+                          >>= fromElement
+                      )
+                      ( valueAsNumber
+                          >=> push <<< SliderMoved
+                      )
+                  ]
+                  {}
+              , val: D.div [] (S.text "Val: 50")
+              }
+          }
+        )
+        /\ 0
+  ) @> \e nclicks -> case e of
     Left _ -> pure nclicks
     Right ButtonClicked ->
       let
         c = nclicks + 1
       in
-        ichange
+        change
           { "root.div1.count.t": "Val: " <> show c
           , "root.div1.button.t":
               if mod c 2 == 0 then "Click" else "me"
           } $> c
     Right (SliderMoved n) ->
-      ichange
+      change
         { "root.div2.val.t": "Val: " <> show n
         } $> nclicks
 

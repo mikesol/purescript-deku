@@ -4,9 +4,8 @@ import Prelude
 
 import Data.Foldable (for_)
 import Data.Tuple.Nested ((/\))
-import Deku.Control.Functions.Graph (freeze, (@!>))
+import Deku.Control.Functions (freeze, u, (@>))
 import Deku.Control.Types (Frame0, Scene)
-import Deku.Create (icreate)
 import Deku.Graph.DOM (root, text)
 import Deku.Interpret (makeFFIDOMSnapshot)
 import Deku.Run (RunDOM, RunEngine, TriggeredScene, defaultOptions, run)
@@ -24,11 +23,11 @@ scene
   -> Scene (TriggeredScene Unit Unit) RunDOM RunEngine Frame0 Unit Unit
 scene elt =
   ( \_ _ ->
-      ( icreate $
-          root elt
-            (detup (text "a" /\ text "b" /\ text "c" /\ text "d" /\ unit))
-      )
-  ) @!> freeze
+      u $
+        root elt
+          (detup (text "a" /\ text "b" /\ text "c" /\ text "d" /\ unit))
+
+  ) @> freeze
 
 main :: Effect Unit
 main = do

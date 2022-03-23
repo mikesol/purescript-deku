@@ -5,7 +5,6 @@ in      conf
         , dependencies =
               conf.dependencies
             # [  "arrays"
-              , "transformers"
               , "web-html"
               , "affjax"
               , "aff"

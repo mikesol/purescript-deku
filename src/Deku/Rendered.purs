@@ -7,7 +7,6 @@ module Deku.Rendered where
 import Prelude
 
 import Data.Function (on)
-import Data.Map (Map)
 import Data.Maybe (Maybe(..))
 import Data.Newtype (class Newtype)
 import Data.Variant (Variant, inj, match)
@@ -70,13 +69,7 @@ type MakeText = { id :: String, text :: String }
 type MakeRoot = { id :: String, root :: RootDOMElement }
 type MakeSubgraph =
   { id :: String
-  , terminus :: String
   , instructions :: Array (Array Instruction)
-  }
-type MakeTumult =
-  { id :: String
-  , terminus :: String
-  , instructions :: Map Int (Maybe (Array Instruction))
   }
 type ConnectXToY =
   { fromId :: String
@@ -91,11 +84,6 @@ type SetAttribute =
   , value :: AttributeValue
   }
 type SetSubgraph = { id :: String }
-type SetTumult =
-  { id :: String
-  , terminus :: String
-  , instructions :: Map Int (Maybe (Array Instruction))
-  }
 
 -- An dom rendering instruction. These instructions are used
 -- for testing purposes during "dry run" simulations of dom rendering.
@@ -109,13 +97,11 @@ type Instruction' =
   , makeText :: MakeText
   , makeRoot :: MakeRoot
   , makeSubgraph :: MakeSubgraph
-  , makeTumult :: MakeTumult
   , connectXToY :: ConnectXToY
   , massiveChange :: MassiveChange
   , setAttribute :: SetAttribute
   , setText :: SetText
   , setSubgraph :: SetSubgraph
-  , setTumult :: SetTumult
   )
 
 newtype Instruction = Instruction (Variant Instruction')
@@ -129,13 +115,11 @@ instructionWeight (Instruction v) = v # match
   , massiveCreate: const 2
   , makeText: const 2
   , makeSubgraph: const 3
-  , makeTumult: const 4
   , connectXToY: const 5
   , setAttribute: const 6
   , massiveChange: const 6
   , setText: const 6
   , setSubgraph: const 7
-  , setTumult: const 8
   }
 
 instructionId :: Instruction -> Maybe String
@@ -147,13 +131,11 @@ instructionId (Instruction v) = v # match
   , makeRoot: _.id >>> Just
   , makeSubgraph: _.id >>> Just
   , massiveCreate: const Nothing
-  , makeTumult: _.id >>> Just
   , connectXToY: _.fromId >>> Just
   , setAttribute: _.id >>> Just
   , setText: _.id >>> Just
   , setSubgraph: _.id >>> Just
   , massiveChange: const Nothing
-  , setTumult: _.id >>> Just
   }
 
 derive instance newtypeInstruction :: Newtype Instruction _
@@ -196,9 +178,6 @@ iMakeSubgraph = Instruction <<< inj (Proxy :: Proxy "makeSubgraph")
 iMassiveCreate :: MassiveCreate -> Instruction
 iMassiveCreate = Instruction <<< inj (Proxy :: Proxy "massiveCreate")
 
-iMakeTumult :: MakeTumult -> Instruction
-iMakeTumult = Instruction <<< inj (Proxy :: Proxy "makeTumult")
-
 iConnectXToY :: ConnectXToY -> Instruction
 iConnectXToY = Instruction <<< inj (Proxy :: Proxy "connectXToY")
 
@@ -207,9 +186,6 @@ iSetAttribute = Instruction <<< inj (Proxy :: Proxy "setAttribute")
 
 iSetSubgraph :: SetSubgraph -> Instruction
 iSetSubgraph = Instruction <<< inj (Proxy :: Proxy "setSubgraph")
-
-iSetTumult :: SetTumult -> Instruction
-iSetTumult = Instruction <<< inj (Proxy :: Proxy "setTumult")
 
 iSetText :: SetText -> Instruction
 iSetText = Instruction <<< inj (Proxy :: Proxy "setText")

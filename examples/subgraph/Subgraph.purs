@@ -2,20 +2,16 @@ module Deku.Example.Subgraph where
 
 import Prelude
 
-import Control.Applicative.Indexed ((:*>))
+import Data.Array ((..))
 import Data.Either (Either(..))
 import Data.Foldable (for_)
-import Data.Tuple.Nested ((/\))
 import Data.Map as Map
 import Data.Maybe (Maybe(..))
 import Data.Monoid.Additive (Additive(..))
-import Deku.Change (ichange)
-import Data.Array ((..))
-import Deku.Control.Functions (imodifyRes)
-import Deku.Control.Functions.Graph (iloop, (@!>))
-import Deku.Control.Functions.Subgraph as SG
+import Data.Tuple.Nested ((/\))
+import Deku.Change (change)
+import Deku.Control.Functions (modifyRes, (%!>), (%>), (@>))
 import Deku.Control.Types (Frame0, Scene)
-import Deku.Create (icreate)
 import Deku.Graph.Attribute (cb)
 import Deku.Graph.DOM (AsSubgraph(..), xsubgraph, Href(..), OnClick(..), a, a'attr, root, subgraph, text, (:=))
 import Deku.Graph.DOM as D
@@ -39,67 +35,68 @@ scene elt =
       let
         falsy n = Map.fromFoldable (map (\i -> i /\ Just false) (0 .. n))
       in
-        ( ( icreate $
-              root elt
-                { hello: D.div []
-                    { hello: a
-                        [ Href := "#", OnClick := cb (const $ push0 Hello) ]
-                        { ht: text "click" }
-                    , helloA: subgraph (falsy 40)
-                        ( AsSubgraph \i -> SG.istart
-                            ( \_ push ->
-                                ( icreate
-                                    { myA: a
-                                        [ Href := "#"
-                                        , OnClick := cb
-                                            ( const $ do
-                                                push false
-                                                when (i == 4) (push0 Hello)
-                                            )
-                                        ]
-                                        { myTxt: text " me " }
-                                    }
-                                )
-                            )
-                            ( SG.iloop \e push _ ->
-                                case e of
-                                  Left tf -> when tf $ do
-                                    ichange { "myA.myTxt": "banana" }
-                                  Right tf -> ichange
+        ( root elt
+            { hello: D.div []
+                { hello: a
+                    [ Href := "#", OnClick := cb (const $ push0 Hello) ]
+                    { ht: text "click" }
+                , helloA: subgraph (falsy 40)
+                    ( AsSubgraph \i ->
+
+                        ( \_ push ->
+                            { myA: a
+                                [ Href := "#"
+                                , OnClick := cb
+                                    ( const $ do
+                                        push false
+                                        when (i == 4) (push0 Hello)
+                                    )
+                                ]
+                                { myTxt: text " me " }
+                            } /\ push
+
+                        ) %>
+                          ( \e push ->
+                              case e of
+                                Left tf ->
+                                  when tf
+                                    (change { "myA.myTxt": "banana" }) $> push
+                                Right tf ->
+                                  change
                                     { "myA": a'attr
                                         [ OnClick := cb (const $ push (not tf))
                                         ]
                                     , "myA.myTxt": if tf then " me " else " em "
-                                    }
+                                    } $> push
+                          )
+                    )
+                }
+            , world: D.div []
+                { wA: a [ Href := "#", OnClick := cb (const $ push0 World) ]
+                    { ht: text "click" }
+                , wB: subgraph (falsy 10)
+                    ( AsSubgraph \i ->
+                        ( \_ push ->
+                            ( { myA: a
+                                  [ Href := "#"
+                                  , OnClick := cb
+                                      ( const $ do
+                                          push false
+                                          when (i == 11) (push0 Hello)
+                                      )
+                                  ]
+                                  { myTxt: text $ " me" <> show i <> " " }
+                              } /\ (push /\ Additive i) /\ (Additive i)
                             )
-                        )
-                    }
-                , world: D.div []
-                    { wA: a [ Href := "#", OnClick := cb (const $ push0 World) ]
-                        { ht: text "click" }
-                    , wB: subgraph (falsy 10)
-                        ( AsSubgraph \i -> SG.istart
-                            ( \_ push ->
-                                ( icreate
-                                    { myA: a
-                                        [ Href := "#"
-                                        , OnClick := cb
-                                            ( const $ do
-                                                push false
-                                                when (i == 11) (push0 Hello)
-                                            )
-                                        ]
-                                        { myTxt: text $ " me" <> show i <> " " }
-                                    } :*> imodifyRes (const $ Additive i)
-                                )
-                            )
-                            ( SG.iloop \e push (Additive i') ->
-                                case e of
-                                  Left _ ->
-                                    imodifyRes
-                                      (const $ Additive ((i' + 1) `mod` 40))
-                                  Right tf ->
-                                    ichange
+                        ) %!>
+                          \e (push /\ (Additive i')) ->
+                            case e of
+                              Left _ ->
+                                map ((/\) push) $ modifyRes
+                                  (const $ Additive ((i' + 1) `mod` 40))
+                              Right tf ->
+                                map ((/\) push)
+                                  ( change
                                       { "myA": a'attr
                                           [ OnClick := cb
                                               (const $ push (not tf))
@@ -107,21 +104,22 @@ scene elt =
                                       , "myA.myTxt":
                                           if tf then " me"
                                           else " em" <> show i <> " "
-                                      } :*> imodifyRes (const $ Additive i')
-                            )
-                        )
-                    }
+                                      } *> modifyRes (const $ Additive i')
+                                  )
 
+                    )
                 }
-          ) $> 0
+
+            }
+            /\ 0
         )
-  ) @!> iloop \e _ lmt ->
+  ) @> \e lmt ->
     lmt + 1 <$ case e of
       Left _ -> pure unit
-      Right Hello -> ichange
+      Right Hello -> change
         { "root.hello.helloA": xsubgraph (Map.singleton 9 (Just true))
         }
-      Right World -> ichange
+      Right World -> change
         { "root.world.wB": xsubgraph
             ( Map.fromFoldable
                 ( map

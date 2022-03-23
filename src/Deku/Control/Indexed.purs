@@ -1,65 +1,45 @@
-module Deku.Control.Indexed where
+module Deku.Control.Monadic where
 
 import Prelude
 
-import Control.Applicative.Indexed (class IxApplicative, class IxApply, iapply, ipure)
-import Control.Bind.Indexed (class IxBind, ibind)
 import Control.Comonad (extract)
-import Control.Monad.Indexed (class IxMonad)
 import Data.Functor (voidRight)
-import Data.Functor.Indexed (class IxFunctor)
 import Deku.Control.Types (DOM)
 
-newtype IxDOM
+newtype MDOM
   (dom :: Type)
   (engine :: Type)
   (proof :: Type)
   (res :: Type)
-  (graphi :: Row Type)
-  (grapho :: Row Type)
-  (a :: Type) = IxDOM
+  (graph :: Row Type)
+  (a :: Type) = MDOM
   ( forall q
-     . DOM dom engine proof res graphi q
-    -> DOM dom engine proof res grapho a
+     . DOM dom engine proof res graph q
+    -> DOM dom engine proof res graph a
   )
 
-instance functorIxDOM :: Functor (IxDOM dom engine proof res graphi grapho) where
-  map f (IxDOM a) = IxDOM ((map <<< map) f a)
+instance functorMDOM :: Functor (MDOM dom engine proof res graph) where
+  map f (MDOM a) = MDOM ((map <<< map) f a)
 
-instance ixFunctorIxDOM :: IxFunctor (IxDOM dom engine proof res) where
-  imap f (IxDOM a) = IxDOM ((map <<< map) f a)
-
-instance ixApplyIxDOM :: IxApply (IxDOM dom engine proof res) where
-  iapply (IxDOM fab') (IxDOM a') =
-    IxDOM \i ->
+instance applyMDOM :: Apply (MDOM dom engine proof res graph) where
+  apply (MDOM fab') (MDOM a') =
+    MDOM \i ->
       let
         fab = fab' i
         a = a' fab
       in
         a $> ((extract fab) (extract a))
+instance applicativeMDOM ::
+  Applicative (MDOM dom engine proof res graph) where
+  pure a = MDOM (voidRight a)
 
-instance applyIxDOM :: Apply (IxDOM dom engine proof res graph graph) where
-  apply = iapply
-
-instance ixApplicativeIxDOM :: IxApplicative (IxDOM dom engine proof res) where
-  ipure a = IxDOM (voidRight a)
-
-instance applicativeIxDOM ::
-  Applicative (IxDOM dom engine proof res graph graph) where
-  pure = ipure
-
-instance ixBindIxDOM :: IxBind (IxDOM dom engine proof res) where
-  ibind (IxDOM ma') aToB =
-    IxDOM \i ->
+instance bindIxWag :: Bind (MDOM dom engine proof res graph) where
+  bind (MDOM ma') aToB =
+    MDOM \i ->
       let
         ma = ma' i
-        IxDOM b = aToB (extract ma)
+        MDOM b = aToB (extract ma)
       in
         b ma
 
-instance bindIxWag :: Bind (IxDOM dom engine proof res graph graph) where
-  bind = ibind
-
-instance ixMonadIxDOM :: IxMonad (IxDOM dom engine proof res)
-
-instance monadIxWag :: Monad (IxDOM dom engine proof res graph graph)
+instance monadIxWag :: Monad (MDOM dom engine proof res graph)

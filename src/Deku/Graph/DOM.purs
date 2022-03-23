@@ -25,10 +25,6 @@ module Deku.Graph.DOM
   , XSubgraph
   , xsubgraph
   , unsafeUnXSubgraph
-  , Tumult
-  , TTumult
-  , tumult
-  , unsafeUnTumult
   -- codegen 7
   , Accept(..)
   , AcceptCharset(..)
@@ -872,12 +868,9 @@ import Data.Tuple.Nested ((/\), type (/\))
 import Data.Hashable (hash, class Hashable)
 import Data.Maybe (Maybe)
 import Data.Monoid.Additive (Additive)
-import Data.Symbol (class IsSymbol, reflectSymbol)
 import Deku.Control.Types (Frame0, SubScene)
 import Deku.Graph.Attribute (Attribute, Cb, cb', prop', unsafeAttribute)
 import Deku.Interpret (class DOMInterpret)
-import Deku.Tumult (Tumultuous)
-import Type.Proxy (Proxy(..))
 import Web.DOM as Web.DOM
 
 class TypeToSym (a :: Type) (b :: Symbol) | a -> b
@@ -950,49 +943,47 @@ text = Element
 
 --
 
-type SubgraphSig index terminus env push =
+type SubgraphSig index env push =
   forall dom engine
    . DOMInterpret dom engine
   => index
-  -> SubScene terminus env dom engine Frame0 push (Additive Int)
+  -> SubScene env dom engine Frame0 push (Additive Int)
 
-type ResolvedSubgraphSig terminus env push =
+type ResolvedSubgraphSig env push =
   forall dom engine
    . DOMInterpret dom engine
-  => SubScene terminus env dom engine Frame0 push (Additive Int)
+  => SubScene env dom engine Frame0 push (Additive Int)
 
-newtype AsSubgraph index terminus env push = AsSubgraph
+newtype AsSubgraph index env push = AsSubgraph
   ( forall dom engine
      . DOMInterpret dom engine
     => index
-    -> SubScene terminus env dom engine Frame0 push (Additive Int)
+    -> SubScene env dom engine Frame0 push (Additive Int)
   )
 
 unAsSubGraph
-  :: forall index terminus env push
-   . AsSubgraph index terminus env push
+  :: forall index env push
+   . AsSubgraph index env push
   -> ( forall dom engine
         . DOMInterpret dom engine
        => index
-       -> SubScene terminus env dom engine Frame0 push (Additive Int)
+       -> SubScene env dom engine Frame0 push (Additive Int)
      )
 unAsSubGraph (AsSubgraph sg) = sg
 
-type Subgraph' index terminus env push =
-  ( subgraphMaker :: AsSubgraph index terminus env push
+type Subgraph' index env push =
+  ( subgraphMaker :: AsSubgraph index env push
   , envs :: Array { index :: index, pos :: Int, env :: Maybe env }
-  , terminus :: String
   )
-newtype Subgraph index terminus env push = Subgraph
-  { | Subgraph' index terminus env push }
+newtype Subgraph index env push = Subgraph
+  { | Subgraph' index env push }
 
 subgraph
-  :: forall index terminus env push
-   . IsSymbol terminus
-  => Hashable index
+  :: forall index env push
+   . Hashable index
   => Map index (Maybe env)
-  -> AsSubgraph index terminus env push
-  -> Element (Subgraph index terminus env push) ()
+  -> AsSubgraph index env push
+  -> Element (Subgraph index env push) ()
 subgraph envs subgraphMaker =
   Element
     { element: Subgraph
@@ -1005,15 +996,14 @@ subgraph envs subgraphMaker =
             )
             (Map.toUnfoldable envs)
         , subgraphMaker
-        , terminus: reflectSymbol (Proxy :: _ terminus)
         }
     , children: {}
     }
 
 unsafeUnSubgraph
-  :: forall index terminus env push
-   . Subgraph index terminus env push
-  -> { | Subgraph' index terminus env push }
+  :: forall index env push
+   . Subgraph index env push
+  -> { | Subgraph' index env push }
 unsafeUnSubgraph (Subgraph unsafe) = unsafe
 
 type XSubgraph' index env =
@@ -1044,38 +1034,10 @@ xsubgraph envs = XSubgraph
   }
 
 instance typeToSymSubgraph ::
-  TypeToSym (Subgraph index terminus env push) "Subgraph"
+  TypeToSym (Subgraph index env push) "Subgraph"
 
 instance typeToSymXSubgraph ::
   TypeToSym (XSubgraph index envs) "Subgraph"
-
-type Tumult' (terminus :: Symbol) =
-  ( tumult :: Tumultuous terminus
-  , terminus :: String
-  )
-newtype Tumult terminus = Tumult
-  { | Tumult' terminus }
-
-tumult
-  :: forall terminus
-   . IsSymbol terminus
-  => Tumultuous terminus
-  -> Element (Tumult terminus) ()
-tumult tumultuous = Element
-  { element: Tumult
-      { terminus: reflectSymbol (Proxy :: _ terminus)
-      , tumult: tumultuous
-      }
-  , children: {}
-  }
-
-unsafeUnTumult
-  :: forall terminus
-   . Tumult terminus
-  -> { | Tumult' terminus }
-unsafeUnTumult (Tumult unsafe) = unsafe
-
-instance typeToSymTumult :: TypeToSym (Tumult terminus) "Tumult"
 
 class ReifyAU a b | a -> b where
   reifyAU :: a -> b
@@ -1083,34 +1045,19 @@ class ReifyAU a b | a -> b where
 
 -- | Type-level constructor for a subgraph.
 data TSubgraph
-  (terminus :: Symbol)
   (env :: Type) = TSubgraph
 
 instance typeToSymTSubgraph ::
-  TypeToSym (TSubgraph terminus env) "TSubgraph"
+  TypeToSym (TSubgraph env) "TSubgraph"
 
-instance semigroupTSubgraph :: Semigroup (TSubgraph terminus env) where
+instance semigroupTSubgraph :: Semigroup (TSubgraph env) where
   append _ _ = TSubgraph
 
-instance monoidTSubgraph :: Monoid (TSubgraph terminus env) where
+instance monoidTSubgraph :: Monoid (TSubgraph env) where
   mempty = TSubgraph
 
 instance reifyTSubgraph ::
-  ReifyAU (Subgraph index terminus env push) (TSubgraph terminus env) where
-  reifyAU = const mempty
-
--- | Type-level constructor for a subgraph.
-data TTumult (terminus :: Symbol) = TTumult
-
-instance typeToSymTTumult :: TypeToSym (TTumult terminus) "TTumult"
-
-instance semigroupTTumult :: Semigroup (TTumult terminus) where
-  append _ _ = TTumult
-
-instance monoidTTumult :: Monoid (TTumult terminus) where
-  mempty = TTumult
-
-instance reifyTTumult :: ReifyAU (Tumult terminus) (TTumult x) where
+  ReifyAU (Subgraph index env push) (TSubgraph env) where
   reifyAU = const mempty
 
 data TText = TText
@@ -1369,370 +1316,492 @@ instance Attr Form_ AcceptCharset String where
     { key: "accept-charset", value: prop' value }
 
 instance Attr A_ Accesskey String where
-  attr Accesskey value = unsafeAttribute { key: "accesskey", value: prop' value }
+  attr Accesskey value = unsafeAttribute
+    { key: "accesskey", value: prop' value }
 
 instance Attr Abbr_ Accesskey String where
-  attr Accesskey value = unsafeAttribute { key: "accesskey", value: prop' value }
+  attr Accesskey value = unsafeAttribute
+    { key: "accesskey", value: prop' value }
 
 instance Attr Acronym_ Accesskey String where
-  attr Accesskey value = unsafeAttribute { key: "accesskey", value: prop' value }
+  attr Accesskey value = unsafeAttribute
+    { key: "accesskey", value: prop' value }
 
 instance Attr Address_ Accesskey String where
-  attr Accesskey value = unsafeAttribute { key: "accesskey", value: prop' value }
+  attr Accesskey value = unsafeAttribute
+    { key: "accesskey", value: prop' value }
 
 instance Attr Applet_ Accesskey String where
-  attr Accesskey value = unsafeAttribute { key: "accesskey", value: prop' value }
+  attr Accesskey value = unsafeAttribute
+    { key: "accesskey", value: prop' value }
 
 instance Attr Area_ Accesskey String where
-  attr Accesskey value = unsafeAttribute { key: "accesskey", value: prop' value }
+  attr Accesskey value = unsafeAttribute
+    { key: "accesskey", value: prop' value }
 
 instance Attr Article_ Accesskey String where
-  attr Accesskey value = unsafeAttribute { key: "accesskey", value: prop' value }
+  attr Accesskey value = unsafeAttribute
+    { key: "accesskey", value: prop' value }
 
 instance Attr Aside_ Accesskey String where
-  attr Accesskey value = unsafeAttribute { key: "accesskey", value: prop' value }
+  attr Accesskey value = unsafeAttribute
+    { key: "accesskey", value: prop' value }
 
 instance Attr Audio_ Accesskey String where
-  attr Accesskey value = unsafeAttribute { key: "accesskey", value: prop' value }
+  attr Accesskey value = unsafeAttribute
+    { key: "accesskey", value: prop' value }
 
 instance Attr B_ Accesskey String where
-  attr Accesskey value = unsafeAttribute { key: "accesskey", value: prop' value }
+  attr Accesskey value = unsafeAttribute
+    { key: "accesskey", value: prop' value }
 
 instance Attr Base_ Accesskey String where
-  attr Accesskey value = unsafeAttribute { key: "accesskey", value: prop' value }
+  attr Accesskey value = unsafeAttribute
+    { key: "accesskey", value: prop' value }
 
 instance Attr Basefont_ Accesskey String where
-  attr Accesskey value = unsafeAttribute { key: "accesskey", value: prop' value }
+  attr Accesskey value = unsafeAttribute
+    { key: "accesskey", value: prop' value }
 
 instance Attr Bdi_ Accesskey String where
-  attr Accesskey value = unsafeAttribute { key: "accesskey", value: prop' value }
+  attr Accesskey value = unsafeAttribute
+    { key: "accesskey", value: prop' value }
 
 instance Attr Bdo_ Accesskey String where
-  attr Accesskey value = unsafeAttribute { key: "accesskey", value: prop' value }
+  attr Accesskey value = unsafeAttribute
+    { key: "accesskey", value: prop' value }
 
 instance Attr Big_ Accesskey String where
-  attr Accesskey value = unsafeAttribute { key: "accesskey", value: prop' value }
+  attr Accesskey value = unsafeAttribute
+    { key: "accesskey", value: prop' value }
 
 instance Attr Blockquote_ Accesskey String where
-  attr Accesskey value = unsafeAttribute { key: "accesskey", value: prop' value }
+  attr Accesskey value = unsafeAttribute
+    { key: "accesskey", value: prop' value }
 
 instance Attr Body_ Accesskey String where
-  attr Accesskey value = unsafeAttribute { key: "accesskey", value: prop' value }
+  attr Accesskey value = unsafeAttribute
+    { key: "accesskey", value: prop' value }
 
 instance Attr Br_ Accesskey String where
-  attr Accesskey value = unsafeAttribute { key: "accesskey", value: prop' value }
+  attr Accesskey value = unsafeAttribute
+    { key: "accesskey", value: prop' value }
 
 instance Attr Button_ Accesskey String where
-  attr Accesskey value = unsafeAttribute { key: "accesskey", value: prop' value }
+  attr Accesskey value = unsafeAttribute
+    { key: "accesskey", value: prop' value }
 
 instance Attr Canvas_ Accesskey String where
-  attr Accesskey value = unsafeAttribute { key: "accesskey", value: prop' value }
+  attr Accesskey value = unsafeAttribute
+    { key: "accesskey", value: prop' value }
 
 instance Attr Caption_ Accesskey String where
-  attr Accesskey value = unsafeAttribute { key: "accesskey", value: prop' value }
+  attr Accesskey value = unsafeAttribute
+    { key: "accesskey", value: prop' value }
 
 instance Attr Center_ Accesskey String where
-  attr Accesskey value = unsafeAttribute { key: "accesskey", value: prop' value }
+  attr Accesskey value = unsafeAttribute
+    { key: "accesskey", value: prop' value }
 
 instance Attr Cite_ Accesskey String where
-  attr Accesskey value = unsafeAttribute { key: "accesskey", value: prop' value }
+  attr Accesskey value = unsafeAttribute
+    { key: "accesskey", value: prop' value }
 
 instance Attr Code_ Accesskey String where
-  attr Accesskey value = unsafeAttribute { key: "accesskey", value: prop' value }
+  attr Accesskey value = unsafeAttribute
+    { key: "accesskey", value: prop' value }
 
 instance Attr Col_ Accesskey String where
-  attr Accesskey value = unsafeAttribute { key: "accesskey", value: prop' value }
+  attr Accesskey value = unsafeAttribute
+    { key: "accesskey", value: prop' value }
 
 instance Attr Colgroup_ Accesskey String where
-  attr Accesskey value = unsafeAttribute { key: "accesskey", value: prop' value }
+  attr Accesskey value = unsafeAttribute
+    { key: "accesskey", value: prop' value }
 
 instance Attr Xdata_ Accesskey String where
-  attr Accesskey value = unsafeAttribute { key: "accesskey", value: prop' value }
+  attr Accesskey value = unsafeAttribute
+    { key: "accesskey", value: prop' value }
 
 instance Attr Datalist_ Accesskey String where
-  attr Accesskey value = unsafeAttribute { key: "accesskey", value: prop' value }
+  attr Accesskey value = unsafeAttribute
+    { key: "accesskey", value: prop' value }
 
 instance Attr Dd_ Accesskey String where
-  attr Accesskey value = unsafeAttribute { key: "accesskey", value: prop' value }
+  attr Accesskey value = unsafeAttribute
+    { key: "accesskey", value: prop' value }
 
 instance Attr Del_ Accesskey String where
-  attr Accesskey value = unsafeAttribute { key: "accesskey", value: prop' value }
+  attr Accesskey value = unsafeAttribute
+    { key: "accesskey", value: prop' value }
 
 instance Attr Details_ Accesskey String where
-  attr Accesskey value = unsafeAttribute { key: "accesskey", value: prop' value }
+  attr Accesskey value = unsafeAttribute
+    { key: "accesskey", value: prop' value }
 
 instance Attr Dfn_ Accesskey String where
-  attr Accesskey value = unsafeAttribute { key: "accesskey", value: prop' value }
+  attr Accesskey value = unsafeAttribute
+    { key: "accesskey", value: prop' value }
 
 instance Attr Dialog_ Accesskey String where
-  attr Accesskey value = unsafeAttribute { key: "accesskey", value: prop' value }
+  attr Accesskey value = unsafeAttribute
+    { key: "accesskey", value: prop' value }
 
 instance Attr Dir_ Accesskey String where
-  attr Accesskey value = unsafeAttribute { key: "accesskey", value: prop' value }
+  attr Accesskey value = unsafeAttribute
+    { key: "accesskey", value: prop' value }
 
 instance Attr Div_ Accesskey String where
-  attr Accesskey value = unsafeAttribute { key: "accesskey", value: prop' value }
+  attr Accesskey value = unsafeAttribute
+    { key: "accesskey", value: prop' value }
 
 instance Attr Dl_ Accesskey String where
-  attr Accesskey value = unsafeAttribute { key: "accesskey", value: prop' value }
+  attr Accesskey value = unsafeAttribute
+    { key: "accesskey", value: prop' value }
 
 instance Attr Dt_ Accesskey String where
-  attr Accesskey value = unsafeAttribute { key: "accesskey", value: prop' value }
+  attr Accesskey value = unsafeAttribute
+    { key: "accesskey", value: prop' value }
 
 instance Attr Em_ Accesskey String where
-  attr Accesskey value = unsafeAttribute { key: "accesskey", value: prop' value }
+  attr Accesskey value = unsafeAttribute
+    { key: "accesskey", value: prop' value }
 
 instance Attr Embed_ Accesskey String where
-  attr Accesskey value = unsafeAttribute { key: "accesskey", value: prop' value }
+  attr Accesskey value = unsafeAttribute
+    { key: "accesskey", value: prop' value }
 
 instance Attr Fieldset_ Accesskey String where
-  attr Accesskey value = unsafeAttribute { key: "accesskey", value: prop' value }
+  attr Accesskey value = unsafeAttribute
+    { key: "accesskey", value: prop' value }
 
 instance Attr Figcaption_ Accesskey String where
-  attr Accesskey value = unsafeAttribute { key: "accesskey", value: prop' value }
+  attr Accesskey value = unsafeAttribute
+    { key: "accesskey", value: prop' value }
 
 instance Attr Figure_ Accesskey String where
-  attr Accesskey value = unsafeAttribute { key: "accesskey", value: prop' value }
+  attr Accesskey value = unsafeAttribute
+    { key: "accesskey", value: prop' value }
 
 instance Attr Font_ Accesskey String where
-  attr Accesskey value = unsafeAttribute { key: "accesskey", value: prop' value }
+  attr Accesskey value = unsafeAttribute
+    { key: "accesskey", value: prop' value }
 
 instance Attr Footer_ Accesskey String where
-  attr Accesskey value = unsafeAttribute { key: "accesskey", value: prop' value }
+  attr Accesskey value = unsafeAttribute
+    { key: "accesskey", value: prop' value }
 
 instance Attr Form_ Accesskey String where
-  attr Accesskey value = unsafeAttribute { key: "accesskey", value: prop' value }
+  attr Accesskey value = unsafeAttribute
+    { key: "accesskey", value: prop' value }
 
 instance Attr Frame_ Accesskey String where
-  attr Accesskey value = unsafeAttribute { key: "accesskey", value: prop' value }
+  attr Accesskey value = unsafeAttribute
+    { key: "accesskey", value: prop' value }
 
 instance Attr Frameset_ Accesskey String where
-  attr Accesskey value = unsafeAttribute { key: "accesskey", value: prop' value }
+  attr Accesskey value = unsafeAttribute
+    { key: "accesskey", value: prop' value }
 
 instance Attr H1_ Accesskey String where
-  attr Accesskey value = unsafeAttribute { key: "accesskey", value: prop' value }
+  attr Accesskey value = unsafeAttribute
+    { key: "accesskey", value: prop' value }
 
 instance Attr H2_ Accesskey String where
-  attr Accesskey value = unsafeAttribute { key: "accesskey", value: prop' value }
+  attr Accesskey value = unsafeAttribute
+    { key: "accesskey", value: prop' value }
 
 instance Attr H3_ Accesskey String where
-  attr Accesskey value = unsafeAttribute { key: "accesskey", value: prop' value }
+  attr Accesskey value = unsafeAttribute
+    { key: "accesskey", value: prop' value }
 
 instance Attr H4_ Accesskey String where
-  attr Accesskey value = unsafeAttribute { key: "accesskey", value: prop' value }
+  attr Accesskey value = unsafeAttribute
+    { key: "accesskey", value: prop' value }
 
 instance Attr H5_ Accesskey String where
-  attr Accesskey value = unsafeAttribute { key: "accesskey", value: prop' value }
+  attr Accesskey value = unsafeAttribute
+    { key: "accesskey", value: prop' value }
 
 instance Attr H6_ Accesskey String where
-  attr Accesskey value = unsafeAttribute { key: "accesskey", value: prop' value }
+  attr Accesskey value = unsafeAttribute
+    { key: "accesskey", value: prop' value }
 
 instance Attr Head_ Accesskey String where
-  attr Accesskey value = unsafeAttribute { key: "accesskey", value: prop' value }
+  attr Accesskey value = unsafeAttribute
+    { key: "accesskey", value: prop' value }
 
 instance Attr Header_ Accesskey String where
-  attr Accesskey value = unsafeAttribute { key: "accesskey", value: prop' value }
+  attr Accesskey value = unsafeAttribute
+    { key: "accesskey", value: prop' value }
 
 instance Attr Hr_ Accesskey String where
-  attr Accesskey value = unsafeAttribute { key: "accesskey", value: prop' value }
+  attr Accesskey value = unsafeAttribute
+    { key: "accesskey", value: prop' value }
 
 instance Attr Html_ Accesskey String where
-  attr Accesskey value = unsafeAttribute { key: "accesskey", value: prop' value }
+  attr Accesskey value = unsafeAttribute
+    { key: "accesskey", value: prop' value }
 
 instance Attr I_ Accesskey String where
-  attr Accesskey value = unsafeAttribute { key: "accesskey", value: prop' value }
+  attr Accesskey value = unsafeAttribute
+    { key: "accesskey", value: prop' value }
 
 instance Attr Iframe_ Accesskey String where
-  attr Accesskey value = unsafeAttribute { key: "accesskey", value: prop' value }
+  attr Accesskey value = unsafeAttribute
+    { key: "accesskey", value: prop' value }
 
 instance Attr Img_ Accesskey String where
-  attr Accesskey value = unsafeAttribute { key: "accesskey", value: prop' value }
+  attr Accesskey value = unsafeAttribute
+    { key: "accesskey", value: prop' value }
 
 instance Attr Input_ Accesskey String where
-  attr Accesskey value = unsafeAttribute { key: "accesskey", value: prop' value }
+  attr Accesskey value = unsafeAttribute
+    { key: "accesskey", value: prop' value }
 
 instance Attr Ins_ Accesskey String where
-  attr Accesskey value = unsafeAttribute { key: "accesskey", value: prop' value }
+  attr Accesskey value = unsafeAttribute
+    { key: "accesskey", value: prop' value }
 
 instance Attr Kbd_ Accesskey String where
-  attr Accesskey value = unsafeAttribute { key: "accesskey", value: prop' value }
+  attr Accesskey value = unsafeAttribute
+    { key: "accesskey", value: prop' value }
 
 instance Attr Label_ Accesskey String where
-  attr Accesskey value = unsafeAttribute { key: "accesskey", value: prop' value }
+  attr Accesskey value = unsafeAttribute
+    { key: "accesskey", value: prop' value }
 
 instance Attr Legend_ Accesskey String where
-  attr Accesskey value = unsafeAttribute { key: "accesskey", value: prop' value }
+  attr Accesskey value = unsafeAttribute
+    { key: "accesskey", value: prop' value }
 
 instance Attr Li_ Accesskey String where
-  attr Accesskey value = unsafeAttribute { key: "accesskey", value: prop' value }
+  attr Accesskey value = unsafeAttribute
+    { key: "accesskey", value: prop' value }
 
 instance Attr Link_ Accesskey String where
-  attr Accesskey value = unsafeAttribute { key: "accesskey", value: prop' value }
+  attr Accesskey value = unsafeAttribute
+    { key: "accesskey", value: prop' value }
 
 instance Attr Main_ Accesskey String where
-  attr Accesskey value = unsafeAttribute { key: "accesskey", value: prop' value }
+  attr Accesskey value = unsafeAttribute
+    { key: "accesskey", value: prop' value }
 
 instance Attr Map_ Accesskey String where
-  attr Accesskey value = unsafeAttribute { key: "accesskey", value: prop' value }
+  attr Accesskey value = unsafeAttribute
+    { key: "accesskey", value: prop' value }
 
 instance Attr Mark_ Accesskey String where
-  attr Accesskey value = unsafeAttribute { key: "accesskey", value: prop' value }
+  attr Accesskey value = unsafeAttribute
+    { key: "accesskey", value: prop' value }
 
 instance Attr Meta_ Accesskey String where
-  attr Accesskey value = unsafeAttribute { key: "accesskey", value: prop' value }
+  attr Accesskey value = unsafeAttribute
+    { key: "accesskey", value: prop' value }
 
 instance Attr Meter_ Accesskey String where
-  attr Accesskey value = unsafeAttribute { key: "accesskey", value: prop' value }
+  attr Accesskey value = unsafeAttribute
+    { key: "accesskey", value: prop' value }
 
 instance Attr Nav_ Accesskey String where
-  attr Accesskey value = unsafeAttribute { key: "accesskey", value: prop' value }
+  attr Accesskey value = unsafeAttribute
+    { key: "accesskey", value: prop' value }
 
 instance Attr Noframes_ Accesskey String where
-  attr Accesskey value = unsafeAttribute { key: "accesskey", value: prop' value }
+  attr Accesskey value = unsafeAttribute
+    { key: "accesskey", value: prop' value }
 
 instance Attr Noscript_ Accesskey String where
-  attr Accesskey value = unsafeAttribute { key: "accesskey", value: prop' value }
+  attr Accesskey value = unsafeAttribute
+    { key: "accesskey", value: prop' value }
 
 instance Attr Object_ Accesskey String where
-  attr Accesskey value = unsafeAttribute { key: "accesskey", value: prop' value }
+  attr Accesskey value = unsafeAttribute
+    { key: "accesskey", value: prop' value }
 
 instance Attr Ol_ Accesskey String where
-  attr Accesskey value = unsafeAttribute { key: "accesskey", value: prop' value }
+  attr Accesskey value = unsafeAttribute
+    { key: "accesskey", value: prop' value }
 
 instance Attr Optgroup_ Accesskey String where
-  attr Accesskey value = unsafeAttribute { key: "accesskey", value: prop' value }
+  attr Accesskey value = unsafeAttribute
+    { key: "accesskey", value: prop' value }
 
 instance Attr Option_ Accesskey String where
-  attr Accesskey value = unsafeAttribute { key: "accesskey", value: prop' value }
+  attr Accesskey value = unsafeAttribute
+    { key: "accesskey", value: prop' value }
 
 instance Attr Output_ Accesskey String where
-  attr Accesskey value = unsafeAttribute { key: "accesskey", value: prop' value }
+  attr Accesskey value = unsafeAttribute
+    { key: "accesskey", value: prop' value }
 
 instance Attr P_ Accesskey String where
-  attr Accesskey value = unsafeAttribute { key: "accesskey", value: prop' value }
+  attr Accesskey value = unsafeAttribute
+    { key: "accesskey", value: prop' value }
 
 instance Attr Param_ Accesskey String where
-  attr Accesskey value = unsafeAttribute { key: "accesskey", value: prop' value }
+  attr Accesskey value = unsafeAttribute
+    { key: "accesskey", value: prop' value }
 
 instance Attr Picture_ Accesskey String where
-  attr Accesskey value = unsafeAttribute { key: "accesskey", value: prop' value }
+  attr Accesskey value = unsafeAttribute
+    { key: "accesskey", value: prop' value }
 
 instance Attr Pre_ Accesskey String where
-  attr Accesskey value = unsafeAttribute { key: "accesskey", value: prop' value }
+  attr Accesskey value = unsafeAttribute
+    { key: "accesskey", value: prop' value }
 
 instance Attr Progress_ Accesskey String where
-  attr Accesskey value = unsafeAttribute { key: "accesskey", value: prop' value }
+  attr Accesskey value = unsafeAttribute
+    { key: "accesskey", value: prop' value }
 
 instance Attr Q_ Accesskey String where
-  attr Accesskey value = unsafeAttribute { key: "accesskey", value: prop' value }
+  attr Accesskey value = unsafeAttribute
+    { key: "accesskey", value: prop' value }
 
 instance Attr Rp_ Accesskey String where
-  attr Accesskey value = unsafeAttribute { key: "accesskey", value: prop' value }
+  attr Accesskey value = unsafeAttribute
+    { key: "accesskey", value: prop' value }
 
 instance Attr Rt_ Accesskey String where
-  attr Accesskey value = unsafeAttribute { key: "accesskey", value: prop' value }
+  attr Accesskey value = unsafeAttribute
+    { key: "accesskey", value: prop' value }
 
 instance Attr Ruby_ Accesskey String where
-  attr Accesskey value = unsafeAttribute { key: "accesskey", value: prop' value }
+  attr Accesskey value = unsafeAttribute
+    { key: "accesskey", value: prop' value }
 
 instance Attr S_ Accesskey String where
-  attr Accesskey value = unsafeAttribute { key: "accesskey", value: prop' value }
+  attr Accesskey value = unsafeAttribute
+    { key: "accesskey", value: prop' value }
 
 instance Attr Samp_ Accesskey String where
-  attr Accesskey value = unsafeAttribute { key: "accesskey", value: prop' value }
+  attr Accesskey value = unsafeAttribute
+    { key: "accesskey", value: prop' value }
 
 instance Attr Script_ Accesskey String where
-  attr Accesskey value = unsafeAttribute { key: "accesskey", value: prop' value }
+  attr Accesskey value = unsafeAttribute
+    { key: "accesskey", value: prop' value }
 
 instance Attr Section_ Accesskey String where
-  attr Accesskey value = unsafeAttribute { key: "accesskey", value: prop' value }
+  attr Accesskey value = unsafeAttribute
+    { key: "accesskey", value: prop' value }
 
 instance Attr Select_ Accesskey String where
-  attr Accesskey value = unsafeAttribute { key: "accesskey", value: prop' value }
+  attr Accesskey value = unsafeAttribute
+    { key: "accesskey", value: prop' value }
 
 instance Attr Small_ Accesskey String where
-  attr Accesskey value = unsafeAttribute { key: "accesskey", value: prop' value }
+  attr Accesskey value = unsafeAttribute
+    { key: "accesskey", value: prop' value }
 
 instance Attr Source_ Accesskey String where
-  attr Accesskey value = unsafeAttribute { key: "accesskey", value: prop' value }
+  attr Accesskey value = unsafeAttribute
+    { key: "accesskey", value: prop' value }
 
 instance Attr Span_ Accesskey String where
-  attr Accesskey value = unsafeAttribute { key: "accesskey", value: prop' value }
+  attr Accesskey value = unsafeAttribute
+    { key: "accesskey", value: prop' value }
 
 instance Attr Strike_ Accesskey String where
-  attr Accesskey value = unsafeAttribute { key: "accesskey", value: prop' value }
+  attr Accesskey value = unsafeAttribute
+    { key: "accesskey", value: prop' value }
 
 instance Attr Strong_ Accesskey String where
-  attr Accesskey value = unsafeAttribute { key: "accesskey", value: prop' value }
+  attr Accesskey value = unsafeAttribute
+    { key: "accesskey", value: prop' value }
 
 instance Attr Style_ Accesskey String where
-  attr Accesskey value = unsafeAttribute { key: "accesskey", value: prop' value }
+  attr Accesskey value = unsafeAttribute
+    { key: "accesskey", value: prop' value }
 
 instance Attr Sub_ Accesskey String where
-  attr Accesskey value = unsafeAttribute { key: "accesskey", value: prop' value }
+  attr Accesskey value = unsafeAttribute
+    { key: "accesskey", value: prop' value }
 
 instance Attr Summary_ Accesskey String where
-  attr Accesskey value = unsafeAttribute { key: "accesskey", value: prop' value }
+  attr Accesskey value = unsafeAttribute
+    { key: "accesskey", value: prop' value }
 
 instance Attr Sup_ Accesskey String where
-  attr Accesskey value = unsafeAttribute { key: "accesskey", value: prop' value }
+  attr Accesskey value = unsafeAttribute
+    { key: "accesskey", value: prop' value }
 
 instance Attr Svg_ Accesskey String where
-  attr Accesskey value = unsafeAttribute { key: "accesskey", value: prop' value }
+  attr Accesskey value = unsafeAttribute
+    { key: "accesskey", value: prop' value }
 
 instance Attr Table_ Accesskey String where
-  attr Accesskey value = unsafeAttribute { key: "accesskey", value: prop' value }
+  attr Accesskey value = unsafeAttribute
+    { key: "accesskey", value: prop' value }
 
 instance Attr Tbody_ Accesskey String where
-  attr Accesskey value = unsafeAttribute { key: "accesskey", value: prop' value }
+  attr Accesskey value = unsafeAttribute
+    { key: "accesskey", value: prop' value }
 
 instance Attr Td_ Accesskey String where
-  attr Accesskey value = unsafeAttribute { key: "accesskey", value: prop' value }
+  attr Accesskey value = unsafeAttribute
+    { key: "accesskey", value: prop' value }
 
 instance Attr Template_ Accesskey String where
-  attr Accesskey value = unsafeAttribute { key: "accesskey", value: prop' value }
+  attr Accesskey value = unsafeAttribute
+    { key: "accesskey", value: prop' value }
 
 instance Attr Textarea_ Accesskey String where
-  attr Accesskey value = unsafeAttribute { key: "accesskey", value: prop' value }
+  attr Accesskey value = unsafeAttribute
+    { key: "accesskey", value: prop' value }
 
 instance Attr Tfoot_ Accesskey String where
-  attr Accesskey value = unsafeAttribute { key: "accesskey", value: prop' value }
+  attr Accesskey value = unsafeAttribute
+    { key: "accesskey", value: prop' value }
 
 instance Attr Th_ Accesskey String where
-  attr Accesskey value = unsafeAttribute { key: "accesskey", value: prop' value }
+  attr Accesskey value = unsafeAttribute
+    { key: "accesskey", value: prop' value }
 
 instance Attr Thead_ Accesskey String where
-  attr Accesskey value = unsafeAttribute { key: "accesskey", value: prop' value }
+  attr Accesskey value = unsafeAttribute
+    { key: "accesskey", value: prop' value }
 
 instance Attr Time_ Accesskey String where
-  attr Accesskey value = unsafeAttribute { key: "accesskey", value: prop' value }
+  attr Accesskey value = unsafeAttribute
+    { key: "accesskey", value: prop' value }
 
 instance Attr Title_ Accesskey String where
-  attr Accesskey value = unsafeAttribute { key: "accesskey", value: prop' value }
+  attr Accesskey value = unsafeAttribute
+    { key: "accesskey", value: prop' value }
 
 instance Attr Tr_ Accesskey String where
-  attr Accesskey value = unsafeAttribute { key: "accesskey", value: prop' value }
+  attr Accesskey value = unsafeAttribute
+    { key: "accesskey", value: prop' value }
 
 instance Attr Track_ Accesskey String where
-  attr Accesskey value = unsafeAttribute { key: "accesskey", value: prop' value }
+  attr Accesskey value = unsafeAttribute
+    { key: "accesskey", value: prop' value }
 
 instance Attr Tt_ Accesskey String where
-  attr Accesskey value = unsafeAttribute { key: "accesskey", value: prop' value }
+  attr Accesskey value = unsafeAttribute
+    { key: "accesskey", value: prop' value }
 
 instance Attr U_ Accesskey String where
-  attr Accesskey value = unsafeAttribute { key: "accesskey", value: prop' value }
+  attr Accesskey value = unsafeAttribute
+    { key: "accesskey", value: prop' value }
 
 instance Attr Ul_ Accesskey String where
-  attr Accesskey value = unsafeAttribute { key: "accesskey", value: prop' value }
+  attr Accesskey value = unsafeAttribute
+    { key: "accesskey", value: prop' value }
 
 instance Attr Var_ Accesskey String where
-  attr Accesskey value = unsafeAttribute { key: "accesskey", value: prop' value }
+  attr Accesskey value = unsafeAttribute
+    { key: "accesskey", value: prop' value }
 
 instance Attr Video_ Accesskey String where
-  attr Accesskey value = unsafeAttribute { key: "accesskey", value: prop' value }
+  attr Accesskey value = unsafeAttribute
+    { key: "accesskey", value: prop' value }
 
 instance Attr Wbr_ Accesskey String where
-  attr Accesskey value = unsafeAttribute { key: "accesskey", value: prop' value }
+  attr Accesskey value = unsafeAttribute
+    { key: "accesskey", value: prop' value }
 
 instance Attr Form_ Action String where
   attr Action value = unsafeAttribute { key: "action", value: prop' value }
@@ -2302,16 +2371,20 @@ instance Attr Textarea_ Autocomplete String where
     { key: "autocomplete", value: prop' value }
 
 instance Attr Button_ Autofocus String where
-  attr Autofocus value = unsafeAttribute { key: "autofocus", value: prop' value }
+  attr Autofocus value = unsafeAttribute
+    { key: "autofocus", value: prop' value }
 
 instance Attr Input_ Autofocus String where
-  attr Autofocus value = unsafeAttribute { key: "autofocus", value: prop' value }
+  attr Autofocus value = unsafeAttribute
+    { key: "autofocus", value: prop' value }
 
 instance Attr Select_ Autofocus String where
-  attr Autofocus value = unsafeAttribute { key: "autofocus", value: prop' value }
+  attr Autofocus value = unsafeAttribute
+    { key: "autofocus", value: prop' value }
 
 instance Attr Textarea_ Autofocus String where
-  attr Autofocus value = unsafeAttribute { key: "autofocus", value: prop' value }
+  attr Autofocus value = unsafeAttribute
+    { key: "autofocus", value: prop' value }
 
 instance Attr Audio_ Autoplay String where
   attr Autoplay value = unsafeAttribute { key: "autoplay", value: prop' value }
@@ -2381,370 +2454,492 @@ instance Attr Input_ Capture String where
   attr Capture value = unsafeAttribute { key: "capture", value: prop' value }
 
 instance Attr A_ Challenge String where
-  attr Challenge value = unsafeAttribute { key: "challenge", value: prop' value }
+  attr Challenge value = unsafeAttribute
+    { key: "challenge", value: prop' value }
 
 instance Attr Abbr_ Challenge String where
-  attr Challenge value = unsafeAttribute { key: "challenge", value: prop' value }
+  attr Challenge value = unsafeAttribute
+    { key: "challenge", value: prop' value }
 
 instance Attr Acronym_ Challenge String where
-  attr Challenge value = unsafeAttribute { key: "challenge", value: prop' value }
+  attr Challenge value = unsafeAttribute
+    { key: "challenge", value: prop' value }
 
 instance Attr Address_ Challenge String where
-  attr Challenge value = unsafeAttribute { key: "challenge", value: prop' value }
+  attr Challenge value = unsafeAttribute
+    { key: "challenge", value: prop' value }
 
 instance Attr Applet_ Challenge String where
-  attr Challenge value = unsafeAttribute { key: "challenge", value: prop' value }
+  attr Challenge value = unsafeAttribute
+    { key: "challenge", value: prop' value }
 
 instance Attr Area_ Challenge String where
-  attr Challenge value = unsafeAttribute { key: "challenge", value: prop' value }
+  attr Challenge value = unsafeAttribute
+    { key: "challenge", value: prop' value }
 
 instance Attr Article_ Challenge String where
-  attr Challenge value = unsafeAttribute { key: "challenge", value: prop' value }
+  attr Challenge value = unsafeAttribute
+    { key: "challenge", value: prop' value }
 
 instance Attr Aside_ Challenge String where
-  attr Challenge value = unsafeAttribute { key: "challenge", value: prop' value }
+  attr Challenge value = unsafeAttribute
+    { key: "challenge", value: prop' value }
 
 instance Attr Audio_ Challenge String where
-  attr Challenge value = unsafeAttribute { key: "challenge", value: prop' value }
+  attr Challenge value = unsafeAttribute
+    { key: "challenge", value: prop' value }
 
 instance Attr B_ Challenge String where
-  attr Challenge value = unsafeAttribute { key: "challenge", value: prop' value }
+  attr Challenge value = unsafeAttribute
+    { key: "challenge", value: prop' value }
 
 instance Attr Base_ Challenge String where
-  attr Challenge value = unsafeAttribute { key: "challenge", value: prop' value }
+  attr Challenge value = unsafeAttribute
+    { key: "challenge", value: prop' value }
 
 instance Attr Basefont_ Challenge String where
-  attr Challenge value = unsafeAttribute { key: "challenge", value: prop' value }
+  attr Challenge value = unsafeAttribute
+    { key: "challenge", value: prop' value }
 
 instance Attr Bdi_ Challenge String where
-  attr Challenge value = unsafeAttribute { key: "challenge", value: prop' value }
+  attr Challenge value = unsafeAttribute
+    { key: "challenge", value: prop' value }
 
 instance Attr Bdo_ Challenge String where
-  attr Challenge value = unsafeAttribute { key: "challenge", value: prop' value }
+  attr Challenge value = unsafeAttribute
+    { key: "challenge", value: prop' value }
 
 instance Attr Big_ Challenge String where
-  attr Challenge value = unsafeAttribute { key: "challenge", value: prop' value }
+  attr Challenge value = unsafeAttribute
+    { key: "challenge", value: prop' value }
 
 instance Attr Blockquote_ Challenge String where
-  attr Challenge value = unsafeAttribute { key: "challenge", value: prop' value }
+  attr Challenge value = unsafeAttribute
+    { key: "challenge", value: prop' value }
 
 instance Attr Body_ Challenge String where
-  attr Challenge value = unsafeAttribute { key: "challenge", value: prop' value }
+  attr Challenge value = unsafeAttribute
+    { key: "challenge", value: prop' value }
 
 instance Attr Br_ Challenge String where
-  attr Challenge value = unsafeAttribute { key: "challenge", value: prop' value }
+  attr Challenge value = unsafeAttribute
+    { key: "challenge", value: prop' value }
 
 instance Attr Button_ Challenge String where
-  attr Challenge value = unsafeAttribute { key: "challenge", value: prop' value }
+  attr Challenge value = unsafeAttribute
+    { key: "challenge", value: prop' value }
 
 instance Attr Canvas_ Challenge String where
-  attr Challenge value = unsafeAttribute { key: "challenge", value: prop' value }
+  attr Challenge value = unsafeAttribute
+    { key: "challenge", value: prop' value }
 
 instance Attr Caption_ Challenge String where
-  attr Challenge value = unsafeAttribute { key: "challenge", value: prop' value }
+  attr Challenge value = unsafeAttribute
+    { key: "challenge", value: prop' value }
 
 instance Attr Center_ Challenge String where
-  attr Challenge value = unsafeAttribute { key: "challenge", value: prop' value }
+  attr Challenge value = unsafeAttribute
+    { key: "challenge", value: prop' value }
 
 instance Attr Cite_ Challenge String where
-  attr Challenge value = unsafeAttribute { key: "challenge", value: prop' value }
+  attr Challenge value = unsafeAttribute
+    { key: "challenge", value: prop' value }
 
 instance Attr Code_ Challenge String where
-  attr Challenge value = unsafeAttribute { key: "challenge", value: prop' value }
+  attr Challenge value = unsafeAttribute
+    { key: "challenge", value: prop' value }
 
 instance Attr Col_ Challenge String where
-  attr Challenge value = unsafeAttribute { key: "challenge", value: prop' value }
+  attr Challenge value = unsafeAttribute
+    { key: "challenge", value: prop' value }
 
 instance Attr Colgroup_ Challenge String where
-  attr Challenge value = unsafeAttribute { key: "challenge", value: prop' value }
+  attr Challenge value = unsafeAttribute
+    { key: "challenge", value: prop' value }
 
 instance Attr Xdata_ Challenge String where
-  attr Challenge value = unsafeAttribute { key: "challenge", value: prop' value }
+  attr Challenge value = unsafeAttribute
+    { key: "challenge", value: prop' value }
 
 instance Attr Datalist_ Challenge String where
-  attr Challenge value = unsafeAttribute { key: "challenge", value: prop' value }
+  attr Challenge value = unsafeAttribute
+    { key: "challenge", value: prop' value }
 
 instance Attr Dd_ Challenge String where
-  attr Challenge value = unsafeAttribute { key: "challenge", value: prop' value }
+  attr Challenge value = unsafeAttribute
+    { key: "challenge", value: prop' value }
 
 instance Attr Del_ Challenge String where
-  attr Challenge value = unsafeAttribute { key: "challenge", value: prop' value }
+  attr Challenge value = unsafeAttribute
+    { key: "challenge", value: prop' value }
 
 instance Attr Details_ Challenge String where
-  attr Challenge value = unsafeAttribute { key: "challenge", value: prop' value }
+  attr Challenge value = unsafeAttribute
+    { key: "challenge", value: prop' value }
 
 instance Attr Dfn_ Challenge String where
-  attr Challenge value = unsafeAttribute { key: "challenge", value: prop' value }
+  attr Challenge value = unsafeAttribute
+    { key: "challenge", value: prop' value }
 
 instance Attr Dialog_ Challenge String where
-  attr Challenge value = unsafeAttribute { key: "challenge", value: prop' value }
+  attr Challenge value = unsafeAttribute
+    { key: "challenge", value: prop' value }
 
 instance Attr Dir_ Challenge String where
-  attr Challenge value = unsafeAttribute { key: "challenge", value: prop' value }
+  attr Challenge value = unsafeAttribute
+    { key: "challenge", value: prop' value }
 
 instance Attr Div_ Challenge String where
-  attr Challenge value = unsafeAttribute { key: "challenge", value: prop' value }
+  attr Challenge value = unsafeAttribute
+    { key: "challenge", value: prop' value }
 
 instance Attr Dl_ Challenge String where
-  attr Challenge value = unsafeAttribute { key: "challenge", value: prop' value }
+  attr Challenge value = unsafeAttribute
+    { key: "challenge", value: prop' value }
 
 instance Attr Dt_ Challenge String where
-  attr Challenge value = unsafeAttribute { key: "challenge", value: prop' value }
+  attr Challenge value = unsafeAttribute
+    { key: "challenge", value: prop' value }
 
 instance Attr Em_ Challenge String where
-  attr Challenge value = unsafeAttribute { key: "challenge", value: prop' value }
+  attr Challenge value = unsafeAttribute
+    { key: "challenge", value: prop' value }
 
 instance Attr Embed_ Challenge String where
-  attr Challenge value = unsafeAttribute { key: "challenge", value: prop' value }
+  attr Challenge value = unsafeAttribute
+    { key: "challenge", value: prop' value }
 
 instance Attr Fieldset_ Challenge String where
-  attr Challenge value = unsafeAttribute { key: "challenge", value: prop' value }
+  attr Challenge value = unsafeAttribute
+    { key: "challenge", value: prop' value }
 
 instance Attr Figcaption_ Challenge String where
-  attr Challenge value = unsafeAttribute { key: "challenge", value: prop' value }
+  attr Challenge value = unsafeAttribute
+    { key: "challenge", value: prop' value }
 
 instance Attr Figure_ Challenge String where
-  attr Challenge value = unsafeAttribute { key: "challenge", value: prop' value }
+  attr Challenge value = unsafeAttribute
+    { key: "challenge", value: prop' value }
 
 instance Attr Font_ Challenge String where
-  attr Challenge value = unsafeAttribute { key: "challenge", value: prop' value }
+  attr Challenge value = unsafeAttribute
+    { key: "challenge", value: prop' value }
 
 instance Attr Footer_ Challenge String where
-  attr Challenge value = unsafeAttribute { key: "challenge", value: prop' value }
+  attr Challenge value = unsafeAttribute
+    { key: "challenge", value: prop' value }
 
 instance Attr Form_ Challenge String where
-  attr Challenge value = unsafeAttribute { key: "challenge", value: prop' value }
+  attr Challenge value = unsafeAttribute
+    { key: "challenge", value: prop' value }
 
 instance Attr Frame_ Challenge String where
-  attr Challenge value = unsafeAttribute { key: "challenge", value: prop' value }
+  attr Challenge value = unsafeAttribute
+    { key: "challenge", value: prop' value }
 
 instance Attr Frameset_ Challenge String where
-  attr Challenge value = unsafeAttribute { key: "challenge", value: prop' value }
+  attr Challenge value = unsafeAttribute
+    { key: "challenge", value: prop' value }
 
 instance Attr H1_ Challenge String where
-  attr Challenge value = unsafeAttribute { key: "challenge", value: prop' value }
+  attr Challenge value = unsafeAttribute
+    { key: "challenge", value: prop' value }
 
 instance Attr H2_ Challenge String where
-  attr Challenge value = unsafeAttribute { key: "challenge", value: prop' value }
+  attr Challenge value = unsafeAttribute
+    { key: "challenge", value: prop' value }
 
 instance Attr H3_ Challenge String where
-  attr Challenge value = unsafeAttribute { key: "challenge", value: prop' value }
+  attr Challenge value = unsafeAttribute
+    { key: "challenge", value: prop' value }
 
 instance Attr H4_ Challenge String where
-  attr Challenge value = unsafeAttribute { key: "challenge", value: prop' value }
+  attr Challenge value = unsafeAttribute
+    { key: "challenge", value: prop' value }
 
 instance Attr H5_ Challenge String where
-  attr Challenge value = unsafeAttribute { key: "challenge", value: prop' value }
+  attr Challenge value = unsafeAttribute
+    { key: "challenge", value: prop' value }
 
 instance Attr H6_ Challenge String where
-  attr Challenge value = unsafeAttribute { key: "challenge", value: prop' value }
+  attr Challenge value = unsafeAttribute
+    { key: "challenge", value: prop' value }
 
 instance Attr Head_ Challenge String where
-  attr Challenge value = unsafeAttribute { key: "challenge", value: prop' value }
+  attr Challenge value = unsafeAttribute
+    { key: "challenge", value: prop' value }
 
 instance Attr Header_ Challenge String where
-  attr Challenge value = unsafeAttribute { key: "challenge", value: prop' value }
+  attr Challenge value = unsafeAttribute
+    { key: "challenge", value: prop' value }
 
 instance Attr Hr_ Challenge String where
-  attr Challenge value = unsafeAttribute { key: "challenge", value: prop' value }
+  attr Challenge value = unsafeAttribute
+    { key: "challenge", value: prop' value }
 
 instance Attr Html_ Challenge String where
-  attr Challenge value = unsafeAttribute { key: "challenge", value: prop' value }
+  attr Challenge value = unsafeAttribute
+    { key: "challenge", value: prop' value }
 
 instance Attr I_ Challenge String where
-  attr Challenge value = unsafeAttribute { key: "challenge", value: prop' value }
+  attr Challenge value = unsafeAttribute
+    { key: "challenge", value: prop' value }
 
 instance Attr Iframe_ Challenge String where
-  attr Challenge value = unsafeAttribute { key: "challenge", value: prop' value }
+  attr Challenge value = unsafeAttribute
+    { key: "challenge", value: prop' value }
 
 instance Attr Img_ Challenge String where
-  attr Challenge value = unsafeAttribute { key: "challenge", value: prop' value }
+  attr Challenge value = unsafeAttribute
+    { key: "challenge", value: prop' value }
 
 instance Attr Input_ Challenge String where
-  attr Challenge value = unsafeAttribute { key: "challenge", value: prop' value }
+  attr Challenge value = unsafeAttribute
+    { key: "challenge", value: prop' value }
 
 instance Attr Ins_ Challenge String where
-  attr Challenge value = unsafeAttribute { key: "challenge", value: prop' value }
+  attr Challenge value = unsafeAttribute
+    { key: "challenge", value: prop' value }
 
 instance Attr Kbd_ Challenge String where
-  attr Challenge value = unsafeAttribute { key: "challenge", value: prop' value }
+  attr Challenge value = unsafeAttribute
+    { key: "challenge", value: prop' value }
 
 instance Attr Label_ Challenge String where
-  attr Challenge value = unsafeAttribute { key: "challenge", value: prop' value }
+  attr Challenge value = unsafeAttribute
+    { key: "challenge", value: prop' value }
 
 instance Attr Legend_ Challenge String where
-  attr Challenge value = unsafeAttribute { key: "challenge", value: prop' value }
+  attr Challenge value = unsafeAttribute
+    { key: "challenge", value: prop' value }
 
 instance Attr Li_ Challenge String where
-  attr Challenge value = unsafeAttribute { key: "challenge", value: prop' value }
+  attr Challenge value = unsafeAttribute
+    { key: "challenge", value: prop' value }
 
 instance Attr Link_ Challenge String where
-  attr Challenge value = unsafeAttribute { key: "challenge", value: prop' value }
+  attr Challenge value = unsafeAttribute
+    { key: "challenge", value: prop' value }
 
 instance Attr Main_ Challenge String where
-  attr Challenge value = unsafeAttribute { key: "challenge", value: prop' value }
+  attr Challenge value = unsafeAttribute
+    { key: "challenge", value: prop' value }
 
 instance Attr Map_ Challenge String where
-  attr Challenge value = unsafeAttribute { key: "challenge", value: prop' value }
+  attr Challenge value = unsafeAttribute
+    { key: "challenge", value: prop' value }
 
 instance Attr Mark_ Challenge String where
-  attr Challenge value = unsafeAttribute { key: "challenge", value: prop' value }
+  attr Challenge value = unsafeAttribute
+    { key: "challenge", value: prop' value }
 
 instance Attr Meta_ Challenge String where
-  attr Challenge value = unsafeAttribute { key: "challenge", value: prop' value }
+  attr Challenge value = unsafeAttribute
+    { key: "challenge", value: prop' value }
 
 instance Attr Meter_ Challenge String where
-  attr Challenge value = unsafeAttribute { key: "challenge", value: prop' value }
+  attr Challenge value = unsafeAttribute
+    { key: "challenge", value: prop' value }
 
 instance Attr Nav_ Challenge String where
-  attr Challenge value = unsafeAttribute { key: "challenge", value: prop' value }
+  attr Challenge value = unsafeAttribute
+    { key: "challenge", value: prop' value }
 
 instance Attr Noframes_ Challenge String where
-  attr Challenge value = unsafeAttribute { key: "challenge", value: prop' value }
+  attr Challenge value = unsafeAttribute
+    { key: "challenge", value: prop' value }
 
 instance Attr Noscript_ Challenge String where
-  attr Challenge value = unsafeAttribute { key: "challenge", value: prop' value }
+  attr Challenge value = unsafeAttribute
+    { key: "challenge", value: prop' value }
 
 instance Attr Object_ Challenge String where
-  attr Challenge value = unsafeAttribute { key: "challenge", value: prop' value }
+  attr Challenge value = unsafeAttribute
+    { key: "challenge", value: prop' value }
 
 instance Attr Ol_ Challenge String where
-  attr Challenge value = unsafeAttribute { key: "challenge", value: prop' value }
+  attr Challenge value = unsafeAttribute
+    { key: "challenge", value: prop' value }
 
 instance Attr Optgroup_ Challenge String where
-  attr Challenge value = unsafeAttribute { key: "challenge", value: prop' value }
+  attr Challenge value = unsafeAttribute
+    { key: "challenge", value: prop' value }
 
 instance Attr Option_ Challenge String where
-  attr Challenge value = unsafeAttribute { key: "challenge", value: prop' value }
+  attr Challenge value = unsafeAttribute
+    { key: "challenge", value: prop' value }
 
 instance Attr Output_ Challenge String where
-  attr Challenge value = unsafeAttribute { key: "challenge", value: prop' value }
+  attr Challenge value = unsafeAttribute
+    { key: "challenge", value: prop' value }
 
 instance Attr P_ Challenge String where
-  attr Challenge value = unsafeAttribute { key: "challenge", value: prop' value }
+  attr Challenge value = unsafeAttribute
+    { key: "challenge", value: prop' value }
 
 instance Attr Param_ Challenge String where
-  attr Challenge value = unsafeAttribute { key: "challenge", value: prop' value }
+  attr Challenge value = unsafeAttribute
+    { key: "challenge", value: prop' value }
 
 instance Attr Picture_ Challenge String where
-  attr Challenge value = unsafeAttribute { key: "challenge", value: prop' value }
+  attr Challenge value = unsafeAttribute
+    { key: "challenge", value: prop' value }
 
 instance Attr Pre_ Challenge String where
-  attr Challenge value = unsafeAttribute { key: "challenge", value: prop' value }
+  attr Challenge value = unsafeAttribute
+    { key: "challenge", value: prop' value }
 
 instance Attr Progress_ Challenge String where
-  attr Challenge value = unsafeAttribute { key: "challenge", value: prop' value }
+  attr Challenge value = unsafeAttribute
+    { key: "challenge", value: prop' value }
 
 instance Attr Q_ Challenge String where
-  attr Challenge value = unsafeAttribute { key: "challenge", value: prop' value }
+  attr Challenge value = unsafeAttribute
+    { key: "challenge", value: prop' value }
 
 instance Attr Rp_ Challenge String where
-  attr Challenge value = unsafeAttribute { key: "challenge", value: prop' value }
+  attr Challenge value = unsafeAttribute
+    { key: "challenge", value: prop' value }
 
 instance Attr Rt_ Challenge String where
-  attr Challenge value = unsafeAttribute { key: "challenge", value: prop' value }
+  attr Challenge value = unsafeAttribute
+    { key: "challenge", value: prop' value }
 
 instance Attr Ruby_ Challenge String where
-  attr Challenge value = unsafeAttribute { key: "challenge", value: prop' value }
+  attr Challenge value = unsafeAttribute
+    { key: "challenge", value: prop' value }
 
 instance Attr S_ Challenge String where
-  attr Challenge value = unsafeAttribute { key: "challenge", value: prop' value }
+  attr Challenge value = unsafeAttribute
+    { key: "challenge", value: prop' value }
 
 instance Attr Samp_ Challenge String where
-  attr Challenge value = unsafeAttribute { key: "challenge", value: prop' value }
+  attr Challenge value = unsafeAttribute
+    { key: "challenge", value: prop' value }
 
 instance Attr Script_ Challenge String where
-  attr Challenge value = unsafeAttribute { key: "challenge", value: prop' value }
+  attr Challenge value = unsafeAttribute
+    { key: "challenge", value: prop' value }
 
 instance Attr Section_ Challenge String where
-  attr Challenge value = unsafeAttribute { key: "challenge", value: prop' value }
+  attr Challenge value = unsafeAttribute
+    { key: "challenge", value: prop' value }
 
 instance Attr Select_ Challenge String where
-  attr Challenge value = unsafeAttribute { key: "challenge", value: prop' value }
+  attr Challenge value = unsafeAttribute
+    { key: "challenge", value: prop' value }
 
 instance Attr Small_ Challenge String where
-  attr Challenge value = unsafeAttribute { key: "challenge", value: prop' value }
+  attr Challenge value = unsafeAttribute
+    { key: "challenge", value: prop' value }
 
 instance Attr Source_ Challenge String where
-  attr Challenge value = unsafeAttribute { key: "challenge", value: prop' value }
+  attr Challenge value = unsafeAttribute
+    { key: "challenge", value: prop' value }
 
 instance Attr Span_ Challenge String where
-  attr Challenge value = unsafeAttribute { key: "challenge", value: prop' value }
+  attr Challenge value = unsafeAttribute
+    { key: "challenge", value: prop' value }
 
 instance Attr Strike_ Challenge String where
-  attr Challenge value = unsafeAttribute { key: "challenge", value: prop' value }
+  attr Challenge value = unsafeAttribute
+    { key: "challenge", value: prop' value }
 
 instance Attr Strong_ Challenge String where
-  attr Challenge value = unsafeAttribute { key: "challenge", value: prop' value }
+  attr Challenge value = unsafeAttribute
+    { key: "challenge", value: prop' value }
 
 instance Attr Style_ Challenge String where
-  attr Challenge value = unsafeAttribute { key: "challenge", value: prop' value }
+  attr Challenge value = unsafeAttribute
+    { key: "challenge", value: prop' value }
 
 instance Attr Sub_ Challenge String where
-  attr Challenge value = unsafeAttribute { key: "challenge", value: prop' value }
+  attr Challenge value = unsafeAttribute
+    { key: "challenge", value: prop' value }
 
 instance Attr Summary_ Challenge String where
-  attr Challenge value = unsafeAttribute { key: "challenge", value: prop' value }
+  attr Challenge value = unsafeAttribute
+    { key: "challenge", value: prop' value }
 
 instance Attr Sup_ Challenge String where
-  attr Challenge value = unsafeAttribute { key: "challenge", value: prop' value }
+  attr Challenge value = unsafeAttribute
+    { key: "challenge", value: prop' value }
 
 instance Attr Svg_ Challenge String where
-  attr Challenge value = unsafeAttribute { key: "challenge", value: prop' value }
+  attr Challenge value = unsafeAttribute
+    { key: "challenge", value: prop' value }
 
 instance Attr Table_ Challenge String where
-  attr Challenge value = unsafeAttribute { key: "challenge", value: prop' value }
+  attr Challenge value = unsafeAttribute
+    { key: "challenge", value: prop' value }
 
 instance Attr Tbody_ Challenge String where
-  attr Challenge value = unsafeAttribute { key: "challenge", value: prop' value }
+  attr Challenge value = unsafeAttribute
+    { key: "challenge", value: prop' value }
 
 instance Attr Td_ Challenge String where
-  attr Challenge value = unsafeAttribute { key: "challenge", value: prop' value }
+  attr Challenge value = unsafeAttribute
+    { key: "challenge", value: prop' value }
 
 instance Attr Template_ Challenge String where
-  attr Challenge value = unsafeAttribute { key: "challenge", value: prop' value }
+  attr Challenge value = unsafeAttribute
+    { key: "challenge", value: prop' value }
 
 instance Attr Textarea_ Challenge String where
-  attr Challenge value = unsafeAttribute { key: "challenge", value: prop' value }
+  attr Challenge value = unsafeAttribute
+    { key: "challenge", value: prop' value }
 
 instance Attr Tfoot_ Challenge String where
-  attr Challenge value = unsafeAttribute { key: "challenge", value: prop' value }
+  attr Challenge value = unsafeAttribute
+    { key: "challenge", value: prop' value }
 
 instance Attr Th_ Challenge String where
-  attr Challenge value = unsafeAttribute { key: "challenge", value: prop' value }
+  attr Challenge value = unsafeAttribute
+    { key: "challenge", value: prop' value }
 
 instance Attr Thead_ Challenge String where
-  attr Challenge value = unsafeAttribute { key: "challenge", value: prop' value }
+  attr Challenge value = unsafeAttribute
+    { key: "challenge", value: prop' value }
 
 instance Attr Time_ Challenge String where
-  attr Challenge value = unsafeAttribute { key: "challenge", value: prop' value }
+  attr Challenge value = unsafeAttribute
+    { key: "challenge", value: prop' value }
 
 instance Attr Title_ Challenge String where
-  attr Challenge value = unsafeAttribute { key: "challenge", value: prop' value }
+  attr Challenge value = unsafeAttribute
+    { key: "challenge", value: prop' value }
 
 instance Attr Tr_ Challenge String where
-  attr Challenge value = unsafeAttribute { key: "challenge", value: prop' value }
+  attr Challenge value = unsafeAttribute
+    { key: "challenge", value: prop' value }
 
 instance Attr Track_ Challenge String where
-  attr Challenge value = unsafeAttribute { key: "challenge", value: prop' value }
+  attr Challenge value = unsafeAttribute
+    { key: "challenge", value: prop' value }
 
 instance Attr Tt_ Challenge String where
-  attr Challenge value = unsafeAttribute { key: "challenge", value: prop' value }
+  attr Challenge value = unsafeAttribute
+    { key: "challenge", value: prop' value }
 
 instance Attr U_ Challenge String where
-  attr Challenge value = unsafeAttribute { key: "challenge", value: prop' value }
+  attr Challenge value = unsafeAttribute
+    { key: "challenge", value: prop' value }
 
 instance Attr Ul_ Challenge String where
-  attr Challenge value = unsafeAttribute { key: "challenge", value: prop' value }
+  attr Challenge value = unsafeAttribute
+    { key: "challenge", value: prop' value }
 
 instance Attr Var_ Challenge String where
-  attr Challenge value = unsafeAttribute { key: "challenge", value: prop' value }
+  attr Challenge value = unsafeAttribute
+    { key: "challenge", value: prop' value }
 
 instance Attr Video_ Challenge String where
-  attr Challenge value = unsafeAttribute { key: "challenge", value: prop' value }
+  attr Challenge value = unsafeAttribute
+    { key: "challenge", value: prop' value }
 
 instance Attr Wbr_ Challenge String where
-  attr Challenge value = unsafeAttribute { key: "challenge", value: prop' value }
+  attr Challenge value = unsafeAttribute
+    { key: "challenge", value: prop' value }
 
 instance Attr Meta_ Charset String where
   attr Charset value = unsafeAttribute { key: "charset", value: prop' value }
@@ -4589,370 +4784,492 @@ instance Attr Area_ Download String where
   attr Download value = unsafeAttribute { key: "download", value: prop' value }
 
 instance Attr A_ Draggable String where
-  attr Draggable value = unsafeAttribute { key: "draggable", value: prop' value }
+  attr Draggable value = unsafeAttribute
+    { key: "draggable", value: prop' value }
 
 instance Attr Abbr_ Draggable String where
-  attr Draggable value = unsafeAttribute { key: "draggable", value: prop' value }
+  attr Draggable value = unsafeAttribute
+    { key: "draggable", value: prop' value }
 
 instance Attr Acronym_ Draggable String where
-  attr Draggable value = unsafeAttribute { key: "draggable", value: prop' value }
+  attr Draggable value = unsafeAttribute
+    { key: "draggable", value: prop' value }
 
 instance Attr Address_ Draggable String where
-  attr Draggable value = unsafeAttribute { key: "draggable", value: prop' value }
+  attr Draggable value = unsafeAttribute
+    { key: "draggable", value: prop' value }
 
 instance Attr Applet_ Draggable String where
-  attr Draggable value = unsafeAttribute { key: "draggable", value: prop' value }
+  attr Draggable value = unsafeAttribute
+    { key: "draggable", value: prop' value }
 
 instance Attr Area_ Draggable String where
-  attr Draggable value = unsafeAttribute { key: "draggable", value: prop' value }
+  attr Draggable value = unsafeAttribute
+    { key: "draggable", value: prop' value }
 
 instance Attr Article_ Draggable String where
-  attr Draggable value = unsafeAttribute { key: "draggable", value: prop' value }
+  attr Draggable value = unsafeAttribute
+    { key: "draggable", value: prop' value }
 
 instance Attr Aside_ Draggable String where
-  attr Draggable value = unsafeAttribute { key: "draggable", value: prop' value }
+  attr Draggable value = unsafeAttribute
+    { key: "draggable", value: prop' value }
 
 instance Attr Audio_ Draggable String where
-  attr Draggable value = unsafeAttribute { key: "draggable", value: prop' value }
+  attr Draggable value = unsafeAttribute
+    { key: "draggable", value: prop' value }
 
 instance Attr B_ Draggable String where
-  attr Draggable value = unsafeAttribute { key: "draggable", value: prop' value }
+  attr Draggable value = unsafeAttribute
+    { key: "draggable", value: prop' value }
 
 instance Attr Base_ Draggable String where
-  attr Draggable value = unsafeAttribute { key: "draggable", value: prop' value }
+  attr Draggable value = unsafeAttribute
+    { key: "draggable", value: prop' value }
 
 instance Attr Basefont_ Draggable String where
-  attr Draggable value = unsafeAttribute { key: "draggable", value: prop' value }
+  attr Draggable value = unsafeAttribute
+    { key: "draggable", value: prop' value }
 
 instance Attr Bdi_ Draggable String where
-  attr Draggable value = unsafeAttribute { key: "draggable", value: prop' value }
+  attr Draggable value = unsafeAttribute
+    { key: "draggable", value: prop' value }
 
 instance Attr Bdo_ Draggable String where
-  attr Draggable value = unsafeAttribute { key: "draggable", value: prop' value }
+  attr Draggable value = unsafeAttribute
+    { key: "draggable", value: prop' value }
 
 instance Attr Big_ Draggable String where
-  attr Draggable value = unsafeAttribute { key: "draggable", value: prop' value }
+  attr Draggable value = unsafeAttribute
+    { key: "draggable", value: prop' value }
 
 instance Attr Blockquote_ Draggable String where
-  attr Draggable value = unsafeAttribute { key: "draggable", value: prop' value }
+  attr Draggable value = unsafeAttribute
+    { key: "draggable", value: prop' value }
 
 instance Attr Body_ Draggable String where
-  attr Draggable value = unsafeAttribute { key: "draggable", value: prop' value }
+  attr Draggable value = unsafeAttribute
+    { key: "draggable", value: prop' value }
 
 instance Attr Br_ Draggable String where
-  attr Draggable value = unsafeAttribute { key: "draggable", value: prop' value }
+  attr Draggable value = unsafeAttribute
+    { key: "draggable", value: prop' value }
 
 instance Attr Button_ Draggable String where
-  attr Draggable value = unsafeAttribute { key: "draggable", value: prop' value }
+  attr Draggable value = unsafeAttribute
+    { key: "draggable", value: prop' value }
 
 instance Attr Canvas_ Draggable String where
-  attr Draggable value = unsafeAttribute { key: "draggable", value: prop' value }
+  attr Draggable value = unsafeAttribute
+    { key: "draggable", value: prop' value }
 
 instance Attr Caption_ Draggable String where
-  attr Draggable value = unsafeAttribute { key: "draggable", value: prop' value }
+  attr Draggable value = unsafeAttribute
+    { key: "draggable", value: prop' value }
 
 instance Attr Center_ Draggable String where
-  attr Draggable value = unsafeAttribute { key: "draggable", value: prop' value }
+  attr Draggable value = unsafeAttribute
+    { key: "draggable", value: prop' value }
 
 instance Attr Cite_ Draggable String where
-  attr Draggable value = unsafeAttribute { key: "draggable", value: prop' value }
+  attr Draggable value = unsafeAttribute
+    { key: "draggable", value: prop' value }
 
 instance Attr Code_ Draggable String where
-  attr Draggable value = unsafeAttribute { key: "draggable", value: prop' value }
+  attr Draggable value = unsafeAttribute
+    { key: "draggable", value: prop' value }
 
 instance Attr Col_ Draggable String where
-  attr Draggable value = unsafeAttribute { key: "draggable", value: prop' value }
+  attr Draggable value = unsafeAttribute
+    { key: "draggable", value: prop' value }
 
 instance Attr Colgroup_ Draggable String where
-  attr Draggable value = unsafeAttribute { key: "draggable", value: prop' value }
+  attr Draggable value = unsafeAttribute
+    { key: "draggable", value: prop' value }
 
 instance Attr Xdata_ Draggable String where
-  attr Draggable value = unsafeAttribute { key: "draggable", value: prop' value }
+  attr Draggable value = unsafeAttribute
+    { key: "draggable", value: prop' value }
 
 instance Attr Datalist_ Draggable String where
-  attr Draggable value = unsafeAttribute { key: "draggable", value: prop' value }
+  attr Draggable value = unsafeAttribute
+    { key: "draggable", value: prop' value }
 
 instance Attr Dd_ Draggable String where
-  attr Draggable value = unsafeAttribute { key: "draggable", value: prop' value }
+  attr Draggable value = unsafeAttribute
+    { key: "draggable", value: prop' value }
 
 instance Attr Del_ Draggable String where
-  attr Draggable value = unsafeAttribute { key: "draggable", value: prop' value }
+  attr Draggable value = unsafeAttribute
+    { key: "draggable", value: prop' value }
 
 instance Attr Details_ Draggable String where
-  attr Draggable value = unsafeAttribute { key: "draggable", value: prop' value }
+  attr Draggable value = unsafeAttribute
+    { key: "draggable", value: prop' value }
 
 instance Attr Dfn_ Draggable String where
-  attr Draggable value = unsafeAttribute { key: "draggable", value: prop' value }
+  attr Draggable value = unsafeAttribute
+    { key: "draggable", value: prop' value }
 
 instance Attr Dialog_ Draggable String where
-  attr Draggable value = unsafeAttribute { key: "draggable", value: prop' value }
+  attr Draggable value = unsafeAttribute
+    { key: "draggable", value: prop' value }
 
 instance Attr Dir_ Draggable String where
-  attr Draggable value = unsafeAttribute { key: "draggable", value: prop' value }
+  attr Draggable value = unsafeAttribute
+    { key: "draggable", value: prop' value }
 
 instance Attr Div_ Draggable String where
-  attr Draggable value = unsafeAttribute { key: "draggable", value: prop' value }
+  attr Draggable value = unsafeAttribute
+    { key: "draggable", value: prop' value }
 
 instance Attr Dl_ Draggable String where
-  attr Draggable value = unsafeAttribute { key: "draggable", value: prop' value }
+  attr Draggable value = unsafeAttribute
+    { key: "draggable", value: prop' value }
 
 instance Attr Dt_ Draggable String where
-  attr Draggable value = unsafeAttribute { key: "draggable", value: prop' value }
+  attr Draggable value = unsafeAttribute
+    { key: "draggable", value: prop' value }
 
 instance Attr Em_ Draggable String where
-  attr Draggable value = unsafeAttribute { key: "draggable", value: prop' value }
+  attr Draggable value = unsafeAttribute
+    { key: "draggable", value: prop' value }
 
 instance Attr Embed_ Draggable String where
-  attr Draggable value = unsafeAttribute { key: "draggable", value: prop' value }
+  attr Draggable value = unsafeAttribute
+    { key: "draggable", value: prop' value }
 
 instance Attr Fieldset_ Draggable String where
-  attr Draggable value = unsafeAttribute { key: "draggable", value: prop' value }
+  attr Draggable value = unsafeAttribute
+    { key: "draggable", value: prop' value }
 
 instance Attr Figcaption_ Draggable String where
-  attr Draggable value = unsafeAttribute { key: "draggable", value: prop' value }
+  attr Draggable value = unsafeAttribute
+    { key: "draggable", value: prop' value }
 
 instance Attr Figure_ Draggable String where
-  attr Draggable value = unsafeAttribute { key: "draggable", value: prop' value }
+  attr Draggable value = unsafeAttribute
+    { key: "draggable", value: prop' value }
 
 instance Attr Font_ Draggable String where
-  attr Draggable value = unsafeAttribute { key: "draggable", value: prop' value }
+  attr Draggable value = unsafeAttribute
+    { key: "draggable", value: prop' value }
 
 instance Attr Footer_ Draggable String where
-  attr Draggable value = unsafeAttribute { key: "draggable", value: prop' value }
+  attr Draggable value = unsafeAttribute
+    { key: "draggable", value: prop' value }
 
 instance Attr Form_ Draggable String where
-  attr Draggable value = unsafeAttribute { key: "draggable", value: prop' value }
+  attr Draggable value = unsafeAttribute
+    { key: "draggable", value: prop' value }
 
 instance Attr Frame_ Draggable String where
-  attr Draggable value = unsafeAttribute { key: "draggable", value: prop' value }
+  attr Draggable value = unsafeAttribute
+    { key: "draggable", value: prop' value }
 
 instance Attr Frameset_ Draggable String where
-  attr Draggable value = unsafeAttribute { key: "draggable", value: prop' value }
+  attr Draggable value = unsafeAttribute
+    { key: "draggable", value: prop' value }
 
 instance Attr H1_ Draggable String where
-  attr Draggable value = unsafeAttribute { key: "draggable", value: prop' value }
+  attr Draggable value = unsafeAttribute
+    { key: "draggable", value: prop' value }
 
 instance Attr H2_ Draggable String where
-  attr Draggable value = unsafeAttribute { key: "draggable", value: prop' value }
+  attr Draggable value = unsafeAttribute
+    { key: "draggable", value: prop' value }
 
 instance Attr H3_ Draggable String where
-  attr Draggable value = unsafeAttribute { key: "draggable", value: prop' value }
+  attr Draggable value = unsafeAttribute
+    { key: "draggable", value: prop' value }
 
 instance Attr H4_ Draggable String where
-  attr Draggable value = unsafeAttribute { key: "draggable", value: prop' value }
+  attr Draggable value = unsafeAttribute
+    { key: "draggable", value: prop' value }
 
 instance Attr H5_ Draggable String where
-  attr Draggable value = unsafeAttribute { key: "draggable", value: prop' value }
+  attr Draggable value = unsafeAttribute
+    { key: "draggable", value: prop' value }
 
 instance Attr H6_ Draggable String where
-  attr Draggable value = unsafeAttribute { key: "draggable", value: prop' value }
+  attr Draggable value = unsafeAttribute
+    { key: "draggable", value: prop' value }
 
 instance Attr Head_ Draggable String where
-  attr Draggable value = unsafeAttribute { key: "draggable", value: prop' value }
+  attr Draggable value = unsafeAttribute
+    { key: "draggable", value: prop' value }
 
 instance Attr Header_ Draggable String where
-  attr Draggable value = unsafeAttribute { key: "draggable", value: prop' value }
+  attr Draggable value = unsafeAttribute
+    { key: "draggable", value: prop' value }
 
 instance Attr Hr_ Draggable String where
-  attr Draggable value = unsafeAttribute { key: "draggable", value: prop' value }
+  attr Draggable value = unsafeAttribute
+    { key: "draggable", value: prop' value }
 
 instance Attr Html_ Draggable String where
-  attr Draggable value = unsafeAttribute { key: "draggable", value: prop' value }
+  attr Draggable value = unsafeAttribute
+    { key: "draggable", value: prop' value }
 
 instance Attr I_ Draggable String where
-  attr Draggable value = unsafeAttribute { key: "draggable", value: prop' value }
+  attr Draggable value = unsafeAttribute
+    { key: "draggable", value: prop' value }
 
 instance Attr Iframe_ Draggable String where
-  attr Draggable value = unsafeAttribute { key: "draggable", value: prop' value }
+  attr Draggable value = unsafeAttribute
+    { key: "draggable", value: prop' value }
 
 instance Attr Img_ Draggable String where
-  attr Draggable value = unsafeAttribute { key: "draggable", value: prop' value }
+  attr Draggable value = unsafeAttribute
+    { key: "draggable", value: prop' value }
 
 instance Attr Input_ Draggable String where
-  attr Draggable value = unsafeAttribute { key: "draggable", value: prop' value }
+  attr Draggable value = unsafeAttribute
+    { key: "draggable", value: prop' value }
 
 instance Attr Ins_ Draggable String where
-  attr Draggable value = unsafeAttribute { key: "draggable", value: prop' value }
+  attr Draggable value = unsafeAttribute
+    { key: "draggable", value: prop' value }
 
 instance Attr Kbd_ Draggable String where
-  attr Draggable value = unsafeAttribute { key: "draggable", value: prop' value }
+  attr Draggable value = unsafeAttribute
+    { key: "draggable", value: prop' value }
 
 instance Attr Label_ Draggable String where
-  attr Draggable value = unsafeAttribute { key: "draggable", value: prop' value }
+  attr Draggable value = unsafeAttribute
+    { key: "draggable", value: prop' value }
 
 instance Attr Legend_ Draggable String where
-  attr Draggable value = unsafeAttribute { key: "draggable", value: prop' value }
+  attr Draggable value = unsafeAttribute
+    { key: "draggable", value: prop' value }
 
 instance Attr Li_ Draggable String where
-  attr Draggable value = unsafeAttribute { key: "draggable", value: prop' value }
+  attr Draggable value = unsafeAttribute
+    { key: "draggable", value: prop' value }
 
 instance Attr Link_ Draggable String where
-  attr Draggable value = unsafeAttribute { key: "draggable", value: prop' value }
+  attr Draggable value = unsafeAttribute
+    { key: "draggable", value: prop' value }
 
 instance Attr Main_ Draggable String where
-  attr Draggable value = unsafeAttribute { key: "draggable", value: prop' value }
+  attr Draggable value = unsafeAttribute
+    { key: "draggable", value: prop' value }
 
 instance Attr Map_ Draggable String where
-  attr Draggable value = unsafeAttribute { key: "draggable", value: prop' value }
+  attr Draggable value = unsafeAttribute
+    { key: "draggable", value: prop' value }
 
 instance Attr Mark_ Draggable String where
-  attr Draggable value = unsafeAttribute { key: "draggable", value: prop' value }
+  attr Draggable value = unsafeAttribute
+    { key: "draggable", value: prop' value }
 
 instance Attr Meta_ Draggable String where
-  attr Draggable value = unsafeAttribute { key: "draggable", value: prop' value }
+  attr Draggable value = unsafeAttribute
+    { key: "draggable", value: prop' value }
 
 instance Attr Meter_ Draggable String where
-  attr Draggable value = unsafeAttribute { key: "draggable", value: prop' value }
+  attr Draggable value = unsafeAttribute
+    { key: "draggable", value: prop' value }
 
 instance Attr Nav_ Draggable String where
-  attr Draggable value = unsafeAttribute { key: "draggable", value: prop' value }
+  attr Draggable value = unsafeAttribute
+    { key: "draggable", value: prop' value }
 
 instance Attr Noframes_ Draggable String where
-  attr Draggable value = unsafeAttribute { key: "draggable", value: prop' value }
+  attr Draggable value = unsafeAttribute
+    { key: "draggable", value: prop' value }
 
 instance Attr Noscript_ Draggable String where
-  attr Draggable value = unsafeAttribute { key: "draggable", value: prop' value }
+  attr Draggable value = unsafeAttribute
+    { key: "draggable", value: prop' value }
 
 instance Attr Object_ Draggable String where
-  attr Draggable value = unsafeAttribute { key: "draggable", value: prop' value }
+  attr Draggable value = unsafeAttribute
+    { key: "draggable", value: prop' value }
 
 instance Attr Ol_ Draggable String where
-  attr Draggable value = unsafeAttribute { key: "draggable", value: prop' value }
+  attr Draggable value = unsafeAttribute
+    { key: "draggable", value: prop' value }
 
 instance Attr Optgroup_ Draggable String where
-  attr Draggable value = unsafeAttribute { key: "draggable", value: prop' value }
+  attr Draggable value = unsafeAttribute
+    { key: "draggable", value: prop' value }
 
 instance Attr Option_ Draggable String where
-  attr Draggable value = unsafeAttribute { key: "draggable", value: prop' value }
+  attr Draggable value = unsafeAttribute
+    { key: "draggable", value: prop' value }
 
 instance Attr Output_ Draggable String where
-  attr Draggable value = unsafeAttribute { key: "draggable", value: prop' value }
+  attr Draggable value = unsafeAttribute
+    { key: "draggable", value: prop' value }
 
 instance Attr P_ Draggable String where
-  attr Draggable value = unsafeAttribute { key: "draggable", value: prop' value }
+  attr Draggable value = unsafeAttribute
+    { key: "draggable", value: prop' value }
 
 instance Attr Param_ Draggable String where
-  attr Draggable value = unsafeAttribute { key: "draggable", value: prop' value }
+  attr Draggable value = unsafeAttribute
+    { key: "draggable", value: prop' value }
 
 instance Attr Picture_ Draggable String where
-  attr Draggable value = unsafeAttribute { key: "draggable", value: prop' value }
+  attr Draggable value = unsafeAttribute
+    { key: "draggable", value: prop' value }
 
 instance Attr Pre_ Draggable String where
-  attr Draggable value = unsafeAttribute { key: "draggable", value: prop' value }
+  attr Draggable value = unsafeAttribute
+    { key: "draggable", value: prop' value }
 
 instance Attr Progress_ Draggable String where
-  attr Draggable value = unsafeAttribute { key: "draggable", value: prop' value }
+  attr Draggable value = unsafeAttribute
+    { key: "draggable", value: prop' value }
 
 instance Attr Q_ Draggable String where
-  attr Draggable value = unsafeAttribute { key: "draggable", value: prop' value }
+  attr Draggable value = unsafeAttribute
+    { key: "draggable", value: prop' value }
 
 instance Attr Rp_ Draggable String where
-  attr Draggable value = unsafeAttribute { key: "draggable", value: prop' value }
+  attr Draggable value = unsafeAttribute
+    { key: "draggable", value: prop' value }
 
 instance Attr Rt_ Draggable String where
-  attr Draggable value = unsafeAttribute { key: "draggable", value: prop' value }
+  attr Draggable value = unsafeAttribute
+    { key: "draggable", value: prop' value }
 
 instance Attr Ruby_ Draggable String where
-  attr Draggable value = unsafeAttribute { key: "draggable", value: prop' value }
+  attr Draggable value = unsafeAttribute
+    { key: "draggable", value: prop' value }
 
 instance Attr S_ Draggable String where
-  attr Draggable value = unsafeAttribute { key: "draggable", value: prop' value }
+  attr Draggable value = unsafeAttribute
+    { key: "draggable", value: prop' value }
 
 instance Attr Samp_ Draggable String where
-  attr Draggable value = unsafeAttribute { key: "draggable", value: prop' value }
+  attr Draggable value = unsafeAttribute
+    { key: "draggable", value: prop' value }
 
 instance Attr Script_ Draggable String where
-  attr Draggable value = unsafeAttribute { key: "draggable", value: prop' value }
+  attr Draggable value = unsafeAttribute
+    { key: "draggable", value: prop' value }
 
 instance Attr Section_ Draggable String where
-  attr Draggable value = unsafeAttribute { key: "draggable", value: prop' value }
+  attr Draggable value = unsafeAttribute
+    { key: "draggable", value: prop' value }
 
 instance Attr Select_ Draggable String where
-  attr Draggable value = unsafeAttribute { key: "draggable", value: prop' value }
+  attr Draggable value = unsafeAttribute
+    { key: "draggable", value: prop' value }
 
 instance Attr Small_ Draggable String where
-  attr Draggable value = unsafeAttribute { key: "draggable", value: prop' value }
+  attr Draggable value = unsafeAttribute
+    { key: "draggable", value: prop' value }
 
 instance Attr Source_ Draggable String where
-  attr Draggable value = unsafeAttribute { key: "draggable", value: prop' value }
+  attr Draggable value = unsafeAttribute
+    { key: "draggable", value: prop' value }
 
 instance Attr Span_ Draggable String where
-  attr Draggable value = unsafeAttribute { key: "draggable", value: prop' value }
+  attr Draggable value = unsafeAttribute
+    { key: "draggable", value: prop' value }
 
 instance Attr Strike_ Draggable String where
-  attr Draggable value = unsafeAttribute { key: "draggable", value: prop' value }
+  attr Draggable value = unsafeAttribute
+    { key: "draggable", value: prop' value }
 
 instance Attr Strong_ Draggable String where
-  attr Draggable value = unsafeAttribute { key: "draggable", value: prop' value }
+  attr Draggable value = unsafeAttribute
+    { key: "draggable", value: prop' value }
 
 instance Attr Style_ Draggable String where
-  attr Draggable value = unsafeAttribute { key: "draggable", value: prop' value }
+  attr Draggable value = unsafeAttribute
+    { key: "draggable", value: prop' value }
 
 instance Attr Sub_ Draggable String where
-  attr Draggable value = unsafeAttribute { key: "draggable", value: prop' value }
+  attr Draggable value = unsafeAttribute
+    { key: "draggable", value: prop' value }
 
 instance Attr Summary_ Draggable String where
-  attr Draggable value = unsafeAttribute { key: "draggable", value: prop' value }
+  attr Draggable value = unsafeAttribute
+    { key: "draggable", value: prop' value }
 
 instance Attr Sup_ Draggable String where
-  attr Draggable value = unsafeAttribute { key: "draggable", value: prop' value }
+  attr Draggable value = unsafeAttribute
+    { key: "draggable", value: prop' value }
 
 instance Attr Svg_ Draggable String where
-  attr Draggable value = unsafeAttribute { key: "draggable", value: prop' value }
+  attr Draggable value = unsafeAttribute
+    { key: "draggable", value: prop' value }
 
 instance Attr Table_ Draggable String where
-  attr Draggable value = unsafeAttribute { key: "draggable", value: prop' value }
+  attr Draggable value = unsafeAttribute
+    { key: "draggable", value: prop' value }
 
 instance Attr Tbody_ Draggable String where
-  attr Draggable value = unsafeAttribute { key: "draggable", value: prop' value }
+  attr Draggable value = unsafeAttribute
+    { key: "draggable", value: prop' value }
 
 instance Attr Td_ Draggable String where
-  attr Draggable value = unsafeAttribute { key: "draggable", value: prop' value }
+  attr Draggable value = unsafeAttribute
+    { key: "draggable", value: prop' value }
 
 instance Attr Template_ Draggable String where
-  attr Draggable value = unsafeAttribute { key: "draggable", value: prop' value }
+  attr Draggable value = unsafeAttribute
+    { key: "draggable", value: prop' value }
 
 instance Attr Textarea_ Draggable String where
-  attr Draggable value = unsafeAttribute { key: "draggable", value: prop' value }
+  attr Draggable value = unsafeAttribute
+    { key: "draggable", value: prop' value }
 
 instance Attr Tfoot_ Draggable String where
-  attr Draggable value = unsafeAttribute { key: "draggable", value: prop' value }
+  attr Draggable value = unsafeAttribute
+    { key: "draggable", value: prop' value }
 
 instance Attr Th_ Draggable String where
-  attr Draggable value = unsafeAttribute { key: "draggable", value: prop' value }
+  attr Draggable value = unsafeAttribute
+    { key: "draggable", value: prop' value }
 
 instance Attr Thead_ Draggable String where
-  attr Draggable value = unsafeAttribute { key: "draggable", value: prop' value }
+  attr Draggable value = unsafeAttribute
+    { key: "draggable", value: prop' value }
 
 instance Attr Time_ Draggable String where
-  attr Draggable value = unsafeAttribute { key: "draggable", value: prop' value }
+  attr Draggable value = unsafeAttribute
+    { key: "draggable", value: prop' value }
 
 instance Attr Title_ Draggable String where
-  attr Draggable value = unsafeAttribute { key: "draggable", value: prop' value }
+  attr Draggable value = unsafeAttribute
+    { key: "draggable", value: prop' value }
 
 instance Attr Tr_ Draggable String where
-  attr Draggable value = unsafeAttribute { key: "draggable", value: prop' value }
+  attr Draggable value = unsafeAttribute
+    { key: "draggable", value: prop' value }
 
 instance Attr Track_ Draggable String where
-  attr Draggable value = unsafeAttribute { key: "draggable", value: prop' value }
+  attr Draggable value = unsafeAttribute
+    { key: "draggable", value: prop' value }
 
 instance Attr Tt_ Draggable String where
-  attr Draggable value = unsafeAttribute { key: "draggable", value: prop' value }
+  attr Draggable value = unsafeAttribute
+    { key: "draggable", value: prop' value }
 
 instance Attr U_ Draggable String where
-  attr Draggable value = unsafeAttribute { key: "draggable", value: prop' value }
+  attr Draggable value = unsafeAttribute
+    { key: "draggable", value: prop' value }
 
 instance Attr Ul_ Draggable String where
-  attr Draggable value = unsafeAttribute { key: "draggable", value: prop' value }
+  attr Draggable value = unsafeAttribute
+    { key: "draggable", value: prop' value }
 
 instance Attr Var_ Draggable String where
-  attr Draggable value = unsafeAttribute { key: "draggable", value: prop' value }
+  attr Draggable value = unsafeAttribute
+    { key: "draggable", value: prop' value }
 
 instance Attr Video_ Draggable String where
-  attr Draggable value = unsafeAttribute { key: "draggable", value: prop' value }
+  attr Draggable value = unsafeAttribute
+    { key: "draggable", value: prop' value }
 
 instance Attr Wbr_ Draggable String where
-  attr Draggable value = unsafeAttribute { key: "draggable", value: prop' value }
+  attr Draggable value = unsafeAttribute
+    { key: "draggable", value: prop' value }
 
 instance Attr Form_ Enctype String where
   attr Enctype value = unsafeAttribute { key: "enctype", value: prop' value }
@@ -6207,17 +6524,20 @@ instance Attr Script_ Importance String where
     { key: "importance", value: prop' value }
 
 instance Attr Link_ Integrity String where
-  attr Integrity value = unsafeAttribute { key: "integrity", value: prop' value }
+  attr Integrity value = unsafeAttribute
+    { key: "integrity", value: prop' value }
 
 instance Attr Script_ Integrity String where
-  attr Integrity value = unsafeAttribute { key: "integrity", value: prop' value }
+  attr Integrity value = unsafeAttribute
+    { key: "integrity", value: prop' value }
 
 instance Attr Img_ Intrinsicsize String where
   attr Intrinsicsize value = unsafeAttribute
     { key: "intrinsicsize", value: prop' value }
 
 instance Attr Textarea_ Inputmode String where
-  attr Inputmode value = unsafeAttribute { key: "inputmode", value: prop' value }
+  attr Inputmode value = unsafeAttribute
+    { key: "inputmode", value: prop' value }
 
 instance Attr Img_ Ismap String where
   attr Ismap value = unsafeAttribute { key: "ismap", value: prop' value }
@@ -7366,16 +7686,20 @@ instance Attr Progress_ Max String where
   attr Max value = unsafeAttribute { key: "max", value: prop' value }
 
 instance Attr Input_ Maxlength String where
-  attr Maxlength value = unsafeAttribute { key: "maxlength", value: prop' value }
+  attr Maxlength value = unsafeAttribute
+    { key: "maxlength", value: prop' value }
 
 instance Attr Textarea_ Maxlength String where
-  attr Maxlength value = unsafeAttribute { key: "maxlength", value: prop' value }
+  attr Maxlength value = unsafeAttribute
+    { key: "maxlength", value: prop' value }
 
 instance Attr Input_ Minlength String where
-  attr Minlength value = unsafeAttribute { key: "minlength", value: prop' value }
+  attr Minlength value = unsafeAttribute
+    { key: "minlength", value: prop' value }
 
 instance Attr Textarea_ Minlength String where
-  attr Minlength value = unsafeAttribute { key: "minlength", value: prop' value }
+  attr Minlength value = unsafeAttribute
+    { key: "minlength", value: prop' value }
 
 instance Attr A_ Media String where
   attr Media value = unsafeAttribute { key: "media", value: prop' value }
@@ -10088,370 +10412,492 @@ instance Attr Wbr_ Title String where
   attr Title value = unsafeAttribute { key: "title", value: prop' value }
 
 instance Attr A_ Translate String where
-  attr Translate value = unsafeAttribute { key: "translate", value: prop' value }
+  attr Translate value = unsafeAttribute
+    { key: "translate", value: prop' value }
 
 instance Attr Abbr_ Translate String where
-  attr Translate value = unsafeAttribute { key: "translate", value: prop' value }
+  attr Translate value = unsafeAttribute
+    { key: "translate", value: prop' value }
 
 instance Attr Acronym_ Translate String where
-  attr Translate value = unsafeAttribute { key: "translate", value: prop' value }
+  attr Translate value = unsafeAttribute
+    { key: "translate", value: prop' value }
 
 instance Attr Address_ Translate String where
-  attr Translate value = unsafeAttribute { key: "translate", value: prop' value }
+  attr Translate value = unsafeAttribute
+    { key: "translate", value: prop' value }
 
 instance Attr Applet_ Translate String where
-  attr Translate value = unsafeAttribute { key: "translate", value: prop' value }
+  attr Translate value = unsafeAttribute
+    { key: "translate", value: prop' value }
 
 instance Attr Area_ Translate String where
-  attr Translate value = unsafeAttribute { key: "translate", value: prop' value }
+  attr Translate value = unsafeAttribute
+    { key: "translate", value: prop' value }
 
 instance Attr Article_ Translate String where
-  attr Translate value = unsafeAttribute { key: "translate", value: prop' value }
+  attr Translate value = unsafeAttribute
+    { key: "translate", value: prop' value }
 
 instance Attr Aside_ Translate String where
-  attr Translate value = unsafeAttribute { key: "translate", value: prop' value }
+  attr Translate value = unsafeAttribute
+    { key: "translate", value: prop' value }
 
 instance Attr Audio_ Translate String where
-  attr Translate value = unsafeAttribute { key: "translate", value: prop' value }
+  attr Translate value = unsafeAttribute
+    { key: "translate", value: prop' value }
 
 instance Attr B_ Translate String where
-  attr Translate value = unsafeAttribute { key: "translate", value: prop' value }
+  attr Translate value = unsafeAttribute
+    { key: "translate", value: prop' value }
 
 instance Attr Base_ Translate String where
-  attr Translate value = unsafeAttribute { key: "translate", value: prop' value }
+  attr Translate value = unsafeAttribute
+    { key: "translate", value: prop' value }
 
 instance Attr Basefont_ Translate String where
-  attr Translate value = unsafeAttribute { key: "translate", value: prop' value }
+  attr Translate value = unsafeAttribute
+    { key: "translate", value: prop' value }
 
 instance Attr Bdi_ Translate String where
-  attr Translate value = unsafeAttribute { key: "translate", value: prop' value }
+  attr Translate value = unsafeAttribute
+    { key: "translate", value: prop' value }
 
 instance Attr Bdo_ Translate String where
-  attr Translate value = unsafeAttribute { key: "translate", value: prop' value }
+  attr Translate value = unsafeAttribute
+    { key: "translate", value: prop' value }
 
 instance Attr Big_ Translate String where
-  attr Translate value = unsafeAttribute { key: "translate", value: prop' value }
+  attr Translate value = unsafeAttribute
+    { key: "translate", value: prop' value }
 
 instance Attr Blockquote_ Translate String where
-  attr Translate value = unsafeAttribute { key: "translate", value: prop' value }
+  attr Translate value = unsafeAttribute
+    { key: "translate", value: prop' value }
 
 instance Attr Body_ Translate String where
-  attr Translate value = unsafeAttribute { key: "translate", value: prop' value }
+  attr Translate value = unsafeAttribute
+    { key: "translate", value: prop' value }
 
 instance Attr Br_ Translate String where
-  attr Translate value = unsafeAttribute { key: "translate", value: prop' value }
+  attr Translate value = unsafeAttribute
+    { key: "translate", value: prop' value }
 
 instance Attr Button_ Translate String where
-  attr Translate value = unsafeAttribute { key: "translate", value: prop' value }
+  attr Translate value = unsafeAttribute
+    { key: "translate", value: prop' value }
 
 instance Attr Canvas_ Translate String where
-  attr Translate value = unsafeAttribute { key: "translate", value: prop' value }
+  attr Translate value = unsafeAttribute
+    { key: "translate", value: prop' value }
 
 instance Attr Caption_ Translate String where
-  attr Translate value = unsafeAttribute { key: "translate", value: prop' value }
+  attr Translate value = unsafeAttribute
+    { key: "translate", value: prop' value }
 
 instance Attr Center_ Translate String where
-  attr Translate value = unsafeAttribute { key: "translate", value: prop' value }
+  attr Translate value = unsafeAttribute
+    { key: "translate", value: prop' value }
 
 instance Attr Cite_ Translate String where
-  attr Translate value = unsafeAttribute { key: "translate", value: prop' value }
+  attr Translate value = unsafeAttribute
+    { key: "translate", value: prop' value }
 
 instance Attr Code_ Translate String where
-  attr Translate value = unsafeAttribute { key: "translate", value: prop' value }
+  attr Translate value = unsafeAttribute
+    { key: "translate", value: prop' value }
 
 instance Attr Col_ Translate String where
-  attr Translate value = unsafeAttribute { key: "translate", value: prop' value }
+  attr Translate value = unsafeAttribute
+    { key: "translate", value: prop' value }
 
 instance Attr Colgroup_ Translate String where
-  attr Translate value = unsafeAttribute { key: "translate", value: prop' value }
+  attr Translate value = unsafeAttribute
+    { key: "translate", value: prop' value }
 
 instance Attr Xdata_ Translate String where
-  attr Translate value = unsafeAttribute { key: "translate", value: prop' value }
+  attr Translate value = unsafeAttribute
+    { key: "translate", value: prop' value }
 
 instance Attr Datalist_ Translate String where
-  attr Translate value = unsafeAttribute { key: "translate", value: prop' value }
+  attr Translate value = unsafeAttribute
+    { key: "translate", value: prop' value }
 
 instance Attr Dd_ Translate String where
-  attr Translate value = unsafeAttribute { key: "translate", value: prop' value }
+  attr Translate value = unsafeAttribute
+    { key: "translate", value: prop' value }
 
 instance Attr Del_ Translate String where
-  attr Translate value = unsafeAttribute { key: "translate", value: prop' value }
+  attr Translate value = unsafeAttribute
+    { key: "translate", value: prop' value }
 
 instance Attr Details_ Translate String where
-  attr Translate value = unsafeAttribute { key: "translate", value: prop' value }
+  attr Translate value = unsafeAttribute
+    { key: "translate", value: prop' value }
 
 instance Attr Dfn_ Translate String where
-  attr Translate value = unsafeAttribute { key: "translate", value: prop' value }
+  attr Translate value = unsafeAttribute
+    { key: "translate", value: prop' value }
 
 instance Attr Dialog_ Translate String where
-  attr Translate value = unsafeAttribute { key: "translate", value: prop' value }
+  attr Translate value = unsafeAttribute
+    { key: "translate", value: prop' value }
 
 instance Attr Dir_ Translate String where
-  attr Translate value = unsafeAttribute { key: "translate", value: prop' value }
+  attr Translate value = unsafeAttribute
+    { key: "translate", value: prop' value }
 
 instance Attr Div_ Translate String where
-  attr Translate value = unsafeAttribute { key: "translate", value: prop' value }
+  attr Translate value = unsafeAttribute
+    { key: "translate", value: prop' value }
 
 instance Attr Dl_ Translate String where
-  attr Translate value = unsafeAttribute { key: "translate", value: prop' value }
+  attr Translate value = unsafeAttribute
+    { key: "translate", value: prop' value }
 
 instance Attr Dt_ Translate String where
-  attr Translate value = unsafeAttribute { key: "translate", value: prop' value }
+  attr Translate value = unsafeAttribute
+    { key: "translate", value: prop' value }
 
 instance Attr Em_ Translate String where
-  attr Translate value = unsafeAttribute { key: "translate", value: prop' value }
+  attr Translate value = unsafeAttribute
+    { key: "translate", value: prop' value }
 
 instance Attr Embed_ Translate String where
-  attr Translate value = unsafeAttribute { key: "translate", value: prop' value }
+  attr Translate value = unsafeAttribute
+    { key: "translate", value: prop' value }
 
 instance Attr Fieldset_ Translate String where
-  attr Translate value = unsafeAttribute { key: "translate", value: prop' value }
+  attr Translate value = unsafeAttribute
+    { key: "translate", value: prop' value }
 
 instance Attr Figcaption_ Translate String where
-  attr Translate value = unsafeAttribute { key: "translate", value: prop' value }
+  attr Translate value = unsafeAttribute
+    { key: "translate", value: prop' value }
 
 instance Attr Figure_ Translate String where
-  attr Translate value = unsafeAttribute { key: "translate", value: prop' value }
+  attr Translate value = unsafeAttribute
+    { key: "translate", value: prop' value }
 
 instance Attr Font_ Translate String where
-  attr Translate value = unsafeAttribute { key: "translate", value: prop' value }
+  attr Translate value = unsafeAttribute
+    { key: "translate", value: prop' value }
 
 instance Attr Footer_ Translate String where
-  attr Translate value = unsafeAttribute { key: "translate", value: prop' value }
+  attr Translate value = unsafeAttribute
+    { key: "translate", value: prop' value }
 
 instance Attr Form_ Translate String where
-  attr Translate value = unsafeAttribute { key: "translate", value: prop' value }
+  attr Translate value = unsafeAttribute
+    { key: "translate", value: prop' value }
 
 instance Attr Frame_ Translate String where
-  attr Translate value = unsafeAttribute { key: "translate", value: prop' value }
+  attr Translate value = unsafeAttribute
+    { key: "translate", value: prop' value }
 
 instance Attr Frameset_ Translate String where
-  attr Translate value = unsafeAttribute { key: "translate", value: prop' value }
+  attr Translate value = unsafeAttribute
+    { key: "translate", value: prop' value }
 
 instance Attr H1_ Translate String where
-  attr Translate value = unsafeAttribute { key: "translate", value: prop' value }
+  attr Translate value = unsafeAttribute
+    { key: "translate", value: prop' value }
 
 instance Attr H2_ Translate String where
-  attr Translate value = unsafeAttribute { key: "translate", value: prop' value }
+  attr Translate value = unsafeAttribute
+    { key: "translate", value: prop' value }
 
 instance Attr H3_ Translate String where
-  attr Translate value = unsafeAttribute { key: "translate", value: prop' value }
+  attr Translate value = unsafeAttribute
+    { key: "translate", value: prop' value }
 
 instance Attr H4_ Translate String where
-  attr Translate value = unsafeAttribute { key: "translate", value: prop' value }
+  attr Translate value = unsafeAttribute
+    { key: "translate", value: prop' value }
 
 instance Attr H5_ Translate String where
-  attr Translate value = unsafeAttribute { key: "translate", value: prop' value }
+  attr Translate value = unsafeAttribute
+    { key: "translate", value: prop' value }
 
 instance Attr H6_ Translate String where
-  attr Translate value = unsafeAttribute { key: "translate", value: prop' value }
+  attr Translate value = unsafeAttribute
+    { key: "translate", value: prop' value }
 
 instance Attr Head_ Translate String where
-  attr Translate value = unsafeAttribute { key: "translate", value: prop' value }
+  attr Translate value = unsafeAttribute
+    { key: "translate", value: prop' value }
 
 instance Attr Header_ Translate String where
-  attr Translate value = unsafeAttribute { key: "translate", value: prop' value }
+  attr Translate value = unsafeAttribute
+    { key: "translate", value: prop' value }
 
 instance Attr Hr_ Translate String where
-  attr Translate value = unsafeAttribute { key: "translate", value: prop' value }
+  attr Translate value = unsafeAttribute
+    { key: "translate", value: prop' value }
 
 instance Attr Html_ Translate String where
-  attr Translate value = unsafeAttribute { key: "translate", value: prop' value }
+  attr Translate value = unsafeAttribute
+    { key: "translate", value: prop' value }
 
 instance Attr I_ Translate String where
-  attr Translate value = unsafeAttribute { key: "translate", value: prop' value }
+  attr Translate value = unsafeAttribute
+    { key: "translate", value: prop' value }
 
 instance Attr Iframe_ Translate String where
-  attr Translate value = unsafeAttribute { key: "translate", value: prop' value }
+  attr Translate value = unsafeAttribute
+    { key: "translate", value: prop' value }
 
 instance Attr Img_ Translate String where
-  attr Translate value = unsafeAttribute { key: "translate", value: prop' value }
+  attr Translate value = unsafeAttribute
+    { key: "translate", value: prop' value }
 
 instance Attr Input_ Translate String where
-  attr Translate value = unsafeAttribute { key: "translate", value: prop' value }
+  attr Translate value = unsafeAttribute
+    { key: "translate", value: prop' value }
 
 instance Attr Ins_ Translate String where
-  attr Translate value = unsafeAttribute { key: "translate", value: prop' value }
+  attr Translate value = unsafeAttribute
+    { key: "translate", value: prop' value }
 
 instance Attr Kbd_ Translate String where
-  attr Translate value = unsafeAttribute { key: "translate", value: prop' value }
+  attr Translate value = unsafeAttribute
+    { key: "translate", value: prop' value }
 
 instance Attr Label_ Translate String where
-  attr Translate value = unsafeAttribute { key: "translate", value: prop' value }
+  attr Translate value = unsafeAttribute
+    { key: "translate", value: prop' value }
 
 instance Attr Legend_ Translate String where
-  attr Translate value = unsafeAttribute { key: "translate", value: prop' value }
+  attr Translate value = unsafeAttribute
+    { key: "translate", value: prop' value }
 
 instance Attr Li_ Translate String where
-  attr Translate value = unsafeAttribute { key: "translate", value: prop' value }
+  attr Translate value = unsafeAttribute
+    { key: "translate", value: prop' value }
 
 instance Attr Link_ Translate String where
-  attr Translate value = unsafeAttribute { key: "translate", value: prop' value }
+  attr Translate value = unsafeAttribute
+    { key: "translate", value: prop' value }
 
 instance Attr Main_ Translate String where
-  attr Translate value = unsafeAttribute { key: "translate", value: prop' value }
+  attr Translate value = unsafeAttribute
+    { key: "translate", value: prop' value }
 
 instance Attr Map_ Translate String where
-  attr Translate value = unsafeAttribute { key: "translate", value: prop' value }
+  attr Translate value = unsafeAttribute
+    { key: "translate", value: prop' value }
 
 instance Attr Mark_ Translate String where
-  attr Translate value = unsafeAttribute { key: "translate", value: prop' value }
+  attr Translate value = unsafeAttribute
+    { key: "translate", value: prop' value }
 
 instance Attr Meta_ Translate String where
-  attr Translate value = unsafeAttribute { key: "translate", value: prop' value }
+  attr Translate value = unsafeAttribute
+    { key: "translate", value: prop' value }
 
 instance Attr Meter_ Translate String where
-  attr Translate value = unsafeAttribute { key: "translate", value: prop' value }
+  attr Translate value = unsafeAttribute
+    { key: "translate", value: prop' value }
 
 instance Attr Nav_ Translate String where
-  attr Translate value = unsafeAttribute { key: "translate", value: prop' value }
+  attr Translate value = unsafeAttribute
+    { key: "translate", value: prop' value }
 
 instance Attr Noframes_ Translate String where
-  attr Translate value = unsafeAttribute { key: "translate", value: prop' value }
+  attr Translate value = unsafeAttribute
+    { key: "translate", value: prop' value }
 
 instance Attr Noscript_ Translate String where
-  attr Translate value = unsafeAttribute { key: "translate", value: prop' value }
+  attr Translate value = unsafeAttribute
+    { key: "translate", value: prop' value }
 
 instance Attr Object_ Translate String where
-  attr Translate value = unsafeAttribute { key: "translate", value: prop' value }
+  attr Translate value = unsafeAttribute
+    { key: "translate", value: prop' value }
 
 instance Attr Ol_ Translate String where
-  attr Translate value = unsafeAttribute { key: "translate", value: prop' value }
+  attr Translate value = unsafeAttribute
+    { key: "translate", value: prop' value }
 
 instance Attr Optgroup_ Translate String where
-  attr Translate value = unsafeAttribute { key: "translate", value: prop' value }
+  attr Translate value = unsafeAttribute
+    { key: "translate", value: prop' value }
 
 instance Attr Option_ Translate String where
-  attr Translate value = unsafeAttribute { key: "translate", value: prop' value }
+  attr Translate value = unsafeAttribute
+    { key: "translate", value: prop' value }
 
 instance Attr Output_ Translate String where
-  attr Translate value = unsafeAttribute { key: "translate", value: prop' value }
+  attr Translate value = unsafeAttribute
+    { key: "translate", value: prop' value }
 
 instance Attr P_ Translate String where
-  attr Translate value = unsafeAttribute { key: "translate", value: prop' value }
+  attr Translate value = unsafeAttribute
+    { key: "translate", value: prop' value }
 
 instance Attr Param_ Translate String where
-  attr Translate value = unsafeAttribute { key: "translate", value: prop' value }
+  attr Translate value = unsafeAttribute
+    { key: "translate", value: prop' value }
 
 instance Attr Picture_ Translate String where
-  attr Translate value = unsafeAttribute { key: "translate", value: prop' value }
+  attr Translate value = unsafeAttribute
+    { key: "translate", value: prop' value }
 
 instance Attr Pre_ Translate String where
-  attr Translate value = unsafeAttribute { key: "translate", value: prop' value }
+  attr Translate value = unsafeAttribute
+    { key: "translate", value: prop' value }
 
 instance Attr Progress_ Translate String where
-  attr Translate value = unsafeAttribute { key: "translate", value: prop' value }
+  attr Translate value = unsafeAttribute
+    { key: "translate", value: prop' value }
 
 instance Attr Q_ Translate String where
-  attr Translate value = unsafeAttribute { key: "translate", value: prop' value }
+  attr Translate value = unsafeAttribute
+    { key: "translate", value: prop' value }
 
 instance Attr Rp_ Translate String where
-  attr Translate value = unsafeAttribute { key: "translate", value: prop' value }
+  attr Translate value = unsafeAttribute
+    { key: "translate", value: prop' value }
 
 instance Attr Rt_ Translate String where
-  attr Translate value = unsafeAttribute { key: "translate", value: prop' value }
+  attr Translate value = unsafeAttribute
+    { key: "translate", value: prop' value }
 
 instance Attr Ruby_ Translate String where
-  attr Translate value = unsafeAttribute { key: "translate", value: prop' value }
+  attr Translate value = unsafeAttribute
+    { key: "translate", value: prop' value }
 
 instance Attr S_ Translate String where
-  attr Translate value = unsafeAttribute { key: "translate", value: prop' value }
+  attr Translate value = unsafeAttribute
+    { key: "translate", value: prop' value }
 
 instance Attr Samp_ Translate String where
-  attr Translate value = unsafeAttribute { key: "translate", value: prop' value }
+  attr Translate value = unsafeAttribute
+    { key: "translate", value: prop' value }
 
 instance Attr Script_ Translate String where
-  attr Translate value = unsafeAttribute { key: "translate", value: prop' value }
+  attr Translate value = unsafeAttribute
+    { key: "translate", value: prop' value }
 
 instance Attr Section_ Translate String where
-  attr Translate value = unsafeAttribute { key: "translate", value: prop' value }
+  attr Translate value = unsafeAttribute
+    { key: "translate", value: prop' value }
 
 instance Attr Select_ Translate String where
-  attr Translate value = unsafeAttribute { key: "translate", value: prop' value }
+  attr Translate value = unsafeAttribute
+    { key: "translate", value: prop' value }
 
 instance Attr Small_ Translate String where
-  attr Translate value = unsafeAttribute { key: "translate", value: prop' value }
+  attr Translate value = unsafeAttribute
+    { key: "translate", value: prop' value }
 
 instance Attr Source_ Translate String where
-  attr Translate value = unsafeAttribute { key: "translate", value: prop' value }
+  attr Translate value = unsafeAttribute
+    { key: "translate", value: prop' value }
 
 instance Attr Span_ Translate String where
-  attr Translate value = unsafeAttribute { key: "translate", value: prop' value }
+  attr Translate value = unsafeAttribute
+    { key: "translate", value: prop' value }
 
 instance Attr Strike_ Translate String where
-  attr Translate value = unsafeAttribute { key: "translate", value: prop' value }
+  attr Translate value = unsafeAttribute
+    { key: "translate", value: prop' value }
 
 instance Attr Strong_ Translate String where
-  attr Translate value = unsafeAttribute { key: "translate", value: prop' value }
+  attr Translate value = unsafeAttribute
+    { key: "translate", value: prop' value }
 
 instance Attr Style_ Translate String where
-  attr Translate value = unsafeAttribute { key: "translate", value: prop' value }
+  attr Translate value = unsafeAttribute
+    { key: "translate", value: prop' value }
 
 instance Attr Sub_ Translate String where
-  attr Translate value = unsafeAttribute { key: "translate", value: prop' value }
+  attr Translate value = unsafeAttribute
+    { key: "translate", value: prop' value }
 
 instance Attr Summary_ Translate String where
-  attr Translate value = unsafeAttribute { key: "translate", value: prop' value }
+  attr Translate value = unsafeAttribute
+    { key: "translate", value: prop' value }
 
 instance Attr Sup_ Translate String where
-  attr Translate value = unsafeAttribute { key: "translate", value: prop' value }
+  attr Translate value = unsafeAttribute
+    { key: "translate", value: prop' value }
 
 instance Attr Svg_ Translate String where
-  attr Translate value = unsafeAttribute { key: "translate", value: prop' value }
+  attr Translate value = unsafeAttribute
+    { key: "translate", value: prop' value }
 
 instance Attr Table_ Translate String where
-  attr Translate value = unsafeAttribute { key: "translate", value: prop' value }
+  attr Translate value = unsafeAttribute
+    { key: "translate", value: prop' value }
 
 instance Attr Tbody_ Translate String where
-  attr Translate value = unsafeAttribute { key: "translate", value: prop' value }
+  attr Translate value = unsafeAttribute
+    { key: "translate", value: prop' value }
 
 instance Attr Td_ Translate String where
-  attr Translate value = unsafeAttribute { key: "translate", value: prop' value }
+  attr Translate value = unsafeAttribute
+    { key: "translate", value: prop' value }
 
 instance Attr Template_ Translate String where
-  attr Translate value = unsafeAttribute { key: "translate", value: prop' value }
+  attr Translate value = unsafeAttribute
+    { key: "translate", value: prop' value }
 
 instance Attr Textarea_ Translate String where
-  attr Translate value = unsafeAttribute { key: "translate", value: prop' value }
+  attr Translate value = unsafeAttribute
+    { key: "translate", value: prop' value }
 
 instance Attr Tfoot_ Translate String where
-  attr Translate value = unsafeAttribute { key: "translate", value: prop' value }
+  attr Translate value = unsafeAttribute
+    { key: "translate", value: prop' value }
 
 instance Attr Th_ Translate String where
-  attr Translate value = unsafeAttribute { key: "translate", value: prop' value }
+  attr Translate value = unsafeAttribute
+    { key: "translate", value: prop' value }
 
 instance Attr Thead_ Translate String where
-  attr Translate value = unsafeAttribute { key: "translate", value: prop' value }
+  attr Translate value = unsafeAttribute
+    { key: "translate", value: prop' value }
 
 instance Attr Time_ Translate String where
-  attr Translate value = unsafeAttribute { key: "translate", value: prop' value }
+  attr Translate value = unsafeAttribute
+    { key: "translate", value: prop' value }
 
 instance Attr Title_ Translate String where
-  attr Translate value = unsafeAttribute { key: "translate", value: prop' value }
+  attr Translate value = unsafeAttribute
+    { key: "translate", value: prop' value }
 
 instance Attr Tr_ Translate String where
-  attr Translate value = unsafeAttribute { key: "translate", value: prop' value }
+  attr Translate value = unsafeAttribute
+    { key: "translate", value: prop' value }
 
 instance Attr Track_ Translate String where
-  attr Translate value = unsafeAttribute { key: "translate", value: prop' value }
+  attr Translate value = unsafeAttribute
+    { key: "translate", value: prop' value }
 
 instance Attr Tt_ Translate String where
-  attr Translate value = unsafeAttribute { key: "translate", value: prop' value }
+  attr Translate value = unsafeAttribute
+    { key: "translate", value: prop' value }
 
 instance Attr U_ Translate String where
-  attr Translate value = unsafeAttribute { key: "translate", value: prop' value }
+  attr Translate value = unsafeAttribute
+    { key: "translate", value: prop' value }
 
 instance Attr Ul_ Translate String where
-  attr Translate value = unsafeAttribute { key: "translate", value: prop' value }
+  attr Translate value = unsafeAttribute
+    { key: "translate", value: prop' value }
 
 instance Attr Var_ Translate String where
-  attr Translate value = unsafeAttribute { key: "translate", value: prop' value }
+  attr Translate value = unsafeAttribute
+    { key: "translate", value: prop' value }
 
 instance Attr Video_ Translate String where
-  attr Translate value = unsafeAttribute { key: "translate", value: prop' value }
+  attr Translate value = unsafeAttribute
+    { key: "translate", value: prop' value }
 
 instance Attr Wbr_ Translate String where
-  attr Translate value = unsafeAttribute { key: "translate", value: prop' value }
+  attr Translate value = unsafeAttribute
+    { key: "translate", value: prop' value }
 
 instance Attr Img_ Usemap String where
   attr Usemap value = unsafeAttribute { key: "usemap", value: prop' value }
@@ -10573,13 +11019,16 @@ instance Attr anything OnDrag Cb where
 instance Attr anything OnDragend Cb where
   attr OnDragend value = unsafeAttribute { key: "dragend", value: cb' value }
 instance Attr anything OnDragenter Cb where
-  attr OnDragenter value = unsafeAttribute { key: "dragenter", value: cb' value }
+  attr OnDragenter value = unsafeAttribute
+    { key: "dragenter", value: cb' value }
 instance Attr anything OnDragleave Cb where
-  attr OnDragleave value = unsafeAttribute { key: "dragleave", value: cb' value }
+  attr OnDragleave value = unsafeAttribute
+    { key: "dragleave", value: cb' value }
 instance Attr anything OnDragover Cb where
   attr OnDragover value = unsafeAttribute { key: "dragover", value: cb' value }
 instance Attr anything OnDragstart Cb where
-  attr OnDragstart value = unsafeAttribute { key: "dragstart", value: cb' value }
+  attr OnDragstart value = unsafeAttribute
+    { key: "dragstart", value: cb' value }
 instance Attr anything OnDrop Cb where
   attr OnDrop value = unsafeAttribute { key: "drop", value: cb' value }
 instance Attr anything OnDurationchange Cb where
@@ -10615,12 +11064,14 @@ instance Attr anything OnLoadedmetadata Cb where
 instance Attr anything OnLoadend Cb where
   attr OnLoadend value = unsafeAttribute { key: "loadend", value: cb' value }
 instance Attr anything OnLoadstart Cb where
-  attr OnLoadstart value = unsafeAttribute { key: "loadstart", value: cb' value }
+  attr OnLoadstart value = unsafeAttribute
+    { key: "loadstart", value: cb' value }
 instance Attr anything OnLostpointercapture Cb where
   attr OnLostpointercapture value = unsafeAttribute
     { key: "lostpointercapture", value: cb' value }
 instance Attr anything OnMousedown Cb where
-  attr OnMousedown value = unsafeAttribute { key: "mousedown", value: cb' value }
+  attr OnMousedown value = unsafeAttribute
+    { key: "mousedown", value: cb' value }
 instance Attr anything OnMouseenter Cb where
   attr OnMouseenter value = unsafeAttribute
     { key: "mouseenter", value: cb' value }
@@ -10628,11 +11079,13 @@ instance Attr anything OnMouseleave Cb where
   attr OnMouseleave value = unsafeAttribute
     { key: "mouseleave", value: cb' value }
 instance Attr anything OnMousemove Cb where
-  attr OnMousemove value = unsafeAttribute { key: "mousemove", value: cb' value }
+  attr OnMousemove value = unsafeAttribute
+    { key: "mousemove", value: cb' value }
 instance Attr anything OnMouseout Cb where
   attr OnMouseout value = unsafeAttribute { key: "mouseout", value: cb' value }
 instance Attr anything OnMouseover Cb where
-  attr OnMouseover value = unsafeAttribute { key: "mouseover", value: cb' value }
+  attr OnMouseover value = unsafeAttribute
+    { key: "mouseover", value: cb' value }
 instance Attr anything OnMouseup Cb where
   attr OnMouseup value = unsafeAttribute { key: "mouseup", value: cb' value }
 instance Attr anything OnMousewheel Cb where
@@ -10653,7 +11106,8 @@ instance Attr anything OnPointermove Cb where
   attr OnPointermove value = unsafeAttribute
     { key: "pointermove", value: cb' value }
 instance Attr anything OnPointerup Cb where
-  attr OnPointerup value = unsafeAttribute { key: "pointerup", value: cb' value }
+  attr OnPointerup value = unsafeAttribute
+    { key: "pointerup", value: cb' value }
 instance Attr anything OnPointercancel Cb where
   attr OnPointercancel value = unsafeAttribute
     { key: "pointercancel", value: cb' value }
@@ -10722,7 +11176,8 @@ instance Attr anything OnTouchcancel Cb where
   attr OnTouchcancel value = unsafeAttribute
     { key: "touchcancel  ", value: cb' value }
 instance Attr anything OnTouchend Cb where
-  attr OnTouchend value = unsafeAttribute { key: "touchend  ", value: cb' value }
+  attr OnTouchend value = unsafeAttribute
+    { key: "touchend  ", value: cb' value }
 instance Attr anything OnTouchmove Cb where
   attr OnTouchmove value = unsafeAttribute
     { key: "touchmove  ", value: cb' value }

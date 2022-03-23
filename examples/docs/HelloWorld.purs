@@ -3,8 +3,7 @@ module Deku.Example.Docs.HelloWorld where
 import Prelude
 
 import Data.Tuple.Nested ((/\))
-import Deku.Control.Functions (freeze, (@!>))
-import Deku.Create (icreate)
+import Deku.Control.Functions (freeze, u, (%>))
 import Deku.Example.Docs.Types (Page(..))
 import Deku.Example.Docs.Util (scrollToTop)
 import Deku.Graph.Attribute (cb)
@@ -14,9 +13,9 @@ import Deku.Graph.DOM.Shorthand as S
 import Deku.Util (detup)
 import Effect (Effect)
 
-helloWorld :: (Page -> Effect Unit) -> ResolvedSubgraphSig "head" Unit Unit
+helloWorld :: (Page -> Effect Unit) -> ResolvedSubgraphSig Unit Unit
 helloWorld dpage =
-  ( \_ _ -> icreate
+  ( \_ _ -> u
       { head: D.div []
           { header: D.header []
               { title: D.h1 [] (S.text "Hello world")
@@ -41,8 +40,7 @@ helloWorld dpage =
 import Prelude
 
 import Data.Foldable (for_)
-import Deku.Control.Functions.Graph (freeze, (@!>))
-import Deku.Create (icreate)
+import Deku.Control.Functions (freeze, u, (@>))
 import Deku.Graph.DOM (root)
 import Deku.Graph.DOM.Shorthand as S
 import Deku.Interpret (makeFFIDOMSnapshot)
@@ -62,9 +60,8 @@ main = do
     subscribe
       ( run (pure unit) (pure unit) defaultOptions ffi
           $
-            ( \_ _ ->
-                (icreate $ root elt (S.text "Hello world"))
-            ) @!> freeze
+            ( \_ _ -> u $ root elt (S.text "Hello world")
+            ) @> freeze
 
       )
       (_.res >>> pure)
@@ -178,7 +175,7 @@ main = do
                                 (S.text "run")
                               /\ D.span []
                                 ( S.text
-                                    """ is no different. Here, the side effect is creating a beautiful webpage like the one you're reading now. Or, if you're following along by typing out the example, it will create \"Hello world\" in the body of your page."""
+                                    """ is no different. Here, the side effect is creating a beautiful webpage like the one you're reading now. Or, if you're following along by typing out the example, it will create "Hello world" in the body of your page."""
                                 )
                               /\ unit
                         )
@@ -218,9 +215,9 @@ main = do
                         ( detup $
                             D.text
                               "That's all you need to know at this point. We'll go over what "
-                              /\ D.code [] (S.text "icreate")
+                              /\ D.code [] (S.text "u")
                               /\ D.text " and "
-                              /\ D.code [] (S.text "@!>")
+                              /\ D.code [] (S.text "@>")
                               /\ D.text
                                 " do later in this guide. For now, the important bit is to get up and running. We'll build off of this in the following sections."
                               /\ unit
@@ -249,4 +246,4 @@ main = do
               )
           }
       }
-  ) @!> freeze
+  ) %> freeze
