@@ -8,10 +8,9 @@ import Data.Hashable (class Hashable, hash)
 import Data.Map (insert, singleton)
 import Data.Tuple (fst, snd)
 import Data.Tuple.Nested ((/\))
-import Deku.Change (ichange)
-import Deku.Control.Functions (iloop, (@!>))
+import Deku.Change (change)
+import Deku.Control.Functions (u, (@>), (%>))
 import Deku.Control.Types (Frame0, Scene)
-import Deku.Create (icreate)
 import Deku.Graph.Attribute (cb)
 import Deku.Graph.DOM (AsSubgraph(..), SubgraphSig, root, xsubgraph, (:=))
 import Deku.Graph.DOM as D
@@ -35,76 +34,76 @@ instance Show Sgs where
 instance Hashable Sgs where
   hash = show >>> hash
 
-sub :: (Sgs -> Effect Unit) -> SubgraphSig Sgs "div" Unit Unit
+sub :: (Sgs -> Effect Unit) -> SubgraphSig Sgs Unit Unit
 sub raise Sg0 =
   ( \_ push ->
-      ( icreate $ S.div []
-          ( { div1: D.div []
-                { button0: D.button
-                    [ D.OnClick := cb (const $ raise Sg0)
-                    ]
-                    (S.text "Send to B")
-                , count0: D.div [] (S.text ("A: 0"))
-                , button1: D.button
-                    [ D.OnClick := cb (const $ push unit)
-                    ]
-                    (S.text "Send to C")
-                , count1: D.div [] (S.text ("C: 0"))
-                }
-            , hr: D.hr [] {}
-            }
-          )
-      ) $> (0 /\ 0)
-  ) @!> iloop \e _ (a /\ c) -> case e of
+      S.div []
+        ( { div1: D.div []
+              { button0: D.button
+                  [ D.OnClick := cb (const $ raise Sg0)
+                  ]
+                  (S.text "Send to B")
+              , count0: D.div [] (S.text ("A: 0"))
+              , button1: D.button
+                  [ D.OnClick := cb (const $ push unit)
+                  ]
+                  (S.text "Send to C")
+              , count1: D.div [] (S.text ("C: 0"))
+              }
+          , hr: D.hr [] {}
+          }
+        )
+        /\ (0 /\ 0)
+  ) %> \e (a /\ c) -> case e of
     Left _ ->
       let
         new = (a + 1) /\ c
       in
-        ichange
+        change
           { "div.div1.count0.t": "A: " <> show (fst new)
           } $> new
     Right _ ->
       let
         new = a /\ (c + 1)
       in
-        ichange
+        change
           { "div.div1.count1.t": "C: " <> show (snd new)
           } $> new
 sub raise Sg1 =
   ( \_ push ->
-      ( icreate $ S.div []
-          ( { div1: D.div []
-                { button0: D.a
-                    [ D.OnClick := cb (const $ raise Sg1)
-                    , D.Style := "cursor:pointer;"
+      S.div []
+        ( { div1: D.div []
+              { button0: D.a
+                  [ D.OnClick := cb (const $ raise Sg1)
+                  , D.Style := "cursor:pointer;"
 
-                    ]
-                    (S.text "Send to A")
-                , count0: D.div [] (S.text "B: 0")
-                , button1: D.a
-                    [ D.OnClick := cb (const $ push unit)
-                    , D.Style := "cursor:pointer;"
+                  ]
+                  (S.text "Send to A")
+              , count0: D.div [] (S.text "B: 0")
+              , button1: D.a
+                  [ D.OnClick := cb (const $ push unit)
+                  , D.Style := "cursor:pointer;"
 
-                    ]
-                    (S.text "Send to D")
-                , count1: D.div [] (S.text "D: 0")
-                }
-            }
-          )
-      ) $> (0 /\ 0)
-  ) @!> iloop \e _ (b /\ d) -> case e of
+                  ]
+                  (S.text "Send to D")
+              , count1: D.div [] (S.text "D: 0")
+              }
+          }
+        )
+        /\ (0 /\ 0)
+  ) %> \e (b /\ d) -> case e of
     Left _ ->
       let
         new = (b + 1) /\ d
       in
-        ichange
+        change
           { "div.div1.count0.t": "B: " <> show (fst new)
           } $> new
     Right _ ->
       let
         new = b /\ (d + 1)
       in
-        ichange
+        change
           { "div.div1.count1.t": "D: " <> show (snd new)
           } $> new
 
@@ -116,22 +115,21 @@ scene
   -> Scene env dom engine Frame0 Sgs res
 scene elt =
   ( \_ push ->
-      ( icreate $ root elt
-          { sub:
-              D.subgraph
-                ( insert Sg0 (pure unit)
-                    $ singleton Sg1 (pure unit)
-                )
-                (AsSubgraph (sub push))
-          }
+      u $ root elt
+        { sub:
+            D.subgraph
+              ( insert Sg0 (pure unit)
+                  $ singleton Sg1 (pure unit)
+              )
+              (AsSubgraph (sub push))
+        }
 
-      )
-  ) @!> iloop \e _ _ -> case e of
+  ) @> \e _ -> case e of
     Left _ -> pure unit
-    Right Sg0 -> ichange
+    Right Sg0 -> change
       { "root.sub": xsubgraph (singleton Sg1 (pure unit))
       }
-    Right Sg1 -> ichange
+    Right Sg1 -> change
       { "root.sub": xsubgraph (singleton Sg0 (pure unit))
       }
 

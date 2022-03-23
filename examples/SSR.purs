@@ -6,9 +6,8 @@ import Data.Either (Either(..))
 import Data.Foldable (for_)
 import Data.Maybe (maybe)
 import Data.Tuple.Nested ((/\))
-import Deku.Control.Functions.Graph (freeze, (@!>))
+import Deku.Control.Functions (freeze, u, (@>))
 import Deku.Control.Types (Frame0, Scene, oneFrame)
-import Deku.Create (icreate)
 import Deku.Graph.DOM (root)
 import Deku.Graph.DOM as D
 import Deku.Graph.DOM.Shorthand as S
@@ -32,30 +31,30 @@ scene
   -> Scene env dom engine Frame0 push Unit
 scene i elt =
   ( \_ _ ->
-      ( icreate $ root elt
-          ( detup $ D.p [] (S.text "Here is some XML!")
-              /\ D.pre []
-                ( S.code []
-                    ( S.text $
-                        if i > 3 then "<stack-overflow />"
-                        else
-                          ( maybe "" toXML
-                              ( ssr
-                                  ( map ((#) unit)
-                                      ( oneFrame
-                                          (scene (i + 1) elt)
-                                          (Left unit)
-                                          (const $ pure unit)
-                                      ).instructions
-                                  )
-                              )
-                          )
-                    )
-                )
-              /\ unit
-          )
-      )
-  ) @!> freeze
+      u $ root elt
+        ( detup $ D.p [] (S.text "Here is some XML!")
+            /\ D.pre []
+              ( S.code []
+                  ( S.text $
+                      if i > 3 then "<stack-overflow />"
+                      else
+                        ( maybe "" toXML
+                            ( ssr
+                                ( map ((#) unit)
+                                    ( oneFrame
+                                        (scene (i + 1) elt)
+                                        (Left unit)
+                                        (const $ pure unit)
+                                    ).instructions
+                                )
+                            )
+                        )
+                  )
+              )
+            /\ unit
+        )
+  )
+    @> freeze
 
 main :: Effect Unit
 main = do
