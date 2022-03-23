@@ -26,6 +26,7 @@ import Deku.Create (class Create, class CreateSG, create, createSG)
 import Deku.Graph.DOM (Element, Root)
 import Deku.Interpret (class DOMInterpret)
 import Effect (Effect)
+import Prim.Row (class Nub)
 
 u :: forall a. a -> a /\ Unit
 u a = a /\ unit
@@ -214,6 +215,7 @@ loopUsingSceneG
    . Monoid res
   => DOMInterpret dom engine
   => Create (root :: Element Root sn) () graph
+  => Nub graph graph
   => ( env
        -> (push -> Effect Unit)
        -> { root :: Element Root sn } /\ control
@@ -232,6 +234,7 @@ loopUsingSceneGWithRes
    . Monoid res
   => DOMInterpret dom engine
   => Create (root :: Element Root sn) () graph
+  => Nub graph graph
   => ( env
        -> (push -> Effect Unit)
        -> { root :: Element Root sn } /\ control /\ res
@@ -257,6 +260,7 @@ loopUsingSceneSG
    . Monoid res
   => DOMInterpret dom engine
   => CreateSG sn () graph
+  => Nub graph graph
   => ( env
        -> (push -> Effect Unit)
        -> { | sn } /\ control
@@ -275,6 +279,7 @@ loopUsingSceneSGWithRes
    . Monoid res
   => DOMInterpret dom engine
   => CreateSG sn () graph
+  => Nub graph graph
   => ( env
        -> (push -> Effect Unit)
        -> { | sn } /\ control /\ res
