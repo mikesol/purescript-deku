@@ -8251,7 +8251,7 @@ var PS = {};
                                       }))
                                   };
                               };
-                              throw new Error("Failed pattern match at Deku.Control.Functions (line 82, column 17 - line 96, column 10): " + [ v.constructor.name ]);
+                              throw new Error("Failed pattern match at Deku.Control.Functions (line 83, column 17 - line 97, column 10): " + [ v.constructor.name ]);
                           };
                       };
                       return Deku_Control_Types.unFrame(dictIsScene)(go);
@@ -8330,7 +8330,7 @@ var PS = {};
                               if (e instanceof Data_Either.Right) {
                                   return new Data_Either.Right(start(dictMonoid)(dictDOMInterpret));
                               };
-                              throw new Error("Failed pattern match at Deku.Control.Functions (line 114, column 13 - line 120, column 29): " + [ e.constructor.name ]);
+                              throw new Error("Failed pattern match at Deku.Control.Functions (line 115, column 13 - line 121, column 29): " + [ e.constructor.name ]);
                           };
                       })(infiniteLoop(dictMonoid)(dictDOMInterpret)(dictIsScene));
                   };
@@ -8341,23 +8341,25 @@ var PS = {};
   var loopUsingSceneGWithRes = function (dictMonoid) {
       return function (dictDOMInterpret) {
           return function (dictCreate) {
-              return function (sceneF0) {
-                  return function (loopF) {
-                      return withStart(dictMonoid)(dictDOMInterpret)(Deku_Control_Types.isSceneScene)(function (env) {
-                          return function (push) {
-                              return function (stt) {
-                                  var v = sceneF0(env)(push);
-                                  return Data_Functor.voidLeft(Deku_Control_Types.functorDOM)(modifyRes$primeImpl(Data_Function["const"](v.value1.value1))(Deku_Create.create(dictCreate)(dictDOMInterpret)(Data_Functor.voidLeft(Deku_Control_Types.functorDOM)(stt)(v.value0))))(v.value1.value0);
+              return function (dictNub) {
+                  return function (sceneF0) {
+                      return function (loopF) {
+                          return withStart(dictMonoid)(dictDOMInterpret)(Deku_Control_Types.isSceneScene)(function (env) {
+                              return function (push) {
+                                  return function (stt) {
+                                      var v = sceneF0(env)(push);
+                                      return Data_Functor.voidLeft(Deku_Control_Types.functorDOM)(modifyRes$primeImpl(Data_Function["const"](v.value1.value1))(Deku_Create.create(dictCreate)(dictDOMInterpret)(Data_Functor.voidLeft(Deku_Control_Types.functorDOM)(stt)(v.value0))))(v.value1.value0);
+                                  };
                               };
-                          };
-                      })(loop(dictMonoid)(dictDOMInterpret)(Deku_Control_Types.isSceneScene)(function (f) {
-                          return function (x) {
-                              return function (v) {
-                                  var v1 = loopF(x)(Control_Comonad.extract(Deku_Control_Types.comonadDOM)(f));
-                                  return v1(f);
+                          })(loop(dictMonoid)(dictDOMInterpret)(Deku_Control_Types.isSceneScene)(function (f) {
+                              return function (x) {
+                                  return function (v) {
+                                      var v1 = loopF(x)(Control_Comonad.extract(Deku_Control_Types.comonadDOM)(f));
+                                      return v1(f);
+                                  };
                               };
-                          };
-                      }));
+                          }));
+                      };
                   };
               };
           };
@@ -8366,10 +8368,12 @@ var PS = {};
   var loopUsingSceneG = function (dictMonoid) {
       return function (dictDOMInterpret) {
           return function (dictCreate) {
-              return function (f) {
-                  return loopUsingSceneGWithRes(dictMonoid)(dictDOMInterpret)(dictCreate)(Data_Functor.map(Data_Functor.functorFn)(Data_Functor.map(Data_Functor.functorFn)(function (v) {
-                      return new Data_Tuple.Tuple(v.value0, new Data_Tuple.Tuple(v.value1, Data_Monoid.mempty(dictMonoid)));
-                  }))(f));
+              return function (dictNub) {
+                  return function (f) {
+                      return loopUsingSceneGWithRes(dictMonoid)(dictDOMInterpret)(dictCreate)()(Data_Functor.map(Data_Functor.functorFn)(Data_Functor.map(Data_Functor.functorFn)(function (v) {
+                          return new Data_Tuple.Tuple(v.value0, new Data_Tuple.Tuple(v.value1, Data_Monoid.mempty(dictMonoid)));
+                      }))(f));
+                  };
               };
           };
       };
@@ -8377,23 +8381,25 @@ var PS = {};
   var loopUsingSceneSGWithRes = function (dictMonoid) {
       return function (dictDOMInterpret) {
           return function (dictCreateSG) {
-              return function (sceneF0) {
-                  return function (loopF) {
-                      return withStart(dictMonoid)(dictDOMInterpret)(Deku_Control_Types.isSceneSubScene)(function (env) {
-                          return function (push) {
-                              return function (stt) {
-                                  var v = sceneF0(env)(push);
-                                  return Data_Functor.voidLeft(Deku_Control_Types.functorDOM)(modifyRes$primeImpl(Data_Function["const"](v.value1.value1))(Deku_Create.createSG(dictCreateSG)(dictDOMInterpret)(Data_Functor.voidLeft(Deku_Control_Types.functorDOM)(stt)(v.value0))))(v.value1.value0);
+              return function (dictNub) {
+                  return function (sceneF0) {
+                      return function (loopF) {
+                          return withStart(dictMonoid)(dictDOMInterpret)(Deku_Control_Types.isSceneSubScene)(function (env) {
+                              return function (push) {
+                                  return function (stt) {
+                                      var v = sceneF0(env)(push);
+                                      return Data_Functor.voidLeft(Deku_Control_Types.functorDOM)(modifyRes$primeImpl(Data_Function["const"](v.value1.value1))(Deku_Create.createSG(dictCreateSG)(dictDOMInterpret)(Data_Functor.voidLeft(Deku_Control_Types.functorDOM)(stt)(v.value0))))(v.value1.value0);
+                                  };
                               };
-                          };
-                      })(loop(dictMonoid)(dictDOMInterpret)(Deku_Control_Types.isSceneSubScene)(function (f) {
-                          return function (x) {
-                              return function (v) {
-                                  var v1 = loopF(x)(Control_Comonad.extract(Deku_Control_Types.comonadDOM)(f));
-                                  return v1(f);
+                          })(loop(dictMonoid)(dictDOMInterpret)(Deku_Control_Types.isSceneSubScene)(function (f) {
+                              return function (x) {
+                                  return function (v) {
+                                      var v1 = loopF(x)(Control_Comonad.extract(Deku_Control_Types.comonadDOM)(f));
+                                      return v1(f);
+                                  };
                               };
-                          };
-                      }));
+                          }));
+                      };
                   };
               };
           };
@@ -8402,10 +8408,12 @@ var PS = {};
   var loopUsingSceneSG = function (dictMonoid) {
       return function (dictDOMInterpret) {
           return function (dictCreateSG) {
-              return function (f) {
-                  return loopUsingSceneSGWithRes(dictMonoid)(dictDOMInterpret)(dictCreateSG)(Data_Functor.map(Data_Functor.functorFn)(Data_Functor.map(Data_Functor.functorFn)(function (v) {
-                      return new Data_Tuple.Tuple(v.value0, new Data_Tuple.Tuple(v.value1, Data_Monoid.mempty(dictMonoid)));
-                  }))(f));
+              return function (dictNub) {
+                  return function (f) {
+                      return loopUsingSceneSGWithRes(dictMonoid)(dictDOMInterpret)(dictCreateSG)()(Data_Functor.map(Data_Functor.functorFn)(Data_Functor.map(Data_Functor.functorFn)(function (v) {
+                          return new Data_Tuple.Tuple(v.value0, new Data_Tuple.Tuple(v.value1, Data_Monoid.mempty(dictMonoid)));
+                      }))(f));
+                  };
               };
           };
       };
@@ -8978,7 +8986,7 @@ var PS = {};
   };
   var sg = function (dictDOMInterpret) {
       return function (v) {
-          return Deku_Control_Functions.loopUsingSceneSG(Data_Monoid_Additive.monoidAdditive(Data_Semiring.semiringInt))(dictDOMInterpret)(Deku_Create.createSGAll())(function (v1) {
+          return Deku_Control_Functions.loopUsingSceneSG(Data_Monoid_Additive.monoidAdditive(Data_Semiring.semiringInt))(dictDOMInterpret)(Deku_Create.createSGAll())()(function (v1) {
               return function (push) {
                   return new Data_Tuple.Tuple(Deku_Graph_DOM_Shorthand.div([  ])({
                       div1: Deku_Graph_DOM.div([  ])({
@@ -9062,7 +9070,7 @@ var PS = {};
   };
   var effects = function (dpage) {
       return function (dictDOMInterpret) {
-          return Deku_Control_Functions.loopUsingSceneSG(Data_Monoid_Additive.monoidAdditive(Data_Semiring.semiringInt))(dictDOMInterpret)(Deku_Create.createSGAll())(function (v) {
+          return Deku_Control_Functions.loopUsingSceneSG(Data_Monoid_Additive.monoidAdditive(Data_Semiring.semiringInt))(dictDOMInterpret)(Deku_Create.createSGAll())()(function (v) {
               return function (v1) {
                   return Deku_Control_Functions.u({
                       head: Deku_Graph_DOM.div([  ])({
@@ -9306,7 +9314,7 @@ var PS = {};
   })();
   var sg = function (dictDOMInterpret) {
       return function (v) {
-          return Deku_Control_Functions.loopUsingSceneSG(Data_Monoid_Additive.monoidAdditive(Data_Semiring.semiringInt))(dictDOMInterpret)(Deku_Create.createSGAll())(function (v1) {
+          return Deku_Control_Functions.loopUsingSceneSG(Data_Monoid_Additive.monoidAdditive(Data_Semiring.semiringInt))(dictDOMInterpret)(Deku_Create.createSGAll())()(function (v1) {
               return function (push) {
                   return new Data_Tuple.Tuple(Deku_Graph_DOM_Shorthand.div([  ])({
                       div1: Deku_Graph_DOM.div([  ])({
@@ -9377,7 +9385,7 @@ var PS = {};
   };
   var events = function (dpage) {
       return function (dictDOMInterpret) {
-          return Deku_Control_Functions.loopUsingSceneSG(Data_Monoid_Additive.monoidAdditive(Data_Semiring.semiringInt))(dictDOMInterpret)(Deku_Create.createSGAll())(function (v) {
+          return Deku_Control_Functions.loopUsingSceneSG(Data_Monoid_Additive.monoidAdditive(Data_Semiring.semiringInt))(dictDOMInterpret)(Deku_Create.createSGAll())()(function (v) {
               return function (v1) {
                   return Deku_Control_Functions.u({
                       head: Deku_Graph_DOM.div([  ])({
@@ -9691,7 +9699,7 @@ var PS = {};
   var Effect = $PS["Effect"];                
   var helloWorld = function (dpage) {
       return function (dictDOMInterpret) {
-          return Deku_Control_Functions.loopUsingSceneSG(Data_Monoid_Additive.monoidAdditive(Data_Semiring.semiringInt))(dictDOMInterpret)(Deku_Create.createSGAll())(function (v) {
+          return Deku_Control_Functions.loopUsingSceneSG(Data_Monoid_Additive.monoidAdditive(Data_Semiring.semiringInt))(dictDOMInterpret)(Deku_Create.createSGAll())()(function (v) {
               return function (v1) {
                   return Deku_Control_Functions.u({
                       head: Deku_Graph_DOM.div([  ])({
@@ -9973,7 +9981,7 @@ var PS = {};
   var Effect = $PS["Effect"];                
   var intro = function (dpage) {
       return function (dictDOMInterpret) {
-          return Deku_Control_Functions.loopUsingSceneSG(Data_Monoid_Additive.monoidAdditive(Data_Semiring.semiringInt))(dictDOMInterpret)(Deku_Create.createSGAll())(function (v) {
+          return Deku_Control_Functions.loopUsingSceneSG(Data_Monoid_Additive.monoidAdditive(Data_Semiring.semiringInt))(dictDOMInterpret)(Deku_Create.createSGAll())()(function (v) {
               return function (v1) {
                   return Deku_Control_Functions.u({
                       head: Deku_Graph_DOM.div([  ])({
@@ -10483,7 +10491,7 @@ var PS = {};
   var scene = function (dictDOMInterpret) {
       return function (i) {
           return function (elt) {
-              return Deku_Control_Functions.loopUsingSceneG(Data_Monoid.monoidUnit)(dictDOMInterpret)(Deku_Create.createAll())(function (v) {
+              return Deku_Control_Functions.loopUsingSceneG(Data_Monoid.monoidUnit)(dictDOMInterpret)(Deku_Create.createAll())()(function (v) {
                   return function (v1) {
                       return Deku_Control_Functions.u(Deku_Graph_DOM.root(elt)(Deku_Util.detup(Deku_Util.detupTuple(Data_Typelevel_Num_Ops.typelevelSucc(Data_Typelevel_Num_Sets.posD1)()(Data_Typelevel_Num_Ops.divMod10D0D0)()(Data_Typelevel_Num_Ops.divMod10D1D0))(Deku_Util.detupTuple(Data_Typelevel_Num_Ops.typelevelSucc(Data_Typelevel_Num_Sets.posD2)()(Data_Typelevel_Num_Ops.divMod10D1D0)()(Data_Typelevel_Num_Ops.divMod10D2D0))(Deku_Util.detupUnit)()()()({
                           reflectSymbol: function () {
@@ -10507,7 +10515,7 @@ var PS = {};
   };
   var serverSide = function (v) {
       return function (dictDOMInterpret) {
-          return Deku_Control_Functions.loopUsingSceneSG(Data_Monoid_Additive.monoidAdditive(Data_Semiring.semiringInt))(dictDOMInterpret)(Deku_Create.createSGAll())(function (v1) {
+          return Deku_Control_Functions.loopUsingSceneSG(Data_Monoid_Additive.monoidAdditive(Data_Semiring.semiringInt))(dictDOMInterpret)(Deku_Create.createSGAll())()(function (v1) {
               return function (v2) {
                   return Deku_Control_Functions.u({
                       head: Deku_Graph_DOM.div([  ])({
@@ -10595,7 +10603,7 @@ var PS = {};
   var Effect = $PS["Effect"];                
   var simpleComponent = function (dpage) {
       return function (dictDOMInterpret) {
-          return Deku_Control_Functions.loopUsingSceneSG(Data_Monoid_Additive.monoidAdditive(Data_Semiring.semiringInt))(dictDOMInterpret)(Deku_Create.createSGAll())(function (v) {
+          return Deku_Control_Functions.loopUsingSceneSG(Data_Monoid_Additive.monoidAdditive(Data_Semiring.semiringInt))(dictDOMInterpret)(Deku_Create.createSGAll())()(function (v) {
               return function (v1) {
                   return Deku_Control_Functions.u({
                       head: Deku_Graph_DOM.div([  ])({
@@ -11064,7 +11072,7 @@ var PS = {};
       return function (dictDOMInterpret) {
           return function (v) {
               if (v instanceof Sg0) {
-                  return Deku_Control_Functions.loopUsingSceneSG(Data_Monoid_Additive.monoidAdditive(Data_Semiring.semiringInt))(dictDOMInterpret)(Deku_Create.createSGAll())(function (v1) {
+                  return Deku_Control_Functions.loopUsingSceneSG(Data_Monoid_Additive.monoidAdditive(Data_Semiring.semiringInt))(dictDOMInterpret)(Deku_Create.createSGAll())()(function (v1) {
                       return function (push) {
                           return new Data_Tuple.Tuple(Deku_Graph_DOM_Shorthand.div([  ])({
                               div1: Deku_Graph_DOM.div([  ])({
@@ -11111,7 +11119,7 @@ var PS = {};
                   });
               };
               if (v instanceof Sg1) {
-                  return Deku_Control_Functions.loopUsingSceneSG(Data_Monoid_Additive.monoidAdditive(Data_Semiring.semiringInt))(dictDOMInterpret)(Deku_Create.createSGAll())(function (v1) {
+                  return Deku_Control_Functions.loopUsingSceneSG(Data_Monoid_Additive.monoidAdditive(Data_Semiring.semiringInt))(dictDOMInterpret)(Deku_Create.createSGAll())()(function (v1) {
                       return function (push) {
                           return new Data_Tuple.Tuple(Deku_Graph_DOM_Shorthand.div([  ])({
                               div1: Deku_Graph_DOM.div([  ])({
@@ -11162,7 +11170,7 @@ var PS = {};
   };
   var sg = function (dictDOMInterpret) {
       return function (v) {
-          return Deku_Control_Functions.loopUsingSceneSG(Data_Monoid_Additive.monoidAdditive(Data_Semiring.semiringInt))(dictDOMInterpret)(Deku_Create.createSGAll())(function (v1) {
+          return Deku_Control_Functions.loopUsingSceneSG(Data_Monoid_Additive.monoidAdditive(Data_Semiring.semiringInt))(dictDOMInterpret)(Deku_Create.createSGAll())()(function (v1) {
               return function (push) {
                   return Deku_Control_Functions.u(Deku_Graph_DOM_Shorthand.div([  ])({
                       sub: Deku_Graph_DOM.subgraph(hashableSgs)(Data_Map_Internal.insert(ordSgs)(Sg0.value)(Control_Applicative.pure(Data_Maybe.applicativeMaybe)(Data_Unit.unit))(Data_Map_Internal.singleton(Sg1.value)(Control_Applicative.pure(Data_Maybe.applicativeMaybe)(Data_Unit.unit))))(function (dictDOMInterpret1) {
@@ -11208,7 +11216,7 @@ var PS = {};
   };
   var subgraphs = function (dpage) {
       return function (dictDOMInterpret) {
-          return Deku_Control_Functions.loopUsingSceneSG(Data_Monoid_Additive.monoidAdditive(Data_Semiring.semiringInt))(dictDOMInterpret)(Deku_Create.createSGAll())(function (v) {
+          return Deku_Control_Functions.loopUsingSceneSG(Data_Monoid_Additive.monoidAdditive(Data_Semiring.semiringInt))(dictDOMInterpret)(Deku_Create.createSGAll())()(function (v) {
               return function (v1) {
                   return Deku_Control_Functions.u({
                       head: Deku_Graph_DOM.div([  ])({
@@ -11915,7 +11923,7 @@ var PS = {};
       };
   };
   var scene = function (elt) {
-      return Deku_Control_Functions.loopUsingSceneG(Data_Monoid.monoidUnit)(Deku_Interpret.effectfulDOMInterpret)(Deku_Create.createAll())(function (v) {
+      return Deku_Control_Functions.loopUsingSceneG(Data_Monoid.monoidUnit)(Deku_Interpret.effectfulDOMInterpret)(Deku_Create.createAll())()(function (v) {
           return function (push) {
               return new Data_Tuple.Tuple(Deku_Graph_DOM.root(elt)({
                   main: Deku_Graph_DOM.main([  ])({
