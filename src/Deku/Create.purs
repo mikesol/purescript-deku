@@ -6,6 +6,7 @@ import Data.Hashable (class Hashable)
 import Data.Symbol (class IsSymbol, reflectSymbol)
 import Deku.Control.Types (DOM, DOMState', unsafeDOM, unsafeUnDOM)
 import Deku.CreateT (class CreateT)
+import Deku.CreateSGT (class CreateSGT)
 import Deku.Graph.Attribute (Attribute, unsafeUnAttribute)
 import Deku.Graph.DOM (unAsSubGraph, unsafeUnRoot, unsafeUnSubgraph, unsafeUnText)
 import Deku.Graph.DOM as CTOR
@@ -29,6 +30,32 @@ instance createAll ::
   CreateT r inGraph outGraph =>
   Create r inGraph outGraph where
   create w = o
+    where
+    { context: i, value } = unsafeUnDOM w
+    o =
+      unsafeDOM
+        { context:
+            i
+              { instructions = i.instructions <>
+                  [ massiveCreate { toCreate: ToCreate $ unsafeCoerce value }
+                  ]
+              }
+        , value: unit
+        }
+
+class
+  CreateSG (r :: Row Type) (inGraph :: Graph) (outGraph :: Graph)
+  | r inGraph -> outGraph where
+  createSG
+    :: forall dom engine proof res
+     . DOMInterpret dom engine
+    => DOM dom engine proof res inGraph { | r }
+    -> DOM dom engine proof res outGraph Unit
+
+instance createSGAll ::
+  CreateSGT r inGraph outGraph =>
+  CreateSG r inGraph outGraph where
+  createSG w = o
     where
     { context: i, value } = unsafeUnDOM w
     o =

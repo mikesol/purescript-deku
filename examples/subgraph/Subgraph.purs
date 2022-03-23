@@ -10,8 +10,7 @@ import Data.Maybe (Maybe(..))
 import Data.Monoid.Additive (Additive(..))
 import Data.Tuple.Nested ((/\))
 import Deku.Change (change)
-import Deku.Control.Functions (modifyRes, (@>), (@!>))
-import Deku.Control.Functions.Subgraph as SG
+import Deku.Control.Functions (modifyRes, (%!>), (%>), (@>))
 import Deku.Control.Types (Frame0, Scene)
 import Deku.Graph.Attribute (cb)
 import Deku.Graph.DOM (AsSubgraph(..), xsubgraph, Href(..), OnClick(..), a, a'attr, root, subgraph, text, (:=))
@@ -43,7 +42,7 @@ scene elt =
                     { ht: text "click" }
                 , helloA: subgraph (falsy 40)
                     ( AsSubgraph \i ->
-                        SG.loopUsingScene
+
                           ( \_ push ->
                               { myA: a
                                   [ Href := "#"
@@ -56,7 +55,7 @@ scene elt =
                                   { myTxt: text " me " }
                               } /\ push
 
-                          )
+                          ) %>
                           ( \e push ->
                               case e of
                                 Left tf ->
@@ -77,7 +76,6 @@ scene elt =
                     { ht: text "click" }
                 , wB: subgraph (falsy 10)
                     ( AsSubgraph \i ->
-                        SG.loopUsingSceneWithRes
                           ( \_ push ->
                               ( { myA: a
                                     [ Href := "#"
@@ -90,7 +88,7 @@ scene elt =
                                     { myTxt: text $ " me" <> show i <> " " }
                                 } /\ (push /\ Additive i) /\ (Additive i)
                               )
-                          )
+                          ) %!>
                           \e (push /\ (Additive i')) ->
                             case e of
                               Left _ ->

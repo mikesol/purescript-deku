@@ -5,8 +5,7 @@ import Prelude
 
 import Data.Vec ((+>), empty)
 import Data.Tuple.Nested ((/\))
-import Deku.Control.Functions (freeze, (@!>))
-import Deku.Create (icreate)
+import Deku.Control.Functions (u, freeze, (%>))
 import Deku.Example.Docs.Util (scrollToTop)
 import Deku.Graph.Attribute (cb)
 import Deku.Graph.DOM (ResolvedSubgraphSig, (:=))
@@ -15,10 +14,10 @@ import Deku.Graph.DOM.Shorthand as S
 import Deku.Util (detup, vex)
 import Effect (Effect)
 
-simpleComponent :: (Page -> Effect Unit) -> ResolvedSubgraphSig "head" Unit Unit
+simpleComponent :: (Page -> Effect Unit) -> ResolvedSubgraphSig Unit Unit
 simpleComponent dpage =
-  ( \_ _ -> icreate
-      { head: D.div []
+  ( \_ _ ->
+      u { head: D.div []
           { header: D.header []
               { title: D.h1 [] (S.text "A Simple Component")
               , subtitle: D.h3 []
@@ -42,12 +41,11 @@ simpleComponent dpage =
 import Prelude
 
 import Data.Foldable (for_)
-import Data.Vec ((+>), empty)
-import Deku.Graph.DOM ((:=), root)
 import Data.Tuple.Nested ((/\))
-import Deku.Control.Functions.Graph (freeze, (@!>))
+import Data.Vec ((+>), empty)
+import Deku.Control.Functions (freeze, u, (@>))
 import Deku.Control.Types (Frame0, Scene)
-import Deku.Create (icreate)
+import Deku.Graph.DOM ((:=), root)
 import Deku.Graph.DOM as D
 import Deku.Graph.DOM.Shorthand as S
 import Deku.Interpret (class DOMInterpret, makeFFIDOMSnapshot)
@@ -69,7 +67,7 @@ scene
   -> Scene env dom engine Frame0 push res
 scene elt =
   ( \_ _ ->
-      ( icreate $ root elt
+      ( u $ root elt
           ( { button: D.button [] { t: D.text "I do nothing" }
             , list: D.ul []
                 $ vex
@@ -77,11 +75,13 @@ scene elt =
                   ("A" +> "B" +> "C" +> empty)
             , rando: D.div []
                 $ detup
-                $ D.a [D.Href := "https://github.com/mikesol/purescript-deku"] (S.text "foo ")
-                  /\ D.i [] (S.text " bar ")
-                  /\ D.span [ D.Style := "font-weight: 800;" ] (S.text " baz")
-                  /\
-                    unit
+                $
+                  D.a [ D.Href := "https://github.com/mikesol/purescript-deku" ]
+                    (S.text "foo ")
+                    /\ D.i [] (S.text " bar ")
+                    /\ D.span [ D.Style := "font-weight: 800;" ] (S.text " baz")
+                    /\
+                      unit
             , lotsOfDivs: D.div []
                 $ S.div []
                 $ S.div []
@@ -89,7 +89,7 @@ scene elt =
             }
           )
       )
-  ) @!> freeze
+  ) @> freeze
 
 main :: Effect Unit
 main = do
@@ -266,4 +266,4 @@ main = do
               )
           }
       }
-  ) @!> freeze
+  ) %> freeze

@@ -4,10 +4,10 @@ import Prelude
 
 import Data.Either (Either(..))
 import Data.Foldable (for_)
-import Deku.Change (ichange)
-import Deku.Control.Functions.Graph (iloop, (@!>))
+import Deku.Change (change)
+import Deku.Control.Functions ((@>))
 import Deku.Control.Types (Frame0, Scene)
-import Deku.Create (icreate)
+import Data.Tuple.Nested ((/\))
 import Deku.Graph.Attribute (cb)
 import Deku.Graph.DOM (OnClick(..), Href(..), a, a'attr, root, text, (:=))
 import Deku.Interpret (makeFFIDOMSnapshot)
@@ -25,20 +25,19 @@ scene
   -> Scene (TriggeredScene Unit Unit) RunDOM RunEngine Frame0 Boolean Unit
 scene elt =
   ( \_ push ->
-      ( icreate $
-          root elt
+      ( root elt
             { hello: text "click "
             , helloA: a [ Href := "#", OnClick := cb (const $ push false) ]
                 { world: text "me" }
-            }
+            } /\ push
       )
-  ) @!> iloop \e push _ ->
+  ) @> \e push ->
     case e of
-      Left _ -> pure unit
-      Right tf -> ichange
+      Left _ -> pure push
+      Right tf -> change
         { "root.hello": if tf then "click " else "kcilc "
         , "root.helloA": a'attr [ OnClick := cb (const $ push (not tf)) ]
-        }
+        } $> push
 
 main :: Effect Unit
 main = do

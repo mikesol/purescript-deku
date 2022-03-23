@@ -1,11 +1,10 @@
 module Deku.Example.Docs.Intro where
 
-import Deku.Example.Docs.Types (Page(..))
 import Prelude
 
 import Data.Tuple.Nested ((/\))
-import Deku.Control.Functions.Subgraph (freeze, (@!>))
-import Deku.Create (icreate)
+import Deku.Control.Functions (freeze, u, (%>))
+import Deku.Example.Docs.Types (Page(..))
 import Deku.Example.Docs.Util (scrollToTop)
 import Deku.Graph.Attribute (cb)
 import Deku.Graph.DOM (ResolvedSubgraphSig, (:=))
@@ -14,10 +13,10 @@ import Deku.Graph.DOM.Shorthand as S
 import Deku.Util (detup)
 import Effect (Effect)
 
-intro :: (Page -> Effect Unit) -> ResolvedSubgraphSig "head" Unit Unit
+intro :: (Page -> Effect Unit) -> ResolvedSubgraphSig Unit Unit
 intro dpage =
-  ( \_ _ -> icreate
-      { head: D.div []
+  ( \_ _ ->
+      u { head: D.div []
           { header: D.header []
               { title: D.h1 [] (S.text "Deku")
               , subtitle: D.h3 []
@@ -107,4 +106,4 @@ intro dpage =
               )
           }
       }
-  ) @!> freeze
+  ) %> freeze

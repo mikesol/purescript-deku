@@ -11,7 +11,7 @@ import Data.Maybe (Maybe(..))
 import Data.Set as Set
 import Data.Tuple.Nested ((/\))
 import Deku.Change (change)
-import Deku.Control.Functions (frozen, (@>))
+import Deku.Control.Functions (freeze, u, (@>), (%>))
 import Deku.Graph.Attribute (cb)
 import Deku.Graph.DOM (xsubgraph, (:=))
 import Deku.Graph.DOM as DOM
@@ -51,11 +51,11 @@ container =
         filled <- Shared.fillContainerState Shared.initialContainerState
         subscribe
           ( run (pure unit) (pure unit) defaultOptions ffi
-              ( frozen
-                  ( \_ _ -> DOM.root (toElement el)
+              (
+                  ( \_ _ -> u $ DOM.root (toElement el)
                       { sg: (containerD filled)
                       }
-                  )
+                  ) @> freeze
               )
           )
           (\(_ :: TriggeredRun Unit) -> pure unit)
@@ -64,7 +64,7 @@ container =
 
 containerD
   :: Shared.ContainerState
-  -> DOM.Element (DOM.Subgraph Int "ctr" Unit Shared.Todo) ()
+  -> DOM.Element (DOM.Subgraph Int Unit Shared.Todo) ()
 containerD cstate = DOM.subgraph (singleton 0 (Just unit)) $ DOM.AsSubgraph
   \_ ->
     ( \_ push ->
@@ -88,7 +88,7 @@ containerD cstate = DOM.subgraph (singleton 0 (Just unit)) $ DOM.AsSubgraph
                     }
                 }
             } /\ (ln /\ push)
-    ) @> \e (ln /\ push) -> case e of
+    ) %> \e (ln /\ push) -> case e of
       Left _ -> pure (ln /\ push)
       Right td -> ((ln + 1) /\ push) <$ change
         { "ctr.dv.sg": xsubgraph
@@ -103,10 +103,10 @@ containerD cstate = DOM.subgraph (singleton 0 (Just unit)) $ DOM.AsSubgraph
 
 todoD
   :: Map Int (Maybe TodoInput)
-  -> DOM.Element (DOM.Subgraph Int "top" TodoInput Unit) ()
+  -> DOM.Element (DOM.Subgraph Int TodoInput Unit) ()
 todoD mp = DOM.subgraph mp $ DOM.AsSubgraph \i ->
-  frozen ( \itl _ ->
-        { top: DOM.div []
+   ( \itl _ ->
+        u $ { top: DOM.div []
             { ipt: DOM.input
                 [ DOM.Id := Shared.editId itl.todo.id
                 , DOM.Value := itl.todo.description
@@ -120,20 +120,20 @@ todoD mp = DOM.subgraph mp $ DOM.AsSubgraph \i ->
                 { txt: DOM.text "Save Changes" }
             }
         }
-  )
+  ) %> freeze
 
 data CheckboxAction = ReceiveCheckboxInput CheckboxInput | HandleCheck Boolean
 
 checkboxD
   :: Map Int (Maybe CheckboxInput)
-  -> DOM.Element (DOM.Subgraph Int "input" CheckboxInput Unit) ()
+  -> DOM.Element (DOM.Subgraph Int CheckboxInput Unit) ()
 checkboxD envs = DOM.subgraph envs $ DOM.AsSubgraph \i ->
-  frozen ( \itl _ ->
-      { input: DOM.input
+   ( \itl _ ->
+      u $ { input: DOM.input
           [ DOM.Xtype := "checkbox"
           , DOM.Id := Shared.checkId i
           , DOM.Checked := (show $ Set.member itl.id itl.completed)
           ]
           {}
       }
-  )
+  ) %> freeze

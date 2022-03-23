@@ -6,9 +6,8 @@ import Data.Either (Either(..))
 import Data.Foldable (for_)
 import Data.Maybe (maybe)
 import Data.Tuple.Nested ((/\))
-import Deku.Control.Functions.Graph (freeze, (@!>))
+import Deku.Control.Functions (freeze, u, (@>))
 import Deku.Control.Types (Frame0, Scene, oneFrame)
-import Deku.Create (icreate)
 import Deku.Graph.DOM (root)
 import Deku.Graph.DOM as D
 import Deku.Graph.DOM.Shorthand as S
@@ -32,7 +31,7 @@ scene
   -> Scene env dom engine Frame0 push Unit
 scene i elt =
   ( \_ _ ->
-      ( icreate $ root elt
+       u $ root elt
           ( detup $ D.p [] (S.text "Here is some XML!")
               /\ D.pre []
                 ( S.code []
@@ -55,7 +54,7 @@ scene i elt =
               /\ unit
           )
       )
-  ) @!> freeze
+   @> freeze
 
 main :: Effect Unit
 main = do

@@ -5,13 +5,10 @@ import Prelude
 import Data.Either (Either(..))
 import Data.Maybe (maybe)
 import Data.Tuple.Nested ((/\))
-import Deku.Control.Functions (freeze, (@!>))
+import Deku.Control.Functions (freeze, u, (@>), (%>))
 import Deku.Control.Types (Frame0, Scene, oneFrame)
-import Deku.Create (icreate)
-import Deku.Example.Docs.Types (Page(..))
-import Deku.Example.Docs.Util (scrollToTop)
-import Deku.Graph.Attribute (Cb(..))
-import Deku.Graph.DOM (ResolvedSubgraphSig, root, (:=))
+import Deku.Example.Docs.Types (Page)
+import Deku.Graph.DOM (ResolvedSubgraphSig, root)
 import Deku.Graph.DOM as D
 import Deku.Graph.DOM.Shorthand as S
 import Deku.Interpret (class DOMInterpret)
@@ -29,7 +26,7 @@ scene
   -> Scene env dom engine Frame0 push Unit
 scene i elt =
   ( \_ _ ->
-      ( icreate $ root elt
+      ( u $ root elt
           ( detup $ D.p [] (S.text "Here is some XML!")
               /\ D.pre []
                 ( S.code []
@@ -52,11 +49,12 @@ scene i elt =
               /\ unit
           )
       )
-  ) @!> freeze
-serverSide :: (Page -> Effect Unit) -> ResolvedSubgraphSig "head" Unit Unit
-serverSide dpage =
-  ( \_ _ -> icreate
-      { head: D.div []
+  ) @> freeze
+
+serverSide :: (Page -> Effect Unit) -> ResolvedSubgraphSig Unit Unit
+serverSide _ =
+  ( \_ _ ->
+      u { head: D.div []
           { header: D.header []
               { title: D.h1 [] (S.text "SSR")
               , subtitle: D.h3 []
@@ -91,9 +89,8 @@ import Data.Either (Either(..))
 import Data.Foldable (for_)
 import Data.Maybe (maybe)
 import Data.Tuple.Nested ((/\))
-import Deku.Control.Functions.Graph (freeze, (@!>))
+import Deku.Control.Functions (freeze, u, (@>))
 import Deku.Control.Types (Frame0, Scene, oneFrame)
-import Deku.Create (icreate)
 import Deku.Graph.DOM (root)
 import Deku.Graph.DOM as D
 import Deku.Graph.DOM.Shorthand as S
@@ -117,26 +114,30 @@ scene
   -> Scene env dom engine Frame0 push Unit
 scene i elt =
   ( \_ _ ->
-      ( icreate $ root elt
-          ( detup $ D.p [] (S.text "Here is some XML!") /\ D.pre []
-              ( S.code []
-                  ( S.text $ if i > 3 then "<stack-overflow />" else
-                      ( maybe "" toXML
-                          ( ssr
-                              ( map ((#) unit)
-                                  ( oneFrame
-                                      (scene (i+1) elt)
-                                      (Left unit)
-                                      (const $ pure unit)
-                                  ).instructions
+       u $ root elt
+          ( detup $ D.p [] (S.text "Here is some XML!")
+              /\ D.pre []
+                ( S.code []
+                    ( S.text $
+                        if i > 3 then "<stack-overflow />"
+                        else
+                          ( maybe "" toXML
+                              ( ssr
+                                  ( map ((#) unit)
+                                      ( oneFrame
+                                          (scene (i + 1) elt)
+                                          (Left unit)
+                                          (const $ pure unit)
+                                      ).instructions
+                                  )
                               )
                           )
-                      )
-                  )
-              ) /\ unit
+                    )
+                )
+              /\ unit
           )
       )
-  ) @!> freeze
+   @> freeze
 
 main :: Effect Unit
 main = do
@@ -192,4 +193,4 @@ main = do
               )
           }
       }
-  ) @!> freeze
+  ) %> freeze

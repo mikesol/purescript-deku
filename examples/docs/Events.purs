@@ -7,14 +7,12 @@ import Data.Foldable (for_)
 import Data.Map (singleton)
 import Data.Maybe (Maybe(..))
 import Data.Tuple.Nested ((/\))
-import Deku.Change (ichange)
-import Deku.Control.Functions (freeze, iloop, (@!>))
-import Deku.Create (icreate)
+import Deku.Change (change)
+import Deku.Control.Functions (freeze, u, (%>))
 import Deku.Example.Docs.Types (Page(..))
 import Deku.Example.Docs.Util (scrollToTop)
 import Deku.Graph.Attribute (cb)
 import Deku.Graph.DOM (AsSubgraph(..), ResolvedSubgraphSig, SubgraphSig, subgraph, (:=))
-import Deku.Graph.DOM (ResolvedSubgraphSig, SubgraphSig, subgraph, (:=))
 import Deku.Graph.DOM as D
 import Deku.Graph.DOM.Shorthand as S
 import Deku.Util (detup)
@@ -23,10 +21,10 @@ import Web.DOM.Element (fromEventTarget)
 import Web.Event.Event (target)
 import Web.HTML.HTMLInputElement (fromElement, valueAsNumber)
 
-events :: (Page -> Effect Unit) -> ResolvedSubgraphSig "head" Unit Unit
+events :: (Page -> Effect Unit) -> ResolvedSubgraphSig Unit Unit
 events dpage =
-  ( \_ _ -> icreate
-      { head: D.div []
+  ( \_ _ ->
+      u { head: D.div []
           { header: D.header []
               { title: D.h1 [] (S.text "Events")
               , subtitle: D.h3 []
@@ -51,11 +49,11 @@ import Prelude
 
 import Data.Either (Either(..))
 import Data.Foldable (for_)
-import Deku.Change (ichange)
-import Deku.Control.Functions.Graph (iloop, (@!>))
+import Deku.Change (change)
+import Data.Tuple.Nested ((/\))
+import Deku.Control.Functions ((@>))
 import Deku.Control.Types (Frame0, Scene)
-import Deku.Create (icreate)
-import Deku.Graph.Attribute (cb(..))
+import Deku.Graph.Attribute (cb)
 import Deku.Graph.DOM ((:=), root)
 import Deku.Graph.DOM as D
 import Deku.Graph.DOM.Shorthand as S
@@ -82,7 +80,7 @@ scene
   -> Scene env dom engine Frame0 UIEvents res
 scene elt =
   ( \_ push ->
-      ( icreate $ root elt
+       root elt
           ( { div1: D.div []
                 { button: D.button
                     [ D.OnClick :=
@@ -108,20 +106,20 @@ scene elt =
                 }
             }
           )
-      ) $> 0
-  ) @!> iloop \e _ nclicks -> case e of
+      /\ 0
+  ) @> \e nclicks -> case e of
     Left _ -> pure nclicks
     Right ButtonClicked ->
       let
         c = nclicks + 1
       in
-        ichange
+        change
           { "root.div1.count.t": "Val: " <> show c
           , "root.div1.button.t":
               if mod c 2 == 0 then "Click" else "me"
           } $> c
     Right (SliderMoved n) ->
-      ichange
+      change
         { "root.div2.val.t": "Val: " <> show n
         } $> nclicks
 
@@ -171,13 +169,10 @@ main = do
                                 """. In order to actually trigger the event, you'll use the"""
                               /\ D.code [] (S.text "push")
                               /\ D.text
-                                """ function passed both to """
-                              /\ D.code [] (S.text "istart")
+                                """ function passed to the creation function and """
+                              /\ D.i [] (S.text "propagate")
                               /\ D.text
-                                """ and """
-                              /\ D.code [] (S.text "iloop")
-                              /\ D.text
-                                """. This function has a signature of """
+                                """ it to the next function, which is our loop. The ush function has a signature of """
                               /\ D.code [] (S.text "(push -> Effect Unit)")
                               /\ D.text
                                 """, where """
@@ -189,24 +184,17 @@ main = do
                                 """. Whenever a push happens, it goes to the """
                               /\ D.code [] (S.text "Right")
                               /\ D.text
-                                """ of the first argument passed to  """
-                              /\ D.code [] (S.text "iloop")
-                              /\ D.text """. Let's delve into what """
-                              /\ D.code [] (S.text "iloop")
-                              /\ D.text """ is doing here."""
+                                """ of the first argument passed to the loop function. Let's delve into what that function is doing."""
                               /\ unit
                         )
                       /\ D.h2 [] (S.text "Loop-de-loop")
                       /\ D.p []
                         ( detup $
                             D.text
-                              """The """
-                              /\ D.code []
-                                ( S.text
-                                    "iloop"
-                                )
+                              """The loop function works off of the fixed DOM type created on the left side of """
+                              /\ D.code [] (S.text "@>")
                               /\ D.text
-                                """ function effectively fixes the nodes of the DOM while allowing their content to vary. This means that we'll no longer be able to add or remove nodes, but we can change them."""
+                                """. This means that we'll no longer be able to add or remove nodes to that type, but we can change their attributes or text content."""
 
                               /\ unit
                         )
@@ -216,13 +204,13 @@ main = do
                               """Changing is done with the function """
                               /\ D.code []
                                 ( S.text
-                                    "ichange"
+                                    "change"
                                 )
                               /\ D.text
                                 """. """
                               /\ D.code []
                                 ( S.text
-                                    "ichange"
+                                    "change"
                                 )
                               /\ D.text
                                 """ uses Barlow-style lenses to zoom into the DOM with surgical precision, changing only what needs to be changed. This is what keeps Deku so darn fast and why it is ideally suited to performance-critical webpages. Because it tracks the DOM at """
@@ -256,29 +244,13 @@ main = do
                       /\ D.p []
                         ( detup $
                             D.text
-                              """The second argument to our loop is the same push function that we got in the initial call to our function. The third argument is a custom accumulator. In our case, we use an """
-                              /\ D.code [] (S.text "Int")
+                              """The second argument is a custom accumulator. In our case, we use """
+                              /\ D.code [] (S.text "push /\\ Int")
                               /\ D.text
-                                """ to track the number of clicks. The accumulator must be returned as the value contained in the indexed monad if you are using the monadic syntax ("""
-                              /\ D.code [] (S.text "icreate")
-                              /\ D.text
-                                ""","""
-                              /\ D.code [] (S.text "ichange")
-                              /\ D.text
-                                """, etc)."""
-                              /\ D.text
-                                """ There is also a comonadic syntax, but it's a bit more verbose. Those versions, """
+                                """ to propagate the push and track the number of clicks. The accumulator must be returned as the value contained in the monad created by"""
                               /\ D.code [] (S.text "create")
                               /\ D.text
-                                """ and """
-                              /\ D.code [] (S.text "change")
-                              /\ D.text ",live in the files "
-                              /\ D.code [] (S.text "Create.purs")
-                              /\ D.text
-                                """and"""
-                              /\ D.code [] (S.text "Change.purs")
-                              /\ D.text
-                                "respectively if you want to see how their signatures differ."
+                                """."""
                               /\ unit
                         )
                       /\ D.h2 [] (S.text "Next steps")
@@ -289,7 +261,7 @@ main = do
                                   """In this section, saw how to react to events using the """
                               ) /\ D.code [] (S.text "iloop")
                               /\ D.text " function in combination with "
-                              /\ D.code [] (S.text "ichange")
+                              /\ D.code [] (S.text "change")
                               /\ D.text
                                 ". In the next section, we'll use a similar mechanism to deal with arbitrary "
                               /\ D.a
@@ -309,14 +281,13 @@ main = do
               )
           }
       }
-  ) @!> freeze
+  ) %> freeze
 
 data UIEvents = ButtonClicked | SliderMoved Number
-sg :: SubgraphSig Int "div" Unit UIEvents
-
+sg :: SubgraphSig Int Unit UIEvents
 sg _ =
   ( \_ push ->
-      ( icreate $ S.div []
+     S.div []
           ( { div1: D.div []
                 { button: D.button
                     [ D.OnClick := cb (const $ push ButtonClicked)
@@ -336,17 +307,17 @@ sg _ =
                 }
             }
           )
-      ) $> 0
-  ) @!> iloop \e _ nclicks -> case e of
+       /\ 0
+  ) %> \e nclicks -> case e of
     Left _ -> pure nclicks
     Right ButtonClicked ->
       let
         c = nclicks + 1
       in
-        ichange
+        change
           { "div.div1.count.t": "Val: " <> show c
           , "div.div1.button.t":
               if mod c 2 == 0 then "Click" else "me"
           } $> c
-    Right (SliderMoved n) -> ichange { "div.div2.val.t": "Val: " <> show n }
+    Right (SliderMoved n) -> change { "div.div2.val.t": "Val: " <> show n }
       $> nclicks

@@ -20,7 +20,6 @@
   , "refs"
   , "simple-json"
   , "sized-vectors"
-  , "transformers"
   , "tuples"
   , "typelevel"
   , "typelevel-peano"

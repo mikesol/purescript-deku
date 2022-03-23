@@ -2,17 +2,17 @@ module Deku.Control.Functions
   ( modifyRes
   , makeSceneR
   , start
+  , infiniteLoop
   , freeze
+  , u
   , loopUsingSceneG
   , loopUsingSceneGWithRes
-  , frozenG
-  , frozenGWithRes
   , loopUsingSceneSG
   , loopUsingSceneSGWithRes
-  , frozenSG
-  , frozenSGWithRes
   , (@>)
   , (@!>)
+  , (%>)
+  , (%!>)
   ) where
 
 import Prelude
@@ -22,10 +22,13 @@ import Data.Either (Either(..))
 import Data.Tuple.Nested (type (/\), (/\))
 import Deku.Control.Monadic (MDOM(..))
 import Deku.Control.Types (class IsScene, DOM, DOMState', Frame0, InitialDOM, Scene, Scene', SubScene, getFrame, unFrame, unsafeDOM, unsafeUnDOM)
-import Deku.Create (class Create, create)
+import Deku.Create (class Create, class CreateSG, create, createSG)
 import Deku.Graph.DOM (Element, Root)
 import Deku.Interpret (class DOMInterpret)
 import Effect (Effect)
+
+u :: forall a. a -> a /\ Unit
+u a = a /\ unit
 
 start
   :: forall dom engine res
@@ -42,6 +45,9 @@ initialDOMState =
   { res: mempty
   , instructions: []
   }
+
+freeze :: forall a b m. Applicative m => a -> b -> m b
+freeze = const $ pure
 
 -- | Make a scene. The infix operator for this operation is `@>`.
 -- |
@@ -107,105 +113,24 @@ withStart
 withStart m ct = makeScene
   ( \e p -> case e of
       Left en -> let f = m en p in Left $ makeSceneR' (f start) ct
-      -- this will lead to a freeze
+      -- this will lead to a infiniteLoop
       -- it's the comonad version of bottom
       -- but as we can never start with a push from our own component
       -- this will "never" happen... until it does...
       Right _ -> Right start
   )
-  freeze
+  infiniteLoop
 
 -- | Freezes the current dom frame.
 -- |
-freeze
+infiniteLoop
   :: forall scene env dom engine proof push res graph x
    . Monoid res
   => DOMInterpret dom engine
   => IsScene scene
   => DOM dom engine proof res graph x
   -> scene env dom engine proof push res
-freeze s = makeScene (const $ const $ Right s) freeze
-
-loopUsingScene'Impl
-  :: forall scene env dom engine push res sn graph control
-   . Monoid res
-  => DOMInterpret dom engine
-  => IsScene scene
-  => Create sn () graph
-  => ( env
-       -> (push -> Effect Unit)
-       -> { | sn } /\ control
-     )
-  -> ( forall proofB
-        . Either env push
-       -> control
-       -> MDOM dom engine proofB res graph control
-     )
-  -> scene env dom engine Frame0 push res
-loopUsingScene'Impl q = loopUsingSceneWithRes'Impl (f q)
-  where
-  f
-    :: forall a b
-     . ( a
-         -> b
-         -> ({ | sn } /\ control)
-       )
-    -> ( a
-         -> b
-         -> ({ | sn } /\ control /\ res)
-       )
-  f g a b = let x /\ y = (g a b) in x /\ y /\ (mempty :: res)
-
-loopUsingSceneWithRes'Impl
-  :: forall scene env dom engine push res sn graph control
-   . Monoid res
-  => DOMInterpret dom engine
-  => IsScene scene
-  => Create sn () graph
-  => ( env
-       -> (push -> Effect Unit)
-       -> { | sn } /\ control /\ res
-     )
-  -> ( forall proofB
-        . Either env push
-       -> control
-       -> MDOM dom engine proofB res graph control
-     )
-  -> scene env dom engine Frame0 push res
-loopUsingSceneWithRes'Impl sceneF0 loopF =
-  ( \env push stt ->
-      let
-        scene /\ control /\ res = sceneF0 env push
-      in
-        (modifyRes'Impl (const res) (create (stt $> scene))) $> control
-  ) `withStart`
-    (loop \f x _ -> let (MDOM o) = loopF x (extract f) in o f)
-
-frozenWithRes'Impl
-  :: forall scene env dom engine push res sn graph
-   . Monoid res
-  => DOMInterpret dom engine
-  => IsScene scene
-  => Create sn () graph
-  => ( env
-       -> (push -> Effect Unit)
-       -> { | sn } /\ res
-     )
-  -> scene env dom engine Frame0 push res
-frozenWithRes'Impl sceneF0 = loopUsingSceneWithRes'Impl (\a b -> let (x/\y) =  sceneF0 a b in x /\ unit /\ y) (const pure)
-
-frozen'Impl
-  :: forall scene env dom engine push res sn graph
-   . Monoid res
-  => DOMInterpret dom engine
-  => IsScene scene
-  => Create sn () graph
-  => ( env
-       -> (push -> Effect Unit)
-       -> { | sn }
-     )
-  -> scene env dom engine Frame0 push res
-frozen'Impl sceneF0 = loopUsingSceneWithRes'Impl (\a b -> let x =  sceneF0 a b in x /\ unit /\ (mempty :: res)) (const pure)
+infiniteLoop s = makeScene (const $ const $ Right s) infiniteLoop
 
 -- | Loops dom.
 -- |
@@ -298,7 +223,7 @@ loopUsingSceneG
        -> MDOM dom engine proofB res graph control
      )
   -> Scene env dom engine Frame0 push res
-loopUsingSceneG = loopUsingScene'Impl
+loopUsingSceneG f = loopUsingSceneGWithRes ((map <<< map) (\(x /\ y) -> (x /\ y /\ (mempty :: res))) f)
 
 loopUsingSceneGWithRes
   :: forall env dom engine push res sn graph control
@@ -315,38 +240,21 @@ loopUsingSceneGWithRes
        -> MDOM dom engine proofB res graph control
      )
   -> Scene env dom engine Frame0 push res
-loopUsingSceneGWithRes = loopUsingSceneWithRes'Impl
-
-frozenGWithRes
-  :: forall env dom engine push res sn graph
-   . Monoid res
-  => DOMInterpret dom engine
-  => Create (root :: Element Root sn) () graph
-  => ( env
-       -> (push -> Effect Unit)
-       -> { root :: Element Root sn } /\ res
-     )
-  -> Scene env dom engine Frame0 push res
-frozenGWithRes = frozenWithRes'Impl
-
-frozenG
-  :: forall env dom engine push res sn graph
-   . Monoid res
-  => DOMInterpret dom engine
-  => Create (root :: Element Root sn) () graph
-  => ( env
-       -> (push -> Effect Unit)
-       -> { root :: Element Root sn }
-     )
-  -> Scene env dom engine Frame0 push res
-frozenG = frozen'Impl
+loopUsingSceneGWithRes sceneF0 loopF =
+  ( \env push stt ->
+      let
+        scene /\ control /\ res = sceneF0 env push
+      in
+        (modifyRes'Impl (const res) (create (stt $> scene))) $> control
+  ) `withStart`
+    (loop \f x _ -> let (MDOM o) = loopF x (extract f) in o f)
 
 -- sg
 loopUsingSceneSG
   :: forall env dom engine push res sn graph control
    . Monoid res
   => DOMInterpret dom engine
-  => Create sn () graph
+  => CreateSG sn () graph
   => ( env
        -> (push -> Effect Unit)
        -> { | sn } /\ control
@@ -357,13 +265,13 @@ loopUsingSceneSG
        -> MDOM dom engine proofB res graph control
      )
   -> SubScene env dom engine Frame0 push res
-loopUsingSceneSG = loopUsingScene'Impl
+loopUsingSceneSG f = loopUsingSceneSGWithRes ((map <<< map) (\(x /\ y) -> (x /\ y /\ (mempty :: res))) f)
 
 loopUsingSceneSGWithRes
   :: forall env dom engine push res sn graph control
    . Monoid res
   => DOMInterpret dom engine
-  => Create sn () graph
+  => CreateSG sn () graph
   => ( env
        -> (push -> Effect Unit)
        -> { | sn } /\ control /\ res
@@ -374,32 +282,15 @@ loopUsingSceneSGWithRes
        -> MDOM dom engine proofB res graph control
      )
   -> SubScene env dom engine Frame0 push res
-loopUsingSceneSGWithRes = loopUsingSceneWithRes'Impl
+loopUsingSceneSGWithRes sceneF0 loopF =
+  ( \env push stt ->
+      let
+        scene /\ control /\ res = sceneF0 env push
+      in
+        (modifyRes'Impl (const res) (createSG (stt $> scene))) $> control
+  ) `withStart`
+    (loop \f x _ -> let (MDOM o) = loopF x (extract f) in o f)
 
-
-frozenSGWithRes
-  :: forall env dom engine push res sn graph
-   . Monoid res
-  => DOMInterpret dom engine
-  => Create sn () graph
-  => ( env
-       -> (push -> Effect Unit)
-       -> { | sn } /\ res
-     )
-  -> SubScene env dom engine Frame0 push res
-frozenSGWithRes = frozenWithRes'Impl
-
-frozenSG
-  :: forall env dom engine push res sn graph
-   . Monoid res
-  => DOMInterpret dom engine
-  => Create sn () graph
-  => ( env
-       -> (push -> Effect Unit)
-       -> { | sn }
-     )
-  -> SubScene env dom engine Frame0 push res
-frozenSG = frozen'Impl
 
 infix 6 loopUsingSceneG as @>
 infix 6 loopUsingSceneGWithRes as @!>

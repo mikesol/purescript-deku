@@ -1,5 +1,8 @@
-name: Publish sample
-on: push
+name: Unit test only
+on:
+  push:
+    branches-ignore:
+      - main
 jobs:
   container-job:
     runs-on: ubuntu-latest
@@ -19,8 +22,3 @@ jobs:
         run: npx spago -x examples.dhall bundle-app --main Deku.Example.Docs --to examples/docs/index.js
       - name: Performance test
         run: npm run test:performance
-      - name: Deploy
-        uses: peaceiris/actions-gh-pages@v3
-        with:
-          github_token: ${{ secrets.GH_TOKEN }}
-          publish_dir: ./examples/docs

@@ -7,8 +7,7 @@ import Affjax as AX
 import Affjax.ResponseFormat as ResponseFormat
 import Data.Argonaut.Core (stringifyWithIndent)
 import Data.HTTP.Method (Method(..))
-import Deku.Change (ichange)
-import Deku.Create (icreate)
+import Deku.Change (change)
 import Deku.Graph.Attribute (Cb, cb)
 import Deku.Graph.DOM as D
 import Deku.Graph.DOM.Shorthand as S
@@ -18,15 +17,15 @@ import Effect.Class (liftEffect)
 import Data.Map (singleton)
 import Data.Maybe (Maybe(..))
 import Data.Tuple.Nested ((/\))
-import Deku.Control.Functions (freeze, iloop, (@!>))
+import Deku.Control.Functions (freeze, u, (%>))
 import Deku.Example.Docs.Types (Page(..))
 import Deku.Example.Docs.Util (scrollToTop)
-import Deku.Graph.DOM (AsSubgraph(..), ResolvedSubgraphSig, SubgraphSig, subgraph, (:=), ResolvedSubgraphSig, SubgraphSig, subgraph, (:=))
+import Deku.Graph.DOM (AsSubgraph(..), ResolvedSubgraphSig, SubgraphSig, subgraph, (:=))
 import Deku.Util (detup)
 
-effects :: (Page -> Effect Unit) -> ResolvedSubgraphSig "head" Unit Unit
+effects :: (Page -> Effect Unit) -> ResolvedSubgraphSig Unit Unit
 effects dpage =
-  ( \_ _ -> icreate
+  ( \_ _ -> u
       { head: D.div []
           { header: D.header []
               { title: D.h1 [] (S.text "Effects")
@@ -60,11 +59,11 @@ import Affjax.ResponseFormat as ResponseFormat
 import Data.Argonaut.Core (stringifyWithIndent)
 import Data.Either (Either(..))
 import Data.Foldable (for_)
+import Data.Tuple.Nested ((/\))
 import Data.HTTP.Method (Method(..))
-import Deku.Change (ichange)
-import Deku.Control.Functions.Graph (iloop, (@!>))
+import Deku.Change (change)
+import Deku.Control.Functions ((@>))
 import Deku.Control.Types (Frame0, Scene)
-import Deku.Create (icreate)
 import Deku.Graph.Attribute (Cb, cb)
 import Deku.Graph.DOM ((:=), root)
 import Deku.Graph.DOM as D
@@ -111,7 +110,7 @@ scene
   -> Scene env dom engine Frame0 (Either Unit String) res
 scene elt =
   ( \_ push ->
-      ( icreate $ root elt
+      root elt
           ( { div1: D.div []
                 { button: D.button
                     [ D.OnClick := clickCb push ]
@@ -121,29 +120,29 @@ scene elt =
                 (S.pre [] (S.code [] (S.text "")))
             }
           )
-      ) $> false
-  ) @!> iloop \e push started -> case e of
-    Left _ -> pure started
+      /\ (push /\ false)
+  ) @> \e (push /\ started) -> case e of
+    Left _ -> pure (push /\ started)
     Right (Left _) ->
-      ichange
+      change
         { "root.div1.button.t": "Loading..."
         , "root.div1.button":
             D.button'attr [ D.OnClick := cb (const $ pure unit) ]
-        } $> started
+        } $> (push /\ started)
     Right (Right str) ->
       when (not started)
-        ( ichange
+        ( change
             { "root.div2": D.div'attr [ D.Style := "display: block;" ]
             }
         )
-        *> ichange
+        *> change
           { "root.div2.pre.code.t": str
           , "root.div1.button.t":
               "Click to get some random user data."
           , "root.div1.button":
               D.button'attr [ D.OnClick := clickCb push ]
           }
-        $> true
+        $> (push /\ true)
 
 main :: Effect Unit
 main = do
@@ -212,7 +211,7 @@ main = do
               )
           }
       }
-  ) @!> freeze
+  ) %> freeze
 
 clickCb :: (Either Unit String -> Effect Unit) -> Cb
 clickCb push = cb
@@ -235,41 +234,38 @@ clickCb push = cb
             stringifyWithIndent 2 response.body
   )
 
-sg :: SubgraphSig Int "div" Unit (Either Unit String)
+sg :: SubgraphSig Int Unit (Either Unit String)
 sg _ =
   ( \_ push ->
-      ( icreate
-          ( S.div []
-              ( { div1: D.div []
-                    { button: D.button
-                        [ D.OnClick := clickCb push ]
-                        (S.text "Click to get some random user data.")
-                    }
-                , div2: D.div [ D.Style := "display: none;" ]
-                    (S.pre [] (S.code [] (S.text "")))
-                }
-              )
-          )
-      ) $> false
-  ) @!> iloop \e push started -> case e of
-    Left _ -> pure started
+      S.div []
+        ( { div1: D.div []
+              { button: D.button
+                  [ D.OnClick := clickCb push ]
+                  (S.text "Click to get some random user data.")
+              }
+          , div2: D.div [ D.Style := "display: none;" ]
+              (S.pre [] (S.code [] (S.text "")))
+          }
+        ) /\ (push /\ false)
+  ) %> \e (push /\ started) -> case e of
+    Left _ -> pure (push /\ started)
     Right (Left _) ->
-      ichange
+      change
         { "div.div1.button.t": "Loading..."
         , "div.div1.button":
             D.button'attr [ D.OnClick := cb (const $ pure unit) ]
-        } $> started
+        } $> (push /\ started)
     Right (Right str) ->
       when (not started)
-        ( ichange
+        ( change
             { "div.div2": D.div'attr [ D.Style := "display: block;" ]
             }
         )
-        *> ichange
+        *> change
           { "div.div2.pre.code.t": str
           , "div.div1.button.t":
               "Click to get some random user data."
           , "div.div1.button":
               D.button'attr [ D.OnClick := clickCb push ]
           }
-        $> true
+        $> (push /\ true)

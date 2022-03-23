@@ -1,22 +1,17 @@
 module Deku.Example.Docs where
 
-import Deku.Example.Docs.Types
+import Deku.Example.Docs.Types (Page(..))
 import Prelude
 
 import Data.Either (Either(..))
 import Data.Foldable (for_)
-import Data.Generic.Rep (class Generic)
-import Data.Hashable (class Hashable, hash)
 import Data.Map (insert, singleton)
 import Data.Maybe (Maybe(..))
-import Data.Show.Generic (genericShow)
 import Data.Tuple.Nested ((/\))
 import Data.Vec ((+>), empty)
-import Deku.Change (ichange)
-import Deku.Control.Functions.Graph as G
-import Deku.Control.Functions.Subgraph (freeze, (@!>))
+import Deku.Change (change)
+import Deku.Control.Functions ((@>))
 import Deku.Control.Types (Frame0, Scene)
-import Deku.Create (icreate)
 import Deku.Example.Docs.Effects as Effects
 import Deku.Example.Docs.Events as Events
 import Deku.Example.Docs.HelloWorld as HelloWorld
@@ -43,74 +38,70 @@ scene
   :: WEB.DOM.Element
   -> Scene (TriggeredScene Unit Unit) RunDOM RunEngine Frame0 Page Unit
 scene elt =
-  G.istart
-    ( \_ push ->
-        ( icreate $
-            D.root elt
-              { main: D.main []
-                  { topbar: D.div []
-                      ( S.div []
-                          ( let
-                              sections =
-                                map
-                                  ( \(x /\ y /\ z) -> D.span []
-                                      ( detup $
-                                          D.a
-                                            [ D.OnClick := cb (const $ push x)
-                                            , D.Style := "cursor:pointer;"
-                                            ]
-                                            (S.text y)
-                                            /\ D.span
-                                              [ D.Style :=
-                                                  if z then ""
-                                                  else "display:none;"
-                                              ]
-                                              (S.text " | ")
-                                            /\ unit
-                                      )
-                                  ) $ Intro
-                                  /\ "Home"
-                                  /\ true +> HelloWorld
-                                  /\ "Hello world"
-                                  /\ true +> SimpleComponent
-                                  /\ "Component"
-                                  /\ true +> Events
-                                  /\ "Events"
-                                  /\ true +> Effects
-                                  /\ "Effects"
-                                  /\ true +> Subgraph
-                                  /\ "Subgraphs"
-                                  /\ true +> SSR
-                                  /\ "SSR"
-                                  /\ false +> empty
-                            in
-                              vex sections
-                          )
-                      )
-                  , page: subgraph (singleton Intro (Just unit))
-                      (AsSubgraph (page push))
-                  }
-              }
-        ) $> Intro
-    )
-    ( G.iloop
-        ( \e _ oldPg -> case e of
-            Left _ -> pure oldPg
-            Right newPg -> newPg <$ when (oldPg /= newPg)
-              ( do
-                  ichange
-                    { "root.main.page": D.xsubgraph
-                        ( insert newPg (Just unit)
-                            $ singleton
-                              oldPg
-                              Nothing
-                        )
-                    }
-              )
-        )
+  ( \_ push ->
+      D.root elt
+        { main: D.main []
+            { topbar: D.div []
+                ( S.div []
+                    ( let
+                        sections =
+                          map
+                            ( \(x /\ y /\ z) -> D.span []
+                                ( detup $
+                                    D.a
+                                      [ D.OnClick := cb (const $ push x)
+                                      , D.Style := "cursor:pointer;"
+                                      ]
+                                      (S.text y)
+                                      /\ D.span
+                                        [ D.Style :=
+                                            if z then ""
+                                            else "display:none;"
+                                        ]
+                                        (S.text " | ")
+                                      /\ unit
+                                )
+                            ) $ Intro
+                            /\ "Home"
+                            /\ true +> HelloWorld
+                            /\ "Hello world"
+                            /\ true +> SimpleComponent
+                            /\ "Component"
+                            /\ true +> Events
+                            /\ "Events"
+                            /\ true +> Effects
+                            /\ "Effects"
+                            /\ true +> Subgraph
+                            /\ "Subgraphs"
+                            /\ true +> SSR
+                            /\ "SSR"
+                            /\ false +> empty
+                      in
+                        vex sections
+                    )
+                )
+            , page: subgraph (singleton Intro (Just unit))
+                (AsSubgraph (page push))
+            }
+        }
+        /\ Intro
+  ) @>
+    ( \e oldPg -> case e of
+        Left _ -> pure oldPg
+        Right newPg -> newPg <$ when (oldPg /= newPg)
+          ( do
+              change
+                { "root.main.page": D.xsubgraph
+                    ( insert newPg (Just unit)
+                        $ singleton
+                          oldPg
+                          Nothing
+                    )
+                }
+          )
     )
 
-page :: (Page -> Effect Unit) -> SubgraphSig Page "head" Unit Unit
+page :: (Page -> Effect Unit) -> SubgraphSig Page Unit Unit
 page dpage Intro = Intro.intro dpage
 page dpage HelloWorld = HelloWorld.helloWorld dpage
 page dpage SimpleComponent = SimpleComponent.simpleComponent dpage
