@@ -56,8 +56,13 @@ class GetSeparator (i :: Symbol) (o :: Symbol) | i -> o
 instance getSeparatorBlank :: GetSeparator "" ""
 else instance getSeparator :: GetSeparator anything "."
 
+class GetNodeEdges i node edges | i -> node edges
+instance getNodeEdgesElement :: GetNodeEdges (Element node edges) node edges
+instance getNodeEdgesMyNameIs :: GetNodeEdges (CTOR.MyNameIs px (Element node edges)) node edges
+
 instance createStepRLTCons ::
-  ( R.Cons key (Element node edges) ignore r
+  ( R.Cons key val ignore r
+  , GetNodeEdges val node edges
   , GetSeparator prefix separator
   , Sym.Append prefix separator prefixA
   , Sym.Append prefixA key fullPath
@@ -160,6 +165,13 @@ instance createTSubgraph ::
   ) =>
   CreateT' ptr
     (CTOR.Subgraph index env push)
+    graphi
+    grapho
+
+instance createTMyNameIs ::
+  CreateT' name thing graphi grapho =>
+  CreateT' ptr
+    (CTOR.MyNameIs name thing)
     graphi
     grapho
 

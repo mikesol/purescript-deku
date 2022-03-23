@@ -7,6 +7,7 @@ module Deku.Graph.DOM
   , AsSubgraph(..)
   , unAsSubGraph
   , myNameIs
+  , myNameIs'
   , MyNameIs
   , (:=)
   , class Attr
@@ -866,9 +867,11 @@ import Prelude hiding (map)
 import Data.Functor as Funk
 import Data.Map (Map)
 import Data.Map as Map
+import Data.Symbol (class IsSymbol, reflectSymbol)
 import Data.Tuple.Nested ((/\), type (/\))
 import Data.Hashable (hash, class Hashable)
 import Data.Maybe (Maybe)
+import Type.Proxy (Proxy(..))
 import Data.Monoid.Additive (Additive)
 import Deku.Control.Types (Frame0, SubScene)
 import Deku.Graph.Attribute (Attribute, Cb, cb', prop', unsafeAttribute)
@@ -879,10 +882,13 @@ class TypeToSym (a :: Type) (b :: Symbol) | a -> b
 
 instance typeToSymTup :: TypeToSym a c => TypeToSym (a /\ b) c
 
-newtype MyNameIs name item = MyNameIs { unMyNameIs :: item }
+newtype MyNameIs (myNameIs :: Symbol) item = MyNameIs { myNameIs :: String, unMyNameIs :: item }
 
-myNameIs :: forall proxy name item. proxy name -> item -> MyNameIs name item
-myNameIs _ = MyNameIs <<< { unMyNameIs: _ }
+myNameIs :: forall proxy name item. IsSymbol name => proxy name -> item -> MyNameIs name item
+myNameIs _ = MyNameIs <<< { myNameIs: reflectSymbol (Proxy :: Proxy name), unMyNameIs: _ }
+
+myNameIs' :: forall proxy name item. IsSymbol name => proxy name -> item -> {_____________________________________________________:: MyNameIs name item }
+myNameIs' _ = {_____________________________________________________: _ } <<< MyNameIs <<< { myNameIs: reflectSymbol (Proxy :: Proxy name), unMyNameIs: _ }
 
 type Element' element children =
   (element :: element, children :: { | children })

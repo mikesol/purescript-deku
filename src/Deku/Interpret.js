@@ -294,15 +294,15 @@ var massiveCreateConnectStep_ = function ($prefix) {
 			return function () {
 				var entries = Object.entries(a.toCreate);
 				for (var i = 0; i < entries.length; i++) {
-					var children = Object.entries(entries[i][1].children);
+					var children = Object.entries(entries[i][1].myNameIs !== undefined ? entries[i][1].unMyNameIs.children : entries[i][1].children);
 					for (var j = 0; j < children.length; j++) {
-						var fromId =
-							$prefix +
-							($prefix === "" ? "" : ".") +
-							entries[i][0] +
+						var toId =
+							entries[i][1].myNameIs !== undefined
+								? entries[i][1].myNameIs
+								: $prefix + ($prefix === "" ? "" : ".") + entries[i][0];
+						var fromId = toId +
 							"." +
 							children[j][0];
-						var toId = $prefix + ($prefix === "" ? "" : ".") + entries[i][0];
 
 						connectXToY_({
 							fromId: fromId,
@@ -311,9 +311,7 @@ var massiveCreateConnectStep_ = function ($prefix) {
 						if (children[j][1].children !== {}) {
 							var toCreate = {};
 							toCreate[children[j][0]] = children[j][1];
-							massiveCreateConnectStep_(
-								$prefix + ($prefix === "" ? "" : ".") + entries[i][0]
-							)({
+							massiveCreateConnectStep_(toId)({
 								toCreate: toCreate,
 							})(state)();
 						}
@@ -366,6 +364,13 @@ var massiveCreateCreateStep_ = function ($isTerminal) {
 														scenes: $unSubgraph(value.element.subgraphMaker),
 														envs: value.element.envs,
 													})(state)();
+												} else if (value.element.myNameIs !== undefined) {
+													// my name is
+													var toCreate = {};
+													toCreate[value.element.myNameIs] = value;
+													massiveCreateCreateStep_(false)("")($unSubgraph)(
+														$makeSubgraph
+													)($makeRoot)($makeElement)($makeText)(toCreate)(state)();
 												} else {
 													throw new Error(
 														"Don't know how to handle " +
