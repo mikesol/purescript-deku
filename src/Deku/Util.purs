@@ -9,6 +9,7 @@ import Data.Tuple.Nested ((/\), type (/\))
 import Data.Typelevel.Bool (True, False)
 import Data.Typelevel.Num (class Nat, class Pred, class Succ, type (:*), D0, D1, D2, D3, D4, D5, D6, D7, D8, D9)
 import Data.Vec (Vec, uncons)
+import Deku.Graph.DOM (Element, MyNameIs, Text)
 import Prim.Ordering (Ordering, LT, GT, EQ)
 import Prim.Row (class Cons, class Lacks)
 import Prim.RowList (RowList)
@@ -178,11 +179,23 @@ class
   AddPrefixToRowList (s :: Symbol) (i :: RowList Type) (o :: RowList Type)
   | s i -> o
 
-instance addPrefixToRowListCons ::
+instance addPrefixToRowListCons1 ::
   ( AddPrefixToRowList sym c x
   , Sym.Append sym a symA
   ) =>
-  AddPrefixToRowList sym (RL.Cons a b c) (RL.Cons symA b x)
+  AddPrefixToRowList sym (RL.Cons a (Element xx yy) c) (RL.Cons symA (Element xx yy) x)
+
+instance addPrefixToRowListCons2 ::
+  ( AddPrefixToRowList sym c x
+  , Sym.Append sym a symA
+  ) =>
+  AddPrefixToRowList sym (RL.Cons a (Text) c) (RL.Cons symA (Text) x)
+
+instance addPrefixToRowListCons3 ::
+  ( AddPrefixToRowList sym c x
+  , Sym.Append sym a symA
+  ) =>
+  AddPrefixToRowList sym (RL.Cons a (MyNameIs foo bar) c) (RL.Cons foo (MyNameIs foo bar) x)
 
 instance addPrefixToRowListNil :: AddPrefixToRowList sym RL.Nil RL.Nil
 

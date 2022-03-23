@@ -5,11 +5,12 @@ module Deku.CreateSGT where
 
 import Prelude
 
+import Data.Typelevel.Bool (False, True)
 import Deku.Graph.DOM (Element)
 import Deku.Graph.DOM as CTOR
 import Deku.Graph.Graph (Graph)
 import Deku.Graph.Node (NodeC)
-import Deku.Util (class AddPrefixToRowList)
+import Deku.Util (class AddPrefixToRowList, class Gate)
 import Prim.Row as R
 import Prim.RowList as RL
 import Prim.Symbol as Sym
@@ -56,16 +57,17 @@ class GetSeparator (i :: Symbol) (o :: Symbol) | i -> o
 instance getSeparatorBlank :: GetSeparator "" ""
 else instance getSeparator :: GetSeparator anything "."
 
-class GetNodeEdges i node edges | i -> node edges
-instance getNodeEdgesElement :: GetNodeEdges (Element node edges) node edges
-instance getNodeEdgesMyNameIs :: GetNodeEdges (CTOR.MyNameIs px (Element node edges)) node edges
+class GetNodeEdges i tf pfx node edges | i -> tf pfx node edges
+instance getNodeEdgesElement :: GetNodeEdges (Element node edges) False "" node edges
+instance getNodeEdgesMyNameIs :: GetNodeEdges (CTOR.MyNameIs px (Element node edges)) True px node edges
 
 instance createSGStepRLTCons ::
   ( R.Cons key val ignore r
-  , GetNodeEdges val node edges
+  , GetNodeEdges val tf pfx node edges
   , GetSeparator prefix separator
   , Sym.Append prefix separator prefixA
-  , Sym.Append prefixA key fullPath
+  , Sym.Append prefixA key fullPath'
+  , Gate tf pfx fullPath' fullPath
   , CreateSGT' fullPath node graph0 graph1
   , CreateSGStepT fullPath edges graph1 graph2
   , CreateSGStepRLT rest prefix r graph2 graph3
@@ -101,9 +103,11 @@ instance connectAfterCreateSGTNil ::
   ConnectAfterCreateSGT prefix RL.Nil graph0 graph0
 
 instance connectAfterCreateSGTCons ::
-  ( GetSeparator prefix separator
+  (   GetNodeEdges val tf pfx node edges
+  , GetSeparator prefix separator
   , Sym.Append prefix separator prefixA
-  , Sym.Append prefixA sym fullPath
+  , Sym.Append prefixA sym fullPath'
+  , Gate tf pfx fullPath' fullPath
   , Sym.Append fullPath "." fullPathAsPrefix
   , RL.RowToList edges edgesList
   , AddPrefixToRowList fullPathAsPrefix edgesList oel
@@ -112,7 +116,7 @@ instance connectAfterCreateSGTCons ::
   , ConnectAfterCreateSGT prefix rest graph2 graph3
   ) =>
   ConnectAfterCreateSGT prefix
-    (RL.Cons sym (Element node edges) rest)
+    (RL.Cons sym val rest)
     graph0
     graph3
 

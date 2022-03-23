@@ -170,7 +170,7 @@ instance reify{typ} :: ReifyAU {term} {typ} where
   ( IsSymbol ptr
   , R.Cons ptr (NodeC CTOR.{typ} ignore0) ignore1 graph
   ) =>
-  Change' ptr (Array (Attribute CTOR.{term})) grapho where
+  Change' ptr (Array (Attribute CTOR.{term})) graph where
   change'impl ptr w = unsafeChange' ptr i value
     where
     {{ context: i, value }} = unsafeUnDOM w''')

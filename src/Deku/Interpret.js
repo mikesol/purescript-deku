@@ -300,7 +300,7 @@ var massiveCreateConnectStep_ = function ($prefix) {
 							entries[i][1].myNameIs !== undefined
 								? entries[i][1].myNameIs
 								: $prefix + ($prefix === "" ? "" : ".") + entries[i][0];
-						var fromId = toId +
+						var fromId = children[j][1].myNameIs !== undefined ? children[j][1].myNameIs : toId +
 							"." +
 							children[j][0];
 
@@ -308,7 +308,8 @@ var massiveCreateConnectStep_ = function ($prefix) {
 							fromId: fromId,
 							toId: toId,
 						})(state)();
-						if (children[j][1].children !== {}) {
+						var child = children[j][1].myNameIs !== undefined ? children[j][1].unMyNameIs : children[j][1];
+						if (child.children !== {}) {
 							var toCreate = {};
 							toCreate[children[j][0]] = children[j][1];
 							massiveCreateConnectStep_(toId)({
@@ -333,12 +334,23 @@ var massiveCreateCreateStep_ = function ($isTerminal) {
 										return function () {
 											var entries = Object.entries(a.toCreate);
 											for (var i = 0; i < entries.length; i++) {
+												var value = entries[i][1];
+												if (value.myNameIs !== undefined) {
+													// my name is
+													var toCreate = {};
+													toCreate[value.myNameIs] = value.unMyNameIs;
+													massiveCreateCreateStep_($isTerminal)("")($unSubgraph)(
+														$makeSubgraph
+													)($makeRoot)($makeElement)($makeText)({
+														toCreate: toCreate,
+													})(state)();
+													continue;
+												}
 												var key =
 													$prefix + ($prefix === "" ? "" : ".") + entries[i][0];
 												if ($isTerminal) {
 													state.terminalPtrs.push(key);
 												}
-												var value = entries[i][1];
 												if (value.element.element !== undefined) {
 													// it's a root
 													$makeRoot({ id: key, root: value.element.element })(
@@ -364,13 +376,6 @@ var massiveCreateCreateStep_ = function ($isTerminal) {
 														scenes: $unSubgraph(value.element.subgraphMaker),
 														envs: value.element.envs,
 													})(state)();
-												} else if (value.element.myNameIs !== undefined) {
-													// my name is
-													var toCreate = {};
-													toCreate[value.element.myNameIs] = value;
-													massiveCreateCreateStep_(false)("")($unSubgraph)(
-														$makeSubgraph
-													)($makeRoot)($makeElement)($makeText)(toCreate)(state)();
 												} else {
 													throw new Error(
 														"Don't know how to handle " +

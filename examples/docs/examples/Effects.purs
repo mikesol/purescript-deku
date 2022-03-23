@@ -13,7 +13,7 @@ import Deku.Change (change)
 import Deku.Control.Functions ((@>))
 import Deku.Control.Types (Frame0, Scene)
 import Deku.Graph.Attribute (Cb, cb)
-import Deku.Graph.DOM (myNameIs', root, (:=))
+import Deku.Graph.DOM (myNameIs', myNameIs, root, (:=))
 import Deku.Graph.DOM as D
 import Deku.Graph.DOM.Shorthand as S
 import Deku.Interpret (class DOMInterpret, makeFFIDOMSnapshot)
@@ -61,7 +61,7 @@ scene elt =
   ( \_ push ->
       root elt
         ( { div1: D.div []
-              { button: D.button
+              { button: myNameIs (Proxy :: _ "bttn") $ D.button
                   [ D.OnClick := clickCb push ]
                   (myNameIs' (Proxy :: _ "textToShow") (D.text "Click to get some random user data."))
               }
@@ -74,8 +74,8 @@ scene elt =
     Left _ -> pure (push /\ started)
     Right (Left _) ->
       change
-        { "root.div1.button.t": "Loading..."
-        , "root.div1.button":
+        { "textToShow": "Loading..."
+        , "bttn":
             D.button'attr [ D.OnClick := cb (const $ pure unit) ]
         } $> (push /\ started)
     Right (Right str) ->
@@ -86,9 +86,9 @@ scene elt =
         )
         *> change
           { "root.div2.pre.code.t": str
-          , "root.div1.button.t":
+          , "textToShow":
               "Click to get some random user data."
-          , "root.div1.button":
+          , "bttn":
               D.button'attr [ D.OnClick := clickCb push ]
           }
         $> (push /\ true)
