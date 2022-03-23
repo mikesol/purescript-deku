@@ -51,11 +51,10 @@ container =
         filled <- Shared.fillContainerState Shared.initialContainerState
         subscribe
           ( run (pure unit) (pure unit) defaultOptions ffi
-              (
-                  ( \_ _ -> u $ DOM.root (toElement el)
-                      { sg: (containerD filled)
-                      }
-                  ) @> freeze
+              ( ( \_ _ -> u $ DOM.root (toElement el)
+                    { sg: (containerD filled)
+                    }
+                ) @> freeze
               )
           )
           (\(_ :: TriggeredRun Unit) -> pure unit)
@@ -71,23 +70,23 @@ containerD cstate = DOM.subgraph (singleton 0 (Just unit)) $ DOM.AsSubgraph
         let
           ln = length cstate.todos
         in
-            { ctr: DOM.div []
-                { btn: DOM.button
-                    [ DOM.Id := Shared.addNewId
-                    , DOM.OnClick := cb
-                        (const $ Shared.mkTodo ln >>= push)
-                    ]
-                    { txt: DOM.text "Add New" }
-                , dv: DOM.div
-                    [ DOM.Id := Shared.todosId ]
-                    { sg: todoD $ fromFoldable
-                        ( cstate.todos # mapWithIndex \ix t ->
-                            ix /\ Just
-                              { todo: t, completed: cstate.completed }
-                        )
-                    }
-                }
-            } /\ (ln /\ push)
+          { ctr: DOM.div []
+              { btn: DOM.button
+                  [ DOM.Id := Shared.addNewId
+                  , DOM.OnClick := cb
+                      (const $ Shared.mkTodo ln >>= push)
+                  ]
+                  { txt: DOM.text "Add New" }
+              , dv: DOM.div
+                  [ DOM.Id := Shared.todosId ]
+                  { sg: todoD $ fromFoldable
+                      ( cstate.todos # mapWithIndex \ix t ->
+                          ix /\ Just
+                            { todo: t, completed: cstate.completed }
+                      )
+                  }
+              }
+          } /\ (ln /\ push)
     ) %> \e (ln /\ push) -> case e of
       Left _ -> pure (ln /\ push)
       Right td -> ((ln + 1) /\ push) <$ change
@@ -105,8 +104,9 @@ todoD
   :: Map Int (Maybe TodoInput)
   -> DOM.Element (DOM.Subgraph Int TodoInput Unit) ()
 todoD mp = DOM.subgraph mp $ DOM.AsSubgraph \i ->
-   ( \itl _ ->
-        u $ { top: DOM.div []
+  ( \itl _ ->
+      u $
+        { top: DOM.div []
             { ipt: DOM.input
                 [ DOM.Id := Shared.editId itl.todo.id
                 , DOM.Value := itl.todo.description
@@ -128,12 +128,13 @@ checkboxD
   :: Map Int (Maybe CheckboxInput)
   -> DOM.Element (DOM.Subgraph Int CheckboxInput Unit) ()
 checkboxD envs = DOM.subgraph envs $ DOM.AsSubgraph \i ->
-   ( \itl _ ->
-      u $ { input: DOM.input
-          [ DOM.Xtype := "checkbox"
-          , DOM.Id := Shared.checkId i
-          , DOM.Checked := (show $ Set.member itl.id itl.completed)
-          ]
-          {}
-      }
+  ( \itl _ ->
+      u $
+        { input: DOM.input
+            [ DOM.Xtype := "checkbox"
+            , DOM.Id := Shared.checkId i
+            , DOM.Checked := (show $ Set.member itl.id itl.completed)
+            ]
+            {}
+        }
   ) %> freeze

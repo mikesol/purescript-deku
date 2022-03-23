@@ -62,7 +62,9 @@ instance changeRL_Cons ::
   ) =>
   ChangeRL (RL.Cons key val rest) r graph where
   changeRL_ _ w = changeRL_ (Proxy :: _ rest)
-    ((change'impl (Proxy :: _ key) (w $> (get (Proxy :: _ key) value))) $> value)
+    ( (change'impl (Proxy :: _ key) (w $> (get (Proxy :: _ key) value))) $>
+        value
+    )
     where
     { value } = unsafeUnDOM w
 

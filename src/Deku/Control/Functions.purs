@@ -195,7 +195,8 @@ modifyRes'Impl
    . (res -> res)
   -> DOM dom engine proof res i a
   -> DOM dom engine proof res i res
-modifyRes'Impl f w = unsafeDOM { context: (context { res = res' }), value: res' }
+modifyRes'Impl f w = unsafeDOM
+  { context: (context { res = res' }), value: res' }
   where
   { context } = unsafeUnDOM w
 
@@ -223,7 +224,8 @@ loopUsingSceneG
        -> MDOM dom engine proofB res graph control
      )
   -> Scene env dom engine Frame0 push res
-loopUsingSceneG f = loopUsingSceneGWithRes ((map <<< map) (\(x /\ y) -> (x /\ y /\ (mempty :: res))) f)
+loopUsingSceneG f = loopUsingSceneGWithRes
+  ((map <<< map) (\(x /\ y) -> (x /\ y /\ (mempty :: res))) f)
 
 loopUsingSceneGWithRes
   :: forall env dom engine push res sn graph control
@@ -259,13 +261,14 @@ loopUsingSceneSG
        -> (push -> Effect Unit)
        -> { | sn } /\ control
      )
-  ->( forall proofB
+  -> ( forall proofB
         . Either env push
        -> control
        -> MDOM dom engine proofB res graph control
      )
   -> SubScene env dom engine Frame0 push res
-loopUsingSceneSG f = loopUsingSceneSGWithRes ((map <<< map) (\(x /\ y) -> (x /\ y /\ (mempty :: res))) f)
+loopUsingSceneSG f = loopUsingSceneSGWithRes
+  ((map <<< map) (\(x /\ y) -> (x /\ y /\ (mempty :: res))) f)
 
 loopUsingSceneSGWithRes
   :: forall env dom engine push res sn graph control
@@ -290,7 +293,6 @@ loopUsingSceneSGWithRes sceneF0 loopF =
         (modifyRes'Impl (const res) (createSG (stt $> scene))) $> control
   ) `withStart`
     (loop \f x _ -> let (MDOM o) = loopF x (extract f) in o f)
-
 
 infix 6 loopUsingSceneG as @>
 infix 6 loopUsingSceneGWithRes as @!>

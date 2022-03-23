@@ -26,18 +26,19 @@ scene
 scene elt =
   ( \_ push ->
       ( root elt
-            { hello: text "click "
-            , helloA: a [ Href := "#", OnClick := cb (const $ push false) ]
-                { world: text "me" }
-            } /\ push
+          { hello: text "click "
+          , helloA: a [ Href := "#", OnClick := cb (const $ push false) ]
+              { world: text "me" }
+          } /\ push
       )
   ) @> \e push ->
     case e of
       Left _ -> pure push
-      Right tf -> change
-        { "root.hello": if tf then "click " else "kcilc "
-        , "root.helloA": a'attr [ OnClick := cb (const $ push (not tf)) ]
-        } $> push
+      Right tf ->
+        change
+          { "root.hello": if tf then "click " else "kcilc "
+          , "root.helloA": a'attr [ OnClick := cb (const $ push (not tf)) ]
+          } $> push
 
 main :: Effect Unit
 main = do

@@ -59,16 +59,16 @@ scene
 scene elt =
   ( \_ push ->
       root elt
-          ( { div1: D.div []
-                { button: D.button
-                    [ D.OnClick := clickCb push ]
-                    (S.text "Click to get some random user data.")
-                }
-            , div2: D.div [ D.Style := "display: none;" ]
-                (S.pre [] (S.code [] (S.text "")))
-            }
-          )
-      /\ (push /\ false)
+        ( { div1: D.div []
+              { button: D.button
+                  [ D.OnClick := clickCb push ]
+                  (S.text "Click to get some random user data.")
+              }
+          , div2: D.div [ D.Style := "display: none;" ]
+              (S.pre [] (S.code [] (S.text "")))
+          }
+        )
+        /\ (push /\ false)
   ) @> \e (push /\ started) -> case e of
     Left _ -> pure (push /\ started)
     Right (Left _) ->

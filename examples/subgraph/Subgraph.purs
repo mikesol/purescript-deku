@@ -43,19 +43,19 @@ scene elt =
                 , helloA: subgraph (falsy 40)
                     ( AsSubgraph \i ->
 
-                          ( \_ push ->
-                              { myA: a
-                                  [ Href := "#"
-                                  , OnClick := cb
-                                      ( const $ do
-                                          push false
-                                          when (i == 4) (push0 Hello)
-                                      )
-                                  ]
-                                  { myTxt: text " me " }
-                              } /\ push
+                        ( \_ push ->
+                            { myA: a
+                                [ Href := "#"
+                                , OnClick := cb
+                                    ( const $ do
+                                        push false
+                                        when (i == 4) (push0 Hello)
+                                    )
+                                ]
+                                { myTxt: text " me " }
+                            } /\ push
 
-                          ) %>
+                        ) %>
                           ( \e push ->
                               case e of
                                 Left tf ->
@@ -76,19 +76,19 @@ scene elt =
                     { ht: text "click" }
                 , wB: subgraph (falsy 10)
                     ( AsSubgraph \i ->
-                          ( \_ push ->
-                              ( { myA: a
-                                    [ Href := "#"
-                                    , OnClick := cb
-                                        ( const $ do
-                                            push false
-                                            when (i == 11) (push0 Hello)
-                                        )
-                                    ]
-                                    { myTxt: text $ " me" <> show i <> " " }
-                                } /\ (push /\ Additive i) /\ (Additive i)
-                              )
-                          ) %!>
+                        ( \_ push ->
+                            ( { myA: a
+                                  [ Href := "#"
+                                  , OnClick := cb
+                                      ( const $ do
+                                          push false
+                                          when (i == 11) (push0 Hello)
+                                      )
+                                  ]
+                                  { myTxt: text $ " me" <> show i <> " " }
+                              } /\ (push /\ Additive i) /\ (Additive i)
+                            )
+                        ) %!>
                           \e (push /\ (Additive i')) ->
                             case e of
                               Left _ ->

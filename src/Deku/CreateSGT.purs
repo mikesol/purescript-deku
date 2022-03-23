@@ -136,7 +136,11 @@ instance createSGTAll ::
 
 -- | CreateSG an dom unit `node` in `igraph` with index `ptr`, resulting in `ograph`.
 class
-  CreateSGT' (ptr :: Symbol) (node :: Type) (inGraph :: Graph) (outGraph :: Graph)
+  CreateSGT'
+    (ptr :: Symbol)
+    (node :: Type)
+    (inGraph :: Graph)
+    (outGraph :: Graph)
   | ptr node inGraph -> outGraph
 
 instance createSGTUnit ::

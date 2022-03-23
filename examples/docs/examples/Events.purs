@@ -35,33 +35,33 @@ scene
   -> Scene env dom engine Frame0 UIEvents res
 scene elt =
   ( \_ push ->
-       root elt
-          ( { div1: D.div []
-                { button: D.button
-                    [ D.OnClick :=
-                        cb (const $ push ButtonClicked)
-                    ]
-                    (S.text "Click")
-                , count: D.div [] (S.text "Val: 0")
-                }
-            , div2: D.div []
-                { slider: D.input
-                    [ D.Xtype := "range"
-                    , D.OnInput := cb \e -> for_
-                        ( target e
-                            >>= fromEventTarget
-                            >>= fromElement
-                        )
-                        ( valueAsNumber
-                            >=> push <<< SliderMoved
-                        )
-                    ]
-                    {}
-                , val: D.div [] (S.text "Val: 50")
-                }
-            }
-          )
-      /\ 0
+      root elt
+        ( { div1: D.div []
+              { button: D.button
+                  [ D.OnClick :=
+                      cb (const $ push ButtonClicked)
+                  ]
+                  (S.text "Click")
+              , count: D.div [] (S.text "Val: 0")
+              }
+          , div2: D.div []
+              { slider: D.input
+                  [ D.Xtype := "range"
+                  , D.OnInput := cb \e -> for_
+                      ( target e
+                          >>= fromEventTarget
+                          >>= fromElement
+                      )
+                      ( valueAsNumber
+                          >=> push <<< SliderMoved
+                      )
+                  ]
+                  {}
+              , val: D.div [] (S.text "Val: 50")
+              }
+          }
+        )
+        /\ 0
   ) @> \e nclicks -> case e of
     Left _ -> pure nclicks
     Right ButtonClicked ->

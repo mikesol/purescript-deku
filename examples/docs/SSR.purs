@@ -54,34 +54,35 @@ scene i elt =
 serverSide :: (Page -> Effect Unit) -> ResolvedSubgraphSig Unit Unit
 serverSide _ =
   ( \_ _ ->
-      u { head: D.div []
-          { header: D.header []
-              { title: D.h1 [] (S.text "SSR")
-              , subtitle: D.h3 []
-                  ( S.text
-                      "For faster loads"
-                  )
-              }
-          , pars: D.div []
-              ( detup
-                  $
-                    D.p []
-                      ( S.text
-                          """Server side rendering is a technique where you ship your initial render to the client as HTML. This speeds up page loading."""
-                      )
-                      /\ D.p []
+      u
+        { head: D.div []
+            { header: D.header []
+                { title: D.h1 [] (S.text "SSR")
+                , subtitle: D.h3 []
+                    ( S.text
+                        "For faster loads"
+                    )
+                }
+            , pars: D.div []
+                ( detup
+                    $
+                      D.p []
                         ( S.text
-                            """Deku supports rendering arbitrary graphs as XML, which can be used to construct an HTML-only page to send to the client. Then, once the JavaScript is finished loading and executed, it can replace the pre-rendered page."""
+                            """Server side rendering is a technique where you ship your initial render to the client as HTML. This speeds up page loading."""
                         )
-                      /\ D.p []
-                        ( S.text
-                            """The example below is quite Inception-y: it does SSR on... itself!"""
-                        )
-                      /\
-                        ( D.pre []
-                            ( S.code []
-                                ( S.text
-                                    """module Deku.Example.Docs.Example.SSR where
+                        /\ D.p []
+                          ( S.text
+                              """Deku supports rendering arbitrary graphs as XML, which can be used to construct an HTML-only page to send to the client. Then, once the JavaScript is finished loading and executed, it can replace the pre-rendered page."""
+                          )
+                        /\ D.p []
+                          ( S.text
+                              """The example below is quite Inception-y: it does SSR on... itself!"""
+                          )
+                        /\
+                          ( D.pre []
+                              ( S.code []
+                                  ( S.text
+                                      """module Deku.Example.Docs.Example.SSR where
 
 import Prelude
 
@@ -151,46 +152,46 @@ main = do
       )
       (_.res >>> pure)
 """
-                                )
-                            )
-                        )
-
-                      /\ D.p []
-                        ( detup $
-                            ( D.text
-                                "Here's what it produces:"
-                            )
-                              /\ unit
-                        )
-                      /\ D.blockquote []
-                        ( detup $ D.p [] (S.text "Here is some XML!")
-                            /\ D.pre []
-                              ( S.code []
-                                  ( S.text
-                                      ( maybe "" toXML
-                                          ( ssr
-                                              ( map ((#) unit)
-                                                  ( oneFrame
-                                                      ( scene 0
-                                                          (unsafeCoerce unit)
-                                                      )
-                                                      (Left unit)
-                                                      (const $ pure unit)
-                                                  ).instructions
-                                              )
-                                          )
-                                      )
                                   )
                               )
-                            /\ unit
-                        )
-                      /\ D.h2 [] (S.text "Parting shot")
-                      /\ D.p []
-                        ( S.text
-                            """Thanks for checking out Deku. I wrote most of it during a coding binge in March 2022, so it's still a bit rough around the edges, but it gest the job done for me in a couple performance-critical where I need the DOM rendering to be faaasssstttt. I've grown quite fond of it, and I hope you get the chance to work your way through this documentation while building your first of many Deku webapps!"""
-                        )
-                      /\ unit
-              )
-          }
-      }
+                          )
+
+                        /\ D.p []
+                          ( detup $
+                              ( D.text
+                                  "Here's what it produces:"
+                              )
+                                /\ unit
+                          )
+                        /\ D.blockquote []
+                          ( detup $ D.p [] (S.text "Here is some XML!")
+                              /\ D.pre []
+                                ( S.code []
+                                    ( S.text
+                                        ( maybe "" toXML
+                                            ( ssr
+                                                ( map ((#) unit)
+                                                    ( oneFrame
+                                                        ( scene 0
+                                                            (unsafeCoerce unit)
+                                                        )
+                                                        (Left unit)
+                                                        (const $ pure unit)
+                                                    ).instructions
+                                                )
+                                            )
+                                        )
+                                    )
+                                )
+                              /\ unit
+                          )
+                        /\ D.h2 [] (S.text "Parting shot")
+                        /\ D.p []
+                          ( S.text
+                              """Thanks for checking out Deku. I wrote most of it during a coding binge in March 2022, so it's still a bit rough around the edges, but it gest the job done for me in a couple performance-critical where I need the DOM rendering to be faaasssstttt. I've grown quite fond of it, and I hope you get the chance to work your way through this documentation while building your first of many Deku webapps!"""
+                          )
+                        /\ unit
+                )
+            }
+        }
   ) %> freeze

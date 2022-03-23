@@ -154,8 +154,6 @@ instance createSubgraph ::
         , value: unit
         }
 
-
-
 unsafeCreate'
   :: forall ptr elt outGraph proxy dom engine proof res
    . DOMInterpret dom engine

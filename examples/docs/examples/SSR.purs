@@ -31,30 +31,30 @@ scene
   -> Scene env dom engine Frame0 push Unit
 scene i elt =
   ( \_ _ ->
-       u $ root elt
-          ( detup $ D.p [] (S.text "Here is some XML!")
-              /\ D.pre []
-                ( S.code []
-                    ( S.text $
-                        if i > 3 then "<stack-overflow />"
-                        else
-                          ( maybe "" toXML
-                              ( ssr
-                                  ( map ((#) unit)
-                                      ( oneFrame
-                                          (scene (i + 1) elt)
-                                          (Left unit)
-                                          (const $ pure unit)
-                                      ).instructions
-                                  )
-                              )
-                          )
-                    )
-                )
-              /\ unit
-          )
-      )
-   @> freeze
+      u $ root elt
+        ( detup $ D.p [] (S.text "Here is some XML!")
+            /\ D.pre []
+              ( S.code []
+                  ( S.text $
+                      if i > 3 then "<stack-overflow />"
+                      else
+                        ( maybe "" toXML
+                            ( ssr
+                                ( map ((#) unit)
+                                    ( oneFrame
+                                        (scene (i + 1) elt)
+                                        (Left unit)
+                                        (const $ pure unit)
+                                    ).instructions
+                                )
+                            )
+                        )
+                  )
+              )
+            /\ unit
+        )
+  )
+    @> freeze
 
 main :: Effect Unit
 main = do
