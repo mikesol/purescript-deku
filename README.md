@@ -16,7 +16,7 @@ Deku aims to be:
 - **small**: the average Deku program tends to be less lines of code than its React or Halogen counterparts.
 - **ssr-friendly**: Deku has out-of-the-box server-side rendering capabilities.
 
-Deku started as an experiment taking [`purescript-wags`](https://github.com/mikesol/purescritp-wags) and replacing all the Web Audio stuff with DOM stuff. It turns out that the DOM and Web Audio are more alike than different, so the first draft took only a few hours. It uses the same file structure, naming conventions and core concepts as wags, making it ideal for performance-critical apps.
+Deku started as an experiment taking [`purescript-wags`](https://github.com/mikesol/purescript-wags) and replacing all the Web Audio stuff with DOM stuff. It turns out that the DOM and Web Audio are more alike than different, so the first draft took only a few hours. It uses the same file structure, naming conventions and core concepts as wags, making it ideal for performance-critical apps.
 
 ## Benchmarks
 
