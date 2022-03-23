@@ -7,13 +7,13 @@ import Affjax.ResponseFormat as ResponseFormat
 import Data.Argonaut.Core (stringifyWithIndent)
 import Data.Either (Either(..))
 import Data.Foldable (for_)
-import Data.Tuple.Nested ((/\))
 import Data.HTTP.Method (Method(..))
+import Data.Tuple.Nested ((/\))
 import Deku.Change (change)
 import Deku.Control.Functions ((@>))
 import Deku.Control.Types (Frame0, Scene)
 import Deku.Graph.Attribute (Cb, cb)
-import Deku.Graph.DOM ((:=), root)
+import Deku.Graph.DOM (myNameIs', myNameIs, root, (:=))
 import Deku.Graph.DOM as D
 import Deku.Graph.DOM.Shorthand as S
 import Deku.Interpret (class DOMInterpret, makeFFIDOMSnapshot)
@@ -22,6 +22,7 @@ import Effect (Effect)
 import Effect.Aff (launchAff_)
 import Effect.Class (liftEffect)
 import FRP.Event (subscribe)
+import Type.Proxy (Proxy(..))
 import Web.DOM (Element)
 import Web.HTML (window)
 import Web.HTML.HTMLDocument (body)
@@ -60,9 +61,9 @@ scene elt =
   ( \_ push ->
       root elt
         ( { div1: D.div []
-              { button: D.button
+              { button: myNameIs (Proxy :: _ "bttn") $ D.button
                   [ D.OnClick := clickCb push ]
-                  (S.text "Click to get some random user data.")
+                  (myNameIs' (Proxy :: _ "textToShow") (D.text "Click to get some random user data."))
               }
           , div2: D.div [ D.Style := "display: none;" ]
               (S.pre [] (S.code [] (S.text "")))
@@ -73,8 +74,8 @@ scene elt =
     Left _ -> pure (push /\ started)
     Right (Left _) ->
       change
-        { "root.div1.button.t": "Loading..."
-        , "root.div1.button":
+        { "textToShow": "Loading..."
+        , "bttn":
             D.button'attr [ D.OnClick := cb (const $ pure unit) ]
         } $> (push /\ started)
     Right (Right str) ->
@@ -85,9 +86,9 @@ scene elt =
         )
         *> change
           { "root.div2.pre.code.t": str
-          , "root.div1.button.t":
+          , "textToShow":
               "Click to get some random user data."
-          , "root.div1.button":
+          , "bttn":
               D.button'attr [ D.OnClick := clickCb push ]
           }
         $> (push /\ true)

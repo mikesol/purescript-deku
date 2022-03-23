@@ -294,26 +294,25 @@ var massiveCreateConnectStep_ = function ($prefix) {
 			return function () {
 				var entries = Object.entries(a.toCreate);
 				for (var i = 0; i < entries.length; i++) {
-					var children = Object.entries(entries[i][1].children);
+					var children = Object.entries(entries[i][1].myNameIs !== undefined ? entries[i][1].unMyNameIs.children : entries[i][1].children);
 					for (var j = 0; j < children.length; j++) {
-						var fromId =
-							$prefix +
-							($prefix === "" ? "" : ".") +
-							entries[i][0] +
+						var toId =
+							entries[i][1].myNameIs !== undefined
+								? entries[i][1].myNameIs
+								: $prefix + ($prefix === "" ? "" : ".") + entries[i][0];
+						var fromId = children[j][1].myNameIs !== undefined ? children[j][1].myNameIs : toId +
 							"." +
 							children[j][0];
-						var toId = $prefix + ($prefix === "" ? "" : ".") + entries[i][0];
 
 						connectXToY_({
 							fromId: fromId,
 							toId: toId,
 						})(state)();
-						if (children[j][1].children !== {}) {
+						var child = children[j][1].myNameIs !== undefined ? children[j][1].unMyNameIs : children[j][1];
+						if (child.children !== {}) {
 							var toCreate = {};
 							toCreate[children[j][0]] = children[j][1];
-							massiveCreateConnectStep_(
-								$prefix + ($prefix === "" ? "" : ".") + entries[i][0]
-							)({
+							massiveCreateConnectStep_(toId)({
 								toCreate: toCreate,
 							})(state)();
 						}
@@ -335,12 +334,23 @@ var massiveCreateCreateStep_ = function ($isTerminal) {
 										return function () {
 											var entries = Object.entries(a.toCreate);
 											for (var i = 0; i < entries.length; i++) {
+												var value = entries[i][1];
+												if (value.myNameIs !== undefined) {
+													// my name is
+													var toCreate = {};
+													toCreate[value.myNameIs] = value.unMyNameIs;
+													massiveCreateCreateStep_($isTerminal)("")($unSubgraph)(
+														$makeSubgraph
+													)($makeRoot)($makeElement)($makeText)({
+														toCreate: toCreate,
+													})(state)();
+													continue;
+												}
 												var key =
 													$prefix + ($prefix === "" ? "" : ".") + entries[i][0];
 												if ($isTerminal) {
 													state.terminalPtrs.push(key);
 												}
-												var value = entries[i][1];
 												if (value.element.element !== undefined) {
 													// it's a root
 													$makeRoot({ id: key, root: value.element.element })(
