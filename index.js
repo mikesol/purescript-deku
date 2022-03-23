@@ -6600,7 +6600,7 @@ var PS = {};
   var unsafeUnXSubgraph = function (v) {
       return v;
   };                                                                              
-  var text = function ($12245) {
+  var text = function ($12247) {
       return Element((function (v) {
           return {
               element: v,
@@ -6610,7 +6610,7 @@ var PS = {};
           return {
               text: v
           };
-      })($12245))));
+      })($12247))));
   };                                                                             
   var subgraph = function (dictHashable) {
       return function (envs) {
@@ -6632,15 +6632,15 @@ var PS = {};
       };
   };                                                                        
   var root = (function () {
-      var $12246 = Control_Semigroupoid.compose(Control_Semigroupoid.semigroupoidFn)(function ($12248) {
+      var $12248 = Control_Semigroupoid.compose(Control_Semigroupoid.semigroupoidFn)(function ($12250) {
           return (function (v) {
               return {
                   root: v
               };
-          })(Element($12248));
+          })(Element($12250));
       });
-      return function ($12247) {
-          return $12246((function (v) {
+      return function ($12249) {
+          return $12248((function (v) {
               return function (v1) {
                   return {
                       element: v,
@@ -6651,14 +6651,14 @@ var PS = {};
               return {
                   element: v
               };
-          })($12247))));
+          })($12249))));
       };
   })();                                                                      
   var makeElt = function (elt) {
       return function (tag) {
-          var $12249 = Control_Semigroupoid.compose(Control_Semigroupoid.semigroupoidFn)(Element);
-          return function ($12250) {
-              return $12249((function (v) {
+          var $12252 = Control_Semigroupoid.compose(Control_Semigroupoid.semigroupoidFn)(Element);
+          return function ($12253) {
+              return $12252((function (v) {
                   return function (v1) {
                       return {
                           element: v,
@@ -6670,7 +6670,7 @@ var PS = {};
                       tag: tag,
                       attributes: v
                   };
-              })($12250))));
+              })($12253))));
           };
       };
   };
