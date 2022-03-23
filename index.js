@@ -6411,8 +6411,10 @@ var PS = {};
   var Data_Functor = $PS["Data.Functor"];
   var Data_Hashable = $PS["Data.Hashable"];
   var Data_Map_Internal = $PS["Data.Map.Internal"];
+  var Data_Symbol = $PS["Data.Symbol"];
   var Data_Unfoldable = $PS["Data.Unfoldable"];
-  var Deku_Graph_Attribute = $PS["Deku.Graph.Attribute"];                
+  var Deku_Graph_Attribute = $PS["Deku.Graph.Attribute"];
+  var Type_Proxy = $PS["Type.Proxy"];                
   var Xtype = (function () {
       function Xtype() {
 
@@ -6459,6 +6461,9 @@ var PS = {};
       OnClick.value = new OnClick();
       return OnClick;
   })();
+  var MyNameIs = function (x) {
+      return x;
+  };
   var Map_ = function (x) {
       return x;
   };   
@@ -6600,7 +6605,7 @@ var PS = {};
   var unsafeUnXSubgraph = function (v) {
       return v;
   };                                                                              
-  var text = function ($12247) {
+  var text = function ($12252) {
       return Element((function (v) {
           return {
               element: v,
@@ -6610,7 +6615,7 @@ var PS = {};
           return {
               text: v
           };
-      })($12247))));
+      })($12252))));
   };                                                                             
   var subgraph = function (dictHashable) {
       return function (envs) {
@@ -6632,15 +6637,15 @@ var PS = {};
       };
   };                                                                        
   var root = (function () {
-      var $12248 = Control_Semigroupoid.compose(Control_Semigroupoid.semigroupoidFn)(function ($12250) {
+      var $12253 = Control_Semigroupoid.compose(Control_Semigroupoid.semigroupoidFn)(function ($12255) {
           return (function (v) {
               return {
                   root: v
               };
-          })(Element($12250));
+          })(Element($12255));
       });
-      return function ($12249) {
-          return $12248((function (v) {
+      return function ($12254) {
+          return $12253((function (v) {
               return function (v1) {
                   return {
                       element: v,
@@ -6651,14 +6656,42 @@ var PS = {};
               return {
                   element: v
               };
-          })($12249))));
+          })($12254))));
       };
   })();                                                                      
+  var myNameIs$prime = function (dictIsSymbol) {
+      return function (v) {
+          return function ($12256) {
+              return (function (v1) {
+                  return {
+                      "_____________________________________________________": v1
+                  };
+              })(MyNameIs((function (v1) {
+                  return {
+                      myNameIs: Data_Symbol.reflectSymbol(dictIsSymbol)(Type_Proxy["Proxy"].value),
+                      unMyNameIs: v1
+                  };
+              })($12256)));
+          };
+      };
+  };
+  var myNameIs = function (dictIsSymbol) {
+      return function (v) {
+          return function ($12257) {
+              return MyNameIs((function (v1) {
+                  return {
+                      myNameIs: Data_Symbol.reflectSymbol(dictIsSymbol)(Type_Proxy["Proxy"].value),
+                      unMyNameIs: v1
+                  };
+              })($12257));
+          };
+      };
+  };                                                                         
   var makeElt = function (elt) {
       return function (tag) {
-          var $12252 = Control_Semigroupoid.compose(Control_Semigroupoid.semigroupoidFn)(Element);
-          return function ($12253) {
-              return $12252((function (v) {
+          var $12258 = Control_Semigroupoid.compose(Control_Semigroupoid.semigroupoidFn)(Element);
+          return function ($12259) {
+              return $12258((function (v) {
                   return function (v1) {
                       return {
                           element: v,
@@ -6670,7 +6703,7 @@ var PS = {};
                       tag: tag,
                       attributes: v
                   };
-              })($12253))));
+              })($12259))));
           };
       };
   };
@@ -6698,6 +6731,8 @@ var PS = {};
       return dict.attr;
   };                                                                       
   var a = makeElt(A_)("a");
+  exports["myNameIs"] = myNameIs;
+  exports["myNameIs'"] = myNameIs$prime;
   exports["attr"] = attr;
   exports["text"] = text;
   exports["root"] = root;
@@ -7034,26 +7069,25 @@ var PS = {};
 			  return function () {
 				  var entries = Object.entries(a.toCreate);
 				  for (var i = 0; i < entries.length; i++) {
-					  var children = Object.entries(entries[i][1].children);
+					  var children = Object.entries(entries[i][1].myNameIs !== undefined ? entries[i][1].unMyNameIs.children : entries[i][1].children);
 					  for (var j = 0; j < children.length; j++) {
-						  var fromId =
-							  $prefix +
-							  ($prefix === "" ? "" : ".") +
-							  entries[i][0] +
+						  var toId =
+							  entries[i][1].myNameIs !== undefined
+								  ? entries[i][1].myNameIs
+								  : $prefix + ($prefix === "" ? "" : ".") + entries[i][0];
+						  var fromId = children[j][1].myNameIs !== undefined ? children[j][1].myNameIs : toId +
 							  "." +
 							  children[j][0];
-						  var toId = $prefix + ($prefix === "" ? "" : ".") + entries[i][0];
 
 						  connectXToY_({
 							  fromId: fromId,
 							  toId: toId,
 						  })(state)();
-						  if (children[j][1].children !== {}) {
+						  var child = children[j][1].myNameIs !== undefined ? children[j][1].unMyNameIs : children[j][1];
+						  if (child.children !== {}) {
 							  var toCreate = {};
 							  toCreate[children[j][0]] = children[j][1];
-							  massiveCreateConnectStep_(
-								  $prefix + ($prefix === "" ? "" : ".") + entries[i][0]
-							  )({
+							  massiveCreateConnectStep_(toId)({
 								  toCreate: toCreate,
 							  })(state)();
 						  }
@@ -7075,12 +7109,23 @@ var PS = {};
 										  return function () {
 											  var entries = Object.entries(a.toCreate);
 											  for (var i = 0; i < entries.length; i++) {
+												  var value = entries[i][1];
+												  if (value.myNameIs !== undefined) {
+													  // my name is
+													  var toCreate = {};
+													  toCreate[value.myNameIs] = value.unMyNameIs;
+													  massiveCreateCreateStep_($isTerminal)("")($unSubgraph)(
+														  $makeSubgraph
+													  )($makeRoot)($makeElement)($makeText)({
+														  toCreate: toCreate,
+													  })(state)();
+													  continue;
+												  }
 												  var key =
 													  $prefix + ($prefix === "" ? "" : ".") + entries[i][0];
 												  if ($isTerminal) {
 													  state.terminalPtrs.push(key);
 												  }
-												  var value = entries[i][1];
 												  if (value.element.element !== undefined) {
 													  // it's a root
 													  $makeRoot({ id: key, root: value.element.element })(
@@ -7990,7 +8035,7 @@ var PS = {};
           };
       };
   };
-  var changeTextString = function (dictIsSymbol) {
+  var changeText = function (dictIsSymbol) {
       return function (dictCons) {
           return {
               "change'impl": function (dictDOMInterpret) {
@@ -8119,10 +8164,10 @@ var PS = {};
   var change = function (dictDOMInterpret) {
       return function (dictChange) {
           return function (r) {
-              var $1056 = change$primerec(dictChange)(dictDOMInterpret);
-              var $1057 = Data_Functor.voidRight(Deku_Control_Types.functorDOM)(r);
-              return function ($1058) {
-                  return $1056($1057($1058));
+              var $1047 = change$primerec(dictChange)(dictDOMInterpret);
+              var $1048 = Data_Functor.voidRight(Deku_Control_Types.functorDOM)(r);
+              return function ($1049) {
+                  return $1047($1048($1049));
               };
           };
       };
@@ -8131,7 +8176,7 @@ var PS = {};
   exports["changeRL_Cons"] = changeRL_Cons;
   exports["changeRL_Nil"] = changeRL_Nil;
   exports["changeAll"] = changeAll;
-  exports["changeTextString"] = changeTextString;
+  exports["changeText"] = changeText;
   exports["changeSubgraph1"] = changeSubgraph1;
   exports["changeButton_"] = changeButton_;
   exports["changeDiv_"] = changeDiv_;
@@ -8959,7 +9004,8 @@ var PS = {};
   var Deku_Util = $PS["Deku.Util"];
   var Effect = $PS["Effect"];
   var Effect_Aff = $PS["Effect.Aff"];
-  var Effect_Class = $PS["Effect.Class"];                
+  var Effect_Class = $PS["Effect.Class"];
+  var Type_Proxy = $PS["Type.Proxy"];                
   var clickCb = function (push) {
       return Deku_Graph_Attribute.cb(Data_Function["const"](function __do() {
           push(new Data_Either.Left(Data_Unit.unit))();
@@ -8980,7 +9026,7 @@ var PS = {};
               if (result instanceof Data_Either.Right) {
                   return Effect_Class.liftEffect(Effect_Aff.monadEffectAff)(push(Data_Either.Right.create(Data_Argonaut_Core.stringifyWithIndent(2)(result.value0.body))));
               };
-              throw new Error("Failed pattern match at Deku.Example.Docs.Effects (line 228, column 9 - line 234, column 48): " + [ result.constructor.name ]);
+              throw new Error("Failed pattern match at Deku.Example.Docs.Effects (line 230, column 9 - line 236, column 48): " + [ result.constructor.name ]);
           }))();
       }));
   };
@@ -8990,7 +9036,15 @@ var PS = {};
               return function (push) {
                   return new Data_Tuple.Tuple(Deku_Graph_DOM_Shorthand.div([  ])({
                       div1: Deku_Graph_DOM.div([  ])({
-                          button: Deku_Graph_DOM.button([ Deku_Graph_DOM.attr(Deku_Graph_DOM.attrOnClickCb)(Deku_Graph_DOM.OnClick.value)(clickCb(push)) ])(Deku_Graph_DOM_Shorthand.text("Click to get some random user data."))
+                          button: Deku_Graph_DOM.myNameIs({
+                              reflectSymbol: function () {
+                                  return "bttn";
+                              }
+                          })(Type_Proxy["Proxy"].value)(Deku_Graph_DOM.button([ Deku_Graph_DOM.attr(Deku_Graph_DOM.attrOnClickCb)(Deku_Graph_DOM.OnClick.value)(clickCb(push)) ])(Deku_Graph_DOM["myNameIs'"]({
+                              reflectSymbol: function () {
+                                  return "textToShow";
+                              }
+                          })(Type_Proxy["Proxy"].value)(Deku_Graph_DOM.text("Click to get some random user data."))))
                       }),
                       div2: Deku_Graph_DOM.div([ Deku_Graph_DOM.attr(Deku_Graph_DOM.attrDiv_StyleString)(Deku_Graph_DOM.Style.value)("display: none;") ])(Deku_Graph_DOM_Shorthand.pre([  ])(Deku_Graph_DOM_Shorthand.code([  ])(Deku_Graph_DOM_Shorthand.text(""))))
                   }), new Data_Tuple.Tuple(push, false));
@@ -9003,23 +9057,23 @@ var PS = {};
                   if (e instanceof Data_Either.Right && e.value0 instanceof Data_Either.Left) {
                       return Data_Functor.voidLeft(Deku_Control_Monadic.functorMDOM)(Deku_Change.change(dictDOMInterpret)(Deku_Change.changeAll()(Deku_Change.changeRL_Cons({
                           reflectSymbol: function () {
-                              return "div.div1.button";
+                              return "bttn";
                           }
                       })()()(Deku_Change.changeButton_({
                           reflectSymbol: function () {
-                              return "div.div1.button";
+                              return "bttn";
                           }
                       })())(Deku_Change.changeRL_Cons({
                           reflectSymbol: function () {
-                              return "div.div1.button.t";
+                              return "textToShow";
                           }
-                      })()()(Deku_Change.changeTextString({
+                      })()()(Deku_Change.changeText({
                           reflectSymbol: function () {
-                              return "div.div1.button.t";
+                              return "textToShow";
                           }
                       })())(Deku_Change.changeRL_Nil))))({
-                          "div.div1.button.t": "Loading...",
-                          "div.div1.button": Deku_Graph_DOM["button'attr"]([ Deku_Graph_DOM.attr(Deku_Graph_DOM.attrOnClickCb)(Deku_Graph_DOM.OnClick.value)(Deku_Graph_Attribute.cb(Data_Function["const"](Control_Applicative.pure(Effect.applicativeEffect)(Data_Unit.unit)))) ])
+                          textToShow: "Loading...",
+                          bttn: Deku_Graph_DOM["button'attr"]([ Deku_Graph_DOM.attr(Deku_Graph_DOM.attrOnClickCb)(Deku_Graph_DOM.OnClick.value)(Deku_Graph_Attribute.cb(Data_Function["const"](Control_Applicative.pure(Effect.applicativeEffect)(Data_Unit.unit)))) ])
                       }))(new Data_Tuple.Tuple(v1.value0, v1.value1));
                   };
                   if (e instanceof Data_Either.Right && e.value0 instanceof Data_Either.Right) {
@@ -9035,35 +9089,35 @@ var PS = {};
                           "div.div2": Deku_Graph_DOM["div'attr"]([ Deku_Graph_DOM.attr(Deku_Graph_DOM.attrDiv_StyleString)(Deku_Graph_DOM.Style.value)("display: block;") ])
                       })))(Deku_Change.change(dictDOMInterpret)(Deku_Change.changeAll()(Deku_Change.changeRL_Cons({
                           reflectSymbol: function () {
-                              return "div.div1.button";
+                              return "bttn";
                           }
                       })()()(Deku_Change.changeButton_({
                           reflectSymbol: function () {
-                              return "div.div1.button";
-                          }
-                      })())(Deku_Change.changeRL_Cons({
-                          reflectSymbol: function () {
-                              return "div.div1.button.t";
-                          }
-                      })()()(Deku_Change.changeTextString({
-                          reflectSymbol: function () {
-                              return "div.div1.button.t";
+                              return "bttn";
                           }
                       })())(Deku_Change.changeRL_Cons({
                           reflectSymbol: function () {
                               return "div.div2.pre.code.t";
                           }
-                      })()()(Deku_Change.changeTextString({
+                      })()()(Deku_Change.changeText({
                           reflectSymbol: function () {
                               return "div.div2.pre.code.t";
+                          }
+                      })())(Deku_Change.changeRL_Cons({
+                          reflectSymbol: function () {
+                              return "textToShow";
+                          }
+                      })()()(Deku_Change.changeText({
+                          reflectSymbol: function () {
+                              return "textToShow";
                           }
                       })())(Deku_Change.changeRL_Nil)))))({
                           "div.div2.pre.code.t": e.value0.value0,
-                          "div.div1.button.t": "Click to get some random user data.",
-                          "div.div1.button": Deku_Graph_DOM["button'attr"]([ Deku_Graph_DOM.attr(Deku_Graph_DOM.attrOnClickCb)(Deku_Graph_DOM.OnClick.value)(clickCb(v1.value0)) ])
+                          textToShow: "Click to get some random user data.",
+                          bttn: Deku_Graph_DOM["button'attr"]([ Deku_Graph_DOM.attr(Deku_Graph_DOM.attrOnClickCb)(Deku_Graph_DOM.OnClick.value)(clickCb(v1.value0)) ])
                       })))(new Data_Tuple.Tuple(v1.value0, true));
                   };
-                  throw new Error("Failed pattern match at Deku.Example.Docs.Effects (line 250, column 32 - line 271, column 26): " + [ e.constructor.name ]);
+                  throw new Error("Failed pattern match at Deku.Example.Docs.Effects (line 252, column 32 - line 273, column 26): " + [ e.constructor.name ]);
               };
           });
       };
@@ -9126,7 +9180,7 @@ var PS = {};
                               reflectSymbol: function () {
                                   return "@0";
                               }
-                          })())(new Data_Tuple.Tuple(Deku_Graph_DOM.text("This example is similar to the previous one in its design: "), new Data_Tuple.Tuple(Deku_Graph_DOM.code([  ])(Deku_Graph_DOM_Shorthand.text("iloop")), new Data_Tuple.Tuple(Deku_Graph_DOM.text(" is called in response to an event. The difference is that the response isn't immediate. Instead, we wait for the result of a network call."), Data_Unit.unit))))), new Data_Tuple.Tuple(Deku_Graph_DOM.pre([  ])(Deku_Graph_DOM_Shorthand.code([  ])(Deku_Graph_DOM_Shorthand.text("module Deku.Example.Docs.Example.Effects where\x0a\x0aimport Prelude\x0a\x0aimport Affjax as AX\x0aimport Affjax.ResponseFormat as ResponseFormat\x0aimport Data.Argonaut.Core (stringifyWithIndent)\x0aimport Data.Either (Either(..))\x0aimport Data.Foldable (for_)\x0aimport Data.Tuple.Nested ((/\\))\x0aimport Data.HTTP.Method (Method(..))\x0aimport Deku.Change (change)\x0aimport Deku.Control.Functions ((@>))\x0aimport Deku.Control.Types (Frame0, Scene)\x0aimport Deku.Graph.Attribute (Cb, cb)\x0aimport Deku.Graph.DOM ((:=), root)\x0aimport Deku.Graph.DOM as D\x0aimport Deku.Graph.DOM.Shorthand as S\x0aimport Deku.Interpret (class DOMInterpret, makeFFIDOMSnapshot)\x0aimport Deku.Run (defaultOptions, run)\x0aimport Effect (Effect)\x0aimport Effect.Aff (launchAff_)\x0aimport Effect.Class (liftEffect)\x0aimport FRP.Event (subscribe)\x0aimport Web.DOM (Element)\x0aimport Web.HTML (window)\x0aimport Web.HTML.HTMLDocument (body)\x0aimport Web.HTML.HTMLElement (toElement)\x0aimport Web.HTML.Window (document)\x0a\x0aclickCb :: (Either Unit String -> Effect Unit) -> Cb\x0aclickCb push = cb\x0a  ( const do\x0a      push (Left unit)\x0a      launchAff_ $ do\x0a        result <- AX.request\x0a          ( AX.defaultRequest\x0a              { url = \"https://randomuser.me/api/\"\x0a              , method = Left GET\x0a              , responseFormat = ResponseFormat.json\x0a              }\x0a          )\x0a        case result of\x0a          Left err -> liftEffect $ push\x0a            $ Right\x0a              ( \"GET /api response failed to decode: \" <>\x0a                  AX.printError err\x0a              )\x0a          Right response -> liftEffect $ push $ Right $\x0a            stringifyWithIndent 2 response.body\x0a  )\x0a\x0ascene\x0a  :: forall env dom engine res\x0a   . Monoid res\x0a  => DOMInterpret dom engine\x0a  => Element\x0a  -> Scene env dom engine Frame0 (Either Unit String) res\x0ascene elt =\x0a  ( \\_ push ->\x0a      root elt\x0a          ( { div1: D.div []\x0a                { button: D.button\x0a                    [ D.OnClick := clickCb push ]\x0a                    (S.text \"Click to get some random user data.\")\x0a                }\x0a            , div2: D.div [ D.Style := \"display: none;\" ]\x0a                (S.pre [] (S.code [] (S.text \"\")))\x0a            }\x0a          )\x0a      /\\ (push /\\ false)\x0a  ) @> \\e (push /\\ started) -> case e of\x0a    Left _ -> pure (push /\\ started)\x0a    Right (Left _) ->\x0a      change\x0a        { \"root.div1.button.t\": \"Loading...\"\x0a        , \"root.div1.button\":\x0a            D.button'attr [ D.OnClick := cb (const $ pure unit) ]\x0a        } $> (push /\\ started)\x0a    Right (Right str) ->\x0a      when (not started)\x0a        ( change\x0a            { \"root.div2\": D.div'attr [ D.Style := \"display: block;\" ]\x0a            }\x0a        )\x0a        *> change\x0a          { \"root.div2.pre.code.t\": str\x0a          , \"root.div1.button.t\":\x0a              \"Click to get some random user data.\"\x0a          , \"root.div1.button\":\x0a              D.button'attr [ D.OnClick := clickCb push ]\x0a          }\x0a        $> (push /\\ true)\x0a\x0amain :: Effect Unit\x0amain = do\x0a  b' <- window >>= document >>= body\x0a  for_ (toElement <$> b') \\elt -> do\x0a    ffi <- makeFFIDOMSnapshot\x0a    subscribe\x0a      ( run (pure unit) (pure unit) defaultOptions ffi\x0a          (scene elt)\x0a\x0a      )\x0a      (_.res >>> pure)\x0a"))), new Data_Tuple.Tuple(Deku_Graph_DOM.p([  ])(Deku_Util.detup(Deku_Util.detupTuple(Data_Typelevel_Num_Ops.typelevelSucc(Data_Typelevel_Num_Sets.posD1)()(Data_Typelevel_Num_Ops.divMod10D0D0)()(Data_Typelevel_Num_Ops.divMod10D1D0))(Deku_Util.detupUnit)()()()({
+                          })())(new Data_Tuple.Tuple(Deku_Graph_DOM.text("This example is similar to the previous one in its design: "), new Data_Tuple.Tuple(Deku_Graph_DOM.code([  ])(Deku_Graph_DOM_Shorthand.text("iloop")), new Data_Tuple.Tuple(Deku_Graph_DOM.text(" is called in response to an event. The difference is that the response isn't immediate. Instead, we wait for the result of a network call."), Data_Unit.unit))))), new Data_Tuple.Tuple(Deku_Graph_DOM.pre([  ])(Deku_Graph_DOM_Shorthand.code([  ])(Deku_Graph_DOM_Shorthand.text("module Deku.Example.Docs.Example.Effects where\x0a\x0aimport Prelude\x0a\x0aimport Affjax as AX\x0aimport Affjax.ResponseFormat as ResponseFormat\x0aimport Data.Argonaut.Core (stringifyWithIndent)\x0aimport Data.Either (Either(..))\x0aimport Data.Foldable (for_)\x0aimport Data.HTTP.Method (Method(..))\x0aimport Data.Tuple.Nested ((/\\))\x0aimport Deku.Change (change)\x0aimport Deku.Control.Functions ((@>))\x0aimport Deku.Control.Types (Frame0, Scene)\x0aimport Deku.Graph.Attribute (Cb, cb)\x0aimport Deku.Graph.DOM (myNameIs', root, (:=))\x0aimport Deku.Graph.DOM as D\x0aimport Deku.Graph.DOM.Shorthand as S\x0aimport Deku.Interpret (class DOMInterpret, makeFFIDOMSnapshot)\x0aimport Deku.Run (defaultOptions, run)\x0aimport Effect (Effect)\x0aimport Effect.Aff (launchAff_)\x0aimport Effect.Class (liftEffect)\x0aimport FRP.Event (subscribe)\x0aimport Type.Proxy (Proxy(..))\x0aimport Web.DOM (Element)\x0aimport Web.HTML (window)\x0aimport Web.HTML.HTMLDocument (body)\x0aimport Web.HTML.HTMLElement (toElement)\x0aimport Web.HTML.Window (document)\x0a\x0aclickCb :: (Either Unit String -> Effect Unit) -> Cb\x0aclickCb push = cb\x0a  ( const do\x0a      push (Left unit)\x0a      launchAff_ $ do\x0a        result <- AX.request\x0a          ( AX.defaultRequest\x0a              { url = \"https://randomuser.me/api/\"\x0a              , method = Left GET\x0a              , responseFormat = ResponseFormat.json\x0a              }\x0a          )\x0a        case result of\x0a          Left err -> liftEffect $ push\x0a            $ Right\x0a              ( \"GET /api response failed to decode: \" <>\x0a                  AX.printError err\x0a              )\x0a          Right response -> liftEffect $ push $ Right $\x0a            stringifyWithIndent 2 response.body\x0a  )\x0a\x0ascene\x0a  :: forall env dom engine res\x0a   . Monoid res\x0a  => DOMInterpret dom engine\x0a  => Element\x0a  -> Scene env dom engine Frame0 (Either Unit String) res\x0ascene elt =\x0a  ( \\_ push ->\x0a      root elt\x0a        ( { div1: D.div []\x0a              { button: D.button\x0a                  [ D.OnClick := clickCb push ]\x0a                  (myNameIs' (Proxy :: _ \"textToShow\") (D.text \"Click to get some random user data.\"))\x0a              }\x0a          , div2: D.div [ D.Style := \"display: none;\" ]\x0a              (S.pre [] (S.code [] (S.text \"\")))\x0a          }\x0a        )\x0a        /\\ (push /\\ false)\x0a  ) @> \\e (push /\\ started) -> case e of\x0a    Left _ -> pure (push /\\ started)\x0a    Right (Left _) ->\x0a      change\x0a        { \"textToShow\": \"Loading...\"\x0a        , \"root.div1.button\":\x0a            D.button'attr [ D.OnClick := cb (const $ pure unit) ]\x0a        } $> (push /\\ started)\x0a    Right (Right str) ->\x0a      when (not started)\x0a        ( change\x0a            { \"root.div2\": D.div'attr [ D.Style := \"display: block;\" ]\x0a            }\x0a        )\x0a        *> change\x0a          { \"root.div2.pre.code.t\": str\x0a          , \"textToShow\":\x0a              \"Click to get some random user data.\"\x0a          , \"root.div1.button\":\x0a              D.button'attr [ D.OnClick := clickCb push ]\x0a          }\x0a        $> (push /\\ true)\x0a\x0amain :: Effect Unit\x0amain = do\x0a  b' <- window >>= document >>= body\x0a  for_ (toElement <$> b') \\elt -> do\x0a    ffi <- makeFFIDOMSnapshot\x0a    subscribe\x0a      ( run (pure unit) (pure unit) defaultOptions ffi\x0a          (scene elt)\x0a\x0a      )\x0a      (_.res >>> pure)\x0a"))), new Data_Tuple.Tuple(Deku_Graph_DOM.p([  ])(Deku_Util.detup(Deku_Util.detupTuple(Data_Typelevel_Num_Ops.typelevelSucc(Data_Typelevel_Num_Sets.posD1)()(Data_Typelevel_Num_Ops.divMod10D0D0)()(Data_Typelevel_Num_Ops.divMod10D1D0))(Deku_Util.detupUnit)()()()({
                               reflectSymbol: function () {
                                   return "@0";
                               }
@@ -9342,7 +9396,7 @@ var PS = {};
                           reflectSymbol: function () {
                               return "div.div1.button.t";
                           }
-                      })()()(Deku_Change.changeTextString({
+                      })()()(Deku_Change.changeText({
                           reflectSymbol: function () {
                               return "div.div1.button.t";
                           }
@@ -9350,7 +9404,7 @@ var PS = {};
                           reflectSymbol: function () {
                               return "div.div1.count.t";
                           }
-                      })()()(Deku_Change.changeTextString({
+                      })()()(Deku_Change.changeText({
                           reflectSymbol: function () {
                               return "div.div1.count.t";
                           }
@@ -9370,7 +9424,7 @@ var PS = {};
                           reflectSymbol: function () {
                               return "div.div2.val.t";
                           }
-                      })()()(Deku_Change.changeTextString({
+                      })()()(Deku_Change.changeText({
                           reflectSymbol: function () {
                               return "div.div2.val.t";
                           }
@@ -11092,7 +11146,7 @@ var PS = {};
                                   reflectSymbol: function () {
                                       return "div.div1.count0.t";
                                   }
-                              })()()(Deku_Change.changeTextString({
+                              })()()(Deku_Change.changeText({
                                   reflectSymbol: function () {
                                       return "div.div1.count0.t";
                                   }
@@ -11106,7 +11160,7 @@ var PS = {};
                                   reflectSymbol: function () {
                                       return "div.div1.count1.t";
                                   }
-                              })()()(Deku_Change.changeTextString({
+                              })()()(Deku_Change.changeText({
                                   reflectSymbol: function () {
                                       return "div.div1.count1.t";
                                   }
@@ -11138,7 +11192,7 @@ var PS = {};
                                   reflectSymbol: function () {
                                       return "div.div1.count0.t";
                                   }
-                              })()()(Deku_Change.changeTextString({
+                              })()()(Deku_Change.changeText({
                                   reflectSymbol: function () {
                                       return "div.div1.count0.t";
                                   }
@@ -11152,7 +11206,7 @@ var PS = {};
                                   reflectSymbol: function () {
                                       return "div.div1.count1.t";
                                   }
-                              })()()(Deku_Change.changeTextString({
+                              })()()(Deku_Change.changeText({
                                   reflectSymbol: function () {
                                       return "div.div1.count1.t";
                                   }
