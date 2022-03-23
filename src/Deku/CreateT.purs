@@ -156,19 +156,10 @@ instance createTText ::
 
 instance createTSubgraph ::
   ( R.Lacks ptr graphi
-  , R.Cons ptr (NodeC (CTOR.TSubgraph terminus env) {}) graphi grapho
+  , R.Cons ptr (NodeC (CTOR.TSubgraph env) {}) graphi grapho
   ) =>
   CreateT' ptr
-    (CTOR.Subgraph index terminus env push)
-    graphi
-    grapho
-
-instance createTTumult ::
-  ( R.Lacks ptr graphi
-  , R.Cons ptr (NodeC (CTOR.TTumult terminus) {}) graphi grapho
-  ) =>
-  CreateT' ptr
-    (CTOR.Tumult terminus)
+    (CTOR.Subgraph index env push)
     graphi
     grapho
 

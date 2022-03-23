@@ -8,10 +8,9 @@ import Data.Foldable (for_)
 import Data.Map as Map
 import Data.Maybe (Maybe(..))
 import Data.Tuple.Nested ((/\))
-import Deku.Change (ichange)
-import Deku.Control.Functions.Graph (iloop, (@!>))
+import Deku.Change (change)
+import Deku.Control.Functions ((@>))
 import Deku.Control.Types (Frame0, Scene)
-import Deku.Create (icreate)
 import Deku.Graph.Attribute (cb)
 import Deku.Graph.DOM (OnClick(..), Href(..), a, root, text, tumult, (:=))
 import Deku.Interpret (makeFFIDOMSnapshot)
@@ -30,7 +29,7 @@ scene
   -> Scene (TriggeredScene Unit Unit) RunDOM RunEngine Frame0 Unit Unit
 scene elt =
   ( \_ push0 ->
-      ( icreate $
+      (
           root elt
             { hello: a [ Href := "#", OnClick := cb (const $ push0 unit) ]
                 { ht: text "click" }
@@ -49,11 +48,11 @@ scene elt =
                     )
                 )
             }
-      ) $> 0
-  ) @!> iloop \e _ lmt ->
+      ) /\ 0
+  ) @> \e lmt ->
     lmt + 1 <$ case e of
       Left _ -> pure unit
-      Right _ -> ichange
+      Right _ -> change
         { "root.helloTum0":
             ( tumultuously
                 ( Map.fromFoldable

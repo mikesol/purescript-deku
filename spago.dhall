@@ -10,7 +10,6 @@
   , "foldable-traversable"
   , "foreign"
   , "foreign-object"
-  , "indexed-monad"
   , "lists"
   , "maybe"
   , "newtype"

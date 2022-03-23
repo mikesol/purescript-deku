@@ -9,6 +9,7 @@ module Deku.Control.Types
   , oneFrame
   , oneFrame'
   , SubScene(..)
+  , uRes
   , oneSubFrame
   , oneSubFrame'
   , unsafeUnDOM
@@ -92,6 +93,9 @@ type Scene' scene env dom engine proof push res =
   , next :: scene env dom engine proof push res
   }
 
+uRes :: forall r. { res :: Unit | r } -> { res :: Unit | r }
+uRes = identity
+
 newtype Scene :: forall k. Type -> Type -> Type -> k -> Type -> Type -> Type
 newtype Scene env dom engine proofA push res = Scene
   ( Either env push
@@ -148,34 +152,34 @@ oneFrame' s e p = go (oneFrame s e p)
 
 --
 newtype SubScene
-  :: forall k. Symbol -> Type -> Type -> Type -> k -> Type -> Type -> Type
-newtype SubScene terminus env dom engine proofA push res = SubScene
+  :: forall k. Type -> Type -> Type -> k -> Type -> Type -> Type
+newtype SubScene env dom engine proofA push res = SubScene
   ( Either env push
     -> (push -> Effect Unit)
     -> forall (proofB :: k)
-     . Scene' (SubScene terminus) env dom engine proofB push res
+     . Scene' SubScene env dom engine proofB push res
   )
 
-instance isSceneSubScene :: IsScene (SubScene terminus) where
+instance isSceneSubScene :: IsScene SubScene where
   getFrame = oneSubFrame
   unFrame = SubScene
 
 oneSubFrame
-  :: forall terminus env dom engine proofA push res
-   . SubScene terminus env dom engine proofA push res
+  :: forall env dom engine proofA push res
+   . SubScene env dom engine proofA push res
   -> ( Either env push
        -> (push -> Effect Unit)
        -> forall proofB
-        . Scene' (SubScene terminus) env dom engine proofB push res
+        . Scene' SubScene env dom engine proofB push res
      )
 oneSubFrame (SubScene scene) = scene
 
 oneSubFrame'
-  :: forall terminus env dom engine proofA push res
-   . SubScene terminus env dom engine proofA push res
+  :: forall env dom engine proofA push res
+   . SubScene env dom engine proofA push res
   -> Either env push
   -> (push -> Effect Unit)
-  -> ( Array (dom -> engine) /\ res /\ SubScene terminus env dom
+  -> ( Array (dom -> engine) /\ res /\ SubScene env dom
          engine
          proofA
          push

@@ -1,6 +1,5 @@
 exports.massiveCreate_ = function ($unSubgraph) {
 	return function ($makeSubgraph) {
-		return function ($makeTumult) {
 			return function ($makeRoot) {
 				return function ($makeElement) {
 					return function ($makeText) {
@@ -10,9 +9,7 @@ exports.massiveCreate_ = function ($unSubgraph) {
 									var o = [];
 									o.push.apply(
 										o,
-										massiveCreateCreateStep_("")($unSubgraph)($makeSubgraph)(
-											$makeTumult
-										)($makeRoot)($makeElement)($makeText)(a)()
+										massiveCreateCreateStep_("")($unSubgraph)($makeSubgraph)($makeRoot)($makeElement)($makeText)(a)()
 									);
 									o.push.apply(
 										o,
@@ -20,7 +17,7 @@ exports.massiveCreate_ = function ($unSubgraph) {
 									);
 									return o;
 								};
-							};
+
 						};
 					};
 				};
@@ -74,7 +71,6 @@ var massiveCreateConnectStep_ = function ($prefix) {
 var massiveCreateCreateStep_ = function ($prefix) {
 	return function ($unSubgraph) {
 		return function ($makeSubgraph) {
-			return function ($makeTumult) {
 				return function ($makeRoot) {
 					return function ($makeElement) {
 						return function ($makeText) {
@@ -113,17 +109,8 @@ var massiveCreateCreateStep_ = function ($prefix) {
 											o.push(
 												$makeSubgraph({
 													id: key,
-													terminus: value.element.terminus,
 													scenes: $unSubgraph(value.element.subgraphMaker),
 													envs: value.element.envs
-												})()
-											);
-										} else if (value.element.tumult !== undefined) {
-											o.push(
-												$makeTumult({
-													id: key,
-													instructions: value.element.tumult,
-													terminus: value.element.terminus,
 												})()
 											);
 										} else {
@@ -136,9 +123,7 @@ var massiveCreateCreateStep_ = function ($prefix) {
 										}
 										o.push.apply(
 											o,
-											massiveCreateCreateStep_(key)($unSubgraph)($makeSubgraph)(
-												$makeTumult
-											)($makeRoot)($makeElement)($makeText)({
+											massiveCreateCreateStep_(key)($unSubgraph)($makeSubgraph)($makeRoot)($makeElement)($makeText)({
 												toCreate: value.children,
 											})()
 										);
@@ -151,5 +136,5 @@ var massiveCreateCreateStep_ = function ($prefix) {
 				};
 			};
 		};
-	};
+
 };

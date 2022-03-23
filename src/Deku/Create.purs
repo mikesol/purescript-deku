@@ -2,22 +2,18 @@ module Deku.Create where
 
 import Prelude
 
-import Data.Functor (voidRight)
 import Data.Hashable (class Hashable)
 import Data.Symbol (class IsSymbol, reflectSymbol)
-import Deku.Control.Indexed (IxDOM(..))
 import Deku.Control.Types (DOM, DOMState', unsafeDOM, unsafeUnDOM)
 import Deku.CreateT (class CreateT)
 import Deku.Graph.Attribute (Attribute, unsafeUnAttribute)
-import Deku.Graph.DOM (unAsSubGraph, unsafeUnRoot, unsafeUnSubgraph, unsafeUnText, unsafeUnTumult)
+import Deku.Graph.DOM (unAsSubGraph, unsafeUnRoot, unsafeUnSubgraph, unsafeUnText)
 import Deku.Graph.DOM as CTOR
 import Deku.Graph.Graph (Graph)
 import Deku.Graph.Node (NodeC)
-import Deku.Interpret (class DOMInterpret, makeElement, makeRoot, makeSubgraph, makeText, makeTumult, massiveCreate)
+import Deku.Interpret (class DOMInterpret, makeElement, makeRoot, makeSubgraph, makeText, massiveCreate)
 import Deku.Rendered (RootDOMElement(..), ToCreate(..))
-import Deku.Tumult (safeUntumult)
 import Prim.Row as R
-import Type.Proxy (Proxy(..))
 import Unsafe.Coerce (unsafeCoerce)
 
 class
@@ -45,13 +41,6 @@ instance createAll ::
               }
         , value: unit
         }
-icreate
-  :: forall r dom engine proof res inGraph outGraph
-   . DOMInterpret dom engine
-  => Create r inGraph outGraph
-  => { | r }
-  -> IxDOM dom engine proof res inGraph outGraph Unit
-icreate r = IxDOM (create <<< voidRight r)
 
 -- | Create an dom unit `node` in `igraph` with index `ptr`, resulting in `ograph`.
 class
@@ -63,15 +52,6 @@ class
     => proxy ptr
     -> DOM dom engine proof res inGraph node
     -> DOM dom engine proof res outGraph Unit
-
-icreate'
-  :: forall proxy ptr node dom engine proof res i o
-   . DOMInterpret dom engine
-  => Create' ptr node i o
-  => proxy ptr
-  -> node
-  -> IxDOM dom engine proof res i o Unit
-icreate' ptr node = IxDOM (create' ptr <<< voidRight node)
 
 instance createUnit ::
   Create' ptr Unit graphi graphi where
@@ -119,19 +99,18 @@ instance createRoot ::
 
 instance createSubgraph ::
   ( IsSymbol ptr
-  , IsSymbol terminus
   , R.Lacks ptr graphi
   , Hashable index
-  , R.Cons ptr (NodeC (CTOR.TSubgraph terminus env) {}) graphi grapho
+  , R.Cons ptr (NodeC (CTOR.TSubgraph env) {}) graphi grapho
   ) =>
   Create' ptr
-    (CTOR.Subgraph index terminus env push)
+    (CTOR.Subgraph index env push)
     graphi
     grapho where
   create' ptr w = o
     where
     { context: i, value } = unsafeUnDOM w
-    { subgraphMaker, terminus, envs } = unsafeUnSubgraph value
+    { subgraphMaker, envs } = unsafeUnSubgraph value
     id = reflectSymbol ptr
     o =
       unsafeDOM
@@ -140,7 +119,6 @@ instance createSubgraph ::
               { instructions = i.instructions <>
                   [ makeSubgraph
                       { id
-                      , terminus
                       , envs
                       , scenes: unAsSubGraph subgraphMaker
                       }
@@ -149,30 +127,7 @@ instance createSubgraph ::
         , value: unit
         }
 
-instance createTumult ::
-  ( IsSymbol ptr
-  , IsSymbol terminus
-  , R.Lacks ptr graphi
-  , R.Cons ptr (NodeC (CTOR.TTumult terminus) {}) graphi grapho
-  ) =>
-  Create' ptr (CTOR.Tumult terminus) graphi grapho where
-  create' ptr w = o
-    where
-    { context: i, value } = unsafeUnDOM w
-    { tumult } = unsafeUnTumult value
-    id = reflectSymbol ptr
-    pt = reflectSymbol (Proxy :: _ terminus)
-    o =
-      unsafeDOM
-        { context:
-            i
-              { instructions = i.instructions <>
-                  [ makeTumult
-                      { id, terminus: pt, instructions: safeUntumult tumult }
-                  ]
-              }
-        , value: unit
-        }
+
 
 unsafeCreate'
   :: forall ptr elt outGraph proxy dom engine proof res

@@ -10,10 +10,8 @@ import Data.Map (Map, fromFoldable, singleton)
 import Data.Maybe (Maybe(..))
 import Data.Set as Set
 import Data.Tuple.Nested ((/\))
-import Deku.Change (ichange)
-import Deku.Control.Functions.Graph as G
-import Deku.Control.Functions.Subgraph (freeze, iloop, (@!>))
-import Deku.Create (icreate)
+import Deku.Change (change)
+import Deku.Control.Functions (frozen, (@>))
 import Deku.Graph.Attribute (cb)
 import Deku.Graph.DOM (xsubgraph, (:=))
 import Deku.Graph.DOM as DOM
@@ -53,15 +51,11 @@ container =
         filled <- Shared.fillContainerState Shared.initialContainerState
         subscribe
           ( run (pure unit) (pure unit) defaultOptions ffi
-              ( G.istart
-                  ( \_ _ ->
-                      icreate
-                        ( DOM.root (toElement el)
-                            { sg: (containerD filled)
-                            }
-                        )
+              ( frozen
+                  ( \_ _ -> DOM.root (toElement el)
+                      { sg: (containerD filled)
+                      }
                   )
-                  G.freeze
               )
           )
           (\(_ :: TriggeredRun Unit) -> pure unit)
@@ -77,7 +71,6 @@ containerD cstate = DOM.subgraph (singleton 0 (Just unit)) $ DOM.AsSubgraph
         let
           ln = length cstate.todos
         in
-          icreate
             { ctr: DOM.div []
                 { btn: DOM.button
                     [ DOM.Id := Shared.addNewId
@@ -94,10 +87,10 @@ containerD cstate = DOM.subgraph (singleton 0 (Just unit)) $ DOM.AsSubgraph
                         )
                     }
                 }
-            } $> ln
-    ) @!> iloop \e push ln -> case e of
-      Left _ -> pure ln
-      Right td -> ln + 1 <$ ichange
+            } /\ (ln /\ push)
+    ) @> \e (ln /\ push) -> case e of
+      Left _ -> pure (ln /\ push)
+      Right td -> ((ln + 1) /\ push) <$ change
         { "ctr.dv.sg": xsubgraph
             ( singleton ln $ Just
                 { todo: td, completed: cstate.completed }
@@ -112,8 +105,7 @@ todoD
   :: Map Int (Maybe TodoInput)
   -> DOM.Element (DOM.Subgraph Int "top" TodoInput Unit) ()
 todoD mp = DOM.subgraph mp $ DOM.AsSubgraph \i ->
-  ( \itl _ ->
-      icreate
+  frozen ( \itl _ ->
         { top: DOM.div []
             { ipt: DOM.input
                 [ DOM.Id := Shared.editId itl.todo.id
@@ -128,7 +120,7 @@ todoD mp = DOM.subgraph mp $ DOM.AsSubgraph \i ->
                 { txt: DOM.text "Save Changes" }
             }
         }
-  ) @!> freeze
+  )
 
 data CheckboxAction = ReceiveCheckboxInput CheckboxInput | HandleCheck Boolean
 
@@ -136,7 +128,7 @@ checkboxD
   :: Map Int (Maybe CheckboxInput)
   -> DOM.Element (DOM.Subgraph Int "input" CheckboxInput Unit) ()
 checkboxD envs = DOM.subgraph envs $ DOM.AsSubgraph \i ->
-  ( \itl _ -> icreate
+  frozen ( \itl _ ->
       { input: DOM.input
           [ DOM.Xtype := "checkbox"
           , DOM.Id := Shared.checkId i
@@ -144,4 +136,4 @@ checkboxD envs = DOM.subgraph envs $ DOM.AsSubgraph \i ->
           ]
           {}
       }
-  ) @!> freeze
+  )

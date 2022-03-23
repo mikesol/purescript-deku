@@ -12,25 +12,24 @@ import Data.Traversable (sequence)
 import Data.Variant (match, on)
 import Deku.Control.Types (Frame0, SubScene)
 import Deku.Graph.Attribute (AttributeValue, prop')
-import Deku.Interpret (AsSubgraphHack(..), SubgraphInput, connectXToY, makeElement, makeRoot, makeSubgraph, makeText, makeTumult)
+import Deku.Interpret (AsSubgraphHack(..), SubgraphInput, connectXToY, makeElement, makeRoot, makeSubgraph, makeText)
 import Deku.Rendered (Instruction(..))
 import Deku.Rendered as R
-import Deku.Tumult.Make (Indecent(..))
+import Deku.HTML (HTML(..))
 import Foreign.Object (Object, empty, lookup, insert, singleton, union, update)
 import Type.Proxy (Proxy(..))
 
 foreign import massiveCreate_
-  :: ( forall index terminus env push
-        . AsSubgraphHack index terminus env
+  :: ( forall index env push
+        . AsSubgraphHack index env
        -> index
-       -> SubScene terminus env Unit Instruction Frame0 push Unit
+       -> SubScene env Unit Instruction Frame0 push Unit
      )
-  -> ( forall index terminus env push
-        . SubgraphInput index terminus env push Unit Instruction
+  -> ( forall index env push
+        . SubgraphInput index env push Unit Instruction
        -> Unit
        -> Instruction
      )
-  -> (R.MakeTumult -> Unit -> Instruction)
   -> (R.MakeRoot -> Unit -> Instruction)
   -> (R.MakeElement -> Unit -> Instruction)
   -> (R.MakeText -> Unit -> Instruction)
@@ -40,12 +39,12 @@ foreign import massiveCreate_
   -> Array Instruction
 
 applySubgraph
-  :: String -> String -> Array (Array Instruction) -> Object Indecent
-applySubgraph terminus id aaI =
+  :: String -> Array (Array Instruction) -> Object HTML
+applySubgraph id aaI =
   case
     ( E "div" [] <$>
         ( sequence $ map
-            (\iss -> ssr' terminus false iss)
+            (\iss -> ssr' id false iss)
             aaI
         )
     )
@@ -55,14 +54,14 @@ applySubgraph terminus id aaI =
     Nothing -> empty
     Just x -> singleton id x
 
-resolveAllSubgraphs :: List Instruction -> Object Indecent
+resolveAllSubgraphs :: List Instruction -> Object HTML
 resolveAllSubgraphs ((Instruction a) : b) = union
   ( on
       ( Proxy
           :: Proxy
             "makeSubgraph"
       )
-      ( \{ id, instructions, terminus } -> applySubgraph terminus id
+      ( \{ id, instructions } -> applySubgraph id
           instructions
       )
       (const empty)
@@ -122,7 +121,7 @@ doConnectStep ((Instruction a) : b) adj =
 doConnectStep Nil adj = adj
 
 adjacenciesToGraph
-  :: String -> Object Adjacency -> Object Indecent -> Maybe Indecent
+  :: String -> Object Adjacency -> Object HTML -> Maybe HTML
 adjacenciesToGraph needle adjacencies indecents =
   lookup needle adjacencies >>= case _ of
     Left txt -> pure (T txt)
@@ -145,14 +144,14 @@ adjacenciesToGraph needle adjacencies indecents =
 -- to be fully robust, it'd need to do that,
 -- but this is good for 95%
 -- of real-world cases
-ssr :: Array Instruction -> Maybe Indecent
+ssr :: Array Instruction -> Maybe HTML
 ssr a = ssr' "root" true a
 
 mcUnsubgraph
-  :: forall index terminus env push
-   . AsSubgraphHack index terminus env
+  :: forall index env push
+   . AsSubgraphHack index env
   -> index
-  -> SubScene terminus env Unit Instruction Frame0 push Unit
+  -> SubScene env Unit Instruction Frame0 push Unit
 mcUnsubgraph (AsSubgraphHack i) = i
 
 expandMassiveCreate :: List Instruction -> List Instruction
@@ -160,7 +159,7 @@ expandMassiveCreate (a@(Instruction aa) : b) =
   on
     (Proxy :: Proxy "massiveCreate")
     ( \tc -> List.fromFoldable
-        ( massiveCreate_ mcUnsubgraph makeSubgraph makeTumult
+        ( massiveCreate_ mcUnsubgraph makeSubgraph
             makeRoot
             makeElement
             makeText
@@ -173,7 +172,7 @@ expandMassiveCreate (a@(Instruction aa) : b) =
     aa <> expandMassiveCreate b
 expandMassiveCreate Nil = Nil
 
-ssr' :: String -> Boolean -> Array Instruction -> Maybe Indecent
+ssr' :: String -> Boolean -> Array Instruction -> Maybe HTML
 ssr' tmus hd a = o
   where
   asList' = List.fromFoldable a
@@ -193,7 +192,7 @@ ssr' tmus hd a = o
     )
   o = adjacenciesToGraph tmus connectStep indecentSubgraphs
 
-toXML :: Indecent -> String
+toXML :: HTML -> String
 toXML (E tag attributes children) =
   "<" <> tag <> " "
     <>

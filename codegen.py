@@ -5,8 +5,8 @@ GENERATE_DOM_DEFS = 1
 GENERATE_CREATES = 2
 GENERATE_CREATETS = 3
 GENERATE_CHANGES = 4
-GENERATE_PATCHES = 5
-GENERATE_VALIDATION = 6
+GENERATE_CREATESGTS = 5
+GENERATE_NOOP = 6
 GENERATE_ATTR_DECL = 7
 GENERATE_ATTR_DEFS = 8
 GENERATE_SHORTHAND = 9
@@ -16,8 +16,7 @@ CG_MAP = {GENERATE_DOM_DECL: 'src/Deku/Graph/DOM.purs',
           GENERATE_CREATES: 'src/Deku/Create.purs',
           GENERATE_CREATETS: 'src/Deku/CreateT.purs',
           GENERATE_CHANGES: 'src/Deku/Change.purs',
-          GENERATE_PATCHES: 'src/Deku/Patch.purs',
-          GENERATE_VALIDATION: 'src/Deku/Validation.purs',
+          GENERATE_CREATESGTS: 'src/Deku/Patch.purs',
           GENERATE_ATTR_DECL: 'src/Deku/Graph/DOM.purs',
           GENERATE_ATTR_DEFS: 'src/Deku/Graph/DOM.purs',
           GENERATE_SHORTHAND: 'src/Deku/Graph/DOM/Shorthand.purs'
@@ -175,7 +174,7 @@ instance reify{typ} :: ReifyAU {term} {typ} where
   change' ptr w = unsafeChange' ptr i value
     where
     {{ context: i, value }} = unsafeUnDOM w''')
-    elif CODEGEN_TARGET == GENERATE_PATCHES:
+    elif CODEGEN_TARGET == GENERATE_CREATESGTS:
         for x in TAGS:
             term = bigtag(x)
             typ = 'T'+term
@@ -233,6 +232,7 @@ instance toGraphEffectsMake{term} ::
 
 if __name__ == '__main__':
     for z in range(10):
+      if z == GENERATE_NOOP: continue
       o = cg(z)
       with open(CG_MAP[z], 'r') as rf:
         i = rf.read().split('\n')

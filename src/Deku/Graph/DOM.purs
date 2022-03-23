@@ -25,10 +25,6 @@ module Deku.Graph.DOM
   , XSubgraph
   , xsubgraph
   , unsafeUnXSubgraph
-  , Tumult
-  , TTumult
-  , tumult
-  , unsafeUnTumult
   -- codegen 7
   , Accept(..)
   , AcceptCharset(..)
@@ -872,12 +868,9 @@ import Data.Tuple.Nested ((/\), type (/\))
 import Data.Hashable (hash, class Hashable)
 import Data.Maybe (Maybe)
 import Data.Monoid.Additive (Additive)
-import Data.Symbol (class IsSymbol, reflectSymbol)
 import Deku.Control.Types (Frame0, SubScene)
 import Deku.Graph.Attribute (Attribute, Cb, cb', prop', unsafeAttribute)
 import Deku.Interpret (class DOMInterpret)
-import Deku.Tumult (Tumultuous)
-import Type.Proxy (Proxy(..))
 import Web.DOM as Web.DOM
 
 class TypeToSym (a :: Type) (b :: Symbol) | a -> b
@@ -950,49 +943,47 @@ text = Element
 
 --
 
-type SubgraphSig index terminus env push =
+type SubgraphSig index env push =
   forall dom engine
    . DOMInterpret dom engine
   => index
-  -> SubScene terminus env dom engine Frame0 push (Additive Int)
+  -> SubScene env dom engine Frame0 push (Additive Int)
 
-type ResolvedSubgraphSig terminus env push =
+type ResolvedSubgraphSig env push =
   forall dom engine
    . DOMInterpret dom engine
-  => SubScene terminus env dom engine Frame0 push (Additive Int)
+  => SubScene env dom engine Frame0 push (Additive Int)
 
-newtype AsSubgraph index terminus env push = AsSubgraph
+newtype AsSubgraph index env push = AsSubgraph
   ( forall dom engine
      . DOMInterpret dom engine
     => index
-    -> SubScene terminus env dom engine Frame0 push (Additive Int)
+    -> SubScene env dom engine Frame0 push (Additive Int)
   )
 
 unAsSubGraph
-  :: forall index terminus env push
-   . AsSubgraph index terminus env push
+  :: forall index env push
+   . AsSubgraph index env push
   -> ( forall dom engine
         . DOMInterpret dom engine
        => index
-       -> SubScene terminus env dom engine Frame0 push (Additive Int)
+       -> SubScene env dom engine Frame0 push (Additive Int)
      )
 unAsSubGraph (AsSubgraph sg) = sg
 
-type Subgraph' index terminus env push =
-  ( subgraphMaker :: AsSubgraph index terminus env push
+type Subgraph' index env push =
+  ( subgraphMaker :: AsSubgraph index env push
   , envs :: Array { index :: index, pos :: Int, env :: Maybe env }
-  , terminus :: String
   )
-newtype Subgraph index terminus env push = Subgraph
-  { | Subgraph' index terminus env push }
+newtype Subgraph index env push = Subgraph
+  { | Subgraph' index env push }
 
 subgraph
-  :: forall index terminus env push
-   . IsSymbol terminus
-  => Hashable index
+  :: forall index env push
+   . Hashable index
   => Map index (Maybe env)
-  -> AsSubgraph index terminus env push
-  -> Element (Subgraph index terminus env push) ()
+  -> AsSubgraph index env push
+  -> Element (Subgraph index env push) ()
 subgraph envs subgraphMaker =
   Element
     { element: Subgraph
@@ -1005,15 +996,14 @@ subgraph envs subgraphMaker =
             )
             (Map.toUnfoldable envs)
         , subgraphMaker
-        , terminus: reflectSymbol (Proxy :: _ terminus)
         }
     , children: {}
     }
 
 unsafeUnSubgraph
-  :: forall index terminus env push
-   . Subgraph index terminus env push
-  -> { | Subgraph' index terminus env push }
+  :: forall index env push
+   . Subgraph index env push
+  -> { | Subgraph' index env push }
 unsafeUnSubgraph (Subgraph unsafe) = unsafe
 
 type XSubgraph' index env =
@@ -1044,38 +1034,10 @@ xsubgraph envs = XSubgraph
   }
 
 instance typeToSymSubgraph ::
-  TypeToSym (Subgraph index terminus env push) "Subgraph"
+  TypeToSym (Subgraph index env push) "Subgraph"
 
 instance typeToSymXSubgraph ::
   TypeToSym (XSubgraph index envs) "Subgraph"
-
-type Tumult' (terminus :: Symbol) =
-  ( tumult :: Tumultuous terminus
-  , terminus :: String
-  )
-newtype Tumult terminus = Tumult
-  { | Tumult' terminus }
-
-tumult
-  :: forall terminus
-   . IsSymbol terminus
-  => Tumultuous terminus
-  -> Element (Tumult terminus) ()
-tumult tumultuous = Element
-  { element: Tumult
-      { terminus: reflectSymbol (Proxy :: _ terminus)
-      , tumult: tumultuous
-      }
-  , children: {}
-  }
-
-unsafeUnTumult
-  :: forall terminus
-   . Tumult terminus
-  -> { | Tumult' terminus }
-unsafeUnTumult (Tumult unsafe) = unsafe
-
-instance typeToSymTumult :: TypeToSym (Tumult terminus) "Tumult"
 
 class ReifyAU a b | a -> b where
   reifyAU :: a -> b
@@ -1083,34 +1045,19 @@ class ReifyAU a b | a -> b where
 
 -- | Type-level constructor for a subgraph.
 data TSubgraph
-  (terminus :: Symbol)
   (env :: Type) = TSubgraph
 
 instance typeToSymTSubgraph ::
-  TypeToSym (TSubgraph terminus env) "TSubgraph"
+  TypeToSym (TSubgraph env) "TSubgraph"
 
-instance semigroupTSubgraph :: Semigroup (TSubgraph terminus env) where
+instance semigroupTSubgraph :: Semigroup (TSubgraph env) where
   append _ _ = TSubgraph
 
-instance monoidTSubgraph :: Monoid (TSubgraph terminus env) where
+instance monoidTSubgraph :: Monoid (TSubgraph env) where
   mempty = TSubgraph
 
 instance reifyTSubgraph ::
-  ReifyAU (Subgraph index terminus env push) (TSubgraph terminus env) where
-  reifyAU = const mempty
-
--- | Type-level constructor for a subgraph.
-data TTumult (terminus :: Symbol) = TTumult
-
-instance typeToSymTTumult :: TypeToSym (TTumult terminus) "TTumult"
-
-instance semigroupTTumult :: Semigroup (TTumult terminus) where
-  append _ _ = TTumult
-
-instance monoidTTumult :: Monoid (TTumult terminus) where
-  mempty = TTumult
-
-instance reifyTTumult :: ReifyAU (Tumult terminus) (TTumult x) where
+  ReifyAU (Subgraph index env push) (TSubgraph env) where
   reifyAU = const mempty
 
 data TText = TText
