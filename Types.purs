@@ -21,3 +21,5 @@ instance showPage :: Show Page where
 
 instance Hashable Page where
   hash = show >>> hash
+
+data DeviceType = Tablet | Mobile | Desktop

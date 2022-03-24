@@ -11,8 +11,8 @@ import Data.Tuple (fst, snd)
 import Data.Tuple.Nested ((/\))
 import Deku.Change (change)
 import Deku.Control.Functions (freeze, u, (%>))
-import Deku.Example.Docs.Types (Page(..))
-import Deku.Example.Docs.Util (scrollToTop)
+import Deku.Example.Docs.Types (DeviceType, Page(..))
+import Deku.Example.Docs.Util (cot, scrollToTop)
 import Deku.Graph.Attribute (cb)
 import Deku.Graph.DOM (AsSubgraph(..), ResolvedSubgraphSig, SubgraphSig, subgraph, xsubgraph, (:=))
 import Deku.Graph.DOM (ResolvedSubgraphSig, SubgraphSig, subgraph, (:=))
@@ -30,18 +30,18 @@ instance Show Sgs where
 instance Hashable Sgs where
   hash = show >>> hash
 
-sub :: (Sgs -> Effect Unit) -> SubgraphSig Sgs Unit Unit
-sub raise Sg0 =
+sub :: DeviceType -> (Sgs -> Effect Unit) -> SubgraphSig Sgs Unit Unit
+sub dt raise Sg0 =
   ( \_ push ->
       S.div []
         ( { div1: D.div []
               { button0: D.button
-                  [ D.OnClick := cb (const $ raise Sg0)
+                  [ cot dt $ cb (const $ raise Sg0)
                   ]
                   (S.text "Send to B")
               , count0: D.div [] (S.text ("A: 0"))
               , button1: D.button
-                  [ D.OnClick := cb (const $ push unit)
+                  [ cot dt $ cb (const $ push unit)
                   ]
                   (S.text "Send to C")
               , count1: D.div [] (S.text ("C: 0"))
@@ -65,19 +65,19 @@ sub raise Sg0 =
         change
           { "div.div1.count1.t": "C: " <> show (snd new)
           } $> new
-sub raise Sg1 =
+sub dt raise Sg1 =
   ( \_ push ->
       S.div []
         ( { div1: D.div []
               { button0: D.a
-                  [ D.OnClick := cb (const $ raise Sg1)
+                  [ cot dt $ cb (const $ raise Sg1)
                   , D.Style := "cursor:pointer;"
 
                   ]
                   (S.text "Send to A")
               , count0: D.div [] (S.text "B: 0")
               , button1: D.a
-                  [ D.OnClick := cb (const $ push unit)
+                  [ cot dt $ cb (const $ push unit)
                   , D.Style := "cursor:pointer;"
 
                   ]
@@ -103,8 +103,8 @@ sub raise Sg1 =
           { "div.div1.count1.t": "D: " <> show (snd new)
           } $> new
 
-sg :: SubgraphSig Int Unit Sgs
-sg _ =
+sg :: DeviceType -> SubgraphSig Int Unit Sgs
+sg dt _ =
   ( \_ push ->
       u $ S.div []
         { sub:
@@ -112,7 +112,7 @@ sg _ =
               ( insert Sg0 (pure unit)
                   $ singleton Sg1 (pure unit)
               )
-              (AsSubgraph (sub push))
+              (AsSubgraph (sub dt push))
         }
 
   ) %> \e _ -> case e of
@@ -124,8 +124,8 @@ sg _ =
       { "div.sub": xsubgraph (singleton Sg0 (pure unit))
       }
 
-subgraphs :: (Page -> Effect Unit) -> ResolvedSubgraphSig Unit Unit
-subgraphs dpage =
+subgraphs :: DeviceType -> (Page -> Effect Unit) -> ResolvedSubgraphSig Unit Unit
+subgraphs dt dpage =
   ( \_ _ ->
       u
         { head: D.div []
@@ -318,13 +318,13 @@ main = do
                           )
                         /\ D.blockquote []
                           { example: subgraph (singleton 0 (Just unit))
-                              (AsSubgraph sg)
+                              (AsSubgraph (sg dt))
                           }
                         /\ D.h2 [] (S.text "Why subgraphs are fast")
                         /\ D.p []
                           ( detup $ D.text "In the "
                               /\ D.a
-                                [ D.OnClick := cb
+                                [ cot dt $ cb
                                     ( const $ dpage Events *>
                                         scrollToTop
                                     )
@@ -514,7 +514,7 @@ main = do
                                   D.text
                                     "In addition to webpage rendering, Deku supports basic server-side rendering capabilities. Let's see how in the "
                                     /\ D.a
-                                      [ D.OnClick := cb
+                                      [ cot dt $ cb
                                           ( const $ dpage SSR *>
                                               scrollToTop
                                           )

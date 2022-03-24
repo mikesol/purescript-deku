@@ -12,8 +12,8 @@ import Data.Maybe (Maybe(..))
 import Data.Tuple.Nested ((/\))
 import Deku.Change (change)
 import Deku.Control.Functions (freeze, u, (%>))
-import Deku.Example.Docs.Types (Page(..))
-import Deku.Example.Docs.Util (scrollToTop)
+import Deku.Example.Docs.Types (DeviceType, Page(..))
+import Deku.Example.Docs.Util (cot, scrollToTop)
 import Deku.Graph.Attribute (Cb, cb)
 import Deku.Graph.DOM (AsSubgraph(..), ResolvedSubgraphSig, SubgraphSig, myNameIs, subgraph, (:=))
 import Deku.Graph.DOM as D
@@ -24,8 +24,8 @@ import Effect.Aff (launchAff_)
 import Effect.Class (liftEffect)
 import Type.Proxy (Proxy(..))
 
-effects :: (Page -> Effect Unit) -> ResolvedSubgraphSig Unit Unit
-effects dpage =
+effects :: DeviceType -> (Page -> Effect Unit) -> ResolvedSubgraphSig Unit Unit
+effects dt dpage =
   ( \_ _ -> u
       { head: D.div []
           { header: D.header []
@@ -171,7 +171,7 @@ main = do
                         )
                       /\ D.blockquote []
                         { example: subgraph (singleton 0 (Just unit))
-                            (AsSubgraph sg)
+                            (AsSubgraph (sg dt))
                         }
                       /\ D.h2 [] (S.text "Arbitrary effects")
                       /\ D.p []
@@ -197,7 +197,7 @@ main = do
                                   """In more complicated apps, like this documentation, we'll want to split up our components into sub-components and create a way for them to communicate back and forth. In the next section, we'll see one way to do this via """
                               )
                               /\ D.a
-                                [ D.OnClick := cb
+                                [ cot dt $ cb
                                     ( const $ dpage Subgraph *>
                                         scrollToTop
                                     )
@@ -236,13 +236,13 @@ clickCb push = cb
             stringifyWithIndent 2 response.body
   )
 
-sg :: SubgraphSig Int Unit (Either Unit String)
-sg _ =
+sg :: DeviceType -> SubgraphSig Int Unit (Either Unit String)
+sg dt _ =
   ( \_ push ->
       S.div []
         ( { div1: D.div []
               { button: myNameIs (Proxy :: Proxy "bttn") $ D.button
-                  [ D.OnClick := clickCb push ]
+                  [ cot dt $ clickCb push ]
                   (D.myNameIs' (Proxy :: _ "textToShow") (D.text "Click to get some random user data."))
               }
           , div2: D.div [ D.Style := "display: none;" ]
@@ -255,7 +255,7 @@ sg _ =
       change
         { "textToShow": "Loading..."
         , "bttn":
-            D.button'attr [ D.OnClick := cb (const $ pure unit) ]
+            D.button'attr [ cot dt $ cb (const $ pure unit) ]
         } $> (push /\ started)
     Right (Right str) ->
       when (not started)
@@ -268,6 +268,6 @@ sg _ =
           , "textToShow":
               "Click to get some random user data."
           , "bttn":
-              D.button'attr [ D.OnClick := clickCb push ]
+              D.button'attr [ cot dt $ clickCb push ]
           }
         $> (push /\ true)

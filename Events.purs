@@ -9,8 +9,8 @@ import Data.Maybe (Maybe(..))
 import Data.Tuple.Nested ((/\))
 import Deku.Change (change)
 import Deku.Control.Functions (freeze, u, (%>))
-import Deku.Example.Docs.Types (Page(..))
-import Deku.Example.Docs.Util (scrollToTop)
+import Deku.Example.Docs.Types (DeviceType, Page(..))
+import Deku.Example.Docs.Util (cot, scrollToTop)
 import Deku.Graph.Attribute (cb)
 import Deku.Graph.DOM (AsSubgraph(..), ResolvedSubgraphSig, SubgraphSig, subgraph, (:=))
 import Deku.Graph.DOM as D
@@ -21,8 +21,8 @@ import Web.DOM.Element (fromEventTarget)
 import Web.Event.Event (target)
 import Web.HTML.HTMLInputElement (fromElement, valueAsNumber)
 
-events :: (Page -> Effect Unit) -> ResolvedSubgraphSig Unit Unit
-events dpage =
+events :: DeviceType -> (Page -> Effect Unit) -> ResolvedSubgraphSig Unit Unit
+events dt dpage =
   ( \_ _ ->
       u
         { head: D.div []
@@ -149,7 +149,7 @@ main = do
                           )
                         /\ D.blockquote []
                           { example: subgraph (singleton 0 (Just unit))
-                              (AsSubgraph sg)
+                              (AsSubgraph (sg dt))
                           }
                         /\ D.h2 [] (S.text "Event handling")
                         /\ D.p []
@@ -267,7 +267,7 @@ main = do
                                 /\ D.text
                                   ". In the next section, we'll use a similar mechanism to deal with arbitrary "
                                 /\ D.a
-                                  [ D.OnClick := cb
+                                  [ cot dt $ cb
                                       ( const $ dpage Effects *>
                                           scrollToTop
                                       )
@@ -286,13 +286,13 @@ main = do
   ) %> freeze
 
 data UIEvents = ButtonClicked | SliderMoved Number
-sg :: SubgraphSig Int Unit UIEvents
-sg _ =
+sg :: DeviceType -> SubgraphSig Int Unit UIEvents
+sg dt _ =
   ( \_ push ->
       S.div []
         ( { div1: D.div []
               { button: D.button
-                  [ D.OnClick := cb (const $ push ButtonClicked)
+                  [ cot dt $ cb (const $ push ButtonClicked)
                   ]
                   (S.text "Click")
               , count: D.div [] (S.text "Val: 0")
