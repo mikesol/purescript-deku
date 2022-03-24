@@ -1,6 +1,5 @@
 module Deku.Example.Docs where
 
-import Deku.Example.Docs.Types (Page(..))
 import Prelude
 
 import Data.Either (Either(..))
@@ -19,6 +18,8 @@ import Deku.Example.Docs.Intro as Intro
 import Deku.Example.Docs.SSR as SSR
 import Deku.Example.Docs.SimpleComponent as SimpleComponent
 import Deku.Example.Docs.Subgraphs as Subgraph
+import Deku.Example.Docs.Types (DeviceType(..), Page(..))
+import Deku.Example.Docs.Util (cot)
 import Deku.Graph.Attribute (cb)
 import Deku.Graph.DOM (AsSubgraph(..), SubgraphSig, subgraph, (:=))
 import Deku.Graph.DOM as D
@@ -36,8 +37,9 @@ import Web.HTML.Window (document)
 
 scene
   :: WEB.DOM.Element
+  -> DeviceType
   -> Scene (TriggeredScene Unit Unit) RunDOM RunEngine Frame0 Page Unit
-scene elt =
+scene elt dt =
   ( \_ push ->
       D.root elt
         { main: D.main []
@@ -49,7 +51,7 @@ scene elt =
                             ( \(x /\ y /\ z) -> D.span []
                                 ( detup $
                                     D.a
-                                      [ D.OnClick := cb (const $ push x)
+                                      [ cot dt $ cb (const $ push x)
                                       , D.Style := "cursor:pointer;"
                                       ]
                                       (S.text y)
@@ -100,21 +102,24 @@ scene elt =
                 }
           )
     )
+  where
+  page :: (Page -> Effect Unit) -> SubgraphSig Page Unit Unit
+  page dpage Intro = Intro.intro dpage
+  page dpage HelloWorld = HelloWorld.helloWorld dpage
+  page dpage SimpleComponent = SimpleComponent.simpleComponent dpage
+  page dpage Events = Events.events dt dpage
+  page dpage Effects = Effects.effects dt dpage
+  page dpage SSR = SSR.serverSide dpage
+  page dpage Subgraph = Subgraph.subgraphs dt dpage
 
-page :: (Page -> Effect Unit) -> SubgraphSig Page Unit Unit
-page dpage Intro = Intro.intro dpage
-page dpage HelloWorld = HelloWorld.helloWorld dpage
-page dpage SimpleComponent = SimpleComponent.simpleComponent dpage
-page dpage Events = Events.events dpage
-page dpage Effects = Effects.effects dpage
-page dpage SSR = SSR.serverSide dpage
-page dpage Subgraph = Subgraph.subgraphs dpage
+foreign import getDeviceType :: DeviceType -> DeviceType -> DeviceType -> Effect DeviceType
 
 main :: Effect Unit
 main = do
+  dt <- getDeviceType Tablet Mobile Desktop
   b' <- window >>= document >>= body
   for_ (toElement <$> b') \b -> do
     ffi <- makeFFIDOMSnapshot
     subscribe
-      (run (pure unit) (pure unit) defaultOptions ffi (scene b))
+      (run (pure unit) (pure unit) defaultOptions ffi (scene b dt))
       (\_ -> pure unit)
