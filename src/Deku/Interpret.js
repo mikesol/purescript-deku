@@ -314,7 +314,10 @@ exports.massiveCreate_ = function ($unSubgraph) {
 							return function (a) {
 								return function (state) {
 									return function () {
-										state.terminalPtrs = [];
+										// if we have pursx, it may call massiveCreate internally again, in which case we don't want to reset this
+										if (!state.terminalPtrs) {
+											state.terminalPtrs = [];
+										}
 										massiveCreateCreateStep_(prefix === null)(
 											prefix === null ? "" : prefix
 										)($unSubgraph)($makeSubgraph)($makeRoot)($makeElement)(

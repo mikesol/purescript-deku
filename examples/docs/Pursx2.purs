@@ -38,7 +38,7 @@ pursx2 dpage =
                         )
                         /\ D.p []
                         ( S.text
-                            """The example below is the same one from the Pursx 1 section with two differences. The first is that the color of the second list item is set dynamically. The second is that there is a new button that is dynamically inserted."""
+                            """The example below is the same one from the Pursx 1 section with two differences. The first is that the background color of the second list item is set dynamically. The second is that there is a new button that is dynamically inserted."""
                         )
                         /\
                           ( D.pre []
@@ -93,7 +93,7 @@ scene elt =
         </div>
         <div><div></div><div><input type="range"/></div></div>
       </div>
-      """ <> "\"\"\"" <> """) ~! {myli: D.li'attr [D.Style := "color:0x2fefef;"]
+      """ <> "\"\"\"" <> """) ~! {myli: D.li'attr [D.Style := "background-color:rgb(200,240,210);"]
       , somethingNew: D.button [D.OnClick := cb (const $ push unit)] (S.text "I was dynamically inserted")
       }
       )
@@ -138,7 +138,7 @@ main = do
         </div>
         <div><div></div><div><input type="range"/></div></div>
       </div>
-      """) ~! {myli: D.li'attr [D.Style := "color:0x2fefef;"]
+      """) ~! {myli: D.li'attr [D.Style := "background-color:rgb(200,240,210);"]
       , somethingNew: D.button [D.OnClick := cb (const $ push unit)] (S.text "I was dynamically inserted")}))
                         /\ D.h2 [] (S.text "Dynamism in static content")
                         /\ D.p []
