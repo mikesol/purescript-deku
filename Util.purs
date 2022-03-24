@@ -14,5 +14,6 @@ scrollToTop :: Effect Unit
 scrollToTop = scrollToTop_
 
 cot :: forall attr. DeviceType -> Cb -> Attribute attr
-cot Desktop cb = D.OnClick := cb
-cot _ cb = D.OnTouchstart := cb
+cot _ cb = D.OnClick := cb
+-- can do this eventually
+--cot _ cb = D.OnTouchstart := cb

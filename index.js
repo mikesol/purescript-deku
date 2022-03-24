@@ -6447,13 +6447,6 @@ var PS = {};
   var P_ = function (x) {
       return x;
   };   
-  var OnTouchstart = (function () {
-      function OnTouchstart() {
-
-      };
-      OnTouchstart.value = new OnTouchstart();
-      return OnTouchstart;
-  })();
   var OnInput = (function () {
       function OnInput() {
 
@@ -6532,16 +6525,6 @@ var PS = {};
               return Deku_Graph_Attribute.unsafeAttribute({
                   key: "style",
                   value: Deku_Graph_Attribute["prop'"](value)
-              });
-          };
-      }
-  };
-  var attrOnTouchstartCb = {
-      attr: function (v) {
-          return function (value) {
-              return Deku_Graph_Attribute.unsafeAttribute({
-                  key: "touchstart  ",
-                  value: Deku_Graph_Attribute["cb'"](value)
               });
           };
       }
@@ -6761,7 +6744,6 @@ var PS = {};
   exports["Xtype"] = Xtype;
   exports["OnClick"] = OnClick;
   exports["OnInput"] = OnInput;
-  exports["OnTouchstart"] = OnTouchstart;
   exports["a"] = a;
   exports["blockquote"] = blockquote;
   exports["button"] = button;
@@ -6789,7 +6771,6 @@ var PS = {};
   exports["attrInput_XtypeString"] = attrInput_XtypeString;
   exports["attrOnClickCb"] = attrOnClickCb;
   exports["attrOnInputCb"] = attrOnInputCb;
-  exports["attrOnTouchstartCb"] = attrOnTouchstartCb;
 })(PS);
 (function(exports) {
   var makeid = function (length) {
@@ -8847,15 +8828,11 @@ var PS = {};
   $PS["Deku.Example.Docs.Util"] = $PS["Deku.Example.Docs.Util"] || {};
   var exports = $PS["Deku.Example.Docs.Util"];
   var $foreign = $PS["Deku.Example.Docs.Util"];
-  var Deku_Example_Docs_Types = $PS["Deku.Example.Docs.Types"];
   var Deku_Graph_DOM = $PS["Deku.Graph.DOM"];                
   var scrollToTop = $foreign.scrollToTop_;
   var cot = function (v) {
       return function (cb) {
-          if (v instanceof Deku_Example_Docs_Types.Desktop) {
-              return Deku_Graph_DOM.attr(Deku_Graph_DOM.attrOnClickCb)(Deku_Graph_DOM.OnClick.value)(cb);
-          };
-          return Deku_Graph_DOM.attr(Deku_Graph_DOM.attrOnTouchstartCb)(Deku_Graph_DOM.OnTouchstart.value)(cb);
+          return Deku_Graph_DOM.attr(Deku_Graph_DOM.attrOnClickCb)(Deku_Graph_DOM.OnClick.value)(cb);
       };
   };
   exports["scrollToTop"] = scrollToTop;
