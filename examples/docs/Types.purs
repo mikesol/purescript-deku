@@ -9,6 +9,8 @@ data Page
   = Intro
   | HelloWorld
   | SimpleComponent
+  | PURSX1
+  | PURSX2
   | Events
   | Effects
   | Subgraph

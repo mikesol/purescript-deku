@@ -18,18 +18,24 @@ import Web.DOM as Web.DOM
 
 newtype ToCreate = ToCreate Foreign
 newtype ToChange = ToChange Foreign
+newtype PursxRec = PursxRec Foreign
 instance Eq ToCreate where
   eq = eq `on` show
 instance Ord ToCreate where
   compare = compare `on` show
 instance Eq ToChange where
   eq = eq `on` show
+instance Ord PursxRec where
+  compare = compare `on` show
+instance Eq PursxRec where
+  eq = eq `on` show
 instance Ord ToChange where
   compare = compare `on` show
-
 instance showToCreate :: Show ToCreate where
   show = JSON.writeJSON
 instance showToChange :: Show ToChange where
+  show = JSON.writeJSON
+instance showPursxRec :: Show PursxRec where
   show = JSON.writeJSON
 
 instance writeJSONToCreate :: JSON.WriteForeign ToCreate where
@@ -41,6 +47,11 @@ instance writeJSONToChange :: JSON.WriteForeign ToChange where
   writeImpl (ToChange tc) = JSON.writeImpl tc
 instance readJSONToChange :: JSON.ReadForeign ToChange where
   readImpl tc = ToChange <$> JSON.readImpl tc
+
+instance writeJSONPursxRec :: JSON.WriteForeign PursxRec where
+  writeImpl (PursxRec px) = JSON.writeImpl px
+instance readJSONPursxRec :: JSON.ReadForeign PursxRec where
+  readImpl px = PursxRec <$> JSON.readImpl px
 
 newtype RootDOMElement = RootDOMElement Web.DOM.Element
 instance Eq RootDOMElement where
@@ -65,6 +76,7 @@ type MakeElement =
   , tag :: String
   , attributes :: Array { key :: String, value :: AttributeValue }
   }
+type MakePursx = { id :: String, html :: String, verb :: String, r :: PursxRec }
 type MakeText = { id :: String, text :: String }
 type MakeRoot = { id :: String, root :: RootDOMElement }
 type MakeSubgraph =
@@ -93,6 +105,7 @@ type Instruction' =
   ( disconnectXFromY :: DisconnectXFromY
   , destroyUnit :: DestroyUnit
   , massiveCreate :: MassiveCreate
+  , makePursx :: MakePursx
   , makeElement :: MakeElement
   , makeText :: MakeText
   , makeRoot :: MakeRoot
@@ -111,6 +124,7 @@ instructionWeight (Instruction v) = v # match
   { disconnectXFromY: const 0
   , destroyUnit: const 1
   , makeRoot: const 2
+  , makePursx: const 2
   , makeElement: const 2
   , massiveCreate: const 2
   , makeText: const 2
@@ -127,6 +141,7 @@ instructionId (Instruction v) = v # match
   { disconnectXFromY: _.fromId >>> Just
   , destroyUnit: _.id >>> Just
   , makeElement: _.id >>> Just
+  , makePursx: _.id >>> Just
   , makeText: _.id >>> Just
   , makeRoot: _.id >>> Just
   , makeSubgraph: _.id >>> Just
@@ -174,6 +189,9 @@ iMakeElement = Instruction <<< inj (Proxy :: Proxy "makeElement")
 
 iMakeSubgraph :: MakeSubgraph -> Instruction
 iMakeSubgraph = Instruction <<< inj (Proxy :: Proxy "makeSubgraph")
+
+iMakePursx :: MakePursx -> Instruction
+iMakePursx = Instruction <<< inj (Proxy :: Proxy "makePursx")
 
 iMassiveCreate :: MassiveCreate -> Instruction
 iMassiveCreate = Instruction <<< inj (Proxy :: Proxy "massiveCreate")

@@ -15,6 +15,8 @@ import Deku.Example.Docs.Effects as Effects
 import Deku.Example.Docs.Events as Events
 import Deku.Example.Docs.HelloWorld as HelloWorld
 import Deku.Example.Docs.Intro as Intro
+import Deku.Example.Docs.Pursx1 as Pursx1
+import Deku.Example.Docs.Pursx2 as Pursx2
 import Deku.Example.Docs.SSR as SSR
 import Deku.Example.Docs.SimpleComponent as SimpleComponent
 import Deku.Example.Docs.Subgraphs as Subgraph
@@ -69,10 +71,14 @@ scene elt dt =
                             /\ "Hello world"
                             /\ true +> SimpleComponent
                             /\ "Component"
+                            /\ true +> PURSX1
+                            /\ "Pursx 1"
                             /\ true +> Events
                             /\ "Events"
                             /\ true +> Effects
                             /\ "Effects"
+                            /\ true +> PURSX2
+                            /\ "Pursx 2"
                             /\ true +> Subgraph
                             /\ "Subgraphs"
                             /\ true +> SSR
@@ -107,6 +113,8 @@ scene elt dt =
   page dpage Intro = Intro.intro dpage
   page dpage HelloWorld = HelloWorld.helloWorld dpage
   page dpage SimpleComponent = SimpleComponent.simpleComponent dpage
+  page dpage PURSX1 = Pursx1.pursx1 dpage
+  page dpage PURSX2 = Pursx2.pursx2 dpage
   page dpage Events = Events.events dt dpage
   page dpage Effects = Effects.effects dt dpage
   page dpage SSR = SSR.serverSide dpage
