@@ -58,8 +58,10 @@ instance getSeparatorBlank :: GetSeparator "" ""
 else instance getSeparator :: GetSeparator anything "."
 
 class GetNodeEdges i tf pfx node edges | i -> tf pfx node edges
-instance getNodeEdgesElement :: GetNodeEdges (Element node edges) False "" node edges
-instance getNodeEdgesMyNameIs :: GetNodeEdges (CTOR.MyNameIs px (Element node edges)) True px node edges
+instance getNodeEdgesElement ::
+  GetNodeEdges (Element node edges) False "" node edges
+instance getNodeEdgesMyNameIs ::
+  GetNodeEdges (CTOR.MyNameIs px (Element node edges)) True px node edges
 
 instance createSGStepRLTCons ::
   ( R.Cons key val ignore r
@@ -103,7 +105,7 @@ instance connectAfterCreateSGTNil ::
   ConnectAfterCreateSGT prefix RL.Nil graph0 graph0
 
 instance connectAfterCreateSGTCons ::
-  (   GetNodeEdges val tf pfx node edges
+  ( GetNodeEdges val tf pfx node edges
   , GetSeparator prefix separator
   , Sym.Append prefix separator prefixA
   , Sym.Append prefixA sym fullPath'

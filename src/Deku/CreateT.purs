@@ -58,8 +58,10 @@ instance getSeparatorBlank :: GetSeparator "" ""
 else instance getSeparator :: GetSeparator anything "."
 
 class GetNodeEdges i tf pfx node edges | i -> tf pfx node edges
-instance getNodeEdgesElement :: GetNodeEdges (Element node edges) False "" node edges
-instance getNodeEdgesMyNameIs :: GetNodeEdges (CTOR.MyNameIs px (Element node edges)) True px node edges
+instance getNodeEdgesElement ::
+  GetNodeEdges (Element node edges) False "" node edges
+instance getNodeEdgesMyNameIs ::
+  GetNodeEdges (CTOR.MyNameIs px (Element node edges)) True px node edges
 
 instance createStepRLTCons ::
   ( R.Cons key val ignore r

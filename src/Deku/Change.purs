@@ -5,9 +5,8 @@ import Prelude
 import Data.Symbol (class IsSymbol, reflectSymbol)
 import Deku.Control.Monadic (MDOM(..))
 import Deku.Control.Types (DOM, DOMState', unsafeDOM, unsafeUnDOM)
-import Deku.Debug (type (^^))
 import Deku.Graph.Attribute (Attribute, AttributeValue, unsafeUnAttribute)
-import Deku.Graph.DOM (Text, unsafeUnSubgraph, unsafeUnText)
+import Deku.Graph.DOM (unsafeUnSubgraph)
 import Deku.Graph.DOM as CTOR
 import Deku.Graph.Graph (Graph)
 import Deku.Graph.Node (NodeC)

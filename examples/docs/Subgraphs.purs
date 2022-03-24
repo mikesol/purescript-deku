@@ -4,8 +4,7 @@ import Prelude
 
 import Data.Either (Either(..))
 import Data.Hashable (class Hashable, hash)
-import Data.Map (insert, singleton)
-import Data.Map (singleton)
+import Data.Map (insert, singleton, singleton)
 import Data.Maybe (Maybe(..))
 import Data.Tuple (fst, snd)
 import Data.Tuple.Nested ((/\))
@@ -15,7 +14,6 @@ import Deku.Example.Docs.Types (DeviceType, Page(..))
 import Deku.Example.Docs.Util (cot, scrollToTop)
 import Deku.Graph.Attribute (cb)
 import Deku.Graph.DOM (AsSubgraph(..), ResolvedSubgraphSig, SubgraphSig, subgraph, xsubgraph, (:=))
-import Deku.Graph.DOM (ResolvedSubgraphSig, SubgraphSig, subgraph, (:=))
 import Deku.Graph.DOM as D
 import Deku.Graph.DOM.Shorthand as S
 import Deku.Util (detup)
@@ -30,8 +28,8 @@ instance Show Sgs where
 instance Hashable Sgs where
   hash = show >>> hash
 
-sub :: DeviceType -> (Sgs -> Effect Unit) -> SubgraphSig Sgs Unit Unit
-sub dt raise Sg0 =
+mySub :: DeviceType -> (Sgs -> Effect Unit) -> SubgraphSig Sgs Unit Unit
+mySub dt raise Sg0 =
   ( \_ push ->
       S.div []
         ( { div1: D.div []
@@ -65,7 +63,7 @@ sub dt raise Sg0 =
         change
           { "div.div1.count1.t": "C: " <> show (snd new)
           } $> new
-sub dt raise Sg1 =
+mySub dt raise Sg1 =
   ( \_ push ->
       S.div []
         ( { div1: D.div []
@@ -112,7 +110,7 @@ sg dt _ =
               ( insert Sg0 (pure unit)
                   $ singleton Sg1 (pure unit)
               )
-              (AsSubgraph (sub dt push))
+              (AsSubgraph (mySub dt push))
         }
 
   ) %> \e _ -> case e of
@@ -194,8 +192,8 @@ instance Show Sgs where
 instance Hashable Sgs where
   hash = show >>> hash
 
-sub :: (Sgs -> Effect Unit) -> SubgraphSig Sgs Unit Unit
-sub raise Sg0 =
+mySub :: (Sgs -> Effect Unit) -> SubgraphSig Sgs Unit Unit
+mySub raise Sg0 =
   ( \_ push ->
       S.div []
         ( { div1: D.div []
@@ -229,7 +227,7 @@ sub raise Sg0 =
         change
           { "div.div1.count1.t": "C: " <> show (snd new)
           } $> new
-sub raise Sg1 =
+mySub raise Sg1 =
   ( \_ push ->
       S.div []
         ( { div1: D.div []
@@ -281,7 +279,7 @@ scene elt =
               ( insert Sg0 (pure unit)
                   $ singleton Sg1 (pure unit)
               )
-              (AsSubgraph (sub push))
+              (AsSubgraph (mySub push))
         }
 
   ) @> \e _ -> case e of

@@ -2,7 +2,7 @@ module Deku.Example.Docs.Util where
 
 import Prelude
 
-import Deku.Example.Docs.Types (DeviceType(..))
+import Deku.Example.Docs.Types (DeviceType)
 import Deku.Graph.Attribute (Attribute, Cb)
 import Deku.Graph.DOM ((:=))
 import Deku.Graph.DOM as D

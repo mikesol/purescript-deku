@@ -34,8 +34,8 @@ instance Show Sgs where
 instance Hashable Sgs where
   hash = show >>> hash
 
-sub :: (Sgs -> Effect Unit) -> SubgraphSig Sgs Unit Unit
-sub raise Sg0 =
+mySub :: (Sgs -> Effect Unit) -> SubgraphSig Sgs Unit Unit
+mySub raise Sg0 =
   ( \_ push ->
       S.div []
         ( { div1: D.div []
@@ -69,7 +69,7 @@ sub raise Sg0 =
         change
           { "div.div1.count1.t": "C: " <> show (snd new)
           } $> new
-sub raise Sg1 =
+mySub raise Sg1 =
   ( \_ push ->
       S.div []
         ( { div1: D.div []
@@ -121,7 +121,7 @@ scene elt =
               ( insert Sg0 (pure unit)
                   $ singleton Sg1 (pure unit)
               )
-              (AsSubgraph (sub push))
+              (AsSubgraph (mySub push))
         }
 
   ) @> \e _ -> case e of

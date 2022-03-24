@@ -183,7 +183,9 @@ instance addPrefixToRowListCons1 ::
   ( AddPrefixToRowList sym c x
   , Sym.Append sym a symA
   ) =>
-  AddPrefixToRowList sym (RL.Cons a (Element xx yy) c) (RL.Cons symA (Element xx yy) x)
+  AddPrefixToRowList sym
+    (RL.Cons a (Element xx yy) c)
+    (RL.Cons symA (Element xx yy) x)
 
 instance addPrefixToRowListCons2 ::
   ( AddPrefixToRowList sym c x
@@ -195,7 +197,9 @@ instance addPrefixToRowListCons3 ::
   ( AddPrefixToRowList sym c x
   , Sym.Append sym a symA
   ) =>
-  AddPrefixToRowList sym (RL.Cons a (MyNameIs foo bar) c) (RL.Cons foo (MyNameIs foo bar) x)
+  AddPrefixToRowList sym
+    (RL.Cons a (MyNameIs foo bar) c)
+    (RL.Cons foo (MyNameIs foo bar) x)
 
 instance addPrefixToRowListNil :: AddPrefixToRowList sym RL.Nil RL.Nil
 
