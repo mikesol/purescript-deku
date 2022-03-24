@@ -194,16 +194,16 @@ main = do
                         ( detup $
                             D.span []
                               ( S.text
-                                  """In more complicated apps, like this documentation, we'll want to split up our components into sub-components and create a way for them to communicate back and forth. In the next section, we'll see one way to do this via """
+                                  """It is also possible to handle events (and by extension effectful actions in events, like network calls) in Pursx. Let's see how in  """
                               )
                               /\ D.a
                                 [ cot dt $ cb
-                                    ( const $ dpage Subgraph *>
+                                    ( const $ dpage PURSX2 *>
                                         scrollToTop
                                     )
                                 , D.Style := "cursor:pointer;"
                                 ]
-                                (S.text "subgraphs")
+                                (S.text "the second Pursx section")
                               /\ D.span []
                                 ( S.text "."
                                 )

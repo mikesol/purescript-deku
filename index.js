@@ -2852,6 +2852,7 @@ var PS = {};
   };
   exports["toMaybe"] = toMaybe;
   exports["toNullable"] = toNullable;
+  exports["null"] = $foreign["null"];
 })(PS);
 (function(exports) {
   /* globals setImmediate, clearImmediate, setTimeout, clearTimeout */
@@ -6549,6 +6550,16 @@ var PS = {};
           };
       }
   };
+  var attrLi_StyleString = {
+      attr: function (v) {
+          return function (value) {
+              return Deku_Graph_Attribute.unsafeAttribute({
+                  key: "style",
+                  value: Deku_Graph_Attribute["prop'"](value)
+              });
+          };
+      }
+  };
   var attrInput_XtypeString = {
       attr: function (v) {
           return function (value) {
@@ -6712,7 +6723,8 @@ var PS = {};
   var pre = makeElt(Pre_)("pre");         
   var span = makeElt(Span_)("span");
   var ul = makeElt(Ul_)("ul");                                                
-  var main = makeElt(Main_)("main");                                        
+  var main = makeElt(Main_)("main");
+  var li$primeattr = Control_Category.identity(Control_Category.categoryFn);
   var li = makeElt(Li_)("li");                                                 
   var input = makeElt(Input_)("input");                                    
   var i = makeElt(I_)("i");                                                 
@@ -6759,6 +6771,7 @@ var PS = {};
   exports["i"] = i;
   exports["input"] = input;
   exports["li"] = li;
+  exports["li'attr"] = li$primeattr;
   exports["main"] = main;
   exports["p"] = p;
   exports["pre"] = pre;
@@ -6767,6 +6780,7 @@ var PS = {};
   exports["attrA_HrefString"] = attrA_HrefString;
   exports["attrA_StyleString"] = attrA_StyleString;
   exports["attrDiv_StyleString"] = attrDiv_StyleString;
+  exports["attrLi_StyleString"] = attrLi_StyleString;
   exports["attrSpan_StyleString"] = attrSpan_StyleString;
   exports["attrInput_XtypeString"] = attrInput_XtypeString;
   exports["attrOnClickCb"] = attrOnClickCb;
@@ -6791,8 +6805,6 @@ var PS = {};
 				  return function (stateY) {
 					  return function () {
 						  stateY.units[y].main.appendChild(stateX.units[x].main);
-						  stateX.units[x].outgoing.push({ unit: y, state: stateY });
-						  stateY.units[y].incoming.push({ unit: x, state: stateX });
 					  };
 				  };
 			  };
@@ -6812,16 +6824,6 @@ var PS = {};
 				  return function (stateY) {
 					  return function () {
 						  stateY.units[y].main.removeChild(stateX.units[x].main);
-						  stateX.units[x].outgoing = stateX.units[x].outgoing.filter(
-							  function (i) {
-								  return !(i.unit === y && i.state.unqidfr === stateY.unqidfr);
-							  }
-						  );
-						  stateY.units[y].incoming = stateY.units[y].incoming.filter(
-							  function (i) {
-								  return !(i.unit === x && i.state.unqidfr === stateX.unqidfr);
-							  }
-						  );
 					  };
 				  };
 			  };
@@ -6848,39 +6850,40 @@ var PS = {};
 		  }
 	  };
   };
-  exports.makeElement_ = function (a) {
-	  return function (state) {
-		  return function () {
-			  var ptr = a.id;
-			  state.units[ptr] = {
-				  outgoing: [],
-				  incoming: [],
-				  listeners: {},
-				  main: document.createElement(a.tag),
-			  };
-			  for (var i = 0; i < a.attributes.length; i++) {
-				  if (a.attributes[i].value.type === "cb") {
-					  var atty = a.attributes[i];
-					  var el = (e) => atty.value.value(e)();
-					  state.units[ptr].main.addEventListener(atty.key, el);
-					  state.units[ptr].listeners[a.attributes[i].key] = el;
-				  } else {
-					  state.units[ptr].main.setAttribute(
-						  a.attributes[i].key,
-						  a.attributes[i].value.value
-					  );
+  var makeElement_ = function (eltAlreadyExists) {
+	  return function (a) {
+		  return function (state) {
+			  return function () {
+				  var ptr = a.id;
+				  state.units[ptr] = {
+					  listeners: {},
+					  main: eltAlreadyExists
+						  ? eltAlreadyExists
+						  : document.createElement(a.tag),
+				  };
+				  for (var i = 0; i < a.attributes.length; i++) {
+					  if (a.attributes[i].value.type === "cb") {
+						  var atty = a.attributes[i];
+						  var el = (e) => atty.value.value(e)();
+						  state.units[ptr].main.addEventListener(atty.key, el);
+						  state.units[ptr].listeners[a.attributes[i].key] = el;
+					  } else {
+						  state.units[ptr].main.setAttribute(
+							  a.attributes[i].key,
+							  a.attributes[i].value.value
+						  );
+					  }
 				  }
-			  }
+			  };
 		  };
 	  };
   };
+  exports.makeElement_ = makeElement_(undefined);
   exports.makeText_ = function (a) {
 	  return function (state) {
 		  return function () {
 			  var ptr = a.id;
 			  state.units[ptr] = {
-				  outgoing: [],
-				  incoming: [],
 				  main: document.createElement("span"),
 			  };
 			  state.units[ptr].main.setAttribute("style", "white-space: pre-wrap;");
@@ -6951,8 +6954,6 @@ var PS = {};
 						  var funk = {};
 						  var unsu = {};
 						  state.units[ptr] = {
-							  outgoing: [],
-							  incoming: [],
 							  sceneM: sceneM,
 							  main: document.createElement("div"),
 							  funkyFx: funkyFx,
@@ -7042,19 +7043,80 @@ var PS = {};
 		  };
 	  };
   };
+  var makePursx_ = function ($massiveCreate) {
+	  return function (a) {
+		  return function (state) {
+			  return function () {
+				  var ptr = a.id;
+				  var html = a.html;
+				  var verb = a.verb;
+				  var r = a.r;
+				  var entries = Object.entries(r);
+				  for (var i = 0; i < entries.length; i++) {
+					  var key = entries[i][0];
+					  if (entries[i][1] instanceof Array) {
+						  // it is an attribute
+						  html = html.replace(
+							  verb + key + verb,
+							  "data-deku-attr-internal=" + '"' + key + '"'
+						  );
+					  } else {
+						  html = html.replace(
+							  verb + key + verb,
+							  "<div data-deku-elt-internal=" + '"' + key + '"></div>'
+						  );
+					  }
+				  }
+				  var tmp = document.createElement("div");
+				  tmp.innerHTML = html.trim();
+				  state.units[ptr] = {
+					  listeners: {},
+					  main: tmp.firstChild,
+				  };
+				  tmp.querySelectorAll("[data-deku-attr-internal]").forEach(function (e) {
+					  var key = e.getAttribute("data-deku-attr-internal");
+					  makeElement_(e)({ id: ptr + "." + key, attributes: r[key] })(state)();
+				  });
+				  tmp.querySelectorAll("[data-deku-elt-internal]").forEach(function (e) {
+					  var key = e.getAttribute("data-deku-elt-internal");
+					  var toCreate = {};
+					  toCreate[key] = r[key];
+					  // todo: rename element to root?
+					  $massiveCreate(ptr)({
+						  toCreate: toCreate,
+					  })(state)();
+					  e.appendChild(state.units[ptr + "." + key].main);
+				  });
+			  };
+		  };
+	  };
+  };
+  exports.makePursx_ = makePursx_;
   exports.setSubgraph_ = setSubgraph_;
   exports.massiveCreate_ = function ($unSubgraph) {
 	  return function ($makeSubgraph) {
 		  return function ($makeRoot) {
 			  return function ($makeElement) {
 				  return function ($makeText) {
-					  return function (a) {
-						  return function (state) {
-							  return function () {
-								  state.terminalPtrs = [];
-								  massiveCreateCreateStep_(true)("")($unSubgraph)($makeSubgraph)
-								  ($makeRoot)($makeElement)($makeText)(a)(state)();
-								  massiveCreateConnectStep_("")(a)(state)();
+					  return function ($makePursx) {
+						  return function (prefix) {
+							  return function (a) {
+								  return function (state) {
+									  return function () {
+										  // if we have pursx, it may call massiveCreate internally again, in which case we don't want to reset this
+										  if (!state.terminalPtrs) {
+											  state.terminalPtrs = [];
+										  }
+										  massiveCreateCreateStep_(prefix === null)(
+											  prefix === null ? "" : prefix
+										  )($unSubgraph)($makeSubgraph)($makeRoot)($makeElement)(
+											  $makeText
+										  )($makePursx)(a)(state)();
+										  massiveCreateConnectStep_(prefix === null ? "" : prefix)(a)(
+											  state
+										  )();
+									  };
+								  };
 							  };
 						  };
 					  };
@@ -7069,21 +7131,32 @@ var PS = {};
 			  return function () {
 				  var entries = Object.entries(a.toCreate);
 				  for (var i = 0; i < entries.length; i++) {
-					  var children = Object.entries(entries[i][1].myNameIs !== undefined ? entries[i][1].unMyNameIs.children : entries[i][1].children);
+					  var children = Object.entries(
+						  entries[i][1].myNameIs !== undefined
+							  ? entries[i][1].unMyNameIs.children
+							  : entries[i][1].children
+					  );
 					  for (var j = 0; j < children.length; j++) {
 						  var toId =
 							  entries[i][1].myNameIs !== undefined
 								  ? entries[i][1].myNameIs
 								  : $prefix + ($prefix === "" ? "" : ".") + entries[i][0];
-						  var fromId = children[j][1].myNameIs !== undefined ? children[j][1].myNameIs : toId +
-							  "." +
-							  children[j][0];
+						  var fromId =
+							  children[j][1].myNameIs !== undefined
+								  ? children[j][1].myNameIs
+								  : toId + "." + children[j][0];
 
 						  connectXToY_({
 							  fromId: fromId,
 							  toId: toId,
 						  })(state)();
-						  var child = children[j][1].myNameIs !== undefined ? children[j][1].unMyNameIs : children[j][1];
+						  if (children[j][1].html !== undefined) {
+							  continue;
+						  }
+						  var child =
+							  children[j][1].myNameIs !== undefined
+								  ? children[j][1].unMyNameIs
+								  : children[j][1];
 						  if (child.children !== {}) {
 							  var toCreate = {};
 							  toCreate[children[j][0]] = children[j][1];
@@ -7101,9 +7174,10 @@ var PS = {};
 	  return function ($prefix) {
 		  return function ($unSubgraph) {
 			  return function ($makeSubgraph) {
-					  return function ($makeRoot) {
-						  return function ($makeElement) {
-							  return function ($makeText) {
+				  return function ($makeRoot) {
+					  return function ($makeElement) {
+						  return function ($makeText) {
+							  return function ($makePursx) {
 								  return function (a) {
 									  return function (state) {
 										  return function () {
@@ -7114,9 +7188,11 @@ var PS = {};
 													  // my name is
 													  var toCreate = {};
 													  toCreate[value.myNameIs] = value.unMyNameIs;
-													  massiveCreateCreateStep_($isTerminal)("")($unSubgraph)(
-														  $makeSubgraph
-													  )($makeRoot)($makeElement)($makeText)({
+													  massiveCreateCreateStep_($isTerminal)("")(
+														  $unSubgraph
+													  )($makeSubgraph)($makeRoot)($makeElement)($makeText)(
+														  $makePursx
+													  )({
 														  toCreate: toCreate,
 													  })(state)();
 													  continue;
@@ -7126,7 +7202,14 @@ var PS = {};
 												  if ($isTerminal) {
 													  state.terminalPtrs.push(key);
 												  }
-												  if (value.element.element !== undefined) {
+												  if (value.html !== undefined) {
+													  $makePursx({
+														  id: key,
+														  html: value.html,
+														  verb: value.verb,
+														  r: value.r,
+													  })(state)();
+												  } else if (value.element.element !== undefined) {
 													  // it's a root
 													  $makeRoot({ id: key, root: value.element.element })(
 														  state
@@ -7159,9 +7242,13 @@ var PS = {};
 															  Object.keys(value.element))
 													   ;
 												  }
+												  // do not keep creating if it is html
+												  if (value.html !== undefined) {
+													  continue;
+												  }
 												  massiveCreateCreateStep_(false)(key)($unSubgraph)(
 													  $makeSubgraph
-												  )($makeRoot)($makeElement)($makeText)({
+												  )($makeRoot)($makeElement)($makeText)($makePursx)({
 													  toCreate: value.children,
 												  })(state)();
 											  }
@@ -7171,7 +7258,7 @@ var PS = {};
 							  };
 						  };
 					  };
-
+				  };
 			  };
 		  };
 	  };
@@ -7179,58 +7266,57 @@ var PS = {};
   exports.massiveChange_ = function ($setSubgraph) {
 	  return function ($setAttribute) {
 		  return function ($setText) {
-				  return function (a) {
-					  return function (state) {
-						  return function () {
-							  var entries = Object.entries(a.toCreate);
-							  for (var i = 0; i < entries.length; i++) {
-								  var key = entries[i][0];
-								  var value = entries[i][1];
-								  if (value.element.element !== undefined) {
-									  // it's a root, do nothing
-								  } else if (value.element.tag !== undefined) {
-									  // it's an element
-									  for (var j = 0; j < value.element.attributes.length; j++) {
-										  $setAttribute({
-											  id: key,
-											  key: value.element.attributes[j].key,
-											  value: value.element.attributes[j].value,
-										  })(state)();
-									  }
-								  } else if (value.element.text !== undefined) {
-									  // it's an element
-									  $setText({
+			  return function (a) {
+				  return function (state) {
+					  return function () {
+						  var entries = Object.entries(a.toCreate);
+						  for (var i = 0; i < entries.length; i++) {
+							  var key = entries[i][0];
+							  var value = entries[i][1];
+							  if (value.element.element !== undefined) {
+								  // it's a root, do nothing
+							  } else if (value.element.tag !== undefined) {
+								  // it's an element
+								  for (var j = 0; j < value.element.attributes.length; j++) {
+									  $setAttribute({
 										  id: key,
-										  text: value.element.text,
+										  key: value.element.attributes[j].key,
+										  value: value.element.attributes[j].value,
 									  })(state)();
-								  } else if (value.element.envs !== undefined) {
-									  // it's a subgraph
-									  $setSubgraph({
-										  id: key,
-										  envs: value.element.envs,
-									  })(state)();
-								  } else {
-									  throw new Error(
-										  "Don't know how to handle " + key + " " + value)
-									   ;
 								  }
-								  massiveChange_($changeSubgraph)($setAttribute)($setText)({ toChange: value.children })(state)();
+							  } else if (value.element.text !== undefined) {
+								  // it's an element
+								  $setText({
+									  id: key,
+									  text: value.element.text,
+								  })(state)();
+							  } else if (value.element.envs !== undefined) {
+								  // it's a subgraph
+								  $setSubgraph({
+									  id: key,
+									  envs: value.element.envs,
+								  })(state)();
+							  } else {
+								  throw new Error(
+									  "Don't know how to handle " + key + " " + value)
+								   ;
 							  }
-						  };
+							  massiveChange_($changeSubgraph)($setAttribute)($setText)({
+								  toChange: value.children,
+							  })(state)();
+						  }
 					  };
 				  };
 			  };
 		  };
 	  };
-
+  };
 
   exports.makeRoot_ = function (a) {
 	  return function (state) {
 		  return function () {
 			  var ptr = a.id;
 			  state.units[ptr] = {
-				  outgoing: [],
-				  incoming: [],
 				  main: a.root,
 			  };
 		  };
@@ -7251,123 +7337,133 @@ var PS = {};
       return x;
   };
   var iSetText = (function () {
-      var $58 = Data_Variant.inj()({
-          reflectSymbol: function () {
-              return "setText";
-          }
-      })(Type_Proxy["Proxy"].value);
-      return function ($59) {
-          return Instruction($58($59));
-      };
-  })();
-  var iSetSubgraph = (function () {
-      var $60 = Data_Variant.inj()({
-          reflectSymbol: function () {
-              return "setSubgraph";
-          }
-      })(Type_Proxy["Proxy"].value);
-      return function ($61) {
-          return Instruction($60($61));
-      };
-  })();
-  var iSetAttribute = (function () {
-      var $62 = Data_Variant.inj()({
-          reflectSymbol: function () {
-              return "setAttribute";
-          }
-      })(Type_Proxy["Proxy"].value);
-      return function ($63) {
-          return Instruction($62($63));
-      };
-  })();
-  var iMassiveCreate = (function () {
       var $64 = Data_Variant.inj()({
           reflectSymbol: function () {
-              return "massiveCreate";
+              return "setText";
           }
       })(Type_Proxy["Proxy"].value);
       return function ($65) {
           return Instruction($64($65));
       };
   })();
-  var iMassiveChange = (function () {
+  var iSetSubgraph = (function () {
       var $66 = Data_Variant.inj()({
           reflectSymbol: function () {
-              return "massiveChange";
+              return "setSubgraph";
           }
       })(Type_Proxy["Proxy"].value);
       return function ($67) {
           return Instruction($66($67));
       };
   })();
-  var iMakeText = (function () {
+  var iSetAttribute = (function () {
       var $68 = Data_Variant.inj()({
           reflectSymbol: function () {
-              return "makeText";
+              return "setAttribute";
           }
       })(Type_Proxy["Proxy"].value);
       return function ($69) {
           return Instruction($68($69));
       };
   })();
-  var iMakeSubgraph = (function () {
+  var iMassiveCreate = (function () {
       var $70 = Data_Variant.inj()({
           reflectSymbol: function () {
-              return "makeSubgraph";
+              return "massiveCreate";
           }
       })(Type_Proxy["Proxy"].value);
       return function ($71) {
           return Instruction($70($71));
       };
   })();
-  var iMakeRoot = (function () {
+  var iMassiveChange = (function () {
       var $72 = Data_Variant.inj()({
           reflectSymbol: function () {
-              return "makeRoot";
+              return "massiveChange";
           }
       })(Type_Proxy["Proxy"].value);
       return function ($73) {
           return Instruction($72($73));
       };
   })();
-  var iMakeElement = (function () {
+  var iMakeText = (function () {
       var $74 = Data_Variant.inj()({
           reflectSymbol: function () {
-              return "makeElement";
+              return "makeText";
           }
       })(Type_Proxy["Proxy"].value);
       return function ($75) {
           return Instruction($74($75));
       };
   })();
-  var iDisconnectXFromY = (function () {
+  var iMakeSubgraph = (function () {
       var $76 = Data_Variant.inj()({
           reflectSymbol: function () {
-              return "disconnectXFromY";
+              return "makeSubgraph";
           }
       })(Type_Proxy["Proxy"].value);
       return function ($77) {
           return Instruction($76($77));
       };
   })();
-  var iDestroyUnit = (function () {
+  var iMakeRoot = (function () {
       var $78 = Data_Variant.inj()({
           reflectSymbol: function () {
-              return "destroyUnit";
+              return "makeRoot";
           }
       })(Type_Proxy["Proxy"].value);
       return function ($79) {
           return Instruction($78($79));
       };
   })();
-  var iConnectXToY = (function () {
+  var iMakePursx = (function () {
       var $80 = Data_Variant.inj()({
           reflectSymbol: function () {
-              return "connectXToY";
+              return "makePursx";
           }
       })(Type_Proxy["Proxy"].value);
       return function ($81) {
           return Instruction($80($81));
+      };
+  })();
+  var iMakeElement = (function () {
+      var $82 = Data_Variant.inj()({
+          reflectSymbol: function () {
+              return "makeElement";
+          }
+      })(Type_Proxy["Proxy"].value);
+      return function ($83) {
+          return Instruction($82($83));
+      };
+  })();
+  var iDisconnectXFromY = (function () {
+      var $84 = Data_Variant.inj()({
+          reflectSymbol: function () {
+              return "disconnectXFromY";
+          }
+      })(Type_Proxy["Proxy"].value);
+      return function ($85) {
+          return Instruction($84($85));
+      };
+  })();
+  var iDestroyUnit = (function () {
+      var $86 = Data_Variant.inj()({
+          reflectSymbol: function () {
+              return "destroyUnit";
+          }
+      })(Type_Proxy["Proxy"].value);
+      return function ($87) {
+          return Instruction($86($87));
+      };
+  })();
+  var iConnectXToY = (function () {
+      var $88 = Data_Variant.inj()({
+          reflectSymbol: function () {
+              return "connectXToY";
+          }
+      })(Type_Proxy["Proxy"].value);
+      return function ($89) {
+          return Instruction($88($89));
       };
   })();
   exports["ToCreate"] = ToCreate;
@@ -7377,6 +7473,7 @@ var PS = {};
   exports["iMakeText"] = iMakeText;
   exports["iMakeElement"] = iMakeElement;
   exports["iMakeSubgraph"] = iMakeSubgraph;
+  exports["iMakePursx"] = iMakePursx;
   exports["iMassiveCreate"] = iMassiveCreate;
   exports["iConnectXToY"] = iConnectXToY;
   exports["iSetAttribute"] = iSetAttribute;
@@ -7824,6 +7921,9 @@ var PS = {};
   var makeRoot = function (dict) {
       return dict.makeRoot;
   };
+  var makePursx = function (dict) {
+      return dict.makePursx;
+  };
   var makeElement = function (dict) {
       return dict.makeElement;
   };
@@ -7847,7 +7947,7 @@ var PS = {};
                               pos: i.pos
                           });
                       };
-                      throw new Error("Failed pattern match at Deku.Interpret (line 95, column 23 - line 97, column 53): " + [ i.env.constructor.name ]);
+                      throw new Error("Failed pattern match at Deku.Interpret (line 97, column 23 - line 99, column 53): " + [ i.env.constructor.name ]);
                   })(v.envs));
                   return instructions;
               })()
@@ -7855,30 +7955,33 @@ var PS = {};
       };
   };
   var freeDOMInterpret = {
-      connectXToY: function ($119) {
-          return Data_Function["const"](Deku_Rendered.iConnectXToY($119));
+      connectXToY: function ($125) {
+          return Data_Function["const"](Deku_Rendered.iConnectXToY($125));
       },
-      disconnectXFromY: function ($120) {
-          return Data_Function["const"](Deku_Rendered.iDisconnectXFromY($120));
+      disconnectXFromY: function ($126) {
+          return Data_Function["const"](Deku_Rendered.iDisconnectXFromY($126));
       },
-      destroyUnit: function ($121) {
-          return Data_Function["const"](Deku_Rendered.iDestroyUnit($121));
+      destroyUnit: function ($127) {
+          return Data_Function["const"](Deku_Rendered.iDestroyUnit($127));
       },
-      makeElement: function ($122) {
-          return Data_Function["const"](Deku_Rendered.iMakeElement($122));
+      makePursx: function ($128) {
+          return Data_Function["const"](Deku_Rendered.iMakePursx($128));
       },
-      makeRoot: function ($123) {
-          return Data_Function["const"](Deku_Rendered.iMakeRoot($123));
+      makeElement: function ($129) {
+          return Data_Function["const"](Deku_Rendered.iMakeElement($129));
       },
-      makeText: function ($124) {
-          return Data_Function["const"](Deku_Rendered.iMakeText($124));
+      makeRoot: function ($130) {
+          return Data_Function["const"](Deku_Rendered.iMakeRoot($130));
       },
-      massiveCreate: function ($125) {
-          return Data_Function["const"](Deku_Rendered.iMassiveCreate($125));
+      makeText: function ($131) {
+          return Data_Function["const"](Deku_Rendered.iMakeText($131));
+      },
+      massiveCreate: function ($132) {
+          return Data_Function["const"](Deku_Rendered.iMassiveCreate($132));
       },
       makeSubgraph: handleSubgraph(Deku_Rendered.iMakeSubgraph),
-      setAttribute: function ($126) {
-          return Data_Function["const"](Deku_Rendered.iSetAttribute($126));
+      setAttribute: function ($133) {
+          return Data_Function["const"](Deku_Rendered.iSetAttribute($133));
       },
       setSubgraph: function (v) {
           return function (v1) {
@@ -7887,11 +7990,11 @@ var PS = {};
               });
           };
       },
-      massiveChange: function ($127) {
-          return Data_Function["const"](Deku_Rendered.iMassiveChange($127));
+      massiveChange: function ($134) {
+          return Data_Function["const"](Deku_Rendered.iMassiveChange($134));
       },
-      setText: function ($128) {
-          return Data_Function["const"](Deku_Rendered.iSetText($128));
+      setText: function ($135) {
+          return Data_Function["const"](Deku_Rendered.iSetText($135));
       }
   };
   var envsToFFI = (function () {
@@ -7913,8 +8016,11 @@ var PS = {};
       destroyUnit: $foreign.destroyUnit_,
       makeElement: $foreign.makeElement_,
       makeRoot: $foreign.makeRoot_,
+      makePursx: function (noEta) {
+          return $foreign.makePursx_($foreign.massiveCreate_(mcUnsubgraph)(makeSubgraph(effectfulDOMInterpret))(makeRoot(effectfulDOMInterpret))(makeElement(effectfulDOMInterpret))(makeText(effectfulDOMInterpret))(makePursx(effectfulDOMInterpret)))(noEta);
+      },
       massiveCreate: function (noEta) {
-          return $foreign.massiveCreate_(mcUnsubgraph)(makeSubgraph(effectfulDOMInterpret))(makeRoot(effectfulDOMInterpret))(makeElement(effectfulDOMInterpret))(makeText(effectfulDOMInterpret))(noEta);
+          return $foreign.massiveCreate_(mcUnsubgraph)(makeSubgraph(effectfulDOMInterpret))(makeRoot(effectfulDOMInterpret))(makeElement(effectfulDOMInterpret))(makeText(effectfulDOMInterpret))(makePursx(effectfulDOMInterpret))(Data_Nullable["null"])(noEta);
       },
       makeText: $foreign.makeText_,
       makeSubgraph: function (v) {
@@ -8564,6 +8670,20 @@ var PS = {};
       SimpleComponent.value = new SimpleComponent();
       return SimpleComponent;
   })();
+  var PURSX1 = (function () {
+      function PURSX1() {
+
+      };
+      PURSX1.value = new PURSX1();
+      return PURSX1;
+  })();
+  var PURSX2 = (function () {
+      function PURSX2() {
+
+      };
+      PURSX2.value = new PURSX2();
+      return PURSX2;
+  })();
   var Events = (function () {
       function Events() {
 
@@ -8625,18 +8745,24 @@ var PS = {};
               return SimpleComponent.value;
           };
           if (x instanceof Data_Generic_Rep.Inr && (x.value0 instanceof Data_Generic_Rep.Inr && (x.value0.value0 instanceof Data_Generic_Rep.Inr && x.value0.value0.value0 instanceof Data_Generic_Rep.Inl))) {
-              return Events.value;
+              return PURSX1.value;
           };
           if (x instanceof Data_Generic_Rep.Inr && (x.value0 instanceof Data_Generic_Rep.Inr && (x.value0.value0 instanceof Data_Generic_Rep.Inr && (x.value0.value0.value0 instanceof Data_Generic_Rep.Inr && x.value0.value0.value0.value0 instanceof Data_Generic_Rep.Inl)))) {
-              return Effects.value;
+              return PURSX2.value;
           };
           if (x instanceof Data_Generic_Rep.Inr && (x.value0 instanceof Data_Generic_Rep.Inr && (x.value0.value0 instanceof Data_Generic_Rep.Inr && (x.value0.value0.value0 instanceof Data_Generic_Rep.Inr && (x.value0.value0.value0.value0 instanceof Data_Generic_Rep.Inr && x.value0.value0.value0.value0.value0 instanceof Data_Generic_Rep.Inl))))) {
+              return Events.value;
+          };
+          if (x instanceof Data_Generic_Rep.Inr && (x.value0 instanceof Data_Generic_Rep.Inr && (x.value0.value0 instanceof Data_Generic_Rep.Inr && (x.value0.value0.value0 instanceof Data_Generic_Rep.Inr && (x.value0.value0.value0.value0 instanceof Data_Generic_Rep.Inr && (x.value0.value0.value0.value0.value0 instanceof Data_Generic_Rep.Inr && x.value0.value0.value0.value0.value0.value0 instanceof Data_Generic_Rep.Inl)))))) {
+              return Effects.value;
+          };
+          if (x instanceof Data_Generic_Rep.Inr && (x.value0 instanceof Data_Generic_Rep.Inr && (x.value0.value0 instanceof Data_Generic_Rep.Inr && (x.value0.value0.value0 instanceof Data_Generic_Rep.Inr && (x.value0.value0.value0.value0 instanceof Data_Generic_Rep.Inr && (x.value0.value0.value0.value0.value0 instanceof Data_Generic_Rep.Inr && (x.value0.value0.value0.value0.value0.value0 instanceof Data_Generic_Rep.Inr && x.value0.value0.value0.value0.value0.value0.value0 instanceof Data_Generic_Rep.Inl))))))) {
               return Subgraph.value;
           };
-          if (x instanceof Data_Generic_Rep.Inr && (x.value0 instanceof Data_Generic_Rep.Inr && (x.value0.value0 instanceof Data_Generic_Rep.Inr && (x.value0.value0.value0 instanceof Data_Generic_Rep.Inr && (x.value0.value0.value0.value0 instanceof Data_Generic_Rep.Inr && x.value0.value0.value0.value0.value0 instanceof Data_Generic_Rep.Inr))))) {
+          if (x instanceof Data_Generic_Rep.Inr && (x.value0 instanceof Data_Generic_Rep.Inr && (x.value0.value0 instanceof Data_Generic_Rep.Inr && (x.value0.value0.value0 instanceof Data_Generic_Rep.Inr && (x.value0.value0.value0.value0 instanceof Data_Generic_Rep.Inr && (x.value0.value0.value0.value0.value0 instanceof Data_Generic_Rep.Inr && (x.value0.value0.value0.value0.value0.value0 instanceof Data_Generic_Rep.Inr && x.value0.value0.value0.value0.value0.value0.value0 instanceof Data_Generic_Rep.Inr))))))) {
               return SSR.value;
           };
-          throw new Error("Failed pattern match at Deku.Example.Docs.Types (line 18, column 1 - line 18, column 31): " + [ x.constructor.name ]);
+          throw new Error("Failed pattern match at Deku.Example.Docs.Types (line 20, column 1 - line 20, column 31): " + [ x.constructor.name ]);
       },
       from: function (x) {
           if (x instanceof Intro) {
@@ -8648,19 +8774,25 @@ var PS = {};
           if (x instanceof SimpleComponent) {
               return new Data_Generic_Rep.Inr(new Data_Generic_Rep.Inr(new Data_Generic_Rep.Inl(Data_Generic_Rep.NoArguments.value)));
           };
-          if (x instanceof Events) {
+          if (x instanceof PURSX1) {
               return new Data_Generic_Rep.Inr(new Data_Generic_Rep.Inr(new Data_Generic_Rep.Inr(new Data_Generic_Rep.Inl(Data_Generic_Rep.NoArguments.value))));
           };
-          if (x instanceof Effects) {
+          if (x instanceof PURSX2) {
               return new Data_Generic_Rep.Inr(new Data_Generic_Rep.Inr(new Data_Generic_Rep.Inr(new Data_Generic_Rep.Inr(new Data_Generic_Rep.Inl(Data_Generic_Rep.NoArguments.value)))));
           };
-          if (x instanceof Subgraph) {
+          if (x instanceof Events) {
               return new Data_Generic_Rep.Inr(new Data_Generic_Rep.Inr(new Data_Generic_Rep.Inr(new Data_Generic_Rep.Inr(new Data_Generic_Rep.Inr(new Data_Generic_Rep.Inl(Data_Generic_Rep.NoArguments.value))))));
           };
-          if (x instanceof SSR) {
-              return new Data_Generic_Rep.Inr(new Data_Generic_Rep.Inr(new Data_Generic_Rep.Inr(new Data_Generic_Rep.Inr(new Data_Generic_Rep.Inr(new Data_Generic_Rep.Inr(Data_Generic_Rep.NoArguments.value))))));
+          if (x instanceof Effects) {
+              return new Data_Generic_Rep.Inr(new Data_Generic_Rep.Inr(new Data_Generic_Rep.Inr(new Data_Generic_Rep.Inr(new Data_Generic_Rep.Inr(new Data_Generic_Rep.Inr(new Data_Generic_Rep.Inl(Data_Generic_Rep.NoArguments.value)))))));
           };
-          throw new Error("Failed pattern match at Deku.Example.Docs.Types (line 18, column 1 - line 18, column 31): " + [ x.constructor.name ]);
+          if (x instanceof Subgraph) {
+              return new Data_Generic_Rep.Inr(new Data_Generic_Rep.Inr(new Data_Generic_Rep.Inr(new Data_Generic_Rep.Inr(new Data_Generic_Rep.Inr(new Data_Generic_Rep.Inr(new Data_Generic_Rep.Inr(new Data_Generic_Rep.Inl(Data_Generic_Rep.NoArguments.value))))))));
+          };
+          if (x instanceof SSR) {
+              return new Data_Generic_Rep.Inr(new Data_Generic_Rep.Inr(new Data_Generic_Rep.Inr(new Data_Generic_Rep.Inr(new Data_Generic_Rep.Inr(new Data_Generic_Rep.Inr(new Data_Generic_Rep.Inr(new Data_Generic_Rep.Inr(Data_Generic_Rep.NoArguments.value))))))));
+          };
+          throw new Error("Failed pattern match at Deku.Example.Docs.Types (line 20, column 1 - line 20, column 31): " + [ x.constructor.name ]);
       }
   };
   var eqPage = {
@@ -8673,6 +8805,12 @@ var PS = {};
                   return true;
               };
               if (x instanceof SimpleComponent && y instanceof SimpleComponent) {
+                  return true;
+              };
+              if (x instanceof PURSX1 && y instanceof PURSX1) {
+                  return true;
+              };
+              if (x instanceof PURSX2 && y instanceof PURSX2) {
                   return true;
               };
               if (x instanceof Events && y instanceof Events) {
@@ -8721,6 +8859,24 @@ var PS = {};
               if (y instanceof SimpleComponent) {
                   return Data_Ordering.GT.value;
               };
+              if (x instanceof PURSX1 && y instanceof PURSX1) {
+                  return Data_Ordering.EQ.value;
+              };
+              if (x instanceof PURSX1) {
+                  return Data_Ordering.LT.value;
+              };
+              if (y instanceof PURSX1) {
+                  return Data_Ordering.GT.value;
+              };
+              if (x instanceof PURSX2 && y instanceof PURSX2) {
+                  return Data_Ordering.EQ.value;
+              };
+              if (x instanceof PURSX2) {
+                  return Data_Ordering.LT.value;
+              };
+              if (y instanceof PURSX2) {
+                  return Data_Ordering.GT.value;
+              };
               if (x instanceof Events && y instanceof Events) {
                   return Data_Ordering.EQ.value;
               };
@@ -8751,7 +8907,7 @@ var PS = {};
               if (x instanceof SSR && y instanceof SSR) {
                   return Data_Ordering.EQ.value;
               };
-              throw new Error("Failed pattern match at Deku.Example.Docs.Types (line 17, column 1 - line 17, column 25): " + [ x.constructor.name, y.constructor.name ]);
+              throw new Error("Failed pattern match at Deku.Example.Docs.Types (line 19, column 1 - line 19, column 25): " + [ x.constructor.name, y.constructor.name ]);
           };
       },
       Eq0: function () {
@@ -8774,6 +8930,14 @@ var PS = {};
               }
           }))(Data_Show_Generic.genericShowSum(Data_Show_Generic.genericShowConstructor(Data_Show_Generic.genericShowArgsNoArguments)({
               reflectSymbol: function () {
+                  return "PURSX1";
+              }
+          }))(Data_Show_Generic.genericShowSum(Data_Show_Generic.genericShowConstructor(Data_Show_Generic.genericShowArgsNoArguments)({
+              reflectSymbol: function () {
+                  return "PURSX2";
+              }
+          }))(Data_Show_Generic.genericShowSum(Data_Show_Generic.genericShowConstructor(Data_Show_Generic.genericShowArgsNoArguments)({
+              reflectSymbol: function () {
                   return "Events";
               }
           }))(Data_Show_Generic.genericShowSum(Data_Show_Generic.genericShowConstructor(Data_Show_Generic.genericShowArgsNoArguments)({
@@ -8788,15 +8952,15 @@ var PS = {};
               reflectSymbol: function () {
                   return "SSR";
               }
-          }))))))))(s);
+          }))))))))))(s);
       }
   };
   var hashablePage = {
       hash: (function () {
-          var $42 = Data_Hashable.hash(Data_Hashable.hashableString);
-          var $43 = Data_Show.show(showPage);
-          return function ($44) {
-              return $42($43($44));
+          var $59 = Data_Hashable.hash(Data_Hashable.hashableString);
+          var $60 = Data_Show.show(showPage);
+          return function ($61) {
+              return $59($60($61));
           };
       })(),
       Eq0: function () {
@@ -8806,6 +8970,8 @@ var PS = {};
   exports["Intro"] = Intro;
   exports["HelloWorld"] = HelloWorld;
   exports["SimpleComponent"] = SimpleComponent;
+  exports["PURSX1"] = PURSX1;
+  exports["PURSX2"] = PURSX2;
   exports["Events"] = Events;
   exports["Effects"] = Effects;
   exports["Subgraph"] = Subgraph;
@@ -9271,7 +9437,7 @@ var PS = {};
                                   reflectSymbol: function () {
                                       return "@0";
                                   }
-                              })())(new Data_Tuple.Tuple(Deku_Graph_DOM.span([  ])(Deku_Graph_DOM_Shorthand.text("In more complicated apps, like this documentation, we'll want to split up our components into sub-components and create a way for them to communicate back and forth. In the next section, we'll see one way to do this via ")), new Data_Tuple.Tuple(Deku_Graph_DOM.a([ Deku_Example_Docs_Util.cot(dt)(Deku_Graph_Attribute.cb(Data_Function["const"](Control_Apply.applySecond(Effect.applyEffect)(dpage(Deku_Example_Docs_Types.Subgraph.value))(Deku_Example_Docs_Util.scrollToTop)))), Deku_Graph_DOM.attr(Deku_Graph_DOM.attrA_StyleString)(Deku_Graph_DOM.Style.value)("cursor:pointer;") ])(Deku_Graph_DOM_Shorthand.text("subgraphs")), new Data_Tuple.Tuple(Deku_Graph_DOM.span([  ])(Deku_Graph_DOM_Shorthand.text(".")), Data_Unit.unit))))), Data_Unit.unit)))))))))))
+                              })())(new Data_Tuple.Tuple(Deku_Graph_DOM.span([  ])(Deku_Graph_DOM_Shorthand.text("It is also possible to handle events (and by extension effectful actions in events, like network calls) in Pursx. Let's see how in  ")), new Data_Tuple.Tuple(Deku_Graph_DOM.a([ Deku_Example_Docs_Util.cot(dt)(Deku_Graph_Attribute.cb(Data_Function["const"](Control_Apply.applySecond(Effect.applyEffect)(dpage(Deku_Example_Docs_Types.PURSX2.value))(Deku_Example_Docs_Util.scrollToTop)))), Deku_Graph_DOM.attr(Deku_Graph_DOM.attrA_StyleString)(Deku_Graph_DOM.Style.value)("cursor:pointer;") ])(Deku_Graph_DOM_Shorthand.text("the second Pursx section")), new Data_Tuple.Tuple(Deku_Graph_DOM.span([  ])(Deku_Graph_DOM_Shorthand.text(".")), Data_Unit.unit))))), Data_Unit.unit)))))))))))
                           })
                       });
                   };
@@ -10201,6 +10367,335 @@ var PS = {};
   };
   exports["intro"] = intro;
 })(PS);
+(function($PS) {
+  // Generated by purs version 0.14.4
+  "use strict";
+  $PS["Deku.Pursx"] = $PS["Deku.Pursx"] || {};
+  var exports = $PS["Deku.Pursx"];
+  var Data_Symbol = $PS["Data.Symbol"];
+  var psxR = function (dictIsSymbol) {
+      return function (dictPXStart) {
+          return function (html) {
+              return function (r) {
+                  return {
+                      psx: {
+                          verb: "~",
+                          html: Data_Symbol.reflectSymbol(dictIsSymbol)(html),
+                          r: r
+                      }
+                  };
+              };
+          };
+      };
+  };
+  exports["psxR"] = psxR;
+})(PS);
+(function($PS) {
+  // Generated by purs version 0.14.4
+  "use strict";
+  $PS["Deku.Example.Docs.Pursx1"] = $PS["Deku.Example.Docs.Pursx1"] || {};
+  var exports = $PS["Deku.Example.Docs.Pursx1"];
+  var Control_Apply = $PS["Control.Apply"];
+  var Data_Function = $PS["Data.Function"];
+  var Data_Monoid_Additive = $PS["Data.Monoid.Additive"];
+  var Data_Semiring = $PS["Data.Semiring"];
+  var Data_Tuple = $PS["Data.Tuple"];
+  var Data_Typelevel_Num_Ops = $PS["Data.Typelevel.Num.Ops"];
+  var Data_Typelevel_Num_Sets = $PS["Data.Typelevel.Num.Sets"];
+  var Data_Unit = $PS["Data.Unit"];
+  var Deku_Control_Functions = $PS["Deku.Control.Functions"];
+  var Deku_Control_Monadic = $PS["Deku.Control.Monadic"];
+  var Deku_Create = $PS["Deku.Create"];
+  var Deku_Example_Docs_Types = $PS["Deku.Example.Docs.Types"];
+  var Deku_Example_Docs_Util = $PS["Deku.Example.Docs.Util"];
+  var Deku_Graph_Attribute = $PS["Deku.Graph.Attribute"];
+  var Deku_Graph_DOM = $PS["Deku.Graph.DOM"];
+  var Deku_Graph_DOM_Shorthand = $PS["Deku.Graph.DOM.Shorthand"];
+  var Deku_Pursx = $PS["Deku.Pursx"];
+  var Deku_Util = $PS["Deku.Util"];
+  var Effect = $PS["Effect"];
+  var Type_Proxy = $PS["Type.Proxy"];                
+  var pursx1 = function (dpage) {
+      return function (dictDOMInterpret) {
+          return Deku_Control_Functions.loopUsingSceneSG(Data_Monoid_Additive.monoidAdditive(Data_Semiring.semiringInt))(dictDOMInterpret)(Deku_Create.createSGAll())()(function (v) {
+              return function (v1) {
+                  return Deku_Control_Functions.u({
+                      head: Deku_Graph_DOM.div([  ])({
+                          header: Deku_Graph_DOM.header([  ])({
+                              title: Deku_Graph_DOM.h1([  ])(Deku_Graph_DOM_Shorthand.text("PursX 1")),
+                              subtitle: Deku_Graph_DOM.h3([  ])(Deku_Graph_DOM_Shorthand.text("Like JSX... but better!"))
+                          }),
+                          pars: Deku_Graph_DOM.div([  ])(Deku_Util.detup(Deku_Util.detupTuple(Data_Typelevel_Num_Ops.typelevelSucc(Data_Typelevel_Num_Sets.posD1)()(Data_Typelevel_Num_Ops.divMod10D0D0)()(Data_Typelevel_Num_Ops.divMod10D1D0))(Deku_Util.detupTuple(Data_Typelevel_Num_Ops.typelevelSucc(Data_Typelevel_Num_Sets.posD2)()(Data_Typelevel_Num_Ops.divMod10D1D0)()(Data_Typelevel_Num_Ops.divMod10D2D0))(Deku_Util.detupTuple(Data_Typelevel_Num_Ops.typelevelSucc(Data_Typelevel_Num_Sets.posD3)()(Data_Typelevel_Num_Ops.divMod10D2D0)()(Data_Typelevel_Num_Ops.divMod10D3D0))(Deku_Util.detupTuple(Data_Typelevel_Num_Ops.typelevelSucc(Data_Typelevel_Num_Sets.posD4)()(Data_Typelevel_Num_Ops.divMod10D3D0)()(Data_Typelevel_Num_Ops.divMod10D4D0))(Deku_Util.detupTuple(Data_Typelevel_Num_Ops.typelevelSucc(Data_Typelevel_Num_Sets.posD5)()(Data_Typelevel_Num_Ops.divMod10D4D0)()(Data_Typelevel_Num_Ops.divMod10D5D0))(Deku_Util.detupTuple(Data_Typelevel_Num_Ops.typelevelSucc(Data_Typelevel_Num_Sets.posD6)()(Data_Typelevel_Num_Ops.divMod10D5D0)()(Data_Typelevel_Num_Ops.divMod10D6D0))(Deku_Util.detupTuple(Data_Typelevel_Num_Ops.typelevelSucc(Data_Typelevel_Num_Sets.posD7)()(Data_Typelevel_Num_Ops.divMod10D6D0)()(Data_Typelevel_Num_Ops.divMod10D7D0))(Deku_Util.detupTuple(Data_Typelevel_Num_Ops.typelevelSucc(Data_Typelevel_Num_Sets.posD8)()(Data_Typelevel_Num_Ops.divMod10D7D0)()(Data_Typelevel_Num_Ops.divMod10D8D0))(Deku_Util.detupTuple(Data_Typelevel_Num_Ops.typelevelSucc(Data_Typelevel_Num_Sets.posD9)()(Data_Typelevel_Num_Ops.divMod10D8D0)()(Data_Typelevel_Num_Ops.divMod10D9D0))(Deku_Util.detupUnit)()()()({
+                              reflectSymbol: function () {
+                                  return "@8";
+                              }
+                          })())()()()({
+                              reflectSymbol: function () {
+                                  return "@7";
+                              }
+                          })())()()()({
+                              reflectSymbol: function () {
+                                  return "@6";
+                              }
+                          })())()()()({
+                              reflectSymbol: function () {
+                                  return "@5";
+                              }
+                          })())()()()({
+                              reflectSymbol: function () {
+                                  return "@4";
+                              }
+                          })())()()()({
+                              reflectSymbol: function () {
+                                  return "@3";
+                              }
+                          })())()()()({
+                              reflectSymbol: function () {
+                                  return "@2";
+                              }
+                          })())()()()({
+                              reflectSymbol: function () {
+                                  return "@1";
+                              }
+                          })())()()()({
+                              reflectSymbol: function () {
+                                  return "@0";
+                              }
+                          })())(new Data_Tuple.Tuple(Deku_Graph_DOM.p([  ])(Deku_Graph_DOM_Shorthand.text("Writing out PureScript code for the DOM only really makes sense if you're doing some sort of interesting manipulations on the JS layer. Otherwise, it's pretty tedious and longer than HTML. Thankfully, there's a solution: PursX.")), new Data_Tuple.Tuple(Deku_Graph_DOM.p([  ])(Deku_Graph_DOM_Shorthand.text("PursX takes its name from JSX and it accomplishes a similar goal: the ability to embed HTML in your document. In the example below, we create the same exact component from the previous article, but in PursX.")), new Data_Tuple.Tuple(Deku_Graph_DOM.pre([  ])(Deku_Graph_DOM_Shorthand.code([  ])(Deku_Graph_DOM_Shorthand.text("module Deku.Example.Docs.Example.ComponentPursx where\x0a\x0aimport Prelude\x0a\x0aimport Data.Foldable (for_)\x0aimport Data.Tuple.Nested ((/\\))\x0aimport Data.Vec ((+>), empty)\x0aimport Deku.Control.Functions (freeze, u, (@>))\x0aimport Deku.Control.Types (Frame0, Scene)\x0aimport Deku.Graph.DOM ((:=), root)\x0aimport Deku.Graph.DOM as D\x0aimport Deku.Graph.DOM.Shorthand as S\x0aimport Deku.Interpret (class DOMInterpret, makeFFIDOMSnapshot)\x0aimport Deku.Pursx ((~!))\x0aimport Deku.Run (defaultOptions, run)\x0aimport Deku.Util (detup, vex)\x0aimport Effect (Effect)\x0aimport FRP.Event (subscribe)\x0aimport Type.Proxy (Proxy(..))\x0aimport Web.DOM (Element)\x0aimport Web.HTML (window)\x0aimport Web.HTML.HTMLDocument (body)\x0aimport Web.HTML.HTMLElement (toElement)\x0aimport Web.HTML.Window (document)\x0a\x0ascene\x0a  :: forall env dom engine push res\x0a   . Monoid res\x0a  => DOMInterpret dom engine\x0a  => Element\x0a  -> Scene env dom engine Frame0 push res\x0ascene elt =\x0a  ( \\_ _ ->\x0a      ( u $ root elt $ (Proxy :: _ " + ("\"\"\"" + ("\x0a      <div>\x0a        <button>I do nothing</button>\x0a        <ul>\x0a          <li>A</li>\x0a          <li>B</li>\x0a          <li>C</li>\x0a        </ul>\x0a        <div>\x0a          <a href=\"https://github.com/mikesol/purescript-deku\">foo</a>\x0a          <i>bar</i>\x0a          <span style=\"font-weight:800;\">baz</span>\x0a        </div>\x0a        <div><div></div><div><input type=\"range\"/></div></div>\x0a      </div>\x0a      " + ("\"\"\"" + "\") ~! {}\x0a      )\x0a  ) @> freeze\x0a\x0amain :: Effect Unit\x0amain = do\x0a  b' <- window >>= document >>= body\x0a  for_ (toElement <$> b') \\elt -> do\x0a    ffi <- makeFFIDOMSnapshot\x0a    subscribe\x0a      ( run (pure unit) (pure unit) defaultOptions ffi(scene elt)      )\x0a      (_.res >>> pure)\x0a")))))), new Data_Tuple.Tuple(Deku_Graph_DOM.p([  ])(Deku_Util.detup(Deku_Util.detupTuple(Data_Typelevel_Num_Ops.typelevelSucc(Data_Typelevel_Num_Sets.posD1)()(Data_Typelevel_Num_Ops.divMod10D0D0)()(Data_Typelevel_Num_Ops.divMod10D1D0))(Deku_Util.detupUnit)()()()({
+                              reflectSymbol: function () {
+                                  return "@0";
+                              }
+                          })())(new Data_Tuple.Tuple(Deku_Graph_DOM.text("Here's what it produces:"), Data_Unit.unit))), new Data_Tuple.Tuple(Deku_Graph_DOM.blockquote([  ])(Deku_Pursx.psxR({
+                              reflectSymbol: function () {
+                                  return "\x0a      <div>\x0a        <button>I do nothing</button>\x0a        <ul>\x0a          <li>A</li>\x0a          <li>B</li>\x0a          <li>C</li>\x0a        </ul>\x0a        <div>\x0a          <a href=\"https://github.com/mikesol/purescript-deku\"></a>\x0a          <i>bar</i>\x0a          <span style=\"font-weight:800;\">baz</span>\x0a        </div>\x0a        <div><div></div><div><input type=\"range\"/></div></div>\x0a      </div>\x0a      ";
+                              }
+                          })()(Type_Proxy["Proxy"].value)({})), new Data_Tuple.Tuple(Deku_Graph_DOM.h2([  ])(Deku_Graph_DOM_Shorthand.text("Puurrrrrr ...sx")), new Data_Tuple.Tuple(Deku_Graph_DOM.p([  ])(Deku_Util.detup(Deku_Util.detupTuple(Data_Typelevel_Num_Ops.typelevelSucc(Data_Typelevel_Num_Sets.posD1)()(Data_Typelevel_Num_Ops.divMod10D0D0)()(Data_Typelevel_Num_Ops.divMod10D1D0))(Deku_Util.detupTuple(Data_Typelevel_Num_Ops.typelevelSucc(Data_Typelevel_Num_Sets.posD2)()(Data_Typelevel_Num_Ops.divMod10D1D0)()(Data_Typelevel_Num_Ops.divMod10D2D0))(Deku_Util.detupTuple(Data_Typelevel_Num_Ops.typelevelSucc(Data_Typelevel_Num_Sets.posD3)()(Data_Typelevel_Num_Ops.divMod10D2D0)()(Data_Typelevel_Num_Ops.divMod10D3D0))(Deku_Util.detupTuple(Data_Typelevel_Num_Ops.typelevelSucc(Data_Typelevel_Num_Sets.posD4)()(Data_Typelevel_Num_Ops.divMod10D3D0)()(Data_Typelevel_Num_Ops.divMod10D4D0))(Deku_Util.detupTuple(Data_Typelevel_Num_Ops.typelevelSucc(Data_Typelevel_Num_Sets.posD5)()(Data_Typelevel_Num_Ops.divMod10D4D0)()(Data_Typelevel_Num_Ops.divMod10D5D0))(Deku_Util.detupTuple(Data_Typelevel_Num_Ops.typelevelSucc(Data_Typelevel_Num_Sets.posD6)()(Data_Typelevel_Num_Ops.divMod10D5D0)()(Data_Typelevel_Num_Ops.divMod10D6D0))(Deku_Util.detupTuple(Data_Typelevel_Num_Ops.typelevelSucc(Data_Typelevel_Num_Sets.posD7)()(Data_Typelevel_Num_Ops.divMod10D6D0)()(Data_Typelevel_Num_Ops.divMod10D7D0))(Deku_Util.detupUnit)()()()({
+                              reflectSymbol: function () {
+                                  return "@6";
+                              }
+                          })())()()()({
+                              reflectSymbol: function () {
+                                  return "@5";
+                              }
+                          })())()()()({
+                              reflectSymbol: function () {
+                                  return "@4";
+                              }
+                          })())()()()({
+                              reflectSymbol: function () {
+                                  return "@3";
+                              }
+                          })())()()()({
+                              reflectSymbol: function () {
+                                  return "@2";
+                              }
+                          })())()()()({
+                              reflectSymbol: function () {
+                                  return "@1";
+                              }
+                          })())()()()({
+                              reflectSymbol: function () {
+                                  return "@0";
+                              }
+                          })())(new Data_Tuple.Tuple(Deku_Graph_DOM.text("Pursx can be activated with the operators "), new Data_Tuple.Tuple(Deku_Graph_DOM.code([  ])(Deku_Graph_DOM_Shorthand.text("~!")), new Data_Tuple.Tuple(Deku_Graph_DOM.text(", which creates a one-off record, and "), new Data_Tuple.Tuple(Deku_Graph_DOM.code([  ])(Deku_Graph_DOM_Shorthand.text("~~")), new Data_Tuple.Tuple(Deku_Graph_DOM.text("for when you already have a record that you're embedding it in. It's also slightly faster than the JS layer, as it just sets the "), new Data_Tuple.Tuple(Deku_Graph_DOM.code([  ])(Deku_Graph_DOM_Shorthand.text("innerHTML")), new Data_Tuple.Tuple(Deku_Graph_DOM.text(" property of a node with the HTML. JavaScript parsers are blazingly fast at setting innerHTML these days, and you can achieve substantial performance gains this way, especially with larger documents. In a later section, we'll see how to modify our PursX and embed PureScript within it, just like we do with JSX."), Data_Unit.unit))))))))), new Data_Tuple.Tuple(Deku_Graph_DOM.h2([  ])(Deku_Graph_DOM_Shorthand.text("Next steps")), new Data_Tuple.Tuple(Deku_Graph_DOM.p([  ])(Deku_Graph_DOM_Shorthand.span([  ])(Deku_Util.detup(Deku_Util.detupTuple(Data_Typelevel_Num_Ops.typelevelSucc(Data_Typelevel_Num_Sets.posD1)()(Data_Typelevel_Num_Ops.divMod10D0D0)()(Data_Typelevel_Num_Ops.divMod10D1D0))(Deku_Util.detupTuple(Data_Typelevel_Num_Ops.typelevelSucc(Data_Typelevel_Num_Sets.posD2)()(Data_Typelevel_Num_Ops.divMod10D1D0)()(Data_Typelevel_Num_Ops.divMod10D2D0))(Deku_Util.detupTuple(Data_Typelevel_Num_Ops.typelevelSucc(Data_Typelevel_Num_Sets.posD3)()(Data_Typelevel_Num_Ops.divMod10D2D0)()(Data_Typelevel_Num_Ops.divMod10D3D0))(Deku_Util.detupUnit)()()()({
+                              reflectSymbol: function () {
+                                  return "@2";
+                              }
+                          })())()()()({
+                              reflectSymbol: function () {
+                                  return "@1";
+                              }
+                          })())()()()({
+                              reflectSymbol: function () {
+                                  return "@0";
+                              }
+                          })())(new Data_Tuple.Tuple(Deku_Graph_DOM.text("In this section, we PursX to build the same component as the previous section. In the next section, we'll learn how to respond to "), new Data_Tuple.Tuple(Deku_Graph_DOM.a([ Deku_Graph_DOM.attr(Deku_Graph_DOM.attrOnClickCb)(Deku_Graph_DOM.OnClick.value)(Deku_Graph_Attribute.cb(Data_Function["const"](Control_Apply.applySecond(Effect.applyEffect)(dpage(Deku_Example_Docs_Types.Events.value))(Deku_Example_Docs_Util.scrollToTop)))), Deku_Graph_DOM.attr(Deku_Graph_DOM.attrA_StyleString)(Deku_Graph_DOM.Style.value)("cursor:pointer;") ])(Deku_Graph_DOM_Shorthand.text("events")), new Data_Tuple.Tuple(Deku_Graph_DOM.span([  ])(Deku_Graph_DOM_Shorthand.text(".")), Data_Unit.unit)))))), Data_Unit.unit)))))))))))
+                      })
+                  });
+              };
+          })(Deku_Control_Functions.freeze(Deku_Control_Monadic.applicativeMDOM));
+      };
+  };
+  exports["pursx1"] = pursx1;
+})(PS);
+(function($PS) {
+  // Generated by purs version 0.14.4
+  "use strict";
+  $PS["Deku.Example.Docs.Pursx2"] = $PS["Deku.Example.Docs.Pursx2"] || {};
+  var exports = $PS["Deku.Example.Docs.Pursx2"];
+  var Control_Applicative = $PS["Control.Applicative"];
+  var Control_Apply = $PS["Control.Apply"];
+  var Data_Either = $PS["Data.Either"];
+  var Data_Function = $PS["Data.Function"];
+  var Data_Monoid_Additive = $PS["Data.Monoid.Additive"];
+  var Data_Semiring = $PS["Data.Semiring"];
+  var Data_Tuple = $PS["Data.Tuple"];
+  var Data_Typelevel_Num_Ops = $PS["Data.Typelevel.Num.Ops"];
+  var Data_Typelevel_Num_Sets = $PS["Data.Typelevel.Num.Sets"];
+  var Data_Unit = $PS["Data.Unit"];
+  var Deku_Change = $PS["Deku.Change"];
+  var Deku_Control_Functions = $PS["Deku.Control.Functions"];
+  var Deku_Control_Monadic = $PS["Deku.Control.Monadic"];
+  var Deku_Create = $PS["Deku.Create"];
+  var Deku_Example_Docs_Types = $PS["Deku.Example.Docs.Types"];
+  var Deku_Example_Docs_Util = $PS["Deku.Example.Docs.Util"];
+  var Deku_Graph_Attribute = $PS["Deku.Graph.Attribute"];
+  var Deku_Graph_DOM = $PS["Deku.Graph.DOM"];
+  var Deku_Graph_DOM_Shorthand = $PS["Deku.Graph.DOM.Shorthand"];
+  var Deku_Pursx = $PS["Deku.Pursx"];
+  var Deku_Util = $PS["Deku.Util"];
+  var Effect = $PS["Effect"];
+  var Type_Proxy = $PS["Type.Proxy"];                
+  var pursx2 = function (dpage) {
+      return function (dictDOMInterpret) {
+          return Deku_Control_Functions.loopUsingSceneSG(Data_Monoid_Additive.monoidAdditive(Data_Semiring.semiringInt))(dictDOMInterpret)(Deku_Create.createSGAll())()(function (v) {
+              return function (push) {
+                  return Deku_Control_Functions.u({
+                      head: Deku_Graph_DOM.div([  ])({
+                          header: Deku_Graph_DOM.header([  ])({
+                              title: Deku_Graph_DOM.h1([  ])(Deku_Graph_DOM_Shorthand.text("PursX 2")),
+                              subtitle: Deku_Graph_DOM.h3([  ])(Deku_Graph_DOM_Shorthand.text("Working with events and effects"))
+                          }),
+                          pars: Deku_Graph_DOM.div([  ])(Deku_Util.detup(Deku_Util.detupTuple(Data_Typelevel_Num_Ops.typelevelSucc(Data_Typelevel_Num_Sets.posD1)()(Data_Typelevel_Num_Ops.divMod10D0D0)()(Data_Typelevel_Num_Ops.divMod10D1D0))(Deku_Util.detupTuple(Data_Typelevel_Num_Ops.typelevelSucc(Data_Typelevel_Num_Sets.posD2)()(Data_Typelevel_Num_Ops.divMod10D1D0)()(Data_Typelevel_Num_Ops.divMod10D2D0))(Deku_Util.detupTuple(Data_Typelevel_Num_Ops.typelevelSucc(Data_Typelevel_Num_Sets.posD3)()(Data_Typelevel_Num_Ops.divMod10D2D0)()(Data_Typelevel_Num_Ops.divMod10D3D0))(Deku_Util.detupTuple(Data_Typelevel_Num_Ops.typelevelSucc(Data_Typelevel_Num_Sets.posD4)()(Data_Typelevel_Num_Ops.divMod10D3D0)()(Data_Typelevel_Num_Ops.divMod10D4D0))(Deku_Util.detupTuple(Data_Typelevel_Num_Ops.typelevelSucc(Data_Typelevel_Num_Sets.posD5)()(Data_Typelevel_Num_Ops.divMod10D4D0)()(Data_Typelevel_Num_Ops.divMod10D5D0))(Deku_Util.detupTuple(Data_Typelevel_Num_Ops.typelevelSucc(Data_Typelevel_Num_Sets.posD6)()(Data_Typelevel_Num_Ops.divMod10D5D0)()(Data_Typelevel_Num_Ops.divMod10D6D0))(Deku_Util.detupTuple(Data_Typelevel_Num_Ops.typelevelSucc(Data_Typelevel_Num_Sets.posD7)()(Data_Typelevel_Num_Ops.divMod10D6D0)()(Data_Typelevel_Num_Ops.divMod10D7D0))(Deku_Util.detupTuple(Data_Typelevel_Num_Ops.typelevelSucc(Data_Typelevel_Num_Sets.posD8)()(Data_Typelevel_Num_Ops.divMod10D7D0)()(Data_Typelevel_Num_Ops.divMod10D8D0))(Deku_Util.detupTuple(Data_Typelevel_Num_Ops.typelevelSucc(Data_Typelevel_Num_Sets.posD9)()(Data_Typelevel_Num_Ops.divMod10D8D0)()(Data_Typelevel_Num_Ops.divMod10D9D0))(Deku_Util.detupUnit)()()()({
+                              reflectSymbol: function () {
+                                  return "@8";
+                              }
+                          })())()()()({
+                              reflectSymbol: function () {
+                                  return "@7";
+                              }
+                          })())()()()({
+                              reflectSymbol: function () {
+                                  return "@6";
+                              }
+                          })())()()()({
+                              reflectSymbol: function () {
+                                  return "@5";
+                              }
+                          })())()()()({
+                              reflectSymbol: function () {
+                                  return "@4";
+                              }
+                          })())()()()({
+                              reflectSymbol: function () {
+                                  return "@3";
+                              }
+                          })())()()()({
+                              reflectSymbol: function () {
+                                  return "@2";
+                              }
+                          })())()()()({
+                              reflectSymbol: function () {
+                                  return "@1";
+                              }
+                          })())()()()({
+                              reflectSymbol: function () {
+                                  return "@0";
+                              }
+                          })())(new Data_Tuple.Tuple(Deku_Graph_DOM.p([  ])(Deku_Graph_DOM_Shorthand.text("PursX would be of only limited utility if it could only render static content. In this section, we'll see how to make it dynamic, both by modifying existing elements and inserting entirely new ones.")), new Data_Tuple.Tuple(Deku_Graph_DOM.p([  ])(Deku_Graph_DOM_Shorthand.text("The example below is the same one from the Pursx 1 section with two differences. The first is that the background color of the second list item is set dynamically. The second is that there is a new button that is dynamically inserted.")), new Data_Tuple.Tuple(Deku_Graph_DOM.pre([  ])(Deku_Graph_DOM_Shorthand.code([  ])(Deku_Graph_DOM_Shorthand.text("module Deku.Example.Docs.Example.ComponentPursx2 where\x0a\x0aimport Prelude\x0a\x0aimport Data.Either (Either(..))\x0aimport Data.Foldable (for_)\x0aimport Deku.Change (change)\x0aimport Deku.Control.Functions (u, (@>))\x0aimport Deku.Control.Types (Frame0, Scene)\x0aimport Deku.Graph.Attribute (cb)\x0aimport Deku.Graph.DOM ((:=), root)\x0aimport Deku.Graph.DOM as D\x0aimport Deku.Graph.DOM.Shorthand as S\x0aimport Deku.Interpret (class DOMInterpret, makeFFIDOMSnapshot)\x0aimport Deku.Pursx ((~!))\x0aimport Deku.Run (defaultOptions, run)\x0aimport Effect (Effect)\x0aimport FRP.Event (subscribe)\x0aimport Type.Proxy (Proxy(..))\x0aimport Web.DOM (Element)\x0aimport Web.HTML (window)\x0aimport Web.HTML.HTMLDocument (body)\x0aimport Web.HTML.HTMLElement (toElement)\x0aimport Web.HTML.Window (document)\x0a\x0ascene\x0a  :: forall env dom engine res\x0a   . Monoid res\x0a  => DOMInterpret dom engine\x0a  => Element\x0a  -> Scene env dom engine Frame0 Unit res\x0ascene elt =\x0a  ( \\_ push ->\x0a      ( u $ root elt $ (Proxy :: _ " + ("\"\"\"" + ("\x0a      <div>\x0a        <button>I do nothing</button>\x0a        <ul>\x0a          <li>A</li>\x0a          <li ~myli~>B</li>\x0a          <li>C</li>\x0a        </ul>\x0a        <div>\x0a          <a href=\"https://github.com/mikesol/purescript-deku\"></a>\x0a          <i>bar</i>\x0a          ~somethingNew~\x0a          <span style=\"font-weight:800;\">baz</span>\x0a        </div>\x0a        <div><div></div><div><input type=\"range\"/></div></div>\x0a      </div>\x0a      " + ("\"\"\"" + ") ~! {myli: D.li'attr [D.Style := \"background-color:rgb(200,240,210);\"]\x0a      , somethingNew: D.button [D.OnClick := cb (const $ push unit)] (S.text \"I was dynamically inserted\")\x0a      }\x0a      )\x0a  ) @> \\e _ -> case e of\x0a    Left _ -> pure unit\x0a    Right _ -> change { \"root.psx.somethingNew.t\": \"Thanks for clicking me!\"}\x0a\x0amain :: Effect Unit\x0amain = do\x0a  b' <- window >>= document >>= body\x0a  for_ (toElement <$> b') \\elt -> do\x0a    ffi <- makeFFIDOMSnapshot\x0a    subscribe\x0a      ( run (pure unit) (pure unit) defaultOptions ffi(scene elt)      )\x0a      (_.res >>> pure)\x0a")))))), new Data_Tuple.Tuple(Deku_Graph_DOM.p([  ])(Deku_Util.detup(Deku_Util.detupTuple(Data_Typelevel_Num_Ops.typelevelSucc(Data_Typelevel_Num_Sets.posD1)()(Data_Typelevel_Num_Ops.divMod10D0D0)()(Data_Typelevel_Num_Ops.divMod10D1D0))(Deku_Util.detupUnit)()()()({
+                              reflectSymbol: function () {
+                                  return "@0";
+                              }
+                          })())(new Data_Tuple.Tuple(Deku_Graph_DOM.text("Here's what it produces:"), Data_Unit.unit))), new Data_Tuple.Tuple(Deku_Graph_DOM.myNameIs({
+                              reflectSymbol: function () {
+                                  return "blocky";
+                              }
+                          })(Type_Proxy["Proxy"].value)(Deku_Graph_DOM.blockquote([  ])(Deku_Pursx.psxR({
+                              reflectSymbol: function () {
+                                  return "\x0a      <div>\x0a        <button>I do nothing</button>\x0a        <ul>\x0a          <li>A</li>\x0a          <li ~myli~>B</li>\x0a          <li>C</li>\x0a        </ul>\x0a        <div>\x0a          <a href=\"https://github.com/mikesol/purescript-deku\"></a>\x0a          <i>bar</i>\x0a          ~somethingNew~\x0a          <span style=\"font-weight:800;\">baz</span>\x0a        </div>\x0a        <div><div></div><div><input type=\"range\"/></div></div>\x0a      </div>\x0a      ";
+                              }
+                          })()(Type_Proxy["Proxy"].value)({
+                              myli: Deku_Graph_DOM["li'attr"]([ Deku_Graph_DOM.attr(Deku_Graph_DOM.attrLi_StyleString)(Deku_Graph_DOM.Style.value)("background-color:rgb(200,240,210);") ]),
+                              somethingNew: Deku_Graph_DOM.button([ Deku_Graph_DOM.attr(Deku_Graph_DOM.attrOnClickCb)(Deku_Graph_DOM.OnClick.value)(Deku_Graph_Attribute.cb(Data_Function["const"](push(Data_Unit.unit)))) ])(Deku_Graph_DOM_Shorthand.text("I was dynamically inserted"))
+                          }))), new Data_Tuple.Tuple(Deku_Graph_DOM.h2([  ])(Deku_Graph_DOM_Shorthand.text("Dynamism in static content")), new Data_Tuple.Tuple(Deku_Graph_DOM.p([  ])(Deku_Util.detup(Deku_Util.detupTuple(Data_Typelevel_Num_Ops.typelevelSucc(Data_Typelevel_Num_Sets.posD1)()(Data_Typelevel_Num_Ops.divMod10D0D0)()(Data_Typelevel_Num_Ops.divMod10D1D0))(Deku_Util.detupTuple(Data_Typelevel_Num_Ops.typelevelSucc(Data_Typelevel_Num_Sets.posD2)()(Data_Typelevel_Num_Ops.divMod10D1D0)()(Data_Typelevel_Num_Ops.divMod10D2D0))(Deku_Util.detupTuple(Data_Typelevel_Num_Ops.typelevelSucc(Data_Typelevel_Num_Sets.posD3)()(Data_Typelevel_Num_Ops.divMod10D2D0)()(Data_Typelevel_Num_Ops.divMod10D3D0))(Deku_Util.detupTuple(Data_Typelevel_Num_Ops.typelevelSucc(Data_Typelevel_Num_Sets.posD4)()(Data_Typelevel_Num_Ops.divMod10D3D0)()(Data_Typelevel_Num_Ops.divMod10D4D0))(Deku_Util.detupTuple(Data_Typelevel_Num_Ops.typelevelSucc(Data_Typelevel_Num_Sets.posD5)()(Data_Typelevel_Num_Ops.divMod10D4D0)()(Data_Typelevel_Num_Ops.divMod10D5D0))(Deku_Util.detupTuple(Data_Typelevel_Num_Ops.typelevelSucc(Data_Typelevel_Num_Sets.posD6)()(Data_Typelevel_Num_Ops.divMod10D5D0)()(Data_Typelevel_Num_Ops.divMod10D6D0))(Deku_Util.detupTuple(Data_Typelevel_Num_Ops.typelevelSucc(Data_Typelevel_Num_Sets.posD7)()(Data_Typelevel_Num_Ops.divMod10D6D0)()(Data_Typelevel_Num_Ops.divMod10D7D0))(Deku_Util.detupTuple(Data_Typelevel_Num_Ops.typelevelSucc(Data_Typelevel_Num_Sets.posD8)()(Data_Typelevel_Num_Ops.divMod10D7D0)()(Data_Typelevel_Num_Ops.divMod10D8D0))(Deku_Util.detupTuple(Data_Typelevel_Num_Ops.typelevelSucc(Data_Typelevel_Num_Sets.posD9)()(Data_Typelevel_Num_Ops.divMod10D8D0)()(Data_Typelevel_Num_Ops.divMod10D9D0))(Deku_Util.detupTuple(Data_Typelevel_Num_Ops.typelevelSucc(Data_Typelevel_Num_Sets.posPosD0(Data_Typelevel_Num_Sets.posD1))()(Data_Typelevel_Num_Ops.divMod10D9D0)()(Data_Typelevel_Num_Ops.divMod10D1x(Data_Typelevel_Num_Sets.posNatD0(Data_Typelevel_Num_Sets.posD1))))(Deku_Util.detupTuple(Data_Typelevel_Num_Ops.typelevelSucc(Data_Typelevel_Num_Sets.posPosD1(Data_Typelevel_Num_Sets.posD1))()(Data_Typelevel_Num_Ops.divMod10D1x(Data_Typelevel_Num_Sets.posNatD0(Data_Typelevel_Num_Sets.posD1)))()(Data_Typelevel_Num_Ops.divMod10D1x(Data_Typelevel_Num_Sets.posNatD1(Data_Typelevel_Num_Sets.posD1))))(Deku_Util.detupTuple(Data_Typelevel_Num_Ops.typelevelSucc(Data_Typelevel_Num_Sets.posPosD2(Data_Typelevel_Num_Sets.posD1))()(Data_Typelevel_Num_Ops.divMod10D1x(Data_Typelevel_Num_Sets.posNatD1(Data_Typelevel_Num_Sets.posD1)))()(Data_Typelevel_Num_Ops.divMod10D1x(Data_Typelevel_Num_Sets.posNatD2(Data_Typelevel_Num_Sets.posD1))))(Deku_Util.detupUnit)()()()({
+                              reflectSymbol: function () {
+                                  return "@11";
+                              }
+                          })())()()()({
+                              reflectSymbol: function () {
+                                  return "@10";
+                              }
+                          })())()()()({
+                              reflectSymbol: function () {
+                                  return "@9";
+                              }
+                          })())()()()({
+                              reflectSymbol: function () {
+                                  return "@8";
+                              }
+                          })())()()()({
+                              reflectSymbol: function () {
+                                  return "@7";
+                              }
+                          })())()()()({
+                              reflectSymbol: function () {
+                                  return "@6";
+                              }
+                          })())()()()({
+                              reflectSymbol: function () {
+                                  return "@5";
+                              }
+                          })())()()()({
+                              reflectSymbol: function () {
+                                  return "@4";
+                              }
+                          })())()()()({
+                              reflectSymbol: function () {
+                                  return "@3";
+                              }
+                          })())()()()({
+                              reflectSymbol: function () {
+                                  return "@2";
+                              }
+                          })())()()()({
+                              reflectSymbol: function () {
+                                  return "@1";
+                              }
+                          })())()()()({
+                              reflectSymbol: function () {
+                                  return "@0";
+                              }
+                          })())(new Data_Tuple.Tuple(Deku_Graph_DOM.text("Dynamic content is added to pursx with the separator "), new Data_Tuple.Tuple(Deku_Graph_DOM.code([  ])(Deku_Graph_DOM_Shorthand.text("~")), new Data_Tuple.Tuple(Deku_Graph_DOM.text(". This separator can be set programatically as well (see the "), new Data_Tuple.Tuple(Deku_Graph_DOM.code([  ])(Deku_Graph_DOM_Shorthand.text("Deku/Pursx.purs")), new Data_Tuple.Tuple(Deku_Graph_DOM.text(" module for an example of how that is done)."), new Data_Tuple.Tuple(Deku_Graph_DOM.code([  ])(Deku_Graph_DOM_Shorthand.text("innerHTML")), new Data_Tuple.Tuple(Deku_Graph_DOM.text("Once it is added, the record after "), new Data_Tuple.Tuple(Deku_Graph_DOM.code([  ])(Deku_Graph_DOM_Shorthand.text("~!")), new Data_Tuple.Tuple(Deku_Graph_DOM.text(" or "), new Data_Tuple.Tuple(Deku_Graph_DOM.code([  ])(Deku_Graph_DOM_Shorthand.text("~~")), new Data_Tuple.Tuple(Deku_Graph_DOM.span([ Deku_Graph_DOM.attr(Deku_Graph_DOM.attrSpan_StyleString)(Deku_Graph_DOM.Style.value)("font-weight:800;") ])(Deku_Graph_DOM_Shorthand.text(" must ")), new Data_Tuple.Tuple(Deku_Graph_DOM.text(" include a field with the name between the squgglies. In the case of a pre-existing element (like our list item), this field will contain attributes. In the case of our entirely new item, it will contain a Deku tree (ha!). These elements are addressable in the usual fashion, and you can see that you can interact with them. This provides a great way to mix static and dynamic content in a single document."), Data_Unit.unit)))))))))))))), new Data_Tuple.Tuple(Deku_Graph_DOM.h2([  ])(Deku_Graph_DOM_Shorthand.text("Next steps")), new Data_Tuple.Tuple(Deku_Graph_DOM.p([  ])(Deku_Util.detup(Deku_Util.detupTuple(Data_Typelevel_Num_Ops.typelevelSucc(Data_Typelevel_Num_Sets.posD1)()(Data_Typelevel_Num_Ops.divMod10D0D0)()(Data_Typelevel_Num_Ops.divMod10D1D0))(Deku_Util.detupTuple(Data_Typelevel_Num_Ops.typelevelSucc(Data_Typelevel_Num_Sets.posD2)()(Data_Typelevel_Num_Ops.divMod10D1D0)()(Data_Typelevel_Num_Ops.divMod10D2D0))(Deku_Util.detupTuple(Data_Typelevel_Num_Ops.typelevelSucc(Data_Typelevel_Num_Sets.posD3)()(Data_Typelevel_Num_Ops.divMod10D2D0)()(Data_Typelevel_Num_Ops.divMod10D3D0))(Deku_Util.detupUnit)()()()({
+                              reflectSymbol: function () {
+                                  return "@2";
+                              }
+                          })())()()()({
+                              reflectSymbol: function () {
+                                  return "@1";
+                              }
+                          })())()()()({
+                              reflectSymbol: function () {
+                                  return "@0";
+                              }
+                          })())(new Data_Tuple.Tuple(Deku_Graph_DOM.span([  ])(Deku_Graph_DOM_Shorthand.text("In more complicated apps, like this documentation, we'll want to split up our components into sub-components and create a way for them to communicate back and forth. In the next section, we'll see one way to do this via ")), new Data_Tuple.Tuple(Deku_Graph_DOM.a([ Deku_Graph_DOM.attr(Deku_Graph_DOM.attrOnClickCb)(Deku_Graph_DOM.OnClick.value)(Deku_Graph_Attribute.cb(Data_Function["const"](Control_Apply.applySecond(Effect.applyEffect)(dpage(Deku_Example_Docs_Types.Subgraph.value))(Deku_Example_Docs_Util.scrollToTop)))), Deku_Graph_DOM.attr(Deku_Graph_DOM.attrA_StyleString)(Deku_Graph_DOM.Style.value)("cursor:pointer;") ])(Deku_Graph_DOM_Shorthand.text("subgraphs")), new Data_Tuple.Tuple(Deku_Graph_DOM.span([  ])(Deku_Graph_DOM_Shorthand.text(".")), Data_Unit.unit))))), Data_Unit.unit)))))))))))
+                      })
+                  });
+              };
+          })(function (e) {
+              return function (v) {
+                  if (e instanceof Data_Either.Left) {
+                      return Control_Applicative.pure(Deku_Control_Monadic.applicativeMDOM)(Data_Unit.unit);
+                  };
+                  if (e instanceof Data_Either.Right) {
+                      return Deku_Change.change(dictDOMInterpret)(Deku_Change.changeAll()(Deku_Change.changeRL_Cons({
+                          reflectSymbol: function () {
+                              return "blocky.psx.somethingNew.t";
+                          }
+                      })()()(Deku_Change.changeText({
+                          reflectSymbol: function () {
+                              return "blocky.psx.somethingNew.t";
+                          }
+                      })())(Deku_Change.changeRL_Nil)))({
+                          "blocky.psx.somethingNew.t": "Thanks for clicking me!"
+                      });
+                  };
+                  throw new Error("Failed pattern match at Deku.Example.Docs.Pursx2 (line 189, column 16 - line 191, column 80): " + [ e.constructor.name ]);
+              };
+          });
+      };
+  };
+  exports["pursx2"] = pursx2;
+})(PS);
 (function(exports) {
   exports.massiveCreate_ = function ($unSubgraph) {
 	  return function ($makeSubgraph) {
@@ -11069,7 +11564,7 @@ var PS = {};
                               reflectSymbol: function () {
                                   return "@0";
                               }
-                          })())(new Data_Tuple.Tuple(Deku_Graph_DOM.span([  ])(Deku_Graph_DOM_Shorthand.text("In this section, we built a simple component out of records. We used several record-shorthand functions, including the ")), new Data_Tuple.Tuple(Deku_Graph_DOM.code([  ])(Deku_Graph_DOM_Shorthand.text("detup")), new Data_Tuple.Tuple(Deku_Graph_DOM.text(", the"), new Data_Tuple.Tuple(Deku_Graph_DOM.code([  ])(Deku_Graph_DOM_Shorthand.text("vex")), new Data_Tuple.Tuple(Deku_Graph_DOM.text(", and the "), new Data_Tuple.Tuple(Deku_Graph_DOM.code([  ])(Deku_Graph_DOM_Shorthand.text("S")), new Data_Tuple.Tuple(Deku_Graph_DOM.text(" family of functions. We also saw how to add attributes to elements. In the next section, we'll learn how to respond to "), new Data_Tuple.Tuple(Deku_Graph_DOM.a([ Deku_Graph_DOM.attr(Deku_Graph_DOM.attrOnClickCb)(Deku_Graph_DOM.OnClick.value)(Deku_Graph_Attribute.cb(Data_Function["const"](Control_Apply.applySecond(Effect.applyEffect)(dpage(Deku_Example_Docs_Types.Events.value))(Deku_Example_Docs_Util.scrollToTop)))), Deku_Graph_DOM.attr(Deku_Graph_DOM.attrA_StyleString)(Deku_Graph_DOM.Style.value)("cursor:pointer;") ])(Deku_Graph_DOM_Shorthand.text("events")), new Data_Tuple.Tuple(Deku_Graph_DOM.span([  ])(Deku_Graph_DOM_Shorthand.text(".")), Data_Unit.unit))))))))))), Data_Unit.unit)))))))))))))))))))
+                          })())(new Data_Tuple.Tuple(Deku_Graph_DOM.span([  ])(Deku_Graph_DOM_Shorthand.text("In this section, we built a simple component out of records. We used several record-shorthand functions, including the ")), new Data_Tuple.Tuple(Deku_Graph_DOM.code([  ])(Deku_Graph_DOM_Shorthand.text("detup")), new Data_Tuple.Tuple(Deku_Graph_DOM.text(", the"), new Data_Tuple.Tuple(Deku_Graph_DOM.code([  ])(Deku_Graph_DOM_Shorthand.text("vex")), new Data_Tuple.Tuple(Deku_Graph_DOM.text(", and the "), new Data_Tuple.Tuple(Deku_Graph_DOM.code([  ])(Deku_Graph_DOM_Shorthand.text("S")), new Data_Tuple.Tuple(Deku_Graph_DOM.text(" family of functions. We also saw how to add attributes to elements. In the next section, we'll recreate the exact same element using a different input syntax called "), new Data_Tuple.Tuple(Deku_Graph_DOM.a([ Deku_Graph_DOM.attr(Deku_Graph_DOM.attrOnClickCb)(Deku_Graph_DOM.OnClick.value)(Deku_Graph_Attribute.cb(Data_Function["const"](Control_Apply.applySecond(Effect.applyEffect)(dpage(Deku_Example_Docs_Types.PURSX1.value))(Deku_Example_Docs_Util.scrollToTop)))), Deku_Graph_DOM.attr(Deku_Graph_DOM.attrA_StyleString)(Deku_Graph_DOM.Style.value)("cursor:pointer;") ])(Deku_Graph_DOM_Shorthand.text("PURSX")), new Data_Tuple.Tuple(Deku_Graph_DOM.span([  ])(Deku_Graph_DOM_Shorthand.text(".")), Data_Unit.unit))))))))))), Data_Unit.unit)))))))))))))))))))
                       })
                   });
               };
@@ -11998,6 +12493,8 @@ var PS = {};
   var Deku_Example_Docs_Events = $PS["Deku.Example.Docs.Events"];
   var Deku_Example_Docs_HelloWorld = $PS["Deku.Example.Docs.HelloWorld"];
   var Deku_Example_Docs_Intro = $PS["Deku.Example.Docs.Intro"];
+  var Deku_Example_Docs_Pursx1 = $PS["Deku.Example.Docs.Pursx1"];
+  var Deku_Example_Docs_Pursx2 = $PS["Deku.Example.Docs.Pursx2"];
   var Deku_Example_Docs_SSR = $PS["Deku.Example.Docs.SSR"];
   var Deku_Example_Docs_SimpleComponent = $PS["Deku.Example.Docs.SimpleComponent"];
   var Deku_Example_Docs_Subgraphs = $PS["Deku.Example.Docs.Subgraphs"];
@@ -12030,6 +12527,12 @@ var PS = {};
                       if (v instanceof Deku_Example_Docs_Types.SimpleComponent) {
                           return Deku_Example_Docs_SimpleComponent.simpleComponent(dpage)(dictDOMInterpret);
                       };
+                      if (v instanceof Deku_Example_Docs_Types.PURSX1) {
+                          return Deku_Example_Docs_Pursx1.pursx1(dpage)(dictDOMInterpret);
+                      };
+                      if (v instanceof Deku_Example_Docs_Types.PURSX2) {
+                          return Deku_Example_Docs_Pursx2.pursx2(dpage)(dictDOMInterpret);
+                      };
                       if (v instanceof Deku_Example_Docs_Types.Events) {
                           return Deku_Example_Docs_Events.events(dt)(dpage)(dictDOMInterpret);
                       };
@@ -12042,7 +12545,7 @@ var PS = {};
                       if (v instanceof Deku_Example_Docs_Types.Subgraph) {
                           return Deku_Example_Docs_Subgraphs.subgraphs(dt)(dpage)(dictDOMInterpret);
                       };
-                      throw new Error("Failed pattern match at Deku.Example.Docs (line 106, column 3 - line 106, column 62): " + [ dpage.constructor.name, v.constructor.name ]);
+                      throw new Error("Failed pattern match at Deku.Example.Docs (line 112, column 3 - line 112, column 62): " + [ dpage.constructor.name, v.constructor.name ]);
                   };
               };
           };
@@ -12066,8 +12569,8 @@ var PS = {};
                                       };
                                       return "display:none;";
                                   })()) ])(Deku_Graph_DOM_Shorthand.text(" | ")), Data_Unit.unit))));
-                              })(Data_Vec.cons(Data_Typelevel_Num_Ops.typelevelSucc(Data_Typelevel_Num_Sets.posD7)()(Data_Typelevel_Num_Ops.divMod10D6D0)()(Data_Typelevel_Num_Ops.divMod10D7D0))(new Data_Tuple.Tuple(Deku_Example_Docs_Types.Intro.value, new Data_Tuple.Tuple("Home", true)))(Data_Vec.cons(Data_Typelevel_Num_Ops.typelevelSucc(Data_Typelevel_Num_Sets.posD6)()(Data_Typelevel_Num_Ops.divMod10D5D0)()(Data_Typelevel_Num_Ops.divMod10D6D0))(new Data_Tuple.Tuple(Deku_Example_Docs_Types.HelloWorld.value, new Data_Tuple.Tuple("Hello world", true)))(Data_Vec.cons(Data_Typelevel_Num_Ops.typelevelSucc(Data_Typelevel_Num_Sets.posD5)()(Data_Typelevel_Num_Ops.divMod10D4D0)()(Data_Typelevel_Num_Ops.divMod10D5D0))(new Data_Tuple.Tuple(Deku_Example_Docs_Types.SimpleComponent.value, new Data_Tuple.Tuple("Component", true)))(Data_Vec.cons(Data_Typelevel_Num_Ops.typelevelSucc(Data_Typelevel_Num_Sets.posD4)()(Data_Typelevel_Num_Ops.divMod10D3D0)()(Data_Typelevel_Num_Ops.divMod10D4D0))(new Data_Tuple.Tuple(Deku_Example_Docs_Types.Events.value, new Data_Tuple.Tuple("Events", true)))(Data_Vec.cons(Data_Typelevel_Num_Ops.typelevelSucc(Data_Typelevel_Num_Sets.posD3)()(Data_Typelevel_Num_Ops.divMod10D2D0)()(Data_Typelevel_Num_Ops.divMod10D3D0))(new Data_Tuple.Tuple(Deku_Example_Docs_Types.Effects.value, new Data_Tuple.Tuple("Effects", true)))(Data_Vec.cons(Data_Typelevel_Num_Ops.typelevelSucc(Data_Typelevel_Num_Sets.posD2)()(Data_Typelevel_Num_Ops.divMod10D1D0)()(Data_Typelevel_Num_Ops.divMod10D2D0))(new Data_Tuple.Tuple(Deku_Example_Docs_Types.Subgraph.value, new Data_Tuple.Tuple("Subgraphs", true)))(Data_Vec.cons(Data_Typelevel_Num_Ops.typelevelSucc(Data_Typelevel_Num_Sets.posD1)()(Data_Typelevel_Num_Ops.divMod10D0D0)()(Data_Typelevel_Num_Ops.divMod10D1D0))(new Data_Tuple.Tuple(Deku_Example_Docs_Types.SSR.value, new Data_Tuple.Tuple("SSR", false)))(Data_Vec.empty))))))));
-                              return Deku_Util.vex(Deku_Util.vxneq(Data_Typelevel_Num_Ops.succPred(Data_Typelevel_Num_Ops.typelevelSucc(Data_Typelevel_Num_Sets.posD7)()(Data_Typelevel_Num_Ops.divMod10D6D0)()(Data_Typelevel_Num_Ops.divMod10D7D0)))(Deku_Util.vxneq(Data_Typelevel_Num_Ops.succPred(Data_Typelevel_Num_Ops.typelevelSucc(Data_Typelevel_Num_Sets.posD6)()(Data_Typelevel_Num_Ops.divMod10D5D0)()(Data_Typelevel_Num_Ops.divMod10D6D0)))(Deku_Util.vxneq(Data_Typelevel_Num_Ops.succPred(Data_Typelevel_Num_Ops.typelevelSucc(Data_Typelevel_Num_Sets.posD5)()(Data_Typelevel_Num_Ops.divMod10D4D0)()(Data_Typelevel_Num_Ops.divMod10D5D0)))(Deku_Util.vxneq(Data_Typelevel_Num_Ops.succPred(Data_Typelevel_Num_Ops.typelevelSucc(Data_Typelevel_Num_Sets.posD4)()(Data_Typelevel_Num_Ops.divMod10D3D0)()(Data_Typelevel_Num_Ops.divMod10D4D0)))(Deku_Util.vxneq(Data_Typelevel_Num_Ops.succPred(Data_Typelevel_Num_Ops.typelevelSucc(Data_Typelevel_Num_Sets.posD3)()(Data_Typelevel_Num_Ops.divMod10D2D0)()(Data_Typelevel_Num_Ops.divMod10D3D0)))(Deku_Util.vxneq(Data_Typelevel_Num_Ops.succPred(Data_Typelevel_Num_Ops.typelevelSucc(Data_Typelevel_Num_Sets.posD2)()(Data_Typelevel_Num_Ops.divMod10D1D0)()(Data_Typelevel_Num_Ops.divMod10D2D0)))(Deku_Util.vxneq(Data_Typelevel_Num_Ops.succPred(Data_Typelevel_Num_Ops.typelevelSucc(Data_Typelevel_Num_Sets.posD1)()(Data_Typelevel_Num_Ops.divMod10D0D0)()(Data_Typelevel_Num_Ops.divMod10D1D0)))(Deku_Util.vx0)()()()({
+                              })(Data_Vec.cons(Data_Typelevel_Num_Ops.typelevelSucc(Data_Typelevel_Num_Sets.posD9)()(Data_Typelevel_Num_Ops.divMod10D8D0)()(Data_Typelevel_Num_Ops.divMod10D9D0))(new Data_Tuple.Tuple(Deku_Example_Docs_Types.Intro.value, new Data_Tuple.Tuple("Home", true)))(Data_Vec.cons(Data_Typelevel_Num_Ops.typelevelSucc(Data_Typelevel_Num_Sets.posD8)()(Data_Typelevel_Num_Ops.divMod10D7D0)()(Data_Typelevel_Num_Ops.divMod10D8D0))(new Data_Tuple.Tuple(Deku_Example_Docs_Types.HelloWorld.value, new Data_Tuple.Tuple("Hello world", true)))(Data_Vec.cons(Data_Typelevel_Num_Ops.typelevelSucc(Data_Typelevel_Num_Sets.posD7)()(Data_Typelevel_Num_Ops.divMod10D6D0)()(Data_Typelevel_Num_Ops.divMod10D7D0))(new Data_Tuple.Tuple(Deku_Example_Docs_Types.SimpleComponent.value, new Data_Tuple.Tuple("Component", true)))(Data_Vec.cons(Data_Typelevel_Num_Ops.typelevelSucc(Data_Typelevel_Num_Sets.posD6)()(Data_Typelevel_Num_Ops.divMod10D5D0)()(Data_Typelevel_Num_Ops.divMod10D6D0))(new Data_Tuple.Tuple(Deku_Example_Docs_Types.PURSX1.value, new Data_Tuple.Tuple("Pursx 1", true)))(Data_Vec.cons(Data_Typelevel_Num_Ops.typelevelSucc(Data_Typelevel_Num_Sets.posD5)()(Data_Typelevel_Num_Ops.divMod10D4D0)()(Data_Typelevel_Num_Ops.divMod10D5D0))(new Data_Tuple.Tuple(Deku_Example_Docs_Types.Events.value, new Data_Tuple.Tuple("Events", true)))(Data_Vec.cons(Data_Typelevel_Num_Ops.typelevelSucc(Data_Typelevel_Num_Sets.posD4)()(Data_Typelevel_Num_Ops.divMod10D3D0)()(Data_Typelevel_Num_Ops.divMod10D4D0))(new Data_Tuple.Tuple(Deku_Example_Docs_Types.Effects.value, new Data_Tuple.Tuple("Effects", true)))(Data_Vec.cons(Data_Typelevel_Num_Ops.typelevelSucc(Data_Typelevel_Num_Sets.posD3)()(Data_Typelevel_Num_Ops.divMod10D2D0)()(Data_Typelevel_Num_Ops.divMod10D3D0))(new Data_Tuple.Tuple(Deku_Example_Docs_Types.PURSX2.value, new Data_Tuple.Tuple("Pursx 2", true)))(Data_Vec.cons(Data_Typelevel_Num_Ops.typelevelSucc(Data_Typelevel_Num_Sets.posD2)()(Data_Typelevel_Num_Ops.divMod10D1D0)()(Data_Typelevel_Num_Ops.divMod10D2D0))(new Data_Tuple.Tuple(Deku_Example_Docs_Types.Subgraph.value, new Data_Tuple.Tuple("Subgraphs", true)))(Data_Vec.cons(Data_Typelevel_Num_Ops.typelevelSucc(Data_Typelevel_Num_Sets.posD1)()(Data_Typelevel_Num_Ops.divMod10D0D0)()(Data_Typelevel_Num_Ops.divMod10D1D0))(new Data_Tuple.Tuple(Deku_Example_Docs_Types.SSR.value, new Data_Tuple.Tuple("SSR", false)))(Data_Vec.empty))))))))));
+                              return Deku_Util.vex(Deku_Util.vxneq(Data_Typelevel_Num_Ops.succPred(Data_Typelevel_Num_Ops.typelevelSucc(Data_Typelevel_Num_Sets.posD9)()(Data_Typelevel_Num_Ops.divMod10D8D0)()(Data_Typelevel_Num_Ops.divMod10D9D0)))(Deku_Util.vxneq(Data_Typelevel_Num_Ops.succPred(Data_Typelevel_Num_Ops.typelevelSucc(Data_Typelevel_Num_Sets.posD8)()(Data_Typelevel_Num_Ops.divMod10D7D0)()(Data_Typelevel_Num_Ops.divMod10D8D0)))(Deku_Util.vxneq(Data_Typelevel_Num_Ops.succPred(Data_Typelevel_Num_Ops.typelevelSucc(Data_Typelevel_Num_Sets.posD7)()(Data_Typelevel_Num_Ops.divMod10D6D0)()(Data_Typelevel_Num_Ops.divMod10D7D0)))(Deku_Util.vxneq(Data_Typelevel_Num_Ops.succPred(Data_Typelevel_Num_Ops.typelevelSucc(Data_Typelevel_Num_Sets.posD6)()(Data_Typelevel_Num_Ops.divMod10D5D0)()(Data_Typelevel_Num_Ops.divMod10D6D0)))(Deku_Util.vxneq(Data_Typelevel_Num_Ops.succPred(Data_Typelevel_Num_Ops.typelevelSucc(Data_Typelevel_Num_Sets.posD5)()(Data_Typelevel_Num_Ops.divMod10D4D0)()(Data_Typelevel_Num_Ops.divMod10D5D0)))(Deku_Util.vxneq(Data_Typelevel_Num_Ops.succPred(Data_Typelevel_Num_Ops.typelevelSucc(Data_Typelevel_Num_Sets.posD4)()(Data_Typelevel_Num_Ops.divMod10D3D0)()(Data_Typelevel_Num_Ops.divMod10D4D0)))(Deku_Util.vxneq(Data_Typelevel_Num_Ops.succPred(Data_Typelevel_Num_Ops.typelevelSucc(Data_Typelevel_Num_Sets.posD3)()(Data_Typelevel_Num_Ops.divMod10D2D0)()(Data_Typelevel_Num_Ops.divMod10D3D0)))(Deku_Util.vxneq(Data_Typelevel_Num_Ops.succPred(Data_Typelevel_Num_Ops.typelevelSucc(Data_Typelevel_Num_Sets.posD2)()(Data_Typelevel_Num_Ops.divMod10D1D0)()(Data_Typelevel_Num_Ops.divMod10D2D0)))(Deku_Util.vxneq(Data_Typelevel_Num_Ops.succPred(Data_Typelevel_Num_Ops.typelevelSucc(Data_Typelevel_Num_Sets.posD1)()(Data_Typelevel_Num_Ops.divMod10D0D0)()(Data_Typelevel_Num_Ops.divMod10D1D0)))(Deku_Util.vx0)()()()({
                                   reflectSymbol: function () {
                                       return "@1";
                                   }
@@ -12095,6 +12598,14 @@ var PS = {};
                                   reflectSymbol: function () {
                                       return "@7";
                                   }
+                              })())()()()({
+                                  reflectSymbol: function () {
+                                      return "@8";
+                                  }
+                              })())()()()({
+                                  reflectSymbol: function () {
+                                      return "@9";
+                                  }
                               })())(sections);
                           })())),
                           page: Deku_Graph_DOM.subgraph(Deku_Example_Docs_Types.hashablePage)(Data_Map_Internal.singleton(Deku_Example_Docs_Types.Intro.value)(new Data_Maybe.Just(Data_Unit.unit)))(function (dictDOMInterpret) {
@@ -12121,7 +12632,7 @@ var PS = {};
                           "root.main.page": Deku_Graph_DOM.xsubgraph(Deku_Example_Docs_Types.hashablePage)(Data_Map_Internal.insert(Deku_Example_Docs_Types.ordPage)(e.value0)(new Data_Maybe.Just(Data_Unit.unit))(Data_Map_Internal.singleton(oldPg)(Data_Maybe.Nothing.value)))
                       })));
                   };
-                  throw new Error("Failed pattern match at Deku.Example.Docs (line 91, column 19 - line 103, column 12): " + [ e.constructor.name ]);
+                  throw new Error("Failed pattern match at Deku.Example.Docs (line 97, column 19 - line 109, column 12): " + [ e.constructor.name ]);
               };
           });
       };

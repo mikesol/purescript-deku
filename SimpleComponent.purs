@@ -250,15 +250,15 @@ main = do
                                 /\ D.text ", and the "
                                 /\ D.code [] (S.text "S")
                                 /\ D.text
-                                  " family of functions. We also saw how to add attributes to elements. In the next section, we'll learn how to respond to "
+                                  " family of functions. We also saw how to add attributes to elements. In the next section, we'll recreate the exact same element using a different input syntax called "
                                 /\ D.a
                                   [ D.OnClick := cb
-                                      ( const $ dpage Events *>
+                                      ( const $ dpage PURSX1 *>
                                           scrollToTop
                                       )
                                   , D.Style := "cursor:pointer;"
                                   ]
-                                  (S.text "events")
+                                  (S.text "PURSX")
                                 /\ D.span []
                                   ( S.text "."
                                   )
