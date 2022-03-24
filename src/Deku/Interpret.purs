@@ -8,6 +8,7 @@ module Deku.Interpret
   , makeFFIDOMSnapshot
   , massiveCreate
   , massiveChange
+  , makePursx
   , connectXToY
   , destroyUnit
   , disconnectXFromY
@@ -26,7 +27,7 @@ import Data.Either (Either(..))
 import Data.Maybe (Maybe(..))
 import Data.Monoid.Additive (Additive)
 import Data.Newtype (unwrap)
-import Data.Nullable (Nullable, toNullable)
+import Data.Nullable (Nullable, null, toNullable)
 import Data.Tuple (fst, snd)
 import Data.Tuple.Nested (type (/\), (/\))
 import Data.Typelevel.Undefined (undefined)
@@ -62,6 +63,7 @@ class DOMInterpret dom engine where
   makeRoot :: R.MakeRoot -> dom -> engine
   makeElement :: R.MakeElement -> dom -> engine
   makeText :: R.MakeText -> dom -> engine
+  makePursx :: R.MakePursx -> dom -> engine
   makeSubgraph
     :: forall index env push
      . SubgraphInput index env push dom engine
@@ -105,6 +107,7 @@ instance freeDOMInterpret :: DOMInterpret Unit Instruction where
   connectXToY = const <<< R.iConnectXToY
   disconnectXFromY = const <<< R.iDisconnectXFromY
   destroyUnit = const <<< R.iDestroyUnit
+  makePursx = const <<< R.iMakePursx
   makeElement = const <<< R.iMakeElement
   makeRoot = const <<< R.iMakeRoot
   makeText = const <<< R.iMakeText
@@ -130,6 +133,15 @@ foreign import disconnectXFromY_
 foreign import destroyUnit_
   :: forall r. { id :: String | r } -> FFIDOMSnapshot -> Effect Unit
 
+foreign import makePursx_
+  :: ( Nullable String
+       -> R.MassiveCreate
+       -> FFIDOMSnapshot
+       -> Effect Unit
+     )
+  -> R.MakePursx
+  -> FFIDOMSnapshot
+  -> Effect Unit
 foreign import makeElement_
   :: R.MakeElement
   -> FFIDOMSnapshot
@@ -171,6 +183,8 @@ foreign import massiveCreate_
   -> (R.MakeRoot -> FFIDOMSnapshot -> Effect Unit)
   -> (R.MakeElement -> FFIDOMSnapshot -> Effect Unit)
   -> (R.MakeText -> FFIDOMSnapshot -> Effect Unit)
+  -> (R.MakePursx -> FFIDOMSnapshot -> Effect Unit)
+  -> Nullable String
   -> R.MassiveCreate
   -> FFIDOMSnapshot
   -> Effect Unit
@@ -248,12 +262,24 @@ instance effectfulDOMInterpret ::
   destroyUnit = destroyUnit_
   makeElement = makeElement_
   makeRoot = makeRoot_
+  makePursx noEta = makePursx_
+    ( massiveCreate_
+        mcUnsubgraph
+        makeSubgraph
+        makeRoot
+        makeElement
+        makeText
+        makePursx
+    )
+    noEta
   massiveCreate noEta = massiveCreate_
     mcUnsubgraph
     makeSubgraph
     makeRoot
     makeElement
     makeText
+    makePursx
+    null
     noEta
   makeText = makeText_
   makeSubgraph { id, scenes, envs } dom =
@@ -333,6 +359,7 @@ instance mixedDOMInterpret ::
   connectXToY a (x /\ y) = connectXToY a x /\ connectXToY a y
   disconnectXFromY a (x /\ y) = disconnectXFromY a x /\ disconnectXFromY a y
   destroyUnit a (x /\ y) = destroyUnit a x /\ destroyUnit a y
+  makePursx a (x /\ y) = makePursx a x /\ makePursx a y
   makeSubgraph { id, envs, scenes } (x /\ y) =
     makeSubgraph { id, envs, scenes: map domEngine1st scenes } x /\
       makeSubgraph { id, envs, scenes: map domEngine2nd scenes } y

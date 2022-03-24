@@ -5,12 +5,11 @@ module Deku.CreateT where
 
 import Prelude
 
-import Data.Typelevel.Bool (False, True)
-import Deku.Graph.DOM (Element)
 import Deku.Graph.DOM as CTOR
 import Deku.Graph.Graph (Graph)
 import Deku.Graph.Node (NodeC)
-import Deku.Util (class AddPrefixToRowList, class Gate)
+import Deku.Pursx (Pursx)
+import Deku.Util (class AddPrefixToRowList, class GetNodeEdges, class Gate)
 import Prim.Row as R
 import Prim.RowList as RL
 import Prim.Symbol as Sym
@@ -56,12 +55,6 @@ class GetSeparator (i :: Symbol) (o :: Symbol) | i -> o
 
 instance getSeparatorBlank :: GetSeparator "" ""
 else instance getSeparator :: GetSeparator anything "."
-
-class GetNodeEdges i tf pfx node edges | i -> tf pfx node edges
-instance getNodeEdgesElement ::
-  GetNodeEdges (Element node edges) False "" node edges
-instance getNodeEdgesMyNameIs ::
-  GetNodeEdges (CTOR.MyNameIs px (Element node edges)) True px node edges
 
 instance createStepRLTCons ::
   ( R.Cons key val ignore r
@@ -164,6 +157,12 @@ instance createTText ::
   , R.Cons ptr (NodeC CTOR.TText {}) graphi grapho
   ) =>
   CreateT' ptr (CTOR.Text) graphi grapho
+
+instance createTPursx ::
+  ( R.Lacks ptr graphi
+  , R.Cons ptr (NodeC (Pursx verb html children) {}) graphi grapho
+  ) =>
+  CreateT' ptr (Pursx verb html children) graphi grapho
 
 instance createTSubgraph ::
   ( R.Lacks ptr graphi

@@ -10,6 +10,9 @@ import Data.Typelevel.Bool (True, False)
 import Data.Typelevel.Num (class Nat, class Pred, class Succ, type (:*), D0, D1, D2, D3, D4, D5, D6, D7, D8, D9)
 import Data.Vec (Vec, uncons)
 import Deku.Graph.DOM (Element, MyNameIs, Text)
+import Deku.Graph.DOM as CTOR
+import Deku.Pursx (class PXStart)
+import Deku.Pursx (class PursxToEdges, Pursx)
 import Prim.Ordering (Ordering, LT, GT, EQ)
 import Prim.Row (class Cons, class Lacks)
 import Prim.RowList (RowList)
@@ -201,6 +204,15 @@ instance addPrefixToRowListCons3 ::
     (RL.Cons a (MyNameIs foo bar) c)
     (RL.Cons foo (MyNameIs foo bar) x)
 
+instance addPrefixToRowListCons4 ::
+  ( AddPrefixToRowList sym c x
+  , Sym.Append sym a symA
+  ) =>
+  AddPrefixToRowList sym
+    (RL.Cons a (Pursx xx yy zz) c)
+    (RL.Cons symA (Pursx xx yy zz) x)
+
+
 instance addPrefixToRowListNil :: AddPrefixToRowList sym RL.Nil RL.Nil
 
 class Detup (n :: Type) (a :: Type) (b :: Row Type) | n a -> b where
@@ -259,3 +271,16 @@ instance N2S D7 "7"
 instance N2S D8 "8"
 instance N2S D9 "9"
 instance (N2S a a', N2S b b', Sym.Append a' b' c) => N2S (a :* b) c
+
+class GetNodeEdges :: forall k1 k2 k3 k4 k5. k1 -> k2 -> k3 -> k4 -> k5 -> Constraint
+class GetNodeEdges i tf pfx node edges | i -> tf pfx node edges
+instance getNodeEdgesElement ::
+  GetNodeEdges (Element node edges) False "" node edges
+instance getNodeEdgesMyNameIs ::
+  GetNodeEdges (CTOR.MyNameIs px (Element node edges)) True px node edges
+-- ugh, double parsing...
+-- need this to be able to make unique rows in the graph
+-- but psx already does this
+-- can we hold proof somehow??
+instance getNodeEdgesPursx ::
+  (PXStart verb " " html r, PursxToEdges r e) => GetNodeEdges (Pursx verb html r) False "" (Pursx verb html r) e

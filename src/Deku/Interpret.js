@@ -16,8 +16,6 @@ var connectXToY = function (calledExternally) {
 				return function (stateY) {
 					return function () {
 						stateY.units[y].main.appendChild(stateX.units[x].main);
-						stateX.units[x].outgoing.push({ unit: y, state: stateY });
-						stateY.units[y].incoming.push({ unit: x, state: stateX });
 					};
 				};
 			};
@@ -37,16 +35,6 @@ var disconnectXFromY = function (calledExternally) {
 				return function (stateY) {
 					return function () {
 						stateY.units[y].main.removeChild(stateX.units[x].main);
-						stateX.units[x].outgoing = stateX.units[x].outgoing.filter(
-							function (i) {
-								return !(i.unit === y && i.state.unqidfr === stateY.unqidfr);
-							}
-						);
-						stateY.units[y].incoming = stateY.units[y].incoming.filter(
-							function (i) {
-								return !(i.unit === x && i.state.unqidfr === stateX.unqidfr);
-							}
-						);
 					};
 				};
 			};
@@ -73,39 +61,40 @@ exports.renderDOM = function (arrayToApply) {
 		}
 	};
 };
-exports.makeElement_ = function (a) {
-	return function (state) {
-		return function () {
-			var ptr = a.id;
-			state.units[ptr] = {
-				outgoing: [],
-				incoming: [],
-				listeners: {},
-				main: document.createElement(a.tag),
-			};
-			for (var i = 0; i < a.attributes.length; i++) {
-				if (a.attributes[i].value.type === "cb") {
-					var atty = a.attributes[i];
-					var el = (e) => atty.value.value(e)();
-					state.units[ptr].main.addEventListener(atty.key, el);
-					state.units[ptr].listeners[a.attributes[i].key] = el;
-				} else {
-					state.units[ptr].main.setAttribute(
-						a.attributes[i].key,
-						a.attributes[i].value.value
-					);
+var makeElement_ = function (eltAlreadyExists) {
+	return function (a) {
+		return function (state) {
+			return function () {
+				var ptr = a.id;
+				state.units[ptr] = {
+					listeners: {},
+					main: eltAlreadyExists
+						? eltAlreadyExists
+						: document.createElement(a.tag),
+				};
+				for (var i = 0; i < a.attributes.length; i++) {
+					if (a.attributes[i].value.type === "cb") {
+						var atty = a.attributes[i];
+						var el = (e) => atty.value.value(e)();
+						state.units[ptr].main.addEventListener(atty.key, el);
+						state.units[ptr].listeners[a.attributes[i].key] = el;
+					} else {
+						state.units[ptr].main.setAttribute(
+							a.attributes[i].key,
+							a.attributes[i].value.value
+						);
+					}
 				}
-			}
+			};
 		};
 	};
 };
+exports.makeElement_ = makeElement_(undefined);
 exports.makeText_ = function (a) {
 	return function (state) {
 		return function () {
 			var ptr = a.id;
 			state.units[ptr] = {
-				outgoing: [],
-				incoming: [],
 				main: document.createElement("span"),
 			};
 			state.units[ptr].main.setAttribute("style", "white-space: pre-wrap;");
@@ -176,8 +165,6 @@ exports.makeSubgraph_ = function (ptr) {
 						var funk = {};
 						var unsu = {};
 						state.units[ptr] = {
-							outgoing: [],
-							incoming: [],
 							sceneM: sceneM,
 							main: document.createElement("div"),
 							funkyFx: funkyFx,
@@ -267,19 +254,77 @@ var setSubgraph_ = function (ptr) {
 		};
 	};
 };
+var makePursx_ = function ($massiveCreate) {
+	return function (a) {
+		return function (state) {
+			return function () {
+				var ptr = a.id;
+				var html = a.html;
+				var verb = a.verb;
+				var r = a.r;
+				var entries = Object.entries(r);
+				for (var i = 0; i < entries.length; i++) {
+					var key = entries[i][0];
+					if (entries[i][1] instanceof Array) {
+						// it is an attribute
+						html = html.replace(
+							verb + key + verb,
+							"data-deku-attr-internal=" + '"' + key + '"'
+						);
+					} else {
+						html = html.replace(
+							verb + key + verb,
+							"<div data-deku-elt-internal=" + '"' + key + '"></div>'
+						);
+					}
+				}
+				var tmp = document.createElement("div");
+				tmp.innerHTML = html.trim();
+				state.units[ptr] = {
+					listeners: {},
+					main: tmp.firstChild,
+				};
+				tmp.querySelectorAll("[data-deku-attr-internal]").forEach(function (e) {
+					var key = e.getAttribute("data-deku-attr-internal");
+					makeElement_(e)({ id: ptr + "." + key, attributes: r[key] })(state)();
+				});
+				tmp.querySelectorAll("[data-deku-elt-internal]").forEach(function (e) {
+					var key = e.getAttribute("data-deku-elt-internal");
+					var toCreate = {};
+					toCreate[key] = r[key];
+					// todo: rename element to root?
+					$massiveCreate(ptr)({
+						toCreate: toCreate,
+					})(state)();
+					e.appendChild(state.units[ptr + "." + key].main);
+				});
+			};
+		};
+	};
+};
+exports.makePursx_ = makePursx_;
 exports.setSubgraph_ = setSubgraph_;
 exports.massiveCreate_ = function ($unSubgraph) {
 	return function ($makeSubgraph) {
 		return function ($makeRoot) {
 			return function ($makeElement) {
 				return function ($makeText) {
-					return function (a) {
-						return function (state) {
-							return function () {
-								state.terminalPtrs = [];
-								massiveCreateCreateStep_(true)("")($unSubgraph)($makeSubgraph)
-								($makeRoot)($makeElement)($makeText)(a)(state)();
-								massiveCreateConnectStep_("")(a)(state)();
+					return function ($makePursx) {
+						return function (prefix) {
+							return function (a) {
+								return function (state) {
+									return function () {
+										state.terminalPtrs = [];
+										massiveCreateCreateStep_(prefix === null)(
+											prefix === null ? "" : prefix
+										)($unSubgraph)($makeSubgraph)($makeRoot)($makeElement)(
+											$makeText
+										)($makePursx)(a)(state)();
+										massiveCreateConnectStep_(prefix === null ? "" : prefix)(a)(
+											state
+										)();
+									};
+								};
 							};
 						};
 					};
@@ -294,21 +339,32 @@ var massiveCreateConnectStep_ = function ($prefix) {
 			return function () {
 				var entries = Object.entries(a.toCreate);
 				for (var i = 0; i < entries.length; i++) {
-					var children = Object.entries(entries[i][1].myNameIs !== undefined ? entries[i][1].unMyNameIs.children : entries[i][1].children);
+					var children = Object.entries(
+						entries[i][1].myNameIs !== undefined
+							? entries[i][1].unMyNameIs.children
+							: entries[i][1].children
+					);
 					for (var j = 0; j < children.length; j++) {
 						var toId =
 							entries[i][1].myNameIs !== undefined
 								? entries[i][1].myNameIs
 								: $prefix + ($prefix === "" ? "" : ".") + entries[i][0];
-						var fromId = children[j][1].myNameIs !== undefined ? children[j][1].myNameIs : toId +
-							"." +
-							children[j][0];
+						var fromId =
+							children[j][1].myNameIs !== undefined
+								? children[j][1].myNameIs
+								: toId + "." + children[j][0];
 
 						connectXToY_({
 							fromId: fromId,
 							toId: toId,
 						})(state)();
-						var child = children[j][1].myNameIs !== undefined ? children[j][1].unMyNameIs : children[j][1];
+						if (children[j][1].html !== undefined) {
+							continue;
+						}
+						var child =
+							children[j][1].myNameIs !== undefined
+								? children[j][1].unMyNameIs
+								: children[j][1];
 						if (child.children !== {}) {
 							var toCreate = {};
 							toCreate[children[j][0]] = children[j][1];
@@ -326,9 +382,10 @@ var massiveCreateCreateStep_ = function ($isTerminal) {
 	return function ($prefix) {
 		return function ($unSubgraph) {
 			return function ($makeSubgraph) {
-					return function ($makeRoot) {
-						return function ($makeElement) {
-							return function ($makeText) {
+				return function ($makeRoot) {
+					return function ($makeElement) {
+						return function ($makeText) {
+							return function ($makePursx) {
 								return function (a) {
 									return function (state) {
 										return function () {
@@ -339,9 +396,11 @@ var massiveCreateCreateStep_ = function ($isTerminal) {
 													// my name is
 													var toCreate = {};
 													toCreate[value.myNameIs] = value.unMyNameIs;
-													massiveCreateCreateStep_($isTerminal)("")($unSubgraph)(
-														$makeSubgraph
-													)($makeRoot)($makeElement)($makeText)({
+													massiveCreateCreateStep_($isTerminal)("")(
+														$unSubgraph
+													)($makeSubgraph)($makeRoot)($makeElement)($makeText)(
+														$makePursx
+													)({
 														toCreate: toCreate,
 													})(state)();
 													continue;
@@ -351,7 +410,14 @@ var massiveCreateCreateStep_ = function ($isTerminal) {
 												if ($isTerminal) {
 													state.terminalPtrs.push(key);
 												}
-												if (value.element.element !== undefined) {
+												if (value.html !== undefined) {
+													$makePursx({
+														id: key,
+														html: value.html,
+														verb: value.verb,
+														r: value.r,
+													})(state)();
+												} else if (value.element.element !== undefined) {
 													// it's a root
 													$makeRoot({ id: key, root: value.element.element })(
 														state
@@ -384,9 +450,13 @@ var massiveCreateCreateStep_ = function ($isTerminal) {
 															Object.keys(value.element)
 													);
 												}
+												// do not keep creating if it is html
+												if (value.html !== undefined) {
+													continue;
+												}
 												massiveCreateCreateStep_(false)(key)($unSubgraph)(
 													$makeSubgraph
-												)($makeRoot)($makeElement)($makeText)({
+												)($makeRoot)($makeElement)($makeText)($makePursx)({
 													toCreate: value.children,
 												})(state)();
 											}
@@ -396,7 +466,7 @@ var massiveCreateCreateStep_ = function ($isTerminal) {
 							};
 						};
 					};
-
+				};
 			};
 		};
 	};
@@ -404,58 +474,57 @@ var massiveCreateCreateStep_ = function ($isTerminal) {
 exports.massiveChange_ = function ($setSubgraph) {
 	return function ($setAttribute) {
 		return function ($setText) {
-				return function (a) {
-					return function (state) {
-						return function () {
-							var entries = Object.entries(a.toCreate);
-							for (var i = 0; i < entries.length; i++) {
-								var key = entries[i][0];
-								var value = entries[i][1];
-								if (value.element.element !== undefined) {
-									// it's a root, do nothing
-								} else if (value.element.tag !== undefined) {
-									// it's an element
-									for (var j = 0; j < value.element.attributes.length; j++) {
-										$setAttribute({
-											id: key,
-											key: value.element.attributes[j].key,
-											value: value.element.attributes[j].value,
-										})(state)();
-									}
-								} else if (value.element.text !== undefined) {
-									// it's an element
-									$setText({
+			return function (a) {
+				return function (state) {
+					return function () {
+						var entries = Object.entries(a.toCreate);
+						for (var i = 0; i < entries.length; i++) {
+							var key = entries[i][0];
+							var value = entries[i][1];
+							if (value.element.element !== undefined) {
+								// it's a root, do nothing
+							} else if (value.element.tag !== undefined) {
+								// it's an element
+								for (var j = 0; j < value.element.attributes.length; j++) {
+									$setAttribute({
 										id: key,
-										text: value.element.text,
+										key: value.element.attributes[j].key,
+										value: value.element.attributes[j].value,
 									})(state)();
-								} else if (value.element.envs !== undefined) {
-									// it's a subgraph
-									$setSubgraph({
-										id: key,
-										envs: value.element.envs,
-									})(state)();
-								} else {
-									throw new Error(
-										"Don't know how to handle " + key + " " + value
-									);
 								}
-								massiveChange_($changeSubgraph)($setAttribute)($setText)({ toChange: value.children })(state)();
+							} else if (value.element.text !== undefined) {
+								// it's an element
+								$setText({
+									id: key,
+									text: value.element.text,
+								})(state)();
+							} else if (value.element.envs !== undefined) {
+								// it's a subgraph
+								$setSubgraph({
+									id: key,
+									envs: value.element.envs,
+								})(state)();
+							} else {
+								throw new Error(
+									"Don't know how to handle " + key + " " + value
+								);
 							}
-						};
+							massiveChange_($changeSubgraph)($setAttribute)($setText)({
+								toChange: value.children,
+							})(state)();
+						}
 					};
 				};
 			};
 		};
 	};
-
+};
 
 exports.makeRoot_ = function (a) {
 	return function (state) {
 		return function () {
 			var ptr = a.id;
 			state.units[ptr] = {
-				outgoing: [],
-				incoming: [],
 				main: a.root,
 			};
 		};

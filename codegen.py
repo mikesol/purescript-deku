@@ -112,6 +112,8 @@ newtype {term} = {term} {{ | {term}' }}
 unsafeUn{term} :: {term} -> {{ | {term}' }}
 unsafeUn{term} ({term} unsafe) = unsafe
 
+instance tagToDeku{term} :: TagToDeku "{astag(x)}" {term}
+
 instance typeToSym{term} ::
   TypeToSym {term} "{astag(x)}"
 
