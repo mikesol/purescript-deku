@@ -11132,7 +11132,7 @@ var PS = {};
           if (v instanceof Sg1) {
               return "Sg1";
           };
-          throw new Error("Failed pattern match at Deku.Example.Docs.Subgraphs (line 27, column 1 - line 29, column 19): " + [ v.constructor.name ]);
+          throw new Error("Failed pattern match at Deku.Example.Docs.Subgraphs (line 25, column 1 - line 27, column 19): " + [ v.constructor.name ]);
       }
   };
   var eqSgs = {
@@ -11175,14 +11175,14 @@ var PS = {};
               if (x instanceof Sg1 && y instanceof Sg1) {
                   return Data_Ordering.EQ.value;
               };
-              throw new Error("Failed pattern match at Deku.Example.Docs.Subgraphs (line 26, column 1 - line 26, column 24): " + [ x.constructor.name, y.constructor.name ]);
+              throw new Error("Failed pattern match at Deku.Example.Docs.Subgraphs (line 24, column 1 - line 24, column 24): " + [ x.constructor.name, y.constructor.name ]);
           };
       },
       Eq0: function () {
           return eqSgs;
       }
   };
-  var sub = function (dt) {
+  var mySub = function (dt) {
       return function (raise) {
           return function (dictDOMInterpret) {
               return function (v) {
@@ -11229,7 +11229,7 @@ var PS = {};
                                       "div.div1.count1.t": "C: " + Data_Show.show(Data_Show.showInt)(Data_Tuple.snd($$new))
                                   }))($$new);
                               };
-                              throw new Error("Failed pattern match at Deku.Example.Docs.Subgraphs (line 53, column 23 - line 67, column 19): " + [ e.constructor.name ]);
+                              throw new Error("Failed pattern match at Deku.Example.Docs.Subgraphs (line 51, column 23 - line 65, column 19): " + [ e.constructor.name ]);
                           };
                       });
                   };
@@ -11275,11 +11275,11 @@ var PS = {};
                                       "div.div1.count1.t": "D: " + Data_Show.show(Data_Show.showInt)(Data_Tuple.snd($$new))
                                   }))($$new);
                               };
-                              throw new Error("Failed pattern match at Deku.Example.Docs.Subgraphs (line 90, column 23 - line 104, column 19): " + [ e.constructor.name ]);
+                              throw new Error("Failed pattern match at Deku.Example.Docs.Subgraphs (line 88, column 23 - line 102, column 19): " + [ e.constructor.name ]);
                           };
                       });
                   };
-                  throw new Error("Failed pattern match at Deku.Example.Docs.Subgraphs (line 33, column 1 - line 33, column 71): " + [ dt.constructor.name, raise.constructor.name, v.constructor.name ]);
+                  throw new Error("Failed pattern match at Deku.Example.Docs.Subgraphs (line 31, column 1 - line 31, column 73): " + [ dt.constructor.name, raise.constructor.name, v.constructor.name ]);
               };
           };
       };
@@ -11291,7 +11291,7 @@ var PS = {};
                   return function (push) {
                       return Deku_Control_Functions.u(Deku_Graph_DOM_Shorthand.div([  ])({
                           sub: Deku_Graph_DOM.subgraph(hashableSgs)(Data_Map_Internal.insert(ordSgs)(Sg0.value)(Control_Applicative.pure(Data_Maybe.applicativeMaybe)(Data_Unit.unit))(Data_Map_Internal.singleton(Sg1.value)(Control_Applicative.pure(Data_Maybe.applicativeMaybe)(Data_Unit.unit))))(function (dictDOMInterpret1) {
-                              return sub(dt)(push)(dictDOMInterpret1);
+                              return mySub(dt)(push)(dictDOMInterpret1);
                           })
                       }));
                   };
@@ -11326,7 +11326,7 @@ var PS = {};
                               "div.sub": Deku_Graph_DOM.xsubgraph(hashableSgs)(Data_Map_Internal.singleton(Sg0.value)(Control_Applicative.pure(Data_Maybe.applicativeMaybe)(Data_Unit.unit)))
                           });
                       };
-                      throw new Error("Failed pattern match at Deku.Example.Docs.Subgraphs (line 118, column 16 - line 125, column 8): " + [ e.constructor.name ]);
+                      throw new Error("Failed pattern match at Deku.Example.Docs.Subgraphs (line 116, column 16 - line 123, column 8): " + [ e.constructor.name ]);
                   };
               });
           };
@@ -11443,7 +11443,7 @@ var PS = {};
                                   reflectSymbol: function () {
                                       return "@0";
                                   }
-                              })())(new Data_Tuple.Tuple(Deku_Graph_DOM.text("In the code below, two subgraphs are divided by a horizontal line. They communicate with each other via message passing, and they also have internal messaging."), Data_Unit.unit))), new Data_Tuple.Tuple(Deku_Graph_DOM.pre([  ])(Deku_Graph_DOM_Shorthand.code([  ])(Deku_Graph_DOM_Shorthand.text("module Deku.Example.Docs.Example.Subgraph where\x0a\x0aimport Prelude\x0a\x0aimport Data.Either (Either(..))\x0aimport Data.Foldable (for_)\x0aimport Data.Hashable (class Hashable, hash)\x0aimport Data.Map (insert, singleton)\x0aimport Data.Tuple (fst, snd)\x0aimport Data.Tuple.Nested ((/\\))\x0aimport Deku.Change (change)\x0aimport Deku.Control.Functions (u, (@>), (%>))\x0aimport Deku.Control.Types (Frame0, Scene)\x0aimport Deku.Graph.Attribute (cb)\x0aimport Deku.Graph.DOM (AsSubgraph(..), SubgraphSig, root, xsubgraph, (:=))\x0aimport Deku.Graph.DOM as D\x0aimport Deku.Graph.DOM.Shorthand as S\x0aimport Deku.Interpret (class DOMInterpret, makeFFIDOMSnapshot)\x0aimport Deku.Run (defaultOptions, run)\x0aimport Effect (Effect)\x0aimport FRP.Event (subscribe)\x0aimport Web.DOM (Element)\x0aimport Web.HTML (window)\x0aimport Web.HTML.HTMLDocument (body)\x0aimport Web.HTML.HTMLElement (toElement)\x0aimport Web.HTML.Window (document)\x0a\x0adata Sgs = Sg0 | Sg1\x0aderive instance Eq Sgs\x0aderive instance Ord Sgs\x0ainstance Show Sgs where\x0a  show Sg0 = \"Sg0\"\x0a  show Sg1 = \"Sg1\"\x0ainstance Hashable Sgs where\x0a  hash = show >>> hash\x0a\x0asub :: (Sgs -> Effect Unit) -> SubgraphSig Sgs Unit Unit\x0asub raise Sg0 =\x0a  ( \\_ push ->\x0a      S.div []\x0a        ( { div1: D.div []\x0a              { button0: D.button\x0a                  [ D.OnClick := cb (const $ raise Sg0)\x0a                  ]\x0a                  (S.text \"Send to B\")\x0a              , count0: D.div [] (S.text (\"A: 0\"))\x0a              , button1: D.button\x0a                  [ D.OnClick := cb (const $ push unit)\x0a                  ]\x0a                  (S.text \"Send to C\")\x0a              , count1: D.div [] (S.text (\"C: 0\"))\x0a              }\x0a          , hr: D.hr [] {}\x0a          }\x0a        )\x0a        /\\ (0 /\\ 0)\x0a  ) %> \\e (a /\\ c) -> case e of\x0a    Left _ ->\x0a      let\x0a        new = (a + 1) /\\ c\x0a      in\x0a        change\x0a          { \"div.div1.count0.t\": \"A: \" <> show (fst new)\x0a          } $> new\x0a    Right _ ->\x0a      let\x0a        new = a /\\ (c + 1)\x0a      in\x0a        change\x0a          { \"div.div1.count1.t\": \"C: \" <> show (snd new)\x0a          } $> new\x0asub raise Sg1 =\x0a  ( \\_ push ->\x0a      S.div []\x0a        ( { div1: D.div []\x0a              { button0: D.a\x0a                  [ D.OnClick := cb (const $ raise Sg1)\x0a                  , D.Style := \"cursor:pointer;\"\x0a\x0a                  ]\x0a                  (S.text \"Send to A\")\x0a              , count0: D.div [] (S.text \"B: 0\")\x0a              , button1: D.a\x0a                  [ D.OnClick := cb (const $ push unit)\x0a                  , D.Style := \"cursor:pointer;\"\x0a\x0a                  ]\x0a                  (S.text \"Send to D\")\x0a              , count1: D.div [] (S.text \"D: 0\")\x0a              }\x0a          }\x0a        )\x0a        /\\ (0 /\\ 0)\x0a  ) %> \\e (b /\\ d) -> case e of\x0a    Left _ ->\x0a      let\x0a        new = (b + 1) /\\ d\x0a      in\x0a        change\x0a          { \"div.div1.count0.t\": \"B: \" <> show (fst new)\x0a          } $> new\x0a    Right _ ->\x0a      let\x0a        new = b /\\ (d + 1)\x0a      in\x0a        change\x0a          { \"div.div1.count1.t\": \"D: \" <> show (snd new)\x0a          } $> new\x0a\x0ascene\x0a  :: forall env dom engine res\x0a   . Monoid res\x0a  => DOMInterpret dom engine\x0a  => Element\x0a  -> Scene env dom engine Frame0 Sgs res\x0ascene elt =\x0a  ( \\_ push ->\x0a      u $ root elt\x0a        { sub:\x0a            D.subgraph\x0a              ( insert Sg0 (pure unit)\x0a                  $ singleton Sg1 (pure unit)\x0a              )\x0a              (AsSubgraph (sub push))\x0a        }\x0a\x0a  ) @> \\e _ -> case e of\x0a    Left _ -> pure unit\x0a    Right Sg0 -> change\x0a      { \"root.sub\": xsubgraph (singleton Sg1 (pure unit))\x0a      }\x0a    Right Sg1 -> change\x0a      { \"root.sub\": xsubgraph (singleton Sg0 (pure unit))\x0a      }\x0a\x0amain :: Effect Unit\x0amain = do\x0a  b' <- window >>= document >>= body\x0a  for_ (toElement <$> b') \\elt -> do\x0a    ffi <- makeFFIDOMSnapshot\x0a    subscribe\x0a      ( run (pure unit) (pure unit) defaultOptions ffi\x0a          (scene elt)\x0a\x0a      )\x0a      (_.res >>> pure)\x0a"))), new Data_Tuple.Tuple(Deku_Graph_DOM.p([  ])(Deku_Util.detup(Deku_Util.detupTuple(Data_Typelevel_Num_Ops.typelevelSucc(Data_Typelevel_Num_Sets.posD1)()(Data_Typelevel_Num_Ops.divMod10D0D0)()(Data_Typelevel_Num_Ops.divMod10D1D0))(Deku_Util.detupUnit)()()()({
+                              })())(new Data_Tuple.Tuple(Deku_Graph_DOM.text("In the code below, two subgraphs are divided by a horizontal line. They communicate with each other via message passing, and they also have internal messaging."), Data_Unit.unit))), new Data_Tuple.Tuple(Deku_Graph_DOM.pre([  ])(Deku_Graph_DOM_Shorthand.code([  ])(Deku_Graph_DOM_Shorthand.text("module Deku.Example.Docs.Example.Subgraph where\x0a\x0aimport Prelude\x0a\x0aimport Data.Either (Either(..))\x0aimport Data.Foldable (for_)\x0aimport Data.Hashable (class Hashable, hash)\x0aimport Data.Map (insert, singleton)\x0aimport Data.Tuple (fst, snd)\x0aimport Data.Tuple.Nested ((/\\))\x0aimport Deku.Change (change)\x0aimport Deku.Control.Functions (u, (@>), (%>))\x0aimport Deku.Control.Types (Frame0, Scene)\x0aimport Deku.Graph.Attribute (cb)\x0aimport Deku.Graph.DOM (AsSubgraph(..), SubgraphSig, root, xsubgraph, (:=))\x0aimport Deku.Graph.DOM as D\x0aimport Deku.Graph.DOM.Shorthand as S\x0aimport Deku.Interpret (class DOMInterpret, makeFFIDOMSnapshot)\x0aimport Deku.Run (defaultOptions, run)\x0aimport Effect (Effect)\x0aimport FRP.Event (subscribe)\x0aimport Web.DOM (Element)\x0aimport Web.HTML (window)\x0aimport Web.HTML.HTMLDocument (body)\x0aimport Web.HTML.HTMLElement (toElement)\x0aimport Web.HTML.Window (document)\x0a\x0adata Sgs = Sg0 | Sg1\x0aderive instance Eq Sgs\x0aderive instance Ord Sgs\x0ainstance Show Sgs where\x0a  show Sg0 = \"Sg0\"\x0a  show Sg1 = \"Sg1\"\x0ainstance Hashable Sgs where\x0a  hash = show >>> hash\x0a\x0amySub :: (Sgs -> Effect Unit) -> SubgraphSig Sgs Unit Unit\x0amySub raise Sg0 =\x0a  ( \\_ push ->\x0a      S.div []\x0a        ( { div1: D.div []\x0a              { button0: D.button\x0a                  [ D.OnClick := cb (const $ raise Sg0)\x0a                  ]\x0a                  (S.text \"Send to B\")\x0a              , count0: D.div [] (S.text (\"A: 0\"))\x0a              , button1: D.button\x0a                  [ D.OnClick := cb (const $ push unit)\x0a                  ]\x0a                  (S.text \"Send to C\")\x0a              , count1: D.div [] (S.text (\"C: 0\"))\x0a              }\x0a          , hr: D.hr [] {}\x0a          }\x0a        )\x0a        /\\ (0 /\\ 0)\x0a  ) %> \\e (a /\\ c) -> case e of\x0a    Left _ ->\x0a      let\x0a        new = (a + 1) /\\ c\x0a      in\x0a        change\x0a          { \"div.div1.count0.t\": \"A: \" <> show (fst new)\x0a          } $> new\x0a    Right _ ->\x0a      let\x0a        new = a /\\ (c + 1)\x0a      in\x0a        change\x0a          { \"div.div1.count1.t\": \"C: \" <> show (snd new)\x0a          } $> new\x0amySub raise Sg1 =\x0a  ( \\_ push ->\x0a      S.div []\x0a        ( { div1: D.div []\x0a              { button0: D.a\x0a                  [ D.OnClick := cb (const $ raise Sg1)\x0a                  , D.Style := \"cursor:pointer;\"\x0a\x0a                  ]\x0a                  (S.text \"Send to A\")\x0a              , count0: D.div [] (S.text \"B: 0\")\x0a              , button1: D.a\x0a                  [ D.OnClick := cb (const $ push unit)\x0a                  , D.Style := \"cursor:pointer;\"\x0a\x0a                  ]\x0a                  (S.text \"Send to D\")\x0a              , count1: D.div [] (S.text \"D: 0\")\x0a              }\x0a          }\x0a        )\x0a        /\\ (0 /\\ 0)\x0a  ) %> \\e (b /\\ d) -> case e of\x0a    Left _ ->\x0a      let\x0a        new = (b + 1) /\\ d\x0a      in\x0a        change\x0a          { \"div.div1.count0.t\": \"B: \" <> show (fst new)\x0a          } $> new\x0a    Right _ ->\x0a      let\x0a        new = b /\\ (d + 1)\x0a      in\x0a        change\x0a          { \"div.div1.count1.t\": \"D: \" <> show (snd new)\x0a          } $> new\x0a\x0ascene\x0a  :: forall env dom engine res\x0a   . Monoid res\x0a  => DOMInterpret dom engine\x0a  => Element\x0a  -> Scene env dom engine Frame0 Sgs res\x0ascene elt =\x0a  ( \\_ push ->\x0a      u $ root elt\x0a        { sub:\x0a            D.subgraph\x0a              ( insert Sg0 (pure unit)\x0a                  $ singleton Sg1 (pure unit)\x0a              )\x0a              (AsSubgraph (mySub push))\x0a        }\x0a\x0a  ) @> \\e _ -> case e of\x0a    Left _ -> pure unit\x0a    Right Sg0 -> change\x0a      { \"root.sub\": xsubgraph (singleton Sg1 (pure unit))\x0a      }\x0a    Right Sg1 -> change\x0a      { \"root.sub\": xsubgraph (singleton Sg0 (pure unit))\x0a      }\x0a\x0amain :: Effect Unit\x0amain = do\x0a  b' <- window >>= document >>= body\x0a  for_ (toElement <$> b') \\elt -> do\x0a    ffi <- makeFFIDOMSnapshot\x0a    subscribe\x0a      ( run (pure unit) (pure unit) defaultOptions ffi\x0a          (scene elt)\x0a\x0a      )\x0a      (_.res >>> pure)\x0a"))), new Data_Tuple.Tuple(Deku_Graph_DOM.p([  ])(Deku_Util.detup(Deku_Util.detupTuple(Data_Typelevel_Num_Ops.typelevelSucc(Data_Typelevel_Num_Sets.posD1)()(Data_Typelevel_Num_Ops.divMod10D0D0)()(Data_Typelevel_Num_Ops.divMod10D1D0))(Deku_Util.detupUnit)()()()({
                                   reflectSymbol: function () {
                                       return "@0";
                                   }
