@@ -1821,6 +1821,21 @@ instance
   PXTagAttrValue verb hasAttributed tag "\\" tail pursi purso trailing
 instance
   ( Sym.Cons x y tail
+  , PXTagAttrValue verb hasAttributed tag x y pursi purso trailing
+  ) =>
+  PXTagAttrValue verb hasAttributed tag " " tail pursi purso trailing
+instance
+  ( Sym.Cons x y tail
+  , PXTagAttrValue verb hasAttributed tag x y pursi purso trailing
+  ) =>
+  PXTagAttrValue verb hasAttributed tag "\t" tail pursi purso trailing
+instance
+  ( Sym.Cons x y tail
+  , PXTagAttrValue verb hasAttributed tag x y pursi purso trailing
+  ) =>
+  PXTagAttrValue verb hasAttributed tag "\n" tail pursi purso trailing
+instance
+  ( Sym.Cons x y tail
   , PXTagPreAttrName verb hasAttributed tag x y pursi purso trailing
   ) =>
   PXTagAttrValue verb hasAttributed tag "\"" tail pursi purso trailing

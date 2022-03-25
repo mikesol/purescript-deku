@@ -29,7 +29,7 @@ testCl =
   Proxy    :: forall r. PXStart "~" " " """<div><input /></div>""" r => Proxy r
 testDivDiv  :: Proxy (myH :: Array (Attribute D.H1_), myA :: Array (Attribute D.A_), myP :: Array (Attribute D.P_), newElt :: D.Element D.H2_ ())
 testDivDiv =
-  Proxy    :: forall r. PXStart "~" " " """<div>
+  Proxy    :: forall r. PXStart "~" " " """<div class="a b">
 <h1 ~myH~>Example Domain</h1>
 ~newElt~
 <!-- a comment -->

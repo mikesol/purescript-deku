@@ -97,7 +97,7 @@ for x in WHITESPACE:
 print_('instance (Sym.Cons x y tail, PXTagAttrValue verb hasAttributed tag x y pursi purso trailing) => PXTagPreAttrValue verb hasAttributed tag "\\"" tail pursi purso trailing')
 print_('--')
 print_('class PXTagAttrValue (verb :: Symbol) (hasAttributed :: Boolean) (tag :: Symbol) (head :: Symbol) (tail :: Symbol) (pursi :: Row Type) (purso :: Row Type) (trailing :: Symbol) | verb hasAttributed tag head tail pursi -> purso trailing')
-for x in [y for y in (string.ascii_lowercase+string.ascii_uppercase+string.digits+':,;\'!@#$%^&*()_-=`~<>/.')]+['\\\\']:
+for x in [y for y in (string.ascii_lowercase+string.ascii_uppercase+string.digits+':,;\'!@#$%^&*()_-=`~<>/.')]+['\\\\']+WHITESPACE:
   print_('instance (Sym.Cons x y tail, PXTagAttrValue verb hasAttributed tag x y pursi purso trailing) => PXTagAttrValue verb hasAttributed tag "%s" tail pursi purso trailing' % x)
 print_('instance (Sym.Cons x y tail, PXTagPreAttrName verb hasAttributed tag x y pursi purso trailing) => PXTagAttrValue verb hasAttributed tag "\\"" tail pursi purso trailing')
 print_('class PXBody (verb :: Symbol) (head :: Symbol) (tail :: Symbol) (pursi :: Row Type) (purso :: Row Type) (trailing :: Symbol) | verb tail pursi -> purso trailing')
