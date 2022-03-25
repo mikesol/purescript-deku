@@ -258,11 +258,7 @@ main = do
                         /\ D.h2 [] (S.text "Next steps")
                         /\ D.p []
                           ( detup $
-                              D.span []
-                                ( S.text
-                                    """In this section, saw how to react to events using the """
-                                ) /\ D.code [] (S.text "iloop")
-                                /\ D.text " function in combination with "
+                              D.text "In this section, saw how to react to events using the looping function in combination with "
                                 /\ D.code [] (S.text "change")
                                 /\ D.text
                                   ". In the next section, we'll use a similar mechanism to deal with arbitrary "
