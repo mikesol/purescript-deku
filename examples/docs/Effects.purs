@@ -41,10 +41,7 @@ effects dt dpage =
                     D.p []
                       ( detup $
                           D.text
-                            """This example is similar to the previous one in its design: """
-                            /\ D.code [] (S.text "iloop")
-                            /\ D.text
-                              """ is called in response to an event. The difference is that the response isn't immediate. Instead, we wait for the result of a network call."""
+                            """This example is similar to the previous one in its design: the looping function is called in response to an event. The difference is that the response isn't immediate. Instead, we wait for the result of a network call."""
                             /\ unit
                       )
                       /\

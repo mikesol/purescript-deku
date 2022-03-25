@@ -32,6 +32,7 @@ testDivDiv =
   Proxy    :: forall r. PXStart "~" " " """<div>
 <h1 ~myH~>Example Domain</h1>
 ~newElt~
+<!-- a comment -->
 <p ~myP~>This domain is for use in illustrative examples in documents. You may use this
     domain in literature without prior coordination or asking for permission.</p>
 <p><a ~myA~ href="https://www.iana.org/domains/example">More information...</a></p>

@@ -352,12 +352,9 @@ main = do
                                   (S.text "not")
                                 /\ D.text
                                   """ use the root component in their graph. Doing this will fail at compile time. Other than that, subgraphs are exactly the same as graphs: each one is its own stream of DOMs that is constructed using primitives like """
-                                /\ D.code [] (S.text "@!>")
+                                /\ D.code [] (S.text "@>")
                                 /\ D.text
-                                  """ and """
-                                /\ D.code [] (S.text "iloop")
-                                /\ D.text
-                                  """."""
+                                  """ and the looping function ."""
                                 /\ unit
                           )
                         /\ D.h2 [] (S.text "Bubbling information up")
@@ -466,13 +463,7 @@ main = do
                                           "Left"
                                       )
                                     /\ D.text
-                                      """ argument to """
-                                    /\ D.code []
-                                      ( S.text
-                                          "iloop"
-                                      )
-                                    /\ D.text
-                                      """ that we have thusfar ignored but now use in the example above. If the subgraph does not exist yet, it will be created. Inversely, sending """
+                                      """ argument to the looping function that we have thusfar ignored but now use in the example above. If the subgraph does not exist yet, it will be created. Inversely, sending """
                                     /\ D.code []
                                       ( S.text
                                           "Nothing"
@@ -490,10 +481,7 @@ main = do
                                     " is slightly less efficient than the use of "
                                   /\ D.code [] (S.text "push")
                                   /\ D.text
-                                    "because each layer needs to send the message down successively, it does not cause the DOM to update unless explicitly asked in "
-                                  /\ D.code [] (S.text "iloop")
-                                  /\ D.text
-                                    ". This means that it is still quite fast."
+                                    "because each layer needs to send the message down successively, it does not cause the DOM to update unless explicitly asked in the looping function. This means that it is still quite fast."
                                   /\ unit
                               )
                           )

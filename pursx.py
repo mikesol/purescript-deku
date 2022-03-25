@@ -101,8 +101,27 @@ for x in [y for y in (string.ascii_lowercase+string.ascii_uppercase+string.digit
   print_('instance (Sym.Cons x y tail, PXTagAttrValue verb hasAttributed tag x y pursi purso trailing) => PXTagAttrValue verb hasAttributed tag "%s" tail pursi purso trailing' % x)
 print_('instance (Sym.Cons x y tail, PXTagPreAttrName verb hasAttributed tag x y pursi purso trailing) => PXTagAttrValue verb hasAttributed tag "\\"" tail pursi purso trailing')
 print_('class PXBody (verb :: Symbol) (head :: Symbol) (tail :: Symbol) (pursi :: Row Type) (purso :: Row Type) (trailing :: Symbol) | verb tail pursi -> purso trailing')
-print_('''class CloseOrRepeat (verb :: Symbol) (head :: Symbol) (tail :: Symbol) (pursi :: Row Type) (purso :: Row Type) (trailing :: Symbol) | verb head tail pursi -> purso trailing
+print_('''
+class CommendEndCandidate2 (head :: Symbol) (tail :: Symbol) (trailing :: Symbol) | head tail -> trailing
+instance CommendEndCandidate2 ">" tail tail
+else instance (Sym.Cons x y tail, SkipUntilCommentEnd x y trailing) => CommendEndCandidate2 anything tail trailing
+class CommendEndCandidate1 (head :: Symbol) (tail :: Symbol) (trailing :: Symbol) | head tail -> trailing
+instance (Sym.Cons x y tail, CommendEndCandidate2 x y trailing) => CommendEndCandidate1 "-" tail trailing
+else instance (Sym.Cons x y tail, SkipUntilCommentEnd x y trailing) => CommendEndCandidate1 anything tail trailing
+class SkipUntilCommentEnd (head :: Symbol) (tail :: Symbol) (trailing :: Symbol) | head tail -> trailing
+instance (Sym.Cons x y tail, CommendEndCandidate1 x y trailing)  => SkipUntilCommentEnd "-" tail trailing
+else instance (Sym.Cons x y tail, SkipUntilCommentEnd x y trailing) => SkipUntilCommentEnd anything tail trailing
+class CloseOrRepeat (verb :: Symbol) (head :: Symbol) (tail :: Symbol) (pursi :: Row Type) (purso :: Row Type) (trailing :: Symbol) | verb head tail pursi -> purso trailing
 instance CloseOrRepeat verb "/" tail purs purs tail
+else instance
+  ( Sym.Cons "-" y tail
+  , Sym.Cons "-" yy y
+  , Sym.Cons x yyy yy
+  , SkipUntilCommentEnd x yyy trailing
+  , Sym.Cons mm bb trailing
+  , PXBody verb mm bb pursi purso newTrailing
+  ) =>
+  CloseOrRepeat verb "!" tail pursi purso newTrailing
 else instance (PXTagPreName verb anything tail () pursm trailing, Row.Union pursi pursm pursz, Sym.Cons x y trailing, PXBody verb x y pursz purso newTrailing) => CloseOrRepeat verb anything tail pursi purso newTrailing
 instance (Sym.Cons x y tail, CloseOrRepeat verb x y pursi purso trailing) => PXBody verb "<" tail pursi purso trailing
 else instance (Sym.Cons x y tail, DoVerbForDOM verb "" x y pursi pursx newTail, Sym.Cons xx yy newTail, PXBody verb xx yy pursx purso trailing) => PXBody verb verb tail pursi purso trailing
