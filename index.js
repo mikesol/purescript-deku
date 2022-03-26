@@ -6864,7 +6864,7 @@ var PS = {};
 				  for (var i = 0; i < a.attributes.length; i++) {
 					  if (a.attributes[i].value.type === "cb") {
 						  var atty = a.attributes[i];
-						  var el = (e) => atty.value.value(e)();
+						  var el = ((x) => (e) => x.value.value(e)())(atty);
 						  state.units[ptr].main.addEventListener(atty.key, el);
 						  state.units[ptr].listeners[a.attributes[i].key] = el;
 					  } else {
@@ -7030,7 +7030,6 @@ var PS = {};
 					  sortable.push([i, applied.forOrdering]);
 					  scenes[i] = applied.nextScene;
 				  }
-				  console.log(needsSorting);
 				  if (needsSorting) {
 					  sortable.sort((a, b) => b[1] - a[1]);
 					  doSortingOnSubgraphs(state.units[ptr], sortable);
