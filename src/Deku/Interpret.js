@@ -274,7 +274,10 @@ var makePursx_ = function ($massiveCreate) {
 					} else {
 						html = html.replace(
 							verb + key + verb,
-							"<div data-deku-elt-internal=" + '"' + key + '"></div>'
+							'<span style="display:contents;" data-deku-elt-internal=' +
+								'"' +
+								key +
+								'"></span>'
 						);
 					}
 				}
