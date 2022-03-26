@@ -9,6 +9,7 @@ import Prim.Row as Row
 import Prim.TypeError (class Warn, Text)
 import Prim.Symbol as Sym
 import Prim.Boolean (False, True)
+import Type.Proxy(Proxy(..))
 import Deku.Graph.Attribute(Attribute)
 import Deku.Graph.DOM(class TagToDeku, Element)
 import Data.Symbol (class IsSymbol, reflectSymbol)
@@ -19,6 +20,8 @@ import Prim.RowList as RL
 import Prim.Row as R
 ''')
 
+print_('pursx :: forall s. Proxy s')
+print_('pursx = Proxy')
 print_('class DoVerbForAttr (verb :: Symbol) (tag :: Symbol) (acc :: Symbol) (head :: Symbol) (tail :: Symbol) (pursi :: Row Type) (purso :: Row Type) (newTail :: Symbol) | verb acc head tail pursi -> purso newTail')
 print_('instance (TagToDeku tag deku, Row.Cons acc (Array (Attribute deku)) pursi purso) => DoVerbForAttr verb tag acc verb tail pursi purso tail')
 print_('else instance (Sym.Append acc anything acc2, Sym.Cons x y tail, DoVerbForAttr verb tag acc2 x y pursi purso newTail) => DoVerbForAttr verb tag acc anything tail pursi purso newTail')

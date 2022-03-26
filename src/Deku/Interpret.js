@@ -342,6 +342,9 @@ var massiveCreateConnectStep_ = function ($prefix) {
 			return function () {
 				var entries = Object.entries(a.toCreate);
 				for (var i = 0; i < entries.length; i++) {
+					if (entries[i][1].html) {
+						continue;
+					}
 					var children = Object.entries(
 						entries[i][1].myNameIs !== undefined
 							? entries[i][1].unMyNameIs.children
@@ -368,6 +371,9 @@ var massiveCreateConnectStep_ = function ($prefix) {
 							children[j][1].myNameIs !== undefined
 								? children[j][1].unMyNameIs
 								: children[j][1];
+						if (child.html) {
+							continue;
+						}
 						if (child.children !== {}) {
 							var toCreate = {};
 							toCreate[children[j][0]] = children[j][1];

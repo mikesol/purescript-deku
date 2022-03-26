@@ -4,6 +4,7 @@ import Prim.Row as Row
 import Prim.TypeError (class Warn, Text)
 import Prim.Symbol as Sym
 import Prim.Boolean (False, True)
+import Type.Proxy (Proxy(..))
 import Deku.Graph.Attribute (Attribute)
 import Deku.Graph.DOM (class TagToDeku, Element)
 import Data.Symbol (class IsSymbol, reflectSymbol)
@@ -13,6 +14,8 @@ import Prim.RowList (class RowToList, RowList)
 import Prim.RowList as RL
 import Prim.Row as R
 
+pursx :: forall s. Proxy s
+pursx = Proxy
 class
   DoVerbForAttr
     (verb :: Symbol)

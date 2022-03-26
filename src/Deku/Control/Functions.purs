@@ -6,12 +6,16 @@ module Deku.Control.Functions
   , freeze
   , u
   , loopUsingSceneG
+  , loopUsingEnvironmentallyUnawareSceneG
   , loopUsingSceneGWithRes
   , loopUsingSceneSG
+  , loopUsingEnvironmentallyUnawareSceneSG
   , loopUsingSceneSGWithRes
   , (@>)
+  , (@@>)
   , (@!>)
   , (%>)
+  , (%%>)
   , (%!>)
   ) where
 
@@ -229,6 +233,26 @@ loopUsingSceneG
 loopUsingSceneG f = loopUsingSceneGWithRes
   ((map <<< map) (\(x /\ y) -> (x /\ y /\ (mempty :: res))) f)
 
+loopUsingEnvironmentallyUnawareSceneG
+  :: forall env dom engine push res sn graph control
+   . Monoid res
+  => DOMInterpret dom engine
+  => Create (root :: Element Root sn) () graph
+  => Nub graph graph
+  => ( env
+       -> (push -> Effect Unit)
+       -> { root :: Element Root sn } /\ control
+     )
+  -> ( forall proofB
+        . push
+       -> control
+       -> MDOM dom engine proofB res graph control
+     )
+  -> Scene env dom engine Frame0 push res
+loopUsingEnvironmentallyUnawareSceneG f0 f1 = loopUsingSceneG f0 \x y -> case x of
+  Left _ -> pure y
+  Right z -> f1 z y
+
 loopUsingSceneGWithRes
   :: forall env dom engine push res sn graph control
    . Monoid res
@@ -274,6 +298,26 @@ loopUsingSceneSG
 loopUsingSceneSG f = loopUsingSceneSGWithRes
   ((map <<< map) (\(x /\ y) -> (x /\ y /\ (mempty :: res))) f)
 
+loopUsingEnvironmentallyUnawareSceneSG
+  :: forall env dom engine push res sn graph control
+   . Monoid res
+  => DOMInterpret dom engine
+  => CreateSG sn () graph
+  => Nub graph graph
+  => ( env
+       -> (push -> Effect Unit)
+       -> { | sn } /\ control
+     )
+  -> ( forall proofB
+        . push
+       -> control
+       -> MDOM dom engine proofB res graph control
+     )
+  -> SubScene env dom engine Frame0 push res
+loopUsingEnvironmentallyUnawareSceneSG f0 f1 = loopUsingSceneSG f0 \x y -> case x of
+  Left _ -> pure y
+  Right z -> f1 z y
+
 loopUsingSceneSGWithRes
   :: forall env dom engine push res sn graph control
    . Monoid res
@@ -301,6 +345,8 @@ loopUsingSceneSGWithRes sceneF0 loopF =
 
 infix 6 loopUsingSceneG as @>
 infix 6 loopUsingSceneGWithRes as @!>
+infix 6 loopUsingEnvironmentallyUnawareSceneG as @@>
 
 infix 6 loopUsingSceneSG as %>
 infix 6 loopUsingSceneSGWithRes as %!>
+infix 6 loopUsingEnvironmentallyUnawareSceneSG as %%>
