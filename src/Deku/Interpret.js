@@ -149,11 +149,10 @@ var doSortingOnSubgraphs = function (unit, sorting) {
 	for (var i = 0; i < sorting.length; i++) {
 		var sl = unit.children[sorting[i][0]].terminalPtrs.length;
 		for (var k = 0; k < sl; k++) {
-			unit.main.insertBefore(
+			unit.main.prepend(
 				unit.children[sorting[i][0]].units[
 					unit.children[sorting[i][0]].terminalPtrs[sl - k - 1]
-				].main,
-				unit.main.firstChild
+				].main
 			);
 		}
 	}
@@ -242,16 +241,18 @@ var setSubgraph_ = function (ptr) {
 					sortable.push([i, applied.forOrdering]);
 					scenes[i] = applied.nextScene;
 				}
+				console.log(needsSorting);
 				if (needsSorting) {
 					sortable.sort((a, b) => b[1] - a[1]);
 					doSortingOnSubgraphs(state.units[ptr], sortable);
-				}
-				for (var i = 0; i < needsConnecting.length; i++) {
-					var j = needsConnecting[i];
-					for (var k = 0; k < children[j].terminalPtrs.length; k++) {
-						connectXToY(false)(children[j].terminalPtrs[k])(ptr)(children[j])(
-							state
-						)();
+				} else {
+					for (var i = 0; i < needsConnecting.length; i++) {
+						var j = needsConnecting[i];
+						for (var k = 0; k < children[j].terminalPtrs.length; k++) {
+							connectXToY(false)(children[j].terminalPtrs[k])(ptr)(children[j])(
+								state
+							)();
+						}
 					}
 				}
 			};
