@@ -6915,7 +6915,11 @@ var PS = {};
 				  state.units[ptr].main.addEventListener(a.key, el);
 				  state.units[ptr].listeners[a.key] = el;
 			  } else {
-				  state.units[ptr].main.setAttribute(a.key, avv);
+				  if (state.units[ptr].main.tagName === "INPUT" && a.key === "value") {
+					  state.units[ptr].main.value = avv;
+				  } else {
+					  state.units[ptr].main.setAttribute(a.key, avv);
+				  }
 			  }
 		  };
 	  };
@@ -7063,7 +7067,10 @@ var PS = {};
 					  } else {
 						  html = html.replace(
 							  verb + key + verb,
-							  "<div data-deku-elt-internal=" + '"' + key + '"></div>'
+							  '<span style="display:contents;" data-deku-elt-internal=' +
+								  '"' +
+								  key +
+								  '"></span>'
 						  );
 					  }
 				  }
