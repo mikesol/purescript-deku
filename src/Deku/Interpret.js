@@ -126,7 +126,11 @@ exports.setAttribute_ = function (a) {
 				state.units[ptr].main.addEventListener(a.key, el);
 				state.units[ptr].listeners[a.key] = el;
 			} else {
-				state.units[ptr].main.setAttribute(a.key, avv);
+				if (state.units[ptr].main.tagName === "INPUT" && a.key === "value") {
+					state.units[ptr].main.value = avv;
+				} else {
+					state.units[ptr].main.setAttribute(a.key, avv);
+				}
 			}
 		};
 	};
