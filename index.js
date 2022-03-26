@@ -7131,6 +7131,9 @@ var PS = {};
 			  return function () {
 				  var entries = Object.entries(a.toCreate);
 				  for (var i = 0; i < entries.length; i++) {
+					  if (entries[i][1].html) {
+						  continue;
+					  }
 					  var children = Object.entries(
 						  entries[i][1].myNameIs !== undefined
 							  ? entries[i][1].unMyNameIs.children
@@ -7157,6 +7160,9 @@ var PS = {};
 							  children[j][1].myNameIs !== undefined
 								  ? children[j][1].unMyNameIs
 								  : children[j][1];
+						  if (child.html) {
+							  continue;
+						  }
 						  if (child.children !== {}) {
 							  var toCreate = {};
 							  toCreate[children[j][0]] = children[j][1];
@@ -8402,7 +8408,7 @@ var PS = {};
                                       }))
                                   };
                               };
-                              throw new Error("Failed pattern match at Deku.Control.Functions (line 83, column 17 - line 97, column 10): " + [ v.constructor.name ]);
+                              throw new Error("Failed pattern match at Deku.Control.Functions (line 87, column 17 - line 101, column 10): " + [ v.constructor.name ]);
                           };
                       };
                       return Deku_Control_Types.unFrame(dictIsScene)(go);
@@ -8481,7 +8487,7 @@ var PS = {};
                               if (e instanceof Data_Either.Right) {
                                   return new Data_Either.Right(start(dictMonoid)(dictDOMInterpret));
                               };
-                              throw new Error("Failed pattern match at Deku.Control.Functions (line 115, column 13 - line 121, column 29): " + [ e.constructor.name ]);
+                              throw new Error("Failed pattern match at Deku.Control.Functions (line 119, column 13 - line 125, column 29): " + [ e.constructor.name ]);
                           };
                       })(infiniteLoop(dictMonoid)(dictDOMInterpret)(dictIsScene));
                   };
@@ -10356,7 +10362,7 @@ var PS = {};
   "use strict";
   $PS["Deku.Pursx"] = $PS["Deku.Pursx"] || {};
   var exports = $PS["Deku.Pursx"];
-  var Data_Symbol = $PS["Data.Symbol"];
+  var Data_Symbol = $PS["Data.Symbol"]; 
   var psxR = function (dictIsSymbol) {
       return function (dictPXStart) {
           return function (html) {
