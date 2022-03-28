@@ -3,24 +3,12 @@ module Deku.Core where
 import Prelude
 
 import Data.Either (Either)
-import Data.Exists (Exists)
 import Data.Maybe (Maybe)
 import Data.Nullable (Nullable)
-import Data.Tuple.Nested (type (/\))
-import Deku.Attribute (Attribute)
 import Deku.Rendered as R
 import Effect (Effect)
 import FRP.Behavior (Behavior)
 import FRP.Event (Event)
-
-newtype Atta'buteF element a = Atta'buteF
-  (Event a /\ (a -> Array (Attribute element)))
-
-type Atta'bute element = Exists (Atta'buteF element)
-
-newtype Te'xtF a = Te'xtF (Event a /\ (a -> String))
-
-type Te'xt = Exists Te'xtF
 
 type Element' dom engine = Event (dom -> engine)
 type Element dom engine = String -> DOMInterpret dom engine -> Event (dom -> engine)
@@ -65,7 +53,7 @@ newtype DOMInterpret dom engine = DOMInterpret
        . SubgraphInput index env push dom engine
       -> dom
       -> engine
-  , setAttributes :: R.SetAttributes -> dom -> engine
+  , setAttribute :: R.SetAttribute -> dom -> engine
   -- | Set subgraph.
   , setSubgraph ::
       forall index env

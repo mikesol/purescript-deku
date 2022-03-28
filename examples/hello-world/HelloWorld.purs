@@ -2,15 +2,16 @@ module Deku.Example.HelloWorld where
 
 import Prelude
 
+import Control.Alt ((<|>))
 import Data.Foldable (for_)
 import Deku.Attribute (cb, (:=))
-import Deku.Control (deku, (@@), (~~))
+import Deku.Control (deku)
 import Deku.Control as C
 import Deku.Core (Element)
 import Deku.DOM as D
 import Deku.Interpret (FFIDOMSnapshot, effectfulDOMInterpret, makeFFIDOMSnapshot)
 import Effect (Effect)
-import FRP.Event (Event, subscribe)
+import FRP.Event (Event, keepLatest, subscribe)
 import FRP.Event (create)
 import Web.HTML (window)
 import Web.HTML.HTMLDocument (body)
@@ -22,12 +23,13 @@ scene
   -> Event Boolean
   -> Array (Element FFIDOMSnapshot (Effect Unit))
 scene push event =
-  [ C.text (event ~~ if _ then "click" else "kcilc")
+  [ C.text (event <#> if _ then "click" else "kcilc")
   , D.a
-      ( event @@ \e ->
-          [ D.Href := "#"
-          , D.OnClick := cb (const $ push (not e))
-          ]
+      ( keepLatest
+          ( event <#> \e ->
+              pure (D.Href := "#") <|> pure
+                (D.OnClick := cb (const $ push (not e)))
+          )
       )
       [ C.text_ "me" ]
   ]

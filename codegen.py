@@ -87,7 +87,7 @@ def cg(CODEGEN_TARGET):
 
 {x}
   :: forall dom engine
-   . Atta'bute {term}
+   . Event (Attribute {term})
   -> Array (Element dom engine)
   -> Element dom engine
 {x} = elementify "{astag(x)}"
@@ -96,7 +96,7 @@ def cg(CODEGEN_TARGET):
   :: forall dom engine
    . Array (Element dom engine)
   -> Element dom engine
-{x}_ = {x} noAttributes
+{x}_ = {x} empty
 instance tagToDeku{term} :: TagToDeku "{astag(x)}" {term}
 ''')
     elif CODEGEN_TARGET == GENERATE_ATTR_DECL:

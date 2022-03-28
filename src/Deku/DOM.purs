@@ -599,27 +599,17 @@ import Data.Foldable (foldl)
 import Data.Functor as F
 import Data.Hashable (class Hashable)
 import Data.Map (Map)
-import Deku.Core (Te'xt, Te'xtF(..), Atta'bute, Atta'buteF(..), Element', Element(..))
+import Deku.Core ( Element', Element(..))
 import Data.Maybe (Maybe(..))
 import Data.Tuple (curry)
 import Data.Tuple.Nested (type (/\), (/\))
 import Deku.Attribute (class Attr, unsafeAttribute, prop', cb', Cb, Attribute, unsafeUnAttributeArray)
-import Deku.Control(atta'bute
-  , elementify
-  , atta'butWithSpice
-  , te'xt
-  , te'xtWithSpice
-  , (@@)
-  , (~~)
-  , text)
+import Deku.Control(elementify, text)
 import Deku.Core (DOMInterpret(..))
 import FRP.Behavior (Behavior, sample_)
 import FRP.Event (Event, keepLatest)
 
 class TagToDeku (tag :: Symbol) (deku :: Type) | tag -> deku
-
-noAttributes :: forall element. Atta'bute element
-noAttributes = empty @@ identity
 
 -- codegen 8
 data Accept = Accept
@@ -752,11 +742,11 @@ data Value = Value
 data Width = Width
 data Xtype = Xtype
 data OnAbort = OnAbort
-data OnAnimationcancel  = OnAnimationcancel
-data OnAnimationend  = OnAnimationend
-data OnAnimationiteration  = OnAnimationiteration
-data OnAnimationstart  = OnAnimationstart
-data OnAuxclick  = OnAuxclick
+data OnAnimationcancel  = OnAnimationcancel 
+data OnAnimationend  = OnAnimationend 
+data OnAnimationiteration  = OnAnimationiteration 
+data OnAnimationstart  = OnAnimationstart 
+data OnAuxclick  = OnAuxclick 
 data OnBlur = OnBlur
 data OnError = OnError
 data OnFocus = OnFocus
@@ -798,7 +788,7 @@ data OnMousemove = OnMousemove
 data OnMouseout = OnMouseout
 data OnMouseover = OnMouseover
 data OnMouseup = OnMouseup
-data OnMousewheel   = OnMousewheel
+data OnMousewheel   = OnMousewheel  
 data OnWheel = OnWheel
 data OnPause = OnPause
 data OnPlay = OnPlay
@@ -811,8 +801,8 @@ data OnPointerover = OnPointerover
 data OnPointerout = OnPointerout
 data OnPointerenter = OnPointerenter
 data OnPointerleave = OnPointerleave
-data OnPointerlockchange  = OnPointerlockchange
-data OnPointerlockerror  = OnPointerlockerror
+data OnPointerlockchange  = OnPointerlockchange 
+data OnPointerlockerror  = OnPointerlockerror 
 data OnProgress = OnProgress
 data OnRatechange = OnRatechange
 data OnReset = OnReset
@@ -824,17 +814,17 @@ data OnSeeking = OnSeeking
 data OnSelect = OnSelect
 data OnSelectstart = OnSelectstart
 data OnSelectionchange = OnSelectionchange
-data OnShow  = OnShow
+data OnShow  = OnShow 
 data OnSlotchange = OnSlotchange
 data OnStalled = OnStalled
 data OnSubmit = OnSubmit
 data OnSuspend = OnSuspend
 data OnTimeupdate = OnTimeupdate
 data OnVolumechange = OnVolumechange
-data OnTouchcancel   = OnTouchcancel
-data OnTouchend   = OnTouchend
-data OnTouchmove   = OnTouchmove
-data OnTouchstart   = OnTouchstart
+data OnTouchcancel   = OnTouchcancel  
+data OnTouchend   = OnTouchend  
+data OnTouchmove   = OnTouchmove  
+data OnTouchstart   = OnTouchstart  
 data OnTransitioncancel = OnTransitioncancel
 data OnTransitionend = OnTransitionend
 data OnTransitionrun = OnTransitionrun
@@ -9544,7 +9534,7 @@ data A_
 
 a
   :: forall dom engine
-   . Atta'bute A_
+   . Event (Attribute A_)
   -> Array (Element dom engine)
   -> Element dom engine
 a = elementify "a"
@@ -9553,14 +9543,14 @@ a_
   :: forall dom engine
    . Array (Element dom engine)
   -> Element dom engine
-a_ = a noAttributes
+a_ = a empty
 instance tagToDekuA_ :: TagToDeku "a" A_
 
 data Abbr_
 
 abbr
   :: forall dom engine
-   . Atta'bute Abbr_
+   . Event (Attribute Abbr_)
   -> Array (Element dom engine)
   -> Element dom engine
 abbr = elementify "abbr"
@@ -9569,14 +9559,14 @@ abbr_
   :: forall dom engine
    . Array (Element dom engine)
   -> Element dom engine
-abbr_ = abbr noAttributes
+abbr_ = abbr empty
 instance tagToDekuAbbr_ :: TagToDeku "abbr" Abbr_
 
 data Acronym_
 
 acronym
   :: forall dom engine
-   . Atta'bute Acronym_
+   . Event (Attribute Acronym_)
   -> Array (Element dom engine)
   -> Element dom engine
 acronym = elementify "acronym"
@@ -9585,14 +9575,14 @@ acronym_
   :: forall dom engine
    . Array (Element dom engine)
   -> Element dom engine
-acronym_ = acronym noAttributes
+acronym_ = acronym empty
 instance tagToDekuAcronym_ :: TagToDeku "acronym" Acronym_
 
 data Address_
 
 address
   :: forall dom engine
-   . Atta'bute Address_
+   . Event (Attribute Address_)
   -> Array (Element dom engine)
   -> Element dom engine
 address = elementify "address"
@@ -9601,14 +9591,14 @@ address_
   :: forall dom engine
    . Array (Element dom engine)
   -> Element dom engine
-address_ = address noAttributes
+address_ = address empty
 instance tagToDekuAddress_ :: TagToDeku "address" Address_
 
 data Applet_
 
 applet
   :: forall dom engine
-   . Atta'bute Applet_
+   . Event (Attribute Applet_)
   -> Array (Element dom engine)
   -> Element dom engine
 applet = elementify "applet"
@@ -9617,14 +9607,14 @@ applet_
   :: forall dom engine
    . Array (Element dom engine)
   -> Element dom engine
-applet_ = applet noAttributes
+applet_ = applet empty
 instance tagToDekuApplet_ :: TagToDeku "applet" Applet_
 
 data Area_
 
 area
   :: forall dom engine
-   . Atta'bute Area_
+   . Event (Attribute Area_)
   -> Array (Element dom engine)
   -> Element dom engine
 area = elementify "area"
@@ -9633,14 +9623,14 @@ area_
   :: forall dom engine
    . Array (Element dom engine)
   -> Element dom engine
-area_ = area noAttributes
+area_ = area empty
 instance tagToDekuArea_ :: TagToDeku "area" Area_
 
 data Article_
 
 article
   :: forall dom engine
-   . Atta'bute Article_
+   . Event (Attribute Article_)
   -> Array (Element dom engine)
   -> Element dom engine
 article = elementify "article"
@@ -9649,14 +9639,14 @@ article_
   :: forall dom engine
    . Array (Element dom engine)
   -> Element dom engine
-article_ = article noAttributes
+article_ = article empty
 instance tagToDekuArticle_ :: TagToDeku "article" Article_
 
 data Aside_
 
 aside
   :: forall dom engine
-   . Atta'bute Aside_
+   . Event (Attribute Aside_)
   -> Array (Element dom engine)
   -> Element dom engine
 aside = elementify "aside"
@@ -9665,14 +9655,14 @@ aside_
   :: forall dom engine
    . Array (Element dom engine)
   -> Element dom engine
-aside_ = aside noAttributes
+aside_ = aside empty
 instance tagToDekuAside_ :: TagToDeku "aside" Aside_
 
 data Audio_
 
 audio
   :: forall dom engine
-   . Atta'bute Audio_
+   . Event (Attribute Audio_)
   -> Array (Element dom engine)
   -> Element dom engine
 audio = elementify "audio"
@@ -9681,14 +9671,14 @@ audio_
   :: forall dom engine
    . Array (Element dom engine)
   -> Element dom engine
-audio_ = audio noAttributes
+audio_ = audio empty
 instance tagToDekuAudio_ :: TagToDeku "audio" Audio_
 
 data B_
 
 b
   :: forall dom engine
-   . Atta'bute B_
+   . Event (Attribute B_)
   -> Array (Element dom engine)
   -> Element dom engine
 b = elementify "b"
@@ -9697,14 +9687,14 @@ b_
   :: forall dom engine
    . Array (Element dom engine)
   -> Element dom engine
-b_ = b noAttributes
+b_ = b empty
 instance tagToDekuB_ :: TagToDeku "b" B_
 
 data Base_
 
 base
   :: forall dom engine
-   . Atta'bute Base_
+   . Event (Attribute Base_)
   -> Array (Element dom engine)
   -> Element dom engine
 base = elementify "base"
@@ -9713,14 +9703,14 @@ base_
   :: forall dom engine
    . Array (Element dom engine)
   -> Element dom engine
-base_ = base noAttributes
+base_ = base empty
 instance tagToDekuBase_ :: TagToDeku "base" Base_
 
 data Basefont_
 
 basefont
   :: forall dom engine
-   . Atta'bute Basefont_
+   . Event (Attribute Basefont_)
   -> Array (Element dom engine)
   -> Element dom engine
 basefont = elementify "basefont"
@@ -9729,14 +9719,14 @@ basefont_
   :: forall dom engine
    . Array (Element dom engine)
   -> Element dom engine
-basefont_ = basefont noAttributes
+basefont_ = basefont empty
 instance tagToDekuBasefont_ :: TagToDeku "basefont" Basefont_
 
 data Bdi_
 
 bdi
   :: forall dom engine
-   . Atta'bute Bdi_
+   . Event (Attribute Bdi_)
   -> Array (Element dom engine)
   -> Element dom engine
 bdi = elementify "bdi"
@@ -9745,14 +9735,14 @@ bdi_
   :: forall dom engine
    . Array (Element dom engine)
   -> Element dom engine
-bdi_ = bdi noAttributes
+bdi_ = bdi empty
 instance tagToDekuBdi_ :: TagToDeku "bdi" Bdi_
 
 data Bdo_
 
 bdo
   :: forall dom engine
-   . Atta'bute Bdo_
+   . Event (Attribute Bdo_)
   -> Array (Element dom engine)
   -> Element dom engine
 bdo = elementify "bdo"
@@ -9761,14 +9751,14 @@ bdo_
   :: forall dom engine
    . Array (Element dom engine)
   -> Element dom engine
-bdo_ = bdo noAttributes
+bdo_ = bdo empty
 instance tagToDekuBdo_ :: TagToDeku "bdo" Bdo_
 
 data Big_
 
 big
   :: forall dom engine
-   . Atta'bute Big_
+   . Event (Attribute Big_)
   -> Array (Element dom engine)
   -> Element dom engine
 big = elementify "big"
@@ -9777,14 +9767,14 @@ big_
   :: forall dom engine
    . Array (Element dom engine)
   -> Element dom engine
-big_ = big noAttributes
+big_ = big empty
 instance tagToDekuBig_ :: TagToDeku "big" Big_
 
 data Blockquote_
 
 blockquote
   :: forall dom engine
-   . Atta'bute Blockquote_
+   . Event (Attribute Blockquote_)
   -> Array (Element dom engine)
   -> Element dom engine
 blockquote = elementify "blockquote"
@@ -9793,14 +9783,14 @@ blockquote_
   :: forall dom engine
    . Array (Element dom engine)
   -> Element dom engine
-blockquote_ = blockquote noAttributes
+blockquote_ = blockquote empty
 instance tagToDekuBlockquote_ :: TagToDeku "blockquote" Blockquote_
 
 data Body_
 
 body
   :: forall dom engine
-   . Atta'bute Body_
+   . Event (Attribute Body_)
   -> Array (Element dom engine)
   -> Element dom engine
 body = elementify "body"
@@ -9809,14 +9799,14 @@ body_
   :: forall dom engine
    . Array (Element dom engine)
   -> Element dom engine
-body_ = body noAttributes
+body_ = body empty
 instance tagToDekuBody_ :: TagToDeku "body" Body_
 
 data Br_
 
 br
   :: forall dom engine
-   . Atta'bute Br_
+   . Event (Attribute Br_)
   -> Array (Element dom engine)
   -> Element dom engine
 br = elementify "br"
@@ -9825,14 +9815,14 @@ br_
   :: forall dom engine
    . Array (Element dom engine)
   -> Element dom engine
-br_ = br noAttributes
+br_ = br empty
 instance tagToDekuBr_ :: TagToDeku "br" Br_
 
 data Button_
 
 button
   :: forall dom engine
-   . Atta'bute Button_
+   . Event (Attribute Button_)
   -> Array (Element dom engine)
   -> Element dom engine
 button = elementify "button"
@@ -9841,14 +9831,14 @@ button_
   :: forall dom engine
    . Array (Element dom engine)
   -> Element dom engine
-button_ = button noAttributes
+button_ = button empty
 instance tagToDekuButton_ :: TagToDeku "button" Button_
 
 data Canvas_
 
 canvas
   :: forall dom engine
-   . Atta'bute Canvas_
+   . Event (Attribute Canvas_)
   -> Array (Element dom engine)
   -> Element dom engine
 canvas = elementify "canvas"
@@ -9857,14 +9847,14 @@ canvas_
   :: forall dom engine
    . Array (Element dom engine)
   -> Element dom engine
-canvas_ = canvas noAttributes
+canvas_ = canvas empty
 instance tagToDekuCanvas_ :: TagToDeku "canvas" Canvas_
 
 data Caption_
 
 caption
   :: forall dom engine
-   . Atta'bute Caption_
+   . Event (Attribute Caption_)
   -> Array (Element dom engine)
   -> Element dom engine
 caption = elementify "caption"
@@ -9873,14 +9863,14 @@ caption_
   :: forall dom engine
    . Array (Element dom engine)
   -> Element dom engine
-caption_ = caption noAttributes
+caption_ = caption empty
 instance tagToDekuCaption_ :: TagToDeku "caption" Caption_
 
 data Center_
 
 center
   :: forall dom engine
-   . Atta'bute Center_
+   . Event (Attribute Center_)
   -> Array (Element dom engine)
   -> Element dom engine
 center = elementify "center"
@@ -9889,14 +9879,14 @@ center_
   :: forall dom engine
    . Array (Element dom engine)
   -> Element dom engine
-center_ = center noAttributes
+center_ = center empty
 instance tagToDekuCenter_ :: TagToDeku "center" Center_
 
 data Cite_
 
 cite
   :: forall dom engine
-   . Atta'bute Cite_
+   . Event (Attribute Cite_)
   -> Array (Element dom engine)
   -> Element dom engine
 cite = elementify "cite"
@@ -9905,14 +9895,14 @@ cite_
   :: forall dom engine
    . Array (Element dom engine)
   -> Element dom engine
-cite_ = cite noAttributes
+cite_ = cite empty
 instance tagToDekuCite_ :: TagToDeku "cite" Cite_
 
 data Code_
 
 code
   :: forall dom engine
-   . Atta'bute Code_
+   . Event (Attribute Code_)
   -> Array (Element dom engine)
   -> Element dom engine
 code = elementify "code"
@@ -9921,14 +9911,14 @@ code_
   :: forall dom engine
    . Array (Element dom engine)
   -> Element dom engine
-code_ = code noAttributes
+code_ = code empty
 instance tagToDekuCode_ :: TagToDeku "code" Code_
 
 data Col_
 
 col
   :: forall dom engine
-   . Atta'bute Col_
+   . Event (Attribute Col_)
   -> Array (Element dom engine)
   -> Element dom engine
 col = elementify "col"
@@ -9937,14 +9927,14 @@ col_
   :: forall dom engine
    . Array (Element dom engine)
   -> Element dom engine
-col_ = col noAttributes
+col_ = col empty
 instance tagToDekuCol_ :: TagToDeku "col" Col_
 
 data Colgroup_
 
 colgroup
   :: forall dom engine
-   . Atta'bute Colgroup_
+   . Event (Attribute Colgroup_)
   -> Array (Element dom engine)
   -> Element dom engine
 colgroup = elementify "colgroup"
@@ -9953,14 +9943,14 @@ colgroup_
   :: forall dom engine
    . Array (Element dom engine)
   -> Element dom engine
-colgroup_ = colgroup noAttributes
+colgroup_ = colgroup empty
 instance tagToDekuColgroup_ :: TagToDeku "colgroup" Colgroup_
 
 data Xdata_
 
 xdata
   :: forall dom engine
-   . Atta'bute Xdata_
+   . Event (Attribute Xdata_)
   -> Array (Element dom engine)
   -> Element dom engine
 xdata = elementify "data"
@@ -9969,14 +9959,14 @@ xdata_
   :: forall dom engine
    . Array (Element dom engine)
   -> Element dom engine
-xdata_ = xdata noAttributes
+xdata_ = xdata empty
 instance tagToDekuXdata_ :: TagToDeku "data" Xdata_
 
 data Datalist_
 
 datalist
   :: forall dom engine
-   . Atta'bute Datalist_
+   . Event (Attribute Datalist_)
   -> Array (Element dom engine)
   -> Element dom engine
 datalist = elementify "datalist"
@@ -9985,14 +9975,14 @@ datalist_
   :: forall dom engine
    . Array (Element dom engine)
   -> Element dom engine
-datalist_ = datalist noAttributes
+datalist_ = datalist empty
 instance tagToDekuDatalist_ :: TagToDeku "datalist" Datalist_
 
 data Dd_
 
 dd
   :: forall dom engine
-   . Atta'bute Dd_
+   . Event (Attribute Dd_)
   -> Array (Element dom engine)
   -> Element dom engine
 dd = elementify "dd"
@@ -10001,14 +9991,14 @@ dd_
   :: forall dom engine
    . Array (Element dom engine)
   -> Element dom engine
-dd_ = dd noAttributes
+dd_ = dd empty
 instance tagToDekuDd_ :: TagToDeku "dd" Dd_
 
 data Del_
 
 del
   :: forall dom engine
-   . Atta'bute Del_
+   . Event (Attribute Del_)
   -> Array (Element dom engine)
   -> Element dom engine
 del = elementify "del"
@@ -10017,14 +10007,14 @@ del_
   :: forall dom engine
    . Array (Element dom engine)
   -> Element dom engine
-del_ = del noAttributes
+del_ = del empty
 instance tagToDekuDel_ :: TagToDeku "del" Del_
 
 data Details_
 
 details
   :: forall dom engine
-   . Atta'bute Details_
+   . Event (Attribute Details_)
   -> Array (Element dom engine)
   -> Element dom engine
 details = elementify "details"
@@ -10033,14 +10023,14 @@ details_
   :: forall dom engine
    . Array (Element dom engine)
   -> Element dom engine
-details_ = details noAttributes
+details_ = details empty
 instance tagToDekuDetails_ :: TagToDeku "details" Details_
 
 data Dfn_
 
 dfn
   :: forall dom engine
-   . Atta'bute Dfn_
+   . Event (Attribute Dfn_)
   -> Array (Element dom engine)
   -> Element dom engine
 dfn = elementify "dfn"
@@ -10049,14 +10039,14 @@ dfn_
   :: forall dom engine
    . Array (Element dom engine)
   -> Element dom engine
-dfn_ = dfn noAttributes
+dfn_ = dfn empty
 instance tagToDekuDfn_ :: TagToDeku "dfn" Dfn_
 
 data Dialog_
 
 dialog
   :: forall dom engine
-   . Atta'bute Dialog_
+   . Event (Attribute Dialog_)
   -> Array (Element dom engine)
   -> Element dom engine
 dialog = elementify "dialog"
@@ -10065,14 +10055,14 @@ dialog_
   :: forall dom engine
    . Array (Element dom engine)
   -> Element dom engine
-dialog_ = dialog noAttributes
+dialog_ = dialog empty
 instance tagToDekuDialog_ :: TagToDeku "dialog" Dialog_
 
 data Dir_
 
 dir
   :: forall dom engine
-   . Atta'bute Dir_
+   . Event (Attribute Dir_)
   -> Array (Element dom engine)
   -> Element dom engine
 dir = elementify "dir"
@@ -10081,14 +10071,14 @@ dir_
   :: forall dom engine
    . Array (Element dom engine)
   -> Element dom engine
-dir_ = dir noAttributes
+dir_ = dir empty
 instance tagToDekuDir_ :: TagToDeku "dir" Dir_
 
 data Div_
 
 div
   :: forall dom engine
-   . Atta'bute Div_
+   . Event (Attribute Div_)
   -> Array (Element dom engine)
   -> Element dom engine
 div = elementify "div"
@@ -10097,14 +10087,14 @@ div_
   :: forall dom engine
    . Array (Element dom engine)
   -> Element dom engine
-div_ = div noAttributes
+div_ = div empty
 instance tagToDekuDiv_ :: TagToDeku "div" Div_
 
 data Dl_
 
 dl
   :: forall dom engine
-   . Atta'bute Dl_
+   . Event (Attribute Dl_)
   -> Array (Element dom engine)
   -> Element dom engine
 dl = elementify "dl"
@@ -10113,14 +10103,14 @@ dl_
   :: forall dom engine
    . Array (Element dom engine)
   -> Element dom engine
-dl_ = dl noAttributes
+dl_ = dl empty
 instance tagToDekuDl_ :: TagToDeku "dl" Dl_
 
 data Dt_
 
 dt
   :: forall dom engine
-   . Atta'bute Dt_
+   . Event (Attribute Dt_)
   -> Array (Element dom engine)
   -> Element dom engine
 dt = elementify "dt"
@@ -10129,14 +10119,14 @@ dt_
   :: forall dom engine
    . Array (Element dom engine)
   -> Element dom engine
-dt_ = dt noAttributes
+dt_ = dt empty
 instance tagToDekuDt_ :: TagToDeku "dt" Dt_
 
 data Em_
 
 em
   :: forall dom engine
-   . Atta'bute Em_
+   . Event (Attribute Em_)
   -> Array (Element dom engine)
   -> Element dom engine
 em = elementify "em"
@@ -10145,14 +10135,14 @@ em_
   :: forall dom engine
    . Array (Element dom engine)
   -> Element dom engine
-em_ = em noAttributes
+em_ = em empty
 instance tagToDekuEm_ :: TagToDeku "em" Em_
 
 data Embed_
 
 embed
   :: forall dom engine
-   . Atta'bute Embed_
+   . Event (Attribute Embed_)
   -> Array (Element dom engine)
   -> Element dom engine
 embed = elementify "embed"
@@ -10161,14 +10151,14 @@ embed_
   :: forall dom engine
    . Array (Element dom engine)
   -> Element dom engine
-embed_ = embed noAttributes
+embed_ = embed empty
 instance tagToDekuEmbed_ :: TagToDeku "embed" Embed_
 
 data Fieldset_
 
 fieldset
   :: forall dom engine
-   . Atta'bute Fieldset_
+   . Event (Attribute Fieldset_)
   -> Array (Element dom engine)
   -> Element dom engine
 fieldset = elementify "fieldset"
@@ -10177,14 +10167,14 @@ fieldset_
   :: forall dom engine
    . Array (Element dom engine)
   -> Element dom engine
-fieldset_ = fieldset noAttributes
+fieldset_ = fieldset empty
 instance tagToDekuFieldset_ :: TagToDeku "fieldset" Fieldset_
 
 data Figcaption_
 
 figcaption
   :: forall dom engine
-   . Atta'bute Figcaption_
+   . Event (Attribute Figcaption_)
   -> Array (Element dom engine)
   -> Element dom engine
 figcaption = elementify "figcaption"
@@ -10193,14 +10183,14 @@ figcaption_
   :: forall dom engine
    . Array (Element dom engine)
   -> Element dom engine
-figcaption_ = figcaption noAttributes
+figcaption_ = figcaption empty
 instance tagToDekuFigcaption_ :: TagToDeku "figcaption" Figcaption_
 
 data Figure_
 
 figure
   :: forall dom engine
-   . Atta'bute Figure_
+   . Event (Attribute Figure_)
   -> Array (Element dom engine)
   -> Element dom engine
 figure = elementify "figure"
@@ -10209,14 +10199,14 @@ figure_
   :: forall dom engine
    . Array (Element dom engine)
   -> Element dom engine
-figure_ = figure noAttributes
+figure_ = figure empty
 instance tagToDekuFigure_ :: TagToDeku "figure" Figure_
 
 data Font_
 
 font
   :: forall dom engine
-   . Atta'bute Font_
+   . Event (Attribute Font_)
   -> Array (Element dom engine)
   -> Element dom engine
 font = elementify "font"
@@ -10225,14 +10215,14 @@ font_
   :: forall dom engine
    . Array (Element dom engine)
   -> Element dom engine
-font_ = font noAttributes
+font_ = font empty
 instance tagToDekuFont_ :: TagToDeku "font" Font_
 
 data Footer_
 
 footer
   :: forall dom engine
-   . Atta'bute Footer_
+   . Event (Attribute Footer_)
   -> Array (Element dom engine)
   -> Element dom engine
 footer = elementify "footer"
@@ -10241,14 +10231,14 @@ footer_
   :: forall dom engine
    . Array (Element dom engine)
   -> Element dom engine
-footer_ = footer noAttributes
+footer_ = footer empty
 instance tagToDekuFooter_ :: TagToDeku "footer" Footer_
 
 data Form_
 
 form
   :: forall dom engine
-   . Atta'bute Form_
+   . Event (Attribute Form_)
   -> Array (Element dom engine)
   -> Element dom engine
 form = elementify "form"
@@ -10257,14 +10247,14 @@ form_
   :: forall dom engine
    . Array (Element dom engine)
   -> Element dom engine
-form_ = form noAttributes
+form_ = form empty
 instance tagToDekuForm_ :: TagToDeku "form" Form_
 
 data Frame_
 
 frame
   :: forall dom engine
-   . Atta'bute Frame_
+   . Event (Attribute Frame_)
   -> Array (Element dom engine)
   -> Element dom engine
 frame = elementify "frame"
@@ -10273,14 +10263,14 @@ frame_
   :: forall dom engine
    . Array (Element dom engine)
   -> Element dom engine
-frame_ = frame noAttributes
+frame_ = frame empty
 instance tagToDekuFrame_ :: TagToDeku "frame" Frame_
 
 data Frameset_
 
 frameset
   :: forall dom engine
-   . Atta'bute Frameset_
+   . Event (Attribute Frameset_)
   -> Array (Element dom engine)
   -> Element dom engine
 frameset = elementify "frameset"
@@ -10289,14 +10279,14 @@ frameset_
   :: forall dom engine
    . Array (Element dom engine)
   -> Element dom engine
-frameset_ = frameset noAttributes
+frameset_ = frameset empty
 instance tagToDekuFrameset_ :: TagToDeku "frameset" Frameset_
 
 data H1_
 
 h1
   :: forall dom engine
-   . Atta'bute H1_
+   . Event (Attribute H1_)
   -> Array (Element dom engine)
   -> Element dom engine
 h1 = elementify "h1"
@@ -10305,14 +10295,14 @@ h1_
   :: forall dom engine
    . Array (Element dom engine)
   -> Element dom engine
-h1_ = h1 noAttributes
+h1_ = h1 empty
 instance tagToDekuH1_ :: TagToDeku "h1" H1_
 
 data H2_
 
 h2
   :: forall dom engine
-   . Atta'bute H2_
+   . Event (Attribute H2_)
   -> Array (Element dom engine)
   -> Element dom engine
 h2 = elementify "h2"
@@ -10321,14 +10311,14 @@ h2_
   :: forall dom engine
    . Array (Element dom engine)
   -> Element dom engine
-h2_ = h2 noAttributes
+h2_ = h2 empty
 instance tagToDekuH2_ :: TagToDeku "h2" H2_
 
 data H3_
 
 h3
   :: forall dom engine
-   . Atta'bute H3_
+   . Event (Attribute H3_)
   -> Array (Element dom engine)
   -> Element dom engine
 h3 = elementify "h3"
@@ -10337,14 +10327,14 @@ h3_
   :: forall dom engine
    . Array (Element dom engine)
   -> Element dom engine
-h3_ = h3 noAttributes
+h3_ = h3 empty
 instance tagToDekuH3_ :: TagToDeku "h3" H3_
 
 data H4_
 
 h4
   :: forall dom engine
-   . Atta'bute H4_
+   . Event (Attribute H4_)
   -> Array (Element dom engine)
   -> Element dom engine
 h4 = elementify "h4"
@@ -10353,14 +10343,14 @@ h4_
   :: forall dom engine
    . Array (Element dom engine)
   -> Element dom engine
-h4_ = h4 noAttributes
+h4_ = h4 empty
 instance tagToDekuH4_ :: TagToDeku "h4" H4_
 
 data H5_
 
 h5
   :: forall dom engine
-   . Atta'bute H5_
+   . Event (Attribute H5_)
   -> Array (Element dom engine)
   -> Element dom engine
 h5 = elementify "h5"
@@ -10369,14 +10359,14 @@ h5_
   :: forall dom engine
    . Array (Element dom engine)
   -> Element dom engine
-h5_ = h5 noAttributes
+h5_ = h5 empty
 instance tagToDekuH5_ :: TagToDeku "h5" H5_
 
 data H6_
 
 h6
   :: forall dom engine
-   . Atta'bute H6_
+   . Event (Attribute H6_)
   -> Array (Element dom engine)
   -> Element dom engine
 h6 = elementify "h6"
@@ -10385,14 +10375,14 @@ h6_
   :: forall dom engine
    . Array (Element dom engine)
   -> Element dom engine
-h6_ = h6 noAttributes
+h6_ = h6 empty
 instance tagToDekuH6_ :: TagToDeku "h6" H6_
 
 data Head_
 
 head
   :: forall dom engine
-   . Atta'bute Head_
+   . Event (Attribute Head_)
   -> Array (Element dom engine)
   -> Element dom engine
 head = elementify "head"
@@ -10401,14 +10391,14 @@ head_
   :: forall dom engine
    . Array (Element dom engine)
   -> Element dom engine
-head_ = head noAttributes
+head_ = head empty
 instance tagToDekuHead_ :: TagToDeku "head" Head_
 
 data Header_
 
 header
   :: forall dom engine
-   . Atta'bute Header_
+   . Event (Attribute Header_)
   -> Array (Element dom engine)
   -> Element dom engine
 header = elementify "header"
@@ -10417,14 +10407,14 @@ header_
   :: forall dom engine
    . Array (Element dom engine)
   -> Element dom engine
-header_ = header noAttributes
+header_ = header empty
 instance tagToDekuHeader_ :: TagToDeku "header" Header_
 
 data Hr_
 
 hr
   :: forall dom engine
-   . Atta'bute Hr_
+   . Event (Attribute Hr_)
   -> Array (Element dom engine)
   -> Element dom engine
 hr = elementify "hr"
@@ -10433,14 +10423,14 @@ hr_
   :: forall dom engine
    . Array (Element dom engine)
   -> Element dom engine
-hr_ = hr noAttributes
+hr_ = hr empty
 instance tagToDekuHr_ :: TagToDeku "hr" Hr_
 
 data Html_
 
 html
   :: forall dom engine
-   . Atta'bute Html_
+   . Event (Attribute Html_)
   -> Array (Element dom engine)
   -> Element dom engine
 html = elementify "html"
@@ -10449,14 +10439,14 @@ html_
   :: forall dom engine
    . Array (Element dom engine)
   -> Element dom engine
-html_ = html noAttributes
+html_ = html empty
 instance tagToDekuHtml_ :: TagToDeku "html" Html_
 
 data I_
 
 i
   :: forall dom engine
-   . Atta'bute I_
+   . Event (Attribute I_)
   -> Array (Element dom engine)
   -> Element dom engine
 i = elementify "i"
@@ -10465,14 +10455,14 @@ i_
   :: forall dom engine
    . Array (Element dom engine)
   -> Element dom engine
-i_ = i noAttributes
+i_ = i empty
 instance tagToDekuI_ :: TagToDeku "i" I_
 
 data Iframe_
 
 iframe
   :: forall dom engine
-   . Atta'bute Iframe_
+   . Event (Attribute Iframe_)
   -> Array (Element dom engine)
   -> Element dom engine
 iframe = elementify "iframe"
@@ -10481,14 +10471,14 @@ iframe_
   :: forall dom engine
    . Array (Element dom engine)
   -> Element dom engine
-iframe_ = iframe noAttributes
+iframe_ = iframe empty
 instance tagToDekuIframe_ :: TagToDeku "iframe" Iframe_
 
 data Img_
 
 img
   :: forall dom engine
-   . Atta'bute Img_
+   . Event (Attribute Img_)
   -> Array (Element dom engine)
   -> Element dom engine
 img = elementify "img"
@@ -10497,14 +10487,14 @@ img_
   :: forall dom engine
    . Array (Element dom engine)
   -> Element dom engine
-img_ = img noAttributes
+img_ = img empty
 instance tagToDekuImg_ :: TagToDeku "img" Img_
 
 data Input_
 
 input
   :: forall dom engine
-   . Atta'bute Input_
+   . Event (Attribute Input_)
   -> Array (Element dom engine)
   -> Element dom engine
 input = elementify "input"
@@ -10513,14 +10503,14 @@ input_
   :: forall dom engine
    . Array (Element dom engine)
   -> Element dom engine
-input_ = input noAttributes
+input_ = input empty
 instance tagToDekuInput_ :: TagToDeku "input" Input_
 
 data Ins_
 
 ins
   :: forall dom engine
-   . Atta'bute Ins_
+   . Event (Attribute Ins_)
   -> Array (Element dom engine)
   -> Element dom engine
 ins = elementify "ins"
@@ -10529,14 +10519,14 @@ ins_
   :: forall dom engine
    . Array (Element dom engine)
   -> Element dom engine
-ins_ = ins noAttributes
+ins_ = ins empty
 instance tagToDekuIns_ :: TagToDeku "ins" Ins_
 
 data Kbd_
 
 kbd
   :: forall dom engine
-   . Atta'bute Kbd_
+   . Event (Attribute Kbd_)
   -> Array (Element dom engine)
   -> Element dom engine
 kbd = elementify "kbd"
@@ -10545,14 +10535,14 @@ kbd_
   :: forall dom engine
    . Array (Element dom engine)
   -> Element dom engine
-kbd_ = kbd noAttributes
+kbd_ = kbd empty
 instance tagToDekuKbd_ :: TagToDeku "kbd" Kbd_
 
 data Label_
 
 label
   :: forall dom engine
-   . Atta'bute Label_
+   . Event (Attribute Label_)
   -> Array (Element dom engine)
   -> Element dom engine
 label = elementify "label"
@@ -10561,14 +10551,14 @@ label_
   :: forall dom engine
    . Array (Element dom engine)
   -> Element dom engine
-label_ = label noAttributes
+label_ = label empty
 instance tagToDekuLabel_ :: TagToDeku "label" Label_
 
 data Legend_
 
 legend
   :: forall dom engine
-   . Atta'bute Legend_
+   . Event (Attribute Legend_)
   -> Array (Element dom engine)
   -> Element dom engine
 legend = elementify "legend"
@@ -10577,14 +10567,14 @@ legend_
   :: forall dom engine
    . Array (Element dom engine)
   -> Element dom engine
-legend_ = legend noAttributes
+legend_ = legend empty
 instance tagToDekuLegend_ :: TagToDeku "legend" Legend_
 
 data Li_
 
 li
   :: forall dom engine
-   . Atta'bute Li_
+   . Event (Attribute Li_)
   -> Array (Element dom engine)
   -> Element dom engine
 li = elementify "li"
@@ -10593,14 +10583,14 @@ li_
   :: forall dom engine
    . Array (Element dom engine)
   -> Element dom engine
-li_ = li noAttributes
+li_ = li empty
 instance tagToDekuLi_ :: TagToDeku "li" Li_
 
 data Link_
 
 link
   :: forall dom engine
-   . Atta'bute Link_
+   . Event (Attribute Link_)
   -> Array (Element dom engine)
   -> Element dom engine
 link = elementify "link"
@@ -10609,14 +10599,14 @@ link_
   :: forall dom engine
    . Array (Element dom engine)
   -> Element dom engine
-link_ = link noAttributes
+link_ = link empty
 instance tagToDekuLink_ :: TagToDeku "link" Link_
 
 data Main_
 
 main
   :: forall dom engine
-   . Atta'bute Main_
+   . Event (Attribute Main_)
   -> Array (Element dom engine)
   -> Element dom engine
 main = elementify "main"
@@ -10625,14 +10615,14 @@ main_
   :: forall dom engine
    . Array (Element dom engine)
   -> Element dom engine
-main_ = main noAttributes
+main_ = main empty
 instance tagToDekuMain_ :: TagToDeku "main" Main_
 
 data Map_
 
 map
   :: forall dom engine
-   . Atta'bute Map_
+   . Event (Attribute Map_)
   -> Array (Element dom engine)
   -> Element dom engine
 map = elementify "map"
@@ -10641,14 +10631,14 @@ map_
   :: forall dom engine
    . Array (Element dom engine)
   -> Element dom engine
-map_ = map noAttributes
+map_ = map empty
 instance tagToDekuMap_ :: TagToDeku "map" Map_
 
 data Mark_
 
 mark
   :: forall dom engine
-   . Atta'bute Mark_
+   . Event (Attribute Mark_)
   -> Array (Element dom engine)
   -> Element dom engine
 mark = elementify "mark"
@@ -10657,14 +10647,14 @@ mark_
   :: forall dom engine
    . Array (Element dom engine)
   -> Element dom engine
-mark_ = mark noAttributes
+mark_ = mark empty
 instance tagToDekuMark_ :: TagToDeku "mark" Mark_
 
 data Meta_
 
 meta
   :: forall dom engine
-   . Atta'bute Meta_
+   . Event (Attribute Meta_)
   -> Array (Element dom engine)
   -> Element dom engine
 meta = elementify "meta"
@@ -10673,14 +10663,14 @@ meta_
   :: forall dom engine
    . Array (Element dom engine)
   -> Element dom engine
-meta_ = meta noAttributes
+meta_ = meta empty
 instance tagToDekuMeta_ :: TagToDeku "meta" Meta_
 
 data Meter_
 
 meter
   :: forall dom engine
-   . Atta'bute Meter_
+   . Event (Attribute Meter_)
   -> Array (Element dom engine)
   -> Element dom engine
 meter = elementify "meter"
@@ -10689,14 +10679,14 @@ meter_
   :: forall dom engine
    . Array (Element dom engine)
   -> Element dom engine
-meter_ = meter noAttributes
+meter_ = meter empty
 instance tagToDekuMeter_ :: TagToDeku "meter" Meter_
 
 data Nav_
 
 nav
   :: forall dom engine
-   . Atta'bute Nav_
+   . Event (Attribute Nav_)
   -> Array (Element dom engine)
   -> Element dom engine
 nav = elementify "nav"
@@ -10705,14 +10695,14 @@ nav_
   :: forall dom engine
    . Array (Element dom engine)
   -> Element dom engine
-nav_ = nav noAttributes
+nav_ = nav empty
 instance tagToDekuNav_ :: TagToDeku "nav" Nav_
 
 data Noframes_
 
 noframes
   :: forall dom engine
-   . Atta'bute Noframes_
+   . Event (Attribute Noframes_)
   -> Array (Element dom engine)
   -> Element dom engine
 noframes = elementify "noframes"
@@ -10721,14 +10711,14 @@ noframes_
   :: forall dom engine
    . Array (Element dom engine)
   -> Element dom engine
-noframes_ = noframes noAttributes
+noframes_ = noframes empty
 instance tagToDekuNoframes_ :: TagToDeku "noframes" Noframes_
 
 data Noscript_
 
 noscript
   :: forall dom engine
-   . Atta'bute Noscript_
+   . Event (Attribute Noscript_)
   -> Array (Element dom engine)
   -> Element dom engine
 noscript = elementify "noscript"
@@ -10737,14 +10727,14 @@ noscript_
   :: forall dom engine
    . Array (Element dom engine)
   -> Element dom engine
-noscript_ = noscript noAttributes
+noscript_ = noscript empty
 instance tagToDekuNoscript_ :: TagToDeku "noscript" Noscript_
 
 data Object_
 
 object
   :: forall dom engine
-   . Atta'bute Object_
+   . Event (Attribute Object_)
   -> Array (Element dom engine)
   -> Element dom engine
 object = elementify "object"
@@ -10753,14 +10743,14 @@ object_
   :: forall dom engine
    . Array (Element dom engine)
   -> Element dom engine
-object_ = object noAttributes
+object_ = object empty
 instance tagToDekuObject_ :: TagToDeku "object" Object_
 
 data Ol_
 
 ol
   :: forall dom engine
-   . Atta'bute Ol_
+   . Event (Attribute Ol_)
   -> Array (Element dom engine)
   -> Element dom engine
 ol = elementify "ol"
@@ -10769,14 +10759,14 @@ ol_
   :: forall dom engine
    . Array (Element dom engine)
   -> Element dom engine
-ol_ = ol noAttributes
+ol_ = ol empty
 instance tagToDekuOl_ :: TagToDeku "ol" Ol_
 
 data Optgroup_
 
 optgroup
   :: forall dom engine
-   . Atta'bute Optgroup_
+   . Event (Attribute Optgroup_)
   -> Array (Element dom engine)
   -> Element dom engine
 optgroup = elementify "optgroup"
@@ -10785,14 +10775,14 @@ optgroup_
   :: forall dom engine
    . Array (Element dom engine)
   -> Element dom engine
-optgroup_ = optgroup noAttributes
+optgroup_ = optgroup empty
 instance tagToDekuOptgroup_ :: TagToDeku "optgroup" Optgroup_
 
 data Option_
 
 option
   :: forall dom engine
-   . Atta'bute Option_
+   . Event (Attribute Option_)
   -> Array (Element dom engine)
   -> Element dom engine
 option = elementify "option"
@@ -10801,14 +10791,14 @@ option_
   :: forall dom engine
    . Array (Element dom engine)
   -> Element dom engine
-option_ = option noAttributes
+option_ = option empty
 instance tagToDekuOption_ :: TagToDeku "option" Option_
 
 data Output_
 
 output
   :: forall dom engine
-   . Atta'bute Output_
+   . Event (Attribute Output_)
   -> Array (Element dom engine)
   -> Element dom engine
 output = elementify "output"
@@ -10817,14 +10807,14 @@ output_
   :: forall dom engine
    . Array (Element dom engine)
   -> Element dom engine
-output_ = output noAttributes
+output_ = output empty
 instance tagToDekuOutput_ :: TagToDeku "output" Output_
 
 data P_
 
 p
   :: forall dom engine
-   . Atta'bute P_
+   . Event (Attribute P_)
   -> Array (Element dom engine)
   -> Element dom engine
 p = elementify "p"
@@ -10833,14 +10823,14 @@ p_
   :: forall dom engine
    . Array (Element dom engine)
   -> Element dom engine
-p_ = p noAttributes
+p_ = p empty
 instance tagToDekuP_ :: TagToDeku "p" P_
 
 data Param_
 
 param
   :: forall dom engine
-   . Atta'bute Param_
+   . Event (Attribute Param_)
   -> Array (Element dom engine)
   -> Element dom engine
 param = elementify "param"
@@ -10849,14 +10839,14 @@ param_
   :: forall dom engine
    . Array (Element dom engine)
   -> Element dom engine
-param_ = param noAttributes
+param_ = param empty
 instance tagToDekuParam_ :: TagToDeku "param" Param_
 
 data Picture_
 
 picture
   :: forall dom engine
-   . Atta'bute Picture_
+   . Event (Attribute Picture_)
   -> Array (Element dom engine)
   -> Element dom engine
 picture = elementify "picture"
@@ -10865,14 +10855,14 @@ picture_
   :: forall dom engine
    . Array (Element dom engine)
   -> Element dom engine
-picture_ = picture noAttributes
+picture_ = picture empty
 instance tagToDekuPicture_ :: TagToDeku "picture" Picture_
 
 data Pre_
 
 pre
   :: forall dom engine
-   . Atta'bute Pre_
+   . Event (Attribute Pre_)
   -> Array (Element dom engine)
   -> Element dom engine
 pre = elementify "pre"
@@ -10881,14 +10871,14 @@ pre_
   :: forall dom engine
    . Array (Element dom engine)
   -> Element dom engine
-pre_ = pre noAttributes
+pre_ = pre empty
 instance tagToDekuPre_ :: TagToDeku "pre" Pre_
 
 data Progress_
 
 progress
   :: forall dom engine
-   . Atta'bute Progress_
+   . Event (Attribute Progress_)
   -> Array (Element dom engine)
   -> Element dom engine
 progress = elementify "progress"
@@ -10897,14 +10887,14 @@ progress_
   :: forall dom engine
    . Array (Element dom engine)
   -> Element dom engine
-progress_ = progress noAttributes
+progress_ = progress empty
 instance tagToDekuProgress_ :: TagToDeku "progress" Progress_
 
 data Q_
 
 q
   :: forall dom engine
-   . Atta'bute Q_
+   . Event (Attribute Q_)
   -> Array (Element dom engine)
   -> Element dom engine
 q = elementify "q"
@@ -10913,14 +10903,14 @@ q_
   :: forall dom engine
    . Array (Element dom engine)
   -> Element dom engine
-q_ = q noAttributes
+q_ = q empty
 instance tagToDekuQ_ :: TagToDeku "q" Q_
 
 data Rp_
 
 rp
   :: forall dom engine
-   . Atta'bute Rp_
+   . Event (Attribute Rp_)
   -> Array (Element dom engine)
   -> Element dom engine
 rp = elementify "rp"
@@ -10929,14 +10919,14 @@ rp_
   :: forall dom engine
    . Array (Element dom engine)
   -> Element dom engine
-rp_ = rp noAttributes
+rp_ = rp empty
 instance tagToDekuRp_ :: TagToDeku "rp" Rp_
 
 data Rt_
 
 rt
   :: forall dom engine
-   . Atta'bute Rt_
+   . Event (Attribute Rt_)
   -> Array (Element dom engine)
   -> Element dom engine
 rt = elementify "rt"
@@ -10945,14 +10935,14 @@ rt_
   :: forall dom engine
    . Array (Element dom engine)
   -> Element dom engine
-rt_ = rt noAttributes
+rt_ = rt empty
 instance tagToDekuRt_ :: TagToDeku "rt" Rt_
 
 data Ruby_
 
 ruby
   :: forall dom engine
-   . Atta'bute Ruby_
+   . Event (Attribute Ruby_)
   -> Array (Element dom engine)
   -> Element dom engine
 ruby = elementify "ruby"
@@ -10961,14 +10951,14 @@ ruby_
   :: forall dom engine
    . Array (Element dom engine)
   -> Element dom engine
-ruby_ = ruby noAttributes
+ruby_ = ruby empty
 instance tagToDekuRuby_ :: TagToDeku "ruby" Ruby_
 
 data S_
 
 s
   :: forall dom engine
-   . Atta'bute S_
+   . Event (Attribute S_)
   -> Array (Element dom engine)
   -> Element dom engine
 s = elementify "s"
@@ -10977,14 +10967,14 @@ s_
   :: forall dom engine
    . Array (Element dom engine)
   -> Element dom engine
-s_ = s noAttributes
+s_ = s empty
 instance tagToDekuS_ :: TagToDeku "s" S_
 
 data Samp_
 
 samp
   :: forall dom engine
-   . Atta'bute Samp_
+   . Event (Attribute Samp_)
   -> Array (Element dom engine)
   -> Element dom engine
 samp = elementify "samp"
@@ -10993,14 +10983,14 @@ samp_
   :: forall dom engine
    . Array (Element dom engine)
   -> Element dom engine
-samp_ = samp noAttributes
+samp_ = samp empty
 instance tagToDekuSamp_ :: TagToDeku "samp" Samp_
 
 data Script_
 
 script
   :: forall dom engine
-   . Atta'bute Script_
+   . Event (Attribute Script_)
   -> Array (Element dom engine)
   -> Element dom engine
 script = elementify "script"
@@ -11009,14 +10999,14 @@ script_
   :: forall dom engine
    . Array (Element dom engine)
   -> Element dom engine
-script_ = script noAttributes
+script_ = script empty
 instance tagToDekuScript_ :: TagToDeku "script" Script_
 
 data Section_
 
 section
   :: forall dom engine
-   . Atta'bute Section_
+   . Event (Attribute Section_)
   -> Array (Element dom engine)
   -> Element dom engine
 section = elementify "section"
@@ -11025,14 +11015,14 @@ section_
   :: forall dom engine
    . Array (Element dom engine)
   -> Element dom engine
-section_ = section noAttributes
+section_ = section empty
 instance tagToDekuSection_ :: TagToDeku "section" Section_
 
 data Select_
 
 select
   :: forall dom engine
-   . Atta'bute Select_
+   . Event (Attribute Select_)
   -> Array (Element dom engine)
   -> Element dom engine
 select = elementify "select"
@@ -11041,14 +11031,14 @@ select_
   :: forall dom engine
    . Array (Element dom engine)
   -> Element dom engine
-select_ = select noAttributes
+select_ = select empty
 instance tagToDekuSelect_ :: TagToDeku "select" Select_
 
 data Small_
 
 small
   :: forall dom engine
-   . Atta'bute Small_
+   . Event (Attribute Small_)
   -> Array (Element dom engine)
   -> Element dom engine
 small = elementify "small"
@@ -11057,14 +11047,14 @@ small_
   :: forall dom engine
    . Array (Element dom engine)
   -> Element dom engine
-small_ = small noAttributes
+small_ = small empty
 instance tagToDekuSmall_ :: TagToDeku "small" Small_
 
 data Source_
 
 source
   :: forall dom engine
-   . Atta'bute Source_
+   . Event (Attribute Source_)
   -> Array (Element dom engine)
   -> Element dom engine
 source = elementify "source"
@@ -11073,14 +11063,14 @@ source_
   :: forall dom engine
    . Array (Element dom engine)
   -> Element dom engine
-source_ = source noAttributes
+source_ = source empty
 instance tagToDekuSource_ :: TagToDeku "source" Source_
 
 data Span_
 
 span
   :: forall dom engine
-   . Atta'bute Span_
+   . Event (Attribute Span_)
   -> Array (Element dom engine)
   -> Element dom engine
 span = elementify "span"
@@ -11089,14 +11079,14 @@ span_
   :: forall dom engine
    . Array (Element dom engine)
   -> Element dom engine
-span_ = span noAttributes
+span_ = span empty
 instance tagToDekuSpan_ :: TagToDeku "span" Span_
 
 data Strike_
 
 strike
   :: forall dom engine
-   . Atta'bute Strike_
+   . Event (Attribute Strike_)
   -> Array (Element dom engine)
   -> Element dom engine
 strike = elementify "strike"
@@ -11105,14 +11095,14 @@ strike_
   :: forall dom engine
    . Array (Element dom engine)
   -> Element dom engine
-strike_ = strike noAttributes
+strike_ = strike empty
 instance tagToDekuStrike_ :: TagToDeku "strike" Strike_
 
 data Strong_
 
 strong
   :: forall dom engine
-   . Atta'bute Strong_
+   . Event (Attribute Strong_)
   -> Array (Element dom engine)
   -> Element dom engine
 strong = elementify "strong"
@@ -11121,14 +11111,14 @@ strong_
   :: forall dom engine
    . Array (Element dom engine)
   -> Element dom engine
-strong_ = strong noAttributes
+strong_ = strong empty
 instance tagToDekuStrong_ :: TagToDeku "strong" Strong_
 
 data Style_
 
 style
   :: forall dom engine
-   . Atta'bute Style_
+   . Event (Attribute Style_)
   -> Array (Element dom engine)
   -> Element dom engine
 style = elementify "style"
@@ -11137,14 +11127,14 @@ style_
   :: forall dom engine
    . Array (Element dom engine)
   -> Element dom engine
-style_ = style noAttributes
+style_ = style empty
 instance tagToDekuStyle_ :: TagToDeku "style" Style_
 
 data Sub_
 
 sub
   :: forall dom engine
-   . Atta'bute Sub_
+   . Event (Attribute Sub_)
   -> Array (Element dom engine)
   -> Element dom engine
 sub = elementify "sub"
@@ -11153,14 +11143,14 @@ sub_
   :: forall dom engine
    . Array (Element dom engine)
   -> Element dom engine
-sub_ = sub noAttributes
+sub_ = sub empty
 instance tagToDekuSub_ :: TagToDeku "sub" Sub_
 
 data Summary_
 
 summary
   :: forall dom engine
-   . Atta'bute Summary_
+   . Event (Attribute Summary_)
   -> Array (Element dom engine)
   -> Element dom engine
 summary = elementify "summary"
@@ -11169,14 +11159,14 @@ summary_
   :: forall dom engine
    . Array (Element dom engine)
   -> Element dom engine
-summary_ = summary noAttributes
+summary_ = summary empty
 instance tagToDekuSummary_ :: TagToDeku "summary" Summary_
 
 data Sup_
 
 sup
   :: forall dom engine
-   . Atta'bute Sup_
+   . Event (Attribute Sup_)
   -> Array (Element dom engine)
   -> Element dom engine
 sup = elementify "sup"
@@ -11185,14 +11175,14 @@ sup_
   :: forall dom engine
    . Array (Element dom engine)
   -> Element dom engine
-sup_ = sup noAttributes
+sup_ = sup empty
 instance tagToDekuSup_ :: TagToDeku "sup" Sup_
 
 data Svg_
 
 svg
   :: forall dom engine
-   . Atta'bute Svg_
+   . Event (Attribute Svg_)
   -> Array (Element dom engine)
   -> Element dom engine
 svg = elementify "svg"
@@ -11201,14 +11191,14 @@ svg_
   :: forall dom engine
    . Array (Element dom engine)
   -> Element dom engine
-svg_ = svg noAttributes
+svg_ = svg empty
 instance tagToDekuSvg_ :: TagToDeku "svg" Svg_
 
 data Table_
 
 table
   :: forall dom engine
-   . Atta'bute Table_
+   . Event (Attribute Table_)
   -> Array (Element dom engine)
   -> Element dom engine
 table = elementify "table"
@@ -11217,14 +11207,14 @@ table_
   :: forall dom engine
    . Array (Element dom engine)
   -> Element dom engine
-table_ = table noAttributes
+table_ = table empty
 instance tagToDekuTable_ :: TagToDeku "table" Table_
 
 data Tbody_
 
 tbody
   :: forall dom engine
-   . Atta'bute Tbody_
+   . Event (Attribute Tbody_)
   -> Array (Element dom engine)
   -> Element dom engine
 tbody = elementify "tbody"
@@ -11233,14 +11223,14 @@ tbody_
   :: forall dom engine
    . Array (Element dom engine)
   -> Element dom engine
-tbody_ = tbody noAttributes
+tbody_ = tbody empty
 instance tagToDekuTbody_ :: TagToDeku "tbody" Tbody_
 
 data Td_
 
 td
   :: forall dom engine
-   . Atta'bute Td_
+   . Event (Attribute Td_)
   -> Array (Element dom engine)
   -> Element dom engine
 td = elementify "td"
@@ -11249,14 +11239,14 @@ td_
   :: forall dom engine
    . Array (Element dom engine)
   -> Element dom engine
-td_ = td noAttributes
+td_ = td empty
 instance tagToDekuTd_ :: TagToDeku "td" Td_
 
 data Template_
 
 template
   :: forall dom engine
-   . Atta'bute Template_
+   . Event (Attribute Template_)
   -> Array (Element dom engine)
   -> Element dom engine
 template = elementify "template"
@@ -11265,14 +11255,14 @@ template_
   :: forall dom engine
    . Array (Element dom engine)
   -> Element dom engine
-template_ = template noAttributes
+template_ = template empty
 instance tagToDekuTemplate_ :: TagToDeku "template" Template_
 
 data Textarea_
 
 textarea
   :: forall dom engine
-   . Atta'bute Textarea_
+   . Event (Attribute Textarea_)
   -> Array (Element dom engine)
   -> Element dom engine
 textarea = elementify "textarea"
@@ -11281,14 +11271,14 @@ textarea_
   :: forall dom engine
    . Array (Element dom engine)
   -> Element dom engine
-textarea_ = textarea noAttributes
+textarea_ = textarea empty
 instance tagToDekuTextarea_ :: TagToDeku "textarea" Textarea_
 
 data Tfoot_
 
 tfoot
   :: forall dom engine
-   . Atta'bute Tfoot_
+   . Event (Attribute Tfoot_)
   -> Array (Element dom engine)
   -> Element dom engine
 tfoot = elementify "tfoot"
@@ -11297,14 +11287,14 @@ tfoot_
   :: forall dom engine
    . Array (Element dom engine)
   -> Element dom engine
-tfoot_ = tfoot noAttributes
+tfoot_ = tfoot empty
 instance tagToDekuTfoot_ :: TagToDeku "tfoot" Tfoot_
 
 data Th_
 
 th
   :: forall dom engine
-   . Atta'bute Th_
+   . Event (Attribute Th_)
   -> Array (Element dom engine)
   -> Element dom engine
 th = elementify "th"
@@ -11313,14 +11303,14 @@ th_
   :: forall dom engine
    . Array (Element dom engine)
   -> Element dom engine
-th_ = th noAttributes
+th_ = th empty
 instance tagToDekuTh_ :: TagToDeku "th" Th_
 
 data Thead_
 
 thead
   :: forall dom engine
-   . Atta'bute Thead_
+   . Event (Attribute Thead_)
   -> Array (Element dom engine)
   -> Element dom engine
 thead = elementify "thead"
@@ -11329,14 +11319,14 @@ thead_
   :: forall dom engine
    . Array (Element dom engine)
   -> Element dom engine
-thead_ = thead noAttributes
+thead_ = thead empty
 instance tagToDekuThead_ :: TagToDeku "thead" Thead_
 
 data Time_
 
 time
   :: forall dom engine
-   . Atta'bute Time_
+   . Event (Attribute Time_)
   -> Array (Element dom engine)
   -> Element dom engine
 time = elementify "time"
@@ -11345,14 +11335,14 @@ time_
   :: forall dom engine
    . Array (Element dom engine)
   -> Element dom engine
-time_ = time noAttributes
+time_ = time empty
 instance tagToDekuTime_ :: TagToDeku "time" Time_
 
 data Title_
 
 title
   :: forall dom engine
-   . Atta'bute Title_
+   . Event (Attribute Title_)
   -> Array (Element dom engine)
   -> Element dom engine
 title = elementify "title"
@@ -11361,14 +11351,14 @@ title_
   :: forall dom engine
    . Array (Element dom engine)
   -> Element dom engine
-title_ = title noAttributes
+title_ = title empty
 instance tagToDekuTitle_ :: TagToDeku "title" Title_
 
 data Tr_
 
 tr
   :: forall dom engine
-   . Atta'bute Tr_
+   . Event (Attribute Tr_)
   -> Array (Element dom engine)
   -> Element dom engine
 tr = elementify "tr"
@@ -11377,14 +11367,14 @@ tr_
   :: forall dom engine
    . Array (Element dom engine)
   -> Element dom engine
-tr_ = tr noAttributes
+tr_ = tr empty
 instance tagToDekuTr_ :: TagToDeku "tr" Tr_
 
 data Track_
 
 track
   :: forall dom engine
-   . Atta'bute Track_
+   . Event (Attribute Track_)
   -> Array (Element dom engine)
   -> Element dom engine
 track = elementify "track"
@@ -11393,14 +11383,14 @@ track_
   :: forall dom engine
    . Array (Element dom engine)
   -> Element dom engine
-track_ = track noAttributes
+track_ = track empty
 instance tagToDekuTrack_ :: TagToDeku "track" Track_
 
 data Tt_
 
 tt
   :: forall dom engine
-   . Atta'bute Tt_
+   . Event (Attribute Tt_)
   -> Array (Element dom engine)
   -> Element dom engine
 tt = elementify "tt"
@@ -11409,14 +11399,14 @@ tt_
   :: forall dom engine
    . Array (Element dom engine)
   -> Element dom engine
-tt_ = tt noAttributes
+tt_ = tt empty
 instance tagToDekuTt_ :: TagToDeku "tt" Tt_
 
 data U_
 
 u
   :: forall dom engine
-   . Atta'bute U_
+   . Event (Attribute U_)
   -> Array (Element dom engine)
   -> Element dom engine
 u = elementify "u"
@@ -11425,14 +11415,14 @@ u_
   :: forall dom engine
    . Array (Element dom engine)
   -> Element dom engine
-u_ = u noAttributes
+u_ = u empty
 instance tagToDekuU_ :: TagToDeku "u" U_
 
 data Ul_
 
 ul
   :: forall dom engine
-   . Atta'bute Ul_
+   . Event (Attribute Ul_)
   -> Array (Element dom engine)
   -> Element dom engine
 ul = elementify "ul"
@@ -11441,14 +11431,14 @@ ul_
   :: forall dom engine
    . Array (Element dom engine)
   -> Element dom engine
-ul_ = ul noAttributes
+ul_ = ul empty
 instance tagToDekuUl_ :: TagToDeku "ul" Ul_
 
 data Var_
 
 var
   :: forall dom engine
-   . Atta'bute Var_
+   . Event (Attribute Var_)
   -> Array (Element dom engine)
   -> Element dom engine
 var = elementify "var"
@@ -11457,14 +11447,14 @@ var_
   :: forall dom engine
    . Array (Element dom engine)
   -> Element dom engine
-var_ = var noAttributes
+var_ = var empty
 instance tagToDekuVar_ :: TagToDeku "var" Var_
 
 data Video_
 
 video
   :: forall dom engine
-   . Atta'bute Video_
+   . Event (Attribute Video_)
   -> Array (Element dom engine)
   -> Element dom engine
 video = elementify "video"
@@ -11473,14 +11463,14 @@ video_
   :: forall dom engine
    . Array (Element dom engine)
   -> Element dom engine
-video_ = video noAttributes
+video_ = video empty
 instance tagToDekuVideo_ :: TagToDeku "video" Video_
 
 data Wbr_
 
 wbr
   :: forall dom engine
-   . Atta'bute Wbr_
+   . Event (Attribute Wbr_)
   -> Array (Element dom engine)
   -> Element dom engine
 wbr = elementify "wbr"
@@ -11489,7 +11479,7 @@ wbr_
   :: forall dom engine
    . Array (Element dom engine)
   -> Element dom engine
-wbr_ = wbr noAttributes
+wbr_ = wbr empty
 instance tagToDekuWbr_ :: TagToDeku "wbr" Wbr_
 
 -- codegen 1

@@ -81,13 +81,10 @@ type MakeSubgraph =
   , instructions :: Array (Array Instruction)
   }
 type SetText = { id :: String, text :: String }
-type SetAttributes =
+type SetAttribute =
   { id :: String
-  , attributes ::
-      Array
-        { key :: String
-        , value :: AttributeValue
-        }
+  , key :: String
+  , value :: AttributeValue
   }
 type SetSubgraph = { id :: String }
 
@@ -100,7 +97,7 @@ type Instruction' =
   , makeText :: MakeText
   , makeRoot :: MakeRoot
   , makeSubgraph :: MakeSubgraph
-  , setAttributes :: SetAttributes
+  , setAttribute :: SetAttribute
   , setText :: SetText
   , setSubgraph :: SetSubgraph
   , sendSubgraphToTop :: SendSubgraphToTop
@@ -114,7 +111,7 @@ instructionWeight (Instruction v) = v # match
   , makeElement: const 2
   , makeText: const 2
   , makeSubgraph: const 3
-  , setAttributes: const 6
+  , setAttribute: const 6
   , setText: const 6
   , setSubgraph: const 7
   , sendSubgraphToTop: const 7
@@ -126,7 +123,7 @@ instructionId (Instruction v) = v # match
   , makeText: _.id >>> Just
   , makeRoot: _.id >>> Just
   , makeSubgraph: _.id >>> Just
-  , setAttributes: _.id >>> Just
+  , setAttribute: _.id >>> Just
   , setText: _.id >>> Just
   , setSubgraph: _.id >>> Just
   , sendSubgraphToTop: _.id >>> Just
@@ -163,8 +160,8 @@ iMakeElement = Instruction <<< inj (Proxy :: Proxy "makeElement")
 iMakeSubgraph :: MakeSubgraph -> Instruction
 iMakeSubgraph = Instruction <<< inj (Proxy :: Proxy "makeSubgraph")
 
-iSetAttributes :: SetAttributes -> Instruction
-iSetAttributes = Instruction <<< inj (Proxy :: Proxy "setAttributes")
+iSetAttribute :: SetAttribute -> Instruction
+iSetAttribute = Instruction <<< inj (Proxy :: Proxy "setAttribute")
 
 iSetSubgraph :: SetSubgraph -> Instruction
 iSetSubgraph = Instruction <<< inj (Proxy :: Proxy "setSubgraph")

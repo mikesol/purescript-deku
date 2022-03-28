@@ -1,11 +1,5 @@
 module Deku.Control
-  ( atta'bute
-  , atta'butWithSpice
-  , te'xt
-  , te'xtWithSpice
-  , elementify
-  , (@@)
-  , (~~)
+  ( elementify
   , text
   , text_
   , deku
@@ -15,46 +9,14 @@ import Prelude hiding (map)
 
 import Control.Alt ((<|>))
 import Control.Plus (empty)
-import Data.Either (Either)
-import Data.Exists (mkExists, runExists)
 import Data.Foldable (foldl)
 import Data.Functor as F
-import Data.Tuple (curry)
-import Data.Tuple.Nested (type (/\), (/\))
-import Deku.Attribute (Attribute, unsafeUnAttributeArray)
-import Deku.Core (Atta'bute, Atta'buteF(..), DOMInterpret(..), Element, Element', Te'xt, Te'xtF(..))
+import Deku.Attribute (Attribute, unsafeUnAttribute)
+import Deku.Core (DOMInterpret(..), Element, Element')
 import Deku.Rendered (RootDOMElement(..))
 import FRP.Behavior (sample_)
-import FRP.Event (Event, fix, keepLatest)
+import FRP.Event (Event, keepLatest)
 import Web.DOM as Web.DOM
-
-atta'bute
-  :: forall element
-   . ( forall a
-        . Event a /\ (a -> Array (Attribute element))
-       -> Atta'bute element
-     )
-atta'bute = mkExists <<< Atta'buteF
-
-atta'butWithSpice
-  :: forall element
-   . ( forall a
-        . Event a
-       -> (a -> Array (Attribute element))
-       -> Atta'bute element
-     )
-atta'butWithSpice = curry atta'bute
-
-infix 5 atta'butWithSpice as @@
-
-te'xt
-  :: (forall a. Event a /\ (a -> String) -> Te'xt)
-te'xt = mkExists <<< Te'xtF
-te'xtWithSpice
-  :: (forall a. Event a -> (a -> String) -> Te'xt)
-te'xtWithSpice = curry te'xt
-
-infix 5 te'xtWithSpice as ~~
 
 ----
 unsafeElement
@@ -82,26 +44,25 @@ unsafeSetText
   :: forall dom engine
    . DOMInterpret dom engine
   -> String
-  -> Te'xt
+  -> Event String
   -> Element' dom engine
 unsafeSetText (DOMInterpret { setText }) id txt = F.map
-  (setText <<< { id, text: _ })
-  (runExists (\(Te'xtF (e /\ f)) -> F.map f e) txt)
+  (setText <<< { id, text: _ }) txt
 
 unsafeSetAttribute
   :: forall element dom engine
    . DOMInterpret dom engine
   -> String
-  -> Atta'bute element
+  -> Event (Attribute element)
   -> Element' dom engine
-unsafeSetAttribute (DOMInterpret { setAttributes }) id atts = F.map
-  (setAttributes <<< { id, attributes: _ } <<< unsafeUnAttributeArray)
-  (runExists (\(Atta'buteF (e /\ f)) -> F.map f e) atts)
+unsafeSetAttribute (DOMInterpret { setAttribute }) id atts = F.map
+  (setAttribute <<< (\{ key, value} -> { id, key, value  }) <<< unsafeUnAttribute)
+  (atts)
 
 elementify
   :: forall element dom engine
    . String
-  -> Atta'bute element
+  -> (Event (Attribute element))
   -> Array (Element dom engine)
   -> Element dom engine
 elementify tag atts children parent di@(DOMInterpret { ids }) = keepLatest
@@ -115,7 +76,7 @@ elementify tag atts children parent di@(DOMInterpret { ids }) = keepLatest
 
 text
   :: forall dom engine
-   . Te'xt
+   . Event String
   -> Element dom engine
 text txt parent di@(DOMInterpret { ids }) = keepLatest
   ( (sample_ ids (pure unit)) <#> \me ->
@@ -129,7 +90,7 @@ text_
   :: forall dom engine
    . String
   -> Element dom engine
-text_ txt = text (pure unit ~~ const txt)
+text_ txt = text (pure txt)
 
 deku
   :: forall dom engine

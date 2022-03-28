@@ -67,8 +67,8 @@ foreign import setText_
   -> FFIDOMSnapshot
   -> Effect Unit
 foreign import sendSubgraphToTop_ :: R.SendSubgraphToTop -> FFIDOMSnapshot -> Effect Unit
-foreign import setAttributes_
-  :: R.SetAttributes -> FFIDOMSnapshot -> Effect Unit
+foreign import setAttribute_
+  :: R.SetAttribute -> FFIDOMSnapshot -> Effect Unit
 
 foreign import setSubgraph_
   :: forall env push index
@@ -113,7 +113,7 @@ effectfulDOMInterpret = DOMInterpret
           let event = map Left evtL.event <|> map Right evtR.event
           let actualized = scenes index evtR.push event parent effectfulDOMInterpret
           pure actualized
-  , setAttributes: setAttributes_
+  , setAttribute: setAttribute_
   , setText: setText_
   , sendSubgraphToTop: sendSubgraphToTop_
   , setSubgraph: \{ id, envs } dom -> setSubgraph_ id
