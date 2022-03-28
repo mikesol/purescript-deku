@@ -11,8 +11,7 @@ import Data.Typelevel.Num (class Nat, class Pred, class Succ, type (:*), D0, D1,
 import Data.Vec (Vec, uncons)
 import Deku.Graph.DOM (Element, MyNameIs, Text)
 import Deku.Graph.DOM as CTOR
-import Deku.Pursx (class PXStart)
-import Deku.Pursx (class PursxToEdges, Pursx)
+import Deku.Pursx (class PXStart, class PursxToEdges, Pursx)
 import Prim.Ordering (Ordering, LT, GT, EQ)
 import Prim.Row (class Cons, class Lacks)
 import Prim.RowList (RowList)
@@ -233,8 +232,11 @@ instance detupTuple ::
 instance detupUnit :: Detup n Unit () where
   detup' _ _ = {}
 
-detup :: forall a b. Detup D0 a b => a -> { | b }
-detup = detup' (Proxy :: Proxy D0)
+detup :: forall a b c. Detup D1 c b => Lacks "@0" b => a -> c -> { "@0" :: a | b }
+detup a b = insertLeft (Proxy :: Proxy "@0") a
+    (detup' (Proxy :: Proxy D1) b)
+
+infixr 6 detup as @@
 
 class Vex (n :: Type) (a :: Type) (b :: Row Type) | n a -> b where
   vex :: Vec n a -> { | b }

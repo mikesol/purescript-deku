@@ -11,7 +11,7 @@ import Deku.Graph.DOM (ResolvedSubgraphSig, (:=))
 import Deku.Graph.DOM as D
 import Deku.Graph.DOM.Shorthand as S
 import Deku.Pursx ((~!))
-import Deku.Util (detup)
+import Deku.Util ((@@))
 import Effect (Effect)
 import Type.Proxy (Proxy(..))
 
@@ -28,13 +28,11 @@ pursx1 dpage =
                     )
                 }
             , pars: D.div []
-                ( detup
-                    $
-                      D.p []
+                ( D.p []
                         ( S.text
                             """Writing out PureScript code for the DOM only really makes sense if you're doing some sort of interesting manipulations on the JS layer. Otherwise, it's pretty tedious and longer than HTML. Thankfully, there's a solution: PursX."""
                         )
-                        /\ D.p []
+                        @@ D.p []
                         ( S.text
                             """PursX takes its name from JSX and it accomplishes a similar goal: the ability to embed HTML in your document. In the example below, we create the same exact component from the previous article, but in PursX."""
                         )
@@ -77,11 +75,7 @@ main =
                           )
 
                         /\ D.p []
-                          ( detup $
-                              ( D.text
-                                  "Here's what it produces:"
-                              )
-                                /\ unit
+                          ( S.text   "Here's what it produces:"
                           )
                         /\ D.blockquote []
                           ((Proxy :: _ """
@@ -102,10 +96,9 @@ main =
       """) ~! {})
                         /\ D.h2 [] (S.text "Puurrrrrr ...sx")
                         /\ D.p []
-                          ( detup $
-                              D.text
+                          (D.text
                                 """Pursx can be activated with the operators """
-                                /\ D.code [] (S.text "~!")
+                                @@ D.code [] (S.text "~!")
                                 /\ D.text
                                   """, which creates a one-off record, and """
                                 /\ D.code [] (S.text "~~")
@@ -119,9 +112,9 @@ main =
                         /\ D.h2 [] (S.text "Next steps")
                         /\ D.p []
                           ( S.span []
-                                (detup $ D.text
+                                ( D.text
                                     """In this section, we PursX to build the same component as the previous section. In the next section, we'll learn how to respond to """
-                                /\ D.a
+                                @@ D.a
                                   [ D.OnClick := cb
                                       ( const $ dpage Events *>
                                           scrollToTop

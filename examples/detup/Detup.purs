@@ -9,7 +9,7 @@ import Deku.Control.Types (Frame0, Scene)
 import Deku.Graph.DOM (root, text)
 import Deku.Interpret (makeFFIDOMSnapshot)
 import Deku.Run (RunDOM, RunEngine, TriggeredScene, defaultOptions, run)
-import Deku.Util (detup)
+import Deku.Util ((@@))
 import Effect (Effect)
 import FRP.Event (subscribe)
 import Web.DOM as WEB.DOM
@@ -25,7 +25,7 @@ scene elt =
   ( \_ _ ->
       u $
         root elt
-          (detup (text "a" /\ text "b" /\ text "c" /\ text "d" /\ unit))
+           (text "a" @@ text "b" /\ text "c" /\ text "d" /\ unit)
 
   ) @> freeze
 

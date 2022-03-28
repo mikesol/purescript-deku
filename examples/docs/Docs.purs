@@ -28,7 +28,7 @@ import Deku.Graph.DOM as D
 import Deku.Graph.DOM.Shorthand as S
 import Deku.Interpret (makeFFIDOMSnapshot)
 import Deku.Run (RunDOM, RunEngine, TriggeredScene, defaultOptions, run)
-import Deku.Util (detup, vex)
+import Deku.Util (vex, (@@))
 import Effect (Effect)
 import FRP.Event (subscribe)
 import Web.DOM as WEB.DOM
@@ -51,19 +51,18 @@ scene elt dt =
                         sections =
                           map
                             ( \(x /\ y /\ z) -> D.span []
-                                ( detup $
-                                    D.a
-                                      [ cot dt $ cb (const $ push x)
-                                      , D.Style := "cursor:pointer;"
+                                ( D.a
+                                    [ cot dt $ cb (const $ push x)
+                                    , D.Style := "cursor:pointer;"
+                                    ]
+                                    (S.text y)
+                                    @@ D.span
+                                      [ D.Style :=
+                                        if z then ""
+                                          else "display:none;"
                                       ]
-                                      (S.text y)
-                                      /\ D.span
-                                        [ D.Style :=
-                                            if z then ""
-                                            else "display:none;"
-                                        ]
-                                        (S.text " | ")
-                                      /\ unit
+                                      (S.text " | ")
+                                    /\ unit
                                 )
                             ) $ Intro
                             /\ "Home"
@@ -120,7 +119,8 @@ scene elt dt =
   page dpage SSR = SSR.serverSide dpage
   page dpage Subgraph = Subgraph.subgraphs dt dpage
 
-foreign import getDeviceType :: DeviceType -> DeviceType -> DeviceType -> Effect DeviceType
+foreign import getDeviceType
+  :: DeviceType -> DeviceType -> DeviceType -> Effect DeviceType
 
 main :: Effect Unit
 main = do
