@@ -5,9 +5,9 @@ import Prelude
 import Data.Either (Either(..))
 import Data.Tuple.Nested ((/\))
 import Deku.Change (change)
-import Deku.Control.Functions (u, freeze, (%>))
+import Deku.Control.Functions (u, (%>))
 import Deku.Example.Docs.Types (Page(..))
-import Deku.Example.Docs.Util (cot, scrollToTop)
+import Deku.Example.Docs.Util (scrollToTop)
 import Deku.Graph.Attribute (cb)
 import Deku.Graph.DOM (ResolvedSubgraphSig, myNameIs, (:=))
 import Deku.Graph.DOM as D

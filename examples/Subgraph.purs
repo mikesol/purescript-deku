@@ -3,27 +3,18 @@ module Deku.Example.Docs.Example.Subgraph where
 import Prelude
 
 import Data.Either (Either(..))
-import Data.Foldable (for_)
+import Deku.Toplevel ((🚀))
 import Data.Hashable (class Hashable, hash)
 import Data.Map (insert, singleton)
 import Data.Tuple (fst, snd)
 import Data.Tuple.Nested ((/\))
 import Deku.Change (change)
-import Deku.Control.Functions (u, (@>), (%>))
-import Deku.Control.Types (Frame0, Scene)
+import Deku.Control.Functions (u, (%>))
 import Deku.Graph.Attribute (cb)
-import Deku.Graph.DOM (AsSubgraph(..), SubgraphSig, root, xsubgraph, (:=))
+import Deku.Graph.DOM (AsSubgraph(..), SubgraphSig, xsubgraph, (:=))
 import Deku.Graph.DOM as D
 import Deku.Graph.DOM.Shorthand as S
-import Deku.Interpret (class DOMInterpret, makeFFIDOMSnapshot)
-import Deku.Run (defaultOptions, run)
 import Effect (Effect)
-import FRP.Event (subscribe)
-import Web.DOM (Element)
-import Web.HTML (window)
-import Web.HTML.HTMLDocument (body)
-import Web.HTML.HTMLElement (toElement)
-import Web.HTML.Window (document)
 
 data Sgs = Sg0 | Sg1
 derive instance Eq Sgs
@@ -34,7 +25,9 @@ instance Show Sgs where
 instance Hashable Sgs where
   hash = show >>> hash
 
-mySub :: (Sgs -> Effect Unit) -> SubgraphSig Sgs Unit Unit
+mySub
+  :: (Sgs -> Effect Unit)
+  -> SubgraphSig Sgs Unit Unit
 mySub raise Sg0 =
   ( \_ push ->
       S.div []
@@ -107,16 +100,10 @@ mySub raise Sg1 =
           { "div.div1.count1.t": "D: " <> show (snd new)
           } $> new
 
-scene
-  :: forall env dom engine res
-   . Monoid res
-  => DOMInterpret dom engine
-  => Element
-  -> Scene env dom engine Frame0 Sgs res
-scene elt =
-  ( \_ push ->
-      u $ root elt
-        { sub:
+main :: Effect Unit
+main =
+  ( \push ->
+      u $ { sub:
             D.subgraph
               ( insert Sg0 (pure unit)
                   $ singleton Sg1 (pure unit)
@@ -124,23 +111,10 @@ scene elt =
               (AsSubgraph (mySub push))
         }
 
-  ) @> \e _ -> case e of
-    Left _ -> pure unit
-    Right Sg0 -> change
+  ) 🚀 \e _ -> case e of
+    Sg0 -> change
       { "root.sub": xsubgraph (singleton Sg1 (pure unit))
       }
-    Right Sg1 -> change
+    Sg1 -> change
       { "root.sub": xsubgraph (singleton Sg0 (pure unit))
       }
-
-main :: Effect Unit
-main = do
-  b' <- window >>= document >>= body
-  for_ (toElement <$> b') \elt -> do
-    ffi <- makeFFIDOMSnapshot
-    subscribe
-      ( run (pure unit) (pure unit) defaultOptions ffi
-          (scene elt)
-
-      )
-      (_.res >>> pure)
