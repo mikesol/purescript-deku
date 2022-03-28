@@ -15,25 +15,24 @@ import Effect (Effect)
 main :: Effect Unit
 main =
   ( const $ u $
-      ( { button: D.button [] { t: D.text "I do nothing" }
-        , list: D.ul []
-            $ vex
-            $ map (D.li [] <<< S.text)
-              ("A" +> "B" +> "C" +> empty)
-        , rando: D.div []
-            $ detup
-            $
-              D.a [ D.Href := "https://example.com" ]
-                (S.text "foo ")
-                /\ D.i [] (S.text " bar ")
-                /\ D.span [ D.Style := "font-weight: 800;" ]
-                  (S.text " baz")
-                /\
-                  unit
-        , lotsOfDivs: D.div []
-            $ S.div []
-            $ S.div []
-            $ S.input [ D.Xtype := "range" ] {}
-        }
-      )
+      { button: D.button [] { t: D.text "I do nothing" }
+      , list: D.ul []
+          $ vex
+          $ map (D.li [] <<< S.text)
+            ("A" +> "B" +> "C" +> empty)
+      , rando: D.div []
+          $ detup
+          $
+            D.a [ D.Href := "https://example.com" ]
+              (S.text "foo ")
+              /\ D.i [] (S.text " bar ")
+              /\ D.span [ D.Style := "font-weight: 800;" ]
+                (S.text " baz")
+              /\
+                unit
+      , lotsOfDivs: D.div []
+          $ S.div []
+          $ S.div []
+          $ S.input [ D.Xtype := "range" ] {}
+      }
   ) 🚀 freeze
