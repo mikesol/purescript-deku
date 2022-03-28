@@ -9,43 +9,31 @@ var makeid = function (length) {
 	return result;
 };
 
-var connectXToY = function (calledExternally) {
-	return function (x) {
-		return function (y) {
-			return function (stateX) {
-				return function (stateY) {
-					return function () {
-						stateY.units[y].main.appendChild(stateX.units[x].main);
-					};
-				};
-			};
-		};
-	};
-};
 var connectXToY_ = function (x) {
-	return function (state) {
-		return connectXToY(true)(x.fromId)(x.toId)(state)(state);
-	};
-};
-exports.connectXToY_ = connectXToY_;
-var disconnectXFromY = function (calledExternally) {
-	return function (x) {
-		return function (y) {
-			return function (stateX) {
-				return function (stateY) {
-					return function () {
-						stateY.units[y].main.removeChild(stateX.units[x].main);
-					};
+	return function (y) {
+		return function (stateX) {
+			return function (stateY) {
+				return function () {
+					stateY.units[y].main.appendChild(stateX.units[x].main);
 				};
 			};
 		};
 	};
 };
-exports.disconnectXFromY_ = function (x) {
-	return function (state) {
-		return disconnectXFromY(true)(x.fromId)(x.toId)(state)(state);
+
+exports.connectXToY_ = connectXToY_;
+var disconnectXFromY_ = function (x) {
+	return function (y) {
+		return function (stateX) {
+			return function (stateY) {
+				return function () {
+					stateY.units[y].main.removeChild(stateX.units[x].main);
+				};
+			};
+		};
 	};
 };
+exports.disconnectXFromY_ = disconnectXFromY_;
 exports.destroyUnit_ = function (a) {
 	return function (state) {
 		return function () {
@@ -72,19 +60,7 @@ var makeElement_ = function (eltAlreadyExists) {
 						? eltAlreadyExists
 						: document.createElement(a.tag),
 				};
-				for (var i = 0; i < a.attributes.length; i++) {
-					if (a.attributes[i].value.type === "cb") {
-						var atty = a.attributes[i];
-						var el = ((x) => (e) => x.value.value(e)())(atty);
-						state.units[ptr].main.addEventListener(atty.key, el);
-						state.units[ptr].listeners[a.attributes[i].key] = el;
-					} else {
-						state.units[ptr].main.setAttribute(
-							a.attributes[i].key,
-							a.attributes[i].value.value
-						);
-					}
-				}
+				connectXToY_(ptr)(a.parent)(state)(state)();
 			};
 		};
 	};
@@ -98,9 +74,7 @@ exports.makeText_ = function (a) {
 				main: document.createElement("span"),
 			};
 			state.units[ptr].main.setAttribute("style", "white-space: pre-wrap;");
-			state.units[ptr].main.innerText = a.text;
-			//.replace(/\n/g, "<br>")
-			//.replace(/ /g, "&nbsp;");
+			connectXToY_(ptr)(a.parent)(state)(state)();
 		};
 	};
 };
@@ -215,9 +189,9 @@ var setSubgraph_ = function (ptr) {
 						needsConnecting.push(j);
 					} else {
 						for (var k = 0; k < children[j].terminalPtrs.length; k++) {
-							disconnectXFromY(false)(children[j].terminalPtrs[k])(ptr)(
-								children[j]
-							)(state)();
+							disconnectXFromY_(children[j].terminalPtrs[k])(ptr)(children[j])(
+								state
+							)();
 						}
 						// unsubscribe
 						unsu[j]();
@@ -251,7 +225,7 @@ var setSubgraph_ = function (ptr) {
 					for (var i = 0; i < needsConnecting.length; i++) {
 						var j = needsConnecting[i];
 						for (var k = 0; k < children[j].terminalPtrs.length; k++) {
-							connectXToY(false)(children[j].terminalPtrs[k])(ptr)(children[j])(
+							connectXToY_(children[j].terminalPtrs[k])(ptr)(children[j])(
 								state
 							)();
 						}
@@ -314,6 +288,13 @@ var makePursx_ = function ($massiveCreate) {
 };
 exports.makePursx_ = makePursx_;
 exports.setSubgraph_ = setSubgraph_;
+exports.sendSubgraphToTop_ = function (a) {
+	return function (state) {
+		return function () {
+			// fill in
+		};
+	};
+};
 exports.massiveCreate_ = function ($unSubgraph) {
 	return function ($makeSubgraph) {
 		return function ($makeRoot) {

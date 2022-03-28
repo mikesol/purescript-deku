@@ -10,7 +10,7 @@ import Data.Function (on)
 import Data.Maybe (Maybe(..))
 import Data.Newtype (class Newtype)
 import Data.Variant (Variant, inj, match)
-import Deku.Graph.Attribute (AttributeValue)
+import Deku.Attribute (AttributeValue)
 import Foreign (Foreign)
 import Simple.JSON as JSON
 import Type.Proxy (Proxy(..))
@@ -62,27 +62,23 @@ instance Ord RootDOMElement where
 instance showRootDOMElement :: Show RootDOMElement where
   show _ = "<root>"
 
-type DisconnectXFromY =
-  { fromId :: String
-  , toId :: String
-  }
-type MassiveCreate = { toCreate :: ToCreate }
-type MassiveChange = { toChange :: ToChange }
-type DestroyUnit = { id :: String, unit :: String }
 type MakeElement =
   { id :: String
   , tag :: String
+  , parent :: String
   }
-type MakePursx = { id :: String, html :: String, verb :: String, r :: PursxRec }
-type MakeText = { id :: String, text :: String }
+type SendSubgraphToTop =
+  { id :: String
+  }
+type MakeText =
+  { id :: String
+  , parent :: String
+  }
 type MakeRoot = { id :: String, root :: RootDOMElement }
 type MakeSubgraph =
   { id :: String
+  , parent :: String
   , instructions :: Array (Array Instruction)
-  }
-type ConnectXToY =
-  { fromId :: String
-  , toId :: String
   }
 type SetText = { id :: String, text :: String }
 type SetAttributes =
@@ -100,55 +96,40 @@ type SetSubgraph = { id :: String }
 -- `Instruction` can also be used if web-dom is being used to control other dom units.
 
 type Instruction' =
-  ( disconnectXFromY :: DisconnectXFromY
-  , destroyUnit :: DestroyUnit
-  , massiveCreate :: MassiveCreate
-  , makePursx :: MakePursx
-  , makeElement :: MakeElement
+  ( makeElement :: MakeElement
   , makeText :: MakeText
   , makeRoot :: MakeRoot
   , makeSubgraph :: MakeSubgraph
-  , connectXToY :: ConnectXToY
-  , massiveChange :: MassiveChange
   , setAttributes :: SetAttributes
   , setText :: SetText
   , setSubgraph :: SetSubgraph
+  , sendSubgraphToTop :: SendSubgraphToTop
   )
 
 newtype Instruction = Instruction (Variant Instruction')
 
 instructionWeight :: Instruction -> Int
 instructionWeight (Instruction v) = v # match
-  { disconnectXFromY: const 0
-  , destroyUnit: const 1
-  , makeRoot: const 2
-  , makePursx: const 2
+  { makeRoot: const 2
   , makeElement: const 2
-  , massiveCreate: const 2
   , makeText: const 2
   , makeSubgraph: const 3
-  , connectXToY: const 5
   , setAttributes: const 6
-  , massiveChange: const 6
   , setText: const 6
   , setSubgraph: const 7
+  , sendSubgraphToTop: const 7
   }
 
 instructionId :: Instruction -> Maybe String
 instructionId (Instruction v) = v # match
-  { disconnectXFromY: _.fromId >>> Just
-  , destroyUnit: _.id >>> Just
-  , makeElement: _.id >>> Just
-  , makePursx: _.id >>> Just
+  { makeElement: _.id >>> Just
   , makeText: _.id >>> Just
   , makeRoot: _.id >>> Just
   , makeSubgraph: _.id >>> Just
-  , massiveCreate: const Nothing
-  , connectXToY: _.fromId >>> Just
   , setAttributes: _.id >>> Just
   , setText: _.id >>> Just
   , setSubgraph: _.id >>> Just
-  , massiveChange: const Nothing
+  , sendSubgraphToTop: _.id >>> Just
   }
 
 derive instance newtypeInstruction :: Newtype Instruction _
@@ -170,12 +151,6 @@ instance ordInstruction :: Ord Instruction where
 instance showInstruction :: Show Instruction where
   show (Instruction i) = show i
 
-iDisconnectXFromY :: DisconnectXFromY -> Instruction
-iDisconnectXFromY = Instruction <<< inj (Proxy :: Proxy "disconnectXFromY")
-
-iDestroyUnit :: DestroyUnit -> Instruction
-iDestroyUnit = Instruction <<< inj (Proxy :: Proxy "destroyUnit")
-
 iMakeRoot :: MakeRoot -> Instruction
 iMakeRoot = Instruction <<< inj (Proxy :: Proxy "makeRoot")
 
@@ -188,23 +163,14 @@ iMakeElement = Instruction <<< inj (Proxy :: Proxy "makeElement")
 iMakeSubgraph :: MakeSubgraph -> Instruction
 iMakeSubgraph = Instruction <<< inj (Proxy :: Proxy "makeSubgraph")
 
-iMakePursx :: MakePursx -> Instruction
-iMakePursx = Instruction <<< inj (Proxy :: Proxy "makePursx")
-
-iMassiveCreate :: MassiveCreate -> Instruction
-iMassiveCreate = Instruction <<< inj (Proxy :: Proxy "massiveCreate")
-
-iConnectXToY :: ConnectXToY -> Instruction
-iConnectXToY = Instruction <<< inj (Proxy :: Proxy "connectXToY")
-
 iSetAttributes :: SetAttributes -> Instruction
 iSetAttributes = Instruction <<< inj (Proxy :: Proxy "setAttributes")
 
 iSetSubgraph :: SetSubgraph -> Instruction
 iSetSubgraph = Instruction <<< inj (Proxy :: Proxy "setSubgraph")
 
+iSendSubgraphToTop :: SendSubgraphToTop -> Instruction
+iSendSubgraphToTop = Instruction <<< inj (Proxy :: Proxy "sendSubgraphToTop")
+
 iSetText :: SetText -> Instruction
 iSetText = Instruction <<< inj (Proxy :: Proxy "setText")
-
-iMassiveChange :: MassiveChange -> Instruction
-iMassiveChange = Instruction <<< inj (Proxy :: Proxy "massiveChange")

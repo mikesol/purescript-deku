@@ -5,10 +5,10 @@ GENERATE_DOM_DEFS = 1
 GENERATE_ATTR_DECL = 7
 GENERATE_ATTR_DEFS = 8
 
-CG_MAP = {GENERATE_DOM_DECL: 'src/Deku/Graph/DOM.purs',
-          GENERATE_DOM_DEFS: 'src/Deku/Graph/DOM.purs',
-          GENERATE_ATTR_DECL: 'src/Deku/Graph/DOM.purs',
-          GENERATE_ATTR_DEFS: 'src/Deku/Graph/DOM.purs',
+CG_MAP = {GENERATE_DOM_DECL: 'src/Deku/DOM.purs',
+          GENERATE_DOM_DEFS: 'src/Deku/DOM.purs',
+          GENERATE_ATTR_DECL: 'src/Deku/DOM.purs',
+          GENERATE_ATTR_DEFS: 'src/Deku/DOM.purs',
           }
 
 url = ('https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes')
@@ -76,8 +76,8 @@ def cg(CODEGEN_TARGET):
             term = bigtag(x)
             typ = 'T'+term
             print_(f'''  , {term}
-  , {typ}
-  , {x}''')
+  , {x}
+  , {x}_''')
 
     elif CODEGEN_TARGET == GENERATE_DOM_DEFS:
         for x in TAGS:
@@ -85,14 +85,18 @@ def cg(CODEGEN_TARGET):
             typ = 'T'+term
             print_(f'''data {term}
 
-a
+{x}
   :: forall dom engine
-   . DOMInterpret dom engine
-  => Atta'bute {term}
+   . Atta'bute {term}
   -> Array (Element dom engine)
   -> Element dom engine
-a = elementify "{astag(x)}"
+{x} = elementify "{astag(x)}"
 
+{x}_
+  :: forall dom engine
+   . Array (Element dom engine)
+  -> Element dom engine
+{x}_ = {x} noAttributes
 instance tagToDeku{term} :: TagToDeku "{astag(x)}" {term}
 ''')
     elif CODEGEN_TARGET == GENERATE_ATTR_DECL:

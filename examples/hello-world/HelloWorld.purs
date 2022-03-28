@@ -2,49 +2,42 @@ module Deku.Example.HelloWorld where
 
 import Prelude
 
-import Data.Either (Either(..))
 import Data.Foldable (for_)
-import Deku.Change (change)
-import Deku.Control.Functions ((@>))
-import Deku.Control.Types (Frame0, Scene)
-import Data.Tuple.Nested ((/\))
-import Deku.Graph.Attribute (cb)
-import Deku.Graph.DOM (OnClick(..), Href(..), a, a'attr, root, text, (:=))
-import Deku.Interpret (makeFFIDOMSnapshot)
-import Deku.Run (RunDOM, RunEngine, TriggeredScene, defaultOptions, run)
+import Deku.Attribute (cb, (:=))
+import Deku.Control (deku, (@@), (~~))
+import Deku.Control as C
+import Deku.Core (Element)
+import Deku.DOM as D
+import Deku.Interpret (FFIDOMSnapshot, effectfulDOMInterpret, makeFFIDOMSnapshot)
 import Effect (Effect)
-import FRP.Event (subscribe)
-import Web.DOM as WEB.DOM
+import FRP.Event (Event, subscribe)
+import FRP.Event (create)
 import Web.HTML (window)
 import Web.HTML.HTMLDocument (body)
 import Web.HTML.HTMLElement (toElement)
 import Web.HTML.Window (document)
 
 scene
-  :: WEB.DOM.Element
-  -> Scene (TriggeredScene Unit Unit) RunDOM RunEngine Frame0 Boolean Unit
-scene elt =
-  ( \_ push ->
-      ( root elt
-          { hello: text "click "
-          , helloA: a [ Href := "#", OnClick := cb (const $ push false) ]
-              { world: text "me" }
-          } /\ push
+  :: (Boolean -> Effect Unit)
+  -> Event Boolean
+  -> Array (Element FFIDOMSnapshot (Effect Unit))
+scene push event =
+  [ C.text (event ~~ if _ then "click" else "kcilc")
+  , D.a
+      ( event @@ \e ->
+          [ D.Href := "#"
+          , D.OnClick := cb (const $ push (not e))
+          ]
       )
-  ) @> \e push ->
-    case e of
-      Left _ -> pure push
-      Right tf ->
-        change
-          { "root.hello": if tf then "click " else "kcilc "
-          , "root.helloA": a'attr [ OnClick := cb (const $ push (not tf)) ]
-          } $> push
+      [ C.text_ "me" ]
+  ]
 
 main :: Effect Unit
 main = do
   b' <- window >>= document >>= body
   for_ (toElement <$> b') \b -> do
     ffi <- makeFFIDOMSnapshot
-    subscribe
-      (run (pure unit) (pure unit) defaultOptions ffi (scene b))
-      (\_ -> pure unit)
+    { push, event } <- create
+    let evt = deku b (scene push event) effectfulDOMInterpret
+    void $ subscribe evt \i -> i ffi
+    push true

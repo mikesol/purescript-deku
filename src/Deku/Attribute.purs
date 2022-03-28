@@ -1,6 +1,9 @@
-module Deku.Graph.Attribute
+module Deku.Attribute
   ( AttributeValue
   , Attribute
+  , class Attr
+  , attr
+  , (:=)
   , unsafeUnAttribute
   , unsafeAttribute
   , unsafeUnAttributeArray
@@ -61,3 +64,8 @@ instance showAttribute :: Show (Attribute x) where
       <> ")"
 derive instance eqAttribute :: Eq (Attribute x)
 derive instance ordAttribute :: Ord (Attribute x)
+
+class Attr e a b where
+  attr :: a -> b -> Attribute e
+
+infixr 5 attr as :=

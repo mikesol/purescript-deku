@@ -4,6 +4,7 @@
   , "behaviors"
   , "control"
   , "datetime"
+  , "debug"
   , "effect"
   , "either"
   , "event"

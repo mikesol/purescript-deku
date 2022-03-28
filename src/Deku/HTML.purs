@@ -4,7 +4,7 @@ import Prelude
 
 import Data.Generic.Rep (class Generic)
 import Data.Show.Generic (genericShow)
-import Deku.Graph.Attribute (AttributeValue)
+import Deku.Attribute (AttributeValue)
 
 data HTML
   = E String (Array { key :: String, value :: AttributeValue }) (Array HTML)
