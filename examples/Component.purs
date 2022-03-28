@@ -9,7 +9,7 @@ import Deku.Graph.DOM ((:=))
 import Deku.Graph.DOM as D
 import Deku.Graph.DOM.Shorthand as S
 import Deku.Toplevel ((🚀))
-import Deku.Util (detup, vex)
+import Deku.Util ((@@), vex)
 import Effect (Effect)
 
 main :: Effect Unit
@@ -21,11 +21,9 @@ main =
           $ map (D.li [] <<< S.text)
             ("A" +> "B" +> "C" +> empty)
       , rando: D.div []
-          $ detup
-          $
-            D.a [ D.Href := "https://example.com" ]
+          $ D.a [ D.Href := "https://example.com" ]
               (S.text "foo ")
-              /\ D.i [] (S.text " bar ")
+              @@ D.i [] (S.text " bar ")
               /\ D.span [ D.Style := "font-weight: 800;" ]
                 (S.text " baz")
               /\ unit

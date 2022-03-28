@@ -18,7 +18,7 @@ import Deku.Graph.Attribute (Cb, cb)
 import Deku.Graph.DOM (AsSubgraph(..), ResolvedSubgraphSig, SubgraphSig, myNameIs, subgraph, (:=))
 import Deku.Graph.DOM as D
 import Deku.Graph.DOM.Shorthand as S
-import Deku.Util (detup)
+import Deku.Util ((@@))
 import Effect (Effect)
 import Effect.Aff (launchAff_)
 import Effect.Class (liftEffect)
@@ -36,19 +36,15 @@ effects dt dpage =
                   )
               }
           , pars: D.div []
-              ( detup
-                  $
-                    D.p []
-                      ( detup $
-                          D.text
-                            """This example is similar to the previous one in its design: the looping function is called in response to an event. The difference is that the response isn't immediate. Instead, we wait for the result of a network call."""
-                            /\ unit
-                      )
-                      /\
-                        ( D.pre []
-                            ( S.code []
-                                ( S.text
-                                    """module Main where
+              ( D.p []
+                  ( S.text
+                      """This example is similar to the previous one in its design: the looping function is called in response to an event. The difference is that the response isn't immediate. Instead, we wait for the result of a network call."""
+                  )
+                  @@
+                    ( D.pre []
+                        ( S.code []
+                            ( S.text
+                                """module Main where
 
 import Prelude
 
@@ -128,58 +124,48 @@ main = io
           $> (push /\ true)
   }
 """
-                                )
                             )
                         )
+                    )
 
-                      /\ D.p []
-                        ( detup $
-                            ( D.text
-                                "Here's what it produces:"
-                            )
-                              /\ unit
-                        )
-                      /\ D.blockquote []
-                        { example: subgraph (singleton 0 (Just unit))
-                            (AsSubgraph (sg dt))
-                        }
-                      /\ D.h2 [] (S.text "Arbitrary effects")
-                      /\ D.p []
-                        ( detup $
-                            D.text
-                              """Because all event listeners execute in the effect monad, you can do more or less whatever you want. Make a network call, run a monad transformer stack just for fun, play music using """
-                              /\ D.code [] (S.text "purescript-wags")
-                              /\ D.text
-                                """. The sky's the limit!"""
-                              /\ unit
-                        )
-                      /\ D.p []
-                        ( detup $
-                            D.text
-                              """Another useful pattern when working with effects is to throttle input. For example, if we are making a network call, we may want to show a loading indicator and prevent additional network calls. This can be achieved by setting the callback to a no-op while the network call is executing, as shown in the example above."""
-                              /\ unit
-                        )
-                      /\ D.h2 [] (S.text "Next steps")
-                      /\ D.p []
-                        ( detup $
-                            D.span []
-                              ( S.text
-                                  """It is also possible to handle events (and by extension effectful actions in events, like network calls) in Pursx. Let's see how in  """
-                              )
-                              /\ D.a
-                                [ cot dt $ cb
-                                    ( const $ dpage PURSX2 *>
-                                        scrollToTop
-                                    )
-                                , D.Style := "cursor:pointer;"
-                                ]
-                                (S.text "the second Pursx section")
-                              /\ D.span []
-                                ( S.text "."
+                  /\ D.p [] (S.text "Here's what it produces:")
+                  /\ D.blockquote []
+                    { example: subgraph (singleton 0 (Just unit))
+                        (AsSubgraph (sg dt))
+                    }
+                  /\ D.h2 [] (S.text "Arbitrary effects")
+                  /\ D.p []
+                    ( D.text
+                        """Because all event listeners execute in the effect monad, you can do more or less whatever you want. Make a network call, run a monad transformer stack just for fun, play music using """
+                        @@ D.code [] (S.text "purescript-wags")
+                        /\ D.text
+                          """. The sky's the limit!"""
+                        /\ unit
+                    )
+                  /\ D.p []
+                    ( S.text
+                        """Another useful pattern when working with effects is to throttle input. For example, if we are making a network call, we may want to show a loading indicator and prevent additional network calls. This can be achieved by setting the callback to a no-op while the network call is executing, as shown in the example above."""
+                    )
+                  /\ D.h2 [] (S.text "Next steps")
+                  /\ D.p []
+                    ( D.span []
+                          ( S.text
+                              """It is also possible to handle events (and by extension effectful actions in events, like network calls) in Pursx. Let's see how in  """
+                          )
+                          @@ D.a
+                            [ cot dt $ cb
+                                ( const $ dpage PURSX2 *>
+                                    scrollToTop
                                 )
-                              /\ unit
-                        )
-                      /\ unit
+                            , D.Style := "cursor:pointer;"
+                            ]
+                            (S.text "the second Pursx section")
+                          /\ D.span []
+                            ( S.text "."
+                            )
+                          /\ unit
+                    )
+                  /\ unit
               )
           }
       }
@@ -213,7 +199,9 @@ sg dt _ =
         ( { div1: D.div []
               { button: myNameIs (Proxy :: Proxy "bttn") $ D.button
                   [ cot dt $ clickCb push ]
-                  (D.myNameIs' (Proxy :: _ "textToShow") (D.text "Click to get some random user data."))
+                  ( D.myNameIs' (Proxy :: _ "textToShow")
+                      (D.text "Click to get some random user data.")
+                  )
               }
           , div2: D.div [ D.Style := "display: none;" ]
               (S.pre [] (S.code [] (S.text "")))

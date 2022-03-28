@@ -14,7 +14,7 @@ import Deku.Graph.DOM.Shorthand as S
 import Deku.Interpret (class DOMInterpret, makeFFIDOMSnapshot)
 import Deku.Run (defaultOptions, run)
 import Deku.SSR (ssr, toXML)
-import Deku.Util (detup)
+import Deku.Util ((@@))
 import Effect (Effect)
 import FRP.Event (subscribe)
 import Web.DOM (Element)
@@ -32,8 +32,8 @@ scene
 scene i elt =
   ( \_ _ ->
       u $ root elt
-        ( detup $ D.p [] (S.text "Here is some XML!")
-            /\ D.pre []
+        ( D.p [] (S.text "Here is some XML!")
+            @@ D.pre []
               ( S.code []
                   ( S.text $
                       if i > 3 then "<stack-overflow />"

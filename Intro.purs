@@ -10,7 +10,7 @@ import Deku.Graph.Attribute (cb)
 import Deku.Graph.DOM (ResolvedSubgraphSig, (:=))
 import Deku.Graph.DOM as D
 import Deku.Graph.DOM.Shorthand as S
-import Deku.Util (detup)
+import Deku.Util ((@@))
 import Effect (Effect)
 
 intro :: (Page -> Effect Unit) -> ResolvedSubgraphSig Unit Unit
@@ -26,9 +26,8 @@ intro dpage =
                     )
                 }
             , pars: D.div []
-                ( detup
-                    $ D.p [] (S.text "Hi! You've found Deku.")
-                      /\ D.p []
+                ( D.p [] (S.text "Hi! You've found Deku.")
+                      @@ D.p []
                         { a: D.a
                             [ D.Href :=
                                 "https://github.com/mikesol/purescript-deku"
@@ -40,12 +39,11 @@ intro dpage =
                             )
                         }
                       /\ D.p []
-                        ( detup $
-                            D.span []
+                        ( D.span []
                               ( S.text
                                   """The main goal of Deku is """
                               )
-                              /\ D.span
+                              @@ D.span
                                 [ D.Style := "font-weight: 800;" ]
                                 { t: D.text "speed" }
                               /\ D.span []
@@ -55,12 +53,11 @@ intro dpage =
                               /\ unit
                         )
                       /\ D.p []
-                        ( detup $
-                            D.span []
+                        ( D.span []
                               ( S.text
                                   """This is the Deku documentation. Like most documentation, it's radically incomplete, hopelessly biased, and full of unfounded assumptions. That said, I hope it gets you started off on the right foot. If you have any questions, feel free ping me on the """
                               )
-                              /\ D.a
+                              @@ D.a
                                 [ D.Href := "https://purescript.org/chat" ]
                                 { t: D.text "PureScript Discord" }
                               /\ D.span []
@@ -68,12 +65,11 @@ intro dpage =
                               /\ unit
                         )
                       /\ D.p []
-                        ( detup $
-                            D.span []
+                        (  D.span []
                               ( S.text
                                   """This documentation is written in Deku and can be found """
                               )
-                              /\ D.a
+                              @@ D.a
                                 [ D.Href :=
                                     "https://github.com/mikesol/purescript-deku/tree/main/examples/docs"
                                 ]
@@ -90,12 +86,11 @@ intro dpage =
                               /\ unit
                         )
                       /\ D.p []
-                        ( detup $
-                            D.span []
+                        (  D.span []
                               ( S.text
                                   """And now, without further ado, check out the """
                               )
-                              /\ D.a
+                              @@ D.a
                                 [ D.OnClick := cb
                                     (const $ dpage HelloWorld *> scrollToTop)
                                 , D.Style := "cursor:pointer;"
