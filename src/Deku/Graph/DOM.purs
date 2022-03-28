@@ -9,6 +9,7 @@ module Deku.Graph.DOM
   , unAsSubGraph
   , myNameIs
   , myNameIs'
+  , (@~)
   , MyNameIs
   , (:=)
   , class Attr
@@ -908,6 +909,8 @@ myNameIs'
 myNameIs' _ = { _____________________________________________________: _ }
   <<< MyNameIs
   <<< { myNameIs: reflectSymbol (Proxy :: Proxy name), unMyNameIs: _ }
+
+infixr 6 myNameIs' as @~
 
 type Element' element children =
   (element :: element, children :: { | children })
