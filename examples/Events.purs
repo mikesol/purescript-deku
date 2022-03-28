@@ -6,12 +6,11 @@ import Data.Foldable (for_)
 import Data.Tuple.Nested ((/\))
 import Deku.Change (change)
 import Deku.Graph.Attribute (cb)
-import Deku.Graph.DOM (myNameIs', (:=))
+import Deku.Graph.DOM ((@~), (:=))
 import Deku.Graph.DOM as D
 import Deku.Toplevel ((🚀))
 import Deku.Util ((/|\), p, (@@))
 import Effect (Effect)
-import Type.Proxy (Proxy(..))
 import Web.DOM.Element (fromEventTarget)
 import Web.Event.Event (target)
 import Web.HTML.HTMLInputElement (fromElement, valueAsNumber)
@@ -26,10 +25,10 @@ main =
               [ D.OnClick :=
                   cb (const $ push ButtonClicked)
               ]
-              (myNameIs' (p :: _ "clickText") (D.text "Click"))
+              ((p :: _ "clickText") @~ D.text "Click")
               @@ D.div
                 []
-                (myNameIs' (p :: _ "val1Text") (D.text "Val: 0"))
+                ((p :: _ "val1Text") @~ D.text "Val: 0")
               /\ unit
           )
           @@ D.div []
@@ -46,7 +45,7 @@ main =
                 ]
                 {}
                 @@ D.div []
-                  (myNameIs' (Proxy :: _ "val2Text") (D.text "Val: 50"))
+                  ((p :: _ "val2Text") @~ D.text "Val: 50")
                 /\ unit
             )
           /\ unit
