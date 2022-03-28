@@ -55,7 +55,6 @@ import Deku.Graph.DOM as D
 import Deku.Toplevel ((🚀))
 import Deku.Util ((/|\), p, (@@))
 import Effect (Effect)
-import Type.Proxy (Proxy(..))
 import Web.DOM.Element (fromEventTarget)
 import Web.Event.Event (target)
 import Web.HTML.HTMLInputElement (fromElement, valueAsNumber)
@@ -90,7 +89,7 @@ main =
                 ]
                 {}
                 @@ D.div []
-                  (myNameIs' (Proxy :: _ "val2Text") (D.text "Val: 50"))
+                  (myNameIs' (p :: _ "val2Text") (D.text "Val: 50"))
                 /\ unit
             )
           /\ unit
