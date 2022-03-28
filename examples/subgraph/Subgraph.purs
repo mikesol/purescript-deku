@@ -17,6 +17,7 @@ import Deku.Graph.DOM (AsSubgraph(..), xsubgraph, Href(..), OnClick(..), a, a'at
 import Deku.Graph.DOM as D
 import Deku.Interpret (makeFFIDOMSnapshot)
 import Deku.Run (RunDOM, RunEngine, TriggeredScene, defaultOptions, run)
+import Deku.Toplevel ((🚀))
 import Effect (Effect)
 import FRP.Event (subscribe)
 import Web.DOM as WEB.DOM
@@ -27,99 +28,92 @@ import Web.HTML.Window (document)
 
 data HelloWorld = Hello | World
 
-scene
-  :: WEB.DOM.Element
-  -> Scene (TriggeredScene Unit Unit) RunDOM RunEngine Frame0 HelloWorld Unit
-scene elt =
-  ( \_ push0 ->
+main :: Effect Unit
+main =
+  ( \push0 ->
       let
-        falsy n = Map.fromFoldable (map (\i -> i /\ Just false) (0 .. n))
+        falsy n =
+          Map.fromFoldable (map (\i -> i /\ Just false) (0 .. n))
       in
-        ( root elt
-            { hello: D.div []
-                { hello: a
-                    [ Href := "#", OnClick := cb (const $ push0 Hello) ]
-                    { ht: text "click" }
-                , helloA: subgraph (falsy 40)
-                    ( AsSubgraph \i ->
+        { hello: D.div []
+            { hello: a
+                [ Href := "#", OnClick := cb (const $ push0 Hello) ]
+                { ht: text "click" }
+            , helloA: subgraph (falsy 40)
+                ( AsSubgraph \i ->
 
-                        ( \_ push ->
-                            { myA: a
-                                [ Href := "#"
-                                , OnClick := cb
-                                    ( const $ do
-                                        push false
-                                        when (i == 4) (push0 Hello)
-                                    )
-                                ]
-                                { myTxt: text " me " }
-                            } /\ push
+                    ( \_ push ->
+                        { myA: a
+                            [ Href := "#"
+                            , OnClick := cb
+                                ( const $ do
+                                    push false
+                                    when (i == 4) (push0 Hello)
+                                )
+                            ]
+                            { myTxt: text " me " }
+                        } /\ push
 
-                        ) %>
-                          ( \e push ->
-                              case e of
-                                Left tf ->
-                                  when tf
-                                    (change { "myA.myTxt": "banana" }) $> push
-                                Right tf ->
-                                  change
-                                    { "myA": a'attr
-                                        [ OnClick := cb (const $ push (not tf))
-                                        ]
-                                    , "myA.myTxt": if tf then " me " else " em "
-                                    } $> push
-                          )
-                    )
-                }
-            , world: D.div []
-                { wA: a [ Href := "#", OnClick := cb (const $ push0 World) ]
-                    { ht: text "click" }
-                , wB: subgraph (falsy 10)
-                    ( AsSubgraph \i ->
-                        ( \_ push ->
-                            ( { myA: a
-                                  [ Href := "#"
-                                  , OnClick := cb
-                                      ( const $ do
-                                          push false
-                                          when (i == 11) (push0 Hello)
-                                      )
-                                  ]
-                                  { myTxt: text $ " me" <> show i <> " " }
-                              } /\ (push /\ Additive i) /\ (Additive i)
-                            )
-                        ) %!>
-                          \e (push /\ (Additive i')) ->
-                            case e of
-                              Left _ ->
-                                map ((/\) push) $ modifyRes
-                                  (const $ Additive ((i' + 1) `mod` 40))
-                              Right tf ->
-                                map ((/\) push)
-                                  ( change
-                                      { "myA": a'attr
-                                          [ OnClick := cb
-                                              (const $ push (not tf))
-                                          ]
-                                      , "myA.myTxt":
-                                          if tf then " me"
-                                          else " em" <> show i <> " "
-                                      } *> modifyRes (const $ Additive i')
-                                  )
-
-                    )
-                }
-
+                    ) %>
+                      ( \e push ->
+                          case e of
+                            Left tf ->
+                              when tf
+                                (change { "myA.myTxt": "banana" }) $> push
+                            Right tf ->
+                              change
+                                { "myA": a'attr
+                                    [ OnClick := cb (const $ push (not tf))
+                                    ]
+                                , "myA.myTxt": if tf then " me " else " em "
+                                } $> push
+                      )
+                )
             }
-            /\ 0
-        )
-  ) @> \e lmt ->
+        , world: D.div []
+            { wA: a [ Href := "#", OnClick := cb (const $ push0 World) ]
+                { ht: text "click" }
+            , wB: subgraph (falsy 10)
+                ( AsSubgraph \i ->
+                    ( \_ push ->
+                        ( { myA: a
+                              [ Href := "#"
+                              , OnClick := cb
+                                  ( const $ do
+                                      push false
+                                      when (i == 11) (push0 Hello)
+                                  )
+                              ]
+                              { myTxt: text $ " me" <> show i <> " " }
+                          } /\ (push /\ Additive i) /\ (Additive i)
+                        )
+                    ) %!>
+                      \e (push /\ (Additive i')) ->
+                        case e of
+                          Left _ ->
+                            map ((/\) push) $ modifyRes
+                              (const $ Additive ((i' + 1) `mod` 40))
+                          Right tf ->
+                            map ((/\) push)
+                              ( change
+                                  { "myA": a'attr
+                                      [ OnClick := cb
+                                          (const $ push (not tf))
+                                      ]
+                                  , "myA.myTxt":
+                                      if tf then " me"
+                                      else " em" <> show i <> " "
+                                  } *> modifyRes (const $ Additive i')
+                              )
+                )
+            }
+        } /\ 0
+  ) 🚀 \e lmt ->
     lmt + 1 <$ case e of
-      Left _ -> pure unit
-      Right Hello -> change
+      Hello -> change
         { "root.hello.helloA": xsubgraph (Map.singleton 9 (Just true))
         }
-      Right World -> change
+      World -> change
         { "root.world.wB": xsubgraph
             ( Map.fromFoldable
                 ( map
@@ -130,12 +124,3 @@ scene elt =
                 )
             )
         }
-
-main :: Effect Unit
-main = do
-  b' <- window >>= document >>= body
-  for_ (toElement <$> b') \b -> do
-    ffi <- makeFFIDOMSnapshot
-    subscribe
-      (run (pure unit) (pure unit) defaultOptions ffi (scene b))
-      (\_ -> pure unit)
