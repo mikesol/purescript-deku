@@ -64,9 +64,7 @@ instance showRootDOMElement :: Show RootDOMElement where
 
 type DisconnectXFromY =
   { fromId :: String
-  , fromUnit :: String
   , toId :: String
-  , toUnit :: String
   }
 type MassiveCreate = { toCreate :: ToCreate }
 type MassiveChange = { toChange :: ToChange }
@@ -74,7 +72,6 @@ type DestroyUnit = { id :: String, unit :: String }
 type MakeElement =
   { id :: String
   , tag :: String
-  , attributes :: Array { key :: String, value :: AttributeValue }
   }
 type MakePursx = { id :: String, html :: String, verb :: String, r :: PursxRec }
 type MakeText = { id :: String, text :: String }
@@ -85,15 +82,16 @@ type MakeSubgraph =
   }
 type ConnectXToY =
   { fromId :: String
-  , fromUnit :: String
   , toId :: String
-  , toUnit :: String
   }
 type SetText = { id :: String, text :: String }
-type SetAttribute =
+type SetAttributes =
   { id :: String
-  , key :: String
-  , value :: AttributeValue
+  , attributes ::
+      Array
+        { key :: String
+        , value :: AttributeValue
+        }
   }
 type SetSubgraph = { id :: String }
 
@@ -112,7 +110,7 @@ type Instruction' =
   , makeSubgraph :: MakeSubgraph
   , connectXToY :: ConnectXToY
   , massiveChange :: MassiveChange
-  , setAttribute :: SetAttribute
+  , setAttributes :: SetAttributes
   , setText :: SetText
   , setSubgraph :: SetSubgraph
   )
@@ -130,7 +128,7 @@ instructionWeight (Instruction v) = v # match
   , makeText: const 2
   , makeSubgraph: const 3
   , connectXToY: const 5
-  , setAttribute: const 6
+  , setAttributes: const 6
   , massiveChange: const 6
   , setText: const 6
   , setSubgraph: const 7
@@ -147,7 +145,7 @@ instructionId (Instruction v) = v # match
   , makeSubgraph: _.id >>> Just
   , massiveCreate: const Nothing
   , connectXToY: _.fromId >>> Just
-  , setAttribute: _.id >>> Just
+  , setAttributes: _.id >>> Just
   , setText: _.id >>> Just
   , setSubgraph: _.id >>> Just
   , massiveChange: const Nothing
@@ -199,8 +197,8 @@ iMassiveCreate = Instruction <<< inj (Proxy :: Proxy "massiveCreate")
 iConnectXToY :: ConnectXToY -> Instruction
 iConnectXToY = Instruction <<< inj (Proxy :: Proxy "connectXToY")
 
-iSetAttribute :: SetAttribute -> Instruction
-iSetAttribute = Instruction <<< inj (Proxy :: Proxy "setAttribute")
+iSetAttributes :: SetAttributes -> Instruction
+iSetAttributes = Instruction <<< inj (Proxy :: Proxy "setAttributes")
 
 iSetSubgraph :: SetSubgraph -> Instruction
 iSetSubgraph = Instruction <<< inj (Proxy :: Proxy "setSubgraph")

@@ -1,68 +1,100 @@
 module Test.Main where
 
-import Prelude hiding (compare)
+import Prelude
 
-import Data.Either (Either(..))
+import Control.Alt ((<|>))
+import Control.Plus (empty)
+import Data.Filterable (filter)
 import Data.Maybe (Maybe(..))
-import Deku.Control.Functions ((@>), u, freeze)
-import Deku.Control.Types (oneFrame, uRes)
-import Deku.Graph.Attribute (Attribute, prop')
-import Deku.Graph.DOM (root)
+import Data.Tuple (Tuple(..))
+import Deku.Graph.Attribute (prop')
+import Deku.Graph.DOM ((:=))
 import Deku.Graph.DOM as D
-import Deku.HTML (HTML(..))
-import Deku.Pursx (class PXStart)
-import Deku.SSR (ssr)
+import Deku.Graph.DOM2 (text, (@@), (~~))
+import Deku.Graph.DOM2 as D2
+import Deku.Interpret (connectXToY, makeElement, makeText, setAttributes)
+import Deku.Rando (random)
 import Effect (Effect)
 import Effect.Aff (launchAff_)
+import Effect.Class (liftEffect)
+import Effect.Ref (Ref, modify, new, read, write)
+import FRP.Behavior (Behavior, behavior)
+import FRP.Event (create, fix, fold, makeEvent, subscribe)
 import Test.Spec (describe, it)
 import Test.Spec.Assertions (shouldEqual)
 import Test.Spec.Reporter (consoleReporter)
 import Test.Spec.Runner (runSpec)
-import Type.Proxy (Proxy(..))
-import Unsafe.Coerce (unsafeCoerce)
 
-testEmbed  :: Proxy (foo :: D.Element D.Span_ ())
-testEmbed =
-  Proxy    :: forall r. PXStart "~" " " """<div><div>~foo~</div></div>""" r => Proxy r
-testCl  :: Proxy ()
-testCl =
-  Proxy    :: forall r. PXStart "~" " " """<div><input /></div>""" r => Proxy r
-testDivDiv  :: Proxy (myH :: Array (Attribute D.H1_), myA :: Array (Attribute D.A_), myP :: Array (Attribute D.P_), newElt :: D.Element D.H2_ ())
-testDivDiv =
-  Proxy    :: forall r. PXStart "~" " " """<div class="a b">
-<h1 ~myH~>Example Domain</h1>
-~newElt~
-<!-- a comment -->
-<p ~myP~>This domain is for use in illustrative examples in documents. You may use this
-    domain in literature without prior coordination or asking for permission.</p>
-<p><a ~myA~ href="https://www.iana.org/domains/example">More information...</a></p>
-</div>""" r => Proxy r
+data Color = Red | Green | Blue
+
+c2s :: Color -> String
+c2s Red = "red"
+c2s Green = "green"
+c2s Blue = "blue"
+
+idTrain :: Ref Int -> Behavior Int
+idTrain r = behavior \f -> makeEvent \k -> do
+  r' <- modify (add 1) r
+  subscribe f \x -> k (x r')
 
 main :: Effect Unit
 main = launchAff_ $ runSpec [ consoleReporter ] do
   describe "Tests" do
-    it "Does basic SSR" do
-      ssr
-        ( map ((#) unit)
-            ( uRes $ oneFrame
-                ( ( \_ _ ->
-                      u $ root (unsafeCoerce unit)
-                        { button: D.button []
-                            { txt: D.text "hi"
-                            }
-                        }
+    it "Does nothing" $ liftEffect do
+      { event, push } <- create
+      let counter = fold (const $ add 1) event (-1)
+      let
+        ediv = filter ((_ == 3) <<< (_ `mod` 5)) counter $> Blue <|> pure Red
+        ea = filter ((_ == 2) <<< (_ `mod` 7)) counter $> "a" <|> pure "b"
+        evt = D2.div
+          (ediv @@ \e -> [ D.Style := "color: " <> c2s e <> ";" ])
+          [ D2.a
+              (ea @@ \e -> [ D.Href := "https://example.com/" <> e ])
+              [ text (empty ~~ identity) "hi" ]
+          , D2.a
+              (empty @@ identity)
+              [ text (empty ~~ identity) "there" ]
 
-                  ) @> freeze
-                )
-                (Left unit)
-                (const $ pure unit)
-            ).instructions
-        )
-        `shouldEqual` Just
-          ( E "div"
-              [ { key: "style"
-                , value: (prop' "display:content;")
-                }
-              ]
-              [ (E "button" [] [ (T "hi") ]) ]
+          ]
+      r <- new []
+      rf <- new 0
+      void $ subscribe (evt (Tuple <$> map show (idTrain rf) <*> pure Nothing))
+        \o -> void $ modify (\x -> x <> [ o ]) r
+      push unit
+      outcome0 <- (map <<< map) ((#) unit) (read r)
+      outcome0 `shouldEqual` map ((#) unit)
+        [ (makeElement { id: "1", tag: "div" })
+        , ( setAttributes
+              { attributes: [ { key: "style", value: (prop' "color: red;") } ]
+              , id: "1"
+              }
           )
+        , (makeElement { id: "2", tag: "a" })
+        , ( setAttributes
+              { attributes:
+                  [ { key: "href", value: (prop' "https://example.com/b") } ]
+              , id: "2"
+              }
+          )
+        , (makeText { id: "3", text: "hi" })
+        , (connectXToY { fromId: "3", toId: "2" })
+        , (connectXToY { fromId: "2", toId: "1" })
+        , (makeElement { id: "4", tag: "a" })
+        , (makeText { id: "5", text: "there" })
+        , (connectXToY { fromId: "5", toId: "4" })
+        , (connectXToY { fromId: "4", toId: "1" })
+        ]
+      write [] r
+      push unit
+      outcome1 <- (map <<< map) ((#) unit) (read r)
+      outcome1 `shouldEqual` []
+      push unit
+      outcome2 <- (map <<< map) ((#) unit) (read r)
+      outcome2 `shouldEqual` map ((#) unit)
+        [ ( setAttributes
+              { attributes:
+                  [ { key: "href", value: (prop' "https://example.com/a") } ]
+              , id: "2"
+              }
+          )
+        ]

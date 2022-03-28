@@ -15,7 +15,7 @@ module Deku.Interpret
   , makeElement
   , makeText
   , makeSubgraph
-  , setAttribute
+  , setAttributes
   , setSubgraph
   , renderDOM
   , setText
@@ -54,7 +54,7 @@ type SetSubgraphInput index env =
   , envs :: Array (Ie index env)
   }
 
-class DOMInterpret dom engine where
+class DOMInterpret dom engine | dom -> engine where
   -- | Connect pointer x to pointer y. For example, connect a sine wave oscillator to a highpass filter.
   connectXToY :: R.ConnectXToY -> dom -> engine
   disconnectXFromY :: R.DisconnectXFromY -> dom -> engine
@@ -70,7 +70,7 @@ class DOMInterpret dom engine where
     -> dom
     -> engine
   massiveChange :: R.MassiveChange -> dom -> engine
-  setAttribute :: R.SetAttribute -> dom -> engine
+  setAttributes :: R.SetAttributes -> dom -> engine
   -- | Set subgraph.
   setSubgraph
     :: forall index env
@@ -113,7 +113,7 @@ instance freeDOMInterpret :: DOMInterpret Unit Instruction where
   makeText = const <<< R.iMakeText
   massiveCreate = const <<< R.iMassiveCreate
   makeSubgraph = handleSubgraph R.iMakeSubgraph
-  setAttribute = const <<< R.iSetAttribute
+  setAttributes = const <<< R.iSetAttributes
   setSubgraph { id } _ = R.iSetSubgraph { id }
   massiveChange = const <<< R.iMassiveChange
   setText = const <<< R.iSetText
@@ -231,14 +231,14 @@ foreign import massiveChange_
        -> FFIDOMSnapshot
        -> Effect Unit
      )
-  -> (R.SetAttribute -> FFIDOMSnapshot -> Effect Unit)
+  -> (R.SetAttributes -> FFIDOMSnapshot -> Effect Unit)
   -> (R.SetText -> FFIDOMSnapshot -> Effect Unit)
   -> R.MassiveChange
   -> FFIDOMSnapshot
   -> Effect Unit
 
-foreign import setAttribute_
-  :: R.SetAttribute -> FFIDOMSnapshot -> Effect Unit
+foreign import setAttributes_
+  :: R.SetAttributes -> FFIDOMSnapshot -> Effect Unit
 
 foreign import setSubgraph_
   :: forall env push index
@@ -300,9 +300,9 @@ instance effectfulDOMInterpret ::
           setSubgraph_ id [ { pos, index, env: toNullable $ Just (Right p) } ]
             dom
         pure { loop, unsubscribe }
-  setAttribute = setAttribute_
+  setAttributes = setAttributes_
   setText = setText_
-  massiveChange noEta = massiveChange_ setSubgraph setAttribute setText
+  massiveChange noEta = massiveChange_ setSubgraph setAttributes setText
     noEta
   -- todo - can we avoid the double map?
   setSubgraph { id, envs } dom = setSubgraph_ id
@@ -368,7 +368,7 @@ instance mixedDOMInterpret ::
   makeRoot a (x /\ y) = makeRoot a x /\ makeRoot a y
   makeElement a (x /\ y) = makeElement a x /\ makeElement a y
   setText a (x /\ y) = setText a x /\ setText a y
-  setAttribute a (x /\ y) = setAttribute a x /\ setAttribute a y
+  setAttributes a (x /\ y) = setAttributes a x /\ setAttributes a y
   massiveChange a (x /\ y) = massiveChange a x /\ massiveChange a y
   setSubgraph { id, envs } (x /\ y) = setSubgraph { id, envs } x /\ setSubgraph
     { id, envs }

@@ -10,6 +10,7 @@ in conf //
         , "console"
         , "halogen"
         , "halogen-hooks"
+        , "filterable"
         , "integers"
         , "node-buffer"
         , "node-fs"

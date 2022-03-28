@@ -110,26 +110,29 @@ exports.makeFFIDOMSnapshot = function () {
 		unqidfr: makeid(10),
 	};
 };
-exports.setAttribute_ = function (a) {
+exports.setAttributes_ = function (z) {
 	return function (state) {
 		return function () {
-			var ptr = a.id;
-			var avv = a.value.value;
-			if (a.value.type === "cb") {
-				if (state.units[ptr].listeners[a.key]) {
-					state.units[ptr].main.removeEventListener(
-						a.key,
-						state.units[ptr].listeners[a.key]
-					);
-				}
-				var el = (e) => avv(e)();
-				state.units[ptr].main.addEventListener(a.key, el);
-				state.units[ptr].listeners[a.key] = el;
-			} else {
-				if (state.units[ptr].main.tagName === "INPUT" && a.key === "value") {
-					state.units[ptr].main.value = avv;
+			var ptr = z.id;
+			for (var i = 0; i < z.attributes.length; i++) {
+				var a = z.attributes[i];
+				var avv = a.value.value;
+				if (a.value.type === "cb") {
+					if (state.units[ptr].listeners[a.key]) {
+						state.units[ptr].main.removeEventListener(
+							a.key,
+							state.units[ptr].listeners[a.key]
+						);
+					}
+					var el = (e) => avv(e)();
+					state.units[ptr].main.addEventListener(a.key, el);
+					state.units[ptr].listeners[a.key] = el;
 				} else {
-					state.units[ptr].main.setAttribute(a.key, avv);
+					if (state.units[ptr].main.tagName === "INPUT" && a.key === "value") {
+						state.units[ptr].main.value = avv;
+					} else {
+						state.units[ptr].main.setAttribute(a.key, avv);
+					}
 				}
 			}
 		};

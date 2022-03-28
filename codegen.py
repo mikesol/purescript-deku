@@ -2,24 +2,13 @@ import requests
 from bs4 import BeautifulSoup
 GENERATE_DOM_DECL = 0
 GENERATE_DOM_DEFS = 1
-GENERATE_CREATES = 2
-GENERATE_CREATETS = 3
-GENERATE_CHANGES = 4
-GENERATE_CREATESGTS = 5
-GENERATE_NOOP = 6
 GENERATE_ATTR_DECL = 7
 GENERATE_ATTR_DEFS = 8
-GENERATE_SHORTHAND = 9
 
 CG_MAP = {GENERATE_DOM_DECL: 'src/Deku/Graph/DOM.purs',
           GENERATE_DOM_DEFS: 'src/Deku/Graph/DOM.purs',
-          GENERATE_CREATES: 'src/Deku/Create.purs',
-          GENERATE_CREATETS: 'src/Deku/CreateT.purs',
-          GENERATE_CHANGES: 'src/Deku/Change.purs',
-          GENERATE_CREATESGTS: 'src/Deku/CreateSGT.purs',
           GENERATE_ATTR_DECL: 'src/Deku/Graph/DOM.purs',
           GENERATE_ATTR_DEFS: 'src/Deku/Graph/DOM.purs',
-          GENERATE_SHORTHAND: 'src/Deku/Graph/DOM/Shorthand.purs'
           }
 
 url = ('https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes')
@@ -88,103 +77,24 @@ def cg(CODEGEN_TARGET):
             typ = 'T'+term
             print_(f'''  , {term}
   , {typ}
-  , {x}
-  , {x}'attr
-  , unsafeUn{term}''')
-    elif CODEGEN_TARGET == GENERATE_SHORTHAND:
-      for x in TAGS:
-        term = bigtag(x)
-        print_(f'''{x}
-  :: forall children
-   . Array (Attribute D.{term})
-  -> {{ | children }}
-  -> {{ {x} :: D.Element D.{term} children }}
-{x} attrs children = {{ {x}: _ }} $ D.{x} attrs children''')
+  , {x}''')
+
     elif CODEGEN_TARGET == GENERATE_DOM_DEFS:
         for x in TAGS:
             term = bigtag(x)
             typ = 'T'+term
-            print_(f'''type {term}' =
-  ( tag :: String
-  , attributes :: Array (Attribute {term})
-  )
-newtype {term} = {term} {{ | {term}' }}
-unsafeUn{term} :: {term} -> {{ | {term}' }}
-unsafeUn{term} ({term} unsafe) = unsafe
+            print_(f'''data {term}
+
+a
+  :: forall dom engine
+   . DOMInterpret dom engine
+  => Atta'bute {term}
+  -> Array (Element dom engine)
+  -> Element dom engine
+a = elementify "{astag(x)}"
 
 instance tagToDeku{term} :: TagToDeku "{astag(x)}" {term}
-
-instance typeToSym{term} ::
-  TypeToSym {term} "{astag(x)}"
-
-{x}
-  :: forall children
-   . Array (Attribute {term})
-  -> {{ | children }}
-  -> Element {term} children
-{x} = makeElt {term} "{astag(x)}"
-
-{x}'attr
-  :: Array (Attribute {term})
-  -> Array (Attribute {term})
-{x}'attr = identity
-
-data {typ} = {typ}
-
-instance typeToSym{typ} :: TypeToSym {typ} "{typ}"
-
-instance semigroup{typ} :: Semigroup {typ} where
-  append _ _ = {typ}
-
-instance monoid{typ} :: Monoid {typ} where
-  mempty = {typ}
-
-instance reify{typ} :: ReifyAU {term} {typ} where
-  reifyAU = const mempty''')
-    elif CODEGEN_TARGET == GENERATE_CREATES:
-        for x in TAGS:
-            term = bigtag(x)
-            typ = 'T'+term
-            print_(f'''instance create{term} ::
-  ( IsSymbol ptr
-  , R.Lacks ptr graphi
-  , R.Cons ptr (NodeC CTOR.{typ} {{}}) graphi grapho
-  ) =>
-  Create' ptr CTOR.{term} graphi grapho where
-  create' ptr w = unsafeCreate' ptr i attributes "{astag(x)}"
-    where
-    {{ context: i, value }} = unsafeUnDOM w
-    {{ attributes }} = CTOR.unsafeUn{term} value''')
-    elif CODEGEN_TARGET == GENERATE_CREATETS:
-        for x in TAGS:
-            term = bigtag(x)
-            typ = 'T'+term
-            print_(f'''instance create{typ} ::
-  ( R.Lacks ptr graphi
-  , R.Cons ptr (NodeC CTOR.{typ} {{}}) graphi grapho
-  ) =>
-  CreateT' ptr CTOR.{term} graphi grapho''')
-    elif CODEGEN_TARGET == GENERATE_CHANGES:
-        for x in TAGS:
-            term = bigtag(x)
-            typ = 'T'+term
-            print_(f'''instance change{term} ::
-  ( IsSymbol ptr
-  , R.Cons ptr (NodeC CTOR.{typ} ignore0) ignore1 graph
-  ) =>
-  Change' ptr (Array (Attribute CTOR.{term})) graph where
-  change'impl ptr w = unsafeChange' ptr i value
-    where
-    {{ context: i, value }} = unsafeUnDOM w''')
-    elif CODEGEN_TARGET == GENERATE_CREATESGTS:
-        for x in TAGS:
-            term = bigtag(x)
-            typ = 'T'+term
-            print_(f'''instance createSG{typ} ::
-  ( R.Lacks ptr graphi
-  , R.Cons ptr (NodeC CTOR.{typ} {{}}) graphi grapho
-  ) =>
-  CreateSGT' ptr CTOR.{term} graphi grapho''')
+''')
     elif CODEGEN_TARGET == GENERATE_ATTR_DECL:
         for x in AMAP.keys():
             term = bigat(x)
@@ -218,9 +128,7 @@ instance reify{typ} :: ReifyAU {term} {typ} where
 
 
 if __name__ == '__main__':
-    for z in range(10):
-      if z == GENERATE_NOOP: continue
-      if z == GENERATE_CREATES: continue
+    for z in [0,1,7,8]:
       o = cg(z)
       with open(CG_MAP[z], 'r') as rf:
         i = rf.read().split('\n')

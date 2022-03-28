@@ -3,6 +3,7 @@ module Deku.Graph.Attribute
   , Attribute
   , unsafeUnAttribute
   , unsafeAttribute
+  , unsafeUnAttributeArray
   , prop'
   , cb'
   , cb
@@ -14,6 +15,7 @@ import Prelude
 import Data.Newtype (class Newtype)
 import Data.Variant (Variant, inj, match)
 import Effect (Effect)
+import Safe.Coerce (coerce)
 import Type.Proxy (Proxy(..))
 import Web.Event.Internal.Types (Event)
 
@@ -43,7 +45,11 @@ newtype Attribute (e :: Type) = Attribute
 
 unsafeUnAttribute
   :: forall e. Attribute e -> { key :: String, value :: AttributeValue }
-unsafeUnAttribute (Attribute unsafe) = unsafe
+unsafeUnAttribute = coerce
+
+unsafeUnAttributeArray
+  :: forall e. Array (Attribute e) -> Array { key :: String, value :: AttributeValue }
+unsafeUnAttributeArray = coerce
 
 unsafeAttribute
   :: forall e. { key :: String, value :: AttributeValue } -> Attribute e
