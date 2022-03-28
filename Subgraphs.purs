@@ -156,152 +156,132 @@ subgraphs dt dpage =
                           ( D.pre []
                               ( S.code []
                                   ( S.text
-                                      """module Deku.Example.Docs.Example.Subgraph where
+                                      """module Main where
 
 import Prelude
 
+import Data.Array ((..))
 import Data.Either (Either(..))
 import Data.Foldable (for_)
-import Data.Hashable (class Hashable, hash)
-import Data.Map (insert, singleton)
-import Data.Tuple (fst, snd)
+import Data.Map as Map
+import Data.Maybe (Maybe(..))
+import Data.Monoid.Additive (Additive(..))
 import Data.Tuple.Nested ((/\))
 import Deku.Change (change)
-import Deku.Control.Functions (u, (@>), (%>))
+import Deku.Control.Functions (modifyRes, (%!>), (%>), (@>))
 import Deku.Control.Types (Frame0, Scene)
 import Deku.Graph.Attribute (cb)
-import Deku.Graph.DOM (AsSubgraph(..), SubgraphSig, root, xsubgraph, (:=))
+import Deku.Graph.DOM (AsSubgraph(..), xsubgraph, Href(..), OnClick(..), a, a'attr, root, subgraph, text, (:=))
 import Deku.Graph.DOM as D
-import Deku.Graph.DOM.Shorthand as S
-import Deku.Interpret (class DOMInterpret, makeFFIDOMSnapshot)
-import Deku.Run (defaultOptions, run)
+import Deku.Interpret (makeFFIDOMSnapshot)
+import Deku.Run (RunDOM, RunEngine, TriggeredScene, defaultOptions, run)
+import Deku.Toplevel ((🚀))
 import Effect (Effect)
 import FRP.Event (subscribe)
-import Web.DOM (Element)
+import Web.DOM as WEB.DOM
 import Web.HTML (window)
 import Web.HTML.HTMLDocument (body)
 import Web.HTML.HTMLElement (toElement)
 import Web.HTML.Window (document)
 
-data Sgs = Sg0 | Sg1
-derive instance Eq Sgs
-derive instance Ord Sgs
-instance Show Sgs where
-  show Sg0 = "Sg0"
-  show Sg1 = "Sg1"
-instance Hashable Sgs where
-  hash = show >>> hash
-
-mySub :: (Sgs -> Effect Unit) -> SubgraphSig Sgs Unit Unit
-mySub raise Sg0 =
-  ( \_ push ->
-      S.div []
-        ( { div1: D.div []
-              { button0: D.button
-                  [ D.OnClick := cb (const $ raise Sg0)
-                  ]
-                  (S.text "Send to B")
-              , count0: D.div [] (S.text ("A: 0"))
-              , button1: D.button
-                  [ D.OnClick := cb (const $ push unit)
-                  ]
-                  (S.text "Send to C")
-              , count1: D.div [] (S.text ("C: 0"))
-              }
-          , hr: D.hr [] {}
-          }
-        )
-        /\ (0 /\ 0)
-  ) %> \e (a /\ c) -> case e of
-    Left _ ->
-      let
-        new = (a + 1) /\ c
-      in
-        change
-          { "div.div1.count0.t": "A: " <> show (fst new)
-          } $> new
-    Right _ ->
-      let
-        new = a /\ (c + 1)
-      in
-        change
-          { "div.div1.count1.t": "C: " <> show (snd new)
-          } $> new
-mySub raise Sg1 =
-  ( \_ push ->
-      S.div []
-        ( { div1: D.div []
-              { button0: D.a
-                  [ D.OnClick := cb (const $ raise Sg1)
-                  , D.Style := "cursor:pointer;"
-
-                  ]
-                  (S.text "Send to A")
-              , count0: D.div [] (S.text "B: 0")
-              , button1: D.a
-                  [ D.OnClick := cb (const $ push unit)
-                  , D.Style := "cursor:pointer;"
-
-                  ]
-                  (S.text "Send to D")
-              , count1: D.div [] (S.text "D: 0")
-              }
-          }
-        )
-        /\ (0 /\ 0)
-  ) %> \e (b /\ d) -> case e of
-    Left _ ->
-      let
-        new = (b + 1) /\ d
-      in
-        change
-          { "div.div1.count0.t": "B: " <> show (fst new)
-          } $> new
-    Right _ ->
-      let
-        new = b /\ (d + 1)
-      in
-        change
-          { "div.div1.count1.t": "D: " <> show (snd new)
-          } $> new
-
-scene
-  :: forall env dom engine res
-   . Monoid res
-  => DOMInterpret dom engine
-  => Element
-  -> Scene env dom engine Frame0 Sgs res
-scene elt =
-  ( \_ push ->
-      u $ root elt
-        { sub:
-            D.subgraph
-              ( insert Sg0 (pure unit)
-                  $ singleton Sg1 (pure unit)
-              )
-              (AsSubgraph (mySub push))
-        }
-
-  ) @> \e _ -> case e of
-    Left _ -> pure unit
-    Right Sg0 -> change
-      { "root.sub": xsubgraph (singleton Sg1 (pure unit))
-      }
-    Right Sg1 -> change
-      { "root.sub": xsubgraph (singleton Sg0 (pure unit))
-      }
+data HelloWorld = Hello | World
 
 main :: Effect Unit
-main = do
-  b' <- window >>= document >>= body
-  for_ (toElement <$> b') \elt -> do
-    ffi <- makeFFIDOMSnapshot
-    subscribe
-      ( run (pure unit) (pure unit) defaultOptions ffi
-          (scene elt)
+main =
+  ( \push0 ->
+      let
+        falsy n =
+          Map.fromFoldable (map (\i -> i /\ Just false) (0 .. n))
+      in
+        { hello: D.div []
+            { hello: a
+                [ Href := "#", OnClick := cb (const $ push0 Hello) ]
+                { ht: text "click" }
+            , helloA: subgraph (falsy 40)
+                ( AsSubgraph \i ->
 
-      )
-      (_.res >>> pure)
+                    ( \_ push ->
+                        { myA: a
+                            [ Href := "#"
+                            , OnClick := cb
+                                ( const $ do
+                                    push false
+                                    when (i == 4) (push0 Hello)
+                                )
+                            ]
+                            { myTxt: text " me " }
+                        } /\ push
+
+                    ) %>
+                      ( \e push ->
+                          case e of
+                            Left tf ->
+                              when tf
+                                (change { "myA.myTxt": "banana" }) $> push
+                            Right tf ->
+                              change
+                                { "myA": a'attr
+                                    [ OnClick := cb (const $ push (not tf))
+                                    ]
+                                , "myA.myTxt": if tf then " me " else " em "
+                                } $> push
+                      )
+                )
+            }
+        , world: D.div []
+            { wA: a [ Href := "#", OnClick := cb (const $ push0 World) ]
+                { ht: text "click" }
+            , wB: subgraph (falsy 10)
+                ( AsSubgraph \i ->
+                    ( \_ push ->
+                        ( { myA: a
+                              [ Href := "#"
+                              , OnClick := cb
+                                  ( const $ do
+                                      push false
+                                      when (i == 11) (push0 Hello)
+                                  )
+                              ]
+                              { myTxt: text $ " me" <> show i <> " " }
+                          } /\ (push /\ Additive i) /\ (Additive i)
+                        )
+                    ) %!>
+                      \e (push /\ (Additive i')) ->
+                        case e of
+                          Left _ ->
+                            map ((/\) push) $ modifyRes
+                              (const $ Additive ((i' + 1) `mod` 40))
+                          Right tf ->
+                            map ((/\) push)
+                              ( change
+                                  { "myA": a'attr
+                                      [ OnClick := cb
+                                          (const $ push (not tf))
+                                      ]
+                                  , "myA.myTxt":
+                                      if tf then " me"
+                                      else " em" <> show i <> " "
+                                  } *> modifyRes (const $ Additive i')
+                              )
+                )
+            }
+        } /\ 0
+  ) 🚀 \e lmt ->
+    lmt + 1 <$ case e of
+      Hello -> change
+        { "root.hello.helloA": xsubgraph (Map.singleton 9 (Just true))
+        }
+      World -> change
+        { "root.world.wB": xsubgraph
+            ( Map.fromFoldable
+                ( map
+                    ( \i -> i /\
+                        (if i < lmt `mod` 10 then Just false else Nothing)
+                    )
+                    (0 .. 10)
+                )
+            )
+        }
 """
                                   )
                               )
