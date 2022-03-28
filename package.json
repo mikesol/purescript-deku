@@ -18,6 +18,7 @@
 	"author": "",
 	"license": "ISC",
 	"devDependencies": {
+		"netlify-cli": "^8.0.1",
 		"filter-console": "^0.1.1",
 		"headless-devtools": "^2.0.1",
 		"psc-package": "^4.0.1",

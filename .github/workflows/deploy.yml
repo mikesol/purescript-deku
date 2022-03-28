@@ -27,3 +27,5 @@ jobs:
         with:
           github_token: ${{ secrets.GH_TOKEN }}
           publish_dir: ./examples/docs
+      - name: deploy to netlify
+        run: NETLIFY_SITE_ID=${{ secrets.NETLIFY_SITE_ID }} NETLIFY_AUTH_TOKEN=${{ secrets.NETLIFY_AUTH_TOKEN }} netlify deploy --dir=./examples/docs --prod
