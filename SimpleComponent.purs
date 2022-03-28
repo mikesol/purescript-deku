@@ -62,10 +62,11 @@ main =
         , rando: D.div []
             $ detup
             $
-              D.a [ D.Href := "https://github.com/mikesol/purescript-deku" ]
+              D.a [ D.Href := "https://example.com" ]
                 (S.text "foo ")
                 /\ D.i [] (S.text " bar ")
-                /\ D.span [ D.Style := "font-weight: 800;" ] (S.text " baz")
+                /\ D.span [ D.Style := "font-weight: 800;" ]
+                  (S.text " baz")
                 /\
                   unit
         , lotsOfDivs: D.div []
@@ -98,7 +99,7 @@ main =
                               $
                                 D.a
                                   [ D.Href :=
-                                      "https://github.com/mikesol/purescript-deku"
+                                      "https://example.com"
                                   ]
                                   (S.text "foo ")
                                   /\ D.i [] (S.text " bar ")
