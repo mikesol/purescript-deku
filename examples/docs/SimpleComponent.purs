@@ -67,8 +67,7 @@ main =
               /\ D.i [] (S.text " bar ")
               /\ D.span [ D.Style := "font-weight: 800;" ]
                 (S.text " baz")
-              /\
-                unit
+              /\ unit
       , lotsOfDivs: D.div []
           $ S.div []
           $ S.div []
