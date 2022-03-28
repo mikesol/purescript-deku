@@ -103,7 +103,8 @@ mySub raise Sg1 =
 main :: Effect Unit
 main =
   ( \push ->
-      u $ { sub:
+      u $
+        { sub:
             D.subgraph
               ( insert Sg0 (pure unit)
                   $ singleton Sg1 (pure unit)

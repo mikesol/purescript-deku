@@ -149,21 +149,21 @@ main = io
                   /\ D.h2 [] (S.text "Next steps")
                   /\ D.p []
                     ( D.span []
-                          ( S.text
-                              """It is also possible to handle events (and by extension effectful actions in events, like network calls) in Pursx. Let's see how in  """
+                        ( S.text
+                            """It is also possible to handle events (and by extension effectful actions in events, like network calls) in Pursx. Let's see how in  """
+                        )
+                        @@ D.a
+                          [ cot dt $ cb
+                              ( const $ dpage PURSX2 *>
+                                  scrollToTop
+                              )
+                          , D.Style := "cursor:pointer;"
+                          ]
+                          (S.text "the second Pursx section")
+                        /\ D.span []
+                          ( S.text "."
                           )
-                          @@ D.a
-                            [ cot dt $ cb
-                                ( const $ dpage PURSX2 *>
-                                    scrollToTop
-                                )
-                            , D.Style := "cursor:pointer;"
-                            ]
-                            (S.text "the second Pursx section")
-                          /\ D.span []
-                            ( S.text "."
-                            )
-                          /\ unit
+                        /\ unit
                     )
                   /\ unit
               )

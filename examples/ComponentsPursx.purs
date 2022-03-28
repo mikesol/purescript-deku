@@ -10,7 +10,10 @@ import Type.Proxy (Proxy(..))
 
 main :: Effect Unit
 main =
-  ( const $ u $ (Proxy :: _ """
+  ( const $ u $
+      ( Proxy
+          :: _
+            """
       <div>
         <button>I do nothing</button>
         <ul>
@@ -25,5 +28,6 @@ main =
         </div>
         <div><div></div><div><input type="range"/></div></div>
       </div>
-      """) ~! {}
+      """
+      ) ~! {}
   ) 🚀 freeze
