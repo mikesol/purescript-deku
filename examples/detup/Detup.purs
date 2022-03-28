@@ -25,7 +25,7 @@ scene elt =
   ( \_ _ ->
       u $
         root elt
-           (text "a" @@ text "b" /\ text "c" /\ text "d" /\ unit)
+          (text "a" @@ text "b" /\ text "c" /\ text "d" /\ unit)
 
   ) @> freeze
 

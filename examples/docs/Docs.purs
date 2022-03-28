@@ -58,7 +58,7 @@ scene elt dt =
                                     (S.text y)
                                     @@ D.span
                                       [ D.Style :=
-                                        if z then ""
+                                          if z then ""
                                           else "display:none;"
                                       ]
                                       (S.text " | ")

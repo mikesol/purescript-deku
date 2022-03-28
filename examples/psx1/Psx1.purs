@@ -30,7 +30,8 @@ scene elt =
   ( \_ push ->
       u $ root elt
         { txt: text "i am some text"
-        , btn: D.button [D.OnClick := cb (const $ push unit)] (S.text "change stuff")
+        , btn: D.button [ D.OnClick := cb (const $ push unit) ]
+            (S.text "change stuff")
         , psxClosure: psx
             ( Proxy
                 :: _
@@ -54,16 +55,20 @@ scene elt =
                 :: _
                   "<div ~mydiv~>i am yet another div <a href=\"https://www.example.com\">i am yet another link</a> ~inner~</div>"
             )
-            { mydiv: [ D.Style := "background-color: rgb(140,234,235);" ], inner: (D.div [] (S.text "hello world")) }
+            { mydiv: [ D.Style := "background-color: rgb(140,234,235);" ]
+            , inner: (D.div [] (S.text "hello world"))
+            }
         }
   ) @> \e _ ->
     case e of
       Left _ -> pure unit
-      Right _ -> change {
-        "root.psx2.mydiv": D.div'attr [ D.Style := "background-color: rgb(0,4,235);" ]
-        ,"root.psx1.mydiv": D.div'attr [ D.Style := "background-color: rgb(0,56,2);" ]
-        ,"root.psx2.inner.t": "works"
-      }
+      Right _ -> change
+        { "root.psx2.mydiv": D.div'attr
+            [ D.Style := "background-color: rgb(0,4,235);" ]
+        , "root.psx1.mydiv": D.div'attr
+            [ D.Style := "background-color: rgb(0,56,2);" ]
+        , "root.psx2.inner.t": "works"
+        }
 
 main :: Effect Unit
 main = do

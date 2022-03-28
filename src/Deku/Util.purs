@@ -211,7 +211,6 @@ instance addPrefixToRowListCons4 ::
     (RL.Cons a (Pursx xx yy zz) c)
     (RL.Cons symA (Pursx xx yy zz) x)
 
-
 instance addPrefixToRowListNil :: AddPrefixToRowList sym RL.Nil RL.Nil
 
 class Detup (n :: Type) (a :: Type) (b :: Row Type) | n a -> b where
@@ -232,9 +231,10 @@ instance detupTuple ::
 instance detupUnit :: Detup n Unit () where
   detup' _ _ = {}
 
-detup :: forall a b c. Detup D1 c b => Lacks "@0" b => a -> c -> { "@0" :: a | b }
+detup
+  :: forall a b c. Detup D1 c b => Lacks "@0" b => a -> c -> { "@0" :: a | b }
 detup a b = insertLeft (Proxy :: Proxy "@0") a
-    (detup' (Proxy :: Proxy D1) b)
+  (detup' (Proxy :: Proxy D1) b)
 
 infixr 6 detup as @@
 
@@ -274,7 +274,8 @@ instance N2S D8 "8"
 instance N2S D9 "9"
 instance (N2S a a', N2S b b', Sym.Append a' b' c) => N2S (a :* b) c
 
-class GetNodeEdges :: forall k1 k2 k3 k4 k5. k1 -> k2 -> k3 -> k4 -> k5 -> Constraint
+class GetNodeEdges
+  :: forall k1 k2 k3 k4 k5. k1 -> k2 -> k3 -> k4 -> k5 -> Constraint
 class GetNodeEdges i tf pfx node edges | i -> tf pfx node edges
 instance getNodeEdgesElement ::
   GetNodeEdges (Element node edges) False "" node edges
@@ -285,4 +286,13 @@ instance getNodeEdgesMyNameIs ::
 -- but psx already does this
 -- can we hold proof somehow??
 instance getNodeEdgesPursx ::
-  (PXStart verb " " html r, PursxToEdges r e) => GetNodeEdges (Pursx verb html r) False "" (Pursx verb html r) e
+  ( PXStart verb " " html r
+  , PursxToEdges r e
+  ) =>
+  GetNodeEdges (Pursx verb html r) False "" (Pursx verb html r) e
+
+p :: forall p. Proxy p
+p = Proxy
+flipTuple :: forall a b. b -> a -> Tuple a b
+flipTuple = flip (/\)
+infixr 6 flipTuple as /|\

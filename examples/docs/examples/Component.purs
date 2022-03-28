@@ -21,7 +21,8 @@ main =
           $ map (D.li [] <<< S.text)
             ("A" +> "B" +> "C" +> empty)
       , rando: D.div []
-          $ D.a [ D.Href := "https://example.com" ]
+          $
+            D.a [ D.Href := "https://example.com" ]
               (S.text "foo ")
               @@ D.i [] (S.text " bar ")
               /\ D.span [ D.Style := "font-weight: 800;" ]

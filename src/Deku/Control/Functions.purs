@@ -249,9 +249,10 @@ loopUsingEnvironmentallyUnawareSceneG
        -> MDOM dom engine proofB res graph control
      )
   -> Scene env dom engine Frame0 push res
-loopUsingEnvironmentallyUnawareSceneG f0 f1 = loopUsingSceneG f0 \x y -> case x of
-  Left _ -> pure y
-  Right z -> f1 z y
+loopUsingEnvironmentallyUnawareSceneG f0 f1 = loopUsingSceneG f0 \x y ->
+  case x of
+    Left _ -> pure y
+    Right z -> f1 z y
 
 loopUsingSceneGWithRes
   :: forall env dom engine push res sn graph control
@@ -314,9 +315,10 @@ loopUsingEnvironmentallyUnawareSceneSG
        -> MDOM dom engine proofB res graph control
      )
   -> SubScene env dom engine Frame0 push res
-loopUsingEnvironmentallyUnawareSceneSG f0 f1 = loopUsingSceneSG f0 \x y -> case x of
-  Left _ -> pure y
-  Right z -> f1 z y
+loopUsingEnvironmentallyUnawareSceneSG f0 f1 = loopUsingSceneSG f0 \x y ->
+  case x of
+    Left _ -> pure y
+    Right z -> f1 z y
 
 loopUsingSceneSGWithRes
   :: forall env dom engine push res sn graph control

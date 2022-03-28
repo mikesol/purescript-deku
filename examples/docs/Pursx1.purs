@@ -29,18 +29,18 @@ pursx1 dpage =
                 }
             , pars: D.div []
                 ( D.p []
-                        ( S.text
-                            """Writing out PureScript code for the DOM only really makes sense if you're doing some sort of interesting manipulations on the JS layer. Otherwise, it's pretty tedious and longer than HTML. Thankfully, there's a solution: PursX."""
-                        )
-                        @@ D.p []
-                        ( S.text
-                            """PursX takes its name from JSX and it accomplishes a similar goal: the ability to embed HTML in your document. In the example below, we create the same exact component from the previous article, but in PursX."""
-                        )
-                        /\
-                          ( D.pre []
-                              ( S.code []
-                                  ( S.text $
-                                      """module Main where
+                    ( S.text
+                        """Writing out PureScript code for the DOM only really makes sense if you're doing some sort of interesting manipulations on the JS layer. Otherwise, it's pretty tedious and longer than HTML. Thankfully, there's a solution: PursX."""
+                    )
+                    @@ D.p []
+                      ( S.text
+                          """PursX takes its name from JSX and it accomplishes a similar goal: the ability to embed HTML in your document. In the example below, we create the same exact component from the previous article, but in PursX."""
+                      )
+                    /\
+                      ( D.pre []
+                          ( S.code []
+                              ( S.text $
+                                  """module Main where
 
 import Prelude
 
@@ -52,7 +52,8 @@ import Type.Proxy (Proxy(..))
 
 main :: Effect Unit
 main =
-  ( const $ u $ (Proxy :: _ """ <> "\"\"\"" <> """
+  ( const $ u $ (Proxy :: _ """ <> "\"\"\""
+                                    <> """
       <div>
         <button>I do nothing</button>
         <ul>
@@ -67,18 +68,23 @@ main =
         </div>
         <div><div></div><div><input type="range"/></div></div>
       </div>
-      """ <> "\"\"\"" <> """) ~! {}
+      """
+                                    <> "\"\"\""
+                                    <>
+                                      """) ~! {}
   ) 🚀 freeze
 """
-                                  )
                               )
                           )
+                      )
 
-                        /\ D.p []
-                          ( S.text   "Here's what it produces:"
-                          )
-                        /\ D.blockquote []
-                          ((Proxy :: _ """
+                    /\ D.p []
+                      ( S.text "Here's what it produces:"
+                      )
+                    /\ D.blockquote []
+                      ( ( Proxy
+                            :: _
+                              """
       <div>
         <button>I do nothing</button>
         <ul>
@@ -93,41 +99,45 @@ main =
         </div>
         <div><div></div><div><input type="range"/></div></div>
       </div>
-      """) ~! {})
-                        /\ D.h2 [] (S.text "Puurrrrrr ...sx")
-                        /\ D.p []
-                          (D.text
-                                """Pursx can be activated with the operators """
-                                @@ D.code [] (S.text "~!")
-                                /\ D.text
-                                  """, which creates a one-off record, and """
-                                /\ D.code [] (S.text "~~")
-                                /\ D.text
-                                  """for when you already have a record that you're embedding it in. It's also slightly faster than the JS layer, as it just sets the """
-                                /\ D.code [] (S.text "innerHTML")
-                                /\ D.text
-                                  """ property of a node with the HTML. JavaScript parsers are blazingly fast at setting innerHTML these days, and you can achieve substantial performance gains this way, especially with larger documents. In a later section, we'll see how to modify our PursX and embed PureScript within it, just like we do with JSX."""
-                                /\ unit
+      """
+                        ) ~! {}
+                      )
+                    /\ D.h2 [] (S.text "Puurrrrrr ...sx")
+                    /\ D.p []
+                      ( D.text
+                          """Pursx can be activated with the operators """
+                          @@ D.code [] (S.text "~!")
+                          /\ D.text
+                            """, which creates a one-off record, and """
+                          /\ D.code [] (S.text "~~")
+                          /\ D.text
+                            """for when you already have a record that you're embedding it in. It's also slightly faster than the JS layer, as it just sets the """
+                          /\ D.code [] (S.text "innerHTML")
+                          /\ D.text
+                            """ property of a node with the HTML. JavaScript parsers are blazingly fast at setting innerHTML these days, and you can achieve substantial performance gains this way, especially with larger documents. In a later section, we'll see how to modify our PursX and embed PureScript within it, just like we do with JSX."""
+                          /\ unit
+                      )
+                    /\ D.h2 [] (S.text "Next steps")
+                    /\ D.p []
+                      ( S.span []
+                          ( D.text
+                              """In this section, we PursX to build the same component as the previous section. In the next section, we'll learn how to respond to """
+                              @@ D.a
+                                [ D.OnClick := cb
+                                    ( const $ dpage Events *>
+                                        scrollToTop
+                                    )
+                                , D.Style := "cursor:pointer;"
+                                ]
+                                (S.text "events")
+                              /\ D.span []
+                                ( S.text "."
+                                )
+                              /\ unit
                           )
-                        /\ D.h2 [] (S.text "Next steps")
-                        /\ D.p []
-                          ( S.span []
-                                ( D.text
-                                    """In this section, we PursX to build the same component as the previous section. In the next section, we'll learn how to respond to """
-                                @@ D.a
-                                  [ D.OnClick := cb
-                                      ( const $ dpage Events *>
-                                          scrollToTop
-                                      )
-                                  , D.Style := "cursor:pointer;"
-                                  ]
-                                  (S.text "events")
-                                /\ D.span []
-                                  ( S.text "."
-                                  )
-                                /\ unit
-                          )
-                ) /\ unit)
+                      )
+                    /\ unit
+                )
             }
         }
   ) %> freeze
