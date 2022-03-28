@@ -131,34 +131,55 @@ var doSortingOnSubgraphs = function (unit, sorting) {
 		}
 	}
 };
+
+// foreign i
 exports.makeSubgraph_ = function (ptr) {
 	return function (sceneM) {
-		return function (envs) {
-			return function (funkyFx) {
-				return function (state) {
-					return function () {
-						var children = {};
-						var scenes = {};
-						var funk = {};
-						var unsu = {};
-						state.units[ptr] = {
-							sceneM: sceneM,
-							main: document.createElement("div"),
-							funkyFx: funkyFx,
-							isSubgraph: true,
-							scenes: scenes,
-							children: children,
-							funk: funk,
-							unsu: unsu,
-						};
-						state.units[ptr].main.setAttribute("style", "display:contents;");
-						setSubgraph_(ptr)(envs)(state)();
+		return function (funkyFx) {
+			return function (state) {
+				return function () {
+					var children = {};
+					var scenes = {};
+					var funk = {};
+					var unsu = {};
+					state.units[ptr] = {
+						sceneM: sceneM,
+						main: document.createElement("div"),
+						funkyFx: funkyFx,
+						isSubgraph: true,
+						scenes: scenes,
+						children: children,
+						funk: funk,
+						unsu: unsu,
 					};
+					state.units[ptr].main.setAttribute("style", "display:contents;");
 				};
 			};
 		};
 	};
 };
+exports.identifyAsTerminus_ = function (a) {
+	return function (state) {
+		return function () {
+			state.terminus = a.id;
+		};
+	};
+};
+// mport makeSubgraph_
+//   :: forall index env push scene
+//    . String
+//   -- this is the generic function for how to interpret a scene
+//   -> ( index
+//        -> (push -> Effect Unit)
+//        -> Event (Either env push)
+//        -> Element FFIDOMSnapshot (Effect Unit)
+//      )
+//   -> ( Int
+//        -> index
+//        -> Effect (Element' FFIDOMSnapshot (Effect Unit))
+//      )
+//   -> FFIDOMSnapshot
+//   -> Effect Unit
 
 var setSubgraph_ = function (ptr) {
 	return function (envs) {
@@ -292,231 +313,6 @@ exports.sendSubgraphToTop_ = function (a) {
 		};
 	};
 };
-exports.massiveCreate_ = function ($unSubgraph) {
-	return function ($makeSubgraph) {
-		return function ($makeRoot) {
-			return function ($makeElement) {
-				return function ($makeText) {
-					return function ($makePursx) {
-						return function (prefix) {
-							return function (a) {
-								return function (state) {
-									return function () {
-										// if we have pursx, it may call massiveCreate internally again, in which case we don't want to reset this
-										if (!state.terminalPtrs) {
-											state.terminalPtrs = [];
-										}
-										massiveCreateCreateStep_(prefix === null)(
-											prefix === null ? "" : prefix
-										)($unSubgraph)($makeSubgraph)($makeRoot)($makeElement)(
-											$makeText
-										)($makePursx)(a)(state)();
-										massiveCreateConnectStep_(prefix === null ? "" : prefix)(a)(
-											state
-										)();
-									};
-								};
-							};
-						};
-					};
-				};
-			};
-		};
-	};
-};
-var massiveCreateConnectStep_ = function ($prefix) {
-	return function (a) {
-		return function (state) {
-			return function () {
-				var entries = Object.entries(a.toCreate);
-				for (var i = 0; i < entries.length; i++) {
-					if (entries[i][1].html) {
-						continue;
-					}
-					var children = Object.entries(
-						entries[i][1].myNameIs !== undefined
-							? entries[i][1].unMyNameIs.children
-							: entries[i][1].children
-					);
-					for (var j = 0; j < children.length; j++) {
-						var toId =
-							entries[i][1].myNameIs !== undefined
-								? entries[i][1].myNameIs
-								: $prefix + ($prefix === "" ? "" : ".") + entries[i][0];
-						var fromId =
-							children[j][1].myNameIs !== undefined
-								? children[j][1].myNameIs
-								: toId + "." + children[j][0];
-
-						connectXToY_({
-							fromId: fromId,
-							toId: toId,
-						})(state)();
-						if (children[j][1].html !== undefined) {
-							continue;
-						}
-						var child =
-							children[j][1].myNameIs !== undefined
-								? children[j][1].unMyNameIs
-								: children[j][1];
-						if (child.html) {
-							continue;
-						}
-						if (child.children !== {}) {
-							var toCreate = {};
-							toCreate[children[j][0]] = children[j][1];
-							massiveCreateConnectStep_(toId)({
-								toCreate: toCreate,
-							})(state)();
-						}
-					}
-				}
-			};
-		};
-	};
-};
-var massiveCreateCreateStep_ = function ($isTerminal) {
-	return function ($prefix) {
-		return function ($unSubgraph) {
-			return function ($makeSubgraph) {
-				return function ($makeRoot) {
-					return function ($makeElement) {
-						return function ($makeText) {
-							return function ($makePursx) {
-								return function (a) {
-									return function (state) {
-										return function () {
-											var entries = Object.entries(a.toCreate);
-											for (var i = 0; i < entries.length; i++) {
-												var value = entries[i][1];
-												if (value.myNameIs !== undefined) {
-													// my name is
-													var toCreate = {};
-													toCreate[value.myNameIs] = value.unMyNameIs;
-													massiveCreateCreateStep_($isTerminal)("")(
-														$unSubgraph
-													)($makeSubgraph)($makeRoot)($makeElement)($makeText)(
-														$makePursx
-													)({
-														toCreate: toCreate,
-													})(state)();
-													continue;
-												}
-												var key =
-													$prefix + ($prefix === "" ? "" : ".") + entries[i][0];
-												if ($isTerminal) {
-													state.terminalPtrs.push(key);
-												}
-												if (value.html !== undefined) {
-													$makePursx({
-														id: key,
-														html: value.html,
-														verb: value.verb,
-														r: value.r,
-													})(state)();
-												} else if (value.element.element !== undefined) {
-													// it's a root
-													$makeRoot({ id: key, root: value.element.element })(
-														state
-													)();
-												} else if (value.element.tag !== undefined) {
-													// it's an element
-													$makeElement({
-														id: key,
-														tag: value.element.tag,
-														attributes: value.element.attributes,
-													})(state)();
-												} else if (value.element.text !== undefined) {
-													// it's an element
-													$makeText({
-														id: key,
-														text: value.element.text,
-													})(state)();
-												} else if (value.element.subgraphMaker !== undefined) {
-													// it's a subgraph
-													$makeSubgraph({
-														id: key,
-														scenes: $unSubgraph(value.element.subgraphMaker),
-														envs: value.element.envs,
-													})(state)();
-												} else {
-													throw new Error(
-														"Don't know how to handle " +
-															key +
-															" " +
-															Object.keys(value.element)
-													);
-												}
-												// do not keep creating if it is html
-												if (value.html !== undefined) {
-													continue;
-												}
-												massiveCreateCreateStep_(false)(key)($unSubgraph)(
-													$makeSubgraph
-												)($makeRoot)($makeElement)($makeText)($makePursx)({
-													toCreate: value.children,
-												})(state)();
-											}
-										};
-									};
-								};
-							};
-						};
-					};
-				};
-			};
-		};
-	};
-};
-exports.massiveChange_ = function ($setSubgraph) {
-	return function ($setAttribute) {
-		return function ($setText) {
-			return function (a) {
-				return function (state) {
-					return function () {
-						var entries = Object.entries(a.toCreate);
-						for (var i = 0; i < entries.length; i++) {
-							var key = entries[i][0];
-							var value = entries[i][1];
-							if (value.element.element !== undefined) {
-								// it's a root, do nothing
-							} else if (value.element.tag !== undefined) {
-								// it's an element
-								for (var j = 0; j < value.element.attributes.length; j++) {
-									$setAttribute({
-										id: key,
-										key: value.element.attributes[j].key,
-										value: value.element.attributes[j].value,
-									})(state)();
-								}
-							} else if (value.element.text !== undefined) {
-								// it's an element
-								$setText({
-									id: key,
-									text: value.element.text,
-								})(state)();
-							} else if (value.element.envs !== undefined) {
-								// it's a subgraph
-								$setSubgraph({
-									id: key,
-									envs: value.element.envs,
-								})(state)();
-							} else {
-								throw new Error(
-									"Don't know how to handle " + key + " " + value
-								);
-							}
-							massiveChange_($changeSubgraph)($setAttribute)($setText)({
-								toChange: value.children,
-							})(state)();
-						}
-					};
-				};
-			};
-		};
-	};
-};
-
 exports.makeRoot_ = function (a) {
 	return function (state) {
 		return function () {

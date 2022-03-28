@@ -2,16 +2,15 @@ module Deku.Example.HelloWorld where
 
 import Prelude
 
-import Control.Alt ((<|>))
 import Data.Foldable (for_)
 import Deku.Attribute (cb, (:=))
-import Deku.Control (deku)
+import Deku.Control (deku, firstThen)
 import Deku.Control as C
 import Deku.Core (Element)
 import Deku.DOM as D
 import Deku.Interpret (FFIDOMSnapshot, effectfulDOMInterpret, makeFFIDOMSnapshot)
 import Effect (Effect)
-import FRP.Event (Event, keepLatest, subscribe)
+import FRP.Event (Event, create, subscribe)
 import FRP.Event (create)
 import Web.HTML (window)
 import Web.HTML.HTMLDocument (body)
@@ -25,14 +24,35 @@ scene
 scene push event =
   [ C.text (event <#> if _ then "click" else "kcilc")
   , D.a
-      ( keepLatest
-          ( event <#> \e ->
-              pure (D.Href := "#") <|> pure
-                (D.OnClick := cb (const $ push (not e)))
+      ( firstThen event
+          ( \e ->
+              [  D.Style := "background-color: blue;", D.Href := "#"
+
+              ] <> thn e
           )
+          thn
       )
       [ C.text_ "me" ]
   ]
+  where
+  thn = \e ->
+    [ D.OnClick := cb (const $ push (not e))
+    , D.Style := "background-color: red;"
+    ]
+{-
+=
+  elt
+    { start: \e ->
+        d @@
+          (@"txt" (D.text "click"))
+          (@"click" (D.a $ [ D.Href := "#" ] <> thn e))
+          (D.text "me")
+      loop: \e -> change
+        { txt: if _ then "click" else "kcilc"
+        , click: thn e
+        }
+    }
+-}
 
 main :: Effect Unit
 main = do

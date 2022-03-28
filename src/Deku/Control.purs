@@ -2,20 +2,21 @@ module Deku.Control
   ( elementify
   , text
   , text_
+  , many
+  , firstThen
   , deku
   ) where
 
-import Prelude hiding (map)
+import Prelude
 
 import Control.Alt ((<|>))
 import Control.Plus (empty)
 import Data.Foldable (foldl)
-import Data.Functor as F
 import Deku.Attribute (Attribute, unsafeUnAttribute)
 import Deku.Core (DOMInterpret(..), Element, Element')
 import Deku.Rendered (RootDOMElement(..))
 import FRP.Behavior (sample_)
-import FRP.Event (Event, keepLatest)
+import FRP.Event (Event, fold, keepLatest)
 import Web.DOM as Web.DOM
 
 ----
@@ -46,8 +47,9 @@ unsafeSetText
   -> String
   -> Event String
   -> Element' dom engine
-unsafeSetText (DOMInterpret { setText }) id txt = F.map
-  (setText <<< { id, text: _ }) txt
+unsafeSetText (DOMInterpret { setText }) id txt = map
+  (setText <<< { id, text: _ })
+  txt
 
 unsafeSetAttribute
   :: forall element dom engine
@@ -55,8 +57,10 @@ unsafeSetAttribute
   -> String
   -> Event (Attribute element)
   -> Element' dom engine
-unsafeSetAttribute (DOMInterpret { setAttribute }) id atts = F.map
-  (setAttribute <<< (\{ key, value} -> { id, key, value  }) <<< unsafeUnAttribute)
+unsafeSetAttribute (DOMInterpret { setAttribute }) id atts = map
+  ( setAttribute <<< (\{ key, value } -> { id, key, value }) <<<
+      unsafeUnAttribute
+  )
   (atts)
 
 elementify
@@ -71,7 +75,7 @@ elementify tag atts children parent di@(DOMInterpret { ids }) = keepLatest
         [ pure (unsafeElement di me parent tag)
         , unsafeSetAttribute di me atts
         ]
-          <> (F.map (\kid -> kid me di) children)
+          <> (map (\kid -> kid me di) children)
   )
 
 text
@@ -98,10 +102,29 @@ deku
   -> Array (Element dom engine)
   -> DOMInterpret dom engine
   -> Event (dom -> engine)
-deku root elts di@(DOMInterpret { ids, makeRoot }) = keepLatest
-  ( (sample_ ids (pure unit)) <#> \me ->
-      foldl (<|>) empty $
-        [ pure (makeRoot { id: me, root: (RootDOMElement root) })
-        ]
-          <> (F.map (\kid -> kid me di) elts)
+deku root elts di@(DOMInterpret { ids, makeRoot, identifyAsTerminus }) =
+  keepLatest
+    ( (sample_ ids (pure unit)) <#> \me ->
+        foldl (<|>) empty $
+          [ pure (makeRoot { id: me, root: (RootDOMElement root) })
+          , pure (identifyAsTerminus { id: me })
+          ]
+            <> (map (\kid -> kid me di) elts)
+    )
+
+{-
+firstThen :: forall a b. Event a -> (a -> Array b) -> (a -> Array b) -> Event b
+firstThen e f s = fix \i -> { input: {false, }, output: }
+-}
+firstThen :: forall a b. Event a -> (a -> Array b) -> (a -> Array b) -> Event b
+firstThen e f s = keepLatest
+  ( map (foldl (<|>) empty)
+      ( (\tf e' -> map pure (if tf then f e' else s e'))
+          <$> map (_ < 0) (fold (\_ x -> (x - 1)) e 1)
+          <*> e
+      )
   )
+
+many :: forall a b. Event a -> (a -> Array b) -> Event b
+many event f = keepLatest
+  (event <#> \e -> foldl (<|>) empty (map pure (f e)))

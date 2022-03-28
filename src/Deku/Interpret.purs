@@ -47,6 +47,11 @@ foreign import makeText_
   -> FFIDOMSnapshot
   -> Effect Unit
 
+foreign import identifyAsTerminus_
+  :: R.IdentifyAsTerminus
+  -> FFIDOMSnapshot
+  -> Effect Unit
+
 foreign import makeSubgraph_
   :: forall index env push scene
    . String
@@ -92,26 +97,14 @@ effectfulDOMInterpret = DOMInterpret
   , makeElement: makeElement_
   , makeRoot: makeRoot_
   , makeText: makeText_
+  , identifyAsTerminus: identifyAsTerminus_
   , makeSubgraph: \{ id, parent, scenes } dom ->
-      {-( index
-       -> (push -> Effect Unit)
-       -> Event (Either env push)
-       -> Element dom engine
-     )
-  -> ( Int
-       -> index
-       -> Effect Unit
-            --{ push :: Either env push -> Effect Unit
-            --, event :: Event (FFIDOMSnapshot -> Effect Unit)
-            --, unsubscribe :: Effect Unit
-            }
-     )-}
       flip (makeSubgraph_ id scenes) dom \pos index ->
         do
           evtL <- create
           evtR <- create
           let event = map Left evtL.event <|> map Right evtR.event
-          let actualized = scenes index evtR.push event parent effectfulDOMInterpret
+          let actualized = pure (identifyAsTerminus_ { id: parent }) <|> scenes index evtR.push event parent effectfulDOMInterpret
           pure actualized
   , setAttribute: setAttribute_
   , setText: setText_

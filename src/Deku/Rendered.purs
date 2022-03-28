@@ -62,6 +62,7 @@ instance Ord RootDOMElement where
 instance showRootDOMElement :: Show RootDOMElement where
   show _ = "<root>"
 
+type IdentifyAsTerminus = { id :: String }
 type MakeElement =
   { id :: String
   , tag :: String
@@ -97,6 +98,7 @@ type Instruction' =
   , makeText :: MakeText
   , makeRoot :: MakeRoot
   , makeSubgraph :: MakeSubgraph
+  , identifyAsTerminus :: IdentifyAsTerminus
   , setAttribute :: SetAttribute
   , setText :: SetText
   , setSubgraph :: SetSubgraph
@@ -110,6 +112,7 @@ instructionWeight (Instruction v) = v # match
   { makeRoot: const 2
   , makeElement: const 2
   , makeText: const 2
+  , identifyAsTerminus: const 0
   , makeSubgraph: const 3
   , setAttribute: const 6
   , setText: const 6
@@ -122,6 +125,7 @@ instructionId (Instruction v) = v # match
   { makeElement: _.id >>> Just
   , makeText: _.id >>> Just
   , makeRoot: _.id >>> Just
+  , identifyAsTerminus: _.id >>> Just
   , makeSubgraph: _.id >>> Just
   , setAttribute: _.id >>> Just
   , setText: _.id >>> Just
@@ -156,6 +160,9 @@ iMakeText = Instruction <<< inj (Proxy :: Proxy "makeText")
 
 iMakeElement :: MakeElement -> Instruction
 iMakeElement = Instruction <<< inj (Proxy :: Proxy "makeElement")
+
+iIdentifyAsTerminus :: IdentifyAsTerminus -> Instruction
+iIdentifyAsTerminus = Instruction <<< inj (Proxy :: Proxy "identifyAsTerminus")
 
 iMakeSubgraph :: MakeSubgraph -> Instruction
 iMakeSubgraph = Instruction <<< inj (Proxy :: Proxy "makeSubgraph")
