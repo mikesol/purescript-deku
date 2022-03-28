@@ -104,7 +104,7 @@ main =
                     /\ D.p []
                       ( D.text
                           """Deku encodes the DOM using records. The functions """
-                          @@ D.code [] (S.text "detup")
+                          @@ D.code [] (S.text "@@")
                           /\ D.text
                             ""","""
                           /\ D.code [] (S.text "vex")
@@ -150,15 +150,15 @@ main =
                     /\ D.h2 [] (S.text "De-tupling")
                     /\ D.p []
                       ( D.text "Next up is "
-                          @@ D.code [] (S.text "detup")
+                          @@ D.code [] (S.text "@@")
                           /\ D.text ". "
-                          /\ D.code [] (S.text "detup")
+                          /\ D.code [] (S.text "@@")
                           /\ D.text
                             " takes a \"list\" of tuples terminated by "
                           /\ D.code [] (S.text "unit")
                           /\ D.text
                             " and turns them into a record with keys that go from 0 to however many elements are in the tuple. This feels a lot more like working with arrays in Halogen and is fast to type. As I'm writing this, I'm using "
-                          /\ D.code [] (S.text "detup")
+                          /\ D.code [] (S.text "@@")
                           /\ D.text "(check the source code)."
                           /\ unit
                       )
