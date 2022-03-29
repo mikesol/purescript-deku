@@ -7,17 +7,17 @@ import Affjax.ResponseFormat as ResponseFormat
 import Data.Argonaut.Core (stringifyWithIndent)
 import Data.Either (Either(..))
 import Data.HTTP.Method (Method(..))
-import Deku.Toplevel (io)
 import Data.Tuple.Nested ((/\))
 import Deku.Change (change)
 import Deku.Graph.Attribute (Cb, cb)
-import Deku.Graph.DOM (myNameIs, myNameIs', (:=))
+import Deku.Graph.DOM ((:=), (@~))
 import Deku.Graph.DOM as D
 import Deku.Graph.DOM.Shorthand as S
+import Deku.Toplevel (io)
+import Deku.Util (p)
 import Effect (Effect)
 import Effect.Aff (launchAff_)
 import Effect.Class (liftEffect)
-import Type.Proxy (Proxy(..))
 
 clickCb :: (Either Unit String -> Effect Unit) -> Cb
 clickCb push = cb
@@ -45,20 +45,20 @@ main :: Effect Unit
 main = io
   { i: \push ->
       { div1: D.div []
-          { button: myNameIs (Proxy :: _ "bttn") $ D.button
+          ( (p :: _ "bttn") @~ D.button
               [ D.OnClick := clickCb push ]
-              ( myNameIs' (Proxy :: _ "textToShow")
+              ( (p :: _ "textToShow") @~
                   (D.text "Click to get some random user data.")
               )
-          }
+          )
       , div2: D.div [ D.Style := "display: none;" ]
           (S.pre [] (S.code [] (S.text "")))
       } /\ (push /\ false)
   , o: \e (push /\ started) -> case e of
       Left _ ->
         change
-          { "textToShow": "Loading..."
-          , "bttn":
+          { textToShow: "Loading..."
+          , bttn:
               D.button'attr [ D.OnClick := cb (const $ pure unit) ]
           } $> (push /\ started)
       Right str ->
@@ -70,9 +70,9 @@ main = io
           )
           *> change
             { "root.div2.pre.code.t": str
-            , "textToShow":
+            , textToShow:
                 "Click to get some random user data."
-            , "bttn":
+            , bttn:
                 D.button'attr [ D.OnClick := clickCb push ]
             }
           $> (push /\ true)
