@@ -69,10 +69,10 @@ main =
               [ D.OnClick :=
                   cb (const $ push ButtonClicked)
               ]
-              (p :: _ "clickText" @~ D.text "Click")
+              ((p :: _ "clickText") @~ D.text "Click")
               @@ D.div
                 []
-                (p :: _ "val1Text" @~ D.text "Val: 0")
+                ((p :: _ "val1Text") @~ D.text "Val: 0")
               /\ unit
           )
           @@ D.div []
@@ -89,7 +89,7 @@ main =
                 ]
                 {}
                 @@ D.div []
-                  (p :: _ "val2Text" @~ D.text "Val: 50")
+                  ((p :: _ "val2Text") @~ D.text "Val: 50")
                 /\ unit
             )
           /\ unit
