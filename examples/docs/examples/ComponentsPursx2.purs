@@ -2,7 +2,6 @@ module Deku.Example.Docs.Example.ComponentPursx2 where
 
 import Prelude
 
-import Deku.Toplevel ((🚀))
 import Deku.Change (change)
 import Deku.Control.Functions (u)
 import Deku.Graph.Attribute (cb)
@@ -10,15 +9,11 @@ import Deku.Graph.DOM ((:=))
 import Deku.Graph.DOM as D
 import Deku.Graph.DOM.Shorthand as S
 import Deku.Pursx ((~!))
+import Deku.Toplevel ((🚀))
+import Deku.Util (p)
 import Effect (Effect)
-import Type.Proxy (Proxy(..))
-main :: Effect Unit
-main =
-  ( \push ->
-      ( u $
-          ( Proxy
-              :: _
-                """
+
+mydom = p :: _ """
       <div>
         <button>I do nothing</button>
         <ul>
@@ -35,13 +30,21 @@ main =
         <div><div></div><div><input type="range"/></div></div>
       </div>
       """
-          ) ~!
+
+main :: Effect Unit
+main =
+  ( \push ->
+      ( u $
+          mydom ~!
             { myli: D.li'attr
                 [ D.Style := "background-color:rgb(200,240,210);" ]
-            , somethingNew: D.button [ D.OnClick := cb (const $ push unit) ]
-                (S.text "I was dynamically inserted")
+            , somethingNew:
+                D.button [ D.OnClick := cb (const $ push unit) ]
+                  (S.text "I was dynamically inserted")
             }
       )
   ) 🚀 \_ _ ->
     change
-      { "root.psx.somethingNew.t": "Thanks for clicking me!" }
+      { "root.psx.somethingNew.t":
+        "Thanks for clicking me!"
+      }
