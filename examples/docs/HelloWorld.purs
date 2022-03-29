@@ -48,15 +48,7 @@ main = (const $ u $ (S.text "Hello world")) 🚀 freeze
                     )
 
                   /\ D.p []
-                    ( D.text
-                        "Yikes, that's a lot of imports! But the actual Deku bit is pretty tame. Let's tackle it starting at the beginning of the "
-
-                        @@ (D.code [] (S.text "main"))
-                        /\ (D.text " function.")
-                        /\ unit
-                    )
-                  /\ D.p []
-                    (S.text "Oh, and here's what it produces:")
+                    (S.text "And here's what it produces:")
                   /\ D.blockquote []
                     (S.text "Hello world")
                   /\ D.p []
@@ -67,115 +59,25 @@ main = (const $ u $ (S.text "Hello world")) 🚀 freeze
                         """Deku sets up shop in an arbitrary DOM component. In the """
                         @@ D.code [] (S.text "main")
                         /\ D.text
-                          """ function above, we grab a component from our page — in this case, the body. We'll use this as the root of our component tree."""
-                        /\ unit
-                    )
-                  /\ D.h2 [] (S.text "The run function")
-                  /\ D.p []
-                    ( D.span []
-                        ( S.text
-                            """Deku relieves heavily on """
-                        )
-                        @@ D.a
-                          [ D.Href :=
-                              "https://wiki.haskell.org/Functional_Reactive_Programming"
-                          ]
-                          ( S.text "Functional Reactive Programming"
-                          )
-                        /\ D.span []
-                          ( S.text
-                              """, or FRP, patterns. This means that everything runs on """
-                          )
-                        /\ D.a
-                          [ D.Href :=
-                              "https://wiki.haskell.org/Functional_Reactive_Programming"
-                          ]
-                          ( S.text "Events"
-                          )
-                        /\ D.span []
-                          ( S.text
-                              """ and """
-                          )
-                        /\ D.a
-                          [ D.Href :=
-                              "https://wiki.haskell.org/Functional_Reactive_Programming"
-                          ]
-                          ( S.text "Behaviors"
-                          )
-                        /\ D.span []
-                          ( S.text
-                              """. The """
-                          )
-                        /\ D.code []
-                          (S.text "run")
-                        /\ D.span []
-                          ( S.text
-                              """ function creates an event, and you subscribe to that event in order to get an outcome or residual. In this case, we're ignoring the residual (which is just """
-                          )
-                        /\ D.code []
-                          (S.text "unit")
-                        /\ D.span []
-                          ( S.text """) at the end of the """
-                          )
-                        /\ D.code []
-                          (S.text "main")
-                        /\ D.span []
-                          ( S.text """ function by calling """
-                          )
-                        /\ D.code []
-                          (S.text "_.res >>> pure")
-                        /\ D.span [] (S.text ".")
-
-                        /\ unit
-                    )
-                  /\ D.p []
-                    ( D.text
-                        "Events can trigger aribtrary side effects on their way to a subscriber, and the one produced by "
-                        @@ D.code []
-                          (S.text "run")
-                        /\ D.span []
-                          ( S.text
-                              """ is no different. Here, the side effect is creating a beautiful webpage like the one you're reading now. Or, if you're following along by typing out the example, it will create "Hello world" in the body of your page."""
-                          )
-                        /\ unit
-                    )
-                  /\ D.p []
-                    ( D.text "The first few arguments to "
-                        @@ (D.code [] (S.text "run"))
-                        /\
-                          ( D.text
-                              " are not important at this point. Know just that you have to call "
-                          )
-                        /\ (D.code [] (S.text "run"))
-                        /\
-                          ( D.text
-                              " to get your webpage displayed on the screen."
-                          )
+                          """ function above, we use 🚀 to automatically insert our Deku tree into the body."""
                         /\ unit
                     )
                   /\ D.h2 [] (S.text "Our scene")
                   /\ D.p []
                     ( D.text
-                        "The last argument to "
-                        @@ (D.code [] (S.text "run"))
+                        "Our scene is comprised of two components - a bit of text, created by "
+                        @@ (D.code [] (S.text "const $ u $ (S.text \"Hello world\")"))
                         /\
                           ( D.text
-                              " is the scene we are going to draw. The scene starts by creating the text \"Hello world\" in the root element and is then frozen, meaning that it can't change."
-                          )
+                              ", and a directive "
+                          ) /\ (D.code [] (S.text "freeze")) /\ D.text "to, well, freeze the DOM, meaning that there will be no subsequent changes."
                         /\ unit
                     )
                   /\ D.p []
-                    ( S.text
-                        "The scene-creation pattern above is the same one you'll see in all the examples to follow. In Deku, changes to DOMs (including no-ops) are streamed, which means that every time we request a change-set to a DOM, Deku has to produce one. By calling freeze, we're not saying that we can't demand a change-set anymore, but rather, we're saying that Deku will always produce an empty change-set when asked. As you become more comfortable with Deku, you'll realize that it's just one big generator of streams of DOM diffs."
-                    )
-                  /\ D.p []
                     ( D.text
-                        "That's all you need to know at this point. We'll go over what "
-                        @@ D.code [] (S.text "u")
-                        /\ D.text " and "
-                        /\ D.code [] (S.text "@>")
-                        /\ D.text
-                          " do later in this guide. For now, the important bit is to get up and running. We'll build off of this in the following sections."
+                        "That's all you need to know at this point. We'll see lots of examples that use "
+                        @@ D.code [] (S.text "🚀")
+                        /\ D.text " to create scenes, and they'll get progressively more complex as the guide goes on."
                         /\ unit
                     )
                   /\ D.h2 [] (S.text "Next steps")
