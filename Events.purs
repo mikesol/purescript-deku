@@ -99,14 +99,12 @@ main =
         c = nclicks + 1
       in
         change
-          { "val1Text": "Val: " <> show c
-          , "clickText":
+          { val1Text: "Val: " <> show c
+          , clickText:
               if mod c 2 == 0 then "Click" else "me"
           } $> c
     SliderMoved n ->
-      change
-        { "val2Text": "Val: " <> show n
-        } $> nclicks
+      change { val2Text: "Val: " <> show n } $> nclicks
 """
                               )
                           )
