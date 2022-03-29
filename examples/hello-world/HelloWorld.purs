@@ -2,16 +2,19 @@ module Deku.Example.HelloWorld where
 
 import Prelude
 
-import Data.Foldable (for_)
+import Control.Alt ((<|>))
+import Control.Plus (empty)
+import Data.Foldable (for_, oneOfMap)
+import Data.Maybe (Maybe(..))
+import Data.Tuple (Tuple(..), snd)
 import Deku.Attribute (cb, (:=))
-import Deku.Control (deku, firstThen)
+import Deku.Control (deku)
 import Deku.Control as C
 import Deku.Core (Element)
 import Deku.DOM as D
 import Deku.Interpret (FFIDOMSnapshot, effectfulDOMInterpret, makeFFIDOMSnapshot)
 import Effect (Effect)
-import FRP.Event (Event, create, subscribe)
-import FRP.Event (create)
+import FRP.Event (Event, filterMap, fix, keepLatest, sampleOn, subscribe, create)
 import Web.HTML (window)
 import Web.HTML.HTMLDocument (body)
 import Web.HTML.HTMLElement (toElement)
@@ -22,37 +25,30 @@ scene
   -> Event Boolean
   -> Array (Element FFIDOMSnapshot (Effect Unit))
 scene push event =
-  [ C.text (event <#> if _ then "click" else "kcilc")
-  , D.a
-      ( firstThen event
-          ( \e ->
-              [  D.Style := "background-color: blue;", D.Href := "#"
-
-              ] <> thn e
+  [ D.div empty [ C.text (pure "Stops after 3 clicks") ]
+  , C.text (event <#> if _ then "click " else "kcilc ")
+  , D.button
+      ( fix
+          ( \i ->
+              let
+                output = sampleOn (i <|> pure 0) (Tuple <$> event)
+              in
+                { input: map (add 1 <<< snd) output, output }
           )
-          thn
+          # filterMap
+            (\(Tuple x y) -> if y < 4 then Just x else Nothing)
+          # map
+            ( \e ->
+                oneOfMap pure
+                  [ D.Style := "background-color: rgb(160,234,203);"
+                  , D.OnClick := cb (const $ push (not e))
+                  ]
+
+            )
+          # keepLatest
       )
       [ C.text_ "me" ]
   ]
-  where
-  thn = \e ->
-    [ D.OnClick := cb (const $ push (not e))
-    , D.Style := "background-color: red;"
-    ]
-{-
-=
-  elt
-    { start: \e ->
-        d @@
-          (@"txt" (D.text "click"))
-          (@"click" (D.a $ [ D.Href := "#" ] <> thn e))
-          (D.text "me")
-      loop: \e -> change
-        { txt: if _ then "click" else "kcilc"
-        , click: thn e
-        }
-    }
--}
 
 main :: Effect Unit
 main = do
