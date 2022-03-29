@@ -89,7 +89,9 @@ main =
       )
   ) 🚀 \_ _ ->
     change
-      { "root.psx.somethingNew.t": "Thanks for clicking me!" }
+      { "root.psx.somethingNew.t":
+        "Thanks for clicking me!"
+      }
 """
                               )
                           )
