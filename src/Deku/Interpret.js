@@ -11,34 +11,20 @@ var makeid = function (length) {
 
 var connectXToY_ = function (x) {
 	return function (y) {
-		return function (stateX) {
-			return function (stateY) {
-				return function () {
-					stateY.units[y].main.appendChild(stateX.units[x].main);
-				};
+		return function (state) {
+			return function () {
+				state.units[y].main.appendChild(state.units[x].main);
 			};
 		};
 	};
 };
 
-exports.connectXToY_ = connectXToY_;
 var disconnectXFromY_ = function (x) {
 	return function (y) {
-		return function (stateX) {
-			return function (stateY) {
-				return function () {
-					stateY.units[y].main.removeChild(stateX.units[x].main);
-				};
+		return function (state) {
+			return function () {
+				state.units[y].main.removeChild(state.units[x].main);
 			};
-		};
-	};
-};
-exports.disconnectXFromY_ = disconnectXFromY_;
-exports.destroyUnit_ = function (a) {
-	return function (state) {
-		return function () {
-			var ptr = a.id;
-			delete state.units[ptr];
 		};
 	};
 };
@@ -49,32 +35,32 @@ exports.renderDOM = function (arrayToApply) {
 		}
 	};
 };
-var makeElement_ = function (eltAlreadyExists) {
-	return function (a) {
-		return function (state) {
-			return function () {
-				var ptr = a.id;
-				state.units[ptr] = {
-					listeners: {},
-					main: eltAlreadyExists
-						? eltAlreadyExists
-						: document.createElement(a.tag),
-				};
-				connectXToY_(ptr)(a.parent)(state)(state)();
+var makeElement_ = function (a) {
+	return function (state) {
+		return function () {
+			var ptr = a.id;
+			state.units[ptr] = {
+				listeners: {},
+				parent: a.parent,
+				main: document.createElement(a.tag),
 			};
+			if (a.parent === state.terminus) {
+				state.terminalPtrs.push(a.id);
+			}
+			connectXToY_(ptr)(a.parent)(state)();
 		};
 	};
 };
-exports.makeElement_ = makeElement_(undefined);
+exports.makeElement_ = makeElement_;
 exports.makeText_ = function (a) {
 	return function (state) {
 		return function () {
 			var ptr = a.id;
 			state.units[ptr] = {
-				main: document.createElement("span"),
+				main: document.createTextNode(""),
+				parent: a.parent,
 			};
-			state.units[ptr].main.setAttribute("style", "white-space: pre-wrap;");
-			connectXToY_(ptr)(a.parent)(state)(state)();
+			connectXToY_(ptr)(a.parent)(state)();
 		};
 	};
 };
@@ -82,6 +68,7 @@ exports.makeFFIDOMSnapshot = function () {
 	return {
 		units: {},
 		unqidfr: makeid(10),
+		terminalPtrs: [],
 	};
 };
 exports.setAttribute_ = function (a) {
@@ -113,198 +100,93 @@ exports.setText_ = function (a) {
 	return function (state) {
 		return function () {
 			var ptr = a.id;
-			state.units[ptr].main.innerHTML = a.text
-				.replace(/\n/g, "<br>")
-				.replace(/ /g, "&nbsp;");
+			state.units[ptr].main.nodeValue = a.text.replace(/\n/g, "<br>");
 		};
 	};
 };
-var doSortingOnSubgraphs = function (unit, sorting) {
-	for (var i = 0; i < sorting.length; i++) {
-		var sl = unit.children[sorting[i][0]].terminalPtrs.length;
-		for (var k = 0; k < sl; k++) {
-			unit.main.prepend(
-				unit.children[sorting[i][0]].units[
-					unit.children[sorting[i][0]].terminalPtrs[sl - k - 1]
-				].main
-			);
-		}
-	}
-};
 
-// foreign i
 exports.makeSubgraph_ = function (ptr) {
-	return function (sceneM) {
-		return function (funkyFx) {
+	return function (parent) {
+		return function (sceneM) {
 			return function (state) {
 				return function () {
 					var children = {};
-					var scenes = {};
-					var funk = {};
+					var pushers = {};
 					var unsu = {};
 					state.units[ptr] = {
+						parent: parent,
 						sceneM: sceneM,
-						main: document.createElement("div"),
-						funkyFx: funkyFx,
-						isSubgraph: true,
-						scenes: scenes,
+						pushers: pushers,
 						children: children,
-						funk: funk,
 						unsu: unsu,
 					};
-					state.units[ptr].main.setAttribute("style", "display:contents;");
 				};
 			};
 		};
 	};
 };
-exports.identifyAsTerminus_ = function (a) {
-	return function (state) {
-		return function () {
-			state.terminus = a.id;
-		};
-	};
-};
-// mport makeSubgraph_
-//   :: forall index env push scene
-//    . String
-//   -- this is the generic function for how to interpret a scene
-//   -> ( index
-//        -> (push -> Effect Unit)
-//        -> Event (Either env push)
-//        -> Element FFIDOMSnapshot (Effect Unit)
-//      )
-//   -> ( Int
-//        -> index
-//        -> Effect (Element' FFIDOMSnapshot (Effect Unit))
-//      )
-//   -> FFIDOMSnapshot
-//   -> Effect Unit
 
 var setSubgraph_ = function (ptr) {
 	return function (envs) {
 		return function (state) {
 			return function () {
-				var scenes = state.units[ptr].scenes;
 				var children = state.units[ptr].children;
-				var funk = state.units[ptr].funk;
 				var unsu = state.units[ptr].unsu;
+				var pushers = state.units[ptr].pushers;
 				var needsConnecting = [];
 				for (var i = 0; i < envs.length; i++) {
 					var j = envs[i].pos;
-					if (envs[i].env === null && scenes[j] === undefined) {
-					} else if (envs[i].env !== null && scenes[j] !== undefined) {
-					} else if (envs[i].env !== null && scenes[j] === undefined) {
+					if (envs[i].env === null && unsu[j] === undefined) {
+					} else if (envs[i].env !== null && unsu[j] !== undefined) {
+					} else if (envs[i].env !== null && unsu[j] === undefined) {
 						children[j] = {
 							units: {},
 							unqidfr: makeid(10),
-							parent: state,
+							parent: ptr,
+							terminalPtrs: [],
 						};
-						scenes[j] = state.units[ptr].sceneM(envs[i].index);
-						var funkworthy = state.units[ptr].funkyFx(j)(envs[i].index)();
-						funk[j] = funkworthy.loop;
-						unsu[j] = funkworthy.unsubscribe;
+						children[j].units[state.units[ptr].parent] =
+							state.units[state.units[ptr].parent];
+						var sg = state.units[ptr].sceneM(envs[i].index)();
+						unsu[j] = sg.actualized(
+							(
+								(jIs) => (instr) => () =>
+									instr(children[jIs])()
+							)(j)
+						)();
+						pushers[j] = sg.pusher;
 						needsConnecting.push(j);
 					} else {
 						for (var k = 0; k < children[j].terminalPtrs.length; k++) {
-							disconnectXFromY_(children[j].terminalPtrs[k])(ptr)(children[j])(
-								state
-							)();
+							disconnectXFromY_(children[j].terminalPtrs[k])(
+								state.units[ptr].parent
+							)(children[j])();
 						}
 						// unsubscribe
 						unsu[j]();
 						// delete unused
-						delete scenes[j];
 						delete children[j];
-						delete funk[j];
 						delete unsu[j];
 					}
 				}
-				var sortable = [];
-				var needsSorting = false;
-				for (var m = 0; m < envs.length; m++) {
-					if (envs[m].env === null) {
+				for (var i = 0; i < envs.length; i++) {
+					if (envs[i].env === null) {
 						continue;
 					}
-					var i = envs[m].pos;
-					var applied = funk[i](envs[m].env)(scenes[i]);
-					for (var j = 0; j < applied.instructions.length; j++) {
-						// thunk
-						applied.instructions[j](children[i])();
-					}
-					needsSorting = needsSorting || applied.forOrdering !== 0;
-					sortable.push([i, applied.forOrdering]);
-					scenes[i] = applied.nextScene;
+					pushers[envs[i].pos](envs[i].env)();
 				}
-				if (needsSorting) {
-					sortable.sort((a, b) => b[1] - a[1]);
-					doSortingOnSubgraphs(state.units[ptr], sortable);
-				} else {
-					for (var i = 0; i < needsConnecting.length; i++) {
-						var j = needsConnecting[i];
-						for (var k = 0; k < children[j].terminalPtrs.length; k++) {
-							connectXToY_(children[j].terminalPtrs[k])(ptr)(children[j])(
-								state
-							)();
-						}
+				for (var i = 0; i < needsConnecting.length; i++) {
+					var j = needsConnecting[i];
+					for (var k = 0; k < children[j].terminalPtrs.length; k++) {
+						connectXToY_(children[j].terminalPtrs[k])(state.units[ptr].parent)(
+							children[j]
+						)();
 					}
 				}
 			};
 		};
 	};
 };
-var makePursx_ = function ($massiveCreate) {
-	return function (a) {
-		return function (state) {
-			return function () {
-				var ptr = a.id;
-				var html = a.html;
-				var verb = a.verb;
-				var r = a.r;
-				var entries = Object.entries(r);
-				for (var i = 0; i < entries.length; i++) {
-					var key = entries[i][0];
-					if (entries[i][1] instanceof Array) {
-						// it is an attribute
-						html = html.replace(
-							verb + key + verb,
-							"data-deku-attr-internal=" + '"' + key + '"'
-						);
-					} else {
-						html = html.replace(
-							verb + key + verb,
-							'<span style="display:contents;" data-deku-elt-internal=' +
-								'"' +
-								key +
-								'"></span>'
-						);
-					}
-				}
-				var tmp = document.createElement("div");
-				tmp.innerHTML = html.trim();
-				state.units[ptr] = {
-					listeners: {},
-					main: tmp.firstChild,
-				};
-				tmp.querySelectorAll("[data-deku-attr-internal]").forEach(function (e) {
-					var key = e.getAttribute("data-deku-attr-internal");
-					makeElement_(e)({ id: ptr + "." + key, attributes: r[key] })(state)();
-				});
-				tmp.querySelectorAll("[data-deku-elt-internal]").forEach(function (e) {
-					var key = e.getAttribute("data-deku-elt-internal");
-					var toCreate = {};
-					toCreate[key] = r[key];
-					// todo: rename element to root?
-					$massiveCreate(ptr)({
-						toCreate: toCreate,
-					})(state)();
-					e.appendChild(state.units[ptr + "." + key].main);
-				});
-			};
-		};
-	};
-};
-exports.makePursx_ = makePursx_;
 exports.setSubgraph_ = setSubgraph_;
 exports.sendSubgraphToTop_ = function (a) {
 	return function (state) {

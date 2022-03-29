@@ -3,20 +3,21 @@ module Deku.Control
   , text
   , text_
   , many
-  , firstThen
   , deku
+  , flatten
   ) where
 
 import Prelude
 
 import Control.Alt ((<|>))
 import Control.Plus (empty)
+import Data.Distributive (distribute)
 import Data.Foldable (foldl)
 import Deku.Attribute (Attribute, unsafeUnAttribute)
 import Deku.Core (DOMInterpret(..), Element, Element')
 import Deku.Rendered (RootDOMElement(..))
 import FRP.Behavior (sample_)
-import FRP.Event (Event, fold, keepLatest)
+import FRP.Event (Event, keepLatest)
 import Web.DOM as Web.DOM
 
 ----
@@ -102,29 +103,18 @@ deku
   -> Array (Element dom engine)
   -> DOMInterpret dom engine
   -> Event (dom -> engine)
-deku root elts di@(DOMInterpret { ids, makeRoot, identifyAsTerminus }) =
+deku root elts di@(DOMInterpret { ids, makeRoot }) =
   keepLatest
     ( (sample_ ids (pure unit)) <#> \me ->
         foldl (<|>) empty $
           [ pure (makeRoot { id: me, root: (RootDOMElement root) })
-          , pure (identifyAsTerminus { id: me })
           ]
             <> (map (\kid -> kid me di) elts)
     )
 
-{-
-firstThen :: forall a b. Event a -> (a -> Array b) -> (a -> Array b) -> Event b
-firstThen e f s = fix \i -> { input: {false, }, output: }
--}
-firstThen :: forall a b. Event a -> (a -> Array b) -> (a -> Array b) -> Event b
-firstThen e f s = keepLatest
-  ( map (foldl (<|>) empty)
-      ( (\tf e' -> map pure (if tf then f e' else s e'))
-          <$> map (_ < 0) (fold (\_ x -> (x - 1)) e 1)
-          <*> e
-      )
-  )
-
 many :: forall a b. Event a -> (a -> Array b) -> Event b
 many event f = keepLatest
   (event <#> \e -> foldl (<|>) empty (map pure (f e)))
+
+flatten :: forall dom engine. Array (Element dom engine) -> Element dom engine
+flatten a = (map <<< map) (foldl (<|>) empty) (map distribute (distribute a))

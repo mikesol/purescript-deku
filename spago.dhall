@@ -5,6 +5,7 @@
   , "control"
   , "datetime"
   , "debug"
+  , "distributive"
   , "effect"
   , "either"
   , "event"

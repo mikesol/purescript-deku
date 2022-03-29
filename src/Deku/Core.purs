@@ -45,7 +45,6 @@ type SetSubgraphInput index env =
 
 newtype DOMInterpret dom engine = DOMInterpret
   { ids :: Behavior String
-  , identifyAsTerminus :: R.IdentifyAsTerminus -> dom -> engine
   , makeRoot :: R.MakeRoot -> dom -> engine
   , makeElement :: R.MakeElement -> dom -> engine
   , makeText :: R.MakeText -> dom -> engine
@@ -55,7 +54,6 @@ newtype DOMInterpret dom engine = DOMInterpret
       -> dom
       -> engine
   , setAttribute :: R.SetAttribute -> dom -> engine
-  -- | Set subgraph.
   , setSubgraph ::
       forall index env
        . SetSubgraphInput index env
