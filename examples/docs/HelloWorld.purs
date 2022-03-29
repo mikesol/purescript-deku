@@ -41,7 +41,7 @@ import Deku.Toplevel ((🚀))
 import Effect (Effect)
 
 main :: Effect Unit
-main = (const $ u $ (S.text "Hello world")) 🚀 freeze
+main = (const $ u $ S.text "Hello world") 🚀 freeze
 """
                             )
                         )
