@@ -20,10 +20,12 @@ jobs:
         run: npm t
       - name: Build qc
         run: npx spago -x examples.dhall bundle-app --main Deku.Example.Docs --to examples/docs/index.js
-      - name: Performance test
-        run: npm run test:performance
+      #- name: Performance test
+      #  run: npm run test:performance
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GH_TOKEN }}
           publish_dir: ./examples/docs
+      - name: deploy to netlify
+        run: NETLIFY_SITE_ID=${{ secrets.NETLIFY_SITE_ID }} NETLIFY_AUTH_TOKEN=${{ secrets.NETLIFY_AUTH_TOKEN }} netlify deploy --dir=./examples/docs --prod

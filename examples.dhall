@@ -12,5 +12,6 @@ in      conf
               , "argonaut-core"
               , "deku-toplevel"
               , "http-methods"
+              , "deku-toplevel"
               ]
         }

@@ -90,6 +90,8 @@ exports.setAttribute_ = function (a) {
 			} else {
 				if (state.units[ptr].main.tagName === "INPUT" && a.key === "value") {
 					state.units[ptr].main.value = avv;
+				} else if (state.units[ptr].main.tagName === "INPUT" && a.key === "checked") {
+					state.units[ptr].main.checked = avv === "true" ;
 				} else {
 					state.units[ptr].main.setAttribute(a.key, avv);
 				}
