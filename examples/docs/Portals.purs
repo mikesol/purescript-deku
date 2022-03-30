@@ -82,8 +82,16 @@ px =  Proxy :: Proxy """<div>
 
   <blockquote> ~result~ </blockquote>
 
-  <h2>TODO: document more</h2>
+  <h2>The anatomy of a portal</h2>
 
+  <p>The <code>portal</code> function takes two arguments</p>
+
+  <ul>
+    <li><code>element</code> - the element that comprises the portal</li>
+    <li><code>continuation</code> - a function yielding element that potentially uses the portal</li>
+  </ul>
+  <p>The element yielded by the continuation will be displayed on the screen.</p>
+  <p>The continuation takes one argument: an <code>Event Boolean</code> that indicates whether or not to display the portal. The portal will jump to whichever place in the DOM yielded true most recently. Be careful - you must send at least one true event to see your portal!</p>
   <h2>Parting shot</h2>
   <p>Thanks for checking out Deku! I had a blast writing it, I hope you have fun using it too 😊</p>
 </div>"""
