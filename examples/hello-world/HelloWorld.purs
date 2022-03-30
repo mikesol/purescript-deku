@@ -14,12 +14,16 @@ import Deku.Core (Element)
 import Deku.DOM as D
 import Deku.Interpret (FFIDOMSnapshot, effectfulDOMInterpret, makeFFIDOMSnapshot)
 import Effect (Effect)
-import FRP.Event (Event, filterMap, fix, keepLatest, sampleOn, subscribe, create)
+import FRP.Event (Event, create, filterMap, fix, keepLatest, mapAccum, sampleOn, subscribe)
 import Web.HTML (window)
 import Web.HTML.HTMLDocument (body)
 import Web.HTML.HTMLElement (toElement)
 import Web.HTML.Window (document)
 
+counter :: forall a. Event a → Event (Tuple a Int)
+counter event = mapAccum f event 0
+  where
+  f a b = Tuple (b + 1) (Tuple a b)
 scene
   :: (Boolean -> Effect Unit)
   -> Event Boolean
@@ -28,13 +32,7 @@ scene push event =
   [ D.div empty [ C.text (pure "Stops after 3 clicks") ]
   , C.text (event <#> if _ then "click " else "kcilc ")
   , D.button
-      ( fix
-          ( \i ->
-              let
-                output = sampleOn (i <|> pure 0) (Tuple <$> event)
-              in
-                { input: map (add 1 <<< snd) output, output }
-          )
+      ( counter event
           # filterMap
             (\(Tuple x y) -> if y < 4 then Just x else Nothing)
           # map

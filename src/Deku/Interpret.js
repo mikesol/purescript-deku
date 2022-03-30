@@ -126,72 +126,84 @@ exports.makeSubgraph_ = function (ptr) {
 	};
 };
 
-var setSubgraph_ = function (ptr) {
-	return function (envs) {
-		return function (state) {
-			return function () {
-				var children = state.units[ptr].children;
-				var unsu = state.units[ptr].unsu;
-				var pushers = state.units[ptr].pushers;
-				var needsConnecting = [];
-				for (var i = 0; i < envs.length; i++) {
-					var j = envs[i].pos;
-					if (envs[i].env === null && unsu[j] === undefined) {
-					} else if (envs[i].env !== null && unsu[j] !== undefined) {
-					} else if (envs[i].env !== null && unsu[j] === undefined) {
-						children[j] = {
-							units: {},
-							unqidfr: makeid(10),
-							parent: ptr,
-							terminalPtrs: [],
-						};
-						children[j].units[state.units[ptr].parent] =
-							state.units[state.units[ptr].parent];
-						var sg = state.units[ptr].sceneM(envs[i].index)();
-						unsu[j] = sg.actualized(
-							(
-								(jIs) => (instr) => () =>
-									instr(children[jIs])()
-							)(j)
-						)();
-						pushers[j] = sg.pusher;
-						needsConnecting.push(j);
-					} else {
-						for (var k = 0; k < children[j].terminalPtrs.length; k++) {
-							disconnectXFromY_(children[j].terminalPtrs[k])(
-								state.units[ptr].parent
-							)(children[j])();
-						}
-						// unsubscribe
-						unsu[j]();
-						// delete unused
-						delete children[j];
-						delete unsu[j];
-					}
-				}
-				for (var i = 0; i < envs.length; i++) {
-					if (envs[i].env === null) {
-						continue;
-					}
-					pushers[envs[i].pos](envs[i].env)();
-				}
-				for (var i = 0; i < needsConnecting.length; i++) {
-					var j = needsConnecting[i];
-					for (var k = 0; k < children[j].terminalPtrs.length; k++) {
-						connectXToY_(children[j].terminalPtrs[k])(state.units[ptr].parent)(
-							children[j]
-						)();
-					}
-				}
-			};
+exports.removeSubgraph_ = function (a) {
+	return function (state) {
+		return function () {
+			var ptr = a.id;
+			var j = a.pos;
+			var children = state.units[ptr].children;
+			var unsu = state.units[ptr].unsu;
+			if (children[j] === undefined) {
+				return;
+			}
+			for (var k = 0; k < children[j].terminalPtrs.length; k++) {
+				disconnectXFromY_(children[j].terminalPtrs[k])(state.units[ptr].parent)(
+					children[j]
+				)();
+			}
+			// unsubscribe
+			unsu[j]();
+			// delete unused
+			delete children[j];
+			delete unsu[j];
 		};
 	};
 };
-exports.setSubgraph_ = setSubgraph_;
+
+var insertOrUpdateSubgraph_ = function (a) {
+	return function (state) {
+		return function () {
+			var ptr = a.id;
+			var env = a.env;
+			var j = a.pos;
+			var index = a.index;
+			var children = state.units[ptr].children;
+			var unsu = state.units[ptr].unsu;
+			var pushers = state.units[ptr].pushers;
+			var needsConnecting = false;
+			if (env !== null && unsu[j] === undefined) {
+				children[j] = {
+					units: {},
+					terminus: state.units[ptr].parent,
+					unqidfr: makeid(10),
+					parent: ptr,
+					terminalPtrs: [],
+				};
+				children[j].units[state.units[ptr].parent] =
+					state.units[state.units[ptr].parent];
+				var sg = state.units[ptr].sceneM(index)();
+				unsu[j] = sg.actualized(
+					(
+						(jIs) => (instr) => () =>
+							instr(children[jIs])()
+					)(j)
+				)();
+				pushers[j] = sg.pusher;
+				needsConnecting = true;
+			}
+			pushers[j](env)();
+			if (needsConnecting) {
+				for (var k = 0; k < children[j].terminalPtrs.length; k++) {
+					connectXToY_(children[j].terminalPtrs[k])(state.units[ptr].parent)(
+						children[j]
+					)();
+				}
+			}
+		};
+	};
+};
+exports.insertOrUpdateSubgraph_ = insertOrUpdateSubgraph_;
 exports.sendSubgraphToTop_ = function (a) {
 	return function (state) {
 		return function () {
-			// fill in
+			var child = state.units[a.id].children[a.pos];
+			if (child === undefined) { return }
+			var l = child.terminalPtrs.length;
+			for (var i = 0; i < child.terminalPtrs.length; i++) {
+				state.units[state.units[a.id].parent].main.prepend(
+					child.units[child.terminalPtrs[l - i - 1]].main
+				);
+			}
 		};
 	};
 };

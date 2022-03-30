@@ -4,27 +4,43 @@ import Prelude
 
 import Control.Alt ((<|>))
 import Data.Hashable (class Hashable, hash)
-import Data.Map (Map, toUnfoldable)
-import Data.Maybe (Maybe)
-import Data.Tuple.Nested ((/\))
+import Data.Tuple.Nested (type (/\), (/\))
 import Deku.Core (DOMInterpret(..), Element, Subgraph)
 import FRP.Behavior (sample_)
 import FRP.Event (Event, keepLatest)
 
+data SubgraphAction env
+  = InsertOrUpdate env
+  | SendToTop
+  | Remove
+
 subgraph
   :: forall index env push dom engine
    . Hashable index
-  => Event (Map index (Maybe env))
+  => Event (index /\ SubgraphAction env)
   -> Subgraph index env push dom engine
   -> Element dom engine
-subgraph envs scenes parent (DOMInterpret { makeSubgraph, setSubgraph, ids }) =
+subgraph
+  mods
+  scenes
+  parent
+  ( DOMInterpret
+      { makeSubgraph
+      , insertOrUpdateSubgraph
+      , sendSubgraphToTop
+      , removeSubgraph
+      , ids
+      }
+  ) =
   keepLatest $ map
     ( \id -> pure (makeSubgraph { id, parent, scenes: scenes }) <|>
-        ( envs <#> \envs' -> setSubgraph
-            { id
-            , envs: map (\(a /\ b) -> { pos: hash a, index: a, env: b })
-                (toUnfoldable envs')
-            }
-        )
+        map
+          ( \(index /\ instr) -> case instr of
+              Remove -> removeSubgraph { id, pos: hash index, index }
+              SendToTop -> sendSubgraphToTop { id, pos: hash index, index }
+              InsertOrUpdate env -> insertOrUpdateSubgraph
+                { id, pos: hash index, index, env }
+          )
+          mods
     )
     (sample_ ids (pure unit))

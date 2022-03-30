@@ -11,7 +11,8 @@ import FRP.Behavior (Behavior)
 import FRP.Event (Event)
 
 type Element' dom engine = Event (dom -> engine)
-type Element dom engine = String -> DOMInterpret dom engine -> Event (dom -> engine)
+type Element dom engine =
+  String -> DOMInterpret dom engine -> Event (dom -> engine)
 
 type Subgraph index env push dom engine =
   -- the index we're creating at
@@ -40,7 +41,21 @@ type SubgraphInput index env push dom engine =
 
 type SetSubgraphInput index env =
   { id :: String
-  , envs :: Array (Ie index env)
+  , index :: index
+  , env :: env
+  , pos :: Int
+  }
+
+type RemoveSubgraphInput index =
+  { id :: String
+  , index :: index
+  , pos :: Int
+  }
+
+type SendSubgraphToTopInput index =
+  { id :: String
+  , index :: index
+  , pos :: Int
   }
 
 newtype DOMInterpret dom engine = DOMInterpret
@@ -54,11 +69,20 @@ newtype DOMInterpret dom engine = DOMInterpret
       -> dom
       -> engine
   , setAttribute :: R.SetAttribute -> dom -> engine
-  , setSubgraph ::
+  , sendSubgraphToTop ::
+      forall index
+       . SendSubgraphToTopInput index
+      -> dom
+      -> engine
+  , removeSubgraph ::
+      forall index
+       . RemoveSubgraphInput index
+      -> dom
+      -> engine
+  , insertOrUpdateSubgraph ::
       forall index env
        . SetSubgraphInput index env
       -> dom
       -> engine
   , setText :: R.SetText -> dom -> engine
-  , sendSubgraphToTop :: R.SendSubgraphToTop -> dom -> engine
   }

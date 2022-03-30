@@ -71,6 +71,9 @@ type MakeElement =
 type SendSubgraphToTop =
   { id :: String
   }
+type RemoveSubgraph =
+  { id :: String
+  }
 type MakeText =
   { id :: String
   , parent :: String

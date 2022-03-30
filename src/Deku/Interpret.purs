@@ -9,12 +9,11 @@ import Prelude
 
 import Control.Alt ((<|>))
 import Data.Either (Either(..))
-import Data.Nullable (toNullable)
-import Deku.Core (DOMInterpret(..), Element', Ie, Pie)
+import Deku.Core (DOMInterpret(..), Element', SendSubgraphToTopInput)
 import Deku.Rando (random)
 import Deku.Rendered as R
 import Effect (Effect)
-import FRP.Event (Event, create)
+import FRP.Event (create)
 
 data FFIDOMSnapshot
 foreign import makeFFIDOMSnapshot :: Effect FFIDOMSnapshot
@@ -35,13 +34,17 @@ foreign import makeText_
 
 foreign import makeSubgraph_
   :: forall index env
+
   -- me
   . String
   -- parent
   -> String
   -- this is the generic function for how to interpret a scene
   -> ( index
-       -> Effect { actualized :: Element' FFIDOMSnapshot (Effect Unit), pusher ::  env -> Effect Unit }
+       -> Effect
+            { actualized :: Element' FFIDOMSnapshot (Effect Unit)
+            , pusher :: env -> Effect Unit
+            }
      )
   -> FFIDOMSnapshot
   -> Effect Unit
@@ -50,24 +53,21 @@ foreign import setText_
   -> FFIDOMSnapshot
   -> Effect Unit
 foreign import sendSubgraphToTop_
-  :: R.SendSubgraphToTop -> FFIDOMSnapshot -> Effect Unit
+  :: forall index. SendSubgraphToTopInput index -> FFIDOMSnapshot -> Effect Unit
 foreign import setAttribute_
   :: R.SetAttribute -> FFIDOMSnapshot -> Effect Unit
 
-foreign import setSubgraph_
+foreign import insertOrUpdateSubgraph_
   :: forall env push index
-   . String
-  -> Array (Pie push index env)
+   . {id :: String, pos :: Int, index :: index, env ::Either env push }
   -> FFIDOMSnapshot
   -> Effect Unit
 
-envsToFFI
-  :: forall index env push
-   . Array (Ie index env)
-  -> Array (Pie push index env)
-envsToFFI = map go
-  where
-  go { pos, index, env } = { pos, index, env: toNullable $ map Left env }
+foreign import removeSubgraph_
+  :: forall index
+   . {id :: String, pos :: Int, index :: index }
+  -> FFIDOMSnapshot
+  -> Effect Unit
 
 effectfulDOMInterpret
   :: DOMInterpret FFIDOMSnapshot (Effect Unit)
@@ -89,11 +89,11 @@ effectfulDOMInterpret = DOMInterpret
               event
               parent
               effectfulDOMInterpret
-          pure {actualized, pusher: evtL.push }
+          pure { actualized, pusher: evtL.push }
   , setAttribute: setAttribute_
   , setText: setText_
   , sendSubgraphToTop: sendSubgraphToTop_
-  , setSubgraph: \{ id, envs } dom -> setSubgraph_ id
-      (envsToFFI envs)
-      (dom)
+  , insertOrUpdateSubgraph: \{ id, index, env, pos } -> insertOrUpdateSubgraph_
+      { id, index, env: Left env, pos }
+  , removeSubgraph: removeSubgraph_
   }
