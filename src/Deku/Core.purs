@@ -69,6 +69,18 @@ type MakeSubgraph index env push dom engine =
   , parent :: String
   , scenes :: Subgraph_ index env push dom engine
   }
+type MakePortal =
+  { id :: String
+  }
+type MakeGateway =
+  { id :: String
+  , parent :: String
+  , portal :: String
+  }
+type SetPortal =
+  { id :: String
+  , on :: Boolean
+  }
 type MakePursx =
   { id :: String
   , parent :: String
@@ -100,6 +112,9 @@ newtype DOMInterpret dom engine = DOMInterpret
   , makeElement :: MakeElement -> dom -> engine
   , makeText :: MakeText -> dom -> engine
   , makePursx :: MakePursx -> dom -> engine
+  , makePortal :: MakePortal -> dom -> engine
+  , makeGateway :: MakeGateway -> dom -> engine
+  , setPortal :: SetPortal -> dom -> engine
   , makeSubgraph ::
       forall index env push
        . MakeSubgraph index env push dom engine

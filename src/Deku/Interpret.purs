@@ -78,6 +78,10 @@ foreign import makePursx_
   -> FFIDOMSnapshot
   -> Effect Unit
 
+foreign import makePortal_ :: Core.MakePortal -> FFIDOMSnapshot -> Effect Unit
+foreign import makeGateway_ :: Core.MakeGateway -> FFIDOMSnapshot -> Effect Unit
+foreign import setPortal_ :: Core.SetPortal -> FFIDOMSnapshot -> Effect Unit
+
 effectfulDOMInterpret :: Core.DOMInterpret FFIDOMSnapshot (Effect Unit)
 effectfulDOMInterpret = Core.DOMInterpret
   { ids: map show random
@@ -85,6 +89,9 @@ effectfulDOMInterpret = Core.DOMInterpret
   , makeRoot: makeRoot_
   , makeText: makeText_
   , makePursx: makePursx_
+  , makePortal: makePortal_
+  , makeGateway: makeGateway_
+  , setPortal: setPortal_
   , makeSubgraph: \{ id, parent, scenes } dom ->
       flip (makeSubgraph_ id parent) dom \index ->
         do

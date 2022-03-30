@@ -14,6 +14,7 @@ data Page
   | Events
   | Effects
   | Subgraph
+  | Portals
 derive instance Eq Page
 derive instance Ord Page
 derive instance Generic Page _

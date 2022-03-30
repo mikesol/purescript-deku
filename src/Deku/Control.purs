@@ -9,10 +9,8 @@ module Deku.Control
 
 import Prelude
 
-import Control.Alt ((<|>))
-import Control.Plus (empty)
 import Data.Distributive (distribute)
-import Data.Foldable (foldl, oneOf)
+import Data.Foldable (oneOf)
 import Deku.Attribute (Attribute, unsafeUnAttribute)
 import Deku.Core (DOMInterpret(..), Element, Element', Element_)
 import FRP.Behavior (sample_)
@@ -71,7 +69,7 @@ elementify
   -> Element_ dom engine
 elementify tag atts children parent di@(DOMInterpret { ids }) = keepLatest
   ( (sample_ ids (pure unit)) <#> \me ->
-      foldl (<|>) empty $
+      oneOf $
         [ pure (unsafeElement di me parent tag)
         , unsafeSetAttribute di me atts
         ]
@@ -83,7 +81,7 @@ text
   -> Element
 text txt parent di@(DOMInterpret { ids }) = keepLatest
   ( (sample_ ids (pure unit)) <#> \me ->
-      foldl (<|>) empty $
+      oneOf
         [ pure (unsafeText di me parent)
         , unsafeSetText di me txt
         ]
@@ -108,7 +106,7 @@ deku root elts di@(DOMInterpret { ids, makeRoot }) =
 
 many :: forall a b. Event a -> (a -> Array b) -> Event b
 many event f = keepLatest
-  (event <#> \e -> foldl (<|>) empty (map pure (f e)))
+  (event <#> \e -> oneOf (map pure (f e)))
 
 flatten :: forall dom engine. Array (Element_ dom engine) -> Element_ dom engine
-flatten a = (map <<< map) (foldl (<|>) empty) (map distribute (distribute a))
+flatten a = (map <<< map) oneOf (map distribute (distribute a))

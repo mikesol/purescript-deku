@@ -19,6 +19,7 @@ import Deku.Example.Docs.Intro as Intro
 import Deku.Example.Docs.Pursx1 as Pursx1
 import Deku.Example.Docs.Pursx2 as Pursx2
 import Deku.Example.Docs.Subgraphs as Subgraph
+import Deku.Example.Docs.Portals as Portals
 import Deku.Example.Docs.Types (Page(..))
 import Deku.Interpret (FFIDOMSnapshot, effectfulDOMInterpret, makeFFIDOMSnapshot)
 import Deku.Subgraph (SubgraphAction(..), subgraph)
@@ -76,6 +77,9 @@ scene push event =
             /\ true
         , Subgraph
             /\ "Subgraphs"
+            /\ true
+         , Portals
+            /\ "Portals"
             /\ false
         ]
   , subgraph
@@ -102,6 +106,7 @@ scene push event =
   page dpage Effects _ _ = Effects.effects dpage
   page dpage PURSX2 _ _ = Pursx2.pursx2 dpage
   page dpage Subgraph _ _ = Subgraph.subgraphs dpage
+  page dpage Portals _ _ = Portals.portals dpage
 
 main :: Effect Unit
 main = do

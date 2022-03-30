@@ -13,7 +13,8 @@ import Deku.Attribute (cb, (:=))
 import Deku.Control (text, text_)
 import Deku.Core (Element, Subgraph)
 import Deku.DOM as D
-import Deku.Example.Docs.Types (Page)
+import Deku.Example.Docs.Types (Page(..))
+import Deku.Example.Docs.Util (scrollToTop)
 import Deku.Pursx (nut, (~~))
 import Deku.Subgraph (SubgraphAction(..), (@@))
 import Effect (Effect)
@@ -119,8 +120,8 @@ px = Proxy :: Proxy """<div>
 
   <p>Using this pattern, you can create the behavior of dynamic websites with little or no overhead. For example, the navigation links on this page are implemented as subgraph, and as you can see, they are quite fast!</p>
 
-  <h2>Parting shot</h2>
-  <p>Thanks for checking out Deku! I had a blast writing it, I hope you have fun using it too 😊</p>
+  <h2>Next steps</h2>
+  <p>Subgraphs are a great way to bring elements in and out of the DOM, but what if you want to take an existing element and ship it somewhere else? In these cases, the best bet is often to use CSS, but if CSS won't cut it, there are <a ~next~ style="cursor:pointer;">portals</a>.</p>
 </div>"""
 
 subgraphs :: (Page -> Effect Unit) -> Element
@@ -231,4 +232,5 @@ main = Nothing 🚀 \push event ->
                   )
             ) @@ mySub (push <<< Just)
       )
+       , next: pure (D.OnClick := (cb (const $ dpage Portals *> scrollToTop)))
   }

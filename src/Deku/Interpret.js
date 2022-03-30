@@ -67,6 +67,7 @@ exports.makeText_ = function (a) {
 exports.makeFFIDOMSnapshot = function () {
 	return {
 		units: {},
+		portals: {},
 		unqidfr: makeid(10),
 		terminalPtrs: [],
 	};
@@ -100,7 +101,7 @@ exports.setText_ = function (a) {
 	return function (state) {
 		return function () {
 			var ptr = a.id;
-			state.units[ptr].main.nodeValue = a.text;//.replace(/\n/g, "<br>");
+			state.units[ptr].main.nodeValue = a.text; //.replace(/\n/g, "<br>");
 		};
 	};
 };
@@ -164,6 +165,7 @@ var insertOrUpdateSubgraph_ = function (a) {
 			if (env !== null && unsu[j] === undefined) {
 				children[j] = {
 					units: {},
+					portals: state.portals,
 					terminus: state.units[ptr].parent,
 					unqidfr: makeid(10),
 					parent: ptr,
@@ -274,4 +276,42 @@ exports.makeRoot_ = function (a) {
 			};
 		};
 	};
+};
+exports.makePortal_ = function (a) {
+	return function (state) {
+		return function () {
+			var main = document.createElement("div");
+			state.portals[a.id] = {
+				main: main,
+			};
+			state.units[a.id] = {
+				main: main,
+			};
+			main.setAttribute("style", "display:contents;");
+		};
+	};
+};
+exports.makeGateway_ = function (a) {
+	return function (state) {
+		return function () {
+			var main = document.createElement("div");
+			state.units[a.id] = {
+				main: main,
+				portal: a.portal
+			};
+			main.setAttribute("style", "display:contents;");
+			connectXToY_(a.id)(a.parent)(state)();
+		};
+	};
+};
+exports.setPortal_ = function (a) {
+	return function(state) {
+		return function() {
+			if (a.on) {
+				state.units[a.id].main.prepend(state.portals[state.units[a.id].portal].main);
+			} else {
+				state.units[a.id].main.innerHTML = "";
+			}
+		}
+	}
 };
