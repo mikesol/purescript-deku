@@ -32,7 +32,7 @@ counter :: forall a. Event a → Event (Tuple a Int)
 counter event = fix
   ( \i ->
       let
-        output = sampleOn (i <|> pure (-1)) (Tuple <$> event)
+        output = sampleOn (i <|> pure 0) (Tuple <$> event)
       in
         { input: map (add 1 <<< snd) output, output }
   )
