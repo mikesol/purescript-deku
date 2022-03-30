@@ -9,73 +9,82 @@ import Prelude
 
 import Control.Alt ((<|>))
 import Data.Either (Either(..))
-import Deku.Core (DOMInterpret(..), Element', SendSubgraphToTopInput)
+import Deku.Core as Core
 import Deku.Rando (random)
-import Deku.Rendered as R
 import Effect (Effect)
 import FRP.Event (create)
+import Foreign.Object (Object)
 
+-- foreign
 data FFIDOMSnapshot
+
 foreign import makeFFIDOMSnapshot :: Effect FFIDOMSnapshot
+
 foreign import renderDOM :: Array (Effect Unit) -> Effect Unit
 
 foreign import makeElement_
-  :: R.MakeElement
+  :: Core.MakeElement
   -> FFIDOMSnapshot
   -> Effect Unit
 foreign import makeRoot_
-  :: R.MakeRoot
+  :: Core.MakeRoot
   -> FFIDOMSnapshot
   -> Effect Unit
 foreign import makeText_
-  :: R.MakeText
+  :: Core.MakeText
   -> FFIDOMSnapshot
   -> Effect Unit
 
 foreign import makeSubgraph_
   :: forall index env
-
-  -- me
-  . String
-  -- parent
+   . String
   -> String
-  -- this is the generic function for how to interpret a scene
   -> ( index
        -> Effect
-            { actualized :: Element' FFIDOMSnapshot (Effect Unit)
+            { actualized :: Core.Element' FFIDOMSnapshot (Effect Unit)
             , pusher :: env -> Effect Unit
             }
      )
   -> FFIDOMSnapshot
   -> Effect Unit
 foreign import setText_
-  :: R.SetText
+  :: Core.SetText
   -> FFIDOMSnapshot
   -> Effect Unit
 foreign import sendSubgraphToTop_
-  :: forall index. SendSubgraphToTopInput index -> FFIDOMSnapshot -> Effect Unit
+  :: forall index. Core.SendSubgraphToTop index -> FFIDOMSnapshot -> Effect Unit
 foreign import setAttribute_
-  :: R.SetAttribute -> FFIDOMSnapshot -> Effect Unit
+  :: Core.SetAttribute -> FFIDOMSnapshot -> Effect Unit
 
 foreign import insertOrUpdateSubgraph_
-  :: forall env push index
-   . {id :: String, pos :: Int, index :: index, env ::Either env push }
+  :: forall index env
+   . Core.InsertOrUpdateSubgraph index env
   -> FFIDOMSnapshot
   -> Effect Unit
 
 foreign import removeSubgraph_
   :: forall index
-   . {id :: String, pos :: Int, index :: index }
+   . Core.RemoveSubgraph index
   -> FFIDOMSnapshot
   -> Effect Unit
 
-effectfulDOMInterpret
-  :: DOMInterpret FFIDOMSnapshot (Effect Unit)
-effectfulDOMInterpret = DOMInterpret
+foreign import makePursx_
+  :: { id :: String
+     , parent :: String
+     , html :: String
+     , verb :: String
+     , cache :: Object Boolean
+     }
+  -> FFIDOMSnapshot
+  -> Effect Unit
+
+effectfulDOMInterpret :: Core.DOMInterpret FFIDOMSnapshot (Effect Unit)
+effectfulDOMInterpret = Core.DOMInterpret
   { ids: map show random
   , makeElement: makeElement_
   , makeRoot: makeRoot_
   , makeText: makeText_
+  , makePursx: makePursx_
   , makeSubgraph: \{ id, parent, scenes } dom ->
       flip (makeSubgraph_ id parent) dom \index ->
         do

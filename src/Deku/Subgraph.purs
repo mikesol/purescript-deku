@@ -5,7 +5,7 @@ import Prelude
 import Control.Alt ((<|>))
 import Data.Hashable (class Hashable, hash)
 import Data.Tuple.Nested (type (/\), (/\))
-import Deku.Core (DOMInterpret(..), Element, Subgraph)
+import Deku.Core (DOMInterpret(..), Element, Element_, Subgraph, Subgraph_)
 import FRP.Behavior (sample_)
 import FRP.Event (Event, keepLatest)
 
@@ -18,8 +18,8 @@ subgraph
   :: forall index env push dom engine
    . Hashable index
   => Event (index /\ SubgraphAction env)
-  -> Subgraph index env push dom engine
-  -> Element dom engine
+  -> Subgraph_ index env push dom engine
+  -> Element_ dom engine
 subgraph
   mods
   scenes

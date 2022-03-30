@@ -14,8 +14,7 @@ import Control.Plus (empty)
 import Data.Distributive (distribute)
 import Data.Foldable (foldl)
 import Deku.Attribute (Attribute, unsafeUnAttribute)
-import Deku.Core (DOMInterpret(..), Element, Element')
-import Deku.Rendered (RootDOMElement(..))
+import Deku.Core (DOMInterpret(..), Element, Element', Element_)
 import FRP.Behavior (sample_)
 import FRP.Event (Event, keepLatest)
 import Web.DOM as Web.DOM
@@ -68,8 +67,8 @@ elementify
   :: forall element dom engine
    . String
   -> (Event (Attribute element))
-  -> Array (Element dom engine)
-  -> Element dom engine
+  -> Array (Element_ dom engine)
+  -> Element_ dom engine
 elementify tag atts children parent di@(DOMInterpret { ids }) = keepLatest
   ( (sample_ ids (pure unit)) <#> \me ->
       foldl (<|>) empty $
@@ -80,9 +79,8 @@ elementify tag atts children parent di@(DOMInterpret { ids }) = keepLatest
   )
 
 text
-  :: forall dom engine
-   . Event String
-  -> Element dom engine
+  :: Event String
+  -> Element
 text txt parent di@(DOMInterpret { ids }) = keepLatest
   ( (sample_ ids (pure unit)) <#> \me ->
       foldl (<|>) empty $
@@ -91,23 +89,20 @@ text txt parent di@(DOMInterpret { ids }) = keepLatest
         ]
   )
 
-text_
-  :: forall dom engine
-   . String
-  -> Element dom engine
+text_ :: String -> Element
 text_ txt = text (pure txt)
 
 deku
   :: forall dom engine
    . Web.DOM.Element
-  -> Array (Element dom engine)
+  -> Array (Element_ dom engine)
   -> DOMInterpret dom engine
   -> Event (dom -> engine)
 deku root elts di@(DOMInterpret { ids, makeRoot }) =
   keepLatest
     ( (sample_ ids (pure unit)) <#> \me ->
         foldl (<|>) empty $
-          [ pure (makeRoot { id: me, root: (RootDOMElement root) })
+          [ pure (makeRoot { id: me, root })
           ]
             <> (map (\kid -> kid me di) elts)
     )
@@ -116,5 +111,5 @@ many :: forall a b. Event a -> (a -> Array b) -> Event b
 many event f = keepLatest
   (event <#> \e -> foldl (<|>) empty (map pure (f e)))
 
-flatten :: forall dom engine. Array (Element dom engine) -> Element dom engine
+flatten :: forall dom engine. Array (Element_ dom engine) -> Element_ dom engine
 flatten a = (map <<< map) (foldl (<|>) empty) (map distribute (distribute a))

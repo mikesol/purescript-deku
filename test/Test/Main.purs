@@ -3,20 +3,14 @@ module Test.Main where
 import Prelude
 
 import Control.Alt ((<|>))
-import Control.Plus (empty)
-import Data.Filterable (filter)
-import Data.Maybe (Maybe(..))
 import Data.Tuple (Tuple(..), snd)
 import Data.Tuple.Nested ((/\))
-import Deku.Attribute ((:=))
-import Deku.Attribute (prop')
-import Deku.DOM as D
 import Effect (Effect)
 import Effect.Aff (launchAff_)
 import Effect.Class (liftEffect)
-import Effect.Ref (Ref, modify, new, read, write)
+import Effect.Ref (Ref, modify, new, read)
 import FRP.Behavior (Behavior, behavior)
-import FRP.Event (Event, create, fix, fold, makeEvent, sampleOn, subscribe)
+import FRP.Event (Event, create, fix, makeEvent, sampleOn, subscribe)
 import Test.Spec (describe, it)
 import Test.Spec.Assertions (shouldEqual)
 import Test.Spec.Reporter (consoleReporter)
@@ -53,9 +47,9 @@ main = launchAff_ $ runSpec [ consoleReporter ] do
         rf <- new []
         { event, push } <- create
         unsub <- subscribe (counter event) \x -> do
-          void $ modify (\i -> i <> [x]) rf
+          void $ modify (\i -> i <> [ x ]) rf
         pure (rf /\ push /\ unsub)
       liftEffect $ push true
       -- why is this?
-      liftEffect (read rf) >>= shouldEqual [true /\ 1]
+      liftEffect (read rf) >>= shouldEqual [ true /\ 1 ]
       liftEffect unsub

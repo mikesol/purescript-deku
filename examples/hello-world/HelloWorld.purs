@@ -2,19 +2,18 @@ module Deku.Example.HelloWorld where
 
 import Prelude
 
-import Control.Alt ((<|>))
 import Control.Plus (empty)
 import Data.Foldable (for_, oneOfMap)
 import Data.Maybe (Maybe(..))
-import Data.Tuple (Tuple(..), snd)
+import Data.Tuple (Tuple(..))
 import Deku.Attribute (cb, (:=))
 import Deku.Control (deku)
 import Deku.Control as C
-import Deku.Core (Element)
+import Deku.Core (Element_)
 import Deku.DOM as D
 import Deku.Interpret (FFIDOMSnapshot, effectfulDOMInterpret, makeFFIDOMSnapshot)
 import Effect (Effect)
-import FRP.Event (Event, create, filterMap, fix, keepLatest, mapAccum, sampleOn, subscribe)
+import FRP.Event (Event, create, filterMap, keepLatest, mapAccum, subscribe)
 import Web.HTML (window)
 import Web.HTML.HTMLDocument (body)
 import Web.HTML.HTMLElement (toElement)
@@ -27,7 +26,7 @@ counter event = mapAccum f event 0
 scene
   :: (Boolean -> Effect Unit)
   -> Event Boolean
-  -> Array (Element FFIDOMSnapshot (Effect Unit))
+  -> Array (Element_ FFIDOMSnapshot (Effect Unit))
 scene push event =
   [ D.div empty [ C.text (pure "Stops after 3 clicks") ]
   , C.text (event <#> if _ then "click " else "kcilc ")

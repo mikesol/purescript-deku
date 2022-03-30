@@ -192,12 +192,70 @@ var insertOrUpdateSubgraph_ = function (a) {
 		};
 	};
 };
+var makePursx_ = function (a) {
+	return function (state) {
+		return function () {
+			var ptr = a.id;
+			var html = a.html;
+			var verb = a.verb;
+			var cache = a.cache;
+			var parent = a.parent;
+			if (a.parent === state.terminus) {
+				state.terminalPtrs.push(a.id);
+			}
+			var entries = Object.entries(cache);
+			for (var i = 0; i < entries.length; i++) {
+				var key = entries[i][0];
+				if (entries[i][1] === true) {
+					// it is an attribute
+					html = html.replace(
+						verb + key + verb,
+						"data-deku-attr-internal=" + '"' + key + '"'
+					);
+				} else {
+					html = html.replace(
+						verb + key + verb,
+						'<span style="display:contents;" data-deku-elt-internal=' +
+							'"' +
+							key +
+							'"></span>'
+					);
+				}
+			}
+			var tmp = document.createElement("div");
+			tmp.innerHTML = html.trim();
+			state.units[ptr] = {
+				listeners: {},
+				parent: parent,
+				main: tmp.firstChild,
+			};
+			tmp.querySelectorAll("[data-deku-attr-internal]").forEach(function (e) {
+				var key = e.getAttribute("data-deku-attr-internal");
+				state.units[key] = {
+					listeners: {},
+					main: e,
+				};
+			});
+			tmp.querySelectorAll("[data-deku-elt-internal]").forEach(function (e) {
+				var key = e.getAttribute("data-deku-elt-internal");
+				state.units[key] = {
+					listeners: {},
+					main: e,
+				};
+			});
+			connectXToY_(ptr)(parent)(state)();
+		};
+	};
+};
+exports.makePursx_ = makePursx_;
 exports.insertOrUpdateSubgraph_ = insertOrUpdateSubgraph_;
 exports.sendSubgraphToTop_ = function (a) {
 	return function (state) {
 		return function () {
 			var child = state.units[a.id].children[a.pos];
-			if (child === undefined) { return }
+			if (child === undefined) {
+				return;
+			}
 			var l = child.terminalPtrs.length;
 			for (var i = 0; i < child.terminalPtrs.length; i++) {
 				state.units[state.units[a.id].parent].main.prepend(

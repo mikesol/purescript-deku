@@ -19,6 +19,7 @@
   , "nullable"
   , "ordered-collections"
   , "prelude"
+  , "profunctor"
   , "random"
   , "record"
   , "refs"

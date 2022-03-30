@@ -5,16 +5,21 @@ import Prelude
 import Data.Either (Either)
 import Data.Maybe (Maybe)
 import Data.Nullable (Nullable)
-import Deku.Rendered as R
+import Deku.Attribute (AttributeValue)
 import Effect (Effect)
 import FRP.Behavior (Behavior)
 import FRP.Event (Event)
+import Foreign.Object (Object)
+import Web.DOM as Web.DOM
 
 type Element' dom engine = Event (dom -> engine)
-type Element dom engine =
+type Element_ dom engine =
   String -> DOMInterpret dom engine -> Event (dom -> engine)
 
-type Subgraph index env push dom engine =
+type Element =
+  forall dom engine. String -> DOMInterpret dom engine -> Event (dom -> engine)
+
+type Subgraph_ index env push dom engine =
   -- the index we're creating at
   index
   -- the pusher for the subgraph
@@ -22,7 +27,17 @@ type Subgraph index env push dom engine =
   -- an event the subgraph can bind to
   -> Event (Either env push)
   -- the subgraph
-  -> Element dom engine
+  -> Element_ dom engine
+
+type Subgraph index env push =
+  -- the index we're creating at
+  index
+  -- the pusher for the subgraph
+  -> (push -> Effect Unit)
+  -- an event the subgraph can bind to
+  -> Event (Either env push)
+  -- the subgraph
+  -> Element
 
 type Ie index env =
   { pos :: Int
@@ -33,26 +48,47 @@ type Ie index env =
 type Pie push index env =
   { pos :: Int, index :: index, env :: Nullable (Either env push) }
 
-type SubgraphInput index env push dom engine =
+type MakeElement =
+  { id :: String
+  , tag :: String
+  , parent :: String
+  }
+type MakeText =
   { id :: String
   , parent :: String
-  , scenes :: Subgraph index env push dom engine
   }
-
-type SetSubgraphInput index env =
+type MakeRoot = { id :: String, root :: Web.DOM.Element }
+type SetText = { id :: String, text :: String }
+type SetAttribute =
+  { id :: String
+  , key :: String
+  , value :: AttributeValue
+  }
+type MakeSubgraph index env push dom engine =
+  { id :: String
+  , parent :: String
+  , scenes :: Subgraph_ index env push dom engine
+  }
+type MakePursx =
+  { id :: String
+  , parent :: String
+  , html :: String
+  , verb :: String
+  , cache :: Object Boolean
+  }
+type InsertOrUpdateSubgraph index env =
   { id :: String
   , index :: index
   , env :: env
   , pos :: Int
   }
-
-type RemoveSubgraphInput index =
+type RemoveSubgraph index =
   { id :: String
   , index :: index
   , pos :: Int
   }
 
-type SendSubgraphToTopInput index =
+type SendSubgraphToTop index =
   { id :: String
   , index :: index
   , pos :: Int
@@ -60,29 +96,30 @@ type SendSubgraphToTopInput index =
 
 newtype DOMInterpret dom engine = DOMInterpret
   { ids :: Behavior String
-  , makeRoot :: R.MakeRoot -> dom -> engine
-  , makeElement :: R.MakeElement -> dom -> engine
-  , makeText :: R.MakeText -> dom -> engine
+  , makeRoot :: MakeRoot -> dom -> engine
+  , makeElement :: MakeElement -> dom -> engine
+  , makeText :: MakeText -> dom -> engine
+  , makePursx :: MakePursx -> dom -> engine
   , makeSubgraph ::
       forall index env push
-       . SubgraphInput index env push dom engine
+       . MakeSubgraph index env push dom engine
       -> dom
       -> engine
-  , setAttribute :: R.SetAttribute -> dom -> engine
+  , setAttribute :: SetAttribute -> dom -> engine
   , sendSubgraphToTop ::
       forall index
-       . SendSubgraphToTopInput index
+       . SendSubgraphToTop index
       -> dom
       -> engine
   , removeSubgraph ::
       forall index
-       . RemoveSubgraphInput index
+       . RemoveSubgraph index
       -> dom
       -> engine
   , insertOrUpdateSubgraph ::
       forall index env
-       . SetSubgraphInput index env
+       . InsertOrUpdateSubgraph index env
       -> dom
       -> engine
-  , setText :: R.SetText -> dom -> engine
+  , setText :: SetText -> dom -> engine
   }

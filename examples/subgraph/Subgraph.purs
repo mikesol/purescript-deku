@@ -13,7 +13,7 @@ import Data.Tuple.Nested ((/\))
 import Deku.Attribute (cb, (:=))
 import Deku.Control (deku)
 import Deku.Control as C
-import Deku.Core (Element)
+import Deku.Core (Element_)
 import Deku.DOM as D
 import Deku.Interpret (FFIDOMSnapshot, effectfulDOMInterpret, makeFFIDOMSnapshot)
 import Deku.Subgraph (SubgraphAction(..))
@@ -43,7 +43,7 @@ n1 = 10
 scene
   :: (HelloWorld -> Effect Unit)
   -> Event HelloWorld
-  -> Array (Element FFIDOMSnapshot (Effect Unit))
+  -> Array (Element_ FFIDOMSnapshot (Effect Unit))
 scene push event =
   [ D.div_
       [ D.a
