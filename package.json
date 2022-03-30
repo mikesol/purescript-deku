@@ -1,6 +1,6 @@
 {
 	"name": "purescript-deku",
-	"version": "0.0.8",
+	"version": "0.1.0",
 	"description": "A friendly tree-like structure in the browser.",
 	"scripts": {
 		"postinstall": "node node_modules/puppeteer/install.js",
@@ -26,9 +26,7 @@
 		"puppeteer": "^5.2.0",
 		"purescript": "^0.14.4",
 		"spago": "^0.20.3",
-		"tracealyzer": "^0.10.3"
-	},
-	"dependencies": {
+		"tracealyzer": "^0.10.3",
 		"purs-tidy": "^0.4.6",
 		"test": "^0.6.0"
 	}

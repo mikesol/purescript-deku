@@ -155,12 +155,6 @@ let additions =
           ]
         , repo = "https://github.com/mikesol/purescript-event.git"
         , version = "v1.4.2"
-        }, deku-toplevel =
-        { dependencies =
-          [  "effect"
-          ]
-        , repo = "https://github.com/mikesol/purescript-deku-toplevel.git"
-        , version = "v0.0.2.1"
         }
       , everythings-better-with-variants =
         { dependencies =
@@ -216,6 +210,12 @@ let additions =
         , repo =
             "https://github.com/natefaubion/purescript-convertable-options.git"
         , version = "v1.0.0"
+        }, deku-toplevel =
+        { dependencies =
+          [  "effect"
+          ]
+        , repo = "https://github.com/mikesol/purescript-deku-toplevel.git"
+        , version = "radical"
         }
       }
 

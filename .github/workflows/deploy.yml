@@ -12,6 +12,20 @@ jobs:
     steps:
       - name: Check out repository code
         uses: actions/checkout@v2
+      - name: Cache purescript dependencies
+        uses: actions/cache@v2
+        with:
+          path: |
+            ~/.npm
+            .spago
+            ${{ env.spago_global_cache }}
+            output
+          key: >-
+            ${{ hashFiles('package-lock.json') }}-
+            ${{ hashFiles('spago.dhall') }}-
+            ${{ hashFiles('packages.dhall') }}-
+            ${{ hashFiles('test.dhall') }}-
+            ${{ hashFiles('examples.dhall') }}
       - name: Install dependencies
         run: npm ci
       - name: Spago build examples
@@ -20,8 +34,8 @@ jobs:
         run: npm t
       - name: Build qc
         run: npx spago -x examples.dhall bundle-app --main Deku.Example.Docs --to examples/docs/index.js
-      - name: Performance test
-        run: npm run test:performance
+      #- name: Performance test
+      #  run: npm run test:performance
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
         with:

@@ -14,7 +14,7 @@ data Page
   | Events
   | Effects
   | Subgraph
-  | SSR
+  | Portals
 derive instance Eq Page
 derive instance Ord Page
 derive instance Generic Page _
@@ -23,5 +23,3 @@ instance showPage :: Show Page where
 
 instance Hashable Page where
   hash = show >>> hash
-
-data DeviceType = Tablet | Mobile | Desktop

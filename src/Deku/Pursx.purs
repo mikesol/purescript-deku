@@ -1,18 +1,27 @@
 module Deku.Pursx where
-import Deku.Debug (type (^^))
-import Prim.Row as Row
-import Prim.TypeError (class Warn, Text)
-import Prim.Symbol as Sym
-import Prim.Boolean (False, True)
-import Type.Proxy (Proxy(..))
-import Deku.Graph.Attribute (Attribute)
-import Deku.Graph.DOM (class TagToDeku, Element)
+
+import Prelude
+-- import Deku.Debug (type (^^))
+-- import Prim.TypeError (class Warn, Text)
+import Foreign.Object as Object
+import Control.Alt ((<|>))
+import Data.Profunctor (lcmap)
 import Data.Symbol (class IsSymbol, reflectSymbol)
-import Deku.Graph.Attribute (Attribute)
-import Deku.Graph.DOM (Element)
-import Prim.RowList (class RowToList, RowList)
+import Deku.Attribute (Attribute, unsafeUnAttribute)
+import Deku.Core (DOMInterpret(..), Element_, Element)
+import Deku.DOM (class TagToDeku)
+import Control.Plus (empty)
+import FRP.Behavior (sample_)
+import FRP.Event (Event, keepLatest)
+import Prim.Boolean (False, True)
+import Prim.Row as Row
 import Prim.RowList as RL
-import Prim.Row as R
+import Prim.Symbol as Sym
+import Record (get)
+import Type.Proxy (Proxy(..))
+
+newtype PursxElement = PursxElement Element
+nut = PursxElement :: Element -> PursxElement
 
 pursx :: forall s. Proxy s
 pursx = Proxy
@@ -29,7 +38,7 @@ class
   | verb acc head tail pursi -> purso newTail
 instance
   ( TagToDeku tag deku
-  , Row.Cons acc (Array (Attribute deku)) pursi purso
+  , Row.Cons acc (Event (Attribute deku)) pursi purso
   ) =>
   DoVerbForAttr verb tag acc verb tail pursi purso tail
 else instance
@@ -50,7 +59,7 @@ class
     (newTail :: Symbol)
   | verb acc head tail pursi -> purso newTail
 instance
-  ( Row.Cons acc (Element anytag anykids) pursi purso
+  ( Row.Cons acc PursxElement pursi purso
   ) =>
   DoVerbForDOM verb acc verb tail pursi purso tail
 else instance
@@ -1930,44 +1939,108 @@ else instance
   , PXBody verb x y pursi purso trailing
   ) =>
   PXBody verb anything tail pursi purso trailing
-newtype Pursx (verb :: Symbol) (html :: Symbol) r = Pursx
-  { verb :: String, html :: String, r :: { | r } }
+
+class PursxToElement (rl :: RL.RowList Type) (r :: Row Type) | rl -> r where
+  pursxToElement
+    :: forall proxy dom engine
+     . proxy rl
+    -> { | r }
+    -> { cache :: Object.Object Boolean, element :: Element_ dom engine }
+
+instance pursxToElementConsAttr ::
+  ( Row.Cons key (Event (Attribute deku)) r' r
+  , PursxToElement rest r
+  , IsSymbol key
+  ) =>
+  PursxToElement (RL.Cons key (Event (Attribute deku)) rest) r where
+  pursxToElement _ r =
+    let
+      { cache, element } = pursxToElement (Proxy :: Proxy rest) r
+    in
+      { cache: Object.insert (reflectSymbol pxk) true cache
+      , element: \parent di@(DOMInterpret { setAttribute }) ->
+          map
+            ( lcmap unsafeUnAttribute
+                ( \{ key, value } -> setAttribute
+                    { id: reflectSymbol $ pxk
+                    , key
+                    , value
+                    }
+                )
+            )
+            (get pxk r)
+            <|> element parent di
+      }
+    where
+    pxk = Proxy :: _ key
+
+instance pursxToElementConsElt ::
+  ( Row.Cons key PursxElement r' r
+  , PursxToElement rest r
+  , IsSymbol key
+  ) =>
+  PursxToElement (RL.Cons key PursxElement rest) r where
+  pursxToElement _ r =
+    let
+      { cache, element } = pursxToElement (Proxy :: Proxy rest) r
+    in
+      { cache: Object.insert (reflectSymbol pxk) false cache
+      , element: \parent di -> pxe (reflectSymbol pxk) di
+          <|> element parent di
+      }
+    where
+    pxk = Proxy :: _ key
+    PursxElement pxe = get pxk r
+
+instance pursxToElementNil ::
+  PursxToElement RL.Nil r where
+  pursxToElement _ _ = { cache: Object.empty, element: \_ _ -> empty }
 
 psx
-  :: forall proxy (html :: Symbol) r
+  :: forall proxy (html :: Symbol)
+   . IsSymbol html
+  => PXStart "~" " " html ()
+  => PursxToElement RL.Nil ()
+  => proxy html
+  -> Element
+psx px = makePursx px {}
+
+makePursx
+  :: forall proxy (html :: Symbol) r rl
    . IsSymbol html
   => PXStart "~" " " html r
+  => RL.RowToList r rl
+  => PursxToElement rl r
   => proxy html
   -> { | r }
-  -> Pursx "~" html r
-psx html r = Pursx { verb: "~", html: reflectSymbol html, r: r }
+  -> Element
+makePursx = makePursx' (Proxy :: _ "~")
 
-psxR
-  :: forall proxy (html :: Symbol) r
+makePursx'
+  :: forall verb proxyA proxyB (html :: Symbol) r rl
    . IsSymbol html
-  => PXStart "~" " " html r
-  => proxy html
+  => IsSymbol verb
+  => PXStart verb " " html r
+  => RL.RowToList r rl
+  => PursxToElement rl r
+  => proxyA verb
+  -> proxyB html
   -> { | r }
-  -> { psx :: Pursx "~" html r }
-psxR html r = { psx: Pursx { verb: "~", html: reflectSymbol html, r: r } }
+  -> Element
+makePursx' verb html r parent di@(DOMInterpret { makePursx, ids }) = keepLatest
+  ( (sample_ ids (pure unit)) <#> \me ->
+      let
+        { cache, element } = pursxToElement (Proxy :: _ rl) r
+      in
+        ( pure $ makePursx
+            { id: me
+            , parent
+            , cache
+            , html: reflectSymbol html
+            , verb: reflectSymbol verb
+            }
+        ) <|> element me di
+  )
 
-infixr 5 psx as ~~
-infixr 5 psxR as ~!
-
-class PursxToEdgesRL (rl :: RowList Type) (e :: Row Type) | rl -> e
-
-class PursxToEdges (r :: Row Type) (e :: Row Type) | r -> e
-
-instance (RowToList r rl, PursxToEdgesRL rl e) => PursxToEdges r e
-instance PursxToEdgesRL RL.Nil ()
-instance
-  ( R.Cons key (Element a b) r' r
-  , PursxToEdgesRL rest r'
-  ) =>
-  PursxToEdgesRL (RL.Cons key (Element a b) rest) r
-instance
-  ( R.Cons key (Element a ()) r' r
-  , PursxToEdgesRL rest r'
-  ) =>
-  PursxToEdgesRL (RL.Cons key (Array (Attribute a)) rest) r
+infixr 5 makePursx as ~~
 

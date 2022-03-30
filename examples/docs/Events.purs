@@ -2,81 +2,103 @@ module Deku.Example.Docs.Events where
 
 import Prelude
 
-import Data.Either (Either(..))
-import Data.Foldable (for_)
-import Data.Map (singleton)
+import Control.Alt ((<|>))
+import Data.Either (hush)
+import Data.Filterable (compact, filter, filterMap)
+import Data.Foldable (for_, oneOfMap)
 import Data.Maybe (Maybe(..))
 import Data.Tuple.Nested ((/\))
-import Deku.Change (change)
-import Deku.Control.Functions (freeze, u, (%>))
-import Deku.Example.Docs.Types (DeviceType, Page(..))
-import Deku.Example.Docs.Util (cot, scrollToTop)
-import Deku.Graph.Attribute (cb)
-import Deku.Graph.DOM (AsSubgraph(..), ResolvedSubgraphSig, SubgraphSig, subgraph, (:=))
-import Deku.Graph.DOM as D
-import Deku.Graph.DOM.Shorthand as S
-import Deku.Util ((@@))
+import Deku.Attribute (cb, (:=))
+import Deku.Control (flatten, text, text_)
+import Deku.Core (Element)
+import Deku.DOM as D
+import Deku.Example.Docs.Types (Page(..))
+import Deku.Example.Docs.Util (scrollToTop)
+import Deku.Pursx (nut, (~~))
+import Deku.Subgraph (SubgraphAction(..), (@@))
 import Effect (Effect)
+import FRP.Event (mapAccum)
+import Type.Proxy (Proxy(..))
 import Web.DOM.Element (fromEventTarget)
 import Web.Event.Event (target)
 import Web.HTML.HTMLInputElement (fromElement, valueAsNumber)
 
-events :: DeviceType -> (Page -> Effect Unit) -> ResolvedSubgraphSig Unit Unit
-events dt dpage =
-  ( \_ _ ->
-      u
-        { head: D.div []
-            { header: D.header []
-                { title: D.h1 [] (S.text "Events")
-                , subtitle: D.h3 []
-                    ( S.text
-                        "Listening to the DOM"
-                    )
-                }
-            , pars: D.div []
-                ( D.p []
-                    ( S.text
-                        """We'll spice up the previous example by adding an event listener to our button. When we do, Deku will keep track of how many times we clicked it. The same goes for a range slider, whose current value is displayed underneath it."""
-                    )
-                    @@
-                      ( D.pre []
-                          ( S.code []
-                              ( S.text
-                                  """module Main where
+data UIEvents = UIShown | ButtonClicked | SliderMoved Number
+derive instance Eq UIEvents
+px = Proxy :: Proxy
+      """<div>
+  <h1>Events</h1>
+
+  <h2>Listening to the DOM</h2>
+  <p>
+    We'll spice up the previous example by adding an event listener to our button. When we do, Deku will keep track of how many times we clicked it. The same goes for a range slider, whose current value is displayed underneath it.
+  </p>
+
+  ~code~
+
+  <p>And here's what it produces:</p>
+
+  <blockquote> ~result~ </blockquote>
+
+  <h1>Event handling</h1>
+  <p>All DOM event handlers, like <code>OnClick</code> and <code>OnInput</code>, can be set with a value of type <code>Cb</code>. This type is a newtype around <code>(Event -> Effect Boolean)</code>. In order to actually trigger the event, you'll use the <code>push</code> function passed to the creation function. The push function has a signature of <code>(push -> Effect Unit)</code>. Here, the type one can push in to <code>push</code> is UIEvents. Whenever a push happens, our `Event` receives it and all attributes are updated accordingly.</p>
+
+  <h1>Attribute updates</h1>
+  <p>In Deku, attributes are `Event`-s. This means that, when you send something to `push`, if you want an attribute to change, the event being pushed to needs to be used to create the attribute event. That's what's happening in our example: the event is used <i>both</i> to control the click and the range slider.</p>
+
+  <p>If every attribute responded to every event, Deku would become very slow. Thankfully, there's a solution. `Event` implements the `Filterable` typeclass, and when you filter an `Event`, you mute the filtered-out parts for downstream consumers.</p>
+
+  <h2>Next steps</h2>
+  <p>In this section, saw how to react to events using the looping function in combination with change. In the next section, we'll use a similar mechanism to deal with arbitrary <a ~next~ style="cursor:pointer;">effects</a>.</p>
+</div>"""
+
+events :: (Page -> Effect Unit) -> Element
+events dpage = px ~~
+  { code: nut
+      ( D.pre_
+          [ D.code_
+              [ text_
+                  """module Main where
 
 import Prelude
 
-import Data.Foldable (for_)
+import Control.Alt ((<|>))
+import Data.Filterable (filter, filterMap)
+import Data.Foldable (for_, oneOfMap)
+import Data.Maybe (Maybe(..))
 import Data.Tuple.Nested ((/\))
-import Deku.Change (change)
-import Deku.Graph.Attribute (cb)
-import Deku.Graph.DOM ((@~), (:=))
-import Deku.Graph.DOM as D
+import Deku.Attribute (cb, (:=))
+import Deku.Control (text, text_)
+import Deku.DOM as D
 import Deku.Toplevel ((🚀))
-import Deku.Util ((/|\), p, (@@))
 import Effect (Effect)
+import FRP.Event (mapAccum)
 import Web.DOM.Element (fromEventTarget)
 import Web.Event.Event (target)
 import Web.HTML.HTMLInputElement (fromElement, valueAsNumber)
 
-data UIEvents = ButtonClicked | SliderMoved Number
+data UIEvents = UIShown | ButtonClicked | SliderMoved Number
+derive instance Eq UIEvents
 
 main :: Effect Unit
-main =
-  ( \push ->
-      0 /|\  D.div []
-          ( D.button
-              [ D.OnClick :=
-                  cb (const $ push ButtonClicked)
-              ]
-              ((p :: _ "clickText") @~ D.text "Click")
-              @@ D.div
-                []
-                ((p :: _ "val1Text") @~ D.text "Val: 0")
-              /\ unit
-          )
-          @@ D.div []
-            ( D.input
+main = UIShown 🚀 \push event ->
+  D.div_
+    [ D.button
+        (pure (D.OnClick := cb (const $ push ButtonClicked)))
+        [ text_ "Click" ]
+    , D.div_
+        [ text
+            ( (pure "Val: 0") <|>
+                ( mapAccum (const $ \x -> (x + 1) /\ x)
+                    (filter (eq ButtonClicked) event)
+                    1
+                    # map (append "Val: " <<< show)
+                )
+            )
+        ]
+    , D.div_
+        [ D.input
+            ( oneOfMap pure
                 [ D.Xtype := "range"
                 , D.OnInput := cb \e -> for_
                     ( target e
@@ -87,207 +109,76 @@ main =
                         >=> push <<< SliderMoved
                     )
                 ]
-                {}
-                @@ D.div []
-                  ((p :: _ "val2Text") @~ D.text "Val: 50")
-                /\ unit
             )
-          /\ unit
-  ) 🚀 \e nclicks -> case e of
-    ButtonClicked ->
-      let
-        c = nclicks + 1
-      in
-        change
-          { val1Text: "Val: " <> show c
-          , clickText:
-              if mod c 2 == 0 then "Click" else "me"
-          } $> c
-    SliderMoved n ->
-      change { val2Text: "Val: " <> show n } $> nclicks
+            []
+        , D.div_
+            [ text
+                ( (pure "Val: 50") <|>
+                    ( filterMap
+                        ( case _ of
+                            SliderMoved n -> Just n
+                            _ -> Nothing
+                        )
+                        event
+                        # map (append "Val: " <<< show)
+                    )
+                )
+            ]
+        ]
+    ]
 """
-                              )
+              ]
+          ]
+      )
+  , result: nut
+      ( pure (unit /\ InsertOrUpdate unit) @@ \_ push event' ->
+          let
+            event = compact (map hush event')
+          in
+            flatten
+              [ D.button
+                  (pure (D.OnClick := cb (const $ push ButtonClicked)))
+                  [ text_ "Click" ]
+              , D.div_
+                  [ text
+                      ( (pure "Val: 0") <|>
+                          ( mapAccum (const $ \x -> (x + 1) /\ x)
+                              (filter (eq ButtonClicked) event)
+                              1
+                              # map (append "Val: " <<< show)
                           )
                       )
-
-                    /\ D.p []
-                      (S.text "Here's what it produces:")
-                    /\ D.blockquote []
-                      { example: subgraph (singleton 0 (Just unit))
-                          (AsSubgraph (sg dt))
-                      }
-                    /\ D.h2 [] (S.text "Event handling")
-                    /\ D.p []
-                      ( D.text
-                          """All DOM event handlers, like """
-                          @@ D.code [] (S.text "OnClick")
-                          /\ D.text
-                            """ and """
-                          /\ D.code [] (S.text "OnInput")
-                          /\ D.text
-                            """, can be set with a value of type """
-                          /\ D.code [] (S.text "Cb")
-                          /\ D.text
-                            """. This type is a newtype around"""
-                          /\ D.code []
-                            (S.text "(Event -> Effect Boolean)")
-                          /\ D.text
-                            """. In order to actually trigger the event, you'll use the"""
-                          /\ D.code [] (S.text "push")
-                          /\ D.text
-                            """ function passed to the creation function and """
-                          /\ D.i [] (S.text "propagate")
-                          /\ D.text
-                            """ it to the next function, which is our loop. The ush function has a signature of """
-                          /\ D.code [] (S.text "(push -> Effect Unit)")
-                          /\ D.text
-                            """, where """
-                          /\ D.code [] (S.text "push")
-                          /\ D.text
-                            """is defined a per-component basis. Here, the type used is """
-                          /\ D.code [] (S.text "UIEvents")
-                          /\ D.text
-                            """. Whenever a push happens, it goes to the """
-                          /\ D.code [] (S.text "Right")
-                          /\ D.text
-                            """ of the first argument passed to the loop function. Let's delve into what that function is doing."""
-                          /\ unit
-                      )
-                    /\ D.h2 [] (S.text "Loop-de-loop")
-                    /\ D.p []
-                      ( D.text
-                          """The loop function works off of the fixed DOM type created on the left side of """
-                          @@ D.code [] (S.text "@>")
-                          /\ D.text
-                            """. This means that we'll no longer be able to add or remove nodes to that type, but we can change their attributes or text content."""
-
-                          /\ unit
-                      )
-                    /\ D.p []
-                      ( D.text
-                          """Changing is done with the function """
-                          @@ D.code []
-                            ( S.text
-                                "change"
-                            )
-                          /\ D.text
-                            """. """
-                          /\ D.code []
-                            ( S.text
-                                "change"
-                            )
-                          /\ D.text
-                            """ uses Barlow-style lenses to zoom into the DOM with surgical precision, changing only what needs to be changed. Deku also supports """
-                          /\ D.i []
-                            ( S.text
-                                "ad hoc"
-                            )
-                          /\ D.text
-                            """ renaming via """
-                          /\ D.code []
-                            ( S.text
-                                "myNameis'"
-                            )
-                          /\ D.text
-                            """. This is what keeps Deku so darn fast and why it is ideally suited to performance-critical webpages. Because it tracks the DOM at """
-                          /\ D.i []
-                            ( S.text
-                                "compile time"
-                            )
-                          /\ D.text
-                            """, you always know what is and isn't present, which allows for one-off changes without re-rendering a bunch of elements. It's even faster than React, having a similar performance profile as Svelte while giving the full power of PureScript's functional language."""
-                          /\ unit
-                      )
-                    /\ D.h2 [] (S.text "Arguments to our loop")
-                    /\ D.p []
-                      ( D.text
-                          """The first argument to our loop is an """
-                          @@ D.code [] (S.text "Either env push")
-                          /\ D.text
-                            """. We've already seen that"""
-                          /\ D.code [] (S.text "push")
-                          /\ D.text
-                            """ in this example is"""
-                          /\ D.code [] (S.text "UIEvents")
-                          /\ D.text
-                            """. We're not using """
-                          /\ D.code [] (S.text "env")
-                          /\ D.text
-                            """ yet, but we will when we talk about subgraphs."""
-                          /\ unit
-                      )
-                    /\ D.p []
-                      ( D.text
-                          """The second argument is a custom accumulator. In our case, we use """
-                          @@ D.code [] (S.text "push /\\ Int")
-                          /\ D.text
-                            """ to propagate the push and track the number of clicks. The accumulator must be returned as the value contained in the monad created by"""
-                          /\ D.code [] (S.text "create")
-                          /\ D.text
-                            """."""
-                          /\ unit
-                      )
-                    /\ D.h2 [] (S.text "Next steps")
-                    /\ D.p []
-                      ( D.text
-                          "In this section, saw how to react to events using the looping function in combination with "
-                          @@ D.code [] (S.text "change")
-                          /\ D.text
-                            ". In the next section, we'll use a similar mechanism to deal with arbitrary "
-                          /\ D.a
-                            [ cot dt $ cb
-                                ( const $ dpage Effects *>
-                                    scrollToTop
-                                )
-                            , D.Style := "cursor:pointer;"
-                            ]
-                            (S.text "effects")
-                          /\ D.span []
-                            ( S.text "."
-                            )
-                          /\ unit
-                      )
-                    /\ unit
-                )
-            }
-        }
-  ) %> freeze
-
-data UIEvents = ButtonClicked | SliderMoved Number
-sg :: DeviceType -> SubgraphSig Int Unit UIEvents
-sg dt _ =
-  ( \_ push ->
-      S.div []
-        ( { div1: D.div []
-              { button: D.button
-                  [ cot dt $ cb (const $ push ButtonClicked)
                   ]
-                  (S.text "Click")
-              , count: D.div [] (S.text "Val: 0")
-              }
-          , div2: D.div []
-              { slider: D.input
-                  [ D.Xtype := "range"
-                  , D.OnInput := cb \e -> for_
-                      (target e >>= fromEventTarget >>= fromElement)
-                      (valueAsNumber >=> push <<< SliderMoved)
+              , D.div_
+                  [ D.input
+                      ( oneOfMap pure
+                          [ D.Xtype := "range"
+                          , D.OnInput := cb \e -> for_
+                              ( target e
+                                  >>= fromEventTarget
+                                  >>= fromElement
+                              )
+                              ( valueAsNumber
+                                  >=> push <<< SliderMoved
+                              )
+                          ]
+                      )
+                      []
+                  , D.div_
+                      [ text
+                          ( (pure "Val: 50") <|>
+                              ( filterMap
+                                  ( case _ of
+                                      SliderMoved n -> Just n
+                                      _ -> Nothing
+                                  )
+                                  event
+                                  # map (append "Val: " <<< show)
+                              )
+                          )
+                      ]
                   ]
-                  {}
-              , val: D.div [] (S.text "Val: 50")
-              }
-          }
-        )
-        /\ 0
-  ) %> \e nclicks -> case e of
-    Left _ -> pure nclicks
-    Right ButtonClicked ->
-      let
-        c = nclicks + 1
-      in
-        change
-          { "div.div1.count.t": "Val: " <> show c
-          , "div.div1.button.t":
-              if mod c 2 == 0 then "Click" else "me"
-          } $> c
-    Right (SliderMoved n) -> change { "div.div2.val.t": "Val: " <> show n }
-      $> nclicks
+              ]
+      )
+  , next: pure (D.OnClick := (cb (const $ dpage PURSX2 *> scrollToTop)))
+  }

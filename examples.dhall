@@ -6,9 +6,11 @@ in      conf
               conf.dependencies
             # [  "arrays"
               , "web-html"
+              , "filterable"
               , "affjax"
               , "aff"
               , "argonaut-core"
+              , "deku-toplevel"
               , "http-methods"
               , "deku-toplevel"
               ]

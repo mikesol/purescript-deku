@@ -1,68 +1,55 @@
 module Test.Main where
 
-import Prelude hiding (compare)
+import Prelude
 
-import Data.Either (Either(..))
-import Data.Maybe (Maybe(..))
-import Deku.Control.Functions ((@>), u, freeze)
-import Deku.Control.Types (oneFrame, uRes)
-import Deku.Graph.Attribute (Attribute, prop')
-import Deku.Graph.DOM (root)
-import Deku.Graph.DOM as D
-import Deku.HTML (HTML(..))
-import Deku.Pursx (class PXStart)
-import Deku.SSR (ssr)
+import Control.Alt ((<|>))
+import Data.Tuple (Tuple(..), snd)
+import Data.Tuple.Nested ((/\))
 import Effect (Effect)
 import Effect.Aff (launchAff_)
+import Effect.Class (liftEffect)
+import Effect.Ref (Ref, modify, new, read)
+import FRP.Behavior (Behavior, behavior)
+import FRP.Event (Event, create, fix, makeEvent, sampleOn, subscribe)
 import Test.Spec (describe, it)
 import Test.Spec.Assertions (shouldEqual)
 import Test.Spec.Reporter (consoleReporter)
 import Test.Spec.Runner (runSpec)
-import Type.Proxy (Proxy(..))
-import Unsafe.Coerce (unsafeCoerce)
 
-testEmbed  :: Proxy (foo :: D.Element D.Span_ ())
-testEmbed =
-  Proxy    :: forall r. PXStart "~" " " """<div><div>~foo~</div></div>""" r => Proxy r
-testCl  :: Proxy ()
-testCl =
-  Proxy    :: forall r. PXStart "~" " " """<div><input /></div>""" r => Proxy r
-testDivDiv  :: Proxy (myH :: Array (Attribute D.H1_), myA :: Array (Attribute D.A_), myP :: Array (Attribute D.P_), newElt :: D.Element D.H2_ ())
-testDivDiv =
-  Proxy    :: forall r. PXStart "~" " " """<div class="a b">
-<h1 ~myH~>Example Domain</h1>
-~newElt~
-<!-- a comment -->
-<p ~myP~>This domain is for use in illustrative examples in documents. You may use this
-    domain in literature without prior coordination or asking for permission.</p>
-<p><a ~myA~ href="https://www.iana.org/domains/example">More information...</a></p>
-</div>""" r => Proxy r
+data Color = Red | Green | Blue
+
+c2s :: Color -> String
+c2s Red = "red"
+c2s Green = "green"
+c2s Blue = "blue"
+
+idTrain :: Ref Int -> Behavior Int
+idTrain r = behavior \f -> makeEvent \k -> do
+  r' <- modify (add 1) r
+  subscribe f \x -> k (x r')
+
+--------
+counter :: forall a. Event a -> Event (Tuple a Int)
+counter event = fix
+  ( \i ->
+      let
+        output = sampleOn (i <|> pure 0) (Tuple <$> event)
+      in
+        { input: map (add 1 <<< snd) output, output }
+  )
+---------
 
 main :: Effect Unit
 main = launchAff_ $ runSpec [ consoleReporter ] do
   describe "Tests" do
-    it "Does basic SSR" do
-      ssr
-        ( map ((#) unit)
-            ( uRes $ oneFrame
-                ( ( \_ _ ->
-                      u $ root (unsafeCoerce unit)
-                        { button: D.button []
-                            { txt: D.text "hi"
-                            }
-                        }
-
-                  ) @> freeze
-                )
-                (Left unit)
-                (const $ pure unit)
-            ).instructions
-        )
-        `shouldEqual` Just
-          ( E "div"
-              [ { key: "style"
-                , value: (prop' "display:content;")
-                }
-              ]
-              [ (E "button" [] [ (T "hi") ]) ]
-          )
+    it "Does nothing" $ do
+      rf /\ push /\ unsub <- liftEffect do
+        rf <- new []
+        { event, push } <- create
+        unsub <- subscribe (counter event) \x -> do
+          void $ modify (\i -> i <> [ x ]) rf
+        pure (rf /\ push /\ unsub)
+      liftEffect $ push true
+      -- why is this?
+      liftEffect (read rf) >>= shouldEqual [ true /\ 1 ]
+      liftEffect unsub
