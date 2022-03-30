@@ -2,13 +2,53 @@ module Deku.Example.Docs.Effects where
 
 import Prelude
 
-import Deku.Control (text_)
+import Data.Either (Either(..), hush)
+import Data.Filterable (filterMap, compact)
+import Data.Maybe (Maybe(..))
+import Data.Tuple.Nested ((/\))
+import Deku.Control (flatten, text_, text)
 import Deku.Core (Element)
 import Deku.DOM as D
 import Deku.Example.Docs.Types (Page)
 import Deku.Pursx (nut, (~~))
+import Deku.Subgraph (SubgraphAction(..), (@@))
 import Effect (Effect)
 import Type.Proxy (Proxy(..))
+import Affjax as AX
+import Affjax.ResponseFormat as ResponseFormat
+import Control.Alt ((<|>))
+import Data.Argonaut.Core (stringifyWithIndent)
+import Data.HTTP.Method (Method(..))
+import Deku.Attribute (Cb, cb, (:=))
+import Effect.Aff (launchAff_)
+import Effect.Class (liftEffect)
+import FRP.Event (mapAccum)
+
+data UIAction = Initial | Loading | Result String
+
+clickCb :: (UIAction -> Effect Unit) -> Cb
+clickCb push = cb
+  ( const do
+      push Loading
+      launchAff_ $ do
+        result <- AX.request
+          ( AX.defaultRequest
+              { url = "https://randomuser.me/api/"
+              , method = Left GET
+              , responseFormat = ResponseFormat.json
+              }
+          )
+        case result of
+          Left err -> liftEffect $ push
+            $ Result
+              ( "GET /api response failed to decode: " <>
+                  AX.printError err
+              )
+          Right response -> liftEffect $ push $ Result $
+            stringifyWithIndent 2 response.body
+  )
+
+clickText = "Click to get some random user data." :: String
 
 px = Proxy :: Proxy """<div>
   <h1>Effects</h1>
@@ -35,6 +75,148 @@ px = Proxy :: Proxy """<div>
 
 effects :: (Page -> Effect Unit) -> Element
 effects dpage  = px ~~
-  { code: nut (D.pre_ [D.code_ [text_ "Code coming soon!"]])
-  , result: nut (D.div_ [text_ "Example coming soon!"])
+  { code: nut (D.pre_ [D.code_ [text_ """module Main where
+
+import Prelude
+
+import Affjax as AX
+import Affjax.ResponseFormat as ResponseFormat
+import Control.Alt ((<|>))
+import Data.Argonaut.Core (stringifyWithIndent)
+import Data.Either (Either(..))
+import Data.Filterable (compact, filterMap)
+import Data.HTTP.Method (Method(..))
+import Data.Maybe (Maybe(..))
+import Data.Tuple.Nested ((/\))
+import Deku.Attribute (Cb, cb, (:=))
+import Deku.Control (flatten, text)
+import Deku.DOM as D
+import Deku.Toplevel ((🚀))
+import Effect (Effect)
+import Effect.Aff (launchAff_)
+import Effect.Class (liftEffect)
+import FRP.Event (mapAccum)
+
+data UIAction = Initial | Loading | Result String
+
+clickCb :: (UIAction -> Effect Unit) -> Cb
+clickCb push = cb
+  ( const do
+      push Loading
+      launchAff_ $ do
+        result <- AX.request
+          ( AX.defaultRequest
+              { url = "https://randomuser.me/api/"
+              , method = Left GET
+              , responseFormat = ResponseFormat.json
+              }
+          )
+        case result of
+          Left err -> liftEffect $ push
+            $ Result
+              ( "GET /api response failed to decode: " <>
+                  AX.printError err
+              )
+          Right response -> liftEffect $ push $ Result $
+            stringifyWithIndent 2 response.body
+  )
+
+clickText = "Click to get some random user data." :: String
+
+main :: Effect Unit
+main = Initial 🚀 \push event ->
+  let
+    loadingOrResult = filterMap
+      ( case _ of
+          Loading -> Just $ Left unit
+          Result s -> Just $ Right s
+          _ -> Nothing
+      )
+      event
+    loading = filterMap
+      ( case _ of
+          Left _ -> Just unit
+          _ -> Nothing
+      )
+      loadingOrResult
+    result = filterMap
+      ( case _ of
+          Right s -> Just s
+          _ -> Nothing
+      )
+      loadingOrResult
+  in
+    flatten
+      [ D.div_
+          [ D.button (pure (D.OnClick := clickCb push))
+              [ text
+                  ( pure clickText
+                      <|> (loading $> "Loading...")
+                      <|> (result $> clickText)
+                  )
+              ]
+          ]
+      , D.div
+          ( (pure (D.Style := "display: none;")) <|>
+              ( compact
+                  ( mapAccum
+                      ( \_ b -> (b && false) /\
+                          if b then Just unit else Nothing
+                      )
+                      result
+                      true
+                  ) $> (D.Style := "display: block;")
+              )
+          )
+          [ D.pre_ [ D.code_ [ text (pure "" <|> result) ] ] ]
+      ]
+"""]])
+  , result: nut
+      ( pure (unit /\ InsertOrUpdate unit) @@ \_ push event' ->
+          let
+            event = compact (map hush event')
+            loadingOrResult = filterMap
+              ( case _ of
+                  Loading -> Just $ Left unit
+                  Result s -> Just $ Right s
+                  _ -> Nothing
+              )
+              event
+            loading = filterMap
+              ( case _ of
+                  Left _ -> Just unit
+                  _ -> Nothing
+              )
+              loadingOrResult
+            result = filterMap
+              ( case _ of
+                  Right s -> Just s
+                  _ -> Nothing
+              )
+              loadingOrResult
+          in
+            flatten
+              [ D.div_
+                  [ D.button (pure (D.OnClick := clickCb push))
+                      [ text
+                          ( pure clickText
+                              <|> (loading $> "Loading...")
+                              <|> (result $> clickText)
+                          )
+                      ]
+                  ]
+              , D.div
+                  ( (pure (D.Style := "display: none;")) <|>
+                      ( compact
+                          ( mapAccum
+                              ( \_ b -> (b && false) /\
+                                  if b then Just unit else Nothing
+                              )
+                              result
+                              true
+                          ) $> (D.Style := "display: block;")
+                      )
+                  )
+                  [ D.pre_ [ D.code_ [ text (pure "" <|> result) ] ] ]
+              ])
   }
