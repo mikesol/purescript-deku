@@ -2,13 +2,78 @@ module Deku.Example.Docs.Subgraphs where
 
 import Prelude
 
-import Deku.Control (text_)
-import Deku.Core (Element)
+import Control.Alt ((<|>))
+import Data.Either (hush)
+import Data.Filterable (compact, partitionMap)
+import Data.Hashable (class Hashable, hash)
+import Data.Maybe (Maybe(..))
+import Data.Tuple (snd)
+import Data.Tuple.Nested ((/\))
+import Deku.Attribute (cb, (:=))
+import Deku.Control (text, text_)
+import Deku.Core (Element, Subgraph)
 import Deku.DOM as D
 import Deku.Example.Docs.Types (Page)
 import Deku.Pursx (nut, (~~))
+import Deku.Subgraph (SubgraphAction(..), (@@))
 import Effect (Effect)
+import FRP.Event (Event, mapAccum)
 import Type.Proxy (Proxy(..))
+
+data UIEvents = UIShown | ButtonClicked | SliderMoved Number
+derive instance Eq UIEvents
+
+data Sgs = Sg0 | Sg1
+derive instance Eq Sgs
+derive instance Ord Sgs
+instance Show Sgs where
+  show Sg0 = "Sg0"
+  show Sg1 = "Sg1"
+instance Hashable Sgs where
+  hash = show >>> hash
+
+counter :: forall a. Event a → Event Int
+counter event = map snd $ mapAccum f event 0
+  where
+  f a b = (b + 1) /\ (a /\ b)
+
+mySub
+  :: (Sgs -> Effect Unit)
+  -> Subgraph Sgs Unit Unit
+mySub raise Sg0 push event =
+  let
+    { left, right } = partitionMap identity event
+  in
+    D.div_
+      [ D.div_
+          [ D.button
+              (pure $ D.OnClick := cb (const $ raise Sg0))
+              [ text_ "Send to B" ]
+          , D.div_ [ text (map (append "A: " <<< show) (counter left)) ]
+          , D.button
+              (pure $ D.OnClick := cb (const $ push unit))
+              [ text_ "Send to C" ]
+          , D.div_ [ text (map (append "C: " <<< show) (map (add 1) (counter right) <|> pure 0)) ]
+          , D.hr_ []
+
+          ]
+      ]
+mySub raise Sg1 push event =
+  let
+    { left, right } = partitionMap identity event
+  in
+    D.div_
+      [ D.div_
+          [ D.button
+              (pure $ D.OnClick := cb (const $ raise Sg1))
+              [ text_ "Send to A" ]
+          , D.div_ [ text (map (append "B: " <<< show) (counter (left))) ]
+          , D.button
+              (pure $ D.OnClick := cb (const $ push unit))
+              [ text_ "Send to D" ]
+          , D.div_ [ text (map (append "D: " <<< show) (map (add 1) (counter right) <|> pure 0)) ]
+          ]
+      ]
 
 px = Proxy :: Proxy """<div>
   <h1>Subgraphs</h1>
@@ -59,7 +124,111 @@ px = Proxy :: Proxy """<div>
 </div>"""
 
 subgraphs :: (Page -> Effect Unit) -> Element
-subgraphs dpage  = px ~~
-  { code: nut (D.pre_ [D.code_ [text_ "Code coming soon!"]])
-  , result: nut (D.div_ [text_ "Example coming soon!"])
+subgraphs dpage = px ~~
+  { code: nut (D.pre_ [ D.code_ [ text_ """module Main where
+
+import Prelude
+
+import Control.Alt ((<|>))
+import Data.Filterable (compact, partitionMap)
+import Data.Hashable (class Hashable, hash)
+import Data.Maybe (Maybe(..))
+import Data.Tuple (snd)
+import Data.Tuple.Nested ((/\))
+import Deku.Attribute (cb, (:=))
+import Deku.Control (text, text_)
+import Deku.Core (Subgraph)
+import Deku.DOM as D
+import Deku.Subgraph (SubgraphAction(..), (@@))
+import Deku.Toplevel ((🚀))
+import Effect (Effect)
+import FRP.Event (Event, mapAccum)
+
+data UIEvents = UIShown | ButtonClicked | SliderMoved Number
+derive instance Eq UIEvents
+
+data Sgs = Sg0 | Sg1
+derive instance Eq Sgs
+derive instance Ord Sgs
+instance Show Sgs where
+  show Sg0 = "Sg0"
+  show Sg1 = "Sg1"
+instance Hashable Sgs where
+  hash = show >>> hash
+
+counter :: forall a. Event a → Event Int
+counter event = map snd $ mapAccum f event 0
+  where
+  f a b = (b + 1) /\ (a /\ b)
+
+mySub
+  :: (Sgs -> Effect Unit)
+  -> Subgraph Sgs Unit Unit
+mySub raise Sg0 push event =
+  let
+    { left, right } = partitionMap identity event
+  in
+    D.div_
+      [ D.div_
+          [ D.button
+              (pure $ D.OnClick := cb (const $ raise Sg0))
+              [ text_ "Send to B" ]
+          , D.div_ [ text
+                     (map (append "A: " <<< show) (counter left)) ]
+          , D.button
+              (pure $ D.OnClick := cb (const $ push unit))
+              [ text_ "Send to C" ]
+          , D.div_ [ text (map (append "C: " <<< show)
+                     (map (add 1) (counter right) <|> pure 0)) ]
+          , D.hr_ []
+
+          ]
+      ]
+mySub raise Sg1 push event =
+  let
+    { left, right } = partitionMap identity event
+  in
+    D.div_
+      [ D.div_
+          [ D.button
+              (pure $ D.OnClick := cb (const $ raise Sg1))
+              [ text_ "Send to A" ]
+          , D.div_ [ text
+                     (map (append "B: " <<< show) (counter left)) ]
+          , D.button
+              (pure $ D.OnClick := cb (const $ push unit))
+              [ text_ "Send to D" ]
+          , D.div_ [ text (map (append "D: " <<< show)
+                     (map (add 1) (counter right) <|> pure 0)) ]
+          ]
+      ]
+
+main :: Effect Unit
+main = Nothing 🚀 \push event ->
+  ( pure (Sg0 /\ InsertOrUpdate unit)
+      <|> pure (Sg1 /\ InsertOrUpdate unit)
+      <|>
+        ( compact event # map
+            ( case _ of
+                Sg0 -> Sg1 /\ InsertOrUpdate unit
+                Sg1 -> Sg0 /\ InsertOrUpdate unit
+            )
+        )
+  ) @@ mySub (push <<< Just)""" ] ])
+  , result: nut
+      ( pure (unit /\ InsertOrUpdate unit) @@ \_ push event' ->
+          let
+            event = compact (map hush event')
+          in
+            ( pure (Sg0 /\ InsertOrUpdate unit)
+                <|> pure (Sg1 /\ InsertOrUpdate unit)
+                <|>
+                  ( compact event # map
+                      ( case _ of
+                          Sg0 -> Sg1 /\ InsertOrUpdate unit
+                          Sg1 -> Sg0 /\ InsertOrUpdate unit
+                      )
+                  )
+            ) @@ mySub (push <<< Just)
+      )
   }

@@ -60,7 +60,7 @@ myDom = Proxy :: Proxy """<div>
 
 pursx2 :: (Page -> Effect Unit) -> Element
 pursx2 dpage = makePursx' (Proxy :: _ "?") px
-  { code: nut (D.pre_ [D.code_ [text_ $ """module Deku.Examples.Docs.Examples.Pursx2 where
+  { code: nut (D.pre_ [D.code_ [text_ $ """module Main where
 
 import Prelude
 
