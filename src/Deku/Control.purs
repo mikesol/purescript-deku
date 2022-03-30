@@ -12,7 +12,7 @@ import Prelude
 import Control.Alt ((<|>))
 import Control.Plus (empty)
 import Data.Distributive (distribute)
-import Data.Foldable (foldl)
+import Data.Foldable (foldl, oneOf)
 import Deku.Attribute (Attribute, unsafeUnAttribute)
 import Deku.Core (DOMInterpret(..), Element, Element', Element_)
 import FRP.Behavior (sample_)
@@ -95,16 +95,15 @@ text_ txt = text (pure txt)
 deku
   :: forall dom engine
    . Web.DOM.Element
-  -> Array (Element_ dom engine)
+  -> Element_ dom engine
   -> DOMInterpret dom engine
   -> Event (dom -> engine)
 deku root elts di@(DOMInterpret { ids, makeRoot }) =
   keepLatest
     ( (sample_ ids (pure unit)) <#> \me ->
-        foldl (<|>) empty $
-          [ pure (makeRoot { id: me, root })
-          ]
-            <> (map (\kid -> kid me di) elts)
+        oneOf $
+          [ pure (makeRoot { id: me, root }),
+           (elts me di)]
     )
 
 many :: forall a b. Event a -> (a -> Array b) -> Event b

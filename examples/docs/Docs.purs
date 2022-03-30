@@ -8,7 +8,7 @@ import Data.Foldable (for_, oneOfMap)
 import Data.Maybe (Maybe(..))
 import Data.Tuple.Nested ((/\))
 import Deku.Attribute (cb, (:=))
-import Deku.Control (deku, text_)
+import Deku.Control (deku, flatten, text_)
 import Deku.Core (Element_, Subgraph)
 import Deku.DOM as D
 import Deku.Example.Docs.Component as Component
@@ -32,9 +32,9 @@ import Web.HTML.Window (document)
 scene
   :: (Page -> Effect Unit)
   -> Event Page
-  -> Array (Element_ FFIDOMSnapshot (Effect Unit))
+  -> Element_ FFIDOMSnapshot (Effect Unit)
 scene push event =
-  [ D.div_
+  flatten [ D.div_
       $ map
         ( \(x /\ y /\ z) -> D.span_
             [ D.a

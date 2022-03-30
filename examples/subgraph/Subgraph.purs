@@ -11,7 +11,7 @@ import Data.Maybe (Maybe(..))
 import Data.Tuple (Tuple(..), snd)
 import Data.Tuple.Nested ((/\))
 import Deku.Attribute (cb, (:=))
-import Deku.Control (deku)
+import Deku.Control (deku, flatten)
 import Deku.Control as C
 import Deku.Core (Element_)
 import Deku.DOM as D
@@ -43,99 +43,102 @@ n1 = 10
 scene
   :: (HelloWorld -> Effect Unit)
   -> Event HelloWorld
-  -> Array (Element_ FFIDOMSnapshot (Effect Unit))
+  -> Element_ FFIDOMSnapshot (Effect Unit)
 scene push event =
-  [ D.div_
-      [ D.a
-          ( oneOfMap pure
-              [ D.Href := "#"
-              , D.OnClick := cb (const $ push Hello)
-              ]
-          )
-          [ C.text_ "click" ]
-      , S.subgraph
-          ( falsy n0 <|>
-              map (\_ -> 9 /\ InsertOrUpdate true)
-                ( counter hellos # filterMap
-                    (\(Tuple _ y) -> if y == 0 then Nothing else Just unit)
-                )
-          )
-          \index hsup tneve -> D.a
-            ( pure (D.Href := "#") <|> pure
-                ( D.OnClick := cb
-                    ( const $ do
-                        hsup unit
-                        when (index == 4) (push Hello)
-                    )
-                )
+  flatten
+    [ D.div_
+        [ D.a
+            ( oneOfMap pure
+                [ D.Href := "#"
+                , D.OnClick := cb (const $ push Hello)
+                ]
             )
-            [ C.text
-                ( ( counter (tneve # filterMap hush) # map
-                      (\(_ /\ y) -> if mod y 2 == 0 then " em " else " me ")
-                  ) <|> (pure " me ") <|>
-                    ( (dropFirst tneve)
-                        # filterMap
-                          ( case _ of
-                              Left _ -> Just unit
-                              Right _ -> Nothing
-                          )
-                        # map (const " banana ")
-                    )
-                )
-            ]
-      ]
-  , D.div_
-      [ D.a
-          ( oneOfMap pure
-              [ D.Href := "#", D.OnClick := cb (const $ push World) ]
-          )
-          [ C.text_ "click" ]
-      , D.span_
-          [ S.subgraph
-              ( falsy n1 <|>
-                  ( counter worlds
-                      # map snd
-                      # map
-                        ( \lmt ->
-                            let
-                              moded = lmt `mod` 10
-                            in
-                              oneOfMap pure
-                                ( map
-                                    ( \i -> i /\
-                                        ( if i < (moded + 1) then InsertOrUpdate
-                                            false
-                                          else Remove
-                                        )
-                                    )
-                                    (0 .. 10)
-                                ) <|>
-                                (guard (moded == 5) $> (5 /\ SendToTop))
-                        )
-                      # keepLatest
+            [ C.text_ "click" ]
+        , S.subgraph
+            ( falsy n0 <|>
+                map (\_ -> 9 /\ InsertOrUpdate true)
+                  ( counter hellos # filterMap
+                      (\(Tuple _ y) -> if y == 0 then Nothing else Just unit)
+                  )
+            )
+            \index hsup tneve -> D.a
+              ( pure (D.Href := "#") <|> pure
+                  ( D.OnClick := cb
+                      ( const $ do
+                          hsup unit
+                          when (index == 4) (push Hello)
+                      )
                   )
               )
-              \index hsup tneve -> D.a
-                ( pure (D.Href := "#") <|> pure
-                    ( D.OnClick := cb
-                        ( const $ do
-                            hsup unit
-                            when (index == 4) (push Hello)
-                        )
+              [ C.text
+                  ( ( counter (tneve # filterMap hush) # map
+                        (\(_ /\ y) -> if mod y 2 == 0 then " em " else " me ")
+                    ) <|> (pure " me ") <|>
+                      ( (dropFirst tneve)
+                          # filterMap
+                            ( case _ of
+                                Left _ -> Just unit
+                                Right _ -> Nothing
+                            )
+                          # map (const " banana ")
+                      )
+                  )
+              ]
+        ]
+    , D.div_
+        [ D.a
+            ( oneOfMap pure
+                [ D.Href := "#", D.OnClick := cb (const $ push World) ]
+            )
+            [ C.text_ "click" ]
+        , D.span_
+            [ S.subgraph
+                ( falsy n1 <|>
+                    ( counter worlds
+                        # map snd
+                        # map
+                          ( \lmt ->
+                              let
+                                moded = lmt `mod` 10
+                              in
+                                oneOfMap pure
+                                  ( map
+                                      ( \i -> i /\
+                                          ( if i < (moded + 1) then
+                                              InsertOrUpdate
+                                                false
+                                            else Remove
+                                          )
+                                      )
+                                      (0 .. 10)
+                                  ) <|>
+                                  (guard (moded == 5) $> (5 /\ SendToTop))
+                          )
+                        # keepLatest
                     )
                 )
-                [ C.text
-                    ( ( counter (tneve # filterMap hush) # map
-                          ( \(_ /\ y) -> (if mod y 2 == 0 then " em" else " me")
-                              <> show index
-                              <> " "
+                \index hsup tneve -> D.a
+                  ( pure (D.Href := "#") <|> pure
+                      ( D.OnClick := cb
+                          ( const $ do
+                              hsup unit
+                              when (index == 4) (push Hello)
                           )
-                      ) <|> (pure (" me" <> show index <> " "))
-                    )
-                ]
-          ]
-      ]
-  ]
+                      )
+                  )
+                  [ C.text
+                      ( ( counter (tneve # filterMap hush) # map
+                            ( \(_ /\ y) ->
+                                (if mod y 2 == 0 then " em" else " me")
+                                  <> show index
+                                  <> " "
+                            )
+                        ) <|> (pure (" me" <> show index <> " "))
+                      )
+                  ]
+            ]
+        ]
+    ]
   where
   falsy n = oneOfMap pure (map (\i -> i /\ InsertOrUpdate false) (0 .. n))
   hellos = filterMap

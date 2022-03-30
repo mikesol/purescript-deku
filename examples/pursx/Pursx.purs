@@ -29,9 +29,9 @@ px = Proxy :: Proxy """<div>
 scene
   :: (Boolean -> Effect Unit)
   -> Event Boolean
-  -> Array (Element_ FFIDOMSnapshot (Effect Unit))
+  -> Element_ FFIDOMSnapshot (Effect Unit)
 scene push event =
-  [ D.div empty
+  D.div empty
       [ px ~~
           { btn: pure (D.Style := "background-color: rgb(133,151,217)")
           , somethingElse:
@@ -45,7 +45,7 @@ scene push event =
           }
       , C.text (event <#> if _ then "Oh hi" else "Oh bye")
       ]
-  ]
+
 
 main :: Effect Unit
 main = do

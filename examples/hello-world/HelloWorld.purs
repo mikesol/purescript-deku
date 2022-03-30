@@ -7,7 +7,7 @@ import Data.Foldable (for_, oneOfMap)
 import Data.Maybe (Maybe(..))
 import Data.Tuple (Tuple(..))
 import Deku.Attribute (cb, (:=))
-import Deku.Control (deku)
+import Deku.Control (deku, flatten)
 import Deku.Control as C
 import Deku.Core (Element_)
 import Deku.DOM as D
@@ -26,26 +26,27 @@ counter event = mapAccum f event 0
 scene
   :: (Boolean -> Effect Unit)
   -> Event Boolean
-  -> Array (Element_ FFIDOMSnapshot (Effect Unit))
+  -> Element_ FFIDOMSnapshot (Effect Unit)
 scene push event =
-  [ D.div empty [ C.text (pure "Stops after 3 clicks") ]
-  , C.text (event <#> if _ then "click " else "kcilc ")
-  , D.button
-      ( counter event
-          # filterMap
-            (\(Tuple x y) -> if y < 4 then Just x else Nothing)
-          # map
-            ( \e ->
-                oneOfMap pure
-                  [ D.Style := "background-color: rgb(160,234,203);"
-                  , D.OnClick := cb (const $ push (not e))
-                  ]
+  flatten
+    [ D.div empty [ C.text (pure "Stops after 3 clicks") ]
+    , C.text (event <#> if _ then "click " else "kcilc ")
+    , D.button
+        ( counter event
+            # filterMap
+              (\(Tuple x y) -> if y < 4 then Just x else Nothing)
+            # map
+              ( \e ->
+                  oneOfMap pure
+                    [ D.Style := "background-color: rgb(160,234,203);"
+                    , D.OnClick := cb (const $ push (not e))
+                    ]
 
-            )
-          # keepLatest
-      )
-      [ C.text_ "me" ]
-  ]
+              )
+            # keepLatest
+        )
+        [ C.text_ "me" ]
+    ]
 
 main :: Effect Unit
 main = do
