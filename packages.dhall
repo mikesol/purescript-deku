@@ -210,6 +210,12 @@ let additions =
         , repo =
             "https://github.com/natefaubion/purescript-convertable-options.git"
         , version = "v1.0.0"
+        }, deku-toplevel =
+        { dependencies =
+          [  "effect"
+          ]
+        , repo = "https://github.com/mikesol/purescript-deku-toplevel.git"
+        , version = "radical"
         }
       }
 

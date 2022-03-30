@@ -2,8 +2,11 @@ module Deku.Example.Docs.Intro where
 
 import Prelude
 
+import Deku.Attribute (cb, (:=))
 import Deku.Core (Element)
-import Deku.Example.Docs.Types (Page)
+import Deku.DOM as D
+import Deku.Example.Docs.Types (Page(..))
+import Deku.Example.Docs.Util (scrollToTop)
 import Deku.Pursx ((~~))
 import Effect (Effect)
 import Type.Proxy (Proxy(..))
@@ -11,7 +14,7 @@ import Type.Proxy (Proxy(..))
 px = Proxy :: Proxy """<div>
   <h1>Deku</h1>
 
-  <h2>A web micro-framework written in PureScript</h2>
+  <h3>A web micro-framework written in PureScript</h3>
 
   <p>Hi! You've found Deku.</p>
 
@@ -23,8 +26,9 @@ px = Proxy :: Proxy """<div>
 
   <p>This documentation is written in Deku and can be found here. One good way to follow along is by using the Deku starter repo, which you can clone here.</p>
 
-  <p>And now, without further ado, check out the hello world section!</p>
+  <p>And now, without further ado, check out the <a ~next~ style="cursor:pointer;">hello world section</a>!</p>
 </div>"""
 
 intro :: (Page -> Effect Unit) -> Element
-intro dpage  = px ~~ {}
+intro dpage  = px ~~
+  { next: pure (D.OnClick := (cb (const $ dpage HelloWorld *> scrollToTop))) }

@@ -184,8 +184,8 @@ instance pursxToElementConsElt ::
       { cache, element } = pursxToElement (Proxy :: Proxy rest) r
     in
       { cache: Object.insert (reflectSymbol pxk) false cache
-      , element: \parent di -> pxe parent di
-          <|> element (reflectSymbol pxk) di
+      , element: \parent di -> pxe (reflectSymbol pxk) di
+          <|> element parent di
       }
     where
     pxk = Proxy :: _ key

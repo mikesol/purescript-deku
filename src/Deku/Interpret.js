@@ -100,7 +100,7 @@ exports.setText_ = function (a) {
 	return function (state) {
 		return function () {
 			var ptr = a.id;
-			state.units[ptr].main.nodeValue = a.text.replace(/\n/g, "<br>");
+			state.units[ptr].main.nodeValue = a.text;//.replace(/\n/g, "<br>");
 		};
 	};
 };

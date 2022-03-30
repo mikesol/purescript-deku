@@ -2,6 +2,7 @@ module Deku.Example.Docs.Effects where
 
 import Prelude
 
+import Deku.Control (text_)
 import Deku.Core (Element)
 import Deku.DOM as D
 import Deku.Example.Docs.Types (Page)
@@ -34,6 +35,6 @@ px = Proxy :: Proxy """<div>
 
 effects :: (Page -> Effect Unit) -> Element
 effects dpage  = px ~~
-  { code: nut (D.div_ [])
-  , result: nut (D.div_ [])
+  { code: nut (D.pre_ [D.code_ [text_ "Code coming soon!"]])
+  , result: nut (D.div_ [text_ "Example coming soon!"])
   }

@@ -44,3 +44,5 @@ subgraph
           mods
     )
     (sample_ ids (pure unit))
+
+infixr 6 subgraph as @@

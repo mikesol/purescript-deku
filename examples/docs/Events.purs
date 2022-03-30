@@ -2,14 +2,30 @@ module Deku.Example.Docs.Events where
 
 import Prelude
 
+import Control.Alt ((<|>))
+import Data.Either (hush)
+import Data.Filterable (compact, filter, filterMap)
+import Data.Foldable (for_, oneOfMap)
+import Data.Maybe (Maybe(..))
+import Data.Tuple.Nested ((/\))
+import Deku.Attribute (cb, (:=))
+import Deku.Control (flatten, text, text_)
 import Deku.Core (Element)
 import Deku.DOM as D
 import Deku.Example.Docs.Types (Page)
 import Deku.Pursx (nut, (~~))
+import Deku.Subgraph (SubgraphAction(..), (@@))
 import Effect (Effect)
+import FRP.Event (mapAccum)
 import Type.Proxy (Proxy(..))
+import Web.DOM.Element (fromEventTarget)
+import Web.Event.Event (target)
+import Web.HTML.HTMLInputElement (fromElement, valueAsNumber)
 
-px = Proxy :: Proxy """<div>
+data UIEvents = UIShown | ButtonClicked | SliderMoved Number
+derive instance Eq UIEvents
+px = Proxy :: Proxy
+      """<div>
   <h1>Events</h1>
 
   <h2>Listening to the DOM</h2>
@@ -36,7 +52,131 @@ px = Proxy :: Proxy """<div>
 </div>"""
 
 events :: (Page -> Effect Unit) -> Element
-events dpage  = px ~~
-  { code: nut (D.div_ [])
-  , result: nut (D.div_ [])
+events dpage = px ~~
+  { code: nut
+      ( D.pre_
+          [ D.code_
+              [ text_
+                  """module Main where
+
+import Prelude
+
+import Control.Alt ((<|>))
+import Data.Filterable (filter, filterMap)
+import Data.Foldable (for_, oneOfMap)
+import Data.Maybe (Maybe(..))
+import Data.Tuple.Nested ((/\))
+import Deku.Attribute (cb, (:=))
+import Deku.Control (text, text_)
+import Deku.DOM as D
+import Deku.Toplevel ((🚀))
+import Effect (Effect)
+import FRP.Event (mapAccum)
+import Web.DOM.Element (fromEventTarget)
+import Web.Event.Event (target)
+import Web.HTML.HTMLInputElement (fromElement, valueAsNumber)
+
+data UIEvents = UIShown | ButtonClicked | SliderMoved Number
+derive instance Eq UIEvents
+
+main :: Effect Unit
+main = UIShown 🚀 \push event ->
+  D.div_
+    [ D.button
+        (pure (D.OnClick := cb (const $ push ButtonClicked)))
+        [ text_ "Click" ]
+    , D.div_
+        [ text
+            ( (pure "Val: 0") <|>
+                ( mapAccum (const $ \x -> (x + 1) /\ x)
+                    (filter (eq ButtonClicked) event)
+                    1
+                    # map (append "Val: " <<< show)
+                )
+            )
+        ]
+    , D.div_
+        [ D.input
+            ( oneOfMap pure
+                [ D.Xtype := "range"
+                , D.OnInput := cb \e -> for_
+                    ( target e
+                        >>= fromEventTarget
+                        >>= fromElement
+                    )
+                    ( valueAsNumber
+                        >=> push <<< SliderMoved
+                    )
+                ]
+            )
+            []
+        , D.div_
+            [ text
+                ( (pure "Val: 50") <|>
+                    ( filterMap
+                        ( case _ of
+                            SliderMoved n -> Just n
+                            _ -> Nothing
+                        )
+                        event
+                        # map (append "Val: " <<< show)
+                    )
+                )
+            ]
+        ]
+    ]
+"""
+              ]
+          ]
+      )
+  , result: nut
+      ( pure (unit /\ InsertOrUpdate unit) @@ \_ push event' ->
+          let
+            event = compact (map hush event')
+          in
+            flatten
+              [ D.button
+                  (pure (D.OnClick := cb (const $ push ButtonClicked)))
+                  [ text_ "Click" ]
+              , D.div_
+                  [ text
+                      ( (pure "Val: 0") <|>
+                          ( mapAccum (const $ \x -> (x + 1) /\ x)
+                              (filter (eq ButtonClicked) event)
+                              1
+                              # map (append "Val: " <<< show)
+                          )
+                      )
+                  ]
+              , D.div_
+                  [ D.input
+                      ( oneOfMap pure
+                          [ D.Xtype := "range"
+                          , D.OnInput := cb \e -> for_
+                              ( target e
+                                  >>= fromEventTarget
+                                  >>= fromElement
+                              )
+                              ( valueAsNumber
+                                  >=> push <<< SliderMoved
+                              )
+                          ]
+                      )
+                      []
+                  , D.div_
+                      [ text
+                          ( (pure "Val: 50") <|>
+                              ( filterMap
+                                  ( case _ of
+                                      SliderMoved n -> Just n
+                                      _ -> Nothing
+                                  )
+                                  event
+                                  # map (append "Val: " <<< show)
+                              )
+                          )
+                      ]
+                  ]
+              ]
+      )
   }
