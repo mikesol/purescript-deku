@@ -11,7 +11,8 @@ import Deku.Attribute (cb, (:=))
 import Deku.Control (text, text_)
 import Deku.Core (Element)
 import Deku.DOM as D
-import Deku.Example.Docs.Types (Page)
+import Deku.Example.Docs.Types (Page(..))
+import Deku.Example.Docs.Util (scrollToTop)
 import Deku.Pursx (makePursx', nut, (~~))
 import Deku.Subgraph (SubgraphAction(..), (@@))
 import Effect (Effect)
@@ -38,7 +39,7 @@ px = Proxy :: Proxy """<div>
   <p>Named slots for dynamic content are added to PursX with between two tildes, like <code>~foo~</code>. This separator doesn't have to be a tilde - it can be set programatically as well (see the Deku/Pursx.purs module for an example of how that is done). Also, we no longer use the <code>psx</code> command. Instead, we use the infix operator <code>~~</code> followed by arguments to our template. In the case of dynamic attributes, the argument is a stream of attributes. In the case of a dynamic section, the arguments are of type <code>Element</code>.</p>
 
   <h2>Next steps</h2>
-  <p>In more complicated apps, like this documentation, we'll want to split up our components into sub-components and create a way for them to communicate back and forth. In the next section, we'll see one way to do this via subgraphs.</p>
+  <p>In more complicated apps, like this documentation, we'll want to split up our components into sub-components and create a way for them to communicate back and forth. In the next section, we'll see one way to do this via <a ?next? style="cursor:pointer;">subgraphs</a>.</p>
 </div>"""
 
 myDom = Proxy :: Proxy """<div>
@@ -118,4 +119,5 @@ main = Nothing 🚀 \push event -> myDom ~~
       )
   }
       )
+  , next: pure (D.OnClick := (cb (const $ dpage Subgraph *> scrollToTop)))
   }

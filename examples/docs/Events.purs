@@ -12,7 +12,8 @@ import Deku.Attribute (cb, (:=))
 import Deku.Control (flatten, text, text_)
 import Deku.Core (Element)
 import Deku.DOM as D
-import Deku.Example.Docs.Types (Page)
+import Deku.Example.Docs.Types (Page(..))
+import Deku.Example.Docs.Util (scrollToTop)
 import Deku.Pursx (nut, (~~))
 import Deku.Subgraph (SubgraphAction(..), (@@))
 import Effect (Effect)
@@ -48,7 +49,7 @@ px = Proxy :: Proxy
   <p>If every attribute responded to every event, Deku would become very slow. Thankfully, there's a solution. `Event` implements the `Filterable` typeclass, and when you filter an `Event`, you mute the filtered-out parts for downstream consumers.</p>
 
   <h2>Next steps</h2>
-  <p>In this section, saw how to react to events using the looping function in combination with change. In the next section, we'll use a similar mechanism to deal with arbitrary effects.</p>
+  <p>In this section, saw how to react to events using the looping function in combination with change. In the next section, we'll use a similar mechanism to deal with arbitrary <a ~next~ style="cursor:pointer;">effects</a>.</p>
 </div>"""
 
 events :: (Page -> Effect Unit) -> Element
@@ -179,4 +180,5 @@ main = UIShown 🚀 \push event ->
                   ]
               ]
       )
+  , next: pure (D.OnClick := (cb (const $ dpage PURSX2 *> scrollToTop)))
   }

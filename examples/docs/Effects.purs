@@ -2,27 +2,28 @@ module Deku.Example.Docs.Effects where
 
 import Prelude
 
-import Data.Either (Either(..), hush)
-import Data.Filterable (filterMap, compact)
-import Data.Maybe (Maybe(..))
-import Data.Tuple.Nested ((/\))
-import Deku.Control (flatten, text_, text)
-import Deku.Core (Element)
-import Deku.DOM as D
-import Deku.Example.Docs.Types (Page)
-import Deku.Pursx (nut, (~~))
-import Deku.Subgraph (SubgraphAction(..), (@@))
-import Effect (Effect)
-import Type.Proxy (Proxy(..))
 import Affjax as AX
 import Affjax.ResponseFormat as ResponseFormat
 import Control.Alt ((<|>))
 import Data.Argonaut.Core (stringifyWithIndent)
+import Data.Either (Either(..), hush)
+import Data.Filterable (filterMap, compact)
 import Data.HTTP.Method (Method(..))
+import Data.Maybe (Maybe(..))
+import Data.Tuple.Nested ((/\))
 import Deku.Attribute (Cb, cb, (:=))
+import Deku.Control (flatten, text_, text)
+import Deku.Core (Element)
+import Deku.DOM as D
+import Deku.Example.Docs.Types (Page(..))
+import Deku.Example.Docs.Util (scrollToTop)
+import Deku.Pursx (nut, (~~))
+import Deku.Subgraph (SubgraphAction(..), (@@))
+import Effect (Effect)
 import Effect.Aff (launchAff_)
 import Effect.Class (liftEffect)
 import FRP.Event (mapAccum)
+import Type.Proxy (Proxy(..))
 
 data UIAction = Initial | Loading | Result String
 
@@ -70,7 +71,7 @@ px = Proxy :: Proxy """<div>
   <p>Another useful pattern when working with effects is to throttle input. For example, if we are making a network call, we may want to show a loading indicator and prevent additional network calls. This can be achieved by setting the callback to a no-op while the network call is executing, as shown in the example above.</p>
 
   <h2>Next steps</h2>
-  <p>It is also possible to handle events (and by extension effectful actions in events, like network calls) in Pursx. Let's see how in the second Pursx section.</p>
+  <p>It is also possible to handle events (and by extension effectful actions in events, like network calls) in Pursx. Let's see how in the <a ~next~ style="cursor:pointer;">second Pursx section</a>.</p>
 </div>"""
 
 effects :: (Page -> Effect Unit) -> Element
@@ -219,4 +220,5 @@ main = Initial 🚀 \push event ->
                   )
                   [ D.pre_ [ D.code_ [ text (pure "" <|> result) ] ] ]
               ])
+  , next: pure (D.OnClick := (cb (const $ dpage Effects *> scrollToTop)))
   }
