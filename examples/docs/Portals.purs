@@ -103,7 +103,7 @@ portals dpage = px ~~
       ( D.pre_
           [ D.code_
               [ text_
-                  """module Deku.Examples.Docs.Examples.Portals where
+                  """module Main where
 
 import Prelude
 
@@ -114,7 +114,7 @@ import Deku.Attribute (Attribute, cb, (:=))
 import Deku.Control (flatten, text_)
 import Deku.Core (Element, Subgraph)
 import Deku.DOM as D
-import Deku.Portal (GatewayToSubgraph, portal)
+import Deku.Portal (portal)
 import Deku.Subgraph (SubgraphAction(..), (@@))
 import Deku.Toplevel ((🚀))
 import Effect (Effect)
@@ -134,9 +134,9 @@ instance Hashable Sgs where
 
 mySub
   :: forall env push event payload
-   . Event Boolean
-  -> (Event Boolean -> Element event payload)
-  -> (Event Boolean -> Element event payload)
+   . IsEvent event => event Boolean
+  -> (event Boolean -> Element event payload)
+  -> (event Boolean -> Element event payload)
   -> Subgraph Sgs env push event payload
 mySub event gateway0 gateway1 sg _ _ = D.div_
   [ gateway0
@@ -157,9 +157,9 @@ mySub event gateway0 gateway1 sg _ _ = D.div_
       )
   ]
 
-img0' :: Event (Attribute D.Img_)
+img0' :: forall event. Applicative event => event (Attribute D.Img_)
 img0' = pure $ D.Src := "https://picsum.photos/200"
-img1' :: Event (Attribute D.Img_)
+img1' :: forall event. Applicative event => event (Attribute D.Img_)
 img1' = pure $ D.Src := "https://picsum.photos/300"
 
 main :: Effect Unit

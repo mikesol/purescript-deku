@@ -52,7 +52,7 @@ import Deku.Toplevel ((🚀))
 import Effect (Effect)
 
 main :: Effect Unit
-main = unit 🚀 \_ _ -> text_ "Hello world"""]])
+main = unit 🚀 \_ _ -> text_ "Hello world""""]])
   , result: nut (D.div_ [text_ "Hello world"])
   , next: pure (D.OnClick := (cb (const $ dpage SimpleComponent *> scrollToTop)))
   }

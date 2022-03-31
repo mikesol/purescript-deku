@@ -92,7 +92,7 @@ main = UIShown 🚀 \push event ->
             ( (pure "Val: 0") <|>
                 ( mapAccum (const $ \x -> (x + 1) /\ x)
                     (filter (eq ButtonClicked) event)
-                    1
+                    0
                     # map (append "Val: " <<< show)
                 )
             )
