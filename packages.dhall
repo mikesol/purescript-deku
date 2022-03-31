@@ -215,7 +215,7 @@ let additions =
           [  "effect"
           ]
         , repo = "https://github.com/mikesol/purescript-deku-toplevel.git"
-        , version = "radical"
+        , version = "newtypes"
         }
       }
 

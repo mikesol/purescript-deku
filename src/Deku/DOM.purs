@@ -592,22 +592,11 @@ module Deku.DOM
 
 import Prelude hiding (map)
 
-import Control.Alt ((<|>))
 import Control.Plus (empty)
-import Data.Exists (Exists, mkExists, runExists)
-import Data.Foldable (foldl)
-import Data.Functor as F
-import Data.Hashable (class Hashable)
-import Data.Map (Map)
-import Deku.Core (Element(..))
-import Data.Maybe (Maybe(..))
-import Data.Tuple (curry)
-import Data.Tuple.Nested (type (/\), (/\))
-import Deku.Attribute (class Attr, unsafeAttribute, prop', cb', Cb, Attribute, unsafeUnAttributeArray)
-import Deku.Control(elementify, text)
-import Deku.Core (DOMInterpret(..))
-import FRP.Behavior (Behavior, sample_)
-import FRP.Event (Event, keepLatest, class IsEvent)
+import Deku.Core (Element)
+import Deku.Attribute (class Attr, Attribute, Cb, cb', prop', unsafeAttribute)
+import Deku.Control (elementify)
+import FRP.Event (class IsEvent)
 
 class TagToDeku (tag :: Symbol) (deku :: Type) | tag -> deku
 

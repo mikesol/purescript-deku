@@ -3,12 +3,9 @@ module Deku.Core where
 import Prelude
 
 import Data.Either (Either)
-import Data.Maybe (Maybe)
-import Data.Nullable (Nullable)
 import Deku.Attribute (AttributeValue)
 import Effect (Effect)
 import FRP.Behavior (ABehavior)
-import FRP.Event (Event)
 import Foreign.Object (Object)
 import Web.DOM as Web.DOM
 
@@ -21,7 +18,7 @@ type Subgraph index env push event payload =
   -- the pusher for the subgraph
   -> (push -> Effect Unit)
   -- an event the subgraph can bind to
-  -> Event (Either env push)
+  -> event (Either env push)
   -- the subgraph
   -> Element event payload
 

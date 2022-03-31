@@ -3,7 +3,7 @@ module Deku.Example.Docs where
 import Prelude
 
 import Control.Alt ((<|>))
-import Control.Plus (empty)
+import Control.Plus (class Plus, empty)
 import Data.Foldable (for_, oneOfMap)
 import Data.Maybe (Maybe(..))
 import Data.Tuple.Nested ((/\))
@@ -16,24 +16,24 @@ import Deku.Example.Docs.Effects as Effects
 import Deku.Example.Docs.Events as Events
 import Deku.Example.Docs.HelloWorld as HelloWorld
 import Deku.Example.Docs.Intro as Intro
+import Deku.Example.Docs.Portals as Portals
 import Deku.Example.Docs.Pursx1 as Pursx1
 import Deku.Example.Docs.Pursx2 as Pursx2
 import Deku.Example.Docs.Subgraphs as Subgraph
-import Deku.Example.Docs.Portals as Portals
 import Deku.Example.Docs.Types (Page(..))
-import Deku.Interpret (FFIDOMSnapshot, effectfulDOMInterpret, makeFFIDOMSnapshot)
+import Deku.Interpret (effectfulDOMInterpret, makeFFIDOMSnapshot)
 import Deku.Subgraph (SubgraphAction(..), subgraph)
 import Effect (Effect)
-import FRP.Event (Event, create, keepLatest, mapAccum, subscribe)
+import FRP.Event (class IsEvent, create, keepLatest, mapAccum, subscribe)
 import Web.HTML (window)
 import Web.HTML.HTMLDocument (body)
 import Web.HTML.HTMLElement (toElement)
 import Web.HTML.Window (document)
 
 scene
-  :: (Page -> Effect Unit)
-  -> Event Page
-  -> Element FFIDOMSnapshot (Effect Unit)
+  :: forall event payload. IsEvent event => Plus event => (Page -> Effect Unit)
+  -> event Page
+  -> Element event payload
 scene push event =
   flatten [ D.div_
       $ map
@@ -97,7 +97,7 @@ scene push event =
 
   ]
   where
-  page :: (Page -> Effect Unit) -> Subgraph Page Unit Unit
+  page :: (Page -> Effect Unit) -> Subgraph Page Unit Unit event payload
   page dpage Intro _ _ = Intro.intro dpage
   page dpage HelloWorld _ _ = HelloWorld.helloWorld dpage
   page dpage SimpleComponent _ _ = Component.components dpage

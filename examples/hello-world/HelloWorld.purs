@@ -26,7 +26,7 @@ counter event = mapAccum f event 0
 scene
   :: (Boolean -> Effect Unit)
   -> Event Boolean
-  -> Element FFIDOMSnapshot (Effect Unit)
+  -> Element Event (FFIDOMSnapshot -> Effect Unit)
 scene push event =
   flatten
     [ D.div empty [ C.text (pure "Stops after 3 clicks") ]

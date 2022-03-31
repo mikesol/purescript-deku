@@ -3,6 +3,7 @@ module Deku.Example.Docs.Portals where
 import Prelude
 
 import Control.Alt ((<|>))
+import Control.Plus (class Plus)
 import Data.Either (hush)
 import Data.Filterable (compact)
 import Data.Hashable (class Hashable, hash)
@@ -17,7 +18,7 @@ import Deku.Portal (portal)
 import Deku.Pursx (nut, (~~))
 import Deku.Subgraph (SubgraphAction(..), (@@))
 import Effect (Effect)
-import FRP.Event (Event, mapAccum)
+import FRP.Event (class IsEvent, Event, mapAccum)
 import Type.Proxy (Proxy(..))
 
 data UIEvents = UIShown | ButtonClicked | SliderMoved Number
@@ -39,11 +40,11 @@ counter event = map snd $ mapAccum f event 0
 
 
 mySub
-  :: forall env push dom engine
-   . Event Boolean
-  -> (Event Boolean -> Element dom engine)
-  -> (Event Boolean -> Element dom engine)
-  -> Subgraph Sgs env push dom engine
+  :: forall env push event payload
+   . IsEvent event => event Boolean
+  -> (event Boolean -> Element event payload)
+  -> (event Boolean -> Element event payload)
+  -> Subgraph Sgs env push event payload
 mySub event gateway0 gateway1 sg _ _ = D.div_
   [ gateway0
       ( map
@@ -91,12 +92,12 @@ px =  Proxy :: Proxy """<div>
     <li><code>continuation</code> - a function yielding element that potentially uses the portal</li>
   </ul>
   <p>The element yielded by the continuation will be displayed on the screen.</p>
-  <p>The continuation takes one argument: an <code>Event Boolean</code> that indicates whether or not to display the portal. The portal will jump to whichever place in the DOM yielded true most recently. Be careful - you must send at least one true event to see your portal!</p>
+  <p>The continuation takes one argument: an <code>event Boolean</code> that indicates whether or not to display the portal. The portal will jump to whichever place in the DOM yielded true most recently. Be careful - you must send at least one true event to see your portal!</p>
   <h2>Parting shot</h2>
   <p>Thanks for checking out Deku! I had a blast writing it, I hope you have fun using it too 😊</p>
 </div>"""
 
-portals :: (Page -> Effect Unit) -> Element
+portals :: forall event payload. IsEvent event => Plus event => (Page -> Effect Unit) -> Element event payload
 portals dpage = px ~~
   { code: nut
       ( D.pre_
@@ -117,7 +118,7 @@ import Deku.Portal (GatewayToSubgraph, portal)
 import Deku.Subgraph (SubgraphAction(..), (@@))
 import Deku.Toplevel ((🚀))
 import Effect (Effect)
-import FRP.Event (Event)
+import FRP.Event (class IsEvent)
 
 data UIEvents = UIShown | ButtonClicked | SliderMoved Number
 derive instance Eq UIEvents
@@ -132,11 +133,11 @@ instance Hashable Sgs where
   hash = show >>> hash
 
 mySub
-  :: forall env push dom engine
+  :: forall env push event payload
    . Event Boolean
-  -> (Event Boolean -> Element dom engine)
-  -> (Event Boolean -> Element dom engine)
-  -> Subgraph Sgs env push dom engine
+  -> (Event Boolean -> Element event payload)
+  -> (Event Boolean -> Element event payload)
+  -> Subgraph Sgs env push event payload
 mySub event gateway0 gateway1 sg _ _ = D.div_
   [ gateway0
       ( map

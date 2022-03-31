@@ -29,7 +29,7 @@ px = Proxy :: Proxy """<div>
 scene
   :: (Boolean -> Effect Unit)
   -> Event Boolean
-  -> Element FFIDOMSnapshot (Effect Unit)
+  -> Element Event (FFIDOMSnapshot -> Effect Unit)
 scene push event =
   D.div empty
       [ px ~~

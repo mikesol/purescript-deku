@@ -3,6 +3,7 @@ module Deku.Example.Docs.Events where
 import Prelude
 
 import Control.Alt ((<|>))
+import Control.Plus (class Plus)
 import Data.Either (hush)
 import Data.Filterable (compact, filter, filterMap)
 import Data.Foldable (for_, oneOfMap)
@@ -17,7 +18,7 @@ import Deku.Example.Docs.Util (scrollToTop)
 import Deku.Pursx (nut, (~~))
 import Deku.Subgraph (SubgraphAction(..), (@@))
 import Effect (Effect)
-import FRP.Event (mapAccum)
+import FRP.Event (class IsEvent, mapAccum)
 import Type.Proxy (Proxy(..))
 import Web.DOM.Element (fromEventTarget)
 import Web.Event.Event (target)
@@ -52,7 +53,7 @@ px = Proxy :: Proxy
   <p>In this section, saw how to react to events using the looping function in combination with change. In the next section, we'll use a similar mechanism to deal with arbitrary <a ~next~ style="cursor:pointer;">effects</a>.</p>
 </div>"""
 
-events :: (Page -> Effect Unit) -> Element
+events :: forall event payload. IsEvent event => Plus event => (Page -> Effect Unit) -> Element event payload
 events dpage = px ~~
   { code: nut
       ( D.pre_
