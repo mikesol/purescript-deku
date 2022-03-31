@@ -5,6 +5,7 @@ import Prelude
 import Affjax as AX
 import Affjax.ResponseFormat as ResponseFormat
 import Control.Alt ((<|>))
+import Control.Plus (class Plus)
 import Data.Argonaut.Core (stringifyWithIndent)
 import Data.Either (Either(..), hush)
 import Data.Filterable (filterMap, compact)
@@ -22,7 +23,7 @@ import Deku.Subgraph (SubgraphAction(..), (@@))
 import Effect (Effect)
 import Effect.Aff (launchAff_)
 import Effect.Class (liftEffect)
-import FRP.Event (mapAccum)
+import FRP.Event (class IsEvent, mapAccum)
 import Type.Proxy (Proxy(..))
 
 data UIAction = Initial | Loading | Result String
@@ -74,7 +75,7 @@ px = Proxy :: Proxy """<div>
   <p>It is also possible to handle events (and by extension effectful actions in events, like network calls) in Pursx. Let's see how in the <a ~next~ style="cursor:pointer;">second Pursx section</a>.</p>
 </div>"""
 
-effects :: (Page -> Effect Unit) -> Element
+effects :: forall event payload. IsEvent event => Plus event => (Page -> Effect Unit) -> Element event payload
 effects dpage  = px ~~
   { code: nut (D.pre_ [D.code_ [text_ """module Main where
 

@@ -2,6 +2,7 @@ module Deku.Example.Docs.Pursx1 where
 
 import Prelude
 
+import Control.Plus (class Plus)
 import Deku.Attribute (cb, (:=))
 import Deku.Control (text_)
 import Deku.Core (Element)
@@ -10,6 +11,7 @@ import Deku.Example.Docs.Types (Page(..))
 import Deku.Example.Docs.Util (scrollToTop)
 import Deku.Pursx (nut, psx, (~~))
 import Effect (Effect)
+import FRP.Event (class IsEvent)
 import Type.Proxy (Proxy(..))
 
 myDom = Proxy :: Proxy """<div>
@@ -52,7 +54,7 @@ px = Proxy :: Proxy """<div>
 </div>"""
 
 
-pursx1 :: (Page -> Effect Unit) -> Element
+pursx1 :: forall event payload. IsEvent event => Plus event => (Page -> Effect Unit) -> Element event payload
 pursx1 dpage  = px ~~
   { code: nut (D.pre_ [D.code_ [text_ $ """module Main where
 
