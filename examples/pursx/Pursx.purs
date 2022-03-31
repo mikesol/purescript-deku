@@ -7,7 +7,7 @@ import Data.Foldable (for_)
 import Deku.Attribute (cb, (:=))
 import Deku.Control (deku)
 import Deku.Control as C
-import Deku.Core (Element_)
+import Deku.Core (Element)
 import Deku.DOM as D
 import Deku.Interpret (FFIDOMSnapshot, effectfulDOMInterpret, makeFFIDOMSnapshot)
 import Deku.Pursx (PursxElement(..), (~~))
@@ -29,7 +29,7 @@ px = Proxy :: Proxy """<div>
 scene
   :: (Boolean -> Effect Unit)
   -> Event Boolean
-  -> Element_ FFIDOMSnapshot (Effect Unit)
+  -> Element Event (FFIDOMSnapshot -> Effect Unit)
 scene push event =
   D.div empty
       [ px ~~

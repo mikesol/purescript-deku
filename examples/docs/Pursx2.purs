@@ -3,6 +3,7 @@ module Deku.Example.Docs.Pursx2 where
 import Prelude
 
 import Control.Alt ((<|>))
+import Control.Plus (class Plus)
 import Data.Compactable (compact)
 import Data.Either (hush)
 import Data.Maybe (Maybe(..))
@@ -16,9 +17,13 @@ import Deku.Example.Docs.Util (scrollToTop)
 import Deku.Pursx (makePursx', nut, (~~))
 import Deku.Subgraph (SubgraphAction(..), (@@))
 import Effect (Effect)
+import FRP.Event (class IsEvent)
 import Type.Proxy (Proxy(..))
 
-px = Proxy :: Proxy """<div>
+px =
+  Proxy
+    :: Proxy
+      """<div>
   <h1>Pursx 2</h1>
 
   <h2>Working with events and effects</h2>
@@ -42,7 +47,10 @@ px = Proxy :: Proxy """<div>
   <p>In more complicated apps, like this documentation, we'll want to split up our components into sub-components and create a way for them to communicate back and forth. In the next section, we'll see one way to do this via <a ?next? style="cursor:pointer;">subgraphs</a>.</p>
 </div>"""
 
-myDom = Proxy :: Proxy """<div>
+myDom =
+  Proxy
+    :: Proxy
+      """<div>
         <button>I do nothing</button>
         <ul>
           <li>A</li>
@@ -59,9 +67,18 @@ myDom = Proxy :: Proxy """<div>
       </div>
 """
 
-pursx2 :: (Page -> Effect Unit) -> Element
+pursx2
+  :: forall event payload
+   . IsEvent event
+  => Plus event
+  => (Page -> Effect Unit)
+  -> Element event payload
 pursx2 dpage = makePursx' (Proxy :: _ "?") px
-  { code: nut (D.pre_ [D.code_ [text_ $ """module Main where
+  { code: nut
+      ( D.pre_
+          [ D.code_
+              [ text_ $
+                  """module Main where
 
 import Prelude
 
@@ -76,7 +93,8 @@ import Deku.Toplevel ((🚀))
 import Effect (Effect)
 import Type.Proxy (Proxy(..))
 
-myDom = Proxy :: Proxy """ <> "\"\"\"" <> """<div>
+myDom = Proxy :: Proxy """ <> "\"\"\""
+                    <> """<div>
         <button>I do nothing</button>
         <ul>
           <li>A</li>
@@ -91,7 +109,10 @@ myDom = Proxy :: Proxy """ <> "\"\"\"" <> """<div>
         </div>
         <div><div></div><div><input type="range"/></div></div>
       </div>
-""" <> "\"\"\"" <> """
+"""
+                    <> "\"\"\""
+                    <>
+                      """
 
 main :: Effect Unit
 main = Nothing 🚀 \push event -> myDom ~~
@@ -103,21 +124,25 @@ main = Nothing 🚀 \push event -> myDom ~~
                   pure "I was dynamically inserted"
           ]
       )
-  }"""]])
+  }"""
+              ]
+          ]
+      )
   , result: nut
       ( pure (unit /\ InsertOrUpdate unit) @@ \_ push event' ->
           let
             event = compact (map hush event')
           in
-            myDom ~~ { myli: pure (D.Style := "background-color:rgb(200,240,210);")
-  , somethingNew: nut
-      ( D.button (pure (D.OnClick := cb (const $ push (Just unit))))
-          [ text
-              $ (compact event $> "Thanks for clicking me!") <|>
-                  pure "I was dynamically inserted"
-          ]
-      )
-  }
+            myDom ~~
+              { myli: pure (D.Style := "background-color:rgb(200,240,210);")
+              , somethingNew: nut
+                  ( D.button (pure (D.OnClick := cb (const $ push (Just unit))))
+                      [ text
+                          $ (compact event $> "Thanks for clicking me!") <|>
+                            pure "I was dynamically inserted"
+                      ]
+                  )
+              }
       )
   , next: pure (D.OnClick := (cb (const $ dpage Subgraph *> scrollToTop)))
   }

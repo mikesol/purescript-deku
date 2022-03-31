@@ -4,7 +4,8 @@ import Prelude
 
 import Control.Alt ((<|>))
 import Data.Either (hush)
-import Data.Filterable (compact, partitionMap)
+import Control.Plus (class Plus)
+import Data.Filterable (class Filterable, compact, partitionMap)
 import Data.Hashable (class Hashable, hash)
 import Data.Maybe (Maybe(..))
 import Data.Tuple (snd)
@@ -18,7 +19,7 @@ import Deku.Example.Docs.Util (scrollToTop)
 import Deku.Pursx (nut, (~~))
 import Deku.Subgraph (SubgraphAction(..), (@@))
 import Effect (Effect)
-import FRP.Event (Event, mapAccum)
+import FRP.Event (class IsEvent, mapAccum)
 import Type.Proxy (Proxy(..))
 
 data UIEvents = UIShown | ButtonClicked | SliderMoved Number
@@ -33,14 +34,17 @@ instance Show Sgs where
 instance Hashable Sgs where
   hash = show >>> hash
 
-counter :: forall a. Event a → Event Int
+counter :: forall event a. IsEvent event => event a → event Int
 counter event = map snd $ mapAccum f event 0
   where
   f a b = (b + 1) /\ (a /\ b)
 
 mySub
-  :: (Sgs -> Effect Unit)
-  -> Subgraph Sgs Unit Unit
+  :: forall event payload
+   . Filterable event
+  => IsEvent event
+  => (Sgs -> Effect Unit)
+  -> Subgraph Sgs Unit Unit event payload
 mySub raise Sg0 push event =
   let
     { left, right } = partitionMap identity event
@@ -54,7 +58,12 @@ mySub raise Sg0 push event =
           , D.button
               (pure $ D.OnClick := cb (const $ push unit))
               [ text_ "Send to C" ]
-          , D.div_ [ text (map (append "C: " <<< show) (map (add 1) (counter right) <|> pure 0)) ]
+          , D.div_
+              [ text
+                  ( map (append "C: " <<< show)
+                      (map (add 1) (counter right) <|> pure 0)
+                  )
+              ]
           , D.hr_ []
 
           ]
@@ -72,11 +81,19 @@ mySub raise Sg1 push event =
           , D.button
               (pure $ D.OnClick := cb (const $ push unit))
               [ text_ "Send to D" ]
-          , D.div_ [ text (map (append "D: " <<< show) (map (add 1) (counter right) <|> pure 0)) ]
+          , D.div_
+              [ text
+                  ( map (append "D: " <<< show)
+                      (map (add 1) (counter right) <|> pure 0)
+                  )
+              ]
           ]
       ]
 
-px = Proxy :: Proxy """<div>
+px =
+  Proxy
+    :: Proxy
+      """<div>
   <h1>Subgraphs</h1>
 
   <h2>Inter-component communication</h2>
@@ -124,14 +141,18 @@ px = Proxy :: Proxy """<div>
   <p>Subgraphs are a great way to bring elements in and out of the DOM, but what if you want to take an existing element and ship it somewhere else? In these cases, the best bet is often to use CSS, but if CSS won't cut it, there are <a ~next~ style="cursor:pointer;">portals</a>.</p>
 </div>"""
 
-subgraphs :: (Page -> Effect Unit) -> Element
+subgraphs :: forall event payload. IsEvent event => Plus event => (Page -> Effect Unit) -> Element event payload
 subgraphs dpage = px ~~
-  { code: nut (D.pre_ [ D.code_ [ text_ """module Main where
+  { code: nut
+      ( D.pre_
+          [ D.code_
+              [ text_
+                  """module Main where
 
 import Prelude
 
 import Control.Alt ((<|>))
-import Data.Filterable (compact, partitionMap)
+import Data.Filterable (class Filterable, compact, partitionMap)
 import Data.Hashable (class Hashable, hash)
 import Data.Maybe (Maybe(..))
 import Data.Tuple (snd)
@@ -143,10 +164,10 @@ import Deku.DOM as D
 import Deku.Subgraph (SubgraphAction(..), (@@))
 import Deku.Toplevel ((🚀))
 import Effect (Effect)
-import FRP.Event (Event, mapAccum)
+import FRP.Event (class IsEvent, mapAccum)
 
-data UIEvents = UIShown | ButtonClicked | SliderMoved Number
-derive instance Eq UIEvents
+data UIevents = UIShown | ButtonClicked | SliderMoved Number
+derive instance Eq UIevents
 
 data Sgs = Sg0 | Sg1
 derive instance Eq Sgs
@@ -157,14 +178,17 @@ instance Show Sgs where
 instance Hashable Sgs where
   hash = show >>> hash
 
-counter :: forall a. Event a → Event Int
+counter :: forall event a. IsEvent event => event a → event Int
 counter event = map snd $ mapAccum f event 0
   where
   f a b = (b + 1) /\ (a /\ b)
 
 mySub
-  :: (Sgs -> Effect Unit)
-  -> Subgraph Sgs Unit Unit
+  :: forall event payload
+   . Filterable event
+  => IsEvent event
+  => (Sgs -> Effect Unit)
+  -> Subgraph Sgs Unit Unit event payload
 mySub raise Sg0 push event =
   let
     { left, right } = partitionMap identity event
@@ -174,15 +198,12 @@ mySub raise Sg0 push event =
           [ D.button
               (pure $ D.OnClick := cb (const $ raise Sg0))
               [ text_ "Send to B" ]
-          , D.div_ [ text
-                     (map (append "A: " <<< show) (counter left)) ]
+          , D.div_ [ text (map (append "A: " <<< show) (counter left)) ]
           , D.button
               (pure $ D.OnClick := cb (const $ push unit))
               [ text_ "Send to C" ]
-          , D.div_ [ text (map (append "C: " <<< show)
-                     (map (add 1) (counter right) <|> pure 0)) ]
+          , D.div_ [ text (map (append "C: " <<< show) (counter right)) ]
           , D.hr_ []
-
           ]
       ]
 mySub raise Sg1 push event =
@@ -192,15 +213,13 @@ mySub raise Sg1 push event =
     D.div_
       [ D.div_
           [ D.button
-              (pure $ D.OnClick := cb (const $ raise Sg1))
+              (pure $ D.OnClick := cb (const $ raise Sg0))
               [ text_ "Send to A" ]
-          , D.div_ [ text
-                     (map (append "B: " <<< show) (counter left)) ]
+          , D.div_ [ text (map (append "B: " <<< show) (counter (left))) ]
           , D.button
               (pure $ D.OnClick := cb (const $ push unit))
               [ text_ "Send to D" ]
-          , D.div_ [ text (map (append "D: " <<< show)
-                     (map (add 1) (counter right) <|> pure 0)) ]
+          , D.div_ [ text (map (append "D: " <<< show) (counter right)) ]
           ]
       ]
 
@@ -215,7 +234,10 @@ main = Nothing 🚀 \push event ->
                 Sg1 -> Sg0 /\ InsertOrUpdate unit
             )
         )
-  ) @@ mySub (push <<< Just)""" ] ])
+  ) @@ mySub (push <<< Just)"""
+              ]
+          ]
+      )
   , result: nut
       ( pure (unit /\ InsertOrUpdate unit) @@ \_ push event' ->
           let
@@ -232,5 +254,5 @@ main = Nothing 🚀 \push event ->
                   )
             ) @@ mySub (push <<< Just)
       )
-       , next: pure (D.OnClick := (cb (const $ dpage Portals *> scrollToTop)))
+  , next: pure (D.OnClick := (cb (const $ dpage Portals *> scrollToTop)))
   }

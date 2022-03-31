@@ -2,6 +2,7 @@ module Deku.Example.Docs.Intro where
 
 import Prelude
 
+import Control.Plus (class Plus)
 import Deku.Attribute (cb, (:=))
 import Deku.Core (Element)
 import Deku.DOM as D
@@ -9,6 +10,7 @@ import Deku.Example.Docs.Types (Page(..))
 import Deku.Example.Docs.Util (scrollToTop)
 import Deku.Pursx ((~~))
 import Effect (Effect)
+import FRP.Event (class IsEvent)
 import Type.Proxy (Proxy(..))
 
 px = Proxy :: Proxy """<div>
@@ -29,6 +31,6 @@ px = Proxy :: Proxy """<div>
   <p>And now, without further ado, check out the <a ~next~ style="cursor:pointer;">hello world section</a>!</p>
 </div>"""
 
-intro :: (Page -> Effect Unit) -> Element
+intro :: forall event payload. IsEvent event => Plus event => (Page -> Effect Unit) -> Element event payload
 intro dpage  = px ~~
   { next: pure (D.OnClick := (cb (const $ dpage HelloWorld *> scrollToTop))) }

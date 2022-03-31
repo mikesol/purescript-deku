@@ -9,10 +9,12 @@ import Prelude
 
 import Control.Alt ((<|>))
 import Data.Either (Either(..))
+import Deku.Core (Element(..))
 import Deku.Core as Core
-import Deku.Rando (random)
 import Effect (Effect)
-import FRP.Event (create)
+import Effect.Random as R
+import FRP.Behavior (behavior)
+import FRP.Event (Event, create, makeEvent, subscribe)
 import Foreign.Object (Object)
 
 -- foreign
@@ -22,7 +24,7 @@ foreign import makeFFIDOMSnapshot :: Effect FFIDOMSnapshot
 
 foreign import renderDOM :: Array (Effect Unit) -> Effect Unit
 
-foreign import makeElement_
+foreign import makeElement
   :: Core.MakeElement
   -> FFIDOMSnapshot
   -> Effect Unit
@@ -35,13 +37,14 @@ foreign import makeText_
   -> FFIDOMSnapshot
   -> Effect Unit
 
-foreign import makeSubgraph_
+foreign import makeSubgraph
   :: forall index env
    . String
   -> String
   -> ( index
        -> Effect
-            { actualized :: Core.Element' FFIDOMSnapshot (Effect Unit)
+            { actualized ::
+                Event (FFIDOMSnapshot -> Effect Unit)
             , pusher :: env -> Effect Unit
             }
      )
@@ -56,13 +59,13 @@ foreign import sendSubgraphToTop_
 foreign import setAttribute_
   :: Core.SetAttribute -> FFIDOMSnapshot -> Effect Unit
 
-foreign import insertOrUpdateSubgraph_
+foreign import insertOrUpdateSubgraph
   :: forall index env
    . Core.InsertOrUpdateSubgraph index env
   -> FFIDOMSnapshot
   -> Effect Unit
 
-foreign import removeSubgraph_
+foreign import removeSubgraph
   :: forall index
    . Core.RemoveSubgraph index
   -> FFIDOMSnapshot
@@ -82,10 +85,12 @@ foreign import makePortal_ :: Core.MakePortal -> FFIDOMSnapshot -> Effect Unit
 foreign import makeGateway_ :: Core.MakeGateway -> FFIDOMSnapshot -> Effect Unit
 foreign import setPortal_ :: Core.SetPortal -> FFIDOMSnapshot -> Effect Unit
 
-effectfulDOMInterpret :: Core.DOMInterpret FFIDOMSnapshot (Effect Unit)
+effectfulDOMInterpret :: Core.DOMInterpret Event (FFIDOMSnapshot -> Effect Unit)
 effectfulDOMInterpret = Core.DOMInterpret
-  { ids: map show random
-  , makeElement: makeElement_
+  { ids: map show $ behavior \f -> makeEvent \k -> do
+      r <- R.random
+      subscribe f \x -> k (x r)
+  , makeElement: makeElement
   , makeRoot: makeRoot_
   , makeText: makeText_
   , makePursx: makePursx_
@@ -93,23 +98,24 @@ effectfulDOMInterpret = Core.DOMInterpret
   , makeGateway: makeGateway_
   , setPortal: setPortal_
   , makeSubgraph: \{ id, parent, scenes } dom ->
-      flip (makeSubgraph_ id parent) dom \index ->
+      flip (makeSubgraph id parent) dom \index ->
         do
           evtL <- create
           evtR <- create
           let event = map Left evtL.event <|> map Right evtR.event
           let
-            actualized = scenes
-              index
-              evtR.push
-              event
-              parent
-              effectfulDOMInterpret
+            actualized =
+              let
+                Element elt = scenes index
+                  evtR.push
+                  event
+              in
+                elt parent effectfulDOMInterpret
           pure { actualized, pusher: evtL.push }
   , setAttribute: setAttribute_
   , setText: setText_
   , sendSubgraphToTop: sendSubgraphToTop_
-  , insertOrUpdateSubgraph: \{ id, index, env, pos } -> insertOrUpdateSubgraph_
+  , insertOrUpdateSubgraph: \{ id, index, env, pos } -> insertOrUpdateSubgraph
       { id, index, env: Left env, pos }
-  , removeSubgraph: removeSubgraph_
+  , removeSubgraph: removeSubgraph
   }
