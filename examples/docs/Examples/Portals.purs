@@ -7,7 +7,7 @@ import Data.Hashable (class Hashable, hash)
 import Data.Tuple.Nested ((/\))
 import Deku.Attribute (Attribute, cb, (:=))
 import Deku.Control (flatten, text_)
-import Deku.Core (Element_, Subgraph_)
+import Deku.Core (Element, Subgraph)
 import Deku.DOM as D
 import Deku.Portal (GatewayToSubgraph, portal)
 import Deku.Subgraph (SubgraphAction(..), (@@))
@@ -30,9 +30,9 @@ instance Hashable Sgs where
 mySub
   :: forall env push dom engine
    . Event Boolean
-  -> (Event Boolean -> Element_ dom engine)
-  -> (Event Boolean -> Element_ dom engine)
-  -> Subgraph_ Sgs env push dom engine
+  -> (Event Boolean -> Element dom engine)
+  -> (Event Boolean -> Element dom engine)
+  -> Subgraph Sgs env push dom engine
 mySub event gateway0 gateway1 sg _ _ = D.div_
   [ gateway0
       ( map

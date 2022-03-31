@@ -35,7 +35,7 @@ exports.renderDOM = function (arrayToApply) {
 		}
 	};
 };
-var makeElement_ = function (a) {
+var makeElement = function (a) {
 	return function (state) {
 		return function () {
 			var ptr = a.id;
@@ -51,7 +51,7 @@ var makeElement_ = function (a) {
 		};
 	};
 };
-exports.makeElement_ = makeElement_;
+exports.makeElement = makeElement;
 exports.makeText_ = function (a) {
 	return function (state) {
 		return function () {
@@ -108,7 +108,7 @@ exports.setText_ = function (a) {
 	};
 };
 
-exports.makeSubgraph_ = function (ptr) {
+exports.makeSubgraph = function (ptr) {
 	return function (parent) {
 		return function (sceneM) {
 			return function (state) {
@@ -129,7 +129,7 @@ exports.makeSubgraph_ = function (ptr) {
 	};
 };
 
-exports.removeSubgraph_ = function (a) {
+exports.removeSubgraph = function (a) {
 	return function (state) {
 		return function () {
 			var ptr = a.id;
@@ -153,7 +153,7 @@ exports.removeSubgraph_ = function (a) {
 	};
 };
 
-var insertOrUpdateSubgraph_ = function (a) {
+var insertOrUpdateSubgraph = function (a) {
 	return function (state) {
 		return function () {
 			var ptr = a.id;
@@ -252,7 +252,7 @@ var makePursx_ = function (a) {
 	};
 };
 exports.makePursx_ = makePursx_;
-exports.insertOrUpdateSubgraph_ = insertOrUpdateSubgraph_;
+exports.insertOrUpdateSubgraph = insertOrUpdateSubgraph;
 exports.sendSubgraphToTop_ = function (a) {
 	return function (state) {
 		return function () {

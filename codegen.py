@@ -86,16 +86,18 @@ def cg(CODEGEN_TARGET):
             print_(f'''data {term}
 
 {x}
-  :: forall dom engine
-   . Event (Attribute {term})
-  -> Array (Element_ dom engine)
-  -> Element_ dom engine
+  :: forall event payload
+   . IsEvent event
+  => event (Attribute {term})
+  -> Array (Element event payload)
+  -> Element event payload
 {x} = elementify "{astag(x)}"
 
 {x}_
-  :: forall dom engine
-   . Array (Element_ dom engine)
-  -> Element_ dom engine
+  :: forall event payload
+   . IsEvent event
+  => Array (Element event payload)
+  -> Element event payload
 {x}_ = {x} empty
 instance tagToDeku{term} :: TagToDeku "{astag(x)}" {term}
 ''')

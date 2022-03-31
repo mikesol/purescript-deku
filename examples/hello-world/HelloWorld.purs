@@ -9,7 +9,7 @@ import Data.Tuple (Tuple(..))
 import Deku.Attribute (cb, (:=))
 import Deku.Control (deku, flatten)
 import Deku.Control as C
-import Deku.Core (Element_)
+import Deku.Core (Element)
 import Deku.DOM as D
 import Deku.Interpret (FFIDOMSnapshot, effectfulDOMInterpret, makeFFIDOMSnapshot)
 import Effect (Effect)
@@ -26,7 +26,7 @@ counter event = mapAccum f event 0
 scene
   :: (Boolean -> Effect Unit)
   -> Event Boolean
-  -> Element_ FFIDOMSnapshot (Effect Unit)
+  -> Element FFIDOMSnapshot (Effect Unit)
 scene push event =
   flatten
     [ D.div empty [ C.text (pure "Stops after 3 clicks") ]

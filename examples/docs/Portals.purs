@@ -10,7 +10,7 @@ import Data.Tuple (snd)
 import Data.Tuple.Nested ((/\))
 import Deku.Attribute (cb, (:=))
 import Deku.Control (flatten, text_)
-import Deku.Core (Element, Element_, Subgraph_)
+import Deku.Core (Element, Element, Subgraph)
 import Deku.DOM as D
 import Deku.Example.Docs.Types (Page)
 import Deku.Portal (portal)
@@ -41,9 +41,9 @@ counter event = map snd $ mapAccum f event 0
 mySub
   :: forall env push dom engine
    . Event Boolean
-  -> (Event Boolean -> Element_ dom engine)
-  -> (Event Boolean -> Element_ dom engine)
-  -> Subgraph_ Sgs env push dom engine
+  -> (Event Boolean -> Element dom engine)
+  -> (Event Boolean -> Element dom engine)
+  -> Subgraph Sgs env push dom engine
 mySub event gateway0 gateway1 sg _ _ = D.div_
   [ gateway0
       ( map
@@ -111,7 +111,7 @@ import Data.Hashable (class Hashable, hash)
 import Data.Tuple.Nested ((/\))
 import Deku.Attribute (Attribute, cb, (:=))
 import Deku.Control (flatten, text_)
-import Deku.Core (Element_, Subgraph_)
+import Deku.Core (Element, Subgraph)
 import Deku.DOM as D
 import Deku.Portal (GatewayToSubgraph, portal)
 import Deku.Subgraph (SubgraphAction(..), (@@))
@@ -134,9 +134,9 @@ instance Hashable Sgs where
 mySub
   :: forall env push dom engine
    . Event Boolean
-  -> (Event Boolean -> Element_ dom engine)
-  -> (Event Boolean -> Element_ dom engine)
-  -> Subgraph_ Sgs env push dom engine
+  -> (Event Boolean -> Element dom engine)
+  -> (Event Boolean -> Element dom engine)
+  -> Subgraph Sgs env push dom engine
 mySub event gateway0 gateway1 sg _ _ = D.div_
   [ gateway0
       ( map

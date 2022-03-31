@@ -2,14 +2,16 @@ module Deku.Example.Docs.HelloWorld where
 
 import Prelude
 
+import Control.Plus (class Plus)
 import Deku.Attribute (cb, (:=))
 import Deku.Control (text_)
-import Deku.Core (Element)
+import Deku.Core (Element, Element)
 import Deku.DOM as D
 import Deku.Example.Docs.Types (Page(..))
 import Deku.Example.Docs.Util (scrollToTop)
 import Deku.Pursx (nut, (~~))
 import Effect (Effect)
+import FRP.Event (class IsEvent)
 import Type.Proxy (Proxy(..))
 
 px = Proxy :: Proxy """<div>
@@ -36,7 +38,10 @@ px = Proxy :: Proxy """<div>
 </div>"""
 
 
-helloWorld :: (Page -> Effect Unit) -> Element
+helloWorld :: forall event payload.
+  Plus event =>
+  IsEvent event =>
+  (Page -> Effect Unit) -> Element event payload
 helloWorld dpage  = px ~~
   { code: nut (D.pre_ [D.code_ [text_ """module Main where
 

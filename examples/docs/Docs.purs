@@ -9,7 +9,7 @@ import Data.Maybe (Maybe(..))
 import Data.Tuple.Nested ((/\))
 import Deku.Attribute (cb, (:=))
 import Deku.Control (deku, flatten, text_)
-import Deku.Core (Element_, Subgraph)
+import Deku.Core (Element, Subgraph)
 import Deku.DOM as D
 import Deku.Example.Docs.Component as Component
 import Deku.Example.Docs.Effects as Effects
@@ -33,7 +33,7 @@ import Web.HTML.Window (document)
 scene
   :: (Page -> Effect Unit)
   -> Event Page
-  -> Element_ FFIDOMSnapshot (Effect Unit)
+  -> Element FFIDOMSnapshot (Effect Unit)
 scene push event =
   flatten [ D.div_
       $ map
