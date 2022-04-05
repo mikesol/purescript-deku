@@ -181,5 +181,5 @@ main = UIShown 🚀 \push event ->
                   ]
               ]
       )
-  , next: pure (D.OnClick := (cb (const $ dpage PURSX2 *> scrollToTop)))
+  , next: pure (D.OnClick := (cb (const $ dpage Effects *> scrollToTop)))
   }

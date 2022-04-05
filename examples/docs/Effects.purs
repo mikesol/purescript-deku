@@ -221,5 +221,5 @@ main = Initial 🚀 \push event ->
                   )
                   [ D.pre_ [ D.code_ [ text (pure "" <|> result) ] ] ]
               ])
-  , next: pure (D.OnClick := (cb (const $ dpage Effects *> scrollToTop)))
+  , next: pure (D.OnClick := (cb (const $ dpage PURSX2 *> scrollToTop)))
   }
