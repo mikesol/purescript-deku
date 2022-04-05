@@ -16,14 +16,15 @@ in conf //
         , "node-fs"
         , "node-path"
         , "nullable"
+        , "refs"
         , "spec"
         , "strings"
         , "random"
         ,  "aff","halogen-subscriptions"
-,"exceptions"
-, "partial"
-, "tailrec"
-, "web-html"
+        , "exceptions"
+        , "partial"
+        , "tailrec"
+        , "web-html"
         ]
   , sources =
       conf.sources #
