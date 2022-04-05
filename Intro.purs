@@ -18,7 +18,7 @@ px = Proxy :: Proxy """<div>
 
   <h3>A web micro-framework written in PureScript</h3>
 
-  <p>Hi! You've found Deku.</p>
+  <p>Hi! You've found <a href="https://github.com/mikesol/purescript-deku">Deku</a>.</p>
 
   <p>Deku is the coolest web micro-framework that no one knows about yet. Except you, of course, as you're here. So welcome!</p>
 
@@ -26,7 +26,7 @@ px = Proxy :: Proxy """<div>
 
   <p>This is the Deku documentation. Like most documentation, it's radically incomplete, hopelessly biased, and full of unfounded assumptions. That said, I hope it gets you started off on the right foot. If you have any questions, feel free ping me on the PureScript Discord.</p>
 
-  <p>This documentation is written in Deku and can be found here. One good way to follow along is by using the Deku starter repo, which you can clone here.</p>
+  <p>This documentation is written in Deku and can be found <a href="https://github.com/mikesol/purescript-deku/tree/main/examples/docs">here</a>. One good way to follow along is by using the Deku starter repo, which you can clone <a href="https://github.com/mikesol/purescript-deku-starter">here</a>.</p>
 
   <p>And now, without further ado, check out the <a ~next~ style="cursor:pointer;">hello world section</a>!</p>
 </div>"""

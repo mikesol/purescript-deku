@@ -5691,7 +5691,7 @@ var PS = {};
                           };
                       };
                   })),
-                  next: Control_Applicative.pure((dictIsEvent.Alternative0()).Applicative0())(Deku_Attribute.attr(Deku_DOM.attrOnClickCb)(Deku_DOM.OnClick.value)(Deku_Attribute.cb(Data_Function["const"](Control_Apply.applySecond(Effect.applyEffect)(dpage(Deku_Example_Docs_Types.Effects.value))(Deku_Example_Docs_Util.scrollToTop)))))
+                  next: Control_Applicative.pure((dictIsEvent.Alternative0()).Applicative0())(Deku_Attribute.attr(Deku_DOM.attrOnClickCb)(Deku_DOM.OnClick.value)(Deku_Attribute.cb(Data_Function["const"](Control_Apply.applySecond(Effect.applyEffect)(dpage(Deku_Example_Docs_Types.PURSX2.value))(Deku_Example_Docs_Util.scrollToTop)))))
               });
           };
       };
@@ -5913,7 +5913,7 @@ var PS = {};
                           };
                       };
                   })),
-                  next: Control_Applicative.pure((dictIsEvent.Alternative0()).Applicative0())(Deku_Attribute.attr(Deku_DOM.attrOnClickCb)(Deku_DOM.OnClick.value)(Deku_Attribute.cb(Data_Function["const"](Control_Apply.applySecond(Effect.applyEffect)(dpage(Deku_Example_Docs_Types.PURSX2.value))(Deku_Example_Docs_Util.scrollToTop)))))
+                  next: Control_Applicative.pure((dictIsEvent.Alternative0()).Applicative0())(Deku_Attribute.attr(Deku_DOM.attrOnClickCb)(Deku_DOM.OnClick.value)(Deku_Attribute.cb(Data_Function["const"](Control_Apply.applySecond(Effect.applyEffect)(dpage(Deku_Example_Docs_Types.Effects.value))(Deku_Example_Docs_Util.scrollToTop)))))
               });
           };
       };
@@ -5987,7 +5987,7 @@ var PS = {};
           return function (dpage) {
               return Deku_Pursx.makePursx({
                   reflectSymbol: function () {
-                      return "<div>\x0a  <h1>Deku</h1>\x0a\x0a  <h3>A web micro-framework written in PureScript</h3>\x0a\x0a  <p>Hi! You've found Deku.</p>\x0a\x0a  <p>Deku is the coolest web micro-framework that no one knows about yet. Except you, of course, as you're here. So welcome!</p>\x0a\x0a  <p>The main goal of Deku is speed. I made it for the purpose of creating interactive web-based musical instruments, but it's equally useful as a general-purpose web framework. Its standard event-handling patterns tend to outperform those of React and Vue by a factor of 1.5-2x.</p>\x0a\x0a  <p>This is the Deku documentation. Like most documentation, it's radically incomplete, hopelessly biased, and full of unfounded assumptions. That said, I hope it gets you started off on the right foot. If you have any questions, feel free ping me on the PureScript Discord.</p>\x0a\x0a  <p>This documentation is written in Deku and can be found here. One good way to follow along is by using the Deku starter repo, which you can clone here.</p>\x0a\x0a  <p>And now, without further ado, check out the <a ~next~ style=\"cursor:pointer;\">hello world section</a>!</p>\x0a</div>";
+                      return "<div>\x0a  <h1>Deku</h1>\x0a\x0a  <h3>A web micro-framework written in PureScript</h3>\x0a\x0a  <p>Hi! You've found <a href=\"https://github.com/mikesol/purescript-deku\">Deku</a>.</p>\x0a\x0a  <p>Deku is the coolest web micro-framework that no one knows about yet. Except you, of course, as you're here. So welcome!</p>\x0a\x0a  <p>The main goal of Deku is speed. I made it for the purpose of creating interactive web-based musical instruments, but it's equally useful as a general-purpose web framework. Its standard event-handling patterns tend to outperform those of React and Vue by a factor of 1.5-2x.</p>\x0a\x0a  <p>This is the Deku documentation. Like most documentation, it's radically incomplete, hopelessly biased, and full of unfounded assumptions. That said, I hope it gets you started off on the right foot. If you have any questions, feel free ping me on the PureScript Discord.</p>\x0a\x0a  <p>This documentation is written in Deku and can be found <a href=\"https://github.com/mikesol/purescript-deku/tree/main/examples/docs\">here</a>. One good way to follow along is by using the Deku starter repo, which you can clone <a href=\"https://github.com/mikesol/purescript-deku-starter\">here</a>.</p>\x0a\x0a  <p>And now, without further ado, check out the <a ~next~ style=\"cursor:pointer;\">hello world section</a>!</p>\x0a</div>";
                   }
               })()()(Deku_Pursx.pursxToElementConsAttr()(Deku_Pursx.pursxToElementNil((dictIsEvent.Alternative0()).Plus1()))({
                   reflectSymbol: function () {
