@@ -7294,14 +7294,7 @@ var PS = {};
       setAttribute: $foreign.setAttribute_,
       setText: $foreign.setText_,
       sendSubgraphToTop: $foreign.sendSubgraphToTop_,
-      insertOrUpdateSubgraph: function (v) {
-          return $foreign.insertOrUpdateSubgraph({
-              id: v.id,
-              index: v.index,
-              env: new Data_Either.Left(v.env),
-              pos: v.pos
-          });
-      },
+      insertOrUpdateSubgraph: $foreign.insertOrUpdateSubgraph,
       removeSubgraph: $foreign.removeSubgraph
   };
   exports["effectfulDOMInterpret"] = effectfulDOMInterpret;
