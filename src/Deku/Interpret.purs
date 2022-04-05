@@ -115,7 +115,6 @@ effectfulDOMInterpret = Core.DOMInterpret
   , setAttribute: setAttribute_
   , setText: setText_
   , sendSubgraphToTop: sendSubgraphToTop_
-  , insertOrUpdateSubgraph: \{ id, index, env, pos } -> insertOrUpdateSubgraph
-      { id, index, env: Left env, pos }
+  , insertOrUpdateSubgraph: insertOrUpdateSubgraph
   , removeSubgraph: removeSubgraph
   }
