@@ -3,11 +3,12 @@ module Deku.Examples.Docs.Examples.Portals where
 import Prelude
 
 import Control.Alt ((<|>))
+import Data.Exists (mkExists)
 import Data.Hashable (class Hashable, hash)
 import Data.Tuple.Nested ((/\))
 import Deku.Attribute (Attribute, cb, (:=))
 import Deku.Control (flatten, text_)
-import Deku.Core (Element, Subgraph)
+import Deku.Core (Element, Subgraph, SubgraphF(..))
 import Deku.DOM as D
 import Deku.Portal (portal)
 import Deku.Subgraph (SubgraphAction(..), (@@))
@@ -28,12 +29,12 @@ instance Hashable Sgs where
   hash = show >>> hash
 
 mySub
-  :: forall env push event payload
+  :: forall env event payload
    . IsEvent event => event Boolean
   -> (event Boolean -> Element event payload)
   -> (event Boolean -> Element event payload)
-  -> Subgraph Sgs env push event payload
-mySub event gateway0 gateway1 sg _ _ = D.div_
+  -> Subgraph Sgs env event payload
+mySub event gateway0 gateway1 sg = mkExists $ SubgraphF \_ _ -> D.div_
   [ gateway0
       ( map
           ( case sg of

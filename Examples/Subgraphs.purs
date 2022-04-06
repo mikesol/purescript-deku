@@ -3,6 +3,7 @@ module Deku.Examples.Docs.Examples.Subgraphs where
 import Prelude
 
 import Control.Alt ((<|>))
+import Data.Exists (mkExists)
 import Data.Filterable (class Filterable, compact, partitionMap)
 import Data.Hashable (class Hashable, hash)
 import Data.Maybe (Maybe(..))
@@ -10,7 +11,7 @@ import Data.Tuple (snd)
 import Data.Tuple.Nested ((/\))
 import Deku.Attribute (cb, (:=))
 import Deku.Control (text, text_)
-import Deku.Core (Subgraph)
+import Deku.Core (Subgraph, SubgraphF(..))
 import Deku.DOM as D
 import Deku.Subgraph (SubgraphAction(..), (@@))
 import Deku.Toplevel ((🚀))
@@ -39,8 +40,8 @@ mySub
    . Filterable event
   => IsEvent event
   => (Sgs -> Effect Unit)
-  -> Subgraph Sgs Unit Unit event payload
-mySub raise Sg0 push event =
+  -> Subgraph Sgs Unit event payload
+mySub raise Sg0 = mkExists $ SubgraphF \push event ->
   let
     { left, right } = partitionMap identity event
   in
@@ -57,7 +58,7 @@ mySub raise Sg0 push event =
           , D.hr_ []
           ]
       ]
-mySub raise Sg1 push event =
+mySub raise Sg1 = mkExists $ SubgraphF \push event ->
   let
     { left, right } = partitionMap identity event
   in

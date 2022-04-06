@@ -8,13 +8,14 @@ import Control.Alt ((<|>))
 import Control.Plus (class Plus)
 import Data.Argonaut.Core (stringifyWithIndent)
 import Data.Either (Either(..), hush)
+import Data.Exists (mkExists)
 import Data.Filterable (filterMap, compact)
 import Data.HTTP.Method (Method(..))
 import Data.Maybe (Maybe(..))
 import Data.Tuple.Nested ((/\))
 import Deku.Attribute (Cb, cb, (:=))
 import Deku.Control (flatten, text_, text)
-import Deku.Core (Element)
+import Deku.Core (Element, SubgraphF(..))
 import Deku.DOM as D
 import Deku.Example.Docs.Types (Page(..))
 import Deku.Example.Docs.Util (scrollToTop)
@@ -174,7 +175,7 @@ main = Initial 🚀 \push event ->
       ]
 """]])
   , result: nut
-      ( pure (unit /\ InsertOrUpdate unit) @@ \_ push event' ->
+      ( pure (unit /\ InsertOrUpdate unit) @@ \_ -> mkExists $ SubgraphF \push event' ->
           let
             event = compact (map hush event')
             loadingOrResult = filterMap

@@ -5,13 +5,14 @@ import Prelude
 import Control.Alt ((<|>))
 import Control.Plus (class Plus)
 import Data.Either (hush)
+import Data.Exists (mkExists)
 import Data.Filterable (compact)
 import Data.Hashable (class Hashable, hash)
 import Data.Tuple (snd)
 import Data.Tuple.Nested ((/\))
 import Deku.Attribute (cb, (:=))
 import Deku.Control (flatten, text_)
-import Deku.Core (Element, Element, Subgraph)
+import Deku.Core (Element, Element, Subgraph, SubgraphF(..))
 import Deku.DOM as D
 import Deku.Example.Docs.Types (Page)
 import Deku.Portal (portal)
@@ -40,12 +41,12 @@ counter event = map snd $ mapAccum f event 0
 
 
 mySub
-  :: forall env push event payload
+  :: forall env event payload
    . IsEvent event => event Boolean
   -> (event Boolean -> Element event payload)
   -> (event Boolean -> Element event payload)
-  -> Subgraph Sgs env push event payload
-mySub event gateway0 gateway1 sg _ _ = D.div_
+  -> Subgraph Sgs env event payload
+mySub event gateway0 gateway1 sg = mkExists $ SubgraphF \_ _ -> D.div_
   [ gateway0
       ( map
           ( case sg of
@@ -108,11 +109,12 @@ portals dpage = px ~~
 import Prelude
 
 import Control.Alt ((<|>))
+import Data.Exists (mkExists)
 import Data.Hashable (class Hashable, hash)
 import Data.Tuple.Nested ((/\))
 import Deku.Attribute (Attribute, cb, (:=))
 import Deku.Control (flatten, text_)
-import Deku.Core (Element, Subgraph)
+import Deku.Core (Element, Subgraph, SubgraphF(..))
 import Deku.DOM as D
 import Deku.Portal (portal)
 import Deku.Subgraph (SubgraphAction(..), (@@))
@@ -133,12 +135,12 @@ instance Hashable Sgs where
   hash = show >>> hash
 
 mySub
-  :: forall env push event payload
+  :: forall env event payload
    . IsEvent event => event Boolean
   -> (event Boolean -> Element event payload)
   -> (event Boolean -> Element event payload)
-  -> Subgraph Sgs env push event payload
-mySub event gateway0 gateway1 sg _ _ = D.div_
+  -> Subgraph Sgs env event payload
+mySub event gateway0 gateway1 sg = mkExists $ SubgraphF \_ _ -> D.div_
   [ gateway0
       ( map
           ( case sg of
@@ -179,7 +181,7 @@ main = false 🚀 \push event ->
           ]
       )
   , result: nut
-      ( pure (unit /\ InsertOrUpdate unit) @@ \_ push event' ->
+      ( pure (unit /\ InsertOrUpdate unit) @@ \_ -> mkExists $ SubgraphF \push event' ->
           let
             event = compact (map hush event')
           in
