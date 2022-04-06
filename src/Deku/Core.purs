@@ -3,6 +3,7 @@ module Deku.Core where
 import Prelude
 
 import Data.Either (Either)
+import Data.Exists (Exists)
 import Deku.Attribute (AttributeValue)
 import Effect (Effect)
 import FRP.Behavior (ABehavior)
@@ -12,15 +13,18 @@ import Web.DOM as Web.DOM
 newtype Element event payload = Element
   (String -> DOMInterpret event payload -> event payload)
 
-type Subgraph index env push event payload =
-  -- the index we're creating at
-  index
-  -- the pusher for the subgraph
-  -> (push -> Effect Unit)
-  -- an event the subgraph can bind to
-  -> event (Either env push)
-  -- the subgraph
-  -> Element event payload
+newtype SubgraphF index env event payload push = SubgraphF
+  (
+    -- the pusher for the subgraph
+    (push -> Effect Unit)
+    -- an event the subgraph can bind to
+    -> event (Either env push)
+    -- the subgraph
+    -> Element event payload
+  )
+
+type Subgraph index env event payload =
+  index -> Exists (SubgraphF index env event payload)
 
 type MakeElement =
   { id :: String
@@ -38,10 +42,10 @@ type SetAttribute =
   , key :: String
   , value :: AttributeValue
   }
-type MakeSubgraph index env push event payload =
+type MakeSubgraph index env event payload =
   { id :: String
   , parent :: String
-  , scenes :: Subgraph index env push event payload
+  , scenes :: Subgraph index env event payload
   }
 type MakePortal =
   { id :: String
@@ -90,8 +94,8 @@ newtype DOMInterpret event payload = DOMInterpret
   , makeGateway :: MakeGateway -> payload
   , setPortal :: SetPortal -> payload
   , makeSubgraph ::
-      forall index env push
-       . MakeSubgraph index env push event payload
+      forall index env
+       . MakeSubgraph index env event payload
       -> payload
   , setAttribute :: SetAttribute -> payload
   , sendSubgraphToTop ::

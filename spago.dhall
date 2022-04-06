@@ -6,6 +6,7 @@
   , "effect"
   , "either"
   , "event"
+  , "exists"
   , "foldable-traversable"
   , "foreign-object"
   , "newtype"

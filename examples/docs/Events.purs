@@ -5,13 +5,14 @@ import Prelude
 import Control.Alt ((<|>))
 import Control.Plus (class Plus)
 import Data.Either (hush)
+import Data.Exists (mkExists)
 import Data.Filterable (compact, filter, filterMap)
 import Data.Foldable (for_, oneOfMap)
 import Data.Maybe (Maybe(..))
 import Data.Tuple.Nested ((/\))
 import Deku.Attribute (cb, (:=))
 import Deku.Control (flatten, text, text_)
-import Deku.Core (Element)
+import Deku.Core (Element, SubgraphF(..))
 import Deku.DOM as D
 import Deku.Example.Docs.Types (Page(..))
 import Deku.Example.Docs.Util (scrollToTop)
@@ -132,7 +133,7 @@ main = UIShown 🚀 \push event ->
           ]
       )
   , result: nut
-      ( pure (unit /\ InsertOrUpdate unit) @@ \_ push event' ->
+      ( pure (unit /\ InsertOrUpdate unit) @@ \_ -> mkExists $ SubgraphF \push event' ->
           let
             event = compact (map hush event')
           in

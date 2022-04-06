@@ -6,6 +6,7 @@ import Control.Alt ((<|>))
 import Control.Alternative (guard)
 import Data.Array ((..))
 import Data.Either (Either(..), hush)
+import Data.Exists (mkExists)
 import Data.Foldable (for_, oneOfMap)
 import Data.Maybe (Maybe(..))
 import Data.Tuple (Tuple(..), snd)
@@ -13,7 +14,7 @@ import Data.Tuple.Nested ((/\))
 import Deku.Attribute (cb, (:=))
 import Deku.Control (deku, flatten)
 import Deku.Control as C
-import Deku.Core (Element)
+import Deku.Core (Element, SubgraphF(..))
 import Deku.DOM as D
 import Deku.Interpret (FFIDOMSnapshot, effectfulDOMInterpret, makeFFIDOMSnapshot)
 import Deku.Subgraph (SubgraphAction(..))
@@ -61,7 +62,7 @@ scene push event =
                       (\(Tuple _ y) -> if y == 0 then Nothing else Just unit)
                   )
             )
-            \index hsup tneve -> D.a
+            \index -> mkExists $ SubgraphF \hsup tneve -> D.a
               ( pure (D.Href := "#") <|> pure
                   ( D.OnClick := cb
                       ( const $ do
@@ -117,7 +118,7 @@ scene push event =
                         # keepLatest
                     )
                 )
-                \index hsup tneve -> D.a
+                \index -> mkExists $ SubgraphF \hsup tneve -> D.a
                   ( pure (D.Href := "#") <|> pure
                       ( D.OnClick := cb
                           ( const $ do

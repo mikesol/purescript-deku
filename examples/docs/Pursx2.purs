@@ -6,11 +6,12 @@ import Control.Alt ((<|>))
 import Control.Plus (class Plus)
 import Data.Compactable (compact)
 import Data.Either (hush)
+import Data.Exists (mkExists)
 import Data.Maybe (Maybe(..))
 import Data.Tuple.Nested ((/\))
 import Deku.Attribute (cb, (:=))
 import Deku.Control (text, text_)
-import Deku.Core (Element)
+import Deku.Core (Element, SubgraphF(..))
 import Deku.DOM as D
 import Deku.Example.Docs.Types (Page(..))
 import Deku.Example.Docs.Util (scrollToTop)
@@ -21,9 +22,7 @@ import FRP.Event (class IsEvent)
 import Type.Proxy (Proxy(..))
 
 px =
-  Proxy
-    :: Proxy
-      """<div>
+  Proxy   :: Proxy      """<div>
   <h1>Pursx 2</h1>
 
   <h2>Working with events and effects</h2>
@@ -47,10 +46,7 @@ px =
   <p>In more complicated apps, like this documentation, we'll want to split up our components into sub-components and create a way for them to communicate back and forth. In the next section, we'll see one way to do this via <a ?next? style="cursor:pointer;">subgraphs</a>.</p>
 </div>"""
 
-myDom =
-  Proxy
-    :: Proxy
-      """<div>
+myDom =  Proxy   :: Proxy    """<div>
         <button>I do nothing</button>
         <ul>
           <li>A</li>
@@ -129,7 +125,7 @@ main = Nothing 🚀 \push event -> myDom ~~
           ]
       )
   , result: nut
-      ( pure (unit /\ InsertOrUpdate unit) @@ \_ push event' ->
+      ( pure (unit /\ InsertOrUpdate unit) @@ \_ -> mkExists $ SubgraphF \push event' ->
           let
             event = compact (map hush event')
           in

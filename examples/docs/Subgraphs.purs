@@ -3,8 +3,9 @@ module Deku.Example.Docs.Subgraphs where
 import Prelude
 
 import Control.Alt ((<|>))
-import Data.Either (hush)
 import Control.Plus (class Plus)
+import Data.Either (hush)
+import Data.Exists (mkExists)
 import Data.Filterable (class Filterable, compact, partitionMap)
 import Data.Hashable (class Hashable, hash)
 import Data.Maybe (Maybe(..))
@@ -12,7 +13,7 @@ import Data.Tuple (snd)
 import Data.Tuple.Nested ((/\))
 import Deku.Attribute (cb, (:=))
 import Deku.Control (text, text_)
-import Deku.Core (Element, Subgraph)
+import Deku.Core (Element, Subgraph, SubgraphF(..))
 import Deku.DOM as D
 import Deku.Example.Docs.Types (Page(..))
 import Deku.Example.Docs.Util (scrollToTop)
@@ -44,8 +45,8 @@ mySub
    . Filterable event
   => IsEvent event
   => (Sgs -> Effect Unit)
-  -> Subgraph Sgs Unit Unit event payload
-mySub raise Sg0 push event =
+  -> Subgraph Sgs Unit event payload
+mySub raise Sg0 = mkExists $ SubgraphF \push event ->
   let
     { left, right } = partitionMap identity event
   in
@@ -68,7 +69,7 @@ mySub raise Sg0 push event =
 
           ]
       ]
-mySub raise Sg1 push event =
+mySub raise Sg1 = mkExists $ SubgraphF \push event ->
   let
     { left, right } = partitionMap identity event
   in
@@ -90,10 +91,7 @@ mySub raise Sg1 push event =
           ]
       ]
 
-px =
-  Proxy
-    :: Proxy
-      """<div>
+px =  Proxy :: Proxy """<div>
   <h1>Subgraphs</h1>
 
   <h2>Inter-component communication</h2>
@@ -135,6 +133,8 @@ px =
     <li>An event of type <code>Event (Either env push)</code>. It responds to <i>both</i> external communication when created and updated (on the <code>Left</code>) <i>and</i> to input from the pusher (on the <code>Right</code>).</li>
   </ul>
 
+  <p>Note that the last two arguments, the <i>pusher</i> and the <i>event</i>, are part of an existential type and <i>must</i> come after a call to <code>mkExists</code> followed by the <code>newtype</code> constructor <code>SubgraphF</code>, as seen in the example above. This pattern allows you to have arbitrary pushers for each subgraph.</p>
+
   <p>Using this pattern, you can create the behavior of dynamic websites with little or no overhead. For example, the navigation links on this page are implemented as subgraph, and as you can see, they are quite fast!</p>
 
   <h2>Next steps</h2>
@@ -152,6 +152,7 @@ subgraphs dpage = px ~~
 import Prelude
 
 import Control.Alt ((<|>))
+import Data.Exists (mkExists)
 import Data.Filterable (class Filterable, compact, partitionMap)
 import Data.Hashable (class Hashable, hash)
 import Data.Maybe (Maybe(..))
@@ -159,7 +160,7 @@ import Data.Tuple (snd)
 import Data.Tuple.Nested ((/\))
 import Deku.Attribute (cb, (:=))
 import Deku.Control (text, text_)
-import Deku.Core (Subgraph)
+import Deku.Core (Subgraph, SubgraphF(..))
 import Deku.DOM as D
 import Deku.Subgraph (SubgraphAction(..), (@@))
 import Deku.Toplevel ((🚀))
@@ -188,8 +189,8 @@ mySub
    . Filterable event
   => IsEvent event
   => (Sgs -> Effect Unit)
-  -> Subgraph Sgs Unit Unit event payload
-mySub raise Sg0 push event =
+  -> Subgraph Sgs Unit event payload
+mySub raise Sg0 = mkExists $ SubgraphF \push event ->
   let
     { left, right } = partitionMap identity event
   in
@@ -206,7 +207,7 @@ mySub raise Sg0 push event =
           , D.hr_ []
           ]
       ]
-mySub raise Sg1 push event =
+mySub raise Sg1 = mkExists $ SubgraphF \push event ->
   let
     { left, right } = partitionMap identity event
   in
@@ -239,7 +240,7 @@ main = Nothing 🚀 \push event ->
           ]
       )
   , result: nut
-      ( pure (unit /\ InsertOrUpdate unit) @@ \_ push event' ->
+      ( pure (unit /\ InsertOrUpdate unit) @@ \_ -> mkExists $ SubgraphF \push event' ->
           let
             event = compact (map hush event')
           in

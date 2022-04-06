@@ -32,6 +32,6 @@ instance ixspy2I ::
   , Warn ((Text "ixspy2") ^^ (Text l) ^^ (Quote (m i o a)))
   ) =>
   IxSpy2 l m i o a where
-  ixspy2 px = identity
+  ixspy2 _ = identity
 
 infixr 5 type Above as ^^

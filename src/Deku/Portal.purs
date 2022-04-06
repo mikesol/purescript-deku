@@ -8,10 +8,10 @@ import Deku.Core (DOMInterpret(..), Element(..), Subgraph)
 import FRP.Behavior (sample_)
 import FRP.Event (class IsEvent, Event, keepLatest)
 
-type GatewayToSubgraph index env push =
+type GatewayToSubgraph index env =
   forall event payload
    . (Event Boolean -> Element event payload)
-  -> Subgraph index env push event payload
+  -> Subgraph index env event payload
 
 type GatewayToElement =
   forall event payload

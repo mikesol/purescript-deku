@@ -9,7 +9,8 @@ import Prelude
 
 import Control.Alt ((<|>))
 import Data.Either (Either(..))
-import Deku.Core (Element(..))
+import Data.Exists (runExists)
+import Deku.Core (Element(..), SubgraphF(..))
 import Deku.Core as Core
 import Effect (Effect)
 import Effect.Random as R
@@ -98,20 +99,20 @@ effectfulDOMInterpret = Core.DOMInterpret
   , makeGateway: makeGateway_
   , setPortal: setPortal_
   , makeSubgraph: \{ id, parent, scenes } dom ->
-      flip (makeSubgraph id parent) dom \index ->
-        do
-          evtL <- create
-          evtR <- create
-          let event = map Left evtL.event <|> map Right evtR.event
-          let
-            actualized =
-              let
-                Element elt = scenes index
-                  evtR.push
-                  event
-              in
-                elt parent effectfulDOMInterpret
-          pure { actualized, pusher: evtL.push }
+      flip (makeSubgraph id parent) dom \index -> runExists
+        ( \(SubgraphF si) -> do
+            evtL <- create
+            evtR <- create
+            let event = map Left evtL.event <|> map Right evtR.event
+            let
+              actualized =
+                let
+                  Element elt = si evtR.push event
+                in
+                  elt parent effectfulDOMInterpret
+            pure { actualized, pusher: evtL.push }
+        )
+        (scenes index)
   , setAttribute: setAttribute_
   , setText: setText_
   , sendSubgraphToTop: sendSubgraphToTop_
