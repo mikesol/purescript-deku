@@ -13,7 +13,7 @@ import Web.DOM as Web.DOM
 newtype Element event payload = Element
   (String -> DOMInterpret event payload -> event payload)
 
-newtype SubgraphF index env event payload push = SubgraphF
+newtype SubgraphF env event payload push = SubgraphF
   (
     -- the pusher for the subgraph
     (push -> Effect Unit)
@@ -24,7 +24,7 @@ newtype SubgraphF index env event payload push = SubgraphF
   )
 
 type Subgraph index env event payload =
-  index -> Exists (SubgraphF index env event payload)
+  index -> Exists (SubgraphF env event payload)
 
 type MakeElement =
   { id :: String
