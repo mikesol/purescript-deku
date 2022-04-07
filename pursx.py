@@ -25,20 +25,20 @@ import Prim.Symbol as Sym
 import Record (get)
 import Type.Proxy (Proxy(..))
 
-newtype PursxElement event payload = PursxElement (Element event payload)
-nut :: forall event payload. Element event payload -> PursxElement event payload
+newtype PursxElement event proof payload = PursxElement (Element event proof payload)
+nut :: forall event proof payload. Element event proof payload -> PursxElement event proof payload
 nut = PursxElement
 ''')
 
 print_('pursx :: forall s. Proxy s')
 print_('pursx = Proxy')
-print_('class DoVerbForAttr (event :: Type -> Type) (verb :: Symbol) (tag :: Symbol) (acc :: Symbol) (head :: Symbol) (tail :: Symbol) (pursi :: Row Type) (purso :: Row Type) (newTail :: Symbol) | event verb acc head tail pursi -> purso newTail')
-print_('instance (TagToDeku tag deku, IsEvent event, Row.Cons acc (event (Attribute deku)) pursi purso) => DoVerbForAttr event verb tag acc verb tail pursi purso tail')
-print_('else instance (Sym.Append acc anything acc2, Sym.Cons x y tail, DoVerbForAttr event verb tag acc2 x y pursi purso newTail) => DoVerbForAttr event verb tag acc anything tail pursi purso newTail')
+print_('class DoVerbForAttr (event :: Type -> Type -> Type) (proof :: Type) (verb :: Symbol) (tag :: Symbol) (acc :: Symbol) (head :: Symbol) (tail :: Symbol) (pursi :: Row Type) (purso :: Row Type) (newTail :: Symbol) | event proof verb acc head tail pursi -> purso newTail')
+print_('instance (TagToDeku tag deku, IsEvent (event proof), Row.Cons acc (event proof (Attribute deku)) pursi purso) => DoVerbForAttr event proof verb tag acc verb tail pursi purso tail')
+print_('else instance (Sym.Append acc anything acc2, Sym.Cons x y tail, DoVerbForAttr event proof verb tag acc2 x y pursi purso newTail) => DoVerbForAttr event proof verb tag acc anything tail pursi purso newTail')
 print_('--')
-print_('class DoVerbForDOM (event :: Type -> Type) (payload :: Type) (verb :: Symbol) (acc :: Symbol) (head :: Symbol) (tail :: Symbol) (pursi :: Row Type) (purso :: Row Type) (newTail :: Symbol) | event payload verb acc head tail pursi -> purso newTail')
-print_('instance (Row.Cons acc (PursxElement event payload) pursi purso) => DoVerbForDOM event payload verb acc verb tail pursi purso tail')
-print_('else instance (Sym.Append acc anything acc2, Sym.Cons x y tail, DoVerbForDOM event payload verb acc2 x y pursi purso newTail) => DoVerbForDOM event payload verb acc anything tail pursi purso newTail')
+print_('class DoVerbForDOM (event :: Type -> Type -> Type) (proof :: Type) (payload :: Type) (verb :: Symbol) (acc :: Symbol) (head :: Symbol) (tail :: Symbol) (pursi :: Row Type) (purso :: Row Type) (newTail :: Symbol) | event proof payload verb acc head tail pursi -> purso newTail')
+print_('instance (Row.Cons acc (PursxElement event proof payload) pursi purso) => DoVerbForDOM event proof payload verb acc verb tail pursi purso tail')
+print_('else instance (Sym.Append acc anything acc2, Sym.Cons x y tail, DoVerbForDOM event proof payload verb acc2 x y pursi purso newTail) => DoVerbForDOM event proof payload verb acc anything tail pursi purso newTail')
 print_('--')
 print_('class IsWhiteSpace (space :: Symbol)')
 print_('instance IsWhiteSpace ""')
@@ -47,28 +47,28 @@ print_('class IsSingleWhiteSpace (s :: Symbol)')
 for x in WHITESPACE:
     print_('instance IsSingleWhiteSpace "%s"' % (x,))
 
-print_('class PXStart (event :: Type -> Type) (payload :: Type) (verb :: Symbol) (head :: Symbol) (tail :: Symbol) (purs :: Row Type) | event payload verb head tail -> purs')
+print_('class PXStart (event :: Type -> Type -> Type) (proof :: Type) (payload :: Type) (verb :: Symbol) (head :: Symbol) (tail :: Symbol) (purs :: Row Type) | event proof payload verb head tail -> purs')
 for x in WHITESPACE:
-    print_('instance (Sym.Cons x y tail, PXStart event payload verb x y purs) => PXStart event payload verb "%s" tail purs' % (x,))
+    print_('instance (Sym.Cons x y tail, PXStart event proof payload verb x y purs) => PXStart event proof payload verb "%s" tail purs' % (x,))
 print_("""instance
   ( Sym.Cons x y tail
-  , PXTagPreName event payload verb x y () purso trailing
+  , PXTagPreName event proof payload verb x y () purso trailing
   , IsWhiteSpace trailing
-  ) => PXStart event payload verb "<" tail purso
+  ) => PXStart event proof payload verb "<" tail purso
 """)
 print_("--")
-print_('class PXTagPreName (event :: Type -> Type) (payload :: Type) (verb :: Symbol) (head :: Symbol) (tail :: Symbol) (pursi :: Row Type) (purso :: Row Type) (trailing :: Symbol) | event payload verb head tail pursi -> purso trailing')
+print_('class PXTagPreName (event :: Type -> Type -> Type) (proof :: Type) (payload :: Type) (verb :: Symbol) (head :: Symbol) (tail :: Symbol) (pursi :: Row Type) (purso :: Row Type) (trailing :: Symbol) | event proof payload verb head tail pursi -> purso trailing')
 for x in WHITESPACE:
-    print_('instance (Sym.Cons x y tail, PXTagPreName event payload verb x y pursi purso trailing) => PXTagPreName event payload verb "%s" tail pursi purso trailing' % (x,))
+    print_('instance (Sym.Cons x y tail, PXTagPreName event proof payload verb x y pursi purso trailing) => PXTagPreName event proof payload verb "%s" tail pursi purso trailing' % (x,))
 for x in string.ascii_lowercase:
-  print_('instance (PXTagName event payload verb "" "%s" tail pursi purso trailing) => PXTagPreName event payload verb "%s" tail pursi purso trailing' % (x,x))
+  print_('instance (PXTagName event proof payload verb "" "%s" tail pursi purso trailing) => PXTagPreName event proof payload verb "%s" tail pursi purso trailing' % (x,x))
 print_('--')
-print_('class PXTagName (event :: Type -> Type) (payload :: Type) (verb :: Symbol) (tag :: Symbol) (head :: Symbol) (tail :: Symbol) (pursi :: Row Type) (purso :: Row Type) (trailing :: Symbol) | event payload verb tag head tail pursi -> purso trailing')
-print_('instance (Sym.Cons q r tail, PXBody event payload verb q r pursi purso trailing, Sym.Cons x y trailing, PreEndTagFromTrailing x y tag newTrailing) => PXTagName event payload verb tag ">" tail pursi purso newTrailing')
+print_('class PXTagName (event :: Type -> Type -> Type) (proof :: Type) (payload :: Type) (verb :: Symbol) (tag :: Symbol) (head :: Symbol) (tail :: Symbol) (pursi :: Row Type) (purso :: Row Type) (trailing :: Symbol) | event proof payload verb tag head tail pursi -> purso trailing')
+print_('instance (Sym.Cons q r tail, PXBody event proof payload verb q r pursi purso trailing, Sym.Cons x y trailing, PreEndTagFromTrailing x y tag newTrailing) => PXTagName event proof payload verb tag ">" tail pursi purso newTrailing')
 for x in string.ascii_lowercase+'-'+string.digits:
-  print_('instance (Sym.Cons x y tail, Sym.Append tag_ "%s" tag, PXTagName event payload verb tag x y pursi purso trailing) => PXTagName event payload verb tag_ "%s" tail pursi purso trailing' % (x,x))
+  print_('instance (Sym.Cons x y tail, Sym.Append tag_ "%s" tag, PXTagName event proof payload verb tag x y pursi purso trailing) => PXTagName event proof payload verb tag_ "%s" tail pursi purso trailing' % (x,x))
 for x in WHITESPACE:
-  print_('instance (Sym.Cons x y tail, PXTagPreAttrName event payload verb False tag x y pursi purso trailing) => PXTagName event payload verb tag "%s" tail pursi purso trailing' % x)
+  print_('instance (Sym.Cons x y tail, PXTagPreAttrName event proof payload verb False tag x y pursi purso trailing) => PXTagName event proof payload verb tag "%s" tail pursi purso trailing' % x)
 print_('--')
 print_('class PreEndTagFromTrailing (head :: Symbol) (tail :: Symbol) (tag :: Symbol) (newTrailing :: Symbol) | head tail -> tag newTrailing')
 for x in WHITESPACE:
@@ -81,39 +81,39 @@ for x in string.ascii_lowercase+'-'+string.digits:
   print_('instance (Sym.Cons x y tail, Sym.Append tag_ "%s" tag, EndTagFromTrailing x y tag otag trailing) => EndTagFromTrailing "%s" tail tag_ otag trailing' % (x,x))
 print_('instance EndTagFromTrailing ">" tail tag tag tail')
 print_('--')
-print_('class PXTagPreAttrName (event :: Type -> Type) (payload :: Type) (verb :: Symbol) (hasAttributed :: Boolean) (tag :: Symbol) (head :: Symbol) (tail :: Symbol) (pursi :: Row Type) (purso :: Row Type) (trailing :: Symbol) | event payload verb hasAttributed tag head tail pursi -> purso trailing')
-print_('instance (Sym.Cons ">" trailing tail) => PXTagPreAttrName event payload verb hasAttributed tag "/" tail purs purs trailing')
+print_('class PXTagPreAttrName (event :: Type -> Type -> Type) (proof :: Type) (payload :: Type) (verb :: Symbol) (hasAttributed :: Boolean) (tag :: Symbol) (head :: Symbol) (tail :: Symbol) (pursi :: Row Type) (purso :: Row Type) (trailing :: Symbol) | event proof payload verb hasAttributed tag head tail pursi -> purso trailing')
+print_('instance (Sym.Cons ">" trailing tail) => PXTagPreAttrName event proof payload verb hasAttributed tag "/" tail purs purs trailing')
 print_('-- trailing will be by definition whatever comes after the closing tag, ie </ foo> will be " foo>"')
-print_('else instance (Sym.Cons q r tail, PXBody event payload verb q r pursi purso trailing, Sym.Cons x y trailing, PreEndTagFromTrailing x y tag newTrailing) => PXTagPreAttrName event payload verb hasAttributed tag ">" tail pursi purso newTrailing')
+print_('else instance (Sym.Cons q r tail, PXBody event proof payload verb q r pursi purso trailing, Sym.Cons x y trailing, PreEndTagFromTrailing x y tag newTrailing) => PXTagPreAttrName event proof payload verb hasAttributed tag ">" tail pursi purso newTrailing')
 print_('--')
 for x in WHITESPACE:
-  print_('else instance (Sym.Cons x y tail, PXTagPreAttrName event payload verb hasAttributed tag x y pursi purso trailing) => PXTagPreAttrName event payload verb hasAttributed tag "%s" tail pursi purso trailing' % x)
+  print_('else instance (Sym.Cons x y tail, PXTagPreAttrName event proof payload verb hasAttributed tag x y pursi purso trailing) => PXTagPreAttrName event proof payload verb hasAttributed tag "%s" tail pursi purso trailing' % x)
 for x in string.ascii_letters:
-  print_('else instance (PXTagAttrName event payload verb hasAttributed tag "%s" tail pursi purso trailing) => PXTagPreAttrName event payload verb hasAttributed tag "%s" tail pursi purso trailing' % (x,x))
-print_('else instance (Sym.Cons x y tail, DoVerbForAttr event verb tag "" x y pursi pursx newTail, Sym.Cons xx yy newTail, PXTagPreAttrName event payload verb True tag xx yy pursx purso trailing) => PXTagPreAttrName event payload verb False tag verb tail pursi purso trailing')
+  print_('else instance (PXTagAttrName event proof payload verb hasAttributed tag "%s" tail pursi purso trailing) => PXTagPreAttrName event proof payload verb hasAttributed tag "%s" tail pursi purso trailing' % (x,x))
+print_('else instance (Sym.Cons x y tail, DoVerbForAttr event proof verb tag "" x y pursi pursx newTail, Sym.Cons xx yy newTail, PXTagPreAttrName event proof payload verb True tag xx yy pursx purso trailing) => PXTagPreAttrName event proof payload verb False tag verb tail pursi purso trailing')
 print_('--')
-print_('class PXTagAttrName (event :: Type -> Type) (payload :: Type) (verb :: Symbol) (hasAttributed :: Boolean) (tag :: Symbol) (head :: Symbol) (tail :: Symbol) (pursi :: Row Type) (purso :: Row Type) (trailing :: Symbol) | event payload verb hasAttributed tag head tail pursi -> purso trailing')
+print_('class PXTagAttrName (event :: Type -> Type -> Type) (proof :: Type) (payload :: Type) (verb :: Symbol) (hasAttributed :: Boolean) (tag :: Symbol) (head :: Symbol) (tail :: Symbol) (pursi :: Row Type) (purso :: Row Type) (trailing :: Symbol) | event proof payload verb hasAttributed tag head tail pursi -> purso trailing')
 for x in string.ascii_lowercase+'-'+string.digits:
-  print_('instance (Sym.Cons x y tail, PXTagAttrName event payload verb hasAttributed tag x y pursi purso trailing) => PXTagAttrName event payload verb hasAttributed tag "%s" tail pursi purso trailing' % x)
-print_('instance (Sym.Cons x y tail, PXTagPreAttrValue event payload verb hasAttributed tag x y pursi purso trailing) => PXTagAttrName event payload verb hasAttributed tag "=" tail pursi purso trailing')
+  print_('instance (Sym.Cons x y tail, PXTagAttrName event proof payload verb hasAttributed tag x y pursi purso trailing) => PXTagAttrName event proof payload verb hasAttributed tag "%s" tail pursi purso trailing' % x)
+print_('instance (Sym.Cons x y tail, PXTagPreAttrValue event proof payload verb hasAttributed tag x y pursi purso trailing) => PXTagAttrName event proof payload verb hasAttributed tag "=" tail pursi purso trailing')
 for x in WHITESPACE:
-  print_('instance (Sym.Cons x y tail, PXTagPostAttrName event payload verb hasAttributed tag x y pursi purso trailing) => PXTagAttrName event payload verb hasAttributed tag "%s" tail pursi purso trailing' % x)
+  print_('instance (Sym.Cons x y tail, PXTagPostAttrName event proof payload verb hasAttributed tag x y pursi purso trailing) => PXTagAttrName event proof payload verb hasAttributed tag "%s" tail pursi purso trailing' % x)
 print_('--')
-print_('class PXTagPostAttrName (event :: Type -> Type) (payload :: Type) (verb :: Symbol) (hasAttributed :: Boolean) (tag :: Symbol) (head :: Symbol) (tail :: Symbol) (pursi :: Row Type) (purso :: Row Type) (trailing :: Symbol) | event payload verb hasAttributed tag head tail pursi -> purso trailing')
+print_('class PXTagPostAttrName (event :: Type -> Type -> Type) (proof :: Type) (payload :: Type) (verb :: Symbol) (hasAttributed :: Boolean) (tag :: Symbol) (head :: Symbol) (tail :: Symbol) (pursi :: Row Type) (purso :: Row Type) (trailing :: Symbol) | event proof payload verb hasAttributed tag head tail pursi -> purso trailing')
 for x in WHITESPACE:
-  print_('instance (Sym.Cons x y tail, PXTagPostAttrName event payload verb hasAttributed tag x y pursi purso trailing) => PXTagPostAttrName event payload verb hasAttributed tag "%s" tail pursi purso trailing' % x)
-print_('instance (Sym.Cons x y tail, PXTagPreAttrValue event payload verb hasAttributed tag x y pursi purso trailing) => PXTagPostAttrName event payload verb hasAttributed tag "=" tail pursi purso trailing')
+  print_('instance (Sym.Cons x y tail, PXTagPostAttrName event proof payload verb hasAttributed tag x y pursi purso trailing) => PXTagPostAttrName event proof payload verb hasAttributed tag "%s" tail pursi purso trailing' % x)
+print_('instance (Sym.Cons x y tail, PXTagPreAttrValue event proof payload verb hasAttributed tag x y pursi purso trailing) => PXTagPostAttrName event proof payload verb hasAttributed tag "=" tail pursi purso trailing')
 print_('--')
-print_('class PXTagPreAttrValue (event :: Type -> Type) (payload :: Type) (verb :: Symbol) (hasAttributed :: Boolean) (tag :: Symbol) (head :: Symbol) (tail :: Symbol) (pursi :: Row Type) (purso :: Row Type) (trailing :: Symbol) | event payload verb hasAttributed tag head tail pursi -> purso trailing')
+print_('class PXTagPreAttrValue (event :: Type -> Type -> Type) (proof :: Type) (payload :: Type) (verb :: Symbol) (hasAttributed :: Boolean) (tag :: Symbol) (head :: Symbol) (tail :: Symbol) (pursi :: Row Type) (purso :: Row Type) (trailing :: Symbol) | event proof payload verb hasAttributed tag head tail pursi -> purso trailing')
 for x in WHITESPACE:
-  print_('instance (Sym.Cons x y tail, PXTagPreAttrValue event payload verb hasAttributed tag x y pursi purso trailing) => PXTagPreAttrValue event payload verb hasAttributed tag "%s" tail pursi purso trailing' % x)
-print_('instance (Sym.Cons x y tail, PXTagAttrValue event payload verb hasAttributed tag x y pursi purso trailing) => PXTagPreAttrValue event payload verb hasAttributed tag "\\"" tail pursi purso trailing')
+  print_('instance (Sym.Cons x y tail, PXTagPreAttrValue event proof payload verb hasAttributed tag x y pursi purso trailing) => PXTagPreAttrValue event proof payload verb hasAttributed tag "%s" tail pursi purso trailing' % x)
+print_('instance (Sym.Cons x y tail, PXTagAttrValue event proof payload verb hasAttributed tag x y pursi purso trailing) => PXTagPreAttrValue event proof payload verb hasAttributed tag "\\"" tail pursi purso trailing')
 print_('--')
-print_('class PXTagAttrValue (event :: Type -> Type) (payload :: Type) (verb :: Symbol) (hasAttributed :: Boolean) (tag :: Symbol) (head :: Symbol) (tail :: Symbol) (pursi :: Row Type) (purso :: Row Type) (trailing :: Symbol) | event payload verb hasAttributed tag head tail pursi -> purso trailing')
+print_('class PXTagAttrValue (event :: Type -> Type -> Type) (proof :: Type) (payload :: Type) (verb :: Symbol) (hasAttributed :: Boolean) (tag :: Symbol) (head :: Symbol) (tail :: Symbol) (pursi :: Row Type) (purso :: Row Type) (trailing :: Symbol) | event proof payload verb hasAttributed tag head tail pursi -> purso trailing')
 for x in [y for y in (string.ascii_lowercase+string.ascii_uppercase+string.digits+':,;\'!@#$%^&*()_-=`~<>/.')]+['\\\\']+WHITESPACE:
-  print_('instance (Sym.Cons x y tail, PXTagAttrValue event payload verb hasAttributed tag x y pursi purso trailing) => PXTagAttrValue event payload verb hasAttributed tag "%s" tail pursi purso trailing' % x)
-print_('instance (Sym.Cons x y tail, PXTagPreAttrName event payload verb hasAttributed tag x y pursi purso trailing) => PXTagAttrValue event payload verb hasAttributed tag "\\"" tail pursi purso trailing')
-print_('class PXBody (event :: Type -> Type) (payload :: Type) (verb :: Symbol) (head :: Symbol) (tail :: Symbol) (pursi :: Row Type) (purso :: Row Type) (trailing :: Symbol) | event payload verb tail pursi -> purso trailing')
+  print_('instance (Sym.Cons x y tail, PXTagAttrValue event proof payload verb hasAttributed tag x y pursi purso trailing) => PXTagAttrValue event proof payload verb hasAttributed tag "%s" tail pursi purso trailing' % x)
+print_('instance (Sym.Cons x y tail, PXTagPreAttrName event proof payload verb hasAttributed tag x y pursi purso trailing) => PXTagAttrValue event proof payload verb hasAttributed tag "\\"" tail pursi purso trailing')
+print_('class PXBody (event :: Type -> Type -> Type) (proof :: Type) (payload :: Type) (verb :: Symbol) (head :: Symbol) (tail :: Symbol) (pursi :: Row Type) (purso :: Row Type) (trailing :: Symbol) | event proof payload verb tail pursi -> purso trailing')
 print_('''
 class CommendEndCandidate2 (head :: Symbol) (tail :: Symbol) (trailing :: Symbol) | head tail -> trailing
 instance CommendEndCandidate2 ">" tail tail
@@ -124,39 +124,39 @@ else instance (Sym.Cons x y tail, SkipUntilCommentEnd x y trailing) => CommendEn
 class SkipUntilCommentEnd (head :: Symbol) (tail :: Symbol) (trailing :: Symbol) | head tail -> trailing
 instance (Sym.Cons x y tail, CommendEndCandidate1 x y trailing)  => SkipUntilCommentEnd "-" tail trailing
 else instance (Sym.Cons x y tail, SkipUntilCommentEnd x y trailing) => SkipUntilCommentEnd anything tail trailing
-class CloseOrRepeat (event :: Type -> Type) (payload :: Type) (verb :: Symbol) (head :: Symbol) (tail :: Symbol) (pursi :: Row Type) (purso :: Row Type) (trailing :: Symbol) | event payload verb head tail pursi -> purso trailing
-instance CloseOrRepeat event payload verb "/" tail purs purs tail
+class CloseOrRepeat (event :: Type -> Type -> Type) (proof :: Type) (payload :: Type) (verb :: Symbol) (head :: Symbol) (tail :: Symbol) (pursi :: Row Type) (purso :: Row Type) (trailing :: Symbol) | event proof payload verb head tail pursi -> purso trailing
+instance CloseOrRepeat event proof payload verb "/" tail purs purs tail
 else instance
   ( Sym.Cons "-" y tail
   , Sym.Cons "-" yy y
   , Sym.Cons x yyy yy
   , SkipUntilCommentEnd x yyy trailing
   , Sym.Cons mm bb trailing
-  , PXBody event payload verb mm bb pursi purso newTrailing
+  , PXBody event proof payload verb mm bb pursi purso newTrailing
   ) =>
-  CloseOrRepeat event payload verb "!" tail pursi purso newTrailing
-else instance (PXTagPreName event payload verb anything tail () pursm trailing, Row.Union pursi pursm pursz, Sym.Cons x y trailing, PXBody event payload verb x y pursz purso newTrailing) => CloseOrRepeat event payload verb anything tail pursi purso newTrailing
-instance (Sym.Cons x y tail, CloseOrRepeat event payload verb x y pursi purso trailing) => PXBody event payload verb "<" tail pursi purso trailing
-else instance (Sym.Cons x y tail, DoVerbForDOM event payload verb "" x y pursi pursx newTail, Sym.Cons xx yy newTail, PXBody event payload verb xx yy pursx purso trailing) => PXBody event payload verb verb tail pursi purso trailing
-else instance (Sym.Cons x y tail, PXBody event payload verb x y pursi purso trailing) => PXBody event payload verb anything tail pursi purso trailing''')
+  CloseOrRepeat event proof payload verb "!" tail pursi purso newTrailing
+else instance (PXTagPreName event proof payload verb anything tail () pursm trailing, Row.Union pursi pursm pursz, Sym.Cons x y trailing, PXBody event proof payload verb x y pursz purso newTrailing) => CloseOrRepeat event proof payload verb anything tail pursi purso newTrailing
+instance (Sym.Cons x y tail, CloseOrRepeat event proof payload verb x y pursi purso trailing) => PXBody event proof payload verb "<" tail pursi purso trailing
+else instance (Sym.Cons x y tail, DoVerbForDOM event proof payload verb "" x y pursi pursx newTail, Sym.Cons xx yy newTail, PXBody event proof payload verb xx yy pursx purso trailing) => PXBody event proof payload verb verb tail pursi purso trailing
+else instance (Sym.Cons x y tail, PXBody event proof payload verb x y pursi purso trailing) => PXBody event proof payload verb anything tail pursi purso trailing''')
 print_('''
 
 class
-  Plus event <=
-  PursxToElement event payload (rl :: RL.RowList Type) (r :: Row Type)
-  | rl -> event payload r where
+  Plus (event proof) <=
+  PursxToElement event proof payload (rl :: RL.RowList Type) (r :: Row Type)
+  | rl -> event proof payload r where
   pursxToElement
     :: forall proxy
      . proxy rl
     -> { | r }
-    -> { cache :: Object.Object Boolean, element :: Element event payload }
+    -> { cache :: Object.Object Boolean, element :: Element event proof payload }
 
 instance pursxToElementConsElt ::
-  ( Row.Cons key (PursxElement event payload) r' r
-  , PursxToElement event payload rest r
+  ( Row.Cons key (PursxElement event proof payload) r' r
+  , PursxToElement event proof payload rest r
   , IsSymbol key
   ) =>
-  PursxToElement event payload (RL.Cons key (PursxElement event payload) rest) r where
+  PursxToElement event proof payload (RL.Cons key (PursxElement event proof payload) rest) r where
   pursxToElement _ r =
     let
       { cache, element } = pursxToElement (Proxy :: Proxy rest) r
@@ -171,11 +171,11 @@ instance pursxToElementConsElt ::
     PursxElement pxe = get pxk r
 
 else instance pursxToElementConsAttr ::
-  ( Row.Cons key (event (Attribute deku)) r' r
-  , PursxToElement event payload rest r
+  ( Row.Cons key (event proof (Attribute deku)) r' r
+  , PursxToElement event proof payload rest r
   , IsSymbol key
   ) =>
-  PursxToElement event payload (RL.Cons key (event (Attribute deku)) rest) r where
+  PursxToElement event proof payload (RL.Cons key (event proof (Attribute deku)) rest) r where
   pursxToElement _ r =
     let
       { cache, element } = pursxToElement (Proxy :: Proxy rest) r
@@ -198,44 +198,44 @@ else instance pursxToElementConsAttr ::
     pxk = Proxy :: _ key
 
 instance pursxToElementNil ::
-  Plus event =>
-  PursxToElement event payload RL.Nil r where
+  Plus (event proof) =>
+  PursxToElement event proof payload RL.Nil r where
   pursxToElement _ _ = { cache: Object.empty, element: Element \_ _ -> empty }
 
 psx
-  :: forall event payload proxy (html :: Symbol)
+  :: forall event proof payload proxy (html :: Symbol)
    . IsSymbol html
-  => PXStart event payload "~" " " html ()
-  => PursxToElement event payload RL.Nil ()
-  => IsEvent event
+  => PXStart event proof payload "~" " " html ()
+  => PursxToElement event proof payload RL.Nil ()
+  => IsEvent (event proof)
   => proxy html
-  -> Element event payload
+  -> Element event proof payload
 psx px = makePursx px {}
 
 makePursx
-  :: forall event payload proxy (html :: Symbol) r rl
+  :: forall event proof payload proxy (html :: Symbol) r rl
    . IsSymbol html
-  => PXStart event payload "~" " " html r
+  => PXStart event proof payload "~" " " html r
   => RL.RowToList r rl
-  => PursxToElement event payload rl r
-  => IsEvent event
+  => PursxToElement event proof payload rl r
+  => IsEvent (event proof)
   => proxy html
   -> { | r }
-  -> Element event payload
+  -> Element event proof payload
 makePursx = makePursx' (Proxy :: _ "~")
 
 makePursx'
-  :: forall event payload verb proxyA proxyB (html :: Symbol) r rl
+  :: forall event proof payload verb proxyA proxyB (html :: Symbol) r rl
    . IsSymbol html
   => IsSymbol verb
-  => PXStart event payload verb " " html r
+  => PXStart event proof payload verb " " html r
   => RL.RowToList r rl
-  => PursxToElement event payload rl r
-  => IsEvent event
+  => PursxToElement event proof payload rl r
+  => IsEvent (event proof)
   => proxyA verb
   -> proxyB html
   -> { | r }
-  -> Element event payload
+  -> Element event proof payload
 makePursx' verb html r = Element go
   where
   go parent di@(DOMInterpret { makePursx: mpx, ids }) = keepLatest

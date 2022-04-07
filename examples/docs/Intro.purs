@@ -31,6 +31,6 @@ px = Proxy :: Proxy """<div>
   <p>And now, without further ado, check out the <a ~next~ style="cursor:pointer;">hello world section</a>!</p>
 </div>"""
 
-intro :: forall event payload. IsEvent event => Plus event => (Page -> Effect Unit) -> Element event payload
+intro :: forall event phantom payload. IsEvent (event phantom) => Plus (event phantom) => (Page -> Effect Unit) -> Element event phantom payload
 intro dpage  = px ~~
   { next: pure (D.OnClick := (cb (const $ dpage HelloWorld *> scrollToTop))) }

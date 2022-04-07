@@ -6,24 +6,24 @@ import Control.Alt ((<|>))
 import Data.Foldable (oneOf)
 import Deku.Core (DOMInterpret(..), Element(..), Subgraph)
 import FRP.Behavior (sample_)
-import FRP.Event (class IsEvent, Event, keepLatest)
+import FRP.Event (class IsEvent, keepLatest)
 
 type GatewayToSubgraph index env =
-  forall event payload
-   . (Event Boolean -> Element event payload)
+  forall event (proof :: Type) payload
+   . (event proof Boolean -> Element event proof payload)
   -> Subgraph index env event payload
 
 type GatewayToElement =
-  forall event payload
-   . (Event Boolean -> Element event payload)
-  -> Element event payload
+  forall event (proof :: Type) payload
+   . (event proof Boolean -> Element event proof payload)
+  -> Element event proof payload
 
 portal
-  :: forall event payload
-   . IsEvent event
-  => Element event payload
-  -> ((event Boolean -> Element event payload) -> Element event payload)
-  -> Element event payload
+  :: forall event proof payload
+   . IsEvent (event proof)
+  => Element event proof payload
+  -> ((event proof Boolean -> Element event proof payload) -> Element event proof payload)
+  -> Element event proof payload
 portal elt cf = Element go
   where
   go parent di@(DOMInterpret { ids, makePortal }) = keepLatest

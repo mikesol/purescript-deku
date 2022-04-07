@@ -54,7 +54,7 @@ px = Proxy :: Proxy """<div>
 </div>"""
 
 
-pursx1 :: forall event payload. IsEvent event => Plus event => (Page -> Effect Unit) -> Element event payload
+pursx1 :: forall event  proof payload. IsEvent (event proof) => Plus (event proof) => (Page -> Effect Unit) -> Element event proof payload
 pursx1 dpage  = px ~~
   { code: nut (D.pre_ [D.code_ [text_ $ """module Main where
 

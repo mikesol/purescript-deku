@@ -86,18 +86,18 @@ def cg(CODEGEN_TARGET):
             print_(f'''data {term}
 
 {x}
-  :: forall event payload
-   . IsEvent event
-  => event (Attribute {term})
-  -> Array (Element event payload)
-  -> Element event payload
+  :: forall event proof payload
+   . IsEvent (event proof)
+  => event proof (Attribute {term})
+  -> Array (Element event proof payload)
+  -> Element event proof payload
 {x} = elementify "{astag(x)}"
 
 {x}_
-  :: forall event payload
-   . IsEvent event
-  => Array (Element event payload)
-  -> Element event payload
+  :: forall event proof payload
+   . IsEvent (event proof)
+  => Array (Element event proof payload)
+  -> Element event proof payload
 {x}_ = {x} empty
 instance tagToDeku{term} :: TagToDeku "{astag(x)}" {term}
 ''')
