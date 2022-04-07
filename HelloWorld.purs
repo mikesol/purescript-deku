@@ -5,7 +5,7 @@ import Prelude
 import Control.Plus (class Plus)
 import Deku.Attribute (cb, (:=))
 import Deku.Control (text_)
-import Deku.Core (Element, Element)
+import Deku.Core (Element)
 import Deku.DOM as D
 import Deku.Example.Docs.Types (Page(..))
 import Deku.Example.Docs.Util (scrollToTop)
@@ -38,10 +38,10 @@ px = Proxy :: Proxy """<div>
 </div>"""
 
 
-helloWorld :: forall event payload.
-  Plus event =>
-  IsEvent event =>
-  (Page -> Effect Unit) -> Element event payload
+helloWorld :: forall event phantom payload.
+  Plus (event phantom) =>
+  IsEvent (event phantom) =>
+  (Page -> Effect Unit) -> Element event phantom payload
 helloWorld dpage  = px ~~
   { code: nut (D.pre_ [D.code_ [text_ """module Main where
 
