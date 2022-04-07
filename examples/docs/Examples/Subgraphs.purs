@@ -4,7 +4,7 @@ import Prelude
 
 import Control.Alt ((<|>))
 import Data.Exists (mkExists)
-import Data.Filterable (class Filterable, compact, partitionMap)
+import Data.Filterable (compact, partitionMap)
 import Data.Hashable (class Hashable, hash)
 import Data.Maybe (Maybe(..))
 import Data.Tuple (snd)
@@ -17,6 +17,7 @@ import Deku.Subgraph (SubgraphAction(..), (@@))
 import Deku.Toplevel ((🚀))
 import Effect (Effect)
 import FRP.Event (class IsEvent, mapAccum)
+import FRP.Event.Phantom (PhantomEvent)
 
 data UIevents = UIShown | ButtonClicked | SliderMoved Number
 derive instance Eq UIevents
@@ -36,28 +37,26 @@ counter event = map snd $ mapAccum f event 0
   f a b = (b + 1) /\ (a /\ b)
 
 mySub
-  :: forall event payload
-   . Filterable event
-  => IsEvent event
-  => (Sgs -> Effect Unit)
-  -> Subgraph Sgs Unit event payload
+  :: forall payload
+   . (Sgs -> Effect Unit)
+  -> Subgraph Sgs Unit PhantomEvent payload
 mySub raise Sg0 = mkExists $ SubgraphF \push event ->
-  let
-    { left, right } = partitionMap identity event
-  in
-    D.div_
-      [ D.div_
-          [ D.button
-              (pure $ D.OnClick := cb (const $ raise Sg0))
-              [ text_ "Send to B" ]
-          , D.div_ [ text (map (append "A: " <<< show) (counter left)) ]
-          , D.button
-              (pure $ D.OnClick := cb (const $ push unit))
-              [ text_ "Send to C" ]
-          , D.div_ [ text (map (append "C: " <<< show) (counter right)) ]
-          , D.hr_ []
-          ]
-      ]
+    let
+      { left, right } = partitionMap identity event
+    in
+      D.div_
+        [ D.div_
+            [ D.button
+                (pure $ D.OnClick := cb (const $ raise Sg0))
+                [ text_ "Send to B" ]
+            , D.div_ [ text (map (append "A: " <<< show) (counter left)) ]
+            , D.button
+                (pure $ D.OnClick := cb (const $ push unit))
+                [ text_ "Send to C" ]
+            , D.div_ [ text (map (append "C: " <<< show) (counter right)) ]
+            , D.hr_ []
+            ]
+        ]
 mySub raise Sg1 = mkExists $ SubgraphF \push event ->
   let
     { left, right } = partitionMap identity event

@@ -182,6 +182,13 @@ let additions =
         , repo = "https://github.com/mikesol/purescript-typelevel-eval.git"
         , version = "mikesol"
         }
+      , phantom-event =
+        { dependencies =
+          [ "event"
+          ]
+        , repo = "https://github.com/mikesol/purescript-phantom-event.git"
+        , version = "v0.0.1"
+        }
       , behaviors =
         { dependencies =
           [ "psci-support"

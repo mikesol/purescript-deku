@@ -15,12 +15,12 @@ data SubgraphAction env
   | Remove
 
 subgraph
-  :: forall index env event payload
+  :: forall index env event proof payload
    . Hashable index
-  => IsEvent event
-  => event (index /\ SubgraphAction env)
+  => IsEvent (event proof)
+  => event proof (index /\ SubgraphAction env)
   -> Subgraph index env event payload
-  -> Element event payload
+  -> Element event proof payload
 subgraph mods scenes = Element go
   where
   go

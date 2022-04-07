@@ -3,10 +3,9 @@ module Deku.Example.Docs.Subgraphs where
 import Prelude
 
 import Control.Alt ((<|>))
-import Control.Plus (class Plus)
 import Data.Either (hush)
 import Data.Exists (mkExists)
-import Data.Filterable (class Filterable, compact, partitionMap)
+import Data.Filterable (compact, partitionMap)
 import Data.Hashable (class Hashable, hash)
 import Data.Maybe (Maybe(..))
 import Data.Tuple (snd)
@@ -21,6 +20,7 @@ import Deku.Pursx (nut, (~~))
 import Deku.Subgraph (SubgraphAction(..), (@@))
 import Effect (Effect)
 import FRP.Event (class IsEvent, mapAccum)
+import FRP.Event.Phantom (PhantomEvent)
 import Type.Proxy (Proxy(..))
 
 data UIEvents = UIShown | ButtonClicked | SliderMoved Number
@@ -41,11 +41,9 @@ counter event = map snd $ mapAccum f event 0
   f a b = (b + 1) /\ (a /\ b)
 
 mySub
-  :: forall event payload
-   . Filterable event
-  => IsEvent event
-  => (Sgs -> Effect Unit)
-  -> Subgraph Sgs Unit event payload
+  :: forall proof payload
+   . (Sgs -> Effect Unit)
+  -> Subgraph Sgs Unit PhantomEvent payload
 mySub raise Sg0 = mkExists $ SubgraphF \push event ->
   let
     { left, right } = partitionMap identity event
@@ -141,7 +139,7 @@ px =  Proxy :: Proxy """<div>
   <p>Subgraphs are a great way to bring elements in and out of the DOM, but what if you want to take an existing element and ship it somewhere else? In these cases, the best bet is often to use CSS, but if CSS won't cut it, there are <a ~next~ style="cursor:pointer;">portals</a>.</p>
 </div>"""
 
-subgraphs :: forall event payload. IsEvent event => Plus event => (Page -> Effect Unit) -> Element event payload
+subgraphs :: forall proof payload. (Page -> Effect Unit) -> Element PhantomEvent proof payload
 subgraphs dpage = px ~~
   { code: nut
       ( D.pre_
@@ -153,7 +151,7 @@ import Prelude
 
 import Control.Alt ((<|>))
 import Data.Exists (mkExists)
-import Data.Filterable (class Filterable, compact, partitionMap)
+import Data.Filterable (compact, partitionMap)
 import Data.Hashable (class Hashable, hash)
 import Data.Maybe (Maybe(..))
 import Data.Tuple (snd)
@@ -166,6 +164,7 @@ import Deku.Subgraph (SubgraphAction(..), (@@))
 import Deku.Toplevel ((🚀))
 import Effect (Effect)
 import FRP.Event (class IsEvent, mapAccum)
+import FRP.Event.Phantom (PhantomEvent)
 
 data UIevents = UIShown | ButtonClicked | SliderMoved Number
 derive instance Eq UIevents
@@ -185,28 +184,26 @@ counter event = map snd $ mapAccum f event 0
   f a b = (b + 1) /\ (a /\ b)
 
 mySub
-  :: forall event payload
-   . Filterable event
-  => IsEvent event
-  => (Sgs -> Effect Unit)
-  -> Subgraph Sgs Unit event payload
+  :: forall payload
+   . (Sgs -> Effect Unit)
+  -> Subgraph Sgs Unit PhantomEvent payload
 mySub raise Sg0 = mkExists $ SubgraphF \push event ->
-  let
-    { left, right } = partitionMap identity event
-  in
-    D.div_
-      [ D.div_
-          [ D.button
-              (pure $ D.OnClick := cb (const $ raise Sg0))
-              [ text_ "Send to B" ]
-          , D.div_ [ text (map (append "A: " <<< show) (counter left)) ]
-          , D.button
-              (pure $ D.OnClick := cb (const $ push unit))
-              [ text_ "Send to C" ]
-          , D.div_ [ text (map (append "C: " <<< show) (counter right)) ]
-          , D.hr_ []
-          ]
-      ]
+    let
+      { left, right } = partitionMap identity event
+    in
+      D.div_
+        [ D.div_
+            [ D.button
+                (pure $ D.OnClick := cb (const $ raise Sg0))
+                [ text_ "Send to B" ]
+            , D.div_ [ text (map (append "A: " <<< show) (counter left)) ]
+            , D.button
+                (pure $ D.OnClick := cb (const $ push unit))
+                [ text_ "Send to C" ]
+            , D.div_ [ text (map (append "C: " <<< show) (counter right)) ]
+            , D.hr_ []
+            ]
+        ]
 mySub raise Sg1 = mkExists $ SubgraphF \push event ->
   let
     { left, right } = partitionMap identity event

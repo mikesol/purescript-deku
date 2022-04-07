@@ -20,16 +20,20 @@ import Prim.Symbol as Sym
 import Record (get)
 import Type.Proxy (Proxy(..))
 
-newtype PursxElement event payload = PursxElement (Element event payload)
+newtype PursxElement event proof payload = PursxElement
+  (Element event proof payload)
 nut
-  :: forall event payload. Element event payload -> PursxElement event payload
+  :: forall event proof payload
+   . Element event proof payload
+  -> PursxElement event proof payload
 nut = PursxElement
 
 pursx :: forall s. Proxy s
 pursx = Proxy
 class
   DoVerbForAttr
-    (event :: Type -> Type)
+    (event :: Type -> Type -> Type)
+    (proof :: Type)
     (verb :: Symbol)
     (tag :: Symbol)
     (acc :: Symbol)
@@ -38,23 +42,24 @@ class
     (pursi :: Row Type)
     (purso :: Row Type)
     (newTail :: Symbol)
-  | event verb acc head tail pursi -> purso newTail
+  | event proof verb acc head tail pursi -> purso newTail
 instance
   ( TagToDeku tag deku
-  , IsEvent event
-  , Row.Cons acc (event (Attribute deku)) pursi purso
+  , IsEvent (event proof)
+  , Row.Cons acc (event proof (Attribute deku)) pursi purso
   ) =>
-  DoVerbForAttr event verb tag acc verb tail pursi purso tail
+  DoVerbForAttr event proof verb tag acc verb tail pursi purso tail
 else instance
   ( Sym.Append acc anything acc2
   , Sym.Cons x y tail
-  , DoVerbForAttr event verb tag acc2 x y pursi purso newTail
+  , DoVerbForAttr event proof verb tag acc2 x y pursi purso newTail
   ) =>
-  DoVerbForAttr event verb tag acc anything tail pursi purso newTail
+  DoVerbForAttr event proof verb tag acc anything tail pursi purso newTail
 --
 class
   DoVerbForDOM
-    (event :: Type -> Type)
+    (event :: Type -> Type -> Type)
+    (proof :: Type)
     (payload :: Type)
     (verb :: Symbol)
     (acc :: Symbol)
@@ -63,17 +68,17 @@ class
     (pursi :: Row Type)
     (purso :: Row Type)
     (newTail :: Symbol)
-  | event payload verb acc head tail pursi -> purso newTail
+  | event proof payload verb acc head tail pursi -> purso newTail
 instance
-  ( Row.Cons acc (PursxElement event payload) pursi purso
+  ( Row.Cons acc (PursxElement event proof payload) pursi purso
   ) =>
-  DoVerbForDOM event payload verb acc verb tail pursi purso tail
+  DoVerbForDOM event proof payload verb acc verb tail pursi purso tail
 else instance
   ( Sym.Append acc anything acc2
   , Sym.Cons x y tail
-  , DoVerbForDOM event payload verb acc2 x y pursi purso newTail
+  , DoVerbForDOM event proof payload verb acc2 x y pursi purso newTail
   ) =>
-  DoVerbForDOM event payload verb acc anything tail pursi purso newTail
+  DoVerbForDOM event proof payload verb acc anything tail pursi purso newTail
 --
 class IsWhiteSpace (space :: Symbol)
 instance IsWhiteSpace ""
@@ -89,39 +94,41 @@ instance IsSingleWhiteSpace "\t"
 instance IsSingleWhiteSpace "\n"
 class
   PXStart
-    (event :: Type -> Type)
+    (event :: Type -> Type -> Type)
+    (proof :: Type)
     (payload :: Type)
     (verb :: Symbol)
     (head :: Symbol)
     (tail :: Symbol)
     (purs :: Row Type)
-  | event payload verb head tail -> purs
+  | event proof payload verb head tail -> purs
 instance
   ( Sym.Cons x y tail
-  , PXStart event payload verb x y purs
+  , PXStart event proof payload verb x y purs
   ) =>
-  PXStart event payload verb " " tail purs
+  PXStart event proof payload verb " " tail purs
 instance
   ( Sym.Cons x y tail
-  , PXStart event payload verb x y purs
+  , PXStart event proof payload verb x y purs
   ) =>
-  PXStart event payload verb "\t" tail purs
+  PXStart event proof payload verb "\t" tail purs
 instance
   ( Sym.Cons x y tail
-  , PXStart event payload verb x y purs
+  , PXStart event proof payload verb x y purs
   ) =>
-  PXStart event payload verb "\n" tail purs
+  PXStart event proof payload verb "\n" tail purs
 instance
   ( Sym.Cons x y tail
-  , PXTagPreName event payload verb x y () purso trailing
+  , PXTagPreName event proof payload verb x y () purso trailing
   , IsWhiteSpace trailing
   ) =>
-  PXStart event payload verb "<" tail purso
+  PXStart event proof payload verb "<" tail purso
 
 --
 class
   PXTagPreName
-    (event :: Type -> Type)
+    (event :: Type -> Type -> Type)
+    (proof :: Type)
     (payload :: Type)
     (verb :: Symbol)
     (head :: Symbol)
@@ -129,130 +136,131 @@ class
     (pursi :: Row Type)
     (purso :: Row Type)
     (trailing :: Symbol)
-  | event payload verb head tail pursi -> purso trailing
+  | event proof payload verb head tail pursi -> purso trailing
 instance
   ( Sym.Cons x y tail
-  , PXTagPreName event payload verb x y pursi purso trailing
+  , PXTagPreName event proof payload verb x y pursi purso trailing
   ) =>
-  PXTagPreName event payload verb " " tail pursi purso trailing
+  PXTagPreName event proof payload verb " " tail pursi purso trailing
 instance
   ( Sym.Cons x y tail
-  , PXTagPreName event payload verb x y pursi purso trailing
+  , PXTagPreName event proof payload verb x y pursi purso trailing
   ) =>
-  PXTagPreName event payload verb "\t" tail pursi purso trailing
+  PXTagPreName event proof payload verb "\t" tail pursi purso trailing
 instance
   ( Sym.Cons x y tail
-  , PXTagPreName event payload verb x y pursi purso trailing
+  , PXTagPreName event proof payload verb x y pursi purso trailing
   ) =>
-  PXTagPreName event payload verb "\n" tail pursi purso trailing
+  PXTagPreName event proof payload verb "\n" tail pursi purso trailing
 instance
-  ( PXTagName event payload verb "" "a" tail pursi purso trailing
+  ( PXTagName event proof payload verb "" "a" tail pursi purso trailing
   ) =>
-  PXTagPreName event payload verb "a" tail pursi purso trailing
+  PXTagPreName event proof payload verb "a" tail pursi purso trailing
 instance
-  ( PXTagName event payload verb "" "b" tail pursi purso trailing
+  ( PXTagName event proof payload verb "" "b" tail pursi purso trailing
   ) =>
-  PXTagPreName event payload verb "b" tail pursi purso trailing
+  PXTagPreName event proof payload verb "b" tail pursi purso trailing
 instance
-  ( PXTagName event payload verb "" "c" tail pursi purso trailing
+  ( PXTagName event proof payload verb "" "c" tail pursi purso trailing
   ) =>
-  PXTagPreName event payload verb "c" tail pursi purso trailing
+  PXTagPreName event proof payload verb "c" tail pursi purso trailing
 instance
-  ( PXTagName event payload verb "" "d" tail pursi purso trailing
+  ( PXTagName event proof payload verb "" "d" tail pursi purso trailing
   ) =>
-  PXTagPreName event payload verb "d" tail pursi purso trailing
+  PXTagPreName event proof payload verb "d" tail pursi purso trailing
 instance
-  ( PXTagName event payload verb "" "e" tail pursi purso trailing
+  ( PXTagName event proof payload verb "" "e" tail pursi purso trailing
   ) =>
-  PXTagPreName event payload verb "e" tail pursi purso trailing
+  PXTagPreName event proof payload verb "e" tail pursi purso trailing
 instance
-  ( PXTagName event payload verb "" "f" tail pursi purso trailing
+  ( PXTagName event proof payload verb "" "f" tail pursi purso trailing
   ) =>
-  PXTagPreName event payload verb "f" tail pursi purso trailing
+  PXTagPreName event proof payload verb "f" tail pursi purso trailing
 instance
-  ( PXTagName event payload verb "" "g" tail pursi purso trailing
+  ( PXTagName event proof payload verb "" "g" tail pursi purso trailing
   ) =>
-  PXTagPreName event payload verb "g" tail pursi purso trailing
+  PXTagPreName event proof payload verb "g" tail pursi purso trailing
 instance
-  ( PXTagName event payload verb "" "h" tail pursi purso trailing
+  ( PXTagName event proof payload verb "" "h" tail pursi purso trailing
   ) =>
-  PXTagPreName event payload verb "h" tail pursi purso trailing
+  PXTagPreName event proof payload verb "h" tail pursi purso trailing
 instance
-  ( PXTagName event payload verb "" "i" tail pursi purso trailing
+  ( PXTagName event proof payload verb "" "i" tail pursi purso trailing
   ) =>
-  PXTagPreName event payload verb "i" tail pursi purso trailing
+  PXTagPreName event proof payload verb "i" tail pursi purso trailing
 instance
-  ( PXTagName event payload verb "" "j" tail pursi purso trailing
+  ( PXTagName event proof payload verb "" "j" tail pursi purso trailing
   ) =>
-  PXTagPreName event payload verb "j" tail pursi purso trailing
+  PXTagPreName event proof payload verb "j" tail pursi purso trailing
 instance
-  ( PXTagName event payload verb "" "k" tail pursi purso trailing
+  ( PXTagName event proof payload verb "" "k" tail pursi purso trailing
   ) =>
-  PXTagPreName event payload verb "k" tail pursi purso trailing
+  PXTagPreName event proof payload verb "k" tail pursi purso trailing
 instance
-  ( PXTagName event payload verb "" "l" tail pursi purso trailing
+  ( PXTagName event proof payload verb "" "l" tail pursi purso trailing
   ) =>
-  PXTagPreName event payload verb "l" tail pursi purso trailing
+  PXTagPreName event proof payload verb "l" tail pursi purso trailing
 instance
-  ( PXTagName event payload verb "" "m" tail pursi purso trailing
+  ( PXTagName event proof payload verb "" "m" tail pursi purso trailing
   ) =>
-  PXTagPreName event payload verb "m" tail pursi purso trailing
+  PXTagPreName event proof payload verb "m" tail pursi purso trailing
 instance
-  ( PXTagName event payload verb "" "n" tail pursi purso trailing
+  ( PXTagName event proof payload verb "" "n" tail pursi purso trailing
   ) =>
-  PXTagPreName event payload verb "n" tail pursi purso trailing
+  PXTagPreName event proof payload verb "n" tail pursi purso trailing
 instance
-  ( PXTagName event payload verb "" "o" tail pursi purso trailing
+  ( PXTagName event proof payload verb "" "o" tail pursi purso trailing
   ) =>
-  PXTagPreName event payload verb "o" tail pursi purso trailing
+  PXTagPreName event proof payload verb "o" tail pursi purso trailing
 instance
-  ( PXTagName event payload verb "" "p" tail pursi purso trailing
+  ( PXTagName event proof payload verb "" "p" tail pursi purso trailing
   ) =>
-  PXTagPreName event payload verb "p" tail pursi purso trailing
+  PXTagPreName event proof payload verb "p" tail pursi purso trailing
 instance
-  ( PXTagName event payload verb "" "q" tail pursi purso trailing
+  ( PXTagName event proof payload verb "" "q" tail pursi purso trailing
   ) =>
-  PXTagPreName event payload verb "q" tail pursi purso trailing
+  PXTagPreName event proof payload verb "q" tail pursi purso trailing
 instance
-  ( PXTagName event payload verb "" "r" tail pursi purso trailing
+  ( PXTagName event proof payload verb "" "r" tail pursi purso trailing
   ) =>
-  PXTagPreName event payload verb "r" tail pursi purso trailing
+  PXTagPreName event proof payload verb "r" tail pursi purso trailing
 instance
-  ( PXTagName event payload verb "" "s" tail pursi purso trailing
+  ( PXTagName event proof payload verb "" "s" tail pursi purso trailing
   ) =>
-  PXTagPreName event payload verb "s" tail pursi purso trailing
+  PXTagPreName event proof payload verb "s" tail pursi purso trailing
 instance
-  ( PXTagName event payload verb "" "t" tail pursi purso trailing
+  ( PXTagName event proof payload verb "" "t" tail pursi purso trailing
   ) =>
-  PXTagPreName event payload verb "t" tail pursi purso trailing
+  PXTagPreName event proof payload verb "t" tail pursi purso trailing
 instance
-  ( PXTagName event payload verb "" "u" tail pursi purso trailing
+  ( PXTagName event proof payload verb "" "u" tail pursi purso trailing
   ) =>
-  PXTagPreName event payload verb "u" tail pursi purso trailing
+  PXTagPreName event proof payload verb "u" tail pursi purso trailing
 instance
-  ( PXTagName event payload verb "" "v" tail pursi purso trailing
+  ( PXTagName event proof payload verb "" "v" tail pursi purso trailing
   ) =>
-  PXTagPreName event payload verb "v" tail pursi purso trailing
+  PXTagPreName event proof payload verb "v" tail pursi purso trailing
 instance
-  ( PXTagName event payload verb "" "w" tail pursi purso trailing
+  ( PXTagName event proof payload verb "" "w" tail pursi purso trailing
   ) =>
-  PXTagPreName event payload verb "w" tail pursi purso trailing
+  PXTagPreName event proof payload verb "w" tail pursi purso trailing
 instance
-  ( PXTagName event payload verb "" "x" tail pursi purso trailing
+  ( PXTagName event proof payload verb "" "x" tail pursi purso trailing
   ) =>
-  PXTagPreName event payload verb "x" tail pursi purso trailing
+  PXTagPreName event proof payload verb "x" tail pursi purso trailing
 instance
-  ( PXTagName event payload verb "" "y" tail pursi purso trailing
+  ( PXTagName event proof payload verb "" "y" tail pursi purso trailing
   ) =>
-  PXTagPreName event payload verb "y" tail pursi purso trailing
+  PXTagPreName event proof payload verb "y" tail pursi purso trailing
 instance
-  ( PXTagName event payload verb "" "z" tail pursi purso trailing
+  ( PXTagName event proof payload verb "" "z" tail pursi purso trailing
   ) =>
-  PXTagPreName event payload verb "z" tail pursi purso trailing
+  PXTagPreName event proof payload verb "z" tail pursi purso trailing
 --
 class
   PXTagName
-    (event :: Type -> Type)
+    (event :: Type -> Type -> Type)
+    (proof :: Type)
     (payload :: Type)
     (verb :: Symbol)
     (tag :: Symbol)
@@ -261,251 +269,251 @@ class
     (pursi :: Row Type)
     (purso :: Row Type)
     (trailing :: Symbol)
-  | event payload verb tag head tail pursi -> purso trailing
+  | event proof payload verb tag head tail pursi -> purso trailing
 instance
   ( Sym.Cons q r tail
-  , PXBody event payload verb q r pursi purso trailing
+  , PXBody event proof payload verb q r pursi purso trailing
   , Sym.Cons x y trailing
   , PreEndTagFromTrailing x y tag newTrailing
   ) =>
-  PXTagName event payload verb tag ">" tail pursi purso newTrailing
+  PXTagName event proof payload verb tag ">" tail pursi purso newTrailing
 instance
   ( Sym.Cons x y tail
   , Sym.Append tag_ "a" tag
-  , PXTagName event payload verb tag x y pursi purso trailing
+  , PXTagName event proof payload verb tag x y pursi purso trailing
   ) =>
-  PXTagName event payload verb tag_ "a" tail pursi purso trailing
+  PXTagName event proof payload verb tag_ "a" tail pursi purso trailing
 instance
   ( Sym.Cons x y tail
   , Sym.Append tag_ "b" tag
-  , PXTagName event payload verb tag x y pursi purso trailing
+  , PXTagName event proof payload verb tag x y pursi purso trailing
   ) =>
-  PXTagName event payload verb tag_ "b" tail pursi purso trailing
+  PXTagName event proof payload verb tag_ "b" tail pursi purso trailing
 instance
   ( Sym.Cons x y tail
   , Sym.Append tag_ "c" tag
-  , PXTagName event payload verb tag x y pursi purso trailing
+  , PXTagName event proof payload verb tag x y pursi purso trailing
   ) =>
-  PXTagName event payload verb tag_ "c" tail pursi purso trailing
+  PXTagName event proof payload verb tag_ "c" tail pursi purso trailing
 instance
   ( Sym.Cons x y tail
   , Sym.Append tag_ "d" tag
-  , PXTagName event payload verb tag x y pursi purso trailing
+  , PXTagName event proof payload verb tag x y pursi purso trailing
   ) =>
-  PXTagName event payload verb tag_ "d" tail pursi purso trailing
+  PXTagName event proof payload verb tag_ "d" tail pursi purso trailing
 instance
   ( Sym.Cons x y tail
   , Sym.Append tag_ "e" tag
-  , PXTagName event payload verb tag x y pursi purso trailing
+  , PXTagName event proof payload verb tag x y pursi purso trailing
   ) =>
-  PXTagName event payload verb tag_ "e" tail pursi purso trailing
+  PXTagName event proof payload verb tag_ "e" tail pursi purso trailing
 instance
   ( Sym.Cons x y tail
   , Sym.Append tag_ "f" tag
-  , PXTagName event payload verb tag x y pursi purso trailing
+  , PXTagName event proof payload verb tag x y pursi purso trailing
   ) =>
-  PXTagName event payload verb tag_ "f" tail pursi purso trailing
+  PXTagName event proof payload verb tag_ "f" tail pursi purso trailing
 instance
   ( Sym.Cons x y tail
   , Sym.Append tag_ "g" tag
-  , PXTagName event payload verb tag x y pursi purso trailing
+  , PXTagName event proof payload verb tag x y pursi purso trailing
   ) =>
-  PXTagName event payload verb tag_ "g" tail pursi purso trailing
+  PXTagName event proof payload verb tag_ "g" tail pursi purso trailing
 instance
   ( Sym.Cons x y tail
   , Sym.Append tag_ "h" tag
-  , PXTagName event payload verb tag x y pursi purso trailing
+  , PXTagName event proof payload verb tag x y pursi purso trailing
   ) =>
-  PXTagName event payload verb tag_ "h" tail pursi purso trailing
+  PXTagName event proof payload verb tag_ "h" tail pursi purso trailing
 instance
   ( Sym.Cons x y tail
   , Sym.Append tag_ "i" tag
-  , PXTagName event payload verb tag x y pursi purso trailing
+  , PXTagName event proof payload verb tag x y pursi purso trailing
   ) =>
-  PXTagName event payload verb tag_ "i" tail pursi purso trailing
+  PXTagName event proof payload verb tag_ "i" tail pursi purso trailing
 instance
   ( Sym.Cons x y tail
   , Sym.Append tag_ "j" tag
-  , PXTagName event payload verb tag x y pursi purso trailing
+  , PXTagName event proof payload verb tag x y pursi purso trailing
   ) =>
-  PXTagName event payload verb tag_ "j" tail pursi purso trailing
+  PXTagName event proof payload verb tag_ "j" tail pursi purso trailing
 instance
   ( Sym.Cons x y tail
   , Sym.Append tag_ "k" tag
-  , PXTagName event payload verb tag x y pursi purso trailing
+  , PXTagName event proof payload verb tag x y pursi purso trailing
   ) =>
-  PXTagName event payload verb tag_ "k" tail pursi purso trailing
+  PXTagName event proof payload verb tag_ "k" tail pursi purso trailing
 instance
   ( Sym.Cons x y tail
   , Sym.Append tag_ "l" tag
-  , PXTagName event payload verb tag x y pursi purso trailing
+  , PXTagName event proof payload verb tag x y pursi purso trailing
   ) =>
-  PXTagName event payload verb tag_ "l" tail pursi purso trailing
+  PXTagName event proof payload verb tag_ "l" tail pursi purso trailing
 instance
   ( Sym.Cons x y tail
   , Sym.Append tag_ "m" tag
-  , PXTagName event payload verb tag x y pursi purso trailing
+  , PXTagName event proof payload verb tag x y pursi purso trailing
   ) =>
-  PXTagName event payload verb tag_ "m" tail pursi purso trailing
+  PXTagName event proof payload verb tag_ "m" tail pursi purso trailing
 instance
   ( Sym.Cons x y tail
   , Sym.Append tag_ "n" tag
-  , PXTagName event payload verb tag x y pursi purso trailing
+  , PXTagName event proof payload verb tag x y pursi purso trailing
   ) =>
-  PXTagName event payload verb tag_ "n" tail pursi purso trailing
+  PXTagName event proof payload verb tag_ "n" tail pursi purso trailing
 instance
   ( Sym.Cons x y tail
   , Sym.Append tag_ "o" tag
-  , PXTagName event payload verb tag x y pursi purso trailing
+  , PXTagName event proof payload verb tag x y pursi purso trailing
   ) =>
-  PXTagName event payload verb tag_ "o" tail pursi purso trailing
+  PXTagName event proof payload verb tag_ "o" tail pursi purso trailing
 instance
   ( Sym.Cons x y tail
   , Sym.Append tag_ "p" tag
-  , PXTagName event payload verb tag x y pursi purso trailing
+  , PXTagName event proof payload verb tag x y pursi purso trailing
   ) =>
-  PXTagName event payload verb tag_ "p" tail pursi purso trailing
+  PXTagName event proof payload verb tag_ "p" tail pursi purso trailing
 instance
   ( Sym.Cons x y tail
   , Sym.Append tag_ "q" tag
-  , PXTagName event payload verb tag x y pursi purso trailing
+  , PXTagName event proof payload verb tag x y pursi purso trailing
   ) =>
-  PXTagName event payload verb tag_ "q" tail pursi purso trailing
+  PXTagName event proof payload verb tag_ "q" tail pursi purso trailing
 instance
   ( Sym.Cons x y tail
   , Sym.Append tag_ "r" tag
-  , PXTagName event payload verb tag x y pursi purso trailing
+  , PXTagName event proof payload verb tag x y pursi purso trailing
   ) =>
-  PXTagName event payload verb tag_ "r" tail pursi purso trailing
+  PXTagName event proof payload verb tag_ "r" tail pursi purso trailing
 instance
   ( Sym.Cons x y tail
   , Sym.Append tag_ "s" tag
-  , PXTagName event payload verb tag x y pursi purso trailing
+  , PXTagName event proof payload verb tag x y pursi purso trailing
   ) =>
-  PXTagName event payload verb tag_ "s" tail pursi purso trailing
+  PXTagName event proof payload verb tag_ "s" tail pursi purso trailing
 instance
   ( Sym.Cons x y tail
   , Sym.Append tag_ "t" tag
-  , PXTagName event payload verb tag x y pursi purso trailing
+  , PXTagName event proof payload verb tag x y pursi purso trailing
   ) =>
-  PXTagName event payload verb tag_ "t" tail pursi purso trailing
+  PXTagName event proof payload verb tag_ "t" tail pursi purso trailing
 instance
   ( Sym.Cons x y tail
   , Sym.Append tag_ "u" tag
-  , PXTagName event payload verb tag x y pursi purso trailing
+  , PXTagName event proof payload verb tag x y pursi purso trailing
   ) =>
-  PXTagName event payload verb tag_ "u" tail pursi purso trailing
+  PXTagName event proof payload verb tag_ "u" tail pursi purso trailing
 instance
   ( Sym.Cons x y tail
   , Sym.Append tag_ "v" tag
-  , PXTagName event payload verb tag x y pursi purso trailing
+  , PXTagName event proof payload verb tag x y pursi purso trailing
   ) =>
-  PXTagName event payload verb tag_ "v" tail pursi purso trailing
+  PXTagName event proof payload verb tag_ "v" tail pursi purso trailing
 instance
   ( Sym.Cons x y tail
   , Sym.Append tag_ "w" tag
-  , PXTagName event payload verb tag x y pursi purso trailing
+  , PXTagName event proof payload verb tag x y pursi purso trailing
   ) =>
-  PXTagName event payload verb tag_ "w" tail pursi purso trailing
+  PXTagName event proof payload verb tag_ "w" tail pursi purso trailing
 instance
   ( Sym.Cons x y tail
   , Sym.Append tag_ "x" tag
-  , PXTagName event payload verb tag x y pursi purso trailing
+  , PXTagName event proof payload verb tag x y pursi purso trailing
   ) =>
-  PXTagName event payload verb tag_ "x" tail pursi purso trailing
+  PXTagName event proof payload verb tag_ "x" tail pursi purso trailing
 instance
   ( Sym.Cons x y tail
   , Sym.Append tag_ "y" tag
-  , PXTagName event payload verb tag x y pursi purso trailing
+  , PXTagName event proof payload verb tag x y pursi purso trailing
   ) =>
-  PXTagName event payload verb tag_ "y" tail pursi purso trailing
+  PXTagName event proof payload verb tag_ "y" tail pursi purso trailing
 instance
   ( Sym.Cons x y tail
   , Sym.Append tag_ "z" tag
-  , PXTagName event payload verb tag x y pursi purso trailing
+  , PXTagName event proof payload verb tag x y pursi purso trailing
   ) =>
-  PXTagName event payload verb tag_ "z" tail pursi purso trailing
+  PXTagName event proof payload verb tag_ "z" tail pursi purso trailing
 instance
   ( Sym.Cons x y tail
   , Sym.Append tag_ "-" tag
-  , PXTagName event payload verb tag x y pursi purso trailing
+  , PXTagName event proof payload verb tag x y pursi purso trailing
   ) =>
-  PXTagName event payload verb tag_ "-" tail pursi purso trailing
+  PXTagName event proof payload verb tag_ "-" tail pursi purso trailing
 instance
   ( Sym.Cons x y tail
   , Sym.Append tag_ "0" tag
-  , PXTagName event payload verb tag x y pursi purso trailing
+  , PXTagName event proof payload verb tag x y pursi purso trailing
   ) =>
-  PXTagName event payload verb tag_ "0" tail pursi purso trailing
+  PXTagName event proof payload verb tag_ "0" tail pursi purso trailing
 instance
   ( Sym.Cons x y tail
   , Sym.Append tag_ "1" tag
-  , PXTagName event payload verb tag x y pursi purso trailing
+  , PXTagName event proof payload verb tag x y pursi purso trailing
   ) =>
-  PXTagName event payload verb tag_ "1" tail pursi purso trailing
+  PXTagName event proof payload verb tag_ "1" tail pursi purso trailing
 instance
   ( Sym.Cons x y tail
   , Sym.Append tag_ "2" tag
-  , PXTagName event payload verb tag x y pursi purso trailing
+  , PXTagName event proof payload verb tag x y pursi purso trailing
   ) =>
-  PXTagName event payload verb tag_ "2" tail pursi purso trailing
+  PXTagName event proof payload verb tag_ "2" tail pursi purso trailing
 instance
   ( Sym.Cons x y tail
   , Sym.Append tag_ "3" tag
-  , PXTagName event payload verb tag x y pursi purso trailing
+  , PXTagName event proof payload verb tag x y pursi purso trailing
   ) =>
-  PXTagName event payload verb tag_ "3" tail pursi purso trailing
+  PXTagName event proof payload verb tag_ "3" tail pursi purso trailing
 instance
   ( Sym.Cons x y tail
   , Sym.Append tag_ "4" tag
-  , PXTagName event payload verb tag x y pursi purso trailing
+  , PXTagName event proof payload verb tag x y pursi purso trailing
   ) =>
-  PXTagName event payload verb tag_ "4" tail pursi purso trailing
+  PXTagName event proof payload verb tag_ "4" tail pursi purso trailing
 instance
   ( Sym.Cons x y tail
   , Sym.Append tag_ "5" tag
-  , PXTagName event payload verb tag x y pursi purso trailing
+  , PXTagName event proof payload verb tag x y pursi purso trailing
   ) =>
-  PXTagName event payload verb tag_ "5" tail pursi purso trailing
+  PXTagName event proof payload verb tag_ "5" tail pursi purso trailing
 instance
   ( Sym.Cons x y tail
   , Sym.Append tag_ "6" tag
-  , PXTagName event payload verb tag x y pursi purso trailing
+  , PXTagName event proof payload verb tag x y pursi purso trailing
   ) =>
-  PXTagName event payload verb tag_ "6" tail pursi purso trailing
+  PXTagName event proof payload verb tag_ "6" tail pursi purso trailing
 instance
   ( Sym.Cons x y tail
   , Sym.Append tag_ "7" tag
-  , PXTagName event payload verb tag x y pursi purso trailing
+  , PXTagName event proof payload verb tag x y pursi purso trailing
   ) =>
-  PXTagName event payload verb tag_ "7" tail pursi purso trailing
+  PXTagName event proof payload verb tag_ "7" tail pursi purso trailing
 instance
   ( Sym.Cons x y tail
   , Sym.Append tag_ "8" tag
-  , PXTagName event payload verb tag x y pursi purso trailing
+  , PXTagName event proof payload verb tag x y pursi purso trailing
   ) =>
-  PXTagName event payload verb tag_ "8" tail pursi purso trailing
+  PXTagName event proof payload verb tag_ "8" tail pursi purso trailing
 instance
   ( Sym.Cons x y tail
   , Sym.Append tag_ "9" tag
-  , PXTagName event payload verb tag x y pursi purso trailing
+  , PXTagName event proof payload verb tag x y pursi purso trailing
   ) =>
-  PXTagName event payload verb tag_ "9" tail pursi purso trailing
+  PXTagName event proof payload verb tag_ "9" tail pursi purso trailing
 instance
   ( Sym.Cons x y tail
-  , PXTagPreAttrName event payload verb False tag x y pursi purso trailing
+  , PXTagPreAttrName event proof payload verb False tag x y pursi purso trailing
   ) =>
-  PXTagName event payload verb tag " " tail pursi purso trailing
+  PXTagName event proof payload verb tag " " tail pursi purso trailing
 instance
   ( Sym.Cons x y tail
-  , PXTagPreAttrName event payload verb False tag x y pursi purso trailing
+  , PXTagPreAttrName event proof payload verb False tag x y pursi purso trailing
   ) =>
-  PXTagName event payload verb tag "\t" tail pursi purso trailing
+  PXTagName event proof payload verb tag "\t" tail pursi purso trailing
 instance
   ( Sym.Cons x y tail
-  , PXTagPreAttrName event payload verb False tag x y pursi purso trailing
+  , PXTagPreAttrName event proof payload verb False tag x y pursi purso trailing
   ) =>
-  PXTagName event payload verb tag "\n" tail pursi purso trailing
+  PXTagName event proof payload verb tag "\n" tail pursi purso trailing
 --
 class
   PreEndTagFromTrailing
@@ -872,7 +880,8 @@ instance EndTagFromTrailing ">" tail tag tag tail
 --
 class
   PXTagPreAttrName
-    (event :: Type -> Type)
+    (event :: Type -> Type -> Type)
+    (proof :: Type)
     (payload :: Type)
     (verb :: Symbol)
     (hasAttributed :: Boolean)
@@ -882,11 +891,12 @@ class
     (pursi :: Row Type)
     (purso :: Row Type)
     (trailing :: Symbol)
-  | event payload verb hasAttributed tag head tail pursi -> purso trailing
+  | event proof payload verb hasAttributed tag head tail pursi -> purso trailing
 instance
   ( Sym.Cons ">" trailing tail
   ) =>
   PXTagPreAttrName event
+    proof
     payload
     verb
     hasAttributed
@@ -899,11 +909,12 @@ instance
 -- trailing will be by definition whatever comes after the closing tag, ie </ foo> will be " foo>"
 else instance
   ( Sym.Cons q r tail
-  , PXBody event payload verb q r pursi purso trailing
+  , PXBody event proof payload verb q r pursi purso trailing
   , Sym.Cons x y trailing
   , PreEndTagFromTrailing x y tag newTrailing
   ) =>
   PXTagPreAttrName event
+    proof
     payload
     verb
     hasAttributed
@@ -916,10 +927,11 @@ else instance
 --
 else instance
   ( Sym.Cons x y tail
-  , PXTagPreAttrName event payload verb hasAttributed tag x y pursi purso
+  , PXTagPreAttrName event proof payload verb hasAttributed tag x y pursi purso
       trailing
   ) =>
   PXTagPreAttrName event
+    proof
     payload
     verb
     hasAttributed
@@ -931,10 +943,11 @@ else instance
     trailing
 else instance
   ( Sym.Cons x y tail
-  , PXTagPreAttrName event payload verb hasAttributed tag x y pursi purso
+  , PXTagPreAttrName event proof payload verb hasAttributed tag x y pursi purso
       trailing
   ) =>
   PXTagPreAttrName event
+    proof
     payload
     verb
     hasAttributed
@@ -946,10 +959,11 @@ else instance
     trailing
 else instance
   ( Sym.Cons x y tail
-  , PXTagPreAttrName event payload verb hasAttributed tag x y pursi purso
+  , PXTagPreAttrName event proof payload verb hasAttributed tag x y pursi purso
       trailing
   ) =>
   PXTagPreAttrName event
+    proof
     payload
     verb
     hasAttributed
@@ -960,10 +974,12 @@ else instance
     purso
     trailing
 else instance
-  ( PXTagAttrName event payload verb hasAttributed tag "a" tail pursi purso
+  ( PXTagAttrName event proof payload verb hasAttributed tag "a" tail pursi
+      purso
       trailing
   ) =>
   PXTagPreAttrName event
+    proof
     payload
     verb
     hasAttributed
@@ -974,10 +990,12 @@ else instance
     purso
     trailing
 else instance
-  ( PXTagAttrName event payload verb hasAttributed tag "b" tail pursi purso
+  ( PXTagAttrName event proof payload verb hasAttributed tag "b" tail pursi
+      purso
       trailing
   ) =>
   PXTagPreAttrName event
+    proof
     payload
     verb
     hasAttributed
@@ -988,10 +1006,12 @@ else instance
     purso
     trailing
 else instance
-  ( PXTagAttrName event payload verb hasAttributed tag "c" tail pursi purso
+  ( PXTagAttrName event proof payload verb hasAttributed tag "c" tail pursi
+      purso
       trailing
   ) =>
   PXTagPreAttrName event
+    proof
     payload
     verb
     hasAttributed
@@ -1002,10 +1022,12 @@ else instance
     purso
     trailing
 else instance
-  ( PXTagAttrName event payload verb hasAttributed tag "d" tail pursi purso
+  ( PXTagAttrName event proof payload verb hasAttributed tag "d" tail pursi
+      purso
       trailing
   ) =>
   PXTagPreAttrName event
+    proof
     payload
     verb
     hasAttributed
@@ -1016,10 +1038,12 @@ else instance
     purso
     trailing
 else instance
-  ( PXTagAttrName event payload verb hasAttributed tag "e" tail pursi purso
+  ( PXTagAttrName event proof payload verb hasAttributed tag "e" tail pursi
+      purso
       trailing
   ) =>
   PXTagPreAttrName event
+    proof
     payload
     verb
     hasAttributed
@@ -1030,10 +1054,12 @@ else instance
     purso
     trailing
 else instance
-  ( PXTagAttrName event payload verb hasAttributed tag "f" tail pursi purso
+  ( PXTagAttrName event proof payload verb hasAttributed tag "f" tail pursi
+      purso
       trailing
   ) =>
   PXTagPreAttrName event
+    proof
     payload
     verb
     hasAttributed
@@ -1044,10 +1070,12 @@ else instance
     purso
     trailing
 else instance
-  ( PXTagAttrName event payload verb hasAttributed tag "g" tail pursi purso
+  ( PXTagAttrName event proof payload verb hasAttributed tag "g" tail pursi
+      purso
       trailing
   ) =>
   PXTagPreAttrName event
+    proof
     payload
     verb
     hasAttributed
@@ -1058,10 +1086,12 @@ else instance
     purso
     trailing
 else instance
-  ( PXTagAttrName event payload verb hasAttributed tag "h" tail pursi purso
+  ( PXTagAttrName event proof payload verb hasAttributed tag "h" tail pursi
+      purso
       trailing
   ) =>
   PXTagPreAttrName event
+    proof
     payload
     verb
     hasAttributed
@@ -1072,10 +1102,12 @@ else instance
     purso
     trailing
 else instance
-  ( PXTagAttrName event payload verb hasAttributed tag "i" tail pursi purso
+  ( PXTagAttrName event proof payload verb hasAttributed tag "i" tail pursi
+      purso
       trailing
   ) =>
   PXTagPreAttrName event
+    proof
     payload
     verb
     hasAttributed
@@ -1086,10 +1118,12 @@ else instance
     purso
     trailing
 else instance
-  ( PXTagAttrName event payload verb hasAttributed tag "j" tail pursi purso
+  ( PXTagAttrName event proof payload verb hasAttributed tag "j" tail pursi
+      purso
       trailing
   ) =>
   PXTagPreAttrName event
+    proof
     payload
     verb
     hasAttributed
@@ -1100,10 +1134,12 @@ else instance
     purso
     trailing
 else instance
-  ( PXTagAttrName event payload verb hasAttributed tag "k" tail pursi purso
+  ( PXTagAttrName event proof payload verb hasAttributed tag "k" tail pursi
+      purso
       trailing
   ) =>
   PXTagPreAttrName event
+    proof
     payload
     verb
     hasAttributed
@@ -1114,10 +1150,12 @@ else instance
     purso
     trailing
 else instance
-  ( PXTagAttrName event payload verb hasAttributed tag "l" tail pursi purso
+  ( PXTagAttrName event proof payload verb hasAttributed tag "l" tail pursi
+      purso
       trailing
   ) =>
   PXTagPreAttrName event
+    proof
     payload
     verb
     hasAttributed
@@ -1128,10 +1166,12 @@ else instance
     purso
     trailing
 else instance
-  ( PXTagAttrName event payload verb hasAttributed tag "m" tail pursi purso
+  ( PXTagAttrName event proof payload verb hasAttributed tag "m" tail pursi
+      purso
       trailing
   ) =>
   PXTagPreAttrName event
+    proof
     payload
     verb
     hasAttributed
@@ -1142,10 +1182,12 @@ else instance
     purso
     trailing
 else instance
-  ( PXTagAttrName event payload verb hasAttributed tag "n" tail pursi purso
+  ( PXTagAttrName event proof payload verb hasAttributed tag "n" tail pursi
+      purso
       trailing
   ) =>
   PXTagPreAttrName event
+    proof
     payload
     verb
     hasAttributed
@@ -1156,10 +1198,12 @@ else instance
     purso
     trailing
 else instance
-  ( PXTagAttrName event payload verb hasAttributed tag "o" tail pursi purso
+  ( PXTagAttrName event proof payload verb hasAttributed tag "o" tail pursi
+      purso
       trailing
   ) =>
   PXTagPreAttrName event
+    proof
     payload
     verb
     hasAttributed
@@ -1170,10 +1214,12 @@ else instance
     purso
     trailing
 else instance
-  ( PXTagAttrName event payload verb hasAttributed tag "p" tail pursi purso
+  ( PXTagAttrName event proof payload verb hasAttributed tag "p" tail pursi
+      purso
       trailing
   ) =>
   PXTagPreAttrName event
+    proof
     payload
     verb
     hasAttributed
@@ -1184,10 +1230,12 @@ else instance
     purso
     trailing
 else instance
-  ( PXTagAttrName event payload verb hasAttributed tag "q" tail pursi purso
+  ( PXTagAttrName event proof payload verb hasAttributed tag "q" tail pursi
+      purso
       trailing
   ) =>
   PXTagPreAttrName event
+    proof
     payload
     verb
     hasAttributed
@@ -1198,10 +1246,12 @@ else instance
     purso
     trailing
 else instance
-  ( PXTagAttrName event payload verb hasAttributed tag "r" tail pursi purso
+  ( PXTagAttrName event proof payload verb hasAttributed tag "r" tail pursi
+      purso
       trailing
   ) =>
   PXTagPreAttrName event
+    proof
     payload
     verb
     hasAttributed
@@ -1212,10 +1262,12 @@ else instance
     purso
     trailing
 else instance
-  ( PXTagAttrName event payload verb hasAttributed tag "s" tail pursi purso
+  ( PXTagAttrName event proof payload verb hasAttributed tag "s" tail pursi
+      purso
       trailing
   ) =>
   PXTagPreAttrName event
+    proof
     payload
     verb
     hasAttributed
@@ -1226,10 +1278,12 @@ else instance
     purso
     trailing
 else instance
-  ( PXTagAttrName event payload verb hasAttributed tag "t" tail pursi purso
+  ( PXTagAttrName event proof payload verb hasAttributed tag "t" tail pursi
+      purso
       trailing
   ) =>
   PXTagPreAttrName event
+    proof
     payload
     verb
     hasAttributed
@@ -1240,10 +1294,12 @@ else instance
     purso
     trailing
 else instance
-  ( PXTagAttrName event payload verb hasAttributed tag "u" tail pursi purso
+  ( PXTagAttrName event proof payload verb hasAttributed tag "u" tail pursi
+      purso
       trailing
   ) =>
   PXTagPreAttrName event
+    proof
     payload
     verb
     hasAttributed
@@ -1254,10 +1310,12 @@ else instance
     purso
     trailing
 else instance
-  ( PXTagAttrName event payload verb hasAttributed tag "v" tail pursi purso
+  ( PXTagAttrName event proof payload verb hasAttributed tag "v" tail pursi
+      purso
       trailing
   ) =>
   PXTagPreAttrName event
+    proof
     payload
     verb
     hasAttributed
@@ -1268,10 +1326,12 @@ else instance
     purso
     trailing
 else instance
-  ( PXTagAttrName event payload verb hasAttributed tag "w" tail pursi purso
+  ( PXTagAttrName event proof payload verb hasAttributed tag "w" tail pursi
+      purso
       trailing
   ) =>
   PXTagPreAttrName event
+    proof
     payload
     verb
     hasAttributed
@@ -1282,10 +1342,12 @@ else instance
     purso
     trailing
 else instance
-  ( PXTagAttrName event payload verb hasAttributed tag "x" tail pursi purso
+  ( PXTagAttrName event proof payload verb hasAttributed tag "x" tail pursi
+      purso
       trailing
   ) =>
   PXTagPreAttrName event
+    proof
     payload
     verb
     hasAttributed
@@ -1296,10 +1358,12 @@ else instance
     purso
     trailing
 else instance
-  ( PXTagAttrName event payload verb hasAttributed tag "y" tail pursi purso
+  ( PXTagAttrName event proof payload verb hasAttributed tag "y" tail pursi
+      purso
       trailing
   ) =>
   PXTagPreAttrName event
+    proof
     payload
     verb
     hasAttributed
@@ -1310,10 +1374,12 @@ else instance
     purso
     trailing
 else instance
-  ( PXTagAttrName event payload verb hasAttributed tag "z" tail pursi purso
+  ( PXTagAttrName event proof payload verb hasAttributed tag "z" tail pursi
+      purso
       trailing
   ) =>
   PXTagPreAttrName event
+    proof
     payload
     verb
     hasAttributed
@@ -1324,10 +1390,12 @@ else instance
     purso
     trailing
 else instance
-  ( PXTagAttrName event payload verb hasAttributed tag "A" tail pursi purso
+  ( PXTagAttrName event proof payload verb hasAttributed tag "A" tail pursi
+      purso
       trailing
   ) =>
   PXTagPreAttrName event
+    proof
     payload
     verb
     hasAttributed
@@ -1338,10 +1406,12 @@ else instance
     purso
     trailing
 else instance
-  ( PXTagAttrName event payload verb hasAttributed tag "B" tail pursi purso
+  ( PXTagAttrName event proof payload verb hasAttributed tag "B" tail pursi
+      purso
       trailing
   ) =>
   PXTagPreAttrName event
+    proof
     payload
     verb
     hasAttributed
@@ -1352,10 +1422,12 @@ else instance
     purso
     trailing
 else instance
-  ( PXTagAttrName event payload verb hasAttributed tag "C" tail pursi purso
+  ( PXTagAttrName event proof payload verb hasAttributed tag "C" tail pursi
+      purso
       trailing
   ) =>
   PXTagPreAttrName event
+    proof
     payload
     verb
     hasAttributed
@@ -1366,10 +1438,12 @@ else instance
     purso
     trailing
 else instance
-  ( PXTagAttrName event payload verb hasAttributed tag "D" tail pursi purso
+  ( PXTagAttrName event proof payload verb hasAttributed tag "D" tail pursi
+      purso
       trailing
   ) =>
   PXTagPreAttrName event
+    proof
     payload
     verb
     hasAttributed
@@ -1380,10 +1454,12 @@ else instance
     purso
     trailing
 else instance
-  ( PXTagAttrName event payload verb hasAttributed tag "E" tail pursi purso
+  ( PXTagAttrName event proof payload verb hasAttributed tag "E" tail pursi
+      purso
       trailing
   ) =>
   PXTagPreAttrName event
+    proof
     payload
     verb
     hasAttributed
@@ -1394,10 +1470,12 @@ else instance
     purso
     trailing
 else instance
-  ( PXTagAttrName event payload verb hasAttributed tag "F" tail pursi purso
+  ( PXTagAttrName event proof payload verb hasAttributed tag "F" tail pursi
+      purso
       trailing
   ) =>
   PXTagPreAttrName event
+    proof
     payload
     verb
     hasAttributed
@@ -1408,10 +1486,12 @@ else instance
     purso
     trailing
 else instance
-  ( PXTagAttrName event payload verb hasAttributed tag "G" tail pursi purso
+  ( PXTagAttrName event proof payload verb hasAttributed tag "G" tail pursi
+      purso
       trailing
   ) =>
   PXTagPreAttrName event
+    proof
     payload
     verb
     hasAttributed
@@ -1422,10 +1502,12 @@ else instance
     purso
     trailing
 else instance
-  ( PXTagAttrName event payload verb hasAttributed tag "H" tail pursi purso
+  ( PXTagAttrName event proof payload verb hasAttributed tag "H" tail pursi
+      purso
       trailing
   ) =>
   PXTagPreAttrName event
+    proof
     payload
     verb
     hasAttributed
@@ -1436,10 +1518,12 @@ else instance
     purso
     trailing
 else instance
-  ( PXTagAttrName event payload verb hasAttributed tag "I" tail pursi purso
+  ( PXTagAttrName event proof payload verb hasAttributed tag "I" tail pursi
+      purso
       trailing
   ) =>
   PXTagPreAttrName event
+    proof
     payload
     verb
     hasAttributed
@@ -1450,10 +1534,12 @@ else instance
     purso
     trailing
 else instance
-  ( PXTagAttrName event payload verb hasAttributed tag "J" tail pursi purso
+  ( PXTagAttrName event proof payload verb hasAttributed tag "J" tail pursi
+      purso
       trailing
   ) =>
   PXTagPreAttrName event
+    proof
     payload
     verb
     hasAttributed
@@ -1464,10 +1550,12 @@ else instance
     purso
     trailing
 else instance
-  ( PXTagAttrName event payload verb hasAttributed tag "K" tail pursi purso
+  ( PXTagAttrName event proof payload verb hasAttributed tag "K" tail pursi
+      purso
       trailing
   ) =>
   PXTagPreAttrName event
+    proof
     payload
     verb
     hasAttributed
@@ -1478,10 +1566,12 @@ else instance
     purso
     trailing
 else instance
-  ( PXTagAttrName event payload verb hasAttributed tag "L" tail pursi purso
+  ( PXTagAttrName event proof payload verb hasAttributed tag "L" tail pursi
+      purso
       trailing
   ) =>
   PXTagPreAttrName event
+    proof
     payload
     verb
     hasAttributed
@@ -1492,10 +1582,12 @@ else instance
     purso
     trailing
 else instance
-  ( PXTagAttrName event payload verb hasAttributed tag "M" tail pursi purso
+  ( PXTagAttrName event proof payload verb hasAttributed tag "M" tail pursi
+      purso
       trailing
   ) =>
   PXTagPreAttrName event
+    proof
     payload
     verb
     hasAttributed
@@ -1506,10 +1598,12 @@ else instance
     purso
     trailing
 else instance
-  ( PXTagAttrName event payload verb hasAttributed tag "N" tail pursi purso
+  ( PXTagAttrName event proof payload verb hasAttributed tag "N" tail pursi
+      purso
       trailing
   ) =>
   PXTagPreAttrName event
+    proof
     payload
     verb
     hasAttributed
@@ -1520,10 +1614,12 @@ else instance
     purso
     trailing
 else instance
-  ( PXTagAttrName event payload verb hasAttributed tag "O" tail pursi purso
+  ( PXTagAttrName event proof payload verb hasAttributed tag "O" tail pursi
+      purso
       trailing
   ) =>
   PXTagPreAttrName event
+    proof
     payload
     verb
     hasAttributed
@@ -1534,10 +1630,12 @@ else instance
     purso
     trailing
 else instance
-  ( PXTagAttrName event payload verb hasAttributed tag "P" tail pursi purso
+  ( PXTagAttrName event proof payload verb hasAttributed tag "P" tail pursi
+      purso
       trailing
   ) =>
   PXTagPreAttrName event
+    proof
     payload
     verb
     hasAttributed
@@ -1548,10 +1646,12 @@ else instance
     purso
     trailing
 else instance
-  ( PXTagAttrName event payload verb hasAttributed tag "Q" tail pursi purso
+  ( PXTagAttrName event proof payload verb hasAttributed tag "Q" tail pursi
+      purso
       trailing
   ) =>
   PXTagPreAttrName event
+    proof
     payload
     verb
     hasAttributed
@@ -1562,10 +1662,12 @@ else instance
     purso
     trailing
 else instance
-  ( PXTagAttrName event payload verb hasAttributed tag "R" tail pursi purso
+  ( PXTagAttrName event proof payload verb hasAttributed tag "R" tail pursi
+      purso
       trailing
   ) =>
   PXTagPreAttrName event
+    proof
     payload
     verb
     hasAttributed
@@ -1576,10 +1678,12 @@ else instance
     purso
     trailing
 else instance
-  ( PXTagAttrName event payload verb hasAttributed tag "S" tail pursi purso
+  ( PXTagAttrName event proof payload verb hasAttributed tag "S" tail pursi
+      purso
       trailing
   ) =>
   PXTagPreAttrName event
+    proof
     payload
     verb
     hasAttributed
@@ -1590,10 +1694,12 @@ else instance
     purso
     trailing
 else instance
-  ( PXTagAttrName event payload verb hasAttributed tag "T" tail pursi purso
+  ( PXTagAttrName event proof payload verb hasAttributed tag "T" tail pursi
+      purso
       trailing
   ) =>
   PXTagPreAttrName event
+    proof
     payload
     verb
     hasAttributed
@@ -1604,10 +1710,12 @@ else instance
     purso
     trailing
 else instance
-  ( PXTagAttrName event payload verb hasAttributed tag "U" tail pursi purso
+  ( PXTagAttrName event proof payload verb hasAttributed tag "U" tail pursi
+      purso
       trailing
   ) =>
   PXTagPreAttrName event
+    proof
     payload
     verb
     hasAttributed
@@ -1618,10 +1726,12 @@ else instance
     purso
     trailing
 else instance
-  ( PXTagAttrName event payload verb hasAttributed tag "V" tail pursi purso
+  ( PXTagAttrName event proof payload verb hasAttributed tag "V" tail pursi
+      purso
       trailing
   ) =>
   PXTagPreAttrName event
+    proof
     payload
     verb
     hasAttributed
@@ -1632,10 +1742,12 @@ else instance
     purso
     trailing
 else instance
-  ( PXTagAttrName event payload verb hasAttributed tag "W" tail pursi purso
+  ( PXTagAttrName event proof payload verb hasAttributed tag "W" tail pursi
+      purso
       trailing
   ) =>
   PXTagPreAttrName event
+    proof
     payload
     verb
     hasAttributed
@@ -1646,10 +1758,12 @@ else instance
     purso
     trailing
 else instance
-  ( PXTagAttrName event payload verb hasAttributed tag "X" tail pursi purso
+  ( PXTagAttrName event proof payload verb hasAttributed tag "X" tail pursi
+      purso
       trailing
   ) =>
   PXTagPreAttrName event
+    proof
     payload
     verb
     hasAttributed
@@ -1660,10 +1774,12 @@ else instance
     purso
     trailing
 else instance
-  ( PXTagAttrName event payload verb hasAttributed tag "Y" tail pursi purso
+  ( PXTagAttrName event proof payload verb hasAttributed tag "Y" tail pursi
+      purso
       trailing
   ) =>
   PXTagPreAttrName event
+    proof
     payload
     verb
     hasAttributed
@@ -1674,10 +1790,12 @@ else instance
     purso
     trailing
 else instance
-  ( PXTagAttrName event payload verb hasAttributed tag "Z" tail pursi purso
+  ( PXTagAttrName event proof payload verb hasAttributed tag "Z" tail pursi
+      purso
       trailing
   ) =>
   PXTagPreAttrName event
+    proof
     payload
     verb
     hasAttributed
@@ -1689,15 +1807,27 @@ else instance
     trailing
 else instance
   ( Sym.Cons x y tail
-  , DoVerbForAttr event verb tag "" x y pursi pursx newTail
+  , DoVerbForAttr event proof verb tag "" x y pursi pursx newTail
   , Sym.Cons xx yy newTail
-  , PXTagPreAttrName event payload verb True tag xx yy pursx purso trailing
+  , PXTagPreAttrName event proof payload verb True tag xx yy pursx purso
+      trailing
   ) =>
-  PXTagPreAttrName event payload verb False tag verb tail pursi purso trailing
+  PXTagPreAttrName event
+    proof
+    payload
+    verb
+    False
+    tag
+    verb
+    tail
+    pursi
+    purso
+    trailing
 --
 class
   PXTagAttrName
-    (event :: Type -> Type)
+    (event :: Type -> Type -> Type)
+    (proof :: Type)
     (payload :: Type)
     (verb :: Symbol)
     (hasAttributed :: Boolean)
@@ -1707,12 +1837,14 @@ class
     (pursi :: Row Type)
     (purso :: Row Type)
     (trailing :: Symbol)
-  | event payload verb hasAttributed tag head tail pursi -> purso trailing
+  | event proof payload verb hasAttributed tag head tail pursi -> purso trailing
 instance
   ( Sym.Cons x y tail
-  , PXTagAttrName event payload verb hasAttributed tag x y pursi purso trailing
+  , PXTagAttrName event proof payload verb hasAttributed tag x y pursi purso
+      trailing
   ) =>
   PXTagAttrName event
+    proof
     payload
     verb
     hasAttributed
@@ -1724,9 +1856,11 @@ instance
     trailing
 instance
   ( Sym.Cons x y tail
-  , PXTagAttrName event payload verb hasAttributed tag x y pursi purso trailing
+  , PXTagAttrName event proof payload verb hasAttributed tag x y pursi purso
+      trailing
   ) =>
   PXTagAttrName event
+    proof
     payload
     verb
     hasAttributed
@@ -1738,9 +1872,11 @@ instance
     trailing
 instance
   ( Sym.Cons x y tail
-  , PXTagAttrName event payload verb hasAttributed tag x y pursi purso trailing
+  , PXTagAttrName event proof payload verb hasAttributed tag x y pursi purso
+      trailing
   ) =>
   PXTagAttrName event
+    proof
     payload
     verb
     hasAttributed
@@ -1752,9 +1888,11 @@ instance
     trailing
 instance
   ( Sym.Cons x y tail
-  , PXTagAttrName event payload verb hasAttributed tag x y pursi purso trailing
+  , PXTagAttrName event proof payload verb hasAttributed tag x y pursi purso
+      trailing
   ) =>
   PXTagAttrName event
+    proof
     payload
     verb
     hasAttributed
@@ -1766,9 +1904,11 @@ instance
     trailing
 instance
   ( Sym.Cons x y tail
-  , PXTagAttrName event payload verb hasAttributed tag x y pursi purso trailing
+  , PXTagAttrName event proof payload verb hasAttributed tag x y pursi purso
+      trailing
   ) =>
   PXTagAttrName event
+    proof
     payload
     verb
     hasAttributed
@@ -1780,9 +1920,11 @@ instance
     trailing
 instance
   ( Sym.Cons x y tail
-  , PXTagAttrName event payload verb hasAttributed tag x y pursi purso trailing
+  , PXTagAttrName event proof payload verb hasAttributed tag x y pursi purso
+      trailing
   ) =>
   PXTagAttrName event
+    proof
     payload
     verb
     hasAttributed
@@ -1794,9 +1936,11 @@ instance
     trailing
 instance
   ( Sym.Cons x y tail
-  , PXTagAttrName event payload verb hasAttributed tag x y pursi purso trailing
+  , PXTagAttrName event proof payload verb hasAttributed tag x y pursi purso
+      trailing
   ) =>
   PXTagAttrName event
+    proof
     payload
     verb
     hasAttributed
@@ -1808,9 +1952,11 @@ instance
     trailing
 instance
   ( Sym.Cons x y tail
-  , PXTagAttrName event payload verb hasAttributed tag x y pursi purso trailing
+  , PXTagAttrName event proof payload verb hasAttributed tag x y pursi purso
+      trailing
   ) =>
   PXTagAttrName event
+    proof
     payload
     verb
     hasAttributed
@@ -1822,9 +1968,11 @@ instance
     trailing
 instance
   ( Sym.Cons x y tail
-  , PXTagAttrName event payload verb hasAttributed tag x y pursi purso trailing
+  , PXTagAttrName event proof payload verb hasAttributed tag x y pursi purso
+      trailing
   ) =>
   PXTagAttrName event
+    proof
     payload
     verb
     hasAttributed
@@ -1836,9 +1984,11 @@ instance
     trailing
 instance
   ( Sym.Cons x y tail
-  , PXTagAttrName event payload verb hasAttributed tag x y pursi purso trailing
+  , PXTagAttrName event proof payload verb hasAttributed tag x y pursi purso
+      trailing
   ) =>
   PXTagAttrName event
+    proof
     payload
     verb
     hasAttributed
@@ -1850,9 +2000,11 @@ instance
     trailing
 instance
   ( Sym.Cons x y tail
-  , PXTagAttrName event payload verb hasAttributed tag x y pursi purso trailing
+  , PXTagAttrName event proof payload verb hasAttributed tag x y pursi purso
+      trailing
   ) =>
   PXTagAttrName event
+    proof
     payload
     verb
     hasAttributed
@@ -1864,9 +2016,11 @@ instance
     trailing
 instance
   ( Sym.Cons x y tail
-  , PXTagAttrName event payload verb hasAttributed tag x y pursi purso trailing
+  , PXTagAttrName event proof payload verb hasAttributed tag x y pursi purso
+      trailing
   ) =>
   PXTagAttrName event
+    proof
     payload
     verb
     hasAttributed
@@ -1878,9 +2032,11 @@ instance
     trailing
 instance
   ( Sym.Cons x y tail
-  , PXTagAttrName event payload verb hasAttributed tag x y pursi purso trailing
+  , PXTagAttrName event proof payload verb hasAttributed tag x y pursi purso
+      trailing
   ) =>
   PXTagAttrName event
+    proof
     payload
     verb
     hasAttributed
@@ -1892,9 +2048,11 @@ instance
     trailing
 instance
   ( Sym.Cons x y tail
-  , PXTagAttrName event payload verb hasAttributed tag x y pursi purso trailing
+  , PXTagAttrName event proof payload verb hasAttributed tag x y pursi purso
+      trailing
   ) =>
   PXTagAttrName event
+    proof
     payload
     verb
     hasAttributed
@@ -1906,9 +2064,11 @@ instance
     trailing
 instance
   ( Sym.Cons x y tail
-  , PXTagAttrName event payload verb hasAttributed tag x y pursi purso trailing
+  , PXTagAttrName event proof payload verb hasAttributed tag x y pursi purso
+      trailing
   ) =>
   PXTagAttrName event
+    proof
     payload
     verb
     hasAttributed
@@ -1920,9 +2080,11 @@ instance
     trailing
 instance
   ( Sym.Cons x y tail
-  , PXTagAttrName event payload verb hasAttributed tag x y pursi purso trailing
+  , PXTagAttrName event proof payload verb hasAttributed tag x y pursi purso
+      trailing
   ) =>
   PXTagAttrName event
+    proof
     payload
     verb
     hasAttributed
@@ -1934,9 +2096,11 @@ instance
     trailing
 instance
   ( Sym.Cons x y tail
-  , PXTagAttrName event payload verb hasAttributed tag x y pursi purso trailing
+  , PXTagAttrName event proof payload verb hasAttributed tag x y pursi purso
+      trailing
   ) =>
   PXTagAttrName event
+    proof
     payload
     verb
     hasAttributed
@@ -1948,9 +2112,11 @@ instance
     trailing
 instance
   ( Sym.Cons x y tail
-  , PXTagAttrName event payload verb hasAttributed tag x y pursi purso trailing
+  , PXTagAttrName event proof payload verb hasAttributed tag x y pursi purso
+      trailing
   ) =>
   PXTagAttrName event
+    proof
     payload
     verb
     hasAttributed
@@ -1962,9 +2128,11 @@ instance
     trailing
 instance
   ( Sym.Cons x y tail
-  , PXTagAttrName event payload verb hasAttributed tag x y pursi purso trailing
+  , PXTagAttrName event proof payload verb hasAttributed tag x y pursi purso
+      trailing
   ) =>
   PXTagAttrName event
+    proof
     payload
     verb
     hasAttributed
@@ -1976,9 +2144,11 @@ instance
     trailing
 instance
   ( Sym.Cons x y tail
-  , PXTagAttrName event payload verb hasAttributed tag x y pursi purso trailing
+  , PXTagAttrName event proof payload verb hasAttributed tag x y pursi purso
+      trailing
   ) =>
   PXTagAttrName event
+    proof
     payload
     verb
     hasAttributed
@@ -1990,9 +2160,11 @@ instance
     trailing
 instance
   ( Sym.Cons x y tail
-  , PXTagAttrName event payload verb hasAttributed tag x y pursi purso trailing
+  , PXTagAttrName event proof payload verb hasAttributed tag x y pursi purso
+      trailing
   ) =>
   PXTagAttrName event
+    proof
     payload
     verb
     hasAttributed
@@ -2004,9 +2176,11 @@ instance
     trailing
 instance
   ( Sym.Cons x y tail
-  , PXTagAttrName event payload verb hasAttributed tag x y pursi purso trailing
+  , PXTagAttrName event proof payload verb hasAttributed tag x y pursi purso
+      trailing
   ) =>
   PXTagAttrName event
+    proof
     payload
     verb
     hasAttributed
@@ -2018,9 +2192,11 @@ instance
     trailing
 instance
   ( Sym.Cons x y tail
-  , PXTagAttrName event payload verb hasAttributed tag x y pursi purso trailing
+  , PXTagAttrName event proof payload verb hasAttributed tag x y pursi purso
+      trailing
   ) =>
   PXTagAttrName event
+    proof
     payload
     verb
     hasAttributed
@@ -2032,9 +2208,11 @@ instance
     trailing
 instance
   ( Sym.Cons x y tail
-  , PXTagAttrName event payload verb hasAttributed tag x y pursi purso trailing
+  , PXTagAttrName event proof payload verb hasAttributed tag x y pursi purso
+      trailing
   ) =>
   PXTagAttrName event
+    proof
     payload
     verb
     hasAttributed
@@ -2046,9 +2224,11 @@ instance
     trailing
 instance
   ( Sym.Cons x y tail
-  , PXTagAttrName event payload verb hasAttributed tag x y pursi purso trailing
+  , PXTagAttrName event proof payload verb hasAttributed tag x y pursi purso
+      trailing
   ) =>
   PXTagAttrName event
+    proof
     payload
     verb
     hasAttributed
@@ -2060,9 +2240,11 @@ instance
     trailing
 instance
   ( Sym.Cons x y tail
-  , PXTagAttrName event payload verb hasAttributed tag x y pursi purso trailing
+  , PXTagAttrName event proof payload verb hasAttributed tag x y pursi purso
+      trailing
   ) =>
   PXTagAttrName event
+    proof
     payload
     verb
     hasAttributed
@@ -2074,9 +2256,11 @@ instance
     trailing
 instance
   ( Sym.Cons x y tail
-  , PXTagAttrName event payload verb hasAttributed tag x y pursi purso trailing
+  , PXTagAttrName event proof payload verb hasAttributed tag x y pursi purso
+      trailing
   ) =>
   PXTagAttrName event
+    proof
     payload
     verb
     hasAttributed
@@ -2088,9 +2272,11 @@ instance
     trailing
 instance
   ( Sym.Cons x y tail
-  , PXTagAttrName event payload verb hasAttributed tag x y pursi purso trailing
+  , PXTagAttrName event proof payload verb hasAttributed tag x y pursi purso
+      trailing
   ) =>
   PXTagAttrName event
+    proof
     payload
     verb
     hasAttributed
@@ -2102,9 +2288,11 @@ instance
     trailing
 instance
   ( Sym.Cons x y tail
-  , PXTagAttrName event payload verb hasAttributed tag x y pursi purso trailing
+  , PXTagAttrName event proof payload verb hasAttributed tag x y pursi purso
+      trailing
   ) =>
   PXTagAttrName event
+    proof
     payload
     verb
     hasAttributed
@@ -2116,9 +2304,11 @@ instance
     trailing
 instance
   ( Sym.Cons x y tail
-  , PXTagAttrName event payload verb hasAttributed tag x y pursi purso trailing
+  , PXTagAttrName event proof payload verb hasAttributed tag x y pursi purso
+      trailing
   ) =>
   PXTagAttrName event
+    proof
     payload
     verb
     hasAttributed
@@ -2130,9 +2320,11 @@ instance
     trailing
 instance
   ( Sym.Cons x y tail
-  , PXTagAttrName event payload verb hasAttributed tag x y pursi purso trailing
+  , PXTagAttrName event proof payload verb hasAttributed tag x y pursi purso
+      trailing
   ) =>
   PXTagAttrName event
+    proof
     payload
     verb
     hasAttributed
@@ -2144,9 +2336,11 @@ instance
     trailing
 instance
   ( Sym.Cons x y tail
-  , PXTagAttrName event payload verb hasAttributed tag x y pursi purso trailing
+  , PXTagAttrName event proof payload verb hasAttributed tag x y pursi purso
+      trailing
   ) =>
   PXTagAttrName event
+    proof
     payload
     verb
     hasAttributed
@@ -2158,9 +2352,11 @@ instance
     trailing
 instance
   ( Sym.Cons x y tail
-  , PXTagAttrName event payload verb hasAttributed tag x y pursi purso trailing
+  , PXTagAttrName event proof payload verb hasAttributed tag x y pursi purso
+      trailing
   ) =>
   PXTagAttrName event
+    proof
     payload
     verb
     hasAttributed
@@ -2172,9 +2368,11 @@ instance
     trailing
 instance
   ( Sym.Cons x y tail
-  , PXTagAttrName event payload verb hasAttributed tag x y pursi purso trailing
+  , PXTagAttrName event proof payload verb hasAttributed tag x y pursi purso
+      trailing
   ) =>
   PXTagAttrName event
+    proof
     payload
     verb
     hasAttributed
@@ -2186,9 +2384,11 @@ instance
     trailing
 instance
   ( Sym.Cons x y tail
-  , PXTagAttrName event payload verb hasAttributed tag x y pursi purso trailing
+  , PXTagAttrName event proof payload verb hasAttributed tag x y pursi purso
+      trailing
   ) =>
   PXTagAttrName event
+    proof
     payload
     verb
     hasAttributed
@@ -2200,9 +2400,11 @@ instance
     trailing
 instance
   ( Sym.Cons x y tail
-  , PXTagAttrName event payload verb hasAttributed tag x y pursi purso trailing
+  , PXTagAttrName event proof payload verb hasAttributed tag x y pursi purso
+      trailing
   ) =>
   PXTagAttrName event
+    proof
     payload
     verb
     hasAttributed
@@ -2214,9 +2416,11 @@ instance
     trailing
 instance
   ( Sym.Cons x y tail
-  , PXTagAttrName event payload verb hasAttributed tag x y pursi purso trailing
+  , PXTagAttrName event proof payload verb hasAttributed tag x y pursi purso
+      trailing
   ) =>
   PXTagAttrName event
+    proof
     payload
     verb
     hasAttributed
@@ -2228,10 +2432,11 @@ instance
     trailing
 instance
   ( Sym.Cons x y tail
-  , PXTagPreAttrValue event payload verb hasAttributed tag x y pursi purso
+  , PXTagPreAttrValue event proof payload verb hasAttributed tag x y pursi purso
       trailing
   ) =>
   PXTagAttrName event
+    proof
     payload
     verb
     hasAttributed
@@ -2243,10 +2448,11 @@ instance
     trailing
 instance
   ( Sym.Cons x y tail
-  , PXTagPostAttrName event payload verb hasAttributed tag x y pursi purso
+  , PXTagPostAttrName event proof payload verb hasAttributed tag x y pursi purso
       trailing
   ) =>
   PXTagAttrName event
+    proof
     payload
     verb
     hasAttributed
@@ -2258,10 +2464,11 @@ instance
     trailing
 instance
   ( Sym.Cons x y tail
-  , PXTagPostAttrName event payload verb hasAttributed tag x y pursi purso
+  , PXTagPostAttrName event proof payload verb hasAttributed tag x y pursi purso
       trailing
   ) =>
   PXTagAttrName event
+    proof
     payload
     verb
     hasAttributed
@@ -2273,10 +2480,11 @@ instance
     trailing
 instance
   ( Sym.Cons x y tail
-  , PXTagPostAttrName event payload verb hasAttributed tag x y pursi purso
+  , PXTagPostAttrName event proof payload verb hasAttributed tag x y pursi purso
       trailing
   ) =>
   PXTagAttrName event
+    proof
     payload
     verb
     hasAttributed
@@ -2289,7 +2497,8 @@ instance
 --
 class
   PXTagPostAttrName
-    (event :: Type -> Type)
+    (event :: Type -> Type -> Type)
+    (proof :: Type)
     (payload :: Type)
     (verb :: Symbol)
     (hasAttributed :: Boolean)
@@ -2299,13 +2508,14 @@ class
     (pursi :: Row Type)
     (purso :: Row Type)
     (trailing :: Symbol)
-  | event payload verb hasAttributed tag head tail pursi -> purso trailing
+  | event proof payload verb hasAttributed tag head tail pursi -> purso trailing
 instance
   ( Sym.Cons x y tail
-  , PXTagPostAttrName event payload verb hasAttributed tag x y pursi purso
+  , PXTagPostAttrName event proof payload verb hasAttributed tag x y pursi purso
       trailing
   ) =>
   PXTagPostAttrName event
+    proof
     payload
     verb
     hasAttributed
@@ -2317,10 +2527,11 @@ instance
     trailing
 instance
   ( Sym.Cons x y tail
-  , PXTagPostAttrName event payload verb hasAttributed tag x y pursi purso
+  , PXTagPostAttrName event proof payload verb hasAttributed tag x y pursi purso
       trailing
   ) =>
   PXTagPostAttrName event
+    proof
     payload
     verb
     hasAttributed
@@ -2332,10 +2543,11 @@ instance
     trailing
 instance
   ( Sym.Cons x y tail
-  , PXTagPostAttrName event payload verb hasAttributed tag x y pursi purso
+  , PXTagPostAttrName event proof payload verb hasAttributed tag x y pursi purso
       trailing
   ) =>
   PXTagPostAttrName event
+    proof
     payload
     verb
     hasAttributed
@@ -2347,10 +2559,11 @@ instance
     trailing
 instance
   ( Sym.Cons x y tail
-  , PXTagPreAttrValue event payload verb hasAttributed tag x y pursi purso
+  , PXTagPreAttrValue event proof payload verb hasAttributed tag x y pursi purso
       trailing
   ) =>
   PXTagPostAttrName event
+    proof
     payload
     verb
     hasAttributed
@@ -2363,7 +2576,8 @@ instance
 --
 class
   PXTagPreAttrValue
-    (event :: Type -> Type)
+    (event :: Type -> Type -> Type)
+    (proof :: Type)
     (payload :: Type)
     (verb :: Symbol)
     (hasAttributed :: Boolean)
@@ -2373,13 +2587,14 @@ class
     (pursi :: Row Type)
     (purso :: Row Type)
     (trailing :: Symbol)
-  | event payload verb hasAttributed tag head tail pursi -> purso trailing
+  | event proof payload verb hasAttributed tag head tail pursi -> purso trailing
 instance
   ( Sym.Cons x y tail
-  , PXTagPreAttrValue event payload verb hasAttributed tag x y pursi purso
+  , PXTagPreAttrValue event proof payload verb hasAttributed tag x y pursi purso
       trailing
   ) =>
   PXTagPreAttrValue event
+    proof
     payload
     verb
     hasAttributed
@@ -2391,10 +2606,11 @@ instance
     trailing
 instance
   ( Sym.Cons x y tail
-  , PXTagPreAttrValue event payload verb hasAttributed tag x y pursi purso
+  , PXTagPreAttrValue event proof payload verb hasAttributed tag x y pursi purso
       trailing
   ) =>
   PXTagPreAttrValue event
+    proof
     payload
     verb
     hasAttributed
@@ -2406,10 +2622,11 @@ instance
     trailing
 instance
   ( Sym.Cons x y tail
-  , PXTagPreAttrValue event payload verb hasAttributed tag x y pursi purso
+  , PXTagPreAttrValue event proof payload verb hasAttributed tag x y pursi purso
       trailing
   ) =>
   PXTagPreAttrValue event
+    proof
     payload
     verb
     hasAttributed
@@ -2421,9 +2638,11 @@ instance
     trailing
 instance
   ( Sym.Cons x y tail
-  , PXTagAttrValue event payload verb hasAttributed tag x y pursi purso trailing
+  , PXTagAttrValue event proof payload verb hasAttributed tag x y pursi purso
+      trailing
   ) =>
   PXTagPreAttrValue event
+    proof
     payload
     verb
     hasAttributed
@@ -2436,7 +2655,8 @@ instance
 --
 class
   PXTagAttrValue
-    (event :: Type -> Type)
+    (event :: Type -> Type -> Type)
+    (proof :: Type)
     (payload :: Type)
     (verb :: Symbol)
     (hasAttributed :: Boolean)
@@ -2446,12 +2666,14 @@ class
     (pursi :: Row Type)
     (purso :: Row Type)
     (trailing :: Symbol)
-  | event payload verb hasAttributed tag head tail pursi -> purso trailing
+  | event proof payload verb hasAttributed tag head tail pursi -> purso trailing
 instance
   ( Sym.Cons x y tail
-  , PXTagAttrValue event payload verb hasAttributed tag x y pursi purso trailing
+  , PXTagAttrValue event proof payload verb hasAttributed tag x y pursi purso
+      trailing
   ) =>
   PXTagAttrValue event
+    proof
     payload
     verb
     hasAttributed
@@ -2463,9 +2685,11 @@ instance
     trailing
 instance
   ( Sym.Cons x y tail
-  , PXTagAttrValue event payload verb hasAttributed tag x y pursi purso trailing
+  , PXTagAttrValue event proof payload verb hasAttributed tag x y pursi purso
+      trailing
   ) =>
   PXTagAttrValue event
+    proof
     payload
     verb
     hasAttributed
@@ -2477,9 +2701,11 @@ instance
     trailing
 instance
   ( Sym.Cons x y tail
-  , PXTagAttrValue event payload verb hasAttributed tag x y pursi purso trailing
+  , PXTagAttrValue event proof payload verb hasAttributed tag x y pursi purso
+      trailing
   ) =>
   PXTagAttrValue event
+    proof
     payload
     verb
     hasAttributed
@@ -2491,9 +2717,11 @@ instance
     trailing
 instance
   ( Sym.Cons x y tail
-  , PXTagAttrValue event payload verb hasAttributed tag x y pursi purso trailing
+  , PXTagAttrValue event proof payload verb hasAttributed tag x y pursi purso
+      trailing
   ) =>
   PXTagAttrValue event
+    proof
     payload
     verb
     hasAttributed
@@ -2505,9 +2733,11 @@ instance
     trailing
 instance
   ( Sym.Cons x y tail
-  , PXTagAttrValue event payload verb hasAttributed tag x y pursi purso trailing
+  , PXTagAttrValue event proof payload verb hasAttributed tag x y pursi purso
+      trailing
   ) =>
   PXTagAttrValue event
+    proof
     payload
     verb
     hasAttributed
@@ -2519,9 +2749,11 @@ instance
     trailing
 instance
   ( Sym.Cons x y tail
-  , PXTagAttrValue event payload verb hasAttributed tag x y pursi purso trailing
+  , PXTagAttrValue event proof payload verb hasAttributed tag x y pursi purso
+      trailing
   ) =>
   PXTagAttrValue event
+    proof
     payload
     verb
     hasAttributed
@@ -2533,9 +2765,11 @@ instance
     trailing
 instance
   ( Sym.Cons x y tail
-  , PXTagAttrValue event payload verb hasAttributed tag x y pursi purso trailing
+  , PXTagAttrValue event proof payload verb hasAttributed tag x y pursi purso
+      trailing
   ) =>
   PXTagAttrValue event
+    proof
     payload
     verb
     hasAttributed
@@ -2547,9 +2781,11 @@ instance
     trailing
 instance
   ( Sym.Cons x y tail
-  , PXTagAttrValue event payload verb hasAttributed tag x y pursi purso trailing
+  , PXTagAttrValue event proof payload verb hasAttributed tag x y pursi purso
+      trailing
   ) =>
   PXTagAttrValue event
+    proof
     payload
     verb
     hasAttributed
@@ -2561,9 +2797,11 @@ instance
     trailing
 instance
   ( Sym.Cons x y tail
-  , PXTagAttrValue event payload verb hasAttributed tag x y pursi purso trailing
+  , PXTagAttrValue event proof payload verb hasAttributed tag x y pursi purso
+      trailing
   ) =>
   PXTagAttrValue event
+    proof
     payload
     verb
     hasAttributed
@@ -2575,9 +2813,11 @@ instance
     trailing
 instance
   ( Sym.Cons x y tail
-  , PXTagAttrValue event payload verb hasAttributed tag x y pursi purso trailing
+  , PXTagAttrValue event proof payload verb hasAttributed tag x y pursi purso
+      trailing
   ) =>
   PXTagAttrValue event
+    proof
     payload
     verb
     hasAttributed
@@ -2589,9 +2829,11 @@ instance
     trailing
 instance
   ( Sym.Cons x y tail
-  , PXTagAttrValue event payload verb hasAttributed tag x y pursi purso trailing
+  , PXTagAttrValue event proof payload verb hasAttributed tag x y pursi purso
+      trailing
   ) =>
   PXTagAttrValue event
+    proof
     payload
     verb
     hasAttributed
@@ -2603,9 +2845,11 @@ instance
     trailing
 instance
   ( Sym.Cons x y tail
-  , PXTagAttrValue event payload verb hasAttributed tag x y pursi purso trailing
+  , PXTagAttrValue event proof payload verb hasAttributed tag x y pursi purso
+      trailing
   ) =>
   PXTagAttrValue event
+    proof
     payload
     verb
     hasAttributed
@@ -2617,9 +2861,11 @@ instance
     trailing
 instance
   ( Sym.Cons x y tail
-  , PXTagAttrValue event payload verb hasAttributed tag x y pursi purso trailing
+  , PXTagAttrValue event proof payload verb hasAttributed tag x y pursi purso
+      trailing
   ) =>
   PXTagAttrValue event
+    proof
     payload
     verb
     hasAttributed
@@ -2631,9 +2877,11 @@ instance
     trailing
 instance
   ( Sym.Cons x y tail
-  , PXTagAttrValue event payload verb hasAttributed tag x y pursi purso trailing
+  , PXTagAttrValue event proof payload verb hasAttributed tag x y pursi purso
+      trailing
   ) =>
   PXTagAttrValue event
+    proof
     payload
     verb
     hasAttributed
@@ -2645,9 +2893,11 @@ instance
     trailing
 instance
   ( Sym.Cons x y tail
-  , PXTagAttrValue event payload verb hasAttributed tag x y pursi purso trailing
+  , PXTagAttrValue event proof payload verb hasAttributed tag x y pursi purso
+      trailing
   ) =>
   PXTagAttrValue event
+    proof
     payload
     verb
     hasAttributed
@@ -2659,9 +2909,11 @@ instance
     trailing
 instance
   ( Sym.Cons x y tail
-  , PXTagAttrValue event payload verb hasAttributed tag x y pursi purso trailing
+  , PXTagAttrValue event proof payload verb hasAttributed tag x y pursi purso
+      trailing
   ) =>
   PXTagAttrValue event
+    proof
     payload
     verb
     hasAttributed
@@ -2673,9 +2925,11 @@ instance
     trailing
 instance
   ( Sym.Cons x y tail
-  , PXTagAttrValue event payload verb hasAttributed tag x y pursi purso trailing
+  , PXTagAttrValue event proof payload verb hasAttributed tag x y pursi purso
+      trailing
   ) =>
   PXTagAttrValue event
+    proof
     payload
     verb
     hasAttributed
@@ -2687,9 +2941,11 @@ instance
     trailing
 instance
   ( Sym.Cons x y tail
-  , PXTagAttrValue event payload verb hasAttributed tag x y pursi purso trailing
+  , PXTagAttrValue event proof payload verb hasAttributed tag x y pursi purso
+      trailing
   ) =>
   PXTagAttrValue event
+    proof
     payload
     verb
     hasAttributed
@@ -2701,9 +2957,11 @@ instance
     trailing
 instance
   ( Sym.Cons x y tail
-  , PXTagAttrValue event payload verb hasAttributed tag x y pursi purso trailing
+  , PXTagAttrValue event proof payload verb hasAttributed tag x y pursi purso
+      trailing
   ) =>
   PXTagAttrValue event
+    proof
     payload
     verb
     hasAttributed
@@ -2715,9 +2973,11 @@ instance
     trailing
 instance
   ( Sym.Cons x y tail
-  , PXTagAttrValue event payload verb hasAttributed tag x y pursi purso trailing
+  , PXTagAttrValue event proof payload verb hasAttributed tag x y pursi purso
+      trailing
   ) =>
   PXTagAttrValue event
+    proof
     payload
     verb
     hasAttributed
@@ -2729,9 +2989,11 @@ instance
     trailing
 instance
   ( Sym.Cons x y tail
-  , PXTagAttrValue event payload verb hasAttributed tag x y pursi purso trailing
+  , PXTagAttrValue event proof payload verb hasAttributed tag x y pursi purso
+      trailing
   ) =>
   PXTagAttrValue event
+    proof
     payload
     verb
     hasAttributed
@@ -2743,9 +3005,11 @@ instance
     trailing
 instance
   ( Sym.Cons x y tail
-  , PXTagAttrValue event payload verb hasAttributed tag x y pursi purso trailing
+  , PXTagAttrValue event proof payload verb hasAttributed tag x y pursi purso
+      trailing
   ) =>
   PXTagAttrValue event
+    proof
     payload
     verb
     hasAttributed
@@ -2757,9 +3021,11 @@ instance
     trailing
 instance
   ( Sym.Cons x y tail
-  , PXTagAttrValue event payload verb hasAttributed tag x y pursi purso trailing
+  , PXTagAttrValue event proof payload verb hasAttributed tag x y pursi purso
+      trailing
   ) =>
   PXTagAttrValue event
+    proof
     payload
     verb
     hasAttributed
@@ -2771,9 +3037,11 @@ instance
     trailing
 instance
   ( Sym.Cons x y tail
-  , PXTagAttrValue event payload verb hasAttributed tag x y pursi purso trailing
+  , PXTagAttrValue event proof payload verb hasAttributed tag x y pursi purso
+      trailing
   ) =>
   PXTagAttrValue event
+    proof
     payload
     verb
     hasAttributed
@@ -2785,9 +3053,11 @@ instance
     trailing
 instance
   ( Sym.Cons x y tail
-  , PXTagAttrValue event payload verb hasAttributed tag x y pursi purso trailing
+  , PXTagAttrValue event proof payload verb hasAttributed tag x y pursi purso
+      trailing
   ) =>
   PXTagAttrValue event
+    proof
     payload
     verb
     hasAttributed
@@ -2799,9 +3069,11 @@ instance
     trailing
 instance
   ( Sym.Cons x y tail
-  , PXTagAttrValue event payload verb hasAttributed tag x y pursi purso trailing
+  , PXTagAttrValue event proof payload verb hasAttributed tag x y pursi purso
+      trailing
   ) =>
   PXTagAttrValue event
+    proof
     payload
     verb
     hasAttributed
@@ -2813,9 +3085,11 @@ instance
     trailing
 instance
   ( Sym.Cons x y tail
-  , PXTagAttrValue event payload verb hasAttributed tag x y pursi purso trailing
+  , PXTagAttrValue event proof payload verb hasAttributed tag x y pursi purso
+      trailing
   ) =>
   PXTagAttrValue event
+    proof
     payload
     verb
     hasAttributed
@@ -2827,9 +3101,11 @@ instance
     trailing
 instance
   ( Sym.Cons x y tail
-  , PXTagAttrValue event payload verb hasAttributed tag x y pursi purso trailing
+  , PXTagAttrValue event proof payload verb hasAttributed tag x y pursi purso
+      trailing
   ) =>
   PXTagAttrValue event
+    proof
     payload
     verb
     hasAttributed
@@ -2841,9 +3117,11 @@ instance
     trailing
 instance
   ( Sym.Cons x y tail
-  , PXTagAttrValue event payload verb hasAttributed tag x y pursi purso trailing
+  , PXTagAttrValue event proof payload verb hasAttributed tag x y pursi purso
+      trailing
   ) =>
   PXTagAttrValue event
+    proof
     payload
     verb
     hasAttributed
@@ -2855,9 +3133,11 @@ instance
     trailing
 instance
   ( Sym.Cons x y tail
-  , PXTagAttrValue event payload verb hasAttributed tag x y pursi purso trailing
+  , PXTagAttrValue event proof payload verb hasAttributed tag x y pursi purso
+      trailing
   ) =>
   PXTagAttrValue event
+    proof
     payload
     verb
     hasAttributed
@@ -2869,9 +3149,11 @@ instance
     trailing
 instance
   ( Sym.Cons x y tail
-  , PXTagAttrValue event payload verb hasAttributed tag x y pursi purso trailing
+  , PXTagAttrValue event proof payload verb hasAttributed tag x y pursi purso
+      trailing
   ) =>
   PXTagAttrValue event
+    proof
     payload
     verb
     hasAttributed
@@ -2883,9 +3165,11 @@ instance
     trailing
 instance
   ( Sym.Cons x y tail
-  , PXTagAttrValue event payload verb hasAttributed tag x y pursi purso trailing
+  , PXTagAttrValue event proof payload verb hasAttributed tag x y pursi purso
+      trailing
   ) =>
   PXTagAttrValue event
+    proof
     payload
     verb
     hasAttributed
@@ -2897,9 +3181,11 @@ instance
     trailing
 instance
   ( Sym.Cons x y tail
-  , PXTagAttrValue event payload verb hasAttributed tag x y pursi purso trailing
+  , PXTagAttrValue event proof payload verb hasAttributed tag x y pursi purso
+      trailing
   ) =>
   PXTagAttrValue event
+    proof
     payload
     verb
     hasAttributed
@@ -2911,9 +3197,11 @@ instance
     trailing
 instance
   ( Sym.Cons x y tail
-  , PXTagAttrValue event payload verb hasAttributed tag x y pursi purso trailing
+  , PXTagAttrValue event proof payload verb hasAttributed tag x y pursi purso
+      trailing
   ) =>
   PXTagAttrValue event
+    proof
     payload
     verb
     hasAttributed
@@ -2925,9 +3213,11 @@ instance
     trailing
 instance
   ( Sym.Cons x y tail
-  , PXTagAttrValue event payload verb hasAttributed tag x y pursi purso trailing
+  , PXTagAttrValue event proof payload verb hasAttributed tag x y pursi purso
+      trailing
   ) =>
   PXTagAttrValue event
+    proof
     payload
     verb
     hasAttributed
@@ -2939,9 +3229,11 @@ instance
     trailing
 instance
   ( Sym.Cons x y tail
-  , PXTagAttrValue event payload verb hasAttributed tag x y pursi purso trailing
+  , PXTagAttrValue event proof payload verb hasAttributed tag x y pursi purso
+      trailing
   ) =>
   PXTagAttrValue event
+    proof
     payload
     verb
     hasAttributed
@@ -2953,9 +3245,11 @@ instance
     trailing
 instance
   ( Sym.Cons x y tail
-  , PXTagAttrValue event payload verb hasAttributed tag x y pursi purso trailing
+  , PXTagAttrValue event proof payload verb hasAttributed tag x y pursi purso
+      trailing
   ) =>
   PXTagAttrValue event
+    proof
     payload
     verb
     hasAttributed
@@ -2967,9 +3261,11 @@ instance
     trailing
 instance
   ( Sym.Cons x y tail
-  , PXTagAttrValue event payload verb hasAttributed tag x y pursi purso trailing
+  , PXTagAttrValue event proof payload verb hasAttributed tag x y pursi purso
+      trailing
   ) =>
   PXTagAttrValue event
+    proof
     payload
     verb
     hasAttributed
@@ -2981,9 +3277,11 @@ instance
     trailing
 instance
   ( Sym.Cons x y tail
-  , PXTagAttrValue event payload verb hasAttributed tag x y pursi purso trailing
+  , PXTagAttrValue event proof payload verb hasAttributed tag x y pursi purso
+      trailing
   ) =>
   PXTagAttrValue event
+    proof
     payload
     verb
     hasAttributed
@@ -2995,9 +3293,11 @@ instance
     trailing
 instance
   ( Sym.Cons x y tail
-  , PXTagAttrValue event payload verb hasAttributed tag x y pursi purso trailing
+  , PXTagAttrValue event proof payload verb hasAttributed tag x y pursi purso
+      trailing
   ) =>
   PXTagAttrValue event
+    proof
     payload
     verb
     hasAttributed
@@ -3009,9 +3309,11 @@ instance
     trailing
 instance
   ( Sym.Cons x y tail
-  , PXTagAttrValue event payload verb hasAttributed tag x y pursi purso trailing
+  , PXTagAttrValue event proof payload verb hasAttributed tag x y pursi purso
+      trailing
   ) =>
   PXTagAttrValue event
+    proof
     payload
     verb
     hasAttributed
@@ -3023,9 +3325,11 @@ instance
     trailing
 instance
   ( Sym.Cons x y tail
-  , PXTagAttrValue event payload verb hasAttributed tag x y pursi purso trailing
+  , PXTagAttrValue event proof payload verb hasAttributed tag x y pursi purso
+      trailing
   ) =>
   PXTagAttrValue event
+    proof
     payload
     verb
     hasAttributed
@@ -3037,9 +3341,11 @@ instance
     trailing
 instance
   ( Sym.Cons x y tail
-  , PXTagAttrValue event payload verb hasAttributed tag x y pursi purso trailing
+  , PXTagAttrValue event proof payload verb hasAttributed tag x y pursi purso
+      trailing
   ) =>
   PXTagAttrValue event
+    proof
     payload
     verb
     hasAttributed
@@ -3051,9 +3357,11 @@ instance
     trailing
 instance
   ( Sym.Cons x y tail
-  , PXTagAttrValue event payload verb hasAttributed tag x y pursi purso trailing
+  , PXTagAttrValue event proof payload verb hasAttributed tag x y pursi purso
+      trailing
   ) =>
   PXTagAttrValue event
+    proof
     payload
     verb
     hasAttributed
@@ -3065,9 +3373,11 @@ instance
     trailing
 instance
   ( Sym.Cons x y tail
-  , PXTagAttrValue event payload verb hasAttributed tag x y pursi purso trailing
+  , PXTagAttrValue event proof payload verb hasAttributed tag x y pursi purso
+      trailing
   ) =>
   PXTagAttrValue event
+    proof
     payload
     verb
     hasAttributed
@@ -3079,9 +3389,11 @@ instance
     trailing
 instance
   ( Sym.Cons x y tail
-  , PXTagAttrValue event payload verb hasAttributed tag x y pursi purso trailing
+  , PXTagAttrValue event proof payload verb hasAttributed tag x y pursi purso
+      trailing
   ) =>
   PXTagAttrValue event
+    proof
     payload
     verb
     hasAttributed
@@ -3093,9 +3405,11 @@ instance
     trailing
 instance
   ( Sym.Cons x y tail
-  , PXTagAttrValue event payload verb hasAttributed tag x y pursi purso trailing
+  , PXTagAttrValue event proof payload verb hasAttributed tag x y pursi purso
+      trailing
   ) =>
   PXTagAttrValue event
+    proof
     payload
     verb
     hasAttributed
@@ -3107,9 +3421,11 @@ instance
     trailing
 instance
   ( Sym.Cons x y tail
-  , PXTagAttrValue event payload verb hasAttributed tag x y pursi purso trailing
+  , PXTagAttrValue event proof payload verb hasAttributed tag x y pursi purso
+      trailing
   ) =>
   PXTagAttrValue event
+    proof
     payload
     verb
     hasAttributed
@@ -3121,9 +3437,11 @@ instance
     trailing
 instance
   ( Sym.Cons x y tail
-  , PXTagAttrValue event payload verb hasAttributed tag x y pursi purso trailing
+  , PXTagAttrValue event proof payload verb hasAttributed tag x y pursi purso
+      trailing
   ) =>
   PXTagAttrValue event
+    proof
     payload
     verb
     hasAttributed
@@ -3135,9 +3453,11 @@ instance
     trailing
 instance
   ( Sym.Cons x y tail
-  , PXTagAttrValue event payload verb hasAttributed tag x y pursi purso trailing
+  , PXTagAttrValue event proof payload verb hasAttributed tag x y pursi purso
+      trailing
   ) =>
   PXTagAttrValue event
+    proof
     payload
     verb
     hasAttributed
@@ -3149,9 +3469,11 @@ instance
     trailing
 instance
   ( Sym.Cons x y tail
-  , PXTagAttrValue event payload verb hasAttributed tag x y pursi purso trailing
+  , PXTagAttrValue event proof payload verb hasAttributed tag x y pursi purso
+      trailing
   ) =>
   PXTagAttrValue event
+    proof
     payload
     verb
     hasAttributed
@@ -3163,9 +3485,11 @@ instance
     trailing
 instance
   ( Sym.Cons x y tail
-  , PXTagAttrValue event payload verb hasAttributed tag x y pursi purso trailing
+  , PXTagAttrValue event proof payload verb hasAttributed tag x y pursi purso
+      trailing
   ) =>
   PXTagAttrValue event
+    proof
     payload
     verb
     hasAttributed
@@ -3177,9 +3501,11 @@ instance
     trailing
 instance
   ( Sym.Cons x y tail
-  , PXTagAttrValue event payload verb hasAttributed tag x y pursi purso trailing
+  , PXTagAttrValue event proof payload verb hasAttributed tag x y pursi purso
+      trailing
   ) =>
   PXTagAttrValue event
+    proof
     payload
     verb
     hasAttributed
@@ -3191,9 +3517,11 @@ instance
     trailing
 instance
   ( Sym.Cons x y tail
-  , PXTagAttrValue event payload verb hasAttributed tag x y pursi purso trailing
+  , PXTagAttrValue event proof payload verb hasAttributed tag x y pursi purso
+      trailing
   ) =>
   PXTagAttrValue event
+    proof
     payload
     verb
     hasAttributed
@@ -3205,9 +3533,11 @@ instance
     trailing
 instance
   ( Sym.Cons x y tail
-  , PXTagAttrValue event payload verb hasAttributed tag x y pursi purso trailing
+  , PXTagAttrValue event proof payload verb hasAttributed tag x y pursi purso
+      trailing
   ) =>
   PXTagAttrValue event
+    proof
     payload
     verb
     hasAttributed
@@ -3219,9 +3549,11 @@ instance
     trailing
 instance
   ( Sym.Cons x y tail
-  , PXTagAttrValue event payload verb hasAttributed tag x y pursi purso trailing
+  , PXTagAttrValue event proof payload verb hasAttributed tag x y pursi purso
+      trailing
   ) =>
   PXTagAttrValue event
+    proof
     payload
     verb
     hasAttributed
@@ -3233,9 +3565,11 @@ instance
     trailing
 instance
   ( Sym.Cons x y tail
-  , PXTagAttrValue event payload verb hasAttributed tag x y pursi purso trailing
+  , PXTagAttrValue event proof payload verb hasAttributed tag x y pursi purso
+      trailing
   ) =>
   PXTagAttrValue event
+    proof
     payload
     verb
     hasAttributed
@@ -3247,9 +3581,11 @@ instance
     trailing
 instance
   ( Sym.Cons x y tail
-  , PXTagAttrValue event payload verb hasAttributed tag x y pursi purso trailing
+  , PXTagAttrValue event proof payload verb hasAttributed tag x y pursi purso
+      trailing
   ) =>
   PXTagAttrValue event
+    proof
     payload
     verb
     hasAttributed
@@ -3261,9 +3597,11 @@ instance
     trailing
 instance
   ( Sym.Cons x y tail
-  , PXTagAttrValue event payload verb hasAttributed tag x y pursi purso trailing
+  , PXTagAttrValue event proof payload verb hasAttributed tag x y pursi purso
+      trailing
   ) =>
   PXTagAttrValue event
+    proof
     payload
     verb
     hasAttributed
@@ -3275,9 +3613,11 @@ instance
     trailing
 instance
   ( Sym.Cons x y tail
-  , PXTagAttrValue event payload verb hasAttributed tag x y pursi purso trailing
+  , PXTagAttrValue event proof payload verb hasAttributed tag x y pursi purso
+      trailing
   ) =>
   PXTagAttrValue event
+    proof
     payload
     verb
     hasAttributed
@@ -3289,9 +3629,11 @@ instance
     trailing
 instance
   ( Sym.Cons x y tail
-  , PXTagAttrValue event payload verb hasAttributed tag x y pursi purso trailing
+  , PXTagAttrValue event proof payload verb hasAttributed tag x y pursi purso
+      trailing
   ) =>
   PXTagAttrValue event
+    proof
     payload
     verb
     hasAttributed
@@ -3303,9 +3645,11 @@ instance
     trailing
 instance
   ( Sym.Cons x y tail
-  , PXTagAttrValue event payload verb hasAttributed tag x y pursi purso trailing
+  , PXTagAttrValue event proof payload verb hasAttributed tag x y pursi purso
+      trailing
   ) =>
   PXTagAttrValue event
+    proof
     payload
     verb
     hasAttributed
@@ -3317,9 +3661,11 @@ instance
     trailing
 instance
   ( Sym.Cons x y tail
-  , PXTagAttrValue event payload verb hasAttributed tag x y pursi purso trailing
+  , PXTagAttrValue event proof payload verb hasAttributed tag x y pursi purso
+      trailing
   ) =>
   PXTagAttrValue event
+    proof
     payload
     verb
     hasAttributed
@@ -3331,9 +3677,11 @@ instance
     trailing
 instance
   ( Sym.Cons x y tail
-  , PXTagAttrValue event payload verb hasAttributed tag x y pursi purso trailing
+  , PXTagAttrValue event proof payload verb hasAttributed tag x y pursi purso
+      trailing
   ) =>
   PXTagAttrValue event
+    proof
     payload
     verb
     hasAttributed
@@ -3345,9 +3693,11 @@ instance
     trailing
 instance
   ( Sym.Cons x y tail
-  , PXTagAttrValue event payload verb hasAttributed tag x y pursi purso trailing
+  , PXTagAttrValue event proof payload verb hasAttributed tag x y pursi purso
+      trailing
   ) =>
   PXTagAttrValue event
+    proof
     payload
     verb
     hasAttributed
@@ -3359,9 +3709,11 @@ instance
     trailing
 instance
   ( Sym.Cons x y tail
-  , PXTagAttrValue event payload verb hasAttributed tag x y pursi purso trailing
+  , PXTagAttrValue event proof payload verb hasAttributed tag x y pursi purso
+      trailing
   ) =>
   PXTagAttrValue event
+    proof
     payload
     verb
     hasAttributed
@@ -3373,9 +3725,11 @@ instance
     trailing
 instance
   ( Sym.Cons x y tail
-  , PXTagAttrValue event payload verb hasAttributed tag x y pursi purso trailing
+  , PXTagAttrValue event proof payload verb hasAttributed tag x y pursi purso
+      trailing
   ) =>
   PXTagAttrValue event
+    proof
     payload
     verb
     hasAttributed
@@ -3387,9 +3741,11 @@ instance
     trailing
 instance
   ( Sym.Cons x y tail
-  , PXTagAttrValue event payload verb hasAttributed tag x y pursi purso trailing
+  , PXTagAttrValue event proof payload verb hasAttributed tag x y pursi purso
+      trailing
   ) =>
   PXTagAttrValue event
+    proof
     payload
     verb
     hasAttributed
@@ -3401,9 +3757,11 @@ instance
     trailing
 instance
   ( Sym.Cons x y tail
-  , PXTagAttrValue event payload verb hasAttributed tag x y pursi purso trailing
+  , PXTagAttrValue event proof payload verb hasAttributed tag x y pursi purso
+      trailing
   ) =>
   PXTagAttrValue event
+    proof
     payload
     verb
     hasAttributed
@@ -3415,9 +3773,11 @@ instance
     trailing
 instance
   ( Sym.Cons x y tail
-  , PXTagAttrValue event payload verb hasAttributed tag x y pursi purso trailing
+  , PXTagAttrValue event proof payload verb hasAttributed tag x y pursi purso
+      trailing
   ) =>
   PXTagAttrValue event
+    proof
     payload
     verb
     hasAttributed
@@ -3429,9 +3789,11 @@ instance
     trailing
 instance
   ( Sym.Cons x y tail
-  , PXTagAttrValue event payload verb hasAttributed tag x y pursi purso trailing
+  , PXTagAttrValue event proof payload verb hasAttributed tag x y pursi purso
+      trailing
   ) =>
   PXTagAttrValue event
+    proof
     payload
     verb
     hasAttributed
@@ -3443,9 +3805,11 @@ instance
     trailing
 instance
   ( Sym.Cons x y tail
-  , PXTagAttrValue event payload verb hasAttributed tag x y pursi purso trailing
+  , PXTagAttrValue event proof payload verb hasAttributed tag x y pursi purso
+      trailing
   ) =>
   PXTagAttrValue event
+    proof
     payload
     verb
     hasAttributed
@@ -3457,9 +3821,11 @@ instance
     trailing
 instance
   ( Sym.Cons x y tail
-  , PXTagAttrValue event payload verb hasAttributed tag x y pursi purso trailing
+  , PXTagAttrValue event proof payload verb hasAttributed tag x y pursi purso
+      trailing
   ) =>
   PXTagAttrValue event
+    proof
     payload
     verb
     hasAttributed
@@ -3471,9 +3837,11 @@ instance
     trailing
 instance
   ( Sym.Cons x y tail
-  , PXTagAttrValue event payload verb hasAttributed tag x y pursi purso trailing
+  , PXTagAttrValue event proof payload verb hasAttributed tag x y pursi purso
+      trailing
   ) =>
   PXTagAttrValue event
+    proof
     payload
     verb
     hasAttributed
@@ -3485,9 +3853,11 @@ instance
     trailing
 instance
   ( Sym.Cons x y tail
-  , PXTagAttrValue event payload verb hasAttributed tag x y pursi purso trailing
+  , PXTagAttrValue event proof payload verb hasAttributed tag x y pursi purso
+      trailing
   ) =>
   PXTagAttrValue event
+    proof
     payload
     verb
     hasAttributed
@@ -3499,9 +3869,11 @@ instance
     trailing
 instance
   ( Sym.Cons x y tail
-  , PXTagAttrValue event payload verb hasAttributed tag x y pursi purso trailing
+  , PXTagAttrValue event proof payload verb hasAttributed tag x y pursi purso
+      trailing
   ) =>
   PXTagAttrValue event
+    proof
     payload
     verb
     hasAttributed
@@ -3513,9 +3885,11 @@ instance
     trailing
 instance
   ( Sym.Cons x y tail
-  , PXTagAttrValue event payload verb hasAttributed tag x y pursi purso trailing
+  , PXTagAttrValue event proof payload verb hasAttributed tag x y pursi purso
+      trailing
   ) =>
   PXTagAttrValue event
+    proof
     payload
     verb
     hasAttributed
@@ -3527,9 +3901,11 @@ instance
     trailing
 instance
   ( Sym.Cons x y tail
-  , PXTagAttrValue event payload verb hasAttributed tag x y pursi purso trailing
+  , PXTagAttrValue event proof payload verb hasAttributed tag x y pursi purso
+      trailing
   ) =>
   PXTagAttrValue event
+    proof
     payload
     verb
     hasAttributed
@@ -3541,9 +3917,11 @@ instance
     trailing
 instance
   ( Sym.Cons x y tail
-  , PXTagAttrValue event payload verb hasAttributed tag x y pursi purso trailing
+  , PXTagAttrValue event proof payload verb hasAttributed tag x y pursi purso
+      trailing
   ) =>
   PXTagAttrValue event
+    proof
     payload
     verb
     hasAttributed
@@ -3555,9 +3933,11 @@ instance
     trailing
 instance
   ( Sym.Cons x y tail
-  , PXTagAttrValue event payload verb hasAttributed tag x y pursi purso trailing
+  , PXTagAttrValue event proof payload verb hasAttributed tag x y pursi purso
+      trailing
   ) =>
   PXTagAttrValue event
+    proof
     payload
     verb
     hasAttributed
@@ -3569,9 +3949,11 @@ instance
     trailing
 instance
   ( Sym.Cons x y tail
-  , PXTagAttrValue event payload verb hasAttributed tag x y pursi purso trailing
+  , PXTagAttrValue event proof payload verb hasAttributed tag x y pursi purso
+      trailing
   ) =>
   PXTagAttrValue event
+    proof
     payload
     verb
     hasAttributed
@@ -3583,9 +3965,11 @@ instance
     trailing
 instance
   ( Sym.Cons x y tail
-  , PXTagAttrValue event payload verb hasAttributed tag x y pursi purso trailing
+  , PXTagAttrValue event proof payload verb hasAttributed tag x y pursi purso
+      trailing
   ) =>
   PXTagAttrValue event
+    proof
     payload
     verb
     hasAttributed
@@ -3597,9 +3981,11 @@ instance
     trailing
 instance
   ( Sym.Cons x y tail
-  , PXTagAttrValue event payload verb hasAttributed tag x y pursi purso trailing
+  , PXTagAttrValue event proof payload verb hasAttributed tag x y pursi purso
+      trailing
   ) =>
   PXTagAttrValue event
+    proof
     payload
     verb
     hasAttributed
@@ -3611,9 +3997,11 @@ instance
     trailing
 instance
   ( Sym.Cons x y tail
-  , PXTagAttrValue event payload verb hasAttributed tag x y pursi purso trailing
+  , PXTagAttrValue event proof payload verb hasAttributed tag x y pursi purso
+      trailing
   ) =>
   PXTagAttrValue event
+    proof
     payload
     verb
     hasAttributed
@@ -3625,9 +4013,11 @@ instance
     trailing
 instance
   ( Sym.Cons x y tail
-  , PXTagAttrValue event payload verb hasAttributed tag x y pursi purso trailing
+  , PXTagAttrValue event proof payload verb hasAttributed tag x y pursi purso
+      trailing
   ) =>
   PXTagAttrValue event
+    proof
     payload
     verb
     hasAttributed
@@ -3639,9 +4029,11 @@ instance
     trailing
 instance
   ( Sym.Cons x y tail
-  , PXTagAttrValue event payload verb hasAttributed tag x y pursi purso trailing
+  , PXTagAttrValue event proof payload verb hasAttributed tag x y pursi purso
+      trailing
   ) =>
   PXTagAttrValue event
+    proof
     payload
     verb
     hasAttributed
@@ -3653,9 +4045,11 @@ instance
     trailing
 instance
   ( Sym.Cons x y tail
-  , PXTagAttrValue event payload verb hasAttributed tag x y pursi purso trailing
+  , PXTagAttrValue event proof payload verb hasAttributed tag x y pursi purso
+      trailing
   ) =>
   PXTagAttrValue event
+    proof
     payload
     verb
     hasAttributed
@@ -3667,9 +4061,11 @@ instance
     trailing
 instance
   ( Sym.Cons x y tail
-  , PXTagAttrValue event payload verb hasAttributed tag x y pursi purso trailing
+  , PXTagAttrValue event proof payload verb hasAttributed tag x y pursi purso
+      trailing
   ) =>
   PXTagAttrValue event
+    proof
     payload
     verb
     hasAttributed
@@ -3681,9 +4077,11 @@ instance
     trailing
 instance
   ( Sym.Cons x y tail
-  , PXTagAttrValue event payload verb hasAttributed tag x y pursi purso trailing
+  , PXTagAttrValue event proof payload verb hasAttributed tag x y pursi purso
+      trailing
   ) =>
   PXTagAttrValue event
+    proof
     payload
     verb
     hasAttributed
@@ -3695,10 +4093,11 @@ instance
     trailing
 instance
   ( Sym.Cons x y tail
-  , PXTagPreAttrName event payload verb hasAttributed tag x y pursi purso
+  , PXTagPreAttrName event proof payload verb hasAttributed tag x y pursi purso
       trailing
   ) =>
   PXTagAttrValue event
+    proof
     payload
     verb
     hasAttributed
@@ -3710,7 +4109,8 @@ instance
     trailing
 class
   PXBody
-    (event :: Type -> Type)
+    (event :: Type -> Type -> Type)
+    (proof :: Type)
     (payload :: Type)
     (verb :: Symbol)
     (head :: Symbol)
@@ -3718,7 +4118,7 @@ class
     (pursi :: Row Type)
     (purso :: Row Type)
     (trailing :: Symbol)
-  | event payload verb tail pursi -> purso trailing
+  | event proof payload verb tail pursi -> purso trailing
 
 class
   CommendEndCandidate2 (head :: Symbol) (tail :: Symbol) (trailing :: Symbol)
@@ -3757,7 +4157,8 @@ else instance
   SkipUntilCommentEnd anything tail trailing
 class
   CloseOrRepeat
-    (event :: Type -> Type)
+    (event :: Type -> Type -> Type)
+    (proof :: Type)
     (payload :: Type)
     (verb :: Symbol)
     (head :: Symbol)
@@ -3765,58 +4166,64 @@ class
     (pursi :: Row Type)
     (purso :: Row Type)
     (trailing :: Symbol)
-  | event payload verb head tail pursi -> purso trailing
-instance CloseOrRepeat event payload verb "/" tail purs purs tail
+  | event proof payload verb head tail pursi -> purso trailing
+instance CloseOrRepeat event proof payload verb "/" tail purs purs tail
 else instance
   ( Sym.Cons "-" y tail
   , Sym.Cons "-" yy y
   , Sym.Cons x yyy yy
   , SkipUntilCommentEnd x yyy trailing
   , Sym.Cons mm bb trailing
-  , PXBody event payload verb mm bb pursi purso newTrailing
+  , PXBody event proof payload verb mm bb pursi purso newTrailing
   ) =>
-  CloseOrRepeat event payload verb "!" tail pursi purso newTrailing
+  CloseOrRepeat event proof payload verb "!" tail pursi purso newTrailing
 else instance
-  ( PXTagPreName event payload verb anything tail () pursm trailing
+  ( PXTagPreName event proof payload verb anything tail () pursm trailing
   , Row.Union pursi pursm pursz
   , Sym.Cons x y trailing
-  , PXBody event payload verb x y pursz purso newTrailing
+  , PXBody event proof payload verb x y pursz purso newTrailing
   ) =>
-  CloseOrRepeat event payload verb anything tail pursi purso newTrailing
+  CloseOrRepeat event proof payload verb anything tail pursi purso newTrailing
 instance
   ( Sym.Cons x y tail
-  , CloseOrRepeat event payload verb x y pursi purso trailing
+  , CloseOrRepeat event proof payload verb x y pursi purso trailing
   ) =>
-  PXBody event payload verb "<" tail pursi purso trailing
+  PXBody event proof payload verb "<" tail pursi purso trailing
 else instance
   ( Sym.Cons x y tail
-  , DoVerbForDOM event payload verb "" x y pursi pursx newTail
+  , DoVerbForDOM event proof payload verb "" x y pursi pursx newTail
   , Sym.Cons xx yy newTail
-  , PXBody event payload verb xx yy pursx purso trailing
+  , PXBody event proof payload verb xx yy pursx purso trailing
   ) =>
-  PXBody event payload verb verb tail pursi purso trailing
+  PXBody event proof payload verb verb tail pursi purso trailing
 else instance
   ( Sym.Cons x y tail
-  , PXBody event payload verb x y pursi purso trailing
+  , PXBody event proof payload verb x y pursi purso trailing
   ) =>
-  PXBody event payload verb anything tail pursi purso trailing
+  PXBody event proof payload verb anything tail pursi purso trailing
 
 class
-  Plus event <=
-  PursxToElement event payload (rl :: RL.RowList Type) (r :: Row Type)
-  | rl -> event payload r where
+  Plus (event proof) <=
+  PursxToElement event proof payload (rl :: RL.RowList Type) (r :: Row Type)
+  | rl -> event proof payload r where
   pursxToElement
     :: forall proxy
      . proxy rl
     -> { | r }
-    -> { cache :: Object.Object Boolean, element :: Element event payload }
+    -> { cache :: Object.Object Boolean
+       , element :: Element event proof payload
+       }
 
 instance pursxToElementConsElt ::
-  ( Row.Cons key (PursxElement event payload) r' r
-  , PursxToElement event payload rest r
+  ( Row.Cons key (PursxElement event proof payload) r' r
+  , PursxToElement event proof payload rest r
   , IsSymbol key
   ) =>
-  PursxToElement event payload (RL.Cons key (PursxElement event payload) rest) r where
+  PursxToElement event
+    proof
+    payload
+    (RL.Cons key (PursxElement event proof payload) rest)
+    r where
   pursxToElement _ r =
     let
       { cache, element } = pursxToElement (Proxy :: Proxy rest) r
@@ -3831,11 +4238,15 @@ instance pursxToElementConsElt ::
     PursxElement pxe = get pxk r
 
 else instance pursxToElementConsAttr ::
-  ( Row.Cons key (event (Attribute deku)) r' r
-  , PursxToElement event payload rest r
+  ( Row.Cons key (event proof (Attribute deku)) r' r
+  , PursxToElement event proof payload rest r
   , IsSymbol key
   ) =>
-  PursxToElement event payload (RL.Cons key (event (Attribute deku)) rest) r where
+  PursxToElement event
+    proof
+    payload
+    (RL.Cons key (event proof (Attribute deku)) rest)
+    r where
   pursxToElement _ r =
     let
       { cache, element } = pursxToElement (Proxy :: Proxy rest) r
@@ -3858,44 +4269,44 @@ else instance pursxToElementConsAttr ::
     pxk = Proxy :: _ key
 
 instance pursxToElementNil ::
-  Plus event =>
-  PursxToElement event payload RL.Nil r where
+  Plus (event proof) =>
+  PursxToElement event proof payload RL.Nil r where
   pursxToElement _ _ = { cache: Object.empty, element: Element \_ _ -> empty }
 
 psx
-  :: forall event payload proxy (html :: Symbol)
+  :: forall event proof payload proxy (html :: Symbol)
    . IsSymbol html
-  => PXStart event payload "~" " " html ()
-  => PursxToElement event payload RL.Nil ()
-  => IsEvent event
+  => PXStart event proof payload "~" " " html ()
+  => PursxToElement event proof payload RL.Nil ()
+  => IsEvent (event proof)
   => proxy html
-  -> Element event payload
+  -> Element event proof payload
 psx px = makePursx px {}
 
 makePursx
-  :: forall event payload proxy (html :: Symbol) r rl
+  :: forall event proof payload proxy (html :: Symbol) r rl
    . IsSymbol html
-  => PXStart event payload "~" " " html r
+  => PXStart event proof payload "~" " " html r
   => RL.RowToList r rl
-  => PursxToElement event payload rl r
-  => IsEvent event
+  => PursxToElement event proof payload rl r
+  => IsEvent (event proof)
   => proxy html
   -> { | r }
-  -> Element event payload
+  -> Element event proof payload
 makePursx = makePursx' (Proxy :: _ "~")
 
 makePursx'
-  :: forall event payload verb proxyA proxyB (html :: Symbol) r rl
+  :: forall event proof payload verb proxyA proxyB (html :: Symbol) r rl
    . IsSymbol html
   => IsSymbol verb
-  => PXStart event payload verb " " html r
+  => PXStart event proof payload verb " " html r
   => RL.RowToList r rl
-  => PursxToElement event payload rl r
-  => IsEvent event
+  => PursxToElement event proof payload rl r
+  => IsEvent (event proof)
   => proxyA verb
   -> proxyB html
   -> { | r }
-  -> Element event payload
+  -> Element event proof payload
 makePursx' verb html r = Element go
   where
   go parent di@(DOMInterpret { makePursx: mpx, ids }) = keepLatest
@@ -3914,3 +4325,4 @@ makePursx' verb html r = Element go
     )
 
 infixr 5 makePursx as ~~
+

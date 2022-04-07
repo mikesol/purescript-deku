@@ -16,12 +16,13 @@ import Deku.Attribute (Attribute, unsafeUnAttribute)
 import Deku.Core (DOMInterpret(..), Element(..))
 import FRP.Behavior (sample_)
 import FRP.Event (class IsEvent, Event, keepLatest)
+import FRP.Event.Phantom (Proof0)
 import Web.DOM as Web.DOM
 
 ----
 unsafeElement
-  :: forall event payload
-   . DOMInterpret event payload
+  :: forall event proof payload
+   . DOMInterpret event proof payload
   -> String
   -> String
   -> String
@@ -30,8 +31,8 @@ unsafeElement (DOMInterpret { makeElement }) id parent tag = makeElement
   { id, parent, tag }
 
 unsafeText
-  :: forall event payload
-   . DOMInterpret event payload
+  :: forall event proof payload
+   . DOMInterpret event proof payload
   -> String
   -> String
   -> payload
@@ -39,23 +40,23 @@ unsafeText (DOMInterpret { makeText }) id parent = makeText
   { id, parent }
 
 unsafeSetText
-  :: forall event payload
-   . Functor event
-  => DOMInterpret event payload
+  :: forall event proof payload
+   . Functor (event proof)
+  => DOMInterpret event proof payload
   -> String
-  -> event String
-  -> event payload
+  -> event proof String
+  -> event proof payload
 unsafeSetText (DOMInterpret { setText }) id txt = map
   (setText <<< { id, text: _ })
   txt
 
 unsafeSetAttribute
-  :: forall element event payload
-   . Functor event
-  => DOMInterpret event payload
+  :: forall element event proof payload
+   . Functor (event proof)
+  => DOMInterpret event proof payload
   -> String
-  -> event (Attribute element)
-  -> event payload
+  -> event proof (Attribute element)
+  -> event proof payload
 unsafeSetAttribute (DOMInterpret { setAttribute }) id atts = map
   ( setAttribute <<< (\{ key, value } -> { id, key, value }) <<<
       unsafeUnAttribute
@@ -63,12 +64,12 @@ unsafeSetAttribute (DOMInterpret { setAttribute }) id atts = map
   (atts)
 
 elementify
-  :: forall element event payload
-   . IsEvent event
+  :: forall element event proof payload
+   . IsEvent (event proof)
   => String
-  -> (event (Attribute element))
-  -> Array (Element event payload)
-  -> Element event payload
+  -> (event proof (Attribute element))
+  -> Array (Element event proof payload)
+  -> Element event proof payload
 elementify tag atts children = Element go
   where
   go parent di@(DOMInterpret { ids }) = keepLatest
@@ -84,10 +85,10 @@ elementify tag atts children = Element go
     )
 
 text
-  :: forall event payload
-   . IsEvent event
-  => event String
-  -> Element event payload
+  :: forall event proof payload
+   . IsEvent (event proof)
+  => event proof String
+  -> Element event proof payload
 text txt = Element go
   where
   go parent di@(DOMInterpret { ids }) = keepLatest
@@ -98,16 +99,20 @@ text txt = Element go
           ]
     )
 
-text_ :: forall event payload. IsEvent event => String -> Element event payload
+text_
+  :: forall event proof payload
+   . IsEvent (event proof)
+  => String
+  -> Element event proof payload
 text_ txt = text (pure txt)
 
 deku
   :: forall event payload
-   . IsEvent event
+   . IsEvent (event Proof0)
   => Web.DOM.Element
-  -> Element event payload
-  -> DOMInterpret event payload
-  -> event payload
+  -> Element event Proof0 payload
+  -> DOMInterpret event Proof0 payload
+  -> event Proof0 payload
 deku root elts di@(DOMInterpret { ids, makeRoot }) =
   keepLatest
     ( (sample_ ids (pure unit)) <#> \me ->
@@ -122,9 +127,9 @@ many event f = keepLatest
   (event <#> \e -> oneOf (map pure (f e)))
 
 flatten
-  :: forall event payload
-   . Plus event
-  => Array (Element event payload)
-  -> Element event payload
+  :: forall event proof payload
+   . Plus (event proof)
+  => Array (Element event proof payload)
+  -> Element event proof payload
 flatten a = Element $ (map <<< map) oneOf
   (map distribute (distribute $ map (\y -> let (Element x) = y in x) a))
