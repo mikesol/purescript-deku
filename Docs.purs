@@ -3,7 +3,7 @@ module Deku.Example.Docs where
 import Prelude
 
 import Control.Alt ((<|>))
-import Control.Plus (empty)
+import Control.Plus (class Plus, empty)
 import Data.Exists (mkExists)
 import Data.Foldable (for_, oneOfMap)
 import Data.Maybe (Maybe(..))
@@ -25,18 +25,19 @@ import Deku.Example.Docs.Types (Page(..))
 import Deku.Interpret (effectfulDOMInterpret, makeFFIDOMSnapshot)
 import Deku.Subgraph (SubgraphAction(..), subgraph)
 import Effect (Effect)
-import FRP.Event (create, keepLatest, mapAccum, subscribe)
-import FRP.Event.Phantom (PhantomEvent, proof0, toEvent)
+import FRP.Event (class IsEvent, create, keepLatest, mapAccum, subscribe)
 import Web.HTML (window)
 import Web.HTML.HTMLDocument (body)
 import Web.HTML.HTMLElement (toElement)
 import Web.HTML.Window (document)
 
 scene
-  :: forall proof payload
-   . (Page -> Effect Unit)
-  -> PhantomEvent proof Page
-  -> Element PhantomEvent proof payload
+  :: forall event payload
+   . IsEvent event
+  => Plus event
+  => (Page -> Effect Unit)
+  -> event Page
+  -> Element event payload
 scene push event =
   flatten
     [ D.div_
@@ -101,7 +102,7 @@ scene push event =
 
     ]
   where
-  page :: (Page -> Effect Unit) -> Subgraph Page Unit PhantomEvent payload
+  page :: (Page -> Effect Unit) -> Subgraph Page Unit event payload
   page dpage Intro = mkExists $ SubgraphF \_ _ -> Intro.intro dpage
   page dpage HelloWorld = mkExists $ SubgraphF \_ _ -> HelloWorld.helloWorld
     dpage
@@ -120,6 +121,6 @@ main = do
   for_ (toElement <$> b') \b -> do
     ffi <- makeFFIDOMSnapshot
     { push, event } <- create
-    let evt = deku b (scene push (proof0 event)) effectfulDOMInterpret
-    void $ subscribe (toEvent evt) \i -> i ffi
+    let evt = deku b (scene push event) effectfulDOMInterpret
+    void $ subscribe evt \i -> i ffi
     push Intro

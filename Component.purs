@@ -2,6 +2,7 @@ module Deku.Example.Docs.Component where
 
 import Prelude
 
+import Control.Plus (class Plus)
 import Deku.Attribute (cb, (:=))
 import Deku.Control (text_)
 import Deku.Core (Element)
@@ -10,7 +11,7 @@ import Deku.Example.Docs.Types (Page(..))
 import Deku.Example.Docs.Util (scrollToTop)
 import Deku.Pursx (nut, (~~))
 import Effect (Effect)
-import FRP.Event.Phantom (PhantomEvent)
+import FRP.Event (class IsEvent)
 import Type.Proxy (Proxy(..))
 
 px = Proxy :: Proxy """<div>
@@ -40,7 +41,7 @@ px = Proxy :: Proxy """<div>
   <p>In this section, we built a simple component. In the next section, we'll recreate the exact same element using a different input syntax called <a ~next~ style="cursor:pointer;">Pursx</a>.</p>
 </div>"""
 
-components :: forall proof payload. (Page -> Effect Unit) -> Element PhantomEvent proof payload
+components :: forall event payload. IsEvent event => Plus event => (Page -> Effect Unit) -> Element event payload
 components dpage = px ~~
   { code: nut
       ( D.pre_ [D.code_
