@@ -5,6 +5,13 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.2.1] - 2022-04-08
+
+- Reverts experiment
+
+## [0.2.0] - 2022-04-07
+
+- A failed experiment in creating phantom types around events. Conceptually, this makes no sense. An event should only be gated with a phantom type if it is somehow tightly coupled to the context in which it is executing. Otherwise, each subscription is separate, so there can be as many as you like. If subscriptions cause some sort of saturation, then you'll want to limit the number of events (for example by creating a hot `requestAnimationFrame` at the toplevel rather than several cold ones).
 
 ## [0.1.3] - 2022-04-07
 
