@@ -15,8 +15,7 @@ import Deku.Core as Core
 import Effect (Effect)
 import Effect.Random as R
 import FRP.Behavior (behavior)
-import FRP.Event (create, makeEvent, subscribe)
-import FRP.Event.Phantom (PhantomEvent, Proof0, toEvent, unsafePhantom)
+import FRP.Event (Event, create, makeEvent, subscribe)
 import Foreign.Object (Object)
 
 -- foreign
@@ -40,13 +39,13 @@ foreign import makeText_
   -> Effect Unit
 
 foreign import makeSubgraph
-  :: forall index env proof
+  :: forall index env
    . String
   -> String
   -> ( index
        -> Effect
             { actualized ::
-                PhantomEvent proof (FFIDOMSnapshot -> Effect Unit)
+                Event (FFIDOMSnapshot -> Effect Unit)
             , pusher :: env -> Effect Unit
             }
      )
@@ -87,11 +86,11 @@ foreign import makePortal_ :: Core.MakePortal -> FFIDOMSnapshot -> Effect Unit
 foreign import makeGateway_ :: Core.MakeGateway -> FFIDOMSnapshot -> Effect Unit
 foreign import setPortal_ :: Core.SetPortal -> FFIDOMSnapshot -> Effect Unit
 
-effectfulDOMInterpret :: Core.DOMInterpret PhantomEvent Proof0 (FFIDOMSnapshot -> Effect Unit)
+effectfulDOMInterpret :: Core.DOMInterpret Event (FFIDOMSnapshot -> Effect Unit)
 effectfulDOMInterpret = Core.DOMInterpret
-  { ids: map show $ behavior \f -> unsafePhantom $ makeEvent \k -> do
+  { ids: map show $ behavior \f -> makeEvent \k -> do
       r <- R.random
-      subscribe (toEvent f) \x -> k (x r)
+      subscribe f \x -> k (x r)
   , makeElement: makeElement
   , makeRoot: makeRoot_
   , makeText: makeText_
@@ -108,7 +107,7 @@ effectfulDOMInterpret = Core.DOMInterpret
             let
               actualized =
                 let
-                  Element elt = si evtR.push (unsafePhantom event)
+                  Element elt = si evtR.push event
                 in
                   elt parent effectfulDOMInterpret
             pure { actualized, pusher: evtL.push }

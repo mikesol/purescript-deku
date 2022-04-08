@@ -731,11 +731,11 @@ data Value = Value
 data Width = Width
 data Xtype = Xtype
 data OnAbort = OnAbort
-data OnAnimationcancel  = OnAnimationcancel 
-data OnAnimationend  = OnAnimationend 
-data OnAnimationiteration  = OnAnimationiteration 
-data OnAnimationstart  = OnAnimationstart 
-data OnAuxclick  = OnAuxclick 
+data OnAnimationcancel  = OnAnimationcancel
+data OnAnimationend  = OnAnimationend
+data OnAnimationiteration  = OnAnimationiteration
+data OnAnimationstart  = OnAnimationstart
+data OnAuxclick  = OnAuxclick
 data OnBlur = OnBlur
 data OnError = OnError
 data OnFocus = OnFocus
@@ -777,7 +777,7 @@ data OnMousemove = OnMousemove
 data OnMouseout = OnMouseout
 data OnMouseover = OnMouseover
 data OnMouseup = OnMouseup
-data OnMousewheel   = OnMousewheel  
+data OnMousewheel   = OnMousewheel
 data OnWheel = OnWheel
 data OnPause = OnPause
 data OnPlay = OnPlay
@@ -790,8 +790,8 @@ data OnPointerover = OnPointerover
 data OnPointerout = OnPointerout
 data OnPointerenter = OnPointerenter
 data OnPointerleave = OnPointerleave
-data OnPointerlockchange  = OnPointerlockchange 
-data OnPointerlockerror  = OnPointerlockerror 
+data OnPointerlockchange  = OnPointerlockchange
+data OnPointerlockerror  = OnPointerlockerror
 data OnProgress = OnProgress
 data OnRatechange = OnRatechange
 data OnReset = OnReset
@@ -803,17 +803,17 @@ data OnSeeking = OnSeeking
 data OnSelect = OnSelect
 data OnSelectstart = OnSelectstart
 data OnSelectionchange = OnSelectionchange
-data OnShow  = OnShow 
+data OnShow  = OnShow
 data OnSlotchange = OnSlotchange
 data OnStalled = OnStalled
 data OnSubmit = OnSubmit
 data OnSuspend = OnSuspend
 data OnTimeupdate = OnTimeupdate
 data OnVolumechange = OnVolumechange
-data OnTouchcancel   = OnTouchcancel  
-data OnTouchend   = OnTouchend  
-data OnTouchmove   = OnTouchmove  
-data OnTouchstart   = OnTouchstart  
+data OnTouchcancel   = OnTouchcancel
+data OnTouchend   = OnTouchend
+data OnTouchmove   = OnTouchmove
+data OnTouchstart   = OnTouchstart
 data OnTransitioncancel = OnTransitioncancel
 data OnTransitionend = OnTransitionend
 data OnTransitionrun = OnTransitionrun
@@ -9522,2196 +9522,2196 @@ instance Attr anything OnWaiting Cb where
 data A_
 
 a
-  :: forall event proof payload
-   . IsEvent (event proof)
-  => event proof (Attribute A_)
-  -> Array (Element event proof payload)
-  -> Element event proof payload
+  :: forall event payload
+   . IsEvent event
+  => event (Attribute A_)
+  -> Array (Element event payload)
+  -> Element event payload
 a = elementify "a"
 
 a_
-  :: forall event proof payload
-   . IsEvent (event proof)
-  => Array (Element event proof payload)
-  -> Element event proof payload
+  :: forall event payload
+   . IsEvent event
+  => Array (Element event payload)
+  -> Element event payload
 a_ = a empty
 instance tagToDekuA_ :: TagToDeku "a" A_
 
 data Abbr_
 
 abbr
-  :: forall event proof payload
-   . IsEvent (event proof)
-  => event proof (Attribute Abbr_)
-  -> Array (Element event proof payload)
-  -> Element event proof payload
+  :: forall event payload
+   . IsEvent event
+  => event (Attribute Abbr_)
+  -> Array (Element event payload)
+  -> Element event payload
 abbr = elementify "abbr"
 
 abbr_
-  :: forall event proof payload
-   . IsEvent (event proof)
-  => Array (Element event proof payload)
-  -> Element event proof payload
+  :: forall event payload
+   . IsEvent event
+  => Array (Element event payload)
+  -> Element event payload
 abbr_ = abbr empty
 instance tagToDekuAbbr_ :: TagToDeku "abbr" Abbr_
 
 data Acronym_
 
 acronym
-  :: forall event proof payload
-   . IsEvent (event proof)
-  => event proof (Attribute Acronym_)
-  -> Array (Element event proof payload)
-  -> Element event proof payload
+  :: forall event payload
+   . IsEvent event
+  => event (Attribute Acronym_)
+  -> Array (Element event payload)
+  -> Element event payload
 acronym = elementify "acronym"
 
 acronym_
-  :: forall event proof payload
-   . IsEvent (event proof)
-  => Array (Element event proof payload)
-  -> Element event proof payload
+  :: forall event payload
+   . IsEvent event
+  => Array (Element event payload)
+  -> Element event payload
 acronym_ = acronym empty
 instance tagToDekuAcronym_ :: TagToDeku "acronym" Acronym_
 
 data Address_
 
 address
-  :: forall event proof payload
-   . IsEvent (event proof)
-  => event proof (Attribute Address_)
-  -> Array (Element event proof payload)
-  -> Element event proof payload
+  :: forall event payload
+   . IsEvent event
+  => event (Attribute Address_)
+  -> Array (Element event payload)
+  -> Element event payload
 address = elementify "address"
 
 address_
-  :: forall event proof payload
-   . IsEvent (event proof)
-  => Array (Element event proof payload)
-  -> Element event proof payload
+  :: forall event payload
+   . IsEvent event
+  => Array (Element event payload)
+  -> Element event payload
 address_ = address empty
 instance tagToDekuAddress_ :: TagToDeku "address" Address_
 
 data Applet_
 
 applet
-  :: forall event proof payload
-   . IsEvent (event proof)
-  => event proof (Attribute Applet_)
-  -> Array (Element event proof payload)
-  -> Element event proof payload
+  :: forall event payload
+   . IsEvent event
+  => event (Attribute Applet_)
+  -> Array (Element event payload)
+  -> Element event payload
 applet = elementify "applet"
 
 applet_
-  :: forall event proof payload
-   . IsEvent (event proof)
-  => Array (Element event proof payload)
-  -> Element event proof payload
+  :: forall event payload
+   . IsEvent event
+  => Array (Element event payload)
+  -> Element event payload
 applet_ = applet empty
 instance tagToDekuApplet_ :: TagToDeku "applet" Applet_
 
 data Area_
 
 area
-  :: forall event proof payload
-   . IsEvent (event proof)
-  => event proof (Attribute Area_)
-  -> Array (Element event proof payload)
-  -> Element event proof payload
+  :: forall event payload
+   . IsEvent event
+  => event (Attribute Area_)
+  -> Array (Element event payload)
+  -> Element event payload
 area = elementify "area"
 
 area_
-  :: forall event proof payload
-   . IsEvent (event proof)
-  => Array (Element event proof payload)
-  -> Element event proof payload
+  :: forall event payload
+   . IsEvent event
+  => Array (Element event payload)
+  -> Element event payload
 area_ = area empty
 instance tagToDekuArea_ :: TagToDeku "area" Area_
 
 data Article_
 
 article
-  :: forall event proof payload
-   . IsEvent (event proof)
-  => event proof (Attribute Article_)
-  -> Array (Element event proof payload)
-  -> Element event proof payload
+  :: forall event payload
+   . IsEvent event
+  => event (Attribute Article_)
+  -> Array (Element event payload)
+  -> Element event payload
 article = elementify "article"
 
 article_
-  :: forall event proof payload
-   . IsEvent (event proof)
-  => Array (Element event proof payload)
-  -> Element event proof payload
+  :: forall event payload
+   . IsEvent event
+  => Array (Element event payload)
+  -> Element event payload
 article_ = article empty
 instance tagToDekuArticle_ :: TagToDeku "article" Article_
 
 data Aside_
 
 aside
-  :: forall event proof payload
-   . IsEvent (event proof)
-  => event proof (Attribute Aside_)
-  -> Array (Element event proof payload)
-  -> Element event proof payload
+  :: forall event payload
+   . IsEvent event
+  => event (Attribute Aside_)
+  -> Array (Element event payload)
+  -> Element event payload
 aside = elementify "aside"
 
 aside_
-  :: forall event proof payload
-   . IsEvent (event proof)
-  => Array (Element event proof payload)
-  -> Element event proof payload
+  :: forall event payload
+   . IsEvent event
+  => Array (Element event payload)
+  -> Element event payload
 aside_ = aside empty
 instance tagToDekuAside_ :: TagToDeku "aside" Aside_
 
 data Audio_
 
 audio
-  :: forall event proof payload
-   . IsEvent (event proof)
-  => event proof (Attribute Audio_)
-  -> Array (Element event proof payload)
-  -> Element event proof payload
+  :: forall event payload
+   . IsEvent event
+  => event (Attribute Audio_)
+  -> Array (Element event payload)
+  -> Element event payload
 audio = elementify "audio"
 
 audio_
-  :: forall event proof payload
-   . IsEvent (event proof)
-  => Array (Element event proof payload)
-  -> Element event proof payload
+  :: forall event payload
+   . IsEvent event
+  => Array (Element event payload)
+  -> Element event payload
 audio_ = audio empty
 instance tagToDekuAudio_ :: TagToDeku "audio" Audio_
 
 data B_
 
 b
-  :: forall event proof payload
-   . IsEvent (event proof)
-  => event proof (Attribute B_)
-  -> Array (Element event proof payload)
-  -> Element event proof payload
+  :: forall event payload
+   . IsEvent event
+  => event (Attribute B_)
+  -> Array (Element event payload)
+  -> Element event payload
 b = elementify "b"
 
 b_
-  :: forall event proof payload
-   . IsEvent (event proof)
-  => Array (Element event proof payload)
-  -> Element event proof payload
+  :: forall event payload
+   . IsEvent event
+  => Array (Element event payload)
+  -> Element event payload
 b_ = b empty
 instance tagToDekuB_ :: TagToDeku "b" B_
 
 data Base_
 
 base
-  :: forall event proof payload
-   . IsEvent (event proof)
-  => event proof (Attribute Base_)
-  -> Array (Element event proof payload)
-  -> Element event proof payload
+  :: forall event payload
+   . IsEvent event
+  => event (Attribute Base_)
+  -> Array (Element event payload)
+  -> Element event payload
 base = elementify "base"
 
 base_
-  :: forall event proof payload
-   . IsEvent (event proof)
-  => Array (Element event proof payload)
-  -> Element event proof payload
+  :: forall event payload
+   . IsEvent event
+  => Array (Element event payload)
+  -> Element event payload
 base_ = base empty
 instance tagToDekuBase_ :: TagToDeku "base" Base_
 
 data Basefont_
 
 basefont
-  :: forall event proof payload
-   . IsEvent (event proof)
-  => event proof (Attribute Basefont_)
-  -> Array (Element event proof payload)
-  -> Element event proof payload
+  :: forall event payload
+   . IsEvent event
+  => event (Attribute Basefont_)
+  -> Array (Element event payload)
+  -> Element event payload
 basefont = elementify "basefont"
 
 basefont_
-  :: forall event proof payload
-   . IsEvent (event proof)
-  => Array (Element event proof payload)
-  -> Element event proof payload
+  :: forall event payload
+   . IsEvent event
+  => Array (Element event payload)
+  -> Element event payload
 basefont_ = basefont empty
 instance tagToDekuBasefont_ :: TagToDeku "basefont" Basefont_
 
 data Bdi_
 
 bdi
-  :: forall event proof payload
-   . IsEvent (event proof)
-  => event proof (Attribute Bdi_)
-  -> Array (Element event proof payload)
-  -> Element event proof payload
+  :: forall event payload
+   . IsEvent event
+  => event (Attribute Bdi_)
+  -> Array (Element event payload)
+  -> Element event payload
 bdi = elementify "bdi"
 
 bdi_
-  :: forall event proof payload
-   . IsEvent (event proof)
-  => Array (Element event proof payload)
-  -> Element event proof payload
+  :: forall event payload
+   . IsEvent event
+  => Array (Element event payload)
+  -> Element event payload
 bdi_ = bdi empty
 instance tagToDekuBdi_ :: TagToDeku "bdi" Bdi_
 
 data Bdo_
 
 bdo
-  :: forall event proof payload
-   . IsEvent (event proof)
-  => event proof (Attribute Bdo_)
-  -> Array (Element event proof payload)
-  -> Element event proof payload
+  :: forall event payload
+   . IsEvent event
+  => event (Attribute Bdo_)
+  -> Array (Element event payload)
+  -> Element event payload
 bdo = elementify "bdo"
 
 bdo_
-  :: forall event proof payload
-   . IsEvent (event proof)
-  => Array (Element event proof payload)
-  -> Element event proof payload
+  :: forall event payload
+   . IsEvent event
+  => Array (Element event payload)
+  -> Element event payload
 bdo_ = bdo empty
 instance tagToDekuBdo_ :: TagToDeku "bdo" Bdo_
 
 data Big_
 
 big
-  :: forall event proof payload
-   . IsEvent (event proof)
-  => event proof (Attribute Big_)
-  -> Array (Element event proof payload)
-  -> Element event proof payload
+  :: forall event payload
+   . IsEvent event
+  => event (Attribute Big_)
+  -> Array (Element event payload)
+  -> Element event payload
 big = elementify "big"
 
 big_
-  :: forall event proof payload
-   . IsEvent (event proof)
-  => Array (Element event proof payload)
-  -> Element event proof payload
+  :: forall event payload
+   . IsEvent event
+  => Array (Element event payload)
+  -> Element event payload
 big_ = big empty
 instance tagToDekuBig_ :: TagToDeku "big" Big_
 
 data Blockquote_
 
 blockquote
-  :: forall event proof payload
-   . IsEvent (event proof)
-  => event proof (Attribute Blockquote_)
-  -> Array (Element event proof payload)
-  -> Element event proof payload
+  :: forall event payload
+   . IsEvent event
+  => event (Attribute Blockquote_)
+  -> Array (Element event payload)
+  -> Element event payload
 blockquote = elementify "blockquote"
 
 blockquote_
-  :: forall event proof payload
-   . IsEvent (event proof)
-  => Array (Element event proof payload)
-  -> Element event proof payload
+  :: forall event payload
+   . IsEvent event
+  => Array (Element event payload)
+  -> Element event payload
 blockquote_ = blockquote empty
 instance tagToDekuBlockquote_ :: TagToDeku "blockquote" Blockquote_
 
 data Body_
 
 body
-  :: forall event proof payload
-   . IsEvent (event proof)
-  => event proof (Attribute Body_)
-  -> Array (Element event proof payload)
-  -> Element event proof payload
+  :: forall event payload
+   . IsEvent event
+  => event (Attribute Body_)
+  -> Array (Element event payload)
+  -> Element event payload
 body = elementify "body"
 
 body_
-  :: forall event proof payload
-   . IsEvent (event proof)
-  => Array (Element event proof payload)
-  -> Element event proof payload
+  :: forall event payload
+   . IsEvent event
+  => Array (Element event payload)
+  -> Element event payload
 body_ = body empty
 instance tagToDekuBody_ :: TagToDeku "body" Body_
 
 data Br_
 
 br
-  :: forall event proof payload
-   . IsEvent (event proof)
-  => event proof (Attribute Br_)
-  -> Array (Element event proof payload)
-  -> Element event proof payload
+  :: forall event payload
+   . IsEvent event
+  => event (Attribute Br_)
+  -> Array (Element event payload)
+  -> Element event payload
 br = elementify "br"
 
 br_
-  :: forall event proof payload
-   . IsEvent (event proof)
-  => Array (Element event proof payload)
-  -> Element event proof payload
+  :: forall event payload
+   . IsEvent event
+  => Array (Element event payload)
+  -> Element event payload
 br_ = br empty
 instance tagToDekuBr_ :: TagToDeku "br" Br_
 
 data Button_
 
 button
-  :: forall event proof payload
-   . IsEvent (event proof)
-  => event proof (Attribute Button_)
-  -> Array (Element event proof payload)
-  -> Element event proof payload
+  :: forall event payload
+   . IsEvent event
+  => event (Attribute Button_)
+  -> Array (Element event payload)
+  -> Element event payload
 button = elementify "button"
 
 button_
-  :: forall event proof payload
-   . IsEvent (event proof)
-  => Array (Element event proof payload)
-  -> Element event proof payload
+  :: forall event payload
+   . IsEvent event
+  => Array (Element event payload)
+  -> Element event payload
 button_ = button empty
 instance tagToDekuButton_ :: TagToDeku "button" Button_
 
 data Canvas_
 
 canvas
-  :: forall event proof payload
-   . IsEvent (event proof)
-  => event proof (Attribute Canvas_)
-  -> Array (Element event proof payload)
-  -> Element event proof payload
+  :: forall event payload
+   . IsEvent event
+  => event (Attribute Canvas_)
+  -> Array (Element event payload)
+  -> Element event payload
 canvas = elementify "canvas"
 
 canvas_
-  :: forall event proof payload
-   . IsEvent (event proof)
-  => Array (Element event proof payload)
-  -> Element event proof payload
+  :: forall event payload
+   . IsEvent event
+  => Array (Element event payload)
+  -> Element event payload
 canvas_ = canvas empty
 instance tagToDekuCanvas_ :: TagToDeku "canvas" Canvas_
 
 data Caption_
 
 caption
-  :: forall event proof payload
-   . IsEvent (event proof)
-  => event proof (Attribute Caption_)
-  -> Array (Element event proof payload)
-  -> Element event proof payload
+  :: forall event payload
+   . IsEvent event
+  => event (Attribute Caption_)
+  -> Array (Element event payload)
+  -> Element event payload
 caption = elementify "caption"
 
 caption_
-  :: forall event proof payload
-   . IsEvent (event proof)
-  => Array (Element event proof payload)
-  -> Element event proof payload
+  :: forall event payload
+   . IsEvent event
+  => Array (Element event payload)
+  -> Element event payload
 caption_ = caption empty
 instance tagToDekuCaption_ :: TagToDeku "caption" Caption_
 
 data Center_
 
 center
-  :: forall event proof payload
-   . IsEvent (event proof)
-  => event proof (Attribute Center_)
-  -> Array (Element event proof payload)
-  -> Element event proof payload
+  :: forall event payload
+   . IsEvent event
+  => event (Attribute Center_)
+  -> Array (Element event payload)
+  -> Element event payload
 center = elementify "center"
 
 center_
-  :: forall event proof payload
-   . IsEvent (event proof)
-  => Array (Element event proof payload)
-  -> Element event proof payload
+  :: forall event payload
+   . IsEvent event
+  => Array (Element event payload)
+  -> Element event payload
 center_ = center empty
 instance tagToDekuCenter_ :: TagToDeku "center" Center_
 
 data Cite_
 
 cite
-  :: forall event proof payload
-   . IsEvent (event proof)
-  => event proof (Attribute Cite_)
-  -> Array (Element event proof payload)
-  -> Element event proof payload
+  :: forall event payload
+   . IsEvent event
+  => event (Attribute Cite_)
+  -> Array (Element event payload)
+  -> Element event payload
 cite = elementify "cite"
 
 cite_
-  :: forall event proof payload
-   . IsEvent (event proof)
-  => Array (Element event proof payload)
-  -> Element event proof payload
+  :: forall event payload
+   . IsEvent event
+  => Array (Element event payload)
+  -> Element event payload
 cite_ = cite empty
 instance tagToDekuCite_ :: TagToDeku "cite" Cite_
 
 data Code_
 
 code
-  :: forall event proof payload
-   . IsEvent (event proof)
-  => event proof (Attribute Code_)
-  -> Array (Element event proof payload)
-  -> Element event proof payload
+  :: forall event payload
+   . IsEvent event
+  => event (Attribute Code_)
+  -> Array (Element event payload)
+  -> Element event payload
 code = elementify "code"
 
 code_
-  :: forall event proof payload
-   . IsEvent (event proof)
-  => Array (Element event proof payload)
-  -> Element event proof payload
+  :: forall event payload
+   . IsEvent event
+  => Array (Element event payload)
+  -> Element event payload
 code_ = code empty
 instance tagToDekuCode_ :: TagToDeku "code" Code_
 
 data Col_
 
 col
-  :: forall event proof payload
-   . IsEvent (event proof)
-  => event proof (Attribute Col_)
-  -> Array (Element event proof payload)
-  -> Element event proof payload
+  :: forall event payload
+   . IsEvent event
+  => event (Attribute Col_)
+  -> Array (Element event payload)
+  -> Element event payload
 col = elementify "col"
 
 col_
-  :: forall event proof payload
-   . IsEvent (event proof)
-  => Array (Element event proof payload)
-  -> Element event proof payload
+  :: forall event payload
+   . IsEvent event
+  => Array (Element event payload)
+  -> Element event payload
 col_ = col empty
 instance tagToDekuCol_ :: TagToDeku "col" Col_
 
 data Colgroup_
 
 colgroup
-  :: forall event proof payload
-   . IsEvent (event proof)
-  => event proof (Attribute Colgroup_)
-  -> Array (Element event proof payload)
-  -> Element event proof payload
+  :: forall event payload
+   . IsEvent event
+  => event (Attribute Colgroup_)
+  -> Array (Element event payload)
+  -> Element event payload
 colgroup = elementify "colgroup"
 
 colgroup_
-  :: forall event proof payload
-   . IsEvent (event proof)
-  => Array (Element event proof payload)
-  -> Element event proof payload
+  :: forall event payload
+   . IsEvent event
+  => Array (Element event payload)
+  -> Element event payload
 colgroup_ = colgroup empty
 instance tagToDekuColgroup_ :: TagToDeku "colgroup" Colgroup_
 
 data Xdata_
 
 xdata
-  :: forall event proof payload
-   . IsEvent (event proof)
-  => event proof (Attribute Xdata_)
-  -> Array (Element event proof payload)
-  -> Element event proof payload
+  :: forall event payload
+   . IsEvent event
+  => event (Attribute Xdata_)
+  -> Array (Element event payload)
+  -> Element event payload
 xdata = elementify "data"
 
 xdata_
-  :: forall event proof payload
-   . IsEvent (event proof)
-  => Array (Element event proof payload)
-  -> Element event proof payload
+  :: forall event payload
+   . IsEvent event
+  => Array (Element event payload)
+  -> Element event payload
 xdata_ = xdata empty
 instance tagToDekuXdata_ :: TagToDeku "data" Xdata_
 
 data Datalist_
 
 datalist
-  :: forall event proof payload
-   . IsEvent (event proof)
-  => event proof (Attribute Datalist_)
-  -> Array (Element event proof payload)
-  -> Element event proof payload
+  :: forall event payload
+   . IsEvent event
+  => event (Attribute Datalist_)
+  -> Array (Element event payload)
+  -> Element event payload
 datalist = elementify "datalist"
 
 datalist_
-  :: forall event proof payload
-   . IsEvent (event proof)
-  => Array (Element event proof payload)
-  -> Element event proof payload
+  :: forall event payload
+   . IsEvent event
+  => Array (Element event payload)
+  -> Element event payload
 datalist_ = datalist empty
 instance tagToDekuDatalist_ :: TagToDeku "datalist" Datalist_
 
 data Dd_
 
 dd
-  :: forall event proof payload
-   . IsEvent (event proof)
-  => event proof (Attribute Dd_)
-  -> Array (Element event proof payload)
-  -> Element event proof payload
+  :: forall event payload
+   . IsEvent event
+  => event (Attribute Dd_)
+  -> Array (Element event payload)
+  -> Element event payload
 dd = elementify "dd"
 
 dd_
-  :: forall event proof payload
-   . IsEvent (event proof)
-  => Array (Element event proof payload)
-  -> Element event proof payload
+  :: forall event payload
+   . IsEvent event
+  => Array (Element event payload)
+  -> Element event payload
 dd_ = dd empty
 instance tagToDekuDd_ :: TagToDeku "dd" Dd_
 
 data Del_
 
 del
-  :: forall event proof payload
-   . IsEvent (event proof)
-  => event proof (Attribute Del_)
-  -> Array (Element event proof payload)
-  -> Element event proof payload
+  :: forall event payload
+   . IsEvent event
+  => event (Attribute Del_)
+  -> Array (Element event payload)
+  -> Element event payload
 del = elementify "del"
 
 del_
-  :: forall event proof payload
-   . IsEvent (event proof)
-  => Array (Element event proof payload)
-  -> Element event proof payload
+  :: forall event payload
+   . IsEvent event
+  => Array (Element event payload)
+  -> Element event payload
 del_ = del empty
 instance tagToDekuDel_ :: TagToDeku "del" Del_
 
 data Details_
 
 details
-  :: forall event proof payload
-   . IsEvent (event proof)
-  => event proof (Attribute Details_)
-  -> Array (Element event proof payload)
-  -> Element event proof payload
+  :: forall event payload
+   . IsEvent event
+  => event (Attribute Details_)
+  -> Array (Element event payload)
+  -> Element event payload
 details = elementify "details"
 
 details_
-  :: forall event proof payload
-   . IsEvent (event proof)
-  => Array (Element event proof payload)
-  -> Element event proof payload
+  :: forall event payload
+   . IsEvent event
+  => Array (Element event payload)
+  -> Element event payload
 details_ = details empty
 instance tagToDekuDetails_ :: TagToDeku "details" Details_
 
 data Dfn_
 
 dfn
-  :: forall event proof payload
-   . IsEvent (event proof)
-  => event proof (Attribute Dfn_)
-  -> Array (Element event proof payload)
-  -> Element event proof payload
+  :: forall event payload
+   . IsEvent event
+  => event (Attribute Dfn_)
+  -> Array (Element event payload)
+  -> Element event payload
 dfn = elementify "dfn"
 
 dfn_
-  :: forall event proof payload
-   . IsEvent (event proof)
-  => Array (Element event proof payload)
-  -> Element event proof payload
+  :: forall event payload
+   . IsEvent event
+  => Array (Element event payload)
+  -> Element event payload
 dfn_ = dfn empty
 instance tagToDekuDfn_ :: TagToDeku "dfn" Dfn_
 
 data Dialog_
 
 dialog
-  :: forall event proof payload
-   . IsEvent (event proof)
-  => event proof (Attribute Dialog_)
-  -> Array (Element event proof payload)
-  -> Element event proof payload
+  :: forall event payload
+   . IsEvent event
+  => event (Attribute Dialog_)
+  -> Array (Element event payload)
+  -> Element event payload
 dialog = elementify "dialog"
 
 dialog_
-  :: forall event proof payload
-   . IsEvent (event proof)
-  => Array (Element event proof payload)
-  -> Element event proof payload
+  :: forall event payload
+   . IsEvent event
+  => Array (Element event payload)
+  -> Element event payload
 dialog_ = dialog empty
 instance tagToDekuDialog_ :: TagToDeku "dialog" Dialog_
 
 data Dir_
 
 dir
-  :: forall event proof payload
-   . IsEvent (event proof)
-  => event proof (Attribute Dir_)
-  -> Array (Element event proof payload)
-  -> Element event proof payload
+  :: forall event payload
+   . IsEvent event
+  => event (Attribute Dir_)
+  -> Array (Element event payload)
+  -> Element event payload
 dir = elementify "dir"
 
 dir_
-  :: forall event proof payload
-   . IsEvent (event proof)
-  => Array (Element event proof payload)
-  -> Element event proof payload
+  :: forall event payload
+   . IsEvent event
+  => Array (Element event payload)
+  -> Element event payload
 dir_ = dir empty
 instance tagToDekuDir_ :: TagToDeku "dir" Dir_
 
 data Div_
 
 div
-  :: forall event proof payload
-   . IsEvent (event proof)
-  => event proof (Attribute Div_)
-  -> Array (Element event proof payload)
-  -> Element event proof payload
+  :: forall event payload
+   . IsEvent event
+  => event (Attribute Div_)
+  -> Array (Element event payload)
+  -> Element event payload
 div = elementify "div"
 
 div_
-  :: forall event proof payload
-   . IsEvent (event proof)
-  => Array (Element event proof payload)
-  -> Element event proof payload
+  :: forall event payload
+   . IsEvent event
+  => Array (Element event payload)
+  -> Element event payload
 div_ = div empty
 instance tagToDekuDiv_ :: TagToDeku "div" Div_
 
 data Dl_
 
 dl
-  :: forall event proof payload
-   . IsEvent (event proof)
-  => event proof (Attribute Dl_)
-  -> Array (Element event proof payload)
-  -> Element event proof payload
+  :: forall event payload
+   . IsEvent event
+  => event (Attribute Dl_)
+  -> Array (Element event payload)
+  -> Element event payload
 dl = elementify "dl"
 
 dl_
-  :: forall event proof payload
-   . IsEvent (event proof)
-  => Array (Element event proof payload)
-  -> Element event proof payload
+  :: forall event payload
+   . IsEvent event
+  => Array (Element event payload)
+  -> Element event payload
 dl_ = dl empty
 instance tagToDekuDl_ :: TagToDeku "dl" Dl_
 
 data Dt_
 
 dt
-  :: forall event proof payload
-   . IsEvent (event proof)
-  => event proof (Attribute Dt_)
-  -> Array (Element event proof payload)
-  -> Element event proof payload
+  :: forall event payload
+   . IsEvent event
+  => event (Attribute Dt_)
+  -> Array (Element event payload)
+  -> Element event payload
 dt = elementify "dt"
 
 dt_
-  :: forall event proof payload
-   . IsEvent (event proof)
-  => Array (Element event proof payload)
-  -> Element event proof payload
+  :: forall event payload
+   . IsEvent event
+  => Array (Element event payload)
+  -> Element event payload
 dt_ = dt empty
 instance tagToDekuDt_ :: TagToDeku "dt" Dt_
 
 data Em_
 
 em
-  :: forall event proof payload
-   . IsEvent (event proof)
-  => event proof (Attribute Em_)
-  -> Array (Element event proof payload)
-  -> Element event proof payload
+  :: forall event payload
+   . IsEvent event
+  => event (Attribute Em_)
+  -> Array (Element event payload)
+  -> Element event payload
 em = elementify "em"
 
 em_
-  :: forall event proof payload
-   . IsEvent (event proof)
-  => Array (Element event proof payload)
-  -> Element event proof payload
+  :: forall event payload
+   . IsEvent event
+  => Array (Element event payload)
+  -> Element event payload
 em_ = em empty
 instance tagToDekuEm_ :: TagToDeku "em" Em_
 
 data Embed_
 
 embed
-  :: forall event proof payload
-   . IsEvent (event proof)
-  => event proof (Attribute Embed_)
-  -> Array (Element event proof payload)
-  -> Element event proof payload
+  :: forall event payload
+   . IsEvent event
+  => event (Attribute Embed_)
+  -> Array (Element event payload)
+  -> Element event payload
 embed = elementify "embed"
 
 embed_
-  :: forall event proof payload
-   . IsEvent (event proof)
-  => Array (Element event proof payload)
-  -> Element event proof payload
+  :: forall event payload
+   . IsEvent event
+  => Array (Element event payload)
+  -> Element event payload
 embed_ = embed empty
 instance tagToDekuEmbed_ :: TagToDeku "embed" Embed_
 
 data Fieldset_
 
 fieldset
-  :: forall event proof payload
-   . IsEvent (event proof)
-  => event proof (Attribute Fieldset_)
-  -> Array (Element event proof payload)
-  -> Element event proof payload
+  :: forall event payload
+   . IsEvent event
+  => event (Attribute Fieldset_)
+  -> Array (Element event payload)
+  -> Element event payload
 fieldset = elementify "fieldset"
 
 fieldset_
-  :: forall event proof payload
-   . IsEvent (event proof)
-  => Array (Element event proof payload)
-  -> Element event proof payload
+  :: forall event payload
+   . IsEvent event
+  => Array (Element event payload)
+  -> Element event payload
 fieldset_ = fieldset empty
 instance tagToDekuFieldset_ :: TagToDeku "fieldset" Fieldset_
 
 data Figcaption_
 
 figcaption
-  :: forall event proof payload
-   . IsEvent (event proof)
-  => event proof (Attribute Figcaption_)
-  -> Array (Element event proof payload)
-  -> Element event proof payload
+  :: forall event payload
+   . IsEvent event
+  => event (Attribute Figcaption_)
+  -> Array (Element event payload)
+  -> Element event payload
 figcaption = elementify "figcaption"
 
 figcaption_
-  :: forall event proof payload
-   . IsEvent (event proof)
-  => Array (Element event proof payload)
-  -> Element event proof payload
+  :: forall event payload
+   . IsEvent event
+  => Array (Element event payload)
+  -> Element event payload
 figcaption_ = figcaption empty
 instance tagToDekuFigcaption_ :: TagToDeku "figcaption" Figcaption_
 
 data Figure_
 
 figure
-  :: forall event proof payload
-   . IsEvent (event proof)
-  => event proof (Attribute Figure_)
-  -> Array (Element event proof payload)
-  -> Element event proof payload
+  :: forall event payload
+   . IsEvent event
+  => event (Attribute Figure_)
+  -> Array (Element event payload)
+  -> Element event payload
 figure = elementify "figure"
 
 figure_
-  :: forall event proof payload
-   . IsEvent (event proof)
-  => Array (Element event proof payload)
-  -> Element event proof payload
+  :: forall event payload
+   . IsEvent event
+  => Array (Element event payload)
+  -> Element event payload
 figure_ = figure empty
 instance tagToDekuFigure_ :: TagToDeku "figure" Figure_
 
 data Font_
 
 font
-  :: forall event proof payload
-   . IsEvent (event proof)
-  => event proof (Attribute Font_)
-  -> Array (Element event proof payload)
-  -> Element event proof payload
+  :: forall event payload
+   . IsEvent event
+  => event (Attribute Font_)
+  -> Array (Element event payload)
+  -> Element event payload
 font = elementify "font"
 
 font_
-  :: forall event proof payload
-   . IsEvent (event proof)
-  => Array (Element event proof payload)
-  -> Element event proof payload
+  :: forall event payload
+   . IsEvent event
+  => Array (Element event payload)
+  -> Element event payload
 font_ = font empty
 instance tagToDekuFont_ :: TagToDeku "font" Font_
 
 data Footer_
 
 footer
-  :: forall event proof payload
-   . IsEvent (event proof)
-  => event proof (Attribute Footer_)
-  -> Array (Element event proof payload)
-  -> Element event proof payload
+  :: forall event payload
+   . IsEvent event
+  => event (Attribute Footer_)
+  -> Array (Element event payload)
+  -> Element event payload
 footer = elementify "footer"
 
 footer_
-  :: forall event proof payload
-   . IsEvent (event proof)
-  => Array (Element event proof payload)
-  -> Element event proof payload
+  :: forall event payload
+   . IsEvent event
+  => Array (Element event payload)
+  -> Element event payload
 footer_ = footer empty
 instance tagToDekuFooter_ :: TagToDeku "footer" Footer_
 
 data Form_
 
 form
-  :: forall event proof payload
-   . IsEvent (event proof)
-  => event proof (Attribute Form_)
-  -> Array (Element event proof payload)
-  -> Element event proof payload
+  :: forall event payload
+   . IsEvent event
+  => event (Attribute Form_)
+  -> Array (Element event payload)
+  -> Element event payload
 form = elementify "form"
 
 form_
-  :: forall event proof payload
-   . IsEvent (event proof)
-  => Array (Element event proof payload)
-  -> Element event proof payload
+  :: forall event payload
+   . IsEvent event
+  => Array (Element event payload)
+  -> Element event payload
 form_ = form empty
 instance tagToDekuForm_ :: TagToDeku "form" Form_
 
 data Frame_
 
 frame
-  :: forall event proof payload
-   . IsEvent (event proof)
-  => event proof (Attribute Frame_)
-  -> Array (Element event proof payload)
-  -> Element event proof payload
+  :: forall event payload
+   . IsEvent event
+  => event (Attribute Frame_)
+  -> Array (Element event payload)
+  -> Element event payload
 frame = elementify "frame"
 
 frame_
-  :: forall event proof payload
-   . IsEvent (event proof)
-  => Array (Element event proof payload)
-  -> Element event proof payload
+  :: forall event payload
+   . IsEvent event
+  => Array (Element event payload)
+  -> Element event payload
 frame_ = frame empty
 instance tagToDekuFrame_ :: TagToDeku "frame" Frame_
 
 data Frameset_
 
 frameset
-  :: forall event proof payload
-   . IsEvent (event proof)
-  => event proof (Attribute Frameset_)
-  -> Array (Element event proof payload)
-  -> Element event proof payload
+  :: forall event payload
+   . IsEvent event
+  => event (Attribute Frameset_)
+  -> Array (Element event payload)
+  -> Element event payload
 frameset = elementify "frameset"
 
 frameset_
-  :: forall event proof payload
-   . IsEvent (event proof)
-  => Array (Element event proof payload)
-  -> Element event proof payload
+  :: forall event payload
+   . IsEvent event
+  => Array (Element event payload)
+  -> Element event payload
 frameset_ = frameset empty
 instance tagToDekuFrameset_ :: TagToDeku "frameset" Frameset_
 
 data H1_
 
 h1
-  :: forall event proof payload
-   . IsEvent (event proof)
-  => event proof (Attribute H1_)
-  -> Array (Element event proof payload)
-  -> Element event proof payload
+  :: forall event payload
+   . IsEvent event
+  => event (Attribute H1_)
+  -> Array (Element event payload)
+  -> Element event payload
 h1 = elementify "h1"
 
 h1_
-  :: forall event proof payload
-   . IsEvent (event proof)
-  => Array (Element event proof payload)
-  -> Element event proof payload
+  :: forall event payload
+   . IsEvent event
+  => Array (Element event payload)
+  -> Element event payload
 h1_ = h1 empty
 instance tagToDekuH1_ :: TagToDeku "h1" H1_
 
 data H2_
 
 h2
-  :: forall event proof payload
-   . IsEvent (event proof)
-  => event proof (Attribute H2_)
-  -> Array (Element event proof payload)
-  -> Element event proof payload
+  :: forall event payload
+   . IsEvent event
+  => event (Attribute H2_)
+  -> Array (Element event payload)
+  -> Element event payload
 h2 = elementify "h2"
 
 h2_
-  :: forall event proof payload
-   . IsEvent (event proof)
-  => Array (Element event proof payload)
-  -> Element event proof payload
+  :: forall event payload
+   . IsEvent event
+  => Array (Element event payload)
+  -> Element event payload
 h2_ = h2 empty
 instance tagToDekuH2_ :: TagToDeku "h2" H2_
 
 data H3_
 
 h3
-  :: forall event proof payload
-   . IsEvent (event proof)
-  => event proof (Attribute H3_)
-  -> Array (Element event proof payload)
-  -> Element event proof payload
+  :: forall event payload
+   . IsEvent event
+  => event (Attribute H3_)
+  -> Array (Element event payload)
+  -> Element event payload
 h3 = elementify "h3"
 
 h3_
-  :: forall event proof payload
-   . IsEvent (event proof)
-  => Array (Element event proof payload)
-  -> Element event proof payload
+  :: forall event payload
+   . IsEvent event
+  => Array (Element event payload)
+  -> Element event payload
 h3_ = h3 empty
 instance tagToDekuH3_ :: TagToDeku "h3" H3_
 
 data H4_
 
 h4
-  :: forall event proof payload
-   . IsEvent (event proof)
-  => event proof (Attribute H4_)
-  -> Array (Element event proof payload)
-  -> Element event proof payload
+  :: forall event payload
+   . IsEvent event
+  => event (Attribute H4_)
+  -> Array (Element event payload)
+  -> Element event payload
 h4 = elementify "h4"
 
 h4_
-  :: forall event proof payload
-   . IsEvent (event proof)
-  => Array (Element event proof payload)
-  -> Element event proof payload
+  :: forall event payload
+   . IsEvent event
+  => Array (Element event payload)
+  -> Element event payload
 h4_ = h4 empty
 instance tagToDekuH4_ :: TagToDeku "h4" H4_
 
 data H5_
 
 h5
-  :: forall event proof payload
-   . IsEvent (event proof)
-  => event proof (Attribute H5_)
-  -> Array (Element event proof payload)
-  -> Element event proof payload
+  :: forall event payload
+   . IsEvent event
+  => event (Attribute H5_)
+  -> Array (Element event payload)
+  -> Element event payload
 h5 = elementify "h5"
 
 h5_
-  :: forall event proof payload
-   . IsEvent (event proof)
-  => Array (Element event proof payload)
-  -> Element event proof payload
+  :: forall event payload
+   . IsEvent event
+  => Array (Element event payload)
+  -> Element event payload
 h5_ = h5 empty
 instance tagToDekuH5_ :: TagToDeku "h5" H5_
 
 data H6_
 
 h6
-  :: forall event proof payload
-   . IsEvent (event proof)
-  => event proof (Attribute H6_)
-  -> Array (Element event proof payload)
-  -> Element event proof payload
+  :: forall event payload
+   . IsEvent event
+  => event (Attribute H6_)
+  -> Array (Element event payload)
+  -> Element event payload
 h6 = elementify "h6"
 
 h6_
-  :: forall event proof payload
-   . IsEvent (event proof)
-  => Array (Element event proof payload)
-  -> Element event proof payload
+  :: forall event payload
+   . IsEvent event
+  => Array (Element event payload)
+  -> Element event payload
 h6_ = h6 empty
 instance tagToDekuH6_ :: TagToDeku "h6" H6_
 
 data Head_
 
 head
-  :: forall event proof payload
-   . IsEvent (event proof)
-  => event proof (Attribute Head_)
-  -> Array (Element event proof payload)
-  -> Element event proof payload
+  :: forall event payload
+   . IsEvent event
+  => event (Attribute Head_)
+  -> Array (Element event payload)
+  -> Element event payload
 head = elementify "head"
 
 head_
-  :: forall event proof payload
-   . IsEvent (event proof)
-  => Array (Element event proof payload)
-  -> Element event proof payload
+  :: forall event payload
+   . IsEvent event
+  => Array (Element event payload)
+  -> Element event payload
 head_ = head empty
 instance tagToDekuHead_ :: TagToDeku "head" Head_
 
 data Header_
 
 header
-  :: forall event proof payload
-   . IsEvent (event proof)
-  => event proof (Attribute Header_)
-  -> Array (Element event proof payload)
-  -> Element event proof payload
+  :: forall event payload
+   . IsEvent event
+  => event (Attribute Header_)
+  -> Array (Element event payload)
+  -> Element event payload
 header = elementify "header"
 
 header_
-  :: forall event proof payload
-   . IsEvent (event proof)
-  => Array (Element event proof payload)
-  -> Element event proof payload
+  :: forall event payload
+   . IsEvent event
+  => Array (Element event payload)
+  -> Element event payload
 header_ = header empty
 instance tagToDekuHeader_ :: TagToDeku "header" Header_
 
 data Hr_
 
 hr
-  :: forall event proof payload
-   . IsEvent (event proof)
-  => event proof (Attribute Hr_)
-  -> Array (Element event proof payload)
-  -> Element event proof payload
+  :: forall event payload
+   . IsEvent event
+  => event (Attribute Hr_)
+  -> Array (Element event payload)
+  -> Element event payload
 hr = elementify "hr"
 
 hr_
-  :: forall event proof payload
-   . IsEvent (event proof)
-  => Array (Element event proof payload)
-  -> Element event proof payload
+  :: forall event payload
+   . IsEvent event
+  => Array (Element event payload)
+  -> Element event payload
 hr_ = hr empty
 instance tagToDekuHr_ :: TagToDeku "hr" Hr_
 
 data Html_
 
 html
-  :: forall event proof payload
-   . IsEvent (event proof)
-  => event proof (Attribute Html_)
-  -> Array (Element event proof payload)
-  -> Element event proof payload
+  :: forall event payload
+   . IsEvent event
+  => event (Attribute Html_)
+  -> Array (Element event payload)
+  -> Element event payload
 html = elementify "html"
 
 html_
-  :: forall event proof payload
-   . IsEvent (event proof)
-  => Array (Element event proof payload)
-  -> Element event proof payload
+  :: forall event payload
+   . IsEvent event
+  => Array (Element event payload)
+  -> Element event payload
 html_ = html empty
 instance tagToDekuHtml_ :: TagToDeku "html" Html_
 
 data I_
 
 i
-  :: forall event proof payload
-   . IsEvent (event proof)
-  => event proof (Attribute I_)
-  -> Array (Element event proof payload)
-  -> Element event proof payload
+  :: forall event payload
+   . IsEvent event
+  => event (Attribute I_)
+  -> Array (Element event payload)
+  -> Element event payload
 i = elementify "i"
 
 i_
-  :: forall event proof payload
-   . IsEvent (event proof)
-  => Array (Element event proof payload)
-  -> Element event proof payload
+  :: forall event payload
+   . IsEvent event
+  => Array (Element event payload)
+  -> Element event payload
 i_ = i empty
 instance tagToDekuI_ :: TagToDeku "i" I_
 
 data Iframe_
 
 iframe
-  :: forall event proof payload
-   . IsEvent (event proof)
-  => event proof (Attribute Iframe_)
-  -> Array (Element event proof payload)
-  -> Element event proof payload
+  :: forall event payload
+   . IsEvent event
+  => event (Attribute Iframe_)
+  -> Array (Element event payload)
+  -> Element event payload
 iframe = elementify "iframe"
 
 iframe_
-  :: forall event proof payload
-   . IsEvent (event proof)
-  => Array (Element event proof payload)
-  -> Element event proof payload
+  :: forall event payload
+   . IsEvent event
+  => Array (Element event payload)
+  -> Element event payload
 iframe_ = iframe empty
 instance tagToDekuIframe_ :: TagToDeku "iframe" Iframe_
 
 data Img_
 
 img
-  :: forall event proof payload
-   . IsEvent (event proof)
-  => event proof (Attribute Img_)
-  -> Array (Element event proof payload)
-  -> Element event proof payload
+  :: forall event payload
+   . IsEvent event
+  => event (Attribute Img_)
+  -> Array (Element event payload)
+  -> Element event payload
 img = elementify "img"
 
 img_
-  :: forall event proof payload
-   . IsEvent (event proof)
-  => Array (Element event proof payload)
-  -> Element event proof payload
+  :: forall event payload
+   . IsEvent event
+  => Array (Element event payload)
+  -> Element event payload
 img_ = img empty
 instance tagToDekuImg_ :: TagToDeku "img" Img_
 
 data Input_
 
 input
-  :: forall event proof payload
-   . IsEvent (event proof)
-  => event proof (Attribute Input_)
-  -> Array (Element event proof payload)
-  -> Element event proof payload
+  :: forall event payload
+   . IsEvent event
+  => event (Attribute Input_)
+  -> Array (Element event payload)
+  -> Element event payload
 input = elementify "input"
 
 input_
-  :: forall event proof payload
-   . IsEvent (event proof)
-  => Array (Element event proof payload)
-  -> Element event proof payload
+  :: forall event payload
+   . IsEvent event
+  => Array (Element event payload)
+  -> Element event payload
 input_ = input empty
 instance tagToDekuInput_ :: TagToDeku "input" Input_
 
 data Ins_
 
 ins
-  :: forall event proof payload
-   . IsEvent (event proof)
-  => event proof (Attribute Ins_)
-  -> Array (Element event proof payload)
-  -> Element event proof payload
+  :: forall event payload
+   . IsEvent event
+  => event (Attribute Ins_)
+  -> Array (Element event payload)
+  -> Element event payload
 ins = elementify "ins"
 
 ins_
-  :: forall event proof payload
-   . IsEvent (event proof)
-  => Array (Element event proof payload)
-  -> Element event proof payload
+  :: forall event payload
+   . IsEvent event
+  => Array (Element event payload)
+  -> Element event payload
 ins_ = ins empty
 instance tagToDekuIns_ :: TagToDeku "ins" Ins_
 
 data Kbd_
 
 kbd
-  :: forall event proof payload
-   . IsEvent (event proof)
-  => event proof (Attribute Kbd_)
-  -> Array (Element event proof payload)
-  -> Element event proof payload
+  :: forall event payload
+   . IsEvent event
+  => event (Attribute Kbd_)
+  -> Array (Element event payload)
+  -> Element event payload
 kbd = elementify "kbd"
 
 kbd_
-  :: forall event proof payload
-   . IsEvent (event proof)
-  => Array (Element event proof payload)
-  -> Element event proof payload
+  :: forall event payload
+   . IsEvent event
+  => Array (Element event payload)
+  -> Element event payload
 kbd_ = kbd empty
 instance tagToDekuKbd_ :: TagToDeku "kbd" Kbd_
 
 data Label_
 
 label
-  :: forall event proof payload
-   . IsEvent (event proof)
-  => event proof (Attribute Label_)
-  -> Array (Element event proof payload)
-  -> Element event proof payload
+  :: forall event payload
+   . IsEvent event
+  => event (Attribute Label_)
+  -> Array (Element event payload)
+  -> Element event payload
 label = elementify "label"
 
 label_
-  :: forall event proof payload
-   . IsEvent (event proof)
-  => Array (Element event proof payload)
-  -> Element event proof payload
+  :: forall event payload
+   . IsEvent event
+  => Array (Element event payload)
+  -> Element event payload
 label_ = label empty
 instance tagToDekuLabel_ :: TagToDeku "label" Label_
 
 data Legend_
 
 legend
-  :: forall event proof payload
-   . IsEvent (event proof)
-  => event proof (Attribute Legend_)
-  -> Array (Element event proof payload)
-  -> Element event proof payload
+  :: forall event payload
+   . IsEvent event
+  => event (Attribute Legend_)
+  -> Array (Element event payload)
+  -> Element event payload
 legend = elementify "legend"
 
 legend_
-  :: forall event proof payload
-   . IsEvent (event proof)
-  => Array (Element event proof payload)
-  -> Element event proof payload
+  :: forall event payload
+   . IsEvent event
+  => Array (Element event payload)
+  -> Element event payload
 legend_ = legend empty
 instance tagToDekuLegend_ :: TagToDeku "legend" Legend_
 
 data Li_
 
 li
-  :: forall event proof payload
-   . IsEvent (event proof)
-  => event proof (Attribute Li_)
-  -> Array (Element event proof payload)
-  -> Element event proof payload
+  :: forall event payload
+   . IsEvent event
+  => event (Attribute Li_)
+  -> Array (Element event payload)
+  -> Element event payload
 li = elementify "li"
 
 li_
-  :: forall event proof payload
-   . IsEvent (event proof)
-  => Array (Element event proof payload)
-  -> Element event proof payload
+  :: forall event payload
+   . IsEvent event
+  => Array (Element event payload)
+  -> Element event payload
 li_ = li empty
 instance tagToDekuLi_ :: TagToDeku "li" Li_
 
 data Link_
 
 link
-  :: forall event proof payload
-   . IsEvent (event proof)
-  => event proof (Attribute Link_)
-  -> Array (Element event proof payload)
-  -> Element event proof payload
+  :: forall event payload
+   . IsEvent event
+  => event (Attribute Link_)
+  -> Array (Element event payload)
+  -> Element event payload
 link = elementify "link"
 
 link_
-  :: forall event proof payload
-   . IsEvent (event proof)
-  => Array (Element event proof payload)
-  -> Element event proof payload
+  :: forall event payload
+   . IsEvent event
+  => Array (Element event payload)
+  -> Element event payload
 link_ = link empty
 instance tagToDekuLink_ :: TagToDeku "link" Link_
 
 data Main_
 
 main
-  :: forall event proof payload
-   . IsEvent (event proof)
-  => event proof (Attribute Main_)
-  -> Array (Element event proof payload)
-  -> Element event proof payload
+  :: forall event payload
+   . IsEvent event
+  => event (Attribute Main_)
+  -> Array (Element event payload)
+  -> Element event payload
 main = elementify "main"
 
 main_
-  :: forall event proof payload
-   . IsEvent (event proof)
-  => Array (Element event proof payload)
-  -> Element event proof payload
+  :: forall event payload
+   . IsEvent event
+  => Array (Element event payload)
+  -> Element event payload
 main_ = main empty
 instance tagToDekuMain_ :: TagToDeku "main" Main_
 
 data Map_
 
 map
-  :: forall event proof payload
-   . IsEvent (event proof)
-  => event proof (Attribute Map_)
-  -> Array (Element event proof payload)
-  -> Element event proof payload
+  :: forall event payload
+   . IsEvent event
+  => event (Attribute Map_)
+  -> Array (Element event payload)
+  -> Element event payload
 map = elementify "map"
 
 map_
-  :: forall event proof payload
-   . IsEvent (event proof)
-  => Array (Element event proof payload)
-  -> Element event proof payload
+  :: forall event payload
+   . IsEvent event
+  => Array (Element event payload)
+  -> Element event payload
 map_ = map empty
 instance tagToDekuMap_ :: TagToDeku "map" Map_
 
 data Mark_
 
 mark
-  :: forall event proof payload
-   . IsEvent (event proof)
-  => event proof (Attribute Mark_)
-  -> Array (Element event proof payload)
-  -> Element event proof payload
+  :: forall event payload
+   . IsEvent event
+  => event (Attribute Mark_)
+  -> Array (Element event payload)
+  -> Element event payload
 mark = elementify "mark"
 
 mark_
-  :: forall event proof payload
-   . IsEvent (event proof)
-  => Array (Element event proof payload)
-  -> Element event proof payload
+  :: forall event payload
+   . IsEvent event
+  => Array (Element event payload)
+  -> Element event payload
 mark_ = mark empty
 instance tagToDekuMark_ :: TagToDeku "mark" Mark_
 
 data Meta_
 
 meta
-  :: forall event proof payload
-   . IsEvent (event proof)
-  => event proof (Attribute Meta_)
-  -> Array (Element event proof payload)
-  -> Element event proof payload
+  :: forall event payload
+   . IsEvent event
+  => event (Attribute Meta_)
+  -> Array (Element event payload)
+  -> Element event payload
 meta = elementify "meta"
 
 meta_
-  :: forall event proof payload
-   . IsEvent (event proof)
-  => Array (Element event proof payload)
-  -> Element event proof payload
+  :: forall event payload
+   . IsEvent event
+  => Array (Element event payload)
+  -> Element event payload
 meta_ = meta empty
 instance tagToDekuMeta_ :: TagToDeku "meta" Meta_
 
 data Meter_
 
 meter
-  :: forall event proof payload
-   . IsEvent (event proof)
-  => event proof (Attribute Meter_)
-  -> Array (Element event proof payload)
-  -> Element event proof payload
+  :: forall event payload
+   . IsEvent event
+  => event (Attribute Meter_)
+  -> Array (Element event payload)
+  -> Element event payload
 meter = elementify "meter"
 
 meter_
-  :: forall event proof payload
-   . IsEvent (event proof)
-  => Array (Element event proof payload)
-  -> Element event proof payload
+  :: forall event payload
+   . IsEvent event
+  => Array (Element event payload)
+  -> Element event payload
 meter_ = meter empty
 instance tagToDekuMeter_ :: TagToDeku "meter" Meter_
 
 data Nav_
 
 nav
-  :: forall event proof payload
-   . IsEvent (event proof)
-  => event proof (Attribute Nav_)
-  -> Array (Element event proof payload)
-  -> Element event proof payload
+  :: forall event payload
+   . IsEvent event
+  => event (Attribute Nav_)
+  -> Array (Element event payload)
+  -> Element event payload
 nav = elementify "nav"
 
 nav_
-  :: forall event proof payload
-   . IsEvent (event proof)
-  => Array (Element event proof payload)
-  -> Element event proof payload
+  :: forall event payload
+   . IsEvent event
+  => Array (Element event payload)
+  -> Element event payload
 nav_ = nav empty
 instance tagToDekuNav_ :: TagToDeku "nav" Nav_
 
 data Noframes_
 
 noframes
-  :: forall event proof payload
-   . IsEvent (event proof)
-  => event proof (Attribute Noframes_)
-  -> Array (Element event proof payload)
-  -> Element event proof payload
+  :: forall event payload
+   . IsEvent event
+  => event (Attribute Noframes_)
+  -> Array (Element event payload)
+  -> Element event payload
 noframes = elementify "noframes"
 
 noframes_
-  :: forall event proof payload
-   . IsEvent (event proof)
-  => Array (Element event proof payload)
-  -> Element event proof payload
+  :: forall event payload
+   . IsEvent event
+  => Array (Element event payload)
+  -> Element event payload
 noframes_ = noframes empty
 instance tagToDekuNoframes_ :: TagToDeku "noframes" Noframes_
 
 data Noscript_
 
 noscript
-  :: forall event proof payload
-   . IsEvent (event proof)
-  => event proof (Attribute Noscript_)
-  -> Array (Element event proof payload)
-  -> Element event proof payload
+  :: forall event payload
+   . IsEvent event
+  => event (Attribute Noscript_)
+  -> Array (Element event payload)
+  -> Element event payload
 noscript = elementify "noscript"
 
 noscript_
-  :: forall event proof payload
-   . IsEvent (event proof)
-  => Array (Element event proof payload)
-  -> Element event proof payload
+  :: forall event payload
+   . IsEvent event
+  => Array (Element event payload)
+  -> Element event payload
 noscript_ = noscript empty
 instance tagToDekuNoscript_ :: TagToDeku "noscript" Noscript_
 
 data Object_
 
 object
-  :: forall event proof payload
-   . IsEvent (event proof)
-  => event proof (Attribute Object_)
-  -> Array (Element event proof payload)
-  -> Element event proof payload
+  :: forall event payload
+   . IsEvent event
+  => event (Attribute Object_)
+  -> Array (Element event payload)
+  -> Element event payload
 object = elementify "object"
 
 object_
-  :: forall event proof payload
-   . IsEvent (event proof)
-  => Array (Element event proof payload)
-  -> Element event proof payload
+  :: forall event payload
+   . IsEvent event
+  => Array (Element event payload)
+  -> Element event payload
 object_ = object empty
 instance tagToDekuObject_ :: TagToDeku "object" Object_
 
 data Ol_
 
 ol
-  :: forall event proof payload
-   . IsEvent (event proof)
-  => event proof (Attribute Ol_)
-  -> Array (Element event proof payload)
-  -> Element event proof payload
+  :: forall event payload
+   . IsEvent event
+  => event (Attribute Ol_)
+  -> Array (Element event payload)
+  -> Element event payload
 ol = elementify "ol"
 
 ol_
-  :: forall event proof payload
-   . IsEvent (event proof)
-  => Array (Element event proof payload)
-  -> Element event proof payload
+  :: forall event payload
+   . IsEvent event
+  => Array (Element event payload)
+  -> Element event payload
 ol_ = ol empty
 instance tagToDekuOl_ :: TagToDeku "ol" Ol_
 
 data Optgroup_
 
 optgroup
-  :: forall event proof payload
-   . IsEvent (event proof)
-  => event proof (Attribute Optgroup_)
-  -> Array (Element event proof payload)
-  -> Element event proof payload
+  :: forall event payload
+   . IsEvent event
+  => event (Attribute Optgroup_)
+  -> Array (Element event payload)
+  -> Element event payload
 optgroup = elementify "optgroup"
 
 optgroup_
-  :: forall event proof payload
-   . IsEvent (event proof)
-  => Array (Element event proof payload)
-  -> Element event proof payload
+  :: forall event payload
+   . IsEvent event
+  => Array (Element event payload)
+  -> Element event payload
 optgroup_ = optgroup empty
 instance tagToDekuOptgroup_ :: TagToDeku "optgroup" Optgroup_
 
 data Option_
 
 option
-  :: forall event proof payload
-   . IsEvent (event proof)
-  => event proof (Attribute Option_)
-  -> Array (Element event proof payload)
-  -> Element event proof payload
+  :: forall event payload
+   . IsEvent event
+  => event (Attribute Option_)
+  -> Array (Element event payload)
+  -> Element event payload
 option = elementify "option"
 
 option_
-  :: forall event proof payload
-   . IsEvent (event proof)
-  => Array (Element event proof payload)
-  -> Element event proof payload
+  :: forall event payload
+   . IsEvent event
+  => Array (Element event payload)
+  -> Element event payload
 option_ = option empty
 instance tagToDekuOption_ :: TagToDeku "option" Option_
 
 data Output_
 
 output
-  :: forall event proof payload
-   . IsEvent (event proof)
-  => event proof (Attribute Output_)
-  -> Array (Element event proof payload)
-  -> Element event proof payload
+  :: forall event payload
+   . IsEvent event
+  => event (Attribute Output_)
+  -> Array (Element event payload)
+  -> Element event payload
 output = elementify "output"
 
 output_
-  :: forall event proof payload
-   . IsEvent (event proof)
-  => Array (Element event proof payload)
-  -> Element event proof payload
+  :: forall event payload
+   . IsEvent event
+  => Array (Element event payload)
+  -> Element event payload
 output_ = output empty
 instance tagToDekuOutput_ :: TagToDeku "output" Output_
 
 data P_
 
 p
-  :: forall event proof payload
-   . IsEvent (event proof)
-  => event proof (Attribute P_)
-  -> Array (Element event proof payload)
-  -> Element event proof payload
+  :: forall event payload
+   . IsEvent event
+  => event (Attribute P_)
+  -> Array (Element event payload)
+  -> Element event payload
 p = elementify "p"
 
 p_
-  :: forall event proof payload
-   . IsEvent (event proof)
-  => Array (Element event proof payload)
-  -> Element event proof payload
+  :: forall event payload
+   . IsEvent event
+  => Array (Element event payload)
+  -> Element event payload
 p_ = p empty
 instance tagToDekuP_ :: TagToDeku "p" P_
 
 data Param_
 
 param
-  :: forall event proof payload
-   . IsEvent (event proof)
-  => event proof (Attribute Param_)
-  -> Array (Element event proof payload)
-  -> Element event proof payload
+  :: forall event payload
+   . IsEvent event
+  => event (Attribute Param_)
+  -> Array (Element event payload)
+  -> Element event payload
 param = elementify "param"
 
 param_
-  :: forall event proof payload
-   . IsEvent (event proof)
-  => Array (Element event proof payload)
-  -> Element event proof payload
+  :: forall event payload
+   . IsEvent event
+  => Array (Element event payload)
+  -> Element event payload
 param_ = param empty
 instance tagToDekuParam_ :: TagToDeku "param" Param_
 
 data Picture_
 
 picture
-  :: forall event proof payload
-   . IsEvent (event proof)
-  => event proof (Attribute Picture_)
-  -> Array (Element event proof payload)
-  -> Element event proof payload
+  :: forall event payload
+   . IsEvent event
+  => event (Attribute Picture_)
+  -> Array (Element event payload)
+  -> Element event payload
 picture = elementify "picture"
 
 picture_
-  :: forall event proof payload
-   . IsEvent (event proof)
-  => Array (Element event proof payload)
-  -> Element event proof payload
+  :: forall event payload
+   . IsEvent event
+  => Array (Element event payload)
+  -> Element event payload
 picture_ = picture empty
 instance tagToDekuPicture_ :: TagToDeku "picture" Picture_
 
 data Pre_
 
 pre
-  :: forall event proof payload
-   . IsEvent (event proof)
-  => event proof (Attribute Pre_)
-  -> Array (Element event proof payload)
-  -> Element event proof payload
+  :: forall event payload
+   . IsEvent event
+  => event (Attribute Pre_)
+  -> Array (Element event payload)
+  -> Element event payload
 pre = elementify "pre"
 
 pre_
-  :: forall event proof payload
-   . IsEvent (event proof)
-  => Array (Element event proof payload)
-  -> Element event proof payload
+  :: forall event payload
+   . IsEvent event
+  => Array (Element event payload)
+  -> Element event payload
 pre_ = pre empty
 instance tagToDekuPre_ :: TagToDeku "pre" Pre_
 
 data Progress_
 
 progress
-  :: forall event proof payload
-   . IsEvent (event proof)
-  => event proof (Attribute Progress_)
-  -> Array (Element event proof payload)
-  -> Element event proof payload
+  :: forall event payload
+   . IsEvent event
+  => event (Attribute Progress_)
+  -> Array (Element event payload)
+  -> Element event payload
 progress = elementify "progress"
 
 progress_
-  :: forall event proof payload
-   . IsEvent (event proof)
-  => Array (Element event proof payload)
-  -> Element event proof payload
+  :: forall event payload
+   . IsEvent event
+  => Array (Element event payload)
+  -> Element event payload
 progress_ = progress empty
 instance tagToDekuProgress_ :: TagToDeku "progress" Progress_
 
 data Q_
 
 q
-  :: forall event proof payload
-   . IsEvent (event proof)
-  => event proof (Attribute Q_)
-  -> Array (Element event proof payload)
-  -> Element event proof payload
+  :: forall event payload
+   . IsEvent event
+  => event (Attribute Q_)
+  -> Array (Element event payload)
+  -> Element event payload
 q = elementify "q"
 
 q_
-  :: forall event proof payload
-   . IsEvent (event proof)
-  => Array (Element event proof payload)
-  -> Element event proof payload
+  :: forall event payload
+   . IsEvent event
+  => Array (Element event payload)
+  -> Element event payload
 q_ = q empty
 instance tagToDekuQ_ :: TagToDeku "q" Q_
 
 data Rp_
 
 rp
-  :: forall event proof payload
-   . IsEvent (event proof)
-  => event proof (Attribute Rp_)
-  -> Array (Element event proof payload)
-  -> Element event proof payload
+  :: forall event payload
+   . IsEvent event
+  => event (Attribute Rp_)
+  -> Array (Element event payload)
+  -> Element event payload
 rp = elementify "rp"
 
 rp_
-  :: forall event proof payload
-   . IsEvent (event proof)
-  => Array (Element event proof payload)
-  -> Element event proof payload
+  :: forall event payload
+   . IsEvent event
+  => Array (Element event payload)
+  -> Element event payload
 rp_ = rp empty
 instance tagToDekuRp_ :: TagToDeku "rp" Rp_
 
 data Rt_
 
 rt
-  :: forall event proof payload
-   . IsEvent (event proof)
-  => event proof (Attribute Rt_)
-  -> Array (Element event proof payload)
-  -> Element event proof payload
+  :: forall event payload
+   . IsEvent event
+  => event (Attribute Rt_)
+  -> Array (Element event payload)
+  -> Element event payload
 rt = elementify "rt"
 
 rt_
-  :: forall event proof payload
-   . IsEvent (event proof)
-  => Array (Element event proof payload)
-  -> Element event proof payload
+  :: forall event payload
+   . IsEvent event
+  => Array (Element event payload)
+  -> Element event payload
 rt_ = rt empty
 instance tagToDekuRt_ :: TagToDeku "rt" Rt_
 
 data Ruby_
 
 ruby
-  :: forall event proof payload
-   . IsEvent (event proof)
-  => event proof (Attribute Ruby_)
-  -> Array (Element event proof payload)
-  -> Element event proof payload
+  :: forall event payload
+   . IsEvent event
+  => event (Attribute Ruby_)
+  -> Array (Element event payload)
+  -> Element event payload
 ruby = elementify "ruby"
 
 ruby_
-  :: forall event proof payload
-   . IsEvent (event proof)
-  => Array (Element event proof payload)
-  -> Element event proof payload
+  :: forall event payload
+   . IsEvent event
+  => Array (Element event payload)
+  -> Element event payload
 ruby_ = ruby empty
 instance tagToDekuRuby_ :: TagToDeku "ruby" Ruby_
 
 data S_
 
 s
-  :: forall event proof payload
-   . IsEvent (event proof)
-  => event proof (Attribute S_)
-  -> Array (Element event proof payload)
-  -> Element event proof payload
+  :: forall event payload
+   . IsEvent event
+  => event (Attribute S_)
+  -> Array (Element event payload)
+  -> Element event payload
 s = elementify "s"
 
 s_
-  :: forall event proof payload
-   . IsEvent (event proof)
-  => Array (Element event proof payload)
-  -> Element event proof payload
+  :: forall event payload
+   . IsEvent event
+  => Array (Element event payload)
+  -> Element event payload
 s_ = s empty
 instance tagToDekuS_ :: TagToDeku "s" S_
 
 data Samp_
 
 samp
-  :: forall event proof payload
-   . IsEvent (event proof)
-  => event proof (Attribute Samp_)
-  -> Array (Element event proof payload)
-  -> Element event proof payload
+  :: forall event payload
+   . IsEvent event
+  => event (Attribute Samp_)
+  -> Array (Element event payload)
+  -> Element event payload
 samp = elementify "samp"
 
 samp_
-  :: forall event proof payload
-   . IsEvent (event proof)
-  => Array (Element event proof payload)
-  -> Element event proof payload
+  :: forall event payload
+   . IsEvent event
+  => Array (Element event payload)
+  -> Element event payload
 samp_ = samp empty
 instance tagToDekuSamp_ :: TagToDeku "samp" Samp_
 
 data Script_
 
 script
-  :: forall event proof payload
-   . IsEvent (event proof)
-  => event proof (Attribute Script_)
-  -> Array (Element event proof payload)
-  -> Element event proof payload
+  :: forall event payload
+   . IsEvent event
+  => event (Attribute Script_)
+  -> Array (Element event payload)
+  -> Element event payload
 script = elementify "script"
 
 script_
-  :: forall event proof payload
-   . IsEvent (event proof)
-  => Array (Element event proof payload)
-  -> Element event proof payload
+  :: forall event payload
+   . IsEvent event
+  => Array (Element event payload)
+  -> Element event payload
 script_ = script empty
 instance tagToDekuScript_ :: TagToDeku "script" Script_
 
 data Section_
 
 section
-  :: forall event proof payload
-   . IsEvent (event proof)
-  => event proof (Attribute Section_)
-  -> Array (Element event proof payload)
-  -> Element event proof payload
+  :: forall event payload
+   . IsEvent event
+  => event (Attribute Section_)
+  -> Array (Element event payload)
+  -> Element event payload
 section = elementify "section"
 
 section_
-  :: forall event proof payload
-   . IsEvent (event proof)
-  => Array (Element event proof payload)
-  -> Element event proof payload
+  :: forall event payload
+   . IsEvent event
+  => Array (Element event payload)
+  -> Element event payload
 section_ = section empty
 instance tagToDekuSection_ :: TagToDeku "section" Section_
 
 data Select_
 
 select
-  :: forall event proof payload
-   . IsEvent (event proof)
-  => event proof (Attribute Select_)
-  -> Array (Element event proof payload)
-  -> Element event proof payload
+  :: forall event payload
+   . IsEvent event
+  => event (Attribute Select_)
+  -> Array (Element event payload)
+  -> Element event payload
 select = elementify "select"
 
 select_
-  :: forall event proof payload
-   . IsEvent (event proof)
-  => Array (Element event proof payload)
-  -> Element event proof payload
+  :: forall event payload
+   . IsEvent event
+  => Array (Element event payload)
+  -> Element event payload
 select_ = select empty
 instance tagToDekuSelect_ :: TagToDeku "select" Select_
 
 data Small_
 
 small
-  :: forall event proof payload
-   . IsEvent (event proof)
-  => event proof (Attribute Small_)
-  -> Array (Element event proof payload)
-  -> Element event proof payload
+  :: forall event payload
+   . IsEvent event
+  => event (Attribute Small_)
+  -> Array (Element event payload)
+  -> Element event payload
 small = elementify "small"
 
 small_
-  :: forall event proof payload
-   . IsEvent (event proof)
-  => Array (Element event proof payload)
-  -> Element event proof payload
+  :: forall event payload
+   . IsEvent event
+  => Array (Element event payload)
+  -> Element event payload
 small_ = small empty
 instance tagToDekuSmall_ :: TagToDeku "small" Small_
 
 data Source_
 
 source
-  :: forall event proof payload
-   . IsEvent (event proof)
-  => event proof (Attribute Source_)
-  -> Array (Element event proof payload)
-  -> Element event proof payload
+  :: forall event payload
+   . IsEvent event
+  => event (Attribute Source_)
+  -> Array (Element event payload)
+  -> Element event payload
 source = elementify "source"
 
 source_
-  :: forall event proof payload
-   . IsEvent (event proof)
-  => Array (Element event proof payload)
-  -> Element event proof payload
+  :: forall event payload
+   . IsEvent event
+  => Array (Element event payload)
+  -> Element event payload
 source_ = source empty
 instance tagToDekuSource_ :: TagToDeku "source" Source_
 
 data Span_
 
 span
-  :: forall event proof payload
-   . IsEvent (event proof)
-  => event proof (Attribute Span_)
-  -> Array (Element event proof payload)
-  -> Element event proof payload
+  :: forall event payload
+   . IsEvent event
+  => event (Attribute Span_)
+  -> Array (Element event payload)
+  -> Element event payload
 span = elementify "span"
 
 span_
-  :: forall event proof payload
-   . IsEvent (event proof)
-  => Array (Element event proof payload)
-  -> Element event proof payload
+  :: forall event payload
+   . IsEvent event
+  => Array (Element event payload)
+  -> Element event payload
 span_ = span empty
 instance tagToDekuSpan_ :: TagToDeku "span" Span_
 
 data Strike_
 
 strike
-  :: forall event proof payload
-   . IsEvent (event proof)
-  => event proof (Attribute Strike_)
-  -> Array (Element event proof payload)
-  -> Element event proof payload
+  :: forall event payload
+   . IsEvent event
+  => event (Attribute Strike_)
+  -> Array (Element event payload)
+  -> Element event payload
 strike = elementify "strike"
 
 strike_
-  :: forall event proof payload
-   . IsEvent (event proof)
-  => Array (Element event proof payload)
-  -> Element event proof payload
+  :: forall event payload
+   . IsEvent event
+  => Array (Element event payload)
+  -> Element event payload
 strike_ = strike empty
 instance tagToDekuStrike_ :: TagToDeku "strike" Strike_
 
 data Strong_
 
 strong
-  :: forall event proof payload
-   . IsEvent (event proof)
-  => event proof (Attribute Strong_)
-  -> Array (Element event proof payload)
-  -> Element event proof payload
+  :: forall event payload
+   . IsEvent event
+  => event (Attribute Strong_)
+  -> Array (Element event payload)
+  -> Element event payload
 strong = elementify "strong"
 
 strong_
-  :: forall event proof payload
-   . IsEvent (event proof)
-  => Array (Element event proof payload)
-  -> Element event proof payload
+  :: forall event payload
+   . IsEvent event
+  => Array (Element event payload)
+  -> Element event payload
 strong_ = strong empty
 instance tagToDekuStrong_ :: TagToDeku "strong" Strong_
 
 data Style_
 
 style
-  :: forall event proof payload
-   . IsEvent (event proof)
-  => event proof (Attribute Style_)
-  -> Array (Element event proof payload)
-  -> Element event proof payload
+  :: forall event payload
+   . IsEvent event
+  => event (Attribute Style_)
+  -> Array (Element event payload)
+  -> Element event payload
 style = elementify "style"
 
 style_
-  :: forall event proof payload
-   . IsEvent (event proof)
-  => Array (Element event proof payload)
-  -> Element event proof payload
+  :: forall event payload
+   . IsEvent event
+  => Array (Element event payload)
+  -> Element event payload
 style_ = style empty
 instance tagToDekuStyle_ :: TagToDeku "style" Style_
 
 data Sub_
 
 sub
-  :: forall event proof payload
-   . IsEvent (event proof)
-  => event proof (Attribute Sub_)
-  -> Array (Element event proof payload)
-  -> Element event proof payload
+  :: forall event payload
+   . IsEvent event
+  => event (Attribute Sub_)
+  -> Array (Element event payload)
+  -> Element event payload
 sub = elementify "sub"
 
 sub_
-  :: forall event proof payload
-   . IsEvent (event proof)
-  => Array (Element event proof payload)
-  -> Element event proof payload
+  :: forall event payload
+   . IsEvent event
+  => Array (Element event payload)
+  -> Element event payload
 sub_ = sub empty
 instance tagToDekuSub_ :: TagToDeku "sub" Sub_
 
 data Summary_
 
 summary
-  :: forall event proof payload
-   . IsEvent (event proof)
-  => event proof (Attribute Summary_)
-  -> Array (Element event proof payload)
-  -> Element event proof payload
+  :: forall event payload
+   . IsEvent event
+  => event (Attribute Summary_)
+  -> Array (Element event payload)
+  -> Element event payload
 summary = elementify "summary"
 
 summary_
-  :: forall event proof payload
-   . IsEvent (event proof)
-  => Array (Element event proof payload)
-  -> Element event proof payload
+  :: forall event payload
+   . IsEvent event
+  => Array (Element event payload)
+  -> Element event payload
 summary_ = summary empty
 instance tagToDekuSummary_ :: TagToDeku "summary" Summary_
 
 data Sup_
 
 sup
-  :: forall event proof payload
-   . IsEvent (event proof)
-  => event proof (Attribute Sup_)
-  -> Array (Element event proof payload)
-  -> Element event proof payload
+  :: forall event payload
+   . IsEvent event
+  => event (Attribute Sup_)
+  -> Array (Element event payload)
+  -> Element event payload
 sup = elementify "sup"
 
 sup_
-  :: forall event proof payload
-   . IsEvent (event proof)
-  => Array (Element event proof payload)
-  -> Element event proof payload
+  :: forall event payload
+   . IsEvent event
+  => Array (Element event payload)
+  -> Element event payload
 sup_ = sup empty
 instance tagToDekuSup_ :: TagToDeku "sup" Sup_
 
 data Svg_
 
 svg
-  :: forall event proof payload
-   . IsEvent (event proof)
-  => event proof (Attribute Svg_)
-  -> Array (Element event proof payload)
-  -> Element event proof payload
+  :: forall event payload
+   . IsEvent event
+  => event (Attribute Svg_)
+  -> Array (Element event payload)
+  -> Element event payload
 svg = elementify "svg"
 
 svg_
-  :: forall event proof payload
-   . IsEvent (event proof)
-  => Array (Element event proof payload)
-  -> Element event proof payload
+  :: forall event payload
+   . IsEvent event
+  => Array (Element event payload)
+  -> Element event payload
 svg_ = svg empty
 instance tagToDekuSvg_ :: TagToDeku "svg" Svg_
 
 data Table_
 
 table
-  :: forall event proof payload
-   . IsEvent (event proof)
-  => event proof (Attribute Table_)
-  -> Array (Element event proof payload)
-  -> Element event proof payload
+  :: forall event payload
+   . IsEvent event
+  => event (Attribute Table_)
+  -> Array (Element event payload)
+  -> Element event payload
 table = elementify "table"
 
 table_
-  :: forall event proof payload
-   . IsEvent (event proof)
-  => Array (Element event proof payload)
-  -> Element event proof payload
+  :: forall event payload
+   . IsEvent event
+  => Array (Element event payload)
+  -> Element event payload
 table_ = table empty
 instance tagToDekuTable_ :: TagToDeku "table" Table_
 
 data Tbody_
 
 tbody
-  :: forall event proof payload
-   . IsEvent (event proof)
-  => event proof (Attribute Tbody_)
-  -> Array (Element event proof payload)
-  -> Element event proof payload
+  :: forall event payload
+   . IsEvent event
+  => event (Attribute Tbody_)
+  -> Array (Element event payload)
+  -> Element event payload
 tbody = elementify "tbody"
 
 tbody_
-  :: forall event proof payload
-   . IsEvent (event proof)
-  => Array (Element event proof payload)
-  -> Element event proof payload
+  :: forall event payload
+   . IsEvent event
+  => Array (Element event payload)
+  -> Element event payload
 tbody_ = tbody empty
 instance tagToDekuTbody_ :: TagToDeku "tbody" Tbody_
 
 data Td_
 
 td
-  :: forall event proof payload
-   . IsEvent (event proof)
-  => event proof (Attribute Td_)
-  -> Array (Element event proof payload)
-  -> Element event proof payload
+  :: forall event payload
+   . IsEvent event
+  => event (Attribute Td_)
+  -> Array (Element event payload)
+  -> Element event payload
 td = elementify "td"
 
 td_
-  :: forall event proof payload
-   . IsEvent (event proof)
-  => Array (Element event proof payload)
-  -> Element event proof payload
+  :: forall event payload
+   . IsEvent event
+  => Array (Element event payload)
+  -> Element event payload
 td_ = td empty
 instance tagToDekuTd_ :: TagToDeku "td" Td_
 
 data Template_
 
 template
-  :: forall event proof payload
-   . IsEvent (event proof)
-  => event proof (Attribute Template_)
-  -> Array (Element event proof payload)
-  -> Element event proof payload
+  :: forall event payload
+   . IsEvent event
+  => event (Attribute Template_)
+  -> Array (Element event payload)
+  -> Element event payload
 template = elementify "template"
 
 template_
-  :: forall event proof payload
-   . IsEvent (event proof)
-  => Array (Element event proof payload)
-  -> Element event proof payload
+  :: forall event payload
+   . IsEvent event
+  => Array (Element event payload)
+  -> Element event payload
 template_ = template empty
 instance tagToDekuTemplate_ :: TagToDeku "template" Template_
 
 data Textarea_
 
 textarea
-  :: forall event proof payload
-   . IsEvent (event proof)
-  => event proof (Attribute Textarea_)
-  -> Array (Element event proof payload)
-  -> Element event proof payload
+  :: forall event payload
+   . IsEvent event
+  => event (Attribute Textarea_)
+  -> Array (Element event payload)
+  -> Element event payload
 textarea = elementify "textarea"
 
 textarea_
-  :: forall event proof payload
-   . IsEvent (event proof)
-  => Array (Element event proof payload)
-  -> Element event proof payload
+  :: forall event payload
+   . IsEvent event
+  => Array (Element event payload)
+  -> Element event payload
 textarea_ = textarea empty
 instance tagToDekuTextarea_ :: TagToDeku "textarea" Textarea_
 
 data Tfoot_
 
 tfoot
-  :: forall event proof payload
-   . IsEvent (event proof)
-  => event proof (Attribute Tfoot_)
-  -> Array (Element event proof payload)
-  -> Element event proof payload
+  :: forall event payload
+   . IsEvent event
+  => event (Attribute Tfoot_)
+  -> Array (Element event payload)
+  -> Element event payload
 tfoot = elementify "tfoot"
 
 tfoot_
-  :: forall event proof payload
-   . IsEvent (event proof)
-  => Array (Element event proof payload)
-  -> Element event proof payload
+  :: forall event payload
+   . IsEvent event
+  => Array (Element event payload)
+  -> Element event payload
 tfoot_ = tfoot empty
 instance tagToDekuTfoot_ :: TagToDeku "tfoot" Tfoot_
 
 data Th_
 
 th
-  :: forall event proof payload
-   . IsEvent (event proof)
-  => event proof (Attribute Th_)
-  -> Array (Element event proof payload)
-  -> Element event proof payload
+  :: forall event payload
+   . IsEvent event
+  => event (Attribute Th_)
+  -> Array (Element event payload)
+  -> Element event payload
 th = elementify "th"
 
 th_
-  :: forall event proof payload
-   . IsEvent (event proof)
-  => Array (Element event proof payload)
-  -> Element event proof payload
+  :: forall event payload
+   . IsEvent event
+  => Array (Element event payload)
+  -> Element event payload
 th_ = th empty
 instance tagToDekuTh_ :: TagToDeku "th" Th_
 
 data Thead_
 
 thead
-  :: forall event proof payload
-   . IsEvent (event proof)
-  => event proof (Attribute Thead_)
-  -> Array (Element event proof payload)
-  -> Element event proof payload
+  :: forall event payload
+   . IsEvent event
+  => event (Attribute Thead_)
+  -> Array (Element event payload)
+  -> Element event payload
 thead = elementify "thead"
 
 thead_
-  :: forall event proof payload
-   . IsEvent (event proof)
-  => Array (Element event proof payload)
-  -> Element event proof payload
+  :: forall event payload
+   . IsEvent event
+  => Array (Element event payload)
+  -> Element event payload
 thead_ = thead empty
 instance tagToDekuThead_ :: TagToDeku "thead" Thead_
 
 data Time_
 
 time
-  :: forall event proof payload
-   . IsEvent (event proof)
-  => event proof (Attribute Time_)
-  -> Array (Element event proof payload)
-  -> Element event proof payload
+  :: forall event payload
+   . IsEvent event
+  => event (Attribute Time_)
+  -> Array (Element event payload)
+  -> Element event payload
 time = elementify "time"
 
 time_
-  :: forall event proof payload
-   . IsEvent (event proof)
-  => Array (Element event proof payload)
-  -> Element event proof payload
+  :: forall event payload
+   . IsEvent event
+  => Array (Element event payload)
+  -> Element event payload
 time_ = time empty
 instance tagToDekuTime_ :: TagToDeku "time" Time_
 
 data Title_
 
 title
-  :: forall event proof payload
-   . IsEvent (event proof)
-  => event proof (Attribute Title_)
-  -> Array (Element event proof payload)
-  -> Element event proof payload
+  :: forall event payload
+   . IsEvent event
+  => event (Attribute Title_)
+  -> Array (Element event payload)
+  -> Element event payload
 title = elementify "title"
 
 title_
-  :: forall event proof payload
-   . IsEvent (event proof)
-  => Array (Element event proof payload)
-  -> Element event proof payload
+  :: forall event payload
+   . IsEvent event
+  => Array (Element event payload)
+  -> Element event payload
 title_ = title empty
 instance tagToDekuTitle_ :: TagToDeku "title" Title_
 
 data Tr_
 
 tr
-  :: forall event proof payload
-   . IsEvent (event proof)
-  => event proof (Attribute Tr_)
-  -> Array (Element event proof payload)
-  -> Element event proof payload
+  :: forall event payload
+   . IsEvent event
+  => event (Attribute Tr_)
+  -> Array (Element event payload)
+  -> Element event payload
 tr = elementify "tr"
 
 tr_
-  :: forall event proof payload
-   . IsEvent (event proof)
-  => Array (Element event proof payload)
-  -> Element event proof payload
+  :: forall event payload
+   . IsEvent event
+  => Array (Element event payload)
+  -> Element event payload
 tr_ = tr empty
 instance tagToDekuTr_ :: TagToDeku "tr" Tr_
 
 data Track_
 
 track
-  :: forall event proof payload
-   . IsEvent (event proof)
-  => event proof (Attribute Track_)
-  -> Array (Element event proof payload)
-  -> Element event proof payload
+  :: forall event payload
+   . IsEvent event
+  => event (Attribute Track_)
+  -> Array (Element event payload)
+  -> Element event payload
 track = elementify "track"
 
 track_
-  :: forall event proof payload
-   . IsEvent (event proof)
-  => Array (Element event proof payload)
-  -> Element event proof payload
+  :: forall event payload
+   . IsEvent event
+  => Array (Element event payload)
+  -> Element event payload
 track_ = track empty
 instance tagToDekuTrack_ :: TagToDeku "track" Track_
 
 data Tt_
 
 tt
-  :: forall event proof payload
-   . IsEvent (event proof)
-  => event proof (Attribute Tt_)
-  -> Array (Element event proof payload)
-  -> Element event proof payload
+  :: forall event payload
+   . IsEvent event
+  => event (Attribute Tt_)
+  -> Array (Element event payload)
+  -> Element event payload
 tt = elementify "tt"
 
 tt_
-  :: forall event proof payload
-   . IsEvent (event proof)
-  => Array (Element event proof payload)
-  -> Element event proof payload
+  :: forall event payload
+   . IsEvent event
+  => Array (Element event payload)
+  -> Element event payload
 tt_ = tt empty
 instance tagToDekuTt_ :: TagToDeku "tt" Tt_
 
 data U_
 
 u
-  :: forall event proof payload
-   . IsEvent (event proof)
-  => event proof (Attribute U_)
-  -> Array (Element event proof payload)
-  -> Element event proof payload
+  :: forall event payload
+   . IsEvent event
+  => event (Attribute U_)
+  -> Array (Element event payload)
+  -> Element event payload
 u = elementify "u"
 
 u_
-  :: forall event proof payload
-   . IsEvent (event proof)
-  => Array (Element event proof payload)
-  -> Element event proof payload
+  :: forall event payload
+   . IsEvent event
+  => Array (Element event payload)
+  -> Element event payload
 u_ = u empty
 instance tagToDekuU_ :: TagToDeku "u" U_
 
 data Ul_
 
 ul
-  :: forall event proof payload
-   . IsEvent (event proof)
-  => event proof (Attribute Ul_)
-  -> Array (Element event proof payload)
-  -> Element event proof payload
+  :: forall event payload
+   . IsEvent event
+  => event (Attribute Ul_)
+  -> Array (Element event payload)
+  -> Element event payload
 ul = elementify "ul"
 
 ul_
-  :: forall event proof payload
-   . IsEvent (event proof)
-  => Array (Element event proof payload)
-  -> Element event proof payload
+  :: forall event payload
+   . IsEvent event
+  => Array (Element event payload)
+  -> Element event payload
 ul_ = ul empty
 instance tagToDekuUl_ :: TagToDeku "ul" Ul_
 
 data Var_
 
 var
-  :: forall event proof payload
-   . IsEvent (event proof)
-  => event proof (Attribute Var_)
-  -> Array (Element event proof payload)
-  -> Element event proof payload
+  :: forall event payload
+   . IsEvent event
+  => event (Attribute Var_)
+  -> Array (Element event payload)
+  -> Element event payload
 var = elementify "var"
 
 var_
-  :: forall event proof payload
-   . IsEvent (event proof)
-  => Array (Element event proof payload)
-  -> Element event proof payload
+  :: forall event payload
+   . IsEvent event
+  => Array (Element event payload)
+  -> Element event payload
 var_ = var empty
 instance tagToDekuVar_ :: TagToDeku "var" Var_
 
 data Video_
 
 video
-  :: forall event proof payload
-   . IsEvent (event proof)
-  => event proof (Attribute Video_)
-  -> Array (Element event proof payload)
-  -> Element event proof payload
+  :: forall event payload
+   . IsEvent event
+  => event (Attribute Video_)
+  -> Array (Element event payload)
+  -> Element event payload
 video = elementify "video"
 
 video_
-  :: forall event proof payload
-   . IsEvent (event proof)
-  => Array (Element event proof payload)
-  -> Element event proof payload
+  :: forall event payload
+   . IsEvent event
+  => Array (Element event payload)
+  -> Element event payload
 video_ = video empty
 instance tagToDekuVideo_ :: TagToDeku "video" Video_
 
 data Wbr_
 
 wbr
-  :: forall event proof payload
-   . IsEvent (event proof)
-  => event proof (Attribute Wbr_)
-  -> Array (Element event proof payload)
-  -> Element event proof payload
+  :: forall event payload
+   . IsEvent event
+  => event (Attribute Wbr_)
+  -> Array (Element event payload)
+  -> Element event payload
 wbr = elementify "wbr"
 
 wbr_
-  :: forall event proof payload
-   . IsEvent (event proof)
-  => Array (Element event proof payload)
-  -> Element event proof payload
+  :: forall event payload
+   . IsEvent event
+  => Array (Element event payload)
+  -> Element event payload
 wbr_ = wbr empty
 instance tagToDekuWbr_ :: TagToDeku "wbr" Wbr_
 

@@ -12,8 +12,7 @@ import Deku.DOM as D
 import Deku.Interpret (FFIDOMSnapshot, effectfulDOMInterpret, makeFFIDOMSnapshot)
 import Deku.Pursx (PursxElement(..), (~~))
 import Effect (Effect)
-import FRP.Event (create, subscribe)
-import FRP.Event.Phantom (PhantomEvent, Proof0, proof0, toEvent)
+import FRP.Event (Event, create, subscribe)
 import Type.Proxy (Proxy(..))
 import Web.HTML (window)
 import Web.HTML.HTMLDocument (body)
@@ -29,8 +28,8 @@ px = Proxy :: Proxy """<div>
 
 scene
   :: (Boolean -> Effect Unit)
-  -> PhantomEvent Proof0 Boolean
-  -> Element PhantomEvent Proof0 (FFIDOMSnapshot -> Effect Unit)
+  -> Event Boolean
+  -> Element Event (FFIDOMSnapshot -> Effect Unit)
 scene push event =
   D.div empty
       [ px ~~
@@ -54,6 +53,6 @@ main = do
   for_ (toElement <$> b') \b -> do
     ffi <- makeFFIDOMSnapshot
     { push, event } <- create
-    let evt = deku b (scene push (proof0 event)) effectfulDOMInterpret
-    void $ subscribe (toEvent evt) \i -> i ffi
+    let evt = deku b (scene push event) effectfulDOMInterpret
+    void $ subscribe evt \i -> i ffi
     push true

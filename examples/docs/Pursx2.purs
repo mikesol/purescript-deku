@@ -19,7 +19,6 @@ import Deku.Pursx (makePursx', nut, (~~))
 import Deku.Subgraph (SubgraphAction(..), (@@))
 import Effect (Effect)
 import FRP.Event (class IsEvent)
-import FRP.Event.Phantom (PhantomEvent)
 import Type.Proxy (Proxy(..))
 
 px =
@@ -65,9 +64,11 @@ myDom =  Proxy   :: Proxy    """<div>
 """
 
 pursx2
-  :: forall proof payload
-   . (Page -> Effect Unit)
-  -> Element PhantomEvent proof payload
+  :: forall event payload
+   . IsEvent event
+  => Plus event
+  => (Page -> Effect Unit)
+  -> Element event payload
 pursx2 dpage = makePursx' (Proxy :: _ "?") px
   { code: nut
       ( D.pre_

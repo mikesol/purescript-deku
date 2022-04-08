@@ -10,7 +10,6 @@
   , "foldable-traversable"
   , "foreign-object"
   , "newtype"
-  , "phantom-event"
   , "prelude"
   , "profunctor"
   , "random"

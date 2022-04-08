@@ -10,6 +10,7 @@ in      conf
               , "affjax"
               , "aff"
               , "argonaut-core"
+              , "deku-toplevel"
               , "http-methods"
               , "maybe"
               ]

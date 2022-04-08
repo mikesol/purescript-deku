@@ -10,17 +10,17 @@ import FRP.Behavior (ABehavior)
 import Foreign.Object (Object)
 import Web.DOM as Web.DOM
 
-newtype Element event proof payload = Element
-  (String -> DOMInterpret event proof payload -> event proof payload)
+newtype Element event payload = Element
+  (String -> DOMInterpret event payload -> event payload)
 
 newtype SubgraphF env event payload push = SubgraphF
-  (forall proof.
+  (
     -- the pusher for the subgraph
     (push -> Effect Unit)
     -- an event the subgraph can bind to
-    -> event proof (Either env push)
+    -> event (Either env push)
     -- the subgraph
-    -> Element event proof payload
+    -> Element event payload
   )
 
 type Subgraph index env event payload =
@@ -84,8 +84,8 @@ type SendSubgraphToTop index =
   , pos :: Int
   }
 
-newtype DOMInterpret event proof payload = DOMInterpret
-  { ids :: ABehavior (event proof) String
+newtype DOMInterpret event payload = DOMInterpret
+  { ids :: ABehavior event String
   , makeRoot :: MakeRoot -> payload
   , makeElement :: MakeElement -> payload
   , makeText :: MakeText -> payload

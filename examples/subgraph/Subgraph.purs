@@ -20,8 +20,7 @@ import Deku.Interpret (FFIDOMSnapshot, effectfulDOMInterpret, makeFFIDOMSnapshot
 import Deku.Subgraph (SubgraphAction(..))
 import Deku.Subgraph as S
 import Effect (Effect)
-import FRP.Event (create, filterMap, keepLatest, mapAccum, subscribe)
-import FRP.Event.Phantom (PhantomEvent, Proof0, proof0, toEvent)
+import FRP.Event (Event, create, filterMap, keepLatest, mapAccum, subscribe)
 import Web.HTML (window)
 import Web.HTML.HTMLDocument (body)
 import Web.HTML.HTMLElement (toElement)
@@ -29,12 +28,12 @@ import Web.HTML.Window (document)
 
 data HelloWorld = Hello | World
 
-counter :: forall proof a. PhantomEvent proof a → PhantomEvent proof (Tuple a Int)
+counter :: forall a. Event a → Event (Tuple a Int)
 counter event = mapAccum f event 0
   where
   f a b = Tuple (b + 1) (Tuple a b)
 
-dropFirst :: forall proof. PhantomEvent proof ~> PhantomEvent proof
+dropFirst :: Event ~> Event
 dropFirst event = counter event # filterMap
   (\(Tuple a i) -> if i == 0 then Nothing else Just a)
 
@@ -44,8 +43,8 @@ n1 :: Int
 n1 = 10
 scene
   :: (HelloWorld -> Effect Unit)
-  -> PhantomEvent Proof0 HelloWorld
-  -> Element PhantomEvent Proof0 (FFIDOMSnapshot -> (Effect Unit))
+  -> Event HelloWorld
+  -> Element Event (FFIDOMSnapshot -> (Effect Unit))
 scene push event =
   flatten
     [ D.div_
@@ -162,6 +161,6 @@ main = do
   for_ (toElement <$> b') \b -> do
     ffi <- makeFFIDOMSnapshot
     { push, event } <- create
-    let evt = deku b (scene push (proof0 event)) effectfulDOMInterpret
-    void $ subscribe (toEvent evt) \i -> i ffi
+    let evt = deku b (scene push event) effectfulDOMInterpret
+    void $ subscribe evt \i -> i ffi
     push Hello
