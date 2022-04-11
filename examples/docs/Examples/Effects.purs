@@ -19,6 +19,7 @@ import Effect (Effect)
 import Effect.Aff (launchAff_)
 import Effect.Class (liftEffect)
 import FRP.Event (mapAccum)
+import FRP.Event.Class (bang)
 
 data UIAction = Initial | Loading | Result String
 
@@ -71,16 +72,16 @@ main = Initial 🚀 \push event ->
   in
     flatten
       [ D.div_
-          [ D.button (pure (D.OnClick := clickCb push))
+          [ D.button (bang (D.OnClick := clickCb push))
               [ text
-                  ( pure clickText
+                  ( bang clickText
                       <|> (loading $> "Loading...")
                       <|> (result $> clickText)
                   )
               ]
           ]
       , D.div
-          ( (pure (D.Style := "display: none;")) <|>
+          ( (bang (D.Style := "display: none;")) <|>
               ( compact
                   ( mapAccum
                       ( \_ b -> (b && false) /\
@@ -91,5 +92,5 @@ main = Initial 🚀 \push event ->
                   ) $> (D.Style := "display: block;")
               )
           )
-          [ D.pre_ [ D.code_ [ text (pure "" <|> result) ] ] ]
+          [ D.pre_ [ D.code_ [ text (bang "" <|> result) ] ] ]
       ]

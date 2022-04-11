@@ -13,6 +13,7 @@ import Deku.Interpret (FFIDOMSnapshot, effectfulDOMInterpret, makeFFIDOMSnapshot
 import Deku.Pursx (PursxElement(..), (~~))
 import Effect (Effect)
 import FRP.Event (Event, create, subscribe)
+import FRP.Event.Class (bang)
 import Type.Proxy (Proxy(..))
 import Web.HTML (window)
 import Web.HTML.HTMLDocument (body)
@@ -33,11 +34,11 @@ scene
 scene push event =
   D.div empty
       [ px ~~
-          { btn: pure (D.Style := "background-color: rgb(133,151,217)")
+          { btn: bang (D.Style := "background-color: rgb(133,151,217)")
           , somethingElse:
               PursxElement
                 ( D.button
-                    ( pure $ D.OnClick :=
+                    ( bang $ D.OnClick :=
                         (cb (const $ push false))
                     )
                     [ C.text_ "I was dynamically inserted " ]

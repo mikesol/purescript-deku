@@ -12,6 +12,7 @@ import Deku.Example.Docs.Util (scrollToTop)
 import Deku.Pursx (nut, psx, (~~))
 import Effect (Effect)
 import FRP.Event (class IsEvent)
+import FRP.Event.Class (bang)
 import Type.Proxy (Proxy(..))
 
 myDom = Proxy :: Proxy """<div>
@@ -84,5 +85,5 @@ myDom = Proxy :: Proxy """ <>"\"\"\""<>"""<div>
 main :: Effect Unit
 main = unit 🚀 \_ _ -> psx myDom"""]])
   , result: nut (psx myDom)
-  , next: pure (D.OnClick := (cb (const $ dpage Events *> scrollToTop)))
+  , next: bang (D.OnClick := (cb (const $ dpage Events *> scrollToTop)))
   }

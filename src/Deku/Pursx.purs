@@ -12,7 +12,7 @@ import Deku.Core (DOMInterpret(..), Element(..))
 import Deku.DOM (class TagToDeku)
 import Control.Plus (class Plus, empty)
 import FRP.Behavior (sample_)
-import FRP.Event (keepLatest, class IsEvent)
+import FRP.Event.Class (class IsEvent, keepLatest, bang)
 import Prim.Boolean (False, True)
 import Prim.Row as Row
 import Prim.RowList as RL
@@ -21,8 +21,7 @@ import Record (get)
 import Type.Proxy (Proxy(..))
 
 newtype PursxElement event payload = PursxElement (Element event payload)
-nut
-  :: forall event payload. Element event payload -> PursxElement event payload
+nut :: forall event payload. Element event payload -> PursxElement event payload
 nut = PursxElement
 
 pursx :: forall s. Proxy s
@@ -3899,11 +3898,11 @@ makePursx'
 makePursx' verb html r = Element go
   where
   go parent di@(DOMInterpret { makePursx: mpx, ids }) = keepLatest
-    ( (sample_ ids (pure unit)) <#> \me ->
+    ( (sample_ ids (bang unit)) <#> \me ->
         let
           { cache, element } = pursxToElement (Proxy :: _ rl) r
         in
-          ( pure $ mpx
+          ( bang $ mpx
               { id: me
               , parent
               , cache
@@ -3914,3 +3913,4 @@ makePursx' verb html r = Element go
     )
 
 infixr 5 makePursx as ~~
+

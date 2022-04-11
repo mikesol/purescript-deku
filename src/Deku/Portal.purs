@@ -7,6 +7,7 @@ import Data.Foldable (oneOf)
 import Deku.Core (DOMInterpret(..), Element(..), Subgraph)
 import FRP.Behavior (sample_)
 import FRP.Event (class IsEvent, Event, keepLatest)
+import FRP.Event.Class (bang)
 
 type GatewayToSubgraph index env =
   forall event payload
@@ -27,15 +28,15 @@ portal
 portal elt cf = Element go
   where
   go parent di@(DOMInterpret { ids, makePortal }) = keepLatest
-    ( (sample_ ids (pure unit)) <#> \portalId ->
+    ( (sample_ ids (bang unit)) <#> \portalId ->
         let
           cont = cf
             \eb ->
               let
                 gogo par (DOMInterpret { ids: ids2, makeGateway, setPortal }) =
                   keepLatest
-                    ( (sample_ ids2 (pure unit)) <#> \gatewayId ->
-                        pure
+                    ( (sample_ ids2 (bang unit)) <#> \gatewayId ->
+                        bang
                           ( makeGateway
                               { id: gatewayId, parent: par, portal: portalId }
                           )
@@ -46,7 +47,7 @@ portal elt cf = Element go
 
         in
           oneOf $
-            [ pure $ makePortal { id: portalId }
+            [ bang $ makePortal { id: portalId }
             , (let Element y = elt in y) portalId
                 di -- this element's parent is the portal
             , (let Element y = cont in y) parent

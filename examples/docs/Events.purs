@@ -20,6 +20,7 @@ import Deku.Pursx (nut, (~~))
 import Deku.Subgraph (SubgraphAction(..), (@@))
 import Effect (Effect)
 import FRP.Event (class IsEvent, mapAccum)
+import FRP.Event.Class (bang)
 import Type.Proxy (Proxy(..))
 import Web.DOM.Element (fromEventTarget)
 import Web.Event.Event (target)
@@ -86,11 +87,11 @@ main :: Effect Unit
 main = UIShown 🚀 \push event ->
   D.div_
     [ D.button
-        (pure (D.OnClick := cb (const $ push ButtonClicked)))
+        (bang (D.OnClick := cb (const $ push ButtonClicked)))
         [ text_ "Click" ]
     , D.div_
         [ text
-            ( (pure "Val: 0") <|>
+            ( (bang "Val: 0") <|>
                 ( mapAccum (const $ \x -> (x + 1) /\ x)
                     (filter (eq ButtonClicked) event)
                     0
@@ -100,7 +101,7 @@ main = UIShown 🚀 \push event ->
         ]
     , D.div_
         [ D.input
-            ( oneOfMap pure
+            ( oneOfMap bang
                 [ D.Xtype := "range"
                 , D.OnInput := cb \e -> for_
                     ( target e
@@ -115,7 +116,7 @@ main = UIShown 🚀 \push event ->
             []
         , D.div_
             [ text
-                ( (pure "Val: 50") <|>
+                ( (bang "Val: 50") <|>
                     ( filterMap
                         ( case _ of
                             SliderMoved n -> Just n
@@ -133,17 +134,17 @@ main = UIShown 🚀 \push event ->
           ]
       )
   , result: nut
-      ( pure (unit /\ InsertOrUpdate unit) @@ \_ -> mkExists $ SubgraphF \push event' ->
+      ( bang (unit /\ InsertOrUpdate unit) @@ \_ -> mkExists $ SubgraphF \push event' ->
           let
             event = compact (map hush event')
           in
             flatten
               [ D.button
-                  (pure (D.OnClick := cb (const $ push ButtonClicked)))
+                  (bang (D.OnClick := cb (const $ push ButtonClicked)))
                   [ text_ "Click" ]
               , D.div_
                   [ text
-                      ( (pure "Val: 0") <|>
+                      ( (bang "Val: 0") <|>
                           ( mapAccum (const $ \x -> (x + 1) /\ x)
                               (filter (eq ButtonClicked) event)
                               1
@@ -153,7 +154,7 @@ main = UIShown 🚀 \push event ->
                   ]
               , D.div_
                   [ D.input
-                      ( oneOfMap pure
+                      ( oneOfMap bang
                           [ D.Xtype := "range"
                           , D.OnInput := cb \e -> for_
                               ( target e
@@ -168,7 +169,7 @@ main = UIShown 🚀 \push event ->
                       []
                   , D.div_
                       [ text
-                          ( (pure "Val: 50") <|>
+                          ( (bang "Val: 50") <|>
                               ( filterMap
                                   ( case _ of
                                       SliderMoved n -> Just n
@@ -182,5 +183,5 @@ main = UIShown 🚀 \push event ->
                   ]
               ]
       )
-  , next: pure (D.OnClick := (cb (const $ dpage Effects *> scrollToTop)))
+  , next: bang (D.OnClick := (cb (const $ dpage Effects *> scrollToTop)))
   }

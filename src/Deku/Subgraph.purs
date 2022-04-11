@@ -8,6 +8,7 @@ import Data.Tuple.Nested (type (/\), (/\))
 import Deku.Core (DOMInterpret(..), Element(..), Subgraph)
 import FRP.Behavior (sample_)
 import FRP.Event (class IsEvent, keepLatest)
+import FRP.Event.Class (bang)
 
 data SubgraphAction env
   = InsertOrUpdate env
@@ -34,7 +35,7 @@ subgraph mods scenes = Element go
         }
     ) =
     keepLatest $ map
-      ( \id -> pure (makeSubgraph { id, parent, scenes: scenes }) <|>
+      ( \id -> bang (makeSubgraph { id, parent, scenes: scenes }) <|>
           map
             ( \(index /\ instr) -> case instr of
                 Remove -> removeSubgraph { id, pos: hash index, index }
@@ -44,6 +45,6 @@ subgraph mods scenes = Element go
             )
             mods
       )
-      (sample_ ids (pure unit))
+      (sample_ ids (bang unit))
 
 infixr 6 subgraph as @@

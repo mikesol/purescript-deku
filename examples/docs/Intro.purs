@@ -11,6 +11,7 @@ import Deku.Example.Docs.Util (scrollToTop)
 import Deku.Pursx ((~~))
 import Effect (Effect)
 import FRP.Event (class IsEvent)
+import FRP.Event.Class (bang)
 import Type.Proxy (Proxy(..))
 
 px = Proxy :: Proxy """<div>
@@ -33,4 +34,4 @@ px = Proxy :: Proxy """<div>
 
 intro :: forall event payload. IsEvent event => Plus event => (Page -> Effect Unit) -> Element event payload
 intro dpage  = px ~~
-  { next: pure (D.OnClick := (cb (const $ dpage HelloWorld *> scrollToTop))) }
+  { next: bang (D.OnClick := (cb (const $ dpage HelloWorld *> scrollToTop))) }

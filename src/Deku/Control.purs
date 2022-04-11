@@ -16,6 +16,7 @@ import Deku.Attribute (Attribute, unsafeUnAttribute)
 import Deku.Core (DOMInterpret(..), Element(..))
 import FRP.Behavior (sample_)
 import FRP.Event (class IsEvent, Event, keepLatest)
+import FRP.Event.Class (bang)
 import Web.DOM as Web.DOM
 
 ----
@@ -72,9 +73,9 @@ elementify
 elementify tag atts children = Element go
   where
   go parent di@(DOMInterpret { ids }) = keepLatest
-    ( (sample_ ids (pure unit)) <#> \me ->
+    ( (sample_ ids (bang unit)) <#> \me ->
         oneOf $
-          [ pure (unsafeElement di me parent tag)
+          [ bang (unsafeElement di me parent tag)
           , unsafeSetAttribute di me atts
           ]
             <>
@@ -91,15 +92,15 @@ text
 text txt = Element go
   where
   go parent di@(DOMInterpret { ids }) = keepLatest
-    ( (sample_ ids (pure unit)) <#> \me ->
+    ( (sample_ ids (bang unit)) <#> \me ->
         oneOf
-          [ pure (unsafeText di me parent)
+          [ bang (unsafeText di me parent)
           , unsafeSetText di me txt
           ]
     )
 
 text_ :: forall event payload. IsEvent event => String -> Element event payload
-text_ txt = text (pure txt)
+text_ txt = text (bang txt)
 
 deku
   :: forall event payload
@@ -110,16 +111,16 @@ deku
   -> event payload
 deku root elts di@(DOMInterpret { ids, makeRoot }) =
   keepLatest
-    ( (sample_ ids (pure unit)) <#> \me ->
+    ( (sample_ ids (bang unit)) <#> \me ->
         oneOf $
-          [ pure (makeRoot { id: me, root })
+          [ bang (makeRoot { id: me, root })
           , (((\y -> let Element x = y in x) elts) me di)
           ]
     )
 
 many :: forall a b. Event a -> (a -> Array b) -> Event b
 many event f = keepLatest
-  (event <#> \e -> oneOf (map pure (f e)))
+  (event <#> \e -> oneOf (map bang (f e)))
 
 flatten
   :: forall event payload

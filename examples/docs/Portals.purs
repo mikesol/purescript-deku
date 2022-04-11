@@ -20,6 +20,7 @@ import Deku.Pursx (nut, (~~))
 import Deku.Subgraph (SubgraphAction(..), (@@))
 import Effect (Effect)
 import FRP.Event (class IsEvent, Event, mapAccum)
+import FRP.Event.Class (bang)
 import Type.Proxy (Proxy(..))
 
 data UIEvents = UIShown | ButtonClicked | SliderMoved Number
@@ -121,6 +122,7 @@ import Deku.Subgraph (SubgraphAction(..), (@@))
 import Deku.Toplevel ((🚀))
 import Effect (Effect)
 import FRP.Event (class IsEvent)
+import FRP.Event.Class (bang)
 
 data UIEvents = UIShown | ButtonClicked | SliderMoved Number
 derive instance Eq UIEvents
@@ -159,19 +161,19 @@ mySub event gateway0 gateway1 sg = mkExists $ SubgraphF \_ _ -> D.div_
       )
   ]
 
-img0' :: forall event. Applicative event => event (Attribute D.Img_)
-img0' = pure $ D.Src := "https://picsum.photos/200"
-img1' :: forall event. Applicative event => event (Attribute D.Img_)
-img1' = pure $ D.Src := "https://picsum.photos/300"
+img0' :: forall event. IsEvent event => event (Attribute D.Img_)
+img0' = bang $ D.Src := "https://picsum.photos/200"
+img1' :: forall event. IsEvent event => event (Attribute D.Img_)
+img1' = bang $ D.Src := "https://picsum.photos/300"
 
 main :: Effect Unit
 main = false 🚀 \push event ->
   portal (D.img img0' []) \img0 ->
     portal (D.img img1' []) \img1 ->
-      let eventBool = event <|> pure false in
+      let eventBool = event <|> bang false in
       flatten
-        [ ( pure (Sg0 /\ InsertOrUpdate unit)
-              <|> pure (Sg1 /\ InsertOrUpdate unit)
+        [ ( bang (Sg0 /\ InsertOrUpdate unit)
+              <|> bang (Sg1 /\ InsertOrUpdate unit)
           ) @@ mySub eventBool img0 img1
         , D.button (map (\e -> D.OnClick :=
         cb (const (push $ not e))) eventBool)
@@ -181,16 +183,16 @@ main = false 🚀 \push event ->
           ]
       )
   , result: nut
-      ( pure (unit /\ InsertOrUpdate unit) @@ \_ -> mkExists $ SubgraphF \push event' ->
+      ( bang (unit /\ InsertOrUpdate unit) @@ \_ -> mkExists $ SubgraphF \push event' ->
           let
             event = compact (map hush event')
           in
-            portal (D.img (pure $ D.Src := "https://picsum.photos/200") []) \img0 ->
-    portal (D.img (pure $ D.Src := "https://picsum.photos/300") []) \img1 ->
-      let eventBool = event <|> pure false in
+            portal (D.img (bang $ D.Src := "https://picsum.photos/200") []) \img0 ->
+    portal (D.img (bang $ D.Src := "https://picsum.photos/300") []) \img1 ->
+      let eventBool = event <|> bang false in
       flatten
-        [ ( pure (Sg0 /\ InsertOrUpdate unit)
-              <|> pure (Sg1 /\ InsertOrUpdate unit)
+        [ ( bang (Sg0 /\ InsertOrUpdate unit)
+              <|> bang (Sg1 /\ InsertOrUpdate unit)
           ) @@ mySub eventBool img0 img1
         , D.button (map (\e -> D.OnClick := cb (const (push $ not e))) eventBool)
             [ text_ "Shift images between portals" ]

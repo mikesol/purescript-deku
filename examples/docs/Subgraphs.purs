@@ -21,6 +21,7 @@ import Deku.Pursx (nut, (~~))
 import Deku.Subgraph (SubgraphAction(..), (@@))
 import Effect (Effect)
 import FRP.Event (class IsEvent, mapAccum)
+import FRP.Event.Class (bang)
 import Type.Proxy (Proxy(..))
 
 data UIEvents = UIShown | ButtonClicked | SliderMoved Number
@@ -53,16 +54,16 @@ mySub raise Sg0 = mkExists $ SubgraphF \push event ->
     D.div_
       [ D.div_
           [ D.button
-              (pure $ D.OnClick := cb (const $ raise Sg0))
+              (bang $ D.OnClick := cb (const $ raise Sg0))
               [ text_ "Send to B" ]
           , D.div_ [ text (map (append "A: " <<< show) (counter left)) ]
           , D.button
-              (pure $ D.OnClick := cb (const $ push unit))
+              (bang $ D.OnClick := cb (const $ push unit))
               [ text_ "Send to C" ]
           , D.div_
               [ text
                   ( map (append "C: " <<< show)
-                      (map (add 1) (counter right) <|> pure 0)
+                      (map (add 1) (counter right) <|> bang 0)
                   )
               ]
           , D.hr_ []
@@ -76,16 +77,16 @@ mySub raise Sg1 = mkExists $ SubgraphF \push event ->
     D.div_
       [ D.div_
           [ D.button
-              (pure $ D.OnClick := cb (const $ raise Sg1))
+              (bang $ D.OnClick := cb (const $ raise Sg1))
               [ text_ "Send to A" ]
           , D.div_ [ text (map (append "B: " <<< show) (counter (left))) ]
           , D.button
-              (pure $ D.OnClick := cb (const $ push unit))
+              (bang $ D.OnClick := cb (const $ push unit))
               [ text_ "Send to D" ]
           , D.div_
               [ text
                   ( map (append "D: " <<< show)
-                      (map (add 1) (counter right) <|> pure 0)
+                      (map (add 1) (counter right) <|> bang 0)
                   )
               ]
           ]
@@ -197,11 +198,11 @@ mySub raise Sg0 = mkExists $ SubgraphF \push event ->
     D.div_
       [ D.div_
           [ D.button
-              (pure $ D.OnClick := cb (const $ raise Sg0))
+              (bang $ D.OnClick := cb (const $ raise Sg0))
               [ text_ "Send to B" ]
           , D.div_ [ text (map (append "A: " <<< show) (counter left)) ]
           , D.button
-              (pure $ D.OnClick := cb (const $ push unit))
+              (bang $ D.OnClick := cb (const $ push unit))
               [ text_ "Send to C" ]
           , D.div_ [ text (map (append "C: " <<< show) (counter right)) ]
           , D.hr_ []
@@ -214,11 +215,11 @@ mySub raise Sg1 = mkExists $ SubgraphF \push event ->
     D.div_
       [ D.div_
           [ D.button
-              (pure $ D.OnClick := cb (const $ raise Sg0))
+              (bang $ D.OnClick := cb (const $ raise Sg0))
               [ text_ "Send to A" ]
           , D.div_ [ text (map (append "B: " <<< show) (counter (left))) ]
           , D.button
-              (pure $ D.OnClick := cb (const $ push unit))
+              (bang $ D.OnClick := cb (const $ push unit))
               [ text_ "Send to D" ]
           , D.div_ [ text (map (append "D: " <<< show) (counter right)) ]
           ]
@@ -226,8 +227,8 @@ mySub raise Sg1 = mkExists $ SubgraphF \push event ->
 
 main :: Effect Unit
 main = Nothing 🚀 \push event ->
-  ( pure (Sg0 /\ InsertOrUpdate unit)
-      <|> pure (Sg1 /\ InsertOrUpdate unit)
+  ( bang (Sg0 /\ InsertOrUpdate unit)
+      <|> bang (Sg1 /\ InsertOrUpdate unit)
       <|>
         ( compact event # map
             ( case _ of
@@ -240,12 +241,12 @@ main = Nothing 🚀 \push event ->
           ]
       )
   , result: nut
-      ( pure (unit /\ InsertOrUpdate unit) @@ \_ -> mkExists $ SubgraphF \push event' ->
+      ( bang (unit /\ InsertOrUpdate unit) @@ \_ -> mkExists $ SubgraphF \push event' ->
           let
             event = compact (map hush event')
           in
-            ( pure (Sg0 /\ InsertOrUpdate unit)
-                <|> pure (Sg1 /\ InsertOrUpdate unit)
+            ( bang (Sg0 /\ InsertOrUpdate unit)
+                <|> bang (Sg1 /\ InsertOrUpdate unit)
                 <|>
                   ( compact event # map
                       ( case _ of
@@ -255,5 +256,5 @@ main = Nothing 🚀 \push event ->
                   )
             ) @@ mySub (push <<< Just)
       )
-  , next: pure (D.OnClick := (cb (const $ dpage Portals *> scrollToTop)))
+  , next: bang (D.OnClick := (cb (const $ dpage Portals *> scrollToTop)))
   }

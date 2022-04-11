@@ -154,7 +154,7 @@ let additions =
           , "now"
           ]
         , repo = "https://github.com/mikesol/purescript-event.git"
-        , version = "v1.4.2"
+        , version = "v1.5.0"
         }
       , everythings-better-with-variants =
         { dependencies =
@@ -195,7 +195,7 @@ let additions =
           , "web-uievents"
           ]
         , repo = "https://github.com/mikesol/purescript-behaviors.git"
-        , version = "v8.1.0"
+        , version = "v8.2.0"
         }
       , row-options =
         { dependencies =

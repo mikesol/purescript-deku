@@ -3,7 +3,7 @@ module Deku.Example.Subgraph where
 import Prelude
 
 import Control.Alt ((<|>))
-import Control.Alternative (guard)
+import Control.Alternative (empty, guard)
 import Data.Array ((..))
 import Data.Either (Either(..), hush)
 import Data.Exists (mkExists)
@@ -21,6 +21,7 @@ import Deku.Subgraph (SubgraphAction(..))
 import Deku.Subgraph as S
 import Effect (Effect)
 import FRP.Event (Event, create, filterMap, keepLatest, mapAccum, subscribe)
+import FRP.Event.Class (bang)
 import Web.HTML (window)
 import Web.HTML.HTMLDocument (body)
 import Web.HTML.HTMLElement (toElement)
@@ -49,7 +50,7 @@ scene push event =
   flatten
     [ D.div_
         [ D.a
-            ( oneOfMap pure
+            ( oneOfMap bang
                 [ D.Href := "#"
                 , D.OnClick := cb (const $ push Hello)
                 ]
@@ -63,7 +64,7 @@ scene push event =
                   )
             )
             \index -> mkExists $ SubgraphF \hsup tneve -> D.a
-              ( pure (D.Href := "#") <|> pure
+              ( bang (D.Href := "#") <|> bang
                   ( D.OnClick := cb
                       ( const $ do
                           hsup unit
@@ -74,7 +75,7 @@ scene push event =
               [ C.text
                   ( ( counter (tneve # filterMap hush) # map
                         (\(_ /\ y) -> if mod y 2 == 0 then " em " else " me ")
-                    ) <|> (pure " me ") <|>
+                    ) <|> (bang " me ") <|>
                       ( (dropFirst tneve)
                           # filterMap
                             ( case _ of
@@ -88,7 +89,7 @@ scene push event =
         ]
     , D.div_
         [ D.a
-            ( oneOfMap pure
+            ( oneOfMap bang
                 [ D.Href := "#", D.OnClick := cb (const $ push World) ]
             )
             [ C.text_ "click" ]
@@ -102,7 +103,7 @@ scene push event =
                               let
                                 moded = lmt `mod` 10
                               in
-                                oneOfMap pure
+                                oneOfMap bang
                                   ( map
                                       ( \i -> i /\
                                           ( if i < (moded + 1) then
@@ -113,13 +114,13 @@ scene push event =
                                       )
                                       (0 .. 10)
                                   ) <|>
-                                  (guard (moded == 5) $> (5 /\ SendToTop))
+                                  (if (moded == 5) then bang (5 /\ SendToTop) else empty)
                           )
                         # keepLatest
                     )
                 )
                 \index -> mkExists $ SubgraphF \hsup tneve -> D.a
-                  ( pure (D.Href := "#") <|> pure
+                  ( bang (D.Href := "#") <|> bang
                       ( D.OnClick := cb
                           ( const $ do
                               hsup unit
@@ -134,14 +135,14 @@ scene push event =
                                   <> show index
                                   <> " "
                             )
-                        ) <|> (pure (" me" <> show index <> " "))
+                        ) <|> (bang (" me" <> show index <> " "))
                       )
                   ]
             ]
         ]
     ]
   where
-  falsy n = oneOfMap pure (map (\i -> i /\ InsertOrUpdate false) (0 .. n))
+  falsy n = oneOfMap bang (map (\i -> i /\ InsertOrUpdate false) (0 .. n))
   hellos = filterMap
     ( case _ of
         Hello -> Just unit
