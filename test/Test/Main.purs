@@ -11,6 +11,7 @@ import Effect.Class (liftEffect)
 import Effect.Ref (Ref, modify, new, read)
 import FRP.Behavior (Behavior, behavior)
 import FRP.Event (Event, create, fix, makeEvent, sampleOn, subscribe)
+import FRP.Event.Class (bang)
 import Test.Spec (describe, it)
 import Test.Spec.Assertions (shouldEqual)
 import Test.Spec.Reporter (consoleReporter)
@@ -33,7 +34,7 @@ counter :: forall a. Event a -> Event (Tuple a Int)
 counter event = fix
   ( \i ->
       let
-        output = sampleOn (i <|> pure 0) (Tuple <$> event)
+        output = sampleOn (i <|> bang 0) (Tuple <$> event)
       in
         { input: map (add 1 <<< snd) output, output }
   )
