@@ -26,6 +26,7 @@ import Deku.Interpret (effectfulDOMInterpret, makeFFIDOMSnapshot)
 import Deku.Subgraph (SubgraphAction(..), subgraph)
 import Effect (Effect)
 import FRP.Event (class IsEvent, create, keepLatest, mapAccum, subscribe)
+import FRP.Event.Class (bang)
 import Web.HTML (window)
 import Web.HTML.HTMLDocument (body)
 import Web.HTML.HTMLElement (toElement)
@@ -44,14 +45,14 @@ scene push event =
         $ map
           ( \(x /\ y /\ z) -> D.span_
               [ D.a
-                  ( oneOfMap pure
+                  ( oneOfMap bang
                       [ D.OnClick := cb (const $ push x)
                       , D.Style := "cursor:pointer;"
                       ]
                   )
                   [ text_ y ]
               , D.span
-                  ( pure $ D.Style :=
+                  ( bang $ D.Style :=
                       if z then ""
                       else "display:none;"
                   )
@@ -93,8 +94,8 @@ scene push event =
               ( \(prev /\ cur) ->
                   ( case prev of
                       Nothing -> empty
-                      Just x -> pure (x /\ Remove)
-                  ) <|> pure (cur /\ InsertOrUpdate unit)
+                      Just x -> bang (x /\ Remove)
+                  ) <|> bang (cur /\ InsertOrUpdate unit)
               )
             # keepLatest
         )

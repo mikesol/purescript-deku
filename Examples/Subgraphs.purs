@@ -17,6 +17,7 @@ import Deku.Subgraph (SubgraphAction(..), (@@))
 import Deku.Toplevel ((🚀))
 import Effect (Effect)
 import FRP.Event (class IsEvent, mapAccum)
+import FRP.Event.Class (bang)
 
 data UIevents = UIShown | ButtonClicked | SliderMoved Number
 derive instance Eq UIevents
@@ -48,11 +49,11 @@ mySub raise Sg0 = mkExists $ SubgraphF \push event ->
     D.div_
       [ D.div_
           [ D.button
-              (pure $ D.OnClick := cb (const $ raise Sg0))
+              (bang $ D.OnClick := cb (const $ raise Sg0))
               [ text_ "Send to B" ]
           , D.div_ [ text (map (append "A: " <<< show) (counter left)) ]
           , D.button
-              (pure $ D.OnClick := cb (const $ push unit))
+              (bang $ D.OnClick := cb (const $ push unit))
               [ text_ "Send to C" ]
           , D.div_ [ text (map (append "C: " <<< show) (counter right)) ]
           , D.hr_ []
@@ -65,11 +66,11 @@ mySub raise Sg1 = mkExists $ SubgraphF \push event ->
     D.div_
       [ D.div_
           [ D.button
-              (pure $ D.OnClick := cb (const $ raise Sg0))
+              (bang $ D.OnClick := cb (const $ raise Sg0))
               [ text_ "Send to A" ]
           , D.div_ [ text (map (append "B: " <<< show) (counter (left))) ]
           , D.button
-              (pure $ D.OnClick := cb (const $ push unit))
+              (bang $ D.OnClick := cb (const $ push unit))
               [ text_ "Send to D" ]
           , D.div_ [ text (map (append "D: " <<< show) (counter right)) ]
           ]
@@ -77,8 +78,8 @@ mySub raise Sg1 = mkExists $ SubgraphF \push event ->
 
 main :: Effect Unit
 main = Nothing 🚀 \push event ->
-  ( pure (Sg0 /\ InsertOrUpdate unit)
-      <|> pure (Sg1 /\ InsertOrUpdate unit)
+  ( bang (Sg0 /\ InsertOrUpdate unit)
+      <|> bang (Sg1 /\ InsertOrUpdate unit)
       <|>
         ( compact event # map
             ( case _ of

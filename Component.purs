@@ -12,6 +12,7 @@ import Deku.Example.Docs.Util (scrollToTop)
 import Deku.Pursx (nut, (~~))
 import Effect (Effect)
 import FRP.Event (class IsEvent)
+import FRP.Event.Class (bang)
 import Type.Proxy (Proxy(..))
 
 px = Proxy :: Proxy """<div>
@@ -33,9 +34,9 @@ px = Proxy :: Proxy """<div>
   <p>The encoding of elements in Deku is not unlike that in React or Halogen. It's a tree, like the Deku tree. So go nuts!</p>
 
   <h1>Attributes</h1>
-  <p>Elements postfixed with an underscore do not take attributes. That is un-fun, so in this example, you see attributes as well! Attributes like an element's style or id are specified as the first argument to an underscore-less element. Note that, if you have multiple attributes, you have to separate them with <code>alt</code>, aka "the tie fighter."</p>
+  <p>Elements postfixed with an underscore do not take attributes. That is un-fun, so in this example, you see attributes as well! Attributes like an element's style or id are specified as the first argument to an underscore-less element. Note that, if you have multiple attributes, you have to separate them with <code>alt</code>, aka "the tie fighter." Also, the many <code>bang</code>-s you'll see around attributes are from the <code>purescript-event</code> library. Bang means <i>right now</i>, which is the answer to the question "When should we set this attribute?"</p>
 
-  <p>As an example, we made the input a range slider using <code>pure (Xtype := "range")</code>. Unlike Halogen, there are no checks to make sure you give a valid string. So if you want your range slider to have the value of true, you can. One day, I may build some validators, but passing strings works decently well here.</p>
+  <p>As an example, we made the input a range slider using <code>bang (Xtype := "range")</code>. Unlike Halogen, there are no checks to make sure you give a valid string. So if you want your range slider to have the value of true, you can. One day, I may build some validators, but passing strings works decently well here.</p>
 
   <h2>Next steps</h2>
   <p>In this section, we built a simple component. In the next section, we'll recreate the exact same element using a different input syntax called <a ~next~ style="cursor:pointer;">Pursx</a>.</p>
@@ -62,15 +63,15 @@ main = unit 🚀 \_ _ ->
     [ D.button_ [ text_ "I do nothing" ]
     , D.ul_ $ map (D.li_ <<< pure <<< text_) [ "A", "B", "C" ]
     , D.div_
-        [ D.a (pure $ D.Href := "https://example.com")
+        [ D.a (bang $ D.Href := "https://example.com")
             [ text_ "foo " ]
         , D.i_ [ text_ " bar " ]
-        , D.span (pure $ D.Style := "font-weight: 800;")
+        , D.span (bang $ D.Style := "font-weight: 800;")
             [ text_ " baz" ]
         ]
     , D.div_
         [ D.div_
-            [ D.div_ [ D.input (pure $ D.Xtype := "range") [] ]
+            [ D.div_ [ D.input (bang $ D.Xtype := "range") [] ]
             ]
         ]
     ]"""
@@ -81,18 +82,18 @@ main = unit 🚀 \_ _ ->
           [ D.button_ [ text_ "I do nothing" ]
           , D.ul_ $ map (D.li_ <<< pure <<< text_) [ "A", "B", "C" ]
           , D.div_
-              [ D.a (pure $ D.Href := "https://example.com")
+              [ D.a (bang $ D.Href := "https://example.com")
                   [ text_ "foo " ]
               , D.i_ [ text_ " bar " ]
-              , D.span (pure $ D.Style := "font-weight: 800;")
+              , D.span (bang $ D.Style := "font-weight: 800;")
                   [ text_ " baz" ]
               ]
           , D.div_
               [ D.div_
-                  [ D.div_ [ D.input (pure $ D.Xtype := "range") [] ]
+                  [ D.div_ [ D.input (bang $ D.Xtype := "range") [] ]
                   ]
               ]
           ]
       )
-    , next: pure (D.OnClick := (cb (const $ dpage PURSX1 *> scrollToTop)))
+    , next: bang (D.OnClick := (cb (const $ dpage PURSX1 *> scrollToTop)))
   }

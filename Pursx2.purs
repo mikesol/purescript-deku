@@ -19,6 +19,7 @@ import Deku.Pursx (makePursx', nut, (~~))
 import Deku.Subgraph (SubgraphAction(..), (@@))
 import Effect (Effect)
 import FRP.Event (class IsEvent)
+import FRP.Event.Class (bang)
 import Type.Proxy (Proxy(..))
 
 px =
@@ -112,12 +113,12 @@ myDom = Proxy :: Proxy """ <> "\"\"\""
 
 main :: Effect Unit
 main = Nothing 🚀 \push event -> myDom ~~
-  { myli: pure (D.Style := "background-color:rgb(200,240,210);")
+  { myli: bang (D.Style := "background-color:rgb(200,240,210);")
   , somethingNew: nut
-      ( D.button (pure (D.OnClick := cb (const $ push (Just unit))))
+      ( D.button (bang (D.OnClick := cb (const $ push (Just unit))))
           [ text
               $ (compact event $> "Thanks for clicking me!") <|>
-                  pure "I was dynamically inserted"
+                  bang "I was dynamically inserted"
           ]
       )
   }"""
@@ -125,20 +126,20 @@ main = Nothing 🚀 \push event -> myDom ~~
           ]
       )
   , result: nut
-      ( pure (unit /\ InsertOrUpdate unit) @@ \_ -> mkExists $ SubgraphF \push event' ->
+      ( bang (unit /\ InsertOrUpdate unit) @@ \_ -> mkExists $ SubgraphF \push event' ->
           let
             event = compact (map hush event')
           in
             myDom ~~
-              { myli: pure (D.Style := "background-color:rgb(200,240,210);")
+              { myli: bang (D.Style := "background-color:rgb(200,240,210);")
               , somethingNew: nut
-                  ( D.button (pure (D.OnClick := cb (const $ push (Just unit))))
+                  ( D.button (bang (D.OnClick := cb (const $ push (Just unit))))
                       [ text
                           $ (compact event $> "Thanks for clicking me!") <|>
-                            pure "I was dynamically inserted"
+                            bang "I was dynamically inserted"
                       ]
                   )
               }
       )
-  , next: pure (D.OnClick := (cb (const $ dpage Subgraph *> scrollToTop)))
+  , next: bang (D.OnClick := (cb (const $ dpage Subgraph *> scrollToTop)))
   }

@@ -13,6 +13,7 @@ import Deku.DOM as D
 import Deku.Toplevel ((🚀))
 import Effect (Effect)
 import FRP.Event (mapAccum)
+import FRP.Event.Class (bang)
 import Web.DOM.Element (fromEventTarget)
 import Web.Event.Event (target)
 import Web.HTML.HTMLInputElement (fromElement, valueAsNumber)
@@ -24,11 +25,11 @@ main :: Effect Unit
 main = UIShown 🚀 \push event ->
   D.div_
     [ D.button
-        (pure (D.OnClick := cb (const $ push ButtonClicked)))
+        (bang (D.OnClick := cb (const $ push ButtonClicked)))
         [ text_ "Click" ]
     , D.div_
         [ text
-            ( (pure "Val: 0") <|>
+            ( (bang "Val: 0") <|>
                 ( mapAccum (const $ \x -> (x + 1) /\ x)
                     (filter (eq ButtonClicked) event)
                     0
@@ -38,7 +39,7 @@ main = UIShown 🚀 \push event ->
         ]
     , D.div_
         [ D.input
-            ( oneOfMap pure
+            ( oneOfMap bang
                 [ D.Xtype := "range"
                 , D.OnInput := cb \e -> for_
                     ( target e
@@ -53,7 +54,7 @@ main = UIShown 🚀 \push event ->
             []
         , D.div_
             [ text
-                ( (pure "Val: 50") <|>
+                ( (bang "Val: 50") <|>
                     ( filterMap
                         ( case _ of
                             SliderMoved n -> Just n

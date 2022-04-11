@@ -5,13 +5,13 @@ import Prelude
 import Control.Plus (class Plus)
 import Deku.Attribute (cb, (:=))
 import Deku.Control (text_)
-import Deku.Core (Element, Element)
+import Deku.Core (Element)
 import Deku.DOM as D
 import Deku.Example.Docs.Types (Page(..))
 import Deku.Example.Docs.Util (scrollToTop)
 import Deku.Pursx (nut, (~~))
 import Effect (Effect)
-import FRP.Event (class IsEvent)
+import FRP.Event.Class (bang, class IsEvent)
 import Type.Proxy (Proxy(..))
 
 px = Proxy :: Proxy """<div>
@@ -54,5 +54,5 @@ import Effect (Effect)
 main :: Effect Unit
 main = unit 🚀 \_ _ -> text_ "Hello world""""]])
   , result: nut (D.div_ [text_ "Hello world"])
-  , next: pure (D.OnClick := (cb (const $ dpage SimpleComponent *> scrollToTop)))
+  , next: bang (D.OnClick := (cb (const $ dpage SimpleComponent *> scrollToTop)))
   }

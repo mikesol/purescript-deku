@@ -25,6 +25,7 @@ import Effect (Effect)
 import Effect.Aff (launchAff_)
 import Effect.Class (liftEffect)
 import FRP.Event (class IsEvent, mapAccum)
+import FRP.Event.Class (bang)
 import Type.Proxy (Proxy(..))
 
 data UIAction = Initial | Loading | Result String
@@ -151,16 +152,16 @@ main = Initial 🚀 \push event ->
   in
     flatten
       [ D.div_
-          [ D.button (pure (D.OnClick := clickCb push))
+          [ D.button (bang (D.OnClick := clickCb push))
               [ text
-                  ( pure clickText
+                  ( bang clickText
                       <|> (loading $> "Loading...")
                       <|> (result $> clickText)
                   )
               ]
           ]
       , D.div
-          ( (pure (D.Style := "display: none;")) <|>
+          ( (bang (D.Style := "display: none;")) <|>
               ( compact
                   ( mapAccum
                       ( \_ b -> (b && false) /\
@@ -171,11 +172,11 @@ main = Initial 🚀 \push event ->
                   ) $> (D.Style := "display: block;")
               )
           )
-          [ D.pre_ [ D.code_ [ text (pure "" <|> result) ] ] ]
+          [ D.pre_ [ D.code_ [ text (bang "" <|> result) ] ] ]
       ]
 """]])
   , result: nut
-      ( pure (unit /\ InsertOrUpdate unit) @@ \_ -> mkExists $ SubgraphF \push event' ->
+      ( bang (unit /\ InsertOrUpdate unit) @@ \_ -> mkExists $ SubgraphF \push event' ->
           let
             event = compact (map hush event')
             loadingOrResult = filterMap
@@ -200,16 +201,16 @@ main = Initial 🚀 \push event ->
           in
             flatten
               [ D.div_
-                  [ D.button (pure (D.OnClick := clickCb push))
+                  [ D.button (bang (D.OnClick := clickCb push))
                       [ text
-                          ( pure clickText
+                          ( bang clickText
                               <|> (loading $> "Loading...")
                               <|> (result $> clickText)
                           )
                       ]
                   ]
               , D.div
-                  ( (pure (D.Style := "display: none;")) <|>
+                  ( (bang (D.Style := "display: none;")) <|>
                       ( compact
                           ( mapAccum
                               ( \_ b -> (b && false) /\
@@ -220,7 +221,7 @@ main = Initial 🚀 \push event ->
                           ) $> (D.Style := "display: block;")
                       )
                   )
-                  [ D.pre_ [ D.code_ [ text (pure "" <|> result) ] ] ]
+                  [ D.pre_ [ D.code_ [ text (bang "" <|> result) ] ] ]
               ])
-  , next: pure (D.OnClick := (cb (const $ dpage PURSX2 *> scrollToTop)))
+  , next: bang (D.OnClick := (cb (const $ dpage PURSX2 *> scrollToTop)))
   }
