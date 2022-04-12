@@ -52,7 +52,7 @@ px = Proxy :: Proxy
   <p>If every attribute responded to every event, Deku would become very slow. Thankfully, there's a solution. `Event` implements the `Filterable` typeclass, and when you filter an `Event`, you mute the filtered-out parts for downstream consumers.</p>
 
   <h2>Next steps</h2>
-  <p>In this section, saw how to react to events using the looping function in combination with change. In the next section, we'll use a similar mechanism to deal with arbitrary <a ~next~ style="cursor:pointer;">effects</a>.</p>
+  <p>In this section, saw how to react to events. In the next section, we'll use a similar mechanism to deal with arbitrary <a ~next~ style="cursor:pointer;">effects</a>.</p>
 </div>"""
 
 events :: forall event payload. IsEvent event => Plus event => (Page -> Effect Unit) -> Element event payload
