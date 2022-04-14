@@ -10,7 +10,7 @@ import Data.Tuple (snd)
 import Data.Tuple.Nested ((/\))
 import Deku.Attribute (cb, (:=))
 import Deku.Control (flatten, text_)
-import Deku.Core (Element, Element, Subgraph, SubgraphF(..))
+import Deku.Core (Element, Subgraph, SubgraphF(..))
 import Deku.DOM as D
 import Deku.Example.Docs.Types (Page)
 import Deku.Portal (portal)

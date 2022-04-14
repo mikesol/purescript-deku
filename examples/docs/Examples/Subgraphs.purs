@@ -4,7 +4,7 @@ import Prelude
 
 import Control.Alt ((<|>))
 import Data.Exists (mkExists)
-import Data.Filterable (class Filterable, compact, filter)
+import Data.Filterable (class Filterable, compact, filterMap)
 import Data.Hashable (class Hashable, hash)
 import Data.Maybe (Maybe(..))
 import Data.Tuple (snd)
@@ -45,10 +45,10 @@ mySub
   -> Subgraph Sgs event payload
 mySub oevent raise Sg0 = mkExists $ SubgraphF \push event ->
   let
-    left = filter
+    left = filterMap
       ( case _ of
-          Sg0 -> false
-          Sg1 -> true
+          Sg0 -> Nothing
+          Sg1 -> Just unit
       )
       oevent
     right = event
@@ -58,20 +58,20 @@ mySub oevent raise Sg0 = mkExists $ SubgraphF \push event ->
           [ D.button
               (bang $ D.OnClick := cb (const $ raise Sg0))
               [ text_ "Send to B" ]
-          , D.div_ [ text (map (append "A: " <<< show) (counter left)) ]
+          , D.div_ [ text (map (append "A: " <<< show) (counter (left <|> bang unit))) ]
           , D.button
               (bang $ D.OnClick := cb (const $ push unit))
               [ text_ "Send to C" ]
-          , D.div_ [ text (map (append "C: " <<< show) (counter right)) ]
+          , D.div_ [ text (map (append "C: " <<< show) (counter (right <|> bang unit))) ]
           , D.hr_ []
           ]
       ]
 mySub oevent raise Sg1 = mkExists $ SubgraphF \push event ->
   let
-    left = filter
+    left = filterMap
       ( case _ of
-          Sg0 -> true
-          Sg1 -> false
+          Sg0 -> Just unit
+          Sg1 -> Nothing
       )
       oevent
     right = event
@@ -79,13 +79,13 @@ mySub oevent raise Sg1 = mkExists $ SubgraphF \push event ->
     D.div_
       [ D.div_
           [ D.button
-              (bang $ D.OnClick := cb (const $ raise Sg0))
+              (bang $ D.OnClick := cb (const $ raise Sg1))
               [ text_ "Send to A" ]
-          , D.div_ [ text (map (append "B: " <<< show) (counter (left))) ]
+          , D.div_ [ text (map (append "B: " <<< show) (counter (left <|> bang unit))) ]
           , D.button
               (bang $ D.OnClick := cb (const $ push unit))
               [ text_ "Send to D" ]
-          , D.div_ [ text (map (append "D: " <<< show) (counter right)) ]
+          , D.div_ [ text (map (append "D: " <<< show) (counter (right <|> bang unit))) ]
           ]
       ]
 

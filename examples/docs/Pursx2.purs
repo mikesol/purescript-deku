@@ -5,7 +5,6 @@ import Prelude
 import Control.Alt ((<|>))
 import Control.Plus (class Plus)
 import Data.Compactable (compact)
-import Data.Either (hush)
 import Data.Exists (mkExists)
 import Data.Maybe (Maybe(..))
 import Data.Tuple.Nested ((/\))
