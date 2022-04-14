@@ -4,15 +4,13 @@ import Prelude
 
 import Control.Alt ((<|>))
 import Control.Plus (class Plus)
-import Data.Either (hush)
 import Data.Exists (mkExists)
-import Data.Filterable (compact)
 import Data.Hashable (class Hashable, hash)
 import Data.Tuple (snd)
 import Data.Tuple.Nested ((/\))
 import Deku.Attribute (cb, (:=))
 import Deku.Control (flatten, text_)
-import Deku.Core (Element, Element, Subgraph, SubgraphF(..))
+import Deku.Core (Element, Subgraph, SubgraphF(..))
 import Deku.DOM as D
 import Deku.Example.Docs.Types (Page)
 import Deku.Portal (portal)
@@ -42,11 +40,11 @@ counter event = map snd $ mapAccum f event 0
 
 
 mySub
-  :: forall env event payload
+  :: forall event payload
    . IsEvent event => event Boolean
   -> (event Boolean -> Element event payload)
   -> (event Boolean -> Element event payload)
-  -> Subgraph Sgs env event payload
+  -> Subgraph Sgs event payload
 mySub event gateway0 gateway1 sg = mkExists $ SubgraphF \_ _ -> D.div_
   [ gateway0
       ( map
@@ -100,7 +98,7 @@ px =  Proxy :: Proxy """<div>
 </div>"""
 
 portals :: forall event payload. IsEvent event => Plus event => (Page -> Effect Unit) -> Element event payload
-portals dpage = px ~~
+portals _ = px ~~
   { code: nut
       ( D.pre_
           [ D.code_
@@ -137,11 +135,11 @@ instance Hashable Sgs where
   hash = show >>> hash
 
 mySub
-  :: forall env event payload
+  :: forall event payload
    . IsEvent event => event Boolean
   -> (event Boolean -> Element event payload)
   -> (event Boolean -> Element event payload)
-  -> Subgraph Sgs env event payload
+  -> Subgraph Sgs event payload
 mySub event gateway0 gateway1 sg = mkExists $ SubgraphF \_ _ -> D.div_
   [ gateway0
       ( map
@@ -172,8 +170,8 @@ main = false 🚀 \push event ->
     portal (D.img img1' []) \img1 ->
       let eventBool = event <|> bang false in
       flatten
-        [ ( bang (Sg0 /\ InsertOrUpdate unit)
-              <|> bang (Sg1 /\ InsertOrUpdate unit)
+        [ ( bang (Sg0 /\ Insert)
+              <|> bang (Sg1 /\ Insert)
           ) @@ mySub eventBool img0 img1
         , D.button (map (\e -> D.OnClick :=
         cb (const (push $ not e))) eventBool)
@@ -183,16 +181,13 @@ main = false 🚀 \push event ->
           ]
       )
   , result: nut
-      ( bang (unit /\ InsertOrUpdate unit) @@ \_ -> mkExists $ SubgraphF \push event' ->
-          let
-            event = compact (map hush event')
-          in
+      ( bang (unit /\ Insert) @@ \_ -> mkExists $ SubgraphF \push event ->
             portal (D.img (bang $ D.Src := "https://picsum.photos/200") []) \img0 ->
     portal (D.img (bang $ D.Src := "https://picsum.photos/300") []) \img1 ->
       let eventBool = event <|> bang false in
       flatten
-        [ ( bang (Sg0 /\ InsertOrUpdate unit)
-              <|> bang (Sg1 /\ InsertOrUpdate unit)
+        [ ( bang (Sg0 /\ Insert)
+              <|> bang (Sg1 /\ Insert)
           ) @@ mySub eventBool img0 img1
         , D.button (map (\e -> D.OnClick := cb (const (push $ not e))) eventBool)
             [ text_ "Shift images between portals" ]

@@ -4,9 +4,8 @@ import Prelude
 
 import Control.Alt ((<|>))
 import Control.Plus (class Plus)
-import Data.Either (hush)
 import Data.Exists (mkExists)
-import Data.Filterable (compact, filter, filterMap)
+import Data.Filterable (filter, filterMap)
 import Data.Foldable (for_, oneOfMap)
 import Data.Maybe (Maybe(..))
 import Data.Tuple.Nested ((/\))
@@ -134,10 +133,7 @@ main = UIShown 🚀 \push event ->
           ]
       )
   , result: nut
-      ( bang (unit /\ InsertOrUpdate unit) @@ \_ -> mkExists $ SubgraphF \push event' ->
-          let
-            event = compact (map hush event')
-          in
+      ( bang (unit /\ Insert) @@ \_ -> mkExists $ SubgraphF \push event ->
             flatten
               [ D.button
                   (bang (D.OnClick := cb (const $ push ButtonClicked)))

@@ -2,7 +2,6 @@ module Deku.Core where
 
 import Prelude
 
-import Data.Either (Either)
 import Data.Exists (Exists)
 import Deku.Attribute (AttributeValue)
 import Effect (Effect)
@@ -13,18 +12,18 @@ import Web.DOM as Web.DOM
 newtype Element event payload = Element
   (String -> DOMInterpret event payload -> event payload)
 
-newtype SubgraphF env event payload push = SubgraphF
+newtype SubgraphF event payload push = SubgraphF
   (
     -- the pusher for the subgraph
     (push -> Effect Unit)
     -- an event the subgraph can bind to
-    -> event (Either env push)
+    -> event push
     -- the subgraph
     -> Element event payload
   )
 
-type Subgraph index env event payload =
-  index -> Exists (SubgraphF env event payload)
+type Subgraph index event payload =
+  index -> Exists (SubgraphF event payload)
 
 type MakeElement =
   { id :: String
@@ -42,10 +41,10 @@ type SetAttribute =
   , key :: String
   , value :: AttributeValue
   }
-type MakeSubgraph index env event payload =
+type MakeSubgraph index event payload =
   { id :: String
   , parent :: String
-  , scenes :: Subgraph index env event payload
+  , scenes :: Subgraph index event payload
   }
 type MakePortal =
   { id :: String
@@ -66,10 +65,9 @@ type MakePursx =
   , verb :: String
   , cache :: Object Boolean
   }
-type InsertOrUpdateSubgraph index env =
+type InsertSubgraph index =
   { id :: String
   , index :: index
-  , env :: env
   , pos :: Int
   }
 type RemoveSubgraph index =
@@ -94,8 +92,8 @@ newtype DOMInterpret event payload = DOMInterpret
   , makeGateway :: MakeGateway -> payload
   , setPortal :: SetPortal -> payload
   , makeSubgraph ::
-      forall index env
-       . MakeSubgraph index env event payload
+      forall index
+       . MakeSubgraph index event payload
       -> payload
   , setAttribute :: SetAttribute -> payload
   , sendSubgraphToTop ::
@@ -106,9 +104,9 @@ newtype DOMInterpret event payload = DOMInterpret
       forall index
        . RemoveSubgraph index
       -> payload
-  , insertOrUpdateSubgraph ::
-      forall index env
-       . InsertOrUpdateSubgraph index env
+  , insertSubgraph ::
+      forall index
+       . InsertSubgraph index
       -> payload
   , setText :: SetText -> payload
   }

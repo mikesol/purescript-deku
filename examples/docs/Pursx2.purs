@@ -5,7 +5,6 @@ import Prelude
 import Control.Alt ((<|>))
 import Control.Plus (class Plus)
 import Data.Compactable (compact)
-import Data.Either (hush)
 import Data.Exists (mkExists)
 import Data.Maybe (Maybe(..))
 import Data.Tuple.Nested ((/\))
@@ -126,20 +125,17 @@ main = Nothing 🚀 \push event -> myDom ~~
           ]
       )
   , result: nut
-      ( bang (unit /\ InsertOrUpdate unit) @@ \_ -> mkExists $ SubgraphF \push event' ->
-          let
-            event = compact (map hush event')
-          in
-            myDom ~~
-              { myli: bang (D.Style := "background-color:rgb(200,240,210);")
-              , somethingNew: nut
-                  ( D.button (bang (D.OnClick := cb (const $ push (Just unit))))
-                      [ text
-                          $ (compact event $> "Thanks for clicking me!") <|>
-                            bang "I was dynamically inserted"
-                      ]
-                  )
-              }
+      ( bang (unit /\ Insert) @@ \_ -> mkExists $ SubgraphF \push event ->
+          myDom ~~
+            { myli: bang (D.Style := "background-color:rgb(200,240,210);")
+            , somethingNew: nut
+                ( D.button (bang (D.OnClick := cb (const $ push (Just unit))))
+                    [ text
+                        $ (compact event $> "Thanks for clicking me!") <|>
+                          bang "I was dynamically inserted"
+                    ]
+                )
+            }
       )
   , next: bang (D.OnClick := (cb (const $ dpage Subgraph *> scrollToTop)))
   }
