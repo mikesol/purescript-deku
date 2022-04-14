@@ -5246,13 +5246,15 @@ var PS = {};
       return {
           pursxToElement: function (v) {
               return function (v1) {
-                  return {
-                      cache: Foreign_Object.empty,
-                      element: function (v2) {
-                          return function (v3) {
-                              return Control_Plus.empty(dictPlus);
-                          };
-                      }
+                  return function (v2) {
+                      return {
+                          cache: Foreign_Object.empty,
+                          element: function (v3) {
+                              return function (v4) {
+                                  return Control_Plus.empty(dictPlus);
+                              };
+                          }
+                      };
                   };
               };
           },
@@ -5268,22 +5270,24 @@ var PS = {};
       return function (dictPursxToElement) {
           return function (dictIsSymbol) {
               return {
-                  pursxToElement: function (v) {
-                      return function (r) {
-                          var v1 = pursxToElement(dictPursxToElement)(Type_Proxy["Proxy"].value)(r);
-                          return {
-                              cache: Foreign_Object.insert(Data_Symbol.reflectSymbol(dictIsSymbol)(Type_Proxy["Proxy"].value))(true)(v1.cache),
-                              element: function (parent) {
-                                  return function (v2) {
-                                      return Control_Alt.alt((dictPursxToElement.Plus0()).Alt0())(Data_Functor.map(((dictPursxToElement.Plus0()).Alt0()).Functor0())(Data_Profunctor.lcmap(Data_Profunctor.profunctorFn)(Deku_Attribute.unsafeUnAttribute)(function (v3) {
-                                          return v2.setAttribute({
-                                              id: Data_Symbol.reflectSymbol(dictIsSymbol)(Type_Proxy["Proxy"].value),
-                                              key: v3.key,
-                                              value: v3.value
-                                          });
-                                      }))(Record.get(dictIsSymbol)()(Type_Proxy["Proxy"].value)(r)))(v1.element(parent)(v2));
-                                  };
-                              }
+                  pursxToElement: function (pxScope) {
+                      return function (v) {
+                          return function (r) {
+                              var v1 = pursxToElement(dictPursxToElement)(pxScope)(Type_Proxy["Proxy"].value)(r);
+                              return {
+                                  cache: Foreign_Object.insert(Data_Symbol.reflectSymbol(dictIsSymbol)(Type_Proxy["Proxy"].value))(true)(v1.cache),
+                                  element: function (parent) {
+                                      return function (v2) {
+                                          return Control_Alt.alt((dictPursxToElement.Plus0()).Alt0())(Data_Functor.map(((dictPursxToElement.Plus0()).Alt0()).Functor0())(Data_Profunctor.lcmap(Data_Profunctor.profunctorFn)(Deku_Attribute.unsafeUnAttribute)(function (v3) {
+                                              return v2.setAttribute({
+                                                  id: Data_Symbol.reflectSymbol(dictIsSymbol)(Type_Proxy["Proxy"].value) + pxScope,
+                                                  key: v3.key,
+                                                  value: v3.value
+                                              });
+                                          }))(Record.get(dictIsSymbol)()(Type_Proxy["Proxy"].value)(r)))(v1.element(parent)(v2));
+                                      };
+                                  }
+                              };
                           };
                       };
                   },
@@ -5296,17 +5300,19 @@ var PS = {};
       return function (dictPursxToElement) {
           return function (dictIsSymbol) {
               return {
-                  pursxToElement: function (v) {
-                      return function (r) {
-                          var v1 = Record.get(dictIsSymbol)()(Type_Proxy["Proxy"].value)(r);
-                          var v2 = pursxToElement(dictPursxToElement)(Type_Proxy["Proxy"].value)(r);
-                          return {
-                              cache: Foreign_Object.insert(Data_Symbol.reflectSymbol(dictIsSymbol)(Type_Proxy["Proxy"].value))(false)(v2.cache),
-                              element: function (parent) {
-                                  return function (di) {
-                                      return Control_Alt.alt((dictPursxToElement.Plus0()).Alt0())(v1(Data_Symbol.reflectSymbol(dictIsSymbol)(Type_Proxy["Proxy"].value))(di))(v2.element(parent)(di));
-                                  };
-                              }
+                  pursxToElement: function (pxScope) {
+                      return function (v) {
+                          return function (r) {
+                              var v1 = Record.get(dictIsSymbol)()(Type_Proxy["Proxy"].value)(r);
+                              var v2 = pursxToElement(dictPursxToElement)(pxScope)(Type_Proxy["Proxy"].value)(r);
+                              return {
+                                  cache: Foreign_Object.insert(Data_Symbol.reflectSymbol(dictIsSymbol)(Type_Proxy["Proxy"].value))(false)(v2.cache),
+                                  element: function (parent) {
+                                      return function (di) {
+                                          return Control_Alt.alt((dictPursxToElement.Plus0()).Alt0())(v1(Data_Symbol.reflectSymbol(dictIsSymbol)(Type_Proxy["Proxy"].value) + pxScope)(di))(v2.element(parent)(di));
+                                      };
+                                  }
+                              };
                           };
                       };
                   },
@@ -5328,14 +5334,17 @@ var PS = {};
                                       var go = function (parent) {
                                           return function (v) {
                                               return FRP_Event_Class.keepLatest(dictIsEvent)(Data_Functor.mapFlipped((dictIsEvent.Filterable1()).Functor1())(FRP_Behavior.sample_(dictIsEvent)(v.ids)(FRP_Event_Class.bang(dictIsEvent)(Data_Unit.unit)))(function (me) {
-                                                  var v1 = pursxToElement(dictPursxToElement)(Type_Proxy["Proxy"].value)(r);
-                                                  return Control_Alt.alt((dictIsEvent.Plus0()).Alt0())(FRP_Event_Class.bang(dictIsEvent)(v.makePursx({
-                                                      id: me,
-                                                      parent: parent,
-                                                      cache: v1.cache,
-                                                      html: Data_Symbol.reflectSymbol(dictIsSymbol)(html),
-                                                      verb: Data_Symbol.reflectSymbol(dictIsSymbol1)(verb)
-                                                  })))(v1.element(me)(v));
+                                                  return FRP_Event_Class.keepLatest(dictIsEvent)(Data_Functor.mapFlipped((dictIsEvent.Filterable1()).Functor1())(FRP_Behavior.sample_(dictIsEvent)(v.ids)(FRP_Event_Class.bang(dictIsEvent)(Data_Unit.unit)))(function (pxScope) {
+                                                      var v1 = pursxToElement(dictPursxToElement)(pxScope)(Type_Proxy["Proxy"].value)(r);
+                                                      return Control_Alt.alt((dictIsEvent.Plus0()).Alt0())(FRP_Event_Class.bang(dictIsEvent)(v.makePursx({
+                                                          id: me,
+                                                          parent: parent,
+                                                          cache: v1.cache,
+                                                          scope: pxScope,
+                                                          html: Data_Symbol.reflectSymbol(dictIsSymbol)(html),
+                                                          verb: Data_Symbol.reflectSymbol(dictIsSymbol1)(verb)
+                                                      })))(v1.element(me)(v));
+                                                  }));
                                               }));
                                           };
                                       };
@@ -6679,6 +6688,7 @@ var PS = {};
 			  var verb = a.verb;
 			  var cache = a.cache;
 			  var parent = a.parent;
+			  var scope = a.scope;
 			  if (a.parent === state.terminus) {
 				  state.terminalPtrs.push(a.id);
 			  }
@@ -6710,14 +6720,14 @@ var PS = {};
 			  };
 			  tmp.querySelectorAll("[data-deku-attr-internal]").forEach(function (e) {
 				  var key = e.getAttribute("data-deku-attr-internal");
-				  state.units[key] = {
+				  state.units[key+scope] = {
 					  listeners: {},
 					  main: e,
 				  };
 			  });
 			  tmp.querySelectorAll("[data-deku-elt-internal]").forEach(function (e) {
 				  var key = e.getAttribute("data-deku-elt-internal");
-				  state.units[key] = {
+				  state.units[key+scope] = {
 					  listeners: {},
 					  main: e,
 				  };
