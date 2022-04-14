@@ -62,6 +62,7 @@ type MakePursx =
   { id :: String
   , parent :: String
   , html :: String
+  , scope :: String
   , verb :: String
   , cache :: Object Boolean
   }

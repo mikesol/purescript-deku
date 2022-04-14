@@ -140,14 +140,14 @@ instance (Sym.Cons x y tail, CloseOrRepeat event payload verb x y pursi purso tr
 else instance (Sym.Cons x y tail, DoVerbForDOM event payload verb "" x y pursi pursx newTail, Sym.Cons xx yy newTail, PXBody event payload verb xx yy pursx purso trailing) => PXBody event payload verb verb tail pursi purso trailing
 else instance (Sym.Cons x y tail, PXBody event payload verb x y pursi purso trailing) => PXBody event payload verb anything tail pursi purso trailing''')
 print_('''
-
 class
   Plus event <=
   PursxToElement event payload (rl :: RL.RowList Type) (r :: Row Type)
   | rl -> event payload r where
   pursxToElement
     :: forall proxy
-     . proxy rl
+     . String
+    -> proxy rl
     -> { | r }
     -> { cache :: Object.Object Boolean, element :: Element event payload }
 
@@ -157,13 +157,13 @@ instance pursxToElementConsElt ::
   , IsSymbol key
   ) =>
   PursxToElement event payload (RL.Cons key (PursxElement event payload) rest) r where
-  pursxToElement _ r =
+  pursxToElement pxScope _ r =
     let
-      { cache, element } = pursxToElement (Proxy :: Proxy rest) r
+      { cache, element } = pursxToElement pxScope (Proxy :: Proxy rest) r
     in
       { cache: Object.insert (reflectSymbol pxk) false cache
       , element: Element \parent di ->
-          (let Element y = pxe in y) (reflectSymbol pxk) di
+          (let Element y = pxe in y) ((reflectSymbol pxk) <> pxScope) di
             <|> (let Element y = element in y) parent di
       }
     where
@@ -176,16 +176,16 @@ else instance pursxToElementConsAttr ::
   , IsSymbol key
   ) =>
   PursxToElement event payload (RL.Cons key (event (Attribute deku)) rest) r where
-  pursxToElement _ r =
+  pursxToElement pxScope _ r =
     let
-      { cache, element } = pursxToElement (Proxy :: Proxy rest) r
+      { cache, element } = pursxToElement pxScope (Proxy :: Proxy rest) r
     in
       { cache: Object.insert (reflectSymbol pxk) true cache
       , element: Element \parent di@(DOMInterpret { setAttribute }) ->
           map
             ( lcmap unsafeUnAttribute
                 ( \{ key, value } -> setAttribute
-                    { id: reflectSymbol $ pxk
+                    { id: ((reflectSymbol pxk) <> pxScope)
                     , key
                     , value
                     }
@@ -200,7 +200,7 @@ else instance pursxToElementConsAttr ::
 instance pursxToElementNil ::
   Plus event =>
   PursxToElement event payload RL.Nil r where
-  pursxToElement _ _ = { cache: Object.empty, element: Element \_ _ -> empty }
+  pursxToElement _ _ _ = { cache: Object.empty, element: Element \_ _ -> empty }
 
 psx
   :: forall event payload proxy (html :: Symbol)
@@ -239,20 +239,22 @@ makePursx'
 makePursx' verb html r = Element go
   where
   go parent di@(DOMInterpret { makePursx: mpx, ids }) = keepLatest
-    ( (sample_ ids (bang unit)) <#> \me ->
-        let
-          { cache, element } = pursxToElement (Proxy :: _ rl) r
-        in
-          ( bang $ mpx
-              { id: me
-              , parent
-              , cache
-              , html: reflectSymbol html
-              , verb: reflectSymbol verb
-              }
-          ) <|> (let Element y = element in y) me di
+    ( (sample_ ids (bang unit)) <#> \me -> keepLatest
+        ( (sample_ ids (bang unit)) <#> \pxScope ->
+            let
+              { cache, element } = pursxToElement pxScope (Proxy :: _ rl) r
+            in
+              ( bang $ mpx
+                  { id: me
+                  , parent
+                  , cache
+                  , scope: pxScope
+                  , html: reflectSymbol html
+                  , verb: reflectSymbol verb
+                  }
+              ) <|> (let Element y = element in y) me di
+        )
     )
-
 infixr 5 makePursx as ~~
 
 ''')

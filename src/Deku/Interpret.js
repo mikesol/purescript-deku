@@ -198,6 +198,7 @@ var makePursx_ = function (a) {
 			var verb = a.verb;
 			var cache = a.cache;
 			var parent = a.parent;
+			var scope = a.scope;
 			if (a.parent === state.terminus) {
 				state.terminalPtrs.push(a.id);
 			}
@@ -229,14 +230,14 @@ var makePursx_ = function (a) {
 			};
 			tmp.querySelectorAll("[data-deku-attr-internal]").forEach(function (e) {
 				var key = e.getAttribute("data-deku-attr-internal");
-				state.units[key] = {
+				state.units[key+scope] = {
 					listeners: {},
 					main: e,
 				};
 			});
 			tmp.querySelectorAll("[data-deku-elt-internal]").forEach(function (e) {
 				var key = e.getAttribute("data-deku-elt-internal");
-				state.units[key] = {
+				state.units[key+scope] = {
 					listeners: {},
 					main: e,
 				};

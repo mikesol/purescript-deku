@@ -10,7 +10,7 @@ import Deku.Control as C
 import Deku.Core (Element)
 import Deku.DOM as D
 import Deku.Interpret (FFIDOMSnapshot, effectfulDOMInterpret, makeFFIDOMSnapshot)
-import Deku.Pursx (PursxElement(..), (~~))
+import Deku.Pursx (PursxElement(..), nut, (~~))
 import Effect (Effect)
 import FRP.Event (Event, create, subscribe)
 import FRP.Event.Class (bang)
@@ -23,9 +23,23 @@ import Web.HTML.Window (document)
 px = Proxy :: Proxy """<div>
   <button ~btn~>i do nothing</button>
   ~somethingElse~
+  ~aThirdThing~
   <div>hello world</div>
 </div>
 """
+
+pxInception push aThirdThing = px ~~
+          { btn: bang (D.Style := "background-color: rgb(133,151,217)")
+          , somethingElse:
+              nut
+                ( D.button
+                    ( bang $ D.OnClick :=
+                        (cb (const $ push false))
+                    )
+                    [ C.text_ "I was dynamically inserted " ]
+                )
+          , aThirdThing: nut aThirdThing
+          }
 
 scene
   :: (Boolean -> Effect Unit)
@@ -33,17 +47,12 @@ scene
   -> Element Event (FFIDOMSnapshot -> Effect Unit)
 scene push event =
   D.div empty
-      [ px ~~
-          { btn: bang (D.Style := "background-color: rgb(133,151,217)")
-          , somethingElse:
-              PursxElement
-                ( D.button
-                    ( bang $ D.OnClick :=
-                        (cb (const $ push false))
-                    )
-                    [ C.text_ "I was dynamically inserted " ]
-                )
-          }
+      [ pxInception push
+        $ pxInception push
+        $ pxInception push
+        $ pxInception push
+        $ pxInception push
+        $ pxInception push (C.text_ "boo")
       , C.text (event <#> if _ then "Oh hi" else "Oh bye")
       ]
 

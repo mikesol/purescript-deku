@@ -74,6 +74,7 @@ foreign import makePursx_
   :: { id :: String
      , parent :: String
      , html :: String
+     , scope :: String
      , verb :: String
      , cache :: Object Boolean
      }
