@@ -4,9 +4,8 @@ import Prelude
 
 import Control.Alt ((<|>))
 import Control.Plus (class Plus)
-import Data.Either (hush)
 import Data.Exists (mkExists)
-import Data.Filterable (class Filterable, compact, partitionMap)
+import Data.Filterable (class Filterable, compact, filter)
 import Data.Hashable (class Hashable, hash)
 import Data.Maybe (Maybe(..))
 import Data.Tuple (snd)
@@ -45,11 +44,18 @@ mySub
   :: forall event payload
    . Filterable event
   => IsEvent event
-  => (Sgs -> Effect Unit)
-  -> Subgraph Sgs Unit event payload
-mySub raise Sg0 = mkExists $ SubgraphF \push event ->
+  => event Sgs
+  -> (Sgs -> Effect Unit)
+  -> Subgraph Sgs event payload
+mySub oevent raise Sg0 = mkExists $ SubgraphF \push event ->
   let
-    { left, right } = partitionMap identity event
+    left = filter
+      ( case _ of
+          Sg0 -> false
+          Sg1 -> true
+      )
+      oevent
+    right = event
   in
     D.div_
       [ D.div_
@@ -70,9 +76,15 @@ mySub raise Sg0 = mkExists $ SubgraphF \push event ->
 
           ]
       ]
-mySub raise Sg1 = mkExists $ SubgraphF \push event ->
+mySub oevent raise Sg1 = mkExists $ SubgraphF \push event ->
   let
-    { left, right } = partitionMap identity event
+    left = filter
+      ( case _ of
+          Sg0 -> true
+          Sg1 -> false
+      )
+      oevent
+    right = event
   in
     D.div_
       [ D.div_
@@ -154,7 +166,7 @@ import Prelude
 
 import Control.Alt ((<|>))
 import Data.Exists (mkExists)
-import Data.Filterable (class Filterable, compact, partitionMap)
+import Data.Filterable (class Filterable, compact, filter)
 import Data.Hashable (class Hashable, hash)
 import Data.Maybe (Maybe(..))
 import Data.Tuple (snd)
@@ -167,6 +179,7 @@ import Deku.Subgraph (SubgraphAction(..), (@@))
 import Deku.Toplevel ((🚀))
 import Effect (Effect)
 import FRP.Event (class IsEvent, mapAccum)
+import FRP.Event.Class (bang)
 
 data UIevents = UIShown | ButtonClicked | SliderMoved Number
 derive instance Eq UIevents
@@ -189,11 +202,18 @@ mySub
   :: forall event payload
    . Filterable event
   => IsEvent event
-  => (Sgs -> Effect Unit)
-  -> Subgraph Sgs Unit event payload
-mySub raise Sg0 = mkExists $ SubgraphF \push event ->
+  => event Sgs
+  -> (Sgs -> Effect Unit)
+  -> Subgraph Sgs event payload
+mySub oevent raise Sg0 = mkExists $ SubgraphF \push event ->
   let
-    { left, right } = partitionMap identity event
+    left = filter
+      ( case _ of
+          Sg0 -> false
+          Sg1 -> true
+      )
+      oevent
+    right = event
   in
     D.div_
       [ D.div_
@@ -208,9 +228,15 @@ mySub raise Sg0 = mkExists $ SubgraphF \push event ->
           , D.hr_ []
           ]
       ]
-mySub raise Sg1 = mkExists $ SubgraphF \push event ->
+mySub oevent raise Sg1 = mkExists $ SubgraphF \push event ->
   let
-    { left, right } = partitionMap identity event
+    left = filter
+      ( case _ of
+          Sg0 -> true
+          Sg1 -> false
+      )
+      oevent
+    right = event
   in
     D.div_
       [ D.div_
@@ -227,34 +253,16 @@ mySub raise Sg1 = mkExists $ SubgraphF \push event ->
 
 main :: Effect Unit
 main = Nothing 🚀 \push event ->
-  ( bang (Sg0 /\ InsertOrUpdate unit)
-      <|> bang (Sg1 /\ InsertOrUpdate unit)
-      <|>
-        ( compact event # map
-            ( case _ of
-                Sg0 -> Sg1 /\ InsertOrUpdate unit
-                Sg1 -> Sg0 /\ InsertOrUpdate unit
-            )
-        )
-  ) @@ mySub (push <<< Just)"""
+  ( bang (Sg0 /\ Insert) <|> bang (Sg1 /\ Insert)
+  ) @@ mySub (compact event) (push <<< Just)"""
               ]
           ]
       )
   , result: nut
-      ( bang (unit /\ InsertOrUpdate unit) @@ \_ -> mkExists $ SubgraphF \push event' ->
-          let
-            event = compact (map hush event')
-          in
-            ( bang (Sg0 /\ InsertOrUpdate unit)
-                <|> bang (Sg1 /\ InsertOrUpdate unit)
-                <|>
-                  ( compact event # map
-                      ( case _ of
-                          Sg0 -> Sg1 /\ InsertOrUpdate unit
-                          Sg1 -> Sg0 /\ InsertOrUpdate unit
-                      )
-                  )
-            ) @@ mySub (push <<< Just)
+      ( bang (unit /\ Insert) @@ \_ -> mkExists $ SubgraphF \push event ->
+            ( bang (Sg0 /\ Insert)
+                <|> bang (Sg1 /\ Insert)
+            ) @@ mySub (compact event) (push <<< Just)
       )
   , next: bang (D.OnClick := (cb (const $ dpage Portals *> scrollToTop)))
   }

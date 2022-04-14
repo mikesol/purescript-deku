@@ -4,7 +4,6 @@
   , "control"
   , "distributive"
   , "effect"
-  , "either"
   , "event"
   , "exists"
   , "foldable-traversable"

@@ -7,7 +7,7 @@ import Affjax.ResponseFormat as ResponseFormat
 import Control.Alt ((<|>))
 import Control.Plus (class Plus)
 import Data.Argonaut.Core (stringifyWithIndent)
-import Data.Either (Either(..), hush)
+import Data.Either (Either(..))
 import Data.Exists (mkExists)
 import Data.Filterable (filterMap, compact)
 import Data.HTTP.Method (Method(..))
@@ -100,6 +100,7 @@ import Effect (Effect)
 import Effect.Aff (launchAff_)
 import Effect.Class (liftEffect)
 import FRP.Event (mapAccum)
+import FRP.Event.Class (bang)
 
 data UIAction = Initial | Loading | Result String
 
@@ -176,9 +177,8 @@ main = Initial 🚀 \push event ->
       ]
 """]])
   , result: nut
-      ( bang (unit /\ InsertOrUpdate unit) @@ \_ -> mkExists $ SubgraphF \push event' ->
+      ( bang (unit /\ Insert) @@ \_ -> mkExists $ SubgraphF \push event ->
           let
-            event = compact (map hush event')
             loadingOrResult = filterMap
               ( case _ of
                   Loading -> Just $ Left unit

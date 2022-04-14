@@ -9,10 +9,10 @@ import FRP.Behavior (sample_)
 import FRP.Event (class IsEvent, Event, keepLatest)
 import FRP.Event.Class (bang)
 
-type GatewayToSubgraph index env =
+type GatewayToSubgraph index =
   forall event payload
    . (Event Boolean -> Element event payload)
-  -> Subgraph index env event payload
+  -> Subgraph index event payload
 
 type GatewayToElement =
   forall event payload

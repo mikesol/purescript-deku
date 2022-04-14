@@ -30,11 +30,11 @@ instance Hashable Sgs where
   hash = show >>> hash
 
 mySub
-  :: forall env event payload
+  :: forall event payload
    . IsEvent event => event Boolean
   -> (event Boolean -> Element event payload)
   -> (event Boolean -> Element event payload)
-  -> Subgraph Sgs env event payload
+  -> Subgraph Sgs event payload
 mySub event gateway0 gateway1 sg = mkExists $ SubgraphF \_ _ -> D.div_
   [ gateway0
       ( map
@@ -65,8 +65,8 @@ main = false 🚀 \push event ->
     portal (D.img img1' []) \img1 ->
       let eventBool = event <|> bang false in
       flatten
-        [ ( bang (Sg0 /\ InsertOrUpdate unit)
-              <|> bang (Sg1 /\ InsertOrUpdate unit)
+        [ ( bang (Sg0 /\ Insert)
+              <|> bang (Sg1 /\ Insert)
           ) @@ mySub eventBool img0 img1
         , D.button (map (\e -> D.OnClick :=
         cb (const (push $ not e))) eventBool)

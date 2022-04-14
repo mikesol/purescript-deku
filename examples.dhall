@@ -4,10 +4,10 @@ in      conf
     //  { sources = conf.sources # [ "examples/**/*.purs" ]
         , dependencies =
               conf.dependencies
-            # [  "arrays"
-              , "web-html"
+            # [ "web-html"
               , "filterable"
               , "affjax"
+              , "either"
               , "aff"
               , "argonaut-core"
               , "deku-toplevel"

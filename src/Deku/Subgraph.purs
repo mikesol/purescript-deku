@@ -10,17 +10,17 @@ import FRP.Behavior (sample_)
 import FRP.Event (class IsEvent, keepLatest)
 import FRP.Event.Class (bang)
 
-data SubgraphAction env
-  = InsertOrUpdate env
+data SubgraphAction
+  = Insert
   | SendToTop
   | Remove
 
 subgraph
-  :: forall index env event payload
+  :: forall index event payload
    . Hashable index
   => IsEvent event
-  => event (index /\ SubgraphAction env)
-  -> Subgraph index env event payload
+  => event (index /\ SubgraphAction)
+  -> Subgraph index event payload
   -> Element event payload
 subgraph mods scenes = Element go
   where
@@ -28,7 +28,7 @@ subgraph mods scenes = Element go
     parent
     ( DOMInterpret
         { makeSubgraph
-        , insertOrUpdateSubgraph
+        , insertSubgraph
         , sendSubgraphToTop
         , removeSubgraph
         , ids
@@ -40,8 +40,8 @@ subgraph mods scenes = Element go
             ( \(index /\ instr) -> case instr of
                 Remove -> removeSubgraph { id, pos: hash index, index }
                 SendToTop -> sendSubgraphToTop { id, pos: hash index, index }
-                InsertOrUpdate env -> insertOrUpdateSubgraph
-                  { id, pos: hash index, index, env }
+                Insert -> insertSubgraph
+                  { id, pos: hash index, index }
             )
             mods
       )

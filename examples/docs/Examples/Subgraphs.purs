@@ -4,7 +4,7 @@ import Prelude
 
 import Control.Alt ((<|>))
 import Data.Exists (mkExists)
-import Data.Filterable (class Filterable, compact, partitionMap)
+import Data.Filterable (class Filterable, compact, filter)
 import Data.Hashable (class Hashable, hash)
 import Data.Maybe (Maybe(..))
 import Data.Tuple (snd)
@@ -40,11 +40,18 @@ mySub
   :: forall event payload
    . Filterable event
   => IsEvent event
-  => (Sgs -> Effect Unit)
-  -> Subgraph Sgs Unit event payload
-mySub raise Sg0 = mkExists $ SubgraphF \push event ->
+  => event Sgs
+  -> (Sgs -> Effect Unit)
+  -> Subgraph Sgs event payload
+mySub oevent raise Sg0 = mkExists $ SubgraphF \push event ->
   let
-    { left, right } = partitionMap identity event
+    left = filter
+      ( case _ of
+          Sg0 -> false
+          Sg1 -> true
+      )
+      oevent
+    right = event
   in
     D.div_
       [ D.div_
@@ -59,9 +66,15 @@ mySub raise Sg0 = mkExists $ SubgraphF \push event ->
           , D.hr_ []
           ]
       ]
-mySub raise Sg1 = mkExists $ SubgraphF \push event ->
+mySub oevent raise Sg1 = mkExists $ SubgraphF \push event ->
   let
-    { left, right } = partitionMap identity event
+    left = filter
+      ( case _ of
+          Sg0 -> true
+          Sg1 -> false
+      )
+      oevent
+    right = event
   in
     D.div_
       [ D.div_
@@ -78,13 +91,5 @@ mySub raise Sg1 = mkExists $ SubgraphF \push event ->
 
 main :: Effect Unit
 main = Nothing 🚀 \push event ->
-  ( bang (Sg0 /\ InsertOrUpdate unit)
-      <|> bang (Sg1 /\ InsertOrUpdate unit)
-      <|>
-        ( compact event # map
-            ( case _ of
-                Sg0 -> Sg1 /\ InsertOrUpdate unit
-                Sg1 -> Sg0 /\ InsertOrUpdate unit
-            )
-        )
-  ) @@ mySub (push <<< Just)
+  ( bang (Sg0 /\ Insert) <|> bang (Sg1 /\ Insert)
+  ) @@ mySub (compact event) (push <<< Just)

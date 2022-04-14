@@ -8,7 +8,6 @@ module Deku.Interpret
 import Prelude
 
 import Control.Alt ((<|>))
-import Data.Either (Either(..))
 import Data.Exists (runExists)
 import Deku.Core (Element(..), SubgraphF(..))
 import Deku.Core as Core
@@ -39,14 +38,13 @@ foreign import makeText_
   -> Effect Unit
 
 foreign import makeSubgraph
-  :: forall index env
+  :: forall index
    . String
   -> String
   -> ( index
        -> Effect
             { actualized ::
                 Event (FFIDOMSnapshot -> Effect Unit)
-            , pusher :: env -> Effect Unit
             }
      )
   -> FFIDOMSnapshot
@@ -60,9 +58,9 @@ foreign import sendSubgraphToTop_
 foreign import setAttribute_
   :: Core.SetAttribute -> FFIDOMSnapshot -> Effect Unit
 
-foreign import insertOrUpdateSubgraph
-  :: forall index env
-   . Core.InsertOrUpdateSubgraph index env
+foreign import insertSubgraph
+  :: forall index
+   . Core.InsertSubgraph index
   -> FFIDOMSnapshot
   -> Effect Unit
 
@@ -101,21 +99,19 @@ effectfulDOMInterpret = Core.DOMInterpret
   , makeSubgraph: \{ id, parent, scenes } dom ->
       flip (makeSubgraph id parent) dom \index -> runExists
         ( \(SubgraphF si) -> do
-            evtL <- create
-            evtR <- create
-            let event = map Left evtL.event <|> map Right evtR.event
+            evt <- create
             let
               actualized =
                 let
-                  Element elt = si evtR.push event
+                  Element elt = si evt.push evt.event
                 in
                   elt parent effectfulDOMInterpret
-            pure { actualized, pusher: evtL.push }
+            pure { actualized }
         )
         (scenes index)
   , setAttribute: setAttribute_
   , setText: setText_
   , sendSubgraphToTop: sendSubgraphToTop_
-  , insertOrUpdateSubgraph: insertOrUpdateSubgraph
+  , insertSubgraph: insertSubgraph
   , removeSubgraph: removeSubgraph
   }

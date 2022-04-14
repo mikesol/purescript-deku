@@ -114,12 +114,10 @@ exports.makeSubgraph = function (ptr) {
 			return function (state) {
 				return function () {
 					var children = {};
-					var pushers = {};
 					var unsu = {};
 					state.units[ptr] = {
 						parent: parent,
 						sceneM: sceneM,
-						pushers: pushers,
 						children: children,
 						unsu: unsu,
 					};
@@ -153,18 +151,16 @@ exports.removeSubgraph = function (a) {
 	};
 };
 
-var insertOrUpdateSubgraph = function (a) {
+var insertSubgraph = function (a) {
 	return function (state) {
 		return function () {
 			var ptr = a.id;
-			var env = a.env;
 			var j = a.pos;
 			var index = a.index;
 			var children = state.units[ptr].children;
 			var unsu = state.units[ptr].unsu;
-			var pushers = state.units[ptr].pushers;
 			var needsConnecting = false;
-			if (env !== null && unsu[j] === undefined) {
+			if (unsu[j] === undefined) {
 				children[j] = {
 					units: {},
 					portals: state.portals,
@@ -182,10 +178,8 @@ var insertOrUpdateSubgraph = function (a) {
 							instr(children[jIs])()
 					)(j)
 				)();
-				pushers[j] = sg.pusher;
 				needsConnecting = true;
 			}
-			pushers[j](env)();
 			if (needsConnecting) {
 				for (var k = 0; k < children[j].terminalPtrs.length; k++) {
 					connectXToY_(children[j].terminalPtrs[k])(state.units[ptr].parent)(
@@ -252,7 +246,7 @@ var makePursx_ = function (a) {
 	};
 };
 exports.makePursx_ = makePursx_;
-exports.insertOrUpdateSubgraph = insertOrUpdateSubgraph;
+exports.insertSubgraph = insertSubgraph;
 exports.sendSubgraphToTop_ = function (a) {
 	return function (state) {
 		return function () {
