@@ -118,14 +118,14 @@ px =  Proxy :: Proxy """<div>
 
   <h3>The event</h3>
 
-  <code>Subgraph</code>-s, like <code>Element</code>-s, receive an <code>Event</code> as their first arguemnt. However, unlike <code>Element</code>-s, this <code>Event</code> contains a <code>Tuple</code> of shape <code>Tuple index  (SubgraphAction env)</code>.
+  <code>Subgraph</code>-s, like <code>Element</code>-s, receive an <code>Event</code> as their first arguemnt. However, unlike <code>Element</code>-s, this <code>Event</code> contains a <code>Tuple</code> of shape <code>Tuple index SubgraphAction</code>.
 
   The first part of the <code>Tuple</code> is the index of the subgraph. Each subgraph has a unique hashable index.
 
   The second part of the <code>Tuple</code> is a <code>SubgraphAction</code>, which is one of the three following things:
 
   <ul>
-    <li><code>InsertOrUpdate env</code>: Inserts or updates a subgraph, pushing the contents of <code>env</code> to it. We'll see how the subgraph receives this content in a bit.</li>
+    <li><code>Insert</code>: Inserts or updates a subgraph. Multiple inserts to the same index are a no-op.</li>
     <li><code>SendToTop</code>: Sends the subgraph to the top of its enclosing element. Note that, if the enclosing element contains other elements besides the subgraph, it will leapfrog those as well, which is not what you want in most cases. To avoid this, as standard practice, a subgraph should be the unique child of its enclosing element.</li>
     <li><code>Remove</code>: Remove a subgraph from the DOM.</li>
   </ul>
@@ -136,7 +136,7 @@ px =  Proxy :: Proxy """<div>
   <ul>
     <li>The index of this particular subgraph</li>
     <li>A pusher for this subgraph. Things pushed to this pusher will be propagated <i>only</i> to this particular subgraph, meaning its parent and its siblings will not receive these pushes.</li>
-    <li>An event of type <code>Event (Either env push)</code>. It responds to <i>both</i> external communication when created and updated (on the <code>Left</code>) <i>and</i> to input from the pusher (on the <code>Right</code>).</li>
+    <li>An event of type <code>Event push</code>. This event is wired up to the subgraph's pusher.</li>
   </ul>
 
   <p>Note that the last two arguments, the <i>pusher</i> and the <i>event</i>, are part of an existential type and <i>must</i> come after a call to <code>mkExists</code> followed by the <code>newtype</code> constructor <code>SubgraphF</code>, as seen in the example above. This pattern allows you to have arbitrary pushers for each subgraph.</p>
