@@ -95,7 +95,7 @@ scene push event =
                   ( case prev of
                       Nothing -> empty
                       Just x -> bang (x /\ Remove)
-                  ) <|> bang (cur /\ InsertOrUpdate unit)
+                  ) <|> bang (cur /\ Insert)
               )
             # keepLatest
         )
@@ -103,7 +103,7 @@ scene push event =
 
     ]
   where
-  page :: (Page -> Effect Unit) -> Subgraph Page Unit event payload
+  page :: (Page -> Effect Unit) -> Subgraph Page event payload
   page dpage Intro = mkExists $ SubgraphF \_ _ -> Intro.intro dpage
   page dpage HelloWorld = mkExists $ SubgraphF \_ _ -> HelloWorld.helloWorld
     dpage
