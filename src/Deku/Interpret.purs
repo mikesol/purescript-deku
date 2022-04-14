@@ -7,14 +7,14 @@ module Deku.Interpret
 
 import Prelude
 
-import Control.Alt ((<|>))
 import Data.Exists (runExists)
 import Deku.Core (Element(..), SubgraphF(..))
 import Deku.Core as Core
 import Effect (Effect)
 import Effect.Random as R
 import FRP.Behavior (behavior)
-import FRP.Event (Event, create, makeEvent, subscribe)
+import FRP.Event (Event, makeEvent, subscribe)
+import FRP.Event.Memoized as Memoized
 import Foreign.Object (Object)
 
 -- foreign
@@ -99,11 +99,11 @@ effectfulDOMInterpret = Core.DOMInterpret
   , makeSubgraph: \{ id, parent, scenes } dom ->
       flip (makeSubgraph id parent) dom \index -> runExists
         ( \(SubgraphF si) -> do
-            evt <- create
+            evt <- Memoized.create
             let
               actualized =
                 let
-                  Element elt = si evt.push evt.event
+                  Element elt = si evt.push $ Memoized.toEvent evt.event
                 in
                   elt parent effectfulDOMInterpret
             pure { actualized }
