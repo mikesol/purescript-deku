@@ -1,14 +1,21 @@
 import requests
+import glob
+import os
 from bs4 import BeautifulSoup
 GENERATE_DOM_DECL = 0
 GENERATE_DOM_DEFS = 1
+GENERATE_DOM_TL = 2
+GENERATE_DOM_TTD = 3
 GENERATE_ATTR_DECL = 7
 GENERATE_ATTR_DEFS = 8
+GENERATE_ATTR_TL = 9
+GENERATE_HANDLER_DEFS = 10
 
 CG_MAP = {GENERATE_DOM_DECL: 'src/Deku/DOM.purs',
-          GENERATE_DOM_DEFS: 'src/Deku/DOM.purs',
+          GENERATE_DOM_TL: 'src/Deku/DOM.purs',
+          GENERATE_DOM_TTD: 'src/Deku/DOM.purs',
           GENERATE_ATTR_DECL: 'src/Deku/DOM.purs',
-          GENERATE_ATTR_DEFS: 'src/Deku/DOM.purs',
+          GENERATE_ATTR_TL: 'src/Deku/DOM.purs',
           }
 
 url = ('https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes')
@@ -42,7 +49,7 @@ for row in table.findAll('tr')[1:x]:
     col = row.findAll('td')
     attr = col[0].getText().replace('*', '')
     name = col[1].getText()
-    AMAP[attr.strip()] = [thing for thing in [normalize(x.strip())
+    AMAP[attr.strip().split('\n')[0]] = [thing for thing in [normalize(x.strip())
                                               for x in name.split(',')] if thing in TAGS]
 
 # don't need it...
@@ -68,22 +75,46 @@ def bigtag(x):
     return ''.join(y)+'_'
 
 
-def cg(CODEGEN_TARGET):
+def cg(CODEGEN_TARGET, ival = None, ival2 = None):
     o = []
     def print_(x): return o.append(x)
+    def noop_(x): return None
     if CODEGEN_TARGET == GENERATE_DOM_DECL:
         for x in TAGS:
             term = bigtag(x)
             typ = 'T'+term
-            print_(f'''  , {term}
+            noop_(f'''  , {term}
   , {x}
   , {x}_''')
+            print_(f''', module Deku.DOM.Elt.{term.split('_')[0]}''')
 
-    elif CODEGEN_TARGET == GENERATE_DOM_DEFS:
+    elif CODEGEN_TARGET == GENERATE_DOM_TL:
         for x in TAGS:
             term = bigtag(x)
             typ = 'T'+term
-            print_(f'''data {term}
+            noop_(f'''  , {term}
+  , {x}
+  , {x}_''')
+            print_(f'''import Deku.DOM.Elt.{term.split('_')[0]}''')
+
+    elif CODEGEN_TARGET == GENERATE_DOM_TTD:
+        for x in TAGS:
+            term = bigtag(x)
+            typ = 'T'+term
+            print_(f'''instance tagToDeku{term} :: TagToDeku "{astag(x)}" {term}''')
+    elif CODEGEN_TARGET == GENERATE_DOM_DEFS:
+            x = ival
+            term = bigtag(x)
+            typ = 'T'+term
+            print_(f'''module Deku.DOM.Elt.{term.split('_')[0]} where
+
+import Control.Plus (empty)
+import Deku.Attribute (Attribute)
+import Deku.Control (elementify)
+import Deku.Core (Element)
+import FRP.Event (class IsEvent)
+
+data {term}
 
 {x}
   :: forall event payload
@@ -99,23 +130,40 @@ def cg(CODEGEN_TARGET):
   => Array (Element event payload)
   -> Element event payload
 {x}_ = {x} empty
-instance tagToDeku{term} :: TagToDeku "{astag(x)}" {term}
 ''')
     elif CODEGEN_TARGET == GENERATE_ATTR_DECL:
         for x in AMAP.keys():
             term = bigat(x)
-            print_(f'''  , {term}(..)''')
+            noop_(f'''  , {term}(..)''')
+            print_(f''', module Deku.DOM.Attr.{term}''')
+
         for x in GLOBAL_EVENT_HANDLERS:
             term = 'On'+x.capitalize()
-            print_(f'''  , {term}(..)''')
-    elif CODEGEN_TARGET == GENERATE_ATTR_DEFS:
+            noop_(f'''  , {term}(..)''')
+            print_(f''', module Deku.DOM.Attr.{term}''')
+    elif CODEGEN_TARGET == GENERATE_ATTR_TL:
         for x in AMAP.keys():
             term = bigat(x)
-            print_(f'''data {term} = {term}''')
+            noop_(f'''  , {term}(..)''')
+            print_(f'''import Deku.DOM.Attr.{term}''')
+
         for x in GLOBAL_EVENT_HANDLERS:
             term = 'On'+x.capitalize()
-            print_(f'''data {term} = {term}''')
-        for k, v in AMAP.items():
+            noop_(f'''  , {term}(..)''')
+            print_(f'''import Deku.DOM.Attr.{term}''')
+    elif CODEGEN_TARGET == GENERATE_ATTR_DEFS:
+            x = ival
+            k = ival
+            v = ival2
+            if v == []:
+                v = TAGS
+            term = bigat(x)
+            print_(f'''module Deku.DOM.Attr.{term} where''')
+            for att in v:
+                term2 = bigtag(att)
+                print_(f'''import Deku.DOM.Elt.{term2.split('_')[0]}({term2})''')
+            print_(f'''import Deku.Attribute (class Attr, prop', unsafeAttribute)
+data {term} = {term}''')
             term = bigat(k)
             if v == []:
                 v = TAGS
@@ -124,17 +172,44 @@ instance tagToDeku{term} :: TagToDeku "{astag(x)}" {term}
                 print_(f'''instance Attr {term2} {term} String where
   attr {term} value = unsafeAttribute {{ key: "{asattr(k)}", value: prop' value }}
 ''')
-        for x in GLOBAL_EVENT_HANDLERS:
+    elif CODEGEN_TARGET == GENERATE_HANDLER_DEFS:
+            x = ival
+            term = 'On'+x.capitalize()
+            print_(f'''module Deku.DOM.Attr.{term} where
+
+import Deku.Attribute (class Attr, Cb, cb', unsafeAttribute)
+
+data {term} = {term}''')
             term = 'On'+x.capitalize()
             print_(f'''instance Attr anything {term} Cb where
   attr {term} value = unsafeAttribute {{ key: "{x}", value: cb' value }}''')
     else:
-      raise ValueError('wat')
+      raise ValueError('wat' + str(CODEGEN_TARGET) )
     return '\n'.join(o)
 
 
 if __name__ == '__main__':
-    for z in [0,1,7,8]:
+    import glob
+
+    files = glob.glob('src/Deku/DOM/Elt/*.purs')
+    for f in files:
+      os.remove(f)
+    files = glob.glob('src/Deku/DOM/Attr/*.purs')
+    for f in files:
+      os.remove(f)
+    for x in TAGS:
+      o = cg(1, x)
+      with open('src/Deku/DOM/Elt/%s.purs' % bigtag(x).split('_')[0], 'w') as wf:
+        wf.write(o)
+    for k,v in AMAP.items():
+      o = cg(8, k,v)
+      with open('src/Deku/DOM/Attr/%s.purs' % bigat(k), 'w') as wf:
+        wf.write(o)
+    for x in GLOBAL_EVENT_HANDLERS:
+      o = cg(10, x)
+      with open('src/Deku/DOM/Attr/On%s.purs' % bigat(x), 'w') as wf:
+        wf.write(o)
+    for z in [0,2,3,7,9]:
       o = cg(z)
       with open(CG_MAP[z], 'r') as rf:
         i = rf.read().split('\n')
