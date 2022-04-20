@@ -6739,15 +6739,20 @@ var PS = {};
 			  var ptr = a.id;
 			  var avv = a.value.value;
 			  if (a.value.type === "cb") {
-				  if (state.units[ptr].listeners[a.key]) {
-					  state.units[ptr].main.removeEventListener(
-						  a.key,
-						  state.units[ptr].listeners[a.key]
-					  );
+				  if (a.key === "@canvas-hack@") {
+					  const cxt = state.units[ptr].main.getContext("2d");
+					  avv(cxt)();
+				  } else {
+					  if (state.units[ptr].listeners[a.key]) {
+						  state.units[ptr].main.removeEventListener(
+							  a.key,
+							  state.units[ptr].listeners[a.key]
+						  );
+					  }
+					  var el = (e) => avv(e)();
+					  state.units[ptr].main.addEventListener(a.key, el);
+					  state.units[ptr].listeners[a.key] = el;
 				  }
-				  var el = (e) => avv(e)();
-				  state.units[ptr].main.addEventListener(a.key, el);
-				  state.units[ptr].listeners[a.key] = el;
 			  } else {
 				  if (state.units[ptr].main.tagName === "INPUT" && a.key === "value") {
 					  state.units[ptr].main.value = avv;
