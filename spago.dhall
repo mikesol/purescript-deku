@@ -1,6 +1,7 @@
 { name = "purescript-deku"
 , dependencies =
   [ "behaviors"
+  , "canvas"
   , "control"
   , "distributive"
   , "effect"
@@ -16,6 +17,7 @@
   , "safe-coerce"
   , "tuples"
   , "unordered-collections"
+  , "unsafe-coerce"
   , "variant"
   , "web-dom"
   , "web-events"
