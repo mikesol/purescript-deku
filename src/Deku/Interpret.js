@@ -13,21 +13,13 @@ var connectXToY_ = function (x) {
 	return function (y) {
 		return function (state) {
 			return function () {
+				if (y === "@portal@") { return }
 				state.units[y].main.appendChild(state.units[x].main);
 			};
 		};
 	};
 };
 
-var disconnectXFromY_ = function (x) {
-	return function (y) {
-		return function (state) {
-			return function () {
-				state.units[y].main.removeChild(state.units[x].main);
-			};
-		};
-	};
-};
 exports.renderDOM = function (arrayToApply) {
 	return function () {
 		for (var i = 0; i < arrayToApply.length; i++) {
@@ -39,9 +31,14 @@ var makeElement = function (a) {
 	return function (state) {
 		return function () {
 			var ptr = a.id;
+			if (!state.scopes[a.scope]) {
+				state.scopes[a.scope] = [];
+			}
+			state.scopes[a.scope].push(ptr);
 			state.units[ptr] = {
 				listeners: {},
 				parent: a.parent,
+				scope: a.scope,
 				main: document.createElement(a.tag),
 			};
 			if (a.parent === state.terminus) {
@@ -56,6 +53,10 @@ exports.makeText_ = function (a) {
 	return function (state) {
 		return function () {
 			var ptr = a.id;
+			if (!state.scopes[a.scope]) {
+				state.scopes[a.scope] = [];
+			}
+			state.scopes[a.scope].push(ptr);
 			state.units[ptr] = {
 				main: document.createTextNode(""),
 				parent: a.parent,
@@ -67,9 +68,8 @@ exports.makeText_ = function (a) {
 exports.makeFFIDOMSnapshot = function () {
 	return {
 		units: {},
-		portals: {},
+		scopes: {},
 		unqidfr: makeid(10),
-		terminalPtrs: [],
 	};
 };
 exports.setAttribute_ = function (a) {
@@ -95,8 +95,11 @@ exports.setAttribute_ = function (a) {
 			} else {
 				if (state.units[ptr].main.tagName === "INPUT" && a.key === "value") {
 					state.units[ptr].main.value = avv;
-				} else if (state.units[ptr].main.tagName === "INPUT" && a.key === "checked") {
-					state.units[ptr].main.checked = avv === "true" ;
+				} else if (
+					state.units[ptr].main.tagName === "INPUT" &&
+					a.key === "checked"
+				) {
+					state.units[ptr].main.checked = avv === "true";
 				} else {
 					state.units[ptr].main.setAttribute(a.key, avv);
 				}
@@ -113,88 +116,6 @@ exports.setText_ = function (a) {
 	};
 };
 
-exports.makeSubgraph = function (ptr) {
-	return function (parent) {
-		return function (sceneM) {
-			return function (state) {
-				return function () {
-					var children = {};
-					var unsu = {};
-					state.units[ptr] = {
-						parent: parent,
-						sceneM: sceneM,
-						children: children,
-						unsu: unsu,
-					};
-				};
-			};
-		};
-	};
-};
-
-exports.removeSubgraph = function (a) {
-	return function (state) {
-		return function () {
-			var ptr = a.id;
-			var j = a.pos;
-			var children = state.units[ptr].children;
-			var unsu = state.units[ptr].unsu;
-			if (children[j] === undefined) {
-				return;
-			}
-			for (var k = 0; k < children[j].terminalPtrs.length; k++) {
-				disconnectXFromY_(children[j].terminalPtrs[k])(state.units[ptr].parent)(
-					children[j]
-				)();
-			}
-			// unsubscribe
-			unsu[j]();
-			// delete unused
-			delete children[j];
-			delete unsu[j];
-		};
-	};
-};
-
-var insertSubgraph = function (a) {
-	return function (state) {
-		return function () {
-			var ptr = a.id;
-			var j = a.pos;
-			var index = a.index;
-			var children = state.units[ptr].children;
-			var unsu = state.units[ptr].unsu;
-			var needsConnecting = false;
-			if (unsu[j] === undefined) {
-				children[j] = {
-					units: {},
-					portals: state.portals,
-					terminus: state.units[ptr].parent,
-					unqidfr: makeid(10),
-					parent: ptr,
-					terminalPtrs: [],
-				};
-				children[j].units[state.units[ptr].parent] =
-					state.units[state.units[ptr].parent];
-				var sg = state.units[ptr].sceneM(index)();
-				unsu[j] = sg.actualized(
-					(
-						(jIs) => (instr) => () =>
-							instr(children[jIs])()
-					)(j)
-				)();
-				needsConnecting = true;
-			}
-			if (needsConnecting) {
-				for (var k = 0; k < children[j].terminalPtrs.length; k++) {
-					connectXToY_(children[j].terminalPtrs[k])(state.units[ptr].parent)(
-						children[j]
-					)();
-				}
-			}
-		};
-	};
-};
 var makePursx_ = function (a) {
 	return function (state) {
 		return function () {
@@ -228,47 +149,39 @@ var makePursx_ = function (a) {
 			}
 			var tmp = document.createElement("div");
 			tmp.innerHTML = html.trim();
+			if (!state.scopes[a.dkScope]) {
+				state.scopes[a.dkScope] = [];
+			}
+			state.scopes[a.dkScope].push(ptr);
 			state.units[ptr] = {
 				listeners: {},
+				scope: a.dkScope,
 				parent: parent,
 				main: tmp.firstChild,
 			};
 			tmp.querySelectorAll("[data-deku-attr-internal]").forEach(function (e) {
 				var key = e.getAttribute("data-deku-attr-internal");
-				state.units[key+scope] = {
+				state.units[key + scope] = {
 					listeners: {},
 					main: e,
+					scope: a.dkScope,
 				};
+				state.scopes[a.dkScope].push(key + scope);
 			});
 			tmp.querySelectorAll("[data-deku-elt-internal]").forEach(function (e) {
 				var key = e.getAttribute("data-deku-elt-internal");
-				state.units[key+scope] = {
+				state.units[key + scope] = {
 					listeners: {},
 					main: e,
+					scope: a.dkScope,
 				};
+				state.scopes[a.dkScope].push(key + scope);
 			});
 			connectXToY_(ptr)(parent)(state)();
 		};
 	};
 };
 exports.makePursx_ = makePursx_;
-exports.insertSubgraph = insertSubgraph;
-exports.sendSubgraphToTop_ = function (a) {
-	return function (state) {
-		return function () {
-			var child = state.units[a.id].children[a.pos];
-			if (child === undefined) {
-				return;
-			}
-			var l = child.terminalPtrs.length;
-			for (var i = 0; i < child.terminalPtrs.length; i++) {
-				state.units[state.units[a.id].parent].main.prepend(
-					child.units[child.terminalPtrs[l - i - 1]].main
-				);
-			}
-		};
-	};
-};
 exports.makeRoot_ = function (a) {
 	return function (state) {
 		return function () {
@@ -279,41 +192,52 @@ exports.makeRoot_ = function (a) {
 		};
 	};
 };
-exports.makePortal_ = function (a) {
+exports.makeNoop_ = function (a) {
 	return function (state) {
 		return function () {
-			var main = document.createElement("div");
-			state.portals[a.id] = {
-				main: main,
+			var ptr = a.id;
+			state.units[ptr] = {
+				noop: true,
 			};
-			state.units[a.id] = {
-				main: main,
-			};
-			main.setAttribute("style", "display:contents;");
 		};
 	};
 };
-exports.makeGateway_ = function (a) {
+exports.giveNewParent_ = function (a) {
 	return function (state) {
 		return function () {
-			var main = document.createElement("div");
-			state.units[a.id] = {
-				main: main,
-				portal: a.portal
-			};
-			main.setAttribute("style", "display:contents;");
-			connectXToY_(a.id)(a.parent)(state)();
+			var ptr = a.id;
+			var parent = a.parent;
+			state.units[parent].main.prepend(state.units[ptr].main);
 		};
 	};
 };
-exports.setPortal_ = function (a) {
-	return function(state) {
-		return function() {
-			if (a.on) {
-				state.units[a.id].main.prepend(state.portals[state.units[a.id].portal].main);
-			} else {
-				state.units[a.id].main.innerHTML = "";
+exports.disconnectElement_ = function (a) {
+	return function (state) {
+		return function () {
+			var ptr = a.id;
+			if (state.units[ptr].noop) {
+				// is this needed?
+				return;
 			}
-		}
-	}
+			state.units[ptr].main.remove();
+			if (state.units[ptr].scope === "@portal@") {
+				return;
+			}
+			const scope = state.units[ptr].scope;
+			state.scopes[scope].forEach((scp) => {
+				delete state.units[scp];
+			});
+			delete state.scopes[scope];
+		};
+	};
+};
+
+exports.sendToTop_ = function (a) {
+	return function (state) {
+		return function () {
+			var ptr = a.id;
+			var parent = a.id;
+			state.units[parent].main.prepend(state.units[ptr].main);
+		};
+	};
 };

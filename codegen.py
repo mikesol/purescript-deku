@@ -95,7 +95,7 @@ def cg(CODEGEN_TARGET, ival = None, ival2 = None):
             noop_(f'''  , {term}
   , {x}
   , {x}_''')
-            print_(f'''import Deku.DOM.Elt.{term.split('_')[0]}''')
+            print_(f'''import Deku.DOM.Elt.{term.split('_')[0]}({term}, class {term}Ctor, {x}, {x}_)''')
 
     elif CODEGEN_TARGET == GENERATE_DOM_TTD:
         for x in TAGS:
@@ -109,26 +109,48 @@ def cg(CODEGEN_TARGET, ival = None, ival2 = None):
             print_(f'''module Deku.DOM.Elt.{term.split('_')[0]} where
 
 import Control.Plus (empty)
+import Data.Foldable (oneOfMap)
 import Deku.Attribute (Attribute)
 import Deku.Control (elementify)
 import Deku.Core (Element)
-import FRP.Event (class IsEvent)
+import FRP.Event (Event)
+import Safe.Coerce (coerce)
+import FRP.Event.Class (bang)
+import Type.Equality (class TypeEquals, proof)
 
 data {term}
 
-{x}
-  :: forall event payload
-   . IsEvent event
-  => event (Attribute {term})
-  -> Array (Element event payload)
-  -> Element event payload
-{x} = elementify "{astag(x)}"
+class {term}Ctor i o | i -> o where
+  {x}
+    :: Event (Attribute {term})
+    -> i
+    -> o
+
+instance
+  (TypeEquals locki locko, TypeEquals payloadi payloado) =>
+  {term}Ctor (Event (Event (Element locki payloadi))) (Element locko payloado) where
+  {x} a i = elementify "{astag(x)}" a (proof (coerce i))
+
+instance
+  (TypeEquals locki locko, TypeEquals payloadi payloado) =>
+  {term}Ctor (Event (Element locki payloadi)) (Element locko payloado) where
+  {x} a i = elementify "{astag(x)}" a (bang (proof (coerce i)))
+
+instance
+  (TypeEquals locki locko, TypeEquals payloadi payloado) =>
+  {term}Ctor (Element locki payloadi) (Element locko payloado) where
+  {x} a i = elementify "{astag(x)}" a (bang (bang (proof (coerce i))))
+
+instance
+  (TypeEquals locki locko, TypeEquals payloadi payloado) =>
+  {term}Ctor (Array (Element locki payloadi)) (Element locko payloado) where
+  {x} a i = elementify "{astag(x)}" a (oneOfMap (\i' -> bang (bang (proof (coerce i')))) i)
 
 {x}_
-  :: forall event payload
-   . IsEvent event
-  => Array (Element event payload)
-  -> Element event payload
+  :: forall i o
+   . {term}Ctor i o
+  => i
+  -> o
 {x}_ = {x} empty
 ''')
     elif CODEGEN_TARGET == GENERATE_ATTR_DECL:
@@ -145,12 +167,12 @@ data {term}
         for x in AMAP.keys():
             term = bigat(x)
             noop_(f'''  , {term}(..)''')
-            print_(f'''import Deku.DOM.Attr.{term}''')
+            print_(f'''import Deku.DOM.Attr.{term}({term}(..))''')
 
         for x in GLOBAL_EVENT_HANDLERS:
             term = 'On'+x.capitalize()
             noop_(f'''  , {term}(..)''')
-            print_(f'''import Deku.DOM.Attr.{term}''')
+            print_(f'''import Deku.DOM.Attr.{term}({term}(..))''')
     elif CODEGEN_TARGET == GENERATE_ATTR_DEFS:
             x = ival
             k = ival

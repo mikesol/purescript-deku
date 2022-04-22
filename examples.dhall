@@ -8,9 +8,9 @@ in      conf
               , "filterable"
               , "affjax"
               , "either"
+              , "integers"
               , "aff"
               , "argonaut-core"
-              , "deku-toplevel"
               , "http-methods"
               , "maybe"
               ]

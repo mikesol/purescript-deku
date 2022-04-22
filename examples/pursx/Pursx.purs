@@ -2,17 +2,19 @@ module Deku.Example.Pursx where
 
 import Prelude
 
+import Control.Alt ((<|>))
 import Control.Plus (empty)
+import Data.Exists (mkExists)
 import Data.Foldable (for_)
 import Deku.Attribute (cb, (:=))
-import Deku.Control (deku)
+import Deku.Control (Bus(..), bus, deku2)
 import Deku.Control as C
 import Deku.Core (Element)
 import Deku.DOM as D
 import Deku.Interpret (FFIDOMSnapshot, effectfulDOMInterpret, makeFFIDOMSnapshot)
-import Deku.Pursx (PursxElement(..), nut, (~~))
+import Deku.Pursx (nut, (~~))
 import Effect (Effect)
-import FRP.Event (Event, create, subscribe)
+import FRP.Event (subscribe)
 import FRP.Event.Class (bang)
 import Type.Proxy (Proxy(..))
 import Web.HTML (window)
@@ -28,6 +30,7 @@ px = Proxy :: Proxy """<div>
 </div>
 """
 
+pxInception :: forall t18 t19. (Boolean -> Effect Unit) -> Element t18 t19 -> Element t18 t19
 pxInception push aThirdThing = px ~~
           { btn: bang (D.Style := "background-color: rgb(133,151,217)")
           , somethingElse:
@@ -42,10 +45,8 @@ pxInception push aThirdThing = px ~~
           }
 
 scene
-  :: (Boolean -> Effect Unit)
-  -> Event Boolean
-  -> Element Event (FFIDOMSnapshot -> Effect Unit)
-scene push event =
+  :: forall lock. Element lock (FFIDOMSnapshot -> Effect Unit)
+scene = bus $ mkExists $ Bus \{ push, event } ->
   D.div empty
       [ pxInception push
         $ pxInception push
@@ -53,7 +54,7 @@ scene push event =
         $ pxInception push
         $ pxInception push
         $ pxInception push (C.text_ "boo")
-      , C.text (event <#> if _ then "Oh hi" else "Oh bye")
+      , C.text ((event <|> bang true) <#> if _ then "Oh hi" else "Oh bye")
       ]
 
 
@@ -62,7 +63,5 @@ main = do
   b' <- window >>= document >>= body
   for_ (toElement <$> b') \b -> do
     ffi <- makeFFIDOMSnapshot
-    { push, event } <- create
-    let evt = deku b (scene push event) effectfulDOMInterpret
+    let evt = deku2 b scene effectfulDOMInterpret
     void $ subscribe evt \i -> i ffi
-    push true

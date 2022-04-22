@@ -2,36 +2,47 @@ module Deku.Core where
 
 import Prelude
 
-import Data.Exists (Exists)
+import Data.Maybe (Maybe)
 import Deku.Attribute (AttributeValue)
 import Effect (Effect)
-import FRP.Behavior (ABehavior)
+import FRP.Behavior (Behavior)
+import FRP.Event (Event)
 import Foreign.Object (Object)
 import Web.DOM as Web.DOM
 
-newtype Element event payload = Element
-  (String -> DOMInterpret event payload -> event payload)
-
-newtype SubgraphF event payload push = SubgraphF
-  (
-    -- the pusher for the subgraph
-    (push -> Effect Unit)
-    -- an event the subgraph can bind to
-    -> event push
-    -- the subgraph
-    -> Element event payload
+newtype Element (lock :: Type) payload = Element
+  ( { parent :: String
+    , scope :: String
+    , predecessor :: Maybe String
+    , raiseId :: Maybe String -> Effect Unit
+    }
+    -> DOMInterpret payload
+    -> Event payload
   )
-
-type Subgraph index event payload =
-  index -> Exists (SubgraphF event payload)
 
 type MakeElement =
   { id :: String
+  , scope :: String
+  , parent :: String
   , tag :: String
+  }
+type GiveNewParent =
+  { id :: String
+  , parent :: String
+  }
+type MakeNoop =
+  { id :: String
+  , scope :: String
+  , parent :: String
+  }
+type DisconnectElement =
+  { id :: String
+  , scope :: String
   , parent :: String
   }
 type MakeText =
   { id :: String
+  , scope :: String
   , parent :: String
   }
 type MakeRoot = { id :: String, root :: Web.DOM.Element }
@@ -41,73 +52,30 @@ type SetAttribute =
   , key :: String
   , value :: AttributeValue
   }
-type MakeSubgraph index event payload =
-  { id :: String
-  , parent :: String
-  , scenes :: Subgraph index event payload
-  }
-type MakePortal =
-  { id :: String
-  }
-type MakeGateway =
-  { id :: String
-  , parent :: String
-  , portal :: String
-  }
-type SetPortal =
-  { id :: String
-  , on :: Boolean
-  }
 type MakePursx =
   { id :: String
   , parent :: String
   , html :: String
   , scope :: String
+  , dkScope :: String
   , verb :: String
   , cache :: Object Boolean
   }
-type InsertSubgraph index =
+
+type SendToTop =
   { id :: String
-  , index :: index
-  , pos :: Int
-  }
-type RemoveSubgraph index =
-  { id :: String
-  , index :: index
-  , pos :: Int
   }
 
-type SendSubgraphToTop index =
-  { id :: String
-  , index :: index
-  , pos :: Int
-  }
-
-newtype DOMInterpret event payload = DOMInterpret
-  { ids :: ABehavior event String
+newtype DOMInterpret payload = DOMInterpret
+  { ids :: Behavior String
   , makeRoot :: MakeRoot -> payload
+  , makeNoop :: MakeNoop -> payload
   , makeElement :: MakeElement -> payload
   , makeText :: MakeText -> payload
   , makePursx :: MakePursx -> payload
-  , makePortal :: MakePortal -> payload
-  , makeGateway :: MakeGateway -> payload
-  , setPortal :: SetPortal -> payload
-  , makeSubgraph ::
-      forall index
-       . MakeSubgraph index event payload
-      -> payload
+  , giveNewParent :: GiveNewParent -> payload
+  , disconnectElement :: DisconnectElement -> payload
+  , sendToTop :: SendToTop -> payload
   , setAttribute :: SetAttribute -> payload
-  , sendSubgraphToTop ::
-      forall index
-       . SendSubgraphToTop index
-      -> payload
-  , removeSubgraph ::
-      forall index
-       . RemoveSubgraph index
-      -> payload
-  , insertSubgraph ::
-      forall index
-       . InsertSubgraph index
-      -> payload
   , setText :: SetText -> payload
   }

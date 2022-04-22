@@ -1,24 +1,46 @@
 module Deku.DOM.Elt.Br where
 
 import Control.Plus (empty)
+import Data.Foldable (oneOfMap)
 import Deku.Attribute (Attribute)
 import Deku.Control (elementify)
 import Deku.Core (Element)
-import FRP.Event (class IsEvent)
+import FRP.Event (Event)
+import Safe.Coerce (coerce)
+import FRP.Event.Class (bang)
+import Type.Equality (class TypeEquals, proof)
 
 data Br_
 
-br
-  :: forall event payload
-   . IsEvent event
-  => event (Attribute Br_)
-  -> Array (Element event payload)
-  -> Element event payload
-br = elementify "br"
+class Br_Ctor i o | i -> o where
+  br
+    :: Event (Attribute Br_)
+    -> i
+    -> o
+
+instance
+  (TypeEquals locki locko, TypeEquals payloadi payloado) =>
+  Br_Ctor (Event (Event (Element locki payloadi))) (Element locko payloado) where
+  br a i = elementify "br" a (proof (coerce i))
+
+instance
+  (TypeEquals locki locko, TypeEquals payloadi payloado) =>
+  Br_Ctor (Event (Element locki payloadi)) (Element locko payloado) where
+  br a i = elementify "br" a (bang (proof (coerce i)))
+
+instance
+  (TypeEquals locki locko, TypeEquals payloadi payloado) =>
+  Br_Ctor (Element locki payloadi) (Element locko payloado) where
+  br a i = elementify "br" a (bang (bang (proof (coerce i))))
+
+instance
+  (TypeEquals locki locko, TypeEquals payloadi payloado) =>
+  Br_Ctor (Array (Element locki payloadi)) (Element locko payloado) where
+  br a i = elementify "br" a (oneOfMap (\i' -> bang (bang (proof (coerce i')))) i)
 
 br_
-  :: forall event payload
-   . IsEvent event
-  => Array (Element event payload)
-  -> Element event payload
+  :: forall i o
+   . Br_Ctor i o
+  => i
+  -> o
 br_ = br empty
