@@ -12,7 +12,7 @@ import Data.Vec as V
 import Deku.Attribute ((:=))
 import Deku.Control (blank, dekuA, plant, portal)
 import Deku.Control as C
-import Deku.Core (Element)
+import Deku.Core (Element, StreamingElt(..))
 import Deku.DOM as D
 import Deku.Interpret (FFIDOMSnapshot, effectfulDOMInterpret, makeFFIDOMSnapshot)
 import Effect (Effect)
@@ -71,9 +71,9 @@ scene =
       ( map
           ( \rgb ->
               bang
-                ( D.div (bang (D.Style := "background-color: " <> rgb <> ";"))
+                (Elt $ D.div (bang (D.Style := "background-color: " <> rgb <> ";"))
                     (C.text_ "hello")
-                ) <|> delay 2000 (bang blank)
+                ) <|> delay 1432 (bang SendToTop) <|> delay 2000 (bang Remove)
           )
           (sample_ rdm (interval 1000))
       )

@@ -237,8 +237,7 @@ exports.sendToTop_ = function (a) {
 	return function (state) {
 		return function () {
 			var ptr = a.id;
-			var parent = a.id;
-			state.units[parent].main.prepend(state.units[ptr].main);
+			state.units[ptr].main.parentNode.prepend(state.units[ptr].main);
 		};
 	};
 };

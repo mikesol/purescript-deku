@@ -18,10 +18,10 @@ import Prelude
 
 import Control.Alt ((<|>))
 import Data.Either (Either(..))
-import Data.Foldable (fold, oneOf, oneOfMap, traverse_)
+import Data.Foldable (oneOf, oneOfMap)
 import Data.FunctorWithIndex (mapWithIndex)
 import Data.Maybe (Maybe(..))
-import Data.Tuple.Nested ((/\))
+import Deku.Internal (__internalDekuFlatten)
 import Data.Vec (toArray, Vec)
 import Deku.Attribute (Attribute, unsafeUnAttribute)
 import Deku.Core (DOMInterpret(..), Element(..), StreamingElt(..))
@@ -29,11 +29,8 @@ import Effect (Effect)
 import Effect.AVar (tryPut)
 import Effect.AVar as AVar
 import Effect.Exception (throwException)
-import Effect.Random as Random
-import Effect.Ref as Ref
-import FRP.Behavior (sampleBy, sample_)
-import FRP.Event (Event, bang, create, keepLatest, makeEvent, subscribe)
-import Foreign.Object as Object
+import FRP.Behavior (sample_)
+import FRP.Event (Event, bang, keepLatest, makeEvent, subscribe)
 import Safe.Coerce (coerce)
 import Type.Equality (class TypeEquals, proof)
 import Unsafe.Coerce (unsafeCoerce)
@@ -76,71 +73,6 @@ unsafeSetAttribute (DOMInterpret { setAttribute }) id atts = map
   )
   (atts)
 
-flatten
-  :: forall lock payload
-   . String
-  -> DOMInterpret payload
-  -> Event (Event (StreamingElt lock payload))
-  -> Event payload
-flatten parent di@(DOMInterpret { ids, disconnectElement, sendToTop }) children =
-  makeEvent \k -> do
-    cancelInner <- Ref.new Object.empty
-    cancelOuter <-
-      -- each child gets its own scope
-      subscribe children \inner ->
-        do
-          -- holds the previous id
-          prevId <- Ref.new Nothing
-          prevUnsub <- Ref.new (pure unit)
-          myUnsub <- Ref.new (pure unit)
-          myImmediateCancellation <- Ref.new (pure unit)
-          rn <- map show Random.random
-          c0 <- subscribe (sampleBy (/\) ids inner) \(newScope /\ kid') ->
-            case kid' of
-              SendToTop -> Ref.read prevId >>= traverse_
-                (k <<< sendToTop <<< { id: _ })
-              Remove -> do
-                let
-                  mic = join (Ref.read myUnsub) *> Ref.modify_
-                    (Object.delete rn)
-                    cancelInner
-                Ref.write mic myImmediateCancellation *> mic
-              Elt (Element kid) -> do
-                -- holds the current id
-                av <- AVar.empty
-                predecessor <- Ref.read prevId
-                c1 <- subscribe
-                  ( kid
-                      { parent
-                      , scope: newScope
-                      , predecessor
-                      , raiseId: \id -> do
-                          Ref.read prevId >>= traverse_ \old ->
-                            k
-                              ( disconnectElement
-                                  { id: old, parent }
-                              )
-                          void $ tryPut id av
-                      }
-                      di
-                  )
-                  k
-                cncl <- AVar.take av \q -> case q of
-                  Right r -> do
-                    Ref.write (Just r) (prevId)
-                    join (Ref.read prevUnsub)
-                    Ref.write c1 prevUnsub
-                  Left e -> throwException e
-                -- cancel immediately, as it should be run synchronously
-                -- so if this actually does something then we have a problem
-                cncl
-          Ref.write c0 myUnsub
-          Ref.modify_ (Object.insert rn c0) cancelInner
-          join (Ref.read myImmediateCancellation)
-    pure do
-      Ref.read cancelInner >>= fold
-      cancelOuter
-
 elementify
   :: forall element lock payload
    . String
@@ -158,7 +90,7 @@ elementify tag atts children = Element go
                 , unsafeSetAttribute di me atts
                 ]
             )
-              <|> flatten me di children
+              <|> __internalDekuFlatten me di children
           )
           k
     )
@@ -207,7 +139,7 @@ internalPortal scopeF gaga closure = Element go
               bang (giveNewParent { id, parent })
         )
         idz
-      realized = flatten psr.parent di
+      realized = __internalDekuFlatten psr.parent di
         (proof (coerce (closure injectable (\(Element q) -> Element q))))
     u <- subscribe realized k
     void $ tryPut u av2
@@ -286,14 +218,16 @@ instance
   ( TypeEquals locki locko
   , TypeEquals payloadi payloado
   ) =>
-  Plant (Array (Element locki payloadi)) (Event (Event (StreamingElt locko payloado))) where
+  Plant (Array (Element locki payloadi))
+    (Event (Event (StreamingElt locko payloado))) where
   plant i = proof (coerce (oneOfMap bang $ map (bang <<< Elt) i))
 
 instance
   ( TypeEquals locki locko
   , TypeEquals payloadi payloado
   ) =>
-  Plant (Array (Event (Element locki payloadi))) (Event (Event (StreamingElt locko payloado))) where
+  Plant (Array (Event (Element locki payloadi)))
+    (Event (Event (StreamingElt locko payloado))) where
   plant i = proof (coerce (oneOfMap bang $ (map <<< map) Elt i))
 
 instance
@@ -346,7 +280,7 @@ deku root children di@(DOMInterpret { ids, makeRoot }) =
   keepLatest
     ( (sample_ ids (bang unit)) <#> \me ->
         bang (makeRoot { id: me, root })
-          <|> flatten me di (proof (coerce children))
+          <|> __internalDekuFlatten me di (proof (coerce children))
     )
 
 deku0

@@ -9,6 +9,7 @@ import Prelude
 
 import Control.Alt ((<|>))
 import Control.Plus (empty)
+import Deku.Internal(__internalDekuFlatten)
 import Data.Either (Either(..))
 import Data.Foldable (fold, traverse_)
 import Data.Maybe (Maybe(..))
@@ -178,7 +179,7 @@ instance pursxToElementConsElt ::
     in
       { cache: Object.insert (reflectSymbol pxk) false cache
       , element: Element \info di ->
-          flatten (reflectSymbol pxk <> pxScope) di pxe
+          __internalDekuFlatten (reflectSymbol pxk <> pxScope) di pxe
             <|> (let Element y = element in y) info di
       }
     where
@@ -277,74 +278,6 @@ makePursx' verb html r = Element go
       )
 infixr 5 makePursx as ~~
 
--------
--- todo
--- this is copied verbatim from control so that it is not exported
--- fix?
-flatten
-  :: forall lock payload
-   . String
-  -> DOMInterpret payload
-  -> Event (Event (StreamingElt lock payload))
-  -> Event payload
-flatten parent di@(DOMInterpret { ids, disconnectElement, sendToTop }) children =
-  makeEvent \k -> do
-    cancelInner <- Ref.new Object.empty
-    cancelOuter <-
-      -- each child gets its own scope
-      subscribe children \inner ->
-        do
-          -- holds the previous id
-          prevId <- Ref.new Nothing
-          prevUnsub <- Ref.new (pure unit)
-          myUnsub <- Ref.new (pure unit)
-          myImmediateCancellation <- Ref.new (pure unit)
-          rn <- map show Random.random
-          c0 <- subscribe (sampleBy (/\) ids inner) \(newScope /\ kid') ->
-            case kid' of
-              SendToTop -> Ref.read prevId >>= traverse_
-                (k <<< sendToTop <<< { id: _ })
-              Remove -> do
-                let
-                  mic = join (Ref.read myUnsub) *> Ref.modify_
-                    (Object.delete rn)
-                    cancelInner
-                Ref.write mic myImmediateCancellation *> mic
-              Elt (Element kid) -> do
-                -- holds the current id
-                av <- AVar.empty
-                predecessor <- Ref.read prevId
-                c1 <- subscribe
-                  ( kid
-                      { parent
-                      , scope: newScope
-                      , predecessor
-                      , raiseId: \id -> do
-                          Ref.read prevId >>= traverse_ \old ->
-                            k
-                              ( disconnectElement
-                                  { id: old, parent }
-                              )
-                          void $ tryPut id av
-                      }
-                      di
-                  )
-                  k
-                cncl <- AVar.take av \q -> case q of
-                  Right r -> do
-                    Ref.write (Just r) (prevId)
-                    join (Ref.read prevUnsub)
-                    Ref.write c1 prevUnsub
-                  Left e -> throwException e
-                -- cancel immediately, as it should be run synchronously
-                -- so if this actually does something then we have a problem
-                cncl
-          Ref.write c0 myUnsub
-          Ref.modify_ (Object.insert rn c0) cancelInner
-          join (Ref.read myImmediateCancellation)
-    pure do
-      Ref.read cancelInner >>= fold
-      cancelOuter
 ''')
 with open('src/Deku/Pursx.purs', 'w') as f:
   for x in o: f.write(x+'\n')
