@@ -11,6 +11,7 @@ in      conf
               , "integers"
               , "aff"
               , "argonaut-core"
+              , "web-uievents"
               , "http-methods"
               , "maybe"
               , "typelevel"

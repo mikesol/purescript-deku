@@ -12,6 +12,7 @@ import Deku.Example.Docs.Component as Component
 import Deku.Example.Docs.Effects as Effects
 import Deku.Example.Docs.Events as Events
 import Deku.Example.Docs.Events2 as Events2
+import Deku.Example.Docs.Events3 as Events3
 import Deku.Example.Docs.HelloWorld as HelloWorld
 import Deku.Example.Docs.Intro as Intro
 import Deku.Example.Docs.Pursx1 as Pursx1
@@ -75,6 +76,9 @@ scene push event =
           , Events2
               /\ "Events 2"
               /\ true
+          , Events3
+              /\ "Events 3"
+              /\ true
           , Portals
               /\ "Portals"
               /\ false
@@ -93,6 +97,7 @@ scene push event =
   page dpage Effects =  Effects.effects dpage
   page dpage PURSX2 =  Pursx2.pursx2 dpage
   page dpage Events2 =  Events2.events2 dpage
+  page dpage Events3 =  Events3.events3 dpage
   page dpage Portals =  Pursx2.pursx2 dpage
 
 main :: Effect Unit

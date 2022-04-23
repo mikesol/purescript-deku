@@ -9,4 +9,5 @@ data Page
   | Events
   | Effects
   | Events2
+  | Events3
   | Portals
