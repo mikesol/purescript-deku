@@ -10,8 +10,6 @@ import Prelude
 import Deku.Core as Core
 import Effect (Effect)
 import Effect.Random as R
-import FRP.Behavior (behavior)
-import FRP.Event (makeEvent, subscribe)
 
 -- foreign
 data FFIDOMSnapshot
@@ -51,9 +49,7 @@ foreign import sendToTop_ :: Core.SendToTop -> FFIDOMSnapshot -> Effect Unit
 effectfulDOMInterpret :: Core.DOMInterpret (FFIDOMSnapshot -> Effect Unit)
 
 effectfulDOMInterpret = Core.DOMInterpret
-  { ids: map show $ behavior \f -> makeEvent \k -> do
-      r <- R.random
-      subscribe f \x -> k (x r)
+  { ids: map show R.random
   , makeElement: makeElement
   , makeRoot: makeRoot_
   , makeText: makeText_

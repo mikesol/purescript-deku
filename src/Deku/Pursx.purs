@@ -3909,31 +3909,33 @@ makePursx'
 makePursx' verb html r = Element go
   where
   go z@{ parent, scope, raiseId } di@(DOMInterpret { makePursx: mpx, ids }) =
-    keepLatest
-      ( (sample_ ids (bang unit)) <#> \me -> makeEvent \k -> do
-          raiseId me
-          subscribe
-            ( keepLatest
-                ( (sample_ ids (bang unit)) <#> \pxScope ->
-                    let
-                      { cache, element: Element element } = pursxToElement
-                        pxScope
-                        (Proxy :: _ rl)
-                        r
-                    in
-                      ( bang $ mpx
-                          { id: me
-                          , parent
-                          , cache
-                          , scope: pxScope
-                          , dkScope: scope
-                          , html: reflectSymbol html
-                          , verb: reflectSymbol verb
-                          }
-                      ) <|> element z di
-                )
-            )
-            k
-      )
+    makeEvent \k1 -> do
+      me <- ids
+      raiseId me
+      subscribe
+        ( makeEvent \k2 -> do
+            pxScope <- ids
+            let
+              { cache, element: Element element } = pursxToElement
+                pxScope
+                (Proxy :: _ rl)
+                r
+            subscribe
+              ( ( bang $
+                    mpx
+                      { id: me
+                      , parent
+                      , cache
+                      , scope: pxScope
+                      , dkScope: scope
+                      , html: reflectSymbol html
+                      , verb: reflectSymbol verb
+                      }
+                ) <|> element z di
+              )
+              k2
+        )
+        k1
+
 infixr 5 makePursx as ~~
 

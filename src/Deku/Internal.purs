@@ -7,14 +7,11 @@ import Prelude
 import Data.Either (Either(..))
 import Data.Foldable (fold, traverse_)
 import Data.Maybe (Maybe(..))
-import Data.Tuple.Nested ((/\))
 import Deku.Core (DOMInterpret(..), Element(..), StreamingElt(..))
 import Effect.AVar (tryPut)
 import Effect.AVar as AVar
 import Effect.Exception (throwException)
-import Effect.Random as Random
 import Effect.Ref as Ref
-import FRP.Behavior (sampleBy)
 import FRP.Event (Event, makeEvent, subscribe)
 import Foreign.Object as Object
 
@@ -36,8 +33,9 @@ __internalDekuFlatten parent di@(DOMInterpret { ids, disconnectElement, sendToTo
           prevUnsub <- Ref.new (pure unit)
           myUnsub <- Ref.new (pure unit)
           myImmediateCancellation <- Ref.new (pure unit)
-          rn <- map show Random.random
-          c0 <- subscribe (sampleBy (/\) ids inner) \(newScope /\ kid') ->
+          rn <- ids
+          c0 <- subscribe inner \kid' -> do
+            newScope <- ids
             case kid' of
               SendToTop -> Ref.read prevId >>= traverse_
                 (k <<< sendToTop <<< { id: _ })

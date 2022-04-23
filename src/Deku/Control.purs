@@ -28,8 +28,7 @@ import Effect (Effect)
 import Effect.AVar (tryPut)
 import Effect.AVar as AVar
 import Effect.Exception (throwException)
-import FRP.Behavior (sample_)
-import FRP.Event (Event, bang, keepLatest, makeEvent, subscribe)
+import FRP.Event (Event, bang, makeEvent, subscribe)
 import Safe.Coerce (coerce)
 import Type.Equality (class TypeEquals, proof)
 import Unsafe.Coerce (unsafeCoerce)
@@ -80,19 +79,18 @@ elementify
   -> Element lock payload
 elementify tag atts children = Element go
   where
-  go { parent, scope, raiseId } di@(DOMInterpret { ids }) = keepLatest
-    ( (sample_ ids (bang unit)) <#> \me -> makeEvent \k -> do
-        raiseId me
-        subscribe
-          ( ( oneOf
-                [ bang (unsafeElement di { id: me, parent, scope, tag })
-                , unsafeSetAttribute di me atts
-                ]
-            )
-              <|> __internalDekuFlatten me di children
-          )
-          k
-    )
+  go { parent, scope, raiseId } di@(DOMInterpret { ids }) = makeEvent \k -> do
+    me <- ids
+    raiseId me
+    subscribe
+      ( ( oneOf
+            [ bang (unsafeElement di { id: me, parent, scope, tag })
+            , unsafeSetAttribute di me atts
+            ]
+        )
+          <|> __internalDekuFlatten me di children
+      )
+      k
 
 newtype MutAr a = MutAr (Array a)
 
@@ -242,28 +240,27 @@ text
   -> Element lock payload
 text txt = Element go
   where
-  go { parent, scope, raiseId } di@(DOMInterpret { ids }) = keepLatest
-    ( (sample_ ids (bang unit)) <#> \me -> makeEvent \k -> do
-        raiseId me
-        subscribe
-          ( oneOf
-              [ bang (unsafeText di { id: me, parent, scope })
-              , unsafeSetText di me txt
-              ]
-          )
-          k
-    )
+  go { parent, scope, raiseId } di@(DOMInterpret { ids }) = makeEvent \k -> do
+    me <- ids
+    raiseId me
+    subscribe
+      ( oneOf
+          [ bang (unsafeText di { id: me, parent, scope })
+          , unsafeSetText di me txt
+          ]
+      )
+      k
 
 blank :: forall lock payload. Element lock payload
 blank = Element go
   where
-  go { parent, scope, raiseId } (DOMInterpret { ids, makeNoop }) = keepLatest
-    ( (sample_ ids (bang unit)) <#> \me -> makeEvent \k -> do
-        raiseId me
-        subscribe
-          (bang (makeNoop { id: me, parent, scope }))
-          k
-    )
+  go { parent, scope, raiseId } (DOMInterpret { ids, makeNoop }) = makeEvent
+    \k -> do
+      me <- ids
+      raiseId me
+      subscribe
+        (bang (makeNoop { id: me, parent, scope }))
+        k
 
 text_ :: forall lock payload. String -> Element lock payload
 text_ txt = text (bang txt)
@@ -274,12 +271,13 @@ deku
   -> (forall lock. Event (Event (StreamingElt lock payload)))
   -> DOMInterpret payload
   -> Event payload
-deku root children di@(DOMInterpret { ids, makeRoot }) =
-  keepLatest
-    ( (sample_ ids (bang unit)) <#> \me ->
-        bang (makeRoot { id: me, root })
-          <|> __internalDekuFlatten me di (proof (coerce children))
+deku root children di@(DOMInterpret { ids, makeRoot }) = makeEvent \k -> do
+  me <- ids
+  subscribe
+    ( bang (makeRoot { id: me, root })
+        <|> __internalDekuFlatten me di (proof (coerce children))
     )
+    k
 
 deku0
   :: forall payload

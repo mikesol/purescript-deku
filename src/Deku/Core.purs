@@ -4,7 +4,6 @@ import Prelude
 
 import Deku.Attribute (AttributeValue)
 import Effect (Effect)
-import FRP.Behavior (Behavior)
 import FRP.Event (Event)
 import Foreign.Object (Object)
 import Web.DOM as Web.DOM
@@ -66,7 +65,7 @@ type SendToTop =
   }
 
 newtype DOMInterpret payload = DOMInterpret
-  { ids :: Behavior String
+  { ids :: Effect String
   , makeRoot :: MakeRoot -> payload
   , makeNoop :: MakeNoop -> payload
   , makeElement :: MakeElement -> payload
