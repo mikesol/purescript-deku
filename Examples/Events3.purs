@@ -29,50 +29,61 @@ data TodoAction = Prioritize | Delete
 main :: Effect Unit
 main = runInBody1
   ( bus \push -> lcmap (alt (bang UIShown)) \event -> do
-      D.div_
-        [ D.div_
-            [ D.input
-                ( oneOfMap bang
-                    [ D.OnInput := cb \e -> for_
-                        ( target e
-                            >>= fromEventTarget
-                        )
-                        ( value
-                            >=> push <<< ChangeText
-                        )
-                    , D.OnKeyup := cb \e -> for_ (fromEvent e) \evt -> do
+      let
+        top =
+          [ D.input
+              ( oneOfMap bang
+                  [ D.OnInput := cb \e -> for_
+                      ( target e
+                          >>= fromEventTarget
+                      )
+                      ( value
+                          >=> push <<< ChangeText
+                      )
+                  , D.OnKeyup := cb
+                      \e -> for_ (fromEvent e) \evt -> do
                         when (code evt == "Enter") $ do
                           push AddTodo
-                    ]
-                )
-                blank
-            , D.button (bang $ D.OnClick := cb (const $ push AddTodo))
-                (text_ "Add")
-            ]
-        , D.div_
-            ( map
-                ( \txt -> keepLatest $ bus \p' e' ->
-                    ( bang $ Elt $ D.div_
-                        [ text_ txt
-                        , D.button
-                            (bang $ D.OnClick := cb (const $ p' SendToTop))
-                            [ text_ "Prioritize" ]
-                        , D.button (bang $ D.OnClick := cb (const $ p' Remove))
-                            [ text_ "Delete" ]
-                        ]
-                    ) <|> e'
-                )
-                ( filterMap (\(tf /\ s) -> if tf then Just s else Nothing)
-                    ( mapAccum
-                        ( \a b -> case a of
-                            ChangeText s -> s /\ (false /\ s)
-                            AddTodo -> b /\ (true /\ b)
-                            _ -> "" /\ (false /\ "")
+                  ]
+              )
+              blank
+          , D.button
+              (bang $ D.OnClick := cb (const $ push AddTodo))
+              (text_ "Add")
+          ]
+      D.div_
+        [ D.div_ top
+        , D.div_ $
+            ( \txt -> keepLatest $ bus \p' e' ->
+                ( bang $ Elt $ D.div_
+                    [ text_ txt
+                    , D.button
+                        ( bang
+                            $ D.OnClick
+                              := cb (const $ p' SendToTop)
                         )
-                        event
-                        ""
-                    )
+                        [ text_ "Prioritize" ]
+                    , D.button
+                        ( bang
+                            $ D.OnClick
+                              := cb (const $ p' Remove)
+                        )
+                        [ text_ "Delete" ]
+                    ]
+                ) <|> e'
+            ) <$>
+              filterMap
+                ( \(tf /\ s) ->
+                    if tf then Just s else Nothing
                 )
-            )
+                ( mapAccum
+                    ( \a b -> case a of
+                        ChangeText s -> s /\ (false /\ s)
+                        AddTodo -> b /\ (true /\ b)
+                        _ -> "" /\ (false /\ "")
+                    )
+                    event
+                    ""
+                )
         ]
   )
