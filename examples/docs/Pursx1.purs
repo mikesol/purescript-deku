@@ -2,7 +2,6 @@ module Deku.Example.Docs.Pursx1 where
 
 import Prelude
 
-import Control.Plus (class Plus)
 import Deku.Attribute (cb, (:=))
 import Deku.Control (text_)
 import Deku.Core (Element)
@@ -11,7 +10,6 @@ import Deku.Example.Docs.Types (Page(..))
 import Deku.Example.Docs.Util (scrollToTop)
 import Deku.Pursx (nut, psx, (~~))
 import Effect (Effect)
-import FRP.Event (class IsEvent)
 import FRP.Event.Class (bang)
 import Type.Proxy (Proxy(..))
 
@@ -55,18 +53,19 @@ px = Proxy :: Proxy """<div>
 </div>"""
 
 
-pursx1 :: forall event payload. IsEvent event => Plus event => (Page -> Effect Unit) -> Element event payload
+pursx1 :: forall lock payload. (Page -> Effect Unit) -> Element lock payload
 pursx1 dpage  = px ~~
   { code: nut (D.pre_ [D.code_ [text_ $ """module Main where
 
 import Prelude
 
 import Deku.Pursx (psx)
-import Deku.Toplevel ((🚀))
+import Deku.Toplevel (runInBody2)
 import Effect (Effect)
+import FRP.Event (bang)
 import Type.Proxy (Proxy(..))
 
-myDom = Proxy :: Proxy """ <>"\"\"\""<>"""<div>
+myDom = Proxy :: Proxy """ <> "\"\"\"" <> """<div>
     <button>I do nothing</button>
     <ul>
         <li>A</li>
@@ -74,16 +73,17 @@ myDom = Proxy :: Proxy """ <>"\"\"\""<>"""<div>
         <li>C</li>
     </ul>
     <div>
-        <a href="https://example.com">foo</a>
+        <a href="https://github.com/mikesol/purescript-deku"></a>
         <i>bar</i>
         <span style="font-weight:800;">baz</span>
     </div>
     <div><div></div><div><input type="range"/></div></div>
     </div>
-""" <>"\"\"\""<>"""
+""" <> "\"\"\"" <> """
 
 main :: Effect Unit
-main = unit 🚀 \_ _ -> psx myDom"""]])
+main = runInBody2 (psx myDom)
+"""]])
   , result: nut (psx myDom)
   , next: bang (D.OnClick := (cb (const $ dpage Events *> scrollToTop)))
   }

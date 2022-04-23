@@ -13,5 +13,6 @@ in      conf
               , "argonaut-core"
               , "http-methods"
               , "maybe"
+              , "typelevel"
               ]
         }

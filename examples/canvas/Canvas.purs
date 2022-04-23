@@ -3,16 +3,14 @@ module Deku.Example.Canvas where
 import Prelude
 
 import Control.Plus (empty)
-import Data.Exists (mkExists)
 import Data.Foldable (for_, oneOfMap)
-import Data.Tuple (Tuple(..))
 import Deku.Attribute ((:=))
-import Deku.Control (Bus(..), bus, deku, deku2, flatten)
+import Deku.Control (deku2)
 import Deku.Core (Element)
 import Deku.DOM as D
 import Deku.Interpret (FFIDOMSnapshot, effectfulDOMInterpret, makeFFIDOMSnapshot)
 import Effect (Effect)
-import FRP.Event (Event, create, mapAccum, subscribe)
+import FRP.Event (Event, subscribe)
 import FRP.Event.Class (bang)
 import Graphics.Canvas (fillRect, setFillStyle)
 import Web.HTML (window)

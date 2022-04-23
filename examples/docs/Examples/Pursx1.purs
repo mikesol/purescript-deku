@@ -3,7 +3,7 @@ module Deku.Examples.Docs.Examples.Pursx1 where
 import Prelude
 
 import Deku.Pursx (psx)
-import Deku.Toplevel ((🚀))
+import Deku.Toplevel (runInBody2)
 import Effect (Effect)
 import Type.Proxy (Proxy(..))
 
@@ -24,4 +24,4 @@ myDom = Proxy :: Proxy """<div>
 """
 
 main :: Effect Unit
-main = unit 🚀 \_ _ -> psx myDom
+main = runInBody2 (psx myDom)

@@ -60,6 +60,7 @@ exports.makeText_ = function (a) {
 			state.units[ptr] = {
 				main: document.createTextNode(""),
 				parent: a.parent,
+				scope: a.scope
 			};
 			connectXToY_(ptr)(a.parent)(state)();
 		};

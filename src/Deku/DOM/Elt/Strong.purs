@@ -1,46 +1,25 @@
 module Deku.DOM.Elt.Strong where
 
 import Control.Plus (empty)
-import Data.Foldable (oneOfMap)
 import Deku.Attribute (Attribute)
-import Deku.Control (elementify)
-import Deku.Core (Element)
+import Deku.Control (elementify, class Plant, plant)
+import Deku.Core (StreamingElt, Element)
 import FRP.Event (Event)
-import Safe.Coerce (coerce)
-import FRP.Event.Class (bang)
-import Type.Equality (class TypeEquals, proof)
 
 data Strong_
 
-class Strong_Ctor i o | i -> o where
-  strong
-    :: Event (Attribute Strong_)
-    -> i
-    -> o
-
-instance
-  (TypeEquals locki locko, TypeEquals payloadi payloado) =>
-  Strong_Ctor (Event (Event (Element locki payloadi))) (Element locko payloado) where
-  strong a i = elementify "strong" a (proof (coerce i))
-
-instance
-  (TypeEquals locki locko, TypeEquals payloadi payloado) =>
-  Strong_Ctor (Event (Element locki payloadi)) (Element locko payloado) where
-  strong a i = elementify "strong" a (bang (proof (coerce i)))
-
-instance
-  (TypeEquals locki locko, TypeEquals payloadi payloado) =>
-  Strong_Ctor (Element locki payloadi) (Element locko payloado) where
-  strong a i = elementify "strong" a (bang (bang (proof (coerce i))))
-
-instance
-  (TypeEquals locki locko, TypeEquals payloadi payloado) =>
-  Strong_Ctor (Array (Element locki payloadi)) (Element locko payloado) where
-  strong a i = elementify "strong" a (oneOfMap (\i' -> bang (bang (proof (coerce i')))) i)
+strong
+  :: forall seed lock payload
+   . Plant seed (Event (Event (StreamingElt lock payload)))
+  => Event (Attribute Strong_)
+  -> seed
+  -> Element lock payload
+strong attributes seed = elementify "strong" attributes (plant seed)
 
 strong_
-  :: forall i o
-   . Strong_Ctor i o
-  => i
-  -> o
+  :: forall seed lock payload
+   . Plant seed (Event (Event (StreamingElt lock payload)))
+  => seed
+  -> Element lock payload
 strong_ = strong empty
+

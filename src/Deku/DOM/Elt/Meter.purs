@@ -1,46 +1,25 @@
 module Deku.DOM.Elt.Meter where
 
 import Control.Plus (empty)
-import Data.Foldable (oneOfMap)
 import Deku.Attribute (Attribute)
-import Deku.Control (elementify)
-import Deku.Core (Element)
+import Deku.Control (elementify, class Plant, plant)
+import Deku.Core (StreamingElt, Element)
 import FRP.Event (Event)
-import Safe.Coerce (coerce)
-import FRP.Event.Class (bang)
-import Type.Equality (class TypeEquals, proof)
 
 data Meter_
 
-class Meter_Ctor i o | i -> o where
-  meter
-    :: Event (Attribute Meter_)
-    -> i
-    -> o
-
-instance
-  (TypeEquals locki locko, TypeEquals payloadi payloado) =>
-  Meter_Ctor (Event (Event (Element locki payloadi))) (Element locko payloado) where
-  meter a i = elementify "meter" a (proof (coerce i))
-
-instance
-  (TypeEquals locki locko, TypeEquals payloadi payloado) =>
-  Meter_Ctor (Event (Element locki payloadi)) (Element locko payloado) where
-  meter a i = elementify "meter" a (bang (proof (coerce i)))
-
-instance
-  (TypeEquals locki locko, TypeEquals payloadi payloado) =>
-  Meter_Ctor (Element locki payloadi) (Element locko payloado) where
-  meter a i = elementify "meter" a (bang (bang (proof (coerce i))))
-
-instance
-  (TypeEquals locki locko, TypeEquals payloadi payloado) =>
-  Meter_Ctor (Array (Element locki payloadi)) (Element locko payloado) where
-  meter a i = elementify "meter" a (oneOfMap (\i' -> bang (bang (proof (coerce i')))) i)
+meter
+  :: forall seed lock payload
+   . Plant seed (Event (Event (StreamingElt lock payload)))
+  => Event (Attribute Meter_)
+  -> seed
+  -> Element lock payload
+meter attributes seed = elementify "meter" attributes (plant seed)
 
 meter_
-  :: forall i o
-   . Meter_Ctor i o
-  => i
-  -> o
+  :: forall seed lock payload
+   . Plant seed (Event (Event (StreamingElt lock payload)))
+  => seed
+  -> Element lock payload
 meter_ = meter empty
+

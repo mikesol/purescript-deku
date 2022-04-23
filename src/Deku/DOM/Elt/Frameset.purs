@@ -1,46 +1,25 @@
 module Deku.DOM.Elt.Frameset where
 
 import Control.Plus (empty)
-import Data.Foldable (oneOfMap)
 import Deku.Attribute (Attribute)
-import Deku.Control (elementify)
-import Deku.Core (Element)
+import Deku.Control (elementify, class Plant, plant)
+import Deku.Core (StreamingElt, Element)
 import FRP.Event (Event)
-import Safe.Coerce (coerce)
-import FRP.Event.Class (bang)
-import Type.Equality (class TypeEquals, proof)
 
 data Frameset_
 
-class Frameset_Ctor i o | i -> o where
-  frameset
-    :: Event (Attribute Frameset_)
-    -> i
-    -> o
-
-instance
-  (TypeEquals locki locko, TypeEquals payloadi payloado) =>
-  Frameset_Ctor (Event (Event (Element locki payloadi))) (Element locko payloado) where
-  frameset a i = elementify "frameset" a (proof (coerce i))
-
-instance
-  (TypeEquals locki locko, TypeEquals payloadi payloado) =>
-  Frameset_Ctor (Event (Element locki payloadi)) (Element locko payloado) where
-  frameset a i = elementify "frameset" a (bang (proof (coerce i)))
-
-instance
-  (TypeEquals locki locko, TypeEquals payloadi payloado) =>
-  Frameset_Ctor (Element locki payloadi) (Element locko payloado) where
-  frameset a i = elementify "frameset" a (bang (bang (proof (coerce i))))
-
-instance
-  (TypeEquals locki locko, TypeEquals payloadi payloado) =>
-  Frameset_Ctor (Array (Element locki payloadi)) (Element locko payloado) where
-  frameset a i = elementify "frameset" a (oneOfMap (\i' -> bang (bang (proof (coerce i')))) i)
+frameset
+  :: forall seed lock payload
+   . Plant seed (Event (Event (StreamingElt lock payload)))
+  => Event (Attribute Frameset_)
+  -> seed
+  -> Element lock payload
+frameset attributes seed = elementify "frameset" attributes (plant seed)
 
 frameset_
-  :: forall i o
-   . Frameset_Ctor i o
-  => i
-  -> o
+  :: forall seed lock payload
+   . Plant seed (Event (Event (StreamingElt lock payload)))
+  => seed
+  -> Element lock payload
 frameset_ = frameset empty
+

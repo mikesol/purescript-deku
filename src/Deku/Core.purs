@@ -10,11 +10,13 @@ import FRP.Event (Event)
 import Foreign.Object (Object)
 import Web.DOM as Web.DOM
 
+data StreamingElt lock payload = Elt (Element lock payload) | SendToTop | Remove
+
 newtype Element (lock :: Type) payload = Element
   ( { parent :: String
     , scope :: String
     , predecessor :: Maybe String
-    , raiseId :: Maybe String -> Effect Unit
+    , raiseId :: String -> Effect Unit
     }
     -> DOMInterpret payload
     -> Event payload
@@ -37,7 +39,6 @@ type MakeNoop =
   }
 type DisconnectElement =
   { id :: String
-  , scope :: String
   , parent :: String
   }
 type MakeText =

@@ -1,46 +1,25 @@
 module Deku.DOM.Elt.H5 where
 
 import Control.Plus (empty)
-import Data.Foldable (oneOfMap)
 import Deku.Attribute (Attribute)
-import Deku.Control (elementify)
-import Deku.Core (Element)
+import Deku.Control (elementify, class Plant, plant)
+import Deku.Core (StreamingElt, Element)
 import FRP.Event (Event)
-import Safe.Coerce (coerce)
-import FRP.Event.Class (bang)
-import Type.Equality (class TypeEquals, proof)
 
 data H5_
 
-class H5_Ctor i o | i -> o where
-  h5
-    :: Event (Attribute H5_)
-    -> i
-    -> o
-
-instance
-  (TypeEquals locki locko, TypeEquals payloadi payloado) =>
-  H5_Ctor (Event (Event (Element locki payloadi))) (Element locko payloado) where
-  h5 a i = elementify "h5" a (proof (coerce i))
-
-instance
-  (TypeEquals locki locko, TypeEquals payloadi payloado) =>
-  H5_Ctor (Event (Element locki payloadi)) (Element locko payloado) where
-  h5 a i = elementify "h5" a (bang (proof (coerce i)))
-
-instance
-  (TypeEquals locki locko, TypeEquals payloadi payloado) =>
-  H5_Ctor (Element locki payloadi) (Element locko payloado) where
-  h5 a i = elementify "h5" a (bang (bang (proof (coerce i))))
-
-instance
-  (TypeEquals locki locko, TypeEquals payloadi payloado) =>
-  H5_Ctor (Array (Element locki payloadi)) (Element locko payloado) where
-  h5 a i = elementify "h5" a (oneOfMap (\i' -> bang (bang (proof (coerce i')))) i)
+h5
+  :: forall seed lock payload
+   . Plant seed (Event (Event (StreamingElt lock payload)))
+  => Event (Attribute H5_)
+  -> seed
+  -> Element lock payload
+h5 attributes seed = elementify "h5" attributes (plant seed)
 
 h5_
-  :: forall i o
-   . H5_Ctor i o
-  => i
-  -> o
+  :: forall seed lock payload
+   . Plant seed (Event (Event (StreamingElt lock payload)))
+  => seed
+  -> Element lock payload
 h5_ = h5 empty
+

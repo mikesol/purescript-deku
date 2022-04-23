@@ -1,46 +1,25 @@
 module Deku.DOM.Elt.Header where
 
 import Control.Plus (empty)
-import Data.Foldable (oneOfMap)
 import Deku.Attribute (Attribute)
-import Deku.Control (elementify)
-import Deku.Core (Element)
+import Deku.Control (elementify, class Plant, plant)
+import Deku.Core (StreamingElt, Element)
 import FRP.Event (Event)
-import Safe.Coerce (coerce)
-import FRP.Event.Class (bang)
-import Type.Equality (class TypeEquals, proof)
 
 data Header_
 
-class Header_Ctor i o | i -> o where
-  header
-    :: Event (Attribute Header_)
-    -> i
-    -> o
-
-instance
-  (TypeEquals locki locko, TypeEquals payloadi payloado) =>
-  Header_Ctor (Event (Event (Element locki payloadi))) (Element locko payloado) where
-  header a i = elementify "header" a (proof (coerce i))
-
-instance
-  (TypeEquals locki locko, TypeEquals payloadi payloado) =>
-  Header_Ctor (Event (Element locki payloadi)) (Element locko payloado) where
-  header a i = elementify "header" a (bang (proof (coerce i)))
-
-instance
-  (TypeEquals locki locko, TypeEquals payloadi payloado) =>
-  Header_Ctor (Element locki payloadi) (Element locko payloado) where
-  header a i = elementify "header" a (bang (bang (proof (coerce i))))
-
-instance
-  (TypeEquals locki locko, TypeEquals payloadi payloado) =>
-  Header_Ctor (Array (Element locki payloadi)) (Element locko payloado) where
-  header a i = elementify "header" a (oneOfMap (\i' -> bang (bang (proof (coerce i')))) i)
+header
+  :: forall seed lock payload
+   . Plant seed (Event (Event (StreamingElt lock payload)))
+  => Event (Attribute Header_)
+  -> seed
+  -> Element lock payload
+header attributes seed = elementify "header" attributes (plant seed)
 
 header_
-  :: forall i o
-   . Header_Ctor i o
-  => i
-  -> o
+  :: forall seed lock payload
+   . Plant seed (Event (Event (StreamingElt lock payload)))
+  => seed
+  -> Element lock payload
 header_ = header empty
+

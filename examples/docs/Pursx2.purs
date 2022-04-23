@@ -3,11 +3,8 @@ module Deku.Example.Docs.Pursx2 where
 import Prelude
 
 import Control.Alt ((<|>))
-import Control.Plus (class Plus)
 import Data.Compactable (compact)
-import Data.Exists (mkExists)
 import Data.Maybe (Maybe(..))
-import Data.Tuple.Nested ((/\))
 import Deku.Attribute (cb, (:=))
 import Deku.Control (text, text_)
 import Deku.Core (Element)
@@ -16,8 +13,7 @@ import Deku.Example.Docs.Types (Page(..))
 import Deku.Example.Docs.Util (scrollToTop)
 import Deku.Pursx (makePursx', nut, (~~))
 import Effect (Effect)
-import FRP.Event (class IsEvent)
-import FRP.Event.Class (bang)
+import FRP.Event (bus, bang)
 import Type.Proxy (Proxy(..))
 
 px =
@@ -42,7 +38,7 @@ px =
   <p>Named slots for dynamic content are added to PursX with between two tildes, like <code>~foo~</code>. This separator doesn't have to be a tilde - it can be set programatically as well (see the Deku/Pursx.purs module for an example of how that is done). Also, we no longer use the <code>psx</code> command. Instead, we use the infix operator <code>~~</code> followed by arguments to our template. In the case of dynamic attributes, the argument is a stream of attributes. In the case of a dynamic section, the arguments are of type <code>Element</code>.</p>
 
   <h2>Next steps</h2>
-  <p>In more complicated apps, like this documentation, we'll want to split up our components into sub-components and create a way for them to communicate back and forth. In the next section, we'll see one way to do this via <a ?next? style="cursor:pointer;">subgraphs</a>.</p>
+  <p>In more complicated apps, like this documentation, we'll need dynamic logic that allows for components to replace each other, for example in a navigation bar. In the next section, we'll see one way to do this by using <a ?next? style="cursor:pointer;">events to control the presence and absence of elements</a>.</p>
 </div>"""
 
 myDom =  Proxy   :: Proxy    """<div>
@@ -63,11 +59,9 @@ myDom =  Proxy   :: Proxy    """<div>
 """
 
 pursx2
-  :: forall event payload
-   . IsEvent event
-  => Plus event
-  => (Page -> Effect Unit)
-  -> Element event payload
+  :: forall lock payload
+   . (Page -> Effect Unit)
+  -> Element lock payload
 pursx2 dpage = makePursx' (Proxy :: _ "?") px
   { code: nut
       ( D.pre_
@@ -84,12 +78,13 @@ import Deku.Attribute (cb, (:=))
 import Deku.Control (text)
 import Deku.DOM as D
 import Deku.Pursx (nut, (~~))
-import Deku.Toplevel ((🚀))
+import Deku.Toplevel (runInBody1)
 import Effect (Effect)
+import FRP.Event (bus, bang)
 import Type.Proxy (Proxy(..))
 
-myDom = Proxy :: Proxy """ <> "\"\"\""
-                    <> """<div>
+myDom =
+  Proxy :: Proxy """ <> "\"\"\"" <> """<div>
         <button>I do nothing</button>
         <ul>
           <li>A</li>
@@ -104,27 +99,26 @@ myDom = Proxy :: Proxy """ <> "\"\"\""
         </div>
         <div><div></div><div><input type="range"/></div></div>
       </div>
-"""
-                    <> "\"\"\""
-                    <>
-                      """
+""" <> "\"\"\"" <> """
 
 main :: Effect Unit
-main = Nothing 🚀 \push event -> myDom ~~
-  { myli: bang (D.Style := "background-color:rgb(200,240,210);")
-  , somethingNew: nut
-      ( D.button (bang (D.OnClick := cb (const $ push (Just unit))))
-          [ text
-              $ (compact event $> "Thanks for clicking me!") <|>
-                  bang "I was dynamically inserted"
-          ]
-      )
-  }"""
+main = runInBody1
+  ( bus \push event -> myDom ~~
+      { myli: bang (D.Style := "background-color:rgb(200,240,210);")
+      , somethingNew: nut
+          ( D.button (bang (D.OnClick := cb (const $ push (Just unit))))
+              [ text
+                  $ (compact event $> "Thanks for clicking me!") <|>
+                    bang "I was dynamically inserted"
+              ]
+          )
+      }
+  )"""
               ]
           ]
       )
   , result: nut
-      ( bang (unit /\ Insert) @@ \_ -> mkExists $ SubgraphF \push event ->
+      ( bus \push event ->
           myDom ~~
             { myli: bang (D.Style := "background-color:rgb(200,240,210);")
             , somethingNew: nut
@@ -136,5 +130,5 @@ main = Nothing 🚀 \push event -> myDom ~~
                 )
             }
       )
-  , next: bang (D.OnClick := (cb (const $ dpage Subgraph *> scrollToTop)))
+  , next: bang (D.OnClick := (cb (const $ dpage Events2 *> scrollToTop)))
   }

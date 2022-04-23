@@ -1,46 +1,25 @@
 module Deku.DOM.Elt.Tfoot where
 
 import Control.Plus (empty)
-import Data.Foldable (oneOfMap)
 import Deku.Attribute (Attribute)
-import Deku.Control (elementify)
-import Deku.Core (Element)
+import Deku.Control (elementify, class Plant, plant)
+import Deku.Core (StreamingElt, Element)
 import FRP.Event (Event)
-import Safe.Coerce (coerce)
-import FRP.Event.Class (bang)
-import Type.Equality (class TypeEquals, proof)
 
 data Tfoot_
 
-class Tfoot_Ctor i o | i -> o where
-  tfoot
-    :: Event (Attribute Tfoot_)
-    -> i
-    -> o
-
-instance
-  (TypeEquals locki locko, TypeEquals payloadi payloado) =>
-  Tfoot_Ctor (Event (Event (Element locki payloadi))) (Element locko payloado) where
-  tfoot a i = elementify "tfoot" a (proof (coerce i))
-
-instance
-  (TypeEquals locki locko, TypeEquals payloadi payloado) =>
-  Tfoot_Ctor (Event (Element locki payloadi)) (Element locko payloado) where
-  tfoot a i = elementify "tfoot" a (bang (proof (coerce i)))
-
-instance
-  (TypeEquals locki locko, TypeEquals payloadi payloado) =>
-  Tfoot_Ctor (Element locki payloadi) (Element locko payloado) where
-  tfoot a i = elementify "tfoot" a (bang (bang (proof (coerce i))))
-
-instance
-  (TypeEquals locki locko, TypeEquals payloadi payloado) =>
-  Tfoot_Ctor (Array (Element locki payloadi)) (Element locko payloado) where
-  tfoot a i = elementify "tfoot" a (oneOfMap (\i' -> bang (bang (proof (coerce i')))) i)
+tfoot
+  :: forall seed lock payload
+   . Plant seed (Event (Event (StreamingElt lock payload)))
+  => Event (Attribute Tfoot_)
+  -> seed
+  -> Element lock payload
+tfoot attributes seed = elementify "tfoot" attributes (plant seed)
 
 tfoot_
-  :: forall i o
-   . Tfoot_Ctor i o
-  => i
-  -> o
+  :: forall seed lock payload
+   . Plant seed (Event (Event (StreamingElt lock payload)))
+  => seed
+  -> Element lock payload
 tfoot_ = tfoot empty
+

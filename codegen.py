@@ -95,7 +95,7 @@ def cg(CODEGEN_TARGET, ival = None, ival2 = None):
             noop_(f'''  , {term}
   , {x}
   , {x}_''')
-            print_(f'''import Deku.DOM.Elt.{term.split('_')[0]}({term}, class {term}Ctor, {x}, {x}_)''')
+            print_(f'''import Deku.DOM.Elt.{term.split('_')[0]}({term}, {x}, {x}_)''')
 
     elif CODEGEN_TARGET == GENERATE_DOM_TTD:
         for x in TAGS:
@@ -109,49 +109,28 @@ def cg(CODEGEN_TARGET, ival = None, ival2 = None):
             print_(f'''module Deku.DOM.Elt.{term.split('_')[0]} where
 
 import Control.Plus (empty)
-import Data.Foldable (oneOfMap)
 import Deku.Attribute (Attribute)
-import Deku.Control (elementify)
-import Deku.Core (Element)
+import Deku.Control (elementify, class Plant, plant)
+import Deku.Core (StreamingElt, Element)
 import FRP.Event (Event)
-import Safe.Coerce (coerce)
-import FRP.Event.Class (bang)
-import Type.Equality (class TypeEquals, proof)
 
 data {term}
 
-class {term}Ctor i o | i -> o where
-  {x}
-    :: Event (Attribute {term})
-    -> i
-    -> o
-
-instance
-  (TypeEquals locki locko, TypeEquals payloadi payloado) =>
-  {term}Ctor (Event (Event (Element locki payloadi))) (Element locko payloado) where
-  {x} a i = elementify "{astag(x)}" a (proof (coerce i))
-
-instance
-  (TypeEquals locki locko, TypeEquals payloadi payloado) =>
-  {term}Ctor (Event (Element locki payloadi)) (Element locko payloado) where
-  {x} a i = elementify "{astag(x)}" a (bang (proof (coerce i)))
-
-instance
-  (TypeEquals locki locko, TypeEquals payloadi payloado) =>
-  {term}Ctor (Element locki payloadi) (Element locko payloado) where
-  {x} a i = elementify "{astag(x)}" a (bang (bang (proof (coerce i))))
-
-instance
-  (TypeEquals locki locko, TypeEquals payloadi payloado) =>
-  {term}Ctor (Array (Element locki payloadi)) (Element locko payloado) where
-  {x} a i = elementify "{astag(x)}" a (oneOfMap (\i' -> bang (bang (proof (coerce i')))) i)
+{x}
+  :: forall seed lock payload
+   . Plant seed (Event (Event (StreamingElt lock payload)))
+  => Event (Attribute {term})
+  -> seed
+  -> Element lock payload
+{x} attributes seed = elementify "{astag(x)}" attributes (plant seed)
 
 {x}_
-  :: forall i o
-   . {term}Ctor i o
-  => i
-  -> o
+  :: forall seed lock payload
+   . Plant seed (Event (Event (StreamingElt lock payload)))
+  => seed
+  -> Element lock payload
 {x}_ = {x} empty
+
 ''')
     elif CODEGEN_TARGET == GENERATE_ATTR_DECL:
         for x in AMAP.keys():

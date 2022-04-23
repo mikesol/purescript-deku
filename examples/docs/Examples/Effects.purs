@@ -4,22 +4,22 @@ import Prelude
 
 import Affjax as AX
 import Affjax.ResponseFormat as ResponseFormat
-import Control.Alt ((<|>))
+import Control.Alt (alt, (<|>))
 import Data.Argonaut.Core (stringifyWithIndent)
 import Data.Either (Either(..))
 import Data.Filterable (compact, filterMap)
 import Data.HTTP.Method (Method(..))
 import Data.Maybe (Maybe(..))
+import Data.Profunctor (lcmap)
 import Data.Tuple.Nested ((/\))
 import Deku.Attribute (Cb, cb, (:=))
-import Deku.Control (flatten, text)
+import Deku.Control (plant, text)
 import Deku.DOM as D
-import Deku.Toplevel ((🚀))
+import Deku.Toplevel (runInBody)
 import Effect (Effect)
 import Effect.Aff (launchAff_)
 import Effect.Class (liftEffect)
-import FRP.Event (mapAccum)
-import FRP.Event.Class (bang)
+import FRP.Event (keepLatest, mapAccum, bus, bang)
 
 data UIAction = Initial | Loading | Result String
 
@@ -48,49 +48,52 @@ clickCb push = cb
 clickText = "Click to get some random user data." :: String
 
 main :: Effect Unit
-main = Initial 🚀 \push event ->
-  let
-    loadingOrResult = filterMap
-      ( case _ of
-          Loading -> Just $ Left unit
-          Result s -> Just $ Right s
-          _ -> Nothing
-      )
-      event
-    loading = filterMap
-      ( case _ of
-          Left _ -> Just unit
-          _ -> Nothing
-      )
-      loadingOrResult
-    result = filterMap
-      ( case _ of
-          Right s -> Just s
-          _ -> Nothing
-      )
-      loadingOrResult
-  in
-    flatten
-      [ D.div_
-          [ D.button (bang (D.OnClick := clickCb push))
-              [ text
-                  ( bang clickText
-                      <|> (loading $> "Loading...")
-                      <|> (result $> clickText)
-                  )
-              ]
-          ]
-      , D.div
-          ( (bang (D.Style := "display: none;")) <|>
-              ( compact
-                  ( mapAccum
-                      ( \_ b -> (b && false) /\
-                          if b then Just unit else Nothing
-                      )
-                      result
-                      true
-                  ) $> (D.Style := "display: block;")
-              )
-          )
-          [ D.pre_ [ D.code_ [ text (bang "" <|> result) ] ] ]
-      ]
+main = runInBody
+  ( keepLatest $ bus \push -> lcmap (alt (bang Initial))
+      \event ->
+        let
+          loadingOrResult = filterMap
+            ( case _ of
+                Loading -> Just $ Left unit
+                Result s -> Just $ Right s
+                _ -> Nothing
+            )
+            event
+          loading = filterMap
+            ( case _ of
+                Left _ -> Just unit
+                _ -> Nothing
+            )
+            loadingOrResult
+          result = filterMap
+            ( case _ of
+                Right s -> Just s
+                _ -> Nothing
+            )
+            loadingOrResult
+        in
+          plant
+            [ D.div_
+                [ D.button (bang (D.OnClick := clickCb push))
+                    [ text
+                        ( bang clickText
+                            <|> (loading $> "Loading...")
+                            <|> (result $> clickText)
+                        )
+                    ]
+                ]
+            , D.div
+                ( (bang (D.Style := "display: none;")) <|>
+                    ( compact
+                        ( mapAccum
+                            ( \_ b -> (b && false) /\
+                                if b then Just unit else Nothing
+                            )
+                            result
+                            true
+                        ) $> (D.Style := "display: block;")
+                    )
+                )
+                [ D.pre_ [ D.code_ [ text (bang "" <|> result) ] ] ]
+            ]
+  )

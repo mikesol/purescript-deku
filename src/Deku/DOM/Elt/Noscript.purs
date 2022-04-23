@@ -1,46 +1,25 @@
 module Deku.DOM.Elt.Noscript where
 
 import Control.Plus (empty)
-import Data.Foldable (oneOfMap)
 import Deku.Attribute (Attribute)
-import Deku.Control (elementify)
-import Deku.Core (Element)
+import Deku.Control (elementify, class Plant, plant)
+import Deku.Core (StreamingElt, Element)
 import FRP.Event (Event)
-import Safe.Coerce (coerce)
-import FRP.Event.Class (bang)
-import Type.Equality (class TypeEquals, proof)
 
 data Noscript_
 
-class Noscript_Ctor i o | i -> o where
-  noscript
-    :: Event (Attribute Noscript_)
-    -> i
-    -> o
-
-instance
-  (TypeEquals locki locko, TypeEquals payloadi payloado) =>
-  Noscript_Ctor (Event (Event (Element locki payloadi))) (Element locko payloado) where
-  noscript a i = elementify "noscript" a (proof (coerce i))
-
-instance
-  (TypeEquals locki locko, TypeEquals payloadi payloado) =>
-  Noscript_Ctor (Event (Element locki payloadi)) (Element locko payloado) where
-  noscript a i = elementify "noscript" a (bang (proof (coerce i)))
-
-instance
-  (TypeEquals locki locko, TypeEquals payloadi payloado) =>
-  Noscript_Ctor (Element locki payloadi) (Element locko payloado) where
-  noscript a i = elementify "noscript" a (bang (bang (proof (coerce i))))
-
-instance
-  (TypeEquals locki locko, TypeEquals payloadi payloado) =>
-  Noscript_Ctor (Array (Element locki payloadi)) (Element locko payloado) where
-  noscript a i = elementify "noscript" a (oneOfMap (\i' -> bang (bang (proof (coerce i')))) i)
+noscript
+  :: forall seed lock payload
+   . Plant seed (Event (Event (StreamingElt lock payload)))
+  => Event (Attribute Noscript_)
+  -> seed
+  -> Element lock payload
+noscript attributes seed = elementify "noscript" attributes (plant seed)
 
 noscript_
-  :: forall i o
-   . Noscript_Ctor i o
-  => i
-  -> o
+  :: forall seed lock payload
+   . Plant seed (Event (Event (StreamingElt lock payload)))
+  => seed
+  -> Element lock payload
 noscript_ = noscript empty
+

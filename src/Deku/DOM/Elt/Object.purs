@@ -1,46 +1,25 @@
 module Deku.DOM.Elt.Object where
 
 import Control.Plus (empty)
-import Data.Foldable (oneOfMap)
 import Deku.Attribute (Attribute)
-import Deku.Control (elementify)
-import Deku.Core (Element)
+import Deku.Control (elementify, class Plant, plant)
+import Deku.Core (StreamingElt, Element)
 import FRP.Event (Event)
-import Safe.Coerce (coerce)
-import FRP.Event.Class (bang)
-import Type.Equality (class TypeEquals, proof)
 
 data Object_
 
-class Object_Ctor i o | i -> o where
-  object
-    :: Event (Attribute Object_)
-    -> i
-    -> o
-
-instance
-  (TypeEquals locki locko, TypeEquals payloadi payloado) =>
-  Object_Ctor (Event (Event (Element locki payloadi))) (Element locko payloado) where
-  object a i = elementify "object" a (proof (coerce i))
-
-instance
-  (TypeEquals locki locko, TypeEquals payloadi payloado) =>
-  Object_Ctor (Event (Element locki payloadi)) (Element locko payloado) where
-  object a i = elementify "object" a (bang (proof (coerce i)))
-
-instance
-  (TypeEquals locki locko, TypeEquals payloadi payloado) =>
-  Object_Ctor (Element locki payloadi) (Element locko payloado) where
-  object a i = elementify "object" a (bang (bang (proof (coerce i))))
-
-instance
-  (TypeEquals locki locko, TypeEquals payloadi payloado) =>
-  Object_Ctor (Array (Element locki payloadi)) (Element locko payloado) where
-  object a i = elementify "object" a (oneOfMap (\i' -> bang (bang (proof (coerce i')))) i)
+object
+  :: forall seed lock payload
+   . Plant seed (Event (Event (StreamingElt lock payload)))
+  => Event (Attribute Object_)
+  -> seed
+  -> Element lock payload
+object attributes seed = elementify "object" attributes (plant seed)
 
 object_
-  :: forall i o
-   . Object_Ctor i o
-  => i
-  -> o
+  :: forall seed lock payload
+   . Plant seed (Event (Event (StreamingElt lock payload)))
+  => seed
+  -> Element lock payload
 object_ = object empty
+

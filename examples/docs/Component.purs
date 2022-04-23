@@ -2,17 +2,15 @@ module Deku.Example.Docs.Component where
 
 import Prelude
 
-import Control.Plus (class Plus)
 import Deku.Attribute (cb, (:=))
-import Deku.Control (text_)
+import Deku.Control (blank, text_)
 import Deku.Core (Element)
 import Deku.DOM as D
 import Deku.Example.Docs.Types (Page(..))
 import Deku.Example.Docs.Util (scrollToTop)
 import Deku.Pursx (nut, (~~))
 import Effect (Effect)
-import FRP.Event (class IsEvent)
-import FRP.Event.Class (bang)
+import FRP.Event (bang)
 import Type.Proxy (Proxy(..))
 
 px = Proxy :: Proxy """<div>
@@ -20,7 +18,7 @@ px = Proxy :: Proxy """<div>
 
   <h3>Slightly more bells and whistles</h3>
   <p>
-    Let's look at an example with several different DOM tags. There are also a few different syntax options depending on what tune your fingers wish to type.
+    Let's look at an example with several different DOM tags.
   </p>
 
   ~code~
@@ -29,12 +27,20 @@ px = Proxy :: Proxy """<div>
 
   <blockquote> ~result~ </blockquote>
 
-  <h1>Elements all the way down</h1>
-  <p>Deku encodes the DOM using functions that represent elements. To create an element with a custom tag called <code>foo</code>, you can call <code>elementify "foo"</code> and that will creat a custom <code>foo</code> tag in your DOM.</p>
-  <p>The encoding of elements in Deku is not unlike that in React or Halogen. It's a tree, like the Deku tree. So go nuts!</p>
+  <h1>Creating an element</h1>
+  <p>To create an element, like for example a <code>span</code> element, the pattern goes like this:</p>
+
+  <pre><code>mySpanWithAttrs = D.span attrs children
+mySpanWithNoAttrs = D.span_ children
+myDivWithNoChildren = D.div attrs blank
+</code></pre>
+
+  <p><code>attrs</code> contains attributes of type <code>Event (Attribute element)</code>, where <code>element</code> is the current element you're assigning attributes to. You never have to specify this type: it is inferred automatically by the attribute creation operator, aka <code>:=</code>. If you use an attribute that's unsupported by an element, the compiler will complain.</p>
+
+  <p>For now, children is an array of children, not unlike Halogen or React sans JSX. We'll see some other types of children later in this guide.</p>
 
   <h1>Attributes</h1>
-  <p>Elements postfixed with an underscore do not take attributes. That is un-fun, so in this example, you see attributes as well! Attributes like an element's style or id are specified as the first argument to an underscore-less element. Note that, if you have multiple attributes, you have to separate them with <code>alt</code>, aka "the tie fighter." Also, the many <code>bang</code>-s you'll see around attributes are from the <code>purescript-event</code> library. Bang means <i>right now</i>, which is the answer to the question "When should we set this attribute?"</p>
+  <p>Attributes like an element's style or id are specified as the first argument to an element. Attributes are just <a href="https://github.com/mikesol/purescript-event/blob/master/src/FRP/Event.purs"><code>Event</code>-s</a>, so you can <code>bang</code> them to make them happen <i>now</i>, combine two event streams with <code>alt</code> to compose events, etc.</p>
 
   <p>As an example, we made the input a range slider using <code>bang (Xtype := "range")</code>. Unlike Halogen, there are no checks to make sure you give a valid string. So if you want your range slider to have the value of true, you can. One day, I may build some validators, but passing strings works decently well here.</p>
 
@@ -42,7 +48,7 @@ px = Proxy :: Proxy """<div>
   <p>In this section, we built a simple component. In the next section, we'll recreate the exact same element using a different input syntax called <a ~next~ style="cursor:pointer;">Pursx</a>.</p>
 </div>"""
 
-components :: forall event payload. IsEvent event => Plus event => (Page -> Effect Unit) -> Element event payload
+components :: forall lock payload. (Page -> Effect Unit) -> Element lock payload
 components dpage = px ~~
   { code: nut
       ( D.pre_ [D.code_
@@ -51,17 +57,17 @@ components dpage = px ~~
 
 import Prelude
 
-import Deku.Control (flatten, text_)
-import Deku.DOM as D
 import Deku.Attribute ((:=))
-import Deku.Toplevel ((🚀))
+import Deku.Control (blank, text_)
+import Deku.DOM as D
+import Deku.Toplevel (runInBodyA)
 import Effect (Effect)
+import FRP.Event.Class (bang)
 
 main :: Effect Unit
-main = unit 🚀 \_ _ ->
-  flatten
-    [ D.button_ [ text_ "I do nothing" ]
-    , D.ul_ $ map (D.li_ <<< pure <<< text_) [ "A", "B", "C" ]
+main = runInBodyA
+  ( [ D.button_ [ text_ "I do nothing" ]
+    , D.ul_ $ map (D.li_ <<< text_) [ "A", "B", "C" ]
     , D.div_
         [ D.a (bang $ D.Href := "https://example.com")
             [ text_ "foo " ]
@@ -71,16 +77,17 @@ main = unit 🚀 \_ _ ->
         ]
     , D.div_
         [ D.div_
-            [ D.div_ [ D.input (bang $ D.Xtype := "range") [] ]
+            [ D.div_ [ D.input (bang $ D.Xtype := "range") blank ]
             ]
         ]
-    ]"""
+    ]
+  )"""
           ]]
       )
   , result: nut
       ( D.div_
           [ D.button_ [ text_ "I do nothing" ]
-          , D.ul_ $ map (D.li_ <<< pure <<< text_) [ "A", "B", "C" ]
+          , D.ul_ $ map (D.li_ <<< text_) [ "A", "B", "C" ]
           , D.div_
               [ D.a (bang $ D.Href := "https://example.com")
                   [ text_ "foo " ]
@@ -90,7 +97,7 @@ main = unit 🚀 \_ _ ->
               ]
           , D.div_
               [ D.div_
-                  [ D.div_ [ D.input (bang $ D.Xtype := "range") [] ]
+                  [ D.div_ [ D.input (bang $ D.Xtype := "range") blank ]
                   ]
               ]
           ]

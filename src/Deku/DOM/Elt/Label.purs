@@ -1,46 +1,25 @@
 module Deku.DOM.Elt.Label where
 
 import Control.Plus (empty)
-import Data.Foldable (oneOfMap)
 import Deku.Attribute (Attribute)
-import Deku.Control (elementify)
-import Deku.Core (Element)
+import Deku.Control (elementify, class Plant, plant)
+import Deku.Core (StreamingElt, Element)
 import FRP.Event (Event)
-import Safe.Coerce (coerce)
-import FRP.Event.Class (bang)
-import Type.Equality (class TypeEquals, proof)
 
 data Label_
 
-class Label_Ctor i o | i -> o where
-  label
-    :: Event (Attribute Label_)
-    -> i
-    -> o
-
-instance
-  (TypeEquals locki locko, TypeEquals payloadi payloado) =>
-  Label_Ctor (Event (Event (Element locki payloadi))) (Element locko payloado) where
-  label a i = elementify "label" a (proof (coerce i))
-
-instance
-  (TypeEquals locki locko, TypeEquals payloadi payloado) =>
-  Label_Ctor (Event (Element locki payloadi)) (Element locko payloado) where
-  label a i = elementify "label" a (bang (proof (coerce i)))
-
-instance
-  (TypeEquals locki locko, TypeEquals payloadi payloado) =>
-  Label_Ctor (Element locki payloadi) (Element locko payloado) where
-  label a i = elementify "label" a (bang (bang (proof (coerce i))))
-
-instance
-  (TypeEquals locki locko, TypeEquals payloadi payloado) =>
-  Label_Ctor (Array (Element locki payloadi)) (Element locko payloado) where
-  label a i = elementify "label" a (oneOfMap (\i' -> bang (bang (proof (coerce i')))) i)
+label
+  :: forall seed lock payload
+   . Plant seed (Event (Event (StreamingElt lock payload)))
+  => Event (Attribute Label_)
+  -> seed
+  -> Element lock payload
+label attributes seed = elementify "label" attributes (plant seed)
 
 label_
-  :: forall i o
-   . Label_Ctor i o
-  => i
-  -> o
+  :: forall seed lock payload
+   . Plant seed (Event (Event (StreamingElt lock payload)))
+  => seed
+  -> Element lock payload
 label_ = label empty
+

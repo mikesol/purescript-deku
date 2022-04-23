@@ -1,46 +1,25 @@
 module Deku.DOM.Elt.Noframes where
 
 import Control.Plus (empty)
-import Data.Foldable (oneOfMap)
 import Deku.Attribute (Attribute)
-import Deku.Control (elementify)
-import Deku.Core (Element)
+import Deku.Control (elementify, class Plant, plant)
+import Deku.Core (StreamingElt, Element)
 import FRP.Event (Event)
-import Safe.Coerce (coerce)
-import FRP.Event.Class (bang)
-import Type.Equality (class TypeEquals, proof)
 
 data Noframes_
 
-class Noframes_Ctor i o | i -> o where
-  noframes
-    :: Event (Attribute Noframes_)
-    -> i
-    -> o
-
-instance
-  (TypeEquals locki locko, TypeEquals payloadi payloado) =>
-  Noframes_Ctor (Event (Event (Element locki payloadi))) (Element locko payloado) where
-  noframes a i = elementify "noframes" a (proof (coerce i))
-
-instance
-  (TypeEquals locki locko, TypeEquals payloadi payloado) =>
-  Noframes_Ctor (Event (Element locki payloadi)) (Element locko payloado) where
-  noframes a i = elementify "noframes" a (bang (proof (coerce i)))
-
-instance
-  (TypeEquals locki locko, TypeEquals payloadi payloado) =>
-  Noframes_Ctor (Element locki payloadi) (Element locko payloado) where
-  noframes a i = elementify "noframes" a (bang (bang (proof (coerce i))))
-
-instance
-  (TypeEquals locki locko, TypeEquals payloadi payloado) =>
-  Noframes_Ctor (Array (Element locki payloadi)) (Element locko payloado) where
-  noframes a i = elementify "noframes" a (oneOfMap (\i' -> bang (bang (proof (coerce i')))) i)
+noframes
+  :: forall seed lock payload
+   . Plant seed (Event (Event (StreamingElt lock payload)))
+  => Event (Attribute Noframes_)
+  -> seed
+  -> Element lock payload
+noframes attributes seed = elementify "noframes" attributes (plant seed)
 
 noframes_
-  :: forall i o
-   . Noframes_Ctor i o
-  => i
-  -> o
+  :: forall seed lock payload
+   . Plant seed (Event (Event (StreamingElt lock payload)))
+  => seed
+  -> Element lock payload
 noframes_ = noframes empty
+

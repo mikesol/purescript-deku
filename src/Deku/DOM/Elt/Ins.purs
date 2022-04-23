@@ -1,46 +1,25 @@
 module Deku.DOM.Elt.Ins where
 
 import Control.Plus (empty)
-import Data.Foldable (oneOfMap)
 import Deku.Attribute (Attribute)
-import Deku.Control (elementify)
-import Deku.Core (Element)
+import Deku.Control (elementify, class Plant, plant)
+import Deku.Core (StreamingElt, Element)
 import FRP.Event (Event)
-import Safe.Coerce (coerce)
-import FRP.Event.Class (bang)
-import Type.Equality (class TypeEquals, proof)
 
 data Ins_
 
-class Ins_Ctor i o | i -> o where
-  ins
-    :: Event (Attribute Ins_)
-    -> i
-    -> o
-
-instance
-  (TypeEquals locki locko, TypeEquals payloadi payloado) =>
-  Ins_Ctor (Event (Event (Element locki payloadi))) (Element locko payloado) where
-  ins a i = elementify "ins" a (proof (coerce i))
-
-instance
-  (TypeEquals locki locko, TypeEquals payloadi payloado) =>
-  Ins_Ctor (Event (Element locki payloadi)) (Element locko payloado) where
-  ins a i = elementify "ins" a (bang (proof (coerce i)))
-
-instance
-  (TypeEquals locki locko, TypeEquals payloadi payloado) =>
-  Ins_Ctor (Element locki payloadi) (Element locko payloado) where
-  ins a i = elementify "ins" a (bang (bang (proof (coerce i))))
-
-instance
-  (TypeEquals locki locko, TypeEquals payloadi payloado) =>
-  Ins_Ctor (Array (Element locki payloadi)) (Element locko payloado) where
-  ins a i = elementify "ins" a (oneOfMap (\i' -> bang (bang (proof (coerce i')))) i)
+ins
+  :: forall seed lock payload
+   . Plant seed (Event (Event (StreamingElt lock payload)))
+  => Event (Attribute Ins_)
+  -> seed
+  -> Element lock payload
+ins attributes seed = elementify "ins" attributes (plant seed)
 
 ins_
-  :: forall i o
-   . Ins_Ctor i o
-  => i
-  -> o
+  :: forall seed lock payload
+   . Plant seed (Event (Event (StreamingElt lock payload)))
+  => seed
+  -> Element lock payload
 ins_ = ins empty
+

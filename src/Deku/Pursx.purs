@@ -1,21 +1,28 @@
 module Deku.Pursx where
 
 import Prelude
--- import Deku.Debug (type (^^))
--- import Prim.TypeError (class Warn, Text)
-import Foreign.Object as Object
+
 import Control.Alt ((<|>))
-import Deku.Control (flatten)
+import Control.Plus (empty)
+import Data.Either (Either(..))
+import Data.Foldable (fold, traverse_)
 import Data.Maybe (Maybe(..))
 import Data.Profunctor (lcmap)
 import Data.Symbol (class IsSymbol, reflectSymbol)
+import Data.Tuple.Nested ((/\))
 import Deku.Attribute (Attribute, unsafeUnAttribute)
-import Deku.Core (DOMInterpret(..), Element(..))
+import Deku.Control (class Plant, plant)
+import Deku.Core (DOMInterpret(..), Element(..), StreamingElt(..))
 import Deku.DOM (class TagToDeku)
-import Control.Plus (class Plus, empty)
-import FRP.Behavior (sample_)
-import FRP.Event (Event, subscribe, makeEvent)
-import FRP.Event.Class (class IsEvent, keepLatest, bang)
+import Effect.AVar (tryPut)
+import Effect.AVar as AVar
+import Effect.Exception (throwException)
+import Effect.Random as Random
+import Effect.Ref as Ref
+import FRP.Behavior (sampleBy, sample_)
+import FRP.Event (Event, bang, subscribe, makeEvent)
+import FRP.Event.Class (keepLatest)
+import Foreign.Object as Object
 import Prim.Boolean (False, True)
 import Prim.Row as Row
 import Prim.RowList as RL
@@ -23,9 +30,15 @@ import Prim.Symbol as Sym
 import Record (get)
 import Type.Proxy (Proxy(..))
 
-newtype PursxElement lock payload = PursxElement (Element lock payload)
-nut :: forall lock payload. Element lock payload -> PursxElement lock payload
-nut = PursxElement
+newtype PursxElement lock payload = PursxElement
+  (Event (Event (StreamingElt lock payload)))
+
+nut
+  :: forall seed lock payload
+   . Plant seed (Event (Event (StreamingElt lock payload)))
+  => seed
+  -> PursxElement lock payload
+nut seed = PursxElement (plant seed)
 
 pursx :: forall s. Proxy s
 pursx = Proxy
@@ -3823,13 +3836,7 @@ instance pursxToElementConsElt ::
     in
       { cache: Object.insert (reflectSymbol pxk) false cache
       , element: Element \info di ->
-          (let Element y = pxe in y)
-            { parent: reflectSymbol pxk <> pxScope
-            , predecessor: Nothing
-            , raiseId: mempty
-            , scope: info.scope
-            }
-            di
+          flatten (reflectSymbol pxk <> pxScope) di pxe
             <|> (let Element y = element in y) info di
       }
     where
@@ -3900,15 +3907,16 @@ makePursx'
   -> Element lock payload
 makePursx' verb html r = Element go
   where
-  go { parent, scope, raiseId } di@(DOMInterpret { makePursx: mpx, ids }) =
+  go z@{ parent, scope, raiseId } di@(DOMInterpret { makePursx: mpx, ids }) =
     keepLatest
       ( (sample_ ids (bang unit)) <#> \me -> makeEvent \k -> do
-          raiseId (Just me)
+          raiseId me
           subscribe
             ( keepLatest
                 ( (sample_ ids (bang unit)) <#> \pxScope ->
                     let
-                      { cache, element } = pursxToElement pxScope
+                      { cache, element: Element element } = pursxToElement
+                        pxScope
                         (Proxy :: _ rl)
                         r
                     in
@@ -3921,10 +3929,79 @@ makePursx' verb html r = Element go
                           , html: reflectSymbol html
                           , verb: reflectSymbol verb
                           }
-                      ) <|> flatten me di (bang (bang element))
+                      ) <|> element z di
                 )
             )
             k
       )
 infixr 5 makePursx as ~~
+
+-------
+-- todo
+-- this is copied verbatim from control so that it is not exported
+-- fix?
+flatten
+  :: forall lock payload
+   . String
+  -> DOMInterpret payload
+  -> Event (Event (StreamingElt lock payload))
+  -> Event payload
+flatten parent di@(DOMInterpret { ids, disconnectElement, sendToTop }) children =
+  makeEvent \k -> do
+    cancelInner <- Ref.new Object.empty
+    cancelOuter <-
+      -- each child gets its own scope
+      subscribe children \inner ->
+        do
+          -- holds the previous id
+          prevId <- Ref.new Nothing
+          prevUnsub <- Ref.new (pure unit)
+          myUnsub <- Ref.new (pure unit)
+          myImmediateCancellation <- Ref.new (pure unit)
+          rn <- map show Random.random
+          c0 <- subscribe (sampleBy (/\) ids inner) \(newScope /\ kid') ->
+            case kid' of
+              SendToTop -> Ref.read prevId >>= traverse_
+                (k <<< sendToTop <<< { id: _ })
+              Remove -> do
+                let
+                  mic = join (Ref.read myUnsub) *> Ref.modify_
+                    (Object.delete rn)
+                    cancelInner
+                Ref.write mic myImmediateCancellation *> mic
+              Elt (Element kid) -> do
+                -- holds the current id
+                av <- AVar.empty
+                predecessor <- Ref.read prevId
+                c1 <- subscribe
+                  ( kid
+                      { parent
+                      , scope: newScope
+                      , predecessor
+                      , raiseId: \id -> do
+                          Ref.read prevId >>= traverse_ \old ->
+                            k
+                              ( disconnectElement
+                                  { id: old, parent }
+                              )
+                          void $ tryPut id av
+                      }
+                      di
+                  )
+                  k
+                cncl <- AVar.take av \q -> case q of
+                  Right r -> do
+                    Ref.write (Just r) (prevId)
+                    join (Ref.read prevUnsub)
+                    Ref.write c1 prevUnsub
+                  Left e -> throwException e
+                -- cancel immediately, as it should be run synchronously
+                -- so if this actually does something then we have a problem
+                cncl
+          Ref.write c0 myUnsub
+          Ref.modify_ (Object.insert rn c0) cancelInner
+          join (Ref.read myImmediateCancellation)
+    pure do
+      Ref.read cancelInner >>= fold
+      cancelOuter
 

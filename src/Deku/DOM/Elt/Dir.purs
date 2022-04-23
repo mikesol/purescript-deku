@@ -1,46 +1,25 @@
 module Deku.DOM.Elt.Dir where
 
 import Control.Plus (empty)
-import Data.Foldable (oneOfMap)
 import Deku.Attribute (Attribute)
-import Deku.Control (elementify)
-import Deku.Core (Element)
+import Deku.Control (elementify, class Plant, plant)
+import Deku.Core (StreamingElt, Element)
 import FRP.Event (Event)
-import Safe.Coerce (coerce)
-import FRP.Event.Class (bang)
-import Type.Equality (class TypeEquals, proof)
 
 data Dir_
 
-class Dir_Ctor i o | i -> o where
-  dir
-    :: Event (Attribute Dir_)
-    -> i
-    -> o
-
-instance
-  (TypeEquals locki locko, TypeEquals payloadi payloado) =>
-  Dir_Ctor (Event (Event (Element locki payloadi))) (Element locko payloado) where
-  dir a i = elementify "dir" a (proof (coerce i))
-
-instance
-  (TypeEquals locki locko, TypeEquals payloadi payloado) =>
-  Dir_Ctor (Event (Element locki payloadi)) (Element locko payloado) where
-  dir a i = elementify "dir" a (bang (proof (coerce i)))
-
-instance
-  (TypeEquals locki locko, TypeEquals payloadi payloado) =>
-  Dir_Ctor (Element locki payloadi) (Element locko payloado) where
-  dir a i = elementify "dir" a (bang (bang (proof (coerce i))))
-
-instance
-  (TypeEquals locki locko, TypeEquals payloadi payloado) =>
-  Dir_Ctor (Array (Element locki payloadi)) (Element locko payloado) where
-  dir a i = elementify "dir" a (oneOfMap (\i' -> bang (bang (proof (coerce i')))) i)
+dir
+  :: forall seed lock payload
+   . Plant seed (Event (Event (StreamingElt lock payload)))
+  => Event (Attribute Dir_)
+  -> seed
+  -> Element lock payload
+dir attributes seed = elementify "dir" attributes (plant seed)
 
 dir_
-  :: forall i o
-   . Dir_Ctor i o
-  => i
-  -> o
+  :: forall seed lock payload
+   . Plant seed (Event (Event (StreamingElt lock payload)))
+  => seed
+  -> Element lock payload
 dir_ = dir empty
+
