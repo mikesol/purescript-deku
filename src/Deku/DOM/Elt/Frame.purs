@@ -2,23 +2,24 @@ module Deku.DOM.Elt.Frame where
 
 import Control.Plus (empty)
 import Deku.Attribute (Attribute)
-import Deku.Control (elementify)
-import Deku.Core (Element)
-import FRP.Event (class IsEvent)
+import Deku.Control (elementify, class Plant, plant)
+import Deku.Core (StreamingElt, Element)
+import FRP.Event (Event)
 
 data Frame_
 
 frame
-  :: forall event payload
-   . IsEvent event
-  => event (Attribute Frame_)
-  -> Array (Element event payload)
-  -> Element event payload
-frame = elementify "frame"
+  :: forall seed lock payload
+   . Plant seed (Event (Event (StreamingElt lock payload)))
+  => Event (Attribute Frame_)
+  -> seed
+  -> Element lock payload
+frame attributes seed = elementify "frame" attributes (plant seed)
 
 frame_
-  :: forall event payload
-   . IsEvent event
-  => Array (Element event payload)
-  -> Element event payload
+  :: forall seed lock payload
+   . Plant seed (Event (Event (StreamingElt lock payload)))
+  => seed
+  -> Element lock payload
 frame_ = frame empty
+

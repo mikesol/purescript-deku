@@ -2,23 +2,24 @@ module Deku.DOM.Elt.Img where
 
 import Control.Plus (empty)
 import Deku.Attribute (Attribute)
-import Deku.Control (elementify)
-import Deku.Core (Element)
-import FRP.Event (class IsEvent)
+import Deku.Control (elementify, class Plant, plant)
+import Deku.Core (StreamingElt, Element)
+import FRP.Event (Event)
 
 data Img_
 
 img
-  :: forall event payload
-   . IsEvent event
-  => event (Attribute Img_)
-  -> Array (Element event payload)
-  -> Element event payload
-img = elementify "img"
+  :: forall seed lock payload
+   . Plant seed (Event (Event (StreamingElt lock payload)))
+  => Event (Attribute Img_)
+  -> seed
+  -> Element lock payload
+img attributes seed = elementify "img" attributes (plant seed)
 
 img_
-  :: forall event payload
-   . IsEvent event
-  => Array (Element event payload)
-  -> Element event payload
+  :: forall seed lock payload
+   . Plant seed (Event (Event (StreamingElt lock payload)))
+  => seed
+  -> Element lock payload
 img_ = img empty
+

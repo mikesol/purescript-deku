@@ -2,23 +2,24 @@ module Deku.DOM.Elt.Figure where
 
 import Control.Plus (empty)
 import Deku.Attribute (Attribute)
-import Deku.Control (elementify)
-import Deku.Core (Element)
-import FRP.Event (class IsEvent)
+import Deku.Control (elementify, class Plant, plant)
+import Deku.Core (StreamingElt, Element)
+import FRP.Event (Event)
 
 data Figure_
 
 figure
-  :: forall event payload
-   . IsEvent event
-  => event (Attribute Figure_)
-  -> Array (Element event payload)
-  -> Element event payload
-figure = elementify "figure"
+  :: forall seed lock payload
+   . Plant seed (Event (Event (StreamingElt lock payload)))
+  => Event (Attribute Figure_)
+  -> seed
+  -> Element lock payload
+figure attributes seed = elementify "figure" attributes (plant seed)
 
 figure_
-  :: forall event payload
-   . IsEvent event
-  => Array (Element event payload)
-  -> Element event payload
+  :: forall seed lock payload
+   . Plant seed (Event (Event (StreamingElt lock payload)))
+  => seed
+  -> Element lock payload
 figure_ = figure empty
+

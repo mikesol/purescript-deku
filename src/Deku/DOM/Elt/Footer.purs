@@ -2,23 +2,24 @@ module Deku.DOM.Elt.Footer where
 
 import Control.Plus (empty)
 import Deku.Attribute (Attribute)
-import Deku.Control (elementify)
-import Deku.Core (Element)
-import FRP.Event (class IsEvent)
+import Deku.Control (elementify, class Plant, plant)
+import Deku.Core (StreamingElt, Element)
+import FRP.Event (Event)
 
 data Footer_
 
 footer
-  :: forall event payload
-   . IsEvent event
-  => event (Attribute Footer_)
-  -> Array (Element event payload)
-  -> Element event payload
-footer = elementify "footer"
+  :: forall seed lock payload
+   . Plant seed (Event (Event (StreamingElt lock payload)))
+  => Event (Attribute Footer_)
+  -> seed
+  -> Element lock payload
+footer attributes seed = elementify "footer" attributes (plant seed)
 
 footer_
-  :: forall event payload
-   . IsEvent event
-  => Array (Element event payload)
-  -> Element event payload
+  :: forall seed lock payload
+   . Plant seed (Event (Event (StreamingElt lock payload)))
+  => seed
+  -> Element lock payload
 footer_ = footer empty
+

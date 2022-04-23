@@ -2,23 +2,24 @@ module Deku.DOM.Elt.Dialog where
 
 import Control.Plus (empty)
 import Deku.Attribute (Attribute)
-import Deku.Control (elementify)
-import Deku.Core (Element)
-import FRP.Event (class IsEvent)
+import Deku.Control (elementify, class Plant, plant)
+import Deku.Core (StreamingElt, Element)
+import FRP.Event (Event)
 
 data Dialog_
 
 dialog
-  :: forall event payload
-   . IsEvent event
-  => event (Attribute Dialog_)
-  -> Array (Element event payload)
-  -> Element event payload
-dialog = elementify "dialog"
+  :: forall seed lock payload
+   . Plant seed (Event (Event (StreamingElt lock payload)))
+  => Event (Attribute Dialog_)
+  -> seed
+  -> Element lock payload
+dialog attributes seed = elementify "dialog" attributes (plant seed)
 
 dialog_
-  :: forall event payload
-   . IsEvent event
-  => Array (Element event payload)
-  -> Element event payload
+  :: forall seed lock payload
+   . Plant seed (Event (Event (StreamingElt lock payload)))
+  => seed
+  -> Element lock payload
 dialog_ = dialog empty
+

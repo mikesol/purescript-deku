@@ -2,23 +2,24 @@ module Deku.DOM.Elt.Button where
 
 import Control.Plus (empty)
 import Deku.Attribute (Attribute)
-import Deku.Control (elementify)
-import Deku.Core (Element)
-import FRP.Event (class IsEvent)
+import Deku.Control (elementify, class Plant, plant)
+import Deku.Core (StreamingElt, Element)
+import FRP.Event (Event)
 
 data Button_
 
 button
-  :: forall event payload
-   . IsEvent event
-  => event (Attribute Button_)
-  -> Array (Element event payload)
-  -> Element event payload
-button = elementify "button"
+  :: forall seed lock payload
+   . Plant seed (Event (Event (StreamingElt lock payload)))
+  => Event (Attribute Button_)
+  -> seed
+  -> Element lock payload
+button attributes seed = elementify "button" attributes (plant seed)
 
 button_
-  :: forall event payload
-   . IsEvent event
-  => Array (Element event payload)
-  -> Element event payload
+  :: forall seed lock payload
+   . Plant seed (Event (Event (StreamingElt lock payload)))
+  => seed
+  -> Element lock payload
 button_ = button empty
+

@@ -2,23 +2,24 @@ module Deku.DOM.Elt.Track where
 
 import Control.Plus (empty)
 import Deku.Attribute (Attribute)
-import Deku.Control (elementify)
-import Deku.Core (Element)
-import FRP.Event (class IsEvent)
+import Deku.Control (elementify, class Plant, plant)
+import Deku.Core (StreamingElt, Element)
+import FRP.Event (Event)
 
 data Track_
 
 track
-  :: forall event payload
-   . IsEvent event
-  => event (Attribute Track_)
-  -> Array (Element event payload)
-  -> Element event payload
-track = elementify "track"
+  :: forall seed lock payload
+   . Plant seed (Event (Event (StreamingElt lock payload)))
+  => Event (Attribute Track_)
+  -> seed
+  -> Element lock payload
+track attributes seed = elementify "track" attributes (plant seed)
 
 track_
-  :: forall event payload
-   . IsEvent event
-  => Array (Element event payload)
-  -> Element event payload
+  :: forall seed lock payload
+   . Plant seed (Event (Event (StreamingElt lock payload)))
+  => seed
+  -> Element lock payload
 track_ = track empty
+

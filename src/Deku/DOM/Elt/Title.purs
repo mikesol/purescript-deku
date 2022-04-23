@@ -2,23 +2,24 @@ module Deku.DOM.Elt.Title where
 
 import Control.Plus (empty)
 import Deku.Attribute (Attribute)
-import Deku.Control (elementify)
-import Deku.Core (Element)
-import FRP.Event (class IsEvent)
+import Deku.Control (elementify, class Plant, plant)
+import Deku.Core (StreamingElt, Element)
+import FRP.Event (Event)
 
 data Title_
 
 title
-  :: forall event payload
-   . IsEvent event
-  => event (Attribute Title_)
-  -> Array (Element event payload)
-  -> Element event payload
-title = elementify "title"
+  :: forall seed lock payload
+   . Plant seed (Event (Event (StreamingElt lock payload)))
+  => Event (Attribute Title_)
+  -> seed
+  -> Element lock payload
+title attributes seed = elementify "title" attributes (plant seed)
 
 title_
-  :: forall event payload
-   . IsEvent event
-  => Array (Element event payload)
-  -> Element event payload
+  :: forall seed lock payload
+   . Plant seed (Event (Event (StreamingElt lock payload)))
+  => seed
+  -> Element lock payload
 title_ = title empty
+

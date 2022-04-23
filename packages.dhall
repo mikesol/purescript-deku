@@ -154,7 +154,7 @@ let additions =
           , "now"
           ]
         , repo = "https://github.com/mikesol/purescript-event.git"
-        , version = "v1.5.1"
+        , version = "v1.6.0"
         }
       , everythings-better-with-variants =
         { dependencies =

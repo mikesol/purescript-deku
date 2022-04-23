@@ -2,23 +2,24 @@ module Deku.DOM.Elt.Fieldset where
 
 import Control.Plus (empty)
 import Deku.Attribute (Attribute)
-import Deku.Control (elementify)
-import Deku.Core (Element)
-import FRP.Event (class IsEvent)
+import Deku.Control (elementify, class Plant, plant)
+import Deku.Core (StreamingElt, Element)
+import FRP.Event (Event)
 
 data Fieldset_
 
 fieldset
-  :: forall event payload
-   . IsEvent event
-  => event (Attribute Fieldset_)
-  -> Array (Element event payload)
-  -> Element event payload
-fieldset = elementify "fieldset"
+  :: forall seed lock payload
+   . Plant seed (Event (Event (StreamingElt lock payload)))
+  => Event (Attribute Fieldset_)
+  -> seed
+  -> Element lock payload
+fieldset attributes seed = elementify "fieldset" attributes (plant seed)
 
 fieldset_
-  :: forall event payload
-   . IsEvent event
-  => Array (Element event payload)
-  -> Element event payload
+  :: forall seed lock payload
+   . Plant seed (Event (Event (StreamingElt lock payload)))
+  => seed
+  -> Element lock payload
 fieldset_ = fieldset empty
+

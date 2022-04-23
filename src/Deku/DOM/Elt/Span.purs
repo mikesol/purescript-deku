@@ -2,23 +2,24 @@ module Deku.DOM.Elt.Span where
 
 import Control.Plus (empty)
 import Deku.Attribute (Attribute)
-import Deku.Control (elementify)
-import Deku.Core (Element)
-import FRP.Event (class IsEvent)
+import Deku.Control (elementify, class Plant, plant)
+import Deku.Core (StreamingElt, Element)
+import FRP.Event (Event)
 
 data Span_
 
 span
-  :: forall event payload
-   . IsEvent event
-  => event (Attribute Span_)
-  -> Array (Element event payload)
-  -> Element event payload
-span = elementify "span"
+  :: forall seed lock payload
+   . Plant seed (Event (Event (StreamingElt lock payload)))
+  => Event (Attribute Span_)
+  -> seed
+  -> Element lock payload
+span attributes seed = elementify "span" attributes (plant seed)
 
 span_
-  :: forall event payload
-   . IsEvent event
-  => Array (Element event payload)
-  -> Element event payload
+  :: forall seed lock payload
+   . Plant seed (Event (Event (StreamingElt lock payload)))
+  => seed
+  -> Element lock payload
 span_ = span empty
+

@@ -2,23 +2,24 @@ module Deku.DOM.Elt.Rt where
 
 import Control.Plus (empty)
 import Deku.Attribute (Attribute)
-import Deku.Control (elementify)
-import Deku.Core (Element)
-import FRP.Event (class IsEvent)
+import Deku.Control (elementify, class Plant, plant)
+import Deku.Core (StreamingElt, Element)
+import FRP.Event (Event)
 
 data Rt_
 
 rt
-  :: forall event payload
-   . IsEvent event
-  => event (Attribute Rt_)
-  -> Array (Element event payload)
-  -> Element event payload
-rt = elementify "rt"
+  :: forall seed lock payload
+   . Plant seed (Event (Event (StreamingElt lock payload)))
+  => Event (Attribute Rt_)
+  -> seed
+  -> Element lock payload
+rt attributes seed = elementify "rt" attributes (plant seed)
 
 rt_
-  :: forall event payload
-   . IsEvent event
-  => Array (Element event payload)
-  -> Element event payload
+  :: forall seed lock payload
+   . Plant seed (Event (Event (StreamingElt lock payload)))
+  => seed
+  -> Element lock payload
 rt_ = rt empty
+

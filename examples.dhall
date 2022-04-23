@@ -8,10 +8,12 @@ in      conf
               , "filterable"
               , "affjax"
               , "either"
+              , "integers"
               , "aff"
               , "argonaut-core"
-              , "deku-toplevel"
+              , "web-uievents"
               , "http-methods"
               , "maybe"
+              , "typelevel"
               ]
         }

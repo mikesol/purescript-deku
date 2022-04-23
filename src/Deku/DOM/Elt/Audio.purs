@@ -2,23 +2,24 @@ module Deku.DOM.Elt.Audio where
 
 import Control.Plus (empty)
 import Deku.Attribute (Attribute)
-import Deku.Control (elementify)
-import Deku.Core (Element)
-import FRP.Event (class IsEvent)
+import Deku.Control (elementify, class Plant, plant)
+import Deku.Core (StreamingElt, Element)
+import FRP.Event (Event)
 
 data Audio_
 
 audio
-  :: forall event payload
-   . IsEvent event
-  => event (Attribute Audio_)
-  -> Array (Element event payload)
-  -> Element event payload
-audio = elementify "audio"
+  :: forall seed lock payload
+   . Plant seed (Event (Event (StreamingElt lock payload)))
+  => Event (Attribute Audio_)
+  -> seed
+  -> Element lock payload
+audio attributes seed = elementify "audio" attributes (plant seed)
 
 audio_
-  :: forall event payload
-   . IsEvent event
-  => Array (Element event payload)
-  -> Element event payload
+  :: forall seed lock payload
+   . Plant seed (Event (Event (StreamingElt lock payload)))
+  => seed
+  -> Element lock payload
 audio_ = audio empty
+

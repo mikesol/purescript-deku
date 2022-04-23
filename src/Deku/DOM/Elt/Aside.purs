@@ -2,23 +2,24 @@ module Deku.DOM.Elt.Aside where
 
 import Control.Plus (empty)
 import Deku.Attribute (Attribute)
-import Deku.Control (elementify)
-import Deku.Core (Element)
-import FRP.Event (class IsEvent)
+import Deku.Control (elementify, class Plant, plant)
+import Deku.Core (StreamingElt, Element)
+import FRP.Event (Event)
 
 data Aside_
 
 aside
-  :: forall event payload
-   . IsEvent event
-  => event (Attribute Aside_)
-  -> Array (Element event payload)
-  -> Element event payload
-aside = elementify "aside"
+  :: forall seed lock payload
+   . Plant seed (Event (Event (StreamingElt lock payload)))
+  => Event (Attribute Aside_)
+  -> seed
+  -> Element lock payload
+aside attributes seed = elementify "aside" attributes (plant seed)
 
 aside_
-  :: forall event payload
-   . IsEvent event
-  => Array (Element event payload)
-  -> Element event payload
+  :: forall seed lock payload
+   . Plant seed (Event (Event (StreamingElt lock payload)))
+  => seed
+  -> Element lock payload
 aside_ = aside empty
+

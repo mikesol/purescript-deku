@@ -2,19 +2,20 @@ module Deku.Example.HelloWorld where
 
 import Prelude
 
+import Control.Alt (alt)
 import Control.Plus (empty)
 import Data.Foldable (for_, oneOfMap)
 import Data.Maybe (Maybe(..))
+import Data.Profunctor (lcmap)
 import Data.Tuple (Tuple(..))
 import Deku.Attribute (cb, (:=))
-import Deku.Control (deku, flatten)
+import Deku.Control (deku, plant)
 import Deku.Control as C
-import Deku.Core (Element)
+import Deku.Core (StreamingElt)
 import Deku.DOM as D
 import Deku.Interpret (FFIDOMSnapshot, effectfulDOMInterpret, makeFFIDOMSnapshot)
 import Effect (Effect)
-import FRP.Event (Event, create, filterMap, keepLatest, mapAccum, subscribe)
-import FRP.Event.Class (bang)
+import FRP.Event (Event, filterMap, keepLatest, mapAccum, subscribe, bang, bus)
 import Web.HTML (window)
 import Web.HTML.HTMLDocument (body)
 import Web.HTML.HTMLElement (toElement)
@@ -24,13 +25,9 @@ counter :: forall a. Event a → Event (Tuple a Int)
 counter event = mapAccum f event 0
   where
   f a b = Tuple (b + 1) (Tuple a b)
-scene
-  :: (Boolean -> Effect Unit)
-  -> Event Boolean
-  -> Element Event (FFIDOMSnapshot -> Effect Unit)
-scene push event =
-  flatten
-    [ D.div empty [ C.text (bang "Stops after 3 clicks") ]
+scene :: forall lock. Event (Event (StreamingElt lock (FFIDOMSnapshot -> Effect Unit)))
+scene = keepLatest $ bus $ \push -> lcmap (alt (bang true)) \event -> do
+    plant [ D.div empty (C.text (bang "Stops after 4 clicks"))
     , C.text (event <#> if _ then "click " else "kcilc ")
     , D.button
         ( counter event
@@ -46,7 +43,7 @@ scene push event =
               )
             # keepLatest
         )
-        [ C.text_ "me" ]
+        (C.text_ "me")
     ]
 
 main :: Effect Unit
@@ -54,7 +51,5 @@ main = do
   b' <- window >>= document >>= body
   for_ (toElement <$> b') \b -> do
     ffi <- makeFFIDOMSnapshot
-    { push, event } <- create
-    let evt = deku b (scene push event) effectfulDOMInterpret
+    let evt = deku b scene effectfulDOMInterpret
     void $ subscribe evt \i -> i ffi
-    push true

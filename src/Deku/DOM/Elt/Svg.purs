@@ -2,23 +2,24 @@ module Deku.DOM.Elt.Svg where
 
 import Control.Plus (empty)
 import Deku.Attribute (Attribute)
-import Deku.Control (elementify)
-import Deku.Core (Element)
-import FRP.Event (class IsEvent)
+import Deku.Control (elementify, class Plant, plant)
+import Deku.Core (StreamingElt, Element)
+import FRP.Event (Event)
 
 data Svg_
 
 svg
-  :: forall event payload
-   . IsEvent event
-  => event (Attribute Svg_)
-  -> Array (Element event payload)
-  -> Element event payload
-svg = elementify "svg"
+  :: forall seed lock payload
+   . Plant seed (Event (Event (StreamingElt lock payload)))
+  => Event (Attribute Svg_)
+  -> seed
+  -> Element lock payload
+svg attributes seed = elementify "svg" attributes (plant seed)
 
 svg_
-  :: forall event payload
-   . IsEvent event
-  => Array (Element event payload)
-  -> Element event payload
+  :: forall seed lock payload
+   . Plant seed (Event (Event (StreamingElt lock payload)))
+  => seed
+  -> Element lock payload
 svg_ = svg empty
+

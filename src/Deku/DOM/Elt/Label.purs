@@ -2,23 +2,24 @@ module Deku.DOM.Elt.Label where
 
 import Control.Plus (empty)
 import Deku.Attribute (Attribute)
-import Deku.Control (elementify)
-import Deku.Core (Element)
-import FRP.Event (class IsEvent)
+import Deku.Control (elementify, class Plant, plant)
+import Deku.Core (StreamingElt, Element)
+import FRP.Event (Event)
 
 data Label_
 
 label
-  :: forall event payload
-   . IsEvent event
-  => event (Attribute Label_)
-  -> Array (Element event payload)
-  -> Element event payload
-label = elementify "label"
+  :: forall seed lock payload
+   . Plant seed (Event (Event (StreamingElt lock payload)))
+  => Event (Attribute Label_)
+  -> seed
+  -> Element lock payload
+label attributes seed = elementify "label" attributes (plant seed)
 
 label_
-  :: forall event payload
-   . IsEvent event
-  => Array (Element event payload)
-  -> Element event payload
+  :: forall seed lock payload
+   . Plant seed (Event (Event (StreamingElt lock payload)))
+  => seed
+  -> Element lock payload
 label_ = label empty
+

@@ -2,23 +2,24 @@ module Deku.DOM.Elt.Option where
 
 import Control.Plus (empty)
 import Deku.Attribute (Attribute)
-import Deku.Control (elementify)
-import Deku.Core (Element)
-import FRP.Event (class IsEvent)
+import Deku.Control (elementify, class Plant, plant)
+import Deku.Core (StreamingElt, Element)
+import FRP.Event (Event)
 
 data Option_
 
 option
-  :: forall event payload
-   . IsEvent event
-  => event (Attribute Option_)
-  -> Array (Element event payload)
-  -> Element event payload
-option = elementify "option"
+  :: forall seed lock payload
+   . Plant seed (Event (Event (StreamingElt lock payload)))
+  => Event (Attribute Option_)
+  -> seed
+  -> Element lock payload
+option attributes seed = elementify "option" attributes (plant seed)
 
 option_
-  :: forall event payload
-   . IsEvent event
-  => Array (Element event payload)
-  -> Element event payload
+  :: forall seed lock payload
+   . Plant seed (Event (Event (StreamingElt lock payload)))
+  => seed
+  -> Element lock payload
 option_ = option empty
+

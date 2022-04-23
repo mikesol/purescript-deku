@@ -2,23 +2,24 @@ module Deku.DOM.Elt.Strike where
 
 import Control.Plus (empty)
 import Deku.Attribute (Attribute)
-import Deku.Control (elementify)
-import Deku.Core (Element)
-import FRP.Event (class IsEvent)
+import Deku.Control (elementify, class Plant, plant)
+import Deku.Core (StreamingElt, Element)
+import FRP.Event (Event)
 
 data Strike_
 
 strike
-  :: forall event payload
-   . IsEvent event
-  => event (Attribute Strike_)
-  -> Array (Element event payload)
-  -> Element event payload
-strike = elementify "strike"
+  :: forall seed lock payload
+   . Plant seed (Event (Event (StreamingElt lock payload)))
+  => Event (Attribute Strike_)
+  -> seed
+  -> Element lock payload
+strike attributes seed = elementify "strike" attributes (plant seed)
 
 strike_
-  :: forall event payload
-   . IsEvent event
-  => Array (Element event payload)
-  -> Element event payload
+  :: forall seed lock payload
+   . Plant seed (Event (Event (StreamingElt lock payload)))
+  => seed
+  -> Element lock payload
 strike_ = strike empty
+

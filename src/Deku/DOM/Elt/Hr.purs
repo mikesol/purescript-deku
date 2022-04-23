@@ -2,23 +2,24 @@ module Deku.DOM.Elt.Hr where
 
 import Control.Plus (empty)
 import Deku.Attribute (Attribute)
-import Deku.Control (elementify)
-import Deku.Core (Element)
-import FRP.Event (class IsEvent)
+import Deku.Control (elementify, class Plant, plant)
+import Deku.Core (StreamingElt, Element)
+import FRP.Event (Event)
 
 data Hr_
 
 hr
-  :: forall event payload
-   . IsEvent event
-  => event (Attribute Hr_)
-  -> Array (Element event payload)
-  -> Element event payload
-hr = elementify "hr"
+  :: forall seed lock payload
+   . Plant seed (Event (Event (StreamingElt lock payload)))
+  => Event (Attribute Hr_)
+  -> seed
+  -> Element lock payload
+hr attributes seed = elementify "hr" attributes (plant seed)
 
 hr_
-  :: forall event payload
-   . IsEvent event
-  => Array (Element event payload)
-  -> Element event payload
+  :: forall seed lock payload
+   . Plant seed (Event (Event (StreamingElt lock payload)))
+  => seed
+  -> Element lock payload
 hr_ = hr empty
+

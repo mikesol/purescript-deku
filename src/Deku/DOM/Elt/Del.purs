@@ -2,23 +2,24 @@ module Deku.DOM.Elt.Del where
 
 import Control.Plus (empty)
 import Deku.Attribute (Attribute)
-import Deku.Control (elementify)
-import Deku.Core (Element)
-import FRP.Event (class IsEvent)
+import Deku.Control (elementify, class Plant, plant)
+import Deku.Core (StreamingElt, Element)
+import FRP.Event (Event)
 
 data Del_
 
 del
-  :: forall event payload
-   . IsEvent event
-  => event (Attribute Del_)
-  -> Array (Element event payload)
-  -> Element event payload
-del = elementify "del"
+  :: forall seed lock payload
+   . Plant seed (Event (Event (StreamingElt lock payload)))
+  => Event (Attribute Del_)
+  -> seed
+  -> Element lock payload
+del attributes seed = elementify "del" attributes (plant seed)
 
 del_
-  :: forall event payload
-   . IsEvent event
-  => Array (Element event payload)
-  -> Element event payload
+  :: forall seed lock payload
+   . Plant seed (Event (Event (StreamingElt lock payload)))
+  => seed
+  -> Element lock payload
 del_ = del empty
+

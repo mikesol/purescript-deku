@@ -2,23 +2,24 @@ module Deku.DOM.Elt.Colgroup where
 
 import Control.Plus (empty)
 import Deku.Attribute (Attribute)
-import Deku.Control (elementify)
-import Deku.Core (Element)
-import FRP.Event (class IsEvent)
+import Deku.Control (elementify, class Plant, plant)
+import Deku.Core (StreamingElt, Element)
+import FRP.Event (Event)
 
 data Colgroup_
 
 colgroup
-  :: forall event payload
-   . IsEvent event
-  => event (Attribute Colgroup_)
-  -> Array (Element event payload)
-  -> Element event payload
-colgroup = elementify "colgroup"
+  :: forall seed lock payload
+   . Plant seed (Event (Event (StreamingElt lock payload)))
+  => Event (Attribute Colgroup_)
+  -> seed
+  -> Element lock payload
+colgroup attributes seed = elementify "colgroup" attributes (plant seed)
 
 colgroup_
-  :: forall event payload
-   . IsEvent event
-  => Array (Element event payload)
-  -> Element event payload
+  :: forall seed lock payload
+   . Plant seed (Event (Event (StreamingElt lock payload)))
+  => seed
+  -> Element lock payload
 colgroup_ = colgroup empty
+

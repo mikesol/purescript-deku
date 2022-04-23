@@ -2,23 +2,24 @@ module Deku.DOM.Elt.Meter where
 
 import Control.Plus (empty)
 import Deku.Attribute (Attribute)
-import Deku.Control (elementify)
-import Deku.Core (Element)
-import FRP.Event (class IsEvent)
+import Deku.Control (elementify, class Plant, plant)
+import Deku.Core (StreamingElt, Element)
+import FRP.Event (Event)
 
 data Meter_
 
 meter
-  :: forall event payload
-   . IsEvent event
-  => event (Attribute Meter_)
-  -> Array (Element event payload)
-  -> Element event payload
-meter = elementify "meter"
+  :: forall seed lock payload
+   . Plant seed (Event (Event (StreamingElt lock payload)))
+  => Event (Attribute Meter_)
+  -> seed
+  -> Element lock payload
+meter attributes seed = elementify "meter" attributes (plant seed)
 
 meter_
-  :: forall event payload
-   . IsEvent event
-  => Array (Element event payload)
-  -> Element event payload
+  :: forall seed lock payload
+   . Plant seed (Event (Event (StreamingElt lock payload)))
+  => seed
+  -> Element lock payload
 meter_ = meter empty
+

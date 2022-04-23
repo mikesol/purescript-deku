@@ -2,23 +2,24 @@ module Deku.DOM.Elt.Meta where
 
 import Control.Plus (empty)
 import Deku.Attribute (Attribute)
-import Deku.Control (elementify)
-import Deku.Core (Element)
-import FRP.Event (class IsEvent)
+import Deku.Control (elementify, class Plant, plant)
+import Deku.Core (StreamingElt, Element)
+import FRP.Event (Event)
 
 data Meta_
 
 meta
-  :: forall event payload
-   . IsEvent event
-  => event (Attribute Meta_)
-  -> Array (Element event payload)
-  -> Element event payload
-meta = elementify "meta"
+  :: forall seed lock payload
+   . Plant seed (Event (Event (StreamingElt lock payload)))
+  => Event (Attribute Meta_)
+  -> seed
+  -> Element lock payload
+meta attributes seed = elementify "meta" attributes (plant seed)
 
 meta_
-  :: forall event payload
-   . IsEvent event
-  => Array (Element event payload)
-  -> Element event payload
+  :: forall seed lock payload
+   . Plant seed (Event (Event (StreamingElt lock payload)))
+  => seed
+  -> Element lock payload
 meta_ = meta empty
+

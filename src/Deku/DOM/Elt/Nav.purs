@@ -2,23 +2,24 @@ module Deku.DOM.Elt.Nav where
 
 import Control.Plus (empty)
 import Deku.Attribute (Attribute)
-import Deku.Control (elementify)
-import Deku.Core (Element)
-import FRP.Event (class IsEvent)
+import Deku.Control (elementify, class Plant, plant)
+import Deku.Core (StreamingElt, Element)
+import FRP.Event (Event)
 
 data Nav_
 
 nav
-  :: forall event payload
-   . IsEvent event
-  => event (Attribute Nav_)
-  -> Array (Element event payload)
-  -> Element event payload
-nav = elementify "nav"
+  :: forall seed lock payload
+   . Plant seed (Event (Event (StreamingElt lock payload)))
+  => Event (Attribute Nav_)
+  -> seed
+  -> Element lock payload
+nav attributes seed = elementify "nav" attributes (plant seed)
 
 nav_
-  :: forall event payload
-   . IsEvent event
-  => Array (Element event payload)
-  -> Element event payload
+  :: forall seed lock payload
+   . Plant seed (Event (Event (StreamingElt lock payload)))
+  => seed
+  -> Element lock payload
 nav_ = nav empty
+

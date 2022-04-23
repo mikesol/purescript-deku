@@ -2,23 +2,24 @@ module Deku.DOM.Elt.Textarea where
 
 import Control.Plus (empty)
 import Deku.Attribute (Attribute)
-import Deku.Control (elementify)
-import Deku.Core (Element)
-import FRP.Event (class IsEvent)
+import Deku.Control (elementify, class Plant, plant)
+import Deku.Core (StreamingElt, Element)
+import FRP.Event (Event)
 
 data Textarea_
 
 textarea
-  :: forall event payload
-   . IsEvent event
-  => event (Attribute Textarea_)
-  -> Array (Element event payload)
-  -> Element event payload
-textarea = elementify "textarea"
+  :: forall seed lock payload
+   . Plant seed (Event (Event (StreamingElt lock payload)))
+  => Event (Attribute Textarea_)
+  -> seed
+  -> Element lock payload
+textarea attributes seed = elementify "textarea" attributes (plant seed)
 
 textarea_
-  :: forall event payload
-   . IsEvent event
-  => Array (Element event payload)
-  -> Element event payload
+  :: forall seed lock payload
+   . Plant seed (Event (Event (StreamingElt lock payload)))
+  => seed
+  -> Element lock payload
 textarea_ = textarea empty
+

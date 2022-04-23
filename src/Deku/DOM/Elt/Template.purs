@@ -2,23 +2,24 @@ module Deku.DOM.Elt.Template where
 
 import Control.Plus (empty)
 import Deku.Attribute (Attribute)
-import Deku.Control (elementify)
-import Deku.Core (Element)
-import FRP.Event (class IsEvent)
+import Deku.Control (elementify, class Plant, plant)
+import Deku.Core (StreamingElt, Element)
+import FRP.Event (Event)
 
 data Template_
 
 template
-  :: forall event payload
-   . IsEvent event
-  => event (Attribute Template_)
-  -> Array (Element event payload)
-  -> Element event payload
-template = elementify "template"
+  :: forall seed lock payload
+   . Plant seed (Event (Event (StreamingElt lock payload)))
+  => Event (Attribute Template_)
+  -> seed
+  -> Element lock payload
+template attributes seed = elementify "template" attributes (plant seed)
 
 template_
-  :: forall event payload
-   . IsEvent event
-  => Array (Element event payload)
-  -> Element event payload
+  :: forall seed lock payload
+   . Plant seed (Event (Event (StreamingElt lock payload)))
+  => seed
+  -> Element lock payload
 template_ = template empty
+

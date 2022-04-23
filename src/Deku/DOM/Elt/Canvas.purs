@@ -2,23 +2,24 @@ module Deku.DOM.Elt.Canvas where
 
 import Control.Plus (empty)
 import Deku.Attribute (Attribute)
-import Deku.Control (elementify)
-import Deku.Core (Element)
-import FRP.Event (class IsEvent)
+import Deku.Control (elementify, class Plant, plant)
+import Deku.Core (StreamingElt, Element)
+import FRP.Event (Event)
 
 data Canvas_
 
 canvas
-  :: forall event payload
-   . IsEvent event
-  => event (Attribute Canvas_)
-  -> Array (Element event payload)
-  -> Element event payload
-canvas = elementify "canvas"
+  :: forall seed lock payload
+   . Plant seed (Event (Event (StreamingElt lock payload)))
+  => Event (Attribute Canvas_)
+  -> seed
+  -> Element lock payload
+canvas attributes seed = elementify "canvas" attributes (plant seed)
 
 canvas_
-  :: forall event payload
-   . IsEvent event
-  => Array (Element event payload)
-  -> Element event payload
+  :: forall seed lock payload
+   . Plant seed (Event (Event (StreamingElt lock payload)))
+  => seed
+  -> Element lock payload
 canvas_ = canvas empty
+

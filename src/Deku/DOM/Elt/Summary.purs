@@ -2,23 +2,24 @@ module Deku.DOM.Elt.Summary where
 
 import Control.Plus (empty)
 import Deku.Attribute (Attribute)
-import Deku.Control (elementify)
-import Deku.Core (Element)
-import FRP.Event (class IsEvent)
+import Deku.Control (elementify, class Plant, plant)
+import Deku.Core (StreamingElt, Element)
+import FRP.Event (Event)
 
 data Summary_
 
 summary
-  :: forall event payload
-   . IsEvent event
-  => event (Attribute Summary_)
-  -> Array (Element event payload)
-  -> Element event payload
-summary = elementify "summary"
+  :: forall seed lock payload
+   . Plant seed (Event (Event (StreamingElt lock payload)))
+  => Event (Attribute Summary_)
+  -> seed
+  -> Element lock payload
+summary attributes seed = elementify "summary" attributes (plant seed)
 
 summary_
-  :: forall event payload
-   . IsEvent event
-  => Array (Element event payload)
-  -> Element event payload
+  :: forall seed lock payload
+   . Plant seed (Event (Event (StreamingElt lock payload)))
+  => seed
+  -> Element lock payload
 summary_ = summary empty
+

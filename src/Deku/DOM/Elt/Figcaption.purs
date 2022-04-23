@@ -2,23 +2,24 @@ module Deku.DOM.Elt.Figcaption where
 
 import Control.Plus (empty)
 import Deku.Attribute (Attribute)
-import Deku.Control (elementify)
-import Deku.Core (Element)
-import FRP.Event (class IsEvent)
+import Deku.Control (elementify, class Plant, plant)
+import Deku.Core (StreamingElt, Element)
+import FRP.Event (Event)
 
 data Figcaption_
 
 figcaption
-  :: forall event payload
-   . IsEvent event
-  => event (Attribute Figcaption_)
-  -> Array (Element event payload)
-  -> Element event payload
-figcaption = elementify "figcaption"
+  :: forall seed lock payload
+   . Plant seed (Event (Event (StreamingElt lock payload)))
+  => Event (Attribute Figcaption_)
+  -> seed
+  -> Element lock payload
+figcaption attributes seed = elementify "figcaption" attributes (plant seed)
 
 figcaption_
-  :: forall event payload
-   . IsEvent event
-  => Array (Element event payload)
-  -> Element event payload
+  :: forall seed lock payload
+   . Plant seed (Event (Event (StreamingElt lock payload)))
+  => seed
+  -> Element lock payload
 figcaption_ = figcaption empty
+

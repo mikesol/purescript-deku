@@ -2,23 +2,24 @@ module Deku.DOM.Elt.Samp where
 
 import Control.Plus (empty)
 import Deku.Attribute (Attribute)
-import Deku.Control (elementify)
-import Deku.Core (Element)
-import FRP.Event (class IsEvent)
+import Deku.Control (elementify, class Plant, plant)
+import Deku.Core (StreamingElt, Element)
+import FRP.Event (Event)
 
 data Samp_
 
 samp
-  :: forall event payload
-   . IsEvent event
-  => event (Attribute Samp_)
-  -> Array (Element event payload)
-  -> Element event payload
-samp = elementify "samp"
+  :: forall seed lock payload
+   . Plant seed (Event (Event (StreamingElt lock payload)))
+  => Event (Attribute Samp_)
+  -> seed
+  -> Element lock payload
+samp attributes seed = elementify "samp" attributes (plant seed)
 
 samp_
-  :: forall event payload
-   . IsEvent event
-  => Array (Element event payload)
-  -> Element event payload
+  :: forall seed lock payload
+   . Plant seed (Event (Event (StreamingElt lock payload)))
+  => seed
+  -> Element lock payload
 samp_ = samp empty
+

@@ -2,23 +2,24 @@ module Deku.DOM.Elt.Ol where
 
 import Control.Plus (empty)
 import Deku.Attribute (Attribute)
-import Deku.Control (elementify)
-import Deku.Core (Element)
-import FRP.Event (class IsEvent)
+import Deku.Control (elementify, class Plant, plant)
+import Deku.Core (StreamingElt, Element)
+import FRP.Event (Event)
 
 data Ol_
 
 ol
-  :: forall event payload
-   . IsEvent event
-  => event (Attribute Ol_)
-  -> Array (Element event payload)
-  -> Element event payload
-ol = elementify "ol"
+  :: forall seed lock payload
+   . Plant seed (Event (Event (StreamingElt lock payload)))
+  => Event (Attribute Ol_)
+  -> seed
+  -> Element lock payload
+ol attributes seed = elementify "ol" attributes (plant seed)
 
 ol_
-  :: forall event payload
-   . IsEvent event
-  => Array (Element event payload)
-  -> Element event payload
+  :: forall seed lock payload
+   . Plant seed (Event (Event (StreamingElt lock payload)))
+  => seed
+  -> Element lock payload
 ol_ = ol empty
+

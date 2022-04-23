@@ -2,23 +2,24 @@ module Deku.DOM.Elt.Abbr where
 
 import Control.Plus (empty)
 import Deku.Attribute (Attribute)
-import Deku.Control (elementify)
-import Deku.Core (Element)
-import FRP.Event (class IsEvent)
+import Deku.Control (elementify, class Plant, plant)
+import Deku.Core (StreamingElt, Element)
+import FRP.Event (Event)
 
 data Abbr_
 
 abbr
-  :: forall event payload
-   . IsEvent event
-  => event (Attribute Abbr_)
-  -> Array (Element event payload)
-  -> Element event payload
-abbr = elementify "abbr"
+  :: forall seed lock payload
+   . Plant seed (Event (Event (StreamingElt lock payload)))
+  => Event (Attribute Abbr_)
+  -> seed
+  -> Element lock payload
+abbr attributes seed = elementify "abbr" attributes (plant seed)
 
 abbr_
-  :: forall event payload
-   . IsEvent event
-  => Array (Element event payload)
-  -> Element event payload
+  :: forall seed lock payload
+   . Plant seed (Event (Event (StreamingElt lock payload)))
+  => seed
+  -> Element lock payload
 abbr_ = abbr empty
+

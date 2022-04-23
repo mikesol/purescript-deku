@@ -2,23 +2,24 @@ module Deku.DOM.Elt.Noframes where
 
 import Control.Plus (empty)
 import Deku.Attribute (Attribute)
-import Deku.Control (elementify)
-import Deku.Core (Element)
-import FRP.Event (class IsEvent)
+import Deku.Control (elementify, class Plant, plant)
+import Deku.Core (StreamingElt, Element)
+import FRP.Event (Event)
 
 data Noframes_
 
 noframes
-  :: forall event payload
-   . IsEvent event
-  => event (Attribute Noframes_)
-  -> Array (Element event payload)
-  -> Element event payload
-noframes = elementify "noframes"
+  :: forall seed lock payload
+   . Plant seed (Event (Event (StreamingElt lock payload)))
+  => Event (Attribute Noframes_)
+  -> seed
+  -> Element lock payload
+noframes attributes seed = elementify "noframes" attributes (plant seed)
 
 noframes_
-  :: forall event payload
-   . IsEvent event
-  => Array (Element event payload)
-  -> Element event payload
+  :: forall seed lock payload
+   . Plant seed (Event (Event (StreamingElt lock payload)))
+  => seed
+  -> Element lock payload
 noframes_ = noframes empty
+

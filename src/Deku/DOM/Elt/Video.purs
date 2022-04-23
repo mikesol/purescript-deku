@@ -2,23 +2,24 @@ module Deku.DOM.Elt.Video where
 
 import Control.Plus (empty)
 import Deku.Attribute (Attribute)
-import Deku.Control (elementify)
-import Deku.Core (Element)
-import FRP.Event (class IsEvent)
+import Deku.Control (elementify, class Plant, plant)
+import Deku.Core (StreamingElt, Element)
+import FRP.Event (Event)
 
 data Video_
 
 video
-  :: forall event payload
-   . IsEvent event
-  => event (Attribute Video_)
-  -> Array (Element event payload)
-  -> Element event payload
-video = elementify "video"
+  :: forall seed lock payload
+   . Plant seed (Event (Event (StreamingElt lock payload)))
+  => Event (Attribute Video_)
+  -> seed
+  -> Element lock payload
+video attributes seed = elementify "video" attributes (plant seed)
 
 video_
-  :: forall event payload
-   . IsEvent event
-  => Array (Element event payload)
-  -> Element event payload
+  :: forall seed lock payload
+   . Plant seed (Event (Event (StreamingElt lock payload)))
+  => seed
+  -> Element lock payload
 video_ = video empty
+

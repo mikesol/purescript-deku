@@ -2,23 +2,24 @@ module Deku.DOM.Elt.Acronym where
 
 import Control.Plus (empty)
 import Deku.Attribute (Attribute)
-import Deku.Control (elementify)
-import Deku.Core (Element)
-import FRP.Event (class IsEvent)
+import Deku.Control (elementify, class Plant, plant)
+import Deku.Core (StreamingElt, Element)
+import FRP.Event (Event)
 
 data Acronym_
 
 acronym
-  :: forall event payload
-   . IsEvent event
-  => event (Attribute Acronym_)
-  -> Array (Element event payload)
-  -> Element event payload
-acronym = elementify "acronym"
+  :: forall seed lock payload
+   . Plant seed (Event (Event (StreamingElt lock payload)))
+  => Event (Attribute Acronym_)
+  -> seed
+  -> Element lock payload
+acronym attributes seed = elementify "acronym" attributes (plant seed)
 
 acronym_
-  :: forall event payload
-   . IsEvent event
-  => Array (Element event payload)
-  -> Element event payload
+  :: forall seed lock payload
+   . Plant seed (Event (Event (StreamingElt lock payload)))
+  => seed
+  -> Element lock payload
 acronym_ = acronym empty
+

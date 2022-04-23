@@ -2,23 +2,24 @@ module Deku.DOM.Elt.Param where
 
 import Control.Plus (empty)
 import Deku.Attribute (Attribute)
-import Deku.Control (elementify)
-import Deku.Core (Element)
-import FRP.Event (class IsEvent)
+import Deku.Control (elementify, class Plant, plant)
+import Deku.Core (StreamingElt, Element)
+import FRP.Event (Event)
 
 data Param_
 
 param
-  :: forall event payload
-   . IsEvent event
-  => event (Attribute Param_)
-  -> Array (Element event payload)
-  -> Element event payload
-param = elementify "param"
+  :: forall seed lock payload
+   . Plant seed (Event (Event (StreamingElt lock payload)))
+  => Event (Attribute Param_)
+  -> seed
+  -> Element lock payload
+param attributes seed = elementify "param" attributes (plant seed)
 
 param_
-  :: forall event payload
-   . IsEvent event
-  => Array (Element event payload)
-  -> Element event payload
+  :: forall seed lock payload
+   . Plant seed (Event (Event (StreamingElt lock payload)))
+  => seed
+  -> Element lock payload
 param_ = param empty
+

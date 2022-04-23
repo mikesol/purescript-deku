@@ -2,23 +2,24 @@ module Deku.DOM.Elt.Applet where
 
 import Control.Plus (empty)
 import Deku.Attribute (Attribute)
-import Deku.Control (elementify)
-import Deku.Core (Element)
-import FRP.Event (class IsEvent)
+import Deku.Control (elementify, class Plant, plant)
+import Deku.Core (StreamingElt, Element)
+import FRP.Event (Event)
 
 data Applet_
 
 applet
-  :: forall event payload
-   . IsEvent event
-  => event (Attribute Applet_)
-  -> Array (Element event payload)
-  -> Element event payload
-applet = elementify "applet"
+  :: forall seed lock payload
+   . Plant seed (Event (Event (StreamingElt lock payload)))
+  => Event (Attribute Applet_)
+  -> seed
+  -> Element lock payload
+applet attributes seed = elementify "applet" attributes (plant seed)
 
 applet_
-  :: forall event payload
-   . IsEvent event
-  => Array (Element event payload)
-  -> Element event payload
+  :: forall seed lock payload
+   . Plant seed (Event (Event (StreamingElt lock payload)))
+  => seed
+  -> Element lock payload
 applet_ = applet empty
+

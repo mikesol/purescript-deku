@@ -95,7 +95,7 @@ def cg(CODEGEN_TARGET, ival = None, ival2 = None):
             noop_(f'''  , {term}
   , {x}
   , {x}_''')
-            print_(f'''import Deku.DOM.Elt.{term.split('_')[0]}''')
+            print_(f'''import Deku.DOM.Elt.{term.split('_')[0]}({term}, {x}, {x}_)''')
 
     elif CODEGEN_TARGET == GENERATE_DOM_TTD:
         for x in TAGS:
@@ -110,26 +110,27 @@ def cg(CODEGEN_TARGET, ival = None, ival2 = None):
 
 import Control.Plus (empty)
 import Deku.Attribute (Attribute)
-import Deku.Control (elementify)
-import Deku.Core (Element)
-import FRP.Event (class IsEvent)
+import Deku.Control (elementify, class Plant, plant)
+import Deku.Core (StreamingElt, Element)
+import FRP.Event (Event)
 
 data {term}
 
 {x}
-  :: forall event payload
-   . IsEvent event
-  => event (Attribute {term})
-  -> Array (Element event payload)
-  -> Element event payload
-{x} = elementify "{astag(x)}"
+  :: forall seed lock payload
+   . Plant seed (Event (Event (StreamingElt lock payload)))
+  => Event (Attribute {term})
+  -> seed
+  -> Element lock payload
+{x} attributes seed = elementify "{astag(x)}" attributes (plant seed)
 
 {x}_
-  :: forall event payload
-   . IsEvent event
-  => Array (Element event payload)
-  -> Element event payload
+  :: forall seed lock payload
+   . Plant seed (Event (Event (StreamingElt lock payload)))
+  => seed
+  -> Element lock payload
 {x}_ = {x} empty
+
 ''')
     elif CODEGEN_TARGET == GENERATE_ATTR_DECL:
         for x in AMAP.keys():
@@ -145,12 +146,12 @@ data {term}
         for x in AMAP.keys():
             term = bigat(x)
             noop_(f'''  , {term}(..)''')
-            print_(f'''import Deku.DOM.Attr.{term}''')
+            print_(f'''import Deku.DOM.Attr.{term}({term}(..))''')
 
         for x in GLOBAL_EVENT_HANDLERS:
             term = 'On'+x.capitalize()
             noop_(f'''  , {term}(..)''')
-            print_(f'''import Deku.DOM.Attr.{term}''')
+            print_(f'''import Deku.DOM.Attr.{term}({term}(..))''')
     elif CODEGEN_TARGET == GENERATE_ATTR_DEFS:
             x = ival
             k = ival

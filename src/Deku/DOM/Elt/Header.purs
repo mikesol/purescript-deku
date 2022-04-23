@@ -2,23 +2,24 @@ module Deku.DOM.Elt.Header where
 
 import Control.Plus (empty)
 import Deku.Attribute (Attribute)
-import Deku.Control (elementify)
-import Deku.Core (Element)
-import FRP.Event (class IsEvent)
+import Deku.Control (elementify, class Plant, plant)
+import Deku.Core (StreamingElt, Element)
+import FRP.Event (Event)
 
 data Header_
 
 header
-  :: forall event payload
-   . IsEvent event
-  => event (Attribute Header_)
-  -> Array (Element event payload)
-  -> Element event payload
-header = elementify "header"
+  :: forall seed lock payload
+   . Plant seed (Event (Event (StreamingElt lock payload)))
+  => Event (Attribute Header_)
+  -> seed
+  -> Element lock payload
+header attributes seed = elementify "header" attributes (plant seed)
 
 header_
-  :: forall event payload
-   . IsEvent event
-  => Array (Element event payload)
-  -> Element event payload
+  :: forall seed lock payload
+   . Plant seed (Event (Event (StreamingElt lock payload)))
+  => seed
+  -> Element lock payload
 header_ = header empty
+

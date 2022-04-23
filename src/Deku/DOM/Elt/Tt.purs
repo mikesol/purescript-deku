@@ -2,23 +2,24 @@ module Deku.DOM.Elt.Tt where
 
 import Control.Plus (empty)
 import Deku.Attribute (Attribute)
-import Deku.Control (elementify)
-import Deku.Core (Element)
-import FRP.Event (class IsEvent)
+import Deku.Control (elementify, class Plant, plant)
+import Deku.Core (StreamingElt, Element)
+import FRP.Event (Event)
 
 data Tt_
 
 tt
-  :: forall event payload
-   . IsEvent event
-  => event (Attribute Tt_)
-  -> Array (Element event payload)
-  -> Element event payload
-tt = elementify "tt"
+  :: forall seed lock payload
+   . Plant seed (Event (Event (StreamingElt lock payload)))
+  => Event (Attribute Tt_)
+  -> seed
+  -> Element lock payload
+tt attributes seed = elementify "tt" attributes (plant seed)
 
 tt_
-  :: forall event payload
-   . IsEvent event
-  => Array (Element event payload)
-  -> Element event payload
+  :: forall seed lock payload
+   . Plant seed (Event (Event (StreamingElt lock payload)))
+  => seed
+  -> Element lock payload
 tt_ = tt empty
+

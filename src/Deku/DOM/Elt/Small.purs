@@ -2,23 +2,24 @@ module Deku.DOM.Elt.Small where
 
 import Control.Plus (empty)
 import Deku.Attribute (Attribute)
-import Deku.Control (elementify)
-import Deku.Core (Element)
-import FRP.Event (class IsEvent)
+import Deku.Control (elementify, class Plant, plant)
+import Deku.Core (StreamingElt, Element)
+import FRP.Event (Event)
 
 data Small_
 
 small
-  :: forall event payload
-   . IsEvent event
-  => event (Attribute Small_)
-  -> Array (Element event payload)
-  -> Element event payload
-small = elementify "small"
+  :: forall seed lock payload
+   . Plant seed (Event (Event (StreamingElt lock payload)))
+  => Event (Attribute Small_)
+  -> seed
+  -> Element lock payload
+small attributes seed = elementify "small" attributes (plant seed)
 
 small_
-  :: forall event payload
-   . IsEvent event
-  => Array (Element event payload)
-  -> Element event payload
+  :: forall seed lock payload
+   . Plant seed (Event (Event (StreamingElt lock payload)))
+  => seed
+  -> Element lock payload
 small_ = small empty
+

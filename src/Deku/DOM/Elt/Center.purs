@@ -2,23 +2,24 @@ module Deku.DOM.Elt.Center where
 
 import Control.Plus (empty)
 import Deku.Attribute (Attribute)
-import Deku.Control (elementify)
-import Deku.Core (Element)
-import FRP.Event (class IsEvent)
+import Deku.Control (elementify, class Plant, plant)
+import Deku.Core (StreamingElt, Element)
+import FRP.Event (Event)
 
 data Center_
 
 center
-  :: forall event payload
-   . IsEvent event
-  => event (Attribute Center_)
-  -> Array (Element event payload)
-  -> Element event payload
-center = elementify "center"
+  :: forall seed lock payload
+   . Plant seed (Event (Event (StreamingElt lock payload)))
+  => Event (Attribute Center_)
+  -> seed
+  -> Element lock payload
+center attributes seed = elementify "center" attributes (plant seed)
 
 center_
-  :: forall event payload
-   . IsEvent event
-  => Array (Element event payload)
-  -> Element event payload
+  :: forall seed lock payload
+   . Plant seed (Event (Event (StreamingElt lock payload)))
+  => seed
+  -> Element lock payload
 center_ = center empty
+

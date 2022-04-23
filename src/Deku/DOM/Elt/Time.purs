@@ -2,23 +2,24 @@ module Deku.DOM.Elt.Time where
 
 import Control.Plus (empty)
 import Deku.Attribute (Attribute)
-import Deku.Control (elementify)
-import Deku.Core (Element)
-import FRP.Event (class IsEvent)
+import Deku.Control (elementify, class Plant, plant)
+import Deku.Core (StreamingElt, Element)
+import FRP.Event (Event)
 
 data Time_
 
 time
-  :: forall event payload
-   . IsEvent event
-  => event (Attribute Time_)
-  -> Array (Element event payload)
-  -> Element event payload
-time = elementify "time"
+  :: forall seed lock payload
+   . Plant seed (Event (Event (StreamingElt lock payload)))
+  => Event (Attribute Time_)
+  -> seed
+  -> Element lock payload
+time attributes seed = elementify "time" attributes (plant seed)
 
 time_
-  :: forall event payload
-   . IsEvent event
-  => Array (Element event payload)
-  -> Element event payload
+  :: forall seed lock payload
+   . Plant seed (Event (Event (StreamingElt lock payload)))
+  => seed
+  -> Element lock payload
 time_ = time empty
+

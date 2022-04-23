@@ -2,23 +2,24 @@ module Deku.DOM.Elt.Iframe where
 
 import Control.Plus (empty)
 import Deku.Attribute (Attribute)
-import Deku.Control (elementify)
-import Deku.Core (Element)
-import FRP.Event (class IsEvent)
+import Deku.Control (elementify, class Plant, plant)
+import Deku.Core (StreamingElt, Element)
+import FRP.Event (Event)
 
 data Iframe_
 
 iframe
-  :: forall event payload
-   . IsEvent event
-  => event (Attribute Iframe_)
-  -> Array (Element event payload)
-  -> Element event payload
-iframe = elementify "iframe"
+  :: forall seed lock payload
+   . Plant seed (Event (Event (StreamingElt lock payload)))
+  => Event (Attribute Iframe_)
+  -> seed
+  -> Element lock payload
+iframe attributes seed = elementify "iframe" attributes (plant seed)
 
 iframe_
-  :: forall event payload
-   . IsEvent event
-  => Array (Element event payload)
-  -> Element event payload
+  :: forall seed lock payload
+   . Plant seed (Event (Event (StreamingElt lock payload)))
+  => seed
+  -> Element lock payload
 iframe_ = iframe empty
+

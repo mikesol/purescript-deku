@@ -2,23 +2,24 @@ module Deku.DOM.Elt.Wbr where
 
 import Control.Plus (empty)
 import Deku.Attribute (Attribute)
-import Deku.Control (elementify)
-import Deku.Core (Element)
-import FRP.Event (class IsEvent)
+import Deku.Control (elementify, class Plant, plant)
+import Deku.Core (StreamingElt, Element)
+import FRP.Event (Event)
 
 data Wbr_
 
 wbr
-  :: forall event payload
-   . IsEvent event
-  => event (Attribute Wbr_)
-  -> Array (Element event payload)
-  -> Element event payload
-wbr = elementify "wbr"
+  :: forall seed lock payload
+   . Plant seed (Event (Event (StreamingElt lock payload)))
+  => Event (Attribute Wbr_)
+  -> seed
+  -> Element lock payload
+wbr attributes seed = elementify "wbr" attributes (plant seed)
 
 wbr_
-  :: forall event payload
-   . IsEvent event
-  => Array (Element event payload)
-  -> Element event payload
+  :: forall seed lock payload
+   . Plant seed (Event (Event (StreamingElt lock payload)))
+  => seed
+  -> Element lock payload
 wbr_ = wbr empty
+
