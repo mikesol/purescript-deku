@@ -5544,11 +5544,9 @@ var PS = {};
                                   if (v1.value1 instanceof Deku_Core.Elt) {
                                       return function __do() {
                                           var av = Effect_AVar.empty();
-                                          var predecessor = Effect_Ref.read(prevId)();
                                           var c1 = FRP_Event.subscribe(v1.value1.value0({
                                               parent: parent,
                                               scope: v1.value0,
-                                              predecessor: predecessor,
                                               raiseId: function (id) {
                                                   return function __do() {
                                                       Control_Bind.bind(Effect.bindEffect)(Effect_Ref.read(prevId))(Data_Foldable.traverse_(Effect.applicativeEffect)(Data_Foldable.foldableMaybe)(function (old) {
@@ -5572,12 +5570,12 @@ var PS = {};
                                               if (q instanceof Data_Either.Left) {
                                                   return Effect_Exception.throwException(q.value0);
                                               };
-                                              throw new Error("Failed pattern match at Deku.Internal (line 77, column 44 - line 82, column 45): " + [ q.constructor.name ]);
+                                              throw new Error("Failed pattern match at Deku.Internal (line 75, column 44 - line 80, column 45): " + [ q.constructor.name ]);
                                           })();
                                           return cncl();
                                       };
                                   };
-                                  throw new Error("Failed pattern match at Deku.Internal (line 41, column 13 - line 85, column 21): " + [ v1.value1.constructor.name ]);
+                                  throw new Error("Failed pattern match at Deku.Internal (line 41, column 13 - line 83, column 21): " + [ v1.value1.constructor.name ]);
                               })();
                               Effect_Ref.write(c0)(myUnsub)();
                               Effect_Ref.modify_(Foreign_Object.insert(rn)(c0))(cancelInner)();
@@ -5663,7 +5661,6 @@ var PS = {};
   var Data_Function = $PS["Data.Function"];
   var Data_Functor = $PS["Data.Functor"];
   var Data_FunctorWithIndex = $PS["Data.FunctorWithIndex"];
-  var Data_Maybe = $PS["Data.Maybe"];
   var Data_Unit = $PS["Data.Unit"];
   var Data_Vec = $PS["Data.Vec"];
   var Deku_Attribute = $PS["Deku.Attribute"];
@@ -5789,7 +5786,6 @@ var PS = {};
                                       return v({
                                           parent: "@portal@",
                                           scope: scopeF(psr.scope),
-                                          predecessor: Data_Maybe.Nothing.value,
                                           raiseId: function (id) {
                                               return $foreign.unsafeUpdateMutAr(ix)(id)(av);
                                           }
@@ -5823,7 +5819,7 @@ var PS = {};
                                       if (q instanceof Data_Either.Left) {
                                           return Effect_Exception.throwException(q.value0);
                                       };
-                                      throw new Error("Failed pattern match at Deku.Control (line 150, column 36 - line 152, column 35): " + [ q.constructor.name ]);
+                                      throw new Error("Failed pattern match at Deku.Control (line 149, column 36 - line 151, column 35): " + [ q.constructor.name ]);
                                   })();
                                   return cncl2();
                               };
