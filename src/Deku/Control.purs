@@ -120,7 +120,6 @@ internalPortal scopeF gaga closure = Element go
             gogo
               { parent: "@portal@"
               , scope: scopeF psr.scope
-              , predecessor: Nothing
               , raiseId: \id -> unsafeUpdateMutAr ix id av
               }
               di

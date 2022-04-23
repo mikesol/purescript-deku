@@ -57,12 +57,10 @@ __internalDekuFlatten parent di@(DOMInterpret { ids, disconnectElement, sendToTo
               Elt (Element kid) -> do
                 -- holds the current id
                 av <- AVar.empty
-                predecessor <- Ref.read prevId
                 c1 <- subscribe
                   ( kid
                       { parent
                       , scope: newScope
-                      , predecessor
                       , raiseId: \id -> do
                           Ref.read prevId >>= traverse_ \old ->
                             k

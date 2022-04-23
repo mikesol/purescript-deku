@@ -2,7 +2,6 @@ module Deku.Core where
 
 import Prelude
 
-import Data.Maybe (Maybe)
 import Deku.Attribute (AttributeValue)
 import Effect (Effect)
 import FRP.Behavior (Behavior)
@@ -15,7 +14,6 @@ data StreamingElt lock payload = Elt (Element lock payload) | SendToTop | Remove
 newtype Element (lock :: Type) payload = Element
   ( { parent :: String
     , scope :: String
-    , predecessor :: Maybe String
     , raiseId :: String -> Effect Unit
     }
     -> DOMInterpret payload
