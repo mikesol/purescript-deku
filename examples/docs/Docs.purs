@@ -17,6 +17,7 @@ import Deku.Example.Docs.HelloWorld as HelloWorld
 import Deku.Example.Docs.Intro as Intro
 import Deku.Example.Docs.Pursx1 as Pursx1
 import Deku.Example.Docs.Pursx2 as Pursx2
+import Deku.Example.Docs.Portals1 as Portals1
 import Deku.Example.Docs.Types (Page(..))
 import Deku.Interpret (effectfulDOMInterpret, makeFFIDOMSnapshot)
 import Effect (Effect)
@@ -98,7 +99,7 @@ scene push event =
   page dpage PURSX2 =  Pursx2.pursx2 dpage
   page dpage Events2 =  Events2.events2 dpage
   page dpage Events3 =  Events3.events3 dpage
-  page dpage Portals =  Pursx2.pursx2 dpage
+  page dpage Portals =  Portals1.portals1 dpage
 
 main :: Effect Unit
 main = do

@@ -50,7 +50,7 @@ px =  Proxy    :: Proxy
   <p>In the previous examples, the children of DOM nodes have been an array elements. For example, we've seen things like <code>D.div_ [text_ "hello ", text_ "world"]</code>. In this example, the bottom-most <code>D.div_</code> contains an <code>Event</code> instead of an <code>Array</code>. Now, whenever the event is fired, the new node will update in the DOM.</p>
 
   <h2>Next steps</h2>
-  <p>In this section, saw how to make our DOM more dynamic by using an <code>Event</code> in the place of an <code>Array</code> of children. In the next section, we'll expand this concept to a situation where an <a ~next~ style="cursor:pointer;">enclosing element needs to hold an indeterminate number of children, like a todo list</a>.</p>
+  <p>In this section, we saw how to make our DOM more dynamic by using an <code>Event</code> in the place of an <code>Array</code> of children. In the next section, we'll expand this concept to a situation where an <a ~next~ style="cursor:pointer;">enclosing element needs to hold an indeterminate number of children, like a todo list</a>.</p>
 </div>"""
 
 events2 :: forall lock payload. (Page -> Effect Unit) -> Element lock payload

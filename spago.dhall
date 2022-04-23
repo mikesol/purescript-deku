@@ -25,6 +25,7 @@
   , "variant"
   , "web-dom"
   , "web-events"
+  , "web-html"
   ]
 , packages = ./packages.dhall
 , sources = [ "src/**/*.purs" ]
