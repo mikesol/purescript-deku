@@ -2,7 +2,6 @@ module Deku.Example.Docs.HelloWorld where
 
 import Prelude
 
-import Control.Plus (class Plus)
 import Deku.Attribute (cb, (:=))
 import Deku.Control (text_)
 import Deku.Core (Element)
@@ -11,7 +10,7 @@ import Deku.Example.Docs.Types (Page(..))
 import Deku.Example.Docs.Util (scrollToTop)
 import Deku.Pursx (nut, (~~))
 import Effect (Effect)
-import FRP.Event.Class (bang, class IsEvent)
+import FRP.Event.Class (bang)
 import Type.Proxy (Proxy(..))
 
 px = Proxy :: Proxy """<div>
@@ -38,21 +37,21 @@ px = Proxy :: Proxy """<div>
 </div>"""
 
 
-helloWorld :: forall event payload.
-  Plus event =>
-  IsEvent event =>
-  (Page -> Effect Unit) -> Element event payload
+helloWorld :: forall lock payload.
+  (Page -> Effect Unit) -> Element lock payload
 helloWorld dpage  = px ~~
   { code: nut (D.pre_ [D.code_ [text_ """module Main where
 
 import Prelude
 
 import Deku.Control (text_)
-import Deku.Toplevel ((🚀))
+import Deku.Toplevel (runInBody2)
 import Effect (Effect)
 
 main :: Effect Unit
-main = unit 🚀 \_ _ -> text_ "Hello world""""]])
+main = runInBody2 (text_ "Hello world")
+"""
+]])
   , result: nut (D.div_ [text_ "Hello world"])
   , next: bang (D.OnClick := (cb (const $ dpage SimpleComponent *> scrollToTop)))
   }
