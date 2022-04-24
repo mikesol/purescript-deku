@@ -31,7 +31,7 @@ data TodoAction = Prioritize | Delete
 
 px =
   Proxy    :: Proxy      """<div>
-  <h1>Events 3</h1>
+  <h1>Events 2</h1>
 
   <h2>Dynamic children</h2>
   <p>

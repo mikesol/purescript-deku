@@ -12,14 +12,18 @@ module Deku.Control
   , portal
   , class Plant
   , plant
+  , switcher
   ) where
 
 import Prelude
 
 import Control.Alt ((<|>))
 import Data.Either (Either(..))
+import Data.Filterable (filter)
 import Data.Foldable (oneOf, oneOfMap)
 import Data.FunctorWithIndex (mapWithIndex)
+import Data.Tuple (snd)
+import Data.Tuple.Nested (type (/\), (/\))
 import Data.Vec (toArray, Vec)
 import Deku.Attribute (Attribute, prop', unsafeAttribute, unsafeUnAttribute)
 import Deku.Core (DOMInterpret(..), Element(..), StreamingElt(..))
@@ -28,7 +32,7 @@ import Effect (Effect)
 import Effect.AVar (tryPut)
 import Effect.AVar as AVar
 import Effect.Exception (throwException)
-import FRP.Event (Event, bang, makeEvent, subscribe)
+import FRP.Event (Event, bang, keepLatest, makeEvent, mapAccum, memoize, subscribe)
 import Safe.Coerce (coerce)
 import Type.Equality (class TypeEquals, proof)
 import Unsafe.Coerce (unsafeCoerce)
@@ -209,7 +213,7 @@ instance
   ) =>
   Plant (Event (StreamingElt locki payloadi))
     (Event (Event (StreamingElt locko payloado))) where
-  plant i = proof (coerce (bang i))
+  plant i = proof (coerce (map bang i))
 
 instance
   ( TypeEquals locki locko
@@ -327,3 +331,21 @@ dekuA
   -> Event payload
 dekuA root children = deku root
   (oneOfMap bang (map (bang <<< Elt) children))
+
+switcher
+  :: forall i lock payload
+   . (i -> Element lock payload)
+  -> Event i
+  -> Event (Event (StreamingElt lock payload))
+switcher f event = keepLatest
+  $ memoize (counter event) \cenv -> map
+    ( \(p /\ n) -> bang (Elt $ f p) <|>
+        ((const Remove) <$> filter (eq (n + 1) <<< snd) cenv)
+    )
+    cenv
+  where
+
+  counter :: forall a. Event a → Event (a /\ Int)
+  counter ev = mapAccum fn ev 0
+    where
+    fn a b = (b + 1) /\ (a /\ b)

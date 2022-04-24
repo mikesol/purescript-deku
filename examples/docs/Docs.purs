@@ -3,9 +3,9 @@ module Deku.Example.Docs where
 import Prelude
 
 import Data.Foldable (for_, oneOfMap)
-import Data.Tuple.Nested ((/\))
+import Data.Tuple.Nested (type (/\), (/\))
 import Deku.Attribute (cb, (:=))
-import Deku.Control (dekuA, text_)
+import Deku.Control (dekuA, switcher, text_)
 import Deku.Core (Element)
 import Deku.DOM as D
 import Deku.Example.Docs.Component as Component
@@ -14,18 +14,22 @@ import Deku.Example.Docs.Events as Events
 import Deku.Example.Docs.Events2 as Events2
 import Deku.Example.Docs.HelloWorld as HelloWorld
 import Deku.Example.Docs.Intro as Intro
+import Deku.Example.Docs.Portals1 as Portals1
 import Deku.Example.Docs.Pursx1 as Pursx1
 import Deku.Example.Docs.Pursx2 as Pursx2
-import Deku.Example.Docs.Portals1 as Portals1
 import Deku.Example.Docs.Types (Page(..))
 import Deku.Interpret (effectfulDOMInterpret, makeFFIDOMSnapshot)
 import Effect (Effect)
-import FRP.Event (Event, create, subscribe)
-import FRP.Event.Class (bang)
+import FRP.Event (Event, bang, create, mapAccum, subscribe)
 import Web.HTML (window)
 import Web.HTML.HTMLDocument (body)
 import Web.HTML.HTMLElement (toElement)
 import Web.HTML.Window (document)
+
+counter :: forall a. Event a → Event (a /\ Int)
+counter event = mapAccum f event 0
+  where
+  f a b = (b + 1) /\ (a /\ b)
 
 scene
   :: forall lock payload
@@ -80,9 +84,7 @@ scene push event =
             /\ "Portals"
             /\ false
         ]
-  , D.div_
-      (page push <$> event)
-
+  , D.div_ $ switcher (page push) event
   ]
   where
   page :: (Page -> Effect Unit) -> Page -> Element lock payload

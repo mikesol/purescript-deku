@@ -2,19 +2,24 @@ module Deku.Examples.Docs.Examples.Portals1 where
 
 import Prelude
 
-import Control.Alt (alt, (<|>))
+import Control.Alt (alt)
 import Data.Foldable (oneOfMap)
 import Data.Profunctor (lcmap)
-import Data.Tuple.Nested ((/\))
+import Data.Tuple.Nested ((/\), type (/\))
 import Data.Typelevel.Num (d0, d1)
 import Data.Vec (index, (+>))
 import Data.Vec as V
 import Deku.Attribute (cb, (:=))
-import Deku.Control (blank, plant, portal, text_)
+import Deku.Control (blank, plant, portal, switcher, text_)
 import Deku.DOM as D
 import Deku.Toplevel (runInBody1)
 import Effect (Effect)
-import FRP.Event (bang, bus, mapAccum)
+import FRP.Event (Event, bang, bus, fold, mapAccum)
+
+counter :: forall a. Event a → Event (a /\ Int)
+counter event = mapAccum f event 0
+  where
+  f a b = (b + 1) /\ (a /\ b)
 
 main :: Effect Unit
 main = runInBody1
@@ -37,11 +42,11 @@ main = runInBody1
           let
             p0 = index v d0
             p1 = index v d1
-            ev = event # mapAccum
-              \_ x -> not x /\ if x then p0 else p1
+            ev = fold (const not) event
+            flips = switcher (if _ then p0 else p1) <<< ev
           plant $ D.div_
             [ D.button (bang $ D.OnClick := cb (const $ push unit))
                 [ text_ "Switch videos" ]
-            , D.div_ [D.span_ (ev true), D.span_ (ev false)]
+            , D.div_ [ D.span_ (flips true), D.span_ (flips false) ]
             ]
   )
