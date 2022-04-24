@@ -15,6 +15,8 @@ import Effect.Ref as Ref
 import FRP.Event (Event, makeEvent, subscribe)
 import Foreign.Object as Object
 
+data Stage = Begin | Middle | End
+
 __internalDekuFlatten
   :: forall lock payload
    . String
@@ -29,42 +31,41 @@ __internalDekuFlatten parent di@(DOMInterpret { ids, disconnectElement, sendToTo
       subscribe children \inner ->
         do
           -- holds the previous id
-          prevId <- Ref.new Nothing
-          prevUnsub <- Ref.new (pure unit)
+          eltsUnsub <- Ref.new (pure unit)
           myUnsub <- Ref.new (pure unit)
+          myId <- Ref.new Nothing
           myImmediateCancellation <- Ref.new (pure unit)
-          rn <- ids
+          unsubId <- ids
+          newScope <- ids
+          stageRef <- Ref.new Begin
           c0 <- subscribe inner \kid' -> do
-            newScope <- ids
-            case kid' of
-              SendToTop -> Ref.read prevId >>= traverse_
+            stage <- Ref.read stageRef
+            case kid', stage of
+              SendToTop, Middle -> Ref.read myId >>= traverse_
                 (k <<< sendToTop <<< { id: _ })
-              Remove -> do
+              Remove, Middle -> do
+                Ref.write End stageRef
                 let
                   mic =
-                    ( Ref.read prevId >>= traverse_ \old ->
+                    ( Ref.read myId >>= traverse_ \old ->
                         k
                           ( disconnectElement
                               { id: old, parent }
                           )
-                    ) *> join (Ref.read myUnsub) *> join (Ref.read prevUnsub) *>
+                    ) *> join (Ref.read myUnsub) *> join (Ref.read eltsUnsub) *>
                       Ref.modify_
-                        (Object.delete rn)
+                        (Object.delete unsubId)
                         cancelInner
                 Ref.write mic myImmediateCancellation *> mic
-              Elt (Element kid) -> do
+              Elt (Element kid), Begin -> do
                 -- holds the current id
+                Ref.write Middle stageRef
                 av <- AVar.empty
                 c1 <- subscribe
                   ( kid
                       { parent
                       , scope: newScope
                       , raiseId: \id -> do
-                          Ref.read prevId >>= traverse_ \old ->
-                            k
-                              ( disconnectElement
-                                  { id: old, parent }
-                              )
                           void $ tryPut id av
                       }
                       di
@@ -72,15 +73,17 @@ __internalDekuFlatten parent di@(DOMInterpret { ids, disconnectElement, sendToTo
                   k
                 cncl <- AVar.take av \q -> case q of
                   Right r -> do
-                    Ref.write (Just r) (prevId)
-                    join (Ref.read prevUnsub)
-                    Ref.write c1 prevUnsub
+                    Ref.write (Just r) (myId)
+                    join (Ref.read eltsUnsub)
+                    Ref.write c1 eltsUnsub
                   Left e -> throwException e
                 -- cancel immediately, as it should be run synchronously
                 -- so if this actually does something then we have a problem
                 cncl
+              -- ignore
+              _, _ -> pure unit
           Ref.write c0 myUnsub
-          Ref.modify_ (Object.insert rn c0) cancelInner
+          Ref.modify_ (Object.insert unsubId c0) cancelInner
           join (Ref.read myImmediateCancellation)
     pure do
       Ref.read cancelInner >>= fold
