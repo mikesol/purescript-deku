@@ -20,10 +20,10 @@ import Control.Alt ((<|>))
 import Data.Either (Either(..))
 import Data.Foldable (oneOf, oneOfMap)
 import Data.FunctorWithIndex (mapWithIndex)
-import Deku.Internal (__internalDekuFlatten)
 import Data.Vec (toArray, Vec)
-import Deku.Attribute (Attribute, unsafeUnAttribute)
+import Deku.Attribute (Attribute, prop', unsafeAttribute, unsafeUnAttribute)
 import Deku.Core (DOMInterpret(..), Element(..), StreamingElt(..))
+import Deku.Internal (__internalDekuFlatten)
 import Effect (Effect)
 import Effect.AVar (tryPut)
 import Effect.AVar as AVar
@@ -130,9 +130,22 @@ internalPortal scopeF gaga closure = Element go
     idz <- asIds <$> readAr av
     let
       injectable = map
-        ( \id -> Element
-            \{ parent } (DOMInterpret { giveNewParent }) ->
-              bang (giveNewParent { id, parent })
+        ( \id -> elementify "div"
+            ( bang
+                ( unsafeAttribute
+                    { key: "style", value: prop' "display:contents;" }
+                )
+            )
+            ( bang
+                ( bang
+                    ( Elt
+                        ( Element
+                            \{ parent } (DOMInterpret { giveNewParent }) ->
+                              bang (giveNewParent { id, parent })
+                        )
+                    )
+                )
+            )
         )
         idz
       realized = __internalDekuFlatten psr.parent di
