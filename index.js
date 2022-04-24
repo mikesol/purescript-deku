@@ -5379,7 +5379,7 @@ var PS = {};
                               var myId = Effect_Ref["new"](Data_Maybe.Nothing.value)();
                               var myImmediateCancellation = Effect_Ref["new"](Control_Applicative.pure(Effect.applicativeEffect)(Data_Unit.unit))();
                               var unsubId = v.ids();
-                              var newScope = v.ids();
+                              var myScope = v.ids();
                               var stageRef = Effect_Ref["new"](Begin.value)();
                               var c0 = FRP_Event.subscribe(inner)(function (kid$prime) {
                                   return function __do() {
@@ -5398,7 +5398,8 @@ var PS = {};
                                           var mic = Control_Apply.applySecond(Effect.applyEffect)(Control_Apply.applySecond(Effect.applyEffect)(Control_Apply.applySecond(Effect.applyEffect)(Control_Bind.bind(Effect.bindEffect)(Effect_Ref.read(myId))(Data_Foldable.traverse_(Effect.applicativeEffect)(Data_Foldable.foldableMaybe)(function (old) {
                                               return k(v.disconnectElement({
                                                   id: old,
-                                                  parent: parent
+                                                  parent: parent,
+                                                  scope: myScope
                                               }));
                                           })))(Control_Bind.join(Effect.bindEffect)(Effect_Ref.read(myUnsub))))(Control_Bind.join(Effect.bindEffect)(Effect_Ref.read(eltsUnsub))))(Effect_Ref.modify_(Foreign_Object["delete"](unsubId))(cancelInner));
                                           return Control_Apply.applySecond(Effect.applyEffect)(Effect_Ref.write(mic)(myImmediateCancellation))(mic)();
@@ -5408,7 +5409,7 @@ var PS = {};
                                           var av = Effect_AVar.empty();
                                           var c1 = FRP_Event.subscribe(kid$prime.value0({
                                               parent: parent,
-                                              scope: newScope,
+                                              scope: myScope,
                                               raiseId: function (id) {
                                                   return Data_Functor["void"](Effect.functorEffect)(Effect_AVar.tryPut(id)(av));
                                               }
@@ -5510,6 +5511,7 @@ var PS = {};
   var exports = $PS["Deku.Control"];
   var $foreign = $PS["Deku.Control"];
   var Control_Alt = $PS["Control.Alt"];
+  var Control_Applicative = $PS["Control.Applicative"];
   var Control_Category = $PS["Control.Category"];
   var Data_Either = $PS["Data.Either"];
   var Data_Eq = $PS["Data.Eq"];
@@ -5519,6 +5521,7 @@ var PS = {};
   var Data_Functor = $PS["Data.Functor"];
   var Data_FunctorWithIndex = $PS["Data.FunctorWithIndex"];
   var Data_Tuple = $PS["Data.Tuple"];
+  var Data_Unit = $PS["Data.Unit"];
   var Data_Vec = $PS["Data.Vec"];
   var Deku_Attribute = $PS["Deku.Attribute"];
   var Deku_Core = $PS["Deku.Core"];
@@ -5562,8 +5565,8 @@ var PS = {};
       return function (dictTypeEquals1) {
           return {
               plant: function (i) {
-                  return Type_Equality.proof(Type_Equality.refl)(Safe_Coerce.coerce()(Data_Foldable.oneOfMap(Data_Foldable.foldableArray)(FRP_Event.plusEvent)(FRP_Event.bang)(Data_Functor.map(Data_Functor.functorArray)(function ($95) {
-                      return FRP_Event.bang(Deku_Core.Elt.create($95));
+                  return Type_Equality.proof(Type_Equality.refl)(Safe_Coerce.coerce()(Data_Foldable.oneOfMap(Data_Foldable.foldableArray)(FRP_Event.plusEvent)(FRP_Event.bang)(Data_Functor.map(Data_Functor.functorArray)(function ($97) {
+                      return FRP_Event.bang(Deku_Core.Elt.create($97));
                   })(i))));
               }
           };
@@ -5575,13 +5578,13 @@ var PS = {};
   var unsafeSetText = function (v) {
       return function (id) {
           return function (txt) {
-              return Data_Functor.map(FRP_Event.functorEvent)(function ($96) {
+              return Data_Functor.map(FRP_Event.functorEvent)(function ($98) {
                   return v.setText((function (v1) {
                       return {
                           id: id,
                           text: v1
                       };
-                  })($96));
+                  })($98));
               })(txt);
           };
       };
@@ -5589,14 +5592,14 @@ var PS = {};
   var unsafeSetAttribute = function (v) {
       return function (id) {
           return function (atts) {
-              return Data_Functor.map(FRP_Event.functorEvent)(function ($97) {
+              return Data_Functor.map(FRP_Event.functorEvent)(function ($99) {
                   return v.setAttribute((function (v1) {
                       return {
                           id: id,
                           key: v1.key,
                           value: v1.value
                       };
-                  })(Deku_Attribute.unsafeUnAttribute($97)));
+                  })(Deku_Attribute.unsafeUnAttribute($99)));
               })(atts);
           };
       };
@@ -5638,9 +5641,9 @@ var PS = {};
           return FRP_Event_Class.keepLatest(FRP_Event.eventIsEvent)(FRP_Event.memoize(counter(event))(function (cenv) {
               return Data_Functor.map(FRP_Event.functorEvent)(function (v) {
                   return Control_Alt.alt(FRP_Event.altEvent)(FRP_Event.bang(Deku_Core.Elt.create(f(v.value0))))(Data_Functor.map(FRP_Event.functorEvent)(Data_Function["const"](Deku_Core.Remove.value))(Data_Filterable.filter(FRP_Event.filterableEvent)((function () {
-                      var $98 = Data_Eq.eq(Data_Eq.eqInt)(v.value1 + 1 | 0);
-                      return function ($99) {
-                          return $98(Data_Tuple.snd($99));
+                      var $100 = Data_Eq.eq(Data_Eq.eqInt)(v.value1 + 1 | 0);
+                      return function ($101) {
+                          return $100(Data_Tuple.snd($101));
                       };
                   })())(cenv)));
               })(cenv);
@@ -5649,29 +5652,6 @@ var PS = {};
   };
   var plant = function (dict) {
       return dict.plant;
-  };
-  var elementify = function (tag) {
-      return function (atts) {
-          return function (children) {
-              var go = function (v) {
-                  return function (v1) {
-                      return FRP_Event.makeEvent(function (k) {
-                          return function __do() {
-                              var me = v1.ids();
-                              v.raiseId(me)();
-                              return FRP_Event.subscribe(Control_Alt.alt(FRP_Event.altEvent)(Data_Foldable.oneOf(Data_Foldable.foldableArray)(FRP_Event.plusEvent)([ FRP_Event.bang(unsafeElement(v1)({
-                                  id: me,
-                                  parent: v.parent,
-                                  scope: v.scope,
-                                  tag: tag
-                              })), unsafeSetAttribute(v1)(me)(atts) ]))(Deku_Internal["__internalDekuFlatten"](me)(v1)(children)))(k)();
-                          };
-                      });
-                  };
-              };
-              return go;
-          };
-      };
   };
   var internalPortal = function (scopeF) {
       return function (gaga) {
@@ -5696,17 +5676,21 @@ var PS = {};
                               var av2 = Effect_AVar.empty();
                               var idz = Data_Functor.map(Effect.functorEffect)(Unsafe_Coerce.unsafeCoerce)($foreign.readAr(av))();
                               var injectable = Data_Functor.map(Data_Vec.functorVec)(function (id) {
-                                  return elementify("div")(FRP_Event.bang(Deku_Attribute.unsafeAttribute({
-                                      key: "style",
-                                      value: Deku_Attribute["prop'"]("display:contents;")
-                                  })))(FRP_Event.bang(FRP_Event.bang(new Deku_Core.Elt(function (v) {
+                                  return function (v) {
                                       return function (v1) {
-                                          return FRP_Event.bang(v1.giveNewParent({
-                                              id: id,
-                                              parent: v.parent
-                                          }));
+                                          return FRP_Event.makeEvent(function (k2) {
+                                              return function __do() {
+                                                  v.raiseId(id)();
+                                                  k2(v1.giveNewParent({
+                                                      id: id,
+                                                      parent: v.parent,
+                                                      scope: v.scope
+                                                  }))();
+                                                  return Control_Applicative.pure(Effect.applicativeEffect)(Data_Unit.unit);
+                                              };
+                                          });
                                       };
-                                  }))));
+                                  };
                               })(idz);
                               var realized = Deku_Internal["__internalDekuFlatten"](psr.parent)(di)(Type_Equality.proof(Type_Equality.refl)(Safe_Coerce.coerce()(closure(injectable)(function (v) {
                                   return v;
@@ -5722,7 +5706,7 @@ var PS = {};
                                       if (q instanceof Data_Either.Left) {
                                           return Effect_Exception.throwException(q.value0);
                                       };
-                                      throw new Error("Failed pattern match at Deku.Control (line 166, column 36 - line 168, column 35): " + [ q.constructor.name ]);
+                                      throw new Error("Failed pattern match at Deku.Control (line 156, column 36 - line 158, column 35): " + [ q.constructor.name ]);
                                   })();
                                   return cncl2();
                               };
@@ -5736,6 +5720,29 @@ var PS = {};
   };
   var portal = function (e) {
       return internalPortal(Control_Category.identity(Control_Category.categoryFn))(e);
+  };
+  var elementify = function (tag) {
+      return function (atts) {
+          return function (children) {
+              var go = function (v) {
+                  return function (v1) {
+                      return FRP_Event.makeEvent(function (k) {
+                          return function __do() {
+                              var me = v1.ids();
+                              v.raiseId(me)();
+                              return FRP_Event.subscribe(Control_Alt.alt(FRP_Event.altEvent)(Data_Foldable.oneOf(Data_Foldable.foldableArray)(FRP_Event.plusEvent)([ FRP_Event.bang(unsafeElement(v1)({
+                                  id: me,
+                                  parent: v.parent,
+                                  scope: v.scope,
+                                  tag: tag
+                              })), unsafeSetAttribute(v1)(me)(atts) ]))(Deku_Internal["__internalDekuFlatten"](me)(v1)(children)))(k)();
+                          };
+                      });
+                  };
+              };
+              return go;
+          };
+      };
   };
   var deku = function (root) {
       return function (children) {
@@ -5754,8 +5761,8 @@ var PS = {};
   };
   var dekuA = function (root) {
       return function (children) {
-          return deku(root)(Data_Foldable.oneOfMap(Data_Foldable.foldableArray)(FRP_Event.plusEvent)(FRP_Event.bang)(Data_Functor.map(Data_Functor.functorArray)(function ($100) {
-              return FRP_Event.bang(Deku_Core.Elt.create($100));
+          return deku(root)(Data_Foldable.oneOfMap(Data_Foldable.foldableArray)(FRP_Event.plusEvent)(FRP_Event.bang)(Data_Functor.map(Data_Functor.functorArray)(function ($102) {
+              return FRP_Event.bang(Deku_Core.Elt.create($102));
           })(children)));
       };
   };
@@ -7675,6 +7682,7 @@ var PS = {};
 		  return function () {
 			  var ptr = a.id;
 			  var parent = a.parent;
+			  state.units[ptr].containingScope = a.scope;
 			  state.units[parent].main.prepend(state.units[ptr].main);
 		  };
 	  };
@@ -7684,11 +7692,18 @@ var PS = {};
 		  return function () {
 			  var ptr = a.id;
 			  if (state.units[ptr].noop) {
-				  // is this needed?
 				  return;
 			  }
+			  if (
+				  state.units[ptr].containingScope && state.units[ptr].containingScope !==
+				  a.scope
+			  ) {
+				  return;
+			  }
+
 			  state.units[ptr].main.remove();
-			  if (state.units[ptr].scope === "@portal@") {
+			  // deleting a portal can never trigger deleting everything
+			  if (state.units[ptr].parent === "@portal@") {
 				  return;
 			  }
 			  const scope = state.units[ptr].scope;
