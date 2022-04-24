@@ -4,39 +4,42 @@ import Prelude
 
 import Control.Alt (alt, (<|>))
 import Data.Filterable (filterMap)
-import Data.Foldable (oneOfMap)
-import Data.Generic.Rep (class Generic)
+import Data.Foldable (for_, oneOfMap)
 import Data.Maybe (Maybe(..))
 import Data.Profunctor (lcmap)
-import Data.Show.Generic (genericShow)
+import Data.Tuple.Nested ((/\))
 import Deku.Attribute (cb, (:=))
-import Deku.Control (text_)
-import Deku.Core (Element)
+import Deku.Control (blank, text_)
+import Deku.Core (Element, StreamingElt(..))
 import Deku.DOM as D
 import Deku.Example.Docs.Types (Page(..))
 import Deku.Example.Docs.Util (scrollToTop)
 import Deku.Pursx (nut, (~~))
 import Effect (Effect)
-import FRP.Event (bang, bus)
+import FRP.Event (bang, bus, keepLatest, mapAccum)
 import Type.Proxy (Proxy(..))
+import Web.Event.Event (target)
+import Web.HTML.HTMLInputElement (fromEventTarget, value)
+import Web.UIEvent.KeyboardEvent (code, fromEvent)
 
-data XPage = Home | About | Contact
-derive instance Generic XPage _
-instance Show XPage where
-  show = genericShow
-data UIEvents = UIShown | PageChanged XPage
+data MainUIAction
+  = UIShown
+  | AddTodo
+  | ChangeText String
 
-px =  Proxy    :: Proxy
-      """<div>
+data TodoAction = Prioritize | Delete
+
+px =
+  Proxy    :: Proxy      """<div>
   <h1>Events 2</h1>
 
-  <h2>Streaming the DOM</h2>
+  <h2>Dynamic children</h2>
   <p>
     Up until now, our DOM has been static. This is OK in some cases, but in many cases, we need a dynamic DOM: one whose elements are inserted and removed based on user interaction. In Deku, we achieve this with <code>Event</code>-s.
   </p>
 
   <p>
-    The example below shows a small navigation bar that inserts a new node in the DOM and removes the previous one whenever an element of the bar is clicked.
+    The code below creates a todo list that allows a user to add, prioritize, and remove elements.
   </p>
 
   ~code~
@@ -45,12 +48,20 @@ px =  Proxy    :: Proxy
 
   <blockquote> ~result~ </blockquote>
 
-  <h2>Eventful children</h2>
+  <h2>Events of events</h2>
 
-  <p>In the previous examples, the children of DOM nodes have been an array elements. For example, we've seen things like <code>D.div_ [text_ "hello ", text_ "world"]</code>. In this example, the bottom-most <code>D.div_</code> contains an <code>Event</code> instead of an <code>Array</code>. Now, whenever the event is fired, the new node will update in the DOM.</p>
+  <p>In the previous sections, DOM element constructors like <code>div_</code> could only accept an <code>Array</code>. They <i>also</i> can accept an event of events. In this case, the outer event represents a dynamic element, and the inner event represents the <i>stage</i> of dynamism with a data type called <code>StreamingElt</code>. <code>StreamingElt</code> has three constructors:</p>
+
+  <ul>
+    <li><code>Elt</code>, which takes an element.</li>
+    <li><code>SendToTop</code>, which sends the current element to the top of its parent.</li>
+    <li><code>Remove</code>, which removes the element from its parent.</li>
+  </ul>
+
+  <p>The Deku engine listens for these in a specific order. <code>Elt</code> can be followed by 0 or more <code>SendToTop</code>-s. When a <code>Remove</code> is called, the stream is unsubscribed from the parent. Because we're in the land of <code>Event</code>-s, you can emit anything, but this is the how they will be listened to.</p>
 
   <h2>Next steps</h2>
-  <p>In this section, we saw how to make our DOM more dynamic by using an <code>Event</code> in the place of an <code>Array</code> of children. In the next section, we'll expand this concept to a situation where an <a ~next~ style="cursor:pointer;">enclosing element needs to hold an indeterminate number of children, like a todo list</a>.</p>
+  <p>In this section, we used nested events to insert and remove elements from a parent. In the next section, we'll see how we can use <a ~next~ style="cursor:pointer;">portals to move an element to a different place of the DOM</a>.</p>
 </div>"""
 
 events2 :: forall lock payload. (Page -> Effect Unit) -> Element lock payload
@@ -65,54 +76,87 @@ import Prelude
 
 import Control.Alt (alt, (<|>))
 import Data.Filterable (filterMap)
-import Data.Foldable (oneOfMap)
-import Data.Generic.Rep (class Generic)
+import Data.Foldable (for_, oneOfMap)
 import Data.Maybe (Maybe(..))
 import Data.Profunctor (lcmap)
-import Data.Show.Generic (genericShow)
+import Data.Tuple.Nested ((/\))
 import Deku.Attribute (cb, (:=))
-import Deku.Control (text_)
+import Deku.Control (blank, text_)
+import Deku.Core (StreamingElt(..))
 import Deku.DOM as D
 import Deku.Toplevel (runInBody1)
 import Effect (Effect)
-import FRP.Event (bus, bang)
+import FRP.Event (bang, bus, keepLatest, mapAccum)
+import Web.Event.Event (target)
+import Web.HTML.HTMLInputElement (fromEventTarget, value)
+import Web.UIEvent.KeyboardEvent (code, fromEvent)
 
-data Page = Home | About | Contact
-derive instance Generic Page _
-instance Show Page where
-  show = genericShow
-data UIEvents = UIShown | PageChanged Page
+data MainUIAction
+  = UIShown
+  | AddTodo
+  | ChangeText String
+
+data TodoAction = Prioritize | Delete
 
 main :: Effect Unit
 main = runInBody1
   ( bus \push -> lcmap (alt (bang UIShown)) \event -> do
-      D.div_
-        [ D.div_
-            $ map
-              ( \page -> D.span_
-                  [ D.a
-                      ( oneOfMap bang
-                          [ D.OnClick :=
-                              cb (const $ push (PageChanged page))
-                          , D.Style := "cursor:pointer;"
-                          ]
+      let
+        top =
+          [ D.input
+              ( oneOfMap bang
+                  [ D.OnInput := cb \e -> for_
+                      ( target e
+                          >>= fromEventTarget
                       )
-                      [ text_ (show page) ]
-                  , text_ " | "
+                      ( value
+                          >=> push <<< ChangeText
+                      )
+                  , D.OnKeyup := cb
+                      \e -> for_ (fromEvent e) \evt -> do
+                        when (code evt == "Enter") $ do
+                          push AddTodo
                   ]
               )
-              [ Home, About, Contact ]
+              blank
+          , D.button
+              (bang $ D.OnClick := cb (const $ push AddTodo))
+              (text_ "Add")
+          ]
+      D.div_
+        [ D.div_ top
         , D.div_ $
-            ( bang Home <|> filterMap
-                ( case _ of
-                    PageChanged p -> Just p
-                    _ -> Nothing
+            ( \txt -> keepLatest $ bus \p' e' ->
+                ( bang $ Elt $ D.div_
+                    [ text_ txt
+                    , D.button
+                        ( bang
+                            $ D.OnClick
+                              := cb (const $ p' SendToTop)
+                        )
+                        [ text_ "Prioritize" ]
+                    , D.button
+                        ( bang
+                            $ D.OnClick
+                              := cb (const $ p' Remove)
+                        )
+                        [ text_ "Delete" ]
+                    ]
+                ) <|> e'
+            ) <$>
+              filterMap
+                ( \(tf /\ s) ->
+                    if tf then Just s else Nothing
                 )
-                event
-            ) <#> case _ of
-              Home -> text_ "I'm a home page."
-              About -> text_ "This page is about me."
-              Contact -> text_ "Here's some contact info."
+                ( mapAccum
+                    ( \a b -> case a of
+                        ChangeText s -> s /\ (false /\ s)
+                        AddTodo -> b /\ (true /\ b)
+                        _ -> "" /\ (false /\ "")
+                    )
+                    event
+                    ""
+                )
         ]
   )
 """
@@ -120,35 +164,64 @@ main = runInBody1
           ]
       )
   , result: nut
-        ( bus \push -> lcmap (alt (bang UIShown)) \event -> do
-      D.div_
-        [ D.div_
-            $ map
-              ( \page -> D.span_
-                  [ D.a
-                      ( oneOfMap bang
-                          [ D.OnClick :=
-                              cb (const $ push (PageChanged page))
-                          , D.Style := "cursor:pointer;"
-                          ]
-                      )
-                      [ text_ (show page) ]
-                  , text_ " | "
-                  ]
-              )
-              [ Home, About, Contact ]
-        , D.div_ $
-            ( bang Home <|> filterMap
-                ( case _ of
-                    PageChanged p -> Just p
-                    _ -> Nothing
+
+      ( bus \push -> lcmap (alt (bang UIShown)) \event -> do
+          D.div_
+            [ D.div_
+                [ D.input
+                    ( oneOfMap bang
+                        [ D.Style := "border-style:solid;border-width: 1px;border-color: black;"
+                        , D.OnInput := cb \e -> for_
+                            ( target e
+                                >>= fromEventTarget
+                            )
+                            ( value
+                                >=> push <<< ChangeText
+                            )
+                        , D.OnKeyup := cb \e -> for_ (fromEvent e) \evt -> do
+                            when (code evt == "Enter") $ do
+                              push AddTodo
+                        ]
+                    )
+                    blank
+                , D.button ((bang $ D.Style := "margin: 5px;") <|> (bang $ D.OnClick := cb (const $ push AddTodo)))
+                    (text_ "Add")
+                ]
+            , D.div_
+                ( map
+                    ( \txt -> keepLatest $ bus \p' e' ->
+                        ( bang $ Elt $ D.div_ do
+                            [ D.span (bang $ D.Style := "margin: 5px;")
+                                (text_ txt)
+                            , D.button
+                                ( (bang $ D.Style := "margin: 5px;") <|>
+                                    ( bang $ D.OnClick := cb
+                                        (const $ p' SendToTop)
+                                    )
+                                )
+                                [ text_ "Prioritize" ]
+                            , D.button
+                                ( (bang $ D.Style := "margin: 5px;") <|>
+                                    (bang $ D.OnClick := cb (const $ p' Remove))
+                                )
+                                [ text_ "Delete" ]
+                            ]
+                        ) <|> e'
+                    )
+                    ( filterMap (\(tf /\ s) -> if tf then Just s else Nothing)
+                        ( mapAccum
+                            ( \a b -> case a of
+                                ChangeText s -> s /\ (false /\ s)
+                                AddTodo -> b /\ (true /\ b)
+                                _ -> "" /\ (false /\ "")
+                            )
+                            event
+                            ""
+                        )
+                    )
                 )
-                event
-            ) <#> case _ of
-              Home -> text_ "I'm a home page."
-              About -> text_ "This page is about me."
-              Contact -> text_ "Here's some contact info."
-        ]
-  )
-  , next: bang (D.OnClick := (cb (const $ dpage Events3 *> scrollToTop)))
+            ]
+      )
+
+  , next: bang (D.OnClick := (cb (const $ dpage Portals *> scrollToTop)))
   }
