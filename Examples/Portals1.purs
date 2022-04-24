@@ -42,6 +42,6 @@ main = runInBody1
           plant $ D.div_
             [ D.button (bang $ D.OnClick := cb (const $ push unit))
                 [ text_ "Switch videos" ]
-            , D.div_ (ev true <|> ev false)
+            , D.div_ [D.span_ (ev true), D.span_ (ev false)]
             ]
   )

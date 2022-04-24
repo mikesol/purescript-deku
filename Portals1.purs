@@ -2,7 +2,7 @@ module Deku.Example.Docs.Portals1 where
 
 import Prelude
 
-import Control.Alt (alt, (<|>))
+import Control.Alt (alt)
 import Data.Foldable (oneOfMap)
 import Data.Profunctor (lcmap)
 import Data.Tuple.Nested ((/\))
@@ -13,8 +13,7 @@ import Deku.Attribute (cb, (:=))
 import Deku.Control (blank, plant, portal, text_)
 import Deku.Core (Element)
 import Deku.DOM as D
-import Deku.Example.Docs.Types (Page(..))
-import Deku.Example.Docs.Util (scrollToTop)
+import Deku.Example.Docs.Types (Page)
 import Deku.Pursx (nut, (~~))
 import Effect (Effect)
 import FRP.Event (bang, bus, mapAccum)
@@ -104,7 +103,7 @@ main = runInBody1
           plant $ D.div_
             [ D.button (bang $ D.OnClick := cb (const $ push unit))
                 [ text_ "Switch videos" ]
-            , D.div_ (ev true <|> ev false)
+            , D.div_ [D.span_ (ev true), D.span_ (ev false)]
             ]
   )
 """
@@ -137,7 +136,7 @@ main = runInBody1
           plant $ D.div_
             [ D.button (bang $ D.OnClick := cb (const $ push unit))
                 [ text_ "Switch videos" ]
-            , D.div_ (ev true <|> ev false)
+            , D.div_ [D.span_ (ev true), D.span_ (ev false)]
             ]
   )
   }

@@ -5669,6 +5669,29 @@ var PS = {};
   var plant = function (dict) {
       return dict.plant;
   };
+  var elementify = function (tag) {
+      return function (atts) {
+          return function (children) {
+              var go = function (v) {
+                  return function (v1) {
+                      return FRP_Event.makeEvent(function (k) {
+                          return function __do() {
+                              var me = v1.ids();
+                              v.raiseId(me)();
+                              return FRP_Event.subscribe(Control_Alt.alt(FRP_Event.altEvent)(Data_Foldable.oneOf(Data_Foldable.foldableArray)(FRP_Event.plusEvent)([ FRP_Event.bang(unsafeElement(v1)({
+                                  id: me,
+                                  parent: v.parent,
+                                  scope: v.scope,
+                                  tag: tag
+                              })), unsafeSetAttribute(v1)(me)(atts) ]))(Deku_Internal["__internalDekuFlatten"](me)(v1)(children)))(k)();
+                          };
+                      });
+                  };
+              };
+              return go;
+          };
+      };
+  };
   var internalPortal = function (scopeF) {
       return function (gaga) {
           return function (closure) {
@@ -5692,14 +5715,17 @@ var PS = {};
                               var av2 = Effect_AVar.empty();
                               var idz = Data_Functor.map(Effect.functorEffect)(Unsafe_Coerce.unsafeCoerce)($foreign.readAr(av))();
                               var injectable = Data_Functor.map(Data_Vec.functorVec)(function (id) {
-                                  return function (v) {
+                                  return elementify("div")(FRP_Event.bang(Deku_Attribute.unsafeAttribute({
+                                      key: "style",
+                                      value: Deku_Attribute["prop'"]("display:contents;")
+                                  })))(FRP_Event.bang(FRP_Event.bang(new Deku_Core.Elt(function (v) {
                                       return function (v1) {
                                           return FRP_Event.bang(v1.giveNewParent({
                                               id: id,
                                               parent: v.parent
                                           }));
                                       };
-                                  };
+                                  }))));
                               })(idz);
                               var realized = Deku_Internal["__internalDekuFlatten"](psr.parent)(di)(Type_Equality.proof(Type_Equality.refl)(Safe_Coerce.coerce()(closure(injectable)(function (v) {
                                   return v;
@@ -5715,7 +5741,7 @@ var PS = {};
                                       if (q instanceof Data_Either.Left) {
                                           return Effect_Exception.throwException(q.value0);
                                       };
-                                      throw new Error("Failed pattern match at Deku.Control (line 146, column 36 - line 148, column 35): " + [ q.constructor.name ]);
+                                      throw new Error("Failed pattern match at Deku.Control (line 159, column 36 - line 161, column 35): " + [ q.constructor.name ]);
                                   })();
                                   return cncl2();
                               };
@@ -5729,29 +5755,6 @@ var PS = {};
   };
   var portal = function (e) {
       return internalPortal(Control_Category.identity(Control_Category.categoryFn))(e);
-  };
-  var elementify = function (tag) {
-      return function (atts) {
-          return function (children) {
-              var go = function (v) {
-                  return function (v1) {
-                      return FRP_Event.makeEvent(function (k) {
-                          return function __do() {
-                              var me = v1.ids();
-                              v.raiseId(me)();
-                              return FRP_Event.subscribe(Control_Alt.alt(FRP_Event.altEvent)(Data_Foldable.oneOf(Data_Foldable.foldableArray)(FRP_Event.plusEvent)([ FRP_Event.bang(unsafeElement(v1)({
-                                  id: me,
-                                  parent: v.parent,
-                                  scope: v.scope,
-                                  tag: tag
-                              })), unsafeSetAttribute(v1)(me)(atts) ]))(Deku_Internal["__internalDekuFlatten"](me)(v1)(children)))(k)();
-                          };
-                      });
-                  };
-              };
-              return go;
-          };
-      };
   };
   var deku = function (root) {
       return function (children) {
@@ -7510,6 +7513,7 @@ var PS = {};
   var Deku_DOM_Elt_Div = $PS["Deku.DOM.Elt.Div"];
   var Deku_DOM_Elt_Pre = $PS["Deku.DOM.Elt.Pre"];
   var Deku_DOM_Elt_Source = $PS["Deku.DOM.Elt.Source"];
+  var Deku_DOM_Elt_Span = $PS["Deku.DOM.Elt.Span"];
   var Deku_DOM_Elt_Video = $PS["Deku.DOM.Elt.Video"];
   var Deku_Pursx = $PS["Deku.Pursx"];
   var FRP_Event = $PS["FRP.Event"];
@@ -7531,7 +7535,7 @@ var PS = {};
               return "code";
           }
       }))(px)({
-          code: Deku_Pursx.nut(Deku_Control.plantElementEventEventStr(Type_Equality.refl)(Type_Equality.refl))(Deku_DOM_Elt_Pre.pre_(Deku_Control.plantArrayElementEventEve(Type_Equality.refl)(Type_Equality.refl))([ Deku_DOM_Elt_Code.code_(Deku_Control.plantArrayElementEventEve(Type_Equality.refl)(Type_Equality.refl))([ Deku_Control.text_("module Main where\x0a\x0aimport Prelude\x0a\x0aimport Control.Alt (alt, (<|>))\x0aimport Data.Foldable (oneOfMap)\x0aimport Data.Profunctor (lcmap)\x0aimport Data.Tuple.Nested ((/\\))\x0aimport Data.Typelevel.Num (d0, d1)\x0aimport Data.Vec (index, (+>))\x0aimport Data.Vec as V\x0aimport Deku.Attribute (cb, (:=))\x0aimport Deku.Control (blank, plant, portal, text_)\x0aimport Deku.DOM as D\x0aimport Deku.Toplevel (runInBody1)\x0aimport Effect (Effect)\x0aimport FRP.Event (bang, bus, mapAccum)\x0a\x0amain :: Effect Unit\x0amain = runInBody1\x0a  ( bus \\push -> lcmap (alt (bang unit)) \\event -> do\x0a      portal\x0a        ( map\x0a            ( \\i -> D.video\x0a                (oneOfMap bang [ D.Controls := \"true\", D.Width := \"250\" ])\x0a                ( D.source\x0a                    (oneOfMap bang [ D.Src := i, D.Xtype := \"video/mp4\" ])\x0a                    blank\x0a                )\x0a            )\x0a            ( \"https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4\"\x0a                +> \"https://www.w3schools.com/jsref/movie.mp4\"\x0a                +> V.empty\x0a            )\x0a        )\x0a        \\v _ -> do\x0a          let\x0a            p0 = index v d0\x0a            p1 = index v d1\x0a            ev = event # mapAccum\x0a              \\_ x -> not x /\\ if x then p0 else p1\x0a          plant $ D.div_\x0a            [ D.button (bang $ D.OnClick := cb (const $ push unit))\x0a                [ text_ \"Switch videos\" ]\x0a            , D.div_ (ev true <|> ev false)\x0a            ]\x0a  )\x0a") ]) ])),
+          code: Deku_Pursx.nut(Deku_Control.plantElementEventEventStr(Type_Equality.refl)(Type_Equality.refl))(Deku_DOM_Elt_Pre.pre_(Deku_Control.plantArrayElementEventEve(Type_Equality.refl)(Type_Equality.refl))([ Deku_DOM_Elt_Code.code_(Deku_Control.plantArrayElementEventEve(Type_Equality.refl)(Type_Equality.refl))([ Deku_Control.text_("module Main where\x0a\x0aimport Prelude\x0a\x0aimport Control.Alt (alt, (<|>))\x0aimport Data.Foldable (oneOfMap)\x0aimport Data.Profunctor (lcmap)\x0aimport Data.Tuple.Nested ((/\\))\x0aimport Data.Typelevel.Num (d0, d1)\x0aimport Data.Vec (index, (+>))\x0aimport Data.Vec as V\x0aimport Deku.Attribute (cb, (:=))\x0aimport Deku.Control (blank, plant, portal, text_)\x0aimport Deku.DOM as D\x0aimport Deku.Toplevel (runInBody1)\x0aimport Effect (Effect)\x0aimport FRP.Event (bang, bus, mapAccum)\x0a\x0amain :: Effect Unit\x0amain = runInBody1\x0a  ( bus \\push -> lcmap (alt (bang unit)) \\event -> do\x0a      portal\x0a        ( map\x0a            ( \\i -> D.video\x0a                (oneOfMap bang [ D.Controls := \"true\", D.Width := \"250\" ])\x0a                ( D.source\x0a                    (oneOfMap bang [ D.Src := i, D.Xtype := \"video/mp4\" ])\x0a                    blank\x0a                )\x0a            )\x0a            ( \"https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4\"\x0a                +> \"https://www.w3schools.com/jsref/movie.mp4\"\x0a                +> V.empty\x0a            )\x0a        )\x0a        \\v _ -> do\x0a          let\x0a            p0 = index v d0\x0a            p1 = index v d1\x0a            ev = event # mapAccum\x0a              \\_ x -> not x /\\ if x then p0 else p1\x0a          plant $ D.div_\x0a            [ D.button (bang $ D.OnClick := cb (const $ push unit))\x0a                [ text_ \"Switch videos\" ]\x0a            , D.div_ [D.span_ (ev true), D.span_ (ev false)]\x0a            ]\x0a  )\x0a") ]) ])),
           result: Deku_Pursx.nut(Deku_Control.plantEventElementEventEve(Type_Equality.refl)(Type_Equality.refl))(FRP_Event.bus(function (push) {
               return Data_Profunctor.lcmap(Data_Profunctor.profunctorFn)(Control_Alt.alt(FRP_Event.altEvent)(FRP_Event.bang(Data_Unit.unit)))(function (event) {
                   return Deku_Control.portal(Data_Functor.map(Data_Vec.functorVec)(function (i) {
@@ -7550,7 +7554,7 @@ var PS = {};
                                   })());
                               };
                           })(event);
-                          return Deku_Control.plant(Deku_Control.plantElementEventEventStr(Type_Equality.refl)(Type_Equality.refl))(Deku_DOM_Elt_Div.div_(Deku_Control.plantArrayElementEventEve(Type_Equality.refl)(Type_Equality.refl))([ Deku_DOM_Elt_Button.button(Deku_Control.plantArrayElementEventEve(Type_Equality.refl)(Type_Equality.refl))(FRP_Event.bang(Deku_Attribute.attr(Deku_DOM_Attr_OnClick.attrOnClickCb)(Deku_DOM_Attr_OnClick.OnClick.value)(Deku_Attribute.cb(Data_Function["const"](push(Data_Unit.unit))))))([ Deku_Control.text_("Switch videos") ]), Deku_DOM_Elt_Div.div_(Deku_Control.plantEventElementEventEve(Type_Equality.refl)(Type_Equality.refl))(Control_Alt.alt(FRP_Event.altEvent)(ev(true))(ev(false))) ]));
+                          return Deku_Control.plant(Deku_Control.plantElementEventEventStr(Type_Equality.refl)(Type_Equality.refl))(Deku_DOM_Elt_Div.div_(Deku_Control.plantArrayElementEventEve(Type_Equality.refl)(Type_Equality.refl))([ Deku_DOM_Elt_Button.button(Deku_Control.plantArrayElementEventEve(Type_Equality.refl)(Type_Equality.refl))(FRP_Event.bang(Deku_Attribute.attr(Deku_DOM_Attr_OnClick.attrOnClickCb)(Deku_DOM_Attr_OnClick.OnClick.value)(Deku_Attribute.cb(Data_Function["const"](push(Data_Unit.unit))))))([ Deku_Control.text_("Switch videos") ]), Deku_DOM_Elt_Div.div_(Deku_Control.plantArrayElementEventEve(Type_Equality.refl)(Type_Equality.refl))([ Deku_DOM_Elt_Span.span_(Deku_Control.plantEventElementEventEve(Type_Equality.refl)(Type_Equality.refl))(ev(true)), Deku_DOM_Elt_Span.span_(Deku_Control.plantEventElementEventEve(Type_Equality.refl)(Type_Equality.refl))(ev(false)) ]) ]));
                       };
                   });
               });
