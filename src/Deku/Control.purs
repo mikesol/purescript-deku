@@ -129,6 +129,9 @@ internalPortal scopeF gaga closure = Element go
       asIds = unsafeCoerce
     idz <- asIds <$> readAr av
     let
+      -- we never connect or disconnect the referentially opaque node
+      -- instead, it is always managed inside a referentially transparent node
+      -- that can be properly connected and disconnected
       injectable = map
         ( \id -> elementify "div"
             ( bang
