@@ -48,7 +48,7 @@ px =
 
   <p>Portals work by sending a referentially-opaque reference to a DOM element into a closure where it can be safely used. Whenever an event is emitted containing the element, the element will be rendered at that place in the DOM, as in the example above. Note that portals "hog the blanket", meaning that they end up in the last place in which they were called.</p>
 
-  <p>Switcher is a small function (a few lines) included in Deku to switch between different elements. In general, I've tried not to write too many util functions, but switching between things (tabs, pages) is such a common pattern that I've included it in the library. You can feel free to roll your own switcher, though, if you choose!</p>
+  <p><code>switcher</code> is a <a href="https://github.com/mikesol/purescript-deku/blob/ff3e2d2dc89b39088c5d5d6ab3492fb8730dd9a4/src/Deku/Control.purs#L325">small function</a> included in Deku to switch between different elements in an enclosure. It's how the tabs in this documentation are implemented as well.</p>
 
   <h2>Parting shot</h2>
   <p>Thanks for checking out Deku! I had a blast writing it, and I hope you enjoy using it for your projects!</p>
