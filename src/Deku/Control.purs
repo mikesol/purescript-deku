@@ -25,7 +25,7 @@ import Data.FunctorWithIndex (mapWithIndex)
 import Data.Tuple (snd)
 import Data.Tuple.Nested (type (/\), (/\))
 import Data.Vec (toArray, Vec)
-import Deku.Attribute (Attribute, prop', unsafeAttribute, unsafeUnAttribute)
+import Deku.Attribute (Attribute, unsafeUnAttribute)
 import Deku.Core (DOMInterpret(..), Element(..), StreamingElt(..))
 import Deku.Internal (__internalDekuFlatten)
 import Effect (Effect)
@@ -137,22 +137,12 @@ internalPortal scopeF gaga closure = Element go
       -- instead, it is always managed inside a referentially transparent node
       -- that can be properly connected and disconnected
       injectable = map
-        ( \id -> elementify "div"
-            ( bang
-                ( unsafeAttribute
-                    { key: "style", value: prop' "display:contents;" }
-                )
-            )
-            ( bang
-                ( bang
-                    ( Elt
-                        ( Element
-                            \{ parent } (DOMInterpret { giveNewParent }) ->
-                              bang (giveNewParent { id, parent })
-                        )
-                    )
-                )
-            )
+        ( \id -> Element
+            \{ parent, scope, raiseId } (DOMInterpret { giveNewParent }) ->
+              makeEvent \k2 -> do
+                raiseId id
+                k2 (giveNewParent { id, parent, scope })
+                pure (pure unit)
         )
         idz
       realized = __internalDekuFlatten psr.parent di

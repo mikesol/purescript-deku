@@ -28,6 +28,7 @@ type MakeElement =
 type GiveNewParent =
   { id :: String
   , parent :: String
+  , scope :: String
   }
 type MakeNoop =
   { id :: String
@@ -37,6 +38,7 @@ type MakeNoop =
 type DisconnectElement =
   { id :: String
   , parent :: String
+  , scope :: String
   }
 type MakeText =
   { id :: String

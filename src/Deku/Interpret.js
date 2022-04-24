@@ -208,6 +208,7 @@ exports.giveNewParent_ = function (a) {
 		return function () {
 			var ptr = a.id;
 			var parent = a.parent;
+			state.units[ptr].containingScope = a.scope;
 			state.units[parent].main.prepend(state.units[ptr].main);
 		};
 	};
@@ -217,11 +218,18 @@ exports.disconnectElement_ = function (a) {
 		return function () {
 			var ptr = a.id;
 			if (state.units[ptr].noop) {
-				// is this needed?
 				return;
 			}
+			if (
+				state.units[ptr].containingScope && state.units[ptr].containingScope !==
+				a.scope
+			) {
+				return;
+			}
+
 			state.units[ptr].main.remove();
-			if (state.units[ptr].scope === "@portal@") {
+			// deleting a portal can never trigger deleting everything
+			if (state.units[ptr].parent === "@portal@") {
 				return;
 			}
 			const scope = state.units[ptr].scope;

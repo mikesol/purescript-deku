@@ -36,7 +36,7 @@ __internalDekuFlatten parent di@(DOMInterpret { ids, disconnectElement, sendToTo
           myId <- Ref.new Nothing
           myImmediateCancellation <- Ref.new (pure unit)
           unsubId <- ids
-          newScope <- ids
+          myScope <- ids
           stageRef <- Ref.new Begin
           c0 <- subscribe inner \kid' -> do
             stage <- Ref.read stageRef
@@ -50,7 +50,7 @@ __internalDekuFlatten parent di@(DOMInterpret { ids, disconnectElement, sendToTo
                     ( Ref.read myId >>= traverse_ \old ->
                         k
                           ( disconnectElement
-                              { id: old, parent }
+                              { id: old, parent, scope: myScope }
                           )
                     ) *> join (Ref.read myUnsub) *> join (Ref.read eltsUnsub) *>
                       Ref.modify_
@@ -64,7 +64,7 @@ __internalDekuFlatten parent di@(DOMInterpret { ids, disconnectElement, sendToTo
                 c1 <- subscribe
                   ( kid
                       { parent
-                      , scope: newScope
+                      , scope: myScope
                       , raiseId: \id -> do
                           void $ tryPut id av
                       }
