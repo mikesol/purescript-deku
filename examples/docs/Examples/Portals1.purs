@@ -2,7 +2,7 @@ module Deku.Examples.Docs.Examples.Portals1 where
 
 import Prelude
 
-import Control.Alt (alt)
+import Control.Alt ((<|>))
 import Data.Foldable (oneOfMap)
 import Data.Profunctor (lcmap)
 import Data.Tuple.Nested ((/\), type (/\))
@@ -23,7 +23,7 @@ counter event = mapAccum f event 0
 
 main :: Effect Unit
 main = runInBody1
-  ( bus \push -> lcmap (alt (bang unit)) \event -> do
+  ( bus \push -> lcmap  (bang unit <|> _) \event -> do
       portal
         ( map
             ( \i -> D.video

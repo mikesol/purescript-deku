@@ -74,7 +74,7 @@ events2 dpage = px ~~
 
 import Prelude
 
-import Control.Alt (alt, (<|>))
+import Control.Alt ((<|>))
 import Data.Filterable (filterMap)
 import Data.Foldable (for_, oneOfMap)
 import Data.Maybe (Maybe(..))
@@ -100,7 +100,7 @@ data TodoAction = Prioritize | Delete
 
 main :: Effect Unit
 main = runInBody1
-  ( bus \push -> lcmap (alt (bang UIShown)) \event -> do
+  ( bus \push -> lcmap (bang UIShown <|> _) \event -> do
       let
         top =
           [ D.input
