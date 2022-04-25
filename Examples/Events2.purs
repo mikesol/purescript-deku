@@ -24,7 +24,7 @@ data UIEvents = UIShown | PageChanged Page
 
 main :: Effect Unit
 main = runInBody1
-  ( bus \push -> lcmap (alt (bang UIShown)) \event -> do
+  ( bus \push -> lcmap (bang UIShown <|> _) \event -> do
       D.div_
         [ D.div_
             $ map

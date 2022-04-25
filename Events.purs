@@ -68,7 +68,7 @@ events dpage = px ~~
 
 import Prelude
 
-import Control.Alt (alt, (<|>))
+import Control.Alt ((<|>))
 import Data.Filterable (filter, filterMap)
 import Data.Foldable (for_, oneOfMap)
 import Data.Maybe (Maybe(..))
@@ -79,7 +79,7 @@ import Deku.Control (blank, text, text_)
 import Deku.DOM as D
 import Deku.Toplevel (runInBody1)
 import Effect (Effect)
-import FRP.Event (mapAccum, bang, bus)
+import FRP.Event (mapAccum, bus, bang)
 import Web.DOM.Element (fromEventTarget)
 import Web.Event.Event (target)
 import Web.HTML.HTMLInputElement (fromElement, valueAsNumber)
@@ -89,7 +89,7 @@ derive instance Eq UIEvents
 
 main :: Effect Unit
 main = runInBody1
-  ( bus \push -> lcmap (alt (bang UIShown)) \event -> do
+  ( bus \push -> lcmap (bang UIShown <|> _) \event -> do
       D.div_
         [ D.button
             (bang (D.OnClick := cb (const $ push ButtonClicked)))

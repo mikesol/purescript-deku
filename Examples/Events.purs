@@ -2,7 +2,7 @@ module Deku.Examples.Docs.Examples.Events where
 
 import Prelude
 
-import Control.Alt (alt, (<|>))
+import Control.Alt ((<|>))
 import Data.Filterable (filter, filterMap)
 import Data.Foldable (for_, oneOfMap)
 import Data.Maybe (Maybe(..))
@@ -23,7 +23,7 @@ derive instance Eq UIEvents
 
 main :: Effect Unit
 main = runInBody1
-  ( bus \push -> lcmap (alt (bang UIShown)) \event -> do
+  ( bus \push -> lcmap (bang UIShown <|> _) \event -> do
       D.div_
         [ D.button
             (bang (D.OnClick := cb (const $ push ButtonClicked)))

@@ -86,7 +86,7 @@ import Prelude
 
 import Affjax as AX
 import Affjax.ResponseFormat as ResponseFormat
-import Control.Alt (alt, (<|>))
+import Control.Alt ((<|>))
 import Data.Argonaut.Core (stringifyWithIndent)
 import Data.Either (Either(..))
 import Data.Filterable (compact, filterMap)
@@ -131,7 +131,7 @@ clickText = "Click to get some random user data." :: String
 
 main :: Effect Unit
 main = runInBody
-  ( keepLatest $ bus \push -> lcmap (alt (bang Initial))
+  ( keepLatest $ bus \push -> lcmap (bang Initial <|> _)
       \event ->
         let
           loadingOrResult = filterMap
