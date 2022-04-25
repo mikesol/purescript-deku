@@ -8,6 +8,7 @@
   , "either"
   , "event"
   , "exceptions"
+  , "filterable"
   , "foldable-traversable"
   , "foreign-object"
   , "maybe"
