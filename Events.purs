@@ -75,8 +75,7 @@ import Web.Event.Event (target)
 import Web.HTML.HTMLInputElement (fromElement, valueAsNumber)
 
 type UIEvents = V
-  ( uiShow :: Unit
-  , buttonClicked :: Unit
+  ( buttonClicked :: Unit
   , sliderMoved :: Number
   )
 
