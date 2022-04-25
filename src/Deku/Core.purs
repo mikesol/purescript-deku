@@ -45,6 +45,7 @@ type MakeText =
   , scope :: String
   , parent :: String
   }
+type DeleteFromCache = { id :: String }
 type MakeRoot = { id :: String, root :: Web.DOM.Element }
 type SetText = { id :: String, text :: String }
 type SetAttribute =
@@ -75,6 +76,7 @@ newtype DOMInterpret payload = DOMInterpret
   , makePursx :: MakePursx -> payload
   , giveNewParent :: GiveNewParent -> payload
   , disconnectElement :: DisconnectElement -> payload
+  , deleteFromCache :: DeleteFromCache -> payload
   , sendToTop :: SendToTop -> payload
   , setAttribute :: SetAttribute -> payload
   , setText :: SetText -> payload

@@ -28,7 +28,7 @@ import Data.Vec (toArray, Vec)
 import Deku.Attribute (Attribute, unsafeUnAttribute)
 import Deku.Core (DOMInterpret(..), Element(..), StreamingElt(..))
 import Deku.Internal (__internalDekuFlatten)
-import Effect (Effect)
+import Effect (Effect, foreachE)
 import Effect.AVar (tryPut)
 import Effect.AVar as AVar
 import Effect.Exception (throwException)
@@ -83,18 +83,19 @@ elementify
   -> Element lock payload
 elementify tag atts children = Element go
   where
-  go { parent, scope, raiseId } di@(DOMInterpret { ids }) = makeEvent \k -> do
-    me <- ids
-    raiseId me
-    subscribe
-      ( ( oneOf
-            [ bang (unsafeElement di { id: me, parent, scope, tag })
-            , unsafeSetAttribute di me atts
-            ]
+  go { parent, scope, raiseId } di@(DOMInterpret { ids, deleteFromCache }) =
+    makeEvent \k -> do
+      me <- ids
+      raiseId me
+      map ((*>) (k (deleteFromCache { id: me }))) $ subscribe
+        ( ( oneOf
+              [ bang (unsafeElement di { id: me, parent, scope, tag })
+              , unsafeSetAttribute di me atts
+              ]
+          )
+            <|> __internalDekuFlatten me di children
         )
-          <|> __internalDekuFlatten me di children
-      )
-      k
+        k
 
 newtype MutAr a = MutAr (Array a)
 
@@ -104,16 +105,17 @@ foreign import readAr :: forall a. MutAr a -> Effect (Array a)
 
 internalPortal
   :: forall n lock0 lock1 payload
-   . (String -> String)
+   . Boolean
+  -> (String -> String)
   -> Vec n (Element lock0 payload)
   -> ( Vec n (Element lock1 payload)
        -> (Element lock0 payload -> Element lock1 payload)
        -> Event (Event (StreamingElt lock1 payload))
      )
   -> Element lock0 payload
-internalPortal scopeF gaga closure = Element go
+internalPortal isGlobal scopeF gaga closure = Element go
   where
-  go psr di = makeEvent \k -> do
+  go psr di@(DOMInterpret { deleteFromCache }) = makeEvent \k -> do
     av <- mutAr (map (const "") $ toArray gaga)
     let
       actualized = oneOf $ mapWithIndex
@@ -153,6 +155,8 @@ internalPortal scopeF gaga closure = Element go
     -- so if this actually does something then we have a problem
     pure do
       u0
+      when (not isGlobal) $ foreachE (toArray idz) \id -> k
+        (deleteFromCache { id })
       cncl2 <- AVar.take av2 \q -> case q of
         Right usu -> usu
         Left e -> throwException e
@@ -165,7 +169,7 @@ globalPortal
    . Vec n (Element lock payload)
   -> (Vec n (Element lock payload) -> Event (Event (StreamingElt lock payload)))
   -> Element lock payload
-globalPortal e f = internalPortal (const "@portal@") e (\x _ -> f x)
+globalPortal e f = internalPortal true (const "@portal@") e (\x _ -> f x)
 
 portal
   :: forall n lock0 payload
@@ -176,7 +180,7 @@ portal
        -> Event (Event (StreamingElt lock1 payload))
      )
   -> Element lock0 payload
-portal e = internalPortal identity e
+portal e = internalPortal false identity e
 
 class Plant seed tree | seed -> tree where
   plant :: seed -> tree
@@ -250,25 +254,26 @@ text
   -> Element lock payload
 text txt = Element go
   where
-  go { parent, scope, raiseId } di@(DOMInterpret { ids }) = makeEvent \k -> do
-    me <- ids
-    raiseId me
-    subscribe
-      ( oneOf
-          [ bang (unsafeText di { id: me, parent, scope })
-          , unsafeSetText di me txt
-          ]
-      )
-      k
+  go { parent, scope, raiseId } di@(DOMInterpret { ids, deleteFromCache }) =
+    makeEvent \k -> do
+      me <- ids
+      raiseId me
+      map ((*>) (k (deleteFromCache { id: me }))) $ subscribe
+        ( oneOf
+            [ bang (unsafeText di { id: me, parent, scope })
+            , unsafeSetText di me txt
+            ]
+        )
+        k
 
 blank :: forall lock payload. Element lock payload
 blank = Element go
   where
-  go { parent, scope, raiseId } (DOMInterpret { ids, makeNoop }) = makeEvent
+  go { parent, scope, raiseId } (DOMInterpret { ids, makeNoop, deleteFromCache }) = makeEvent
     \k -> do
       me <- ids
       raiseId me
-      subscribe
+      map ((*>) (k (deleteFromCache { id: me }))) $ subscribe
         (bang (makeNoop { id: me, parent, scope }))
         k
 

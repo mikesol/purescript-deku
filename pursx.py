@@ -9,25 +9,14 @@ import Prelude
 
 import Control.Alt ((<|>))
 import Control.Plus (empty)
-import Deku.Internal(__internalDekuFlatten)
-import Data.Either (Either(..))
-import Data.Foldable (fold, traverse_)
-import Data.Maybe (Maybe(..))
 import Data.Profunctor (lcmap)
 import Data.Symbol (class IsSymbol, reflectSymbol)
-import Data.Tuple.Nested ((/\))
 import Deku.Attribute (Attribute, unsafeUnAttribute)
 import Deku.Control (class Plant, plant)
-import Deku.Core (DOMInterpret(..), Element(..), StreamingElt(..))
+import Deku.Core (DOMInterpret(..), Element(..), StreamingElt)
 import Deku.DOM (class TagToDeku)
-import Effect.AVar (tryPut)
-import Effect.AVar as AVar
-import Effect.Exception (throwException)
-import Effect.Random as Random
-import Effect.Ref as Ref
-import FRP.Behavior (sampleBy, sample_)
+import Deku.Internal (__internalDekuFlatten)
 import FRP.Event (Event, bang, subscribe, makeEvent)
-import FRP.Event.Class (keepLatest)
 import Foreign.Object as Object
 import Prim.Boolean (False, True)
 import Prim.Row as Row
@@ -250,34 +239,33 @@ makePursx'
   -> Element lock payload
 makePursx' verb html r = Element go
   where
-  go z@{ parent, scope, raiseId } di@(DOMInterpret { makePursx: mpx, ids }) =
+  go
+    z@{ parent, scope, raiseId }
+    di@(DOMInterpret { makePursx: mpx, ids, deleteFromCache }) =
     makeEvent \k1 -> do
       me <- ids
+      pxScope <- ids
       raiseId me
-      subscribe
-        ( makeEvent \k2 -> do
-            pxScope <- ids
-            let
-              { cache, element: Element element } = pursxToElement
-                pxScope
-                (Proxy :: _ rl)
-                r
-            subscribe
-              ( ( bang $
-                    mpx
-                      { id: me
-                      , parent
-                      , cache
-                      , scope: pxScope
-                      , dkScope: scope
-                      , html: reflectSymbol html
-                      , verb: reflectSymbol verb
-                      }
-                ) <|> element z di
-              )
-              k2
-        )
-        k1
+      let
+        { cache, element: Element element } = pursxToElement
+          pxScope
+          (Proxy :: _ rl)
+          r
+      map ((*>) (k1 (deleteFromCache { id: me }))) $
+        subscribe
+          ( ( bang $
+                mpx
+                  { id: me
+                  , parent
+                  , cache
+                  , scope: pxScope
+                  , dkScope: scope
+                  , html: reflectSymbol html
+                  , verb: reflectSymbol verb
+                  }
+            ) <|> element z di
+          )
+          k1
 
 infixr 5 makePursx as ~~
 

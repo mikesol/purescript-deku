@@ -42,6 +42,7 @@ foreign import makePursx_
   -> FFIDOMSnapshot
   -> Effect Unit
 
+foreign import deleteFromCache_ :: Core.DeleteFromCache -> FFIDOMSnapshot -> Effect Unit
 foreign import makeNoop_ :: Core.MakeNoop -> FFIDOMSnapshot -> Effect Unit
 foreign import giveNewParent_ :: Core.GiveNewParent -> FFIDOMSnapshot -> Effect Unit
 foreign import disconnectElement_ :: Core.DisconnectElement -> FFIDOMSnapshot -> Effect Unit
@@ -58,6 +59,7 @@ effectfulDOMInterpret = Core.DOMInterpret
   , setText: setText_
   , sendToTop: sendToTop_
   , makeNoop: makeNoop_
+  , deleteFromCache: deleteFromCache_
   , giveNewParent: giveNewParent_
   , disconnectElement: disconnectElement_
   }

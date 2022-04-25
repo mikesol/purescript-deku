@@ -228,19 +228,16 @@ exports.disconnectElement_ = function (a) {
 			}
 
 			state.units[ptr].main.remove();
-			// deleting a portal can never trigger deleting everything
-			if (state.units[ptr].parent === "@portal@") {
-				return;
-			}
-			const scope = state.units[ptr].scope;
-			state.scopes[scope].forEach((scp) => {
-				delete state.units[scp];
-			});
-			delete state.scopes[scope];
 		};
 	};
 };
-
+exports.deleteFromCache_ = function (a) {
+	return function (state) {
+		return function () {
+			delete state.units[a.id];
+		};
+	};
+};
 exports.sendToTop_ = function (a) {
 	return function (state) {
 		return function () {

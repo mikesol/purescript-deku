@@ -23,7 +23,10 @@ __internalDekuFlatten
   -> DOMInterpret payload
   -> Event (Event (StreamingElt lock payload))
   -> Event payload
-__internalDekuFlatten parent di@(DOMInterpret { ids, disconnectElement, sendToTop }) children =
+__internalDekuFlatten
+  parent
+  di@(DOMInterpret { ids, disconnectElement, sendToTop })
+  children =
   makeEvent \k -> do
     cancelInner <- Ref.new Object.empty
     cancelOuter <-
@@ -31,11 +34,12 @@ __internalDekuFlatten parent di@(DOMInterpret { ids, disconnectElement, sendToTo
       subscribe children \inner ->
         do
           -- holds the previous id
-          eltsUnsub <- Ref.new (pure unit)
+          myUnsubId <- ids
           myUnsub <- Ref.new (pure unit)
+          eltsUnsubId <- ids
+          eltsUnsub <- Ref.new (pure unit)
           myId <- Ref.new Nothing
           myImmediateCancellation <- Ref.new (pure unit)
-          unsubId <- ids
           myScope <- ids
           stageRef <- Ref.new Begin
           c0 <- subscribe inner \kid' -> do
@@ -52,9 +56,13 @@ __internalDekuFlatten parent di@(DOMInterpret { ids, disconnectElement, sendToTo
                           ( disconnectElement
                               { id: old, parent, scope: myScope }
                           )
-                    ) *> join (Ref.read myUnsub) *> join (Ref.read eltsUnsub) *>
-                      Ref.modify_
-                        (Object.delete unsubId)
+                    ) *> join (Ref.read myUnsub)
+                      *> join (Ref.read eltsUnsub)
+                      *> Ref.modify_
+                        (Object.delete myUnsubId)
+                        cancelInner
+                      *> Ref.modify_
+                        (Object.delete eltsUnsubId)
                         cancelInner
                 Ref.write mic myImmediateCancellation *> mic
               Elt (Element kid), Begin -> do
@@ -74,16 +82,17 @@ __internalDekuFlatten parent di@(DOMInterpret { ids, disconnectElement, sendToTo
                 cncl <- AVar.take av \q -> case q of
                   Right r -> do
                     Ref.write (Just r) (myId)
-                    join (Ref.read eltsUnsub)
+                    Ref.modify_ (Object.insert eltsUnsubId c1) cancelInner
                     Ref.write c1 eltsUnsub
                   Left e -> throwException e
                 -- cancel immediately, as it should be run synchronously
                 -- so if this actually does something then we have a problem
                 cncl
               -- ignore
-              _, _ -> pure unit
+              _,
+              _ -> pure unit
           Ref.write c0 myUnsub
-          Ref.modify_ (Object.insert unsubId c0) cancelInner
+          Ref.modify_ (Object.insert myUnsubId c0) cancelInner
           join (Ref.read myImmediateCancellation)
     pure do
       Ref.read cancelInner >>= fold
