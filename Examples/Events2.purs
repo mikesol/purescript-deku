@@ -2,7 +2,7 @@ module Deku.Examples.Docs.Examples.Events2 where
 
 import Prelude
 
-import Control.Alt (alt, (<|>))
+import Control.Alt ((<|>))
 import Data.Filterable (filterMap)
 import Data.Foldable (oneOfMap)
 import Data.Generic.Rep (class Generic)
