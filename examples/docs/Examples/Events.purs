@@ -11,7 +11,7 @@ import Deku.DOM as D
 import Deku.Toplevel (runInBody1)
 import Effect (Effect)
 import FRP.Event (bang, mapAccum)
-import FRP.Event.Variant (V, vbus)
+import FRP.Event.VBus (V, vbus)
 import Type.Proxy (Proxy(..))
 import Web.DOM.Element (fromEventTarget)
 import Web.Event.Event (target)

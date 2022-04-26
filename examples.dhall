@@ -8,7 +8,6 @@ in      conf
               , "filterable"
               , "affjax"
               , "either"
-              , "meh"
               , "integers"
               , "aff"
               , "argonaut-core"

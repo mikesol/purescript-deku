@@ -154,14 +154,7 @@ let additions =
           , "now"
           ]
         , repo = "https://github.com/mikesol/purescript-event.git"
-        , version = "v1.6.0"
-        }
-     , meh =
-        { dependencies =
-          [ "event"
-          ]
-        , repo = "https://github.com/mikesol/purescript-meh.git"
-        , version = "v0.0.0"
+        , version = "v1.6.2"
         }
       , everythings-better-with-variants =
         { dependencies =
