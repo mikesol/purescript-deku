@@ -10,9 +10,9 @@ import Data.Typelevel.Num (d0)
 import Data.Vec ((+>))
 import Data.Vec as V
 import Deku.Attribute ((:=))
-import Deku.Control (blank, dekuA, plant, portal)
+import Deku.Control (blank, dekuA, portal, switcher)
 import Deku.Control as C
-import Deku.Core (Element, StreamingElt(..))
+import Deku.Core (Element, Child(..))
 import Deku.DOM as D
 import Deku.Interpret (FFIDOMSnapshot, effectfulDOMInterpret, makeFFIDOMSnapshot)
 import Effect (Effect)
@@ -59,7 +59,7 @@ scene =
               ]
               +> V.empty
           )
-          ( \i _ -> plant $ map
+          ( \i _ -> switcher
               ( \rgb -> D.div
                   (bang (D.Style := "background-color: " <> rgb <> ";"))
                   (V.index i d0)
@@ -71,7 +71,7 @@ scene =
       ( map
           ( \rgb ->
               bang
-                (Elt $ D.div (bang (D.Style := "background-color: " <> rgb <> ";"))
+                (Insert $ D.div (bang (D.Style := "background-color: " <> rgb <> ";"))
                     (C.text_ "hello")
                 ) <|> delay 1432 (bang SendToTop) <|> delay 2000 (bang Remove)
           )

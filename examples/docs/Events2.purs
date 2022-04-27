@@ -10,7 +10,7 @@ import Data.Profunctor (lcmap)
 import Data.Tuple.Nested ((/\))
 import Deku.Attribute (cb, (:=))
 import Deku.Control (blank, text_)
-import Deku.Core (Element, StreamingElt(..))
+import Deku.Core (Element, Child(..))
 import Deku.DOM as D
 import Deku.Example.Docs.Types (Page(..))
 import Deku.Example.Docs.Util (scrollToTop)
@@ -50,15 +50,15 @@ px =
 
   <h2>Events of events</h2>
 
-  <p>In the previous sections, DOM element constructors like <code>div_</code> could only accept an <code>Array</code>. They <i>also</i> can accept an event of events. In this case, the outer event represents a dynamic element, and the inner event represents the <i>stage</i> of dynamism with a data type called <code>StreamingElt</code>. <code>StreamingElt</code> has three constructors:</p>
+  <p>In the previous sections, DOM element constructors like <code>div_</code> could only accept an <code>Array</code>. They <i>also</i> can accept an event of events. In this case, the outer event represents a dynamic element, and the inner event represents the <i>stage</i> of dynamism with a data type called <code>Child</code>. <code>Child</code> has three constructors:</p>
 
   <ul>
-    <li><code>Elt</code>, which takes an element.</li>
+    <li><code>Insert</code>, which takes an element.</li>
     <li><code>SendToTop</code>, which sends the current element to the top of its parent.</li>
     <li><code>Remove</code>, which removes the element from its parent.</li>
   </ul>
 
-  <p>The Deku engine listens for these in a specific order. <code>Elt</code> can be followed by 0 or more <code>SendToTop</code>-s. When a <code>Remove</code> is called, the stream is unsubscribed from the parent. Because we're in the land of <code>Event</code>-s, you can emit anything, but this is the how they will be listened to.</p>
+  <p>The Deku engine listens for these in a specific order. <code>Insert</code> can be followed by 0 or more <code>SendToTop</code>-s. When a <code>Remove</code> is called, the stream is unsubscribed from the parent. Because we're in the land of <code>Event</code>-s, you can emit anything, but this is the how they will be listened to.</p>
 
   <h2>Next steps</h2>
   <p>In this section, we used nested events to insert and remove elements from a parent. In the next section, we'll see how we can use <a ~next~ style="cursor:pointer;">portals to move an element to a different place of the DOM</a>.</p>
@@ -82,7 +82,7 @@ import Data.Profunctor (lcmap)
 import Data.Tuple.Nested ((/\))
 import Deku.Attribute (cb, (:=))
 import Deku.Control (blank, text_)
-import Deku.Core (StreamingElt(..))
+import Deku.Core (Child(..))
 import Deku.DOM as D
 import Deku.Toplevel (runInBody1)
 import Effect (Effect)
@@ -127,7 +127,7 @@ main = runInBody1
         [ D.div_ top
         , D.div_ $
             ( \txt -> keepLatest $ bus \p' e' ->
-                ( bang $ Elt $ D.div_
+                ( bang $ Insert $ D.div_
                     [ text_ txt
                     , D.button
                         ( bang
@@ -190,7 +190,7 @@ main = runInBody1
             , D.div_
                 ( map
                     ( \txt -> keepLatest $ bus \p' e' ->
-                        ( bang $ Elt $ D.div_ do
+                        ( bang $ Insert $ D.div_ do
                             [ D.span (bang $ D.Style := "margin: 5px;")
                                 (text_ txt)
                             , D.button

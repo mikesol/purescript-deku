@@ -9,6 +9,7 @@ in      conf
               , "affjax"
               , "either"
               , "integers"
+              , "behaviors"
               , "aff"
               , "argonaut-core"
               , "web-uievents"

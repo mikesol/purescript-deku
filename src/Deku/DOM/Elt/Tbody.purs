@@ -3,14 +3,14 @@ module Deku.DOM.Elt.Tbody where
 import Control.Plus (empty)
 import Deku.Attribute (Attribute)
 import Deku.Control (elementify, class Plant, plant)
-import Deku.Core (StreamingElt, Element)
+import Deku.Core (Child, Element)
 import FRP.Event (Event)
 
 data Tbody_
 
 tbody
   :: forall seed lock payload
-   . Plant seed (Event (Event (StreamingElt lock payload)))
+   . Plant seed (Event (Event (Child lock payload)))
   => Event (Attribute Tbody_)
   -> seed
   -> Element lock payload
@@ -18,7 +18,7 @@ tbody attributes seed = elementify "tbody" attributes (plant seed)
 
 tbody_
   :: forall seed lock payload
-   . Plant seed (Event (Event (StreamingElt lock payload)))
+   . Plant seed (Event (Event (Child lock payload)))
   => seed
   -> Element lock payload
 tbody_ = tbody empty

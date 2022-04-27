@@ -7,13 +7,13 @@ import Data.Compactable (compact)
 import Data.Maybe (Maybe(..))
 import Deku.Attribute (cb, (:=))
 import Deku.Control (text, text_)
-import Deku.Core (Element)
+import Deku.Core (Child(..), Element)
 import Deku.DOM as D
 import Deku.Example.Docs.Types (Page(..))
 import Deku.Example.Docs.Util (scrollToTop)
 import Deku.Pursx (makePursx', nut, (~~))
 import Effect (Effect)
-import FRP.Event (bus, bang)
+import FRP.Event (bang, bus)
 import Type.Proxy (Proxy(..))
 
 px =
@@ -119,7 +119,7 @@ main = runInBody1
       )
   , result: nut
       ( bus \push event ->
-          myDom ~~
+          bang $ Insert $ myDom ~~
             { myli: bang (D.Style := "background-color:rgb(200,240,210);")
             , somethingNew: nut
                 ( D.button (bang (D.OnClick := cb (const $ push (Just unit))))

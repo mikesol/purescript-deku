@@ -4,13 +4,12 @@ import Prelude
 
 import Control.Alt ((<|>))
 import Data.Foldable (for_, oneOfMap)
-import Data.Tuple.Nested ((/\))
 import Deku.Attribute (cb, (:=))
 import Deku.Control (blank, text, text_)
 import Deku.DOM as D
 import Deku.Toplevel (runInBody1)
 import Effect (Effect)
-import FRP.Event (bang, mapAccum)
+import FRP.Event (bang, fold)
 import FRP.Event.VBus (V, vbus)
 import Type.Proxy (Proxy(..))
 import Web.DOM.Element (fromEventTarget)
@@ -32,10 +31,10 @@ main = runInBody1
             [ text_ "Click" ]
         , D.div_
             [ text
-                ( (bang "Val: 0") <|>
-                    ( mapAccum (const $ \x -> (x + 1) /\ x)
+                ( bang "Val: 0" <|>
+                    ( fold (const $ \x -> (x + 1))
                         (bang unit <|> event.buttonClicked)
-                        0
+                        (-1)
                         # map (append "Val: " <<< show)
                     )
                 )
@@ -57,7 +56,7 @@ main = runInBody1
                 blank
             , D.div_
                 [ text
-                    ( (bang "Val: 50") <|>
+                    ( bang "Val: 50" <|>
                         ( (append "Val: " <<< show) <$> event.sliderMoved
                         )
                     )

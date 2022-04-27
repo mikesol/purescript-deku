@@ -2,19 +2,19 @@ module Deku.Example.Portal where
 
 import Prelude
 
-import Control.Alt (alt, (<|>))
+import Control.Alt (alt)
 import Data.Foldable (oneOfMap)
 import Data.Profunctor (lcmap)
-import Data.Tuple.Nested ((/\))
 import Data.Typelevel.Num (d0, d1)
 import Data.Vec (index, (+>))
 import Data.Vec as V
 import Deku.Attribute (cb, (:=))
-import Deku.Control (blank, plant, portal, text_)
+import Deku.Control (blank, plant, portal, switcher, text_)
+import Deku.Core (Child(..))
 import Deku.DOM as D
-import Deku.Toplevel (runInBody1, runInBody2)
+import Deku.Toplevel (runInBody2)
 import Effect (Effect)
-import FRP.Event (bang, bus, mapAccum)
+import FRP.Event (bang, bus, fold)
 
 main :: Effect Unit
 main = runInBody2
@@ -24,7 +24,7 @@ main = runInBody2
       , D.div_
           [ text_ "Switching portals should flip between them"
           , D.div_
-              ( bus \push -> lcmap (alt (bang unit)) \event -> portal
+              ( bus \push -> lcmap (alt (bang unit)) \event -> bang $ Insert $ portal
                   ( map
                       ( \i -> D.video
                           ( oneOfMap bang
@@ -46,12 +46,12 @@ main = runInBody2
                     let
                       p0 = index v d0
                       p1 = index v d1
-                      ev = event # mapAccum
-                        \_ x -> not x /\ if x then p0 else p1
+                      ev = fold (const not) event
+                      flips = switcher (if _ then p0 else p1) <<< ev
                     plant $ D.div_
                       [ D.button (bang $ D.OnClick := cb (const $ push unit))
                           [ text_ "Switch videos" ]
-                      , D.div_ [D.div_ (ev true), D.div_ (ev false)]
+                      , D.div_ [D.div_ (flips true), D.div_ (flips false)]
                       ]
               )
           ]
@@ -59,7 +59,7 @@ main = runInBody2
       , D.div_
           [ text_ "Single portals should not accumulate"
           , D.div_
-              ( bus \push -> lcmap (alt (bang unit)) \event -> portal
+              ( bus \push -> lcmap (alt (bang unit)) \event -> bang $ Insert $ portal
                   ( map
                       ( \i -> D.video
                           ( oneOfMap bang
@@ -81,12 +81,12 @@ main = runInBody2
                     let
                       p0 = index v d0
                       p1 = index v d1
-                      ev = event # mapAccum
-                        \_ x -> not x /\ if x then p0 else p1
+                      ev = fold (const not) event
+                      flips = switcher (if _ then p0 else p1) <<< ev
                     plant $ D.div_
                       [ D.button (bang $ D.OnClick := cb (const $ push unit))
                           [ text_ "Toggle videos" ]
-                      , D.div_ (ev true)
+                      , D.div_ (flips true)
                       ]
               )
           ]
@@ -94,7 +94,7 @@ main = runInBody2
       , D.div_
           [ text_ "Portal should come in and out"
           , D.div_
-              ( bus \push -> lcmap (alt (bang unit)) \event -> portal
+              ( bus \push -> lcmap (alt (bang unit)) \event ->  bang $ Insert $ portal
                   ( map
                       ( \i -> D.video
                           ( oneOfMap bang
@@ -114,12 +114,12 @@ main = runInBody2
                   \v _ -> do
                     let
                       p0 = index v d0
-                      ev = event # mapAccum
-                        \_ x -> not x /\ if x then p0 else blank
+                      ev = fold (const not) event
+                      flips = switcher (if _ then p0 else blank) <<< ev
                     plant $ D.div_
                       [ D.button (bang $ D.OnClick := cb (const $ push unit))
                           [ text_ "Toggle videos" ]
-                      , D.div_ (ev true)
+                      , D.div_ (flips true)
                       ]
               )
           ]

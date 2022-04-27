@@ -10,7 +10,7 @@ import Data.Vec ((+>), index)
 import Data.Vec as V
 import Deku.Attribute (cb, (:=))
 import Deku.Control (blank, plant, portal, switcher, text_)
-import Deku.Core (Element)
+import Deku.Core (Child(..), Element)
 import Deku.DOM as D
 import Deku.Example.Docs.Types (Page)
 import Deku.Pursx (nut, (~~))
@@ -121,7 +121,7 @@ main = runInBody1
   , result: nut
 
    ( bus \push -> lcmap (alt (bang unit)) \event -> do
-      portal
+      bang $ Insert $ portal
         ( map
             ( \i -> D.video
                 (oneOfMap bang [ D.Controls := "true", D.Width := "250" ])
