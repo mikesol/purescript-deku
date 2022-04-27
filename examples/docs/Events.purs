@@ -84,15 +84,20 @@ main = runInBody1
   ( vbus (Proxy :: _ UIEvents) \push event -> do
       D.div_
         [ D.button
-            (bang (D.OnClick := cb (const $ push.buttonClicked unit)))
+            ( bang
+                ( D.OnClick :=
+                    cb (const $ push.buttonClicked unit)
+                )
+            )
             [ text_ "Click" ]
         , D.div_
             [ text
                 ( bang "Val: 0" <|>
-                    ( fold (const $ \x -> (x + 1))
-                        (bang unit <|> event.buttonClicked)
-                        (-1)
-                        # map (append "Val: " <<< show)
+                    ( append "Val: " <<< show
+                        <$> fold
+                          (const (add 1))
+                          (bang unit <|> event.buttonClicked)
+                          (-1)
                     )
                 )
             ]
@@ -114,7 +119,8 @@ main = runInBody1
             , D.div_
                 [ text
                     ( bang "Val: 50" <|>
-                        ( (append "Val: " <<< show) <$> event.sliderMoved
+                        ( append "Val: " <<< show
+                            <$> event.sliderMoved
                         )
                     )
                 ]
