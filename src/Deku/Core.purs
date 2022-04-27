@@ -2,6 +2,7 @@ module Deku.Core where
 
 import Prelude
 
+import Data.Variant (Variant)
 import Deku.Attribute (AttributeValue)
 import Effect (Effect)
 import FRP.Event (Event)
@@ -10,6 +11,15 @@ import Web.DOM as Web.DOM
 
 data Child lock payload = Insert (Element lock payload) | SendToTop | Remove
 
+newtype DynamicChildren lock payload = DynamicChildren
+  (Event (Event (Child lock payload)))
+
+newtype FixedChildren lock payload = FixedChildren
+  (Array (Element lock payload))
+
+newtype EventfulElement lock payload = EventfulElement
+  (Event (Domable lock payload))
+
 newtype Element (lock :: Type) payload = Element
   ( { parent :: String
     , scope :: String
@@ -17,6 +27,15 @@ newtype Element (lock :: Type) payload = Element
     }
     -> DOMInterpret payload
     -> Event payload
+  )
+
+newtype Domable lock payload = Domable
+  ( Variant
+      ( dynamicChildren :: DynamicChildren lock payload
+      , fixedChildren :: FixedChildren lock payload
+      , eventfulElement :: EventfulElement lock payload
+      , element :: Element lock payload
+      )
   )
 
 type MakeElement =

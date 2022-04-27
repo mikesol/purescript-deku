@@ -3,8 +3,8 @@ module Deku.Toplevel where
 import Prelude
 
 import Data.Maybe (maybe)
-import Deku.Control (deku, deku0, deku1, deku2, dekuA)
-import Deku.Core (Element, Child)
+import Deku.Control (deku, deku1, deku2, dekuA, plant)
+import Deku.Core (Domable, Element)
 import Deku.Interpret (FFIDOMSnapshot, effectfulDOMInterpret, makeFFIDOMSnapshot)
 import Effect (Effect)
 import FRP.Event (Event, subscribe)
@@ -16,25 +16,16 @@ import Web.HTML.Window (document)
 
 runInElement'
   :: Web.DOM.Element
-  -> (forall lock. Event (Event (Child lock (FFIDOMSnapshot -> Effect Unit))))
+  -> (forall lock. Domable lock (FFIDOMSnapshot -> Effect Unit))
   -> Effect (Effect Unit)
 runInElement' elt eee = do
   ffi <- makeFFIDOMSnapshot
-  let evt = deku elt eee effectfulDOMInterpret
-  subscribe evt \i -> i ffi
-
-runInElement0'
-  :: Web.DOM.Element
-  -> (forall lock. Event (Event (Element lock (FFIDOMSnapshot -> Effect Unit))))
-  -> Effect (Effect Unit)
-runInElement0' elt eee = do
-  ffi <- makeFFIDOMSnapshot
-  let evt = deku0 elt eee effectfulDOMInterpret
+  let evt = deku elt (plant eee) effectfulDOMInterpret
   subscribe evt \i -> i ffi
 
 runInElement1'
   :: Web.DOM.Element
-  -> (forall lock. Event (Element lock (FFIDOMSnapshot -> Effect Unit)))
+  -> (forall lock. Event (Domable lock (FFIDOMSnapshot -> Effect Unit)))
   -> Effect (Effect Unit)
 runInElement1' elt eee = do
   ffi <- makeFFIDOMSnapshot
@@ -60,21 +51,14 @@ runInElementA' elt eee = do
   subscribe evt \i -> i ffi
 
 runInBody'
-  :: (forall lock. Event (Event (Child lock (FFIDOMSnapshot -> Effect Unit)) ))
+  :: (forall lock. Domable lock (FFIDOMSnapshot -> Effect Unit))
   -> Effect (Effect Unit)
 runInBody' eee = do
   b' <- window >>= document >>= body
   maybe mempty (\elt -> runInElement' elt eee) (toElement <$> b')
 
-runInBody0'
-  :: (forall lock. Event (Event (Element lock (FFIDOMSnapshot -> Effect Unit))))
-  -> Effect (Effect Unit)
-runInBody0' eee = do
-  b' <- window >>= document >>= body
-  maybe mempty (\elt -> runInElement0' elt eee) (toElement <$> b')
-
 runInBody1'
-  :: (forall lock. Event (Element lock (FFIDOMSnapshot -> Effect Unit)))
+  :: (forall lock. Event (Domable lock (FFIDOMSnapshot -> Effect Unit)))
   -> Effect (Effect Unit)
 runInBody1' eee = do
   b' <- window >>= document >>= body
@@ -95,17 +79,12 @@ runInBodyA' eee = do
   maybe mempty (\elt -> runInElementA' elt eee) (toElement <$> b')
 
 runInBody
-  :: (forall lock. Event (Event (Child lock (FFIDOMSnapshot -> Effect Unit))))
+  :: (forall lock. Domable lock (FFIDOMSnapshot -> Effect Unit))
   -> Effect Unit
 runInBody a = void (runInBody' a)
 
-runInBody0
-  :: (forall lock. Event (Event (Element lock (FFIDOMSnapshot -> Effect Unit))))
-  -> Effect Unit
-runInBody0 a = void (runInBody0' a)
-
 runInBody1
-  :: (forall lock. Event (Element lock (FFIDOMSnapshot -> Effect Unit)))
+  :: (forall lock. Event (Domable lock (FFIDOMSnapshot -> Effect Unit)))
   -> Effect Unit
 runInBody1 a = void (runInBody1' a)
 

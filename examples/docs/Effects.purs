@@ -12,7 +12,7 @@ import Data.HTTP.Method (Method(..))
 import Data.Maybe (Maybe(..))
 import Data.Tuple.Nested ((/\))
 import Deku.Attribute (Cb, cb, (:=))
-import Deku.Control (text, text_)
+import Deku.Control (plant, text, text_)
 import Deku.Core (Element)
 import Deku.DOM as D
 import Deku.Example.Docs.Types (Page(..))
@@ -184,7 +184,7 @@ main = runInBody
           ]
       )
   , result: nut
-      ( bus \push event ->
+      ( bus \push event -> plant do
           let
             loadingOrResult = filterMap
               ( case _ of
@@ -205,8 +205,7 @@ main = runInBody
                   _ -> Nothing
               )
               loadingOrResult
-          in
-            D.div_
+          D.div_
               [ D.div_
                   [ D.button (bang (D.OnClick := clickCb push))
                       [ text

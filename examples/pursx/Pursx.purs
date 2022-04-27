@@ -6,9 +6,9 @@ import Control.Alt ((<|>))
 import Control.Plus (empty)
 import Data.Foldable (for_)
 import Deku.Attribute (cb, (:=))
-import Deku.Control (deku1)
+import Deku.Control (deku1, plant)
 import Deku.Control as C
-import Deku.Core (Element)
+import Deku.Core (Domable, Element)
 import Deku.DOM as D
 import Deku.Interpret (FFIDOMSnapshot, effectfulDOMInterpret, makeFFIDOMSnapshot)
 import Deku.Pursx (nut, (~~))
@@ -48,9 +48,9 @@ pxInception push aThirdThing = px ~~
   }
 
 scene
-  :: forall lock. Event (Element lock (FFIDOMSnapshot -> Effect Unit))
+  :: forall lock. Event (Domable lock (FFIDOMSnapshot -> Effect Unit))
 scene = bus \push event ->
-  D.div empty
+  plant $ D.div empty
     [ pxInception push
         $ pxInception push
         $ pxInception push

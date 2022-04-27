@@ -13,7 +13,7 @@ import Data.Profunctor (lcmap)
 import Data.Symbol (class IsSymbol, reflectSymbol)
 import Deku.Attribute (Attribute, unsafeUnAttribute)
 import Deku.Control (class Plant, plant)
-import Deku.Core (DOMInterpret(..), Element(..), Child)
+import Deku.Core (DOMInterpret(..), Element(..), Child, Domable)
 import Deku.DOM (class TagToDeku)
 import Deku.Internal (__internalDekuFlatten)
 import FRP.Event (Event, bang, subscribe, makeEvent)
@@ -26,11 +26,11 @@ import Record (get)
 import Type.Proxy (Proxy(..))
 
 newtype PursxElement lock payload = PursxElement
-  (Event (Event (Child lock payload)))
+  (Domable lock payload)
 
 nut
   :: forall seed lock payload
-   . Plant seed (Event (Event (Child lock payload)))
+   . Plant seed (Domable lock payload)
   => seed
   -> PursxElement lock payload
 nut seed = PursxElement (plant seed)
