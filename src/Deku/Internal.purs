@@ -7,7 +7,7 @@ import Prelude
 import Data.Either (Either(..))
 import Data.Foldable (fold, traverse_)
 import Data.Maybe (Maybe(..))
-import Deku.Core (DOMInterpret(..), Element(..), StreamingElt(..))
+import Deku.Core (DOMInterpret(..), Element(..), Child(..))
 import Effect.AVar (tryPut)
 import Effect.AVar as AVar
 import Effect.Exception (throwException)
@@ -21,7 +21,7 @@ __internalDekuFlatten
   :: forall lock payload
    . String
   -> DOMInterpret payload
-  -> Event (Event (StreamingElt lock payload))
+  -> Event (Event (Child lock payload))
   -> Event payload
 __internalDekuFlatten
   parent
@@ -65,7 +65,7 @@ __internalDekuFlatten
                         (Object.delete eltsUnsubId)
                         cancelInner
                 Ref.write mic myImmediateCancellation *> mic
-              Elt (Element kid), Begin -> do
+              Insert (Element kid), Begin -> do
                 -- holds the current id
                 Ref.write Middle stageRef
                 av <- AVar.empty

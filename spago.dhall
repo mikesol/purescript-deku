@@ -1,7 +1,6 @@
 { name = "purescript-deku"
 , dependencies =
   [ "avar"
-  , "behaviors"
   , "canvas"
   , "control"
   , "effect"

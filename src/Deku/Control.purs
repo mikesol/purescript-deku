@@ -26,7 +26,7 @@ import Data.Tuple (snd)
 import Data.Tuple.Nested (type (/\), (/\))
 import Data.Vec (toArray, Vec)
 import Deku.Attribute (Attribute, unsafeUnAttribute)
-import Deku.Core (DOMInterpret(..), Element(..), StreamingElt(..))
+import Deku.Core (DOMInterpret(..), Element(..), Child(..))
 import Deku.Internal (__internalDekuFlatten)
 import Effect (Effect, foreachE)
 import Effect.AVar (tryPut)
@@ -79,7 +79,7 @@ elementify
   :: forall element lock payload
    . String
   -> Event (Attribute element)
-  -> Event (Event (StreamingElt lock payload))
+  -> Event (Event (Child lock payload))
   -> Element lock payload
 elementify tag atts children = Element go
   where
@@ -110,7 +110,7 @@ internalPortal
   -> Vec n (Element lock0 payload)
   -> ( Vec n (Element lock1 payload)
        -> (Element lock0 payload -> Element lock1 payload)
-       -> Event (Event (StreamingElt lock1 payload))
+       -> Event (Event (Child lock1 payload))
      )
   -> Element lock0 payload
 internalPortal isGlobal scopeF gaga closure = Element go
@@ -167,7 +167,7 @@ internalPortal isGlobal scopeF gaga closure = Element go
 globalPortal
   :: forall n lock payload
    . Vec n (Element lock payload)
-  -> (Vec n (Element lock payload) -> Event (Event (StreamingElt lock payload)))
+  -> (Vec n (Element lock payload) -> Event (Event (Child lock payload)))
   -> Element lock payload
 globalPortal e f = internalPortal true (const "@portal@") e (\x _ -> f x)
 
@@ -177,7 +177,7 @@ portal
   -> ( forall lock1
         . Vec n (Element lock1 payload)
        -> (Element lock0 payload -> Element lock1 payload)
-       -> Event (Event (StreamingElt lock1 payload))
+       -> Event (Event (Child lock1 payload))
      )
   -> Element lock0 payload
 portal e = internalPortal false identity e
@@ -189,64 +189,32 @@ instance
   ( TypeEquals locki locko
   , TypeEquals payloadi payloado
   ) =>
-  Plant (Event (Event (StreamingElt locki payloadi)))
-    (Event (Event (StreamingElt locko payloado))) where
+  Plant (Event (Event (Child locki payloadi)))
+    (Event (Event (Child locko payloado))) where
   plant i = proof (coerce i)
 
 instance
   ( TypeEquals locki locko
   , TypeEquals payloadi payloado
   ) =>
-  Plant (Event (Event (Element locki payloadi)))
-    (Event (Event (StreamingElt locko payloado))) where
-  plant i = proof (coerce ((map <<< map) Elt i))
-
-instance
-  ( TypeEquals locki locko
-  , TypeEquals payloadi payloado
-  ) =>
-  Plant (Event (StreamingElt locki payloadi))
-    (Event (Event (StreamingElt locko payloado))) where
-  plant i = proof (coerce (map bang i))
-
-instance
-  ( TypeEquals locki locko
-  , TypeEquals payloadi payloado
-  ) =>
   Plant (Event (Element locki payloadi))
-    (Event (Event (StreamingElt locko payloado))) where
-  plant i = proof (coerce ((bang <<< map Elt) i))
+    (Event (Event (Child locko payloado))) where
+  plant i = proof (coerce ((bang <<< map Insert) i))
 
 instance
   ( TypeEquals locki locko
   , TypeEquals payloadi payloado
   ) =>
-  Plant (Element locki payloadi) (Event (Event (StreamingElt locko payloado))) where
-  plant i = proof (coerce ((bang <<< bang <<< Elt) i))
+  Plant (Element locki payloadi) (Event (Event (Child locko payloado))) where
+  plant i = proof (coerce ((bang <<< bang <<< Insert) i))
 
 instance
   ( TypeEquals locki locko
   , TypeEquals payloadi payloado
   ) =>
   Plant (Array (Element locki payloadi))
-    (Event (Event (StreamingElt locko payloado))) where
-  plant i = proof (coerce (oneOfMap bang $ map (bang <<< Elt) i))
-
-instance
-  ( TypeEquals locki locko
-  , TypeEquals payloadi payloado
-  ) =>
-  Plant (Array (Event (Element locki payloadi)))
-    (Event (Event (StreamingElt locko payloado))) where
-  plant i = proof (coerce (oneOfMap bang $ (map <<< map) Elt i))
-
-instance
-  ( TypeEquals locki locko
-  , TypeEquals payloadi payloado
-  ) =>
-  Plant (StreamingElt locki payloadi)
-    (Event (Event (StreamingElt locko payloado))) where
-  plant i = proof (coerce ((bang <<< bang) i))
+    (Event (Event (Child locko payloado))) where
+  plant i = proof (coerce (oneOfMap bang $ map (bang <<< Insert) i))
 
 text
   :: forall lock payload
@@ -283,7 +251,7 @@ text_ txt = text (bang txt)
 deku
   :: forall payload
    . Web.DOM.Element
-  -> (forall lock. Event (Event (StreamingElt lock payload)))
+  -> (forall lock. Event (Event (Child lock payload)))
   -> DOMInterpret payload
   -> Event payload
 deku root children di@(DOMInterpret { ids, makeRoot }) = makeEvent \k -> do
@@ -300,7 +268,7 @@ deku0
   -> (forall lock. Event (Event (Element lock payload)))
   -> DOMInterpret payload
   -> Event payload
-deku0 root children = deku root ((map <<< map) Elt children)
+deku0 root children = deku root ((map <<< map) Insert children)
 
 deku1
   :: forall payload
@@ -308,7 +276,7 @@ deku1
   -> (forall lock. Event (Element lock payload))
   -> DOMInterpret payload
   -> Event payload
-deku1 root children = deku root (bang (map Elt children))
+deku1 root children = deku root (bang (map Insert children))
 
 deku2
   :: forall payload
@@ -325,16 +293,16 @@ dekuA
   -> DOMInterpret payload
   -> Event payload
 dekuA root children = deku root
-  (oneOfMap bang (map (bang <<< Elt) children))
+  (oneOfMap bang (map (bang <<< Insert) children))
 
 switcher
   :: forall i lock payload
    . (i -> Element lock payload)
   -> Event i
-  -> Event (Event (StreamingElt lock payload))
+  -> Event (Event (Child lock payload))
 switcher f event = keepLatest
   $ memoize (counter event) \cenv -> map
-    ( \(p /\ n) -> bang (Elt $ f p) <|>
+    ( \(p /\ n) -> bang (Insert $ f p) <|>
         ((const Remove) <$> filter (eq (n + 1) <<< snd) cenv)
     )
     cenv

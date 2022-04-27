@@ -4,7 +4,7 @@ import Prelude
 
 import Data.Maybe (maybe)
 import Deku.Control (deku, deku0, deku1, deku2, dekuA)
-import Deku.Core (Element, StreamingElt)
+import Deku.Core (Element, Child)
 import Deku.Interpret (FFIDOMSnapshot, effectfulDOMInterpret, makeFFIDOMSnapshot)
 import Effect (Effect)
 import FRP.Event (Event, subscribe)
@@ -16,7 +16,7 @@ import Web.HTML.Window (document)
 
 runInElement'
   :: Web.DOM.Element
-  -> (forall lock. Event (Event (StreamingElt lock (FFIDOMSnapshot -> Effect Unit))))
+  -> (forall lock. Event (Event (Child lock (FFIDOMSnapshot -> Effect Unit))))
   -> Effect (Effect Unit)
 runInElement' elt eee = do
   ffi <- makeFFIDOMSnapshot
@@ -60,7 +60,7 @@ runInElementA' elt eee = do
   subscribe evt \i -> i ffi
 
 runInBody'
-  :: (forall lock. Event (Event (StreamingElt lock (FFIDOMSnapshot -> Effect Unit)) ))
+  :: (forall lock. Event (Event (Child lock (FFIDOMSnapshot -> Effect Unit)) ))
   -> Effect (Effect Unit)
 runInBody' eee = do
   b' <- window >>= document >>= body
@@ -95,7 +95,7 @@ runInBodyA' eee = do
   maybe mempty (\elt -> runInElementA' elt eee) (toElement <$> b')
 
 runInBody
-  :: (forall lock. Event (Event (StreamingElt lock (FFIDOMSnapshot -> Effect Unit))))
+  :: (forall lock. Event (Event (Child lock (FFIDOMSnapshot -> Effect Unit))))
   -> Effect Unit
 runInBody a = void (runInBody' a)
 

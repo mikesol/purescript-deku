@@ -8,7 +8,7 @@ import FRP.Event (Event)
 import Foreign.Object (Object)
 import Web.DOM as Web.DOM
 
-data StreamingElt lock payload = Elt (Element lock payload) | SendToTop | Remove
+data Child lock payload = Insert (Element lock payload) | SendToTop | Remove
 
 newtype Element (lock :: Type) payload = Element
   ( { parent :: String
