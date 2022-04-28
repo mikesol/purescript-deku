@@ -20,15 +20,14 @@ import Web.HTML.HTMLInputElement (fromEventTarget, value)
 import Web.UIEvent.KeyboardEvent (code, fromEvent)
 
 data MainUIAction
-  = UIShown
-  | AddTodo
+  = AddTodo
   | ChangeText String
 
 data TodoAction = Prioritize | Delete
 
 main :: Effect Unit
 main = runInBody1
-  ( bus \push -> lcmap (bang UIShown <|> _) \event -> plant do
+  ( bus \push event -> plant do
       let
         top =
           [ D.input
@@ -78,10 +77,9 @@ main = runInBody1
                     ( \a b -> case a of
                         ChangeText s -> s /\ (false /\ s)
                         AddTodo -> b /\ (true /\ b)
-                        _ -> "" /\ (false /\ "")
                     )
                     event
-                    ""
+                    mempty
                 )
         ]
   )
