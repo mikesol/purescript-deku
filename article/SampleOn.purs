@@ -11,10 +11,10 @@ import Effect (Effect)
 import FRP.Event (bang, bus, fold, memoize, sampleOn)
 import FRP.Event.Time (interval)
 
-example model = bus \push event -> plant $ D.div_
+example counter = bus \push event -> plant $ D.div_
   [ D.button (bang (D.OnClick := push unit))
       [ text_ "Show current counter" ]
-  , text (sampleOn (show <$> model) (event $> identity))
+  , text (sampleOn (show <$> counter) (event $> identity))
   ]
 
 main :: Effect Unit
