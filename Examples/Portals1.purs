@@ -24,7 +24,7 @@ counter event = mapAccum f event 0
 main :: Effect Unit
 main = runInBody1
   ( bus \push -> lcmap  (bang unit <|> _) \event -> do
-      portal
+      plant $ portal
         ( map
             ( \i -> D.video
                 (oneOfMap bang [ D.Controls := "true", D.Width := "250" ])

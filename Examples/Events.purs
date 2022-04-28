@@ -5,7 +5,7 @@ import Prelude
 import Control.Alt ((<|>))
 import Data.Foldable (for_, oneOfMap)
 import Deku.Attribute (cb, (:=))
-import Deku.Control (blank, text, text_)
+import Deku.Control (blank, plant, text, text_)
 import Deku.DOM as D
 import Deku.Toplevel (runInBody1)
 import Effect (Effect)
@@ -24,7 +24,7 @@ type UIEvents = V
 
 main :: Effect Unit
 main = runInBody1
-  ( vbus (Proxy :: _ UIEvents) \push event -> do
+  ( vbus (Proxy :: _ UIEvents) \push event -> plant do
       D.div_
         [ D.button
             ( bang

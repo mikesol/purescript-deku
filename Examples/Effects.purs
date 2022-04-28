@@ -19,7 +19,7 @@ import Deku.Toplevel (runInBody)
 import Effect (Effect)
 import Effect.Aff (launchAff_)
 import Effect.Class (liftEffect)
-import FRP.Event (keepLatest, mapAccum, bus, bang)
+import FRP.Event (bang, bus, mapAccum)
 
 data UIAction = Initial | Loading | Result String
 
@@ -49,7 +49,7 @@ clickText = "Click to get some random user data." :: String
 
 main :: Effect Unit
 main = runInBody
-  ( keepLatest $ bus \push -> lcmap (bang Initial <|> _)
+  ( plant $ bus \push -> lcmap (bang Initial <|> _)
       \event ->
         let
           loadingOrResult = filterMap

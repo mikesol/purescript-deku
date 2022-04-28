@@ -9,7 +9,7 @@ import Data.Maybe (Maybe(..))
 import Data.Profunctor (lcmap)
 import Data.Tuple.Nested ((/\))
 import Deku.Attribute (cb, (:=))
-import Deku.Control (blank, text_)
+import Deku.Control (blank, plant, text_)
 import Deku.Core (Element, Child(..))
 import Deku.DOM as D
 import Deku.Example.Docs.Types (Page(..))
@@ -164,8 +164,7 @@ main = runInBody1
           ]
       )
   , result: nut
-
-      ( bus \push -> lcmap (alt (bang UIShown)) \event -> do
+      ( bus \push -> lcmap (alt (bang UIShown)) \event -> plant do
           D.div_
             [ D.div_
                 [ D.input

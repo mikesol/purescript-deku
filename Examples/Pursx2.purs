@@ -6,7 +6,7 @@ import Control.Alt ((<|>))
 import Data.Compactable (compact)
 import Data.Maybe (Maybe(..))
 import Deku.Attribute (cb, (:=))
-import Deku.Control (text)
+import Deku.Control (plant, text)
 import Deku.DOM as D
 import Deku.Pursx (nut, (~~))
 import Deku.Toplevel (runInBody1)
@@ -34,7 +34,7 @@ myDom =
 
 main :: Effect Unit
 main = runInBody1
-  ( bus \push event -> myDom ~~
+  ( bus \push event -> plant $ myDom ~~
       { myli: bang (D.Style := "background-color:rgb(200,240,210);")
       , somethingNew: nut
           ( D.button (bang (D.OnClick := cb (const $ push (Just unit))))
