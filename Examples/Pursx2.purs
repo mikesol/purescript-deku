@@ -5,7 +5,7 @@ import Prelude
 import Control.Alt ((<|>))
 import Data.Compactable (compact)
 import Data.Maybe (Maybe(..))
-import Deku.Attribute (cb, (:=))
+import Deku.Attribute ((:=))
 import Deku.Control (plant, text)
 import Deku.DOM as D
 import Deku.Pursx (nut, (~~))
@@ -37,7 +37,7 @@ main = runInBody1
   ( bus \push event -> plant $ myDom ~~
       { myli: bang (D.Style := "background-color:rgb(200,240,210);")
       , somethingNew: nut
-          ( D.button (bang (D.OnClick := cb (const $ push (Just unit))))
+          ( D.button (bang (D.OnClick := push (Just unit)))
               [ text
                   $ (compact event $> "Thanks for clicking me!") <|>
                     bang "I was dynamically inserted"

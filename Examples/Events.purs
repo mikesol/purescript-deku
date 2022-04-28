@@ -28,9 +28,7 @@ main = runInBody1
       D.div_
         [ D.button
             ( bang
-                ( D.OnClick :=
-                    cb (const $ push.buttonClicked unit)
-                )
+                ( D.OnClick := push.buttonClicked unit)
             )
             [ text_ "Click" ]
         , D.div_
