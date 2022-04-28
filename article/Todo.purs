@@ -2,8 +2,6 @@ module Main where
 
 import Prelude
 
-import Prelude
-
 import Control.Alt ((<|>))
 import Data.Filterable (filterMap)
 import Data.Foldable (for_, oneOfMap)
