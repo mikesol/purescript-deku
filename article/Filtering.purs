@@ -14,10 +14,8 @@ import FRP.Event.Time (interval)
 example model = D.div_
   [ D.div_ [ text_ "Name: ", text (_.name <$> model) ]
   , D.div_ [ text_ "Age: ", text (_.age >>> show <$> model) ]
-  , D.div_
-      ( filter (_.age >>> (5 < _)) model
-          $> (plant $ text_ "They sure do grow up fast!")
-      )
+  , text
+      (filter (_.age >>> (5 < _)) model $> "They sure do grow up fast!")
   ]
 
 main :: Effect Unit
