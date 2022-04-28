@@ -6,9 +6,9 @@ import Control.Alt ((<|>))
 import Data.Filterable (filter)
 import Deku.Control (plant, text, text_)
 import Deku.DOM as D
-import Deku.Toplevel (runInBody2)
+import Deku.Toplevel (runInBody1, runInBody2)
 import Effect (Effect)
-import FRP.Event (bang, fold)
+import FRP.Event (bang, fold, memoize)
 import FRP.Event.Time (interval)
 
 example model = D.div_
@@ -19,9 +19,12 @@ example model = D.div_
   ]
 
 main :: Effect Unit
-main = runInBody2
-  ( example
-      ( { name: "Jane", age: _ } <$>
-          (fold (const (add 1)) (interval 400) 0 <|> bang 0)
+main = runInBody1
+  ( memoize
+      ( ( { name: "Jane", age: _ } <$>
+            (fold (const (add 1)) (interval 400) 0 <|> bang 0)
+        )
       )
+      (plant <<< example)
+
   )
