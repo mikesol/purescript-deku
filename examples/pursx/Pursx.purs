@@ -1,4 +1,4 @@
-module Deku.Example.Pursx where
+module Main where
 
 import Prelude
 
