@@ -39,7 +39,7 @@ main = runInBody1
               blank
           , D.button
               (bang $ D.OnClick := push (Left unit))
-              (text_ "Change text below")
+              (text_ "Finalize text")
           ]
         events = partitionMap identity event
         current = sampleOn events.right (events.left $> identity)
