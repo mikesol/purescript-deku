@@ -111,14 +111,14 @@ def cg(CODEGEN_TARGET, ival = None, ival2 = None):
 import Control.Plus (empty)
 import Deku.Attribute (Attribute)
 import Deku.Control (elementify, class Plant, plant)
-import Deku.Core (Child, Element)
+import Deku.Core (Child, Element, Domable)
 import FRP.Event (Event)
 
 data {term}
 
 {x}
   :: forall seed lock payload
-   . Plant seed (Event (Event (Child lock payload)))
+   . Plant seed (Domable lock payload)
   => Event (Attribute {term})
   -> seed
   -> Element lock payload
@@ -126,7 +126,7 @@ data {term}
 
 {x}_
   :: forall seed lock payload
-   . Plant seed (Event (Event (Child lock payload)))
+   . Plant seed (Domable lock payload)
   => seed
   -> Element lock payload
 {x}_ = {x} empty
