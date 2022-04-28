@@ -20,6 +20,7 @@ example counter = bus \push event -> plant $ D.div_
       ( keepLatest $
           ( \i -> oneOfMap bang
               [ D.Style := bgColor i
+              , D.Xtype := "checkbox"
               , D.Checked := show (if mod i 2 == 0 then true else false)
               ]
           ) <$> counter
