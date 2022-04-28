@@ -178,12 +178,18 @@ data {term} = {term}''')
             term = 'On'+x.capitalize()
             print_(f'''module Deku.DOM.Attr.{term} where
 
-import Deku.Attribute (class Attr, Cb, cb', unsafeAttribute)
+import Prelude
+import Effect (Effect)
+import Deku.Attribute (class Attr, Cb(..), cb', cb, unsafeAttribute)
 
 data {term} = {term}''')
             term = 'On'+x.capitalize()
             print_(f'''instance Attr anything {term} Cb where
   attr {term} value = unsafeAttribute {{ key: "{x}", value: cb' value }}''')
+            print_(f'''instance Attr anything {term} (Effect Unit) where
+  attr {term} value = unsafeAttribute {{ key: "{x}", value: cb' (Cb (const (value $> true))) }}''')
+            print_(f'''instance Attr anything {term} (Effect Boolean) where
+  attr {term} value = unsafeAttribute {{ key: "{x}", value: cb' (Cb (const value)) }}''')
     else:
       raise ValueError('wat' + str(CODEGEN_TARGET) )
     return '\n'.join(o)
