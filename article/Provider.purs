@@ -21,6 +21,8 @@ import FRP.Event.VBus (V, vbus)
 import Record (union)
 import Type.Proxy (Proxy(..))
 
+-- in a normal application, tokenState and getToken would be
+-- provided by a third-party framework like auth0
 tokenState :: Effect TokenState
 tokenState = do
   rn <- Random.random
@@ -30,6 +32,9 @@ tokenState = do
       | rn < 0.75 = map Refreshed Random.random
       | otherwise = pure Invalid
   o
+
+getToken :: Effect Number
+getToken = Random.random
 
 data TokenState = Valid | Refreshed Number | Invalid
 
@@ -129,8 +134,8 @@ unauthorized = do
   { token1, token2 } <- ask
   pure $ D.button
     ( bang $ D.OnClick := do
-        Random.random >>= token1
-        Random.random >>= token2
+        getToken >>= token1
+        getToken >>= token2
     )
     (text_ "Log in")
 
