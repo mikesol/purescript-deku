@@ -19,15 +19,10 @@ random = behavior \e ->
     Random.random >>= k <<< f
 
 example counter = D.div_
-  [ text_ "Here are some random numbers"
+  [ text_ "Here are some random numbers: "
   , text (show <$> sample_ (Tuple <$> random <*> random) counter)
   ]
 
 main :: Effect Unit
 main = runInBody1
-  ( memoize
-      ( (fold (const (add 1)) (interval 400) 0 <|> bang 0)
-      )
-      (plant <<< example)
-
-  )
+  (memoize (interval 400) (plant <<< example))
