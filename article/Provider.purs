@@ -21,8 +21,8 @@ import FRP.Event.VBus (V, vbus)
 import Record (union)
 import Type.Proxy (Proxy(..))
 
-tokenState :: Number -> Effect TokenState
-tokenState n = do
+tokenState :: Effect TokenState
+tokenState = do
   rn <- Random.random
   let
     o
@@ -63,11 +63,11 @@ cell2 = do
   t1 <- asks _.token1
   pure (D.td_ $ text (("Token 1: " <> _) <<< show <$> t1))
 
-cell3 :: forall l p. { push1 :: (Event (Effect Unit)) | _ } -> Element l p
+cell3 :: forall l p. { push1 :: Effect Unit | _ } -> Element l p
 cell3 = do
   { push1 } <- ask
   pure
-    ( D.td_ $ D.button (attr D.OnClick <$> push1)
+    ( D.td_ $ D.button (bang (D.OnClick := push1))
         (text_ "Do something needing token 1")
     )
 
@@ -76,11 +76,11 @@ cell4 = do
   t2 <- asks _.token2
   pure (D.td_ $ text (("Token 2: " <> _) <<< show <$> t2))
 
-cell5 :: forall l p. { push2 :: (Event (Effect Unit)) | _ } -> Element l p
+cell5 :: forall l p. { push2 :: Effect Unit | _ } -> Element l p
 cell5 = do
   { push2 } <- ask
   pure
-    ( D.td_ $ D.button (attr D.OnClick <$> push2)
+    ( D.td_ $ D.button (bang (D.OnClick := push2))
         (text_ "Do something needing token 2")
     )
 
@@ -137,9 +137,9 @@ unauthorized = do
 type Tokens = V (token1 :: Maybe Number, token2 :: Maybe Number)
 
 keepRefreshOrInvalidate
-  :: Event Number -> (Maybe Number -> Effect Unit) -> Event (Effect Unit)
-keepRefreshOrInvalidate event push = event <#> \n -> do
-  tk <- tokenState n
+  :: (Maybe Number -> Effect Unit) -> Effect Unit
+keepRefreshOrInvalidate push = do
+  tk <- tokenState
   case tk of
     Valid -> mempty
     Refreshed i -> push $ Just i
@@ -155,8 +155,8 @@ main = runInBody1
         Just t1', Just t2' -> do
           let token1 = compact event.token1 <|> bang t1'
           let token2 = compact event.token2 <|> bang t2'
-          let push1 = keepRefreshOrInvalidate token1 push.token1
-          let push2 = keepRefreshOrInvalidate token2 push.token2
+          let push1 = keepRefreshOrInvalidate push.token1
+          let push2 = keepRefreshOrInvalidate push.token2
           authorized { token1, token2, push1, push2 }
         _, _ -> unauthorized
           { token1: lcmap Just push.token1, token2: lcmap Just push.token2 }
