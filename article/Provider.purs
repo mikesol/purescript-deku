@@ -76,9 +76,9 @@ cell4 = do
   t2 <- asks _.token2
   pure (D.td_ $ text (("Token 2: " <> _) <<< show <$> t2))
 
-cell5 :: forall l p. { push2 :: Effect Unit | _ } -> Element l p
+cell5 :: forall l p. Effect Unit -> Element l p
 cell5 = do
-  { push2 } <- ask
+  push2 <- ask
   pure
     ( D.td_ $ D.button (bang (D.OnClick := push2))
         (text_ "Do something needing token 2")
@@ -102,7 +102,7 @@ authorized = do
   c2 <- cell2
   c3 <- cell3
   c4 <- cell4
-  c5 <- cell5
+  c5 <- lcmap _.push2 cell5
   incTok <- distribute incrementToken
   pure $ D.div_
     [ topMatter
