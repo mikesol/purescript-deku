@@ -3,10 +3,11 @@ module Deku.Pursx where
 import Prelude
 
 import Control.Alt ((<|>))
+import Data.Reflectable (class Reflectable, reflectType)
 import Control.Plus (empty)
+import Data.Symbol (class IsSymbol)
 import Data.Profunctor (lcmap)
-import Data.Symbol (class IsSymbol, reflectSymbol)
-import Deku.Attribute (Attribute, unsafeUnAttribute)
+import Deku.Attribute (Attribute, AttributeValue(..), unsafeUnAttribute)
 import Deku.Control (class Plant, plant)
 import Deku.Core (DOMInterpret(..), Element(..), Child, Domable)
 import Deku.DOM (class TagToDeku)
@@ -3808,15 +3809,15 @@ class
   PursxToElement lock payload (rl :: RL.RowList Type) (r :: Row Type)
   | rl -> lock payload r where
   pursxToElement
-    :: forall proxy
-     . String
-    -> proxy rl
+    :: String
+    -> Proxy rl
     -> { | r }
     -> { cache :: Object.Object Boolean, element :: Element lock payload }
 
 instance pursxToElementConsInsert ::
   ( Row.Cons key (PursxElement lock payload) r' r
   , PursxToElement lock payload rest r
+  , Reflectable key String
   , IsSymbol key
   ) =>
   PursxToElement lock payload (RL.Cons key (PursxElement lock payload) rest) r where
@@ -3824,9 +3825,9 @@ instance pursxToElementConsInsert ::
     let
       { cache, element } = pursxToElement pxScope (Proxy :: Proxy rest) r
     in
-      { cache: Object.insert (reflectSymbol pxk) false cache
+      { cache: Object.insert (reflectType pxk) false cache
       , element: Element \info di ->
-          __internalDekuFlatten (reflectSymbol pxk <> pxScope) di pxe
+          __internalDekuFlatten (reflectType pxk <> pxScope) di pxe
             <|> (let Element y = element in y) info di
       }
     where
@@ -3836,6 +3837,7 @@ instance pursxToElementConsInsert ::
 else instance pursxToElementConsAttr ::
   ( Row.Cons key (Event (Attribute deku)) r' r
   , PursxToElement lock payload rest r
+  , Reflectable key String
   , IsSymbol key
   ) =>
   PursxToElement lock payload (RL.Cons key (Event (Attribute deku)) rest) r where
@@ -3843,15 +3845,21 @@ else instance pursxToElementConsAttr ::
     let
       { cache, element } = pursxToElement pxScope (Proxy :: Proxy rest) r
     in
-      { cache: Object.insert (reflectSymbol pxk) true cache
-      , element: Element \parent di@(DOMInterpret { setAttribute }) ->
+      { cache: Object.insert (reflectType pxk) true cache
+      , element: Element \parent di@(DOMInterpret { setProp, setCb }) ->
           map
             ( lcmap unsafeUnAttribute
-                ( \{ key, value } -> setAttribute
-                    { id: ((reflectSymbol pxk) <> pxScope)
-                    , key
-                    , value
-                    }
+                ( \{ key, value } -> case value of
+                    Prop' p -> setProp
+                      { id: ((reflectType pxk) <> pxScope)
+                      , key
+                      , value: p
+                      }
+                    Cb' c -> setCb
+                      { id: ((reflectType pxk) <> pxScope)
+                      , key
+                      , value: c
+                      }
                 )
             )
             (get pxk r)
@@ -3865,34 +3873,34 @@ instance pursxToElementNil ::
   pursxToElement _ _ _ = { cache: Object.empty, element: Element \_ _ -> empty }
 
 psx
-  :: forall lock payload proxy (html :: Symbol)
-   . IsSymbol html
+  :: forall lock payload (html :: Symbol)
+   . Reflectable html String
   => PXStart lock payload "~" " " html ()
   => PursxToElement lock payload RL.Nil ()
-  => proxy html
+  => Proxy html
   -> Element lock payload
 psx px = makePursx px {}
 
 makePursx
-  :: forall lock payload proxy (html :: Symbol) r rl
-   . IsSymbol html
+  :: forall lock payload (html :: Symbol) r rl
+   . Reflectable html String
   => PXStart lock payload "~" " " html r
   => RL.RowToList r rl
   => PursxToElement lock payload rl r
-  => proxy html
+  => Proxy html
   -> { | r }
   -> Element lock payload
 makePursx = makePursx' (Proxy :: _ "~")
 
 makePursx'
-  :: forall lock payload verb proxyA proxyB (html :: Symbol) r rl
-   . IsSymbol html
-  => IsSymbol verb
+  :: forall lock payload verb (html :: Symbol) r rl
+   . Reflectable html String
+  => Reflectable verb String
   => PXStart lock payload verb " " html r
   => RL.RowToList r rl
   => PursxToElement lock payload rl r
-  => proxyA verb
-  -> proxyB html
+  => Proxy verb
+  -> Proxy html
   -> { | r }
   -> Element lock payload
 makePursx' verb html r = Element go
@@ -3918,8 +3926,8 @@ makePursx' verb html r = Element go
                   , cache
                   , scope: pxScope
                   , dkScope: scope
-                  , html: reflectSymbol html
-                  , verb: reflectSymbol verb
+                  , html: reflectType html
+                  , verb: reflectType verb
                   }
             ) <|> element z di
           )

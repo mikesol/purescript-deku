@@ -7,7 +7,6 @@ import Prelude
 import Data.Either (Either(..))
 import Data.Foldable (fold, oneOfMap, traverse_)
 import Data.Maybe (Maybe(..))
-import Data.Variant (match)
 import Deku.Core (Child(..), DOMInterpret(..), Domable(..), DynamicChildren(..), Element(..), EventfulElement(..), FixedChildren(..))
 import Effect.AVar (tryPut)
 import Effect.AVar as AVar
@@ -26,12 +25,11 @@ __internalDekuFlatten
   -> Event payload
 __internalDekuFlatten
   parent
-  di@(DOMInterpret { ids, disconnectElement, sendToTop })
-  (Domable children') = children' # match
-  { fixedChildren: \(FixedChildren f) -> oneOfMap element f
-  , eventfulElement: \(EventfulElement e) -> keepLatest (map (__internalDekuFlatten parent di) e)
-  , element
-  , dynamicChildren: \(DynamicChildren children) ->
+  di@(DOMInterpret { ids, disconnectElement, sendToTop }) = case _ of
+     FixedChildren' (FixedChildren f) -> oneOfMap element f
+     EventfulElement' (EventfulElement e) -> keepLatest (map (__internalDekuFlatten parent di) e)
+     Element' e -> element e
+     DynamicChildren' (DynamicChildren children) ->
       makeEvent \k -> do
         cancelInner <- Ref.new Object.empty
         cancelOuter <-
@@ -102,7 +100,6 @@ __internalDekuFlatten
         pure do
           Ref.read cancelInner >>= fold
           cancelOuter
-  }
   where
   element (Element e) = e
       { parent

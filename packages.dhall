@@ -105,45 +105,11 @@ in  upstream
 -------------------------------
 -}
 let upstream =
-      https://github.com/purescript/package-sets/releases/download/psc-0.14.4-20211030/packages.dhall sha256:5cd7c5696feea3d3f84505d311348b9e90a76c4ce3684930a0ff29606d2d816c
-
-let overrides =
-      { arraybuffer =
-        { dependencies =
-          [ "arraybuffer-types"
-          , "arrays"
-          , "effect"
-          , "float32"
-          , "functions"
-          , "gen"
-          , "maybe"
-          , "nullable"
-          , "prelude"
-          , "tailrec"
-          , "uint"
-          , "unfoldable"
-          ]
-        , repo =
-            "https://github.com/purescript-contrib/purescript-arraybuffer.git"
-        , version = "v12.0.0"
-        }
-      }
+      https://github.com/purescript/package-sets/releases/download/psc-0.15.0-20220429/packages.dhall
+        sha256:03c682bff56fc8f9d8c495ffcc6f524cbd3c89fe04778f965265c08757de8c9d
 
 let additions =
-      { typelevel-peano =
-        { dependencies =
-          [ "arrays"
-          , "console"
-          , "effect"
-          , "prelude"
-          , "psci-support"
-          , "typelevel-prelude"
-          , "unsafe-coerce"
-          ]
-        , repo = "https://github.com/csicar/purescript-typelevel-peano.git"
-        , version = "v1.0.1"
-        }
-      , event =
+      { event =
         { dependencies =
           [ "console"
           , "effect"
@@ -154,7 +120,7 @@ let additions =
           , "now"
           ]
         , repo = "https://github.com/mikesol/purescript-event.git"
-        , version = "v1.6.2"
+        , version = "v1.6.3"
         }
       , everythings-better-with-variants =
         { dependencies =
@@ -168,19 +134,6 @@ let additions =
           ]
         , repo = "https://github.com/mikesol/purescript-everythings-better-with-variants.git"
         , version = "v0.0.0"
-        }
-      , typelevel-eval =
-        { dependencies =
-          [ "effect"
-          , "leibniz"
-          , "prelude"
-          , "psci-support"
-          , "tuples"
-          , "typelevel-prelude"
-          , "unsafe-coerce"
-          ]
-        , repo = "https://github.com/mikesol/purescript-typelevel-eval.git"
-        , version = "mikesol"
         }
       , behaviors =
         { dependencies =
@@ -197,26 +150,12 @@ let additions =
         , repo = "https://github.com/mikesol/purescript-behaviors.git"
         , version = "v8.2.0"
         }
-      , row-options =
-        { dependencies =
-          [ "homogeneous"
-          , "heterogeneous"
-          ]
-        , repo = "https://github.com/mikesol/purescript-row-options.git"
-        , version = "v0.0.2"
-        }
       , convertable-options =
         { dependencies = [ "console", "effect", "maybe", "record" ]
         , repo =
             "https://github.com/natefaubion/purescript-convertable-options.git"
         , version = "v1.0.0"
-        }, deku-toplevel =
-        { dependencies =
-          [  "effect"
-          ]
-        , repo = "https://github.com/mikesol/purescript-deku-toplevel.git"
-        , version = "v0.1.0.0"
         }
       }
 
-in  upstream // overrides // additions
+in  upstream // additions

@@ -34,8 +34,12 @@ foreign import setText_
   :: Core.SetText
   -> FFIDOMSnapshot
   -> Effect Unit
-foreign import setAttribute_
-  :: Core.SetAttribute -> FFIDOMSnapshot -> Effect Unit
+
+foreign import setProp_
+  :: Core.SetProp -> FFIDOMSnapshot -> Effect Unit
+
+foreign import setCb_
+  :: Core.SetCb -> FFIDOMSnapshot -> Effect Unit
 
 foreign import makePursx_
   :: Core.MakePursx
@@ -55,7 +59,8 @@ effectfulDOMInterpret = Core.DOMInterpret
   , makeRoot: makeRoot_
   , makeText: makeText_
   , makePursx: makePursx_
-  , setAttribute: setAttribute_
+  , setProp: setProp_
+  , setCb: setCb_
   , setText: setText_
   , sendToTop: sendToTop_
   , makeNoop: makeNoop_

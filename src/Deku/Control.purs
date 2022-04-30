@@ -23,9 +23,8 @@ import Data.Foldable (oneOf)
 import Data.FunctorWithIndex (mapWithIndex)
 import Data.Tuple (snd)
 import Data.Tuple.Nested (type (/\), (/\))
-import Data.Variant (inj)
 import Data.Vec (toArray, Vec)
-import Deku.Attribute (Attribute, unsafeUnAttribute)
+import Deku.Attribute (Attribute, AttributeValue(..), unsafeUnAttribute)
 import Deku.Core (Child(..), DOMInterpret(..), Domable(..), DynamicChildren(..), Element(..), EventfulElement(..), FixedChildren(..))
 import Deku.Internal (__internalDekuFlatten)
 import Effect (Effect, foreachE)
@@ -35,7 +34,6 @@ import Effect.Exception (throwException)
 import FRP.Event (Event, bang, keepLatest, makeEvent, mapAccum, memoize, subscribe)
 import Safe.Coerce (coerce)
 import Type.Equality (class TypeEquals, proof)
-import Type.Proxy (Proxy(..))
 import Unsafe.Coerce (unsafeCoerce)
 import Web.DOM as Web.DOM
 
@@ -70,8 +68,10 @@ unsafeSetAttribute
   -> String
   -> Event (Attribute element)
   -> Event payload
-unsafeSetAttribute (DOMInterpret { setAttribute }) id atts = map
-  ( setAttribute <<< (\{ key, value } -> { id, key, value }) <<<
+unsafeSetAttribute (DOMInterpret { setProp, setCb }) id atts = map
+  ( (\{key, value } -> case value of
+     Prop' s -> setProp { id, key, value:s }
+     Cb' c -> setCb { id, key, value:c }) <<<
       unsafeUnAttribute
   )
   (atts)
@@ -195,7 +195,7 @@ instance
   ) =>
   Plant (Event (Event (Child locki payloadi)))
     (Domable locko payloado) where
-  plant i = Domable $ inj (Proxy :: _ "dynamicChildren")
+  plant i = DynamicChildren'
     (DynamicChildren (proof (coerce i)))
 
 instance
@@ -212,7 +212,7 @@ instance
   ) =>
   Plant (Event (Domable locki payloadi))
     (Domable locko payloado) where
-  plant i = Domable $ inj (Proxy :: _ "eventfulElement")
+  plant i = EventfulElement'
     (EventfulElement (map deleteMeASAP i))
 
 instance
@@ -220,7 +220,7 @@ instance
   , TypeEquals payloadi payloado
   ) =>
   Plant (Element locki payloadi) (Domable locko payloado) where
-  plant i = Domable $ inj (Proxy :: _ "element") (proof (coerce i))
+  plant i = Element' (proof (coerce i))
 
 instance
   ( TypeEquals locki locko
@@ -228,7 +228,7 @@ instance
   ) =>
   Plant (Array (Element locki payloadi))
     (Domable locko payloado) where
-  plant i = Domable $ inj (Proxy :: _ "fixedChildren")
+  plant i = FixedChildren'
     (FixedChildren (proof (coerce i)))
 
 text

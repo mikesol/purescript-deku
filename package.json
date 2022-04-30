@@ -1,6 +1,6 @@
 {
 	"name": "purescript-deku",
-	"version": "0.3.4",
+	"version": "0.3.6",
 	"description": "A friendly tree-like structure in the browser.",
 	"scripts": {
 		"postinstall": "node node_modules/puppeteer/install.js",
@@ -18,16 +18,17 @@
 	"author": "",
 	"license": "ISC",
 	"devDependencies": {
-		"netlify-cli": "^8.0.1",
+		"esbuild": "^0.14.38",
 		"filter-console": "^0.1.1",
 		"headless-devtools": "^2.0.1",
+		"netlify-cli": "^8.0.1",
 		"psc-package": "^4.0.1",
 		"pulp": "^15.0.0",
 		"puppeteer": "^5.2.0",
-		"purescript": "^0.14.4",
-		"spago": "^0.20.3",
-		"tracealyzer": "^0.10.3",
+		"purescript": "^0.15.0",
 		"purs-tidy": "^0.4.6",
-		"test": "^0.6.0"
+		"spago": "^0.20.8",
+		"test": "^0.6.0",
+		"tracealyzer": "^0.10.3"
 	}
 }

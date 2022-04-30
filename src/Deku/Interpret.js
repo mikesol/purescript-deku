@@ -13,20 +13,23 @@ var connectXToY_ = function (x) {
 	return function (y) {
 		return function (state) {
 			return function () {
-				if (y === "@portal@") { return }
+				if (y === "@portal@") {
+					return;
+				}
 				state.units[y].main.appendChild(state.units[x].main);
 			};
 		};
 	};
 };
 
-exports.renderDOM = function (arrayToApply) {
+export function renderDOM(arrayToApply) {
 	return function () {
 		for (var i = 0; i < arrayToApply.length; i++) {
 			arrayToApply[i]();
 		}
 	};
-};
+}
+
 var makeElement = function (a) {
 	return function (state) {
 		return function () {
@@ -48,8 +51,9 @@ var makeElement = function (a) {
 		};
 	};
 };
-exports.makeElement = makeElement;
-exports.makeText_ = function (a) {
+export { makeElement };
+
+export function makeText_(a) {
 	return function (state) {
 		return function () {
 			var ptr = a.id;
@@ -60,62 +64,71 @@ exports.makeText_ = function (a) {
 			state.units[ptr] = {
 				main: document.createTextNode(""),
 				parent: a.parent,
-				scope: a.scope
+				scope: a.scope,
 			};
 			connectXToY_(ptr)(a.parent)(state)();
 		};
 	};
-};
-exports.makeFFIDOMSnapshot = function () {
+}
+
+export function makeFFIDOMSnapshot() {
 	return {
 		units: {},
 		scopes: {},
 		unqidfr: makeid(10),
 	};
-};
-exports.setAttribute_ = function (a) {
+}
+
+export function setProp_(a) {
 	return function (state) {
 		return function () {
 			var ptr = a.id;
-			var avv = a.value.value;
-			if (a.value.type === "cb") {
-				if (a.key === "@canvas-hack@") {
-					const cxt = state.units[ptr].main.getContext("2d");
-					avv(cxt)();
-				} else {
-					if (state.units[ptr].listeners[a.key]) {
-						state.units[ptr].main.removeEventListener(
-							a.key,
-							state.units[ptr].listeners[a.key]
-						);
-					}
-					var el = (e) => avv(e)();
-					state.units[ptr].main.addEventListener(a.key, el);
-					state.units[ptr].listeners[a.key] = el;
-				}
+			var avv = a.value;
+			if (state.units[ptr].main.tagName === "INPUT" && a.key === "value") {
+				state.units[ptr].main.value = avv;
+			} else if (
+				state.units[ptr].main.tagName === "INPUT" &&
+				a.key === "checked"
+			) {
+				state.units[ptr].main.checked = avv === "true";
 			} else {
-				if (state.units[ptr].main.tagName === "INPUT" && a.key === "value") {
-					state.units[ptr].main.value = avv;
-				} else if (
-					state.units[ptr].main.tagName === "INPUT" &&
-					a.key === "checked"
-				) {
-					state.units[ptr].main.checked = avv === "true";
-				} else {
-					state.units[ptr].main.setAttribute(a.key, avv);
-				}
+				state.units[ptr].main.setAttribute(a.key, avv);
 			}
 		};
 	};
-};
-exports.setText_ = function (a) {
+}
+
+export function setCb_(a) {
+	return function (state) {
+		return function () {
+			var ptr = a.id;
+			var avv = a.value;
+			if (a.key === "@canvas-hack@") {
+				const cxt = state.units[ptr].main.getContext("2d");
+				avv(cxt)();
+			} else {
+				if (state.units[ptr].listeners[a.key]) {
+					state.units[ptr].main.removeEventListener(
+						a.key,
+						state.units[ptr].listeners[a.key]
+					);
+				}
+				var el = (e) => avv(e)();
+				state.units[ptr].main.addEventListener(a.key, el);
+				state.units[ptr].listeners[a.key] = el;
+			}
+		};
+	};
+}
+
+export function setText_(a) {
 	return function (state) {
 		return function () {
 			var ptr = a.id;
 			state.units[ptr].main.nodeValue = a.text; //.replace(/\n/g, "<br>");
 		};
 	};
-};
+}
 
 var makePursx_ = function (a) {
 	return function (state) {
@@ -182,8 +195,9 @@ var makePursx_ = function (a) {
 		};
 	};
 };
-exports.makePursx_ = makePursx_;
-exports.makeRoot_ = function (a) {
+export { makePursx_ };
+
+export function makeRoot_(a) {
 	return function (state) {
 		return function () {
 			var ptr = a.id;
@@ -192,8 +206,9 @@ exports.makeRoot_ = function (a) {
 			};
 		};
 	};
-};
-exports.makeNoop_ = function (a) {
+}
+
+export function makeNoop_(a) {
 	return function (state) {
 		return function () {
 			var ptr = a.id;
@@ -202,8 +217,9 @@ exports.makeNoop_ = function (a) {
 			};
 		};
 	};
-};
-exports.giveNewParent_ = function (a) {
+}
+
+export function giveNewParent_(a) {
 	return function (state) {
 		return function () {
 			var ptr = a.id;
@@ -212,8 +228,9 @@ exports.giveNewParent_ = function (a) {
 			state.units[parent].main.prepend(state.units[ptr].main);
 		};
 	};
-};
-exports.disconnectElement_ = function (a) {
+}
+
+export function disconnectElement_(a) {
 	return function (state) {
 		return function () {
 			var ptr = a.id;
@@ -221,8 +238,8 @@ exports.disconnectElement_ = function (a) {
 				return;
 			}
 			if (
-				state.units[ptr].containingScope && state.units[ptr].containingScope !==
-				a.scope
+				state.units[ptr].containingScope &&
+				state.units[ptr].containingScope !== a.scope
 			) {
 				return;
 			}
@@ -230,19 +247,21 @@ exports.disconnectElement_ = function (a) {
 			state.units[ptr].main.remove();
 		};
 	};
-};
-exports.deleteFromCache_ = function (a) {
+}
+
+export function deleteFromCache_(a) {
 	return function (state) {
 		return function () {
 			delete state.units[a.id];
 		};
 	};
-};
-exports.sendToTop_ = function (a) {
+}
+
+export function sendToTop_(a) {
 	return function (state) {
 		return function () {
 			var ptr = a.id;
 			state.units[ptr].main.parentNode.prepend(state.units[ptr].main);
 		};
 	};
-};
+}

@@ -22,7 +22,6 @@
   , "tuples"
   , "type-equality"
   , "unsafe-coerce"
-  , "variant"
   , "web-dom"
   , "web-events"
   , "web-html"

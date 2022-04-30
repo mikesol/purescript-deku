@@ -6,6 +6,7 @@ in      conf
               conf.dependencies
             # [ "web-html"
               , "filterable"
+              , "affjax-web"
               , "affjax"
               , "either"
               , "integers"

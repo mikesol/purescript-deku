@@ -2,8 +2,7 @@ module Deku.Core where
 
 import Prelude
 
-import Data.Variant (Variant)
-import Deku.Attribute (AttributeValue)
+import Deku.Attribute (AttributeValue, Cb)
 import Effect (Effect)
 import FRP.Event (Event)
 import Foreign.Object (Object)
@@ -29,14 +28,10 @@ newtype Element (lock :: Type) payload = Element
     -> Event payload
   )
 
-newtype Domable lock payload = Domable
-  ( Variant
-      ( dynamicChildren :: DynamicChildren lock payload
-      , fixedChildren :: FixedChildren lock payload
-      , eventfulElement :: EventfulElement lock payload
-      , element :: Element lock payload
-      )
-  )
+data Domable lock payload = DynamicChildren' (DynamicChildren lock payload)
+      | FixedChildren' (FixedChildren lock payload)
+      | EventfulElement' (EventfulElement lock payload)
+      | Element' (Element lock payload)
 
 type MakeElement =
   { id :: String
@@ -67,10 +62,15 @@ type MakeText =
 type DeleteFromCache = { id :: String }
 type MakeRoot = { id :: String, root :: Web.DOM.Element }
 type SetText = { id :: String, text :: String }
-type SetAttribute =
+type SetProp =
   { id :: String
   , key :: String
-  , value :: AttributeValue
+  , value :: String
+  }
+type SetCb =
+  { id :: String
+  , key :: String
+  , value :: Cb
   }
 type MakePursx =
   { id :: String
@@ -97,6 +97,7 @@ newtype DOMInterpret payload = DOMInterpret
   , disconnectElement :: DisconnectElement -> payload
   , deleteFromCache :: DeleteFromCache -> payload
   , sendToTop :: SendToTop -> payload
-  , setAttribute :: SetAttribute -> payload
+  , setProp :: SetProp -> payload
+  , setCb :: SetCb -> payload
   , setText :: SetText -> payload
   }

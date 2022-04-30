@@ -1,9 +1,17 @@
-exports.mutAr = (a) =>  () => {
-  return a.slice();
+export function mutAr(a) {
+  return () => {
+    return a.slice();
+  };
 }
-exports.unsafeUpdateMutAr = (i) =>  (v) => (a)  => () => {
-  a[i] = v;
+
+export function unsafeUpdateMutAr(i) {
+  return (v) => (a)  => () => {
+    a[i] = v;
+  };
 }
-exports.readAr = (a) => () => {
-	return a.slice();
-};
+
+export function readAr(a) {
+  return () => {
+      return a.slice();
+  };
+}

@@ -1,5 +1,5 @@
 module Deku.Attribute
-  ( AttributeValue
+  ( AttributeValue(..)
   , Attribute
   , class Attr
   , attr
@@ -16,10 +16,8 @@ module Deku.Attribute
 import Prelude
 
 import Data.Newtype (class Newtype)
-import Data.Variant (Variant, inj, match)
 import Effect (Effect)
 import Safe.Coerce (coerce)
-import Type.Proxy (Proxy(..))
 import Web.Event.Internal.Types (Event)
 
 newtype Cb = Cb (Event -> Effect Boolean)
@@ -35,17 +33,16 @@ cb :: (Event -> Effect Unit) -> Cb
 cb = Cb <<< ((map <<< map) (const true))
 
 prop' :: String -> AttributeValue
-prop' = inj (Proxy :: _ "prop")
+prop' = Prop'
 
 cb' :: Cb -> AttributeValue
-cb' = inj (Proxy :: _ "cb")
+cb' = Cb'
 
-type AttributeValue = Variant (prop :: String, cb :: Cb)
+data AttributeValue = Prop' String | Cb' Cb
 newtype Attribute (e :: Type) = Attribute
   { key :: String
   , value :: AttributeValue
   }
-
 unsafeUnAttribute
   :: forall e. Attribute e -> { key :: String, value :: AttributeValue }
 unsafeUnAttribute = coerce
@@ -57,13 +54,6 @@ unsafeUnAttributeArray = coerce
 unsafeAttribute
   :: forall e. { key :: String, value :: AttributeValue } -> Attribute e
 unsafeAttribute = Attribute
-
-instance showAttribute :: Show (Attribute x) where
-  show (Attribute { key, value }) =
-    "(" <> key <> "," <> match { prop: \a -> a, cb: \_ -> "(callback)" } value
-      <> ")"
-derive instance eqAttribute :: Eq (Attribute x)
-derive instance ordAttribute :: Ord (Attribute x)
 
 class Attr e a b where
   attr :: a -> b -> Attribute e
