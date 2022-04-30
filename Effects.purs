@@ -2,7 +2,7 @@ module Deku.Example.Docs.Effects where
 
 import Prelude
 
-import Affjax as AX
+import Affjax.Web as AX
 import Affjax.ResponseFormat as ResponseFormat
 import Control.Alt ((<|>))
 import Data.Argonaut.Core (stringifyWithIndent)

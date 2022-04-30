@@ -2,9 +2,10 @@ module Deku.Examples.Docs.Examples.Effects where
 
 import Prelude
 
-import Affjax as AX
+import Affjax.Web as AX
 import Affjax.ResponseFormat as ResponseFormat
 import Control.Alt ((<|>))
+import Affjax.Web as AXW
 import Data.Argonaut.Core (stringifyWithIndent)
 import Data.Either (Either(..))
 import Data.Filterable (compact, filterMap)

@@ -1,3 +1,3 @@
-exports.scrollToTop_ = function () {
+export function scrollToTop_() {
 	window.scrollTo(0, 0);
-};
+}
