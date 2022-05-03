@@ -6983,9 +6983,8 @@ function setCb_(a2) {
     return function() {
       var ptr = a2.id;
       var avv = a2.value;
-      if (a2.key === "@canvas-hack@") {
-        const cxt = state3.units[ptr].main.getContext("2d");
-        avv(cxt)();
+      if (a2.key === "@self@") {
+        avv(state3.units[ptr].main)();
       } else {
         if (state3.units[ptr].listeners[a2.key]) {
           state3.units[ptr].main.removeEventListener(a2.key, state3.units[ptr].listeners[a2.key]);
