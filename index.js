@@ -2691,111 +2691,113 @@ var End = /* @__PURE__ */ function() {
   return End2;
 }();
 var __internalDekuFlatten = function(parent2) {
-  return function(v) {
-    var element = function(v1) {
-      return v1({
-        parent: parent2,
-        scope: "trivial",
-        raiseId: mempty(monoidFn(monoidEffect(monoidUnit)))
-      })(v);
-    };
-    return function(v1) {
-      if (v1 instanceof FixedChildren$prime) {
-        return oneOfMap(foldableArray)(plusEvent)(element)(v1.value0);
-      }
-      ;
-      if (v1 instanceof EventfulElement$prime) {
-        return keepLatest(eventIsEvent)(map(functorEvent)(__internalDekuFlatten(parent2)(v))(v1.value0));
-      }
-      ;
-      if (v1 instanceof Element$prime) {
-        return element(v1.value0);
-      }
-      ;
-      if (v1 instanceof DynamicChildren$prime) {
-        return makeEvent(function(k) {
-          return function __do3() {
-            var cancelInner = $$new(empty3)();
-            var cancelOuter = subscribe(v1.value0)(function(inner) {
-              return function __do4() {
-                var myUnsubId = v.ids();
-                var myUnsub = $$new(pure(applicativeEffect)(unit))();
-                var eltsUnsubId = v.ids();
-                var eltsUnsub = $$new(pure(applicativeEffect)(unit))();
-                var myId = $$new(Nothing.value)();
-                var myImmediateCancellation = $$new(pure(applicativeEffect)(unit))();
-                var myScope = v.ids();
-                var stageRef = $$new(Begin.value)();
-                var c0 = subscribe(inner)(function(kid$prime) {
-                  return function __do5() {
-                    var stage = read(stageRef)();
-                    if (kid$prime instanceof SendToTop && stage instanceof Middle) {
-                      return bind(bindEffect)(read(myId))(traverse_(applicativeEffect)(foldableMaybe)(function($21) {
-                        return k(v.sendToTop(function(v2) {
-                          return {
-                            id: v2
-                          };
-                        }($21)));
-                      }))();
-                    }
-                    ;
-                    if (kid$prime instanceof Remove && stage instanceof Middle) {
-                      write(End.value)(stageRef)();
-                      var mic = applySecond(applyEffect)(applySecond(applyEffect)(applySecond(applyEffect)(applySecond(applyEffect)(bind(bindEffect)(read(myId))(traverse_(applicativeEffect)(foldableMaybe)(function(old) {
-                        return k(v.disconnectElement({
-                          id: old,
+  return function(scope2) {
+    return function(v) {
+      var element = function(v1) {
+        return v1({
+          parent: parent2,
+          scope: scope2,
+          raiseId: mempty(monoidFn(monoidEffect(monoidUnit)))
+        })(v);
+      };
+      return function(v1) {
+        if (v1 instanceof FixedChildren$prime) {
+          return oneOfMap(foldableArray)(plusEvent)(element)(v1.value0);
+        }
+        ;
+        if (v1 instanceof EventfulElement$prime) {
+          return keepLatest(eventIsEvent)(map(functorEvent)(__internalDekuFlatten(parent2)(scope2)(v))(v1.value0));
+        }
+        ;
+        if (v1 instanceof Element$prime) {
+          return element(v1.value0);
+        }
+        ;
+        if (v1 instanceof DynamicChildren$prime) {
+          return makeEvent(function(k) {
+            return function __do3() {
+              var cancelInner = $$new(empty3)();
+              var cancelOuter = subscribe(v1.value0)(function(inner) {
+                return function __do4() {
+                  var myUnsubId = v.ids();
+                  var myUnsub = $$new(pure(applicativeEffect)(unit))();
+                  var eltsUnsubId = v.ids();
+                  var eltsUnsub = $$new(pure(applicativeEffect)(unit))();
+                  var myId = $$new(Nothing.value)();
+                  var myImmediateCancellation = $$new(pure(applicativeEffect)(unit))();
+                  var myScope = v.ids();
+                  var stageRef = $$new(Begin.value)();
+                  var c0 = subscribe(inner)(function(kid$prime) {
+                    return function __do5() {
+                      var stage = read(stageRef)();
+                      if (kid$prime instanceof SendToTop && stage instanceof Middle) {
+                        return bind(bindEffect)(read(myId))(traverse_(applicativeEffect)(foldableMaybe)(function($22) {
+                          return k(v.sendToTop(function(v2) {
+                            return {
+                              id: v2
+                            };
+                          }($22)));
+                        }))();
+                      }
+                      ;
+                      if (kid$prime instanceof Remove && stage instanceof Middle) {
+                        write(End.value)(stageRef)();
+                        var mic = applySecond(applyEffect)(applySecond(applyEffect)(applySecond(applyEffect)(applySecond(applyEffect)(bind(bindEffect)(read(myId))(traverse_(applicativeEffect)(foldableMaybe)(function(old) {
+                          return k(v.disconnectElement({
+                            id: old,
+                            parent: parent2,
+                            scope: myScope
+                          }));
+                        })))(join(bindEffect)(read(myUnsub))))(join(bindEffect)(read(eltsUnsub))))(modify_($$delete(myUnsubId))(cancelInner)))(modify_($$delete(eltsUnsubId))(cancelInner));
+                        return applySecond(applyEffect)(write(mic)(myImmediateCancellation))(mic)();
+                      }
+                      ;
+                      if (kid$prime instanceof Insert && stage instanceof Begin) {
+                        write(Middle.value)(stageRef)();
+                        var av = empty5();
+                        var c1 = subscribe(kid$prime.value0({
                           parent: parent2,
-                          scope: myScope
-                        }));
-                      })))(join(bindEffect)(read(myUnsub))))(join(bindEffect)(read(eltsUnsub))))(modify_($$delete(myUnsubId))(cancelInner)))(modify_($$delete(eltsUnsubId))(cancelInner));
-                      return applySecond(applyEffect)(write(mic)(myImmediateCancellation))(mic)();
-                    }
-                    ;
-                    if (kid$prime instanceof Insert && stage instanceof Begin) {
-                      write(Middle.value)(stageRef)();
-                      var av = empty5();
-                      var c1 = subscribe(kid$prime.value0({
-                        parent: parent2,
-                        scope: myScope,
-                        raiseId: function(id3) {
-                          return $$void(functorEffect)(tryPut(id3)(av));
-                        }
-                      })(v))(k)();
-                      var cncl = take4(av)(function(q) {
-                        if (q instanceof Right) {
-                          return function __do6() {
-                            write(new Just(q.value0))(myId)();
-                            modify_(insert2(eltsUnsubId)(c1))(cancelInner)();
-                            return write(c1)(eltsUnsub)();
-                          };
-                        }
-                        ;
-                        if (q instanceof Left) {
-                          return throwException(q.value0);
-                        }
-                        ;
-                        throw new Error("Failed pattern match at Deku.Internal (line 85, column 48 - line 90, column 49): " + [q.constructor.name]);
-                      })();
-                      return cncl();
-                    }
-                    ;
-                    return unit;
-                  };
-                })();
-                write(c0)(myUnsub)();
-                modify_(insert2(myUnsubId)(c0))(cancelInner)();
-                return join(bindEffect)(read(myImmediateCancellation))();
+                          scope: myScope,
+                          raiseId: function(id3) {
+                            return $$void(functorEffect)(tryPut(id3)(av));
+                          }
+                        })(v))(k)();
+                        var cncl = take4(av)(function(q) {
+                          if (q instanceof Right) {
+                            return function __do6() {
+                              write(new Just(q.value0))(myId)();
+                              modify_(insert2(eltsUnsubId)(c1))(cancelInner)();
+                              return write(c1)(eltsUnsub)();
+                            };
+                          }
+                          ;
+                          if (q instanceof Left) {
+                            return throwException(q.value0);
+                          }
+                          ;
+                          throw new Error("Failed pattern match at Deku.Internal (line 87, column 48 - line 92, column 49): " + [q.constructor.name]);
+                        })();
+                        return cncl();
+                      }
+                      ;
+                      return unit;
+                    };
+                  })();
+                  write(c0)(myUnsub)();
+                  modify_(insert2(myUnsubId)(c0))(cancelInner)();
+                  return join(bindEffect)(read(myImmediateCancellation))();
+                };
+              })();
+              return function __do4() {
+                bind(bindEffect)(read(cancelInner))(fold(foldableObject)(monoidEffect(monoidUnit)))();
+                return cancelOuter();
               };
-            })();
-            return function __do4() {
-              bind(bindEffect)(read(cancelInner))(fold(foldableObject)(monoidEffect(monoidUnit)))();
-              return cancelOuter();
             };
-          };
-        });
-      }
-      ;
-      throw new Error("Failed pattern match at Deku.Internal (line 28, column 61 - line 102, column 22): " + [v1.constructor.name]);
+          });
+        }
+        ;
+        throw new Error("Failed pattern match at Deku.Internal (line 30, column 61 - line 104, column 22): " + [v1.constructor.name]);
+      };
     };
   };
 };
@@ -2939,7 +2941,7 @@ var elementify = function(tag) {
                 parent: v.parent,
                 scope: v.scope,
                 tag
-              })), unsafeSetAttribute(v1)(me)(atts)]))(__internalDekuFlatten(me)(v1)(children2)))(k))();
+              })), unsafeSetAttribute(v1)(me)(atts)]))(__internalDekuFlatten(me)(v.scope)(v1)(children2)))(k))();
             };
           });
         };
@@ -2993,7 +2995,7 @@ var internalPortal = function(isGlobal) {
                     };
                   };
                 })(idz);
-                var realized = __internalDekuFlatten(psr.parent)(v)(deleteMeASAP(refl)(refl)(closure(injectable)(function(v1) {
+                var realized = __internalDekuFlatten(psr.parent)(psr.scope)(v)(deleteMeASAP(refl)(refl)(closure(injectable)(function(v1) {
                   return v1;
                 })));
                 var u = subscribe(realized)(k)();
@@ -3057,7 +3059,7 @@ var deku = function(root) {
           return subscribe(alt(altEvent)(bang2(v.makeRoot({
             id: me,
             root
-          })))(__internalDekuFlatten(me)(v)(deleteMeASAP(refl)(refl)(children2))))(k)();
+          })))(__internalDekuFlatten(me)("rootScope")(v)(deleteMeASAP(refl)(refl)(children2))))(k)();
         };
       });
     };
@@ -3525,7 +3527,7 @@ var pursxToElementConsInsert = function() {
                   cache: insert2(reflectType(dictReflectable)($$Proxy.value))(false)(v2.cache),
                   element: function(info) {
                     return function(di) {
-                      return alt(altEvent)(__internalDekuFlatten(reflectType(dictReflectable)($$Proxy.value) + pxScope)(di)(v1))(v2.element(info)(di));
+                      return alt(altEvent)(__internalDekuFlatten(reflectType(dictReflectable)($$Proxy.value) + pxScope)(info.scope)(di)(v1))(v2.element(info)(di));
                     };
                   }
                 };
@@ -6897,15 +6899,6 @@ var pursx2 = function(dpage) {
 };
 
 // output/Deku.Interpret/foreign.js
-var makeid = function(length8) {
-  var result = "";
-  var characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-  var charactersLength = characters.length;
-  for (var i2 = 0; i2 < length8; i2++) {
-    result += characters.charAt(Math.floor(Math.random() * charactersLength));
-  }
-  return result;
-};
 var connectXToY_ = function(x) {
   return function(y) {
     return function(state3) {
@@ -6956,8 +6949,7 @@ function makeText_(a2) {
 function makeFFIDOMSnapshot() {
   return {
     units: {},
-    scopes: {},
-    unqidfr: makeid(10)
+    scopes: {}
   };
 }
 function setProp_(a2) {
