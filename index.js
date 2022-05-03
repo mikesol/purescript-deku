@@ -6932,9 +6932,6 @@ function makeElement_(a2) {
         scope: a2.scope,
         main: document.createElement(a2.tag)
       };
-      if (a2.parent === state3.terminus) {
-        state3.terminalPtrs.push(a2.id);
-      }
       connectXToY_(ptr)(a2.parent)(state3)();
     };
   };
@@ -7013,9 +7010,6 @@ var makePursx_ = function(a2) {
       var cache = a2.cache;
       var parent2 = a2.parent;
       var scope2 = a2.scope;
-      if (a2.parent === state3.terminus) {
-        state3.terminalPtrs.push(a2.id);
-      }
       var entries = Object.entries(cache);
       for (var i2 = 0; i2 < entries.length; i2++) {
         var key2 = entries[i2][0];
