@@ -6,7 +6,6 @@ module Deku.Attribute
   , (:=)
   , unsafeUnAttribute
   , unsafeAttribute
-  , unsafeUnAttributeArray
   , prop'
   , cb'
   , cb
@@ -46,10 +45,6 @@ newtype Attribute (e :: Type) = Attribute
 unsafeUnAttribute
   :: forall e. Attribute e -> { key :: String, value :: AttributeValue }
 unsafeUnAttribute = coerce
-
-unsafeUnAttributeArray
-  :: forall e. Array (Attribute e) -> Array { key :: String, value :: AttributeValue }
-unsafeUnAttributeArray = coerce
 
 unsafeAttribute
   :: forall e. { key :: String, value :: AttributeValue } -> Attribute e
