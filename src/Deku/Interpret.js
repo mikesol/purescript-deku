@@ -36,9 +36,6 @@ export function makeElement_ (a) {
 				scope: a.scope,
 				main: document.createElement(a.tag),
 			};
-			if (a.parent === state.terminus) {
-				state.terminalPtrs.push(a.id);
-			}
 			connectXToY_(ptr)(a.parent)(state)();
 		};
 	};
@@ -129,9 +126,6 @@ var makePursx_ = function (a) {
 			var cache = a.cache;
 			var parent = a.parent;
 			var scope = a.scope;
-			if (a.parent === state.terminus) {
-				state.terminalPtrs.push(a.id);
-			}
 			var entries = Object.entries(cache);
 			for (var i = 0; i < entries.length; i++) {
 				var key = entries[i][0];
