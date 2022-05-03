@@ -5,6 +5,7 @@ in      conf
         , dependencies =
               conf.dependencies
             # [ "web-html"
+              , "canvas"
               , "filterable"
               , "affjax-web"
               , "affjax"

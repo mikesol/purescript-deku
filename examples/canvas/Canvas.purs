@@ -2,7 +2,7 @@ module Deku.Example.Canvas where
 
 import Prelude
 
-import Data.Foldable (for_, oneOfMap)
+import Data.Foldable (for_, oneOfMap, traverse_)
 import Deku.Attribute ((:=))
 import Deku.Control (blank, deku2)
 import Deku.Core (Element)
@@ -11,8 +11,10 @@ import Deku.Interpret (FFIDOMSnapshot, effectfulDOMInterpret, makeFFIDOMSnapshot
 import Effect (Effect)
 import FRP.Event (subscribe)
 import FRP.Event.Class (bang)
-import Graphics.Canvas (fillRect, setFillStyle)
+import Graphics.Canvas (CanvasElement, fillRect, getContext2D, setFillStyle)
+import Unsafe.Coerce (unsafeCoerce)
 import Web.HTML (window)
+import Web.HTML.HTMLCanvasElement as HTMLCanvasElement
 import Web.HTML.HTMLDocument (body)
 import Web.HTML.HTMLElement (toElement)
 import Web.HTML.Window (document)
@@ -22,7 +24,12 @@ scene = D.canvas
   ( oneOfMap bang
       [ D.Width := "400px"
       , D.Height := "400px"
-      , D.Draw2D := \ctx -> do
+      , D.Self := HTMLCanvasElement.fromElement >>> traverse_ \e -> do
+          ctx <- getContext2D
+            ( ( unsafeCoerce
+                  :: HTMLCanvasElement.HTMLCanvasElement -> CanvasElement
+              ) e
+            )
           setFillStyle ctx "blue"
           fillRect ctx { height: 100.0, width: 100.0, x: 0.0, y: 0.0 }
       ]

@@ -103,9 +103,8 @@ export function setCb_(a) {
 		return function () {
 			var ptr = a.id;
 			var avv = a.value;
-			if (a.key === "@canvas-hack@") {
-				const cxt = state.units[ptr].main.getContext("2d");
-				avv(cxt)();
+			if (a.key === "@self@") {
+				avv(state.units[ptr].main)();
 			} else {
 				if (state.units[ptr].listeners[a.key]) {
 					state.units[ptr].main.removeEventListener(
