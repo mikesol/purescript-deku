@@ -2,7 +2,6 @@ module Deku.Interpret
   ( FFIDOMSnapshot
   , effectfulDOMInterpret
   , makeFFIDOMSnapshot
-  , renderDOM
   ) where
 
 import Prelude
@@ -15,8 +14,6 @@ import Effect.Random as R
 data FFIDOMSnapshot
 
 foreign import makeFFIDOMSnapshot :: Effect FFIDOMSnapshot
-
-foreign import renderDOM :: Array (Effect Unit) -> Effect Unit
 
 foreign import makeElement_
   :: Core.MakeElement

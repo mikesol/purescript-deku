@@ -22,14 +22,6 @@ var connectXToY_ = function (x) {
 	};
 };
 
-export function renderDOM(arrayToApply) {
-	return function () {
-		for (var i = 0; i < arrayToApply.length; i++) {
-			arrayToApply[i]();
-		}
-	};
-}
-
 export function makeElement_ (a) {
 	return function (state) {
 		return function () {
