@@ -6918,7 +6918,7 @@ var connectXToY_ = function(x) {
     };
   };
 };
-var makeElement = function(a2) {
+function makeElement_(a2) {
   return function(state3) {
     return function() {
       var ptr = a2.id;
@@ -6938,7 +6938,7 @@ var makeElement = function(a2) {
       connectXToY_(ptr)(a2.parent)(state3)();
     };
   };
-};
+}
 function makeText_(a2) {
   return function(state3) {
     return function() {
@@ -7122,7 +7122,7 @@ function sendToTop_(a2) {
 // output/Deku.Interpret/index.js
 var effectfulDOMInterpret = {
   ids: /* @__PURE__ */ map(functorEffect)(/* @__PURE__ */ show(showNumber))(random),
-  makeElement,
+  makeElement: makeElement_,
   makeRoot: makeRoot_,
   makeText: makeText_,
   makePursx: makePursx_,
