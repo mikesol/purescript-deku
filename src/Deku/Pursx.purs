@@ -3827,7 +3827,7 @@ instance pursxToElementConsInsert ::
     in
       { cache: Object.insert (reflectType pxk) false cache
       , element: Element \info di ->
-          __internalDekuFlatten (reflectType pxk <> pxScope) di pxe
+          __internalDekuFlatten (reflectType pxk <> pxScope) info.scope di pxe
             <|> (let Element y = element in y) info di
       }
     where

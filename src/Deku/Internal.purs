@@ -20,14 +20,16 @@ data Stage = Begin | Middle | End
 __internalDekuFlatten
   :: forall lock payload
    . String
+  -> String
   -> DOMInterpret payload
   -> Domable lock payload
   -> Event payload
 __internalDekuFlatten
   parent
+  scope
   di@(DOMInterpret { ids, disconnectElement, sendToTop }) = case _ of
      FixedChildren' (FixedChildren f) -> oneOfMap element f
-     EventfulElement' (EventfulElement e) -> keepLatest (map (__internalDekuFlatten parent di) e)
+     EventfulElement' (EventfulElement e) -> keepLatest (map (__internalDekuFlatten parent scope di) e)
      Element' e -> element e
      DynamicChildren' (DynamicChildren children) ->
       makeEvent \k -> do
@@ -103,7 +105,7 @@ __internalDekuFlatten
   where
   element (Element e) = e
       { parent
-      , scope: "trivial"
+      , scope
       , raiseId: mempty
       }
       di

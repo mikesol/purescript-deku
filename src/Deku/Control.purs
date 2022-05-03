@@ -94,7 +94,7 @@ elementify tag atts children = Element go
               , unsafeSetAttribute di me atts
               ]
           )
-            <|> __internalDekuFlatten me di children
+            <|> __internalDekuFlatten me scope di children
         )
         k
 
@@ -151,7 +151,7 @@ internalPortal isGlobal scopeF gaga closure = Element go
                 pure (pure unit)
         )
         idz
-      realized = __internalDekuFlatten psr.parent di
+      realized = __internalDekuFlatten psr.parent psr.scope di
         (deleteMeASAP (closure injectable (\(Element q) -> Element q)))
     u <- subscribe realized k
     void $ tryPut u av2
@@ -275,7 +275,7 @@ deku root children di@(DOMInterpret { ids, makeRoot }) = makeEvent \k -> do
   me <- ids
   subscribe
     ( bang (makeRoot { id: me, root })
-        <|> __internalDekuFlatten me di (deleteMeASAP children)
+        <|> __internalDekuFlatten me "rootScope" di (deleteMeASAP children)
     )
     k
 

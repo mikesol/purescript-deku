@@ -1,3 +1,5 @@
+
+
 var connectXToY_ = function (x) {
 	return function (y) {
 		return function (state) {
@@ -11,7 +13,7 @@ var connectXToY_ = function (x) {
 	};
 };
 
-export function makeScene_ (a) {
+export function makeElement_ (a) {
 	return function (state) {
 		return function () {
 			var ptr = a.id;

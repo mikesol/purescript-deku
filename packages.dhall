@@ -122,6 +122,26 @@ let additions =
         , repo = "https://github.com/mikesol/purescript-event.git"
         , version = "v1.6.3"
         }
+      , variant =
+        { dependencies =
+          [ "assert"
+          , "control"
+          , "effect"
+          , "either"
+          , "enums"
+          , "foldable-traversable"
+          , "lists"
+          , "maybe"
+          , "partial"
+          , "prelude"
+          , "record"
+          , "tuples"
+          , "type-equality"
+          , "unsafe-coerce"
+          ]
+        , repo = "https://github.com/natefaubion/purescript-variant.git"
+        , version = "v8.0.0"
+        }
       , everythings-better-with-variants =
         { dependencies =
           [ "control"
