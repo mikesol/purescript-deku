@@ -30,7 +30,7 @@ export function renderDOM(arrayToApply) {
 	};
 }
 
-var makeElement = function (a) {
+export function makeElement_ (a) {
 	return function (state) {
 		return function () {
 			var ptr = a.id;
@@ -51,7 +51,6 @@ var makeElement = function (a) {
 		};
 	};
 };
-export { makeElement };
 
 export function makeText_(a) {
 	return function (state) {

@@ -18,7 +18,7 @@ foreign import makeFFIDOMSnapshot :: Effect FFIDOMSnapshot
 
 foreign import renderDOM :: Array (Effect Unit) -> Effect Unit
 
-foreign import makeElement
+foreign import makeElement_
   :: Core.MakeElement
   -> FFIDOMSnapshot
   -> Effect Unit
@@ -55,7 +55,7 @@ effectfulDOMInterpret :: Core.DOMInterpret (FFIDOMSnapshot -> Effect Unit)
 
 effectfulDOMInterpret = Core.DOMInterpret
   { ids: map show R.random
-  , makeElement: makeElement
+  , makeElement: makeElement_
   , makeRoot: makeRoot_
   , makeText: makeText_
   , makePursx: makePursx_
