@@ -1,14 +1,3 @@
-var makeid = function (length) {
-	var result = "";
-	var characters =
-		"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-	var charactersLength = characters.length;
-	for (var i = 0; i < length; i++) {
-		result += characters.charAt(Math.floor(Math.random() * charactersLength));
-	}
-	return result;
-};
-
 var connectXToY_ = function (x) {
 	return function (y) {
 		return function (state) {
@@ -22,7 +11,7 @@ var connectXToY_ = function (x) {
 	};
 };
 
-export function makeElement_ (a) {
+export function makeScene_ (a) {
 	return function (state) {
 		return function () {
 			var ptr = a.id;
@@ -63,7 +52,6 @@ export function makeFFIDOMSnapshot() {
 	return {
 		units: {},
 		scopes: {},
-		unqidfr: makeid(10),
 	};
 }
 
