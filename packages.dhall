@@ -132,7 +132,8 @@ let additions =
           , "psci-support"
           , "variant"
           ]
-        , repo = "https://github.com/mikesol/purescript-everythings-better-with-variants.git"
+        , repo =
+            "https://github.com/mikesol/purescript-everythings-better-with-variants.git"
         , version = "v0.0.0"
         }
       , behaviors =
