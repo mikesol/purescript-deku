@@ -320,6 +320,29 @@ var eq = function(dict) {
   return dict.eq;
 };
 
+// output/Data.Semiring/foreign.js
+var intAdd = function(x) {
+  return function(y) {
+    return x + y | 0;
+  };
+};
+var intMul = function(x) {
+  return function(y) {
+    return x * y | 0;
+  };
+};
+
+// output/Data.Semiring/index.js
+var semiringInt = {
+  add: intAdd,
+  zero: 0,
+  mul: intMul,
+  one: 1
+};
+var add = function(dict) {
+  return dict.add;
+};
+
 // output/Data.Show/foreign.js
 var showIntImpl = function(n) {
   return n.toString();
@@ -2758,8 +2781,8 @@ var __internalDekuFlatten = function(parent2) {
                         var c1 = subscribe(kid$prime.value0({
                           parent: parent2,
                           scope: myScope,
-                          raiseId: function(id3) {
-                            return $$void(functorEffect)(tryPut(id3)(av));
+                          raiseId: function(id2) {
+                            return $$void(functorEffect)(tryPut(id2)(av));
                           }
                         })(v))(k)();
                         var cncl = take4(av)(function(q) {
@@ -2834,12 +2857,12 @@ var unsafeText = function(v) {
   return v.makeText;
 };
 var unsafeSetText = function(v) {
-  return function(id3) {
+  return function(id2) {
     return function(txt) {
       return map(functorEvent)(function($101) {
         return v.setText(function(v1) {
           return {
-            id: id3,
+            id: id2,
             text: v1
           };
         }($101));
@@ -2848,13 +2871,13 @@ var unsafeSetText = function(v) {
   };
 };
 var unsafeSetAttribute = function(v) {
-  return function(id3) {
+  return function(id2) {
     return function(atts) {
       return map(functorEvent)(function($102) {
         return function(v1) {
           if (v1.value instanceof Prop$prime) {
             return v.setProp({
-              id: id3,
+              id: id2,
               key: v1.key,
               value: v1.value.value0
             });
@@ -2862,7 +2885,7 @@ var unsafeSetAttribute = function(v) {
           ;
           if (v1.value instanceof Cb$prime) {
             return v.setCb({
-              id: id3,
+              id: id2,
               key: v1.key,
               value: v1.value.value0
             });
@@ -2927,7 +2950,7 @@ var switcher = function(f) {
 };
 var elementify = function(tag) {
   return function(atts) {
-    return function(children2) {
+    return function(children) {
       var go2 = function(v) {
         return function(v1) {
           return makeEvent(function(k) {
@@ -2941,7 +2964,7 @@ var elementify = function(tag) {
                 parent: v.parent,
                 scope: v.scope,
                 tag
-              })), unsafeSetAttribute(v1)(me)(atts)]))(__internalDekuFlatten(me)(v.scope)(v1)(children2)))(k))();
+              })), unsafeSetAttribute(v1)(me)(atts)]))(__internalDekuFlatten(me)(v.scope)(v1)(children)))(k))();
             };
           });
         };
@@ -2969,8 +2992,8 @@ var internalPortal = function(isGlobal) {
                     return v1({
                       parent: "@portal@",
                       scope: scopeF(psr.scope),
-                      raiseId: function(id3) {
-                        return unsafeUpdateMutAr(ix)(id3)(av);
+                      raiseId: function(id2) {
+                        return unsafeUpdateMutAr(ix)(id2)(av);
                       }
                     })(v);
                   };
@@ -2978,14 +3001,14 @@ var internalPortal = function(isGlobal) {
                 var u0 = subscribe(actualized)(k)();
                 var av2 = empty5();
                 var idz = map(functorEffect)(unsafeCoerce2)(readAr(av))();
-                var injectable = map(functorVec)(function(id3) {
+                var injectable = map(functorVec)(function(id2) {
                   return function(v1) {
                     return function(v2) {
                       return makeEvent(function(k2) {
                         return function __do4() {
-                          v1.raiseId(id3)();
+                          v1.raiseId(id2)();
                           k2(v2.giveNewParent({
-                            id: id3,
+                            id: id2,
                             parent: v1.parent,
                             scope: v1.scope
                           }))();
@@ -3002,9 +3025,9 @@ var internalPortal = function(isGlobal) {
                 $$void(functorEffect)(tryPut(u)(av2))();
                 return function __do4() {
                   u0();
-                  when(applicativeEffect)(!isGlobal)(foreachE(toArray3(idz))(function(id3) {
+                  when(applicativeEffect)(!isGlobal)(foreachE(toArray3(idz))(function(id2) {
                     return k(v.deleteFromCache({
-                      id: id3
+                      id: id2
                     }));
                   }))();
                   var cncl2 = take4(av2)(function(q) {
@@ -3051,7 +3074,7 @@ var plantEventDomableDomable = function(dictTypeEquals) {
   };
 };
 var deku = function(root) {
-  return function(children2) {
+  return function(children) {
     return function(v) {
       return makeEvent(function(k) {
         return function __do3() {
@@ -3059,15 +3082,15 @@ var deku = function(root) {
           return subscribe(alt(altEvent)(bang2(v.makeRoot({
             id: me,
             root
-          })))(__internalDekuFlatten(me)("rootScope")(v)(deleteMeASAP(refl)(refl)(children2))))(k)();
+          })))(__internalDekuFlatten(me)("rootScope")(v)(deleteMeASAP(refl)(refl)(children))))(k)();
         };
       });
     };
   };
 };
 var dekuA = function(root) {
-  return function(children2) {
-    return deku(root)(plant(plantArrayElementDomable(refl)(refl))(children2));
+  return function(children) {
+    return deku(root)(plant(plantArrayElementDomable(refl)(refl))(children));
   };
 };
 var blank = /* @__PURE__ */ function() {
@@ -5955,6 +5978,87 @@ var attrOnInputCb = {
   }
 };
 
+// output/Web.Event.Event/foreign.js
+function _target(e) {
+  return e.target;
+}
+
+// output/Web.Event.Event/index.js
+var target = function($0) {
+  return toMaybe(_target($0));
+};
+
+// output/Web.HTML.HTMLInputElement/foreign.js
+function value2(input2) {
+  return function() {
+    return input2.value;
+  };
+}
+function valueAsNumber(input2) {
+  return function() {
+    return input2.valueAsNumber;
+  };
+}
+
+// output/Web.Internal.FFI/foreign.js
+function _unsafeReadProtoTagged(nothing, just, name16, value13) {
+  if (typeof window !== "undefined") {
+    var ty = window[name16];
+    if (ty != null && value13 instanceof ty) {
+      return just(value13);
+    }
+  }
+  var obj = value13;
+  while (obj != null) {
+    var proto = Object.getPrototypeOf(obj);
+    var constructorName = proto.constructor.name;
+    if (constructorName === name16) {
+      return just(value13);
+    } else if (constructorName === "Object") {
+      return nothing;
+    }
+    obj = proto;
+  }
+  return nothing;
+}
+
+// output/Web.Internal.FFI/index.js
+var unsafeReadProtoTagged = function(name16) {
+  return function(value13) {
+    return _unsafeReadProtoTagged(Nothing.value, Just.create, name16, value13);
+  };
+};
+
+// output/Web.HTML.HTMLInputElement/index.js
+var fromEventTarget = /* @__PURE__ */ unsafeReadProtoTagged("HTMLInputElement");
+
+// output/Deku.Listeners/index.js
+var slider = /* @__PURE__ */ function() {
+  var $6 = alt(altEvent)(bang2(attr(attrInput_XtypeString)(Xtype.value)("range")));
+  var $7 = map(functorEvent)(function(push2) {
+    return attr(attrOnInputCb)(OnInput.value)(cb(function(e) {
+      return for_(applicativeEffect)(foldableMaybe)(bind(bindMaybe)(target(e))(fromEventTarget))(composeKleisli(bindEffect)(valueAsNumber)(push2));
+    }));
+  });
+  return function($8) {
+    return $6($7($8));
+  };
+}();
+var click_ = function(dictFunctor) {
+  return function(dictMonoid) {
+    return function(dictAttr) {
+      return map(dictFunctor)(function() {
+        var $9 = attr(dictAttr)(OnClick.value);
+        return function($10) {
+          return $9(function(v) {
+            return v(mempty(dictMonoid));
+          }($10));
+        };
+      }());
+    };
+  };
+};
+
 // output/FRP.Event.VBus/foreign.js
 var _____$__$_$$_vbus = "_____$__$_$$_vbus";
 function unsafeDestroyS(s) {
@@ -6057,88 +6161,6 @@ var vbusCons2 = function(dictIsSymbol) {
   };
 };
 
-// output/Web.DOM.Element/foreign.js
-var getProp = function(name16) {
-  return function(doctype) {
-    return doctype[name16];
-  };
-};
-var _namespaceURI = getProp("namespaceURI");
-var _prefix = getProp("prefix");
-var localName = getProp("localName");
-var tagName = getProp("tagName");
-
-// output/Web.DOM.ParentNode/foreign.js
-var getEffProp = function(name16) {
-  return function(node) {
-    return function() {
-      return node[name16];
-    };
-  };
-};
-var children = getEffProp("children");
-var _firstElementChild = getEffProp("firstElementChild");
-var _lastElementChild = getEffProp("lastElementChild");
-var childElementCount = getEffProp("childElementCount");
-
-// output/Web.Internal.FFI/foreign.js
-function _unsafeReadProtoTagged(nothing, just, name16, value13) {
-  if (typeof window !== "undefined") {
-    var ty = window[name16];
-    if (ty != null && value13 instanceof ty) {
-      return just(value13);
-    }
-  }
-  var obj = value13;
-  while (obj != null) {
-    var proto = Object.getPrototypeOf(obj);
-    var constructorName = proto.constructor.name;
-    if (constructorName === name16) {
-      return just(value13);
-    } else if (constructorName === "Object") {
-      return nothing;
-    }
-    obj = proto;
-  }
-  return nothing;
-}
-
-// output/Web.Internal.FFI/index.js
-var unsafeReadProtoTagged = function(name16) {
-  return function(value13) {
-    return _unsafeReadProtoTagged(Nothing.value, Just.create, name16, value13);
-  };
-};
-
-// output/Web.DOM.Element/index.js
-var fromEventTarget = /* @__PURE__ */ unsafeReadProtoTagged("Element");
-
-// output/Web.Event.Event/foreign.js
-function _target(e) {
-  return e.target;
-}
-
-// output/Web.Event.Event/index.js
-var target = function($0) {
-  return toMaybe(_target($0));
-};
-
-// output/Web.HTML.HTMLInputElement/foreign.js
-function value2(input2) {
-  return function() {
-    return input2.value;
-  };
-}
-function valueAsNumber(input2) {
-  return function() {
-    return input2.valueAsNumber;
-  };
-}
-
-// output/Web.HTML.HTMLInputElement/index.js
-var fromEventTarget2 = /* @__PURE__ */ unsafeReadProtoTagged("HTMLInputElement");
-var fromElement = /* @__PURE__ */ unsafeReadProtoTagged("HTMLInputElement");
-
 // output/Deku.Example.Docs.Events/index.js
 var px3 = /* @__PURE__ */ function() {
   return $$Proxy.value;
@@ -6192,7 +6214,7 @@ var events = function(dpage) {
       return "code";
     }
   }))(px3)({
-    code: nut(plantElementDomable(refl)(refl))(pre_(plantArrayElementDomable(refl)(refl))([code_(plantArrayElementDomable(refl)(refl))([text_('module Main where\n\nimport Prelude\n\nimport Affjax as AX\nimport Affjax.ResponseFormat as ResponseFormat\nimport Control.Alt ((<|>))\nimport Data.Argonaut.Core (stringifyWithIndent)\nimport Data.Either (Either(..))\nimport Data.Filterable (compact, filterMap)\nimport Data.HTTP.Method (Method(..))\nimport Data.Maybe (Maybe(..))\nimport Data.Profunctor (lcmap)\nimport Data.Tuple.Nested ((/\\))\nimport Deku.Attribute (Cb, cb, (:=))\nimport Deku.Control (plant, text)\nimport Deku.DOM as D\nimport Deku.Toplevel (runInBody)\nimport Effect (Effect)\nimport Effect.Aff (launchAff_)\nimport Effect.Class (liftEffect)\nimport FRP.Event (bang, bus, mapAccum)\n\ndata UIAction = Initial | Loading | Result String\n\nclickCb :: (UIAction -> Effect Unit) -> Cb\nclickCb push = cb\n  ( const do\n      push Loading\n      launchAff_ $ do\n        result <- AX.request\n          ( AX.defaultRequest\n              { url = "https://randomuser.me/api/"\n              , method = Left GET\n              , responseFormat = ResponseFormat.json\n              }\n          )\n        case result of\n          Left err -> liftEffect $ push\n            $ Result\n              ( "GET /api response failed to decode: " <>\n                  AX.printError err\n              )\n          Right response -> liftEffect $ push $ Result $\n            stringifyWithIndent 2 response.body\n  )\n\nclickText = "Click to get some random user data." :: String\n\nmain :: Effect Unit\nmain = runInBody\n  ( plant $ bus \\push -> lcmap (bang Initial <|> _)\n      \\event ->\n        let\n          loadingOrResult = filterMap\n            ( case _ of\n                Loading -> Just $ Left unit\n                Result s -> Just $ Right s\n                _ -> Nothing\n            )\n            event\n          loading = filterMap\n            ( case _ of\n                Left _ -> Just unit\n                _ -> Nothing\n            )\n            loadingOrResult\n          result = filterMap\n            ( case _ of\n                Right s -> Just s\n                _ -> Nothing\n            )\n            loadingOrResult\n        in\n          plant\n            [ D.div_\n                [ D.button (bang (D.OnClick := clickCb push))\n                    [ text\n                        ( bang clickText\n                            <|> (loading $> "Loading...")\n                            <|> (result $> clickText)\n                        )\n                    ]\n                ]\n            , D.div\n                ( (bang (D.Style := "display: none;")) <|>\n                    ( compact\n                        ( mapAccum\n                            ( \\_ b -> (b && false) /\\\n                                if b then Just unit else Nothing\n                            )\n                            result\n                            true\n                        ) $> (D.Style := "display: block;")\n                    )\n                )\n                [ D.pre_ [ D.code_ [ text (bang "" <|> result) ] ] ]\n            ]\n  )\n')])])),
+    code: nut(plantElementDomable(refl)(refl))(pre_(plantArrayElementDomable(refl)(refl))([code_(plantArrayElementDomable(refl)(refl))([text_('module Main where\n\nimport Prelude\n\nimport Control.Alt ((<|>))\nimport Deku.Attribute ((:=))\nimport Deku.Control (blank, plant, text, text_)\nimport Deku.DOM as D\nimport Deku.Listeners (slider)\nimport Deku.Toplevel (runInBody1)\nimport Effect (Effect)\nimport FRP.Event (bang, fold)\nimport FRP.Event.VBus (V, vbus)\nimport Type.Proxy (Proxy(..))\n\ntype UIEvents = V\n  ( uiShow :: Unit\n  , buttonClicked :: Unit\n  , sliderMoved :: Number\n  )\n\nmain :: Effect Unit\nmain = runInBody1\n  ( vbus (Proxy :: _ UIEvents) \\push event -> plant do\n      D.div_\n        [ D.button\n            ( bang\n                ( D.OnClick := push.buttonClicked unit)\n            )\n            [ text_ "Click" ]\n        , D.div_\n            [ text\n                ( bang "Val: 0" <|>\n                    ( append "Val: " <<< show\n                        <$> fold\n                          (const (add 1))\n                          (bang unit <|> event.buttonClicked)\n                          (-1)\n                    )\n                )\n            ]\n        , D.div_\n            [ D.input\n                (slider (bang push.sliderMoved))\n                blank\n            , D.div_\n                [ text\n                    ( bang "Val: 50" <|>\n                        ( append "Val: " <<< show\n                            <$> event.sliderMoved\n                        )\n                    )\n                ]\n            ]\n        ]\n  )\n')])])),
     result: nut(plantEventDomableDomable(refl)(refl))(vbus()(vbusCons2({
       reflectSymbol: function() {
         return "buttonClicked";
@@ -6207,17 +6229,13 @@ var events = function(dpage) {
       }
     })()()(vbusNil)()()()())()()()())()()()())($$Proxy.value)(function(push2) {
       return function(event) {
-        return plant(plantElementDomable(refl)(refl))(div_(plantArrayElementDomable(refl)(refl))([button(plantArrayElementDomable(refl)(refl))(bang2(attr(attrOnClickCb)(OnClick.value)(cb($$const(push2.buttonClicked(unit))))))([text_("Click")]), div_(plantArrayElementDomable(refl)(refl))([text(alt(altEvent)(bang2("Val: 0"))(map(functorEvent)(function() {
+        return plant(plantElementDomable(refl)(refl))(div_(plantArrayElementDomable(refl)(refl))([button(plantArrayElementDomable(refl)(refl))(click_(functorEvent)(monoidUnit)(attrOnClickEffectUnit)(bang2(push2.buttonClicked)))([text_("Click")]), div_(plantArrayElementDomable(refl)(refl))([text(alt(altEvent)(bang2("Val: 0"))(map(functorEvent)(function() {
           var $0 = append(semigroupString)("Val: ");
           var $1 = show(showInt);
           return function($2) {
             return $0($1($2));
           };
-        }())(mapAccum(eventIsEvent)($$const(function(x) {
-          return new Tuple(x + 1 | 0, x);
-        }))(alt(altEvent)(bang2(unit))(event.buttonClicked))(0))))]), div_(plantArrayElementDomable(refl)(refl))([input(plantElementDomable(refl)(refl))(oneOfMap(foldableArray)(plusEvent)(bang2)([attr(attrInput_XtypeString)(Xtype.value)("range"), attr(attrOnInputCb)(OnInput.value)(cb(function(e) {
-          return for_(applicativeEffect)(foldableMaybe)(bind(bindMaybe)(bind(bindMaybe)(target(e))(fromEventTarget))(fromElement))(composeKleisli(bindEffect)(valueAsNumber)(push2.sliderMoved));
-        }))]))(blank), div_(plantArrayElementDomable(refl)(refl))([text(alt(altEvent)(bang2("Val: 50"))(map(functorEvent)(function() {
+        }())(fold3(eventIsEvent)($$const(add(semiringInt)(1)))(alt(altEvent)(bang2(unit))(event.buttonClicked))(-1 | 0))))]), div_(plantArrayElementDomable(refl)(refl))([input(plantElementDomable(refl)(refl))(slider(bang2(push2.sliderMoved)))(blank), div_(plantArrayElementDomable(refl)(refl))([text(alt(altEvent)(bang2("Val: 50"))(map(functorEvent)(function() {
           var $3 = append(semigroupString)("Val: ");
           var $4 = show(showNumber);
           return function($5) {
@@ -6438,7 +6456,7 @@ main = runInBody1
     result: nut(plantEventDomableDomable(refl)(refl))(bus(function(push2) {
       return lcmap(profunctorFn)(alt(altEvent)(bang2(UIShown.value)))(function(event) {
         return plant(plantElementDomable(refl)(refl))(div_(plantArrayElementDomable(refl)(refl))([div_(plantArrayElementDomable(refl)(refl))([input(plantElementDomable(refl)(refl))(oneOfMap(foldableArray)(plusEvent)(bang2)([attr(attrInput_StyleString)(Style.value)("border-style:solid;border-width: 1px;border-color: black;"), attr(attrOnInputCb)(OnInput.value)(cb(function(e) {
-          return for_(applicativeEffect)(foldableMaybe)(bind(bindMaybe)(target(e))(fromEventTarget2))(composeKleisli(bindEffect)(value2)(function($7) {
+          return for_(applicativeEffect)(foldableMaybe)(bind(bindMaybe)(target(e))(fromEventTarget))(composeKleisli(bindEffect)(value2)(function($7) {
             return push2(ChangeText.create($7));
           }));
         })), attr(attrOnKeyupCb)(OnKeyup.value)(cb(function(e) {
