@@ -60,7 +60,7 @@ import Control.Alt ((<|>))
 import Deku.Attribute ((:=))
 import Deku.Control (blank, plant, text, text_)
 import Deku.DOM as D
-import Deku.Listeners (slider)
+import Deku.Listeners (click_, slider)
 import Deku.Toplevel (runInBody1)
 import Effect (Effect)
 import FRP.Event (bang, fold)
@@ -78,9 +78,7 @@ main = runInBody1
   ( vbus (Proxy :: _ UIEvents) \push event -> plant do
       D.div_
         [ D.button
-            ( bang
-                ( D.OnClick := push.buttonClicked unit)
-            )
+            (click_ (bang push.buttonClicked))
             [ text_ "Click" ]
         , D.div_
             [ text
