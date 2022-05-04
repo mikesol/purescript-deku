@@ -3,7 +3,6 @@ module Deku.Example.Docs.Events where
 import Prelude
 
 import Control.Alt ((<|>))
-import Data.Foldable (for_, oneOfMap)
 import Data.Tuple.Nested ((/\))
 import Deku.Attribute (cb, (:=))
 import Deku.Control (blank, plant, text, text_)
@@ -11,14 +10,12 @@ import Deku.Core (Element)
 import Deku.DOM as D
 import Deku.Example.Docs.Types (Page(..))
 import Deku.Example.Docs.Util (scrollToTop)
+import Deku.Listeners (click_, slider)
 import Deku.Pursx (nut, (~~))
 import Effect (Effect)
-import FRP.Event (bang, mapAccum)
+import FRP.Event (bang, fold, mapAccum)
 import FRP.Event.VBus (V, vbus)
 import Type.Proxy (Proxy(..))
-import Web.DOM.Element (fromEventTarget)
-import Web.Event.Event (target)
-import Web.HTML.HTMLInputElement (fromElement, valueAsNumber)
 
 
 type UIEvents = V
@@ -59,100 +56,57 @@ events dpage = px ~~
 
 import Prelude
 
-import Affjax as AX
-import Affjax.ResponseFormat as ResponseFormat
 import Control.Alt ((<|>))
-import Data.Argonaut.Core (stringifyWithIndent)
-import Data.Either (Either(..))
-import Data.Filterable (compact, filterMap)
-import Data.HTTP.Method (Method(..))
-import Data.Maybe (Maybe(..))
-import Data.Profunctor (lcmap)
-import Data.Tuple.Nested ((/\))
-import Deku.Attribute (Cb, cb, (:=))
-import Deku.Control (plant, text)
+import Deku.Attribute ((:=))
+import Deku.Control (blank, plant, text, text_)
 import Deku.DOM as D
-import Deku.Toplevel (runInBody)
+import Deku.Listeners (slider)
+import Deku.Toplevel (runInBody1)
 import Effect (Effect)
-import Effect.Aff (launchAff_)
-import Effect.Class (liftEffect)
-import FRP.Event (bang, bus, mapAccum)
+import FRP.Event (bang, fold)
+import FRP.Event.VBus (V, vbus)
+import Type.Proxy (Proxy(..))
 
-data UIAction = Initial | Loading | Result String
-
-clickCb :: (UIAction -> Effect Unit) -> Cb
-clickCb push = cb
-  ( const do
-      push Loading
-      launchAff_ $ do
-        result <- AX.request
-          ( AX.defaultRequest
-              { url = "https://randomuser.me/api/"
-              , method = Left GET
-              , responseFormat = ResponseFormat.json
-              }
-          )
-        case result of
-          Left err -> liftEffect $ push
-            $ Result
-              ( "GET /api response failed to decode: " <>
-                  AX.printError err
-              )
-          Right response -> liftEffect $ push $ Result $
-            stringifyWithIndent 2 response.body
+type UIEvents = V
+  ( uiShow :: Unit
+  , buttonClicked :: Unit
+  , sliderMoved :: Number
   )
 
-clickText = "Click to get some random user data." :: String
-
 main :: Effect Unit
-main = runInBody
-  ( plant $ bus \push -> lcmap (bang Initial <|> _)
-      \event ->
-        let
-          loadingOrResult = filterMap
-            ( case _ of
-                Loading -> Just $ Left unit
-                Result s -> Just $ Right s
-                _ -> Nothing
+main = runInBody1
+  ( vbus (Proxy :: _ UIEvents) \push event -> plant do
+      D.div_
+        [ D.button
+            ( bang
+                ( D.OnClick := push.buttonClicked unit)
             )
-            event
-          loading = filterMap
-            ( case _ of
-                Left _ -> Just unit
-                _ -> Nothing
-            )
-            loadingOrResult
-          result = filterMap
-            ( case _ of
-                Right s -> Just s
-                _ -> Nothing
-            )
-            loadingOrResult
-        in
-          plant
-            [ D.div_
-                [ D.button (bang (D.OnClick := clickCb push))
-                    [ text
-                        ( bang clickText
-                            <|> (loading $> "Loading...")
-                            <|> (result $> clickText)
-                        )
-                    ]
-                ]
-            , D.div
-                ( (bang (D.Style := "display: none;")) <|>
-                    ( compact
-                        ( mapAccum
-                            ( \_ b -> (b && false) /\
-                                if b then Just unit else Nothing
-                            )
-                            result
-                            true
-                        ) $> (D.Style := "display: block;")
+            [ text_ "Click" ]
+        , D.div_
+            [ text
+                ( bang "Val: 0" <|>
+                    ( append "Val: " <<< show
+                        <$> fold
+                          (const (add 1))
+                          (bang unit <|> event.buttonClicked)
+                          (-1)
                     )
                 )
-                [ D.pre_ [ D.code_ [ text (bang "" <|> result) ] ] ]
             ]
+        , D.div_
+            [ D.input
+                (slider (bang push.sliderMoved))
+                blank
+            , D.div_
+                [ text
+                    ( bang "Val: 50" <|>
+                        ( append "Val: " <<< show
+                            <$> event.sliderMoved
+                        )
+                    )
+                ]
+            ]
+        ]
   )
 """
               ]
@@ -161,32 +115,22 @@ main = runInBody
   , result: nut( vbus (Proxy :: _ UIEvents) \push event -> plant do
       D.div_
         [ D.button
-            (bang (D.OnClick := cb (const $ push.buttonClicked unit)))
+            (click_ (bang  push.buttonClicked))
             [ text_ "Click" ]
         , D.div_
             [ text
-                ( (bang "Val: 0") <|>
-                    ( mapAccum (const $ \x -> (x + 1) /\ x)
-                        (bang unit <|> event.buttonClicked)
-                        0
-                        # map (append "Val: " <<< show)
+                ( bang "Val: 0" <|>
+                    ( append "Val: " <<< show
+                        <$> fold
+                          (const (add 1))
+                          (bang unit <|> event.buttonClicked)
+                          (-1)
                     )
                 )
             ]
         , D.div_
             [ D.input
-                ( oneOfMap bang
-                    [ D.Xtype := "range"
-                    , D.OnInput := cb \e -> for_
-                        ( target e
-                            >>= fromEventTarget
-                            >>= fromElement
-                        )
-                        ( valueAsNumber
-                            >=> push.sliderMoved
-                        )
-                    ]
-                )
+                (slider (bang push.sliderMoved))
                 blank
             , D.div_
                 [ text
