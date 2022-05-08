@@ -17,6 +17,6 @@ in      conf
               , "web-uievents"
               , "http-methods"
               , "maybe"
-              , "typelevel"
+              , "typelevel-prelude"
               ]
         }

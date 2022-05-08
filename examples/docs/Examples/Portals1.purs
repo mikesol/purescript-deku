@@ -6,15 +6,15 @@ import Control.Alt ((<|>))
 import Data.Foldable (oneOfMap)
 import Data.Profunctor (lcmap)
 import Data.Tuple.Nested ((/\), type (/\))
-import Data.Typelevel.Num (d0, d1)
-import Data.Vec (index, (+>))
-import Data.Vec as V
+import Data.FastVect.FastVect (index, (:))
+import Data.FastVect.FastVect as V
 import Deku.Attribute ((:=))
 import Deku.Control (blank, plant, portal, switcher, text_)
 import Deku.DOM as D
 import Deku.Toplevel (runInBody1)
 import Effect (Effect)
 import FRP.Event (Event, bang, bus, fold, mapAccum)
+import Type.Prelude (Proxy(..))
 
 counter :: forall a. Event a → Event (a /\ Int)
 counter event = mapAccum f event 0
@@ -34,14 +34,14 @@ main = runInBody1
                 )
             )
             ( "https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4"
-                +> "https://www.w3schools.com/jsref/movie.mp4"
-                +> V.empty
+                : "https://www.w3schools.com/jsref/movie.mp4"
+                : V.empty
             )
         )
         \v _ -> do
           let
-            p0 = index v d0
-            p1 = index v d1
+            p0 = index (Proxy :: _ 0) v
+            p1 = index (Proxy :: _ 1) v
             ev = fold (const not) event
             flips = switcher (if _ then p0 else p1) <<< ev
           plant $ D.div_

@@ -6,9 +6,8 @@ import Control.Alt ((<|>))
 import Data.Foldable (for_)
 import Data.Int (floor)
 import Data.Tuple (Tuple(..))
-import Data.Typelevel.Num (d0)
-import Data.Vec ((+>))
-import Data.Vec as V
+import Data.FastVect.FastVect ((:))
+import Data.FastVect.FastVect as V
 import Deku.Attribute ((:=))
 import Deku.Control (blank, dekuA, portal, switcher)
 import Deku.Control as C
@@ -20,6 +19,7 @@ import Effect.Random as Random
 import FRP.Behavior (Behavior, behavior, sample_)
 import FRP.Event (Event, bang, makeEvent, mapAccum, subscribe)
 import FRP.Event.Time (delay, interval)
+import Type.Prelude (Proxy(..))
 import Web.HTML (window)
 import Web.HTML.HTMLDocument (body)
 import Web.HTML.HTMLElement (toElement)
@@ -57,12 +57,12 @@ scene =
                   )
                   blank
               ]
-              +> V.empty
+              : V.empty
           )
           ( \i _ -> switcher
               ( \rgb -> D.div
                   (bang (D.Style := "background-color: " <> rgb <> ";"))
-                  (V.index i d0)
+                  (V.index (Proxy :: _ 0) i)
               )
               (sample_ rdm (interval 1000))
           )
