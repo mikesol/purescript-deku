@@ -189,9 +189,9 @@ var join = function(dictBind) {
 
 // output/Data.Foldable/foreign.js
 var foldrArray = function(f) {
-  return function(init4) {
+  return function(init2) {
     return function(xs) {
-      var acc = init4;
+      var acc = init2;
       var len = xs.length;
       for (var i2 = len - 1; i2 >= 0; i2--) {
         acc = f(xs[i2])(acc);
@@ -201,9 +201,9 @@ var foldrArray = function(f) {
   };
 };
 var foldlArray = function(f) {
-  return function(init4) {
+  return function(init2) {
     return function(xs) {
-      var acc = init4;
+      var acc = init2;
       var len = xs.length;
       for (var i2 = 0; i2 < len; i2++) {
         acc = f(acc)(xs[i2]);
@@ -844,7 +844,7 @@ var ap = function(dictMonad) {
 };
 
 // output/Effect/index.js
-var $runtime_lazy = function(name16, moduleName, init4) {
+var $runtime_lazy = function(name16, moduleName, init2) {
   var state3 = 0;
   var val;
   return function(lineNumber) {
@@ -853,7 +853,7 @@ var $runtime_lazy = function(name16, moduleName, init4) {
     if (state3 === 1)
       throw new ReferenceError(name16 + " was needed before it finished initializing (module " + moduleName + ", line " + lineNumber + ")", moduleName, lineNumber);
     state3 = 1;
-    val = init4();
+    val = init2();
     state3 = 2;
     return val;
   };
@@ -991,14 +991,14 @@ var replicatePolyfill = function(count2) {
 };
 var replicate = typeof Array.prototype.fill === "function" ? replicateFill : replicatePolyfill;
 var fromFoldableImpl = function() {
-  function Cons3(head6, tail3) {
-    this.head = head6;
-    this.tail = tail3;
+  function Cons3(head3, tail) {
+    this.head = head3;
+    this.tail = tail;
   }
   var emptyList = {};
-  function curryCons(head6) {
-    return function(tail3) {
-      return new Cons3(head6, tail3);
+  function curryCons(head3) {
+    return function(tail) {
+      return new Cons3(head3, tail);
     };
   }
   function listToArray(list) {
@@ -1044,7 +1044,7 @@ var _deleteAt = function(just) {
   };
 };
 var sortByImpl = function() {
-  function mergeFromTo(compare2, fromOrdering, xs1, xs2, from3, to2) {
+  function mergeFromTo(compare2, fromOrdering, xs1, xs2, from2, to) {
     var mid;
     var i2;
     var j;
@@ -1052,15 +1052,15 @@ var sortByImpl = function() {
     var x;
     var y;
     var c;
-    mid = from3 + (to2 - from3 >> 1);
-    if (mid - from3 > 1)
-      mergeFromTo(compare2, fromOrdering, xs2, xs1, from3, mid);
-    if (to2 - mid > 1)
-      mergeFromTo(compare2, fromOrdering, xs2, xs1, mid, to2);
-    i2 = from3;
+    mid = from2 + (to - from2 >> 1);
+    if (mid - from2 > 1)
+      mergeFromTo(compare2, fromOrdering, xs2, xs1, from2, mid);
+    if (to - mid > 1)
+      mergeFromTo(compare2, fromOrdering, xs2, xs1, mid, to);
+    i2 = from2;
     j = mid;
-    k = from3;
-    while (i2 < mid && j < to2) {
+    k = from2;
+    while (i2 < mid && j < to) {
       x = xs2[i2];
       y = xs2[j];
       c = fromOrdering(compare2(x)(y));
@@ -1075,7 +1075,7 @@ var sortByImpl = function() {
     while (i2 < mid) {
       xs1[k++] = xs2[i2++];
     }
-    while (j < to2) {
+    while (j < to) {
       xs1[k++] = xs2[j++];
     }
   }
@@ -1205,7 +1205,7 @@ function copyImpl(xs) {
 }
 var thaw = copyImpl;
 var sortByImpl2 = function() {
-  function mergeFromTo(compare2, fromOrdering, xs1, xs2, from3, to2) {
+  function mergeFromTo(compare2, fromOrdering, xs1, xs2, from2, to) {
     var mid;
     var i2;
     var j;
@@ -1213,15 +1213,15 @@ var sortByImpl2 = function() {
     var x;
     var y;
     var c;
-    mid = from3 + (to2 - from3 >> 1);
-    if (mid - from3 > 1)
-      mergeFromTo(compare2, fromOrdering, xs2, xs1, from3, mid);
-    if (to2 - mid > 1)
-      mergeFromTo(compare2, fromOrdering, xs2, xs1, mid, to2);
-    i2 = from3;
+    mid = from2 + (to - from2 >> 1);
+    if (mid - from2 > 1)
+      mergeFromTo(compare2, fromOrdering, xs2, xs1, from2, mid);
+    if (to - mid > 1)
+      mergeFromTo(compare2, fromOrdering, xs2, xs1, mid, to);
+    i2 = from2;
     j = mid;
-    k = from3;
-    while (i2 < mid && j < to2) {
+    k = from2;
+    while (i2 < mid && j < to) {
       x = xs2[i2];
       y = xs2[j];
       c = fromOrdering(compare2(x)(y));
@@ -1236,7 +1236,7 @@ var sortByImpl2 = function() {
     while (i2 < mid) {
       xs1[k++] = xs2[i2++];
     }
-    while (j < to2) {
+    while (j < to) {
       xs1[k++] = xs2[j++];
     }
   }
@@ -1290,7 +1290,7 @@ var traverseArrayImpl = function() {
       return xs.concat(ys);
     };
   }
-  return function(apply3) {
+  return function(apply2) {
     return function(map2) {
       return function(pure2) {
         return function(f) {
@@ -1302,12 +1302,12 @@ var traverseArrayImpl = function() {
                 case 1:
                   return map2(array1)(f(array[bot]));
                 case 2:
-                  return apply3(map2(array2)(f(array[bot])))(f(array[bot + 1]));
+                  return apply2(map2(array2)(f(array[bot])))(f(array[bot + 1]));
                 case 3:
-                  return apply3(apply3(map2(array3)(f(array[bot])))(f(array[bot + 1])))(f(array[bot + 2]));
+                  return apply2(apply2(map2(array3)(f(array[bot])))(f(array[bot + 1])))(f(array[bot + 2]));
                 default:
                   var pivot = bot + Math.floor((top2 - bot) / 4) * 2;
-                  return apply3(map2(concat2)(go2(bot, pivot)))(go2(pivot, top2));
+                  return apply2(map2(concat2)(go2(bot, pivot)))(go2(pivot, top2));
               }
             }
             return go2(0, array.length);
@@ -1370,6 +1370,55 @@ var deleteBy = function(v) {
 var cons2 = function(x) {
   return function(xs) {
     return append(semigroupArray)([x])(xs);
+  };
+};
+
+// output/Data.Reflectable/index.js
+var reflectType = function(dict) {
+  return dict.reflectType;
+};
+
+// output/Data.FastVect.FastVect/index.js
+var functorVect = {
+  map: function(f) {
+    return function(v) {
+      return map(functorArray)(f)(v);
+    };
+  }
+};
+var toInt = function(dictReflectable) {
+  return reflectType(dictReflectable);
+};
+var toArray = function() {
+  return function(v) {
+    return v;
+  };
+};
+var index = function() {
+  return function() {
+    return function() {
+      return function() {
+        return function() {
+          return function(dictReflectable) {
+            return function(proxy) {
+              return function(v) {
+                return v[toInt(dictReflectable)(proxy)];
+              };
+            };
+          };
+        };
+      };
+    };
+  };
+};
+var empty2 = [];
+var cons3 = function() {
+  return function() {
+    return function(elem2) {
+      return function(v) {
+        return cons2(elem2)(v);
+      };
+    };
   };
 };
 
@@ -1651,418 +1700,6 @@ var filter4 = function(dict) {
   return dict.filter;
 };
 
-// output/Data.Argonaut.Core/foreign.js
-function id(x) {
-  return x;
-}
-function stringify(j) {
-  return JSON.stringify(j);
-}
-function stringifyWithIndent(i2) {
-  return function(j) {
-    return JSON.stringify(j, null, i2);
-  };
-}
-
-// output/Foreign.Object/foreign.js
-function _copyST(m) {
-  return function() {
-    var r = {};
-    for (var k in m) {
-      if (hasOwnProperty.call(m, k)) {
-        r[k] = m[k];
-      }
-    }
-    return r;
-  };
-}
-var empty3 = {};
-function runST(f) {
-  return f();
-}
-function _foldM(bind2) {
-  return function(f) {
-    return function(mz) {
-      return function(m) {
-        var acc = mz;
-        function g(k2) {
-          return function(z) {
-            return f(z)(k2)(m[k2]);
-          };
-        }
-        for (var k in m) {
-          if (hasOwnProperty.call(m, k)) {
-            acc = bind2(acc)(g(k));
-          }
-        }
-        return acc;
-      };
-    };
-  };
-}
-function toArrayWithKey(f) {
-  return function(m) {
-    var r = [];
-    for (var k in m) {
-      if (hasOwnProperty.call(m, k)) {
-        r.push(f(k)(m[k]));
-      }
-    }
-    return r;
-  };
-}
-var keys = Object.keys || toArrayWithKey(function(k) {
-  return function() {
-    return k;
-  };
-});
-
-// output/Data.Function.Uncurried/foreign.js
-var runFn3 = function(fn) {
-  return function(a2) {
-    return function(b) {
-      return function(c) {
-        return fn(a2, b, c);
-      };
-    };
-  };
-};
-
-// output/Foreign.Object.ST/foreign.js
-function poke2(k) {
-  return function(v) {
-    return function(m) {
-      return function() {
-        m[k] = v;
-        return m;
-      };
-    };
-  };
-}
-var deleteImpl = function(k) {
-  return function(m) {
-    return function() {
-      delete m[k];
-      return m;
-    };
-  };
-};
-
-// output/Foreign.Object/index.js
-var values = /* @__PURE__ */ toArrayWithKey(function(v) {
-  return function(v1) {
-    return v1;
-  };
-});
-var thawST = _copyST;
-var mutate = function(f) {
-  return function(m) {
-    return runST(function __do3() {
-      var s = thawST(m)();
-      f(s)();
-      return s;
-    });
-  };
-};
-var insert2 = function(k) {
-  return function(v) {
-    return mutate(poke2(k)(v));
-  };
-};
-var fold2 = /* @__PURE__ */ _foldM(applyFlipped);
-var foldMap2 = function(dictMonoid) {
-  return function(f) {
-    return fold2(function(acc) {
-      return function(k) {
-        return function(v) {
-          return append(dictMonoid.Semigroup0())(acc)(f(k)(v));
-        };
-      };
-    })(mempty(dictMonoid));
-  };
-};
-var foldableObject = {
-  foldl: function(f) {
-    return fold2(function(z) {
-      return function(v) {
-        return f(z);
-      };
-    });
-  },
-  foldr: function(f) {
-    return function(z) {
-      return function(m) {
-        return foldr(foldableArray)(f)(z)(values(m));
-      };
-    };
-  },
-  foldMap: function(dictMonoid) {
-    return function(f) {
-      return foldMap2(dictMonoid)($$const(f));
-    };
-  }
-};
-var $$delete = function(k) {
-  return mutate(deleteImpl(k));
-};
-
-// output/Data.Argonaut.Core/index.js
-var jsonEmptyObject = /* @__PURE__ */ id(empty3);
-
-// output/Data.Array.NonEmpty.Internal/foreign.js
-var traverse1Impl = function() {
-  function Cont(fn) {
-    this.fn = fn;
-  }
-  var emptyList = {};
-  var ConsCell = function(head6, tail3) {
-    this.head = head6;
-    this.tail = tail3;
-  };
-  function finalCell(head6) {
-    return new ConsCell(head6, emptyList);
-  }
-  function consList(x) {
-    return function(xs) {
-      return new ConsCell(x, xs);
-    };
-  }
-  function listToArray(list) {
-    var arr = [];
-    var xs = list;
-    while (xs !== emptyList) {
-      arr.push(xs.head);
-      xs = xs.tail;
-    }
-    return arr;
-  }
-  return function(apply3) {
-    return function(map2) {
-      return function(f) {
-        var buildFrom = function(x, ys) {
-          return apply3(map2(consList)(f(x)))(ys);
-        };
-        var go2 = function(acc, currentLen, xs) {
-          if (currentLen === 0) {
-            return acc;
-          } else {
-            var last4 = xs[currentLen - 1];
-            return new Cont(function() {
-              var built = go2(buildFrom(last4, acc), currentLen - 1, xs);
-              return built;
-            });
-          }
-        };
-        return function(array) {
-          var acc = map2(finalCell)(f(array[array.length - 1]));
-          var result = go2(acc, array.length - 1, array);
-          while (result instanceof Cont) {
-            result = result.fn();
-          }
-          return map2(listToArray)(result);
-        };
-      };
-    };
-  };
-}();
-
-// output/Data.List.NonEmpty/index.js
-var singleton5 = /* @__PURE__ */ function() {
-  var $169 = singleton2(plusList);
-  return function($170) {
-    return NonEmptyList($169($170));
-  };
-}();
-var head3 = function(v) {
-  return v.value0;
-};
-
-// output/Data.String.CodePoints/foreign.js
-var hasArrayFrom = typeof Array.from === "function";
-var hasStringIterator = typeof Symbol !== "undefined" && Symbol != null && typeof Symbol.iterator !== "undefined" && typeof String.prototype[Symbol.iterator] === "function";
-var hasFromCodePoint = typeof String.prototype.fromCodePoint === "function";
-var hasCodePointAt = typeof String.prototype.codePointAt === "function";
-
-// output/Data.String.Common/foreign.js
-var joinWith = function(s) {
-  return function(xs) {
-    return xs.join(s);
-  };
-};
-
-// output/Record/index.js
-var insert4 = function(dictIsSymbol) {
-  return function() {
-    return function() {
-      return function(l) {
-        return function(a2) {
-          return function(r) {
-            return unsafeSet(reflectSymbol(dictIsSymbol)(l))(a2)(r);
-          };
-        };
-      };
-    };
-  };
-};
-var get = function(dictIsSymbol) {
-  return function() {
-    return function(l) {
-      return function(r) {
-        return unsafeGet(reflectSymbol(dictIsSymbol)(l))(r);
-      };
-    };
-  };
-};
-
-// output/Type.Equality/index.js
-var refl = {
-  proof: function(a2) {
-    return a2;
-  },
-  Coercible0: function() {
-    return void 0;
-  }
-};
-var proof = function(dict) {
-  return dict.proof;
-};
-
-// output/Data.Typelevel.Undefined/index.js
-var $$undefined = unit;
-
-// output/Data.Typelevel.Num.Sets/index.js
-var toInt = function(dict) {
-  return dict.toInt;
-};
-var natD2 = {
-  toInt: function(v) {
-    return 2;
-  }
-};
-var posD2 = {
-  Nat0: function() {
-    return natD2;
-  }
-};
-var natD1 = {
-  toInt: function(v) {
-    return 1;
-  }
-};
-var posD1 = {
-  Nat0: function() {
-    return natD1;
-  }
-};
-var natD0 = {
-  toInt: function(v) {
-    return 0;
-  }
-};
-
-// output/Data.Typelevel.Num.Ops/index.js
-var typelevelSucc = function(dictPos) {
-  return function() {
-    return function(dictDivMod10) {
-      return function() {
-        return function(dictDivMod101) {
-          return {
-            Nat0: dictDivMod10.Nat1,
-            Pos1: function() {
-              return dictPos;
-            }
-          };
-        };
-      };
-    };
-  };
-};
-var divMod10D2D0 = {
-  Nat0: function() {
-    return natD0;
-  },
-  Nat1: function() {
-    return natD2;
-  }
-};
-var divMod10D1D0 = {
-  Nat0: function() {
-    return natD0;
-  },
-  Nat1: function() {
-    return natD1;
-  }
-};
-var divMod10D0D0 = {
-  Nat0: function() {
-    return natD0;
-  },
-  Nat1: function() {
-    return natD0;
-  }
-};
-
-// output/Effect.Exception/foreign.js
-function message(e) {
-  return e.message;
-}
-function throwException(e) {
-  return function() {
-    throw e;
-  };
-}
-
-// output/Control.Monad.Error.Class/index.js
-var throwError = function(dict) {
-  return dict.throwError;
-};
-var catchError = function(dict) {
-  return dict.catchError;
-};
-var $$try = function(dictMonadError) {
-  return function(a2) {
-    return catchError(dictMonadError)(map(dictMonadError.MonadThrow0().Monad0().Bind1().Apply0().Functor0())(Right.create)(a2))(function() {
-      var $21 = pure(dictMonadError.MonadThrow0().Monad0().Applicative0());
-      return function($22) {
-        return $21(Left.create($22));
-      };
-    }());
-  };
-};
-
-// output/Effect.Class/index.js
-var liftEffect = function(dict) {
-  return dict.liftEffect;
-};
-
-// output/Effect.Random/foreign.js
-var random = Math.random;
-
-// output/Data.Vec/index.js
-var toArray3 = function(v) {
-  return v;
-};
-var index4 = function(dictNat) {
-  return function() {
-    return function(v) {
-      return function(i2) {
-        return v[toInt(dictNat)(i2)];
-      };
-    };
-  };
-};
-var functorWithIndexVec = functorWithIndexArray;
-var functorVec = functorArray;
-var foldableVec = foldableArray;
-var empty4 = [];
-var cons5 = function(dictSucc) {
-  return function(x) {
-    return function(v) {
-      return cons2(x)(v);
-    };
-  };
-};
-
 // output/Deku.Core/index.js
 var Insert = /* @__PURE__ */ function() {
   function Insert2(value0) {
@@ -2310,7 +1947,7 @@ var AVar = function() {
   AVar2.drainVar = drainVar;
   return AVar2;
 }();
-function empty5() {
+function empty4() {
   return new AVar(AVar.EMPTY);
 }
 function _takeVar(util, avar, cb2) {
@@ -2373,7 +2010,7 @@ var ffiUtil = /* @__PURE__ */ function() {
     empty: Empty.value
   };
 }();
-var take4 = function(avar) {
+var take2 = function(avar) {
   return function(cb2) {
     return _takeVar(ffiUtil, avar, cb2);
   };
@@ -2384,6 +2021,16 @@ var tryPut = function(value13) {
   };
 };
 
+// output/Effect.Exception/foreign.js
+function message(e) {
+  return e.message;
+}
+function throwException(e) {
+  return function() {
+    throw e;
+  };
+}
+
 // output/Effect.Unsafe/foreign.js
 var unsafePerformEffect = function(f) {
   return f();
@@ -2393,14 +2040,14 @@ var unsafePerformEffect = function(f) {
 var keepLatest = function(dict) {
   return dict.keepLatest;
 };
-var fold3 = function(dict) {
+var fold2 = function(dict) {
   return dict.fold;
 };
 var mapAccum = function(dictIsEvent) {
   return function(f) {
     return function(xs) {
       return function(acc) {
-        return filterMap(dictIsEvent.Filterable1())(snd)(fold3(dictIsEvent)(function(a2) {
+        return filterMap(dictIsEvent.Filterable1())(snd)(fold2(dictIsEvent)(function(a2) {
           return function(v) {
             return map(functorTuple)(pure(applicativeMaybe))(f(a2)(v.value0));
           };
@@ -2480,7 +2127,7 @@ var functorEvent = {
     };
   }
 };
-var fold4 = function(f) {
+var fold3 = function(f) {
   return function(v) {
     return function(b) {
       return function(k) {
@@ -2678,7 +2325,7 @@ var plusEvent = {
   }
 };
 var eventIsEvent = {
-  fold: fold4,
+  fold: fold3,
   keepLatest: keepLatest2,
   sampleOn: sampleOn2,
   fix: fix3,
@@ -2689,6 +2336,148 @@ var eventIsEvent = {
   Filterable1: function() {
     return filterableEvent;
   }
+};
+
+// output/Foreign.Object/foreign.js
+function _copyST(m) {
+  return function() {
+    var r = {};
+    for (var k in m) {
+      if (hasOwnProperty.call(m, k)) {
+        r[k] = m[k];
+      }
+    }
+    return r;
+  };
+}
+var empty5 = {};
+function runST(f) {
+  return f();
+}
+function _foldM(bind2) {
+  return function(f) {
+    return function(mz) {
+      return function(m) {
+        var acc = mz;
+        function g(k2) {
+          return function(z) {
+            return f(z)(k2)(m[k2]);
+          };
+        }
+        for (var k in m) {
+          if (hasOwnProperty.call(m, k)) {
+            acc = bind2(acc)(g(k));
+          }
+        }
+        return acc;
+      };
+    };
+  };
+}
+function toArrayWithKey(f) {
+  return function(m) {
+    var r = [];
+    for (var k in m) {
+      if (hasOwnProperty.call(m, k)) {
+        r.push(f(k)(m[k]));
+      }
+    }
+    return r;
+  };
+}
+var keys = Object.keys || toArrayWithKey(function(k) {
+  return function() {
+    return k;
+  };
+});
+
+// output/Data.Function.Uncurried/foreign.js
+var runFn3 = function(fn) {
+  return function(a2) {
+    return function(b) {
+      return function(c) {
+        return fn(a2, b, c);
+      };
+    };
+  };
+};
+
+// output/Foreign.Object.ST/foreign.js
+function poke2(k) {
+  return function(v) {
+    return function(m) {
+      return function() {
+        m[k] = v;
+        return m;
+      };
+    };
+  };
+}
+var deleteImpl = function(k) {
+  return function(m) {
+    return function() {
+      delete m[k];
+      return m;
+    };
+  };
+};
+
+// output/Foreign.Object/index.js
+var values = /* @__PURE__ */ toArrayWithKey(function(v) {
+  return function(v1) {
+    return v1;
+  };
+});
+var thawST = _copyST;
+var mutate = function(f) {
+  return function(m) {
+    return runST(function __do3() {
+      var s = thawST(m)();
+      f(s)();
+      return s;
+    });
+  };
+};
+var insert2 = function(k) {
+  return function(v) {
+    return mutate(poke2(k)(v));
+  };
+};
+var fold4 = /* @__PURE__ */ _foldM(applyFlipped);
+var foldMap2 = function(dictMonoid) {
+  return function(f) {
+    return fold4(function(acc) {
+      return function(k) {
+        return function(v) {
+          return append(dictMonoid.Semigroup0())(acc)(f(k)(v));
+        };
+      };
+    })(mempty(dictMonoid));
+  };
+};
+var foldableObject = {
+  foldl: function(f) {
+    return fold4(function(z) {
+      return function(v) {
+        return f(z);
+      };
+    });
+  },
+  foldr: function(f) {
+    return function(z) {
+      return function(m) {
+        return foldr(foldableArray)(f)(z)(values(m));
+      };
+    };
+  },
+  foldMap: function(dictMonoid) {
+    return function(f) {
+      return foldMap2(dictMonoid)($$const(f));
+    };
+  }
+};
+var $$delete = function(k) {
+  return mutate(deleteImpl(k));
 };
 
 // output/Deku.Internal/index.js
@@ -2739,7 +2528,7 @@ var __internalDekuFlatten = function(parent2) {
         if (v1 instanceof DynamicChildren$prime) {
           return makeEvent(function(k) {
             return function __do3() {
-              var cancelInner = $$new(empty3)();
+              var cancelInner = $$new(empty5)();
               var cancelOuter = subscribe(v1.value0)(function(inner) {
                 return function __do4() {
                   var myUnsubId = v.ids();
@@ -2777,7 +2566,7 @@ var __internalDekuFlatten = function(parent2) {
                       ;
                       if (kid$prime instanceof Insert && stage instanceof Begin) {
                         write(Middle.value)(stageRef)();
-                        var av = empty5();
+                        var av = empty4();
                         var c1 = subscribe(kid$prime.value0({
                           parent: parent2,
                           scope: myScope,
@@ -2785,7 +2574,7 @@ var __internalDekuFlatten = function(parent2) {
                             return $$void(functorEffect)(tryPut(id2)(av));
                           }
                         })(v))(k)();
-                        var cncl = take4(av)(function(q) {
+                        var cncl = take2(av)(function(q) {
                           if (q instanceof Right) {
                             return function __do6() {
                               write(new Just(q.value0))(myId)();
@@ -2823,6 +2612,19 @@ var __internalDekuFlatten = function(parent2) {
       };
     };
   };
+};
+
+// output/Type.Equality/index.js
+var refl = {
+  proof: function(a2) {
+    return a2;
+  },
+  Coercible0: function() {
+    return void 0;
+  }
+};
+var proof = function(dict) {
+  return dict.proof;
 };
 
 // output/Deku.Control/index.js
@@ -2891,7 +2693,7 @@ var unsafeSetAttribute = function(v) {
             });
           }
           ;
-          throw new Error("Failed pattern match at Deku.Control (line 72, column 24 - line 74, column 41): " + [v1.value.constructor.name]);
+          throw new Error("Failed pattern match at Deku.Control (line 74, column 24 - line 76, column 41): " + [v1.value.constructor.name]);
         }(unsafeUnAttribute($102));
       })(atts);
     };
@@ -2978,82 +2780,86 @@ var deleteMeASAP = function(dictTypeEquals) {
     return unsafeCoerce2;
   };
 };
-var internalPortal = function(isGlobal) {
-  return function(scopeF) {
-    return function(gaga) {
-      return function(closure) {
-        var go2 = function(psr) {
-          return function(v) {
-            return makeEvent(function(k) {
-              return function __do3() {
-                var av = mutAr(map(functorArray)($$const(""))(toArray3(gaga)))();
-                var actualized = oneOf(foldableVec)(plusEvent)(mapWithIndex(functorWithIndexVec)(function(ix) {
-                  return function(v1) {
-                    return v1({
-                      parent: "@portal@",
-                      scope: scopeF(psr.scope),
-                      raiseId: function(id2) {
-                        return unsafeUpdateMutAr(ix)(id2)(av);
-                      }
-                    })(v);
-                  };
-                })(gaga));
-                var u0 = subscribe(actualized)(k)();
-                var av2 = empty5();
-                var idz = map(functorEffect)(unsafeCoerce2)(readAr(av))();
-                var injectable = map(functorVec)(function(id2) {
-                  return function(v1) {
-                    return function(v2) {
-                      return makeEvent(function(k2) {
-                        return function __do4() {
-                          v1.raiseId(id2)();
-                          k2(v2.giveNewParent({
-                            id: id2,
-                            parent: v1.parent,
-                            scope: v1.scope
-                          }))();
-                          return pure(applicativeEffect)(unit);
-                        };
-                      });
+var internalPortal = function() {
+  return function(isGlobal) {
+    return function(scopeF) {
+      return function(gaga) {
+        return function(closure) {
+          var go2 = function(psr) {
+            return function(v) {
+              return makeEvent(function(k) {
+                return function __do3() {
+                  var av = mutAr(map(functorArray)($$const(""))(toArray()(gaga)))();
+                  var actualized = oneOf(foldableArray)(plusEvent)(mapWithIndex(functorWithIndexArray)(function(ix) {
+                    return function(v1) {
+                      return v1({
+                        parent: "@portal@",
+                        scope: scopeF(psr.scope),
+                        raiseId: function(id2) {
+                          return unsafeUpdateMutAr(ix)(id2)(av);
+                        }
+                      })(v);
                     };
+                  })(toArray()(gaga)));
+                  var u0 = subscribe(actualized)(k)();
+                  var av2 = empty4();
+                  var idz = map(functorEffect)(unsafeCoerce2)(readAr(av))();
+                  var injectable = map(functorVect)(function(id2) {
+                    return function(v1) {
+                      return function(v2) {
+                        return makeEvent(function(k2) {
+                          return function __do4() {
+                            v1.raiseId(id2)();
+                            k2(v2.giveNewParent({
+                              id: id2,
+                              parent: v1.parent,
+                              scope: v1.scope
+                            }))();
+                            return pure(applicativeEffect)(unit);
+                          };
+                        });
+                      };
+                    };
+                  })(idz);
+                  var realized = __internalDekuFlatten(psr.parent)(psr.scope)(v)(deleteMeASAP(refl)(refl)(closure(injectable)(function(v1) {
+                    return v1;
+                  })));
+                  var u = subscribe(realized)(k)();
+                  $$void(functorEffect)(tryPut(u)(av2))();
+                  return function __do4() {
+                    u0();
+                    when(applicativeEffect)(!isGlobal)(foreachE(toArray()(idz))(function(id2) {
+                      return k(v.deleteFromCache({
+                        id: id2
+                      }));
+                    }))();
+                    var cncl2 = take2(av2)(function(q) {
+                      if (q instanceof Right) {
+                        return q.value0;
+                      }
+                      ;
+                      if (q instanceof Left) {
+                        return throwException(q.value0);
+                      }
+                      ;
+                      throw new Error("Failed pattern match at Deku.Control (line 167, column 36 - line 169, column 35): " + [q.constructor.name]);
+                    })();
+                    return cncl2();
                   };
-                })(idz);
-                var realized = __internalDekuFlatten(psr.parent)(psr.scope)(v)(deleteMeASAP(refl)(refl)(closure(injectable)(function(v1) {
-                  return v1;
-                })));
-                var u = subscribe(realized)(k)();
-                $$void(functorEffect)(tryPut(u)(av2))();
-                return function __do4() {
-                  u0();
-                  when(applicativeEffect)(!isGlobal)(foreachE(toArray3(idz))(function(id2) {
-                    return k(v.deleteFromCache({
-                      id: id2
-                    }));
-                  }))();
-                  var cncl2 = take4(av2)(function(q) {
-                    if (q instanceof Right) {
-                      return q.value0;
-                    }
-                    ;
-                    if (q instanceof Left) {
-                      return throwException(q.value0);
-                    }
-                    ;
-                    throw new Error("Failed pattern match at Deku.Control (line 164, column 36 - line 166, column 35): " + [q.constructor.name]);
-                  })();
-                  return cncl2();
                 };
-              };
-            });
+              });
+            };
           };
+          return go2;
         };
-        return go2;
       };
     };
   };
 };
-var portal = function(e) {
-  return internalPortal(false)(identity(categoryFn))(e);
+var portal = function() {
+  return function(e) {
+    return internalPortal()(false)(identity(categoryFn))(e);
+  };
 };
 var plantDomableDomable = function(dictTypeEquals) {
   return function(dictTypeEquals1) {
@@ -3234,7 +3040,7 @@ var div_ = function(dictPlant) {
 };
 
 // output/Deku.DOM.Elt.Span/index.js
-var span3 = function(dictPlant) {
+var span = function(dictPlant) {
   return function(attributes) {
     return function(seed) {
       return elementify("span")(attributes)(plant(dictPlant)(seed));
@@ -3242,7 +3048,7 @@ var span3 = function(dictPlant) {
   };
 };
 var span_ = function(dictPlant) {
-  return span3(dictPlant)(empty(plusEvent));
+  return span(dictPlant)(empty(plusEvent));
 };
 
 // output/Deku.DOM.Attr.Href/index.js
@@ -3468,9 +3274,28 @@ var lcmap = function(dictProfunctor) {
   };
 };
 
-// output/Data.Reflectable/index.js
-var reflectType = function(dict) {
-  return dict.reflectType;
+// output/Record/index.js
+var insert3 = function(dictIsSymbol) {
+  return function() {
+    return function() {
+      return function(l) {
+        return function(a2) {
+          return function(r) {
+            return unsafeSet(reflectSymbol(dictIsSymbol)(l))(a2)(r);
+          };
+        };
+      };
+    };
+  };
+};
+var get = function(dictIsSymbol) {
+  return function() {
+    return function(l) {
+      return function(r) {
+        return unsafeGet(reflectSymbol(dictIsSymbol)(l))(r);
+      };
+    };
+  };
 };
 
 // output/Deku.Pursx/index.js
@@ -3479,7 +3304,7 @@ var pursxToElementNil = {
     return function(v1) {
       return function(v2) {
         return {
-          cache: empty3,
+          cache: empty5,
           element: function(v3) {
             return function(v4) {
               return empty(plusEvent);
@@ -3703,7 +3528,7 @@ myDivWithNoChildren = D.div attrs blank
       return function($1) {
         return $0(text_($1));
       };
-    }())(["A", "B", "C"])), div_(plantArrayElementDomable(refl)(refl))([a(plantArrayElementDomable(refl)(refl))(bang2(attr(attrA_HrefString)(Href.value)("https://example.com")))([text_("foo ")]), i_(plantArrayElementDomable(refl)(refl))([text_(" bar ")]), span3(plantArrayElementDomable(refl)(refl))(bang2(attr(attrSpan_StyleString)(Style.value)("font-weight: 800;")))([text_(" baz")])]), div_(plantArrayElementDomable(refl)(refl))([div_(plantArrayElementDomable(refl)(refl))([div_(plantArrayElementDomable(refl)(refl))([input(plantElementDomable(refl)(refl))(bang2(attr(attrInput_XtypeString)(Xtype.value)("range")))(blank)])])])])),
+    }())(["A", "B", "C"])), div_(plantArrayElementDomable(refl)(refl))([a(plantArrayElementDomable(refl)(refl))(bang2(attr(attrA_HrefString)(Href.value)("https://example.com")))([text_("foo ")]), i_(plantArrayElementDomable(refl)(refl))([text_(" bar ")]), span(plantArrayElementDomable(refl)(refl))(bang2(attr(attrSpan_StyleString)(Style.value)("font-weight: 800;")))([text_(" baz")])]), div_(plantArrayElementDomable(refl)(refl))([div_(plantArrayElementDomable(refl)(refl))([div_(plantArrayElementDomable(refl)(refl))([input(plantElementDomable(refl)(refl))(bang2(attr(attrInput_XtypeString)(Xtype.value)("range")))(blank)])])])])),
     next: bang2(attr(attrOnClickCb)(OnClick.value)(cb($$const(applySecond(applyEffect)(dpage(PURSX1.value))(scrollToTop)))))
   });
 };
@@ -4027,6 +3852,29 @@ var ResponseHeader = /* @__PURE__ */ function() {
   return ResponseHeader2;
 }();
 
+// output/Control.Monad.Error.Class/index.js
+var throwError = function(dict) {
+  return dict.throwError;
+};
+var catchError = function(dict) {
+  return dict.catchError;
+};
+var $$try = function(dictMonadError) {
+  return function(a2) {
+    return catchError(dictMonadError)(map(dictMonadError.MonadThrow0().Monad0().Bind1().Apply0().Functor0())(Right.create)(a2))(function() {
+      var $21 = pure(dictMonadError.MonadThrow0().Monad0().Applicative0());
+      return function($22) {
+        return $21(Left.create($22));
+      };
+    }());
+  };
+};
+
+// output/Effect.Class/index.js
+var liftEffect = function(dict) {
+  return dict.liftEffect;
+};
+
 // output/Control.Monad.Except.Trans/index.js
 var ExceptT = function(x) {
   return x;
@@ -4153,6 +4001,22 @@ var runExcept = /* @__PURE__ */ function() {
   };
 }();
 
+// output/Data.Argonaut.Core/foreign.js
+function id(x) {
+  return x;
+}
+function stringify(j) {
+  return JSON.stringify(j);
+}
+function stringifyWithIndent(i2) {
+  return function(j) {
+    return JSON.stringify(j, null, i2);
+  };
+}
+
+// output/Data.Argonaut.Core/index.js
+var jsonEmptyObject = /* @__PURE__ */ id(empty5);
+
 // output/Data.Argonaut.Parser/foreign.js
 function _jsonParser(fail2, succ, s) {
   try {
@@ -4165,6 +4029,13 @@ function _jsonParser(fail2, succ, s) {
 // output/Data.Argonaut.Parser/index.js
 var jsonParser = function(j) {
   return _jsonParser(Left.create, Right.create, j);
+};
+
+// output/Data.String.Common/foreign.js
+var joinWith = function(s) {
+  return function(xs) {
+    return xs.join(s);
+  };
 };
 
 // output/JSURI/foreign.js
@@ -4187,7 +4058,7 @@ var encodeFormURLComponent = /* @__PURE__ */ function() {
 }();
 
 // output/Data.FormURLEncoded/index.js
-var toArray4 = function(v) {
+var toArray2 = function(v) {
   return v;
 };
 var encode2 = /* @__PURE__ */ function() {
@@ -4209,7 +4080,7 @@ var encode2 = /* @__PURE__ */ function() {
   var $16 = map(functorMaybe)(joinWith("&"));
   var $17 = traverse(traversableArray)(applicativeMaybe)(encodePart);
   return function($18) {
-    return $16($17(toArray4($18)));
+    return $16($17(toArray2($18)));
   };
 }();
 
@@ -4400,6 +4271,17 @@ var showMethod = {
 };
 var print = /* @__PURE__ */ either(/* @__PURE__ */ show(showMethod))(unCustomMethod);
 
+// output/Data.List.NonEmpty/index.js
+var singleton4 = /* @__PURE__ */ function() {
+  var $169 = singleton2(plusList);
+  return function($170) {
+    return NonEmptyList($169($170));
+  };
+}();
+var head2 = function(v) {
+  return v.value0;
+};
+
 // output/Data.Nullable/foreign.js
 var nullImpl = null;
 function nullable(a2, r, f) {
@@ -4480,15 +4362,15 @@ var Aff = function() {
   }
   var Scheduler = function() {
     var limit = 1024;
-    var size5 = 0;
+    var size4 = 0;
     var ix = 0;
     var queue = new Array(limit);
     var draining = false;
     function drain() {
       var thunk;
       draining = true;
-      while (size5 !== 0) {
-        size5--;
+      while (size4 !== 0) {
+        size4--;
         thunk = queue[ix];
         queue[ix] = void 0;
         ix = (ix + 1) % limit;
@@ -4502,13 +4384,13 @@ var Aff = function() {
       },
       enqueue: function(cb2) {
         var i2, tmp;
-        if (size5 === limit) {
+        if (size4 === limit) {
           tmp = draining;
           drain();
           draining = tmp;
         }
-        queue[(ix + size5) % limit] = cb2;
-        size5++;
+        queue[(ix + size4) % limit] = cb2;
+        size4++;
         if (!draining) {
           drain();
         }
@@ -4928,8 +4810,8 @@ var Aff = function() {
     var root = EMPTY;
     function kill(error2, par2, cb3) {
       var step3 = par2;
-      var head6 = null;
-      var tail3 = null;
+      var head3 = null;
+      var tail = null;
       var count2 = 0;
       var kills2 = {};
       var tmp, kid;
@@ -4949,15 +4831,15 @@ var Aff = function() {
                   };
                 });
               }
-              if (head6 === null) {
+              if (head3 === null) {
                 break loop;
               }
-              step3 = head6._2;
-              if (tail3 === null) {
-                head6 = null;
+              step3 = head3._2;
+              if (tail === null) {
+                head3 = null;
               } else {
-                head6 = tail3._1;
-                tail3 = tail3._2;
+                head3 = tail._1;
+                tail = tail._2;
               }
               break;
             case MAP:
@@ -4965,10 +4847,10 @@ var Aff = function() {
               break;
             case APPLY:
             case ALT:
-              if (head6) {
-                tail3 = new Aff2(CONS, head6, tail3);
+              if (head3) {
+                tail = new Aff2(CONS, head3, tail);
               }
-              head6 = step3;
+              head3 = step3;
               step3 = step3._1;
               break;
           }
@@ -4984,7 +4866,7 @@ var Aff = function() {
       }
       return kills2;
     }
-    function join2(result, head6, tail3) {
+    function join2(result, head3, tail) {
       var fail2, step3, lhs, rhs, tmp, kid;
       if (util.isLeft(result)) {
         fail2 = result;
@@ -5002,38 +4884,38 @@ var Aff = function() {
           if (interrupt !== null) {
             return;
           }
-          if (head6 === null) {
+          if (head3 === null) {
             cb2(fail2 || step3)();
             return;
           }
-          if (head6._3 !== EMPTY) {
+          if (head3._3 !== EMPTY) {
             return;
           }
-          switch (head6.tag) {
+          switch (head3.tag) {
             case MAP:
               if (fail2 === null) {
-                head6._3 = util.right(head6._1(util.fromRight(step3)));
-                step3 = head6._3;
+                head3._3 = util.right(head3._1(util.fromRight(step3)));
+                step3 = head3._3;
               } else {
-                head6._3 = fail2;
+                head3._3 = fail2;
               }
               break;
             case APPLY:
-              lhs = head6._1._3;
-              rhs = head6._2._3;
+              lhs = head3._1._3;
+              rhs = head3._2._3;
               if (fail2) {
-                head6._3 = fail2;
+                head3._3 = fail2;
                 tmp = true;
                 kid = killId++;
-                kills[kid] = kill(early, fail2 === lhs ? head6._2 : head6._1, function() {
+                kills[kid] = kill(early, fail2 === lhs ? head3._2 : head3._1, function() {
                   return function() {
                     delete kills[kid];
                     if (tmp) {
                       tmp = false;
-                    } else if (tail3 === null) {
+                    } else if (tail === null) {
                       join2(fail2, null, null);
                     } else {
-                      join2(fail2, tail3._1, tail3._2);
+                      join2(fail2, tail._1, tail._2);
                     }
                   };
                 });
@@ -5045,32 +4927,32 @@ var Aff = function() {
                 return;
               } else {
                 step3 = util.right(util.fromRight(lhs)(util.fromRight(rhs)));
-                head6._3 = step3;
+                head3._3 = step3;
               }
               break;
             case ALT:
-              lhs = head6._1._3;
-              rhs = head6._2._3;
+              lhs = head3._1._3;
+              rhs = head3._2._3;
               if (lhs === EMPTY && util.isLeft(rhs) || rhs === EMPTY && util.isLeft(lhs)) {
                 return;
               }
               if (lhs !== EMPTY && util.isLeft(lhs) && rhs !== EMPTY && util.isLeft(rhs)) {
                 fail2 = step3 === lhs ? rhs : lhs;
                 step3 = null;
-                head6._3 = fail2;
+                head3._3 = fail2;
               } else {
-                head6._3 = step3;
+                head3._3 = step3;
                 tmp = true;
                 kid = killId++;
-                kills[kid] = kill(early, step3 === lhs ? head6._2 : head6._1, function() {
+                kills[kid] = kill(early, step3 === lhs ? head3._2 : head3._1, function() {
                   return function() {
                     delete kills[kid];
                     if (tmp) {
                       tmp = false;
-                    } else if (tail3 === null) {
+                    } else if (tail === null) {
                       join2(step3, null, null);
                     } else {
-                      join2(step3, tail3._1, tail3._2);
+                      join2(step3, tail._1, tail._2);
                     }
                   };
                 });
@@ -5081,11 +4963,11 @@ var Aff = function() {
               }
               break;
           }
-          if (tail3 === null) {
-            head6 = null;
+          if (tail === null) {
+            head3 = null;
           } else {
-            head6 = tail3._1;
-            tail3 = tail3._2;
+            head3 = tail._1;
+            tail = tail._2;
           }
         }
     }
@@ -5101,8 +4983,8 @@ var Aff = function() {
     function run3() {
       var status = CONTINUE;
       var step3 = par;
-      var head6 = null;
-      var tail3 = null;
+      var head3 = null;
+      var tail = null;
       var tmp, fid;
       loop:
         while (true) {
@@ -5112,31 +4994,31 @@ var Aff = function() {
             case CONTINUE:
               switch (step3.tag) {
                 case MAP:
-                  if (head6) {
-                    tail3 = new Aff2(CONS, head6, tail3);
+                  if (head3) {
+                    tail = new Aff2(CONS, head3, tail);
                   }
-                  head6 = new Aff2(MAP, step3._1, EMPTY, EMPTY);
+                  head3 = new Aff2(MAP, step3._1, EMPTY, EMPTY);
                   step3 = step3._2;
                   break;
                 case APPLY:
-                  if (head6) {
-                    tail3 = new Aff2(CONS, head6, tail3);
+                  if (head3) {
+                    tail = new Aff2(CONS, head3, tail);
                   }
-                  head6 = new Aff2(APPLY, EMPTY, step3._2, EMPTY);
+                  head3 = new Aff2(APPLY, EMPTY, step3._2, EMPTY);
                   step3 = step3._1;
                   break;
                 case ALT:
-                  if (head6) {
-                    tail3 = new Aff2(CONS, head6, tail3);
+                  if (head3) {
+                    tail = new Aff2(CONS, head3, tail);
                   }
-                  head6 = new Aff2(ALT, EMPTY, step3._2, EMPTY);
+                  head3 = new Aff2(ALT, EMPTY, step3._2, EMPTY);
                   step3 = step3._1;
                   break;
                 default:
                   fid = fiberId++;
                   status = RETURN;
                   tmp = step3;
-                  step3 = new Aff2(FORKED, fid, new Aff2(CONS, head6, tail3), EMPTY);
+                  step3 = new Aff2(FORKED, fid, new Aff2(CONS, head3, tail), EMPTY);
                   tmp = Fiber(util, supervisor, tmp);
                   tmp.onComplete({
                     rethrow: false,
@@ -5149,22 +5031,22 @@ var Aff = function() {
               }
               break;
             case RETURN:
-              if (head6 === null) {
+              if (head3 === null) {
                 break loop;
               }
-              if (head6._1 === EMPTY) {
-                head6._1 = step3;
+              if (head3._1 === EMPTY) {
+                head3._1 = step3;
                 status = CONTINUE;
-                step3 = head6._2;
-                head6._2 = EMPTY;
+                step3 = head3._2;
+                head3._2 = EMPTY;
               } else {
-                head6._2 = step3;
-                step3 = head6;
-                if (tail3 === null) {
-                  head6 = null;
+                head3._2 = step3;
+                step3 = head3;
+                if (tail === null) {
+                  head3 = null;
                 } else {
-                  head6 = tail3._1;
-                  tail3 = tail3._2;
+                  head3 = tail._1;
+                  tail = tail._2;
                 }
               }
           }
@@ -5298,7 +5180,7 @@ var _delay = function() {
 var _sequential = Aff.Seq;
 
 // output/Effect.Aff/index.js
-var $runtime_lazy2 = function(name16, moduleName, init4) {
+var $runtime_lazy2 = function(name16, moduleName, init2) {
   var state3 = 0;
   var val;
   return function(lineNumber) {
@@ -5307,7 +5189,7 @@ var $runtime_lazy2 = function(name16, moduleName, init4) {
     if (state3 === 1)
       throw new ReferenceError(name16 + " was needed before it finished initializing (module " + moduleName + ", line " + lineNumber + ")", moduleName, lineNumber);
     state3 = 1;
-    val = init4();
+    val = init2();
     state3 = 2;
     return val;
   };
@@ -5465,18 +5347,18 @@ var ForeignError = /* @__PURE__ */ function() {
   };
   return ForeignError2;
 }();
-var TypeMismatch2 = /* @__PURE__ */ function() {
-  function TypeMismatch3(value0, value1) {
+var TypeMismatch = /* @__PURE__ */ function() {
+  function TypeMismatch2(value0, value1) {
     this.value0 = value0;
     this.value1 = value1;
   }
   ;
-  TypeMismatch3.create = function(value0) {
+  TypeMismatch2.create = function(value0) {
     return function(value1) {
-      return new TypeMismatch3(value0, value1);
+      return new TypeMismatch2(value0, value1);
     };
   };
-  return TypeMismatch3;
+  return TypeMismatch2;
 }();
 var ErrorAtIndex = /* @__PURE__ */ function() {
   function ErrorAtIndex2(value0, value1) {
@@ -5519,7 +5401,7 @@ var renderForeignError = function(v) {
     return "Error at property " + (show(showString)(v.value0) + (": " + renderForeignError(v.value1)));
   }
   ;
-  if (v instanceof TypeMismatch2) {
+  if (v instanceof TypeMismatch) {
     return "Type mismatch: expected " + (v.value0 + (", found " + v.value1));
   }
   ;
@@ -5528,7 +5410,7 @@ var renderForeignError = function(v) {
 var fail = function(dictMonad) {
   var $118 = throwError(monadThrowExceptT(dictMonad));
   return function($119) {
-    return $118(singleton5($119));
+    return $118(singleton4($119));
   };
 };
 var unsafeReadTagged = function(dictMonad) {
@@ -5539,7 +5421,7 @@ var unsafeReadTagged = function(dictMonad) {
       }
       ;
       if (otherwise) {
-        return fail(dictMonad)(new TypeMismatch2(tag, tagOf(value13)));
+        return fail(dictMonad)(new TypeMismatch(tag, tagOf(value13)));
       }
       ;
       throw new Error("Failed pattern match at Foreign (line 123, column 1 - line 123, column 104): " + [tag.constructor.name, value13.constructor.name]);
@@ -5708,7 +5590,7 @@ var request = function(driver2) {
         if (v2 instanceof Right) {
           var v1 = runExcept(fromResponse(v2.value0.body));
           if (v1 instanceof Left) {
-            return new Left(new ResponseBodyError(head3(v1.value0), v2.value0));
+            return new Left(new ResponseBodyError(head2(v1.value0), v2.value0));
           }
           ;
           if (v1 instanceof Right) {
@@ -6147,7 +6029,7 @@ var vbusCons2 = function(dictIsSymbol) {
                   vb: function(v) {
                     return function(v1) {
                       return function(v2) {
-                        return insert4(dictIsSymbol)()()($$Proxy.value)(unit)(vb(dictVBus)($$Proxy.value)($$Proxy.value)($$Proxy.value));
+                        return insert3(dictIsSymbol)()()($$Proxy.value)(unit)(vb(dictVBus)($$Proxy.value)($$Proxy.value)($$Proxy.value));
                       };
                     };
                   }
@@ -6235,7 +6117,7 @@ var events = function(dpage) {
           return function($2) {
             return $0($1($2));
           };
-        }())(fold3(eventIsEvent)($$const(add(semiringInt)(1)))(alt(altEvent)(bang2(unit))(event.buttonClicked))(-1 | 0))))]), div_(plantArrayElementDomable(refl)(refl))([input(plantElementDomable(refl)(refl))(slider(bang2(push2.sliderMoved)))(blank), div_(plantArrayElementDomable(refl)(refl))([text(alt(altEvent)(bang2("Val: 50"))(map(functorEvent)(function() {
+        }())(fold2(eventIsEvent)($$const(add(semiringInt)(1)))(alt(altEvent)(bang2(unit))(event.buttonClicked))(-1 | 0))))]), div_(plantArrayElementDomable(refl)(refl))([input(plantElementDomable(refl)(refl))(slider(bang2(push2.sliderMoved)))(blank), div_(plantArrayElementDomable(refl)(refl))([text(alt(altEvent)(bang2("Val: 50"))(map(functorEvent)(function() {
           var $3 = append(semigroupString)("Val: ");
           var $4 = show(showNumber);
           return function($5) {
@@ -6466,7 +6348,7 @@ main = runInBody1
         }))]))(blank), button(plantElementDomable(refl)(refl))(alt(altEvent)(bang2(attr(attrButton_StyleString)(Style.value)("margin: 5px;")))(bang2(attr(attrOnClickCb)(OnClick.value)(cb($$const(push2(AddTodo.value)))))))(text_("Add"))]), div_(plantEventEventChildDomab(refl)(refl))(map(functorEvent)(function(txt) {
           return keepLatest(eventIsEvent)(bus(function(p$prime) {
             return function(e$prime) {
-              return alt(altEvent)(bang2(new Insert(div_(plantArrayElementDomable(refl)(refl))([span3(plantElementDomable(refl)(refl))(bang2(attr(attrSpan_StyleString)(Style.value)("margin: 5px;")))(text_(txt)), button(plantArrayElementDomable(refl)(refl))(alt(altEvent)(bang2(attr(attrButton_StyleString)(Style.value)("margin: 5px;")))(bang2(attr(attrOnClickCb)(OnClick.value)(cb($$const(p$prime(SendToTop.value)))))))([text_("Prioritize")]), button(plantArrayElementDomable(refl)(refl))(alt(altEvent)(bang2(attr(attrButton_StyleString)(Style.value)("margin: 5px;")))(bang2(attr(attrOnClickCb)(OnClick.value)(cb($$const(p$prime(Remove.value)))))))([text_("Delete")])]))))(e$prime);
+              return alt(altEvent)(bang2(new Insert(div_(plantArrayElementDomable(refl)(refl))([span(plantElementDomable(refl)(refl))(bang2(attr(attrSpan_StyleString)(Style.value)("margin: 5px;")))(text_(txt)), button(plantArrayElementDomable(refl)(refl))(alt(altEvent)(bang2(attr(attrButton_StyleString)(Style.value)("margin: 5px;")))(bang2(attr(attrOnClickCb)(OnClick.value)(cb($$const(p$prime(SendToTop.value)))))))([text_("Prioritize")]), button(plantArrayElementDomable(refl)(refl))(alt(altEvent)(bang2(attr(attrButton_StyleString)(Style.value)("margin: 5px;")))(bang2(attr(attrOnClickCb)(OnClick.value)(cb($$const(p$prime(Remove.value)))))))([text_("Delete")])]))))(e$prime);
             };
           }));
         })(filterMap(filterableEvent)(function(v) {
@@ -6590,10 +6472,6 @@ var intro = function(dpage) {
     next: bang(eventIsEvent)(attr(attrOnClickCb)(OnClick.value)(cb($$const(applySecond(applyEffect)(dpage(HelloWorld.value))(scrollToTop)))))
   });
 };
-
-// output/Data.Typelevel.Num.Reps/index.js
-var d1 = $$undefined;
-var d0 = $$undefined;
 
 // output/Deku.DOM.Attr.Controls/index.js
 var Controls = /* @__PURE__ */ function() {
@@ -6722,16 +6600,24 @@ var portals1 = function(v) {
       return "code";
     }
   }))(px7)({
-    code: nut(plantElementDomable(refl)(refl))(pre_(plantArrayElementDomable(refl)(refl))([code_(plantArrayElementDomable(refl)(refl))([text_('module Main where\n\nimport Prelude\n\nimport Control.Alt ((<|>))\nimport Data.Foldable (oneOfMap)\nimport Data.Profunctor (lcmap)\nimport Data.Tuple.Nested ((/\\), type (/\\))\nimport Data.Typelevel.Num (d0, d1)\nimport Data.Vec (index, (+>))\nimport Data.Vec as V\nimport Deku.Attribute ((:=))\nimport Deku.Control (blank, plant, portal, switcher, text_)\nimport Deku.DOM as D\nimport Deku.Toplevel (runInBody1)\nimport Effect (Effect)\nimport FRP.Event (Event, bang, bus, fold, mapAccum)\n\ncounter :: forall a. Event a \u2192 Event (a /\\ Int)\ncounter event = mapAccum f event 0\n  where\n  f a b = (b + 1) /\\ (a /\\ b)\n\nmain :: Effect Unit\nmain = runInBody1\n  ( bus \\push -> lcmap  (bang unit <|> _) \\event -> do\n      plant $ portal\n        ( map\n            ( \\i -> D.video\n                (oneOfMap bang [ D.Controls := "true", D.Width := "250" ])\n                ( D.source\n                    (oneOfMap bang [ D.Src := i, D.Xtype := "video/mp4" ])\n                    blank\n                )\n            )\n            ( "https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4"\n                +> "https://www.w3schools.com/jsref/movie.mp4"\n                +> V.empty\n            )\n        )\n        \\v _ -> do\n          let\n            p0 = index v d0\n            p1 = index v d1\n            ev = fold (const not) event\n            flips = switcher (if _ then p0 else p1) <<< ev\n          plant $ D.div_\n            [ D.button (bang $ D.OnClick := push unit)\n                [ text_ "Switch videos" ]\n            , D.div_ [ D.span_ (flips true), D.span_ (flips false) ]\n            ]\n  )\n')])])),
+    code: nut(plantElementDomable(refl)(refl))(pre_(plantArrayElementDomable(refl)(refl))([code_(plantArrayElementDomable(refl)(refl))([text_('module Main where\n\nimport Prelude\n\nimport Control.Alt ((<|>))\nimport Data.Foldable (oneOfMap)\nimport Data.Profunctor (lcmap)\nimport Data.Tuple.Nested ((/\\), type (/\\))\nimport Data.FastVect.FastVect (index, (:))\nimport Data.FastVect.FastVect as V\nimport Deku.Attribute ((:=))\nimport Deku.Control (blank, plant, portal, switcher, text_)\nimport Deku.DOM as D\nimport Deku.Toplevel (runInBody1)\nimport Effect (Effect)\nimport FRP.Event (Event, bang, bus, fold, mapAccum)\nimport Type.Prelude (Proxy(..))\n\ncounter :: forall a. Event a \u2192 Event (a /\\ Int)\ncounter event = mapAccum f event 0\n  where\n  f a b = (b + 1) /\\ (a /\\ b)\n\nmain :: Effect Unit\nmain = runInBody1\n  ( bus \\push -> lcmap  (bang unit <|> _) \\event -> do\n      plant $ portal\n        ( map\n            ( \\i -> D.video\n                (oneOfMap bang [ D.Controls := "true", D.Width := "250" ])\n                ( D.source\n                    (oneOfMap bang [ D.Src := i, D.Xtype := "video/mp4" ])\n                    blank\n                )\n            )\n            ( "https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4"\n                : "https://www.w3schools.com/jsref/movie.mp4"\n                : V.empty\n            )\n        )\n        \\v _ -> do\n          let\n            p0 = index (Proxy :: _ 0) v\n            p1 = index (Proxy :: _ 1) v\n            ev = fold (const not) event\n            flips = switcher (if _ then p0 else p1) <<< ev\n          plant $ D.div_\n            [ D.button (bang $ D.OnClick := push unit)\n                [ text_ "Switch videos" ]\n            , D.div_ [ D.span_ (flips true), D.span_ (flips false) ]\n            ]\n  )\n')])])),
     result: nut(plantEventEventChildDomab(refl)(refl))(bus(function(push2) {
       return lcmap(profunctorFn)(alt(altEvent)(bang2(unit)))(function(event) {
-        return bang2(new Insert(portal(map(functorVec)(function(i2) {
+        return bang2(new Insert(portal()(map(functorVect)(function(i2) {
           return video(plantElementDomable(refl)(refl))(oneOfMap(foldableArray)(plusEvent)(bang2)([attr(attrVideo_ControlsString)(Controls.value)("true"), attr(attrVideo_WidthString)(Width.value)("250")]))(source(plantElementDomable(refl)(refl))(oneOfMap(foldableArray)(plusEvent)(bang2)([attr(attrSource_SrcString)(Src.value)(i2), attr(attrSource_XtypeString)(Xtype.value)("video/mp4")]))(blank));
-        })(cons5(typelevelSucc(posD2)()(divMod10D1D0)()(divMod10D2D0))("https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4")(cons5(typelevelSucc(posD1)()(divMod10D0D0)()(divMod10D1D0))("https://www.w3schools.com/jsref/movie.mp4")(empty4))))(function(v1) {
+        })(cons3()()("https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4")(cons3()()("https://www.w3schools.com/jsref/movie.mp4")(empty2))))(function(v1) {
           return function(v2) {
-            var p1 = index4(natD1)()(v1)(d1);
-            var p0 = index4(natD0)()(v1)(d0);
-            var ev = fold3(eventIsEvent)($$const(not(heytingAlgebraBoolean)))(event);
+            var p1 = index()()()()()({
+              reflectType: function() {
+                return 1;
+              }
+            })($$Proxy.value)(v1);
+            var p0 = index()()()()()({
+              reflectType: function() {
+                return 0;
+              }
+            })($$Proxy.value)(v1);
+            var ev = fold2(eventIsEvent)($$const(not(heytingAlgebraBoolean)))(event);
             var flips = function() {
               var $4 = switcher(function(v3) {
                 if (v3) {
@@ -7123,6 +7009,9 @@ function sendToTop_(a2) {
   };
 }
 
+// output/Effect.Random/foreign.js
+var random = Math.random;
+
 // output/Deku.Interpret/index.js
 var effectfulDOMInterpret = {
   ids: /* @__PURE__ */ map(functorEffect)(/* @__PURE__ */ show(showNumber))(random),
@@ -7215,7 +7104,7 @@ var scene = function(push2) {
       };
     };
     return [div_(plantArrayElementDomable(refl)(refl))(map(functorArray)(function(v) {
-      return span_(plantArrayElementDomable(refl)(refl))([a(plantArrayElementDomable(refl)(refl))(oneOfMap(foldableArray)(plusEvent)(bang2)([attr(attrOnClickCb)(OnClick.value)(cb($$const(push2(v.value0)))), attr(attrA_StyleString)(Style.value)("cursor:pointer;")]))([text_(v.value1.value0)]), span3(plantArrayElementDomable(refl)(refl))(bang2(attr(attrSpan_StyleString)(Style.value)(function() {
+      return span_(plantArrayElementDomable(refl)(refl))([a(plantArrayElementDomable(refl)(refl))(oneOfMap(foldableArray)(plusEvent)(bang2)([attr(attrOnClickCb)(OnClick.value)(cb($$const(push2(v.value0)))), attr(attrA_StyleString)(Style.value)("cursor:pointer;")]))([text_(v.value1.value0)]), span(plantArrayElementDomable(refl)(refl))(bang2(attr(attrSpan_StyleString)(Style.value)(function() {
         if (v.value1.value1) {
           return "";
         }
