@@ -19,7 +19,6 @@ export const makeElement_ = (tryHydration) => (a) => (state) => () => {
 			scope: a.scope,
 			main: dom,
 		};
-		connectXToY_(ptr, a.parent, state);
 	} else {
 		state.units[ptr] = {
 			listeners: {},
@@ -41,7 +40,7 @@ export const makeText_ = (tryHydration) => (a) => (state) => () => {
 		state.units[ptr] = {
 			// if we've done ssr for a text node, it will be a span,
 			// so we want to get the child node
-			main: dom.childNodes[0].nodeValue,
+			main: dom.childNodes[0],
 			parent: a.parent,
 			scope: a.scope,
 		};
@@ -99,6 +98,7 @@ export const setText_ = (a) => (state) => () => {
 
 export const makePursx_ = (tryHydration) => (a) => (state) => () => {
 	var dom;
+	var tmp;
 	var ptr = a.id;
 	var html = a.html;
 	var verb = a.verb;
@@ -110,7 +110,7 @@ export const makePursx_ = (tryHydration) => (a) => (state) => () => {
 			listeners: {},
 			scope: a.dkScope,
 			parent: parent,
-			main: dom,
+			main: dom.childNodes[0],
 		};
 	} else {
 		var entries = Object.entries(cache);
@@ -132,7 +132,7 @@ export const makePursx_ = (tryHydration) => (a) => (state) => () => {
 				);
 			}
 		}
-		var tmp = document.createElement("div");
+		tmp = document.createElement("div");
 		tmp.innerHTML = html.trim();
 		state.units[ptr] = {
 			listeners: {},
@@ -143,6 +143,10 @@ export const makePursx_ = (tryHydration) => (a) => (state) => () => {
 	}
 	if (!state.scopes[a.dkScope]) {
 		state.scopes[a.dkScope] = [];
+	}
+	// we were hydrating if tmp is not defined
+	if (!tmp) {
+		tmp = dom;
 	}
 	state.scopes[a.dkScope].push(ptr);
 	tmp.querySelectorAll("[data-deku-attr-internal]").forEach(function (e) {

@@ -11,7 +11,17 @@ main :: Effect Unit
 main =
   runSSR
     ( Template
-        { head: "<html><head><title>Deku documentation</title><script defer src=\"bundle.js\"/></head>"
+        { head: """<html>
+  <head>
+    <title>Deku documentation</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <link rel="stylesheet" href="style.css">
+		<script type="module">
+			import { main } from "./bundle.js";
+			main();
+		</script>
+  </head>"""
         , tail: "</html>"
         }
     )

@@ -75,7 +75,8 @@ ssr arr = "<body id=\"deku-root\">" <> o "deku-root" <> "</body>"
       case i2a !! 0 of
         Just (SetText _) -> makeText unit
         Just (MakeText _) -> makeText unit
-        Just (MakePursx { html }) -> html
+        -- todo: strip styling from div
+        Just (MakePursx { html }) -> "<div id=\""<>id<>"\">"<>html<>"</div>"
         _ -> makeElt unit
   eltTag i2a = i2a #
     ( fromMaybe "" <<< findMap case _ of
