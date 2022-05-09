@@ -2,24 +2,22 @@ module Deku.DOM.Elt.Basefont where
 
 import Control.Plus (empty)
 import Deku.Attribute (Attribute)
-import Deku.Control (elementify, class Plant, plant)
-import Deku.Core (Child, Element, Domable)
+import Deku.Control (elementify)
+import Deku.Core (Domable(..), FixedChildren(..))
 import FRP.Event (Event)
 
 data Basefont_
 
 basefont
-  :: forall seed lock payload
-   . Plant seed (Domable lock payload)
-  => Event (Attribute Basefont_)
-  -> seed
-  -> Element lock payload
-basefont attributes seed = elementify "basefont" attributes (plant seed)
+  :: forall lock payload
+   . Event (Attribute Basefont_)
+  -> Array (Domable lock payload)
+  -> Domable lock payload
+basefont attributes kids = Element' (elementify "basefont" attributes (FixedChildren' (FixedChildren kids)))
 
 basefont_
-  :: forall seed lock payload
-   . Plant seed (Domable lock payload)
-  => seed
-  -> Element lock payload
+  :: forall lock payload
+   . Array (Domable lock payload)
+  -> Domable lock payload
 basefont_ = basefont empty
 

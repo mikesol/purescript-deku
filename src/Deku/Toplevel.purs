@@ -3,7 +3,7 @@ module Deku.Toplevel where
 import Prelude
 
 import Data.Maybe (maybe)
-import Deku.Control (deku, deku1, deku2, dekuA, plant)
+import Deku.Control (deku, deku1, deku2, dekuA)
 import Deku.Core (Domable, Element)
 import Deku.Interpret (FFIDOMSnapshot, effectfulDOMInterpret, makeFFIDOMSnapshot)
 import Effect (Effect)
@@ -20,7 +20,7 @@ runInElement'
   -> Effect (Effect Unit)
 runInElement' elt eee = do
   ffi <- makeFFIDOMSnapshot
-  let evt = deku elt (plant eee) effectfulDOMInterpret
+  let evt = deku elt eee effectfulDOMInterpret
   subscribe evt \i -> i ffi
 
 runInElement1'
@@ -43,7 +43,7 @@ runInElement2' elt eee = do
 
 runInElementA'
   :: Web.DOM.Element
-  -> (forall lock. Array (Element lock (FFIDOMSnapshot -> Effect Unit)))
+  -> (forall lock. Array (Domable lock (FFIDOMSnapshot -> Effect Unit)))
   -> Effect (Effect Unit)
 runInElementA' elt eee = do
   ffi <- makeFFIDOMSnapshot
@@ -72,7 +72,7 @@ runInBody2' eee = do
   maybe mempty (\elt -> runInElement2' elt eee) (toElement <$> b')
 
 runInBodyA'
-  :: (forall lock. Array (Element lock (FFIDOMSnapshot -> Effect Unit)))
+  :: (forall lock. Array (Domable lock (FFIDOMSnapshot -> Effect Unit)))
   -> Effect (Effect Unit)
 runInBodyA' eee = do
   b' <- window >>= document >>= body
@@ -94,6 +94,6 @@ runInBody2
 runInBody2 a = void (runInBody2' a)
 
 runInBodyA
-  :: (forall lock. Array (Element lock (FFIDOMSnapshot -> Effect Unit)))
+  :: (forall lock. Array (Domable lock (FFIDOMSnapshot -> Effect Unit)))
   -> Effect Unit
 runInBodyA a = void (runInBodyA' a)

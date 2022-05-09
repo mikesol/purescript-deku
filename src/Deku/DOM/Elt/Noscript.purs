@@ -2,24 +2,22 @@ module Deku.DOM.Elt.Noscript where
 
 import Control.Plus (empty)
 import Deku.Attribute (Attribute)
-import Deku.Control (elementify, class Plant, plant)
-import Deku.Core (Child, Element, Domable)
+import Deku.Control (elementify)
+import Deku.Core (Domable(..), FixedChildren(..))
 import FRP.Event (Event)
 
 data Noscript_
 
 noscript
-  :: forall seed lock payload
-   . Plant seed (Domable lock payload)
-  => Event (Attribute Noscript_)
-  -> seed
-  -> Element lock payload
-noscript attributes seed = elementify "noscript" attributes (plant seed)
+  :: forall lock payload
+   . Event (Attribute Noscript_)
+  -> Array (Domable lock payload)
+  -> Domable lock payload
+noscript attributes kids = Element' (elementify "noscript" attributes (FixedChildren' (FixedChildren kids)))
 
 noscript_
-  :: forall seed lock payload
-   . Plant seed (Domable lock payload)
-  => seed
-  -> Element lock payload
+  :: forall lock payload
+   . Array (Domable lock payload)
+  -> Domable lock payload
 noscript_ = noscript empty
 

@@ -6,17 +6,16 @@ module Deku.Control
   , deku1
   , deku2
   , dekuA
-  , blank
   , globalPortal
   , portal
-  , class Plant
-  , plant
   , switcher
   ) where
 
 import Prelude
 
 import Control.Alt ((<|>))
+import Control.Lazy (fix)
+import Control.Plus (empty)
 import Data.Either (Either(..))
 import Data.Filterable (filter)
 import Data.Foldable (oneOf)
@@ -32,8 +31,7 @@ import Effect.AVar (tryPut)
 import Effect.AVar as AVar
 import Effect.Exception (throwException)
 import FRP.Event (Event, bang, keepLatest, makeEvent, mapAccum, memoize, subscribe)
-import Safe.Coerce (coerce)
-import Type.Equality (class TypeEquals, proof)
+import Type.Equality (class TypeEquals)
 import Unsafe.Coerce (unsafeCoerce)
 import Web.DOM as Web.DOM
 
@@ -69,9 +67,10 @@ unsafeSetAttribute
   -> Event (Attribute element)
   -> Event payload
 unsafeSetAttribute (DOMInterpret { setProp, setCb }) id atts = map
-  ( (\{key, value } -> case value of
-     Prop' s -> setProp { id, key, value:s }
-     Cb' c -> setCb { id, key, value:c }) <<<
+  ( ( \{ key, value } -> case value of
+        Prop' s -> setProp { id, key, value: s }
+        Cb' c -> setCb { id, key, value: c }
+    ) <<<
       unsafeUnAttribute
   )
   (atts)
@@ -94,7 +93,8 @@ elementify tag atts children = Element go
               , unsafeSetAttribute di me atts
               ]
           )
-            <|> __internalDekuFlatten me scope di children
+            <|> __internalDekuFlatten { parent: me, scope, raiseId: mempty } di
+              children
         )
         k
 
@@ -104,32 +104,38 @@ foreign import mutAr :: forall a. Array a -> Effect (MutAr a)
 foreign import unsafeUpdateMutAr :: forall a. Int -> a -> MutAr a -> Effect Unit
 foreign import readAr :: forall a. MutAr a -> Effect (Array a)
 
-deleteMeASAP :: forall lock0 lock1 payload0 payload1. TypeEquals lock0 lock1 => TypeEquals payload0 payload1 => Domable lock0 payload0 -> Domable lock1 payload1
+deleteMeASAP
+  :: forall lock0 lock1 payload0 payload1
+   . TypeEquals lock0 lock1
+  => TypeEquals payload0 payload1
+  => Domable lock0 payload0
+  -> Domable lock1 payload1
 deleteMeASAP = unsafeCoerce
 
 internalPortal
   :: forall n lock0 lock1 payload
    . Boolean
   -> (String -> String)
-  -> Vec n (Element lock0 payload)
-  -> ( Vec n (Element lock1 payload)
-       -> (Element lock0 payload -> Element lock1 payload)
+  -> Vec n (Domable lock0 payload)
+  -> ( Vec n (Domable lock1 payload)
+       -> (Domable lock0 payload -> Domable lock1 payload)
        -> Domable lock1 payload
      )
-  -> Element lock0 payload
-internalPortal isGlobal scopeF gaga closure = Element go
+  -> Domable lock0 payload
+internalPortal isGlobal scopeF gaga closure = Element' $ Element go
   where
   go psr di@(DOMInterpret { deleteFromCache }) = makeEvent \k -> do
     av <- mutAr (map (const "") $ toArray gaga)
     let
       actualized = oneOf $ mapWithIndex
-        ( \ix (Element gogo) ->
-            gogo
+        ( \ix -> fix \f i -> case i of
+            Element' (Element gogo) -> gogo
               { parent: "@portal@"
               , scope: scopeF psr.scope
               , raiseId: \id -> unsafeUpdateMutAr ix id av
               }
               di
+            _ -> f (Element' (elementify "div" empty i))
         )
         gaga
     u0 <- subscribe actualized k
@@ -143,7 +149,7 @@ internalPortal isGlobal scopeF gaga closure = Element go
       -- instead, it is always managed inside a referentially transparent node
       -- that can be properly connected and disconnected
       injectable = map
-        ( \id -> Element
+        ( \id -> Element' $ Element
             \{ parent, scope, raiseId } (DOMInterpret { giveNewParent }) ->
               makeEvent \k2 -> do
                 raiseId id
@@ -151,8 +157,12 @@ internalPortal isGlobal scopeF gaga closure = Element go
                 pure (pure unit)
         )
         idz
-      realized = __internalDekuFlatten psr.parent psr.scope di
-        (deleteMeASAP (closure injectable (\(Element q) -> Element q)))
+      realized = __internalDekuFlatten psr di
+        ( deleteMeASAP
+            ( closure injectable
+                (unsafeCoerce :: Domable lock0 payload -> Domable lock1 payload)
+            )
+        )
     u <- subscribe realized k
     void $ tryPut u av2
     -- cancel immediately, as it should be run synchronously
@@ -170,72 +180,27 @@ internalPortal isGlobal scopeF gaga closure = Element go
 
 globalPortal
   :: forall n lock payload
-   . Vec n (Element lock payload)
-  -> (Vec n (Element lock payload) -> Domable lock payload)
-  -> Element lock payload
+   . Vec n (Domable lock payload)
+  -> (Vec n (Domable lock payload) -> Domable lock payload)
+  -> Domable lock payload
 globalPortal e f = internalPortal true (const "@portal@") e (\x _ -> f x)
 
 portal
   :: forall n lock0 payload
-   . Vec n (Element lock0 payload)
+   . Vec n (Domable lock0 payload)
   -> ( forall lock1
-        . Vec n (Element lock1 payload)
-       -> (Element lock0 payload -> Element lock1 payload)
+        . Vec n (Domable lock1 payload)
+       -> (Domable lock0 payload -> Domable lock1 payload)
        -> Domable lock1 payload
      )
-  -> Element lock0 payload
+  -> Domable lock0 payload
 portal e = internalPortal false identity e
-
-class Plant seed tree | seed -> tree where
-  plant :: seed -> tree
-
-instance
-  ( TypeEquals locki locko
-  , TypeEquals payloadi payloado
-  ) =>
-  Plant (Event (Event (Child locki payloadi)))
-    (Domable locko payloado) where
-  plant i = DynamicChildren'
-    (DynamicChildren (proof (coerce i)))
-
-instance
-  ( TypeEquals locki locko
-  , TypeEquals payloadi payloado
-  ) =>
-  Plant (Domable locki payloadi)
-    (Domable locko payloado) where
-  plant i = deleteMeASAP i
-
-instance
-  ( TypeEquals locki locko
-  , TypeEquals payloadi payloado
-  ) =>
-  Plant (Event (Domable locki payloadi))
-    (Domable locko payloado) where
-  plant i = EventfulElement'
-    (EventfulElement (map deleteMeASAP i))
-
-instance
-  ( TypeEquals locki locko
-  , TypeEquals payloadi payloado
-  ) =>
-  Plant (Element locki payloadi) (Domable locko payloado) where
-  plant i = Element' (proof (coerce i))
-
-instance
-  ( TypeEquals locki locko
-  , TypeEquals payloadi payloado
-  ) =>
-  Plant (Array (Element locki payloadi))
-    (Domable locko payloado) where
-  plant i = FixedChildren'
-    (FixedChildren (proof (coerce i)))
 
 text
   :: forall lock payload
    . Event String
-  -> Element lock payload
-text txt = Element go
+  -> Domable lock payload
+text txt = Element' $ Element go
   where
   go { parent, scope, raiseId } di@(DOMInterpret { ids, deleteFromCache }) =
     makeEvent \k -> do
@@ -249,20 +214,7 @@ text txt = Element go
         )
         k
 
-blank :: forall lock payload. Element lock payload
-blank = Element go
-  where
-  go
-    { parent, scope, raiseId }
-    (DOMInterpret { ids, makeNoop, deleteFromCache }) = makeEvent
-    \k -> do
-      me <- ids
-      raiseId me
-      map ((*>) (k (deleteFromCache { id: me }))) $ subscribe
-        (bang (makeNoop { id: me, parent, scope }))
-        k
-
-text_ :: forall lock payload. String -> Element lock payload
+text_ :: forall lock payload. String -> Domable lock payload
 text_ txt = text (bang txt)
 
 deku
@@ -275,7 +227,10 @@ deku root children di@(DOMInterpret { ids, makeRoot }) = makeEvent \k -> do
   me <- ids
   subscribe
     ( bang (makeRoot { id: me, root })
-        <|> __internalDekuFlatten me "rootScope" di (deleteMeASAP children)
+        <|> __internalDekuFlatten
+          { parent: me, scope: "rootScope", raiseId: mempty }
+          di
+          (deleteMeASAP children)
     )
     k
 
@@ -285,7 +240,7 @@ deku1
   -> (forall lock. Event (Domable lock payload))
   -> DOMInterpret payload
   -> Event payload
-deku1 root children = deku root (plant children)
+deku1 root children = deku root (EventfulElement' $ EventfulElement children)
 
 deku2
   :: forall payload
@@ -293,22 +248,22 @@ deku2
   -> (forall lock. Element lock payload)
   -> DOMInterpret payload
   -> Event payload
-deku2 root children = deku root (plant children)
+deku2 root children = deku root (Element' children)
 
 dekuA
   :: forall payload
    . Web.DOM.Element
-  -> (forall lock. Array (Element lock payload))
+  -> (forall lock. Array (Domable lock payload))
   -> DOMInterpret payload
   -> Event payload
-dekuA root children = deku root (plant children)
+dekuA root children = deku root (FixedChildren' $ FixedChildren children)
 
 switcher
   :: forall i lock payload
-   . (i -> Element lock payload)
+   . (i -> Domable lock payload)
   -> Event i
   -> Domable lock payload
-switcher f event = plant $ keepLatest
+switcher f event = DynamicChildren' $ DynamicChildren $ keepLatest
   $ memoize (counter event) \cenv -> map
     ( \(p /\ n) -> bang (Insert $ f p) <|>
         ((const Remove) <$> filter (eq (n + 1) <<< snd) cenv)

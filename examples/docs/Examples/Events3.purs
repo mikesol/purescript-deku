@@ -9,8 +9,8 @@ import Data.Maybe (Maybe(..))
 import Data.Profunctor (lcmap)
 import Data.Tuple.Nested ((/\))
 import Deku.Attribute (cb, (:=))
-import Deku.Control (blank, plant, text_)
-import Deku.Core (Child(..))
+import Deku.Control (text_)
+import Deku.Core (Child(..), dyn)
 import Deku.DOM as D
 import Deku.Toplevel (runInBody1)
 import Effect (Effect)
@@ -28,7 +28,7 @@ data TodoAction = Prioritize | Delete
 
 main :: Effect Unit
 main = runInBody1
-  ( bus \push -> lcmap (bang UIShown <|> _) \event -> plant do
+  ( bus \push -> lcmap (bang UIShown <|> _) \event -> do
       let
         top =
           [ D.input
@@ -46,42 +46,46 @@ main = runInBody1
                           push AddTodo
                   ]
               )
-              blank
+              []
           , D.button
-              (bang $ D.OnClick :=  push AddTodo)
-              (text_ "Add")
+              (bang $ D.OnClick := push AddTodo)
+              [ text_ "Add" ]
           ]
       D.div_
         [ D.div_ top
-        , D.div_ $
-            ( \txt -> keepLatest $ bus \p' e' ->
-                ( bang $ Insert $ D.div_
-                    [ text_ txt
-                    , D.button
-                        ( bang
-                            $ D.OnClick := p' SendToTop
-                        )
-                        [ text_ "Prioritize" ]
-                    , D.button
-                        ( bang
-                            $ D.OnClick :=  p' Remove
-                        )
-                        [ text_ "Delete" ]
-                    ]
-                ) <|> e'
-            ) <$>
-              filterMap
-                ( \(tf /\ s) ->
-                    if tf then Just s else Nothing
-                )
-                ( mapAccum
-                    ( \a b -> case a of
-                        ChangeText s -> s /\ (false /\ s)
-                        AddTodo -> b /\ (true /\ b)
-                        _ -> "" /\ (false /\ "")
-                    )
-                    event
-                    ""
-                )
+        , D.div_
+            [ dyn $
+                map
+                  ( \txt -> keepLatest $ bus \p' e' ->
+                      ( bang $ Insert $ D.div_
+                          [ text_ txt
+                          , D.button
+                              ( bang
+                                  $ D.OnClick := p' SendToTop
+                              )
+                              [ text_ "Prioritize" ]
+                          , D.button
+                              ( bang
+                                  $ D.OnClick := p' Remove
+                              )
+                              [ text_ "Delete" ]
+                          ]
+                      ) <|> e'
+                  )
+                  ( filterMap
+                      ( \(tf /\ s) ->
+                          if tf then Just s else Nothing
+                      )
+                      ( mapAccum
+                          ( \a b -> case a of
+                              ChangeText s -> s /\ (false /\ s)
+                              AddTodo -> b /\ (true /\ b)
+                              _ -> "" /\ (false /\ "")
+                          )
+                          event
+                          ""
+                      )
+                  )
+            ]
         ]
   )

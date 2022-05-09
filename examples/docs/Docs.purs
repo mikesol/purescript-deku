@@ -6,7 +6,7 @@ import Data.Foldable (for_, oneOfMap)
 import Data.Tuple.Nested (type (/\), (/\))
 import Deku.Attribute (cb, (:=))
 import Deku.Control (dekuA, switcher, text_)
-import Deku.Core (Element)
+import Deku.Core (Domable)
 import Deku.DOM as D
 import Deku.Example.Docs.Component as Component
 import Deku.Example.Docs.Effects as Effects
@@ -35,7 +35,7 @@ scene
   :: forall lock payload
    . (Page -> Effect Unit)
   -> Event Page
-  -> Array (Element lock payload)
+  -> Array (Domable lock payload)
 scene push event =
   [ D.div_
       $ map
@@ -84,10 +84,10 @@ scene push event =
             /\ "Portals"
             /\ false
         ]
-  , D.div_ $ switcher (page push) event
+  , D.div_ [ switcher (page push) event ]
   ]
   where
-  page :: (Page -> Effect Unit) -> Page -> Element lock payload
+  page :: (Page -> Effect Unit) -> Page -> Domable lock payload
   page dpage Intro = Intro.intro dpage
   page dpage HelloWorld = HelloWorld.helloWorld dpage
   page dpage SimpleComponent = Component.components dpage

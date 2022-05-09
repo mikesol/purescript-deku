@@ -2,24 +2,22 @@ module Deku.DOM.Elt.Figure where
 
 import Control.Plus (empty)
 import Deku.Attribute (Attribute)
-import Deku.Control (elementify, class Plant, plant)
-import Deku.Core (Child, Element, Domable)
+import Deku.Control (elementify)
+import Deku.Core (Domable(..), FixedChildren(..))
 import FRP.Event (Event)
 
 data Figure_
 
 figure
-  :: forall seed lock payload
-   . Plant seed (Domable lock payload)
-  => Event (Attribute Figure_)
-  -> seed
-  -> Element lock payload
-figure attributes seed = elementify "figure" attributes (plant seed)
+  :: forall lock payload
+   . Event (Attribute Figure_)
+  -> Array (Domable lock payload)
+  -> Domable lock payload
+figure attributes kids = Element' (elementify "figure" attributes (FixedChildren' (FixedChildren kids)))
 
 figure_
-  :: forall seed lock payload
-   . Plant seed (Domable lock payload)
-  => seed
-  -> Element lock payload
+  :: forall lock payload
+   . Array (Domable lock payload)
+  -> Domable lock payload
 figure_ = figure empty
 

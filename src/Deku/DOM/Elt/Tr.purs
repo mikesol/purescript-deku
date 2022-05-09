@@ -2,24 +2,22 @@ module Deku.DOM.Elt.Tr where
 
 import Control.Plus (empty)
 import Deku.Attribute (Attribute)
-import Deku.Control (elementify, class Plant, plant)
-import Deku.Core (Child, Element, Domable)
+import Deku.Control (elementify)
+import Deku.Core (Domable(..), FixedChildren(..))
 import FRP.Event (Event)
 
 data Tr_
 
 tr
-  :: forall seed lock payload
-   . Plant seed (Domable lock payload)
-  => Event (Attribute Tr_)
-  -> seed
-  -> Element lock payload
-tr attributes seed = elementify "tr" attributes (plant seed)
+  :: forall lock payload
+   . Event (Attribute Tr_)
+  -> Array (Domable lock payload)
+  -> Domable lock payload
+tr attributes kids = Element' (elementify "tr" attributes (FixedChildren' (FixedChildren kids)))
 
 tr_
-  :: forall seed lock payload
-   . Plant seed (Domable lock payload)
-  => seed
-  -> Element lock payload
+  :: forall lock payload
+   . Array (Domable lock payload)
+  -> Domable lock payload
 tr_ = tr empty
 

@@ -4,8 +4,8 @@ import Prelude
 
 import Data.Foldable (for_, oneOfMap, traverse_)
 import Deku.Attribute ((:=))
-import Deku.Control (blank, deku2)
-import Deku.Core (Element)
+import Deku.Control (deku)
+import Deku.Core (Domable)
 import Deku.DOM as D
 import Deku.Interpret (FFIDOMSnapshot, effectfulDOMInterpret, makeFFIDOMSnapshot)
 import Effect (Effect)
@@ -19,7 +19,7 @@ import Web.HTML.HTMLDocument (body)
 import Web.HTML.HTMLElement (toElement)
 import Web.HTML.Window (document)
 
-scene :: forall lock. Element lock (FFIDOMSnapshot -> Effect Unit)
+scene :: forall lock. Domable lock (FFIDOMSnapshot -> Effect Unit)
 scene = D.canvas
   ( oneOfMap bang
       [ D.Width := "400px"
@@ -34,12 +34,12 @@ scene = D.canvas
           fillRect ctx { height: 100.0, width: 100.0, x: 0.0, y: 0.0 }
       ]
   )
-  blank
+  []
 
 main :: Effect Unit
 main = do
   b' <- window >>= document >>= body
   for_ (toElement <$> b') \b -> do
     ffi <- makeFFIDOMSnapshot
-    let evt = deku2 b scene effectfulDOMInterpret
+    let evt = deku b scene effectfulDOMInterpret
     void $ subscribe evt \i -> i ffi

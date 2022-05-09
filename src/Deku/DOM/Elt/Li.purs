@@ -2,24 +2,22 @@ module Deku.DOM.Elt.Li where
 
 import Control.Plus (empty)
 import Deku.Attribute (Attribute)
-import Deku.Control (elementify, class Plant, plant)
-import Deku.Core (Child, Element, Domable)
+import Deku.Control (elementify)
+import Deku.Core (Domable(..), FixedChildren(..))
 import FRP.Event (Event)
 
 data Li_
 
 li
-  :: forall seed lock payload
-   . Plant seed (Domable lock payload)
-  => Event (Attribute Li_)
-  -> seed
-  -> Element lock payload
-li attributes seed = elementify "li" attributes (plant seed)
+  :: forall lock payload
+   . Event (Attribute Li_)
+  -> Array (Domable lock payload)
+  -> Domable lock payload
+li attributes kids = Element' (elementify "li" attributes (FixedChildren' (FixedChildren kids)))
 
 li_
-  :: forall seed lock payload
-   . Plant seed (Domable lock payload)
-  => seed
-  -> Element lock payload
+  :: forall lock payload
+   . Array (Domable lock payload)
+  -> Domable lock payload
 li_ = li empty
 

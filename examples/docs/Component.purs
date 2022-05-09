@@ -3,8 +3,8 @@ module Deku.Example.Docs.Component where
 import Prelude
 
 import Deku.Attribute (cb, (:=))
-import Deku.Control (blank, text_)
-import Deku.Core (Element)
+import Deku.Control (text_)
+import Deku.Core (Domable, Element)
 import Deku.DOM as D
 import Deku.Example.Docs.Types (Page(..))
 import Deku.Example.Docs.Util (scrollToTop)
@@ -48,7 +48,7 @@ myDivWithNoChildren = D.div attrs blank
   <p>In this section, we built a simple component. In the next section, we'll recreate the exact same element using a different input syntax called <a ~next~ style="cursor:pointer;">Pursx</a>.</p>
 </div>"""
 
-components :: forall lock payload. (Page -> Effect Unit) -> Element lock payload
+components :: forall lock payload. (Page -> Effect Unit) -> Domable lock payload
 components dpage = px ~~
   { code: nut
       ( D.pre_ [D.code_
@@ -87,7 +87,7 @@ main = runInBodyA
   , result: nut
       ( D.div_
           [ D.button_ [ text_ "I do nothing" ]
-          , D.ul_ $ map (D.li_ <<< text_) [ "A", "B", "C" ]
+          , D.ul_ $ map (D.li_ <<< pure <<< text_) [ "A", "B", "C" ]
           , D.div_
               [ D.a (bang $ D.Href := "https://example.com")
                   [ text_ "foo " ]
@@ -97,7 +97,7 @@ main = runInBodyA
               ]
           , D.div_
               [ D.div_
-                  [ D.div_ [ D.input (bang $ D.Xtype := "range") blank ]
+                  [ D.div_ [ D.input (bang $ D.Xtype := "range") [] ]
                   ]
               ]
           ]

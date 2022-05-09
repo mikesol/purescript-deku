@@ -2,24 +2,22 @@ module Deku.DOM.Elt.Frame where
 
 import Control.Plus (empty)
 import Deku.Attribute (Attribute)
-import Deku.Control (elementify, class Plant, plant)
-import Deku.Core (Child, Element, Domable)
+import Deku.Control (elementify)
+import Deku.Core (Domable(..), FixedChildren(..))
 import FRP.Event (Event)
 
 data Frame_
 
 frame
-  :: forall seed lock payload
-   . Plant seed (Domable lock payload)
-  => Event (Attribute Frame_)
-  -> seed
-  -> Element lock payload
-frame attributes seed = elementify "frame" attributes (plant seed)
+  :: forall lock payload
+   . Event (Attribute Frame_)
+  -> Array (Domable lock payload)
+  -> Domable lock payload
+frame attributes kids = Element' (elementify "frame" attributes (FixedChildren' (FixedChildren kids)))
 
 frame_
-  :: forall seed lock payload
-   . Plant seed (Domable lock payload)
-  => seed
-  -> Element lock payload
+  :: forall lock payload
+   . Array (Domable lock payload)
+  -> Domable lock payload
 frame_ = frame empty
 

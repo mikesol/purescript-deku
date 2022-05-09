@@ -2,24 +2,22 @@ module Deku.DOM.Elt.Del where
 
 import Control.Plus (empty)
 import Deku.Attribute (Attribute)
-import Deku.Control (elementify, class Plant, plant)
-import Deku.Core (Child, Element, Domable)
+import Deku.Control (elementify)
+import Deku.Core (Domable(..), FixedChildren(..))
 import FRP.Event (Event)
 
 data Del_
 
 del
-  :: forall seed lock payload
-   . Plant seed (Domable lock payload)
-  => Event (Attribute Del_)
-  -> seed
-  -> Element lock payload
-del attributes seed = elementify "del" attributes (plant seed)
+  :: forall lock payload
+   . Event (Attribute Del_)
+  -> Array (Domable lock payload)
+  -> Domable lock payload
+del attributes kids = Element' (elementify "del" attributes (FixedChildren' (FixedChildren kids)))
 
 del_
-  :: forall seed lock payload
-   . Plant seed (Domable lock payload)
-  => seed
-  -> Element lock payload
+  :: forall lock payload
+   . Array (Domable lock payload)
+  -> Domable lock payload
 del_ = del empty
 

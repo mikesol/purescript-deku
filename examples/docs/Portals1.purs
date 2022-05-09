@@ -9,8 +9,8 @@ import Data.Typelevel.Num (d0, d1)
 import Data.Vec ((+>), index)
 import Data.Vec as V
 import Deku.Attribute (cb, (:=))
-import Deku.Control (blank, plant, portal, switcher, text_)
-import Deku.Core (Child(..), Element)
+import Deku.Control (portal, switcher, text_)
+import Deku.Core (Child(..), Domable, Element, dyn)
 import Deku.DOM as D
 import Deku.Example.Docs.Types (Page)
 import Deku.Pursx (nut, (~~))
@@ -56,7 +56,7 @@ px =
 
 
 
-portals1 :: forall lock payload. (Page -> Effect Unit) -> Element lock payload
+portals1 :: forall lock payload. (Page -> Effect Unit) -> Domable lock payload
 portals1 _ = px ~~
   { code: nut
       ( D.pre_
@@ -120,15 +120,15 @@ main = runInBody1
       )
   , result: nut
 
-   ( bus \push -> lcmap (alt (bang unit)) \event -> do
+   ( dyn $ bus \push -> lcmap (alt (bang unit)) \event -> do
       bang $ Insert $ portal
         ( map
             ( \i -> D.video
                 (oneOfMap bang [ D.Controls := "true", D.Width := "250" ])
-                ( D.source
+                [D.source
                     (oneOfMap bang [ D.Src := i, D.Xtype := "video/mp4" ])
-                    blank
-                )
+                    []
+                ]
             )
             ( "https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4"
                 +> "https://www.w3schools.com/jsref/movie.mp4"
@@ -141,10 +141,10 @@ main = runInBody1
             p1 = index v d1
             ev = fold (const not) event
             flips = switcher (if _ then p0 else p1) <<< ev
-          plant $ D.div_
+          D.div_
             [ D.button (bang $ D.OnClick := cb (const $ push unit))
                 [ text_ "Switch videos" ]
-            , D.div_ [ D.span_ (flips true), D.span_ (flips false) ]
+            , D.div_ [ D.span_ [flips true], D.span_ [flips false] ]
             ]
   )
   }

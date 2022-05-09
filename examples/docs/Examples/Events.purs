@@ -3,8 +3,7 @@ module Deku.Examples.Docs.Examples.Events where
 import Prelude
 
 import Control.Alt ((<|>))
-import Deku.Attribute ((:=))
-import Deku.Control (blank, plant, text, text_)
+import Deku.Control (text, text_)
 import Deku.DOM as D
 import Deku.Listeners (click_, slider)
 import Deku.Toplevel (runInBody1)
@@ -21,7 +20,7 @@ type UIEvents = V
 
 main :: Effect Unit
 main = runInBody1
-  ( vbus (Proxy :: _ UIEvents) \push event -> plant do
+  ( vbus (Proxy :: _ UIEvents) \push event -> do
       D.div_
         [ D.button
             (click_ (bang push.buttonClicked))
@@ -40,7 +39,7 @@ main = runInBody1
         , D.div_
             [ D.input
                 (slider (bang push.sliderMoved))
-                blank
+                []
             , D.div_
                 [ text
                     ( bang "Val: 50" <|>

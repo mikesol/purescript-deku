@@ -2,8 +2,8 @@ module Deku.Example.Docs.Effects where
 
 import Prelude
 
-import Affjax.Web as AX
 import Affjax.ResponseFormat as ResponseFormat
+import Affjax.Web as AX
 import Control.Alt ((<|>))
 import Data.Argonaut.Core (stringifyWithIndent)
 import Data.Either (Either(..))
@@ -12,8 +12,8 @@ import Data.HTTP.Method (Method(..))
 import Data.Maybe (Maybe(..))
 import Data.Tuple.Nested ((/\))
 import Deku.Attribute (Cb, cb, (:=))
-import Deku.Control (plant, text, text_)
-import Deku.Core (Element)
+import Deku.Control (text, text_)
+import Deku.Core (Domable, Element, bussed)
 import Deku.DOM as D
 import Deku.Example.Docs.Types (Page(..))
 import Deku.Example.Docs.Util (scrollToTop)
@@ -74,7 +74,7 @@ px =
   <p>It is also possible to handle events (and by extension effectful actions in events, like network calls) in Pursx. Let's see how in the <a ~next~ style="cursor:pointer;">second Pursx section</a>.</p>
 </div>"""
 
-effects :: forall lock payload. (Page -> Effect Unit) -> Element lock payload
+effects :: forall lock payload. (Page -> Effect Unit) -> Domable lock payload
 effects dpage = px ~~
   { code: nut
       ( D.pre_
@@ -184,7 +184,7 @@ main = runInBody
           ]
       )
   , result: nut
-      ( bus \push event -> plant do
+      ( bussed \push event -> do
           let
             loadingOrResult = filterMap
               ( case _ of

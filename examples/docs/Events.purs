@@ -5,8 +5,8 @@ import Prelude
 import Control.Alt ((<|>))
 import Data.Tuple.Nested ((/\))
 import Deku.Attribute (cb, (:=))
-import Deku.Control (blank, plant, text, text_)
-import Deku.Core (Element)
+import Deku.Control (text, text_)
+import Deku.Core (Domable, Element, vbussed)
 import Deku.DOM as D
 import Deku.Example.Docs.Types (Page(..))
 import Deku.Example.Docs.Util (scrollToTop)
@@ -46,7 +46,7 @@ px =
   <p>In this section, saw how to react to events. In the next section, we'll use a similar mechanism to deal with arbitrary <a ~next~ style="cursor:pointer;">effects</a>.</p>
 </div>"""
 
-events :: forall lock payload. (Page -> Effect Unit) -> Element lock payload
+events :: forall lock payload. (Page -> Effect Unit) -> Domable lock payload
 events dpage = px ~~
   { code: nut
       ( D.pre_
@@ -110,7 +110,7 @@ main = runInBody1
               ]
           ]
       )
-  , result: nut( vbus (Proxy :: _ UIEvents) \push event -> plant do
+  , result: nut( vbussed (Proxy :: _ UIEvents) \push event -> do
       D.div_
         [ D.button
             (click_ (bang  push.buttonClicked))
@@ -129,7 +129,7 @@ main = runInBody1
         , D.div_
             [ D.input
                 (slider (bang push.sliderMoved))
-                blank
+                []
             , D.div_
                 [ text
                     ( (bang "Val: 50") <|>

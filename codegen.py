@@ -110,25 +110,23 @@ def cg(CODEGEN_TARGET, ival = None, ival2 = None):
 
 import Control.Plus (empty)
 import Deku.Attribute (Attribute)
-import Deku.Control (elementify, class Plant, plant)
-import Deku.Core (Child, Element, Domable)
+import Deku.Control (elementify)
+import Deku.Core (Domable(..), FixedChildren(..))
 import FRP.Event (Event)
 
 data {term}
 
 {x}
-  :: forall seed lock payload
-   . Plant seed (Domable lock payload)
-  => Event (Attribute {term})
-  -> seed
-  -> Element lock payload
-{x} attributes seed = elementify "{astag(x)}" attributes (plant seed)
+  :: forall lock payload
+   . Event (Attribute {term})
+  -> Array (Domable lock payload)
+  -> Domable lock payload
+{x} attributes kids = Element' (elementify "{astag(x)}" attributes (FixedChildren' (FixedChildren kids)))
 
 {x}_
-  :: forall seed lock payload
-   . Plant seed (Domable lock payload)
-  => seed
-  -> Element lock payload
+  :: forall lock payload
+   . Array (Domable lock payload)
+  -> Domable lock payload
 {x}_ = {x} empty
 
 ''')

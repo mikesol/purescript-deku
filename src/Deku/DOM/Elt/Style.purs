@@ -2,24 +2,22 @@ module Deku.DOM.Elt.Style where
 
 import Control.Plus (empty)
 import Deku.Attribute (Attribute)
-import Deku.Control (elementify, class Plant, plant)
-import Deku.Core (Child, Element, Domable)
+import Deku.Control (elementify)
+import Deku.Core (Domable(..), FixedChildren(..))
 import FRP.Event (Event)
 
 data Style_
 
 style
-  :: forall seed lock payload
-   . Plant seed (Domable lock payload)
-  => Event (Attribute Style_)
-  -> seed
-  -> Element lock payload
-style attributes seed = elementify "style" attributes (plant seed)
+  :: forall lock payload
+   . Event (Attribute Style_)
+  -> Array (Domable lock payload)
+  -> Domable lock payload
+style attributes kids = Element' (elementify "style" attributes (FixedChildren' (FixedChildren kids)))
 
 style_
-  :: forall seed lock payload
-   . Plant seed (Domable lock payload)
-  => seed
-  -> Element lock payload
+  :: forall lock payload
+   . Array (Domable lock payload)
+  -> Domable lock payload
 style_ = style empty
 

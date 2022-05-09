@@ -3,7 +3,7 @@ module Deku.Example.Docs.Intro where
 import Prelude
 
 import Deku.Attribute (cb, (:=))
-import Deku.Core (Element)
+import Deku.Core (Domable, Element)
 import Deku.DOM as D
 import Deku.Example.Docs.Types (Page(..))
 import Deku.Example.Docs.Util (scrollToTop)
@@ -28,6 +28,6 @@ px = Proxy :: Proxy """<div>
   <p>And now, without further ado, check out the <a ~next~ style="cursor:pointer;">hello world section</a>!</p>
 </div>"""
 
-intro :: forall lock payload. (Page -> Effect Unit) -> Element lock payload
+intro :: forall lock payload. (Page -> Effect Unit) -> Domable lock payload
 intro dpage  = px ~~
   { next: bang (D.OnClick := (cb (const $ dpage HelloWorld *> scrollToTop))) }

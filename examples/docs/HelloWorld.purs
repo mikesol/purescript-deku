@@ -4,7 +4,7 @@ import Prelude
 
 import Deku.Attribute (cb, (:=))
 import Deku.Control (text_)
-import Deku.Core (Element)
+import Deku.Core (Domable, Element)
 import Deku.DOM as D
 import Deku.Example.Docs.Types (Page(..))
 import Deku.Example.Docs.Util (scrollToTop)
@@ -38,7 +38,7 @@ px = Proxy :: Proxy """<div>
 
 
 helloWorld :: forall lock payload.
-  (Page -> Effect Unit) -> Element lock payload
+  (Page -> Effect Unit) -> Domable lock payload
 helloWorld dpage  = px ~~
   { code: nut (D.pre_ [D.code_ [text_ """module Main where
 

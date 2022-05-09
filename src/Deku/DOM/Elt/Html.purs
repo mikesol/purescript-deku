@@ -2,24 +2,22 @@ module Deku.DOM.Elt.Html where
 
 import Control.Plus (empty)
 import Deku.Attribute (Attribute)
-import Deku.Control (elementify, class Plant, plant)
-import Deku.Core (Child, Element, Domable)
+import Deku.Control (elementify)
+import Deku.Core (Domable(..), FixedChildren(..))
 import FRP.Event (Event)
 
 data Html_
 
 html
-  :: forall seed lock payload
-   . Plant seed (Domable lock payload)
-  => Event (Attribute Html_)
-  -> seed
-  -> Element lock payload
-html attributes seed = elementify "html" attributes (plant seed)
+  :: forall lock payload
+   . Event (Attribute Html_)
+  -> Array (Domable lock payload)
+  -> Domable lock payload
+html attributes kids = Element' (elementify "html" attributes (FixedChildren' (FixedChildren kids)))
 
 html_
-  :: forall seed lock payload
-   . Plant seed (Domable lock payload)
-  => seed
-  -> Element lock payload
+  :: forall lock payload
+   . Array (Domable lock payload)
+  -> Domable lock payload
 html_ = html empty
 

@@ -8,8 +8,7 @@ import Control.Plus (empty)
 import Data.Symbol (class IsSymbol)
 import Data.Profunctor (lcmap)
 import Deku.Attribute (Attribute, AttributeValue(..), unsafeUnAttribute)
-import Deku.Control (class Plant, plant)
-import Deku.Core (DOMInterpret(..), Element(..), Child, Domable)
+import Deku.Core (DOMInterpret(..), Element(..), Domable(..))
 import Deku.DOM (class TagToDeku)
 import Deku.Internal (__internalDekuFlatten)
 import FRP.Event (Event, bang, subscribe, makeEvent)
@@ -25,11 +24,10 @@ newtype PursxElement lock payload = PursxElement
   (Domable lock payload)
 
 nut
-  :: forall seed lock payload
-   . Plant seed (Domable lock payload)
-  => seed
+  :: forall lock payload
+   . Domable lock payload
   -> PursxElement lock payload
-nut seed = PursxElement (plant seed)
+nut = PursxElement
 
 pursx :: forall s. Proxy s
 pursx = Proxy
@@ -3827,7 +3825,13 @@ instance pursxToElementConsInsert ::
     in
       { cache: Object.insert (reflectType pxk) false cache
       , element: Element \info di ->
-          __internalDekuFlatten (reflectType pxk <> pxScope) info.scope di pxe
+          __internalDekuFlatten
+            { parent: reflectType pxk <> pxScope
+            , scope: info.scope
+            , raiseId: mempty
+            }
+            di
+            pxe
             <|> (let Element y = element in y) info di
       }
     where
@@ -3878,7 +3882,7 @@ psx
   => PXStart lock payload "~" " " html ()
   => PursxToElement lock payload RL.Nil ()
   => Proxy html
-  -> Element lock payload
+  -> Domable lock payload
 psx px = makePursx px {}
 
 makePursx
@@ -3889,7 +3893,7 @@ makePursx
   => PursxToElement lock payload rl r
   => Proxy html
   -> { | r }
-  -> Element lock payload
+  -> Domable lock payload
 makePursx = makePursx' (Proxy :: _ "~")
 
 makePursx'
@@ -3902,8 +3906,8 @@ makePursx'
   => Proxy verb
   -> Proxy html
   -> { | r }
-  -> Element lock payload
-makePursx' verb html r = Element go
+  -> Domable lock payload
+makePursx' verb html r = Element' $ Element go
   where
   go
     z@{ parent, scope, raiseId }

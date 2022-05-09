@@ -9,9 +9,9 @@ import Data.Maybe (Maybe(..))
 import Data.Profunctor (lcmap)
 import Data.Tuple (Tuple(..))
 import Deku.Attribute (cb, (:=))
-import Deku.Control (deku, plant)
+import Deku.Control (deku)
 import Deku.Control as C
-import Deku.Core (Domable)
+import Deku.Core (Domable, toDOM)
 import Deku.DOM as D
 import Deku.Interpret (FFIDOMSnapshot, effectfulDOMInterpret, makeFFIDOMSnapshot)
 import Effect (Effect)
@@ -26,9 +26,9 @@ counter event = mapAccum f event 0
   where
   f a b = Tuple (b + 1) (Tuple a b)
 scene :: forall lock. Domable lock (FFIDOMSnapshot -> Effect Unit)
-scene = plant $ bus $ \push -> lcmap (alt (bang true)) \event -> do
-  plant
-    [ D.div empty (C.text (bang "Stops after 4 clicks"))
+scene = toDOM $ bus $ \push -> lcmap (alt (bang true)) \event -> do
+  D.div_
+    [ D.div empty [C.text (bang "Stops after 4 clicks")]
     , C.text (event <#> if _ then "click " else "kcilc ")
     , D.button
         ( counter event
@@ -44,7 +44,7 @@ scene = plant $ bus $ \push -> lcmap (alt (bang true)) \event -> do
               )
             # keepLatest
         )
-        (C.text_ "me")
+        [C.text_ "me"]
     ]
 
 main :: Effect Unit

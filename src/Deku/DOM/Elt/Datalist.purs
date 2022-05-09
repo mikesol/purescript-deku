@@ -2,24 +2,22 @@ module Deku.DOM.Elt.Datalist where
 
 import Control.Plus (empty)
 import Deku.Attribute (Attribute)
-import Deku.Control (elementify, class Plant, plant)
-import Deku.Core (Child, Element, Domable)
+import Deku.Control (elementify)
+import Deku.Core (Domable(..), FixedChildren(..))
 import FRP.Event (Event)
 
 data Datalist_
 
 datalist
-  :: forall seed lock payload
-   . Plant seed (Domable lock payload)
-  => Event (Attribute Datalist_)
-  -> seed
-  -> Element lock payload
-datalist attributes seed = elementify "datalist" attributes (plant seed)
+  :: forall lock payload
+   . Event (Attribute Datalist_)
+  -> Array (Domable lock payload)
+  -> Domable lock payload
+datalist attributes kids = Element' (elementify "datalist" attributes (FixedChildren' (FixedChildren kids)))
 
 datalist_
-  :: forall seed lock payload
-   . Plant seed (Domable lock payload)
-  => seed
-  -> Element lock payload
+  :: forall lock payload
+   . Array (Domable lock payload)
+  -> Domable lock payload
 datalist_ = datalist empty
 

@@ -9,8 +9,8 @@ import Data.Maybe (Maybe(..))
 import Data.Profunctor (lcmap)
 import Data.Tuple.Nested ((/\))
 import Deku.Attribute (cb, (:=))
-import Deku.Control (blank, plant, text_)
-import Deku.Core (Element, Child(..))
+import Deku.Control (text_)
+import Deku.Core (Child(..), Domable, Element, bussed, dyn)
 import Deku.DOM as D
 import Deku.Example.Docs.Types (Page(..))
 import Deku.Example.Docs.Util (scrollToTop)
@@ -64,7 +64,7 @@ px =
   <p>In this section, we used nested events to insert and remove elements from a parent. In the next section, we'll see how we can use <a ~next~ style="cursor:pointer;">portals to move an element to a different place of the DOM</a>.</p>
 </div>"""
 
-events2 :: forall lock payload. (Page -> Effect Unit) -> Element lock payload
+events2 :: forall lock payload. (Page -> Effect Unit) -> Domable lock payload
 events2 dpage = px ~~
   { code: nut
       ( D.pre_
@@ -162,7 +162,7 @@ main = runInBody1
           ]
       )
   , result: nut
-      ( bus \push -> lcmap (alt (bang UIShown)) \event -> plant do
+      ( bussed \push -> lcmap (alt (bang UIShown)) \event -> do
           D.div_
             [ D.div_
                 [ D.input
@@ -180,16 +180,16 @@ main = runInBody1
                               push AddTodo
                         ]
                     )
-                    blank
+                    []
                 , D.button ((bang $ D.Style := "margin: 5px;") <|> (bang $ D.OnClick := cb (const $ push AddTodo)))
-                    (text_ "Add")
+                    [text_ "Add"]
                 ]
             , D.div_
-                ( map
+                [dyn $ map
                     ( \txt -> keepLatest $ bus \p' e' ->
                         ( bang $ Insert $ D.div_ do
                             [ D.span (bang $ D.Style := "margin: 5px;")
-                                (text_ txt)
+                                [text_ txt]
                             , D.button
                                 ( (bang $ D.Style := "margin: 5px;") <|>
                                     ( bang $ D.OnClick := cb
@@ -216,7 +216,7 @@ main = runInBody1
                             ""
                         )
                     )
-                )
+                ]
             ]
       )
 

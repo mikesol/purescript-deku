@@ -2,24 +2,22 @@ module Deku.DOM.Elt.Mark where
 
 import Control.Plus (empty)
 import Deku.Attribute (Attribute)
-import Deku.Control (elementify, class Plant, plant)
-import Deku.Core (Child, Element, Domable)
+import Deku.Control (elementify)
+import Deku.Core (Domable(..), FixedChildren(..))
 import FRP.Event (Event)
 
 data Mark_
 
 mark
-  :: forall seed lock payload
-   . Plant seed (Domable lock payload)
-  => Event (Attribute Mark_)
-  -> seed
-  -> Element lock payload
-mark attributes seed = elementify "mark" attributes (plant seed)
+  :: forall lock payload
+   . Event (Attribute Mark_)
+  -> Array (Domable lock payload)
+  -> Domable lock payload
+mark attributes kids = Element' (elementify "mark" attributes (FixedChildren' (FixedChildren kids)))
 
 mark_
-  :: forall seed lock payload
-   . Plant seed (Domable lock payload)
-  => seed
-  -> Element lock payload
+  :: forall lock payload
+   . Array (Domable lock payload)
+  -> Domable lock payload
 mark_ = mark empty
 
