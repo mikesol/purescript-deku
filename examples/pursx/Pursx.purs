@@ -4,21 +4,16 @@ import Prelude
 
 import Control.Alt ((<|>))
 import Control.Plus (empty)
-import Data.Foldable (for_)
 import Deku.Attribute (cb, (:=))
-import Deku.Control (deku1)
 import Deku.Control as C
 import Deku.Core (Domable)
 import Deku.DOM as D
-import Deku.Interpret (FFIDOMSnapshot, effectfulDOMInterpret, makeFFIDOMSnapshot)
+import Deku.Interpret (FFIDOMSnapshot)
 import Deku.Pursx (nut, (~~))
+import Deku.Toplevel (runInBody1)
 import Effect (Effect)
-import FRP.Event (Event, subscribe, bang, bus)
+import FRP.Event (Event, bang, bus)
 import Type.Proxy (Proxy(..))
-import Web.HTML (window)
-import Web.HTML.HTMLDocument (body)
-import Web.HTML.HTMLElement (toElement)
-import Web.HTML.Window (document)
 
 px =  Proxy    :: Proxy
       """<div>
@@ -61,9 +56,4 @@ scene = bus \push event ->
     ]
 
 main :: Effect Unit
-main = do
-  b' <- window >>= document >>= body
-  for_ (toElement <$> b') \b -> do
-    ffi <- makeFFIDOMSnapshot
-    let evt = deku1 b scene effectfulDOMInterpret
-    void $ subscribe evt \i -> i ffi
+main = runInBody1 scene

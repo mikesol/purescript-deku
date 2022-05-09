@@ -1,10 +1,10 @@
-module Deku.Example.Docs where
+module Deku.Example.Docs.Static.Live where
 
 import Prelude
 
 import Deku.Example.Docs.Scene (scene)
-import Deku.Toplevel (runInBody)
+import Deku.Toplevel (hydrate)
 import Effect (Effect)
 
 main :: Effect Unit
-main = runInBody scene
+main = hydrate scene

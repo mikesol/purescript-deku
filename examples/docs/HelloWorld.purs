@@ -46,11 +46,11 @@ helloWorld dpage  = px ~~
 import Prelude
 
 import Deku.Control (text_)
-import Deku.Toplevel (runInBody2)
+import Deku.Toplevel (runInBody)
 import Effect (Effect)
 
 main :: Effect Unit
-main = runInBody2 (text_ "Hello world")
+main = runInBody (text_ "Hello world")
 """
 ]])
   , result: nut (D.div_ [text_ "Hello world"])

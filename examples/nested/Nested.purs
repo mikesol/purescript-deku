@@ -3,27 +3,23 @@ module Deku.Example.Nested where
 import Prelude
 
 import Control.Alt ((<|>))
-import Data.Foldable (for_)
-import Data.Int (floor)
-import Data.Tuple (Tuple(..))
 import Data.FastVect.FastVect ((:))
 import Data.FastVect.FastVect as V
+import Data.Int (floor)
+import Data.Tuple (Tuple(..))
 import Deku.Attribute ((:=))
-import Deku.Control (dekuA, portal, switcher)
+import Deku.Control (portal, switcher)
 import Deku.Control as C
 import Deku.Core (Child(..), Domable, dyn)
 import Deku.DOM as D
-import Deku.Interpret (FFIDOMSnapshot, effectfulDOMInterpret, makeFFIDOMSnapshot)
+import Deku.Interpret (FFIDOMSnapshot)
+import Deku.Toplevel (runInBodyA)
 import Effect (Effect)
 import Effect.Random as Random
 import FRP.Behavior (Behavior, behavior, sample_)
-import FRP.Event.Time (interval)
 import FRP.Event (Event, delay, bang, makeEvent, mapAccum, subscribe)
+import FRP.Event.Time (interval)
 import Type.Prelude (Proxy(..))
-import Web.HTML (window)
-import Web.HTML.HTMLDocument (body)
-import Web.HTML.HTMLElement (toElement)
-import Web.HTML.Window (document)
 
 random :: Behavior Number
 random = behavior \e ->
@@ -83,9 +79,4 @@ scene =
   ]
 
 main :: Effect Unit
-main = do
-  b' <- window >>= document >>= body
-  for_ (toElement <$> b') \b -> do
-    ffi <- makeFFIDOMSnapshot
-    let evt = dekuA b scene effectfulDOMInterpret
-    void $ subscribe evt \i -> i ffi
+main = runInBodyA scene

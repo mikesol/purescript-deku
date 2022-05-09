@@ -8,6 +8,7 @@ in      conf
               , "canvas"
               , "filterable"
               , "affjax-web"
+              , "console"
               , "affjax"
               , "either"
               , "monoid-extras"

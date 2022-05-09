@@ -4,22 +4,18 @@ import Prelude
 
 import Control.Alt (alt)
 import Control.Plus (empty)
-import Data.Foldable (for_, oneOfMap)
+import Data.Foldable (oneOfMap)
 import Data.Maybe (Maybe(..))
 import Data.Profunctor (lcmap)
 import Data.Tuple (Tuple(..))
 import Deku.Attribute (cb, (:=))
-import Deku.Control (deku)
 import Deku.Control as C
 import Deku.Core (Domable, toDOM)
 import Deku.DOM as D
-import Deku.Interpret (FFIDOMSnapshot, effectfulDOMInterpret, makeFFIDOMSnapshot)
+import Deku.Interpret (FFIDOMSnapshot)
+import Deku.Toplevel (runInBody)
 import Effect (Effect)
-import FRP.Event (Event, filterMap, keepLatest, mapAccum, subscribe, bang, bus)
-import Web.HTML (window)
-import Web.HTML.HTMLDocument (body)
-import Web.HTML.HTMLElement (toElement)
-import Web.HTML.Window (document)
+import FRP.Event (Event, bang, bus, filterMap, keepLatest, mapAccum)
 
 counter :: forall a. Event a → Event (Tuple a Int)
 counter event = mapAccum f event 0
@@ -48,9 +44,4 @@ scene = toDOM $ bus $ \push -> lcmap (alt (bang true)) \event -> do
     ]
 
 main :: Effect Unit
-main = do
-  b' <- window >>= document >>= body
-  for_ (toElement <$> b') \b -> do
-    ffi <- makeFFIDOMSnapshot
-    let evt = deku b scene effectfulDOMInterpret
-    void $ subscribe evt \i -> i ffi
+main = runInBody scene

@@ -79,11 +79,6 @@ type GiveNewParent =
   , parent :: String
   , scope :: String
   }
-type MakeNoop =
-  { id :: String
-  , scope :: String
-  , parent :: String
-  }
 type DisconnectElement =
   { id :: String
   , parent :: String
@@ -124,7 +119,6 @@ type SendToTop =
 newtype DOMInterpret m payload = DOMInterpret
   { ids :: m String
   , makeRoot :: MakeRoot -> payload
-  , makeNoop :: MakeNoop -> payload
   , makeElement :: MakeElement -> payload
   , makeText :: MakeText -> payload
   , makePursx :: MakePursx -> payload

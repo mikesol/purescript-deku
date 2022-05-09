@@ -92,8 +92,8 @@ effects dpage = px ~~
 
 import Prelude
 
-import Affjax as AX
 import Affjax.ResponseFormat as ResponseFormat
+import Affjax.Web as AX
 import Control.Alt ((<|>))
 import Data.Argonaut.Core (stringifyWithIndent)
 import Data.Either (Either(..))
@@ -103,13 +103,13 @@ import Data.Maybe (Maybe(..))
 import Data.Profunctor (lcmap)
 import Data.Tuple.Nested ((/\))
 import Deku.Attribute (Cb, cb, (:=))
-import Deku.Control (plant, text)
+import Deku.Control (text)
 import Deku.DOM as D
-import Deku.Toplevel (runInBody)
+import Deku.Toplevel (runInBody1)
 import Effect (Effect)
 import Effect.Aff (launchAff_)
 import Effect.Class (liftEffect)
-import FRP.Event (keepLatest, mapAccum, bus, bang)
+import FRP.Event (bang, bus, mapAccum)
 
 data UIAction = Initial | Loading | Result String
 
@@ -138,8 +138,8 @@ clickCb push = cb
 clickText = "Click to get some random user data." :: String
 
 main :: Effect Unit
-main = runInBody
-  ( keepLatest $ bus \push -> lcmap (bang Initial <|> _)
+main = runInBody1
+  ( bus \push -> lcmap (bang Initial <|> _)
       \event ->
         let
           loadingOrResult = filterMap
@@ -162,7 +162,7 @@ main = runInBody
             )
             loadingOrResult
         in
-          plant
+          D.div_
             [ D.div_
                 [ D.button (bang (D.OnClick := clickCb push))
                     [ text

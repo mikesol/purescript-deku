@@ -9,6 +9,9 @@
 /.psa*
 /.spago
 /examples/**/index.js
+/examples/**/bundle.js
+/examples/**/main.js
+/examples/**/make.js
 packages.json
 .venv
 /test-results/

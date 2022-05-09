@@ -2,11 +2,18 @@ module Deku.Toplevel where
 
 import Prelude
 
+import Control.Monad.ST (ST)
+import Control.Monad.ST.Class (liftST)
+import Control.Monad.ST.Global (Global)
+import Control.Monad.ST.Internal as RRef
 import Data.Maybe (maybe)
-import Deku.Control (deku, deku1, deku2, dekuA)
+import Data.Newtype (class Newtype)
+import Deku.Control (__internalDekuFlatten, deku, deku1, deku2, dekuA, deleteMeASAP)
 import Deku.Core (Domable, Element)
-import Deku.Interpret (FFIDOMSnapshot, effectfulDOMInterpret, makeFFIDOMSnapshot)
+import Deku.Interpret (FFIDOMSnapshot, Instruction, fullDOMInterpret, hydratingDOMInterpret, makeFFIDOMSnapshot, ssrDOMInterpret)
+import Deku.SSR (ssr)
 import Effect (Effect)
+import Effect.Ref as Ref
 import FRP.Event (Event, subscribe)
 import Web.DOM.Element as Web.DOM
 import Web.HTML (window)
@@ -20,7 +27,7 @@ runInElement'
   -> Effect (Effect Unit)
 runInElement' elt eee = do
   ffi <- makeFFIDOMSnapshot
-  let evt = deku elt eee effectfulDOMInterpret
+  evt <- Ref.new 0 <#> (deku elt eee <<< fullDOMInterpret)
   subscribe evt \i -> i ffi
 
 runInElement1'
@@ -29,7 +36,7 @@ runInElement1'
   -> Effect (Effect Unit)
 runInElement1' elt eee = do
   ffi <- makeFFIDOMSnapshot
-  let evt = deku1 elt eee effectfulDOMInterpret
+  evt <- Ref.new 0 <#> (deku1 elt eee <<< fullDOMInterpret)
   subscribe evt \i -> i ffi
 
 runInElement2'
@@ -38,7 +45,7 @@ runInElement2'
   -> Effect (Effect Unit)
 runInElement2' elt eee = do
   ffi <- makeFFIDOMSnapshot
-  let evt = deku2 elt eee effectfulDOMInterpret
+  evt <- Ref.new 0 <#> (deku2 elt eee <<< fullDOMInterpret)
   subscribe evt \i -> i ffi
 
 runInElementA'
@@ -47,7 +54,7 @@ runInElementA'
   -> Effect (Effect Unit)
 runInElementA' elt eee = do
   ffi <- makeFFIDOMSnapshot
-  let evt = dekuA elt eee effectfulDOMInterpret
+  evt <- Ref.new 0 <#> (dekuA elt eee <<< fullDOMInterpret)
   subscribe evt \i -> i ffi
 
 runInBody'
@@ -97,3 +104,55 @@ runInBodyA
   :: (forall lock. Array (Domable Effect lock (FFIDOMSnapshot -> Effect Unit)))
   -> Effect Unit
 runInBodyA a = void (runInBodyA' a)
+
+--
+
+hydrate'
+  :: (forall lock. Domable Effect lock (FFIDOMSnapshot -> Effect Unit))
+  -> Effect (Effect Unit)
+hydrate' children = do
+  ffi <- makeFFIDOMSnapshot
+  di <- Ref.new 0 <#> hydratingDOMInterpret
+  subscribe
+    ( __internalDekuFlatten
+        { parent: "deku-root", scope: "rootScope", raiseId: \_ -> pure unit }
+        di
+        (deleteMeASAP children)
+    )
+    \i -> i ffi
+
+hydrate
+  :: (forall lock. Domable Effect lock (FFIDOMSnapshot -> Effect Unit))
+  -> Effect Unit
+hydrate a = void (hydrate' a)
+
+--
+newtype Template = Template { head :: String, tail :: String }
+
+derive instance Newtype Template _
+
+runSSR
+  :: Template
+  -> ( forall lock
+        . Domable (ST Global) lock
+            (RRef.STRef Global (Array Instruction) -> ST Global Unit)
+     )
+  -> Effect String
+runSSR (Template { head, tail }) children = (head <> _) <<< (_ <> tail) <<< ssr
+  <$> liftST
+    ( do
+        seed <- RRef.new 0
+        instr <- RRef.new []
+        let di = ssrDOMInterpret seed
+        void $ subscribe
+          ( __internalDekuFlatten
+              { parent: "deku-root"
+              , scope: "rootScope"
+              , raiseId: \_ -> pure unit
+              }
+              di
+              (deleteMeASAP children)
+          )
+          \i -> i instr
+        RRef.read instr
+    )

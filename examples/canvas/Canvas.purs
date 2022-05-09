@@ -2,22 +2,17 @@ module Deku.Example.Canvas where
 
 import Prelude
 
-import Data.Foldable (for_, oneOfMap, traverse_)
+import Data.Foldable (oneOfMap, traverse_)
 import Deku.Attribute ((:=))
-import Deku.Control (deku)
 import Deku.Core (Domable)
 import Deku.DOM as D
-import Deku.Interpret (FFIDOMSnapshot, effectfulDOMInterpret, makeFFIDOMSnapshot)
+import Deku.Interpret (FFIDOMSnapshot)
+import Deku.Toplevel (runInBody)
 import Effect (Effect)
-import FRP.Event (subscribe)
 import FRP.Event.Class (bang)
 import Graphics.Canvas (CanvasElement, fillRect, getContext2D, setFillStyle)
 import Unsafe.Coerce (unsafeCoerce)
-import Web.HTML (window)
 import Web.HTML.HTMLCanvasElement as HTMLCanvasElement
-import Web.HTML.HTMLDocument (body)
-import Web.HTML.HTMLElement (toElement)
-import Web.HTML.Window (document)
 
 scene :: forall lock. Domable Effect lock (FFIDOMSnapshot -> Effect Unit)
 scene = D.canvas
@@ -37,9 +32,4 @@ scene = D.canvas
   []
 
 main :: Effect Unit
-main = do
-  b' <- window >>= document >>= body
-  for_ (toElement <$> b') \b -> do
-    ffi <- makeFFIDOMSnapshot
-    let evt = deku b scene effectfulDOMInterpret
-    void $ subscribe evt \i -> i ffi
+main = runInBody scene

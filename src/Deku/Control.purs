@@ -9,7 +9,9 @@ module Deku.Control
   , globalPortal
   , portal
   , switcher
+  --
   , __internalDekuFlatten
+  , deleteMeASAP
   ) where
 
 import Prelude
