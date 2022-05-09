@@ -10,6 +10,7 @@ in      conf
               , "affjax-web"
               , "affjax"
               , "either"
+              , "monoid-extras"
               , "integers"
               , "behaviors"
               , "aff"

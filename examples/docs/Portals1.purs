@@ -3,13 +3,15 @@ module Deku.Example.Docs.Portals1 where
 import Prelude
 
 import Control.Alt (alt)
-import Data.Foldable (oneOfMap)
-import Data.Profunctor (lcmap)
+import Control.Monad.ST.Class (class MonadST)
 import Data.FastVect.FastVect ((:), index)
 import Data.FastVect.FastVect as V
+import Data.Foldable (oneOfMap)
+import Data.Monoid.Always (class Always, always)
+import Data.Profunctor (lcmap)
 import Deku.Attribute (cb, (:=))
 import Deku.Control (portal, switcher, text_)
-import Deku.Core (Child(..), Domable, Element, dyn)
+import Deku.Core (Child(..), Domable, dyn)
 import Deku.DOM as D
 import Deku.Example.Docs.Types (Page)
 import Deku.Pursx (nut, (~~))
@@ -25,7 +27,7 @@ data MainUIAction
 data TodoAction = Prioritize | Delete
 
 px =
-  Proxy    :: Proxy      """<div>
+  Proxy    :: Proxy         """<div>
   <h1>Portals</h1>
 
   <h2>Zapping from place to place</h2>
@@ -53,9 +55,12 @@ px =
   <p>Thanks for checking out Deku! I had a blast writing it, and I hope you enjoy using it for your projects!</p>
 </div>"""
 
-
-
-portals1 :: forall lock payload. (Page -> Effect Unit) -> Domable Effect lock payload
+portals1
+  :: forall s m lock payload
+   . Always (m Unit) (Effect Unit)
+  => MonadST s m
+  => (Page -> Effect Unit)
+  -> Domable m lock payload
 portals1 _ = px ~~
   { code: nut
       ( D.pre_
@@ -119,31 +124,32 @@ main = runInBody1
       )
   , result: nut
 
-   ( dyn $ bus \push -> lcmap (alt (bang unit)) \event -> do
-      bang $ Insert $ portal
-        ( map
-            ( \i -> D.video
-                (oneOfMap bang [ D.Controls := "true", D.Width := "250" ])
-                [D.source
-                    (oneOfMap bang [ D.Src := i, D.Xtype := "video/mp4" ])
-                    []
-                ]
-            )
-            ( "https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4"
-                : "https://www.w3schools.com/jsref/movie.mp4"
-                : V.empty
-            )
-        )
-        \v _ -> do
-          let
-            p0 = index (Proxy :: _ 0) v
-            p1 = index (Proxy :: _ 1) v
-            ev = fold (const not) event
-            flips = switcher (if _ then p0 else p1) <<< ev
-          D.div_
-            [ D.button (bang $ D.OnClick := cb (const $ push unit))
-                [ text_ "Switch videos" ]
-            , D.div_ [ D.span_ [flips true], D.span_ [flips false] ]
-            ]
-  )
+      ( dyn $ bus $ lcmap (map always) \push -> lcmap (alt (bang unit))
+          \event -> do
+            bang $ Insert $ portal
+              ( map
+                  ( \i -> D.video
+                      (oneOfMap bang [ D.Controls := "true", D.Width := "250" ])
+                      [ D.source
+                          (oneOfMap bang [ D.Src := i, D.Xtype := "video/mp4" ])
+                          []
+                      ]
+                  )
+                  ( "https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4"
+                      : "https://www.w3schools.com/jsref/movie.mp4"
+                      : V.empty
+                  )
+              )
+              \v _ -> do
+                let
+                  p0 = index (Proxy :: _ 0) v
+                  p1 = index (Proxy :: _ 1) v
+                  ev = fold (const not) event
+                  flips = switcher (if _ then p0 else p1) <<< ev
+                D.div_
+                  [ D.button (bang $ D.OnClick := cb (const $ push unit))
+                      [ text_ "Switch videos" ]
+                  , D.div_ [ D.span_ [ flips true ], D.span_ [ flips false ] ]
+                  ]
+      )
   }

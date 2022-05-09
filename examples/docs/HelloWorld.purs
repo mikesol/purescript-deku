@@ -2,9 +2,10 @@ module Deku.Example.Docs.HelloWorld where
 
 import Prelude
 
+import Control.Monad.ST.Class (class MonadST)
 import Deku.Attribute (cb, (:=))
 import Deku.Control (text_)
-import Deku.Core (Domable, Element)
+import Deku.Core (Domable)
 import Deku.DOM as D
 import Deku.Example.Docs.Types (Page(..))
 import Deku.Example.Docs.Util (scrollToTop)
@@ -37,8 +38,8 @@ px = Proxy :: Proxy """<div>
 </div>"""
 
 
-helloWorld :: forall lock payload.
-  (Page -> Effect Unit) -> Domable Effect lock payload
+helloWorld :: forall s m lock payload. MonadST s m =>
+  (Page -> Effect Unit) -> Domable m lock payload
 helloWorld dpage  = px ~~
   { code: nut (D.pre_ [D.code_ [text_ """module Main where
 

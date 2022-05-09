@@ -5,15 +5,18 @@ import Prelude
 import Affjax.ResponseFormat as ResponseFormat
 import Affjax.Web as AX
 import Control.Alt ((<|>))
+import Control.Monad.ST.Class (class MonadST)
 import Data.Argonaut.Core (stringifyWithIndent)
 import Data.Either (Either(..))
 import Data.Filterable (filterMap, compact)
 import Data.HTTP.Method (Method(..))
 import Data.Maybe (Maybe(..))
+import Data.Monoid.Always (class Always, always)
+import Data.Profunctor (lcmap)
 import Data.Tuple.Nested ((/\))
 import Deku.Attribute (Cb, cb, (:=))
 import Deku.Control (text, text_)
-import Deku.Core (Domable, Element, bussed)
+import Deku.Core (Domable, bussed)
 import Deku.DOM as D
 import Deku.Example.Docs.Types (Page(..))
 import Deku.Example.Docs.Util (scrollToTop)
@@ -21,7 +24,7 @@ import Deku.Pursx (nut, (~~))
 import Effect (Effect)
 import Effect.Aff (launchAff_)
 import Effect.Class (liftEffect)
-import FRP.Event (mapAccum, bang, bus)
+import FRP.Event (bang, mapAccum)
 import Type.Proxy (Proxy(..))
 
 data UIAction = Initial | Loading | Result String
@@ -41,9 +44,9 @@ clickCb push = cb
         case result of
           Left err -> liftEffect $ push
             $ Result
-              ( "GET /api response failed to decode: " <>
-                  AX.printError err
-              )
+                ( "GET /api response failed to decode: " <>
+                    AX.printError err
+                )
           Right response -> liftEffect $ push $ Result $
             stringifyWithIndent 2 response.body
   )
@@ -51,7 +54,7 @@ clickCb push = cb
 clickText = "Click to get some random user data." :: String
 
 px =
-  Proxy    :: Proxy      """<div>
+  Proxy    :: Proxy         """<div>
   <h1>Effects</h1>
 
   <h2>Let's make a network call</h2>
@@ -74,7 +77,12 @@ px =
   <p>It is also possible to handle events (and by extension effectful actions in events, like network calls) in Pursx. Let's see how in the <a ~next~ style="cursor:pointer;">second Pursx section</a>.</p>
 </div>"""
 
-effects :: forall lock payload. (Page -> Effect Unit) -> Domable Effect lock payload
+effects
+  :: forall s m lock payload
+   . MonadST s m
+  => Always (m Unit) (Effect Unit)
+  => (Page -> Effect Unit)
+  -> Domable m lock payload
 effects dpage = px ~~
   { code: nut
       ( D.pre_
@@ -184,7 +192,7 @@ main = runInBody
           ]
       )
   , result: nut
-      ( bussed \push event -> do
+      ( bussed $ lcmap (map always) \push event -> do
           let
             loadingOrResult = filterMap
               ( case _ of
@@ -206,29 +214,29 @@ main = runInBody
               )
               loadingOrResult
           D.div_
-              [ D.div_
-                  [ D.button (bang (D.OnClick := clickCb push))
-                      [ text
-                          ( bang clickText
-                              <|> (loading $> "Loading...")
-                              <|> (result $> clickText)
-                          )
-                      ]
-                  ]
-              , D.div
-                  ( (bang (D.Style := "display: none;")) <|>
-                      ( compact
-                          ( mapAccum
-                              ( \_ b -> (b && false) /\
-                                  if b then Just unit else Nothing
-                              )
-                              result
-                              true
-                          ) $> (D.Style := "display: block;")
-                      )
-                  )
-                  [ D.pre_ [ D.code_ [ text (bang "" <|> result) ] ] ]
-              ]
+            [ D.div_
+                [ D.button (bang (D.OnClick := clickCb push))
+                    [ text
+                        ( bang clickText
+                            <|> (loading $> "Loading...")
+                            <|> (result $> clickText)
+                        )
+                    ]
+                ]
+            , D.div
+                ( (bang (D.Style := "display: none;")) <|>
+                    ( compact
+                        ( mapAccum
+                            ( \_ b -> (b && false) /\
+                                if b then Just unit else Nothing
+                            )
+                            result
+                            true
+                        ) $> (D.Style := "display: block;")
+                    )
+                )
+                [ D.pre_ [ D.code_ [ text (bang "" <|> result) ] ] ]
+            ]
       )
   , next: bang (D.OnClick := (cb (const $ dpage PURSX2 *> scrollToTop)))
   }

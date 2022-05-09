@@ -2,6 +2,7 @@ module Deku.Example.Docs.Intro where
 
 import Prelude
 
+import Control.Monad.ST.Class (class MonadST)
 import Deku.Attribute (cb, (:=))
 import Deku.Core (Domable, Element)
 import Deku.DOM as D
@@ -28,6 +29,6 @@ px = Proxy :: Proxy """<div>
   <p>And now, without further ado, check out the <a ~next~ style="cursor:pointer;">hello world section</a>!</p>
 </div>"""
 
-intro :: forall lock payload. (Page -> Effect Unit) -> Domable Effect lock payload
+intro :: forall s m lock payload. MonadST s m => (Page -> Effect Unit) -> Domable m lock payload
 intro dpage  = px ~~
   { next: bang (D.OnClick := (cb (const $ dpage HelloWorld *> scrollToTop))) }

@@ -7,7 +7,7 @@ import Data.Foldable (for_)
 import Deku.Attribute (class Attr, Attribute, attr, cb, (:=))
 import Deku.DOM as D
 import Effect (Effect)
-import FRP.Event (Event, bang)
+import FRP.Event (AnEvent, bang)
 import Web.Event.Event (target)
 import Web.HTML.HTMLInputElement (fromEventTarget, valueAsNumber)
 
@@ -28,7 +28,7 @@ click_
   -> event (Attribute element)
 click_ = map (attr D.OnClick <<< (_ $ mempty))
 
-slider :: Event (Number -> Effect Unit) -> Event (Attribute D.Input_)
+slider :: forall mo. Applicative mo => AnEvent mo (Number -> Effect Unit) -> AnEvent mo (Attribute D.Input_)
 slider = alt (bang $ D.Xtype := "range") <<< map
   ( \push ->
       D.OnInput := cb \e -> for_
@@ -38,5 +38,4 @@ slider = alt (bang $ D.Xtype := "range") <<< map
         ( valueAsNumber
             >=> push
         )
-
   )

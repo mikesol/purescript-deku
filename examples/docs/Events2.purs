@@ -2,15 +2,17 @@ module Deku.Example.Docs.Events2 where
 
 import Prelude
 
-import Control.Alt (alt, (<|>))
+import Control.Alt ((<|>))
+import Control.Monad.ST.Class (class MonadST)
 import Data.Filterable (filterMap)
 import Data.Foldable (for_, oneOfMap)
 import Data.Maybe (Maybe(..))
+import Data.Monoid.Always (class Always, always)
 import Data.Profunctor (lcmap)
 import Data.Tuple.Nested ((/\))
 import Deku.Attribute (cb, (:=))
 import Deku.Control (text_)
-import Deku.Core (Child(..), Domable, Element, bussed, dyn)
+import Deku.Core (Child(..), Domable, bussed, dyn)
 import Deku.DOM as D
 import Deku.Example.Docs.Types (Page(..))
 import Deku.Example.Docs.Util (scrollToTop)
@@ -30,7 +32,7 @@ data MainUIAction
 data TodoAction = Prioritize | Delete
 
 px =
-  Proxy    :: Proxy      """<div>
+  Proxy    :: Proxy         """<div>
   <h1>Events 2</h1>
 
   <h2>Dynamic children</h2>
@@ -64,7 +66,12 @@ px =
   <p>In this section, we used nested events to insert and remove elements from a parent. In the next section, we'll see how we can use <a ~next~ style="cursor:pointer;">portals to move an element to a different place of the DOM</a>.</p>
 </div>"""
 
-events2 :: forall lock payload. (Page -> Effect Unit) -> Domable Effect lock payload
+events2
+  :: forall s m lock payload
+   . Always (m Unit) (Effect Unit)
+  => MonadST s m
+  => (Page -> Effect Unit)
+  -> Domable m lock payload
 events2 dpage = px ~~
   { code: nut
       ( D.pre_
@@ -162,12 +169,13 @@ main = runInBody1
           ]
       )
   , result: nut
-      ( bussed \push -> lcmap (alt (bang UIShown)) \event -> do
+      ( bussed $ lcmap (map always) \push -> lcmap (bang UIShown <|> _) \event -> do
           D.div_
             [ D.div_
                 [ D.input
                     ( oneOfMap bang
-                        [ D.Style := "border-style:solid;border-width: 1px;border-color: black;"
+                        [ D.Style :=
+                            "border-style:solid;border-width: 1px;border-color: black;"
                         , D.OnInput := cb \e -> for_
                             ( target e
                                 >>= fromEventTarget
@@ -181,15 +189,18 @@ main = runInBody1
                         ]
                     )
                     []
-                , D.button ((bang $ D.Style := "margin: 5px;") <|> (bang $ D.OnClick := cb (const $ push AddTodo)))
-                    [text_ "Add"]
+                , D.button
+                    ( (bang $ D.Style := "margin: 5px;") <|>
+                        (bang $ D.OnClick := cb (const $ push AddTodo))
+                    )
+                    [ text_ "Add" ]
                 ]
             , D.div_
-                [dyn $ map
-                    ( \txt -> keepLatest $ bus \p' e' ->
+                [ dyn $ map
+                    ( \txt -> keepLatest $ bus $ lcmap (map always) \p' e' ->
                         ( bang $ Insert $ D.div_ do
                             [ D.span (bang $ D.Style := "margin: 5px;")
-                                [text_ txt]
+                                [ text_ txt ]
                             , D.button
                                 ( (bang $ D.Style := "margin: 5px;") <|>
                                     ( bang $ D.OnClick := cb
@@ -219,6 +230,5 @@ main = runInBody1
                 ]
             ]
       )
-
   , next: bang (D.OnClick := (cb (const $ dpage Portals *> scrollToTop)))
   }
