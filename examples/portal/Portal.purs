@@ -5,9 +5,8 @@ import Prelude
 import Control.Alt (alt)
 import Data.Foldable (oneOfMap)
 import Data.Profunctor (lcmap)
-import Data.Typelevel.Num (d0, d1)
-import Data.Vec (index, (+>))
-import Data.Vec as V
+import Data.FastVect.FastVect (index, (:))
+import Data.FastVect.FastVect as V
 import Deku.Attribute (cb, (:=))
 import Deku.Control (portal, switcher, text_)
 import Deku.Core (Child(..), dyn)
@@ -15,6 +14,7 @@ import Deku.DOM as D
 import Deku.Toplevel (runInBody)
 import Effect (Effect)
 import FRP.Event (bang, bus, fold)
+import Type.Prelude (Proxy(..))
 
 main :: Effect Unit
 main = runInBody
@@ -41,14 +41,14 @@ main = runInBody
                               ]
                           )
                           ( "https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4"
-                              +> "https://www.w3schools.com/jsref/movie.mp4"
-                              +> V.empty
+                              : "https://www.w3schools.com/jsref/movie.mp4"
+                              : V.empty
                           )
                       )
                       \v _ -> do
                         let
-                          p0 = index v d0
-                          p1 = index v d1
+                          p0 = index (Proxy :: _ 0) v
+                          p1 = index (Proxy :: _ 1) v
                           ev = fold (const not) event
                           flips = switcher (if _ then p0 else p1) <<< ev
                         D.div_
@@ -81,14 +81,14 @@ main = runInBody
                               ]
                           )
                           ( "https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4"
-                              +> "https://www.w3schools.com/jsref/movie.mp4"
-                              +> V.empty
+                              : "https://www.w3schools.com/jsref/movie.mp4"
+                              : V.empty
                           )
                       )
                       \v _ -> do
                         let
-                          p0 = index v d0
-                          p1 = index v d1
+                          p0 = index (Proxy :: _ 0) v
+                          p1 = index (Proxy :: _ 1) v
                           ev = fold (const not) event
                           flips = switcher (if _ then p0 else p1) <<< ev
                         D.div_
@@ -120,12 +120,12 @@ main = runInBody
                               ]
                           )
                           ( "https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4"
-                              +> V.empty
+                              : V.empty
                           )
                       )
                       \v _ -> do
                         let
-                          p0 = index v d0
+                          p0 = index (Proxy :: _ 0) v
                           ev = fold (const not) event
                           flips = switcher (if _ then p0 else D.div_ []) <<< ev
                         D.div_

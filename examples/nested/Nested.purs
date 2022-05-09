@@ -6,9 +6,8 @@ import Control.Alt ((<|>))
 import Data.Foldable (for_)
 import Data.Int (floor)
 import Data.Tuple (Tuple(..))
-import Data.Typelevel.Num (d0)
-import Data.Vec ((+>))
-import Data.Vec as V
+import Data.FastVect.FastVect ((:))
+import Data.FastVect.FastVect as V
 import Deku.Attribute ((:=))
 import Deku.Control (dekuA, portal, switcher)
 import Deku.Control as C
@@ -18,8 +17,9 @@ import Deku.Interpret (FFIDOMSnapshot, effectfulDOMInterpret, makeFFIDOMSnapshot
 import Effect (Effect)
 import Effect.Random as Random
 import FRP.Behavior (Behavior, behavior, sample_)
-import FRP.Event (Event, delay, bang, makeEvent, mapAccum, subscribe)
 import FRP.Event.Time (interval)
+import FRP.Event (Event, delay, bang, makeEvent, mapAccum, subscribe)
+import Type.Prelude (Proxy(..))
 import Web.HTML (window)
 import Web.HTML.HTMLDocument (body)
 import Web.HTML.HTMLElement (toElement)
@@ -44,7 +44,9 @@ counter :: forall a. Event a → Event (Tuple a Int)
 counter event = mapAccum f event 0
   where
   f a b = Tuple (b + 1) (Tuple a b)
-scene :: forall lock. Array (Domable Effect lock (FFIDOMSnapshot -> Effect Unit))
+
+scene
+  :: forall lock. Array (Domable Effect lock (FFIDOMSnapshot -> Effect Unit))
 scene =
   [ D.div_
       [ portal
@@ -57,12 +59,12 @@ scene =
                   )
                   []
               ]
-              +> V.empty
+              : V.empty
           )
           ( \i _ -> switcher
               ( \rgb -> D.div
                   (bang (D.Style := "background-color: " <> rgb <> ";"))
-                  [ V.index i d0 ]
+                  [V.index (Proxy :: _ 0) i]
               )
               (sample_ rdm (interval 1000))
           )

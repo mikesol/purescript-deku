@@ -25,7 +25,7 @@ import Data.FunctorWithIndex (mapWithIndex)
 import Data.Maybe (Maybe(..))
 import Data.Tuple (snd)
 import Data.Tuple.Nested (type (/\), (/\))
-import Data.Vec (toArray, Vec)
+import Data.FastVect.FastVect (toArray, Vect)
 import Deku.Attribute (Attribute, AttributeValue(..), unsafeUnAttribute)
 import Deku.Core (Child(..), DOMInterpret(..), Domable(..), DynamicChildren(..), Element(..), EventfulElement(..), FixedChildren(..))
 import Deku.Core (Child(..), DOMInterpret(..), Domable(..), DynamicChildren(..), Element(..), EventfulElement(..), FixedChildren(..), PSR)
@@ -33,6 +33,13 @@ import FRP.Event (AnEvent, bang, keepLatest, makeEvent, mapAccum, memoize, subsc
 import FRP.Event (AnEvent, keepLatest, makeEvent, subscribe)
 import Foreign.Object as Object
 import Type.Equality (class TypeEquals)
+import Effect (Effect, foreachE)
+import Effect.Exception (throwException)
+import FRP.Event (Event, bang, keepLatest, makeEvent, mapAccum, memoize, subscribe)
+import Prim.Int (class Compare)
+import Prim.Ordering (GT)
+import Safe.Coerce (coerce)
+import Type.Equality (class TypeEquals, proof)
 import Unsafe.Coerce (unsafeCoerce)
 import Web.DOM as Web.DOM
 
@@ -118,11 +125,12 @@ deleteMeASAP = unsafeCoerce
 
 internalPortal
   :: forall n s m lock0 lock1 payload
-   . MonadST s m
+   . Compare n (-1) GT
+  => MonadST s m
   => Boolean
   -> (String -> String)
-  -> Vec n (Domable m lock0 payload)
-  -> ( Vec n (Domable m lock1 payload)
+  -> Vect n (Domable m lock0 payload)
+  -> ( Vect n (Domable m lock1 payload)
        -> (Domable m lock0 payload -> Domable m lock1 payload)
        -> Domable m lock1 payload
      )
@@ -142,11 +150,11 @@ internalPortal isGlobal scopeF gaga closure = Element' $ Element go
               di
             _ -> f (Element' (elementify "div" empty i))
         )
-        gaga
+        (toArray gaga)
     u0 <- subscribe actualized k
     av2 <- liftST $ Ref.new (pure unit)
     let
-      asIds :: Array String -> Vec n String
+      asIds :: Array String -> Vect n String
       asIds = unsafeCoerce
     idz <- asIds <$> readAr av
     let
@@ -182,16 +190,18 @@ internalPortal isGlobal scopeF gaga closure = Element' $ Element go
 
 globalPortal
   :: forall n s m lock payload
-   . MonadST s m => Vec n (Domable m lock payload)
-  -> (Vec n (Domable m lock payload) -> Domable m lock payload)
+   . Compare n (-1) GT
+  => MonadST s m => Vect n (Domable m lock payload)
+  -> (Vect n (Domable m lock payload) -> Domable m lock payload)
   -> Domable m lock payload
 globalPortal e f = internalPortal true (const "@portal@") e (\x _ -> f x)
 
 portal
   :: forall n s m lock0 payload
-   . MonadST s m =>Vec n (Domable m lock0 payload)
+   . Compare n (-1) GT
+  => MonadST s m =>Vect n (Domable m lock0 payload)
   -> ( forall lock1
-        . Vec n (Domable m lock1 payload)
+        . Vect n (Domable m lock1 payload)
        -> (Domable m lock0 payload -> Domable m lock1 payload)
        -> Domable m lock1 payload
      )
