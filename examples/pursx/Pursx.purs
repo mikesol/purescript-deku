@@ -8,7 +8,7 @@ import Data.Foldable (for_)
 import Deku.Attribute (cb, (:=))
 import Deku.Control (deku1)
 import Deku.Control as C
-import Deku.Core (Domable, Element)
+import Deku.Core (Domable)
 import Deku.DOM as D
 import Deku.Interpret (FFIDOMSnapshot, effectfulDOMInterpret, makeFFIDOMSnapshot)
 import Deku.Pursx (nut, (~~))
@@ -32,8 +32,8 @@ px =  Proxy    :: Proxy
 pxInception
   :: forall lock payload
    . (Boolean -> Effect Unit)
-  -> Domable lock payload
-  -> Domable lock payload
+  -> Domable Effect lock payload
+  -> Domable Effect lock payload
 pxInception push aThirdThing = px ~~
   { btn: bang (D.Style := "background-color: rgb(133,151,217)")
   , somethingElse:
@@ -48,7 +48,7 @@ pxInception push aThirdThing = px ~~
   }
 
 scene
-  :: forall lock. Event (Domable lock (FFIDOMSnapshot -> Effect Unit))
+  :: forall lock. Event (Domable Effect lock (FFIDOMSnapshot -> Effect Unit))
 scene = bus \push event ->
   D.div empty
     [ pxInception push

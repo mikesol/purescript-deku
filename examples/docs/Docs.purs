@@ -35,7 +35,7 @@ scene
   :: forall lock payload
    . (Page -> Effect Unit)
   -> Event Page
-  -> Array (Domable lock payload)
+  -> Array (Domable Effect lock payload)
 scene push event =
   [ D.div_
       $ map
@@ -87,7 +87,7 @@ scene push event =
   , D.div_ [ switcher (page push) event ]
   ]
   where
-  page :: (Page -> Effect Unit) -> Page -> Domable lock payload
+  page :: (Page -> Effect Unit) -> Page -> Domable Effect lock payload
   page dpage Intro = Intro.intro dpage
   page dpage HelloWorld = HelloWorld.helloWorld dpage
   page dpage SimpleComponent = Component.components dpage

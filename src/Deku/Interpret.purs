@@ -48,7 +48,7 @@ foreign import makeNoop_ :: Core.MakeNoop -> FFIDOMSnapshot -> Effect Unit
 foreign import giveNewParent_ :: Core.GiveNewParent -> FFIDOMSnapshot -> Effect Unit
 foreign import disconnectElement_ :: Core.DisconnectElement -> FFIDOMSnapshot -> Effect Unit
 foreign import sendToTop_ :: Core.SendToTop -> FFIDOMSnapshot -> Effect Unit
-effectfulDOMInterpret :: Core.DOMInterpret (FFIDOMSnapshot -> Effect Unit)
+effectfulDOMInterpret :: Core.DOMInterpret Effect (FFIDOMSnapshot -> Effect Unit)
 
 effectfulDOMInterpret = Core.DOMInterpret
   { ids: map show R.random

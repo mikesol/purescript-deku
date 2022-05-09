@@ -3,21 +3,24 @@ module Deku.DOM.Elt.Legend where
 import Control.Plus (empty)
 import Deku.Attribute (Attribute)
 import Deku.Control (elementify)
+import Control.Monad.ST.Class (class MonadST)
 import Deku.Core (Domable(..), FixedChildren(..))
-import FRP.Event (Event)
+import FRP.Event (AnEvent)
 
 data Legend_
 
 legend
-  :: forall lock payload
-   . Event (Attribute Legend_)
-  -> Array (Domable lock payload)
-  -> Domable lock payload
+  :: forall s m lock payload
+   . MonadST s m
+  => AnEvent m (Attribute Legend_)
+  -> Array (Domable m lock payload)
+  -> Domable m lock payload
 legend attributes kids = Element' (elementify "legend" attributes (FixedChildren' (FixedChildren kids)))
 
 legend_
-  :: forall lock payload
-   . Array (Domable lock payload)
-  -> Domable lock payload
+  :: forall s m lock payload
+   . MonadST s m
+  => Array (Domable m lock payload)
+  -> Domable m lock payload
 legend_ = legend empty
 

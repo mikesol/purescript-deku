@@ -46,7 +46,7 @@ px =
   <p>In this section, saw how to react to events. In the next section, we'll use a similar mechanism to deal with arbitrary <a ~next~ style="cursor:pointer;">effects</a>.</p>
 </div>"""
 
-events :: forall lock payload. (Page -> Effect Unit) -> Domable lock payload
+events :: forall lock payload. (Page -> Effect Unit) -> Domable Effect lock payload
 events dpage = px ~~
   { code: nut
       ( D.pre_

@@ -28,6 +28,6 @@ px = Proxy :: Proxy """<div>
   <p>And now, without further ado, check out the <a ~next~ style="cursor:pointer;">hello world section</a>!</p>
 </div>"""
 
-intro :: forall lock payload. (Page -> Effect Unit) -> Domable lock payload
+intro :: forall lock payload. (Page -> Effect Unit) -> Domable Effect lock payload
 intro dpage  = px ~~
   { next: bang (D.OnClick := (cb (const $ dpage HelloWorld *> scrollToTop))) }

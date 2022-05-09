@@ -3,21 +3,24 @@ module Deku.DOM.Elt.Li where
 import Control.Plus (empty)
 import Deku.Attribute (Attribute)
 import Deku.Control (elementify)
+import Control.Monad.ST.Class (class MonadST)
 import Deku.Core (Domable(..), FixedChildren(..))
-import FRP.Event (Event)
+import FRP.Event (AnEvent)
 
 data Li_
 
 li
-  :: forall lock payload
-   . Event (Attribute Li_)
-  -> Array (Domable lock payload)
-  -> Domable lock payload
+  :: forall s m lock payload
+   . MonadST s m
+  => AnEvent m (Attribute Li_)
+  -> Array (Domable m lock payload)
+  -> Domable m lock payload
 li attributes kids = Element' (elementify "li" attributes (FixedChildren' (FixedChildren kids)))
 
 li_
-  :: forall lock payload
-   . Array (Domable lock payload)
-  -> Domable lock payload
+  :: forall s m lock payload
+   . MonadST s m
+  => Array (Domable m lock payload)
+  -> Domable m lock payload
 li_ = li empty
 

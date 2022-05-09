@@ -53,7 +53,7 @@ px = Proxy :: Proxy """<div>
 </div>"""
 
 
-pursx1 :: forall lock payload. (Page -> Effect Unit) -> Domable lock payload
+pursx1 :: forall lock payload. (Page -> Effect Unit) -> Domable Effect lock payload
 pursx1 dpage  = px ~~
   { code: nut (D.pre_ [D.code_ [text_ $ """module Main where
 

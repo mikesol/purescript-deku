@@ -38,7 +38,7 @@ px = Proxy :: Proxy """<div>
 
 
 helloWorld :: forall lock payload.
-  (Page -> Effect Unit) -> Domable lock payload
+  (Page -> Effect Unit) -> Domable Effect lock payload
 helloWorld dpage  = px ~~
   { code: nut (D.pre_ [D.code_ [text_ """module Main where
 

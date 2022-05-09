@@ -7,7 +7,7 @@ import Data.Compactable (compact)
 import Data.Maybe (Maybe(..))
 import Deku.Attribute (cb, (:=))
 import Deku.Control (text, text_)
-import Deku.Core (Child(..), Domable, Element, dyn)
+import Deku.Core (Child(..), Domable, dyn)
 import Deku.DOM as D
 import Deku.Example.Docs.Types (Page(..))
 import Deku.Example.Docs.Util (scrollToTop)
@@ -61,7 +61,7 @@ myDom =  Proxy   :: Proxy    """<div>
 pursx2
   :: forall lock payload
    . (Page -> Effect Unit)
-  -> Domable lock payload
+  -> Domable Effect lock payload
 pursx2 dpage = makePursx' (Proxy :: _ "?") px
   { code: nut
       ( D.pre_

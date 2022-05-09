@@ -121,7 +121,7 @@ let additions =
           , "now"
           ]
         , repo = "https://github.com/mikesol/purescript-event.git"
-        , version = "v1.6.4"
+        , version = "v1.6.5"
         }
       , monoid-extras =
         { dependencies = [ "profunctor-lenses" ]

@@ -19,7 +19,7 @@ import Web.HTML.HTMLDocument (body)
 import Web.HTML.HTMLElement (toElement)
 import Web.HTML.Window (document)
 
-scene :: forall lock. Domable lock (FFIDOMSnapshot -> Effect Unit)
+scene :: forall lock. Domable Effect lock (FFIDOMSnapshot -> Effect Unit)
 scene = D.canvas
   ( oneOfMap bang
       [ D.Width := "400px"

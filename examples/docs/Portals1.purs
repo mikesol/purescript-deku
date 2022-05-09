@@ -56,7 +56,7 @@ px =
 
 
 
-portals1 :: forall lock payload. (Page -> Effect Unit) -> Domable lock payload
+portals1 :: forall lock payload. (Page -> Effect Unit) -> Domable Effect lock payload
 portals1 _ = px ~~
   { code: nut
       ( D.pre_

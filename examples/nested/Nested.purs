@@ -44,7 +44,7 @@ counter :: forall a. Event a → Event (Tuple a Int)
 counter event = mapAccum f event 0
   where
   f a b = Tuple (b + 1) (Tuple a b)
-scene :: forall lock. Array (Domable lock (FFIDOMSnapshot -> Effect Unit))
+scene :: forall lock. Array (Domable Effect lock (FFIDOMSnapshot -> Effect Unit))
 scene =
   [ D.div_
       [ portal

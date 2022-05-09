@@ -64,7 +64,7 @@ px =
   <p>In this section, we used nested events to insert and remove elements from a parent. In the next section, we'll see how we can use <a ~next~ style="cursor:pointer;">portals to move an element to a different place of the DOM</a>.</p>
 </div>"""
 
-events2 :: forall lock payload. (Page -> Effect Unit) -> Domable lock payload
+events2 :: forall lock payload. (Page -> Effect Unit) -> Domable Effect lock payload
 events2 dpage = px ~~
   { code: nut
       ( D.pre_

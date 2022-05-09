@@ -25,7 +25,7 @@ counter :: forall a. Event a → Event (Tuple a Int)
 counter event = mapAccum f event 0
   where
   f a b = Tuple (b + 1) (Tuple a b)
-scene :: forall lock. Domable lock (FFIDOMSnapshot -> Effect Unit)
+scene :: forall lock. Domable Effect lock (FFIDOMSnapshot -> Effect Unit)
 scene = toDOM $ bus $ \push -> lcmap (alt (bang true)) \event -> do
   D.div_
     [ D.div empty [C.text (bang "Stops after 4 clicks")]

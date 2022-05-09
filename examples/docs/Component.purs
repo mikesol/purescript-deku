@@ -48,7 +48,7 @@ myDivWithNoChildren = D.div attrs blank
   <p>In this section, we built a simple component. In the next section, we'll recreate the exact same element using a different input syntax called <a ~next~ style="cursor:pointer;">Pursx</a>.</p>
 </div>"""
 
-components :: forall lock payload. (Page -> Effect Unit) -> Domable lock payload
+components :: forall lock payload. (Page -> Effect Unit) -> Domable Effect lock payload
 components dpage = px ~~
   { code: nut
       ( D.pre_ [D.code_

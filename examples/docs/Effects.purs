@@ -74,7 +74,7 @@ px =
   <p>It is also possible to handle events (and by extension effectful actions in events, like network calls) in Pursx. Let's see how in the <a ~next~ style="cursor:pointer;">second Pursx section</a>.</p>
 </div>"""
 
-effects :: forall lock payload. (Page -> Effect Unit) -> Domable lock payload
+effects :: forall lock payload. (Page -> Effect Unit) -> Domable Effect lock payload
 effects dpage = px ~~
   { code: nut
       ( D.pre_
