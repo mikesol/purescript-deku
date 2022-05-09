@@ -23,7 +23,7 @@ import Data.Foldable (oneOf)
 import Data.FunctorWithIndex (mapWithIndex)
 import Data.Tuple (snd)
 import Data.Tuple.Nested (type (/\), (/\))
-import Data.Vec (toArray, Vec)
+import Data.FastVect.FastVect (toArray, Vect)
 import Deku.Attribute (Attribute, AttributeValue(..), unsafeUnAttribute)
 import Deku.Core (Child(..), DOMInterpret(..), Domable(..), DynamicChildren(..), Element(..), EventfulElement(..), FixedChildren(..))
 import Deku.Internal (__internalDekuFlatten)
@@ -32,6 +32,8 @@ import Effect.AVar (tryPut)
 import Effect.AVar as AVar
 import Effect.Exception (throwException)
 import FRP.Event (Event, bang, keepLatest, makeEvent, mapAccum, memoize, subscribe)
+import Prim.Int (class Compare)
+import Prim.Ordering (GT)
 import Safe.Coerce (coerce)
 import Type.Equality (class TypeEquals, proof)
 import Unsafe.Coerce (unsafeCoerce)
@@ -109,10 +111,11 @@ deleteMeASAP = unsafeCoerce
 
 internalPortal
   :: forall n lock0 lock1 payload
-   . Boolean
+   . Compare n (-1) GT
+  => Boolean
   -> (String -> String)
-  -> Vec n (Element lock0 payload)
-  -> ( Vec n (Element lock1 payload)
+  -> Vect n (Element lock0 payload)
+  -> ( Vect n (Element lock1 payload)
        -> (Element lock0 payload -> Element lock1 payload)
        -> Domable lock1 payload
      )
@@ -131,11 +134,11 @@ internalPortal isGlobal scopeF gaga closure = Element go
               }
               di
         )
-        gaga
+        (toArray gaga)
     u0 <- subscribe actualized k
     av2 <- AVar.empty
     let
-      asIds :: Array String -> Vec n String
+      asIds :: Array String -> Vect n String
       asIds = unsafeCoerce
     idz <- asIds <$> readAr av
     let
@@ -170,16 +173,18 @@ internalPortal isGlobal scopeF gaga closure = Element go
 
 globalPortal
   :: forall n lock payload
-   . Vec n (Element lock payload)
-  -> (Vec n (Element lock payload) -> Domable lock payload)
+   . Compare n (-1) GT
+  => Vect n (Element lock payload)
+  -> (Vect n (Element lock payload) -> Domable lock payload)
   -> Element lock payload
 globalPortal e f = internalPortal true (const "@portal@") e (\x _ -> f x)
 
 portal
   :: forall n lock0 payload
-   . Vec n (Element lock0 payload)
+   . Compare n (-1) GT
+  => Vect n (Element lock0 payload)
   -> ( forall lock1
-        . Vec n (Element lock1 payload)
+        . Vect n (Element lock1 payload)
        -> (Element lock0 payload -> Element lock1 payload)
        -> Domable lock1 payload
      )
