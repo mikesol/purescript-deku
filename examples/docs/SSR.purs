@@ -28,7 +28,7 @@ px =
   Proxy    :: Proxy         """<div>
   <h1>Server-side rendering</h1>
 
-  <h2>Squeezing every ounce of performance</h2>
+  <h2>When performance matters!</h2>
   <p>
     In web development, it's good practice to send a plain-HTML version of your site over the wire before any JavaScript starts executing. This is called <i>server-side rendering</i>, or SSR, where the server renders HTML in an initial pass before rendering any JavaScript.
   </p>
