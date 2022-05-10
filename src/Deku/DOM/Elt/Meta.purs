@@ -2,24 +2,26 @@ module Deku.DOM.Elt.Meta where
 
 import Control.Plus (empty)
 import Deku.Attribute (Attribute)
-import Deku.Control (elementify, class Plant, plant)
-import Deku.Core (Child, Element, Domable)
-import FRP.Event (Event)
+import Deku.Control (elementify)
+import Control.Monad.ST.Class (class MonadST)
+import Deku.Core (Domable(..), FixedChildren(..))
+import FRP.Event (AnEvent)
 
 data Meta_
 
 meta
-  :: forall seed lock payload
-   . Plant seed (Domable lock payload)
-  => Event (Attribute Meta_)
-  -> seed
-  -> Element lock payload
-meta attributes seed = elementify "meta" attributes (plant seed)
+  :: forall s m lock payload
+   . MonadST s m
+  => AnEvent m (Attribute Meta_)
+  -> Array (Domable m lock payload)
+  -> Domable m lock payload
+meta attributes kids = Element'
+  (elementify "meta" attributes (FixedChildren' (FixedChildren kids)))
 
 meta_
-  :: forall seed lock payload
-   . Plant seed (Domable lock payload)
-  => seed
-  -> Element lock payload
+  :: forall s m lock payload
+   . MonadST s m
+  => Array (Domable m lock payload)
+  -> Domable m lock payload
 meta_ = meta empty
 

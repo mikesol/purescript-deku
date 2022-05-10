@@ -2,24 +2,26 @@ module Deku.DOM.Elt.Dir where
 
 import Control.Plus (empty)
 import Deku.Attribute (Attribute)
-import Deku.Control (elementify, class Plant, plant)
-import Deku.Core (Child, Element, Domable)
-import FRP.Event (Event)
+import Deku.Control (elementify)
+import Control.Monad.ST.Class (class MonadST)
+import Deku.Core (Domable(..), FixedChildren(..))
+import FRP.Event (AnEvent)
 
 data Dir_
 
 dir
-  :: forall seed lock payload
-   . Plant seed (Domable lock payload)
-  => Event (Attribute Dir_)
-  -> seed
-  -> Element lock payload
-dir attributes seed = elementify "dir" attributes (plant seed)
+  :: forall s m lock payload
+   . MonadST s m
+  => AnEvent m (Attribute Dir_)
+  -> Array (Domable m lock payload)
+  -> Domable m lock payload
+dir attributes kids = Element'
+  (elementify "dir" attributes (FixedChildren' (FixedChildren kids)))
 
 dir_
-  :: forall seed lock payload
-   . Plant seed (Domable lock payload)
-  => seed
-  -> Element lock payload
+  :: forall s m lock payload
+   . MonadST s m
+  => Array (Domable m lock payload)
+  -> Domable m lock payload
 dir_ = dir empty
 

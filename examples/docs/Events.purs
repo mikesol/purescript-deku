@@ -3,29 +3,32 @@ module Deku.Example.Docs.Events where
 import Prelude
 
 import Control.Alt ((<|>))
-import Data.Tuple.Nested ((/\))
+import Control.Monad.ST.Class (class MonadST)
+import Data.Monoid.Always (class Always)
+import Data.Profunctor (lcmap)
+import Deku.Always (halways)
 import Deku.Attribute (cb, (:=))
-import Deku.Control (blank, plant, text, text_)
-import Deku.Core (Element)
+import Deku.Control (text, text_)
+import Deku.Core (Domable, vbussed)
 import Deku.DOM as D
 import Deku.Example.Docs.Types (Page(..))
 import Deku.Example.Docs.Util (scrollToTop)
 import Deku.Listeners (click_, slider)
 import Deku.Pursx (nut, (~~))
 import Effect (Effect)
-import FRP.Event (bang, fold, mapAccum)
-import FRP.Event.VBus (V, vbus)
+import FRP.Event (bang, fold)
+import FRP.Event.VBus (V)
 import Type.Proxy (Proxy(..))
 
-
 type UIEvents = V
-  ( uiShow :: Unit
-  , buttonClicked :: Unit
+  ( buttonClicked :: Unit
   , sliderMoved :: Number
   )
 
 px =
-  Proxy    :: Proxy      """<div>
+  Proxy
+    :: Proxy
+         """<div>
   <h1>Events</h1>
 
   <h2>Listening to the DOM</h2>
@@ -46,7 +49,12 @@ px =
   <p>In this section, saw how to react to events. In the next section, we'll use a similar mechanism to deal with arbitrary <a ~next~ style="cursor:pointer;">effects</a>.</p>
 </div>"""
 
-events :: forall lock payload. (Page -> Effect Unit) -> Element lock payload
+events
+  :: forall s m lock payload
+   . MonadST s m
+  => Always (m Unit) (Effect Unit)
+  => (Page -> Effect Unit)
+  -> Domable m lock payload
 events dpage = px ~~
   { code: nut
       ( D.pre_
@@ -57,8 +65,7 @@ events dpage = px ~~
 import Prelude
 
 import Control.Alt ((<|>))
-import Deku.Attribute ((:=))
-import Deku.Control (blank, plant, text, text_)
+import Deku.Control (text, text_)
 import Deku.DOM as D
 import Deku.Listeners (click_, slider)
 import Deku.Toplevel (runInBody1)
@@ -68,14 +75,13 @@ import FRP.Event.VBus (V, vbus)
 import Type.Proxy (Proxy(..))
 
 type UIEvents = V
-  ( uiShow :: Unit
-  , buttonClicked :: Unit
+  ( buttonClicked :: Unit
   , sliderMoved :: Number
   )
 
 main :: Effect Unit
 main = runInBody1
-  ( vbus (Proxy :: _ UIEvents) \push event -> plant do
+  ( vbus (Proxy :: _ UIEvents) \push event -> do
       D.div_
         [ D.button
             (click_ (bang push.buttonClicked))
@@ -94,7 +100,7 @@ main = runInBody1
         , D.div_
             [ D.input
                 (slider (bang push.sliderMoved))
-                blank
+                []
             , D.div_
                 [ text
                     ( bang "Val: 50" <|>
@@ -110,35 +116,36 @@ main = runInBody1
               ]
           ]
       )
-  , result: nut( vbus (Proxy :: _ UIEvents) \push event -> plant do
-      D.div_
-        [ D.button
-            (click_ (bang  push.buttonClicked))
-            [ text_ "Click" ]
-        , D.div_
-            [ text
-                ( bang "Val: 0" <|>
-                    ( append "Val: " <<< show
-                        <$> fold
-                          (const (add 1))
-                          (bang unit <|> event.buttonClicked)
-                          (-1)
-                    )
-                )
-            ]
-        , D.div_
-            [ D.input
-                (slider (bang push.sliderMoved))
-                blank
+  , result: nut
+      ( vbussed (Proxy :: _ UIEvents) $ lcmap halways \push event -> do
+          D.div_
+            [ D.button
+                (click_ (bang push.buttonClicked))
+                [ text_ "Click" ]
             , D.div_
                 [ text
-                    ( (bang "Val: 50") <|>
-                        ( (append "Val: " <<< show) <$> event.sliderMoved
+                    ( bang "Val: 0" <|>
+                        ( append "Val: " <<< show
+                            <$> fold
+                              (const (add 1))
+                              (bang unit <|> event.buttonClicked)
+                              (-1)
                         )
                     )
                 ]
+            , D.div_
+                [ D.input
+                    (slider (bang push.sliderMoved))
+                    []
+                , D.div_
+                    [ text
+                        ( (bang "Val: 50") <|>
+                            ( (append "Val: " <<< show) <$> event.sliderMoved
+                            )
+                        )
+                    ]
+                ]
             ]
-        ]
-  )
+      )
   , next: bang (D.OnClick := (cb (const $ dpage Effects *> scrollToTop)))
   }

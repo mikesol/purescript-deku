@@ -5,7 +5,7 @@ import Prelude
 import Control.Alt ((<|>))
 import Data.Foldable (oneOfMap)
 import Deku.Attribute ((:=))
-import Deku.Control (blank, plant, text_)
+import Deku.Control (text_)
 import Deku.DOM as D
 import Deku.Toplevel (runInBody1)
 import Effect (Effect)
@@ -27,7 +27,7 @@ example counter = D.div_
               ]
           ) <$> counter
       )
-      blank
+      []
   ]
 
 main :: Effect Unit
@@ -35,6 +35,6 @@ main = runInBody1
   ( memoize
       ( (fold (const (add 1)) (interval 400) 0 <|> bang 0)
       )
-      (plant <<< example)
+      example
 
   )

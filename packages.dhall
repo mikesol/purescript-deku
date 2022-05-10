@@ -115,12 +115,18 @@ let additions =
           , "effect"
           , "filterable"
           , "nullable"
+          , "monoid-extras"
           , "unsafe-reference"
           , "js-timers"
           , "now"
           ]
         , repo = "https://github.com/mikesol/purescript-event.git"
-        , version = "v1.6.3"
+        , version = "v1.6.5"
+        }
+      , monoid-extras =
+        { dependencies = [ "profunctor-lenses" ]
+        , repo = "https://github.com/mikesol/purescript-monoid-extras.git"
+        , version = "v0.0.1"
         }
       , variant =
         { dependencies =
@@ -169,7 +175,7 @@ let additions =
           , "web-uievents"
           ]
         , repo = "https://github.com/mikesol/purescript-behaviors.git"
-        , version = "v8.2.0"
+        , version = "v8.2.1"
         }
       , convertable-options =
         { dependencies = [ "console", "effect", "maybe", "record" ]

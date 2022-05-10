@@ -2,24 +2,26 @@ module Deku.DOM.Elt.Param where
 
 import Control.Plus (empty)
 import Deku.Attribute (Attribute)
-import Deku.Control (elementify, class Plant, plant)
-import Deku.Core (Child, Element, Domable)
-import FRP.Event (Event)
+import Deku.Control (elementify)
+import Control.Monad.ST.Class (class MonadST)
+import Deku.Core (Domable(..), FixedChildren(..))
+import FRP.Event (AnEvent)
 
 data Param_
 
 param
-  :: forall seed lock payload
-   . Plant seed (Domable lock payload)
-  => Event (Attribute Param_)
-  -> seed
-  -> Element lock payload
-param attributes seed = elementify "param" attributes (plant seed)
+  :: forall s m lock payload
+   . MonadST s m
+  => AnEvent m (Attribute Param_)
+  -> Array (Domable m lock payload)
+  -> Domable m lock payload
+param attributes kids = Element'
+  (elementify "param" attributes (FixedChildren' (FixedChildren kids)))
 
 param_
-  :: forall seed lock payload
-   . Plant seed (Domable lock payload)
-  => seed
-  -> Element lock payload
+  :: forall s m lock payload
+   . MonadST s m
+  => Array (Domable m lock payload)
+  -> Domable m lock payload
 param_ = param empty
 

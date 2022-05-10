@@ -2,24 +2,26 @@ module Deku.DOM.Elt.Rt where
 
 import Control.Plus (empty)
 import Deku.Attribute (Attribute)
-import Deku.Control (elementify, class Plant, plant)
-import Deku.Core (Child, Element, Domable)
-import FRP.Event (Event)
+import Deku.Control (elementify)
+import Control.Monad.ST.Class (class MonadST)
+import Deku.Core (Domable(..), FixedChildren(..))
+import FRP.Event (AnEvent)
 
 data Rt_
 
 rt
-  :: forall seed lock payload
-   . Plant seed (Domable lock payload)
-  => Event (Attribute Rt_)
-  -> seed
-  -> Element lock payload
-rt attributes seed = elementify "rt" attributes (plant seed)
+  :: forall s m lock payload
+   . MonadST s m
+  => AnEvent m (Attribute Rt_)
+  -> Array (Domable m lock payload)
+  -> Domable m lock payload
+rt attributes kids = Element'
+  (elementify "rt" attributes (FixedChildren' (FixedChildren kids)))
 
 rt_
-  :: forall seed lock payload
-   . Plant seed (Domable lock payload)
-  => seed
-  -> Element lock payload
+  :: forall s m lock payload
+   . MonadST s m
+  => Array (Domable m lock payload)
+  -> Domable m lock payload
 rt_ = rt empty
 

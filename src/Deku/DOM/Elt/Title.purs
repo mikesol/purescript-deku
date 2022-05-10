@@ -2,24 +2,26 @@ module Deku.DOM.Elt.Title where
 
 import Control.Plus (empty)
 import Deku.Attribute (Attribute)
-import Deku.Control (elementify, class Plant, plant)
-import Deku.Core (Child, Element, Domable)
-import FRP.Event (Event)
+import Deku.Control (elementify)
+import Control.Monad.ST.Class (class MonadST)
+import Deku.Core (Domable(..), FixedChildren(..))
+import FRP.Event (AnEvent)
 
 data Title_
 
 title
-  :: forall seed lock payload
-   . Plant seed (Domable lock payload)
-  => Event (Attribute Title_)
-  -> seed
-  -> Element lock payload
-title attributes seed = elementify "title" attributes (plant seed)
+  :: forall s m lock payload
+   . MonadST s m
+  => AnEvent m (Attribute Title_)
+  -> Array (Domable m lock payload)
+  -> Domable m lock payload
+title attributes kids = Element'
+  (elementify "title" attributes (FixedChildren' (FixedChildren kids)))
 
 title_
-  :: forall seed lock payload
-   . Plant seed (Domable lock payload)
-  => seed
-  -> Element lock payload
+  :: forall s m lock payload
+   . MonadST s m
+  => Array (Domable m lock payload)
+  -> Domable m lock payload
 title_ = title empty
 

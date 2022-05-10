@@ -32,14 +32,16 @@ jobs:
         run: npm run build:examples
       - name: Test
         run: npm t
-      - name: Build qc
-        run: npx spago -x examples.dhall bundle-app --main Deku.Example.Docs --to examples/docs/index.js
-      #- name: Performance test
-      #  run: npm run test:performance
+      - name: Build make
+        run: npx spago -x examples.dhall bundle-app --main Deku.Example.Docs.Static.Build --to examples/docs/Static/make.js
+      - name: Build hydration
+        run: npx spago -x examples.dhall bundle-app --main Deku.Example.Docs.Static.Live --to examples/docs/Static/bundle.js --minify
+      - name: Make index.html
+        run: cd examples/docs/Static && node make.js > index.html && cd ../../..
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GH_TOKEN }}
-          publish_dir: ./examples/docs
+          publish_dir: ./examples/docs/Static
       - name: deploy to netlify
-        run: NETLIFY_SITE_ID=${{ secrets.NETLIFY_SITE_ID }} NETLIFY_AUTH_TOKEN=${{ secrets.NETLIFY_AUTH_TOKEN }} netlify deploy --dir=./examples/docs --prod
+        run: NETLIFY_SITE_ID=${{ secrets.NETLIFY_SITE_ID }} NETLIFY_AUTH_TOKEN=${{ secrets.NETLIFY_AUTH_TOKEN }} netlify deploy --dir=./examples/docs/Static --prod

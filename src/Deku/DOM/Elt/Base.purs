@@ -2,24 +2,26 @@ module Deku.DOM.Elt.Base where
 
 import Control.Plus (empty)
 import Deku.Attribute (Attribute)
-import Deku.Control (elementify, class Plant, plant)
-import Deku.Core (Child, Element, Domable)
-import FRP.Event (Event)
+import Deku.Control (elementify)
+import Control.Monad.ST.Class (class MonadST)
+import Deku.Core (Domable(..), FixedChildren(..))
+import FRP.Event (AnEvent)
 
 data Base_
 
 base
-  :: forall seed lock payload
-   . Plant seed (Domable lock payload)
-  => Event (Attribute Base_)
-  -> seed
-  -> Element lock payload
-base attributes seed = elementify "base" attributes (plant seed)
+  :: forall s m lock payload
+   . MonadST s m
+  => AnEvent m (Attribute Base_)
+  -> Array (Domable m lock payload)
+  -> Domable m lock payload
+base attributes kids = Element'
+  (elementify "base" attributes (FixedChildren' (FixedChildren kids)))
 
 base_
-  :: forall seed lock payload
-   . Plant seed (Domable lock payload)
-  => seed
-  -> Element lock payload
+  :: forall s m lock payload
+   . MonadST s m
+  => Array (Domable m lock payload)
+  -> Domable m lock payload
 base_ = base empty
 

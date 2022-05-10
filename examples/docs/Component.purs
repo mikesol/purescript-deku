@@ -2,9 +2,10 @@ module Deku.Example.Docs.Component where
 
 import Prelude
 
+import Control.Monad.ST.Class (class MonadST)
 import Deku.Attribute (cb, (:=))
-import Deku.Control (blank, text_)
-import Deku.Core (Element)
+import Deku.Control (text_)
+import Deku.Core (Domable)
 import Deku.DOM as D
 import Deku.Example.Docs.Types (Page(..))
 import Deku.Example.Docs.Util (scrollToTop)
@@ -13,7 +14,10 @@ import Effect (Effect)
 import FRP.Event (bang)
 import Type.Proxy (Proxy(..))
 
-px = Proxy :: Proxy """<div>
+px =
+  Proxy
+    :: Proxy
+         """<div>
   <h1>A Simple Component</h1>
 
   <h3>Slightly more bells and whistles</h3>
@@ -48,17 +52,22 @@ myDivWithNoChildren = D.div attrs blank
   <p>In this section, we built a simple component. In the next section, we'll recreate the exact same element using a different input syntax called <a ~next~ style="cursor:pointer;">Pursx</a>.</p>
 </div>"""
 
-components :: forall lock payload. (Page -> Effect Unit) -> Element lock payload
+components
+  :: forall s m lock payload
+   . MonadST s m
+  => (Page -> Effect Unit)
+  -> Domable m lock payload
 components dpage = px ~~
   { code: nut
-      ( D.pre_ [D.code_
-          [ text_
-              """module Main where
+      ( D.pre_
+          [ D.code_
+              [ text_
+                  """module Main where
 
 import Prelude
 
 import Deku.Attribute ((:=))
-import Deku.Control (blank, text_)
+import Deku.Control (text_)
 import Deku.DOM as D
 import Deku.Toplevel (runInBodyA)
 import Effect (Effect)
@@ -67,7 +76,7 @@ import FRP.Event.Class (bang)
 main :: Effect Unit
 main = runInBodyA
   ( [ D.button_ [ text_ "I do nothing" ]
-    , D.ul_ $ map (D.li_ <<< text_) [ "A", "B", "C" ]
+    , D.ul_ $ map (D.li_ <<< pure <<< text_) [ "A", "B", "C" ]
     , D.div_
         [ D.a (bang $ D.Href := "https://example.com")
             [ text_ "foo " ]
@@ -77,17 +86,18 @@ main = runInBodyA
         ]
     , D.div_
         [ D.div_
-            [ D.div_ [ D.input (bang $ D.Xtype := "range") blank ]
+            [ D.div_ [ D.input (bang $ D.Xtype := "range") [] ]
             ]
         ]
     ]
   )"""
-          ]]
+              ]
+          ]
       )
   , result: nut
       ( D.div_
           [ D.button_ [ text_ "I do nothing" ]
-          , D.ul_ $ map (D.li_ <<< text_) [ "A", "B", "C" ]
+          , D.ul_ $ map (D.li_ <<< pure <<< text_) [ "A", "B", "C" ]
           , D.div_
               [ D.a (bang $ D.Href := "https://example.com")
                   [ text_ "foo " ]
@@ -97,10 +107,10 @@ main = runInBodyA
               ]
           , D.div_
               [ D.div_
-                  [ D.div_ [ D.input (bang $ D.Xtype := "range") blank ]
+                  [ D.div_ [ D.input (bang $ D.Xtype := "range") [] ]
                   ]
               ]
           ]
       )
-    , next: bang (D.OnClick := (cb (const $ dpage PURSX1 *> scrollToTop)))
+  , next: bang (D.OnClick := (cb (const $ dpage PURSX1 *> scrollToTop)))
   }

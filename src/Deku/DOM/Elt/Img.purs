@@ -2,24 +2,26 @@ module Deku.DOM.Elt.Img where
 
 import Control.Plus (empty)
 import Deku.Attribute (Attribute)
-import Deku.Control (elementify, class Plant, plant)
-import Deku.Core (Child, Element, Domable)
-import FRP.Event (Event)
+import Deku.Control (elementify)
+import Control.Monad.ST.Class (class MonadST)
+import Deku.Core (Domable(..), FixedChildren(..))
+import FRP.Event (AnEvent)
 
 data Img_
 
 img
-  :: forall seed lock payload
-   . Plant seed (Domable lock payload)
-  => Event (Attribute Img_)
-  -> seed
-  -> Element lock payload
-img attributes seed = elementify "img" attributes (plant seed)
+  :: forall s m lock payload
+   . MonadST s m
+  => AnEvent m (Attribute Img_)
+  -> Array (Domable m lock payload)
+  -> Domable m lock payload
+img attributes kids = Element'
+  (elementify "img" attributes (FixedChildren' (FixedChildren kids)))
 
 img_
-  :: forall seed lock payload
-   . Plant seed (Domable lock payload)
-  => seed
-  -> Element lock payload
+  :: forall s m lock payload
+   . MonadST s m
+  => Array (Domable m lock payload)
+  -> Domable m lock payload
 img_ = img empty
 

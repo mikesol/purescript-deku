@@ -47,7 +47,7 @@ main = runInBody1
               )
               blank
           , D.button
-              (bang $ D.OnClick :=  push AddTodo)
+              (bang $ D.OnClick := push AddTodo)
               (text_ "Add")
           ]
       D.div_
@@ -63,7 +63,7 @@ main = runInBody1
                         [ text_ "Prioritize" ]
                     , D.button
                         ( bang
-                            $ D.OnClick :=  p' Remove
+                            $ D.OnClick := p' Remove
                         )
                         [ text_ "Delete" ]
                     ]

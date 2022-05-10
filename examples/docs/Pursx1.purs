@@ -2,9 +2,10 @@ module Deku.Example.Docs.Pursx1 where
 
 import Prelude
 
+import Control.Monad.ST.Class (class MonadST)
 import Deku.Attribute (cb, (:=))
 import Deku.Control (text_)
-import Deku.Core (Element)
+import Deku.Core (Domable, Element)
 import Deku.DOM as D
 import Deku.Example.Docs.Types (Page(..))
 import Deku.Example.Docs.Util (scrollToTop)
@@ -13,7 +14,10 @@ import Effect (Effect)
 import FRP.Event.Class (bang)
 import Type.Proxy (Proxy(..))
 
-myDom = Proxy :: Proxy """<div>
+myDom =
+  Proxy
+    :: Proxy
+         """<div>
     <button>I do nothing</button>
     <ul>
         <li>A</li>
@@ -29,7 +33,10 @@ myDom = Proxy :: Proxy """<div>
     </div>
 """
 
-px = Proxy :: Proxy """<div>
+px =
+  Proxy
+    :: Proxy
+         """<div>
   <h1>PursX 1</h1>
 
   <h2>Like JSX... but better!</h2>
@@ -49,23 +56,32 @@ px = Proxy :: Proxy """<div>
   <p>Static Pursx (meaning Pursx without any dynamic content) can be activated with the function <code>psx</code>.</p>
 
   <h2>Next steps</h2>
-  <p>In this section, we PursX to build the same component as the previous section. In the next section, we'll learn how to respond to <a ~next~ style="cursor:pointer;">events</a>.</p>
+  <p>In this section, we used PursX to build the same component as the previous section. In the next section, we'll learn how to respond to <a ~next~ style="cursor:pointer;">events</a>.</p>
 </div>"""
 
-
-pursx1 :: forall lock payload. (Page -> Effect Unit) -> Element lock payload
-pursx1 dpage  = px ~~
-  { code: nut (D.pre_ [D.code_ [text_ $ """module Main where
+pursx1
+  :: forall s m lock payload
+   . MonadST s m
+  => (Page -> Effect Unit)
+  -> Domable m lock payload
+pursx1 dpage = px ~~
+  { code: nut
+      ( D.pre_
+          [ D.code_
+              [ text_ $
+                  """module Main where
 
 import Prelude
 
 import Deku.Pursx (psx)
-import Deku.Toplevel (runInBody2)
+import Deku.Toplevel (runInBody)
 import Effect (Effect)
 import FRP.Event (bang)
 import Type.Proxy (Proxy(..))
 
-myDom = Proxy :: Proxy """ <> "\"\"\"" <> """<div>
+myDom = Proxy :: Proxy """ <> "\"\"\""
+                    <>
+                      """<div>
     <button>I do nothing</button>
     <ul>
         <li>A</li>
@@ -79,11 +95,17 @@ myDom = Proxy :: Proxy """ <> "\"\"\"" <> """<div>
     </div>
     <div><div></div><div><input type="range"/></div></div>
     </div>
-""" <> "\"\"\"" <> """
+"""
+                    <> "\"\"\""
+                    <>
+                      """
 
 main :: Effect Unit
-main = runInBody2 (psx myDom)
-"""]])
+main = runInBody (psx myDom)
+"""
+              ]
+          ]
+      )
   , result: nut (psx myDom)
   , next: bang (D.OnClick := (cb (const $ dpage Events *> scrollToTop)))
   }

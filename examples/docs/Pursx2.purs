@@ -3,11 +3,14 @@ module Deku.Example.Docs.Pursx2 where
 import Prelude
 
 import Control.Alt ((<|>))
+import Control.Monad.ST.Class (class MonadST)
 import Data.Compactable (compact)
 import Data.Maybe (Maybe(..))
+import Data.Monoid.Always (class Always, always)
+import Data.Profunctor (lcmap)
 import Deku.Attribute (cb, (:=))
 import Deku.Control (text, text_)
-import Deku.Core (Child(..), Element)
+import Deku.Core (Child(..), Domable, dyn)
 import Deku.DOM as D
 import Deku.Example.Docs.Types (Page(..))
 import Deku.Example.Docs.Util (scrollToTop)
@@ -17,7 +20,9 @@ import FRP.Event (bang, bus)
 import Type.Proxy (Proxy(..))
 
 px =
-  Proxy   :: Proxy      """<div>
+  Proxy
+    :: Proxy
+         """<div>
   <h1>Pursx 2</h1>
 
   <h2>Working with events and effects</h2>
@@ -41,7 +46,10 @@ px =
   <p>In more complicated apps, like this documentation, we'll need dynamic logic that allows for components to replace each other, for example in a navigation bar. In the next section, we'll see one way to do this by using <a ?next? style="cursor:pointer;">events to control the presence and absence of elements</a>.</p>
 </div>"""
 
-myDom =  Proxy   :: Proxy    """<div>
+myDom =
+  Proxy
+    :: Proxy
+         """<div>
         <button>I do nothing</button>
         <ul>
           <li>A</li>
@@ -59,9 +67,11 @@ myDom =  Proxy   :: Proxy    """<div>
 """
 
 pursx2
-  :: forall lock payload
-   . (Page -> Effect Unit)
-  -> Element lock payload
+  :: forall s m lock payload
+   . Always (m Unit) (Effect Unit)
+  => MonadST s m
+  => (Page -> Effect Unit)
+  -> Domable m lock payload
 pursx2 dpage = makePursx' (Proxy :: _ "?") px
   { code: nut
       ( D.pre_
@@ -84,7 +94,9 @@ import FRP.Event (bus, bang)
 import Type.Proxy (Proxy(..))
 
 myDom =
-  Proxy :: Proxy """ <> "\"\"\"" <> """<div>
+  Proxy :: Proxy """ <> "\"\"\""
+                    <>
+                      """<div>
         <button>I do nothing</button>
         <ul>
           <li>A</li>
@@ -99,7 +111,10 @@ myDom =
         </div>
         <div><div></div><div><input type="range"/></div></div>
       </div>
-""" <> "\"\"\"" <> """
+"""
+                    <> "\"\"\""
+                    <>
+                      """
 
 main :: Effect Unit
 main = runInBody1
@@ -118,14 +133,14 @@ main = runInBody1
           ]
       )
   , result: nut
-      ( bus \push event ->
+      ( dyn $ bus $ lcmap (map (always :: m Unit -> Effect Unit)) \push event ->
           bang $ Insert $ myDom ~~
             { myli: bang (D.Style := "background-color:rgb(200,240,210);")
             , somethingNew: nut
-          ( D.button (bang (D.OnClick := push (Just unit)))
+                ( D.button (bang (D.OnClick := push (Just unit)))
                     [ text
                         $ (compact event $> "Thanks for clicking me!") <|>
-                          bang "I was dynamically inserted"
+                            bang "I was dynamically inserted"
                     ]
                 )
             }

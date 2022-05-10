@@ -2,24 +2,26 @@ module Deku.DOM.Elt.Applet where
 
 import Control.Plus (empty)
 import Deku.Attribute (Attribute)
-import Deku.Control (elementify, class Plant, plant)
-import Deku.Core (Child, Element, Domable)
-import FRP.Event (Event)
+import Deku.Control (elementify)
+import Control.Monad.ST.Class (class MonadST)
+import Deku.Core (Domable(..), FixedChildren(..))
+import FRP.Event (AnEvent)
 
 data Applet_
 
 applet
-  :: forall seed lock payload
-   . Plant seed (Domable lock payload)
-  => Event (Attribute Applet_)
-  -> seed
-  -> Element lock payload
-applet attributes seed = elementify "applet" attributes (plant seed)
+  :: forall s m lock payload
+   . MonadST s m
+  => AnEvent m (Attribute Applet_)
+  -> Array (Domable m lock payload)
+  -> Domable m lock payload
+applet attributes kids = Element'
+  (elementify "applet" attributes (FixedChildren' (FixedChildren kids)))
 
 applet_
-  :: forall seed lock payload
-   . Plant seed (Domable lock payload)
-  => seed
-  -> Element lock payload
+  :: forall s m lock payload
+   . MonadST s m
+  => Array (Domable m lock payload)
+  -> Domable m lock payload
 applet_ = applet empty
 

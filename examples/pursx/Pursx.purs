@@ -4,24 +4,21 @@ import Prelude
 
 import Control.Alt ((<|>))
 import Control.Plus (empty)
-import Data.Foldable (for_)
 import Deku.Attribute (cb, (:=))
-import Deku.Control (deku1, plant)
 import Deku.Control as C
-import Deku.Core (Domable, Element)
+import Deku.Core (Domable)
 import Deku.DOM as D
-import Deku.Interpret (FFIDOMSnapshot, effectfulDOMInterpret, makeFFIDOMSnapshot)
+import Deku.Interpret (FFIDOMSnapshot)
 import Deku.Pursx (nut, (~~))
+import Deku.Toplevel (runInBody1)
 import Effect (Effect)
-import FRP.Event (Event, subscribe, bang, bus)
+import FRP.Event (Event, bang, bus)
 import Type.Proxy (Proxy(..))
-import Web.HTML (window)
-import Web.HTML.HTMLDocument (body)
-import Web.HTML.HTMLElement (toElement)
-import Web.HTML.Window (document)
 
-px =  Proxy    :: Proxy
-      """<div>
+px =
+  Proxy
+    :: Proxy
+         """<div>
   <button ~btn~>i do nothing</button>
   ~somethingElse~
   ~aThirdThing~
@@ -32,8 +29,8 @@ px =  Proxy    :: Proxy
 pxInception
   :: forall lock payload
    . (Boolean -> Effect Unit)
-  -> Element lock payload
-  -> Element lock payload
+  -> Domable Effect lock payload
+  -> Domable Effect lock payload
 pxInception push aThirdThing = px ~~
   { btn: bang (D.Style := "background-color: rgb(133,151,217)")
   , somethingElse:
@@ -48,9 +45,9 @@ pxInception push aThirdThing = px ~~
   }
 
 scene
-  :: forall lock. Event (Domable lock (FFIDOMSnapshot -> Effect Unit))
+  :: forall lock. Event (Domable Effect lock (FFIDOMSnapshot -> Effect Unit))
 scene = bus \push event ->
-  plant $ D.div empty
+  D.div empty
     [ pxInception push
         $ pxInception push
         $ pxInception push
@@ -61,9 +58,4 @@ scene = bus \push event ->
     ]
 
 main :: Effect Unit
-main = do
-  b' <- window >>= document >>= body
-  for_ (toElement <$> b') \b -> do
-    ffi <- makeFFIDOMSnapshot
-    let evt = deku1 b scene effectfulDOMInterpret
-    void $ subscribe evt \i -> i ffi
+main = runInBody1 scene

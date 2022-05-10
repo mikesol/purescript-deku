@@ -2,8 +2,9 @@ module Deku.Example.Docs.Intro where
 
 import Prelude
 
+import Control.Monad.ST.Class (class MonadST)
 import Deku.Attribute (cb, (:=))
-import Deku.Core (Element)
+import Deku.Core (Domable, Element)
 import Deku.DOM as D
 import Deku.Example.Docs.Types (Page(..))
 import Deku.Example.Docs.Util (scrollToTop)
@@ -12,7 +13,10 @@ import Effect (Effect)
 import FRP.Event.Class (bang)
 import Type.Proxy (Proxy(..))
 
-px = Proxy :: Proxy """<div>
+px =
+  Proxy
+    :: Proxy
+         """<div>
   <h1>Deku</h1>
 
   <h3>A web micro-framework written in PureScript</h3>
@@ -28,6 +32,10 @@ px = Proxy :: Proxy """<div>
   <p>And now, without further ado, check out the <a ~next~ style="cursor:pointer;">hello world section</a>!</p>
 </div>"""
 
-intro :: forall lock payload. (Page -> Effect Unit) -> Element lock payload
-intro dpage  = px ~~
+intro
+  :: forall s m lock payload
+   . MonadST s m
+  => (Page -> Effect Unit)
+  -> Domable m lock payload
+intro dpage = px ~~
   { next: bang (D.OnClick := (cb (const $ dpage HelloWorld *> scrollToTop))) }

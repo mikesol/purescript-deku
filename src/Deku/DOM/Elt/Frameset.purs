@@ -2,24 +2,26 @@ module Deku.DOM.Elt.Frameset where
 
 import Control.Plus (empty)
 import Deku.Attribute (Attribute)
-import Deku.Control (elementify, class Plant, plant)
-import Deku.Core (Child, Element, Domable)
-import FRP.Event (Event)
+import Deku.Control (elementify)
+import Control.Monad.ST.Class (class MonadST)
+import Deku.Core (Domable(..), FixedChildren(..))
+import FRP.Event (AnEvent)
 
 data Frameset_
 
 frameset
-  :: forall seed lock payload
-   . Plant seed (Domable lock payload)
-  => Event (Attribute Frameset_)
-  -> seed
-  -> Element lock payload
-frameset attributes seed = elementify "frameset" attributes (plant seed)
+  :: forall s m lock payload
+   . MonadST s m
+  => AnEvent m (Attribute Frameset_)
+  -> Array (Domable m lock payload)
+  -> Domable m lock payload
+frameset attributes kids = Element'
+  (elementify "frameset" attributes (FixedChildren' (FixedChildren kids)))
 
 frameset_
-  :: forall seed lock payload
-   . Plant seed (Domable lock payload)
-  => seed
-  -> Element lock payload
+  :: forall s m lock payload
+   . MonadST s m
+  => Array (Domable m lock payload)
+  -> Domable m lock payload
 frameset_ = frameset empty
 

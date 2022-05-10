@@ -26,7 +26,7 @@
 		"pulp": "^15.0.0",
 		"puppeteer": "^5.2.0",
 		"purescript": "^0.15.0",
-		"purs-tidy": "^0.4.6",
+		"purs-tidy": "^0.8.0",
 		"spago": "^0.20.8",
 		"test": "^0.6.0",
 		"tracealyzer": "^0.10.3"

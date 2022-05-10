@@ -2,24 +2,26 @@ module Deku.DOM.Elt.Br where
 
 import Control.Plus (empty)
 import Deku.Attribute (Attribute)
-import Deku.Control (elementify, class Plant, plant)
-import Deku.Core (Child, Element, Domable)
-import FRP.Event (Event)
+import Deku.Control (elementify)
+import Control.Monad.ST.Class (class MonadST)
+import Deku.Core (Domable(..), FixedChildren(..))
+import FRP.Event (AnEvent)
 
 data Br_
 
 br
-  :: forall seed lock payload
-   . Plant seed (Domable lock payload)
-  => Event (Attribute Br_)
-  -> seed
-  -> Element lock payload
-br attributes seed = elementify "br" attributes (plant seed)
+  :: forall s m lock payload
+   . MonadST s m
+  => AnEvent m (Attribute Br_)
+  -> Array (Domable m lock payload)
+  -> Domable m lock payload
+br attributes kids = Element'
+  (elementify "br" attributes (FixedChildren' (FixedChildren kids)))
 
 br_
-  :: forall seed lock payload
-   . Plant seed (Domable lock payload)
-  => seed
-  -> Element lock payload
+  :: forall s m lock payload
+   . MonadST s m
+  => Array (Domable m lock payload)
+  -> Domable m lock payload
 br_ = br empty
 

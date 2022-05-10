@@ -20,11 +20,14 @@ import Safe.Coerce (coerce)
 import Web.Event.Internal.Types (Event)
 
 newtype Cb = Cb (Event -> Effect Boolean)
+
 derive instance newtypeCb :: Newtype Cb _
 instance eqCb :: Eq Cb where
   eq _ _ = false
+
 instance ordCb :: Ord Cb where
   compare _ _ = LT
+
 instance showCb :: Show Cb where
   show _ = "{callback}"
 
@@ -42,6 +45,7 @@ newtype Attribute (e :: Type) = Attribute
   { key :: String
   , value :: AttributeValue
   }
+
 unsafeUnAttribute
   :: forall e. Attribute e -> { key :: String, value :: AttributeValue }
 unsafeUnAttribute = coerce

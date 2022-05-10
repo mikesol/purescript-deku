@@ -9,7 +9,7 @@ import Data.Tuple.Nested ((/\), type (/\))
 import Data.FastVect.FastVect (index, (:))
 import Data.FastVect.FastVect as V
 import Deku.Attribute ((:=))
-import Deku.Control (blank, plant, portal, switcher, text_)
+import Deku.Control (portal, switcher, text_)
 import Deku.DOM as D
 import Deku.Toplevel (runInBody1)
 import Effect (Effect)
@@ -23,15 +23,15 @@ counter event = mapAccum f event 0
 
 main :: Effect Unit
 main = runInBody1
-  ( bus \push -> lcmap  (bang unit <|> _) \event -> do
-      plant $ portal
+  ( bus \push -> lcmap (bang unit <|> _) \event -> do
+      portal
         ( map
             ( \i -> D.video
                 (oneOfMap bang [ D.Controls := "true", D.Width := "250" ])
-                ( D.source
+                [ D.source
                     (oneOfMap bang [ D.Src := i, D.Xtype := "video/mp4" ])
-                    blank
-                )
+                    []
+                ]
             )
             ( "https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4"
                 : "https://www.w3schools.com/jsref/movie.mp4"
@@ -44,9 +44,9 @@ main = runInBody1
             p1 = index (Proxy :: _ 1) v
             ev = fold (const not) event
             flips = switcher (if _ then p0 else p1) <<< ev
-          plant $ D.div_
+          D.div_
             [ D.button (bang $ D.OnClick := push unit)
                 [ text_ "Switch videos" ]
-            , D.div_ [ D.span_ (flips true), D.span_ (flips false) ]
+            , D.div_ [ D.span_ [ flips true ], D.span_ [ flips false ] ]
             ]
   )
