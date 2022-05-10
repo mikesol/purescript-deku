@@ -15,8 +15,10 @@ import Effect (Effect)
 import FRP.Event (Event, bang, bus)
 import Type.Proxy (Proxy(..))
 
-px =  Proxy    :: Proxy
-      """<div>
+px =
+  Proxy
+    :: Proxy
+         """<div>
   <button ~btn~>i do nothing</button>
   ~somethingElse~
   ~aThirdThing~

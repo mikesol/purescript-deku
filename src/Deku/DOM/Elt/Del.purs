@@ -15,7 +15,8 @@ del
   => AnEvent m (Attribute Del_)
   -> Array (Domable m lock payload)
   -> Domable m lock payload
-del attributes kids = Element' (elementify "del" attributes (FixedChildren' (FixedChildren kids)))
+del attributes kids = Element'
+  (elementify "del" attributes (FixedChildren' (FixedChildren kids)))
 
 del_
   :: forall s m lock payload

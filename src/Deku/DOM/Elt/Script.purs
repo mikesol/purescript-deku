@@ -15,7 +15,8 @@ script
   => AnEvent m (Attribute Script_)
   -> Array (Domable m lock payload)
   -> Domable m lock payload
-script attributes kids = Element' (elementify "script" attributes (FixedChildren' (FixedChildren kids)))
+script attributes kids = Element'
+  (elementify "script" attributes (FixedChildren' (FixedChildren kids)))
 
 script_
   :: forall s m lock payload

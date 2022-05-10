@@ -15,7 +15,8 @@ input
   => AnEvent m (Attribute Input_)
   -> Array (Domable m lock payload)
   -> Domable m lock payload
-input attributes kids = Element' (elementify "input" attributes (FixedChildren' (FixedChildren kids)))
+input attributes kids = Element'
+  (elementify "input" attributes (FixedChildren' (FixedChildren kids)))
 
 input_
   :: forall s m lock payload

@@ -4,9 +4,9 @@ import Prelude
 
 import Control.Alt ((<|>))
 import Data.Filterable (filter)
-import Deku.Control (plant, text, text_)
+import Deku.Control (text, text_)
 import Deku.DOM as D
-import Deku.Toplevel (runInBody1, runInBody2)
+import Deku.Toplevel (runInBody1)
 import Effect (Effect)
 import FRP.Event (bang, fold, memoize)
 import FRP.Event.Time (interval)
@@ -25,6 +25,6 @@ main = runInBody1
             (fold (const (add 1)) (interval 400) 0 <|> bang 0)
         )
       )
-      (plant <<< example)
+      (example)
 
   )

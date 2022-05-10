@@ -15,7 +15,8 @@ thead
   => AnEvent m (Attribute Thead_)
   -> Array (Domable m lock payload)
   -> Domable m lock payload
-thead attributes kids = Element' (elementify "thead" attributes (FixedChildren' (FixedChildren kids)))
+thead attributes kids = Element'
+  (elementify "thead" attributes (FixedChildren' (FixedChildren kids)))
 
 thead_
   :: forall s m lock payload

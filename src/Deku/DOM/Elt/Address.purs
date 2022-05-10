@@ -15,7 +15,8 @@ address
   => AnEvent m (Attribute Address_)
   -> Array (Domable m lock payload)
   -> Domable m lock payload
-address attributes kids = Element' (elementify "address" attributes (FixedChildren' (FixedChildren kids)))
+address attributes kids = Element'
+  (elementify "address" attributes (FixedChildren' (FixedChildren kids)))
 
 address_
   :: forall s m lock payload

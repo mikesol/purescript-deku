@@ -9,8 +9,8 @@ import Data.Distributive (distribute)
 import Data.Maybe (Maybe(..))
 import Data.Profunctor (lcmap)
 import Deku.Attribute (attr, (:=))
-import Deku.Control (plant, switcher, text, text_)
-import Deku.Core (Domable, Element)
+import Deku.Control (switcher, text, text_)
+import Deku.Core (Domable, toDOM)
 import Deku.DOM as D
 import Deku.Toplevel (runInBody1)
 import Effect (Effect)
@@ -38,14 +38,14 @@ getToken = Random.random
 
 data TokenState = Valid | Refreshed Number | Invalid
 
-topMatter :: forall l p. Element l p
+topMatter :: forall l p. Domable Effect l p
 topMatter = D.div_
   [ D.p_
       [ text_
           "In the example below, when you click on the buttons needing a token, one of three things will happen. It will either:"
       ]
   , D.ul_
-      ( map (D.li_ <<< text_)
+      ( map (D.li_ <<< pure <<< text_)
           [ "keep the same token;", "get a new token; or", "log you out." ]
       )
   , D.p_
@@ -54,53 +54,83 @@ topMatter = D.div_
       ]
   ]
 
-cell0 :: forall l p. _ -> Element l p
-cell0 = pure (D.td_ $ text_ "I'm just a cell...")
+cell0
+  :: forall l p
+   . _
+  -> Domable Effect l p
+cell0 = pure (D.td_ $ pure $ text_ "I'm just a cell...")
 
-cell1 :: forall l p. { myBool :: Boolean | _ } -> Element l p
+cell1
+  :: forall l p
+   . { myBool :: Boolean
+     | _
+     }
+  -> Domable Effect l p
 cell1 = do
   { myBool } <- ask
-  pure $ D.td_ $ text_
+  pure $ D.td_ $ pure $ text_
     ("Here's a boolean from an internal provider: " <> show myBool)
 
-cell2 :: forall l p. { token1 :: Event Number | _ } -> Element l p
+cell2
+  :: forall l p
+   . { token1 :: Event Number
+     | _
+     }
+  -> Domable Effect l p
 cell2 = do
   t1 <- asks _.token1
-  pure (D.td_ $ text (("Token 1: " <> _) <<< show <$> t1))
+  pure (D.td_ $ pure $ text (("Token 1: " <> _) <<< show <$> t1))
 
-cell3 :: forall l p. { push1 :: Effect Unit | _ } -> Element l p
+cell3
+  :: forall l p
+   . { push1 :: Effect Unit
+     | _
+     }
+  -> Domable Effect l p
 cell3 = do
   { push1 } <- ask
   pure
-    ( D.td_ $ D.button (bang (D.OnClick := push1))
-        (text_ "Do something needing token 1")
+    ( D.td_ $ pure $ D.button (bang (D.OnClick := push1))
+        $ pure (text_ "Do something needing token 1")
     )
 
-cell4 :: forall l p. { token2 :: Event Number | _ } -> Element l p
+cell4
+  :: forall l p
+   . { token2 :: Event Number
+     | _
+     }
+  -> Domable Effect l p
 cell4 = do
   t2 <- asks _.token2
-  pure (D.td_ $ text (("Token 2: " <> _) <<< show <$> t2))
+  pure (D.td_ $ pure $ text (("Token 2: " <> _) <<< show <$> t2))
 
-cell5 :: forall l p. Effect Unit -> Element l p
+cell5 :: forall l p. Effect Unit -> Domable Effect l p
 cell5 = do
   push2 <- ask
   pure
-    ( D.td_ $ D.button (bang (D.OnClick := push2))
-        (text_ "Do something needing token 2")
+    ( D.td_ $ pure $ D.button (bang (D.OnClick := push2))
+        (pure $ text_ "Do something needing token 2")
     )
 
 incrementToken
-  :: forall l p. Event ({ token1 :: Event Number | _ } -> Domable l p)
+  :: forall l p
+   . Event
+       ( { token1 :: Event Number
+         | _
+         }
+         -> Domable Effect l p
+       )
 incrementToken = bus \setN n -> do
   t1 <- asks _.token1
   let t1n = t1 <|> n
-  pure $ plant $ D.div_
-    [ D.p_ $ text_ "Increment token 1 locally, leaving it unchanged elsewhere."
-    , D.button (map (attr D.OnClick <<< setN <<< add 1.0) t1n) (text_ "Increment")
+  pure $ D.div_
+    [ D.p_ $ pure $ text_
+        "Increment token 1 locally, leaving it unchanged elsewhere."
+    , D.button (map (attr D.OnClick <<< setN <<< add 1.0) t1n)
+        (pure $ text_ "Increment")
     , D.p_ [ text_ "Token: ", text (map show t1n) ]
     ]
 
-authorized :: forall l p. _ -> Element l p
 authorized = do
   c0 <- cell0
   c1 <- lcmap (union { myBool: true }) cell1
@@ -113,14 +143,14 @@ authorized = do
     [ topMatter
     , D.table_
         [ D.tr_
-            [ D.th_ (text_ "Column 1")
-            , D.th_ (text_ "Column 2")
+            [ D.th_ (pure $ text_ "Column 1")
+            , D.th_ (pure $ text_ "Column 2")
             ]
         , D.tr_ [ c0, c1 ]
         , D.tr_ [ c2, c3 ]
         , D.tr_ [ c4, c5 ]
         ]
-    , D.div_ incTok
+    , D.div_ [ toDOM incTok ]
     ]
 
 unauthorized
@@ -128,8 +158,9 @@ unauthorized
    . { token1 :: Number -> Effect Unit
      , token2 :: Number -> Effect Unit
      | _
+
      }
-  -> Element l p
+  -> Domable Effect l p
 unauthorized = do
   { token1, token2 } <- ask
   pure $ D.button
@@ -137,7 +168,7 @@ unauthorized = do
         getToken >>= token1
         getToken >>= token2
     )
-    (text_ "Log in")
+    (pure $ text_ "Log in")
 
 type Tokens = V (token1 :: Maybe Number, token2 :: Maybe Number)
 

@@ -15,7 +15,8 @@ wbr
   => AnEvent m (Attribute Wbr_)
   -> Array (Domable m lock payload)
   -> Domable m lock payload
-wbr attributes kids = Element' (elementify "wbr" attributes (FixedChildren' (FixedChildren kids)))
+wbr attributes kids = Element'
+  (elementify "wbr" attributes (FixedChildren' (FixedChildren kids)))
 
 wbr_
   :: forall s m lock payload

@@ -15,7 +15,8 @@ map
   => AnEvent m (Attribute Map_)
   -> Array (Domable m lock payload)
   -> Domable m lock payload
-map attributes kids = Element' (elementify "map" attributes (FixedChildren' (FixedChildren kids)))
+map attributes kids = Element'
+  (elementify "map" attributes (FixedChildren' (FixedChildren kids)))
 
 map_
   :: forall s m lock payload

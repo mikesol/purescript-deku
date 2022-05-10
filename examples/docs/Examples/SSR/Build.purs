@@ -11,7 +11,8 @@ main :: Effect Unit
 main =
   runSSR
     ( Template
-        { head: """<!DOCTYPE html>
+        { head:
+            """<!DOCTYPE html>
 <html>
   <head>
     <title>My static page</title>

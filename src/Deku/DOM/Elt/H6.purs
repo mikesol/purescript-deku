@@ -15,7 +15,8 @@ h6
   => AnEvent m (Attribute H6_)
   -> Array (Domable m lock payload)
   -> Domable m lock payload
-h6 attributes kids = Element' (elementify "h6" attributes (FixedChildren' (FixedChildren kids)))
+h6 attributes kids = Element'
+  (elementify "h6" attributes (FixedChildren' (FixedChildren kids)))
 
 h6_
   :: forall s m lock payload

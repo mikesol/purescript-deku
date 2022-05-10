@@ -15,7 +15,8 @@ acronym
   => AnEvent m (Attribute Acronym_)
   -> Array (Domable m lock payload)
   -> Domable m lock payload
-acronym attributes kids = Element' (elementify "acronym" attributes (FixedChildren' (FixedChildren kids)))
+acronym attributes kids = Element'
+  (elementify "acronym" attributes (FixedChildren' (FixedChildren kids)))
 
 acronym_
   :: forall s m lock payload

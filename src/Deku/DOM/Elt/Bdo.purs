@@ -15,7 +15,8 @@ bdo
   => AnEvent m (Attribute Bdo_)
   -> Array (Domable m lock payload)
   -> Domable m lock payload
-bdo attributes kids = Element' (elementify "bdo" attributes (FixedChildren' (FixedChildren kids)))
+bdo attributes kids = Element'
+  (elementify "bdo" attributes (FixedChildren' (FixedChildren kids)))
 
 bdo_
   :: forall s m lock payload

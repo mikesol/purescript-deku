@@ -15,7 +15,8 @@ footer
   => AnEvent m (Attribute Footer_)
   -> Array (Domable m lock payload)
   -> Domable m lock payload
-footer attributes kids = Element' (elementify "footer" attributes (FixedChildren' (FixedChildren kids)))
+footer attributes kids = Element'
+  (elementify "footer" attributes (FixedChildren' (FixedChildren kids)))
 
 footer_
   :: forall s m lock payload

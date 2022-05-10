@@ -60,7 +60,7 @@ scene =
           ( \i _ -> switcher
               ( \rgb -> D.div
                   (bang (D.Style := "background-color: " <> rgb <> ";"))
-                  [V.index (Proxy :: _ 0) i]
+                  [ V.index (Proxy :: _ 0) i ]
               )
               (sample_ rdm (interval 1000))
           )

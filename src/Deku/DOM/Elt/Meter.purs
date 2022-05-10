@@ -15,7 +15,8 @@ meter
   => AnEvent m (Attribute Meter_)
   -> Array (Domable m lock payload)
   -> Domable m lock payload
-meter attributes kids = Element' (elementify "meter" attributes (FixedChildren' (FixedChildren kids)))
+meter attributes kids = Element'
+  (elementify "meter" attributes (FixedChildren' (FixedChildren kids)))
 
 meter_
   :: forall s m lock payload

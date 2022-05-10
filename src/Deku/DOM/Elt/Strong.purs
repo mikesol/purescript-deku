@@ -15,7 +15,8 @@ strong
   => AnEvent m (Attribute Strong_)
   -> Array (Domable m lock payload)
   -> Domable m lock payload
-strong attributes kids = Element' (elementify "strong" attributes (FixedChildren' (FixedChildren kids)))
+strong attributes kids = Element'
+  (elementify "strong" attributes (FixedChildren' (FixedChildren kids)))
 
 strong_
   :: forall s m lock payload

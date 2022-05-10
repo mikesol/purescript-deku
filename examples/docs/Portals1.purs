@@ -28,7 +28,9 @@ data MainUIAction
 data TodoAction = Prioritize | Delete
 
 px =
-  Proxy    :: Proxy         """<div>
+  Proxy
+    :: Proxy
+         """<div>
   <h1>Portals</h1>
 
   <h2>Zapping from place to place</h2>
@@ -153,5 +155,5 @@ main = runInBody1
                   , D.div_ [ D.span_ [ flips true ], D.span_ [ flips false ] ]
                   ]
       )
-        , next: bang (D.OnClick := (cb (const $ dpage SSR *> scrollToTop)))
+  , next: bang (D.OnClick := (cb (const $ dpage SSR *> scrollToTop)))
   }

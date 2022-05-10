@@ -7,7 +7,10 @@ import Deku.Toplevel (runInBody)
 import Effect (Effect)
 import Type.Proxy (Proxy(..))
 
-myDom = Proxy :: Proxy """<div>
+myDom =
+  Proxy
+    :: Proxy
+         """<div>
     <button>I do nothing</button>
     <ul>
         <li>A</li>

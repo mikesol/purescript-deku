@@ -15,7 +15,8 @@ figure
   => AnEvent m (Attribute Figure_)
   -> Array (Domable m lock payload)
   -> Domable m lock payload
-figure attributes kids = Element' (elementify "figure" attributes (FixedChildren' (FixedChildren kids)))
+figure attributes kids = Element'
+  (elementify "figure" attributes (FixedChildren' (FixedChildren kids)))
 
 figure_
   :: forall s m lock payload

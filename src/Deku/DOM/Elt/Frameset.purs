@@ -15,7 +15,8 @@ frameset
   => AnEvent m (Attribute Frameset_)
   -> Array (Domable m lock payload)
   -> Domable m lock payload
-frameset attributes kids = Element' (elementify "frameset" attributes (FixedChildren' (FixedChildren kids)))
+frameset attributes kids = Element'
+  (elementify "frameset" attributes (FixedChildren' (FixedChildren kids)))
 
 frameset_
   :: forall s m lock payload

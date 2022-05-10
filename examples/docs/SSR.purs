@@ -25,7 +25,9 @@ type UIEvents = V
   )
 
 px =
-  Proxy    :: Proxy         """<div>
+  Proxy
+    :: Proxy
+         """<div>
   <h1>Server-side rendering</h1>
 
   <h2>When performance matters!</h2>
@@ -127,7 +129,11 @@ ssrPage
   => (Page -> Effect Unit)
   -> Domable m lock payload
 ssrPage _ = px ~~
-  { code2: nut (D.pre_ [D.code_ [ text_ """module Live where
+  { code2: nut
+      ( D.pre_
+          [ D.code_
+              [ text_
+                  """module Live where
 
 import Prelude
 
@@ -136,7 +142,15 @@ import Deku.Toplevel (hydrate)
 import Effect (Effect)
 
 main :: Effect Unit
-main = hydrate app"""]]),code1: nut (D.pre_ [D.code_ [ text_ """module Build where
+main = hydrate app"""
+              ]
+          ]
+      )
+  , code1: nut
+      ( D.pre_
+          [ D.code_
+              [ text_
+                  """module Build where
 
 import Prelude
 
@@ -153,11 +167,16 @@ main =
         , tail: "</html>"
         }
     )
-    app >>= log"""]]), code0: nut
+    app >>= log"""
+              ]
+          ]
+      )
+  , code0: nut
       ( D.pre_
           [ D.code_
               [ text_
-                $  """module App where
+                  $
+                    """module App where
 
 import Prelude
 
@@ -189,9 +208,14 @@ app = vbussed (Proxy :: _ UIEvents) $ lcmap halways \push event -> do
   D.div_
     [ D.p_
         [ text_
-            """ <> "\"\"\"" <> """Here's an example of SSR in deku.
+            """ <> "\"\"\""
+                      <>
+                        """Here's an example of SSR in deku.
 All of the static bits are rendered as HTML,
-and all of the dynamic bits are hydrated on page load.""" <> "\"\"\"" <> """
+and all of the dynamic bits are hydrated on page load."""
+                      <> "\"\"\""
+                      <>
+                        """
         ]
     , D.button
         (click_ (bang push.buttonClicked))
@@ -227,12 +251,23 @@ and all of the dynamic bits are hydrated on page load.""" <> "\"\"\"" <> """
           ]
       )
   , result: nut app
-  , codegen: nut (D.pre_ [D.code_ [ text (makeEvent \k ->
-    ((runSSR
-    ( Template
-        { head: "<!DOCTYPE html><html><head><script src=\"bundle.js\" defer></script></head>"
-        , tail: "</html>"
-        }
-    )
-    app) >>= k) *> (pure (pure unit))) ]])
+  , codegen: nut
+      ( D.pre_
+          [ D.code_
+              [ text
+                  ( makeEvent \k ->
+                      ( ( runSSR
+                            ( Template
+                                { head:
+                                    "<!DOCTYPE html><html><head><script src=\"bundle.js\" defer></script></head>"
+                                , tail: "</html>"
+                                }
+                            )
+                            app
+                        ) >>= k
+                      ) *> (pure (pure unit))
+                  )
+              ]
+          ]
+      )
   }

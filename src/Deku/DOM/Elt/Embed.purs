@@ -15,7 +15,8 @@ embed
   => AnEvent m (Attribute Embed_)
   -> Array (Domable m lock payload)
   -> Domable m lock payload
-embed attributes kids = Element' (elementify "embed" attributes (FixedChildren' (FixedChildren kids)))
+embed attributes kids = Element'
+  (elementify "embed" attributes (FixedChildren' (FixedChildren kids)))
 
 embed_
   :: forall s m lock payload

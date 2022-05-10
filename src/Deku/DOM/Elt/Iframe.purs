@@ -15,7 +15,8 @@ iframe
   => AnEvent m (Attribute Iframe_)
   -> Array (Domable m lock payload)
   -> Domable m lock payload
-iframe attributes kids = Element' (elementify "iframe" attributes (FixedChildren' (FixedChildren kids)))
+iframe attributes kids = Element'
+  (elementify "iframe" attributes (FixedChildren' (FixedChildren kids)))
 
 iframe_
   :: forall s m lock payload

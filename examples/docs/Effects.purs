@@ -54,7 +54,9 @@ clickCb push = cb
 clickText = "Click to get some random user data." :: String
 
 px =
-  Proxy    :: Proxy         """<div>
+  Proxy
+    :: Proxy
+         """<div>
   <h1>Effects</h1>
 
   <h2>Let's make a network call</h2>

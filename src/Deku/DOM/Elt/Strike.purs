@@ -15,7 +15,8 @@ strike
   => AnEvent m (Attribute Strike_)
   -> Array (Domable m lock payload)
   -> Domable m lock payload
-strike attributes kids = Element' (elementify "strike" attributes (FixedChildren' (FixedChildren kids)))
+strike attributes kids = Element'
+  (elementify "strike" attributes (FixedChildren' (FixedChildren kids)))
 
 strike_
   :: forall s m lock payload

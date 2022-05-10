@@ -15,7 +15,8 @@ tt
   => AnEvent m (Attribute Tt_)
   -> Array (Domable m lock payload)
   -> Domable m lock payload
-tt attributes kids = Element' (elementify "tt" attributes (FixedChildren' (FixedChildren kids)))
+tt attributes kids = Element'
+  (elementify "tt" attributes (FixedChildren' (FixedChildren kids)))
 
 tt_
   :: forall s m lock payload

@@ -15,7 +15,8 @@ xdata
   => AnEvent m (Attribute Xdata_)
   -> Array (Domable m lock payload)
   -> Domable m lock payload
-xdata attributes kids = Element' (elementify "data" attributes (FixedChildren' (FixedChildren kids)))
+xdata attributes kids = Element'
+  (elementify "data" attributes (FixedChildren' (FixedChildren kids)))
 
 xdata_
   :: forall s m lock payload

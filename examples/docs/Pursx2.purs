@@ -20,7 +20,9 @@ import FRP.Event (bang, bus)
 import Type.Proxy (Proxy(..))
 
 px =
-  Proxy    :: Proxy         """<div>
+  Proxy
+    :: Proxy
+         """<div>
   <h1>Pursx 2</h1>
 
   <h2>Working with events and effects</h2>
@@ -45,7 +47,9 @@ px =
 </div>"""
 
 myDom =
-  Proxy    :: Proxy         """<div>
+  Proxy
+    :: Proxy
+         """<div>
         <button>I do nothing</button>
         <ul>
           <li>A</li>
@@ -90,7 +94,9 @@ import FRP.Event (bus, bang)
 import Type.Proxy (Proxy(..))
 
 myDom =
-  Proxy :: Proxy """ <> "\"\"\""   <>  """<div>
+  Proxy :: Proxy """ <> "\"\"\""
+                    <>
+                      """<div>
         <button>I do nothing</button>
         <ul>
           <li>A</li>

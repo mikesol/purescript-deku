@@ -8,7 +8,9 @@ import Heterogeneous.Mapping (class HMap, class Mapping, hmap)
 
 data AlwaysEffect = AlwaysEffect
 
-instance (Always (m Unit) (Effect Unit)) =>
+instance
+  ( Always (m Unit) (Effect Unit)
+  ) =>
   Mapping AlwaysEffect (i -> m Unit) (i -> Effect Unit) where
   mapping AlwaysEffect = map always
 

@@ -7,7 +7,7 @@ import Data.Int (toNumber)
 import Data.Maybe (Maybe, fromMaybe, maybe)
 import Data.Newtype (wrap)
 import Data.Time.Duration (Milliseconds(..))
-import Deku.Control (plant, text, text_)
+import Deku.Control (text, text_)
 import Deku.DOM as D
 import Deku.Toplevel (runInBody1)
 import Effect (Effect)
@@ -51,7 +51,7 @@ example counter = do
       (map (\x -> { period: wrap (toNumber x), value: unit }))
       (fold (const (add 300)) counter 0)
   D.div_
-    [ D.div_ (text_ "I get slowwwwwerrr")
+    [ D.div_ [ text_ "I get slowwwwwerrr" ]
     , text (show <$> fold (const (add 1)) myCounter 0)
     ]
 
@@ -59,6 +59,5 @@ main :: Effect Unit
 main = runInBody1
   ( memoize
       (interval 100)
-      (plant <<< example)
-
+      example
   )

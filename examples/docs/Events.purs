@@ -26,7 +26,9 @@ type UIEvents = V
   )
 
 px =
-  Proxy    :: Proxy         """<div>
+  Proxy
+    :: Proxy
+         """<div>
   <h1>Events</h1>
 
   <h2>Listening to the DOM</h2>
@@ -116,34 +118,34 @@ main = runInBody1
       )
   , result: nut
       ( vbussed (Proxy :: _ UIEvents) $ lcmap halways \push event -> do
-            D.div_
-              [ D.button
-                  (click_ (bang push.buttonClicked))
-                  [ text_ "Click" ]
-              , D.div_
-                  [ text
-                      ( bang "Val: 0" <|>
-                          ( append "Val: " <<< show
-                              <$> fold
-                                (const (add 1))
-                                (bang unit <|> event.buttonClicked)
-                                (-1)
-                          )
-                      )
-                  ]
-              , D.div_
-                  [ D.input
-                      (slider (bang push.sliderMoved))
-                      []
-                  , D.div_
-                      [ text
-                          ( (bang "Val: 50") <|>
-                              ( (append "Val: " <<< show) <$> event.sliderMoved
-                              )
-                          )
-                      ]
-                  ]
-              ]
+          D.div_
+            [ D.button
+                (click_ (bang push.buttonClicked))
+                [ text_ "Click" ]
+            , D.div_
+                [ text
+                    ( bang "Val: 0" <|>
+                        ( append "Val: " <<< show
+                            <$> fold
+                              (const (add 1))
+                              (bang unit <|> event.buttonClicked)
+                              (-1)
+                        )
+                    )
+                ]
+            , D.div_
+                [ D.input
+                    (slider (bang push.sliderMoved))
+                    []
+                , D.div_
+                    [ text
+                        ( (bang "Val: 50") <|>
+                            ( (append "Val: " <<< show) <$> event.sliderMoved
+                            )
+                        )
+                    ]
+                ]
+            ]
       )
   , next: bang (D.OnClick := (cb (const $ dpage Effects *> scrollToTop)))
   }

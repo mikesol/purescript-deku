@@ -15,7 +15,8 @@ audio
   => AnEvent m (Attribute Audio_)
   -> Array (Domable m lock payload)
   -> Domable m lock payload
-audio attributes kids = Element' (elementify "audio" attributes (FixedChildren' (FixedChildren kids)))
+audio attributes kids = Element'
+  (elementify "audio" attributes (FixedChildren' (FixedChildren kids)))
 
 audio_
   :: forall s m lock payload

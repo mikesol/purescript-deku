@@ -15,7 +15,8 @@ section
   => AnEvent m (Attribute Section_)
   -> Array (Domable m lock payload)
   -> Domable m lock payload
-section attributes kids = Element' (elementify "section" attributes (FixedChildren' (FixedChildren kids)))
+section attributes kids = Element'
+  (elementify "section" attributes (FixedChildren' (FixedChildren kids)))
 
 section_
   :: forall s m lock payload

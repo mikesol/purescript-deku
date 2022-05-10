@@ -15,7 +15,8 @@ textarea
   => AnEvent m (Attribute Textarea_)
   -> Array (Domable m lock payload)
   -> Domable m lock payload
-textarea attributes kids = Element' (elementify "textarea" attributes (FixedChildren' (FixedChildren kids)))
+textarea attributes kids = Element'
+  (elementify "textarea" attributes (FixedChildren' (FixedChildren kids)))
 
 textarea_
   :: forall s m lock payload

@@ -14,7 +14,10 @@ import Effect (Effect)
 import FRP.Event (bang)
 import Type.Proxy (Proxy(..))
 
-px = Proxy :: Proxy """<div>
+px =
+  Proxy
+    :: Proxy
+         """<div>
   <h1>A Simple Component</h1>
 
   <h3>Slightly more bells and whistles</h3>
@@ -49,12 +52,17 @@ myDivWithNoChildren = D.div attrs blank
   <p>In this section, we built a simple component. In the next section, we'll recreate the exact same element using a different input syntax called <a ~next~ style="cursor:pointer;">Pursx</a>.</p>
 </div>"""
 
-components :: forall s m lock payload. MonadST s m => (Page -> Effect Unit) -> Domable m lock payload
+components
+  :: forall s m lock payload
+   . MonadST s m
+  => (Page -> Effect Unit)
+  -> Domable m lock payload
 components dpage = px ~~
   { code: nut
-      ( D.pre_ [D.code_
-          [ text_
-              """module Main where
+      ( D.pre_
+          [ D.code_
+              [ text_
+                  """module Main where
 
 import Prelude
 
@@ -83,7 +91,8 @@ main = runInBodyA
         ]
     ]
   )"""
-          ]]
+              ]
+          ]
       )
   , result: nut
       ( D.div_
@@ -103,5 +112,5 @@ main = runInBodyA
               ]
           ]
       )
-    , next: bang (D.OnClick := (cb (const $ dpage PURSX1 *> scrollToTop)))
+  , next: bang (D.OnClick := (cb (const $ dpage PURSX1 *> scrollToTop)))
   }

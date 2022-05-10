@@ -15,7 +15,8 @@ code
   => AnEvent m (Attribute Code_)
   -> Array (Domable m lock payload)
   -> Domable m lock payload
-code attributes kids = Element' (elementify "code" attributes (FixedChildren' (FixedChildren kids)))
+code attributes kids = Element'
+  (elementify "code" attributes (FixedChildren' (FixedChildren kids)))
 
 code_
   :: forall s m lock payload

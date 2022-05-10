@@ -15,7 +15,8 @@ area
   => AnEvent m (Attribute Area_)
   -> Array (Domable m lock payload)
   -> Domable m lock payload
-area attributes kids = Element' (elementify "area" attributes (FixedChildren' (FixedChildren kids)))
+area attributes kids = Element'
+  (elementify "area" attributes (FixedChildren' (FixedChildren kids)))
 
 area_
   :: forall s m lock payload

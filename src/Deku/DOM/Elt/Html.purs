@@ -15,7 +15,8 @@ html
   => AnEvent m (Attribute Html_)
   -> Array (Domable m lock payload)
   -> Domable m lock payload
-html attributes kids = Element' (elementify "html" attributes (FixedChildren' (FixedChildren kids)))
+html attributes kids = Element'
+  (elementify "html" attributes (FixedChildren' (FixedChildren kids)))
 
 html_
   :: forall s m lock payload

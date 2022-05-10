@@ -15,7 +15,8 @@ video
   => AnEvent m (Attribute Video_)
   -> Array (Domable m lock payload)
   -> Domable m lock payload
-video attributes kids = Element' (elementify "video" attributes (FixedChildren' (FixedChildren kids)))
+video attributes kids = Element'
+  (elementify "video" attributes (FixedChildren' (FixedChildren kids)))
 
 video_
   :: forall s m lock payload

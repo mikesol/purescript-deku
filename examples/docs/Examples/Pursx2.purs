@@ -15,7 +15,9 @@ import FRP.Event (bus, bang)
 import Type.Proxy (Proxy(..))
 
 myDom =
-  Proxy :: Proxy """<div>
+  Proxy
+    :: Proxy
+         """<div>
         <button>I do nothing</button>
         <ul>
           <li>A</li>
@@ -40,7 +42,7 @@ main = runInBody1
           ( D.button (bang (D.OnClick := push (Just unit)))
               [ text
                   $ (compact event $> "Thanks for clicking me!") <|>
-                    bang "I was dynamically inserted"
+                      bang "I was dynamically inserted"
               ]
           )
       }

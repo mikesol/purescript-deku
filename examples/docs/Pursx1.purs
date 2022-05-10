@@ -15,7 +15,9 @@ import FRP.Event.Class (bang)
 import Type.Proxy (Proxy(..))
 
 myDom =
-  Proxy    :: Proxy         """<div>
+  Proxy
+    :: Proxy
+         """<div>
     <button>I do nothing</button>
     <ul>
         <li>A</li>
@@ -32,7 +34,9 @@ myDom =
 """
 
 px =
-  Proxy    :: Proxy         """<div>
+  Proxy
+    :: Proxy
+         """<div>
   <h1>PursX 1</h1>
 
   <h2>Like JSX... but better!</h2>

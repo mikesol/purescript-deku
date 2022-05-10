@@ -15,7 +15,8 @@ kbd
   => AnEvent m (Attribute Kbd_)
   -> Array (Domable m lock payload)
   -> Domable m lock payload
-kbd attributes kids = Element' (elementify "kbd" attributes (FixedChildren' (FixedChildren kids)))
+kbd attributes kids = Element'
+  (elementify "kbd" attributes (FixedChildren' (FixedChildren kids)))
 
 kbd_
   :: forall s m lock payload

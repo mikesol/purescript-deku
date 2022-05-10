@@ -15,7 +15,8 @@ span
   => AnEvent m (Attribute Span_)
   -> Array (Domable m lock payload)
   -> Domable m lock payload
-span attributes kids = Element' (elementify "span" attributes (FixedChildren' (FixedChildren kids)))
+span attributes kids = Element'
+  (elementify "span" attributes (FixedChildren' (FixedChildren kids)))
 
 span_
   :: forall s m lock payload

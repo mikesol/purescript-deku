@@ -31,60 +31,61 @@ scene
    . MonadST s m
   => Always (m Unit) (Effect Unit)
   => Domable m lock payload
-scene = bussed $ (lcmap (map always)) \push -> lcmap (bang Intro <|> _) \event ->
-  D.div_
-    [ D.div_
-        $ map
-            ( \(x /\ y /\ z) -> D.span_
-                [ D.a
-                    ( oneOfMap bang
-                        [ D.OnClick := cb (const $ push x)
-                        , D.Style := "cursor:pointer;"
-                        ]
-                    )
-                    [ text_ y ]
-                , D.span
-                    ( bang $ D.Style :=
-                        if z then ""
-                        else "display:none;"
-                    )
-                    [ text_ " | " ]
-                ]
-            )
-        $
-          [ Intro
-              /\ "Home"
-              /\ true
-          , HelloWorld
-              /\ "Hello world"
-              /\ true
-          , SimpleComponent
-              /\ "Component"
-              /\ true
-          , PURSX1
-              /\ "Pursx 1"
-              /\ true
-          , Events
-              /\ "Events 1"
-              /\ true
-          , Effects
-              /\ "Effects"
-              /\ true
-          , PURSX2
-              /\ "Pursx 2"
-              /\ true
-          , Events2
-              /\ "Events 2"
-              /\ true
-          , Portals
-              /\ "Portals"
-              /\ true
-          , SSR
-              /\ "SSR"
-              /\ false
-          ]
-    , D.div_ [ switcher (page push) event ]
-    ]
+scene = bussed $ (lcmap (map always)) \push -> lcmap (bang Intro <|> _)
+  \event ->
+    D.div_
+      [ D.div_
+          $ map
+              ( \(x /\ y /\ z) -> D.span_
+                  [ D.a
+                      ( oneOfMap bang
+                          [ D.OnClick := cb (const $ push x)
+                          , D.Style := "cursor:pointer;"
+                          ]
+                      )
+                      [ text_ y ]
+                  , D.span
+                      ( bang $ D.Style :=
+                          if z then ""
+                          else "display:none;"
+                      )
+                      [ text_ " | " ]
+                  ]
+              )
+          $
+            [ Intro
+                /\ "Home"
+                /\ true
+            , HelloWorld
+                /\ "Hello world"
+                /\ true
+            , SimpleComponent
+                /\ "Component"
+                /\ true
+            , PURSX1
+                /\ "Pursx 1"
+                /\ true
+            , Events
+                /\ "Events 1"
+                /\ true
+            , Effects
+                /\ "Effects"
+                /\ true
+            , PURSX2
+                /\ "Pursx 2"
+                /\ true
+            , Events2
+                /\ "Events 2"
+                /\ true
+            , Portals
+                /\ "Portals"
+                /\ true
+            , SSR
+                /\ "SSR"
+                /\ false
+            ]
+      , D.div_ [ switcher (page push) event ]
+      ]
   where
   page :: (Page -> Effect Unit) -> Page -> Domable m lock payload
   page dpage Intro = Intro.intro dpage

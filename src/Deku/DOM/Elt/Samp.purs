@@ -15,7 +15,8 @@ samp
   => AnEvent m (Attribute Samp_)
   -> Array (Domable m lock payload)
   -> Domable m lock payload
-samp attributes kids = Element' (elementify "samp" attributes (FixedChildren' (FixedChildren kids)))
+samp attributes kids = Element'
+  (elementify "samp" attributes (FixedChildren' (FixedChildren kids)))
 
 samp_
   :: forall s m lock payload

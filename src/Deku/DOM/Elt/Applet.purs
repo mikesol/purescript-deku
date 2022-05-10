@@ -15,7 +15,8 @@ applet
   => AnEvent m (Attribute Applet_)
   -> Array (Domable m lock payload)
   -> Domable m lock payload
-applet attributes kids = Element' (elementify "applet" attributes (FixedChildren' (FixedChildren kids)))
+applet attributes kids = Element'
+  (elementify "applet" attributes (FixedChildren' (FixedChildren kids)))
 
 applet_
   :: forall s m lock payload

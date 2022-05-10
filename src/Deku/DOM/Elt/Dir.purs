@@ -15,7 +15,8 @@ dir
   => AnEvent m (Attribute Dir_)
   -> Array (Domable m lock payload)
   -> Domable m lock payload
-dir attributes kids = Element' (elementify "dir" attributes (FixedChildren' (FixedChildren kids)))
+dir attributes kids = Element'
+  (elementify "dir" attributes (FixedChildren' (FixedChildren kids)))
 
 dir_
   :: forall s m lock payload

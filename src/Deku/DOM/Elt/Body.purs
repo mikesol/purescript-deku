@@ -15,7 +15,8 @@ body
   => AnEvent m (Attribute Body_)
   -> Array (Domable m lock payload)
   -> Domable m lock payload
-body attributes kids = Element' (elementify "body" attributes (FixedChildren' (FixedChildren kids)))
+body attributes kids = Element'
+  (elementify "body" attributes (FixedChildren' (FixedChildren kids)))
 
 body_
   :: forall s m lock payload

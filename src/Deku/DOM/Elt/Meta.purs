@@ -15,7 +15,8 @@ meta
   => AnEvent m (Attribute Meta_)
   -> Array (Domable m lock payload)
   -> Domable m lock payload
-meta attributes kids = Element' (elementify "meta" attributes (FixedChildren' (FixedChildren kids)))
+meta attributes kids = Element'
+  (elementify "meta" attributes (FixedChildren' (FixedChildren kids)))
 
 meta_
   :: forall s m lock payload

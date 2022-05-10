@@ -15,7 +15,8 @@ sup
   => AnEvent m (Attribute Sup_)
   -> Array (Domable m lock payload)
   -> Domable m lock payload
-sup attributes kids = Element' (elementify "sup" attributes (FixedChildren' (FixedChildren kids)))
+sup attributes kids = Element'
+  (elementify "sup" attributes (FixedChildren' (FixedChildren kids)))
 
 sup_
   :: forall s m lock payload

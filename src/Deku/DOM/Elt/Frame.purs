@@ -15,7 +15,8 @@ frame
   => AnEvent m (Attribute Frame_)
   -> Array (Domable m lock payload)
   -> Domable m lock payload
-frame attributes kids = Element' (elementify "frame" attributes (FixedChildren' (FixedChildren kids)))
+frame attributes kids = Element'
+  (elementify "frame" attributes (FixedChildren' (FixedChildren kids)))
 
 frame_
   :: forall s m lock payload

@@ -15,7 +15,8 @@ cite
   => AnEvent m (Attribute Cite_)
   -> Array (Domable m lock payload)
   -> Domable m lock payload
-cite attributes kids = Element' (elementify "cite" attributes (FixedChildren' (FixedChildren kids)))
+cite attributes kids = Element'
+  (elementify "cite" attributes (FixedChildren' (FixedChildren kids)))
 
 cite_
   :: forall s m lock payload

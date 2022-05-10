@@ -15,7 +15,8 @@ button
   => AnEvent m (Attribute Button_)
   -> Array (Domable m lock payload)
   -> Domable m lock payload
-button attributes kids = Element' (elementify "button" attributes (FixedChildren' (FixedChildren kids)))
+button attributes kids = Element'
+  (elementify "button" attributes (FixedChildren' (FixedChildren kids)))
 
 button_
   :: forall s m lock payload

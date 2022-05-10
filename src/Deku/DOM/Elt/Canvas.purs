@@ -15,7 +15,8 @@ canvas
   => AnEvent m (Attribute Canvas_)
   -> Array (Domable m lock payload)
   -> Domable m lock payload
-canvas attributes kids = Element' (elementify "canvas" attributes (FixedChildren' (FixedChildren kids)))
+canvas attributes kids = Element'
+  (elementify "canvas" attributes (FixedChildren' (FixedChildren kids)))
 
 canvas_
   :: forall s m lock payload

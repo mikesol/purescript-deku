@@ -38,7 +38,9 @@ data Domable m lock payload
   | Element' (Element m lock payload)
 
 fixed
-  :: forall m lock payload. Array (Domable m lock payload) -> Domable m lock payload
+  :: forall m lock payload
+   . Array (Domable m lock payload)
+  -> Domable m lock payload
 fixed a = FixedChildren' (FixedChildren a)
 
 dyn
@@ -48,7 +50,9 @@ dyn
 dyn a = DynamicChildren' (DynamicChildren a)
 
 toDOM
-  :: forall m lock payload. AnEvent m (Domable m lock payload) -> Domable m lock payload
+  :: forall m lock payload
+   . AnEvent m (Domable m lock payload)
+  -> Domable m lock payload
 toDOM a = EventfulElement' (EventfulElement a)
 
 bussed
@@ -74,21 +78,25 @@ type MakeElement =
   , parent :: String
   , tag :: String
   }
+
 type GiveNewParent =
   { id :: String
   , parent :: String
   , scope :: String
   }
+
 type DisconnectElement =
   { id :: String
   , parent :: String
   , scope :: String
   }
+
 type MakeText =
   { id :: String
   , scope :: String
   , parent :: String
   }
+
 type DeleteFromCache = { id :: String }
 type MakeRoot = { id :: String, root :: Web.DOM.Element }
 type SetText = { id :: String, text :: String }
@@ -97,11 +105,13 @@ type SetProp =
   , key :: String
   , value :: String
   }
+
 type SetCb =
   { id :: String
   , key :: String
   , value :: Cb
   }
+
 type MakePursx =
   { id :: String
   , parent :: String

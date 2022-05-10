@@ -15,7 +15,8 @@ ruby
   => AnEvent m (Attribute Ruby_)
   -> Array (Domable m lock payload)
   -> Domable m lock payload
-ruby attributes kids = Element' (elementify "ruby" attributes (FixedChildren' (FixedChildren kids)))
+ruby attributes kids = Element'
+  (elementify "ruby" attributes (FixedChildren' (FixedChildren kids)))
 
 ruby_
   :: forall s m lock payload

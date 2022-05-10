@@ -38,9 +38,9 @@ clickCb push = cb
         case result of
           Left err -> liftEffect $ push
             $ Result
-              ( "GET /api response failed to decode: " <>
-                  AX.printError err
-              )
+                ( "GET /api response failed to decode: " <>
+                    AX.printError err
+                )
           Right response -> liftEffect $ push $ Result $
             stringifyWithIndent 2 response.body
   )

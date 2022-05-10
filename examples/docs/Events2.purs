@@ -32,7 +32,9 @@ data MainUIAction
 data TodoAction = Prioritize | Delete
 
 px =
-  Proxy    :: Proxy         """<div>
+  Proxy
+    :: Proxy
+         """<div>
   <h1>Events 2</h1>
 
   <h2>Dynamic children</h2>
@@ -173,66 +175,69 @@ main = runInBody1
           ]
       )
   , result: nut
-      ( bussed $ lcmap (map always) \push -> lcmap (bang UIShown <|> _) \event -> do
-          D.div_
-            [ D.div_
-                [ D.input
-                    ( oneOfMap bang
-                        [ D.Style :=
-                            "border-style:solid;border-width: 1px;border-color: black;"
-                        , D.OnInput := cb \e -> for_
-                            ( target e
-                                >>= fromEventTarget
-                            )
-                            ( value
-                                >=> push <<< ChangeText
-                            )
-                        , D.OnKeyup := cb \e -> for_ (fromEvent e) \evt -> do
-                            when (code evt == "Enter") $ do
-                              push AddTodo
-                        ]
-                    )
-                    []
-                , D.button
-                    ( (bang $ D.Style := "margin: 5px;") <|>
-                        (bang $ D.OnClick := cb (const $ push AddTodo))
-                    )
-                    [ text_ "Add" ]
-                ]
-            , D.div_
-                [ dyn $ map
-                    ( \txt -> keepLatest $ bus $ lcmap (map always) \p' e' ->
-                        ( bang $ Insert $ D.div_ do
-                            [ D.span (bang $ D.Style := "margin: 5px;")
-                                [ text_ txt ]
-                            , D.button
-                                ( (bang $ D.Style := "margin: 5px;") <|>
-                                    ( bang $ D.OnClick := cb
-                                        (const $ p' SendToTop)
-                                    )
-                                )
-                                [ text_ "Prioritize" ]
-                            , D.button
-                                ( (bang $ D.Style := "margin: 5px;") <|>
-                                    (bang $ D.OnClick := cb (const $ p' Remove))
-                                )
-                                [ text_ "Delete" ]
-                            ]
-                        ) <|> e'
-                    )
-                    ( filterMap (\(tf /\ s) -> if tf then Just s else Nothing)
-                        ( mapAccum
-                            ( \a b -> case a of
-                                ChangeText s -> s /\ (false /\ s)
-                                AddTodo -> b /\ (true /\ b)
-                                _ -> "" /\ (false /\ "")
-                            )
-                            event
-                            ""
-                        )
-                    )
-                ]
-            ]
+      ( bussed $ lcmap (map always) \push -> lcmap (bang UIShown <|> _)
+          \event -> do
+            D.div_
+              [ D.div_
+                  [ D.input
+                      ( oneOfMap bang
+                          [ D.Style :=
+                              "border-style:solid;border-width: 1px;border-color: black;"
+                          , D.OnInput := cb \e -> for_
+                              ( target e
+                                  >>= fromEventTarget
+                              )
+                              ( value
+                                  >=> push <<< ChangeText
+                              )
+                          , D.OnKeyup := cb \e -> for_ (fromEvent e) \evt -> do
+                              when (code evt == "Enter") $ do
+                                push AddTodo
+                          ]
+                      )
+                      []
+                  , D.button
+                      ( (bang $ D.Style := "margin: 5px;") <|>
+                          (bang $ D.OnClick := cb (const $ push AddTodo))
+                      )
+                      [ text_ "Add" ]
+                  ]
+              , D.div_
+                  [ dyn $ map
+                      ( \txt -> keepLatest $ bus $ lcmap (map always) \p' e' ->
+                          ( bang $ Insert $ D.div_ do
+                              [ D.span (bang $ D.Style := "margin: 5px;")
+                                  [ text_ txt ]
+                              , D.button
+                                  ( (bang $ D.Style := "margin: 5px;") <|>
+                                      ( bang $ D.OnClick := cb
+                                          (const $ p' SendToTop)
+                                      )
+                                  )
+                                  [ text_ "Prioritize" ]
+                              , D.button
+                                  ( (bang $ D.Style := "margin: 5px;") <|>
+                                      ( bang $ D.OnClick := cb
+                                          (const $ p' Remove)
+                                      )
+                                  )
+                                  [ text_ "Delete" ]
+                              ]
+                          ) <|> e'
+                      )
+                      ( filterMap (\(tf /\ s) -> if tf then Just s else Nothing)
+                          ( mapAccum
+                              ( \a b -> case a of
+                                  ChangeText s -> s /\ (false /\ s)
+                                  AddTodo -> b /\ (true /\ b)
+                                  _ -> "" /\ (false /\ "")
+                              )
+                              event
+                              ""
+                          )
+                      )
+                  ]
+              ]
       )
   , next: bang (D.OnClick := (cb (const $ dpage Portals *> scrollToTop)))
   }

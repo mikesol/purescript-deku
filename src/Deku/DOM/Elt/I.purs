@@ -15,7 +15,8 @@ i
   => AnEvent m (Attribute I_)
   -> Array (Domable m lock payload)
   -> Domable m lock payload
-i attributes kids = Element' (elementify "i" attributes (FixedChildren' (FixedChildren kids)))
+i attributes kids = Element'
+  (elementify "i" attributes (FixedChildren' (FixedChildren kids)))
 
 i_
   :: forall s m lock payload

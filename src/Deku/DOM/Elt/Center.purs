@@ -15,7 +15,8 @@ center
   => AnEvent m (Attribute Center_)
   -> Array (Domable m lock payload)
   -> Domable m lock payload
-center attributes kids = Element' (elementify "center" attributes (FixedChildren' (FixedChildren kids)))
+center attributes kids = Element'
+  (elementify "center" attributes (FixedChildren' (FixedChildren kids)))
 
 center_
   :: forall s m lock payload

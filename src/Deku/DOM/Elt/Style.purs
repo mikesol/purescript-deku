@@ -15,7 +15,8 @@ style
   => AnEvent m (Attribute Style_)
   -> Array (Domable m lock payload)
   -> Domable m lock payload
-style attributes kids = Element' (elementify "style" attributes (FixedChildren' (FixedChildren kids)))
+style attributes kids = Element'
+  (elementify "style" attributes (FixedChildren' (FixedChildren kids)))
 
 style_
   :: forall s m lock payload

@@ -23,12 +23,12 @@ counter event = mapAccum f event 0
 
 main :: Effect Unit
 main = runInBody1
-  ( bus \push -> lcmap  (bang unit <|> _) \event -> do
+  ( bus \push -> lcmap (bang unit <|> _) \event -> do
       portal
         ( map
             ( \i -> D.video
                 (oneOfMap bang [ D.Controls := "true", D.Width := "250" ])
-                [D.source
+                [ D.source
                     (oneOfMap bang [ D.Src := i, D.Xtype := "video/mp4" ])
                     []
                 ]
@@ -47,6 +47,6 @@ main = runInBody1
           D.div_
             [ D.button (bang $ D.OnClick := push unit)
                 [ text_ "Switch videos" ]
-            , D.div_ [ D.span_ [flips true], D.span_ [flips false] ]
+            , D.div_ [ D.span_ [ flips true ], D.span_ [ flips false ] ]
             ]
   )

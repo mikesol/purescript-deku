@@ -15,7 +15,8 @@ option
   => AnEvent m (Attribute Option_)
   -> Array (Domable m lock payload)
   -> Domable m lock payload
-option attributes kids = Element' (elementify "option" attributes (FixedChildren' (FixedChildren kids)))
+option attributes kids = Element'
+  (elementify "option" attributes (FixedChildren' (FixedChildren kids)))
 
 option_
   :: forall s m lock payload

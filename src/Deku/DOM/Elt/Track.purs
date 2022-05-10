@@ -15,7 +15,8 @@ track
   => AnEvent m (Attribute Track_)
   -> Array (Domable m lock payload)
   -> Domable m lock payload
-track attributes kids = Element' (elementify "track" attributes (FixedChildren' (FixedChildren kids)))
+track attributes kids = Element'
+  (elementify "track" attributes (FixedChildren' (FixedChildren kids)))
 
 track_
   :: forall s m lock payload

@@ -14,7 +14,10 @@ import Effect (Effect)
 import FRP.Event.Class (bang)
 import Type.Proxy (Proxy(..))
 
-px = Proxy :: Proxy """<div>
+px =
+  Proxy
+    :: Proxy
+         """<div>
   <h1>Hello world</h1>
 
   <h3>A small example</h3>
@@ -37,11 +40,17 @@ px = Proxy :: Proxy """<div>
   <p>Now that we have our setup running, let's make a more interesting <a ~next~ style="cursor:pointer;">component</a>.</p>
 </div>"""
 
-
-helloWorld :: forall s m lock payload. MonadST s m =>
-  (Page -> Effect Unit) -> Domable m lock payload
-helloWorld dpage  = px ~~
-  { code: nut (D.pre_ [D.code_ [text_ """module Main where
+helloWorld
+  :: forall s m lock payload
+   . MonadST s m
+  => (Page -> Effect Unit)
+  -> Domable m lock payload
+helloWorld dpage = px ~~
+  { code: nut
+      ( D.pre_
+          [ D.code_
+              [ text_
+                  """module Main where
 
 import Prelude
 
@@ -52,7 +61,10 @@ import Effect (Effect)
 main :: Effect Unit
 main = runInBody (text_ "Hello world")
 """
-]])
-  , result: nut (D.div_ [text_ "Hello world"])
-  , next: bang (D.OnClick := (cb (const $ dpage SimpleComponent *> scrollToTop)))
+              ]
+          ]
+      )
+  , result: nut (D.div_ [ text_ "Hello world" ])
+  , next: bang
+      (D.OnClick := (cb (const $ dpage SimpleComponent *> scrollToTop)))
   }

@@ -15,7 +15,8 @@ svg
   => AnEvent m (Attribute Svg_)
   -> Array (Domable m lock payload)
   -> Domable m lock payload
-svg attributes kids = Element' (elementify "svg" attributes (FixedChildren' (FixedChildren kids)))
+svg attributes kids = Element'
+  (elementify "svg" attributes (FixedChildren' (FixedChildren kids)))
 
 svg_
   :: forall s m lock payload

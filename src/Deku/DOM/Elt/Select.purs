@@ -15,7 +15,8 @@ select
   => AnEvent m (Attribute Select_)
   -> Array (Domable m lock payload)
   -> Domable m lock payload
-select attributes kids = Element' (elementify "select" attributes (FixedChildren' (FixedChildren kids)))
+select attributes kids = Element'
+  (elementify "select" attributes (FixedChildren' (FixedChildren kids)))
 
 select_
   :: forall s m lock payload

@@ -15,7 +15,8 @@ bdi
   => AnEvent m (Attribute Bdi_)
   -> Array (Domable m lock payload)
   -> Domable m lock payload
-bdi attributes kids = Element' (elementify "bdi" attributes (FixedChildren' (FixedChildren kids)))
+bdi attributes kids = Element'
+  (elementify "bdi" attributes (FixedChildren' (FixedChildren kids)))
 
 bdi_
   :: forall s m lock payload

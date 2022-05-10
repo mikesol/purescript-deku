@@ -28,7 +28,11 @@ click_
   -> event (Attribute element)
 click_ = map (attr D.OnClick <<< (_ $ mempty))
 
-slider :: forall mo. Applicative mo => AnEvent mo (Number -> Effect Unit) -> AnEvent mo (Attribute D.Input_)
+slider
+  :: forall m
+   . Applicative m
+  => AnEvent m (Number -> Effect Unit)
+  -> AnEvent m (Attribute D.Input_)
 slider = alt (bang $ D.Xtype := "range") <<< map
   ( \push ->
       D.OnInput := cb \e -> for_

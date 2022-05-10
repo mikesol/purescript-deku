@@ -15,7 +15,8 @@ legend
   => AnEvent m (Attribute Legend_)
   -> Array (Domable m lock payload)
   -> Domable m lock payload
-legend attributes kids = Element' (elementify "legend" attributes (FixedChildren' (FixedChildren kids)))
+legend attributes kids = Element'
+  (elementify "legend" attributes (FixedChildren' (FixedChildren kids)))
 
 legend_
   :: forall s m lock payload

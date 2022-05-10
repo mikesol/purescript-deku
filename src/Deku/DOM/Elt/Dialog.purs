@@ -15,7 +15,8 @@ dialog
   => AnEvent m (Attribute Dialog_)
   -> Array (Domable m lock payload)
   -> Domable m lock payload
-dialog attributes kids = Element' (elementify "dialog" attributes (FixedChildren' (FixedChildren kids)))
+dialog attributes kids = Element'
+  (elementify "dialog" attributes (FixedChildren' (FixedChildren kids)))
 
 dialog_
   :: forall s m lock payload

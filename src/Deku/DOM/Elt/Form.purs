@@ -15,7 +15,8 @@ form
   => AnEvent m (Attribute Form_)
   -> Array (Domable m lock payload)
   -> Domable m lock payload
-form attributes kids = Element' (elementify "form" attributes (FixedChildren' (FixedChildren kids)))
+form attributes kids = Element'
+  (elementify "form" attributes (FixedChildren' (FixedChildren kids)))
 
 form_
   :: forall s m lock payload
