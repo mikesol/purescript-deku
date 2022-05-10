@@ -1,8 +1,8 @@
-module Deku.Example.Docs.Static.Build where
+module Deku.Example.Docs.Examples.SSR.Build where
 
 import Prelude
 
-import Deku.Example.Docs.Scene (scene)
+import Deku.Examples.Docs.Examples.SSR.App (app)
 import Deku.Toplevel (Template(..), runSSR)
 import Effect (Effect)
 import Effect.Console (log)
@@ -14,13 +14,10 @@ main =
         { head: """<!DOCTYPE html>
 <html>
   <head>
-    <title>Deku documentation</title>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width">
-    <link rel="stylesheet" href="style.css">
+    <title>My static page</title>
 		<script src="bundle.js" defer></script>
   </head>"""
         , tail: "</html>"
         }
     )
-    scene >>= log
+    app >>= log

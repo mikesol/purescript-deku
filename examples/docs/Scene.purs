@@ -21,6 +21,7 @@ import Deku.Example.Docs.Intro as Intro
 import Deku.Example.Docs.Portals1 as Portals1
 import Deku.Example.Docs.Pursx1 as Pursx1
 import Deku.Example.Docs.Pursx2 as Pursx2
+import Deku.Example.Docs.SSR as SSR
 import Deku.Example.Docs.Types (Page(..))
 import Effect (Effect)
 import FRP.Event (bang)
@@ -77,6 +78,9 @@ scene = bussed $ (lcmap (map always)) \push -> lcmap (bang Intro <|> _) \event -
               /\ true
           , Portals
               /\ "Portals"
+              /\ true
+          , SSR
+              /\ "SSR"
               /\ false
           ]
     , D.div_ [ switcher (page push) event ]
@@ -92,3 +96,4 @@ scene = bussed $ (lcmap (map always)) \push -> lcmap (bang Intro <|> _) \event -
   page dpage PURSX2 = Pursx2.pursx2 dpage
   page dpage Events2 = Events2.events2 dpage
   page dpage Portals = Portals1.portals1 dpage
+  page dpage SSR = SSR.ssrPage dpage

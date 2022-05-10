@@ -30,9 +30,3 @@ jobs:
         run: npm ci
       - name: Spago build examples
         run: npm run build:examples
-      - name: Test
-        run: npm t
-      - name: Build qc
-        run: npx spago -x examples.dhall bundle-app --main Deku.Example.Docs --to examples/docs/index.js
-      #- name: Performance test
-      #  run: npm run test:performance

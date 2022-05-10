@@ -13,8 +13,7 @@ import FRP.Event.VBus (V, vbus)
 import Type.Proxy (Proxy(..))
 
 type UIEvents = V
-  ( uiShow :: Unit
-  , buttonClicked :: Unit
+  ( buttonClicked :: Unit
   , sliderMoved :: Number
   )
 

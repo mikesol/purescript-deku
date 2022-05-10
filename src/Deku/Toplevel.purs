@@ -3,7 +3,7 @@ module Deku.Toplevel where
 import Prelude
 
 import Control.Monad.ST (ST)
-import Control.Monad.ST.Class (liftST)
+import Control.Monad.ST.Class (class MonadST, liftST)
 import Control.Monad.ST.Global (Global)
 import Control.Monad.ST.Internal as RRef
 import Data.Maybe (maybe)
@@ -11,7 +11,7 @@ import Data.Newtype (class Newtype)
 import Deku.Control (__internalDekuFlatten, deku, deku1, deku2, dekuA, deleteMeASAP)
 import Deku.Core (Domable, Element)
 import Deku.Interpret (FFIDOMSnapshot, Instruction, fullDOMInterpret, hydratingDOMInterpret, makeFFIDOMSnapshot, ssrDOMInterpret)
-import Deku.SSR (ssr)
+import Deku.SSR (ssr, ssr')
 import Effect (Effect)
 import Effect.Ref as Ref
 import FRP.Event (Event, subscribe)
@@ -132,27 +132,42 @@ newtype Template = Template { head :: String, tail :: String }
 derive instance Newtype Template _
 
 runSSR
-  :: Template
+  :: forall s m
+   . MonadST s m
+  => Template
   -> ( forall lock
-        . Domable (ST Global) lock
-            (RRef.STRef Global (Array Instruction) -> ST Global Unit)
+        . Domable (ST s) lock
+            (RRef.STRef s (Array Instruction) -> ST s Unit)
      )
-  -> Effect String
-runSSR (Template { head, tail }) children = (head <> _) <<< (_ <> tail) <<< ssr
-  <$> liftST
-    ( do
-        seed <- RRef.new 0
-        instr <- RRef.new []
-        let di = ssrDOMInterpret seed
-        void $ subscribe
-          ( __internalDekuFlatten
-              { parent: "deku-root"
-              , scope: "rootScope"
-              , raiseId: \_ -> pure unit
-              }
-              di
-              (deleteMeASAP children)
-          )
-          \i -> i instr
-        RRef.read instr
-    )
+  -> m String
+runSSR = runSSR' "body"
+
+runSSR'
+  :: forall s m
+   . MonadST s m
+  => String
+  -> Template
+  -> ( forall lock
+        . Domable (ST s) lock
+            (RRef.STRef s (Array Instruction) -> ST s Unit)
+     )
+  -> m String
+runSSR' topTag (Template { head, tail }) children =
+  (head <> _) <<< (_ <> tail) <<< ssr' topTag
+    <$> liftST
+      ( do
+          seed <- RRef.new 0
+          instr <- RRef.new []
+          let di = ssrDOMInterpret seed
+          void $ subscribe
+            ( __internalDekuFlatten
+                { parent: "deku-root"
+                , scope: "rootScope"
+                , raiseId: \_ -> pure unit
+                }
+                di
+                (deleteMeASAP children)
+            )
+            \i -> i instr
+          RRef.read instr
+      )

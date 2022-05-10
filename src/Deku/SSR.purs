@@ -14,7 +14,14 @@ import Deku.Interpret (Instruction(..))
 foreign import doPursxReplacements :: Core.MakePursx -> String
 
 ssr :: Array Instruction -> String
-ssr arr = "<body data-deku-ssr-deku-root=\"true\">" <> o "deku-root" <> "</body>"
+ssr = ssr' "body"
+
+ssr' :: String -> Array Instruction -> String
+ssr' topTag arr = "<" <> topTag <> " data-deku-ssr-deku-root=\"true\">"
+  <> o "deku-root"
+  <> "</"
+  <> topTag
+  <> ">"
   where
   making parent id action = do
     void $ modify
@@ -67,7 +74,9 @@ ssr arr = "<body data-deku-ssr-deku-root=\"true\">" <> o "deku-root" <> "</body>
         makeElt _ = do
           let tag = eltTag i2a
           let atts = eltAtts i2a
-          "<" <> tag <> " " <> atts <> " data-deku-ssr-" <> id <> "=\"true\">" <> o id <> "</"
+          "<" <> tag <> " " <> atts <> " data-deku-ssr-" <> id <> "=\"true\">"
+            <> o id
+            <> "</"
             <> tag
             <> ">"
       case i2a !! 0 of

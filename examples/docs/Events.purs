@@ -4,8 +4,9 @@ import Prelude
 
 import Control.Alt ((<|>))
 import Control.Monad.ST.Class (class MonadST)
-import Data.Monoid.Always (class Always, always)
+import Data.Monoid.Always (class Always)
 import Data.Profunctor (lcmap)
+import Deku.Always (halways)
 import Deku.Attribute (cb, (:=))
 import Deku.Control (text, text_)
 import Deku.Core (Domable, vbussed)
@@ -72,8 +73,7 @@ import FRP.Event.VBus (V, vbus)
 import Type.Proxy (Proxy(..))
 
 type UIEvents = V
-  ( uiShow :: Unit
-  , buttonClicked :: Unit
+  ( buttonClicked :: Unit
   , sliderMoved :: Number
   )
 
@@ -114,15 +114,8 @@ main = runInBody1
               ]
           ]
       )
-  -- todo: come up with an hmap for always
   , result: nut
-      ( vbussed (Proxy :: _ UIEvents) $ lcmap
-          ( \{ buttonClicked, sliderMoved } ->
-              { buttonClicked: map (always :: m Unit -> Effect Unit) buttonClicked
-              , sliderMoved: map always sliderMoved
-              }
-          )
-          \push event -> do
+      ( vbussed (Proxy :: _ UIEvents) $ lcmap halways \push event -> do
             D.div_
               [ D.button
                   (click_ (bang push.buttonClicked))

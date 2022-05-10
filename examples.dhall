@@ -13,6 +13,7 @@ in      conf
               , "either"
               , "monoid-extras"
               , "integers"
+              , "random"
               , "behaviors"
               , "aff"
               , "argonaut-core"

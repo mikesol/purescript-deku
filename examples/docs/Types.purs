@@ -10,3 +10,4 @@ data Page
   | Effects
   | Events2
   | Portals
+  | SSR

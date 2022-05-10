@@ -52,7 +52,7 @@ px =
   <p>Static Pursx (meaning Pursx without any dynamic content) can be activated with the function <code>psx</code>.</p>
 
   <h2>Next steps</h2>
-  <p>In this section, we PursX to build the same component as the previous section. In the next section, we'll learn how to respond to <a ~next~ style="cursor:pointer;">events</a>.</p>
+  <p>In this section, we used PursX to build the same component as the previous section. In the next section, we'll learn how to respond to <a ~next~ style="cursor:pointer;">events</a>.</p>
 </div>"""
 
 pursx1

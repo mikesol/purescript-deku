@@ -99,29 +99,30 @@ data Instruction
   | SetText Core.SetText
 
 ssrMakeElement
-  :: Core.MakeElement -> RRef.STRef Global (Array Instruction) -> ST Global Unit
+  :: forall r. Core.MakeElement -> RRef.STRef r (Array Instruction) -> ST r Unit
 ssrMakeElement a i = void $ RRef.modify (_ <> [ MakeElement a ]) i
 
 ssrMakeText
-  :: Core.MakeText -> RRef.STRef Global (Array Instruction) -> ST Global Unit
+  :: forall r. Core.MakeText -> RRef.STRef r (Array Instruction) -> ST r Unit
 ssrMakeText a i = void $ RRef.modify (_ <> [ MakeText a ]) i
 
 ssrMakePursx
-  :: Core.MakePursx -> RRef.STRef Global (Array Instruction) -> ST Global Unit
+  :: forall r. Core.MakePursx -> RRef.STRef r (Array Instruction) -> ST r Unit
 ssrMakePursx a i = void $ RRef.modify (_ <> [ MakePursx a ]) i
 
 ssrSetProp
-  :: Core.SetProp -> RRef.STRef Global (Array Instruction) -> ST Global Unit
+  :: forall r. Core.SetProp -> RRef.STRef r (Array Instruction) -> ST r Unit
 ssrSetProp a i = void $ RRef.modify (_ <> [ SetProp a ]) i
 
 ssrSetText
-  :: Core.SetText -> RRef.STRef Global (Array Instruction) -> ST Global Unit
+  :: forall r. Core.SetText -> RRef.STRef r (Array Instruction) -> ST r Unit
 ssrSetText a i = void $ RRef.modify (_ <> [ SetText a ]) i
 
 ssrDOMInterpret
-  :: RRef.STRef Global Int
-  -> Core.DOMInterpret (ST Global)
-       (RRef.STRef Global (Array Instruction) -> ST Global Unit)
+  :: forall r
+   . RRef.STRef r Int
+  -> Core.DOMInterpret (ST r)
+       (RRef.STRef r (Array Instruction) -> ST r Unit)
 ssrDOMInterpret seed = Core.DOMInterpret
   { ids: do
       s <- RRef.read seed
