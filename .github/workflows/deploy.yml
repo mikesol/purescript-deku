@@ -30,8 +30,6 @@ jobs:
         run: npm ci
       - name: Spago build examples
         run: npm run build:examples
-      - name: Test
-        run: npm t
       - name: Build make
         run: npx spago -x examples.dhall bundle-app --main Deku.Example.Docs.Static.Build --to examples/docs/Static/make.js
       - name: Build hydration
