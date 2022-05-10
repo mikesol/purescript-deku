@@ -12,6 +12,7 @@
 /examples/**/bundle.js
 /examples/**/main.js
 /examples/**/make.js
+/examples/docs/Static/index.html
 packages.json
 .venv
 /test-results/

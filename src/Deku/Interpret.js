@@ -173,7 +173,7 @@ export const makePursx_ = (tryHydration) => (a) => (state) => () => {
 			listeners: {},
 			scope: scope,
 			parent: parent,
-			main: dom.childNodes[0],
+			main: dom
 		};
 	} else {
 		const entries = Object.entries(cache);
@@ -210,6 +210,8 @@ export const makePursx_ = (tryHydration) => (a) => (state) => () => {
 	state.scopes[scope].push(ptr);
 	// we were hydrating if tmp is not defined
 	if (!tmp) {
+		// need to test if this will work in all cases! especially when we're setting
+		// attributes of the top-level element
 		tmp = dom;
 	}
 	tmp.querySelectorAll("[data-deku-attr-internal]").forEach(function (e) {
