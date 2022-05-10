@@ -12,7 +12,14 @@ export const makeElement_ = (tryHydration) => (a) => (state) => () => {
 		state.scopes[a.scope] = [];
 	}
 	state.scopes[a.scope].push(ptr);
-	if (tryHydration && (dom = document.getElementById(ptr))) {
+	// note that, for portals, this will be broken in its current form
+	if (
+		tryHydration &&
+		a.parent !== "@portal@" &&
+		(dom = document.body
+			.querySelectorAll("[data-deku-ssr-" + ptr + "]")
+			.item(0))
+	) {
 		state.units[ptr] = {
 			listeners: {},
 			parent: a.parent,
@@ -36,7 +43,15 @@ export const makeText_ = (tryHydration) => (a) => (state) => () => {
 		state.scopes[a.scope] = [];
 	}
 	state.scopes[a.scope].push(ptr);
-	if (tryHydration && (dom = document.getElementById(ptr))) {
+	// for SSR, we need a parent, otherwise we cannot get the child node
+	// note that, for portals, this will be broken in its current form
+	if (
+		tryHydration &&
+		a.parent !== "@portal@" &&
+		(dom = document.body
+			.querySelectorAll("[data-deku-ssr-" + a.parent + "]")
+			.item(0))
+	) {
 		state.units[ptr] = {
 			// if we've done ssr for a text node, it will be a span,
 			// so we want to get the child node
@@ -61,9 +76,29 @@ export function makeFFIDOMSnapshot() {
 	};
 }
 
-export const setProp_ = (a) => (state) => () => {
+export const setProp_ = (tryHydration) => (a) => (state) => () => {
 	var ptr = a.id;
 	var avv = a.value;
+	// it may be the case that we have created an element via
+	// pursx but not added it to the global state yet
+	if (
+		tryHydration &&
+		!state.units[ptr] &&
+		(dom = document.body
+			.querySelectorAll("[data-deku-ssr-" + ptr + "]")
+			.item(0))
+	) {
+		state.units[ptr] = {
+			listeners: {},
+			parent: a.parent,
+			scope: a.scope,
+			main: dom,
+		};
+		if (!state.scopes[a.scope]) {
+			state.scopes[a.scope] = [];
+		}
+		state.scopes[a.scope].push(ptr);
+	}
 	if (state.units[ptr].main.tagName === "INPUT" && a.key === "value") {
 		state.units[ptr].main.value = avv;
 	} else if (state.units[ptr].main.tagName === "INPUT" && a.key === "checked") {
@@ -73,9 +108,29 @@ export const setProp_ = (a) => (state) => () => {
 	}
 };
 
-export const setCb_ = (a) => (state) => () => {
+export const setCb_ = (tryHydration) => (a) => (state) => () => {
 	var ptr = a.id;
 	var avv = a.value;
+	// it may be the case that we have created an element via
+	// pursx but not added it to the global state yet
+	if (
+		tryHydration &&
+		!state.units[ptr] &&
+		(dom = document.body
+			.querySelectorAll("[data-deku-ssr-" + ptr + "]")
+			.item(0))
+	) {
+		state.units[ptr] = {
+			listeners: {},
+			parent: a.parent,
+			scope: a.scope,
+			main: dom,
+		};
+		if (!state.scopes[a.scope]) {
+			state.scopes[a.scope] = [];
+		}
+		state.scopes[a.scope].push(ptr);
+	}
 	if (a.key === "@self@") {
 		avv(state.units[ptr].main)();
 	} else {
@@ -105,17 +160,25 @@ export const makePursx_ = (tryHydration) => (a) => (state) => () => {
 	var cache = a.cache;
 	var parent = a.parent;
 	var scope = a.scope;
-	if (tryHydration && (dom = document.getElementById(ptr))) {
+	var pxScope = a.pxScope;
+	// note that, for portals, this will be broken in its current form
+	if (
+		tryHydration &&
+		parent !== "@portal@" &&
+		(dom = document.body
+			.querySelectorAll("[data-deku-ssr-" + ptr + "]")
+			.item(0))
+	) {
 		state.units[ptr] = {
 			listeners: {},
-			scope: a.dkScope,
+			scope: scope,
 			parent: parent,
 			main: dom.childNodes[0],
 		};
 	} else {
-		var entries = Object.entries(cache);
+		const entries = Object.entries(cache);
 		for (var i = 0; i < entries.length; i++) {
-			var key = entries[i][0];
+			const key = entries[i][0];
 			if (entries[i][1] === true) {
 				// it is an attribute
 				html = html.replace(
@@ -136,36 +199,41 @@ export const makePursx_ = (tryHydration) => (a) => (state) => () => {
 		tmp.innerHTML = html.trim();
 		state.units[ptr] = {
 			listeners: {},
-			scope: a.dkScope,
+			scope: scope,
 			parent: parent,
 			main: tmp.firstChild,
 		};
 	}
-	if (!state.scopes[a.dkScope]) {
-		state.scopes[a.dkScope] = [];
+	if (!state.scopes[scope]) {
+		state.scopes[scope] = [];
 	}
+	state.scopes[scope].push(ptr);
 	// we were hydrating if tmp is not defined
 	if (!tmp) {
 		tmp = dom;
 	}
-	state.scopes[a.dkScope].push(ptr);
 	tmp.querySelectorAll("[data-deku-attr-internal]").forEach(function (e) {
 		var key = e.getAttribute("data-deku-attr-internal");
-		state.units[key + scope] = {
+		// each individual unit has the name of the key plus its scope
+		// this is necessary to avoid namespacing conflicts
+		// in case multiple purs-x contain the same key
+		const namespacedKey = key + pxScope;
+		state.units[namespacedKey] = {
 			listeners: {},
 			main: e,
-			scope: a.dkScope,
+			scope: scope,
 		};
-		state.scopes[a.dkScope].push(key + scope);
+		state.scopes[scope].push(namespacedKey);
 	});
 	tmp.querySelectorAll("[data-deku-elt-internal]").forEach(function (e) {
 		var key = e.getAttribute("data-deku-elt-internal");
-		state.units[key + scope] = {
+		const namespacedKey = key + pxScope;
+		state.units[key + pxScope] = {
 			listeners: {},
 			main: e,
-			scope: a.dkScope,
+			scope: scope,
 		};
-		state.scopes[a.dkScope].push(key + scope);
+		state.scopes[scope].push(namespacedKey);
 	});
 	if (!dom) {
 		connectXToY_(ptr, parent, state);

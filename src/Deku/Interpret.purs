@@ -46,10 +46,10 @@ foreign import setText_
   -> Effect Unit
 
 foreign import setProp_
-  :: Core.SetProp -> FFIDOMSnapshot -> Effect Unit
+  :: Boolean -> Core.SetProp -> FFIDOMSnapshot -> Effect Unit
 
 foreign import setCb_
-  :: Core.SetCb -> FFIDOMSnapshot -> Effect Unit
+  :: Boolean -> Core.SetCb -> FFIDOMSnapshot -> Effect Unit
 
 foreign import makePursx_
   :: Boolean
@@ -82,8 +82,8 @@ fullDOMInterpret seed = Core.DOMInterpret
   , makeRoot: makeRoot_
   , makeText: makeText_ false
   , makePursx: makePursx_ false
-  , setProp: setProp_
-  , setCb: setCb_
+  , setProp: setProp_ false
+  , setCb: setCb_ false
   , setText: setText_
   , sendToTop: sendToTop_
   , deleteFromCache: deleteFromCache_
@@ -157,8 +157,8 @@ hydratingDOMInterpret seed = Core.DOMInterpret
   , makeRoot: makeRoot_
   , makeText: makeText_ true
   , makePursx: makePursx_ true
-  , setProp: setProp_
-  , setCb: setCb_
+  , setProp: setProp_ true
+  , setCb: setCb_ true
   , setText: setText_
   , sendToTop: sendToTop_
   , deleteFromCache: deleteFromCache_

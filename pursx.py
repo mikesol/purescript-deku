@@ -268,8 +268,8 @@ makePursx' verb html r = Element' $ Element go
                   { id: me
                   , parent
                   , cache
-                  , scope: pxScope
-                  , dkScope: scope
+                  , pxScope: pxScope
+                  , scope
                   , html: reflectType html
                   , verb: reflectType verb
                   }

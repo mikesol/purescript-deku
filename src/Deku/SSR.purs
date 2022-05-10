@@ -8,10 +8,13 @@ import Data.Filterable (filterMap)
 import Data.Map as Map
 import Data.Maybe (Maybe(..), fromMaybe, maybe)
 import Data.Traversable (foldMap, intercalate, traverse)
+import Deku.Core as Core
 import Deku.Interpret (Instruction(..))
 
+foreign import doPursxReplacements :: Core.MakePursx -> String
+
 ssr :: Array Instruction -> String
-ssr arr = "<body id=\"deku-root\">" <> o "deku-root" <> "</body>"
+ssr arr = "<body data-deku-ssr-deku-root=\"true\">" <> o "deku-root" <> "</body>"
   where
   making parent id action = do
     void $ modify
@@ -56,27 +59,22 @@ ssr arr = "<body id=\"deku-root\">" <> o "deku-root" <> "</body>"
   singleElt id =
     Map.lookup id idToActions # maybe "" \i2a -> do
       let
-        makeText _ = do
-          "<span id=\"" <> id <> "\">"
-            <>
-              ( i2a #
-                  ( fromMaybe "" <<< findMap case _ of
-                      SetText { text } -> Just text
-                      _ -> Nothing
-                  )
-              )
-            <> "</span>"
+        makeText _ = i2a #
+          ( fromMaybe "" <<< findMap case _ of
+              SetText { text } -> Just text
+              _ -> Nothing
+          )
         makeElt _ = do
           let tag = eltTag i2a
           let atts = eltAtts i2a
-          "<" <> tag <> " " <> atts <> " id=\"" <> id <> "\">" <> o id <> "</"
+          "<" <> tag <> " " <> atts <> " data-deku-ssr-" <> id <> "=\"true\">" <> o id <> "</"
             <> tag
             <> ">"
       case i2a !! 0 of
         Just (SetText _) -> makeText unit
         Just (MakeText _) -> makeText unit
         -- todo: strip styling from div
-        Just (MakePursx { html }) -> "<div id=\""<>id<>"\">"<>html<>"</div>"
+        Just (MakePursx mpx) -> doPursxReplacements mpx
         _ -> makeElt unit
   eltTag i2a = i2a #
     ( fromMaybe "" <<< findMap case _ of

@@ -107,7 +107,7 @@ type MakePursx =
   , parent :: String
   , html :: String
   , scope :: String
-  , dkScope :: String
+  , pxScope :: String
   , verb :: String
   , cache :: Object Boolean
   }
