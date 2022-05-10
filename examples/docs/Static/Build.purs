@@ -11,7 +11,8 @@ main :: Effect Unit
 main =
   runSSR
     ( Template
-        { head: """<html>
+        { head: """<!DOCTYPE html>
+<html>
   <head>
     <title>Deku documentation</title>
     <meta charset="UTF-8">
