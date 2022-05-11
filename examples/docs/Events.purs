@@ -26,9 +26,7 @@ type UIEvents = V
   )
 
 px =
-  Proxy
-    :: Proxy
-         """<div>
+  Proxy    :: Proxy         """<div>
   <h1>Events</h1>
 
   <h2>Listening to the DOM</h2>
