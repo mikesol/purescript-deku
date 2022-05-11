@@ -8,8 +8,6 @@ module Deku.Control
   , globalPortal
   , portal
   , module Bolson.Control
-  --
-  , __internalDekuFlatten
   ) where
 
 import Prelude

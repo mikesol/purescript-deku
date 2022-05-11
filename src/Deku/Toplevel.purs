@@ -2,19 +2,21 @@ module Deku.Toplevel where
 
 import Prelude
 
-import Bolson.Core (Scope(..))
+import Bolson.Control as Bolson
+import Bolson.Core (Element(..), Entity(..), PSR, Scope(..))
 import Control.Monad.ST (ST)
 import Control.Monad.ST.Class (class MonadST, liftST)
 import Control.Monad.ST.Internal as RRef
+import Control.Plus (empty)
 import Data.Maybe (Maybe(..), maybe)
-import Data.Newtype (class Newtype)
-import Deku.Control (__internalDekuFlatten, deku, deku1, dekuA)
-import Deku.Core (Domable)
+import Data.Newtype (class Newtype, unwrap)
+import Deku.Control (deku, deku1, dekuA, elementify)
+import Deku.Core (DOMInterpret(..), Domable, Node(..))
 import Deku.Interpret (FFIDOMSnapshot, Instruction, fullDOMInterpret, hydratingDOMInterpret, makeFFIDOMSnapshot, ssrDOMInterpret)
 import Deku.SSR (ssr')
 import Effect (Effect)
 import Effect.Ref as Ref
-import FRP.Event (Event, subscribe)
+import FRP.Event (AnEvent, Event, subscribe)
 import Unsafe.Coerce (unsafeCoerce)
 import Web.DOM.Element as Web.DOM
 import Web.HTML (window)
@@ -151,3 +153,12 @@ runSSR' topTag (Template { head, tail }) children =
             \i -> i instr
           RRef.read instr
       )
+
+__internalDekuFlatten
+  :: forall s m lock payload
+   . MonadST s m
+  => PSR m
+  -> DOMInterpret m payload
+  -> Domable m lock payload
+  -> AnEvent m payload
+__internalDekuFlatten = Bolson.flatten (\_ (DOMInterpret { sendToTop }) id -> sendToTop { id })  (unwrap >>> _.ids) (\(DOMInterpret { disconnectElement } ) {id,scope,parent} -> disconnectElement { id,scope,parent,scopeEq:eq })  (\e -> Element' $ elementify "div" empty e) (\(Node e) -> Element e) (\(Element e) -> Node e)

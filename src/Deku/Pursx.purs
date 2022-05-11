@@ -2,16 +2,18 @@ module Deku.Pursx where
 
 import Prelude
 
-import Bolson.Core (Entity(..))
+import Bolson.Control as Bolson
+import Bolson.Core (Element(..), Entity(..), PSR)
 import Control.Alt ((<|>))
 import Control.Monad.ST.Class (class MonadST)
 import Control.Plus (empty)
 import Data.Maybe (Maybe(..))
+import Data.Newtype (unwrap)
 import Data.Profunctor (lcmap)
 import Data.Reflectable (class Reflectable, reflectType)
 import Data.Symbol (class IsSymbol)
 import Deku.Attribute (Attribute, AttributeValue(..), unsafeUnAttribute)
-import Deku.Control (__internalDekuFlatten)
+import Deku.Control (elementify)
 import Deku.Core (DOMInterpret(..), Domable, Node(..))
 import Deku.DOM (class TagToDeku)
 import FRP.Event (AnEvent, bang, subscribe, makeEvent)
@@ -4558,6 +4560,23 @@ makePursx' verb html r = Element' $ Node go
             ) <|> element z di
           )
           k1
+
+__internalDekuFlatten
+  :: forall s m lock payload
+   . MonadST s m
+  => PSR m
+  -> DOMInterpret m payload
+  -> Domable m lock payload
+  -> AnEvent m payload
+__internalDekuFlatten = Bolson.flatten
+  (\_ (DOMInterpret { sendToTop }) id -> sendToTop { id })
+  (unwrap >>> _.ids)
+  ( \(DOMInterpret { disconnectElement }) { id, scope, parent } ->
+      disconnectElement { id, scope, parent, scopeEq: eq }
+  )
+  (\e -> Element' $ elementify "div" empty e)
+  (\(Node e) -> Element e)
+  (\(Element e) -> Node e)
 
 infixr 5 makePursx as ~~
 
