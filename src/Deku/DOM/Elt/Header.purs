@@ -4,7 +4,8 @@ import Control.Plus (empty)
 import Deku.Attribute (Attribute)
 import Deku.Control (elementify)
 import Control.Monad.ST.Class (class MonadST)
-import Deku.Core (Domable(..), FixedChildren(..))
+import Deku.Core (Domable)
+import Bolson.Core (Entity(..), fixed)
 import FRP.Event (AnEvent)
 
 data Header_
@@ -15,8 +16,7 @@ header
   => AnEvent m (Attribute Header_)
   -> Array (Domable m lock payload)
   -> Domable m lock payload
-header attributes kids = Element'
-  (elementify "header" attributes (FixedChildren' (FixedChildren kids)))
+header attributes kids = Element' (elementify "header" attributes (fixed kids))
 
 header_
   :: forall s m lock payload

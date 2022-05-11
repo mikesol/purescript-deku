@@ -4,7 +4,8 @@ import Control.Plus (empty)
 import Deku.Attribute (Attribute)
 import Deku.Control (elementify)
 import Control.Monad.ST.Class (class MonadST)
-import Deku.Core (Domable(..), FixedChildren(..))
+import Deku.Core (Domable)
+import Bolson.Core (Entity(..), fixed)
 import FRP.Event (AnEvent)
 
 data Meter_
@@ -15,8 +16,7 @@ meter
   => AnEvent m (Attribute Meter_)
   -> Array (Domable m lock payload)
   -> Domable m lock payload
-meter attributes kids = Element'
-  (elementify "meter" attributes (FixedChildren' (FixedChildren kids)))
+meter attributes kids = Element' (elementify "meter" attributes (fixed kids))
 
 meter_
   :: forall s m lock payload

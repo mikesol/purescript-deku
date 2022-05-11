@@ -1,6 +1,7 @@
 { name = "purescript-deku"
 , dependencies =
   [ "arrays"
+  , "bolson"
   , "control"
   , "effect"
   , "event"
@@ -21,8 +22,6 @@
   , "safe-coerce"
   , "st"
   , "transformers"
-  , "tuples"
-  , "type-equality"
   , "unsafe-coerce"
   , "web-dom"
   , "web-events"

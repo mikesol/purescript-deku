@@ -4,7 +4,8 @@ import Control.Plus (empty)
 import Deku.Attribute (Attribute)
 import Deku.Control (elementify)
 import Control.Monad.ST.Class (class MonadST)
-import Deku.Core (Domable(..), FixedChildren(..))
+import Deku.Core (Domable)
+import Bolson.Core (Entity(..), fixed)
 import FRP.Event (AnEvent)
 
 data Fieldset_
@@ -15,8 +16,7 @@ fieldset
   => AnEvent m (Attribute Fieldset_)
   -> Array (Domable m lock payload)
   -> Domable m lock payload
-fieldset attributes kids = Element'
-  (elementify "fieldset" attributes (FixedChildren' (FixedChildren kids)))
+fieldset attributes kids = Element' (elementify "fieldset" attributes (fixed kids))
 
 fieldset_
   :: forall s m lock payload

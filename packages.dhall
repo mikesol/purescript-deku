@@ -128,6 +128,11 @@ let additions =
         , repo = "https://github.com/mikesol/purescript-monoid-extras.git"
         , version = "v0.0.1"
         }
+      , bolson =
+        { dependencies = [ "prelude" ]
+        , repo = "https://github.com/mikesol/purescript-bolson.git"
+        , version = "main"
+        }
       , variant =
         { dependencies =
           [ "assert"

@@ -10,8 +10,8 @@ module Deku.Interpret
 import Prelude
 
 import Control.Monad.ST (ST)
-import Control.Monad.ST.Global (Global)
 import Control.Monad.ST.Internal as RRef
+import Data.Maybe (Maybe, maybe)
 import Deku.Core as Core
 import Effect (Effect)
 import Effect.Ref as Ref
@@ -25,6 +25,7 @@ foreign import makeFFIDOMSnapshot :: Effect FFIDOMSnapshot
 
 foreign import makeElement_
   :: Boolean
+  -> (forall a. (a -> Unit) -> Maybe a -> Unit)
   -> Core.MakeElement
   -> FFIDOMSnapshot
   -> Effect Unit
@@ -36,6 +37,7 @@ foreign import makeRoot_
 
 foreign import makeText_
   :: Boolean
+  -> (forall a. (a -> Unit) -> Maybe a -> Unit)
   -> Core.MakeText
   -> FFIDOMSnapshot
   -> Effect Unit
@@ -53,6 +55,7 @@ foreign import setCb_
 
 foreign import makePursx_
   :: Boolean
+  -> (forall a. (a -> Unit) -> Maybe a -> Unit)
   -> Core.MakePursx
   -> FFIDOMSnapshot
   -> Effect Unit
@@ -78,10 +81,10 @@ fullDOMInterpret seed = Core.DOMInterpret
           (evalGen (arbitrary :: Gen Int) { newSeed: mkSeed s, size: 5 })
       void $ Ref.modify (add 1) seed
       pure o
-  , makeElement: makeElement_ false
+  , makeElement: makeElement_ false (maybe unit)
   , makeRoot: makeRoot_
-  , makeText: makeText_ false
-  , makePursx: makePursx_ false
+  , makeText: makeText_ false (maybe unit)
+  , makePursx: makePursx_ false (maybe unit)
   , setProp: setProp_ false
   , setCb: setCb_ false
   , setText: setText_
@@ -154,10 +157,10 @@ hydratingDOMInterpret seed = Core.DOMInterpret
           (evalGen (arbitrary :: Gen Int) { newSeed: mkSeed s, size: 5 })
       void $ Ref.modify (add 1) seed
       pure o
-  , makeElement: makeElement_ true
+  , makeElement: makeElement_ true (maybe unit)
   , makeRoot: makeRoot_
-  , makeText: makeText_ true
-  , makePursx: makePursx_ true
+  , makeText: makeText_ true (maybe unit)
+  , makePursx: makePursx_ true (maybe unit)
   , setProp: setProp_ true
   , setCb: setCb_ true
   , setText: setText_

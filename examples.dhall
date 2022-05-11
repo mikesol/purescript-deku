@@ -9,6 +9,7 @@ in      conf
               , "filterable"
               , "affjax-web"
               , "console"
+              , "tuples"
               , "affjax"
               , "either"
               , "monoid-extras"

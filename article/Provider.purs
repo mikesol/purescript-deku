@@ -10,7 +10,7 @@ import Data.Maybe (Maybe(..))
 import Data.Profunctor (lcmap)
 import Deku.Attribute (attr, (:=))
 import Deku.Control (switcher, text, text_)
-import Deku.Core (Domable, toDOM)
+import Deku.Core (Domable, envy)
 import Deku.DOM as D
 import Deku.Toplevel (runInBody1)
 import Effect (Effect)
@@ -154,7 +154,7 @@ authorized = do
         , D.tr_ [ c2, c3 ]
         , D.tr_ [ c4, c5 ]
         ]
-    , D.div_ [ toDOM incTok ]
+    , D.div_ [ envy incTok ]
     ]
 
 unauthorized

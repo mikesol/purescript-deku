@@ -4,7 +4,8 @@ import Control.Plus (empty)
 import Deku.Attribute (Attribute)
 import Deku.Control (elementify)
 import Control.Monad.ST.Class (class MonadST)
-import Deku.Core (Domable(..), FixedChildren(..))
+import Deku.Core (Domable)
+import Bolson.Core (Entity(..), fixed)
 import FRP.Event (AnEvent)
 
 data Footer_
@@ -15,8 +16,7 @@ footer
   => AnEvent m (Attribute Footer_)
   -> Array (Domable m lock payload)
   -> Domable m lock payload
-footer attributes kids = Element'
-  (elementify "footer" attributes (FixedChildren' (FixedChildren kids)))
+footer attributes kids = Element' (elementify "footer" attributes (fixed kids))
 
 footer_
   :: forall s m lock payload

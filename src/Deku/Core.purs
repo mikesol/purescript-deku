@@ -1,100 +1,76 @@
-module Deku.Core where
+module Deku.Core
+  ( module Bolson.Core
+  , DOMInterpret(..)
+  , MakeRoot
+  , MakeElement
+  , MakeText
+  , MakePursx
+  , GiveNewParent
+  , DisconnectElement
+  , DeleteFromCache
+  , SendToTop
+  , SetProp
+  , SetCb
+  , SetText
+  , remove
+  , sendToTop
+  , insert
+  , Domable
+  , Node(..)
+  ) where
 
 import Prelude
 
-import Control.Monad.ST.Class (class MonadST)
+import Bolson.Core (Scope, vbussed, fixed, dyn, envy, bussed)
+import Bolson.Core as Bolson
+import Data.Maybe (Maybe)
+import Data.Newtype (class Newtype)
 import Deku.Attribute (Cb)
-import FRP.Event (AnEvent, bus)
-import FRP.Event.VBus (class VBus, V, vbus)
+import FRP.Event (AnEvent)
 import Foreign.Object (Object)
-import Prim.RowList (class RowToList)
-import Type.Proxy (Proxy)
 import Web.DOM as Web.DOM
 
-data Child m lock payload = Insert (Domable m lock payload) | SendToTop | Remove
+newtype Node m (lock :: Type) payload = Node
+  (Bolson.PSR m -> DOMInterpret m payload -> AnEvent m payload)
 
-newtype DynamicChildren m lock payload = DynamicChildren
-  (AnEvent m (AnEvent m (Child m lock payload)))
+type Domable m lock payload = Bolson.Entity Unit (Node m lock payload) m lock
 
-newtype FixedChildren m lock payload = FixedChildren
-  (Array (Domable m lock payload))
+insert
+  :: forall logic obj m lock
+   . Bolson.Entity logic obj m lock
+  -> Bolson.Child logic obj m lock
+insert = Bolson.Insert
 
-newtype EventfulElement m lock payload = EventfulElement
-  (AnEvent m (Domable m lock payload))
+remove :: forall logic obj m lock. Bolson.Child logic obj m lock
+remove = Bolson.Remove
 
-type PSR m =
-  { parent :: String
-  , scope :: String
-  , raiseId :: String -> m Unit
-  }
-
-newtype Element m (lock :: Type) payload = Element
-  (PSR m -> DOMInterpret m payload -> AnEvent m payload)
-
-data Domable m lock payload
-  = DynamicChildren' (DynamicChildren m lock payload)
-  | FixedChildren' (FixedChildren m lock payload)
-  | EventfulElement' (EventfulElement m lock payload)
-  | Element' (Element m lock payload)
-
-fixed
-  :: forall m lock payload
-   . Array (Domable m lock payload)
-  -> Domable m lock payload
-fixed a = FixedChildren' (FixedChildren a)
-
-dyn
-  :: forall m lock payload
-   . AnEvent m (AnEvent m (Child m lock payload))
-  -> Domable m lock payload
-dyn a = DynamicChildren' (DynamicChildren a)
-
-toDOM
-  :: forall m lock payload
-   . AnEvent m (Domable m lock payload)
-  -> Domable m lock payload
-toDOM a = EventfulElement' (EventfulElement a)
-
-bussed
-  :: forall s m lock payload a
-   . MonadST s m
-  => ((a -> m Unit) -> AnEvent m a -> Domable m lock payload)
-  -> Domable m lock payload
-bussed f = EventfulElement' (EventfulElement (bus f))
-
-vbussed
-  :: forall s m lock payload rbus bus push event u
-   . RowToList bus rbus
-  => MonadST s m
-  => VBus rbus push event u
-  => Proxy (V bus)
-  -> ({ | push } -> { | event } -> Domable m lock payload)
-  -> Domable m lock payload
-vbussed px f = EventfulElement' (EventfulElement (vbus px f))
+sendToTop :: forall obj m lock. Bolson.Child Unit obj m lock
+sendToTop = Bolson.Logic unit
 
 type MakeElement =
   { id :: String
-  , scope :: String
-  , parent :: String
+  , scope :: Scope
+  , parent :: Maybe String
   , tag :: String
   }
 
 type GiveNewParent =
   { id :: String
   , parent :: String
-  , scope :: String
+  , scope :: Scope
   }
 
 type DisconnectElement =
   { id :: String
   , parent :: String
-  , scope :: String
+  , scope :: Scope
+  , scopeEq :: Scope -> Scope -> Boolean
   }
 
 type MakeText =
   { id :: String
-  , scope :: String
-  , parent :: String
+  , scope :: Scope
+  , parent :: Maybe String
   }
 
 type DeleteFromCache = { id :: String }
@@ -114,9 +90,9 @@ type SetCb =
 
 type MakePursx =
   { id :: String
-  , parent :: String
+  , parent :: Maybe String
   , html :: String
-  , scope :: String
+  , scope :: Scope
   , pxScope :: String
   , verb :: String
   , cache :: Object Boolean
@@ -125,6 +101,8 @@ type MakePursx =
 type SendToTop =
   { id :: String
   }
+
+derive instance Newtype (DOMInterpret m payload) _
 
 newtype DOMInterpret m payload = DOMInterpret
   { ids :: m String

@@ -10,7 +10,7 @@ import Data.Monoid.Always (class Always, always)
 import Data.Profunctor (lcmap)
 import Deku.Attribute (cb, (:=))
 import Deku.Control (text, text_)
-import Deku.Core (Child(..), Domable, dyn)
+import Deku.Core (Domable, dyn, insert)
 import Deku.DOM as D
 import Deku.Example.Docs.Types (Page(..))
 import Deku.Example.Docs.Util (scrollToTop)
@@ -134,7 +134,7 @@ main = runInBody1
       )
   , result: nut
       ( dyn $ bus $ lcmap (map (always :: m Unit -> Effect Unit)) \push event ->
-          bang $ Insert $ myDom ~~
+          bang $ insert $ myDom ~~
             { myli: bang (D.Style := "background-color:rgb(200,240,210);")
             , somethingNew: nut
                 ( D.button (bang (D.OnClick := push (Just unit)))

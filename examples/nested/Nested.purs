@@ -10,7 +10,7 @@ import Data.Tuple (Tuple(..))
 import Deku.Attribute ((:=))
 import Deku.Control (portal, switcher)
 import Deku.Control as C
-import Deku.Core (Child(..), Domable, dyn)
+import Deku.Core (Domable, dyn, insert, remove, sendToTop)
 import Deku.DOM as D
 import Deku.Interpret (FFIDOMSnapshot)
 import Deku.Toplevel (runInBodyA)
@@ -69,10 +69,10 @@ scene =
       [ dyn $ map
           ( \rgb ->
               bang
-                ( Insert $ D.div
+                ( insert $ D.div
                     (bang (D.Style := "background-color: " <> rgb <> ";"))
                     [ C.text_ "hello" ]
-                ) <|> delay 1432 (bang SendToTop) <|> delay 2000 (bang Remove)
+                ) <|> delay 1432 (bang sendToTop) <|> delay 2000 (bang remove)
           )
           (sample_ rdm (interval 1000))
       ]
