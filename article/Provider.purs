@@ -131,6 +131,10 @@ incrementToken = bus \setN n -> do
     , D.p_ [ text_ "Token: ", text (map show t1n) ]
     ]
 
+authorized
+  :: forall lock payload
+   . _
+  -> Domable Effect lock payload
 authorized = do
   c0 <- cell0
   c1 <- lcmap (union { myBool: true }) cell1
