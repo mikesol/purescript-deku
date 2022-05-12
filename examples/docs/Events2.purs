@@ -12,7 +12,7 @@ import Data.Profunctor (lcmap)
 import Data.Tuple.Nested ((/\))
 import Deku.Attribute (cb, (:=))
 import Deku.Control (text_)
-import Deku.Core (Child(..), Domable, bussed, dyn)
+import Deku.Core (Domable, insert, sendToTop, remove, bussed, dyn)
 import Deku.DOM as D
 import Deku.Example.Docs.Types (Page(..))
 import Deku.Example.Docs.Util (scrollToTop)
@@ -57,9 +57,9 @@ px =
   <p>In the previous sections, DOM element constructors like <code>div_</code> could only accept an <code>Array</code>. They <i>also</i> can accept an event of events. In this case, the outer event represents a dynamic element, and the inner event represents the <i>stage</i> of dynamism with a data type called <code>Child</code>. <code>Child</code> has three constructors:</p>
 
   <ul>
-    <li><code>Insert</code>, which takes an element.</li>
-    <li><code>SendToTop</code>, which sends the current element to the top of its parent.</li>
-    <li><code>Remove</code>, which removes the element from its parent.</li>
+    <li><code>insert</code>, which takes an element.</li>
+    <li><code>sendToTop</code>, which sends the current element to the top of its parent.</li>
+    <li><code>remove</code>, which removes the element from its parent.</li>
   </ul>
 
   <p>The Deku engine listens for these in a specific order. <code>Insert</code> can be followed by 0 or more <code>SendToTop</code>-s. When a <code>Remove</code> is called, the stream is unsubscribed from the parent. Because we're in the land of <code>Event</code>-s, you can emit anything, but this is the how they will be listened to.</p>
@@ -205,20 +205,20 @@ main = runInBody1
               , D.div_
                   [ dyn $ map
                       ( \txt -> keepLatest $ bus $ lcmap (map always) \p' e' ->
-                          ( bang $ Insert $ D.div_ do
+                          ( bang $ insert $ D.div_ do
                               [ D.span (bang $ D.Style := "margin: 5px;")
                                   [ text_ txt ]
                               , D.button
                                   ( (bang $ D.Style := "margin: 5px;") <|>
                                       ( bang $ D.OnClick := cb
-                                          (const $ p' SendToTop)
+                                          (const $ p' sendToTop)
                                       )
                                   )
                                   [ text_ "Prioritize" ]
                               , D.button
                                   ( (bang $ D.Style := "margin: 5px;") <|>
                                       ( bang $ D.OnClick := cb
-                                          (const $ p' Remove)
+                                          (const $ p' remove)
                                       )
                                   )
                                   [ text_ "Delete" ]

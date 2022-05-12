@@ -4,7 +4,8 @@ import Control.Plus (empty)
 import Deku.Attribute (Attribute)
 import Deku.Control (elementify)
 import Control.Monad.ST.Class (class MonadST)
-import Deku.Core (Domable(..), FixedChildren(..))
+import Deku.Core (Domable)
+import Bolson.Core (Entity(..), fixed)
 import FRP.Event (AnEvent)
 
 data Blockquote_
@@ -15,8 +16,7 @@ blockquote
   => AnEvent m (Attribute Blockquote_)
   -> Array (Domable m lock payload)
   -> Domable m lock payload
-blockquote attributes kids = Element'
-  (elementify "blockquote" attributes (FixedChildren' (FixedChildren kids)))
+blockquote attributes kids = Element' (elementify "blockquote" attributes (fixed kids))
 
 blockquote_
   :: forall s m lock payload

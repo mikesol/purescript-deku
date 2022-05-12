@@ -4,7 +4,8 @@ import Control.Plus (empty)
 import Deku.Attribute (Attribute)
 import Deku.Control (elementify)
 import Control.Monad.ST.Class (class MonadST)
-import Deku.Core (Domable(..), FixedChildren(..))
+import Deku.Core (Domable)
+import Bolson.Core (Entity(..), fixed)
 import FRP.Event (AnEvent)
 
 data Basefont_
@@ -15,8 +16,7 @@ basefont
   => AnEvent m (Attribute Basefont_)
   -> Array (Domable m lock payload)
   -> Domable m lock payload
-basefont attributes kids = Element'
-  (elementify "basefont" attributes (FixedChildren' (FixedChildren kids)))
+basefont attributes kids = Element' (elementify "basefont" attributes (fixed kids))
 
 basefont_
   :: forall s m lock payload

@@ -4,7 +4,8 @@ import Control.Plus (empty)
 import Deku.Attribute (Attribute)
 import Deku.Control (elementify)
 import Control.Monad.ST.Class (class MonadST)
-import Deku.Core (Domable(..), FixedChildren(..))
+import Deku.Core (Domable)
+import Bolson.Core (Entity(..), fixed)
 import FRP.Event (AnEvent)
 
 data Svg_
@@ -15,8 +16,7 @@ svg
   => AnEvent m (Attribute Svg_)
   -> Array (Domable m lock payload)
   -> Domable m lock payload
-svg attributes kids = Element'
-  (elementify "svg" attributes (FixedChildren' (FixedChildren kids)))
+svg attributes kids = Element' (elementify "svg" attributes (fixed kids))
 
 svg_
   :: forall s m lock payload

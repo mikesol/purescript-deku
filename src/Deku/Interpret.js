@@ -1,11 +1,8 @@
-const connectXToY_ = (x, y, state) => {
-	if (y === "@portal@") {
-		return;
-	}
-	state.units[y].main.appendChild(state.units[x].main);
+const connectXToY_ = (maybe, x, y$, state) => {
+	maybe((y) => state.units[y].main.appendChild(state.units[x].main))(y$);
 };
 
-export const makeElement_ = (tryHydration) => (a) => (state) => () => {
+export const makeElement_ = (tryHydration) => (maybe) => (a) => (state) => () => {
 	var dom;
 	var ptr = a.id;
 	if (!state.scopes[a.scope]) {
@@ -33,10 +30,10 @@ export const makeElement_ = (tryHydration) => (a) => (state) => () => {
 			scope: a.scope,
 			main: document.createElement(a.tag),
 		};
-		connectXToY_(ptr, a.parent, state);
+		connectXToY_(maybe, ptr, a.parent, state);
 	}
 };
-export const makeText_ = (tryHydration) => (a) => (state) => () => {
+export const makeText_ = (tryHydration) => (maybe) => (a) => (state) => () => {
 	var ptr = a.id;
 	var dom;
 	if (!state.scopes[a.scope]) {
@@ -65,7 +62,7 @@ export const makeText_ = (tryHydration) => (a) => (state) => () => {
 			parent: a.parent,
 			scope: a.scope,
 		};
-		connectXToY_(ptr, a.parent, state);
+		connectXToY_(maybe, ptr, a.parent, state);
 	}
 };
 
@@ -151,7 +148,7 @@ export const setText_ = (a) => (state) => () => {
 	state.units[ptr].main.nodeValue = a.text;
 };
 
-export const makePursx_ = (tryHydration) => (a) => (state) => () => {
+export const makePursx_ = (tryHydration) => (maybe) => (a) => (state) => () => {
 	var dom;
 	var tmp;
 	var ptr = a.id;
@@ -173,7 +170,7 @@ export const makePursx_ = (tryHydration) => (a) => (state) => () => {
 			listeners: {},
 			scope: scope,
 			parent: parent,
-			main: dom
+			main: dom,
 		};
 	} else {
 		const entries = Object.entries(cache);
@@ -238,7 +235,7 @@ export const makePursx_ = (tryHydration) => (a) => (state) => () => {
 		state.scopes[scope].push(namespacedKey);
 	});
 	if (!dom) {
-		connectXToY_(ptr, parent, state);
+		connectXToY_(maybe, ptr, parent, state);
 	}
 };
 
@@ -263,7 +260,7 @@ export const disconnectElement_ = (a) => (state) => () => {
 	}
 	if (
 		state.units[ptr].containingScope &&
-		state.units[ptr].containingScope !== a.scope
+		!(a.scopeEq(state.units[ptr].containingScope)(a.scope))
 	) {
 		return;
 	}

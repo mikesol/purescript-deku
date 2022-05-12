@@ -4,7 +4,8 @@ import Control.Plus (empty)
 import Deku.Attribute (Attribute)
 import Deku.Control (elementify)
 import Control.Monad.ST.Class (class MonadST)
-import Deku.Core (Domable(..), FixedChildren(..))
+import Deku.Core (Domable)
+import Bolson.Core (Entity(..), fixed)
 import FRP.Event (AnEvent)
 
 data Html_
@@ -15,8 +16,7 @@ html
   => AnEvent m (Attribute Html_)
   -> Array (Domable m lock payload)
   -> Domable m lock payload
-html attributes kids = Element'
-  (elementify "html" attributes (FixedChildren' (FixedChildren kids)))
+html attributes kids = Element' (elementify "html" attributes (fixed kids))
 
 html_
   :: forall s m lock payload

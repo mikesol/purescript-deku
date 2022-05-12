@@ -4,7 +4,8 @@ import Control.Plus (empty)
 import Deku.Attribute (Attribute)
 import Deku.Control (elementify)
 import Control.Monad.ST.Class (class MonadST)
-import Deku.Core (Domable(..), FixedChildren(..))
+import Deku.Core (Domable)
+import Bolson.Core (Entity(..), fixed)
 import FRP.Event (AnEvent)
 
 data B_
@@ -15,8 +16,7 @@ b
   => AnEvent m (Attribute B_)
   -> Array (Domable m lock payload)
   -> Domable m lock payload
-b attributes kids = Element'
-  (elementify "b" attributes (FixedChildren' (FixedChildren kids)))
+b attributes kids = Element' (elementify "b" attributes (fixed kids))
 
 b_
   :: forall s m lock payload

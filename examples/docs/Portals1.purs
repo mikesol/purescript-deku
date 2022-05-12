@@ -11,7 +11,7 @@ import Data.Monoid.Always (class Always, always)
 import Data.Profunctor (lcmap)
 import Deku.Attribute (cb, (:=))
 import Deku.Control (portal, switcher, text_)
-import Deku.Core (Child(..), Domable, dyn)
+import Deku.Core (Domable, dyn, insert)
 import Deku.DOM as D
 import Deku.Example.Docs.Types (Page(..))
 import Deku.Example.Docs.Util (scrollToTop)
@@ -129,7 +129,7 @@ main = runInBody1
 
       ( dyn $ bus $ lcmap (map always) \push -> lcmap (alt (bang unit))
           \event -> do
-            bang $ Insert $ portal
+            bang $ insert $ portal
               ( map
                   ( \i -> D.video
                       (oneOfMap bang [ D.Controls := "true", D.Width := "250" ])

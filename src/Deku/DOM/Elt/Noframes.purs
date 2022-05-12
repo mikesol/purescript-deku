@@ -4,7 +4,8 @@ import Control.Plus (empty)
 import Deku.Attribute (Attribute)
 import Deku.Control (elementify)
 import Control.Monad.ST.Class (class MonadST)
-import Deku.Core (Domable(..), FixedChildren(..))
+import Deku.Core (Domable)
+import Bolson.Core (Entity(..), fixed)
 import FRP.Event (AnEvent)
 
 data Noframes_
@@ -15,8 +16,7 @@ noframes
   => AnEvent m (Attribute Noframes_)
   -> Array (Domable m lock payload)
   -> Domable m lock payload
-noframes attributes kids = Element'
-  (elementify "noframes" attributes (FixedChildren' (FixedChildren kids)))
+noframes attributes kids = Element' (elementify "noframes" attributes (fixed kids))
 
 noframes_
   :: forall s m lock payload

@@ -7,15 +7,19 @@ print_('''module Deku.Pursx where
 
 import Prelude
 
+import Bolson.Control as Bolson
+import Bolson.Core (Element(..), Entity(..), PSR)
 import Control.Alt ((<|>))
-import Data.Reflectable (class Reflectable, reflectType)
-import Control.Plus (empty)
 import Control.Monad.ST.Class (class MonadST)
-import Data.Symbol (class IsSymbol)
+import Control.Plus (empty)
+import Data.Maybe (Maybe(..))
+import Data.Newtype (unwrap)
 import Data.Profunctor (lcmap)
+import Data.Reflectable (class Reflectable, reflectType)
+import Data.Symbol (class IsSymbol)
 import Deku.Attribute (Attribute, AttributeValue(..), unsafeUnAttribute)
-import Deku.Core (DOMInterpret(..), Element(..), Domable(..))
-import Deku.Control(__internalDekuFlatten)
+import Deku.Control (elementify)
+import Deku.Core (DOMInterpret(..), Domable, Node(..))
 import Deku.DOM (class TagToDeku)
 import FRP.Event (AnEvent, bang, subscribe, makeEvent)
 import Foreign.Object as Object
@@ -153,7 +157,7 @@ class
     :: String
     -> Proxy rl
     -> { | r }
-    -> { cache :: Object.Object Boolean, element :: Element m lock payload }
+    -> { cache :: Object.Object Boolean, element :: Node m lock payload }
 
 instance pursxToElementConsInsert ::
   ( Row.Cons key (PursxElement m lock payload) r' r
@@ -162,15 +166,25 @@ instance pursxToElementConsInsert ::
   , IsSymbol key
   , MonadST s m
   ) =>
-  PursxToElement m lock payload (RL.Cons key (PursxElement m lock payload) rest) r where
+  PursxToElement m
+    lock
+    payload
+    (RL.Cons key (PursxElement m lock payload) rest)
+    r where
   pursxToElement pxScope _ r =
     let
       { cache, element } = pursxToElement pxScope (Proxy :: Proxy rest) r
     in
       { cache: Object.insert (reflectType pxk) false cache
-      , element: Element \info di ->
-          __internalDekuFlatten {parent: reflectType pxk <> pxScope, scope: info.scope, raiseId: \_ -> pure unit } di pxe
-            <|> (let Element y = element in y) info di
+      , element: Node \info di ->
+          __internalDekuFlatten
+            { parent: Just (reflectType pxk <> pxScope)
+            , scope: info.scope
+            , raiseId: \_ -> pure unit
+            }
+            di
+            pxe
+            <|> (let Node y = element in y) info di
       }
     where
     pxk = Proxy :: _ key
@@ -183,35 +197,42 @@ else instance pursxToElementConsAttr ::
   , IsSymbol key
   , MonadST s m
   ) =>
-  PursxToElement m lock payload (RL.Cons key (AnEvent m (Attribute deku)) rest) r where
+  PursxToElement m
+    lock
+    payload
+    (RL.Cons key (AnEvent m (Attribute deku)) rest)
+    r where
   pursxToElement pxScope _ r =
     let
       { cache, element } = pursxToElement pxScope (Proxy :: Proxy rest) r
     in
       { cache: Object.insert (reflectType pxk) true cache
-      , element: Element \parent di@(DOMInterpret { setProp, setCb }) ->
+      , element: Node \parent di@(DOMInterpret { setProp, setCb }) ->
           map
             ( lcmap unsafeUnAttribute
                 ( \{ key, value } -> case value of
-                    Prop' p -> setProp { id: ((reflectType pxk) <> pxScope)
-                            , key
-                            , value: p
-                            }
-                    Cb' c -> setCb { id: ((reflectType pxk) <> pxScope)
-                            , key
-                            , value: c
-                            }
+                    Prop' p -> setProp
+                      { id: ((reflectType pxk) <> pxScope)
+                      , key
+                      , value: p
+                      }
+                    Cb' c -> setCb
+                      { id: ((reflectType pxk) <> pxScope)
+                      , key
+                      , value: c
+                      }
                 )
             )
             (get pxk r)
-            <|> (let Element y = element in y) parent di
+            <|> (let Node y = element in y) parent di
       }
     where
     pxk = Proxy :: _ key
 
 instance pursxToElementNil ::
-  Applicative m => PursxToElement m lock payload RL.Nil r where
-  pursxToElement _ _ _ = { cache: Object.empty, element: Element \_ _ -> empty }
+  Applicative m =>
+  PursxToElement m lock payload RL.Nil r where
+  pursxToElement _ _ _ = { cache: Object.empty, element: Node \_ _ -> empty }
 
 psx
   :: forall s m lock payload (html :: Symbol)
@@ -247,7 +268,7 @@ makePursx'
   -> Proxy html
   -> { | r }
   -> Domable m lock payload
-makePursx' verb html r = Element' $ Element go
+makePursx' verb html r = Element' $ Node go
   where
   go
     z@{ parent, scope, raiseId }
@@ -257,7 +278,7 @@ makePursx' verb html r = Element' $ Element go
       pxScope <- ids
       raiseId me
       let
-        { cache, element: Element element } = pursxToElement
+        { cache, element: Node element } = pursxToElement
           pxScope
           (Proxy :: _ rl)
           r
@@ -276,6 +297,23 @@ makePursx' verb html r = Element' $ Element go
             ) <|> element z di
           )
           k1
+
+__internalDekuFlatten
+  :: forall s m lock payload
+   . MonadST s m
+  => PSR m
+  -> DOMInterpret m payload
+  -> Domable m lock payload
+  -> AnEvent m payload
+__internalDekuFlatten = Bolson.flatten
+  { doLogic: \_ (DOMInterpret { sendToTop }) id -> sendToTop { id }
+  , ids: unwrap >>> _.ids
+  , disconnectElement:
+      \(DOMInterpret { disconnectElement }) { id, scope, parent } ->
+        disconnectElement { id, scope, parent, scopeEq: eq }
+  , wrapElt: Element' <<< elementify "div" empty
+  , toElt: \(Node e) -> Element e
+  }
 
 infixr 5 makePursx as ~~
 

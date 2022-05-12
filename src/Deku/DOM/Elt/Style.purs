@@ -4,7 +4,8 @@ import Control.Plus (empty)
 import Deku.Attribute (Attribute)
 import Deku.Control (elementify)
 import Control.Monad.ST.Class (class MonadST)
-import Deku.Core (Domable(..), FixedChildren(..))
+import Deku.Core (Domable)
+import Bolson.Core (Entity(..), fixed)
 import FRP.Event (AnEvent)
 
 data Style_
@@ -15,8 +16,7 @@ style
   => AnEvent m (Attribute Style_)
   -> Array (Domable m lock payload)
   -> Domable m lock payload
-style attributes kids = Element'
-  (elementify "style" attributes (FixedChildren' (FixedChildren kids)))
+style attributes kids = Element' (elementify "style" attributes (fixed kids))
 
 style_
   :: forall s m lock payload

@@ -3,13 +3,13 @@ module Deku.Example.Portal where
 import Prelude
 
 import Control.Alt (alt)
-import Data.Foldable (oneOfMap)
-import Data.Profunctor (lcmap)
 import Data.FastVect.FastVect (index, (:))
 import Data.FastVect.FastVect as V
+import Data.Foldable (oneOfMap)
+import Data.Profunctor (lcmap)
 import Deku.Attribute (cb, (:=))
 import Deku.Control (portal, switcher, text_)
-import Deku.Core (Child(..), dyn)
+import Deku.Core (dyn, insert)
 import Deku.DOM as D
 import Deku.Toplevel (runInBody)
 import Effect (Effect)
@@ -25,7 +25,7 @@ main = runInBody
           [ text_ "Switching portals should flip between them"
           , D.div_
               [ dyn $ bus \push -> lcmap (alt (bang unit)) \event -> bang
-                  $ Insert
+                  $ insert
                   $
                     portal
                       ( map
@@ -65,7 +65,7 @@ main = runInBody
           [ text_ "Single portals should not accumulate"
           , D.div_
               [ dyn $ bus \push -> lcmap (alt (bang unit)) \event -> bang
-                  $ Insert
+                  $ insert
                   $
                     portal
                       ( map
@@ -104,7 +104,7 @@ main = runInBody
           [ text_ "Portal should come in and out"
           , D.div_
               [ dyn $ bus \push -> lcmap (alt (bang unit)) \event -> bang
-                  $ Insert
+                  $ insert
                   $
                     portal
                       ( map

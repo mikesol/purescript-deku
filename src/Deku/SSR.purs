@@ -7,7 +7,7 @@ import Data.Array (findMap, (!!))
 import Data.Filterable (filterMap)
 import Data.Map as Map
 import Data.Maybe (Maybe(..), fromMaybe, maybe)
-import Data.Traversable (foldMap, intercalate, traverse)
+import Data.Traversable (foldMap, for_, intercalate, traverse)
 import Deku.Core as Core
 import Deku.Interpret (Instruction(..))
 
@@ -51,9 +51,11 @@ ssr' topTag arr = "<" <> topTag <> " data-deku-ssr-deku-root=\"true\">"
   { parentToChild, idToActions } = execState
     ( traverse
         ( \i -> case i of
-            MakeElement { parent, id } -> making parent id i
-            MakeText { parent, id } -> making parent id i
-            MakePursx { parent, id } -> making parent id i
+            -- for now, ssr ignores portals
+            -- so we case on parents being Just
+            MakeElement { parent, id } -> for_ parent \p -> making p id i
+            MakeText { parent, id } -> for_ parent \p -> making p id i
+            MakePursx { parent, id } -> for_ parent \p -> making p id i
             SetProp { id } -> setting id i
             SetText { id } -> setting id i
         )

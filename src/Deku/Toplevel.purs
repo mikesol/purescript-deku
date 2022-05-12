@@ -2,19 +2,22 @@ module Deku.Toplevel where
 
 import Prelude
 
+import Bolson.Control as Bolson
+import Bolson.Core (Element(..), Entity(..), PSR, Scope(..))
 import Control.Monad.ST (ST)
 import Control.Monad.ST.Class (class MonadST, liftST)
-import Control.Monad.ST.Global (Global)
 import Control.Monad.ST.Internal as RRef
-import Data.Maybe (maybe)
-import Data.Newtype (class Newtype)
-import Deku.Control (__internalDekuFlatten, deku, deku1, deku2, dekuA, deleteMeASAP)
-import Deku.Core (Domable, Element)
+import Control.Plus (empty)
+import Data.Maybe (Maybe(..), maybe)
+import Data.Newtype (class Newtype, unwrap)
+import Deku.Control (deku, deku1, dekuA, elementify)
+import Deku.Core (DOMInterpret(..), Domable, Node(..))
 import Deku.Interpret (FFIDOMSnapshot, Instruction, fullDOMInterpret, hydratingDOMInterpret, makeFFIDOMSnapshot, ssrDOMInterpret)
-import Deku.SSR (ssr, ssr')
+import Deku.SSR (ssr')
 import Effect (Effect)
 import Effect.Ref as Ref
-import FRP.Event (Event, subscribe)
+import FRP.Event (AnEvent, Event, subscribe)
+import Unsafe.Coerce (unsafeCoerce)
 import Web.DOM.Element as Web.DOM
 import Web.HTML (window)
 import Web.HTML.HTMLDocument (body)
@@ -37,15 +40,6 @@ runInElement1'
 runInElement1' elt eee = do
   ffi <- makeFFIDOMSnapshot
   evt <- Ref.new 0 <#> (deku1 elt eee <<< fullDOMInterpret)
-  subscribe evt \i -> i ffi
-
-runInElement2'
-  :: Web.DOM.Element
-  -> (forall lock. Element Effect lock (FFIDOMSnapshot -> Effect Unit))
-  -> Effect (Effect Unit)
-runInElement2' elt eee = do
-  ffi <- makeFFIDOMSnapshot
-  evt <- Ref.new 0 <#> (deku2 elt eee <<< fullDOMInterpret)
   subscribe evt \i -> i ffi
 
 runInElementA'
@@ -71,13 +65,6 @@ runInBody1' eee = do
   b' <- window >>= document >>= body
   maybe mempty (\elt -> runInElement1' elt eee) (toElement <$> b')
 
-runInBody2'
-  :: (forall lock. Element Effect lock (FFIDOMSnapshot -> Effect Unit))
-  -> Effect (Effect Unit)
-runInBody2' eee = do
-  b' <- window >>= document >>= body
-  maybe mempty (\elt -> runInElement2' elt eee) (toElement <$> b')
-
 runInBodyA'
   :: (forall lock. Array (Domable Effect lock (FFIDOMSnapshot -> Effect Unit)))
   -> Effect (Effect Unit)
@@ -95,11 +82,6 @@ runInBody1
   -> Effect Unit
 runInBody1 a = void (runInBody1' a)
 
-runInBody2
-  :: (forall lock. Element Effect lock (FFIDOMSnapshot -> Effect Unit))
-  -> Effect Unit
-runInBody2 a = void (runInBody2' a)
-
 runInBodyA
   :: (forall lock. Array (Domable Effect lock (FFIDOMSnapshot -> Effect Unit)))
   -> Effect Unit
@@ -115,9 +97,9 @@ hydrate' children = do
   di <- Ref.new 0 <#> hydratingDOMInterpret
   subscribe
     ( __internalDekuFlatten
-        { parent: "deku-root", scope: "rootScope", raiseId: \_ -> pure unit }
+        { parent: Just "deku-root", scope: Local "rootScope", raiseId: \_ -> pure unit }
         di
-        (deleteMeASAP children)
+        (unsafeCoerce children)
     )
     \i -> i ffi
 
@@ -161,13 +143,30 @@ runSSR' topTag (Template { head, tail }) children =
           let di = ssrDOMInterpret seed
           void $ subscribe
             ( __internalDekuFlatten
-                { parent: "deku-root"
-                , scope: "rootScope"
+                { parent: Just "deku-root"
+                , scope: Local "rootScope"
                 , raiseId: \_ -> pure unit
                 }
                 di
-                (deleteMeASAP children)
+                (unsafeCoerce children)
             )
             \i -> i instr
           RRef.read instr
       )
+
+__internalDekuFlatten
+  :: forall s m lock payload
+   . MonadST s m
+  => PSR m
+  -> DOMInterpret m payload
+  -> Domable m lock payload
+  -> AnEvent m payload
+__internalDekuFlatten = Bolson.flatten
+  { doLogic: \_ (DOMInterpret { sendToTop }) id -> sendToTop { id }
+  , ids: unwrap >>> _.ids
+  , disconnectElement:
+      \(DOMInterpret { disconnectElement }) { id, scope, parent } ->
+        disconnectElement { id, scope, parent, scopeEq: eq }
+  , wrapElt: Element' <<< elementify "div" empty
+  , toElt: \(Node e) -> Element e
+  }

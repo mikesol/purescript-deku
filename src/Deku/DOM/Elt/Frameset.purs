@@ -4,7 +4,8 @@ import Control.Plus (empty)
 import Deku.Attribute (Attribute)
 import Deku.Control (elementify)
 import Control.Monad.ST.Class (class MonadST)
-import Deku.Core (Domable(..), FixedChildren(..))
+import Deku.Core (Domable)
+import Bolson.Core (Entity(..), fixed)
 import FRP.Event (AnEvent)
 
 data Frameset_
@@ -15,8 +16,7 @@ frameset
   => AnEvent m (Attribute Frameset_)
   -> Array (Domable m lock payload)
   -> Domable m lock payload
-frameset attributes kids = Element'
-  (elementify "frameset" attributes (FixedChildren' (FixedChildren kids)))
+frameset attributes kids = Element' (elementify "frameset" attributes (fixed kids))
 
 frameset_
   :: forall s m lock payload

@@ -4,7 +4,8 @@ import Control.Plus (empty)
 import Deku.Attribute (Attribute)
 import Deku.Control (elementify)
 import Control.Monad.ST.Class (class MonadST)
-import Deku.Core (Domable(..), FixedChildren(..))
+import Deku.Core (Domable)
+import Bolson.Core (Entity(..), fixed)
 import FRP.Event (AnEvent)
 
 data Dir_
@@ -15,8 +16,7 @@ dir
   => AnEvent m (Attribute Dir_)
   -> Array (Domable m lock payload)
   -> Domable m lock payload
-dir attributes kids = Element'
-  (elementify "dir" attributes (FixedChildren' (FixedChildren kids)))
+dir attributes kids = Element' (elementify "dir" attributes (fixed kids))
 
 dir_
   :: forall s m lock payload
