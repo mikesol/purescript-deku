@@ -1,4 +1,5 @@
 const connectXToY_ = (maybe, x, y$, state) => {
+	//console.log(x, y$);
 	maybe((y) => state.units[y].main.appendChild(state.units[x].main))(y$);
 };
 
@@ -12,11 +13,13 @@ export const makeElement_ = (tryHydration) => (maybe) => (a) => (state) => () =>
 	// note that, for portals, this will be broken in its current form
 	if (
 		tryHydration &&
-		a.parent !== "@portal@" &&
+		// hack
+		a.parent.value0 &&
 		(dom = document.body
 			.querySelectorAll("[data-deku-ssr-" + ptr + "]")
 			.item(0))
 	) {
+		//console.log('hydrating', ptr);
 		state.units[ptr] = {
 			listeners: {},
 			parent: a.parent,
@@ -24,6 +27,7 @@ export const makeElement_ = (tryHydration) => (maybe) => (a) => (state) => () =>
 			main: dom,
 		};
 	} else {
+		//console.log("doing ssr for", ptr);
 		state.units[ptr] = {
 			listeners: {},
 			parent: a.parent,
@@ -44,9 +48,11 @@ export const makeText_ = (tryHydration) => (maybe) => (a) => (state) => () => {
 	// note that, for portals, this will be broken in its current form
 	if (
 		tryHydration &&
-		a.parent !== "@portal@" &&
+		// hack
+		a.parent.value0 &&
 		(dom = document.body
-			.querySelectorAll("[data-deku-ssr-" + a.parent + "]")
+			// hack
+			.querySelectorAll("[data-deku-ssr-" + a.parent.value0 + "]")
 			.item(0))
 	) {
 		state.units[ptr] = {
@@ -161,7 +167,8 @@ export const makePursx_ = (tryHydration) => (maybe) => (a) => (state) => () => {
 	// note that, for portals, this will be broken in its current form
 	if (
 		tryHydration &&
-		parent !== "@portal@" &&
+		// hack
+		a.parent.value0 &&
 		(dom = document.body
 			.querySelectorAll("[data-deku-ssr-" + ptr + "]")
 			.item(0))
