@@ -305,7 +305,15 @@ __internalDekuFlatten
   -> DOMInterpret m payload
   -> Domable m lock payload
   -> AnEvent m payload
-__internalDekuFlatten = Bolson.flatten (\_ (DOMInterpret { sendToTop }) id -> sendToTop { id })  (unwrap >>> _.ids) (\(DOMInterpret { disconnectElement } ) {id,scope,parent} -> disconnectElement { id,scope,parent,scopeEq:eq })  (\e -> Element' $ elementify "div" empty e) (\(Node e) -> Element e) (\(Element e) -> Node e)
+__internalDekuFlatten = Bolson.flatten
+  { doLogic: \_ (DOMInterpret { sendToTop }) id -> sendToTop { id }
+  , ids: unwrap >>> _.ids
+  , disconnectElement:
+      \(DOMInterpret { disconnectElement }) { id, scope, parent } ->
+        disconnectElement { id, scope, parent, scopeEq: eq }
+  , wrapElt: Element' <<< elementify "div" empty
+  , toElt: \(Node e) -> Element e
+  }
 
 infixr 5 makePursx as ~~
 

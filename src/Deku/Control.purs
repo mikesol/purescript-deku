@@ -12,8 +12,8 @@ module Deku.Control
 
 import Prelude
 
-import Bolson.Control as Bolson
 import Bolson.Control (switcher)
+import Bolson.Control as Bolson
 import Bolson.Core (Element(..), Entity(..), EventfulElement(..), FixedChildren(..), PSR, Scope(..))
 import Control.Alt ((<|>))
 import Control.Monad.ST.Class (class MonadST)
@@ -29,6 +29,8 @@ import Prim.Int (class Compare)
 import Prim.Ordering (GT)
 import Unsafe.Coerce (unsafeCoerce)
 import Web.DOM as Web.DOM
+
+type Neg1 = -1
 
 ----
 unsafeElement
@@ -96,19 +98,30 @@ elementify tag atts children = Node go
         )
         k
 
-
 globalPortal
   :: forall n s m lock payload
-   . Compare n (-1) GT
-  => MonadST s m => Vect n (Domable m lock payload)
+   . Compare n Neg1 GT
+  => MonadST s m
+  => Vect n (Domable m lock payload)
   -> (Vect n (Domable m lock payload) -> Domable m lock payload)
   -> Domable m lock payload
-globalPortal = Bolson.globalPortal (\_ (DOMInterpret { sendToTop }) id -> sendToTop { id })  (unwrap >>> _.ids) (\(DOMInterpret { disconnectElement } ) {id,scope,parent} -> disconnectElement { id,scope,parent,scopeEq:eq }) (\e -> Element' $ elementify "div" empty e) (\(Node e) -> Element e) (\(Element e) -> Node e)  (unwrap >>> _.giveNewParent) (unwrap >>> _.deleteFromCache)
-
+globalPortal = Bolson.globalPortal
+  { doLogic: \_ (DOMInterpret { sendToTop }) id -> sendToTop { id }
+  , ids: unwrap >>> _.ids
+  , disconnectElement:
+      \(DOMInterpret { disconnectElement }) { id, scope, parent } ->
+        disconnectElement { id, scope, parent, scopeEq: eq }
+  , wrapElt: Element' <<< elementify "div" empty
+  , toElt: \(Node e) -> Element e
+  }
+  { fromElt: \(Element e) -> Node e
+  , giveNewParent: unwrap >>> _.giveNewParent
+  , deleteFromCache: unwrap >>> _.deleteFromCache
+  }
 
 portal
   :: forall n s m lock0 payload
-   . Compare n (-1) GT
+   . Compare n Neg1 GT
   => MonadST s m
   => Vect n (Domable m lock0 payload)
   -> ( forall lockfoo
@@ -117,7 +130,21 @@ portal
        -> Domable m lockfoo payload
      )
   -> Domable m lock0 payload
-portal a b = Bolson.portal (\_ (DOMInterpret { sendToTop }) id -> sendToTop { id })  (unwrap >>> _.ids) (\(DOMInterpret { disconnectElement } ) {id,scope,parent} -> disconnectElement { id,scope,parent,scopeEq:eq }) (\e -> Element' $ elementify "div" empty e) (\(Node e) -> Element e) (\(Element e) -> Node e)  (unwrap >>> _.giveNewParent) (unwrap >>> _.deleteFromCache)  a (unsafeCoerce b)
+portal a b = Bolson.portal
+  { doLogic: \_ (DOMInterpret { sendToTop }) id -> sendToTop { id }
+  , ids: unwrap >>> _.ids
+  , disconnectElement:
+      \(DOMInterpret { disconnectElement }) { id, scope, parent } ->
+        disconnectElement { id, scope, parent, scopeEq: eq }
+  , wrapElt: Element' <<< elementify "div" empty
+  , toElt: \(Node e) -> Element e
+  }
+  { fromElt: \(Element e) -> Node e
+  , giveNewParent: unwrap >>> _.giveNewParent
+  , deleteFromCache: unwrap >>> _.deleteFromCache
+  }
+  a
+  (unsafeCoerce b)
 
 text
   :: forall m lock payload
@@ -153,7 +180,10 @@ deku root children di@(DOMInterpret { ids, makeRoot }) = makeEvent \k -> do
   subscribe
     ( bang (makeRoot { id: me, root })
         <|> __internalDekuFlatten
-          { parent: Just me, scope: Local "rootScope", raiseId: \_ -> pure unit }
+          { parent: Just me
+          , scope: Local "rootScope"
+          , raiseId: \_ -> pure unit
+          }
           di
           (unsafeCoerce children)
     )
@@ -177,7 +207,6 @@ dekuA
   -> AnEvent m payload
 dekuA root children = deku root (FixedChildren' $ FixedChildren children)
 
-
 data Stage = Begin | Middle | End
 
 __internalDekuFlatten
@@ -187,4 +216,12 @@ __internalDekuFlatten
   -> DOMInterpret m payload
   -> Domable m lock payload
   -> AnEvent m payload
-__internalDekuFlatten = Bolson.flatten (\_ (DOMInterpret { sendToTop }) id -> sendToTop { id })  (unwrap >>> _.ids) (\(DOMInterpret { disconnectElement } ) {id,scope,parent} -> disconnectElement { id,scope,parent,scopeEq:eq })  (\e -> Element' $ elementify "div" empty e) (\(Node e) -> Element e) (\(Element e) -> Node e)
+__internalDekuFlatten = Bolson.flatten
+  { doLogic: \_ (DOMInterpret { sendToTop }) id -> sendToTop { id }
+  , ids: unwrap >>> _.ids
+  , disconnectElement:
+      \(DOMInterpret { disconnectElement }) { id, scope, parent } ->
+        disconnectElement { id, scope, parent, scopeEq: eq }
+  , wrapElt: Element' <<< elementify "div" empty
+  , toElt: \(Node e) -> Element e
+  }
