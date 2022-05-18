@@ -3,17 +3,14 @@ module Deku.Example.Docs.Events where
 import Prelude
 
 import Control.Alt ((<|>))
-import Data.Profunctor (lcmap)
-import Deku.Always (halways)
 import Deku.Attribute (cb, (:=))
 import Deku.Control (text, text_)
-import Deku.Core (vbussed)
 import Deku.DOM as D
 import Deku.Example.Docs.Types (Page(..))
 import Deku.Example.Docs.Util (scrollToTop)
 import Deku.Listeners (click_, slider)
 import Deku.Pursx (nut, (~~))
-import Deku.TLDW (Nut)
+import Deku.TLDW (Nut, avbussed)
 import Effect (Effect)
 import FRP.Event (bang, fold)
 import FRP.Event.VBus (V)
@@ -109,7 +106,7 @@ main = runInBody1
           ]
       )
   , result: nut
-      ( vbussed (Proxy :: _ UIEvents) $ lcmap halways \push event -> do
+      ( avbussed (Proxy :: _ UIEvents) \push event -> do
           D.div_
             [ D.button
                 (click_ (bang push.buttonClicked))

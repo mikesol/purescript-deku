@@ -3,15 +3,10 @@ module Deku.Examples.Docs.Examples.SSR.App where
 import Prelude
 
 import Control.Alt ((<|>))
-import Control.Monad.ST.Class (class MonadST)
-import Data.Monoid.Always (class Always)
-import Data.Profunctor (lcmap)
-import Deku.Always (halways)
 import Deku.Control (text, text_)
-import Deku.Core (Domable, vbussed)
 import Deku.DOM as D
 import Deku.Listeners (click_, slider)
-import Effect (Effect)
+import Deku.TLDW (Nut, avbussed)
 import FRP.Event (bang, fold)
 import FRP.Event.VBus (V)
 import Type.Proxy (Proxy(..))
@@ -21,12 +16,8 @@ type UIEvents = V
   , sliderMoved :: Number
   )
 
-app
-  :: forall s m lock payload
-   . MonadST s m
-  => Always (m Unit) (Effect Unit)
-  => Domable m lock payload
-app = vbussed (Proxy :: _ UIEvents) $ lcmap halways \push event -> do
+app :: Nut
+app = avbussed (Proxy :: _ UIEvents) \push event -> do
   D.div_
     [ D.p_
         [ text_

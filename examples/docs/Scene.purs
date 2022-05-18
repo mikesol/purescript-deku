@@ -4,12 +4,10 @@ import Prelude
 
 import Control.Alt ((<|>))
 import Data.Foldable (oneOfMap)
-import Data.Monoid.Always (always)
 import Data.Profunctor (lcmap)
 import Data.Tuple.Nested ((/\))
 import Deku.Attribute (cb, (:=))
 import Deku.Control (switcher, text_)
-import Deku.Core (bussed)
 import Deku.DOM as D
 import Deku.Example.Docs.Component as Component
 import Deku.Example.Docs.Effects as Effects
@@ -22,11 +20,11 @@ import Deku.Example.Docs.Pursx1 as Pursx1
 import Deku.Example.Docs.Pursx2 as Pursx2
 import Deku.Example.Docs.SSR as SSR
 import Deku.Example.Docs.Types (Page(..))
-import Deku.TLDW (Nut)
+import Deku.TLDW (Nut, abussed)
 import FRP.Event (bang)
 
 scene :: Nut
-scene = bussed $ (lcmap (map always)) \push -> lcmap (bang Intro <|> _)
+scene = abussed \push -> lcmap (bang Intro <|> _)
   \event ->
     D.div_
       [ D.div_

@@ -6,7 +6,6 @@ import Control.Alt (alt)
 import Data.FastVect.FastVect ((:), index)
 import Data.FastVect.FastVect as V
 import Data.Foldable (oneOfMap)
-import Data.Monoid.Always (always)
 import Data.Profunctor (lcmap)
 import Deku.Attribute (cb, (:=))
 import Deku.Control (portal, switcher, text_)
@@ -15,9 +14,9 @@ import Deku.DOM as D
 import Deku.Example.Docs.Types (Page(..))
 import Deku.Example.Docs.Util (scrollToTop)
 import Deku.Pursx (nut, (~~))
-import Deku.TLDW (Nut)
+import Deku.TLDW (Nut, abus)
 import Effect (Effect)
-import FRP.Event (bang, bus, fold)
+import FRP.Event (bang, fold)
 import Type.Proxy (Proxy(..))
 
 data MainUIAction
@@ -119,7 +118,7 @@ main = runInBody1
       )
   , result: nut
 
-      ( dyn $ bus $ lcmap (map always) \push -> lcmap (alt (bang unit))
+      ( dyn $ abus \push -> lcmap (alt (bang unit))
           \event -> do
             bang $ insert $ portal
               ( map

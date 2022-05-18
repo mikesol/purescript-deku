@@ -3,15 +3,12 @@ module Deku.Example.Docs.SSR where
 import Prelude
 
 import Control.Alt ((<|>))
-import Data.Profunctor (lcmap)
-import Deku.Always (halways)
 import Deku.Control (text, text_)
-import Deku.Core (vbussed)
 import Deku.DOM as D
 import Deku.Example.Docs.Types (Page)
 import Deku.Listeners (click_, slider)
 import Deku.Pursx (nut, (~~))
-import Deku.TLDW (Nut)
+import Deku.TLDW (Nut, avbussed)
 import Deku.Toplevel (Template(..), runSSR)
 import Effect (Effect)
 import FRP.Event (bang, fold, makeEvent)
@@ -53,7 +50,7 @@ px =
   </ul>
 
   <h3>App</h3>
-  <p>Unlike the previous examples that used <code>runInBody</code>, our application code here has a slightly more complicated type. This is because it is polymorphic over <code>m</code>, and <code>m</code> will be different depending on if we are doing SSR or if we are on the live page. Also note the use of the function <code>halways</code>. This is needed before our pushers so that they will be lifted into the correct monad.</p>
+  <p>Unlike the previous examples that used <code>runInBody</code>, our application code here has a slightly more complicated type. This is because it is polymorphic over <code>m</code>, and <code>m</code> will be different depending on if we are doing SSR or if we are on the live page.</p>
   ~code0~
   <h3>Build</h3>
   <p>This is the code we use to generate our HTML site. The example below creates a small script that logs our HTML to the command line,but we can also call <code>runSSR</code> from a NodeJS server, in which case we wouldn't <code>log</code> the HTML string but rather we would instead send it over the wire as the response to a request.</p>
@@ -77,7 +74,7 @@ px =
 </div>"""
 
 app :: Nut
-app = vbussed (Proxy :: _ UIEvents) $ lcmap halways \push event -> do
+app = avbussed (Proxy :: _ UIEvents) \push event -> do
   D.div_
     [ D.p_
         [ text_
@@ -169,15 +166,10 @@ main =
 import Prelude
 
 import Control.Alt ((<|>))
-import Control.Monad.ST.Class (class MonadST)
-import Data.Monoid.Always (class Always)
-import Data.Profunctor (lcmap)
-import Deku.Always (halways)
 import Deku.Control (text, text_)
-import Deku.Core (Domable, vbussed)
 import Deku.DOM as D
 import Deku.Listeners (click_, slider)
-import Effect (Effect)
+import Deku.TLDW (Nut, avbussed)
 import FRP.Event (bang, fold)
 import FRP.Event.VBus (V)
 import Type.Proxy (Proxy(..))
@@ -187,23 +179,14 @@ type UIEvents = V
   , sliderMoved :: Number
   )
 
-app
-  :: forall s m lock payload
-   . MonadST s m
-  => Always (m Unit) (Effect Unit)
-  => Domable m lock payload
-app = vbussed (Proxy :: _ UIEvents) $ lcmap halways \push event -> do
+app :: Nut
+app = avbussed (Proxy :: _ UIEvents) \push event -> do
   D.div_
     [ D.p_
         [ text_
-            """ <> "\"\"\""
-                      <>
-                        """Here's an example of SSR in deku.
+            """ <> "\"\"\"" <> """Here's an example of SSR in deku.
 All of the static bits are rendered as HTML,
-and all of the dynamic bits are hydrated on page load."""
-                      <> "\"\"\""
-                      <>
-                        """
+and all of the dynamic bits are hydrated on page load.""" <> "\"\"\"" <> """
         ]
     , D.button
         (click_ (bang push.buttonClicked))

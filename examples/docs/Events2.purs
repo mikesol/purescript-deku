@@ -6,19 +6,18 @@ import Control.Alt ((<|>))
 import Data.Filterable (filterMap)
 import Data.Foldable (for_, oneOfMap)
 import Data.Maybe (Maybe(..))
-import Data.Monoid.Always (always)
 import Data.Profunctor (lcmap)
 import Data.Tuple.Nested ((/\))
 import Deku.Attribute (cb, (:=))
 import Deku.Control (text_)
-import Deku.Core (bussed, dyn, insert, remove, sendToTop)
+import Deku.Core (dyn, insert, remove, sendToTop)
 import Deku.DOM as D
 import Deku.Example.Docs.Types (Page(..))
 import Deku.Example.Docs.Util (scrollToTop)
 import Deku.Pursx (nut, (~~))
-import Deku.TLDW (Nut)
+import Deku.TLDW (Nut, abus, abussed)
 import Effect (Effect)
-import FRP.Event (bang, bus, keepLatest, mapAccum)
+import FRP.Event (bang, keepLatest, mapAccum)
 import Type.Proxy (Proxy(..))
 import Web.Event.Event (target)
 import Web.HTML.HTMLInputElement (fromEventTarget, value)
@@ -170,7 +169,7 @@ main = runInBody1
           ]
       )
   , result: nut
-      ( bussed $ lcmap (map always) \push -> lcmap (bang UIShown <|> _)
+      ( abussed \push -> lcmap (bang UIShown <|> _)
           \event -> do
             D.div_
               [ D.div_
@@ -199,7 +198,7 @@ main = runInBody1
                   ]
               , D.div_
                   [ dyn $ map
-                      ( \txt -> keepLatest $ bus $ lcmap (map always) \p' e' ->
+                      ( \txt -> keepLatest $ abus \p' e' ->
                           ( bang $ insert $ D.div_ do
                               [ D.span (bang $ D.Style := "margin: 5px;")
                                   [ text_ txt ]

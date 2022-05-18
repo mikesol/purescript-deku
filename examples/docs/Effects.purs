@@ -10,17 +10,14 @@ import Data.Either (Either(..))
 import Data.Filterable (filterMap, compact)
 import Data.HTTP.Method (Method(..))
 import Data.Maybe (Maybe(..))
-import Data.Monoid.Always (always)
-import Data.Profunctor (lcmap)
 import Data.Tuple.Nested ((/\))
 import Deku.Attribute (Cb, cb, (:=))
 import Deku.Control (text, text_)
-import Deku.Core (bussed)
 import Deku.DOM as D
 import Deku.Example.Docs.Types (Page(..))
 import Deku.Example.Docs.Util (scrollToTop)
 import Deku.Pursx (nut, (~~))
-import Deku.TLDW (Nut)
+import Deku.TLDW (Nut, abussed)
 import Effect (Effect)
 import Effect.Aff (launchAff_)
 import Effect.Class (liftEffect)
@@ -187,7 +184,7 @@ main = runInBody1
           ]
       )
   , result: nut
-      ( bussed $ lcmap (map always) \push event -> do
+      ( abussed \push event -> do
           let
             loadingOrResult = filterMap
               ( case _ of
