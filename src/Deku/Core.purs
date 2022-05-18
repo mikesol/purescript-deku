@@ -12,6 +12,10 @@ module Deku.Core
   , SetProp
   , SetCb
   , SetText
+  , Nut
+  , bus
+  , bussed
+  , vbussed
   , remove
   , sendToTop
   , insert
@@ -21,14 +25,61 @@ module Deku.Core
 
 import Prelude
 
-import Bolson.Core (Scope, vbussed, fixed, dyn, envy, bussed)
+import Bolson.Always (AlwaysEffect, halways)
+import Bolson.Core (Scope, fixed, dyn, envy)
 import Bolson.Core as Bolson
+import Control.Monad.ST.Class (class MonadST)
 import Data.Maybe (Maybe)
+import Data.Monoid.Always (class Always, always)
 import Data.Newtype (class Newtype)
+import Data.Profunctor (lcmap)
 import Deku.Attribute (Cb)
+import Effect (Effect)
+import FRP.Event as FRP.Event
 import FRP.Event (AnEvent)
+import FRP.Event.VBus (class VBus, V, vbus)
 import Foreign.Object (Object)
+import Heterogeneous.Mapping (class MapRecordWithIndex, ConstMapping)
+import Prim.RowList (class RowToList)
+import Type.Proxy (Proxy)
 import Web.DOM as Web.DOM
+
+type Nut =
+  forall s m lock payload
+   . MonadST s m
+  => Always (m Unit) (Effect Unit)
+  => Domable m lock payload
+
+bus
+  :: forall a b s m
+   . MonadST s m
+  => Always (m Unit) (Effect Unit)
+  => ((a -> Effect Unit) -> AnEvent m a -> b)
+  -> AnEvent m b
+bus f = FRP.Event.bus (lcmap (map (always :: m Unit -> Effect Unit)) f)
+
+bussed
+  :: forall s m lock logic obj a
+   . MonadST s m
+  => Always (m Unit) (Effect Unit)
+  => ((a -> Effect Unit) -> AnEvent m a -> Bolson.Entity logic obj m lock)
+  -> Bolson.Entity logic obj m lock
+bussed f = Bolson.EventfulElement' (Bolson.EventfulElement (bus f))
+
+vbussed
+  :: forall s m logic obj lock rbus bus pushi pusho pushR event u
+   . RowToList bus rbus
+  => MonadST s m
+  => RowToList pushi pushR
+  => MapRecordWithIndex pushR
+       (ConstMapping AlwaysEffect)
+       pushi
+       pusho
+  => VBus rbus pushi event u
+  => Proxy (V bus)
+  -> ({ | pusho } -> { | event } -> Bolson.Entity logic obj m lock)
+  -> Bolson.Entity logic obj m lock
+vbussed px f = Bolson.EventfulElement' (Bolson.EventfulElement (vbus px (lcmap halways f)))
 
 newtype Node m (lock :: Type) payload = Node
   (Bolson.PSR m -> DOMInterpret m payload -> AnEvent m payload)

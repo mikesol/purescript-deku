@@ -10,7 +10,7 @@ import Deku.Example.Docs.Types (Page(..))
 import Deku.Example.Docs.Util (scrollToTop)
 import Deku.Listeners (click_, slider)
 import Deku.Pursx (nut, (~~))
-import Deku.TLDW (Nut, avbussed)
+import Deku.Core (Nut, vbussed)
 import Effect (Effect)
 import FRP.Event (bang, fold)
 import FRP.Event.VBus (V)
@@ -106,7 +106,7 @@ main = runInBody1
           ]
       )
   , result: nut
-      ( avbussed (Proxy :: _ UIEvents) \push event -> do
+      ( vbussed (Proxy :: _ UIEvents) \push event -> do
           D.div_
             [ D.button
                 (click_ (bang push.buttonClicked))

@@ -7,12 +7,11 @@ import Data.Compactable (compact)
 import Data.Maybe (Maybe(..))
 import Deku.Attribute (cb, (:=))
 import Deku.Control (text, text_)
-import Deku.Core (dyn, insert)
+import Deku.Core (dyn, insert, Nut, bus)
 import Deku.DOM as D
 import Deku.Example.Docs.Types (Page(..))
 import Deku.Example.Docs.Util (scrollToTop)
 import Deku.Pursx (makePursx', nut, (~~))
-import Deku.TLDW (Nut, abus)
 import Effect (Effect)
 import FRP.Event (bang)
 import Type.Proxy (Proxy(..))
@@ -122,7 +121,7 @@ main = runInBody1
           ]
       )
   , result: nut
-      ( dyn $ abus \push event ->
+      ( dyn $ bus \push event ->
           bang $ insert $ myDom ~~
             { myli: bang (D.Style := "background-color:rgb(200,240,210);")
             , somethingNew: nut

@@ -20,11 +20,11 @@ import Deku.Example.Docs.Pursx1 as Pursx1
 import Deku.Example.Docs.Pursx2 as Pursx2
 import Deku.Example.Docs.SSR as SSR
 import Deku.Example.Docs.Types (Page(..))
-import Deku.TLDW (Nut, abussed)
+import Deku.Core (Nut, bussed)
 import FRP.Event (bang)
 
 scene :: Nut
-scene = abussed \push -> lcmap (bang Intro <|> _)
+scene = bussed \push -> lcmap (bang Intro <|> _)
   \event ->
     D.div_
       [ D.div_

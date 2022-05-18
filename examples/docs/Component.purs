@@ -8,7 +8,7 @@ import Deku.DOM as D
 import Deku.Example.Docs.Types (Page(..))
 import Deku.Example.Docs.Util (scrollToTop)
 import Deku.Pursx (nut, (~~))
-import Deku.TLDW (Nut)
+import Deku.Core (Nut)
 import Effect (Effect)
 import FRP.Event (bang)
 import Type.Proxy (Proxy(..))

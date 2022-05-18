@@ -9,12 +9,11 @@ import Data.Foldable (oneOfMap)
 import Data.Profunctor (lcmap)
 import Deku.Attribute (cb, (:=))
 import Deku.Control (portal, switcher, text_)
-import Deku.Core (dyn, insert)
+import Deku.Core (dyn, insert, Nut, bus)
 import Deku.DOM as D
 import Deku.Example.Docs.Types (Page(..))
 import Deku.Example.Docs.Util (scrollToTop)
 import Deku.Pursx (nut, (~~))
-import Deku.TLDW (Nut, abus)
 import Effect (Effect)
 import FRP.Event (bang, fold)
 import Type.Proxy (Proxy(..))
@@ -118,7 +117,7 @@ main = runInBody1
       )
   , result: nut
 
-      ( dyn $ abus \push -> lcmap (alt (bang unit))
+      ( dyn $ bus \push -> lcmap (alt (bang unit))
           \event -> do
             bang $ insert $ portal
               ( map

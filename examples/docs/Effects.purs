@@ -17,7 +17,7 @@ import Deku.DOM as D
 import Deku.Example.Docs.Types (Page(..))
 import Deku.Example.Docs.Util (scrollToTop)
 import Deku.Pursx (nut, (~~))
-import Deku.TLDW (Nut, abussed)
+import Deku.Core (Nut, bussed)
 import Effect (Effect)
 import Effect.Aff (launchAff_)
 import Effect.Class (liftEffect)
@@ -184,7 +184,7 @@ main = runInBody1
           ]
       )
   , result: nut
-      ( abussed \push event -> do
+      ( bussed \push event -> do
           let
             loadingOrResult = filterMap
               ( case _ of

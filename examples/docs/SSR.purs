@@ -8,7 +8,7 @@ import Deku.DOM as D
 import Deku.Example.Docs.Types (Page)
 import Deku.Listeners (click_, slider)
 import Deku.Pursx (nut, (~~))
-import Deku.TLDW (Nut, avbussed)
+import Deku.Core (Nut, vbussed)
 import Deku.Toplevel (Template(..), runSSR)
 import Effect (Effect)
 import FRP.Event (bang, fold, makeEvent)
@@ -74,7 +74,7 @@ px =
 </div>"""
 
 app :: Nut
-app = avbussed (Proxy :: _ UIEvents) \push event -> do
+app = vbussed (Proxy :: _ UIEvents) \push event -> do
   D.div_
     [ D.p_
         [ text_
