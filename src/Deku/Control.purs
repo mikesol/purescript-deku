@@ -22,6 +22,7 @@ import Data.FastVect.FastVect (Vect)
 import Data.Foldable (oneOf)
 import Data.Maybe (Maybe(..))
 import Data.Newtype (unwrap)
+import Data.Profunctor (lcmap)
 import Deku.Attribute (Attribute, AttributeValue(..), unsafeUnAttribute)
 import Deku.Core (DOMInterpret(..), Domable, Node(..))
 import FRP.Event (AnEvent, bang, makeEvent, subscribe)
@@ -105,7 +106,7 @@ globalPortal
   => Vect n (Domable m lock payload)
   -> (Vect n (Domable m lock payload) -> Domable m lock payload)
   -> Domable m lock payload
-globalPortal = Bolson.globalPortal
+globalPortal v c = Bolson.globalPortal
   { doLogic: \_ (DOMInterpret { sendToTop }) id -> sendToTop { id }
   , ids: unwrap >>> _.ids
   , disconnectElement:
@@ -115,9 +116,11 @@ globalPortal = Bolson.globalPortal
   , toElt: \(Node e) -> Element e
   }
   { fromElt: \(Element e) -> Node e
-  , giveNewParent: unwrap >>> _.giveNewParent
+  , giveNewParent: \a b _ -> (unwrap a).giveNewParent b
   , deleteFromCache: unwrap >>> _.deleteFromCache
   }
+  v
+  (lcmap (map (_ $ unit)) c)
 
 portal
   :: forall n s m lock0 payload
@@ -140,11 +143,11 @@ portal a b = Bolson.portal
   , toElt: \(Node e) -> Element e
   }
   { fromElt: \(Element e) -> Node e
-  , giveNewParent: unwrap >>> _.giveNewParent
+  , giveNewParent: \q r _ -> (unwrap q).giveNewParent r
   , deleteFromCache: unwrap >>> _.deleteFromCache
   }
   a
-  (unsafeCoerce b)
+  (lcmap (map (_ $ unit)) (unsafeCoerce b))
 
 text
   :: forall m lock payload
