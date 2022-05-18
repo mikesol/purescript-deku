@@ -5,8 +5,6 @@ import Prelude
 import Control.Alt ((<|>))
 import Data.Compactable (compact)
 import Data.Maybe (Maybe(..))
-import Data.Monoid.Always (always)
-import Data.Profunctor (lcmap)
 import Deku.Attribute (cb, (:=))
 import Deku.Control (text, text_)
 import Deku.Core (dyn, insert)
@@ -14,9 +12,9 @@ import Deku.DOM as D
 import Deku.Example.Docs.Types (Page(..))
 import Deku.Example.Docs.Util (scrollToTop)
 import Deku.Pursx (makePursx', nut, (~~))
-import Deku.TLDW (Nut')
+import Deku.TLDW (Nut, abus)
 import Effect (Effect)
-import FRP.Event (bang, bus)
+import FRP.Event (bang)
 import Type.Proxy (Proxy(..))
 
 px =
@@ -62,7 +60,7 @@ myDom =
       </div>
 """
 
-pursx2 :: forall m. (Page -> Effect Unit) -> Nut' m
+pursx2 :: (Page -> Effect Unit) -> Nut
 pursx2 dpage = makePursx' (Proxy :: _ "?") px
   { code: nut
       ( D.pre_
@@ -124,7 +122,7 @@ main = runInBody1
           ]
       )
   , result: nut
-      ( dyn $ bus $ lcmap (map (always :: m Unit -> Effect Unit)) \push event ->
+      ( dyn $ abus \push event ->
           bang $ insert $ myDom ~~
             { myli: bang (D.Style := "background-color:rgb(200,240,210);")
             , somethingNew: nut
