@@ -16,7 +16,6 @@ import Bolson.Control (switcher)
 import Bolson.Control as Bolson
 import Bolson.Core (Element(..), Entity(..), EventfulElement(..), FixedChildren(..), PSR, Scope(..))
 import Control.Alt ((<|>))
-import Control.Monad.ST.Class (class MonadST)
 import Control.Plus (empty)
 import Data.FastVect.FastVect (Vect)
 import Data.Foldable (oneOf)
@@ -24,7 +23,7 @@ import Data.Maybe (Maybe(..))
 import Data.Newtype (unwrap)
 import Data.Profunctor (lcmap)
 import Deku.Attribute (Attribute, AttributeValue(..), unsafeUnAttribute)
-import Deku.Core (DOMInterpret(..), Domable, Node(..))
+import Deku.Core (class Korok, DOMInterpret(..), Domable, Node(..))
 import FRP.Event (AnEvent, bang, makeEvent, subscribe)
 import Prim.Int (class Compare)
 import Prim.Ordering (GT)
@@ -76,7 +75,7 @@ unsafeSetAttribute (DOMInterpret { setProp, setCb }) id atts = map
 
 elementify
   :: forall s m element lock payload
-   . MonadST s m
+   . Korok s m
   => String
   -> AnEvent m (Attribute element)
   -> Domable m lock payload
@@ -103,7 +102,7 @@ elementify tag atts children = Node go
 globalPortal
   :: forall n s m lock payload
    . Compare n Neg1 GT
-  => MonadST s m
+  => Korok s m
   => Vect n (Domable m lock payload)
   -> (Vect n (Domable m lock payload) -> Domable m lock payload)
   -> Domable m lock payload
@@ -126,7 +125,7 @@ globalPortal v c = Bolson.globalPortal
 portal
   :: forall n s m lock0 payload
    . Compare n Neg1 GT
-  => MonadST s m
+  => Korok s m
   => Vect n (Domable m lock0 payload)
   -> ( forall lockfoo
         . Vect n (Domable m lockfoo payload)
@@ -174,7 +173,7 @@ text_ txt = text (bang txt)
 
 deku
   :: forall s m payload
-   . MonadST s m
+   . Korok s m
   => Web.DOM.Element
   -> (forall lock. Domable m lock payload)
   -> DOMInterpret m payload
@@ -195,7 +194,7 @@ deku root children di@(DOMInterpret { ids, makeRoot }) = makeEvent \k -> do
 
 deku1
   :: forall s m payload
-   . MonadST s m
+   . Korok s m
   => Web.DOM.Element
   -> (forall lock. AnEvent m (Domable m lock payload))
   -> DOMInterpret m payload
@@ -204,7 +203,7 @@ deku1 root children = deku root (EventfulElement' $ EventfulElement children)
 
 dekuA
   :: forall s m payload
-   . MonadST s m
+   . Korok s m
   => Web.DOM.Element
   -> (forall lock. Array (Domable m lock payload))
   -> DOMInterpret m payload
@@ -215,7 +214,7 @@ data Stage = Begin | Middle | End
 
 __internalDekuFlatten
   :: forall s m lock payload
-   . MonadST s m
+   . Korok s m
   => PSR m
   -> DOMInterpret m payload
   -> Domable m lock payload

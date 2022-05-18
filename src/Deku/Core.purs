@@ -19,6 +19,7 @@ module Deku.Core
   , remove
   , sendToTop
   , insert
+  , class Korok
   , Domable
   , Node(..)
   ) where
@@ -28,7 +29,9 @@ import Prelude
 import Bolson.Always (AlwaysEffect, halways)
 import Bolson.Core (Scope, fixed, dyn, envy)
 import Bolson.Core as Bolson
+import Control.Monad.ST (ST)
 import Control.Monad.ST.Class (class MonadST)
+import Control.Monad.ST.Global (Global)
 import Data.Maybe (Maybe)
 import Data.Monoid.Always (class Always, always)
 import Data.Monoid.Endo (Endo)
@@ -45,18 +48,28 @@ import Prim.RowList (class RowToList)
 import Type.Proxy (Proxy)
 import Web.DOM as Web.DOM
 
+class
+  ( Always (m Unit) (Effect Unit)
+  , Always (m (m Unit)) (Effect (Effect Unit))
+  , Always (m Unit) (Effect Unit)
+  , Always (Endo Function (Effect (Effect Unit))) (Endo Function (m (m Unit)))
+  , Always (Endo Function (Effect Unit)) (Endo Function (m Unit))
+  , MonadST s m
+  ) <=
+  Korok s m
+  | m -> s
+
+instance Korok s (ST s)
+instance Korok Global Effect
+
 type Nut =
   forall s m lock payload
-   . MonadST s m
-  => Always (m Unit) (Effect Unit)
-  => Always (Endo Function (Effect (Effect Unit))) (Endo Function (m (m Unit)))
-  => Always (Endo Function (Effect Unit)) (Endo Function (m Unit))
-  => Always (m (m Unit)) (Effect (Effect Unit))
+   . Korok s m
   => Domable m lock payload
 
 bus
   :: forall a b s m
-   . MonadST s m
+   . Korok s m
   => Always (m Unit) (Effect Unit)
   => ((a -> Effect Unit) -> AnEvent m a -> b)
   -> AnEvent m b
@@ -64,7 +77,7 @@ bus f = FRP.Event.bus (lcmap (map (always :: m Unit -> Effect Unit)) f)
 
 bussed
   :: forall s m lock logic obj a
-   . MonadST s m
+   . Korok s m
   => Always (m Unit) (Effect Unit)
   => ((a -> Effect Unit) -> AnEvent m a -> Bolson.Entity logic obj m lock)
   -> Bolson.Entity logic obj m lock
@@ -73,7 +86,7 @@ bussed f = Bolson.EventfulElement' (Bolson.EventfulElement (bus f))
 vbussed
   :: forall s m logic obj lock rbus bus pushi pusho pushR event u
    . RowToList bus rbus
-  => MonadST s m
+  => Korok s m
   => RowToList pushi pushR
   => MapRecordWithIndex pushR
        (ConstMapping AlwaysEffect)
