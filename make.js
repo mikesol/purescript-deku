@@ -3862,7 +3862,7 @@ var flatten = function(dictApplicative) {
               });
             }
             ;
-            throw new Error("Failed pattern match at Bolson.Control (line 208, column 17 - line 293, column 20): " + [v1.constructor.name]);
+            throw new Error("Failed pattern match at Bolson.Control (line 209, column 17 - line 294, column 20): " + [v1.constructor.name]);
           };
         };
       };
@@ -3905,23 +3905,25 @@ var internalPortal = function() {
                           return bind(dictMonadST.Monad0().Bind1())(liftST(dictMonadST)(newSTRef(pure(dictMonadST.Monad0().Applicative0())(unit))))(function(av2) {
                             return bind(dictMonadST.Monad0().Bind1())(map(dictMonadST.Monad0().Bind1().Apply0().Functor0())(unsafeCoerce)(readAr(av)))(function(idz) {
                               var injectable = map(functorVect)(function(id2) {
-                                return new Element$prime(v1.fromElt(function(v2) {
-                                  return function(itp) {
-                                    return makeEvent(function(k2) {
-                                      return discard(discardUnit)(dictMonadST.Monad0().Bind1())(v2.raiseId(id2))(function() {
-                                        return discard(discardUnit)(dictMonadST.Monad0().Bind1())(for_(dictMonadST.Monad0().Applicative0())(foldableMaybe)(v2.parent)(function(pt) {
-                                          return k2(v1.giveNewParent(itp)({
-                                            id: id2,
-                                            parent: pt,
-                                            scope: v2.scope
-                                          }));
-                                        }))(function() {
-                                          return pure(dictMonadST.Monad0().Applicative0())(pure(dictMonadST.Monad0().Applicative0())(unit));
+                                return function(specialization) {
+                                  return new Element$prime(v1.fromElt(function(v2) {
+                                    return function(itp) {
+                                      return makeEvent(function(k2) {
+                                        return discard(discardUnit)(dictMonadST.Monad0().Bind1())(v2.raiseId(id2))(function() {
+                                          return discard(discardUnit)(dictMonadST.Monad0().Bind1())(for_(dictMonadST.Monad0().Applicative0())(foldableMaybe)(v2.parent)(function(pt) {
+                                            return k2(v1.giveNewParent(itp)({
+                                              id: id2,
+                                              parent: pt,
+                                              scope: v2.scope
+                                            })(specialization));
+                                          }))(function() {
+                                            return pure(dictMonadST.Monad0().Applicative0())(pure(dictMonadST.Monad0().Applicative0())(unit));
+                                          });
                                         });
                                       });
-                                    });
-                                  };
-                                }));
+                                    };
+                                  }));
+                                };
                               })(idz);
                               var realized = flatten(dictMonadST.Monad0().Applicative0())(dictMonadST)(v)(psr)(interpreter)(enteq(closure(injectable)(unsafeCoerce)));
                               return bind(dictMonadST.Monad0().Bind1())(subscribe(realized)(k))(function(u) {
@@ -4019,13 +4021,13 @@ var unsafeText = function(v) {
 var unsafeSetText = function(v) {
   return function(id2) {
     return function(txt) {
-      return map(functorEvent)(function($113) {
+      return map(functorEvent)(function($115) {
         return v.setText(function(v1) {
           return {
             id: id2,
             text: v1
           };
-        }($113));
+        }($115));
       })(txt);
     };
   };
@@ -4033,7 +4035,7 @@ var unsafeSetText = function(v) {
 var unsafeSetAttribute = function(v) {
   return function(id2) {
     return function(atts) {
-      return map(functorEvent)(function($114) {
+      return map(functorEvent)(function($116) {
         return function(v1) {
           if (v1.value instanceof Prop$prime) {
             return v.setProp({
@@ -4051,8 +4053,8 @@ var unsafeSetAttribute = function(v) {
             });
           }
           ;
-          throw new Error("Failed pattern match at Deku.Control (line 67, column 26 - line 69, column 45): " + [v1.value.constructor.name]);
-        }(unsafeUnAttribute($114));
+          throw new Error("Failed pattern match at Deku.Control (line 68, column 26 - line 70, column 45): " + [v1.value.constructor.name]);
+        }(unsafeUnAttribute($116));
       })(atts);
     };
   };
@@ -4132,11 +4134,11 @@ var __internalDekuFlatten = function(dictMonadST) {
       };
     },
     ids: function() {
-      var $115 = unwrap();
-      return function($116) {
+      var $117 = unwrap();
+      return function($118) {
         return function(v) {
           return v.ids;
-        }($115($116));
+        }($117($118));
       };
     }(),
     disconnectElement: function(v) {
@@ -4150,9 +4152,9 @@ var __internalDekuFlatten = function(dictMonadST) {
       };
     },
     wrapElt: function() {
-      var $117 = elementify(dictMonadST)("div")(empty(plusEvent(dictMonadST.Monad0().Applicative0())));
-      return function($118) {
-        return Element$prime.create($117($118));
+      var $119 = elementify(dictMonadST)("div")(empty(plusEvent(dictMonadST.Monad0().Applicative0())));
+      return function($120) {
+        return Element$prime.create($119($120));
       };
     }(),
     toElt: function(v) {
@@ -4205,23 +4207,24 @@ var portal2 = function() {
           fromElt: function(v) {
             return v;
           },
-          giveNewParent: function() {
+          giveNewParent: function(q) {
+            return function(r) {
+              return function(v) {
+                return unwrap()(q).giveNewParent(r);
+              };
+            };
+          },
+          deleteFromCache: function() {
             var $131 = unwrap();
             return function($132) {
               return function(v) {
-                return v.giveNewParent;
+                return v.deleteFromCache;
               }($131($132));
             };
-          }(),
-          deleteFromCache: function() {
-            var $133 = unwrap();
-            return function($134) {
-              return function(v) {
-                return v.deleteFromCache;
-              }($133($134));
-            };
           }()
-        })(a2)(b);
+        })(a2)(lcmap(profunctorFn)(map(functorVect)(function(v) {
+          return v(unit);
+        }))(b));
       };
     };
   };
