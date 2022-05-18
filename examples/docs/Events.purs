@@ -3,18 +3,17 @@ module Deku.Example.Docs.Events where
 import Prelude
 
 import Control.Alt ((<|>))
-import Control.Monad.ST.Class (class MonadST)
-import Data.Monoid.Always (class Always)
 import Data.Profunctor (lcmap)
 import Deku.Always (halways)
 import Deku.Attribute (cb, (:=))
 import Deku.Control (text, text_)
-import Deku.Core (Domable, vbussed)
+import Deku.Core (vbussed)
 import Deku.DOM as D
 import Deku.Example.Docs.Types (Page(..))
 import Deku.Example.Docs.Util (scrollToTop)
 import Deku.Listeners (click_, slider)
 import Deku.Pursx (nut, (~~))
+import Deku.TLDW (Nut)
 import Effect (Effect)
 import FRP.Event (bang, fold)
 import FRP.Event.VBus (V)
@@ -47,12 +46,7 @@ px =
   <p>In this section, saw how to react to events. In the next section, we'll use a similar mechanism to deal with arbitrary <a ~next~ style="cursor:pointer;">effects</a>.</p>
 </div>"""
 
-events
-  :: forall s m lock payload
-   . MonadST s m
-  => Always (m Unit) (Effect Unit)
-  => (Page -> Effect Unit)
-  -> Domable m lock payload
+events :: (Page -> Effect Unit) -> Nut
 events dpage = px ~~
   { code: nut
       ( D.pre_

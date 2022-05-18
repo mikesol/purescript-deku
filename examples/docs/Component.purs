@@ -2,22 +2,19 @@ module Deku.Example.Docs.Component where
 
 import Prelude
 
-import Control.Monad.ST.Class (class MonadST)
 import Deku.Attribute (cb, (:=))
 import Deku.Control (text_)
-import Deku.Core (Domable)
 import Deku.DOM as D
 import Deku.Example.Docs.Types (Page(..))
 import Deku.Example.Docs.Util (scrollToTop)
 import Deku.Pursx (nut, (~~))
+import Deku.TLDW (Nut)
 import Effect (Effect)
 import FRP.Event (bang)
 import Type.Proxy (Proxy(..))
 
 px =
-  Proxy
-    :: Proxy
-         """<div>
+  Proxy    :: Proxy         """<div>
   <h1>A Simple Component</h1>
 
   <h3>Slightly more bells and whistles</h3>
@@ -52,11 +49,7 @@ myDivWithNoChildren = D.div attrs blank
   <p>In this section, we built a simple component. In the next section, we'll recreate the exact same element using a different input syntax called <a ~next~ style="cursor:pointer;">Pursx</a>.</p>
 </div>"""
 
-components
-  :: forall s m lock payload
-   . MonadST s m
-  => (Page -> Effect Unit)
-  -> Domable m lock payload
+components :: (Page -> Effect Unit) -> Nut
 components dpage = px ~~
   { code: nut
       ( D.pre_

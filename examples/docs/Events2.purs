@@ -3,20 +3,20 @@ module Deku.Example.Docs.Events2 where
 import Prelude
 
 import Control.Alt ((<|>))
-import Control.Monad.ST.Class (class MonadST)
 import Data.Filterable (filterMap)
 import Data.Foldable (for_, oneOfMap)
 import Data.Maybe (Maybe(..))
-import Data.Monoid.Always (class Always, always)
+import Data.Monoid.Always (always)
 import Data.Profunctor (lcmap)
 import Data.Tuple.Nested ((/\))
 import Deku.Attribute (cb, (:=))
 import Deku.Control (text_)
-import Deku.Core (Domable, insert, sendToTop, remove, bussed, dyn)
+import Deku.Core (bussed, dyn, insert, remove, sendToTop)
 import Deku.DOM as D
 import Deku.Example.Docs.Types (Page(..))
 import Deku.Example.Docs.Util (scrollToTop)
 import Deku.Pursx (nut, (~~))
+import Deku.TLDW (Nut)
 import Effect (Effect)
 import FRP.Event (bang, bus, keepLatest, mapAccum)
 import Type.Proxy (Proxy(..))
@@ -32,9 +32,7 @@ data MainUIAction
 data TodoAction = Prioritize | Delete
 
 px =
-  Proxy
-    :: Proxy
-         """<div>
+  Proxy    :: Proxy         """<div>
   <h1>Events 2</h1>
 
   <h2>Dynamic children</h2>
@@ -69,11 +67,8 @@ px =
 </div>"""
 
 events2
-  :: forall s m lock payload
-   . Always (m Unit) (Effect Unit)
-  => MonadST s m
-  => (Page -> Effect Unit)
-  -> Domable m lock payload
+  :: (Page -> Effect Unit)
+  -> Nut
 events2 dpage = px ~~
   { code: nut
       ( D.pre_

@@ -2,22 +2,19 @@ module Deku.Example.Docs.Pursx1 where
 
 import Prelude
 
-import Control.Monad.ST.Class (class MonadST)
 import Deku.Attribute (cb, (:=))
 import Deku.Control (text_)
-import Deku.Core (Domable)
 import Deku.DOM as D
 import Deku.Example.Docs.Types (Page(..))
 import Deku.Example.Docs.Util (scrollToTop)
 import Deku.Pursx (nut, psx, (~~))
+import Deku.TLDW (Nut)
 import Effect (Effect)
 import FRP.Event.Class (bang)
 import Type.Proxy (Proxy(..))
 
 myDom =
-  Proxy
-    :: Proxy
-         """<div>
+  Proxy    :: Proxy         """<div>
     <button>I do nothing</button>
     <ul>
         <li>A</li>
@@ -34,9 +31,7 @@ myDom =
 """
 
 px =
-  Proxy
-    :: Proxy
-         """<div>
+  Proxy    :: Proxy         """<div>
   <h1>PursX 1</h1>
 
   <h2>Like JSX... but better!</h2>
@@ -59,11 +54,7 @@ px =
   <p>In this section, we used PursX to build the same component as the previous section. In the next section, we'll learn how to respond to <a ~next~ style="cursor:pointer;">events</a>.</p>
 </div>"""
 
-pursx1
-  :: forall s m lock payload
-   . MonadST s m
-  => (Page -> Effect Unit)
-  -> Domable m lock payload
+pursx1 :: (Page -> Effect Unit) -> Nut
 pursx1 dpage = px ~~
   { code: nut
       ( D.pre_

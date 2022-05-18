@@ -3,16 +3,15 @@ module Deku.Example.Docs.SSR where
 import Prelude
 
 import Control.Alt ((<|>))
-import Control.Monad.ST.Class (class MonadST)
-import Data.Monoid.Always (class Always)
 import Data.Profunctor (lcmap)
 import Deku.Always (halways)
 import Deku.Control (text, text_)
-import Deku.Core (Domable, vbussed)
+import Deku.Core (vbussed)
 import Deku.DOM as D
 import Deku.Example.Docs.Types (Page)
 import Deku.Listeners (click_, slider)
 import Deku.Pursx (nut, (~~))
+import Deku.TLDW (Nut)
 import Deku.Toplevel (Template(..), runSSR)
 import Effect (Effect)
 import FRP.Event (bang, fold, makeEvent)
@@ -25,9 +24,7 @@ type UIEvents = V
   )
 
 px =
-  Proxy
-    :: Proxy
-         """<div>
+  Proxy    :: Proxy         """<div>
   <h1>Server-side rendering</h1>
 
   <h2>When performance matters!</h2>
@@ -79,11 +76,7 @@ px =
   <p>Thanks for checking out Deku! I had a blast writing it, and I hope you enjoy using it for your projects!</p>
 </div>"""
 
-app
-  :: forall s m lock payload
-   . MonadST s m
-  => Always (m Unit) (Effect Unit)
-  => Domable m lock payload
+app :: Nut
 app = vbussed (Proxy :: _ UIEvents) $ lcmap halways \push event -> do
   D.div_
     [ D.p_
@@ -122,12 +115,7 @@ and all of the dynamic bits are hydrated on page load."""
         ]
     ]
 
-ssrPage
-  :: forall s m lock payload
-   . MonadST s m
-  => Always (m Unit) (Effect Unit)
-  => (Page -> Effect Unit)
-  -> Domable m lock payload
+ssrPage :: (Page -> Effect Unit) -> Nut
 ssrPage _ = px ~~
   { code2: nut
       ( D.pre_

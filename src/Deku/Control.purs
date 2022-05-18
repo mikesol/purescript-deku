@@ -28,6 +28,7 @@ import Deku.Core (DOMInterpret(..), Domable, Node(..))
 import FRP.Event (AnEvent, bang, makeEvent, subscribe)
 import Prim.Int (class Compare)
 import Prim.Ordering (GT)
+import Safe.Coerce (coerce)
 import Unsafe.Coerce (unsafeCoerce)
 import Web.DOM as Web.DOM
 
@@ -147,7 +148,7 @@ portal a b = Bolson.portal
   , deleteFromCache: unwrap >>> _.deleteFromCache
   }
   a
-  (lcmap (map (_ $ unit)) (unsafeCoerce b))
+  (lcmap (map (_ $ unit)) (coerce b))
 
 text
   :: forall m lock payload

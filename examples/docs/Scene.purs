@@ -3,14 +3,13 @@ module Deku.Example.Docs.Scene where
 import Prelude
 
 import Control.Alt ((<|>))
-import Control.Monad.ST.Class (class MonadST)
 import Data.Foldable (oneOfMap)
-import Data.Monoid.Always (class Always, always)
+import Data.Monoid.Always (always)
 import Data.Profunctor (lcmap)
 import Data.Tuple.Nested ((/\))
 import Deku.Attribute (cb, (:=))
 import Deku.Control (switcher, text_)
-import Deku.Core (Domable, bussed)
+import Deku.Core (bussed)
 import Deku.DOM as D
 import Deku.Example.Docs.Component as Component
 import Deku.Example.Docs.Effects as Effects
@@ -23,14 +22,10 @@ import Deku.Example.Docs.Pursx1 as Pursx1
 import Deku.Example.Docs.Pursx2 as Pursx2
 import Deku.Example.Docs.SSR as SSR
 import Deku.Example.Docs.Types (Page(..))
-import Effect (Effect)
+import Deku.TLDW (Nut)
 import FRP.Event (bang)
 
-scene
-  :: forall s m lock payload
-   . MonadST s m
-  => Always (m Unit) (Effect Unit)
-  => Domable m lock payload
+scene :: Nut
 scene = bussed $ (lcmap (map always)) \push -> lcmap (bang Intro <|> _)
   \event ->
     D.div_
@@ -87,7 +82,6 @@ scene = bussed $ (lcmap (map always)) \push -> lcmap (bang Intro <|> _)
       , D.div_ [ switcher (page push) event ]
       ]
   where
-  page :: (Page -> Effect Unit) -> Page -> Domable m lock payload
   page dpage Intro = Intro.intro dpage
   page dpage HelloWorld = HelloWorld.helloWorld dpage
   page dpage SimpleComponent = Component.components dpage
