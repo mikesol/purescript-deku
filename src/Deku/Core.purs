@@ -31,12 +31,13 @@ import Bolson.Core as Bolson
 import Control.Monad.ST.Class (class MonadST)
 import Data.Maybe (Maybe)
 import Data.Monoid.Always (class Always, always)
+import Data.Monoid.Endo (Endo)
 import Data.Newtype (class Newtype)
 import Data.Profunctor (lcmap)
 import Deku.Attribute (Cb)
 import Effect (Effect)
-import FRP.Event as FRP.Event
 import FRP.Event (AnEvent)
+import FRP.Event as FRP.Event
 import FRP.Event.VBus (class VBus, V, vbus)
 import Foreign.Object (Object)
 import Heterogeneous.Mapping (class MapRecordWithIndex, ConstMapping)
@@ -48,6 +49,7 @@ type Nut =
   forall s m lock payload
    . MonadST s m
   => Always (m Unit) (Effect Unit)
+  => Always (Endo Function (Effect (Effect Unit))) (Endo Function (m (m Unit)))
   => Domable m lock payload
 
 bus
