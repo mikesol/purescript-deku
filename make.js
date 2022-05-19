@@ -243,204 +243,25 @@ var join = function(dictBind) {
   };
 };
 
-// output/Unsafe.Coerce/foreign.js
-var unsafeCoerce = function(x) {
-  return x;
+// output/Data.EuclideanRing/foreign.js
+var intDegree = function(x) {
+  return Math.min(Math.abs(x), 2147483647);
 };
-
-// output/Control.Monad.ST.Global/index.js
-var toEffect = unsafeCoerce;
-
-// output/Control.Monad.ST.Internal/foreign.js
-var map_ = function(f) {
-  return function(a2) {
-    return function() {
-      return f(a2());
-    };
+var intDiv = function(x) {
+  return function(y) {
+    if (y === 0)
+      return 0;
+    return y > 0 ? Math.floor(x / y) : -Math.floor(x / -y);
   };
 };
-var pure_ = function(a2) {
-  return function() {
-    return a2;
+var intMod = function(x) {
+  return function(y) {
+    if (y === 0)
+      return 0;
+    var yy = Math.abs(y);
+    return (x % yy + yy) % yy;
   };
 };
-var bind_ = function(a2) {
-  return function(f) {
-    return function() {
-      return f(a2())();
-    };
-  };
-};
-function newSTRef(val) {
-  return function() {
-    return { value: val };
-  };
-}
-var read = function(ref) {
-  return function() {
-    return ref.value;
-  };
-};
-var modifyImpl = function(f) {
-  return function(ref) {
-    return function() {
-      var t = f(ref.value);
-      ref.value = t.state;
-      return t.value;
-    };
-  };
-};
-var write = function(a2) {
-  return function(ref) {
-    return function() {
-      return ref.value = a2;
-    };
-  };
-};
-
-// output/Control.Monad/index.js
-var ap = function(dictMonad) {
-  return function(f) {
-    return function(a2) {
-      return bind(dictMonad.Bind1())(f)(function(f$prime) {
-        return bind(dictMonad.Bind1())(a2)(function(a$prime) {
-          return pure(dictMonad.Applicative0())(f$prime(a$prime));
-        });
-      });
-    };
-  };
-};
-
-// output/Data.Semigroup/foreign.js
-var concatString = function(s1) {
-  return function(s2) {
-    return s1 + s2;
-  };
-};
-var concatArray = function(xs) {
-  return function(ys) {
-    if (xs.length === 0)
-      return ys;
-    if (ys.length === 0)
-      return xs;
-    return xs.concat(ys);
-  };
-};
-
-// output/Data.Symbol/index.js
-var reflectSymbol = function(dict) {
-  return dict.reflectSymbol;
-};
-
-// output/Record.Unsafe/foreign.js
-var unsafeGet = function(label4) {
-  return function(rec) {
-    return rec[label4];
-  };
-};
-var unsafeSet = function(label4) {
-  return function(value13) {
-    return function(rec) {
-      var copy = {};
-      for (var key2 in rec) {
-        if ({}.hasOwnProperty.call(rec, key2)) {
-          copy[key2] = rec[key2];
-        }
-      }
-      copy[label4] = value13;
-      return copy;
-    };
-  };
-};
-
-// output/Data.Semigroup/index.js
-var semigroupUnit = {
-  append: function(v) {
-    return function(v1) {
-      return unit;
-    };
-  }
-};
-var semigroupString = {
-  append: concatString
-};
-var semigroupArray = {
-  append: concatArray
-};
-var append = function(dict) {
-  return dict.append;
-};
-
-// output/Control.Alt/index.js
-var alt = function(dict) {
-  return dict.alt;
-};
-
-// output/Data.Bounded/foreign.js
-var topInt = 2147483647;
-var bottomInt = -2147483648;
-var topChar = String.fromCharCode(65535);
-var bottomChar = String.fromCharCode(0);
-var topNumber = Number.POSITIVE_INFINITY;
-var bottomNumber = Number.NEGATIVE_INFINITY;
-
-// output/Data.Ord/foreign.js
-var unsafeCompareImpl = function(lt) {
-  return function(eq2) {
-    return function(gt) {
-      return function(x) {
-        return function(y) {
-          return x < y ? lt : x === y ? eq2 : gt;
-        };
-      };
-    };
-  };
-};
-var ordIntImpl = unsafeCompareImpl;
-var ordStringImpl = unsafeCompareImpl;
-
-// output/Data.Eq/foreign.js
-var refEq = function(r1) {
-  return function(r2) {
-    return r1 === r2;
-  };
-};
-var eqIntImpl = refEq;
-var eqStringImpl = refEq;
-
-// output/Data.Eq/index.js
-var eqString = {
-  eq: eqStringImpl
-};
-var eqInt = {
-  eq: eqIntImpl
-};
-var eq = function(dict) {
-  return dict.eq;
-};
-
-// output/Data.Ordering/index.js
-var LT = /* @__PURE__ */ function() {
-  function LT2() {
-  }
-  ;
-  LT2.value = new LT2();
-  return LT2;
-}();
-var GT = /* @__PURE__ */ function() {
-  function GT2() {
-  }
-  ;
-  GT2.value = new GT2();
-  return GT2;
-}();
-var EQ = /* @__PURE__ */ function() {
-  function EQ2() {
-  }
-  ;
-  EQ2.value = new EQ2();
-  return EQ2;
-}();
 
 // output/Data.Ring/foreign.js
 var intSub = function(x) {
@@ -471,6 +292,32 @@ var numMul = function(n1) {
   };
 };
 
+// output/Data.Symbol/index.js
+var reflectSymbol = function(dict) {
+  return dict.reflectSymbol;
+};
+
+// output/Record.Unsafe/foreign.js
+var unsafeGet = function(label4) {
+  return function(rec) {
+    return rec[label4];
+  };
+};
+var unsafeSet = function(label4) {
+  return function(value13) {
+    return function(rec) {
+      var copy = {};
+      for (var key2 in rec) {
+        if ({}.hasOwnProperty.call(rec, key2)) {
+          copy[key2] = rec[key2];
+        }
+      }
+      copy[label4] = value13;
+      return copy;
+    };
+  };
+};
+
 // output/Data.Semiring/index.js
 var semiringNumber = {
   add: numAdd,
@@ -498,6 +345,169 @@ var ringInt = {
     return semiringInt;
   }
 };
+
+// output/Data.CommutativeRing/index.js
+var commutativeRingInt = {
+  Ring0: function() {
+    return ringInt;
+  }
+};
+
+// output/Data.Eq/foreign.js
+var refEq = function(r1) {
+  return function(r2) {
+    return r1 === r2;
+  };
+};
+var eqIntImpl = refEq;
+var eqStringImpl = refEq;
+
+// output/Data.Eq/index.js
+var eqString = {
+  eq: eqStringImpl
+};
+var eqInt = {
+  eq: eqIntImpl
+};
+var eq = function(dict) {
+  return dict.eq;
+};
+
+// output/Data.EuclideanRing/index.js
+var mod = function(dict) {
+  return dict.mod;
+};
+var euclideanRingInt = {
+  degree: intDegree,
+  div: intDiv,
+  mod: intMod,
+  CommutativeRing0: function() {
+    return commutativeRingInt;
+  }
+};
+
+// output/Data.Ordering/index.js
+var LT = /* @__PURE__ */ function() {
+  function LT2() {
+  }
+  ;
+  LT2.value = new LT2();
+  return LT2;
+}();
+var GT = /* @__PURE__ */ function() {
+  function GT2() {
+  }
+  ;
+  GT2.value = new GT2();
+  return GT2;
+}();
+var EQ = /* @__PURE__ */ function() {
+  function EQ2() {
+  }
+  ;
+  EQ2.value = new EQ2();
+  return EQ2;
+}();
+
+// output/Data.Semigroup/foreign.js
+var concatString = function(s1) {
+  return function(s2) {
+    return s1 + s2;
+  };
+};
+var concatArray = function(xs) {
+  return function(ys) {
+    if (xs.length === 0)
+      return ys;
+    if (ys.length === 0)
+      return xs;
+    return xs.concat(ys);
+  };
+};
+
+// output/Data.Semigroup/index.js
+var semigroupUnit = {
+  append: function(v) {
+    return function(v1) {
+      return unit;
+    };
+  }
+};
+var semigroupString = {
+  append: concatString
+};
+var semigroupArray = {
+  append: concatArray
+};
+var append = function(dict) {
+  return dict.append;
+};
+
+// output/Data.Monoid/index.js
+var monoidUnit = {
+  mempty: unit,
+  Semigroup0: function() {
+    return semigroupUnit;
+  }
+};
+var monoidString = {
+  mempty: "",
+  Semigroup0: function() {
+    return semigroupString;
+  }
+};
+var mempty = function(dict) {
+  return dict.mempty;
+};
+
+// output/Data.Monoid.Always/index.js
+var always1 = function(dictMonoid) {
+  return {
+    always: $$const(mempty(dictMonoid)),
+    Monoid0: function() {
+      return dictMonoid;
+    }
+  };
+};
+var always2 = function(dictMonoid) {
+  return {
+    always: identity(categoryFn),
+    Monoid0: function() {
+      return dictMonoid;
+    }
+  };
+};
+var always = function(dict) {
+  return dict.always;
+};
+
+// output/Control.Alt/index.js
+var alt = function(dict) {
+  return dict.alt;
+};
+
+// output/Data.Bounded/foreign.js
+var topInt = 2147483647;
+var bottomInt = -2147483648;
+var topChar = String.fromCharCode(65535);
+var bottomChar = String.fromCharCode(0);
+var topNumber = Number.POSITIVE_INFINITY;
+var bottomNumber = Number.NEGATIVE_INFINITY;
+
+// output/Data.Ord/foreign.js
+var unsafeCompareImpl = function(lt) {
+  return function(eq2) {
+    return function(gt) {
+      return function(x) {
+        return function(y) {
+          return x < y ? lt : x === y ? eq2 : gt;
+        };
+      };
+    };
+  };
+};
+var ordIntImpl = unsafeCompareImpl;
+var ordStringImpl = unsafeCompareImpl;
 
 // output/Data.Ord/index.js
 var ordString = /* @__PURE__ */ function() {
@@ -745,460 +755,39 @@ var hush = /* @__PURE__ */ function() {
   return either($$const(Nothing.value))(Just.create);
 }();
 
-// output/Data.Identity/index.js
-var Identity = function(x) {
-  return x;
-};
-var functorIdentity = {
-  map: function(f) {
-    return function(m) {
-      return f(m);
-    };
-  }
-};
-var applyIdentity = {
-  apply: function(v) {
-    return function(v1) {
-      return v(v1);
-    };
-  },
-  Functor0: function() {
-    return functorIdentity;
-  }
-};
-var bindIdentity = {
-  bind: function(v) {
-    return function(f) {
-      return f(v);
-    };
-  },
-  Apply0: function() {
-    return applyIdentity;
-  }
-};
-var applicativeIdentity = {
-  pure: Identity,
-  Apply0: function() {
-    return applyIdentity;
-  }
-};
-var monadIdentity = {
-  Applicative0: function() {
-    return applicativeIdentity;
-  },
-  Bind1: function() {
-    return bindIdentity;
-  }
+// output/Control.Plus/index.js
+var empty = function(dict) {
+  return dict.empty;
 };
 
-// output/Data.EuclideanRing/foreign.js
-var intDegree = function(x) {
-  return Math.min(Math.abs(x), 2147483647);
-};
-var intDiv = function(x) {
-  return function(y) {
-    if (y === 0)
-      return 0;
-    return y > 0 ? Math.floor(x / y) : -Math.floor(x / -y);
-  };
-};
-var intMod = function(x) {
-  return function(y) {
-    if (y === 0)
-      return 0;
-    var yy = Math.abs(y);
-    return (x % yy + yy) % yy;
-  };
-};
-
-// output/Data.CommutativeRing/index.js
-var commutativeRingInt = {
-  Ring0: function() {
-    return ringInt;
-  }
-};
-
-// output/Data.EuclideanRing/index.js
-var mod = function(dict) {
-  return dict.mod;
-};
-var euclideanRingInt = {
-  degree: intDegree,
-  div: intDiv,
-  mod: intMod,
-  CommutativeRing0: function() {
-    return commutativeRingInt;
-  }
-};
-
-// output/Data.Monoid/index.js
-var monoidUnit = {
-  mempty: unit,
-  Semigroup0: function() {
-    return semigroupUnit;
-  }
-};
-var monoidString = {
-  mempty: "",
-  Semigroup0: function() {
-    return semigroupString;
-  }
-};
-var mempty = function(dict) {
-  return dict.mempty;
-};
-
-// output/Effect/foreign.js
-var pureE = function(a2) {
-  return function() {
-    return a2;
-  };
-};
-var bindE = function(a2) {
-  return function(f) {
-    return function() {
-      return f(a2())();
-    };
-  };
-};
-
-// output/Effect/index.js
-var $runtime_lazy = function(name16, moduleName, init3) {
-  var state3 = 0;
-  var val;
-  return function(lineNumber) {
-    if (state3 === 2)
-      return val;
-    if (state3 === 1)
-      throw new ReferenceError(name16 + " was needed before it finished initializing (module " + moduleName + ", line " + lineNumber + ")", moduleName, lineNumber);
-    state3 = 1;
-    val = init3();
-    state3 = 2;
-    return val;
-  };
-};
-var monadEffect = {
-  Applicative0: function() {
-    return applicativeEffect;
-  },
-  Bind1: function() {
-    return bindEffect;
-  }
-};
-var bindEffect = {
-  bind: bindE,
-  Apply0: function() {
-    return $lazy_applyEffect(0);
-  }
-};
-var applicativeEffect = {
-  pure: pureE,
-  Apply0: function() {
-    return $lazy_applyEffect(0);
-  }
-};
-var $lazy_functorEffect = /* @__PURE__ */ $runtime_lazy("functorEffect", "Effect", function() {
-  return {
-    map: liftA1(applicativeEffect)
-  };
-});
-var $lazy_applyEffect = /* @__PURE__ */ $runtime_lazy("applyEffect", "Effect", function() {
-  return {
-    apply: ap(monadEffect),
-    Functor0: function() {
-      return $lazy_functorEffect(0);
-    }
-  };
-});
-var functorEffect = /* @__PURE__ */ $lazy_functorEffect(20);
-var applyEffect = /* @__PURE__ */ $lazy_applyEffect(23);
-var semigroupEffect = function(dictSemigroup) {
-  return {
-    append: lift2(applyEffect)(append(dictSemigroup))
-  };
-};
-var monoidEffect = function(dictMonoid) {
-  return {
-    mempty: pureE(mempty(dictMonoid)),
-    Semigroup0: function() {
-      return semigroupEffect(dictMonoid.Semigroup0());
-    }
-  };
-};
-
-// output/Control.Monad.ST.Internal/index.js
-var $runtime_lazy2 = function(name16, moduleName, init3) {
-  var state3 = 0;
-  var val;
-  return function(lineNumber) {
-    if (state3 === 2)
-      return val;
-    if (state3 === 1)
-      throw new ReferenceError(name16 + " was needed before it finished initializing (module " + moduleName + ", line " + lineNumber + ")", moduleName, lineNumber);
-    state3 = 1;
-    val = init3();
-    state3 = 2;
-    return val;
-  };
-};
-var modify$prime = modifyImpl;
-var modify = function(f) {
-  return modify$prime(function(s) {
-    var s$prime = f(s);
-    return {
-      state: s$prime,
-      value: s$prime
-    };
-  });
-};
-var functorST = {
-  map: map_
-};
-var monadST = {
-  Applicative0: function() {
-    return applicativeST;
-  },
-  Bind1: function() {
-    return bindST;
-  }
-};
-var bindST = {
-  bind: bind_,
-  Apply0: function() {
-    return $lazy_applyST(0);
-  }
-};
-var applicativeST = {
-  pure: pure_,
-  Apply0: function() {
-    return $lazy_applyST(0);
-  }
-};
-var $lazy_applyST = /* @__PURE__ */ $runtime_lazy2("applyST", "Control.Monad.ST.Internal", function() {
-  return {
-    apply: ap(monadST),
-    Functor0: function() {
-      return functorST;
-    }
-  };
-});
-var applyST = /* @__PURE__ */ $lazy_applyST(46);
-
-// output/Control.Monad.ST.Class/index.js
-var monadSTST = {
-  liftST: /* @__PURE__ */ identity(categoryFn),
-  Monad0: function() {
-    return monadST;
-  }
-};
-var monadSTEffect = {
-  liftST: toEffect,
-  Monad0: function() {
-    return monadEffect;
-  }
-};
-var liftST = function(dict) {
-  return dict.liftST;
-};
-
-// output/Data.Monoid.Always/index.js
-var always1 = function(dictMonoid) {
-  return {
-    always: $$const(mempty(dictMonoid)),
-    Monoid0: function() {
-      return dictMonoid;
-    }
-  };
-};
-var always = function(dict) {
-  return dict.always;
-};
-
-// output/Bolson.Control/foreign.js
-function mutAr(a2) {
-  return () => {
-    return a2.slice();
-  };
-}
-function unsafeUpdateMutAr(i2) {
-  return (v) => (a2) => () => {
-    a2[i2] = v;
-  };
-}
-function readAr(a2) {
-  return () => {
-    return a2.slice();
-  };
-}
-
-// output/Data.Array/foreign.js
-var replicateFill = function(count2) {
-  return function(value13) {
-    if (count2 < 1) {
-      return [];
-    }
-    var result = new Array(count2);
-    return result.fill(value13);
-  };
-};
-var replicatePolyfill = function(count2) {
-  return function(value13) {
-    var result = [];
-    var n = 0;
-    for (var i2 = 0; i2 < count2; i2++) {
-      result[n++] = value13;
-    }
-    return result;
-  };
-};
-var replicate = typeof Array.prototype.fill === "function" ? replicateFill : replicatePolyfill;
-var fromFoldableImpl = function() {
-  function Cons3(head5, tail2) {
-    this.head = head5;
-    this.tail = tail2;
-  }
-  var emptyList = {};
-  function curryCons(head5) {
-    return function(tail2) {
-      return new Cons3(head5, tail2);
-    };
-  }
-  function listToArray(list) {
-    var result = [];
-    var count2 = 0;
-    var xs = list;
-    while (xs !== emptyList) {
-      result[count2++] = xs.head;
-      xs = xs.tail;
-    }
-    return result;
-  }
-  return function(foldr2) {
+// output/Data.Foldable/foreign.js
+var foldrArray = function(f) {
+  return function(init3) {
     return function(xs) {
-      return listToArray(foldr2(curryCons)(emptyList)(xs));
-    };
-  };
-}();
-var indexImpl = function(just) {
-  return function(nothing) {
-    return function(xs) {
-      return function(i2) {
-        return i2 < 0 || i2 >= xs.length ? nothing : just(xs[i2]);
-      };
-    };
-  };
-};
-var findMapImpl = function(nothing) {
-  return function(isJust2) {
-    return function(f) {
-      return function(xs) {
-        for (var i2 = 0; i2 < xs.length; i2++) {
-          var result = f(xs[i2]);
-          if (isJust2(result))
-            return result;
-        }
-        return nothing;
-      };
-    };
-  };
-};
-var findIndexImpl = function(just) {
-  return function(nothing) {
-    return function(f) {
-      return function(xs) {
-        for (var i2 = 0, l = xs.length; i2 < l; i2++) {
-          if (f(xs[i2]))
-            return just(i2);
-        }
-        return nothing;
-      };
-    };
-  };
-};
-var _deleteAt = function(just) {
-  return function(nothing) {
-    return function(i2) {
-      return function(l) {
-        if (i2 < 0 || i2 >= l.length)
-          return nothing;
-        var l1 = l.slice();
-        l1.splice(i2, 1);
-        return just(l1);
-      };
-    };
-  };
-};
-var filter = function(f) {
-  return function(xs) {
-    return xs.filter(f);
-  };
-};
-var partition = function(f) {
-  return function(xs) {
-    var yes = [];
-    var no = [];
-    for (var i2 = 0; i2 < xs.length; i2++) {
-      var x = xs[i2];
-      if (f(x))
-        yes.push(x);
-      else
-        no.push(x);
-    }
-    return { yes, no };
-  };
-};
-var sortByImpl = function() {
-  function mergeFromTo(compare2, fromOrdering, xs1, xs2, from3, to2) {
-    var mid;
-    var i2;
-    var j;
-    var k;
-    var x;
-    var y;
-    var c;
-    mid = from3 + (to2 - from3 >> 1);
-    if (mid - from3 > 1)
-      mergeFromTo(compare2, fromOrdering, xs2, xs1, from3, mid);
-    if (to2 - mid > 1)
-      mergeFromTo(compare2, fromOrdering, xs2, xs1, mid, to2);
-    i2 = from3;
-    j = mid;
-    k = from3;
-    while (i2 < mid && j < to2) {
-      x = xs2[i2];
-      y = xs2[j];
-      c = fromOrdering(compare2(x)(y));
-      if (c > 0) {
-        xs1[k++] = y;
-        ++j;
-      } else {
-        xs1[k++] = x;
-        ++i2;
+      var acc = init3;
+      var len = xs.length;
+      for (var i2 = len - 1; i2 >= 0; i2--) {
+        acc = f(xs[i2])(acc);
       }
-    }
-    while (i2 < mid) {
-      xs1[k++] = xs2[i2++];
-    }
-    while (j < to2) {
-      xs1[k++] = xs2[j++];
-    }
-  }
-  return function(compare2) {
-    return function(fromOrdering) {
-      return function(xs) {
-        var out;
-        if (xs.length < 2)
-          return xs;
-        out = xs.slice(0);
-        mergeFromTo(compare2, fromOrdering, out, xs.slice(0), 0, xs.length);
-        return out;
-      };
+      return acc;
     };
   };
-}();
+};
+var foldlArray = function(f) {
+  return function(init3) {
+    return function(xs) {
+      var acc = init3;
+      var len = xs.length;
+      for (var i2 = 0; i2 < len; i2++) {
+        acc = f(acc)(xs[i2]);
+      }
+      return acc;
+    };
+  };
+};
 
 // output/Control.Lazy/index.js
-var $runtime_lazy3 = function(name16, moduleName, init3) {
+var $runtime_lazy = function(name16, moduleName, init3) {
   var state3 = 0;
   var val;
   return function(lineNumber) {
@@ -1224,7 +813,7 @@ var defer = function(dict) {
 };
 var fix = function(dictLazy) {
   return function(f) {
-    var $lazy_go = $runtime_lazy3("go", "Control.Lazy", function() {
+    var $lazy_go = $runtime_lazy("go", "Control.Lazy", function() {
       return defer(dictLazy)(function(v) {
         return f($lazy_go(25));
       });
@@ -1232,92 +821,6 @@ var fix = function(dictLazy) {
     var go2 = $lazy_go(25);
     return go2;
   };
-};
-
-// output/Data.Array.ST/foreign.js
-function newSTArray() {
-  return [];
-}
-var pushAll = function(as) {
-  return function(xs) {
-    return function() {
-      return xs.push.apply(xs, as);
-    };
-  };
-};
-var unsafeFreeze = function(xs) {
-  return function() {
-    return xs;
-  };
-};
-function copyImpl(xs) {
-  return function() {
-    return xs.slice();
-  };
-}
-var thaw = copyImpl;
-var sortByImpl2 = function() {
-  function mergeFromTo(compare2, fromOrdering, xs1, xs2, from3, to2) {
-    var mid;
-    var i2;
-    var j;
-    var k;
-    var x;
-    var y;
-    var c;
-    mid = from3 + (to2 - from3 >> 1);
-    if (mid - from3 > 1)
-      mergeFromTo(compare2, fromOrdering, xs2, xs1, from3, mid);
-    if (to2 - mid > 1)
-      mergeFromTo(compare2, fromOrdering, xs2, xs1, mid, to2);
-    i2 = from3;
-    j = mid;
-    k = from3;
-    while (i2 < mid && j < to2) {
-      x = xs2[i2];
-      y = xs2[j];
-      c = fromOrdering(compare2(x)(y));
-      if (c > 0) {
-        xs1[k++] = y;
-        ++j;
-      } else {
-        xs1[k++] = x;
-        ++i2;
-      }
-    }
-    while (i2 < mid) {
-      xs1[k++] = xs2[i2++];
-    }
-    while (j < to2) {
-      xs1[k++] = xs2[j++];
-    }
-  }
-  return function(compare2) {
-    return function(fromOrdering) {
-      return function(xs) {
-        return function() {
-          if (xs.length < 2)
-            return xs;
-          mergeFromTo(compare2, fromOrdering, xs, xs.slice(0), 0, xs.length);
-          return xs;
-        };
-      };
-    };
-  };
-}();
-
-// output/Data.Array.ST/index.js
-var withArray = function(f) {
-  return function(xs) {
-    return function __do() {
-      var result = thaw(xs)();
-      f(result)();
-      return unsafeFreeze(result)();
-    };
-  };
-};
-var push = function(a2) {
-  return pushAll([a2]);
 };
 
 // output/Data.HeytingAlgebra/foreign.js
@@ -1356,87 +859,6 @@ var heytingAlgebraBoolean = {
   conj: boolConj,
   disj: boolDisj,
   not: boolNot
-};
-
-// output/Data.Array.ST.Iterator/index.js
-var Iterator = /* @__PURE__ */ function() {
-  function Iterator2(value0, value1) {
-    this.value0 = value0;
-    this.value1 = value1;
-  }
-  ;
-  Iterator2.create = function(value0) {
-    return function(value1) {
-      return new Iterator2(value0, value1);
-    };
-  };
-  return Iterator2;
-}();
-var next = function(v) {
-  return function __do() {
-    var i2 = read(v.value1)();
-    modify(function(v1) {
-      return v1 + 1 | 0;
-    })(v.value1)();
-    return v.value0(i2);
-  };
-};
-var iterator = function(f) {
-  return map(functorST)(Iterator.create(f))(newSTRef(0));
-};
-var iterate = function(iter) {
-  return function(f) {
-    return function __do() {
-      var $$break = newSTRef(false)();
-      while (map(functorST)(not(heytingAlgebraBoolean))(read($$break))()) {
-        (function __do2() {
-          var mx = next(iter)();
-          if (mx instanceof Just) {
-            return f(mx.value0)();
-          }
-          ;
-          if (mx instanceof Nothing) {
-            return $$void(functorST)(write(true)($$break))();
-          }
-          ;
-          throw new Error("Failed pattern match at Data.Array.ST.Iterator (line 42, column 5 - line 44, column 47): " + [mx.constructor.name]);
-        })();
-      }
-      ;
-      return {};
-    };
-  };
-};
-
-// output/Data.Foldable/foreign.js
-var foldrArray = function(f) {
-  return function(init3) {
-    return function(xs) {
-      var acc = init3;
-      var len = xs.length;
-      for (var i2 = len - 1; i2 >= 0; i2--) {
-        acc = f(xs[i2])(acc);
-      }
-      return acc;
-    };
-  };
-};
-var foldlArray = function(f) {
-  return function(init3) {
-    return function(xs) {
-      var acc = init3;
-      var len = xs.length;
-      for (var i2 = 0; i2 < len; i2++) {
-        acc = f(acc)(xs[i2]);
-      }
-      return acc;
-    };
-  };
-};
-
-// output/Control.Plus/index.js
-var empty = function(dict) {
-  return dict.empty;
 };
 
 // output/Data.Tuple/index.js
@@ -1486,9 +908,33 @@ var monoidDisj = function(dictHeytingAlgebra) {
   };
 };
 
+// output/Data.Monoid.Endo/index.js
+var semigroupEndo = function(dictSemigroupoid) {
+  return {
+    append: function(v) {
+      return function(v1) {
+        return compose(dictSemigroupoid)(v)(v1);
+      };
+    }
+  };
+};
+var monoidEndo = function(dictCategory) {
+  return {
+    mempty: identity(dictCategory),
+    Semigroup0: function() {
+      return semigroupEndo(dictCategory.Semigroupoid0());
+    }
+  };
+};
+
+// output/Unsafe.Coerce/foreign.js
+var unsafeCoerce2 = function(x) {
+  return x;
+};
+
 // output/Safe.Coerce/index.js
 var coerce = function() {
-  return unsafeCoerce;
+  return unsafeCoerce2;
 };
 
 // output/Data.Newtype/index.js
@@ -1652,6 +1098,75 @@ var any = function(dictFoldable) {
   };
 };
 
+// output/Data.FunctorWithIndex/foreign.js
+var mapWithIndexArray = function(f) {
+  return function(xs) {
+    var l = xs.length;
+    var result = Array(l);
+    for (var i2 = 0; i2 < l; i2++) {
+      result[i2] = f(i2)(xs[i2]);
+    }
+    return result;
+  };
+};
+
+// output/Data.Identity/index.js
+var Identity = function(x) {
+  return x;
+};
+var functorIdentity = {
+  map: function(f) {
+    return function(m) {
+      return f(m);
+    };
+  }
+};
+var applyIdentity = {
+  apply: function(v) {
+    return function(v1) {
+      return v(v1);
+    };
+  },
+  Functor0: function() {
+    return functorIdentity;
+  }
+};
+var bindIdentity = {
+  bind: function(v) {
+    return function(f) {
+      return f(v);
+    };
+  },
+  Apply0: function() {
+    return applyIdentity;
+  }
+};
+var applicativeIdentity = {
+  pure: Identity,
+  Apply0: function() {
+    return applyIdentity;
+  }
+};
+var monadIdentity = {
+  Applicative0: function() {
+    return applicativeIdentity;
+  },
+  Bind1: function() {
+    return bindIdentity;
+  }
+};
+
+// output/Data.FunctorWithIndex/index.js
+var mapWithIndex = function(dict) {
+  return dict.mapWithIndex;
+};
+var functorWithIndexArray = {
+  mapWithIndex: mapWithIndexArray,
+  Functor0: function() {
+    return functorArray;
+  }
+};
+
 // output/Data.Traversable/foreign.js
 var traverseArrayImpl = function() {
   function array1(a2) {
@@ -1726,78 +1241,6 @@ var traversableArray = {
   }
 };
 
-// output/Data.Array/index.js
-var snoc = function(xs) {
-  return function(x) {
-    return withArray(push(x))(xs)();
-  };
-};
-var singleton2 = function(a2) {
-  return [a2];
-};
-var index = /* @__PURE__ */ function() {
-  return indexImpl(Just.create)(Nothing.value);
-}();
-var findMap = /* @__PURE__ */ function() {
-  return findMapImpl(Nothing.value)(isJust);
-}();
-var findIndex = /* @__PURE__ */ function() {
-  return findIndexImpl(Just.create)(Nothing.value);
-}();
-var deleteAt = /* @__PURE__ */ function() {
-  return _deleteAt(Just.create)(Nothing.value);
-}();
-var deleteBy = function(v) {
-  return function(v1) {
-    return function(v2) {
-      if (v2.length === 0) {
-        return [];
-      }
-      ;
-      return maybe(v2)(function(i2) {
-        return fromJust()(deleteAt(i2)(v2));
-      })(findIndex(v(v1))(v2));
-    };
-  };
-};
-var cons2 = function(x) {
-  return function(xs) {
-    return append(semigroupArray)([x])(xs);
-  };
-};
-var concatMap = /* @__PURE__ */ flip(/* @__PURE__ */ bind(bindArray));
-var mapMaybe = function(f) {
-  return concatMap(function() {
-    var $99 = maybe([])(singleton2);
-    return function($100) {
-      return $99(f($100));
-    };
-  }());
-};
-
-// output/Data.FunctorWithIndex/foreign.js
-var mapWithIndexArray = function(f) {
-  return function(xs) {
-    var l = xs.length;
-    var result = Array(l);
-    for (var i2 = 0; i2 < l; i2++) {
-      result[i2] = f(i2)(xs[i2]);
-    }
-    return result;
-  };
-};
-
-// output/Data.FunctorWithIndex/index.js
-var mapWithIndex = function(dict) {
-  return dict.mapWithIndex;
-};
-var functorWithIndexArray = {
-  mapWithIndex: mapWithIndexArray,
-  Functor0: function() {
-    return functorArray;
-  }
-};
-
 // output/Data.NonEmpty/index.js
 var NonEmpty = /* @__PURE__ */ function() {
   function NonEmpty2(value0, value1) {
@@ -1812,7 +1255,7 @@ var NonEmpty = /* @__PURE__ */ function() {
   };
   return NonEmpty2;
 }();
-var singleton3 = function(dictPlus) {
+var singleton2 = function(dictPlus) {
   return function(a2) {
     return new NonEmpty(a2, empty(dictPlus));
   };
@@ -2040,6 +1483,706 @@ var unsafeCrashWith = function(msg) {
   });
 };
 
+// output/Record.Builder/foreign.js
+function copyRecord(rec) {
+  var copy = {};
+  for (var key2 in rec) {
+    if ({}.hasOwnProperty.call(rec, key2)) {
+      copy[key2] = rec[key2];
+    }
+  }
+  return copy;
+}
+function unsafeModify(l) {
+  return function(f) {
+    return function(rec) {
+      rec[l] = f(rec[l]);
+      return rec;
+    };
+  };
+}
+
+// output/Data.Function.Uncurried/foreign.js
+var runFn3 = function(fn) {
+  return function(a2) {
+    return function(b) {
+      return function(c) {
+        return fn(a2, b, c);
+      };
+    };
+  };
+};
+
+// output/Record.Builder/index.js
+var semigroupoidBuilder = semigroupoidFn;
+var modify = function() {
+  return function() {
+    return function(dictIsSymbol) {
+      return function(l) {
+        return function(f) {
+          return function(r1) {
+            return unsafeModify(reflectSymbol(dictIsSymbol)(l))(f)(r1);
+          };
+        };
+      };
+    };
+  };
+};
+var categoryBuilder = categoryFn;
+var build = function(v) {
+  return function(r1) {
+    return v(copyRecord(r1));
+  };
+};
+
+// output/Heterogeneous.Mapping/index.js
+var ConstMapping = function(x) {
+  return x;
+};
+var mappingWithIndex = function(dict) {
+  return dict.mappingWithIndex;
+};
+var mapping = function(dict) {
+  return dict.mapping;
+};
+var mapRecordWithIndexNil = {
+  mapRecordWithIndexBuilder: function(v) {
+    return function(v1) {
+      return identity(categoryBuilder);
+    };
+  }
+};
+var mapRecordWithIndexBuilder = function(dict) {
+  return dict.mapRecordWithIndexBuilder;
+};
+var mapRecordWithIndexCons = function(dictIsSymbol) {
+  return function(dictMappingWithIndex) {
+    return function(dictMapRecordWithIndex) {
+      return function() {
+        return function() {
+          return {
+            mapRecordWithIndexBuilder: function(v) {
+              return function(f) {
+                return compose(semigroupoidBuilder)(modify()()(dictIsSymbol)($$Proxy.value)(mappingWithIndex(dictMappingWithIndex)(f)($$Proxy.value)))(mapRecordWithIndexBuilder(dictMapRecordWithIndex)($$Proxy.value)(f));
+              };
+            }
+          };
+        };
+      };
+    };
+  };
+};
+var hmapRecord = function() {
+  return function(dictMapRecordWithIndex) {
+    return {
+      hmap: function() {
+        var $72 = mapRecordWithIndexBuilder(dictMapRecordWithIndex)($$Proxy.value);
+        return function($73) {
+          return build($72(ConstMapping($73)));
+        };
+      }()
+    };
+  };
+};
+var hmap = function(dict) {
+  return dict.hmap;
+};
+var constMapping = function(dictMapping) {
+  return {
+    mappingWithIndex: function(v) {
+      return function(v1) {
+        return mapping(dictMapping)(v);
+      };
+    }
+  };
+};
+
+// output/Bolson.Always/index.js
+var AlwaysEffect = /* @__PURE__ */ function() {
+  function AlwaysEffect2() {
+  }
+  ;
+  AlwaysEffect2.value = new AlwaysEffect2();
+  return AlwaysEffect2;
+}();
+var mappingAlwaysEffectFuncti = function(dictAlways) {
+  return {
+    mapping: function(v) {
+      return map(functorFn)(always(dictAlways));
+    }
+  };
+};
+var halways = function(dictHMap) {
+  return hmap(dictHMap)(AlwaysEffect.value);
+};
+
+// output/Control.Monad.ST.Global/index.js
+var toEffect = unsafeCoerce2;
+
+// output/Control.Monad.ST.Internal/foreign.js
+var map_ = function(f) {
+  return function(a2) {
+    return function() {
+      return f(a2());
+    };
+  };
+};
+var pure_ = function(a2) {
+  return function() {
+    return a2;
+  };
+};
+var bind_ = function(a2) {
+  return function(f) {
+    return function() {
+      return f(a2())();
+    };
+  };
+};
+function newSTRef(val) {
+  return function() {
+    return { value: val };
+  };
+}
+var read = function(ref) {
+  return function() {
+    return ref.value;
+  };
+};
+var modifyImpl = function(f) {
+  return function(ref) {
+    return function() {
+      var t = f(ref.value);
+      ref.value = t.state;
+      return t.value;
+    };
+  };
+};
+var write = function(a2) {
+  return function(ref) {
+    return function() {
+      return ref.value = a2;
+    };
+  };
+};
+
+// output/Control.Monad/index.js
+var ap = function(dictMonad) {
+  return function(f) {
+    return function(a2) {
+      return bind(dictMonad.Bind1())(f)(function(f$prime) {
+        return bind(dictMonad.Bind1())(a2)(function(a$prime) {
+          return pure(dictMonad.Applicative0())(f$prime(a$prime));
+        });
+      });
+    };
+  };
+};
+
+// output/Effect/foreign.js
+var pureE = function(a2) {
+  return function() {
+    return a2;
+  };
+};
+var bindE = function(a2) {
+  return function(f) {
+    return function() {
+      return f(a2())();
+    };
+  };
+};
+
+// output/Effect/index.js
+var $runtime_lazy2 = function(name16, moduleName, init3) {
+  var state3 = 0;
+  var val;
+  return function(lineNumber) {
+    if (state3 === 2)
+      return val;
+    if (state3 === 1)
+      throw new ReferenceError(name16 + " was needed before it finished initializing (module " + moduleName + ", line " + lineNumber + ")", moduleName, lineNumber);
+    state3 = 1;
+    val = init3();
+    state3 = 2;
+    return val;
+  };
+};
+var monadEffect = {
+  Applicative0: function() {
+    return applicativeEffect;
+  },
+  Bind1: function() {
+    return bindEffect;
+  }
+};
+var bindEffect = {
+  bind: bindE,
+  Apply0: function() {
+    return $lazy_applyEffect(0);
+  }
+};
+var applicativeEffect = {
+  pure: pureE,
+  Apply0: function() {
+    return $lazy_applyEffect(0);
+  }
+};
+var $lazy_functorEffect = /* @__PURE__ */ $runtime_lazy2("functorEffect", "Effect", function() {
+  return {
+    map: liftA1(applicativeEffect)
+  };
+});
+var $lazy_applyEffect = /* @__PURE__ */ $runtime_lazy2("applyEffect", "Effect", function() {
+  return {
+    apply: ap(monadEffect),
+    Functor0: function() {
+      return $lazy_functorEffect(0);
+    }
+  };
+});
+var functorEffect = /* @__PURE__ */ $lazy_functorEffect(20);
+var applyEffect = /* @__PURE__ */ $lazy_applyEffect(23);
+var semigroupEffect = function(dictSemigroup) {
+  return {
+    append: lift2(applyEffect)(append(dictSemigroup))
+  };
+};
+var monoidEffect = function(dictMonoid) {
+  return {
+    mempty: pureE(mempty(dictMonoid)),
+    Semigroup0: function() {
+      return semigroupEffect(dictMonoid.Semigroup0());
+    }
+  };
+};
+
+// output/Control.Monad.ST.Internal/index.js
+var $runtime_lazy3 = function(name16, moduleName, init3) {
+  var state3 = 0;
+  var val;
+  return function(lineNumber) {
+    if (state3 === 2)
+      return val;
+    if (state3 === 1)
+      throw new ReferenceError(name16 + " was needed before it finished initializing (module " + moduleName + ", line " + lineNumber + ")", moduleName, lineNumber);
+    state3 = 1;
+    val = init3();
+    state3 = 2;
+    return val;
+  };
+};
+var modify$prime = modifyImpl;
+var modify2 = function(f) {
+  return modify$prime(function(s) {
+    var s$prime = f(s);
+    return {
+      state: s$prime,
+      value: s$prime
+    };
+  });
+};
+var functorST = {
+  map: map_
+};
+var monadST = {
+  Applicative0: function() {
+    return applicativeST;
+  },
+  Bind1: function() {
+    return bindST;
+  }
+};
+var bindST = {
+  bind: bind_,
+  Apply0: function() {
+    return $lazy_applyST(0);
+  }
+};
+var applicativeST = {
+  pure: pure_,
+  Apply0: function() {
+    return $lazy_applyST(0);
+  }
+};
+var $lazy_applyST = /* @__PURE__ */ $runtime_lazy3("applyST", "Control.Monad.ST.Internal", function() {
+  return {
+    apply: ap(monadST),
+    Functor0: function() {
+      return functorST;
+    }
+  };
+});
+var applyST = /* @__PURE__ */ $lazy_applyST(46);
+
+// output/Control.Monad.ST.Class/index.js
+var monadSTST = {
+  liftST: /* @__PURE__ */ identity(categoryFn),
+  Monad0: function() {
+    return monadST;
+  }
+};
+var monadSTEffect = {
+  liftST: toEffect,
+  Monad0: function() {
+    return monadEffect;
+  }
+};
+var liftST = function(dict) {
+  return dict.liftST;
+};
+
+// output/Data.Array/foreign.js
+var replicateFill = function(count2) {
+  return function(value13) {
+    if (count2 < 1) {
+      return [];
+    }
+    var result = new Array(count2);
+    return result.fill(value13);
+  };
+};
+var replicatePolyfill = function(count2) {
+  return function(value13) {
+    var result = [];
+    var n = 0;
+    for (var i2 = 0; i2 < count2; i2++) {
+      result[n++] = value13;
+    }
+    return result;
+  };
+};
+var replicate = typeof Array.prototype.fill === "function" ? replicateFill : replicatePolyfill;
+var fromFoldableImpl = function() {
+  function Cons3(head5, tail2) {
+    this.head = head5;
+    this.tail = tail2;
+  }
+  var emptyList = {};
+  function curryCons(head5) {
+    return function(tail2) {
+      return new Cons3(head5, tail2);
+    };
+  }
+  function listToArray(list) {
+    var result = [];
+    var count2 = 0;
+    var xs = list;
+    while (xs !== emptyList) {
+      result[count2++] = xs.head;
+      xs = xs.tail;
+    }
+    return result;
+  }
+  return function(foldr2) {
+    return function(xs) {
+      return listToArray(foldr2(curryCons)(emptyList)(xs));
+    };
+  };
+}();
+var indexImpl = function(just) {
+  return function(nothing) {
+    return function(xs) {
+      return function(i2) {
+        return i2 < 0 || i2 >= xs.length ? nothing : just(xs[i2]);
+      };
+    };
+  };
+};
+var findMapImpl = function(nothing) {
+  return function(isJust2) {
+    return function(f) {
+      return function(xs) {
+        for (var i2 = 0; i2 < xs.length; i2++) {
+          var result = f(xs[i2]);
+          if (isJust2(result))
+            return result;
+        }
+        return nothing;
+      };
+    };
+  };
+};
+var findIndexImpl = function(just) {
+  return function(nothing) {
+    return function(f) {
+      return function(xs) {
+        for (var i2 = 0, l = xs.length; i2 < l; i2++) {
+          if (f(xs[i2]))
+            return just(i2);
+        }
+        return nothing;
+      };
+    };
+  };
+};
+var _deleteAt = function(just) {
+  return function(nothing) {
+    return function(i2) {
+      return function(l) {
+        if (i2 < 0 || i2 >= l.length)
+          return nothing;
+        var l1 = l.slice();
+        l1.splice(i2, 1);
+        return just(l1);
+      };
+    };
+  };
+};
+var filter = function(f) {
+  return function(xs) {
+    return xs.filter(f);
+  };
+};
+var partition = function(f) {
+  return function(xs) {
+    var yes = [];
+    var no = [];
+    for (var i2 = 0; i2 < xs.length; i2++) {
+      var x = xs[i2];
+      if (f(x))
+        yes.push(x);
+      else
+        no.push(x);
+    }
+    return { yes, no };
+  };
+};
+var sortByImpl = function() {
+  function mergeFromTo(compare2, fromOrdering, xs1, xs2, from3, to2) {
+    var mid;
+    var i2;
+    var j;
+    var k;
+    var x;
+    var y;
+    var c;
+    mid = from3 + (to2 - from3 >> 1);
+    if (mid - from3 > 1)
+      mergeFromTo(compare2, fromOrdering, xs2, xs1, from3, mid);
+    if (to2 - mid > 1)
+      mergeFromTo(compare2, fromOrdering, xs2, xs1, mid, to2);
+    i2 = from3;
+    j = mid;
+    k = from3;
+    while (i2 < mid && j < to2) {
+      x = xs2[i2];
+      y = xs2[j];
+      c = fromOrdering(compare2(x)(y));
+      if (c > 0) {
+        xs1[k++] = y;
+        ++j;
+      } else {
+        xs1[k++] = x;
+        ++i2;
+      }
+    }
+    while (i2 < mid) {
+      xs1[k++] = xs2[i2++];
+    }
+    while (j < to2) {
+      xs1[k++] = xs2[j++];
+    }
+  }
+  return function(compare2) {
+    return function(fromOrdering) {
+      return function(xs) {
+        var out;
+        if (xs.length < 2)
+          return xs;
+        out = xs.slice(0);
+        mergeFromTo(compare2, fromOrdering, out, xs.slice(0), 0, xs.length);
+        return out;
+      };
+    };
+  };
+}();
+
+// output/Data.Array.ST/foreign.js
+function newSTArray() {
+  return [];
+}
+var pushAll = function(as) {
+  return function(xs) {
+    return function() {
+      return xs.push.apply(xs, as);
+    };
+  };
+};
+var unsafeFreeze = function(xs) {
+  return function() {
+    return xs;
+  };
+};
+function copyImpl(xs) {
+  return function() {
+    return xs.slice();
+  };
+}
+var thaw = copyImpl;
+var sortByImpl2 = function() {
+  function mergeFromTo(compare2, fromOrdering, xs1, xs2, from3, to2) {
+    var mid;
+    var i2;
+    var j;
+    var k;
+    var x;
+    var y;
+    var c;
+    mid = from3 + (to2 - from3 >> 1);
+    if (mid - from3 > 1)
+      mergeFromTo(compare2, fromOrdering, xs2, xs1, from3, mid);
+    if (to2 - mid > 1)
+      mergeFromTo(compare2, fromOrdering, xs2, xs1, mid, to2);
+    i2 = from3;
+    j = mid;
+    k = from3;
+    while (i2 < mid && j < to2) {
+      x = xs2[i2];
+      y = xs2[j];
+      c = fromOrdering(compare2(x)(y));
+      if (c > 0) {
+        xs1[k++] = y;
+        ++j;
+      } else {
+        xs1[k++] = x;
+        ++i2;
+      }
+    }
+    while (i2 < mid) {
+      xs1[k++] = xs2[i2++];
+    }
+    while (j < to2) {
+      xs1[k++] = xs2[j++];
+    }
+  }
+  return function(compare2) {
+    return function(fromOrdering) {
+      return function(xs) {
+        return function() {
+          if (xs.length < 2)
+            return xs;
+          mergeFromTo(compare2, fromOrdering, xs, xs.slice(0), 0, xs.length);
+          return xs;
+        };
+      };
+    };
+  };
+}();
+
+// output/Data.Array.ST/index.js
+var withArray = function(f) {
+  return function(xs) {
+    return function __do() {
+      var result = thaw(xs)();
+      f(result)();
+      return unsafeFreeze(result)();
+    };
+  };
+};
+var push = function(a2) {
+  return pushAll([a2]);
+};
+
+// output/Data.Array.ST.Iterator/index.js
+var Iterator = /* @__PURE__ */ function() {
+  function Iterator2(value0, value1) {
+    this.value0 = value0;
+    this.value1 = value1;
+  }
+  ;
+  Iterator2.create = function(value0) {
+    return function(value1) {
+      return new Iterator2(value0, value1);
+    };
+  };
+  return Iterator2;
+}();
+var next = function(v) {
+  return function __do() {
+    var i2 = read(v.value1)();
+    modify2(function(v1) {
+      return v1 + 1 | 0;
+    })(v.value1)();
+    return v.value0(i2);
+  };
+};
+var iterator = function(f) {
+  return map(functorST)(Iterator.create(f))(newSTRef(0));
+};
+var iterate = function(iter) {
+  return function(f) {
+    return function __do() {
+      var $$break = newSTRef(false)();
+      while (map(functorST)(not(heytingAlgebraBoolean))(read($$break))()) {
+        (function __do2() {
+          var mx = next(iter)();
+          if (mx instanceof Just) {
+            return f(mx.value0)();
+          }
+          ;
+          if (mx instanceof Nothing) {
+            return $$void(functorST)(write(true)($$break))();
+          }
+          ;
+          throw new Error("Failed pattern match at Data.Array.ST.Iterator (line 42, column 5 - line 44, column 47): " + [mx.constructor.name]);
+        })();
+      }
+      ;
+      return {};
+    };
+  };
+};
+
+// output/Data.Array/index.js
+var snoc = function(xs) {
+  return function(x) {
+    return withArray(push(x))(xs)();
+  };
+};
+var singleton3 = function(a2) {
+  return [a2];
+};
+var index = /* @__PURE__ */ function() {
+  return indexImpl(Just.create)(Nothing.value);
+}();
+var findMap = /* @__PURE__ */ function() {
+  return findMapImpl(Nothing.value)(isJust);
+}();
+var findIndex = /* @__PURE__ */ function() {
+  return findIndexImpl(Just.create)(Nothing.value);
+}();
+var deleteAt = /* @__PURE__ */ function() {
+  return _deleteAt(Just.create)(Nothing.value);
+}();
+var deleteBy = function(v) {
+  return function(v1) {
+    return function(v2) {
+      if (v2.length === 0) {
+        return [];
+      }
+      ;
+      return maybe(v2)(function(i2) {
+        return fromJust()(deleteAt(i2)(v2));
+      })(findIndex(v(v1))(v2));
+    };
+  };
+};
+var cons2 = function(x) {
+  return function(xs) {
+    return append(semigroupArray)([x])(xs);
+  };
+};
+var concatMap = /* @__PURE__ */ flip(/* @__PURE__ */ bind(bindArray));
+var mapMaybe = function(f) {
+  return concatMap(function() {
+    var $99 = maybe([])(singleton3);
+    return function($100) {
+      return $99(f($100));
+    };
+  }());
+};
+
 // output/Data.Map.Internal/index.js
 var Leaf = /* @__PURE__ */ function() {
   function Leaf2() {
@@ -2221,7 +2364,7 @@ var KickUp = /* @__PURE__ */ function() {
   };
   return KickUp2;
 }();
-var lookup = function(dictOrd) {
+var lookup2 = function(dictOrd) {
   return function(k) {
     var comp = compare(dictOrd);
     var go2 = function($copy_v) {
@@ -2787,7 +2930,7 @@ var alter = function(dictOrd) {
   return function(f) {
     return function(k) {
       return function(m) {
-        var v = f(lookup(dictOrd)(k)(m));
+        var v = f(lookup2(dictOrd)(k)(m));
         if (v instanceof Nothing) {
           return $$delete(dictOrd)(k)(m);
         }
@@ -3037,7 +3180,7 @@ var fold3 = function(dictMonadST) {
         return function(k) {
           return bind(dictMonadST.Monad0().Bind1())(liftST(dictMonadST)(newSTRef(b)))(function(result) {
             return v(function(a2) {
-              return bind(dictMonadST.Monad0().Bind1())(liftST(dictMonadST)(modify(f(a2))(result)))(k);
+              return bind(dictMonadST.Monad0().Bind1())(liftST(dictMonadST)(modify2(f(a2))(result)))(k);
             });
           });
         };
@@ -3086,10 +3229,10 @@ var create = function(dictMonadST) {
     return bind(dictMonadST.Monad0().Bind1())(liftST(dictMonadST)(newSTRef([])))(function(subscribers) {
       return pure(dictMonadST.Monad0().Applicative0())({
         event: function(k) {
-          return bind(dictMonadST1.Monad0().Bind1())(liftST(dictMonadST1)(modify(function(v) {
+          return bind(dictMonadST1.Monad0().Bind1())(liftST(dictMonadST1)(modify2(function(v) {
             return append(semigroupArray)(v)([k]);
           })(subscribers)))(function() {
-            return pure(dictMonadST1.Monad0().Applicative0())(bind(dictMonadST1.Monad0().Bind1())(liftST(dictMonadST1)(modify(deleteBy(unsafeRefEq)(k))(subscribers)))(function() {
+            return pure(dictMonadST1.Monad0().Applicative0())(bind(dictMonadST1.Monad0().Bind1())(liftST(dictMonadST1)(modify2(deleteBy(unsafeRefEq)(k))(subscribers)))(function() {
               return pure(dictMonadST1.Monad0().Applicative0())(unit);
             }));
           });
@@ -3314,17 +3457,6 @@ function unsafePE(u) {
   };
 }
 
-// output/Data.Function.Uncurried/foreign.js
-var runFn3 = function(fn) {
-  return function(a2) {
-    return function(b) {
-      return function(c) {
-        return fn(a2, b, c);
-      };
-    };
-  };
-};
-
 // output/Record/index.js
 var insert2 = function(dictIsSymbol) {
   return function() {
@@ -3506,28 +3638,109 @@ var eqScope = {
     };
   }
 };
-var vbussed = function() {
-  return function(dictMonadST) {
-    return function(dictVBus) {
-      return function(px11) {
-        return function(f) {
-          return new EventfulElement$prime(vbus()(dictMonadST)(dictVBus)(px11)(f));
-        };
-      };
-    };
-  };
-};
 var fixed = function(a2) {
   return new FixedChildren$prime(a2);
 };
 var dyn = function(a2) {
   return new DynamicChildren$prime(a2);
 };
-var bussed = function(dictMonadST) {
-  return function(f) {
-    return new EventfulElement$prime(bus(dictMonadST)(f));
+
+// output/Deku.Core/index.js
+var korokST = {
+  Always0: function() {
+    return always1(monoidEffect(monoidUnit));
+  },
+  Always1: function() {
+    return always1(monoidEffect(monoidEffect(monoidUnit)));
+  },
+  Always2: function() {
+    return always1(monoidEffect(monoidUnit));
+  },
+  Always3: function() {
+    return always1(monoidEndo(categoryFn));
+  },
+  Always4: function() {
+    return always1(monoidEndo(categoryFn));
+  },
+  MonadST5: function() {
+    return monadSTST;
+  }
+};
+var korokGlobalEffect = {
+  Always0: function() {
+    return always2(monoidEffect(monoidUnit));
+  },
+  Always1: function() {
+    return always2(monoidEffect(monoidEffect(monoidUnit)));
+  },
+  Always2: function() {
+    return always2(monoidEffect(monoidUnit));
+  },
+  Always3: function() {
+    return always2(monoidEndo(categoryFn));
+  },
+  Always4: function() {
+    return always2(monoidEndo(categoryFn));
+  },
+  MonadST5: function() {
+    return monadSTEffect;
+  }
+};
+var vbussed = function() {
+  return function(dictKorok) {
+    return function() {
+      return function(dictMapRecordWithIndex) {
+        return function(dictVBus) {
+          return function(px11) {
+            return function(f) {
+              return new EventfulElement$prime(vbus()(dictKorok.MonadST5())(dictVBus)(px11)(lcmap(profunctorFn)(halways(hmapRecord()(dictMapRecordWithIndex)))(f)));
+            };
+          };
+        };
+      };
+    };
   };
 };
+var sendToTop = /* @__PURE__ */ function() {
+  return new Logic(unit);
+}();
+var remove = /* @__PURE__ */ function() {
+  return Remove.value;
+}();
+var insert3 = /* @__PURE__ */ function() {
+  return Insert.create;
+}();
+var bus2 = function(dictKorok) {
+  return function(dictAlways) {
+    return function(f) {
+      return bus(dictKorok.MonadST5())(lcmap(profunctorFn)(map(functorFn)(always(dictAlways)))(f));
+    };
+  };
+};
+var bussed = function(dictKorok) {
+  return function(dictAlways) {
+    return function(f) {
+      return new EventfulElement$prime(bus2(dictKorok)(dictAlways)(f));
+    };
+  };
+};
+
+// output/Bolson.Control/foreign.js
+function mutAr(a2) {
+  return () => {
+    return a2.slice();
+  };
+}
+function unsafeUpdateMutAr(i2) {
+  return (v) => (a2) => () => {
+    a2[i2] = v;
+  };
+}
+function readAr(a2) {
+  return () => {
+    return a2.slice();
+  };
+}
 
 // output/Data.Reflectable/index.js
 var reflectType = function(dict) {
@@ -3667,7 +3880,7 @@ var mutate = function(f) {
     });
   };
 };
-var insert3 = function(k) {
+var insert4 = function(k) {
   return function(v) {
     return mutate(poke2(k)(v));
   };
@@ -3809,7 +4022,7 @@ var flatten = function(dictApplicative) {
                                                   scope: myScope
                                                 }));
                                               });
-                                            })))(join(dictMonadST.Monad0().Bind1())(liftST(dictMonadST)(read(myUnsub)))))(join(dictMonadST.Monad0().Bind1())(liftST(dictMonadST)(read(eltsUnsub)))))($$void(dictApplicative.Apply0().Functor0())(liftST(dictMonadST)(modify($$delete3(myUnsubId))(cancelInner)))))($$void(dictApplicative.Apply0().Functor0())(liftST(dictMonadST)(modify($$delete3(eltsUnsubId))(cancelInner))));
+                                            })))(join(dictMonadST.Monad0().Bind1())(liftST(dictMonadST)(read(myUnsub)))))(join(dictMonadST.Monad0().Bind1())(liftST(dictMonadST)(read(eltsUnsub)))))($$void(dictApplicative.Apply0().Functor0())(liftST(dictMonadST)(modify2($$delete3(myUnsubId))(cancelInner)))))($$void(dictApplicative.Apply0().Functor0())(liftST(dictMonadST)(modify2($$delete3(eltsUnsubId))(cancelInner))));
                                             return applySecond(dictApplicative.Apply0())($$void(dictApplicative.Apply0().Functor0())(liftST(dictMonadST)(write(mic)(myImmediateCancellation))))(mic);
                                           });
                                         }
@@ -3829,7 +4042,7 @@ var flatten = function(dictApplicative) {
                                               ;
                                               return v.wrapElt(kid$prime.value0);
                                             }()))(v2))(function(c1) {
-                                              return discard(discardUnit)(dictMonadST.Monad0().Bind1())($$void(dictApplicative.Apply0().Functor0())(liftST(dictMonadST)(modify(insert3(eltsUnsubId)(c1))(cancelInner))))(function() {
+                                              return discard(discardUnit)(dictMonadST.Monad0().Bind1())($$void(dictApplicative.Apply0().Functor0())(liftST(dictMonadST)(modify2(insert4(eltsUnsubId)(c1))(cancelInner))))(function() {
                                                 return $$void(dictApplicative.Apply0().Functor0())(liftST(dictMonadST)(write(c1)(eltsUnsub)));
                                               });
                                             });
@@ -3840,7 +4053,7 @@ var flatten = function(dictApplicative) {
                                       });
                                     }))(function(c0) {
                                       return discard(discardUnit)(dictMonadST.Monad0().Bind1())($$void(dictApplicative.Apply0().Functor0())(liftST(dictMonadST)(write(c0)(myUnsub))))(function() {
-                                        return discard(discardUnit)(dictMonadST.Monad0().Bind1())($$void(dictApplicative.Apply0().Functor0())(liftST(dictMonadST)(modify(insert3(myUnsubId)(c0))(cancelInner))))(function() {
+                                        return discard(discardUnit)(dictMonadST.Monad0().Bind1())($$void(dictApplicative.Apply0().Functor0())(liftST(dictMonadST)(modify2(insert4(myUnsubId)(c0))(cancelInner))))(function() {
                                           return join(dictMonadST.Monad0().Bind1())(liftST(dictMonadST)(read(myImmediateCancellation)));
                                         });
                                       });
@@ -3869,7 +4082,7 @@ var flatten = function(dictApplicative) {
     };
   };
 };
-var enteq = unsafeCoerce;
+var enteq = unsafeCoerce2;
 var internalPortal = function() {
   return function(dictMonadST) {
     return function(isGlobal) {
@@ -3903,7 +4116,7 @@ var internalPortal = function() {
                         })(toArray()(toBeam)));
                         return bind(dictMonadST.Monad0().Bind1())(subscribe(actualized)(k))(function(u0) {
                           return bind(dictMonadST.Monad0().Bind1())(liftST(dictMonadST)(newSTRef(pure(dictMonadST.Monad0().Applicative0())(unit))))(function(av2) {
-                            return bind(dictMonadST.Monad0().Bind1())(map(dictMonadST.Monad0().Bind1().Apply0().Functor0())(unsafeCoerce)(readAr(av)))(function(idz) {
+                            return bind(dictMonadST.Monad0().Bind1())(map(dictMonadST.Monad0().Bind1().Apply0().Functor0())(unsafeCoerce2)(readAr(av)))(function(idz) {
                               var injectable = map(functorVect)(function(id2) {
                                 return function(specialization) {
                                   return new Element$prime(v1.fromElt(function(v2) {
@@ -3925,7 +4138,7 @@ var internalPortal = function() {
                                   }));
                                 };
                               })(idz);
-                              var realized = flatten(dictMonadST.Monad0().Applicative0())(dictMonadST)(v)(psr)(interpreter)(enteq(closure(injectable)(unsafeCoerce)));
+                              var realized = flatten(dictMonadST.Monad0().Applicative0())(dictMonadST)(v)(psr)(interpreter)(enteq(closure(injectable)(unsafeCoerce2)));
                               return bind(dictMonadST.Monad0().Bind1())(subscribe(realized)(k))(function(u) {
                                 return discard(discardUnit)(dictMonadST.Monad0().Bind1())($$void(dictMonadST.Monad0().Bind1().Apply0().Functor0())(liftST(dictMonadST)(write(u)(av2))))(function() {
                                   return pure(dictMonadST.Monad0().Applicative0())(discard(discardUnit)(dictMonadST.Monad0().Bind1())(u0)(function() {
@@ -4089,27 +4302,27 @@ var text_ = function(dictMonad) {
     return text(dictMonad)(bang2(dictMonad.Applicative0())(txt));
   };
 };
-var elementify = function(dictMonadST) {
+var elementify = function(dictKorok) {
   return function(tag) {
     return function(atts) {
       return function(children) {
         var go2 = function(v) {
           return function(v1) {
             return makeEvent(function(k) {
-              return bind(dictMonadST.Monad0().Bind1())(v1.ids)(function(me) {
-                return discard(discardUnit)(dictMonadST.Monad0().Bind1())(v.raiseId(me))(function() {
-                  return map(dictMonadST.Monad0().Bind1().Apply0().Functor0())(applySecond(dictMonadST.Monad0().Bind1().Apply0())(k(v1.deleteFromCache({
+              return bind(dictKorok.MonadST5().Monad0().Bind1())(v1.ids)(function(me) {
+                return discard(discardUnit)(dictKorok.MonadST5().Monad0().Bind1())(v.raiseId(me))(function() {
+                  return map(dictKorok.MonadST5().Monad0().Bind1().Apply0().Functor0())(applySecond(dictKorok.MonadST5().Monad0().Bind1().Apply0())(k(v1.deleteFromCache({
                     id: me
-                  }))))(subscribe(alt(altEvent(dictMonadST.Monad0().Applicative0()))(oneOf(foldableArray)(plusEvent(dictMonadST.Monad0().Applicative0()))([bang2(dictMonadST.Monad0().Applicative0())(unsafeElement(v1)({
+                  }))))(subscribe(alt(altEvent(dictKorok.MonadST5().Monad0().Applicative0()))(oneOf(foldableArray)(plusEvent(dictKorok.MonadST5().Monad0().Applicative0()))([bang2(dictKorok.MonadST5().Monad0().Applicative0())(unsafeElement(v1)({
                     id: me,
                     parent: v.parent,
                     scope: v.scope,
                     tag
-                  })), unsafeSetAttribute(v1)(me)(atts)]))(__internalDekuFlatten(dictMonadST)({
+                  })), unsafeSetAttribute(v1)(me)(atts)]))(__internalDekuFlatten(dictKorok)({
                     parent: new Just(me),
                     scope: v.scope,
                     raiseId: function(v2) {
-                      return pure(dictMonadST.Monad0().Applicative0())(unit);
+                      return pure(dictKorok.MonadST5().Monad0().Applicative0())(unit);
                     }
                   })(v1)(children)))(k));
                 });
@@ -4122,8 +4335,8 @@ var elementify = function(dictMonadST) {
     };
   };
 };
-var __internalDekuFlatten = function(dictMonadST) {
-  return flatten(dictMonadST.Monad0().Applicative0())(dictMonadST)({
+var __internalDekuFlatten = function(dictKorok) {
+  return flatten(dictKorok.MonadST5().Monad0().Applicative0())(dictKorok.MonadST5())({
     doLogic: function(v) {
       return function(v1) {
         return function(id2) {
@@ -4152,7 +4365,7 @@ var __internalDekuFlatten = function(dictMonadST) {
       };
     },
     wrapElt: function() {
-      var $119 = elementify(dictMonadST)("div")(empty(plusEvent(dictMonadST.Monad0().Applicative0())));
+      var $119 = elementify(dictKorok)("div")(empty(plusEvent(dictKorok.MonadST5().Monad0().Applicative0())));
       return function($120) {
         return Element$prime.create($119($120));
       };
@@ -4163,10 +4376,10 @@ var __internalDekuFlatten = function(dictMonadST) {
   });
 };
 var portal2 = function() {
-  return function(dictMonadST) {
+  return function(dictKorok) {
     return function(a2) {
       return function(b) {
-        return portal()(dictMonadST)({
+        return portal()(dictKorok.MonadST5())({
           doLogic: function(v) {
             return function(v1) {
               return function(id2) {
@@ -4195,7 +4408,7 @@ var portal2 = function() {
             };
           },
           wrapElt: function() {
-            var $129 = elementify(dictMonadST)("div")(empty(plusEvent(dictMonadST.Monad0().Applicative0())));
+            var $129 = elementify(dictKorok)("div")(empty(plusEvent(dictKorok.MonadST5().Monad0().Applicative0())));
             return function($130) {
               return Element$prime.create($129($130));
             };
@@ -4224,7 +4437,7 @@ var portal2 = function() {
           }()
         })(a2)(lcmap(profunctorFn)(map(functorVect)(function(v) {
           return v(unit);
-        }))(b));
+        }))(coerce()(b)));
       };
     };
   };
@@ -4329,36 +4542,36 @@ var attrA_StyleString = {
 };
 
 // output/Deku.DOM.Elt.A/index.js
-var a = function(dictMonadST) {
+var a = function(dictKorok) {
   return function(attributes) {
     return function(kids) {
-      return new Element$prime(elementify(dictMonadST)("a")(attributes)(fixed(kids)));
+      return new Element$prime(elementify(dictKorok)("a")(attributes)(fixed(kids)));
     };
   };
 };
 
 // output/Deku.DOM.Elt.Div/index.js
-var div2 = function(dictMonadST) {
+var div2 = function(dictKorok) {
   return function(attributes) {
     return function(kids) {
-      return new Element$prime(elementify(dictMonadST)("div")(attributes)(fixed(kids)));
+      return new Element$prime(elementify(dictKorok)("div")(attributes)(fixed(kids)));
     };
   };
 };
-var div_ = function(dictMonadST) {
-  return div2(dictMonadST)(empty(plusEvent(dictMonadST.Monad0().Applicative0())));
+var div_ = function(dictKorok) {
+  return div2(dictKorok)(empty(plusEvent(dictKorok.MonadST5().Monad0().Applicative0())));
 };
 
 // output/Deku.DOM.Elt.Span/index.js
-var span = function(dictMonadST) {
+var span = function(dictKorok) {
   return function(attributes) {
     return function(kids) {
-      return new Element$prime(elementify(dictMonadST)("span")(attributes)(fixed(kids)));
+      return new Element$prime(elementify(dictKorok)("span")(attributes)(fixed(kids)));
     };
   };
 };
-var span_ = function(dictMonadST) {
-  return span(dictMonadST)(empty(plusEvent(dictMonadST.Monad0().Applicative0())));
+var span_ = function(dictKorok) {
+  return span(dictKorok)(empty(plusEvent(dictKorok.MonadST5().Monad0().Applicative0())));
 };
 
 // output/Deku.DOM.Attr.Href/index.js
@@ -4410,84 +4623,84 @@ var attrInput_XtypeString = {
 };
 
 // output/Deku.DOM.Elt.Button/index.js
-var button = function(dictMonadST) {
+var button = function(dictKorok) {
   return function(attributes) {
     return function(kids) {
-      return new Element$prime(elementify(dictMonadST)("button")(attributes)(fixed(kids)));
+      return new Element$prime(elementify(dictKorok)("button")(attributes)(fixed(kids)));
     };
   };
 };
-var button_ = function(dictMonadST) {
-  return button(dictMonadST)(empty(plusEvent(dictMonadST.Monad0().Applicative0())));
+var button_ = function(dictKorok) {
+  return button(dictKorok)(empty(plusEvent(dictKorok.MonadST5().Monad0().Applicative0())));
 };
 
 // output/Deku.DOM.Elt.Code/index.js
-var code = function(dictMonadST) {
+var code = function(dictKorok) {
   return function(attributes) {
     return function(kids) {
-      return new Element$prime(elementify(dictMonadST)("code")(attributes)(fixed(kids)));
+      return new Element$prime(elementify(dictKorok)("code")(attributes)(fixed(kids)));
     };
   };
 };
-var code_ = function(dictMonadST) {
-  return code(dictMonadST)(empty(plusEvent(dictMonadST.Monad0().Applicative0())));
+var code_ = function(dictKorok) {
+  return code(dictKorok)(empty(plusEvent(dictKorok.MonadST5().Monad0().Applicative0())));
 };
 
 // output/Deku.DOM.Elt.I/index.js
-var i = function(dictMonadST) {
+var i = function(dictKorok) {
   return function(attributes) {
     return function(kids) {
-      return new Element$prime(elementify(dictMonadST)("i")(attributes)(fixed(kids)));
+      return new Element$prime(elementify(dictKorok)("i")(attributes)(fixed(kids)));
     };
   };
 };
-var i_ = function(dictMonadST) {
-  return i(dictMonadST)(empty(plusEvent(dictMonadST.Monad0().Applicative0())));
+var i_ = function(dictKorok) {
+  return i(dictKorok)(empty(plusEvent(dictKorok.MonadST5().Monad0().Applicative0())));
 };
 
 // output/Deku.DOM.Elt.Input/index.js
-var input = function(dictMonadST) {
+var input = function(dictKorok) {
   return function(attributes) {
     return function(kids) {
-      return new Element$prime(elementify(dictMonadST)("input")(attributes)(fixed(kids)));
+      return new Element$prime(elementify(dictKorok)("input")(attributes)(fixed(kids)));
     };
   };
 };
 
 // output/Deku.DOM.Elt.Li/index.js
-var li = function(dictMonadST) {
+var li = function(dictKorok) {
   return function(attributes) {
     return function(kids) {
-      return new Element$prime(elementify(dictMonadST)("li")(attributes)(fixed(kids)));
+      return new Element$prime(elementify(dictKorok)("li")(attributes)(fixed(kids)));
     };
   };
 };
-var li_ = function(dictMonadST) {
-  return li(dictMonadST)(empty(plusEvent(dictMonadST.Monad0().Applicative0())));
+var li_ = function(dictKorok) {
+  return li(dictKorok)(empty(plusEvent(dictKorok.MonadST5().Monad0().Applicative0())));
 };
 
 // output/Deku.DOM.Elt.Pre/index.js
-var pre = function(dictMonadST) {
+var pre = function(dictKorok) {
   return function(attributes) {
     return function(kids) {
-      return new Element$prime(elementify(dictMonadST)("pre")(attributes)(fixed(kids)));
+      return new Element$prime(elementify(dictKorok)("pre")(attributes)(fixed(kids)));
     };
   };
 };
-var pre_ = function(dictMonadST) {
-  return pre(dictMonadST)(empty(plusEvent(dictMonadST.Monad0().Applicative0())));
+var pre_ = function(dictKorok) {
+  return pre(dictKorok)(empty(plusEvent(dictKorok.MonadST5().Monad0().Applicative0())));
 };
 
 // output/Deku.DOM.Elt.Ul/index.js
-var ul = function(dictMonadST) {
+var ul = function(dictKorok) {
   return function(attributes) {
     return function(kids) {
-      return new Element$prime(elementify(dictMonadST)("ul")(attributes)(fixed(kids)));
+      return new Element$prime(elementify(dictKorok)("ul")(attributes)(fixed(kids)));
     };
   };
 };
-var ul_ = function(dictMonadST) {
-  return ul(dictMonadST)(empty(plusEvent(dictMonadST.Monad0().Applicative0())));
+var ul_ = function(dictKorok) {
+  return ul(dictKorok)(empty(plusEvent(dictKorok.MonadST5().Monad0().Applicative0())));
 };
 
 // output/Deku.Example.Docs.Types/index.js
@@ -4599,17 +4812,17 @@ var pursxToElementConsAttr = function() {
   return function(dictPursxToElement) {
     return function(dictReflectable) {
       return function(dictIsSymbol) {
-        return function(dictMonadST) {
+        return function(dictKorok) {
           return {
             pursxToElement: function(pxScope) {
               return function(v) {
                 return function(r) {
                   var v1 = pursxToElement(dictPursxToElement)(pxScope)($$Proxy.value)(r);
                   return {
-                    cache: insert3(reflectType(dictReflectable)($$Proxy.value))(true)(v1.cache),
+                    cache: insert4(reflectType(dictReflectable)($$Proxy.value))(true)(v1.cache),
                     element: function(parent2) {
                       return function(v2) {
-                        return alt(altEvent(dictMonadST.Monad0().Applicative0()))(map(functorEvent)(lcmap(profunctorFn)(unsafeUnAttribute)(function(v3) {
+                        return alt(altEvent(dictKorok.MonadST5().Monad0().Applicative0()))(map(functorEvent)(lcmap(profunctorFn)(unsafeUnAttribute)(function(v3) {
                           if (v3.value instanceof Prop$prime) {
                             return v2.setProp({
                               id: reflectType(dictReflectable)($$Proxy.value) + pxScope,
@@ -4626,7 +4839,7 @@ var pursxToElementConsAttr = function() {
                             });
                           }
                           ;
-                          throw new Error("Failed pattern match at Deku.Pursx (line 4476, column 38 - line 4486, column 24): " + [v3.value.constructor.name]);
+                          throw new Error("Failed pattern match at Deku.Pursx (line 4475, column 38 - line 4485, column 24): " + [v3.value.constructor.name]);
                         }))(get(dictIsSymbol)()($$Proxy.value)(r)))(v1.element(parent2)(v2));
                       };
                     }
@@ -4645,7 +4858,7 @@ var makePursx$prime = function(dictReflectable) {
   return function(dictReflectable1) {
     return function() {
       return function() {
-        return function(dictMonadST) {
+        return function(dictKorok) {
           return function(dictPursxToElement) {
             return function(verb) {
               return function(html) {
@@ -4653,13 +4866,13 @@ var makePursx$prime = function(dictReflectable) {
                   var go2 = function(v) {
                     return function(v1) {
                       return makeEvent(function(k1) {
-                        return bind(dictMonadST.Monad0().Bind1())(v1.ids)(function(me) {
-                          return bind(dictMonadST.Monad0().Bind1())(v1.ids)(function(pxScope) {
-                            return discard(discardUnit)(dictMonadST.Monad0().Bind1())(v.raiseId(me))(function() {
+                        return bind(dictKorok.MonadST5().Monad0().Bind1())(v1.ids)(function(me) {
+                          return bind(dictKorok.MonadST5().Monad0().Bind1())(v1.ids)(function(pxScope) {
+                            return discard(discardUnit)(dictKorok.MonadST5().Monad0().Bind1())(v.raiseId(me))(function() {
                               var v2 = pursxToElement(dictPursxToElement)(pxScope)($$Proxy.value)(r);
-                              return map(dictMonadST.Monad0().Bind1().Apply0().Functor0())(applySecond(dictMonadST.Monad0().Bind1().Apply0())(k1(v1.deleteFromCache({
+                              return map(dictKorok.MonadST5().Monad0().Bind1().Apply0().Functor0())(applySecond(dictKorok.MonadST5().Monad0().Bind1().Apply0())(k1(v1.deleteFromCache({
                                 id: me
-                              }))))(subscribe(alt(altEvent(dictMonadST.Monad0().Applicative0()))(bang2(dictMonadST.Monad0().Applicative0())(v1.makePursx({
+                              }))))(subscribe(alt(altEvent(dictKorok.MonadST5().Monad0().Applicative0()))(bang2(dictKorok.MonadST5().Monad0().Applicative0())(v1.makePursx({
                                 id: me,
                                 parent: v.parent,
                                 cache: v2.cache,
@@ -4688,12 +4901,12 @@ var makePursx = function(dictReflectable) {
   return function() {
     return function() {
       return function(dictPursxToElement) {
-        return function(dictMonadST) {
+        return function(dictKorok) {
           return makePursx$prime(dictReflectable)({
             reflectType: function() {
               return "~";
             }
-          })()()(dictMonadST)(dictPursxToElement)($$Proxy.value);
+          })()()(dictKorok)(dictPursxToElement)($$Proxy.value);
         };
       };
     };
@@ -4701,17 +4914,17 @@ var makePursx = function(dictReflectable) {
 };
 var psx = function(dictReflectable) {
   return function() {
-    return function(dictMonadST) {
+    return function(dictKorok) {
       return function(dictPursxToElement) {
         return function(px11) {
-          return makePursx(dictReflectable)()()(dictPursxToElement)(dictMonadST)(px11)({});
+          return makePursx(dictReflectable)()()(dictPursxToElement)(dictKorok)(px11)({});
         };
       };
     };
   };
 };
-var __internalDekuFlatten2 = function(dictMonadST) {
-  return flatten(dictMonadST.Monad0().Applicative0())(dictMonadST)({
+var __internalDekuFlatten2 = function(dictKorok) {
+  return flatten(dictKorok.MonadST5().Monad0().Applicative0())(dictKorok.MonadST5())({
     doLogic: function(v) {
       return function(v1) {
         return function(id2) {
@@ -4740,7 +4953,7 @@ var __internalDekuFlatten2 = function(dictMonadST) {
       };
     },
     wrapElt: function() {
-      var $446 = elementify(dictMonadST)("div")(empty(plusEvent(dictMonadST.Monad0().Applicative0())));
+      var $446 = elementify(dictKorok)("div")(empty(plusEvent(dictKorok.MonadST5().Monad0().Applicative0())));
       return function($447) {
         return Element$prime.create($446($447));
       };
@@ -4754,7 +4967,7 @@ var pursxToElementConsInsert = function() {
   return function(dictPursxToElement) {
     return function(dictReflectable) {
       return function(dictIsSymbol) {
-        return function(dictMonadST) {
+        return function(dictKorok) {
           return {
             pursxToElement: function(pxScope) {
               return function(v) {
@@ -4762,14 +4975,14 @@ var pursxToElementConsInsert = function() {
                   var v1 = get(dictIsSymbol)()($$Proxy.value)(r);
                   var v2 = pursxToElement(dictPursxToElement)(pxScope)($$Proxy.value)(r);
                   return {
-                    cache: insert3(reflectType(dictReflectable)($$Proxy.value))(false)(v2.cache),
+                    cache: insert4(reflectType(dictReflectable)($$Proxy.value))(false)(v2.cache),
                     element: function(info2) {
                       return function(di) {
-                        return alt(altEvent(dictMonadST.Monad0().Applicative0()))(__internalDekuFlatten2(dictMonadST)({
+                        return alt(altEvent(dictKorok.MonadST5().Monad0().Applicative0()))(__internalDekuFlatten2(dictKorok)({
                           parent: new Just(reflectType(dictReflectable)($$Proxy.value) + pxScope),
                           scope: info2.scope,
                           raiseId: function(v3) {
-                            return pure(dictMonadST.Monad0().Applicative0())(unit);
+                            return pure(dictKorok.MonadST5().Monad0().Applicative0())(unit);
                           }
                         })(di)(v1))(v2.element(info2)(di));
                       };
@@ -4789,8 +5002,8 @@ var pursxToElementConsInsert = function() {
 var px = /* @__PURE__ */ function() {
   return $$Proxy.value;
 }();
-var components = function(dictMonadST) {
-  return function(dpage) {
+var components = function(dpage) {
+  return function(dictKorok) {
     return makePursx({
       reflectType: function() {
         return `<div>
@@ -4828,7 +5041,7 @@ myDivWithNoChildren = D.div attrs blank
   <p>In this section, we built a simple component. In the next section, we'll recreate the exact same element using a different input syntax called <a ~next~ style="cursor:pointer;">Pursx</a>.</p>
 </div>`;
       }
-    })()()(pursxToElementConsInsert()(pursxToElementConsAttr()(pursxToElementConsInsert()(pursxToElementNil(dictMonadST.Monad0().Applicative0()))({
+    })()()(pursxToElementConsInsert()(pursxToElementConsAttr()(pursxToElementConsInsert()(pursxToElementNil(dictKorok.MonadST5().Monad0().Applicative0()))({
       reflectType: function() {
         return "result";
       }
@@ -4836,7 +5049,7 @@ myDivWithNoChildren = D.div attrs blank
       reflectSymbol: function() {
         return "result";
       }
-    })(dictMonadST))({
+    })(dictKorok))({
       reflectType: function() {
         return "next";
       }
@@ -4844,7 +5057,7 @@ myDivWithNoChildren = D.div attrs blank
       reflectSymbol: function() {
         return "next";
       }
-    })(dictMonadST))({
+    })(dictKorok))({
       reflectType: function() {
         return "code";
       }
@@ -4852,17 +5065,17 @@ myDivWithNoChildren = D.div attrs blank
       reflectSymbol: function() {
         return "code";
       }
-    })(dictMonadST))(dictMonadST)(px)({
-      code: nut(pre_(dictMonadST)([code_(dictMonadST)([text_(dictMonadST.Monad0())('module Main where\n\nimport Prelude\n\nimport Deku.Attribute ((:=))\nimport Deku.Control (text_)\nimport Deku.DOM as D\nimport Deku.Toplevel (runInBodyA)\nimport Effect (Effect)\nimport FRP.Event.Class (bang)\n\nmain :: Effect Unit\nmain = runInBodyA\n  ( [ D.button_ [ text_ "I do nothing" ]\n    , D.ul_ $ map (D.li_ <<< pure <<< text_) [ "A", "B", "C" ]\n    , D.div_\n        [ D.a (bang $ D.Href := "https://example.com")\n            [ text_ "foo " ]\n        , D.i_ [ text_ " bar " ]\n        , D.span (bang $ D.Style := "font-weight: 800;")\n            [ text_ " baz" ]\n        ]\n    , D.div_\n        [ D.div_\n            [ D.div_ [ D.input (bang $ D.Xtype := "range") [] ]\n            ]\n        ]\n    ]\n  )')])])),
-      result: nut(div_(dictMonadST)([button_(dictMonadST)([text_(dictMonadST.Monad0())("I do nothing")]), ul_(dictMonadST)(map(functorArray)(function() {
-        var $1 = li_(dictMonadST);
+    })(dictKorok))(dictKorok)(px)({
+      code: nut(pre_(dictKorok)([code_(dictKorok)([text_(dictKorok.MonadST5().Monad0())('module Main where\n\nimport Prelude\n\nimport Deku.Attribute ((:=))\nimport Deku.Control (text_)\nimport Deku.DOM as D\nimport Deku.Toplevel (runInBodyA)\nimport Effect (Effect)\nimport FRP.Event.Class (bang)\n\nmain :: Effect Unit\nmain = runInBodyA\n  ( [ D.button_ [ text_ "I do nothing" ]\n    , D.ul_ $ map (D.li_ <<< pure <<< text_) [ "A", "B", "C" ]\n    , D.div_\n        [ D.a (bang $ D.Href := "https://example.com")\n            [ text_ "foo " ]\n        , D.i_ [ text_ " bar " ]\n        , D.span (bang $ D.Style := "font-weight: 800;")\n            [ text_ " baz" ]\n        ]\n    , D.div_\n        [ D.div_\n            [ D.div_ [ D.input (bang $ D.Xtype := "range") [] ]\n            ]\n        ]\n    ]\n  )')])])),
+      result: nut(div_(dictKorok)([button_(dictKorok)([text_(dictKorok.MonadST5().Monad0())("I do nothing")]), ul_(dictKorok)(map(functorArray)(function() {
+        var $1 = li_(dictKorok);
         var $2 = pure(applicativeArray);
-        var $3 = text_(dictMonadST.Monad0());
+        var $3 = text_(dictKorok.MonadST5().Monad0());
         return function($4) {
           return $1($2($3($4)));
         };
-      }())(["A", "B", "C"])), div_(dictMonadST)([a(dictMonadST)(bang2(dictMonadST.Monad0().Applicative0())(attr(attrA_HrefString)(Href.value)("https://example.com")))([text_(dictMonadST.Monad0())("foo ")]), i_(dictMonadST)([text_(dictMonadST.Monad0())(" bar ")]), span(dictMonadST)(bang2(dictMonadST.Monad0().Applicative0())(attr(attrSpan_StyleString)(Style.value)("font-weight: 800;")))([text_(dictMonadST.Monad0())(" baz")])]), div_(dictMonadST)([div_(dictMonadST)([div_(dictMonadST)([input(dictMonadST)(bang2(dictMonadST.Monad0().Applicative0())(attr(attrInput_XtypeString)(Xtype.value)("range")))([])])])])])),
-      next: bang2(dictMonadST.Monad0().Applicative0())(attr(attrOnClickCb)(OnClick.value)(cb($$const(applySecond(applyEffect)(dpage(PURSX1.value))(scrollToTop)))))
+      }())(["A", "B", "C"])), div_(dictKorok)([a(dictKorok)(bang2(dictKorok.MonadST5().Monad0().Applicative0())(attr(attrA_HrefString)(Href.value)("https://example.com")))([text_(dictKorok.MonadST5().Monad0())("foo ")]), i_(dictKorok)([text_(dictKorok.MonadST5().Monad0())(" bar ")]), span(dictKorok)(bang2(dictKorok.MonadST5().Monad0().Applicative0())(attr(attrSpan_StyleString)(Style.value)("font-weight: 800;")))([text_(dictKorok.MonadST5().Monad0())(" baz")])]), div_(dictKorok)([div_(dictKorok)([div_(dictKorok)([input(dictKorok)(bang2(dictKorok.MonadST5().Monad0().Applicative0())(attr(attrInput_XtypeString)(Xtype.value)("range")))([])])])])])),
+      next: bang2(dictKorok.MonadST5().Monad0().Applicative0())(attr(attrOnClickCb)(OnClick.value)(cb($$const(applySecond(applyEffect)(dpage(PURSX1.value))(scrollToTop)))))
     });
   };
 };
@@ -5213,7 +5426,7 @@ var $$try = function(dictMonadError) {
 var state = function(dict) {
   return dict.state;
 };
-var modify3 = function(dictMonadState) {
+var modify4 = function(dictMonadState) {
   return function(f) {
     return state(dictMonadState)(function(s) {
       var s$prime = f(s);
@@ -5625,7 +5838,7 @@ var print = /* @__PURE__ */ either(/* @__PURE__ */ show(showMethod))(unCustomMet
 
 // output/Data.List.NonEmpty/index.js
 var singleton7 = /* @__PURE__ */ function() {
-  var $169 = singleton3(plusList);
+  var $169 = singleton2(plusList);
   return function($170) {
     return NonEmptyList($169($170));
   };
@@ -6786,8 +6999,8 @@ var ErrorAtProperty = /* @__PURE__ */ function() {
   };
   return ErrorAtProperty2;
 }();
-var unsafeToForeign = unsafeCoerce;
-var unsafeFromForeign = unsafeCoerce;
+var unsafeToForeign = unsafeCoerce2;
+var unsafeFromForeign = unsafeCoerce2;
 var renderForeignError = function(v) {
   if (v instanceof ForeignError) {
     return v.value0;
@@ -7139,16 +7352,15 @@ var clickCb = function(push2) {
         return liftEffect(monadEffectAff)(push2(new Result(stringifyWithIndent(2)(result.value0.body))));
       }
       ;
-      throw new Error("Failed pattern match at Deku.Example.Docs.Effects (line 44, column 9 - line 51, column 48): " + [result.constructor.name]);
+      throw new Error("Failed pattern match at Deku.Example.Docs.Effects (line 41, column 9 - line 48, column 48): " + [result.constructor.name]);
     }))();
   }));
 };
-var effects = function(dictMonadST) {
-  return function(dictAlways) {
-    return function(dpage) {
-      return makePursx({
-        reflectType: function() {
-          return `<div>
+var effects = function(dpage) {
+  return function(dictKorok) {
+    return makePursx({
+      reflectType: function() {
+        return `<div>
   <h1>Effects</h1>
 
   <h2>Let's make a network call</h2>
@@ -7170,199 +7382,76 @@ var effects = function(dictMonadST) {
   <h2>Next steps</h2>
   <p>It is also possible to handle events (and by extension effectful actions in events, like network calls) in Pursx. Let's see how in the <a ~next~ style="cursor:pointer;">second Pursx section</a>.</p>
 </div>`;
-        }
-      })()()(pursxToElementConsInsert()(pursxToElementConsAttr()(pursxToElementConsInsert()(pursxToElementNil(dictMonadST.Monad0().Applicative0()))({
-        reflectType: function() {
-          return "result";
-        }
-      })({
-        reflectSymbol: function() {
-          return "result";
-        }
-      })(dictMonadST))({
-        reflectType: function() {
-          return "next";
-        }
-      })({
-        reflectSymbol: function() {
-          return "next";
-        }
-      })(dictMonadST))({
-        reflectType: function() {
-          return "code";
-        }
-      })({
-        reflectSymbol: function() {
-          return "code";
-        }
-      })(dictMonadST))(dictMonadST)(px2)({
-        code: nut(pre_(dictMonadST)([code_(dictMonadST)([text_(dictMonadST.Monad0())('module Main where\n\nimport Prelude\n\nimport Affjax.ResponseFormat as ResponseFormat\nimport Affjax.Web as AX\nimport Control.Alt ((<|>))\nimport Data.Argonaut.Core (stringifyWithIndent)\nimport Data.Either (Either(..))\nimport Data.Filterable (compact, filterMap)\nimport Data.HTTP.Method (Method(..))\nimport Data.Maybe (Maybe(..))\nimport Data.Profunctor (lcmap)\nimport Data.Tuple.Nested ((/\\))\nimport Deku.Attribute (Cb, cb, (:=))\nimport Deku.Control (text)\nimport Deku.DOM as D\nimport Deku.Toplevel (runInBody1)\nimport Effect (Effect)\nimport Effect.Aff (launchAff_)\nimport Effect.Class (liftEffect)\nimport FRP.Event (bang, bus, mapAccum)\n\ndata UIAction = Initial | Loading | Result String\n\nclickCb :: (UIAction -> Effect Unit) -> Cb\nclickCb push = cb\n  ( const do\n      push Loading\n      launchAff_ $ do\n        result <- AX.request\n          ( AX.defaultRequest\n              { url = "https://randomuser.me/api/"\n              , method = Left GET\n              , responseFormat = ResponseFormat.json\n              }\n          )\n        case result of\n          Left err -> liftEffect $ push\n            $ Result\n              ( "GET /api response failed to decode: " <>\n                  AX.printError err\n              )\n          Right response -> liftEffect $ push $ Result $\n            stringifyWithIndent 2 response.body\n  )\n\nclickText = "Click to get some random user data." :: String\n\nmain :: Effect Unit\nmain = runInBody1\n  ( bus \\push -> lcmap (bang Initial <|> _)\n      \\event ->\n        let\n          loadingOrResult = filterMap\n            ( case _ of\n                Loading -> Just $ Left unit\n                Result s -> Just $ Right s\n                _ -> Nothing\n            )\n            event\n          loading = filterMap\n            ( case _ of\n                Left _ -> Just unit\n                _ -> Nothing\n            )\n            loadingOrResult\n          result = filterMap\n            ( case _ of\n                Right s -> Just s\n                _ -> Nothing\n            )\n            loadingOrResult\n        in\n          D.div_\n            [ D.div_\n                [ D.button (bang (D.OnClick := clickCb push))\n                    [ text\n                        ( bang clickText\n                            <|> (loading $> "Loading...")\n                            <|> (result $> clickText)\n                        )\n                    ]\n                ]\n            , D.div\n                ( (bang (D.Style := "display: none;")) <|>\n                    ( compact\n                        ( mapAccum\n                            ( \\_ b -> (b && false) /\\\n                                if b then Just unit else Nothing\n                            )\n                            result\n                            true\n                        ) $> (D.Style := "display: block;")\n                    )\n                )\n                [ D.pre_ [ D.code_ [ text (bang "" <|> result) ] ] ]\n            ]\n  )\n')])])),
-        result: nut(bussed(dictMonadST)(lcmap(profunctorFn)(map(functorFn)(always(dictAlways)))(function(push2) {
-          return function(event) {
-            var loadingOrResult = filterMap(filterableEvent(dictMonadST.Monad0().Applicative0()))(function(v) {
-              if (v instanceof Loading) {
-                return new Just(new Left(unit));
-              }
-              ;
-              if (v instanceof Result) {
-                return new Just(new Right(v.value0));
-              }
-              ;
-              return Nothing.value;
-            })(event);
-            var result = filterMap(filterableEvent(dictMonadST.Monad0().Applicative0()))(function(v) {
-              if (v instanceof Right) {
-                return new Just(v.value0);
-              }
-              ;
-              return Nothing.value;
-            })(loadingOrResult);
-            var loading = filterMap(filterableEvent(dictMonadST.Monad0().Applicative0()))(function(v) {
-              if (v instanceof Left) {
-                return new Just(unit);
-              }
-              ;
-              return Nothing.value;
-            })(loadingOrResult);
-            return div_(dictMonadST)([div_(dictMonadST)([button(dictMonadST)(bang2(dictMonadST.Monad0().Applicative0())(attr(attrOnClickCb)(OnClick.value)(clickCb(push2))))([text(dictMonadST.Monad0())(alt(altEvent(dictMonadST.Monad0().Applicative0()))(bang2(dictMonadST.Monad0().Applicative0())(clickText))(alt(altEvent(dictMonadST.Monad0().Applicative0()))(voidLeft(functorEvent)(loading)("Loading..."))(voidLeft(functorEvent)(result)(clickText))))])]), div2(dictMonadST)(alt(altEvent(dictMonadST.Monad0().Applicative0()))(bang2(dictMonadST.Monad0().Applicative0())(attr(attrDiv_StyleString)(Style.value)("display: none;")))(voidLeft(functorEvent)(compact(compactableEvent(dictMonadST.Monad0().Applicative0()))(mapAccum(eventIsEvent(dictMonadST))(function(v) {
-              return function(b) {
-                return new Tuple(b && false, function() {
-                  if (b) {
-                    return new Just(unit);
-                  }
-                  ;
-                  return Nothing.value;
-                }());
-              };
-            })(result)(true)))(attr(attrDiv_StyleString)(Style.value)("display: block;"))))([pre_(dictMonadST)([code_(dictMonadST)([text(dictMonadST.Monad0())(alt(altEvent(dictMonadST.Monad0().Applicative0()))(bang2(dictMonadST.Monad0().Applicative0())(""))(result))])])])]);
-          };
-        }))),
-        next: bang2(dictMonadST.Monad0().Applicative0())(attr(attrOnClickCb)(OnClick.value)(cb($$const(applySecond(applyEffect)(dpage(PURSX2.value))(scrollToTop)))))
-      });
-    };
-  };
-};
-
-// output/Record.Builder/foreign.js
-function copyRecord(rec) {
-  var copy = {};
-  for (var key2 in rec) {
-    if ({}.hasOwnProperty.call(rec, key2)) {
-      copy[key2] = rec[key2];
-    }
-  }
-  return copy;
-}
-function unsafeModify(l) {
-  return function(f) {
-    return function(rec) {
-      rec[l] = f(rec[l]);
-      return rec;
-    };
-  };
-}
-
-// output/Record.Builder/index.js
-var semigroupoidBuilder = semigroupoidFn;
-var modify4 = function() {
-  return function() {
-    return function(dictIsSymbol) {
-      return function(l) {
-        return function(f) {
-          return function(r1) {
-            return unsafeModify(reflectSymbol(dictIsSymbol)(l))(f)(r1);
-          };
-        };
-      };
-    };
-  };
-};
-var categoryBuilder = categoryFn;
-var build = function(v) {
-  return function(r1) {
-    return v(copyRecord(r1));
-  };
-};
-
-// output/Heterogeneous.Mapping/index.js
-var ConstMapping = function(x) {
-  return x;
-};
-var mappingWithIndex = function(dict) {
-  return dict.mappingWithIndex;
-};
-var mapping = function(dict) {
-  return dict.mapping;
-};
-var mapRecordWithIndexNil = {
-  mapRecordWithIndexBuilder: function(v) {
-    return function(v1) {
-      return identity(categoryBuilder);
-    };
-  }
-};
-var mapRecordWithIndexBuilder = function(dict) {
-  return dict.mapRecordWithIndexBuilder;
-};
-var mapRecordWithIndexCons = function(dictIsSymbol) {
-  return function(dictMappingWithIndex) {
-    return function(dictMapRecordWithIndex) {
-      return function() {
-        return function() {
-          return {
-            mapRecordWithIndexBuilder: function(v) {
-              return function(f) {
-                return compose(semigroupoidBuilder)(modify4()()(dictIsSymbol)($$Proxy.value)(mappingWithIndex(dictMappingWithIndex)(f)($$Proxy.value)))(mapRecordWithIndexBuilder(dictMapRecordWithIndex)($$Proxy.value)(f));
-              };
+      }
+    })()()(pursxToElementConsInsert()(pursxToElementConsAttr()(pursxToElementConsInsert()(pursxToElementNil(dictKorok.MonadST5().Monad0().Applicative0()))({
+      reflectType: function() {
+        return "result";
+      }
+    })({
+      reflectSymbol: function() {
+        return "result";
+      }
+    })(dictKorok))({
+      reflectType: function() {
+        return "next";
+      }
+    })({
+      reflectSymbol: function() {
+        return "next";
+      }
+    })(dictKorok))({
+      reflectType: function() {
+        return "code";
+      }
+    })({
+      reflectSymbol: function() {
+        return "code";
+      }
+    })(dictKorok))(dictKorok)(px2)({
+      code: nut(pre_(dictKorok)([code_(dictKorok)([text_(dictKorok.MonadST5().Monad0())('module Main where\n\nimport Prelude\n\nimport Affjax.ResponseFormat as ResponseFormat\nimport Affjax.Web as AX\nimport Control.Alt ((<|>))\nimport Data.Argonaut.Core (stringifyWithIndent)\nimport Data.Either (Either(..))\nimport Data.Filterable (compact, filterMap)\nimport Data.HTTP.Method (Method(..))\nimport Data.Maybe (Maybe(..))\nimport Data.Profunctor (lcmap)\nimport Data.Tuple.Nested ((/\\))\nimport Deku.Attribute (Cb, cb, (:=))\nimport Deku.Control (text)\nimport Deku.DOM as D\nimport Deku.Toplevel (runInBody1)\nimport Effect (Effect)\nimport Effect.Aff (launchAff_)\nimport Effect.Class (liftEffect)\nimport FRP.Event (bang, bus, mapAccum)\n\ndata UIAction = Initial | Loading | Result String\n\nclickCb :: (UIAction -> Effect Unit) -> Cb\nclickCb push = cb\n  ( const do\n      push Loading\n      launchAff_ $ do\n        result <- AX.request\n          ( AX.defaultRequest\n              { url = "https://randomuser.me/api/"\n              , method = Left GET\n              , responseFormat = ResponseFormat.json\n              }\n          )\n        case result of\n          Left err -> liftEffect $ push\n            $ Result\n              ( "GET /api response failed to decode: " <>\n                  AX.printError err\n              )\n          Right response -> liftEffect $ push $ Result $\n            stringifyWithIndent 2 response.body\n  )\n\nclickText = "Click to get some random user data." :: String\n\nmain :: Effect Unit\nmain = runInBody1\n  ( bus \\push -> lcmap (bang Initial <|> _)\n      \\event ->\n        let\n          loadingOrResult = filterMap\n            ( case _ of\n                Loading -> Just $ Left unit\n                Result s -> Just $ Right s\n                _ -> Nothing\n            )\n            event\n          loading = filterMap\n            ( case _ of\n                Left _ -> Just unit\n                _ -> Nothing\n            )\n            loadingOrResult\n          result = filterMap\n            ( case _ of\n                Right s -> Just s\n                _ -> Nothing\n            )\n            loadingOrResult\n        in\n          D.div_\n            [ D.div_\n                [ D.button (bang (D.OnClick := clickCb push))\n                    [ text\n                        ( bang clickText\n                            <|> (loading $> "Loading...")\n                            <|> (result $> clickText)\n                        )\n                    ]\n                ]\n            , D.div\n                ( (bang (D.Style := "display: none;")) <|>\n                    ( compact\n                        ( mapAccum\n                            ( \\_ b -> (b && false) /\\\n                                if b then Just unit else Nothing\n                            )\n                            result\n                            true\n                        ) $> (D.Style := "display: block;")\n                    )\n                )\n                [ D.pre_ [ D.code_ [ text (bang "" <|> result) ] ] ]\n            ]\n  )\n')])])),
+      result: nut(bussed(dictKorok)(dictKorok.Always2())(function(push2) {
+        return function(event) {
+          var loadingOrResult = filterMap(filterableEvent(dictKorok.MonadST5().Monad0().Applicative0()))(function(v) {
+            if (v instanceof Loading) {
+              return new Just(new Left(unit));
             }
-          };
+            ;
+            if (v instanceof Result) {
+              return new Just(new Right(v.value0));
+            }
+            ;
+            return Nothing.value;
+          })(event);
+          var result = filterMap(filterableEvent(dictKorok.MonadST5().Monad0().Applicative0()))(function(v) {
+            if (v instanceof Right) {
+              return new Just(v.value0);
+            }
+            ;
+            return Nothing.value;
+          })(loadingOrResult);
+          var loading = filterMap(filterableEvent(dictKorok.MonadST5().Monad0().Applicative0()))(function(v) {
+            if (v instanceof Left) {
+              return new Just(unit);
+            }
+            ;
+            return Nothing.value;
+          })(loadingOrResult);
+          return div_(dictKorok)([div_(dictKorok)([button(dictKorok)(bang2(dictKorok.MonadST5().Monad0().Applicative0())(attr(attrOnClickCb)(OnClick.value)(clickCb(push2))))([text(dictKorok.MonadST5().Monad0())(alt(altEvent(dictKorok.MonadST5().Monad0().Applicative0()))(bang2(dictKorok.MonadST5().Monad0().Applicative0())(clickText))(alt(altEvent(dictKorok.MonadST5().Monad0().Applicative0()))(voidLeft(functorEvent)(loading)("Loading..."))(voidLeft(functorEvent)(result)(clickText))))])]), div2(dictKorok)(alt(altEvent(dictKorok.MonadST5().Monad0().Applicative0()))(bang2(dictKorok.MonadST5().Monad0().Applicative0())(attr(attrDiv_StyleString)(Style.value)("display: none;")))(voidLeft(functorEvent)(compact(compactableEvent(dictKorok.MonadST5().Monad0().Applicative0()))(mapAccum(eventIsEvent(dictKorok.MonadST5()))(function(v) {
+            return function(b) {
+              return new Tuple(b && false, function() {
+                if (b) {
+                  return new Just(unit);
+                }
+                ;
+                return Nothing.value;
+              }());
+            };
+          })(result)(true)))(attr(attrDiv_StyleString)(Style.value)("display: block;"))))([pre_(dictKorok)([code_(dictKorok)([text(dictKorok.MonadST5().Monad0())(alt(altEvent(dictKorok.MonadST5().Monad0().Applicative0()))(bang2(dictKorok.MonadST5().Monad0().Applicative0())(""))(result))])])])]);
         };
-      };
-    };
+      })),
+      next: bang2(dictKorok.MonadST5().Monad0().Applicative0())(attr(attrOnClickCb)(OnClick.value)(cb($$const(applySecond(applyEffect)(dpage(PURSX2.value))(scrollToTop)))))
+    });
   };
-};
-var hmapRecord = function() {
-  return function(dictMapRecordWithIndex) {
-    return {
-      hmap: function() {
-        var $72 = mapRecordWithIndexBuilder(dictMapRecordWithIndex)($$Proxy.value);
-        return function($73) {
-          return build($72(ConstMapping($73)));
-        };
-      }()
-    };
-  };
-};
-var hmap = function(dict) {
-  return dict.hmap;
-};
-var constMapping = function(dictMapping) {
-  return {
-    mappingWithIndex: function(v) {
-      return function(v1) {
-        return mapping(dictMapping)(v);
-      };
-    }
-  };
-};
-
-// output/Deku.Always/index.js
-var AlwaysEffect = /* @__PURE__ */ function() {
-  function AlwaysEffect2() {
-  }
-  ;
-  AlwaysEffect2.value = new AlwaysEffect2();
-  return AlwaysEffect2;
-}();
-var mappingAlwaysEffectFuncti = function(dictAlways) {
-  return {
-    mapping: function(v) {
-      return map(functorFn)(always(dictAlways));
-    }
-  };
-};
-var halways = function(dictHMap) {
-  return hmap(dictHMap)(AlwaysEffect.value);
 };
 
 // output/Deku.DOM.Attr.OnInput/index.js
@@ -7469,12 +7558,11 @@ var click_ = function(dictFunctor) {
 var px3 = /* @__PURE__ */ function() {
   return $$Proxy.value;
 }();
-var events = function(dictMonadST) {
-  return function(dictAlways) {
-    return function(dpage) {
-      return makePursx({
-        reflectType: function() {
-          return `<div>
+var events = function(dpage) {
+  return function(dictKorok) {
+    return makePursx({
+      reflectType: function() {
+        return `<div>
   <h1>Events</h1>
 
   <h2>Listening to the DOM</h2>
@@ -7494,82 +7582,70 @@ var events = function(dictMonadST) {
   <h2>Next steps</h2>
   <p>In this section, saw how to react to events. In the next section, we'll use a similar mechanism to deal with arbitrary <a ~next~ style="cursor:pointer;">effects</a>.</p>
 </div>`;
-        }
-      })()()(pursxToElementConsInsert()(pursxToElementConsAttr()(pursxToElementConsInsert()(pursxToElementNil(dictMonadST.Monad0().Applicative0()))({
-        reflectType: function() {
-          return "result";
-        }
-      })({
+      }
+    })()()(pursxToElementConsInsert()(pursxToElementConsAttr()(pursxToElementConsInsert()(pursxToElementNil(dictKorok.MonadST5().Monad0().Applicative0()))({
+      reflectType: function() {
+        return "result";
+      }
+    })({
+      reflectSymbol: function() {
+        return "result";
+      }
+    })(dictKorok))({
+      reflectType: function() {
+        return "next";
+      }
+    })({
+      reflectSymbol: function() {
+        return "next";
+      }
+    })(dictKorok))({
+      reflectType: function() {
+        return "code";
+      }
+    })({
+      reflectSymbol: function() {
+        return "code";
+      }
+    })(dictKorok))(dictKorok)(px3)({
+      code: nut(pre_(dictKorok)([code_(dictKorok)([text_(dictKorok.MonadST5().Monad0())('module Main where\n\nimport Prelude\n\nimport Control.Alt ((<|>))\nimport Deku.Control (text, text_)\nimport Deku.DOM as D\nimport Deku.Listeners (click_, slider)\nimport Deku.Toplevel (runInBody1)\nimport Effect (Effect)\nimport FRP.Event (bang, fold)\nimport FRP.Event.VBus (V, vbus)\nimport Type.Proxy (Proxy(..))\n\ntype UIEvents = V\n  ( buttonClicked :: Unit\n  , sliderMoved :: Number\n  )\n\nmain :: Effect Unit\nmain = runInBody1\n  ( vbus (Proxy :: _ UIEvents) \\push event -> do\n      D.div_\n        [ D.button\n            (click_ (bang push.buttonClicked))\n            [ text_ "Click" ]\n        , D.div_\n            [ text\n                ( bang "Val: 0" <|>\n                    ( append "Val: " <<< show\n                        <$> fold\n                          (const (add 1))\n                          (bang unit <|> event.buttonClicked)\n                          (-1)\n                    )\n                )\n            ]\n        , D.div_\n            [ D.input\n                (slider (bang push.sliderMoved))\n                []\n            , D.div_\n                [ text\n                    ( bang "Val: 50" <|>\n                        ( append "Val: " <<< show\n                            <$> event.sliderMoved\n                        )\n                    )\n                ]\n            ]\n        ]\n  )\n')])])),
+      result: nut(vbussed()(dictKorok)()(mapRecordWithIndexCons({
         reflectSymbol: function() {
-          return "result";
+          return "buttonClicked";
         }
-      })(dictMonadST))({
-        reflectType: function() {
-          return "next";
-        }
-      })({
+      })(constMapping(mappingAlwaysEffectFuncti(dictKorok.Always2())))(mapRecordWithIndexCons({
         reflectSymbol: function() {
-          return "next";
+          return "sliderMoved";
         }
-      })(dictMonadST))({
-        reflectType: function() {
-          return "code";
-        }
-      })({
+      })(constMapping(mappingAlwaysEffectFuncti(dictKorok.Always2())))(mapRecordWithIndexNil)()())()())(vbusCons2({
         reflectSymbol: function() {
-          return "code";
+          return "buttonClicked";
         }
-      })(dictMonadST))(dictMonadST)(px3)({
-        code: nut(pre_(dictMonadST)([code_(dictMonadST)([text_(dictMonadST.Monad0())('module Main where\n\nimport Prelude\n\nimport Control.Alt ((<|>))\nimport Deku.Control (text, text_)\nimport Deku.DOM as D\nimport Deku.Listeners (click_, slider)\nimport Deku.Toplevel (runInBody1)\nimport Effect (Effect)\nimport FRP.Event (bang, fold)\nimport FRP.Event.VBus (V, vbus)\nimport Type.Proxy (Proxy(..))\n\ntype UIEvents = V\n  ( buttonClicked :: Unit\n  , sliderMoved :: Number\n  )\n\nmain :: Effect Unit\nmain = runInBody1\n  ( vbus (Proxy :: _ UIEvents) \\push event -> do\n      D.div_\n        [ D.button\n            (click_ (bang push.buttonClicked))\n            [ text_ "Click" ]\n        , D.div_\n            [ text\n                ( bang "Val: 0" <|>\n                    ( append "Val: " <<< show\n                        <$> fold\n                          (const (add 1))\n                          (bang unit <|> event.buttonClicked)\n                          (-1)\n                    )\n                )\n            ]\n        , D.div_\n            [ D.input\n                (slider (bang push.sliderMoved))\n                []\n            , D.div_\n                [ text\n                    ( bang "Val: 50" <|>\n                        ( append "Val: " <<< show\n                            <$> event.sliderMoved\n                        )\n                    )\n                ]\n            ]\n        ]\n  )\n')])])),
-        result: nut(vbussed()(dictMonadST)(vbusCons2({
-          reflectSymbol: function() {
-            return "buttonClicked";
-          }
-        })()()(vbusCons2({
-          reflectSymbol: function() {
-            return "sliderMoved";
-          }
-        })()()(vbusNil)()()()())()()()())($$Proxy.value)(lcmap(profunctorFn)(halways(hmapRecord()(mapRecordWithIndexCons({
-          reflectSymbol: function() {
-            return "buttonClicked";
-          }
-        })(constMapping(mappingAlwaysEffectFuncti(dictAlways)))(mapRecordWithIndexCons({
-          reflectSymbol: function() {
-            return "sliderMoved";
-          }
-        })(constMapping(mappingAlwaysEffectFuncti(dictAlways)))(mapRecordWithIndexNil)()())()())))(function(push2) {
-          return function(event) {
-            return div_(dictMonadST)([button(dictMonadST)(click_(functorEvent)(monoidUnit)(attrOnClickEffectUnit)(bang2(dictMonadST.Monad0().Applicative0())(push2.buttonClicked)))([text_(dictMonadST.Monad0())("Click")]), div_(dictMonadST)([text(dictMonadST.Monad0())(alt(altEvent(dictMonadST.Monad0().Applicative0()))(bang2(dictMonadST.Monad0().Applicative0())("Val: 0"))(map(functorEvent)(function() {
-              var $2 = append(semigroupString)("Val: ");
-              var $3 = show(showInt);
-              return function($4) {
-                return $2($3($4));
-              };
-            }())(fold2(eventIsEvent(dictMonadST))($$const(add(semiringInt)(1)))(alt(altEvent(dictMonadST.Monad0().Applicative0()))(bang2(dictMonadST.Monad0().Applicative0())(unit))(event.buttonClicked))(-1 | 0))))]), div_(dictMonadST)([input(dictMonadST)(slider(dictMonadST.Monad0().Applicative0())(bang2(dictMonadST.Monad0().Applicative0())(push2.sliderMoved)))([]), div_(dictMonadST)([text(dictMonadST.Monad0())(alt(altEvent(dictMonadST.Monad0().Applicative0()))(bang2(dictMonadST.Monad0().Applicative0())("Val: 50"))(map(functorEvent)(function() {
-              var $5 = append(semigroupString)("Val: ");
-              var $6 = show(showNumber);
-              return function($7) {
-                return $5($6($7));
-              };
-            }())(event.sliderMoved)))])])]);
-          };
-        }))),
-        next: bang2(dictMonadST.Monad0().Applicative0())(attr(attrOnClickCb)(OnClick.value)(cb($$const(applySecond(applyEffect)(dpage(Effects.value))(scrollToTop)))))
-      });
-    };
+      })()()(vbusCons2({
+        reflectSymbol: function() {
+          return "sliderMoved";
+        }
+      })()()(vbusNil)()()()())()()()())($$Proxy.value)(function(push2) {
+        return function(event) {
+          return div_(dictKorok)([button(dictKorok)(click_(functorEvent)(monoidUnit)(attrOnClickEffectUnit)(bang2(dictKorok.MonadST5().Monad0().Applicative0())(push2.buttonClicked)))([text_(dictKorok.MonadST5().Monad0())("Click")]), div_(dictKorok)([text(dictKorok.MonadST5().Monad0())(alt(altEvent(dictKorok.MonadST5().Monad0().Applicative0()))(bang2(dictKorok.MonadST5().Monad0().Applicative0())("Val: 0"))(map(functorEvent)(function() {
+            var $1 = append(semigroupString)("Val: ");
+            var $2 = show(showInt);
+            return function($3) {
+              return $1($2($3));
+            };
+          }())(fold2(eventIsEvent(dictKorok.MonadST5()))($$const(add(semiringInt)(1)))(alt(altEvent(dictKorok.MonadST5().Monad0().Applicative0()))(bang2(dictKorok.MonadST5().Monad0().Applicative0())(unit))(event.buttonClicked))(-1 | 0))))]), div_(dictKorok)([input(dictKorok)(slider(dictKorok.MonadST5().Monad0().Applicative0())(bang2(dictKorok.MonadST5().Monad0().Applicative0())(push2.sliderMoved)))([]), div_(dictKorok)([text(dictKorok.MonadST5().Monad0())(alt(altEvent(dictKorok.MonadST5().Monad0().Applicative0()))(bang2(dictKorok.MonadST5().Monad0().Applicative0())("Val: 50"))(map(functorEvent)(function() {
+            var $4 = append(semigroupString)("Val: ");
+            var $5 = show(showNumber);
+            return function($6) {
+              return $4($5($6));
+            };
+          }())(event.sliderMoved)))])])]);
+        };
+      })),
+      next: bang2(dictKorok.MonadST5().Monad0().Applicative0())(attr(attrOnClickCb)(OnClick.value)(cb($$const(applySecond(applyEffect)(dpage(Effects.value))(scrollToTop)))))
+    });
   };
 };
-
-// output/Deku.Core/index.js
-var sendToTop = /* @__PURE__ */ function() {
-  return new Logic(unit);
-}();
-var remove = /* @__PURE__ */ function() {
-  return Remove.value;
-}();
-var insert4 = /* @__PURE__ */ function() {
-  return Insert.create;
-}();
 
 // output/Deku.DOM.Attr.OnKeyup/index.js
 var OnKeyup = /* @__PURE__ */ function() {
@@ -7626,12 +7702,11 @@ var ChangeText = /* @__PURE__ */ function() {
 var px4 = /* @__PURE__ */ function() {
   return $$Proxy.value;
 }();
-var events2 = function(dictAlways) {
-  return function(dictMonadST) {
-    return function(dpage) {
-      return makePursx({
-        reflectType: function() {
-          return `<div>
+var events2 = function(dpage) {
+  return function(dictKorok) {
+    return makePursx({
+      reflectType: function() {
+        return `<div>
   <h1>Events 2</h1>
 
   <h2>Dynamic children</h2>
@@ -7664,33 +7739,33 @@ var events2 = function(dictAlways) {
   <h2>Next steps</h2>
   <p>In this section, we used nested events to insert and remove elements from a parent. In the next section, we'll see how we can use <a ~next~ style="cursor:pointer;">portals to move an element to a different place of the DOM</a>.</p>
 </div>`;
-        }
-      })()()(pursxToElementConsInsert()(pursxToElementConsAttr()(pursxToElementConsInsert()(pursxToElementNil(dictMonadST.Monad0().Applicative0()))({
-        reflectType: function() {
-          return "result";
-        }
-      })({
-        reflectSymbol: function() {
-          return "result";
-        }
-      })(dictMonadST))({
-        reflectType: function() {
-          return "next";
-        }
-      })({
-        reflectSymbol: function() {
-          return "next";
-        }
-      })(dictMonadST))({
-        reflectType: function() {
-          return "code";
-        }
-      })({
-        reflectSymbol: function() {
-          return "code";
-        }
-      })(dictMonadST))(dictMonadST)(px4)({
-        code: nut(pre_(dictMonadST)([code_(dictMonadST)([text_(dictMonadST.Monad0())(`module Main where
+      }
+    })()()(pursxToElementConsInsert()(pursxToElementConsAttr()(pursxToElementConsInsert()(pursxToElementNil(dictKorok.MonadST5().Monad0().Applicative0()))({
+      reflectType: function() {
+        return "result";
+      }
+    })({
+      reflectSymbol: function() {
+        return "result";
+      }
+    })(dictKorok))({
+      reflectType: function() {
+        return "next";
+      }
+    })({
+      reflectSymbol: function() {
+        return "next";
+      }
+    })(dictKorok))({
+      reflectType: function() {
+        return "code";
+      }
+    })({
+      reflectSymbol: function() {
+        return "code";
+      }
+    })(dictKorok))(dictKorok)(px4)({
+      code: nut(pre_(dictKorok)([code_(dictKorok)([text_(dictKorok.MonadST5().Monad0())(`module Main where
 
 import Prelude
 
@@ -7782,48 +7857,47 @@ main = runInBody1
         ]
   )
 `)])])),
-        result: nut(bussed(dictMonadST)(lcmap(profunctorFn)(map(functorFn)(always(dictAlways)))(function(push2) {
-          return lcmap(profunctorFn)(function(v) {
-            return alt(altEvent(dictMonadST.Monad0().Applicative0()))(bang2(dictMonadST.Monad0().Applicative0())(UIShown.value))(v);
-          })(function(event) {
-            return div_(dictMonadST)([div_(dictMonadST)([input(dictMonadST)(oneOfMap(foldableArray)(plusEvent(dictMonadST.Monad0().Applicative0()))(bang2(dictMonadST.Monad0().Applicative0()))([attr(attrInput_StyleString)(Style.value)("border-style:solid;border-width: 1px;border-color: black;"), attr(attrOnInputCb)(OnInput.value)(cb(function(e) {
-              return for_(applicativeEffect)(foldableMaybe)(bind(bindMaybe)(target(e))(fromEventTarget))(composeKleisli(bindEffect)(value2)(function($10) {
-                return push2(ChangeText.create($10));
-              }));
-            })), attr(attrOnKeyupCb)(OnKeyup.value)(cb(function(e) {
-              return for_(applicativeEffect)(foldableMaybe)(fromEvent(e))(function(evt) {
-                return when(applicativeEffect)(code2(evt) === "Enter")(push2(AddTodo.value));
-              });
-            }))]))([]), button(dictMonadST)(alt(altEvent(dictMonadST.Monad0().Applicative0()))(bang2(dictMonadST.Monad0().Applicative0())(attr(attrButton_StyleString)(Style.value)("margin: 5px;")))(bang2(dictMonadST.Monad0().Applicative0())(attr(attrOnClickCb)(OnClick.value)(cb($$const(push2(AddTodo.value)))))))([text_(dictMonadST.Monad0())("Add")])]), div_(dictMonadST)([dyn(map(functorEvent)(function(txt) {
-              return keepLatest(eventIsEvent(dictMonadST))(bus(dictMonadST)(lcmap(profunctorFn)(map(functorFn)(always(dictAlways)))(function(p$prime) {
-                return function(e$prime) {
-                  return alt(altEvent(dictMonadST.Monad0().Applicative0()))(bang2(dictMonadST.Monad0().Applicative0())(insert4(div_(dictMonadST)([span(dictMonadST)(bang2(dictMonadST.Monad0().Applicative0())(attr(attrSpan_StyleString)(Style.value)("margin: 5px;")))([text_(dictMonadST.Monad0())(txt)]), button(dictMonadST)(alt(altEvent(dictMonadST.Monad0().Applicative0()))(bang2(dictMonadST.Monad0().Applicative0())(attr(attrButton_StyleString)(Style.value)("margin: 5px;")))(bang2(dictMonadST.Monad0().Applicative0())(attr(attrOnClickCb)(OnClick.value)(cb($$const(p$prime(sendToTop)))))))([text_(dictMonadST.Monad0())("Prioritize")]), button(dictMonadST)(alt(altEvent(dictMonadST.Monad0().Applicative0()))(bang2(dictMonadST.Monad0().Applicative0())(attr(attrButton_StyleString)(Style.value)("margin: 5px;")))(bang2(dictMonadST.Monad0().Applicative0())(attr(attrOnClickCb)(OnClick.value)(cb($$const(p$prime(remove)))))))([text_(dictMonadST.Monad0())("Delete")])]))))(e$prime);
-                };
-              })));
-            })(filterMap(filterableEvent(dictMonadST.Monad0().Applicative0()))(function(v) {
-              if (v.value0) {
-                return new Just(v.value1);
+      result: nut(bussed(dictKorok)(dictKorok.Always2())(function(push2) {
+        return lcmap(profunctorFn)(function(v) {
+          return alt(altEvent(dictKorok.MonadST5().Monad0().Applicative0()))(bang2(dictKorok.MonadST5().Monad0().Applicative0())(UIShown.value))(v);
+        })(function(event) {
+          return div_(dictKorok)([div_(dictKorok)([input(dictKorok)(oneOfMap(foldableArray)(plusEvent(dictKorok.MonadST5().Monad0().Applicative0()))(bang2(dictKorok.MonadST5().Monad0().Applicative0()))([attr(attrInput_StyleString)(Style.value)("border-style:solid;border-width: 1px;border-color: black;"), attr(attrOnInputCb)(OnInput.value)(cb(function(e) {
+            return for_(applicativeEffect)(foldableMaybe)(bind(bindMaybe)(target(e))(fromEventTarget))(composeKleisli(bindEffect)(value2)(function($9) {
+              return push2(ChangeText.create($9));
+            }));
+          })), attr(attrOnKeyupCb)(OnKeyup.value)(cb(function(e) {
+            return for_(applicativeEffect)(foldableMaybe)(fromEvent(e))(function(evt) {
+              return when(applicativeEffect)(code2(evt) === "Enter")(push2(AddTodo.value));
+            });
+          }))]))([]), button(dictKorok)(alt(altEvent(dictKorok.MonadST5().Monad0().Applicative0()))(bang2(dictKorok.MonadST5().Monad0().Applicative0())(attr(attrButton_StyleString)(Style.value)("margin: 5px;")))(bang2(dictKorok.MonadST5().Monad0().Applicative0())(attr(attrOnClickCb)(OnClick.value)(cb($$const(push2(AddTodo.value)))))))([text_(dictKorok.MonadST5().Monad0())("Add")])]), div_(dictKorok)([dyn(map(functorEvent)(function(txt) {
+            return keepLatest(eventIsEvent(dictKorok.MonadST5()))(bus2(dictKorok)(dictKorok.Always2())(function(p$prime) {
+              return function(e$prime) {
+                return alt(altEvent(dictKorok.MonadST5().Monad0().Applicative0()))(bang2(dictKorok.MonadST5().Monad0().Applicative0())(insert3(div_(dictKorok)([span(dictKorok)(bang2(dictKorok.MonadST5().Monad0().Applicative0())(attr(attrSpan_StyleString)(Style.value)("margin: 5px;")))([text_(dictKorok.MonadST5().Monad0())(txt)]), button(dictKorok)(alt(altEvent(dictKorok.MonadST5().Monad0().Applicative0()))(bang2(dictKorok.MonadST5().Monad0().Applicative0())(attr(attrButton_StyleString)(Style.value)("margin: 5px;")))(bang2(dictKorok.MonadST5().Monad0().Applicative0())(attr(attrOnClickCb)(OnClick.value)(cb($$const(p$prime(sendToTop)))))))([text_(dictKorok.MonadST5().Monad0())("Prioritize")]), button(dictKorok)(alt(altEvent(dictKorok.MonadST5().Monad0().Applicative0()))(bang2(dictKorok.MonadST5().Monad0().Applicative0())(attr(attrButton_StyleString)(Style.value)("margin: 5px;")))(bang2(dictKorok.MonadST5().Monad0().Applicative0())(attr(attrOnClickCb)(OnClick.value)(cb($$const(p$prime(remove)))))))([text_(dictKorok.MonadST5().Monad0())("Delete")])]))))(e$prime);
+              };
+            }));
+          })(filterMap(filterableEvent(dictKorok.MonadST5().Monad0().Applicative0()))(function(v) {
+            if (v.value0) {
+              return new Just(v.value1);
+            }
+            ;
+            return Nothing.value;
+          })(mapAccum(eventIsEvent(dictKorok.MonadST5()))(function(a2) {
+            return function(b) {
+              if (a2 instanceof ChangeText) {
+                return new Tuple(a2.value0, new Tuple(false, a2.value0));
               }
               ;
-              return Nothing.value;
-            })(mapAccum(eventIsEvent(dictMonadST))(function(a2) {
-              return function(b) {
-                if (a2 instanceof ChangeText) {
-                  return new Tuple(a2.value0, new Tuple(false, a2.value0));
-                }
-                ;
-                if (a2 instanceof AddTodo) {
-                  return new Tuple(b, new Tuple(true, b));
-                }
-                ;
-                return new Tuple("", new Tuple(false, ""));
-              };
-            })(event)(""))))])]);
-          });
-        }))),
-        next: bang2(dictMonadST.Monad0().Applicative0())(attr(attrOnClickCb)(OnClick.value)(cb($$const(applySecond(applyEffect)(dpage(Portals.value))(scrollToTop)))))
-      });
-    };
+              if (a2 instanceof AddTodo) {
+                return new Tuple(b, new Tuple(true, b));
+              }
+              ;
+              return new Tuple("", new Tuple(false, ""));
+            };
+          })(event)(""))))])]);
+        });
+      })),
+      next: bang2(dictKorok.MonadST5().Monad0().Applicative0())(attr(attrOnClickCb)(OnClick.value)(cb($$const(applySecond(applyEffect)(dpage(Portals.value))(scrollToTop)))))
+    });
   };
 };
 
@@ -7831,8 +7905,8 @@ main = runInBody1
 var px5 = /* @__PURE__ */ function() {
   return $$Proxy.value;
 }();
-var helloWorld = function(dictMonadST) {
-  return function(dpage) {
+var helloWorld = function(dpage) {
+  return function(dictKorok) {
     return makePursx({
       reflectType: function() {
         return `<div>
@@ -7858,7 +7932,7 @@ var helloWorld = function(dictMonadST) {
   <p>Now that we have our setup running, let's make a more interesting <a ~next~ style="cursor:pointer;">component</a>.</p>
 </div>`;
       }
-    })()()(pursxToElementConsInsert()(pursxToElementConsAttr()(pursxToElementConsInsert()(pursxToElementNil(dictMonadST.Monad0().Applicative0()))({
+    })()()(pursxToElementConsInsert()(pursxToElementConsAttr()(pursxToElementConsInsert()(pursxToElementNil(dictKorok.MonadST5().Monad0().Applicative0()))({
       reflectType: function() {
         return "result";
       }
@@ -7866,7 +7940,7 @@ var helloWorld = function(dictMonadST) {
       reflectSymbol: function() {
         return "result";
       }
-    })(dictMonadST))({
+    })(dictKorok))({
       reflectType: function() {
         return "next";
       }
@@ -7874,7 +7948,7 @@ var helloWorld = function(dictMonadST) {
       reflectSymbol: function() {
         return "next";
       }
-    })(dictMonadST))({
+    })(dictKorok))({
       reflectType: function() {
         return "code";
       }
@@ -7882,10 +7956,10 @@ var helloWorld = function(dictMonadST) {
       reflectSymbol: function() {
         return "code";
       }
-    })(dictMonadST))(dictMonadST)(px5)({
-      code: nut(pre_(dictMonadST)([code_(dictMonadST)([text_(dictMonadST.Monad0())('module Main where\n\nimport Prelude\n\nimport Deku.Control (text_)\nimport Deku.Toplevel (runInBody)\nimport Effect (Effect)\n\nmain :: Effect Unit\nmain = runInBody (text_ "Hello world")\n')])])),
-      result: nut(div_(dictMonadST)([text_(dictMonadST.Monad0())("Hello world")])),
-      next: bang(eventIsEvent(dictMonadST))(attr(attrOnClickCb)(OnClick.value)(cb($$const(applySecond(applyEffect)(dpage(SimpleComponent.value))(scrollToTop)))))
+    })(dictKorok))(dictKorok)(px5)({
+      code: nut(pre_(dictKorok)([code_(dictKorok)([text_(dictKorok.MonadST5().Monad0())('module Main where\n\nimport Prelude\n\nimport Deku.Control (text_)\nimport Deku.Toplevel (runInBody)\nimport Effect (Effect)\n\nmain :: Effect Unit\nmain = runInBody (text_ "Hello world")\n')])])),
+      result: nut(div_(dictKorok)([text_(dictKorok.MonadST5().Monad0())("Hello world")])),
+      next: bang(eventIsEvent(dictKorok.MonadST5()))(attr(attrOnClickCb)(OnClick.value)(cb($$const(applySecond(applyEffect)(dpage(SimpleComponent.value))(scrollToTop)))))
     });
   };
 };
@@ -7894,8 +7968,8 @@ var helloWorld = function(dictMonadST) {
 var px6 = /* @__PURE__ */ function() {
   return $$Proxy.value;
 }();
-var intro = function(dictMonadST) {
-  return function(dpage) {
+var intro = function(dpage) {
+  return function(dictKorok) {
     return makePursx({
       reflectType: function() {
         return `<div>
@@ -7914,7 +7988,7 @@ var intro = function(dictMonadST) {
   <p>And now, without further ado, check out the <a ~next~ style="cursor:pointer;">hello world section</a>!</p>
 </div>`;
       }
-    })()()(pursxToElementConsAttr()(pursxToElementNil(dictMonadST.Monad0().Applicative0()))({
+    })()()(pursxToElementConsAttr()(pursxToElementNil(dictKorok.MonadST5().Monad0().Applicative0()))({
       reflectType: function() {
         return "next";
       }
@@ -7922,8 +7996,8 @@ var intro = function(dictMonadST) {
       reflectSymbol: function() {
         return "next";
       }
-    })(dictMonadST))(dictMonadST)(px6)({
-      next: bang(eventIsEvent(dictMonadST))(attr(attrOnClickCb)(OnClick.value)(cb($$const(applySecond(applyEffect)(dpage(HelloWorld.value))(scrollToTop)))))
+    })(dictKorok))(dictKorok)(px6)({
+      next: bang(eventIsEvent(dictKorok.MonadST5()))(attr(attrOnClickCb)(OnClick.value)(cb($$const(applySecond(applyEffect)(dpage(HelloWorld.value))(scrollToTop)))))
     });
   };
 };
@@ -7986,19 +8060,19 @@ var attrVideo_WidthString = {
 };
 
 // output/Deku.DOM.Elt.Source/index.js
-var source = function(dictMonadST) {
+var source = function(dictKorok) {
   return function(attributes) {
     return function(kids) {
-      return new Element$prime(elementify(dictMonadST)("source")(attributes)(fixed(kids)));
+      return new Element$prime(elementify(dictKorok)("source")(attributes)(fixed(kids)));
     };
   };
 };
 
 // output/Deku.DOM.Elt.Video/index.js
-var video = function(dictMonadST) {
+var video = function(dictKorok) {
   return function(attributes) {
     return function(kids) {
-      return new Element$prime(elementify(dictMonadST)("video")(attributes)(fixed(kids)));
+      return new Element$prime(elementify(dictKorok)("video")(attributes)(fixed(kids)));
     };
   };
 };
@@ -8007,12 +8081,11 @@ var video = function(dictMonadST) {
 var px7 = /* @__PURE__ */ function() {
   return $$Proxy.value;
 }();
-var portals1 = function(dictAlways) {
-  return function(dictMonadST) {
-    return function(dpage) {
-      return makePursx({
-        reflectType: function() {
-          return `<div>
+var portals1 = function(dpage) {
+  return function(dictKorok) {
+    return makePursx({
+      reflectType: function() {
+        return `<div>
   <h1>Portals</h1>
 
   <h2>Zapping from place to place</h2>
@@ -8039,70 +8112,69 @@ var portals1 = function(dictAlways) {
   <h2>Next steps</h2>
   <p>In this section, we used portals to move an element to different areas of the DOM. In the next section, we'll learn how to do <a ~next~ style="cursor:pointer;">static site rendering</a>.</p>
 </div>`;
-        }
-      })()()(pursxToElementConsInsert()(pursxToElementConsAttr()(pursxToElementConsInsert()(pursxToElementNil(dictMonadST.Monad0().Applicative0()))({
-        reflectType: function() {
-          return "result";
-        }
-      })({
-        reflectSymbol: function() {
-          return "result";
-        }
-      })(dictMonadST))({
-        reflectType: function() {
-          return "next";
-        }
-      })({
-        reflectSymbol: function() {
-          return "next";
-        }
-      })(dictMonadST))({
-        reflectType: function() {
-          return "code";
-        }
-      })({
-        reflectSymbol: function() {
-          return "code";
-        }
-      })(dictMonadST))(dictMonadST)(px7)({
-        code: nut(pre_(dictMonadST)([code_(dictMonadST)([text_(dictMonadST.Monad0())('module Main where\n\nimport Prelude\n\nimport Control.Alt ((<|>))\nimport Data.Foldable (oneOfMap)\nimport Data.Profunctor (lcmap)\nimport Data.Tuple.Nested ((/\\), type (/\\))\nimport Data.FastVect.FastVect (index, (:))\nimport Data.FastVect.FastVect as V\nimport Deku.Attribute ((:=))\nimport Deku.Control (portal, switcher, text_)\nimport Deku.DOM as D\nimport Deku.Toplevel (runInBody1)\nimport Effect (Effect)\nimport FRP.Event (Event, bang, bus, fold, mapAccum)\nimport Type.Prelude (Proxy(..))\n\ncounter :: forall a. Event a \u2192 Event (a /\\ Int)\ncounter event = mapAccum f event 0\n  where\n  f a b = (b + 1) /\\ (a /\\ b)\n\nmain :: Effect Unit\nmain = runInBody1\n  ( bus \\push -> lcmap  (bang unit <|> _) \\event -> do\n      portal\n        ( map\n            ( \\i -> D.video\n                (oneOfMap bang [ D.Controls := "true", D.Width := "250" ])\n                [D.source\n                    (oneOfMap bang [ D.Src := i, D.Xtype := "video/mp4" ])\n                    []\n                ]\n            )\n            ( "https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4"\n                : "https://www.w3schools.com/jsref/movie.mp4"\n                : V.empty\n            )\n        )\n        \\v _ -> do\n          let\n            p0 = index (Proxy :: _ 0) v\n            p1 = index (Proxy :: _ 1) v\n            ev = fold (const not) event\n            flips = switcher (if _ then p0 else p1) <<< ev\n          D.div_\n            [ D.button (bang $ D.OnClick := push unit)\n                [ text_ "Switch videos" ]\n            , D.div_ [ D.span_ [flips true], D.span_ [flips false] ]\n            ]\n  )\n')])])),
-        result: nut(dyn(bus(dictMonadST)(lcmap(profunctorFn)(map(functorFn)(always(dictAlways)))(function(push2) {
-          return lcmap(profunctorFn)(alt(altEvent(dictMonadST.Monad0().Applicative0()))(bang2(dictMonadST.Monad0().Applicative0())(unit)))(function(event) {
-            return bang2(dictMonadST.Monad0().Applicative0())(insert4(portal2()(dictMonadST)(map(functorVect)(function(i2) {
-              return video(dictMonadST)(oneOfMap(foldableArray)(plusEvent(dictMonadST.Monad0().Applicative0()))(bang2(dictMonadST.Monad0().Applicative0()))([attr(attrVideo_ControlsString)(Controls.value)("true"), attr(attrVideo_WidthString)(Width.value)("250")]))([source(dictMonadST)(oneOfMap(foldableArray)(plusEvent(dictMonadST.Monad0().Applicative0()))(bang2(dictMonadST.Monad0().Applicative0()))([attr(attrSource_SrcString)(Src.value)(i2), attr(attrSource_XtypeString)(Xtype.value)("video/mp4")]))([])]);
-            })(cons4()()("https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4")(cons4()()("https://www.w3schools.com/jsref/movie.mp4")(empty3))))(function(v) {
-              return function(v1) {
-                var p1 = index2()()()()()({
-                  reflectType: function() {
-                    return 1;
+      }
+    })()()(pursxToElementConsInsert()(pursxToElementConsAttr()(pursxToElementConsInsert()(pursxToElementNil(dictKorok.MonadST5().Monad0().Applicative0()))({
+      reflectType: function() {
+        return "result";
+      }
+    })({
+      reflectSymbol: function() {
+        return "result";
+      }
+    })(dictKorok))({
+      reflectType: function() {
+        return "next";
+      }
+    })({
+      reflectSymbol: function() {
+        return "next";
+      }
+    })(dictKorok))({
+      reflectType: function() {
+        return "code";
+      }
+    })({
+      reflectSymbol: function() {
+        return "code";
+      }
+    })(dictKorok))(dictKorok)(px7)({
+      code: nut(pre_(dictKorok)([code_(dictKorok)([text_(dictKorok.MonadST5().Monad0())('module Main where\n\nimport Prelude\n\nimport Control.Alt ((<|>))\nimport Data.Foldable (oneOfMap)\nimport Data.Profunctor (lcmap)\nimport Data.Tuple.Nested ((/\\), type (/\\))\nimport Data.FastVect.FastVect (index, (:))\nimport Data.FastVect.FastVect as V\nimport Deku.Attribute ((:=))\nimport Deku.Control (portal, switcher, text_)\nimport Deku.DOM as D\nimport Deku.Toplevel (runInBody1)\nimport Effect (Effect)\nimport FRP.Event (Event, bang, bus, fold, mapAccum)\nimport Type.Prelude (Proxy(..))\n\ncounter :: forall a. Event a \u2192 Event (a /\\ Int)\ncounter event = mapAccum f event 0\n  where\n  f a b = (b + 1) /\\ (a /\\ b)\n\nmain :: Effect Unit\nmain = runInBody1\n  ( bus \\push -> lcmap  (bang unit <|> _) \\event -> do\n      portal\n        ( map\n            ( \\i -> D.video\n                (oneOfMap bang [ D.Controls := "true", D.Width := "250" ])\n                [D.source\n                    (oneOfMap bang [ D.Src := i, D.Xtype := "video/mp4" ])\n                    []\n                ]\n            )\n            ( "https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4"\n                : "https://www.w3schools.com/jsref/movie.mp4"\n                : V.empty\n            )\n        )\n        \\v _ -> do\n          let\n            p0 = index (Proxy :: _ 0) v\n            p1 = index (Proxy :: _ 1) v\n            ev = fold (const not) event\n            flips = switcher (if _ then p0 else p1) <<< ev\n          D.div_\n            [ D.button (bang $ D.OnClick := push unit)\n                [ text_ "Switch videos" ]\n            , D.div_ [ D.span_ [flips true], D.span_ [flips false] ]\n            ]\n  )\n')])])),
+      result: nut(dyn(bus2(dictKorok)(dictKorok.Always2())(function(push2) {
+        return lcmap(profunctorFn)(alt(altEvent(dictKorok.MonadST5().Monad0().Applicative0()))(bang2(dictKorok.MonadST5().Monad0().Applicative0())(unit)))(function(event) {
+          return bang2(dictKorok.MonadST5().Monad0().Applicative0())(insert3(portal2()(dictKorok)(map(functorVect)(function(i2) {
+            return video(dictKorok)(oneOfMap(foldableArray)(plusEvent(dictKorok.MonadST5().Monad0().Applicative0()))(bang2(dictKorok.MonadST5().Monad0().Applicative0()))([attr(attrVideo_ControlsString)(Controls.value)("true"), attr(attrVideo_WidthString)(Width.value)("250")]))([source(dictKorok)(oneOfMap(foldableArray)(plusEvent(dictKorok.MonadST5().Monad0().Applicative0()))(bang2(dictKorok.MonadST5().Monad0().Applicative0()))([attr(attrSource_SrcString)(Src.value)(i2), attr(attrSource_XtypeString)(Xtype.value)("video/mp4")]))([])]);
+          })(cons4()()("https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4")(cons4()()("https://www.w3schools.com/jsref/movie.mp4")(empty3))))(function(v) {
+            return function(v1) {
+              var p1 = index2()()()()()({
+                reflectType: function() {
+                  return 1;
+                }
+              })($$Proxy.value)(v);
+              var p0 = index2()()()()()({
+                reflectType: function() {
+                  return 0;
+                }
+              })($$Proxy.value)(v);
+              var ev = fold2(eventIsEvent(dictKorok.MonadST5()))($$const(not(heytingAlgebraBoolean)))(event);
+              var flips = function() {
+                var $4 = switcher(dictKorok.MonadST5())(function(v2) {
+                  if (v2) {
+                    return p0;
                   }
-                })($$Proxy.value)(v);
-                var p0 = index2()()()()()({
-                  reflectType: function() {
-                    return 0;
-                  }
-                })($$Proxy.value)(v);
-                var ev = fold2(eventIsEvent(dictMonadST))($$const(not(heytingAlgebraBoolean)))(event);
-                var flips = function() {
-                  var $5 = switcher(dictMonadST)(function(v2) {
-                    if (v2) {
-                      return p0;
-                    }
-                    ;
-                    return p1;
-                  });
-                  return function($6) {
-                    return $5(ev($6));
-                  };
-                }();
-                return div_(dictMonadST)([button(dictMonadST)(bang2(dictMonadST.Monad0().Applicative0())(attr(attrOnClickCb)(OnClick.value)(cb($$const(push2(unit))))))([text_(dictMonadST.Monad0())("Switch videos")]), div_(dictMonadST)([span_(dictMonadST)([flips(true)]), span_(dictMonadST)([flips(false)])])]);
-              };
-            })));
-          });
-        })))),
-        next: bang2(dictMonadST.Monad0().Applicative0())(attr(attrOnClickCb)(OnClick.value)(cb($$const(applySecond(applyEffect)(dpage(SSR.value))(scrollToTop)))))
-      });
-    };
+                  ;
+                  return p1;
+                });
+                return function($5) {
+                  return $4(ev($5));
+                };
+              }();
+              return div_(dictKorok)([button(dictKorok)(bang2(dictKorok.MonadST5().Monad0().Applicative0())(attr(attrOnClickCb)(OnClick.value)(cb($$const(push2(unit))))))([text_(dictKorok.MonadST5().Monad0())("Switch videos")]), div_(dictKorok)([span_(dictKorok)([flips(true)]), span_(dictKorok)([flips(false)])])]);
+            };
+          })));
+        });
+      }))),
+      next: bang2(dictKorok.MonadST5().Monad0().Applicative0())(attr(attrOnClickCb)(OnClick.value)(cb($$const(applySecond(applyEffect)(dpage(SSR.value))(scrollToTop)))))
+    });
   };
 };
 
@@ -8113,8 +8185,8 @@ var px8 = /* @__PURE__ */ function() {
 var myDom = /* @__PURE__ */ function() {
   return $$Proxy.value;
 }();
-var pursx1 = function(dictMonadST) {
-  return function(dpage) {
+var pursx1 = function(dpage) {
+  return function(dictKorok) {
     return makePursx({
       reflectType: function() {
         return `<div>
@@ -8140,7 +8212,7 @@ var pursx1 = function(dictMonadST) {
   <p>In this section, we used PursX to build the same component as the previous section. In the next section, we'll learn how to respond to <a ~next~ style="cursor:pointer;">events</a>.</p>
 </div>`;
       }
-    })()()(pursxToElementConsInsert()(pursxToElementConsAttr()(pursxToElementConsInsert()(pursxToElementNil(dictMonadST.Monad0().Applicative0()))({
+    })()()(pursxToElementConsInsert()(pursxToElementConsAttr()(pursxToElementConsInsert()(pursxToElementNil(dictKorok.MonadST5().Monad0().Applicative0()))({
       reflectType: function() {
         return "result";
       }
@@ -8148,7 +8220,7 @@ var pursx1 = function(dictMonadST) {
       reflectSymbol: function() {
         return "result";
       }
-    })(dictMonadST))({
+    })(dictKorok))({
       reflectType: function() {
         return "next";
       }
@@ -8156,7 +8228,7 @@ var pursx1 = function(dictMonadST) {
       reflectSymbol: function() {
         return "next";
       }
-    })(dictMonadST))({
+    })(dictKorok))({
       reflectType: function() {
         return "code";
       }
@@ -8164,14 +8236,14 @@ var pursx1 = function(dictMonadST) {
       reflectSymbol: function() {
         return "code";
       }
-    })(dictMonadST))(dictMonadST)(px8)({
-      code: nut(pre_(dictMonadST)([code_(dictMonadST)([text_(dictMonadST.Monad0())('module Main where\n\nimport Prelude\n\nimport Deku.Pursx (psx)\nimport Deku.Toplevel (runInBody)\nimport Effect (Effect)\nimport FRP.Event (bang)\nimport Type.Proxy (Proxy(..))\n\nmyDom = Proxy :: Proxy """<div>\n    <button>I do nothing</button>\n    <ul>\n        <li>A</li>\n        <li>B</li>\n        <li>C</li>\n    </ul>\n    <div>\n        <a href="https://github.com/mikesol/purescript-deku"></a>\n        <i>bar</i>\n        <span style="font-weight:800;">baz</span>\n    </div>\n    <div><div></div><div><input type="range"/></div></div>\n    </div>\n"""\n\nmain :: Effect Unit\nmain = runInBody (psx myDom)\n')])])),
+    })(dictKorok))(dictKorok)(px8)({
+      code: nut(pre_(dictKorok)([code_(dictKorok)([text_(dictKorok.MonadST5().Monad0())('module Main where\n\nimport Prelude\n\nimport Deku.Pursx (psx)\nimport Deku.Toplevel (runInBody)\nimport Effect (Effect)\nimport FRP.Event (bang)\nimport Type.Proxy (Proxy(..))\n\nmyDom = Proxy :: Proxy """<div>\n    <button>I do nothing</button>\n    <ul>\n        <li>A</li>\n        <li>B</li>\n        <li>C</li>\n    </ul>\n    <div>\n        <a href="https://github.com/mikesol/purescript-deku"></a>\n        <i>bar</i>\n        <span style="font-weight:800;">baz</span>\n    </div>\n    <div><div></div><div><input type="range"/></div></div>\n    </div>\n"""\n\nmain :: Effect Unit\nmain = runInBody (psx myDom)\n')])])),
       result: nut(psx({
         reflectType: function() {
           return '<div>\n    <button>I do nothing</button>\n    <ul>\n        <li>A</li>\n        <li>B</li>\n        <li>C</li>\n    </ul>\n    <div>\n        <a href="https://example.com">foo</a>\n        <i>bar</i>\n        <span style="font-weight:800;">baz</span>\n    </div>\n    <div><div></div><div><input type="range"/></div></div>\n    </div>\n';
         }
-      })()(dictMonadST)(pursxToElementNil(dictMonadST.Monad0().Applicative0()))(myDom)),
-      next: bang(eventIsEvent(dictMonadST))(attr(attrOnClickCb)(OnClick.value)(cb($$const(applySecond(applyEffect)(dpage(Events.value))(scrollToTop)))))
+      })()(dictKorok)(pursxToElementNil(dictKorok.MonadST5().Monad0().Applicative0()))(myDom)),
+      next: bang(eventIsEvent(dictKorok.MonadST5()))(attr(attrOnClickCb)(OnClick.value)(cb($$const(applySecond(applyEffect)(dpage(Events.value))(scrollToTop)))))
     });
   };
 };
@@ -8183,12 +8255,11 @@ var px9 = /* @__PURE__ */ function() {
 var myDom2 = /* @__PURE__ */ function() {
   return $$Proxy.value;
 }();
-var pursx2 = function(dictAlways) {
-  return function(dictMonadST) {
-    return function(dpage) {
-      return makePursx$prime({
-        reflectType: function() {
-          return `<div>
+var pursx2 = function(dpage) {
+  return function(dictKorok) {
+    return makePursx$prime({
+      reflectType: function() {
+        return `<div>
   <h1>Pursx 2</h1>
 
   <h2>Working with events and effects</h2>
@@ -8211,81 +8282,80 @@ var pursx2 = function(dictAlways) {
   <h2>Next steps</h2>
   <p>In more complicated apps, like this documentation, we'll need dynamic logic that allows for components to replace each other, for example in a navigation bar. In the next section, we'll see one way to do this by using <a ?next? style="cursor:pointer;">events to control the presence and absence of elements</a>.</p>
 </div>`;
-        }
-      })({
-        reflectType: function() {
-          return "?";
-        }
-      })()()(dictMonadST)(pursxToElementConsInsert()(pursxToElementConsAttr()(pursxToElementConsInsert()(pursxToElementNil(dictMonadST.Monad0().Applicative0()))({
-        reflectType: function() {
-          return "result";
-        }
-      })({
-        reflectSymbol: function() {
-          return "result";
-        }
-      })(dictMonadST))({
-        reflectType: function() {
-          return "next";
-        }
-      })({
-        reflectSymbol: function() {
-          return "next";
-        }
-      })(dictMonadST))({
-        reflectType: function() {
-          return "code";
-        }
-      })({
-        reflectSymbol: function() {
-          return "code";
-        }
-      })(dictMonadST))($$Proxy.value)(px9)({
-        code: nut(pre_(dictMonadST)([code_(dictMonadST)([text_(dictMonadST.Monad0())('module Main where\n\nimport Prelude\n\nimport Control.Alt ((<|>))\nimport Data.Compactable (compact)\nimport Data.Maybe (Maybe(..))\nimport Deku.Attribute (cb, (:=))\nimport Deku.Control (text)\nimport Deku.DOM as D\nimport Deku.Pursx (nut, (~~))\nimport Deku.Toplevel (runInBody1)\nimport Effect (Effect)\nimport FRP.Event (bus, bang)\nimport Type.Proxy (Proxy(..))\n\nmyDom =\n  Proxy :: Proxy """<div>\n        <button>I do nothing</button>\n        <ul>\n          <li>A</li>\n          <li ~myli~>B</li>\n          <li>C</li>\n        </ul>\n        <div>\n          <a href="https://github.com/mikesol/purescript-deku"></a>\n          <i>bar</i>\n          ~somethingNew~\n          <span style="font-weight:800;">baz</span>\n        </div>\n        <div><div></div><div><input type="range"/></div></div>\n      </div>\n"""\n\nmain :: Effect Unit\nmain = runInBody1\n  ( bus \\push event -> myDom ~~\n      { myli: bang (D.Style := "background-color:rgb(200,240,210);")\n      , somethingNew: nut\n          ( D.button (bang (D.OnClick := push (Just unit)))\n              [ text\n                  $ (compact event $> "Thanks for clicking me!") <|>\n                    bang "I was dynamically inserted"\n              ]\n          )\n      }\n  )')])])),
-        result: nut(dyn(bus(dictMonadST)(lcmap(profunctorFn)(map(functorFn)(always(dictAlways)))(function(push2) {
-          return function(event) {
-            return bang2(dictMonadST.Monad0().Applicative0())(insert4(makePursx({
-              reflectType: function() {
-                return '<div>\n        <button>I do nothing</button>\n        <ul>\n          <li>A</li>\n          <li ~myli~>B</li>\n          <li>C</li>\n        </ul>\n        <div>\n          <a href="https://github.com/mikesol/purescript-deku"></a>\n          <i>bar</i>\n          ~somethingNew~\n          <span style="font-weight:800;">baz</span>\n        </div>\n        <div><div></div><div><input type="range"/></div></div>\n      </div>\n';
-              }
-            })()()(pursxToElementConsAttr()(pursxToElementConsInsert()(pursxToElementNil(dictMonadST.Monad0().Applicative0()))({
-              reflectType: function() {
-                return "somethingNew";
-              }
-            })({
-              reflectSymbol: function() {
-                return "somethingNew";
-              }
-            })(dictMonadST))({
-              reflectType: function() {
-                return "myli";
-              }
-            })({
-              reflectSymbol: function() {
-                return "myli";
-              }
-            })(dictMonadST))(dictMonadST)(myDom2)({
-              myli: bang2(dictMonadST.Monad0().Applicative0())(attr(attrLi_StyleString)(Style.value)("background-color:rgb(200,240,210);")),
-              somethingNew: nut(button(dictMonadST)(bang2(dictMonadST.Monad0().Applicative0())(attr(attrOnClickEffectUnit)(OnClick.value)(push2(new Just(unit)))))([text(dictMonadST.Monad0())(alt(altEvent(dictMonadST.Monad0().Applicative0()))(voidLeft(functorEvent)(compact(compactableEvent(dictMonadST.Monad0().Applicative0()))(event))("Thanks for clicking me!"))(bang2(dictMonadST.Monad0().Applicative0())("I was dynamically inserted")))]))
-            })));
-          };
-        })))),
-        next: bang2(dictMonadST.Monad0().Applicative0())(attr(attrOnClickCb)(OnClick.value)(cb($$const(applySecond(applyEffect)(dpage(Events2.value))(scrollToTop)))))
-      });
-    };
+      }
+    })({
+      reflectType: function() {
+        return "?";
+      }
+    })()()(dictKorok)(pursxToElementConsInsert()(pursxToElementConsAttr()(pursxToElementConsInsert()(pursxToElementNil(dictKorok.MonadST5().Monad0().Applicative0()))({
+      reflectType: function() {
+        return "result";
+      }
+    })({
+      reflectSymbol: function() {
+        return "result";
+      }
+    })(dictKorok))({
+      reflectType: function() {
+        return "next";
+      }
+    })({
+      reflectSymbol: function() {
+        return "next";
+      }
+    })(dictKorok))({
+      reflectType: function() {
+        return "code";
+      }
+    })({
+      reflectSymbol: function() {
+        return "code";
+      }
+    })(dictKorok))($$Proxy.value)(px9)({
+      code: nut(pre_(dictKorok)([code_(dictKorok)([text_(dictKorok.MonadST5().Monad0())('module Main where\n\nimport Prelude\n\nimport Control.Alt ((<|>))\nimport Data.Compactable (compact)\nimport Data.Maybe (Maybe(..))\nimport Deku.Attribute (cb, (:=))\nimport Deku.Control (text)\nimport Deku.DOM as D\nimport Deku.Pursx (nut, (~~))\nimport Deku.Toplevel (runInBody1)\nimport Effect (Effect)\nimport FRP.Event (bus, bang)\nimport Type.Proxy (Proxy(..))\n\nmyDom =\n  Proxy :: Proxy """<div>\n        <button>I do nothing</button>\n        <ul>\n          <li>A</li>\n          <li ~myli~>B</li>\n          <li>C</li>\n        </ul>\n        <div>\n          <a href="https://github.com/mikesol/purescript-deku"></a>\n          <i>bar</i>\n          ~somethingNew~\n          <span style="font-weight:800;">baz</span>\n        </div>\n        <div><div></div><div><input type="range"/></div></div>\n      </div>\n"""\n\nmain :: Effect Unit\nmain = runInBody1\n  ( bus \\push event -> myDom ~~\n      { myli: bang (D.Style := "background-color:rgb(200,240,210);")\n      , somethingNew: nut\n          ( D.button (bang (D.OnClick := push (Just unit)))\n              [ text\n                  $ (compact event $> "Thanks for clicking me!") <|>\n                    bang "I was dynamically inserted"\n              ]\n          )\n      }\n  )')])])),
+      result: nut(dyn(bus2(dictKorok)(dictKorok.Always2())(function(push2) {
+        return function(event) {
+          return bang2(dictKorok.MonadST5().Monad0().Applicative0())(insert3(makePursx({
+            reflectType: function() {
+              return '<div>\n        <button>I do nothing</button>\n        <ul>\n          <li>A</li>\n          <li ~myli~>B</li>\n          <li>C</li>\n        </ul>\n        <div>\n          <a href="https://github.com/mikesol/purescript-deku"></a>\n          <i>bar</i>\n          ~somethingNew~\n          <span style="font-weight:800;">baz</span>\n        </div>\n        <div><div></div><div><input type="range"/></div></div>\n      </div>\n';
+            }
+          })()()(pursxToElementConsAttr()(pursxToElementConsInsert()(pursxToElementNil(dictKorok.MonadST5().Monad0().Applicative0()))({
+            reflectType: function() {
+              return "somethingNew";
+            }
+          })({
+            reflectSymbol: function() {
+              return "somethingNew";
+            }
+          })(dictKorok))({
+            reflectType: function() {
+              return "myli";
+            }
+          })({
+            reflectSymbol: function() {
+              return "myli";
+            }
+          })(dictKorok))(dictKorok)(myDom2)({
+            myli: bang2(dictKorok.MonadST5().Monad0().Applicative0())(attr(attrLi_StyleString)(Style.value)("background-color:rgb(200,240,210);")),
+            somethingNew: nut(button(dictKorok)(bang2(dictKorok.MonadST5().Monad0().Applicative0())(attr(attrOnClickEffectUnit)(OnClick.value)(push2(new Just(unit)))))([text(dictKorok.MonadST5().Monad0())(alt(altEvent(dictKorok.MonadST5().Monad0().Applicative0()))(voidLeft(functorEvent)(compact(compactableEvent(dictKorok.MonadST5().Monad0().Applicative0()))(event))("Thanks for clicking me!"))(bang2(dictKorok.MonadST5().Monad0().Applicative0())("I was dynamically inserted")))]))
+          })));
+        };
+      }))),
+      next: bang2(dictKorok.MonadST5().Monad0().Applicative0())(attr(attrOnClickCb)(OnClick.value)(cb($$const(applySecond(applyEffect)(dpage(Events2.value))(scrollToTop)))))
+    });
   };
 };
 
 // output/Deku.DOM.Elt.P/index.js
-var p = function(dictMonadST) {
+var p = function(dictKorok) {
   return function(attributes) {
     return function(kids) {
-      return new Element$prime(elementify(dictMonadST)("p")(attributes)(fixed(kids)));
+      return new Element$prime(elementify(dictKorok)("p")(attributes)(fixed(kids)));
     };
   };
 };
-var p_ = function(dictMonadST) {
-  return p(dictMonadST)(empty(plusEvent(dictMonadST.Monad0().Applicative0())));
+var p_ = function(dictKorok) {
+  return p(dictKorok)(empty(plusEvent(dictKorok.MonadST5().Monad0().Applicative0())));
 };
 
 // output/Random.LCG/index.js
@@ -8583,35 +8653,35 @@ var SetText = /* @__PURE__ */ function() {
 }();
 var ssrSetText = function(a2) {
   return function(i2) {
-    return $$void(functorST)(modify(function(v) {
+    return $$void(functorST)(modify2(function(v) {
       return append(semigroupArray)(v)([new SetText(a2)]);
     })(i2));
   };
 };
 var ssrSetProp = function(a2) {
   return function(i2) {
-    return $$void(functorST)(modify(function(v) {
+    return $$void(functorST)(modify2(function(v) {
       return append(semigroupArray)(v)([new SetProp(a2)]);
     })(i2));
   };
 };
 var ssrMakeText = function(a2) {
   return function(i2) {
-    return $$void(functorST)(modify(function(v) {
+    return $$void(functorST)(modify2(function(v) {
       return append(semigroupArray)(v)([new MakeText(a2)]);
     })(i2));
   };
 };
 var ssrMakePursx = function(a2) {
   return function(i2) {
-    return $$void(functorST)(modify(function(v) {
+    return $$void(functorST)(modify2(function(v) {
       return append(semigroupArray)(v)([new MakePursx(a2)]);
     })(i2));
   };
 };
 var ssrMakeElement = function(a2) {
   return function(i2) {
-    return $$void(functorST)(modify(function(v) {
+    return $$void(functorST)(modify2(function(v) {
       return append(semigroupArray)(v)([new MakeElement(a2)]);
     })(i2));
   };
@@ -8624,7 +8694,7 @@ var ssrDOMInterpret = function(seed) {
         newSeed: mkSeed(s),
         size: 5
       }));
-      $$void(functorST)(modify(add(semiringInt)(1))(seed))();
+      $$void(functorST)(modify2(add(semiringInt)(1))(seed))();
       return o;
     },
     makeElement: ssrMakeElement,
@@ -8688,7 +8758,7 @@ var ssr$prime = function(topTag) {
   return function(arr) {
     var setting = function(id2) {
       return function(action2) {
-        return $$void(functorStateT(functorIdentity))(modify3(monadStateStateT(monadIdentity))(function(s) {
+        return $$void(functorStateT(functorIdentity))(modify4(monadStateStateT(monadIdentity))(function(s) {
           var $13 = {};
           for (var $14 in s) {
             if ({}.hasOwnProperty.call(s, $14)) {
@@ -8715,7 +8785,7 @@ var ssr$prime = function(topTag) {
     var making = function(parent2) {
       return function(id2) {
         return function(action2) {
-          return discard(discardUnit)(bindStateT(monadIdentity))($$void(functorStateT(functorIdentity))(modify3(monadStateStateT(monadIdentity))(function(s) {
+          return discard(discardUnit)(bindStateT(monadIdentity))($$void(functorStateT(functorIdentity))(modify4(monadStateStateT(monadIdentity))(function(s) {
             var $18 = {};
             for (var $19 in s) {
               if ({}.hasOwnProperty.call(s, $19)) {
@@ -8822,10 +8892,10 @@ var ssr$prime = function(topTag) {
         }
         ;
         return makeElt(unit);
-      })(lookup(ordString)(id2)(v.idToActions));
+      })(lookup2(ordString)(id2)(v.idToActions));
     };
     var o = function(id2) {
-      var elts = fromMaybe([])(lookup(ordString)(id2)(v.parentToChild));
+      var elts = fromMaybe([])(lookup2(ordString)(id2)(v.parentToChild));
       return foldMap(foldableArray)(monoidString)(singleElt)(elts);
     };
     return "<" + (topTag + (' data-deku-ssr-deku-root="true">' + (o("deku-root") + ("</" + (topTag + ">")))));
@@ -8833,8 +8903,8 @@ var ssr$prime = function(topTag) {
 };
 
 // output/Deku.Toplevel/index.js
-var __internalDekuFlatten3 = function(dictMonadST) {
-  return flatten(dictMonadST.Monad0().Applicative0())(dictMonadST)({
+var __internalDekuFlatten3 = function(dictKorok) {
+  return flatten(dictKorok.MonadST5().Monad0().Applicative0())(dictKorok.MonadST5())({
     doLogic: function(v) {
       return function(v1) {
         return function(id2) {
@@ -8863,7 +8933,7 @@ var __internalDekuFlatten3 = function(dictMonadST) {
       };
     },
     wrapElt: function() {
-      var $37 = elementify(dictMonadST)("div")(empty(plusEvent(dictMonadST.Monad0().Applicative0())));
+      var $37 = elementify(dictKorok)("div")(empty(plusEvent(dictKorok.MonadST5().Monad0().Applicative0())));
       return function($38) {
         return Element$prime.create($37($38));
       };
@@ -8873,11 +8943,11 @@ var __internalDekuFlatten3 = function(dictMonadST) {
     }
   });
 };
-var runSSR$prime = function(dictMonadST) {
+var runSSR$prime = function(dictKorok) {
   return function(topTag) {
     return function(v) {
       return function(children) {
-        return map(dictMonadST.Monad0().Bind1().Apply0().Functor0())(function() {
+        return map(dictKorok.MonadST5().Monad0().Bind1().Apply0().Functor0())(function() {
           var $39 = ssr$prime(topTag);
           return function($40) {
             return function(v1) {
@@ -8886,11 +8956,11 @@ var runSSR$prime = function(dictMonadST) {
               return v1 + v.tail;
             }($39($40)));
           };
-        }())(liftST(dictMonadST)(function __do() {
+        }())(liftST(dictKorok.MonadST5())(function __do() {
           var seed = newSTRef(0)();
           var instr = newSTRef([])();
           var di = ssrDOMInterpret(seed);
-          $$void(functorST)(subscribe(__internalDekuFlatten3(monadSTST)({
+          $$void(functorST)(subscribe(__internalDekuFlatten3(korokST)({
             parent: new Just("deku-root"),
             scope: new Local("rootScope"),
             raiseId: function(v1) {
@@ -8905,115 +8975,107 @@ var runSSR$prime = function(dictMonadST) {
     };
   };
 };
-var runSSR = function(dictMonadST) {
-  return runSSR$prime(dictMonadST)("body");
+var runSSR = function(dictKorok) {
+  return runSSR$prime(dictKorok)("body");
 };
 
 // output/Deku.Example.Docs.SSR/index.js
 var px10 = /* @__PURE__ */ function() {
   return $$Proxy.value;
 }();
-var app = function(dictMonadST) {
-  return function(dictAlways) {
-    return vbussed()(dictMonadST)(vbusCons2({
-      reflectSymbol: function() {
-        return "buttonClicked";
-      }
-    })()()(vbusCons2({
-      reflectSymbol: function() {
-        return "sliderMoved";
-      }
-    })()()(vbusNil)()()()())()()()())($$Proxy.value)(lcmap(profunctorFn)(halways(hmapRecord()(mapRecordWithIndexCons({
-      reflectSymbol: function() {
-        return "buttonClicked";
-      }
-    })(constMapping(mappingAlwaysEffectFuncti(dictAlways)))(mapRecordWithIndexCons({
-      reflectSymbol: function() {
-        return "sliderMoved";
-      }
-    })(constMapping(mappingAlwaysEffectFuncti(dictAlways)))(mapRecordWithIndexNil)()())()())))(function(push2) {
-      return function(event) {
-        return div_(dictMonadST)([p_(dictMonadST)([text_(dictMonadST.Monad0())("Here's an example of SSR in deku.\nAll of the static bits are rendered as HTML,\nand all of the dynamic bits are hydrated on page load.")]), button(dictMonadST)(click_(functorEvent)(monoidUnit)(attrOnClickEffectUnit)(bang2(dictMonadST.Monad0().Applicative0())(push2.buttonClicked)))([text_(dictMonadST.Monad0())("Click")]), div_(dictMonadST)([text(dictMonadST.Monad0())(alt(altEvent(dictMonadST.Monad0().Applicative0()))(bang2(dictMonadST.Monad0().Applicative0())("Val: 0"))(map(functorEvent)(function() {
-          var $5 = append(semigroupString)("Val: ");
-          var $6 = show(showInt);
-          return function($7) {
-            return $5($6($7));
-          };
-        }())(fold2(eventIsEvent(dictMonadST))($$const(add(semiringInt)(1)))(alt(altEvent(dictMonadST.Monad0().Applicative0()))(bang2(dictMonadST.Monad0().Applicative0())(unit))(event.buttonClicked))(-1 | 0))))]), div_(dictMonadST)([input(dictMonadST)(slider(dictMonadST.Monad0().Applicative0())(bang2(dictMonadST.Monad0().Applicative0())(push2.sliderMoved)))([]), div_(dictMonadST)([text(dictMonadST.Monad0())(alt(altEvent(dictMonadST.Monad0().Applicative0()))(bang2(dictMonadST.Monad0().Applicative0())("Val: 50"))(map(functorEvent)(function() {
-          var $8 = append(semigroupString)("Val: ");
-          var $9 = show(showNumber);
-          return function($10) {
-            return $8($9($10));
-          };
-        }())(event.sliderMoved)))])])]);
-      };
-    }));
-  };
+var app = function(dictKorok) {
+  return vbussed()(dictKorok)()(mapRecordWithIndexCons({
+    reflectSymbol: function() {
+      return "buttonClicked";
+    }
+  })(constMapping(mappingAlwaysEffectFuncti(dictKorok.Always2())))(mapRecordWithIndexCons({
+    reflectSymbol: function() {
+      return "sliderMoved";
+    }
+  })(constMapping(mappingAlwaysEffectFuncti(dictKorok.Always2())))(mapRecordWithIndexNil)()())()())(vbusCons2({
+    reflectSymbol: function() {
+      return "buttonClicked";
+    }
+  })()()(vbusCons2({
+    reflectSymbol: function() {
+      return "sliderMoved";
+    }
+  })()()(vbusNil)()()()())()()()())($$Proxy.value)(function(push2) {
+    return function(event) {
+      return div_(dictKorok)([p_(dictKorok)([text_(dictKorok.MonadST5().Monad0())("Here's an example of SSR in deku.\nAll of the static bits are rendered as HTML,\nand all of the dynamic bits are hydrated on page load.")]), button(dictKorok)(click_(functorEvent)(monoidUnit)(attrOnClickEffectUnit)(bang2(dictKorok.MonadST5().Monad0().Applicative0())(push2.buttonClicked)))([text_(dictKorok.MonadST5().Monad0())("Click")]), div_(dictKorok)([text(dictKorok.MonadST5().Monad0())(alt(altEvent(dictKorok.MonadST5().Monad0().Applicative0()))(bang2(dictKorok.MonadST5().Monad0().Applicative0())("Val: 0"))(map(functorEvent)(function() {
+        var $3 = append(semigroupString)("Val: ");
+        var $4 = show(showInt);
+        return function($5) {
+          return $3($4($5));
+        };
+      }())(fold2(eventIsEvent(dictKorok.MonadST5()))($$const(add(semiringInt)(1)))(alt(altEvent(dictKorok.MonadST5().Monad0().Applicative0()))(bang2(dictKorok.MonadST5().Monad0().Applicative0())(unit))(event.buttonClicked))(-1 | 0))))]), div_(dictKorok)([input(dictKorok)(slider(dictKorok.MonadST5().Monad0().Applicative0())(bang2(dictKorok.MonadST5().Monad0().Applicative0())(push2.sliderMoved)))([]), div_(dictKorok)([text(dictKorok.MonadST5().Monad0())(alt(altEvent(dictKorok.MonadST5().Monad0().Applicative0()))(bang2(dictKorok.MonadST5().Monad0().Applicative0())("Val: 50"))(map(functorEvent)(function() {
+        var $6 = append(semigroupString)("Val: ");
+        var $7 = show(showNumber);
+        return function($8) {
+          return $6($7($8));
+        };
+      }())(event.sliderMoved)))])])]);
+    };
+  });
 };
-var ssrPage = function(dictMonadST) {
-  return function(dictAlways) {
-    return function(v) {
-      return makePursx({
-        reflectType: function() {
-          return "<div>\n  <h1>Server-side rendering</h1>\n\n  <h2>When performance matters!</h2>\n  <p>\n    In web development, it's good practice to send a plain-HTML version of your site over the wire before any JavaScript starts executing. This is called <i>server-side rendering</i>, or SSR, where the server renders HTML in an initial pass before rendering any JavaScript.\n  </p>\n  <p>\n    The most performant form of SSR is pre-rendering HTML and serving them from memory or from a file system. This is Deku's strategy via the following two functions:\n  </p>\n  <ul>\n    <li><code>runSSR</code> generates HTML; and</li>\n    <li><code>hydrate</code> generates JavaScript that will hydrate your HTML with anything that's dynamic. Note that this is <i>partial</i> hydration, meaning it will only hydrate the bits that need hydrating. This means that, for example, you can do CSS animations on load without fear of jank when the JavaScript kicks in.</li>\n  </ul>\n\n  <p>\n    This documentation is generated using SSR, and if you add <code>view-source:</code> before the URL, you'll see the intro page rendered as HTML. If you're reading this documentation on a computer screen, you won't see much of a difference, but if you're reading it on a 3G mobile network, you'll spot the difference immedaitely.\n  </p>\n\n  <h2>A motivating example</h2>\n\n  <p>Here is a small application using SSR. We'll split it up into three files:</p>\n  <ul>\n    <li><code>App.purs</code> has our application logic.</li>\n    <li><code>Build.purs</code> creates a <code>.js</code> file, for example <code>make.js</code>, that will render our HTML.</li>\n    <li><code>Live.purs</code> uses hydration to add dynamic logic to the website.</li>\n  </ul>\n\n  <h3>App</h3>\n  <p>Unlike the previous examples that used <code>runInBody</code>, our application code here has a slightly more complicated type. This is because it is polymorphic over <code>m</code>, and <code>m</code> will be different depending on if we are doing SSR or if we are on the live page. Also note the use of the function <code>halways</code>. This is needed before our pushers so that they will be lifted into the correct monad.</p>\n  ~code0~\n  <h3>Build</h3>\n  <p>This is the code we use to generate our HTML site. The example below creates a small script that logs our HTML to the command line,but we can also call <code>runSSR</code> from a NodeJS server, in which case we wouldn't <code>log</code> the HTML string but rather we would instead send it over the wire as the response to a request.</p>\n  ~code1~\n  <h3>Live</h3>\n  <p><code>Live.purs</code> can be bundled to generate our dynamic JS. The JS will hydrate our elements instead of replacing them, and will only hydrate elements that potentially will interactive content.</p>\n  ~code2~\n\n  <h3>Result</h3>\n\n  <p>Here is the resulting code from our static-site generation. It is rendered dynamically in your browser, but in production settings, we'd use NodeJS to render or pre-render this HTML.</p>\n\n  ~codegen~\n\n  <p>And here is what the result looks like after hydration.</p>\n\n  <blockquote> ~result~ </blockquote>\n\n  <h2>Parting shot</h2>\n  <p>Thanks for checking out Deku! I had a blast writing it, and I hope you enjoy using it for your projects!</p>\n</div>";
-        }
-      })()()(pursxToElementConsInsert()(pursxToElementConsInsert()(pursxToElementConsInsert()(pursxToElementConsInsert()(pursxToElementConsInsert()(pursxToElementNil(dictMonadST.Monad0().Applicative0()))({
-        reflectType: function() {
-          return "result";
-        }
-      })({
-        reflectSymbol: function() {
-          return "result";
-        }
-      })(dictMonadST))({
-        reflectType: function() {
-          return "codegen";
-        }
-      })({
-        reflectSymbol: function() {
-          return "codegen";
-        }
-      })(dictMonadST))({
-        reflectType: function() {
-          return "code2";
-        }
-      })({
-        reflectSymbol: function() {
-          return "code2";
-        }
-      })(dictMonadST))({
-        reflectType: function() {
-          return "code1";
-        }
-      })({
-        reflectSymbol: function() {
-          return "code1";
-        }
-      })(dictMonadST))({
-        reflectType: function() {
-          return "code0";
-        }
-      })({
-        reflectSymbol: function() {
-          return "code0";
-        }
-      })(dictMonadST))(dictMonadST)(px10)({
-        code2: nut(pre_(dictMonadST)([code_(dictMonadST)([text_(dictMonadST.Monad0())("module Live where\n\nimport Prelude\n\nimport App (app)\nimport Deku.Toplevel (hydrate)\nimport Effect (Effect)\n\nmain :: Effect Unit\nmain = hydrate app")])])),
-        code1: nut(pre_(dictMonadST)([code_(dictMonadST)([text_(dictMonadST.Monad0())('module Build where\n\nimport Prelude\n\nimport App (app)\nimport Deku.Toplevel (Template(..), runSSR)\nimport Effect (Effect)\nimport Effect.Console (log)\n\nmain :: Effect Unit\nmain =\n  runSSR\n    ( Template\n        { head: "<!DOCTYPE html><html><head><script src=\\"bundle.js\\" defer><\/script></head>"\n        , tail: "</html>"\n        }\n    )\n    app >>= log')])])),
-        code0: nut(pre_(dictMonadST)([code_(dictMonadST)([text_(dictMonadST.Monad0())(`module App where
+var ssrPage = function(v) {
+  return function(dictKorok) {
+    return makePursx({
+      reflectType: function() {
+        return "<div>\n  <h1>Server-side rendering</h1>\n\n  <h2>When performance matters!</h2>\n  <p>\n    In web development, it's good practice to send a plain-HTML version of your site over the wire before any JavaScript starts executing. This is called <i>server-side rendering</i>, or SSR, where the server renders HTML in an initial pass before rendering any JavaScript.\n  </p>\n  <p>\n    The most performant form of SSR is pre-rendering HTML and serving them from memory or from a file system. This is Deku's strategy via the following two functions:\n  </p>\n  <ul>\n    <li><code>runSSR</code> generates HTML; and</li>\n    <li><code>hydrate</code> generates JavaScript that will hydrate your HTML with anything that's dynamic. Note that this is <i>partial</i> hydration, meaning it will only hydrate the bits that need hydrating. This means that, for example, you can do CSS animations on load without fear of jank when the JavaScript kicks in.</li>\n  </ul>\n\n  <p>\n    This documentation is generated using SSR, and if you add <code>view-source:</code> before the URL, you'll see the intro page rendered as HTML. If you're reading this documentation on a computer screen, you won't see much of a difference, but if you're reading it on a 3G mobile network, you'll spot the difference immedaitely.\n  </p>\n\n  <h2>A motivating example</h2>\n\n  <p>Here is a small application using SSR. We'll split it up into three files:</p>\n  <ul>\n    <li><code>App.purs</code> has our application logic.</li>\n    <li><code>Build.purs</code> creates a <code>.js</code> file, for example <code>make.js</code>, that will render our HTML.</li>\n    <li><code>Live.purs</code> uses hydration to add dynamic logic to the website.</li>\n  </ul>\n\n  <h3>App</h3>\n  <p>Unlike the previous examples that used <code>runInBody</code>, our application code here has an explicit type annotation <code>Nut</code>. The definition of <code>Nut</code> is <code>type Nut = forall s m lock payload. Korok s m => Domable m lock payload</code>, and in larger projects, you may need to write this type out explicitly, for example if you are working with an <code>Array</code> of <code>Domable</code> and need <code>m</code> to be consistant over the <code>Array</code>.</p>\n  ~code0~\n  <h3>Build</h3>\n  <p>This is the code we use to generate our HTML site. The example below creates a small script that logs our HTML to the command line,but we can also call <code>runSSR</code> from a NodeJS server, in which case we wouldn't <code>log</code> the HTML string but rather we would instead send it over the wire as the response to a request.</p>\n  ~code1~\n  <h3>Live</h3>\n  <p><code>Live.purs</code> can be bundled to generate our dynamic JS. The JS will hydrate our elements instead of replacing them, and will only hydrate elements that potentially will interactive content.</p>\n  ~code2~\n\n  <h3>Result</h3>\n\n  <p>Here is the resulting code from our static-site generation. It is rendered dynamically in your browser, but in production settings, we'd use NodeJS to render or pre-render this HTML.</p>\n\n  ~codegen~\n\n  <p>And here is what the result looks like after hydration.</p>\n\n  <blockquote> ~result~ </blockquote>\n\n  <h2>Parting shot</h2>\n  <p>Thanks for checking out Deku! I had a blast writing it, and I hope you enjoy using it for your projects!</p>\n</div>";
+      }
+    })()()(pursxToElementConsInsert()(pursxToElementConsInsert()(pursxToElementConsInsert()(pursxToElementConsInsert()(pursxToElementConsInsert()(pursxToElementNil(dictKorok.MonadST5().Monad0().Applicative0()))({
+      reflectType: function() {
+        return "result";
+      }
+    })({
+      reflectSymbol: function() {
+        return "result";
+      }
+    })(dictKorok))({
+      reflectType: function() {
+        return "codegen";
+      }
+    })({
+      reflectSymbol: function() {
+        return "codegen";
+      }
+    })(dictKorok))({
+      reflectType: function() {
+        return "code2";
+      }
+    })({
+      reflectSymbol: function() {
+        return "code2";
+      }
+    })(dictKorok))({
+      reflectType: function() {
+        return "code1";
+      }
+    })({
+      reflectSymbol: function() {
+        return "code1";
+      }
+    })(dictKorok))({
+      reflectType: function() {
+        return "code0";
+      }
+    })({
+      reflectSymbol: function() {
+        return "code0";
+      }
+    })(dictKorok))(dictKorok)(px10)({
+      code2: nut(pre_(dictKorok)([code_(dictKorok)([text_(dictKorok.MonadST5().Monad0())("module Live where\n\nimport Prelude\n\nimport App (app)\nimport Deku.Toplevel (hydrate)\nimport Effect (Effect)\n\nmain :: Effect Unit\nmain = hydrate app")])])),
+      code1: nut(pre_(dictKorok)([code_(dictKorok)([text_(dictKorok.MonadST5().Monad0())('module Build where\n\nimport Prelude\n\nimport App (app)\nimport Deku.Toplevel (Template(..), runSSR)\nimport Effect (Effect)\nimport Effect.Console (log)\n\nmain :: Effect Unit\nmain =\n  runSSR\n    ( Template\n        { head: "<!DOCTYPE html><html><head><script src=\\"bundle.js\\" defer><\/script></head>"\n        , tail: "</html>"\n        }\n    )\n    app >>= log')])])),
+      code0: nut(pre_(dictKorok)([code_(dictKorok)([text_(dictKorok.MonadST5().Monad0())(`module App where
 
 import Prelude
 
 import Control.Alt ((<|>))
-import Control.Monad.ST.Class (class MonadST)
-import Data.Monoid.Always (class Always)
-import Data.Profunctor (lcmap)
-import Deku.Always (halways)
 import Deku.Control (text, text_)
-import Deku.Core (Domable, vbussed)
 import Deku.DOM as D
 import Deku.Listeners (click_, slider)
-import Effect (Effect)
+import Deku.Core (Nut, vbussed)
 import FRP.Event (bang, fold)
 import FRP.Event.VBus (V)
 import Type.Proxy (Proxy(..))
@@ -9023,12 +9085,8 @@ type UIEvents = V
   , sliderMoved :: Number
   )
 
-app
-  :: forall s m lock payload
-   . MonadST s m
-  => Always (m Unit) (Effect Unit)
-  => Domable m lock payload
-app = vbussed (Proxy :: _ UIEvents) $ lcmap halways \\push event -> do
+app :: Nut
+app = vbussed (Proxy :: _ UIEvents) \\push event -> do
   D.div_
     [ D.p_
         [ text_
@@ -9066,82 +9124,79 @@ and all of the dynamic bits are hydrated on page load."""
         ]
     ]
 `)])])),
-        result: nut(app(dictMonadST)(dictAlways)),
-        codegen: nut(pre_(dictMonadST)([code_(dictMonadST)([text(dictMonadST.Monad0())(makeEvent(function(k) {
-          return applySecond(dictMonadST.Monad0().Bind1().Apply0())(bind(dictMonadST.Monad0().Bind1())(runSSR(dictMonadST)({
-            head: '<!DOCTYPE html><html><head><script src="bundle.js" defer><\/script></head>',
-            tail: "</html>"
-          })(app(monadSTST)(always1(monoidEffect(monoidUnit)))))(k))(pure(dictMonadST.Monad0().Applicative0())(pure(dictMonadST.Monad0().Applicative0())(unit)));
-        }))])]))
-      });
-    };
+      result: nut(app(dictKorok)),
+      codegen: nut(pre_(dictKorok)([code_(dictKorok)([text(dictKorok.MonadST5().Monad0())(makeEvent(function(k) {
+        return applySecond(dictKorok.MonadST5().Monad0().Bind1().Apply0())(bind(dictKorok.MonadST5().Monad0().Bind1())(runSSR(dictKorok)({
+          head: '<!DOCTYPE html><html><head><script src="bundle.js" defer><\/script></head>',
+          tail: "</html>"
+        })(app(korokST)))(k))(pure(dictKorok.MonadST5().Monad0().Applicative0())(pure(dictKorok.MonadST5().Monad0().Applicative0())(unit)));
+      }))])]))
+    });
   };
 };
 
 // output/Deku.Example.Docs.Scene/index.js
-var scene = function(dictMonadST) {
-  return function(dictAlways) {
-    var page = function(dpage) {
-      return function(v) {
-        if (v instanceof Intro) {
-          return intro(dictMonadST)(dpage);
-        }
-        ;
-        if (v instanceof HelloWorld) {
-          return helloWorld(dictMonadST)(dpage);
-        }
-        ;
-        if (v instanceof SimpleComponent) {
-          return components(dictMonadST)(dpage);
-        }
-        ;
-        if (v instanceof PURSX1) {
-          return pursx1(dictMonadST)(dpage);
-        }
-        ;
-        if (v instanceof Events) {
-          return events(dictMonadST)(dictAlways)(dpage);
-        }
-        ;
-        if (v instanceof Effects) {
-          return effects(dictMonadST)(dictAlways)(dpage);
-        }
-        ;
-        if (v instanceof PURSX2) {
-          return pursx2(dictAlways)(dictMonadST)(dpage);
-        }
-        ;
-        if (v instanceof Events2) {
-          return events2(dictAlways)(dictMonadST)(dpage);
-        }
-        ;
-        if (v instanceof Portals) {
-          return portals1(dictAlways)(dictMonadST)(dpage);
-        }
-        ;
-        if (v instanceof SSR) {
-          return ssrPage(dictMonadST)(dictAlways)(dpage);
-        }
-        ;
-        throw new Error("Failed pattern match at Deku.Example.Docs.Scene (line 90, column 3 - line 90, column 66): " + [dpage.constructor.name, v.constructor.name]);
-      };
+var scene = function(dictKorok) {
+  var page = function(dpage) {
+    return function(v) {
+      if (v instanceof Intro) {
+        return intro(dpage)(dictKorok);
+      }
+      ;
+      if (v instanceof HelloWorld) {
+        return helloWorld(dpage)(dictKorok);
+      }
+      ;
+      if (v instanceof SimpleComponent) {
+        return components(dpage)(dictKorok);
+      }
+      ;
+      if (v instanceof PURSX1) {
+        return pursx1(dpage)(dictKorok);
+      }
+      ;
+      if (v instanceof Events) {
+        return events(dpage)(dictKorok);
+      }
+      ;
+      if (v instanceof Effects) {
+        return effects(dpage)(dictKorok);
+      }
+      ;
+      if (v instanceof PURSX2) {
+        return pursx2(dpage)(dictKorok);
+      }
+      ;
+      if (v instanceof Events2) {
+        return events2(dpage)(dictKorok);
+      }
+      ;
+      if (v instanceof Portals) {
+        return portals1(dpage)(dictKorok);
+      }
+      ;
+      if (v instanceof SSR) {
+        return ssrPage(dpage)(dictKorok);
+      }
+      ;
+      throw new Error("Failed pattern match at Deku.Example.Docs.Scene (line 83, column 3 - line 83, column 39): " + [dpage.constructor.name, v.constructor.name]);
     };
-    return bussed(dictMonadST)(lcmap(profunctorFn)(map(functorFn)(always(dictAlways)))(function(push2) {
-      return lcmap(profunctorFn)(function(v) {
-        return alt(altEvent(dictMonadST.Monad0().Applicative0()))(bang2(dictMonadST.Monad0().Applicative0())(Intro.value))(v);
-      })(function(event) {
-        return div_(dictMonadST)([div_(dictMonadST)(map(functorArray)(function(v) {
-          return span_(dictMonadST)([a(dictMonadST)(oneOfMap(foldableArray)(plusEvent(dictMonadST.Monad0().Applicative0()))(bang2(dictMonadST.Monad0().Applicative0()))([attr(attrOnClickCb)(OnClick.value)(cb($$const(push2(v.value0)))), attr(attrA_StyleString)(Style.value)("cursor:pointer;")]))([text_(dictMonadST.Monad0())(v.value1.value0)]), span(dictMonadST)(bang2(dictMonadST.Monad0().Applicative0())(attr(attrSpan_StyleString)(Style.value)(function() {
-            if (v.value1.value1) {
-              return "";
-            }
-            ;
-            return "display:none;";
-          }())))([text_(dictMonadST.Monad0())(" | ")])]);
-        })([new Tuple(Intro.value, new Tuple("Home", true)), new Tuple(HelloWorld.value, new Tuple("Hello world", true)), new Tuple(SimpleComponent.value, new Tuple("Component", true)), new Tuple(PURSX1.value, new Tuple("Pursx 1", true)), new Tuple(Events.value, new Tuple("Events 1", true)), new Tuple(Effects.value, new Tuple("Effects", true)), new Tuple(PURSX2.value, new Tuple("Pursx 2", true)), new Tuple(Events2.value, new Tuple("Events 2", true)), new Tuple(Portals.value, new Tuple("Portals", true)), new Tuple(SSR.value, new Tuple("SSR", false))])), div_(dictMonadST)([switcher(dictMonadST)(page(push2))(event)])]);
-      });
-    }));
   };
+  return bussed(dictKorok)(dictKorok.Always2())(function(push2) {
+    return lcmap(profunctorFn)(function(v) {
+      return alt(altEvent(dictKorok.MonadST5().Monad0().Applicative0()))(bang2(dictKorok.MonadST5().Monad0().Applicative0())(Intro.value))(v);
+    })(function(event) {
+      return div_(dictKorok)([div_(dictKorok)(map(functorArray)(function(v) {
+        return span_(dictKorok)([a(dictKorok)(oneOfMap(foldableArray)(plusEvent(dictKorok.MonadST5().Monad0().Applicative0()))(bang2(dictKorok.MonadST5().Monad0().Applicative0()))([attr(attrOnClickCb)(OnClick.value)(cb($$const(push2(v.value0)))), attr(attrA_StyleString)(Style.value)("cursor:pointer;")]))([text_(dictKorok.MonadST5().Monad0())(v.value1.value0)]), span(dictKorok)(bang2(dictKorok.MonadST5().Monad0().Applicative0())(attr(attrSpan_StyleString)(Style.value)(function() {
+          if (v.value1.value1) {
+            return "";
+          }
+          ;
+          return "display:none;";
+        }())))([text_(dictKorok.MonadST5().Monad0())(" | ")])]);
+      })([new Tuple(Intro.value, new Tuple("Home", true)), new Tuple(HelloWorld.value, new Tuple("Hello world", true)), new Tuple(SimpleComponent.value, new Tuple("Component", true)), new Tuple(PURSX1.value, new Tuple("Pursx 1", true)), new Tuple(Events.value, new Tuple("Events 1", true)), new Tuple(Effects.value, new Tuple("Effects", true)), new Tuple(PURSX2.value, new Tuple("Pursx 2", true)), new Tuple(Events2.value, new Tuple("Events 2", true)), new Tuple(Portals.value, new Tuple("Portals", true)), new Tuple(SSR.value, new Tuple("SSR", false))])), div_(dictKorok)([switcher(dictKorok.MonadST5())(page(push2))(event)])]);
+    });
+  });
 };
 
 // output/Effect.Console/foreign.js
@@ -9152,10 +9207,10 @@ var log2 = function(s) {
 };
 
 // output/Deku.Example.Docs.Static.Build/index.js
-var main = /* @__PURE__ */ bind(bindEffect)(/* @__PURE__ */ runSSR(monadSTEffect)({
+var main = /* @__PURE__ */ bind(bindEffect)(/* @__PURE__ */ runSSR(korokGlobalEffect)({
   head: '<!DOCTYPE html>\n<html>\n  <head>\n    <title>Deku documentation</title>\n    <meta charset="UTF-8">\n    <meta name="viewport" content="width=device-width">\n    <link rel="stylesheet" href="style.css">\n		<script src="bundle.js" defer><\/script>\n  </head>',
   tail: "</html>"
-})(/* @__PURE__ */ scene(monadSTST)(/* @__PURE__ */ always1(/* @__PURE__ */ monoidEffect(monoidUnit)))))(log2);
+})(/* @__PURE__ */ scene(korokST)))(log2);
 
 // <stdin>
 main();
