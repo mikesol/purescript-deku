@@ -169,7 +169,7 @@ import Control.Alt ((<|>))
 import Deku.Control (text, text_)
 import Deku.DOM as D
 import Deku.Listeners (click_, slider)
-import Deku.TLDW (Nut, avbussed)
+import Deku.Core (Nut, vbussed)
 import FRP.Event (bang, fold)
 import FRP.Event.VBus (V)
 import Type.Proxy (Proxy(..))
@@ -180,7 +180,7 @@ type UIEvents = V
   )
 
 app :: Nut
-app = avbussed (Proxy :: _ UIEvents) \push event -> do
+app = vbussed (Proxy :: _ UIEvents) \push event -> do
   D.div_
     [ D.p_
         [ text_
