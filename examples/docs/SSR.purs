@@ -50,7 +50,7 @@ px =
   </ul>
 
   <h3>App</h3>
-  <p>Unlike the previous examples that used <code>runInBody</code>, our application code here has a slightly more complicated type. This is because it is polymorphic over <code>m</code>, and <code>m</code> will be different depending on if we are doing SSR or if we are on the live page.</p>
+  <p>Unlike the previous examples that used <code>runInBody</code>, our application code here has an explicit type annotation <code>Nut</code>. The definition of <code>Nut</code> is <code>type Nut = forall s m lock payload. Korok s m => Domable m lock payload</code>, and in larger projects, you may need to write this type out explicitly, for example if you are working with an <code>Array</code> of <code>Domable</code> and need <code>m</code> to be consistant over the <code>Array</code>.</p>
   ~code0~
   <h3>Build</h3>
   <p>This is the code we use to generate our HTML site. The example below creates a small script that logs our HTML to the command line,but we can also call <code>runSSR</code> from a NodeJS server, in which case we wouldn't <code>log</code> the HTML string but rather we would instead send it over the wire as the response to a request.</p>
