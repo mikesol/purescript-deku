@@ -3,26 +3,21 @@ module Deku.Example.Docs.Pursx2 where
 import Prelude
 
 import Control.Alt ((<|>))
-import Control.Monad.ST.Class (class MonadST)
 import Data.Compactable (compact)
 import Data.Maybe (Maybe(..))
-import Data.Monoid.Always (class Always, always)
-import Data.Profunctor (lcmap)
 import Deku.Attribute (cb, (:=))
 import Deku.Control (text, text_)
-import Deku.Core (Domable, dyn, insert)
+import Deku.Core (dyn, insert, Nut, bus)
 import Deku.DOM as D
 import Deku.Example.Docs.Types (Page(..))
 import Deku.Example.Docs.Util (scrollToTop)
 import Deku.Pursx (makePursx', nut, (~~))
 import Effect (Effect)
-import FRP.Event (bang, bus)
+import FRP.Event (bang)
 import Type.Proxy (Proxy(..))
 
 px =
-  Proxy
-    :: Proxy
-         """<div>
+  Proxy    :: Proxy         """<div>
   <h1>Pursx 2</h1>
 
   <h2>Working with events and effects</h2>
@@ -47,9 +42,7 @@ px =
 </div>"""
 
 myDom =
-  Proxy
-    :: Proxy
-         """<div>
+  Proxy    :: Proxy         """<div>
         <button>I do nothing</button>
         <ul>
           <li>A</li>
@@ -66,12 +59,7 @@ myDom =
       </div>
 """
 
-pursx2
-  :: forall s m lock payload
-   . Always (m Unit) (Effect Unit)
-  => MonadST s m
-  => (Page -> Effect Unit)
-  -> Domable m lock payload
+pursx2 :: (Page -> Effect Unit) -> Nut
 pursx2 dpage = makePursx' (Proxy :: _ "?") px
   { code: nut
       ( D.pre_
@@ -133,7 +121,7 @@ main = runInBody1
           ]
       )
   , result: nut
-      ( dyn $ bus $ lcmap (map (always :: m Unit -> Effect Unit)) \push event ->
+      ( dyn $ bus \push event ->
           bang $ insert $ myDom ~~
             { myli: bang (D.Style := "background-color:rgb(200,240,210);")
             , somethingNew: nut

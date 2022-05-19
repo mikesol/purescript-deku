@@ -111,8 +111,7 @@ def cg(CODEGEN_TARGET, ival = None, ival2 = None):
 import Control.Plus (empty)
 import Deku.Attribute (Attribute)
 import Deku.Control (elementify)
-import Control.Monad.ST.Class (class MonadST)
-import Deku.Core (Domable)
+import Deku.Core (Domable, class Korok)
 import Bolson.Core (Entity(..), fixed)
 import FRP.Event (AnEvent)
 
@@ -120,7 +119,7 @@ data {term}
 
 {x}
   :: forall s m lock payload
-   . MonadST s m
+   . Korok s m
   => AnEvent m (Attribute {term})
   -> Array (Domable m lock payload)
   -> Domable m lock payload
@@ -128,7 +127,7 @@ data {term}
 
 {x}_
   :: forall s m lock payload
-   . MonadST s m
+   . Korok s m
   => Array (Domable m lock payload)
   -> Domable m lock payload
 {x}_ = {x} empty

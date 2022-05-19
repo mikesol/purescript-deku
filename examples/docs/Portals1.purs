@@ -3,21 +3,19 @@ module Deku.Example.Docs.Portals1 where
 import Prelude
 
 import Control.Alt (alt)
-import Control.Monad.ST.Class (class MonadST)
 import Data.FastVect.FastVect ((:), index)
 import Data.FastVect.FastVect as V
 import Data.Foldable (oneOfMap)
-import Data.Monoid.Always (class Always, always)
 import Data.Profunctor (lcmap)
 import Deku.Attribute (cb, (:=))
 import Deku.Control (portal, switcher, text_)
-import Deku.Core (Domable, dyn, insert)
+import Deku.Core (dyn, insert, Nut, bus)
 import Deku.DOM as D
 import Deku.Example.Docs.Types (Page(..))
 import Deku.Example.Docs.Util (scrollToTop)
 import Deku.Pursx (nut, (~~))
 import Effect (Effect)
-import FRP.Event (bang, bus, fold)
+import FRP.Event (bang, fold)
 import Type.Proxy (Proxy(..))
 
 data MainUIAction
@@ -27,10 +25,7 @@ data MainUIAction
 
 data TodoAction = Prioritize | Delete
 
-px =
-  Proxy
-    :: Proxy
-         """<div>
+px =  Proxy    :: Proxy         """<div>
   <h1>Portals</h1>
 
   <h2>Zapping from place to place</h2>
@@ -58,12 +53,7 @@ px =
   <p>In this section, we used portals to move an element to different areas of the DOM. In the next section, we'll learn how to do <a ~next~ style="cursor:pointer;">static site rendering</a>.</p>
 </div>"""
 
-portals1
-  :: forall s m lock payload
-   . Always (m Unit) (Effect Unit)
-  => MonadST s m
-  => (Page -> Effect Unit)
-  -> Domable m lock payload
+portals1 :: (Page -> Effect Unit) -> Nut
 portals1 dpage = px ~~
   { code: nut
       ( D.pre_
@@ -127,7 +117,7 @@ main = runInBody1
       )
   , result: nut
 
-      ( dyn $ bus $ lcmap (map always) \push -> lcmap (alt (bang unit))
+      ( dyn $ bus \push -> lcmap (alt (bang unit))
           \event -> do
             bang $ insert $ portal
               ( map

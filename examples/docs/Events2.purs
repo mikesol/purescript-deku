@@ -3,22 +3,20 @@ module Deku.Example.Docs.Events2 where
 import Prelude
 
 import Control.Alt ((<|>))
-import Control.Monad.ST.Class (class MonadST)
 import Data.Filterable (filterMap)
 import Data.Foldable (for_, oneOfMap)
 import Data.Maybe (Maybe(..))
-import Data.Monoid.Always (class Always, always)
 import Data.Profunctor (lcmap)
 import Data.Tuple.Nested ((/\))
 import Deku.Attribute (cb, (:=))
 import Deku.Control (text_)
-import Deku.Core (Domable, insert, sendToTop, remove, bussed, dyn)
+import Deku.Core (dyn, insert, remove, sendToTop, Nut, bus, bussed)
 import Deku.DOM as D
 import Deku.Example.Docs.Types (Page(..))
 import Deku.Example.Docs.Util (scrollToTop)
 import Deku.Pursx (nut, (~~))
 import Effect (Effect)
-import FRP.Event (bang, bus, keepLatest, mapAccum)
+import FRP.Event (bang, keepLatest, mapAccum)
 import Type.Proxy (Proxy(..))
 import Web.Event.Event (target)
 import Web.HTML.HTMLInputElement (fromEventTarget, value)
@@ -32,9 +30,7 @@ data MainUIAction
 data TodoAction = Prioritize | Delete
 
 px =
-  Proxy
-    :: Proxy
-         """<div>
+  Proxy    :: Proxy         """<div>
   <h1>Events 2</h1>
 
   <h2>Dynamic children</h2>
@@ -69,11 +65,8 @@ px =
 </div>"""
 
 events2
-  :: forall s m lock payload
-   . Always (m Unit) (Effect Unit)
-  => MonadST s m
-  => (Page -> Effect Unit)
-  -> Domable m lock payload
+  :: (Page -> Effect Unit)
+  -> Nut
 events2 dpage = px ~~
   { code: nut
       ( D.pre_
@@ -175,7 +168,7 @@ main = runInBody1
           ]
       )
   , result: nut
-      ( bussed $ lcmap (map always) \push -> lcmap (bang UIShown <|> _)
+      ( bussed \push -> lcmap (bang UIShown <|> _)
           \event -> do
             D.div_
               [ D.div_
@@ -204,7 +197,7 @@ main = runInBody1
                   ]
               , D.div_
                   [ dyn $ map
-                      ( \txt -> keepLatest $ bus $ lcmap (map always) \p' e' ->
+                      ( \txt -> keepLatest $ bus \p' e' ->
                           ( bang $ insert $ D.div_ do
                               [ D.span (bang $ D.Style := "margin: 5px;")
                                   [ text_ txt ]

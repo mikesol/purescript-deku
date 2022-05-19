@@ -3,16 +3,12 @@ module Deku.Example.Docs.SSR where
 import Prelude
 
 import Control.Alt ((<|>))
-import Control.Monad.ST.Class (class MonadST)
-import Data.Monoid.Always (class Always)
-import Data.Profunctor (lcmap)
-import Deku.Always (halways)
 import Deku.Control (text, text_)
-import Deku.Core (Domable, vbussed)
 import Deku.DOM as D
 import Deku.Example.Docs.Types (Page)
 import Deku.Listeners (click_, slider)
 import Deku.Pursx (nut, (~~))
+import Deku.Core (Nut, vbussed)
 import Deku.Toplevel (Template(..), runSSR)
 import Effect (Effect)
 import FRP.Event (bang, fold, makeEvent)
@@ -25,9 +21,7 @@ type UIEvents = V
   )
 
 px =
-  Proxy
-    :: Proxy
-         """<div>
+  Proxy    :: Proxy         """<div>
   <h1>Server-side rendering</h1>
 
   <h2>When performance matters!</h2>
@@ -56,7 +50,7 @@ px =
   </ul>
 
   <h3>App</h3>
-  <p>Unlike the previous examples that used <code>runInBody</code>, our application code here has a slightly more complicated type. This is because it is polymorphic over <code>m</code>, and <code>m</code> will be different depending on if we are doing SSR or if we are on the live page. Also note the use of the function <code>halways</code>. This is needed before our pushers so that they will be lifted into the correct monad.</p>
+  <p>Unlike the previous examples that used <code>runInBody</code>, our application code here has an explicit type annotation <code>Nut</code>. The definition of <code>Nut</code> is <code>type Nut = forall s m lock payload. Korok s m => Domable m lock payload</code>, and in larger projects, you may need to write this type out explicitly, for example if you are working with an <code>Array</code> of <code>Domable</code> and need <code>m</code> to be consistant over the <code>Array</code>.</p>
   ~code0~
   <h3>Build</h3>
   <p>This is the code we use to generate our HTML site. The example below creates a small script that logs our HTML to the command line,but we can also call <code>runSSR</code> from a NodeJS server, in which case we wouldn't <code>log</code> the HTML string but rather we would instead send it over the wire as the response to a request.</p>
@@ -79,12 +73,8 @@ px =
   <p>Thanks for checking out Deku! I had a blast writing it, and I hope you enjoy using it for your projects!</p>
 </div>"""
 
-app
-  :: forall s m lock payload
-   . MonadST s m
-  => Always (m Unit) (Effect Unit)
-  => Domable m lock payload
-app = vbussed (Proxy :: _ UIEvents) $ lcmap halways \push event -> do
+app :: Nut
+app = vbussed (Proxy :: _ UIEvents) \push event -> do
   D.div_
     [ D.p_
         [ text_
@@ -122,12 +112,7 @@ and all of the dynamic bits are hydrated on page load."""
         ]
     ]
 
-ssrPage
-  :: forall s m lock payload
-   . MonadST s m
-  => Always (m Unit) (Effect Unit)
-  => (Page -> Effect Unit)
-  -> Domable m lock payload
+ssrPage :: (Page -> Effect Unit) -> Nut
 ssrPage _ = px ~~
   { code2: nut
       ( D.pre_
@@ -181,15 +166,10 @@ main =
 import Prelude
 
 import Control.Alt ((<|>))
-import Control.Monad.ST.Class (class MonadST)
-import Data.Monoid.Always (class Always)
-import Data.Profunctor (lcmap)
-import Deku.Always (halways)
 import Deku.Control (text, text_)
-import Deku.Core (Domable, vbussed)
 import Deku.DOM as D
 import Deku.Listeners (click_, slider)
-import Effect (Effect)
+import Deku.Core (Nut, vbussed)
 import FRP.Event (bang, fold)
 import FRP.Event.VBus (V)
 import Type.Proxy (Proxy(..))
@@ -199,23 +179,14 @@ type UIEvents = V
   , sliderMoved :: Number
   )
 
-app
-  :: forall s m lock payload
-   . MonadST s m
-  => Always (m Unit) (Effect Unit)
-  => Domable m lock payload
-app = vbussed (Proxy :: _ UIEvents) $ lcmap halways \push event -> do
+app :: Nut
+app = vbussed (Proxy :: _ UIEvents) \push event -> do
   D.div_
     [ D.p_
         [ text_
-            """ <> "\"\"\""
-                      <>
-                        """Here's an example of SSR in deku.
+            """ <> "\"\"\"" <> """Here's an example of SSR in deku.
 All of the static bits are rendered as HTML,
-and all of the dynamic bits are hydrated on page load."""
-                      <> "\"\"\""
-                      <>
-                        """
+and all of the dynamic bits are hydrated on page load.""" <> "\"\"\"" <> """
         ]
     , D.button
         (click_ (bang push.buttonClicked))

@@ -5,22 +5,19 @@ import Prelude
 import Affjax.ResponseFormat as ResponseFormat
 import Affjax.Web as AX
 import Control.Alt ((<|>))
-import Control.Monad.ST.Class (class MonadST)
 import Data.Argonaut.Core (stringifyWithIndent)
 import Data.Either (Either(..))
 import Data.Filterable (filterMap, compact)
 import Data.HTTP.Method (Method(..))
 import Data.Maybe (Maybe(..))
-import Data.Monoid.Always (class Always, always)
-import Data.Profunctor (lcmap)
 import Data.Tuple.Nested ((/\))
 import Deku.Attribute (Cb, cb, (:=))
 import Deku.Control (text, text_)
-import Deku.Core (Domable, bussed)
 import Deku.DOM as D
 import Deku.Example.Docs.Types (Page(..))
 import Deku.Example.Docs.Util (scrollToTop)
 import Deku.Pursx (nut, (~~))
+import Deku.Core (Nut, bussed)
 import Effect (Effect)
 import Effect.Aff (launchAff_)
 import Effect.Class (liftEffect)
@@ -54,9 +51,7 @@ clickCb push = cb
 clickText = "Click to get some random user data." :: String
 
 px =
-  Proxy
-    :: Proxy
-         """<div>
+  Proxy    :: Proxy         """<div>
   <h1>Effects</h1>
 
   <h2>Let's make a network call</h2>
@@ -79,12 +74,7 @@ px =
   <p>It is also possible to handle events (and by extension effectful actions in events, like network calls) in Pursx. Let's see how in the <a ~next~ style="cursor:pointer;">second Pursx section</a>.</p>
 </div>"""
 
-effects
-  :: forall s m lock payload
-   . MonadST s m
-  => Always (m Unit) (Effect Unit)
-  => (Page -> Effect Unit)
-  -> Domable m lock payload
+effects :: (Page -> Effect Unit) -> Nut
 effects dpage = px ~~
   { code: nut
       ( D.pre_
@@ -194,7 +184,7 @@ main = runInBody1
           ]
       )
   , result: nut
-      ( bussed $ lcmap (map always) \push event -> do
+      ( bussed \push event -> do
           let
             loadingOrResult = filterMap
               ( case _ of

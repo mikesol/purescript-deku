@@ -5,13 +5,13 @@ import Prelude
 import Bolson.Control as Bolson
 import Bolson.Core (Element(..), Entity(..), PSR, Scope(..))
 import Control.Monad.ST (ST)
-import Control.Monad.ST.Class (class MonadST, liftST)
+import Control.Monad.ST.Class (liftST)
 import Control.Monad.ST.Internal as RRef
 import Control.Plus (empty)
 import Data.Maybe (Maybe(..), maybe)
 import Data.Newtype (class Newtype, unwrap)
 import Deku.Control (deku, deku1, dekuA, elementify)
-import Deku.Core (DOMInterpret(..), Domable, Node(..))
+import Deku.Core (class Korok, DOMInterpret(..), Domable, Node(..))
 import Deku.Interpret (FFIDOMSnapshot, Instruction, fullDOMInterpret, hydratingDOMInterpret, makeFFIDOMSnapshot, ssrDOMInterpret)
 import Deku.SSR (ssr')
 import Effect (Effect)
@@ -78,7 +78,7 @@ runInBody
 runInBody a = void (runInBody' a)
 
 runInBody1
-  :: (forall lock. Event (Domable Effect lock (FFIDOMSnapshot -> Effect Unit)))
+  ::  (forall lock. Event (Domable Effect lock (FFIDOMSnapshot -> Effect Unit)))
   -> Effect Unit
 runInBody1 a = void (runInBody1' a)
 
@@ -97,7 +97,10 @@ hydrate' children = do
   di <- Ref.new 0 <#> hydratingDOMInterpret
   subscribe
     ( __internalDekuFlatten
-        { parent: Just "deku-root", scope: Local "rootScope", raiseId: \_ -> pure unit }
+        { parent: Just "deku-root"
+        , scope: Local "rootScope"
+        , raiseId: \_ -> pure unit
+        }
         di
         (unsafeCoerce children)
     )
@@ -115,7 +118,7 @@ derive instance Newtype Template _
 
 runSSR
   :: forall s m
-   . MonadST s m
+   . Korok s m
   => Template
   -> ( forall lock
         . Domable (ST s) lock
@@ -126,7 +129,7 @@ runSSR = runSSR' "body"
 
 runSSR'
   :: forall s m
-   . MonadST s m
+   . Korok s m
   => String
   -> Template
   -> ( forall lock
@@ -156,7 +159,7 @@ runSSR' topTag (Template { head, tail }) children =
 
 __internalDekuFlatten
   :: forall s m lock payload
-   . MonadST s m
+   . Korok s m
   => PSR m
   -> DOMInterpret m payload
   -> Domable m lock payload

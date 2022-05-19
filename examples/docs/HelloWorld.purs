@@ -2,22 +2,19 @@ module Deku.Example.Docs.HelloWorld where
 
 import Prelude
 
-import Control.Monad.ST.Class (class MonadST)
 import Deku.Attribute (cb, (:=))
 import Deku.Control (text_)
-import Deku.Core (Domable)
 import Deku.DOM as D
 import Deku.Example.Docs.Types (Page(..))
 import Deku.Example.Docs.Util (scrollToTop)
 import Deku.Pursx (nut, (~~))
+import Deku.Core (Nut)
 import Effect (Effect)
 import FRP.Event.Class (bang)
 import Type.Proxy (Proxy(..))
 
 px =
-  Proxy
-    :: Proxy
-         """<div>
+  Proxy    :: Proxy         """<div>
   <h1>Hello world</h1>
 
   <h3>A small example</h3>
@@ -41,10 +38,8 @@ px =
 </div>"""
 
 helloWorld
-  :: forall s m lock payload
-   . MonadST s m
-  => (Page -> Effect Unit)
-  -> Domable m lock payload
+  :: (Page -> Effect Unit)
+  -> Nut
 helloWorld dpage = px ~~
   { code: nut
       ( D.pre_
