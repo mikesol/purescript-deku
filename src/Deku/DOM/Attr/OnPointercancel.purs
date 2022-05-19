@@ -2,7 +2,7 @@ module Deku.DOM.Attr.OnPointercancel where
 
 import Prelude
 import Effect (Effect)
-import Deku.Attribute (class Attr, Cb(..), cb', cb, unsafeAttribute)
+import Deku.Attribute (class Attr, Cb(..), cb', unsafeAttribute)
 
 data OnPointercancel = OnPointercancel
 instance Attr anything OnPointercancel Cb where

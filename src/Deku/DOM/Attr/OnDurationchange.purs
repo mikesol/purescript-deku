@@ -2,7 +2,7 @@ module Deku.DOM.Attr.OnDurationchange where
 
 import Prelude
 import Effect (Effect)
-import Deku.Attribute (class Attr, Cb(..), cb', cb, unsafeAttribute)
+import Deku.Attribute (class Attr, Cb(..), cb', unsafeAttribute)
 
 data OnDurationchange = OnDurationchange
 instance Attr anything OnDurationchange Cb where

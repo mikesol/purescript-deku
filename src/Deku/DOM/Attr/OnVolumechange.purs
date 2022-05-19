@@ -2,7 +2,7 @@ module Deku.DOM.Attr.OnVolumechange where
 
 import Prelude
 import Effect (Effect)
-import Deku.Attribute (class Attr, Cb(..), cb', cb, unsafeAttribute)
+import Deku.Attribute (class Attr, Cb(..), cb', unsafeAttribute)
 
 data OnVolumechange = OnVolumechange
 instance Attr anything OnVolumechange Cb where

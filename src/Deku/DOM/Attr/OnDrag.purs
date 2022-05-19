@@ -2,7 +2,7 @@ module Deku.DOM.Attr.OnDrag where
 
 import Prelude
 import Effect (Effect)
-import Deku.Attribute (class Attr, Cb(..), cb', cb, unsafeAttribute)
+import Deku.Attribute (class Attr, Cb(..), cb', unsafeAttribute)
 
 data OnDrag = OnDrag
 instance Attr anything OnDrag Cb where

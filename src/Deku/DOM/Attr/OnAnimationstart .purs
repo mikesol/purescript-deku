@@ -2,7 +2,7 @@ module Deku.DOM.Attr.OnAnimationstart  where
 
 import Prelude
 import Effect (Effect)
-import Deku.Attribute (class Attr, Cb(..), cb', cb, unsafeAttribute)
+import Deku.Attribute (class Attr, Cb(..), cb', unsafeAttribute)
 
 data OnAnimationstart  = OnAnimationstart 
 instance Attr anything OnAnimationstart  Cb where

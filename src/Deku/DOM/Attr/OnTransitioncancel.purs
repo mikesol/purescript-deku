@@ -2,7 +2,7 @@ module Deku.DOM.Attr.OnTransitioncancel where
 
 import Prelude
 import Effect (Effect)
-import Deku.Attribute (class Attr, Cb(..), cb', cb, unsafeAttribute)
+import Deku.Attribute (class Attr, Cb(..), cb', unsafeAttribute)
 
 data OnTransitioncancel = OnTransitioncancel
 instance Attr anything OnTransitioncancel Cb where

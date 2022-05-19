@@ -2,7 +2,7 @@ module Deku.DOM.Attr.OnTransitionend where
 
 import Prelude
 import Effect (Effect)
-import Deku.Attribute (class Attr, Cb(..), cb', cb, unsafeAttribute)
+import Deku.Attribute (class Attr, Cb(..), cb', unsafeAttribute)
 
 data OnTransitionend = OnTransitionend
 instance Attr anything OnTransitionend Cb where

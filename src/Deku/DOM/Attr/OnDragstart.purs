@@ -2,7 +2,7 @@ module Deku.DOM.Attr.OnDragstart where
 
 import Prelude
 import Effect (Effect)
-import Deku.Attribute (class Attr, Cb(..), cb', cb, unsafeAttribute)
+import Deku.Attribute (class Attr, Cb(..), cb', unsafeAttribute)
 
 data OnDragstart = OnDragstart
 instance Attr anything OnDragstart Cb where

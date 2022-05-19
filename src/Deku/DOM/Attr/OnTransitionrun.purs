@@ -2,7 +2,7 @@ module Deku.DOM.Attr.OnTransitionrun where
 
 import Prelude
 import Effect (Effect)
-import Deku.Attribute (class Attr, Cb(..), cb', cb, unsafeAttribute)
+import Deku.Attribute (class Attr, Cb(..), cb', unsafeAttribute)
 
 data OnTransitionrun = OnTransitionrun
 instance Attr anything OnTransitionrun Cb where

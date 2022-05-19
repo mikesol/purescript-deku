@@ -2,7 +2,7 @@ module Deku.DOM.Attr.OnAuxclick  where
 
 import Prelude
 import Effect (Effect)
-import Deku.Attribute (class Attr, Cb(..), cb', cb, unsafeAttribute)
+import Deku.Attribute (class Attr, Cb(..), cb', unsafeAttribute)
 
 data OnAuxclick  = OnAuxclick 
 instance Attr anything OnAuxclick  Cb where

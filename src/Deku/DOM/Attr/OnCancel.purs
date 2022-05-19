@@ -2,7 +2,7 @@ module Deku.DOM.Attr.OnCancel where
 
 import Prelude
 import Effect (Effect)
-import Deku.Attribute (class Attr, Cb(..), cb', cb, unsafeAttribute)
+import Deku.Attribute (class Attr, Cb(..), cb', unsafeAttribute)
 
 data OnCancel = OnCancel
 instance Attr anything OnCancel Cb where

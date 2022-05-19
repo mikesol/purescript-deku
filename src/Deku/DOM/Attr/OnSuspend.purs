@@ -2,7 +2,7 @@ module Deku.DOM.Attr.OnSuspend where
 
 import Prelude
 import Effect (Effect)
-import Deku.Attribute (class Attr, Cb(..), cb', cb, unsafeAttribute)
+import Deku.Attribute (class Attr, Cb(..), cb', unsafeAttribute)
 
 data OnSuspend = OnSuspend
 instance Attr anything OnSuspend Cb where

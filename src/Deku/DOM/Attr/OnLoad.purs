@@ -2,7 +2,7 @@ module Deku.DOM.Attr.OnLoad where
 
 import Prelude
 import Effect (Effect)
-import Deku.Attribute (class Attr, Cb(..), cb', cb, unsafeAttribute)
+import Deku.Attribute (class Attr, Cb(..), cb', unsafeAttribute)
 
 data OnLoad = OnLoad
 instance Attr anything OnLoad Cb where

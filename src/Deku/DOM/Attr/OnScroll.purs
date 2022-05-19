@@ -2,7 +2,7 @@ module Deku.DOM.Attr.OnScroll where
 
 import Prelude
 import Effect (Effect)
-import Deku.Attribute (class Attr, Cb(..), cb', cb, unsafeAttribute)
+import Deku.Attribute (class Attr, Cb(..), cb', unsafeAttribute)
 
 data OnScroll = OnScroll
 instance Attr anything OnScroll Cb where

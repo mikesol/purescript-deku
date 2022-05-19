@@ -2,7 +2,7 @@ module Deku.DOM.Attr.OnDrop where
 
 import Prelude
 import Effect (Effect)
-import Deku.Attribute (class Attr, Cb(..), cb', cb, unsafeAttribute)
+import Deku.Attribute (class Attr, Cb(..), cb', unsafeAttribute)
 
 data OnDrop = OnDrop
 instance Attr anything OnDrop Cb where

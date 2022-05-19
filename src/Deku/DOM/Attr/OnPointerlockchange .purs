@@ -2,7 +2,7 @@ module Deku.DOM.Attr.OnPointerlockchange  where
 
 import Prelude
 import Effect (Effect)
-import Deku.Attribute (class Attr, Cb(..), cb', cb, unsafeAttribute)
+import Deku.Attribute (class Attr, Cb(..), cb', unsafeAttribute)
 
 data OnPointerlockchange  = OnPointerlockchange 
 instance Attr anything OnPointerlockchange  Cb where

@@ -2,7 +2,7 @@ module Deku.DOM.Attr.OnPause where
 
 import Prelude
 import Effect (Effect)
-import Deku.Attribute (class Attr, Cb(..), cb', cb, unsafeAttribute)
+import Deku.Attribute (class Attr, Cb(..), cb', unsafeAttribute)
 
 data OnPause = OnPause
 instance Attr anything OnPause Cb where

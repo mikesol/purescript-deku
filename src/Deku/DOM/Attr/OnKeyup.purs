@@ -2,7 +2,7 @@ module Deku.DOM.Attr.OnKeyup where
 
 import Prelude
 import Effect (Effect)
-import Deku.Attribute (class Attr, Cb(..), cb', cb, unsafeAttribute)
+import Deku.Attribute (class Attr, Cb(..), cb', unsafeAttribute)
 
 data OnKeyup = OnKeyup
 instance Attr anything OnKeyup Cb where

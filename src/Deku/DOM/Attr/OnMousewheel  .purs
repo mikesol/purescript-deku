@@ -2,7 +2,7 @@ module Deku.DOM.Attr.OnMousewheel   where
 
 import Prelude
 import Effect (Effect)
-import Deku.Attribute (class Attr, Cb(..), cb', cb, unsafeAttribute)
+import Deku.Attribute (class Attr, Cb(..), cb', unsafeAttribute)
 
 data OnMousewheel   = OnMousewheel  
 instance Attr anything OnMousewheel   Cb where

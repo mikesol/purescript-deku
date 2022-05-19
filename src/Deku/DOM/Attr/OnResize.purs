@@ -2,7 +2,7 @@ module Deku.DOM.Attr.OnResize where
 
 import Prelude
 import Effect (Effect)
-import Deku.Attribute (class Attr, Cb(..), cb', cb, unsafeAttribute)
+import Deku.Attribute (class Attr, Cb(..), cb', unsafeAttribute)
 
 data OnResize = OnResize
 instance Attr anything OnResize Cb where

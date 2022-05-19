@@ -2,7 +2,7 @@ module Deku.DOM.Attr.OnInvalid where
 
 import Prelude
 import Effect (Effect)
-import Deku.Attribute (class Attr, Cb(..), cb', cb, unsafeAttribute)
+import Deku.Attribute (class Attr, Cb(..), cb', unsafeAttribute)
 
 data OnInvalid = OnInvalid
 instance Attr anything OnInvalid Cb where

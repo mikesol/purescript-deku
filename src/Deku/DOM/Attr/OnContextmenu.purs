@@ -2,7 +2,7 @@ module Deku.DOM.Attr.OnContextmenu where
 
 import Prelude
 import Effect (Effect)
-import Deku.Attribute (class Attr, Cb(..), cb', cb, unsafeAttribute)
+import Deku.Attribute (class Attr, Cb(..), cb', unsafeAttribute)
 
 data OnContextmenu = OnContextmenu
 instance Attr anything OnContextmenu Cb where

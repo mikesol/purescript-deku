@@ -2,7 +2,7 @@ module Deku.DOM.Attr.OnClose where
 
 import Prelude
 import Effect (Effect)
-import Deku.Attribute (class Attr, Cb(..), cb', cb, unsafeAttribute)
+import Deku.Attribute (class Attr, Cb(..), cb', unsafeAttribute)
 
 data OnClose = OnClose
 instance Attr anything OnClose Cb where

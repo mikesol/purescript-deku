@@ -2,7 +2,7 @@ module Deku.DOM.Attr.OnSelectstart where
 
 import Prelude
 import Effect (Effect)
-import Deku.Attribute (class Attr, Cb(..), cb', cb, unsafeAttribute)
+import Deku.Attribute (class Attr, Cb(..), cb', unsafeAttribute)
 
 data OnSelectstart = OnSelectstart
 instance Attr anything OnSelectstart Cb where
