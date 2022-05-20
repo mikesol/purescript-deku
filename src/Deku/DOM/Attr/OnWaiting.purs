@@ -2,7 +2,7 @@ module Deku.DOM.Attr.OnWaiting where
 
 import Prelude
 import Effect (Effect)
-import Deku.Attribute (class Attr, Cb(..), cb', cb, unsafeAttribute)
+import Deku.Attribute (class Attr, Cb(..), cb', unsafeAttribute)
 
 data OnWaiting = OnWaiting
 instance Attr anything OnWaiting Cb where

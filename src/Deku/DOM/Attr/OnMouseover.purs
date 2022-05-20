@@ -2,7 +2,7 @@ module Deku.DOM.Attr.OnMouseover where
 
 import Prelude
 import Effect (Effect)
-import Deku.Attribute (class Attr, Cb(..), cb', cb, unsafeAttribute)
+import Deku.Attribute (class Attr, Cb(..), cb', unsafeAttribute)
 
 data OnMouseover = OnMouseover
 instance Attr anything OnMouseover Cb where

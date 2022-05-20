@@ -2,7 +2,7 @@ module Deku.DOM.Attr.OnStalled where
 
 import Prelude
 import Effect (Effect)
-import Deku.Attribute (class Attr, Cb(..), cb', cb, unsafeAttribute)
+import Deku.Attribute (class Attr, Cb(..), cb', unsafeAttribute)
 
 data OnStalled = OnStalled
 instance Attr anything OnStalled Cb where

@@ -2,7 +2,7 @@ module Deku.DOM.Attr.OnPlay where
 
 import Prelude
 import Effect (Effect)
-import Deku.Attribute (class Attr, Cb(..), cb', cb, unsafeAttribute)
+import Deku.Attribute (class Attr, Cb(..), cb', unsafeAttribute)
 
 data OnPlay = OnPlay
 instance Attr anything OnPlay Cb where

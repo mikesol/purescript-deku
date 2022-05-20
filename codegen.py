@@ -181,7 +181,7 @@ data {term} = {term}''')
 
 import Prelude
 import Effect (Effect)
-import Deku.Attribute (class Attr, Cb(..), cb', cb, unsafeAttribute)
+import Deku.Attribute (class Attr, Cb(..), cb', unsafeAttribute)
 
 data {term} = {term}''')
             term = 'On'+x.capitalize()

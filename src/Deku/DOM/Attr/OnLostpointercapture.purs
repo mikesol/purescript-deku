@@ -2,7 +2,7 @@ module Deku.DOM.Attr.OnLostpointercapture where
 
 import Prelude
 import Effect (Effect)
-import Deku.Attribute (class Attr, Cb(..), cb', cb, unsafeAttribute)
+import Deku.Attribute (class Attr, Cb(..), cb', unsafeAttribute)
 
 data OnLostpointercapture = OnLostpointercapture
 instance Attr anything OnLostpointercapture Cb where

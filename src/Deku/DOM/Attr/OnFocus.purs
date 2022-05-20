@@ -2,7 +2,7 @@ module Deku.DOM.Attr.OnFocus where
 
 import Prelude
 import Effect (Effect)
-import Deku.Attribute (class Attr, Cb(..), cb', cb, unsafeAttribute)
+import Deku.Attribute (class Attr, Cb(..), cb', unsafeAttribute)
 
 data OnFocus = OnFocus
 instance Attr anything OnFocus Cb where

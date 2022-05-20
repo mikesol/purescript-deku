@@ -2,7 +2,7 @@ module Deku.DOM.Attr.OnPointerenter where
 
 import Prelude
 import Effect (Effect)
-import Deku.Attribute (class Attr, Cb(..), cb', cb, unsafeAttribute)
+import Deku.Attribute (class Attr, Cb(..), cb', unsafeAttribute)
 
 data OnPointerenter = OnPointerenter
 instance Attr anything OnPointerenter Cb where

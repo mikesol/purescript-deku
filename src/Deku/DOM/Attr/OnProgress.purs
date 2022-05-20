@@ -2,7 +2,7 @@ module Deku.DOM.Attr.OnProgress where
 
 import Prelude
 import Effect (Effect)
-import Deku.Attribute (class Attr, Cb(..), cb', cb, unsafeAttribute)
+import Deku.Attribute (class Attr, Cb(..), cb', unsafeAttribute)
 
 data OnProgress = OnProgress
 instance Attr anything OnProgress Cb where

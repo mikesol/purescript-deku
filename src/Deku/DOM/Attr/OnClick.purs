@@ -2,7 +2,7 @@ module Deku.DOM.Attr.OnClick where
 
 import Prelude
 import Effect (Effect)
-import Deku.Attribute (class Attr, Cb(..), cb', cb, unsafeAttribute)
+import Deku.Attribute (class Attr, Cb(..), cb', unsafeAttribute)
 
 data OnClick = OnClick
 instance Attr anything OnClick Cb where

@@ -2,7 +2,7 @@ module Deku.DOM.Attr.OnError where
 
 import Prelude
 import Effect (Effect)
-import Deku.Attribute (class Attr, Cb(..), cb', cb, unsafeAttribute)
+import Deku.Attribute (class Attr, Cb(..), cb', unsafeAttribute)
 
 data OnError = OnError
 instance Attr anything OnError Cb where

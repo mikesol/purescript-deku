@@ -2,7 +2,7 @@ module Deku.DOM.Attr.OnRatechange where
 
 import Prelude
 import Effect (Effect)
-import Deku.Attribute (class Attr, Cb(..), cb', cb, unsafeAttribute)
+import Deku.Attribute (class Attr, Cb(..), cb', unsafeAttribute)
 
 data OnRatechange = OnRatechange
 instance Attr anything OnRatechange Cb where

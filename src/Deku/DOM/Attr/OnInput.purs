@@ -2,7 +2,7 @@ module Deku.DOM.Attr.OnInput where
 
 import Prelude
 import Effect (Effect)
-import Deku.Attribute (class Attr, Cb(..), cb', cb, unsafeAttribute)
+import Deku.Attribute (class Attr, Cb(..), cb', unsafeAttribute)
 
 data OnInput = OnInput
 instance Attr anything OnInput Cb where

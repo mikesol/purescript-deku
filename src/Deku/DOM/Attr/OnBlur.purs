@@ -2,7 +2,7 @@ module Deku.DOM.Attr.OnBlur where
 
 import Prelude
 import Effect (Effect)
-import Deku.Attribute (class Attr, Cb(..), cb', cb, unsafeAttribute)
+import Deku.Attribute (class Attr, Cb(..), cb', unsafeAttribute)
 
 data OnBlur = OnBlur
 instance Attr anything OnBlur Cb where

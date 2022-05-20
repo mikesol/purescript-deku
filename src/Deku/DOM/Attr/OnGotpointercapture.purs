@@ -2,7 +2,7 @@ module Deku.DOM.Attr.OnGotpointercapture where
 
 import Prelude
 import Effect (Effect)
-import Deku.Attribute (class Attr, Cb(..), cb', cb, unsafeAttribute)
+import Deku.Attribute (class Attr, Cb(..), cb', unsafeAttribute)
 
 data OnGotpointercapture = OnGotpointercapture
 instance Attr anything OnGotpointercapture Cb where

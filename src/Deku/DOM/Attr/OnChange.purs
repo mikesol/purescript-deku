@@ -2,7 +2,7 @@ module Deku.DOM.Attr.OnChange where
 
 import Prelude
 import Effect (Effect)
-import Deku.Attribute (class Attr, Cb(..), cb', cb, unsafeAttribute)
+import Deku.Attribute (class Attr, Cb(..), cb', unsafeAttribute)
 
 data OnChange = OnChange
 instance Attr anything OnChange Cb where

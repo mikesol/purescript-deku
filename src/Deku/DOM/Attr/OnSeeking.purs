@@ -2,7 +2,7 @@ module Deku.DOM.Attr.OnSeeking where
 
 import Prelude
 import Effect (Effect)
-import Deku.Attribute (class Attr, Cb(..), cb', cb, unsafeAttribute)
+import Deku.Attribute (class Attr, Cb(..), cb', unsafeAttribute)
 
 data OnSeeking = OnSeeking
 instance Attr anything OnSeeking Cb where

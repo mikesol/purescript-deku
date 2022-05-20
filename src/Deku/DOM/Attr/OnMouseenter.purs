@@ -2,7 +2,7 @@ module Deku.DOM.Attr.OnMouseenter where
 
 import Prelude
 import Effect (Effect)
-import Deku.Attribute (class Attr, Cb(..), cb', cb, unsafeAttribute)
+import Deku.Attribute (class Attr, Cb(..), cb', unsafeAttribute)
 
 data OnMouseenter = OnMouseenter
 instance Attr anything OnMouseenter Cb where

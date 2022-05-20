@@ -2,7 +2,7 @@ module Deku.DOM.Attr.OnPointerdown where
 
 import Prelude
 import Effect (Effect)
-import Deku.Attribute (class Attr, Cb(..), cb', cb, unsafeAttribute)
+import Deku.Attribute (class Attr, Cb(..), cb', unsafeAttribute)
 
 data OnPointerdown = OnPointerdown
 instance Attr anything OnPointerdown Cb where
