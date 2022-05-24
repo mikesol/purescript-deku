@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+  <html>
+    <head>
+      <title>Deku documentation</title>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width">
+      <link rel="stylesheet" href="style.css">
+      <script type="module">
+        import { main } from "./bundle.js";
+        main("SSR")();
+      </script>
+    </head><body data-deku-ssr-deku-root="true"><div  data-deku-ssr--648823="true"><div  data-deku-ssr--903457="true"><span  data-deku-ssr--806914="true"><a style="cursor:pointer;" href="/index.html" data-deku-ssr--710371="true">Home</a><span style="" data-deku-ssr--517285="true"> | </span></span><span  data-deku-ssr--324199="true"><a style="cursor:pointer;" href="/hello.html" data-deku-ssr--227656="true">Hello world</a><span style="" data-deku-ssr--34570="true"> | </span></span><span  data-deku-ssr-158516="true"><a style="cursor:pointer;" href="/simple.html" data-deku-ssr-255059="true">Component</a><span style="" data-deku-ssr-448145="true"> | </span></span><span  data-deku-ssr-641231="true"><a style="cursor:pointer;" href="/pursx1.html" data-deku-ssr-737774="true">Pursx 1</a><span style="" data-deku-ssr-930860="true"> | </span></span><span  data-deku-ssr--876055="true"><a style="cursor:pointer;" href="/events1.html" data-deku-ssr--779512="true">Events 1</a><span style="" data-deku-ssr--586426="true"> | </span></span><span  data-deku-ssr--393340="true"><a style="cursor:pointer;" href="/effects.html" data-deku-ssr--296797="true">Effects</a><span style="" data-deku-ssr--103711="true"> | </span></span><span  data-deku-ssr-89375="true"><a style="cursor:pointer;" href="/pursx2.html" data-deku-ssr-185918="true">Pursx 2</a><span style="" data-deku-ssr-379004="true"> | </span></span><span  data-deku-ssr-572090="true"><a style="cursor:pointer;" href="/events2.html" data-deku-ssr-668633="true">Events 2</a><span style="" data-deku-ssr-861719="true"> | </span></span><span  data-deku-ssr--945196="true"><a style="cursor:pointer;" href="/portals.html" data-deku-ssr--848653="true">Portals</a><span style="" data-deku-ssr--655567="true"> | </span></span><span  data-deku-ssr--462481="true"><a style="cursor:pointer;" href="/ssr.html" data-deku-ssr--365938="true">SSR</a><span style="display:none;" data-deku-ssr--172852="true"> | </span></span></div><div  data-deku-ssr-20234="true"><div data-deku-ssr-406406="true" >
+  <h1>Server-side rendering</h1>
+
+  <h2>When performance matters!</h2>
+  <p>
+    In web development, it's good practice to send a plain-HTML version of your site over the wire before any JavaScript starts executing. This is called <i>server-side rendering</i>, or SSR, where the server renders HTML in an initial pass before rendering any JavaScript.
+  </p>
+  <p>
+    The most performant form of SSR is pre-rendering HTML and serving them from memory or from a file system. This is Deku's strategy via the following two functions:
+  </p>
+  <ul>
+    <li><code>runSSR</code> generates HTML; and</li>
+    <li><code>hydrate</code> generates JavaScript that will hydrate your HTML with anything that's dynamic. Note that this is <i>partial</i> hydration, meaning it will only hydrate the bits that need hydrating. This means that, for example, you can do CSS animations on load without fear of jank when the JavaScript kicks in.</li>
+  </ul>
+
+  <p>
+    This documentation is generated using SSR, and if you add <code>view-source:</code> before the URL, you'll see the intro page rendered as HTML. If you're reading this documentation on a computer screen, you won't see much of a difference, but if you're reading it on a 3G mobile network, you'll spot the difference immedaitely.
+  </p>
+
+  <h2>A motivating example</h2>
+
+  <p>Here is a small application using SSR. We'll split it up into three files:</p>
+  <ul>
+    <li><code>App.purs</code> has our application logic.</li>
+    <li><code>Build.purs</code> creates a <code>.js</code> file, for example <code>make.js</code>, that will render our HTML.</li>
+    <li><code>Live.purs</code> uses hydration to add dynamic logic to the website.</li>
+  </ul>
+
+  <h3>App</h3>
+  <p>Unlike the previous examples that used <code>runInBody</code>, our application code here has an explicit type annotation <code>Nut</code>. The definition of <code>Nut</code> is <code>type Nut = forall s m lock payload. Korok s m => Domable m lock payload</code>, and in larger projects, you may need to write this type out explicitly, for example if you are working with an <code>Array</code> of <code>Domable</code> and need <code>m</code> to be consistant over the <code>Array</code>.</p>
+  <span style="display:contents;" data-deku-elt-internal="code0" data-deku-ssr-code0502949="true"></span>
+  <h3>Build</h3>
+  <p>This is the code we use to generate our HTML site. The example below creates a small script that logs our HTML to the command line,but we can also call <code>runSSR</code> from a NodeJS server, in which case we wouldn't <code>log</code> the HTML string but rather we would instead send it over the wire as the response to a request.</p>
+  <span style="display:contents;" data-deku-elt-internal="code1" data-deku-ssr-code1502949="true"></span>
+  <h3>Live</h3>
+  <p><code>Live.purs</code> can be bundled to generate our dynamic JS. The JS will hydrate our elements instead of replacing them, and will only hydrate elements that potentially will interactive content.</p>
+  <span style="display:contents;" data-deku-elt-internal="code2" data-deku-ssr-code2502949="true"></span>
+
+  <h3>Result</h3>
+
+  <p>Here is the resulting code from our static-site generation. It is rendered dynamically in your browser, but in production settings, we'd use NodeJS to render or pre-render this HTML.</p>
+
+  <span style="display:contents;" data-deku-elt-internal="codegen" data-deku-ssr-codegen502949="true"></span>
+
+  <p>And here is what the result looks like after hydration.</p>
+
+  <blockquote> <span style="display:contents;" data-deku-elt-internal="result" data-deku-ssr-result502949="true"></span> </blockquote>
+
+  <h2>Parting shot</h2>
+  <p>Thanks for checking out Deku! I had a blast writing it, and I hope you enjoy using it for your projects!</p>
+</div></div></div></body></html>
