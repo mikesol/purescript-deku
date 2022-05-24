@@ -4,14 +4,15 @@ import Prelude
 
 import Deku.Attribute (cb, (:=))
 import Deku.Control (text_)
+import Deku.Core (Nut)
 import Deku.DOM as D
 import Deku.Example.Docs.Types (Page(..))
 import Deku.Example.Docs.Util (scrollToTop)
 import Deku.Pursx (nut, (~~))
-import Deku.Core (Nut)
 import Effect (Effect)
 import FRP.Event (bang)
 import Type.Proxy (Proxy(..))
+import Web.Event.Event (preventDefault)
 
 px =
   Proxy    :: Proxy         """<div>
@@ -46,7 +47,7 @@ myDivWithNoChildren = D.div attrs blank
   <p>As an example, we made the input a range slider using <code>bang (Xtype := "range")</code>. Unlike Halogen, there are no checks to make sure you give a valid string. So if you want your range slider to have the value of true, you can. One day, I may build some validators, but passing strings works decently well here.</p>
 
   <h2>Next steps</h2>
-  <p>In this section, we built a simple component. In the next section, we'll recreate the exact same element using a different input syntax called <a ~next~ style="cursor:pointer;">Pursx</a>.</p>
+  <p>In this section, we built a simple component. In the next section, we'll recreate the exact same element using a different input syntax called <a href="/pursx1.html" ~next~ style="cursor:pointer;">Pursx</a>.</p>
 </div>"""
 
 components :: (Page -> Effect Unit) -> Nut
@@ -105,5 +106,5 @@ main = runInBodyA
               ]
           ]
       )
-  , next: bang (D.OnClick := (cb (const $ dpage PURSX1 *> scrollToTop)))
+  , next: bang (D.OnClick := (cb (\e -> preventDefault e *> dpage PURSX1 *> scrollToTop)))
   }

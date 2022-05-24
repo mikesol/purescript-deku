@@ -6,6 +6,8 @@ in      conf
               conf.dependencies
             # [ "web-html"
               , "canvas"
+              , "exceptions"
+              , "node-process"
               , "filterable"
               , "affjax-web"
               , "console"

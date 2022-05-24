@@ -3,14 +3,15 @@ module Deku.Example.Docs.Intro where
 import Prelude
 
 import Deku.Attribute (cb, (:=))
+import Deku.Core (Nut)
 import Deku.DOM as D
 import Deku.Example.Docs.Types (Page(..))
 import Deku.Example.Docs.Util (scrollToTop)
 import Deku.Pursx ((~~))
-import Deku.Core (Nut)
 import Effect (Effect)
 import FRP.Event.Class (bang)
 import Type.Proxy (Proxy(..))
+import Web.Event.Event (preventDefault)
 
 px =
   Proxy    :: Proxy         """<div>
@@ -26,9 +27,9 @@ px =
 
   <p>This documentation is written in Deku and can be found <a href="https://github.com/mikesol/purescript-deku/tree/main/examples/docs">here</a>. One good way to follow along is by using the Deku starter repo, which you can clone <a href="https://github.com/mikesol/purescript-deku-starter">here</a>.</p>
 
-  <p>And now, without further ado, check out the <a ~next~ style="cursor:pointer;">hello world section</a>!</p>
+  <p>And now, without further ado, check out the <a href="/hello.html" ~next~ style="cursor:pointer;">hello world section</a>!</p>
 </div>"""
 
 intro :: (Page -> Effect Unit) -> Nut
 intro dpage = px ~~
-  { next: bang (D.OnClick := (cb (const $ dpage HelloWorld *> scrollToTop))) }
+  { next: bang (D.OnClick := (cb (\e -> preventDefault e *> dpage HelloWorld *> scrollToTop))) }

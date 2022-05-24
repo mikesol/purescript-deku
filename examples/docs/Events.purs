@@ -5,16 +5,17 @@ import Prelude
 import Control.Alt ((<|>))
 import Deku.Attribute (cb, (:=))
 import Deku.Control (text, text_)
+import Deku.Core (Nut, vbussed)
 import Deku.DOM as D
 import Deku.Example.Docs.Types (Page(..))
 import Deku.Example.Docs.Util (scrollToTop)
 import Deku.Listeners (click_, slider)
 import Deku.Pursx (nut, (~~))
-import Deku.Core (Nut, vbussed)
 import Effect (Effect)
 import FRP.Event (bang, fold)
 import FRP.Event.VBus (V)
 import Type.Proxy (Proxy(..))
+import Web.Event.Event (preventDefault)
 
 type UIEvents = V
   ( buttonClicked :: Unit
@@ -40,7 +41,7 @@ px =
   <p>All DOM event handlers, like <code>OnClick</code> and <code>OnInput</code>, can be set with a value of type <code>Cb</code>. This type is a <code>newtype</code> around <code>(Event -> Effect Boolean)</code>. To hook the event up to the Deku event bus, you can use the <code>push</code> function within the event handler. The push function has a signature of <code>(push -> Effect Unit)</code>. Here, the type one can push in to <code>push</code> is UIEvents. Whenever a push happens, our <code>Event</code> receives it and all attributes are updated accordingly.</p>
 
   <h2>Next steps</h2>
-  <p>In this section, saw how to react to events. In the next section, we'll use a similar mechanism to deal with arbitrary <a ~next~ style="cursor:pointer;">effects</a>.</p>
+  <p>In this section, saw how to react to events. In the next section, we'll use a similar mechanism to deal with arbitrary <a href="/effects.html" ~next~ style="cursor:pointer;">effects</a>.</p>
 </div>"""
 
 events :: (Page -> Effect Unit) -> Nut
@@ -136,5 +137,5 @@ main = runInBody1
                 ]
             ]
       )
-  , next: bang (D.OnClick := (cb (const $ dpage Effects *> scrollToTop)))
+  , next: bang (D.OnClick := (cb (\e -> preventDefault e *> dpage Effects *> scrollToTop)))
   }

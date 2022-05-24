@@ -18,7 +18,7 @@ import Deku.Pursx (nut, (~~))
 import Effect (Effect)
 import FRP.Event (bang, keepLatest, mapAccum)
 import Type.Proxy (Proxy(..))
-import Web.Event.Event (target)
+import Web.Event.Event (preventDefault, target)
 import Web.HTML.HTMLInputElement (fromEventTarget, value)
 import Web.UIEvent.KeyboardEvent (code, fromEvent)
 
@@ -232,5 +232,5 @@ main = runInBody1
                   ]
               ]
       )
-  , next: bang (D.OnClick := (cb (const $ dpage Portals *> scrollToTop)))
+  , next: bang (D.OnClick := (cb (\e -> preventDefault e *>  dpage Portals *> scrollToTop)))
   }
