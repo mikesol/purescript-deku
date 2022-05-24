@@ -11,7 +11,7 @@
 /examples/**/index.js
 /examples/**/bundle.js
 /examples/**/main.js
-/examples/**/make.js
+/examples/**/make.mjs
 /examples/docs/Static/**.html
 packages.json
 .venv
