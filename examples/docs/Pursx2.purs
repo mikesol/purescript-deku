@@ -15,6 +15,7 @@ import Deku.Pursx (makePursx', nut, (~~))
 import Effect (Effect)
 import FRP.Event (bang)
 import Type.Proxy (Proxy(..))
+import Web.Event.Event (preventDefault)
 
 px =
   Proxy    :: Proxy         """<div>
@@ -38,7 +39,7 @@ px =
   <p>Named slots for dynamic content are added to PursX with between two tildes, like <code>~foo~</code>. This separator doesn't have to be a tilde - it can be set programatically as well (see the Deku/Pursx.purs module for an example of how that is done). Also, we no longer use the <code>psx</code> command. Instead, we use the infix operator <code>~~</code> followed by arguments to our template. In the case of dynamic attributes, the argument is a stream of attributes. In the case of a dynamic section, the arguments are of type <code>Element</code>.</p>
 
   <h2>Next steps</h2>
-  <p>In more complicated apps, like this documentation, we'll need dynamic logic that allows for components to replace each other, for example in a navigation bar. In the next section, we'll see one way to do this by using <a ?next? style="cursor:pointer;">events to control the presence and absence of elements</a>.</p>
+  <p>In more complicated apps, like this documentation, we'll need dynamic logic that allows for components to replace each other, for example in a navigation bar. In the next section, we'll see one way to do this by using <a href="/events2.html" ?next? style="cursor:pointer;">events to control the presence and absence of elements</a>.</p>
 </div>"""
 
 myDom =
@@ -133,5 +134,5 @@ main = runInBody1
                 )
             }
       )
-  , next: bang (D.OnClick := (cb (const $ dpage Events2 *> scrollToTop)))
+  , next: bang (D.OnClick := (cb (\e -> preventDefault e *> dpage Events2 *> scrollToTop)))
   }

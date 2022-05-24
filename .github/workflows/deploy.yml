@@ -31,11 +31,23 @@ jobs:
       - name: Spago build examples
         run: npm run build:examples
       - name: Build make
-        run: npx spago -x examples.dhall bundle-app --main Deku.Example.Docs.Static.Build --to examples/docs/Static/make.js
+        run: npx spago -x examples.dhall bundle-app --main Deku.Example.Docs.Static.Build --to examples/docs/Static/make.mjs --platform node
       - name: Build hydration
-        run: npx spago -x examples.dhall bundle-app --main Deku.Example.Docs.Static.Live --to examples/docs/Static/bundle.js --minify
+        run: npx spago -x examples.dhall bundle-module --main Deku.Example.Docs.Static.Live --to examples/docs/Static/bundle.js --minify
       - name: Make index.html
-        run: cd examples/docs/Static && node make.js > index.html && cd ../../..
+        run: |
+          cd examples/docs/Static
+          node make.mjs Intro > index.html
+          node make.mjs HelloWorld > hello.html
+          node make.mjs SimpleComponent > simple.html
+          node make.mjs PURSX1 > pursx1.html
+          node make.mjs PURSX2 > pursx2.html
+          node make.mjs Events > events1.html
+          node make.mjs Effects > effects.html
+          node make.mjs Events2 > events2.html
+          node make.mjs Portals > portals.html
+          node make.mjs SSR > ssr.html
+          cd ../../..
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
         with:

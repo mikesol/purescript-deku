@@ -8,6 +8,7 @@ import Data.Profunctor (lcmap)
 import Data.Tuple.Nested ((/\))
 import Deku.Attribute (cb, (:=))
 import Deku.Control (switcher, text_)
+import Deku.Core (Nut, bussed)
 import Deku.DOM as D
 import Deku.Example.Docs.Component as Component
 import Deku.Example.Docs.Effects as Effects
@@ -20,20 +21,21 @@ import Deku.Example.Docs.Pursx1 as Pursx1
 import Deku.Example.Docs.Pursx2 as Pursx2
 import Deku.Example.Docs.SSR as SSR
 import Deku.Example.Docs.Types (Page(..))
-import Deku.Core (Nut, bussed)
 import FRP.Event (bang)
+import Web.Event.Event (preventDefault)
 
-scene :: Nut
-scene = bussed \push -> lcmap (bang Intro <|> _)
+scene :: Page -> Nut
+scene startsWith = bussed \push -> lcmap (bang startsWith <|> _)
   \event ->
     D.div_
       [ D.div_
           $ map
-              ( \(x /\ y /\ z) -> D.span_
+              ( \(x /\ y /\ pg /\ z) -> D.span_
                   [ D.a
                       ( oneOfMap bang
-                          [ D.OnClick := cb (const $ push x)
+                          [ D.OnClick := cb (\e -> preventDefault e *> push x)
                           , D.Style := "cursor:pointer;"
+                          , D.Href := "/" <> pg <> ".html"
                           ]
                       )
                       [ text_ y ]
@@ -48,33 +50,43 @@ scene = bussed \push -> lcmap (bang Intro <|> _)
           $
             [ Intro
                 /\ "Home"
+                /\ "index"
                 /\ true
             , HelloWorld
                 /\ "Hello world"
+                /\ "hello"
                 /\ true
             , SimpleComponent
                 /\ "Component"
+                /\ "simple"
                 /\ true
             , PURSX1
                 /\ "Pursx 1"
+                /\ "pursx1"
                 /\ true
             , Events
                 /\ "Events 1"
+                /\ "events1"
                 /\ true
             , Effects
                 /\ "Effects"
+                /\ "effects"
                 /\ true
             , PURSX2
                 /\ "Pursx 2"
+                /\ "pursx2"
                 /\ true
             , Events2
                 /\ "Events 2"
+                /\ "events2"
                 /\ true
             , Portals
                 /\ "Portals"
+                /\ "portals"
                 /\ true
             , SSR
                 /\ "SSR"
+                /\ "ssr"
                 /\ false
             ]
       , D.div_ [ switcher (page push) event ]

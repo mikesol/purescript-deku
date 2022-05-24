@@ -4,14 +4,15 @@ import Prelude
 
 import Deku.Attribute (cb, (:=))
 import Deku.Control (text_)
+import Deku.Core (Nut)
 import Deku.DOM as D
 import Deku.Example.Docs.Types (Page(..))
 import Deku.Example.Docs.Util (scrollToTop)
 import Deku.Pursx (nut, (~~))
-import Deku.Core (Nut)
 import Effect (Effect)
 import FRP.Event.Class (bang)
 import Type.Proxy (Proxy(..))
+import Web.Event.Event (preventDefault)
 
 px =
   Proxy    :: Proxy         """<div>
@@ -34,7 +35,7 @@ px =
   <p>Deku sets up shop in an arbitrary DOM component. In the main function above, we use 🚀 to automatically insert our Deku tree into the body.</p>
 
   <h2>Next steps</h2>
-  <p>Now that we have our setup running, let's make a more interesting <a ~next~ style="cursor:pointer;">component</a>.</p>
+  <p>Now that we have our setup running, let's make a more interesting <a href="/simple.html" ~next~ style="cursor:pointer;">component</a>.</p>
 </div>"""
 
 helloWorld
@@ -61,5 +62,5 @@ main = runInBody (text_ "Hello world")
       )
   , result: nut (D.div_ [ text_ "Hello world" ])
   , next: bang
-      (D.OnClick := (cb (const $ dpage SimpleComponent *> scrollToTop)))
+      (D.OnClick := (cb (\e -> preventDefault e *> dpage SimpleComponent *> scrollToTop)))
   }

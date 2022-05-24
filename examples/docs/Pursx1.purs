@@ -4,14 +4,15 @@ import Prelude
 
 import Deku.Attribute (cb, (:=))
 import Deku.Control (text_)
+import Deku.Core (Nut)
 import Deku.DOM as D
 import Deku.Example.Docs.Types (Page(..))
 import Deku.Example.Docs.Util (scrollToTop)
 import Deku.Pursx (nut, psx, (~~))
-import Deku.Core (Nut)
 import Effect (Effect)
 import FRP.Event.Class (bang)
 import Type.Proxy (Proxy(..))
+import Web.Event.Event (preventDefault)
 
 myDom =
   Proxy    :: Proxy         """<div>
@@ -51,7 +52,7 @@ px =
   <p>Static Pursx (meaning Pursx without any dynamic content) can be activated with the function <code>psx</code>.</p>
 
   <h2>Next steps</h2>
-  <p>In this section, we used PursX to build the same component as the previous section. In the next section, we'll learn how to respond to <a ~next~ style="cursor:pointer;">events</a>.</p>
+  <p>In this section, we used PursX to build the same component as the previous section. In the next section, we'll learn how to respond to <a href="/events1.html" ~next~ style="cursor:pointer;">events</a>.</p>
 </div>"""
 
 pursx1 :: (Page -> Effect Unit) -> Nut
@@ -98,5 +99,5 @@ main = runInBody (psx myDom)
           ]
       )
   , result: nut (psx myDom)
-  , next: bang (D.OnClick := (cb (const $ dpage Events *> scrollToTop)))
+  , next: bang (D.OnClick := (cb (\e -> preventDefault e *>  dpage Events *> scrollToTop)))
   }
