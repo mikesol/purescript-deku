@@ -68,11 +68,8 @@ jobs:
           echo '{"page":"SSR","slug":"/","top":false}' > config.json
           node make.mjs config.json > ssr/index.html
           cd ../../..
-      - name: Deploy
-        uses: peaceiris/actions-gh-pages@v3
-        with:
-          github_token: ${{ secrets.GH_TOKEN }}
-          publish_dir: ./examples/docs/Static
+      - name: deploy to netlify
+        run: NETLIFY_SITE_ID=${{ secrets.NETLIFY_SITE_ID }} NETLIFY_AUTH_TOKEN=${{ secrets.NETLIFY_AUTH_TOKEN }} netlify deploy --dir=./examples/docs/Static --prod
       - name: Make index.html for netlify
         run: |
           cd examples/docs/Static
@@ -107,5 +104,8 @@ jobs:
           echo '{"page":"SSR","slug":"/purescript-deku/","top":false}' > config.json
           node make.mjs config.json > ssr/index.html
           cd ../../..
-      - name: deploy to netlify
-        run: NETLIFY_SITE_ID=${{ secrets.NETLIFY_SITE_ID }} NETLIFY_AUTH_TOKEN=${{ secrets.NETLIFY_AUTH_TOKEN }} netlify deploy --dir=./examples/docs/Static --prod
+      - name: Deploy
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GH_TOKEN }}
+          publish_dir: ./examples/docs/Static
