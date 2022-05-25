@@ -15,7 +15,8 @@ summary
   => AnEvent m (Attribute Summary_)
   -> Array (Domable m lock payload)
   -> Domable m lock payload
-summary attributes kids = Element' (elementify "summary" attributes (fixed kids))
+summary attributes kids = Element'
+  (elementify "summary" attributes (fixed kids))
 
 summary_
   :: forall s m lock payload

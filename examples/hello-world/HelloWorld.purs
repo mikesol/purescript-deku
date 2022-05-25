@@ -25,23 +25,26 @@ counter event = mapAccum f event 0
 scene :: forall lock. Domable Effect lock (FFIDOMSnapshot -> Effect Unit)
 scene = envy $ bus $ \push -> lcmap (alt (bang true)) \event -> do
   D.div_
-    [ D.div empty [ C.text (bang "Stops after 4 clicks") ]
-    , C.text (event <#> if _ then "click " else "kcilc ")
-    , D.button
-        ( counter event
-            # filterMap
-                (\(Tuple x y) -> if y < 4 then Just x else Nothing)
-            # map
-                ( \e ->
-                    oneOfMap bang
-                      [ D.Style := "background-color: rgb(160,234,203);"
-                      , D.OnClick := cb (const $ push (not e))
-                      ]
+    [ D.div_
+        [ D.div empty [ C.text (bang "Stops after 4 clicks") ]
+        , C.text (event <#> if _ then "click " else "kcilc ")
+        , D.button
+            ( counter event
+                # filterMap
+                    (\(Tuple x y) -> if y < 4 then Just x else Nothing)
+                # map
+                    ( \e ->
+                        oneOfMap bang
+                          [ D.Style := "background-color: rgb(160,234,203);"
+                          , D.OnClick := cb (const $ push (not e))
+                          ]
 
-                )
-            # keepLatest
-        )
-        [ C.text_ "me" ]
+                    )
+                # keepLatest
+            )
+            [ C.text_ "me" ]
+        ]
+    , D.input (bang $ D.Autofocus := "") []
     ]
 
 main :: Effect Unit

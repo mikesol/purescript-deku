@@ -15,7 +15,8 @@ optgroup
   => AnEvent m (Attribute Optgroup_)
   -> Array (Domable m lock payload)
   -> Domable m lock payload
-optgroup attributes kids = Element' (elementify "optgroup" attributes (fixed kids))
+optgroup attributes kids = Element'
+  (elementify "optgroup" attributes (fixed kids))
 
 optgroup_
   :: forall s m lock payload

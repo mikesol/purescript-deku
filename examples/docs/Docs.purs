@@ -8,4 +8,4 @@ import Deku.Toplevel (runInBody)
 import Effect (Effect)
 
 main :: Effect Unit
-main = runInBody (scene Intro)
+main = runInBody (scene { slug: "/", startsWith: Intro })

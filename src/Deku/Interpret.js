@@ -3,7 +3,14 @@ const connectXToY_ = (maybe, x, y$, state) => {
 	maybe((y) => state.units[y].main.appendChild(state.units[x].main))(y$);
 };
 
-export const makeElement_ = (tryHydration) => (maybe) => (a) => (state) => () => {
+export const attributeParent_ = (a) => (state) => () => {
+	// only attribute if it is not attributed already
+	if (!state.units[a.id].main.parentNode) {
+		state.units[a.parent].main.appendChild(state.units[a.id].main);
+	}
+};
+
+export const makeElement_ = (tryHydration) => (a) => (state) => () => {
 	var dom;
 	var ptr = a.id;
 	if (!state.scopes[a.scope]) {
@@ -34,7 +41,6 @@ export const makeElement_ = (tryHydration) => (maybe) => (a) => (state) => () =>
 			scope: a.scope,
 			main: document.createElement(a.tag),
 		};
-		connectXToY_(maybe, ptr, a.parent, state);
 	}
 };
 export const makeText_ = (tryHydration) => (maybe) => (a) => (state) => () => {
@@ -267,7 +273,7 @@ export const disconnectElement_ = (a) => (state) => () => {
 	}
 	if (
 		state.units[ptr].containingScope &&
-		!(a.scopeEq(state.units[ptr].containingScope)(a.scope))
+		!a.scopeEq(state.units[ptr].containingScope)(a.scope)
 	) {
 		return;
 	}

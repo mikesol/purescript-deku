@@ -4,6 +4,7 @@ import Prelude
 
 import Control.Plus (empty)
 import Data.Maybe (Maybe)
+import Effect (Effect)
 
 data Page
   = Intro
@@ -29,3 +30,7 @@ stringToPage "Events2" = pure Events2
 stringToPage "Portals" = pure Portals
 stringToPage "SSR" = pure SSR
 stringToPage _ = empty
+
+type Options r = (startsWith :: Page, slug :: String | r)
+type OptionsForeign = (startsWith :: String, slug :: String)
+type PageOptions r = (dpage :: Page -> Effect Unit, slug :: String | r)

@@ -19,7 +19,7 @@ import Control.Alt ((<|>))
 import Control.Plus (empty)
 import Data.FastVect.FastVect (Vect)
 import Data.Foldable (oneOf)
-import Data.Maybe (Maybe(..))
+import Data.Maybe (Maybe(..), maybe)
 import Data.Newtype (unwrap)
 import Data.Profunctor (lcmap)
 import Deku.Attribute (Attribute, AttributeValue(..), unsafeUnAttribute)
@@ -40,6 +40,13 @@ unsafeElement
   -> { id :: String, parent :: Maybe String, scope :: Scope, tag :: String }
   -> payload
 unsafeElement (DOMInterpret { makeElement }) = makeElement
+
+unsafeConnect
+  :: forall m payload
+   . DOMInterpret m payload
+  -> { id :: String, parent :: String }
+  -> payload
+unsafeConnect (DOMInterpret { attributeParent }) = attributeParent
 
 unsafeText
   :: forall m payload
@@ -88,9 +95,17 @@ elementify tag atts children = Node go
       raiseId me
       map ((*>) (k (deleteFromCache { id: me }))) $ subscribe
         ( ( oneOf
-              [ bang (unsafeElement di { id: me, parent, scope, tag })
-              , unsafeSetAttribute di me atts
-              ]
+              ( [ bang (unsafeElement di { id: me, parent, scope, tag })
+                , unsafeSetAttribute di me atts
+                ] <> maybe []
+                  ( \p ->
+                      [ bang
+                          $ unsafeConnect di
+                          $ { id: me, parent: p }
+                      ]
+                  )
+                  parent
+              )
           )
             <|> __internalDekuFlatten
               { parent: Just me, scope, raiseId: \_ -> pure unit }

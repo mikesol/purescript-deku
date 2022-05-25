@@ -8,6 +8,7 @@ import Control.Alt ((<|>))
 import Data.Argonaut.Core (stringifyWithIndent)
 import Data.Either (Either(..))
 import Data.Filterable (filterMap, compact)
+import Data.Foldable (oneOfMap)
 import Data.HTTP.Method (Method(..))
 import Data.Maybe (Maybe(..))
 import Data.Tuple.Nested ((/\))
@@ -15,7 +16,7 @@ import Deku.Attribute (Cb, cb, (:=))
 import Deku.Control (text, text_)
 import Deku.Core (Nut, bussed)
 import Deku.DOM as D
-import Deku.Example.Docs.Types (Page(..))
+import Deku.Example.Docs.Types (Page(..), PageOptions)
 import Deku.Example.Docs.Util (scrollToTop)
 import Deku.Pursx (nut, (~~))
 import Effect (Effect)
@@ -72,11 +73,11 @@ px =
   <p>Another useful pattern when working with effects is to throttle input. For example, if we are making a network call, we may want to show a loading indicator and prevent additional network calls. This can be achieved by setting the callback to a no-op while the network call is executing, as shown in the example above.</p>
 
   <h2>Next steps</h2>
-  <p>It is also possible to handle events (and by extension effectful actions in events, like network calls) in Pursx. Let's see how in the <a href="/pursx2.html" ~next~ style="cursor:pointer;">second Pursx section</a>.</p>
+  <p>It is also possible to handle events (and by extension effectful actions in events, like network calls) in Pursx. Let's see how in the <a ~next~ style="cursor:pointer;">second Pursx section</a>.</p>
 </div>"""
 
-effects :: (Page -> Effect Unit) -> Nut
-effects dpage = px ~~
+effects :: forall r. {|PageOptions r}  -> Nut
+effects options = px ~~
   { code: nut
       ( D.pre_
           [ D.code_
@@ -231,5 +232,5 @@ main = runInBody1
                 [ D.pre_ [ D.code_ [ text (bang "" <|> result) ] ] ]
             ]
       )
-  , next: bang (D.OnClick := (cb (\e -> preventDefault e *> dpage PURSX2 *> scrollToTop)))
+  , next: oneOfMap bang [D.OnClick := (cb (\e -> preventDefault e *> options.dpage PURSX2 *> scrollToTop) ), D.Href := (options.slug <> "pursx2/") ]
   }

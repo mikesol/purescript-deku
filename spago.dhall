@@ -21,6 +21,7 @@
   , "refs"
   , "safe-coerce"
   , "st"
+  , "strings"
   , "transformers"
   , "unsafe-coerce"
   , "web-dom"

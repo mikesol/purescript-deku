@@ -11,10 +11,9 @@ import Deku.Attribute (cb, (:=))
 import Deku.Control (portal, switcher, text_)
 import Deku.Core (dyn, insert, Nut, bus)
 import Deku.DOM as D
-import Deku.Example.Docs.Types (Page(..))
+import Deku.Example.Docs.Types (Page(..), PageOptions)
 import Deku.Example.Docs.Util (scrollToTop)
 import Deku.Pursx (nut, (~~))
-import Effect (Effect)
 import FRP.Event (bang, fold)
 import Type.Proxy (Proxy(..))
 import Web.Event.Event (preventDefault)
@@ -51,11 +50,11 @@ px =  Proxy    :: Proxy         """<div>
   <p><code>switcher</code> is a <a href="https://github.com/mikesol/purescript-deku/blob/ff3e2d2dc89b39088c5d5d6ab3492fb8730dd9a4/src/Deku/Control.purs#L325">small function</a> included in Deku to switch between different elements in an enclosure. It's how the tabs in this documentation are implemented as well.</p>
 
   <h2>Next steps</h2>
-  <p>In this section, we used portals to move an element to different areas of the DOM. In the next section, we'll learn how to do <a href="/ssr.html" ~next~ style="cursor:pointer;">static site rendering</a>.</p>
+  <p>In this section, we used portals to move an element to different areas of the DOM. In the next section, we'll learn how to do <a ~next~ style="cursor:pointer;">static site rendering</a>.</p>
 </div>"""
 
-portals1 :: (Page -> Effect Unit) -> Nut
-portals1 dpage = px ~~
+portals1 :: forall r. {|PageOptions r}  -> Nut
+portals1 options = px ~~
   { code: nut
       ( D.pre_
           [ D.code_
@@ -146,5 +145,5 @@ main = runInBody1
                   , D.div_ [ D.span_ [ flips true ], D.span_ [ flips false ] ]
                   ]
       )
-  , next: bang (D.OnClick := (cb (\e -> preventDefault e *> dpage SSR *> scrollToTop)))
+  , next: oneOfMap bang [D.OnClick := (cb (\e -> preventDefault e *> options.dpage SSR *> scrollToTop) ), D.Href := (options.slug <> "ssr/") ]
   }
