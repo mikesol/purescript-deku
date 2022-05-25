@@ -4,43 +4,45 @@ const connectXToY_ = (maybe, x, y$, state) => {
 };
 
 export const attributeParent_ = (a) => (state) => () => {
-	state.units[a.parent].main.appendChild(state.units[a.id].main);
+	// only attribute if it is not attributed already
+	if (!state.units[a.id].main.parentNode) {
+		state.units[a.parent].main.appendChild(state.units[a.id].main);
+	}
 };
 
-export const makeElement_ =
-	(tryHydration) => (a) => (state) => () => {
-		var dom;
-		var ptr = a.id;
-		if (!state.scopes[a.scope]) {
-			state.scopes[a.scope] = [];
-		}
-		state.scopes[a.scope].push(ptr);
-		// note that, for portals, this will be broken in its current form
-		if (
-			tryHydration &&
-			// hack
-			a.parent.value0 &&
-			(dom = document.body
-				.querySelectorAll("[data-deku-ssr-" + ptr + "]")
-				.item(0))
-		) {
-			//console.log('hydrating', ptr);
-			state.units[ptr] = {
-				listeners: {},
-				parent: a.parent,
-				scope: a.scope,
-				main: dom,
-			};
-		} else {
-			//console.log("doing ssr for", ptr);
-			state.units[ptr] = {
-				listeners: {},
-				parent: a.parent,
-				scope: a.scope,
-				main: document.createElement(a.tag),
-			};
-		}
-	};
+export const makeElement_ = (tryHydration) => (a) => (state) => () => {
+	var dom;
+	var ptr = a.id;
+	if (!state.scopes[a.scope]) {
+		state.scopes[a.scope] = [];
+	}
+	state.scopes[a.scope].push(ptr);
+	// note that, for portals, this will be broken in its current form
+	if (
+		tryHydration &&
+		// hack
+		a.parent.value0 &&
+		(dom = document.body
+			.querySelectorAll("[data-deku-ssr-" + ptr + "]")
+			.item(0))
+	) {
+		//console.log('hydrating', ptr);
+		state.units[ptr] = {
+			listeners: {},
+			parent: a.parent,
+			scope: a.scope,
+			main: dom,
+		};
+	} else {
+		//console.log("doing ssr for", ptr);
+		state.units[ptr] = {
+			listeners: {},
+			parent: a.parent,
+			scope: a.scope,
+			main: document.createElement(a.tag),
+		};
+	}
+};
 export const makeText_ = (tryHydration) => (maybe) => (a) => (state) => () => {
 	var ptr = a.id;
 	var dom;
