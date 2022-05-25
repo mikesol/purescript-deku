@@ -4,13 +4,11 @@ import Prelude
 
 import Control.Alt ((<|>))
 import Deku.Control (text, text_)
+import Deku.Core (Nut, vbussed)
 import Deku.DOM as D
-import Deku.Example.Docs.Types (Page)
 import Deku.Listeners (click_, slider)
 import Deku.Pursx (nut, (~~))
-import Deku.Core (Nut, vbussed)
 import Deku.Toplevel (Template(..), runSSR)
-import Effect (Effect)
 import FRP.Event (bang, fold, makeEvent)
 import FRP.Event.VBus (V)
 import Type.Proxy (Proxy(..))
@@ -112,7 +110,7 @@ and all of the dynamic bits are hydrated on page load."""
         ]
     ]
 
-ssrPage :: (Page -> Effect Unit) -> Nut
+ssrPage :: forall i. i -> Nut
 ssrPage _ = px ~~
   { code2: nut
       ( D.pre_

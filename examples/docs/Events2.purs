@@ -12,10 +12,9 @@ import Deku.Attribute (cb, (:=))
 import Deku.Control (text_)
 import Deku.Core (dyn, insert, remove, sendToTop, Nut, bus, bussed)
 import Deku.DOM as D
-import Deku.Example.Docs.Types (Page(..))
+import Deku.Example.Docs.Types (Page(..), PageOptions)
 import Deku.Example.Docs.Util (scrollToTop)
 import Deku.Pursx (nut, (~~))
-import Effect (Effect)
 import FRP.Event (bang, keepLatest, mapAccum)
 import Type.Proxy (Proxy(..))
 import Web.Event.Event (preventDefault, target)
@@ -65,9 +64,9 @@ px =
 </div>"""
 
 events2
-  :: (Page -> Effect Unit)
+  :: forall r. {|PageOptions r}
   -> Nut
-events2 dpage = px ~~
+events2 options = px ~~
   { code: nut
       ( D.pre_
           [ D.code_
@@ -232,5 +231,5 @@ main = runInBody1
                   ]
               ]
       )
-  , next: bang (D.OnClick := (cb (\e -> preventDefault e *>  dpage Portals *> scrollToTop)))
+  , next: oneOfMap bang [D.OnClick := (cb (\e -> preventDefault e *> options.dpage Portals *> scrollToTop) ), D.Href := (options.slug <> "portals/") ]
   }

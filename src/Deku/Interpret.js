@@ -3,40 +3,44 @@ const connectXToY_ = (maybe, x, y$, state) => {
 	maybe((y) => state.units[y].main.appendChild(state.units[x].main))(y$);
 };
 
-export const makeElement_ = (tryHydration) => (maybe) => (a) => (state) => () => {
-	var dom;
-	var ptr = a.id;
-	if (!state.scopes[a.scope]) {
-		state.scopes[a.scope] = [];
-	}
-	state.scopes[a.scope].push(ptr);
-	// note that, for portals, this will be broken in its current form
-	if (
-		tryHydration &&
-		// hack
-		a.parent.value0 &&
-		(dom = document.body
-			.querySelectorAll("[data-deku-ssr-" + ptr + "]")
-			.item(0))
-	) {
-		//console.log('hydrating', ptr);
-		state.units[ptr] = {
-			listeners: {},
-			parent: a.parent,
-			scope: a.scope,
-			main: dom,
-		};
-	} else {
-		//console.log("doing ssr for", ptr);
-		state.units[ptr] = {
-			listeners: {},
-			parent: a.parent,
-			scope: a.scope,
-			main: document.createElement(a.tag),
-		};
-		connectXToY_(maybe, ptr, a.parent, state);
-	}
+export const attributeParent_ = (a) => (state) => () => {
+	state.units[a.parent].main.appendChild(state.units[a.id].main);
 };
+
+export const makeElement_ =
+	(tryHydration) => (a) => (state) => () => {
+		var dom;
+		var ptr = a.id;
+		if (!state.scopes[a.scope]) {
+			state.scopes[a.scope] = [];
+		}
+		state.scopes[a.scope].push(ptr);
+		// note that, for portals, this will be broken in its current form
+		if (
+			tryHydration &&
+			// hack
+			a.parent.value0 &&
+			(dom = document.body
+				.querySelectorAll("[data-deku-ssr-" + ptr + "]")
+				.item(0))
+		) {
+			//console.log('hydrating', ptr);
+			state.units[ptr] = {
+				listeners: {},
+				parent: a.parent,
+				scope: a.scope,
+				main: dom,
+			};
+		} else {
+			//console.log("doing ssr for", ptr);
+			state.units[ptr] = {
+				listeners: {},
+				parent: a.parent,
+				scope: a.scope,
+				main: document.createElement(a.tag),
+			};
+		}
+	};
 export const makeText_ = (tryHydration) => (maybe) => (a) => (state) => () => {
 	var ptr = a.id;
 	var dom;
@@ -267,7 +271,7 @@ export const disconnectElement_ = (a) => (state) => () => {
 	}
 	if (
 		state.units[ptr].containingScope &&
-		!(a.scopeEq(state.units[ptr].containingScope)(a.scope))
+		!a.scopeEq(state.units[ptr].containingScope)(a.scope)
 	) {
 		return;
 	}

@@ -15,7 +15,8 @@ figcaption
   => AnEvent m (Attribute Figcaption_)
   -> Array (Domable m lock payload)
   -> Domable m lock payload
-figcaption attributes kids = Element' (elementify "figcaption" attributes (fixed kids))
+figcaption attributes kids = Element'
+  (elementify "figcaption" attributes (fixed kids))
 
 figcaption_
   :: forall s m lock payload

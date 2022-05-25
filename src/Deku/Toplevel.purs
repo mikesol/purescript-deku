@@ -78,7 +78,7 @@ runInBody
 runInBody a = void (runInBody' a)
 
 runInBody1
-  ::  (forall lock. Event (Domable Effect lock (FFIDOMSnapshot -> Effect Unit)))
+  :: (forall lock. Event (Domable Effect lock (FFIDOMSnapshot -> Effect Unit)))
   -> Effect Unit
 runInBody1 a = void (runInBody1' a)
 

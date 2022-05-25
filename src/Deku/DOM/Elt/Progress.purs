@@ -15,7 +15,8 @@ progress
   => AnEvent m (Attribute Progress_)
   -> Array (Domable m lock payload)
   -> Domable m lock payload
-progress attributes kids = Element' (elementify "progress" attributes (fixed kids))
+progress attributes kids = Element'
+  (elementify "progress" attributes (fixed kids))
 
 progress_
   :: forall s m lock payload

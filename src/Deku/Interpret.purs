@@ -25,8 +25,12 @@ foreign import makeFFIDOMSnapshot :: Effect FFIDOMSnapshot
 
 foreign import makeElement_
   :: Boolean
-  -> (forall a. (a -> Unit) -> Maybe a -> Unit)
   -> Core.MakeElement
+  -> FFIDOMSnapshot
+  -> Effect Unit
+
+foreign import attributeParent_
+  :: Core.AttributeParent
   -> FFIDOMSnapshot
   -> Effect Unit
 
@@ -81,7 +85,8 @@ fullDOMInterpret seed = Core.DOMInterpret
           (evalGen (arbitrary :: Gen Int) { newSeed: mkSeed s, size: 5 })
       void $ Ref.modify (add 1) seed
       pure o
-  , makeElement: makeElement_ false (maybe unit)
+  , makeElement: makeElement_ false
+  , attributeParent: attributeParent_
   , makeRoot: makeRoot_
   , makeText: makeText_ false (maybe unit)
   , makePursx: makePursx_ false (maybe unit)
@@ -135,6 +140,7 @@ ssrDOMInterpret seed = Core.DOMInterpret
       void $ RRef.modify (add 1) seed
       pure o
   , makeElement: ssrMakeElement
+  , attributeParent: \_ _ -> pure unit
   , makeRoot: \_ _ -> pure unit
   , makeText: ssrMakeText
   , makePursx: ssrMakePursx
@@ -157,7 +163,8 @@ hydratingDOMInterpret seed = Core.DOMInterpret
           (evalGen (arbitrary :: Gen Int) { newSeed: mkSeed s, size: 5 })
       void $ Ref.modify (add 1) seed
       pure o
-  , makeElement: makeElement_ true (maybe unit)
+  , makeElement: makeElement_ true
+  , attributeParent: attributeParent_
   , makeRoot: makeRoot_
   , makeText: makeText_ true (maybe unit)
   , makePursx: makePursx_ true (maybe unit)

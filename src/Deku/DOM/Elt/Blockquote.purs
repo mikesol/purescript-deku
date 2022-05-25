@@ -15,7 +15,8 @@ blockquote
   => AnEvent m (Attribute Blockquote_)
   -> Array (Domable m lock payload)
   -> Domable m lock payload
-blockquote attributes kids = Element' (elementify "blockquote" attributes (fixed kids))
+blockquote attributes kids = Element'
+  (elementify "blockquote" attributes (fixed kids))
 
 blockquote_
   :: forall s m lock payload

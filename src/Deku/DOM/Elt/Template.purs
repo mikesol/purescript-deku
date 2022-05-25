@@ -15,7 +15,8 @@ template
   => AnEvent m (Attribute Template_)
   -> Array (Domable m lock payload)
   -> Domable m lock payload
-template attributes kids = Element' (elementify "template" attributes (fixed kids))
+template attributes kids = Element'
+  (elementify "template" attributes (fixed kids))
 
 template_
   :: forall s m lock payload

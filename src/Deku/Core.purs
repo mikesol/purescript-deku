@@ -3,6 +3,7 @@ module Deku.Core
   , DOMInterpret(..)
   , MakeRoot
   , MakeElement
+  , AttributeParent
   , MakeText
   , MakePursx
   , GiveNewParent
@@ -123,6 +124,11 @@ type MakeElement =
   , tag :: String
   }
 
+type AttributeParent =
+  { id :: String
+  , parent :: String
+  }
+
 type GiveNewParent =
   { id :: String
   , parent :: String
@@ -177,6 +183,7 @@ newtype DOMInterpret m payload = DOMInterpret
   { ids :: m String
   , makeRoot :: MakeRoot -> payload
   , makeElement :: MakeElement -> payload
+  , attributeParent :: AttributeParent -> payload
   , makeText :: MakeText -> payload
   , makePursx :: MakePursx -> payload
   , giveNewParent :: GiveNewParent -> payload
