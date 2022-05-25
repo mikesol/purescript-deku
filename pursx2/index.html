@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+  <html>
+    <head>
+      <title>Deku documentation</title>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width">
+      <link rel="stylesheet" href="../style.css">
+      <script type="module">
+        import { main } from "../bundle.js";
+        main({"startsWith":"PURSX2","slug":"/"})();
+      </script>
+    </head><body data-deku-ssr-deku-root="true"><div  data-deku-ssr--648823="true"><div  data-deku-ssr--903457="true"><span  data-deku-ssr--806914="true"><a style="cursor:pointer;" href="/" data-deku-ssr--710371="true">Home</a><span style="" data-deku-ssr--517285="true"> | </span></span><span  data-deku-ssr--324199="true"><a style="cursor:pointer;" href="/hello/" data-deku-ssr--227656="true">Hello world</a><span style="" data-deku-ssr--34570="true"> | </span></span><span  data-deku-ssr-158516="true"><a style="cursor:pointer;" href="/simple/" data-deku-ssr-255059="true">Component</a><span style="" data-deku-ssr-448145="true"> | </span></span><span  data-deku-ssr-641231="true"><a style="cursor:pointer;" href="/pursx1/" data-deku-ssr-737774="true">Pursx 1</a><span style="" data-deku-ssr-930860="true"> | </span></span><span  data-deku-ssr--876055="true"><a style="cursor:pointer;" href="/events1/" data-deku-ssr--779512="true">Events 1</a><span style="" data-deku-ssr--586426="true"> | </span></span><span  data-deku-ssr--393340="true"><a style="cursor:pointer;" href="/effects/" data-deku-ssr--296797="true">Effects</a><span style="" data-deku-ssr--103711="true"> | </span></span><span  data-deku-ssr-89375="true"><a style="cursor:pointer;" href="/pursx2/" data-deku-ssr-185918="true">Pursx 2</a><span style="" data-deku-ssr-379004="true"> | </span></span><span  data-deku-ssr-572090="true"><a style="cursor:pointer;" href="/events2/" data-deku-ssr-668633="true">Events 2</a><span style="" data-deku-ssr-861719="true"> | </span></span><span  data-deku-ssr--945196="true"><a style="cursor:pointer;" href="/portals/" data-deku-ssr--848653="true">Portals</a><span style="" data-deku-ssr--655567="true"> | </span></span><span  data-deku-ssr--462481="true"><a style="cursor:pointer;" href="/ssr/" data-deku-ssr--365938="true">SSR</a><span style="display:none;" data-deku-ssr--172852="true"> | </span></span></div><div  data-deku-ssr-20234="true"><div  data-deku-ssr-406406="true" >
+  <h1>Pursx 2</h1>
+
+  <h2>Working with events and effects</h2>
+  <p>
+    PursX would be of limited utility if it could only render static content. In this section, we'll see how to make it dynamic, both by modifying existing elements and inserting entirely new ones.
+  </p>
+
+  <p>The example below is the same one from the Pursx 1 section with two differences. The first is that the background color of the second list item is set dynamically. The second is that there is a new button that is dynamically inserted.
+  </p>
+
+  <span style="display:contents;" data-deku-elt-internal="code" data-deku-ssr-code502949="true"></span>
+
+  <p>And here's what it produces:</p>
+
+  <blockquote> <span style="display:contents;" data-deku-elt-internal="result" data-deku-ssr-result502949="true"></span> </blockquote>
+
+  <h2>Dynamism in static content</h2>
+  <p>Named slots for dynamic content are added to PursX with between two tildes, like <code>~foo~</code>. This separator doesn't have to be a tilde - it can be set programatically as well (see the Deku/Pursx.purs module for an example of how that is done). Also, we no longer use the <code>psx</code> command. Instead, we use the infix operator <code>~~</code> followed by arguments to our template. In the case of dynamic attributes, the argument is a stream of attributes. In the case of a dynamic section, the arguments are of type <code>Element</code>.</p>
+
+  <h2>Next steps</h2>
+  <p>In more complicated apps, like this documentation, we'll need dynamic logic that allows for components to replace each other, for example in a navigation bar. In the next section, we'll see one way to do this by using <a data-deku-attr-internal="next" href="/events2/" data-deku-ssr-next502949="true" style="cursor:pointer;">events to control the presence and absence of elements</a>.</p>
+</div></div></div></body></html>
