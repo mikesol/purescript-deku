@@ -4820,9 +4820,9 @@ var switcher = function(dictMonadST) {
       return new DynamicChildren$prime(keepLatest(eventIsEvent(dictMonadST))(memoize(dictMonadST)(counter(event))(function(cenv) {
         return map(functorEvent)(function(v) {
           return alt(altEvent(dictMonadST.Monad0().Applicative0()))(bang(eventIsEvent(dictMonadST))(new Insert(f(v.value0))))(map(functorEvent)($$const(Remove.value))(filter4(filterableEvent(dictMonadST.Monad0().Applicative0()))(function() {
-            var $69 = eq(eqInt)(v.value1 + 1 | 0);
-            return function($70) {
-              return $69(snd($70));
+            var $66 = eq(eqInt)(v.value1 + 1 | 0);
+            return function($67) {
+              return $66(snd($67));
             };
           }())(cenv)));
         })(cenv);
@@ -4859,24 +4859,24 @@ var flatten = function(dictApplicative) {
                       return bind(dictMonadST.Monad0().Bind1())(liftST(dictMonadST)(newSTRef(pure(dictApplicative)(unit))))(function(myUnsub) {
                         return bind(dictMonadST.Monad0().Bind1())(v.ids(interpreter))(function(eltsUnsubId) {
                           return bind(dictMonadST.Monad0().Bind1())(liftST(dictMonadST)(newSTRef(pure(dictApplicative)(unit))))(function(eltsUnsub) {
-                            return bind(dictMonadST.Monad0().Bind1())(liftST(dictMonadST)(newSTRef(Nothing.value)))(function(myId) {
+                            return bind(dictMonadST.Monad0().Bind1())(liftST(dictMonadST)(newSTRef([])))(function(myIds) {
                               return bind(dictMonadST.Monad0().Bind1())(liftST(dictMonadST)(newSTRef(pure(dictApplicative)(unit))))(function(myImmediateCancellation) {
                                 return bind(dictMonadST.Monad0().Bind1())(map(dictApplicative.Apply0().Functor0())(Local.create)(v.ids(interpreter)))(function(myScope) {
                                   return bind(dictMonadST.Monad0().Bind1())(liftST(dictMonadST)(newSTRef(Begin.value)))(function(stageRef) {
                                     return bind(dictMonadST.Monad0().Bind1())(subscribe(inner)(function(kid$prime) {
                                       return bind(dictMonadST.Monad0().Bind1())(liftST(dictMonadST)(read2(stageRef)))(function(stage) {
                                         if (kid$prime instanceof Logic && stage instanceof Middle) {
-                                          return bind(dictMonadST.Monad0().Bind1())(liftST(dictMonadST)(read2(myId)))(traverse_(dictApplicative)(foldableMaybe)(function() {
-                                            var $71 = v.doLogic(kid$prime.value0)(interpreter);
-                                            return function($72) {
-                                              return v2($71($72));
+                                          return bind(dictMonadST.Monad0().Bind1())(liftST(dictMonadST)(read2(myIds)))(traverse_(dictApplicative)(foldableArray)(function() {
+                                            var $68 = v.doLogic(kid$prime.value0)(interpreter);
+                                            return function($69) {
+                                              return v2($68($69));
                                             };
                                           }()));
                                         }
                                         ;
                                         if (kid$prime instanceof Remove && stage instanceof Middle) {
                                           return discard(discardUnit)(dictMonadST.Monad0().Bind1())($$void(dictApplicative.Apply0().Functor0())(liftST(dictMonadST)(write2(End.value)(stageRef))))(function() {
-                                            var mic = applySecond(dictApplicative.Apply0())(applySecond(dictApplicative.Apply0())(applySecond(dictApplicative.Apply0())(applySecond(dictApplicative.Apply0())(bind(dictMonadST.Monad0().Bind1())(liftST(dictMonadST)(read2(myId)))(traverse_(dictApplicative)(foldableMaybe)(function(old) {
+                                            var mic = applySecond(dictApplicative.Apply0())(applySecond(dictApplicative.Apply0())(applySecond(dictApplicative.Apply0())(applySecond(dictApplicative.Apply0())(bind(dictMonadST.Monad0().Bind1())(liftST(dictMonadST)(read2(myIds)))(traverse_(dictApplicative)(foldableArray)(function(old) {
                                               return for_(dictApplicative)(foldableMaybe)(psr.parent)(function(pnt) {
                                                 return v2(v.disconnectElement(interpreter)({
                                                   id: old,
@@ -4895,15 +4895,9 @@ var flatten = function(dictApplicative) {
                                               parent: psr.parent,
                                               scope: myScope,
                                               raiseId: function(id2) {
-                                                return $$void(dictApplicative.Apply0().Functor0())(liftST(dictMonadST)(write2(new Just(id2))(myId)));
+                                                return $$void(dictApplicative.Apply0().Functor0())(liftST(dictMonadST)(modify(append(semigroupArray)([id2]))(myIds)));
                                               }
-                                            })(interpreter)(function() {
-                                              if (kid$prime.value0 instanceof Element$prime) {
-                                                return kid$prime.value0;
-                                              }
-                                              ;
-                                              return v.wrapElt(kid$prime.value0);
-                                            }()))(v2))(function(c1) {
+                                            })(interpreter)(kid$prime.value0))(v2))(function(c1) {
                                               return discard(discardUnit)(dictMonadST.Monad0().Bind1())($$void(dictApplicative.Apply0().Functor0())(liftST(dictMonadST)(modify(insert(eltsUnsubId)(c1))(cancelInner))))(function() {
                                                 return $$void(dictApplicative.Apply0().Functor0())(liftST(dictMonadST)(write2(c1)(eltsUnsub)));
                                               });
@@ -4937,7 +4931,7 @@ var flatten = function(dictApplicative) {
               });
             }
             ;
-            throw new Error("Failed pattern match at Bolson.Control (line 209, column 17 - line 294, column 20): " + [v1.constructor.name]);
+            throw new Error("Failed pattern match at Bolson.Control (line 208, column 17 - line 291, column 20): " + [v1.constructor.name]);
           };
         };
       };
@@ -4972,7 +4966,7 @@ var internalPortal = function() {
                                 }(v.toElt(i2.value0));
                               }
                               ;
-                              return f(v.wrapElt(i2));
+                              return f(v1.wrapElt(i2));
                             };
                           });
                         })(toArray2()(toBeam)));
@@ -5167,6 +5161,40 @@ var text_ = function(dictMonad) {
     return text(dictMonad)(bang2(dictMonad.Applicative0())(txt));
   };
 };
+var __internalDekuFlatten = function(dictKorok) {
+  return flatten(dictKorok.MonadST5().Monad0().Applicative0())(dictKorok.MonadST5())({
+    doLogic: function(v) {
+      return function(v1) {
+        return function(id2) {
+          return v1.sendToTop({
+            id: id2
+          });
+        };
+      };
+    },
+    ids: function() {
+      var $120 = unwrap();
+      return function($121) {
+        return function(v) {
+          return v.ids;
+        }($120($121));
+      };
+    }(),
+    disconnectElement: function(v) {
+      return function(v1) {
+        return v.disconnectElement({
+          id: v1.id,
+          scope: v1.scope,
+          parent: v1.parent,
+          scopeEq: eq(eqScope)
+        });
+      };
+    },
+    toElt: function(v) {
+      return v;
+    }
+  });
+};
 var elementify = function(dictKorok) {
   return function(tag) {
     return function(atts) {
@@ -5205,46 +5233,6 @@ var elementify = function(dictKorok) {
     };
   };
 };
-var __internalDekuFlatten = function(dictKorok) {
-  return flatten(dictKorok.MonadST5().Monad0().Applicative0())(dictKorok.MonadST5())({
-    doLogic: function(v) {
-      return function(v1) {
-        return function(id2) {
-          return v1.sendToTop({
-            id: id2
-          });
-        };
-      };
-    },
-    ids: function() {
-      var $120 = unwrap();
-      return function($121) {
-        return function(v) {
-          return v.ids;
-        }($120($121));
-      };
-    }(),
-    disconnectElement: function(v) {
-      return function(v1) {
-        return v.disconnectElement({
-          id: v1.id,
-          scope: v1.scope,
-          parent: v1.parent,
-          scopeEq: eq(eqScope)
-        });
-      };
-    },
-    wrapElt: function() {
-      var $122 = elementify(dictKorok)("div")(empty(plusEvent(dictKorok.MonadST5().Monad0().Applicative0())));
-      return function($123) {
-        return Element$prime.create($122($123));
-      };
-    }(),
-    toElt: function(v) {
-      return v;
-    }
-  });
-};
 var portal2 = function() {
   return function(dictKorok) {
     return function(a2) {
@@ -5260,11 +5248,11 @@ var portal2 = function() {
             };
           },
           ids: function() {
-            var $130 = unwrap();
-            return function($131) {
+            var $128 = unwrap();
+            return function($129) {
               return function(v) {
                 return v.ids;
-              }($130($131));
+              }($128($129));
             };
           }(),
           disconnectElement: function(v) {
@@ -5277,12 +5265,6 @@ var portal2 = function() {
               });
             };
           },
-          wrapElt: function() {
-            var $132 = elementify(dictKorok)("div")(empty(plusEvent(dictKorok.MonadST5().Monad0().Applicative0())));
-            return function($133) {
-              return Element$prime.create($132($133));
-            };
-          }(),
           toElt: function(v) {
             return v;
           }
@@ -5290,6 +5272,12 @@ var portal2 = function() {
           fromElt: function(v) {
             return v;
           },
+          wrapElt: function() {
+            var $130 = elementify(dictKorok)("div")(empty(plusEvent(dictKorok.MonadST5().Monad0().Applicative0())));
+            return function($131) {
+              return Element$prime.create($130($131));
+            };
+          }(),
           giveNewParent: function(q) {
             return function(r) {
               return function(v) {
@@ -5298,11 +5286,11 @@ var portal2 = function() {
             };
           },
           deleteFromCache: function() {
-            var $134 = unwrap();
-            return function($135) {
+            var $132 = unwrap();
+            return function($133) {
               return function(v) {
                 return v.deleteFromCache;
-              }($134($135));
+              }($132($133));
             };
           }()
         })(a2)(lcmap(profunctorFn)(map(functorVect)(function(v) {
@@ -5752,7 +5740,7 @@ var pursxToElementConsAttr = function() {
                             });
                           }
                           ;
-                          throw new Error("Failed pattern match at Deku.Pursx (line 4475, column 38 - line 4485, column 24): " + [v3.value.constructor.name]);
+                          throw new Error("Failed pattern match at Deku.Pursx (line 4474, column 38 - line 4484, column 24): " + [v3.value.constructor.name]);
                         }))(get(dictIsSymbol)()($$Proxy.value)(r)))(v1.element(parent2)(v2));
                       };
                     }
@@ -5865,12 +5853,6 @@ var __internalDekuFlatten2 = function(dictKorok) {
         });
       };
     },
-    wrapElt: function() {
-      var $446 = elementify(dictKorok)("div")(empty(plusEvent(dictKorok.MonadST5().Monad0().Applicative0())));
-      return function($447) {
-        return Element$prime.create($446($447));
-      };
-    }(),
     toElt: function(v) {
       return v;
     }
@@ -9778,12 +9760,6 @@ var __internalDekuFlatten3 = function(dictKorok) {
         });
       };
     },
-    wrapElt: function() {
-      var $37 = elementify(dictKorok)("div")(empty(plusEvent(dictKorok.MonadST5().Monad0().Applicative0())));
-      return function($38) {
-        return Element$prime.create($37($38));
-      };
-    }(),
     toElt: function(v) {
       return v;
     }
@@ -9794,13 +9770,13 @@ var runSSR$prime = function(dictKorok) {
     return function(v) {
       return function(children) {
         return map(dictKorok.MonadST5().Monad0().Bind1().Apply0().Functor0())(function() {
-          var $39 = ssr$prime(topTag);
-          return function($40) {
+          var $37 = ssr$prime(topTag);
+          return function($38) {
             return function(v1) {
               return v.head + v1;
             }(function(v1) {
               return v1 + v.tail;
-            }($39($40)));
+            }($37($38)));
           };
         }())(liftST(dictKorok.MonadST5())(function __do2() {
           var seed = newSTRef(0)();
