@@ -127,10 +127,10 @@ globalPortal v c = Bolson.globalPortal
   , disconnectElement:
       \(DOMInterpret { disconnectElement }) { id, scope, parent } ->
         disconnectElement { id, scope, parent, scopeEq: eq }
-  , wrapElt: Element' <<< elementify "div" empty
   , toElt: \(Node e) -> Element e
   }
   { fromElt: \(Element e) -> Node e
+  , wrapElt: Element' <<< elementify "div" empty
   , giveNewParent: \a b _ -> (unwrap a).giveNewParent b
   , deleteFromCache: unwrap >>> _.deleteFromCache
   }
@@ -154,10 +154,10 @@ portal a b = Bolson.portal
   , disconnectElement:
       \(DOMInterpret { disconnectElement }) { id, scope, parent } ->
         disconnectElement { id, scope, parent, scopeEq: eq }
-  , wrapElt: Element' <<< elementify "div" empty
   , toElt: \(Node e) -> Element e
   }
   { fromElt: \(Element e) -> Node e
+  , wrapElt: Element' <<< elementify "div" empty
   , giveNewParent: \q r _ -> (unwrap q).giveNewParent r
   , deleteFromCache: unwrap >>> _.deleteFromCache
   }
@@ -240,6 +240,5 @@ __internalDekuFlatten = Bolson.flatten
   , disconnectElement:
       \(DOMInterpret { disconnectElement }) { id, scope, parent } ->
         disconnectElement { id, scope, parent, scopeEq: eq }
-  , wrapElt: Element' <<< elementify "div" empty
   , toElt: \(Node e) -> Element e
   }

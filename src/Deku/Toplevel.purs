@@ -3,14 +3,13 @@ module Deku.Toplevel where
 import Prelude
 
 import Bolson.Control as Bolson
-import Bolson.Core (Element(..), Entity(..), PSR, Scope(..))
+import Bolson.Core (Element(..), PSR, Scope(..))
 import Control.Monad.ST (ST)
 import Control.Monad.ST.Class (liftST)
 import Control.Monad.ST.Internal as RRef
-import Control.Plus (empty)
 import Data.Maybe (Maybe(..), maybe)
 import Data.Newtype (class Newtype, unwrap)
-import Deku.Control (deku, deku1, dekuA, elementify)
+import Deku.Control (deku, deku1, dekuA)
 import Deku.Core (class Korok, DOMInterpret(..), Domable, Node(..))
 import Deku.Interpret (FFIDOMSnapshot, Instruction, fullDOMInterpret, hydratingDOMInterpret, makeFFIDOMSnapshot, ssrDOMInterpret)
 import Deku.SSR (ssr')
@@ -170,6 +169,5 @@ __internalDekuFlatten = Bolson.flatten
   , disconnectElement:
       \(DOMInterpret { disconnectElement }) { id, scope, parent } ->
         disconnectElement { id, scope, parent, scopeEq: eq }
-  , wrapElt: Element' <<< elementify "div" empty
   , toElt: \(Node e) -> Element e
   }

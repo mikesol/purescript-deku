@@ -12,7 +12,6 @@ import Data.Profunctor (lcmap)
 import Data.Reflectable (class Reflectable, reflectType)
 import Data.Symbol (class IsSymbol)
 import Deku.Attribute (Attribute, AttributeValue(..), unsafeUnAttribute)
-import Deku.Control (elementify)
 import Deku.Core (DOMInterpret(..), class Korok, Domable, Node(..))
 import Deku.DOM (class TagToDeku)
 import FRP.Event (AnEvent, bang, subscribe, makeEvent)
@@ -4573,7 +4572,6 @@ __internalDekuFlatten = Bolson.flatten
   , disconnectElement:
       \(DOMInterpret { disconnectElement }) { id, scope, parent } ->
         disconnectElement { id, scope, parent, scopeEq: eq }
-  , wrapElt: Element' <<< elementify "div" empty
   , toElt: \(Node e) -> Element e
   }
 
