@@ -14,6 +14,7 @@ module Deku.Core
   , SetCb
   , SetText
   , Nut
+  , ANut(..)
   , bus
   , bussed
   , vbussed
@@ -67,6 +68,8 @@ type Nut =
   forall s m lock payload
    . Korok s m
   => Domable m lock payload
+
+newtype ANut = ANut Nut
 
 bus
   :: forall a b s m
