@@ -131,7 +131,7 @@ let additions =
       , bolson =
         { dependencies = [ "prelude" ]
         , repo = "https://github.com/mikesol/purescript-bolson.git"
-        , version = "v0.0.4"
+        , version = "v0.0.6"
         }
       , variant =
         { dependencies =

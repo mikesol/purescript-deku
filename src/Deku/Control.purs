@@ -121,15 +121,17 @@ globalPortal
   => Vect n (Domable m lock payload)
   -> (Vect n (Domable m lock payload) -> Domable m lock payload)
   -> Domable m lock payload
-globalPortal v c = Bolson.globalPortal
+globalPortal v c = Bolson.globalPortalComplexComplex
   { doLogic: \_ (DOMInterpret { sendToTop }) id -> sendToTop { id }
   , ids: unwrap >>> _.ids
   , disconnectElement:
       \(DOMInterpret { disconnectElement }) { id, scope, parent } ->
         disconnectElement { id, scope, parent, scopeEq: eq }
-  , toElt: \(Node e) -> Element e
+  , toElt: coerce
   }
-  { fromElt: \(Element e) -> Node e
+  { fromEltO1: coerce
+  , fromEltO2: coerce
+  , toElt: coerce
   , wrapElt: Element' <<< elementify "div" empty
   , giveNewParent: \a b _ -> (unwrap a).giveNewParent b
   , deleteFromCache: unwrap >>> _.deleteFromCache
@@ -148,7 +150,7 @@ portal
        -> Domable m lockfoo payload
      )
   -> Domable m lock0 payload
-portal a b = Bolson.portal
+portal a b = Bolson.portalComplexComplex
   { doLogic: \_ (DOMInterpret { sendToTop }) id -> sendToTop { id }
   , ids: unwrap >>> _.ids
   , disconnectElement:
@@ -156,7 +158,9 @@ portal a b = Bolson.portal
         disconnectElement { id, scope, parent, scopeEq: eq }
   , toElt: \(Node e) -> Element e
   }
-  { fromElt: \(Element e) -> Node e
+  { fromEltO1: coerce
+  , fromEltO2: coerce
+  , toElt: coerce
   , wrapElt: Element' <<< elementify "div" empty
   , giveNewParent: \q r _ -> (unwrap q).giveNewParent r
   , deleteFromCache: unwrap >>> _.deleteFromCache
