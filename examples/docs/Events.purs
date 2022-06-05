@@ -93,7 +93,7 @@ main = runInBody1
                 []
             , D.div_
                 [ text
-                    ( bang "Val: 50" <|>
+                    ( bang "Val: 50.0" <|>
                         ( append "Val: " <<< show
                             <$> event.sliderMoved
                         )
@@ -129,7 +129,7 @@ main = runInBody1
                     []
                 , D.div_
                     [ text
-                        ( (bang "Val: 50") <|>
+                        ( (bang "Val: 50.0") <|>
                             ( (append "Val: " <<< show) <$> event.sliderMoved
                             )
                         )
