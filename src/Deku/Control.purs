@@ -122,13 +122,7 @@ globalPortal
   -> (Vect n (Domable m lock payload) -> Domable m lock payload)
   -> Domable m lock payload
 globalPortal v c = Bolson.globalPortalComplexComplex
-  { doLogic: \_ (DOMInterpret { sendToTop }) id -> sendToTop { id }
-  , ids: unwrap >>> _.ids
-  , disconnectElement:
-      \(DOMInterpret { disconnectElement }) { id, scope, parent } ->
-        disconnectElement { id, scope, parent, scopeEq: eq }
-  , toElt: coerce
-  }
+  portalFlatten
   { fromEltO1: coerce
   , fromEltO2: coerce
   , toElt: coerce
@@ -138,6 +132,15 @@ globalPortal v c = Bolson.globalPortalComplexComplex
   }
   v
   (lcmap (map (_ $ unit)) c)
+
+portalFlatten =
+  { doLogic: \pos (DOMInterpret { sendToPos }) id -> sendToPos { id, pos }
+  , ids: unwrap >>> _.ids
+  , disconnectElement:
+      \(DOMInterpret { disconnectElement }) { id, scope, parent } ->
+        disconnectElement { id, scope, parent, scopeEq: eq }
+  , toElt: \(Node e) -> Element e
+  }
 
 portal
   :: forall n s m lock0 payload
@@ -151,13 +154,7 @@ portal
      )
   -> Domable m lock0 payload
 portal a b = Bolson.portalComplexComplex
-  { doLogic: \_ (DOMInterpret { sendToTop }) id -> sendToTop { id }
-  , ids: unwrap >>> _.ids
-  , disconnectElement:
-      \(DOMInterpret { disconnectElement }) { id, scope, parent } ->
-        disconnectElement { id, scope, parent, scopeEq: eq }
-  , toElt: \(Node e) -> Element e
-  }
+  portalFlatten
   { fromEltO1: coerce
   , fromEltO2: coerce
   , toElt: coerce
@@ -239,10 +236,4 @@ __internalDekuFlatten
   -> Domable m lock payload
   -> AnEvent m payload
 __internalDekuFlatten = Bolson.flatten
-  { doLogic: \_ (DOMInterpret { sendToTop }) id -> sendToTop { id }
-  , ids: unwrap >>> _.ids
-  , disconnectElement:
-      \(DOMInterpret { disconnectElement }) { id, scope, parent } ->
-        disconnectElement { id, scope, parent, scopeEq: eq }
-  , toElt: \(Node e) -> Element e
-  }
+  portalFlatten

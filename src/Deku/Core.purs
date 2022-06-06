@@ -9,7 +9,7 @@ module Deku.Core
   , GiveNewParent
   , DisconnectElement
   , DeleteFromCache
-  , SendToTop
+  , SendToPos
   , SetProp
   , SetCb
   , SetText
@@ -20,6 +20,7 @@ module Deku.Core
   , vbussed
   , remove
   , sendToTop
+  , sendToPos
   , insert
   , class Korok
   , Domable
@@ -106,7 +107,7 @@ vbussed px f = Bolson.EventfulElement'
 newtype Node m (lock :: Type) payload = Node
   (Bolson.PSR m -> DOMInterpret m payload -> AnEvent m payload)
 
-type Domable m lock payload = Bolson.Entity Unit (Node m lock payload) m lock
+type Domable m lock payload = Bolson.Entity Int (Node m lock payload) m lock
 
 insert
   :: forall logic obj m lock
@@ -117,8 +118,11 @@ insert = Bolson.Insert
 remove :: forall logic obj m lock. Bolson.Child logic obj m lock
 remove = Bolson.Remove
 
-sendToTop :: forall obj m lock. Bolson.Child Unit obj m lock
-sendToTop = Bolson.Logic unit
+sendToTop :: forall obj m lock. Bolson.Child Int obj m lock
+sendToTop = Bolson.Logic 0
+
+sendToPos :: forall obj m lock. Int -> Bolson.Child Int obj m lock
+sendToPos = Bolson.Logic
 
 type MakeElement =
   { id :: String
@@ -176,8 +180,9 @@ type MakePursx =
   , cache :: Object Boolean
   }
 
-type SendToTop =
+type SendToPos =
   { id :: String
+  , pos :: Int
   }
 
 derive instance Newtype (DOMInterpret m payload) _
@@ -192,7 +197,7 @@ newtype DOMInterpret m payload = DOMInterpret
   , giveNewParent :: GiveNewParent -> payload
   , disconnectElement :: DisconnectElement -> payload
   , deleteFromCache :: DeleteFromCache -> payload
-  , sendToTop :: SendToTop -> payload
+  , sendToPos :: SendToPos -> payload
   , setProp :: SetProp -> payload
   , setCb :: SetCb -> payload
   , setText :: SetText -> payload

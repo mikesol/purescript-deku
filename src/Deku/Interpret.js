@@ -285,7 +285,16 @@ export const deleteFromCache_ = (a) => (state) => () => {
 	delete state.units[a.id];
 };
 
-export const sendToTop_ = (a) => (state) => () => {
+export const sendToPos_ = (a) => (state) => () => {
 	var ptr = a.id;
-	state.units[ptr].main.parentNode.prepend(state.units[ptr].main);
+	var pos = a.pos;
+	var parent = state.units[ptr].main.parentNode;
+	parent.insertBefore(
+		state.units[ptr].main,
+		parent.children.length <= pos
+			? parent.children[parent.children.length - 1]
+			: pos < 0
+			? parent.children[0]
+			: parent.children[pos]
+	);
 };

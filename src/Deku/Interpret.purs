@@ -73,7 +73,7 @@ foreign import giveNewParent_
 foreign import disconnectElement_
   :: Core.DisconnectElement -> FFIDOMSnapshot -> Effect Unit
 
-foreign import sendToTop_ :: Core.SendToTop -> FFIDOMSnapshot -> Effect Unit
+foreign import sendToPos_ :: Core.SendToPos -> FFIDOMSnapshot -> Effect Unit
 
 fullDOMInterpret
   :: Ref.Ref Int -> Core.DOMInterpret Effect (FFIDOMSnapshot -> Effect Unit)
@@ -93,7 +93,7 @@ fullDOMInterpret seed = Core.DOMInterpret
   , setProp: setProp_ false
   , setCb: setCb_ false
   , setText: setText_
-  , sendToTop: sendToTop_
+  , sendToPos: sendToPos_
   , deleteFromCache: deleteFromCache_
   , giveNewParent: giveNewParent_
   , disconnectElement: disconnectElement_
@@ -147,7 +147,7 @@ ssrDOMInterpret seed = Core.DOMInterpret
   , setProp: ssrSetProp
   , setCb: \_ _ -> pure unit
   , setText: ssrSetText
-  , sendToTop: \_ _ -> pure unit
+  , sendToPos: \_ _ -> pure unit
   , deleteFromCache: \_ _ -> pure unit
   , giveNewParent: \_ _ -> pure unit
   , disconnectElement: \_ _ -> pure unit
@@ -171,7 +171,7 @@ hydratingDOMInterpret seed = Core.DOMInterpret
   , setProp: setProp_ true
   , setCb: setCb_ true
   , setText: setText_
-  , sendToTop: sendToTop_
+  , sendToPos: sendToPos_
   , deleteFromCache: deleteFromCache_
   , giveNewParent: giveNewParent_
   , disconnectElement: disconnectElement_

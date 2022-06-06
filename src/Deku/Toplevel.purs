@@ -164,7 +164,7 @@ __internalDekuFlatten
   -> Domable m lock payload
   -> AnEvent m payload
 __internalDekuFlatten = Bolson.flatten
-  { doLogic: \_ (DOMInterpret { sendToTop }) id -> sendToTop { id }
+  { doLogic: \pos (DOMInterpret { sendToPos }) id -> sendToPos { id, pos }
   , ids: unwrap >>> _.ids
   , disconnectElement:
       \(DOMInterpret { disconnectElement }) { id, scope, parent } ->
