@@ -4701,7 +4701,7 @@ var vbussed = function() {
   };
 };
 var sendToTop = /* @__PURE__ */ function() {
-  return new Logic(unit);
+  return new Logic(0);
 }();
 var remove = /* @__PURE__ */ function() {
   return Remove.value;
@@ -5089,13 +5089,13 @@ var unsafeText = function(v) {
 var unsafeSetText = function(v) {
   return function(id2) {
     return function(txt) {
-      return map(functorEvent)(function($112) {
+      return map(functorEvent)(function($84) {
         return v.setText(function(v1) {
           return {
             id: id2,
             text: v1
           };
-        }($112));
+        }($84));
       })(txt);
     };
   };
@@ -5103,7 +5103,7 @@ var unsafeSetText = function(v) {
 var unsafeSetAttribute = function(v) {
   return function(id2) {
     return function(atts) {
-      return map(functorEvent)(function($113) {
+      return map(functorEvent)(function($85) {
         return function(v1) {
           if (v1.value instanceof Prop$prime) {
             return v.setProp({
@@ -5122,7 +5122,7 @@ var unsafeSetAttribute = function(v) {
           }
           ;
           throw new Error("Failed pattern match at Deku.Control (line 75, column 26 - line 77, column 45): " + [v1.value.constructor.name]);
-        }(unsafeUnAttribute($113));
+        }(unsafeUnAttribute($85));
       })(atts);
     };
   };
@@ -5160,23 +5160,24 @@ var text_ = function(dictMonad) {
     return text(dictMonad)(bang2(dictMonad.Applicative0())(txt));
   };
 };
-var __internalDekuFlatten = function(dictKorok) {
-  return flatten(dictKorok.MonadST5().Monad0().Applicative0())(dictKorok.MonadST5())({
-    doLogic: function(v) {
-      return function(v1) {
+var portalFlatten = function(dictNewtype) {
+  return {
+    doLogic: function(pos) {
+      return function(v) {
         return function(id2) {
-          return v1.sendToTop({
-            id: id2
+          return v.sendToPos({
+            id: id2,
+            pos
           });
         };
       };
     },
     ids: function() {
-      var $114 = unwrap();
-      return function($115) {
+      var $86 = unwrap(dictNewtype);
+      return function($87) {
         return function(v) {
           return v.ids;
-        }($114($115));
+        }($86($87));
       };
     }(),
     disconnectElement: function(v) {
@@ -5192,7 +5193,10 @@ var __internalDekuFlatten = function(dictKorok) {
     toElt: function(v) {
       return v;
     }
-  });
+  };
+};
+var __internalDekuFlatten = function(dictKorok) {
+  return flatten(dictKorok.MonadST5().Monad0().Applicative0())(dictKorok.MonadST5())(portalFlatten());
 };
 var elementify = function(dictKorok) {
   return function(tag) {
@@ -5236,45 +5240,14 @@ var portal = function() {
   return function(dictKorok) {
     return function(a2) {
       return function(b) {
-        return portalComplexComplex()(dictKorok.MonadST5())({
-          doLogic: function(v) {
-            return function(v1) {
-              return function(id2) {
-                return v1.sendToTop({
-                  id: id2
-                });
-              };
-            };
-          },
-          ids: function() {
-            var $122 = unwrap();
-            return function($123) {
-              return function(v) {
-                return v.ids;
-              }($122($123));
-            };
-          }(),
-          disconnectElement: function(v) {
-            return function(v1) {
-              return v.disconnectElement({
-                id: v1.id,
-                scope: v1.scope,
-                parent: v1.parent,
-                scopeEq: eq(eqScope)
-              });
-            };
-          },
-          toElt: function(v) {
-            return v;
-          }
-        })({
+        return portalComplexComplex()(dictKorok.MonadST5())(portalFlatten())({
           fromEltO1: coerce(),
           fromEltO2: coerce(),
           toElt: coerce(),
           wrapElt: function() {
-            var $124 = elementify(dictKorok)("div")(empty(plusEvent(dictKorok.MonadST5().Monad0().Applicative0())));
-            return function($125) {
-              return Element$prime.create($124($125));
+            var $92 = elementify(dictKorok)("div")(empty(plusEvent(dictKorok.MonadST5().Monad0().Applicative0())));
+            return function($93) {
+              return Element$prime.create($92($93));
             };
           }(),
           giveNewParent: function(q) {
@@ -5285,11 +5258,11 @@ var portal = function() {
             };
           },
           deleteFromCache: function() {
-            var $126 = unwrap();
-            return function($127) {
+            var $94 = unwrap();
+            return function($95) {
               return function(v) {
                 return v.deleteFromCache;
-              }($126($127));
+              }($94($95));
             };
           }()
         })(a2)(lcmap(profunctorFn)(map(functorVect)(function(v) {
@@ -5825,21 +5798,22 @@ var psx = function(dictReflectable) {
 };
 var __internalDekuFlatten2 = function(dictKorok) {
   return flatten(dictKorok.MonadST5().Monad0().Applicative0())(dictKorok.MonadST5())({
-    doLogic: function(v) {
-      return function(v1) {
+    doLogic: function(pos) {
+      return function(v) {
         return function(id2) {
-          return v1.sendToTop({
-            id: id2
+          return v.sendToPos({
+            id: id2,
+            pos
           });
         };
       };
     },
     ids: function() {
-      var $444 = unwrap();
-      return function($445) {
+      var $443 = unwrap();
+      return function($444) {
         return function(v) {
           return v.ids;
-        }($444($445));
+        }($443($444));
       };
     }(),
     disconnectElement: function(v) {
@@ -9508,7 +9482,7 @@ var ssrDOMInterpret = function(seed) {
       };
     },
     setText: ssrSetText,
-    sendToTop: function(v) {
+    sendToPos: function(v) {
       return function(v1) {
         return pure(applicativeST)(unit);
       };
@@ -9732,21 +9706,22 @@ var ssr$prime = function(topTag) {
 // output/Deku.Toplevel/index.js
 var __internalDekuFlatten3 = function(dictKorok) {
   return flatten(dictKorok.MonadST5().Monad0().Applicative0())(dictKorok.MonadST5())({
-    doLogic: function(v) {
-      return function(v1) {
+    doLogic: function(pos) {
+      return function(v) {
         return function(id2) {
-          return v1.sendToTop({
-            id: id2
+          return v.sendToPos({
+            id: id2,
+            pos
           });
         };
       };
     },
     ids: function() {
-      var $35 = unwrap();
-      return function($36) {
+      var $34 = unwrap();
+      return function($35) {
         return function(v) {
           return v.ids;
-        }($35($36));
+        }($34($35));
       };
     }(),
     disconnectElement: function(v) {
@@ -9769,13 +9744,13 @@ var runSSR$prime = function(dictKorok) {
     return function(v) {
       return function(children) {
         return map(dictKorok.MonadST5().Monad0().Bind1().Apply0().Functor0())(function() {
-          var $37 = ssr$prime(topTag);
-          return function($38) {
+          var $36 = ssr$prime(topTag);
+          return function($37) {
             return function(v1) {
               return v.head + v1;
             }(function(v1) {
               return v1 + v.tail;
-            }($37($38)));
+            }($36($37)));
           };
         }())(liftST(dictKorok.MonadST5())(function __do2() {
           var seed = newSTRef(0)();
