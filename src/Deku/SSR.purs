@@ -13,6 +13,7 @@ import Data.Traversable (foldMap, for_, intercalate, traverse)
 import Deku.Core as Core
 import Deku.Interpret (Instruction(..))
 
+foreign import encodedString :: String -> String
 foreign import doPursxReplacements :: Core.MakePursx -> String
 
 ssr :: Array Instruction -> String
@@ -90,7 +91,7 @@ ssr' topTag arr = "<" <> topTag <> " data-deku-ssr-deku-root=\"true\">"
       let
         makeText _ = i2a #
           ( fromMaybe "" <<< findMap case _ of
-              SetText { text } -> Just text
+              SetText { text } -> Just $ encodedString text
               _ -> Nothing
           )
         makeElt _ = do
