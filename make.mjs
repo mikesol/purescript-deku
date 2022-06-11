@@ -9506,6 +9506,9 @@ var ssrDOMInterpret = function(seed) {
 };
 
 // output/Deku.SSR/foreign.js
+var encodedString = (rawStr) => rawStr.replace(/[\u00A0-\u9999<>\&]/g, function(i2) {
+  return "&#" + i2.charCodeAt(0) + ";";
+});
 var doPursxReplacements = ({ id: id2, html, pxScope, cache, verb }) => {
   let vhtml = html;
   const entries = Object.entries(cache);
@@ -9546,7 +9549,7 @@ var ssr$prime = function(topTag) {
               return new Just([action2]);
             }
             ;
-            throw new Error("Failed pattern match at Deku.SSR (line 45, column 17 - line 47, column 45): " + [v1.constructor.name]);
+            throw new Error("Failed pattern match at Deku.SSR (line 46, column 17 - line 48, column 45): " + [v1.constructor.name]);
           })(id2)(s.idToActions);
           return $15;
         }));
@@ -9573,7 +9576,7 @@ var ssr$prime = function(topTag) {
                 return new Just([id2]);
               }
               ;
-              throw new Error("Failed pattern match at Deku.SSR (line 32, column 17 - line 34, column 41): " + [v1.constructor.name]);
+              throw new Error("Failed pattern match at Deku.SSR (line 33, column 17 - line 35, column 41): " + [v1.constructor.name]);
             })(parent2)(s.parentToChild);
             return $20;
           })))(function() {
@@ -9609,7 +9612,7 @@ var ssr$prime = function(topTag) {
         return setting(i2.value0.id)(i2);
       }
       ;
-      throw new Error("Failed pattern match at Deku.SSR (line 55, column 17 - line 62, column 43): " + [i2.constructor.name]);
+      throw new Error("Failed pattern match at Deku.SSR (line 56, column 17 - line 63, column 43): " + [i2.constructor.name]);
     })(arr))({
       parentToChild: empty3,
       idToActions: empty3
@@ -9650,7 +9653,7 @@ var ssr$prime = function(topTag) {
         var makeText = function(v12) {
           return fromMaybe("")(findMap(function(v2) {
             if (v2 instanceof SetText) {
-              return new Just(v2.value0.text);
+              return new Just(encodedString(v2.value0.text));
             }
             ;
             return Nothing.value;
@@ -9694,7 +9697,7 @@ var ssr$prime = function(topTag) {
               return replace("data-deku-ssr-" + i2)(eltAtts(a2) + (" data-deku-ssr-" + i2))(b);
             }
             ;
-            throw new Error("Failed pattern match at Deku.SSR (line 82, column 19 - line 84, column 136): " + [v1.constructor.name]);
+            throw new Error("Failed pattern match at Deku.SSR (line 83, column 19 - line 85, column 136): " + [v1.constructor.name]);
           };
         };
       })(o(id2))(v.idToActions);
