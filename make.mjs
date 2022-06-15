@@ -9653,7 +9653,7 @@ var ssr$prime = function(topTag) {
         var makeText = function(v12) {
           return fromMaybe("")(findMap(function(v2) {
             if (v2 instanceof SetText) {
-              return new Just(encodedString(v2.value0.text));
+              return new Just(encodedString(v2.value0.text) + ("<!--" + (id2 + "-->")));
             }
             ;
             return Nothing.value;
