@@ -166,11 +166,11 @@ portal a b = Bolson.portalComplexComplex
   (lcmap (map (_ $ unit)) (coerce b))
 
 text
-  :: forall m lock payload
-   . Monad m
+  :: forall s m lock payload
+   . Korok s m
   => AnEvent m String
   -> Domable m lock payload
-text txt = Element' $ Node go
+text txt = Element' (elementify "span" empty (Element' $ Node go))
   where
   go { parent, scope, raiseId } di@(DOMInterpret { ids, deleteFromCache }) =
     makeEvent \k -> do
@@ -184,7 +184,7 @@ text txt = Element' $ Node go
         )
         k
 
-text_ :: forall m lock payload. Monad m => String -> Domable m lock payload
+text_ :: forall s m lock payload. Korok s m => String -> Domable m lock payload
 text_ txt = text (bang txt)
 
 deku
