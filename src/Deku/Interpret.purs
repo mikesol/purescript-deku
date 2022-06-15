@@ -5,6 +5,8 @@ module Deku.Interpret
   , ssrDOMInterpret
   , hydratingDOMInterpret
   , Instruction(..)
+  , setHydrating
+  , unSetHydrating
   ) where
 
 import Prelude
@@ -74,6 +76,9 @@ foreign import disconnectElement_
   :: Core.DisconnectElement -> FFIDOMSnapshot -> Effect Unit
 
 foreign import sendToPos_ :: Core.SendToPos -> FFIDOMSnapshot -> Effect Unit
+
+foreign import setHydrating :: FFIDOMSnapshot -> Effect Unit
+foreign import unSetHydrating :: FFIDOMSnapshot -> Effect Unit
 
 fullDOMInterpret
   :: Ref.Ref Int -> Core.DOMInterpret Effect (FFIDOMSnapshot -> Effect Unit)
