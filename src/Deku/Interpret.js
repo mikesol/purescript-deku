@@ -58,13 +58,15 @@ export const makeText_ = (tryHydration) => (maybe) => (a) => (state) => () => {
 		a.parent.value0 &&
 		(dom = document.body
 			// hack
-			.querySelectorAll("[data-deku-ssr-" + a.parent.value0 + "]")
+			.querySelectorAll("[data-deku-text-" + ptr + "]")
 			.item(0))
 	) {
+		const main = dom.childNodes[0];
+		dom.parentNode.replaceChild(main, dom);
 		state.units[ptr] = {
 			// if we've done ssr for a text node, it will be a span,
 			// so we want to get the child node
-			main: dom.childNodes[0],
+			main: main,
 			parent: a.parent,
 			scope: a.scope,
 		};
