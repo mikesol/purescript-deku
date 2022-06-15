@@ -91,7 +91,7 @@ ssr' topTag arr = "<" <> topTag <> " data-deku-ssr-deku-root=\"true\">"
       let
         makeText _ = i2a #
           ( fromMaybe "" <<< findMap case _ of
-              SetText { text } -> Just $ encodedString text
+              SetText { text } -> Just $ (encodedString text <> "<!--"<>id<>"-->")
               _ -> Nothing
           )
         makeElt _ = do

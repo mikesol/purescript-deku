@@ -11,7 +11,7 @@ import Data.Maybe (Maybe(..), maybe)
 import Data.Newtype (class Newtype, unwrap)
 import Deku.Control (deku, deku1, dekuA)
 import Deku.Core (class Korok, DOMInterpret(..), Domable, Node(..))
-import Deku.Interpret (FFIDOMSnapshot, Instruction, fullDOMInterpret, hydratingDOMInterpret, makeFFIDOMSnapshot, ssrDOMInterpret)
+import Deku.Interpret (FFIDOMSnapshot, Instruction, fullDOMInterpret, hydratingDOMInterpret, makeFFIDOMSnapshot, setHydrating, ssrDOMInterpret, unSetHydrating)
 import Deku.SSR (ssr')
 import Effect (Effect)
 import Effect.Ref as Ref
@@ -94,7 +94,8 @@ hydrate'
 hydrate' children = do
   ffi <- makeFFIDOMSnapshot
   di <- Ref.new 0 <#> hydratingDOMInterpret
-  subscribe
+  setHydrating ffi
+  u <- subscribe
     ( __internalDekuFlatten
         { parent: Just "deku-root"
         , scope: Local "rootScope"
@@ -104,6 +105,8 @@ hydrate' children = do
         (unsafeCoerce children)
     )
     \i -> i ffi
+  unSetHydrating ffi
+  pure u
 
 hydrate
   :: (forall lock. Domable Effect lock (FFIDOMSnapshot -> Effect Unit))

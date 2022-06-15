@@ -2,7 +2,8 @@ const connectXToY_ = (maybe, x, y$, state) => {
 	//console.log(x, y$);
 	maybe((y) => state.units[y].main.appendChild(state.units[x].main))(y$);
 };
-
+export const setHydrating = (state) => () => { state.hydrating = true; }
+export const unSetHydrating = (state) => () => { state.hydrating = false; }
 export const attributeParent_ = (a) => (state) => () => {
 	// only attribute if it is not attributed already
 	if (!state.units[a.id].main.parentNode) {
@@ -19,6 +20,7 @@ export const makeElement_ = (tryHydration) => (a) => (state) => () => {
 	state.scopes[a.scope].push(ptr);
 	// note that, for portals, this will be broken in its current form
 	if (
+		state.hydrating &&
 		tryHydration &&
 		// hack
 		a.parent.value0 &&
@@ -53,6 +55,7 @@ export const makeText_ = (tryHydration) => (maybe) => (a) => (state) => () => {
 	// for SSR, we need a parent, otherwise we cannot get the child node
 	// note that, for portals, this will be broken in its current form
 	if (
+		state.hydrating &&
 		tryHydration &&
 		// hack
 		a.parent.value0 &&
@@ -61,6 +64,13 @@ export const makeText_ = (tryHydration) => (maybe) => (a) => (state) => () => {
 			.querySelectorAll("[data-deku-ssr-" + a.parent.value0 + "]")
 			.item(0))
 	) {
+		var i = 0;
+		for (var i = 0; i < dom.childNodes.length; i++) {
+			if (dom.childNodes[i].nodeType === 8 && dom.childNodes[i].nodeValue === ptr) {
+				i = i - 1;
+				break;
+			}
+		}
 		state.units[ptr] = {
 			// if we've done ssr for a text node, it will be a span,
 			// so we want to get the child node
@@ -91,6 +101,7 @@ export const setProp_ = (tryHydration) => (a) => (state) => () => {
 	// it may be the case that we have created an element via
 	// pursx but not added it to the global state yet
 	if (
+		state.hydrating &&
 		tryHydration &&
 		!state.units[ptr] &&
 		(dom = document.body
@@ -123,6 +134,7 @@ export const setCb_ = (tryHydration) => (a) => (state) => () => {
 	// it may be the case that we have created an element via
 	// pursx but not added it to the global state yet
 	if (
+		state.hydrating &&
 		tryHydration &&
 		!state.units[ptr] &&
 		(dom = document.body
@@ -172,6 +184,7 @@ export const makePursx_ = (tryHydration) => (maybe) => (a) => (state) => () => {
 	var pxScope = a.pxScope;
 	// note that, for portals, this will be broken in its current form
 	if (
+		state.hydrating &&
 		tryHydration &&
 		// hack
 		a.parent.value0 &&
