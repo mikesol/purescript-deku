@@ -22,7 +22,7 @@ import Data.Foldable (oneOf)
 import Data.Maybe (Maybe(..), maybe)
 import Data.Newtype (unwrap)
 import Data.Profunctor (lcmap)
-import Deku.Attribute (Attribute, AttributeValue(..), unsafeUnAttribute)
+import Deku.Attribute (Attribute, Attribute', AttributeValue(..), unsafeUnAttribute)
 import Deku.Core (class Korok, DOMInterpret(..), Domable, Node(..))
 import FRP.Event (AnEvent, bang, makeEvent, subscribe)
 import Prim.Int (class Compare)
@@ -170,7 +170,15 @@ text
    . Korok s m
   => AnEvent m String
   -> Domable m lock payload
-text txt = Element' (elementify "span" empty (Element' $ Node go))
+text txt = Element'
+  ( elementify "span"
+      ( bang $ (unsafeCoerce :: forall e. Attribute' -> Attribute e)
+          { key: "style"
+          , value: Prop' "all: inherit;"
+          }
+      )
+      (Element' $ Node go)
+  )
   where
   go { parent, scope, raiseId } di@(DOMInterpret { ids, deleteFromCache }) =
     makeEvent \k -> do
