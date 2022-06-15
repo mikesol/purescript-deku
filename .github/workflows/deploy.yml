@@ -34,7 +34,7 @@ jobs:
         run: npx spago -x examples.dhall bundle-app --main Deku.Example.Docs.Static.Build --to examples/docs/Static/make.mjs --platform node
       - name: Build hydration
         run: npx spago -x examples.dhall bundle-module --main Deku.Example.Docs.Static.Live --to examples/docs/Static/bundle.js --minify
-      - name: Make index.html for github
+      - name: Make index.html for netlify
         run: |
           cd examples/docs/Static
           mkdir -p intro
@@ -70,7 +70,7 @@ jobs:
           cd ../../..
       - name: deploy to netlify
         run: NETLIFY_SITE_ID=${{ secrets.NETLIFY_SITE_ID }} NETLIFY_AUTH_TOKEN=${{ secrets.NETLIFY_AUTH_TOKEN }} netlify deploy --dir=./examples/docs/Static --prod
-      - name: Make index.html for netlify
+      - name: Make index.html for github
         run: |
           cd examples/docs/Static
           mkdir -p intro
