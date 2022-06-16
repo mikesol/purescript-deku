@@ -74,7 +74,7 @@ export const makeText_ = (tryHydration) => (maybe) => (a) => (state) => () => {
 		state.units[ptr] = {
 			// if we've done ssr for a text node, it will be a span,
 			// so we want to get the child node
-			main: dom.childNodes[0],
+			main: dom.childNodes[i],
 			parent: a.parent,
 			scope: a.scope,
 		};
