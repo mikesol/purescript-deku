@@ -1,9 +1,12 @@
 const connectXToY_ = (maybe, x, y$, state) => {
-	//console.log(x, y$);
 	maybe((y) => state.units[y].main.appendChild(state.units[x].main))(y$);
 };
-export const setHydrating = (state) => () => { state.hydrating = true; }
-export const unSetHydrating = (state) => () => { state.hydrating = false; }
+export const setHydrating = (state) => () => {
+	state.hydrating = true;
+};
+export const unSetHydrating = (state) => () => {
+	state.hydrating = false;
+};
 export const attributeParent_ = (a) => (state) => () => {
 	// only attribute if it is not attributed already
 	if (!state.units[a.id].main.parentNode) {
@@ -28,7 +31,6 @@ export const makeElement_ = (tryHydration) => (a) => (state) => () => {
 			.querySelectorAll("[data-deku-ssr-" + ptr + "]")
 			.item(0))
 	) {
-		//console.log('hydrating', ptr);
 		state.units[ptr] = {
 			listeners: {},
 			parent: a.parent,
@@ -36,7 +38,6 @@ export const makeElement_ = (tryHydration) => (a) => (state) => () => {
 			main: dom,
 		};
 	} else {
-		//console.log("doing ssr for", ptr);
 		state.units[ptr] = {
 			listeners: {},
 			parent: a.parent,
@@ -65,10 +66,20 @@ export const makeText_ = (tryHydration) => (maybe) => (a) => (state) => () => {
 			.item(0))
 	) {
 		var i = 0;
-		for (var i = 0; i < dom.childNodes.length; i++) {
-			if (dom.childNodes[i].nodeType === 8 && dom.childNodes[i].nodeValue === ptr) {
-				i = i - 1;
-				break;
+		// if the length is one, that means that there is only a comment because
+		// the text is empty
+		// so we need to add a text node
+		if (dom.childNodes.length === 1) {
+			dom.prepend(document.createTextNode(""));
+		} else {
+			for (var i = 0; i < dom.childNodes.length; i++) {
+				if (
+					dom.childNodes[i].nodeType === 8 &&
+					dom.childNodes[i].nodeValue === ptr
+				) {
+					i = i - 1;
+					break;
+				}
 			}
 		}
 		state.units[ptr] = {
