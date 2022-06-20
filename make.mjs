@@ -5089,13 +5089,13 @@ var unsafeText = function(v) {
 var unsafeSetText = function(v) {
   return function(id2) {
     return function(txt) {
-      return map(functorEvent)(function($84) {
+      return map(functorEvent)(function($83) {
         return v.setText(function(v1) {
           return {
             id: id2,
             text: v1
           };
-        }($84));
+        }($83));
       })(txt);
     };
   };
@@ -5103,7 +5103,7 @@ var unsafeSetText = function(v) {
 var unsafeSetAttribute = function(v) {
   return function(id2) {
     return function(atts) {
-      return map(functorEvent)(function($85) {
+      return map(functorEvent)(function($84) {
         return function(v1) {
           if (v1.value instanceof Prop$prime) {
             return v.setProp({
@@ -5122,7 +5122,7 @@ var unsafeSetAttribute = function(v) {
           }
           ;
           throw new Error("Failed pattern match at Deku.Control (line 75, column 26 - line 77, column 45): " + [v1.value.constructor.name]);
-        }(unsafeUnAttribute($85));
+        }(unsafeUnAttribute($84));
       })(atts);
     };
   };
@@ -5160,7 +5160,7 @@ var text_ = function(dictMonad) {
     return text(dictMonad)(bang2(dictMonad.Applicative0())(txt));
   };
 };
-var portalFlatten = function(dictNewtype) {
+var portalFlatten = function() {
   return {
     doLogic: function(pos) {
       return function(v) {
@@ -5173,11 +5173,11 @@ var portalFlatten = function(dictNewtype) {
       };
     },
     ids: function() {
-      var $86 = unwrap(dictNewtype);
-      return function($87) {
+      var $85 = unwrap();
+      return function($86) {
         return function(v) {
           return v.ids;
-        }($86($87));
+        }($85($86));
       };
     }(),
     disconnectElement: function(v) {
@@ -5245,9 +5245,9 @@ var portal = function() {
           fromEltO2: coerce(),
           toElt: coerce(),
           wrapElt: function() {
-            var $92 = elementify(dictKorok)("div")(empty(plusEvent(dictKorok.MonadST5().Monad0().Applicative0())));
-            return function($93) {
-              return Element$prime.create($92($93));
+            var $91 = elementify(dictKorok)("div")(empty(plusEvent(dictKorok.MonadST5().Monad0().Applicative0())));
+            return function($92) {
+              return Element$prime.create($91($92));
             };
           }(),
           giveNewParent: function(q) {
@@ -5258,11 +5258,11 @@ var portal = function() {
             };
           },
           deleteFromCache: function() {
-            var $94 = unwrap();
-            return function($95) {
+            var $93 = unwrap();
+            return function($94) {
               return function(v) {
                 return v.deleteFromCache;
-              }($94($95));
+              }($93($94));
             };
           }()
         })(a2)(lcmap(profunctorFn)(map(functorVect)(function(v) {
