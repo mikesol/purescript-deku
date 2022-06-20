@@ -20,7 +20,7 @@ import Control.Plus (empty)
 import Data.FastVect.FastVect (Vect)
 import Data.Foldable (oneOf)
 import Data.Maybe (Maybe(..), maybe)
-import Data.Newtype (unwrap)
+import Data.Newtype (class Newtype, unwrap)
 import Data.Profunctor (lcmap)
 import Deku.Attribute (Attribute, AttributeValue(..), unsafeUnAttribute)
 import Deku.Core (class Korok, DOMInterpret(..), Domable, Node(..))
@@ -133,6 +133,27 @@ globalPortal v c = Bolson.globalPortalComplexComplex
   v
   (lcmap (map (_ $ unit)) c)
 
+portalFlatten
+  :: forall m151 payload152 b159 d161 t165 m168 t174 t176 m183 lock184 lock188
+       payload189
+   . Newtype b159
+       { ids :: d161
+       | t165
+       }
+  => { disconnectElement ::
+         DOMInterpret m168 t174
+         -> { id :: String
+            , parent :: String
+            , scope :: Scope
+            | t176
+            }
+         -> t174
+     , doLogic :: Int -> DOMInterpret m151 payload152 -> String -> payload152
+     , ids :: b159 -> d161
+     , toElt ::
+         Node m183 lock184 payload189
+         -> Element (DOMInterpret m183 payload189) m183 lock188 payload189
+     }
 portalFlatten =
   { doLogic: \pos (DOMInterpret { sendToPos }) id -> sendToPos { id, pos }
   , ids: unwrap >>> _.ids
