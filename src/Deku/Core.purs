@@ -48,7 +48,7 @@ import FRP.Event.VBus (class VBus, V, vbus)
 import Foreign.Object (Object)
 import Heterogeneous.Mapping (class MapRecordWithIndex, ConstMapping)
 import Prim.RowList (class RowToList)
-import Type.Proxy (Proxy)
+import Type.Proxy (Proxy(..))
 import Web.DOM as Web.DOM
 
 class
@@ -94,7 +94,7 @@ vbussed
   => Korok s m
   => RowToList pushi pushR
   => MapRecordWithIndex pushR
-       (ConstMapping AlwaysEffect)
+       (ConstMapping (AlwaysEffect m))
        pushi
        pusho
   => VBus rbus pushi event u
@@ -102,7 +102,7 @@ vbussed
   -> ({ | pusho } -> { | event } -> Bolson.Entity logic obj m lock)
   -> Bolson.Entity logic obj m lock
 vbussed px f = Bolson.EventfulElement'
-  (Bolson.EventfulElement (vbus px (lcmap halways f)))
+  (Bolson.EventfulElement (vbus px (lcmap (halways (Proxy :: Proxy m)) f)))
 
 newtype Node m (lock :: Type) payload = Node
   (Bolson.PSR m -> DOMInterpret m payload -> AnEvent m payload)
