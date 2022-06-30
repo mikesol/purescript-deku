@@ -21,7 +21,6 @@ in      conf
               , "monoid-extras"
               , "integers"
               , "random"
-              , "behaviors"
               , "aff"
               , "argonaut-core"
               , "web-uievents"
