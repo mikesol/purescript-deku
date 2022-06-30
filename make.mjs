@@ -3069,21 +3069,28 @@ var constMapping = function(dictMapping) {
 
 // output/Bolson.Always/index.js
 var AlwaysEffect = /* @__PURE__ */ function() {
-  function AlwaysEffect2() {
+  function AlwaysEffect2(value0) {
+    this.value0 = value0;
   }
   ;
-  AlwaysEffect2.value = new AlwaysEffect2();
+  AlwaysEffect2.create = function(value0) {
+    return new AlwaysEffect2(value0);
+  };
   return AlwaysEffect2;
 }();
 var mappingAlwaysEffectFuncti = function(dictAlways) {
-  return {
-    mapping: function(v) {
-      return map(functorFn)(always(dictAlways));
-    }
+  return function(dictTypeEquals) {
+    return {
+      mapping: function(v) {
+        return map(functorFn)(always(dictAlways));
+      }
+    };
   };
 };
 var halways = function(dictHMap) {
-  return hmap(dictHMap)(AlwaysEffect.value);
+  return function(p2) {
+    return hmap(dictHMap)(new AlwaysEffect(p2));
+  };
 };
 
 // output/Control.Monad.ST.Global/index.js
@@ -4152,8 +4159,8 @@ var sampleOn2 = function(dictMonadST) {
               return liftST(dictMonadST)($$void(functorST)(write2(new Just(a2))(latest)));
             }))(function(c1) {
               return bind(dictMonadST.Monad0().Bind1())(v1(function(f) {
-                return bind(dictMonadST.Monad0().Bind1())(liftST(dictMonadST)(read2(latest)))(traverse_(dictApplicative)(foldableMaybe)(function($91) {
-                  return k(f($91));
+                return bind(dictMonadST.Monad0().Bind1())(liftST(dictMonadST)(read2(latest)))(traverse_(dictApplicative)(foldableMaybe)(function($108) {
+                  return k(f($108));
                 }));
               }))(function(c2) {
                 return pure(dictApplicative)(applySecond(dictApplicative.Apply0())(c1)(c2));
@@ -4189,8 +4196,8 @@ var functorEvent = {
   map: function(f) {
     return function(v) {
       return function(k) {
-        return v(function($92) {
-          return k(f($92));
+        return v(function($109) {
+          return k(f($109));
         });
       };
     };
@@ -4225,7 +4232,7 @@ var filter5 = function(dictApplicative) {
             return pure(dictApplicative)(unit);
           }
           ;
-          throw new Error("Failed pattern match at FRP.Event (line 126, column 13 - line 128, column 27): " + [v1.constructor.name]);
+          throw new Error("Failed pattern match at FRP.Event (line 131, column 13 - line 133, column 27): " + [v1.constructor.name]);
         });
       };
     };
@@ -4243,7 +4250,7 @@ var filter$prime = function(dictApplicative) {
         return Nothing.value;
       }
       ;
-      throw new Error("Failed pattern match at FRP.Event (line 84, column 13 - line 86, column 25): " + [v.constructor.name]);
+      throw new Error("Failed pattern match at FRP.Event (line 89, column 13 - line 91, column 25): " + [v.constructor.name]);
     });
   };
 };
@@ -4312,7 +4319,7 @@ var compactableEvent = function(dictApplicative) {
             return Nothing.value;
           }
           ;
-          throw new Error("Failed pattern match at FRP.Event (line 67, column 13 - line 69, column 33): " + [v.constructor.name]);
+          throw new Error("Failed pattern match at FRP.Event (line 72, column 13 - line 74, column 33): " + [v.constructor.name]);
         })(xs),
         right: filter5(dictApplicative)(function(v) {
           if (v instanceof Right) {
@@ -4323,7 +4330,7 @@ var compactableEvent = function(dictApplicative) {
             return Nothing.value;
           }
           ;
-          throw new Error("Failed pattern match at FRP.Event (line 74, column 13 - line 76, column 32): " + [v.constructor.name]);
+          throw new Error("Failed pattern match at FRP.Event (line 79, column 13 - line 81, column 32): " + [v.constructor.name]);
         })(xs)
       };
     }
@@ -4338,9 +4345,9 @@ var filterableEvent = function(dictApplicative) {
         return {
           yes: filter$prime(dictApplicative)(p2)(xs),
           no: filter$prime(dictApplicative)(function() {
-            var $93 = not(heytingAlgebraBoolean);
-            return function($94) {
-              return $93(p2($94));
+            var $110 = not(heytingAlgebraBoolean);
+            return function($111) {
+              return $110(p2($111));
             };
           }())(xs)
         };
@@ -4350,13 +4357,13 @@ var filterableEvent = function(dictApplicative) {
       return function(xs) {
         return {
           left: filterMap(filterableEvent(dictApplicative))(function() {
-            var $95 = either(Just.create)($$const(Nothing.value));
-            return function($96) {
-              return $95(f($96));
+            var $112 = either(Just.create)($$const(Nothing.value));
+            return function($113) {
+              return $112(f($113));
             };
           }())(xs),
-          right: filterMap(filterableEvent(dictApplicative))(function($97) {
-            return hush(f($97));
+          right: filterMap(filterableEvent(dictApplicative))(function($114) {
+            return hush(f($114));
           })(xs)
         };
       };
@@ -4457,16 +4464,16 @@ function unsafePE(u) {
           const rn = `${Math.random()}`;
           s2[rn] = {};
           p3[ok[i2]] = (v) => () => {
-            const rnk = Object.keys(s2[rn]);
+            const rnk = Object.values(s2[rn]);
             for (var j = 0; j < rnk.length; j++) {
-              s2[rn][rnk[j]](v)();
+              rnk[j](v)();
             }
           };
           e2[ok[i2]] = (f) => () => {
             const k = `${Math.random()}`;
             s2[rn][k] = f;
             return () => {
-              delete s2[rn][k];
+              s2[rn] && s2[rn][k] && delete s2[rn][k];
             };
           };
         }
@@ -4692,7 +4699,7 @@ var vbussed = function() {
         return function(dictVBus) {
           return function(px11) {
             return function(f) {
-              return new EventfulElement$prime(vbus()(dictKorok.MonadST5())(dictVBus)(px11)(lcmap(profunctorFn)(halways(hmapRecord()(dictMapRecordWithIndex)))(f)));
+              return new EventfulElement$prime(vbus()(dictKorok.MonadST5())(dictVBus)(px11)(lcmap(profunctorFn)(halways(hmapRecord()(dictMapRecordWithIndex))($$Proxy.value))(f)));
             };
           };
         };
@@ -4741,16 +4748,21 @@ function readAr(a2) {
   };
 }
 
+// output/Data.FastVect.FastVect/foreign.js
+var indexImpl2 = (i2) => (v) => v[i2];
+
 // output/Data.Reflectable/index.js
 var reflectType = function(dict) {
   return dict.reflectType;
 };
 
-// output/Data.FastVect.FastVect/index.js
-var functorVect = functorArray;
+// output/Data.FastVect.Common/index.js
 var toInt = function(dictReflectable) {
   return reflectType(dictReflectable);
 };
+
+// output/Data.FastVect.FastVect/index.js
+var functorVect = functorArray;
 var toArray2 = function() {
   return function(v) {
     return v;
@@ -4762,10 +4774,9 @@ var index2 = function() {
       return function() {
         return function() {
           return function(dictReflectable) {
-            return function(proxy) {
-              return function(v) {
-                return v[toInt(dictReflectable)(proxy)];
-              };
+            var $70 = toInt(dictReflectable);
+            return function($71) {
+              return indexImpl2($70($71));
             };
           };
         };
@@ -8364,11 +8375,11 @@ var events = function(options2) {
         reflectSymbol: function() {
           return "buttonClicked";
         }
-      })(constMapping(mappingAlwaysEffectFuncti(dictKorok.Always2())))(mapRecordWithIndexCons({
+      })(constMapping(mappingAlwaysEffectFuncti(dictKorok.Always2())(refl)))(mapRecordWithIndexCons({
         reflectSymbol: function() {
           return "sliderMoved";
         }
-      })(constMapping(mappingAlwaysEffectFuncti(dictKorok.Always2())))(mapRecordWithIndexNil)()())()())(vbusCons2({
+      })(constMapping(mappingAlwaysEffectFuncti(dictKorok.Always2())(refl)))(mapRecordWithIndexNil)()())()())(vbusCons2({
         reflectSymbol: function() {
           return "buttonClicked";
         }
@@ -9787,11 +9798,11 @@ var app = function(dictKorok) {
     reflectSymbol: function() {
       return "buttonClicked";
     }
-  })(constMapping(mappingAlwaysEffectFuncti(dictKorok.Always2())))(mapRecordWithIndexCons({
+  })(constMapping(mappingAlwaysEffectFuncti(dictKorok.Always2())(refl)))(mapRecordWithIndexCons({
     reflectSymbol: function() {
       return "sliderMoved";
     }
-  })(constMapping(mappingAlwaysEffectFuncti(dictKorok.Always2())))(mapRecordWithIndexNil)()())()())(vbusCons2({
+  })(constMapping(mappingAlwaysEffectFuncti(dictKorok.Always2())(refl)))(mapRecordWithIndexNil)()())()())(vbusCons2({
     reflectSymbol: function() {
       return "buttonClicked";
     }
