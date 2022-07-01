@@ -30,7 +30,7 @@ module Deku.Core
 import Prelude
 
 import Bolson.Always (AlwaysEffect, halways)
-import Bolson.Core (Scope, fixed, dyn, envy)
+import Bolson.Core (Scope, fixed, envy)
 import Bolson.Core as Bolson
 import Control.Monad.ST (ST)
 import Control.Monad.ST.Class (class MonadST)
@@ -128,6 +128,7 @@ type MakeElement =
   { id :: String
   , scope :: Scope
   , parent :: Maybe String
+  , dyn :: Maybe String
   , tag :: String
   }
 
@@ -139,6 +140,7 @@ type AttributeParent =
 type GiveNewParent =
   { id :: String
   , parent :: String
+  , dyn :: Maybe String
   , scope :: Scope
   }
 
@@ -152,6 +154,7 @@ type DisconnectElement =
 type MakeText =
   { id :: String
   , scope :: Scope
+  , dyn :: Maybe String
   , parent :: Maybe String
   }
 

@@ -10,7 +10,7 @@ import Data.Tuple (Tuple(..))
 import Deku.Attribute ((:=))
 import Deku.Control (portal, switcher)
 import Deku.Control as C
-import Deku.Core (Domable, dyn, insert, remove, sendToTop)
+import Deku.Core (Domable, insert, remove, sendToTop)
 import Deku.DOM as D
 import Deku.Interpret (FFIDOMSnapshot)
 import Deku.Toplevel (runInBodyA)
@@ -66,7 +66,7 @@ scene =
           )
       ]
   , D.div_
-      [ dyn $ map
+      [ C.dyn $ map
           ( \rgb ->
               bang
                 ( insert $ D.div

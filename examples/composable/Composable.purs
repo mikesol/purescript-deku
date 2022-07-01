@@ -1,4 +1,4 @@
-module Deku.Examples.Docs.Examples.Events3 where
+module Deku.Example.Composable where
 
 import Prelude
 
@@ -10,9 +10,9 @@ import Data.Profunctor (lcmap)
 import Data.Tuple.Nested ((/\))
 import Deku.Attribute (cb, (:=))
 import Deku.Control (text_, dyn)
-import Deku.Core (insert, sendToTop, remove)
+import Deku.Core (bussed, fixed, insert, remove, sendToTop)
 import Deku.DOM as D
-import Deku.Toplevel (runInBody1)
+import Deku.Toplevel (runInBody)
 import Effect (Effect)
 import FRP.Event (bang, bus, keepLatest, mapAccum)
 import Web.Event.Event (target)
@@ -27,34 +27,35 @@ data MainUIAction
 data TodoAction = Prioritize | Delete
 
 main :: Effect Unit
-main = runInBody1
-  ( bus \push -> lcmap (bang UIShown <|> _) \event -> do
+main = runInBody
+  ( fixed
       let
-        top =
-          [ D.input
-              ( oneOfMap bang
-                  [ D.OnInput := cb \e -> for_
-                      ( target e
-                          >>= fromEventTarget
-                      )
-                      ( value
-                          >=> push <<< ChangeText
-                      )
-                  , D.OnKeyup := cb
-                      \e -> for_ (fromEvent e) \evt -> do
-                        when (code evt == "Enter") $ do
-                          push AddTodo
-                  ]
-              )
-              []
-          , D.button
-              (bang $ D.OnClick := push AddTodo)
-              [ text_ "Add" ]
-          ]
-      D.div_
-        [ D.div_ top
-        , D.div_
-            [ dyn $
+        mvc = bussed \push -> lcmap (bang UIShown <|> _) \event -> do
+          let
+            top =
+              [ D.input
+                  ( oneOfMap bang
+                      [ D.OnInput := cb \e -> for_
+                          ( target e
+                              >>= fromEventTarget
+                          )
+                          ( value
+                              >=> push <<< ChangeText
+                          )
+                      , D.OnKeyup := cb
+                          \e -> for_ (fromEvent e) \evt -> do
+                            when (code evt == "Enter") $ do
+                              push AddTodo
+                      ]
+                  )
+                  []
+              , D.button
+                  (bang $ D.OnClick := push AddTodo)
+                  [ text_ "Add" ]
+              ]
+          fixed
+            [ D.div_ top
+            , dyn $
                 map
                   ( \txt -> keepLatest $ bus \p' e' ->
                       ( bang $ insert $ D.div_
@@ -87,5 +88,6 @@ main = runInBody1
                       )
                   )
             ]
-        ]
+      in
+        [ mvc, mvc, mvc, mvc, mvc ]
   )

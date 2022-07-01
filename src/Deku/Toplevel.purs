@@ -99,6 +99,7 @@ hydrate' children = do
     ( __internalDekuFlatten
         { parent: Just "deku-root"
         , scope: Local "rootScope"
+        , dyn: Nothing
         , raiseId: \_ -> pure unit
         }
         di
@@ -151,6 +152,7 @@ runSSR' topTag (Template { head, tail }) children =
                 { parent: Just "deku-root"
                 , scope: Local "rootScope"
                 , raiseId: \_ -> pure unit
+                , dyn: Nothing
                 }
                 di
                 (unsafeCoerce children)

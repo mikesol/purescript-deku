@@ -8,8 +8,8 @@ import Data.FastVect.FastVect as V
 import Data.Foldable (oneOfMap)
 import Data.Profunctor (lcmap)
 import Deku.Attribute (cb, (:=))
-import Deku.Control (portal, switcher, text_)
-import Deku.Core (dyn, insert, Nut, bus)
+import Deku.Control (dyn, portal, switcher, text_)
+import Deku.Core (insert, Nut, bus)
 import Deku.DOM as D
 import Deku.Example.Docs.Types (Page(..), PageOptions)
 import Deku.Example.Docs.Util (scrollToTop)

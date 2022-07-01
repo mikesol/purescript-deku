@@ -9,21 +9,18 @@ export const unSetHydrating = (state) => () => {
 };
 const insertAfter = (newNode, existingNode) => {
 	existingNode.parentNode.insertBefore(newNode, existingNode.nextSibling);
-}
+};
 export const attributeParent_ = (a) => (state) => () => {
 	// only attribute if it is not attributed already
 	if (!state.units[a.id].main.parentNode) {
 		// if the parent has an input tagged with this scope, then we insert it
 		// before this element
-		var scoped;
-		// if it has gone through a portal, we use this.
-		const scope = state.units[a.id].containingScope || state.units[a.id].scope;
-		if (
-			scope &&
-			(scoped = state.units[a.parent].main.querySelector(
-				`[data-deku-scope=${state.units[a.id].scope}-tail]`
-			))
-		) {
+		var dyned;
+		const dyn = state.units[a.id].dyn.value0;
+		const selector = dyn
+			? `[data-deku-dyn="${dyn}-tail"]`
+			: undefined;
+		if (dyn && (dyned = state.units[a.parent].main.querySelector(selector))) {
 			insertAfter(state.units[a.id].main, scoped);
 		} else {
 			state.units[a.parent].main.appendChild(state.units[a.id].main);
@@ -51,6 +48,7 @@ export const makeElement_ = (tryHydration) => (a) => (state) => () => {
 		state.units[ptr] = {
 			listeners: {},
 			parent: a.parent,
+			dyn: a.dyn,
 			scope: a.scope,
 			main: dom,
 		};
@@ -58,6 +56,7 @@ export const makeElement_ = (tryHydration) => (a) => (state) => () => {
 		state.units[ptr] = {
 			listeners: {},
 			parent: a.parent,
+			dyn: a.dyn,
 			scope: a.scope,
 			main: document.createElement(a.tag),
 		};

@@ -4441,6 +4441,7 @@ instance pursxToElementConsInsert ::
           __internalDekuFlatten
             { parent: Just (reflectType pxk <> pxScope)
             , scope: info.scope
+            , dyn: Nothing
             , raiseId: \_ -> pure unit
             }
             di
@@ -4576,4 +4577,3 @@ __internalDekuFlatten = Bolson.flatten
   }
 
 infixr 5 makePursx as ~~
-

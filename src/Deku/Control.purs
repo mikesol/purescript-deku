@@ -39,7 +39,7 @@ type Neg1 = -1
 unsafeElement
   :: forall m payload
    . DOMInterpret m payload
-  -> { id :: String, parent :: Maybe String, scope :: Scope, tag :: String }
+  -> { id :: String, parent :: Maybe String, scope :: Scope, tag :: String, dyn :: Maybe String }
   -> payload
 unsafeElement (DOMInterpret { makeElement }) = makeElement
 
@@ -53,7 +53,7 @@ unsafeConnect (DOMInterpret { attributeParent }) = attributeParent
 unsafeText
   :: forall m payload
    . DOMInterpret m payload
-  -> { id :: String, parent :: Maybe String, scope :: Scope }
+  -> { id :: String, parent :: Maybe String, scope :: Scope, dyn :: Maybe String }
   -> payload
 unsafeText (DOMInterpret { makeText }) = makeText
 
@@ -96,21 +96,21 @@ dyn e = BC.dyn (head <|> tail <|> e)
         ( Insert $ Element'
             ( Node \psr di ->
                 let
-                  (Node nd) = elementify "input"
-                    ( ( bang $ (unsafeCoerce :: Attribute' -> Attribute _)
-                          { key: "data-deku-scope"
-                          , value: Prop' $
-                              ( case psr.scope of
-                                  Local s -> s
-                                  Global -> "@global@"
-                              ) <> "-" <> ht
-                          }
-                      ) <|>
-                        ( bang $ (unsafeCoerce :: Attribute' -> Attribute _)
-                            { key: "type"
-                            , value: Prop' "hidden"
-                            }
-                        )
+                  (Node nd) = elementify "deku-beacon"
+                    ( ( case psr.dyn of
+                          Just s -> bang $
+                            (unsafeCoerce :: Attribute' -> Attribute _)
+                              { key: "data-deku-dyn"
+                              , value: Prop' $ s <> "-" <> ht
+                              }
+                          Nothing -> empty
+                      )
+                    -- <|>
+                    --   ( bang $ (unsafeCoerce :: Attribute' -> Attribute _)
+                    --       { key: "type"
+                    --       , value: Prop' "hidden"
+                    --       }
+                    --   )
                     )
                     (BC.fixed [])
                 in
@@ -128,13 +128,13 @@ elementify
   -> Node m lock payload
 elementify tag atts children = Node go
   where
-  go { parent, scope, raiseId } di@(DOMInterpret { ids, deleteFromCache }) =
+  go { parent, scope, raiseId, dyn: d } di@(DOMInterpret { ids, deleteFromCache }) =
     makeEvent \k -> do
       me <- ids
       raiseId me
       map ((*>) (k (deleteFromCache { id: me }))) $ subscribe
         ( ( oneOf
-              ( [ bang (unsafeElement di { id: me, parent, scope, tag })
+              ( [ bang (unsafeElement di { id: me, parent, scope, tag, dyn: d })
                 , unsafeSetAttribute di me atts
                 ] <> maybe []
                   ( \p ->
@@ -147,7 +147,7 @@ elementify tag atts children = Node go
               )
           )
             <|> __internalDekuFlatten
-              { parent: Just me, scope, raiseId: \_ -> pure unit }
+              { parent: Just me, dyn: Nothing, scope, raiseId: \_ -> pure unit }
               di
               children
         )
@@ -232,13 +232,13 @@ text
   -> Domable m lock payload
 text txt = Element' $ Node go
   where
-  go { parent, scope, raiseId } di@(DOMInterpret { ids, deleteFromCache }) =
+  go { parent, scope, dyn, raiseId } di@(DOMInterpret { ids, deleteFromCache }) =
     makeEvent \k -> do
       me <- ids
       raiseId me
       map ((*>) (k (deleteFromCache { id: me }))) $ subscribe
         ( oneOf
-            [ bang (unsafeText di { id: me, parent, scope })
+            [ bang (unsafeText di { id: me, parent, scope, dyn })
             , unsafeSetText di me txt
             ]
         )
@@ -260,6 +260,7 @@ deku root children di@(DOMInterpret { ids, makeRoot }) = makeEvent \k -> do
     ( bang (makeRoot { id: me, root })
         <|> __internalDekuFlatten
           { parent: Just me
+          , dyn: Nothing
           , scope: Local "rootScope"
           , raiseId: \_ -> pure unit
           }

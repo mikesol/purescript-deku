@@ -8,8 +8,8 @@ import Data.FastVect.FastVect as V
 import Data.Foldable (oneOfMap)
 import Data.Profunctor (lcmap)
 import Deku.Attribute (cb, (:=))
-import Deku.Control (portal, switcher, text_)
-import Deku.Core (dyn, insert)
+import Deku.Control (dyn, portal, switcher, text_)
+import Deku.Core (insert)
 import Deku.DOM as D
 import Deku.Toplevel (runInBody)
 import Effect (Effect)
