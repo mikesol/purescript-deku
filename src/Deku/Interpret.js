@@ -17,11 +17,9 @@ export const attributeParent_ = (a) => (state) => () => {
 		// before this element
 		var dyned;
 		const dyn = state.units[a.id].dyn.value0;
-		const selector = dyn
-			? `[data-deku-dyn="${dyn}-tail"]`
-			: undefined;
+		const selector = dyn ? `[data-deku-dyn="${dyn}-tail"]` : undefined;
 		if (dyn && (dyned = state.units[a.parent].main.querySelector(selector))) {
-			insertAfter(state.units[a.id].main, scoped);
+			state.units[a.parent].main.insertBefore(state.units[a.id].main, dyned);
 		} else {
 			state.units[a.parent].main.appendChild(state.units[a.id].main);
 		}
@@ -303,6 +301,7 @@ export const giveNewParent_ = (a) => (state) => () => {
 	var ptr = a.id;
 	var parent = a.parent;
 	state.units[ptr].containingScope = a.scope;
+	state.units[ptr].dyn = a.dyn;
 	state.units[parent].main.prepend(state.units[ptr].main);
 };
 
@@ -329,12 +328,18 @@ export const sendToPos_ = (a) => (state) => () => {
 	var ptr = a.id;
 	var pos = a.pos;
 	var parent = state.units[ptr].main.parentNode;
-	parent.insertBefore(
+	const dyn = state.units[a.id].dyn.value0;
+	const selectorH = `[data-deku-dyn="${dyn}-head"]`;
+	let dynedH = parent.querySelector(selectorH);
+	const selectorT = `[data-deku-dyn="${dyn}-tail"]`;
+	const dynedT = parent.querySelector(selectorT);
+	let i = 0;
+	while (dynedH !== dynedT && i < pos) {
+		dynedH = dynedH.nextSibling;
+		i++;
+	}
+	insertAfter(
 		state.units[ptr].main,
-		parent.children.length <= pos
-			? parent.children[parent.children.length - 1]
-			: pos < 0
-			? parent.children[0]
-			: parent.children[pos]
+		dynedH
 	);
 };
