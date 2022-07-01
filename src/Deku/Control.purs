@@ -87,34 +87,36 @@ dyn
    . Korok s m
   => AnEvent m (AnEvent m (Child logic (Node m lock payload) m lock))
   -> Entity logic (Node m lock payload) m lock
-dyn e =
-  BC.dyn
+dyn e = BC.dyn (head <|> tail <|> e)
+  where
+  head = headTail "head"
+  tail = headTail "tail"
+  headTail ht = bang
     ( bang
-        ( bang
-            ( Insert $ Element'
-                ( Node \psr di ->
-                    let
-                      (Node nd) = elementify "input"
-                        ( ( bang $ (unsafeCoerce :: Attribute' -> Attribute _)
-                              { key: "data-deku-scope"
-                              , value: Prop' $ case psr.scope of
+        ( Insert $ Element'
+            ( Node \psr di ->
+                let
+                  (Node nd) = elementify "input"
+                    ( ( bang $ (unsafeCoerce :: Attribute' -> Attribute _)
+                          { key: "data-deku-scope"
+                          , value: Prop' $
+                              ( case psr.scope of
                                   Local s -> s
                                   Global -> "@global@"
-                              }
-                          ) <|>
-                            ( bang $ (unsafeCoerce :: Attribute' -> Attribute _)
-                                { key: "type"
-                                , value: Prop' "hidden"
-                                }
-                            )
+                              ) <> "-" <> ht
+                          }
+                      ) <|>
+                        ( bang $ (unsafeCoerce :: Attribute' -> Attribute _)
+                            { key: "type"
+                            , value: Prop' "hidden"
+                            }
                         )
-                        (BC.fixed [])
-                    in
-                      nd psr di
-
-                )
+                    )
+                    (BC.fixed [])
+                in
+                  nd psr di
             )
-        ) <|> e
+        )
     )
 
 elementify

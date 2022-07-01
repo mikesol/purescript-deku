@@ -21,7 +21,7 @@ export const attributeParent_ = (a) => (state) => () => {
 		if (
 			scope &&
 			(scoped = state.units[a.parent].main.querySelector(
-				`[data-deku-scope=${state.units[a.id].scope}-end]`
+				`[data-deku-scope=${state.units[a.id].scope}-tail]`
 			))
 		) {
 			insertAfter(state.units[a.id].main, scoped);
