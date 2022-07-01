@@ -1,5 +1,6 @@
 module Deku.Control
   ( elementify
+  , dyn
   , text
   , text_
   , deku
@@ -14,7 +15,8 @@ import Prelude
 
 import Bolson.Control (switcher)
 import Bolson.Control as Bolson
-import Bolson.Core (Element(..), Entity(..), EventfulElement(..), FixedChildren(..), PSR, Scope(..))
+import Bolson.Core (Child(..), Element(..), Entity(..), EventfulElement(..), FixedChildren(..), PSR, Scope(..))
+import Bolson.Core as BC
 import Control.Alt ((<|>))
 import Control.Plus (empty)
 import Data.FastVect.FastVect (Vect)
@@ -22,7 +24,7 @@ import Data.Foldable (oneOf)
 import Data.Maybe (Maybe(..), maybe)
 import Data.Newtype (class Newtype, unwrap)
 import Data.Profunctor (lcmap)
-import Deku.Attribute (Attribute, AttributeValue(..), unsafeUnAttribute)
+import Deku.Attribute (Attribute, AttributeValue(..), Attribute', unsafeUnAttribute)
 import Deku.Core (class Korok, DOMInterpret(..), Domable, Node(..))
 import FRP.Event (AnEvent, bang, makeEvent, subscribe)
 import Prim.Int (class Compare)
@@ -79,6 +81,41 @@ unsafeSetAttribute (DOMInterpret { setProp, setCb }) id atts = map
       unsafeUnAttribute
   )
   (atts)
+
+dyn
+  :: forall logic s m lock payload
+   . Korok s m
+  => AnEvent m (AnEvent m (Child logic (Node m lock payload) m lock))
+  -> Entity logic (Node m lock payload) m lock
+dyn e =
+  BC.dyn
+    ( bang
+        ( bang
+            ( Insert $ Element'
+                ( Node \psr di ->
+                    let
+                      (Node nd) = elementify "input"
+                        ( ( bang $ (unsafeCoerce :: Attribute' -> Attribute _)
+                              { key: "data-deku-scope"
+                              , value: Prop' $ case psr.scope of
+                                  Local s -> s
+                                  Global -> "@global@"
+                              }
+                          ) <|>
+                            ( bang $ (unsafeCoerce :: Attribute' -> Attribute _)
+                                { key: "type"
+                                , value: Prop' "hidden"
+                                }
+                            )
+                        )
+                        (BC.fixed [])
+                    in
+                      nd psr di
+
+                )
+            )
+        ) <|> e
+    )
 
 elementify
   :: forall s m element lock payload

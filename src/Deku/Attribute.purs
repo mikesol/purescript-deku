@@ -1,6 +1,7 @@
 module Deku.Attribute
   ( AttributeValue(..)
   , Attribute
+  , Attribute'
   , class Attr
   , attr
   , (:=)
@@ -41,10 +42,10 @@ cb' :: Cb -> AttributeValue
 cb' = Cb'
 
 data AttributeValue = Prop' String | Cb' Cb
-newtype Attribute (e :: Type) = Attribute
-  { key :: String
+type Attribute' = { key :: String
   , value :: AttributeValue
   }
+newtype Attribute (e :: Type) = Attribute Attribute'
 
 unsafeUnAttribute
   :: forall e. Attribute e -> { key :: String, value :: AttributeValue }
