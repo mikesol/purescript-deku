@@ -1,12 +1,15 @@
 module Deku.Core
   ( DOMInterpret(..)
+  , Seedling
   , MakeRoot
   , MakeElement
   , AttributeParent
   , MakeText
   , MakePursx
+  , MakeDyn
+  , AddChild
+  , RemoveChild
   , GiveNewParent
-  , DisconnectElement
   , DeleteFromCache
   , SendToPos
   , SetProp
@@ -14,9 +17,6 @@ module Deku.Core
   , SetText
   , Nut
   , ANut(..)
-  , bus
-  , bussed
-  , vbussed
   , remove
   , sendToTop
   , sendToPos
@@ -28,26 +28,20 @@ module Deku.Core
 
 import Prelude
 
-import Bolson.Always (AlwaysEffect, halways)
 import Bolson.Core (Scope)
 import Bolson.Core as Bolson
 import Control.Monad.ST (ST)
 import Control.Monad.ST.Class (class MonadST)
 import Control.Monad.ST.Global (Global)
 import Data.Maybe (Maybe)
-import Data.Monoid.Always (class Always, always)
 import Data.Monoid.Endo (Endo)
 import Data.Newtype (class Newtype)
-import Data.Profunctor (lcmap)
 import Deku.Attribute (Cb)
 import Effect (Effect)
 import FRP.Event (AnEvent)
-import FRP.Event as FRP.Event
-import FRP.Event.VBus (class VBus, V, vbus)
+import FRP.Event.Class (bang)
 import Foreign.Object (Object)
-import Heterogeneous.Mapping (class MapRecordWithIndex, ConstMapping)
-import Prim.RowList (class RowToList)
-import Type.Proxy (Proxy(..))
+import Data.Monoid.Always (class Always)
 
 class
   ( Always (m Unit) (Effect Unit)
@@ -70,38 +64,6 @@ type Nut =
 
 newtype ANut = ANut Nut
 
-bus
-  :: forall a b s m
-   . Korok s m
-  => Always (m Unit) (Effect Unit)
-  => ((a -> Effect Unit) -> AnEvent m a -> b)
-  -> AnEvent m b
-bus f = FRP.Event.bus (lcmap (map (always :: m Unit -> Effect Unit)) f)
-
-bussed
-  :: forall s m lock logic obj a
-   . Korok s m
-  => Always (m Unit) (Effect Unit)
-  => ((a -> Effect Unit) -> AnEvent m a -> Bolson.Entity logic obj m lock)
-  -> Bolson.Entity logic obj m lock
-bussed f = Bolson.EventfulElement' (Bolson.EventfulElement (bus f))
-
-vbussed
-  :: forall s m logic obj lock rbus bus pushi pusho pushR event u
-   . RowToList bus rbus
-  => Korok s m
-  => RowToList pushi pushR
-  => MapRecordWithIndex pushR
-       (ConstMapping (AlwaysEffect m))
-       pushi
-       pusho
-  => VBus rbus pushi event u
-  => Proxy (V bus)
-  -> ({ | pusho } -> { | event } -> Bolson.Entity logic obj m lock)
-  -> Bolson.Entity logic obj m lock
-vbussed px f = Bolson.EventfulElement'
-  (Bolson.EventfulElement (vbus px (lcmap (halways (Proxy :: Proxy m)) f)))
-
 newtype Node e m (lock :: Type) payload = Node
   ( Bolson.PSR m
     -> DOMInterpret e m payload
@@ -109,20 +71,22 @@ newtype Node e m (lock :: Type) payload = Node
   )
 
 type Domable e m lock payload = Bolson.Entity Int (Node e m lock payload) m lock
+type Seedling e m lock payload = Bolson.Child Int (Node e m lock payload) m lock
 
 insert
-  :: forall logic obj m lock
-   . Bolson.Entity logic obj m lock
-  -> Bolson.Child logic obj m lock
-insert = Bolson.Insert
+  :: forall s e m lock payload
+   . Korok s m
+  => Domable e m lock payload
+  -> AnEvent m (Seedling e m lock payload)
+insert = bang <<< Bolson.Insert
 
-remove :: forall logic obj m lock. Bolson.Child logic obj m lock
+remove :: forall e m lock payload. Seedling e m lock payload
 remove = Bolson.Remove
 
-sendToTop :: forall obj m lock. Bolson.Child Int obj m lock
-sendToTop = Bolson.Logic 0
+sendToTop :: forall e m lock payload. Seedling e m lock payload
+sendToTop = sendToPos 0
 
-sendToPos :: forall obj m lock. Int -> Bolson.Child Int obj m lock
+sendToPos :: forall e m lock payload. Int -> Seedling e m lock payload
 sendToPos = Bolson.Logic
 
 type MakeElement =
@@ -131,6 +95,19 @@ type MakeElement =
   , parent :: Maybe String
   , tag :: String
   }
+
+type MakeDyn =
+  { id :: String
+  , scope :: Scope
+  , parent :: Maybe String
+  }
+
+type AddChild =
+  { parent :: String
+  , child :: String
+  }
+
+type RemoveChild = { id :: String }
 
 type AttributeParent =
   { id :: String
@@ -142,12 +119,6 @@ type GiveNewParent =
   , parent :: String
   , scope :: Scope
   }
-
--- This is called _only_ in dynamic circomstances
--- when we want to disconnect one element from another
--- It may _also_ trigger deletion, but that's a separate operation (deleteFromCache)
--- For example, in the case of portals, we can disconnect the element without deleting it.
-type DisconnectElement = { id :: String }
 
 type MakeText =
   { id :: String
@@ -201,10 +172,12 @@ newtype DOMInterpret e m payload = DOMInterpret
   , makeText :: MakeText -> payload
   , makePursx :: MakePursx -> payload
   , giveNewParent :: GiveNewParent -> payload
-  , disconnectElement :: DisconnectElement -> payload
   , deleteFromCache :: DeleteFromCache -> payload
-  , sendToPos :: SendToPos -> payload
   , setProp :: SetProp -> payload
   , setCb :: SetCb -> payload
   , setText :: SetText -> payload
+  , makeDyn :: MakeDyn -> payload
+  , addChild :: AddChild -> payload
+  , sendToPos :: SendToPos -> payload
+  , removeChild :: RemoveChild -> payload
   }

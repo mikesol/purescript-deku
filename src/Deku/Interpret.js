@@ -20,9 +20,6 @@ export const getTextNode_ = (dom) => () => {
 		"You think you're clever, but your hydration algorithm just threw a programming error..."
 	);
 };
-export const attributeParent_ = (a) => (state) => () => {
-	state.units[a.parent].main.appendChild(state.units[a.id].main);
-};
 
 export const setPropContinuation_ = (a) => (state) => () => {
 	var ptr = a.id;
@@ -97,7 +94,7 @@ export const giveNewParent_ = (a) => (state) => () => {
 	state.units[parent].main.prepend(state.units[ptr].main);
 };
 
-export const disconnectElement_ = (a) => (state) => () => {
+export const removeActualChild_ = (a) => (state) => () => {
 	state.units[a.id].main.remove();
 };
 

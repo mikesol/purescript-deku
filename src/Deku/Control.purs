@@ -5,32 +5,104 @@ module Deku.Control
   , deku
   , globalPortal
   , portal
-  , module Bolson.Control
+  , switcher
+  , dyn
+  , envy
+  , fixed
+  , vbussed
+  , bussed
+  , bus
   ) where
 
 import Prelude
 
-import Bolson.Control (switcher)
-import Bolson.Control as Bolson
-import Bolson.Core (Element(..), Entity(..), PSR, Scope(..))
-import Control.Alt ((<|>))
+import Bolson.Always (AlwaysEffect, halways)
+import Bolson.Control as Bolson.Control
+import Bolson.Core as Bolson.Core
 import Control.Plus (empty)
 import Data.FastVect.FastVect (Vect)
 import Data.Foldable (oneOf)
 import Data.Maybe (Maybe(..), maybe)
-import Data.Newtype (class Newtype, unwrap)
+import Data.Monoid.Always (class Always, always)
+import Data.Newtype (unwrap)
 import Data.Profunctor (lcmap)
 import Deku.Attribute (Attribute, AttributeValue(..), unsafeUnAttribute)
-import Deku.Core (class Korok, DOMInterpret(..), Domable, Node(..))
---import Deku.Shadow (Shadow(..))
+import Deku.Core (class Korok, DOMInterpret(..), Domable, Node(..), Seedling)
+import Effect (Effect)
 import FRP.Event (AnEvent, bang, makeEvent, subscribe)
+import FRP.Event as FRP.Event
+import FRP.Event.VBus (class VBus, V, vbus)
+import Heterogeneous.Mapping (class MapRecordWithIndex, ConstMapping)
 import Prim.Int (class Compare)
 import Prim.Ordering (GT)
+import Prim.RowList (class RowToList)
 import Safe.Coerce (coerce)
+import Type.Proxy (Proxy(..))
 import Unsafe.Coerce (unsafeCoerce)
 import Web.DOM as Web.DOM
 
 type Neg1 = -1
+
+switcher
+  :: forall i e s m lock payload
+   . Korok s m
+  => (i -> Domable e m lock payload)
+  -> AnEvent m i
+  -> Domable e m lock payload
+switcher = Bolson.Control.switcher
+
+protoDyn
+  :: forall e s m lock payload children
+   . Korok s m
+  => (children -> Domable e m lock payload)
+  -> children
+  -> Domable e m lock payload
+protoDyn f children = Bolson.Core.Element' $ Node go
+  where
+  go
+    { parent, scope, raiseId }
+    di@(DOMInterpret { ids, makeDyn, deleteFromCache }) =
+    makeEvent \k -> do
+      me <- ids
+      raiseId me scope
+      u <- subscribe
+        ( oneOf
+            ( [ bang (makeDyn { id: me, parent, scope })
+              , __internalDekuFlatten
+                  { parent: Just me
+                  , scope
+                  , raiseId: \_ _ -> pure unit
+                  }
+                  di
+                  (f children)
+              ]
+            )
+        )
+        k
+      pure (k (deleteFromCache { id: me }) *> u)
+
+dyn
+  :: forall e s m lock payload
+   . Korok s m
+  => AnEvent m (AnEvent m (Seedling e m lock payload))
+  -> Domable e m lock payload
+dyn = protoDyn Bolson.Control.dyn
+
+envy
+  :: forall e s m lock payload
+   . Korok s m
+  => AnEvent m (Domable e m lock payload)
+  -> Domable e m lock payload
+envy = protoDyn Bolson.Control.envy
+
+
+fixed
+  :: forall e s m lock payload
+   . Korok s m
+  => Array (Domable e m lock payload)
+  -> Domable e m lock payload
+fixed = protoDyn Bolson.Control.fixed
+
 
 ----
 unsafeElement
@@ -38,7 +110,7 @@ unsafeElement
    . DOMInterpret e m payload
   -> { id :: String
      , parent :: Maybe String
-     , scope :: Scope
+     , scope :: Bolson.Core.Scope
      , tag :: String
      }
   -> payload
@@ -56,7 +128,7 @@ unsafeText
    . DOMInterpret e m payload
   -> { id :: String
      , parent :: Maybe String
-     , scope :: Scope
+     , scope :: Bolson.Core.Scope
      }
   -> payload
 unsafeText (DOMInterpret { makeText }) = makeText
@@ -83,7 +155,7 @@ unsafeSetText (DOMInterpret { setText }) id txt = map
 unsafeSetAttribute
   :: forall e m element payload
    . Maybe String
-  -> Scope
+  -> Bolson.Core.Scope
   -> DOMInterpret e m payload
   -> String
   -> AnEvent m (Attribute element)
@@ -111,12 +183,13 @@ elementify tag atts children = Node go
     di@(DOMInterpret { ids, deleteFromCache }) =
     makeEvent \k -> do
       me <- ids
-      raiseId me
+      raiseId me scope
       u <- subscribe
-        ( ( oneOf
-              ( [ bang (unsafeElement di { id: me, parent, scope, tag })
-                , unsafeSetAttribute parent scope di me atts
-                ] <> maybe []
+        ( oneOf
+            ( [ bang (unsafeElement di { id: me, parent, scope, tag })
+              , unsafeSetAttribute parent scope di me atts
+              ]
+                <> maybe []
                   ( \p ->
                       [ bang
                           $ unsafeConnect di
@@ -124,15 +197,16 @@ elementify tag atts children = Node go
                       ]
                   )
                   parent
-              )
-          )
-            <|> __internalDekuFlatten
-              { parent: Just me
-              , scope
-              , raiseId: \_ -> pure unit
-              }
-              di
-              children
+                <>
+                  [ __internalDekuFlatten
+                      { parent: Just me
+                      , scope
+                      , raiseId: \_ _ -> pure unit
+                      }
+                      di
+                      children
+                  ]
+            )
         )
         k
       pure (k (deleteFromCache { id: me }) *> u)
@@ -144,12 +218,12 @@ globalPortal
   => Vect n (Domable e m lock payload)
   -> (Vect n (Domable e m lock payload) -> Domable e m lock payload)
   -> Domable e m lock payload
-globalPortal v c = Bolson.globalPortalComplexComplex
+globalPortal v c = Bolson.Control.globalPortalComplexComplex
   portalFlatten
   { fromEltO1: coerce
   , fromEltO2: coerce
   , toElt: coerce
-  , wrapElt: Element' <<< elementify "div" empty
+  , wrapElt: Bolson.Core.Element' <<< elementify "div" empty
   , giveNewParent: \a b _ -> (unwrap a).giveNewParent b
   , deleteFromCache: unwrap >>> _.deleteFromCache
   }
@@ -157,35 +231,30 @@ globalPortal v c = Bolson.globalPortalComplexComplex
   (lcmap (map (_ $ unit)) c)
 
 portalFlatten
-  :: forall e m151 payload152 b159 d161 t165 m168 t174 t176 m183 lock184 lock188
-       payload189
-   . Newtype b159
-       { ids :: d161
-       | t165
-       }
-  => { disconnectElement ::
-         DOMInterpret e m168 t174
-         -> { id :: String
-            , parent :: String
-            , scope :: Scope
-            | t176
-            }
-         -> t174
-     , doLogic :: Int -> DOMInterpret e m151 payload152 -> String -> payload152
-     , ids :: b159 -> d161
+  :: forall e m payload lock
+   . { dynamicElementRemoved ::
+         DOMInterpret e m payload
+         -> { id :: String, parent :: String, scope :: Bolson.Core.Scope }
+         -> payload
+     , dynamicElementInserted ::
+         DOMInterpret e m payload
+         -> { id :: String, parent :: String, scope :: Bolson.Core.Scope }
+         -> payload
+     , doLogic :: Int -> DOMInterpret e m payload -> String -> payload
+     , ids :: DOMInterpret e m payload -> m String
      , toElt ::
-         Node e m183 lock184 payload189
-         -> Element (DOMInterpret e m183 payload189) m183
-              lock188
-              payload189
+         Node e m lock payload
+         -> Bolson.Core.Element (DOMInterpret e m payload) m lock payload
      }
 portalFlatten =
   { doLogic: \pos (DOMInterpret { sendToPos }) id -> sendToPos { id, pos }
   , ids: unwrap >>> _.ids
-  , disconnectElement:
-      \(DOMInterpret { disconnectElement }) { id, scope, parent } ->
-        disconnectElement { id }
-  , toElt: \(Node e) -> Element e
+  , dynamicElementRemoved:
+      \(DOMInterpret { removeChild }) { id } ->
+        removeChild { id }
+  , dynamicElementInserted: \(DOMInterpret { addChild }) { id, parent } ->
+      addChild { child: id, parent }
+  , toElt: \(Node e) -> Bolson.Core.Element e
   }
 
 portal
@@ -199,12 +268,12 @@ portal
        -> Domable e m lockfoo payload
      )
   -> Domable e m lock0 payload
-portal a b = Bolson.portalComplexComplex
+portal a b = Bolson.Control.portalComplexComplex
   portalFlatten
   { fromEltO1: coerce
   , fromEltO2: coerce
   , toElt: coerce
-  , wrapElt: Element' <<< elementify "div" empty
+  , wrapElt: Bolson.Core.Element' <<< elementify "div" empty
   , giveNewParent: \q r _ -> (unwrap q).giveNewParent r
   , deleteFromCache: unwrap >>> _.deleteFromCache
   }
@@ -216,7 +285,7 @@ text
    . Monad m
   => AnEvent m String
   -> Domable e m lock payload
-text txt = Element' $ Node go
+text txt = Bolson.Core.Element' $ Node go
   where
   go
     { parent
@@ -231,7 +300,7 @@ text txt = Element' $ Node go
       ) =
     makeEvent \k -> do
       me <- ids
-      raiseId me
+      raiseId me scope
       map ((*>) (k (deleteFromCache { id: me }))) $ subscribe
         ( oneOf
             ( [ bang (unsafeText di { id: me, parent, scope })
@@ -256,14 +325,16 @@ deku
 deku root children di@(DOMInterpret { ids, makeRoot }) = makeEvent \k -> do
   me <- ids
   subscribe
-    ( bang (makeRoot { id: me, root })
-        <|> __internalDekuFlatten
-          { parent: Just me
-          , scope: Local "rootScope"
-          , raiseId: \_ -> pure unit
-          }
-          di
-          (unsafeCoerce children)
+    ( oneOf
+        [ bang (makeRoot { id: me, root })
+        , __internalDekuFlatten
+            { parent: Just me
+            , scope: Bolson.Core.Local "rootBolson.Core.Scope"
+            , raiseId: \_ _ -> pure unit
+            }
+            di
+            (unsafeCoerce children)
+        ]
     )
     k
 
@@ -272,9 +343,40 @@ data Stage = Begin | Middle | End
 __internalDekuFlatten
   :: forall e s m lock payload
    . Korok s m
-  => PSR m
+  => Bolson.Core.PSR m
   -> DOMInterpret e m payload
   -> Domable e m lock payload
   -> AnEvent m payload
-__internalDekuFlatten = Bolson.flatten
+__internalDekuFlatten = Bolson.Control.flatten
   portalFlatten
+
+bus
+  :: forall a b s m
+   . Korok s m
+  => Always (m Unit) (Effect Unit)
+  => ((a -> Effect Unit) -> AnEvent m a -> b)
+  -> AnEvent m b
+bus f = FRP.Event.bus (lcmap (map (always :: m Unit -> Effect Unit)) f)
+
+bussed
+  :: forall e s m lock a payload
+   . Korok s m
+  => Always (m Unit) (Effect Unit)
+  => ((a -> Effect Unit) -> AnEvent m a -> Domable e m lock payload)
+  -> Domable e m lock payload
+bussed f = envy (bus f)
+
+vbussed
+  :: forall s m lock rbus bus pushi pusho pushR event u e payload
+   . RowToList bus rbus
+  => Korok s m
+  => RowToList pushi pushR
+  => MapRecordWithIndex pushR
+       (ConstMapping (AlwaysEffect m))
+       pushi
+       pusho
+  => VBus rbus pushi event u
+  => Proxy (V bus)
+  -> ({ | pusho } -> { | event } -> Domable e m lock payload)
+  -> Domable e m lock payload
+vbussed px f = envy (vbus px (lcmap (halways (Proxy :: Proxy m)) f))

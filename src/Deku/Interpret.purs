@@ -21,7 +21,8 @@ import Control.Monad.ST.Internal as RRef
 import Control.Monad.State (execState, get, put)
 import Data.Array (find)
 import Data.Array.ST as STA
-import Data.Either (Either)
+import Data.Either (Either(..))
+import Data.Filterable (filter)
 import Data.Foldable (for_)
 import Data.Maybe (Maybe(..), isNothing, maybe)
 import Data.Newtype (class Newtype, unwrap)
@@ -40,9 +41,10 @@ import Test.QuickCheck.Gen (Gen, evalGen)
 import Web.DOM as Web.DOM
 import Web.DOM.Document (createElement, createTextNode)
 import Web.DOM.Element (fromNode, toNode)
-import Web.DOM.Node (childNodes, firstChild, nodeTypeIndex, nodeValue)
+import Web.DOM.Node (appendChild, childNodes, firstChild, nodeTypeIndex, nodeValue)
 import Web.DOM.NodeList (toArray)
 import Web.DOM.ParentNode (QuerySelector(..), querySelector)
+import Web.DOM.Text as Web.DOM.Text
 import Web.Event.Internal.Types as Web
 import Web.HTML (window)
 import Web.HTML.HTMLDocument (body, fromDocument, toDocument)
@@ -300,6 +302,39 @@ ssrMakeElement_ a state'@(FFIDOMSnapshot state) = do
     )
     state.units
 
+makeDynCommon
+  :: forall r e t m
+   . MonadST r m
+  => Core.MakeDyn
+  -> FFIDOMSnapshot r e t
+  -> m Unit
+makeDynCommon a state'@(FFIDOMSnapshot state) = do
+  liftST $ addElementScopeToScopes_ a state'
+  liftST $ void $ STO.poke
+    a.id
+    ( SDyn
+        { scope: a.scope
+        , parent: a.parent
+        , children: []
+        }
+    )
+    state.units
+
+
+ssrMakeDyn_
+  :: forall r
+   . Core.MakeDyn
+  -> FFIDOMSnapshot r (SSRElement r) SSRText
+  -> ST r Unit
+ssrMakeDyn_ = makeDynCommon
+
+makeDyn_
+  :: forall r
+   . Core.MakeDyn
+  -> FFIDOMSnapshot Global Web.DOM.Element Web.DOM.Text
+  -> Effect Unit
+makeDyn_ = makeDynCommon
+
 addTextScopeToScopes_
   :: forall r x e t
    . _
@@ -405,29 +440,188 @@ ssrMakeText_ a state'@(FFIDOMSnapshot state) = do
     )
     state.units
 
-foreign import attributeParent_
+addChildCommon
+  :: forall r e t m
+   . MonadST r m
+  => Core.AddChild
+  -> FFIDOMSnapshot r e t
+  -> m Unit
+addChildCommon a (FFIDOMSnapshot state) = do
+  elt <- liftST $ STO.peek a.parent state.units
+  for_ elt \elt' ->
+    case elt' of
+      SDyn t -> liftST $ void $ STO.poke a.parent
+        ( SDyn
+            ( t
+                { children =
+                    t.children <> [ a.child ]
+                }
+            )
+        )
+        state.units
+      SEnvy t -> liftST $ void $ STO.poke a.parent
+        ( SEnvy
+            ( t
+                { child = Just a.child
+                }
+            )
+        )
+        state.units
+      SFixed t -> liftST $ void $ STO.poke a.parent
+        ( SFixed
+            ( t
+                { children =
+                    t.children <> [ a.child ]
+                }
+            )
+        )
+        state.units
+      -- in Bolson, add child is only used as a side effect of dyn
+      -- and isn't intended to actually touch the DOM
+      SElement _ -> pure unit -- programming error :-(
+      SText _ -> pure unit -- programming error :-(
+
+ssrAddChild_
+  :: forall r
+   . Core.AddChild
+  -> FFIDOMSnapshot r (SSRElement r) SSRText
+  -> ST r Unit
+ssrAddChild_ = addChildCommon
+
+addChild_
+  :: forall r
+   . Core.AddChild
+  -> FFIDOMSnapshot Global Web.DOM.Element Web.DOM.Text
+  -> Effect Unit
+addChild_ = addChildCommon
+
+removeChildCommon
+  :: forall r e t m
+   . MonadST r m
+  => ( Core.RemoveChild
+       -> FFIDOMSnapshot r e t
+       -> m Unit
+     )
+  -> Core.RemoveChild
+  -> FFIDOMSnapshot r e t
+  -> m Unit
+removeChildCommon impl a state'@(FFIDOMSnapshot state) = do
+  elt <- liftST $ STO.peek a.id state.units
+  for_ elt \elt' -> do
+    let
+      nnd' = case elt' of
+        SElement e -> SElement (e { parent = Nothing })
+        SText e -> SText (e { parent = Nothing })
+        SDyn e -> SDyn (e { parent = Nothing })
+        SEnvy e -> SEnvy (e { parent = Nothing })
+        SFixed e -> SFixed (e { parent = Nothing })
+    liftST $ void $ STO.poke a.id nnd' state.units
+    let
+      parent = case elt' of
+        SDyn { parent } -> parent
+        SEnvy { parent } -> parent
+        SFixed { parent } -> parent
+        SElement { parent } -> parent
+        SText { parent } -> parent
+    case elt' of
+      SDyn { children } -> for_ children \id -> removeChildCommon impl { id }
+        state'
+      SEnvy { child } -> for_ child \id -> removeChildCommon impl { id } state'
+      SFixed { children } -> for_ children \id -> removeChildCommon impl { id }
+        state'
+      SElement _ -> impl a state'
+      SText _ -> impl a state'
+    for_ parent \parent' -> do
+      parElt <- liftST $ STO.peek parent' state.units
+      for_ parElt \parElt' -> do
+        case parElt' of
+          SDyn t -> liftST $ void $ STO.poke parent'
+            ( SDyn
+                ( t
+                    { children = filter (not <<< (_ == a.id)) t.children
+                    }
+                )
+            )
+            state.units
+          SEnvy t -> liftST $ void $ STO.poke parent'
+            ( SEnvy
+                ( t
+                    { child = Nothing
+                    }
+                )
+            )
+            state.units
+          SFixed t -> liftST $ void $ STO.poke parent'
+            ( SFixed
+                ( t
+                    { children = filter (not <<< (_ == a.id)) t.children
+                    }
+                )
+            )
+            state.units
+          SElement _ -> pure unit
+          SText _ -> pure unit
+
+ssrRemoveChild_
+  :: forall r
+   . Core.RemoveChild
+  -> FFIDOMSnapshot r (SSRElement r) SSRText
+  -> ST r Unit
+ssrRemoveChild_ = removeChildCommon \_ _ -> pure unit
+
+removeChild_
+  :: forall r
+   . Core.RemoveChild
+  -> FFIDOMSnapshot Global Web.DOM.Element Web.DOM.Text
+  -> Effect Unit
+removeChild_ = removeChildCommon removeActualChild_
+
+attributeParentCommon
+  :: forall r e t m
+   . MonadST r m
+  => (e -> Either e t -> m Unit)
+  -> Core.AttributeParent
+  -> FFIDOMSnapshot r e t
+  -> m Unit
+attributeParentCommon attributor a (FFIDOMSnapshot state) = do
+  nd <- liftST $ STO.peek a.id state.units
+  for_ nd case _ of
+    SElement t -> go (Left t.main) t.parent
+    SText t -> go (Right t.main) t.parent
+    SDyn _ -> pure unit -- programming error :-(
+    SEnvy _ -> pure unit -- programming error :-(
+    SFixed _ -> pure unit -- programming error :-(
+  where
+  go e = case _ of
+    Nothing -> pure unit
+    Just p -> do
+      nd <- liftST $ STO.peek p state.units
+      for_ nd case _ of
+        SElement t -> attributor t.main e
+        SText t -> pure unit -- programming error :-(
+        SDyn { parent } -> go e parent
+        SEnvy { parent } -> go e parent
+        SFixed { parent } -> go e parent
+
+attributeParent_
   :: forall r
    . Core.AttributeParent
-  -> FFIDOMSnapshot r Web.DOM.Element Web.DOM.Text
+  -> FFIDOMSnapshot Global Web.DOM.Element Web.DOM.Text
   -> Effect Unit
+attributeParent_ = attributeParentCommon
+  \e lr -> appendChild
+    ( case lr of
+        Left elt -> toNode elt
+        Right txt -> Web.DOM.Text.toNode txt
+    )
+    (toNode e)
 
 ssrAttributeParent_
   :: forall r
    . Core.AttributeParent
   -> FFIDOMSnapshot r (SSRElement r) SSRText
   -> ST r Unit
-ssrAttributeParent_ a state'@(FFIDOMSnapshot state) = do
-  nd <- liftST $ STO.peek a.id state.units
-  for_ nd \nd' -> do
-    void $ STO.poke a.id
-      ( case nd' of
-          SElement e -> SElement (e { parent = Just a.parent })
-          SText e -> SText (e { parent = Just a.parent })
-          SDyn e -> SDyn (e { parent = Just a.parent })
-          SEnvy e -> SEnvy (e { parent = Just a.parent })
-          SFixed e -> SFixed (e { parent = Just a.parent })
-      )
-      state.units
+ssrAttributeParent_ = attributeParentCommon \_ _ -> pure unit
 
 foreign import setInnerHTML_ :: String -> Web.DOM.Element -> Effect Unit
 
@@ -642,31 +836,11 @@ ssrGiveNewParent_ a state'@(FFIDOMSnapshot state) = do
         SFixed a -> SFixed (a { parent = Just parent })
     void $ STO.poke ptr nnd' state.units
 
-foreign import disconnectElement_
+foreign import removeActualChild_
   :: forall r
-   . Core.DisconnectElement
+   . Core.RemoveChild
   -> FFIDOMSnapshot Global Web.DOM.Element Web.DOM.Text
   -> Effect Unit
-
-ssrDisconnectElement_
-  :: forall r
-   . Core.DisconnectElement
-  -> FFIDOMSnapshot r (SSRElement r) SSRText
-  -> ST r Unit
-ssrDisconnectElement_ a state'@(FFIDOMSnapshot state) = do
-  let ptr = a.id
-  nd <- STO.peek ptr state.units
-  for_ nd \nd' -> do
-    -- set parent
-    let
-      nnd' = case nd' of
-        SElement e -> SElement (e { parent = Nothing })
-        SText e -> SText (e { parent = Nothing })
-        SDyn e -> SDyn (e { parent = Nothing })
-        SEnvy e -> SEnvy (e { parent = Nothing })
-        SFixed e -> SFixed (e { parent = Nothing })
-
-    void $ STO.poke ptr nnd' state.units
 
 foreign import deleteFromCache_
   :: Core.DeleteFromCache
@@ -675,7 +849,7 @@ foreign import deleteFromCache_
 
 ssrDeleteFromCache_
   :: forall r
-   . Core.DisconnectElement
+   . Core.DeleteFromCache
   -> FFIDOMSnapshot r (SSRElement r) SSRText
   -> ST r Unit
 ssrDeleteFromCache_ a (FFIDOMSnapshot state) = do
@@ -704,7 +878,7 @@ ssrDeleteFromCache_ a (FFIDOMSnapshot state) = do
 --   , sendToPos: sendToPos_
 --   , deleteFromCache: deleteFromCache_
 --   , giveNewParent: giveNewParent_
---   , disconnectElement: disconnectElement_
+--   , removeChild: removeChild_
 --   }
 
 -- ssrDOMInterpret
@@ -731,7 +905,7 @@ ssrDeleteFromCache_ a (FFIDOMSnapshot state) = do
 --   , sendToPos: \_ _ -> pure unit
 --   , deleteFromCache: \_ _ -> pure unit
 --   , giveNewParent: \_ _ -> pure unit
---   , disconnectElement: \_ _ -> pure unit
+--   , removeChild: \_ _ -> pure unit
 --   }
 
 -- hydratingDOMInterpret
@@ -757,5 +931,5 @@ ssrDeleteFromCache_ a (FFIDOMSnapshot state) = do
 --   , sendToPos: sendToPos_
 --   , deleteFromCache: deleteFromCache_
 --   , giveNewParent: giveNewParent_
---   , disconnectElement: disconnectElement_
+--   , removeChild: removeChild_
 --   }

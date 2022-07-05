@@ -178,7 +178,7 @@ instance pursxToElementConsInsert ::
           __internalDekuFlatten
             { parent: Just (reflectType pxk <> pxScope)
             , scope: info.scope
-            , raiseId: \_ -> pure unit
+            , raiseId: \_ _ -> pure unit
             }
             di
             pxe
@@ -278,7 +278,7 @@ makePursx' verb html r = Element' $ Node go
     makeEvent \k1 -> do
       me <- ids
       pxScope <- ids
-      raiseId me
+      raiseId me scope
       let
         { cache, element: Node element } = pursxToElement
           pxScope
