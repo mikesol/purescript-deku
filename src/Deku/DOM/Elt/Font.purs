@@ -10,17 +10,17 @@ import FRP.Event (AnEvent)
 data Font_
 
 font
-  :: forall s m lock payload
+  :: forall s m e lock payload
    . Korok s m
   => AnEvent m (Attribute Font_)
-  -> Array (Domable m lock payload)
-  -> Domable m lock payload
+  -> Array (Domable e m lock payload)
+  -> Domable e m lock payload
 font attributes kids = Element' (elementify "font" attributes (fixed kids))
 
 font_
-  :: forall s m lock payload
+  :: forall s m e lock payload
    . Korok s m
-  => Array (Domable m lock payload)
-  -> Domable m lock payload
+  => Array (Domable e m lock payload)
+  -> Domable e m lock payload
 font_ = font empty
 

@@ -10,17 +10,17 @@ import FRP.Event (AnEvent)
 data Tbody_
 
 tbody
-  :: forall s m lock payload
+  :: forall s m e lock payload
    . Korok s m
   => AnEvent m (Attribute Tbody_)
-  -> Array (Domable m lock payload)
-  -> Domable m lock payload
+  -> Array (Domable e m lock payload)
+  -> Domable e m lock payload
 tbody attributes kids = Element' (elementify "tbody" attributes (fixed kids))
 
 tbody_
-  :: forall s m lock payload
+  :: forall s m e lock payload
    . Korok s m
-  => Array (Domable m lock payload)
-  -> Domable m lock payload
+  => Array (Domable e m lock payload)
+  -> Domable e m lock payload
 tbody_ = tbody empty
 

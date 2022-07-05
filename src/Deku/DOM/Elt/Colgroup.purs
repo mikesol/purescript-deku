@@ -10,18 +10,17 @@ import FRP.Event (AnEvent)
 data Colgroup_
 
 colgroup
-  :: forall s m lock payload
+  :: forall s m e lock payload
    . Korok s m
   => AnEvent m (Attribute Colgroup_)
-  -> Array (Domable m lock payload)
-  -> Domable m lock payload
-colgroup attributes kids = Element'
-  (elementify "colgroup" attributes (fixed kids))
+  -> Array (Domable e m lock payload)
+  -> Domable e m lock payload
+colgroup attributes kids = Element' (elementify "colgroup" attributes (fixed kids))
 
 colgroup_
-  :: forall s m lock payload
+  :: forall s m e lock payload
    . Korok s m
-  => Array (Domable m lock payload)
-  -> Domable m lock payload
+  => Array (Domable e m lock payload)
+  -> Domable e m lock payload
 colgroup_ = colgroup empty
 

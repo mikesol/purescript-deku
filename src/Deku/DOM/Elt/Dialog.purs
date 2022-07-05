@@ -10,17 +10,17 @@ import FRP.Event (AnEvent)
 data Dialog_
 
 dialog
-  :: forall s m lock payload
+  :: forall s m e lock payload
    . Korok s m
   => AnEvent m (Attribute Dialog_)
-  -> Array (Domable m lock payload)
-  -> Domable m lock payload
+  -> Array (Domable e m lock payload)
+  -> Domable e m lock payload
 dialog attributes kids = Element' (elementify "dialog" attributes (fixed kids))
 
 dialog_
-  :: forall s m lock payload
+  :: forall s m e lock payload
    . Korok s m
-  => Array (Domable m lock payload)
-  -> Domable m lock payload
+  => Array (Domable e m lock payload)
+  -> Domable e m lock payload
 dialog_ = dialog empty
 

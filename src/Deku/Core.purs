@@ -1,6 +1,5 @@
 module Deku.Core
-  ( module Bolson.Core
-  , DOMInterpret(..)
+  ( DOMInterpret(..)
   , MakeRoot
   , MakeElement
   , AttributeParent
@@ -30,7 +29,7 @@ module Deku.Core
 import Prelude
 
 import Bolson.Always (AlwaysEffect, halways)
-import Bolson.Core (Scope, fixed, dyn, envy)
+import Bolson.Core (Scope)
 import Bolson.Core as Bolson
 import Control.Monad.ST (ST)
 import Control.Monad.ST.Class (class MonadST)
@@ -49,7 +48,6 @@ import Foreign.Object (Object)
 import Heterogeneous.Mapping (class MapRecordWithIndex, ConstMapping)
 import Prim.RowList (class RowToList)
 import Type.Proxy (Proxy(..))
-import Web.DOM as Web.DOM
 
 class
   ( Always (m Unit) (Effect Unit)
@@ -66,9 +64,9 @@ instance Korok s (ST s)
 instance Korok Global Effect
 
 type Nut =
-  forall s m lock payload
+  forall s m e lock payload
    . Korok s m
-  => Domable m lock payload
+  => Domable e m lock payload
 
 newtype ANut = ANut Nut
 
@@ -104,10 +102,13 @@ vbussed
 vbussed px f = Bolson.EventfulElement'
   (Bolson.EventfulElement (vbus px (lcmap (halways (Proxy :: Proxy m)) f)))
 
-newtype Node m (lock :: Type) payload = Node
-  (Bolson.PSR m -> DOMInterpret m payload -> AnEvent m payload)
+newtype Node e m (lock :: Type) payload = Node
+  ( Bolson.PSR m
+    -> DOMInterpret e m payload
+    -> AnEvent m payload
+  )
 
-type Domable m lock payload = Bolson.Entity Int (Node m lock payload) m lock
+type Domable e m lock payload = Bolson.Entity Int (Node e m lock payload) m lock
 
 insert
   :: forall logic obj m lock
@@ -142,12 +143,11 @@ type GiveNewParent =
   , scope :: Scope
   }
 
-type DisconnectElement =
-  { id :: String
-  , parent :: String
-  , scope :: Scope
-  , scopeEq :: Scope -> Scope -> Boolean
-  }
+-- This is called _only_ in dynamic circomstances
+-- when we want to disconnect one element from another
+-- It may _also_ trigger deletion, but that's a separate operation (deleteFromCache)
+-- For example, in the case of portals, we can disconnect the element without deleting it.
+type DisconnectElement = { id :: String }
 
 type MakeText =
   { id :: String
@@ -155,17 +155,23 @@ type MakeText =
   , parent :: Maybe String
   }
 
+-- this is how we say "remove me completely"
+-- that means call remove on _and_ delete the element from the cache to free up memory
 type DeleteFromCache = { id :: String }
-type MakeRoot = { id :: String, root :: Web.DOM.Element }
+type MakeRoot e = { id :: String, root :: e }
 type SetText = { id :: String, text :: String }
 type SetProp =
   { id :: String
+  , parent :: Maybe String
+  , scope :: Scope
   , key :: String
   , value :: String
   }
 
 type SetCb =
   { id :: String
+  , parent :: Maybe String
+  , scope :: Scope
   , key :: String
   , value :: Cb
   }
@@ -185,11 +191,11 @@ type SendToPos =
   , pos :: Int
   }
 
-derive instance Newtype (DOMInterpret m payload) _
+derive instance Newtype (DOMInterpret e m payload) _
 
-newtype DOMInterpret m payload = DOMInterpret
+newtype DOMInterpret e m payload = DOMInterpret
   { ids :: m String
-  , makeRoot :: MakeRoot -> payload
+  , makeRoot :: MakeRoot e -> payload
   , makeElement :: MakeElement -> payload
   , attributeParent :: AttributeParent -> payload
   , makeText :: MakeText -> payload

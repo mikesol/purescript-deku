@@ -10,18 +10,17 @@ import FRP.Event (AnEvent)
 data Fieldset_
 
 fieldset
-  :: forall s m lock payload
+  :: forall s m e lock payload
    . Korok s m
   => AnEvent m (Attribute Fieldset_)
-  -> Array (Domable m lock payload)
-  -> Domable m lock payload
-fieldset attributes kids = Element'
-  (elementify "fieldset" attributes (fixed kids))
+  -> Array (Domable e m lock payload)
+  -> Domable e m lock payload
+fieldset attributes kids = Element' (elementify "fieldset" attributes (fixed kids))
 
 fieldset_
-  :: forall s m lock payload
+  :: forall s m e lock payload
    . Korok s m
-  => Array (Domable m lock payload)
-  -> Domable m lock payload
+  => Array (Domable e m lock payload)
+  -> Domable e m lock payload
 fieldset_ = fieldset empty
 

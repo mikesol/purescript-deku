@@ -10,18 +10,17 @@ import FRP.Event (AnEvent)
 data Optgroup_
 
 optgroup
-  :: forall s m lock payload
+  :: forall s m e lock payload
    . Korok s m
   => AnEvent m (Attribute Optgroup_)
-  -> Array (Domable m lock payload)
-  -> Domable m lock payload
-optgroup attributes kids = Element'
-  (elementify "optgroup" attributes (fixed kids))
+  -> Array (Domable e m lock payload)
+  -> Domable e m lock payload
+optgroup attributes kids = Element' (elementify "optgroup" attributes (fixed kids))
 
 optgroup_
-  :: forall s m lock payload
+  :: forall s m e lock payload
    . Korok s m
-  => Array (Domable m lock payload)
-  -> Domable m lock payload
+  => Array (Domable e m lock payload)
+  -> Domable e m lock payload
 optgroup_ = optgroup empty
 

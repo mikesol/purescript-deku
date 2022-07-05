@@ -10,18 +10,17 @@ import FRP.Event (AnEvent)
 data Datalist_
 
 datalist
-  :: forall s m lock payload
+  :: forall s m e lock payload
    . Korok s m
   => AnEvent m (Attribute Datalist_)
-  -> Array (Domable m lock payload)
-  -> Domable m lock payload
-datalist attributes kids = Element'
-  (elementify "datalist" attributes (fixed kids))
+  -> Array (Domable e m lock payload)
+  -> Domable e m lock payload
+datalist attributes kids = Element' (elementify "datalist" attributes (fixed kids))
 
 datalist_
-  :: forall s m lock payload
+  :: forall s m e lock payload
    . Korok s m
-  => Array (Domable m lock payload)
-  -> Domable m lock payload
+  => Array (Domable e m lock payload)
+  -> Domable e m lock payload
 datalist_ = datalist empty
 

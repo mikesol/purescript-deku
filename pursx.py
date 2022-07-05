@@ -28,13 +28,13 @@ import Prim.Symbol as Sym
 import Record (get)
 import Type.Proxy (Proxy(..))
 
-newtype PursxElement m lock payload = PursxElement
-  (Domable m lock payload)
+newtype PursxElement e m lock payload = PursxElement
+  (Domable e m lock payload)
 
 nut
-  :: forall m lock payload
-   . Domable m lock payload
-  -> PursxElement m lock payload
+  :: forall e m lock payload
+   . Domable e m lock payload
+  -> PursxElement e m lock payload
 nut = PursxElement
 ''')
 
@@ -45,7 +45,7 @@ print_('instance (TagToDeku tag deku,  Row.Cons acc (AnEvent m (Attribute deku))
 print_('else instance (Sym.Append acc anything acc2, Sym.Cons x y tail, DoVerbForAttr verb tag acc2 x y pursi purso newTail) => DoVerbForAttr verb tag acc anything tail pursi purso newTail')
 print_('--')
 print_('class DoVerbForDOM  (m :: Type -> Type) (lock :: Type) (payload :: Type) (verb :: Symbol) (acc :: Symbol) (head :: Symbol) (tail :: Symbol) (pursi :: Row Type) (purso :: Row Type) (newTail :: Symbol) | m lock payload verb acc head tail pursi -> purso newTail')
-print_('instance (Row.Cons acc (PursxElement m lock payload) pursi purso) => DoVerbForDOM m lock payload verb acc verb tail pursi purso tail')
+print_('instance (Row.Cons acc (PursxElement e m lock payload) pursi purso) => DoVerbForDOM m lock payload verb acc verb tail pursi purso tail')
 print_('else instance (Sym.Append acc anything acc2, Sym.Cons x y tail, DoVerbForDOM m lock payload verb acc2 x y pursi purso newTail) => DoVerbForDOM m lock payload verb acc anything tail pursi purso newTail')
 print_('--')
 print_('class IsWhiteSpace (space :: Symbol)')
@@ -149,25 +149,25 @@ else instance (Sym.Cons x y tail, DoVerbForDOM m lock payload verb "" x y pursi 
 else instance (Sym.Cons x y tail, PXBody m lock payload verb x y pursi purso trailing) => PXBody m lock payload verb anything tail pursi purso trailing''')
 print_('''
 class
-  PursxToElement m lock payload (rl :: RL.RowList Type) (r :: Row Type)
+  PursxToElement e m lock payload (rl :: RL.RowList Type) (r :: Row Type)
   | rl -> m lock payload r where
   pursxToElement
     :: String
     -> Proxy rl
     -> { | r }
-    -> { cache :: Object.Object Boolean, element :: Node m lock payload }
+    -> { cache :: Object.Object Boolean, element :: Node e m lock payload }
 
 instance pursxToElementConsInsert ::
-  ( Row.Cons key (PursxElement m lock payload) r' r
-  , PursxToElement m lock payload rest r
+  ( Row.Cons key (PursxElement e m lock payload) r' r
+  , PursxToElement e m lock payload rest r
   , Reflectable key String
   , IsSymbol key
   , Korok s m
   ) =>
-  PursxToElement m
+  PursxToElement e m
     lock
     payload
-    (RL.Cons key (PursxElement m lock payload) rest)
+    (RL.Cons key (PursxElement e m lock payload) rest)
     r where
   pursxToElement pxScope _ r =
     let
@@ -190,12 +190,12 @@ instance pursxToElementConsInsert ::
 
 else instance pursxToElementConsAttr ::
   ( Row.Cons key (AnEvent m (Attribute deku)) r' r
-  , PursxToElement m lock payload rest r
+  , PursxToElement e m lock payload rest r
   , Reflectable key String
   , IsSymbol key
   , Korok s m
   ) =>
-  PursxToElement m
+  PursxToElement e m
     lock
     payload
     (RL.Cons key (AnEvent m (Attribute deku)) rest)
@@ -212,12 +212,16 @@ else instance pursxToElementConsAttr ::
                     Prop' p -> setProp
                       { id: ((reflectType pxk) <> pxScope)
                       , key
+                      , parent: parent.parent
                       , value: p
+                      , scope: parent.scope
                       }
                     Cb' c -> setCb
                       { id: ((reflectType pxk) <> pxScope)
                       , key
+                      , parent: parent.parent
                       , value: c
+                      , scope: parent.scope
                       }
                 )
             )
@@ -229,48 +233,48 @@ else instance pursxToElementConsAttr ::
 
 instance pursxToElementNil ::
   Applicative m =>
-  PursxToElement m lock payload RL.Nil r where
+  PursxToElement e m lock payload RL.Nil r where
   pursxToElement _ _ _ = { cache: Object.empty, element: Node \_ _ -> empty }
 
 psx
-  :: forall s m lock payload (html :: Symbol)
+  :: forall s m e lock payload (html :: Symbol)
    . Reflectable html String
   => PXStart m lock payload "~" " " html ()
   => Korok s m
-  => PursxToElement m lock payload RL.Nil ()
+  => PursxToElement e m lock payload RL.Nil ()
   => Proxy html
-  -> Domable m lock payload
+  -> Domable e m lock payload
 psx px = makePursx px {}
 
 makePursx
-  :: forall s m lock payload (html :: Symbol) r rl
+  :: forall s m e lock payload (html :: Symbol) r rl
    . Reflectable html String
   => PXStart m lock payload "~" " " html r
   => RL.RowToList r rl
-  => PursxToElement m lock payload rl r
+  => PursxToElement e m lock payload rl r
   => Korok s m
   => Proxy html
   -> { | r }
-  -> Domable m lock payload
+  -> Domable e m lock payload
 makePursx = makePursx' (Proxy :: _ "~")
 
 makePursx'
-  :: forall s m lock payload verb (html :: Symbol) r rl
+  :: forall s m e lock payload verb (html :: Symbol) r rl
    . Reflectable html String
   => Reflectable verb String
   => PXStart m lock payload verb " " html r
   => RL.RowToList r rl
   => Korok s m
-  => PursxToElement m lock payload rl r
+  => PursxToElement e m lock payload rl r
   => Proxy verb
   -> Proxy html
   -> { | r }
-  -> Domable m lock payload
+  -> Domable e m lock payload
 makePursx' verb html r = Element' $ Node go
   where
   go
     z@{ parent, scope, raiseId }
-    di@(DOMInterpret { makePursx: mpx, ids, deleteFromCache }) =
+    di@(DOMInterpret { makePursx: mpx, attributeParent, ids, deleteFromCache }) =
     makeEvent \k1 -> do
       me <- ids
       pxScope <- ids
@@ -280,35 +284,38 @@ makePursx' verb html r = Element' $ Node go
           pxScope
           (Proxy :: _ rl)
           r
-      map ((*>) (k1 (deleteFromCache { id: me }))) $
+      map (k1 (deleteFromCache { id: me }) *> _) $
         subscribe
           ( ( bang $
                 mpx
                   { id: me
-                  , parent
                   , cache
+                  , parent
                   , pxScope: pxScope
                   , scope
                   , html: reflectType html
                   , verb: reflectType verb
                   }
-            ) <|> element z di
+            ) <|> (case parent of
+                        Just p' -> bang (attributeParent { id: me, parent: p' })
+                        Nothing -> empty
+               ) <|> element z di
           )
           k1
 
 __internalDekuFlatten
-  :: forall s m lock payload
+  :: forall s m e lock payload
    . Korok s m
   => PSR m
-  -> DOMInterpret m payload
-  -> Domable m lock payload
+  -> DOMInterpret e m payload
+  -> Domable e m lock payload
   -> AnEvent m payload
 __internalDekuFlatten = Bolson.flatten
   { doLogic: \pos (DOMInterpret { sendToPos }) id -> sendToPos { id, pos }
   , ids: unwrap >>> _.ids
   , disconnectElement:
-      \(DOMInterpret { disconnectElement }) { id, scope, parent } ->
-        disconnectElement { id, scope, parent, scopeEq: eq }
+      \(DOMInterpret { disconnectElement }) { id } ->
+        disconnectElement { id }
   , toElt: \(Node e) -> Element e
   }
 

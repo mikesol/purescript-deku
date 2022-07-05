@@ -10,18 +10,17 @@ import FRP.Event (AnEvent)
 data Progress_
 
 progress
-  :: forall s m lock payload
+  :: forall s m e lock payload
    . Korok s m
   => AnEvent m (Attribute Progress_)
-  -> Array (Domable m lock payload)
-  -> Domable m lock payload
-progress attributes kids = Element'
-  (elementify "progress" attributes (fixed kids))
+  -> Array (Domable e m lock payload)
+  -> Domable e m lock payload
+progress attributes kids = Element' (elementify "progress" attributes (fixed kids))
 
 progress_
-  :: forall s m lock payload
+  :: forall s m e lock payload
    . Korok s m
-  => Array (Domable m lock payload)
-  -> Domable m lock payload
+  => Array (Domable e m lock payload)
+  -> Domable e m lock payload
 progress_ = progress empty
 

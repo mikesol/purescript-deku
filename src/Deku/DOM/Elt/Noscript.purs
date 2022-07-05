@@ -10,18 +10,17 @@ import FRP.Event (AnEvent)
 data Noscript_
 
 noscript
-  :: forall s m lock payload
+  :: forall s m e lock payload
    . Korok s m
   => AnEvent m (Attribute Noscript_)
-  -> Array (Domable m lock payload)
-  -> Domable m lock payload
-noscript attributes kids = Element'
-  (elementify "noscript" attributes (fixed kids))
+  -> Array (Domable e m lock payload)
+  -> Domable e m lock payload
+noscript attributes kids = Element' (elementify "noscript" attributes (fixed kids))
 
 noscript_
-  :: forall s m lock payload
+  :: forall s m e lock payload
    . Korok s m
-  => Array (Domable m lock payload)
-  -> Domable m lock payload
+  => Array (Domable e m lock payload)
+  -> Domable e m lock payload
 noscript_ = noscript empty
 

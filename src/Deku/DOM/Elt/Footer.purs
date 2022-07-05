@@ -10,17 +10,17 @@ import FRP.Event (AnEvent)
 data Footer_
 
 footer
-  :: forall s m lock payload
+  :: forall s m e lock payload
    . Korok s m
   => AnEvent m (Attribute Footer_)
-  -> Array (Domable m lock payload)
-  -> Domable m lock payload
+  -> Array (Domable e m lock payload)
+  -> Domable e m lock payload
 footer attributes kids = Element' (elementify "footer" attributes (fixed kids))
 
 footer_
-  :: forall s m lock payload
+  :: forall s m e lock payload
    . Korok s m
-  => Array (Domable m lock payload)
-  -> Domable m lock payload
+  => Array (Domable e m lock payload)
+  -> Domable e m lock payload
 footer_ = footer empty
 

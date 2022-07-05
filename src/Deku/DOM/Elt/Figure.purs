@@ -10,17 +10,17 @@ import FRP.Event (AnEvent)
 data Figure_
 
 figure
-  :: forall s m lock payload
+  :: forall s m e lock payload
    . Korok s m
   => AnEvent m (Attribute Figure_)
-  -> Array (Domable m lock payload)
-  -> Domable m lock payload
+  -> Array (Domable e m lock payload)
+  -> Domable e m lock payload
 figure attributes kids = Element' (elementify "figure" attributes (fixed kids))
 
 figure_
-  :: forall s m lock payload
+  :: forall s m e lock payload
    . Korok s m
-  => Array (Domable m lock payload)
-  -> Domable m lock payload
+  => Array (Domable e m lock payload)
+  -> Domable e m lock payload
 figure_ = figure empty
 

@@ -10,18 +10,17 @@ import FRP.Event (AnEvent)
 data Textarea_
 
 textarea
-  :: forall s m lock payload
+  :: forall s m e lock payload
    . Korok s m
   => AnEvent m (Attribute Textarea_)
-  -> Array (Domable m lock payload)
-  -> Domable m lock payload
-textarea attributes kids = Element'
-  (elementify "textarea" attributes (fixed kids))
+  -> Array (Domable e m lock payload)
+  -> Domable e m lock payload
+textarea attributes kids = Element' (elementify "textarea" attributes (fixed kids))
 
 textarea_
-  :: forall s m lock payload
+  :: forall s m e lock payload
    . Korok s m
-  => Array (Domable m lock payload)
-  -> Domable m lock payload
+  => Array (Domable e m lock payload)
+  -> Domable e m lock payload
 textarea_ = textarea empty
 

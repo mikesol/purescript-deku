@@ -10,18 +10,17 @@ import FRP.Event (AnEvent)
 data Summary_
 
 summary
-  :: forall s m lock payload
+  :: forall s m e lock payload
    . Korok s m
   => AnEvent m (Attribute Summary_)
-  -> Array (Domable m lock payload)
-  -> Domable m lock payload
-summary attributes kids = Element'
-  (elementify "summary" attributes (fixed kids))
+  -> Array (Domable e m lock payload)
+  -> Domable e m lock payload
+summary attributes kids = Element' (elementify "summary" attributes (fixed kids))
 
 summary_
-  :: forall s m lock payload
+  :: forall s m e lock payload
    . Korok s m
-  => Array (Domable m lock payload)
-  -> Domable m lock payload
+  => Array (Domable e m lock payload)
+  -> Domable e m lock payload
 summary_ = summary empty
 

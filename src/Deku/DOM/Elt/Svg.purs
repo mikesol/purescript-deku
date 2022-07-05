@@ -10,17 +10,17 @@ import FRP.Event (AnEvent)
 data Svg_
 
 svg
-  :: forall s m lock payload
+  :: forall s m e lock payload
    . Korok s m
   => AnEvent m (Attribute Svg_)
-  -> Array (Domable m lock payload)
-  -> Domable m lock payload
+  -> Array (Domable e m lock payload)
+  -> Domable e m lock payload
 svg attributes kids = Element' (elementify "svg" attributes (fixed kids))
 
 svg_
-  :: forall s m lock payload
+  :: forall s m e lock payload
    . Korok s m
-  => Array (Domable m lock payload)
-  -> Domable m lock payload
+  => Array (Domable e m lock payload)
+  -> Domable e m lock payload
 svg_ = svg empty
 

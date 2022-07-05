@@ -10,17 +10,17 @@ import FRP.Event (AnEvent)
 data Applet_
 
 applet
-  :: forall s m lock payload
+  :: forall s m e lock payload
    . Korok s m
   => AnEvent m (Attribute Applet_)
-  -> Array (Domable m lock payload)
-  -> Domable m lock payload
+  -> Array (Domable e m lock payload)
+  -> Domable e m lock payload
 applet attributes kids = Element' (elementify "applet" attributes (fixed kids))
 
 applet_
-  :: forall s m lock payload
+  :: forall s m e lock payload
    . Korok s m
-  => Array (Domable m lock payload)
-  -> Domable m lock payload
+  => Array (Domable e m lock payload)
+  -> Domable e m lock payload
 applet_ = applet empty
 

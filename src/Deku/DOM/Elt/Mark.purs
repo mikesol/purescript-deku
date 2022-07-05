@@ -10,17 +10,17 @@ import FRP.Event (AnEvent)
 data Mark_
 
 mark
-  :: forall s m lock payload
+  :: forall s m e lock payload
    . Korok s m
   => AnEvent m (Attribute Mark_)
-  -> Array (Domable m lock payload)
-  -> Domable m lock payload
+  -> Array (Domable e m lock payload)
+  -> Domable e m lock payload
 mark attributes kids = Element' (elementify "mark" attributes (fixed kids))
 
 mark_
-  :: forall s m lock payload
+  :: forall s m e lock payload
    . Korok s m
-  => Array (Domable m lock payload)
-  -> Domable m lock payload
+  => Array (Domable e m lock payload)
+  -> Domable e m lock payload
 mark_ = mark empty
 
