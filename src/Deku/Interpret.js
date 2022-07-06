@@ -100,20 +100,6 @@ export const removeActualChild_ = (a) => (state) => () => {
 
 export const deleteFromCache_ = (a) => (state) => () => {
 	// just in case
-	state.units[a.id].remove();
+	if (state.units[a.id].remove) { state.units[a.id].remove(); }
 	delete state.units[a.id];
-};
-
-export const sendToPos_ = (a) => (state) => () => {
-	var ptr = a.id;
-	var pos = a.pos;
-	var parent = state.units[ptr].main.parentNode;
-	parent.insertBefore(
-		state.units[ptr].main,
-		parent.children.length <= pos
-			? parent.children[parent.children.length - 1]
-			: pos < 0
-			? parent.children[0]
-			: parent.children[pos]
-	);
 };
