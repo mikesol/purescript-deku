@@ -1,6 +1,9 @@
 module Deku.Interpret
   ( FFIDOMSnapshot
   , fullDOMInterpret
+  , SSRElement(..)
+  , SSRText(..)
+  , StateUnit(..)
   -- , makeFFIDOMSnapshot
   -- , ssrDOMInterpret
   -- , hydratingDOMInterpret

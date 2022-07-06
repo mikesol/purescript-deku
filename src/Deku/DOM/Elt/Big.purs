@@ -2,9 +2,9 @@ module Deku.DOM.Elt.Big where
 
 import Control.Plus (empty)
 import Deku.Attribute (Attribute)
-import Deku.Control (elementify)
+import Deku.Control (elementify, fixed)
 import Deku.Core (Domable, class Korok)
-import Bolson.Core (Entity(..), fixed)
+import Bolson.Core (Entity(..))
 import FRP.Event (AnEvent)
 
 data Big_

@@ -110,9 +110,9 @@ def cg(CODEGEN_TARGET, ival = None, ival2 = None):
 
 import Control.Plus (empty)
 import Deku.Attribute (Attribute)
-import Deku.Control (elementify)
+import Deku.Control (elementify, fixed)
 import Deku.Core (Domable, class Korok)
-import Bolson.Core (Entity(..), fixed)
+import Bolson.Core (Entity(..))
 import FRP.Event (AnEvent)
 
 data {term}

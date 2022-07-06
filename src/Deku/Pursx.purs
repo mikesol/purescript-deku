@@ -4581,9 +4581,11 @@ __internalDekuFlatten
 __internalDekuFlatten = Bolson.flatten
   { doLogic: \pos (DOMInterpret { sendToPos }) id -> sendToPos { id, pos }
   , ids: unwrap >>> _.ids
-  , disconnectElement:
-      \(DOMInterpret { disconnectElement }) { id } ->
-        disconnectElement { id }
+  , dynamicElementRemoved:
+      \(DOMInterpret { removeChild }) { id } ->
+        removeChild { id }
+  , dynamicElementInserted: \(DOMInterpret { addChild }) { id, parent } ->
+      addChild { child: id, parent }
   , toElt: \(Node e) -> Element e
   }
 
