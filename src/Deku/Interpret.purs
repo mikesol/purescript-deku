@@ -1,6 +1,6 @@
 module Deku.Interpret
   ( FFIDOMSnapshot
-  -- , fullDOMInterpret
+  , fullDOMInterpret
   -- , makeFFIDOMSnapshot
   -- , ssrDOMInterpret
   -- , hydratingDOMInterpret
@@ -33,6 +33,7 @@ import Data.Tuple.Nested ((/\))
 import Deku.Core as Core
 import Effect (Effect, foreachE)
 import Effect.Exception (error, throwException)
+import Effect.Ref as Ref
 import Foreign.Object (Object)
 import Foreign.Object as Object
 import Foreign.Object.ST as STO
@@ -673,12 +674,12 @@ makePursx_ a state'@(FFIDOMSnapshot state) = do
     SEnvy _ -> pure unit -- programming error :-(
     SFixed _ -> pure unit -- programming error :-(
 
-ssrMakePursX_
+ssrMakePursx_
   :: forall r
    . Core.MakePursx
   -> FFIDOMSnapshot r (SSRElement r) SSRText
   -> ST r Unit
-ssrMakePursX_ = pursXCreationStep \t ->
+ssrMakePursx_ = pursXCreationStep \t ->
   pure $ SSRPursxElement { html: t }
 
 pursXCreationStep
@@ -1043,81 +1044,59 @@ sendToPos_ a state'@(FFIDOMSnapshot state) = do
     Just tmr -> insertBefore e tmr parentNode
     Nothing -> appendChild e parentNode
 
--- fullDOMInterpret
---   :: forall r
---    . Ref.Ref Int
---   -> Core.DOMInterpret Effect (FFIDOMSnapshot r -> Effect Unit)
--- fullDOMInterpret seed = Core.DOMInterpret
---   { ids: do
---       s <- Ref.read seed
---       let
---         o = show
---           (evalGen (arbitrary :: Gen Int) { newSeed: mkSeed s, size: 5 })
---       void $ Ref.modify (add 1) seed
---       pure o
---   , makeElement: makeElement_ false
---   , attributeParent: attributeParent_
---   , makeRoot: makeRoot_
---   , makeText: makeText_ false (maybe unit)
---   , makePursx: makePursx_ false (maybe unit)
---   , setProp: setProp_ false
---   , setCb: setCb_ false
---   , setText: setText_
---   , sendToPos: sendToPos_
---   , deleteFromCache: deleteFromCache_
---   , giveNewParent: giveNewParent_
---   , removeChild: removeChild_
---   }
+fullDOMInterpret
+  :: forall r
+   . Ref.Ref Int
+  -> Core.DOMInterpret Web.DOM.Element Effect (EffectfulFFIDOMSnapshot -> Effect Unit)
+fullDOMInterpret seed = Core.DOMInterpret
+  { ids: do
+      s <- Ref.read seed
+      let
+        o = show
+          (evalGen (arbitrary :: Gen Int) { newSeed: mkSeed s, size: 5 })
+      void $ Ref.modify (add 1) seed
+      pure o
+  , makeElement: makeElement_
+  , attributeParent: attributeParent_
+  , makeRoot: makeRoot_
+  , makeText: makeText_
+  , makePursx: makePursx_
+  , setProp: setProp_
+  , setCb: setCb_
+  , setText: setText_
+  , sendToPos: sendToPos_
+  , deleteFromCache: deleteFromCache_
+  , giveNewParent: giveNewParent_
+  , removeChild: removeChild_
+  , makeDyn: makeDyn_
+  , addChild: addChild_
+  }
 
--- ssrDOMInterpret
---   :: forall r
---    . RRef.STRef r Int
---   -> Core.DOMInterpret (ST r)
---        (RRef.STRef r (Array Instruction) -> ST r Unit)
--- ssrDOMInterpret seed = Core.DOMInterpret
---   { ids: do
---       s <- RRef.read seed
---       let
---         o = show
---           (evalGen (arbitrary :: Gen Int) { newSeed: mkSeed s, size: 5 })
---       void $ RRef.modify (add 1) seed
---       pure o
---   , makeElement: ssrMakeElement
---   , attributeParent: \_ _ -> pure unit
---   , makeRoot: \_ _ -> pure unit
---   , makeText: ssrMakeText
---   , makePursx: ssrMakePursx
---   , setProp: ssrSetProp
---   , setCb: \_ _ -> pure unit
---   , setText: ssrSetText
---   , sendToPos: \_ _ -> pure unit
---   , deleteFromCache: \_ _ -> pure unit
---   , giveNewParent: \_ _ -> pure unit
---   , removeChild: \_ _ -> pure unit
---   }
-
--- hydratingDOMInterpret
---   :: forall r
---    . Ref.Ref Int
---   -> Core.DOMInterpret Effect (FFIDOMSnapshot r -> Effect Unit)
--- hydratingDOMInterpret seed = Core.DOMInterpret
---   { ids: do
---       s <- Ref.read seed
---       let
---         o = show
---           (evalGen (arbitrary :: Gen Int) { newSeed: mkSeed s, size: 5 })
---       void $ Ref.modify (add 1) seed
---       pure o
---   , makeElement: makeElement_ true
---   , attributeParent: attributeParent_
---   , makeRoot: makeRoot_
---   , makeText: makeText_ true (maybe unit)
---   , makePursx: makePursx_ true (maybe unit)
---   , setProp: setProp_ true
---   , setCb: setCb_ true
---   , setText: setText_
---   , sendToPos: sendToPos_
---   , deleteFromCache: deleteFromCache_
---   , giveNewParent: giveNewParent_
---   , removeChild: removeChild_
---   }
+ssrDOMInterpret
+  :: forall r
+   . RRef.STRef r Int
+  -> Core.DOMInterpret (SSRElement r) (ST r)
+       (FFIDOMSnapshot r (SSRElement r) SSRText  -> ST r Unit)
+ssrDOMInterpret seed = Core.DOMInterpret
+  { ids: do
+      s <- RRef.read seed
+      let
+        o = show
+          (evalGen (arbitrary :: Gen Int) { newSeed: mkSeed s, size: 5 })
+      void $ RRef.modify (add 1) seed
+      pure o
+  , makeElement: ssrMakeElement_
+  , attributeParent: ssrAttributeParent_
+  , makeRoot: ssrMakeRoot_
+  , makeText: ssrMakeText_
+  , makePursx: ssrMakePursx_
+  , setProp: ssrSetProp_
+  , setCb: \_ _ -> pure unit -- no callbacks in html :-)
+  , setText: ssrSetText_
+  , sendToPos: ssrSendToPos_
+  , deleteFromCache: ssrDeleteFromCache_
+  , giveNewParent: ssrGiveNewParent_
+  , removeChild: ssrRemoveChild_
+  , makeDyn: ssrMakeDyn_
+  , addChild: ssrAddChild_
+  }
