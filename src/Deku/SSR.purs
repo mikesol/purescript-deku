@@ -31,7 +31,6 @@ import Foreign.Object.ST as STO
 -- | 4. Perform inerts into the DOM
 
 foreign import encodedString :: String -> String
-foreign import doPursxReplacements :: Core.MakePursx -> String
 
 render
   :: forall r
@@ -64,7 +63,7 @@ render parentCache state'@(FFIDOMSnapshot state) id = do
             ((traverse (render parentCache state') kids) :: ST r (Array String))
           pure $ (head <> innerMatter <> tail)
         SSRPursxElement { html } -> pure html
-      SText e -> pure ("<!--" <> id <> "-->" <> (unwrap e.main).text)
+      SText e -> pure ("<!--" <> id <> "-->" <> encodedString (unwrap e.main).text)
       SDyn { children } -> fold <$>
         (traverse (render parentCache state') children)
       SEnvy { child } -> fold <$> (traverse (render parentCache state') child)

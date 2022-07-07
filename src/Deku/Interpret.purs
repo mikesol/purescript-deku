@@ -33,6 +33,7 @@ import Data.Tuple.Nested ((/\))
 import Deku.Core (Domable)
 import Deku.Core as Core
 import Effect (Effect, foreachE)
+import Effect.Class.Console as Log
 import Effect.Exception (error, throwException)
 import Effect.Ref as Ref
 import Foreign.Object (Object)
@@ -709,6 +710,7 @@ pursXConnectionStep_ tmp a state'@(FFIDOMSnapshot state) = do
       -- this node needs to be here because otherwise, when
       -- a pursx element is looking for its parent, it won't find it
       key' <- getAttribute "data-deku-elt-internal" e
+      --Log.info (show key')
       for_ key' \key -> do
         let namespacedKey = key <> pxScope
         void $ liftST $ STO.poke namespacedKey
@@ -721,6 +723,7 @@ pursXConnectionStep_ tmp a state'@(FFIDOMSnapshot state) = do
           )
           state.units
         liftST $ addElementScopeToScopes_ { id: namespacedKey, scope } state'
+  --Log.info (show a.id)
   for_ (toParentNode <$> (HTMLElement.fromElement tmp)) \tmp' -> do
     querySelectorAll (QuerySelector "[data-deku-attr-internal]") tmp' >>= toArray >>= traverse_ (flip foreachE  attributeF) <<< traverse fromNode
     querySelectorAll (QuerySelector "[data-deku-elt-internal]") tmp' >>= toArray >>= traverse_ (flip foreachE elementF) <<< traverse fromNode
@@ -787,7 +790,7 @@ pursXCreationStep createElementStep a state'@(FFIDOMSnapshot state) = do
             -- it is an attribute
             put $ String.replace (String.Pattern (verb <> key <> verb))
               ( String.Replacement
-                  ("data-deku-attr-internal=" <> """"""" <> key <> """"""")
+                  ("data-deku-attr-internal=" <> "\"" <> key <> "\"")
               )
               h
           else do
@@ -796,11 +799,11 @@ pursXCreationStep createElementStep a state'@(FFIDOMSnapshot state) = do
                   (verb <> key <> verb)
               )
               ( String.Replacement
-                  ( """<span style="display:contents;" data-deku-elt-internal=""""
-                      <> """""""
+                  ( "<span style=\"display:contents;\" data-deku-elt-internal="
+                      <> "\""
                       <> key
                       <>
-                        """"></span>"""
+                        "\"></span>"
                   )
               )
               h
