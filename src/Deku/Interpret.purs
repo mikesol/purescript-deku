@@ -1,6 +1,7 @@
 module Deku.Interpret
   ( FFIDOMSnapshot(..)
   , EffectfulFFIDOMSnapshot
+  , EffectfulDomable
   , fullDOMInterpret
   , SSRElement(..)
   , SSRText(..)
@@ -30,6 +31,7 @@ import Data.String (trim)
 import Data.String as String
 import Data.Traversable (traverse)
 import Data.Tuple.Nested ((/\))
+import Deku.Core (Domable)
 import Deku.Core as Core
 import Effect (Effect, foreachE)
 import Effect.Exception (error, throwException)
@@ -98,6 +100,8 @@ data StateUnit e t
       , scope :: Scope
       , children :: Array String
       }
+
+type EffectfulDomable lock = Domable Web.DOM.Element Effect lock (FFIDOMSnapshot Global Web.DOM.Element Web.DOM.Text -> Effect Unit)
 
 data SSRElement r
   = SSRElement

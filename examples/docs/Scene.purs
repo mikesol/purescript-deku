@@ -7,8 +7,8 @@ import Data.Foldable (oneOfMap)
 import Data.Profunctor (lcmap)
 import Data.Tuple.Nested ((/\))
 import Deku.Attribute (cb, (:=))
-import Deku.Control (switcher, text_)
-import Deku.Core (Nut, bussed)
+import Deku.Control (bussed, switcher, text_)
+import Deku.Core (Nut)
 import Deku.DOM as D
 import Deku.Example.Docs.Component as Component
 import Deku.Example.Docs.Effects as Effects
