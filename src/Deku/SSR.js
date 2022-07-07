@@ -39,3 +39,5 @@ export const doPursxReplacements = ({ id, html, pxScope, cache, verb }) => {
 		vhtml.slice(0, ix) + " data-deku-ssr-" + id + '="true" ' + vhtml.slice(ix)
 	);
 };
+
+export const freezeObj = (o) => () => ({ ...o });

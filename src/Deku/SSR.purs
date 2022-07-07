@@ -3,18 +3,24 @@ module Deku.SSR where
 import Prelude
 
 import Control.Monad.ST (ST)
-import Control.Monad.State (execState, modify)
-import Data.Array (find, findMap, uncons, (!!))
-import Data.Filterable (filterMap)
-import Data.FoldableWithIndex (foldlWithIndex)
+import Control.Monad.State (lift)
+import Control.Monad.Writer (execWriter, execWriterT, tell)
+import Data.Array (findMap, head, uncons)
+import Data.Array.ST as STA
+import Data.FoldableWithIndex (traverseWithIndex_)
+import Data.Map (SemigroupMap(..))
 import Data.Map as Map
-import Data.Maybe (Maybe(..), fromMaybe, isJust, maybe)
+import Data.Maybe (Maybe(..), fromMaybe, maybe)
+import Data.Newtype (unwrap)
 import Data.String as String
-import Data.Traversable (foldMap, for_, intercalate, traverse)
-import Data.Tuple (Tuple(..), fst)
+import Data.Traversable (fold, for_, intercalate, traverse)
+import Data.Tuple (Tuple(..))
 import Data.Tuple.Nested (type (/\), (/\))
 import Deku.Core as Core
-import Deku.Interpret (FFIDOMSnapshot, SSRElement, SSRText(..), StateUnit)
+import Deku.Interpret (FFIDOMSnapshot(..), SSRElement(..), SSRText, StateUnit(..))
+import Foreign.Object (Object)
+import Foreign.Object as Object
+import Foreign.Object.ST as STO
 
 -- | Algorithm
 -- | Input: state
@@ -27,34 +33,149 @@ import Deku.Interpret (FFIDOMSnapshot, SSRElement, SSRText(..), StateUnit)
 foreign import encodedString :: String -> String
 foreign import doPursxReplacements :: Core.MakePursx -> String
 
-render :: forall r. FFIDOMSnapshot r (SSRElement r) SSRText -> String -> String
-render state id = ?hole
+render
+  :: forall r
+   . Map.Map String (Array String)
+  -> FFIDOMSnapshot r (SSRElement r) SSRText
+  -> String
+  -> ST r String
+render parentCache state'@(FFIDOMSnapshot state) id = do
+  ut <- STO.peek id state.units
+  ut # maybe (pure "") \ut' -> do
+    case ut' of
+      SElement e -> case e.main of
+        SSRElement { attributes, tag } -> do
+          atts <- STA.freeze attributes
+          let
+            head = "<" <> tag <> " "
+              <> intercalate " "
+                ( map (\{ key, value } -> key <> "\"" <> value <> "\"")
+                    atts
+                )
+              <> " data-deku-ssr-"
+              <> id
+              <> "=\"true\">"
+          let
+            tail = "</"
+              <> tag
+              <> ">"
+          let kids = fromMaybe [] (Map.lookup id parentCache)
+          innerMatter <- fold <$>
+            ((traverse (render parentCache state') kids) :: ST r (Array String))
+          pure $ (head <> innerMatter <> tail)
+        SSRPursxElement { html } -> pure html
+      SText e -> pure ("<!--" <> id <> "-->" <> (unwrap e.main).text)
+      SDyn { children } -> fold <$>
+        (traverse (render parentCache state') children)
+      SEnvy { child } -> fold <$> (traverse (render parentCache state') child)
+      SFixed { children } -> fold <$>
+        (traverse (render parentCache state') children)
 
-doReplacements :: String -> (String /\ String ) -> String
-doReplacements dom (id /\ subdom) = ?hole
+doReplacements :: String -> (String /\ String) -> String
+doReplacements dom (id /\ subdom) = fromMaybe dom nw
+  where
+  nw = do
+    let spl0 = String.split (String.Pattern ("deku-ssr-" <> id)) dom
+    ucs0 <- uncons spl0
+    h <- head ucs0.tail
+    let spl1 = String.split (String.Pattern (">")) h
+    ucs1 <- uncons spl1
+    pure $ ucs0.head <> ("deku-ssr-" <> id) <> ucs1.head <> ">" <> subdom <>
+      intercalate ">" ucs1.tail
 
-getBody :: forall r. FFIDOMSnapshot r (SSRElement r) SSRText -> StateUnit (SSRElement r) SSRText
-getBody state = ?hole
+getBody
+  :: forall r
+   . FFIDOMSnapshot r (SSRElement r) SSRText
+  -> ST r String
+getBody state'@(FFIDOMSnapshot state) = do
+  frozen <- Object.toUnfoldable <$> freezeObj state.units
+  -- ugh, technical debt... fix...
+  pure $ fromMaybe "ERROR"
+    ( findMap
+        ( \(a /\ b) -> case b of
+            SDyn _ -> Nothing
+            SFixed _ -> Nothing
+            SEnvy _ -> Nothing
+            SText _ -> Nothing
+            SElement { main } -> case main of
+              SSRPursxElement _ -> Nothing
+              SSRElement { tag }
+                | tag == "body" -> Just a
+                | otherwise -> Nothing
+        )
+        frozen
+    )
 
+getElementsWhoseParentIsNotInGraph
+  :: forall r
+   . FFIDOMSnapshot r (SSRElement r) SSRText
+  -> ST r (Array String)
+getElementsWhoseParentIsNotInGraph state'@(FFIDOMSnapshot state) = do
+  frozen <- freezeObj state.units
+  execWriterT
+    let
+      opar i parent = do
+        p <- lift $ STO.peek i state.units
+        case p of
+          Nothing -> tell [ i ]
+          Just _ -> tell []
+    in
+      ( traverseWithIndex_
+          ( \i u -> case u of
+              SDyn { parent } -> opar i parent
+              SEnvy { parent } -> opar i parent
+              SFixed { parent } -> opar i parent
+              SElement { parent } -> opar i parent
+              SText { parent } -> opar i parent
+          )
+          frozen
+      )
 
-getElementsWhoseParentIsNotInGraph :: forall r. FFIDOMSnapshot r (SSRElement r) SSRText -> Array (StateUnit (SSRElement r) SSRText)
-getElementsWhoseParentIsNotInGraph state = ?hole
+foreign import freezeObj :: forall r a. STO.STObject r a -> ST r (Object a)
 
-ssr :: forall r. FFIDOMSnapshot r (SSRElement r) SSRText
+-- this function relies on the (ugly) fact that all SElement will _always_ have a single child that is _either_ a fixed _or_ whatever goes into the top-level (envy, fixed or dyn)
+makeParentCache
+  :: forall r
+   . FFIDOMSnapshot r (SSRElement r) SSRText
+  -> ST r (Map.Map String (Array String))
+makeParentCache state'@(FFIDOMSnapshot state) = do
+  frozen <- freezeObj state.units
+  pure $ unwrap $ execWriter
+    let
+      opar i parent = for_ parent \p' -> tell
+        (SemigroupMap (Map.singleton p' [ i ]))
+    in
+      ( traverseWithIndex_
+          ( \i u -> case u of
+              SDyn { parent } -> opar i parent
+              SEnvy { parent } -> opar i parent
+              SFixed { parent } -> opar i parent
+              SElement { parent } -> opar i parent
+              SText { parent } -> opar i parent
+          )
+          frozen
+      )
+
+ssr
+  :: forall r
+   . FFIDOMSnapshot r (SSRElement r) SSRText
   -> ST r String
 ssr state = do
   body <- getBody state
+  parentCache <- makeParentCache state
   missingParElts <- getElementsWhoseParentIsNotInGraph state
-  bodyRendered <- render state body
-  subEltsRendered <- traverse (Tuple <*> render state) missingParElts
-  pure (go bodyRendered subEltsRendered)
+  bodyRendered <- render parentCache state body
+  subEltsRendered :: Array (Tuple String String) <- traverse
+    ((map <$> Tuple <*> render parentCache state) :: String -> ST r (Tuple String String))
+    missingParElts
+  pure (go subEltsRendered bodyRendered)
   where
-    go :: Array (Tuple String String) -> String -> String
-    go bod s
-      | Just { head, tail } <- uncons s = go (doReplacements bod head) (map (\(a /\ b) -> a /\ doReplacements b head) tail)
-      | Nothing = bod
-
-
+  go :: Array (Tuple String String) -> String -> String
+  go s bod
+    | Just { head, tail } <- uncons s = go
+        (map (\(a /\ b) -> a /\ doReplacements b head) tail)
+        (doReplacements bod head)
+    | otherwise = bod
 
 -- ssr' :: String -> Array Instruction -> String
 -- ssr' topTag arr = "<" <> topTag <> " data-deku-ssr-deku-root=\"true\">"

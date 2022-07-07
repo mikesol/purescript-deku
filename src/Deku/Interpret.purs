@@ -1,15 +1,12 @@
 module Deku.Interpret
-  ( FFIDOMSnapshot
+  ( FFIDOMSnapshot(..)
+  , EffectfulFFIDOMSnapshot
   , fullDOMInterpret
   , SSRElement(..)
   , SSRText(..)
   , StateUnit(..)
-  -- , makeFFIDOMSnapshot
-  -- , ssrDOMInterpret
-  -- , hydratingDOMInterpret
-  -- , Instruction(..)
-  -- , setHydrating
-  -- , unSetHydrating
+  , makeFFIDOMSnapshot
+  , ssrDOMInterpret
   ) where
 
 import Prelude
@@ -127,7 +124,7 @@ scopeToString (Local s) = s
 scopeToString Global = "rootScope"
 
 addElementScopeToScopes_
-  :: forall r x e t c
+  :: forall r e t c
    . { id :: String, scope :: Scope | c }
   -> FFIDOMSnapshot r e t
   -> ST r Unit
@@ -194,7 +191,7 @@ ssrSetProp_
    . Core.SetProp
   -> FFIDOMSnapshot r (SSRElement r) SSRText
   -> ST r Unit
-ssrSetProp_ a state'@(FFIDOMSnapshot state) = do
+ssrSetProp_ a (FFIDOMSnapshot state) = do
   let ptr = a.id
   let avv = a.value
   ut <- STO.peek ptr state.units
@@ -241,7 +238,7 @@ setPropAndRetrieveElementDuringHydration_
   :: Core.SetProp
   -> EffectfulFFIDOMSnapshot
   -> Effect Unit
-setPropAndRetrieveElementDuringHydration_ a state'@(FFIDOMSnapshot state) = do
+setPropAndRetrieveElementDuringHydration_ a state' = do
   retrieveElementDuringHydration_ a state'
   -- continue to set the property on the element
   setPropContinuation_ a state'
@@ -250,7 +247,7 @@ setCbAndRetrieveElementDuringHydration_
   :: Core.SetCb
   -> EffectfulFFIDOMSnapshot
   -> Effect Unit
-setCbAndRetrieveElementDuringHydration_ a state'@(FFIDOMSnapshot state) = do
+setCbAndRetrieveElementDuringHydration_ a state' = do
   retrieveElementDuringHydration_ a state'
   -- continue to set the cb on the element
   setCbContinuation_ a state'

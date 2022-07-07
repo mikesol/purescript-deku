@@ -39,7 +39,6 @@ import Prim.RowList (class RowToList)
 import Safe.Coerce (coerce)
 import Type.Proxy (Proxy(..))
 import Unsafe.Coerce (unsafeCoerce)
-import Web.DOM as Web.DOM
 
 type Neg1 = -1
 
@@ -318,9 +317,9 @@ text_ txt = text (bang txt)
 deku
   :: forall e s m payload
    . Korok s m
-  => Web.DOM.Element
+  => e
   -> (forall lock. Domable e m lock payload)
-  -> DOMInterpret Web.DOM.Element m payload
+  -> DOMInterpret e m payload
   -> AnEvent m payload
 deku root children di@(DOMInterpret { ids, makeRoot }) = makeEvent \k -> do
   me <- ids
