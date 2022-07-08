@@ -2,7 +2,9 @@
 , dependencies =
   [ "arrays"
   , "bolson"
+  , "console"
   , "control"
+  , "debug"
   , "effect"
   , "either"
   , "exceptions"

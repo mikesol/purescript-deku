@@ -24,12 +24,13 @@ import Data.Array.ST as STA
 import Data.Either (Either(..))
 import Data.Filterable (filter)
 import Data.Foldable (for_, traverse_)
-import Data.Maybe (Maybe(..), fromMaybe, fromMaybe', maybe)
+import Data.Maybe (Maybe(..), fromMaybe, fromMaybe', isJust, maybe)
 import Data.Newtype (class Newtype, unwrap)
 import Data.String (trim)
 import Data.String as String
 import Data.Traversable (traverse)
 import Data.Tuple.Nested ((/\))
+import Debug (spy)
 import Deku.Core (Domable)
 import Deku.Core as Core
 import Effect (Effect, foreachE)
@@ -86,26 +87,34 @@ data StateUnit e t
       , scope :: Scope
       , main :: e
       , listeners :: Object (Web.Event -> Effect Boolean)
+      , portalTookMeHere :: Maybe Scope
       }
   | SText
       { parent :: Maybe String
       , scope :: Scope
       , main :: t
+      , portalTookMeHere :: Maybe Scope
       }
   | SDyn
       { parent :: Maybe String
       , scope :: Scope
       , children :: Array String
+      , portalTookMeHere :: Maybe Scope
+
       }
   | SEnvy
       { parent :: Maybe String
       , scope :: Scope
       , child :: Maybe String
+      , portalTookMeHere :: Maybe Scope
+
       }
   | SFixed
       { parent :: Maybe String
       , scope :: Scope
       , children :: Array String
+      , portalTookMeHere :: Maybe Scope
+
       }
 
 type EffectfulDomable lock = Domable Web.DOM.Element Effect lock
@@ -151,7 +160,8 @@ addElementScopeToScopes_ a (FFIDOMSnapshot state) = do
       void (STO.poke scope arr state.scopes)
 
 removeActualChild_
-  :: { id :: String }
+  :: forall r
+   . { id :: String | r }
   -> EffectfulFFIDOMSnapshot
   -> Effect Unit
 removeActualChild_ a (FFIDOMSnapshot state) = do
@@ -213,6 +223,7 @@ hydrateElement_ a state'@(FFIDOMSnapshot state) = do
             , parent: a.parent
             , scope: a.scope
             , main: qs'
+            , portalTookMeHere: Nothing
             }
         )
         state.units
@@ -224,6 +235,7 @@ hydrateElement_ a state'@(FFIDOMSnapshot state) = do
               , parent: a.parent
               , scope: a.scope
               , main: e
+              , portalTookMeHere: Nothing
               }
           )
           state.units
@@ -277,6 +289,7 @@ retrieveElementDuringHydration_ a state'@(FFIDOMSnapshot state) = do
             , parent: a.parent
             , scope: a.scope
             , main: qs'
+            , portalTookMeHere: Nothing
             }
         )
         state.units
@@ -320,6 +333,7 @@ createElement_ a state'@(FFIDOMSnapshot state) = do
           , parent: a.parent
           , scope: a.scope
           , main: e
+          , portalTookMeHere: Nothing
           }
       )
       state.units
@@ -347,6 +361,7 @@ ssrMakeElement_ a state'@(FFIDOMSnapshot state) = do
         , scope: a.scope
         , parent: a.parent
         , main: SSRElement { attributes, tag: a.tag }
+        , portalTookMeHere: Nothing
         }
     )
     state.units
@@ -365,6 +380,7 @@ makeDynCommon a state'@(FFIDOMSnapshot state) = do
         { scope: a.scope
         , parent: a.parent
         , children: []
+        , portalTookMeHere: Nothing
         }
     )
     state.units
@@ -427,6 +443,7 @@ hydrateText_ a state'@(FFIDOMSnapshot state) = do
                 { scope: a.scope
                 , parent: a.parent
                 , main: tnode
+                , portalTookMeHere: Nothing
                 }
             )
             state.units
@@ -437,6 +454,7 @@ hydrateText_ a state'@(FFIDOMSnapshot state) = do
                 { scope: a.scope
                 , parent: a.parent
                 , main: e
+                , portalTookMeHere: Nothing
                 }
             )
             state.units
@@ -461,6 +479,7 @@ createText_ a state'@(FFIDOMSnapshot state) = do
           { scope: a.scope
           , parent: a.parent
           , main: e
+          , portalTookMeHere: Nothing
           }
       )
       state.units
@@ -486,6 +505,7 @@ ssrMakeText_ a state'@(FFIDOMSnapshot state) = do
         { scope: a.scope
         , parent: a.parent
         , main: SSRText { text: "" }
+        , portalTookMeHere: Nothing
         }
     )
     state.units
@@ -558,58 +578,70 @@ removeChildCommon impl a state'@(FFIDOMSnapshot state) = do
   elt <- liftST $ STO.peek a.id state.units
   for_ elt \elt' -> do
     let
-      nnd' = case elt' of
-        SElement e -> SElement (e { parent = Nothing })
-        SText e -> SText (e { parent = Nothing })
-        SDyn e -> SDyn (e { parent = Nothing })
-        SEnvy e -> SEnvy (e { parent = Nothing })
-        SFixed e -> SFixed (e { parent = Nothing })
-    liftST $ void $ STO.poke a.id nnd' state.units
-    let
-      p = case elt' of
-        SDyn { parent } -> parent
-        SEnvy { parent } -> parent
-        SFixed { parent } -> parent
-        SElement { parent } -> parent
-        SText { parent } -> parent
-    case elt' of
-      SDyn { children } -> for_ children \id -> removeChildCommon impl { id }
-        state'
-      SEnvy { child } -> for_ child \id -> removeChildCommon impl { id } state'
-      SFixed { children } -> for_ children \id -> removeChildCommon impl { id }
-        state'
-      SElement _ -> impl a state'
-      SText _ -> impl a state'
-    for_ p \parent' -> do
-      parElt <- liftST $ STO.peek parent' state.units
-      for_ parElt \parElt' -> do
-        case parElt' of
-          SDyn t -> liftST $ void $ STO.poke parent'
-            ( SDyn
-                ( t
-                    { children = filter (not <<< (_ == a.id)) t.children
-                    }
-                )
-            )
-            state.units
-          SEnvy t -> liftST $ void $ STO.poke parent'
-            ( SEnvy
-                ( t
-                    { child = Nothing
-                    }
-                )
-            )
-            state.units
-          SFixed t -> liftST $ void $ STO.poke parent'
-            ( SFixed
-                ( t
-                    { children = filter (not <<< (_ == a.id)) t.children
-                    }
-                )
-            )
-            state.units
-          SElement _ -> pure unit
-          SText _ -> pure unit
+      currentPortal = case elt' of
+        SElement e -> e.portalTookMeHere
+        SText e -> e.portalTookMeHere
+        SDyn e -> e.portalTookMeHere
+        SEnvy e -> e.portalTookMeHere
+        SFixed e -> e.portalTookMeHere
+    unless (isJust currentPortal && Just a.scope /= currentPortal) do
+      let
+        nnd' = case elt' of
+          SElement e -> SElement (e { parent = Nothing })
+          SText e -> SText (e { parent = Nothing })
+          SDyn e -> SDyn (e { parent = Nothing })
+          SEnvy e -> SEnvy (e { parent = Nothing })
+          SFixed e -> SFixed (e { parent = Nothing })
+      liftST $ void $ STO.poke a.id nnd' state.units
+      let
+        p = case elt' of
+          SDyn { parent } -> parent
+          SEnvy { parent } -> parent
+          SFixed { parent } -> parent
+          SElement { parent } -> parent
+          SText { parent } -> parent
+      case elt' of
+        SDyn { children } -> for_ children \id -> removeChildCommon impl
+          { id, scope: a.scope }
+          state'
+        SEnvy { child } -> for_ child \id -> removeChildCommon impl
+          { id, scope: a.scope }
+          state'
+        SFixed { children } -> for_ children \id -> removeChildCommon impl
+          { id, scope: a.scope }
+          state'
+        SElement _ -> impl a state'
+        SText _ -> impl a state'
+      for_ p \parent' -> do
+        parElt <- liftST $ STO.peek parent' state.units
+        for_ parElt \parElt' -> do
+          case parElt' of
+            SDyn t -> liftST $ void $ STO.poke parent'
+              ( SDyn
+                  ( t
+                      { children = filter (not <<< (_ == a.id)) t.children
+                      }
+                  )
+              )
+              state.units
+            SEnvy t -> liftST $ void $ STO.poke parent'
+              ( SEnvy
+                  ( t
+                      { child = Nothing
+                      }
+                  )
+              )
+              state.units
+            SFixed t -> liftST $ void $ STO.poke parent'
+              ( SFixed
+                  ( t
+                      { children = filter (not <<< (_ == a.id)) t.children
+                      }
+                  )
+              )
+              state.units
+            SElement _ -> pure unit
+            SText _ -> pure unit
 
 ssrRemoveChild_
   :: forall r
@@ -622,7 +654,9 @@ removeChild_
   :: Core.RemoveChild
   -> EffectfulFFIDOMSnapshot
   -> Effect Unit
-removeChild_ = removeChildCommon removeActualChild_
+removeChild_ a state = do
+  --Log.info ("removeChild_: " <> show a)
+  removeChildCommon removeActualChild_ a state
 
 attributeParentCommon
   :: forall r e t m
@@ -701,6 +735,7 @@ pursXConnectionStep_ tmp a state'@(FFIDOMSnapshot state) = do
               , main: e
               , scope: scope
               , parent: a.parent
+              , portalTookMeHere: Nothing
               }
           )
           state.units
@@ -719,14 +754,18 @@ pursXConnectionStep_ tmp a state'@(FFIDOMSnapshot state) = do
               , main: e
               , scope: scope
               , parent: a.parent
+              , portalTookMeHere: Nothing
               }
           )
           state.units
         liftST $ addElementScopeToScopes_ { id: namespacedKey, scope } state'
   --Log.info (show a.id)
   for_ (toParentNode <$> (HTMLElement.fromElement tmp)) \tmp' -> do
-    querySelectorAll (QuerySelector "[data-deku-attr-internal]") tmp' >>= toArray >>= traverse_ (flip foreachE  attributeF) <<< traverse fromNode
-    querySelectorAll (QuerySelector "[data-deku-elt-internal]") tmp' >>= toArray >>= traverse_ (flip foreachE elementF) <<< traverse fromNode
+    querySelectorAll (QuerySelector "[data-deku-attr-internal]") tmp'
+      >>= toArray
+      >>= traverse_ (flip foreachE attributeF) <<< traverse fromNode
+    querySelectorAll (QuerySelector "[data-deku-elt-internal]") tmp' >>= toArray
+      >>= traverse_ (flip foreachE elementF) <<< traverse fromNode
 
 pursXCreationStepDOM
   :: Core.MakePursx
@@ -816,6 +855,7 @@ pursXCreationStep createElementStep a state'@(FFIDOMSnapshot state) = do
         , parent: a.parent
         , scope: scope
         , main: e
+        , portalTookMeHere: Nothing
         }
     )
     state.units
@@ -841,6 +881,7 @@ protoMakeRoot { id, root } state'@(FFIDOMSnapshot state) = do
             , parent: Nothing
             , scope: Bolson.Core.Global
             , listeners: Object.empty
+            , portalTookMeHere: Nothing
             }
         )
         state.units
@@ -912,7 +953,6 @@ setCbContinuation_ a (FFIDOMSnapshot state) = do
   for_ ut \ut' -> do
     case ut' of
       SElement e -> do
-        let tn = tagName e.main
         if a.key == "@self@" then do
           void $ (unwrap avv)
             ((unsafeCoerce :: Web.DOM.Element -> Web.Event.Event.Event) e.main)
@@ -938,6 +978,7 @@ giveNewParent_
   -> EffectfulFFIDOMSnapshot
   -> Effect Unit
 giveNewParent_ a state' = do
+  --Log.info $ "giveNewParent_: " <> show a.id
   liftST $ protoGiveNewParent a state'
   -- todo: are give new parent and attribute parent the same??
   attributeParent_ { id: a.id, parent: a.parent } state'
@@ -949,7 +990,8 @@ protoGiveNewParent
   -> FFIDOMSnapshot r e t
   -> m Unit
 protoGiveNewParent a state'@(FFIDOMSnapshot state) = do
-  liftST $ removeChildCommon (\_ _ -> pure unit) { id: a.id } state'
+  liftST $ removeChildCommon (\_ _ -> pure unit) { id: a.id, scope: a.scope }
+    state'
   let ptr = a.id
   let parent = a.parent
   nd <- liftST $ STO.peek ptr state.units
@@ -957,11 +999,16 @@ protoGiveNewParent a state'@(FFIDOMSnapshot state) = do
     -- set parent
     let
       nnd' = case nd' of
-        SElement aa -> SElement (aa { parent = Just parent })
-        SText aa -> SText (aa { parent = Just parent })
-        SDyn aa -> SDyn (aa { parent = Just parent })
-        SEnvy aa -> SEnvy (aa { parent = Just parent })
-        SFixed aa -> SFixed (aa { parent = Just parent })
+        SElement aa -> SElement
+          (aa { parent = Just parent, portalTookMeHere = Just a.scope })
+        SText aa -> SText
+          (aa { parent = Just parent, portalTookMeHere = Just a.scope })
+        SDyn aa -> SDyn
+          (aa { parent = Just parent, portalTookMeHere = Just a.scope })
+        SEnvy aa -> SEnvy
+          (aa { parent = Just parent, portalTookMeHere = Just a.scope })
+        SFixed aa -> SFixed
+          (aa { parent = Just parent, portalTookMeHere = Just a.scope })
     liftST $ void $ STO.poke ptr nnd' state.units
 
 ssrGiveNewParent_
@@ -975,8 +1022,10 @@ deleteFromCache_
   :: Core.DeleteFromCache
   -> EffectfulFFIDOMSnapshot
   -> Effect Unit
-deleteFromCache_ a state'@(FFIDOMSnapshot state) = do
-  removeChild_ { id: a.id } state'
+deleteFromCache_ a state' = do
+  --Log.info ("deleteFromCache_: " <> show a.id)
+  -- should be removed already!
+  --  removeChild_ { id: a.id, scope: a.scope } state'
   liftST $ protoDeleteFromCache a state'
 
 protoDeleteFromCache
@@ -1022,6 +1071,7 @@ sendToPosNominal a (FFIDOMSnapshot state) = do
               newKids = delete ptr e.children
               newerKids = fromMaybe' (\_ -> newKids <> [ ptr ])
                 (insertAt pos ptr newKids)
+              -- _____ = spy "kids" {children: e.children, newerKids}
             in
               liftST $
                 ( STO.poke parent'
@@ -1094,7 +1144,8 @@ getParentAndToMyRight
   -> EffectfulFFIDOMSnapshot
   -> Effect { parentNode :: Web.DOM.Node, toMyRight :: Maybe Web.DOM.Node.Node }
 getParentAndToMyRight initialSearch a state'@(FFIDOMSnapshot state) = do
-  { parentNode, parentId } <- getParent a.id
+  { parentNode, parentId } <- getParent false a.id
+  -- let ___ = spy "pnpi" { parentNode, parentId }
   toMyRight <- getAbuttingRight parentId a.id initialSearch
   pure { parentNode: toNode parentNode, toMyRight }
   where
@@ -1139,7 +1190,7 @@ getParentAndToMyRight initialSearch a state'@(FFIDOMSnapshot state) = do
               newArray
             Nothing -> pure Nothing
 
-  getParent ptr = do
+  getParent isParent (ptr :: String) = do
     let
       hittingTheFan = throwException
         ( error
@@ -1152,11 +1203,11 @@ getParentAndToMyRight initialSearch a state'@(FFIDOMSnapshot state) = do
     case ut of
       Just ut' -> do
         case ut' of
-          SElement e -> pure { parentNode: e.main, parentId: ptr }
-          SText e -> maybe hittingTheFan getParent e.parent
-          SDyn e -> maybe hittingTheFan getParent e.parent
-          SEnvy e -> maybe hittingTheFan getParent e.parent
-          SFixed e -> maybe hittingTheFan getParent e.parent
+          SElement e -> if isParent then pure { parentNode: e.main, parentId: ptr } else maybe hittingTheFan (getParent true) e.parent
+          SText e -> maybe hittingTheFan (getParent true) e.parent
+          SDyn e -> maybe hittingTheFan (getParent true) e.parent
+          SEnvy e -> maybe hittingTheFan (getParent true) e.parent
+          SFixed e -> maybe hittingTheFan (getParent true) e.parent
       Nothing -> hittingTheFan
 
 getImmediateChildEltsInOrder
@@ -1180,10 +1231,12 @@ sendToPos_
   :: Core.SendToPos
   -> EffectfulFFIDOMSnapshot
   -> Effect Unit
-sendToPos_ a state'@(FFIDOMSnapshot state) = do
+sendToPos_ a state' = do
+  -- Log.info "starting send to pos"
   initialSearch <- sendToPosNominal a state'
   { parentNode, toMyRight } <- getParentAndToMyRight initialSearch a state'
   eltsInOrder <- getImmediateChildEltsInOrder a.id state'
+  -- let _____ = spy "parentNode tmr" {parentNode, toMyRight, id: a.id, eltsInOrder}
   foreachE eltsInOrder \e -> case toMyRight of
     Just tmr -> insertBefore e tmr parentNode
     Nothing -> appendChild e parentNode

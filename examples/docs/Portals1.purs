@@ -8,7 +8,7 @@ import Data.FastVect.FastVect as V
 import Data.Foldable (oneOfMap)
 import Data.Profunctor (lcmap)
 import Deku.Attribute (cb, (:=))
-import Deku.Control (dyn, bus, portal, switcher, text_)
+import Deku.Control (dyn, envy, bus, portal, switcher, text_)
 import Deku.Core (insert, Nut)
 import Deku.DOM as D
 import Deku.Example.Docs.Types (Page(..), PageOptions)
@@ -117,9 +117,9 @@ main = runInBody1
       )
   , result: nut
 
-      ( dyn $ bus \push -> lcmap (alt (bang unit))
+      ( envy $ bus \push -> lcmap (alt (bang unit))
           \event -> do
-             insert $ portal
+             portal
               ( map
                   ( \i -> D.video
                       (oneOfMap bang [ D.Controls := "true", D.Width := "250" ])

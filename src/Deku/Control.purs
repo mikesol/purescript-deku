@@ -249,8 +249,8 @@ portalFlatten =
   { doLogic: \pos (DOMInterpret { sendToPos }) id -> sendToPos { id, pos }
   , ids: unwrap >>> _.ids
   , dynamicElementRemoved:
-      \(DOMInterpret { removeChild }) { id } ->
-        removeChild { id }
+      \(DOMInterpret { removeChild }) { id, scope } -> do
+        removeChild { id, scope }
   , dynamicElementInserted: \(DOMInterpret { addChild }) { id, parent } ->
       addChild { child: id, parent }
   , toElt: \(Node e) -> Bolson.Core.Element e

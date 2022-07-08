@@ -107,7 +107,7 @@ type AddChild =
   , child :: String
   }
 
-type RemoveChild = { id :: String }
+type RemoveChild = { id :: String, scope :: Scope }
 
 type AttributeParent =
   { id :: String
