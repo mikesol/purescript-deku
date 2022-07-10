@@ -21,7 +21,6 @@ import Control.Monad.ST.Internal as RRef
 import Control.Monad.State (execState, get, put)
 import Data.Array (delete, drop, insertAt, span, uncons)
 import Data.Array.ST as STA
-import Data.Either (Either(..))
 import Data.Filterable (filter)
 import Data.Foldable (for_, traverse_)
 import Data.Maybe (Maybe(..), fromMaybe, fromMaybe', isJust, maybe)
@@ -30,11 +29,10 @@ import Data.String (trim)
 import Data.String as String
 import Data.Traversable (traverse)
 import Data.Tuple.Nested ((/\))
-import Debug (spy)
 import Deku.Core (Domable)
 import Deku.Core as Core
 import Effect (Effect, foreachE)
-import Effect.Class.Console as Log
+import Effect.Class.Console (logShow)
 import Effect.Exception (error, throwException)
 import Effect.Ref as Ref
 import Foreign.Object (Object)
@@ -658,51 +656,23 @@ removeChild_ a state = do
   --Log.info ("removeChild_: " <> show a)
   removeChildCommon removeActualChild_ a state
 
-attributeParentCommon
-  :: forall r e t m
-   . MonadST r m
-  => (e -> Either e t -> m Unit)
-  -> Core.AttributeParent
-  -> FFIDOMSnapshot r e t
-  -> m Unit
-attributeParentCommon attributor a (FFIDOMSnapshot state) = do
-  nd <- liftST $ STO.peek a.id state.units
-  for_ nd case _ of
-    SElement t -> go (Left t.main) t.parent
-    SText t -> go (Right t.main) t.parent
-    SDyn _ -> pure unit -- programming error :-(
-    SEnvy _ -> pure unit -- programming error :-(
-    SFixed _ -> pure unit -- programming error :-(
-  where
-  go e = case _ of
-    Nothing -> pure unit
-    Just p -> do
-      nd <- liftST $ STO.peek p state.units
-      for_ nd case _ of
-        SElement t -> attributor t.main e
-        SText t -> pure unit -- programming error :-(
-        SDyn { parent } -> go e parent
-        SEnvy { parent } -> go e parent
-        SFixed { parent } -> go e parent
-
 attributeParent_
   :: Core.AttributeParent
   -> EffectfulFFIDOMSnapshot
   -> Effect Unit
-attributeParent_ = attributeParentCommon
-  \e lr -> appendChild
-    ( case lr of
-        Left elt -> toNode elt
-        Right txt -> Web.DOM.Text.toNode txt
-    )
-    (toNode e)
+attributeParent_ a state = do
+  logShow a
+  -- -1 to avoid overflow errors
+  sendToPos_ { id: a.id, pos: top - 1 } state
 
 ssrAttributeParent_
   :: forall r
    . Core.AttributeParent
   -> FFIDOMSnapshot r (SSRElement r) SSRText
   -> ST r Unit
-ssrAttributeParent_ = attributeParentCommon \_ _ -> pure unit
+ssrAttributeParent_ a state = do
+  -- -1 to avoid overflow errors
+  ssrSendToPos_ { id: a.id, pos: top - 1 } state
 
 foreign import setInnerHTML_ :: String -> Web.DOM.Element -> Effect Unit
 
@@ -1071,7 +1041,7 @@ sendToPosNominal a (FFIDOMSnapshot state) = do
               newKids = delete ptr e.children
               newerKids = fromMaybe' (\_ -> newKids <> [ ptr ])
                 (insertAt pos ptr newKids)
-              -- _____ = spy "kids" {children: e.children, newerKids}
+              -- _____ = spy "dropping" pos
             in
               liftST $
                 ( STO.poke parent'
@@ -1146,7 +1116,9 @@ getParentAndToMyRight
 getParentAndToMyRight initialSearch a state'@(FFIDOMSnapshot state) = do
   { parentNode, parentId } <- getParent false a.id
   -- let ___ = spy "pnpi" { parentNode, parentId }
+  -- let ____ = spy "initialSearch" initialSearch
   toMyRight <- getAbuttingRight parentId a.id initialSearch
+  -- let ___ = spy "toMyRight" toMyRight
   pure { parentNode: toNode parentNode, toMyRight }
   where
   drillDownSingleId
@@ -1242,8 +1214,7 @@ sendToPos_ a state' = do
     Nothing -> appendChild e parentNode
 
 fullDOMInterpret
-  :: forall r
-   . Ref.Ref Int
+  :: Ref.Ref Int
   -> Core.DOMInterpret Web.DOM.Element Effect
        (EffectfulFFIDOMSnapshot -> Effect Unit)
 fullDOMInterpret seed = Core.DOMInterpret
