@@ -7,7 +7,7 @@ import Control.Monad.State (lift)
 import Control.Monad.Writer (execWriter, execWriterT, tell)
 import Data.Array (findMap, head, uncons)
 import Data.Array.ST as STA
-import Data.FoldableWithIndex (traverseWithIndex_)
+import Data.FoldableWithIndex (foldrWithIndex, traverseWithIndex_)
 import Data.Map (SemigroupMap(..))
 import Data.Map as Map
 import Data.Maybe (Maybe(..), fromMaybe, maybe)
@@ -16,7 +16,7 @@ import Data.String as String
 import Data.Traversable (fold, for_, intercalate, traverse)
 import Data.Tuple (Tuple(..))
 import Data.Tuple.Nested (type (/\), (/\))
-import Deku.Core as Core
+import Debug (spy)
 import Deku.Interpret (FFIDOMSnapshot(..), SSRElement(..), SSRText, StateUnit(..))
 import Foreign.Object (Object)
 import Foreign.Object as Object
@@ -137,8 +137,9 @@ makeParentCache
   :: forall r
    . FFIDOMSnapshot r (SSRElement r) SSRText
   -> ST r (Map.Map String (Array String))
-makeParentCache state'@(FFIDOMSnapshot state) = do
+makeParentCache (FFIDOMSnapshot state) = do
   frozen <- freezeObj state.units
+  -- let _ = spy "frozen" state.units
   pure $ unwrap $ execWriter
     let
       opar i parent = for_ parent \p' -> tell
@@ -161,8 +162,11 @@ ssr
   -> ST r String
 ssr state = do
   body <- getBody state
+  -- let _ = spy "body" body
   parentCache <- makeParentCache state
+  -- let _ = spy "parentCache" (foldrWithIndex Object.insert Object.empty parentCache)
   missingParElts <- getElementsWhoseParentIsNotInGraph state
+  -- let _ = spy "missingParElts" missingParElts
   bodyRendered <- render parentCache state body
   subEltsRendered :: Array (Tuple String String) <- traverse
     ((map <$> Tuple <*> render parentCache state) :: String -> ST r (Tuple String String))

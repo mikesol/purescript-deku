@@ -661,7 +661,7 @@ attributeParent_
   -> EffectfulFFIDOMSnapshot
   -> Effect Unit
 attributeParent_ a state = do
-  logShow a
+  -- logShow a
   -- -1 to avoid overflow errors
   sendToPos_ { id: a.id, pos: top - 1 } state
 

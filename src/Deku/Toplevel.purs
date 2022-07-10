@@ -104,8 +104,7 @@ runSSR  (Template { head, tail }) children = do
           ffi <- makeFFIDOMSnapshot
           attributes <- STA.new
           evt <- RRef.new 0 <#> (deku (SSRElement { attributes, tag: "body" }) children <<< ssrDOMInterpret)
-          u <- subscribe evt \i -> i ffi
-          u
+          void $ subscribe evt \i -> i ffi
           ssr ffi
       )
   pure (head <> o <> tail)
