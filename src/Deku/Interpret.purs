@@ -32,7 +32,7 @@ import Data.Tuple.Nested ((/\))
 import Deku.Core (Domable)
 import Deku.Core as Core
 import Effect (Effect, foreachE)
-import Effect.Class.Console (logShow)
+--import Effect.Class.Console (logShow)
 import Effect.Exception (error, throwException)
 import Effect.Ref as Ref
 import Foreign.Object (Object)
@@ -322,19 +322,17 @@ createElement_ a state'@(FFIDOMSnapshot state) = do
   -- if it does, we need to create it from scratch
   w <- window
   d <- document w
-  b <- body d
-  for_ b \b' -> do
-    e <- createElement a.tag (toDocument d)
-    liftST $ STO.poke a.id
-      ( SElement
-          { listeners: Object.empty
-          , parent: a.parent
-          , scope: a.scope
-          , main: e
-          , portalTookMeHere: Nothing
-          }
-      )
-      state.units
+  e <- createElement a.tag (toDocument d)
+  void $ liftST $ STO.poke a.id
+    ( SElement
+        { listeners: Object.empty
+        , parent: a.parent
+        , scope: a.scope
+        , main: e
+        , portalTookMeHere: Nothing
+        }
+    )
+    state.units
 
 makeElement_
   :: Core.MakeElement
@@ -469,18 +467,16 @@ createText_ a state'@(FFIDOMSnapshot state) = do
   -- if it does, we need to create it from scratch
   w <- window
   d <- document w
-  b <- body d
-  for_ b \b' -> do
-    e <- createTextNode "" (toDocument d)
-    liftST $ STO.poke a.id
-      ( SText
-          { scope: a.scope
-          , parent: a.parent
-          , main: e
-          , portalTookMeHere: Nothing
-          }
-      )
-      state.units
+  e <- createTextNode "" (toDocument d)
+  void $ liftST $ STO.poke a.id
+    ( SText
+        { scope: a.scope
+        , parent: a.parent
+        , main: e
+        , portalTookMeHere: Nothing
+        }
+    )
+    state.units
 
 makeText_
   :: Core.MakeText

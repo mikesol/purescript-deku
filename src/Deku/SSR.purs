@@ -7,7 +7,7 @@ import Control.Monad.State (lift)
 import Control.Monad.Writer (execWriter, execWriterT, tell)
 import Data.Array (findMap, head, uncons)
 import Data.Array.ST as STA
-import Data.FoldableWithIndex (foldrWithIndex, traverseWithIndex_)
+import Data.FoldableWithIndex (traverseWithIndex_)
 import Data.Map (SemigroupMap(..))
 import Data.Map as Map
 import Data.Maybe (Maybe(..), fromMaybe, maybe)
@@ -16,7 +16,6 @@ import Data.String as String
 import Data.Traversable (fold, for_, intercalate, traverse)
 import Data.Tuple (Tuple(..))
 import Data.Tuple.Nested (type (/\), (/\))
-import Debug (spy)
 import Deku.Interpret (FFIDOMSnapshot(..), SSRElement(..), SSRText, StateUnit(..))
 import Foreign.Object (Object)
 import Foreign.Object as Object
@@ -86,7 +85,7 @@ getBody
   :: forall r
    . FFIDOMSnapshot r (SSRElement r) SSRText
   -> ST r String
-getBody state'@(FFIDOMSnapshot state) = do
+getBody (FFIDOMSnapshot state) = do
   frozen <- Object.toUnfoldable <$> freezeObj state.units
   -- ugh, technical debt... fix...
   pure $ fromMaybe "ERROR"
@@ -109,12 +108,12 @@ getElementsWhoseParentIsNotInGraph
   :: forall r
    . FFIDOMSnapshot r (SSRElement r) SSRText
   -> ST r (Array String)
-getElementsWhoseParentIsNotInGraph state'@(FFIDOMSnapshot state) = do
+getElementsWhoseParentIsNotInGraph (FFIDOMSnapshot state) = do
   frozen <- freezeObj state.units
   execWriterT
     let
-      opar i parent = do
-        p <- lift $ STO.peek i state.units
+      opar i p' = for_ p' \p'' -> do
+        p <- lift $ STO.peek p'' state.units
         case p of
           Nothing -> tell [ i ]
           Just _ -> tell []
