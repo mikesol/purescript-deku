@@ -1,7 +1,7 @@
 export const setInnerHTML_ = (t) => (elt) => () => {
 	elt.innerHTML = t;
 };
-export const getTextNode_ = (dom) => () => {
+export const getTextNode_ = (dom) => (ptr) => () => {
 	if (dom.childNodes.length === 1) {
 		const node = document.createTextNode("");
 		dom.prepend(node);
@@ -12,9 +12,11 @@ export const getTextNode_ = (dom) => () => {
 				dom.childNodes[i].nodeType === 8 &&
 				dom.childNodes[i].nodeValue === ptr
 			) {
-				return dom.childNodes[i - 1];
+				console.log("returning", dom, ptr, i, dom.childNodes[i - 1]);
+				return dom.childNodes[i + 1];
 			}
 		}
+		throw new Error("No text node found for pointer: " + ptr + " with cn length: " + dom.childNodes.length);
 	}
 	throw new Error(
 		"You think you're clever, but your hydration algorithm just threw a programming error..."

@@ -71,7 +71,7 @@ render parentCache state'@(FFIDOMSnapshot state) id = do
         (traverse (render parentCache state') children)
 
 doReplacements :: String -> (String /\ String /\ String) -> String
-doReplacements dom (par /\ id /\ subdom) = do
+doReplacements dom (par /\ _ /\ subdom) = do
   -- let _ = spy "doReplacements" [par, id, dom, subdom, show nw]
   fromMaybe dom nw
   where

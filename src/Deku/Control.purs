@@ -328,7 +328,7 @@ deku root children di@(DOMInterpret { ids, makeRoot }) = makeEvent \k -> do
         [ bang (makeRoot { id: me, root })
         , __internalDekuFlatten
             { parent: Just me
-            , scope: Bolson.Core.Local "rootBolson.Core.Scope"
+            , scope: Bolson.Core.Local "rootScope"
             , raiseId: \_ _ -> pure unit
             }
             di

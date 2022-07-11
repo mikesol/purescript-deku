@@ -33,7 +33,7 @@ import Data.Tuple.Nested ((/\))
 import Deku.Core (Domable)
 import Deku.Core as Core
 import Effect (Effect, foreachE)
---import Effect.Class.Console (logShow)
+import Effect.Class.Console as Log
 import Effect.Exception (error, throwException)
 import Effect.Ref as Ref
 import Foreign.Object (Object)
@@ -219,19 +219,23 @@ hydrateElement_ a state'@(FFIDOMSnapshot state) = do
     qs <- querySelector (QuerySelector ("[data-deku-ssr-" <> a.id <> "]"))
       (toParentNode b')
     case qs of
-      Just qs' -> liftST $ STO.poke a.id
-        ( SElement
-            { listeners: Object.empty
-            , parent: a.parent
-            , scope: a.scope
-            , main: qs'
-            , portalTookMeHere: Nothing
-            }
-        )
-        state.units
+      Just qs' ->
+        do
+          Log.info ("Found elt " <> show a)
+          void $ liftST $ STO.poke a.id
+            ( SElement
+                { listeners: Object.empty
+                , parent: a.parent
+                , scope: a.scope
+                , main: qs'
+                , portalTookMeHere: Nothing
+                }
+            )
+            state.units
       Nothing -> do
+        Log.error ("Could not find elt" <> show a)
         e <- createElement a.tag (toDocument d)
-        liftST $ STO.poke a.id
+        void $ liftST $ STO.poke a.id
           ( SElement
               { listeners: Object.empty
               , parent: a.parent
@@ -283,18 +287,29 @@ retrieveElementDuringHydration_ a state'@(FFIDOMSnapshot state) = do
   for_ b \b' -> do
     qs <- querySelector (QuerySelector ("[data-deku-ssr-" <> a.id <> "]"))
       (toParentNode b')
-    for_ qs \qs' -> do
-      liftST $ addElementScopeToScopes_ a state'
-      liftST $ STO.poke a.id
-        ( SElement
-            { listeners: Object.empty
-            , parent: a.parent
-            , scope: a.scope
-            , main: qs'
-            , portalTookMeHere: Nothing
-            }
+    qs # maybe
+      ( Log.error
+          ( "Could not find pursx " <> show
+              { id: a.id, parent: a.parent, scope: a.scope }
+          )
+      )
+      \qs' -> do
+        ( Log.info
+            ( "Found pursx " <> show
+                { id: a.id, parent: a.parent, scope: a.scope }
+            )
         )
-        state.units
+        liftST $ addElementScopeToScopes_ a state'
+        void $ liftST $ STO.poke a.id
+          ( SElement
+              { listeners: Object.empty
+              , parent: a.parent
+              , scope: a.scope
+              , main: qs'
+              , portalTookMeHere: Nothing
+              }
+          )
+          state.units
 
 setPropAndRetrieveElementDuringHydration_
   :: Core.SetProp
@@ -416,7 +431,7 @@ addTextScopeToScopes_ a (FFIDOMSnapshot state) = do
       void $ STA.push ptr arr
       void (STO.poke scope arr state.scopes)
 
-foreign import getTextNode_ :: Web.DOM.Element -> Effect (Web.DOM.Text)
+foreign import getTextNode_ :: Web.DOM.Element -> String -> Effect (Web.DOM.Text)
 
 hydrateText_
   :: Core.MakeText
@@ -431,13 +446,19 @@ hydrateText_ a state'@(FFIDOMSnapshot state) = do
   w <- window
   d <- document w
   b <- body d
-  for_ b \b' ->
-    for_ a.parent \p' -> do
-      qs <- querySelector (QuerySelector ("[data-deku-ssr-" <> p' <> "]"))
+  for_ b \b' -> do
+    -- we cannot run getParent on the id because it is not added to the cache yet
+    -- so we start from the parent
+    for_ a.parent \parId' -> do
+      parrrr <- getParent true parId' a.id state'
+      qs <- querySelector
+        (QuerySelector ("[data-deku-ssr-" <> parrrr.parentId <> "]"))
         (toParentNode b')
       case qs of
         Just qs' -> do
-          tnode <- getTextNode_ qs'
+          Log.info $ "Found parent " <> parrrr.parentId
+          tnode <- getTextNode_ qs' a.id
+          Log.info ("Found text " <> show a)
           liftST $ STO.poke a.id
             ( SText
                 { scope: a.scope
@@ -448,6 +469,7 @@ hydrateText_ a state'@(FFIDOMSnapshot state) = do
             )
             state.units
         Nothing -> do
+          Log.error ("Could not find text " <> show a)
           e <- createTextNode "" (toDocument d)
           liftST $ STO.poke a.id
             ( SText
@@ -796,7 +818,10 @@ pursXCreationStep createElementStep a state'@(FFIDOMSnapshot state) = do
             -- it is an attribute
             put $ String.replace (String.Pattern (verb <> key <> verb))
               ( String.Replacement
-                  ("data-deku-attr-internal=" <> "\"" <> namespaceWithPursxScope key a.pxScope <> "\"")
+                  ( "data-deku-attr-internal=" <> "\""
+                      <> namespaceWithPursxScope key a.pxScope
+                      <> "\""
+                  )
               )
               h
           else do
@@ -1038,7 +1063,7 @@ sendToPosNominal a (FFIDOMSnapshot state) = do
               newKids = delete ptr e.children
               newerKids = fromMaybe' (\_ -> newKids <> [ ptr ])
                 (insertAt pos ptr newKids)
-              -- _____ = spy "dropping" pos
+            -- _____ = spy "dropping" pos
             in
               liftST $
                 ( STO.poke parent'
@@ -1105,13 +1130,50 @@ stepUpAndOver needle state'@(FFIDOMSnapshot state) = do
             -- no dice, nothing to the right
             SText _ -> pure Nothing
 
+getParent
+  :: Boolean
+  -> String
+  -> String
+  -> EffectfulFFIDOMSnapshot
+  -> Effect
+       { parentId :: String
+       , parentNode :: Web.DOM.Element
+       }
+getParent isParent (ptr :: String) starts state'@(FFIDOMSnapshot state) = do
+  let
+    hittingTheFan = throwException
+      ( error
+          ( "Cannot resolve parent of " <> ptr
+              <> " for dyn traversal starting at "
+              <> starts
+          )
+      )
+  ut <- liftST $ STO.peek ptr state.units
+  Log.info ("getParent running : " <> show ptr <> " starts at " <> starts)
+  case ut of
+    Just ut' -> do
+      case ut' of
+        SElement e ->
+          if isParent then pure { parentNode: e.main, parentId: ptr }
+          else maybe hittingTheFan (\x -> getParent true x starts state')
+            e.parent
+        SText e -> maybe hittingTheFan (\x -> getParent true x starts state')
+          e.parent
+        SDyn e -> maybe hittingTheFan (\x -> getParent true x starts state')
+          e.parent
+        SEnvy e -> maybe hittingTheFan (\x -> getParent true x starts state')
+          e.parent
+        SFixed e -> maybe hittingTheFan (\x -> getParent true x starts state')
+          e.parent
+    Nothing -> hittingTheFan
+
 getParentAndToMyRight
   :: Array String
   -> Core.SendToPos
   -> EffectfulFFIDOMSnapshot
   -> Effect { parentNode :: Web.DOM.Node, toMyRight :: Maybe Web.DOM.Node.Node }
 getParentAndToMyRight initialSearch a state'@(FFIDOMSnapshot state) = do
-  { parentNode, parentId } <- getParent false a.id
+  { parentNode, parentId } <- getParent false a.id a.id state'
   -- let ___ = spy "pnpi" { parentNode, parentId }
   -- let ____ = spy "initialSearch" initialSearch
   toMyRight <- getAbuttingRight parentId a.id initialSearch
@@ -1158,26 +1220,6 @@ getParentAndToMyRight initialSearch a state'@(FFIDOMSnapshot state) = do
             Just { newStep, newArray } -> getAbuttingRight parentId newStep
               newArray
             Nothing -> pure Nothing
-
-  getParent isParent (ptr :: String) = do
-    let
-      hittingTheFan = throwException
-        ( error
-            ( "Cannot resolve parent of " <> ptr
-                <> " for dyn traversal starting at "
-                <> a.id
-            )
-        )
-    ut <- liftST $ STO.peek ptr state.units
-    case ut of
-      Just ut' -> do
-        case ut' of
-          SElement e -> if isParent then pure { parentNode: e.main, parentId: ptr } else maybe hittingTheFan (getParent true) e.parent
-          SText e -> maybe hittingTheFan (getParent true) e.parent
-          SDyn e -> maybe hittingTheFan (getParent true) e.parent
-          SEnvy e -> maybe hittingTheFan (getParent true) e.parent
-          SFixed e -> maybe hittingTheFan (getParent true) e.parent
-      Nothing -> hittingTheFan
 
 getImmediateChildEltsInOrder
   :: String

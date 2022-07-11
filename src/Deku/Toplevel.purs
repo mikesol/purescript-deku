@@ -4,10 +4,12 @@ import Prelude
 
 import Bolson.Control as Bolson
 import Bolson.Core (Element(..), PSR, Scope(..))
+import Bolson.Core as Bolson.Core
 import Control.Monad.ST (ST)
 import Control.Monad.ST.Class (liftST)
 import Control.Monad.ST.Internal as RRef
 import Data.Array.ST as STA
+import Data.Foldable (for_, oneOf)
 import Data.Maybe (Maybe(..), maybe)
 import Data.Newtype (class Newtype, unwrap)
 import Deku.Control (deku)
@@ -17,11 +19,13 @@ import Deku.SSR (ssr)
 import Effect (Effect)
 import Effect.Ref as Ref
 import FRP.Event (AnEvent, subscribe)
+import FRP.Event.Class (bang)
 import Unsafe.Coerce (unsafeCoerce)
 import Web.DOM.Element as Web.DOM
 import Web.HTML (window)
 import Web.HTML.HTMLDocument (body)
 import Web.HTML.HTMLElement (toElement)
+import Web.HTML.HTMLElement as HTMLElement
 import Web.HTML.Window (document)
 
 runInElement'
@@ -60,20 +64,25 @@ hydrate'
   -> Effect (Effect Unit)
 hydrate' children = do
   ffi@(FFIDOMSnapshot ffi') <- liftST $ makeFFIDOMSnapshot
-  di <- Ref.new 0 <#> fullDOMInterpret
-  void $ liftST $ RRef.write true ffi'.hydrating
-  u <- subscribe
-    ( __internalDekuFlatten
-        { parent: Just "deku-root"
-        , scope: Local "rootScope"
-        , raiseId: \_ _ -> pure unit
-        }
-        di
-        (unsafeCoerce children)
-    )
-    \i -> i ffi
-  void $ liftST $ RRef.write false ffi'.hydrating
-  pure u
+  di@(DOMInterpret di') <- Ref.new 0 <#> fullDOMInterpret
+  me <- di'.ids
+  b' <- window >>= document >>= body
+  b' # maybe (pure (pure unit)) \root -> do
+    void $ liftST $ RRef.write true ffi'.hydrating
+    (u :: Effect Unit) <- subscribe
+      ( oneOf
+          [ bang (di'.makeRoot { id: me, root: (HTMLElement.toElement root) })
+          , __internalDekuFlatten
+              { parent: Just me
+              , scope: Bolson.Core.Local "rootScope"
+              , raiseId: \_ _ -> pure unit
+              }
+              di
+              (unsafeCoerce children)
+          ]
+      ) \i -> i ffi
+    void $ liftST $ RRef.write false ffi'.hydrating
+    (pure u :: Effect (Effect Unit))
 
 hydrate
   :: ( forall lock
