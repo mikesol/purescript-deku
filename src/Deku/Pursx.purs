@@ -11,6 +11,7 @@ import Data.Newtype (unwrap)
 import Data.Profunctor (lcmap)
 import Data.Reflectable (class Reflectable, reflectType)
 import Data.Symbol (class IsSymbol)
+import Deku.Interpret (namespaceWithPursxScope)
 import Deku.Attribute (Attribute, AttributeValue(..), unsafeUnAttribute)
 import Deku.Core (DOMInterpret(..), class Korok, Domable, Node(..))
 import Deku.DOM (class TagToDeku)
@@ -4695,7 +4696,7 @@ instance pursxToElementConsInsert ::
       { cache: Object.insert (reflectType pxk) false cache
       , element: Node \info di ->
           __internalDekuFlatten
-            { parent: Just (reflectType pxk <> pxScope)
+            { parent: Just (namespaceWithPursxScope (reflectType pxk) pxScope)
             , scope: info.scope
             , raiseId: \_ _ -> pure unit
             }
@@ -4730,14 +4731,14 @@ else instance pursxToElementConsAttr ::
             ( lcmap unsafeUnAttribute
                 ( \{ key, value } -> case value of
                     Prop' p -> setProp
-                      { id: ((reflectType pxk) <> pxScope)
+                      { id: namespaceWithPursxScope (reflectType pxk) pxScope
                       , key
                       , parent: parent.parent
                       , value: p
                       , scope: parent.scope
                       }
                     Cb' c -> setCb
-                      { id: ((reflectType pxk) <> pxScope)
+                      { id: namespaceWithPursxScope (reflectType pxk) pxScope
                       , key
                       , parent: parent.parent
                       , value: c

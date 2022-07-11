@@ -7,7 +7,7 @@ import Control.Monad.State (lift)
 import Control.Monad.Writer (execWriter, execWriterT, tell)
 import Data.Array (findMap, head, uncons)
 import Data.Array.ST as STA
-import Data.FoldableWithIndex (traverseWithIndex_)
+import Data.FoldableWithIndex (foldrWithIndex, traverseWithIndex_)
 import Data.Map (SemigroupMap(..))
 import Data.Map as Map
 import Data.Maybe (Maybe(..), fromMaybe, maybe)
@@ -16,6 +16,7 @@ import Data.String as String
 import Data.Traversable (fold, for_, intercalate, traverse)
 import Data.Tuple (Tuple(..))
 import Data.Tuple.Nested (type (/\), (/\))
+import Debug (spy)
 import Deku.Interpret (FFIDOMSnapshot(..), SSRElement(..), SSRText, StateUnit(..))
 import Foreign.Object (Object)
 import Foreign.Object as Object
@@ -69,16 +70,19 @@ render parentCache state'@(FFIDOMSnapshot state) id = do
       SFixed { children } -> fold <$>
         (traverse (render parentCache state') children)
 
-doReplacements :: String -> (String /\ String) -> String
-doReplacements dom (id /\ subdom) = fromMaybe dom nw
+doReplacements :: String -> (String /\ String /\ String) -> String
+doReplacements dom (par /\ id /\ subdom) = do
+  -- let _ = spy "doReplacements" [par, id, dom, subdom, show nw]
+  fromMaybe dom nw
   where
   nw = do
-    let spl0 = String.split (String.Pattern ("deku-ssr-" <> id)) dom
+    let dde = ("data-deku-elt-internal=\"" <> par<>"\"")
+    let spl0 = String.split (String.Pattern dde) dom
     ucs0 <- uncons spl0
     h <- head ucs0.tail
     let spl1 = String.split (String.Pattern (">")) h
     ucs1 <- uncons spl1
-    pure $ ucs0.head <> ("deku-ssr-" <> id) <> ucs1.head <> ">" <> subdom <>
+    pure $ ucs0.head <> dde <> ucs1.head <> ">" <> subdom <>
       intercalate ">" ucs1.tail
 
 getBody
@@ -107,7 +111,7 @@ getBody (FFIDOMSnapshot state) = do
 getElementsWhoseParentIsNotInGraph
   :: forall r
    . FFIDOMSnapshot r (SSRElement r) SSRText
-  -> ST r (Array String)
+  -> ST r (Array (String /\ String))
 getElementsWhoseParentIsNotInGraph (FFIDOMSnapshot state) = do
   frozen <- freezeObj state.units
   execWriterT
@@ -115,7 +119,7 @@ getElementsWhoseParentIsNotInGraph (FFIDOMSnapshot state) = do
       opar i p' = for_ p' \p'' -> do
         p <- lift $ STO.peek p'' state.units
         case p of
-          Nothing -> tell [ i ]
+          Nothing -> tell [ p'' /\ i ]
           Just _ -> tell []
     in
       ( traverseWithIndex_
@@ -167,15 +171,19 @@ ssr state = do
   missingParElts <- getElementsWhoseParentIsNotInGraph state
   -- let _ = spy "missingParElts" missingParElts
   bodyRendered <- render parentCache state body
-  subEltsRendered :: Array (Tuple String String) <- traverse
-    ((map <$> Tuple <*> render parentCache state) :: String -> ST r (Tuple String String))
+  -- let _ = spy "BR" bodyRendered
+  subEltsRendered <- traverse
+    (\(p /\ i) -> do
+      r <- render parentCache state i
+      pure $ p /\ i /\ r)
     missingParElts
+  -- let _ = spy "SER" subEltsRendered
   pure (go subEltsRendered bodyRendered)
   where
-  go :: Array (Tuple String String) -> String -> String
+  go :: Array (String /\ String /\ String) -> String -> String
   go s bod
     | Just { head, tail } <- uncons s = go
-        (map (\(a /\ b) -> a /\ doReplacements b head) tail)
+        (map (\(a /\ b /\ c) -> a /\ b /\ doReplacements c head) (tail :: Array (String /\ String /\ String)))
         (doReplacements bod head)
     | otherwise = bod
 

@@ -8,6 +8,7 @@ module Deku.Interpret
   , StateUnit(..)
   , makeFFIDOMSnapshot
   , ssrDOMInterpret
+  , namespaceWithPursxScope
   ) where
 
 import Prelude
@@ -60,6 +61,9 @@ import Web.HTML.HTMLElement (toParentNode)
 import Web.HTML.HTMLElement as HTMLElement
 import Web.HTML.HTMLInputElement as HTMLInputElement
 import Web.HTML.Window (document)
+
+namespaceWithPursxScope :: String -> String -> String
+namespaceWithPursxScope a b = a <> "@" <> b
 
 -- foreign
 newtype FFIDOMSnapshot r e t = FFIDOMSnapshot
@@ -689,12 +693,10 @@ pursXConnectionStep_
   -> Effect Unit
 pursXConnectionStep_ tmp a state'@(FFIDOMSnapshot state) = do
   let scope = a.scope
-  let pxScope = a.pxScope
   let
     attributeF e = do
       key' <- getAttribute "data-deku-attr-internal" e
-      for_ key' \key -> do
-        let namespacedKey = key <> pxScope
+      for_ key' \namespacedKey -> do
         void $ liftST $ STO.poke namespacedKey
           ( SElement
               { listeners: Object.empty
@@ -712,8 +714,7 @@ pursXConnectionStep_ tmp a state'@(FFIDOMSnapshot state) = do
       -- a pursx element is looking for its parent, it won't find it
       key' <- getAttribute "data-deku-elt-internal" e
       --Log.info (show key')
-      for_ key' \key -> do
-        let namespacedKey = key <> pxScope
+      for_ key' \namespacedKey -> do
         void $ liftST $ STO.poke namespacedKey
           ( SElement
               { listeners: Object.empty
@@ -795,7 +796,7 @@ pursXCreationStep createElementStep a state'@(FFIDOMSnapshot state) = do
             -- it is an attribute
             put $ String.replace (String.Pattern (verb <> key <> verb))
               ( String.Replacement
-                  ("data-deku-attr-internal=" <> "\"" <> key <> "\"")
+                  ("data-deku-attr-internal=" <> "\"" <> namespaceWithPursxScope key a.pxScope <> "\"")
               )
               h
           else do
@@ -806,7 +807,7 @@ pursXCreationStep createElementStep a state'@(FFIDOMSnapshot state) = do
               ( String.Replacement
                   ( "<span style=\"display:contents;\" data-deku-elt-internal="
                       <> "\""
-                      <> key
+                      <> namespaceWithPursxScope key a.pxScope
                       <>
                         "\"></span>"
                   )

@@ -8,10 +8,12 @@
 /.purs*
 /.psa*
 /.spago
+/examples/ssr/index.html
 /examples/**/index.js
 /examples/**/bundle.js
 /examples/**/main.js
 /examples/**/make.mjs
+/examples/**/make.js
 /examples/**/config.json
 /examples/docs/Static/**.html
 packages.json
