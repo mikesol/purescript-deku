@@ -105,7 +105,7 @@ dku = fixed
             ( D.div_
                 [ (Proxy :: _ "<div>~a~ ~b~ ~c~ ~d~</div>") ~~
                     { a: nut (D.div_ [ text_ "testing1" ])
-                    , b: nut (D.div_ [ text_ "testing12" ])
+                    , b: nut (D.div_ [ text_ "testing12", mvc ])
                     , c: nut (D.div_ [ D.button_ [ text_ "I'm a button" ] ])
                     , d: nut (D.div_ [ text_ "testing3" ])
                     }

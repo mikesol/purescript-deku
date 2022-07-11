@@ -12,7 +12,6 @@ export const getTextNode_ = (dom) => (ptr) => () => {
 				dom.childNodes[i].nodeType === 8 &&
 				dom.childNodes[i].nodeValue === ptr
 			) {
-				console.log("returning", dom, ptr, i, dom.childNodes[i - 1]);
 				return dom.childNodes[i + 1];
 			}
 		}

@@ -221,7 +221,7 @@ hydrateElement_ a state'@(FFIDOMSnapshot state) = do
     case qs of
       Just qs' ->
         do
-          Log.info ("Found elt " <> show a)
+          -- Log.info ("Found elt " <> show a)
           void $ liftST $ STO.poke a.id
             ( SElement
                 { listeners: Object.empty
@@ -233,7 +233,7 @@ hydrateElement_ a state'@(FFIDOMSnapshot state) = do
             )
             state.units
       Nothing -> do
-        Log.error ("Could not find elt" <> show a)
+        -- Log.error ("Could not find elt" <> show a)
         e <- createElement a.tag (toDocument d)
         void $ liftST $ STO.poke a.id
           ( SElement
@@ -288,17 +288,13 @@ retrieveElementDuringHydration_ a state'@(FFIDOMSnapshot state) = do
     qs <- querySelector (QuerySelector ("[data-deku-ssr-" <> a.id <> "]"))
       (toParentNode b')
     qs # maybe
-      ( Log.error
+      ( when false $ Log.error
           ( "Could not find pursx " <> show
               { id: a.id, parent: a.parent, scope: a.scope }
           )
       )
       \qs' -> do
-        ( Log.info
-            ( "Found pursx " <> show
-                { id: a.id, parent: a.parent, scope: a.scope }
-            )
-        )
+        -- Log.info   ( "Found pursx " <> show { id: a.id, parent: a.parent, scope: a.scope })
         liftST $ addElementScopeToScopes_ a state'
         void $ liftST $ STO.poke a.id
           ( SElement
@@ -431,7 +427,8 @@ addTextScopeToScopes_ a (FFIDOMSnapshot state) = do
       void $ STA.push ptr arr
       void (STO.poke scope arr state.scopes)
 
-foreign import getTextNode_ :: Web.DOM.Element -> String -> Effect (Web.DOM.Text)
+foreign import getTextNode_
+  :: Web.DOM.Element -> String -> Effect (Web.DOM.Text)
 
 hydrateText_
   :: Core.MakeText
@@ -456,9 +453,9 @@ hydrateText_ a state'@(FFIDOMSnapshot state) = do
         (toParentNode b')
       case qs of
         Just qs' -> do
-          Log.info $ "Found parent " <> parrrr.parentId
+          -- Log.info $ "Found parent " <> parrrr.parentId
           tnode <- getTextNode_ qs' a.id
-          Log.info ("Found text " <> show a)
+          -- Log.info ("Found text " <> show a)
           liftST $ STO.poke a.id
             ( SText
                 { scope: a.scope
@@ -469,7 +466,7 @@ hydrateText_ a state'@(FFIDOMSnapshot state) = do
             )
             state.units
         Nothing -> do
-          Log.error ("Could not find text " <> show a)
+          -- Log.error ("Could not find text " <> show a)
           e <- createTextNode "" (toDocument d)
           liftST $ STO.poke a.id
             ( SText
@@ -682,10 +679,24 @@ attributeParent_
   :: Core.AttributeParent
   -> EffectfulFFIDOMSnapshot
   -> Effect Unit
-attributeParent_ a state = do
+attributeParent_ a state'@(FFIDOMSnapshot state) = do
+  hydrating <- liftST $ RRef.read state.hydrating
+  ( if hydrating then (\x y -> void $ sendToPosNominal x y)
+    else sendToPos_
+  )
+    -- logShow a
+    -- -1 to avoid overflow errors
+    { id: a.id, pos: top - 1 }
+    state'
+
+hydratingAttributeParent_
+  :: Core.AttributeParent
+  -> EffectfulFFIDOMSnapshot
+  -> Effect Unit
+hydratingAttributeParent_ a state = do
   -- logShow a
   -- -1 to avoid overflow errors
-  sendToPos_ { id: a.id, pos: top - 1 } state
+  void $ sendToPosNominal { id: a.id, pos: top - 1 } state
 
 ssrAttributeParent_
   :: forall r
@@ -1149,7 +1160,7 @@ getParent isParent (ptr :: String) starts state'@(FFIDOMSnapshot state) = do
           )
       )
   ut <- liftST $ STO.peek ptr state.units
-  Log.info ("getParent running : " <> show ptr <> " starts at " <> starts)
+  -- Log.info ("getParent running : " <> show ptr <> " starts at " <> starts)
   case ut of
     Just ut' -> do
       case ut' of
