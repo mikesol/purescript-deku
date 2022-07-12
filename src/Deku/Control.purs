@@ -4,6 +4,7 @@ module Deku.Control
   , text_
   , deku
   , globalPortal
+  , portal1
   , portal
   , switcher
   , dyn
@@ -21,6 +22,7 @@ import Bolson.Control as Bolson.Control
 import Bolson.Core as Bolson.Core
 import Control.Plus (empty)
 import Data.FastVect.FastVect (Vect)
+import Data.FastVect.FastVect as V
 import Data.Foldable (oneOf)
 import Data.Maybe (Maybe(..), maybe)
 import Data.Monoid.Always (class Always, always)
@@ -255,6 +257,18 @@ portalFlatten =
       addChild { child: id, parent }
   , toElt: \(Node e) -> Bolson.Core.Element e
   }
+
+portal1
+  :: forall e s m lock0 payload
+   . Korok s m
+  => Domable e m lock0 payload
+  -> ( forall lockfoo
+        . Domable e m lockfoo payload
+       -> (Domable e m lock0 payload -> Domable e m lockfoo payload)
+       -> Domable e m lockfoo payload
+     )
+  -> Domable e m lock0 payload
+portal1 a b = portal (V.cons a V.empty) (lcmap (V.index (Proxy :: _ 0)) b)
 
 portal
   :: forall e n s m lock0 payload

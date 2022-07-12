@@ -10,7 +10,7 @@ import Data.Monoid.Always (always)
 import Data.Profunctor (lcmap)
 import Data.Tuple.Nested ((/\))
 import Deku.Attribute (cb, (:=))
-import Deku.Control (bussed, dyn, fixed, text_)
+import Deku.Control (bussed, dyn, fixed, portal1, text_)
 import Deku.Core (class Korok, Domable, insert, remove, sendToTop)
 import Deku.DOM as D
 import Deku.Pursx (nut, (~~))
@@ -94,9 +94,9 @@ dku = fixed
         ]
   in
     [ mvc
+    , portal1 (D.div_ [ text_ "This portal is intentionally unused" ]) \_ f -> D.div_ [ f mvc ]
     , mvc
-    , mvc
-    , mvc
+    , portal1 (D.div_ [ text_ "Hello from a portal" ]) \h f -> D.div_ [ f mvc, h ]
     , mvc
     , (Proxy :: _ "<div>~a~ ~b~ ~c~ ~d~</div>") ~~
         { a: nut (D.div_ [ text_ "hello" ])
@@ -118,13 +118,13 @@ dku = fixed
 ssr'd :: Effect Unit
 ssr'd = do
   h <- runSSR
-        ( Template
-            { head:
-                "<!DOCTYPE html><html><head><script src=\"bundle.js\" defer></script></head>"
-            , tail: "</html>"
-            }
-        )
-        dku
+    ( Template
+        { head:
+            "<!DOCTYPE html><html><head><script src=\"bundle.js\" defer></script></head>"
+        , tail: "</html>"
+        }
+    )
+    dku
   log h
 
 main :: Effect Unit
