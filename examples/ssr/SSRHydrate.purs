@@ -1,10 +1,10 @@
-module Deku.Example.SSRMain where
+module Deku.Example.SSRHydrate where
 
 import Prelude
 
 import Deku.Example.SSRCore (dku)
-import Deku.Toplevel (runInBody)
+import Deku.Toplevel (hydrate)
 import Effect (Effect)
 
 main:: Effect Unit
-main = runInBody dku
+main = hydrate dku
