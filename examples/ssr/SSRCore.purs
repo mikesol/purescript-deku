@@ -30,8 +30,79 @@ data MainUIAction
 
 data TodoAction = Prioritize | Delete
 
+-- use this to test regressions & smaller formats of the kitchen sink below
 dku :: forall s e m lock payload. Korok s m => Domable e m lock payload
 dku = fixed
+  let
+    mvc = bussed \push -> lcmap (bang UIShown <|> _) \event -> do
+      let
+        top =
+          [ D.input
+              ( oneOfMap bang
+                  [ D.OnInput := cb \e -> for_
+                      ( target e
+                          >>= fromEventTarget
+                      )
+                      ( value
+                          >=> push <<< ChangeText
+                      )
+                  , D.OnKeyup := cb
+                      \e -> for_ (fromEvent e) \evt -> do
+                        when (code evt == "Enter") $ do
+                          push AddTodo
+                  ]
+              )
+              []
+          , D.button
+              (bang $ D.OnClick := push AddTodo)
+              [ text_ "Add" ]
+          ]
+      fixed
+        [ D.div_ top
+        , dyn $
+            map
+              ( \txt -> keepLatest $ bus
+                  ( lcmap (map (always :: m Unit -> Effect Unit)) \p' e' ->
+                      ( insert $ D.div_
+                          [ text_ txt
+                          , D.button
+                              ( bang $ D.OnClick := p' sendToTop
+                              )
+                              [ text_ "Prioritize" ]
+                          , D.button
+                              ( bang
+                                  $ D.OnClick := p' remove
+                              )
+                              [ text_ "Delete" ]
+                          ]
+                      ) <|> e'
+                  )
+              )
+              ( filterMap
+                  ( \(tf /\ s) ->
+                      if tf then Just s else Nothing
+                  )
+                  ( mapAccum
+                      ( \a b -> case a of
+                          ChangeText s -> s /\ (false /\ s)
+                          AddTodo -> b /\ (true /\ b)
+                          _ -> "" /\ (false /\ "")
+                      )
+                      event
+                      ""
+                  )
+              )
+        ]
+  in
+    [  portal1 (D.div_ [ text_ "Hello from a portal" ]) \h f -> D.div_ [ f mvc, h ]
+    , mvc
+    , (Proxy :: _ "<div>~a~</div>") ~~
+        { a: nut (D.div_ [ text_ "hello" ])
+        }
+    ]
+
+dku' :: forall s e m lock payload. Korok s m => Domable e m lock payload
+dku' = fixed
   let
     mvc = bussed \push -> lcmap (bang UIShown <|> _) \event -> do
       let

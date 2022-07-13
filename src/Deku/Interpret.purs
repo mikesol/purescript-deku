@@ -9,6 +9,7 @@ module Deku.Interpret
   , makeFFIDOMSnapshot
   , ssrDOMInterpret
   , namespaceWithPursxScope
+  , toForeign
   ) where
 
 import Prelude
@@ -22,7 +23,7 @@ import Control.Monad.ST.Internal as RRef
 import Control.Monad.State (execState, get, put)
 import Data.Array (delete, drop, insertAt, span, uncons)
 import Data.Array.ST as STA
-import Data.Filterable (filter)
+import Data.Filterable (filter, filterMap)
 import Data.Foldable (for_, traverse_)
 import Data.Maybe (Maybe(..), fromMaybe, fromMaybe', isJust, maybe)
 import Data.Newtype (class Newtype, unwrap)
@@ -32,13 +33,16 @@ import Data.Traversable (traverse)
 import Data.Tuple.Nested ((/\))
 import Deku.Core (Domable)
 import Deku.Core as Core
+import Deku.STObject (freezeObj)
 import Effect (Effect, foreachE)
 import Effect.Class.Console as Log
 import Effect.Exception (error, throwException)
 import Effect.Ref as Ref
+import Foreign (Foreign)
 import Foreign.Object (Object)
 import Foreign.Object as Object
 import Foreign.Object.ST as STO
+import Simple.JSON as JSON
 import Test.QuickCheck (arbitrary, mkSeed)
 import Test.QuickCheck.Gen (Gen, evalGen)
 import Unsafe.Coerce (unsafeCoerce)
@@ -46,7 +50,7 @@ import Web.DOM as Web.DOM
 import Web.DOM.ChildNode (remove)
 import Web.DOM.Document (createElement, createTextNode)
 import Web.DOM.Element (fromNode, getAttribute, setAttribute, tagName, toChildNode, toEventTarget, toNode)
-import Web.DOM.Node (appendChild, firstChild, insertBefore, setNodeValue)
+import Web.DOM.Node (appendChild, firstChild, insertBefore, nodeValue, setNodeValue)
 import Web.DOM.Node as Web.DOM.Node
 import Web.DOM.NodeList (toArray)
 import Web.DOM.ParentNode (QuerySelector(..), querySelector, querySelectorAll)
@@ -71,6 +75,70 @@ newtype FFIDOMSnapshot r e t = FFIDOMSnapshot
   , scopes :: STO.STObject r (STA.STArray r String)
   , hydrating :: RRef.STRef r Boolean
   }
+
+toForeign
+  :: EffectfulFFIDOMSnapshot
+  -> Effect Foreign
+toForeign = toForeignProto (pure <<< JSON.writeImpl <<< tagName) \x -> do
+  v <- nodeValue (Web.DOM.Text.toNode x)
+  pure $ JSON.writeImpl v
+
+toForeignProto
+  :: forall r e t m
+   . MonadST r m
+  => (e -> m Foreign)
+  -> (t -> m Foreign)
+  -> FFIDOMSnapshot r e t
+  -> m Foreign
+toForeignProto ee tt (FFIDOMSnapshot state) = do
+  units <- liftST $ freezeObj state.units
+  o <- units # traverse case _ of
+    SElement { parent, scope, main, portalTookMeHere } -> do
+      e <- ee main
+      pure $ JSON.writeImpl
+        { parent
+        , scope: f scope
+        , main: e
+        , portalTookMeHere: map f portalTookMeHere
+        , type: "SElement"
+        }
+    SText { parent, scope, main, portalTookMeHere } -> do
+      t <- tt main
+      pure $ JSON.writeImpl
+        { parent
+        , scope: f scope
+        , main: t
+        , portalTookMeHere: map f portalTookMeHere
+        , type: "SText"
+        }
+    SDyn { parent, scope, children, portalTookMeHere } ->
+      pure $ JSON.writeImpl
+        { parent
+        , scope: f scope
+        , children
+        , portalTookMeHere: map f portalTookMeHere
+        , type: "SDyn"
+        }
+    SEnvy { parent, scope, child, portalTookMeHere } ->
+      pure $ JSON.writeImpl
+        { parent
+        , scope: f scope
+        , child
+        , portalTookMeHere: map f portalTookMeHere
+        , type: "SEnvy"
+        }
+    SFixed { parent, scope, children, portalTookMeHere } ->
+      pure $ JSON.writeImpl
+        { parent
+        , scope: f scope
+        , children
+        , portalTookMeHere: map f portalTookMeHere
+        , type: "SFixed"
+        }
+  pure (JSON.writeImpl o)
+  where
+  f (Bolson.Core.Local s) = Just s
+  f Bolson.Core.Global = Nothing
 
 data StateUnit e t
   = SElement
@@ -280,12 +348,21 @@ retrieveElementDuringHydration_
    . { id :: String, parent :: Maybe String, scope :: Scope | r }
   -> EffectfulFFIDOMSnapshot
   -> Effect Unit
-retrieveElementDuringHydration_ a state'@(FFIDOMSnapshot state) = do
+retrieveElementDuringHydration_ = retrieveElementDuringHydration_' \a ->
+  "[data-deku-ssr-" <> a.id <> "]"
+
+retrieveElementDuringHydration_'
+  :: forall r
+   . ({ id :: String, parent :: Maybe String, scope :: Scope | r } -> String)
+  -> { id :: String, parent :: Maybe String, scope :: Scope | r }
+  -> EffectfulFFIDOMSnapshot
+  -> Effect Unit
+retrieveElementDuringHydration_' mkSelector a state'@(FFIDOMSnapshot state) = do
   w <- window
   d <- document w
   b <- body d
   for_ b \b' -> do
-    qs <- querySelector (QuerySelector ("[data-deku-ssr-" <> a.id <> "]"))
+    qs <- querySelector (QuerySelector (mkSelector a))
       (toParentNode b')
     qs # maybe
       ( when false $ Log.error
@@ -867,7 +944,24 @@ pursXHydrationStep
   :: Core.MakePursx
   -> EffectfulFFIDOMSnapshot
   -> Effect Unit
-pursXHydrationStep a state = retrieveElementDuringHydration_ a state
+pursXHydrationStep a state = do
+  retrieveElementDuringHydration_ a state
+  let cache = a.cache
+  -- we also retrieve all of the embedded elements
+  let unfolded = (Object.toUnfoldable :: _ -> Array _) cache
+  for_ (filterMap (\(k /\ v) -> if v then Nothing else Just k) unfolded) \k ->
+    let
+      namespaced = namespaceWithPursxScope k a.pxScope
+    in
+      retrieveElementDuringHydration_'
+        ( \_ ->
+            ( "[data-deku-elt-internal=" <> "\""
+                <> namespaced
+                <> "\"]"
+            )
+        )
+        { id: namespaced, parent: a.parent, scope: a.scope }
+        state
 
 protoMakeRoot
   :: forall r m e t c

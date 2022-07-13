@@ -12,9 +12,11 @@ import Data.Array.ST as STA
 import Data.Foldable (for_, oneOf)
 import Data.Maybe (Maybe(..), maybe)
 import Data.Newtype (class Newtype, unwrap)
+import Data.Tuple (Tuple(..))
+import Data.Tuple.Nested (type (/\))
 import Deku.Control (deku)
 import Deku.Core (class Korok, DOMInterpret(..), Domable, Node(..))
-import Deku.Interpret (EffectfulFFIDOMSnapshot, FFIDOMSnapshot(..), SSRElement(..), SSRText, fullDOMInterpret, makeFFIDOMSnapshot, ssrDOMInterpret)
+import Deku.Interpret (FFIDOMSnapshot(..), SSRElement(..), SSRText, EffectfulFFIDOMSnapshot, fullDOMInterpret, makeFFIDOMSnapshot, ssrDOMInterpret)
 import Deku.SSR (ssr)
 import Effect (Effect)
 import Effect.Ref as Ref
@@ -33,20 +35,20 @@ runInElement'
   -> ( forall lock
         . Domable Web.DOM.Element Effect lock (EffectfulFFIDOMSnapshot -> Effect Unit)
      )
-  -> Effect (Effect Unit)
+  -> Effect (EffectfulFFIDOMSnapshot /\ (Effect Unit))
 runInElement' elt eee = do
   ffi <- liftST $ makeFFIDOMSnapshot
   evt <- Ref.new 0 <#> (deku elt eee <<< fullDOMInterpret)
-  subscribe evt \i -> i ffi
+  Tuple ffi <$> subscribe evt \i -> i ffi
 
 runInBody'
   :: ( forall lock
         . Domable Web.DOM.Element Effect lock (EffectfulFFIDOMSnapshot -> Effect Unit)
      )
-  -> Effect (Effect Unit)
+  -> Effect (EffectfulFFIDOMSnapshot /\ (Effect Unit))
 runInBody' eee = do
   b' <- window >>= document >>= body
-  maybe mempty (\elt -> runInElement' elt eee) (toElement <$> b')
+  maybe (Tuple <$> (liftST $ makeFFIDOMSnapshot) <*> mempty) (\elt -> runInElement' elt eee) (toElement <$> b')
 
 runInBody
   :: ( forall lock
@@ -61,13 +63,13 @@ hydrate'
   :: ( forall lock
         . Domable Web.DOM.Element Effect lock (EffectfulFFIDOMSnapshot -> Effect Unit)
      )
-  -> Effect (Effect Unit)
+  -> Effect (EffectfulFFIDOMSnapshot /\ (Effect Unit))
 hydrate' children = do
   ffi@(FFIDOMSnapshot ffi') <- liftST $ makeFFIDOMSnapshot
   di@(DOMInterpret di') <- Ref.new 0 <#> fullDOMInterpret
   me <- di'.ids
   b' <- window >>= document >>= body
-  b' # maybe (pure (pure unit)) \root -> do
+  b' # maybe(Tuple <$> (liftST $ makeFFIDOMSnapshot) <*> mempty) \root -> do
     void $ liftST $ RRef.write true ffi'.hydrating
     (u :: Effect Unit) <- subscribe
       ( oneOf
@@ -82,7 +84,7 @@ hydrate' children = do
           ]
       ) \i -> i ffi
     void $ liftST $ RRef.write false ffi'.hydrating
-    (pure u :: Effect (Effect Unit))
+    pure $ Tuple ffi u
 
 hydrate
   :: ( forall lock
