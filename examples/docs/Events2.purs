@@ -9,8 +9,8 @@ import Data.Maybe (Maybe(..))
 import Data.Profunctor (lcmap)
 import Data.Tuple.Nested ((/\))
 import Deku.Attribute (cb, (:=))
-import Deku.Control (text_)
-import Deku.Core (dyn, insert, remove, sendToTop, Nut, bus, bussed)
+import Deku.Control (dyn,text_, bus, bussed)
+import Deku.Core (insert, remove, sendToTop, Nut)
 import Deku.DOM as D
 import Deku.Example.Docs.Types (Page(..), PageOptions)
 import Deku.Example.Docs.Util (scrollToTop)
@@ -197,7 +197,7 @@ main = runInBody1
               , D.div_
                   [ dyn $ map
                       ( \txt -> keepLatest $ bus \p' e' ->
-                          ( bang $ insert $ D.div_ do
+                          ( insert $ D.div_ do
                               [ D.span (bang $ D.Style := "margin: 5px;")
                                   [ text_ txt ]
                               , D.button

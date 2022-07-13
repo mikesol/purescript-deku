@@ -112,7 +112,7 @@ let overrides =
       { bolson =
         { dependencies = [ "prelude" ]
         , repo = "https://github.com/mikesol/purescript-bolson.git"
-        , version = "v0.0.7"
+        , version = "dyn3"
         }
       }
 

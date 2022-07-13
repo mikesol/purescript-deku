@@ -9,10 +9,10 @@ import Data.Maybe (Maybe(..))
 import Data.Profunctor (lcmap)
 import Data.Tuple.Nested ((/\))
 import Deku.Attribute (cb, (:=))
-import Deku.Control (text_)
-import Deku.Core (dyn, insert, sendToTop, remove)
+import Deku.Control (dyn, envy, text_)
+import Deku.Core (insert, sendToTop, remove)
 import Deku.DOM as D
-import Deku.Toplevel (runInBody1)
+import Deku.Toplevel (runInBody)
 import Effect (Effect)
 import FRP.Event (bang, bus, keepLatest, mapAccum)
 import Web.Event.Event (target)
@@ -27,8 +27,8 @@ data MainUIAction
 data TodoAction = Prioritize | Delete
 
 main :: Effect Unit
-main = runInBody1
-  ( bus \push -> lcmap (bang UIShown <|> _) \event -> do
+main = runInBody
+  (envy $ bus \push -> lcmap (bang UIShown <|> _) \event -> do
       let
         top =
           [ D.input
@@ -57,7 +57,7 @@ main = runInBody1
             [ dyn $
                 map
                   ( \txt -> keepLatest $ bus \p' e' ->
-                      ( bang $ insert $ D.div_
+                      ( insert $ D.div_
                           [ text_ txt
                           , D.button
                               ( bang

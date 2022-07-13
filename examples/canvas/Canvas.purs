@@ -4,9 +4,8 @@ import Prelude
 
 import Data.Foldable (oneOfMap, traverse_)
 import Deku.Attribute ((:=))
-import Deku.Core (Domable)
 import Deku.DOM as D
-import Deku.Interpret (FFIDOMSnapshot)
+import Deku.Interpret (EffectfulDomable)
 import Deku.Toplevel (runInBody)
 import Effect (Effect)
 import FRP.Event.Class (bang)
@@ -14,7 +13,7 @@ import Graphics.Canvas (CanvasElement, fillRect, getContext2D, setFillStyle)
 import Unsafe.Coerce (unsafeCoerce)
 import Web.HTML.HTMLCanvasElement as HTMLCanvasElement
 
-scene :: forall lock. Domable Effect lock (FFIDOMSnapshot -> Effect Unit)
+scene :: forall lock. EffectfulDomable lock
 scene = D.canvas
   ( oneOfMap bang
       [ D.Width := "400px"
