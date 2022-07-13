@@ -31,8 +31,8 @@ data MainUIAction
 data TodoAction = Prioritize | Delete
 
 -- use this to test regressions & smaller formats of the kitchen sink below
-dku :: forall s e m lock payload. Korok s m => Domable e m lock payload
-dku = fixed
+dku' :: forall s e m lock payload. Korok s m => Domable e m lock payload
+dku' = fixed
   let
     mvc = bussed \push -> lcmap (bang UIShown <|> _) \event -> do
       let
@@ -101,8 +101,8 @@ dku = fixed
         }
     ]
 
-dku' :: forall s e m lock payload. Korok s m => Domable e m lock payload
-dku' = fixed
+dku :: forall s e m lock payload. Korok s m => Domable e m lock payload
+dku = fixed
   let
     mvc = bussed \push -> lcmap (bang UIShown <|> _) \event -> do
       let
