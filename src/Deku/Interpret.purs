@@ -187,9 +187,9 @@ data StateUnit e t
       , children :: Array String
       , portalTookMeHere :: Maybe Scope
       , bookends ::
-        { top :: String
-        , bot :: String
-        }
+          { top :: String
+          , bot :: String
+          }
       }
   | SEnvy
       { parent :: Maybe String
@@ -197,9 +197,9 @@ data StateUnit e t
       , child :: Maybe String
       , portalTookMeHere :: Maybe Scope
       , bookends ::
-        { top :: String
-        , bot :: String
-        }
+          { top :: String
+          , bot :: String
+          }
       }
   | SFixed
       { parent :: Maybe String
@@ -207,9 +207,9 @@ data StateUnit e t
       , children :: Array String
       , portalTookMeHere :: Maybe Scope
       , bookends ::
-        { top :: String
-        , bot :: String
-        }
+          { top :: String
+          , bot :: String
+          }
       }
   | SComment
       { parent :: Maybe String
@@ -679,6 +679,7 @@ createComment_ a state'@(FFIDOMSnapshot state) = do
     )
     state.units
 
+hydrateComment_ :: forall m. Monoid m => m
 hydrateComment_ = mempty -- FIXME
 
 makeComment_
@@ -1168,7 +1169,8 @@ setCbContinuation_ a (FFIDOMSnapshot state) = do
         else do
           let l = Object.lookup a.key e.listeners
           for_ l \oldEl -> do
-            removeEventListener (EventType a.key) oldEl true (toEventTarget e.main)
+            removeEventListener (EventType a.key) oldEl true
+              (toEventTarget e.main)
           newEl <- eventListener (unwrap avv)
           addEventListener (EventType a.key) newEl true (toEventTarget e.main)
           void $ liftST $ STO.poke a.id
@@ -1300,7 +1302,8 @@ sendToPosNominal a (FFIDOMSnapshot state) = do
                             }
                         )
                     )
-                    state.units $> Just (fromMaybe e.bookends.bot (newerKids !! (pos + 1)))
+                    state.units $> Just
+                    (fromMaybe e.bookends.bot (newerKids !! (pos + 1)))
                 )
           SText _ -> pure empty -- programming error :-(
           SElement _ -> pure empty -- programming error :-(
@@ -1417,32 +1420,54 @@ getParentNode isParent (ptr :: String) starts state'@(FFIDOMSnapshot state) = do
         SElement e ->
           if isParent then pure (Just (Web.DOM.Element.toNode e.main))
           else getParentNodeFromNode (Web.DOM.Element.toNode e.main) \_ ->
-              join <$> traverse (\x -> getParentNode true x starts state')
-                e.parent
+            join <$> traverse (\x -> getParentNode true x starts state')
+              e.parent
         SText e ->
           getParentNodeFromNode ((Web.DOM.CharacterData.toNode e.main)) \_ ->
-              join <$> traverse (\x -> getParentNode true x starts state')
-                e.parent
+            join <$> traverse (\x -> getParentNode true x starts state')
+              e.parent
         SComment e ->
           getParentNodeFromNode ((Web.DOM.CharacterData.toNode e.main)) \_ ->
-              join <$> traverse (\x -> getParentNode true x starts state')
-                e.parent
+            join <$> traverse (\x -> getParentNode true x starts state')
+              e.parent
         SDyn e ->
-          getParentNodeFromDyn e.bookends e.parent state' (\x -> getParentNode true x starts state')
+          getParentNodeFromDyn e.bookends e.parent state'
+            (\x -> getParentNode true x starts state')
         SEnvy e ->
-          getParentNodeFromDyn e.bookends e.parent state' (\x -> getParentNode true x starts state')
+          getParentNodeFromDyn e.bookends e.parent state'
+            (\x -> getParentNode true x starts state')
         SFixed e ->
-          getParentNodeFromDyn e.bookends e.parent state' (\x -> getParentNode true x starts state')
+          getParentNodeFromDyn e.bookends e.parent state'
+            (\x -> getParentNode true x starts state')
     Nothing -> hittingTheFan
 
+getParentNodeFromNode
+  :: Web.DOM.Node
+  -> (Unit -> Effect (Maybe Web.DOM.Node))
+  -> Effect (Maybe Web.DOM.Node)
 getParentNodeFromNode n fallback =
   Web.DOM.Node.parentNode n >>= case _ of
     Just p -> pure (Just p)
     Nothing -> fallback unit
+
+getBookendNodeParent
+  :: String
+  -> EffectfulFFIDOMSnapshot
+  -> (Unit -> Effect (Maybe Web.DOM.Node))
+  -> Effect (Maybe Web.DOM.Node)
 getBookendNodeParent id state' fallback =
   getBookendNode id state' >>= case _ of
     Nothing -> fallback unit
     Just n -> getParentNodeFromNode n fallback
+
+getParentNodeFromDyn
+  :: { bot :: String
+     , top :: String
+     }
+  -> Maybe String
+  -> EffectfulFFIDOMSnapshot
+  -> (String -> Effect (Maybe Web.DOM.Node))
+  -> Effect (Maybe Web.DOM.Node)
 getParentNodeFromDyn bookends parent state' getter =
   getBookendNodeParent bookends.bot state' \_ ->
     getBookendNodeParent bookends.top state' \_ ->
@@ -1516,14 +1541,24 @@ getImmediateChildEltsInOrder id state'@(FFIDOMSnapshot state) = do
       SComment e -> pure [ Web.DOM.CharacterData.toNode e.main ]
       SDyn { bookends, children } ->
         getBetweenBookendsOr bookends state' \_ ->
-          map join (children # traverse (flip getImmediateChildEltsInOrder state'))
+          map join
+            (children # traverse (flip getImmediateChildEltsInOrder state'))
       SEnvy { bookends, child } ->
         getBetweenBookendsOr bookends state' \_ ->
-          map (fromMaybe []) (child # traverse (flip getImmediateChildEltsInOrder state'))
+          map (fromMaybe [])
+            (child # traverse (flip getImmediateChildEltsInOrder state'))
       SFixed { bookends, children } ->
         getBetweenBookendsOr bookends state' \_ ->
-          map join (children # traverse (flip getImmediateChildEltsInOrder state'))
+          map join
+            (children # traverse (flip getImmediateChildEltsInOrder state'))
 
+getBetweenBookendsOr
+  :: { bot :: String
+     , top :: String
+     }
+  -> EffectfulFFIDOMSnapshot
+  -> (Unit -> Effect (Array Web.DOM.Node))
+  -> Effect (Array Web.DOM.Node)
 getBetweenBookendsOr bookends state' fallback =
   getBetweenBookends bookends state' >>= case _ of
     Just r -> do
@@ -1533,17 +1568,45 @@ getBetweenBookendsOr bookends state' fallback =
     Nothing -> do
       log "Fallback children"
       fallback unit
-getBookendNodes :: _ -> _ -> Effect (Maybe _)
+
+getBookendNodes
+  :: { bot :: String
+     , top :: String
+     }
+  -> EffectfulFFIDOMSnapshot
+  -> Effect
+       ( Maybe
+           { bot :: Web.DOM.Node
+           , top :: Web.DOM.Node
+           }
+       )
 getBookendNodes bookends state' =
-  lift2 { top: _, bot: _ } <$> getBookendNode bookends.top state' <*> getBookendNode bookends.bot state'
+  lift2 { top: _, bot: _ } <$> getBookendNode bookends.top state' <*>
+    getBookendNode bookends.bot state'
+
+getBookendNode
+  :: String -> EffectfulFFIDOMSnapshot -> Effect (Maybe Web.DOM.Node)
 getBookendNode id (FFIDOMSnapshot state) = do
   ut <- liftST $ STO.peek id state.units
   pure case ut of
     Just (SComment e) -> Just (Web.DOM.CharacterData.toNode e.main)
     _ -> Nothing
+
+getBetweenBookends
+  :: { bot :: String
+     , top :: String
+     }
+  -> EffectfulFFIDOMSnapshot
+  -> Effect (Maybe (Array Web.DOM.Node))
 getBetweenBookends bookends state' =
   getBookendNodes bookends state' >>=
     traverse getBetweenNodes
+
+getBetweenNodes
+  :: { bot :: Web.DOM.Node
+     , top :: Web.DOM.Node
+     }
+  -> Effect (Array Web.DOM.Node)
 getBetweenNodes { top, bot } = do
   ret <- liftST $ STA.new
   startAt <- Web.DOM.Node.nextSibling top
@@ -1559,7 +1622,7 @@ getBetweenNodes { top, bot } = do
   whenM (Ref.read node <#> isNothing) do
     log "Failed ………"
   liftST (STA.unsafeFreeze ret) <#> \as ->
-    [top] <> as <> [bot]
+    [ top ] <> as <> [ bot ]
 
 -- | Current (bad) algo for a twenty-deep nested dyn: `dyn (dyn (dyn (dyn ... (text_ "hello world"))))`
 -- | 1. We go to number 19, find its parent, go to 18, find its parent, go to 17...
@@ -1581,6 +1644,7 @@ sendToPos_ a state' = do
   for_ initialSearch \nextId ->
     sendBefore a.id nextId state'
 
+sendBefore :: String -> String -> EffectfulFFIDOMSnapshot -> Effect Unit
 sendBefore id next state' = do
   -- log $ "sendBefore " <> show id <> " " <> show next
   getFirstByName next state' >>= traverse_ \toMyRight -> do
@@ -1603,6 +1667,7 @@ sendBefore id next state' = do
           foreachE eltsInOrder \e ->
             appendChild e parentNode
 
+appendNode :: String -> EffectfulFFIDOMSnapshot -> Effect Unit
 appendNode id state' = do
   { parentNode, toMyRight } <- getParentAndToMyRight [] { id, pos: 0 } state'
   eltsInOrder <- getImmediateChildEltsInOrder id state'
@@ -1614,11 +1679,16 @@ appendNode id state' = do
       foreachE eltsInOrder \e ->
         appendChild e parentNode
 
-getFirstByName :: String -> EffectfulFFIDOMSnapshot -> Effect (Maybe _)
+getFirstByName
+  :: String -> EffectfulFFIDOMSnapshot -> Effect (Maybe Web.DOM.Node)
 getFirstByName name state'@(FFIDOMSnapshot state) = map join $
   liftST (STO.peek name state.units) >>= traverse \node -> do
     getFirst node state'
-getFirst :: _ -> EffectfulFFIDOMSnapshot -> Effect (Maybe _)
+
+getFirst
+  :: StateUnit Web.DOM.Element Web.DOM.CharacterData
+  -> EffectfulFFIDOMSnapshot
+  -> Effect (Maybe Web.DOM.Node)
 getFirst node state' = case node of
   SText e -> pure (Just (Web.DOM.CharacterData.toNode e.main))
   SComment e -> pure (Just (Web.DOM.CharacterData.toNode e.main))
