@@ -30,7 +30,7 @@ main :: Effect Unit
 main = runInBody
   ( fixed
       let
-        mvc = bussed \push -> lcmap (bang UIShown <|> _) \event -> do
+        mvc' useFixed = bussed \push -> lcmap (bang UIShown <|> _) \event -> do
           let
             top =
               [ D.input
@@ -58,8 +58,8 @@ main = runInBody
             , dyn $
                 map
                   ( \txt -> keepLatest $ bus \p' e' ->
-                      ( insert $ D.div_
-                          [ text_ txt
+                      let
+                        innerMatter = [ text_ txt
                           , D.button
                               ( bang
                                   $ D.OnClick := p' sendToTop
@@ -71,7 +71,8 @@ main = runInBody
                               )
                               [ text_ "Delete" ]
                           ]
-                      ) <|> e'
+                      in
+                            ( insert $ (if useFixed then fixed innerMatter else D.div_ innerMatter) ) <|> e'
                   )
                   ( filterMap
                       ( \(tf /\ s) ->
@@ -88,6 +89,8 @@ main = runInBody
                       )
                   )
             ]
+        mvc = mvc' false
+        mvcF = mvc' true
       in
-        [ mvc, mvc, mvc, mvc, mvc ]
+        [ mvc, mvcF, mvc, mvcF, mvc ]
   )
