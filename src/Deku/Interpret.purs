@@ -1496,9 +1496,9 @@ getParentAndToMyRight initialSearch a state'@(FFIDOMSnapshot state) = do
           SElement e -> pure $ Just $ toNode e.main
           SText e -> pure $ Just $ Web.DOM.CharacterData.toNode e.main
           SComment e -> pure $ Just $ Web.DOM.CharacterData.toNode e.main
-          SDyn e -> scanToRight e.children
-          SEnvy e -> scanToRight (maybe [] pure e.child)
-          SFixed e -> scanToRight e.children
+          SDyn e -> scanToRight $ [e.bookends.top] <> e.children <> [e.bookends.bot]
+          SEnvy e -> scanToRight $ [e.bookends.top] <> (maybe [] pure e.child) <> [e.bookends.bot]
+          SFixed e -> scanToRight $ [e.bookends.top] <> e.children <> [e.bookends.bot]
       Nothing -> pure Nothing
 
   -- scan to right traverses the right of a dyn starting from 1+ the position, as
@@ -1542,15 +1542,15 @@ getImmediateChildEltsInOrder id state'@(FFIDOMSnapshot state) = do
       SDyn { bookends, children } ->
         getBetweenBookendsOr bookends state' \_ ->
           map join
-            (children # traverse (flip getImmediateChildEltsInOrder state'))
+            (([bookends.top] <> children <> [bookends.bot]) # traverse (flip getImmediateChildEltsInOrder state'))
       SEnvy { bookends, child } ->
         getBetweenBookendsOr bookends state' \_ ->
-          map (fromMaybe [])
-            (child # traverse (flip getImmediateChildEltsInOrder state'))
+          map join
+            (([bookends.top] <> (maybe [] pure child) <> [bookends.bot]) # traverse (flip getImmediateChildEltsInOrder state'))
       SFixed { bookends, children } ->
         getBetweenBookendsOr bookends state' \_ ->
           map join
-            (children # traverse (flip getImmediateChildEltsInOrder state'))
+            (([bookends.top] <> children <> [bookends.bot]) # traverse (flip getImmediateChildEltsInOrder state'))
 
 getBetweenBookendsOr
   :: { bot :: String

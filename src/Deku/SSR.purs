@@ -73,12 +73,13 @@ render parentCache state'@(FFIDOMSnapshot state) id = do
       SText e -> pure
         ("<!--" <> id <> "-->" <> encodedString (unwrap e.main).text)
       SComment e -> pure
-        ("<!--" <> id <> "-->")
-      SDyn { children } -> fold <$>
-        (traverse (render parentCache state') children)
-      SEnvy { child } -> fold <$> (traverse (render parentCache state') child)
-      SFixed { children } -> fold <$>
-        (traverse (render parentCache state') children)
+        ("<!--" <> encodedString (unwrap e.main).text <> "-->")
+      SDyn { bookends, children } -> fold <$>
+        (traverse (render parentCache state') ([bookends.top] <> children <> [bookends.bot]))
+      SEnvy { bookends, child } -> fold <$>
+        (traverse (render parentCache state') ([bookends.top] <> maybe [] pure child <> [bookends.bot]))
+      SFixed { bookends, children } -> fold <$>
+        (traverse (render parentCache state') ([bookends.top] <> children <> [bookends.bot]))
 
 doReplacements :: String -> (String /\ String /\ String) -> String
 doReplacements dom (par /\ _ /\ subdom) = do
