@@ -16,16 +16,18 @@ import Prelude
 
 import Bolson.Core (Scope(..))
 import Bolson.Core as Bolson.Core
+import Control.Apply (lift2)
 import Control.Monad.ST (ST)
 import Control.Monad.ST.Class (class MonadST, liftST)
 import Control.Monad.ST.Global (Global)
 import Control.Monad.ST.Internal as RRef
 import Control.Monad.State (execState, get, put)
-import Data.Array (delete, drop, insertAt, span, uncons)
+import Control.Plus (empty)
+import Data.Array (delete, drop, insertAt, span, uncons, (!!))
 import Data.Array.ST as STA
 import Data.Filterable (filter, filterMap)
 import Data.Foldable (for_, traverse_)
-import Data.Maybe (Maybe(..), fromMaybe, fromMaybe', isJust, maybe)
+import Data.Maybe (Maybe(..), fromMaybe, fromMaybe', isJust, isNothing, maybe)
 import Data.Newtype (class Newtype, unwrap)
 import Data.String (trim)
 import Data.String as String
@@ -34,7 +36,8 @@ import Data.Tuple.Nested ((/\))
 import Deku.Core (Domable)
 import Deku.Core as Core
 import Deku.STObject (freezeObj)
-import Effect (Effect, foreachE)
+import Effect (Effect, foreachE, whileE)
+import Effect.Class.Console (log)
 import Effect.Class.Console as Log
 import Effect.Exception (error, throwException)
 import Effect.Ref as Ref
@@ -46,10 +49,14 @@ import Simple.JSON as JSON
 import Test.QuickCheck (arbitrary, mkSeed)
 import Test.QuickCheck.Gen (Gen, evalGen)
 import Unsafe.Coerce (unsafeCoerce)
+import Unsafe.Reference (unsafeRefEq)
 import Web.DOM as Web.DOM
+import Web.DOM.CharacterData as Web.DOM.CharacterData
 import Web.DOM.ChildNode (remove)
-import Web.DOM.Document (createElement, createTextNode)
+import Web.DOM.Comment as Web.DOM.Comment
+import Web.DOM.Document (createComment, createElement, createTextNode)
 import Web.DOM.Element (fromNode, getAttribute, setAttribute, tagName, toChildNode, toEventTarget, toNode)
+import Web.DOM.Element as Web.DOM.Element
 import Web.DOM.Node (appendChild, firstChild, insertBefore, nodeValue, setNodeValue)
 import Web.DOM.Node as Web.DOM.Node
 import Web.DOM.NodeList (toArray)
@@ -58,7 +65,6 @@ import Web.DOM.Text as Web.DOM.Text
 import Web.Event.Event (EventType(..))
 import Web.Event.Event as Web.Event.Event
 import Web.Event.EventTarget (EventListener, addEventListener, eventListener, removeEventListener)
-import Web.Event.Internal.Types as Web
 import Web.HTML (window)
 import Web.HTML.HTMLDocument (body, toDocument)
 import Web.HTML.HTMLElement (toParentNode)
@@ -80,7 +86,7 @@ toForeign
   :: EffectfulFFIDOMSnapshot
   -> Effect Foreign
 toForeign = toForeignProto (pure <<< JSON.writeImpl <<< tagName) \x -> do
-  v <- nodeValue (Web.DOM.Text.toNode x)
+  v <- nodeValue (Web.DOM.CharacterData.toNode x)
   pure $ JSON.writeImpl v
 
 toForeignProto
@@ -111,27 +117,37 @@ toForeignProto ee tt (FFIDOMSnapshot state) = do
         , portalTookMeHere: map f portalTookMeHere
         , type: "SText"
         }
-    SDyn { parent, scope, children, portalTookMeHere } ->
+    SDyn { parent, scope, children, portalTookMeHere, bookends } ->
       pure $ JSON.writeImpl
         { parent
         , scope: f scope
         , children
         , portalTookMeHere: map f portalTookMeHere
+        , bookends
         , type: "SDyn"
         }
-    SEnvy { parent, scope, child, portalTookMeHere } ->
+    SEnvy { parent, scope, child, portalTookMeHere, bookends } ->
       pure $ JSON.writeImpl
         { parent
         , scope: f scope
         , child
         , portalTookMeHere: map f portalTookMeHere
+        , bookends
         , type: "SEnvy"
         }
-    SFixed { parent, scope, children, portalTookMeHere } ->
+    SFixed { parent, scope, children, portalTookMeHere, bookends } ->
       pure $ JSON.writeImpl
         { parent
         , scope: f scope
         , children
+        , portalTookMeHere: map f portalTookMeHere
+        , bookends
+        , type: "SFixed"
+        }
+    SComment { parent, scope, portalTookMeHere } ->
+      pure $ JSON.writeImpl
+        { parent
+        , scope: f scope
         , portalTookMeHere: map f portalTookMeHere
         , type: "SFixed"
         }
@@ -170,25 +186,40 @@ data StateUnit e t
       , scope :: Scope
       , children :: Array String
       , portalTookMeHere :: Maybe Scope
-
+      , bookends ::
+        { top :: String
+        , bot :: String
+        }
       }
   | SEnvy
       { parent :: Maybe String
       , scope :: Scope
       , child :: Maybe String
       , portalTookMeHere :: Maybe Scope
-
+      , bookends ::
+        { top :: String
+        , bot :: String
+        }
       }
   | SFixed
       { parent :: Maybe String
       , scope :: Scope
       , children :: Array String
       , portalTookMeHere :: Maybe Scope
-
+      , bookends ::
+        { top :: String
+        , bot :: String
+        }
+      }
+  | SComment
+      { parent :: Maybe String
+      , scope :: Scope
+      , main :: t
+      , portalTookMeHere :: Maybe Scope
       }
 
 type EffectfulDomable lock = Domable Web.DOM.Element Effect lock
-  (FFIDOMSnapshot Global Web.DOM.Element Web.DOM.Text -> Effect Unit)
+  (FFIDOMSnapshot Global Web.DOM.Element Web.DOM.CharacterData -> Effect Unit)
 
 data SSRElement r
   = SSRElement
@@ -240,10 +271,11 @@ removeActualChild_ a (FFIDOMSnapshot state) = do
   for_ ut \ut' -> do
     case ut' of
       SElement e -> remove $ toChildNode e.main
-      SText e -> remove $ Web.DOM.Text.toChildNode e.main
+      SText e -> remove $ Web.DOM.CharacterData.toChildNode e.main
       SDyn _ -> pure unit -- programming error :-(
       SEnvy _ -> pure unit -- programming error :-(
       SFixed _ -> pure unit -- programming error :-(
+      SComment _ -> pure unit -- programming error :-(
 
 setPropContinuation_
   :: Core.SetProp
@@ -269,6 +301,7 @@ setPropContinuation_ a (FFIDOMSnapshot state) = do
       SDyn _ -> pure unit -- programming error :-(
       SEnvy _ -> pure unit -- programming error :-(
       SFixed _ -> pure unit -- programming error :-(
+      SComment _ -> pure unit -- programming error :-(
 
 hydrateElement_
   :: Core.MakeElement
@@ -342,6 +375,7 @@ ssrSetProp_ a (FFIDOMSnapshot state) = do
       SDyn _ -> pure unit -- programming error :-(
       SEnvy _ -> pure unit -- programming error :-(
       SFixed _ -> pure unit -- programming error :-(
+      SComment _ -> pure unit -- programming error :-(
 
 retrieveElementDuringHydration_
   :: forall r
@@ -458,9 +492,10 @@ makeDynCommon
   :: forall r e t m
    . MonadST r m
   => Core.MakeDyn
+  -> { top :: String, bot :: String }
   -> FFIDOMSnapshot r e t
   -> m Unit
-makeDynCommon a state'@(FFIDOMSnapshot state) = do
+makeDynCommon a bookends state'@(FFIDOMSnapshot state) = do
   liftST $ addElementScopeToScopes_ a state'
   liftST $ void $ STO.poke
     a.id
@@ -469,6 +504,7 @@ makeDynCommon a state'@(FFIDOMSnapshot state) = do
         , parent: a.parent
         , children: []
         , portalTookMeHere: Nothing
+        , bookends
         }
     )
     state.units
@@ -478,13 +514,29 @@ ssrMakeDyn_
    . Core.MakeDyn
   -> FFIDOMSnapshot r (SSRElement r) SSRText
   -> ST r Unit
-ssrMakeDyn_ = makeDynCommon
+ssrMakeDyn_ a state = do
+  let
+    top = a { id = a.id <> "--top", parent = Just a.id }
+    bot = a { id = a.id <> "--bot", parent = Just a.id }
+  ssrMakeComment_ top state
+  ssrMakeComment_ bot state
+  makeDynCommon a { top: top.id, bot: bot.id } state
 
 makeDyn_
   :: Core.MakeDyn
   -> EffectfulFFIDOMSnapshot
   -> Effect Unit
-makeDyn_ = makeDynCommon
+makeDyn_ a state = do
+  let
+    top = a { id = a.id <> "--top", parent = Just a.id }
+    bot = a { id = a.id <> "--bot", parent = Just a.id }
+  makeComment_ top state
+  makeComment_ bot state
+  makeDynCommon a { top: top.id, bot: bot.id } state
+  -- do not call attributeParent_ since we do not want these nodes
+  -- to appear in the children
+  appendNode top.id state
+  appendNode bot.id state
 
 addTextScopeToScopes_
   :: forall r x e t
@@ -505,7 +557,7 @@ addTextScopeToScopes_ a (FFIDOMSnapshot state) = do
       void (STO.poke scope arr state.scopes)
 
 foreign import getTextNode_
-  :: Web.DOM.Element -> String -> Effect (Web.DOM.Text)
+  :: Web.DOM.Element -> String -> Effect (Web.DOM.CharacterData)
 
 hydrateText_
   :: Core.MakeText
@@ -544,7 +596,7 @@ hydrateText_ a state'@(FFIDOMSnapshot state) = do
             state.units
         Nothing -> do
           -- Log.error ("Could not find text " <> show a)
-          e <- createTextNode "" (toDocument d)
+          e <- Web.DOM.Text.toCharacterData <$> createTextNode "" (toDocument d)
           liftST $ STO.poke a.id
             ( SText
                 { scope: a.scope
@@ -567,7 +619,7 @@ createText_ a state'@(FFIDOMSnapshot state) = do
   -- if it does, we need to create it from scratch
   w <- window
   d <- document w
-  e <- createTextNode "" (toDocument d)
+  e <- Web.DOM.Text.toCharacterData <$> createTextNode "" (toDocument d)
   void $ liftST $ STO.poke a.id
     ( SText
         { scope: a.scope
@@ -596,6 +648,57 @@ ssrMakeText_ a state'@(FFIDOMSnapshot state) = do
   void $ STO.poke
     a.id
     ( SText
+        { scope: a.scope
+        , parent: a.parent
+        , main: SSRText { text: "" }
+        , portalTookMeHere: Nothing
+        }
+    )
+    state.units
+
+createComment_
+  :: Core.MakeText
+  -> EffectfulFFIDOMSnapshot
+  -> Effect Unit
+createComment_ a state'@(FFIDOMSnapshot state) = do
+  liftST $ addTextScopeToScopes_ a state'
+  -- if a portal has not been used yet, there's a chance that
+  -- an element is not in the DOM
+  -- so our lookup may fail
+  -- if it does, we need to create it from scratch
+  w <- window
+  d <- document w
+  e <- Web.DOM.Comment.toCharacterData <$> createComment a.id (toDocument d)
+  void $ liftST $ STO.poke a.id
+    ( SComment
+        { scope: a.scope
+        , parent: a.parent
+        , main: e
+        , portalTookMeHere: Nothing
+        }
+    )
+    state.units
+
+hydrateComment_ = mempty -- FIXME
+
+makeComment_
+  :: Core.MakeText
+  -> EffectfulFFIDOMSnapshot
+  -> Effect Unit
+makeComment_ a state'@(FFIDOMSnapshot state) = do
+  hydrating <- liftST $ RRef.read state.hydrating
+  (if hydrating then hydrateComment_ else createComment_) a state'
+
+ssrMakeComment_
+  :: forall r
+   . Core.MakeText
+  -> FFIDOMSnapshot r (SSRElement r) SSRText
+  -> ST r Unit
+ssrMakeComment_ a state'@(FFIDOMSnapshot state) = do
+  liftST $ addTextScopeToScopes_ a state'
+  void $ STO.poke
+    a.id
+    ( SComment
         { scope: a.scope
         , parent: a.parent
         , main: SSRText { text: "" }
@@ -644,6 +747,7 @@ addChildCommon a (FFIDOMSnapshot state) = do
       -- and isn't intended to actually touch the DOM
       SElement _ -> pure unit -- programming error :-(
       SText _ -> pure unit -- programming error :-(
+      SComment _ -> pure unit -- programming error :-(
 
 ssrAddChild_
   :: forall r
@@ -678,6 +782,7 @@ removeChildCommon impl a state'@(FFIDOMSnapshot state) = do
         SDyn e -> e.portalTookMeHere
         SEnvy e -> e.portalTookMeHere
         SFixed e -> e.portalTookMeHere
+        SComment e -> e.portalTookMeHere
     unless (isJust currentPortal && Just a.scope /= currentPortal) do
       let
         nnd' = case elt' of
@@ -686,6 +791,7 @@ removeChildCommon impl a state'@(FFIDOMSnapshot state) = do
           SDyn e -> SDyn (e { parent = Nothing })
           SEnvy e -> SEnvy (e { parent = Nothing })
           SFixed e -> SFixed (e { parent = Nothing })
+          SComment e -> SComment (e { parent = Nothing })
       liftST $ void $ STO.poke a.id nnd' state.units
       let
         p = case elt' of
@@ -694,6 +800,7 @@ removeChildCommon impl a state'@(FFIDOMSnapshot state) = do
           SFixed { parent } -> parent
           SElement { parent } -> parent
           SText { parent } -> parent
+          SComment { parent } -> parent
       case elt' of
         SDyn { children } -> for_ children \id -> removeChildCommon impl
           { id, scope: a.scope }
@@ -706,6 +813,7 @@ removeChildCommon impl a state'@(FFIDOMSnapshot state) = do
           state'
         SElement _ -> impl a state'
         SText _ -> impl a state'
+        SComment _ -> impl a state'
       for_ p \parent' -> do
         parElt <- liftST $ STO.peek parent' state.units
         for_ parElt \parElt' -> do
@@ -736,6 +844,7 @@ removeChildCommon impl a state'@(FFIDOMSnapshot state) = do
               state.units
             SElement _ -> pure unit
             SText _ -> pure unit
+            SComment _ -> pure unit
 
 ssrRemoveChild_
   :: forall r
@@ -875,6 +984,7 @@ makePursx_ a state'@(FFIDOMSnapshot state) = do
     SDyn _ -> pure unit -- programming error :-(
     SEnvy _ -> pure unit -- programming error :-(
     SFixed _ -> pure unit -- programming error :-(
+    SComment _ -> pure unit -- programming error :-(
 
 ssrMakePursx_
   :: forall r
@@ -1007,11 +1117,12 @@ setText_ a (FFIDOMSnapshot state) = do
   for_ ut \ut' -> do
     case ut' of
       SText e -> do
-        setNodeValue a.text (Web.DOM.Text.toNode e.main)
+        setNodeValue a.text (Web.DOM.CharacterData.toNode e.main)
       SElement _ -> pure unit -- programming error :-(
       SDyn _ -> pure unit -- programming error :-(
       SEnvy _ -> pure unit -- programming error :-(
       SFixed _ -> pure unit -- programming error :-(
+      SComment _ -> pure unit -- programming error :-(
 
 ssrSetText_
   :: forall r
@@ -1035,6 +1146,7 @@ ssrSetText_ a (FFIDOMSnapshot state) = do
       SDyn _ -> pure unit -- programming error :-(
       SEnvy _ -> pure unit -- programming error :-(
       SFixed _ -> pure unit -- programming error :-(
+      SComment _ -> pure unit -- programming error :-(
 
 -- foreign import setProp_
 --   :: forall r. Boolean -> Core.SetProp -> FFIDOMSnapshot r -> Effect Unit
@@ -1068,6 +1180,7 @@ setCbContinuation_ a (FFIDOMSnapshot state) = do
       SDyn _ -> pure unit -- programming error :-(
       SEnvy _ -> pure unit -- programming error :-(
       SFixed _ -> pure unit -- programming error :-(
+      SComment _ -> pure unit -- programming error :-(
 
 giveNewParent_
   :: Core.GiveNewParent
@@ -1105,6 +1218,8 @@ protoGiveNewParent a state'@(FFIDOMSnapshot state) = do
           (aa { parent = Just parent, portalTookMeHere = Just a.scope })
         SFixed aa -> SFixed
           (aa { parent = Just parent, portalTookMeHere = Just a.scope })
+        SComment aa -> SComment
+          (aa { parent = Just parent, portalTookMeHere = Just a.scope })
     liftST $ void $ STO.poke ptr nnd' state.units
 
 ssrGiveNewParent_
@@ -1140,17 +1255,24 @@ ssrDeleteFromCache_
   -> ST r Unit
 ssrDeleteFromCache_ = protoDeleteFromCache
 
+-- | This is not doing any actual DOM or SSR manipulation, but it is
+-- | manipulating the internal ledger of where an element is in its parent.
+-- | Some things ,like SElement and SText, do not have parent-child relationships
+-- | managed by deku, whereas SDyn SEnvy and SFixed do. This is a way to
+-- | track those.
+-- | This only acts on dyn because sendToPos, as an operation, only makes sense
+-- | for dyn. TODO: verify that fixed and envy _don't_ need this.
 sendToPosNominal
   :: forall r e t m
    . MonadST r m
   => Core.SendToPos
   -> FFIDOMSnapshot r e t
-  -> m (Array String)
+  -> m (Maybe String)
 sendToPosNominal a (FFIDOMSnapshot state) = do
   let ptr = a.id
   let pos = a.pos
   ut <- liftST $ STO.peek ptr state.units
-  ut # maybe (pure []) \ut' -> do
+  ut # maybe (pure empty) \ut' -> do
     let
       parent = case ut' of
         SElement e -> e.parent
@@ -1158,9 +1280,10 @@ sendToPosNominal a (FFIDOMSnapshot state) = do
         SDyn e -> e.parent
         SEnvy e -> e.parent
         SFixed e -> e.parent
-    parent # maybe (pure []) \parent' -> do
+        SComment e -> e.parent
+    parent # maybe (pure empty) \parent' -> do
       parElt <- liftST $ STO.peek parent' state.units
-      parElt # maybe (pure []) \parElt' -> do
+      parElt # maybe (pure empty) \parElt' -> do
         case parElt' of
           SDyn e ->
             let
@@ -1177,12 +1300,13 @@ sendToPosNominal a (FFIDOMSnapshot state) = do
                             }
                         )
                     )
-                    state.units $> (drop (pos + 1) newerKids)
+                    state.units $> Just (fromMaybe e.bookends.bot (newerKids !! (pos + 1)))
                 )
-          SText _ -> pure [] -- programming error :-(
-          SElement _ -> pure [] -- programming error :-(
-          SEnvy _ -> pure [] -- programming error :-(
-          SFixed _ -> pure [] -- programming error :-(
+          SText _ -> pure empty -- programming error :-(
+          SElement _ -> pure empty -- programming error :-(
+          SEnvy _ -> pure empty -- programming error :-(
+          SFixed _ -> pure empty -- programming error :-(
+          SComment _ -> pure empty -- programming error :-(
 
 ssrSendToPos_
   :: forall r
@@ -1192,7 +1316,7 @@ ssrSendToPos_
 ssrSendToPos_ a state = void $ sendToPosNominal a state
 
 type EffectfulFFIDOMSnapshot = FFIDOMSnapshot Global Web.DOM.Element
-  Web.DOM.Text
+  Web.DOM.CharacterData
 
 stepUpAndOver
   :: String
@@ -1208,6 +1332,7 @@ stepUpAndOver needle state'@(FFIDOMSnapshot state) = do
         SFixed { parent } -> parent
         SElement { parent } -> parent
         SText { parent } -> parent
+        SComment { parent } -> parent
     par' # maybe (pure Nothing) \par -> do
       parElt <- liftST $ STO.peek par state.units
       parElt # maybe (pure Nothing) \parElt' -> do
@@ -1218,6 +1343,7 @@ stepUpAndOver needle state'@(FFIDOMSnapshot state) = do
             SFixed { parent } -> parent
             SElement { parent } -> parent
             SText { parent } -> parent
+            SComment { parent } -> parent
         parentParent' # maybe (pure Nothing) \parentParent -> do
           parParElt <- liftST $ STO.peek parentParent state.units
           parParElt # maybe (pure Nothing) case _ of
@@ -1233,6 +1359,7 @@ stepUpAndOver needle state'@(FFIDOMSnapshot state) = do
             SElement _ -> pure Nothing
             -- no dice, nothing to the right
             SText _ -> pure Nothing
+            SComment _ -> pure Nothing
 
 getParent
   :: Boolean
@@ -1269,7 +1396,57 @@ getParent isParent (ptr :: String) starts state'@(FFIDOMSnapshot state) = do
           e.parent
         SFixed e -> maybe hittingTheFan (\x -> getParent true x starts state')
           e.parent
+        SComment e -> maybe hittingTheFan (\x -> getParent true x starts state')
+          e.parent
     Nothing -> hittingTheFan
+
+getParentNode
+  :: Boolean
+  -> String
+  -> String
+  -> EffectfulFFIDOMSnapshot
+  -> Effect (Maybe Web.DOM.Node)
+getParentNode isParent (ptr :: String) starts state'@(FFIDOMSnapshot state) = do
+  let
+    hittingTheFan = pure Nothing
+  ut <- liftST $ STO.peek ptr state.units
+  -- Log.info ("getParentNode running : " <> show ptr <> " starts at " <> starts)
+  case ut of
+    Just ut' -> do
+      case ut' of
+        SElement e ->
+          if isParent then pure (Just (Web.DOM.Element.toNode e.main))
+          else getParentNodeFromNode (Web.DOM.Element.toNode e.main) \_ ->
+              join <$> traverse (\x -> getParentNode true x starts state')
+                e.parent
+        SText e ->
+          getParentNodeFromNode ((Web.DOM.CharacterData.toNode e.main)) \_ ->
+              join <$> traverse (\x -> getParentNode true x starts state')
+                e.parent
+        SComment e ->
+          getParentNodeFromNode ((Web.DOM.CharacterData.toNode e.main)) \_ ->
+              join <$> traverse (\x -> getParentNode true x starts state')
+                e.parent
+        SDyn e ->
+          getParentNodeFromDyn e.bookends e.parent state' (\x -> getParentNode true x starts state')
+        SEnvy e ->
+          getParentNodeFromDyn e.bookends e.parent state' (\x -> getParentNode true x starts state')
+        SFixed e ->
+          getParentNodeFromDyn e.bookends e.parent state' (\x -> getParentNode true x starts state')
+    Nothing -> hittingTheFan
+
+getParentNodeFromNode n fallback =
+  Web.DOM.Node.parentNode n >>= case _ of
+    Just p -> pure (Just p)
+    Nothing -> fallback unit
+getBookendNodeParent id state' fallback =
+  getBookendNode id state' >>= case _ of
+    Nothing -> fallback unit
+    Just n -> getParentNodeFromNode n fallback
+getParentNodeFromDyn bookends parent state' getter =
+  getBookendNodeParent bookends.bot state' \_ ->
+    getBookendNodeParent bookends.top state' \_ ->
+      join <$> traverse getter parent
 
 getParentAndToMyRight
   :: Array String
@@ -1292,7 +1469,8 @@ getParentAndToMyRight initialSearch a state'@(FFIDOMSnapshot state) = do
       Just ut' -> do
         case ut' of
           SElement e -> pure $ Just $ toNode e.main
-          SText e -> pure $ Just $ Web.DOM.Text.toNode e.main
+          SText e -> pure $ Just $ Web.DOM.CharacterData.toNode e.main
+          SComment e -> pure $ Just $ Web.DOM.CharacterData.toNode e.main
           SDyn e -> scanToRight e.children
           SEnvy e -> scanToRight (maybe [] pure e.child)
           SFixed e -> scanToRight e.children
@@ -1334,13 +1512,64 @@ getImmediateChildEltsInOrder id state'@(FFIDOMSnapshot state) = do
   ut # maybe (pure []) \ut' -> do
     case ut' of
       SElement e -> pure [ toNode e.main ]
-      SText e -> pure [ Web.DOM.Text.toNode e.main ]
-      SDyn { children } -> map join
-        (children # traverse (flip getImmediateChildEltsInOrder state'))
-      SEnvy { child } -> map (fromMaybe [])
-        (child # traverse (flip getImmediateChildEltsInOrder state'))
-      SFixed { children } -> map join
-        (children # traverse (flip getImmediateChildEltsInOrder state'))
+      SText e -> pure [ Web.DOM.CharacterData.toNode e.main ]
+      SComment e -> pure [ Web.DOM.CharacterData.toNode e.main ]
+      SDyn { bookends, children } ->
+        getBetweenBookendsOr bookends state' \_ ->
+          map join (children # traverse (flip getImmediateChildEltsInOrder state'))
+      SEnvy { bookends, child } ->
+        getBetweenBookendsOr bookends state' \_ ->
+          map (fromMaybe []) (child # traverse (flip getImmediateChildEltsInOrder state'))
+      SFixed { bookends, children } ->
+        getBetweenBookendsOr bookends state' \_ ->
+          map join (children # traverse (flip getImmediateChildEltsInOrder state'))
+
+getBetweenBookendsOr bookends state' fallback =
+  getBetweenBookends bookends state' >>= case _ of
+    Just r -> do
+      -- log $ "Fast children " <> show (bookends :: { bot :: _, top :: _ }) <> ":"
+      -- log $ unsafeCoerce r
+      pure r
+    Nothing -> do
+      log "Fallback children"
+      fallback unit
+getBookendNodes :: _ -> _ -> Effect (Maybe _)
+getBookendNodes bookends state' =
+  lift2 { top: _, bot: _ } <$> getBookendNode bookends.top state' <*> getBookendNode bookends.bot state'
+getBookendNode id (FFIDOMSnapshot state) = do
+  ut <- liftST $ STO.peek id state.units
+  pure case ut of
+    Just (SComment e) -> Just (Web.DOM.CharacterData.toNode e.main)
+    _ -> Nothing
+getBetweenBookends bookends state' =
+  getBookendNodes bookends state' >>=
+    traverse getBetweenNodes
+getBetweenNodes { top, bot } = do
+  ret <- liftST $ STA.new
+  startAt <- Web.DOM.Node.nextSibling top
+  node <- Ref.new startAt
+  let
+    continue = Ref.read node <#> case _ of
+      Nothing -> false
+      Just n -> not unsafeRefEq n bot
+  whileE continue $ Ref.read node >>= traverse_ \tgt -> do
+    _ <- liftST $ STA.push tgt ret
+    next <- Web.DOM.Node.nextSibling tgt
+    Ref.write next node
+  whenM (Ref.read node <#> isNothing) do
+    log "Failed ………"
+  liftST (STA.unsafeFreeze ret) <#> \as ->
+    [top] <> as <> [bot]
+
+-- | Current (bad) algo for a twenty-deep nested dyn: `dyn (dyn (dyn (dyn ... (text_ "hello world"))))`
+-- | 1. We go to number 19, find its parent, go to 18, find its parent, go to 17...
+-- | 2. When we get to 0, it will have a parent that is SElement, and that's the parent we use for `insertBefore`.
+-- | Now a good algorithm with comments.
+-- | 1. We go to number 19.
+-- | 2. _By definition_, number 19 has already been added to the DOM because we are inserting into it.
+-- | 3. _By definition)_, if number 19 exists in the DOM, then given @MonoidMusician's comment strategy, it has a comment, that also in the DOM.
+-- | 4. _By definition_, because the comment exists in the DOM, it has parent.
+-- | 5. This parent is the _same_ as the parent of number 20, so we take node.parentNode and we're done.
 
 sendToPos_
   :: Core.SendToPos
@@ -1349,12 +1578,54 @@ sendToPos_
 sendToPos_ a state' = do
   -- Log.info "starting send to pos"
   initialSearch <- sendToPosNominal a state'
-  { parentNode, toMyRight } <- getParentAndToMyRight initialSearch a state'
-  eltsInOrder <- getImmediateChildEltsInOrder a.id state'
-  -- let _____ = spy "parentNode tmr" {parentNode, toMyRight, id: a.id, eltsInOrder}
-  foreachE eltsInOrder \e -> case toMyRight of
-    Just tmr -> insertBefore e tmr parentNode
-    Nothing -> appendChild e parentNode
+  for_ initialSearch \nextId ->
+    sendBefore a.id nextId state'
+
+sendBefore id next state' = do
+  -- log $ "sendBefore " <> show id <> " " <> show next
+  getFirstByName next state' >>= traverse_ \toMyRight -> do
+    -- log $ unsafeCoerce toMyRight
+    Web.DOM.Node.parentNode toMyRight >>= case _ of
+      Just parentNode -> do
+        -- log "Fast path:"
+        -- log $ unsafeCoerce parentNode
+        -- let _____ = spy "parentNode tmr" {parentNode, toMyRight, id: a.id, eltsInOrder}
+        eltsInOrder <- getImmediateChildEltsInOrder id state'
+        foreachE eltsInOrder \e ->
+          insertBefore e toMyRight parentNode
+      Nothing -> do
+        -- Should probably never be called?
+        log "Slow path:"
+        eltsInOrder <- getImmediateChildEltsInOrder id state'
+        mparentNode <- getParentNode false id id state'
+        -- log $ unsafeCoerce mparentNode
+        for_ mparentNode \parentNode ->
+          foreachE eltsInOrder \e ->
+            appendChild e parentNode
+
+appendNode id state' = do
+  { parentNode, toMyRight } <- getParentAndToMyRight [] { id, pos: 0 } state'
+  eltsInOrder <- getImmediateChildEltsInOrder id state'
+  case toMyRight of
+    Just tmr ->
+      foreachE eltsInOrder \e ->
+        insertBefore e tmr parentNode
+    Nothing ->
+      foreachE eltsInOrder \e ->
+        appendChild e parentNode
+
+getFirstByName :: String -> EffectfulFFIDOMSnapshot -> Effect (Maybe _)
+getFirstByName name state'@(FFIDOMSnapshot state) = map join $
+  liftST (STO.peek name state.units) >>= traverse \node -> do
+    getFirst node state'
+getFirst :: _ -> EffectfulFFIDOMSnapshot -> Effect (Maybe _)
+getFirst node state' = case node of
+  SText e -> pure (Just (Web.DOM.CharacterData.toNode e.main))
+  SComment e -> pure (Just (Web.DOM.CharacterData.toNode e.main))
+  SElement e -> pure (Just (Web.DOM.Element.toNode e.main))
+  SDyn e -> getFirstByName e.bookends.top state'
+  SEnvy e -> getFirstByName e.bookends.top state'
+  SFixed e -> getFirstByName e.bookends.top state'
 
 fullDOMInterpret
   :: Ref.Ref Int

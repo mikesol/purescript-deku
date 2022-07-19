@@ -72,6 +72,8 @@ render parentCache state'@(FFIDOMSnapshot state) id = do
 
       SText e -> pure
         ("<!--" <> id <> "-->" <> encodedString (unwrap e.main).text)
+      SComment e -> pure
+        ("<!--" <> id <> "-->")
       SDyn { children } -> fold <$>
         (traverse (render parentCache state') children)
       SEnvy { child } -> fold <$> (traverse (render parentCache state') child)
@@ -107,6 +109,7 @@ getBody (FFIDOMSnapshot state) = do
             SFixed _ -> Nothing
             SEnvy _ -> Nothing
             SText _ -> Nothing
+            SComment _ -> Nothing
             SElement { main } -> case main of
               SSRPursxElement _ -> Nothing
               SSRElement { tag }
@@ -137,6 +140,7 @@ getElementsWhoseParentIsNotInGraph (FFIDOMSnapshot state) = do
               SFixed { parent } -> opar i parent
               SElement { parent } -> opar i parent
               SText { parent } -> opar i parent
+              SComment { parent } -> opar i parent
           )
           frozen
       )
@@ -161,6 +165,7 @@ makeParentCache (FFIDOMSnapshot state) = do
               SFixed { parent } -> opar i parent
               SElement { parent } -> opar i parent
               SText { parent } -> opar i parent
+              SComment { parent } -> opar i parent
           )
           frozen
       )
