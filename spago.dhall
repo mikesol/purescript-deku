@@ -31,6 +31,7 @@
   , "transformers"
   , "tuples"
   , "unsafe-coerce"
+  , "unsafe-reference"
   , "web-dom"
   , "web-events"
   , "web-html"
