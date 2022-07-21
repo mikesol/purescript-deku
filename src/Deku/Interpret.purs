@@ -84,12 +84,11 @@ toForeign = toForeignProto (pure <<< JSON.writeImpl <<< tagName) \x -> do
   pure $ JSON.writeImpl v
 
 toForeignProto
-  :: forall r e t m
-   . MonadST r m
-  => (e -> m Foreign)
-  -> (t -> m Foreign)
-  -> FFIDOMSnapshot r e t
-  -> m Foreign
+  :: forall e t
+   . (e -> Effect Foreign)
+  -> (t -> Effect Foreign)
+  -> FFIDOMSnapshot Global e t
+  -> Effect Foreign
 toForeignProto ee tt (FFIDOMSnapshot state) = do
   units <- liftST $ freezeObj state.units
   o <- units # traverse case _ of
@@ -203,11 +202,11 @@ newtype SSRText = SSRText { text :: String }
 
 derive instance Newtype SSRText _
 
-makeFFIDOMSnapshot :: forall r e t. ST r (FFIDOMSnapshot r e t)
+makeFFIDOMSnapshot :: forall e t. Effect (FFIDOMSnapshot Global e t)
 makeFFIDOMSnapshot = do
-  units <- STO.new
-  scopes <- STO.new
-  hydrating <- RRef.new false
+  units <- liftST $ STO.new
+  scopes <- liftST $ STO.new
+  hydrating <- liftST $ RRef.new false
   pure $ FFIDOMSnapshot { units, scopes, hydrating }
 
 scopeToString :: Scope -> String
@@ -217,12 +216,12 @@ scopeToString Global = "rootScope"
 addElementScopeToScopes_
   :: forall r e t c
    . { id :: String, scope :: Scope | c }
-  -> FFIDOMSnapshot r e t
-  -> ST r Unit
+  -> FFIDOMSnapshot Global e t
+  -> Effect Unit
 addElementScopeToScopes_ a (FFIDOMSnapshot state) = do
   let ptr = a.id
   let scope = scopeToString a.scope
-  STO.peek scope state.scopes >>= case _ of
+  liftST $ STO.peek scope state.scopes >>= case _ of
     Just arr -> void (STA.push ptr arr)
     Nothing -> do
       arr <- STA.new
@@ -275,7 +274,7 @@ hydrateElement_
   -> EffectfulFFIDOMSnapshot
   -> Effect Unit
 hydrateElement_ a state'@(FFIDOMSnapshot state) = do
-  liftST $ addElementScopeToScopes_ a state'
+  addElementScopeToScopes_ a state'
   -- if a portal has not been used yet, there's a chance that
   -- an element is not in the DOM
   -- so our lookup may fail
@@ -325,18 +324,18 @@ setProp_ a state'@(FFIDOMSnapshot state) = do
   ) a state'
 
 ssrSetProp_
-  :: forall r
-   . Core.SetProp
-  -> FFIDOMSnapshot r (SSRElement r) SSRText
-  -> ST r Unit
+  :: Core.SetProp
+  -> FFIDOMSnapshot Global (SSRElement Global) SSRText
+  -> Effect Unit
 ssrSetProp_ a (FFIDOMSnapshot state) = do
   let ptr = a.id
   let avv = a.value
-  ut <- STO.peek ptr state.units
+  ut <- liftST $ STO.peek ptr state.units
   for_ ut \ut' -> do
     case ut' of
       SElement e -> case e.main of
-        SSRElement x -> void $ STA.push { key: a.key, value: avv } x.attributes
+        SSRElement x -> void $ liftST $ STA.push { key: a.key, value: avv }
+          x.attributes
         SSRPursxElement _ -> pure unit
       SText _ -> pure unit -- programming error :-(
       SDyn _ -> pure unit -- programming error :-(
@@ -344,8 +343,7 @@ ssrSetProp_ a (FFIDOMSnapshot state) = do
       SFixed _ -> pure unit -- programming error :-(
 
 retrieveElementDuringHydration_
-  :: forall r
-   . { id :: String, parent :: Maybe String, scope :: Scope | r }
+  :: forall r. { id :: String, parent :: Maybe String, scope :: Scope | r }
   -> EffectfulFFIDOMSnapshot
   -> Effect Unit
 retrieveElementDuringHydration_ = retrieveElementDuringHydration_' \a ->
@@ -372,7 +370,7 @@ retrieveElementDuringHydration_' mkSelector a state'@(FFIDOMSnapshot state) = do
       )
       \qs' -> do
         -- Log.info   ( "Found pursx " <> show { id: a.id, parent: a.parent, scope: a.scope })
-        liftST $ addElementScopeToScopes_ a state'
+        addElementScopeToScopes_ a state'
         void $ liftST $ STO.poke a.id
           ( SElement
               { listeners: Object.empty
@@ -407,7 +405,7 @@ createElement_
   -> EffectfulFFIDOMSnapshot
   -> Effect Unit
 createElement_ a state'@(FFIDOMSnapshot state) = do
-  liftST $ addElementScopeToScopes_ a state'
+  addElementScopeToScopes_ a state'
   -- if a portal has not been used yet, there's a chance that
   -- an element is not in the DOM
   -- so our lookup may fail
@@ -435,14 +433,13 @@ makeElement_ a state'@(FFIDOMSnapshot state) = do
   (if hydrating then hydrateElement_ else createElement_) a state'
 
 ssrMakeElement_
-  :: forall r
-   . Core.MakeElement
-  -> FFIDOMSnapshot r (SSRElement r) SSRText
-  -> ST r Unit
+  :: Core.MakeElement
+  -> FFIDOMSnapshot Global (SSRElement Global) SSRText
+  -> Effect Unit
 ssrMakeElement_ a state'@(FFIDOMSnapshot state) = do
-  liftST $ addElementScopeToScopes_ a state'
-  attributes <- STA.new
-  void $ STO.poke
+  addElementScopeToScopes_ a state'
+  attributes <- liftST $ STA.new
+  void $ liftST $ STO.poke
     a.id
     ( SElement
         { listeners: Object.empty
@@ -455,13 +452,12 @@ ssrMakeElement_ a state'@(FFIDOMSnapshot state) = do
     state.units
 
 makeDynCommon
-  :: forall r e t m
-   . MonadST r m
-  => Core.MakeDyn
-  -> FFIDOMSnapshot r e t
-  -> m Unit
+  :: forall e t
+   . Core.MakeDyn
+  -> FFIDOMSnapshot Global e t
+  -> Effect Unit
 makeDynCommon a state'@(FFIDOMSnapshot state) = do
-  liftST $ addElementScopeToScopes_ a state'
+  addElementScopeToScopes_ a state'
   liftST $ void $ STO.poke
     a.id
     ( SDyn
@@ -474,10 +470,9 @@ makeDynCommon a state'@(FFIDOMSnapshot state) = do
     state.units
 
 ssrMakeDyn_
-  :: forall r
-   . Core.MakeDyn
-  -> FFIDOMSnapshot r (SSRElement r) SSRText
-  -> ST r Unit
+  :: Core.MakeDyn
+  -> FFIDOMSnapshot Global (SSRElement Global) SSRText
+  -> Effect Unit
 ssrMakeDyn_ = makeDynCommon
 
 makeDyn_
@@ -492,12 +487,12 @@ addTextScopeToScopes_
      , scope :: Scope
      | x
      }
-  -> FFIDOMSnapshot r e t
-  -> ST r Unit
+  -> FFIDOMSnapshot Global e t
+  -> Effect Unit
 addTextScopeToScopes_ a (FFIDOMSnapshot state) = do
   let ptr = a.id
   let scope = scopeToString a.scope
-  STO.peek scope state.scopes >>= case _ of
+  liftST $ STO.peek scope state.scopes >>= case _ of
     Just arr -> void (STA.push ptr arr)
     Nothing -> do
       arr <- STA.new
@@ -512,7 +507,7 @@ hydrateText_
   -> EffectfulFFIDOMSnapshot
   -> Effect Unit
 hydrateText_ a state'@(FFIDOMSnapshot state) = do
-  liftST $ addTextScopeToScopes_ a state'
+  addTextScopeToScopes_ a state'
   -- if a portal has not been used yet, there's a chance that
   -- an element is not in the DOM
   -- so our lookup may fail
@@ -560,7 +555,7 @@ createText_
   -> EffectfulFFIDOMSnapshot
   -> Effect Unit
 createText_ a state'@(FFIDOMSnapshot state) = do
-  liftST $ addTextScopeToScopes_ a state'
+  addTextScopeToScopes_ a state'
   -- if a portal has not been used yet, there's a chance that
   -- an element is not in the DOM
   -- so our lookup may fail
@@ -587,13 +582,12 @@ makeText_ a state'@(FFIDOMSnapshot state) = do
   (if hydrating then hydrateText_ else createText_) a state'
 
 ssrMakeText_
-  :: forall r
-   . Core.MakeText
-  -> FFIDOMSnapshot r (SSRElement r) SSRText
-  -> ST r Unit
+  :: Core.MakeText
+  -> FFIDOMSnapshot Global (SSRElement Global) SSRText
+  -> Effect Unit
 ssrMakeText_ a state'@(FFIDOMSnapshot state) = do
-  liftST $ addTextScopeToScopes_ a state'
-  void $ STO.poke
+  addTextScopeToScopes_ a state'
+  void $ liftST $ STO.poke
     a.id
     ( SText
         { scope: a.scope
@@ -605,11 +599,10 @@ ssrMakeText_ a state'@(FFIDOMSnapshot state) = do
     state.units
 
 addChildCommon
-  :: forall r e t m
-   . MonadST r m
-  => Core.AddChild
-  -> FFIDOMSnapshot r e t
-  -> m Unit
+  :: forall e t
+   . Core.AddChild
+  -> FFIDOMSnapshot Global e t
+  -> Effect Unit
 addChildCommon a (FFIDOMSnapshot state) = do
   elt <- liftST $ STO.peek a.parent state.units
   for_ elt \elt' ->
@@ -646,10 +639,9 @@ addChildCommon a (FFIDOMSnapshot state) = do
       SText _ -> pure unit -- programming error :-(
 
 ssrAddChild_
-  :: forall r
-   . Core.AddChild
-  -> FFIDOMSnapshot r (SSRElement r) SSRText
-  -> ST r Unit
+  :: Core.AddChild
+  -> FFIDOMSnapshot Global (SSRElement Global) SSRText
+  -> Effect Unit
 ssrAddChild_ = addChildCommon
 
 addChild_
@@ -659,15 +651,14 @@ addChild_
 addChild_ = addChildCommon
 
 removeChildCommon
-  :: forall r e t m
-   . MonadST r m
-  => ( Core.RemoveChild
-       -> FFIDOMSnapshot r e t
-       -> m Unit
+  :: forall e t
+   . ( Core.RemoveChild
+       -> FFIDOMSnapshot Global e t
+       -> Effect Unit
      )
   -> Core.RemoveChild
-  -> FFIDOMSnapshot r e t
-  -> m Unit
+  -> FFIDOMSnapshot Global e t
+  -> Effect Unit
 removeChildCommon impl a state'@(FFIDOMSnapshot state) = do
   elt <- liftST $ STO.peek a.id state.units
   for_ elt \elt' -> do
@@ -738,10 +729,9 @@ removeChildCommon impl a state'@(FFIDOMSnapshot state) = do
             SText _ -> pure unit
 
 ssrRemoveChild_
-  :: forall r
-   . Core.RemoveChild
-  -> FFIDOMSnapshot r (SSRElement r) SSRText
-  -> ST r Unit
+  :: Core.RemoveChild
+  -> FFIDOMSnapshot Global (SSRElement Global) SSRText
+  -> Effect Unit
 ssrRemoveChild_ = removeChildCommon \_ _ -> pure unit
 
 removeChild_
@@ -776,10 +766,9 @@ hydratingAttributeParent_ a state = do
   void $ sendToPosNominal { id: a.id, pos: top - 1 } state
 
 ssrAttributeParent_
-  :: forall r
-   . Core.AttributeParent
-  -> FFIDOMSnapshot r (SSRElement r) SSRText
-  -> ST r Unit
+  :: Core.AttributeParent
+  -> FFIDOMSnapshot Global (SSRElement Global) SSRText
+  -> Effect Unit
 ssrAttributeParent_ a state = do
   -- -1 to avoid overflow errors
   ssrSendToPos_ { id: a.id, pos: top - 1 } state
@@ -817,7 +806,7 @@ pursXConnectionStep_ tmp a state'@(FFIDOMSnapshot state) = do
               }
           )
           state.units
-        liftST $ addElementScopeToScopes_ { id: namespacedKey, scope } state'
+        addElementScopeToScopes_ { id: namespacedKey, scope } state'
   let
     elementF e = do
       -- this node needs to be here because otherwise, when
@@ -835,7 +824,7 @@ pursXConnectionStep_ tmp a state'@(FFIDOMSnapshot state) = do
               }
           )
           state.units
-        liftST $ addElementScopeToScopes_ { id: namespacedKey, scope } state'
+        addElementScopeToScopes_ { id: namespacedKey, scope } state'
   --Log.info (show a.id)
   for_ (toParentNode <$> (HTMLElement.fromElement tmp)) \tmp' -> do
     querySelectorAll (QuerySelector "[data-deku-attr-internal]") tmp'
@@ -877,20 +866,18 @@ makePursx_ a state'@(FFIDOMSnapshot state) = do
     SFixed _ -> pure unit -- programming error :-(
 
 ssrMakePursx_
-  :: forall r
-   . Core.MakePursx
-  -> FFIDOMSnapshot r (SSRElement r) SSRText
-  -> ST r Unit
+  :: Core.MakePursx
+  -> FFIDOMSnapshot Global (SSRElement Global) SSRText
+  -> Effect Unit
 ssrMakePursx_ = pursXCreationStep \t ->
   pure $ SSRPursxElement { html: t }
 
 pursXCreationStep
-  :: forall r e t m
-   . MonadST r m
-  => (String -> m e)
+  :: forall e t
+   . (String -> Effect e)
   -> Core.MakePursx
-  -> FFIDOMSnapshot r e t
-  -> m Unit
+  -> FFIDOMSnapshot Global e t
+  -> Effect Unit
 pursXCreationStep createElementStep a state'@(FFIDOMSnapshot state) = do
   let ptr = a.id
   let html = a.html
@@ -928,7 +915,7 @@ pursXCreationStep createElementStep a state'@(FFIDOMSnapshot state) = do
               h
       )
   e <- createElementStep (trim html')
-  liftST $ addElementScopeToScopes_ a state'
+  addElementScopeToScopes_ a state'
   liftST $ void $ STO.poke ptr
     ( SElement
         { listeners: Object.empty
@@ -965,12 +952,11 @@ pursXHydrationStep a state = do
 
 protoMakeRoot
   :: forall r m e t c
-   . MonadST r m
-  => { id :: String, root :: e | c }
-  -> FFIDOMSnapshot r e t
-  -> m Unit
+   . { id :: String, root :: e | c }
+  -> FFIDOMSnapshot Global e t
+  -> Effect Unit
 protoMakeRoot { id, root } state'@(FFIDOMSnapshot state) = do
-  liftST $ addElementScopeToScopes_ { id, scope: Bolson.Core.Global } state'
+  addElementScopeToScopes_ { id, scope: Bolson.Core.Global } state'
   liftST $ void
     ( STO.poke id
         ( SElement
@@ -991,10 +977,9 @@ makeRoot_
 makeRoot_ = protoMakeRoot
 
 ssrMakeRoot_
-  :: forall r
-   . Core.MakeRoot (SSRElement r)
-  -> FFIDOMSnapshot r (SSRElement r) SSRText
-  -> ST r Unit
+  :: Core.MakeRoot (SSRElement Global)
+  -> FFIDOMSnapshot Global (SSRElement Global) SSRText
+  -> Effect Unit
 ssrMakeRoot_ = protoMakeRoot
 
 setText_
@@ -1014,15 +999,14 @@ setText_ a (FFIDOMSnapshot state) = do
       SFixed _ -> pure unit -- programming error :-(
 
 ssrSetText_
-  :: forall r
-   . Core.SetText
-  -> FFIDOMSnapshot r (SSRElement r) SSRText
-  -> ST r Unit
+  :: Core.SetText
+  -> FFIDOMSnapshot Global (SSRElement Global) SSRText
+  -> Effect Unit
 ssrSetText_ a (FFIDOMSnapshot state) = do
-  elt <- STO.peek a.id state.units
+  elt <- liftST $ STO.peek a.id state.units
   for_ elt \elt' ->
     case elt' of
-      SText t -> void $ STO.poke a.id
+      SText t -> void $ liftST $ STO.poke a.id
         ( SText
             ( t
                 { main =
@@ -1076,19 +1060,17 @@ giveNewParent_
   -> Effect Unit
 giveNewParent_ a state' = do
   --Log.info $ "giveNewParent_: " <> show a.id
-  liftST $ protoGiveNewParent a state'
+  protoGiveNewParent a state'
   -- todo: are give new parent and attribute parent the same??
   attributeParent_ { id: a.id, parent: a.parent } state'
 
 protoGiveNewParent
   :: forall m r e t
-   . MonadST r m
-  => Core.GiveNewParent
-  -> FFIDOMSnapshot r e t
-  -> m Unit
+   . Core.GiveNewParent
+  -> FFIDOMSnapshot Global e t
+  -> Effect Unit
 protoGiveNewParent a state'@(FFIDOMSnapshot state) = do
-  liftST $ removeChildCommon (\_ _ -> pure unit) { id: a.id, scope: a.scope }
-    state'
+  removeChildCommon (\_ _ -> pure unit) { id: a.id, scope: a.scope } state'
   let ptr = a.id
   let parent = a.parent
   nd <- liftST $ STO.peek ptr state.units
@@ -1109,10 +1091,9 @@ protoGiveNewParent a state'@(FFIDOMSnapshot state) = do
     liftST $ void $ STO.poke ptr nnd' state.units
 
 ssrGiveNewParent_
-  :: forall r
-   . Core.GiveNewParent
-  -> FFIDOMSnapshot r (SSRElement r) SSRText
-  -> ST r Unit
+  :: Core.GiveNewParent
+  -> FFIDOMSnapshot Global (SSRElement Global) SSRText
+  -> Effect Unit
 ssrGiveNewParent_ = protoGiveNewParent
 
 deleteFromCache_
@@ -1123,30 +1104,27 @@ deleteFromCache_ a state' = do
   --Log.info ("deleteFromCache_: " <> show a.id)
   -- should be removed already!
   --  removeChild_ { id: a.id, scope: a.scope } state'
-  liftST $ protoDeleteFromCache a state'
+  protoDeleteFromCache a state'
 
 protoDeleteFromCache
-  :: forall r m e t
-   . MonadST r m
-  => Core.DeleteFromCache
-  -> FFIDOMSnapshot r e t
-  -> m Unit
+  :: forall e t
+   . Core.DeleteFromCache
+  -> FFIDOMSnapshot Global e t
+  -> Effect Unit
 protoDeleteFromCache a (FFIDOMSnapshot state) = do
   liftST $ void $ STO.delete a.id state.units
 
 ssrDeleteFromCache_
-  :: forall r
-   . Core.DeleteFromCache
-  -> FFIDOMSnapshot r (SSRElement r) SSRText
-  -> ST r Unit
+  :: Core.DeleteFromCache
+  -> FFIDOMSnapshot Global (SSRElement Global) SSRText
+  -> Effect Unit
 ssrDeleteFromCache_ = protoDeleteFromCache
 
 sendToPosNominal
-  :: forall r e t m
-   . MonadST r m
-  => Core.SendToPos
-  -> FFIDOMSnapshot r e t
-  -> m (Array String)
+  :: forall e t
+   . Core.SendToPos
+  -> FFIDOMSnapshot Global e t
+  -> Effect (Array String)
 sendToPosNominal a (FFIDOMSnapshot state) = do
   let ptr = a.id
   let pos = a.pos
@@ -1186,10 +1164,9 @@ sendToPosNominal a (FFIDOMSnapshot state) = do
           SFixed _ -> pure [] -- programming error :-(
 
 ssrSendToPos_
-  :: forall r
-   . Core.SendToPos
-  -> FFIDOMSnapshot r (SSRElement r) SSRText
-  -> ST r Unit
+  :: Core.SendToPos
+  -> FFIDOMSnapshot Global (SSRElement Global) SSRText
+  -> Effect Unit
 ssrSendToPos_ a state = void $ sendToPosNominal a state
 
 type EffectfulFFIDOMSnapshot = FFIDOMSnapshot Global Web.DOM.Element
@@ -1386,12 +1363,11 @@ fullDOMInterpret seed = Core.DOMInterpret
   }
 
 ssrDOMInterpret
-  :: forall r
-   . RRef.STRef r Int
-  -> Core.DOMInterpret (SSRElement r) (ST r)
-       (FFIDOMSnapshot r (SSRElement r) SSRText -> ST r Unit)
+  :: RRef.STRef Global Int
+  -> Core.DOMInterpret (SSRElement Global) Effect
+       (FFIDOMSnapshot Global (SSRElement Global) SSRText -> Effect Unit)
 ssrDOMInterpret seed = Core.DOMInterpret
-  { ids: do
+  { ids: liftST do
       s <- RRef.read seed
       let
         o = show

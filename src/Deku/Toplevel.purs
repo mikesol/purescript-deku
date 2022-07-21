@@ -5,8 +5,8 @@ import Prelude
 import Bolson.Control as Bolson
 import Bolson.Core (Element(..), PSR, Scope(..))
 import Bolson.Core as Bolson.Core
-import Control.Monad.ST (ST)
 import Control.Monad.ST.Class (liftST)
+import Control.Monad.ST.Global (Global)
 import Control.Monad.ST.Internal as RRef
 import Data.Array.ST as STA
 import Data.Foldable (for_, oneOf)
@@ -33,26 +33,31 @@ import Web.HTML.Window (document)
 runInElement'
   :: Web.DOM.Element
   -> ( forall lock
-        . Domable Web.DOM.Element Effect lock (EffectfulFFIDOMSnapshot -> Effect Unit)
+        . Domable Web.DOM.Element Effect lock
+            (EffectfulFFIDOMSnapshot -> Effect Unit)
      )
   -> Effect (EffectfulFFIDOMSnapshot /\ (Effect Unit))
 runInElement' elt eee = do
-  ffi <- liftST $ makeFFIDOMSnapshot
+  ffi <- makeFFIDOMSnapshot
   evt <- Ref.new 0 <#> (deku elt eee <<< fullDOMInterpret)
   Tuple ffi <$> subscribe evt \i -> i ffi
 
 runInBody'
   :: ( forall lock
-        . Domable Web.DOM.Element Effect lock (EffectfulFFIDOMSnapshot -> Effect Unit)
+        . Domable Web.DOM.Element Effect lock
+            (EffectfulFFIDOMSnapshot -> Effect Unit)
      )
   -> Effect (EffectfulFFIDOMSnapshot /\ (Effect Unit))
 runInBody' eee = do
   b' <- window >>= document >>= body
-  maybe (Tuple <$> (liftST $ makeFFIDOMSnapshot) <*> mempty) (\elt -> runInElement' elt eee) (toElement <$> b')
+  maybe (Tuple <$> (makeFFIDOMSnapshot) <*> mempty)
+    (\elt -> runInElement' elt eee)
+    (toElement <$> b')
 
 runInBody
   :: ( forall lock
-        . Domable Web.DOM.Element Effect lock (EffectfulFFIDOMSnapshot -> Effect Unit)
+        . Domable Web.DOM.Element Effect lock
+            (EffectfulFFIDOMSnapshot -> Effect Unit)
      )
   -> Effect Unit
 runInBody a = void (runInBody' a)
@@ -61,15 +66,16 @@ runInBody a = void (runInBody' a)
 
 hydrate'
   :: ( forall lock
-        . Domable Web.DOM.Element Effect lock (EffectfulFFIDOMSnapshot -> Effect Unit)
+        . Domable Web.DOM.Element Effect lock
+            (EffectfulFFIDOMSnapshot -> Effect Unit)
      )
   -> Effect (EffectfulFFIDOMSnapshot /\ (Effect Unit))
 hydrate' children = do
-  ffi@(FFIDOMSnapshot ffi') <- liftST $ makeFFIDOMSnapshot
+  ffi@(FFIDOMSnapshot ffi') <- makeFFIDOMSnapshot
   di@(DOMInterpret di') <- Ref.new 0 <#> fullDOMInterpret
   me <- di'.ids
   b' <- window >>= document >>= body
-  b' # maybe(Tuple <$> (liftST $ makeFFIDOMSnapshot) <*> mempty) \root -> do
+  b' # maybe (Tuple <$> (makeFFIDOMSnapshot) <*> mempty) \root -> do
     void $ liftST $ RRef.write true ffi'.hydrating
     (u :: Effect Unit) <- subscribe
       ( oneOf
@@ -82,13 +88,15 @@ hydrate' children = do
               di
               (unsafeCoerce children)
           ]
-      ) \i -> i ffi
+      )
+      \i -> i ffi
     void $ liftST $ RRef.write false ffi'.hydrating
     pure $ Tuple ffi u
 
 hydrate
   :: ( forall lock
-        . Domable Web.DOM.Element Effect lock (EffectfulFFIDOMSnapshot -> Effect Unit)
+        . Domable Web.DOM.Element Effect lock
+            (EffectfulFFIDOMSnapshot -> Effect Unit)
      )
   -> Effect Unit
 hydrate a = void (hydrate' a)
@@ -99,25 +107,21 @@ newtype Template = Template { head :: String, tail :: String }
 derive instance Newtype Template _
 
 runSSR
-  :: forall s m
-   . Korok s m
-  => Template
+  :: Template
   -> ( forall lock
-        . Domable (SSRElement s) (ST s) lock
-            ( FFIDOMSnapshot s (SSRElement s) SSRText
-              -> ST s Unit
+        . Domable (SSRElement Global) Effect lock
+            ( FFIDOMSnapshot Global (SSRElement Global) SSRText
+              -> Effect Unit
             )
      )
-  -> m String
-runSSR  (Template { head, tail }) children = do
-  o <- liftST
-      ( do
-          ffi <- makeFFIDOMSnapshot
-          attributes <- STA.new
-          evt <- RRef.new 0 <#> (deku (SSRElement { attributes, tag: "body" }) children <<< ssrDOMInterpret)
-          void $ subscribe evt \i -> i ffi
-          ssr ffi
-      )
+  -> Effect String
+runSSR (Template { head, tail }) children = do
+  ffi <- makeFFIDOMSnapshot
+  attributes <- liftST $ STA.new
+  evt <- (liftST $ RRef.new 0) <#>
+    (deku (SSRElement { attributes, tag: "body" }) children <<< ssrDOMInterpret)
+  void $ subscribe evt \i -> i ffi
+  o <- liftST $ ssr ffi
   pure (head <> o <> tail)
 
 __internalDekuFlatten

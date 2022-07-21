@@ -9,7 +9,7 @@ import Deku.DOM as D
 import Deku.Listeners (click_, slider)
 import Deku.Pursx (nut, (~~))
 import Deku.Toplevel (Template(..), runSSR)
-import FRP.Event (bang, fold, makeEvent)
+import FRP.Event (bang, fold, fromEvent, makeEvent)
 import FRP.Event.VBus (V)
 import Type.Proxy (Proxy(..))
 
@@ -224,7 +224,7 @@ and all of the dynamic bits are hydrated on page load.""" <> "\"\"\"" <> """
       ( D.pre_
           [ D.code_
               [ text
-                  ( makeEvent \k ->
+                  (fromEvent( makeEvent \k ->
                       ( ( runSSR
                             ( Template
                                 { head:
@@ -235,7 +235,7 @@ and all of the dynamic bits are hydrated on page load.""" <> "\"\"\"" <> """
                             app
                         ) >>= k
                       ) *> (pure (pure unit))
-                  )
+                  ))
               ]
           ]
       )

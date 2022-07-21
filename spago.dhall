@@ -6,7 +6,6 @@
   , "control"
   , "debug"
   , "effect"
-  , "either"
   , "exceptions"
   , "fast-vect"
   , "filterable"
