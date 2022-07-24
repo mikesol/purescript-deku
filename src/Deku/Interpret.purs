@@ -57,7 +57,7 @@ import Web.DOM.ParentNode (QuerySelector(..), querySelector, querySelectorAll)
 import Web.DOM.Text as Web.DOM.Text
 import Web.Event.Event (EventType(..))
 import Web.Event.Event as Web.Event.Event
-import Web.Event.EventTarget (EventListener, addEventListener, eventListener, removeEventListener)
+import Web.Event.EventTarget (addEventListener, eventListener, removeEventListener)
 import Web.Event.Internal.Types as Web
 import Web.HTML (window)
 import Web.HTML.HTMLDocument (body, toDocument)
@@ -156,7 +156,7 @@ data StateUnit e t
       -- downward until there are no more nodes _or_ we hit a new dynamic element.
       , scope :: Scope
       , main :: e
-      , listeners :: Object EventListener
+      , listeners :: Object (Web.Event -> Effect Boolean)
       , portalTookMeHere :: Maybe Scope
       }
   | SText
@@ -1055,13 +1055,14 @@ setCbContinuation_ a (FFIDOMSnapshot state) = do
             ((unsafeCoerce :: Web.DOM.Element -> Web.Event.Event.Event) e.main)
         else do
           let l = Object.lookup a.key e.listeners
-          for_ l \oldEl -> do
-            removeEventListener (EventType a.key) oldEl true (toEventTarget e.main)
+          for_ l \l' -> do
+            el <- eventListener l'
+            removeEventListener (EventType a.key) el true (toEventTarget e.main)
           newEl <- eventListener (unwrap avv)
           addEventListener (EventType a.key) newEl true (toEventTarget e.main)
           void $ liftST $ STO.poke a.id
             ( SElement
-                (e { listeners = Object.insert a.key newEl e.listeners })
+                (e { listeners = Object.insert a.key (unwrap avv) e.listeners })
             )
             state.units
       SText _ -> pure unit -- programming error :-(
