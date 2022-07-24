@@ -3,15 +3,15 @@ module Deku.Examples.Docs.Examples.Component where
 import Prelude
 
 import Deku.Attribute ((:=))
-import Deku.Control (text_, fixed)
+import Deku.Control (text_)
 import Deku.DOM as D
-import Deku.Toplevel (runInBody)
+import Deku.Toplevel (runInBodyA)
 import Effect (Effect)
 import FRP.Event.Class (bang)
 
 main :: Effect Unit
-main = runInBody
-  (fixed [ D.button_ [ text_ "I do nothing" ]
+main = runInBodyA
+  ( [ D.button_ [ text_ "I do nothing" ]
     , D.ul_ $ map (D.li_ <<< pure <<< text_) [ "A", "B", "C" ]
     , D.div_
         [ D.a (bang $ D.Href := "https://example.com")

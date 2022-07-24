@@ -6,16 +6,17 @@ import Control.Alt ((<|>))
 import Data.Compactable (compact)
 import Data.Maybe (Maybe(..))
 import Deku.Attribute ((:=))
-import Deku.Control (envy, text)
+import Deku.Control (text)
 import Deku.DOM as D
 import Deku.Pursx (nut, (~~))
-import Deku.Toplevel (runInBody)
+import Deku.Toplevel (runInBody1)
 import Effect (Effect)
 import FRP.Event (bus, bang)
 import Type.Proxy (Proxy(..))
 
 myDom =
-  Proxy    :: Proxy
+  Proxy
+    :: Proxy
          """<div>
         <button>I do nothing</button>
         <ul>
@@ -34,8 +35,8 @@ myDom =
 """
 
 main :: Effect Unit
-main = runInBody
-  (envy $ bus \push event -> myDom ~~
+main = runInBody1
+  ( bus \push event -> myDom ~~
       { myli: bang (D.Style := "background-color:rgb(200,240,210);")
       , somethingNew: nut
           ( D.button (bang (D.OnClick := push (Just unit)))

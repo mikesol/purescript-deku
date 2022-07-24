@@ -13,9 +13,9 @@ import Data.Maybe (Maybe(..))
 import Data.Profunctor (lcmap)
 import Data.Tuple.Nested ((/\))
 import Deku.Attribute (Cb, cb, (:=))
-import Deku.Control (envy, text)
+import Deku.Control (text)
 import Deku.DOM as D
-import Deku.Toplevel (runInBody)
+import Deku.Toplevel (runInBody1)
 import Effect (Effect)
 import Effect.Aff (launchAff_)
 import Effect.Class (liftEffect)
@@ -48,8 +48,8 @@ clickCb push = cb
 clickText = "Click to get some random user data." :: String
 
 main :: Effect Unit
-main = runInBody
-  (envy $ bus \push -> lcmap (bang Initial <|> _)
+main = runInBody1
+  ( bus \push -> lcmap (bang Initial <|> _)
       \event ->
         let
           loadingOrResult = filterMap
