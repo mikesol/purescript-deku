@@ -1,15 +1,13 @@
 module Deku.Core
-  ( DOMInterpret(..)
-  , Seedling
+  ( module Bolson.Core
+  , DOMInterpret(..)
   , MakeRoot
   , MakeElement
   , AttributeParent
   , MakeText
   , MakePursx
-  , MakeDyn
-  , AddChild
-  , RemoveChild
   , GiveNewParent
+  , DisconnectElement
   , DeleteFromCache
   , SendToPos
   , SetProp
@@ -17,6 +15,9 @@ module Deku.Core
   , SetText
   , Nut
   , ANut(..)
+  , bus
+  , bussed
+  , vbussed
   , remove
   , sendToTop
   , sendToPos
@@ -28,20 +29,27 @@ module Deku.Core
 
 import Prelude
 
-import Bolson.Core (Scope)
+import Bolson.Always (AlwaysEffect, halways)
+import Bolson.Core (Scope, fixed, dyn, envy)
 import Bolson.Core as Bolson
 import Control.Monad.ST (ST)
 import Control.Monad.ST.Class (class MonadST)
 import Control.Monad.ST.Global (Global)
 import Data.Maybe (Maybe)
+import Data.Monoid.Always (class Always, always)
 import Data.Monoid.Endo (Endo)
 import Data.Newtype (class Newtype)
+import Data.Profunctor (lcmap)
 import Deku.Attribute (Cb)
 import Effect (Effect)
 import FRP.Event (AnEvent)
-import FRP.Event.Class (bang)
+import FRP.Event as FRP.Event
+import FRP.Event.VBus (class VBus, V, vbus)
 import Foreign.Object (Object)
-import Data.Monoid.Always (class Always)
+import Heterogeneous.Mapping (class MapRecordWithIndex, ConstMapping)
+import Prim.RowList (class RowToList)
+import Type.Proxy (Proxy(..))
+import Web.DOM as Web.DOM
 
 class
   ( Always (m Unit) (Effect Unit)
@@ -58,35 +66,62 @@ instance Korok s (ST s)
 instance Korok Global Effect
 
 type Nut =
-  forall s m e lock payload
+  forall s m lock payload
    . Korok s m
-  => Domable e m lock payload
+  => Domable m lock payload
 
 newtype ANut = ANut Nut
 
-newtype Node e m (lock :: Type) payload = Node
-  ( Bolson.PSR m
-    -> DOMInterpret e m payload
-    -> AnEvent m payload
-  )
+bus
+  :: forall a b s m
+   . Korok s m
+  => Always (m Unit) (Effect Unit)
+  => ((a -> Effect Unit) -> AnEvent m a -> b)
+  -> AnEvent m b
+bus f = FRP.Event.bus (lcmap (map (always :: m Unit -> Effect Unit)) f)
 
-type Domable e m lock payload = Bolson.Entity Int (Node e m lock payload) m lock
-type Seedling e m lock payload = Bolson.Child Int (Node e m lock payload) m lock
+bussed
+  :: forall s m lock logic obj a
+   . Korok s m
+  => Always (m Unit) (Effect Unit)
+  => ((a -> Effect Unit) -> AnEvent m a -> Bolson.Entity logic obj m lock)
+  -> Bolson.Entity logic obj m lock
+bussed f = Bolson.EventfulElement' (Bolson.EventfulElement (bus f))
+
+vbussed
+  :: forall s m logic obj lock rbus bus pushi pusho pushR event u
+   . RowToList bus rbus
+  => Korok s m
+  => RowToList pushi pushR
+  => MapRecordWithIndex pushR
+       (ConstMapping (AlwaysEffect m))
+       pushi
+       pusho
+  => VBus rbus pushi event u
+  => Proxy (V bus)
+  -> ({ | pusho } -> { | event } -> Bolson.Entity logic obj m lock)
+  -> Bolson.Entity logic obj m lock
+vbussed px f = Bolson.EventfulElement'
+  (Bolson.EventfulElement (vbus px (lcmap (halways (Proxy :: Proxy m)) f)))
+
+newtype Node m (lock :: Type) payload = Node
+  (Bolson.PSR m -> DOMInterpret m payload -> AnEvent m payload)
+
+type Domable m lock payload = Bolson.Entity Int (Node m lock payload) m lock
 
 insert
-  :: forall s e m lock payload
-   . Korok s m
-  => Domable e m lock payload
-  -> AnEvent m (Seedling e m lock payload)
-insert = bang <<< Bolson.Insert
+  :: forall logic obj m lock
+   . Bolson.Entity logic obj m lock
+  -> Bolson.Child logic obj m lock
+insert = Bolson.Insert
 
-remove :: forall e m lock payload. Seedling e m lock payload
+remove :: forall logic obj m lock. Bolson.Child logic obj m lock
 remove = Bolson.Remove
 
-sendToTop :: forall e m lock payload. Seedling e m lock payload
-sendToTop = sendToPos 0
+sendToTop :: forall obj m lock. Bolson.Child Int obj m lock
+sendToTop = Bolson.Logic 0
 
-sendToPos :: forall e m lock payload. Int -> Seedling e m lock payload
+sendToPos :: forall obj m lock. Int -> Bolson.Child Int obj m lock
 sendToPos = Bolson.Logic
 
 type MakeElement =
@@ -95,19 +130,6 @@ type MakeElement =
   , parent :: Maybe String
   , tag :: String
   }
-
-type MakeDyn =
-  { id :: String
-  , scope :: Scope
-  , parent :: Maybe String
-  }
-
-type AddChild =
-  { parent :: String
-  , child :: String
-  }
-
-type RemoveChild = { id :: String, scope :: Scope }
 
 type AttributeParent =
   { id :: String
@@ -120,29 +142,30 @@ type GiveNewParent =
   , scope :: Scope
   }
 
+type DisconnectElement =
+  { id :: String
+  , parent :: String
+  , scope :: Scope
+  , scopeEq :: Scope -> Scope -> Boolean
+  }
+
 type MakeText =
   { id :: String
   , scope :: Scope
   , parent :: Maybe String
   }
 
--- this is how we say "remove me completely"
--- that means call remove on _and_ delete the element from the cache to free up memory
 type DeleteFromCache = { id :: String }
-type MakeRoot e = { id :: String, root :: e }
+type MakeRoot = { id :: String, root :: Web.DOM.Element }
 type SetText = { id :: String, text :: String }
 type SetProp =
   { id :: String
-  , parent :: Maybe String
-  , scope :: Scope
   , key :: String
   , value :: String
   }
 
 type SetCb =
   { id :: String
-  , parent :: Maybe String
-  , scope :: Scope
   , key :: String
   , value :: Cb
   }
@@ -162,22 +185,20 @@ type SendToPos =
   , pos :: Int
   }
 
-derive instance Newtype (DOMInterpret e m payload) _
+derive instance Newtype (DOMInterpret m payload) _
 
-newtype DOMInterpret e m payload = DOMInterpret
+newtype DOMInterpret m payload = DOMInterpret
   { ids :: m String
-  , makeRoot :: MakeRoot e -> payload
+  , makeRoot :: MakeRoot -> payload
   , makeElement :: MakeElement -> payload
   , attributeParent :: AttributeParent -> payload
   , makeText :: MakeText -> payload
   , makePursx :: MakePursx -> payload
   , giveNewParent :: GiveNewParent -> payload
+  , disconnectElement :: DisconnectElement -> payload
   , deleteFromCache :: DeleteFromCache -> payload
+  , sendToPos :: SendToPos -> payload
   , setProp :: SetProp -> payload
   , setCb :: SetCb -> payload
   , setText :: SetText -> payload
-  , makeDyn :: MakeDyn -> payload
-  , addChild :: AddChild -> payload
-  , sendToPos :: SendToPos -> payload
-  , removeChild :: RemoveChild -> payload
   }

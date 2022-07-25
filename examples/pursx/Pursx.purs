@@ -5,13 +5,12 @@ import Prelude
 import Control.Alt ((<|>))
 import Control.Plus (empty)
 import Deku.Attribute (cb, (:=))
-import Deku.Control (envy)
 import Deku.Control as C
 import Deku.Core (Domable)
 import Deku.DOM as D
-import Deku.Interpret (EffectfulDomable)
+import Deku.Interpret (FFIDOMSnapshot)
 import Deku.Pursx (nut, (~~))
-import Deku.Toplevel (runInBody)
+import Deku.Toplevel (runInBody1)
 import Effect (Effect)
 import FRP.Event (Event, bang, bus)
 import Type.Proxy (Proxy(..))
@@ -26,10 +25,10 @@ px =
 """
 
 pxInception
-  :: forall e lock payload
+  :: forall lock payload
    . (Boolean -> Effect Unit)
-  -> Domable e Effect lock payload
-  -> Domable e Effect lock payload
+  -> Domable Effect lock payload
+  -> Domable Effect lock payload
 pxInception push aThirdThing = px ~~
   { btn: bang (D.Style := "background-color: rgb(133,151,217)")
   , somethingElse:
@@ -44,7 +43,7 @@ pxInception push aThirdThing = px ~~
   }
 
 scene
-  :: forall lock. Event (EffectfulDomable lock)
+  :: forall lock. Event (Domable Effect lock (FFIDOMSnapshot -> Effect Unit))
 scene = bus \push event ->
   D.div empty
     [ pxInception push
@@ -57,4 +56,4 @@ scene = bus \push event ->
     ]
 
 main :: Effect Unit
-main = runInBody (envy scene)
+main = runInBody1 scene

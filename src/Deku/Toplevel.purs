@@ -4,92 +4,112 @@ import Prelude
 
 import Bolson.Control as Bolson
 import Bolson.Core (Element(..), PSR, Scope(..))
-import Bolson.Core as Bolson.Core
 import Control.Monad.ST (ST)
 import Control.Monad.ST.Class (liftST)
 import Control.Monad.ST.Internal as RRef
-import Data.Array.ST as STA
-import Data.Foldable (for_, oneOf)
 import Data.Maybe (Maybe(..), maybe)
 import Data.Newtype (class Newtype, unwrap)
-import Data.Tuple (Tuple(..))
-import Data.Tuple.Nested (type (/\))
-import Deku.Control (deku)
+import Deku.Control (deku, deku1, dekuA)
 import Deku.Core (class Korok, DOMInterpret(..), Domable, Node(..))
-import Deku.Interpret (FFIDOMSnapshot(..), SSRElement(..), SSRText, EffectfulFFIDOMSnapshot, fullDOMInterpret, makeFFIDOMSnapshot, ssrDOMInterpret)
-import Deku.SSR (ssr)
+import Deku.Interpret (FFIDOMSnapshot, Instruction, fullDOMInterpret, hydratingDOMInterpret, makeFFIDOMSnapshot, setHydrating, ssrDOMInterpret, unSetHydrating)
+import Deku.SSR (ssr')
 import Effect (Effect)
 import Effect.Ref as Ref
-import FRP.Event (AnEvent, subscribe)
-import FRP.Event.Class (bang)
+import FRP.Event (AnEvent, Event, subscribe)
 import Unsafe.Coerce (unsafeCoerce)
 import Web.DOM.Element as Web.DOM
 import Web.HTML (window)
 import Web.HTML.HTMLDocument (body)
 import Web.HTML.HTMLElement (toElement)
-import Web.HTML.HTMLElement as HTMLElement
 import Web.HTML.Window (document)
 
 runInElement'
   :: Web.DOM.Element
-  -> ( forall lock
-        . Domable Web.DOM.Element Effect lock (EffectfulFFIDOMSnapshot -> Effect Unit)
-     )
-  -> Effect (EffectfulFFIDOMSnapshot /\ (Effect Unit))
+  -> (forall lock. Domable Effect lock (FFIDOMSnapshot -> Effect Unit))
+  -> Effect (Effect Unit)
 runInElement' elt eee = do
-  ffi <- liftST $ makeFFIDOMSnapshot
+  ffi <- makeFFIDOMSnapshot
   evt <- Ref.new 0 <#> (deku elt eee <<< fullDOMInterpret)
-  Tuple ffi <$> subscribe evt \i -> i ffi
+  subscribe evt \i -> i ffi
+
+runInElement1'
+  :: Web.DOM.Element
+  -> (forall lock. Event (Domable Effect lock (FFIDOMSnapshot -> Effect Unit)))
+  -> Effect (Effect Unit)
+runInElement1' elt eee = do
+  ffi <- makeFFIDOMSnapshot
+  evt <- Ref.new 0 <#> (deku1 elt eee <<< fullDOMInterpret)
+  subscribe evt \i -> i ffi
+
+runInElementA'
+  :: Web.DOM.Element
+  -> (forall lock. Array (Domable Effect lock (FFIDOMSnapshot -> Effect Unit)))
+  -> Effect (Effect Unit)
+runInElementA' elt eee = do
+  ffi <- makeFFIDOMSnapshot
+  evt <- Ref.new 0 <#> (dekuA elt eee <<< fullDOMInterpret)
+  subscribe evt \i -> i ffi
 
 runInBody'
-  :: ( forall lock
-        . Domable Web.DOM.Element Effect lock (EffectfulFFIDOMSnapshot -> Effect Unit)
-     )
-  -> Effect (EffectfulFFIDOMSnapshot /\ (Effect Unit))
+  :: (forall lock. Domable Effect lock (FFIDOMSnapshot -> Effect Unit))
+  -> Effect (Effect Unit)
 runInBody' eee = do
   b' <- window >>= document >>= body
-  maybe (Tuple <$> (liftST $ makeFFIDOMSnapshot) <*> mempty) (\elt -> runInElement' elt eee) (toElement <$> b')
+  maybe mempty (\elt -> runInElement' elt eee) (toElement <$> b')
+
+runInBody1'
+  :: (forall lock. Event (Domable Effect lock (FFIDOMSnapshot -> Effect Unit)))
+  -> Effect (Effect Unit)
+runInBody1' eee = do
+  b' <- window >>= document >>= body
+  maybe mempty (\elt -> runInElement1' elt eee) (toElement <$> b')
+
+runInBodyA'
+  :: (forall lock. Array (Domable Effect lock (FFIDOMSnapshot -> Effect Unit)))
+  -> Effect (Effect Unit)
+runInBodyA' eee = do
+  b' <- window >>= document >>= body
+  maybe mempty (\elt -> runInElementA' elt eee) (toElement <$> b')
 
 runInBody
-  :: ( forall lock
-        . Domable Web.DOM.Element Effect lock (EffectfulFFIDOMSnapshot -> Effect Unit)
-     )
+  :: (forall lock. Domable Effect lock (FFIDOMSnapshot -> Effect Unit))
   -> Effect Unit
 runInBody a = void (runInBody' a)
+
+runInBody1
+  :: (forall lock. Event (Domable Effect lock (FFIDOMSnapshot -> Effect Unit)))
+  -> Effect Unit
+runInBody1 a = void (runInBody1' a)
+
+runInBodyA
+  :: (forall lock. Array (Domable Effect lock (FFIDOMSnapshot -> Effect Unit)))
+  -> Effect Unit
+runInBodyA a = void (runInBodyA' a)
 
 --
 
 hydrate'
-  :: ( forall lock
-        . Domable Web.DOM.Element Effect lock (EffectfulFFIDOMSnapshot -> Effect Unit)
-     )
-  -> Effect (EffectfulFFIDOMSnapshot /\ (Effect Unit))
+  :: (forall lock. Domable Effect lock (FFIDOMSnapshot -> Effect Unit))
+  -> Effect (Effect Unit)
 hydrate' children = do
-  ffi@(FFIDOMSnapshot ffi') <- liftST $ makeFFIDOMSnapshot
-  di@(DOMInterpret di') <- Ref.new 0 <#> fullDOMInterpret
-  me <- di'.ids
-  b' <- window >>= document >>= body
-  b' # maybe(Tuple <$> (liftST $ makeFFIDOMSnapshot) <*> mempty) \root -> do
-    void $ liftST $ RRef.write true ffi'.hydrating
-    (u :: Effect Unit) <- subscribe
-      ( oneOf
-          [ bang (di'.makeRoot { id: me, root: (HTMLElement.toElement root) })
-          , __internalDekuFlatten
-              { parent: Just me
-              , scope: Bolson.Core.Local "rootScope"
-              , raiseId: \_ _ -> pure unit
-              }
-              di
-              (unsafeCoerce children)
-          ]
-      ) \i -> i ffi
-    void $ liftST $ RRef.write false ffi'.hydrating
-    pure $ Tuple ffi u
+  ffi <- makeFFIDOMSnapshot
+  di <- Ref.new 0 <#> hydratingDOMInterpret
+  setHydrating ffi
+  u <- subscribe
+    ( __internalDekuFlatten
+        { parent: Just "deku-root"
+        , scope: Local "rootScope"
+        , raiseId: \_ -> pure unit
+        }
+        di
+        (unsafeCoerce children)
+    )
+    \i -> i ffi
+  unSetHydrating ffi
+  pure u
 
 hydrate
-  :: ( forall lock
-        . Domable Web.DOM.Element Effect lock (EffectfulFFIDOMSnapshot -> Effect Unit)
-     )
+  :: (forall lock. Domable Effect lock (FFIDOMSnapshot -> Effect Unit))
   -> Effect Unit
 hydrate a = void (hydrate' a)
 
@@ -103,37 +123,54 @@ runSSR
    . Korok s m
   => Template
   -> ( forall lock
-        . Domable (SSRElement s) (ST s) lock
-            ( FFIDOMSnapshot s (SSRElement s) SSRText
-              -> ST s Unit
-            )
+        . Domable (ST s) lock
+            (RRef.STRef s (Array Instruction) -> ST s Unit)
      )
   -> m String
-runSSR  (Template { head, tail }) children = do
-  o <- liftST
+runSSR = runSSR' "body"
+
+runSSR'
+  :: forall s m
+   . Korok s m
+  => String
+  -> Template
+  -> ( forall lock
+        . Domable (ST s) lock
+            (RRef.STRef s (Array Instruction) -> ST s Unit)
+     )
+  -> m String
+runSSR' topTag (Template { head, tail }) children =
+  (head <> _) <<< (_ <> tail) <<< ssr' topTag
+    <$> liftST
       ( do
-          ffi <- makeFFIDOMSnapshot
-          attributes <- STA.new
-          evt <- RRef.new 0 <#> (deku (SSRElement { attributes, tag: "body" }) children <<< ssrDOMInterpret)
-          void $ subscribe evt \i -> i ffi
-          ssr ffi
+          seed <- RRef.new 0
+          instr <- RRef.new []
+          let di = ssrDOMInterpret seed
+          void $ subscribe
+            ( __internalDekuFlatten
+                { parent: Just "deku-root"
+                , scope: Local "rootScope"
+                , raiseId: \_ -> pure unit
+                }
+                di
+                (unsafeCoerce children)
+            )
+            \i -> i instr
+          RRef.read instr
       )
-  pure (head <> o <> tail)
 
 __internalDekuFlatten
-  :: forall s m e lock payload
+  :: forall s m lock payload
    . Korok s m
   => PSR m
-  -> DOMInterpret e m payload
-  -> Domable e m lock payload
+  -> DOMInterpret m payload
+  -> Domable m lock payload
   -> AnEvent m payload
 __internalDekuFlatten = Bolson.flatten
   { doLogic: \pos (DOMInterpret { sendToPos }) id -> sendToPos { id, pos }
   , ids: unwrap >>> _.ids
-  , dynamicElementRemoved:
-      \(DOMInterpret { removeChild }) { id, scope } ->
-        removeChild { id, scope }
-  , dynamicElementInserted: \(DOMInterpret { addChild }) { id, parent } ->
-      addChild { child: id, parent }
+  , disconnectElement:
+      \(DOMInterpret { disconnectElement }) { id, scope, parent } ->
+        disconnectElement { id, scope, parent, scopeEq: eq }
   , toElt: \(Node e) -> Element e
   }

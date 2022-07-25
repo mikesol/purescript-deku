@@ -2,25 +2,25 @@ module Deku.DOM.Elt.Rp where
 
 import Control.Plus (empty)
 import Deku.Attribute (Attribute)
-import Deku.Control (elementify, fixed)
+import Deku.Control (elementify)
 import Deku.Core (Domable, class Korok)
-import Bolson.Core (Entity(..))
+import Bolson.Core (Entity(..), fixed)
 import FRP.Event (AnEvent)
 
 data Rp_
 
 rp
-  :: forall s m e lock payload
+  :: forall s m lock payload
    . Korok s m
   => AnEvent m (Attribute Rp_)
-  -> Array (Domable e m lock payload)
-  -> Domable e m lock payload
+  -> Array (Domable m lock payload)
+  -> Domable m lock payload
 rp attributes kids = Element' (elementify "rp" attributes (fixed kids))
 
 rp_
-  :: forall s m e lock payload
+  :: forall s m lock payload
    . Korok s m
-  => Array (Domable e m lock payload)
-  -> Domable e m lock payload
+  => Array (Domable m lock payload)
+  -> Domable m lock payload
 rp_ = rp empty
 

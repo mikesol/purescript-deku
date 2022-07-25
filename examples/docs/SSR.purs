@@ -3,8 +3,8 @@ module Deku.Example.Docs.SSR where
 import Prelude
 
 import Control.Alt ((<|>))
-import Deku.Control (vbussed, text, text_)
-import Deku.Core (Nut)
+import Deku.Control (text, text_)
+import Deku.Core (Nut, vbussed)
 import Deku.DOM as D
 import Deku.Listeners (click_, slider)
 import Deku.Pursx (nut, (~~))

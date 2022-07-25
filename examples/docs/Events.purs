@@ -5,8 +5,8 @@ import Prelude
 import Control.Alt ((<|>))
 import Data.Foldable (oneOfMap)
 import Deku.Attribute (cb, (:=))
-import Deku.Control (vbussed, text, text_)
-import Deku.Core (Nut)
+import Deku.Control (text, text_)
+import Deku.Core (Nut, vbussed)
 import Deku.DOM as D
 import Deku.Example.Docs.Types (Page(..), PageOptions)
 import Deku.Example.Docs.Util (scrollToTop)

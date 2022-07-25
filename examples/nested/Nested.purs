@@ -8,12 +8,12 @@ import Data.FastVect.FastVect as V
 import Data.Int (floor)
 import Data.Tuple (Tuple(..))
 import Deku.Attribute ((:=))
-import Deku.Control (dyn, fixed, portal, switcher)
+import Deku.Control (portal, switcher)
 import Deku.Control as C
-import Deku.Core (insert, remove, sendToTop)
+import Deku.Core (Domable, dyn, insert, remove, sendToTop)
 import Deku.DOM as D
-import Deku.Interpret (EffectfulDomable)
-import Deku.Toplevel (runInBody)
+import Deku.Interpret (FFIDOMSnapshot)
+import Deku.Toplevel (runInBodyA)
 import Effect (Effect)
 import Effect.Random as Random
 import FRP.Behavior (Behavior, behavior, sample_)
@@ -42,7 +42,7 @@ counter event = mapAccum f event 0
   f a b = Tuple (b + 1) (Tuple a b)
 
 scene
-  :: forall lock. Array (EffectfulDomable lock)
+  :: forall lock. Array (Domable Effect lock (FFIDOMSnapshot -> Effect Unit))
 scene =
   [ D.div_
       [ portal
@@ -68,14 +68,15 @@ scene =
   , D.div_
       [ dyn $ map
           ( \rgb ->
-              ( insert $ D.div
-                  (bang (D.Style := "background-color: " <> rgb <> ";"))
-                  [ C.text_ "hello" ]
-              ) <|> delay 1432 (bang sendToTop) <|> delay 2000 (bang remove)
+              bang
+                ( insert $ D.div
+                    (bang (D.Style := "background-color: " <> rgb <> ";"))
+                    [ C.text_ "hello" ]
+                ) <|> delay 1432 (bang sendToTop) <|> delay 2000 (bang remove)
           )
           (sample_ rdm (interval 1000))
       ]
   ]
 
 main :: Effect Unit
-main = runInBody (fixed scene)
+main = runInBodyA scene

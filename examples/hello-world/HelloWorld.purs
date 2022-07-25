@@ -10,8 +10,9 @@ import Data.Profunctor (lcmap)
 import Data.Tuple (Tuple(..))
 import Deku.Attribute (cb, (:=))
 import Deku.Control as C
+import Deku.Core (Domable, envy)
 import Deku.DOM as D
-import Deku.Interpret (EffectfulDomable)
+import Deku.Interpret (FFIDOMSnapshot)
 import Deku.Toplevel (runInBody)
 import Effect (Effect)
 import FRP.Event (Event, bang, bus, filterMap, keepLatest, mapAccum)
@@ -21,8 +22,8 @@ counter event = mapAccum f event 0
   where
   f a b = Tuple (b + 1) (Tuple a b)
 
-scene :: forall lock. EffectfulDomable lock
-scene = C.envy $ bus $ \push -> lcmap (alt (bang true)) \event -> do
+scene :: forall lock. Domable Effect lock (FFIDOMSnapshot -> Effect Unit)
+scene = envy $ bus $ \push -> lcmap (alt (bang true)) \event -> do
   D.div_
     [ D.div_
         [ D.div empty [ C.text (bang "Stops after 4 clicks") ]

@@ -3,15 +3,15 @@ module Deku.Examples.Docs.Examples.Portals1 where
 import Prelude
 
 import Control.Alt ((<|>))
-import Data.FastVect.FastVect (index, (:))
-import Data.FastVect.FastVect as V
 import Data.Foldable (oneOfMap)
 import Data.Profunctor (lcmap)
 import Data.Tuple.Nested ((/\), type (/\))
+import Data.FastVect.FastVect (index, (:))
+import Data.FastVect.FastVect as V
 import Deku.Attribute ((:=))
-import Deku.Control (envy, portal, switcher, text_)
+import Deku.Control (portal, switcher, text_)
 import Deku.DOM as D
-import Deku.Toplevel (runInBody)
+import Deku.Toplevel (runInBody1)
 import Effect (Effect)
 import FRP.Event (Event, bang, bus, fold, mapAccum)
 import Type.Prelude (Proxy(..))
@@ -22,8 +22,8 @@ counter event = mapAccum f event 0
   f a b = (b + 1) /\ (a /\ b)
 
 main :: Effect Unit
-main = runInBody
-  ( envy $ bus \push -> lcmap (bang unit <|> _) \event -> do
+main = runInBody1
+  ( bus \push -> lcmap (bang unit <|> _) \event -> do
       portal
         ( map
             ( \i -> D.video

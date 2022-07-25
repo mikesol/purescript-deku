@@ -1,15 +1,18 @@
 module Deku.DOM.Attr.Bgcolor where
-import Deku.DOM.Elt.Body(Body_)
-import Deku.DOM.Elt.Col(Col_)
-import Deku.DOM.Elt.Colgroup(Colgroup_)
-import Deku.DOM.Elt.Table(Table_)
-import Deku.DOM.Elt.Tbody(Tbody_)
-import Deku.DOM.Elt.Tfoot(Tfoot_)
-import Deku.DOM.Elt.Td(Td_)
-import Deku.DOM.Elt.Th(Th_)
-import Deku.DOM.Elt.Tr(Tr_)
+
+import Deku.DOM.Elt.Body (Body_)
+import Deku.DOM.Elt.Col (Col_)
+import Deku.DOM.Elt.Colgroup (Colgroup_)
+import Deku.DOM.Elt.Table (Table_)
+import Deku.DOM.Elt.Tbody (Tbody_)
+import Deku.DOM.Elt.Tfoot (Tfoot_)
+import Deku.DOM.Elt.Td (Td_)
+import Deku.DOM.Elt.Th (Th_)
+import Deku.DOM.Elt.Tr (Tr_)
 import Deku.Attribute (class Attr, prop', unsafeAttribute)
+
 data Bgcolor = Bgcolor
+
 instance Attr Body_ Bgcolor String where
   attr Bgcolor value = unsafeAttribute { key: "bgcolor", value: prop' value }
 

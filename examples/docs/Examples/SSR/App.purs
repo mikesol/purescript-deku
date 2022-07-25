@@ -3,10 +3,10 @@ module Deku.Examples.Docs.Examples.SSR.App where
 import Prelude
 
 import Control.Alt ((<|>))
-import Deku.Control (text, text_, vbussed)
+import Deku.Control (text, text_)
 import Deku.DOM as D
 import Deku.Listeners (click_, slider)
-import Deku.Core (Nut)
+import Deku.Core (Nut, vbussed)
 import FRP.Event (bang, fold)
 import FRP.Event.VBus (V)
 import Type.Proxy (Proxy(..))
