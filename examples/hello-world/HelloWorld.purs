@@ -8,7 +8,7 @@ import Data.Foldable (oneOfMap)
 import Data.Maybe (Maybe(..))
 import Data.Profunctor (lcmap)
 import Data.Tuple (Tuple(..))
-import Deku.Attribute (cb, (:=))
+import Deku.Attribute (cb, xdata, (:=))
 import Deku.Control as C
 import Deku.Core (Domable, envy)
 import Deku.DOM as D
@@ -37,6 +37,7 @@ scene = envy $ bus $ \push -> lcmap (alt (bang true)) \event -> do
                         oneOfMap bang
                           [ D.Style := "background-color: rgb(160,234,203);"
                           , D.OnClick := cb (const $ push (not e))
+                          , xdata "hello" "world"
                           ]
 
                     )

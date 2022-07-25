@@ -10,6 +10,7 @@ module Deku.Attribute
   , cb'
   , cb
   , Cb(..)
+  , xdata
   ) where
 
 import Prelude
@@ -58,3 +59,6 @@ class Attr e a b where
   attr :: a -> b -> Attribute e
 
 infixr 5 attr as :=
+
+xdata :: forall e. String -> String -> Attribute e
+xdata k v = unsafeAttribute { key: "data-" <> k, value: Prop' v }
