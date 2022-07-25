@@ -94,7 +94,7 @@ vbussed
   => Korok s m
   => RowToList pushi pushR
   => MapRecordWithIndex pushR
-       (ConstMapping (AlwaysEffect m))
+       (ConstMapping (AlwaysEffect))
        pushi
        pusho
   => VBus rbus pushi event u
@@ -102,7 +102,7 @@ vbussed
   -> ({ | pusho } -> { | event } -> Bolson.Entity logic obj m lock)
   -> Bolson.Entity logic obj m lock
 vbussed px f = Bolson.EventfulElement'
-  (Bolson.EventfulElement (vbus px (lcmap (halways (Proxy :: Proxy m)) f)))
+  (Bolson.EventfulElement (vbus px (lcmap (halways) f)))
 
 newtype Node m (lock :: Type) payload = Node
   (Bolson.PSR m -> DOMInterpret m payload -> AnEvent m payload)
