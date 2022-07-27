@@ -23,6 +23,7 @@
   , "st"
   , "strings"
   , "transformers"
+  , "tuples"
   , "unsafe-coerce"
   , "web-dom"
   , "web-events"
