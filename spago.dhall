@@ -1,4 +1,4 @@
-{ name = "purescript-deku"
+{ name = "deku"
 , dependencies =
   [ "arrays"
   , "bolson"
@@ -29,6 +29,8 @@
   , "web-events"
   , "web-html"
   ]
+, license = "Apache-2.0"
 , packages = ./packages.dhall
+, repository = "https://github.com/mikesol/purescript-deku"
 , sources = [ "src/**/*.purs" ]
 }
