@@ -4,6 +4,13 @@
 
 A PureScript web micro-framework for apps that need to be fast.
 
+## In anger
+
+- [Verity Scheel's post on parsing](https://cofree.coffee/~verity/parser.html) implements a full-featured tweening engine to animate rule-based parsing steps.
+- [joyride.fm](https://joyride.fm) is a social rhythm game.
+- [Horizontal and Vertical Events](https://dev.to/mikesol/horizontal-and-vertical-events-1pm1) is an article that explores some concepts central to Deku with many tryable & editable examples.
+
+
 ## Documentation
 
 [Here is a guide](https://mikesol.github.io/purescript-deku/) to building apps with Deku. The guide is written in Deku and its source code can be found [here](./examples/docs/).
