@@ -16,8 +16,8 @@ import Deku.Interpret (FFIDOMSnapshot, Instruction, fullDOMInterpret, hydratingD
 import Deku.SSR (ssr')
 import Effect (Effect)
 import Effect.Ref as Ref
-import FRP.Event (AnEvent, Event, fromEvent, subscribe)
-import Mermaid (liftImpure, liftPure, runImpure, runPure)
+import FRP.Event (AnEvent, Event, fromEvent, subscribe, toEvent)
+import Mermaid (liftImpure, liftPure)
 import Unsafe.Coerce (unsafeCoerce)
 import Web.DOM.Element as Web.DOM
 import Web.HTML (window)
@@ -32,8 +32,7 @@ runInElement'
 runInElement' elt eee = do
   ffi <- makeFFIDOMSnapshot
   evt <- Ref.new 0 <#> (deku elt eee <<< fullDOMInterpret)
-  canceler <- runImpure $ subscribe evt \i -> liftImpure (i ffi)
-  pure $ runImpure canceler
+  subscribe (toEvent evt) (_ $ ffi)
 
 runInElement1'
   :: Web.DOM.Element
@@ -42,8 +41,7 @@ runInElement1'
 runInElement1' elt eee = do
   ffi <- makeFFIDOMSnapshot
   evt <- Ref.new 0 <#> (deku1 elt (fromEvent eee) <<< fullDOMInterpret)
-  canceler <- runImpure $ subscribe evt \i -> liftImpure (i ffi)
-  pure $ runImpure canceler
+  subscribe (toEvent evt) (_ $ ffi)
 
 runInElementA'
   :: Web.DOM.Element
@@ -52,8 +50,7 @@ runInElementA'
 runInElementA' elt eee = do
   ffi <- makeFFIDOMSnapshot
   evt <- Ref.new 0 <#> (dekuA elt eee <<< fullDOMInterpret)
-  canceler <- runImpure $ subscribe evt \i -> liftImpure (i ffi)
-  pure $ runImpure canceler
+  subscribe (toEvent evt) (_ $ ffi)
 
 runInBody'
   :: (forall lock. Domable lock (FFIDOMSnapshot -> Effect Unit))
@@ -100,18 +97,20 @@ hydrate' children = do
   ffi <- makeFFIDOMSnapshot
   di <- Ref.new 0 <#> hydratingDOMInterpret
   setHydrating ffi
-  u <- runImpure $ subscribe
-    ( __internalDekuFlatten
-        { parent: Just "deku-root"
-        , scope: Local "rootScope"
-        , raiseId: \_ -> pure unit
-        }
-        di
-        (unsafeCoerce children)
+  u <- subscribe
+    ( toEvent
+        ( __internalDekuFlatten
+            { parent: Just "deku-root"
+            , scope: Local "rootScope"
+            , raiseId: \_ -> pure unit
+            }
+            di
+            (unsafeCoerce children)
+        )
     )
-    \i -> liftImpure (i ffi)
+    (_ $ ffi)
   unSetHydrating ffi
-  pure $ runImpure u
+  pure u
 
 hydrate
   :: (forall lock. Domable lock (FFIDOMSnapshot -> Effect Unit))
@@ -147,16 +146,18 @@ runSSR' topTag (Template { head, tail }) children =
           seed <- RRef.new 0
           instr <- RRef.new []
           let di = ssrDOMInterpret seed
-          _ <- runPure $ subscribe
-            ( __internalDekuFlatten
-                { parent: Just "deku-root"
-                , scope: Local "rootScope"
-                , raiseId: \_ -> pure unit
-                }
-                di
-                (unsafeCoerce children)
+          _ <- subscribe
+            ( fromEvent $ toEvent
+                ( __internalDekuFlatten
+                    { parent: Just "deku-root"
+                    , scope: Local "rootScope"
+                    , raiseId: \_ -> pure unit
+                    }
+                    di
+                    (unsafeCoerce children)
+                )
             )
-            \i -> liftPure $ i instr
+            (_ $ instr)
           RRef.read instr
       )
 
