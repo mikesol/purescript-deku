@@ -83,8 +83,8 @@ bussedUncurried = curry >>> bussed
 
 data AlwaysMermaid = AlwaysMermaid
 
-instance Mapping AlwaysMermaid (i -> Effect Unit) (i -> M Unit) where
-  mapping _ = map liftImpure
+instance Mapping AlwaysMermaid (i -> M Unit) (i -> Effect Unit) where
+  mapping _ = map runImpure
 
 hmermaid :: forall i o. HMap AlwaysMermaid i o => i -> o
 hmermaid = hmap AlwaysMermaid

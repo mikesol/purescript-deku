@@ -3,49 +3,34 @@ module Deku.Example.HelloWorld where
 import Prelude
 
 import Control.Alt (alt)
-import Control.Plus (empty)
-import Data.Foldable (oneOfMap)
-import Data.Maybe (Maybe(..))
 import Data.Profunctor (lcmap)
 import Data.Tuple (Tuple(..))
-import Deku.Attribute (cb, xdata, (:=))
+import Deku.Attribute (cb, (:=))
 import Deku.Control as C
-import Deku.Core (Domable, M, bus, envy)
+import Deku.Core (Domable, M, bussed)
 import Deku.DOM as D
-import Deku.Interpret (FFIDOMSnapshot)
 import Deku.Toplevel (runInBody)
 import Effect (Effect)
-import FRP.Event (AnEvent, bang, filterMap, keepLatest, mapAccum)
+import FRP.Event (AnEvent, bang, keepLatest, mapAccum)
 
 counter :: forall a. AnEvent M a → AnEvent M (Tuple a Int)
 counter event = mapAccum f event 0
   where
   f a b = Tuple (b + 1) (Tuple a b)
 
-scene :: forall lock. Domable lock (FFIDOMSnapshot -> Effect Unit)
-scene = envy $ bus $ \push -> lcmap (alt (bang true)) \event -> do
+scene :: forall lock payload. Domable lock payload
+scene = bussed $ \push -> lcmap (alt $ bang 0) \event ->
   D.div_
-    [ D.div_
-        [ D.div empty [ C.text (bang "Stops after 4 clicks") ]
-        , C.text (event <#> if _ then "click " else "kcilc ")
-        , D.button
-            ( counter event
-                # filterMap
-                    (\(Tuple x y) -> if y < 4 then Just x else Nothing)
-                # map
-                    ( \e ->
-                        oneOfMap bang
-                          [ D.Style := "background-color: rgb(160,234,203);"
-                          , D.OnClick := cb (const $ push (not e))
-                          , xdata "hello" "world"
-                          ]
-
-                    )
-                # keepLatest
-            )
-            [ C.text_ "me" ]
-        ]
-    , D.input (bang $ D.Autofocus := "") []
+    [ D.span_
+      [ C.text (event <#> show)
+      ]
+    , D.button
+        ( event
+            # map
+                (\e -> bang $ D.OnClick := cb (const $ push (e + 1)))
+            # keepLatest
+        )
+        [ C.text_ "Click Me" ]
     ]
 
 main :: Effect Unit
