@@ -16,7 +16,8 @@ details
   => AnEvent m (Attribute Details_)
   -> Array (Domable m lock payload)
   -> Domable m lock payload
-details attributes kids = Element' (elementify "details" attributes (fixed kids))
+details attributes kids = Element'
+  (elementify "details" attributes (fixed kids))
 
 details_
   :: forall s m lock payload

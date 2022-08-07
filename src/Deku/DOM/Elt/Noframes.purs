@@ -16,7 +16,8 @@ noframes
   => AnEvent m (Attribute Noframes_)
   -> Array (Domable m lock payload)
   -> Domable m lock payload
-noframes attributes kids = Element' (elementify "noframes" attributes (fixed kids))
+noframes attributes kids = Element'
+  (elementify "noframes" attributes (fixed kids))
 
 noframes_
   :: forall s m lock payload

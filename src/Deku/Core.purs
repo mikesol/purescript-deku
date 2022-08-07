@@ -103,7 +103,10 @@ busUncurried
   -> AnEvent m b
 busUncurried = curry >>> bus
 
-busUncurried' :: forall t337 t338. ((t337 -> Effect Unit) /\ (AnEvent (Mermaid Global) t337) -> t338) -> AnEvent (Mermaid Global) t338
+busUncurried'
+  :: forall t337 t338
+   . ((t337 -> Effect Unit) /\ (AnEvent (Mermaid Global) t337) -> t338)
+  -> AnEvent (Mermaid Global) t338
 busUncurried' = curry >>> bus'
 
 bussed
@@ -114,7 +117,10 @@ bussed
   -> Bolson.Entity logic obj m lock
 bussed f = Bolson.EventfulElement' (Bolson.EventfulElement (bus f))
 
-bussed' :: forall logic obj lock a. ((a -> Effect Unit) -> AnEvent M a -> Bolson.Entity logic obj M lock) -> Bolson.Entity logic obj M lock
+bussed'
+  :: forall logic obj lock a
+   . ((a -> Effect Unit) -> AnEvent M a -> Bolson.Entity logic obj M lock)
+  -> Bolson.Entity logic obj M lock
 bussed' = Bolson.EventfulElement' <<< Bolson.EventfulElement <<< bus'
 
 bussedUncurried

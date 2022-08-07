@@ -16,7 +16,8 @@ basefont
   => AnEvent m (Attribute Basefont_)
   -> Array (Domable m lock payload)
   -> Domable m lock payload
-basefont attributes kids = Element' (elementify "basefont" attributes (fixed kids))
+basefont attributes kids = Element'
+  (elementify "basefont" attributes (fixed kids))
 
 basefont_
   :: forall s m lock payload

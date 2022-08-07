@@ -16,7 +16,8 @@ caption
   => AnEvent m (Attribute Caption_)
   -> Array (Domable m lock payload)
   -> Domable m lock payload
-caption attributes kids = Element' (elementify "caption" attributes (fixed kids))
+caption attributes kids = Element'
+  (elementify "caption" attributes (fixed kids))
 
 caption_
   :: forall s m lock payload

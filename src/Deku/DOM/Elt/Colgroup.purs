@@ -16,7 +16,8 @@ colgroup
   => AnEvent m (Attribute Colgroup_)
   -> Array (Domable m lock payload)
   -> Domable m lock payload
-colgroup attributes kids = Element' (elementify "colgroup" attributes (fixed kids))
+colgroup attributes kids = Element'
+  (elementify "colgroup" attributes (fixed kids))
 
 colgroup_
   :: forall s m lock payload

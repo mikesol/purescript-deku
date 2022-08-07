@@ -16,7 +16,8 @@ datalist
   => AnEvent m (Attribute Datalist_)
   -> Array (Domable m lock payload)
   -> Domable m lock payload
-datalist attributes kids = Element' (elementify "datalist" attributes (fixed kids))
+datalist attributes kids = Element'
+  (elementify "datalist" attributes (fixed kids))
 
 datalist_
   :: forall s m lock payload

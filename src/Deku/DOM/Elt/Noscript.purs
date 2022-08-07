@@ -16,7 +16,8 @@ noscript
   => AnEvent m (Attribute Noscript_)
   -> Array (Domable m lock payload)
   -> Domable m lock payload
-noscript attributes kids = Element' (elementify "noscript" attributes (fixed kids))
+noscript attributes kids = Element'
+  (elementify "noscript" attributes (fixed kids))
 
 noscript_
   :: forall s m lock payload

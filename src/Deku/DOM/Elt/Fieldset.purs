@@ -16,7 +16,8 @@ fieldset
   => AnEvent m (Attribute Fieldset_)
   -> Array (Domable m lock payload)
   -> Domable m lock payload
-fieldset attributes kids = Element' (elementify "fieldset" attributes (fixed kids))
+fieldset attributes kids = Element'
+  (elementify "fieldset" attributes (fixed kids))
 
 fieldset_
   :: forall s m lock payload
