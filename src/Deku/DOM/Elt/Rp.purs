@@ -1,27 +1,24 @@
 module Deku.DOM.Elt.Rp where
 
-import Control.Monad.ST.Class (class MonadST)
 import Control.Plus (empty)
 import Deku.Attribute (Attribute)
 import Deku.Control (elementify)
-import Deku.Core (Domable)
+import Deku.Core (Domable, M)
 import Bolson.Core (Entity(..), fixed)
 import FRP.Event (AnEvent)
 
 data Rp_
 
 rp
-  :: forall s m lock payload
-   . MonadST s m
-  => AnEvent m (Attribute Rp_)
-  -> Array (Domable m lock payload)
-  -> Domable m lock payload
+  :: forall lock payload
+   . AnEvent M (Attribute Rp_)
+  -> Array (Domable lock payload)
+  -> Domable lock payload
 rp attributes kids = Element' (elementify "rp" attributes (fixed kids))
 
 rp_
-  :: forall s m lock payload
-   . MonadST s m
-  => Array (Domable m lock payload)
-  -> Domable m lock payload
+  :: forall lock payload
+   . Array (Domable lock payload)
+  -> Domable lock payload
 rp_ = rp empty
 

@@ -1,28 +1,25 @@
 module Deku.DOM.Elt.Article where
 
-import Control.Monad.ST.Class (class MonadST)
 import Control.Plus (empty)
 import Deku.Attribute (Attribute)
 import Deku.Control (elementify)
-import Deku.Core (Domable)
+import Deku.Core (Domable, M)
 import Bolson.Core (Entity(..), fixed)
 import FRP.Event (AnEvent)
 
 data Article_
 
 article
-  :: forall s m lock payload
-   . MonadST s m
-  => AnEvent m (Attribute Article_)
-  -> Array (Domable m lock payload)
-  -> Domable m lock payload
+  :: forall lock payload
+   . AnEvent M (Attribute Article_)
+  -> Array (Domable lock payload)
+  -> Domable lock payload
 article attributes kids = Element'
   (elementify "article" attributes (fixed kids))
 
 article_
-  :: forall s m lock payload
-   . MonadST s m
-  => Array (Domable m lock payload)
-  -> Domable m lock payload
+  :: forall lock payload
+   . Array (Domable lock payload)
+  -> Domable lock payload
 article_ = article empty
 

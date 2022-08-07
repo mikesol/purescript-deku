@@ -1,27 +1,24 @@
 module Deku.DOM.Elt.Style where
 
-import Control.Monad.ST.Class (class MonadST)
 import Control.Plus (empty)
 import Deku.Attribute (Attribute)
 import Deku.Control (elementify)
-import Deku.Core (Domable)
+import Deku.Core (Domable, M)
 import Bolson.Core (Entity(..), fixed)
 import FRP.Event (AnEvent)
 
 data Style_
 
 style
-  :: forall s m lock payload
-   . MonadST s m
-  => AnEvent m (Attribute Style_)
-  -> Array (Domable m lock payload)
-  -> Domable m lock payload
+  :: forall lock payload
+   . AnEvent M (Attribute Style_)
+  -> Array (Domable lock payload)
+  -> Domable lock payload
 style attributes kids = Element' (elementify "style" attributes (fixed kids))
 
 style_
-  :: forall s m lock payload
-   . MonadST s m
-  => Array (Domable m lock payload)
-  -> Domable m lock payload
+  :: forall lock payload
+   . Array (Domable lock payload)
+  -> Domable lock payload
 style_ = style empty
 

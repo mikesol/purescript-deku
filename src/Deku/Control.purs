@@ -24,7 +24,7 @@ import Data.Maybe (Maybe(..), maybe)
 import Data.Newtype (class Newtype, unwrap)
 import Data.Profunctor (lcmap)
 import Deku.Attribute (Attribute, AttributeValue(..), unsafeUnAttribute)
-import Deku.Core (DOMInterpret(..), Domable, Node(..))
+import Deku.Core (DOMInterpret(..), Domable, M, Node(..))
 import FRP.Event (AnEvent, bang, makeEvent, subscribe)
 import Prim.Int (class Compare)
 import Prim.Ordering (GT)
@@ -36,42 +36,42 @@ type Neg1 = -1
 
 ----
 unsafeElement
-  :: forall m payload
-   . DOMInterpret m payload
+  :: forall payload
+   . DOMInterpret payload
   -> { id :: String, parent :: Maybe String, scope :: Scope, tag :: String }
   -> payload
 unsafeElement (DOMInterpret { makeElement }) = makeElement
 
 unsafeConnect
-  :: forall m payload
-   . DOMInterpret m payload
+  :: forall payload
+   . DOMInterpret payload
   -> { id :: String, parent :: String }
   -> payload
 unsafeConnect (DOMInterpret { attributeParent }) = attributeParent
 
 unsafeText
-  :: forall m payload
-   . DOMInterpret m payload
+  :: forall payload
+   . DOMInterpret payload
   -> { id :: String, parent :: Maybe String, scope :: Scope }
   -> payload
 unsafeText (DOMInterpret { makeText }) = makeText
 
 unsafeSetText
-  :: forall m payload
-   . DOMInterpret m payload
+  :: forall payload
+   . DOMInterpret payload
   -> String
-  -> AnEvent m String
-  -> AnEvent m payload
+  -> AnEvent M String
+  -> AnEvent M payload
 unsafeSetText (DOMInterpret { setText }) id txt = map
   (setText <<< { id, text: _ })
   txt
 
 unsafeSetAttribute
-  :: forall m element payload
-   . DOMInterpret m payload
+  :: forall element payload
+   . DOMInterpret payload
   -> String
-  -> AnEvent m (Attribute element)
-  -> AnEvent m payload
+  -> AnEvent M (Attribute element)
+  -> AnEvent M payload
 unsafeSetAttribute (DOMInterpret { setProp, setCb }) id atts = map
   ( ( \{ key, value } -> case value of
         Prop' s -> setProp { id, key, value: s }
@@ -82,12 +82,11 @@ unsafeSetAttribute (DOMInterpret { setProp, setCb }) id atts = map
   (atts)
 
 elementify
-  :: forall s m element lock payload
-   . MonadST s m
-  => String
-  -> AnEvent m (Attribute element)
-  -> Domable m lock payload
-  -> Node m lock payload
+  :: forall element lock payload
+   . String
+  -> AnEvent M (Attribute element)
+  -> Domable lock payload
+  -> Node lock payload
 elementify tag atts children = Node go
   where
   go { parent, scope, raiseId } di@(DOMInterpret { ids, deleteFromCache }) =
@@ -116,12 +115,11 @@ elementify tag atts children = Node go
         k
 
 globalPortal
-  :: forall n s m lock payload
+  :: forall n lock payload
    . Compare n Neg1 GT
-  => MonadST s m
-  => Vect n (Domable m lock payload)
-  -> (Vect n (Domable m lock payload) -> Domable m lock payload)
-  -> Domable m lock payload
+  => Vect n (Domable lock payload)
+  -> (Vect n (Domable lock payload) -> Domable lock payload)
+  -> Domable lock payload
 globalPortal v c = Bolson.globalPortalComplexComplex
   portalFlatten
   { fromEltO1: coerce
@@ -135,25 +133,24 @@ globalPortal v c = Bolson.globalPortalComplexComplex
   (lcmap (map (_ $ unit)) c)
 
 portalFlatten
-  :: forall m151 payload152 b159 d161 t165 m168 t174 t176 m183 lock184 lock188
-       payload189
+  :: forall payload152 b159 d161 t165 t174 t176 lock184 lock188
    . Newtype b159
        { ids :: d161
        | t165
        }
   => { disconnectElement ::
-         DOMInterpret m168 t174
+         DOMInterpret t174
          -> { id :: String
             , parent :: String
             , scope :: Scope
             | t176
             }
          -> t174
-     , doLogic :: Int -> DOMInterpret m151 payload152 -> String -> payload152
+     , doLogic :: Int -> DOMInterpret payload152 -> String -> payload152
      , ids :: b159 -> d161
      , toElt ::
-         Node m183 lock184 payload189
-         -> Element (DOMInterpret m183 payload189) m183 lock188 payload189
+         Node lock184 payload152
+         -> Element (DOMInterpret payload152) M lock188 payload152
      }
 portalFlatten =
   { doLogic: \pos (DOMInterpret { sendToPos }) id -> sendToPos { id, pos }
@@ -168,13 +165,13 @@ portal
   :: forall n s m lock0 payload
    . Compare n Neg1 GT
   => MonadST s m
-  => Vect n (Domable m lock0 payload)
+  => Vect n (Domable lock0 payload)
   -> ( forall lockfoo
-        . Vect n (Domable m lockfoo payload)
-       -> (Domable m lock0 payload -> Domable m lockfoo payload)
-       -> Domable m lockfoo payload
+        . Vect n (Domable lockfoo payload)
+       -> (Domable lock0 payload -> Domable lockfoo payload)
+       -> Domable lockfoo payload
      )
-  -> Domable m lock0 payload
+  -> Domable lock0 payload
 portal a b = Bolson.portalComplexComplex
   portalFlatten
   { fromEltO1: coerce
@@ -187,11 +184,7 @@ portal a b = Bolson.portalComplexComplex
   a
   (lcmap (map (_ $ unit)) (coerce b))
 
-text
-  :: forall m lock payload
-   . Monad m
-  => AnEvent m String
-  -> Domable m lock payload
+text :: forall lock payload. AnEvent M String -> Domable lock payload
 text txt = Element' $ Node go
   where
   go { parent, scope, raiseId } di@(DOMInterpret { ids, deleteFromCache }) =
@@ -206,16 +199,15 @@ text txt = Element' $ Node go
         )
         k
 
-text_ :: forall m lock payload. Monad m => String -> Domable m lock payload
+text_ :: forall lock payload. String -> Domable lock payload
 text_ txt = text (bang txt)
 
 deku
-  :: forall s m payload
-   . MonadST s m
-  => Web.DOM.Element
-  -> (forall lock. Domable m lock payload)
-  -> DOMInterpret m payload
-  -> AnEvent m payload
+  :: forall payload
+   . Web.DOM.Element
+  -> (forall lock. Domable lock payload)
+  -> DOMInterpret payload
+  -> AnEvent M payload
 deku root children di@(DOMInterpret { ids, makeRoot }) = makeEvent \k -> do
   me <- ids
   subscribe
@@ -231,31 +223,27 @@ deku root children di@(DOMInterpret { ids, makeRoot }) = makeEvent \k -> do
     k
 
 deku1
-  :: forall s m payload
-   . MonadST s m
-  => Web.DOM.Element
-  -> (forall lock. AnEvent m (Domable m lock payload))
-  -> DOMInterpret m payload
-  -> AnEvent m payload
+  :: forall payload
+   . Web.DOM.Element
+  -> (forall lock. AnEvent M (Domable lock payload))
+  -> DOMInterpret payload
+  -> AnEvent M payload
 deku1 root children = deku root (EventfulElement' $ EventfulElement children)
 
 dekuA
-  :: forall s m payload
-   . MonadST s m
-  => Web.DOM.Element
-  -> (forall lock. Array (Domable m lock payload))
-  -> DOMInterpret m payload
-  -> AnEvent m payload
+  :: forall payload
+   . Web.DOM.Element
+  -> (forall lock. Array (Domable lock payload))
+  -> DOMInterpret payload
+  -> AnEvent M payload
 dekuA root children = deku root (FixedChildren' $ FixedChildren children)
 
 data Stage = Begin | Middle | End
 
 __internalDekuFlatten
-  :: forall s m lock payload
-   . MonadST s m
-  => PSR m
-  -> DOMInterpret m payload
-  -> Domable m lock payload
-  -> AnEvent m payload
-__internalDekuFlatten = Bolson.flatten
-  portalFlatten
+  :: forall lock payload
+   . PSR M
+  -> DOMInterpret payload
+  -> Domable lock payload
+  -> AnEvent M payload
+__internalDekuFlatten = Bolson.flatten portalFlatten

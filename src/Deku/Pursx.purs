@@ -12,7 +12,7 @@ import Data.Profunctor (lcmap)
 import Data.Reflectable (class Reflectable, reflectType)
 import Data.Symbol (class IsSymbol)
 import Deku.Attribute (Attribute, AttributeValue(..), unsafeUnAttribute)
-import Deku.Core (DOMInterpret(..), class Korok, Domable, Node(..))
+import Deku.Core (DOMInterpret(..), Domable, M, Node(..))
 import Deku.DOM (class TagToDeku)
 import FRP.Event (AnEvent, bang, subscribe, makeEvent)
 import Foreign.Object as Object
@@ -23,13 +23,13 @@ import Prim.Symbol as Sym
 import Record (get)
 import Type.Proxy (Proxy(..))
 
-newtype PursxElement m lock payload = PursxElement
-  (Domable m lock payload)
+newtype PursxElement lock payload = PursxElement
+  (Domable lock payload)
 
 nut
-  :: forall m lock payload
-   . Domable m lock payload
-  -> PursxElement m lock payload
+  :: forall lock payload
+   . Domable lock payload
+  -> PursxElement lock payload
 nut = PursxElement
 
 pursx :: forall s. Proxy s
@@ -49,7 +49,7 @@ class
 
 instance
   ( TagToDeku tag deku
-  , Row.Cons acc (AnEvent m (Attribute deku)) pursi purso
+  , Row.Cons acc (AnEvent M (Attribute deku)) pursi purso
   ) =>
   DoVerbForAttr verb tag acc verb tail pursi purso tail
 else instance
@@ -75,7 +75,7 @@ class
   | m lock payload verb acc head tail pursi -> purso newTail
 
 instance
-  ( Row.Cons acc (PursxElement m lock payload) pursi purso
+  ( Row.Cons acc (PursxElement lock payload) pursi purso
   ) =>
   DoVerbForDOM m lock payload verb acc verb tail pursi purso tail
 else instance
@@ -4412,25 +4412,24 @@ else instance
   PXBody m lock payload verb anything tail pursi purso trailing
 
 class
-  PursxToElement m lock payload (rl :: RL.RowList Type) (r :: Row Type)
-  | rl -> m lock payload r where
+  PursxToElement lock payload (rl :: RL.RowList Type) (r :: Row Type)
+  | rl -> lock payload r where
   pursxToElement
     :: String
     -> Proxy rl
     -> { | r }
-    -> { cache :: Object.Object Boolean, element :: Node m lock payload }
+    -> { cache :: Object.Object Boolean, element :: Node lock payload }
 
 instance pursxToElementConsInsert ::
-  ( Row.Cons key (PursxElement m lock payload) r' r
-  , PursxToElement m lock payload rest r
+  ( Row.Cons key (PursxElement lock payload) r' r
+  , PursxToElement lock payload rest r
   , Reflectable key String
   , IsSymbol key
-  , Korok s m
   ) =>
-  PursxToElement m
+  PursxToElement
     lock
     payload
-    (RL.Cons key (PursxElement m lock payload) rest)
+    (RL.Cons key (PursxElement lock payload) rest)
     r where
   pursxToElement pxScope _ r =
     let
@@ -4452,16 +4451,15 @@ instance pursxToElementConsInsert ::
     PursxElement pxe = get pxk r
 
 else instance pursxToElementConsAttr ::
-  ( Row.Cons key (AnEvent m (Attribute deku)) r' r
-  , PursxToElement m lock payload rest r
+  ( Row.Cons key (AnEvent M (Attribute deku)) r' r
+  , PursxToElement lock payload rest r
   , Reflectable key String
   , IsSymbol key
-  , Korok s m
   ) =>
-  PursxToElement m
+  PursxToElement
     lock
     payload
-    (RL.Cons key (AnEvent m (Attribute deku)) rest)
+    (RL.Cons key (AnEvent M (Attribute deku)) rest)
     r where
   pursxToElement pxScope _ r =
     let
@@ -4492,43 +4490,40 @@ else instance pursxToElementConsAttr ::
 
 instance pursxToElementNil ::
   Applicative m =>
-  PursxToElement m lock payload RL.Nil r where
+  PursxToElement lock payload RL.Nil r where
   pursxToElement _ _ _ = { cache: Object.empty, element: Node \_ _ -> empty }
 
 psx
-  :: forall s m lock payload (html :: Symbol)
+  :: forall lock payload (html :: Symbol)
    . Reflectable html String
-  => PXStart m lock payload "~" " " html ()
-  => Korok s m
-  => PursxToElement m lock payload RL.Nil ()
+  => PXStart M lock payload "~" " " html ()
+  => PursxToElement lock payload RL.Nil ()
   => Proxy html
-  -> Domable m lock payload
+  -> Domable lock payload
 psx px = makePursx px {}
 
 makePursx
-  :: forall s m lock payload (html :: Symbol) r rl
+  :: forall lock payload (html :: Symbol) r rl
    . Reflectable html String
-  => PXStart m lock payload "~" " " html r
+  => PXStart M lock payload "~" " " html r
   => RL.RowToList r rl
-  => PursxToElement m lock payload rl r
-  => Korok s m
+  => PursxToElement lock payload rl r
   => Proxy html
   -> { | r }
-  -> Domable m lock payload
+  -> Domable lock payload
 makePursx = makePursx' (Proxy :: _ "~")
 
 makePursx'
-  :: forall s m lock payload verb (html :: Symbol) r rl
+  :: forall lock payload verb (html :: Symbol) r rl
    . Reflectable html String
   => Reflectable verb String
-  => PXStart m lock payload verb " " html r
+  => PXStart M lock payload verb " " html r
   => RL.RowToList r rl
-  => Korok s m
-  => PursxToElement m lock payload rl r
+  => PursxToElement lock payload rl r
   => Proxy verb
   -> Proxy html
   -> { | r }
-  -> Domable m lock payload
+  -> Domable lock payload
 makePursx' verb html r = Element' $ Node go
   where
   go
@@ -4560,12 +4555,11 @@ makePursx' verb html r = Element' $ Node go
           k1
 
 __internalDekuFlatten
-  :: forall s m lock payload
-   . Korok s m
-  => PSR m
-  -> DOMInterpret m payload
-  -> Domable m lock payload
-  -> AnEvent m payload
+  :: forall lock payload
+   . PSR M
+  -> DOMInterpret payload
+  -> Domable lock payload
+  -> AnEvent M payload
 __internalDekuFlatten = Bolson.flatten
   { doLogic: \pos (DOMInterpret { sendToPos }) id -> sendToPos { id, pos }
   , ids: unwrap >>> _.ids

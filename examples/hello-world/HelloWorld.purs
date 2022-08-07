@@ -10,19 +10,19 @@ import Data.Profunctor (lcmap)
 import Data.Tuple (Tuple(..))
 import Deku.Attribute (cb, xdata, (:=))
 import Deku.Control as C
-import Deku.Core (Domable, envy)
+import Deku.Core (Domable, M, bus, envy)
 import Deku.DOM as D
 import Deku.Interpret (FFIDOMSnapshot)
 import Deku.Toplevel (runInBody)
 import Effect (Effect)
-import FRP.Event (Event, bang, bus, filterMap, keepLatest, mapAccum)
+import FRP.Event (AnEvent, bang, filterMap, keepLatest, mapAccum)
 
-counter :: forall a. Event a → Event (Tuple a Int)
+counter :: forall a. AnEvent M a → AnEvent M (Tuple a Int)
 counter event = mapAccum f event 0
   where
   f a b = Tuple (b + 1) (Tuple a b)
 
-scene :: forall lock. Domable Effect lock (FFIDOMSnapshot -> Effect Unit)
+scene :: forall lock. Domable lock (FFIDOMSnapshot -> Effect Unit)
 scene = envy $ bus $ \push -> lcmap (alt (bang true)) \event -> do
   D.div_
     [ D.div_

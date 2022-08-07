@@ -1,37 +1,34 @@
 module Deku.Core
-  ( module Bolson.Core
-  , DOMInterpret(..)
-  , MakeRoot
-  , MakeElement
+  ( ANut(..)
   , AttributeParent
-  , MakeText
-  , MakePursx
-  , GiveNewParent
-  , DisconnectElement
+  , DOMInterpret(..)
   , DeleteFromCache
-  , SendToPos
-  , SetProp
-  , SetCb
-  , SetText
+  , DisconnectElement
+  , Domable
+  , GiveNewParent
+  , M
+  , MakeElement
+  , MakePursx
+  , MakeRoot
+  , MakeText
+  , Node(..)
   , Nut
-  , ANut(..)
+  , SendToPos
+  , SetCb
+  , SetProp
+  , SetText
   , bus
-  , bus'
   , busUncurried
-  , busUncurried'
   , bussed
-  , bussed'
   , bussedUncurried
-  , bussedUncurried'
+  , class Korok
+  , insert
+  , module Bolson.Core
+  , remove
+  , sendToPos
+  , sendToTop
   , vbussed
   , vbussedUncurried
-  , remove
-  , sendToTop
-  , sendToPos
-  , insert
-  , class Korok
-  , Domable
-  , Node(..)
   ) where
 
 import Prelude
@@ -43,7 +40,7 @@ import Control.Monad.ST (ST)
 import Control.Monad.ST.Class (class MonadST)
 import Control.Monad.ST.Global (Global)
 import Data.Maybe (Maybe)
-import Data.Monoid.Always (class Always, always)
+import Data.Monoid.Always (class Always)
 import Data.Monoid.Endo (Endo)
 import Data.Newtype (class Newtype)
 import Data.Profunctor (lcmap)
@@ -75,67 +72,33 @@ class
 instance Korok s (ST s)
 instance Korok Global Effect
 
-type Nut =
-  forall s m lock payload
-   . Korok s m
-  => Domable m lock payload
+type Nut = forall lock payload. Domable lock payload
 
 newtype ANut = ANut Nut
 
 bus
-  :: forall a b s m
-   . Korok s m
-  => Always (m Unit) (Effect Unit)
-  => ((a -> Effect Unit) -> AnEvent m a -> b)
-  -> AnEvent m b
-bus f = FRP.Event.bus (lcmap (map (always :: m Unit -> Effect Unit)) f)
-
-type M = Mermaid Global
-
-bus' :: forall a b. ((a -> Effect Unit) -> AnEvent M a -> b) -> AnEvent M b
-bus' = FRP.Event.bus <<< lcmap (map runImpure)
+  :: forall a b
+   . ((a -> Effect Unit) -> AnEvent M a -> b)
+  -> AnEvent M b
+bus f = FRP.Event.bus (lcmap (map runImpure) f)
 
 busUncurried
-  :: forall a b s m
-   . Korok s m
-  => Always (m Unit) (Effect Unit)
-  => (((a -> Effect Unit) /\ AnEvent m a) -> b)
-  -> AnEvent m b
+  :: forall a b
+   . (((a -> Effect Unit) /\ AnEvent M a) -> b)
+  -> AnEvent M b
 busUncurried = curry >>> bus
 
-busUncurried'
-  :: forall t337 t338
-   . ((t337 -> Effect Unit) /\ (AnEvent (Mermaid Global) t337) -> t338)
-  -> AnEvent (Mermaid Global) t338
-busUncurried' = curry >>> bus'
-
 bussed
-  :: forall s m lock logic obj a
-   . Korok s m
-  => Always (m Unit) (Effect Unit)
-  => ((a -> Effect Unit) -> AnEvent m a -> Bolson.Entity logic obj m lock)
-  -> Bolson.Entity logic obj m lock
-bussed f = Bolson.EventfulElement' (Bolson.EventfulElement (bus f))
-
-bussed'
-  :: forall logic obj lock a
+  :: forall lock logic obj a
    . ((a -> Effect Unit) -> AnEvent M a -> Bolson.Entity logic obj M lock)
   -> Bolson.Entity logic obj M lock
-bussed' = Bolson.EventfulElement' <<< Bolson.EventfulElement <<< bus'
+bussed f = Bolson.EventfulElement' (Bolson.EventfulElement (bus f))
 
 bussedUncurried
-  :: forall s m lock logic obj a
-   . Korok s m
-  => Always (m Unit) (Effect Unit)
-  => (((a -> Effect Unit) /\ AnEvent m a) -> Bolson.Entity logic obj m lock)
-  -> Bolson.Entity logic obj m lock
-bussedUncurried = curry >>> bussed
-
-bussedUncurried'
-  :: forall logic obj lock a
-   . ((a -> Effect Unit) /\ (AnEvent M a) -> Bolson.Entity logic obj M lock)
+  :: forall lock logic obj a
+   . (((a -> Effect Unit) /\ AnEvent M a) -> Bolson.Entity logic obj M lock)
   -> Bolson.Entity logic obj M lock
-bussedUncurried' = curry >>> bussed'
+bussedUncurried = curry >>> bussed
 
 vbussed
   :: forall s m logic obj lock rbus bus pushi pusho pushR event u
@@ -168,24 +131,29 @@ vbussedUncurried
   -> Bolson.Entity logic obj m lock
 vbussedUncurried px = curry >>> vbussed px
 
-newtype Node m (lock :: Type) payload = Node
-  (Bolson.PSR m -> DOMInterpret m payload -> AnEvent m payload)
+type M = Mermaid Global
 
-type Domable m lock payload = Bolson.Entity Int (Node m lock payload) m lock
+newtype Node :: Type -> Type -> Type
+newtype Node lock payload = Node
+  ( Bolson.PSR M -> DOMInterpret payload -> AnEvent M payload
+  )
+
+type Domable :: Type -> Type -> Type
+type Domable lock payload = Bolson.Entity Int (Node lock payload) M lock
 
 insert
-  :: forall logic obj m lock
-   . Bolson.Entity logic obj m lock
-  -> Bolson.Child logic obj m lock
+  :: forall logic obj lock
+   . Bolson.Entity logic obj M lock
+  -> Bolson.Child logic obj M lock
 insert = Bolson.Insert
 
-remove :: forall logic obj m lock. Bolson.Child logic obj m lock
+remove :: forall logic obj lock. Bolson.Child logic obj M lock
 remove = Bolson.Remove
 
-sendToTop :: forall obj m lock. Bolson.Child Int obj m lock
+sendToTop :: forall obj lock. Bolson.Child Int obj M lock
 sendToTop = Bolson.Logic 0
 
-sendToPos :: forall obj m lock. Int -> Bolson.Child Int obj m lock
+sendToPos :: forall obj lock. Int -> Bolson.Child Int obj M lock
 sendToPos = Bolson.Logic
 
 type MakeElement =
@@ -249,10 +217,10 @@ type SendToPos =
   , pos :: Int
   }
 
-derive instance Newtype (DOMInterpret m payload) _
+derive instance Newtype (DOMInterpret payload) _
 
-newtype DOMInterpret m payload = DOMInterpret
-  { ids :: m String
+newtype DOMInterpret payload = DOMInterpret
+  { ids :: M String
   , makeRoot :: MakeRoot -> payload
   , makeElement :: MakeElement -> payload
   , attributeParent :: AttributeParent -> payload

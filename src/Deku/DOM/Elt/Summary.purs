@@ -1,28 +1,25 @@
 module Deku.DOM.Elt.Summary where
 
-import Control.Monad.ST.Class (class MonadST)
 import Control.Plus (empty)
 import Deku.Attribute (Attribute)
 import Deku.Control (elementify)
-import Deku.Core (Domable)
+import Deku.Core (Domable, M)
 import Bolson.Core (Entity(..), fixed)
 import FRP.Event (AnEvent)
 
 data Summary_
 
 summary
-  :: forall s m lock payload
-   . MonadST s m
-  => AnEvent m (Attribute Summary_)
-  -> Array (Domable m lock payload)
-  -> Domable m lock payload
+  :: forall lock payload
+   . AnEvent M (Attribute Summary_)
+  -> Array (Domable lock payload)
+  -> Domable lock payload
 summary attributes kids = Element'
   (elementify "summary" attributes (fixed kids))
 
 summary_
-  :: forall s m lock payload
-   . MonadST s m
-  => Array (Domable m lock payload)
-  -> Domable m lock payload
+  :: forall lock payload
+   . Array (Domable lock payload)
+  -> Domable lock payload
 summary_ = summary empty
 

@@ -1,27 +1,24 @@
 module Deku.DOM.Elt.Video where
 
-import Control.Monad.ST.Class (class MonadST)
 import Control.Plus (empty)
 import Deku.Attribute (Attribute)
 import Deku.Control (elementify)
-import Deku.Core (Domable)
+import Deku.Core (Domable, M)
 import Bolson.Core (Entity(..), fixed)
 import FRP.Event (AnEvent)
 
 data Video_
 
 video
-  :: forall s m lock payload
-   . MonadST s m
-  => AnEvent m (Attribute Video_)
-  -> Array (Domable m lock payload)
-  -> Domable m lock payload
+  :: forall lock payload
+   . AnEvent M (Attribute Video_)
+  -> Array (Domable lock payload)
+  -> Domable lock payload
 video attributes kids = Element' (elementify "video" attributes (fixed kids))
 
 video_
-  :: forall s m lock payload
-   . MonadST s m
-  => Array (Domable m lock payload)
-  -> Domable m lock payload
+  :: forall lock payload
+   . Array (Domable lock payload)
+  -> Domable lock payload
 video_ = video empty
 
