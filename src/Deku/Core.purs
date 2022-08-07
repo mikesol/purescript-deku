@@ -16,9 +16,13 @@ module Deku.Core
   , Nut
   , ANut(..)
   , bus
+  , bus'
   , busUncurried
+  , busUncurried'
   , bussed
+  , bussed'
   , bussedUncurried
+  , bussedUncurried'
   , vbussed
   , vbussedUncurried
   , remove
@@ -52,6 +56,7 @@ import FRP.Event as FRP.Event
 import FRP.Event.VBus (class VBus, V, vbus)
 import Foreign.Object (Object)
 import Heterogeneous.Mapping (class MapRecordWithIndex, ConstMapping)
+import Mermaid (Mermaid, runImpure)
 import Prim.RowList (class RowToList)
 import Type.Proxy (Proxy(..))
 import Web.DOM as Web.DOM
@@ -85,6 +90,11 @@ bus
   -> AnEvent m b
 bus f = FRP.Event.bus (lcmap (map (always :: m Unit -> Effect Unit)) f)
 
+type M = Mermaid Global
+
+bus' :: forall a b. ((a -> Effect Unit) -> AnEvent M a -> b) -> AnEvent M b
+bus' = FRP.Event.bus <<< lcmap (map runImpure)
+
 busUncurried
   :: forall a b s m
    . Korok s m
@@ -92,6 +102,9 @@ busUncurried
   => (((a -> Effect Unit) /\ AnEvent m a) -> b)
   -> AnEvent m b
 busUncurried = curry >>> bus
+
+busUncurried' :: forall t337 t338. ((t337 -> Effect Unit) /\ (AnEvent (Mermaid Global) t337) -> t338) -> AnEvent (Mermaid Global) t338
+busUncurried' = curry >>> bus'
 
 bussed
   :: forall s m lock logic obj a
@@ -101,6 +114,9 @@ bussed
   -> Bolson.Entity logic obj m lock
 bussed f = Bolson.EventfulElement' (Bolson.EventfulElement (bus f))
 
+bussed' :: forall logic obj lock a. ((a -> Effect Unit) -> AnEvent M a -> Bolson.Entity logic obj M lock) -> Bolson.Entity logic obj M lock
+bussed' = Bolson.EventfulElement' <<< Bolson.EventfulElement <<< bus'
+
 bussedUncurried
   :: forall s m lock logic obj a
    . Korok s m
@@ -108,6 +124,12 @@ bussedUncurried
   => (((a -> Effect Unit) /\ AnEvent m a) -> Bolson.Entity logic obj m lock)
   -> Bolson.Entity logic obj m lock
 bussedUncurried = curry >>> bussed
+
+bussedUncurried'
+  :: forall logic obj lock a
+   . ((a -> Effect Unit) /\ (AnEvent M a) -> Bolson.Entity logic obj M lock)
+  -> Bolson.Entity logic obj M lock
+bussedUncurried' = curry >>> bussed'
 
 vbussed
   :: forall s m logic obj lock rbus bus pushi pusho pushR event u

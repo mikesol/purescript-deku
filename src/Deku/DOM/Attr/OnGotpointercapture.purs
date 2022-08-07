@@ -5,15 +5,9 @@ import Effect (Effect)
 import Deku.Attribute (class Attr, Cb(..), cb', unsafeAttribute)
 
 data OnGotpointercapture = OnGotpointercapture
-
 instance Attr anything OnGotpointercapture Cb where
-  attr OnGotpointercapture value = unsafeAttribute
-    { key: "gotpointercapture", value: cb' value }
-
+  attr OnGotpointercapture value = unsafeAttribute { key: "gotpointercapture", value: cb' value }
 instance Attr anything OnGotpointercapture (Effect Unit) where
-  attr OnGotpointercapture value = unsafeAttribute
-    { key: "gotpointercapture", value: cb' (Cb (const (value $> true))) }
-
+  attr OnGotpointercapture value = unsafeAttribute { key: "gotpointercapture", value: cb' (Cb (const (value $> true))) }
 instance Attr anything OnGotpointercapture (Effect Boolean) where
-  attr OnGotpointercapture value = unsafeAttribute
-    { key: "gotpointercapture", value: cb' (Cb (const value)) }
+  attr OnGotpointercapture value = unsafeAttribute { key: "gotpointercapture", value: cb' (Cb (const value)) }

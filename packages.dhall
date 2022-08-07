@@ -114,6 +114,20 @@ let overrides =
         , repo = "https://github.com/mikesol/purescript-bolson.git"
         , version = "main"
         }
+      , mermaid =
+        { dependencies =
+          [ "effect"
+          , "free"
+          , "maybe"
+          , "mmorph"
+          , "prelude"
+          , "st"
+          , "tailrec"
+          , "transformers"
+          ]
+        , repo = "https://github.com/purefunctor/purescript-mermaid.git"
+        , version = "main"
+        }
       }
 
 in  upstream // overrides

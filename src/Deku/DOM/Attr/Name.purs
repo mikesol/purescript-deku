@@ -1,21 +1,18 @@
 module Deku.DOM.Attr.Name where
-
-import Deku.DOM.Elt.Button (Button_)
-import Deku.DOM.Elt.Form (Form_)
-import Deku.DOM.Elt.Fieldset (Fieldset_)
-import Deku.DOM.Elt.Iframe (Iframe_)
-import Deku.DOM.Elt.Input (Input_)
-import Deku.DOM.Elt.Object (Object_)
-import Deku.DOM.Elt.Output (Output_)
-import Deku.DOM.Elt.Select (Select_)
-import Deku.DOM.Elt.Textarea (Textarea_)
-import Deku.DOM.Elt.Map (Map_)
-import Deku.DOM.Elt.Meta (Meta_)
-import Deku.DOM.Elt.Param (Param_)
+import Deku.DOM.Elt.Button(Button_)
+import Deku.DOM.Elt.Form(Form_)
+import Deku.DOM.Elt.Fieldset(Fieldset_)
+import Deku.DOM.Elt.Iframe(Iframe_)
+import Deku.DOM.Elt.Input(Input_)
+import Deku.DOM.Elt.Object(Object_)
+import Deku.DOM.Elt.Output(Output_)
+import Deku.DOM.Elt.Select(Select_)
+import Deku.DOM.Elt.Textarea(Textarea_)
+import Deku.DOM.Elt.Map(Map_)
+import Deku.DOM.Elt.Meta(Meta_)
+import Deku.DOM.Elt.Param(Param_)
 import Deku.Attribute (class Attr, prop', unsafeAttribute)
-
 data Name = Name
-
 instance Attr Button_ Name String where
   attr Name value = unsafeAttribute { key: "name", value: prop' value }
 
