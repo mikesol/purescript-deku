@@ -21,7 +21,7 @@ module Deku.Core
   , busUncurried
   , bussed
   , bussedUncurried
-  , class Korok
+  , AlwaysMermaid
   , insert
   , module Bolson.Core
   , remove
@@ -33,15 +33,10 @@ module Deku.Core
 
 import Prelude
 
-import Bolson.Always (AlwaysEffect, halways)
 import Bolson.Core (Scope, fixed, dyn, envy)
 import Bolson.Core as Bolson
-import Control.Monad.ST (ST)
-import Control.Monad.ST.Class (class MonadST)
 import Control.Monad.ST.Global (Global)
 import Data.Maybe (Maybe)
-import Data.Monoid.Always (class Always)
-import Data.Monoid.Endo (Endo)
 import Data.Newtype (class Newtype)
 import Data.Profunctor (lcmap)
 import Data.Tuple (curry)
@@ -52,25 +47,11 @@ import FRP.Event (AnEvent)
 import FRP.Event as FRP.Event
 import FRP.Event.VBus (class VBus, V, vbus)
 import Foreign.Object (Object)
-import Heterogeneous.Mapping (class MapRecordWithIndex, ConstMapping)
-import Mermaid (Mermaid, runImpure)
+import Heterogeneous.Mapping (class HMap, class MapRecordWithIndex, class Mapping, ConstMapping, hmap)
+import Mermaid (Mermaid, liftImpure, runImpure)
 import Prim.RowList (class RowToList)
-import Type.Proxy (Proxy(..))
+import Type.Prelude (Proxy)
 import Web.DOM as Web.DOM
-
-class
-  ( Always (m Unit) (Effect Unit)
-  , Always (m (m Unit)) (Effect (Effect Unit))
-  , Always (m Unit) (Effect Unit)
-  , Always (Endo Function (Effect (Effect Unit))) (Endo Function (m (m Unit)))
-  , Always (Endo Function (Effect Unit)) (Endo Function (m Unit))
-  , MonadST s m
-  ) <=
-  Korok s m
-  | m -> s
-
-instance Korok s (ST s)
-instance Korok Global Effect
 
 type Nut = forall lock payload. Domable lock payload
 
@@ -100,35 +81,35 @@ bussedUncurried
   -> Bolson.Entity logic obj M lock
 bussedUncurried = curry >>> bussed
 
+data AlwaysMermaid = AlwaysMermaid
+
+instance Mapping AlwaysMermaid (i -> Effect Unit) (i -> M Unit) where
+  mapping _ = map liftImpure
+
+hmermaid :: forall i o. HMap AlwaysMermaid i o => i -> o
+hmermaid = hmap AlwaysMermaid
+
 vbussed
-  :: forall s m logic obj lock rbus bus pushi pusho pushR event u
+  :: forall logic obj lock rbus bus pushi pusho pushR event u
    . RowToList bus rbus
-  => Korok s m
-  => RowToList pushi pushR
-  => MapRecordWithIndex pushR
-       (ConstMapping (AlwaysEffect m))
-       pushi
-       pusho
   => VBus rbus pushi event u
+  => RowToList pushi pushR
+  => MapRecordWithIndex pushR (ConstMapping AlwaysMermaid) pushi pusho
   => Proxy (V bus)
-  -> ({ | pusho } -> { | event } -> Bolson.Entity logic obj m lock)
-  -> Bolson.Entity logic obj m lock
+  -> ({ | pusho } -> { | event } -> Bolson.Entity logic obj M lock)
+  -> Bolson.Entity logic obj M lock
 vbussed px f = Bolson.EventfulElement'
-  (Bolson.EventfulElement (vbus px (lcmap (halways (Proxy :: Proxy m)) f)))
+  (Bolson.EventfulElement (vbus px (lcmap hmermaid f)))
 
 vbussedUncurried
-  :: forall s m logic obj lock rbus bus pushi pusho pushR event u
+  :: forall logic obj lock rbus bus pushi pusho pushR event u
    . RowToList bus rbus
-  => Korok s m
-  => RowToList pushi pushR
-  => MapRecordWithIndex pushR
-       (ConstMapping (AlwaysEffect m))
-       pushi
-       pusho
   => VBus rbus pushi event u
+  => RowToList pushi pushR
+  => MapRecordWithIndex pushR (ConstMapping AlwaysMermaid) pushi pusho
   => Proxy (V bus)
-  -> (({ | pusho } /\ { | event }) -> Bolson.Entity logic obj m lock)
-  -> Bolson.Entity logic obj m lock
+  -> ({ | pusho } /\ { | event } -> Bolson.Entity logic obj M lock)
+  -> Bolson.Entity logic obj M lock
 vbussedUncurried px = curry >>> vbussed px
 
 type M = Mermaid Global
