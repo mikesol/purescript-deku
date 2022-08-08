@@ -7,6 +7,12 @@ module Deku.Control
   , dekuA
   , globalPortal
   , portal
+  , dyn
+  , dyn_
+  , fixed
+  , fixed_
+  , envy
+  , envy_
   , module Bolson.Control
   ) where
 
@@ -15,6 +21,7 @@ import Prelude
 import Bolson.Control (switcher)
 import Bolson.Control as Bolson
 import Bolson.Core (Element(..), Entity(..), EventfulElement(..), FixedChildren(..), PSR, Scope(..))
+import Bolson.Core as BCore
 import Control.Alt ((<|>))
 import Control.Plus (empty)
 import Data.FastVect.FastVect (Vect)
@@ -238,3 +245,54 @@ __internalDekuFlatten
   -> AnEvent m payload
 __internalDekuFlatten = Bolson.flatten
   portalFlatten
+
+dyn
+  :: forall s m element lock payload
+   . Korok s m
+  => (AnEvent m (Attribute element) -> Array (Domable m lock payload) -> Domable m lock payload)
+  -> AnEvent m (Attribute element)
+  -> AnEvent m (AnEvent m (BCore.Child Int (Node m lock payload) m lock))
+  -> Domable m lock payload
+dyn f e i = f e [BCore.dyn i]
+
+dyn_
+  :: forall s m element lock payload
+   . Korok s m
+  => (AnEvent m (Attribute element) -> Array (Domable m lock payload) -> Domable m lock payload)
+  -> AnEvent m (AnEvent m (BCore.Child Int (Node m lock payload) m lock))
+  -> Domable m lock payload
+dyn_ f i = f empty [BCore.dyn i]
+
+fixed
+  :: forall s m element lock payload
+   . Korok s m
+  => (AnEvent m (Attribute element) -> Array (Domable m lock payload) -> Domable m lock payload)
+  -> AnEvent m (Attribute element)
+  -> Array (Domable m lock payload)
+  -> Domable m lock payload
+fixed f e i = f e [BCore.fixed i]
+
+fixed_
+  :: forall s m element lock payload
+   . Korok s m
+  => (AnEvent m (Attribute element) -> Array (Domable m lock payload) -> Domable m lock payload)
+  -> Array (Domable m lock payload)
+  -> Domable m lock payload
+fixed_ f i = f empty [BCore.fixed i]
+
+envy
+  :: forall s m element lock payload
+   . Korok s m
+  => (AnEvent m (Attribute element) -> Array (Domable m lock payload) -> Domable m lock payload)
+  -> AnEvent m (Attribute element)
+  -> AnEvent m (Domable m lock payload)
+  -> Domable m lock payload
+envy f e i = f e [BCore.envy i]
+
+envy_
+  :: forall s m element lock payload
+   . Korok s m
+  => (AnEvent m (Attribute element) -> Array (Domable m lock payload) -> Domable m lock payload)
+  -> AnEvent m (Domable m lock payload)
+  -> Domable m lock payload
+envy_ f i = f empty [BCore.envy i]
