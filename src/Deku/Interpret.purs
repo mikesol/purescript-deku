@@ -2,8 +2,6 @@ module Deku.Interpret
   ( FFIDOMSnapshot
   , fullDOMInterpret
   , makeFFIDOMSnapshot
-  , ssrDOMInterpret
-  , hydratingDOMInterpret
   , mermaidDOMInterpret
   , Instruction(..)
   , setHydrating
@@ -133,57 +131,6 @@ ssrSetProp a i = void $ RRef.modify (_ <> [ SetProp a ]) i
 ssrSetText
   :: forall r. Core.SetText -> RRef.STRef r (Array Instruction) -> ST r Unit
 ssrSetText a i = void $ RRef.modify (_ <> [ SetText a ]) i
-
-ssrDOMInterpret
-  :: forall r
-   . RRef.STRef r Int
-  -> Core.DOMInterpret (ST r)
-       (RRef.STRef r (Array Instruction) -> ST r Unit)
-ssrDOMInterpret seed = Core.DOMInterpret
-  { ids: do
-      s <- RRef.read seed
-      let
-        o = show
-          (evalGen (arbitrary :: Gen Int) { newSeed: mkSeed s, size: 5 })
-      void $ RRef.modify (add 1) seed
-      pure o
-  , makeElement: ssrMakeElement
-  , attributeParent: \_ _ -> pure unit
-  , makeRoot: \_ _ -> pure unit
-  , makeText: ssrMakeText
-  , makePursx: ssrMakePursx
-  , setProp: ssrSetProp
-  , setCb: \_ _ -> pure unit
-  , setText: ssrSetText
-  , sendToPos: \_ _ -> pure unit
-  , deleteFromCache: \_ _ -> pure unit
-  , giveNewParent: \_ _ -> pure unit
-  , disconnectElement: \_ _ -> pure unit
-  }
-
-hydratingDOMInterpret
-  :: Ref.Ref Int -> Core.DOMInterpret Effect (FFIDOMSnapshot -> Effect Unit)
-hydratingDOMInterpret seed = Core.DOMInterpret
-  { ids: do
-      s <- Ref.read seed
-      let
-        o = show
-          (evalGen (arbitrary :: Gen Int) { newSeed: mkSeed s, size: 5 })
-      void $ Ref.modify (add 1) seed
-      pure o
-  , makeElement: makeElement_ true
-  , attributeParent: attributeParent_
-  , makeRoot: makeRoot_
-  , makeText: makeText_ true (maybe unit)
-  , makePursx: makePursx_ true (maybe unit)
-  , setProp: setProp_ true
-  , setCb: setCb_ true
-  , setText: setText_
-  , sendToPos: sendToPos_
-  , deleteFromCache: deleteFromCache_
-  , giveNewParent: giveNewParent_
-  , disconnectElement: disconnectElement_
-  }
 
 mermaidDOMInterpret
   :: forall r

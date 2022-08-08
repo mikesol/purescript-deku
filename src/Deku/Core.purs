@@ -34,12 +34,9 @@ import Prelude
 import Bolson.Always (AlwaysEffect, halways)
 import Bolson.Core (Scope, fixed, dyn, envy)
 import Bolson.Core as Bolson
-import Control.Monad.ST (ST)
 import Control.Monad.ST.Class (class MonadST)
-import Control.Monad.ST.Global (Global)
 import Data.Maybe (Maybe)
 import Data.Monoid.Always (class Always, always)
-import Data.Monoid.Endo (Endo)
 import Data.Newtype (class Newtype)
 import Data.Profunctor (lcmap)
 import Data.Tuple (curry)
@@ -51,7 +48,6 @@ import FRP.Event as FRP.Event
 import FRP.Event.VBus (class VBus, V, vbus)
 import Foreign.Object (Object)
 import Heterogeneous.Mapping (class MapRecordWithIndex, ConstMapping)
-import Mermaid (Mermaid)
 import Prim.RowList (class RowToList)
 import Type.Proxy (Proxy(..))
 import Web.DOM as Web.DOM

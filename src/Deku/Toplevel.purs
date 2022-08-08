@@ -13,7 +13,7 @@ import Data.Newtype (class Newtype, unwrap)
 import Data.Tuple.Nested (type (/\), (/\))
 import Deku.Control (deku, deku1, dekuA)
 import Deku.Core (DOMInterpret(..), Domable, Node(..))
-import Deku.Interpret (FFIDOMSnapshot, Instruction, fullDOMInterpret, hydratingDOMInterpret, makeFFIDOMSnapshot, mermaidDOMInterpret, setHydrating, unSetHydrating)
+import Deku.Interpret (FFIDOMSnapshot, Instruction, fullDOMInterpret, makeFFIDOMSnapshot, mermaidDOMInterpret, setHydrating, unSetHydrating)
 import Deku.SSR (ssr')
 import Effect (Effect)
 import Effect.Ref as Ref
