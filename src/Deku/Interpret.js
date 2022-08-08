@@ -10,7 +10,17 @@ export const unSetHydrating = (state) => () => {
 export const attributeParent_ = (a) => (state) => () => {
 	// only attribute if it is not attributed already
 	if (!state.units[a.id].main.parentNode) {
-		state.units[a.parent].main.appendChild(state.units[a.id].main);
+		if (
+			a.pos.value0 instanceof number &&
+			state.units[a.parent].main.children[a.pos.value0]
+		) {
+			state.units[a.parent].main.insertBefore(
+				state.units[a.id].main,
+				state.units[a.parent].main.children[a.pos.value0]
+			);
+		} else {
+			state.units[a.parent].main.appendChild(state.units[a.id].main);
+		}
 	}
 };
 

@@ -10,7 +10,7 @@ import Data.Profunctor (lcmap)
 import Data.Tuple.Nested ((/\))
 import Deku.Attribute (cb, (:=))
 import Deku.Control (dyn_, text_)
-import Deku.Core (dyn, insert, remove, sendToTop, Nut, bus, bussed)
+import Deku.Core (Nut, bus, bussed, insert_, remove, sendToTop)
 import Deku.DOM as D
 import Deku.Example.Docs.Types (Page(..), PageOptions)
 import Deku.Example.Docs.Util (scrollToTop)
@@ -194,7 +194,7 @@ main = runInBody1
                   ]
               , dyn_ D.div $ map
                       ( \txt -> keepLatest $ bus \p' e' ->
-                          ( bang $ insert $ D.div_ do
+                          ( bang $ insert_ $ D.div_ do
                               [ D.span (bang $ D.Style := "margin: 5px;")
                                   [ text_ txt ]
                               , D.button

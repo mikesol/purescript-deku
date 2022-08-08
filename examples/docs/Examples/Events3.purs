@@ -10,7 +10,7 @@ import Data.Profunctor (lcmap)
 import Data.Tuple.Nested ((/\))
 import Deku.Attribute (cb, (:=))
 import Deku.Control (dyn_, text_)
-import Deku.Core (dyn, insert, sendToTop, remove)
+import Deku.Core (insert_, remove, sendToTop)
 import Deku.DOM as D
 import Deku.Toplevel (runInBody1)
 import Effect (Effect)
@@ -56,7 +56,7 @@ main = runInBody1
         , dyn_ D.div $
             map
               ( \txt -> keepLatest $ bus \p' e' ->
-                  ( bang $ insert $ D.div_
+                  ( bang $ insert_ $ D.div_
                       [ text_ txt
                       , D.button
                           ( bang
