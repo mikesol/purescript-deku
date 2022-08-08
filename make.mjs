@@ -5100,13 +5100,13 @@ var unsafeText = function(v) {
 var unsafeSetText = function(v) {
   return function(id2) {
     return function(txt) {
-      return map(functorEvent)(function($83) {
+      return map(functorEvent)(function($89) {
         return v.setText(function(v1) {
           return {
             id: id2,
             text: v1
           };
-        }($83));
+        }($89));
       })(txt);
     };
   };
@@ -5114,7 +5114,7 @@ var unsafeSetText = function(v) {
 var unsafeSetAttribute = function(v) {
   return function(id2) {
     return function(atts) {
-      return map(functorEvent)(function($84) {
+      return map(functorEvent)(function($90) {
         return function(v1) {
           if (v1.value instanceof Prop$prime) {
             return v.setProp({
@@ -5132,8 +5132,8 @@ var unsafeSetAttribute = function(v) {
             });
           }
           ;
-          throw new Error("Failed pattern match at Deku.Control (line 75, column 26 - line 77, column 45): " + [v1.value.constructor.name]);
-        }(unsafeUnAttribute($84));
+          throw new Error("Failed pattern match at Deku.Control (line 82, column 26 - line 84, column 45): " + [v1.value.constructor.name]);
+        }(unsafeUnAttribute($90));
       })(atts);
     };
   };
@@ -5184,11 +5184,11 @@ var portalFlatten = function() {
       };
     },
     ids: function() {
-      var $85 = unwrap();
-      return function($86) {
+      var $91 = unwrap();
+      return function($92) {
         return function(v) {
           return v.ids;
-        }($85($86));
+        }($91($92));
       };
     }(),
     disconnectElement: function(v) {
@@ -5204,6 +5204,13 @@ var portalFlatten = function() {
     toElt: function(v) {
       return v;
     }
+  };
+};
+var dyn_ = function(dictKorok) {
+  return function(f) {
+    return function(i2) {
+      return f(empty(plusEvent(dictKorok.MonadST5().Monad0().Applicative0())))([dyn(i2)]);
+    };
   };
 };
 var __internalDekuFlatten = function(dictKorok) {
@@ -5256,9 +5263,9 @@ var portal = function() {
           fromEltO2: coerce(),
           toElt: coerce(),
           wrapElt: function() {
-            var $91 = elementify(dictKorok)("div")(empty(plusEvent(dictKorok.MonadST5().Monad0().Applicative0())));
-            return function($92) {
-              return Element$prime.create($91($92));
+            var $97 = elementify(dictKorok)("div")(empty(plusEvent(dictKorok.MonadST5().Monad0().Applicative0())));
+            return function($98) {
+              return Element$prime.create($97($98));
             };
           }(),
           giveNewParent: function(q) {
@@ -5269,11 +5276,11 @@ var portal = function() {
             };
           },
           deleteFromCache: function() {
-            var $93 = unwrap();
-            return function($94) {
+            var $99 = unwrap();
+            return function($100) {
               return function(v) {
                 return v.deleteFromCache;
-              }($93($94));
+              }($99($100));
             };
           }()
         })(a2)(lcmap(profunctorFn)(map(functorVect)(function(v) {
@@ -8540,8 +8547,8 @@ import Data.Maybe (Maybe(..))
 import Data.Profunctor (lcmap)
 import Data.Tuple.Nested ((/\\))
 import Deku.Attribute (cb, (:=))
-import Deku.Control (text_)
-import Deku.Core (Child(..), dyn)
+import Deku.Control (text_, dyn_)
+import Deku.Core (Child(..))
 import Deku.DOM as D
 import Deku.Toplevel (runInBody1)
 import Effect (Effect)
@@ -8584,8 +8591,7 @@ main = runInBody1
           ]
       D.div_
         [ D.div_ top
-        , D.div_
-            [ dyn $
+        , dyn_ D.div $
                 map
                   ( \\txt -> keepLatest $ bus \\p' e' ->
                       ( bang $ Insert $ D.div_
@@ -8617,7 +8623,6 @@ main = runInBody1
                           ""
                       )
                   )
-            ]
         ]
   )
 `)])])),
@@ -8633,7 +8638,7 @@ main = runInBody1
             return for_(applicativeEffect)(foldableMaybe)(fromEvent(e))(function(evt) {
               return when(applicativeEffect)(code2(evt) === "Enter")(push2(AddTodo.value));
             });
-          }))]))([]), button(dictKorok)(alt(altEvent(dictKorok.MonadST5().Monad0().Applicative0()))(bang2(dictKorok.MonadST5().Monad0().Applicative0())(attr(attrButton_StyleString)(Style.value)("margin: 5px;")))(bang2(dictKorok.MonadST5().Monad0().Applicative0())(attr(attrOnClickCb)(OnClick.value)(cb($$const(push2(AddTodo.value)))))))([text_(dictKorok.MonadST5().Monad0())("Add")])]), div_(dictKorok)([dyn(map(functorEvent)(function(txt) {
+          }))]))([]), button(dictKorok)(alt(altEvent(dictKorok.MonadST5().Monad0().Applicative0()))(bang2(dictKorok.MonadST5().Monad0().Applicative0())(attr(attrButton_StyleString)(Style.value)("margin: 5px;")))(bang2(dictKorok.MonadST5().Monad0().Applicative0())(attr(attrOnClickCb)(OnClick.value)(cb($$const(push2(AddTodo.value)))))))([text_(dictKorok.MonadST5().Monad0())("Add")])]), dyn_(dictKorok)(div2(dictKorok))(map(functorEvent)(function(txt) {
             return keepLatest(eventIsEvent(dictKorok.MonadST5()))(bus2(dictKorok)(dictKorok.Always2())(function(p$prime) {
               return function(e$prime) {
                 return alt(altEvent(dictKorok.MonadST5().Monad0().Applicative0()))(bang2(dictKorok.MonadST5().Monad0().Applicative0())(insert4(div_(dictKorok)([span(dictKorok)(bang2(dictKorok.MonadST5().Monad0().Applicative0())(attr(attrSpan_StyleString)(Style.value)("margin: 5px;")))([text_(dictKorok.MonadST5().Monad0())(txt)]), button(dictKorok)(alt(altEvent(dictKorok.MonadST5().Monad0().Applicative0()))(bang2(dictKorok.MonadST5().Monad0().Applicative0())(attr(attrButton_StyleString)(Style.value)("margin: 5px;")))(bang2(dictKorok.MonadST5().Monad0().Applicative0())(attr(attrOnClickCb)(OnClick.value)(cb($$const(p$prime(sendToTop)))))))([text_(dictKorok.MonadST5().Monad0())("Prioritize")]), button(dictKorok)(alt(altEvent(dictKorok.MonadST5().Monad0().Applicative0()))(bang2(dictKorok.MonadST5().Monad0().Applicative0())(attr(attrButton_StyleString)(Style.value)("margin: 5px;")))(bang2(dictKorok.MonadST5().Monad0().Applicative0())(attr(attrOnClickCb)(OnClick.value)(cb($$const(p$prime(remove)))))))([text_(dictKorok.MonadST5().Monad0())("Delete")])]))))(e$prime);
@@ -8657,7 +8662,7 @@ main = runInBody1
               ;
               return new Tuple("", new Tuple(false, ""));
             };
-          })(event)(""))))])]);
+          })(event)(""))))]);
         });
       })),
       next: oneOfMap(foldableArray)(plusEvent(dictKorok.MonadST5().Monad0().Applicative0()))(bang2(dictKorok.MonadST5().Monad0().Applicative0()))([attr(attrOnClickCb)(OnClick.value)(cb(function(e) {
