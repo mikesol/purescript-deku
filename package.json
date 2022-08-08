@@ -23,6 +23,7 @@
 		"filter-console": "^0.1.1",
 		"headless-devtools": "^2.0.1",
 		"netlify-cli": "^8.0.1",
+		"parcel": "^2.7.0",
 		"psc-package": "^4.0.1",
 		"pulp": "^15.0.0",
 		"puppeteer": "^5.2.0",

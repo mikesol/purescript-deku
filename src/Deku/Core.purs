@@ -25,7 +25,6 @@ module Deku.Core
   , sendToTop
   , sendToPos
   , insert
-  , class Korok
   , Domable
   , Node(..)
   ) where
@@ -52,34 +51,18 @@ import FRP.Event as FRP.Event
 import FRP.Event.VBus (class VBus, V, vbus)
 import Foreign.Object (Object)
 import Heterogeneous.Mapping (class MapRecordWithIndex, ConstMapping)
+import Mermaid (Mermaid)
 import Prim.RowList (class RowToList)
 import Type.Proxy (Proxy(..))
 import Web.DOM as Web.DOM
 
-class
-  ( Always (m Unit) (Effect Unit)
-  , Always (m (m Unit)) (Effect (Effect Unit))
-  , Always (m Unit) (Effect Unit)
-  , Always (Endo Function (Effect (Effect Unit))) (Endo Function (m (m Unit)))
-  , Always (Endo Function (Effect Unit)) (Endo Function (m Unit))
-  , MonadST s m
-  ) <=
-  Korok s m
-  | m -> s
-
-instance Korok s (ST s)
-instance Korok Global Effect
-
-type Nut =
-  forall s m lock payload
-   . Korok s m
-  => Domable m lock payload
+type Nut = forall s m lock payload. MonadST s m => Domable m lock payload
 
 newtype ANut = ANut Nut
 
 bus
   :: forall a b s m
-   . Korok s m
+   . MonadST s m
   => Always (m Unit) (Effect Unit)
   => ((a -> Effect Unit) -> AnEvent m a -> b)
   -> AnEvent m b
@@ -87,7 +70,7 @@ bus f = FRP.Event.bus (lcmap (map (always :: m Unit -> Effect Unit)) f)
 
 busUncurried
   :: forall a b s m
-   . Korok s m
+   . MonadST s m
   => Always (m Unit) (Effect Unit)
   => (((a -> Effect Unit) /\ AnEvent m a) -> b)
   -> AnEvent m b
@@ -95,7 +78,7 @@ busUncurried = curry >>> bus
 
 bussed
   :: forall s m lock logic obj a
-   . Korok s m
+   . MonadST s m
   => Always (m Unit) (Effect Unit)
   => ((a -> Effect Unit) -> AnEvent m a -> Bolson.Entity logic obj m lock)
   -> Bolson.Entity logic obj m lock
@@ -103,7 +86,7 @@ bussed f = Bolson.EventfulElement' (Bolson.EventfulElement (bus f))
 
 bussedUncurried
   :: forall s m lock logic obj a
-   . Korok s m
+   . MonadST s m
   => Always (m Unit) (Effect Unit)
   => (((a -> Effect Unit) /\ AnEvent m a) -> Bolson.Entity logic obj m lock)
   -> Bolson.Entity logic obj m lock
@@ -112,7 +95,7 @@ bussedUncurried = curry >>> bussed
 vbussed
   :: forall s m logic obj lock rbus bus pushi pusho pushR event u
    . RowToList bus rbus
-  => Korok s m
+  => MonadST s m
   => RowToList pushi pushR
   => MapRecordWithIndex pushR
        (ConstMapping (AlwaysEffect m))
@@ -128,7 +111,7 @@ vbussed px f = Bolson.EventfulElement'
 vbussedUncurried
   :: forall s m logic obj lock rbus bus pushi pusho pushR event u
    . RowToList bus rbus
-  => Korok s m
+  => MonadST s m
   => RowToList pushi pushR
   => MapRecordWithIndex pushR
        (ConstMapping (AlwaysEffect m))

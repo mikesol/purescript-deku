@@ -5,6 +5,7 @@ import Prelude
 import Bolson.Control as Bolson
 import Bolson.Core (Element(..), Entity(..), PSR)
 import Control.Alt ((<|>))
+import Control.Monad.ST.Class (class MonadST)
 import Control.Plus (empty)
 import Data.Maybe (Maybe(..))
 import Data.Newtype (unwrap)
@@ -12,7 +13,7 @@ import Data.Profunctor (lcmap)
 import Data.Reflectable (class Reflectable, reflectType)
 import Data.Symbol (class IsSymbol)
 import Deku.Attribute (Attribute, AttributeValue(..), unsafeUnAttribute)
-import Deku.Core (DOMInterpret(..), class Korok, Domable, Node(..))
+import Deku.Core (DOMInterpret(..), Domable, Node(..))
 import Deku.DOM (class TagToDeku)
 import FRP.Event (AnEvent, bang, subscribe, makeEvent)
 import Foreign.Object as Object
@@ -4425,7 +4426,7 @@ instance pursxToElementConsInsert ::
   , PursxToElement m lock payload rest r
   , Reflectable key String
   , IsSymbol key
-  , Korok s m
+  , MonadST s m
   ) =>
   PursxToElement m
     lock
@@ -4456,7 +4457,7 @@ else instance pursxToElementConsAttr ::
   , PursxToElement m lock payload rest r
   , Reflectable key String
   , IsSymbol key
-  , Korok s m
+  , MonadST s m
   ) =>
   PursxToElement m
     lock
@@ -4499,7 +4500,7 @@ psx
   :: forall s m lock payload (html :: Symbol)
    . Reflectable html String
   => PXStart m lock payload "~" " " html ()
-  => Korok s m
+  => MonadST s m
   => PursxToElement m lock payload RL.Nil ()
   => Proxy html
   -> Domable m lock payload
@@ -4511,7 +4512,7 @@ makePursx
   => PXStart m lock payload "~" " " html r
   => RL.RowToList r rl
   => PursxToElement m lock payload rl r
-  => Korok s m
+  => MonadST s m
   => Proxy html
   -> { | r }
   -> Domable m lock payload
@@ -4523,7 +4524,7 @@ makePursx'
   => Reflectable verb String
   => PXStart m lock payload verb " " html r
   => RL.RowToList r rl
-  => Korok s m
+  => MonadST s m
   => PursxToElement m lock payload rl r
   => Proxy verb
   -> Proxy html
@@ -4561,7 +4562,7 @@ makePursx' verb html r = Element' $ Node go
 
 __internalDekuFlatten
   :: forall s m lock payload
-   . Korok s m
+   . MonadST s m
   => PSR m
   -> DOMInterpret m payload
   -> Domable m lock payload

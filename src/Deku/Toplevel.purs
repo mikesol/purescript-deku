@@ -5,15 +5,15 @@ import Prelude
 import Bolson.Control as Bolson
 import Bolson.Core (Element(..), PSR, Scope(..))
 import Control.Monad.ST (ST)
-import Control.Monad.ST.Class (class MonadST, liftST)
+import Control.Monad.ST.Class (class MonadST)
 import Control.Monad.ST.Global (Global, toEffect)
 import Control.Monad.ST.Internal as RRef
 import Data.Maybe (Maybe(..), maybe)
 import Data.Newtype (class Newtype, unwrap)
 import Data.Tuple.Nested (type (/\), (/\))
 import Deku.Control (deku, deku1, dekuA)
-import Deku.Core (class Korok, DOMInterpret(..), Domable, Node(..))
-import Deku.Interpret (FFIDOMSnapshot, Instruction, fullDOMInterpret, hydratingDOMInterpret, makeFFIDOMSnapshot, mermaidDOMInterpret, setHydrating, ssrDOMInterpret, unSetHydrating)
+import Deku.Core (DOMInterpret(..), Domable, Node(..))
+import Deku.Interpret (FFIDOMSnapshot, Instruction, fullDOMInterpret, hydratingDOMInterpret, makeFFIDOMSnapshot, mermaidDOMInterpret, setHydrating, unSetHydrating)
 import Deku.SSR (ssr')
 import Effect (Effect)
 import Effect.Ref as Ref
@@ -157,47 +157,6 @@ hydrateMermaid a = void (hydrateMermaid' a)
 newtype Template = Template { head :: String, tail :: String }
 
 derive instance Newtype Template _
-
-runSSR
-  :: forall s m
-   . Korok s m
-  => Template
-  -> ( forall lock
-        . Domable (ST s) lock
-            (RRef.STRef s (Array Instruction) -> ST s Unit)
-     )
-  -> m String
-runSSR = runSSR' "body"
-
-runSSR'
-  :: forall s m
-   . Korok s m
-  => String
-  -> Template
-  -> ( forall lock
-        . Domable (ST s) lock
-            (RRef.STRef s (Array Instruction) -> ST s Unit)
-     )
-  -> m String
-runSSR' topTag (Template { head, tail }) children =
-  (head <> _) <<< (_ <> tail) <<< ssr' topTag
-    <$> liftST
-      ( do
-          seed <- RRef.new 0
-          instr <- RRef.new []
-          let di = ssrDOMInterpret seed
-          void $ subscribe
-            ( __internalDekuFlatten
-                { parent: Just "deku-root"
-                , scope: Local "rootScope"
-                , raiseId: \_ -> pure unit
-                }
-                di
-                (unsafeCoerce children)
-            )
-            \i -> i instr
-          RRef.read instr
-      )
 
 runSSRMermaid
   :: Template

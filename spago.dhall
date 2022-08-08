@@ -2,6 +2,7 @@
 , dependencies =
   [ "arrays"
   , "bolson"
+  , "console"
   , "control"
   , "effect"
   , "fast-vect"
@@ -33,5 +34,5 @@
 , license = "Apache-2.0"
 , packages = ./packages.dhall
 , repository = "https://github.com/mikesol/purescript-deku"
-, sources = [ "src/**/*.purs" ]
+, sources = [ "src/**/*.purs", "live/**/*.purs" ]
 }

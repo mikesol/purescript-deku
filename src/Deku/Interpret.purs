@@ -199,26 +199,26 @@ mermaidDOMInterpret seed = Core.DOMInterpret
       void $ RRef.modify (add 1) seed
       pure o
   , makeElement: \a (b /\ c) -> do
-      liftPure $ ssrMakeElement a b
       liftImpure $ makeElement_ true a c
+      liftPure $ ssrMakeElement a b
   , attributeParent: \a (_ /\ c) -> do
       liftImpure $ attributeParent_ a c
   , makeRoot: \a (_ /\ c) -> do
       liftImpure $ makeRoot_ a c
   , makeText: \a (b /\ c) -> do
-      liftPure $ ssrMakeText a b
       liftImpure $ makeText_ true (maybe unit) a c
+      liftPure $ ssrMakeText a b
   , makePursx: \a (b /\ c) -> do
-      liftPure $ ssrMakePursx a b
       liftImpure $ makePursx_ true (maybe unit) a c
+      liftPure $ ssrMakePursx a b
   , setProp: \a (b /\ c) -> do
-      liftPure $ ssrSetProp a b
       liftImpure $ setProp_ true a c
+      liftPure $ ssrSetProp a b
   , setCb: \a (_ /\ c) -> do
       liftImpure $ setCb_ true a c
   , setText: \a (b /\ c) -> do
-      liftPure $ ssrSetText a b
       liftImpure $ setText_ a c
+      liftPure $ ssrSetText a b
   , sendToPos: \a (_ /\ c) -> do
       liftImpure $ sendToPos_ a c
   , deleteFromCache: \a (_ /\ c) -> do
