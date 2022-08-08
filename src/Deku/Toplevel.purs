@@ -10,7 +10,6 @@ import Control.Monad.ST.Global (Global, toEffect)
 import Control.Monad.ST.Internal as RRef
 import Data.Maybe (Maybe(..), maybe)
 import Data.Newtype (class Newtype, unwrap)
-import Data.Tuple.Nested (type (/\), (/\))
 import Deku.Control (deku, deku1, dekuA)
 import Deku.Core (DOMInterpret(..), Domable, Node(..))
 import Deku.Interpret (FFIDOMSnapshot, Instruction, fullDOMInterpret, makeFFIDOMSnapshot, mermaidDOMInterpret, setHydrating, unSetHydrating)
@@ -95,7 +94,7 @@ runInBodyA a = void (runInBodyA' a)
 hydrate'
   :: ( forall lock
         . Domable (Mermaid Global) lock
-            ( (RRef.STRef Global (Array Instruction)) /\ FFIDOMSnapshot
+            ( (RRef.STRef Global (Array Instruction)) -> FFIDOMSnapshot
               -> Mermaid Global Unit
             )
      )
@@ -114,14 +113,14 @@ hydrate' children = do
         di
         children
     )
-    (\k -> runImpure $ k (ins /\ ffi))
+    (\k -> runImpure $ k ins ffi)
   unSetHydrating ffi
   pure u
 
 hydrate
   :: ( forall lock
         . Domable (Mermaid Global) lock
-            ( (RRef.STRef Global (Array Instruction)) /\ FFIDOMSnapshot
+            ( (RRef.STRef Global (Array Instruction)) -> FFIDOMSnapshot
               -> Mermaid Global Unit
             )
      )
@@ -137,7 +136,7 @@ runSSR
   :: Template
   -> ( forall lock
         . Domable (Mermaid Global) lock
-            ( (RRef.STRef Global (Array Instruction)) /\ FFIDOMSnapshot
+            ( (RRef.STRef Global (Array Instruction)) -> FFIDOMSnapshot
               -> Mermaid Global Unit
             )
      )
@@ -149,7 +148,7 @@ runSSR'
   -> Template
   -> ( forall lock
         . Domable (Mermaid Global) lock
-            ( (RRef.STRef Global (Array Instruction)) /\ FFIDOMSnapshot
+            ( (RRef.STRef Global (Array Instruction)) -> FFIDOMSnapshot
               -> Mermaid Global Unit
             )
      )
@@ -170,7 +169,7 @@ runSSR' topTag (Template { head, tail }) children =
           dint
           children
       )
-      (\k -> runPure $ k (inst /\ ffi))
+      (\k -> runPure $ k inst ffi)
     RRef.read inst
 
 __internalDekuFlatten

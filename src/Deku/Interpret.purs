@@ -13,7 +13,6 @@ import Prelude
 import Control.Monad.ST (ST)
 import Control.Monad.ST.Internal as RRef
 import Data.Maybe (Maybe, maybe)
-import Data.Tuple.Nested (type (/\), (/\))
 import Deku.Core as Core
 import Effect (Effect)
 import Effect.Ref as Ref
@@ -136,7 +135,7 @@ mermaidDOMInterpret
   :: forall r
    . RRef.STRef r Int
   -> Core.DOMInterpret (Mermaid r)
-       (RRef.STRef r (Array Instruction) /\ FFIDOMSnapshot -> Mermaid r Unit)
+       (RRef.STRef r (Array Instruction) -> FFIDOMSnapshot -> Mermaid r Unit)
 mermaidDOMInterpret seed = Core.DOMInterpret
   { ids: liftPure do
       seed' <- RRef.read seed
@@ -145,33 +144,33 @@ mermaidDOMInterpret seed = Core.DOMInterpret
           { newSeed: mkSeed seed', size: 5 }
       void $ RRef.modify (add 1) seed
       pure o
-  , makeElement: \a (b /\ c) -> do
+  , makeElement: \a b c -> do
       liftImpure $ makeElement_ true a c
       liftPure $ ssrMakeElement a b
-  , attributeParent: \a (_ /\ c) -> do
+  , attributeParent: \a _ c -> do
       liftImpure $ attributeParent_ a c
-  , makeRoot: \a (_ /\ c) -> do
+  , makeRoot: \a _ c -> do
       liftImpure $ makeRoot_ a c
-  , makeText: \a (b /\ c) -> do
+  , makeText: \a b c -> do
       liftImpure $ makeText_ true (maybe unit) a c
       liftPure $ ssrMakeText a b
-  , makePursx: \a (b /\ c) -> do
+  , makePursx: \a b c -> do
       liftImpure $ makePursx_ true (maybe unit) a c
       liftPure $ ssrMakePursx a b
-  , setProp: \a (b /\ c) -> do
+  , setProp: \a b c -> do
       liftImpure $ setProp_ true a c
       liftPure $ ssrSetProp a b
-  , setCb: \a (_ /\ c) -> do
+  , setCb: \a _ c -> do
       liftImpure $ setCb_ true a c
-  , setText: \a (b /\ c) -> do
+  , setText: \a b c -> do
       liftImpure $ setText_ a c
       liftPure $ ssrSetText a b
-  , sendToPos: \a (_ /\ c) -> do
+  , sendToPos: \a _ c -> do
       liftImpure $ sendToPos_ a c
-  , deleteFromCache: \a (_ /\ c) -> do
+  , deleteFromCache: \a _ c -> do
       liftImpure $ deleteFromCache_ a c
-  , giveNewParent: \a (_ /\ c) -> do
+  , giveNewParent: \a _ c -> do
       liftImpure $ giveNewParent_ a c
-  , disconnectElement: \a (_ /\ c) -> do
+  , disconnectElement: \a _ c -> do
       liftImpure $ disconnectElement_ a c
   }
