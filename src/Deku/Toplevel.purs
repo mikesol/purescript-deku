@@ -94,7 +94,8 @@ runInBodyA a = void (runInBodyA' a)
 hydrate'
   :: ( forall lock
         . Domable (Mermaid Global) lock
-            ( (RRef.STRef Global (Array Instruction)) -> FFIDOMSnapshot
+            ( (RRef.STRef Global (Array Instruction))
+              -> FFIDOMSnapshot
               -> Mermaid Global Unit
             )
      )
@@ -120,7 +121,8 @@ hydrate' children = do
 hydrate
   :: ( forall lock
         . Domable (Mermaid Global) lock
-            ( (RRef.STRef Global (Array Instruction)) -> FFIDOMSnapshot
+            ( (RRef.STRef Global (Array Instruction))
+              -> FFIDOMSnapshot
               -> Mermaid Global Unit
             )
      )
@@ -136,7 +138,8 @@ runSSR
   :: Template
   -> ( forall lock
         . Domable (Mermaid Global) lock
-            ( (RRef.STRef Global (Array Instruction)) -> FFIDOMSnapshot
+            ( (RRef.STRef Global (Array Instruction))
+              -> FFIDOMSnapshot
               -> Mermaid Global Unit
             )
      )
@@ -148,7 +151,8 @@ runSSR'
   -> Template
   -> ( forall lock
         . Domable (Mermaid Global) lock
-            ( (RRef.STRef Global (Array Instruction)) -> FFIDOMSnapshot
+            ( (RRef.STRef Global (Array Instruction))
+              -> FFIDOMSnapshot
               -> Mermaid Global Unit
             )
      )
