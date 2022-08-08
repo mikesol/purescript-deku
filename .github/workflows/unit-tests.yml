@@ -28,5 +28,9 @@ jobs:
             ${{ hashFiles('examples.dhall') }}
       - name: Install dependencies
         run: npm ci
-      - name: Spago build examples
+      - name: Build examples
         run: npm run build:examples
+      - name: Build performance
+        run: npm run bundle:performance
+      - name: Test performance
+        run: npm run test:performance
