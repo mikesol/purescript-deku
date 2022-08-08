@@ -4,6 +4,7 @@ module Deku.Interpret
   , makeFFIDOMSnapshot
   , ssrDOMInterpret
   , hydratingDOMInterpret
+  , mermaidDOMInterpret
   , Instruction(..)
   , setHydrating
   , unSetHydrating
@@ -14,9 +15,11 @@ import Prelude
 import Control.Monad.ST (ST)
 import Control.Monad.ST.Internal as RRef
 import Data.Maybe (Maybe, maybe)
+import Data.Tuple.Nested (type (/\), (/\))
 import Deku.Core as Core
 import Effect (Effect)
 import Effect.Ref as Ref
+import Mermaid (Mermaid, liftImpure, liftPure)
 import Test.QuickCheck (arbitrary, mkSeed)
 import Test.QuickCheck.Gen (Gen, evalGen)
 
@@ -180,4 +183,48 @@ hydratingDOMInterpret seed = Core.DOMInterpret
   , deleteFromCache: deleteFromCache_
   , giveNewParent: giveNewParent_
   , disconnectElement: disconnectElement_
+  }
+
+mermaidDOMInterpret
+  :: forall r
+   . RRef.STRef r Int
+  -> Core.DOMInterpret (Mermaid r)
+       (RRef.STRef r (Array Instruction) /\ FFIDOMSnapshot -> Mermaid r Unit)
+mermaidDOMInterpret seed = Core.DOMInterpret
+  { ids: liftPure do
+      seed' <- RRef.read seed
+      let
+        o = show $ evalGen (arbitrary :: Gen Int)
+          { newSeed: mkSeed seed', size: 5 }
+      void $ RRef.modify (add 1) seed
+      pure o
+  , makeElement: \a (b /\ c) -> do
+      liftPure $ ssrMakeElement a b
+      liftImpure $ makeElement_ true a c
+  , attributeParent: \a (_ /\ c) -> do
+      liftImpure $ attributeParent_ a c
+  , makeRoot: \a (_ /\ c) -> do
+      liftImpure $ makeRoot_ a c
+  , makeText: \a (b /\ c) -> do
+      liftPure $ ssrMakeText a b
+      liftImpure $ makeText_ true (maybe unit) a c
+  , makePursx: \a (b /\ c) -> do
+      liftPure $ ssrMakePursx a b
+      liftImpure $ makePursx_ true (maybe unit) a c
+  , setProp: \a (b /\ c) -> do
+      liftPure $ ssrSetProp a b
+      liftImpure $ setProp_ true a c
+  , setCb: \a (_ /\ c) -> do
+      liftImpure $ setCb_ true a c
+  , setText: \a (b /\ c) -> do
+      liftPure $ ssrSetText a b
+      liftImpure $ setText_ a c
+  , sendToPos: \a (_ /\ c) -> do
+      liftImpure $ sendToPos_ a c
+  , deleteFromCache: \a (_ /\ c) -> do
+      liftImpure $ deleteFromCache_ a c
+  , giveNewParent: \a (_ /\ c) -> do
+      liftImpure $ giveNewParent_ a c
+  , disconnectElement: \a (_ /\ c) -> do
+      liftImpure $ disconnectElement_ a c
   }

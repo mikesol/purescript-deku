@@ -11,6 +11,7 @@
   , "heterogeneous"
   , "hyrule"
   , "maybe"
+  , "mermaid"
   , "monoid-extras"
   , "newtype"
   , "ordered-collections"

@@ -5,17 +5,21 @@ import Prelude
 import Bolson.Control as Bolson
 import Bolson.Core (Element(..), PSR, Scope(..))
 import Control.Monad.ST (ST)
-import Control.Monad.ST.Class (liftST)
+import Control.Monad.ST.Class (class MonadST, liftST)
+import Control.Monad.ST.Global (Global, toEffect)
 import Control.Monad.ST.Internal as RRef
 import Data.Maybe (Maybe(..), maybe)
 import Data.Newtype (class Newtype, unwrap)
+import Data.Tuple.Nested (type (/\), (/\))
 import Deku.Control (deku, deku1, dekuA)
 import Deku.Core (class Korok, DOMInterpret(..), Domable, Node(..))
-import Deku.Interpret (FFIDOMSnapshot, Instruction, fullDOMInterpret, hydratingDOMInterpret, makeFFIDOMSnapshot, setHydrating, ssrDOMInterpret, unSetHydrating)
+import Deku.Interpret (FFIDOMSnapshot, Instruction, fullDOMInterpret, hydratingDOMInterpret, makeFFIDOMSnapshot, mermaidDOMInterpret, setHydrating, ssrDOMInterpret, unSetHydrating)
 import Deku.SSR (ssr')
 import Effect (Effect)
 import Effect.Ref as Ref
 import FRP.Event (AnEvent, Event, subscribe)
+import Mermaid (Mermaid, runImpure, runPure)
+import Mermaid.Hyrule (toEfEvent, toStEvent)
 import Unsafe.Coerce (unsafeCoerce)
 import Web.DOM.Element as Web.DOM
 import Web.HTML (window)
@@ -113,6 +117,42 @@ hydrate
   -> Effect Unit
 hydrate a = void (hydrate' a)
 
+hydrateMermaid'
+  :: ( forall lock
+        . Domable (Mermaid Global) lock
+            ( (RRef.STRef Global (Array Instruction)) /\ FFIDOMSnapshot
+              -> Mermaid Global Unit
+            )
+     )
+  -> Effect (Effect Unit)
+hydrateMermaid' children = do
+  ffi <- makeFFIDOMSnapshot
+  ins <- toEffect $ RRef.new []
+  di <- toEffect $ RRef.new 0 <#> mermaidDOMInterpret
+  setHydrating ffi
+  u <- subscribe
+    ( toEfEvent $ __internalDekuFlatten
+        { parent: Just "deku-root"
+        , scope: Local "rootScope"
+        , raiseId: \_ -> pure unit
+        }
+        di
+        children
+    )
+    (\k -> runImpure $ k (ins /\ ffi))
+  unSetHydrating ffi
+  pure u
+
+hydrateMermaid
+  :: ( forall lock
+        . Domable (Mermaid Global) lock
+            ( (RRef.STRef Global (Array Instruction)) /\ FFIDOMSnapshot
+              -> Mermaid Global Unit
+            )
+     )
+  -> Effect Unit
+hydrateMermaid a = void (hydrateMermaid' a)
+
 --
 newtype Template = Template { head :: String, tail :: String }
 
@@ -159,9 +199,49 @@ runSSR' topTag (Template { head, tail }) children =
           RRef.read instr
       )
 
+runSSRMermaid
+  :: Template
+  -> ( forall lock
+        . Domable (Mermaid Global) lock
+            ( (RRef.STRef Global (Array Instruction)) /\ FFIDOMSnapshot
+              -> Mermaid Global Unit
+            )
+     )
+  -> ST Global String
+runSSRMermaid = runSSRMermaid' "body"
+
+runSSRMermaid'
+  :: String
+  -> Template
+  -> ( forall lock
+        . Domable (Mermaid Global) lock
+            ( (RRef.STRef Global (Array Instruction)) /\ FFIDOMSnapshot
+              -> Mermaid Global Unit
+            )
+     )
+  -> ST Global String
+runSSRMermaid' topTag (Template { head, tail }) children =
+  (head <> _) <<< (_ <> tail) <<< ssr' topTag <$> do
+    let
+      ffi :: FFIDOMSnapshot
+      ffi = unsafeCoerce { units: {}, scopes: {} }
+    inst <- RRef.new []
+    dint <- RRef.new 0 <#> mermaidDOMInterpret
+    void $ subscribe
+      ( toStEvent $ __internalDekuFlatten
+          { parent: Just "deku-root"
+          , scope: Local "rootScope"
+          , raiseId: \_ -> pure unit
+          }
+          dint
+          children
+      )
+      (\k -> runPure $ k (inst /\ ffi))
+    RRef.read inst
+
 __internalDekuFlatten
   :: forall s m lock payload
-   . Korok s m
+   . MonadST s m
   => PSR m
   -> DOMInterpret m payload
   -> Domable m lock payload
