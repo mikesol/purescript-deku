@@ -141,7 +141,7 @@ vbussedUncurried
 vbussedUncurried px = curry >>> vbussed px
 
 newtype Node m (lock :: Type) payload = Node
-  (Bolson.PSR m -> DOMInterpret m payload -> AnEvent m payload)
+  (Bolson.PSR m (pos :: Maybe Int) -> DOMInterpret m payload -> AnEvent m payload)
 
 type Domable m lock payload = Bolson.Entity Int (Node m lock payload) m lock
 
@@ -170,6 +170,7 @@ type MakeElement =
 type AttributeParent =
   { id :: String
   , parent :: String
+  , pos :: Maybe Int
   }
 
 type GiveNewParent =
