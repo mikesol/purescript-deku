@@ -93,31 +93,6 @@ runInBodyA a = void (runInBodyA' a)
 --
 
 hydrate'
-  :: (forall lock. Domable Effect lock (FFIDOMSnapshot -> Effect Unit))
-  -> Effect (Effect Unit)
-hydrate' children = do
-  ffi <- makeFFIDOMSnapshot
-  di <- Ref.new 0 <#> hydratingDOMInterpret
-  setHydrating ffi
-  u <- subscribe
-    ( __internalDekuFlatten
-        { parent: Just "deku-root"
-        , scope: Local "rootScope"
-        , raiseId: \_ -> pure unit
-        }
-        di
-        (unsafeCoerce children)
-    )
-    \i -> i ffi
-  unSetHydrating ffi
-  pure u
-
-hydrate
-  :: (forall lock. Domable Effect lock (FFIDOMSnapshot -> Effect Unit))
-  -> Effect Unit
-hydrate a = void (hydrate' a)
-
-hydrateMermaid'
   :: ( forall lock
         . Domable (Mermaid Global) lock
             ( (RRef.STRef Global (Array Instruction)) /\ FFIDOMSnapshot
@@ -125,7 +100,7 @@ hydrateMermaid'
             )
      )
   -> Effect (Effect Unit)
-hydrateMermaid' children = do
+hydrate' children = do
   ffi <- makeFFIDOMSnapshot
   ins <- toEffect $ RRef.new []
   di <- toEffect $ RRef.new 0 <#> mermaidDOMInterpret
@@ -143,7 +118,7 @@ hydrateMermaid' children = do
   unSetHydrating ffi
   pure u
 
-hydrateMermaid
+hydrate
   :: ( forall lock
         . Domable (Mermaid Global) lock
             ( (RRef.STRef Global (Array Instruction)) /\ FFIDOMSnapshot
@@ -151,14 +126,14 @@ hydrateMermaid
             )
      )
   -> Effect Unit
-hydrateMermaid a = void (hydrateMermaid' a)
+hydrate a = void (hydrate' a)
 
 --
 newtype Template = Template { head :: String, tail :: String }
 
 derive instance Newtype Template _
 
-runSSRMermaid
+runSSR
   :: Template
   -> ( forall lock
         . Domable (Mermaid Global) lock
@@ -167,9 +142,9 @@ runSSRMermaid
             )
      )
   -> ST Global String
-runSSRMermaid = runSSRMermaid' "body"
+runSSR = runSSR' "body"
 
-runSSRMermaid'
+runSSR'
   :: String
   -> Template
   -> ( forall lock
@@ -179,7 +154,7 @@ runSSRMermaid'
             )
      )
   -> ST Global String
-runSSRMermaid' topTag (Template { head, tail }) children =
+runSSR' topTag (Template { head, tail }) children =
   (head <> _) <<< (_ <> tail) <<< ssr' topTag <$> do
     let
       ffi :: FFIDOMSnapshot
