@@ -51,7 +51,9 @@ import Partial.Unsafe (unsafePartial)
 import Web.HTML (HTMLElement)
 
 -- | Turn off noisy messages from the Puppeteer tests
-foreign import filterConsole :: Effect Unit
+foreign import filterConsoleImpl :: Effect Unit
+
+filterConsole = filterConsoleImpl :: Effect Unit
 
 -- | An instance of a Puppeteer browser, which should be created at
 -- | the start of any Puppeteer session and closed at the end.
@@ -245,7 +247,10 @@ readScriptingTime fp = do
     Left err -> throw $ printJsonDecodeError err
     Right val -> pure $ Milliseconds $ round $ fromMaybe 0.0 val
 
-foreign import tracealyzer :: FilePath -> Effect Json
+foreign import tracealyzerImpl :: FilePath -> Effect Json
+
+tracealyzer :: FilePath -> Effect Json
+tracealyzer = tracealyzerImpl
 
 toAffE1 :: forall a b. EffectFn1 a (Promise b) -> a -> Aff b
 toAffE1 fn = toAffE <<< runEffectFn1 fn
