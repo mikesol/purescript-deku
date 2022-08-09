@@ -179,6 +179,7 @@ instance pursxToElementConsInsert ::
             { parent: Just (reflectType pxk <> pxScope)
             , scope: info.scope
             , raiseId: \_ -> pure unit
+            , pos: info.pos
             }
             di
             pxe
@@ -299,7 +300,7 @@ makePursx' verb html r = Element' $ Node go
 __internalDekuFlatten
   :: forall s m lock payload
    . Korok s m
-  => PSR m
+  => PSR m (pos :: Maybe Int)
   -> DOMInterpret m payload
   -> Domable m lock payload
   -> AnEvent m payload

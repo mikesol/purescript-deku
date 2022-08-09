@@ -10,6 +10,7 @@ in      conf
               , "node-process"
               , "filterable"
               , "node-fs"
+              , "datetime"
               , "affjax-web"
               , "node-buffer"
               , "argonaut"

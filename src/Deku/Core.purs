@@ -1,6 +1,5 @@
 module Deku.Core
-  ( module Bolson.Core
-  , DOMInterpret(..)
+  ( DOMInterpret(..)
   , MakeRoot
   , MakeElement
   , AttributeParent
@@ -25,6 +24,7 @@ module Deku.Core
   , sendToTop
   , sendToPos
   , insert
+  , insert_
   , class Korok
   , Domable
   , Node(..)
@@ -33,12 +33,12 @@ module Deku.Core
 import Prelude
 
 import Bolson.Always (AlwaysEffect, halways)
-import Bolson.Core (Scope, fixed, dyn, envy)
+import Bolson.Core (Scope)
 import Bolson.Core as Bolson
 import Control.Monad.ST (ST)
 import Control.Monad.ST.Class (class MonadST)
 import Control.Monad.ST.Global (Global)
-import Data.Maybe (Maybe)
+import Data.Maybe (Maybe(..))
 import Data.Monoid.Always (class Always, always)
 import Data.Monoid.Endo (Endo)
 import Data.Newtype (class Newtype)
@@ -141,15 +141,27 @@ vbussedUncurried
 vbussedUncurried px = curry >>> vbussed px
 
 newtype Node m (lock :: Type) payload = Node
-  (Bolson.PSR m -> DOMInterpret m payload -> AnEvent m payload)
+  ( Bolson.PSR m (pos :: Maybe Int)
+    -> DOMInterpret m payload
+    -> AnEvent m payload
+  )
 
 type Domable m lock payload = Bolson.Entity Int (Node m lock payload) m lock
 
 insert
-  :: forall logic obj m lock
-   . Bolson.Entity logic obj m lock
-  -> Bolson.Child logic obj m lock
-insert = Bolson.Insert
+  :: forall logic m lock payload
+   . Int
+  -> Bolson.Entity logic (Node m lock payload) m lock
+  -> Bolson.Child logic (Node m lock payload) m lock
+insert i e = Bolson.Insert case e of
+  Bolson.Element' (Node e') -> Bolson.Element' (Node (lcmap (_ { pos = Just i}) e'))
+  _ -> e
+
+insert_
+  :: forall logic m lock payload
+   . Bolson.Entity logic (Node m lock payload) m lock
+  -> Bolson.Child logic (Node m lock payload) m lock
+insert_ = Bolson.Insert
 
 remove :: forall logic obj m lock. Bolson.Child logic obj m lock
 remove = Bolson.Remove
@@ -170,6 +182,7 @@ type MakeElement =
 type AttributeParent =
   { id :: String
   , parent :: String
+  , pos :: Maybe Int
   }
 
 type GiveNewParent =

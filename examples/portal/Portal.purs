@@ -8,8 +8,8 @@ import Data.FastVect.FastVect as V
 import Data.Foldable (oneOfMap)
 import Data.Profunctor (lcmap)
 import Deku.Attribute (cb, (:=))
-import Deku.Control (portal, switcher, text_)
-import Deku.Core (dyn, insert)
+import Deku.Control (dyn_, portal, switcher, text_)
+import Deku.Core (insert_)
 import Deku.DOM as D
 import Deku.Toplevel (runInBody)
 import Effect (Effect)
@@ -24,10 +24,9 @@ main = runInBody
       , D.div_
           [ text_ "Switching portals should flip between them"
           , D.div_
-              [ dyn $ bus \push -> lcmap (alt (bang unit)) \event -> bang
-                  $ insert
-                  $
-                    portal
+              [ dyn_ D.div $ bus \push -> lcmap (alt (bang unit)) \event -> bang
+                  $ insert_
+                  $ portal
                       ( map
                           ( \i -> D.video
                               ( oneOfMap bang
@@ -64,10 +63,9 @@ main = runInBody
       , D.div_
           [ text_ "Single portals should not accumulate"
           , D.div_
-              [ dyn $ bus \push -> lcmap (alt (bang unit)) \event -> bang
-                  $ insert
-                  $
-                    portal
+              [ dyn_ D.div $ bus \push -> lcmap (alt (bang unit)) \event -> bang
+                  $ insert_
+                  $ portal
                       ( map
                           ( \i -> D.video
                               ( oneOfMap bang
@@ -103,10 +101,9 @@ main = runInBody
       , D.div_
           [ text_ "Portal should come in and out"
           , D.div_
-              [ dyn $ bus \push -> lcmap (alt (bang unit)) \event -> bang
-                  $ insert
-                  $
-                    portal
+              [ dyn_ D.div $ bus \push -> lcmap (alt (bang unit)) \event -> bang
+                  $ insert_
+                  $ portal
                       ( map
                           ( \i -> D.video
                               ( oneOfMap bang

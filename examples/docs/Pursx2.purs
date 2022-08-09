@@ -7,8 +7,8 @@ import Data.Compactable (compact)
 import Data.Foldable (oneOfMap)
 import Data.Maybe (Maybe(..))
 import Deku.Attribute (cb, (:=))
-import Deku.Control (text, text_)
-import Deku.Core (dyn, insert, Nut, bus)
+import Deku.Control (dyn_, text, text_)
+import Deku.Core (insert_, Nut, bus)
 import Deku.DOM as D
 import Deku.Example.Docs.Types (Page(..), PageOptions)
 import Deku.Example.Docs.Util (scrollToTop)
@@ -122,8 +122,8 @@ main = runInBody1
           ]
       )
   , result: nut
-      ( dyn $ bus \push event ->
-          bang $ insert $ myDom ~~
+      ( dyn_ D.div $ bus \push event ->
+          bang $ insert_ $ myDom ~~
             { myli: bang (D.Style := "background-color:rgb(200,240,210);")
             , somethingNew: nut
                 ( D.button (bang (D.OnClick := push (Just unit)))

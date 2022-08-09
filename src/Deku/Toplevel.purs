@@ -100,6 +100,7 @@ hydrate' children = do
         { parent: Just "deku-root"
         , scope: Local "rootScope"
         , raiseId: \_ -> pure unit
+        , pos: Nothing
         }
         di
         (unsafeCoerce children)
@@ -151,6 +152,7 @@ runSSR' topTag (Template { head, tail }) children =
                 { parent: Just "deku-root"
                 , scope: Local "rootScope"
                 , raiseId: \_ -> pure unit
+                , pos: Nothing
                 }
                 di
                 (unsafeCoerce children)
@@ -162,7 +164,7 @@ runSSR' topTag (Template { head, tail }) children =
 __internalDekuFlatten
   :: forall s m lock payload
    . Korok s m
-  => PSR m
+  => PSR m (pos :: Maybe Int)
   -> DOMInterpret m payload
   -> Domable m lock payload
   -> AnEvent m payload

@@ -27,7 +27,7 @@ import Control.Plus (empty)
 import Data.FastVect.FastVect (Vect)
 import Data.Foldable (oneOf)
 import Data.Maybe (Maybe(..), maybe)
-import Data.Newtype (class Newtype, unwrap)
+import Data.Newtype (unwrap)
 import Data.Profunctor (lcmap)
 import Deku.Attribute (Attribute, AttributeValue(..), unsafeUnAttribute)
 import Deku.Core (class Korok, DOMInterpret(..), Domable, Node(..))
@@ -51,7 +51,7 @@ unsafeElement (DOMInterpret { makeElement }) = makeElement
 unsafeConnect
   :: forall m payload
    . DOMInterpret m payload
-  -> { id :: String, parent :: String }
+  -> { id :: String, parent :: String, pos :: Maybe Int }
   -> payload
 unsafeConnect (DOMInterpret { attributeParent }) = attributeParent
 
@@ -96,11 +96,11 @@ elementify
   -> Node m lock payload
 elementify tag atts children = Node go
   where
-  go { parent, scope, raiseId } di@(DOMInterpret { ids, deleteFromCache }) =
+  go { parent, scope, raiseId, pos } di@(DOMInterpret { ids, deleteFromCache }) =
     makeEvent \k -> do
       me <- ids
       raiseId me
-      map ((*>) (k (deleteFromCache { id: me }))) $ subscribe
+      map ((k (deleteFromCache { id: me })) *> _) $ subscribe
         ( ( oneOf
               ( [ bang (unsafeElement di { id: me, parent, scope, tag })
                 , unsafeSetAttribute di me atts
@@ -108,14 +108,14 @@ elementify tag atts children = Node go
                   ( \p ->
                       [ bang
                           $ unsafeConnect di
-                          $ { id: me, parent: p }
+                          $ { id: me, parent: p, pos }
                       ]
                   )
                   parent
               )
           )
             <|> __internalDekuFlatten
-              { parent: Just me, scope, raiseId: \_ -> pure unit }
+              { parent: Just me, scope, raiseId: \_ -> pure unit, pos: Nothing }
               di
               children
         )
@@ -140,27 +140,6 @@ globalPortal v c = Bolson.globalPortalComplexComplex
   v
   (lcmap (map (_ $ unit)) c)
 
-portalFlatten
-  :: forall m151 payload152 b159 d161 t165 m168 t174 t176 m183 lock184 lock188
-       payload189
-   . Newtype b159
-       { ids :: d161
-       | t165
-       }
-  => { disconnectElement ::
-         DOMInterpret m168 t174
-         -> { id :: String
-            , parent :: String
-            , scope :: Scope
-            | t176
-            }
-         -> t174
-     , doLogic :: Int -> DOMInterpret m151 payload152 -> String -> payload152
-     , ids :: b159 -> d161
-     , toElt ::
-         Node m183 lock184 payload189
-         -> Element (DOMInterpret m183 payload189) m183 lock188 payload189
-     }
 portalFlatten =
   { doLogic: \pos (DOMInterpret { sendToPos }) id -> sendToPos { id, pos }
   , ids: unwrap >>> _.ids
@@ -230,6 +209,7 @@ deku root children di@(DOMInterpret { ids, makeRoot }) = makeEvent \k -> do
           { parent: Just me
           , scope: Local "rootScope"
           , raiseId: \_ -> pure unit
+          , pos: Nothing
           }
           di
           (unsafeCoerce children)
@@ -259,7 +239,7 @@ data Stage = Begin | Middle | End
 __internalDekuFlatten
   :: forall s m lock payload
    . Korok s m
-  => PSR m
+  => PSR m (pos :: Maybe Int)
   -> DOMInterpret m payload
   -> Domable m lock payload
   -> AnEvent m payload
