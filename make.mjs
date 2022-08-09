@@ -4713,7 +4713,7 @@ var sendToTop = /* @__PURE__ */ function() {
 var remove = /* @__PURE__ */ function() {
   return Remove.value;
 }();
-var insert4 = /* @__PURE__ */ function() {
+var insert_ = /* @__PURE__ */ function() {
   return Insert.create;
 }();
 var bus2 = function(dictKorok) {
@@ -4831,9 +4831,9 @@ var switcher = function(dictMonadST) {
       return new DynamicChildren$prime(keepLatest(eventIsEvent(dictMonadST))(memoize(dictMonadST)(counter(event))(function(cenv) {
         return map(functorEvent)(function(v) {
           return alt(altEvent(dictMonadST.Monad0().Applicative0()))(bang(eventIsEvent(dictMonadST))(new Insert(f(v.value0))))(map(functorEvent)($$const(Remove.value))(filter4(filterableEvent(dictMonadST.Monad0().Applicative0()))(function() {
-            var $117 = eq(eqInt)(v.value1 + 1 | 0);
-            return function($118) {
-              return $117(snd($118));
+            var $137 = eq(eqInt)(v.value1 + 1 | 0);
+            return function($138) {
+              return $137(snd($138));
             };
           }())(cenv)));
         })(cenv);
@@ -4878,9 +4878,9 @@ var flatten = function(dictApplicative) {
                                       return bind(dictMonadST.Monad0().Bind1())(liftST(dictMonadST)(read2(stageRef)))(function(stage) {
                                         if (kid$prime instanceof Logic && stage instanceof Middle) {
                                           return bind(dictMonadST.Monad0().Bind1())(liftST(dictMonadST)(read2(myIds)))(traverse_(dictApplicative)(foldableArray)(function() {
-                                            var $119 = v.doLogic(kid$prime.value0)(interpreter);
-                                            return function($120) {
-                                              return v2($119($120));
+                                            var $139 = v.doLogic(kid$prime.value0)(interpreter);
+                                            return function($140) {
+                                              return v2($139($140));
                                             };
                                           }()));
                                         }
@@ -4902,13 +4902,21 @@ var flatten = function(dictApplicative) {
                                         ;
                                         if (kid$prime instanceof Insert && stage instanceof Begin) {
                                           return discard(discardUnit)(dictMonadST.Monad0().Bind1())($$void(dictApplicative.Apply0().Functor0())(liftST(dictMonadST)(write2(Middle.value)(stageRef))))(function() {
-                                            return bind(dictMonadST.Monad0().Bind1())(subscribe(flatten(dictApplicative)(dictMonadST)(v)({
-                                              parent: psr.parent,
-                                              scope: myScope,
-                                              raiseId: function(id2) {
-                                                return $$void(dictApplicative.Apply0().Functor0())(liftST(dictMonadST)(modify(append(semigroupArray)([id2]))(myIds)));
+                                            return bind(dictMonadST.Monad0().Bind1())(subscribe(flatten(dictApplicative)(dictMonadST)(v)(function() {
+                                              var $77 = {};
+                                              for (var $78 in psr) {
+                                                if ({}.hasOwnProperty.call(psr, $78)) {
+                                                  $77[$78] = psr[$78];
+                                                }
+                                                ;
                                               }
-                                            })(interpreter)(kid$prime.value0))(v2))(function(c1) {
+                                              ;
+                                              $77.scope = myScope;
+                                              $77.raiseId = function(id2) {
+                                                return $$void(dictApplicative.Apply0().Functor0())(liftST(dictMonadST)(modify(append(semigroupArray)([id2]))(myIds)));
+                                              };
+                                              return $77;
+                                            }())(interpreter)(kid$prime.value0))(v2))(function(c1) {
                                               return discard(discardUnit)(dictMonadST.Monad0().Bind1())($$void(dictApplicative.Apply0().Functor0())(liftST(dictMonadST)(modify(insert(eltsUnsubId)(c1))(cancelInner))))(function() {
                                                 return $$void(dictApplicative.Apply0().Functor0())(liftST(dictMonadST)(write2(c1)(eltsUnsub)));
                                               });
@@ -4942,7 +4950,7 @@ var flatten = function(dictApplicative) {
               });
             }
             ;
-            throw new Error("Failed pattern match at Bolson.Control (line 521, column 17 - line 604, column 20): " + [v1.constructor.name]);
+            throw new Error("Failed pattern match at Bolson.Control (line 531, column 17 - line 615, column 20): " + [v1.constructor.name]);
           };
         };
       };
@@ -4966,13 +4974,22 @@ var internalPortalComplexComplex = function() {
                             return function(i2) {
                               if (i2 instanceof Element$prime) {
                                 return function(v1) {
-                                  return v1({
-                                    parent: Nothing.value,
-                                    scope: scopeF(psr.scope),
-                                    raiseId: function(id2) {
-                                      return unsafeUpdateMutAr(ix)(id2)(av);
+                                  return v1(function() {
+                                    var $94 = {};
+                                    for (var $95 in psr) {
+                                      if ({}.hasOwnProperty.call(psr, $95)) {
+                                        $94[$95] = psr[$95];
+                                      }
+                                      ;
                                     }
-                                  })(interpreter);
+                                    ;
+                                    $94.parent = Nothing.value;
+                                    $94.scope = scopeF(psr.scope);
+                                    $94.raiseId = function(id2) {
+                                      return unsafeUpdateMutAr(ix)(id2)(av);
+                                    };
+                                    return $94;
+                                  }())(interpreter);
                                 }(v.toElt(i2.value0));
                               }
                               ;
@@ -5100,13 +5117,13 @@ var unsafeText = function(v) {
 var unsafeSetText = function(v) {
   return function(id2) {
     return function(txt) {
-      return map(functorEvent)(function($89) {
+      return map(functorEvent)(function($92) {
         return v.setText(function(v1) {
           return {
             id: id2,
             text: v1
           };
-        }($89));
+        }($92));
       })(txt);
     };
   };
@@ -5114,7 +5131,7 @@ var unsafeSetText = function(v) {
 var unsafeSetAttribute = function(v) {
   return function(id2) {
     return function(atts) {
-      return map(functorEvent)(function($90) {
+      return map(functorEvent)(function($93) {
         return function(v1) {
           if (v1.value instanceof Prop$prime) {
             return v.setProp({
@@ -5133,7 +5150,7 @@ var unsafeSetAttribute = function(v) {
           }
           ;
           throw new Error("Failed pattern match at Deku.Control (line 82, column 26 - line 84, column 45): " + [v1.value.constructor.name]);
-        }(unsafeUnAttribute($90));
+        }(unsafeUnAttribute($93));
       })(atts);
     };
   };
@@ -5171,7 +5188,7 @@ var text_ = function(dictMonad) {
     return text(dictMonad)(bang2(dictMonad.Applicative0())(txt));
   };
 };
-var portalFlatten = function() {
+var portalFlatten = function(dictNewtype) {
   return {
     doLogic: function(pos) {
       return function(v) {
@@ -5184,11 +5201,11 @@ var portalFlatten = function() {
       };
     },
     ids: function() {
-      var $91 = unwrap();
-      return function($92) {
+      var $94 = unwrap(dictNewtype);
+      return function($95) {
         return function(v) {
           return v.ids;
-        }($91($92));
+        }($94($95));
       };
     }(),
     disconnectElement: function(v) {
@@ -5225,9 +5242,11 @@ var elementify = function(dictKorok) {
             return makeEvent(function(k) {
               return bind(dictKorok.MonadST5().Monad0().Bind1())(v1.ids)(function(me) {
                 return discard(discardUnit)(dictKorok.MonadST5().Monad0().Bind1())(v.raiseId(me))(function() {
-                  return map(dictKorok.MonadST5().Monad0().Bind1().Apply0().Functor0())(applySecond(dictKorok.MonadST5().Monad0().Bind1().Apply0())(k(v1.deleteFromCache({
-                    id: me
-                  }))))(subscribe(alt(altEvent(dictKorok.MonadST5().Monad0().Applicative0()))(oneOf(foldableArray)(plusEvent(dictKorok.MonadST5().Monad0().Applicative0()))(append(semigroupArray)([bang2(dictKorok.MonadST5().Monad0().Applicative0())(unsafeElement(v1)({
+                  return map(dictKorok.MonadST5().Monad0().Bind1().Apply0().Functor0())(function(v2) {
+                    return applySecond(dictKorok.MonadST5().Monad0().Bind1().Apply0())(k(v1.deleteFromCache({
+                      id: me
+                    })))(v2);
+                  })(subscribe(alt(altEvent(dictKorok.MonadST5().Monad0().Applicative0()))(oneOf(foldableArray)(plusEvent(dictKorok.MonadST5().Monad0().Applicative0()))(append(semigroupArray)([bang2(dictKorok.MonadST5().Monad0().Applicative0())(unsafeElement(v1)({
                     id: me,
                     parent: v.parent,
                     scope: v.scope,
@@ -5235,14 +5254,16 @@ var elementify = function(dictKorok) {
                   })), unsafeSetAttribute(v1)(me)(atts)])(maybe([])(function(p2) {
                     return [bang2(dictKorok.MonadST5().Monad0().Applicative0())(unsafeConnect(v1)({
                       id: me,
-                      parent: p2
+                      parent: p2,
+                      pos: v.pos
                     }))];
                   })(v.parent))))(__internalDekuFlatten(dictKorok)({
                     parent: new Just(me),
                     scope: v.scope,
                     raiseId: function(v2) {
                       return pure(dictKorok.MonadST5().Monad0().Applicative0())(unit);
-                    }
+                    },
+                    pos: Nothing.value
                   })(v1)(children)))(k));
                 });
               });
@@ -5263,9 +5284,9 @@ var portal = function() {
           fromEltO2: coerce(),
           toElt: coerce(),
           wrapElt: function() {
-            var $97 = elementify(dictKorok)("div")(empty(plusEvent(dictKorok.MonadST5().Monad0().Applicative0())));
-            return function($98) {
-              return Element$prime.create($97($98));
+            var $100 = elementify(dictKorok)("div")(empty(plusEvent(dictKorok.MonadST5().Monad0().Applicative0())));
+            return function($101) {
+              return Element$prime.create($100($101));
             };
           }(),
           giveNewParent: function(q) {
@@ -5276,11 +5297,11 @@ var portal = function() {
             };
           },
           deleteFromCache: function() {
-            var $99 = unwrap();
-            return function($100) {
+            var $102 = unwrap();
+            return function($103) {
               return function(v) {
                 return v.deleteFromCache;
-              }($99($100));
+              }($102($103));
             };
           }()
         })(a2)(lcmap(profunctorFn)(map(functorVect)(function(v) {
@@ -5730,7 +5751,7 @@ var pursxToElementConsAttr = function() {
                             });
                           }
                           ;
-                          throw new Error("Failed pattern match at Deku.Pursx (line 4474, column 38 - line 4484, column 24): " + [v3.value.constructor.name]);
+                          throw new Error("Failed pattern match at Deku.Pursx (line 4475, column 38 - line 4485, column 24): " + [v3.value.constructor.name]);
                         }))(get(dictIsSymbol)()($$Proxy.value)(r)))(v1.element(parent2)(v2));
                       };
                     }
@@ -5869,7 +5890,8 @@ var pursxToElementConsInsert = function() {
                           scope: info2.scope,
                           raiseId: function(v3) {
                             return pure(dictKorok.MonadST5().Monad0().Applicative0())(unit);
-                          }
+                          },
+                          pos: info2.pos
                         })(di)(v1))(v2.element(info2)(di));
                       };
                     }
@@ -8641,7 +8663,7 @@ main = runInBody1
           }))]))([]), button(dictKorok)(alt(altEvent(dictKorok.MonadST5().Monad0().Applicative0()))(bang2(dictKorok.MonadST5().Monad0().Applicative0())(attr(attrButton_StyleString)(Style.value)("margin: 5px;")))(bang2(dictKorok.MonadST5().Monad0().Applicative0())(attr(attrOnClickCb)(OnClick.value)(cb($$const(push2(AddTodo.value)))))))([text_(dictKorok.MonadST5().Monad0())("Add")])]), dyn_(dictKorok)(div2(dictKorok))(map(functorEvent)(function(txt) {
             return keepLatest(eventIsEvent(dictKorok.MonadST5()))(bus2(dictKorok)(dictKorok.Always2())(function(p$prime) {
               return function(e$prime) {
-                return alt(altEvent(dictKorok.MonadST5().Monad0().Applicative0()))(bang2(dictKorok.MonadST5().Monad0().Applicative0())(insert4(div_(dictKorok)([span(dictKorok)(bang2(dictKorok.MonadST5().Monad0().Applicative0())(attr(attrSpan_StyleString)(Style.value)("margin: 5px;")))([text_(dictKorok.MonadST5().Monad0())(txt)]), button(dictKorok)(alt(altEvent(dictKorok.MonadST5().Monad0().Applicative0()))(bang2(dictKorok.MonadST5().Monad0().Applicative0())(attr(attrButton_StyleString)(Style.value)("margin: 5px;")))(bang2(dictKorok.MonadST5().Monad0().Applicative0())(attr(attrOnClickCb)(OnClick.value)(cb($$const(p$prime(sendToTop)))))))([text_(dictKorok.MonadST5().Monad0())("Prioritize")]), button(dictKorok)(alt(altEvent(dictKorok.MonadST5().Monad0().Applicative0()))(bang2(dictKorok.MonadST5().Monad0().Applicative0())(attr(attrButton_StyleString)(Style.value)("margin: 5px;")))(bang2(dictKorok.MonadST5().Monad0().Applicative0())(attr(attrOnClickCb)(OnClick.value)(cb($$const(p$prime(remove)))))))([text_(dictKorok.MonadST5().Monad0())("Delete")])]))))(e$prime);
+                return alt(altEvent(dictKorok.MonadST5().Monad0().Applicative0()))(bang2(dictKorok.MonadST5().Monad0().Applicative0())(insert_(div_(dictKorok)([span(dictKorok)(bang2(dictKorok.MonadST5().Monad0().Applicative0())(attr(attrSpan_StyleString)(Style.value)("margin: 5px;")))([text_(dictKorok.MonadST5().Monad0())(txt)]), button(dictKorok)(alt(altEvent(dictKorok.MonadST5().Monad0().Applicative0()))(bang2(dictKorok.MonadST5().Monad0().Applicative0())(attr(attrButton_StyleString)(Style.value)("margin: 5px;")))(bang2(dictKorok.MonadST5().Monad0().Applicative0())(attr(attrOnClickCb)(OnClick.value)(cb($$const(p$prime(sendToTop)))))))([text_(dictKorok.MonadST5().Monad0())("Prioritize")]), button(dictKorok)(alt(altEvent(dictKorok.MonadST5().Monad0().Applicative0()))(bang2(dictKorok.MonadST5().Monad0().Applicative0())(attr(attrButton_StyleString)(Style.value)("margin: 5px;")))(bang2(dictKorok.MonadST5().Monad0().Applicative0())(attr(attrOnClickCb)(OnClick.value)(cb($$const(p$prime(remove)))))))([text_(dictKorok.MonadST5().Monad0())("Delete")])]))))(e$prime);
               };
             }));
           })(filterMap(filterableEvent(dictKorok.MonadST5().Monad0().Applicative0()))(function(v) {
@@ -8914,9 +8936,9 @@ var portals1 = function(options2) {
       }
     })(dictKorok))(dictKorok)(px7)({
       code: nut(pre_(dictKorok)([code_(dictKorok)([text_(dictKorok.MonadST5().Monad0())('module Main where\n\nimport Prelude\n\nimport Control.Alt ((<|>))\nimport Data.Foldable (oneOfMap)\nimport Data.Profunctor (lcmap)\nimport Data.Tuple.Nested ((/\\), type (/\\))\nimport Data.FastVect.FastVect (index, (:))\nimport Data.FastVect.FastVect as V\nimport Deku.Attribute ((:=))\nimport Deku.Control (portal, switcher, text_)\nimport Deku.DOM as D\nimport Deku.Toplevel (runInBody1)\nimport Effect (Effect)\nimport FRP.Event (Event, bang, bus, fold, mapAccum)\nimport Type.Prelude (Proxy(..))\n\ncounter :: forall a. Event a \u2192 Event (a /\\ Int)\ncounter event = mapAccum f event 0\n  where\n  f a b = (b + 1) /\\ (a /\\ b)\n\nmain :: Effect Unit\nmain = runInBody1\n  ( bus \\push -> lcmap  (bang unit <|> _) \\event -> do\n      portal\n        ( map\n            ( \\i -> D.video\n                (oneOfMap bang [ D.Controls := "true", D.Width := "250" ])\n                [D.source\n                    (oneOfMap bang [ D.Src := i, D.Xtype := "video/mp4" ])\n                    []\n                ]\n            )\n            ( "https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4"\n                : "https://www.w3schools.com/jsref/movie.mp4"\n                : V.empty\n            )\n        )\n        \\v _ -> do\n          let\n            p0 = index (Proxy :: _ 0) v\n            p1 = index (Proxy :: _ 1) v\n            ev = fold (const not) event\n            flips = switcher (if _ then p0 else p1) <<< ev\n          D.div_\n            [ D.button (bang $ D.OnClick := push unit)\n                [ text_ "Switch videos" ]\n            , D.div_ [ D.span_ [flips true], D.span_ [flips false] ]\n            ]\n  )\n')])])),
-      result: nut(dyn(bus2(dictKorok)(dictKorok.Always2())(function(push2) {
+      result: nut(dyn_(dictKorok)(div2(dictKorok))(bus2(dictKorok)(dictKorok.Always2())(function(push2) {
         return lcmap(profunctorFn)(alt(altEvent(dictKorok.MonadST5().Monad0().Applicative0()))(bang2(dictKorok.MonadST5().Monad0().Applicative0())(unit)))(function(event) {
-          return bang2(dictKorok.MonadST5().Monad0().Applicative0())(insert4(portal()(dictKorok)(map(functorVect)(function(i2) {
+          return bang2(dictKorok.MonadST5().Monad0().Applicative0())(insert_(portal()(dictKorok)(map(functorVect)(function(i2) {
             return video(dictKorok)(oneOfMap(foldableArray)(plusEvent(dictKorok.MonadST5().Monad0().Applicative0()))(bang2(dictKorok.MonadST5().Monad0().Applicative0()))([attr(attrVideo_ControlsString)(Controls.value)("true"), attr(attrVideo_WidthString)(Width.value)("250")]))([source(dictKorok)(oneOfMap(foldableArray)(plusEvent(dictKorok.MonadST5().Monad0().Applicative0()))(bang2(dictKorok.MonadST5().Monad0().Applicative0()))([attr(attrSource_SrcString)(Src.value)(i2), attr(attrSource_XtypeString)(Xtype.value)("video/mp4")]))([])]);
           })(cons4()()("https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4")(cons4()()("https://www.w3schools.com/jsref/movie.mp4")(empty4))))(function(v) {
             return function(v1) {
@@ -9092,9 +9114,9 @@ var pursx2 = function(options2) {
       }
     })(dictKorok))($$Proxy.value)(px9)({
       code: nut(pre_(dictKorok)([code_(dictKorok)([text_(dictKorok.MonadST5().Monad0())('module Main where\n\nimport Prelude\n\nimport Control.Alt ((<|>))\nimport Data.Compactable (compact)\nimport Data.Maybe (Maybe(..))\nimport Deku.Attribute (cb, (:=))\nimport Deku.Control (text)\nimport Deku.DOM as D\nimport Deku.Pursx (nut, (~~))\nimport Deku.Toplevel (runInBody1)\nimport Effect (Effect)\nimport FRP.Event (bus, bang)\nimport Type.Proxy (Proxy(..))\n\nmyDom =\n  Proxy :: Proxy """<div>\n        <button>I do nothing</button>\n        <ul>\n          <li>A</li>\n          <li ~myli~>B</li>\n          <li>C</li>\n        </ul>\n        <div>\n          <a href="https://github.com/mikesol/purescript-deku"></a>\n          <i>bar</i>\n          ~somethingNew~\n          <span style="font-weight:800;">baz</span>\n        </div>\n        <div><div></div><div><input type="range"/></div></div>\n      </div>\n"""\n\nmain :: Effect Unit\nmain = runInBody1\n  ( bus \\push event -> myDom ~~\n      { myli: bang (D.Style := "background-color:rgb(200,240,210);")\n      , somethingNew: nut\n          ( D.button (bang (D.OnClick := push (Just unit)))\n              [ text\n                  $ (compact event $> "Thanks for clicking me!") <|>\n                    bang "I was dynamically inserted"\n              ]\n          )\n      }\n  )')])])),
-      result: nut(dyn(bus2(dictKorok)(dictKorok.Always2())(function(push2) {
+      result: nut(dyn_(dictKorok)(div2(dictKorok))(bus2(dictKorok)(dictKorok.Always2())(function(push2) {
         return function(event) {
-          return bang2(dictKorok.MonadST5().Monad0().Applicative0())(insert4(makePursx({
+          return bang2(dictKorok.MonadST5().Monad0().Applicative0())(insert_(makePursx({
             reflectType: function() {
               return '<div>\n        <button>I do nothing</button>\n        <ul>\n          <li>A</li>\n          <li ~myli~>B</li>\n          <li>C</li>\n        </ul>\n        <div>\n          <a href="https://github.com/mikesol/purescript-deku"></a>\n          <i>bar</i>\n          ~somethingNew~\n          <span style="font-weight:800;">baz</span>\n        </div>\n        <div><div></div><div><input type="range"/></div></div>\n      </div>\n';
             }
@@ -9780,7 +9802,8 @@ var runSSR$prime = function(dictKorok) {
             scope: new Local("rootScope"),
             raiseId: function(v1) {
               return pure(applicativeST)(unit);
-            }
+            },
+            pos: Nothing.value
           })(di)(children))(function(i2) {
             return i2(instr);
           }))();
