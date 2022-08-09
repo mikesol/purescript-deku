@@ -13,7 +13,7 @@
 		"test": "spago -x test/test.dhall test",
 		"test:performance": "npm run bundle:performance && spago -x test/test.dhall run --main Performance.Main",
 		"bundle:examples": "spago -x examples.dhall bundle-app --main Deku.Example.HelloWorld --to examples/hello-world/index.js",
-		"bundle:performance": "spago -x test/test.dhall bundle-app --main Performance.Test.App --to test/test.js --no-build"
+		"bundle:performance": "spago -x test/test.dhall bundle-app --minify --main Performance.Test.App --to test/test.js --no-build"
 	},
 	"keywords": [],
 	"author": "",

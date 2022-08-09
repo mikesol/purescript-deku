@@ -3,11 +3,12 @@ module Deku.Listeners where
 import Prelude
 
 import Control.Alt (alt)
+import Control.Monad.ST.Class (class MonadST)
 import Data.Foldable (for_)
 import Deku.Attribute (class Attr, Attribute, attr, cb, (:=))
 import Deku.DOM as D
 import Effect (Effect)
-import FRP.Event (AnEvent, bang)
+import FRP.Event (AnEvent)
 import Web.Event.Event (target)
 import Web.HTML.HTMLInputElement (fromEventTarget, valueAsNumber)
 
@@ -29,11 +30,11 @@ click_
 click_ = map (attr D.OnClick <<< (_ $ mempty))
 
 slider
-  :: forall m
-   . Applicative m
+  :: forall s m
+   . MonadST s m
   => AnEvent m (Number -> Effect Unit)
   -> AnEvent m (Attribute D.Input_)
-slider = alt (bang $ D.Xtype := "range") <<< map
+slider = alt (pure $ D.Xtype := "range") <<< map
   ( \push ->
       D.OnInput := cb \e -> for_
         ( target e

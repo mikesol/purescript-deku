@@ -23,6 +23,7 @@ import Bolson.Control as Bolson
 import Bolson.Core (Element(..), Entity(..), EventfulElement(..), FixedChildren(..), PSR, Scope(..))
 import Bolson.Core as BCore
 import Control.Alt ((<|>))
+import Control.Monad.ST.Class (class MonadST)
 import Control.Plus (empty)
 import Data.FastVect.FastVect (Vect)
 import Data.Foldable (oneOf)
@@ -173,8 +174,8 @@ portal a b = Bolson.portalComplexComplex
   (lcmap (map (_ $ unit)) (coerce b))
 
 text
-  :: forall m lock payload
-   . Monad m
+  :: forall s m lock payload
+   . MonadST s m
   => AnEvent m String
   -> Domable m lock payload
 text txt = Element' $ Node go
@@ -191,7 +192,7 @@ text txt = Element' $ Node go
         )
         k
 
-text_ :: forall m lock payload. Monad m => String -> Domable m lock payload
+text_ :: forall s m lock payload. MonadST s m => String -> Domable m lock payload
 text_ txt = text (bang txt)
 
 deku
