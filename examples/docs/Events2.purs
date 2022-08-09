@@ -9,8 +9,8 @@ import Data.Maybe (Maybe(..))
 import Data.Profunctor (lcmap)
 import Data.Tuple.Nested ((/\))
 import Deku.Attribute (cb, (:=))
-import Deku.Control (text_)
-import Deku.Core (dyn, insert, remove, sendToTop, Nut, bus, bussed)
+import Deku.Control (dyn_, text_)
+import Deku.Core (Nut, bus, bussed, insert_, remove, sendToTop)
 import Deku.DOM as D
 import Deku.Example.Docs.Types (Page(..), PageOptions)
 import Deku.Example.Docs.Util (scrollToTop)
@@ -82,8 +82,8 @@ import Data.Maybe (Maybe(..))
 import Data.Profunctor (lcmap)
 import Data.Tuple.Nested ((/\))
 import Deku.Attribute (cb, (:=))
-import Deku.Control (text_)
-import Deku.Core (Child(..), dyn)
+import Deku.Control (text_, dyn_)
+import Deku.Core (Child(..))
 import Deku.DOM as D
 import Deku.Toplevel (runInBody1)
 import Effect (Effect)
@@ -126,8 +126,7 @@ main = runInBody1
           ]
       D.div_
         [ D.div_ top
-        , D.div_
-            [ dyn $
+        , dyn_ D.div $
                 map
                   ( \txt -> keepLatest $ bus \p' e' ->
                       ( bang $ Insert $ D.div_
@@ -159,7 +158,6 @@ main = runInBody1
                           ""
                       )
                   )
-            ]
         ]
   )
 """
@@ -194,10 +192,9 @@ main = runInBody1
                       )
                       [ text_ "Add" ]
                   ]
-              , D.div_
-                  [ dyn $ map
+              , dyn_ D.div $ map
                       ( \txt -> keepLatest $ bus \p' e' ->
-                          ( bang $ insert $ D.div_ do
+                          ( bang $ insert_ $ D.div_ do
                               [ D.span (bang $ D.Style := "margin: 5px;")
                                   [ text_ txt ]
                               , D.button
@@ -228,7 +225,6 @@ main = runInBody1
                               ""
                           )
                       )
-                  ]
               ]
       )
   , next: oneOfMap bang [D.OnClick := (cb (\e -> preventDefault e *> options.dpage Portals *> scrollToTop) ), D.Href := (options.slug <> "portals/") ]

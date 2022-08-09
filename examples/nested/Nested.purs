@@ -8,9 +8,9 @@ import Data.FastVect.FastVect as V
 import Data.Int (floor)
 import Data.Tuple (Tuple(..))
 import Deku.Attribute ((:=))
-import Deku.Control (portal, switcher)
+import Deku.Control (dyn_, portal, switcher)
 import Deku.Control as C
-import Deku.Core (Domable, dyn, insert, remove, sendToTop)
+import Deku.Core (Domable, insert_, remove, sendToTop)
 import Deku.DOM as D
 import Deku.Interpret (FFIDOMSnapshot)
 import Deku.Toplevel (runInBodyA)
@@ -65,17 +65,15 @@ scene =
               (sample_ rdm (interval 1000))
           )
       ]
-  , D.div_
-      [ dyn $ map
-          ( \rgb ->
-              bang
-                ( insert $ D.div
-                    (bang (D.Style := "background-color: " <> rgb <> ";"))
-                    [ C.text_ "hello" ]
-                ) <|> delay 1432 (bang sendToTop) <|> delay 2000 (bang remove)
-          )
-          (sample_ rdm (interval 1000))
-      ]
+  , dyn_ D.div $ map
+      ( \rgb ->
+          bang
+            ( insert_ $ D.div
+                (bang (D.Style := "background-color: " <> rgb <> ";"))
+                [ C.text_ "hello" ]
+            ) <|> delay 1432 (bang sendToTop) <|> delay 2000 (bang remove)
+      )
+      (sample_ rdm (interval 1000))
   ]
 
 main :: Effect Unit
