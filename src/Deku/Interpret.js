@@ -9,11 +9,12 @@ export const unSetHydrating = (state) => () => {
 };
 export const attributeParent_ = (a) => (state) => () => {
 	// only attribute if it is not attributed already
+	console.log(a);
 	if (!state.units[a.id].main.parentNode) {
 		if (
-			a.pos.value0 instanceof number &&
+			typeof a.pos.value0 === 'number' &&
 			state.units[a.parent].main.children[a.pos.value0]
-		) {
+		) {console.log("ibefore", a.pos.value0);
 			state.units[a.parent].main.insertBefore(
 				state.units[a.id].main,
 				state.units[a.parent].main.children[a.pos.value0]
