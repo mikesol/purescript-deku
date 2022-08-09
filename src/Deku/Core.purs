@@ -153,9 +153,12 @@ insert
    . Int
   -> Bolson.Entity logic (Node m lock payload) m lock
   -> Bolson.Child logic (Node m lock payload) m lock
-insert i e = Bolson.Insert case e of
-  Bolson.Element' (Node e') -> Bolson.Element' (Node (lcmap (_ { pos = Just i}) e'))
-  _ -> e
+insert i e = Bolson.Insert (f e)
+  where
+  f = case _ of
+      Bolson.Element' (Node e') -> Bolson.Element' (Node (lcmap (_ { pos = Just i}) e'))
+      Bolson.EventfulElement' (Bolson.EventfulElement e') -> Bolson.EventfulElement' (Bolson.EventfulElement (map f e'))
+      _ -> e
 
 insert_
   :: forall logic m lock payload
