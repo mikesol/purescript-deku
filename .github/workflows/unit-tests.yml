@@ -30,7 +30,9 @@ jobs:
         run: npm ci
       - name: Build examples
         run: npm run build:examples
-      - name: Build performance
+      - name: Build test
+        run: npm run build:test
+      - name: Bunlde performance
         run: npm run bundle:performance
       - name: Test performance
         run: npm run test:performance

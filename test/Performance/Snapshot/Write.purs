@@ -67,7 +67,7 @@ main = launchAff_ do
         ]
 
     snapshotTemplate results =
-      "exports.result = " <> stringifyWithIndent 2 (encodeJson results)
+      "export const result = " <> stringifyWithIndent 2 (encodeJson results)
 
 testTypeToModule :: TestType -> String
 testTypeToModule = case _ of
