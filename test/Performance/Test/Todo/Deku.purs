@@ -2,7 +2,6 @@ module Performance.Test.Todo.Deku where
 
 import Prelude
 
-import Bolson.Core (envy)
 import Control.Alt ((<|>))
 import Data.Array (cons, drop, head, length, reverse, takeEnd)
 import Data.Filterable (filter)
@@ -15,12 +14,13 @@ import Deku.Attribute ((:=))
 import Deku.Control (dyn, text_)
 import Deku.Core (class Korok, Domable, bussedUncurried, insert_, remove)
 import Deku.DOM as D
+import Deku.Do (useMailboxed, useMemoized)
 import Deku.Do as Deku
 import Deku.Listeners (click)
 import Deku.Toplevel (runInElement')
 import Effect (Effect)
 import Effect.Class (class MonadEffect)
-import FRP.Event (AnEvent, fold, keepLatest, mailboxed, mapAccum, memoize)
+import FRP.Event (AnEvent, fold, keepLatest, mapAccum)
 import Halogen (liftEffect)
 import Halogen as H
 import Halogen.HTML as HH
@@ -66,15 +66,13 @@ containerD
   => Shared.ContainerState
   -> Domable m lock payload
 containerD initialState = Deku.do
-  setState /\ state' <- bussedUncurried
-  setUndo /\ undo' <- bussedUncurried
-  setCompleteStatus /\ completeStatus' <- bussedUncurried
-  setRename /\ rename' <- bussedUncurried
-  setDelete /\ delete' <- bussedUncurried
-  rename <- envy <<< mailboxed rename'
-  delete <- envy <<< mailboxed delete'
-  completeStatus <- envy <<< mailboxed completeStatus'
-  undos <- envy <<< memoize do
+  setCompleteStatus /\ completeStatus <- useMailboxed
+  setRename /\ rename <- useMailboxed
+  setDelete /\ delete <- useMailboxed
+  setState /\ state <- useMemoized \state' -> do
+    let istate = initialState
+    (fold ($) state' istate) <|> pure istate
+  setUndo /\ undos <- useMemoized \undo' -> do
     let initialUndos = map (_.id >>> UndoAdd) (reverse initialState.todos)
     ( pure initialUndos <|> map snd
         ( fold
@@ -87,9 +85,6 @@ containerD initialState = Deku.do
             (1 /\ initialUndos)
         )
     )
-  state <- envy <<< memoize do
-    let istate = initialState
-    (fold ($) state' istate) <|> pure istate
   let
     toDyn = keepLatest
       ( map
