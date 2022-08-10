@@ -11,7 +11,7 @@ import Deku.DOM as D
 import Deku.Pursx (nut, (~~))
 import Deku.Toplevel (runInBody1)
 import Effect (Effect)
-import FRP.Event (bus, bang)
+import FRP.Event (bus)
 import Type.Proxy (Proxy(..))
 
 myDom =
@@ -37,12 +37,12 @@ myDom =
 main :: Effect Unit
 main = runInBody1
   ( bus \push event -> myDom ~~
-      { myli: bang (D.Style := "background-color:rgb(200,240,210);")
+      { myli: pure (D.Style := "background-color:rgb(200,240,210);")
       , somethingNew: nut
-          ( D.button (bang (D.OnClick := push (Just unit)))
+          ( D.button (pure (D.OnClick := push (Just unit)))
               [ text
                   $ (compact event $> "Thanks for clicking me!") <|>
-                      bang "I was dynamically inserted"
+                      pure "I was dynamically inserted"
               ]
           )
       }

@@ -17,7 +17,7 @@ import Deku.Toplevel (runInBodyA)
 import Effect (Effect)
 import Effect.Random as Random
 import FRP.Behavior (Behavior, behavior, sample_)
-import FRP.Event (Event, delay, bang, makeEvent, mapAccum, subscribe)
+import FRP.Event (Event, delay, makeEvent, mapAccum, subscribe)
 import FRP.Event.Time (interval)
 import Type.Prelude (Proxy(..))
 
@@ -46,12 +46,12 @@ scene
 scene =
   [ D.div_
       [ portal
-          ( D.video (bang (D.Controls := "true") <|> bang (D.Width := "250"))
+          ( D.video (pure (D.Controls := "true") <|> pure (D.Width := "250"))
               [ D.source
-                  ( bang
+                  ( pure
                       ( D.Src :=
                           "https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.webm"
-                      ) <|> bang (D.Xtype := "video/webm")
+                      ) <|> pure (D.Xtype := "video/webm")
                   )
                   []
               ]
@@ -59,7 +59,7 @@ scene =
           )
           ( \i _ -> switcher
               ( \rgb -> D.div
-                  (bang (D.Style := "background-color: " <> rgb <> ";"))
+                  (pure (D.Style := "background-color: " <> rgb <> ";"))
                   [ V.index (Proxy :: _ 0) i ]
               )
               (sample_ rdm (interval 1000))
@@ -67,11 +67,11 @@ scene =
       ]
   , dyn_ D.div $ map
       ( \rgb ->
-          bang
+          pure
             ( insert_ $ D.div
-                (bang (D.Style := "background-color: " <> rgb <> ";"))
+                (pure (D.Style := "background-color: " <> rgb <> ";"))
                 [ C.text_ "hello" ]
-            ) <|> delay 1432 (bang sendToTop) <|> delay 2000 (bang remove)
+            ) <|> delay 1432 (pure sendToTop) <|> delay 2000 (pure remove)
       )
       (sample_ rdm (interval 1000))
   ]

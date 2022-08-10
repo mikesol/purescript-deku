@@ -22,7 +22,7 @@ import Deku.Pursx (nut, (~~))
 import Effect (Effect)
 import Effect.Aff (launchAff_)
 import Effect.Class (liftEffect)
-import FRP.Event (bang, mapAccum)
+import FRP.Event (mapAccum)
 import Type.Proxy (Proxy(..))
 import Web.Event.Event (preventDefault)
 
@@ -103,7 +103,7 @@ import Deku.Toplevel (runInBody1)
 import Effect (Effect)
 import Effect.Aff (launchAff_)
 import Effect.Class (liftEffect)
-import FRP.Event (bang, bus, mapAccum)
+import FRP.Event (pure, bus, mapAccum)
 
 data UIAction = Initial | Loading | Result String
 
@@ -133,7 +133,7 @@ clickText = "Click to get some random user data." :: String
 
 main :: Effect Unit
 main = runInBody1
-  ( bus \push -> lcmap (bang Initial <|> _)
+  ( bus \push -> lcmap (pure Initial <|> _)
       \event ->
         let
           loadingOrResult = filterMap
@@ -158,16 +158,16 @@ main = runInBody1
         in
           D.div_
             [ D.div_
-                [ D.button (bang (D.OnClick := clickCb push))
+                [ D.button (pure (D.OnClick := clickCb push))
                     [ text
-                        ( bang clickText
+                        ( pure clickText
                             <|> (loading $> "Loading...")
                             <|> (result $> clickText)
                         )
                     ]
                 ]
             , D.div
-                ( (bang (D.Style := "display: none;")) <|>
+                ( (pure (D.Style := "display: none;")) <|>
                     ( compact
                         ( mapAccum
                             ( \_ b -> (b && false) /\
@@ -178,7 +178,7 @@ main = runInBody1
                         ) $> (D.Style := "display: block;")
                     )
                 )
-                [ D.pre_ [ D.code_ [ text (bang "" <|> result) ] ] ]
+                [ D.pre_ [ D.code_ [ text (pure "" <|> result) ] ] ]
             ]
   )
 """
@@ -209,16 +209,16 @@ main = runInBody1
               loadingOrResult
           D.div_
             [ D.div_
-                [ D.button (bang (D.OnClick := clickCb push))
+                [ D.button (pure (D.OnClick := clickCb push))
                     [ text
-                        ( bang clickText
+                        ( pure clickText
                             <|> (loading $> "Loading...")
                             <|> (result $> clickText)
                         )
                     ]
                 ]
             , D.div
-                ( (bang (D.Style := "display: none;")) <|>
+                ( (pure (D.Style := "display: none;")) <|>
                     ( compact
                         ( mapAccum
                             ( \_ b -> (b && false) /\
@@ -229,8 +229,8 @@ main = runInBody1
                         ) $> (D.Style := "display: block;")
                     )
                 )
-                [ D.pre_ [ D.code_ [ text (bang "" <|> result) ] ] ]
+                [ D.pre_ [ D.code_ [ text (pure "" <|> result) ] ] ]
             ]
       )
-  , next: oneOfMap bang [D.OnClick := (cb (\e -> preventDefault e *> options.dpage PURSX2 *> scrollToTop) ), D.Href := (options.slug <> "pursx2/") ]
+  , next: oneOfMap pure [D.OnClick := (cb (\e -> preventDefault e *> options.dpage PURSX2 *> scrollToTop) ), D.Href := (options.slug <> "pursx2/") ]
   }

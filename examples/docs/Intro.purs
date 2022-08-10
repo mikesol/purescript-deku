@@ -9,7 +9,6 @@ import Deku.DOM as D
 import Deku.Example.Docs.Types (Page(..), PageOptions)
 import Deku.Example.Docs.Util (scrollToTop)
 import Deku.Pursx ((~~))
-import FRP.Event.Class (bang)
 import Type.Proxy (Proxy(..))
 import Web.Event.Event (preventDefault)
 
@@ -32,5 +31,5 @@ px =
 
 intro :: forall r. {|PageOptions r} -> Nut
 intro options = px ~~
-  {   next: oneOfMap bang [D.OnClick := (cb (\e -> preventDefault e *> options.dpage HelloWorld *> scrollToTop) ), D.Href := (options.slug <> "hello/") ]
+  {   next: oneOfMap pure [D.OnClick := (cb (\e -> preventDefault e *> options.dpage HelloWorld *> scrollToTop) ), D.Href := (options.slug <> "hello/") ]
  }

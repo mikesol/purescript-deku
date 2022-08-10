@@ -10,7 +10,6 @@ import Deku.DOM as D
 import Deku.Example.Docs.Types (Page(..), PageOptions)
 import Deku.Example.Docs.Util (scrollToTop)
 import Deku.Pursx (nut, (~~))
-import FRP.Event (bang)
 import Type.Proxy (Proxy(..))
 import Web.Event.Event (preventDefault)
 
@@ -42,9 +41,9 @@ myDivWithNoChildren = D.div attrs blank
   <p>For now, children is an array of children, not unlike Halogen or React sans JSX. We'll see some other types of children later in this guide.</p>
 
   <h1>Attributes</h1>
-  <p>Attributes like an element's style or id are specified as the first argument to an element. Attributes are just <a href="https://github.com/mikesol/purescript-event/blob/master/src/FRP/Event.purs"><code>Event</code>-s</a>, so you can <code>bang</code> them to make them happen <i>now</i>, combine two event streams with <code>alt</code> to compose events, etc.</p>
+  <p>Attributes like an element's style or id are specified as the first argument to an element. Attributes are just <a href="https://github.com/mikesol/purescript-event/blob/master/src/FRP/Event.purs"><code>Event</code>-s</a>, so you can <code>pure</code> them to make them happen <i>now</i>, combine two event streams with <code>alt</code> to compose events, etc.</p>
 
-  <p>As an example, we made the input a range slider using <code>bang (Xtype := "range")</code>. Unlike Halogen, there are no checks to make sure you give a valid string. So if you want your range slider to have the value of true, you can. One day, I may build some validators, but passing strings works decently well here.</p>
+  <p>As an example, we made the input a range slider using <code>pure (Xtype := "range")</code>. Unlike Halogen, there are no checks to make sure you give a valid string. So if you want your range slider to have the value of true, you can. One day, I may build some validators, but passing strings works decently well here.</p>
 
   <h2>Next steps</h2>
   <p>In this section, we built a simple component. In the next section, we'll recreate the exact same element using a different input syntax called <a ~next~ style="cursor:pointer;">Pursx</a>.</p>
@@ -65,22 +64,22 @@ import Deku.Control (text_)
 import Deku.DOM as D
 import Deku.Toplevel (runInBodyA)
 import Effect (Effect)
-import FRP.Event.Class (bang)
+import FRP.Event.Class (pure)
 
 main :: Effect Unit
 main = runInBodyA
   ( [ D.button_ [ text_ "I do nothing" ]
     , D.ul_ $ map (D.li_ <<< pure <<< text_) [ "A", "B", "C" ]
     , D.div_
-        [ D.a (bang $ D.Href := "https://example.com")
+        [ D.a (pure $ D.Href := "https://example.com")
             [ text_ "foo " ]
         , D.i_ [ text_ " bar " ]
-        , D.span (bang $ D.Style := "font-weight: 800;")
+        , D.span (pure $ D.Style := "font-weight: 800;")
             [ text_ " baz" ]
         ]
     , D.div_
         [ D.div_
-            [ D.div_ [ D.input (bang $ D.Xtype := "range") [] ]
+            [ D.div_ [ D.input (pure $ D.Xtype := "range") [] ]
             ]
         ]
     ]
@@ -93,18 +92,18 @@ main = runInBodyA
           [ D.button_ [ text_ "I do nothing" ]
           , D.ul_ $ map (D.li_ <<< pure <<< text_) [ "A", "B", "C" ]
           , D.div_
-              [ D.a (bang $ D.Href := "https://example.com")
+              [ D.a (pure $ D.Href := "https://example.com")
                   [ text_ "foo " ]
               , D.i_ [ text_ " bar " ]
-              , D.span (bang $ D.Style := "font-weight: 800;")
+              , D.span (pure $ D.Style := "font-weight: 800;")
                   [ text_ " baz" ]
               ]
           , D.div_
               [ D.div_
-                  [ D.div_ [ D.input (bang $ D.Xtype := "range") [] ]
+                  [ D.div_ [ D.input (pure $ D.Xtype := "range") [] ]
                   ]
               ]
           ]
       )
-  , next: oneOfMap bang [D.OnClick := (cb (\e -> preventDefault e *> options.dpage PURSX1 *> scrollToTop) ), D.Href := (options.slug <> "pursx1/") ]
+  , next: oneOfMap pure [D.OnClick := (cb (\e -> preventDefault e *> options.dpage PURSX1 *> scrollToTop) ), D.Href := (options.slug <> "pursx1/") ]
   }

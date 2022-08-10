@@ -10,11 +10,11 @@ import Deku.DOM as D
 import Deku.Pursx (nut, (~~))
 import Deku.Toplevel (runInBody1)
 import Effect (Effect)
-import FRP.Event (Event, bang, bus)
+import FRP.Event (Event, bus)
 import Type.Proxy (Proxy(..))
 
 example name = bus
-  \setAge -> lcmap (bang 1 <|> _) \age ->
+  \setAge -> lcmap (pure 1 <|> _) \age ->
     ( Proxy
         :: Proxy
              """
@@ -30,4 +30,4 @@ example name = bus
       }
 
 main :: Effect Unit
-main = runInBody1 (example (bang "Steve"))
+main = runInBody1 (example (pure "Steve"))

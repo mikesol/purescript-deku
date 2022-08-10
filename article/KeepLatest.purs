@@ -9,7 +9,7 @@ import Deku.Control (text_)
 import Deku.DOM as D
 import Deku.Toplevel (runInBody1)
 import Effect (Effect)
-import FRP.Event (bang, fold, keepLatest, memoize)
+import FRP.Event (fold, keepLatest, memoize)
 import FRP.Event.Time (interval)
 
 padMe :: Int -> String
@@ -20,7 +20,7 @@ example counter = D.div_
   [ text_ "Hello margin"
   , D.input
       ( keepLatest $
-          ( \i -> oneOfMap bang
+          ( \i -> oneOfMap pure
               [ D.Style := padMe i
               , D.Xtype := "checkbox"
               , D.Checked := show (if mod i 2 == 0 then true else false)
@@ -33,7 +33,7 @@ example counter = D.div_
 main :: Effect Unit
 main = runInBody1
   ( memoize
-      ( (fold (const (add 1)) (interval 400) 0 <|> bang 0)
+      ( (fold (const (add 1)) (interval 400) 0 <|> pure 0)
       )
       example
 

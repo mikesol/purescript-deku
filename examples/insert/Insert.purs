@@ -11,14 +11,14 @@ import Deku.Core (insert, remove)
 import Deku.DOM as D
 import Deku.Toplevel (runInBody)
 import Effect (Effect)
-import FRP.Event (bang, delay, mapAccum)
+import FRP.Event (delay, mapAccum)
 import FRP.Event.Time (interval)
 
 main :: Effect Unit
 main = runInBody
   ( dyn_ D.div $ map
       ( \(x /\ c) ->
-          ( bang (insert c (D.div_ [text_ ("At pos: " <> show c <> " at time " <> show x)])) <|> delay (5050 + (c * 1000)) (bang remove)
+          ( pure (insert c (D.div_ [text_ ("At pos: " <> show c <> " at time " <> show x)])) <|> delay (5050 + (c * 1000)) (pure remove)
           )
       )
       ( mapAccum

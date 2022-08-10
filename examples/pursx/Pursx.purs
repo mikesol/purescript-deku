@@ -12,7 +12,7 @@ import Deku.Interpret (FFIDOMSnapshot)
 import Deku.Pursx (nut, (~~))
 import Deku.Toplevel (runInBody1)
 import Effect (Effect)
-import FRP.Event (Event, bang, bus)
+import FRP.Event (Event, bus)
 import Type.Proxy (Proxy(..))
 
 px =
@@ -30,11 +30,11 @@ pxInception
   -> Domable Effect lock payload
   -> Domable Effect lock payload
 pxInception push aThirdThing = px ~~
-  { btn: bang (D.Style := "background-color: rgb(133,151,217)")
+  { btn: pure (D.Style := "background-color: rgb(133,151,217)")
   , somethingElse:
       nut
         ( D.button
-            ( bang $ D.OnClick :=
+            ( pure $ D.OnClick :=
                 (cb (const $ push false))
             )
             [ C.text_ "I was dynamically inserted " ]
@@ -52,7 +52,7 @@ scene = bus \push event ->
         $ pxInception push
         $ pxInception push
         $ pxInception push (C.text_ "boo")
-    , C.text ((event <|> bang true) <#> if _ then "Oh hi" else "Oh bye")
+    , C.text ((event <|> pure true) <#> if _ then "Oh hi" else "Oh bye")
     ]
 
 main :: Effect Unit

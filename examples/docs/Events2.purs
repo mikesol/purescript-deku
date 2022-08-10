@@ -15,7 +15,7 @@ import Deku.DOM as D
 import Deku.Example.Docs.Types (Page(..), PageOptions)
 import Deku.Example.Docs.Util (scrollToTop)
 import Deku.Pursx (nut, (~~))
-import FRP.Event (bang, keepLatest, mapAccum)
+import FRP.Event (keepLatest, mapAccum)
 import Type.Proxy (Proxy(..))
 import Web.Event.Event (preventDefault, target)
 import Web.HTML.HTMLInputElement (fromEventTarget, value)
@@ -87,7 +87,7 @@ import Deku.Core (Child(..))
 import Deku.DOM as D
 import Deku.Toplevel (runInBody1)
 import Effect (Effect)
-import FRP.Event (bang, bus, keepLatest, mapAccum)
+import FRP.Event (pure, bus, keepLatest, mapAccum)
 import Web.Event.Event (target)
 import Web.HTML.HTMLInputElement (fromEventTarget, value)
 import Web.UIEvent.KeyboardEvent (code, fromEvent)
@@ -101,11 +101,11 @@ data TodoAction = Prioritize | Delete
 
 main :: Effect Unit
 main = runInBody1
-  ( bus \push -> lcmap (bang UIShown <|> _) \event -> do
+  ( bus \push -> lcmap (pure UIShown <|> _) \event -> do
       let
         top =
           [ D.input
-              ( oneOfMap bang
+              ( oneOfMap pure
                   [ D.OnInput := cb \e -> for_
                       ( target e
                           >>= fromEventTarget
@@ -121,7 +121,7 @@ main = runInBody1
               )
               []
           , D.button
-              (bang $ D.OnClick := push AddTodo)
+              (pure $ D.OnClick := push AddTodo)
               [ text_ "Add" ]
           ]
       D.div_
@@ -129,15 +129,15 @@ main = runInBody1
         , dyn_ D.div $
                 map
                   ( \txt -> keepLatest $ bus \p' e' ->
-                      ( bang $ Insert $ D.div_
+                      ( pure $ Insert $ D.div_
                           [ text_ txt
                           , D.button
-                              ( bang
+                              ( pure
                                   $ D.OnClick := p' SendToTop
                               )
                               [ text_ "Prioritize" ]
                           , D.button
-                              ( bang
+                              ( pure
                                   $ D.OnClick := p' Remove
                               )
                               [ text_ "Delete" ]
@@ -165,12 +165,12 @@ main = runInBody1
           ]
       )
   , result: nut
-      ( bussed \push -> lcmap (bang UIShown <|> _)
+      ( bussed \push -> lcmap (pure UIShown <|> _)
           \event -> do
             D.div_
               [ D.div_
                   [ D.input
-                      ( oneOfMap bang
+                      ( oneOfMap pure
                           [ D.Style :=
                               "border-style:solid;border-width: 1px;border-color: black;"
                           , D.OnInput := cb \e -> for_
@@ -187,26 +187,26 @@ main = runInBody1
                       )
                       []
                   , D.button
-                      ( (bang $ D.Style := "margin: 5px;") <|>
-                          (bang $ D.OnClick := cb (const $ push AddTodo))
+                      ( (pure $ D.Style := "margin: 5px;") <|>
+                          (pure $ D.OnClick := cb (const $ push AddTodo))
                       )
                       [ text_ "Add" ]
                   ]
               , dyn_ D.div $ map
                       ( \txt -> keepLatest $ bus \p' e' ->
-                          ( bang $ insert_ $ D.div_ do
-                              [ D.span (bang $ D.Style := "margin: 5px;")
+                          ( pure $ insert_ $ D.div_ do
+                              [ D.span (pure $ D.Style := "margin: 5px;")
                                   [ text_ txt ]
                               , D.button
-                                  ( (bang $ D.Style := "margin: 5px;") <|>
-                                      ( bang $ D.OnClick := cb
+                                  ( (pure $ D.Style := "margin: 5px;") <|>
+                                      ( pure $ D.OnClick := cb
                                           (const $ p' sendToTop)
                                       )
                                   )
                                   [ text_ "Prioritize" ]
                               , D.button
-                                  ( (bang $ D.Style := "margin: 5px;") <|>
-                                      ( bang $ D.OnClick := cb
+                                  ( (pure $ D.Style := "margin: 5px;") <|>
+                                      ( pure $ D.OnClick := cb
                                           (const $ p' remove)
                                       )
                                   )
@@ -227,5 +227,5 @@ main = runInBody1
                       )
               ]
       )
-  , next: oneOfMap bang [D.OnClick := (cb (\e -> preventDefault e *> options.dpage Portals *> scrollToTop) ), D.Href := (options.slug <> "portals/") ]
+  , next: oneOfMap pure [D.OnClick := (cb (\e -> preventDefault e *> options.dpage Portals *> scrollToTop) ), D.Href := (options.slug <> "portals/") ]
   }

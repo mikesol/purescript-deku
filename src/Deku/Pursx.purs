@@ -14,7 +14,7 @@ import Data.Symbol (class IsSymbol)
 import Deku.Attribute (Attribute, AttributeValue(..), unsafeUnAttribute)
 import Deku.Core (DOMInterpret(..), class Korok, Domable, Node(..))
 import Deku.DOM (class TagToDeku)
-import FRP.Event (AnEvent, bang, subscribe, makeEvent)
+import FRP.Event (AnEvent, subscribe, makeEvent)
 import Foreign.Object as Object
 import Prim.Boolean (False, True)
 import Prim.Row as Row
@@ -4546,7 +4546,7 @@ makePursx' verb html r = Element' $ Node go
           r
       map ((*>) (k1 (deleteFromCache { id: me }))) $
         subscribe
-          ( ( bang $
+          ( ( pure $
                 mpx
                   { id: me
                   , parent

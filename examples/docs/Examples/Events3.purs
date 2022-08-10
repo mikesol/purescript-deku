@@ -14,7 +14,7 @@ import Deku.Core (insert_, remove, sendToTop)
 import Deku.DOM as D
 import Deku.Toplevel (runInBody1)
 import Effect (Effect)
-import FRP.Event (bang, bus, keepLatest, mapAccum)
+import FRP.Event (bus, keepLatest, mapAccum)
 import Web.Event.Event (target)
 import Web.HTML.HTMLInputElement (fromEventTarget, value)
 import Web.UIEvent.KeyboardEvent (code, fromEvent)
@@ -28,11 +28,11 @@ data TodoAction = Prioritize | Delete
 
 main :: Effect Unit
 main = runInBody1
-  ( bus \push -> lcmap (bang UIShown <|> _) \event -> do
+  ( bus \push -> lcmap (pure UIShown <|> _) \event -> do
       let
         top =
           [ D.input
-              ( oneOfMap bang
+              ( oneOfMap pure
                   [ D.OnInput := cb \e -> for_
                       ( target e
                           >>= fromEventTarget
@@ -48,7 +48,7 @@ main = runInBody1
               )
               []
           , D.button
-              (bang $ D.OnClick := push AddTodo)
+              (pure $ D.OnClick := push AddTodo)
               [ text_ "Add" ]
           ]
       D.div_
@@ -56,15 +56,15 @@ main = runInBody1
         , dyn_ D.div $
             map
               ( \txt -> keepLatest $ bus \p' e' ->
-                  ( bang $ insert_ $ D.div_
+                  ( pure $ insert_ $ D.div_
                       [ text_ txt
                       , D.button
-                          ( bang
+                          ( pure
                               $ D.OnClick := p' sendToTop
                           )
                           [ text_ "Prioritize" ]
                       , D.button
-                          ( bang
+                          ( pure
                               $ D.OnClick := p' remove
                           )
                           [ text_ "Delete" ]

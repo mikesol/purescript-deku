@@ -9,13 +9,13 @@ import Data.Distributive (distribute)
 import Data.Maybe (Maybe(..))
 import Data.Profunctor (lcmap)
 import Deku.Attribute (attr, (:=))
-import Deku.Control (switcher, text, text_)
-import Deku.Core (Domable, envy)
+import Deku.Control (envy_, switcher, text, text_)
+import Deku.Core (Domable)
 import Deku.DOM as D
 import Deku.Toplevel (runInBody1)
 import Effect (Effect)
 import Effect.Random as Random
-import FRP.Event (Event, bang, bus)
+import FRP.Event (Event, bus)
 import FRP.Event.Class (biSampleOn)
 import FRP.Event.VBus (V, vbus)
 import Record (union)
@@ -90,7 +90,7 @@ cell3
 cell3 = do
   { push1 } <- ask
   pure
-    ( D.td_ $ pure $ D.button (bang (D.OnClick := push1))
+    ( D.td_ $ pure $ D.button (pure (D.OnClick := push1))
         $ pure (text_ "Do something needing token 1")
     )
 
@@ -108,7 +108,7 @@ cell5 :: forall l p. Effect Unit -> Domable Effect l p
 cell5 = do
   push2 <- ask
   pure
-    ( D.td_ $ pure $ D.button (bang (D.OnClick := push2))
+    ( D.td_ $ pure $ D.button (pure (D.OnClick := push2))
         (pure $ text_ "Do something needing token 2")
     )
 
@@ -154,7 +154,7 @@ authorized = do
         , D.tr_ [ c2, c3 ]
         , D.tr_ [ c4, c5 ]
         ]
-    , D.div_ [ envy incTok ]
+    ,  envy_ D.div incTok
     ]
 
 unauthorized
@@ -168,7 +168,7 @@ unauthorized
 unauthorized = do
   { token1, token2 } <- ask
   pure $ D.button
-    ( bang $ D.OnClick := do
+    ( pure $ D.OnClick := do
         getToken >>= token1
         getToken >>= token2
     )
@@ -189,12 +189,12 @@ main :: Effect Unit
 main = runInBody1
   ( vbus (Proxy :: _ Tokens) \push event -> do
       let
-        tokens = biSampleOn (bang Nothing <|> event.token2)
-          ({ token1: _, token2: _ } <$> (bang Nothing <|> event.token1))
+        tokens = biSampleOn (pure Nothing <|> event.token2)
+          ({ token1: _, token2: _ } <$> (pure Nothing <|> event.token1))
       tokens # switcher \{ token1: t1, token2: t2 } -> case t1, t2 of
         Just t1', Just t2' -> do
-          let token1 = compact event.token1 <|> bang t1'
-          let token2 = compact event.token2 <|> bang t2'
+          let token1 = compact event.token1 <|> pure t1'
+          let token2 = compact event.token2 <|> pure t2'
           let push1 = keepRefreshOrInvalidate push.token1
           let push2 = keepRefreshOrInvalidate push.token2
           authorized { token1, token2, push1, push2 }

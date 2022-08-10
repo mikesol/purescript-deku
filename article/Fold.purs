@@ -12,7 +12,7 @@ import Deku.Control (text, text_)
 import Deku.DOM as D
 import Deku.Toplevel (runInBody1)
 import Effect (Effect)
-import FRP.Event (bang, bus, mapAccum, sampleOn)
+import FRP.Event (bus, mapAccum, sampleOn)
 import Web.Event.Event (target)
 import Web.HTML.HTMLInputElement (fromEventTarget, value)
 
@@ -22,7 +22,7 @@ main = runInBody1
       let
         top =
           [ D.input
-              ( oneOfMap bang
+              ( oneOfMap pure
                   [ D.OnInput := cb \e -> for_
                       ( target e
                           >>= fromEventTarget
@@ -34,7 +34,7 @@ main = runInBody1
               )
               []
           , D.button
-              (bang $ D.OnClick := push (Left unit))
+              (pure $ D.OnClick := push (Left unit))
               [ text_ "Finalize text" ]
           ]
         events = partitionMap identity event

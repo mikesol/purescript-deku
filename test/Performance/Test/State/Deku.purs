@@ -14,7 +14,6 @@ import Deku.Toplevel (runInElement')
 import Effect (Effect)
 import Effect.Class (class MonadEffect)
 import Effect.Ref as Ref
-import FRP.Event.Class (bang)
 import Halogen as H
 import Halogen.HTML as HH
 import Halogen.HTML.Properties as HP
@@ -64,12 +63,12 @@ scene
 scene notifyEnd =
   ( bussed \setState state' ->
       let
-        stateE = state' <|> bang { n: 0, n1: 0, n2: 0, n3: 0, n4: 0 }
+        stateE = state' <|> pure { n: 0, n1: 0, n2: 0, n3: 0, n4: 0 }
       in
         ( D.div_
             [ D.button
                 ( oneOf
-                    [ bang $ D.Id := (testToString StateDeku <> startSuffix)
+                    [ pure $ D.Id := (testToString StateDeku <> startSuffix)
                     , stateE <#> \state -> D.OnClick := do
                         ref <- Ref.new state
                         let modify = flip Ref.modify ref

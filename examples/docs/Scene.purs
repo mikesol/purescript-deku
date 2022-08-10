@@ -21,18 +21,17 @@ import Deku.Example.Docs.Pursx1 as Pursx1
 import Deku.Example.Docs.Pursx2 as Pursx2
 import Deku.Example.Docs.SSR as SSR
 import Deku.Example.Docs.Types (Page(..), Options)
-import FRP.Event (bang)
 import Web.Event.Event (preventDefault)
 
 scene :: forall r. { | Options r } -> Nut
-scene options = bussed \push -> lcmap (bang options.startsWith <|> _)
+scene options = bussed \push -> lcmap (pure options.startsWith <|> _)
   \event ->
     D.div_
       [ D.div_
           $ map
               ( \(x /\ y /\ pg /\ z) -> D.span_
                   [ D.a
-                      ( oneOfMap bang
+                      ( oneOfMap pure
                           [ D.OnClick := cb (\e -> preventDefault e *> push x)
                           , D.Style := "cursor:pointer;"
                           , D.Href := options.slug <> pg
@@ -40,7 +39,7 @@ scene options = bussed \push -> lcmap (bang options.startsWith <|> _)
                       )
                       [ text_ y ]
                   , D.span
-                      ( bang $ D.Style :=
+                      ( pure $ D.Style :=
                           if z then ""
                           else "display:none;"
                       )

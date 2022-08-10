@@ -106,10 +106,7 @@ containerD initialState = Deku.do
     updateNameAt id n = setState
       ( \x -> x
           { todos = map
-              ( \y ->
-                  if y.id == id then y { description = n }
-                  else y
-              )
+              (\y -> if y.id == id then y { description = n } else y)
               x.todos
           }
       )

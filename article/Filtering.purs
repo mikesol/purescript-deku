@@ -8,7 +8,7 @@ import Deku.Control (text, text_)
 import Deku.DOM as D
 import Deku.Toplevel (runInBody1)
 import Effect (Effect)
-import FRP.Event (bang, fold, memoize)
+import FRP.Event (fold, memoize)
 import FRP.Event.Time (interval)
 
 example model = D.div_
@@ -22,7 +22,7 @@ main :: Effect Unit
 main = runInBody1
   ( memoize
       ( ( { name: "Jane", age: _ } <$>
-            (fold (const (add 1)) (interval 400) 0 <|> bang 0)
+            (fold (const (add 1)) (interval 400) 0 <|> pure 0)
         )
       )
       (example)

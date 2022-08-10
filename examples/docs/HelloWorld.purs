@@ -10,7 +10,6 @@ import Deku.DOM as D
 import Deku.Example.Docs.Types (Page(..), PageOptions)
 import Deku.Example.Docs.Util (scrollToTop)
 import Deku.Pursx (nut, (~~))
-import FRP.Event.Class (bang)
 import Type.Proxy (Proxy(..))
 import Web.Event.Event (preventDefault)
 
@@ -61,5 +60,5 @@ main = runInBody (text_ "Hello world")
           ]
       )
   , result: nut (D.div_ [ text_ "Hello world" ])
-  , next: oneOfMap bang [D.OnClick := (cb (\e -> preventDefault e *> options.dpage SimpleComponent *> scrollToTop) ), D.Href := (options.slug <> "component/") ]
+  , next: oneOfMap pure [D.OnClick := (cb (\e -> preventDefault e *> options.dpage SimpleComponent *> scrollToTop) ), D.Href := (options.slug <> "component/") ]
   }

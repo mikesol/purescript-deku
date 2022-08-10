@@ -32,7 +32,7 @@ import Data.Newtype (unwrap)
 import Data.Profunctor (lcmap)
 import Deku.Attribute (Attribute, AttributeValue(..), unsafeUnAttribute)
 import Deku.Core (class Korok, DOMInterpret(..), Domable, Node(..))
-import FRP.Event (AnEvent, bang, makeEvent, subscribe)
+import FRP.Event (AnEvent, makeEvent, subscribe)
 import Prim.Int (class Compare)
 import Prim.Ordering (GT)
 import Safe.Coerce (coerce)
@@ -103,11 +103,11 @@ elementify tag atts children = Node go
       raiseId me
       map ((k (deleteFromCache { id: me })) *> _) $ subscribe
         ( ( oneOf
-              ( [ bang (unsafeElement di { id: me, parent, scope, tag })
+              ( [ pure (unsafeElement di { id: me, parent, scope, tag })
                 , unsafeSetAttribute di me atts
                 ] <> maybe []
                   ( \p ->
-                      [ bang
+                      [ pure
                           $ unsafeConnect di
                           $ { id: me, parent: p, pos }
                       ]
@@ -186,14 +186,14 @@ text txt = Element' $ Node go
       raiseId me
       map ((*>) (k (deleteFromCache { id: me }))) $ subscribe
         ( oneOf
-            [ bang (unsafeText di { id: me, parent, scope })
+            [ pure (unsafeText di { id: me, parent, scope })
             , unsafeSetText di me txt
             ]
         )
         k
 
 text_ :: forall s m lock payload. MonadST s m => String -> Domable m lock payload
-text_ txt = text (bang txt)
+text_ txt = text (pure txt)
 
 deku
   :: forall s m payload
@@ -205,7 +205,7 @@ deku
 deku root children di@(DOMInterpret { ids, makeRoot }) = makeEvent \k -> do
   me <- ids
   subscribe
-    ( bang (makeRoot { id: me, root })
+    ( pure (makeRoot { id: me, root })
         <|> __internalDekuFlatten
           { parent: Just me
           , scope: Local "rootScope"

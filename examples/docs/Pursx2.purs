@@ -13,7 +13,6 @@ import Deku.DOM as D
 import Deku.Example.Docs.Types (Page(..), PageOptions)
 import Deku.Example.Docs.Util (scrollToTop)
 import Deku.Pursx (makePursx', nut, (~~))
-import FRP.Event (bang)
 import Type.Proxy (Proxy(..))
 import Web.Event.Event (preventDefault)
 
@@ -79,7 +78,7 @@ import Deku.DOM as D
 import Deku.Pursx (nut, (~~))
 import Deku.Toplevel (runInBody1)
 import Effect (Effect)
-import FRP.Event (bus, bang)
+import FRP.Event (bus, pure)
 import Type.Proxy (Proxy(..))
 
 myDom =
@@ -108,12 +107,12 @@ myDom =
 main :: Effect Unit
 main = runInBody1
   ( bus \push event -> myDom ~~
-      { myli: bang (D.Style := "background-color:rgb(200,240,210);")
+      { myli: pure (D.Style := "background-color:rgb(200,240,210);")
       , somethingNew: nut
-          ( D.button (bang (D.OnClick := push (Just unit)))
+          ( D.button (pure (D.OnClick := push (Just unit)))
               [ text
                   $ (compact event $> "Thanks for clicking me!") <|>
-                    bang "I was dynamically inserted"
+                    pure "I was dynamically inserted"
               ]
           )
       }
@@ -123,16 +122,16 @@ main = runInBody1
       )
   , result: nut
       ( dyn_ D.div $ bus \push event ->
-          bang $ insert_ $ myDom ~~
-            { myli: bang (D.Style := "background-color:rgb(200,240,210);")
+          pure $ insert_ $ myDom ~~
+            { myli: pure (D.Style := "background-color:rgb(200,240,210);")
             , somethingNew: nut
-                ( D.button (bang (D.OnClick := push (Just unit)))
+                ( D.button (pure (D.OnClick := push (Just unit)))
                     [ text
                         $ (compact event $> "Thanks for clicking me!") <|>
-                            bang "I was dynamically inserted"
+                            pure "I was dynamically inserted"
                     ]
                 )
             }
       )
-  , next: oneOfMap bang [D.OnClick := (cb (\e -> preventDefault e *> options.dpage Events2 *> scrollToTop) ), D.Href := (options.slug <> "events2/") ]
+  , next: oneOfMap pure [D.OnClick := (cb (\e -> preventDefault e *> options.dpage Events2 *> scrollToTop) ), D.Href := (options.slug <> "events2/") ]
   }

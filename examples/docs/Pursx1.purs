@@ -10,7 +10,6 @@ import Deku.DOM as D
 import Deku.Example.Docs.Types (Page(..), PageOptions)
 import Deku.Example.Docs.Util (scrollToTop)
 import Deku.Pursx (nut, psx, (~~))
-import FRP.Event.Class (bang)
 import Type.Proxy (Proxy(..))
 import Web.Event.Event (preventDefault)
 
@@ -68,7 +67,7 @@ import Prelude
 import Deku.Pursx (psx)
 import Deku.Toplevel (runInBody)
 import Effect (Effect)
-import FRP.Event (bang)
+import FRP.Event (pure)
 import Type.Proxy (Proxy(..))
 
 myDom = Proxy :: Proxy """ <> "\"\"\""
@@ -99,5 +98,5 @@ main = runInBody (psx myDom)
           ]
       )
   , result: nut (psx myDom)
-  , next: oneOfMap bang [D.OnClick := (cb (\e -> preventDefault e *> options.dpage Events *> scrollToTop) ), D.Href := (options.slug <> "events1/") ]
+  , next: oneOfMap pure [D.OnClick := (cb (\e -> preventDefault e *> options.dpage Events *> scrollToTop) ), D.Href := (options.slug <> "events1/") ]
   }

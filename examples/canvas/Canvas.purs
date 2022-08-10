@@ -9,14 +9,13 @@ import Deku.DOM as D
 import Deku.Interpret (FFIDOMSnapshot)
 import Deku.Toplevel (runInBody)
 import Effect (Effect)
-import FRP.Event.Class (bang)
 import Graphics.Canvas (CanvasElement, fillRect, getContext2D, setFillStyle)
 import Unsafe.Coerce (unsafeCoerce)
 import Web.HTML.HTMLCanvasElement as HTMLCanvasElement
 
 scene :: forall lock. Domable Effect lock (FFIDOMSnapshot -> Effect Unit)
 scene = D.canvas
-  ( oneOfMap bang
+  ( oneOfMap pure
       [ D.Width := "400px"
       , D.Height := "400px"
       , D.Self := HTMLCanvasElement.fromElement >>> traverse_ \e -> do

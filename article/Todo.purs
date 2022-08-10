@@ -8,12 +8,12 @@ import Data.Foldable (for_, oneOfMap)
 import Data.Maybe (Maybe(..))
 import Data.Tuple.Nested ((/\))
 import Deku.Attribute (cb, (:=))
-import Deku.Control (text_)
-import Deku.Core (dyn, insert, remove, sendToTop)
+import Deku.Control (dyn, dyn_, text_)
+import Deku.Core (insert, insert_, remove, sendToTop)
 import Deku.DOM as D
 import Deku.Toplevel (runInBody1)
 import Effect (Effect)
-import FRP.Event (bang, bus, keepLatest, mapAccum)
+import FRP.Event (bus, keepLatest, mapAccum)
 import Web.Event.Event (target)
 import Web.HTML.HTMLInputElement (fromEventTarget, value)
 import Web.UIEvent.KeyboardEvent (code, fromEvent)
@@ -30,7 +30,7 @@ main = runInBody1
       let
         top =
           [ D.input
-              ( oneOfMap bang
+              ( oneOfMap pure
                   [ D.OnInput := cb \e -> for_
                       ( target e
                           >>= fromEventTarget
@@ -46,41 +46,39 @@ main = runInBody1
               )
               []
           , D.button
-              (bang $ D.OnClick := push AddTodo)
+              (pure $ D.OnClick := push AddTodo)
               [ text_ "Add" ]
           ]
       D.div_
         [ D.div_ top
-        , D.div_
-            [ dyn $
-                ( \txt -> keepLatest $ bus \p' e' ->
-                    ( bang $ insert $ D.div_
-                        [ text_ txt
-                        , D.button
-                            ( bang
-                                $ D.OnClick := p' sendToTop
-                            )
-                            [ text_ "Prioritize" ]
-                        , D.button
-                            ( bang
-                                $ D.OnClick := p' remove
-                            )
-                            [ text_ "Delete" ]
-                        ]
-                    ) <|> e'
-                ) <$>
-                  filterMap
-                    ( \(tf /\ s) ->
-                        if tf then Just s else Nothing
-                    )
-                    ( mapAccum
-                        ( \a b -> case a of
-                            ChangeText s -> s /\ (false /\ s)
-                            AddTodo -> b /\ (true /\ b)
+        , dyn_ D.div
+            (( \txt -> keepLatest $ bus \p' e' ->
+                ( pure $ insert_ $ D.div_
+                    [ text_ txt
+                    , D.button
+                        ( pure
+                            $ D.OnClick := p' sendToTop
                         )
-                        event
-                        mempty
-                    )
-            ]
+                        [ text_ "Prioritize" ]
+                    , D.button
+                        ( pure
+                            $ D.OnClick := p' remove
+                        )
+                        [ text_ "Delete" ]
+                    ]
+                ) <|> e'
+            ) <$>
+            filterMap
+              ( \(tf /\ s) ->
+                  if tf then Just s else Nothing
+              )
+              ( mapAccum
+                  ( \a b -> case a of
+                      ChangeText s -> s /\ (false /\ s)
+                      AddTodo -> b /\ (true /\ b)
+                  )
+                  event
+                  mempty
+              ))
         ]
   )

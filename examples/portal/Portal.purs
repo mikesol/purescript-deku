@@ -13,7 +13,7 @@ import Deku.Core (insert_)
 import Deku.DOM as D
 import Deku.Toplevel (runInBody)
 import Effect (Effect)
-import FRP.Event (bang, bus, fold)
+import FRP.Event (bus, fold)
 import Type.Prelude (Proxy(..))
 
 main :: Effect Unit
@@ -24,16 +24,16 @@ main = runInBody
       , D.div_
           [ text_ "Switching portals should flip between them"
           , D.div_
-              [ dyn_ D.div $ bus \push -> lcmap (alt (bang unit)) \event -> bang
+              [ dyn_ D.div $ bus \push -> lcmap (alt (pure unit)) \event -> pure
                   $ insert_
                   $ portal
                       ( map
                           ( \i -> D.video
-                              ( oneOfMap bang
+                              ( oneOfMap pure
                                   [ D.Controls := "true", D.Width := "250" ]
                               )
                               [ D.source
-                                  ( oneOfMap bang
+                                  ( oneOfMap pure
                                       [ D.Src := i, D.Xtype := "video/mp4" ]
                                   )
                                   []
@@ -52,7 +52,7 @@ main = runInBody
                           flips = switcher (if _ then p0 else p1) <<< ev
                         D.div_
                           [ D.button
-                              (bang $ D.OnClick := cb (const $ push unit))
+                              (pure $ D.OnClick := cb (const $ push unit))
                               [ text_ "Switch videos" ]
                           , D.div_
                               [ D.div_ [ flips true ], D.div_ [ flips false ] ]
@@ -63,16 +63,16 @@ main = runInBody
       , D.div_
           [ text_ "Single portals should not accumulate"
           , D.div_
-              [ dyn_ D.div $ bus \push -> lcmap (alt (bang unit)) \event -> bang
+              [ dyn_ D.div $ bus \push -> lcmap (alt (pure unit)) \event -> pure
                   $ insert_
                   $ portal
                       ( map
                           ( \i -> D.video
-                              ( oneOfMap bang
+                              ( oneOfMap pure
                                   [ D.Controls := "true", D.Width := "250" ]
                               )
                               [ D.source
-                                  ( oneOfMap bang
+                                  ( oneOfMap pure
                                       [ D.Src := i, D.Xtype := "video/mp4" ]
                                   )
                                   []
@@ -91,7 +91,7 @@ main = runInBody
                           flips = switcher (if _ then p0 else p1) <<< ev
                         D.div_
                           [ D.button
-                              (bang $ D.OnClick := cb (const $ push unit))
+                              (pure $ D.OnClick := cb (const $ push unit))
                               [ text_ "Toggle videos" ]
                           , D.div_ [ flips true ]
                           ]
@@ -101,16 +101,16 @@ main = runInBody
       , D.div_
           [ text_ "Portal should come in and out"
           , D.div_
-              [ dyn_ D.div $ bus \push -> lcmap (alt (bang unit)) \event -> bang
+              [ dyn_ D.div $ bus \push -> lcmap (alt (pure unit)) \event -> pure
                   $ insert_
                   $ portal
                       ( map
                           ( \i -> D.video
-                              ( oneOfMap bang
+                              ( oneOfMap pure
                                   [ D.Controls := "true", D.Width := "250" ]
                               )
                               [ D.source
-                                  ( oneOfMap bang
+                                  ( oneOfMap pure
                                       [ D.Src := i, D.Xtype := "video/mp4" ]
                                   )
                                   []
@@ -127,7 +127,7 @@ main = runInBody
                           flips = switcher (if _ then p0 else D.div_ []) <<< ev
                         D.div_
                           [ D.button
-                              (bang $ D.OnClick := cb (const $ push unit))
+                              (pure $ D.OnClick := cb (const $ push unit))
                               [ text_ "Toggle videos" ]
                           , D.div_ [ flips true ]
                           ]
