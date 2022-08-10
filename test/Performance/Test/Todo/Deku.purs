@@ -128,7 +128,7 @@ containerD initialState = Deku.do
         [ text_ "Add New" ]
     , D.button
         ( oneOf
-            [ pure $ D.Id := Shared.addNewId
+            [ pure $ D.Id := Shared.undoId
             , click $ undos <#> \uu ->
                 for_ (head uu) \u -> do
                   case u of

@@ -2,10 +2,11 @@ module Performance.Test.Todo.Component where
 
 import Prelude
 
-import Data.Array (filter, head)
+import Data.Array (cons, drop, filter, head, zip)
 import Data.Foldable (for_)
 import Data.Maybe (Maybe(..))
 import Data.Set as Set
+import Data.Tuple.Nested ((/\))
 import Effect.Aff.Class (class MonadAff)
 import Halogen (liftEffect)
 import Halogen as H
@@ -32,7 +33,11 @@ data UndoAction
 container :: forall q i o m. MonadAff m => H.Component q i o m
 container =
   H.mkComponent
-    { initialState: \_ -> { state: Shared.initialContainerState, undos: [] }
+    { initialState: \_ ->
+        { state: Shared.initialContainerState
+        , undos: []
+        , clearUndo: false
+        }
     , render
     , eval: H.mkEval $ H.defaultEval
         { handleAction = handleAction, initialize = Just Initialize }
@@ -46,6 +51,7 @@ container =
 
     HandleUndo -> do
       undos <- H.gets _.undos
+      H.modify_ (_ { clearUndo = true, undos = drop 1 undos })
       case head undos of
         Just (UndoRename i t) -> H.modify_
           ( \s -> s
@@ -68,19 +74,31 @@ container =
           )
         Nothing -> pure unit
 
-    HandleTodo msg -> case msg of
-      Save t -> do
-        state <- H.gets _.state
-        for_ (Shared.updateTodo t state.todos) \todos ->
-          H.modify_ _ { state { todos = todos } }
+    HandleTodo msg -> do
+      clearUndo <- H.gets _.clearUndo
+      when clearUndo $ H.modify_ (_ { undos = [] })
+      H.modify_ (_ { clearUndo = false })
+      case msg of
+        Save t -> do
+          state <- H.gets _.state
+          for_ (Shared.updateTodo t state.todos) \todos -> do
+            -- zip and update
+            for_ (zip state.todos todos) \(a /\ b) -> do
+              when (a.description /= b.description) do
+                H.modify_
+                  ( \x -> x
+                      { undos = cons (UndoRename a.id a.description) x.undos }
+                  )
+            H.modify_ _ { state { todos = todos } }
 
-      SetCompleted id complete -> do
-        if complete then
+        SetCompleted id complete -> do
           H.modify_ \s -> s
-            { state { completed = Set.insert id s.state.completed } }
-        else
-          H.modify_ \s -> s
-            { state { completed = Set.delete id s.state.completed } }
+            { state
+                { completed = (if complete then Set.insert else Set.delete) id
+                    s.state.completed
+                }
+            , undos = cons (UndoCompleted id (not complete)) s.undos
+            }
 
     AddNew -> do
       state <- H.gets _.state
@@ -99,6 +117,11 @@ container =
           , HE.onClick \_ -> AddNew
           ]
           [ HH.text "Add New" ]
+      , HH.button
+          [ HP.id Shared.undoId
+          , HE.onClick \_ -> HandleUndo
+          ]
+          [ HH.text "Undo" ]
       , HH.div
           [ HP.id Shared.todosId ]
           todos
@@ -112,7 +135,7 @@ data TodoAction
 
 todo :: forall q m. MonadAff m => H.Component q TodoInput TodoOutput m
 todo = H.mkComponent
-  { initialState: identity
+  { initialState: \x -> { todo: x.todo, completed: x.completed, dirty: false }
   , render
   , eval: H.mkEval $ H.defaultEval
       { handleAction = handleAction, receive = Just <<< ReceiveTodoInput }
@@ -122,16 +145,31 @@ todo = H.mkComponent
     ReceiveTodoInput input -> do
       state <- H.get
       unless
-        (state.todo.id == input.todo.id && state.completed == input.completed)
+        ( state.todo.id == input.todo.id && state.completed == input.completed
+            && state.todo.description == input.todo.description
+        )
         do
+          when (state.todo.description /= input.todo.description && not state.dirty)
+            do
+              H.modify_ \st -> st
+                { todo
+                    { id = input.todo.id
+                    , description = input.todo.description
+                    }
+                }
           H.modify_ \st -> st
-            { todo { id = input.todo.id }, completed = input.completed }
+            { todo
+                { id = input.todo.id
+                }
+            , completed = input.completed
+            }
 
     UpdateDescription str -> do
-      H.modify_ \state -> state { todo { description = str } }
+      H.modify_ _ { todo { description = str }, dirty = true }
 
     SaveUpdate -> do
       state <- H.get
+      H.modify_ _ { dirty = false }
       H.raise $ Save { id: state.todo.id, description: state.todo.description }
 
     HandleCheckbox (Check checked) -> do
@@ -162,7 +200,8 @@ checkbox
 checkbox = H.mkComponent
   { initialState: identity
   , render
-  , eval: H.mkEval $ H.defaultEval { handleAction = handleAction }
+  , eval: H.mkEval $ H.defaultEval
+      { handleAction = handleAction, receive = Just <<< ReceiveCheckboxInput }
   }
   where
   handleAction = case _ of
