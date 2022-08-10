@@ -7,6 +7,8 @@ module Performance.Setup.Puppeteer
   , debug
   , click
   , waitForSelector
+  , getInputFieldValue
+  , getChecked
   , focus
   , typeWithKeyboard
   , goto
@@ -95,6 +97,16 @@ foreign import waitForSelectorImpl :: EffectFn2 Page String (Promise (Nullable H
 
 waitForSelector :: Page -> String -> Aff (Maybe HTMLElement)
 waitForSelector page selector = map toMaybe (toAffE2 waitForSelectorImpl page selector)
+
+foreign import getInputFieldValueImpl :: EffectFn2 Page String (Promise (Nullable String))
+
+getInputFieldValue :: Page -> String -> Aff (Maybe String)
+getInputFieldValue page selector = map toMaybe (toAffE2 getInputFieldValueImpl page selector)
+
+foreign import getCheckedImpl :: EffectFn2 Page String (Promise (Nullable Boolean))
+
+getChecked :: Page -> String -> Aff (Maybe Boolean)
+getChecked page selector = map toMaybe (toAffE2 getCheckedImpl page selector)
 
 foreign import focusImpl :: EffectFn2 Page String (Promise Unit)
 

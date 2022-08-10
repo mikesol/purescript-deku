@@ -82,6 +82,9 @@ descriptions = [ "eat", "drink", "sleep", "party", "walk", "run", "hike", "play 
 addNewId :: String
 addNewId = "add-new"
 
+undoId :: String
+undoId = "undo"
+
 todosId :: String
 todosId = "todos"
 
