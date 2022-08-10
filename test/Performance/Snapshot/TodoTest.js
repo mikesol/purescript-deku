@@ -1,23 +1,23 @@
 export const result = {
   "hookAverage": {
-    "totalTime": "654ms",
-    "scriptTime": "426ms",
-    "peakHeap": "13823kb",
-    "averageHeap": "6615kb",
-    "averageFPS": 17
+    "totalTime": "759ms",
+    "scriptTime": "555ms",
+    "peakHeap": "14458kb",
+    "averageHeap": "7334kb",
+    "averageFPS": 16
   },
   "dekuAverage": {
-    "totalTime": "317ms",
-    "scriptTime": "152ms",
-    "peakHeap": "6462kb",
-    "averageHeap": "3895kb",
-    "averageFPS": 26
+    "totalTime": "344ms",
+    "scriptTime": "147ms",
+    "peakHeap": "6700kb",
+    "averageHeap": "4217kb",
+    "averageFPS": 30
   },
   "componentAverage": {
-    "totalTime": "408ms",
-    "scriptTime": "243ms",
-    "peakHeap": "7380kb",
-    "averageHeap": "3694kb",
-    "averageFPS": 25
+    "totalTime": "630ms",
+    "scriptTime": "416ms",
+    "peakHeap": "12781kb",
+    "averageHeap": "6652kb",
+    "averageFPS": 19
   }
 }
