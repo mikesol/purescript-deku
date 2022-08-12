@@ -7,7 +7,7 @@ import Affjax.Web as AX
 import Control.Alt ((<|>))
 import Data.Argonaut.Core (stringifyWithIndent)
 import Data.Either (Either(..))
-import Data.Filterable (compact, filterMap)
+import Data.Filterable (compact, separate)
 import Data.HTTP.Method (Method(..))
 import Data.Maybe (Maybe(..))
 import Data.Profunctor (lcmap)
@@ -19,7 +19,7 @@ import Deku.Toplevel (runInBody1)
 import Effect (Effect)
 import Effect.Aff (launchAff_)
 import Effect.Class (liftEffect)
-import FRP.Event (bus, mapAccum)
+import FRP.Event (AnEvent, bus, mapAccum)
 
 data UIAction = Initial | Loading | Result String
 
@@ -52,33 +52,24 @@ main = runInBody1
   ( bus \push -> lcmap (pure Initial <|> _)
       \event ->
         let
-          loadingOrResult = filterMap
-            ( case _ of
-                Loading -> Just $ Left unit
-                Result s -> Just $ Right s
-                _ -> Nothing
-            )
-            event
-          loading = filterMap
-            ( case _ of
-                Left _ -> Just unit
-                _ -> Nothing
-            )
-            loadingOrResult
-          result = filterMap
-            ( case _ of
-                Right s -> Just s
-                _ -> Nothing
-            )
-            loadingOrResult
+          split :: { left :: AnEvent _ Unit, right :: AnEvent _ String }
+          split = separate $ compact $
+            map
+              ( case _ of
+                  Loading -> Just $ Left unit
+                  Result s -> Just $ Right s
+                  _ -> Nothing
+              )
+              event
+
         in
           D.div_
             [ D.div_
                 [ D.button (pure (D.OnClick := clickCb push))
                     [ text
                         ( pure clickText
-                            <|> (loading $> "Loading...")
-                            <|> (result $> clickText)
+                            <|> (split.left $> "Loading...")
+                            <|> (split.right $> clickText)
                         )
                     ]
                 ]
@@ -89,11 +80,11 @@ main = runInBody1
                             ( \_ b -> (b && false) /\
                                 if b then Just unit else Nothing
                             )
-                            result
+                            split.right
                             true
                         ) $> (D.Style := "display: block;")
                     )
                 )
-                [ D.pre_ [ D.code_ [ text (pure "" <|> result) ] ] ]
+                [ D.pre_ [ D.code_ [ text (pure "" <|> split.right) ] ] ]
             ]
   )

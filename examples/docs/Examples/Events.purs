@@ -2,14 +2,15 @@ module Deku.Examples.Docs.Examples.Events where
 
 import Prelude
 
+import Bolson.Core (vbussed)
 import Control.Alt ((<|>))
 import Deku.Control (text, text_)
 import Deku.DOM as D
 import Deku.Listeners (click_, slider)
-import Deku.Toplevel (runInBody1)
+import Deku.Toplevel (runInBody)
 import Effect (Effect)
-import FRP.Event (fold)
-import FRP.Event.VBus (V, vbus)
+import FRP.Event (AnEvent, fold)
+import FRP.Event.VBus (V)
 import Type.Proxy (Proxy(..))
 
 type UIEvents = V
@@ -18,8 +19,14 @@ type UIEvents = V
   )
 
 main :: Effect Unit
-main = runInBody1
-  ( vbus (Proxy :: _ UIEvents) \push event -> do
+main = runInBody
+  ( vbussed (Proxy :: _ UIEvents) \push event -> do
+      let
+        countUp :: AnEvent _ Int
+        countUp = fold
+          (const (1 + _))
+          (pure unit <|> event.buttonClicked)
+          (-1)
       D.div_
         [ D.button
             (click_ (pure push.buttonClicked))
@@ -27,11 +34,7 @@ main = runInBody1
         , D.div_
             [ text
                 ( pure "Val: 0" <|>
-                    ( append "Val: " <<< show
-                        <$> fold
-                          (const (add 1))
-                          (pure unit <|> event.buttonClicked)
-                          (-1)
+                    ( append "Val: " <<< show <$> countUp
                     )
                 )
             ]
