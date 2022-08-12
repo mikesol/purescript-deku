@@ -7,6 +7,7 @@ module Deku.Control
   , dekuA
   , globalPortal
   , portal
+  , blank
   , dyn
   , dyn_
   , fixed
@@ -31,7 +32,7 @@ import Data.Maybe (Maybe(..), maybe)
 import Data.Newtype (unwrap)
 import Data.Profunctor (lcmap)
 import Deku.Attribute (Attribute, AttributeValue(..), unsafeUnAttribute)
-import Deku.Core (class Korok, DOMInterpret(..), Domable, Node(..))
+import Deku.Core (class Korok, DOMInterpret(..), Domable, Node(..), Nut)
 import FRP.Event (AnEvent, makeEvent, subscribe)
 import Prim.Int (class Compare)
 import Prim.Ordering (GT)
@@ -297,3 +298,6 @@ envy_
   -> AnEvent m (Domable m lock payload)
   -> Domable m lock payload
 envy_ f i = f empty [BCore.envy i]
+
+blank :: Nut
+blank = BCore.envy empty
