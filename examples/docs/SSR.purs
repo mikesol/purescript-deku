@@ -12,6 +12,7 @@ import Deku.Toplevel (Template(..), runSSR)
 import FRP.Event (fold, makeEvent)
 import FRP.Event.VBus (V)
 import Type.Proxy (Proxy(..))
+import Examples as Examples
 
 type UIEvents = V
   ( buttonClicked :: Unit
@@ -115,107 +116,21 @@ ssrPage _ = px ~~
   { code2: nut
       ( D.pre_
           [ D.code_
-              [ text_
-                  """module Live where
-
-import Prelude
-
-import App (app)
-import Deku.Toplevel (hydrate)
-import Effect (Effect)
-
-main :: Effect Unit
-main = hydrate app"""
+              [ text_ Examples.live
               ]
           ]
       )
   , code1: nut
       ( D.pre_
           [ D.code_
-              [ text_
-                  """module Build where
-
-import Prelude
-
-import App (app)
-import Deku.Toplevel (Template(..), runSSR)
-import Effect (Effect)
-import Effect.Console (log)
-
-main :: Effect Unit
-main =
-  runSSR
-    ( Template
-        { head: "<!DOCTYPE html><html><head><script src=\"bundle.js\" defer></script></head>"
-        , tail: "</html>"
-        }
-    )
-    app >>= log"""
+              [ text_ Examples.build
               ]
           ]
       )
   , code0: nut
       ( D.pre_
           [ D.code_
-              [ text_
-                  $
-                    """module App where
-
-import Prelude
-
-import Control.Alt ((<|>))
-import Deku.Control (text, text_)
-import Deku.DOM as D
-import Deku.Listeners (click_, slider)
-import Deku.Core (Nut, vbussed)
-import FRP.Event (pure, fold)
-import FRP.Event.VBus (V)
-import Type.Proxy (Proxy(..))
-
-type UIEvents = V
-  ( buttonClicked :: Unit
-  , sliderMoved :: Number
-  )
-
-app :: Nut
-app = vbussed (Proxy :: _ UIEvents) \push event -> do
-  D.div_
-    [ D.p_
-        [ text_
-            """ <> "\"\"\"" <> """Here's an example of SSR in deku.
-All of the static bits are rendered as HTML,
-and all of the dynamic bits are hydrated on page load.""" <> "\"\"\"" <> """
-        ]
-    , D.button
-        (click_ (pure push.buttonClicked))
-        [ text_ "Click" ]
-    , D.div_
-        [ text
-            ( pure "Val: 0" <|>
-                ( append "Val: " <<< show
-                    <$> fold
-                      (const (add 1))
-                      (pure unit <|> event.buttonClicked)
-                      (-1)
-                )
-            )
-        ]
-    , D.div_
-        [ D.input
-            (slider (pure push.sliderMoved))
-            []
-        , D.div_
-            [ text
-                ( pure "Val: 50" <|>
-                    ( map
-                        (append "Val: " <<< show)
-                        event.sliderMoved
-                    )
-                )
-            ]
-        ]
-    ]
-"""
+              [ text_ Examples.app
               ]
           ]
       )

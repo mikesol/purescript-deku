@@ -15,6 +15,7 @@ import Deku.DOM as D
 import Deku.Example.Docs.Types (Page(..), PageOptions)
 import Deku.Example.Docs.Util (scrollToTop)
 import Deku.Pursx (nut, (~~))
+import Examples as Examples
 import FRP.Event (keepLatest, mapAccum)
 import Type.Proxy (Proxy(..))
 import Web.Event.Event (preventDefault, target)
@@ -70,97 +71,7 @@ events2 options = px ~~
   { code: nut
       ( D.pre_
           [ D.code_
-              [ text_
-                  """module Main where
-
-import Prelude
-
-import Control.Alt ((<|>))
-import Data.Filterable (filterMap)
-import Data.Foldable (for_, oneOfMap)
-import Data.Maybe (Maybe(..))
-import Data.Profunctor (lcmap)
-import Data.Tuple.Nested ((/\))
-import Deku.Attribute (cb, (:=))
-import Deku.Control (text_, dyn_)
-import Deku.Core (Child(..))
-import Deku.DOM as D
-import Deku.Toplevel (runInBody1)
-import Effect (Effect)
-import FRP.Event (pure, bus, keepLatest, mapAccum)
-import Web.Event.Event (target)
-import Web.HTML.HTMLInputElement (fromEventTarget, value)
-import Web.UIEvent.KeyboardEvent (code, fromEvent)
-
-data MainUIAction
-  = UIShown
-  | AddTodo
-  | ChangeText String
-
-data TodoAction = Prioritize | Delete
-
-main :: Effect Unit
-main = runInBody1
-  ( bus \push -> lcmap (pure UIShown <|> _) \event -> do
-      let
-        top =
-          [ D.input
-              ( oneOfMap pure
-                  [ D.OnInput := cb \e -> for_
-                      ( target e
-                          >>= fromEventTarget
-                      )
-                      ( value
-                          >=> push <<< ChangeText
-                      )
-                  , D.OnKeyup := cb
-                      \e -> for_ (fromEvent e) \evt -> do
-                        when (code evt == "Enter") $ do
-                          push AddTodo
-                  ]
-              )
-              []
-          , D.button
-              (pure $ D.OnClick := push AddTodo)
-              [ text_ "Add" ]
-          ]
-      D.div_
-        [ D.div_ top
-        , dyn_ D.div $
-                map
-                  ( \txt -> keepLatest $ bus \p' e' ->
-                      ( pure $ Insert $ D.div_
-                          [ text_ txt
-                          , D.button
-                              ( pure
-                                  $ D.OnClick := p' SendToTop
-                              )
-                              [ text_ "Prioritize" ]
-                          , D.button
-                              ( pure
-                                  $ D.OnClick := p' Remove
-                              )
-                              [ text_ "Delete" ]
-                          ]
-                      ) <|> e'
-                  )
-                  ( filterMap
-                      ( \(tf /\ s) ->
-                          if tf then Just s else Nothing
-                      )
-                      ( mapAccum
-                          ( \a b -> case a of
-                              ChangeText s -> s /\ (false /\ s)
-                              AddTodo -> b /\ (true /\ b)
-                              _ -> "" /\ (false /\ "")
-                          )
-                          event
-                          ""
-                      )
-                  )
-        ]
-  )
-"""
+              [ text_ Examples.events3
               ]
           ]
       )
