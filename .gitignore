@@ -8,6 +8,8 @@
 /.purs*
 /.psa*
 /.spago
+/examples/docs/Examples.js
+/examples/docs/Examples.purs
 /examples/**/index.js
 /examples/**/bundle.js
 /examples/**/main.js

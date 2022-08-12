@@ -10,6 +10,7 @@ import Deku.DOM as D
 import Deku.Example.Docs.Types (Page(..), PageOptions)
 import Deku.Example.Docs.Util (scrollToTop)
 import Deku.Pursx (nut, (~~))
+import Examples as Examples
 import Type.Proxy (Proxy(..))
 import Web.Event.Event (preventDefault)
 
@@ -45,17 +46,7 @@ helloWorld options = px ~~
       ( D.pre_
           [ D.code_
               [ text_
-                  """module Main where
-
-import Prelude
-
-import Deku.Control (text_)
-import Deku.Toplevel (runInBody)
-import Effect (Effect)
-
-main :: Effect Unit
-main = runInBody (text_ "Hello world")
-"""
+                 Examples.helloWorld
               ]
           ]
       )

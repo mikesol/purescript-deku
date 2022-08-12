@@ -10,6 +10,7 @@ import Deku.DOM as D
 import Deku.Example.Docs.Types (Page(..), PageOptions)
 import Deku.Example.Docs.Util (scrollToTop)
 import Deku.Pursx (nut, psx, (~~))
+import Examples as Examples
 import Type.Proxy (Proxy(..))
 import Web.Event.Event (preventDefault)
 
@@ -59,41 +60,7 @@ pursx1 options = px ~~
   { code: nut
       ( D.pre_
           [ D.code_
-              [ text_ $
-                  """module Main where
-
-import Prelude
-
-import Deku.Pursx (psx)
-import Deku.Toplevel (runInBody)
-import Effect (Effect)
-import FRP.Event (pure)
-import Type.Proxy (Proxy(..))
-
-myDom = Proxy :: Proxy """ <> "\"\"\""
-                    <>
-                      """<div>
-    <button>I do nothing</button>
-    <ul>
-        <li>A</li>
-        <li>B</li>
-        <li>C</li>
-    </ul>
-    <div>
-        <a href="https://github.com/mikesol/purescript-deku"></a>
-        <i>bar</i>
-        <span style="font-weight:800;">baz</span>
-    </div>
-    <div><div></div><div><input type="range"/></div></div>
-    </div>
-"""
-                    <> "\"\"\""
-                    <>
-                      """
-
-main :: Effect Unit
-main = runInBody (psx myDom)
-"""
+              [ text_ Examples.pursx1
               ]
           ]
       )

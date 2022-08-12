@@ -10,6 +10,7 @@ import Deku.DOM as D
 import Deku.Example.Docs.Types (Page(..), PageOptions)
 import Deku.Example.Docs.Util (scrollToTop)
 import Deku.Pursx (nut, (~~))
+import Examples as Examples
 import Type.Proxy (Proxy(..))
 import Web.Event.Event (preventDefault)
 
@@ -54,36 +55,7 @@ components options = px ~~
   { code: nut
       ( D.pre_
           [ D.code_
-              [ text_
-                  """module Main where
-
-import Prelude
-
-import Deku.Attribute ((:=))
-import Deku.Control (text_)
-import Deku.DOM as D
-import Deku.Toplevel (runInBodyA)
-import Effect (Effect)
-import FRP.Event.Class (pure)
-
-main :: Effect Unit
-main = runInBodyA
-  ( [ D.button_ [ text_ "I do nothing" ]
-    , D.ul_ $ map (D.li_ <<< pure <<< text_) [ "A", "B", "C" ]
-    , D.div_
-        [ D.a (pure $ D.Href := "https://example.com")
-            [ text_ "foo " ]
-        , D.i_ [ text_ " bar " ]
-        , D.span (pure $ D.Style := "font-weight: 800;")
-            [ text_ " baz" ]
-        ]
-    , D.div_
-        [ D.div_
-            [ D.div_ [ D.input (pure $ D.Xtype := "range") [] ]
-            ]
-        ]
-    ]
-  )"""
+              [ text_ Examples.component
               ]
           ]
       )
