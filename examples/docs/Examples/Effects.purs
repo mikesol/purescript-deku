@@ -50,7 +50,7 @@ clickText = "Click to get some random user data." :: String
 main :: Effect Unit
 main = runInBody1
   ( bus \push -> lcmap (pure Initial <|> _)
-      \event ->
+      \event -> do
         let
           split :: { left :: AnEvent _ Unit, right :: AnEvent _ String }
           split = separate $ compact $
@@ -61,15 +61,14 @@ main = runInBody1
                   _ -> Nothing
               )
               event
-
-        in
-          D.div_
+          { left: loading, right: result } = split
+        D.div_
             [ D.div_
                 [ D.button (pure (D.OnClick := clickCb push))
                     [ text
                         ( pure clickText
-                            <|> (split.left $> "Loading...")
-                            <|> (split.right $> clickText)
+                            <|> (loading $> "Loading...")
+                            <|> (result $> clickText)
                         )
                     ]
                 ]
@@ -80,11 +79,11 @@ main = runInBody1
                             ( \_ b -> (b && false) /\
                                 if b then Just unit else Nothing
                             )
-                            split.right
+                            result
                             true
                         ) $> (D.Style := "display: block;")
                     )
                 )
-                [ D.pre_ [ D.code_ [ text (pure "" <|> split.right) ] ] ]
+                [ D.pre_ [ D.code_ [ text (pure "" <|> result) ] ] ]
             ]
   )
