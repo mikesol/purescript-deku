@@ -5866,7 +5866,7 @@ var pursxToElementConsAttr = function() {
                             });
                           }
                           ;
-                          throw new Error("Failed pattern match at Deku.Pursx (line 4475, column 38 - line 4485, column 24): " + [v3.value.constructor.name]);
+                          throw new Error("Failed pattern match at Deku.Pursx (line 4492, column 38 - line 4502, column 24): " + [v3.value.constructor.name]);
                         }))(get(dictIsSymbol)()($$Proxy.value)(r)))(v1.element(parent2)(v2));
                       };
                     }
@@ -5963,11 +5963,11 @@ var __internalDekuFlatten2 = function(dictKorok) {
       };
     },
     ids: function() {
-      var $443 = unwrap();
-      return function($444) {
+      var $444 = unwrap();
+      return function($445) {
         return function(v) {
           return v.ids;
-        }($443($444));
+        }($444($445));
       };
     }(),
     disconnectElement: function(v) {
