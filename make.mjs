@@ -512,8 +512,8 @@ var showStringImpl = function(s) {
         return "\\v";
     }
     var k = i2 + 1;
-    var empty5 = k < l && s[k] >= "0" && s[k] <= "9" ? "\\&" : "";
-    return "\\" + c.charCodeAt(0).toString(10) + empty5;
+    var empty6 = k < l && s[k] >= "0" && s[k] <= "9" ? "\\&" : "";
+    return "\\" + c.charCodeAt(0).toString(10) + empty6;
   }) + '"';
 };
 
@@ -1163,6 +1163,52 @@ var monoidEffect = function(dictMonoid) {
   };
 };
 
+// output/Effect.Ref/foreign.js
+var _new = function(val) {
+  return function() {
+    return { value: val };
+  };
+};
+var read = function(ref) {
+  return function() {
+    return ref.value;
+  };
+};
+var modifyImpl = function(f) {
+  return function(ref) {
+    return function() {
+      var t = f(ref.value);
+      ref.value = t.state;
+      return t.value;
+    };
+  };
+};
+var write = function(val) {
+  return function(ref) {
+    return function() {
+      ref.value = val;
+    };
+  };
+};
+
+// output/Effect.Ref/index.js
+var $$new = _new;
+var modify$prime = modifyImpl;
+var modify = function(f) {
+  return modify$prime(function(s) {
+    var s$prime = f(s);
+    return {
+      state: s$prime,
+      value: s$prime
+    };
+  });
+};
+var modify_ = function(f) {
+  return function(s) {
+    return $$void(functorEffect)(modify(f)(s));
+  };
+};
+
 // output/Control.Monad.ST.Internal/foreign.js
 var map_ = function(f) {
   return function(a2) {
@@ -1234,9 +1280,9 @@ var $runtime_lazy3 = function(name16, moduleName, init3) {
     return val;
   };
 };
-var modify$prime = modifyImpl2;
-var modify = function(f) {
-  return modify$prime(function(s) {
+var modify$prime2 = modifyImpl2;
+var modify2 = function(f) {
+  return modify$prime2(function(s) {
     var s$prime = f(s);
     return {
       state: s$prime,
@@ -1430,7 +1476,7 @@ var Iterator = /* @__PURE__ */ function() {
 var next = function(v) {
   return function __do2() {
     var i2 = read2(v.value1)();
-    modify(function(v1) {
+    modify2(function(v1) {
       return v1 + 1 | 0;
     })(v.value1)();
     return v.value0(i2);
@@ -1944,7 +1990,7 @@ var $$try = function(dictMonadError) {
 var state = function(dict) {
   return dict.state;
 };
-var modify3 = function(dictMonadState) {
+var modify4 = function(dictMonadState) {
   return function(f) {
     return state(dictMonadState)(function(s) {
       var s$prime = f(s);
@@ -3005,7 +3051,7 @@ function unsafeModify(l) {
 
 // output/Record.Builder/index.js
 var semigroupoidBuilder = semigroupoidFn;
-var modify4 = function() {
+var modify5 = function() {
   return function() {
     return function(dictIsSymbol) {
       return function(l) {
@@ -3053,7 +3099,7 @@ var mapRecordWithIndexCons = function(dictIsSymbol) {
           return {
             mapRecordWithIndexBuilder: function(v) {
               return function(f) {
-                return compose(semigroupoidBuilder)(modify4()()(dictIsSymbol)($$Proxy.value)(mappingWithIndex(dictMappingWithIndex)(f)($$Proxy.value)))(mapRecordWithIndexBuilder(dictMapRecordWithIndex)($$Proxy.value)(f));
+                return compose(semigroupoidBuilder)(modify5()()(dictIsSymbol)($$Proxy.value)(mappingWithIndex(dictMappingWithIndex)(f)($$Proxy.value)))(mapRecordWithIndexBuilder(dictMapRecordWithIndex)($$Proxy.value)(f));
               };
             }
           };
@@ -3314,6 +3360,11 @@ var KickUp = /* @__PURE__ */ function() {
   };
   return KickUp2;
 }();
+var singleton7 = function(k) {
+  return function(v) {
+    return new Two(Leaf.value, k, v, Leaf.value);
+  };
+};
 var lookup3 = function(dictOrd) {
   return function(k) {
     var comp = compare(dictOrd);
@@ -3987,6 +4038,15 @@ var foldableWithIndexMap = {
     return foldableMap;
   }
 };
+var keys2 = /* @__PURE__ */ function() {
+  return foldrWithIndex(foldableWithIndexMap)(function(k) {
+    return function(v) {
+      return function(acc) {
+        return new Cons(k, acc);
+      };
+    };
+  })(Nil.value);
+}();
 var empty3 = /* @__PURE__ */ function() {
   return Leaf.value;
 }();
@@ -4014,6 +4074,30 @@ var alter = function(dictOrd) {
       };
     };
   };
+};
+var unionWith = function(dictOrd) {
+  return function(f) {
+    return function(m1) {
+      return function(m2) {
+        var go2 = function(k) {
+          return function(m) {
+            return function(v) {
+              return alter(dictOrd)(function() {
+                var $808 = maybe(v)(f(v));
+                return function($809) {
+                  return Just.create($808($809));
+                };
+              }())(k)(m);
+            };
+          };
+        };
+        return foldlWithIndex(foldableWithIndexMap)(go2)(m2)(m1);
+      };
+    };
+  };
+};
+var union = function(dictOrd) {
+  return unionWith(dictOrd)($$const);
 };
 
 // output/Data.Compactable/index.js
@@ -4126,6 +4210,103 @@ var filter4 = function(dict) {
   return dict.filter;
 };
 
+// output/Data.Set/index.js
+var union2 = function(dictOrd) {
+  return function(v) {
+    return function(v1) {
+      return union(dictOrd)(v)(v1);
+    };
+  };
+};
+var toList2 = function(v) {
+  return keys2(v);
+};
+var singleton8 = function(a2) {
+  return singleton7(a2)(unit);
+};
+var semigroupSet = function(dictOrd) {
+  return {
+    append: union2(dictOrd)
+  };
+};
+var foldableSet = {
+  foldMap: function(dictMonoid) {
+    return function(f) {
+      var $72 = foldMap(foldableList)(dictMonoid)(f);
+      return function($73) {
+        return $72(toList2($73));
+      };
+    };
+  },
+  foldl: function(f) {
+    return function(x) {
+      var $74 = foldl(foldableList)(f)(x);
+      return function($75) {
+        return $74(toList2($75));
+      };
+    };
+  },
+  foldr: function(f) {
+    return function(x) {
+      var $76 = foldr(foldableList)(f)(x);
+      return function($77) {
+        return $76(toList2($77));
+      };
+    };
+  }
+};
+var empty4 = empty3;
+var monoidSet = function(dictOrd) {
+  return {
+    mempty: empty4,
+    Semigroup0: function() {
+      return semigroupSet(dictOrd);
+    }
+  };
+};
+var $$delete3 = function(dictOrd) {
+  return function(a2) {
+    return function(v) {
+      return $$delete2(dictOrd)(a2)(v);
+    };
+  };
+};
+
+// output/Effect.Timer/foreign.js
+function setTimeoutImpl(ms) {
+  return function(fn) {
+    return function() {
+      return setTimeout(fn, ms);
+    };
+  };
+}
+function clearTimeoutImpl(id2) {
+  return function() {
+    clearTimeout(id2);
+  };
+}
+
+// output/Effect.Timer/index.js
+var setTimeout2 = setTimeoutImpl;
+var eqTimeoutId = {
+  eq: function(x) {
+    return function(y) {
+      return x === y;
+    };
+  }
+};
+var ordTimeoutId = {
+  compare: function(x) {
+    return function(y) {
+      return compare(ordInt)(x)(y);
+    };
+  },
+  Eq0: function() {
+    return eqTimeoutId;
+  }
+};
+var clearTimeout2 = clearTimeoutImpl;
+
 // output/FRP.Event.Class/index.js
 var keepLatest = function(dict) {
   return dict.keepLatest;
@@ -4146,11 +4327,6 @@ var mapAccum = function(dictIsEvent) {
     };
   };
 };
-var bang = function() {
-  return function(dictApplicative) {
-    return pure(dictApplicative);
-  };
-};
 
 // output/Unsafe.Reference/foreign.js
 function reallyUnsafeRefEq(a2) {
@@ -4163,13 +4339,22 @@ function reallyUnsafeRefEq(a2) {
 var unsafeRefEq = reallyUnsafeRefEq;
 
 // output/FRP.Event/index.js
+var $runtime_lazy4 = function(name16, moduleName, init3) {
+  var state3 = 0;
+  var val;
+  return function(lineNumber) {
+    if (state3 === 2)
+      return val;
+    if (state3 === 1)
+      throw new ReferenceError(name16 + " was needed before it finished initializing (module " + moduleName + ", line " + lineNumber + ")", moduleName, lineNumber);
+    state3 = 1;
+    val = init3();
+    state3 = 2;
+    return val;
+  };
+};
 var AnEvent = function(x) {
   return x;
-};
-var subscribe = function(v) {
-  return function(k) {
-    return v(k);
-  };
 };
 var sampleOn2 = function(dictMonadST) {
   return function(dictApplicative) {
@@ -4181,8 +4366,8 @@ var sampleOn2 = function(dictMonadST) {
               return liftST(dictMonadST)($$void(functorST)(write2(new Just(a2))(latest)));
             }))(function(c1) {
               return bind(dictMonadST.Monad0().Bind1())(v1(function(f) {
-                return bind(dictMonadST.Monad0().Bind1())(liftST(dictMonadST)(read2(latest)))(traverse_(dictApplicative)(foldableMaybe)(function($130) {
-                  return k(f($130));
+                return bind(dictMonadST.Monad0().Bind1())(liftST(dictMonadST)(read2(latest)))(traverse_(dictApplicative)(foldableMaybe)(function($160) {
+                  return k(f($160));
                 }));
               }))(function(c2) {
                 return pure(dictApplicative)(applySecond(dictApplicative.Apply0())(c1)(c2));
@@ -4194,32 +4379,12 @@ var sampleOn2 = function(dictMonadST) {
     };
   };
 };
-var makeEvent = AnEvent;
-var keepLatest2 = function(dictMonadST) {
-  return function(v) {
-    return function(k) {
-      return bind(dictMonadST.Monad0().Bind1())(liftST(dictMonadST)(newSTRef(Nothing.value)))(function(cancelInner) {
-        return bind(dictMonadST.Monad0().Bind1())(v(function(inner) {
-          return discard(discardUnit)(dictMonadST.Monad0().Bind1())(bind(dictMonadST.Monad0().Bind1())(liftST(dictMonadST)(read2(cancelInner)))(sequence_(dictMonadST.Monad0().Applicative0())(foldableMaybe)))(function() {
-            return bind(dictMonadST.Monad0().Bind1())(subscribe(inner)(k))(function(c) {
-              return liftST(dictMonadST)($$void(functorST)(write2(new Just(c))(cancelInner)));
-            });
-          });
-        }))(function(cancelOuter) {
-          return pure(dictMonadST.Monad0().Applicative0())(discard(discardUnit)(dictMonadST.Monad0().Bind1())(bind(dictMonadST.Monad0().Bind1())(liftST(dictMonadST)(read2(cancelInner)))(sequence_(dictMonadST.Monad0().Applicative0())(foldableMaybe)))(function() {
-            return cancelOuter;
-          }));
-        });
-      });
-    };
-  };
-};
 var functorEvent = {
   map: function(f) {
     return function(v) {
       return function(k) {
-        return v(function($131) {
-          return k(f($131));
+        return v(function($161) {
+          return k(f($161));
         });
       };
     };
@@ -4232,7 +4397,7 @@ var fold4 = function(dictMonadST) {
         return function(k) {
           return bind(dictMonadST.Monad0().Bind1())(liftST(dictMonadST)(newSTRef(b)))(function(result) {
             return v(function(a2) {
-              return bind(dictMonadST.Monad0().Bind1())(liftST(dictMonadST)(modify(f(a2))(result)))(k);
+              return bind(dictMonadST.Monad0().Bind1())(liftST(dictMonadST)(modify2(f(a2))(result)))(k);
             });
           });
         };
@@ -4254,7 +4419,7 @@ var filter5 = function(dictApplicative) {
             return pure(dictApplicative)(unit);
           }
           ;
-          throw new Error("Failed pattern match at FRP.Event (line 159, column 13 - line 161, column 27): " + [v1.constructor.name]);
+          throw new Error("Failed pattern match at FRP.Event (line 184, column 13 - line 186, column 27): " + [v1.constructor.name]);
         });
       };
     };
@@ -4272,59 +4437,8 @@ var filter$prime = function(dictApplicative) {
         return Nothing.value;
       }
       ;
-      throw new Error("Failed pattern match at FRP.Event (line 93, column 13 - line 95, column 25): " + [v.constructor.name]);
+      throw new Error("Failed pattern match at FRP.Event (line 112, column 13 - line 114, column 25): " + [v.constructor.name]);
     });
-  };
-};
-var create = function(dictMonadST) {
-  return function(dictMonadST1) {
-    return bind(dictMonadST.Monad0().Bind1())(liftST(dictMonadST)(newSTRef([])))(function(subscribers) {
-      return pure(dictMonadST.Monad0().Applicative0())({
-        event: function(k) {
-          return bind(dictMonadST1.Monad0().Bind1())(liftST(dictMonadST1)(modify(function(v) {
-            return append(semigroupArray)(v)([k]);
-          })(subscribers)))(function() {
-            return pure(dictMonadST1.Monad0().Applicative0())(bind(dictMonadST1.Monad0().Bind1())(liftST(dictMonadST1)(modify(deleteBy(unsafeRefEq)(k))(subscribers)))(function() {
-              return pure(dictMonadST1.Monad0().Applicative0())(unit);
-            }));
-          });
-        },
-        push: function(a2) {
-          return bind(dictMonadST1.Monad0().Bind1())(liftST(dictMonadST1)(read2(subscribers)))(traverse_(dictMonadST1.Monad0().Applicative0())(foldableArray)(function(k) {
-            return k(a2);
-          }));
-        }
-      });
-    });
-  };
-};
-var fix3 = function(dictMonadST) {
-  return function(dictMonad) {
-    return function(f) {
-      return function(k) {
-        return bind(dictMonad.Bind1())(create(dictMonadST)(dictMonadST))(function(v) {
-          var v1 = f(v.event);
-          return bind(dictMonad.Bind1())(subscribe(v1.input)(v.push))(function(c1) {
-            return bind(dictMonad.Bind1())(subscribe(v1.output)(k))(function(c2) {
-              return pure(dictMonad.Applicative0())(applySecond(dictMonad.Bind1().Apply0())(c1)(c2));
-            });
-          });
-        });
-      };
-    };
-  };
-};
-var memoize = function(dictMonadST) {
-  return function(e) {
-    return function(f) {
-      return makeEvent(function(k) {
-        return bind(dictMonadST.Monad0().Bind1())(create(dictMonadST)(dictMonadST))(function(v) {
-          return discard(discardUnit)(dictMonadST.Monad0().Bind1())(k(f(v.event)))(function() {
-            return subscribe(e)(v.push);
-          });
-        });
-      });
-    };
   };
 };
 var compactableEvent = function(dictApplicative) {
@@ -4341,7 +4455,7 @@ var compactableEvent = function(dictApplicative) {
             return Nothing.value;
           }
           ;
-          throw new Error("Failed pattern match at FRP.Event (line 76, column 13 - line 78, column 33): " + [v.constructor.name]);
+          throw new Error("Failed pattern match at FRP.Event (line 95, column 13 - line 97, column 33): " + [v.constructor.name]);
         })(xs),
         right: filter5(dictApplicative)(function(v) {
           if (v instanceof Right) {
@@ -4352,7 +4466,7 @@ var compactableEvent = function(dictApplicative) {
             return Nothing.value;
           }
           ;
-          throw new Error("Failed pattern match at FRP.Event (line 83, column 13 - line 85, column 32): " + [v.constructor.name]);
+          throw new Error("Failed pattern match at FRP.Event (line 102, column 13 - line 104, column 32): " + [v.constructor.name]);
         })(xs)
       };
     }
@@ -4367,9 +4481,9 @@ var filterableEvent = function(dictApplicative) {
         return {
           yes: filter$prime(dictApplicative)(p2)(xs),
           no: filter$prime(dictApplicative)(function() {
-            var $132 = not(heytingAlgebraBoolean);
-            return function($133) {
-              return $132(p2($133));
+            var $162 = not(heytingAlgebraBoolean);
+            return function($163) {
+              return $162(p2($163));
             };
           }())(xs)
         };
@@ -4379,13 +4493,13 @@ var filterableEvent = function(dictApplicative) {
       return function(xs) {
         return {
           left: filterMap(filterableEvent(dictApplicative))(function() {
-            var $134 = either(Just.create)($$const(Nothing.value));
-            return function($135) {
-              return $134(f($135));
+            var $164 = either(Just.create)($$const(Nothing.value));
+            return function($165) {
+              return $164(f($165));
             };
           }())(xs),
-          right: filterMap(filterableEvent(dictApplicative))(function($136) {
-            return hush(f($136));
+          right: filterMap(filterableEvent(dictApplicative))(function($166) {
+            return hush(f($166));
           })(xs)
         };
       };
@@ -4396,17 +4510,6 @@ var filterableEvent = function(dictApplicative) {
     Functor1: function() {
       return functorEvent;
     }
-  };
-};
-var bus = function(dictMonadST) {
-  return function(f) {
-    return makeEvent(function(k) {
-      return bind(dictMonadST.Monad0().Bind1())(create(dictMonadST)(dictMonadST))(function(v) {
-        return discard(discardUnit)(dictMonadST.Monad0().Bind1())(k(f(v.push)(v.event)))(function() {
-          return pure(dictMonadST.Monad0().Applicative0())(pure(dictMonadST.Monad0().Applicative0())(unit));
-        });
-      });
-    });
   };
 };
 var biSampleOn = function(dictMonadST) {
@@ -4475,6 +4578,252 @@ var biSampleOn = function(dictMonadST) {
           });
         };
       };
+    };
+  };
+};
+var subscribe = function(i2) {
+  return function(v) {
+    return v;
+  }($lazy_backdoor(269).subscribe)(i2);
+};
+var makeEvent = function(i2) {
+  return function(v) {
+    return v;
+  }($lazy_backdoor(292).makeEvent)(i2);
+};
+var create = function(dictMonadST) {
+  return function(dictMonadST1) {
+    return discard(discardUnit)(dictMonadST.Monad0().Bind1())(pure(dictMonadST.Monad0().Applicative0())(unit))(function() {
+      return function(v) {
+        return v(dictMonadST)(dictMonadST1);
+      }($lazy_backdoor(308).create);
+    });
+  };
+};
+var $lazy_backdoor = /* @__PURE__ */ $runtime_lazy4("backdoor", "FRP.Event", function() {
+  return {
+    makeEvent: AnEvent,
+    create: function() {
+      var create_ = function(dictMonadST) {
+        return function(dictMonadST1) {
+          return bind(dictMonadST.Monad0().Bind1())(liftST(dictMonadST)(newSTRef([])))(function(subscribers) {
+            return pure(dictMonadST.Monad0().Applicative0())({
+              event: function(k) {
+                return bind(dictMonadST1.Monad0().Bind1())(liftST(dictMonadST1)(modify2(function(v) {
+                  return append(semigroupArray)(v)([k]);
+                })(subscribers)))(function() {
+                  return pure(dictMonadST1.Monad0().Applicative0())(bind(dictMonadST1.Monad0().Bind1())(liftST(dictMonadST1)(modify2(deleteBy(unsafeRefEq)(k))(subscribers)))(function() {
+                    return pure(dictMonadST1.Monad0().Applicative0())(unit);
+                  }));
+                });
+              },
+              push: function(a2) {
+                return bind(dictMonadST1.Monad0().Bind1())(liftST(dictMonadST1)(read2(subscribers)))(traverse_(dictMonadST1.Monad0().Applicative0())(foldableArray)(function(k) {
+                  return k(a2);
+                }));
+              }
+            });
+          });
+        };
+      };
+      return create_;
+    }(),
+    subscribe: function() {
+      var subscribe_ = function(v) {
+        return function(k) {
+          return v(k);
+        };
+      };
+      return subscribe_;
+    }(),
+    bus: function() {
+      var bus_ = function(dictMonadST) {
+        return function(f) {
+          return makeEvent(function(k) {
+            return bind(dictMonadST.Monad0().Bind1())(create(dictMonadST)(dictMonadST))(function(v) {
+              return discard(discardUnit)(dictMonadST.Monad0().Bind1())(k(f(v.push)(v.event)))(function() {
+                return pure(dictMonadST.Monad0().Applicative0())(pure(dictMonadST.Monad0().Applicative0())(unit));
+              });
+            });
+          });
+        };
+      };
+      return bus_;
+    }(),
+    memoize: function() {
+      var memoize_ = function(dictMonadST) {
+        return function(e) {
+          return function(f) {
+            return makeEvent(function(k) {
+              return bind(dictMonadST.Monad0().Bind1())(create(dictMonadST)(dictMonadST))(function(v) {
+                return discard(discardUnit)(dictMonadST.Monad0().Bind1())(k(f(v.event)))(function() {
+                  return subscribe(e)(v.push);
+                });
+              });
+            });
+          };
+        };
+      };
+      return memoize_;
+    }(),
+    hot: function() {
+      var hot_ = function(dictMonadST) {
+        return function(e) {
+          return bind(dictMonadST.Monad0().Bind1())(create(dictMonadST)(dictMonadST))(function(v) {
+            return bind(dictMonadST.Monad0().Bind1())(subscribe(e)(v.push))(function(unsubscribe) {
+              return pure(dictMonadST.Monad0().Applicative0())({
+                event: v.event,
+                unsubscribe
+              });
+            });
+          });
+        };
+      };
+      return hot_;
+    }(),
+    mailboxed: function() {
+      var mailboxed_ = function(dictOrd) {
+        return function(dictMonadST) {
+          return function(e) {
+            return function(f) {
+              return makeEvent(function(k1) {
+                return bind(dictMonadST.Monad0().Bind1())(liftST(dictMonadST)(newSTRef(empty3)))(function(r) {
+                  return discard(discardUnit)(dictMonadST.Monad0().Bind1())(k1(f(function(a2) {
+                    return makeEvent(function(k2) {
+                      return discard(discardUnit)(dictMonadST.Monad0().Bind1())($$void(dictMonadST.Monad0().Bind1().Apply0().Functor0())(liftST(dictMonadST)(modify2(alter(dictOrd)(function(v) {
+                        if (v instanceof Nothing) {
+                          return new Just([k2]);
+                        }
+                        ;
+                        if (v instanceof Just) {
+                          return new Just(append(semigroupArray)(v.value0)([k2]));
+                        }
+                        ;
+                        throw new Error("Failed pattern match at FRP.Event (line 490, column 21 - line 492, column 55): " + [v.constructor.name]);
+                      })(a2))(r))))(function() {
+                        return pure(dictMonadST.Monad0().Applicative0())($$void(dictMonadST.Monad0().Bind1().Apply0().Functor0())(liftST(dictMonadST)(modify2(alter(dictOrd)(function(v) {
+                          if (v instanceof Nothing) {
+                            return Nothing.value;
+                          }
+                          ;
+                          if (v instanceof Just) {
+                            return new Just(deleteBy(unsafeRefEq)(k2)(v.value0));
+                          }
+                          ;
+                          throw new Error("Failed pattern match at FRP.Event (line 499, column 21 - line 501, column 69): " + [v.constructor.name]);
+                        })(a2))(r))));
+                      });
+                    });
+                  })))(function() {
+                    return bind(dictMonadST.Monad0().Bind1())(subscribe(e)(function(v) {
+                      return bind(dictMonadST.Monad0().Bind1())(liftST(dictMonadST)(read2(r)))(function(o) {
+                        var v1 = lookup3(dictOrd)(v.address)(o);
+                        if (v1 instanceof Nothing) {
+                          return pure(dictMonadST.Monad0().Applicative0())(unit);
+                        }
+                        ;
+                        if (v1 instanceof Just) {
+                          return for_(dictMonadST.Monad0().Applicative0())(foldableArray)(v1.value0)(function(v2) {
+                            return v2(v.payload);
+                          });
+                        }
+                        ;
+                        throw new Error("Failed pattern match at FRP.Event (line 508, column 13 - line 510, column 49): " + [v1.constructor.name]);
+                      });
+                    }))(function(unsub) {
+                      return pure(dictMonadST.Monad0().Applicative0())(discard(discardUnit)(dictMonadST.Monad0().Bind1())($$void(dictMonadST.Monad0().Bind1().Apply0().Functor0())(liftST(dictMonadST)(write2(empty3)(r))))(function() {
+                        return unsub;
+                      }));
+                    });
+                  });
+                });
+              });
+            };
+          };
+        };
+      };
+      return mailboxed_;
+    }(),
+    delay: function() {
+      var delay_ = function(n) {
+        return function(e) {
+          return makeEvent(function(k) {
+            return function __do2() {
+              var tid = $$new(mempty(monoidSet(ordTimeoutId)))();
+              var canceler = subscribe(e)(function(a2) {
+                return function __do3() {
+                  var localId = $$new(Nothing.value)();
+                  var id2 = setTimeout2(n)(function __do4() {
+                    k(a2)();
+                    var lid = read(localId)();
+                    return maybe(pure(applicativeEffect)(unit))(function(id3) {
+                      return modify_($$delete3(ordTimeoutId)(id3))(tid);
+                    })(lid)();
+                  })();
+                  write(new Just(id2))(localId)();
+                  return modify_(append(semigroupSet(ordTimeoutId))(singleton8(id2)))(tid)();
+                };
+              })();
+              return function __do3() {
+                var ids = read(tid)();
+                for_(applicativeEffect)(foldableSet)(ids)(clearTimeout2)();
+                return canceler();
+              };
+            };
+          });
+        };
+      };
+      return delay_;
+    }()
+  };
+});
+var backdoor = /* @__PURE__ */ $lazy_backdoor(423);
+var bus = function(dictMonadST) {
+  return function(i2) {
+    return function(v) {
+      return v(dictMonadST);
+    }(backdoor.bus)(i2);
+  };
+};
+var memoize = function(dictMonadST) {
+  return function(i2) {
+    return function(v) {
+      return v(dictMonadST);
+    }(backdoor.memoize)(i2);
+  };
+};
+var fix3 = function(dictMonadST) {
+  return function(dictMonad) {
+    return function(f) {
+      return function(k) {
+        return bind(dictMonad.Bind1())(create(dictMonadST)(dictMonadST))(function(v) {
+          var v1 = f(v.event);
+          return bind(dictMonad.Bind1())(subscribe(v1.input)(v.push))(function(c1) {
+            return bind(dictMonad.Bind1())(subscribe(v1.output)(k))(function(c2) {
+              return pure(dictMonad.Applicative0())(applySecond(dictMonad.Bind1().Apply0())(c1)(c2));
+            });
+          });
+        });
+      };
+    };
+  };
+};
+var keepLatest2 = function(dictMonadST) {
+  return function(v) {
+    return function(k) {
+      return bind(dictMonadST.Monad0().Bind1())(liftST(dictMonadST)(newSTRef(Nothing.value)))(function(cancelInner) {
+        return bind(dictMonadST.Monad0().Bind1())(v(function(inner) {
+          return discard(discardUnit)(dictMonadST.Monad0().Bind1())(bind(dictMonadST.Monad0().Bind1())(liftST(dictMonadST)(read2(cancelInner)))(sequence_(dictMonadST.Monad0().Applicative0())(foldableMaybe)))(function() {
+            return bind(dictMonadST.Monad0().Bind1())(subscribe(inner)(k))(function(c) {
+              return liftST(dictMonadST)($$void(functorST)(write2(new Just(c))(cancelInner)));
+            });
+          });
+        }))(function(cancelOuter) {
+          return pure(dictMonadST.Monad0().Applicative0())(discard(discardUnit)(dictMonadST.Monad0().Bind1())(bind(dictMonadST.Monad0().Bind1())(liftST(dictMonadST)(read2(cancelInner)))(sequence_(dictMonadST.Monad0().Applicative0())(foldableMaybe)))(function() {
+            return cancelOuter;
+          }));
+        });
+      });
     };
   };
 };
@@ -4615,20 +4964,43 @@ var vbusNil = {
 var vb = function(dict) {
   return dict.vb;
 };
+var vbackdoor = {
+  vbus: /* @__PURE__ */ function() {
+    var vbus__ = function() {
+      return function(dictMonadST) {
+        return function(dictVBus) {
+          return function(v) {
+            return function(f) {
+              var vbd = vb(dictVBus)($$Proxy.value)($$Proxy.value)($$Proxy.value);
+              return makeEvent(function(k) {
+                return bind(dictMonadST.Monad0().Bind1())(unsafePE(vbd))(function(upe) {
+                  return discard(discardUnit)(dictMonadST.Monad0().Bind1())(k(f(upe.p)(upe.e)))(function() {
+                    return pure(dictMonadST.Monad0().Applicative0())(unsafeDestroyS(upe.s));
+                  });
+                });
+              });
+            };
+          };
+        };
+      };
+    };
+    var vbus_ = function() {
+      return function(dictMonadST) {
+        return function(dictVBus) {
+          return vbus__()(dictMonadST)(dictVBus);
+        };
+      };
+    };
+    return vbus_;
+  }()
+};
 var vbus = function() {
   return function(dictMonadST) {
     return function(dictVBus) {
-      return function(v) {
-        return function(f) {
-          var vbd = vb(dictVBus)($$Proxy.value)($$Proxy.value)($$Proxy.value);
-          return makeEvent(function(k) {
-            return bind(dictMonadST.Monad0().Bind1())(unsafePE(vbd))(function(upe) {
-              return discard(discardUnit)(dictMonadST.Monad0().Bind1())(k(f(upe.p)(upe.e)))(function() {
-                return pure(dictMonadST.Monad0().Applicative0())(unsafeDestroyS(upe.s));
-              });
-            });
-          });
-        };
+      return function(i2) {
+        return function(v) {
+          return v()(dictMonadST)(dictVBus);
+        }(vbackdoor.vbus)(i2);
       };
     };
   };
@@ -4899,7 +5271,7 @@ var index2 = function() {
     };
   };
 };
-var empty4 = [];
+var empty5 = [];
 var cons4 = function() {
   return function() {
     return function(elem3) {
@@ -4945,7 +5317,7 @@ var switcher = function(dictMonadST) {
       };
       return new DynamicChildren$prime(keepLatest(eventIsEvent(dictMonadST))(memoize(dictMonadST)(counter(event))(function(cenv) {
         return map(functorEvent)(function(v) {
-          return alt(altEvent(dictMonadST.Monad0().Applicative0()))(bang()(applicativeEvent(dictMonadST))(new Insert(f(v.value0))))(map(functorEvent)($$const(Remove.value))(filter4(filterableEvent(dictMonadST.Monad0().Applicative0()))(function() {
+          return alt(altEvent(dictMonadST.Monad0().Applicative0()))(pure(applicativeEvent(dictMonadST))(new Insert(f(v.value0))))(map(functorEvent)($$const(Remove.value))(filter4(filterableEvent(dictMonadST.Monad0().Applicative0()))(function() {
             var $137 = eq(eqInt)(v.value1 + 1 | 0);
             return function($138) {
               return $137(snd($138));
@@ -5010,7 +5382,7 @@ var flatten = function(dictApplicative) {
                                                   scope: myScope
                                                 }));
                                               });
-                                            })))(join(dictMonadST.Monad0().Bind1())(liftST(dictMonadST)(read2(myUnsub)))))(join(dictMonadST.Monad0().Bind1())(liftST(dictMonadST)(read2(eltsUnsub)))))($$void(dictApplicative.Apply0().Functor0())(liftST(dictMonadST)(modify($$delete(myUnsubId))(cancelInner)))))($$void(dictApplicative.Apply0().Functor0())(liftST(dictMonadST)(modify($$delete(eltsUnsubId))(cancelInner))));
+                                            })))(join(dictMonadST.Monad0().Bind1())(liftST(dictMonadST)(read2(myUnsub)))))(join(dictMonadST.Monad0().Bind1())(liftST(dictMonadST)(read2(eltsUnsub)))))($$void(dictApplicative.Apply0().Functor0())(liftST(dictMonadST)(modify2($$delete(myUnsubId))(cancelInner)))))($$void(dictApplicative.Apply0().Functor0())(liftST(dictMonadST)(modify2($$delete(eltsUnsubId))(cancelInner))));
                                             return applySecond(dictApplicative.Apply0())($$void(dictApplicative.Apply0().Functor0())(liftST(dictMonadST)(write2(mic)(myImmediateCancellation))))(mic);
                                           });
                                         }
@@ -5028,11 +5400,11 @@ var flatten = function(dictApplicative) {
                                               ;
                                               $77.scope = myScope;
                                               $77.raiseId = function(id2) {
-                                                return $$void(dictApplicative.Apply0().Functor0())(liftST(dictMonadST)(modify(append(semigroupArray)([id2]))(myIds)));
+                                                return $$void(dictApplicative.Apply0().Functor0())(liftST(dictMonadST)(modify2(append(semigroupArray)([id2]))(myIds)));
                                               };
                                               return $77;
                                             }())(interpreter)(kid$prime.value0))(v2))(function(c1) {
-                                              return discard(discardUnit)(dictMonadST.Monad0().Bind1())($$void(dictApplicative.Apply0().Functor0())(liftST(dictMonadST)(modify(insert(eltsUnsubId)(c1))(cancelInner))))(function() {
+                                              return discard(discardUnit)(dictMonadST.Monad0().Bind1())($$void(dictApplicative.Apply0().Functor0())(liftST(dictMonadST)(modify2(insert(eltsUnsubId)(c1))(cancelInner))))(function() {
                                                 return $$void(dictApplicative.Apply0().Functor0())(liftST(dictMonadST)(write2(c1)(eltsUnsub)));
                                               });
                                             });
@@ -5043,7 +5415,7 @@ var flatten = function(dictApplicative) {
                                       });
                                     }))(function(c0) {
                                       return discard(discardUnit)(dictMonadST.Monad0().Bind1())($$void(dictApplicative.Apply0().Functor0())(liftST(dictMonadST)(write2(c0)(myUnsub))))(function() {
-                                        return discard(discardUnit)(dictMonadST.Monad0().Bind1())($$void(dictApplicative.Apply0().Functor0())(liftST(dictMonadST)(modify(insert(myUnsubId)(c0))(cancelInner))))(function() {
+                                        return discard(discardUnit)(dictMonadST.Monad0().Bind1())($$void(dictApplicative.Apply0().Functor0())(liftST(dictMonadST)(modify2(insert(myUnsubId)(c0))(cancelInner))))(function() {
                                           return join(dictMonadST.Monad0().Bind1())(liftST(dictMonadST)(read2(myImmediateCancellation)));
                                         });
                                       });
@@ -5065,7 +5437,7 @@ var flatten = function(dictApplicative) {
               });
             }
             ;
-            throw new Error("Failed pattern match at Bolson.Control (line 531, column 17 - line 615, column 20): " + [v1.constructor.name]);
+            throw new Error("Failed pattern match at Bolson.Control (line 530, column 17 - line 614, column 20): " + [v1.constructor.name]);
           };
         };
       };
@@ -6024,100 +6396,85 @@ var pursxToElementConsInsert = function() {
 // output/Examples/foreign.js
 var pursx2 = 'module Main where\n\nimport Prelude\n\nimport Control.Alt ((<|>))\nimport Data.Compactable (compact)\nimport Data.Maybe (Maybe(..))\nimport Deku.Attribute ((:=))\nimport Deku.Control (text)\nimport Deku.DOM as D\nimport Deku.Pursx (nut, (~~))\nimport Deku.Toplevel (runInBody1)\nimport Effect (Effect)\nimport FRP.Event (bus)\nimport Type.Proxy (Proxy(..))\n\nmyDom =\n  Proxy\n    :: Proxy\n         """<div>\n        <button>I do nothing</button>\n        <ul>\n          <li>A</li>\n          <li ~myli~>B</li>\n          <li>C</li>\n        </ul>\n        <div>\n          <a href="https://github.com/mikesol/purescript-deku"></a>\n          <i>bar</i>\n          ~somethingNew~\n          <span style="font-weight:800;">baz</span>\n        </div>\n        <div><div></div><div><input type="range"/></div></div>\n      </div>\n"""\n\nmain :: Effect Unit\nmain = runInBody1\n  ( bus \\push event -> myDom ~~\n      { myli: pure (D.Style := "background-color:rgb(200,240,210);")\n      , somethingNew: nut\n          ( D.button (pure (D.OnClick := push (Just unit)))\n              [ text\n                  $ (compact event $> "Thanks for clicking me!") <|>\n                      pure "I was dynamically inserted"\n              ]\n          )\n      }\n  )';
 var pursx1 = 'module Main where\n\nimport Prelude\n\nimport Deku.Pursx (psx)\nimport Deku.Toplevel (runInBody)\nimport Effect (Effect)\nimport Type.Proxy (Proxy(..))\n\nmyDom =\n  Proxy\n    :: Proxy\n         """<div>\n    <button>I do nothing</button>\n    <ul>\n        <li>A</li>\n        <li>B</li>\n        <li>C</li>\n    </ul>\n    <div>\n        <a href="https://github.com/mikesol/purescript-deku"></a>\n        <i>bar</i>\n        <span style="font-weight:800;">baz</span>\n    </div>\n    <div><div></div><div><input type="range"/></div></div>\n    </div>\n"""\n\nmain :: Effect Unit\nmain = runInBody (psx myDom)';
-var portals1 = 'module Main where\n\nimport Prelude\n\nimport Control.Alt ((<|>))\nimport Data.Foldable (oneOfMap)\nimport Data.Profunctor (lcmap)\nimport Data.Tuple.Nested ((/\\), type (/\\))\nimport Data.FastVect.FastVect (index, (:))\nimport Data.FastVect.FastVect as V\nimport Deku.Attribute ((:=))\nimport Deku.Control (portal, switcher, text_)\nimport Deku.DOM as D\nimport Deku.Toplevel (runInBody1)\nimport Effect (Effect)\nimport FRP.Event (Event, bus, fold, mapAccum)\nimport Type.Prelude (Proxy(..))\n\ncounter :: forall a. Event a \u2192 Event (a /\\ Int)\ncounter event = mapAccum f event 0\n  where\n  f a b = (b + 1) /\\ (a /\\ b)\n\nmain :: Effect Unit\nmain = runInBody1\n  ( bus \\push -> lcmap (pure unit <|> _) \\event -> do\n      portal\n        ( map\n            ( \\i -> D.video\n                (oneOfMap pure [ D.Controls := "true", D.Width := "250" ])\n                [ D.source\n                    (oneOfMap pure [ D.Src := i, D.Xtype := "video/mp4" ])\n                    []\n                ]\n            )\n            ( "https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4"\n                : "https://www.w3schools.com/jsref/movie.mp4"\n                : V.empty\n            )\n        )\n        \\v _ -> do\n          let\n            p0 = index (Proxy :: _ 0) v\n            p1 = index (Proxy :: _ 1) v\n            ev = fold (const not) event\n            flips = switcher (if _ then p0 else p1) <<< ev\n          D.div_\n            [ D.button (pure $ D.OnClick := push unit)\n                [ text_ "Switch videos" ]\n            , D.div_ [ D.span_ [ flips true ], D.span_ [ flips false ] ]\n            ]\n  )\n';
+var portals1 = 'module Main where\n\nimport Prelude\n\nimport Control.Alt ((<|>))\nimport Data.FastVect.FastVect (index, (:))\nimport Data.FastVect.FastVect as V\nimport Data.Foldable (oneOfMap)\nimport Data.Profunctor (lcmap)\nimport Deku.Attribute ((:=))\nimport Deku.Control (portal, switcher, text_)\nimport Deku.Core (Domable)\nimport Deku.DOM as D\nimport Deku.Toplevel (runInBody1)\nimport Effect (Effect)\nimport FRP.Event (AnEvent, bus, fold)\nimport Type.Prelude (Proxy(..))\n\nmain :: Effect Unit\nmain = runInBody1\n  ( bus \\push -> lcmap (pure unit <|> _) \\event -> do\n      portal\n        ( map\n            ( \\i -> D.video\n                (oneOfMap pure [ D.Controls := "true", D.Width := "250" ])\n                [ D.source\n                    (oneOfMap pure [ D.Src := i, D.Xtype := "video/mp4" ])\n                    []\n                ]\n            )\n            ( "https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4"\n                : "https://www.w3schools.com/jsref/movie.mp4"\n                : V.empty\n            )\n        )\n        \\v _ -> do\n          let\n            p0 :: Domable _ _ _\n            p0 = index (Proxy :: _ 0) v\n            p1 :: Domable _ _ _\n            p1 = index (Proxy :: _ 1) v\n            ev :: Boolean -> AnEvent _ Boolean\n            ev = fold (const not) event\n            flips :: Boolean -> Domable _ _ _\n            flips = switcher (if _ then p0 else p1) <<< ev\n          D.div_\n            [ D.button (pure $ D.OnClick := push unit)\n                [ text_ "Switch videos" ]\n            , D.div_ [ D.span_ [ flips true ], D.span_ [ flips false ] ]\n            ]\n  )\n';
 var helloWorld = 'module Main where\n\nimport Prelude\n\nimport Deku.Control (text_)\nimport Deku.Toplevel (runInBody)\nimport Effect (Effect)\n\nmain :: Effect Unit\nmain = runInBody (text_ "Hello world")';
 var events3 = `module Main where
 
 import Prelude
 
 import Control.Alt ((<|>))
-import Data.Filterable (filterMap)
-import Data.Foldable (for_, oneOfMap)
+import Data.Filterable (compact)
+import Data.Foldable (oneOf)
 import Data.Maybe (Maybe(..))
-import Data.Profunctor (lcmap)
 import Data.Tuple.Nested ((/\\))
-import Deku.Attribute (cb, (:=))
 import Deku.Control (dyn_, text_)
-import Deku.Core (insert_, remove, sendToTop)
+import Deku.Core (Nut, bussed, insert_, remove, sendToTop)
 import Deku.DOM as D
-import Deku.Toplevel (runInBody1)
+import Deku.Listeners (click, keyUp, textInput)
+import Deku.Toplevel (runInBody)
 import Effect (Effect)
-import FRP.Event (bus, keepLatest, mapAccum)
-import Web.Event.Event (target)
-import Web.HTML.HTMLInputElement (fromEventTarget, value)
-import Web.UIEvent.KeyboardEvent (code, fromEvent)
+import FRP.Event (AnEvent, bus, keepLatest, mapAccum)
+import Web.UIEvent.KeyboardEvent (code)
 
 data MainUIAction
-  = UIShown
-  | AddTodo
+  = AddTodo
   | ChangeText String
 
 data TodoAction = Prioritize | Delete
 
 main :: Effect Unit
-main = runInBody1
-  ( bus \\push -> lcmap (pure UIShown <|> _) \\event -> do
+main = runInBody
+  ( bussed \\pushAction actionEvent -> do
       let
-        top =
-          [ D.input
-              ( oneOfMap pure
-                  [ D.OnInput := cb \\e -> for_
-                      ( target e
-                          >>= fromEventTarget
-                      )
-                      ( value
-                          >=> push <<< ChangeText
-                      )
-                  , D.OnKeyup := cb
-                      \\e -> for_ (fromEvent e) \\evt -> do
-                        when (code evt == "Enter") $ do
-                          push AddTodo
-                  ]
+        accumulateTextAndEmitOnSubmit :: AnEvent _ String
+        accumulateTextAndEmitOnSubmit = compact
+          ( mapAccum
+              ( \\a b -> case a of
+                  AddTodo -> b /\\ Just b
+                  ChangeText s -> s /\\ Nothing
               )
-              []
-          , D.button
-              (pure $ D.OnClick := push AddTodo)
-              [ text_ "Add" ]
-          ]
+              actionEvent
+              ""
+          )
+
+        top :: Nut
+        top =
+          D.div_
+            [ D.input
+                ( oneOf
+                    [ textInput $ pure (pushAction <<< ChangeText)
+                    , keyUp $ pure \\evt -> do
+                        when (code evt == "Enter") $ do
+                          pushAction AddTodo
+                    ]
+                )
+                []
+            , D.button
+                (click $ pure $ pushAction AddTodo)
+                [ text_ "Add" ]
+            ]
       D.div_
-        [ D.div_ top
+        [ top
         , dyn_ D.div $
             map
               ( \\txt -> keepLatest $ bus \\p' e' ->
                   ( pure $ insert_ $ D.div_
                       [ text_ txt
                       , D.button
-                          ( pure
-                              $ D.OnClick := p' sendToTop
-                          )
+                          (click $ pure (p' sendToTop))
                           [ text_ "Prioritize" ]
                       , D.button
-                          ( pure
-                              $ D.OnClick := p' remove
-                          )
+                          (click $ pure (p' remove))
                           [ text_ "Delete" ]
                       ]
                   ) <|> e'
               )
-              ( filterMap
-                  ( \\(tf /\\ s) ->
-                      if tf then Just s else Nothing
-                  )
-                  ( mapAccum
-                      ( \\a b -> case a of
-                          ChangeText s -> s /\\ (false /\\ s)
-                          AddTodo -> b /\\ (true /\\ b)
-                          _ -> "" /\\ (false /\\ "")
-                      )
-                      event
-                      ""
-                  )
-              )
+              accumulateTextAndEmitOnSubmit
         ]
   )
 `;
-var events = 'module Main where\n\nimport Prelude\n\nimport Control.Alt ((<|>))\nimport Deku.Control (text, text_)\nimport Deku.DOM as D\nimport Deku.Listeners (click_, slider)\nimport Deku.Toplevel (runInBody1)\nimport Effect (Effect)\nimport FRP.Event (fold)\nimport FRP.Event.VBus (V, vbus)\nimport Type.Proxy (Proxy(..))\n\ntype UIEvents = V\n  ( buttonClicked :: Unit\n  , sliderMoved :: Number\n  )\n\nmain :: Effect Unit\nmain = runInBody1\n  ( vbus (Proxy :: _ UIEvents) \\push event -> do\n      D.div_\n        [ D.button\n            (click_ (pure push.buttonClicked))\n            [ text_ "Click" ]\n        , D.div_\n            [ text\n                ( pure "Val: 0" <|>\n                    ( append "Val: " <<< show\n                        <$> fold\n                          (const (add 1))\n                          (pure unit <|> event.buttonClicked)\n                          (-1)\n                    )\n                )\n            ]\n        , D.div_\n            [ D.input\n                (slider (pure push.sliderMoved))\n                []\n            , D.div_\n                [ text\n                    ( pure "Val: 50" <|>\n                        ( append "Val: " <<< show\n                            <$> event.sliderMoved\n                        )\n                    )\n                ]\n            ]\n        ]\n  )\n';
-var effects = 'module Main where\n\nimport Prelude\n\nimport Affjax.ResponseFormat as ResponseFormat\nimport Affjax.Web as AX\nimport Control.Alt ((<|>))\nimport Data.Argonaut.Core (stringifyWithIndent)\nimport Data.Either (Either(..))\nimport Data.Filterable (compact, filterMap)\nimport Data.HTTP.Method (Method(..))\nimport Data.Maybe (Maybe(..))\nimport Data.Profunctor (lcmap)\nimport Data.Tuple.Nested ((/\\))\nimport Deku.Attribute (Cb, cb, (:=))\nimport Deku.Control (text)\nimport Deku.DOM as D\nimport Deku.Toplevel (runInBody1)\nimport Effect (Effect)\nimport Effect.Aff (launchAff_)\nimport Effect.Class (liftEffect)\nimport FRP.Event (bus, mapAccum)\n\ndata UIAction = Initial | Loading | Result String\n\nclickCb :: (UIAction -> Effect Unit) -> Cb\nclickCb push = cb\n  ( const do\n      push Loading\n      launchAff_ $ do\n        result <- AX.request\n          ( AX.defaultRequest\n              { url = "https://randomuser.me/api/"\n              , method = Left GET\n              , responseFormat = ResponseFormat.json\n              }\n          )\n        case result of\n          Left err -> liftEffect $ push\n            $ Result\n                ( "GET /api response failed to decode: " <>\n                    AX.printError err\n                )\n          Right response -> liftEffect $ push $ Result $\n            stringifyWithIndent 2 response.body\n  )\n\nclickText = "Click to get some random user data." :: String\n\nmain :: Effect Unit\nmain = runInBody1\n  ( bus \\push -> lcmap (pure Initial <|> _)\n      \\event ->\n        let\n          loadingOrResult = filterMap\n            ( case _ of\n                Loading -> Just $ Left unit\n                Result s -> Just $ Right s\n                _ -> Nothing\n            )\n            event\n          loading = filterMap\n            ( case _ of\n                Left _ -> Just unit\n                _ -> Nothing\n            )\n            loadingOrResult\n          result = filterMap\n            ( case _ of\n                Right s -> Just s\n                _ -> Nothing\n            )\n            loadingOrResult\n        in\n          D.div_\n            [ D.div_\n                [ D.button (pure (D.OnClick := clickCb push))\n                    [ text\n                        ( pure clickText\n                            <|> (loading $> "Loading...")\n                            <|> (result $> clickText)\n                        )\n                    ]\n                ]\n            , D.div\n                ( (pure (D.Style := "display: none;")) <|>\n                    ( compact\n                        ( mapAccum\n                            ( \\_ b -> (b && false) /\\\n                                if b then Just unit else Nothing\n                            )\n                            result\n                            true\n                        ) $> (D.Style := "display: block;")\n                    )\n                )\n                [ D.pre_ [ D.code_ [ text (pure "" <|> result) ] ] ]\n            ]\n  )\n';
+var events = 'module Main where\n\nimport Prelude\n\nimport Bolson.Core (vbussed)\nimport Control.Alt ((<|>))\nimport Deku.Control (text, text_)\nimport Deku.DOM as D\nimport Deku.Listeners (click_, slider)\nimport Deku.Toplevel (runInBody)\nimport Effect (Effect)\nimport FRP.Event (AnEvent, fold)\nimport FRP.Event.VBus (V)\nimport Type.Proxy (Proxy(..))\n\ntype UIEvents = V\n  ( buttonClicked :: Unit\n  , sliderMoved :: Number\n  )\n\nmain :: Effect Unit\nmain = runInBody\n  ( vbussed (Proxy :: _ UIEvents) \\push event -> do\n      let\n        countUp :: AnEvent _ Int\n        countUp = fold\n          (const (1 + _))\n          (pure unit <|> event.buttonClicked)\n          (-1)\n      D.div_\n        [ D.button\n            (click_ (pure push.buttonClicked))\n            [ text_ "Click" ]\n        , D.div_\n            [ text\n                ( pure "Val: 0" <|>\n                    ( append "Val: " <<< show <$> countUp\n                    )\n                )\n            ]\n        , D.div_\n            [ D.input\n                (slider (pure push.sliderMoved))\n                []\n            , D.div_\n                [ text\n                    ( pure "Val: 50" <|>\n                        ( append "Val: " <<< show\n                            <$> event.sliderMoved\n                        )\n                    )\n                ]\n            ]\n        ]\n  )\n';
+var effects = 'module Main where\n\nimport Prelude\n\nimport Affjax.ResponseFormat as ResponseFormat\nimport Affjax.Web as AX\nimport Control.Alt ((<|>))\nimport Data.Argonaut.Core (stringifyWithIndent)\nimport Data.Either (Either(..))\nimport Data.Filterable (compact, separate)\nimport Data.HTTP.Method (Method(..))\nimport Data.Maybe (Maybe(..))\nimport Data.Profunctor (lcmap)\nimport Data.Tuple.Nested ((/\\))\nimport Deku.Attribute (Cb, cb, (:=))\nimport Deku.Control (text)\nimport Deku.DOM as D\nimport Deku.Toplevel (runInBody1)\nimport Effect (Effect)\nimport Effect.Aff (launchAff_)\nimport Effect.Class (liftEffect)\nimport FRP.Event (AnEvent, bus, mapAccum)\n\ndata UIAction = Initial | Loading | Result String\n\nclickCb :: (UIAction -> Effect Unit) -> Cb\nclickCb push = cb\n  ( const do\n      push Loading\n      launchAff_ $ do\n        result <- AX.request\n          ( AX.defaultRequest\n              { url = "https://randomuser.me/api/"\n              , method = Left GET\n              , responseFormat = ResponseFormat.json\n              }\n          )\n        case result of\n          Left err -> liftEffect $ push\n            $ Result\n                ( "GET /api response failed to decode: " <>\n                    AX.printError err\n                )\n          Right response -> liftEffect $ push $ Result $\n            stringifyWithIndent 2 response.body\n  )\n\nclickText = "Click to get some random user data." :: String\n\nmain :: Effect Unit\nmain = runInBody1\n  ( bus \\push -> lcmap (pure Initial <|> _)\n      \\event -> do\n        let\n          split :: { left :: AnEvent _ Unit, right :: AnEvent _ String }\n          split = separate $ compact $\n            map\n              ( case _ of\n                  Loading -> Just $ Left unit\n                  Result s -> Just $ Right s\n                  _ -> Nothing\n              )\n              event\n          { left: loading, right: result } = split\n        D.div_\n            [ D.div_\n                [ D.button (pure (D.OnClick := clickCb push))\n                    [ text\n                        ( pure clickText\n                            <|> (loading $> "Loading...")\n                            <|> (result $> clickText)\n                        )\n                    ]\n                ]\n            , D.div\n                ( (pure (D.Style := "display: none;")) <|>\n                    ( compact\n                        ( mapAccum\n                            ( \\_ b -> (b && false) /\\\n                                if b then Just unit else Nothing\n                            )\n                            result\n                            true\n                        ) $> (D.Style := "display: block;")\n                    )\n                )\n                [ D.pre_ [ D.code_ [ text (pure "" <|> result) ] ] ]\n            ]\n  )\n';
 var component = 'module Main where\n\nimport Prelude\n\nimport Deku.Attribute ((:=))\nimport Deku.Control (text_)\nimport Deku.DOM as D\nimport Deku.Toplevel (runInBodyA)\nimport Effect (Effect)\n\nmain :: Effect Unit\nmain = runInBodyA\n  ( [ D.button_ [ text_ "I do nothing" ]\n    , D.ul_ $ map (D.li_ <<< pure <<< text_) [ "A", "B", "C" ]\n    , D.div_\n        [ D.a (pure $ D.Href := "https://example.com")\n            [ text_ "foo " ]\n        , D.i_ [ text_ " bar " ]\n        , D.span (pure $ D.Style := "font-weight: 800;")\n            [ text_ " baz" ]\n        ]\n    , D.div_\n        [ D.div_\n            [ D.div_ [ D.input (pure $ D.Xtype := "range") [] ]\n            ]\n        ]\n    ]\n  )';
 var app = `module Main where
 
@@ -7865,7 +8222,7 @@ var _delay = function() {
 var _sequential = Aff.Seq;
 
 // output/Effect.Aff/index.js
-var $runtime_lazy4 = function(name16, moduleName, init3) {
+var $runtime_lazy5 = function(name16, moduleName, init3) {
   var state3 = 0;
   var val;
   return function(lineNumber) {
@@ -7960,7 +8317,7 @@ var applicativeAff = {
     return $lazy_applyAff(0);
   }
 };
-var $lazy_applyAff = /* @__PURE__ */ $runtime_lazy4("applyAff", "Effect.Aff", function() {
+var $lazy_applyAff = /* @__PURE__ */ $runtime_lazy5("applyAff", "Effect.Aff", function() {
   return {
     apply: ap(monadAff),
     Functor0: function() {
@@ -8547,6 +8904,25 @@ var attrOnInputCb = {
   }
 };
 
+// output/Deku.DOM.Attr.OnKeyup/index.js
+var OnKeyup = /* @__PURE__ */ function() {
+  function OnKeyup2() {
+  }
+  ;
+  OnKeyup2.value = new OnKeyup2();
+  return OnKeyup2;
+}();
+var attrOnKeyupCb = {
+  attr: function(v) {
+    return function(value13) {
+      return unsafeAttribute({
+        key: "keyup",
+        value: cb$prime(value13)
+      });
+    };
+  }
+};
+
 // output/Web.HTML.HTMLInputElement/foreign.js
 function value2(input2) {
   return function() {
@@ -8591,27 +8967,35 @@ var unsafeReadProtoTagged = function(name16) {
 // output/Web.HTML.HTMLInputElement/index.js
 var fromEventTarget = /* @__PURE__ */ unsafeReadProtoTagged("HTMLInputElement");
 
+// output/Web.UIEvent.KeyboardEvent/foreign.js
+function code2(e) {
+  return e.code;
+}
+
+// output/Web.UIEvent.KeyboardEvent/index.js
+var fromEvent = /* @__PURE__ */ unsafeReadProtoTagged("KeyboardEvent");
+
 // output/Deku.Listeners/index.js
 var slider = function(dictMonadST) {
-  var $7 = alt(altEvent(dictMonadST.Monad0().Applicative0()))(pure(applicativeEvent(dictMonadST))(attr(attrInput_XtypeString)(Xtype.value)("range")));
-  var $8 = map(functorEvent)(function(push2) {
+  var $13 = alt(altEvent(dictMonadST.Monad0().Applicative0()))(pure(applicativeEvent(dictMonadST))(attr(attrInput_XtypeString)(Xtype.value)("range")));
+  var $14 = map(functorEvent)(function(push2) {
     return attr(attrOnInputCb)(OnInput.value)(cb(function(e) {
       return for_(applicativeEffect)(foldableMaybe)(bind(bindMaybe)(target(e))(fromEventTarget))(composeKleisli(bindEffect)(valueAsNumber)(push2));
     }));
   });
-  return function($9) {
-    return $7($8($9));
+  return function($15) {
+    return $13($14($15));
   };
 };
 var click_ = function(dictFunctor) {
   return function(dictMonoid) {
     return function(dictAttr) {
       return map(dictFunctor)(function() {
-        var $10 = attr(dictAttr)(OnClick.value);
-        return function($11) {
-          return $10(function(v) {
+        var $16 = attr(dictAttr)(OnClick.value);
+        return function($17) {
+          return $16(function(v) {
             return v(mempty(dictMonoid));
-          }($11));
+          }($17));
         };
       }());
     };
@@ -8712,33 +9096,6 @@ var events2 = function(options2) {
     });
   };
 };
-
-// output/Deku.DOM.Attr.OnKeyup/index.js
-var OnKeyup = /* @__PURE__ */ function() {
-  function OnKeyup2() {
-  }
-  ;
-  OnKeyup2.value = new OnKeyup2();
-  return OnKeyup2;
-}();
-var attrOnKeyupCb = {
-  attr: function(v) {
-    return function(value13) {
-      return unsafeAttribute({
-        key: "keyup",
-        value: cb$prime(value13)
-      });
-    };
-  }
-};
-
-// output/Web.UIEvent.KeyboardEvent/foreign.js
-function code2(e) {
-  return e.code;
-}
-
-// output/Web.UIEvent.KeyboardEvent/index.js
-var fromEvent = /* @__PURE__ */ unsafeReadProtoTagged("KeyboardEvent");
 
 // output/Deku.Example.Docs.Events2/index.js
 var UIShown = /* @__PURE__ */ function() {
@@ -9124,7 +9481,7 @@ var portals12 = function(options2) {
         return lcmap(profunctorFn)(alt(altEvent(dictKorok.MonadST5().Monad0().Applicative0()))(pure(applicativeEvent(dictKorok.MonadST5()))(unit)))(function(event) {
           return pure(applicativeEvent(dictKorok.MonadST5()))(insert_(portal()(dictKorok)(map(functorVect)(function(i2) {
             return video(dictKorok)(oneOfMap(foldableArray)(plusEvent(dictKorok.MonadST5().Monad0().Applicative0()))(pure(applicativeEvent(dictKorok.MonadST5())))([attr(attrVideo_ControlsString)(Controls.value)("true"), attr(attrVideo_WidthString)(Width.value)("250")]))([source(dictKorok)(oneOfMap(foldableArray)(plusEvent(dictKorok.MonadST5().Monad0().Applicative0()))(pure(applicativeEvent(dictKorok.MonadST5())))([attr(attrSource_SrcString)(Src.value)(i2), attr(attrSource_XtypeString)(Xtype.value)("video/mp4")]))([])]);
-          })(cons4()()("https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4")(cons4()()("https://www.w3schools.com/jsref/movie.mp4")(empty4))))(function(v) {
+          })(cons4()()("https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4")(cons4()()("https://www.w3schools.com/jsref/movie.mp4")(empty5))))(function(v) {
             return function(v1) {
               var p1 = index2()()()()()({
                 reflectType: function() {
@@ -9640,35 +9997,35 @@ var SetText = /* @__PURE__ */ function() {
 }();
 var ssrSetText = function(a2) {
   return function(i2) {
-    return $$void(functorST)(modify(function(v) {
+    return $$void(functorST)(modify2(function(v) {
       return append(semigroupArray)(v)([new SetText(a2)]);
     })(i2));
   };
 };
 var ssrSetProp = function(a2) {
   return function(i2) {
-    return $$void(functorST)(modify(function(v) {
+    return $$void(functorST)(modify2(function(v) {
       return append(semigroupArray)(v)([new SetProp(a2)]);
     })(i2));
   };
 };
 var ssrMakeText = function(a2) {
   return function(i2) {
-    return $$void(functorST)(modify(function(v) {
+    return $$void(functorST)(modify2(function(v) {
       return append(semigroupArray)(v)([new MakeText(a2)]);
     })(i2));
   };
 };
 var ssrMakePursx = function(a2) {
   return function(i2) {
-    return $$void(functorST)(modify(function(v) {
+    return $$void(functorST)(modify2(function(v) {
       return append(semigroupArray)(v)([new MakePursx(a2)]);
     })(i2));
   };
 };
 var ssrMakeElement = function(a2) {
   return function(i2) {
-    return $$void(functorST)(modify(function(v) {
+    return $$void(functorST)(modify2(function(v) {
       return append(semigroupArray)(v)([new MakeElement(a2)]);
     })(i2));
   };
@@ -9681,7 +10038,7 @@ var ssrDOMInterpret = function(seed) {
         newSeed: mkSeed(s),
         size: 5
       }));
-      $$void(functorST)(modify(add(semiringInt)(1))(seed))();
+      $$void(functorST)(modify2(add(semiringInt)(1))(seed))();
       return o;
     },
     makeElement: ssrMakeElement,
@@ -9753,7 +10110,7 @@ var ssr$prime = function(topTag) {
   return function(arr) {
     var setting = function(id2) {
       return function(action2) {
-        return $$void(functorStateT(functorIdentity))(modify3(monadStateStateT(monadIdentity))(function(s) {
+        return $$void(functorStateT(functorIdentity))(modify4(monadStateStateT(monadIdentity))(function(s) {
           var $15 = {};
           for (var $16 in s) {
             if ({}.hasOwnProperty.call(s, $16)) {
@@ -9780,7 +10137,7 @@ var ssr$prime = function(topTag) {
     var making = function(parent2) {
       return function(id2) {
         return function(action2) {
-          return discard(discardUnit)(bindStateT(monadIdentity))($$void(functorStateT(functorIdentity))(modify3(monadStateStateT(monadIdentity))(function(s) {
+          return discard(discardUnit)(bindStateT(monadIdentity))($$void(functorStateT(functorIdentity))(modify4(monadStateStateT(monadIdentity))(function(s) {
             var $20 = {};
             for (var $21 in s) {
               if ({}.hasOwnProperty.call(s, $21)) {
