@@ -3928,6 +3928,23 @@ instance
     verb
     hasAttributed
     tag
+    "?"
+    tail
+    pursi
+    purso
+    trailing
+
+instance
+  ( Sym.Cons x y tail
+  , PXTagAttrValue m lock payload verb hasAttributed tag x y pursi purso
+      trailing
+  ) =>
+  PXTagAttrValue m
+    lock
+    payload
+    verb
+    hasAttributed
+    tag
     "@"
     tail
     pursi
