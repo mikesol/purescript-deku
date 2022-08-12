@@ -7,7 +7,7 @@ import Affjax.Web as AX
 import Control.Alt ((<|>))
 import Data.Argonaut.Core (stringifyWithIndent)
 import Data.Either (Either(..))
-import Data.Filterable (compact, filterMap)
+import Data.Filterable (compact, separate)
 import Data.HTTP.Method (Method(..))
 import Data.Maybe (Maybe(..))
 import Data.Profunctor (lcmap)
@@ -19,7 +19,7 @@ import Deku.Toplevel (runInBody1)
 import Effect (Effect)
 import Effect.Aff (launchAff_)
 import Effect.Class (liftEffect)
-import FRP.Event (bus, mapAccum)
+import FRP.Event (AnEvent, bus, mapAccum)
 
 data UIAction = Initial | Loading | Result String
 
@@ -50,29 +50,19 @@ clickText = "Click to get some random user data." :: String
 main :: Effect Unit
 main = runInBody1
   ( bus \push -> lcmap (pure Initial <|> _)
-      \event ->
+      \event -> do
         let
-          loadingOrResult = filterMap
-            ( case _ of
-                Loading -> Just $ Left unit
-                Result s -> Just $ Right s
-                _ -> Nothing
-            )
-            event
-          loading = filterMap
-            ( case _ of
-                Left _ -> Just unit
-                _ -> Nothing
-            )
-            loadingOrResult
-          result = filterMap
-            ( case _ of
-                Right s -> Just s
-                _ -> Nothing
-            )
-            loadingOrResult
-        in
-          D.div_
+          split :: { left :: AnEvent _ Unit, right :: AnEvent _ String }
+          split = separate $ compact $
+            map
+              ( case _ of
+                  Loading -> Just $ Left unit
+                  Result s -> Just $ Right s
+                  _ -> Nothing
+              )
+              event
+          { left: loading, right: result } = split
+        D.div_
             [ D.div_
                 [ D.button (pure (D.OnClick := clickCb push))
                     [ text

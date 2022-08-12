@@ -3,23 +3,18 @@ module Deku.Examples.Docs.Examples.Portals1 where
 import Prelude
 
 import Control.Alt ((<|>))
-import Data.Foldable (oneOfMap)
-import Data.Profunctor (lcmap)
-import Data.Tuple.Nested ((/\), type (/\))
 import Data.FastVect.FastVect (index, (:))
 import Data.FastVect.FastVect as V
+import Data.Foldable (oneOfMap)
+import Data.Profunctor (lcmap)
 import Deku.Attribute ((:=))
 import Deku.Control (portal, switcher, text_)
+import Deku.Core (Domable)
 import Deku.DOM as D
 import Deku.Toplevel (runInBody1)
 import Effect (Effect)
-import FRP.Event (Event, bus, fold, mapAccum)
+import FRP.Event (AnEvent, bus, fold)
 import Type.Prelude (Proxy(..))
-
-counter :: forall a. Event a → Event (a /\ Int)
-counter event = mapAccum f event 0
-  where
-  f a b = (b + 1) /\ (a /\ b)
 
 main :: Effect Unit
 main = runInBody1
@@ -40,9 +35,13 @@ main = runInBody1
         )
         \v _ -> do
           let
+            p0 :: Domable _ _ _
             p0 = index (Proxy :: _ 0) v
+            p1 :: Domable _ _ _
             p1 = index (Proxy :: _ 1) v
+            ev :: Boolean -> AnEvent _ Boolean
             ev = fold (const not) event
+            flips :: Boolean -> Domable _ _ _
             flips = switcher (if _ then p0 else p1) <<< ev
           D.div_
             [ D.button (pure $ D.OnClick := push unit)

@@ -3,87 +3,72 @@ module Deku.Examples.Docs.Examples.Events3 where
 import Prelude
 
 import Control.Alt ((<|>))
-import Data.Filterable (filterMap)
-import Data.Foldable (for_, oneOfMap)
+import Data.Filterable (compact)
+import Data.Foldable (oneOf)
 import Data.Maybe (Maybe(..))
-import Data.Profunctor (lcmap)
 import Data.Tuple.Nested ((/\))
-import Deku.Attribute (cb, (:=))
 import Deku.Control (dyn_, text_)
-import Deku.Core (insert_, remove, sendToTop)
+import Deku.Core (Nut, bussed, insert_, remove, sendToTop)
 import Deku.DOM as D
-import Deku.Toplevel (runInBody1)
+import Deku.Listeners (click, keyUp, textInput)
+import Deku.Toplevel (runInBody)
 import Effect (Effect)
-import FRP.Event (bus, keepLatest, mapAccum)
-import Web.Event.Event (target)
-import Web.HTML.HTMLInputElement (fromEventTarget, value)
-import Web.UIEvent.KeyboardEvent (code, fromEvent)
+import FRP.Event (AnEvent, bus, keepLatest, mapAccum)
+import Web.UIEvent.KeyboardEvent (code)
 
 data MainUIAction
-  = UIShown
-  | AddTodo
+  = AddTodo
   | ChangeText String
 
 data TodoAction = Prioritize | Delete
 
 main :: Effect Unit
-main = runInBody1
-  ( bus \push -> lcmap (pure UIShown <|> _) \event -> do
+main = runInBody
+  ( bussed \pushAction actionEvent -> do
       let
-        top =
-          [ D.input
-              ( oneOfMap pure
-                  [ D.OnInput := cb \e -> for_
-                      ( target e
-                          >>= fromEventTarget
-                      )
-                      ( value
-                          >=> push <<< ChangeText
-                      )
-                  , D.OnKeyup := cb
-                      \e -> for_ (fromEvent e) \evt -> do
-                        when (code evt == "Enter") $ do
-                          push AddTodo
-                  ]
+        accumulateTextAndEmitOnSubmit :: AnEvent _ String
+        accumulateTextAndEmitOnSubmit = compact
+          ( mapAccum
+              ( \a b -> case a of
+                  AddTodo -> b /\ Just b
+                  ChangeText s -> s /\ Nothing
               )
-              []
-          , D.button
-              (pure $ D.OnClick := push AddTodo)
-              [ text_ "Add" ]
-          ]
+              actionEvent
+              ""
+          )
+
+        top :: Nut
+        top =
+          D.div_
+            [ D.input
+                ( oneOf
+                    [ textInput $ pure (pushAction <<< ChangeText)
+                    , keyUp $ pure \evt -> do
+                        when (code evt == "Enter") $ do
+                          pushAction AddTodo
+                    ]
+                )
+                []
+            , D.button
+                (click $ pure $ pushAction AddTodo)
+                [ text_ "Add" ]
+            ]
       D.div_
-        [ D.div_ top
+        [ top
         , dyn_ D.div $
             map
               ( \txt -> keepLatest $ bus \p' e' ->
                   ( pure $ insert_ $ D.div_
                       [ text_ txt
                       , D.button
-                          ( pure
-                              $ D.OnClick := p' sendToTop
-                          )
+                          (click $ pure (p' sendToTop))
                           [ text_ "Prioritize" ]
                       , D.button
-                          ( pure
-                              $ D.OnClick := p' remove
-                          )
+                          (click $ pure (p' remove))
                           [ text_ "Delete" ]
                       ]
                   ) <|> e'
               )
-              ( filterMap
-                  ( \(tf /\ s) ->
-                      if tf then Just s else Nothing
-                  )
-                  ( mapAccum
-                      ( \a b -> case a of
-                          ChangeText s -> s /\ (false /\ s)
-                          AddTodo -> b /\ (true /\ b)
-                          _ -> "" /\ (false /\ "")
-                      )
-                      event
-                      ""
-                  )
-              )
+              accumulateTextAndEmitOnSubmit
         ]
   )

@@ -28,6 +28,7 @@
   , "web-dom"
   , "web-events"
   , "web-html"
+  , "web-uievents"
   ]
 , license = "Apache-2.0"
 , packages = ./packages.dhall
