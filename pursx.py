@@ -118,7 +118,7 @@ for x in WHITESPACE:
 print_('instance (Sym.Cons x y tail, PXTagAttrValue m lock payload verb hasAttributed tag x y pursi purso trailing) => PXTagPreAttrValue m lock payload verb hasAttributed tag "\\"" tail pursi purso trailing')
 print_('--')
 print_('class PXTagAttrValue  (m :: Type -> Type) (lock :: Type) (payload :: Type) (verb :: Symbol) (hasAttributed :: Boolean) (tag :: Symbol) (head :: Symbol) (tail :: Symbol) (pursi :: Row Type) (purso :: Row Type) (trailing :: Symbol) | m lock payload verb hasAttributed tag head tail pursi -> purso trailing')
-for x in [y for y in (string.ascii_lowercase+string.ascii_uppercase+string.digits+':,;\'!@#$%^&*()_-=`~<>/.')]+['\\\\']+WHITESPACE:
+for x in [y for y in (string.ascii_lowercase+string.ascii_uppercase+string.digits+':,;\'!?@#$%^&*()_-=`~<>/.')]+['\\\\']+WHITESPACE:
   print_('instance (Sym.Cons x y tail, PXTagAttrValue m lock payload verb hasAttributed tag x y pursi purso trailing) => PXTagAttrValue m lock payload verb hasAttributed tag "%s" tail pursi purso trailing' % x)
 print_('instance (Sym.Cons x y tail, PXTagPreAttrName m lock payload verb hasAttributed tag x y pursi purso trailing) => PXTagAttrValue m lock payload verb hasAttributed tag "\\"" tail pursi purso trailing')
 print_('class PXBody  (m :: Type -> Type) (lock :: Type) (payload :: Type) (verb :: Symbol) (head :: Symbol) (tail :: Symbol) (pursi :: Row Type) (purso :: Row Type) (trailing :: Symbol) | m lock payload verb tail pursi -> purso trailing')
