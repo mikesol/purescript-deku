@@ -19,7 +19,14 @@ export const attributeParent_ = (a) => (state) => () => {
 				state.units[a.parent].main.children[a.pos.value0]
 			);
 		} else {
-			state.units[a.parent].main.appendChild(state.units[a.id].main);
+			if (a.parent.indexOf("@!%") !== -1) {
+				state.units[a.parent].main.parentNode.replaceChild(state.units[a.id].main);
+			} else {
+				state.units[a.parent].main.appendChild(
+					state.units[a.id].main,
+					state.units[a.parent].main
+				);
+			}
 		}
 	}
 };
@@ -263,7 +270,7 @@ export const makePursx_ = (tryHydration) => (maybe) => (a) => (state) => () => {
 		// each individual unit has the name of the key plus its scope
 		// this is necessary to avoid namespacing conflicts
 		// in case multiple purs-x contain the same key
-		const namespacedKey = key + pxScope;
+		const namespacedKey = key + "@!%" + pxScope;
 		state.units[namespacedKey] = {
 			listeners: {},
 			main: e,
@@ -273,13 +280,10 @@ export const makePursx_ = (tryHydration) => (maybe) => (a) => (state) => () => {
 	});
 	tmp.querySelectorAll("[data-deku-elt-internal]").forEach(function (e) {
 		var key = e.getAttribute("data-deku-elt-internal");
-		var fc = e.firstChild;
-		var par = e.parentNode;
-		par.replaceChild(e, fc);
-		const namespacedKey = key + pxScope;
-		state.units[key + pxScope] = {
+		const namespacedKey = key + "@!%" + pxScope;
+		state.units[key + "@!%" + pxScope] = {
 			listeners: {},
-			main: fc,
+			main: e,
 			scope: scope,
 		};
 		state.scopes[scope].push(namespacedKey);
