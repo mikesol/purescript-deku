@@ -20,12 +20,12 @@ export const attributeParent_ = (a) => (state) => () => {
 			);
 		} else {
 			if (a.parent.indexOf("@!%") !== -1) {
-				state.units[a.parent].main.parentNode.replaceChild(state.units[a.id].main);
-			} else {
-				state.units[a.parent].main.appendChild(
+				state.units[a.parent].main.parentNode.replaceChild(
 					state.units[a.id].main,
 					state.units[a.parent].main
 				);
+			} else {
+				state.units[a.parent].main.appendChild(state.units[a.id].main);
 			}
 		}
 	}
