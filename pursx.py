@@ -176,7 +176,7 @@ instance pursxToElementConsInsert ::
       { cache: Object.insert (reflectType pxk) false cache
       , element: Node \info di ->
           __internalDekuFlatten
-            { parent: Just (reflectType pxk <> pxScope)
+            { parent: Just (reflectType pxk <> "@!%" <> pxScope)
             , scope: info.scope
             , raiseId: \_ -> pure unit
             , pos: info.pos
@@ -211,12 +211,12 @@ else instance pursxToElementConsAttr ::
             ( lcmap unsafeUnAttribute
                 ( \{ key, value } -> case value of
                     Prop' p -> setProp
-                      { id: ((reflectType pxk) <> pxScope)
+                      { id: ((reflectType pxk) <> "@!%" <> pxScope)
                       , key
                       , value: p
                       }
                     Cb' c -> setCb
-                      { id: ((reflectType pxk) <> pxScope)
+                      { id: ((reflectType pxk) <> "@!%" <> pxScope)
                       , key
                       , value: c
                       }
