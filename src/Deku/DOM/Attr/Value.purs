@@ -32,9 +32,3 @@ instance Attr Progress_ Value String where
 
 instance Attr Param_ Value String where
   attr Value value = unsafeAttribute { key: "value", value: prop' value }
-
---- EDITED BY HAND
---- add to python file later
-
-instance Attr Textarea_ Value String where
-  attr Value value = unsafeAttribute { key: "value", value: prop' value }

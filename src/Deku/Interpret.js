@@ -273,10 +273,13 @@ export const makePursx_ = (tryHydration) => (maybe) => (a) => (state) => () => {
 	});
 	tmp.querySelectorAll("[data-deku-elt-internal]").forEach(function (e) {
 		var key = e.getAttribute("data-deku-elt-internal");
+		var fc = e.firstChild;
+		var par = e.parentNode;
+		par.replaceChild(e, fc);
 		const namespacedKey = key + pxScope;
 		state.units[key + pxScope] = {
 			listeners: {},
-			main: e,
+			main: fc,
 			scope: scope,
 		};
 		state.scopes[scope].push(namespacedKey);
