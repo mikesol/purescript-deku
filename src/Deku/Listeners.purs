@@ -51,10 +51,10 @@ slider = alt (pure $ D.Xtype := "range") <<< map
   )
 
 textInput
-  :: forall s m
+  :: forall s m e
    . MonadST s m
   => AnEvent m (String -> Effect Unit)
-  -> AnEvent m (Attribute D.Input_)
+  -> AnEvent m (Attribute e)
 textInput = map \push -> D.OnInput := cb \e -> for_
   (target e >>= fromEventTarget)
   (value >=> push)
