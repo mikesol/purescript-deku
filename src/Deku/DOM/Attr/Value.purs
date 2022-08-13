@@ -1,5 +1,6 @@
 module Deku.DOM.Attr.Value where
 
+import Deku.DOM.Elt.Textarea (Textarea_)
 import Deku.DOM.Elt.Button (Button_)
 import Deku.DOM.Elt.Input (Input_)
 import Deku.DOM.Elt.Li (Li_)
@@ -30,4 +31,10 @@ instance Attr Progress_ Value String where
   attr Value value = unsafeAttribute { key: "value", value: prop' value }
 
 instance Attr Param_ Value String where
+  attr Value value = unsafeAttribute { key: "value", value: prop' value }
+
+--- EDITED BY HAND
+--- add to python file later
+
+instance Attr Textarea_ Value String where
   attr Value value = unsafeAttribute { key: "value", value: prop' value }
