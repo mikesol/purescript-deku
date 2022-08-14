@@ -39,23 +39,23 @@
 
   <h3>App</h3>
   <p>Unlike the previous examples that used <code>runInBody</code>, our application code here has an explicit type annotation <code>Nut</code>. The definition of <code>Nut</code> is <code>type Nut = forall s m lock payload. Korok s m => Domable m lock payload</code>, and in larger projects, you may need to write this type out explicitly, for example if you are working with an <code>Array</code> of <code>Domable</code> and need <code>m</code> to be consistant over the <code>Array</code>.</p>
-  <span style="display:contents;" data-deku-elt-internal="code0" data-deku-ssr-code0502949="true"></span>
+  <span style="display:contents;" data-deku-elt-internal="code0" data-deku-ssr-code0@!%502949="true"></span>
   <h3>Build</h3>
   <p>This is the code we use to generate our HTML site. The example below creates a small script that logs our HTML to the command line,but we can also call <code>runSSR</code> from a NodeJS server, in which case we wouldn't <code>log</code> the HTML string but rather we would instead send it over the wire as the response to a request.</p>
-  <span style="display:contents;" data-deku-elt-internal="code1" data-deku-ssr-code1502949="true"></span>
+  <span style="display:contents;" data-deku-elt-internal="code1" data-deku-ssr-code1@!%502949="true"></span>
   <h3>Live</h3>
   <p><code>Live.purs</code> can be bundled to generate our dynamic JS. The JS will hydrate our elements instead of replacing them, and will only hydrate elements that potentially will interactive content.</p>
-  <span style="display:contents;" data-deku-elt-internal="code2" data-deku-ssr-code2502949="true"></span>
+  <span style="display:contents;" data-deku-elt-internal="code2" data-deku-ssr-code2@!%502949="true"></span>
 
   <h3>Result</h3>
 
   <p>Here is the resulting code from our static-site generation. It is rendered dynamically in your browser, but in production settings, we'd use NodeJS to render or pre-render this HTML.</p>
 
-  <span style="display:contents;" data-deku-elt-internal="codegen" data-deku-ssr-codegen502949="true"></span>
+  <span style="display:contents;" data-deku-elt-internal="codegen" data-deku-ssr-codegen@!%502949="true"></span>
 
   <p>And here is what the result looks like after hydration.</p>
 
-  <blockquote> <span style="display:contents;" data-deku-elt-internal="result" data-deku-ssr-result502949="true"></span> </blockquote>
+  <blockquote> <span style="display:contents;" data-deku-elt-internal="result" data-deku-ssr-result@!%502949="true"></span> </blockquote>
 
   <h2>Parting shot</h2>
   <p>Thanks for checking out Deku! I had a blast writing it, and I hope you enjoy using it for your projects!</p>

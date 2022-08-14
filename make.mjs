@@ -6224,7 +6224,7 @@ var pursxToElementConsAttr = function() {
                         return alt(altEvent(dictKorok.MonadST5().Monad0().Applicative0()))(map(functorEvent)(lcmap(profunctorFn)(unsafeUnAttribute)(function(v3) {
                           if (v3.value instanceof Prop$prime) {
                             return v2.setProp({
-                              id: reflectType(dictReflectable)($$Proxy.value) + pxScope,
+                              id: reflectType(dictReflectable)($$Proxy.value) + ("@!%" + pxScope),
                               key: v3.key,
                               value: v3.value.value0
                             });
@@ -6232,7 +6232,7 @@ var pursxToElementConsAttr = function() {
                           ;
                           if (v3.value instanceof Cb$prime) {
                             return v2.setCb({
-                              id: reflectType(dictReflectable)($$Proxy.value) + pxScope,
+                              id: reflectType(dictReflectable)($$Proxy.value) + ("@!%" + pxScope),
                               key: v3.key,
                               value: v3.value.value0
                             });
@@ -6373,7 +6373,7 @@ var pursxToElementConsInsert = function() {
                     element: function(info2) {
                       return function(di) {
                         return alt(altEvent(dictKorok.MonadST5().Monad0().Applicative0()))(__internalDekuFlatten2(dictKorok)({
-                          parent: new Just(reflectType(dictReflectable)($$Proxy.value) + pxScope),
+                          parent: new Just(reflectType(dictReflectable)($$Proxy.value) + ("@!%" + pxScope)),
                           scope: info2.scope,
                           raiseId: function(v3) {
                             return pure(dictKorok.MonadST5().Monad0().Applicative0())(unit);
@@ -10094,9 +10094,9 @@ var doPursxReplacements = ({ id: id2, html, pxScope, cache, verb }) => {
   for (var i2 = 0; i2 < entries.length; i2++) {
     const key2 = entries[i2][0];
     if (entries[i2][1] === true) {
-      vhtml = vhtml.replace(verb + key2 + verb, 'data-deku-attr-internal="' + key2 + '" data-deku-ssr-' + key2 + pxScope + '="true"');
+      vhtml = vhtml.replace(verb + key2 + verb, 'data-deku-attr-internal="' + key2 + '" data-deku-ssr-' + key2 + "@!%" + pxScope + '="true"');
     } else {
-      vhtml = vhtml.replace(verb + key2 + verb, '<span style="display:contents;" data-deku-elt-internal="' + key2 + '" data-deku-ssr-' + key2 + pxScope + '="true"></span>');
+      vhtml = vhtml.replace(verb + key2 + verb, '<span style="display:contents;" data-deku-elt-internal="' + key2 + '" data-deku-ssr-' + key2 + "@!%" + pxScope + '="true"></span>');
     }
   }
   const gtix = vhtml.indexOf(">");

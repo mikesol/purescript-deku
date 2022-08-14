@@ -17,15 +17,15 @@
     We'll spice up the previous example by adding an event listener to our button. When we do, Deku will keep track of how many times we clicked it. The same goes for a range slider, whose current value is displayed underneath it.
   </p>
 
-  <span style="display:contents;" data-deku-elt-internal="code" data-deku-ssr-code502949="true"></span>
+  <span style="display:contents;" data-deku-elt-internal="code" data-deku-ssr-code@!%502949="true"></span>
 
   <p>And here's what it produces:</p>
 
-  <blockquote> <span style="display:contents;" data-deku-elt-internal="result" data-deku-ssr-result502949="true"></span> </blockquote>
+  <blockquote> <span style="display:contents;" data-deku-elt-internal="result" data-deku-ssr-result@!%502949="true"></span> </blockquote>
 
   <h2>Event handling</h2>
   <p>All DOM event handlers, like <code>OnClick</code> and <code>OnInput</code>, can be set with a value of type <code>Cb</code>. This type is a <code>newtype</code> around <code>(Event -> Effect Boolean)</code>. To hook the event up to the Deku event bus, you can use the <code>push</code> function within the event handler. The push function has a signature of <code>(push -> Effect Unit)</code>. Here, the type one can push in to <code>push</code> is UIEvents. Whenever a push happens, our <code>Event</code> receives it and all attributes are updated accordingly.</p>
 
   <h2>Next steps</h2>
-  <p>In this section, saw how to react to events. In the next section, we'll use a similar mechanism to deal with arbitrary <a data-deku-attr-internal="next" href="/purescript-deku/effects/" data-deku-ssr-next502949="true" style="cursor:pointer;">effects</a>.</p>
+  <p>In this section, saw how to react to events. In the next section, we'll use a similar mechanism to deal with arbitrary <a data-deku-attr-internal="next" href="/purescript-deku/effects/" data-deku-ssr-next@!%502949="true" style="cursor:pointer;">effects</a>.</p>
 </div></div></div></body></html>
