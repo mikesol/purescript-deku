@@ -64,7 +64,7 @@ useState
   => a
   -> (((a -> Effect Unit) /\ AnEvent m a) -> Bolson.Entity logic obj m lock)
   -> Bolson.Entity logic obj m lock
-useState a = useState' <<< lcmap (map (pure a <|> _))
+useState a = useMemoized (pure a <|> _)
 
 useStates'
   :: forall s m logic obj lock rbus bus pushi pusho pushR event u

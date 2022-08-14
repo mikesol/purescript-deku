@@ -15,7 +15,7 @@ export const doPursxReplacements = ({ id, html, pxScope, cache, verb }) => {
 					'"' +
 					key +
 					'" data-deku-ssr-' +
-					key +
+					key + "@!%" +
 					pxScope +
 					'="true"'
 			);
@@ -26,7 +26,7 @@ export const doPursxReplacements = ({ id, html, pxScope, cache, verb }) => {
 					'"' +
 					key +
 					'" data-deku-ssr-' +
-					key +
+					key + "@!%" +
 					pxScope +
 					'="true"></span>'
 			);
