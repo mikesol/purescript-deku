@@ -9,7 +9,7 @@ let overrides =
         , version = "main"
         }
         , hyrule =
-        { dependencies = [ "web-uievents", "js-timers", "unsafe-reference" ]
+        { dependencies = [ "monoid-extras", "web-uievents", "js-timers", "unsafe-reference" ]
         , repo = "https://github.com/purefunctor/purescript-hyrule.git"
         , version = "pure/zora"
         }
