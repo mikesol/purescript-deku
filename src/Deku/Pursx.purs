@@ -4208,7 +4208,6 @@ else instance pursxToElementConsAttr ::
     pxk = Proxy :: _ key
 
 instance pursxToElementNil ::
-  Applicative m =>
   PursxToElement lock payload RL.Nil r where
   pursxToElement _ _ _ = { cache: Object.empty, element: Node \_ _ -> empty }
 
