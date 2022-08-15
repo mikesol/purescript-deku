@@ -12,9 +12,10 @@ import Data.Profunctor (lcmap)
 import Data.Reflectable (class Reflectable, reflectType)
 import Data.Symbol (class IsSymbol)
 import Deku.Attribute (Attribute, AttributeValue(..), unsafeUnAttribute)
-import Deku.Core (DOMInterpret(..), class Korok, Domable, Node(..))
+import Deku.Core (DOMInterpret(..), Domable, Node(..))
 import Deku.DOM (class TagToDeku)
 import FRP.Event (AnEvent, subscribe, makeEvent)
+import Hyrule.Zora (Zora)
 import Foreign.Object as Object
 import Prim.Boolean (False, True)
 import Prim.Row as Row
@@ -23,13 +24,12 @@ import Prim.Symbol as Sym
 import Record (get)
 import Type.Proxy (Proxy(..))
 
-newtype PursxElement m lock payload = PursxElement
-  (Domable m lock payload)
+newtype PursxElement lock payload = PursxElement (Domable lock payload)
 
 nut
-  :: forall m lock payload
-   . Domable m lock payload
-  -> PursxElement m lock payload
+  :: forall lock payload
+   . Domable lock payload
+  -> PursxElement lock payload
 nut = PursxElement
 
 pursx :: forall s. Proxy s
@@ -49,7 +49,7 @@ class
 
 instance
   ( TagToDeku tag deku
-  , Row.Cons acc (AnEvent m (Attribute deku)) pursi purso
+  , Row.Cons acc (AnEvent Zora (Attribute deku)) pursi purso
   ) =>
   DoVerbForAttr verb tag acc verb tail pursi purso tail
 else instance
@@ -62,7 +62,6 @@ else instance
 --
 class
   DoVerbForDOM
-    (m :: Type -> Type)
     (lock :: Type)
     (payload :: Type)
     (verb :: Symbol)
@@ -72,18 +71,18 @@ class
     (pursi :: Row Type)
     (purso :: Row Type)
     (newTail :: Symbol)
-  | m lock payload verb acc head tail pursi -> purso newTail
+  | lock payload verb acc head tail pursi -> purso newTail
 
 instance
-  ( Row.Cons acc (PursxElement m lock payload) pursi purso
+  ( Row.Cons acc (PursxElement lock payload) pursi purso
   ) =>
-  DoVerbForDOM m lock payload verb acc verb tail pursi purso tail
+  DoVerbForDOM lock payload verb acc verb tail pursi purso tail
 else instance
   ( Sym.Append acc anything acc2
   , Sym.Cons x y tail
-  , DoVerbForDOM m lock payload verb acc2 x y pursi purso newTail
+  , DoVerbForDOM lock payload verb acc2 x y pursi purso newTail
   ) =>
-  DoVerbForDOM m lock payload verb acc anything tail pursi purso newTail
+  DoVerbForDOM lock payload verb acc anything tail pursi purso newTail
 
 --
 class IsWhiteSpace (space :: Symbol)
@@ -104,44 +103,42 @@ instance IsSingleWhiteSpace "\n"
 
 class
   PXStart
-    (m :: Type -> Type)
     (lock :: Type)
     (payload :: Type)
     (verb :: Symbol)
     (head :: Symbol)
     (tail :: Symbol)
     (purs :: Row Type)
-  | m lock payload verb head tail -> purs
+  | lock payload verb head tail -> purs
 
 instance
   ( Sym.Cons x y tail
-  , PXStart m lock payload verb x y purs
+  , PXStart lock payload verb x y purs
   ) =>
-  PXStart m lock payload verb " " tail purs
+  PXStart lock payload verb " " tail purs
 
 instance
   ( Sym.Cons x y tail
-  , PXStart m lock payload verb x y purs
+  , PXStart lock payload verb x y purs
   ) =>
-  PXStart m lock payload verb "\t" tail purs
+  PXStart lock payload verb "\t" tail purs
 
 instance
   ( Sym.Cons x y tail
-  , PXStart m lock payload verb x y purs
+  , PXStart lock payload verb x y purs
   ) =>
-  PXStart m lock payload verb "\n" tail purs
+  PXStart lock payload verb "\n" tail purs
 
 instance
   ( Sym.Cons x y tail
-  , PXTagPreName m lock payload verb x y () purso trailing
+  , PXTagPreName lock payload verb x y () purso trailing
   , IsWhiteSpace trailing
   ) =>
-  PXStart m lock payload verb "<" tail purso
+  PXStart lock payload verb "<" tail purso
 
 --
 class
   PXTagPreName
-    (m :: Type -> Type)
     (lock :: Type)
     (payload :: Type)
     (verb :: Symbol)
@@ -150,160 +147,159 @@ class
     (pursi :: Row Type)
     (purso :: Row Type)
     (trailing :: Symbol)
-  | m lock payload verb head tail pursi -> purso trailing
+  | lock payload verb head tail pursi -> purso trailing
 
 instance
   ( Sym.Cons x y tail
-  , PXTagPreName m lock payload verb x y pursi purso trailing
+  , PXTagPreName lock payload verb x y pursi purso trailing
   ) =>
-  PXTagPreName m lock payload verb " " tail pursi purso trailing
+  PXTagPreName lock payload verb " " tail pursi purso trailing
 
 instance
   ( Sym.Cons x y tail
-  , PXTagPreName m lock payload verb x y pursi purso trailing
+  , PXTagPreName lock payload verb x y pursi purso trailing
   ) =>
-  PXTagPreName m lock payload verb "\t" tail pursi purso trailing
+  PXTagPreName lock payload verb "\t" tail pursi purso trailing
 
 instance
   ( Sym.Cons x y tail
-  , PXTagPreName m lock payload verb x y pursi purso trailing
+  , PXTagPreName lock payload verb x y pursi purso trailing
   ) =>
-  PXTagPreName m lock payload verb "\n" tail pursi purso trailing
+  PXTagPreName lock payload verb "\n" tail pursi purso trailing
 
 instance
-  ( PXTagName m lock payload verb "" "a" tail pursi purso trailing
+  ( PXTagName lock payload verb "" "a" tail pursi purso trailing
   ) =>
-  PXTagPreName m lock payload verb "a" tail pursi purso trailing
+  PXTagPreName lock payload verb "a" tail pursi purso trailing
 
 instance
-  ( PXTagName m lock payload verb "" "b" tail pursi purso trailing
+  ( PXTagName lock payload verb "" "b" tail pursi purso trailing
   ) =>
-  PXTagPreName m lock payload verb "b" tail pursi purso trailing
+  PXTagPreName lock payload verb "b" tail pursi purso trailing
 
 instance
-  ( PXTagName m lock payload verb "" "c" tail pursi purso trailing
+  ( PXTagName lock payload verb "" "c" tail pursi purso trailing
   ) =>
-  PXTagPreName m lock payload verb "c" tail pursi purso trailing
+  PXTagPreName lock payload verb "c" tail pursi purso trailing
 
 instance
-  ( PXTagName m lock payload verb "" "d" tail pursi purso trailing
+  ( PXTagName lock payload verb "" "d" tail pursi purso trailing
   ) =>
-  PXTagPreName m lock payload verb "d" tail pursi purso trailing
+  PXTagPreName lock payload verb "d" tail pursi purso trailing
 
 instance
-  ( PXTagName m lock payload verb "" "e" tail pursi purso trailing
+  ( PXTagName lock payload verb "" "e" tail pursi purso trailing
   ) =>
-  PXTagPreName m lock payload verb "e" tail pursi purso trailing
+  PXTagPreName lock payload verb "e" tail pursi purso trailing
 
 instance
-  ( PXTagName m lock payload verb "" "f" tail pursi purso trailing
+  ( PXTagName lock payload verb "" "f" tail pursi purso trailing
   ) =>
-  PXTagPreName m lock payload verb "f" tail pursi purso trailing
+  PXTagPreName lock payload verb "f" tail pursi purso trailing
 
 instance
-  ( PXTagName m lock payload verb "" "g" tail pursi purso trailing
+  ( PXTagName lock payload verb "" "g" tail pursi purso trailing
   ) =>
-  PXTagPreName m lock payload verb "g" tail pursi purso trailing
+  PXTagPreName lock payload verb "g" tail pursi purso trailing
 
 instance
-  ( PXTagName m lock payload verb "" "h" tail pursi purso trailing
+  ( PXTagName lock payload verb "" "h" tail pursi purso trailing
   ) =>
-  PXTagPreName m lock payload verb "h" tail pursi purso trailing
+  PXTagPreName lock payload verb "h" tail pursi purso trailing
 
 instance
-  ( PXTagName m lock payload verb "" "i" tail pursi purso trailing
+  ( PXTagName lock payload verb "" "i" tail pursi purso trailing
   ) =>
-  PXTagPreName m lock payload verb "i" tail pursi purso trailing
+  PXTagPreName lock payload verb "i" tail pursi purso trailing
 
 instance
-  ( PXTagName m lock payload verb "" "j" tail pursi purso trailing
+  ( PXTagName lock payload verb "" "j" tail pursi purso trailing
   ) =>
-  PXTagPreName m lock payload verb "j" tail pursi purso trailing
+  PXTagPreName lock payload verb "j" tail pursi purso trailing
 
 instance
-  ( PXTagName m lock payload verb "" "k" tail pursi purso trailing
+  ( PXTagName lock payload verb "" "k" tail pursi purso trailing
   ) =>
-  PXTagPreName m lock payload verb "k" tail pursi purso trailing
+  PXTagPreName lock payload verb "k" tail pursi purso trailing
 
 instance
-  ( PXTagName m lock payload verb "" "l" tail pursi purso trailing
+  ( PXTagName lock payload verb "" "l" tail pursi purso trailing
   ) =>
-  PXTagPreName m lock payload verb "l" tail pursi purso trailing
+  PXTagPreName lock payload verb "l" tail pursi purso trailing
 
 instance
-  ( PXTagName m lock payload verb "" "m" tail pursi purso trailing
+  ( PXTagName lock payload verb "" "m" tail pursi purso trailing
   ) =>
-  PXTagPreName m lock payload verb "m" tail pursi purso trailing
+  PXTagPreName lock payload verb "m" tail pursi purso trailing
 
 instance
-  ( PXTagName m lock payload verb "" "n" tail pursi purso trailing
+  ( PXTagName lock payload verb "" "n" tail pursi purso trailing
   ) =>
-  PXTagPreName m lock payload verb "n" tail pursi purso trailing
+  PXTagPreName lock payload verb "n" tail pursi purso trailing
 
 instance
-  ( PXTagName m lock payload verb "" "o" tail pursi purso trailing
+  ( PXTagName lock payload verb "" "o" tail pursi purso trailing
   ) =>
-  PXTagPreName m lock payload verb "o" tail pursi purso trailing
+  PXTagPreName lock payload verb "o" tail pursi purso trailing
 
 instance
-  ( PXTagName m lock payload verb "" "p" tail pursi purso trailing
+  ( PXTagName lock payload verb "" "p" tail pursi purso trailing
   ) =>
-  PXTagPreName m lock payload verb "p" tail pursi purso trailing
+  PXTagPreName lock payload verb "p" tail pursi purso trailing
 
 instance
-  ( PXTagName m lock payload verb "" "q" tail pursi purso trailing
+  ( PXTagName lock payload verb "" "q" tail pursi purso trailing
   ) =>
-  PXTagPreName m lock payload verb "q" tail pursi purso trailing
+  PXTagPreName lock payload verb "q" tail pursi purso trailing
 
 instance
-  ( PXTagName m lock payload verb "" "r" tail pursi purso trailing
+  ( PXTagName lock payload verb "" "r" tail pursi purso trailing
   ) =>
-  PXTagPreName m lock payload verb "r" tail pursi purso trailing
+  PXTagPreName lock payload verb "r" tail pursi purso trailing
 
 instance
-  ( PXTagName m lock payload verb "" "s" tail pursi purso trailing
+  ( PXTagName lock payload verb "" "s" tail pursi purso trailing
   ) =>
-  PXTagPreName m lock payload verb "s" tail pursi purso trailing
+  PXTagPreName lock payload verb "s" tail pursi purso trailing
 
 instance
-  ( PXTagName m lock payload verb "" "t" tail pursi purso trailing
+  ( PXTagName lock payload verb "" "t" tail pursi purso trailing
   ) =>
-  PXTagPreName m lock payload verb "t" tail pursi purso trailing
+  PXTagPreName lock payload verb "t" tail pursi purso trailing
 
 instance
-  ( PXTagName m lock payload verb "" "u" tail pursi purso trailing
+  ( PXTagName lock payload verb "" "u" tail pursi purso trailing
   ) =>
-  PXTagPreName m lock payload verb "u" tail pursi purso trailing
+  PXTagPreName lock payload verb "u" tail pursi purso trailing
 
 instance
-  ( PXTagName m lock payload verb "" "v" tail pursi purso trailing
+  ( PXTagName lock payload verb "" "v" tail pursi purso trailing
   ) =>
-  PXTagPreName m lock payload verb "v" tail pursi purso trailing
+  PXTagPreName lock payload verb "v" tail pursi purso trailing
 
 instance
-  ( PXTagName m lock payload verb "" "w" tail pursi purso trailing
+  ( PXTagName lock payload verb "" "w" tail pursi purso trailing
   ) =>
-  PXTagPreName m lock payload verb "w" tail pursi purso trailing
+  PXTagPreName lock payload verb "w" tail pursi purso trailing
 
 instance
-  ( PXTagName m lock payload verb "" "x" tail pursi purso trailing
+  ( PXTagName lock payload verb "" "x" tail pursi purso trailing
   ) =>
-  PXTagPreName m lock payload verb "x" tail pursi purso trailing
+  PXTagPreName lock payload verb "x" tail pursi purso trailing
 
 instance
-  ( PXTagName m lock payload verb "" "y" tail pursi purso trailing
+  ( PXTagName lock payload verb "" "y" tail pursi purso trailing
   ) =>
-  PXTagPreName m lock payload verb "y" tail pursi purso trailing
+  PXTagPreName lock payload verb "y" tail pursi purso trailing
 
 instance
-  ( PXTagName m lock payload verb "" "z" tail pursi purso trailing
+  ( PXTagName lock payload verb "" "z" tail pursi purso trailing
   ) =>
-  PXTagPreName m lock payload verb "z" tail pursi purso trailing
+  PXTagPreName lock payload verb "z" tail pursi purso trailing
 
 --
 class
   PXTagName
-    (m :: Type -> Type)
     (lock :: Type)
     (payload :: Type)
     (verb :: Symbol)
@@ -313,292 +309,292 @@ class
     (pursi :: Row Type)
     (purso :: Row Type)
     (trailing :: Symbol)
-  | m lock payload verb tag head tail pursi -> purso trailing
+  | lock payload verb tag head tail pursi -> purso trailing
 
 instance
   ( Sym.Cons q r tail
-  , PXBody m lock payload verb q r pursi purso trailing
+  , PXBody lock payload verb q r pursi purso trailing
   , Sym.Cons x y trailing
   , PreEndTagFromTrailing x y tag newTrailing
   ) =>
-  PXTagName m lock payload verb tag ">" tail pursi purso newTrailing
+  PXTagName lock payload verb tag ">" tail pursi purso newTrailing
 
 instance
   ( Sym.Cons x y tail
   , Sym.Append tag_ "a" tag
-  , PXTagName m lock payload verb tag x y pursi purso trailing
+  , PXTagName lock payload verb tag x y pursi purso trailing
   ) =>
-  PXTagName m lock payload verb tag_ "a" tail pursi purso trailing
+  PXTagName lock payload verb tag_ "a" tail pursi purso trailing
 
 instance
   ( Sym.Cons x y tail
   , Sym.Append tag_ "b" tag
-  , PXTagName m lock payload verb tag x y pursi purso trailing
+  , PXTagName lock payload verb tag x y pursi purso trailing
   ) =>
-  PXTagName m lock payload verb tag_ "b" tail pursi purso trailing
+  PXTagName lock payload verb tag_ "b" tail pursi purso trailing
 
 instance
   ( Sym.Cons x y tail
   , Sym.Append tag_ "c" tag
-  , PXTagName m lock payload verb tag x y pursi purso trailing
+  , PXTagName lock payload verb tag x y pursi purso trailing
   ) =>
-  PXTagName m lock payload verb tag_ "c" tail pursi purso trailing
+  PXTagName lock payload verb tag_ "c" tail pursi purso trailing
 
 instance
   ( Sym.Cons x y tail
   , Sym.Append tag_ "d" tag
-  , PXTagName m lock payload verb tag x y pursi purso trailing
+  , PXTagName lock payload verb tag x y pursi purso trailing
   ) =>
-  PXTagName m lock payload verb tag_ "d" tail pursi purso trailing
+  PXTagName lock payload verb tag_ "d" tail pursi purso trailing
 
 instance
   ( Sym.Cons x y tail
   , Sym.Append tag_ "e" tag
-  , PXTagName m lock payload verb tag x y pursi purso trailing
+  , PXTagName lock payload verb tag x y pursi purso trailing
   ) =>
-  PXTagName m lock payload verb tag_ "e" tail pursi purso trailing
+  PXTagName lock payload verb tag_ "e" tail pursi purso trailing
 
 instance
   ( Sym.Cons x y tail
   , Sym.Append tag_ "f" tag
-  , PXTagName m lock payload verb tag x y pursi purso trailing
+  , PXTagName lock payload verb tag x y pursi purso trailing
   ) =>
-  PXTagName m lock payload verb tag_ "f" tail pursi purso trailing
+  PXTagName lock payload verb tag_ "f" tail pursi purso trailing
 
 instance
   ( Sym.Cons x y tail
   , Sym.Append tag_ "g" tag
-  , PXTagName m lock payload verb tag x y pursi purso trailing
+  , PXTagName lock payload verb tag x y pursi purso trailing
   ) =>
-  PXTagName m lock payload verb tag_ "g" tail pursi purso trailing
+  PXTagName lock payload verb tag_ "g" tail pursi purso trailing
 
 instance
   ( Sym.Cons x y tail
   , Sym.Append tag_ "h" tag
-  , PXTagName m lock payload verb tag x y pursi purso trailing
+  , PXTagName lock payload verb tag x y pursi purso trailing
   ) =>
-  PXTagName m lock payload verb tag_ "h" tail pursi purso trailing
+  PXTagName lock payload verb tag_ "h" tail pursi purso trailing
 
 instance
   ( Sym.Cons x y tail
   , Sym.Append tag_ "i" tag
-  , PXTagName m lock payload verb tag x y pursi purso trailing
+  , PXTagName lock payload verb tag x y pursi purso trailing
   ) =>
-  PXTagName m lock payload verb tag_ "i" tail pursi purso trailing
+  PXTagName lock payload verb tag_ "i" tail pursi purso trailing
 
 instance
   ( Sym.Cons x y tail
   , Sym.Append tag_ "j" tag
-  , PXTagName m lock payload verb tag x y pursi purso trailing
+  , PXTagName lock payload verb tag x y pursi purso trailing
   ) =>
-  PXTagName m lock payload verb tag_ "j" tail pursi purso trailing
+  PXTagName lock payload verb tag_ "j" tail pursi purso trailing
 
 instance
   ( Sym.Cons x y tail
   , Sym.Append tag_ "k" tag
-  , PXTagName m lock payload verb tag x y pursi purso trailing
+  , PXTagName lock payload verb tag x y pursi purso trailing
   ) =>
-  PXTagName m lock payload verb tag_ "k" tail pursi purso trailing
+  PXTagName lock payload verb tag_ "k" tail pursi purso trailing
 
 instance
   ( Sym.Cons x y tail
   , Sym.Append tag_ "l" tag
-  , PXTagName m lock payload verb tag x y pursi purso trailing
+  , PXTagName lock payload verb tag x y pursi purso trailing
   ) =>
-  PXTagName m lock payload verb tag_ "l" tail pursi purso trailing
+  PXTagName lock payload verb tag_ "l" tail pursi purso trailing
 
 instance
   ( Sym.Cons x y tail
   , Sym.Append tag_ "m" tag
-  , PXTagName m lock payload verb tag x y pursi purso trailing
+  , PXTagName lock payload verb tag x y pursi purso trailing
   ) =>
-  PXTagName m lock payload verb tag_ "m" tail pursi purso trailing
+  PXTagName lock payload verb tag_ "m" tail pursi purso trailing
 
 instance
   ( Sym.Cons x y tail
   , Sym.Append tag_ "n" tag
-  , PXTagName m lock payload verb tag x y pursi purso trailing
+  , PXTagName lock payload verb tag x y pursi purso trailing
   ) =>
-  PXTagName m lock payload verb tag_ "n" tail pursi purso trailing
+  PXTagName lock payload verb tag_ "n" tail pursi purso trailing
 
 instance
   ( Sym.Cons x y tail
   , Sym.Append tag_ "o" tag
-  , PXTagName m lock payload verb tag x y pursi purso trailing
+  , PXTagName lock payload verb tag x y pursi purso trailing
   ) =>
-  PXTagName m lock payload verb tag_ "o" tail pursi purso trailing
+  PXTagName lock payload verb tag_ "o" tail pursi purso trailing
 
 instance
   ( Sym.Cons x y tail
   , Sym.Append tag_ "p" tag
-  , PXTagName m lock payload verb tag x y pursi purso trailing
+  , PXTagName lock payload verb tag x y pursi purso trailing
   ) =>
-  PXTagName m lock payload verb tag_ "p" tail pursi purso trailing
+  PXTagName lock payload verb tag_ "p" tail pursi purso trailing
 
 instance
   ( Sym.Cons x y tail
   , Sym.Append tag_ "q" tag
-  , PXTagName m lock payload verb tag x y pursi purso trailing
+  , PXTagName lock payload verb tag x y pursi purso trailing
   ) =>
-  PXTagName m lock payload verb tag_ "q" tail pursi purso trailing
+  PXTagName lock payload verb tag_ "q" tail pursi purso trailing
 
 instance
   ( Sym.Cons x y tail
   , Sym.Append tag_ "r" tag
-  , PXTagName m lock payload verb tag x y pursi purso trailing
+  , PXTagName lock payload verb tag x y pursi purso trailing
   ) =>
-  PXTagName m lock payload verb tag_ "r" tail pursi purso trailing
+  PXTagName lock payload verb tag_ "r" tail pursi purso trailing
 
 instance
   ( Sym.Cons x y tail
   , Sym.Append tag_ "s" tag
-  , PXTagName m lock payload verb tag x y pursi purso trailing
+  , PXTagName lock payload verb tag x y pursi purso trailing
   ) =>
-  PXTagName m lock payload verb tag_ "s" tail pursi purso trailing
+  PXTagName lock payload verb tag_ "s" tail pursi purso trailing
 
 instance
   ( Sym.Cons x y tail
   , Sym.Append tag_ "t" tag
-  , PXTagName m lock payload verb tag x y pursi purso trailing
+  , PXTagName lock payload verb tag x y pursi purso trailing
   ) =>
-  PXTagName m lock payload verb tag_ "t" tail pursi purso trailing
+  PXTagName lock payload verb tag_ "t" tail pursi purso trailing
 
 instance
   ( Sym.Cons x y tail
   , Sym.Append tag_ "u" tag
-  , PXTagName m lock payload verb tag x y pursi purso trailing
+  , PXTagName lock payload verb tag x y pursi purso trailing
   ) =>
-  PXTagName m lock payload verb tag_ "u" tail pursi purso trailing
+  PXTagName lock payload verb tag_ "u" tail pursi purso trailing
 
 instance
   ( Sym.Cons x y tail
   , Sym.Append tag_ "v" tag
-  , PXTagName m lock payload verb tag x y pursi purso trailing
+  , PXTagName lock payload verb tag x y pursi purso trailing
   ) =>
-  PXTagName m lock payload verb tag_ "v" tail pursi purso trailing
+  PXTagName lock payload verb tag_ "v" tail pursi purso trailing
 
 instance
   ( Sym.Cons x y tail
   , Sym.Append tag_ "w" tag
-  , PXTagName m lock payload verb tag x y pursi purso trailing
+  , PXTagName lock payload verb tag x y pursi purso trailing
   ) =>
-  PXTagName m lock payload verb tag_ "w" tail pursi purso trailing
+  PXTagName lock payload verb tag_ "w" tail pursi purso trailing
 
 instance
   ( Sym.Cons x y tail
   , Sym.Append tag_ "x" tag
-  , PXTagName m lock payload verb tag x y pursi purso trailing
+  , PXTagName lock payload verb tag x y pursi purso trailing
   ) =>
-  PXTagName m lock payload verb tag_ "x" tail pursi purso trailing
+  PXTagName lock payload verb tag_ "x" tail pursi purso trailing
 
 instance
   ( Sym.Cons x y tail
   , Sym.Append tag_ "y" tag
-  , PXTagName m lock payload verb tag x y pursi purso trailing
+  , PXTagName lock payload verb tag x y pursi purso trailing
   ) =>
-  PXTagName m lock payload verb tag_ "y" tail pursi purso trailing
+  PXTagName lock payload verb tag_ "y" tail pursi purso trailing
 
 instance
   ( Sym.Cons x y tail
   , Sym.Append tag_ "z" tag
-  , PXTagName m lock payload verb tag x y pursi purso trailing
+  , PXTagName lock payload verb tag x y pursi purso trailing
   ) =>
-  PXTagName m lock payload verb tag_ "z" tail pursi purso trailing
+  PXTagName lock payload verb tag_ "z" tail pursi purso trailing
 
 instance
   ( Sym.Cons x y tail
   , Sym.Append tag_ "-" tag
-  , PXTagName m lock payload verb tag x y pursi purso trailing
+  , PXTagName lock payload verb tag x y pursi purso trailing
   ) =>
-  PXTagName m lock payload verb tag_ "-" tail pursi purso trailing
+  PXTagName lock payload verb tag_ "-" tail pursi purso trailing
 
 instance
   ( Sym.Cons x y tail
   , Sym.Append tag_ "0" tag
-  , PXTagName m lock payload verb tag x y pursi purso trailing
+  , PXTagName lock payload verb tag x y pursi purso trailing
   ) =>
-  PXTagName m lock payload verb tag_ "0" tail pursi purso trailing
+  PXTagName lock payload verb tag_ "0" tail pursi purso trailing
 
 instance
   ( Sym.Cons x y tail
   , Sym.Append tag_ "1" tag
-  , PXTagName m lock payload verb tag x y pursi purso trailing
+  , PXTagName lock payload verb tag x y pursi purso trailing
   ) =>
-  PXTagName m lock payload verb tag_ "1" tail pursi purso trailing
+  PXTagName lock payload verb tag_ "1" tail pursi purso trailing
 
 instance
   ( Sym.Cons x y tail
   , Sym.Append tag_ "2" tag
-  , PXTagName m lock payload verb tag x y pursi purso trailing
+  , PXTagName lock payload verb tag x y pursi purso trailing
   ) =>
-  PXTagName m lock payload verb tag_ "2" tail pursi purso trailing
+  PXTagName lock payload verb tag_ "2" tail pursi purso trailing
 
 instance
   ( Sym.Cons x y tail
   , Sym.Append tag_ "3" tag
-  , PXTagName m lock payload verb tag x y pursi purso trailing
+  , PXTagName lock payload verb tag x y pursi purso trailing
   ) =>
-  PXTagName m lock payload verb tag_ "3" tail pursi purso trailing
+  PXTagName lock payload verb tag_ "3" tail pursi purso trailing
 
 instance
   ( Sym.Cons x y tail
   , Sym.Append tag_ "4" tag
-  , PXTagName m lock payload verb tag x y pursi purso trailing
+  , PXTagName lock payload verb tag x y pursi purso trailing
   ) =>
-  PXTagName m lock payload verb tag_ "4" tail pursi purso trailing
+  PXTagName lock payload verb tag_ "4" tail pursi purso trailing
 
 instance
   ( Sym.Cons x y tail
   , Sym.Append tag_ "5" tag
-  , PXTagName m lock payload verb tag x y pursi purso trailing
+  , PXTagName lock payload verb tag x y pursi purso trailing
   ) =>
-  PXTagName m lock payload verb tag_ "5" tail pursi purso trailing
+  PXTagName lock payload verb tag_ "5" tail pursi purso trailing
 
 instance
   ( Sym.Cons x y tail
   , Sym.Append tag_ "6" tag
-  , PXTagName m lock payload verb tag x y pursi purso trailing
+  , PXTagName lock payload verb tag x y pursi purso trailing
   ) =>
-  PXTagName m lock payload verb tag_ "6" tail pursi purso trailing
+  PXTagName lock payload verb tag_ "6" tail pursi purso trailing
 
 instance
   ( Sym.Cons x y tail
   , Sym.Append tag_ "7" tag
-  , PXTagName m lock payload verb tag x y pursi purso trailing
+  , PXTagName lock payload verb tag x y pursi purso trailing
   ) =>
-  PXTagName m lock payload verb tag_ "7" tail pursi purso trailing
+  PXTagName lock payload verb tag_ "7" tail pursi purso trailing
 
 instance
   ( Sym.Cons x y tail
   , Sym.Append tag_ "8" tag
-  , PXTagName m lock payload verb tag x y pursi purso trailing
+  , PXTagName lock payload verb tag x y pursi purso trailing
   ) =>
-  PXTagName m lock payload verb tag_ "8" tail pursi purso trailing
+  PXTagName lock payload verb tag_ "8" tail pursi purso trailing
 
 instance
   ( Sym.Cons x y tail
   , Sym.Append tag_ "9" tag
-  , PXTagName m lock payload verb tag x y pursi purso trailing
+  , PXTagName lock payload verb tag x y pursi purso trailing
   ) =>
-  PXTagName m lock payload verb tag_ "9" tail pursi purso trailing
+  PXTagName lock payload verb tag_ "9" tail pursi purso trailing
 
 instance
   ( Sym.Cons x y tail
-  , PXTagPreAttrName m lock payload verb False tag x y pursi purso trailing
+  , PXTagPreAttrName lock payload verb False tag x y pursi purso trailing
   ) =>
-  PXTagName m lock payload verb tag " " tail pursi purso trailing
+  PXTagName lock payload verb tag " " tail pursi purso trailing
 
 instance
   ( Sym.Cons x y tail
-  , PXTagPreAttrName m lock payload verb False tag x y pursi purso trailing
+  , PXTagPreAttrName lock payload verb False tag x y pursi purso trailing
   ) =>
-  PXTagName m lock payload verb tag "\t" tail pursi purso trailing
+  PXTagName lock payload verb tag "\t" tail pursi purso trailing
 
 instance
   ( Sym.Cons x y tail
-  , PXTagPreAttrName m lock payload verb False tag x y pursi purso trailing
+  , PXTagPreAttrName lock payload verb False tag x y pursi purso trailing
   ) =>
-  PXTagName m lock payload verb tag "\n" tail pursi purso trailing
+  PXTagName lock payload verb tag "\n" tail pursi purso trailing
 
 --
 class
@@ -1036,7 +1032,6 @@ instance EndTagFromTrailing ">" tail tag tag tail
 --
 class
   PXTagPreAttrName
-    (m :: Type -> Type)
     (lock :: Type)
     (payload :: Type)
     (verb :: Symbol)
@@ -1047,13 +1042,12 @@ class
     (pursi :: Row Type)
     (purso :: Row Type)
     (trailing :: Symbol)
-  | m lock payload verb hasAttributed tag head tail pursi -> purso trailing
+  | lock payload verb hasAttributed tag head tail pursi -> purso trailing
 
 instance
   ( Sym.Cons ">" trailing tail
   ) =>
-  PXTagPreAttrName m
-    lock
+  PXTagPreAttrName lock
     payload
     verb
     hasAttributed
@@ -1066,12 +1060,11 @@ instance
 -- trailing will be by definition whatever comes after the closing tag, ie </ foo> will be " foo>"
 else instance
   ( Sym.Cons q r tail
-  , PXBody m lock payload verb q r pursi purso trailing
+  , PXBody lock payload verb q r pursi purso trailing
   , Sym.Cons x y trailing
   , PreEndTagFromTrailing x y tag newTrailing
   ) =>
-  PXTagPreAttrName m
-    lock
+  PXTagPreAttrName lock
     payload
     verb
     hasAttributed
@@ -1084,11 +1077,10 @@ else instance
 --
 else instance
   ( Sym.Cons x y tail
-  , PXTagPreAttrName m lock payload verb hasAttributed tag x y pursi purso
+  , PXTagPreAttrName lock payload verb hasAttributed tag x y pursi purso
       trailing
   ) =>
-  PXTagPreAttrName m
-    lock
+  PXTagPreAttrName lock
     payload
     verb
     hasAttributed
@@ -1100,11 +1092,10 @@ else instance
     trailing
 else instance
   ( Sym.Cons x y tail
-  , PXTagPreAttrName m lock payload verb hasAttributed tag x y pursi purso
+  , PXTagPreAttrName lock payload verb hasAttributed tag x y pursi purso
       trailing
   ) =>
-  PXTagPreAttrName m
-    lock
+  PXTagPreAttrName lock
     payload
     verb
     hasAttributed
@@ -1116,11 +1107,10 @@ else instance
     trailing
 else instance
   ( Sym.Cons x y tail
-  , PXTagPreAttrName m lock payload verb hasAttributed tag x y pursi purso
+  , PXTagPreAttrName lock payload verb hasAttributed tag x y pursi purso
       trailing
   ) =>
-  PXTagPreAttrName m
-    lock
+  PXTagPreAttrName lock
     payload
     verb
     hasAttributed
@@ -1131,11 +1121,10 @@ else instance
     purso
     trailing
 else instance
-  ( PXTagAttrName m lock payload verb hasAttributed tag "a" tail pursi purso
+  ( PXTagAttrName lock payload verb hasAttributed tag "a" tail pursi purso
       trailing
   ) =>
-  PXTagPreAttrName m
-    lock
+  PXTagPreAttrName lock
     payload
     verb
     hasAttributed
@@ -1146,11 +1135,10 @@ else instance
     purso
     trailing
 else instance
-  ( PXTagAttrName m lock payload verb hasAttributed tag "b" tail pursi purso
+  ( PXTagAttrName lock payload verb hasAttributed tag "b" tail pursi purso
       trailing
   ) =>
-  PXTagPreAttrName m
-    lock
+  PXTagPreAttrName lock
     payload
     verb
     hasAttributed
@@ -1161,11 +1149,10 @@ else instance
     purso
     trailing
 else instance
-  ( PXTagAttrName m lock payload verb hasAttributed tag "c" tail pursi purso
+  ( PXTagAttrName lock payload verb hasAttributed tag "c" tail pursi purso
       trailing
   ) =>
-  PXTagPreAttrName m
-    lock
+  PXTagPreAttrName lock
     payload
     verb
     hasAttributed
@@ -1176,11 +1163,10 @@ else instance
     purso
     trailing
 else instance
-  ( PXTagAttrName m lock payload verb hasAttributed tag "d" tail pursi purso
+  ( PXTagAttrName lock payload verb hasAttributed tag "d" tail pursi purso
       trailing
   ) =>
-  PXTagPreAttrName m
-    lock
+  PXTagPreAttrName lock
     payload
     verb
     hasAttributed
@@ -1191,11 +1177,10 @@ else instance
     purso
     trailing
 else instance
-  ( PXTagAttrName m lock payload verb hasAttributed tag "e" tail pursi purso
+  ( PXTagAttrName lock payload verb hasAttributed tag "e" tail pursi purso
       trailing
   ) =>
-  PXTagPreAttrName m
-    lock
+  PXTagPreAttrName lock
     payload
     verb
     hasAttributed
@@ -1206,11 +1191,10 @@ else instance
     purso
     trailing
 else instance
-  ( PXTagAttrName m lock payload verb hasAttributed tag "f" tail pursi purso
+  ( PXTagAttrName lock payload verb hasAttributed tag "f" tail pursi purso
       trailing
   ) =>
-  PXTagPreAttrName m
-    lock
+  PXTagPreAttrName lock
     payload
     verb
     hasAttributed
@@ -1221,11 +1205,10 @@ else instance
     purso
     trailing
 else instance
-  ( PXTagAttrName m lock payload verb hasAttributed tag "g" tail pursi purso
+  ( PXTagAttrName lock payload verb hasAttributed tag "g" tail pursi purso
       trailing
   ) =>
-  PXTagPreAttrName m
-    lock
+  PXTagPreAttrName lock
     payload
     verb
     hasAttributed
@@ -1236,11 +1219,10 @@ else instance
     purso
     trailing
 else instance
-  ( PXTagAttrName m lock payload verb hasAttributed tag "h" tail pursi purso
+  ( PXTagAttrName lock payload verb hasAttributed tag "h" tail pursi purso
       trailing
   ) =>
-  PXTagPreAttrName m
-    lock
+  PXTagPreAttrName lock
     payload
     verb
     hasAttributed
@@ -1251,11 +1233,10 @@ else instance
     purso
     trailing
 else instance
-  ( PXTagAttrName m lock payload verb hasAttributed tag "i" tail pursi purso
+  ( PXTagAttrName lock payload verb hasAttributed tag "i" tail pursi purso
       trailing
   ) =>
-  PXTagPreAttrName m
-    lock
+  PXTagPreAttrName lock
     payload
     verb
     hasAttributed
@@ -1266,11 +1247,10 @@ else instance
     purso
     trailing
 else instance
-  ( PXTagAttrName m lock payload verb hasAttributed tag "j" tail pursi purso
+  ( PXTagAttrName lock payload verb hasAttributed tag "j" tail pursi purso
       trailing
   ) =>
-  PXTagPreAttrName m
-    lock
+  PXTagPreAttrName lock
     payload
     verb
     hasAttributed
@@ -1281,11 +1261,10 @@ else instance
     purso
     trailing
 else instance
-  ( PXTagAttrName m lock payload verb hasAttributed tag "k" tail pursi purso
+  ( PXTagAttrName lock payload verb hasAttributed tag "k" tail pursi purso
       trailing
   ) =>
-  PXTagPreAttrName m
-    lock
+  PXTagPreAttrName lock
     payload
     verb
     hasAttributed
@@ -1296,11 +1275,10 @@ else instance
     purso
     trailing
 else instance
-  ( PXTagAttrName m lock payload verb hasAttributed tag "l" tail pursi purso
+  ( PXTagAttrName lock payload verb hasAttributed tag "l" tail pursi purso
       trailing
   ) =>
-  PXTagPreAttrName m
-    lock
+  PXTagPreAttrName lock
     payload
     verb
     hasAttributed
@@ -1311,11 +1289,10 @@ else instance
     purso
     trailing
 else instance
-  ( PXTagAttrName m lock payload verb hasAttributed tag "m" tail pursi purso
+  ( PXTagAttrName lock payload verb hasAttributed tag "m" tail pursi purso
       trailing
   ) =>
-  PXTagPreAttrName m
-    lock
+  PXTagPreAttrName lock
     payload
     verb
     hasAttributed
@@ -1326,11 +1303,10 @@ else instance
     purso
     trailing
 else instance
-  ( PXTagAttrName m lock payload verb hasAttributed tag "n" tail pursi purso
+  ( PXTagAttrName lock payload verb hasAttributed tag "n" tail pursi purso
       trailing
   ) =>
-  PXTagPreAttrName m
-    lock
+  PXTagPreAttrName lock
     payload
     verb
     hasAttributed
@@ -1341,11 +1317,10 @@ else instance
     purso
     trailing
 else instance
-  ( PXTagAttrName m lock payload verb hasAttributed tag "o" tail pursi purso
+  ( PXTagAttrName lock payload verb hasAttributed tag "o" tail pursi purso
       trailing
   ) =>
-  PXTagPreAttrName m
-    lock
+  PXTagPreAttrName lock
     payload
     verb
     hasAttributed
@@ -1356,11 +1331,10 @@ else instance
     purso
     trailing
 else instance
-  ( PXTagAttrName m lock payload verb hasAttributed tag "p" tail pursi purso
+  ( PXTagAttrName lock payload verb hasAttributed tag "p" tail pursi purso
       trailing
   ) =>
-  PXTagPreAttrName m
-    lock
+  PXTagPreAttrName lock
     payload
     verb
     hasAttributed
@@ -1371,11 +1345,10 @@ else instance
     purso
     trailing
 else instance
-  ( PXTagAttrName m lock payload verb hasAttributed tag "q" tail pursi purso
+  ( PXTagAttrName lock payload verb hasAttributed tag "q" tail pursi purso
       trailing
   ) =>
-  PXTagPreAttrName m
-    lock
+  PXTagPreAttrName lock
     payload
     verb
     hasAttributed
@@ -1386,11 +1359,10 @@ else instance
     purso
     trailing
 else instance
-  ( PXTagAttrName m lock payload verb hasAttributed tag "r" tail pursi purso
+  ( PXTagAttrName lock payload verb hasAttributed tag "r" tail pursi purso
       trailing
   ) =>
-  PXTagPreAttrName m
-    lock
+  PXTagPreAttrName lock
     payload
     verb
     hasAttributed
@@ -1401,11 +1373,10 @@ else instance
     purso
     trailing
 else instance
-  ( PXTagAttrName m lock payload verb hasAttributed tag "s" tail pursi purso
+  ( PXTagAttrName lock payload verb hasAttributed tag "s" tail pursi purso
       trailing
   ) =>
-  PXTagPreAttrName m
-    lock
+  PXTagPreAttrName lock
     payload
     verb
     hasAttributed
@@ -1416,11 +1387,10 @@ else instance
     purso
     trailing
 else instance
-  ( PXTagAttrName m lock payload verb hasAttributed tag "t" tail pursi purso
+  ( PXTagAttrName lock payload verb hasAttributed tag "t" tail pursi purso
       trailing
   ) =>
-  PXTagPreAttrName m
-    lock
+  PXTagPreAttrName lock
     payload
     verb
     hasAttributed
@@ -1431,11 +1401,10 @@ else instance
     purso
     trailing
 else instance
-  ( PXTagAttrName m lock payload verb hasAttributed tag "u" tail pursi purso
+  ( PXTagAttrName lock payload verb hasAttributed tag "u" tail pursi purso
       trailing
   ) =>
-  PXTagPreAttrName m
-    lock
+  PXTagPreAttrName lock
     payload
     verb
     hasAttributed
@@ -1446,11 +1415,10 @@ else instance
     purso
     trailing
 else instance
-  ( PXTagAttrName m lock payload verb hasAttributed tag "v" tail pursi purso
+  ( PXTagAttrName lock payload verb hasAttributed tag "v" tail pursi purso
       trailing
   ) =>
-  PXTagPreAttrName m
-    lock
+  PXTagPreAttrName lock
     payload
     verb
     hasAttributed
@@ -1461,11 +1429,10 @@ else instance
     purso
     trailing
 else instance
-  ( PXTagAttrName m lock payload verb hasAttributed tag "w" tail pursi purso
+  ( PXTagAttrName lock payload verb hasAttributed tag "w" tail pursi purso
       trailing
   ) =>
-  PXTagPreAttrName m
-    lock
+  PXTagPreAttrName lock
     payload
     verb
     hasAttributed
@@ -1476,11 +1443,10 @@ else instance
     purso
     trailing
 else instance
-  ( PXTagAttrName m lock payload verb hasAttributed tag "x" tail pursi purso
+  ( PXTagAttrName lock payload verb hasAttributed tag "x" tail pursi purso
       trailing
   ) =>
-  PXTagPreAttrName m
-    lock
+  PXTagPreAttrName lock
     payload
     verb
     hasAttributed
@@ -1491,11 +1457,10 @@ else instance
     purso
     trailing
 else instance
-  ( PXTagAttrName m lock payload verb hasAttributed tag "y" tail pursi purso
+  ( PXTagAttrName lock payload verb hasAttributed tag "y" tail pursi purso
       trailing
   ) =>
-  PXTagPreAttrName m
-    lock
+  PXTagPreAttrName lock
     payload
     verb
     hasAttributed
@@ -1506,11 +1471,10 @@ else instance
     purso
     trailing
 else instance
-  ( PXTagAttrName m lock payload verb hasAttributed tag "z" tail pursi purso
+  ( PXTagAttrName lock payload verb hasAttributed tag "z" tail pursi purso
       trailing
   ) =>
-  PXTagPreAttrName m
-    lock
+  PXTagPreAttrName lock
     payload
     verb
     hasAttributed
@@ -1521,11 +1485,10 @@ else instance
     purso
     trailing
 else instance
-  ( PXTagAttrName m lock payload verb hasAttributed tag "A" tail pursi purso
+  ( PXTagAttrName lock payload verb hasAttributed tag "A" tail pursi purso
       trailing
   ) =>
-  PXTagPreAttrName m
-    lock
+  PXTagPreAttrName lock
     payload
     verb
     hasAttributed
@@ -1536,11 +1499,10 @@ else instance
     purso
     trailing
 else instance
-  ( PXTagAttrName m lock payload verb hasAttributed tag "B" tail pursi purso
+  ( PXTagAttrName lock payload verb hasAttributed tag "B" tail pursi purso
       trailing
   ) =>
-  PXTagPreAttrName m
-    lock
+  PXTagPreAttrName lock
     payload
     verb
     hasAttributed
@@ -1551,11 +1513,10 @@ else instance
     purso
     trailing
 else instance
-  ( PXTagAttrName m lock payload verb hasAttributed tag "C" tail pursi purso
+  ( PXTagAttrName lock payload verb hasAttributed tag "C" tail pursi purso
       trailing
   ) =>
-  PXTagPreAttrName m
-    lock
+  PXTagPreAttrName lock
     payload
     verb
     hasAttributed
@@ -1566,11 +1527,10 @@ else instance
     purso
     trailing
 else instance
-  ( PXTagAttrName m lock payload verb hasAttributed tag "D" tail pursi purso
+  ( PXTagAttrName lock payload verb hasAttributed tag "D" tail pursi purso
       trailing
   ) =>
-  PXTagPreAttrName m
-    lock
+  PXTagPreAttrName lock
     payload
     verb
     hasAttributed
@@ -1581,11 +1541,10 @@ else instance
     purso
     trailing
 else instance
-  ( PXTagAttrName m lock payload verb hasAttributed tag "E" tail pursi purso
+  ( PXTagAttrName lock payload verb hasAttributed tag "E" tail pursi purso
       trailing
   ) =>
-  PXTagPreAttrName m
-    lock
+  PXTagPreAttrName lock
     payload
     verb
     hasAttributed
@@ -1596,11 +1555,10 @@ else instance
     purso
     trailing
 else instance
-  ( PXTagAttrName m lock payload verb hasAttributed tag "F" tail pursi purso
+  ( PXTagAttrName lock payload verb hasAttributed tag "F" tail pursi purso
       trailing
   ) =>
-  PXTagPreAttrName m
-    lock
+  PXTagPreAttrName lock
     payload
     verb
     hasAttributed
@@ -1611,11 +1569,10 @@ else instance
     purso
     trailing
 else instance
-  ( PXTagAttrName m lock payload verb hasAttributed tag "G" tail pursi purso
+  ( PXTagAttrName lock payload verb hasAttributed tag "G" tail pursi purso
       trailing
   ) =>
-  PXTagPreAttrName m
-    lock
+  PXTagPreAttrName lock
     payload
     verb
     hasAttributed
@@ -1626,11 +1583,10 @@ else instance
     purso
     trailing
 else instance
-  ( PXTagAttrName m lock payload verb hasAttributed tag "H" tail pursi purso
+  ( PXTagAttrName lock payload verb hasAttributed tag "H" tail pursi purso
       trailing
   ) =>
-  PXTagPreAttrName m
-    lock
+  PXTagPreAttrName lock
     payload
     verb
     hasAttributed
@@ -1641,11 +1597,10 @@ else instance
     purso
     trailing
 else instance
-  ( PXTagAttrName m lock payload verb hasAttributed tag "I" tail pursi purso
+  ( PXTagAttrName lock payload verb hasAttributed tag "I" tail pursi purso
       trailing
   ) =>
-  PXTagPreAttrName m
-    lock
+  PXTagPreAttrName lock
     payload
     verb
     hasAttributed
@@ -1656,11 +1611,10 @@ else instance
     purso
     trailing
 else instance
-  ( PXTagAttrName m lock payload verb hasAttributed tag "J" tail pursi purso
+  ( PXTagAttrName lock payload verb hasAttributed tag "J" tail pursi purso
       trailing
   ) =>
-  PXTagPreAttrName m
-    lock
+  PXTagPreAttrName lock
     payload
     verb
     hasAttributed
@@ -1671,11 +1625,10 @@ else instance
     purso
     trailing
 else instance
-  ( PXTagAttrName m lock payload verb hasAttributed tag "K" tail pursi purso
+  ( PXTagAttrName lock payload verb hasAttributed tag "K" tail pursi purso
       trailing
   ) =>
-  PXTagPreAttrName m
-    lock
+  PXTagPreAttrName lock
     payload
     verb
     hasAttributed
@@ -1686,11 +1639,10 @@ else instance
     purso
     trailing
 else instance
-  ( PXTagAttrName m lock payload verb hasAttributed tag "L" tail pursi purso
+  ( PXTagAttrName lock payload verb hasAttributed tag "L" tail pursi purso
       trailing
   ) =>
-  PXTagPreAttrName m
-    lock
+  PXTagPreAttrName lock
     payload
     verb
     hasAttributed
@@ -1701,11 +1653,10 @@ else instance
     purso
     trailing
 else instance
-  ( PXTagAttrName m lock payload verb hasAttributed tag "M" tail pursi purso
+  ( PXTagAttrName lock payload verb hasAttributed tag "M" tail pursi purso
       trailing
   ) =>
-  PXTagPreAttrName m
-    lock
+  PXTagPreAttrName lock
     payload
     verb
     hasAttributed
@@ -1716,11 +1667,10 @@ else instance
     purso
     trailing
 else instance
-  ( PXTagAttrName m lock payload verb hasAttributed tag "N" tail pursi purso
+  ( PXTagAttrName lock payload verb hasAttributed tag "N" tail pursi purso
       trailing
   ) =>
-  PXTagPreAttrName m
-    lock
+  PXTagPreAttrName lock
     payload
     verb
     hasAttributed
@@ -1731,11 +1681,10 @@ else instance
     purso
     trailing
 else instance
-  ( PXTagAttrName m lock payload verb hasAttributed tag "O" tail pursi purso
+  ( PXTagAttrName lock payload verb hasAttributed tag "O" tail pursi purso
       trailing
   ) =>
-  PXTagPreAttrName m
-    lock
+  PXTagPreAttrName lock
     payload
     verb
     hasAttributed
@@ -1746,11 +1695,10 @@ else instance
     purso
     trailing
 else instance
-  ( PXTagAttrName m lock payload verb hasAttributed tag "P" tail pursi purso
+  ( PXTagAttrName lock payload verb hasAttributed tag "P" tail pursi purso
       trailing
   ) =>
-  PXTagPreAttrName m
-    lock
+  PXTagPreAttrName lock
     payload
     verb
     hasAttributed
@@ -1761,11 +1709,10 @@ else instance
     purso
     trailing
 else instance
-  ( PXTagAttrName m lock payload verb hasAttributed tag "Q" tail pursi purso
+  ( PXTagAttrName lock payload verb hasAttributed tag "Q" tail pursi purso
       trailing
   ) =>
-  PXTagPreAttrName m
-    lock
+  PXTagPreAttrName lock
     payload
     verb
     hasAttributed
@@ -1776,11 +1723,10 @@ else instance
     purso
     trailing
 else instance
-  ( PXTagAttrName m lock payload verb hasAttributed tag "R" tail pursi purso
+  ( PXTagAttrName lock payload verb hasAttributed tag "R" tail pursi purso
       trailing
   ) =>
-  PXTagPreAttrName m
-    lock
+  PXTagPreAttrName lock
     payload
     verb
     hasAttributed
@@ -1791,11 +1737,10 @@ else instance
     purso
     trailing
 else instance
-  ( PXTagAttrName m lock payload verb hasAttributed tag "S" tail pursi purso
+  ( PXTagAttrName lock payload verb hasAttributed tag "S" tail pursi purso
       trailing
   ) =>
-  PXTagPreAttrName m
-    lock
+  PXTagPreAttrName lock
     payload
     verb
     hasAttributed
@@ -1806,11 +1751,10 @@ else instance
     purso
     trailing
 else instance
-  ( PXTagAttrName m lock payload verb hasAttributed tag "T" tail pursi purso
+  ( PXTagAttrName lock payload verb hasAttributed tag "T" tail pursi purso
       trailing
   ) =>
-  PXTagPreAttrName m
-    lock
+  PXTagPreAttrName lock
     payload
     verb
     hasAttributed
@@ -1821,11 +1765,10 @@ else instance
     purso
     trailing
 else instance
-  ( PXTagAttrName m lock payload verb hasAttributed tag "U" tail pursi purso
+  ( PXTagAttrName lock payload verb hasAttributed tag "U" tail pursi purso
       trailing
   ) =>
-  PXTagPreAttrName m
-    lock
+  PXTagPreAttrName lock
     payload
     verb
     hasAttributed
@@ -1836,11 +1779,10 @@ else instance
     purso
     trailing
 else instance
-  ( PXTagAttrName m lock payload verb hasAttributed tag "V" tail pursi purso
+  ( PXTagAttrName lock payload verb hasAttributed tag "V" tail pursi purso
       trailing
   ) =>
-  PXTagPreAttrName m
-    lock
+  PXTagPreAttrName lock
     payload
     verb
     hasAttributed
@@ -1851,11 +1793,10 @@ else instance
     purso
     trailing
 else instance
-  ( PXTagAttrName m lock payload verb hasAttributed tag "W" tail pursi purso
+  ( PXTagAttrName lock payload verb hasAttributed tag "W" tail pursi purso
       trailing
   ) =>
-  PXTagPreAttrName m
-    lock
+  PXTagPreAttrName lock
     payload
     verb
     hasAttributed
@@ -1866,11 +1807,10 @@ else instance
     purso
     trailing
 else instance
-  ( PXTagAttrName m lock payload verb hasAttributed tag "X" tail pursi purso
+  ( PXTagAttrName lock payload verb hasAttributed tag "X" tail pursi purso
       trailing
   ) =>
-  PXTagPreAttrName m
-    lock
+  PXTagPreAttrName lock
     payload
     verb
     hasAttributed
@@ -1881,11 +1821,10 @@ else instance
     purso
     trailing
 else instance
-  ( PXTagAttrName m lock payload verb hasAttributed tag "Y" tail pursi purso
+  ( PXTagAttrName lock payload verb hasAttributed tag "Y" tail pursi purso
       trailing
   ) =>
-  PXTagPreAttrName m
-    lock
+  PXTagPreAttrName lock
     payload
     verb
     hasAttributed
@@ -1896,11 +1835,10 @@ else instance
     purso
     trailing
 else instance
-  ( PXTagAttrName m lock payload verb hasAttributed tag "Z" tail pursi purso
+  ( PXTagAttrName lock payload verb hasAttributed tag "Z" tail pursi purso
       trailing
   ) =>
-  PXTagPreAttrName m
-    lock
+  PXTagPreAttrName lock
     payload
     verb
     hasAttributed
@@ -1914,14 +1852,13 @@ else instance
   ( Sym.Cons x y tail
   , DoVerbForAttr verb tag "" x y pursi pursx newTail
   , Sym.Cons xx yy newTail
-  , PXTagPreAttrName m lock payload verb True tag xx yy pursx purso trailing
+  , PXTagPreAttrName lock payload verb True tag xx yy pursx purso trailing
   ) =>
-  PXTagPreAttrName m lock payload verb False tag verb tail pursi purso trailing
+  PXTagPreAttrName lock payload verb False tag verb tail pursi purso trailing
 
 --
 class
   PXTagAttrName
-    (m :: Type -> Type)
     (lock :: Type)
     (payload :: Type)
     (verb :: Symbol)
@@ -1932,14 +1869,13 @@ class
     (pursi :: Row Type)
     (purso :: Row Type)
     (trailing :: Symbol)
-  | m lock payload verb hasAttributed tag head tail pursi -> purso trailing
+  | lock payload verb hasAttributed tag head tail pursi -> purso trailing
 
 instance
   ( Sym.Cons x y tail
-  , PXTagAttrName m lock payload verb hasAttributed tag x y pursi purso trailing
+  , PXTagAttrName lock payload verb hasAttributed tag x y pursi purso trailing
   ) =>
-  PXTagAttrName m
-    lock
+  PXTagAttrName lock
     payload
     verb
     hasAttributed
@@ -1952,10 +1888,9 @@ instance
 
 instance
   ( Sym.Cons x y tail
-  , PXTagAttrName m lock payload verb hasAttributed tag x y pursi purso trailing
+  , PXTagAttrName lock payload verb hasAttributed tag x y pursi purso trailing
   ) =>
-  PXTagAttrName m
-    lock
+  PXTagAttrName lock
     payload
     verb
     hasAttributed
@@ -1968,10 +1903,9 @@ instance
 
 instance
   ( Sym.Cons x y tail
-  , PXTagAttrName m lock payload verb hasAttributed tag x y pursi purso trailing
+  , PXTagAttrName lock payload verb hasAttributed tag x y pursi purso trailing
   ) =>
-  PXTagAttrName m
-    lock
+  PXTagAttrName lock
     payload
     verb
     hasAttributed
@@ -1984,10 +1918,9 @@ instance
 
 instance
   ( Sym.Cons x y tail
-  , PXTagAttrName m lock payload verb hasAttributed tag x y pursi purso trailing
+  , PXTagAttrName lock payload verb hasAttributed tag x y pursi purso trailing
   ) =>
-  PXTagAttrName m
-    lock
+  PXTagAttrName lock
     payload
     verb
     hasAttributed
@@ -2000,10 +1933,9 @@ instance
 
 instance
   ( Sym.Cons x y tail
-  , PXTagAttrName m lock payload verb hasAttributed tag x y pursi purso trailing
+  , PXTagAttrName lock payload verb hasAttributed tag x y pursi purso trailing
   ) =>
-  PXTagAttrName m
-    lock
+  PXTagAttrName lock
     payload
     verb
     hasAttributed
@@ -2016,10 +1948,9 @@ instance
 
 instance
   ( Sym.Cons x y tail
-  , PXTagAttrName m lock payload verb hasAttributed tag x y pursi purso trailing
+  , PXTagAttrName lock payload verb hasAttributed tag x y pursi purso trailing
   ) =>
-  PXTagAttrName m
-    lock
+  PXTagAttrName lock
     payload
     verb
     hasAttributed
@@ -2032,10 +1963,9 @@ instance
 
 instance
   ( Sym.Cons x y tail
-  , PXTagAttrName m lock payload verb hasAttributed tag x y pursi purso trailing
+  , PXTagAttrName lock payload verb hasAttributed tag x y pursi purso trailing
   ) =>
-  PXTagAttrName m
-    lock
+  PXTagAttrName lock
     payload
     verb
     hasAttributed
@@ -2048,10 +1978,9 @@ instance
 
 instance
   ( Sym.Cons x y tail
-  , PXTagAttrName m lock payload verb hasAttributed tag x y pursi purso trailing
+  , PXTagAttrName lock payload verb hasAttributed tag x y pursi purso trailing
   ) =>
-  PXTagAttrName m
-    lock
+  PXTagAttrName lock
     payload
     verb
     hasAttributed
@@ -2064,10 +1993,9 @@ instance
 
 instance
   ( Sym.Cons x y tail
-  , PXTagAttrName m lock payload verb hasAttributed tag x y pursi purso trailing
+  , PXTagAttrName lock payload verb hasAttributed tag x y pursi purso trailing
   ) =>
-  PXTagAttrName m
-    lock
+  PXTagAttrName lock
     payload
     verb
     hasAttributed
@@ -2080,10 +2008,9 @@ instance
 
 instance
   ( Sym.Cons x y tail
-  , PXTagAttrName m lock payload verb hasAttributed tag x y pursi purso trailing
+  , PXTagAttrName lock payload verb hasAttributed tag x y pursi purso trailing
   ) =>
-  PXTagAttrName m
-    lock
+  PXTagAttrName lock
     payload
     verb
     hasAttributed
@@ -2096,10 +2023,9 @@ instance
 
 instance
   ( Sym.Cons x y tail
-  , PXTagAttrName m lock payload verb hasAttributed tag x y pursi purso trailing
+  , PXTagAttrName lock payload verb hasAttributed tag x y pursi purso trailing
   ) =>
-  PXTagAttrName m
-    lock
+  PXTagAttrName lock
     payload
     verb
     hasAttributed
@@ -2112,10 +2038,9 @@ instance
 
 instance
   ( Sym.Cons x y tail
-  , PXTagAttrName m lock payload verb hasAttributed tag x y pursi purso trailing
+  , PXTagAttrName lock payload verb hasAttributed tag x y pursi purso trailing
   ) =>
-  PXTagAttrName m
-    lock
+  PXTagAttrName lock
     payload
     verb
     hasAttributed
@@ -2128,10 +2053,9 @@ instance
 
 instance
   ( Sym.Cons x y tail
-  , PXTagAttrName m lock payload verb hasAttributed tag x y pursi purso trailing
+  , PXTagAttrName lock payload verb hasAttributed tag x y pursi purso trailing
   ) =>
-  PXTagAttrName m
-    lock
+  PXTagAttrName lock
     payload
     verb
     hasAttributed
@@ -2144,10 +2068,9 @@ instance
 
 instance
   ( Sym.Cons x y tail
-  , PXTagAttrName m lock payload verb hasAttributed tag x y pursi purso trailing
+  , PXTagAttrName lock payload verb hasAttributed tag x y pursi purso trailing
   ) =>
-  PXTagAttrName m
-    lock
+  PXTagAttrName lock
     payload
     verb
     hasAttributed
@@ -2160,10 +2083,9 @@ instance
 
 instance
   ( Sym.Cons x y tail
-  , PXTagAttrName m lock payload verb hasAttributed tag x y pursi purso trailing
+  , PXTagAttrName lock payload verb hasAttributed tag x y pursi purso trailing
   ) =>
-  PXTagAttrName m
-    lock
+  PXTagAttrName lock
     payload
     verb
     hasAttributed
@@ -2176,10 +2098,9 @@ instance
 
 instance
   ( Sym.Cons x y tail
-  , PXTagAttrName m lock payload verb hasAttributed tag x y pursi purso trailing
+  , PXTagAttrName lock payload verb hasAttributed tag x y pursi purso trailing
   ) =>
-  PXTagAttrName m
-    lock
+  PXTagAttrName lock
     payload
     verb
     hasAttributed
@@ -2192,10 +2113,9 @@ instance
 
 instance
   ( Sym.Cons x y tail
-  , PXTagAttrName m lock payload verb hasAttributed tag x y pursi purso trailing
+  , PXTagAttrName lock payload verb hasAttributed tag x y pursi purso trailing
   ) =>
-  PXTagAttrName m
-    lock
+  PXTagAttrName lock
     payload
     verb
     hasAttributed
@@ -2208,10 +2128,9 @@ instance
 
 instance
   ( Sym.Cons x y tail
-  , PXTagAttrName m lock payload verb hasAttributed tag x y pursi purso trailing
+  , PXTagAttrName lock payload verb hasAttributed tag x y pursi purso trailing
   ) =>
-  PXTagAttrName m
-    lock
+  PXTagAttrName lock
     payload
     verb
     hasAttributed
@@ -2224,10 +2143,9 @@ instance
 
 instance
   ( Sym.Cons x y tail
-  , PXTagAttrName m lock payload verb hasAttributed tag x y pursi purso trailing
+  , PXTagAttrName lock payload verb hasAttributed tag x y pursi purso trailing
   ) =>
-  PXTagAttrName m
-    lock
+  PXTagAttrName lock
     payload
     verb
     hasAttributed
@@ -2240,10 +2158,9 @@ instance
 
 instance
   ( Sym.Cons x y tail
-  , PXTagAttrName m lock payload verb hasAttributed tag x y pursi purso trailing
+  , PXTagAttrName lock payload verb hasAttributed tag x y pursi purso trailing
   ) =>
-  PXTagAttrName m
-    lock
+  PXTagAttrName lock
     payload
     verb
     hasAttributed
@@ -2256,10 +2173,9 @@ instance
 
 instance
   ( Sym.Cons x y tail
-  , PXTagAttrName m lock payload verb hasAttributed tag x y pursi purso trailing
+  , PXTagAttrName lock payload verb hasAttributed tag x y pursi purso trailing
   ) =>
-  PXTagAttrName m
-    lock
+  PXTagAttrName lock
     payload
     verb
     hasAttributed
@@ -2272,10 +2188,9 @@ instance
 
 instance
   ( Sym.Cons x y tail
-  , PXTagAttrName m lock payload verb hasAttributed tag x y pursi purso trailing
+  , PXTagAttrName lock payload verb hasAttributed tag x y pursi purso trailing
   ) =>
-  PXTagAttrName m
-    lock
+  PXTagAttrName lock
     payload
     verb
     hasAttributed
@@ -2288,10 +2203,9 @@ instance
 
 instance
   ( Sym.Cons x y tail
-  , PXTagAttrName m lock payload verb hasAttributed tag x y pursi purso trailing
+  , PXTagAttrName lock payload verb hasAttributed tag x y pursi purso trailing
   ) =>
-  PXTagAttrName m
-    lock
+  PXTagAttrName lock
     payload
     verb
     hasAttributed
@@ -2304,10 +2218,9 @@ instance
 
 instance
   ( Sym.Cons x y tail
-  , PXTagAttrName m lock payload verb hasAttributed tag x y pursi purso trailing
+  , PXTagAttrName lock payload verb hasAttributed tag x y pursi purso trailing
   ) =>
-  PXTagAttrName m
-    lock
+  PXTagAttrName lock
     payload
     verb
     hasAttributed
@@ -2320,10 +2233,9 @@ instance
 
 instance
   ( Sym.Cons x y tail
-  , PXTagAttrName m lock payload verb hasAttributed tag x y pursi purso trailing
+  , PXTagAttrName lock payload verb hasAttributed tag x y pursi purso trailing
   ) =>
-  PXTagAttrName m
-    lock
+  PXTagAttrName lock
     payload
     verb
     hasAttributed
@@ -2336,10 +2248,9 @@ instance
 
 instance
   ( Sym.Cons x y tail
-  , PXTagAttrName m lock payload verb hasAttributed tag x y pursi purso trailing
+  , PXTagAttrName lock payload verb hasAttributed tag x y pursi purso trailing
   ) =>
-  PXTagAttrName m
-    lock
+  PXTagAttrName lock
     payload
     verb
     hasAttributed
@@ -2352,10 +2263,9 @@ instance
 
 instance
   ( Sym.Cons x y tail
-  , PXTagAttrName m lock payload verb hasAttributed tag x y pursi purso trailing
+  , PXTagAttrName lock payload verb hasAttributed tag x y pursi purso trailing
   ) =>
-  PXTagAttrName m
-    lock
+  PXTagAttrName lock
     payload
     verb
     hasAttributed
@@ -2368,10 +2278,9 @@ instance
 
 instance
   ( Sym.Cons x y tail
-  , PXTagAttrName m lock payload verb hasAttributed tag x y pursi purso trailing
+  , PXTagAttrName lock payload verb hasAttributed tag x y pursi purso trailing
   ) =>
-  PXTagAttrName m
-    lock
+  PXTagAttrName lock
     payload
     verb
     hasAttributed
@@ -2384,10 +2293,9 @@ instance
 
 instance
   ( Sym.Cons x y tail
-  , PXTagAttrName m lock payload verb hasAttributed tag x y pursi purso trailing
+  , PXTagAttrName lock payload verb hasAttributed tag x y pursi purso trailing
   ) =>
-  PXTagAttrName m
-    lock
+  PXTagAttrName lock
     payload
     verb
     hasAttributed
@@ -2400,10 +2308,9 @@ instance
 
 instance
   ( Sym.Cons x y tail
-  , PXTagAttrName m lock payload verb hasAttributed tag x y pursi purso trailing
+  , PXTagAttrName lock payload verb hasAttributed tag x y pursi purso trailing
   ) =>
-  PXTagAttrName m
-    lock
+  PXTagAttrName lock
     payload
     verb
     hasAttributed
@@ -2416,10 +2323,9 @@ instance
 
 instance
   ( Sym.Cons x y tail
-  , PXTagAttrName m lock payload verb hasAttributed tag x y pursi purso trailing
+  , PXTagAttrName lock payload verb hasAttributed tag x y pursi purso trailing
   ) =>
-  PXTagAttrName m
-    lock
+  PXTagAttrName lock
     payload
     verb
     hasAttributed
@@ -2432,10 +2338,9 @@ instance
 
 instance
   ( Sym.Cons x y tail
-  , PXTagAttrName m lock payload verb hasAttributed tag x y pursi purso trailing
+  , PXTagAttrName lock payload verb hasAttributed tag x y pursi purso trailing
   ) =>
-  PXTagAttrName m
-    lock
+  PXTagAttrName lock
     payload
     verb
     hasAttributed
@@ -2448,10 +2353,9 @@ instance
 
 instance
   ( Sym.Cons x y tail
-  , PXTagAttrName m lock payload verb hasAttributed tag x y pursi purso trailing
+  , PXTagAttrName lock payload verb hasAttributed tag x y pursi purso trailing
   ) =>
-  PXTagAttrName m
-    lock
+  PXTagAttrName lock
     payload
     verb
     hasAttributed
@@ -2464,10 +2368,9 @@ instance
 
 instance
   ( Sym.Cons x y tail
-  , PXTagAttrName m lock payload verb hasAttributed tag x y pursi purso trailing
+  , PXTagAttrName lock payload verb hasAttributed tag x y pursi purso trailing
   ) =>
-  PXTagAttrName m
-    lock
+  PXTagAttrName lock
     payload
     verb
     hasAttributed
@@ -2480,10 +2383,9 @@ instance
 
 instance
   ( Sym.Cons x y tail
-  , PXTagAttrName m lock payload verb hasAttributed tag x y pursi purso trailing
+  , PXTagAttrName lock payload verb hasAttributed tag x y pursi purso trailing
   ) =>
-  PXTagAttrName m
-    lock
+  PXTagAttrName lock
     payload
     verb
     hasAttributed
@@ -2496,10 +2398,9 @@ instance
 
 instance
   ( Sym.Cons x y tail
-  , PXTagAttrName m lock payload verb hasAttributed tag x y pursi purso trailing
+  , PXTagAttrName lock payload verb hasAttributed tag x y pursi purso trailing
   ) =>
-  PXTagAttrName m
-    lock
+  PXTagAttrName lock
     payload
     verb
     hasAttributed
@@ -2512,10 +2413,9 @@ instance
 
 instance
   ( Sym.Cons x y tail
-  , PXTagAttrName m lock payload verb hasAttributed tag x y pursi purso trailing
+  , PXTagAttrName lock payload verb hasAttributed tag x y pursi purso trailing
   ) =>
-  PXTagAttrName m
-    lock
+  PXTagAttrName lock
     payload
     verb
     hasAttributed
@@ -2528,11 +2428,10 @@ instance
 
 instance
   ( Sym.Cons x y tail
-  , PXTagPreAttrValue m lock payload verb hasAttributed tag x y pursi purso
+  , PXTagPreAttrValue lock payload verb hasAttributed tag x y pursi purso
       trailing
   ) =>
-  PXTagAttrName m
-    lock
+  PXTagAttrName lock
     payload
     verb
     hasAttributed
@@ -2545,11 +2444,10 @@ instance
 
 instance
   ( Sym.Cons x y tail
-  , PXTagPostAttrName m lock payload verb hasAttributed tag x y pursi purso
+  , PXTagPostAttrName lock payload verb hasAttributed tag x y pursi purso
       trailing
   ) =>
-  PXTagAttrName m
-    lock
+  PXTagAttrName lock
     payload
     verb
     hasAttributed
@@ -2562,11 +2460,10 @@ instance
 
 instance
   ( Sym.Cons x y tail
-  , PXTagPostAttrName m lock payload verb hasAttributed tag x y pursi purso
+  , PXTagPostAttrName lock payload verb hasAttributed tag x y pursi purso
       trailing
   ) =>
-  PXTagAttrName m
-    lock
+  PXTagAttrName lock
     payload
     verb
     hasAttributed
@@ -2579,11 +2476,10 @@ instance
 
 instance
   ( Sym.Cons x y tail
-  , PXTagPostAttrName m lock payload verb hasAttributed tag x y pursi purso
+  , PXTagPostAttrName lock payload verb hasAttributed tag x y pursi purso
       trailing
   ) =>
-  PXTagAttrName m
-    lock
+  PXTagAttrName lock
     payload
     verb
     hasAttributed
@@ -2597,7 +2493,6 @@ instance
 --
 class
   PXTagPostAttrName
-    (m :: Type -> Type)
     (lock :: Type)
     (payload :: Type)
     (verb :: Symbol)
@@ -2608,15 +2503,14 @@ class
     (pursi :: Row Type)
     (purso :: Row Type)
     (trailing :: Symbol)
-  | m lock payload verb hasAttributed tag head tail pursi -> purso trailing
+  | lock payload verb hasAttributed tag head tail pursi -> purso trailing
 
 instance
   ( Sym.Cons x y tail
-  , PXTagPostAttrName m lock payload verb hasAttributed tag x y pursi purso
+  , PXTagPostAttrName lock payload verb hasAttributed tag x y pursi purso
       trailing
   ) =>
-  PXTagPostAttrName m
-    lock
+  PXTagPostAttrName lock
     payload
     verb
     hasAttributed
@@ -2629,11 +2523,10 @@ instance
 
 instance
   ( Sym.Cons x y tail
-  , PXTagPostAttrName m lock payload verb hasAttributed tag x y pursi purso
+  , PXTagPostAttrName lock payload verb hasAttributed tag x y pursi purso
       trailing
   ) =>
-  PXTagPostAttrName m
-    lock
+  PXTagPostAttrName lock
     payload
     verb
     hasAttributed
@@ -2646,11 +2539,10 @@ instance
 
 instance
   ( Sym.Cons x y tail
-  , PXTagPostAttrName m lock payload verb hasAttributed tag x y pursi purso
+  , PXTagPostAttrName lock payload verb hasAttributed tag x y pursi purso
       trailing
   ) =>
-  PXTagPostAttrName m
-    lock
+  PXTagPostAttrName lock
     payload
     verb
     hasAttributed
@@ -2663,11 +2555,10 @@ instance
 
 instance
   ( Sym.Cons x y tail
-  , PXTagPreAttrValue m lock payload verb hasAttributed tag x y pursi purso
+  , PXTagPreAttrValue lock payload verb hasAttributed tag x y pursi purso
       trailing
   ) =>
-  PXTagPostAttrName m
-    lock
+  PXTagPostAttrName lock
     payload
     verb
     hasAttributed
@@ -2681,7 +2572,6 @@ instance
 --
 class
   PXTagPreAttrValue
-    (m :: Type -> Type)
     (lock :: Type)
     (payload :: Type)
     (verb :: Symbol)
@@ -2692,15 +2582,14 @@ class
     (pursi :: Row Type)
     (purso :: Row Type)
     (trailing :: Symbol)
-  | m lock payload verb hasAttributed tag head tail pursi -> purso trailing
+  | lock payload verb hasAttributed tag head tail pursi -> purso trailing
 
 instance
   ( Sym.Cons x y tail
-  , PXTagPreAttrValue m lock payload verb hasAttributed tag x y pursi purso
+  , PXTagPreAttrValue lock payload verb hasAttributed tag x y pursi purso
       trailing
   ) =>
-  PXTagPreAttrValue m
-    lock
+  PXTagPreAttrValue lock
     payload
     verb
     hasAttributed
@@ -2713,11 +2602,10 @@ instance
 
 instance
   ( Sym.Cons x y tail
-  , PXTagPreAttrValue m lock payload verb hasAttributed tag x y pursi purso
+  , PXTagPreAttrValue lock payload verb hasAttributed tag x y pursi purso
       trailing
   ) =>
-  PXTagPreAttrValue m
-    lock
+  PXTagPreAttrValue lock
     payload
     verb
     hasAttributed
@@ -2730,11 +2618,10 @@ instance
 
 instance
   ( Sym.Cons x y tail
-  , PXTagPreAttrValue m lock payload verb hasAttributed tag x y pursi purso
+  , PXTagPreAttrValue lock payload verb hasAttributed tag x y pursi purso
       trailing
   ) =>
-  PXTagPreAttrValue m
-    lock
+  PXTagPreAttrValue lock
     payload
     verb
     hasAttributed
@@ -2747,11 +2634,9 @@ instance
 
 instance
   ( Sym.Cons x y tail
-  , PXTagAttrValue m lock payload verb hasAttributed tag x y pursi purso
-      trailing
+  , PXTagAttrValue lock payload verb hasAttributed tag x y pursi purso trailing
   ) =>
-  PXTagPreAttrValue m
-    lock
+  PXTagPreAttrValue lock
     payload
     verb
     hasAttributed
@@ -2765,7 +2650,6 @@ instance
 --
 class
   PXTagAttrValue
-    (m :: Type -> Type)
     (lock :: Type)
     (payload :: Type)
     (verb :: Symbol)
@@ -2776,15 +2660,13 @@ class
     (pursi :: Row Type)
     (purso :: Row Type)
     (trailing :: Symbol)
-  | m lock payload verb hasAttributed tag head tail pursi -> purso trailing
+  | lock payload verb hasAttributed tag head tail pursi -> purso trailing
 
 instance
   ( Sym.Cons x y tail
-  , PXTagAttrValue m lock payload verb hasAttributed tag x y pursi purso
-      trailing
+  , PXTagAttrValue lock payload verb hasAttributed tag x y pursi purso trailing
   ) =>
-  PXTagAttrValue m
-    lock
+  PXTagAttrValue lock
     payload
     verb
     hasAttributed
@@ -2797,11 +2679,9 @@ instance
 
 instance
   ( Sym.Cons x y tail
-  , PXTagAttrValue m lock payload verb hasAttributed tag x y pursi purso
-      trailing
+  , PXTagAttrValue lock payload verb hasAttributed tag x y pursi purso trailing
   ) =>
-  PXTagAttrValue m
-    lock
+  PXTagAttrValue lock
     payload
     verb
     hasAttributed
@@ -2814,11 +2694,9 @@ instance
 
 instance
   ( Sym.Cons x y tail
-  , PXTagAttrValue m lock payload verb hasAttributed tag x y pursi purso
-      trailing
+  , PXTagAttrValue lock payload verb hasAttributed tag x y pursi purso trailing
   ) =>
-  PXTagAttrValue m
-    lock
+  PXTagAttrValue lock
     payload
     verb
     hasAttributed
@@ -2831,11 +2709,9 @@ instance
 
 instance
   ( Sym.Cons x y tail
-  , PXTagAttrValue m lock payload verb hasAttributed tag x y pursi purso
-      trailing
+  , PXTagAttrValue lock payload verb hasAttributed tag x y pursi purso trailing
   ) =>
-  PXTagAttrValue m
-    lock
+  PXTagAttrValue lock
     payload
     verb
     hasAttributed
@@ -2848,11 +2724,9 @@ instance
 
 instance
   ( Sym.Cons x y tail
-  , PXTagAttrValue m lock payload verb hasAttributed tag x y pursi purso
-      trailing
+  , PXTagAttrValue lock payload verb hasAttributed tag x y pursi purso trailing
   ) =>
-  PXTagAttrValue m
-    lock
+  PXTagAttrValue lock
     payload
     verb
     hasAttributed
@@ -2865,11 +2739,9 @@ instance
 
 instance
   ( Sym.Cons x y tail
-  , PXTagAttrValue m lock payload verb hasAttributed tag x y pursi purso
-      trailing
+  , PXTagAttrValue lock payload verb hasAttributed tag x y pursi purso trailing
   ) =>
-  PXTagAttrValue m
-    lock
+  PXTagAttrValue lock
     payload
     verb
     hasAttributed
@@ -2882,11 +2754,9 @@ instance
 
 instance
   ( Sym.Cons x y tail
-  , PXTagAttrValue m lock payload verb hasAttributed tag x y pursi purso
-      trailing
+  , PXTagAttrValue lock payload verb hasAttributed tag x y pursi purso trailing
   ) =>
-  PXTagAttrValue m
-    lock
+  PXTagAttrValue lock
     payload
     verb
     hasAttributed
@@ -2899,11 +2769,9 @@ instance
 
 instance
   ( Sym.Cons x y tail
-  , PXTagAttrValue m lock payload verb hasAttributed tag x y pursi purso
-      trailing
+  , PXTagAttrValue lock payload verb hasAttributed tag x y pursi purso trailing
   ) =>
-  PXTagAttrValue m
-    lock
+  PXTagAttrValue lock
     payload
     verb
     hasAttributed
@@ -2916,11 +2784,9 @@ instance
 
 instance
   ( Sym.Cons x y tail
-  , PXTagAttrValue m lock payload verb hasAttributed tag x y pursi purso
-      trailing
+  , PXTagAttrValue lock payload verb hasAttributed tag x y pursi purso trailing
   ) =>
-  PXTagAttrValue m
-    lock
+  PXTagAttrValue lock
     payload
     verb
     hasAttributed
@@ -2933,11 +2799,9 @@ instance
 
 instance
   ( Sym.Cons x y tail
-  , PXTagAttrValue m lock payload verb hasAttributed tag x y pursi purso
-      trailing
+  , PXTagAttrValue lock payload verb hasAttributed tag x y pursi purso trailing
   ) =>
-  PXTagAttrValue m
-    lock
+  PXTagAttrValue lock
     payload
     verb
     hasAttributed
@@ -2950,11 +2814,9 @@ instance
 
 instance
   ( Sym.Cons x y tail
-  , PXTagAttrValue m lock payload verb hasAttributed tag x y pursi purso
-      trailing
+  , PXTagAttrValue lock payload verb hasAttributed tag x y pursi purso trailing
   ) =>
-  PXTagAttrValue m
-    lock
+  PXTagAttrValue lock
     payload
     verb
     hasAttributed
@@ -2967,11 +2829,9 @@ instance
 
 instance
   ( Sym.Cons x y tail
-  , PXTagAttrValue m lock payload verb hasAttributed tag x y pursi purso
-      trailing
+  , PXTagAttrValue lock payload verb hasAttributed tag x y pursi purso trailing
   ) =>
-  PXTagAttrValue m
-    lock
+  PXTagAttrValue lock
     payload
     verb
     hasAttributed
@@ -2984,11 +2844,9 @@ instance
 
 instance
   ( Sym.Cons x y tail
-  , PXTagAttrValue m lock payload verb hasAttributed tag x y pursi purso
-      trailing
+  , PXTagAttrValue lock payload verb hasAttributed tag x y pursi purso trailing
   ) =>
-  PXTagAttrValue m
-    lock
+  PXTagAttrValue lock
     payload
     verb
     hasAttributed
@@ -3001,11 +2859,9 @@ instance
 
 instance
   ( Sym.Cons x y tail
-  , PXTagAttrValue m lock payload verb hasAttributed tag x y pursi purso
-      trailing
+  , PXTagAttrValue lock payload verb hasAttributed tag x y pursi purso trailing
   ) =>
-  PXTagAttrValue m
-    lock
+  PXTagAttrValue lock
     payload
     verb
     hasAttributed
@@ -3018,11 +2874,9 @@ instance
 
 instance
   ( Sym.Cons x y tail
-  , PXTagAttrValue m lock payload verb hasAttributed tag x y pursi purso
-      trailing
+  , PXTagAttrValue lock payload verb hasAttributed tag x y pursi purso trailing
   ) =>
-  PXTagAttrValue m
-    lock
+  PXTagAttrValue lock
     payload
     verb
     hasAttributed
@@ -3035,11 +2889,9 @@ instance
 
 instance
   ( Sym.Cons x y tail
-  , PXTagAttrValue m lock payload verb hasAttributed tag x y pursi purso
-      trailing
+  , PXTagAttrValue lock payload verb hasAttributed tag x y pursi purso trailing
   ) =>
-  PXTagAttrValue m
-    lock
+  PXTagAttrValue lock
     payload
     verb
     hasAttributed
@@ -3052,11 +2904,9 @@ instance
 
 instance
   ( Sym.Cons x y tail
-  , PXTagAttrValue m lock payload verb hasAttributed tag x y pursi purso
-      trailing
+  , PXTagAttrValue lock payload verb hasAttributed tag x y pursi purso trailing
   ) =>
-  PXTagAttrValue m
-    lock
+  PXTagAttrValue lock
     payload
     verb
     hasAttributed
@@ -3069,11 +2919,9 @@ instance
 
 instance
   ( Sym.Cons x y tail
-  , PXTagAttrValue m lock payload verb hasAttributed tag x y pursi purso
-      trailing
+  , PXTagAttrValue lock payload verb hasAttributed tag x y pursi purso trailing
   ) =>
-  PXTagAttrValue m
-    lock
+  PXTagAttrValue lock
     payload
     verb
     hasAttributed
@@ -3086,11 +2934,9 @@ instance
 
 instance
   ( Sym.Cons x y tail
-  , PXTagAttrValue m lock payload verb hasAttributed tag x y pursi purso
-      trailing
+  , PXTagAttrValue lock payload verb hasAttributed tag x y pursi purso trailing
   ) =>
-  PXTagAttrValue m
-    lock
+  PXTagAttrValue lock
     payload
     verb
     hasAttributed
@@ -3103,11 +2949,9 @@ instance
 
 instance
   ( Sym.Cons x y tail
-  , PXTagAttrValue m lock payload verb hasAttributed tag x y pursi purso
-      trailing
+  , PXTagAttrValue lock payload verb hasAttributed tag x y pursi purso trailing
   ) =>
-  PXTagAttrValue m
-    lock
+  PXTagAttrValue lock
     payload
     verb
     hasAttributed
@@ -3120,11 +2964,9 @@ instance
 
 instance
   ( Sym.Cons x y tail
-  , PXTagAttrValue m lock payload verb hasAttributed tag x y pursi purso
-      trailing
+  , PXTagAttrValue lock payload verb hasAttributed tag x y pursi purso trailing
   ) =>
-  PXTagAttrValue m
-    lock
+  PXTagAttrValue lock
     payload
     verb
     hasAttributed
@@ -3137,11 +2979,9 @@ instance
 
 instance
   ( Sym.Cons x y tail
-  , PXTagAttrValue m lock payload verb hasAttributed tag x y pursi purso
-      trailing
+  , PXTagAttrValue lock payload verb hasAttributed tag x y pursi purso trailing
   ) =>
-  PXTagAttrValue m
-    lock
+  PXTagAttrValue lock
     payload
     verb
     hasAttributed
@@ -3154,11 +2994,9 @@ instance
 
 instance
   ( Sym.Cons x y tail
-  , PXTagAttrValue m lock payload verb hasAttributed tag x y pursi purso
-      trailing
+  , PXTagAttrValue lock payload verb hasAttributed tag x y pursi purso trailing
   ) =>
-  PXTagAttrValue m
-    lock
+  PXTagAttrValue lock
     payload
     verb
     hasAttributed
@@ -3171,11 +3009,9 @@ instance
 
 instance
   ( Sym.Cons x y tail
-  , PXTagAttrValue m lock payload verb hasAttributed tag x y pursi purso
-      trailing
+  , PXTagAttrValue lock payload verb hasAttributed tag x y pursi purso trailing
   ) =>
-  PXTagAttrValue m
-    lock
+  PXTagAttrValue lock
     payload
     verb
     hasAttributed
@@ -3188,11 +3024,9 @@ instance
 
 instance
   ( Sym.Cons x y tail
-  , PXTagAttrValue m lock payload verb hasAttributed tag x y pursi purso
-      trailing
+  , PXTagAttrValue lock payload verb hasAttributed tag x y pursi purso trailing
   ) =>
-  PXTagAttrValue m
-    lock
+  PXTagAttrValue lock
     payload
     verb
     hasAttributed
@@ -3205,11 +3039,9 @@ instance
 
 instance
   ( Sym.Cons x y tail
-  , PXTagAttrValue m lock payload verb hasAttributed tag x y pursi purso
-      trailing
+  , PXTagAttrValue lock payload verb hasAttributed tag x y pursi purso trailing
   ) =>
-  PXTagAttrValue m
-    lock
+  PXTagAttrValue lock
     payload
     verb
     hasAttributed
@@ -3222,11 +3054,9 @@ instance
 
 instance
   ( Sym.Cons x y tail
-  , PXTagAttrValue m lock payload verb hasAttributed tag x y pursi purso
-      trailing
+  , PXTagAttrValue lock payload verb hasAttributed tag x y pursi purso trailing
   ) =>
-  PXTagAttrValue m
-    lock
+  PXTagAttrValue lock
     payload
     verb
     hasAttributed
@@ -3239,11 +3069,9 @@ instance
 
 instance
   ( Sym.Cons x y tail
-  , PXTagAttrValue m lock payload verb hasAttributed tag x y pursi purso
-      trailing
+  , PXTagAttrValue lock payload verb hasAttributed tag x y pursi purso trailing
   ) =>
-  PXTagAttrValue m
-    lock
+  PXTagAttrValue lock
     payload
     verb
     hasAttributed
@@ -3256,11 +3084,9 @@ instance
 
 instance
   ( Sym.Cons x y tail
-  , PXTagAttrValue m lock payload verb hasAttributed tag x y pursi purso
-      trailing
+  , PXTagAttrValue lock payload verb hasAttributed tag x y pursi purso trailing
   ) =>
-  PXTagAttrValue m
-    lock
+  PXTagAttrValue lock
     payload
     verb
     hasAttributed
@@ -3273,11 +3099,9 @@ instance
 
 instance
   ( Sym.Cons x y tail
-  , PXTagAttrValue m lock payload verb hasAttributed tag x y pursi purso
-      trailing
+  , PXTagAttrValue lock payload verb hasAttributed tag x y pursi purso trailing
   ) =>
-  PXTagAttrValue m
-    lock
+  PXTagAttrValue lock
     payload
     verb
     hasAttributed
@@ -3290,11 +3114,9 @@ instance
 
 instance
   ( Sym.Cons x y tail
-  , PXTagAttrValue m lock payload verb hasAttributed tag x y pursi purso
-      trailing
+  , PXTagAttrValue lock payload verb hasAttributed tag x y pursi purso trailing
   ) =>
-  PXTagAttrValue m
-    lock
+  PXTagAttrValue lock
     payload
     verb
     hasAttributed
@@ -3307,11 +3129,9 @@ instance
 
 instance
   ( Sym.Cons x y tail
-  , PXTagAttrValue m lock payload verb hasAttributed tag x y pursi purso
-      trailing
+  , PXTagAttrValue lock payload verb hasAttributed tag x y pursi purso trailing
   ) =>
-  PXTagAttrValue m
-    lock
+  PXTagAttrValue lock
     payload
     verb
     hasAttributed
@@ -3324,11 +3144,9 @@ instance
 
 instance
   ( Sym.Cons x y tail
-  , PXTagAttrValue m lock payload verb hasAttributed tag x y pursi purso
-      trailing
+  , PXTagAttrValue lock payload verb hasAttributed tag x y pursi purso trailing
   ) =>
-  PXTagAttrValue m
-    lock
+  PXTagAttrValue lock
     payload
     verb
     hasAttributed
@@ -3341,11 +3159,9 @@ instance
 
 instance
   ( Sym.Cons x y tail
-  , PXTagAttrValue m lock payload verb hasAttributed tag x y pursi purso
-      trailing
+  , PXTagAttrValue lock payload verb hasAttributed tag x y pursi purso trailing
   ) =>
-  PXTagAttrValue m
-    lock
+  PXTagAttrValue lock
     payload
     verb
     hasAttributed
@@ -3358,11 +3174,9 @@ instance
 
 instance
   ( Sym.Cons x y tail
-  , PXTagAttrValue m lock payload verb hasAttributed tag x y pursi purso
-      trailing
+  , PXTagAttrValue lock payload verb hasAttributed tag x y pursi purso trailing
   ) =>
-  PXTagAttrValue m
-    lock
+  PXTagAttrValue lock
     payload
     verb
     hasAttributed
@@ -3375,11 +3189,9 @@ instance
 
 instance
   ( Sym.Cons x y tail
-  , PXTagAttrValue m lock payload verb hasAttributed tag x y pursi purso
-      trailing
+  , PXTagAttrValue lock payload verb hasAttributed tag x y pursi purso trailing
   ) =>
-  PXTagAttrValue m
-    lock
+  PXTagAttrValue lock
     payload
     verb
     hasAttributed
@@ -3392,11 +3204,9 @@ instance
 
 instance
   ( Sym.Cons x y tail
-  , PXTagAttrValue m lock payload verb hasAttributed tag x y pursi purso
-      trailing
+  , PXTagAttrValue lock payload verb hasAttributed tag x y pursi purso trailing
   ) =>
-  PXTagAttrValue m
-    lock
+  PXTagAttrValue lock
     payload
     verb
     hasAttributed
@@ -3409,11 +3219,9 @@ instance
 
 instance
   ( Sym.Cons x y tail
-  , PXTagAttrValue m lock payload verb hasAttributed tag x y pursi purso
-      trailing
+  , PXTagAttrValue lock payload verb hasAttributed tag x y pursi purso trailing
   ) =>
-  PXTagAttrValue m
-    lock
+  PXTagAttrValue lock
     payload
     verb
     hasAttributed
@@ -3426,11 +3234,9 @@ instance
 
 instance
   ( Sym.Cons x y tail
-  , PXTagAttrValue m lock payload verb hasAttributed tag x y pursi purso
-      trailing
+  , PXTagAttrValue lock payload verb hasAttributed tag x y pursi purso trailing
   ) =>
-  PXTagAttrValue m
-    lock
+  PXTagAttrValue lock
     payload
     verb
     hasAttributed
@@ -3443,11 +3249,9 @@ instance
 
 instance
   ( Sym.Cons x y tail
-  , PXTagAttrValue m lock payload verb hasAttributed tag x y pursi purso
-      trailing
+  , PXTagAttrValue lock payload verb hasAttributed tag x y pursi purso trailing
   ) =>
-  PXTagAttrValue m
-    lock
+  PXTagAttrValue lock
     payload
     verb
     hasAttributed
@@ -3460,11 +3264,9 @@ instance
 
 instance
   ( Sym.Cons x y tail
-  , PXTagAttrValue m lock payload verb hasAttributed tag x y pursi purso
-      trailing
+  , PXTagAttrValue lock payload verb hasAttributed tag x y pursi purso trailing
   ) =>
-  PXTagAttrValue m
-    lock
+  PXTagAttrValue lock
     payload
     verb
     hasAttributed
@@ -3477,11 +3279,9 @@ instance
 
 instance
   ( Sym.Cons x y tail
-  , PXTagAttrValue m lock payload verb hasAttributed tag x y pursi purso
-      trailing
+  , PXTagAttrValue lock payload verb hasAttributed tag x y pursi purso trailing
   ) =>
-  PXTagAttrValue m
-    lock
+  PXTagAttrValue lock
     payload
     verb
     hasAttributed
@@ -3494,11 +3294,9 @@ instance
 
 instance
   ( Sym.Cons x y tail
-  , PXTagAttrValue m lock payload verb hasAttributed tag x y pursi purso
-      trailing
+  , PXTagAttrValue lock payload verb hasAttributed tag x y pursi purso trailing
   ) =>
-  PXTagAttrValue m
-    lock
+  PXTagAttrValue lock
     payload
     verb
     hasAttributed
@@ -3511,11 +3309,9 @@ instance
 
 instance
   ( Sym.Cons x y tail
-  , PXTagAttrValue m lock payload verb hasAttributed tag x y pursi purso
-      trailing
+  , PXTagAttrValue lock payload verb hasAttributed tag x y pursi purso trailing
   ) =>
-  PXTagAttrValue m
-    lock
+  PXTagAttrValue lock
     payload
     verb
     hasAttributed
@@ -3528,11 +3324,9 @@ instance
 
 instance
   ( Sym.Cons x y tail
-  , PXTagAttrValue m lock payload verb hasAttributed tag x y pursi purso
-      trailing
+  , PXTagAttrValue lock payload verb hasAttributed tag x y pursi purso trailing
   ) =>
-  PXTagAttrValue m
-    lock
+  PXTagAttrValue lock
     payload
     verb
     hasAttributed
@@ -3545,11 +3339,9 @@ instance
 
 instance
   ( Sym.Cons x y tail
-  , PXTagAttrValue m lock payload verb hasAttributed tag x y pursi purso
-      trailing
+  , PXTagAttrValue lock payload verb hasAttributed tag x y pursi purso trailing
   ) =>
-  PXTagAttrValue m
-    lock
+  PXTagAttrValue lock
     payload
     verb
     hasAttributed
@@ -3562,11 +3354,9 @@ instance
 
 instance
   ( Sym.Cons x y tail
-  , PXTagAttrValue m lock payload verb hasAttributed tag x y pursi purso
-      trailing
+  , PXTagAttrValue lock payload verb hasAttributed tag x y pursi purso trailing
   ) =>
-  PXTagAttrValue m
-    lock
+  PXTagAttrValue lock
     payload
     verb
     hasAttributed
@@ -3579,11 +3369,9 @@ instance
 
 instance
   ( Sym.Cons x y tail
-  , PXTagAttrValue m lock payload verb hasAttributed tag x y pursi purso
-      trailing
+  , PXTagAttrValue lock payload verb hasAttributed tag x y pursi purso trailing
   ) =>
-  PXTagAttrValue m
-    lock
+  PXTagAttrValue lock
     payload
     verb
     hasAttributed
@@ -3596,11 +3384,9 @@ instance
 
 instance
   ( Sym.Cons x y tail
-  , PXTagAttrValue m lock payload verb hasAttributed tag x y pursi purso
-      trailing
+  , PXTagAttrValue lock payload verb hasAttributed tag x y pursi purso trailing
   ) =>
-  PXTagAttrValue m
-    lock
+  PXTagAttrValue lock
     payload
     verb
     hasAttributed
@@ -3613,11 +3399,9 @@ instance
 
 instance
   ( Sym.Cons x y tail
-  , PXTagAttrValue m lock payload verb hasAttributed tag x y pursi purso
-      trailing
+  , PXTagAttrValue lock payload verb hasAttributed tag x y pursi purso trailing
   ) =>
-  PXTagAttrValue m
-    lock
+  PXTagAttrValue lock
     payload
     verb
     hasAttributed
@@ -3630,11 +3414,9 @@ instance
 
 instance
   ( Sym.Cons x y tail
-  , PXTagAttrValue m lock payload verb hasAttributed tag x y pursi purso
-      trailing
+  , PXTagAttrValue lock payload verb hasAttributed tag x y pursi purso trailing
   ) =>
-  PXTagAttrValue m
-    lock
+  PXTagAttrValue lock
     payload
     verb
     hasAttributed
@@ -3647,11 +3429,9 @@ instance
 
 instance
   ( Sym.Cons x y tail
-  , PXTagAttrValue m lock payload verb hasAttributed tag x y pursi purso
-      trailing
+  , PXTagAttrValue lock payload verb hasAttributed tag x y pursi purso trailing
   ) =>
-  PXTagAttrValue m
-    lock
+  PXTagAttrValue lock
     payload
     verb
     hasAttributed
@@ -3664,11 +3444,9 @@ instance
 
 instance
   ( Sym.Cons x y tail
-  , PXTagAttrValue m lock payload verb hasAttributed tag x y pursi purso
-      trailing
+  , PXTagAttrValue lock payload verb hasAttributed tag x y pursi purso trailing
   ) =>
-  PXTagAttrValue m
-    lock
+  PXTagAttrValue lock
     payload
     verb
     hasAttributed
@@ -3681,11 +3459,9 @@ instance
 
 instance
   ( Sym.Cons x y tail
-  , PXTagAttrValue m lock payload verb hasAttributed tag x y pursi purso
-      trailing
+  , PXTagAttrValue lock payload verb hasAttributed tag x y pursi purso trailing
   ) =>
-  PXTagAttrValue m
-    lock
+  PXTagAttrValue lock
     payload
     verb
     hasAttributed
@@ -3698,11 +3474,9 @@ instance
 
 instance
   ( Sym.Cons x y tail
-  , PXTagAttrValue m lock payload verb hasAttributed tag x y pursi purso
-      trailing
+  , PXTagAttrValue lock payload verb hasAttributed tag x y pursi purso trailing
   ) =>
-  PXTagAttrValue m
-    lock
+  PXTagAttrValue lock
     payload
     verb
     hasAttributed
@@ -3715,11 +3489,9 @@ instance
 
 instance
   ( Sym.Cons x y tail
-  , PXTagAttrValue m lock payload verb hasAttributed tag x y pursi purso
-      trailing
+  , PXTagAttrValue lock payload verb hasAttributed tag x y pursi purso trailing
   ) =>
-  PXTagAttrValue m
-    lock
+  PXTagAttrValue lock
     payload
     verb
     hasAttributed
@@ -3732,11 +3504,9 @@ instance
 
 instance
   ( Sym.Cons x y tail
-  , PXTagAttrValue m lock payload verb hasAttributed tag x y pursi purso
-      trailing
+  , PXTagAttrValue lock payload verb hasAttributed tag x y pursi purso trailing
   ) =>
-  PXTagAttrValue m
-    lock
+  PXTagAttrValue lock
     payload
     verb
     hasAttributed
@@ -3749,11 +3519,9 @@ instance
 
 instance
   ( Sym.Cons x y tail
-  , PXTagAttrValue m lock payload verb hasAttributed tag x y pursi purso
-      trailing
+  , PXTagAttrValue lock payload verb hasAttributed tag x y pursi purso trailing
   ) =>
-  PXTagAttrValue m
-    lock
+  PXTagAttrValue lock
     payload
     verb
     hasAttributed
@@ -3766,11 +3534,9 @@ instance
 
 instance
   ( Sym.Cons x y tail
-  , PXTagAttrValue m lock payload verb hasAttributed tag x y pursi purso
-      trailing
+  , PXTagAttrValue lock payload verb hasAttributed tag x y pursi purso trailing
   ) =>
-  PXTagAttrValue m
-    lock
+  PXTagAttrValue lock
     payload
     verb
     hasAttributed
@@ -3783,11 +3549,9 @@ instance
 
 instance
   ( Sym.Cons x y tail
-  , PXTagAttrValue m lock payload verb hasAttributed tag x y pursi purso
-      trailing
+  , PXTagAttrValue lock payload verb hasAttributed tag x y pursi purso trailing
   ) =>
-  PXTagAttrValue m
-    lock
+  PXTagAttrValue lock
     payload
     verb
     hasAttributed
@@ -3800,11 +3564,9 @@ instance
 
 instance
   ( Sym.Cons x y tail
-  , PXTagAttrValue m lock payload verb hasAttributed tag x y pursi purso
-      trailing
+  , PXTagAttrValue lock payload verb hasAttributed tag x y pursi purso trailing
   ) =>
-  PXTagAttrValue m
-    lock
+  PXTagAttrValue lock
     payload
     verb
     hasAttributed
@@ -3817,11 +3579,9 @@ instance
 
 instance
   ( Sym.Cons x y tail
-  , PXTagAttrValue m lock payload verb hasAttributed tag x y pursi purso
-      trailing
+  , PXTagAttrValue lock payload verb hasAttributed tag x y pursi purso trailing
   ) =>
-  PXTagAttrValue m
-    lock
+  PXTagAttrValue lock
     payload
     verb
     hasAttributed
@@ -3834,11 +3594,9 @@ instance
 
 instance
   ( Sym.Cons x y tail
-  , PXTagAttrValue m lock payload verb hasAttributed tag x y pursi purso
-      trailing
+  , PXTagAttrValue lock payload verb hasAttributed tag x y pursi purso trailing
   ) =>
-  PXTagAttrValue m
-    lock
+  PXTagAttrValue lock
     payload
     verb
     hasAttributed
@@ -3851,11 +3609,9 @@ instance
 
 instance
   ( Sym.Cons x y tail
-  , PXTagAttrValue m lock payload verb hasAttributed tag x y pursi purso
-      trailing
+  , PXTagAttrValue lock payload verb hasAttributed tag x y pursi purso trailing
   ) =>
-  PXTagAttrValue m
-    lock
+  PXTagAttrValue lock
     payload
     verb
     hasAttributed
@@ -3868,11 +3624,9 @@ instance
 
 instance
   ( Sym.Cons x y tail
-  , PXTagAttrValue m lock payload verb hasAttributed tag x y pursi purso
-      trailing
+  , PXTagAttrValue lock payload verb hasAttributed tag x y pursi purso trailing
   ) =>
-  PXTagAttrValue m
-    lock
+  PXTagAttrValue lock
     payload
     verb
     hasAttributed
@@ -3885,11 +3639,9 @@ instance
 
 instance
   ( Sym.Cons x y tail
-  , PXTagAttrValue m lock payload verb hasAttributed tag x y pursi purso
-      trailing
+  , PXTagAttrValue lock payload verb hasAttributed tag x y pursi purso trailing
   ) =>
-  PXTagAttrValue m
-    lock
+  PXTagAttrValue lock
     payload
     verb
     hasAttributed
@@ -3902,11 +3654,9 @@ instance
 
 instance
   ( Sym.Cons x y tail
-  , PXTagAttrValue m lock payload verb hasAttributed tag x y pursi purso
-      trailing
+  , PXTagAttrValue lock payload verb hasAttributed tag x y pursi purso trailing
   ) =>
-  PXTagAttrValue m
-    lock
+  PXTagAttrValue lock
     payload
     verb
     hasAttributed
@@ -3919,11 +3669,9 @@ instance
 
 instance
   ( Sym.Cons x y tail
-  , PXTagAttrValue m lock payload verb hasAttributed tag x y pursi purso
-      trailing
+  , PXTagAttrValue lock payload verb hasAttributed tag x y pursi purso trailing
   ) =>
-  PXTagAttrValue m
-    lock
+  PXTagAttrValue lock
     payload
     verb
     hasAttributed
@@ -3936,11 +3684,9 @@ instance
 
 instance
   ( Sym.Cons x y tail
-  , PXTagAttrValue m lock payload verb hasAttributed tag x y pursi purso
-      trailing
+  , PXTagAttrValue lock payload verb hasAttributed tag x y pursi purso trailing
   ) =>
-  PXTagAttrValue m
-    lock
+  PXTagAttrValue lock
     payload
     verb
     hasAttributed
@@ -3953,11 +3699,9 @@ instance
 
 instance
   ( Sym.Cons x y tail
-  , PXTagAttrValue m lock payload verb hasAttributed tag x y pursi purso
-      trailing
+  , PXTagAttrValue lock payload verb hasAttributed tag x y pursi purso trailing
   ) =>
-  PXTagAttrValue m
-    lock
+  PXTagAttrValue lock
     payload
     verb
     hasAttributed
@@ -3970,11 +3714,9 @@ instance
 
 instance
   ( Sym.Cons x y tail
-  , PXTagAttrValue m lock payload verb hasAttributed tag x y pursi purso
-      trailing
+  , PXTagAttrValue lock payload verb hasAttributed tag x y pursi purso trailing
   ) =>
-  PXTagAttrValue m
-    lock
+  PXTagAttrValue lock
     payload
     verb
     hasAttributed
@@ -3987,11 +3729,9 @@ instance
 
 instance
   ( Sym.Cons x y tail
-  , PXTagAttrValue m lock payload verb hasAttributed tag x y pursi purso
-      trailing
+  , PXTagAttrValue lock payload verb hasAttributed tag x y pursi purso trailing
   ) =>
-  PXTagAttrValue m
-    lock
+  PXTagAttrValue lock
     payload
     verb
     hasAttributed
@@ -4004,11 +3744,9 @@ instance
 
 instance
   ( Sym.Cons x y tail
-  , PXTagAttrValue m lock payload verb hasAttributed tag x y pursi purso
-      trailing
+  , PXTagAttrValue lock payload verb hasAttributed tag x y pursi purso trailing
   ) =>
-  PXTagAttrValue m
-    lock
+  PXTagAttrValue lock
     payload
     verb
     hasAttributed
@@ -4021,11 +3759,9 @@ instance
 
 instance
   ( Sym.Cons x y tail
-  , PXTagAttrValue m lock payload verb hasAttributed tag x y pursi purso
-      trailing
+  , PXTagAttrValue lock payload verb hasAttributed tag x y pursi purso trailing
   ) =>
-  PXTagAttrValue m
-    lock
+  PXTagAttrValue lock
     payload
     verb
     hasAttributed
@@ -4038,11 +3774,9 @@ instance
 
 instance
   ( Sym.Cons x y tail
-  , PXTagAttrValue m lock payload verb hasAttributed tag x y pursi purso
-      trailing
+  , PXTagAttrValue lock payload verb hasAttributed tag x y pursi purso trailing
   ) =>
-  PXTagAttrValue m
-    lock
+  PXTagAttrValue lock
     payload
     verb
     hasAttributed
@@ -4055,11 +3789,9 @@ instance
 
 instance
   ( Sym.Cons x y tail
-  , PXTagAttrValue m lock payload verb hasAttributed tag x y pursi purso
-      trailing
+  , PXTagAttrValue lock payload verb hasAttributed tag x y pursi purso trailing
   ) =>
-  PXTagAttrValue m
-    lock
+  PXTagAttrValue lock
     payload
     verb
     hasAttributed
@@ -4072,11 +3804,9 @@ instance
 
 instance
   ( Sym.Cons x y tail
-  , PXTagAttrValue m lock payload verb hasAttributed tag x y pursi purso
-      trailing
+  , PXTagAttrValue lock payload verb hasAttributed tag x y pursi purso trailing
   ) =>
-  PXTagAttrValue m
-    lock
+  PXTagAttrValue lock
     payload
     verb
     hasAttributed
@@ -4089,11 +3819,9 @@ instance
 
 instance
   ( Sym.Cons x y tail
-  , PXTagAttrValue m lock payload verb hasAttributed tag x y pursi purso
-      trailing
+  , PXTagAttrValue lock payload verb hasAttributed tag x y pursi purso trailing
   ) =>
-  PXTagAttrValue m
-    lock
+  PXTagAttrValue lock
     payload
     verb
     hasAttributed
@@ -4106,11 +3834,9 @@ instance
 
 instance
   ( Sym.Cons x y tail
-  , PXTagAttrValue m lock payload verb hasAttributed tag x y pursi purso
-      trailing
+  , PXTagAttrValue lock payload verb hasAttributed tag x y pursi purso trailing
   ) =>
-  PXTagAttrValue m
-    lock
+  PXTagAttrValue lock
     payload
     verb
     hasAttributed
@@ -4123,11 +3849,9 @@ instance
 
 instance
   ( Sym.Cons x y tail
-  , PXTagAttrValue m lock payload verb hasAttributed tag x y pursi purso
-      trailing
+  , PXTagAttrValue lock payload verb hasAttributed tag x y pursi purso trailing
   ) =>
-  PXTagAttrValue m
-    lock
+  PXTagAttrValue lock
     payload
     verb
     hasAttributed
@@ -4140,11 +3864,9 @@ instance
 
 instance
   ( Sym.Cons x y tail
-  , PXTagAttrValue m lock payload verb hasAttributed tag x y pursi purso
-      trailing
+  , PXTagAttrValue lock payload verb hasAttributed tag x y pursi purso trailing
   ) =>
-  PXTagAttrValue m
-    lock
+  PXTagAttrValue lock
     payload
     verb
     hasAttributed
@@ -4157,11 +3879,9 @@ instance
 
 instance
   ( Sym.Cons x y tail
-  , PXTagAttrValue m lock payload verb hasAttributed tag x y pursi purso
-      trailing
+  , PXTagAttrValue lock payload verb hasAttributed tag x y pursi purso trailing
   ) =>
-  PXTagAttrValue m
-    lock
+  PXTagAttrValue lock
     payload
     verb
     hasAttributed
@@ -4174,11 +3894,9 @@ instance
 
 instance
   ( Sym.Cons x y tail
-  , PXTagAttrValue m lock payload verb hasAttributed tag x y pursi purso
-      trailing
+  , PXTagAttrValue lock payload verb hasAttributed tag x y pursi purso trailing
   ) =>
-  PXTagAttrValue m
-    lock
+  PXTagAttrValue lock
     payload
     verb
     hasAttributed
@@ -4191,11 +3909,9 @@ instance
 
 instance
   ( Sym.Cons x y tail
-  , PXTagAttrValue m lock payload verb hasAttributed tag x y pursi purso
-      trailing
+  , PXTagAttrValue lock payload verb hasAttributed tag x y pursi purso trailing
   ) =>
-  PXTagAttrValue m
-    lock
+  PXTagAttrValue lock
     payload
     verb
     hasAttributed
@@ -4208,11 +3924,9 @@ instance
 
 instance
   ( Sym.Cons x y tail
-  , PXTagAttrValue m lock payload verb hasAttributed tag x y pursi purso
-      trailing
+  , PXTagAttrValue lock payload verb hasAttributed tag x y pursi purso trailing
   ) =>
-  PXTagAttrValue m
-    lock
+  PXTagAttrValue lock
     payload
     verb
     hasAttributed
@@ -4225,11 +3939,9 @@ instance
 
 instance
   ( Sym.Cons x y tail
-  , PXTagAttrValue m lock payload verb hasAttributed tag x y pursi purso
-      trailing
+  , PXTagAttrValue lock payload verb hasAttributed tag x y pursi purso trailing
   ) =>
-  PXTagAttrValue m
-    lock
+  PXTagAttrValue lock
     payload
     verb
     hasAttributed
@@ -4242,11 +3954,9 @@ instance
 
 instance
   ( Sym.Cons x y tail
-  , PXTagAttrValue m lock payload verb hasAttributed tag x y pursi purso
-      trailing
+  , PXTagAttrValue lock payload verb hasAttributed tag x y pursi purso trailing
   ) =>
-  PXTagAttrValue m
-    lock
+  PXTagAttrValue lock
     payload
     verb
     hasAttributed
@@ -4259,11 +3969,9 @@ instance
 
 instance
   ( Sym.Cons x y tail
-  , PXTagAttrValue m lock payload verb hasAttributed tag x y pursi purso
-      trailing
+  , PXTagAttrValue lock payload verb hasAttributed tag x y pursi purso trailing
   ) =>
-  PXTagAttrValue m
-    lock
+  PXTagAttrValue lock
     payload
     verb
     hasAttributed
@@ -4276,11 +3984,9 @@ instance
 
 instance
   ( Sym.Cons x y tail
-  , PXTagAttrValue m lock payload verb hasAttributed tag x y pursi purso
-      trailing
+  , PXTagAttrValue lock payload verb hasAttributed tag x y pursi purso trailing
   ) =>
-  PXTagAttrValue m
-    lock
+  PXTagAttrValue lock
     payload
     verb
     hasAttributed
@@ -4293,11 +3999,9 @@ instance
 
 instance
   ( Sym.Cons x y tail
-  , PXTagAttrValue m lock payload verb hasAttributed tag x y pursi purso
-      trailing
+  , PXTagAttrValue lock payload verb hasAttributed tag x y pursi purso trailing
   ) =>
-  PXTagAttrValue m
-    lock
+  PXTagAttrValue lock
     payload
     verb
     hasAttributed
@@ -4310,11 +4014,10 @@ instance
 
 instance
   ( Sym.Cons x y tail
-  , PXTagPreAttrName m lock payload verb hasAttributed tag x y pursi purso
+  , PXTagPreAttrName lock payload verb hasAttributed tag x y pursi purso
       trailing
   ) =>
-  PXTagAttrValue m
-    lock
+  PXTagAttrValue lock
     payload
     verb
     hasAttributed
@@ -4327,7 +4030,6 @@ instance
 
 class
   PXBody
-    (m :: Type -> Type)
     (lock :: Type)
     (payload :: Type)
     (verb :: Symbol)
@@ -4336,7 +4038,7 @@ class
     (pursi :: Row Type)
     (purso :: Row Type)
     (trailing :: Symbol)
-  | m lock payload verb tail pursi -> purso trailing
+  | lock payload verb tail pursi -> purso trailing
 
 class
   CommendEndCandidate2 (head :: Symbol) (tail :: Symbol) (trailing :: Symbol)
@@ -4381,7 +4083,6 @@ else instance
 
 class
   CloseOrRepeat
-    (m :: Type -> Type)
     (lock :: Type)
     (payload :: Type)
     (verb :: Symbol)
@@ -4390,64 +4091,63 @@ class
     (pursi :: Row Type)
     (purso :: Row Type)
     (trailing :: Symbol)
-  | m lock payload verb head tail pursi -> purso trailing
+  | lock payload verb head tail pursi -> purso trailing
 
-instance CloseOrRepeat m lock payload verb "/" tail purs purs tail
+instance CloseOrRepeat lock payload verb "/" tail purs purs tail
 else instance
   ( Sym.Cons "-" y tail
   , Sym.Cons "-" yy y
   , Sym.Cons x yyy yy
   , SkipUntilCommentEnd x yyy trailing
   , Sym.Cons mm bb trailing
-  , PXBody m lock payload verb mm bb pursi purso newTrailing
+  , PXBody lock payload verb mm bb pursi purso newTrailing
   ) =>
-  CloseOrRepeat m lock payload verb "!" tail pursi purso newTrailing
+  CloseOrRepeat lock payload verb "!" tail pursi purso newTrailing
 else instance
-  ( PXTagPreName m lock payload verb anything tail () pursm trailing
+  ( PXTagPreName lock payload verb anything tail () pursm trailing
   , Row.Union pursi pursm pursz
   , Sym.Cons x y trailing
-  , PXBody m lock payload verb x y pursz purso newTrailing
+  , PXBody lock payload verb x y pursz purso newTrailing
   ) =>
-  CloseOrRepeat m lock payload verb anything tail pursi purso newTrailing
+  CloseOrRepeat lock payload verb anything tail pursi purso newTrailing
 
 instance
   ( Sym.Cons x y tail
-  , CloseOrRepeat m lock payload verb x y pursi purso trailing
+  , CloseOrRepeat lock payload verb x y pursi purso trailing
   ) =>
-  PXBody m lock payload verb "<" tail pursi purso trailing
+  PXBody lock payload verb "<" tail pursi purso trailing
 else instance
   ( Sym.Cons x y tail
-  , DoVerbForDOM m lock payload verb "" x y pursi pursx newTail
+  , DoVerbForDOM lock payload verb "" x y pursi pursx newTail
   , Sym.Cons xx yy newTail
-  , PXBody m lock payload verb xx yy pursx purso trailing
+  , PXBody lock payload verb xx yy pursx purso trailing
   ) =>
-  PXBody m lock payload verb verb tail pursi purso trailing
+  PXBody lock payload verb verb tail pursi purso trailing
 else instance
   ( Sym.Cons x y tail
-  , PXBody m lock payload verb x y pursi purso trailing
+  , PXBody lock payload verb x y pursi purso trailing
   ) =>
-  PXBody m lock payload verb anything tail pursi purso trailing
+  PXBody lock payload verb anything tail pursi purso trailing
 
 class
-  PursxToElement m lock payload (rl :: RL.RowList Type) (r :: Row Type)
-  | rl -> m lock payload r where
+  PursxToElement lock payload (rl :: RL.RowList Type) (r :: Row Type)
+  | rl -> lock payload r where
   pursxToElement
     :: String
     -> Proxy rl
     -> { | r }
-    -> { cache :: Object.Object Boolean, element :: Node m lock payload }
+    -> { cache :: Object.Object Boolean, element :: Node lock payload }
 
 instance pursxToElementConsInsert ::
-  ( Row.Cons key (PursxElement m lock payload) r' r
-  , PursxToElement m lock payload rest r
+  ( Row.Cons key (PursxElement lock payload) r' r
+  , PursxToElement lock payload rest r
   , Reflectable key String
   , IsSymbol key
-  , Korok s m
   ) =>
-  PursxToElement m
+  PursxToElement
     lock
     payload
-    (RL.Cons key (PursxElement m lock payload) rest)
+    (RL.Cons key (PursxElement lock payload) rest)
     r where
   pursxToElement pxScope _ r =
     let
@@ -4470,16 +4170,15 @@ instance pursxToElementConsInsert ::
     PursxElement pxe = get pxk r
 
 else instance pursxToElementConsAttr ::
-  ( Row.Cons key (AnEvent m (Attribute deku)) r' r
-  , PursxToElement m lock payload rest r
+  ( Row.Cons key (AnEvent Zora (Attribute deku)) r' r
+  , PursxToElement lock payload rest r
   , Reflectable key String
   , IsSymbol key
-  , Korok s m
   ) =>
-  PursxToElement m
+  PursxToElement
     lock
     payload
-    (RL.Cons key (AnEvent m (Attribute deku)) rest)
+    (RL.Cons key (AnEvent Zora (Attribute deku)) rest)
     r where
   pursxToElement pxScope _ r =
     let
@@ -4510,43 +4209,40 @@ else instance pursxToElementConsAttr ::
 
 instance pursxToElementNil ::
   Applicative m =>
-  PursxToElement m lock payload RL.Nil r where
+  PursxToElement lock payload RL.Nil r where
   pursxToElement _ _ _ = { cache: Object.empty, element: Node \_ _ -> empty }
 
 psx
-  :: forall s m lock payload (html :: Symbol)
+  :: forall lock payload (html :: Symbol)
    . Reflectable html String
-  => PXStart m lock payload "~" " " html ()
-  => Korok s m
-  => PursxToElement m lock payload RL.Nil ()
+  => PXStart lock payload "~" " " html ()
+  => PursxToElement lock payload RL.Nil ()
   => Proxy html
-  -> Domable m lock payload
+  -> Domable lock payload
 psx px = makePursx px {}
 
 makePursx
-  :: forall s m lock payload (html :: Symbol) r rl
+  :: forall lock payload (html :: Symbol) r rl
    . Reflectable html String
-  => PXStart m lock payload "~" " " html r
+  => PXStart lock payload "~" " " html r
   => RL.RowToList r rl
-  => PursxToElement m lock payload rl r
-  => Korok s m
+  => PursxToElement lock payload rl r
   => Proxy html
   -> { | r }
-  -> Domable m lock payload
+  -> Domable lock payload
 makePursx = makePursx' (Proxy :: _ "~")
 
 makePursx'
-  :: forall s m lock payload verb (html :: Symbol) r rl
+  :: forall lock payload verb (html :: Symbol) r rl
    . Reflectable html String
   => Reflectable verb String
-  => PXStart m lock payload verb " " html r
+  => PXStart lock payload verb " " html r
   => RL.RowToList r rl
-  => Korok s m
-  => PursxToElement m lock payload rl r
+  => PursxToElement lock payload rl r
   => Proxy verb
   -> Proxy html
   -> { | r }
-  -> Domable m lock payload
+  -> Domable lock payload
 makePursx' verb html r = Element' $ Node go
   where
   go
@@ -4578,12 +4274,11 @@ makePursx' verb html r = Element' $ Node go
           k1
 
 __internalDekuFlatten
-  :: forall s m lock payload
-   . Korok s m
-  => PSR m (pos :: Maybe Int)
-  -> DOMInterpret m payload
-  -> Domable m lock payload
-  -> AnEvent m payload
+  :: forall lock payload
+   . PSR Zora (pos :: Maybe Int)
+  -> DOMInterpret payload
+  -> Domable lock payload
+  -> AnEvent Zora payload
 __internalDekuFlatten = Bolson.flatten
   { doLogic: \pos (DOMInterpret { sendToPos }) id -> sendToPos { id, pos }
   , ids: unwrap >>> _.ids
