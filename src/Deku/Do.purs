@@ -7,6 +7,7 @@ module Deku.Do
   , useStates
   , useMemoized
   , useMailboxed
+  , useRemoval
   , class InitializeEvents
   , initializeEvents'
   ) where
@@ -14,17 +15,18 @@ module Deku.Do
 import Prelude hiding (bind, discard)
 
 import Bolson.Always (AlwaysEffect)
-import Bolson.Core (envy)
+import Bolson.Core (Child, envy)
 import Bolson.Core as Bolson
 import Control.Alt ((<|>))
 import Control.Monad.ST.Class (class MonadST)
 import Data.Monoid.Always (class Always)
 import Data.Profunctor (lcmap)
 import Data.Symbol (class IsSymbol)
+import Data.Tuple (curry)
 import Data.Tuple.Nested (type (/\), (/\))
-import Deku.Core (class Korok, bussedUncurried, vbussedUncurried)
+import Deku.Core (class Korok, bus, bussedUncurried, remove, vbussedUncurried)
 import Effect (Effect)
-import FRP.Event (AnEvent, mailboxed, memoize)
+import FRP.Event (AnEvent, keepLatest, mailboxed, memoize)
 import FRP.Event.VBus (class VBus, V)
 import Heterogeneous.Mapping (class MapRecordWithIndex, ConstMapping)
 import Prim.Row as R
@@ -144,3 +146,12 @@ useMailboxed
   -> Bolson.Entity logic obj m lock
 useMailboxed f = bussedUncurried \(a /\ b) -> envy
   (mailboxed b \c -> f (a /\ c))
+
+useRemoval
+  :: forall a m logic obj lock s
+   . Korok s m
+  => (Effect Unit /\ (AnEvent m (Child logic obj m lock)) -> AnEvent m a)
+  -> AnEvent m a
+useRemoval f = keepLatest do
+  setRemoveMe /\ removeMe <- bus <<< curry
+  f (setRemoveMe unit /\ (removeMe $> remove))
