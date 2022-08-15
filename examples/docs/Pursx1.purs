@@ -15,7 +15,9 @@ import Type.Proxy (Proxy(..))
 import Web.Event.Event (preventDefault)
 
 myDom =
-  Proxy    :: Proxy         """<div>
+  Proxy
+    :: Proxy
+         """<div>
     <button>I do nothing</button>
     <ul>
         <li>A</li>
@@ -32,7 +34,9 @@ myDom =
 """
 
 px =
-  Proxy    :: Proxy         """<div>
+  Proxy
+    :: Proxy
+         """<div>
   <h1>PursX 1</h1>
 
   <h2>Like JSX... but better!</h2>
@@ -55,7 +59,7 @@ px =
   <p>In this section, we used PursX to build the same component as the previous section. In the next section, we'll learn how to respond to <a ~next~ style="cursor:pointer;">events</a>.</p>
 </div>"""
 
-pursx1 :: forall r. {|PageOptions r}  -> Nut
+pursx1 :: forall r. { | PageOptions r } -> Nut
 pursx1 options = px ~~
   { code: nut
       ( D.pre_
@@ -65,5 +69,9 @@ pursx1 options = px ~~
           ]
       )
   , result: nut (psx myDom)
-  , next: oneOfMap pure [D.OnClick := (cb (\e -> preventDefault e *> options.dpage Events *> scrollToTop) ), D.Href := (options.slug <> "events1/") ]
+  , next: oneOfMap pure
+      [ D.OnClick :=
+          (cb (\e -> preventDefault e *> options.dpage Events *> scrollToTop))
+      , D.Href := (options.slug <> "events1/")
+      ]
   }

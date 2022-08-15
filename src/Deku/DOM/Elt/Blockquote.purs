@@ -15,7 +15,8 @@ blockquote
    . AnEvent Zora (Attribute Blockquote_)
   -> Array (Domable lock payload)
   -> Domable lock payload
-blockquote attributes kids = Element' (elementify "blockquote" attributes (fixed kids))
+blockquote attributes kids = Element'
+  (elementify "blockquote" attributes (fixed kids))
 
 blockquote_
   :: forall lock payload

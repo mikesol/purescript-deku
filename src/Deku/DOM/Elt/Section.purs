@@ -15,7 +15,8 @@ section
    . AnEvent Zora (Attribute Section_)
   -> Array (Domable lock payload)
   -> Domable lock payload
-section attributes kids = Element' (elementify "section" attributes (fixed kids))
+section attributes kids = Element'
+  (elementify "section" attributes (fixed kids))
 
 section_
   :: forall lock payload

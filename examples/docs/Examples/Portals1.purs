@@ -37,10 +37,13 @@ main = runInBody1
           let
             p0 :: Domable _ _
             p0 = index (Proxy :: _ 0) v
+
             p1 :: Domable _ _
             p1 = index (Proxy :: _ 1) v
+
             ev :: Boolean -> AnEvent _ Boolean
             ev = fold (const not) event
+
             flips :: Boolean -> Domable _ _
             flips = switcher_ D.span (if _ then p0 else p1) <<< ev
           D.div_

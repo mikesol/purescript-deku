@@ -41,14 +41,18 @@ discard = bind
 
 useState'
   :: forall lock logic obj a
-   . (((a -> Effect Unit) /\ AnEvent Zora a) -> Bolson.Entity logic obj Zora lock)
+   . ( ((a -> Effect Unit) /\ AnEvent Zora a)
+       -> Bolson.Entity logic obj Zora lock
+     )
   -> Bolson.Entity logic obj Zora lock
 useState' = bussedUncurried
 
 useMemoized
   :: forall lock logic obj a b
    . (AnEvent Zora a -> AnEvent Zora b)
-  -> (((a -> Effect Unit) /\ AnEvent Zora b) -> Bolson.Entity logic obj Zora lock)
+  -> ( ((a -> Effect Unit) /\ AnEvent Zora b)
+       -> Bolson.Entity logic obj Zora lock
+     )
   -> Bolson.Entity logic obj Zora lock
 useMemoized f0 f1 = bussedUncurried \(a /\ b) -> envy
   (memoize (f0 b) \c -> f1 (a /\ c))
@@ -56,7 +60,9 @@ useMemoized f0 f1 = bussedUncurried \(a /\ b) -> envy
 useState
   :: forall lock logic obj a
    . a
-  -> (((a -> Effect Unit) /\ AnEvent Zora a) -> Bolson.Entity logic obj Zora lock)
+  -> ( ((a -> Effect Unit) /\ AnEvent Zora a)
+       -> Bolson.Entity logic obj Zora lock
+     )
   -> Bolson.Entity logic obj Zora lock
 useState a = useMemoized (pure a <|> _)
 
@@ -128,7 +134,9 @@ useStates v needle = useStates' v <<< lcmap (map (initializeEvents needle))
 useMailboxed
   :: forall lock logic obj a b
    . Ord a
-  => ( (({ address :: a, payload :: b } -> Effect Unit) /\ (a -> AnEvent Zora b))
+  => ( ( ({ address :: a, payload :: b } -> Effect Unit) /\
+           (a -> AnEvent Zora b)
+       )
        -> Bolson.Entity logic obj Zora lock
      )
   -> Bolson.Entity logic obj Zora lock

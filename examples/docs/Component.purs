@@ -15,7 +15,9 @@ import Type.Proxy (Proxy(..))
 import Web.Event.Event (preventDefault)
 
 px =
-  Proxy    :: Proxy         """<div>
+  Proxy
+    :: Proxy
+         """<div>
   <h1>A Simple Component</h1>
 
   <h3>Slightly more bells and whistles</h3>
@@ -50,7 +52,7 @@ myDivWithNoChildren = D.div attrs blank
   <p>In this section, we built a simple component. In the next section, we'll recreate the exact same element using a different input syntax called <a ~next~ style="cursor:pointer;">Pursx</a>.</p>
 </div>"""
 
-components :: forall r. {|PageOptions r} -> Nut
+components :: forall r. { | PageOptions r } -> Nut
 components options = px ~~
   { code: nut
       ( D.pre_
@@ -77,5 +79,9 @@ components options = px ~~
               ]
           ]
       )
-  , next: oneOfMap pure [D.OnClick := (cb (\e -> preventDefault e *> options.dpage PURSX1 *> scrollToTop) ), D.Href := (options.slug <> "pursx1/") ]
+  , next: oneOfMap pure
+      [ D.OnClick :=
+          (cb (\e -> preventDefault e *> options.dpage PURSX1 *> scrollToTop))
+      , D.Href := (options.slug <> "pursx1/")
+      ]
   }

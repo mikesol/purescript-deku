@@ -15,7 +15,8 @@ frameset
    . AnEvent Zora (Attribute Frameset_)
   -> Array (Domable lock payload)
   -> Domable lock payload
-frameset attributes kids = Element' (elementify "frameset" attributes (fixed kids))
+frameset attributes kids = Element'
+  (elementify "frameset" attributes (fixed kids))
 
 frameset_
   :: forall lock payload

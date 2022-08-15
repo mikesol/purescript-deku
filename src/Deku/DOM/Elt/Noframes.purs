@@ -15,7 +15,8 @@ noframes
    . AnEvent Zora (Attribute Noframes_)
   -> Array (Domable lock payload)
   -> Domable lock payload
-noframes attributes kids = Element' (elementify "noframes" attributes (fixed kids))
+noframes attributes kids = Element'
+  (elementify "noframes" attributes (fixed kids))
 
 noframes_
   :: forall lock payload

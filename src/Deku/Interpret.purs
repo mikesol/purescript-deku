@@ -133,7 +133,9 @@ ssrSetText
   :: forall r. Core.SetText -> RRef.STRef r (Array Instruction) -> ST r Unit
 ssrSetText a i = void $ RRef.modify (_ <> [ SetText a ]) i
 
-ssrDOMInterpret :: RRef.STRef Global Int -> Core.DOMInterpret (RRef.STRef Global (Array Instruction) -> ST Global Unit)
+ssrDOMInterpret
+  :: RRef.STRef Global Int
+  -> Core.DOMInterpret (RRef.STRef Global (Array Instruction) -> ST Global Unit)
 ssrDOMInterpret seed = Core.DOMInterpret
   { ids: liftPure do
       s <- RRef.read seed

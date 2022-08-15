@@ -15,7 +15,8 @@ noscript
    . AnEvent Zora (Attribute Noscript_)
   -> Array (Domable lock payload)
   -> Domable lock payload
-noscript attributes kids = Element' (elementify "noscript" attributes (fixed kids))
+noscript attributes kids = Element'
+  (elementify "noscript" attributes (fixed kids))
 
 noscript_
   :: forall lock payload

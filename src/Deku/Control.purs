@@ -193,7 +193,7 @@ text_ :: forall lock payload. String -> Domable lock payload
 text_ txt = text (pure txt)
 
 deku
-  :: forall payload   
+  :: forall payload
    . Web.DOM.Element
   -> (forall lock. Domable lock payload)
   -> DOMInterpret payload
@@ -214,7 +214,7 @@ deku root children di@(DOMInterpret { ids, makeRoot }) = makeEvent \k -> do
     k
 
 deku1
-  :: forall payload   
+  :: forall payload
    . Web.DOM.Element
   -> (forall lock. AnEvent Zora (Domable lock payload))
   -> DOMInterpret payload
@@ -222,7 +222,7 @@ deku1
 deku1 root children = deku root (EventfulElement' $ EventfulElement children)
 
 dekuA
-  :: forall payload   
+  :: forall payload
    . Web.DOM.Element
   -> (forall lock. Array (Domable lock payload))
   -> DOMInterpret payload
@@ -241,8 +241,11 @@ __internalDekuFlatten = Bolson.flatten
   portalFlatten
 
 switcher
-  :: forall a element lock payload   
-   . (AnEvent Zora (Attribute element) -> Array (Domable lock payload) -> Domable lock payload)
+  :: forall a element lock payload
+   . ( AnEvent Zora (Attribute element)
+       -> Array (Domable lock payload)
+       -> Domable lock payload
+     )
   -> AnEvent Zora (Attribute element)
   -> (a -> Domable lock payload)
   -> AnEvent Zora a
@@ -251,7 +254,10 @@ switcher f e1 i e2 = f e1 [ Bolson.switcher i e2 ]
 
 switcher_
   :: forall a element lock payload
-   . (AnEvent Zora (Attribute element) -> Array (Domable lock payload) -> Domable lock payload)
+   . ( AnEvent Zora (Attribute element)
+       -> Array (Domable lock payload)
+       -> Domable lock payload
+     )
   -> (a -> Domable lock payload)
   -> AnEvent Zora a
   -> Domable lock payload
@@ -259,7 +265,10 @@ switcher_ f i e = f empty [ Bolson.switcher i e ]
 
 dyn
   :: forall element lock payload
-   . (AnEvent Zora (Attribute element) -> Array (Domable lock payload) -> Domable lock payload)
+   . ( AnEvent Zora (Attribute element)
+       -> Array (Domable lock payload)
+       -> Domable lock payload
+     )
   -> AnEvent Zora (Attribute element)
   -> AnEvent Zora (AnEvent Zora (BCore.Child Int (Node lock payload) Zora lock))
   -> Domable lock payload
@@ -267,14 +276,20 @@ dyn f e i = f e [ BCore.dyn i ]
 
 dyn_
   :: forall element lock payload
-   . (AnEvent Zora (Attribute element) -> Array (Domable lock payload) -> Domable lock payload)
+   . ( AnEvent Zora (Attribute element)
+       -> Array (Domable lock payload)
+       -> Domable lock payload
+     )
   -> AnEvent Zora (AnEvent Zora (BCore.Child Int (Node lock payload) Zora lock))
   -> Domable lock payload
 dyn_ f i = f empty [ BCore.dyn i ]
 
 fixed
   :: forall element lock payload
-   . (AnEvent Zora (Attribute element) -> Array (Domable lock payload) -> Domable lock payload)
+   . ( AnEvent Zora (Attribute element)
+       -> Array (Domable lock payload)
+       -> Domable lock payload
+     )
   -> AnEvent Zora (Attribute element)
   -> Array (Domable lock payload)
   -> Domable lock payload
@@ -282,14 +297,20 @@ fixed f e i = f e [ BCore.fixed i ]
 
 fixed_
   :: forall element lock payload
-   . (AnEvent Zora (Attribute element) -> Array (Domable lock payload) -> Domable lock payload)
+   . ( AnEvent Zora (Attribute element)
+       -> Array (Domable lock payload)
+       -> Domable lock payload
+     )
   -> Array (Domable lock payload)
   -> Domable lock payload
 fixed_ f i = f empty [ BCore.fixed i ]
 
 envy
   :: forall element lock payload
-   . (AnEvent Zora (Attribute element) -> Array (Domable lock payload) -> Domable lock payload)
+   . ( AnEvent Zora (Attribute element)
+       -> Array (Domable lock payload)
+       -> Domable lock payload
+     )
   -> AnEvent Zora (Attribute element)
   -> AnEvent Zora (Domable lock payload)
   -> Domable lock payload
@@ -297,7 +318,10 @@ envy f e i = f e [ BCore.envy i ]
 
 envy_
   :: forall element lock payload
-   . (AnEvent Zora (Attribute element) -> Array (Domable lock payload) -> Domable lock payload)
+   . ( AnEvent Zora (Attribute element)
+       -> Array (Domable lock payload)
+       -> Domable lock payload
+     )
   -> AnEvent Zora (Domable lock payload)
   -> Domable lock payload
 envy_ f i = f empty [ BCore.envy i ]

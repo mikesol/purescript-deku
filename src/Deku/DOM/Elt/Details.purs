@@ -15,7 +15,8 @@ details
    . AnEvent Zora (Attribute Details_)
   -> Array (Domable lock payload)
   -> Domable lock payload
-details attributes kids = Element' (elementify "details" attributes (fixed kids))
+details attributes kids = Element'
+  (elementify "details" attributes (fixed kids))
 
 details_
   :: forall lock payload

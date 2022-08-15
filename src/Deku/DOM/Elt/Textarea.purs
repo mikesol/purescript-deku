@@ -15,7 +15,8 @@ textarea
    . AnEvent Zora (Attribute Textarea_)
   -> Array (Domable lock payload)
   -> Domable lock payload
-textarea attributes kids = Element' (elementify "textarea" attributes (fixed kids))
+textarea attributes kids = Element'
+  (elementify "textarea" attributes (fixed kids))
 
 textarea_
   :: forall lock payload

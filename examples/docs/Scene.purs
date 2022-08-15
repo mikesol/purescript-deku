@@ -88,7 +88,7 @@ scene options = bussed \push -> lcmap (pure options.startsWith <|> _)
                 /\ "ssr/"
                 /\ false
             ]
-      ,  switcher_ D.div (page push) event
+      , switcher_ D.div (page push) event
       ]
   where
   page dpage i = go i { dpage, slug: options.slug }

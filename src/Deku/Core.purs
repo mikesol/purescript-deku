@@ -75,7 +75,9 @@ bussed f = Bolson.EventfulElement' (Bolson.EventfulElement (bus f))
 
 bussedUncurried
   :: forall lock logic obj a
-   . (((a -> Effect Unit) /\ AnEvent Zora a) -> Bolson.Entity logic obj Zora lock)
+   . ( ((a -> Effect Unit) /\ AnEvent Zora a)
+       -> Bolson.Entity logic obj Zora lock
+     )
   -> Bolson.Entity logic obj Zora lock
 bussedUncurried = curry >>> bussed
 
@@ -110,7 +112,7 @@ vbussedUncurried px = curry >>> vbussed px
 
 newtype Node (lock :: Type) payload = Node
   ( Bolson.PSR Zora (pos :: Maybe Int)
-    -> DOMInterpret payload    
+    -> DOMInterpret payload
     -> AnEvent Zora payload
   )
 
@@ -124,9 +126,11 @@ insert
 insert i e = Bolson.Insert (f e)
   where
   f = case _ of
-      Bolson.Element' (Node e') -> Bolson.Element' (Node (lcmap (_ { pos = Just i}) e'))
-      Bolson.EventfulElement' (Bolson.EventfulElement e') -> Bolson.EventfulElement' (Bolson.EventfulElement (map f e'))
-      _ -> e
+    Bolson.Element' (Node e') -> Bolson.Element'
+      (Node (lcmap (_ { pos = Just i }) e'))
+    Bolson.EventfulElement' (Bolson.EventfulElement e') ->
+      Bolson.EventfulElement' (Bolson.EventfulElement (map f e'))
+    _ -> e
 
 insert_
   :: forall logic lock payload

@@ -10,16 +10,18 @@ import Effect.Console (log)
 
 main :: Effect Unit
 main =
-  toEffect (runSSR
-    ( Template
-        { head:
-            """<!DOCTYPE html>
+  toEffect
+    ( runSSR
+        ( Template
+            { head:
+                """<!DOCTYPE html>
 <html>
   <head>
     <title>My static page</title>
 		<script src="bundle.js" defer></script>
   </head>"""
-        , tail: "</html>"
-        }
-    )
-    app) >>= log
+            , tail: "</html>"
+            }
+        )
+        app
+    ) >>= log

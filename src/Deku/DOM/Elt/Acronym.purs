@@ -15,7 +15,8 @@ acronym
    . AnEvent Zora (Attribute Acronym_)
   -> Array (Domable lock payload)
   -> Domable lock payload
-acronym attributes kids = Element' (elementify "acronym" attributes (fixed kids))
+acronym attributes kids = Element'
+  (elementify "acronym" attributes (fixed kids))
 
 acronym_
   :: forall lock payload

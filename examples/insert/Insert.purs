@@ -26,12 +26,18 @@ main :: Effect Unit
 main = runInBody
   ( dyn_ D.div $ map
       ( \(x /\ c) ->
-          ( pure (insert c (D.div_ [text_ ("At pos: " <> show c <> " at time " <> show x)])) <|> delay (5050 + (c * 1000)) (pure remove)
+          ( pure
+              ( insert c
+                  ( D.div_
+                      [ text_ ("At pos: " <> show c <> " at time " <> show x) ]
+                  )
+              ) <|> delay (5050 + (c * 1000)) (pure remove)
           )
       )
       ( mapAccum
           ( \x (a /\ b) ->
-              if a < b then (((a + 1) /\ b) /\ ((unwrap (unInstant x)) /\ (a + 1)))
+              if a < b then
+                (((a + 1) /\ b) /\ ((unwrap (unInstant x)) /\ (a + 1)))
               else ((0 /\ (b + 1)) /\ ((unwrap (unInstant x)) /\ 0))
           )
           (interval 1000)

@@ -38,7 +38,9 @@ random = behavior \e ->
 
 rdm :: ABehavior (AnEvent Zora) String
 rdm = map
-  ( \{ r: Additive r, g: Additive g, b: Additive b } -> "rgb(" <> show (floor (r * 100.0 + 155.0)) <> ","
+  ( \{ r: Additive r, g: Additive g, b: Additive b } -> "rgb("
+      <> show (floor (r * 100.0 + 155.0))
+      <> ","
       <> show (floor (g * 100.0 + 155.0))
       <> ","
       <> show (floor (b * 100.0 + 155.0))
@@ -72,7 +74,7 @@ scene =
                   (pure (D.Style := "background-color: " <> rgb <> ";"))
                   [ V.index (Proxy :: _ 0) i ]
               )
-              (sample_ rdm (interval 1000))              
+              (sample_ rdm (interval 1000))
           )
       ]
   , dyn_ D.div $ map

@@ -15,7 +15,8 @@ caption
    . AnEvent Zora (Attribute Caption_)
   -> Array (Domable lock payload)
   -> Domable lock payload
-caption attributes kids = Element' (elementify "caption" attributes (fixed kids))
+caption attributes kids = Element'
+  (elementify "caption" attributes (fixed kids))
 
 caption_
   :: forall lock payload

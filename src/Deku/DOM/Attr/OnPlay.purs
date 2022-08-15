@@ -6,13 +6,22 @@ import Deku.Attribute (class Attr, Cb(..), cb', unsafeAttribute)
 import Hyrule.Zora (Zora, runImpure)
 
 data OnPlay = OnPlay
+
 instance Attr anything OnPlay Cb where
   attr OnPlay value = unsafeAttribute { key: "play", value: cb' value }
+
 instance Attr anything OnPlay (Effect Unit) where
-  attr OnPlay value = unsafeAttribute { key: "play", value: cb' (Cb (const (value $> true))) }
+  attr OnPlay value = unsafeAttribute
+    { key: "play", value: cb' (Cb (const (value $> true))) }
+
 instance Attr anything OnPlay (Effect Boolean) where
-  attr OnPlay value = unsafeAttribute { key: "play", value: cb' (Cb (const value)) }
+  attr OnPlay value = unsafeAttribute
+    { key: "play", value: cb' (Cb (const value)) }
+
 instance Attr anything OnPlay (Zora Unit) where
-  attr OnPlay value = unsafeAttribute { key: "play", value: cb' (Cb (const (runImpure (value $> true)))) }
+  attr OnPlay value = unsafeAttribute
+    { key: "play", value: cb' (Cb (const (runImpure (value $> true)))) }
+
 instance Attr anything OnPlay (Zora Boolean) where
-  attr OnPlay value = unsafeAttribute { key: "play", value: cb' (Cb (const (runImpure value))) }
+  attr OnPlay value = unsafeAttribute
+    { key: "play", value: cb' (Cb (const (runImpure value))) }

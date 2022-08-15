@@ -15,7 +15,8 @@ colgroup
    . AnEvent Zora (Attribute Colgroup_)
   -> Array (Domable lock payload)
   -> Domable lock payload
-colgroup attributes kids = Element' (elementify "colgroup" attributes (fixed kids))
+colgroup attributes kids = Element'
+  (elementify "colgroup" attributes (fixed kids))
 
 colgroup_
   :: forall lock payload

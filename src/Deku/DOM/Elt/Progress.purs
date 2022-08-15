@@ -15,7 +15,8 @@ progress
    . AnEvent Zora (Attribute Progress_)
   -> Array (Domable lock payload)
   -> Domable lock payload
-progress attributes kids = Element' (elementify "progress" attributes (fixed kids))
+progress attributes kids = Element'
+  (elementify "progress" attributes (fixed kids))
 
 progress_
   :: forall lock payload

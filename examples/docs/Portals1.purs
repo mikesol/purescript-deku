@@ -26,7 +26,10 @@ data MainUIAction
 
 data TodoAction = Prioritize | Delete
 
-px =  Proxy    :: Proxy         """<div>
+px =
+  Proxy
+    :: Proxy
+         """<div>
   <h1>Portals</h1>
 
   <h2>Zapping from place to place</h2>
@@ -54,13 +57,13 @@ px =  Proxy    :: Proxy         """<div>
   <p>In this section, we used portals to move an element to different areas of the DOM. In the next section, we'll learn how to do <a ~next~ style="cursor:pointer;">static site rendering</a>.</p>
 </div>"""
 
-portals1 :: forall r. {|PageOptions r}  -> Nut
+portals1 :: forall r. { | PageOptions r } -> Nut
 portals1 options = px ~~
   { code: nut
       ( D.pre_
           [ D.code_
               [ text_
-                                 Examples.portals1
+                  Examples.portals1
               ]
           ]
       )
@@ -94,5 +97,9 @@ portals1 options = px ~~
                   , D.div_ [ flips true, flips false ]
                   ]
       )
-  , next: oneOfMap pure [D.OnClick := (cb (\e -> preventDefault e *> options.dpage SSR *> scrollToTop) ), D.Href := (options.slug <> "ssr/") ]
+  , next: oneOfMap pure
+      [ D.OnClick :=
+          (cb (\e -> preventDefault e *> options.dpage SSR *> scrollToTop))
+      , D.Href := (options.slug <> "ssr/")
+      ]
   }

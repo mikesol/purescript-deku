@@ -15,7 +15,8 @@ datalist
    . AnEvent Zora (Attribute Datalist_)
   -> Array (Domable lock payload)
   -> Domable lock payload
-datalist attributes kids = Element' (elementify "datalist" attributes (fixed kids))
+datalist attributes kids = Element'
+  (elementify "datalist" attributes (fixed kids))
 
 datalist_
   :: forall lock payload

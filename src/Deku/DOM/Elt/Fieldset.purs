@@ -15,7 +15,8 @@ fieldset
    . AnEvent Zora (Attribute Fieldset_)
   -> Array (Domable lock payload)
   -> Domable lock payload
-fieldset attributes kids = Element' (elementify "fieldset" attributes (fixed kids))
+fieldset attributes kids = Element'
+  (elementify "fieldset" attributes (fixed kids))
 
 fieldset_
   :: forall lock payload

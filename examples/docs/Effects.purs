@@ -54,7 +54,9 @@ clickCb push = cb
 clickText = "Click to get some random user data." :: String
 
 px =
-  Proxy    :: Proxy         """<div>
+  Proxy
+    :: Proxy
+         """<div>
   <h1>Effects</h1>
 
   <h2>Let's make a network call</h2>
@@ -77,7 +79,7 @@ px =
   <p>It is also possible to handle events (and by extension effectful actions in events, like network calls) in Pursx. Let's see how in the <a ~next~ style="cursor:pointer;">second Pursx section</a>.</p>
 </div>"""
 
-effects :: forall r. {|PageOptions r}  -> Nut
+effects :: forall r. { | PageOptions r } -> Nut
 effects options = px ~~
   { code: nut
       ( D.pre_
@@ -132,5 +134,9 @@ effects options = px ~~
                 [ D.pre_ [ D.code_ [ text (pure "" <|> result) ] ] ]
             ]
       )
-  , next: oneOfMap pure [D.OnClick := (cb (\e -> preventDefault e *> options.dpage PURSX2 *> scrollToTop) ), D.Href := (options.slug <> "pursx2/") ]
+  , next: oneOfMap pure
+      [ D.OnClick :=
+          (cb (\e -> preventDefault e *> options.dpage PURSX2 *> scrollToTop))
+      , D.Href := (options.slug <> "pursx2/")
+      ]
   }

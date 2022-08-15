@@ -15,7 +15,8 @@ picture
    . AnEvent Zora (Attribute Picture_)
   -> Array (Domable lock payload)
   -> Domable lock payload
-picture attributes kids = Element' (elementify "picture" attributes (fixed kids))
+picture attributes kids = Element'
+  (elementify "picture" attributes (fixed kids))
 
 picture_
   :: forall lock payload

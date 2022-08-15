@@ -15,7 +15,8 @@ summary
    . AnEvent Zora (Attribute Summary_)
   -> Array (Domable lock payload)
   -> Domable lock payload
-summary attributes kids = Element' (elementify "summary" attributes (fixed kids))
+summary attributes kids = Element'
+  (elementify "summary" attributes (fixed kids))
 
 summary_
   :: forall lock payload

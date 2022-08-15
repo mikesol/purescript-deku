@@ -15,7 +15,8 @@ figcaption
    . AnEvent Zora (Attribute Figcaption_)
   -> Array (Domable lock payload)
   -> Domable lock payload
-figcaption attributes kids = Element' (elementify "figcaption" attributes (fixed kids))
+figcaption attributes kids = Element'
+  (elementify "figcaption" attributes (fixed kids))
 
 figcaption_
   :: forall lock payload

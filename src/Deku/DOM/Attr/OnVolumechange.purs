@@ -6,13 +6,23 @@ import Deku.Attribute (class Attr, Cb(..), cb', unsafeAttribute)
 import Hyrule.Zora (Zora, runImpure)
 
 data OnVolumechange = OnVolumechange
+
 instance Attr anything OnVolumechange Cb where
-  attr OnVolumechange value = unsafeAttribute { key: "volumechange", value: cb' value }
+  attr OnVolumechange value = unsafeAttribute
+    { key: "volumechange", value: cb' value }
+
 instance Attr anything OnVolumechange (Effect Unit) where
-  attr OnVolumechange value = unsafeAttribute { key: "volumechange", value: cb' (Cb (const (value $> true))) }
+  attr OnVolumechange value = unsafeAttribute
+    { key: "volumechange", value: cb' (Cb (const (value $> true))) }
+
 instance Attr anything OnVolumechange (Effect Boolean) where
-  attr OnVolumechange value = unsafeAttribute { key: "volumechange", value: cb' (Cb (const value)) }
+  attr OnVolumechange value = unsafeAttribute
+    { key: "volumechange", value: cb' (Cb (const value)) }
+
 instance Attr anything OnVolumechange (Zora Unit) where
-  attr OnVolumechange value = unsafeAttribute { key: "volumechange", value: cb' (Cb (const (runImpure (value $> true)))) }
+  attr OnVolumechange value = unsafeAttribute
+    { key: "volumechange", value: cb' (Cb (const (runImpure (value $> true)))) }
+
 instance Attr anything OnVolumechange (Zora Boolean) where
-  attr OnVolumechange value = unsafeAttribute { key: "volumechange", value: cb' (Cb (const (runImpure value))) }
+  attr OnVolumechange value = unsafeAttribute
+    { key: "volumechange", value: cb' (Cb (const (runImpure value))) }

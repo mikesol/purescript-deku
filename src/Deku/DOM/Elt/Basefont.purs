@@ -15,7 +15,8 @@ basefont
    . AnEvent Zora (Attribute Basefont_)
   -> Array (Domable lock payload)
   -> Domable lock payload
-basefont attributes kids = Element' (elementify "basefont" attributes (fixed kids))
+basefont attributes kids = Element'
+  (elementify "basefont" attributes (fixed kids))
 
 basefont_
   :: forall lock payload

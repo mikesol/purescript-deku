@@ -21,7 +21,9 @@ type UIEvents = V
   )
 
 px =
-  Proxy    :: Proxy         """<div>
+  Proxy
+    :: Proxy
+         """<div>
   <h1>Server-side rendering</h1>
 
   <h2>When performance matters!</h2>
@@ -141,15 +143,16 @@ ssrPage _ = px ~~
           [ D.code_
               [ text
                   ( makeEvent \k ->
-                      ( liftPure ( runSSR
-                            ( Template
-                                { head:
-                                    "<!DOCTYPE html><html><head><script src=\"bundle.js\" defer></script></head>"
-                                , tail: "</html>"
-                                }
-                            )
-                            app
-                        ) >>= k
+                      ( liftPure
+                          ( runSSR
+                              ( Template
+                                  { head:
+                                      "<!DOCTYPE html><html><head><script src=\"bundle.js\" defer></script></head>"
+                                  , tail: "</html>"
+                                  }
+                              )
+                              app
+                          ) >>= k
                       ) *> (pure (pure unit))
                   )
               ]

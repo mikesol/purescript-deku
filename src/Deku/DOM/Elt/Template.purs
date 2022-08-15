@@ -15,7 +15,8 @@ template
    . AnEvent Zora (Attribute Template_)
   -> Array (Domable lock payload)
   -> Domable lock payload
-template attributes kids = Element' (elementify "template" attributes (fixed kids))
+template attributes kids = Element'
+  (elementify "template" attributes (fixed kids))
 
 template_
   :: forall lock payload

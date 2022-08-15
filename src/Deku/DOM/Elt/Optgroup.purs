@@ -15,7 +15,8 @@ optgroup
    . AnEvent Zora (Attribute Optgroup_)
   -> Array (Domable lock payload)
   -> Domable lock payload
-optgroup attributes kids = Element' (elementify "optgroup" attributes (fixed kids))
+optgroup attributes kids = Element'
+  (elementify "optgroup" attributes (fixed kids))
 
 optgroup_
   :: forall lock payload

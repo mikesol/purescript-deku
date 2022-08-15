@@ -15,7 +15,8 @@ article
    . AnEvent Zora (Attribute Article_)
   -> Array (Domable lock payload)
   -> Domable lock payload
-article attributes kids = Element' (elementify "article" attributes (fixed kids))
+article attributes kids = Element'
+  (elementify "article" attributes (fixed kids))
 
 article_
   :: forall lock payload

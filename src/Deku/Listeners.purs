@@ -55,7 +55,7 @@ slider = alt (pure $ D.Xtype := "range") <<< map
 
 textInput
   :: forall e
-  . AnEvent Zora (String -> Effect Unit)
+   . AnEvent Zora (String -> Effect Unit)
   -> AnEvent Zora (Attribute e)
 textInput = map \push -> D.OnInput := cb \e -> for_
   (target e >>= fromEventTarget)

@@ -17,7 +17,9 @@ import Hyrule.Zora (Zora)
 import Type.Proxy (Proxy(..))
 
 px =
-  Proxy    :: Proxy         """<div>
+  Proxy
+    :: Proxy
+         """<div>
   <button ~btn~>i do nothing</button>
   ~somethingElse~
   ~aThirdThing~
