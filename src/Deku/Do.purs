@@ -13,7 +13,6 @@ module Deku.Do
 
 import Prelude hiding (bind, discard)
 
-import Bolson.Always (AlwaysEffect)
 import Bolson.Core (envy)
 import Bolson.Core as Bolson
 import Control.Alt ((<|>))
@@ -21,7 +20,7 @@ import Control.Monad.ST.Class (class MonadST)
 import Data.Profunctor (lcmap)
 import Data.Symbol (class IsSymbol)
 import Data.Tuple.Nested (type (/\), (/\))
-import Deku.Core (bussedUncurried, vbussedUncurried)
+import Deku.Core (LiftImpure, bussedUncurried, vbussedUncurried)
 import Effect (Effect)
 import FRP.Event (AnEvent, mailboxed, memoize)
 import FRP.Event.VBus (class VBus, V)
@@ -71,7 +70,7 @@ useStates'
    . RowToList bus rbus
   => RowToList pushi pushR
   => MapRecordWithIndex pushR
-       (ConstMapping (AlwaysEffect Zora))
+       (ConstMapping LiftImpure)
        pushi
        pusho
   => VBus rbus pushi event u
@@ -121,7 +120,7 @@ useStates
   => InitializeEvents needleRL needle event
   => RowToList pushi pushR
   => MapRecordWithIndex pushR
-       (ConstMapping (AlwaysEffect Zora))
+       (ConstMapping LiftImpure)
        pushi
        pusho
   => VBus rbus pushi event u

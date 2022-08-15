@@ -1,37 +1,38 @@
 module Deku.Core
-  ( DOMInterpret(..)
-  , MakeRoot
-  , MakeElement
+  ( ANut(..)
   , AttributeParent
-  , MakeText
-  , MakePursx
-  , GiveNewParent
-  , DisconnectElement
+  , DOMInterpret(..)
   , DeleteFromCache
-  , SendToPos
-  , SetProp
-  , SetCb
-  , SetText
+  , DisconnectElement
+  , Domable
+  , GiveNewParent
+  , LiftImpure(..)
+  , MakeElement
+  , MakePursx
+  , MakeRoot
+  , MakeText
+  , Node(..)
   , Nut
-  , ANut(..)
+  , SendToPos
+  , SetCb
+  , SetProp
+  , SetText
   , bus
   , busUncurried
   , bussed
   , bussedUncurried
-  , vbussed
-  , vbussedUncurried
-  , remove
-  , sendToTop
-  , sendToPos
+  , hlift
   , insert
   , insert_
-  , Domable
-  , Node(..)
+  , remove
+  , sendToPos
+  , sendToTop
+  , vbussed
+  , vbussedUncurried
   ) where
 
 import Prelude
 
-import Bolson.Always (AlwaysEffect, halways)
 import Bolson.Core (Scope)
 import Bolson.Core as Bolson
 import Data.Maybe (Maybe(..))
@@ -45,10 +46,10 @@ import FRP.Event (AnEvent)
 import FRP.Event as FRP.Event
 import FRP.Event.VBus (class VBus, V, vbus)
 import Foreign.Object (Object)
-import Heterogeneous.Mapping (class MapRecordWithIndex, ConstMapping)
+import Heterogeneous.Mapping (class HMap, class MapRecordWithIndex, class Mapping, ConstMapping, hmap)
 import Hyrule.Zora (Zora, runImpure)
 import Prim.RowList (class RowToList)
-import Type.Proxy (Proxy(..))
+import Type.Proxy (Proxy)
 import Web.DOM as Web.DOM
 
 type Nut = forall lock payload. Domable lock payload
@@ -81,12 +82,30 @@ bussedUncurried
   -> Bolson.Entity logic obj Zora lock
 bussedUncurried = curry >>> bussed
 
+--
+
+data LiftImpure = LiftImpure
+
+instance Mapping LiftImpure (i -> Zora Unit) (i -> Effect Unit) where
+  mapping _ = map runImpure
+
+instance
+  ( HMap LiftImpure (Record i) (Record o)
+  ) =>
+  Mapping LiftImpure (Record i) (Record o) where
+  mapping _ = hmap LiftImpure
+
+hlift :: forall i o. HMap LiftImpure i o => i -> o
+hlift = hmap LiftImpure
+
+--
+
 vbussed
   :: forall logic obj lock rbus bus pushi pusho pushR event u
    . RowToList bus rbus
   => RowToList pushi pushR
   => MapRecordWithIndex pushR
-       (ConstMapping (AlwaysEffect Zora))
+       (ConstMapping LiftImpure)
        pushi
        pusho
   => VBus rbus pushi event u
@@ -94,14 +113,14 @@ vbussed
   -> ({ | pusho } -> { | event } -> Bolson.Entity logic obj Zora lock)
   -> Bolson.Entity logic obj Zora lock
 vbussed px f = Bolson.EventfulElement'
-  (Bolson.EventfulElement (vbus px (lcmap (halways (Proxy :: Proxy Zora)) f)))
+  (Bolson.EventfulElement (vbus px (lcmap hlift f)))
 
 vbussedUncurried
   :: forall logic obj lock rbus bus pushi pusho pushR event u
    . RowToList bus rbus
   => RowToList pushi pushR
   => MapRecordWithIndex pushR
-       (ConstMapping (AlwaysEffect Zora))
+       (ConstMapping LiftImpure)
        pushi
        pusho
   => VBus rbus pushi event u
