@@ -3,25 +3,23 @@ module Deku.DOM.Elt.Colgroup where
 import Control.Plus (empty)
 import Deku.Attribute (Attribute)
 import Deku.Control (elementify)
-import Deku.Core (Domable, class Korok)
+import Deku.Core (Domable)
 import Bolson.Core (Entity(..), fixed)
 import FRP.Event (AnEvent)
+import Hyrule.Zora (Zora)
 
 data Colgroup_
 
 colgroup
-  :: forall s m lock payload
-   . Korok s m
-  => AnEvent m (Attribute Colgroup_)
-  -> Array (Domable m lock payload)
-  -> Domable m lock payload
-colgroup attributes kids = Element'
-  (elementify "colgroup" attributes (fixed kids))
+  :: forall lock payload
+   . AnEvent Zora (Attribute Colgroup_)
+  -> Array (Domable lock payload)
+  -> Domable lock payload
+colgroup attributes kids = Element' (elementify "colgroup" attributes (fixed kids))
 
 colgroup_
-  :: forall s m lock payload
-   . Korok s m
-  => Array (Domable m lock payload)
-  -> Domable m lock payload
+  :: forall lock payload
+   . Array (Domable lock payload)
+  -> Domable lock payload
 colgroup_ = colgroup empty
 

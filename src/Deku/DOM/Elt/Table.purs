@@ -3,24 +3,23 @@ module Deku.DOM.Elt.Table where
 import Control.Plus (empty)
 import Deku.Attribute (Attribute)
 import Deku.Control (elementify)
-import Deku.Core (Domable, class Korok)
+import Deku.Core (Domable)
 import Bolson.Core (Entity(..), fixed)
 import FRP.Event (AnEvent)
+import Hyrule.Zora (Zora)
 
 data Table_
 
 table
-  :: forall s m lock payload
-   . Korok s m
-  => AnEvent m (Attribute Table_)
-  -> Array (Domable m lock payload)
-  -> Domable m lock payload
+  :: forall lock payload
+   . AnEvent Zora (Attribute Table_)
+  -> Array (Domable lock payload)
+  -> Domable lock payload
 table attributes kids = Element' (elementify "table" attributes (fixed kids))
 
 table_
-  :: forall s m lock payload
-   . Korok s m
-  => Array (Domable m lock payload)
-  -> Domable m lock payload
+  :: forall lock payload
+   . Array (Domable lock payload)
+  -> Domable lock payload
 table_ = table empty
 

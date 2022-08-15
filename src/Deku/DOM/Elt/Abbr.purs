@@ -3,24 +3,23 @@ module Deku.DOM.Elt.Abbr where
 import Control.Plus (empty)
 import Deku.Attribute (Attribute)
 import Deku.Control (elementify)
-import Deku.Core (Domable, class Korok)
+import Deku.Core (Domable)
 import Bolson.Core (Entity(..), fixed)
 import FRP.Event (AnEvent)
+import Hyrule.Zora (Zora)
 
 data Abbr_
 
 abbr
-  :: forall s m lock payload
-   . Korok s m
-  => AnEvent m (Attribute Abbr_)
-  -> Array (Domable m lock payload)
-  -> Domable m lock payload
+  :: forall lock payload
+   . AnEvent Zora (Attribute Abbr_)
+  -> Array (Domable lock payload)
+  -> Domable lock payload
 abbr attributes kids = Element' (elementify "abbr" attributes (fixed kids))
 
 abbr_
-  :: forall s m lock payload
-   . Korok s m
-  => Array (Domable m lock payload)
-  -> Domable m lock payload
+  :: forall lock payload
+   . Array (Domable lock payload)
+  -> Domable lock payload
 abbr_ = abbr empty
 

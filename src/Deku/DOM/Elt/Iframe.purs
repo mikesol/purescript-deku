@@ -3,24 +3,23 @@ module Deku.DOM.Elt.Iframe where
 import Control.Plus (empty)
 import Deku.Attribute (Attribute)
 import Deku.Control (elementify)
-import Deku.Core (Domable, class Korok)
+import Deku.Core (Domable)
 import Bolson.Core (Entity(..), fixed)
 import FRP.Event (AnEvent)
+import Hyrule.Zora (Zora)
 
 data Iframe_
 
 iframe
-  :: forall s m lock payload
-   . Korok s m
-  => AnEvent m (Attribute Iframe_)
-  -> Array (Domable m lock payload)
-  -> Domable m lock payload
+  :: forall lock payload
+   . AnEvent Zora (Attribute Iframe_)
+  -> Array (Domable lock payload)
+  -> Domable lock payload
 iframe attributes kids = Element' (elementify "iframe" attributes (fixed kids))
 
 iframe_
-  :: forall s m lock payload
-   . Korok s m
-  => Array (Domable m lock payload)
-  -> Domable m lock payload
+  :: forall lock payload
+   . Array (Domable lock payload)
+  -> Domable lock payload
 iframe_ = iframe empty
 

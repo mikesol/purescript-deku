@@ -3,25 +3,23 @@ module Deku.DOM.Elt.Article where
 import Control.Plus (empty)
 import Deku.Attribute (Attribute)
 import Deku.Control (elementify)
-import Deku.Core (Domable, class Korok)
+import Deku.Core (Domable)
 import Bolson.Core (Entity(..), fixed)
 import FRP.Event (AnEvent)
+import Hyrule.Zora (Zora)
 
 data Article_
 
 article
-  :: forall s m lock payload
-   . Korok s m
-  => AnEvent m (Attribute Article_)
-  -> Array (Domable m lock payload)
-  -> Domable m lock payload
-article attributes kids = Element'
-  (elementify "article" attributes (fixed kids))
+  :: forall lock payload
+   . AnEvent Zora (Attribute Article_)
+  -> Array (Domable lock payload)
+  -> Domable lock payload
+article attributes kids = Element' (elementify "article" attributes (fixed kids))
 
 article_
-  :: forall s m lock payload
-   . Korok s m
-  => Array (Domable m lock payload)
-  -> Domable m lock payload
+  :: forall lock payload
+   . Array (Domable lock payload)
+  -> Domable lock payload
 article_ = article empty
 

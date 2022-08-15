@@ -3,24 +3,23 @@ module Deku.DOM.Elt.Font where
 import Control.Plus (empty)
 import Deku.Attribute (Attribute)
 import Deku.Control (elementify)
-import Deku.Core (Domable, class Korok)
+import Deku.Core (Domable)
 import Bolson.Core (Entity(..), fixed)
 import FRP.Event (AnEvent)
+import Hyrule.Zora (Zora)
 
 data Font_
 
 font
-  :: forall s m lock payload
-   . Korok s m
-  => AnEvent m (Attribute Font_)
-  -> Array (Domable m lock payload)
-  -> Domable m lock payload
+  :: forall lock payload
+   . AnEvent Zora (Attribute Font_)
+  -> Array (Domable lock payload)
+  -> Domable lock payload
 font attributes kids = Element' (elementify "font" attributes (fixed kids))
 
 font_
-  :: forall s m lock payload
-   . Korok s m
-  => Array (Domable m lock payload)
-  -> Domable m lock payload
+  :: forall lock payload
+   . Array (Domable lock payload)
+  -> Domable lock payload
 font_ = font empty
 

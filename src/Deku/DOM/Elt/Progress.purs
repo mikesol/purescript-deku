@@ -3,25 +3,23 @@ module Deku.DOM.Elt.Progress where
 import Control.Plus (empty)
 import Deku.Attribute (Attribute)
 import Deku.Control (elementify)
-import Deku.Core (Domable, class Korok)
+import Deku.Core (Domable)
 import Bolson.Core (Entity(..), fixed)
 import FRP.Event (AnEvent)
+import Hyrule.Zora (Zora)
 
 data Progress_
 
 progress
-  :: forall s m lock payload
-   . Korok s m
-  => AnEvent m (Attribute Progress_)
-  -> Array (Domable m lock payload)
-  -> Domable m lock payload
-progress attributes kids = Element'
-  (elementify "progress" attributes (fixed kids))
+  :: forall lock payload
+   . AnEvent Zora (Attribute Progress_)
+  -> Array (Domable lock payload)
+  -> Domable lock payload
+progress attributes kids = Element' (elementify "progress" attributes (fixed kids))
 
 progress_
-  :: forall s m lock payload
-   . Korok s m
-  => Array (Domable m lock payload)
-  -> Domable m lock payload
+  :: forall lock payload
+   . Array (Domable lock payload)
+  -> Domable lock payload
 progress_ = progress empty
 

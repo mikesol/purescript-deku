@@ -3,24 +3,23 @@ module Deku.DOM.Elt.Dt where
 import Control.Plus (empty)
 import Deku.Attribute (Attribute)
 import Deku.Control (elementify)
-import Deku.Core (Domable, class Korok)
+import Deku.Core (Domable)
 import Bolson.Core (Entity(..), fixed)
 import FRP.Event (AnEvent)
+import Hyrule.Zora (Zora)
 
 data Dt_
 
 dt
-  :: forall s m lock payload
-   . Korok s m
-  => AnEvent m (Attribute Dt_)
-  -> Array (Domable m lock payload)
-  -> Domable m lock payload
+  :: forall lock payload
+   . AnEvent Zora (Attribute Dt_)
+  -> Array (Domable lock payload)
+  -> Domable lock payload
 dt attributes kids = Element' (elementify "dt" attributes (fixed kids))
 
 dt_
-  :: forall s m lock payload
-   . Korok s m
-  => Array (Domable m lock payload)
-  -> Domable m lock payload
+  :: forall lock payload
+   . Array (Domable lock payload)
+  -> Domable lock payload
 dt_ = dt empty
 
