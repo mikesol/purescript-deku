@@ -1,6 +1,7 @@
 { name = "deku"
 , dependencies =
-  [ "arrays"
+  [ "aff"
+  , "arrays"
   , "bolson"
   , "control"
   , "effect"

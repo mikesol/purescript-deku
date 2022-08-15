@@ -8,7 +8,7 @@ import Data.FastVect.FastVect as V
 import Data.Foldable (oneOfMap)
 import Data.Profunctor (lcmap)
 import Deku.Attribute (cb, (:=))
-import Deku.Control (dyn_, portal, switcher, text_)
+import Deku.Control (dyn_, portal, switcher_, text_)
 import Deku.Core (Nut, bus, insert_)
 import Deku.DOM as D
 import Deku.Example.Docs.Types (Page(..), PageOptions)
@@ -87,11 +87,11 @@ portals1 options = px ~~
                   p0 = index (Proxy :: _ 0) v
                   p1 = index (Proxy :: _ 1) v
                   ev = fold (const not) event
-                  flips = switcher (if _ then p0 else p1) <<< ev
+                  flips = switcher_ D.span (if _ then p0 else p1) <<< ev
                 D.div_
                   [ D.button (pure $ D.OnClick := cb (const $ push unit))
                       [ text_ "Switch videos" ]
-                  , D.div_ [ D.span_ [ flips true ], D.span_ [ flips false ] ]
+                  , D.div_ [ flips true, flips false ]
                   ]
       )
   , next: oneOfMap pure [D.OnClick := (cb (\e -> preventDefault e *> options.dpage SSR *> scrollToTop) ), D.Href := (options.slug <> "ssr/") ]

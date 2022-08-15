@@ -14,12 +14,12 @@ module Deku.Control
   , fixed_
   , envy
   , envy_
-  , module Bolson.Control
+  , switcher
+  , switcher_
   ) where
 
 import Prelude
 
-import Bolson.Control (switcher)
 import Bolson.Control as Bolson
 import Bolson.Core (Element(..), Entity(..), EventfulElement(..), FixedChildren(..), PSR, Scope(..))
 import Bolson.Core as BCore
@@ -247,6 +247,25 @@ __internalDekuFlatten
   -> AnEvent m payload
 __internalDekuFlatten = Bolson.flatten
   portalFlatten
+
+switcher
+  :: forall a s m element lock payload
+   . Korok s m
+  => (AnEvent m (Attribute element) -> Array (Domable m lock payload) -> Domable m lock payload)
+  -> AnEvent m (Attribute element)
+  -> (a -> Domable m lock payload)
+  -> AnEvent m a
+  -> Domable m lock payload
+switcher f e1 i e2 = f e1 [Bolson.switcher i e2 ]
+
+switcher_
+  :: forall a s m element lock payload
+   . Korok s m
+  => (AnEvent m (Attribute element) -> Array (Domable m lock payload) -> Domable m lock payload)
+  -> (a -> Domable m lock payload)
+  -> AnEvent m a
+  -> Domable m lock payload
+switcher_ f i e = f empty [Bolson.switcher i e ]
 
 dyn
   :: forall s m element lock payload

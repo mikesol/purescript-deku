@@ -6,6 +6,8 @@ module Deku.Listeners
   , keyDown
   , keyPress
   , textInput
+  , injectElement
+  , injectElementT
   ) where
 
 import Prelude
@@ -14,9 +16,13 @@ import Control.Alt (alt)
 import Control.Monad.ST.Class (class MonadST)
 import Data.Foldable (for_)
 import Deku.Attribute (class Attr, Attribute, Cb, attr, cb, (:=))
+import Deku.Core (class Korok)
 import Deku.DOM as D
 import Effect (Effect)
+import Effect.Aff (launchAff_, delay, Milliseconds(..))
+import Effect.Class (liftEffect)
 import FRP.Event (AnEvent)
+import Web.DOM (Element)
 import Web.Event.Event (target)
 import Web.HTML.HTMLInputElement (fromEventTarget, value, valueAsNumber)
 import Web.UIEvent.KeyboardEvent (KeyboardEvent, fromEvent)
@@ -88,3 +94,21 @@ keyPress
   => AnEvent m (KeyboardEvent -> Effect Unit)
   -> AnEvent m (Attribute eleemnt)
 keyPress = keyEvent' D.OnKeypress
+
+injectElement
+  :: forall e s m
+   . Korok s m
+  => Attr e D.Self (Element -> Effect Unit)
+  => (Element -> Effect Unit)
+  -> AnEvent m (Attribute e)
+injectElement f = pure
+  (D.Self := \s -> launchAff_ (delay (Milliseconds 0.0) *> liftEffect (f s)))
+
+injectElementT
+  :: forall e te s m
+   . Korok s m
+  => Attr e D.SelfT (te -> Effect Unit)
+  => (te -> Effect Unit)
+  -> AnEvent m (Attribute e)
+injectElementT f = pure
+  (D.SelfT := \s -> launchAff_ (delay (Milliseconds 0.0) *> liftEffect (f s)))

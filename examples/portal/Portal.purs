@@ -8,7 +8,7 @@ import Data.FastVect.FastVect as V
 import Data.Foldable (oneOfMap)
 import Data.Profunctor (lcmap)
 import Deku.Attribute (cb, (:=))
-import Deku.Control (dyn_, portal, switcher, text_)
+import Deku.Control (dyn_, portal, switcher_, text_)
 import Deku.Core (insert_)
 import Deku.DOM as D
 import Deku.Toplevel (runInBody)
@@ -49,13 +49,13 @@ main = runInBody
                           p0 = index (Proxy :: _ 0) v
                           p1 = index (Proxy :: _ 1) v
                           ev = fold (const not) event
-                          flips = switcher (if _ then p0 else p1) <<< ev
+                          flips = switcher_ D.div (if _ then p0 else p1) <<< ev
                         D.div_
                           [ D.button
                               (pure $ D.OnClick := cb (const $ push unit))
                               [ text_ "Switch videos" ]
                           , D.div_
-                              [ D.div_ [ flips true ], D.div_ [ flips false ] ]
+                              [ flips true, flips false ]
                           ]
               ]
           ]
@@ -88,12 +88,12 @@ main = runInBody
                           p0 = index (Proxy :: _ 0) v
                           p1 = index (Proxy :: _ 1) v
                           ev = fold (const not) event
-                          flips = switcher (if _ then p0 else p1) <<< ev
+                          flips = switcher_ D.div (if _ then p0 else p1) <<< ev
                         D.div_
                           [ D.button
                               (pure $ D.OnClick := cb (const $ push unit))
                               [ text_ "Toggle videos" ]
-                          , D.div_ [ flips true ]
+                          , flips true
                           ]
               ]
           ]
@@ -124,12 +124,12 @@ main = runInBody
                         let
                           p0 = index (Proxy :: _ 0) v
                           ev = fold (const not) event
-                          flips = switcher (if _ then p0 else D.div_ []) <<< ev
+                          flips = switcher_ D.div (if _ then p0 else D.div_ []) <<< ev
                         D.div_
                           [ D.button
                               (pure $ D.OnClick := cb (const $ push unit))
                               [ text_ "Toggle videos" ]
-                          , D.div_ [ flips true ]
+                          , flips true
                           ]
               ]
           ]

@@ -8,7 +8,7 @@ import Data.FastVect.FastVect as V
 import Data.Foldable (oneOfMap)
 import Data.Profunctor (lcmap)
 import Deku.Attribute ((:=))
-import Deku.Control (portal, switcher, text_)
+import Deku.Control (portal, switcher_, text_)
 import Deku.Core (Domable)
 import Deku.DOM as D
 import Deku.Toplevel (runInBody1)
@@ -42,10 +42,10 @@ main = runInBody1
             ev :: Boolean -> AnEvent _ Boolean
             ev = fold (const not) event
             flips :: Boolean -> Domable _ _ _
-            flips = switcher (if _ then p0 else p1) <<< ev
+            flips = switcher_ D.span (if _ then p0 else p1) <<< ev
           D.div_
             [ D.button (pure $ D.OnClick := push unit)
                 [ text_ "Switch videos" ]
-            , D.div_ [ D.span_ [ flips true ], D.span_ [ flips false ] ]
+            , D.div_ [ D.span_ [ flips true ], flips false ]
             ]
   )
