@@ -56,9 +56,9 @@ var on = function(f) {
   };
 };
 var flip = function(f) {
-  return function(b) {
+  return function(b2) {
     return function(a2) {
-      return f(a2)(b);
+      return f(a2)(b2);
     };
   };
 };
@@ -142,16 +142,16 @@ var apply = function(dict) {
 };
 var applySecond = function(dictApply) {
   return function(a2) {
-    return function(b) {
-      return apply(dictApply)(map(dictApply.Functor0())($$const(identity(categoryFn)))(a2))(b);
+    return function(b2) {
+      return apply(dictApply)(map(dictApply.Functor0())($$const(identity(categoryFn)))(a2))(b2);
     };
   };
 };
 var lift2 = function(dictApply) {
   return function(f) {
     return function(a2) {
-      return function(b) {
-        return apply(dictApply)(map(dictApply.Functor0())(f)(a2))(b);
+      return function(b2) {
+        return apply(dictApply)(map(dictApply.Functor0())(f)(a2))(b2);
       };
     };
   };
@@ -249,9 +249,9 @@ var join = function(dictBind) {
 };
 
 // output/Data.Argonaut.Parser/foreign.js
-function _jsonParser(fail2, succ2, s) {
+function _jsonParser(fail2, succ2, s2) {
   try {
-    return succ2(JSON.parse(s));
+    return succ2(JSON.parse(s2));
   } catch (e) {
     return fail2(e.message);
   }
@@ -279,12 +279,12 @@ var reflectSymbol = function(dict) {
 };
 
 // output/Record.Unsafe/foreign.js
-var unsafeGet = function(label4) {
+var unsafeGet = function(label5) {
   return function(rec) {
-    return rec[label4];
+    return rec[label5];
   };
 };
-var unsafeSet = function(label4) {
+var unsafeSet = function(label5) {
   return function(value13) {
     return function(rec) {
       var copy3 = {};
@@ -293,7 +293,7 @@ var unsafeSet = function(label4) {
           copy3[key2] = rec[key2];
         }
       }
-      copy3[label4] = value13;
+      copy3[label5] = value13;
       return copy3;
     };
   };
@@ -489,9 +489,9 @@ var showNumberImpl = function(n) {
   var str = n.toString();
   return isNaN(str + ".0") ? str : str + ".0";
 };
-var showStringImpl = function(s) {
-  var l = s.length;
-  return '"' + s.replace(/[\0-\x1F\x7F"\\]/g, function(c, i2) {
+var showStringImpl = function(s2) {
+  var l = s2.length;
+  return '"' + s2.replace(/[\0-\x1F\x7F"\\]/g, function(c, i2) {
     switch (c) {
       case '"':
       case "\\":
@@ -512,7 +512,7 @@ var showStringImpl = function(s) {
         return "\\v";
     }
     var k = i2 + 1;
-    var empty6 = k < l && s[k] >= "0" && s[k] <= "9" ? "\\&" : "";
+    var empty6 = k < l && s2[k] >= "0" && s2[k] <= "9" ? "\\&" : "";
     return "\\" + c.charCodeAt(0).toString(10) + empty6;
   }) + '"';
 };
@@ -780,14 +780,14 @@ var replicatePolyfill = function(count2) {
 };
 var replicate = typeof Array.prototype.fill === "function" ? replicateFill : replicatePolyfill;
 var fromFoldableImpl = function() {
-  function Cons3(head5, tail2) {
-    this.head = head5;
+  function Cons3(head6, tail2) {
+    this.head = head6;
     this.tail = tail2;
   }
   var emptyList = {};
-  function curryCons(head5) {
+  function curryCons(head6) {
     return function(tail2) {
-      return new Cons3(head5, tail2);
+      return new Cons3(head6, tail2);
     };
   }
   function listToArray(list) {
@@ -1195,8 +1195,8 @@ var write = function(val) {
 var $$new = _new;
 var modify$prime = modifyImpl;
 var modify = function(f) {
-  return modify$prime(function(s) {
-    var s$prime = f(s);
+  return modify$prime(function(s2) {
+    var s$prime = f(s2);
     return {
       state: s$prime,
       value: s$prime
@@ -1204,8 +1204,8 @@ var modify = function(f) {
   });
 };
 var modify_ = function(f) {
-  return function(s) {
-    return $$void(functorEffect)(modify(f)(s));
+  return function(s2) {
+    return $$void(functorEffect)(modify(f)(s2));
   };
 };
 
@@ -1282,8 +1282,8 @@ var $runtime_lazy3 = function(name16, moduleName, init3) {
 };
 var modify$prime2 = modifyImpl2;
 var modify2 = function(f) {
-  return modify$prime2(function(s) {
-    var s$prime = f(s);
+  return modify$prime2(function(s2) {
+    var s$prime = f(s2);
     return {
       state: s$prime,
       value: s$prime
@@ -1432,8 +1432,8 @@ var boolDisj = function(b1) {
     return b1 || b2;
   };
 };
-var boolNot = function(b) {
-  return !b;
+var boolNot = function(b2) {
+  return !b2;
 };
 
 // output/Data.HeytingAlgebra/index.js
@@ -1450,8 +1450,8 @@ var heytingAlgebraBoolean = {
   ff: false,
   tt: true,
   implies: function(a2) {
-    return function(b) {
-      return disj(heytingAlgebraBoolean)(not(heytingAlgebraBoolean)(a2))(b);
+    return function(b2) {
+      return disj(heytingAlgebraBoolean)(not(heytingAlgebraBoolean)(a2))(b2);
     };
   },
   conj: boolConj,
@@ -1827,14 +1827,14 @@ var traverseArrayImpl = function() {
     return [a2];
   }
   function array2(a2) {
-    return function(b) {
-      return [a2, b];
+    return function(b2) {
+      return [a2, b2];
     };
   }
   function array3(a2) {
-    return function(b) {
+    return function(b2) {
       return function(c) {
-        return [a2, b, c];
+        return [a2, b2, c];
       };
     };
   }
@@ -1844,7 +1844,7 @@ var traverseArrayImpl = function() {
     };
   }
   return function(apply3) {
-    return function(map2) {
+    return function(map3) {
       return function(pure2) {
         return function(f) {
           return function(array) {
@@ -1853,14 +1853,14 @@ var traverseArrayImpl = function() {
                 case 0:
                   return pure2([]);
                 case 1:
-                  return map2(array1)(f(array[bot]));
+                  return map3(array1)(f(array[bot]));
                 case 2:
-                  return apply3(map2(array2)(f(array[bot])))(f(array[bot + 1]));
+                  return apply3(map3(array2)(f(array[bot])))(f(array[bot + 1]));
                 case 3:
-                  return apply3(apply3(map2(array3)(f(array[bot])))(f(array[bot + 1])))(f(array[bot + 2]));
+                  return apply3(apply3(map3(array3)(f(array[bot])))(f(array[bot + 1])))(f(array[bot + 2]));
                 default:
                   var pivot = bot + Math.floor((top2 - bot) / 4) * 2;
-                  return apply3(map2(concat22)(go2(bot, pivot)))(go2(pivot, top2));
+                  return apply3(map3(concat22)(go2(bot, pivot)))(go2(pivot, top2));
               }
             }
             return go2(0, array.length);
@@ -1910,6 +1910,9 @@ var singleton2 = function(a2) {
 var index = /* @__PURE__ */ function() {
   return indexImpl(Just.create)(Nothing.value);
 }();
+var last = function(xs) {
+  return index(xs)(length(xs) - 1 | 0);
+};
 var fromFoldable = function(dictFoldable) {
   return fromFoldableImpl(foldr(dictFoldable));
 };
@@ -1992,8 +1995,8 @@ var state = function(dict) {
 };
 var modify4 = function(dictMonadState) {
   return function(f) {
-    return state(dictMonadState)(function(s) {
-      var s$prime = f(s);
+    return state(dictMonadState)(function(s2) {
+      var s$prime = f(s2);
       return new Tuple(s$prime, s$prime);
     });
   };
@@ -2271,19 +2274,19 @@ var keys = Object.keys || toArrayWithKey(function(k) {
 // output/Data.Function.Uncurried/foreign.js
 var runFn3 = function(fn) {
   return function(a2) {
-    return function(b) {
+    return function(b2) {
       return function(c) {
-        return fn(a2, b, c);
+        return fn(a2, b2, c);
       };
     };
   };
 };
 var runFn4 = function(fn) {
   return function(a2) {
-    return function(b) {
+    return function(b2) {
       return function(c) {
         return function(d) {
-          return fn(a2, b, c, d);
+          return fn(a2, b2, c, d);
         };
       };
     };
@@ -2357,9 +2360,9 @@ var thawST = _copyST;
 var mutate = function(f) {
   return function(m) {
     return runST(function __do2() {
-      var s = thawST(m)();
-      f(s)();
-      return s;
+      var s2 = thawST(m)();
+      f(s2)();
+      return s2;
     });
   };
 };
@@ -2374,11 +2377,11 @@ var insert = function(k) {
 var fromFoldable2 = function(dictFoldable) {
   return function(l) {
     return runST(function __do2() {
-      var s = newImpl();
+      var s2 = newImpl();
       foreach(fromFoldable(dictFoldable)(l))(function(v) {
-        return $$void(functorST)(poke2(v.value0)(v.value1)(s));
+        return $$void(functorST)(poke2(v.value0)(v.value1)(s2));
       })();
-      return s;
+      return s2;
     });
   };
 };
@@ -2616,7 +2619,7 @@ var functorList = {
 };
 var foldableList = {
   foldr: function(f) {
-    return function(b) {
+    return function(b2) {
       var rev3 = function() {
         var go2 = function($copy_acc) {
           return function($copy_v) {
@@ -2647,7 +2650,7 @@ var foldableList = {
         };
         return go2(Nil.value);
       }();
-      var $205 = foldl(foldableList)(flip(f))(b);
+      var $205 = foldl(foldableList)(flip(f))(b2);
       return function($206) {
         return $205(rev3($206));
       };
@@ -2659,14 +2662,14 @@ var foldableList = {
         var $tco_var_b = $copy_b;
         var $tco_done1 = false;
         var $tco_result;
-        function $tco_loop(b, v) {
+        function $tco_loop(b2, v) {
           if (v instanceof Nil) {
             $tco_done1 = true;
-            return b;
+            return b2;
           }
           ;
           if (v instanceof Cons) {
-            $tco_var_b = f(b)(v.value0);
+            $tco_var_b = f(b2)(v.value0);
             $copy_v = v.value1;
             return;
           }
@@ -2737,9 +2740,9 @@ var replace = function(s1) {
     };
   };
 };
-var joinWith = function(s) {
+var joinWith = function(s2) {
   return function(xs) {
-    return xs.join(s);
+    return xs.join(s2);
   };
 };
 
@@ -2852,9 +2855,9 @@ var recordProp = function(dictIsSymbol) {
               };
             };
           };
-          var unsafeGet2 = function(s) {
+          var unsafeGet2 = function(s2) {
             var $178 = fromJust();
-            var $179 = lookup(s);
+            var $179 = lookup(s2);
             return function($180) {
               return $178($179($180));
             };
@@ -4330,8 +4333,8 @@ var mapAccum = function(dictIsEvent) {
 
 // output/Unsafe.Reference/foreign.js
 function reallyUnsafeRefEq(a2) {
-  return function(b) {
-    return a2 === b;
+  return function(b2) {
+    return a2 === b2;
   };
 }
 
@@ -4366,8 +4369,8 @@ var sampleOn2 = function(dictMonadST) {
               return liftST(dictMonadST)($$void(functorST)(write2(new Just(a2))(latest)));
             }))(function(c1) {
               return bind(dictMonadST.Monad0().Bind1())(v1(function(f) {
-                return bind(dictMonadST.Monad0().Bind1())(liftST(dictMonadST)(read2(latest)))(traverse_(dictApplicative)(foldableMaybe)(function($160) {
-                  return k(f($160));
+                return bind(dictMonadST.Monad0().Bind1())(liftST(dictMonadST)(read2(latest)))(traverse_(dictApplicative)(foldableMaybe)(function($161) {
+                  return k(f($161));
                 }));
               }))(function(c2) {
                 return pure(dictApplicative)(applySecond(dictApplicative.Apply0())(c1)(c2));
@@ -4383,8 +4386,8 @@ var functorEvent = {
   map: function(f) {
     return function(v) {
       return function(k) {
-        return v(function($161) {
-          return k(f($161));
+        return v(function($162) {
+          return k(f($162));
         });
       };
     };
@@ -4393,9 +4396,9 @@ var functorEvent = {
 var fold4 = function(dictMonadST) {
   return function(f) {
     return function(v) {
-      return function(b) {
+      return function(b2) {
         return function(k) {
-          return bind(dictMonadST.Monad0().Bind1())(liftST(dictMonadST)(newSTRef(b)))(function(result) {
+          return bind(dictMonadST.Monad0().Bind1())(liftST(dictMonadST)(newSTRef(b2)))(function(result) {
             return v(function(a2) {
               return bind(dictMonadST.Monad0().Bind1())(liftST(dictMonadST)(modify2(f(a2))(result)))(k);
             });
@@ -4419,7 +4422,7 @@ var filter5 = function(dictApplicative) {
             return pure(dictApplicative)(unit);
           }
           ;
-          throw new Error("Failed pattern match at FRP.Event (line 184, column 13 - line 186, column 27): " + [v1.constructor.name]);
+          throw new Error("Failed pattern match at FRP.Event (line 185, column 13 - line 187, column 27): " + [v1.constructor.name]);
         });
       };
     };
@@ -4437,7 +4440,7 @@ var filter$prime = function(dictApplicative) {
         return Nothing.value;
       }
       ;
-      throw new Error("Failed pattern match at FRP.Event (line 112, column 13 - line 114, column 25): " + [v.constructor.name]);
+      throw new Error("Failed pattern match at FRP.Event (line 113, column 13 - line 115, column 25): " + [v.constructor.name]);
     });
   };
 };
@@ -4455,7 +4458,7 @@ var compactableEvent = function(dictApplicative) {
             return Nothing.value;
           }
           ;
-          throw new Error("Failed pattern match at FRP.Event (line 95, column 13 - line 97, column 33): " + [v.constructor.name]);
+          throw new Error("Failed pattern match at FRP.Event (line 96, column 13 - line 98, column 33): " + [v.constructor.name]);
         })(xs),
         right: filter5(dictApplicative)(function(v) {
           if (v instanceof Right) {
@@ -4466,7 +4469,7 @@ var compactableEvent = function(dictApplicative) {
             return Nothing.value;
           }
           ;
-          throw new Error("Failed pattern match at FRP.Event (line 102, column 13 - line 104, column 32): " + [v.constructor.name]);
+          throw new Error("Failed pattern match at FRP.Event (line 103, column 13 - line 105, column 32): " + [v.constructor.name]);
         })(xs)
       };
     }
@@ -4481,9 +4484,9 @@ var filterableEvent = function(dictApplicative) {
         return {
           yes: filter$prime(dictApplicative)(p2)(xs),
           no: filter$prime(dictApplicative)(function() {
-            var $162 = not(heytingAlgebraBoolean);
-            return function($163) {
-              return $162(p2($163));
+            var $163 = not(heytingAlgebraBoolean);
+            return function($164) {
+              return $163(p2($164));
             };
           }())(xs)
         };
@@ -4493,13 +4496,13 @@ var filterableEvent = function(dictApplicative) {
       return function(xs) {
         return {
           left: filterMap(filterableEvent(dictApplicative))(function() {
-            var $164 = either(Just.create)($$const(Nothing.value));
-            return function($165) {
-              return $164(f($165));
+            var $165 = either(Just.create)($$const(Nothing.value));
+            return function($166) {
+              return $165(f($166));
             };
           }())(xs),
-          right: filterMap(filterableEvent(dictApplicative))(function($166) {
-            return hush(f($166));
+          right: filterMap(filterableEvent(dictApplicative))(function($167) {
+            return hush(f($167));
           })(xs)
         };
       };
@@ -4551,15 +4554,21 @@ var biSampleOn = function(dictMonadST) {
                         return bind(dictMonadST.Monad0().Bind1())(liftST(dictMonadST)(write2(false)(capturing)))(function() {
                           return bind(dictMonadST.Monad0().Bind1())(liftST(dictMonadST)(freeze(replay1)))(function(samples1) {
                             return bind(dictMonadST.Monad0().Bind1())(liftST(dictMonadST)(freeze(replay2)))(function(samples2) {
-                              return discard(discardUnit)(dictMonadST.Monad0().Bind1())(for_(dictApplicative)(foldableArray)(samples1)(function(a2) {
-                                return bind(dictMonadST.Monad0().Bind1())(liftST(dictMonadST)(write2(new Just(a2))(latest1)))(function() {
-                                  return for_(dictApplicative)(foldableArray)(samples2)(function(f) {
-                                    return bind(dictMonadST.Monad0().Bind1())(liftST(dictMonadST)(write2(new Just(f))(latest2)))(function() {
-                                      return k(f(a2));
+                              return discard(discardUnit)(dictMonadST.Monad0().Bind1())(function() {
+                                if (samples1.length === 0) {
+                                  return $$void(dictApplicative.Apply0().Functor0())(liftST(dictMonadST)(write2(last(samples2))(latest2)));
+                                }
+                                ;
+                                return for_(dictApplicative)(foldableArray)(samples1)(function(a2) {
+                                  return bind(dictMonadST.Monad0().Bind1())(liftST(dictMonadST)(write2(new Just(a2))(latest1)))(function() {
+                                    return for_(dictApplicative)(foldableArray)(samples2)(function(f) {
+                                      return bind(dictMonadST.Monad0().Bind1())(liftST(dictMonadST)(write2(new Just(f))(latest2)))(function() {
+                                        return k(f(a2));
+                                      });
                                     });
                                   });
                                 });
-                              }))(function() {
+                              }())(function() {
                                 return bind(dictMonadST.Monad0().Bind1())(liftST(dictMonadST)(splice(0)(length(samples1))([])(replay1)))(function() {
                                   return bind(dictMonadST.Monad0().Bind1())(liftST(dictMonadST)(splice(0)(length(samples2))([])(replay2)))(function() {
                                     return pure(dictApplicative)(applySecond(dictApplicative.Apply0())(c1)(c2));
@@ -4584,19 +4593,19 @@ var biSampleOn = function(dictMonadST) {
 var subscribe = function(i2) {
   return function(v) {
     return v;
-  }($lazy_backdoor(269).subscribe)(i2);
+  }($lazy_backdoor(273).subscribe)(i2);
 };
 var makeEvent = function(i2) {
   return function(v) {
     return v;
-  }($lazy_backdoor(292).makeEvent)(i2);
+  }($lazy_backdoor(296).makeEvent)(i2);
 };
 var create = function(dictMonadST) {
   return function(dictMonadST1) {
     return discard(discardUnit)(dictMonadST.Monad0().Bind1())(pure(dictMonadST.Monad0().Applicative0())(unit))(function() {
       return function(v) {
         return v(dictMonadST)(dictMonadST1);
-      }($lazy_backdoor(308).create);
+      }($lazy_backdoor(312).create);
     });
   };
 };
@@ -4699,7 +4708,7 @@ var $lazy_backdoor = /* @__PURE__ */ $runtime_lazy4("backdoor", "FRP.Event", fun
                           return new Just(append(semigroupArray)(v.value0)([k2]));
                         }
                         ;
-                        throw new Error("Failed pattern match at FRP.Event (line 490, column 21 - line 492, column 55): " + [v.constructor.name]);
+                        throw new Error("Failed pattern match at FRP.Event (line 494, column 21 - line 496, column 55): " + [v.constructor.name]);
                       })(a2))(r))))(function() {
                         return pure(dictMonadST.Monad0().Applicative0())($$void(dictMonadST.Monad0().Bind1().Apply0().Functor0())(liftST(dictMonadST)(modify2(alter(dictOrd)(function(v) {
                           if (v instanceof Nothing) {
@@ -4710,7 +4719,7 @@ var $lazy_backdoor = /* @__PURE__ */ $runtime_lazy4("backdoor", "FRP.Event", fun
                             return new Just(deleteBy(unsafeRefEq)(k2)(v.value0));
                           }
                           ;
-                          throw new Error("Failed pattern match at FRP.Event (line 499, column 21 - line 501, column 69): " + [v.constructor.name]);
+                          throw new Error("Failed pattern match at FRP.Event (line 503, column 21 - line 505, column 69): " + [v.constructor.name]);
                         })(a2))(r))));
                       });
                     });
@@ -4728,7 +4737,7 @@ var $lazy_backdoor = /* @__PURE__ */ $runtime_lazy4("backdoor", "FRP.Event", fun
                           });
                         }
                         ;
-                        throw new Error("Failed pattern match at FRP.Event (line 508, column 13 - line 510, column 49): " + [v1.constructor.name]);
+                        throw new Error("Failed pattern match at FRP.Event (line 512, column 13 - line 514, column 49): " + [v1.constructor.name]);
                       });
                     }))(function(unsub) {
                       return pure(dictMonadST.Monad0().Applicative0())(discard(discardUnit)(dictMonadST.Monad0().Bind1())($$void(dictMonadST.Monad0().Bind1().Apply0().Functor0())(liftST(dictMonadST)(write2(empty3)(r))))(function() {
@@ -4777,7 +4786,7 @@ var $lazy_backdoor = /* @__PURE__ */ $runtime_lazy4("backdoor", "FRP.Event", fun
     }()
   };
 });
-var backdoor = /* @__PURE__ */ $lazy_backdoor(423);
+var backdoor = /* @__PURE__ */ $lazy_backdoor(427);
 var bus = function(dictMonadST) {
   return function(i2) {
     return function(v) {
@@ -4830,8 +4839,8 @@ var keepLatest2 = function(dictMonadST) {
 var applyEvent = function(dictMonadST) {
   return {
     apply: function(a2) {
-      return function(b) {
-        return biSampleOn(dictMonadST)(dictMonadST.Monad0().Applicative0())(a2)(map(functorEvent)(applyFlipped)(b));
+      return function(b2) {
+        return biSampleOn(dictMonadST)(dictMonadST.Monad0().Applicative0())(a2)(map(functorEvent)(applyFlipped)(b2));
       };
     },
     Functor0: function() {
@@ -4906,48 +4915,48 @@ var eventIsEvent = function(dictMonadST) {
 
 // output/FRP.Event.VBus/foreign.js
 var _____$__$_$$_vbus = "_____$__$_$$_vbus";
-function unsafeDestroyS(s) {
+function unsafeDestroyS(s2) {
   return () => {
-    for (const key2 in s) {
-      delete s[key2];
+    for (const key2 in s2) {
+      delete s2[key2];
     }
   };
 }
-function unsafePE(u) {
+function unsafePE(u2) {
   return () => {
-    const doAssigns = (s2, p3, e2, u2) => {
-      const ok = Object.keys(u2);
+    const doAssigns = (s3, p3, e2, u3) => {
+      const ok = Object.keys(u3);
       for (var i2 = 0; i2 < ok.length; i2++) {
-        if (u2[ok[i2]] instanceof Object && u2[ok[i2]][_____$__$_$$_vbus] === _____$__$_$$_vbus) {
+        if (u3[ok[i2]] instanceof Object && u3[ok[i2]][_____$__$_$$_vbus] === _____$__$_$$_vbus) {
           const p0 = {};
           const e0 = {};
-          doAssigns(s2, p0, e0, u2[ok[i2]]);
+          doAssigns(s3, p0, e0, u3[ok[i2]]);
           p3[ok[i2]] = p0;
           e2[ok[i2]] = e0;
         } else {
           const rn = `${Math.random()}`;
-          s2[rn] = {};
+          s3[rn] = {};
           p3[ok[i2]] = (v) => () => {
-            const rnk = Object.values(s2[rn]);
+            const rnk = Object.values(s3[rn]);
             for (var j = 0; j < rnk.length; j++) {
               rnk[j](v)();
             }
           };
           e2[ok[i2]] = (f) => () => {
             const k = `${Math.random()}`;
-            s2[rn][k] = f;
+            s3[rn][k] = f;
             return () => {
-              s2[rn] && s2[rn][k] && delete s2[rn][k];
+              s3[rn] && s3[rn][k] && delete s3[rn][k];
             };
           };
         }
       }
     };
-    const s = {};
+    const s2 = {};
     const p2 = {};
     const e = {};
-    doAssigns(s, p2, e, u);
-    return { p: p2, e, s };
+    doAssigns(s2, p2, e, u2);
+    return { p: p2, e, s: s2 };
   };
 }
 
@@ -5218,6 +5227,51 @@ var bussed = function(dictKorok) {
   };
 };
 
+// output/Deku.Attribute/index.js
+var Cb = function(x) {
+  return x;
+};
+var Prop$prime = /* @__PURE__ */ function() {
+  function Prop$prime2(value0) {
+    this.value0 = value0;
+  }
+  ;
+  Prop$prime2.create = function(value0) {
+    return new Prop$prime2(value0);
+  };
+  return Prop$prime2;
+}();
+var Cb$prime = /* @__PURE__ */ function() {
+  function Cb$prime2(value0) {
+    this.value0 = value0;
+  }
+  ;
+  Cb$prime2.create = function(value0) {
+    return new Cb$prime2(value0);
+  };
+  return Cb$prime2;
+}();
+var Attribute = function(x) {
+  return x;
+};
+var unsafeUnAttribute = /* @__PURE__ */ coerce();
+var unsafeAttribute = Attribute;
+var prop$prime = /* @__PURE__ */ function() {
+  return Prop$prime.create;
+}();
+var cb$prime = /* @__PURE__ */ function() {
+  return Cb$prime.create;
+}();
+var cb = /* @__PURE__ */ function() {
+  var $6 = map(functorFn)(map(functorEffect)($$const(true)));
+  return function($7) {
+    return Cb($6($7));
+  };
+}();
+var attr = function(dict) {
+  return dict.attr;
+};
+
 // output/Bolson.Control/foreign.js
 function mutAr(a2) {
   return () => {
@@ -5309,8 +5363,8 @@ var switcher = function(dictMonadST) {
     return function(event) {
       var counter = function(ev) {
         var fn = function(a2) {
-          return function(b) {
-            return new Tuple(b + 1 | 0, new Tuple(a2, b));
+          return function(b2) {
+            return new Tuple(b2 + 1 | 0, new Tuple(a2, b2));
           };
         };
         return mapAccum(eventIsEvent(dictMonadST))(fn)(ev)(0);
@@ -5509,8 +5563,8 @@ var internalPortalComplexComplex = function() {
                                 };
                               })(idz);
                               var realized = flatten(dictMonadST.Monad0().Applicative0())(dictMonadST)(flatArgs)(psr)(interpreter)(closure(injectable)(unsafeCoerce2));
-                              return bind(dictMonadST.Monad0().Bind1())(subscribe(realized)(k))(function(u) {
-                                return discard(discardUnit)(dictMonadST.Monad0().Bind1())($$void(dictMonadST.Monad0().Bind1().Apply0().Functor0())(liftST(dictMonadST)(write2(u)(av2))))(function() {
+                              return bind(dictMonadST.Monad0().Bind1())(subscribe(realized)(k))(function(u2) {
+                                return discard(discardUnit)(dictMonadST.Monad0().Bind1())($$void(dictMonadST.Monad0().Bind1().Apply0().Functor0())(liftST(dictMonadST)(write2(u2)(av2))))(function() {
                                   return pure(dictMonadST.Monad0().Applicative0())(discard(discardUnit)(dictMonadST.Monad0().Bind1())(u0)(function() {
                                     return discard(discardUnit)(dictMonadST.Monad0().Bind1())(when(dictMonadST.Monad0().Applicative0())(!isGlobal)(for_(dictMonadST.Monad0().Applicative0())(foldableArray)(toArray2()(idz))(function(id2) {
                                       return k(v.deleteFromCache(interpreter)({
@@ -5552,51 +5606,6 @@ var portalComplexComplex = function() {
   };
 };
 
-// output/Deku.Attribute/index.js
-var Cb = function(x) {
-  return x;
-};
-var Prop$prime = /* @__PURE__ */ function() {
-  function Prop$prime2(value0) {
-    this.value0 = value0;
-  }
-  ;
-  Prop$prime2.create = function(value0) {
-    return new Prop$prime2(value0);
-  };
-  return Prop$prime2;
-}();
-var Cb$prime = /* @__PURE__ */ function() {
-  function Cb$prime2(value0) {
-    this.value0 = value0;
-  }
-  ;
-  Cb$prime2.create = function(value0) {
-    return new Cb$prime2(value0);
-  };
-  return Cb$prime2;
-}();
-var Attribute = function(x) {
-  return x;
-};
-var unsafeUnAttribute = /* @__PURE__ */ coerce();
-var unsafeAttribute = Attribute;
-var prop$prime = /* @__PURE__ */ function() {
-  return Prop$prime.create;
-}();
-var cb$prime = /* @__PURE__ */ function() {
-  return Cb$prime.create;
-}();
-var cb = /* @__PURE__ */ function() {
-  var $6 = map(functorFn)(map(functorEffect)($$const(true)));
-  return function($7) {
-    return Cb($6($7));
-  };
-}();
-var attr = function(dict) {
-  return dict.attr;
-};
-
 // output/Deku.Control/index.js
 var unsafeText = function(v) {
   return v.makeText;
@@ -5604,13 +5613,13 @@ var unsafeText = function(v) {
 var unsafeSetText = function(v) {
   return function(id2) {
     return function(txt) {
-      return map(functorEvent)(function($93) {
+      return map(functorEvent)(function($95) {
         return v.setText(function(v1) {
           return {
             id: id2,
             text: v1
           };
-        }($93));
+        }($95));
       })(txt);
     };
   };
@@ -5618,7 +5627,7 @@ var unsafeSetText = function(v) {
 var unsafeSetAttribute = function(v) {
   return function(id2) {
     return function(atts) {
-      return map(functorEvent)(function($94) {
+      return map(functorEvent)(function($96) {
         return function(v1) {
           if (v1.value instanceof Prop$prime) {
             return v.setProp({
@@ -5637,7 +5646,7 @@ var unsafeSetAttribute = function(v) {
           }
           ;
           throw new Error("Failed pattern match at Deku.Control (line 84, column 26 - line 86, column 45): " + [v1.value.constructor.name]);
-        }(unsafeUnAttribute($94));
+        }(unsafeUnAttribute($96));
       })(atts);
     };
   };
@@ -5675,6 +5684,15 @@ var text_ = function(dictMonadST) {
     return text(dictMonadST)(pure(applicativeEvent(dictMonadST))(txt));
   };
 };
+var switcher_ = function(dictKorok) {
+  return function(f) {
+    return function(i2) {
+      return function(e) {
+        return f(empty(plusEvent(dictKorok.MonadST5().Monad0().Applicative0())))([switcher(dictKorok.MonadST5())(i2)(e)]);
+      };
+    };
+  };
+};
 var portalFlatten = function(dictNewtype) {
   return {
     doLogic: function(pos) {
@@ -5688,11 +5706,11 @@ var portalFlatten = function(dictNewtype) {
       };
     },
     ids: function() {
-      var $95 = unwrap(dictNewtype);
-      return function($96) {
+      var $97 = unwrap(dictNewtype);
+      return function($98) {
         return function(v) {
           return v.ids;
-        }($95($96));
+        }($97($98));
       };
     }(),
     disconnectElement: function(v) {
@@ -5765,35 +5783,35 @@ var elementify = function(dictKorok) {
 var portal = function() {
   return function(dictKorok) {
     return function(a2) {
-      return function(b) {
+      return function(b2) {
         return portalComplexComplex()(dictKorok.MonadST5())(portalFlatten())({
           fromEltO1: coerce(),
           fromEltO2: coerce(),
           toElt: coerce(),
           wrapElt: function() {
-            var $101 = elementify(dictKorok)("div")(empty(plusEvent(dictKorok.MonadST5().Monad0().Applicative0())));
-            return function($102) {
-              return Element$prime.create($101($102));
+            var $103 = elementify(dictKorok)("div")(empty(plusEvent(dictKorok.MonadST5().Monad0().Applicative0())));
+            return function($104) {
+              return Element$prime.create($103($104));
             };
           }(),
-          giveNewParent: function(q) {
+          giveNewParent: function(q2) {
             return function(r) {
               return function(v) {
-                return unwrap()(q).giveNewParent(r);
+                return unwrap()(q2).giveNewParent(r);
               };
             };
           },
           deleteFromCache: function() {
-            var $103 = unwrap();
-            return function($104) {
+            var $105 = unwrap();
+            return function($106) {
               return function(v) {
                 return v.deleteFromCache;
-              }($103($104));
+              }($105($106));
             };
           }()
         })(a2)(lcmap(profunctorFn)(map(functorVect)(function(v) {
           return v(unit);
-        }))(coerce()(b)));
+        }))(coerce()(b2)));
       };
     };
   };
@@ -6260,7 +6278,7 @@ var makePursx$prime = function(dictReflectable) {
         return function(dictKorok) {
           return function(dictPursxToElement) {
             return function(verb) {
-              return function(html) {
+              return function(html2) {
                 return function(r) {
                   var go2 = function(v) {
                     return function(v1) {
@@ -6277,7 +6295,7 @@ var makePursx$prime = function(dictReflectable) {
                                 cache: v2.cache,
                                 pxScope,
                                 scope: v.scope,
-                                html: reflectType(dictReflectable)(html),
+                                html: reflectType(dictReflectable)(html2),
                                 verb: reflectType(dictReflectable1)(verb)
                               })))(v2.element(v)(v1)))(k1));
                             });
@@ -6396,7 +6414,7 @@ var pursxToElementConsInsert = function() {
 // output/Examples/foreign.js
 var pursx2 = 'module Main where\n\nimport Prelude\n\nimport Control.Alt ((<|>))\nimport Data.Compactable (compact)\nimport Data.Maybe (Maybe(..))\nimport Deku.Attribute ((:=))\nimport Deku.Control (text)\nimport Deku.DOM as D\nimport Deku.Pursx (nut, (~~))\nimport Deku.Toplevel (runInBody1)\nimport Effect (Effect)\nimport FRP.Event (bus)\nimport Type.Proxy (Proxy(..))\n\nmyDom =\n  Proxy\n    :: Proxy\n         """<div>\n        <button>I do nothing</button>\n        <ul>\n          <li>A</li>\n          <li ~myli~>B</li>\n          <li>C</li>\n        </ul>\n        <div>\n          <a href="https://github.com/mikesol/purescript-deku"></a>\n          <i>bar</i>\n          ~somethingNew~\n          <span style="font-weight:800;">baz</span>\n        </div>\n        <div><div></div><div><input type="range"/></div></div>\n      </div>\n"""\n\nmain :: Effect Unit\nmain = runInBody1\n  ( bus \\push event -> myDom ~~\n      { myli: pure (D.Style := "background-color:rgb(200,240,210);")\n      , somethingNew: nut\n          ( D.button (pure (D.OnClick := push (Just unit)))\n              [ text\n                  $ (compact event $> "Thanks for clicking me!") <|>\n                      pure "I was dynamically inserted"\n              ]\n          )\n      }\n  )';
 var pursx1 = 'module Main where\n\nimport Prelude\n\nimport Deku.Pursx (psx)\nimport Deku.Toplevel (runInBody)\nimport Effect (Effect)\nimport Type.Proxy (Proxy(..))\n\nmyDom =\n  Proxy\n    :: Proxy\n         """<div>\n    <button>I do nothing</button>\n    <ul>\n        <li>A</li>\n        <li>B</li>\n        <li>C</li>\n    </ul>\n    <div>\n        <a href="https://github.com/mikesol/purescript-deku"></a>\n        <i>bar</i>\n        <span style="font-weight:800;">baz</span>\n    </div>\n    <div><div></div><div><input type="range"/></div></div>\n    </div>\n"""\n\nmain :: Effect Unit\nmain = runInBody (psx myDom)';
-var portals1 = 'module Main where\n\nimport Prelude\n\nimport Control.Alt ((<|>))\nimport Data.FastVect.FastVect (index, (:))\nimport Data.FastVect.FastVect as V\nimport Data.Foldable (oneOfMap)\nimport Data.Profunctor (lcmap)\nimport Deku.Attribute ((:=))\nimport Deku.Control (portal, switcher, text_)\nimport Deku.Core (Domable)\nimport Deku.DOM as D\nimport Deku.Toplevel (runInBody1)\nimport Effect (Effect)\nimport FRP.Event (AnEvent, bus, fold)\nimport Type.Prelude (Proxy(..))\n\nmain :: Effect Unit\nmain = runInBody1\n  ( bus \\push -> lcmap (pure unit <|> _) \\event -> do\n      portal\n        ( map\n            ( \\i -> D.video\n                (oneOfMap pure [ D.Controls := "true", D.Width := "250" ])\n                [ D.source\n                    (oneOfMap pure [ D.Src := i, D.Xtype := "video/mp4" ])\n                    []\n                ]\n            )\n            ( "https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4"\n                : "https://www.w3schools.com/jsref/movie.mp4"\n                : V.empty\n            )\n        )\n        \\v _ -> do\n          let\n            p0 :: Domable _ _ _\n            p0 = index (Proxy :: _ 0) v\n            p1 :: Domable _ _ _\n            p1 = index (Proxy :: _ 1) v\n            ev :: Boolean -> AnEvent _ Boolean\n            ev = fold (const not) event\n            flips :: Boolean -> Domable _ _ _\n            flips = switcher (if _ then p0 else p1) <<< ev\n          D.div_\n            [ D.button (pure $ D.OnClick := push unit)\n                [ text_ "Switch videos" ]\n            , D.div_ [ D.span_ [ flips true ], D.span_ [ flips false ] ]\n            ]\n  )\n';
+var portals1 = 'module Main where\n\nimport Prelude\n\nimport Control.Alt ((<|>))\nimport Data.FastVect.FastVect (index, (:))\nimport Data.FastVect.FastVect as V\nimport Data.Foldable (oneOfMap)\nimport Data.Profunctor (lcmap)\nimport Deku.Attribute ((:=))\nimport Deku.Control (portal, switcher_, text_)\nimport Deku.Core (Domable)\nimport Deku.DOM as D\nimport Deku.Toplevel (runInBody1)\nimport Effect (Effect)\nimport FRP.Event (AnEvent, bus, fold)\nimport Type.Prelude (Proxy(..))\n\nmain :: Effect Unit\nmain = runInBody1\n  ( bus \\push -> lcmap (pure unit <|> _) \\event -> do\n      portal\n        ( map\n            ( \\i -> D.video\n                (oneOfMap pure [ D.Controls := "true", D.Width := "250" ])\n                [ D.source\n                    (oneOfMap pure [ D.Src := i, D.Xtype := "video/mp4" ])\n                    []\n                ]\n            )\n            ( "https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4"\n                : "https://www.w3schools.com/jsref/movie.mp4"\n                : V.empty\n            )\n        )\n        \\v _ -> do\n          let\n            p0 :: Domable _ _ _\n            p0 = index (Proxy :: _ 0) v\n            p1 :: Domable _ _ _\n            p1 = index (Proxy :: _ 1) v\n            ev :: Boolean -> AnEvent _ Boolean\n            ev = fold (const not) event\n            flips :: Boolean -> Domable _ _ _\n            flips = switcher_ D.span (if _ then p0 else p1) <<< ev\n          D.div_\n            [ D.button (pure $ D.OnClick := push unit)\n                [ text_ "Switch videos" ]\n            , D.div_ [ D.span_ [ flips true ], flips false ]\n            ]\n  )\n';
 var helloWorld = 'module Main where\n\nimport Prelude\n\nimport Deku.Control (text_)\nimport Deku.Toplevel (runInBody)\nimport Effect (Effect)\n\nmain :: Effect Unit\nmain = runInBody (text_ "Hello world")';
 var events3 = `module Main where
 
@@ -6658,8 +6676,8 @@ function _ajax(platformSpecificDriver, timeoutErrorMessageIdent, requestFailedMe
     xhr.open(options2.method || "GET", fixedUrl, true, options2.username, options2.password);
     if (options2.headers) {
       try {
-        for (var i2 = 0, header; (header = options2.headers[i2]) != null; i2++) {
-          xhr.setRequestHeader(header.field, header.value);
+        for (var i2 = 0, header2; (header2 = options2.headers[i2]) != null; i2++) {
+          xhr.setRequestHeader(header2.field, header2.value);
         }
       } catch (e) {
         errback(e);
@@ -6676,11 +6694,11 @@ function _ajax(platformSpecificDriver, timeoutErrorMessageIdent, requestFailedMe
       callback({
         status: xhr.status,
         statusText: xhr.statusText,
-        headers: xhr.getAllResponseHeaders().split("\r\n").filter(function(header2) {
-          return header2.length > 0;
-        }).map(function(header2) {
-          var i3 = header2.indexOf(":");
-          return mkHeader(header2.substring(0, i3))(header2.substring(i3 + 2));
+        headers: xhr.getAllResponseHeaders().split("\r\n").filter(function(header3) {
+          return header3.length > 0;
+        }).map(function(header3) {
+          var i3 = header3.indexOf(":");
+          return mkHeader(header3.substring(0, i3))(header3.substring(i3 + 2));
         }),
         body: xhr.response
       });
@@ -6789,14 +6807,14 @@ var toMediaType = function(v) {
 
 // output/Affjax.RequestHeader/index.js
 var Accept = /* @__PURE__ */ function() {
-  function Accept2(value0) {
+  function Accept3(value0) {
     this.value0 = value0;
   }
   ;
-  Accept2.create = function(value0) {
-    return new Accept2(value0);
+  Accept3.create = function(value0) {
+    return new Accept3(value0);
   };
-  return Accept2;
+  return Accept3;
 }();
 var ContentType = /* @__PURE__ */ function() {
   function ContentType2(value0) {
@@ -7852,7 +7870,7 @@ var Aff = function() {
     var root = EMPTY;
     function kill(error3, par2, cb3) {
       var step3 = par2;
-      var head5 = null;
+      var head6 = null;
       var tail2 = null;
       var count2 = 0;
       var kills2 = {};
@@ -7873,14 +7891,14 @@ var Aff = function() {
                   };
                 });
               }
-              if (head5 === null) {
+              if (head6 === null) {
                 break loop;
               }
-              step3 = head5._2;
+              step3 = head6._2;
               if (tail2 === null) {
-                head5 = null;
+                head6 = null;
               } else {
-                head5 = tail2._1;
+                head6 = tail2._1;
                 tail2 = tail2._2;
               }
               break;
@@ -7889,10 +7907,10 @@ var Aff = function() {
               break;
             case APPLY:
             case ALT:
-              if (head5) {
-                tail2 = new Aff2(CONS, head5, tail2);
+              if (head6) {
+                tail2 = new Aff2(CONS, head6, tail2);
               }
-              head5 = step3;
+              head6 = step3;
               step3 = step3._1;
               break;
           }
@@ -7908,7 +7926,7 @@ var Aff = function() {
       }
       return kills2;
     }
-    function join2(result, head5, tail2) {
+    function join2(result, head6, tail2) {
       var fail2, step3, lhs, rhs, tmp, kid;
       if (util.isLeft(result)) {
         fail2 = result;
@@ -7926,30 +7944,30 @@ var Aff = function() {
           if (interrupt !== null) {
             return;
           }
-          if (head5 === null) {
+          if (head6 === null) {
             cb2(fail2 || step3)();
             return;
           }
-          if (head5._3 !== EMPTY) {
+          if (head6._3 !== EMPTY) {
             return;
           }
-          switch (head5.tag) {
+          switch (head6.tag) {
             case MAP:
               if (fail2 === null) {
-                head5._3 = util.right(head5._1(util.fromRight(step3)));
-                step3 = head5._3;
+                head6._3 = util.right(head6._1(util.fromRight(step3)));
+                step3 = head6._3;
               } else {
-                head5._3 = fail2;
+                head6._3 = fail2;
               }
               break;
             case APPLY:
-              lhs = head5._1._3;
-              rhs = head5._2._3;
+              lhs = head6._1._3;
+              rhs = head6._2._3;
               if (fail2) {
-                head5._3 = fail2;
+                head6._3 = fail2;
                 tmp = true;
                 kid = killId++;
-                kills[kid] = kill(early, fail2 === lhs ? head5._2 : head5._1, function() {
+                kills[kid] = kill(early, fail2 === lhs ? head6._2 : head6._1, function() {
                   return function() {
                     delete kills[kid];
                     if (tmp) {
@@ -7969,24 +7987,24 @@ var Aff = function() {
                 return;
               } else {
                 step3 = util.right(util.fromRight(lhs)(util.fromRight(rhs)));
-                head5._3 = step3;
+                head6._3 = step3;
               }
               break;
             case ALT:
-              lhs = head5._1._3;
-              rhs = head5._2._3;
+              lhs = head6._1._3;
+              rhs = head6._2._3;
               if (lhs === EMPTY && util.isLeft(rhs) || rhs === EMPTY && util.isLeft(lhs)) {
                 return;
               }
               if (lhs !== EMPTY && util.isLeft(lhs) && rhs !== EMPTY && util.isLeft(rhs)) {
                 fail2 = step3 === lhs ? rhs : lhs;
                 step3 = null;
-                head5._3 = fail2;
+                head6._3 = fail2;
               } else {
-                head5._3 = step3;
+                head6._3 = step3;
                 tmp = true;
                 kid = killId++;
-                kills[kid] = kill(early, step3 === lhs ? head5._2 : head5._1, function() {
+                kills[kid] = kill(early, step3 === lhs ? head6._2 : head6._1, function() {
                   return function() {
                     delete kills[kid];
                     if (tmp) {
@@ -8006,9 +8024,9 @@ var Aff = function() {
               break;
           }
           if (tail2 === null) {
-            head5 = null;
+            head6 = null;
           } else {
-            head5 = tail2._1;
+            head6 = tail2._1;
             tail2 = tail2._2;
           }
         }
@@ -8025,7 +8043,7 @@ var Aff = function() {
     function run3() {
       var status = CONTINUE;
       var step3 = par;
-      var head5 = null;
+      var head6 = null;
       var tail2 = null;
       var tmp, fid;
       loop:
@@ -8036,31 +8054,31 @@ var Aff = function() {
             case CONTINUE:
               switch (step3.tag) {
                 case MAP:
-                  if (head5) {
-                    tail2 = new Aff2(CONS, head5, tail2);
+                  if (head6) {
+                    tail2 = new Aff2(CONS, head6, tail2);
                   }
-                  head5 = new Aff2(MAP, step3._1, EMPTY, EMPTY);
+                  head6 = new Aff2(MAP, step3._1, EMPTY, EMPTY);
                   step3 = step3._2;
                   break;
                 case APPLY:
-                  if (head5) {
-                    tail2 = new Aff2(CONS, head5, tail2);
+                  if (head6) {
+                    tail2 = new Aff2(CONS, head6, tail2);
                   }
-                  head5 = new Aff2(APPLY, EMPTY, step3._2, EMPTY);
+                  head6 = new Aff2(APPLY, EMPTY, step3._2, EMPTY);
                   step3 = step3._1;
                   break;
                 case ALT:
-                  if (head5) {
-                    tail2 = new Aff2(CONS, head5, tail2);
+                  if (head6) {
+                    tail2 = new Aff2(CONS, head6, tail2);
                   }
-                  head5 = new Aff2(ALT, EMPTY, step3._2, EMPTY);
+                  head6 = new Aff2(ALT, EMPTY, step3._2, EMPTY);
                   step3 = step3._1;
                   break;
                 default:
                   fid = fiberId++;
                   status = RETURN;
                   tmp = step3;
-                  step3 = new Aff2(FORKED, fid, new Aff2(CONS, head5, tail2), EMPTY);
+                  step3 = new Aff2(FORKED, fid, new Aff2(CONS, head6, tail2), EMPTY);
                   tmp = Fiber(util, supervisor, tmp);
                   tmp.onComplete({
                     rethrow: false,
@@ -8073,21 +8091,21 @@ var Aff = function() {
               }
               break;
             case RETURN:
-              if (head5 === null) {
+              if (head6 === null) {
                 break loop;
               }
-              if (head5._1 === EMPTY) {
-                head5._1 = step3;
+              if (head6._1 === EMPTY) {
+                head6._1 = step3;
                 status = CONTINUE;
-                step3 = head5._2;
-                head5._2 = EMPTY;
+                step3 = head6._2;
+                head6._2 = EMPTY;
               } else {
-                head5._2 = step3;
-                step3 = head5;
+                head6._2 = step3;
+                step3 = head6;
                 if (tail2 === null) {
-                  head5 = null;
+                  head6 = null;
                 } else {
-                  head5 = tail2._1;
+                  head6 = tail2._1;
                   tail2 = tail2._2;
                 }
               }
@@ -8739,11 +8757,11 @@ var request2 = /* @__PURE__ */ request(driver);
 
 // output/Deku.Example.Docs.Effects/index.js
 var Loading = /* @__PURE__ */ function() {
-  function Loading3() {
+  function Loading4() {
   }
   ;
-  Loading3.value = new Loading3();
-  return Loading3;
+  Loading4.value = new Loading4();
+  return Loading4;
 }();
 var Result = /* @__PURE__ */ function() {
   function Result2(value0) {
@@ -8866,9 +8884,9 @@ var effects2 = function(options2) {
             return Nothing.value;
           })(loadingOrResult);
           return div_(dictKorok)([div_(dictKorok)([button(dictKorok)(pure(applicativeEvent(dictKorok.MonadST5()))(attr(attrOnClickCb)(OnClick.value)(clickCb(push2))))([text(dictKorok.MonadST5())(alt(altEvent(dictKorok.MonadST5().Monad0().Applicative0()))(pure(applicativeEvent(dictKorok.MonadST5()))(clickText))(alt(altEvent(dictKorok.MonadST5().Monad0().Applicative0()))(voidLeft(functorEvent)(loading)("Loading..."))(voidLeft(functorEvent)(result)(clickText))))])]), div2(dictKorok)(alt(altEvent(dictKorok.MonadST5().Monad0().Applicative0()))(pure(applicativeEvent(dictKorok.MonadST5()))(attr(attrDiv_StyleString)(Style.value)("display: none;")))(voidLeft(functorEvent)(compact(compactableEvent(dictKorok.MonadST5().Monad0().Applicative0()))(mapAccum(eventIsEvent(dictKorok.MonadST5()))(function(v) {
-            return function(b) {
-              return new Tuple(b && false, function() {
-                if (b) {
+            return function(b2) {
+              return new Tuple(b2 && false, function() {
+                if (b2) {
                   return new Just(unit);
                 }
                 ;
@@ -8883,6 +8901,25 @@ var effects2 = function(options2) {
       })), attr(attrA_HrefString)(Href.value)(options2.slug + "pursx2/")])
     });
   };
+};
+
+// output/Deku.DOM.Attr.Controls/index.js
+var Controls = /* @__PURE__ */ function() {
+  function Controls2() {
+  }
+  ;
+  Controls2.value = new Controls2();
+  return Controls2;
+}();
+var attrVideo_ControlsString = {
+  attr: function(v) {
+    return function(value13) {
+      return unsafeAttribute({
+        key: "controls",
+        value: prop$prime(value13)
+      });
+    };
+  }
 };
 
 // output/Deku.DOM.Attr.OnInput/index.js
@@ -8921,6 +8958,74 @@ var attrOnKeyupCb = {
       });
     };
   }
+};
+
+// output/Deku.DOM.Attr.Src/index.js
+var Src = /* @__PURE__ */ function() {
+  function Src2() {
+  }
+  ;
+  Src2.value = new Src2();
+  return Src2;
+}();
+var attrSource_SrcString = {
+  attr: function(v) {
+    return function(value13) {
+      return unsafeAttribute({
+        key: "src",
+        value: prop$prime(value13)
+      });
+    };
+  }
+};
+
+// output/Deku.DOM.Attr.Width/index.js
+var Width = /* @__PURE__ */ function() {
+  function Width2() {
+  }
+  ;
+  Width2.value = new Width2();
+  return Width2;
+}();
+var attrVideo_WidthString = {
+  attr: function(v) {
+    return function(value13) {
+      return unsafeAttribute({
+        key: "width",
+        value: prop$prime(value13)
+      });
+    };
+  }
+};
+
+// output/Deku.DOM.Elt.P/index.js
+var p = function(dictKorok) {
+  return function(attributes) {
+    return function(kids) {
+      return new Element$prime(elementify(dictKorok)("p")(attributes)(fixed(kids)));
+    };
+  };
+};
+var p_ = function(dictKorok) {
+  return p(dictKorok)(empty(plusEvent(dictKorok.MonadST5().Monad0().Applicative0())));
+};
+
+// output/Deku.DOM.Elt.Source/index.js
+var source = function(dictKorok) {
+  return function(attributes) {
+    return function(kids) {
+      return new Element$prime(elementify(dictKorok)("source")(attributes)(fixed(kids)));
+    };
+  };
+};
+
+// output/Deku.DOM.Elt.Video/index.js
+var video = function(dictKorok) {
+  return function(attributes) {
+    return function(kids) {
+      return new Element$prime(elementify(dictKorok)("video")(attributes)(fixed(kids)));
+    };
+  };
 };
 
 // output/Web.HTML.HTMLInputElement/foreign.js
@@ -8977,25 +9082,25 @@ var fromEvent = /* @__PURE__ */ unsafeReadProtoTagged("KeyboardEvent");
 
 // output/Deku.Listeners/index.js
 var slider = function(dictMonadST) {
-  var $13 = alt(altEvent(dictMonadST.Monad0().Applicative0()))(pure(applicativeEvent(dictMonadST))(attr(attrInput_XtypeString)(Xtype.value)("range")));
-  var $14 = map(functorEvent)(function(push2) {
+  var $17 = alt(altEvent(dictMonadST.Monad0().Applicative0()))(pure(applicativeEvent(dictMonadST))(attr(attrInput_XtypeString)(Xtype.value)("range")));
+  var $18 = map(functorEvent)(function(push2) {
     return attr(attrOnInputCb)(OnInput.value)(cb(function(e) {
       return for_(applicativeEffect)(foldableMaybe)(bind(bindMaybe)(target(e))(fromEventTarget))(composeKleisli(bindEffect)(valueAsNumber)(push2));
     }));
   });
-  return function($15) {
-    return $13($14($15));
+  return function($19) {
+    return $17($18($19));
   };
 };
 var click_ = function(dictFunctor) {
   return function(dictMonoid) {
     return function(dictAttr) {
       return map(dictFunctor)(function() {
-        var $16 = attr(dictAttr)(OnClick.value);
-        return function($17) {
-          return $16(function(v) {
+        var $20 = attr(dictAttr)(OnClick.value);
+        return function($21) {
+          return $20(function(v) {
             return v(mempty(dictMonoid));
-          }($17));
+          }($21));
         };
       }());
     };
@@ -9214,13 +9319,13 @@ var events22 = function(options2) {
             ;
             return Nothing.value;
           })(mapAccum(eventIsEvent(dictKorok.MonadST5()))(function(a2) {
-            return function(b) {
+            return function(b2) {
               if (a2 instanceof ChangeText) {
                 return new Tuple(a2.value0, new Tuple(false, a2.value0));
               }
               ;
               if (a2 instanceof AddTodo) {
-                return new Tuple(b, new Tuple(true, b));
+                return new Tuple(b2, new Tuple(true, b2));
               }
               ;
               return new Tuple("", new Tuple(false, ""));
@@ -9340,81 +9445,6 @@ var intro = function(options2) {
   };
 };
 
-// output/Deku.DOM.Attr.Controls/index.js
-var Controls = /* @__PURE__ */ function() {
-  function Controls2() {
-  }
-  ;
-  Controls2.value = new Controls2();
-  return Controls2;
-}();
-var attrVideo_ControlsString = {
-  attr: function(v) {
-    return function(value13) {
-      return unsafeAttribute({
-        key: "controls",
-        value: prop$prime(value13)
-      });
-    };
-  }
-};
-
-// output/Deku.DOM.Attr.Src/index.js
-var Src = /* @__PURE__ */ function() {
-  function Src2() {
-  }
-  ;
-  Src2.value = new Src2();
-  return Src2;
-}();
-var attrSource_SrcString = {
-  attr: function(v) {
-    return function(value13) {
-      return unsafeAttribute({
-        key: "src",
-        value: prop$prime(value13)
-      });
-    };
-  }
-};
-
-// output/Deku.DOM.Attr.Width/index.js
-var Width = /* @__PURE__ */ function() {
-  function Width2() {
-  }
-  ;
-  Width2.value = new Width2();
-  return Width2;
-}();
-var attrVideo_WidthString = {
-  attr: function(v) {
-    return function(value13) {
-      return unsafeAttribute({
-        key: "width",
-        value: prop$prime(value13)
-      });
-    };
-  }
-};
-
-// output/Deku.DOM.Elt.Source/index.js
-var source = function(dictKorok) {
-  return function(attributes) {
-    return function(kids) {
-      return new Element$prime(elementify(dictKorok)("source")(attributes)(fixed(kids)));
-    };
-  };
-};
-
-// output/Deku.DOM.Elt.Video/index.js
-var video = function(dictKorok) {
-  return function(attributes) {
-    return function(kids) {
-      return new Element$prime(elementify(dictKorok)("video")(attributes)(fixed(kids)));
-    };
-  };
-};
-
 // output/Deku.Example.Docs.Portals1/index.js
 var px7 = /* @__PURE__ */ function() {
   return $$Proxy.value;
@@ -9495,7 +9525,7 @@ var portals12 = function(options2) {
               })($$Proxy.value)(v);
               var ev = fold3(eventIsEvent(dictKorok.MonadST5()))($$const(not(heytingAlgebraBoolean)))(event);
               var flips = function() {
-                var $4 = switcher(dictKorok.MonadST5())(function(v2) {
+                var $4 = switcher_(dictKorok)(span(dictKorok))(function(v2) {
                   if (v2) {
                     return p0;
                   }
@@ -9506,7 +9536,7 @@ var portals12 = function(options2) {
                   return $4(ev($5));
                 };
               }();
-              return div_(dictKorok)([button(dictKorok)(pure(applicativeEvent(dictKorok.MonadST5()))(attr(attrOnClickCb)(OnClick.value)(cb($$const(push2(unit))))))([text_(dictKorok.MonadST5())("Switch videos")]), div_(dictKorok)([span_(dictKorok)([flips(true)]), span_(dictKorok)([flips(false)])])]);
+              return div_(dictKorok)([button(dictKorok)(pure(applicativeEvent(dictKorok.MonadST5()))(attr(attrOnClickCb)(OnClick.value)(cb($$const(push2(unit))))))([text_(dictKorok.MonadST5())("Switch videos")]), div_(dictKorok)([flips(true), flips(false)])]);
             };
           })));
         });
@@ -9690,18 +9720,6 @@ var pursx22 = function(options2) {
   };
 };
 
-// output/Deku.DOM.Elt.P/index.js
-var p = function(dictKorok) {
-  return function(attributes) {
-    return function(kids) {
-      return new Element$prime(elementify(dictKorok)("p")(attributes)(fixed(kids)));
-    };
-  };
-};
-var p_ = function(dictKorok) {
-  return p(dictKorok)(empty(plusEvent(dictKorok.MonadST5().Monad0().Applicative0())));
-};
-
 // output/Random.LCG/index.js
 var unSeed = function(v) {
   return v;
@@ -9743,12 +9761,12 @@ var traverse1Impl = function() {
     this.fn = fn;
   }
   var emptyList = {};
-  var ConsCell = function(head5, tail2) {
-    this.head = head5;
+  var ConsCell = function(head6, tail2) {
+    this.head = head6;
     this.tail = tail2;
   };
-  function finalCell(head5) {
-    return new ConsCell(head5, emptyList);
+  function finalCell(head6) {
+    return new ConsCell(head6, emptyList);
   }
   function consList(x) {
     return function(xs) {
@@ -9765,10 +9783,10 @@ var traverse1Impl = function() {
     return arr;
   }
   return function(apply3) {
-    return function(map2) {
+    return function(map3) {
       return function(f) {
         var buildFrom = function(x, ys) {
-          return apply3(map2(consList)(f(x)))(ys);
+          return apply3(map3(consList)(f(x)))(ys);
         };
         var go2 = function(acc, currentLen, xs) {
           if (currentLen === 0) {
@@ -9782,12 +9800,12 @@ var traverse1Impl = function() {
           }
         };
         return function(array) {
-          var acc = map2(finalCell)(f(array[array.length - 1]));
+          var acc = map3(finalCell)(f(array[array.length - 1]));
           var result = go2(acc, array.length - 1, array);
           while (result instanceof Cont) {
             result = result.fn();
           }
-          return map2(listToArray)(result);
+          return map3(listToArray)(result);
         };
       };
     };
@@ -9799,10 +9817,10 @@ var functorStateT = function(dictFunctor) {
   return {
     map: function(f) {
       return function(v) {
-        return function(s) {
+        return function(s2) {
           return map(dictFunctor)(function(v1) {
             return new Tuple(f(v1.value0), v1.value1);
-          })(v(s));
+          })(v(s2));
         };
       };
     }
@@ -9822,8 +9840,8 @@ var bindStateT = function(dictMonad) {
   return {
     bind: function(v) {
       return function(f) {
-        return function(s) {
-          return bind(dictMonad.Bind1())(v(s))(function(v1) {
+        return function(s2) {
+          return bind(dictMonad.Bind1())(v(s2))(function(v1) {
             var v3 = f(v1.value0);
             return v3(v1.value1);
           });
@@ -9846,8 +9864,8 @@ var applyStateT = function(dictMonad) {
 var applicativeStateT = function(dictMonad) {
   return {
     pure: function(a2) {
-      return function(s) {
-        return pure(dictMonad.Applicative0())(new Tuple(a2, s));
+      return function(s2) {
+        return pure(dictMonad.Applicative0())(new Tuple(a2, s2));
       };
     },
     Apply0: function() {
@@ -9871,14 +9889,14 @@ var monadStateStateT = function(dictMonad) {
 
 // output/Control.Monad.State/index.js
 var execState = function(v) {
-  return function(s) {
-    var v1 = v(s);
+  return function(s2) {
+    var v1 = v(s2);
     return v1.value1;
   };
 };
 var evalState = function(v) {
-  return function(s) {
-    var v1 = v(s);
+  return function(s2) {
+    var v1 = v(s2);
     return v1.value0;
   };
 };
@@ -9888,17 +9906,17 @@ var unGen = function(v) {
   return v;
 };
 var lcgStep = /* @__PURE__ */ function() {
-  var f = function(s) {
-    return new Tuple(unSeed(s.newSeed), function() {
+  var f = function(s2) {
+    return new Tuple(unSeed(s2.newSeed), function() {
       var $30 = {};
-      for (var $31 in s) {
-        if ({}.hasOwnProperty.call(s, $31)) {
-          $30[$31] = s[$31];
+      for (var $31 in s2) {
+        if ({}.hasOwnProperty.call(s2, $31)) {
+          $30[$31] = s2[$31];
         }
         ;
       }
       ;
-      $30.newSeed = lcgNext(s.newSeed);
+      $30.newSeed = lcgNext(s2.newSeed);
       return $30;
     }());
   };
@@ -9910,8 +9928,8 @@ var evalGen = function($40) {
 };
 var applyGen = /* @__PURE__ */ applyStateT(monadIdentity);
 var chooseInt$prime = function(a2) {
-  return function(b) {
-    var numB = toNumber(b);
+  return function(b2) {
+    var numB = toNumber(b2);
     var numA = toNumber(a2);
     var clamp = function(x) {
       return numA + remainder(x)(numB - numA + 1);
@@ -9924,13 +9942,13 @@ var chooseInt$prime = function(a2) {
   };
 };
 var chooseInt2 = function(a2) {
-  return function(b) {
-    var $37 = a2 <= b;
+  return function(b2) {
+    var $37 = a2 <= b2;
     if ($37) {
-      return chooseInt$prime(a2)(b);
+      return chooseInt$prime(a2)(b2);
     }
     ;
-    return chooseInt$prime(b)(a2);
+    return chooseInt$prime(b2)(a2);
   };
 };
 
@@ -10033,9 +10051,9 @@ var ssrMakeElement = function(a2) {
 var ssrDOMInterpret = function(seed) {
   return {
     ids: function __do2() {
-      var s = read2(seed)();
+      var s2 = read2(seed)();
       var o = show(showInt)(evalGen(arbitrary(arbInt))({
-        newSeed: mkSeed(s),
+        newSeed: mkSeed(s2),
         size: 5
       }));
       $$void(functorST)(modify2(add(semiringInt)(1))(seed))();
@@ -10088,8 +10106,8 @@ var ssrDOMInterpret = function(seed) {
 var encodedString = (rawStr) => rawStr.replace(/[\u00A0-\u9999<>\&]/g, function(i2) {
   return "&#" + i2.charCodeAt(0) + ";";
 });
-var doPursxReplacements = ({ id: id2, html, pxScope, cache, verb }) => {
-  let vhtml = html;
+var doPursxReplacements = ({ id: id2, html: html2, pxScope, cache, verb }) => {
+  let vhtml = html2;
   const entries = Object.entries(cache);
   for (var i2 = 0; i2 < entries.length; i2++) {
     const key2 = entries[i2][0];
@@ -10110,11 +10128,11 @@ var ssr$prime = function(topTag) {
   return function(arr) {
     var setting = function(id2) {
       return function(action2) {
-        return $$void(functorStateT(functorIdentity))(modify4(monadStateStateT(monadIdentity))(function(s) {
+        return $$void(functorStateT(functorIdentity))(modify4(monadStateStateT(monadIdentity))(function(s2) {
           var $15 = {};
-          for (var $16 in s) {
-            if ({}.hasOwnProperty.call(s, $16)) {
-              $15[$16] = s[$16];
+          for (var $16 in s2) {
+            if ({}.hasOwnProperty.call(s2, $16)) {
+              $15[$16] = s2[$16];
             }
             ;
           }
@@ -10129,7 +10147,7 @@ var ssr$prime = function(topTag) {
             }
             ;
             throw new Error("Failed pattern match at Deku.SSR (line 46, column 17 - line 48, column 45): " + [v1.constructor.name]);
-          })(id2)(s.idToActions);
+          })(id2)(s2.idToActions);
           return $15;
         }));
       };
@@ -10137,11 +10155,11 @@ var ssr$prime = function(topTag) {
     var making = function(parent2) {
       return function(id2) {
         return function(action2) {
-          return discard(discardUnit)(bindStateT(monadIdentity))($$void(functorStateT(functorIdentity))(modify4(monadStateStateT(monadIdentity))(function(s) {
+          return discard(discardUnit)(bindStateT(monadIdentity))($$void(functorStateT(functorIdentity))(modify4(monadStateStateT(monadIdentity))(function(s2) {
             var $20 = {};
-            for (var $21 in s) {
-              if ({}.hasOwnProperty.call(s, $21)) {
-                $20[$21] = s[$21];
+            for (var $21 in s2) {
+              if ({}.hasOwnProperty.call(s2, $21)) {
+                $20[$21] = s2[$21];
               }
               ;
             }
@@ -10156,7 +10174,7 @@ var ssr$prime = function(topTag) {
               }
               ;
               throw new Error("Failed pattern match at Deku.SSR (line 33, column 17 - line 35, column 41): " + [v1.constructor.name]);
-            })(parent2)(s.parentToChild);
+            })(parent2)(s2.parentToChild);
             return $20;
           })))(function() {
             return setting(id2)(action2);
@@ -10265,15 +10283,15 @@ var ssr$prime = function(topTag) {
     };
     var oo = function(id2) {
       return foldlWithIndex(foldableWithIndexMap)(function(i2) {
-        return function(b) {
+        return function(b2) {
           return function(a2) {
             var v1 = hasMake(a2);
             if (v1) {
-              return b;
+              return b2;
             }
             ;
             if (!v1) {
-              return replace("data-deku-ssr-" + i2)(eltAtts(a2) + (" data-deku-ssr-" + i2))(b);
+              return replace("data-deku-ssr-" + i2)(eltAtts(a2) + (" data-deku-ssr-" + i2))(b2);
             }
             ;
             throw new Error("Failed pattern match at Deku.SSR (line 83, column 19 - line 85, column 136): " + [v1.constructor.name]);
@@ -10526,16 +10544,16 @@ var scene = function(options2) {
             ;
             return "display:none;";
           }())))([text_(dictKorok.MonadST5())(" | ")])]);
-        })([new Tuple(Intro.value, new Tuple("Home", new Tuple("", true))), new Tuple(HelloWorld.value, new Tuple("Hello world", new Tuple("hello/", true))), new Tuple(SimpleComponent.value, new Tuple("Component", new Tuple("simple/", true))), new Tuple(PURSX1.value, new Tuple("Pursx 1", new Tuple("pursx1/", true))), new Tuple(Events.value, new Tuple("Events 1", new Tuple("events1/", true))), new Tuple(Effects.value, new Tuple("Effects", new Tuple("effects/", true))), new Tuple(PURSX2.value, new Tuple("Pursx 2", new Tuple("pursx2/", true))), new Tuple(Events2.value, new Tuple("Events 2", new Tuple("events2/", true))), new Tuple(Portals.value, new Tuple("Portals", new Tuple("portals/", true))), new Tuple(SSR.value, new Tuple("SSR", new Tuple("ssr/", false)))])), div_(dictKorok)([switcher(dictKorok.MonadST5())(page(push2))(event)])]);
+        })([new Tuple(Intro.value, new Tuple("Home", new Tuple("", true))), new Tuple(HelloWorld.value, new Tuple("Hello world", new Tuple("hello/", true))), new Tuple(SimpleComponent.value, new Tuple("Component", new Tuple("simple/", true))), new Tuple(PURSX1.value, new Tuple("Pursx 1", new Tuple("pursx1/", true))), new Tuple(Events.value, new Tuple("Events 1", new Tuple("events1/", true))), new Tuple(Effects.value, new Tuple("Effects", new Tuple("effects/", true))), new Tuple(PURSX2.value, new Tuple("Pursx 2", new Tuple("pursx2/", true))), new Tuple(Events2.value, new Tuple("Events 2", new Tuple("events2/", true))), new Tuple(Portals.value, new Tuple("Portals", new Tuple("portals/", true))), new Tuple(SSR.value, new Tuple("SSR", new Tuple("ssr/", false)))])), switcher_(dictKorok)(div2(dictKorok))(page(push2))(event)]);
       });
     });
   };
 };
 
 // output/Effect.Console/foreign.js
-var log2 = function(s) {
+var log2 = function(s2) {
   return function() {
-    console.log(s);
+    console.log(s2);
   };
 };
 
@@ -10687,7 +10705,7 @@ var argv = /* @__PURE__ */ function() {
 }();
 
 // output/Deku.Example.Docs.Static.Build/index.js
-var main = function __do() {
+var main2 = function __do() {
   var args = argv();
   var options2 = maybe(pure(applicativeEffect)({
     pageString: "Intro",
@@ -10696,12 +10714,12 @@ var main = function __do() {
     top: true
   }))(function(f) {
     return function __do2() {
-      var s = readTextFile(UTF8.value)(f)();
+      var s2 = readTextFile(UTF8.value)(f)();
       var parsed = either(function(e) {
-        return throwException(error("cannot convert string to json: " + (s + (" err: " + show(showString)(e)))));
-      })(pure(applicativeEffect))(jsonParser(s))();
+        return throwException(error("cannot convert string to json: " + (s2 + (" err: " + show(showString)(e)))));
+      })(pure(applicativeEffect))(jsonParser(s2))();
       var decoded = either(function(e) {
-        return throwException(error("cannot decode json: " + (s + (" err: " + show(showJsonDecodeError)(e)))));
+        return throwException(error("cannot decode json: " + (s2 + (" err: " + show(showJsonDecodeError)(e)))));
       })(pure(applicativeEffect))(decode(object("Info")(record2()(rowListCodecCons(rowListCodecCons(rowListCodecCons(rowListCodecNil)()()({
         reflectSymbol: function() {
           return "top";
@@ -10747,4 +10765,4 @@ var main = function __do() {
 };
 
 // <stdin>
-main();
+main2();
