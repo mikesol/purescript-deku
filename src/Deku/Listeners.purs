@@ -16,12 +16,12 @@ import Control.Alt (alt)
 import Control.Monad.ST.Class (class MonadST)
 import Data.Foldable (for_)
 import Deku.Attribute (class Attr, Attribute, Cb, attr, cb, (:=))
-import Deku.Core (class Korok)
 import Deku.DOM as D
 import Effect (Effect)
 import Effect.Aff (launchAff_, delay, Milliseconds(..))
 import Effect.Class (liftEffect)
 import FRP.Event (AnEvent)
+import Hyrule.Zora (Zora)
 import Web.DOM (Element)
 import Web.Event.Event (target)
 import Web.HTML.HTMLInputElement (fromEventTarget, value, valueAsNumber)
@@ -47,8 +47,8 @@ click_ = map (attr D.OnClick <<< (_ $ mempty))
 slider
   :: forall s m
    . MonadST s m
-  => AnEvent m (Number -> Effect Unit)
-  -> AnEvent m (Attribute D.Input_)
+  => AnEvent Zora (Number -> Effect Unit)
+  -> AnEvent Zora (Attribute D.Input_)
 slider = alt (pure $ D.Xtype := "range") <<< map
   ( \push ->
       D.OnInput := cb \e -> for_
@@ -59,8 +59,8 @@ slider = alt (pure $ D.Xtype := "range") <<< map
 textInput
   :: forall s m e
    . MonadST s m
-  => AnEvent m (String -> Effect Unit)
-  -> AnEvent m (Attribute e)
+  => AnEvent Zora (String -> Effect Unit)
+  -> AnEvent Zora (Attribute e)
 textInput = map \push -> D.OnInput := cb \e -> for_
   (target e >>= fromEventTarget)
   (value >=> push)
@@ -75,40 +75,35 @@ keyEvent'
 keyEvent' listener = map \f -> listener := cb \e -> for_ (fromEvent e) f
 
 keyUp
-  :: forall s m eleemnt
-   . MonadST s m
-  => AnEvent m (KeyboardEvent -> Effect Unit)
-  -> AnEvent m (Attribute eleemnt)
+  :: forall eleemnt
+   . AnEvent Zora (KeyboardEvent -> Effect Unit)
+  -> AnEvent Zora (Attribute eleemnt)
 keyUp = keyEvent' D.OnKeyup
 
 keyDown
-  :: forall s m eleemnt
-   . MonadST s m
-  => AnEvent m (KeyboardEvent -> Effect Unit)
-  -> AnEvent m (Attribute eleemnt)
+  :: forall eleemnt
+   . AnEvent Zora (KeyboardEvent -> Effect Unit)
+  -> AnEvent Zora (Attribute eleemnt)
 keyDown = keyEvent' D.OnKeydown
 
 keyPress
-  :: forall s m eleemnt
-   . MonadST s m
-  => AnEvent m (KeyboardEvent -> Effect Unit)
-  -> AnEvent m (Attribute eleemnt)
+  :: forall eleemnt
+   . AnEvent Zora (KeyboardEvent -> Effect Unit)
+  -> AnEvent Zora (Attribute eleemnt)
 keyPress = keyEvent' D.OnKeypress
 
 injectElement
-  :: forall e s m
-   . Korok s m
-  => Attr e D.Self (Element -> Effect Unit)
+  :: forall e
+   . Attr e D.Self (Element -> Effect Unit)
   => (Element -> Effect Unit)
-  -> AnEvent m (Attribute e)
+  -> AnEvent Zora (Attribute e)
 injectElement f = pure
   (D.Self := \s -> launchAff_ (delay (Milliseconds 0.0) *> liftEffect (f s)))
 
 injectElementT
-  :: forall e te s m
-   . Korok s m
-  => Attr e D.SelfT (te -> Effect Unit)
+  :: forall e te
+   . Attr e D.SelfT (te -> Effect Unit)
   => (te -> Effect Unit)
-  -> AnEvent m (Attribute e)
+  -> AnEvent Zora (Attribute e)
 injectElementT f = pure
   (D.SelfT := \s -> launchAff_ (delay (Milliseconds 0.0) *> liftEffect (f s)))
