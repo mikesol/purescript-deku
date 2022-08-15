@@ -13,7 +13,7 @@ import Graphics.Canvas (CanvasElement, fillRect, getContext2D, setFillStyle)
 import Unsafe.Coerce (unsafeCoerce)
 import Web.HTML.HTMLCanvasElement as HTMLCanvasElement
 
-scene :: forall lock. Domable Effect lock (FFIDOMSnapshot -> Effect Unit)
+scene :: forall lock. Domable lock (FFIDOMSnapshot -> Effect Unit)
 scene = D.canvas
   ( oneOfMap pure
       [ D.Width := "400px"
