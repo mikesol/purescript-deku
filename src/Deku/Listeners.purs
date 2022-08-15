@@ -13,7 +13,6 @@ module Deku.Listeners
 import Prelude
 
 import Control.Alt (alt)
-import Control.Monad.ST.Class (class MonadST)
 import Data.Foldable (for_)
 import Deku.Attribute (class Attr, Attribute, Cb, attr, cb, (:=))
 import Deku.DOM as D
@@ -45,9 +44,7 @@ click_
 click_ = map (attr D.OnClick <<< (_ $ mempty))
 
 slider
-  :: forall s m
-   . MonadST s m
-  => AnEvent Zora (Number -> Effect Unit)
+  :: AnEvent Zora (Number -> Effect Unit)
   -> AnEvent Zora (Attribute D.Input_)
 slider = alt (pure $ D.Xtype := "range") <<< map
   ( \push ->
@@ -57,9 +54,8 @@ slider = alt (pure $ D.Xtype := "range") <<< map
   )
 
 textInput
-  :: forall s m e
-   . MonadST s m
-  => AnEvent Zora (String -> Effect Unit)
+  :: forall e
+  . AnEvent Zora (String -> Effect Unit)
   -> AnEvent Zora (Attribute e)
 textInput = map \push -> D.OnInput := cb \e -> for_
   (target e >>= fromEventTarget)
