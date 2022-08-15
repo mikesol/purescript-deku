@@ -14,12 +14,13 @@ import Data.Profunctor (lcmap)
 import Data.Tuple.Nested ((/\))
 import Deku.Attribute (Cb, cb, (:=))
 import Deku.Control (text)
+import Deku.Core (bus)
 import Deku.DOM as D
 import Deku.Toplevel (runInBody1)
 import Effect (Effect)
 import Effect.Aff (launchAff_)
 import Effect.Class (liftEffect)
-import FRP.Event (AnEvent, bus, mapAccum)
+import FRP.Event (AnEvent, mapAccum)
 
 data UIAction = Initial | Loading | Result String
 

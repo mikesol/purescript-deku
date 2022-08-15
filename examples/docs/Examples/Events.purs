@@ -2,9 +2,9 @@ module Deku.Examples.Docs.Examples.Events where
 
 import Prelude
 
-import Bolson.Core (vbussed)
 import Control.Alt ((<|>))
 import Deku.Control (text, text_)
+import Deku.Core (vbussed)
 import Deku.DOM as D
 import Deku.Listeners (click_, slider)
 import Deku.Toplevel (runInBody)

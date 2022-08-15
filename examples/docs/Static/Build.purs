@@ -2,6 +2,7 @@ module Deku.Example.Docs.Static.Build where
 
 import Prelude
 
+import Control.Monad.ST.Global (toEffect)
 import Data.Argonaut as Parser
 import Data.Array ((!!))
 import Data.Codec.Argonaut as CA
@@ -62,7 +63,7 @@ main = do
           }
     )
     (args !! 2)
-  runSSR
+  toEffect (runSSR
     ( Template
         { head:
             """<!DOCTYPE html>
@@ -97,4 +98,4 @@ main = do
         , tail: "</html>"
         }
     )
-    (scene options) >>= log
+    (scene options)) >>= log
