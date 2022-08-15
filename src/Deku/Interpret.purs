@@ -12,11 +12,13 @@ module Deku.Interpret
 import Prelude
 
 import Control.Monad.ST (ST)
+import Control.Monad.ST.Global (Global)
 import Control.Monad.ST.Internal as RRef
 import Data.Maybe (Maybe, maybe)
 import Deku.Core as Core
 import Effect (Effect)
 import Effect.Ref as Ref
+import Hyrule.Zora (liftImpure, liftPure)
 import Test.QuickCheck (arbitrary, mkSeed)
 import Test.QuickCheck.Gen (Gen, evalGen)
 
@@ -81,9 +83,9 @@ foreign import setHydrating :: FFIDOMSnapshot -> Effect Unit
 foreign import unSetHydrating :: FFIDOMSnapshot -> Effect Unit
 
 fullDOMInterpret
-  :: Ref.Ref Int -> Core.DOMInterpret Effect (FFIDOMSnapshot -> Effect Unit)
+  :: Ref.Ref Int -> Core.DOMInterpret (FFIDOMSnapshot -> Effect Unit)
 fullDOMInterpret seed = Core.DOMInterpret
-  { ids: do
+  { ids: liftImpure do
       s <- Ref.read seed
       let
         o = show
@@ -131,13 +133,9 @@ ssrSetText
   :: forall r. Core.SetText -> RRef.STRef r (Array Instruction) -> ST r Unit
 ssrSetText a i = void $ RRef.modify (_ <> [ SetText a ]) i
 
-ssrDOMInterpret
-  :: forall r
-   . RRef.STRef r Int
-  -> Core.DOMInterpret (ST r)
-       (RRef.STRef r (Array Instruction) -> ST r Unit)
+ssrDOMInterpret :: RRef.STRef Global Int -> Core.DOMInterpret (RRef.STRef Global (Array Instruction) -> ST Global Unit)
 ssrDOMInterpret seed = Core.DOMInterpret
-  { ids: do
+  { ids: liftPure do
       s <- RRef.read seed
       let
         o = show
@@ -159,9 +157,9 @@ ssrDOMInterpret seed = Core.DOMInterpret
   }
 
 hydratingDOMInterpret
-  :: Ref.Ref Int -> Core.DOMInterpret Effect (FFIDOMSnapshot -> Effect Unit)
+  :: Ref.Ref Int -> Core.DOMInterpret (FFIDOMSnapshot -> Effect Unit)
 hydratingDOMInterpret seed = Core.DOMInterpret
-  { ids: do
+  { ids: liftImpure do
       s <- Ref.read seed
       let
         o = show
