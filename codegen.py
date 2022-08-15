@@ -181,6 +181,7 @@ data {term} = {term}''')
 import Prelude
 import Effect (Effect)
 import Deku.Attribute (class Attr, Cb(..), cb', unsafeAttribute)
+import Hyrule.Zora (Zora, runImpure)
 
 data {term} = {term}''')
             term = 'On'+x.capitalize()
@@ -190,6 +191,10 @@ data {term} = {term}''')
   attr {term} value = unsafeAttribute {{ key: "{x}", value: cb' (Cb (const (value $> true))) }}''')
             print_(f'''instance Attr anything {term} (Effect Boolean) where
   attr {term} value = unsafeAttribute {{ key: "{x}", value: cb' (Cb (const value)) }}''')
+            print_(f'''instance Attr anything {term} (Zora Unit) where
+  attr {term} value = unsafeAttribute {{ key: "{x}", value: cb' (Cb (const (runImpure (value $> true)))) }}''')
+            print_(f'''instance Attr anything {term} (Zora Boolean) where
+  attr {term} value = unsafeAttribute {{ key: "{x}", value: cb' (Cb (const (runImpure value))) }}''')
     else:
       raise ValueError('wat' + str(CODEGEN_TARGET) )
     return '\n'.join(o)

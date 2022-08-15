@@ -349,7 +349,7 @@ module Deku.DOM
   -- codegen 0
   ) where
 
-import Deku.Attribute
+import Deku.Attribute (class Attr, Cb(..), unsafeAttribute, cb')
 
 -- codegen 9
 import Deku.DOM.Attr.Accept(Accept(..))
