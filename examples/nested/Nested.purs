@@ -31,13 +31,11 @@ interval = fromEvent <<< FRP.Event.Time.interval
 delay :: forall a. Int -> AnEvent Zora a -> AnEvent Zora a
 delay n = fromEvent <<< FRP.Event.delay n <<< toEvent
 
--- random :: ABehavior Zora (Additive Number)
 random :: ABehavior (AnEvent Zora) (Additive Number)
 random = behavior \e ->
   makeEvent \k -> subscribe e \f ->
     (liftImpure $ Additive <$> Random.random) >>= k <<< f
 
--- rdm :: ABehavior Zora String
 rdm :: ABehavior (AnEvent Zora) String
 rdm = map
   ( \{ r: Additive r, g: Additive g, b: Additive b } -> "rgb(" <> show (floor (r * 100.0 + 155.0)) <> ","
