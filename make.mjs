@@ -9082,25 +9082,25 @@ var fromEvent = /* @__PURE__ */ unsafeReadProtoTagged("KeyboardEvent");
 
 // output/Deku.Listeners/index.js
 var slider = function(dictMonadST) {
-  var $17 = alt(altEvent(dictMonadST.Monad0().Applicative0()))(pure(applicativeEvent(dictMonadST))(attr(attrInput_XtypeString)(Xtype.value)("range")));
-  var $18 = map(functorEvent)(function(push2) {
+  var $18 = alt(altEvent(dictMonadST.Monad0().Applicative0()))(pure(applicativeEvent(dictMonadST))(attr(attrInput_XtypeString)(Xtype.value)("range")));
+  var $19 = map(functorEvent)(function(push2) {
     return attr(attrOnInputCb)(OnInput.value)(cb(function(e) {
       return for_(applicativeEffect)(foldableMaybe)(bind(bindMaybe)(target(e))(fromEventTarget))(composeKleisli(bindEffect)(valueAsNumber)(push2));
     }));
   });
-  return function($19) {
-    return $17($18($19));
+  return function($20) {
+    return $18($19($20));
   };
 };
 var click_ = function(dictFunctor) {
   return function(dictMonoid) {
     return function(dictAttr) {
       return map(dictFunctor)(function() {
-        var $20 = attr(dictAttr)(OnClick.value);
-        return function($21) {
-          return $20(function(v) {
+        var $24 = attr(dictAttr)(OnClick.value);
+        return function($25) {
+          return $24(function(v) {
             return v(mempty(dictMonoid));
-          }($21));
+          }($25));
         };
       }());
     };
