@@ -297,14 +297,11 @@ ezDyn
        -> Domable m lock payload
      )
   -> AnEvent m (Attribute element)
-  -> ( { remove :: Effect Unit, sendToPos :: Int -> Effect Unit }
-       -> AnEvent m (Domable m lock payload)
-     )
+  -> (AnEvent m ({ remove :: Effect Unit, sendToPos :: Int -> Effect Unit } -> Domable m lock payload))
   -> Domable m lock payload
-ezDyn f0 e f1 = dyn f0 e $ keepLatest $ bus \setRm rm ->
+ezDyn f0 e0 e1 = dyn f0 e0 (e1 <#> \f1 -> keepLatest $ bus \setRm rm ->
   keepLatest $ bus \setStp stp ->
-    f1 { remove: setRm unit, sendToPos: setStp } <#> \c ->
-      (rm $> remove) <|> (stp <#> sendToPos) <|> pure (insert_ c)
+      (rm $> remove) <|> (stp <#> sendToPos) <|> pure (insert_ (f1 { remove: setRm unit, sendToPos: setStp })))
 
 ezDyn_
   :: forall s m element lock payload
@@ -313,14 +310,11 @@ ezDyn_
        -> Array (Domable m lock payload)
        -> Domable m lock payload
      )
-  -> ( { remove :: Effect Unit, sendToPos :: Int -> Effect Unit }
-       -> AnEvent m (Domable m lock payload)
-     )
+  -> (AnEvent m ({ remove :: Effect Unit, sendToPos :: Int -> Effect Unit } -> Domable m lock payload))
   -> Domable m lock payload
-ezDyn_ f0 f1 = dyn_ f0 $ keepLatest $ bus \setRm rm ->
+ezDyn_ f0 e1 = dyn_ f0 (e1 <#> \f1 -> keepLatest $ bus \setRm rm ->
   keepLatest $ bus \setStp stp ->
-    f1 { remove: setRm unit, sendToPos: setStp } <#> \c ->
-      (rm $> remove) <|> (stp <#> sendToPos) <|> pure (insert_ c)
+      (rm $> remove) <|> (stp <#> sendToPos) <|> pure (insert_ (f1 { remove: setRm unit, sendToPos: setStp })))
 dyn_
   :: forall s m element lock payload
    . Korok s m
