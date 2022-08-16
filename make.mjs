@@ -5613,13 +5613,13 @@ var unsafeText = function(v) {
 var unsafeSetText = function(v) {
   return function(id2) {
     return function(txt) {
-      return map(functorEvent)(function($95) {
+      return map(functorEvent)(function($97) {
         return v.setText(function(v1) {
           return {
             id: id2,
             text: v1
           };
-        }($95));
+        }($97));
       })(txt);
     };
   };
@@ -5627,7 +5627,7 @@ var unsafeSetText = function(v) {
 var unsafeSetAttribute = function(v) {
   return function(id2) {
     return function(atts) {
-      return map(functorEvent)(function($96) {
+      return map(functorEvent)(function($98) {
         return function(v1) {
           if (v1.value instanceof Prop$prime) {
             return v.setProp({
@@ -5645,8 +5645,8 @@ var unsafeSetAttribute = function(v) {
             });
           }
           ;
-          throw new Error("Failed pattern match at Deku.Control (line 84, column 26 - line 86, column 45): " + [v1.value.constructor.name]);
-        }(unsafeUnAttribute($96));
+          throw new Error("Failed pattern match at Deku.Control (line 87, column 26 - line 89, column 45): " + [v1.value.constructor.name]);
+        }(unsafeUnAttribute($98));
       })(atts);
     };
   };
@@ -5706,11 +5706,11 @@ var portalFlatten = function(dictNewtype) {
       };
     },
     ids: function() {
-      var $97 = unwrap(dictNewtype);
-      return function($98) {
+      var $99 = unwrap(dictNewtype);
+      return function($100) {
         return function(v) {
           return v.ids;
-        }($97($98));
+        }($99($100));
       };
     }(),
     disconnectElement: function(v) {
@@ -5789,9 +5789,9 @@ var portal = function() {
           fromEltO2: coerce(),
           toElt: coerce(),
           wrapElt: function() {
-            var $103 = elementify(dictKorok)("div")(empty(plusEvent(dictKorok.MonadST5().Monad0().Applicative0())));
-            return function($104) {
-              return Element$prime.create($103($104));
+            var $105 = elementify(dictKorok)("div")(empty(plusEvent(dictKorok.MonadST5().Monad0().Applicative0())));
+            return function($106) {
+              return Element$prime.create($105($106));
             };
           }(),
           giveNewParent: function(q2) {
@@ -5802,11 +5802,11 @@ var portal = function() {
             };
           },
           deleteFromCache: function() {
-            var $105 = unwrap();
-            return function($106) {
+            var $107 = unwrap();
+            return function($108) {
               return function(v) {
                 return v.deleteFromCache;
-              }($105($106));
+              }($107($108));
             };
           }()
         })(a2)(lcmap(profunctorFn)(map(functorVect)(function(v) {
