@@ -10,6 +10,8 @@ module Deku.Control
   , blank
   , dyn
   , dyn_
+  , ezDyn
+  , ezDyn_
   , fixed
   , fixed_
   , envy
@@ -32,8 +34,9 @@ import Data.Maybe (Maybe(..), maybe)
 import Data.Newtype (unwrap)
 import Data.Profunctor (lcmap)
 import Deku.Attribute (Attribute, AttributeValue(..), unsafeUnAttribute)
-import Deku.Core (class Korok, DOMInterpret(..), Domable, Node(..), Nut)
-import FRP.Event (AnEvent, makeEvent, subscribe)
+import Deku.Core (class Korok, DOMInterpret(..), Domable, Node(..), Nut, bus, insert_, remove, sendToPos)
+import Effect (Effect)
+import FRP.Event (AnEvent, keepLatest, makeEvent, subscribe)
 import Prim.Int (class Compare)
 import Prim.Ordering (GT)
 import Safe.Coerce (coerce)
@@ -193,7 +196,8 @@ text txt = Element' $ Node go
         )
         k
 
-text_ :: forall s m lock payload. MonadST s m => String -> Domable m lock payload
+text_
+  :: forall s m lock payload. MonadST s m => String -> Domable m lock payload
 text_ txt = text (pure txt)
 
 deku
@@ -251,72 +255,128 @@ __internalDekuFlatten = Bolson.flatten
 switcher
   :: forall a s m element lock payload
    . Korok s m
-  => (AnEvent m (Attribute element) -> Array (Domable m lock payload) -> Domable m lock payload)
+  => ( AnEvent m (Attribute element)
+       -> Array (Domable m lock payload)
+       -> Domable m lock payload
+     )
   -> AnEvent m (Attribute element)
   -> (a -> Domable m lock payload)
   -> AnEvent m a
   -> Domable m lock payload
-switcher f e1 i e2 = f e1 [Bolson.switcher i e2 ]
+switcher f e1 i e2 = f e1 [ Bolson.switcher i e2 ]
 
 switcher_
   :: forall a s m element lock payload
    . Korok s m
-  => (AnEvent m (Attribute element) -> Array (Domable m lock payload) -> Domable m lock payload)
+  => ( AnEvent m (Attribute element)
+       -> Array (Domable m lock payload)
+       -> Domable m lock payload
+     )
   -> (a -> Domable m lock payload)
   -> AnEvent m a
   -> Domable m lock payload
-switcher_ f i e = f empty [Bolson.switcher i e ]
+switcher_ f i e = f empty [ Bolson.switcher i e ]
 
 dyn
   :: forall s m element lock payload
    . Korok s m
-  => (AnEvent m (Attribute element) -> Array (Domable m lock payload) -> Domable m lock payload)
+  => ( AnEvent m (Attribute element)
+       -> Array (Domable m lock payload)
+       -> Domable m lock payload
+     )
   -> AnEvent m (Attribute element)
   -> AnEvent m (AnEvent m (BCore.Child Int (Node m lock payload) m lock))
   -> Domable m lock payload
-dyn f e i = f e [BCore.dyn i]
+dyn f e i = f e [ BCore.dyn i ]
 
+ezDyn
+  :: forall s m element lock payload
+   . Korok s m
+  => ( AnEvent m (Attribute element)
+       -> Array (Domable m lock payload)
+       -> Domable m lock payload
+     )
+  -> AnEvent m (Attribute element)
+  -> ( { remove :: Effect Unit, sendToPos :: Int -> Effect Unit }
+       -> AnEvent m (Domable m lock payload)
+     )
+  -> Domable m lock payload
+ezDyn f0 e f1 = dyn f0 e $ keepLatest $ bus \setRm rm ->
+  keepLatest $ bus \setStp stp ->
+    f1 { remove: setRm unit, sendToPos: setStp } <#> \c ->
+      (rm $> remove) <|> (stp <#> sendToPos) <|> pure (insert_ c)
+
+ezDyn_
+  :: forall s m element lock payload
+   . Korok s m
+  => ( AnEvent m (Attribute element)
+       -> Array (Domable m lock payload)
+       -> Domable m lock payload
+     )
+  -> ( { remove :: Effect Unit, sendToPos :: Int -> Effect Unit }
+       -> AnEvent m (Domable m lock payload)
+     )
+  -> Domable m lock payload
+ezDyn_ f0 f1 = dyn_ f0 $ keepLatest $ bus \setRm rm ->
+  keepLatest $ bus \setStp stp ->
+    f1 { remove: setRm unit, sendToPos: setStp } <#> \c ->
+      (rm $> remove) <|> (stp <#> sendToPos) <|> pure (insert_ c)
 dyn_
   :: forall s m element lock payload
    . Korok s m
-  => (AnEvent m (Attribute element) -> Array (Domable m lock payload) -> Domable m lock payload)
+  => ( AnEvent m (Attribute element)
+       -> Array (Domable m lock payload)
+       -> Domable m lock payload
+     )
   -> AnEvent m (AnEvent m (BCore.Child Int (Node m lock payload) m lock))
   -> Domable m lock payload
-dyn_ f i = f empty [BCore.dyn i]
+dyn_ f i = f empty [ BCore.dyn i ]
 
 fixed
   :: forall s m element lock payload
    . Korok s m
-  => (AnEvent m (Attribute element) -> Array (Domable m lock payload) -> Domable m lock payload)
+  => ( AnEvent m (Attribute element)
+       -> Array (Domable m lock payload)
+       -> Domable m lock payload
+     )
   -> AnEvent m (Attribute element)
   -> Array (Domable m lock payload)
   -> Domable m lock payload
-fixed f e i = f e [BCore.fixed i]
+fixed f e i = f e [ BCore.fixed i ]
 
 fixed_
   :: forall s m element lock payload
    . Korok s m
-  => (AnEvent m (Attribute element) -> Array (Domable m lock payload) -> Domable m lock payload)
+  => ( AnEvent m (Attribute element)
+       -> Array (Domable m lock payload)
+       -> Domable m lock payload
+     )
   -> Array (Domable m lock payload)
   -> Domable m lock payload
-fixed_ f i = f empty [BCore.fixed i]
+fixed_ f i = f empty [ BCore.fixed i ]
 
 envy
   :: forall s m element lock payload
    . Korok s m
-  => (AnEvent m (Attribute element) -> Array (Domable m lock payload) -> Domable m lock payload)
+  => ( AnEvent m (Attribute element)
+       -> Array (Domable m lock payload)
+       -> Domable m lock payload
+     )
   -> AnEvent m (Attribute element)
   -> AnEvent m (Domable m lock payload)
   -> Domable m lock payload
-envy f e i = f e [BCore.envy i]
+envy f e i = f e [ BCore.envy i ]
 
 envy_
   :: forall s m element lock payload
    . Korok s m
-  => (AnEvent m (Attribute element) -> Array (Domable m lock payload) -> Domable m lock payload)
+  => ( AnEvent m (Attribute element)
+       -> Array (Domable m lock payload)
+       -> Domable m lock payload
+     )
   -> AnEvent m (Domable m lock payload)
   -> Domable m lock payload
-envy_ f i = f empty [BCore.envy i]
+envy_ f i = f empty [ BCore.envy i ]
 
 blank :: Nut
 blank = BCore.envy empty
