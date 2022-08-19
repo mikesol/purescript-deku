@@ -7,22 +7,24 @@ module Deku.Do
   , useStates
   , useMemoized
   , useMailboxed
+  , useRemoval
   , class InitializeEvents
   , initializeEvents'
   ) where
 
 import Prelude hiding (bind, discard)
 
-import Bolson.Core (envy)
+import Bolson.Core (Child, envy)
 import Bolson.Core as Bolson
 import Control.Alt ((<|>))
 import Control.Monad.ST.Class (class MonadST)
 import Data.Profunctor (lcmap)
 import Data.Symbol (class IsSymbol)
+import Data.Tuple (curry)
 import Data.Tuple.Nested (type (/\), (/\))
 import Deku.Core (LiftImpure, bussedUncurried, vbussedUncurried)
 import Effect (Effect)
-import FRP.Event (AnEvent, mailboxed, memoize)
+import FRP.Event (AnEvent, keepLatest, mailboxed, memoize)
 import FRP.Event.VBus (class VBus, V)
 import Heterogeneous.Mapping (class MapRecordWithIndex, ConstMapping)
 import Hyrule.Zora (Zora)
@@ -141,3 +143,12 @@ useMailboxed
   -> Bolson.Entity logic obj Zora lock
 useMailboxed f = bussedUncurried \(a /\ b) -> envy
   (mailboxed b \c -> f (a /\ c))
+
+useRemoval
+  :: forall a m logic obj lock s
+   . Korok s m
+  => (Effect Unit /\ (AnEvent m (Child logic obj m lock)) -> AnEvent m a)
+  -> AnEvent m a
+useRemoval f = keepLatest do
+  setRemoveMe /\ removeMe <- bus <<< curry
+  f (setRemoveMe unit /\ (removeMe $> remove))

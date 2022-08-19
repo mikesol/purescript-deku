@@ -10,6 +10,8 @@ module Deku.Control
   , blank
   , dyn
   , dyn_
+  , ezDyn
+  , ezDyn_
   , fixed
   , fixed_
   , envy
@@ -31,9 +33,11 @@ import Data.Maybe (Maybe(..), maybe)
 import Data.Newtype (unwrap)
 import Data.Profunctor (lcmap)
 import Deku.Attribute (Attribute, AttributeValue(..), unsafeUnAttribute)
-import Deku.Core (DOMInterpret(..), Domable, Node(..), Nut)
 import FRP.Event (AnEvent, makeEvent, subscribe)
 import Hyrule.Zora (Zora)
+import Deku.Core (class Korok, DOMInterpret(..), Domable, Node(..), Nut, bus, insert_, remove, sendToPos)
+import Effect (Effect)
+import FRP.Event (AnEvent, keepLatest, makeEvent, subscribe)
 import Prim.Int (class Compare)
 import Prim.Ordering (GT)
 import Safe.Coerce (coerce)
@@ -274,6 +278,30 @@ dyn
   -> Domable lock payload
 dyn f e i = f e [ BCore.dyn i ]
 
+ezDyn
+  :: forall element lock payload
+   . ( AnEvent Zora (Attribute element)
+       -> Array (Domable lock payload)
+       -> Domable lock payload
+     )
+  -> AnEvent Zora (Attribute element)
+  -> (AnEvent Zora ({ remove :: Effect Unit, sendToPos :: Int -> Effect Unit } -> Domable lock payload))
+  -> Domable lock payload
+ezDyn f0 e0 e1 = dyn f0 e0 (e1 <#> \f1 -> keepLatest $ bus \setRm rm ->
+  keepLatest $ bus \setStp stp ->
+      (rm $> remove) <|> (stp <#> sendToPos) <|> pure (insert_ (f1 { remove: setRm unit, sendToPos: setStp })))
+
+ezDyn_
+  :: forall element lock payload
+   . ( AnEvent Zora (Attribute element)
+       -> Array (Domable lock payload)
+       -> Domable lock payload
+     )
+  -> (AnEvent Zora ({ remove :: Effect Unit, sendToPos :: Int -> Effect Unit } -> Domable lock payload))
+  -> Domable lock payload
+ezDyn_ f0 e1 = dyn_ f0 (e1 <#> \f1 -> keepLatest $ bus \setRm rm ->
+  keepLatest $ bus \setStp stp ->
+      (rm $> remove) <|> (stp <#> sendToPos) <|> pure (insert_ (f1 { remove: setRm unit, sendToPos: setStp })))
 dyn_
   :: forall element lock payload
    . ( AnEvent Zora (Attribute element)
