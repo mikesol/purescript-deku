@@ -55,10 +55,8 @@ slider = alt (pure $ D.Xtype := "range") <<< map
   )
 
 numeric
-  :: forall s m
-   . MonadST s m
-  => AnEvent m (Number -> Effect Unit)
-  -> AnEvent m (Attribute D.Input_)
+  :: AnEvent Zora (Number -> Effect Unit)
+  -> AnEvent Zora (Attribute D.Input_)
 numeric = alt (pure $ D.Xtype := "number") <<< map
   ( \push ->
       D.OnInput := cb \e -> for_

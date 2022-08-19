@@ -6,7 +6,7 @@ let overrides =
       { bolson =
         { dependencies = [ "prelude" ]
         , repo = "https://github.com/mikesol/purescript-bolson.git"
-        , version = "main"
+        , version = "purefunctor"
         }
         , hyrule =
         { dependencies = [ "monoid-extras", "web-uievents", "js-timers", "unsafe-reference" ]

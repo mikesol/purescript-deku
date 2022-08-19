@@ -22,7 +22,7 @@ import Data.Profunctor (lcmap)
 import Data.Symbol (class IsSymbol)
 import Data.Tuple (curry)
 import Data.Tuple.Nested (type (/\), (/\))
-import Deku.Core (LiftImpure, bussedUncurried, vbussedUncurried)
+import Deku.Core (LiftImpure, bus, remove, bussedUncurried, vbussedUncurried)
 import Effect (Effect)
 import FRP.Event (AnEvent, keepLatest, mailboxed, memoize)
 import FRP.Event.VBus (class VBus, V)
@@ -75,7 +75,7 @@ useStates'
        (ConstMapping LiftImpure)
        pushi
        pusho
-  => VBus rbus pushi event u
+  => VBus rbus pushi event Zora
   => Proxy (V bus)
   -> (({ | pusho } /\ { | event }) -> Bolson.Entity logic obj Zora lock)
   -> Bolson.Entity logic obj Zora lock
@@ -125,7 +125,7 @@ useStates
        (ConstMapping LiftImpure)
        pushi
        pusho
-  => VBus rbus pushi event u
+  => VBus rbus pushi event Zora
   => Proxy (V bus)
   -> { | needle }
   -> (({ | pusho } /\ { | event }) -> Bolson.Entity logic obj Zora lock)
@@ -145,10 +145,9 @@ useMailboxed f = bussedUncurried \(a /\ b) -> envy
   (mailboxed b \c -> f (a /\ c))
 
 useRemoval
-  :: forall a m logic obj lock s
-   . Korok s m
-  => (Effect Unit /\ (AnEvent m (Child logic obj m lock)) -> AnEvent m a)
-  -> AnEvent m a
+  :: forall a logic obj lock s
+   . (Effect Unit /\ (AnEvent Zora (Child logic obj Zora lock)) -> AnEvent Zora a)
+  -> AnEvent Zora a
 useRemoval f = keepLatest do
   setRemoveMe /\ removeMe <- bus <<< curry
   f (setRemoveMe unit /\ (removeMe $> remove))

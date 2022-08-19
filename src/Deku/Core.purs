@@ -108,7 +108,7 @@ vbussed
        (ConstMapping LiftImpure)
        pushi
        pusho
-  => VBus rbus pushi event u
+  => VBus rbus pushi event Zora
   => Proxy (V bus)
   -> ({ | pusho } -> { | event } -> Bolson.Entity logic obj Zora lock)
   -> Bolson.Entity logic obj Zora lock
@@ -116,14 +116,14 @@ vbussed px f = Bolson.EventfulElement'
   (Bolson.EventfulElement (vbus px (lcmap hlift f)))
 
 vbussedUncurried
-  :: forall logic obj lock rbus bus pushi pusho pushR event u
+  :: forall logic obj lock rbus bus pushi pusho pushR event
    . RowToList bus rbus
   => RowToList pushi pushR
   => MapRecordWithIndex pushR
        (ConstMapping LiftImpure)
        pushi
        pusho
-  => VBus rbus pushi event u
+  => VBus rbus pushi event Zora
   => Proxy (V bus)
   -> (({ | pusho } /\ { | event }) -> Bolson.Entity logic obj Zora lock)
   -> Bolson.Entity logic obj Zora lock
