@@ -12,7 +12,7 @@ import Data.Tuple (snd)
 import Data.Tuple.Nested ((/\))
 import Deku.Attribute ((:=))
 import Deku.Control (dyn, text_)
-import Deku.Core (class Korok, Domable, bussedUncurried, insert_, remove)
+import Deku.Core (Domable, bussedUncurried, insert_, remove)
 import Deku.DOM as D
 import Deku.Do (useMailboxed, useMemoized)
 import Deku.Do as Deku
@@ -25,6 +25,7 @@ import Halogen (liftEffect)
 import Halogen as H
 import Halogen.HTML as HH
 import Halogen.HTML.Properties as HP
+import Hyrule.Zora (Zora)
 import Performance.Test.Todo.Shared as Shared
 import Type.Proxy (Proxy(..))
 import Web.HTML.HTMLElement (toElement)
@@ -61,10 +62,9 @@ container =
       pure unit
 
 containerD
-  :: forall s m lock payload
-   . Korok s m
-  => Shared.ContainerState
-  -> Domable m lock payload
+  :: forall lock payload
+   . Shared.ContainerState
+  -> Domable lock payload
 containerD initialState = Deku.do
   setCompleteStatus /\ completeStatus <- useMailboxed
   setRename /\ rename <- useMailboxed
@@ -180,14 +180,13 @@ containerD initialState = Deku.do
     ]
 
 todoD
-  :: forall s m lock payload
-   . Korok s m
-  => { id :: Int, description :: String }
-  -> AnEvent m Boolean
-  -> AnEvent m String
+  :: forall lock payload
+   . { id :: Int, description :: String }
+  -> AnEvent Zora Boolean
+  -> AnEvent Zora String
   -> (String -> Effect Unit)
   -> (Boolean -> Effect Unit)
-  -> Domable m lock payload
+  -> Domable lock payload
 todoD { id, description } completeStatus newName doEditName doChecked = Deku.do
   setName /\ name' <- bussedUncurried
   let name = name' <|> pure description
@@ -207,12 +206,11 @@ todoD { id, description } completeStatus newName doEditName doChecked = Deku.do
     ]
 
 checkboxD
-  :: forall s m lock payload
-   . Korok s m
-  => { id :: Int }
-  -> AnEvent m Boolean
+  :: forall lock payload
+   . { id :: Int }
+  -> AnEvent Zora Boolean
   -> (Boolean -> Effect Unit)
-  -> Domable m lock payload
+  -> Domable lock payload
 checkboxD { id } completeStatus doChecked = Deku.do
   localSetChecked /\ localChecked <- bussedUncurried
   let checked = pure true <|> completeStatus

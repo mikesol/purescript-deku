@@ -2,6 +2,7 @@ module Deku.Example.Docs.Static.Build where
 
 import Prelude
 
+import Control.Monad.ST.Global (toEffect)
 import Data.Argonaut as Parser
 import Data.Array ((!!))
 import Data.Codec.Argonaut as CA
@@ -62,39 +63,42 @@ main = do
           }
     )
     (args !! 2)
-  runSSR
-    ( Template
-        { head:
-            """<!DOCTYPE html>
+  toEffect
+    ( runSSR
+        ( Template
+            { head:
+                """<!DOCTYPE html>
   <html>
     <head>
       <title>Deku documentation</title>
       <meta charset="UTF-8">
       <meta name="viewport" content="width=device-width">
       <link rel="stylesheet" href=""" <>
-              if options.top then "\"style.css\""
-              else "\"../style.css\""
-                <>
-                  """>
+                  if options.top then "\"style.css\""
+                  else "\"../style.css\""
+                    <>
+                      """>
       <script type="module">
-        import { main } from """ <>
-              if options.top then "\"bundle.js\""
-              else "\"../bundle.js\""
-                <>
-                  """;
+        import { main } from """
+                    <>
+                      if options.top then "\"bundle.js\""
+                      else "\"../bundle.js\""
+                        <>
+                          """;
         main({"startsWith":"""
-                <> "\""
-                <> options.pageString
-                <> "\""
-                <> ""","slug":"""
-                <> "\""
-                <> options.slug
-                <> "\""
-                <>
-                  """})();
+                        <> "\""
+                        <> options.pageString
+                        <> "\""
+                        <> ""","slug":"""
+                        <> "\""
+                        <> options.slug
+                        <> "\""
+                        <>
+                          """})();
       </script>
     </head>"""
-        , tail: "</html>"
-        }
-    )
-    (scene options) >>= log
+            , tail: "</html>"
+            }
+        )
+        (scene options)
+    ) >>= log

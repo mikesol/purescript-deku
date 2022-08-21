@@ -30,7 +30,9 @@ data MainUIAction
 data TodoAction = Prioritize | Delete
 
 px =
-  Proxy    :: Proxy         """<div>
+  Proxy
+    :: Proxy
+         """<div>
   <h1>Events 2</h1>
 
   <h2>Dynamic children</h2>
@@ -65,7 +67,8 @@ px =
 </div>"""
 
 events2
-  :: forall r. {|PageOptions r}
+  :: forall r
+   . { | PageOptions r }
   -> Nut
 events2 options = px ~~
   { code: nut
@@ -104,39 +107,43 @@ events2 options = px ~~
                       [ text_ "Add" ]
                   ]
               , dyn_ D.div $ map
-                      ( \txt -> keepLatest $ bus \p' e' ->
-                          ( pure $ insert_ $ D.div_ do
-                              [ D.span (pure $ D.Style := "margin: 5px;")
-                                  [ text_ txt ]
-                              , D.button
-                                  ( (pure $ D.Style := "margin: 5px;") <|>
-                                      ( pure $ D.OnClick := cb
-                                          (const $ p' sendToTop)
-                                      )
+                  ( \txt -> keepLatest $ bus \p' e' ->
+                      ( pure $ insert_ $ D.div_ do
+                          [ D.span (pure $ D.Style := "margin: 5px;")
+                              [ text_ txt ]
+                          , D.button
+                              ( (pure $ D.Style := "margin: 5px;") <|>
+                                  ( pure $ D.OnClick := cb
+                                      (const $ p' sendToTop)
                                   )
-                                  [ text_ "Prioritize" ]
-                              , D.button
-                                  ( (pure $ D.Style := "margin: 5px;") <|>
-                                      ( pure $ D.OnClick := cb
-                                          (const $ p' remove)
-                                      )
-                                  )
-                                  [ text_ "Delete" ]
-                              ]
-                          ) <|> e'
-                      )
-                      ( filterMap (\(tf /\ s) -> if tf then Just s else Nothing)
-                          ( mapAccum
-                              ( \a b -> case a of
-                                  ChangeText s -> s /\ (false /\ s)
-                                  AddTodo -> b /\ (true /\ b)
-                                  _ -> "" /\ (false /\ "")
                               )
-                              event
-                              ""
+                              [ text_ "Prioritize" ]
+                          , D.button
+                              ( (pure $ D.Style := "margin: 5px;") <|>
+                                  ( pure $ D.OnClick := cb
+                                      (const $ p' remove)
+                                  )
+                              )
+                              [ text_ "Delete" ]
+                          ]
+                      ) <|> e'
+                  )
+                  ( filterMap (\(tf /\ s) -> if tf then Just s else Nothing)
+                      ( mapAccum
+                          ( \a b -> case a of
+                              ChangeText s -> s /\ (false /\ s)
+                              AddTodo -> b /\ (true /\ b)
+                              _ -> "" /\ (false /\ "")
                           )
+                          event
+                          ""
                       )
+                  )
               ]
       )
-  , next: oneOfMap pure [D.OnClick := (cb (\e -> preventDefault e *> options.dpage Portals *> scrollToTop) ), D.Href := (options.slug <> "portals/") ]
+  , next: oneOfMap pure
+      [ D.OnClick :=
+          (cb (\e -> preventDefault e *> options.dpage Portals *> scrollToTop))
+      , D.Href := (options.slug <> "portals/")
+      ]
   }

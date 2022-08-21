@@ -6,12 +6,12 @@ let overrides =
       { bolson =
         { dependencies = [ "prelude" ]
         , repo = "https://github.com/mikesol/purescript-bolson.git"
-        , version = "main"
+        , version = "v0.1.0"
         }
         , hyrule =
-        { dependencies = [ "web-uievents", "js-timers", "unsafe-reference" ]
+        { dependencies = [ "monoid-extras", "web-uievents", "js-timers", "unsafe-reference" ]
         , repo = "https://github.com/mikesol/purescript-hyrule.git"
-        , version = "master"
+        , version = "v2.1.0"
         }
       }
 

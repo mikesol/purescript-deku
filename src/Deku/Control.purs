@@ -26,7 +26,6 @@ import Bolson.Control as Bolson
 import Bolson.Core (Element(..), Entity(..), EventfulElement(..), FixedChildren(..), PSR, Scope(..))
 import Bolson.Core as BCore
 import Control.Alt ((<|>))
-import Control.Monad.ST.Class (class MonadST)
 import Control.Plus (empty)
 import Data.FastVect.FastVect (Vect)
 import Data.Foldable (oneOf)
@@ -34,7 +33,9 @@ import Data.Maybe (Maybe(..), maybe)
 import Data.Newtype (unwrap)
 import Data.Profunctor (lcmap)
 import Deku.Attribute (Attribute, AttributeValue(..), unsafeUnAttribute)
-import Deku.Core (class Korok, DOMInterpret(..), Domable, Node(..), Nut, bus, insert_, remove, sendToPos)
+import FRP.Event (AnEvent, makeEvent, subscribe)
+import Hyrule.Zora (Zora)
+import Deku.Core (DOMInterpret(..), Domable, Node(..), Nut, bus, insert_, remove, sendToPos)
 import Effect (Effect)
 import FRP.Event (AnEvent, keepLatest, makeEvent, subscribe)
 import Prim.Int (class Compare)
@@ -47,42 +48,42 @@ type Neg1 = -1
 
 ----
 unsafeElement
-  :: forall m payload
-   . DOMInterpret m payload
+  :: forall payload
+   . DOMInterpret payload
   -> { id :: String, parent :: Maybe String, scope :: Scope, tag :: String }
   -> payload
 unsafeElement (DOMInterpret { makeElement }) = makeElement
 
 unsafeConnect
-  :: forall m payload
-   . DOMInterpret m payload
+  :: forall payload
+   . DOMInterpret payload
   -> { id :: String, parent :: String, pos :: Maybe Int }
   -> payload
 unsafeConnect (DOMInterpret { attributeParent }) = attributeParent
 
 unsafeText
-  :: forall m payload
-   . DOMInterpret m payload
+  :: forall payload
+   . DOMInterpret payload
   -> { id :: String, parent :: Maybe String, scope :: Scope }
   -> payload
 unsafeText (DOMInterpret { makeText }) = makeText
 
 unsafeSetText
-  :: forall m payload
-   . DOMInterpret m payload
+  :: forall payload
+   . DOMInterpret payload
   -> String
-  -> AnEvent m String
-  -> AnEvent m payload
+  -> AnEvent Zora String
+  -> AnEvent Zora payload
 unsafeSetText (DOMInterpret { setText }) id txt = map
   (setText <<< { id, text: _ })
   txt
 
 unsafeSetAttribute
-  :: forall m element payload
-   . DOMInterpret m payload
+  :: forall element payload
+   . DOMInterpret payload
   -> String
-  -> AnEvent m (Attribute element)
-  -> AnEvent m payload
+  -> AnEvent Zora (Attribute element)
+  -> AnEvent Zora payload
 unsafeSetAttribute (DOMInterpret { setProp, setCb }) id atts = map
   ( ( \{ key, value } -> case value of
         Prop' s -> setProp { id, key, value: s }
@@ -93,12 +94,11 @@ unsafeSetAttribute (DOMInterpret { setProp, setCb }) id atts = map
   (atts)
 
 elementify
-  :: forall s m element lock payload
-   . Korok s m
-  => String
-  -> AnEvent m (Attribute element)
-  -> Domable m lock payload
-  -> Node m lock payload
+  :: forall element lock payload
+   . String
+  -> AnEvent Zora (Attribute element)
+  -> Domable lock payload
+  -> Node lock payload
 elementify tag atts children = Node go
   where
   go { parent, scope, raiseId, pos } di@(DOMInterpret { ids, deleteFromCache }) =
@@ -127,12 +127,11 @@ elementify tag atts children = Node go
         k
 
 globalPortal
-  :: forall n s m lock payload
+  :: forall n lock payload
    . Compare n Neg1 GT
-  => Korok s m
-  => Vect n (Domable m lock payload)
-  -> (Vect n (Domable m lock payload) -> Domable m lock payload)
-  -> Domable m lock payload
+  => Vect n (Domable lock payload)
+  -> (Vect n (Domable lock payload) -> Domable lock payload)
+  -> Domable lock payload
 globalPortal v c = Bolson.globalPortalComplexComplex
   portalFlatten
   { fromEltO1: coerce
@@ -155,16 +154,15 @@ portalFlatten =
   }
 
 portal
-  :: forall n s m lock0 payload
+  :: forall n lock0 payload
    . Compare n Neg1 GT
-  => Korok s m
-  => Vect n (Domable m lock0 payload)
+  => Vect n (Domable lock0 payload)
   -> ( forall lockfoo
-        . Vect n (Domable m lockfoo payload)
-       -> (Domable m lock0 payload -> Domable m lockfoo payload)
-       -> Domable m lockfoo payload
+        . Vect n (Domable lockfoo payload)
+       -> (Domable lock0 payload -> Domable lockfoo payload)
+       -> Domable lockfoo payload
      )
-  -> Domable m lock0 payload
+  -> Domable lock0 payload
 portal a b = Bolson.portalComplexComplex
   portalFlatten
   { fromEltO1: coerce
@@ -178,10 +176,9 @@ portal a b = Bolson.portalComplexComplex
   (lcmap (map (_ $ unit)) (coerce b))
 
 text
-  :: forall s m lock payload
-   . MonadST s m
-  => AnEvent m String
-  -> Domable m lock payload
+  :: forall lock payload
+   . AnEvent Zora String
+  -> Domable lock payload
 text txt = Element' $ Node go
   where
   go { parent, scope, raiseId } di@(DOMInterpret { ids, deleteFromCache }) =
@@ -196,17 +193,15 @@ text txt = Element' $ Node go
         )
         k
 
-text_
-  :: forall s m lock payload. MonadST s m => String -> Domable m lock payload
+text_ :: forall lock payload. String -> Domable lock payload
 text_ txt = text (pure txt)
 
 deku
-  :: forall s m payload
-   . Korok s m
-  => Web.DOM.Element
-  -> (forall lock. Domable m lock payload)
-  -> DOMInterpret m payload
-  -> AnEvent m payload
+  :: forall payload
+   . Web.DOM.Element
+  -> (forall lock. Domable lock payload)
+  -> DOMInterpret payload
+  -> AnEvent Zora payload
 deku root children di@(DOMInterpret { ids, makeRoot }) = makeEvent \k -> do
   me <- ids
   subscribe
@@ -223,153 +218,140 @@ deku root children di@(DOMInterpret { ids, makeRoot }) = makeEvent \k -> do
     k
 
 deku1
-  :: forall s m payload
-   . Korok s m
-  => Web.DOM.Element
-  -> (forall lock. AnEvent m (Domable m lock payload))
-  -> DOMInterpret m payload
-  -> AnEvent m payload
+  :: forall payload
+   . Web.DOM.Element
+  -> (forall lock. AnEvent Zora (Domable lock payload))
+  -> DOMInterpret payload
+  -> AnEvent Zora payload
 deku1 root children = deku root (EventfulElement' $ EventfulElement children)
 
 dekuA
-  :: forall s m payload
-   . Korok s m
-  => Web.DOM.Element
-  -> (forall lock. Array (Domable m lock payload))
-  -> DOMInterpret m payload
-  -> AnEvent m payload
+  :: forall payload
+   . Web.DOM.Element
+  -> (forall lock. Array (Domable lock payload))
+  -> DOMInterpret payload
+  -> AnEvent Zora payload
 dekuA root children = deku root (FixedChildren' $ FixedChildren children)
 
 data Stage = Begin | Middle | End
 
 __internalDekuFlatten
-  :: forall s m lock payload
-   . Korok s m
-  => PSR m (pos :: Maybe Int)
-  -> DOMInterpret m payload
-  -> Domable m lock payload
-  -> AnEvent m payload
+  :: forall lock payload
+   . PSR Zora (pos :: Maybe Int)
+  -> DOMInterpret payload
+  -> Domable lock payload
+  -> AnEvent Zora payload
 __internalDekuFlatten = Bolson.flatten
   portalFlatten
 
 switcher
-  :: forall a s m element lock payload
-   . Korok s m
-  => ( AnEvent m (Attribute element)
-       -> Array (Domable m lock payload)
-       -> Domable m lock payload
+  :: forall a element lock payload
+   . ( AnEvent Zora (Attribute element)
+       -> Array (Domable lock payload)
+       -> Domable lock payload
      )
-  -> AnEvent m (Attribute element)
-  -> (a -> Domable m lock payload)
-  -> AnEvent m a
-  -> Domable m lock payload
+  -> AnEvent Zora (Attribute element)
+  -> (a -> Domable lock payload)
+  -> AnEvent Zora a
+  -> Domable lock payload
 switcher f e1 i e2 = f e1 [ Bolson.switcher i e2 ]
 
 switcher_
-  :: forall a s m element lock payload
-   . Korok s m
-  => ( AnEvent m (Attribute element)
-       -> Array (Domable m lock payload)
-       -> Domable m lock payload
+  :: forall a element lock payload
+   . ( AnEvent Zora (Attribute element)
+       -> Array (Domable lock payload)
+       -> Domable lock payload
      )
-  -> (a -> Domable m lock payload)
-  -> AnEvent m a
-  -> Domable m lock payload
+  -> (a -> Domable lock payload)
+  -> AnEvent Zora a
+  -> Domable lock payload
 switcher_ f i e = f empty [ Bolson.switcher i e ]
 
 dyn
-  :: forall s m element lock payload
-   . Korok s m
-  => ( AnEvent m (Attribute element)
-       -> Array (Domable m lock payload)
-       -> Domable m lock payload
+  :: forall element lock payload
+   . ( AnEvent Zora (Attribute element)
+       -> Array (Domable lock payload)
+       -> Domable lock payload
      )
-  -> AnEvent m (Attribute element)
-  -> AnEvent m (AnEvent m (BCore.Child Int (Node m lock payload) m lock))
-  -> Domable m lock payload
+  -> AnEvent Zora (Attribute element)
+  -> AnEvent Zora (AnEvent Zora (BCore.Child Int (Node lock payload) Zora lock))
+  -> Domable lock payload
 dyn f e i = f e [ BCore.dyn i ]
 
 ezDyn
-  :: forall s m element lock payload
-   . Korok s m
-  => ( AnEvent m (Attribute element)
-       -> Array (Domable m lock payload)
-       -> Domable m lock payload
+  :: forall element lock payload
+   . ( AnEvent Zora (Attribute element)
+       -> Array (Domable lock payload)
+       -> Domable lock payload
      )
-  -> AnEvent m (Attribute element)
-  -> (AnEvent m ({ remove :: Effect Unit, sendToPos :: Int -> Effect Unit } -> Domable m lock payload))
-  -> Domable m lock payload
+  -> AnEvent Zora (Attribute element)
+  -> (AnEvent Zora ({ remove :: Effect Unit, sendToPos :: Int -> Effect Unit } -> Domable lock payload))
+  -> Domable lock payload
 ezDyn f0 e0 e1 = dyn f0 e0 (e1 <#> \f1 -> keepLatest $ bus \setRm rm ->
   keepLatest $ bus \setStp stp ->
       (rm $> remove) <|> (stp <#> sendToPos) <|> pure (insert_ (f1 { remove: setRm unit, sendToPos: setStp })))
 
 ezDyn_
-  :: forall s m element lock payload
-   . Korok s m
-  => ( AnEvent m (Attribute element)
-       -> Array (Domable m lock payload)
-       -> Domable m lock payload
+  :: forall element lock payload
+   . ( AnEvent Zora (Attribute element)
+       -> Array (Domable lock payload)
+       -> Domable lock payload
      )
-  -> (AnEvent m ({ remove :: Effect Unit, sendToPos :: Int -> Effect Unit } -> Domable m lock payload))
-  -> Domable m lock payload
+  -> (AnEvent Zora ({ remove :: Effect Unit, sendToPos :: Int -> Effect Unit } -> Domable lock payload))
+  -> Domable lock payload
 ezDyn_ f0 e1 = dyn_ f0 (e1 <#> \f1 -> keepLatest $ bus \setRm rm ->
   keepLatest $ bus \setStp stp ->
       (rm $> remove) <|> (stp <#> sendToPos) <|> pure (insert_ (f1 { remove: setRm unit, sendToPos: setStp })))
 dyn_
-  :: forall s m element lock payload
-   . Korok s m
-  => ( AnEvent m (Attribute element)
-       -> Array (Domable m lock payload)
-       -> Domable m lock payload
+  :: forall element lock payload
+   . ( AnEvent Zora (Attribute element)
+       -> Array (Domable lock payload)
+       -> Domable lock payload
      )
-  -> AnEvent m (AnEvent m (BCore.Child Int (Node m lock payload) m lock))
-  -> Domable m lock payload
+  -> AnEvent Zora (AnEvent Zora (BCore.Child Int (Node lock payload) Zora lock))
+  -> Domable lock payload
 dyn_ f i = f empty [ BCore.dyn i ]
 
 fixed
-  :: forall s m element lock payload
-   . Korok s m
-  => ( AnEvent m (Attribute element)
-       -> Array (Domable m lock payload)
-       -> Domable m lock payload
+  :: forall element lock payload
+   . ( AnEvent Zora (Attribute element)
+       -> Array (Domable lock payload)
+       -> Domable lock payload
      )
-  -> AnEvent m (Attribute element)
-  -> Array (Domable m lock payload)
-  -> Domable m lock payload
+  -> AnEvent Zora (Attribute element)
+  -> Array (Domable lock payload)
+  -> Domable lock payload
 fixed f e i = f e [ BCore.fixed i ]
 
 fixed_
-  :: forall s m element lock payload
-   . Korok s m
-  => ( AnEvent m (Attribute element)
-       -> Array (Domable m lock payload)
-       -> Domable m lock payload
+  :: forall element lock payload
+   . ( AnEvent Zora (Attribute element)
+       -> Array (Domable lock payload)
+       -> Domable lock payload
      )
-  -> Array (Domable m lock payload)
-  -> Domable m lock payload
+  -> Array (Domable lock payload)
+  -> Domable lock payload
 fixed_ f i = f empty [ BCore.fixed i ]
 
 envy
-  :: forall s m element lock payload
-   . Korok s m
-  => ( AnEvent m (Attribute element)
-       -> Array (Domable m lock payload)
-       -> Domable m lock payload
+  :: forall element lock payload
+   . ( AnEvent Zora (Attribute element)
+       -> Array (Domable lock payload)
+       -> Domable lock payload
      )
-  -> AnEvent m (Attribute element)
-  -> AnEvent m (Domable m lock payload)
-  -> Domable m lock payload
+  -> AnEvent Zora (Attribute element)
+  -> AnEvent Zora (Domable lock payload)
+  -> Domable lock payload
 envy f e i = f e [ BCore.envy i ]
 
 envy_
-  :: forall s m element lock payload
-   . Korok s m
-  => ( AnEvent m (Attribute element)
-       -> Array (Domable m lock payload)
-       -> Domable m lock payload
+  :: forall element lock payload
+   . ( AnEvent Zora (Attribute element)
+       -> Array (Domable lock payload)
+       -> Domable lock payload
      )
-  -> AnEvent m (Domable m lock payload)
-  -> Domable m lock payload
+  -> AnEvent Zora (Domable lock payload)
+  -> Domable lock payload
 envy_ f i = f empty [ BCore.envy i ]
 
 blank :: Nut

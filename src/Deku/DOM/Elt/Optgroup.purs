@@ -3,25 +3,24 @@ module Deku.DOM.Elt.Optgroup where
 import Control.Plus (empty)
 import Deku.Attribute (Attribute)
 import Deku.Control (elementify)
-import Deku.Core (Domable, class Korok)
+import Deku.Core (Domable)
 import Bolson.Core (Entity(..), fixed)
 import FRP.Event (AnEvent)
+import Hyrule.Zora (Zora)
 
 data Optgroup_
 
 optgroup
-  :: forall s m lock payload
-   . Korok s m
-  => AnEvent m (Attribute Optgroup_)
-  -> Array (Domable m lock payload)
-  -> Domable m lock payload
+  :: forall lock payload
+   . AnEvent Zora (Attribute Optgroup_)
+  -> Array (Domable lock payload)
+  -> Domable lock payload
 optgroup attributes kids = Element'
   (elementify "optgroup" attributes (fixed kids))
 
 optgroup_
-  :: forall s m lock payload
-   . Korok s m
-  => Array (Domable m lock payload)
-  -> Domable m lock payload
+  :: forall lock payload
+   . Array (Domable lock payload)
+  -> Domable lock payload
 optgroup_ = optgroup empty
 

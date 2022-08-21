@@ -24,7 +24,9 @@ type UIEvents = V
   )
 
 px =
-  Proxy    :: Proxy         """<div>
+  Proxy
+    :: Proxy
+         """<div>
   <h1>Events</h1>
 
   <h2>Listening to the DOM</h2>
@@ -45,7 +47,7 @@ px =
   <p>In this section, saw how to react to events. In the next section, we'll use a similar mechanism to deal with arbitrary <a ~next~ style="cursor:pointer;">effects</a>.</p>
 </div>"""
 
-events :: forall r. {|PageOptions r}  -> Nut
+events :: forall r. { | PageOptions r } -> Nut
 events options = px ~~
   { code: nut
       ( D.pre_
@@ -86,5 +88,9 @@ events options = px ~~
                 ]
             ]
       )
-  , next: oneOfMap pure [D.OnClick := (cb (\e -> preventDefault e *> options.dpage Effects *> scrollToTop) ), D.Href := (options.slug <> "effects/") ]
+  , next: oneOfMap pure
+      [ D.OnClick :=
+          (cb (\e -> preventDefault e *> options.dpage Effects *> scrollToTop))
+      , D.Href := (options.slug <> "effects/")
+      ]
   }

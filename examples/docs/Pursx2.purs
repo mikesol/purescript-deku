@@ -18,7 +18,9 @@ import Type.Proxy (Proxy(..))
 import Web.Event.Event (preventDefault)
 
 px =
-  Proxy    :: Proxy         """<div>
+  Proxy
+    :: Proxy
+         """<div>
   <h1>Pursx 2</h1>
 
   <h2>Working with events and effects</h2>
@@ -43,7 +45,9 @@ px =
 </div>"""
 
 myDom =
-  Proxy    :: Proxy         """<div>
+  Proxy
+    :: Proxy
+         """<div>
         <button>I do nothing</button>
         <ul>
           <li>A</li>
@@ -60,7 +64,7 @@ myDom =
       </div>
 """
 
-pursx2 :: forall r. {|PageOptions r}  -> Nut
+pursx2 :: forall r. { | PageOptions r } -> Nut
 pursx2 options = makePursx' (Proxy :: _ "?") px
   { code: nut
       ( D.pre_
@@ -82,5 +86,9 @@ pursx2 options = makePursx' (Proxy :: _ "?") px
                 )
             }
       )
-  , next: oneOfMap pure [D.OnClick := (cb (\e -> preventDefault e *> options.dpage Events2 *> scrollToTop) ), D.Href := (options.slug <> "events2/") ]
+  , next: oneOfMap pure
+      [ D.OnClick :=
+          (cb (\e -> preventDefault e *> options.dpage Events2 *> scrollToTop))
+      , D.Href := (options.slug <> "events2/")
+      ]
   }

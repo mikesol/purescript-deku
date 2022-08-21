@@ -15,7 +15,9 @@ import Type.Proxy (Proxy(..))
 import Web.Event.Event (preventDefault)
 
 px =
-  Proxy    :: Proxy         """<div>
+  Proxy
+    :: Proxy
+         """<div>
   <h1>Hello world</h1>
 
   <h3>A small example</h3>
@@ -39,17 +41,26 @@ px =
 </div>"""
 
 helloWorld
-  :: forall r. {|PageOptions r}
+  :: forall r
+   . { | PageOptions r }
   -> Nut
 helloWorld options = px ~~
   { code: nut
       ( D.pre_
           [ D.code_
               [ text_
-                 Examples.helloWorld
+                  Examples.helloWorld
               ]
           ]
       )
   , result: nut (D.div_ [ text_ "Hello world" ])
-  , next: oneOfMap pure [D.OnClick := (cb (\e -> preventDefault e *> options.dpage SimpleComponent *> scrollToTop) ), D.Href := (options.slug <> "component/") ]
+  , next: oneOfMap pure
+      [ D.OnClick :=
+          ( cb
+              ( \e -> preventDefault e *> options.dpage SimpleComponent *>
+                  scrollToTop
+              )
+          )
+      , D.Href := (options.slug <> "component/")
+      ]
   }

@@ -82,7 +82,9 @@ ssr' topTag arr = "<" <> topTag <> " data-deku-ssr-deku-root=\"true\">"
     foldlWithIndex
       ( \i b a -> case hasMake a of
           true -> b
-          false -> String.replace (String.Pattern ("data-deku-ssr-" <> i)) (String.Replacement (eltAtts a <> " data-deku-ssr-" <> i)) b
+          false -> String.replace (String.Pattern ("data-deku-ssr-" <> i))
+            (String.Replacement (eltAtts a <> " data-deku-ssr-" <> i))
+            b
       )
       (o id)
       idToActions
@@ -91,7 +93,8 @@ ssr' topTag arr = "<" <> topTag <> " data-deku-ssr-deku-root=\"true\">"
       let
         makeText _ = i2a #
           ( fromMaybe "" <<< findMap case _ of
-              SetText { text } -> Just $ (encodedString text <> "<!--"<>id<>"-->")
+              SetText { text } -> Just $
+                (encodedString text <> "<!--" <> id <> "-->")
               _ -> Nothing
           )
         makeElt _ = do

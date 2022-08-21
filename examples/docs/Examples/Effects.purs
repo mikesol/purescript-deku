@@ -14,12 +14,13 @@ import Data.Profunctor (lcmap)
 import Data.Tuple.Nested ((/\))
 import Deku.Attribute (Cb, cb, (:=))
 import Deku.Control (text)
+import Deku.Core (bus)
 import Deku.DOM as D
 import Deku.Toplevel (runInBody1)
 import Effect (Effect)
 import Effect.Aff (launchAff_)
 import Effect.Class (liftEffect)
-import FRP.Event (AnEvent, bus, mapAccum)
+import FRP.Event (AnEvent, mapAccum)
 
 data UIAction = Initial | Loading | Result String
 
@@ -63,27 +64,27 @@ main = runInBody1
               event
           { left: loading, right: result } = split
         D.div_
-            [ D.div_
-                [ D.button (pure (D.OnClick := clickCb push))
-                    [ text
-                        ( pure clickText
-                            <|> (loading $> "Loading...")
-                            <|> (result $> clickText)
-                        )
-                    ]
-                ]
-            , D.div
-                ( (pure (D.Style := "display: none;")) <|>
-                    ( compact
-                        ( mapAccum
-                            ( \_ b -> (b && false) /\
-                                if b then Just unit else Nothing
-                            )
-                            result
-                            true
-                        ) $> (D.Style := "display: block;")
-                    )
-                )
-                [ D.pre_ [ D.code_ [ text (pure "" <|> result) ] ] ]
-            ]
+          [ D.div_
+              [ D.button (pure (D.OnClick := clickCb push))
+                  [ text
+                      ( pure clickText
+                          <|> (loading $> "Loading...")
+                          <|> (result $> clickText)
+                      )
+                  ]
+              ]
+          , D.div
+              ( (pure (D.Style := "display: none;")) <|>
+                  ( compact
+                      ( mapAccum
+                          ( \_ b -> (b && false) /\
+                              if b then Just unit else Nothing
+                          )
+                          result
+                          true
+                      ) $> (D.Style := "display: block;")
+                  )
+              )
+              [ D.pre_ [ D.code_ [ text (pure "" <|> result) ] ] ]
+          ]
   )

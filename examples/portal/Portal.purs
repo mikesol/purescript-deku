@@ -9,11 +9,11 @@ import Data.Foldable (oneOfMap)
 import Data.Profunctor (lcmap)
 import Deku.Attribute (cb, (:=))
 import Deku.Control (dyn_, portal, switcher_, text_)
-import Deku.Core (insert_)
+import Deku.Core (bus, insert_)
 import Deku.DOM as D
 import Deku.Toplevel (runInBody)
 import Effect (Effect)
-import FRP.Event (bus, fold)
+import FRP.Event (fold)
 import Type.Prelude (Proxy(..))
 
 main :: Effect Unit
@@ -124,7 +124,8 @@ main = runInBody
                         let
                           p0 = index (Proxy :: _ 0) v
                           ev = fold (const not) event
-                          flips = switcher_ D.div (if _ then p0 else D.div_ []) <<< ev
+                          flips = switcher_ D.div (if _ then p0 else D.div_ [])
+                            <<< ev
                         D.div_
                           [ D.button
                               (pure $ D.OnClick := cb (const $ push unit))

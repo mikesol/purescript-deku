@@ -3,24 +3,23 @@ module Deku.DOM.Elt.Time where
 import Control.Plus (empty)
 import Deku.Attribute (Attribute)
 import Deku.Control (elementify)
-import Deku.Core (Domable, class Korok)
+import Deku.Core (Domable)
 import Bolson.Core (Entity(..), fixed)
 import FRP.Event (AnEvent)
+import Hyrule.Zora (Zora)
 
 data Time_
 
 time
-  :: forall s m lock payload
-   . Korok s m
-  => AnEvent m (Attribute Time_)
-  -> Array (Domable m lock payload)
-  -> Domable m lock payload
+  :: forall lock payload
+   . AnEvent Zora (Attribute Time_)
+  -> Array (Domable lock payload)
+  -> Domable lock payload
 time attributes kids = Element' (elementify "time" attributes (fixed kids))
 
 time_
-  :: forall s m lock payload
-   . Korok s m
-  => Array (Domable m lock payload)
-  -> Domable m lock payload
+  :: forall lock payload
+   . Array (Domable lock payload)
+  -> Domable lock payload
 time_ = time empty
 

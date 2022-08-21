@@ -12,7 +12,6 @@
   , "heterogeneous"
   , "hyrule"
   , "maybe"
-  , "monoid-extras"
   , "newtype"
   , "ordered-collections"
   , "prelude"

@@ -111,25 +111,24 @@ def cg(CODEGEN_TARGET, ival = None, ival2 = None):
 import Control.Plus (empty)
 import Deku.Attribute (Attribute)
 import Deku.Control (elementify)
-import Deku.Core (Domable, class Korok)
+import Deku.Core (Domable)
 import Bolson.Core (Entity(..), fixed)
 import FRP.Event (AnEvent)
+import Hyrule.Zora (Zora)
 
 data {term}
 
 {x}
-  :: forall s m lock payload
-   . Korok s m
-  => AnEvent m (Attribute {term})
-  -> Array (Domable m lock payload)
-  -> Domable m lock payload
+  :: forall lock payload
+   . AnEvent Zora (Attribute {term})
+  -> Array (Domable lock payload)
+  -> Domable lock payload
 {x} attributes kids = Element' (elementify "{astag(x)}" attributes (fixed kids))
 
 {x}_
-  :: forall s m lock payload
-   . Korok s m
-  => Array (Domable m lock payload)
-  -> Domable m lock payload
+  :: forall lock payload
+   . Array (Domable lock payload)
+  -> Domable lock payload
 {x}_ = {x} empty
 
 ''')
@@ -182,6 +181,7 @@ data {term} = {term}''')
 import Prelude
 import Effect (Effect)
 import Deku.Attribute (class Attr, Cb(..), cb', unsafeAttribute)
+import Hyrule.Zora (Zora, runImpure)
 
 data {term} = {term}''')
             term = 'On'+x.capitalize()
@@ -191,6 +191,10 @@ data {term} = {term}''')
   attr {term} value = unsafeAttribute {{ key: "{x}", value: cb' (Cb (const (value $> true))) }}''')
             print_(f'''instance Attr anything {term} (Effect Boolean) where
   attr {term} value = unsafeAttribute {{ key: "{x}", value: cb' (Cb (const value)) }}''')
+            print_(f'''instance Attr anything {term} (Zora Unit) where
+  attr {term} value = unsafeAttribute {{ key: "{x}", value: cb' (Cb (const (runImpure (value $> true)))) }}''')
+            print_(f'''instance Attr anything {term} (Zora Boolean) where
+  attr {term} value = unsafeAttribute {{ key: "{x}", value: cb' (Cb (const (runImpure value))) }}''')
     else:
       raise ValueError('wat' + str(CODEGEN_TARGET) )
     return '\n'.join(o)

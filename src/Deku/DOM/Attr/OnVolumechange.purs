@@ -3,6 +3,7 @@ module Deku.DOM.Attr.OnVolumechange where
 import Prelude
 import Effect (Effect)
 import Deku.Attribute (class Attr, Cb(..), cb', unsafeAttribute)
+import Hyrule.Zora (Zora, runImpure)
 
 data OnVolumechange = OnVolumechange
 
@@ -17,3 +18,11 @@ instance Attr anything OnVolumechange (Effect Unit) where
 instance Attr anything OnVolumechange (Effect Boolean) where
   attr OnVolumechange value = unsafeAttribute
     { key: "volumechange", value: cb' (Cb (const value)) }
+
+instance Attr anything OnVolumechange (Zora Unit) where
+  attr OnVolumechange value = unsafeAttribute
+    { key: "volumechange", value: cb' (Cb (const (runImpure (value $> true)))) }
+
+instance Attr anything OnVolumechange (Zora Boolean) where
+  attr OnVolumechange value = unsafeAttribute
+    { key: "volumechange", value: cb' (Cb (const (runImpure value))) }

@@ -13,7 +13,9 @@ import Type.Proxy (Proxy(..))
 import Web.Event.Event (preventDefault)
 
 px =
-  Proxy    :: Proxy         """<div>
+  Proxy
+    :: Proxy
+         """<div>
   <h1>Deku</h1>
 
   <h3>A web micro-framework written in PureScript</h3>
@@ -29,7 +31,15 @@ px =
   <p>And now, without further ado, check out the <a ~next~ style="cursor:pointer;">hello world section</a>!</p>
 </div>"""
 
-intro :: forall r. {|PageOptions r} -> Nut
+intro :: forall r. { | PageOptions r } -> Nut
 intro options = px ~~
-  {   next: oneOfMap pure [D.OnClick := (cb (\e -> preventDefault e *> options.dpage HelloWorld *> scrollToTop) ), D.Href := (options.slug <> "hello/") ]
- }
+  { next: oneOfMap pure
+      [ D.OnClick :=
+          ( cb
+              ( \e -> preventDefault e *> options.dpage HelloWorld *>
+                  scrollToTop
+              )
+          )
+      , D.Href := (options.slug <> "hello/")
+      ]
+  }

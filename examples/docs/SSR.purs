@@ -9,10 +9,11 @@ import Deku.DOM as D
 import Deku.Listeners (click_, slider)
 import Deku.Pursx (nut, (~~))
 import Deku.Toplevel (Template(..), runSSR)
+import Examples as Examples
 import FRP.Event (fold, makeEvent)
 import FRP.Event.VBus (V)
+import Hyrule.Zora (liftPure)
 import Type.Proxy (Proxy(..))
-import Examples as Examples
 
 type UIEvents = V
   ( buttonClicked :: Unit
@@ -20,7 +21,9 @@ type UIEvents = V
   )
 
 px =
-  Proxy    :: Proxy         """<div>
+  Proxy
+    :: Proxy
+         """<div>
   <h1>Server-side rendering</h1>
 
   <h2>When performance matters!</h2>
@@ -140,15 +143,16 @@ ssrPage _ = px ~~
           [ D.code_
               [ text
                   ( makeEvent \k ->
-                      ( ( runSSR
-                            ( Template
-                                { head:
-                                    "<!DOCTYPE html><html><head><script src=\"bundle.js\" defer></script></head>"
-                                , tail: "</html>"
-                                }
-                            )
-                            app
-                        ) >>= k
+                      ( liftPure
+                          ( runSSR
+                              ( Template
+                                  { head:
+                                      "<!DOCTYPE html><html><head><script src=\"bundle.js\" defer></script></head>"
+                                  , tail: "</html>"
+                                  }
+                              )
+                              app
+                          ) >>= k
                       ) *> (pure (pure unit))
                   )
               ]

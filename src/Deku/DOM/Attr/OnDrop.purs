@@ -3,6 +3,7 @@ module Deku.DOM.Attr.OnDrop where
 import Prelude
 import Effect (Effect)
 import Deku.Attribute (class Attr, Cb(..), cb', unsafeAttribute)
+import Hyrule.Zora (Zora, runImpure)
 
 data OnDrop = OnDrop
 
@@ -16,3 +17,11 @@ instance Attr anything OnDrop (Effect Unit) where
 instance Attr anything OnDrop (Effect Boolean) where
   attr OnDrop value = unsafeAttribute
     { key: "drop", value: cb' (Cb (const value)) }
+
+instance Attr anything OnDrop (Zora Unit) where
+  attr OnDrop value = unsafeAttribute
+    { key: "drop", value: cb' (Cb (const (runImpure (value $> true)))) }
+
+instance Attr anything OnDrop (Zora Boolean) where
+  attr OnDrop value = unsafeAttribute
+    { key: "drop", value: cb' (Cb (const (runImpure value))) }

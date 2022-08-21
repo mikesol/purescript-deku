@@ -349,7 +349,7 @@ module Deku.DOM
   -- codegen 0
   ) where
 
-import Deku.Attribute
+import Deku.Attribute (class Attr, Cb(..), unsafeAttribute, cb')
 
 -- codegen 9
 import Deku.DOM.Attr.Accept (Accept(..))
@@ -743,7 +743,6 @@ import Web.HTML.HTMLTitleElement as HTMLTitleElement
 import Web.HTML.HTMLTrackElement as HTMLTrackElement
 import Web.HTML.HTMLVideoElement as HTMLVideoElement
 
-
 class TagToDeku (tag :: Symbol) (deku :: Type) | tag -> deku
 
 -- codegen 3
@@ -885,127 +884,173 @@ instance Attr anything SelfT (DOM.Element -> Effect Unit) where
   attr SelfT value = unsafeAttribute
     { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
 
-
 instance Attr A_ SelfT (HTMLAnchorElement.HTMLAnchorElement -> Effect Unit) where
   attr SelfT value = unsafeAttribute
     { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
+
 instance Attr Area_ SelfT (HTMLAreaElement.HTMLAreaElement -> Effect Unit) where
   attr SelfT value = unsafeAttribute
     { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
+
 instance Attr Audio_ SelfT (HTMLAudioElement.HTMLAudioElement -> Effect Unit) where
   attr SelfT value = unsafeAttribute
     { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
+
 instance Attr Base_ SelfT (HTMLBaseElement.HTMLBaseElement -> Effect Unit) where
   attr SelfT value = unsafeAttribute
     { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
+
 instance Attr Body_ SelfT (HTMLBodyElement.HTMLBodyElement -> Effect Unit) where
   attr SelfT value = unsafeAttribute
     { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
+
 instance Attr Br_ SelfT (HTMLBRElement.HTMLBRElement -> Effect Unit) where
   attr SelfT value = unsafeAttribute
     { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
+
 instance Attr Button_ SelfT (HTMLButtonElement.HTMLButtonElement -> Effect Unit) where
   attr SelfT value = unsafeAttribute
     { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
+
 instance Attr Canvas_ SelfT (HTMLCanvasElement.HTMLCanvasElement -> Effect Unit) where
   attr SelfT value = unsafeAttribute
     { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
+
 instance Attr Div_ SelfT (HTMLDivElement.HTMLDivElement -> Effect Unit) where
   attr SelfT value = unsafeAttribute
     { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
+
 instance Attr Embed_ SelfT (HTMLEmbedElement.HTMLEmbedElement -> Effect Unit) where
   attr SelfT value = unsafeAttribute
     { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
+
 instance Attr Form_ SelfT (HTMLFormElement.HTMLFormElement -> Effect Unit) where
   attr SelfT value = unsafeAttribute
     { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
+
 instance Attr Head_ SelfT (HTMLHeadElement.HTMLHeadElement -> Effect Unit) where
   attr SelfT value = unsafeAttribute
     { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
+
 instance Attr Hr_ SelfT (HTMLHRElement.HTMLHRElement -> Effect Unit) where
   attr SelfT value = unsafeAttribute
     { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
+
 instance Attr Html_ SelfT (HTMLHtmlElement.HTMLHtmlElement -> Effect Unit) where
   attr SelfT value = unsafeAttribute
     { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
+
 instance Attr Input_ SelfT (HTMLInputElement.HTMLInputElement -> Effect Unit) where
   attr SelfT value = unsafeAttribute
     { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
+
 instance Attr Label_ SelfT (HTMLLabelElement.HTMLLabelElement -> Effect Unit) where
   attr SelfT value = unsafeAttribute
     { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
+
 instance Attr Legend_ SelfT (HTMLLegendElement.HTMLLegendElement -> Effect Unit) where
   attr SelfT value = unsafeAttribute
     { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
+
 instance Attr Link_ SelfT (HTMLLinkElement.HTMLLinkElement -> Effect Unit) where
   attr SelfT value = unsafeAttribute
     { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
+
 instance Attr Map_ SelfT (HTMLMapElement.HTMLMapElement -> Effect Unit) where
   attr SelfT value = unsafeAttribute
     { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
+
 instance Attr Meta_ SelfT (HTMLMetaElement.HTMLMetaElement -> Effect Unit) where
   attr SelfT value = unsafeAttribute
     { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
+
 instance Attr Meter_ SelfT (HTMLMeterElement.HTMLMeterElement -> Effect Unit) where
   attr SelfT value = unsafeAttribute
     { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
+
 instance Attr Object_ SelfT (HTMLObjectElement.HTMLObjectElement -> Effect Unit) where
   attr SelfT value = unsafeAttribute
     { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
+
 instance Attr Option_ SelfT (HTMLOptionElement.HTMLOptionElement -> Effect Unit) where
   attr SelfT value = unsafeAttribute
     { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
+
 instance Attr Output_ SelfT (HTMLOutputElement.HTMLOutputElement -> Effect Unit) where
   attr SelfT value = unsafeAttribute
     { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
-instance Attr P_ SelfT (HTMLParagraphElement.HTMLParagraphElement -> Effect Unit) where
+
+instance
+  Attr P_ SelfT (HTMLParagraphElement.HTMLParagraphElement -> Effect Unit) where
   attr SelfT value = unsafeAttribute
     { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
+
 instance Attr Param_ SelfT (HTMLParamElement.HTMLParamElement -> Effect Unit) where
   attr SelfT value = unsafeAttribute
     { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
+
 instance Attr Pre_ SelfT (HTMLPreElement.HTMLPreElement -> Effect Unit) where
   attr SelfT value = unsafeAttribute
     { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
-instance Attr Progress_ SelfT (HTMLProgressElement.HTMLProgressElement -> Effect Unit) where
+
+instance
+  Attr Progress_ SelfT (HTMLProgressElement.HTMLProgressElement -> Effect Unit) where
   attr SelfT value = unsafeAttribute
     { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
+
 instance Attr Script_ SelfT (HTMLScriptElement.HTMLScriptElement -> Effect Unit) where
   attr SelfT value = unsafeAttribute
     { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
+
 instance Attr Select_ SelfT (HTMLSelectElement.HTMLSelectElement -> Effect Unit) where
   attr SelfT value = unsafeAttribute
     { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
+
 instance Attr Source_ SelfT (HTMLSourceElement.HTMLSourceElement -> Effect Unit) where
   attr SelfT value = unsafeAttribute
     { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
+
 instance Attr Span_ SelfT (HTMLSpanElement.HTMLSpanElement -> Effect Unit) where
   attr SelfT value = unsafeAttribute
     { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
+
 instance Attr Style_ SelfT (HTMLStyleElement.HTMLStyleElement -> Effect Unit) where
   attr SelfT value = unsafeAttribute
     { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
+
 instance Attr Table_ SelfT (HTMLTableElement.HTMLTableElement -> Effect Unit) where
   attr SelfT value = unsafeAttribute
     { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
-instance Attr Td_ SelfT (HTMLTableDataCellElement.HTMLTableDataCellElement -> Effect Unit) where
+
+instance
+  Attr Td_
+    SelfT
+    (HTMLTableDataCellElement.HTMLTableDataCellElement -> Effect Unit) where
   attr SelfT value = unsafeAttribute
     { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
-instance Attr Template_ SelfT (HTMLTemplateElement.HTMLTemplateElement -> Effect Unit) where
+
+instance
+  Attr Template_ SelfT (HTMLTemplateElement.HTMLTemplateElement -> Effect Unit) where
   attr SelfT value = unsafeAttribute
     { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
-instance Attr Textarea_ SelfT (HTMLTextAreaElement.HTMLTextAreaElement -> Effect Unit) where
+
+instance
+  Attr Textarea_ SelfT (HTMLTextAreaElement.HTMLTextAreaElement -> Effect Unit) where
   attr SelfT value = unsafeAttribute
     { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
+
 instance Attr Time_ SelfT (HTMLTimeElement.HTMLTimeElement -> Effect Unit) where
   attr SelfT value = unsafeAttribute
     { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
+
 instance Attr Title_ SelfT (HTMLTitleElement.HTMLTitleElement -> Effect Unit) where
   attr SelfT value = unsafeAttribute
     { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
+
 instance Attr Track_ SelfT (HTMLTrackElement.HTMLTrackElement -> Effect Unit) where
   attr SelfT value = unsafeAttribute
     { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
+
 instance Attr Video_ SelfT (HTMLVideoElement.HTMLVideoElement -> Effect Unit) where
   attr SelfT value = unsafeAttribute
     { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
