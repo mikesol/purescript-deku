@@ -151,6 +151,8 @@ export const setProp_ = (tryHydration) => (a) => (state) => () => {
 		state.units[ptr].main.value = avv;
 	} else if (state.units[ptr].main.tagName === "INPUT" && a.key === "checked") {
 		state.units[ptr].main.checked = avv === "true";
+	} else if (state.units[ptr].main.tagName === "INPUT" && a.key === "disabled") {
+		state.units[ptr].main.disabled = avv === "true";
 	} else {
 		state.units[ptr].main.setAttribute(a.key, avv);
 	}
