@@ -7,18 +7,20 @@ export const setHydrating = (state) => () => {
 export const unSetHydrating = (state) => () => {
 	state.hydrating = false;
 };
-export const attributeParent_ = (a) => (state) => () => {
+export const attributeParent_ = (runOnJust) => (a) => (state) => () => {
 	// only attribute if it is not attributed already
 	if (!state.units[a.id].main.parentNode) {
-		if (
-			typeof a.pos.value0 === "number" &&
-			state.units[a.parent].main.children[a.pos.value0]
-		) {
-			state.units[a.parent].main.insertBefore(
-				state.units[a.id].main,
-				state.units[a.parent].main.children[a.pos.value0]
-			);
-		} else {
+		const iRan = runOnJust(a.pos)((pos) => () => {
+			if (state.units[a.parent].main.children[pos]) {
+				state.units[a.parent].main.insertBefore(
+					state.units[a.id].main,
+					state.units[a.parent].main.children[pos]
+				);
+				return true;
+			}
+			return false;
+		})();
+		if (!iRan) {
 			if (a.parent.indexOf("@!%") !== -1) {
 				state.units[a.parent].main.parentNode.replaceChild(
 					state.units[a.id].main,
@@ -31,7 +33,7 @@ export const attributeParent_ = (a) => (state) => () => {
 	}
 };
 
-export const makeElement_ = (tryHydration) => (a) => (state) => () => {
+export const makeElement_ = (runOnJust) => (tryHydration) => (a) => (state) => () => {
 	var dom;
 	var ptr = a.id;
 	if (!state.scopes[a.scope]) {
@@ -39,22 +41,25 @@ export const makeElement_ = (tryHydration) => (a) => (state) => () => {
 	}
 	state.scopes[a.scope].push(ptr);
 	// note that, for portals, this will be broken in its current form
-	if (
-		state.hydrating &&
-		tryHydration &&
-		// hack
-		a.parent.value0 &&
-		(dom = document.body
-			.querySelectorAll("[data-deku-ssr-" + ptr + "]")
-			.item(0))
-	) {
-		state.units[ptr] = {
-			listeners: {},
-			parent: a.parent,
-			scope: a.scope,
-			main: dom,
-		};
-	} else {
+	const iRan = runOnJust(a.parent)(() => () => {
+		if (
+			state.hydrating &&
+			tryHydration &&
+			(dom = document.body
+				.querySelectorAll("[data-deku-ssr-" + ptr + "]")
+				.item(0))
+		) {
+			state.units[ptr] = {
+				listeners: {},
+				parent: a.parent,
+				scope: a.scope,
+				main: dom,
+			};
+			return true;
+		}
+		return false;
+	})();
+	if (!iRan) {
 		state.units[ptr] = {
 			listeners: {},
 			parent: a.parent,
@@ -63,7 +68,7 @@ export const makeElement_ = (tryHydration) => (a) => (state) => () => {
 		};
 	}
 };
-export const makeText_ = (tryHydration) => (maybe) => (a) => (state) => () => {
+export const makeText_ = (runOnJust) => (tryHydration) => (maybe) => (a) => (state) => () => {
 	var ptr = a.id;
 	var dom;
 	if (!state.scopes[a.scope]) {
@@ -72,41 +77,45 @@ export const makeText_ = (tryHydration) => (maybe) => (a) => (state) => () => {
 	state.scopes[a.scope].push(ptr);
 	// for SSR, we need a parent, otherwise we cannot get the child node
 	// note that, for portals, this will be broken in its current form
-	if (
-		state.hydrating &&
-		tryHydration &&
-		// hack
-		a.parent.value0 &&
-		(dom = document.body
+	const iRan = runOnJust(a.parent)((parent) => () => {
+		if (
+			state.hydrating &&
+			tryHydration &&
 			// hack
-			.querySelectorAll("[data-deku-ssr-" + a.parent.value0 + "]")
-			.item(0))
-	) {
-		var i = 0;
-		// if the length is one, that means that there is only a comment because
-		// the text is empty
-		// so we need to add a text node
-		if (dom.childNodes.length === 1) {
-			dom.prepend(document.createTextNode(""));
-		} else {
-			for (var i = 0; i < dom.childNodes.length; i++) {
-				if (
-					dom.childNodes[i].nodeType === 8 &&
-					dom.childNodes[i].nodeValue === ptr
-				) {
-					i = i - 1;
-					break;
+			(dom = document.body
+				// hack
+				.querySelectorAll("[data-deku-ssr-" + parent + "]")
+				.item(0))
+		) {
+			var i = 0;
+			// if the length is one, that means that there is only a comment because
+			// the text is empty
+			// so we need to add a text node
+			if (dom.childNodes.length === 1) {
+				dom.prepend(document.createTextNode(""));
+			} else {
+				for (var i = 0; i < dom.childNodes.length; i++) {
+					if (
+						dom.childNodes[i].nodeType === 8 &&
+						dom.childNodes[i].nodeValue === ptr
+					) {
+						i = i - 1;
+						break;
+					}
 				}
 			}
+			state.units[ptr] = {
+				// if we've done ssr for a text node, it will be a span,
+				// so we want to get the child node
+				main: dom.childNodes[i],
+				parent: a.parent,
+				scope: a.scope,
+			};
+			return true;
 		}
-		state.units[ptr] = {
-			// if we've done ssr for a text node, it will be a span,
-			// so we want to get the child node
-			main: dom.childNodes[i],
-			parent: a.parent,
-			scope: a.scope,
-		};
-	} else {
+		return false;
+	})();
+	if (!iRan) {
 		state.units[ptr] = {
 			main: document.createTextNode(""),
 			parent: a.parent,
@@ -200,7 +209,7 @@ export const setText_ = (a) => (state) => () => {
 	state.units[ptr].main.nodeValue = a.text;
 };
 
-export const makePursx_ = (tryHydration) => (maybe) => (a) => (state) => () => {
+export const makePursx_ = (runOnJust) => (tryHydration) => (maybe) => (a) => (state) => () => {
 	var dom;
 	var tmp;
 	var ptr = a.id;
@@ -211,22 +220,26 @@ export const makePursx_ = (tryHydration) => (maybe) => (a) => (state) => () => {
 	var scope = a.scope;
 	var pxScope = a.pxScope;
 	// note that, for portals, this will be broken in its current form
-	if (
-		state.hydrating &&
-		tryHydration &&
-		// hack
-		a.parent.value0 &&
-		(dom = document.body
-			.querySelectorAll("[data-deku-ssr-" + ptr + "]")
-			.item(0))
-	) {
-		state.units[ptr] = {
-			listeners: {},
-			scope: scope,
-			parent: parent,
-			main: dom,
-		};
-	} else {
+	const iRan = runOnJust(a.parent)(() => () => {
+		if (
+			state.hydrating &&
+			tryHydration &&
+			// hack
+			(dom = document.body
+				.querySelectorAll("[data-deku-ssr-" + ptr + "]")
+				.item(0))
+		) {
+			state.units[ptr] = {
+				listeners: {},
+				scope: scope,
+				parent: parent,
+				main: dom,
+			};
+			return true;
+		}
+		return false;
+	})();
+	if (!iRan) {
 		const entries = Object.entries(cache);
 		for (var i = 0; i < entries.length; i++) {
 			const key = entries[i][0];
@@ -240,9 +253,9 @@ export const makePursx_ = (tryHydration) => (maybe) => (a) => (state) => () => {
 				html = html.replace(
 					verb + key + verb,
 					'<span style="display:contents;" data-deku-elt-internal=' +
-						'"' +
-						key +
-						'"></span>'
+					'"' +
+					key +
+					'"></span>'
 				);
 			}
 		}
@@ -335,7 +348,7 @@ export const sendToPos_ = (a) => (state) => () => {
 		parent.children.length <= pos
 			? parent.children[parent.children.length - 1]
 			: pos < 0
-			? parent.children[0]
-			: parent.children[pos]
+				? parent.children[0]
+				: parent.children[pos]
 	);
 };

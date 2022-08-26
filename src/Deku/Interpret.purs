@@ -14,7 +14,7 @@ import Prelude
 import Control.Monad.ST (ST)
 import Control.Monad.ST.Global (Global)
 import Control.Monad.ST.Internal as RRef
-import Data.Maybe (Maybe, maybe)
+import Data.Maybe (Maybe(..), maybe)
 import Deku.Core as Core
 import Effect (Effect)
 import Effect.Ref as Ref
@@ -27,14 +27,22 @@ data FFIDOMSnapshot
 
 foreign import makeFFIDOMSnapshot :: Effect FFIDOMSnapshot
 
+type RunOnJust = forall a. Maybe a -> (a -> Effect Boolean) -> Effect Boolean
+
+runOnJust :: RunOnJust
+runOnJust (Just a) f = f a
+runOnJust _ _ = pure false
+
 foreign import makeElement_
-  :: Boolean
+  :: RunOnJust
+  -> Boolean
   -> Core.MakeElement
   -> FFIDOMSnapshot
   -> Effect Unit
 
 foreign import attributeParent_
-  :: Core.AttributeParent
+  :: RunOnJust
+  -> Core.AttributeParent
   -> FFIDOMSnapshot
   -> Effect Unit
 
@@ -44,7 +52,8 @@ foreign import makeRoot_
   -> Effect Unit
 
 foreign import makeText_
-  :: Boolean
+  :: RunOnJust
+  -> Boolean
   -> (forall a. (a -> Unit) -> Maybe a -> Unit)
   -> Core.MakeText
   -> FFIDOMSnapshot
@@ -62,7 +71,8 @@ foreign import setCb_
   :: Boolean -> Core.SetCb -> FFIDOMSnapshot -> Effect Unit
 
 foreign import makePursx_
-  :: Boolean
+  :: RunOnJust
+  -> Boolean
   -> (forall a. (a -> Unit) -> Maybe a -> Unit)
   -> Core.MakePursx
   -> FFIDOMSnapshot
@@ -92,11 +102,11 @@ fullDOMInterpret seed = Core.DOMInterpret
           (evalGen (arbitrary :: Gen Int) { newSeed: mkSeed s, size: 5 })
       void $ Ref.modify (add 1) seed
       pure o
-  , makeElement: makeElement_ false
-  , attributeParent: attributeParent_
+  , makeElement: makeElement_ runOnJust false
+  , attributeParent: attributeParent_ runOnJust
   , makeRoot: makeRoot_
-  , makeText: makeText_ false (maybe unit)
-  , makePursx: makePursx_ false (maybe unit)
+  , makeText: makeText_ runOnJust false (maybe unit)
+  , makePursx: makePursx_ runOnJust false (maybe unit)
   , setProp: setProp_ false
   , setCb: setCb_ false
   , setText: setText_
@@ -168,11 +178,11 @@ hydratingDOMInterpret seed = Core.DOMInterpret
           (evalGen (arbitrary :: Gen Int) { newSeed: mkSeed s, size: 5 })
       void $ Ref.modify (add 1) seed
       pure o
-  , makeElement: makeElement_ true
-  , attributeParent: attributeParent_
+  , makeElement: makeElement_ runOnJust true
+  , attributeParent: attributeParent_ runOnJust
   , makeRoot: makeRoot_
-  , makeText: makeText_ true (maybe unit)
-  , makePursx: makePursx_ true (maybe unit)
+  , makeText: makeText_ runOnJust true (maybe unit)
+  , makePursx: makePursx_ runOnJust true (maybe unit)
   , setProp: setProp_ true
   , setCb: setCb_ true
   , setText: setText_
