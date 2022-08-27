@@ -17,7 +17,9 @@ module Deku.Control
   , envy
   , envy_
   , switcher
+  , switcherA
   , switcher_
+  , switcherA_
   ) where
 
 import Prelude
@@ -256,6 +258,18 @@ switcher
   -> Domable lock payload
 switcher f e1 i e2 = f e1 [ Bolson.switcher i e2 ]
 
+switcherA
+  :: forall a element lock payload
+   . ( AnEvent Zora (Attribute element)
+       -> Array (Domable lock payload)
+       -> Domable lock payload
+     )
+  -> AnEvent Zora (Attribute element)
+  -> (a -> Array (Domable lock payload))
+  -> AnEvent Zora a
+  -> Domable lock payload
+switcherA f e1 i e2 = Bolson.switcher (f e1 <<< i) e2
+
 switcher_
   :: forall a element lock payload
    . ( AnEvent Zora (Attribute element)
@@ -266,6 +280,17 @@ switcher_
   -> AnEvent Zora a
   -> Domable lock payload
 switcher_ f i e = f empty [ Bolson.switcher i e ]
+
+switcherA_
+  :: forall a element lock payload
+   . ( AnEvent Zora (Attribute element)
+       -> Array (Domable lock payload)
+       -> Domable lock payload
+     )
+  -> (a -> Array (Domable lock payload))
+  -> AnEvent Zora a
+  -> Domable lock payload
+switcherA_ f i e = Bolson.switcher (f empty <<< i) e
 
 dyn
   :: forall element lock payload
