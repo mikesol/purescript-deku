@@ -18,6 +18,7 @@ in      conf
               , "node-path"
               , "nullable"
               , "spec"
+              , "refs"
               , "strings"
               , "random"
               , "aff"
