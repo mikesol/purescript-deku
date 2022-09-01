@@ -19,7 +19,7 @@ import Data.Symbol (class IsSymbol)
 import Deku.Attribute (Attribute, AttributeValue(..), unsafeUnAttribute)
 import Deku.Core (DOMInterpret(..), Domable, Node(..))
 import Deku.DOM (class TagToDeku)
-import FRP.Event (Event, subscribePure, makePureEvent)
+import FRP.Event (Event, makeLemmingEvent)
 
 import Foreign.Object as Object
 import Prim.Boolean (False, True)
@@ -266,7 +266,7 @@ makePursx' verb html r = Element' $ Node go
   go
     z@{ parent, scope, raiseId }
     di@(DOMInterpret { makePursx: mpx, ids, deleteFromCache }) =
-    makePureEvent \k1 -> do
+    makeLemmingEvent \mySub k1 -> do
       me <- ids
       pxScope <- ids
       raiseId me
@@ -275,7 +275,7 @@ makePursx' verb html r = Element' $ Node go
           pxScope
           (Proxy :: _ rl)
           r
-      unsub <- subscribePure
+      unsub <- mySub
           ( ( pure $
                 mpx
                   { id: me

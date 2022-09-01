@@ -35,7 +35,7 @@ import Data.Profunctor (lcmap)
 import Deku.Attribute (Attribute, AttributeValue(..), unsafeUnAttribute)
 import Deku.Core (DOMInterpret(..), Domable, Node(..), Nut, bus, insert_, remove, sendToPos)
 import Effect (Effect)
-import FRP.Event (Event, keepLatest, makePureEvent, subscribePure)
+import FRP.Event (Event, keepLatest, makeLemmingEvent)
 import Prim.Int (class Compare)
 import Prim.Ordering (GT)
 import Safe.Coerce (coerce)
@@ -100,10 +100,10 @@ elementify
 elementify tag atts children = Node go
   where
   go { parent, scope, raiseId, pos } di@(DOMInterpret { ids, deleteFromCache }) =
-    makePureEvent \k -> do
+    makeLemmingEvent \mySub k -> do
       me <- ids
       raiseId me
-      unsub <- subscribePure
+      unsub <- mySub
         ( ( oneOf
               ( [ pure (unsafeElement di { id: me, parent, scope, tag })
                 , unsafeSetAttribute di me atts
@@ -208,10 +208,10 @@ text
 text txt = Element' $ Node go
   where
   go { parent, scope, raiseId } di@(DOMInterpret { ids, deleteFromCache }) =
-    makePureEvent \k -> do
+    makeLemmingEvent \mySub k -> do
       me <- ids
       raiseId me
-      unsub <- subscribePure
+      unsub <- mySub
         ( oneOf
             [ pure (unsafeText di { id: me, parent, scope })
             , unsafeSetText di me txt
@@ -231,9 +231,9 @@ deku
   -> (forall lock. Domable lock payload)
   -> DOMInterpret payload
   -> Event payload
-deku root children di@(DOMInterpret { ids, makeRoot }) = makePureEvent \k -> do
+deku root children di@(DOMInterpret { ids, makeRoot }) = makeLemmingEvent \mySub k -> do
   me <- ids
-  subscribePure
+  mySub
     ( pure (makeRoot { id: me, root })
         <|> __internalDekuFlatten
           { parent: Just me
