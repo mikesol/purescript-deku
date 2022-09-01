@@ -33,3 +33,4 @@
 , repository = "https://github.com/mikesol/purescript-deku"
 , sources = [ "src/**/*.purs" ]
 }
+
