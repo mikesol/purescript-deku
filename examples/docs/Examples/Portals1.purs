@@ -13,7 +13,7 @@ import Deku.Core (Domable)
 import Deku.DOM as D
 import Deku.Toplevel (runInBody1)
 import Effect (Effect)
-import FRP.Event (AnEvent, bus, fold)
+import FRP.Event (Event, bus, fold)
 import Type.Prelude (Proxy(..))
 
 main :: Effect Unit
@@ -41,7 +41,7 @@ main = runInBody1
             p1 :: Domable _ _
             p1 = index (Proxy :: _ 1) v
 
-            ev :: Boolean -> AnEvent _ Boolean
+            ev :: Boolean -> Event Boolean
             ev = fold (const not) event
 
             flips :: Boolean -> Domable _ _

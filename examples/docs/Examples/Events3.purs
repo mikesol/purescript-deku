@@ -13,7 +13,7 @@ import Deku.DOM as D
 import Deku.Listeners (click, keyUp, textInput)
 import Deku.Toplevel (runInBody)
 import Effect (Effect)
-import FRP.Event (AnEvent, bus, keepLatest, mapAccum)
+import FRP.Event (Event, bus, keepLatest, mapAccum)
 import Web.UIEvent.KeyboardEvent (code)
 
 data MainUIAction
@@ -26,7 +26,7 @@ main :: Effect Unit
 main = runInBody
   ( bussed \pushAction actionEvent -> do
       let
-        accumulateTextAndEmitOnSubmit :: AnEvent _ String
+        accumulateTextAndEmitOnSubmit :: Event String
         accumulateTextAndEmitOnSubmit = compact
           ( mapAccum
               ( \a b -> case a of

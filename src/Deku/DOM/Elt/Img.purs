@@ -5,14 +5,14 @@ import Deku.Attribute (Attribute)
 import Deku.Control (elementify)
 import Deku.Core (Domable)
 import Bolson.Core (Entity(..), fixed)
-import FRP.Event (AnEvent)
-import Hyrule.Zora (Zora)
+import FRP.Event (Event)
+
 
 data Img_
 
 img
   :: forall lock payload
-   . AnEvent Zora (Attribute Img_)
+   . Event (Attribute Img_)
   -> Array (Domable lock payload)
   -> Domable lock payload
 img attributes kids = Element' (elementify "img" attributes (fixed kids))

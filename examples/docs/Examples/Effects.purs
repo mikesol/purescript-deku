@@ -20,7 +20,7 @@ import Deku.Toplevel (runInBody1)
 import Effect (Effect)
 import Effect.Aff (launchAff_)
 import Effect.Class (liftEffect)
-import FRP.Event (AnEvent, mapAccum)
+import FRP.Event (Event, mapAccum)
 
 data UIAction = Initial | Loading | Result String
 
@@ -53,7 +53,7 @@ main = runInBody1
   ( bus \push -> lcmap (pure Initial <|> _)
       \event -> do
         let
-          split :: { left :: AnEvent _ Unit, right :: AnEvent _ String }
+          split :: { left :: Event Unit, right :: Event String }
           split = separate $ compact $
             map
               ( case _ of

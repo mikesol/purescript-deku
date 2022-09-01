@@ -3,26 +3,12 @@ module Deku.DOM.Attr.OnDragleave where
 import Prelude
 import Effect (Effect)
 import Deku.Attribute (class Attr, Cb(..), cb', unsafeAttribute)
-import Hyrule.Zora (Zora, runImpure)
+
 
 data OnDragleave = OnDragleave
-
 instance Attr anything OnDragleave Cb where
-  attr OnDragleave value = unsafeAttribute
-    { key: "dragleave", value: cb' value }
-
+  attr OnDragleave value = unsafeAttribute { key: "dragleave", value: cb' value }
 instance Attr anything OnDragleave (Effect Unit) where
-  attr OnDragleave value = unsafeAttribute
-    { key: "dragleave", value: cb' (Cb (const (value $> true))) }
-
+  attr OnDragleave value = unsafeAttribute { key: "dragleave", value: cb' (Cb (const (value $> true))) }
 instance Attr anything OnDragleave (Effect Boolean) where
-  attr OnDragleave value = unsafeAttribute
-    { key: "dragleave", value: cb' (Cb (const value)) }
-
-instance Attr anything OnDragleave (Zora Unit) where
-  attr OnDragleave value = unsafeAttribute
-    { key: "dragleave", value: cb' (Cb (const (runImpure (value $> true)))) }
-
-instance Attr anything OnDragleave (Zora Boolean) where
-  attr OnDragleave value = unsafeAttribute
-    { key: "dragleave", value: cb' (Cb (const (runImpure value))) }
+  attr OnDragleave value = unsafeAttribute { key: "dragleave", value: cb' (Cb (const value)) }

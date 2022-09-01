@@ -14,8 +14,8 @@ import Data.Symbol (class IsSymbol)
 import Deku.Attribute (Attribute, AttributeValue(..), unsafeUnAttribute)
 import Deku.Core (DOMInterpret(..), Domable, Node(..))
 import Deku.DOM (class TagToDeku)
-import FRP.Event (AnEvent, subscribe, makeEvent)
-import Hyrule.Zora (Zora)
+import FRP.Event (Event, subscribePure, makePureEvent)
+
 import Foreign.Object as Object
 import Prim.Boolean (False, True)
 import Prim.Row as Row
@@ -49,7 +49,7 @@ class
 
 instance
   ( TagToDeku tag deku
-  , Row.Cons acc (AnEvent Zora (Attribute deku)) pursi purso
+  , Row.Cons acc (Event (Attribute deku)) pursi purso
   ) =>
   DoVerbForAttr verb tag acc verb tail pursi purso tail
 else instance
@@ -4170,7 +4170,7 @@ instance pursxToElementConsInsert ::
     PursxElement pxe = get pxk r
 
 else instance pursxToElementConsAttr ::
-  ( Row.Cons key (AnEvent Zora (Attribute deku)) r' r
+  ( Row.Cons key (Event (Attribute deku)) r' r
   , PursxToElement lock payload rest r
   , Reflectable key String
   , IsSymbol key
@@ -4178,7 +4178,7 @@ else instance pursxToElementConsAttr ::
   PursxToElement
     lock
     payload
-    (RL.Cons key (AnEvent Zora (Attribute deku)) rest)
+    (RL.Cons key (Event (Attribute deku)) rest)
     r where
   pursxToElement pxScope _ r =
     let
@@ -4247,7 +4247,7 @@ makePursx' verb html r = Element' $ Node go
   go
     z@{ parent, scope, raiseId }
     di@(DOMInterpret { makePursx: mpx, ids, deleteFromCache }) =
-    makeEvent \k1 -> do
+    makePureEvent \k1 -> do
       me <- ids
       pxScope <- ids
       raiseId me
@@ -4256,28 +4256,30 @@ makePursx' verb html r = Element' $ Node go
           pxScope
           (Proxy :: _ rl)
           r
-      map ((*>) (k1 (deleteFromCache { id: me }))) $
-        subscribe
-          ( ( pure $
-                mpx
-                  { id: me
-                  , parent
-                  , cache
-                  , pxScope: pxScope
-                  , scope
-                  , html: reflectType html
-                  , verb: reflectType verb
-                  }
-            ) <|> element z di
-          )
-          k1
+      unsub <- subscribePure
+        ( ( pure $
+              mpx
+                { id: me
+                , parent
+                , cache
+                , pxScope: pxScope
+                , scope
+                , html: reflectType html
+                , verb: reflectType verb
+                }
+          ) <|> element z di
+        )
+        k1
+      pure do
+        k1 (deleteFromCache { id: me })
+        unsub
 
 __internalDekuFlatten
   :: forall lock payload
-   . PSR Zora (pos :: Maybe Int)
+   . PSR (pos :: Maybe Int)
   -> DOMInterpret payload
   -> Domable lock payload
-  -> AnEvent Zora payload
+  -> Event payload
 __internalDekuFlatten = Bolson.flatten
   { doLogic: \pos (DOMInterpret { sendToPos }) id -> sendToPos { id, pos }
   , ids: unwrap >>> _.ids

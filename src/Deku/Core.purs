@@ -6,7 +6,6 @@ module Deku.Core
   , DisconnectElement
   , Domable
   , GiveNewParent
-  , LiftImpure(..)
   , MakeElement
   , MakePursx
   , MakeRoot
@@ -21,7 +20,6 @@ module Deku.Core
   , busUncurried
   , bussed
   , bussedUncurried
-  , hlift
   , insert
   , insert_
   , remove
@@ -35,6 +33,8 @@ import Prelude
 
 import Bolson.Core (Scope)
 import Bolson.Core as Bolson
+import Control.Monad.ST (ST)
+import Control.Monad.ST.Global (Global)
 import Data.Maybe (Maybe(..))
 import Data.Newtype (class Newtype)
 import Data.Profunctor (lcmap)
@@ -42,12 +42,10 @@ import Data.Tuple (curry)
 import Data.Tuple.Nested (type (/\))
 import Deku.Attribute (Cb)
 import Effect (Effect)
-import FRP.Event (AnEvent)
+import FRP.Event (Event)
 import FRP.Event as FRP.Event
 import FRP.Event.VBus (class VBus, V, vbus)
 import Foreign.Object (Object)
-import Heterogeneous.Mapping (class HMap, class MapRecordWithIndex, class Mapping, ConstMapping, hmap)
-import Hyrule.Zora (Zora, runImpure)
 import Prim.RowList (class RowToList)
 import Type.Proxy (Proxy)
 import Web.DOM as Web.DOM
@@ -58,90 +56,64 @@ newtype ANut = ANut Nut
 
 bus
   :: forall a b
-   . ((a -> Effect Unit) -> AnEvent Zora a -> b)
-  -> AnEvent Zora b
-bus f = FRP.Event.bus (lcmap (map runImpure) f)
+   . ((a -> Effect Unit) -> Event a -> b)
+  -> Event b
+bus f = FRP.Event.bus f
 
 busUncurried
   :: forall a b
-   . (((a -> Effect Unit) /\ AnEvent Zora a) -> b)
-  -> AnEvent Zora b
+   . (((a -> Effect Unit) /\ Event a) -> b)
+  -> Event b
 busUncurried = curry >>> bus
 
 bussed
   :: forall lock logic obj a
-   . ((a -> Effect Unit) -> AnEvent Zora a -> Bolson.Entity logic obj Zora lock)
-  -> Bolson.Entity logic obj Zora lock
+   . ((a -> Effect Unit) -> Event a -> Bolson.Entity logic obj lock)
+  -> Bolson.Entity logic obj lock
 bussed f = Bolson.EventfulElement' (Bolson.EventfulElement (bus f))
 
 bussedUncurried
   :: forall lock logic obj a
-   . ( ((a -> Effect Unit) /\ AnEvent Zora a)
-       -> Bolson.Entity logic obj Zora lock
+   . ( ((a -> Effect Unit) /\ Event a)
+       -> Bolson.Entity logic obj lock
      )
-  -> Bolson.Entity logic obj Zora lock
+  -> Bolson.Entity logic obj lock
 bussedUncurried = curry >>> bussed
 
 --
 
-data LiftImpure = LiftImpure
-
-instance Mapping LiftImpure (i -> Zora Unit) (i -> Effect Unit) where
-  mapping _ = map runImpure
-
-instance
-  ( HMap LiftImpure (Record i) (Record o)
-  ) =>
-  Mapping LiftImpure (Record i) (Record o) where
-  mapping _ = hmap LiftImpure
-
-hlift :: forall i o. HMap LiftImpure i o => i -> o
-hlift = hmap LiftImpure
-
---
-
 vbussed
-  :: forall logic obj lock rbus bus pushi pusho pushR event u
+  :: forall logic obj lock rbus bus push event
    . RowToList bus rbus
-  => RowToList pushi pushR
-  => MapRecordWithIndex pushR
-       (ConstMapping LiftImpure)
-       pushi
-       pusho
-  => VBus rbus pushi event Zora
+  => VBus rbus push event
   => Proxy (V bus)
-  -> ({ | pusho } -> { | event } -> Bolson.Entity logic obj Zora lock)
-  -> Bolson.Entity logic obj Zora lock
+  -> ({ | push } -> { | event } -> Bolson.Entity logic obj lock)
+  -> Bolson.Entity logic obj lock
 vbussed px f = Bolson.EventfulElement'
-  (Bolson.EventfulElement (vbus px (lcmap hlift f)))
+  (Bolson.EventfulElement (vbus px f))
 
 vbussedUncurried
-  :: forall logic obj lock rbus bus pushi pusho pushR event
+  :: forall logic obj lock rbus bus push event
    . RowToList bus rbus
-  => RowToList pushi pushR
-  => MapRecordWithIndex pushR
-       (ConstMapping LiftImpure)
-       pushi
-       pusho
-  => VBus rbus pushi event Zora
+  => VBus rbus push event
   => Proxy (V bus)
-  -> (({ | pusho } /\ { | event }) -> Bolson.Entity logic obj Zora lock)
-  -> Bolson.Entity logic obj Zora lock
+  -> (({ | push } /\ { | event }) -> Bolson.Entity logic obj lock)
+  -> Bolson.Entity logic obj lock
 vbussedUncurried px = curry >>> vbussed px
 
 newtype Node (lock :: Type) payload = Node
-  ( Bolson.PSR Zora (pos :: Maybe Int)
+  ( Bolson.PSR(pos :: Maybe Int)
     -> DOMInterpret payload
-    -> AnEvent Zora payload
+    -> Event payload
   )
 
-type Domable lock payload = Bolson.Entity Int (Node lock payload) Zora lock
+type Domable lock payload = Bolson.Entity Int (Node lock payload)lock
 
 insert
   :: forall logic lock payload
    . Int
-  -> Bolson.Entity logic (Node lock payload) Zora lock
-  -> Bolson.Child logic (Node lock payload) Zora lock
+  -> Bolson.Entity logic (Node lock payload)lock
+  -> Bolson.Child logic (Node lock payload)lock
 insert i e = Bolson.Insert (f e)
   where
   f = case _ of
@@ -153,17 +125,17 @@ insert i e = Bolson.Insert (f e)
 
 insert_
   :: forall logic lock payload
-   . Bolson.Entity logic (Node lock payload) Zora lock
-  -> Bolson.Child logic (Node lock payload) Zora lock
+   . Bolson.Entity logic (Node lock payload) lock
+  -> Bolson.Child logic (Node lock payload) lock
 insert_ = Bolson.Insert
 
-remove :: forall logic obj lock. Bolson.Child logic obj Zora lock
+remove :: forall logic obj lock. Bolson.Child logic obj lock
 remove = Bolson.Remove
 
-sendToTop :: forall obj lock. Bolson.Child Int obj Zora lock
+sendToTop :: forall obj lock. Bolson.Child Int obj lock
 sendToTop = Bolson.Logic 0
 
-sendToPos :: forall obj lock. Int -> Bolson.Child Int obj Zora lock
+sendToPos :: forall obj lock. Int -> Bolson.Child Int obj lock
 sendToPos = Bolson.Logic
 
 type MakeElement =
@@ -231,7 +203,7 @@ type SendToPos =
 derive instance Newtype (DOMInterpret payload) _
 
 newtype DOMInterpret payload = DOMInterpret
-  { ids :: Zora String
+  { ids :: ST Global String
   , makeRoot :: MakeRoot -> payload
   , makeElement :: MakeElement -> payload
   , attributeParent :: AttributeParent -> payload

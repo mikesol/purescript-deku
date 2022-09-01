@@ -11,16 +11,16 @@ import Deku.Core (insert, remove)
 import Deku.DOM as D
 import Deku.Toplevel (runInBody)
 import Effect (Effect)
-import FRP.Event (AnEvent, fromEvent, mapAccum, toEvent)
+import FRP.Event (Event, mapAccum)
 import FRP.Event as FRP.Event
 import FRP.Event.Time as FRP.Event.Time
-import Hyrule.Zora (Zora)
 
-interval :: Int -> AnEvent Zora Instant
-interval = fromEvent <<< FRP.Event.Time.interval
 
-delay :: forall a. Int -> AnEvent Zora a -> AnEvent Zora a
-delay n = fromEvent <<< FRP.Event.delay n <<< toEvent
+interval :: Int -> Event Instant
+interval = FRP.Event.Time.interval
+
+delay :: forall a. Int -> Event a -> Event a
+delay n = FRP.Event.delay n
 
 main :: Effect Unit
 main = runInBody

@@ -12,8 +12,8 @@ import Deku.Interpret (FFIDOMSnapshot)
 import Deku.Pursx (nut, (~~))
 import Deku.Toplevel (runInBody1)
 import Effect (Effect)
-import FRP.Event (AnEvent)
-import Hyrule.Zora (Zora)
+import FRP.Event (Event)
+
 import Type.Proxy (Proxy(..))
 
 px =
@@ -46,7 +46,7 @@ pxInception push aThirdThing = px ~~
   }
 
 scene
-  :: forall lock. AnEvent Zora (Domable lock (FFIDOMSnapshot -> Effect Unit))
+  :: forall lock. Event (Domable lock (FFIDOMSnapshot -> Effect Unit))
 scene = bus \push event ->
   D.div empty
     [ pxInception push

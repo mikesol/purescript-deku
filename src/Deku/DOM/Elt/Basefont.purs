@@ -5,18 +5,17 @@ import Deku.Attribute (Attribute)
 import Deku.Control (elementify)
 import Deku.Core (Domable)
 import Bolson.Core (Entity(..), fixed)
-import FRP.Event (AnEvent)
-import Hyrule.Zora (Zora)
+import FRP.Event (Event)
+
 
 data Basefont_
 
 basefont
   :: forall lock payload
-   . AnEvent Zora (Attribute Basefont_)
+   . Event (Attribute Basefont_)
   -> Array (Domable lock payload)
   -> Domable lock payload
-basefont attributes kids = Element'
-  (elementify "basefont" attributes (fixed kids))
+basefont attributes kids = Element' (elementify "basefont" attributes (fixed kids))
 
 basefont_
   :: forall lock payload

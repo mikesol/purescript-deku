@@ -113,14 +113,14 @@ import Deku.Attribute (Attribute)
 import Deku.Control (elementify)
 import Deku.Core (Domable)
 import Bolson.Core (Entity(..), fixed)
-import FRP.Event (AnEvent)
-import Hyrule.Zora (Zora)
+import FRP.Event (Event)
+
 
 data {term}
 
 {x}
   :: forall lock payload
-   . AnEvent Zora (Attribute {term})
+   . Event (Attribute {term})
   -> Array (Domable lock payload)
   -> Domable lock payload
 {x} attributes kids = Element' (elementify "{astag(x)}" attributes (fixed kids))
@@ -181,7 +181,7 @@ data {term} = {term}''')
 import Prelude
 import Effect (Effect)
 import Deku.Attribute (class Attr, Cb(..), cb', unsafeAttribute)
-import Hyrule.Zora (Zora, runImpure)
+
 
 data {term} = {term}''')
             term = 'On'+x.capitalize()
@@ -191,10 +191,7 @@ data {term} = {term}''')
   attr {term} value = unsafeAttribute {{ key: "{x}", value: cb' (Cb (const (value $> true))) }}''')
             print_(f'''instance Attr anything {term} (Effect Boolean) where
   attr {term} value = unsafeAttribute {{ key: "{x}", value: cb' (Cb (const value)) }}''')
-            print_(f'''instance Attr anything {term} (Zora Unit) where
-  attr {term} value = unsafeAttribute {{ key: "{x}", value: cb' (Cb (const (runImpure (value $> true)))) }}''')
-            print_(f'''instance Attr anything {term} (Zora Boolean) where
-  attr {term} value = unsafeAttribute {{ key: "{x}", value: cb' (Cb (const (runImpure value))) }}''')
+          
     else:
       raise ValueError('wat' + str(CODEGEN_TARGET) )
     return '\n'.join(o)
@@ -211,15 +208,15 @@ if __name__ == '__main__':
       os.remove(f)
     for x in TAGS:
       o = cg(1, x)
-      with open('src/Deku/DOM/Elt/%s.purs' % bigtag(x).split('_')[0], 'w') as wf:
+      with open('src/Deku/DOM/Elt/%s.purs' % bigtag(x).split('_')[0].replace(' ',''), 'w') as wf:
         wf.write(o)
     for k,v in AMAP.items():
       o = cg(8, k,v)
-      with open('src/Deku/DOM/Attr/%s.purs' % bigat(k), 'w') as wf:
+      with open('src/Deku/DOM/Attr/%s.purs' % bigat(k).replace(' ',''), 'w') as wf:
         wf.write(o)
     for x in GLOBAL_EVENT_HANDLERS:
       o = cg(10, x)
-      with open('src/Deku/DOM/Attr/On%s.purs' % bigat(x), 'w') as wf:
+      with open('src/Deku/DOM/Attr/On%s.purs' % bigat(x).replace(' ',''), 'w') as wf:
         wf.write(o)
     for z in [0,2,3,7,9]:
       o = cg(z)

@@ -15,9 +15,8 @@ import Deku.Core (DOMInterpret(..), Domable, Node(..))
 import Deku.Interpret (FFIDOMSnapshot, Instruction, fullDOMInterpret, hydratingDOMInterpret, makeFFIDOMSnapshot, setHydrating, ssrDOMInterpret, unSetHydrating)
 import Deku.SSR (ssr')
 import Effect (Effect)
-import Effect.Ref as Ref
-import FRP.Event (AnEvent, subscribe, toEvent, toStEvent)
-import Hyrule.Zora (Zora)
+import FRP.Event (Event, subscribe, subscribePure)
+
 import Unsafe.Coerce (unsafeCoerce)
 import Web.DOM.Element as Web.DOM
 import Web.HTML (window)
@@ -31,17 +30,17 @@ runInElement'
   -> Effect (Effect Unit)
 runInElement' elt eee = do
   ffi <- makeFFIDOMSnapshot
-  evt <- Ref.new 0 <#> (deku elt eee <<< fullDOMInterpret)
-  subscribe (toEvent evt) \i -> i ffi
+  evt <- liftST (RRef.new 0) <#> (deku elt eee <<< fullDOMInterpret)
+  subscribe evt \i -> i ffi
 
 runInElement1'
   :: Web.DOM.Element
-  -> (forall lock. AnEvent Zora (Domable lock (FFIDOMSnapshot -> Effect Unit)))
+  -> (forall lock. Event (Domable lock (FFIDOMSnapshot -> Effect Unit)))
   -> Effect (Effect Unit)
 runInElement1' elt eee = do
   ffi <- makeFFIDOMSnapshot
-  evt <- Ref.new 0 <#> (deku1 elt eee <<< fullDOMInterpret)
-  subscribe (toEvent evt) \i -> i ffi
+  evt <- liftST (RRef.new 0) <#> (deku1 elt eee <<< fullDOMInterpret)
+  subscribe evt \i -> i ffi
 
 runInElementA'
   :: Web.DOM.Element
@@ -49,8 +48,8 @@ runInElementA'
   -> Effect (Effect Unit)
 runInElementA' elt eee = do
   ffi <- makeFFIDOMSnapshot
-  evt <- Ref.new 0 <#> (dekuA elt eee <<< fullDOMInterpret)
-  subscribe (toEvent evt) \i -> i ffi
+  evt <- liftST (RRef.new 0) <#> (dekuA elt eee <<< fullDOMInterpret)
+  subscribe evt \i -> i ffi
 
 runInBody'
   :: (forall lock. Domable lock (FFIDOMSnapshot -> Effect Unit))
@@ -60,7 +59,7 @@ runInBody' eee = do
   maybe mempty (\elt -> runInElement' elt eee) (toElement <$> b')
 
 runInBody1'
-  :: (forall lock. AnEvent Zora (Domable lock (FFIDOMSnapshot -> Effect Unit)))
+  :: (forall lock. Event (Domable lock (FFIDOMSnapshot -> Effect Unit)))
   -> Effect (Effect Unit)
 runInBody1' eee = do
   b' <- window >>= document >>= body
@@ -79,7 +78,7 @@ runInBody
 runInBody a = void (runInBody' a)
 
 runInBody1
-  :: (forall lock. AnEvent Zora (Domable lock (FFIDOMSnapshot -> Effect Unit)))
+  :: (forall lock. Event (Domable lock (FFIDOMSnapshot -> Effect Unit)))
   -> Effect Unit
 runInBody1 a = void (runInBody1' a)
 
@@ -95,19 +94,17 @@ hydrate'
   -> Effect (Effect Unit)
 hydrate' children = do
   ffi <- makeFFIDOMSnapshot
-  di <- Ref.new 0 <#> hydratingDOMInterpret
+  di <- liftST (RRef.new 0) <#> hydratingDOMInterpret
   setHydrating ffi
   u <- subscribe
-    ( toEvent
-        ( __internalDekuFlatten
-            { parent: Just "deku-root"
-            , scope: Local "rootScope"
-            , raiseId: \_ -> pure unit
-            , pos: Nothing
-            }
-            di
-            (unsafeCoerce children)
-        )
+    ( __internalDekuFlatten
+        { parent: Just "deku-root"
+        , scope: Local "rootScope"
+        , raiseId: \_ -> pure unit
+        , pos: Nothing
+        }
+        di
+        (unsafeCoerce children)
     )
     \i -> i ffi
   unSetHydrating ffi
@@ -147,17 +144,16 @@ runSSR' topTag (Template { head, tail }) children =
           seed <- RRef.new 0
           instr <- RRef.new []
           let di = ssrDOMInterpret seed
-          void $ subscribe
-            ( toStEvent
-                ( __internalDekuFlatten
-                    { parent: Just "deku-root"
-                    , scope: Local "rootScope"
-                    , raiseId: \_ -> pure unit
-                    , pos: Nothing
-                    }
-                    di
-                    children
-                )
+          void $ subscribePure
+            ( ( __internalDekuFlatten
+                  { parent: Just "deku-root"
+                  , scope: Local "rootScope"
+                  , raiseId: \_ -> pure unit
+                  , pos: Nothing
+                  }
+                  di
+                  children
+              )
             )
             \i -> i instr
           RRef.read instr
@@ -165,10 +161,10 @@ runSSR' topTag (Template { head, tail }) children =
 
 __internalDekuFlatten
   :: forall lock payload
-   . PSR Zora (pos :: Maybe Int)
+   . PSR (pos :: Maybe Int)
   -> DOMInterpret payload
   -> Domable lock payload
-  -> AnEvent Zora payload
+  -> Event payload
 __internalDekuFlatten = Bolson.flatten
   { doLogic: \pos (DOMInterpret { sendToPos }) id -> sendToPos { id, pos }
   , ids: unwrap >>> _.ids
