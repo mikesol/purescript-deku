@@ -8,10 +8,42 @@ let overrides =
         , repo = "https://github.com/mikesol/purescript-bolson.git"
         , version = "effn-event2"
         }
-        , hyrule =
-        { dependencies = [ "monoid-extras", "web-uievents", "js-timers", "unsafe-reference" ]
+      , hyrule =
+        { dependencies =
+          [ "monoid-extras", "web-uievents", "js-timers", "unsafe-reference" ]
         , repo = "https://github.com/mikesol/purescript-hyrule.git"
         , version = "effn-event2"
+        }
+      , halogen-hooks =
+        { dependencies =
+          [ "aff"
+          , "arrays"
+          , "bifunctors"
+          , "effect"
+          , "exceptions"
+          , "foldable-traversable"
+          , "foreign-object"
+          , "free"
+          , "freeap"
+          , "halogen"
+          , "halogen-subscriptions"
+          , "maybe"
+          , "newtype"
+          , "ordered-collections"
+          , "parallel"
+          , "partial"
+          , "prelude"
+          , "refs"
+          , "tailrec"
+          , "transformers"
+          , "tuples"
+          , "unsafe-coerce"
+          , "unsafe-reference"
+          , "web-dom"
+          , "web-html"
+          ]
+        , repo = "https://github.com/thomashoneyman/purescript-halogen-hooks"
+        , version = "v0.6.1"
         }
       }
 

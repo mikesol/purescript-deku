@@ -11,9 +11,11 @@
 		"build:test": "spago -x test/test.dhall build",
 		"snapshot": "npm run bundle:performance && spago -x test/test.dhall run --main Performance.Snapshot.Write",
 		"test": "spago -x test/test.dhall test",
+		"test:optimizer-performance": "npm run bundle:optimizer-performance && spago -x test/test.dhall run --main Performance.Main",
 		"test:performance": "npm run bundle:performance && spago -x test/test.dhall run --main Performance.Main",
 		"bundle:examples": "python makeExampleStrings.py && spago -x examples.dhall bundle-app --main Deku.Example.HelloWorld --to examples/hello-world/index.js",
-		"bundle:performance": "spago -x test/test.dhall bundle-app --minify --main Performance.Test.App --to test/test.js --no-build"
+		"bundle:performance": "spago -x test/test.dhall bundle-app --minify --main Performance.Test.App --to test/test.js",
+		"bundle:optimizer-performance": "spago -x test/test-optimized.dhall build && purs-backend-es bundle-app --main Performance.Test.App --to test/test.js"
 	},
 	"keywords": [],
 	"author": "",
@@ -27,6 +29,7 @@
 		"pulp": "^15.0.0",
 		"puppeteer": "^5.2.0",
 		"purescript": "^0.15.0",
+		"purs-backend-es": "^1.1.0",
 		"purs-tidy": "^0.9.0",
 		"spago": "^0.20.8",
 		"test": "^0.6.0",
