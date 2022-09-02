@@ -19,24 +19,23 @@ import Deku.Toplevel (runInBodyA)
 import Effect (Effect)
 import Effect.Random as Random
 import FRP.Behavior (ABehavior, behavior, sample_)
-import FRP.Event (AnEvent, fromEvent, makeEvent, mapAccum, subscribe, toEvent)
+import FRP.Event (Event, makeEvent, mapAccum, subscribe)
 import FRP.Event as FRP.Event
 import FRP.Event.Time as FRP.Event.Time
-import Hyrule.Zora (Zora, liftImpure)
 import Type.Prelude (Proxy(..))
 
-interval :: Int -> AnEvent Zora Instant
-interval = fromEvent <<< FRP.Event.Time.interval
+interval :: Int -> Event Instant
+interval = FRP.Event.Time.interval
 
-delay :: forall a. Int -> AnEvent Zora a -> AnEvent Zora a
-delay n = fromEvent <<< FRP.Event.delay n <<< toEvent
+delay :: forall a. Int -> Event a -> Event a
+delay n = FRP.Event.delay n
 
-random :: ABehavior (AnEvent Zora) (Additive Number)
+random :: ABehavior (Event) (Additive Number)
 random = behavior \e ->
   makeEvent \k -> subscribe e \f ->
-    (liftImpure $ Additive <$> Random.random) >>= k <<< f
+    (Additive <$> Random.random) >>= k <<< f
 
-rdm :: ABehavior (AnEvent Zora) String
+rdm :: ABehavior (Event) String
 rdm = map
   ( \{ r: Additive r, g: Additive g, b: Additive b } -> "rgb("
       <> show (floor (r * 100.0 + 155.0))
@@ -48,7 +47,7 @@ rdm = map
   )
   ({ r: _, g: _, b: _ } <$> random <*> random <*> random)
 
-counter :: forall a. AnEvent Zora a → AnEvent Zora (Tuple a Int)
+counter :: forall a. Event a → Event (Tuple a Int)
 counter event = mapAccum f event 0
   where
   f a b = Tuple (b + 1) (Tuple a b)

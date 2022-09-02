@@ -30,14 +30,12 @@ import Control.Plus (empty)
 import Data.FastVect.FastVect (Vect)
 import Data.Foldable (oneOf)
 import Data.Maybe (Maybe(..), maybe)
-import Data.Newtype (unwrap)
+import Data.Newtype (class Newtype, unwrap)
 import Data.Profunctor (lcmap)
 import Deku.Attribute (Attribute, AttributeValue(..), unsafeUnAttribute)
-import FRP.Event (AnEvent, makeEvent, subscribe)
-import Hyrule.Zora (Zora)
 import Deku.Core (DOMInterpret(..), Domable, Node(..), Nut, bus, insert_, remove, sendToPos)
 import Effect (Effect)
-import FRP.Event (AnEvent, keepLatest, makeEvent, subscribe)
+import FRP.Event (Event, keepLatest, makeLemmingEvent)
 import Prim.Int (class Compare)
 import Prim.Ordering (GT)
 import Safe.Coerce (coerce)
@@ -72,8 +70,8 @@ unsafeSetText
   :: forall payload
    . DOMInterpret payload
   -> String
-  -> AnEvent Zora String
-  -> AnEvent Zora payload
+  -> Event String
+  -> Event payload
 unsafeSetText (DOMInterpret { setText }) id txt = map
   (setText <<< { id, text: _ })
   txt
@@ -82,8 +80,8 @@ unsafeSetAttribute
   :: forall element payload
    . DOMInterpret payload
   -> String
-  -> AnEvent Zora (Attribute element)
-  -> AnEvent Zora payload
+  -> Event (Attribute element)
+  -> Event payload
 unsafeSetAttribute (DOMInterpret { setProp, setCb }) id atts = map
   ( ( \{ key, value } -> case value of
         Prop' s -> setProp { id, key, value: s }
@@ -96,16 +94,16 @@ unsafeSetAttribute (DOMInterpret { setProp, setCb }) id atts = map
 elementify
   :: forall element lock payload
    . String
-  -> AnEvent Zora (Attribute element)
+  -> Event (Attribute element)
   -> Domable lock payload
   -> Node lock payload
 elementify tag atts children = Node go
   where
   go { parent, scope, raiseId, pos } di@(DOMInterpret { ids, deleteFromCache }) =
-    makeEvent \k -> do
+    makeLemmingEvent \mySub k -> do
       me <- ids
       raiseId me
-      map ((k (deleteFromCache { id: me })) *> _) $ subscribe
+      unsub <- mySub
         ( ( oneOf
               ( [ pure (unsafeElement di { id: me, parent, scope, tag })
                 , unsafeSetAttribute di me atts
@@ -125,6 +123,9 @@ elementify tag atts children = Node go
               children
         )
         k
+      pure do
+        k (deleteFromCache { id: me })
+        unsub
 
 globalPortal
   :: forall n lock payload
@@ -144,6 +145,31 @@ globalPortal v c = Bolson.globalPortalComplexComplex
   v
   (lcmap (map (_ $ unit)) c)
 
+-- ugh, this isn't sacred, delete it and regenerate if something changes
+portalFlatten
+  :: forall payload136 b143 d145 t149 t157 t159 lock166 lock170 payload171
+   . Newtype b143
+       { ids :: d145
+       | t149
+       }
+  => { disconnectElement ::
+         DOMInterpret t157
+         -> { id :: String
+            , parent :: String
+            , scope :: Scope
+            | t159
+            }
+         -> t157
+     , doLogic :: Int -> DOMInterpret payload136 -> String -> payload136
+     , ids :: b143 -> d145
+     , toElt ::
+         Node lock166 payload171
+         -> Element (DOMInterpret payload171)
+              ( pos :: Maybe Int
+              )
+              lock170
+              payload171
+     }
 portalFlatten =
   { doLogic: \pos (DOMInterpret { sendToPos }) id -> sendToPos { id, pos }
   , ids: unwrap >>> _.ids
@@ -177,21 +203,24 @@ portal a b = Bolson.portalComplexComplex
 
 text
   :: forall lock payload
-   . AnEvent Zora String
+   . Event String
   -> Domable lock payload
 text txt = Element' $ Node go
   where
   go { parent, scope, raiseId } di@(DOMInterpret { ids, deleteFromCache }) =
-    makeEvent \k -> do
+    makeLemmingEvent \mySub k -> do
       me <- ids
       raiseId me
-      map ((*>) (k (deleteFromCache { id: me }))) $ subscribe
+      unsub <- mySub
         ( oneOf
             [ pure (unsafeText di { id: me, parent, scope })
             , unsafeSetText di me txt
             ]
         )
         k
+      pure do
+        k (deleteFromCache { id: me })
+        unsub
 
 text_ :: forall lock payload. String -> Domable lock payload
 text_ txt = text (pure txt)
@@ -201,10 +230,10 @@ deku
    . Web.DOM.Element
   -> (forall lock. Domable lock payload)
   -> DOMInterpret payload
-  -> AnEvent Zora payload
-deku root children di@(DOMInterpret { ids, makeRoot }) = makeEvent \k -> do
+  -> Event payload
+deku root children di@(DOMInterpret { ids, makeRoot }) = makeLemmingEvent \mySub k -> do
   me <- ids
-  subscribe
+  mySub
     ( pure (makeRoot { id: me, root })
         <|> __internalDekuFlatten
           { parent: Just me
@@ -220,9 +249,9 @@ deku root children di@(DOMInterpret { ids, makeRoot }) = makeEvent \k -> do
 deku1
   :: forall payload
    . Web.DOM.Element
-  -> (forall lock. AnEvent Zora (Domable lock payload))
+  -> (forall lock. Event (Domable lock payload))
   -> DOMInterpret payload
-  -> AnEvent Zora payload
+  -> Event payload
 deku1 root children = deku root (EventfulElement' $ EventfulElement children)
 
 dekuA
@@ -230,102 +259,117 @@ dekuA
    . Web.DOM.Element
   -> (forall lock. Array (Domable lock payload))
   -> DOMInterpret payload
-  -> AnEvent Zora payload
+  -> Event payload
 dekuA root children = deku root (FixedChildren' $ FixedChildren children)
 
 data Stage = Begin | Middle | End
 
 __internalDekuFlatten
   :: forall lock payload
-   . PSR Zora (pos :: Maybe Int)
+   . PSR (pos :: Maybe Int)
   -> DOMInterpret payload
   -> Domable lock payload
-  -> AnEvent Zora payload
+  -> Event payload
 __internalDekuFlatten = Bolson.flatten
   portalFlatten
 
 switcher
   :: forall a element lock payload
-   . ( AnEvent Zora (Attribute element)
+   . ( Event (Attribute element)
        -> Array (Domable lock payload)
        -> Domable lock payload
      )
-  -> AnEvent Zora (Attribute element)
+  -> Event (Attribute element)
   -> (a -> Domable lock payload)
-  -> AnEvent Zora a
+  -> Event a
   -> Domable lock payload
 switcher f e1 i e2 = f e1 [ Bolson.switcher i e2 ]
 
 switcher_
   :: forall a element lock payload
-   . ( AnEvent Zora (Attribute element)
+   . ( Event (Attribute element)
        -> Array (Domable lock payload)
        -> Domable lock payload
      )
   -> (a -> Domable lock payload)
-  -> AnEvent Zora a
+  -> Event a
   -> Domable lock payload
 switcher_ f i e = f empty [ Bolson.switcher i e ]
 
 dyn
   :: forall element lock payload
-   . ( AnEvent Zora (Attribute element)
+   . ( Event (Attribute element)
        -> Array (Domable lock payload)
        -> Domable lock payload
      )
-  -> AnEvent Zora (Attribute element)
-  -> AnEvent Zora (AnEvent Zora (BCore.Child Int (Node lock payload) Zora lock))
+  -> Event (Attribute element)
+  -> Event (Event (BCore.Child Int (Node lock payload) lock))
   -> Domable lock payload
 dyn f e i = f e [ BCore.dyn i ]
 
 ezDyn
   :: forall element lock payload
-   . ( AnEvent Zora (Attribute element)
+   . ( Event (Attribute element)
        -> Array (Domable lock payload)
        -> Domable lock payload
      )
-  -> AnEvent Zora (Attribute element)
-  -> (AnEvent Zora ({ remove :: Effect Unit, sendToPos :: Int -> Effect Unit } -> Domable lock payload))
+  -> Event (Attribute element)
+  -> ( Event
+         ( { remove :: Effect Unit, sendToPos :: Int -> Effect Unit }
+           -> Domable lock payload
+         )
+     )
   -> Domable lock payload
-ezDyn f0 e0 e1 = dyn f0 e0 (e1 <#> \f1 -> keepLatest $ bus \setRm rm ->
-  keepLatest $ bus \setStp stp ->
-      (rm $> remove) <|> (stp <#> sendToPos) <|> pure (insert_ (f1 { remove: setRm unit, sendToPos: setStp })))
+ezDyn f0 e0 e1 = dyn f0 e0
+  ( e1 <#> \f1 -> keepLatest $ bus \setRm rm ->
+      keepLatest $ bus \setStp stp ->
+        (rm $> remove) <|> (stp <#> sendToPos) <|> pure
+          (insert_ (f1 { remove: setRm unit, sendToPos: setStp }))
+  )
 
 ezDyn_
   :: forall element lock payload
-   . ( AnEvent Zora (Attribute element)
+   . ( Event (Attribute element)
        -> Array (Domable lock payload)
        -> Domable lock payload
      )
-  -> (AnEvent Zora ({ remove :: Effect Unit, sendToPos :: Int -> Effect Unit } -> Domable lock payload))
+  -> ( Event
+         ( { remove :: Effect Unit, sendToPos :: Int -> Effect Unit }
+           -> Domable lock payload
+         )
+     )
   -> Domable lock payload
-ezDyn_ f0 e1 = dyn_ f0 (e1 <#> \f1 -> keepLatest $ bus \setRm rm ->
-  keepLatest $ bus \setStp stp ->
-      (rm $> remove) <|> (stp <#> sendToPos) <|> pure (insert_ (f1 { remove: setRm unit, sendToPos: setStp })))
+ezDyn_ f0 e1 = dyn_ f0
+  ( e1 <#> \f1 -> keepLatest $ bus \setRm rm ->
+      keepLatest $ bus \setStp stp ->
+        (rm $> remove) <|> (stp <#> sendToPos) <|> pure
+          (insert_ (f1 { remove: setRm unit, sendToPos: setStp }))
+  )
+
 dyn_
   :: forall element lock payload
-   . ( AnEvent Zora (Attribute element)
+   . ( Event (Attribute element)
        -> Array (Domable lock payload)
        -> Domable lock payload
      )
-  -> AnEvent Zora (AnEvent Zora (BCore.Child Int (Node lock payload) Zora lock))
+  -> Event (Event (BCore.Child Int (Node lock payload) lock))
   -> Domable lock payload
 dyn_ f i = f empty [ BCore.dyn i ]
 
 fixed
   :: forall element lock payload
-   . ( AnEvent Zora (Attribute element)
+   . ( Event (Attribute element)
        -> Array (Domable lock payload)
        -> Domable lock payload
      )
-  -> AnEvent Zora (Attribute element)
+  -> Event (Attribute element)
   -> Array (Domable lock payload)
   -> Domable lock payload
 fixed f e i = f e [ BCore.fixed i ]
 
 fixed_
   :: forall element lock payload
-   . ( AnEvent Zora (Attribute element)
+   . ( Event (Attribute element)
        -> Array (Domable lock payload)
        -> Domable lock payload
      )
@@ -335,22 +379,22 @@ fixed_ f i = f empty [ BCore.fixed i ]
 
 envy
   :: forall element lock payload
-   . ( AnEvent Zora (Attribute element)
+   . ( Event (Attribute element)
        -> Array (Domable lock payload)
        -> Domable lock payload
      )
-  -> AnEvent Zora (Attribute element)
-  -> AnEvent Zora (Domable lock payload)
+  -> Event (Attribute element)
+  -> Event (Domable lock payload)
   -> Domable lock payload
 envy f e i = f e [ BCore.envy i ]
 
 envy_
   :: forall element lock payload
-   . ( AnEvent Zora (Attribute element)
+   . ( Event (Attribute element)
        -> Array (Domable lock payload)
        -> Domable lock payload
      )
-  -> AnEvent Zora (Domable lock payload)
+  -> Event (Domable lock payload)
   -> Domable lock payload
 envy_ f i = f empty [ BCore.envy i ]
 

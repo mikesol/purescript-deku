@@ -9,7 +9,7 @@ import Deku.DOM as D
 import Deku.Listeners (click_, slider)
 import Deku.Toplevel (runInBody)
 import Effect (Effect)
-import FRP.Event (AnEvent, fold)
+import FRP.Event (Event, fold)
 import FRP.Event.VBus (V)
 import Type.Proxy (Proxy(..))
 
@@ -22,7 +22,7 @@ main :: Effect Unit
 main = runInBody
   ( vbussed (Proxy :: _ UIEvents) \push event -> do
       let
-        countUp :: AnEvent _ Int
+        countUp :: Event Int
         countUp = fold
           (const (1 + _))
           (pure unit <|> event.buttonClicked)

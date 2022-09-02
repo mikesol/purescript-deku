@@ -8,27 +8,27 @@ import Prelude
 
 import Deku.Attribute (class Attr, Attribute, (:=))
 import Deku.DOM as D
-import FRP.Event (AnEvent)
-import Hyrule.Zora (Zora)
+import FRP.Event (Event)
+
 
 klass
   :: forall e
    . Attr e D.Class String
-  => AnEvent Zora String
-  -> AnEvent Zora (Attribute e)
+  => Event String
+  -> Event (Attribute e)
 klass e = e <#> (D.Class := _)
 
 style
   :: forall e
    . Attr e D.Style String
-  => AnEvent Zora String
-  -> AnEvent Zora (Attribute e)
+  => Event String
+  -> Event (Attribute e)
 style e = e <#> (D.Style := _)
 
 id
   :: forall e
    . Attr e D.Id String
-  => AnEvent Zora String
-  -> AnEvent Zora (Attribute e)
+  => Event String
+  -> Event (Attribute e)
 id e = e <#> (D.Id := _)
 

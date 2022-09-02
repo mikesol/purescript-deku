@@ -5,14 +5,14 @@ import Deku.Attribute (Attribute)
 import Deku.Control (elementify)
 import Deku.Core (Domable)
 import Bolson.Core (Entity(..), fixed)
-import FRP.Event (AnEvent)
-import Hyrule.Zora (Zora)
+import FRP.Event (Event)
+
 
 data Audio_
 
 audio
   :: forall lock payload
-   . AnEvent Zora (Attribute Audio_)
+   . Event (Attribute Audio_)
   -> Array (Domable lock payload)
   -> Domable lock payload
 audio attributes kids = Element' (elementify "audio" attributes (fixed kids))

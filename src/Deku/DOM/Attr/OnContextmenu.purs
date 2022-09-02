@@ -3,26 +3,12 @@ module Deku.DOM.Attr.OnContextmenu where
 import Prelude
 import Effect (Effect)
 import Deku.Attribute (class Attr, Cb(..), cb', unsafeAttribute)
-import Hyrule.Zora (Zora, runImpure)
+
 
 data OnContextmenu = OnContextmenu
-
 instance Attr anything OnContextmenu Cb where
-  attr OnContextmenu value = unsafeAttribute
-    { key: "contextmenu", value: cb' value }
-
+  attr OnContextmenu value = unsafeAttribute { key: "contextmenu", value: cb' value }
 instance Attr anything OnContextmenu (Effect Unit) where
-  attr OnContextmenu value = unsafeAttribute
-    { key: "contextmenu", value: cb' (Cb (const (value $> true))) }
-
+  attr OnContextmenu value = unsafeAttribute { key: "contextmenu", value: cb' (Cb (const (value $> true))) }
 instance Attr anything OnContextmenu (Effect Boolean) where
-  attr OnContextmenu value = unsafeAttribute
-    { key: "contextmenu", value: cb' (Cb (const value)) }
-
-instance Attr anything OnContextmenu (Zora Unit) where
-  attr OnContextmenu value = unsafeAttribute
-    { key: "contextmenu", value: cb' (Cb (const (runImpure (value $> true)))) }
-
-instance Attr anything OnContextmenu (Zora Boolean) where
-  attr OnContextmenu value = unsafeAttribute
-    { key: "contextmenu", value: cb' (Cb (const (runImpure value))) }
+  attr OnContextmenu value = unsafeAttribute { key: "contextmenu", value: cb' (Cb (const value)) }

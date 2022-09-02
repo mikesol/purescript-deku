@@ -9,7 +9,6 @@
   , "filterable"
   , "foldable-traversable"
   , "foreign-object"
-  , "heterogeneous"
   , "hyrule"
   , "maybe"
   , "newtype"
@@ -18,7 +17,6 @@
   , "profunctor"
   , "quickcheck"
   , "record"
-  , "refs"
   , "safe-coerce"
   , "st"
   , "strings"
@@ -35,3 +33,4 @@
 , repository = "https://github.com/mikesol/purescript-deku"
 , sources = [ "src/**/*.purs" ]
 }
+

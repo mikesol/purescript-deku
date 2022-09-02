@@ -5,18 +5,17 @@ import Deku.Attribute (Attribute)
 import Deku.Control (elementify)
 import Deku.Core (Domable)
 import Bolson.Core (Entity(..), fixed)
-import FRP.Event (AnEvent)
-import Hyrule.Zora (Zora)
+import FRP.Event (Event)
+
 
 data Fieldset_
 
 fieldset
   :: forall lock payload
-   . AnEvent Zora (Attribute Fieldset_)
+   . Event (Attribute Fieldset_)
   -> Array (Domable lock payload)
   -> Domable lock payload
-fieldset attributes kids = Element'
-  (elementify "fieldset" attributes (fixed kids))
+fieldset attributes kids = Element' (elementify "fieldset" attributes (fixed kids))
 
 fieldset_
   :: forall lock payload

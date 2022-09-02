@@ -10,9 +10,8 @@ import Deku.Listeners (click_, slider)
 import Deku.Pursx (nut, (~~))
 import Deku.Toplevel (Template(..), runSSR)
 import Examples as Examples
-import FRP.Event (fold, makeEvent)
+import FRP.Event (fold, makePureEvent)
 import FRP.Event.VBus (V)
-import Hyrule.Zora (liftPure)
 import Type.Proxy (Proxy(..))
 
 type UIEvents = V
@@ -142,8 +141,8 @@ ssrPage _ = px ~~
       ( D.pre_
           [ D.code_
               [ text
-                  ( makeEvent \k ->
-                      ( liftPure
+                  ( makePureEvent \k ->
+                      ( 
                           ( runSSR
                               ( Template
                                   { head:

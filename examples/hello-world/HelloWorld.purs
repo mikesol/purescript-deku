@@ -15,10 +15,10 @@ import Deku.DOM as D
 import Deku.Interpret (FFIDOMSnapshot)
 import Deku.Toplevel (runInBody)
 import Effect (Effect)
-import FRP.Event (AnEvent, filterMap, keepLatest, mapAccum)
-import Hyrule.Zora (Zora)
+import FRP.Event (Event, filterMap, keepLatest, mapAccum)
 
-counter :: forall a. AnEvent Zora a → AnEvent Zora (Tuple a Int)
+
+counter :: forall a. Event a → Event (Tuple a Int)
 counter event = mapAccum f event 0
   where
   f a b = Tuple (b + 1) (Tuple a b)

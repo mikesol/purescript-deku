@@ -13,12 +13,11 @@ import Prelude
 
 import Control.Monad.ST (ST)
 import Control.Monad.ST.Global (Global)
-import Control.Monad.ST.Internal as RRef
+import Control.Monad.ST.Global as Region
+import Control.Monad.ST.Internal as Ref
 import Data.Maybe (Maybe(..), maybe)
 import Deku.Core as Core
 import Effect (Effect)
-import Effect.Ref as Ref
-import Hyrule.Zora (liftImpure, liftPure)
 import Test.QuickCheck (arbitrary, mkSeed)
 import Test.QuickCheck.Gen (Gen, evalGen)
 
@@ -93,9 +92,9 @@ foreign import setHydrating :: FFIDOMSnapshot -> Effect Unit
 foreign import unSetHydrating :: FFIDOMSnapshot -> Effect Unit
 
 fullDOMInterpret
-  :: Ref.Ref Int -> Core.DOMInterpret (FFIDOMSnapshot -> Effect Unit)
+  :: Ref.STRef Region.Global Int -> Core.DOMInterpret (FFIDOMSnapshot -> Effect Unit)
 fullDOMInterpret seed = Core.DOMInterpret
-  { ids: liftImpure do
+  { ids: do
       s <- Ref.read seed
       let
         o = show
@@ -124,35 +123,35 @@ data Instruction
   | SetText Core.SetText
 
 ssrMakeElement
-  :: forall r. Core.MakeElement -> RRef.STRef r (Array Instruction) -> ST r Unit
-ssrMakeElement a i = void $ RRef.modify (_ <> [ MakeElement a ]) i
+  :: forall r. Core.MakeElement -> Ref.STRef r (Array Instruction) -> ST r Unit
+ssrMakeElement a i = void $ Ref.modify (_ <> [ MakeElement a ]) i
 
 ssrMakeText
-  :: forall r. Core.MakeText -> RRef.STRef r (Array Instruction) -> ST r Unit
-ssrMakeText a i = void $ RRef.modify (_ <> [ MakeText a ]) i
+  :: forall r. Core.MakeText -> Ref.STRef r (Array Instruction) -> ST r Unit
+ssrMakeText a i = void $ Ref.modify (_ <> [ MakeText a ]) i
 
 ssrMakePursx
-  :: forall r. Core.MakePursx -> RRef.STRef r (Array Instruction) -> ST r Unit
-ssrMakePursx a i = void $ RRef.modify (_ <> [ MakePursx a ]) i
+  :: forall r. Core.MakePursx -> Ref.STRef r (Array Instruction) -> ST r Unit
+ssrMakePursx a i = void $ Ref.modify (_ <> [ MakePursx a ]) i
 
 ssrSetProp
-  :: forall r. Core.SetProp -> RRef.STRef r (Array Instruction) -> ST r Unit
-ssrSetProp a i = void $ RRef.modify (_ <> [ SetProp a ]) i
+  :: forall r. Core.SetProp -> Ref.STRef r (Array Instruction) -> ST r Unit
+ssrSetProp a i = void $ Ref.modify (_ <> [ SetProp a ]) i
 
 ssrSetText
-  :: forall r. Core.SetText -> RRef.STRef r (Array Instruction) -> ST r Unit
-ssrSetText a i = void $ RRef.modify (_ <> [ SetText a ]) i
+  :: forall r. Core.SetText -> Ref.STRef r (Array Instruction) -> ST r Unit
+ssrSetText a i = void $ Ref.modify (_ <> [ SetText a ]) i
 
 ssrDOMInterpret
-  :: RRef.STRef Global Int
-  -> Core.DOMInterpret (RRef.STRef Global (Array Instruction) -> ST Global Unit)
+  :: Ref.STRef Global Int
+  -> Core.DOMInterpret (Ref.STRef Global (Array Instruction) -> ST Global Unit)
 ssrDOMInterpret seed = Core.DOMInterpret
-  { ids: liftPure do
-      s <- RRef.read seed
+  { ids: do
+      s <- Ref.read seed
       let
         o = show
           (evalGen (arbitrary :: Gen Int) { newSeed: mkSeed s, size: 5 })
-      void $ RRef.modify (add 1) seed
+      void $ Ref.modify (add 1) seed
       pure o
   , makeElement: ssrMakeElement
   , attributeParent: \_ _ -> pure unit
@@ -169,9 +168,9 @@ ssrDOMInterpret seed = Core.DOMInterpret
   }
 
 hydratingDOMInterpret
-  :: Ref.Ref Int -> Core.DOMInterpret (FFIDOMSnapshot -> Effect Unit)
+  :: Ref.STRef Region.Global Int -> Core.DOMInterpret (FFIDOMSnapshot -> Effect Unit)
 hydratingDOMInterpret seed = Core.DOMInterpret
-  { ids: liftImpure do
+  { ids: do
       s <- Ref.read seed
       let
         o = show

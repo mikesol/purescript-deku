@@ -20,12 +20,12 @@ import Deku.Listeners (click)
 import Deku.Toplevel (runInElement')
 import Effect (Effect)
 import Effect.Class (class MonadEffect)
-import FRP.Event (AnEvent, fold, keepLatest, mapAccum)
+import FRP.Event (Event, fold, keepLatest, mapAccum)
 import Halogen (liftEffect)
 import Halogen as H
 import Halogen.HTML as HH
 import Halogen.HTML.Properties as HP
-import Hyrule.Zora (Zora)
+
 import Performance.Test.Todo.Shared as Shared
 import Type.Proxy (Proxy(..))
 import Web.HTML.HTMLElement (toElement)
@@ -182,8 +182,8 @@ containerD initialState = Deku.do
 todoD
   :: forall lock payload
    . { id :: Int, description :: String }
-  -> AnEvent Zora Boolean
-  -> AnEvent Zora String
+  -> Event Boolean
+  -> Event String
   -> (String -> Effect Unit)
   -> (Boolean -> Effect Unit)
   -> Domable lock payload
@@ -208,7 +208,7 @@ todoD { id, description } completeStatus newName doEditName doChecked = Deku.do
 checkboxD
   :: forall lock payload
    . { id :: Int }
-  -> AnEvent Zora Boolean
+  -> Event Boolean
   -> (Boolean -> Effect Unit)
   -> Domable lock payload
 checkboxD { id } completeStatus doChecked = Deku.do
