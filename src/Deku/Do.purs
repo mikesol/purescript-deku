@@ -17,7 +17,6 @@ import Prelude hiding (bind, discard)
 import Bolson.Core (Child, envy)
 import Bolson.Core as Bolson
 import Control.Alt ((<|>))
-import Control.Monad.ST.Class (class MonadST)
 import Data.Profunctor (lcmap)
 import Data.Symbol (class IsSymbol)
 import Data.Tuple (curry)
