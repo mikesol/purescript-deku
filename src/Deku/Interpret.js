@@ -9,25 +9,27 @@ export const unSetHydrating = (state) => () => {
 };
 export const attributeParent_ = (runOnJust) => (a) => (state) => () => {
 	// only attribute if it is not attributed already
-	if (!state.units[a.id].main.parentNode) {
-		const iRan = runOnJust(a.pos)((pos) => () => {
-			if (state.units[a.parent].main.children[pos]) {
-				state.units[a.parent].main.insertBefore(
-					state.units[a.id].main,
-					state.units[a.parent].main.children[pos]
-				);
-				return true;
-			}
-			return false;
-		})();
-		if (!iRan) {
-			if (a.parent.indexOf("@!%") !== -1) {
-				state.units[a.parent].main.parentNode.replaceChild(
-					state.units[a.id].main,
-					state.units[a.parent].main
-				);
-			} else {
-				state.units[a.parent].main.appendChild(state.units[a.id].main);
+	if (state.units[a.id]) {
+		if (!state.units[a.id].main.parentNode) {
+			const iRan = runOnJust(a.pos)((pos) => () => {
+				if (state.units[a.parent].main.children[pos]) {
+					state.units[a.parent].main.insertBefore(
+						state.units[a.id].main,
+						state.units[a.parent].main.children[pos]
+					);
+					return true;
+				}
+				return false;
+			})();
+			if (!iRan) {
+				if (a.parent.indexOf("@!%") !== -1) {
+					state.units[a.parent].main.parentNode.replaceChild(
+						state.units[a.id].main,
+						state.units[a.parent].main
+					);
+				} else {
+					state.units[a.parent].main.appendChild(state.units[a.id].main);
+				}
 			}
 		}
 	}
@@ -133,80 +135,89 @@ export function makeFFIDOMSnapshot() {
 }
 
 export const setProp_ = (tryHydration) => (a) => (state) => () => {
-	var ptr = a.id;
-	var avv = a.value;
-	// it may be the case that we have created an element via
-	// pursx but not added it to the global state yet
-	if (
-		state.hydrating &&
-		tryHydration &&
-		!state.units[ptr] &&
-		(dom = document.body
-			.querySelectorAll("[data-deku-ssr-" + ptr + "]")
-			.item(0))
-	) {
-		state.units[ptr] = {
-			listeners: {},
-			parent: a.parent,
-			scope: a.scope,
-			main: dom,
-		};
-		if (!state.scopes[a.scope]) {
-			state.scopes[a.scope] = [];
+	if (state.units[a.id]) {
+
+		var ptr = a.id;
+		var avv = a.value;
+		// it may be the case that we have created an element via
+		// pursx but not added it to the global state yet
+		if (
+			state.hydrating &&
+			tryHydration &&
+			!state.units[ptr] &&
+			(dom = document.body
+				.querySelectorAll("[data-deku-ssr-" + ptr + "]")
+				.item(0))
+		) {
+			state.units[ptr] = {
+				listeners: {},
+				parent: a.parent,
+				scope: a.scope,
+				main: dom,
+			};
+			if (!state.scopes[a.scope]) {
+				state.scopes[a.scope] = [];
+			}
+			state.scopes[a.scope].push(ptr);
 		}
-		state.scopes[a.scope].push(ptr);
-	}
-	if (state.units[ptr].main.tagName === "INPUT" && a.key === "value") {
-		state.units[ptr].main.value = avv;
-	} else if (state.units[ptr].main.tagName === "INPUT" && a.key === "checked") {
-		state.units[ptr].main.checked = avv === "true";
-	} else {
-		state.units[ptr].main.setAttribute(a.key, avv);
+		if (state.units[ptr].main.tagName === "INPUT" && a.key === "value") {
+			state.units[ptr].main.value = avv;
+		} else if (state.units[ptr].main.tagName === "INPUT" && a.key === "checked") {
+			state.units[ptr].main.checked = avv === "true";
+		} else {
+			state.units[ptr].main.setAttribute(a.key, avv);
+		}
 	}
 };
 
 export const setCb_ = (tryHydration) => (a) => (state) => () => {
-	var ptr = a.id;
-	var avv = a.value;
-	// it may be the case that we have created an element via
-	// pursx but not added it to the global state yet
-	if (
-		state.hydrating &&
-		tryHydration &&
-		!state.units[ptr] &&
-		(dom = document.body
-			.querySelectorAll("[data-deku-ssr-" + ptr + "]")
-			.item(0))
-	) {
-		state.units[ptr] = {
-			listeners: {},
-			parent: a.parent,
-			scope: a.scope,
-			main: dom,
-		};
-		if (!state.scopes[a.scope]) {
-			state.scopes[a.scope] = [];
+	if (state.units[a.id]) {
+
+		var ptr = a.id;
+		var avv = a.value;
+		// it may be the case that we have created an element via
+		// pursx but not added it to the global state yet
+		if (
+			state.hydrating &&
+			tryHydration &&
+			!state.units[ptr] &&
+			(dom = document.body
+				.querySelectorAll("[data-deku-ssr-" + ptr + "]")
+				.item(0))
+		) {
+			state.units[ptr] = {
+				listeners: {},
+				parent: a.parent,
+				scope: a.scope,
+				main: dom,
+			};
+			if (!state.scopes[a.scope]) {
+				state.scopes[a.scope] = [];
+			}
+			state.scopes[a.scope].push(ptr);
 		}
-		state.scopes[a.scope].push(ptr);
-	}
-	if (a.key === "@self@") {
-		avv(state.units[ptr].main)();
-	} else {
-		if (state.units[ptr].listeners[a.key]) {
-			state.units[ptr].main.removeEventListener(
-				a.key,
-				state.units[ptr].listeners[a.key]
-			);
+		if (a.key === "@self@") {
+			avv(state.units[ptr].main)();
+		} else {
+			if (state.units[ptr].listeners[a.key]) {
+				state.units[ptr].main.removeEventListener(
+					a.key,
+					state.units[ptr].listeners[a.key]
+				);
+			}
+			var el = (e) => avv(e)();
+			state.units[ptr].main.addEventListener(a.key, el);
+			state.units[ptr].listeners[a.key] = el;
 		}
-		var el = (e) => avv(e)();
-		state.units[ptr].main.addEventListener(a.key, el);
-		state.units[ptr].listeners[a.key] = el;
 	}
 };
 
 export const setText_ = (a) => (state) => () => {
-	var ptr = a.id;
-	state.units[ptr].main.nodeValue = a.text;
+	if (state.units[a.id]) {
+
+		var ptr = a.id;
+		state.units[ptr].main.nodeValue = a.text;
+	}
 };
 
 export const makePursx_ = (runOnJust) => (tryHydration) => (maybe) => (a) => (state) => () => {
@@ -314,41 +325,52 @@ export const makeRoot_ = (a) => (state) => () => {
 };
 
 export const giveNewParent_ = (a) => (state) => () => {
-	var ptr = a.id;
-	var parent = a.parent;
-	state.units[ptr].containingScope = a.scope;
-	state.units[parent].main.prepend(state.units[ptr].main);
+	if (state.units[a.id]) {
+
+		var ptr = a.id;
+		var parent = a.parent;
+		state.units[ptr].containingScope = a.scope;
+		state.units[parent].main.prepend(state.units[ptr].main);
+	}
 };
 
 export const disconnectElement_ = (a) => (state) => () => {
-	var ptr = a.id;
-	if (state.units[ptr].noop) {
-		return;
-	}
-	if (
-		state.units[ptr].containingScope &&
-		!a.scopeEq(state.units[ptr].containingScope)(a.scope)
-	) {
-		return;
-	}
+	if (state.units[a.id]) {
 
-	state.units[ptr].main.remove();
+		var ptr = a.id;
+		if (state.units[ptr].noop) {
+			return;
+		}
+		if (
+			state.units[ptr].containingScope &&
+			!a.scopeEq(state.units[ptr].containingScope)(a.scope)
+		) {
+			return;
+		}
+
+		state.units[ptr].main.remove();
+	}
 };
 
 export const deleteFromCache_ = (a) => (state) => () => {
-	delete state.units[a.id];
+	if (state.units[a.id]) {
+
+		delete state.units[a.id];
+	}
 };
 
 export const sendToPos_ = (a) => (state) => () => {
-	var ptr = a.id;
-	var pos = a.pos;
-	var parent = state.units[ptr].main.parentNode;
-	parent.insertBefore(
-		state.units[ptr].main,
-		parent.children.length <= pos
-			? parent.children[parent.children.length - 1]
-			: pos < 0
-				? parent.children[0]
-				: parent.children[pos]
-	);
+	if (state.units[a.id]) {
+		var ptr = a.id;
+		var pos = a.pos;
+		var parent = state.units[ptr].main.parentNode;
+		parent.insertBefore(
+			state.units[ptr].main,
+			parent.children.length <= pos
+				? parent.children[parent.children.length - 1]
+				: pos < 0
+					? parent.children[0]
+					: parent.children[pos]
+		);
+	}
 };
