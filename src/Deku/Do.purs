@@ -84,9 +84,7 @@ instance InitializeEvents RL.Nil r1 r2 where
   initializeEvents' _ _ = identity
 
 instance
-  ( Applicative m
-  , MonadST s m
-  , IsSymbol key
+  ( IsSymbol key
   , R.Cons key value needle' needle
   , R.Cons key (Event value) haystack' haystack
   , InitializeEvents rest needle haystack
