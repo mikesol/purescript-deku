@@ -1,6 +1,7 @@
 module Deku.Listeners
   ( slider
   , numeric
+  , checkbox
   , click
   , click_
   , keyUp
@@ -21,10 +22,9 @@ import Effect (Effect)
 import Effect.Aff (launchAff_, delay, Milliseconds(..))
 import Effect.Class (liftEffect)
 import FRP.Event (Event)
-
 import Web.DOM (Element)
 import Web.Event.Event (target)
-import Web.HTML.HTMLInputElement (fromEventTarget, value, valueAsNumber)
+import Web.HTML.HTMLInputElement (checked, fromEventTarget, value, valueAsNumber)
 import Web.UIEvent.KeyboardEvent (KeyboardEvent, fromEvent)
 
 click
@@ -62,6 +62,16 @@ numeric = alt (pure $ D.Xtype := "number") <<< map
       D.OnInput := cb \e -> for_
         (target e >>= fromEventTarget)
         (valueAsNumber >=> push)
+  )
+
+checkbox
+  :: Event (Boolean -> Effect Unit)
+  -> Event (Attribute D.Input_)
+checkbox = alt (pure $ D.Xtype := "checkbox") <<< map
+  ( \push ->
+      D.OnInput := cb \e -> for_
+        (target e >>= fromEventTarget)
+        (checked >=> push)
   )
 
 textInput
