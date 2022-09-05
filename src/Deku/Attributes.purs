@@ -20,7 +20,7 @@ klass
   => Event String
   -> Event (Attribute e)
 klass e = e <#> (D.Class := _)
-klass_ :: forall t30. Attr t30 D.Class String => String -> AnEvent Zora (Attribute t30)
+klass_ :: forall t30. Attr t30 D.Class String => String -> Event (Attribute t30)
 klass_ = klass <<< pure
 
 style
@@ -30,7 +30,7 @@ style
   -> Event (Attribute e)
 style e = e <#> (D.Style := _)
 
-style_ :: forall t13. Attr t13 D.Style String => String -> AnEvent Zora (Attribute t13)
+style_ :: forall t13. Attr t13 D.Style String => String -> Event (Attribute t13)
 style_ = style <<< pure
 
 id
@@ -39,5 +39,5 @@ id
   => Event String
   -> Event (Attribute e)
 id e = e <#> (D.Id := _)
-id_ :: forall t47. Attr t47 D.Id String => String -> AnEvent Zora (Attribute t47)
+id_ :: forall t47. Attr t47 D.Id String => String -> Event (Attribute t47)
 id_ = id <<< pure
