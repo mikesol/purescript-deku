@@ -2945,68 +2945,6 @@ var record2 = function() {
   };
 };
 
-// output/Deku.Attribute/index.js
-var Cb = function(x) {
-  return x;
-};
-var Prop$prime = /* @__PURE__ */ function() {
-  function Prop$prime2(value0) {
-    this.value0 = value0;
-  }
-  ;
-  Prop$prime2.create = function(value0) {
-    return new Prop$prime2(value0);
-  };
-  return Prop$prime2;
-}();
-var Cb$prime = /* @__PURE__ */ function() {
-  function Cb$prime2(value0) {
-    this.value0 = value0;
-  }
-  ;
-  Cb$prime2.create = function(value0) {
-    return new Cb$prime2(value0);
-  };
-  return Cb$prime2;
-}();
-var Attribute = function(x) {
-  return x;
-};
-var unsafeUnAttribute = /* @__PURE__ */ coerce();
-var unsafeAttribute = Attribute;
-var prop$prime = /* @__PURE__ */ function() {
-  return Prop$prime.create;
-}();
-var cb$prime = /* @__PURE__ */ function() {
-  return Cb$prime.create;
-}();
-var cb = /* @__PURE__ */ function() {
-  var $6 = map(functorFn)(map(functorEffect)($$const(true)));
-  return function($7) {
-    return Cb($6($7));
-  };
-}();
-var attr = function(dict) {
-  return dict.attr;
-};
-
-// output/Bolson.Control/foreign.js
-function mutAr(a2) {
-  return () => {
-    return a2.slice();
-  };
-}
-function unsafeUpdateMutAr(i2) {
-  return (v) => (a2) => () => {
-    a2[i2] = v;
-  };
-}
-function readAr(a2) {
-  return () => {
-    return a2.slice();
-  };
-}
-
 // output/Control.Monad.ST.Class/index.js
 var monadSTST = {
   liftST: /* @__PURE__ */ identity(categoryFn),
@@ -4851,6 +4789,68 @@ var eventIsEvent = {
     return filterableEvent;
   }
 };
+
+// output/Deku.Attribute/index.js
+var Cb = function(x) {
+  return x;
+};
+var Prop$prime = /* @__PURE__ */ function() {
+  function Prop$prime2(value0) {
+    this.value0 = value0;
+  }
+  ;
+  Prop$prime2.create = function(value0) {
+    return new Prop$prime2(value0);
+  };
+  return Prop$prime2;
+}();
+var Cb$prime = /* @__PURE__ */ function() {
+  function Cb$prime2(value0) {
+    this.value0 = value0;
+  }
+  ;
+  Cb$prime2.create = function(value0) {
+    return new Cb$prime2(value0);
+  };
+  return Cb$prime2;
+}();
+var Attribute = function(x) {
+  return x;
+};
+var unsafeUnAttribute = /* @__PURE__ */ coerce();
+var unsafeAttribute = Attribute;
+var prop$prime = /* @__PURE__ */ function() {
+  return Prop$prime.create;
+}();
+var cb$prime = /* @__PURE__ */ function() {
+  return Cb$prime.create;
+}();
+var cb = /* @__PURE__ */ function() {
+  var $18 = map(functorFn)(map(functorEffect)($$const(true)));
+  return function($19) {
+    return Cb($18($19));
+  };
+}();
+var attr = function(dict) {
+  return dict.attr;
+};
+
+// output/Bolson.Control/foreign.js
+function mutAr(a2) {
+  return () => {
+    return a2.slice();
+  };
+}
+function unsafeUpdateMutAr(i2) {
+  return (v) => (a2) => () => {
+    a2[i2] = v;
+  };
+}
+function readAr(a2) {
+  return () => {
+    return a2.slice();
+  };
+}
 
 // output/FRP.Event.VBus/index.js
 var vbusNil = {
