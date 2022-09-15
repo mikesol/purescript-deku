@@ -11,8 +11,8 @@ import Data.Set as Set
 import Data.Tuple (snd)
 import Data.Tuple.Nested ((/\))
 import Deku.Attribute ((:=))
-import Deku.Control (dyn, text_)
-import Deku.Core (Domable, bussedUncurried, insert_, remove)
+import Deku.Control (text_)
+import Deku.Core (Domable, dyn, bussedUncurried, insert_, remove)
 import Deku.DOM as D
 import Deku.Do (useMailboxed, useMemoized)
 import Deku.Do as Deku
@@ -151,32 +151,35 @@ containerD initialState = Deku.do
             ]
         )
         [ text_ "Undo" ]
-    , dyn D.div (oneOf [ pure $ D.Id := Shared.todosId ])
-        ( toDyn # map
-            \td -> do
-              let
-                addCheckedToUndoStack cs = setUndo
-                  (PushUndo (UndoCompleted td.id cs))
-                addOldNameToUndoStack n = setUndo
-                  (PushUndo (UndoRename td.id n))
-                renameAction n = do
-                  updateNameAt td.id n
-                  addOldNameToUndoStack n
-                checkedAction cs = do
-                  setState
-                    ( \x -> x
-                        { completed = (if cs then Set.insert else Set.delete)
-                            td.id
-                            x.completed
-                        }
-                    )
-                  addCheckedToUndoStack (not cs)
-              pure
-                ( insert_ $ todoD td (completeStatus td.id) (rename td.id)
-                    renameAction
-                    checkedAction
-                ) <|> (delete td.id $> remove)
-        )
+    , D.div (oneOf [ pure $ D.Id := Shared.todosId ])
+        [ dyn
+            ( toDyn # map
+                \td -> do
+                  let
+                    addCheckedToUndoStack cs = setUndo
+                      (PushUndo (UndoCompleted td.id cs))
+                    addOldNameToUndoStack n = setUndo
+                      (PushUndo (UndoRename td.id n))
+                    renameAction n = do
+                      updateNameAt td.id n
+                      addOldNameToUndoStack n
+                    checkedAction cs = do
+                      setState
+                        ( \x -> x
+                            { completed =
+                                (if cs then Set.insert else Set.delete)
+                                  td.id
+                                  x.completed
+                            }
+                        )
+                      addCheckedToUndoStack (not cs)
+                  pure
+                    ( insert_ $ todoD td (completeStatus td.id) (rename td.id)
+                        renameAction
+                        checkedAction
+                    ) <|> (delete td.id $> remove)
+            )
+        ]
     ]
 
 todoD
