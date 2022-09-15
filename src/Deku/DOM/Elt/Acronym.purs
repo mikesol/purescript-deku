@@ -3,9 +3,11 @@ module Deku.DOM.Elt.Acronym where
 import Control.Plus (empty)
 import Deku.Attribute (Attribute)
 import Deku.Control (elementify)
-import Deku.Core (Domable)
+import Deku.Core (Domable(..), Domable')
 import Bolson.Core (Entity(..), fixed)
 import FRP.Event (Event)
+import Safe.Coerce (coerce)
+
 
 
 data Acronym_
@@ -15,7 +17,7 @@ acronym
    . Event (Attribute Acronym_)
   -> Array (Domable lock payload)
   -> Domable lock payload
-acronym attributes kids = Element' (elementify "acronym" attributes (fixed kids))
+acronym attributes kids = Domable (Element' (elementify "acronym" attributes ((coerce :: Domable' lock payload -> Domable lock payload)  (fixed (coerce kids)))))
 
 acronym_
   :: forall lock payload

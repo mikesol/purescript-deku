@@ -8,17 +8,17 @@ import Data.FastVect.FastVect as V
 import Data.Foldable (oneOfMap)
 import Data.Profunctor (lcmap)
 import Deku.Attribute ((:=))
-import Deku.Control (portal, switcher_, text_)
-import Deku.Core (Domable)
+import Deku.Control (portal, switcher, text_)
+import Deku.Core (Domable, envy)
 import Deku.DOM as D
-import Deku.Toplevel (runInBody1)
+import Deku.Toplevel (runInBody)
 import Effect (Effect)
 import FRP.Event (Event, bus, fold)
 import Type.Prelude (Proxy(..))
 
 main :: Effect Unit
-main = runInBody1
-  ( bus \push -> lcmap (pure unit <|> _) \event -> do
+main = runInBody
+  (envy $ bus \push -> lcmap (pure unit <|> _) \event -> do
       portal
         ( map
             ( \i -> D.video
@@ -45,7 +45,7 @@ main = runInBody1
             ev = fold (const not) event
 
             flips :: Boolean -> Domable _ _
-            flips = switcher_ D.span (if _ then p0 else p1) <<< ev
+            flips = D.span_ <<< pure <<< switcher (if _ then p0 else p1) <<< ev
           D.div_
             [ D.button (pure $ D.OnClick := push unit)
                 [ text_ "Switch videos" ]

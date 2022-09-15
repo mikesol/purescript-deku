@@ -13,11 +13,12 @@ import Control.Alt ((<|>))
 import Control.Plus (empty)
 import Data.Maybe (Maybe(..))
 import Data.Newtype (unwrap)
+import Safe.Coerce (coerce)
 import Data.Profunctor (lcmap)
 import Data.Reflectable (class Reflectable, reflectType)
 import Data.Symbol (class IsSymbol)
 import Deku.Attribute (Attribute, AttributeValue(..), unsafeUnAttribute)
-import Deku.Core (DOMInterpret(..), Domable, Node(..))
+import Deku.Core (DOMInterpret(..), Domable(..), Domable', Node(..))
 import Deku.DOM (class TagToDeku)
 import FRP.Event (Event, makeLemmingEvent)
 
@@ -179,6 +180,7 @@ instance pursxToElementConsInsert ::
             , scope: info.scope
             , raiseId: \_ -> pure unit
             , pos: info.pos
+            , dynFamily: info.dynFamily
             }
             di
             pxe
@@ -261,10 +263,10 @@ makePursx'
   -> Proxy html
   -> { | r }
   -> Domable lock payload
-makePursx' verb html r = Element' $ Node go
+makePursx' verb html r = Domable $ Element' $ Node go
   where
   go
-    z@{ parent, scope, raiseId }
+    z@{ parent, scope, raiseId, dynFamily }
     di@(DOMInterpret { makePursx: mpx, ids, deleteFromCache }) =
     makeLemmingEvent \mySub k1 -> do
       me <- ids
@@ -281,6 +283,7 @@ makePursx' verb html r = Element' $ Node go
                   { id: me
                   , parent
                   , cache
+                  , dynFamily
                   , pxScope: pxScope
                   , scope
                   , html: reflectType html
@@ -295,18 +298,18 @@ makePursx' verb html r = Element' $ Node go
 
 __internalDekuFlatten
   :: forall lock payload
-   . PSR  (pos :: Maybe Int)
+   . PSR (pos :: Maybe Int, dynFamily :: Maybe String)
   -> DOMInterpret payload
   -> Domable lock payload
   -> Event payload
-__internalDekuFlatten = Bolson.flatten
+__internalDekuFlatten a b c = Bolson.flatten
   { doLogic: \pos (DOMInterpret { sendToPos }) id -> sendToPos { id, pos }
   , ids: unwrap >>> _.ids
   , disconnectElement:
       \(DOMInterpret { disconnectElement }) { id, scope, parent } ->
         disconnectElement { id, scope, parent, scopeEq: eq }
   , toElt: \(Node e) -> Element e
-  }
+  }  a b ((coerce :: Domable lock payload -> Domable' lock payload) c)
 
 infixr 5 makePursx as ~~
 

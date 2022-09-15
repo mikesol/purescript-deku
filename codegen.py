@@ -111,9 +111,11 @@ def cg(CODEGEN_TARGET, ival = None, ival2 = None):
 import Control.Plus (empty)
 import Deku.Attribute (Attribute)
 import Deku.Control (elementify)
-import Deku.Core (Domable)
+import Deku.Core (Domable(..), Domable')
 import Bolson.Core (Entity(..), fixed)
 import FRP.Event (Event)
+import Safe.Coerce (coerce)
+
 
 
 data {term}
@@ -123,7 +125,7 @@ data {term}
    . Event (Attribute {term})
   -> Array (Domable lock payload)
   -> Domable lock payload
-{x} attributes kids = Element' (elementify "{astag(x)}" attributes (fixed kids))
+{x} attributes kids = Domable (Element' (elementify "{astag(x)}" attributes ((coerce :: Domable' lock payload -> Domable lock payload)  (fixed (coerce kids)))))
 
 {x}_
   :: forall lock payload

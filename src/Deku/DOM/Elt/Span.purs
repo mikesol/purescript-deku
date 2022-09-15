@@ -3,9 +3,11 @@ module Deku.DOM.Elt.Span where
 import Control.Plus (empty)
 import Deku.Attribute (Attribute)
 import Deku.Control (elementify)
-import Deku.Core (Domable)
+import Deku.Core (Domable(..), Domable')
 import Bolson.Core (Entity(..), fixed)
 import FRP.Event (Event)
+import Safe.Coerce (coerce)
+
 
 
 data Span_
@@ -15,7 +17,7 @@ span
    . Event (Attribute Span_)
   -> Array (Domable lock payload)
   -> Domable lock payload
-span attributes kids = Element' (elementify "span" attributes (fixed kids))
+span attributes kids = Domable (Element' (elementify "span" attributes ((coerce :: Domable' lock payload -> Domable lock payload)  (fixed (coerce kids)))))
 
 span_
   :: forall lock payload

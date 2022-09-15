@@ -39,6 +39,18 @@ foreign import makeElement_
   -> FFIDOMSnapshot
   -> Effect Unit
 
+foreign import makeDynBeacon_
+  :: RunOnJust
+  -> Boolean
+  -> Core.MakeDynBeacon
+  -> FFIDOMSnapshot
+  -> Effect Unit
+
+foreign import removeDynBeacon_
+  :: Core.RemoveDynBeacon
+  -> FFIDOMSnapshot
+  -> Effect Unit
+
 foreign import attributeParent_
   :: RunOnJust
   -> Core.AttributeParent
@@ -102,6 +114,7 @@ fullDOMInterpret seed = Core.DOMInterpret
       void $ Ref.modify (add 1) seed
       pure o
   , makeElement: makeElement_ runOnJust false
+  , makeDynBeacon: makeDynBeacon_ runOnJust false
   , attributeParent: attributeParent_ runOnJust
   , makeRoot: makeRoot_
   , makeText: makeText_ runOnJust false (maybe unit)
@@ -110,6 +123,7 @@ fullDOMInterpret seed = Core.DOMInterpret
   , setCb: setCb_ false
   , setText: setText_
   , sendToPos: sendToPos_
+  , removeDynBeacon: removeDynBeacon_
   , deleteFromCache: deleteFromCache_
   , giveNewParent: giveNewParent_
   , disconnectElement: disconnectElement_
@@ -118,6 +132,7 @@ fullDOMInterpret seed = Core.DOMInterpret
 data Instruction
   = MakeElement Core.MakeElement
   | MakeText Core.MakeText
+  | MakeDynBeacon Core.MakeDynBeacon
   | MakePursx Core.MakePursx
   | SetProp Core.SetProp
   | SetText Core.SetText
@@ -125,6 +140,10 @@ data Instruction
 ssrMakeElement
   :: forall r. Core.MakeElement -> Ref.STRef r (Array Instruction) -> ST r Unit
 ssrMakeElement a i = void $ Ref.modify (_ <> [ MakeElement a ]) i
+
+ssrMakeDynBeacon
+  :: forall r. Core.MakeDynBeacon -> Ref.STRef r (Array Instruction) -> ST r Unit
+ssrMakeDynBeacon a i = void $ Ref.modify (_ <> [ MakeDynBeacon a ]) i
 
 ssrMakeText
   :: forall r. Core.MakeText -> Ref.STRef r (Array Instruction) -> ST r Unit
@@ -159,10 +178,12 @@ ssrDOMInterpret seed = Core.DOMInterpret
   , makeText: ssrMakeText
   , makePursx: ssrMakePursx
   , setProp: ssrSetProp
+  , makeDynBeacon: ssrMakeDynBeacon
   , setCb: \_ _ -> pure unit
   , setText: ssrSetText
   , sendToPos: \_ _ -> pure unit
   , deleteFromCache: \_ _ -> pure unit
+  , removeDynBeacon: \_ _ -> pure unit
   , giveNewParent: \_ _ -> pure unit
   , disconnectElement: \_ _ -> pure unit
   }
@@ -178,6 +199,7 @@ hydratingDOMInterpret seed = Core.DOMInterpret
       void $ Ref.modify (add 1) seed
       pure o
   , makeElement: makeElement_ runOnJust true
+  , makeDynBeacon: makeDynBeacon_ runOnJust true
   , attributeParent: attributeParent_ runOnJust
   , makeRoot: makeRoot_
   , makeText: makeText_ runOnJust true (maybe unit)
@@ -187,6 +209,7 @@ hydratingDOMInterpret seed = Core.DOMInterpret
   , setText: setText_
   , sendToPos: sendToPos_
   , deleteFromCache: deleteFromCache_
+  , removeDynBeacon: removeDynBeacon_
   , giveNewParent: giveNewParent_
   , disconnectElement: disconnectElement_
   }

@@ -3,9 +3,11 @@ module Deku.DOM.Elt.Footer where
 import Control.Plus (empty)
 import Deku.Attribute (Attribute)
 import Deku.Control (elementify)
-import Deku.Core (Domable)
+import Deku.Core (Domable(..), Domable')
 import Bolson.Core (Entity(..), fixed)
 import FRP.Event (Event)
+import Safe.Coerce (coerce)
+
 
 
 data Footer_
@@ -15,7 +17,7 @@ footer
    . Event (Attribute Footer_)
   -> Array (Domable lock payload)
   -> Domable lock payload
-footer attributes kids = Element' (elementify "footer" attributes (fixed kids))
+footer attributes kids = Domable (Element' (elementify "footer" attributes ((coerce :: Domable' lock payload -> Domable lock payload)  (fixed (coerce kids)))))
 
 footer_
   :: forall lock payload

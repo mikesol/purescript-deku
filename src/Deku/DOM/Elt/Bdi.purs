@@ -3,9 +3,11 @@ module Deku.DOM.Elt.Bdi where
 import Control.Plus (empty)
 import Deku.Attribute (Attribute)
 import Deku.Control (elementify)
-import Deku.Core (Domable)
+import Deku.Core (Domable(..), Domable')
 import Bolson.Core (Entity(..), fixed)
 import FRP.Event (Event)
+import Safe.Coerce (coerce)
+
 
 
 data Bdi_
@@ -15,7 +17,7 @@ bdi
    . Event (Attribute Bdi_)
   -> Array (Domable lock payload)
   -> Domable lock payload
-bdi attributes kids = Element' (elementify "bdi" attributes (fixed kids))
+bdi attributes kids = Domable (Element' (elementify "bdi" attributes ((coerce :: Domable' lock payload -> Domable lock payload)  (fixed (coerce kids)))))
 
 bdi_
   :: forall lock payload

@@ -3,9 +3,11 @@ module Deku.DOM.Elt.Meter where
 import Control.Plus (empty)
 import Deku.Attribute (Attribute)
 import Deku.Control (elementify)
-import Deku.Core (Domable)
+import Deku.Core (Domable(..), Domable')
 import Bolson.Core (Entity(..), fixed)
 import FRP.Event (Event)
+import Safe.Coerce (coerce)
+
 
 
 data Meter_
@@ -15,7 +17,7 @@ meter
    . Event (Attribute Meter_)
   -> Array (Domable lock payload)
   -> Domable lock payload
-meter attributes kids = Element' (elementify "meter" attributes (fixed kids))
+meter attributes kids = Domable (Element' (elementify "meter" attributes ((coerce :: Domable' lock payload -> Domable lock payload)  (fixed (coerce kids)))))
 
 meter_
   :: forall lock payload

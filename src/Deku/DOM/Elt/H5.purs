@@ -3,9 +3,11 @@ module Deku.DOM.Elt.H5 where
 import Control.Plus (empty)
 import Deku.Attribute (Attribute)
 import Deku.Control (elementify)
-import Deku.Core (Domable)
+import Deku.Core (Domable(..), Domable')
 import Bolson.Core (Entity(..), fixed)
 import FRP.Event (Event)
+import Safe.Coerce (coerce)
+
 
 
 data H5_
@@ -15,7 +17,7 @@ h5
    . Event (Attribute H5_)
   -> Array (Domable lock payload)
   -> Domable lock payload
-h5 attributes kids = Element' (elementify "h5" attributes (fixed kids))
+h5 attributes kids = Domable (Element' (elementify "h5" attributes ((coerce :: Domable' lock payload -> Domable lock payload)  (fixed (coerce kids)))))
 
 h5_
   :: forall lock payload

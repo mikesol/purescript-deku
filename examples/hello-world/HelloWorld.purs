@@ -11,6 +11,7 @@ import Data.Tuple (Tuple(..))
 import Deku.Attribute (cb, xdata, (:=))
 import Deku.Control as C
 import Deku.Core (Domable, bus)
+import Deku.Core as CC
 import Deku.DOM as D
 import Deku.Interpret (FFIDOMSnapshot)
 import Deku.Toplevel (runInBody)
@@ -24,7 +25,7 @@ counter event = mapAccum f event 0
   f a b = Tuple (b + 1) (Tuple a b)
 
 scene :: forall lock. Domable lock (FFIDOMSnapshot -> Effect Unit)
-scene = C.envy_ D.div $ bus $ \push -> lcmap (alt (pure true)) \event -> do
+scene = CC.envy $ bus $ \push -> lcmap (alt (pure true)) \event -> do
   D.div_
     [ D.div_
         [ D.div empty [ C.text (pure "Stops after 4 clicks") ]

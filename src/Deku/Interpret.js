@@ -35,6 +35,12 @@ export const attributeParent_ = (runOnJust) => (a) => (state) => () => {
 	}
 };
 
+export const makeDynBeacon_ = (runOnJust) => (tryHydration) => (a) => (state) => () => {
+}
+
+export const removeDynBeacon_ = (a) => (state) => () => {
+}
+
 export const makeElement_ = (runOnJust) => (tryHydration) => (a) => (state) => () => {
 	var dom;
 	var ptr = a.id;
@@ -328,7 +334,6 @@ export const makeRoot_ = (a) => (state) => () => {
 
 export const giveNewParent_ = (a) => (state) => () => {
 	if (state.units[a.id]) {
-
 		var ptr = a.id;
 		var parent = a.parent;
 		state.units[ptr].containingScope = a.scope;

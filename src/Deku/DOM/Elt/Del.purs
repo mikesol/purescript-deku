@@ -3,9 +3,11 @@ module Deku.DOM.Elt.Del where
 import Control.Plus (empty)
 import Deku.Attribute (Attribute)
 import Deku.Control (elementify)
-import Deku.Core (Domable)
+import Deku.Core (Domable(..), Domable')
 import Bolson.Core (Entity(..), fixed)
 import FRP.Event (Event)
+import Safe.Coerce (coerce)
+
 
 
 data Del_
@@ -15,7 +17,7 @@ del
    . Event (Attribute Del_)
   -> Array (Domable lock payload)
   -> Domable lock payload
-del attributes kids = Element' (elementify "del" attributes (fixed kids))
+del attributes kids = Domable (Element' (elementify "del" attributes ((coerce :: Domable' lock payload -> Domable lock payload)  (fixed (coerce kids)))))
 
 del_
   :: forall lock payload

@@ -3,9 +3,11 @@ module Deku.DOM.Elt.Caption where
 import Control.Plus (empty)
 import Deku.Attribute (Attribute)
 import Deku.Control (elementify)
-import Deku.Core (Domable)
+import Deku.Core (Domable(..), Domable')
 import Bolson.Core (Entity(..), fixed)
 import FRP.Event (Event)
+import Safe.Coerce (coerce)
+
 
 
 data Caption_
@@ -15,7 +17,7 @@ caption
    . Event (Attribute Caption_)
   -> Array (Domable lock payload)
   -> Domable lock payload
-caption attributes kids = Element' (elementify "caption" attributes (fixed kids))
+caption attributes kids = Domable (Element' (elementify "caption" attributes ((coerce :: Domable' lock payload -> Domable lock payload)  (fixed (coerce kids)))))
 
 caption_
   :: forall lock payload

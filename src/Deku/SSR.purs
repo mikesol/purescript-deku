@@ -59,6 +59,7 @@ ssr' topTag arr = "<" <> topTag <> " data-deku-ssr-deku-root=\"true\">"
             MakeElement { parent, id } -> for_ parent \p -> making p id i
             MakeText { parent, id } -> for_ parent \p -> making p id i
             MakePursx { parent, id } -> for_ parent \p -> making p id i
+            MakeDynBeacon { parent, id } -> for_ parent \p -> making p id i
             SetProp { id } -> setting id i
             SetText { id } -> setting id i
         )
@@ -69,6 +70,7 @@ ssr' topTag arr = "<" <> topTag <> " data-deku-ssr-deku-root=\"true\">"
     ( case _ of
         MakeElement _ -> true
         MakeText _ -> true
+        MakeDynBeacon _ -> true
         _ -> false
     )
     a
@@ -97,10 +99,19 @@ ssr' topTag arr = "<" <> topTag <> " data-deku-ssr-deku-root=\"true\">"
                 (encodedString text <> "<!--" <> id <> "-->")
               _ -> Nothing
           )
+        makeDynBeacon _ = do
+          let dp = eltDynFamily i2a
+          i2a #
+            ( fromMaybe "" <<< findMap case _ of
+                SetText { text } -> Just $
+                  (encodedString text <> "<!--" <> id <> maybe "" ("@-@" <> _) dp <> "-->")
+                _ -> Nothing
+            )
         makeElt _ = do
           let tag = eltTag i2a
           let atts = eltAtts i2a
-          "<" <> tag <> " " <> atts <> " data-deku-ssr-" <> id <> "=\"true\">"
+          let dp = eltDynFamily i2a
+          "<" <> tag <> " " <> atts <> " data-deku-ssr-" <> id <> "=\"true\"" <> maybe "" (\i -> " data-deku-dyn=\"" <> i <> "\"") dp <> ">"
             <> o id
             <> "</"
             <> tag
@@ -108,12 +119,20 @@ ssr' topTag arr = "<" <> topTag <> " data-deku-ssr-deku-root=\"true\">"
       case i2a !! 0 of
         Just (SetText _) -> makeText unit
         Just (MakeText _) -> makeText unit
+        Just (MakeDynBeacon _) -> makeDynBeacon unit
         -- todo: strip styling from div
         Just (MakePursx mpx) -> doPursxReplacements mpx
         _ -> makeElt unit
   eltTag i2a = i2a #
     ( fromMaybe "" <<< findMap case _ of
         MakeElement { tag } -> Just tag
+        _ -> Nothing
+    )
+  eltDynFamily i2a = i2a #
+    ( findMap case _ of
+        MakeElement { dynFamily } -> dynFamily
+        MakeText { dynFamily } -> dynFamily
+        MakeDynBeacon { dynFamily } -> Just dynFamily
         _ -> Nothing
     )
   eltAtts i2a = i2a #

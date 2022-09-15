@@ -3,9 +3,11 @@ module Deku.DOM.Elt.Section where
 import Control.Plus (empty)
 import Deku.Attribute (Attribute)
 import Deku.Control (elementify)
-import Deku.Core (Domable)
+import Deku.Core (Domable(..), Domable')
 import Bolson.Core (Entity(..), fixed)
 import FRP.Event (Event)
+import Safe.Coerce (coerce)
+
 
 
 data Section_
@@ -15,7 +17,7 @@ section
    . Event (Attribute Section_)
   -> Array (Domable lock payload)
   -> Domable lock payload
-section attributes kids = Element' (elementify "section" attributes (fixed kids))
+section attributes kids = Domable (Element' (elementify "section" attributes ((coerce :: Domable' lock payload -> Domable lock payload)  (fixed (coerce kids)))))
 
 section_
   :: forall lock payload

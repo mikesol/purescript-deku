@@ -3,9 +3,11 @@ module Deku.DOM.Elt.Header where
 import Control.Plus (empty)
 import Deku.Attribute (Attribute)
 import Deku.Control (elementify)
-import Deku.Core (Domable)
+import Deku.Core (Domable(..), Domable')
 import Bolson.Core (Entity(..), fixed)
 import FRP.Event (Event)
+import Safe.Coerce (coerce)
+
 
 
 data Header_
@@ -15,7 +17,7 @@ header
    . Event (Attribute Header_)
   -> Array (Domable lock payload)
   -> Domable lock payload
-header attributes kids = Element' (elementify "header" attributes (fixed kids))
+header attributes kids = Domable (Element' (elementify "header" attributes ((coerce :: Domable' lock payload -> Domable lock payload)  (fixed (coerce kids)))))
 
 header_
   :: forall lock payload

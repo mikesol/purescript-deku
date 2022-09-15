@@ -14,9 +14,9 @@ import Data.Profunctor (lcmap)
 import Data.Tuple.Nested ((/\))
 import Deku.Attribute (Cb, cb, (:=))
 import Deku.Control (text)
-import Deku.Core (bus)
+import Deku.Core (bus, envy)
 import Deku.DOM as D
-import Deku.Toplevel (runInBody1)
+import Deku.Toplevel (runInBody)
 import Effect (Effect)
 import Effect.Aff (launchAff_)
 import Effect.Class (liftEffect)
@@ -49,8 +49,8 @@ clickCb push = cb
 clickText = "Click to get some random user data." :: String
 
 main :: Effect Unit
-main = runInBody1
-  ( bus \push -> lcmap (pure Initial <|> _)
+main = runInBody
+  (envy $ bus \push -> lcmap (pure Initial <|> _)
       \event -> do
         let
           split :: { left :: Event Unit, right :: Event String }

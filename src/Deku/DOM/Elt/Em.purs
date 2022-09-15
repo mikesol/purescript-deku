@@ -3,9 +3,11 @@ module Deku.DOM.Elt.Em where
 import Control.Plus (empty)
 import Deku.Attribute (Attribute)
 import Deku.Control (elementify)
-import Deku.Core (Domable)
+import Deku.Core (Domable(..), Domable')
 import Bolson.Core (Entity(..), fixed)
 import FRP.Event (Event)
+import Safe.Coerce (coerce)
+
 
 
 data Em_
@@ -15,7 +17,7 @@ em
    . Event (Attribute Em_)
   -> Array (Domable lock payload)
   -> Domable lock payload
-em attributes kids = Element' (elementify "em" attributes (fixed kids))
+em attributes kids = Domable (Element' (elementify "em" attributes ((coerce :: Domable' lock payload -> Domable lock payload)  (fixed (coerce kids)))))
 
 em_
   :: forall lock payload

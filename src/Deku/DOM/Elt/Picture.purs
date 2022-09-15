@@ -3,9 +3,11 @@ module Deku.DOM.Elt.Picture where
 import Control.Plus (empty)
 import Deku.Attribute (Attribute)
 import Deku.Control (elementify)
-import Deku.Core (Domable)
+import Deku.Core (Domable(..), Domable')
 import Bolson.Core (Entity(..), fixed)
 import FRP.Event (Event)
+import Safe.Coerce (coerce)
+
 
 
 data Picture_
@@ -15,7 +17,7 @@ picture
    . Event (Attribute Picture_)
   -> Array (Domable lock payload)
   -> Domable lock payload
-picture attributes kids = Element' (elementify "picture" attributes (fixed kids))
+picture attributes kids = Domable (Element' (elementify "picture" attributes ((coerce :: Domable' lock payload -> Domable lock payload)  (fixed (coerce kids)))))
 
 picture_
   :: forall lock payload

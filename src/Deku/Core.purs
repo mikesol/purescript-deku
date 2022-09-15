@@ -4,18 +4,21 @@ module Deku.Core
   , DOMInterpret(..)
   , DeleteFromCache
   , DisconnectElement
-  , Domable
+  , Domable(..)
   , GiveNewParent
   , MakeElement
+  , MakeDynBeacon
   , MakePursx
   , MakeRoot
   , MakeText
+  , RemoveDynBeacon
   , Node(..)
   , Nut
   , SendToPos
   , SetCb
   , SetProp
   , SetText
+  , Domable'
   , bus
   , busUncurried
   , bussed
@@ -27,26 +30,32 @@ module Deku.Core
   , sendToTop
   , vbussed
   , vbussedUncurried
+  , dyn
+  , fixed
+  , envy
   ) where
 
 import Prelude
 
+import Bolson.Control as BControl
 import Bolson.Core (Scope)
 import Bolson.Core as Bolson
 import Control.Monad.ST (ST)
 import Control.Monad.ST.Global (Global)
+import Control.Plus (empty)
 import Data.Maybe (Maybe(..))
-import Data.Newtype (class Newtype)
+import Data.Newtype (class Newtype, unwrap)
 import Data.Profunctor (lcmap)
 import Data.Tuple (curry)
 import Data.Tuple.Nested (type (/\))
 import Deku.Attribute (Cb)
 import Effect (Effect)
-import FRP.Event (Event)
+import FRP.Event (Event, makeLemmingEvent)
 import FRP.Event as FRP.Event
 import FRP.Event.VBus (class VBus, V, vbus)
 import Foreign.Object (Object)
 import Prim.RowList (class RowToList)
+import Safe.Coerce (coerce)
 import Type.Proxy (Proxy)
 import Web.DOM as Web.DOM
 
@@ -67,54 +76,63 @@ busUncurried
 busUncurried = curry >>> bus
 
 bussed
-  :: forall lock logic obj a
-   . ((a -> Effect Unit) -> Event a -> Bolson.Entity logic obj lock)
-  -> Bolson.Entity logic obj lock
-bussed f = Bolson.EventfulElement' (Bolson.EventfulElement (bus f))
+  :: forall lock obj a
+   . ((a -> Effect Unit) -> Event a -> Domable obj lock)
+  -> Domable obj lock
+bussed f = Domable $ Bolson.EventfulElement' (Bolson.EventfulElement (coerce $ bus f))
 
 bussedUncurried
-  :: forall lock logic obj a
+  :: forall lock obj a
    . ( ((a -> Effect Unit) /\ Event a)
-       -> Bolson.Entity logic obj lock
+       -> Domable obj lock
      )
-  -> Bolson.Entity logic obj lock
+  -> Domable obj lock
 bussedUncurried = curry >>> bussed
 
 --
 
 vbussed
-  :: forall logic obj lock rbus bus push event
+  :: forall obj lock rbus bus push event
    . RowToList bus rbus
   => VBus rbus push event
   => Proxy (V bus)
-  -> ({ | push } -> { | event } -> Bolson.Entity logic obj lock)
-  -> Bolson.Entity logic obj lock
-vbussed px f = Bolson.EventfulElement'
-  (Bolson.EventfulElement (vbus px f))
+  -> ({ | push } -> { | event } -> Domable obj lock)
+  -> Domable obj lock
+vbussed px f = Domable $ Bolson.EventfulElement'
+  (Bolson.EventfulElement (coerce (vbus px f)))
 
 vbussedUncurried
-  :: forall logic obj lock rbus bus push event
+  :: forall obj lock rbus bus push event
    . RowToList bus rbus
   => VBus rbus push event
   => Proxy (V bus)
-  -> (({ | push } /\ { | event }) -> Bolson.Entity logic obj lock)
-  -> Bolson.Entity logic obj lock
+  -> (({ | push } /\ { | event }) -> Domable obj lock)
+  -> Domable obj lock
 vbussedUncurried px = curry >>> vbussed px
 
 newtype Node (lock :: Type) payload = Node
-  ( Bolson.PSR(pos :: Maybe Int)
+  ( Bolson.PSR (pos :: Maybe Int, dynFamily :: Maybe String)
     -> DOMInterpret payload
     -> Event payload
   )
 
-type Domable lock payload = Bolson.Entity Int (Node lock payload)lock
+type  Domable' lock payload = Bolson.Entity Int (Node lock payload) lock
+newtype Domable lock payload = Domable (Domable' lock payload)
+derive instance Newtype (Domable lock payload) _
+
+instance Semigroup (Domable lock payload) where
+  append a b = fixed [a,b]
+
+instance Monoid (Domable lock payload) where
+  mempty = Domable (Bolson.envy empty)
+
 
 insert
-  :: forall logic lock payload
+  :: forall lock payload
    . Int
-  -> Bolson.Entity logic (Node lock payload)lock
-  -> Bolson.Child logic (Node lock payload)lock
-insert i e = Bolson.Insert (f e)
+  -> Domable lock payload
+  -> Bolson.Child Int (Node lock payload) lock
+insert i (Domable e) = Bolson.Insert (f e)
   where
   f = case _ of
     Bolson.Element' (Node e') -> Bolson.Element'
@@ -124,10 +142,10 @@ insert i e = Bolson.Insert (f e)
     _ -> e
 
 insert_
-  :: forall logic lock payload
-   . Bolson.Entity logic (Node lock payload) lock
-  -> Bolson.Child logic (Node lock payload) lock
-insert_ = Bolson.Insert
+  :: forall lock payload
+   . Domable lock payload
+  -> Bolson.Child Int (Node lock payload) lock
+insert_ (Domable d) = Bolson.Insert d
 
 remove :: forall logic obj lock. Bolson.Child logic obj lock
 remove = Bolson.Remove
@@ -143,18 +161,22 @@ type MakeElement =
   , scope :: Scope
   , parent :: Maybe String
   , tag :: String
+  , dynFamily :: Maybe String
   }
 
 type AttributeParent =
   { id :: String
   , parent :: String
   , pos :: Maybe Int
+  , dynFamily :: Maybe String
   }
 
 type GiveNewParent =
   { id :: String
   , parent :: String
   , scope :: Scope
+  , pos :: Maybe Int
+  , dynFamily :: Maybe String
   }
 
 type DisconnectElement =
@@ -168,6 +190,7 @@ type MakeText =
   { id :: String
   , scope :: Scope
   , parent :: Maybe String
+  , dynFamily :: Maybe String
   }
 
 type DeleteFromCache = { id :: String }
@@ -193,6 +216,7 @@ type MakePursx =
   , pxScope :: String
   , verb :: String
   , cache :: Object Boolean
+  , dynFamily :: Maybe String
   }
 
 type SendToPos =
@@ -200,12 +224,16 @@ type SendToPos =
   , pos :: Int
   }
 
+type RemoveDynBeacon = { id :: String }
+type MakeDynBeacon = { id :: String, parent :: Maybe String, dynFamily :: String }
+
 derive instance Newtype (DOMInterpret payload) _
 
 newtype DOMInterpret payload = DOMInterpret
   { ids :: ST Global String
   , makeRoot :: MakeRoot -> payload
   , makeElement :: MakeElement -> payload
+  , makeDynBeacon :: MakeDynBeacon -> payload
   , attributeParent :: AttributeParent -> payload
   , makeText :: MakeText -> payload
   , makePursx :: MakePursx -> payload
@@ -216,4 +244,98 @@ newtype DOMInterpret payload = DOMInterpret
   , setProp :: SetProp -> payload
   , setCb :: SetCb -> payload
   , setText :: SetText -> payload
+  , removeDynBeacon :: RemoveDynBeacon -> payload
   }
+
+portalFlatten
+  :: forall payload136 b143 d145 t149 t157 t159 lock166 lock170 payload171
+   . Newtype b143
+       { ids :: d145
+       | t149
+       }
+  => { disconnectElement ::
+         DOMInterpret t157
+         -> { id :: String
+            , parent :: String
+            , scope :: Scope
+            | t159
+            }
+         -> t157
+     , doLogic :: Int -> DOMInterpret payload136 -> String -> payload136
+     , ids :: b143 -> d145
+     , toElt ::
+         Node lock166 payload171
+         -> Bolson.Element (DOMInterpret payload171)
+              ( pos :: Maybe Int
+              , dynFamily :: Maybe String
+              )
+              lock170
+              payload171
+     }
+portalFlatten =
+  { doLogic: \pos (DOMInterpret { sendToPos: stp }) id -> stp { id, pos }
+  , ids: unwrap >>> _.ids
+  , disconnectElement:
+      \(DOMInterpret { disconnectElement }) { id, scope, parent } ->
+        disconnectElement { id, scope, parent, scopeEq: eq }
+  , toElt: \(Node e) -> Bolson.Element e
+  }
+
+__internalDekuFlatten
+  :: forall lock payload
+   . Bolson.PSR (pos :: Maybe Int, dynFamily :: Maybe String)
+  -> DOMInterpret payload
+  -> Domable lock payload
+  -> Event payload
+__internalDekuFlatten a b (Domable c) = BControl.flatten portalFlatten a b c
+
+dynify
+  :: forall i payload lock
+   . (i -> Domable payload lock)
+  -> i
+  -> Domable payload lock
+dynify f es = Domable $ Bolson.Element' (Node go)
+  where
+  go { parent, scope, raiseId, pos } di@(DOMInterpret { ids, removeDynBeacon }) =
+    makeLemmingEvent \mySub k -> do
+      me <- ids
+      unsub <- mySub
+        ( __internalDekuFlatten
+            { parent, scope, raiseId, pos, dynFamily: Just me }
+            di
+            (f es)
+        )
+        k
+      pure do
+        k (removeDynBeacon { id: me })
+        unsub
+
+dyn
+  :: forall lock payload
+   . Event (Event (Bolson.Child Int (Node lock payload) lock))
+  -> Domable lock payload
+dyn = dynify
+  ( coerce
+      ( Bolson.dyn
+          :: Event (Event (Bolson.Child Int (Node lock payload) lock))
+          -> Domable' lock payload
+      )
+  )
+
+fixed
+  :: forall lock payload
+   . Array (Domable lock payload)
+  -> Domable lock payload
+fixed = dynify
+  ( coerce
+      (Bolson.fixed :: Array (Domable' lock payload) -> Domable' lock payload)
+  )
+
+envy
+  :: forall lock payload
+   . Event (Domable lock payload)
+  -> Domable lock payload
+envy = dynify
+  ( coerce
+      (Bolson.envy :: Event (Domable' lock payload) -> Domable' lock payload)
+  )

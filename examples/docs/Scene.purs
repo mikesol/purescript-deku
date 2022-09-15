@@ -7,7 +7,7 @@ import Data.Foldable (oneOfMap)
 import Data.Profunctor (lcmap)
 import Data.Tuple.Nested ((/\))
 import Deku.Attribute (cb, (:=))
-import Deku.Control (switcher_, text_)
+import Deku.Control (switcher, text_)
 import Deku.Core (Nut, bussed)
 import Deku.DOM as D
 import Deku.Example.Docs.Component as Component
@@ -88,7 +88,7 @@ scene options = bussed \push -> lcmap (pure options.startsWith <|> _)
                 /\ "ssr/"
                 /\ false
             ]
-      , switcher_ D.div (page push) event
+      , switcher (page push) event
       ]
   where
   page dpage i = go i { dpage, slug: options.slug }
