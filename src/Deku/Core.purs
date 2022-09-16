@@ -130,7 +130,8 @@ instance Semigroup (Domable lock payload) where
 instance Monoid (Domable lock payload) where
   mempty = Domable (Bolson.envy empty)
 
-unsafeSetPos :: forall lock payload. Int -> Domable lock payload -> Domable lock payload
+unsafeSetPos
+  :: forall lock payload. Int -> Domable lock payload -> Domable lock payload
 unsafeSetPos i (Domable e) = Domable (f e)
   where
   f = case _ of
@@ -232,8 +233,12 @@ type SendToPos =
 
 type RemoveDynBeacon = { id :: String }
 type MakeDynBeacon =
-  { id :: String, parent :: Maybe String
-  , pos :: Maybe Int, scope :: Scope, dynFamily :: String }
+  { id :: String
+  , parent :: Maybe String
+  , pos :: Maybe Int
+  , scope :: Scope
+  , dynFamily :: Maybe String
+  }
 
 derive instance Newtype (DOMInterpret payload) _
 
@@ -305,22 +310,27 @@ dynify
 dynify f es = Domable $ Bolson.Element' (Node go)
   where
   go
-    { parent, scope, raiseId, pos }
+    { parent, scope, raiseId, pos, dynFamily }
     di@(DOMInterpret { ids, makeDynBeacon, attributeParent, removeDynBeacon }) =
     makeLemmingEvent \mySub k -> do
       me <- ids
       raiseId me
       unsub <- mySub
         ( oneOf
-            [ pure $ makeDynBeacon { id: me, parent, scope, dynFamily: me, pos }
+            [ pure $ makeDynBeacon { id: me, parent, scope, dynFamily, pos }
             , maybe empty
                 ( \p ->
                     pure $ attributeParent
-                      { id: me, parent: p, pos, dynFamily: Just me }
+                      { id: me, parent: p, pos, dynFamily }
                 )
                 parent
             , __internalDekuFlatten
-                { parent, scope, raiseId: \_ -> pure unit, pos, dynFamily: Just me }
+                { parent
+                , scope
+                , raiseId: \_ -> pure unit
+                , pos
+                , dynFamily: Just me
+                }
                 di
                 (f es)
             ]

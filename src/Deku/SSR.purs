@@ -132,7 +132,7 @@ ssr' topTag arr = "<" <> topTag <> " data-deku-ssr-deku-root=\"true\">"
     ( findMap case _ of
         MakeElement { dynFamily } -> dynFamily
         MakeText { dynFamily } -> dynFamily
-        MakeDynBeacon { dynFamily } -> Just dynFamily
+        MakeDynBeacon { dynFamily } -> dynFamily
         _ -> Nothing
     )
   eltAtts i2a = i2a #

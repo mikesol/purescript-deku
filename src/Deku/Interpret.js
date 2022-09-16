@@ -7,18 +7,20 @@ export const unSetHydrating = (state) => () => {
 export const attributeParent_ = (runOnJust) => (a) => (state) => () => {
 	if (state.units[a.id]) {
 		// only attribute if it is not attributed already
-		if (!state.units[a.id].main.parentNode) {
+		if (!((state.units[a.id].main && state.units[a.id].main.parentNode)
+			|| (state.units[a.id].startBeacon && state.units[a.id].startBeacon.parentNode))) {
 			const iRan = runOnJust(a.pos)((pos) => () => {
 				// when attributing,
 				// we only care about positional information for
 				// things with a dyn family
 				// otherwise, they can't be inserted anywhere
 				// other than at the back of their collection
-				return runOnJust(a.dynFamily)((dynFamily) => {
+				return runOnJust(a.dynFamily)((dynFamily) => () => {
 					var i = 0;
 					var j = 0;
 					var terminalDyn;
-					while (j < state.units[a.parent].main.childNodes.length) {
+					const dom = state.units[a.parent].main;
+					while (j < dom.childNodes.length) {
 						if (
 							dom.childNodes[j].nodeType === 8 &&
 							dom.childNodes[j].nodeValue === '%-%' + dynFamily
@@ -28,25 +30,26 @@ export const attributeParent_ = (runOnJust) => (a) => (state) => () => {
 							j += 1;
 							break;
 						}
+						j++;
 					}
 					const inserter = (k) => {
 						if (state.units[a.id].startBeacon) {
-							state.units[a.parent].main.insertBefore(
+							dom.insertBefore(
 								state.units[a.id].startBeacon,
-								state.units[a.parent].main.childNodes[k]
+								dom.childNodes[k]
 							);
-							state.units[a.parent].main.insertBefore(
+							dom.insertBefore(
 								state.units[a.id].endBeacon,
-								state.units[a.parent].main.childNodes[k]
+								dom.childNodes[k]
 							);
 						} else {
-							state.units[a.parent].main.insertBefore(
+							dom.insertBefore(
 								state.units[a.id].main,
-								state.units[a.parent].main.childNodes[k]
+								dom.childNodes[k]
 							);
 						}
 					}
-					while (j < state.units[a.parent].main.childNodes.length) {
+					while (j < dom.childNodes.length) {
 						if (i === pos) {
 							inserter(j);
 							return true;
@@ -101,7 +104,7 @@ export const attributeParent_ = (runOnJust) => (a) => (state) => () => {
 					);
 				} else {
 					// we insert it at the end of its dyn family
-					const hasADynFamily = runOnJust(a.dynFamily)((dynFamily) => {
+					const hasADynFamily = runOnJust(a.dynFamily)((dynFamily) => () => {
 						if (state.units[a.id].startBeacon) {
 							state.units[a.parent].main.insertBefore(state.units[a.id].startBeacon, state.units[dynFamily].endBeacon);
 							state.units[a.parent].main.insertBefore(state.units[a.id].endBeacon, state.units[dynFamily].endBeacon);
@@ -136,9 +139,8 @@ export const getAllComments = (state) => () => {
 		var curNode;
 		while (curNode = iterator.nextNode()) {
 			if (curNode.value.substring(0, 3) === '%-%')
-				allBeacons[curNode.value.substring(3)] = curNode;
+				state.allBeacons[curNode.value.substring(3)] = curNode;
 		}
-		return comments;
 	}
 
 	getAllComments(document.body);
@@ -163,6 +165,7 @@ export const makeDynBeacon_ = (runOnJust) => (tryHydration) => (a) => (state) =>
 				listeners: {},
 				parent: a.parent,
 				scope: a.scope,
+				dynFamily: a.dynFamily,
 				startBeacon,
 				endBeacon
 			};
@@ -174,17 +177,18 @@ export const makeDynBeacon_ = (runOnJust) => (tryHydration) => (a) => (state) =>
 		state.units[ptr] = {
 			listeners: {},
 			parent: a.parent,
+			dynFamily: a.dynFamily,
 			scope: a.scope,
-			startBeacon: document.createComment(`%-%${id}`),
-			endBeacon: document.createComment(`%-%${id}%-%`),
+			startBeacon: document.createComment(`%-%${a.id}`),
+			endBeacon: document.createComment(`%-%${a.id}%-%`),
 		};
 	}
 }
 
-export const getPos = (id) => (state) => () => state.units[id] && state.units.id.pos ? state.units.id.pos : (() => {throw new Error(`No positional information for ${id}`)})();
-export const getDynFamily = (id) => (state) => () => state.units[id] && state.units.id.dynFamily ? state.units.id.dynFamily : (() => {throw new Error(`No positional information for ${id}`)})();
-export const getParent = (id) => (state) => () => state.units[id] && state.units[id].main.parentNode && state.revUnits[state.units[id].main.parentNode] ? state.revUnits[state.units[id].main.parentNode] : (() => {throw new Error(`No parent information for ${id}`)})();
-export const getScope = (id) => (state) => () => state.units[id] && state.units.id.scope ? state.units.id.scope : (() => {throw new Error(`No scope information for ${id}`)})();
+export const getPos = (id) => (state) => () => state.units[id] && state.units.id.pos ? state.units.id.pos : (() => { throw new Error(`No positional information for ${id}`) })();
+export const getDynFamily = (id) => (state) => () => state.units[id] && state.units.id.dynFamily ? state.units.id.dynFamily : (() => { throw new Error(`No positional information for ${id}`) })();
+export const getParent = (id) => (state) => () => state.units[id] && state.units[id].main.parentNode && state.revUnits[state.units[id].main.parentNode] ? state.revUnits[state.units[id].main.parentNode] : (() => { throw new Error(`No parent information for ${id}`) })();
+export const getScope = (id) => (state) => () => state.units[id] && state.units.id.scope ? state.units.id.scope : (() => { throw new Error(`No scope information for ${id}`) })();
 
 
 export const makeElement_ = (runOnJust) => (tryHydration) => (a) => (state) => () => {
@@ -517,13 +521,13 @@ export const giveNewParent_ = (runOnJust) => (b) => (state) => () => {
 		const ptr = a.id;
 		const parent = a.parent;
 		state.units[ptr].containingScope = a.scope;
-		const iRan = runOnJust(a.pos)((pos) => {
+		const iRan = runOnJust(a.pos)((pos) => () => {
 			const nodes = state.units[parent].main.childNodes;
 			// todo: binary search would be faster
 			for (var i = 0; i < nodes.length; i++) {
 				if (state.revUnits[nodes[i]]) {
 					// if the positions are equal, insert before and return true
-					const roj = runOnJust(state.units[state.revUnits[nodes[i]]].pos)((pos2) => {
+					const roj = runOnJust(state.units[state.revUnits[nodes[i]]].pos)((pos2) => () => {
 						if (pos2 === pos) {
 							state.units[parent].main.insertBefore(state.units[ptr].main, nodes[i]);
 							return true;
