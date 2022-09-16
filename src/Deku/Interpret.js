@@ -94,6 +94,7 @@ export const attributeParent_ = (runOnJust) => (a) => (state) => () => {
 				// the way we solve that in this function is to replace the
 				// wrapper with its child.
 				if (a.parent.indexOf("@!%") !== -1) {
+					// TODO: do we also need to update revUnits here?
 					state.units[a.parent].main.parentNode.replaceChild(
 						state.units[a.id].main,
 						state.units[a.parent].main
@@ -205,19 +206,22 @@ export const makeElement_ = (runOnJust) => (tryHydration) => (a) => (state) => (
 				dynFamily: a.dynFamily,
 				main: dom,
 			};
+			state.revUnits[dom] = ptr;
 			return true;
 		}
 		return false;
 	})();
 	if (!iRan) {
+		const main = document.createElement(a.tag);
 		state.units[ptr] = {
 			listeners: {},
 			parent: a.parent,
 			pos: a.pos,
 			scope: a.scope,
 			dynFamily: a.dynFamily,
-			main: document.createElement(a.tag),
+			main
 		};
+		state.revUnits[dom] = main;
 	}
 };
 
@@ -260,33 +264,37 @@ export const makeText_ = (runOnJust) => (tryHydration) => (maybe) => (a) => (sta
 					break;
 				}
 			}
-
+			const main = dom.childNodes[i];
 			state.units[ptr] = {
 				// if we've done ssr for a text node, it will be a span,
 				// so we want to get the child node
-				main: dom.childNodes[i],
+				main,
 				pos: a.pos,
 				parent: a.parent,
 				scope: a.scope,
 			};
+			state.revUnits[main] = ptr;
 			return true;
 		}
 		return false;
 	})();
 	if (!iRan) {
+		const main = document.createTextNode("");
 		state.units[ptr] = {
-			main: document.createTextNode(""),
+			main,
 			parent: a.parent,
 			scope: a.scope,
 			pos: a.pos,
 			dynFamily: a.dynFamily
 		};
+		state.revUnits[main] = ptr;
 	}
 };
 
 export function makeFFIDOMSnapshot() {
 	return {
 		units: {},
+		revUnits: {},
 		scopes: {},
 		allBeacons: {}
 	};
@@ -407,6 +415,7 @@ export const makePursx_ = (runOnJust) => (tryHydration) => (maybe) => (a) => (st
 				parent: parent,
 				main: dom,
 			};
+			state.revUnits[dom] = ptr;
 			return true;
 		}
 		return false;
@@ -440,6 +449,7 @@ export const makePursx_ = (runOnJust) => (tryHydration) => (maybe) => (a) => (st
 			parent: parent,
 			main: tmp.firstChild,
 		};
+		state.revUnits[tmp.firstChild] = ptr;
 	}
 	if (!state.scopes[scope]) {
 		state.scopes[scope] = [];
@@ -483,36 +493,18 @@ export const makeRoot_ = (a) => (state) => () => {
 	};
 };
 
-// this is called whenever we are in a portal situation
-// the basic issue we're up against, which at the moment has no answer,
-// is how to preserve positional information
-/**
- * portal (text_ "foo") \t ->
- *   D.div_ [text_ "bar", envy $ (delay 1.0) (pure t), text_ "baz"]
- */
-// In the current code base, `t` will wind up at the bottom of the list, but we
-// don't want that.
-// We somehow need to get `t` between "bar" and "baz".
-// This is complicated by the fact that,
-// in the vast majority of cases, positional information will not matter.
-// There will be a list of items, and we'll just append them to the parent
-// one by one. Cnstantly working with positional information will slow apps down
-// considerably, and we don't want to optimize for the corner cases.
-// Ideally, we'll stash the position for a rainy day and
-// only use it in dynamic isituations like portal, where we can afford
-// the more expensive operation because there are likely less of them.
 export const giveNewParent_ = (a) => (state) => () => {
 	if (state.units[a.id] && state.units[a.id].main) {
 		var ptr = a.id;
 		var parent = a.parent;
 		state.units[ptr].containingScope = a.scope;
+		// TODO:
+		// if there is positional information, use that
+		// otherwise, just prepend
 		state.units[parent].main.prepend(state.units[ptr].main);
 	}
 	if (state.units[a.id] && state.units[a.id].startBeacon) {
-		var ptr = a.id;
-		var parent = a.parent;
-		state.units[ptr].containingScope = a.scope;
-		state.units[parent].main.prepend(state.units[ptr].main);
+		// ?hole
 	}
 };
 
