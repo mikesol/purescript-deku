@@ -8,66 +8,82 @@ export const attributeParent_ = (runOnJust) => (a) => (state) => () => {
 	if (state.units[a.id]) {
 		// only attribute if it is not attributed already
 		if (!state.units[a.id].main.parentNode) {
-			// this is the branch where we have positional information
-			// TODO: this is wrong
-			// the positional information for a dyn will only apply to
-			// its scope
-			// we should ONLY care about position in those cases
-			// so in addition to checking for position
-			// we need to check if it has a dyn beacon
-			// also, the code below is wrong
-			// instead of making position relative to the toplevel
-			// we should ALWAYS
-			// make it relative to the dyn beacon
-			// which may be the top level
-			// and may not
 			const iRan = runOnJust(a.pos)((pos) => () => {
-				var i = 0;
-				var j = 0;
-				var terminalDyn;
-				while (j < state.units[a.parent].main.childNodes.length) {
-					if (i === pos) {
+				// when attributing,
+				// we only care about positional information for
+				// things with a dyn family
+				// otherwise, they can't be inserted anywhere
+				// other than at the back of their collection
+				return runOnJust(a.dynFamily)((dynFamily) => {
+					var i = 0;
+					var j = 0;
+					var terminalDyn;
+					while (j < state.units[a.parent].main.childNodes.length) {
+						if (
+							dom.childNodes[j].nodeType === 8 &&
+							dom.childNodes[j].nodeValue === '%-%' + dynFamily
+						) {
+							// we have found our starting position, which is one
+							// after this dyn node
+							j += 1;
+							break;
+						}
+					}
+					const inserter = (k) => {
 						if (state.units[a.id].startBeacon) {
 							state.units[a.parent].main.insertBefore(
 								state.units[a.id].startBeacon,
-								state.units[a.parent].main.childNodes[j]
+								state.units[a.parent].main.childNodes[k]
 							);
 							state.units[a.parent].main.insertBefore(
 								state.units[a.id].endBeacon,
-								state.units[a.parent].main.childNodes[j]
+								state.units[a.parent].main.childNodes[k]
 							);
 						} else {
 							state.units[a.parent].main.insertBefore(
 								state.units[a.id].main,
-								state.units[a.parent].main.childNodes[j]
+								state.units[a.parent].main.childNodes[k]
 							);
 						}
-						return true;
 					}
-					// we are starting a dynamic bloc
-					// suspend incrementing until we hit its end
-					if (
-						dom.childNodes[i].nodeType === 8 &&
-						dom.childNodes[i].nodeValue.substring(0, 3) === '%-%' &&
-						!terminalDyn
-					) {
-						terminalDyn = dom.childNodes[i].nodeValue + '%-%';
+					while (j < state.units[a.parent].main.childNodes.length) {
+						if (i === pos) {
+							inserter(j);
+							return true;
+						} if (
+							dom.childNodes[j].nodeType === 8 &&
+							dom.childNodes[j].nodeValue === '%-%' + dynFamily + '%-%'
+						) {
+							// we have hit the end
+							// insert here
+							inserter(j);
+							return true;
+						}
+						// we are starting a dynamic bloc
+						// suspend incrementing until we hit its end
+						if (
+							dom.childNodes[j].nodeType === 8 &&
+							dom.childNodes[j].nodeValue.substring(0, 3) === '%-%' &&
+							!terminalDyn
+						) {
+							terminalDyn = dom.childNodes[j].nodeValue + '%-%';
+						}
+						// we are not in a dynamic bloc, increment normally
+						if (!terminalDyn) {
+							i++;
+						}
+						// we are ending a dynamic bloc and we can safely increment now
+						if (
+							dom.childNodes[j].nodeType === 8 &&
+							dom.childNodes[j].nodeValue === terminalDyn
+						) {
+							terminalDyn = undefined;
+							i++;
+						}
+						j++;
 					}
-					// we are not in a dynamic bloc, increment normally
-					if (!terminalDyn) {
-						i++;
-					}
-					// we are ending a dynamic bloc and we can safely increment now
-					if (
-						dom.childNodes[i].nodeType === 8 &&
-						dom.childNodes[i].nodeValue === terminalDyn
-					) {
-						terminalDyn = undefined;
-						i++;
-					}
-					j++;
-				}
-				return false;
+					return false;
+				});
 			})();
 			if (!iRan) {
 				// this is a pursx child element
