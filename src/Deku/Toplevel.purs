@@ -12,7 +12,7 @@ import Data.Maybe (Maybe(..), maybe)
 import Data.Newtype (class Newtype, unwrap)
 import Deku.Control (deku)
 import Deku.Core (DOMInterpret(..), Domable(..), Node(..), Domable')
-import Deku.Interpret (FFIDOMSnapshot, Instruction, fullDOMInterpret, hydratingDOMInterpret, makeFFIDOMSnapshot, setHydrating, ssrDOMInterpret, unSetHydrating)
+import Deku.Interpret (FFIDOMSnapshot, Instruction, fullDOMInterpret, getAllComments, hydratingDOMInterpret, makeFFIDOMSnapshot, setHydrating, ssrDOMInterpret, unSetHydrating)
 import Deku.SSR (ssr')
 import Effect (Effect)
 import FRP.Event (Event, subscribe, subscribePure)
@@ -53,6 +53,7 @@ hydrate'
   -> Effect (Effect Unit)
 hydrate' children = do
   ffi <- makeFFIDOMSnapshot
+  getAllComments ffi
   di <- liftST (RRef.new 0) <#> hydratingDOMInterpret
   setHydrating ffi
   u <- subscribe

@@ -7,6 +7,7 @@ module Deku.Interpret
   , Instruction(..)
   , setHydrating
   , unSetHydrating
+  , getAllComments
   ) where
 
 import Prelude
@@ -31,6 +32,8 @@ type RunOnJust = forall a. Maybe a -> (a -> Effect Boolean) -> Effect Boolean
 runOnJust :: RunOnJust
 runOnJust (Just a) f = f a
 runOnJust _ _ = pure false
+
+foreign import getAllComments :: FFIDOMSnapshot -> Effect Unit
 
 foreign import makeElement_
   :: RunOnJust

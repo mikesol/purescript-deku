@@ -1,10 +1,11 @@
 module Deku.DOM.Elt.Map where
 
+import Bolson.Core (Entity(..), fixed)
 import Control.Plus (empty)
+import Data.Array (mapWithIndex)
 import Deku.Attribute (Attribute)
 import Deku.Control (elementify)
-import Deku.Core (Domable(..), Domable')
-import Bolson.Core (Entity(..), fixed)
+import Deku.Core (Domable(..), Domable', unsafeSetPos)
 import FRP.Event (Event)
 import Safe.Coerce (coerce)
 
@@ -17,7 +18,7 @@ map
    . Event (Attribute Map_)
   -> Array (Domable lock payload)
   -> Domable lock payload
-map attributes kids = Domable (Element' (elementify "map" attributes ((coerce :: Domable' lock payload -> Domable lock payload)  (fixed (coerce kids)))))
+map attributes kids = Domable (Element' (elementify "map" attributes ((coerce :: Domable' lock payload -> Domable lock payload)  (fixed (coerce (mapWithIndex unsafeSetPos kids))))))
 
 map_
   :: forall lock payload

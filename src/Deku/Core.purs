@@ -33,6 +33,7 @@ module Deku.Core
   , dyn
   , fixed
   , envy
+  , unsafeSetPos
   ) where
 
 import Prelude
@@ -129,12 +130,8 @@ instance Semigroup (Domable lock payload) where
 instance Monoid (Domable lock payload) where
   mempty = Domable (Bolson.envy empty)
 
-insert
-  :: forall lock payload
-   . Int
-  -> Domable lock payload
-  -> Bolson.Child Int (Node lock payload) lock
-insert i (Domable e) = Bolson.Insert (f e)
+unsafeSetPos :: forall lock payload. Int -> Domable lock payload -> Domable lock payload
+unsafeSetPos i (Domable e) = Domable (f e)
   where
   f = case _ of
     Bolson.Element' (Node e') -> Bolson.Element'
@@ -142,6 +139,13 @@ insert i (Domable e) = Bolson.Insert (f e)
     Bolson.EventfulElement' (Bolson.EventfulElement e') ->
       Bolson.EventfulElement' (Bolson.EventfulElement (map f e'))
     _ -> e
+
+insert
+  :: forall lock payload
+   . Int
+  -> Domable lock payload
+  -> Bolson.Child Int (Node lock payload) lock
+insert i e = Bolson.Insert (unwrap $ unsafeSetPos i e)
 
 insert_
   :: forall lock payload
