@@ -449,6 +449,24 @@ export const makeRoot_ = (a) => (state) => () => {
 	};
 };
 
+// this is called whenever we are in a portal situation
+// the basic issue we're up against, which at the moment has no answer,
+// is how to preserve positional information
+/**
+ * portal (text_ "foo") \t ->
+ *   D.div_ [text_ "bar", envy $ (delay 1.0) (pure t), text_ "baz"]
+ */
+// In the current code base, `t` will wind up at the bottom of the list, but we
+// don't want that.
+// We somehow need to get `t` between "bar" and "baz".
+// This is complicated by the fact that,
+// in the vast majority of cases, positional information will not matter.
+// There will be a list of items, and we'll just append them to the parent
+// one by one. Cnstantly working with positional information will slow apps down
+// considerably, and we don't want to optimize for the corner cases.
+// Ideally, we'll stash the position for a rainy day and
+// only use it in dynamic isituations like portal, where we can afford
+// the more expensive operation because there are likely less of them.
 export const giveNewParent_ = (a) => (state) => () => {
 	if (state.units[a.id]) {
 		var ptr = a.id;

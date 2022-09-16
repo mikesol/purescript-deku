@@ -304,6 +304,7 @@ dynify f es = Domable $ Bolson.Element' (Node go)
     di@(DOMInterpret { ids, makeDynBeacon, attributeParent, removeDynBeacon }) =
     makeLemmingEvent \mySub k -> do
       me <- ids
+      raiseId me
       unsub <- mySub
         ( oneOf
             [ pure $ makeDynBeacon { id: me, parent, scope, dynFamily: me }
@@ -314,7 +315,7 @@ dynify f es = Domable $ Bolson.Element' (Node go)
                 )
                 parent
             , __internalDekuFlatten
-                { parent, scope, raiseId, pos, dynFamily: Just me }
+                { parent, scope, raiseId: \_ -> pure unit, pos, dynFamily: Just me }
                 di
                 (f es)
             ]
