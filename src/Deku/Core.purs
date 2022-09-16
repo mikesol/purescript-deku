@@ -232,7 +232,8 @@ type SendToPos =
 
 type RemoveDynBeacon = { id :: String }
 type MakeDynBeacon =
-  { id :: String, parent :: Maybe String, scope :: Scope, dynFamily :: String }
+  { id :: String, parent :: Maybe String
+  , pos :: Maybe Int, scope :: Scope, dynFamily :: String }
 
 derive instance Newtype (DOMInterpret payload) _
 
@@ -311,7 +312,7 @@ dynify f es = Domable $ Bolson.Element' (Node go)
       raiseId me
       unsub <- mySub
         ( oneOf
-            [ pure $ makeDynBeacon { id: me, parent, scope, dynFamily: me }
+            [ pure $ makeDynBeacon { id: me, parent, scope, dynFamily: me, pos }
             , maybe empty
                 ( \p ->
                     pure $ attributeParent

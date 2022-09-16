@@ -83,7 +83,7 @@ export const attributeParent_ = (runOnJust) => (a) => (state) => () => {
 						j++;
 					}
 					return false;
-				});
+				})();
 			})();
 			if (!iRan) {
 				// this is a pursx child element
@@ -108,7 +108,8 @@ export const attributeParent_ = (runOnJust) => (a) => (state) => () => {
 						} else {
 							state.units[a.parent].main.insertBefore(state.units[a.id].main, state.units[dynFamily].endBeacon);
 						}
-					});
+						return true;
+					})();
 					// vanilla node inserting. no need to do any fancy positional stuff
 					// we just tack it on to the end
 					if (!hasADynFamily) {
@@ -180,7 +181,11 @@ export const makeDynBeacon_ = (runOnJust) => (tryHydration) => (a) => (state) =>
 	}
 }
 
-export const removeDynBeacon_ = deleteFromCache_;
+export const getPos = (id) => (state) => () => state.units[id] && state.units.id.pos ? state.units.id.pos : (() => {throw new Error(`No positional information for ${id}`)})();
+export const getDynFamily = (id) => (state) => () => state.units[id] && state.units.id.dynFamily ? state.units.id.dynFamily : (() => {throw new Error(`No positional information for ${id}`)})();
+export const getParent = (id) => (state) => () => state.units[id] && state.units[id].main.parentNode && state.revUnits[state.units[id].main.parentNode] ? state.revUnits[state.units[id].main.parentNode] : (() => {throw new Error(`No parent information for ${id}`)})();
+export const getScope = (id) => (state) => () => state.units[id] && state.units.id.scope ? state.units.id.scope : (() => {throw new Error(`No scope information for ${id}`)})();
+
 
 export const makeElement_ = (runOnJust) => (tryHydration) => (a) => (state) => () => {
 	var dom;
@@ -493,18 +498,52 @@ export const makeRoot_ = (a) => (state) => () => {
 	};
 };
 
-export const giveNewParent_ = (a) => (state) => () => {
-	if (state.units[a.id] && state.units[a.id].main) {
-		var ptr = a.id;
-		var parent = a.parent;
-		state.units[ptr].containingScope = a.scope;
-		// TODO:
-		// if there is positional information, use that
-		// otherwise, just prepend
-		state.units[parent].main.prepend(state.units[ptr].main);
+export const giveNewParent_ = (runOnJust) => (b) => (state) => () => {
+	const runMe = []
+	if (state.units[b.id] && state.units[b.id].startBeacon) {
+		var c = b;
+		while (c) {
+			runMe.push(c);
+			c = c.nextSibling;
+			if (c === state.units[b.id].endBeacon) {
+				break;
+			}
+		}
+	} else {
+		runMe.push(b);
 	}
-	if (state.units[a.id] && state.units[a.id].startBeacon) {
-		// ?hole
+	for (var z = 0; z < runMe.length; z++) {
+		const a = runMe[z]
+		const ptr = a.id;
+		const parent = a.parent;
+		state.units[ptr].containingScope = a.scope;
+		const iRan = runOnJust(a.pos)((pos) => {
+			const nodes = state.units[parent].main.childNodes;
+			// todo: binary search would be faster
+			for (var i = 0; i < nodes.length; i++) {
+				if (state.revUnits[nodes[i]]) {
+					// if the positions are equal, insert before and return true
+					const roj = runOnJust(state.units[state.revUnits[nodes[i]]].pos)((pos2) => {
+						if (pos2 === pos) {
+							state.units[parent].main.insertBefore(state.units[ptr].main, nodes[i]);
+							return true;
+						}
+						// positions are not equal, so false
+						return false;
+					})();
+					// if true, that means we called insert before, return true to break the loop
+					if (roj) {
+						return true;
+					}
+				}
+			}
+			// we return true anyway, as this just means that we can tack this onto the end of our structure
+			state.units[parent].main.appendChild(state.units[ptr].main);
+			return true;
+		})();
+		if (!iRan) {
+			state.units[parent].main.appendChild(state.units[ptr].main);
+		}
 	}
 };
 
@@ -528,18 +567,4 @@ export const deleteFromCache_ = (a) => (state) => () => {
 	}
 };
 
-export const sendToPos_ = (a) => (state) => () => {
-	if (state.units[a.id]) {
-		var ptr = a.id;
-		var pos = a.pos;
-		var parent = state.units[ptr].main.parentNode;
-		parent.insertBefore(
-			state.units[ptr].main,
-			parent.children.length <= pos
-				? parent.children[parent.children.length - 1]
-				: pos < 0
-					? parent.children[0]
-					: parent.children[pos]
-		);
-	}
-};
+export const removeDynBeacon_ = deleteFromCache_;

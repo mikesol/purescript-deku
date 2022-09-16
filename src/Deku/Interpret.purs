@@ -12,6 +12,7 @@ module Deku.Interpret
 
 import Prelude
 
+import Bolson.Core (Scope)
 import Control.Monad.ST (ST)
 import Control.Monad.ST.Global (Global)
 import Control.Monad.ST.Global as Region
@@ -96,18 +97,22 @@ foreign import deleteFromCache_
   :: Core.DeleteFromCache -> FFIDOMSnapshot -> Effect Unit
 
 foreign import giveNewParent_
-  :: Core.GiveNewParent -> FFIDOMSnapshot -> Effect Unit
+  :: RunOnJust -> Core.GiveNewParent -> FFIDOMSnapshot -> Effect Unit
 
 foreign import disconnectElement_
   :: Core.DisconnectElement -> FFIDOMSnapshot -> Effect Unit
 
-foreign import sendToPos_ :: Core.SendToPos -> FFIDOMSnapshot -> Effect Unit
-
 foreign import setHydrating :: FFIDOMSnapshot -> Effect Unit
 foreign import unSetHydrating :: FFIDOMSnapshot -> Effect Unit
 
+foreign import getPos :: String -> FFIDOMSnapshot -> Effect (Maybe Int)
+foreign import getDynFamily :: String -> FFIDOMSnapshot -> Effect (Maybe String)
+foreign import getParent :: String -> FFIDOMSnapshot -> Effect String
+foreign import getScope :: String -> FFIDOMSnapshot -> Effect Scope
+
 fullDOMInterpret
-  :: Ref.STRef Region.Global Int -> Core.DOMInterpret (FFIDOMSnapshot -> Effect Unit)
+  :: Ref.STRef Region.Global Int
+  -> Core.DOMInterpret (FFIDOMSnapshot -> Effect Unit)
 fullDOMInterpret seed = Core.DOMInterpret
   { ids: do
       s <- Ref.read seed
@@ -125,10 +130,10 @@ fullDOMInterpret seed = Core.DOMInterpret
   , setProp: setProp_ false
   , setCb: setCb_ false
   , setText: setText_
-  , sendToPos: sendToPos_
+  , sendToPos
   , removeDynBeacon: removeDynBeacon_
   , deleteFromCache: deleteFromCache_
-  , giveNewParent: giveNewParent_
+  , giveNewParent: giveNewParent_ runOnJust
   , disconnectElement: disconnectElement_
   }
 
@@ -145,7 +150,10 @@ ssrMakeElement
 ssrMakeElement a i = void $ Ref.modify (_ <> [ MakeElement a ]) i
 
 ssrMakeDynBeacon
-  :: forall r. Core.MakeDynBeacon -> Ref.STRef r (Array Instruction) -> ST r Unit
+  :: forall r
+   . Core.MakeDynBeacon
+  -> Ref.STRef r (Array Instruction)
+  -> ST r Unit
 ssrMakeDynBeacon a i = void $ Ref.modify (_ <> [ MakeDynBeacon a ]) i
 
 ssrMakeText
@@ -191,8 +199,17 @@ ssrDOMInterpret seed = Core.DOMInterpret
   , disconnectElement: \_ _ -> pure unit
   }
 
+sendToPos :: Core.SendToPos -> FFIDOMSnapshot -> Effect Unit
+sendToPos a state = do
+  scope <- getScope a.id state
+  parent <- getParent a.id state
+  dynFamily <- getDynFamily a.id state
+  let newA = { scope, parent, dynFamily, id: a.id, pos: Just a.pos }
+  giveNewParent_ runOnJust newA state
+
 hydratingDOMInterpret
-  :: Ref.STRef Region.Global Int -> Core.DOMInterpret (FFIDOMSnapshot -> Effect Unit)
+  :: Ref.STRef Region.Global Int
+  -> Core.DOMInterpret (FFIDOMSnapshot -> Effect Unit)
 hydratingDOMInterpret seed = Core.DOMInterpret
   { ids: do
       s <- Ref.read seed
@@ -210,9 +227,9 @@ hydratingDOMInterpret seed = Core.DOMInterpret
   , setProp: setProp_ true
   , setCb: setCb_ true
   , setText: setText_
-  , sendToPos: sendToPos_
+  , sendToPos
   , deleteFromCache: deleteFromCache_
   , removeDynBeacon: removeDynBeacon_
-  , giveNewParent: giveNewParent_
+  , giveNewParent: giveNewParent_ runOnJust
   , disconnectElement: disconnectElement_
   }
