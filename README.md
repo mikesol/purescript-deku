@@ -27,73 +27,13 @@ Deku aims to be:
 
 Deku started as an experiment taking [`purescript-wags`](https://github.com/mikesol/purescript-wags) and replacing all the Web Audio stuff with DOM stuff. It turns out that the DOM and Web Audio are more alike than different, so the first draft took only a few hours. It uses the same file structure, naming conventions and core concepts as wags, making it ideal for performance-critical apps.
 
-## Benchmarks
-
-Here are some recent benchmarks from the test suite comparing Deku to Halogen and Halogen Hooks. The test suite is the same one that is used in [`halogen-hooks`](https://github.com/thomashoneyman/purescript-halogen-hooks).
-
-### The State test
-
-Many effectful computations followed by a DOM modification.
-
-```json
-{
-  "hookAverage": {
-    "totalTime": "171ms",
-    "scriptTime": "121ms",
-    "peakHeap": "2570kb",
-    "averageHeap": "1062kb",
-    "averageFPS": 15
-  },
-  "dekuAverage": {
-    "totalTime": "73ms",
-    "scriptTime": "18ms",
-    "peakHeap": "842kb",
-    "averageHeap": "378kb",
-    "averageFPS": 215
-  },
-  "componentAverage": {
-    "totalTime": "106ms",
-    "scriptTime": "56ms",
-    "peakHeap": "1288kb",
-    "averageHeap": "613kb",
-    "averageFPS": 35
-  }
-}
-```
-
-### The Todo test
-
-A vanilla MVC Todo app.
-
-```json
-{
-  "hookAverage": {
-    "totalTime": "567ms",
-    "scriptTime": "397ms",
-    "peakHeap": "13292kb",
-    "averageHeap": "6242kb",
-    "averageFPS": 18
-  },
-  "dekuAverage": {
-    "totalTime": "230ms",
-    "scriptTime": "67ms",
-    "peakHeap": "1768kb",
-    "averageHeap": "1136kb",
-    "averageFPS": 36
-  },
-  "componentAverage": {
-    "totalTime": "401ms",
-    "scriptTime": "206ms",
-    "peakHeap": "6835kb",
-    "averageHeap": "3844kb",
-    "averageFPS": 26
-  }
-}
-```
-
 ## Examples
 
 Here are some [examples](./examples) to get you started.
+
+## SSR
+
+If you are doing SSR with Deku, you _must install_ `jsdom`, ie `npm install --save-dev jsdom`. Currently, SSR is only supported in the Node environment.
 
 ## Bundling on your site
 
