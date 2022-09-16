@@ -496,7 +496,13 @@ export const makeRoot_ = (a) => (state) => () => {
 // only use it in dynamic isituations like portal, where we can afford
 // the more expensive operation because there are likely less of them.
 export const giveNewParent_ = (a) => (state) => () => {
-	if (state.units[a.id]) {
+	if (state.units[a.id] && state.units[a.id].main) {
+		var ptr = a.id;
+		var parent = a.parent;
+		state.units[ptr].containingScope = a.scope;
+		state.units[parent].main.prepend(state.units[ptr].main);
+	}
+	if (state.units[a.id] && state.units[a.id].startBeacon) {
 		var ptr = a.id;
 		var parent = a.parent;
 		state.units[ptr].containingScope = a.scope;
@@ -506,11 +512,7 @@ export const giveNewParent_ = (a) => (state) => () => {
 
 export const disconnectElement_ = (a) => (state) => () => {
 	if (state.units[a.id]) {
-
 		var ptr = a.id;
-		if (state.units[ptr].noop) {
-			return;
-		}
 		if (
 			state.units[ptr].containingScope &&
 			!a.scopeEq(state.units[ptr].containingScope)(a.scope)
