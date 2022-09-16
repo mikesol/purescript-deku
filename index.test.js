@@ -23,7 +23,7 @@ describe('deku', () => {
     finished();
   });
 
-  it.only('has dyn appearing in the correct composable order', () => {
+  it('has dyn appearing in the correct composable order', () => {
     document.getElementsByTagName('html')[0].innerHTML = '<head></head><body></body>';
     const $ = require('jquery');
     const finished = tests.dynAppearsCorrectly();

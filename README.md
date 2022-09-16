@@ -31,10 +31,6 @@ Deku started as an experiment taking [`purescript-wags`](https://github.com/mike
 
 Here are some [examples](./examples) to get you started.
 
-## SSR
-
-If you are doing SSR with Deku, you _must install_ `jsdom`, ie `npm install --save-dev jsdom`. Currently, SSR is only supported in the Node environment.
-
 ## Bundling on your site
 
 To see how to bundle this library on your site, please visit the [examples](./examples) directory.

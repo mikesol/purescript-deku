@@ -29,7 +29,7 @@ main = runInBody
           (-1)
       D.div_
         [ D.button
-            (click_ (pure push.buttonClicked))
+            (click_ (push.buttonClicked unit))
             [ text_ "Click" ]
         , D.div_
             [ text

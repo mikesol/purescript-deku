@@ -61,7 +61,7 @@ events options = px ~~
       ( vbussed (Proxy :: _ UIEvents) \push event -> do
           D.div_
             [ D.button
-                (click_ (pure push.buttonClicked))
+                (click_ (push.buttonClicked unit))
                 [ text_ "Click" ]
             , D.div_
                 [ text
