@@ -199,6 +199,7 @@ export const makeElement_ = (runOnJust) => (tryHydration) => (a) => (state) => (
 		) {
 			state.units[ptr] = {
 				listeners: {},
+				pos: a.pos,
 				parent: a.parent,
 				scope: a.scope,
 				dynFamily: a.dynFamily,
@@ -212,6 +213,7 @@ export const makeElement_ = (runOnJust) => (tryHydration) => (a) => (state) => (
 		state.units[ptr] = {
 			listeners: {},
 			parent: a.parent,
+			pos: a.pos,
 			scope: a.scope,
 			dynFamily: a.dynFamily,
 			main: document.createElement(a.tag),
@@ -263,6 +265,7 @@ export const makeText_ = (runOnJust) => (tryHydration) => (maybe) => (a) => (sta
 				// if we've done ssr for a text node, it will be a span,
 				// so we want to get the child node
 				main: dom.childNodes[i],
+				pos: a.pos,
 				parent: a.parent,
 				scope: a.scope,
 			};
@@ -275,6 +278,7 @@ export const makeText_ = (runOnJust) => (tryHydration) => (maybe) => (a) => (sta
 			main: document.createTextNode(""),
 			parent: a.parent,
 			scope: a.scope,
+			pos: a.pos,
 			dynFamily: a.dynFamily
 		};
 	}
@@ -398,6 +402,7 @@ export const makePursx_ = (runOnJust) => (tryHydration) => (maybe) => (a) => (st
 		) {
 			state.units[ptr] = {
 				listeners: {},
+				pos: a.pos,
 				scope: scope,
 				parent: parent,
 				main: dom,
@@ -430,6 +435,7 @@ export const makePursx_ = (runOnJust) => (tryHydration) => (maybe) => (a) => (st
 		tmp.innerHTML = html.trim();
 		state.units[ptr] = {
 			listeners: {},
+			pos: a.pos,
 			scope: scope,
 			parent: parent,
 			main: tmp.firstChild,
