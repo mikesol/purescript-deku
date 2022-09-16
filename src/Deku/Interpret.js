@@ -1,6 +1,3 @@
-const connectXToY_ = (maybe, x, y$, state) => {
-	maybe((y) => state.units[y].main.appendChild(state.units[x].main))(y$);
-};
 export const setHydrating = (state) => () => {
 	state.hydrating = true;
 };
@@ -8,38 +5,153 @@ export const unSetHydrating = (state) => () => {
 	state.hydrating = false;
 };
 export const attributeParent_ = (runOnJust) => (a) => (state) => () => {
-	// only attribute if it is not attributed already
 	if (state.units[a.id]) {
+		// only attribute if it is not attributed already
 		if (!state.units[a.id].main.parentNode) {
+			// this is the branch where we have positional information
 			const iRan = runOnJust(a.pos)((pos) => () => {
-				if (state.units[a.parent].main.children[pos]) {
-					state.units[a.parent].main.insertBefore(
-						state.units[a.id].main,
-						state.units[a.parent].main.children[pos]
-					);
-					return true;
+				var i = 0;
+				var j = 0;
+				var terminalDyn;
+				while (j < state.units[a.parent].main.childNodes.length) {
+					if (i === pos) {
+						if (state.units[a.id].startBeacon) {
+							state.units[a.parent].main.insertBefore(
+								state.units[a.id].startBeacon,
+								state.units[a.parent].main.childNodes[j]
+							);
+							state.units[a.parent].main.insertBefore(
+								state.units[a.id].endBeacon,
+								state.units[a.parent].main.childNodes[j]
+							);
+						} else {
+							state.units[a.parent].main.insertBefore(
+								state.units[a.id].main,
+								state.units[a.parent].main.childNodes[j]
+							);
+						}
+						return true;
+					}
+					// we are starting a dynamic bloc
+					// suspend incrementing until we hit its end
+					if (
+						dom.childNodes[i].nodeType === 8 &&
+						dom.childNodes[i].nodeValue.substring(0, 3) === '%-%' &&
+						!terminalDyn
+					) {
+						terminalDyn = dom.childNodes[i].nodeValue + '%-%';
+					}
+					// we are not in a dynamic bloc, increment normally
+					if (!terminalDyn) {
+						i++;
+					}
+					// we are ending a dynamic bloc and we can safely increment now
+					if (
+						dom.childNodes[i].nodeType === 8 &&
+						dom.childNodes[i].nodeValue === terminalDyn
+					) {
+						terminalDyn = undefined;
+						i++;
+					}
+					j++;
 				}
 				return false;
 			})();
 			if (!iRan) {
+				// this is a pursx child element
+				// pursx children will _never_ have positional information
+				// as they are one-offs in the pursx tree
+				// however, the way that makePursX is done, there is a thin
+				// wrapper node created around the main node
+				// the way we solve that in this function is to replace the
+				// wrapper with its child.
 				if (a.parent.indexOf("@!%") !== -1) {
 					state.units[a.parent].main.parentNode.replaceChild(
 						state.units[a.id].main,
 						state.units[a.parent].main
 					);
 				} else {
-					state.units[a.parent].main.appendChild(state.units[a.id].main);
+					// we insert it at the end of its dyn family
+					const hasADynFamily = runOnJust(a.dynFamily)((dynFamily) => {
+						if (state.units[a.id].startBeacon) {
+							state.units[a.parent].main.insertBefore(state.units[a.id].startBeacon, state.units[dynFamily].endBeacon);
+							state.units[a.parent].main.insertBefore(state.units[a.id].endBeacon, state.units[dynFamily].endBeacon);
+						} else {
+							state.units[a.parent].main.insertBefore(state.units[a.id].main, state.units[dynFamily].endBeacon);
+						}
+					});
+					// vanilla node inserting. no need to do any fancy positional stuff
+					// we just tack it on to the end
+					if (!hasADynFamily) {
+						if (state.units[a.id].startBeacon) {
+							state.units[a.parent].main.appendChild(state.units[a.id].startBeacon);
+							state.units[a.parent].main.appendChild(state.units[a.id].endBeacon);
+						} else {
+							state.units[a.parent].main.appendChild(state.units[a.id].main);
+						}
+					}
 				}
 			}
 		}
 	}
 };
+export const getAllComments = (state) => () => {
+	function filterNone() {
+		return NodeFilter.FILTER_ACCEPT;
+	}
 
+	function getAllComments(rootElem) {
+		// Fourth argument, which is actually obsolete according to the DOM4 standard, is required in IE 11
+		var iterator = document.createNodeIterator(rootElem, NodeFilter.SHOW_COMMENT, filterNone, false);
+		var curNode;
+		while (curNode = iterator.nextNode()) {
+			if (curNode.value.substring(0, 3) === '%-%')
+				allBeacons[curNode.value.substring(3)] = curNode;
+		}
+		return comments;
+	}
+
+	getAllComments(document.body);
+}
 export const makeDynBeacon_ = (runOnJust) => (tryHydration) => (a) => (state) => () => {
+	var startBeacon;
+	var endBeacon;
+	var ptr = a.id;
+	if (!state.scopes[a.scope]) {
+		state.scopes[a.scope] = [];
+	}
+	state.scopes[a.scope].push(ptr);
+	// note that, for portals, this will be broken in its current form
+	const iRan = runOnJust(a.parent)(() => () => {
+		if (
+			state.hydrating &&
+			tryHydration &&
+			(startBeacon = state.allBeacons[a.id]) &&
+			(endBeacon = state.allBeacons[`${a.id}'%-%'`])
+		) {
+			state.units[ptr] = {
+				listeners: {},
+				parent: a.parent,
+				scope: a.scope,
+				startBeacon,
+				endBeacon
+			};
+			return true;
+		}
+		return false;
+	})();
+	if (!iRan) {
+		state.units[ptr] = {
+			listeners: {},
+			parent: a.parent,
+			scope: a.scope,
+			startBeacon: document.createComment(`%-%${id}`),
+			endBeacon: document.createComment(`%-%${id}%-%`),
+		};
+	}
 }
 
-export const removeDynBeacon_ = (a) => (state) => () => {
-}
+export const removeDynBeacon_ = deleteFromCache_;
 
 export const makeElement_ = (runOnJust) => (tryHydration) => (a) => (state) => () => {
 	var dom;
@@ -61,6 +173,7 @@ export const makeElement_ = (runOnJust) => (tryHydration) => (a) => (state) => (
 				listeners: {},
 				parent: a.parent,
 				scope: a.scope,
+				dynFamily: a.dynFamily,
 				main: dom,
 			};
 			return true;
@@ -72,10 +185,12 @@ export const makeElement_ = (runOnJust) => (tryHydration) => (a) => (state) => (
 			listeners: {},
 			parent: a.parent,
 			scope: a.scope,
+			dynFamily: a.dynFamily,
 			main: document.createElement(a.tag),
 		};
 	}
 };
+
 export const makeText_ = (runOnJust) => (tryHydration) => (maybe) => (a) => (state) => () => {
 	var ptr = a.id;
 	var dom;
@@ -95,23 +210,27 @@ export const makeText_ = (runOnJust) => (tryHydration) => (maybe) => (a) => (sta
 				.querySelectorAll("[data-deku-ssr-" + parent + "]")
 				.item(0))
 		) {
+
 			var i = 0;
-			// if the length is one, that means that there is only a comment because
-			// the text is empty
-			// so we need to add a text node
-			if (dom.childNodes.length === 1) {
-				dom.prepend(document.createTextNode(""));
-			} else {
-				for (var i = 0; i < dom.childNodes.length; i++) {
-					if (
-						dom.childNodes[i].nodeType === 8 &&
-						dom.childNodes[i].nodeValue === ptr
-					) {
-						i = i - 1;
-						break;
+			for (; i < dom.childNodes.length; i++) {
+				const ptrSplit = ptr.split('@-@');
+				if (
+					dom.childNodes[i].nodeType === 8 &&
+					dom.childNodes[i].nodeValue === ptrSplit[0]
+				) {
+					i = i - 1;
+					var textWasBlank = i === 0;
+					var textWasBlankAfterDynBeacon = dom.childNodes[i].nodeType === 8;
+					if (textWasBlank) {
+						dom.prepend(document.createTextNode(""));
 					}
+					if (textWasBlankAfterDynBeacon) {
+						dom.insertBefore(document.createTextNode(""), dom.childNodes[i + 1]);
+					}
+					break;
 				}
 			}
+
 			state.units[ptr] = {
 				// if we've done ssr for a text node, it will be a span,
 				// so we want to get the child node
@@ -128,8 +247,8 @@ export const makeText_ = (runOnJust) => (tryHydration) => (maybe) => (a) => (sta
 			main: document.createTextNode(""),
 			parent: a.parent,
 			scope: a.scope,
+			dynFamily: a.dynFamily
 		};
-		connectXToY_(maybe, ptr, a.parent, state);
 	}
 };
 
@@ -137,6 +256,7 @@ export function makeFFIDOMSnapshot() {
 	return {
 		units: {},
 		scopes: {},
+		allBeacons: {}
 	};
 }
 
@@ -320,9 +440,6 @@ export const makePursx_ = (runOnJust) => (tryHydration) => (maybe) => (a) => (st
 		};
 		state.scopes[scope].push(namespacedKey);
 	});
-	if (!dom) {
-		connectXToY_(maybe, ptr, parent, state);
-	}
 };
 
 export const makeRoot_ = (a) => (state) => () => {
@@ -361,7 +478,6 @@ export const disconnectElement_ = (a) => (state) => () => {
 
 export const deleteFromCache_ = (a) => (state) => () => {
 	if (state.units[a.id]) {
-
 		delete state.units[a.id];
 	}
 };

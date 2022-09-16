@@ -43,7 +43,8 @@ import Bolson.Core as Bolson
 import Control.Monad.ST (ST)
 import Control.Monad.ST.Global (Global)
 import Control.Plus (empty)
-import Data.Maybe (Maybe(..))
+import Data.Foldable (oneOf)
+import Data.Maybe (Maybe(..), maybe)
 import Data.Newtype (class Newtype, unwrap)
 import Data.Profunctor (lcmap)
 import Data.Tuple (curry)
@@ -79,7 +80,8 @@ bussed
   :: forall lock obj a
    . ((a -> Effect Unit) -> Event a -> Domable obj lock)
   -> Domable obj lock
-bussed f = Domable $ Bolson.EventfulElement' (Bolson.EventfulElement (coerce $ bus f))
+bussed f = Domable $ Bolson.EventfulElement'
+  (Bolson.EventfulElement (coerce $ bus f))
 
 bussedUncurried
   :: forall lock obj a
@@ -116,16 +118,16 @@ newtype Node (lock :: Type) payload = Node
     -> Event payload
   )
 
-type  Domable' lock payload = Bolson.Entity Int (Node lock payload) lock
+type Domable' lock payload = Bolson.Entity Int (Node lock payload) lock
 newtype Domable lock payload = Domable (Domable' lock payload)
+
 derive instance Newtype (Domable lock payload) _
 
 instance Semigroup (Domable lock payload) where
-  append a b = fixed [a,b]
+  append a b = fixed [ a, b ]
 
 instance Monoid (Domable lock payload) where
   mempty = Domable (Bolson.envy empty)
-
 
 insert
   :: forall lock payload
@@ -225,7 +227,8 @@ type SendToPos =
   }
 
 type RemoveDynBeacon = { id :: String }
-type MakeDynBeacon = { id :: String, parent :: Maybe String, dynFamily :: String }
+type MakeDynBeacon =
+  { id :: String, parent :: Maybe String, scope :: Scope, dynFamily :: String }
 
 derive instance Newtype (DOMInterpret payload) _
 
@@ -296,14 +299,25 @@ dynify
   -> Domable payload lock
 dynify f es = Domable $ Bolson.Element' (Node go)
   where
-  go { parent, scope, raiseId, pos } di@(DOMInterpret { ids, removeDynBeacon }) =
+  go
+    { parent, scope, raiseId, pos }
+    di@(DOMInterpret { ids, makeDynBeacon, attributeParent, removeDynBeacon }) =
     makeLemmingEvent \mySub k -> do
       me <- ids
       unsub <- mySub
-        ( __internalDekuFlatten
-            { parent, scope, raiseId, pos, dynFamily: Just me }
-            di
-            (f es)
+        ( oneOf
+            [ pure $ makeDynBeacon { id: me, parent, scope, dynFamily: me }
+            , maybe empty
+                ( \p ->
+                    pure $ attributeParent
+                      { id: me, parent: p, pos, dynFamily: Just me }
+                )
+                parent
+            , __internalDekuFlatten
+                { parent, scope, raiseId, pos, dynFamily: Just me }
+                di
+                (f es)
+            ]
         )
         k
       pure do

@@ -10,8 +10,9 @@ import Prelude
 import Bolson.Control as Bolson
 import Bolson.Core (Element(..), Entity(..), PSR)
 import Control.Alt ((<|>))
+import Data.Foldable (oneOf)
 import Control.Plus (empty)
-import Data.Maybe (Maybe(..))
+import Data.Maybe (Maybe(..), maybe)
 import Data.Newtype (unwrap)
 import Safe.Coerce (coerce)
 import Data.Profunctor (lcmap)
@@ -266,8 +267,8 @@ makePursx'
 makePursx' verb html r = Domable $ Element' $ Node go
   where
   go
-    z@{ parent, scope, raiseId, dynFamily }
-    di@(DOMInterpret { makePursx: mpx, ids, deleteFromCache }) =
+    z@{ parent, scope, raiseId, dynFamily, pos }
+    di@(DOMInterpret { makePursx: mpx, ids, deleteFromCache, attributeParent }) =
     makeLemmingEvent \mySub k1 -> do
       me <- ids
       pxScope <- ids
@@ -278,7 +279,7 @@ makePursx' verb html r = Domable $ Element' $ Node go
           (Proxy :: _ rl)
           r
       unsub <- mySub
-          ( ( pure $
+          ( oneOf [pure $
                 mpx
                   { id: me
                   , parent
@@ -289,7 +290,12 @@ makePursx' verb html r = Domable $ Element' $ Node go
                   , html: reflectType html
                   , verb: reflectType verb
                   }
-            ) <|> element z di
+            , element z di
+            , maybe empty
+                ( \p ->
+                    pure $ attributeParent { id: me, parent: p, pos, dynFamily }
+                )
+                parent]
           )
           k1
       pure do

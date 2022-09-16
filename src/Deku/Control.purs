@@ -50,17 +50,6 @@ unsafeElement
   -> payload
 unsafeElement (DOMInterpret { makeElement }) = makeElement
 
-unsafeConnect
-  :: forall payload
-   . DOMInterpret payload
-  -> { id :: String
-     , parent :: String
-     , pos :: Maybe Int
-     , dynFamily :: Maybe String
-     }
-  -> payload
-unsafeConnect (DOMInterpret { attributeParent }) = attributeParent
-
 unsafeText
   :: forall payload
    . DOMInterpret payload
@@ -107,7 +96,7 @@ elementify tag atts children = Node go
   where
   go
     { parent, scope, raiseId, pos, dynFamily }
-    di@(DOMInterpret { ids, deleteFromCache }) =
+    di@(DOMInterpret { ids, deleteFromCache, attributeParent }) =
     makeLemmingEvent \mySub k -> do
       me <- ids
       raiseId me
@@ -118,9 +107,8 @@ elementify tag atts children = Node go
                 , unsafeSetAttribute di me atts
                 ] <> maybe []
                   ( \p ->
-                      [ pure
-                          $ unsafeConnect di
-                          $ { id: me, parent: p, pos, dynFamily }
+                      [ pure $ attributeParent
+                          { id: me, parent: p, pos, dynFamily }
                       ]
                   )
                   parent
@@ -223,8 +211,8 @@ text
 text txt = Domable $ Element' $ Node go
   where
   go
-    { parent, scope, raiseId, dynFamily }
-    di@(DOMInterpret { ids, deleteFromCache }) =
+    { parent, scope, raiseId, dynFamily, pos }
+    di@(DOMInterpret { ids, deleteFromCache, attributeParent }) =
     makeLemmingEvent \mySub k -> do
       me <- ids
       raiseId me
@@ -232,6 +220,12 @@ text txt = Domable $ Element' $ Node go
         ( oneOf
             [ pure (unsafeText di { id: me, parent, scope, dynFamily })
             , unsafeSetText di me txt
+            , maybe empty
+                ( \p ->
+                    pure $ attributeParent
+                      { id: me, parent: p, pos, dynFamily }
+                )
+                parent
             ]
         )
         k
@@ -309,7 +303,6 @@ ezDyn e1 = dyn
               (unsafeCoerce (f1 { remove: setRm unit, sendToPos: setStp }))
           )
   )
-
 
 blank :: Nut
 blank = Domable $ BCore.envy empty
