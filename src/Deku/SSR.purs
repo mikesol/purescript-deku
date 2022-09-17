@@ -99,19 +99,11 @@ ssr' topTag arr = "<" <> topTag <> " data-deku-ssr-deku-root=\"true\">"
                 (encodedString text <> "<!--" <> id <> "-->")
               _ -> Nothing
           )
-        makeDynBeacon _ = do
-          let dp = eltDynFamily i2a
-          i2a #
-            ( fromMaybe "" <<< findMap case _ of
-                SetText { text } -> Just $
-                  (encodedString text <> "<!--" <> id <> maybe "" ("@-@" <> _) dp <> "-->")
-                _ -> Nothing
-            )
+        makeDynBeacon _ =  "<!--%-%" <> id <> "--><!--%-%" <> id <> "%-%-->"
         makeElt _ = do
           let tag = eltTag i2a
           let atts = eltAtts i2a
-          let dp = eltDynFamily i2a
-          "<" <> tag <> " " <> atts <> " data-deku-ssr-" <> id <> "=\"true\"" <> maybe "" (\i -> " data-deku-dyn=\"" <> i <> "\"") dp <> ">"
+          "<" <> tag <> " " <> atts <> " data-deku-ssr-" <> id <> "=\"true\">"
             <> o id
             <> "</"
             <> tag
@@ -126,13 +118,6 @@ ssr' topTag arr = "<" <> topTag <> " data-deku-ssr-deku-root=\"true\">"
   eltTag i2a = i2a #
     ( fromMaybe "" <<< findMap case _ of
         MakeElement { tag } -> Just tag
-        _ -> Nothing
-    )
-  eltDynFamily i2a = i2a #
-    ( findMap case _ of
-        MakeElement { dynFamily } -> dynFamily
-        MakeText { dynFamily } -> dynFamily
-        MakeDynBeacon { dynFamily } -> dynFamily
         _ -> Nothing
     )
   eltAtts i2a = i2a #

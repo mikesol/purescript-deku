@@ -134,12 +134,12 @@ export const getAllComments = (state) => () => {
 	}
 
 	function getAllComments(rootElem) {
-		// Fourth argument, which is actually obsolete according to the DOM4 standard, is required in IE 11
 		var iterator = document.createNodeIterator(rootElem, NodeFilter.SHOW_COMMENT, filterNone, false);
 		var curNode;
 		while (curNode = iterator.nextNode()) {
-			if (curNode.value.substring(0, 3) === '%-%')
-				state.allBeacons[curNode.value.substring(3)] = curNode;
+			if (curNode.nodeValue.substring(0, 3) === '%-%') {
+				state.allBeacons[curNode.nodeValue.substring(3)] = curNode;
+			}
 		}
 	}
 
@@ -159,7 +159,7 @@ export const makeDynBeacon_ = (runOnJust) => (tryHydration) => (a) => (state) =>
 			state.hydrating &&
 			tryHydration &&
 			(startBeacon = state.allBeacons[a.id]) &&
-			(endBeacon = state.allBeacons[`${a.id}'%-%'`])
+			(endBeacon = state.allBeacons[`${a.id}%-%`])
 		) {
 			state.units[ptr] = {
 				listeners: {},
@@ -253,7 +253,6 @@ export const makeText_ = (runOnJust) => (tryHydration) => (maybe) => (a) => (sta
 				.querySelectorAll("[data-deku-ssr-" + parent + "]")
 				.item(0))
 		) {
-
 			var i = 0;
 			for (; i < dom.childNodes.length; i++) {
 				const ptrSplit = ptr.split('@-@');
@@ -262,7 +261,7 @@ export const makeText_ = (runOnJust) => (tryHydration) => (maybe) => (a) => (sta
 					dom.childNodes[i].nodeValue === ptrSplit[0]
 				) {
 					i = i - 1;
-					var textWasBlank = i === 0;
+					var textWasBlank = i === -1;
 					var textWasBlankAfterDynBeacon = dom.childNodes[i].nodeType === 8;
 					if (textWasBlank) {
 						dom.prepend(document.createTextNode(""));
@@ -391,7 +390,6 @@ export const setCb_ = (tryHydration) => (a) => (state) => () => {
 
 export const setText_ = (a) => (state) => () => {
 	if (state.units[a.id]) {
-
 		var ptr = a.id;
 		state.units[ptr].main.nodeValue = a.text;
 	}
