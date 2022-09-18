@@ -5,6 +5,8 @@ module Deku.Interpret
   , ssrDOMInterpret
   , hydratingDOMInterpret
   , Instruction(..)
+  , EliminatableInstruction(..)
+  , RenderableInstruction(..)
   , setHydrating
   , unSetHydrating
   , getAllComments
@@ -137,40 +139,92 @@ fullDOMInterpret seed = Core.DOMInterpret
   , disconnectElement: disconnectElement_
   }
 
-data Instruction
+data RenderableInstruction
   = MakeElement Core.MakeElement
   | MakeText Core.MakeText
-  | MakeDynBeacon Core.MakeDynBeacon
+  | MakeOpenDynBeacon Core.MakeDynBeacon
+  | MakeCloseDynBeacon Core.MakeDynBeacon
   | MakePursx Core.MakePursx
   | SetProp Core.SetProp
   | SetText Core.SetText
 
+data EliminatableInstruction
+  = SendToPos Core.SendToPos
+  | GiveNewParent Core.GiveNewParent
+  | DisconnectElement Core.DisconnectElement
+  | RemoveDynBeacon Core.RemoveDynBeacon
+  | DeleteFromCache Core.DeleteFromCache
+
+data Instruction
+  = RenderableInstruction RenderableInstruction
+  | EliminatableInstruction EliminatableInstruction
+
 ssrMakeElement
   :: forall r. Core.MakeElement -> Ref.STRef r (Array Instruction) -> ST r Unit
-ssrMakeElement a i = void $ Ref.modify (_ <> [ MakeElement a ]) i
+ssrMakeElement a i = void $ Ref.modify
+  (_ <> [ RenderableInstruction $ MakeElement a ])
+  i
 
 ssrMakeDynBeacon
   :: forall r
    . Core.MakeDynBeacon
   -> Ref.STRef r (Array Instruction)
   -> ST r Unit
-ssrMakeDynBeacon a i = void $ Ref.modify (_ <> [ MakeDynBeacon a ]) i
+ssrMakeDynBeacon a i = void $ Ref.modify
+  ( _ <>
+      [ RenderableInstruction $ MakeOpenDynBeacon a
+      , RenderableInstruction $ MakeCloseDynBeacon a
+      ]
+  )
+  i
 
 ssrMakeText
   :: forall r. Core.MakeText -> Ref.STRef r (Array Instruction) -> ST r Unit
-ssrMakeText a i = void $ Ref.modify (_ <> [ MakeText a ]) i
+ssrMakeText a i = void $ Ref.modify
+  (_ <> [ RenderableInstruction $ MakeText a ])
+  i
 
 ssrMakePursx
   :: forall r. Core.MakePursx -> Ref.STRef r (Array Instruction) -> ST r Unit
-ssrMakePursx a i = void $ Ref.modify (_ <> [ MakePursx a ]) i
+ssrMakePursx a i = void $ Ref.modify
+  (_ <> [ RenderableInstruction $ MakePursx a ])
+  i
 
 ssrSetProp
   :: forall r. Core.SetProp -> Ref.STRef r (Array Instruction) -> ST r Unit
-ssrSetProp a i = void $ Ref.modify (_ <> [ SetProp a ]) i
+ssrSetProp a i = void $ Ref.modify (_ <> [ RenderableInstruction $ SetProp a ])
+  i
 
 ssrSetText
   :: forall r. Core.SetText -> Ref.STRef r (Array Instruction) -> ST r Unit
-ssrSetText a i = void $ Ref.modify (_ <> [ SetText a ]) i
+ssrSetText a i = void $ Ref.modify (_ <> [ RenderableInstruction $ SetText a ])
+  i
+
+ssrGiveNewParent
+  :: forall r. Core.GiveNewParent -> Ref.STRef r (Array Instruction) -> ST r Unit
+ssrGiveNewParent a i = void $ Ref.modify (_ <> [ EliminatableInstruction $ GiveNewParent a ])
+  i
+
+ssrSendToPos
+  :: forall r. Core.SendToPos -> Ref.STRef r (Array Instruction) -> ST r Unit
+ssrSendToPos a i = void $ Ref.modify (_ <> [ EliminatableInstruction $ SendToPos a ])
+  i
+
+ssrDeleteFromCache
+  :: forall r. Core.DeleteFromCache -> Ref.STRef r (Array Instruction) -> ST r Unit
+ssrDeleteFromCache a i = void $ Ref.modify (_ <> [ EliminatableInstruction $ DeleteFromCache a ])
+  i
+
+ssrRemoveDynBeacon
+  :: forall r. Core.DeleteFromCache -> Ref.STRef r (Array Instruction) -> ST r Unit
+ssrRemoveDynBeacon a i = void $ Ref.modify (_ <> [ EliminatableInstruction $ RemoveDynBeacon a ])
+  i
+
+
+ssrDisconnectElement
+  :: forall r. Core.DisconnectElement -> Ref.STRef r (Array Instruction) -> ST r Unit
+ssrDisconnectElement a i = void $ Ref.modify (_ <> [ EliminatableInstruction $ DisconnectElement a ])
+  i
 
 ssrDOMInterpret
   :: Ref.STRef Global Int
@@ -192,11 +246,11 @@ ssrDOMInterpret seed = Core.DOMInterpret
   , makeDynBeacon: ssrMakeDynBeacon
   , setCb: \_ _ -> pure unit
   , setText: ssrSetText
-  , sendToPos: \_ _ -> pure unit
-  , deleteFromCache: \_ _ -> pure unit
-  , removeDynBeacon: \_ _ -> pure unit
-  , giveNewParent: \_ _ -> pure unit
-  , disconnectElement: \_ _ -> pure unit
+  , sendToPos: ssrSendToPos
+  , deleteFromCache: ssrDeleteFromCache
+  , removeDynBeacon: ssrRemoveDynBeacon
+  , giveNewParent: ssrGiveNewParent
+  , disconnectElement: ssrDisconnectElement
   }
 
 sendToPos :: Core.SendToPos -> FFIDOMSnapshot -> Effect Unit

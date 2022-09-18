@@ -4,14 +4,17 @@ import Prelude
 
 import Control.Monad.State (execState, modify)
 import Data.Array (find, findMap, (!!))
+import Data.Array as Array
+import Data.CatList as List
 import Data.Filterable (filterMap)
 import Data.FoldableWithIndex (foldlWithIndex)
 import Data.Map as Map
 import Data.Maybe (Maybe(..), fromMaybe, isJust, maybe)
 import Data.String as String
 import Data.Traversable (foldMap, for_, intercalate, traverse)
+import Data.Tuple.Nested ((/\))
 import Deku.Core as Core
-import Deku.Interpret (Instruction(..))
+import Deku.Interpret (EliminatableInstruction(..), Instruction(..), RenderableInstruction(..))
 
 foreign import encodedString :: String -> String
 foreign import doPursxReplacements :: Core.MakePursx -> String
@@ -20,12 +23,106 @@ ssr :: Array Instruction -> String
 ssr = ssr' "body"
 
 ssr' :: String -> Array Instruction -> String
-ssr' topTag arr = "<" <> topTag <> " data-deku-ssr-deku-root=\"true\">"
+ssr' topTag arr' = "<" <> topTag <> " data-deku-ssr-deku-root=\"true\">"
   <> oo "deku-root"
   <> "</"
   <> topTag
   <> ">"
   where
+  arr = instructionsToRenderableInstructions arr'
+
+  instructionsToRenderableInstructions
+    :: Array Instruction -> List.CatList RenderableInstruction
+  instructionsToRenderableInstructions aa = go
+    where
+    go = moveClosingsToEnd [] List.empty $ doEliminations List.empty asList
+    moveClosingsToEnd processed cl q = case List.uncons q of
+      Just (MakeCloseDynBeacon i /\ rest)
+        | Array.elem i.id processed -> moveClosingsToEnd processed
+            (List.snoc cl (MakeCloseDynBeacon i))
+            rest
+        | otherwise -> moveClosingsToEnd ([ i.id ] <> processed) cl $
+            moveClosingToEnd List.empty List.empty i rest
+      Just (i /\ rest) -> moveClosingsToEnd processed (List.snoc cl i) rest
+      Nothing -> cl
+
+    moveClosingToEnd
+      :: List.CatList RenderableInstruction
+      -> List.CatList RenderableInstruction
+      -> Core.MakeDynBeacon
+      -> List.CatList RenderableInstruction
+      -> List.CatList RenderableInstruction
+    moveClosingToEnd staging1 staging2 dbc = List.uncons >>> case _ of
+      Just (inst@((MakeOpenDynBeacon odb)) /\ rest)
+        | odb.dynFamily == Just dbc.id -> moveClosingToEnd
+            (List.snoc (staging1 <> staging2) inst)
+            List.empty
+            dbc
+            rest
+        | otherwise -> moveClosingToEnd staging1 (List.snoc staging2 inst) dbc
+            rest
+      Just (inst@((MakeCloseDynBeacon cdb)) /\ rest)
+        | cdb.dynFamily == Just dbc.id -> moveClosingToEnd
+            (List.snoc (staging1 <> staging2) inst)
+            List.empty
+            dbc
+            rest
+        | otherwise -> moveClosingToEnd staging1 (List.snoc staging2 inst) dbc
+            rest
+      Just (inst@((MakeText txt)) /\ rest)
+        | txt.dynFamily == Just dbc.id -> moveClosingToEnd
+            (List.snoc (staging1 <> staging2) inst)
+            List.empty
+            dbc
+            rest
+        | otherwise -> moveClosingToEnd staging1 (List.snoc staging2 inst) dbc
+            rest
+      Just (inst@((MakePursx px)) /\ rest)
+        | px.dynFamily == Just dbc.id -> moveClosingToEnd
+            (List.snoc (staging1 <> staging2) inst)
+            List.empty
+            dbc
+            rest
+        | otherwise -> moveClosingToEnd staging1 (List.snoc staging2 inst) dbc
+            rest
+      Just (inst@((MakeElement me)) /\ rest)
+        | me.dynFamily == Just dbc.id -> moveClosingToEnd
+            (List.snoc (staging1 <> staging2) inst)
+            List.empty
+            dbc
+            rest
+        | otherwise -> moveClosingToEnd staging1 (List.snoc staging2 inst) dbc
+            rest
+      Just (inst@((SetProp _)) /\ rest) -> moveClosingToEnd staging1 (List.snoc staging2 inst) dbc
+            rest
+      Just (inst@((SetText _)) /\ rest) -> moveClosingToEnd staging1 (List.snoc staging2 inst) dbc
+            rest
+      Nothing -> staging1 <> pure ((MakeCloseDynBeacon dbc)) <> staging2
+    doEliminations cl = List.uncons >>> case _ of
+      Just (RenderableInstruction i /\ rest) -> doEliminations (List.snoc cl i)
+        rest
+      Just (EliminatableInstruction (SendToPos stp) /\ rest) -> doEliminations
+        cl
+        rest
+      Just (EliminatableInstruction (GiveNewParent gnp) /\ rest) ->
+        doEliminations cl rest
+      Just (EliminatableInstruction (DisconnectElement dce) /\ rest) ->
+        doEliminations cl rest
+      Just (EliminatableInstruction (RemoveDynBeacon rdb) /\ rest) ->
+        doEliminations cl rest
+      Just (EliminatableInstruction (DeleteFromCache dfc) /\ rest) ->
+        doEliminations (doDeleteFromCache List.empty dfc.id cl) rest
+      Nothing -> cl
+    doDeleteFromCache cl id' = List.uncons >>> case _ of
+            Just (elt@(MakeElement { id }) /\ rest) -> if id == id' then doDeleteFromCache cl id' rest else doDeleteFromCache (List.snoc cl elt) id' rest 
+            Just (elt@(MakeText { id }) /\ rest) -> if id == id' then doDeleteFromCache cl id' rest else doDeleteFromCache (List.snoc cl elt) id' rest 
+            Just (elt@(MakePursx { id }) /\ rest) -> if id == id' then doDeleteFromCache cl id' rest else doDeleteFromCache (List.snoc cl elt) id' rest 
+            Just (elt@(MakeOpenDynBeacon { id }) /\ rest) -> if id == id' then doDeleteFromCache cl id' rest else doDeleteFromCache (List.snoc cl elt) id' rest 
+            Just (elt@(MakeCloseDynBeacon { id })  /\ rest)-> if id == id' then doDeleteFromCache cl id' rest else doDeleteFromCache (List.snoc cl elt) id' rest 
+            Just (elt@(SetProp { id }) /\ rest) -> if id == id' then doDeleteFromCache cl id' rest else doDeleteFromCache (List.snoc cl elt) id' rest 
+            Just (elt@(SetText { id }) /\ rest) -> if id == id' then doDeleteFromCache cl id' rest else doDeleteFromCache (List.snoc cl elt) id' rest 
+            Nothing -> cl
+    asList = List.fromFoldable aa
   making parent id action = do
     void $ modify
       ( \s -> s
@@ -59,7 +156,8 @@ ssr' topTag arr = "<" <> topTag <> " data-deku-ssr-deku-root=\"true\">"
             MakeElement { parent, id } -> for_ parent \p -> making p id i
             MakeText { parent, id } -> for_ parent \p -> making p id i
             MakePursx { parent, id } -> for_ parent \p -> making p id i
-            MakeDynBeacon { parent, id } -> for_ parent \p -> making p id i
+            MakeOpenDynBeacon { parent, id } -> for_ parent \p -> making p id i
+            MakeCloseDynBeacon { parent, id } -> for_ parent \p -> making p id i
             SetProp { id } -> setting id i
             SetText { id } -> setting id i
         )
@@ -70,7 +168,8 @@ ssr' topTag arr = "<" <> topTag <> " data-deku-ssr-deku-root=\"true\">"
     ( case _ of
         MakeElement _ -> true
         MakeText _ -> true
-        MakeDynBeacon _ -> true
+        MakeOpenDynBeacon _ -> true
+        MakeCloseDynBeacon _ -> true
         _ -> false
     )
     a
@@ -99,7 +198,8 @@ ssr' topTag arr = "<" <> topTag <> " data-deku-ssr-deku-root=\"true\">"
                 (encodedString text <> "<!--" <> id <> "-->")
               _ -> Nothing
           )
-        makeDynBeacon _ =  "<!--%-%" <> id <> "--><!--%-%" <> id <> "%-%-->"
+        makeOpenDynBeacon _ = "<!--%-%" <> id <> "-->"
+        makeCloseDynBeacon _ = "<!--%-%" <> id <> "%-%-->"
         makeElt _ = do
           let tag = eltTag i2a
           let atts = eltAtts i2a
@@ -111,7 +211,8 @@ ssr' topTag arr = "<" <> topTag <> " data-deku-ssr-deku-root=\"true\">"
       case i2a !! 0 of
         Just (SetText _) -> makeText unit
         Just (MakeText _) -> makeText unit
-        Just (MakeDynBeacon _) -> makeDynBeacon unit
+        Just (MakeOpenDynBeacon _) -> makeOpenDynBeacon unit
+        Just (MakeCloseDynBeacon _) -> makeCloseDynBeacon unit
         -- todo: strip styling from div
         Just (MakePursx mpx) -> doPursxReplacements mpx
         _ -> makeElt unit

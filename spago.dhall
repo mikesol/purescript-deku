@@ -3,6 +3,7 @@
   [ "aff"
   , "arrays"
   , "bolson"
+  , "catenable-lists"
   , "control"
   , "effect"
   , "fast-vect"
@@ -10,6 +11,7 @@
   , "foldable-traversable"
   , "foreign-object"
   , "hyrule"
+  , "lists"
   , "maybe"
   , "newtype"
   , "ordered-collections"
@@ -33,4 +35,3 @@
 , repository = "https://github.com/mikesol/purescript-deku"
 , sources = [ "src/**/*.purs" ]
 }
-
