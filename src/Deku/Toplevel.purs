@@ -4,6 +4,7 @@ import Prelude
 
 import Bolson.Control as Bolson
 import Bolson.Core (Element(..), PSR, Scope(..))
+import Control.Alt ((<|>))
 import Control.Monad.ST (ST)
 import Control.Monad.ST.Class (liftST)
 import Control.Monad.ST.Global (Global)
@@ -18,6 +19,7 @@ import Effect (Effect)
 import FRP.Event (Event, subscribe, subscribePure)
 import Safe.Coerce (coerce)
 import Unsafe.Coerce (unsafeCoerce)
+import Web.DOM.Element as DOM
 import Web.DOM.Element as Web.DOM
 import Web.HTML (window)
 import Web.HTML.HTMLDocument (body)
@@ -48,6 +50,8 @@ runInBody a = void (runInBody' a)
 
 --
 
+foreign import dekuRoot :: Effect DOM.Element
+
 hydrate'
   :: (forall lock. Domable lock (FFIDOMSnapshot -> Effect Unit))
   -> Effect (Effect Unit)
@@ -56,8 +60,10 @@ hydrate' children = do
   getAllComments ffi
   di <- liftST (RRef.new 0) <#> hydratingDOMInterpret
   setHydrating ffi
+  let me = "deku-root"
+  root <- dekuRoot
   u <- subscribe
-    ( __internalDekuFlatten
+    ( pure ((unwrap di).makeRoot { id: me, root }) <|> __internalDekuFlatten
         { parent: Just "deku-root"
         , scope: Local "rootScope"
         , raiseId: \_ -> pure unit

@@ -5,7 +5,7 @@ import Prelude
 import Control.Monad.ST.Global (Global)
 import Control.Monad.ST.Internal (ST)
 import Control.Monad.ST.Internal as RRef
-import Data.Foldable (oneOf)
+import Data.Foldable (intercalate, oneOf)
 import Data.Tuple.Nested ((/\))
 import Deku.Attributes (id_)
 import Deku.Control (text_)
@@ -105,3 +105,7 @@ deeplyNestedPreservesOrder = Deku.do
     , D.span (id_ "div1") [ text_ "bar" ]
     , mydyn 0
     ]
+
+-- why intercalate with mempty? why not!
+isAMonoid :: Nut
+isAMonoid = intercalate mempty $ map text_ ["m", "o", "n", "o", "i", "d"]

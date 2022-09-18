@@ -3,7 +3,7 @@ const tests = require('./output/Test.Main');
 const doTest = (name, closure, onlyWithSSR) => {
   (onlyWithSSR === false ? it.only : it)(name + ' without SSR', () => {
     closure((myTest, myScript) => {
-      document.getElementsByTagName('html')[0].innerHTML = '<head></head><body></body>';
+      document.getElementsByTagName('html')[0].innerHTML = '<head></head><body id=\"mybody\"></body>';
       const finished = tests.runNoSSR(myTest)();
       myScript(false);
       finished();
@@ -13,6 +13,8 @@ const doTest = (name, closure, onlyWithSSR) => {
     closure((myTest, myScript) => {
       const myHtml = tests.ssr(myTest)();
       document.getElementsByTagName('html')[0].innerHTML = myHtml;
+      const $ = require('jquery');
+      $('body').attr('id','mybody');
       const finished = tests.runWithSSR(myTest)();
       myScript(true);
       finished();
@@ -79,3 +81,8 @@ describe('deku', () => {
     expect($('#incr-2').index()).toBeLessThan($('#dyn0-2').index());
   }));
 });
+
+doTest('domable is a monoid', (f) => f(tests.isAMonoid, () => {
+  const $ = require('jquery');
+  expect($('#mybody').text()).toBe('monoid');
+}));

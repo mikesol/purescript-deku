@@ -5,7 +5,7 @@ import Prelude
 import Control.Monad.State (execState, modify)
 import Data.Array (find, findMap, (!!))
 import Data.Array as Array
-import Data.CatList as List
+import Data.CatQueue as Queue
 import Data.Filterable (filterMap)
 import Data.FoldableWithIndex (foldlWithIndex)
 import Data.Function (on)
@@ -24,102 +24,106 @@ ssr :: Array Instruction -> String
 ssr = ssr' "body"
 
 ssr' :: String -> Array Instruction -> String
-ssr' topTag arr' = "<" <> topTag <> " data-deku-ssr-deku-root=\"true\">"
-  <> oo "deku-root"
+ssr' topTag arr' = "<" <> topTag <> " data-deku-ssr-deku-root=\"true\" data-deku-root=\"" <> rootId <> "\">"
+  <> oo rootId
   <> "</"
   <> topTag
   <> ">"
   where
+  rootId = fromMaybe "deku-root" $ Array.findMap
+    ( case _ of
+        EliminatableInstruction (MakeRoot { id }) -> Just id
+        _ -> Nothing
+    )
+    arr'
   arr = instructionsToRenderableInstructions arr'
 
   instructionsToRenderableInstructions
-    :: Array Instruction -> List.CatList RenderableInstruction
+    :: Array Instruction -> Queue.CatQueue RenderableInstruction
   instructionsToRenderableInstructions aa = go
     where
-    go = moveClosingsToEnd [] List.empty $ doEliminations List.empty asList
-    moveClosingsToEnd processed cl q = case List.uncons q of
-      Just (MakeCloseDynBeacon i /\ rest)
-        | Array.elem i.id processed -> moveClosingsToEnd processed
-            -- because of the way sorting works
-            -- the id needs to be the id that will be in the real cache
-            -- so we append %-%, as we do in Interpret.purs
-            -- otherwise one ID will overwrite the other in the map below
-            (List.snoc cl (MakeCloseDynBeacon (i { id = i.id <> "%-%" })))
-            rest
-        | otherwise -> moveClosingsToEnd ([ i.id ] <> processed) cl $
-            moveClosingToEnd List.empty List.empty i rest
-      Just (i /\ rest) -> moveClosingsToEnd processed (List.snoc cl i) rest
+    go = moveClosingsToEnd Queue.empty beforeClosingsMoved
+    beforeClosingsMoved = doEliminations Queue.empty asList
+    moveClosingsToEnd cl = Queue.unsnoc >>> case _ of
+      Just (MakeCloseDynBeacon i /\ rest) -> moveClosingsToEnd
+        (moveClosingToEnd Queue.empty Queue.empty i cl)
+        rest
+      Just (i /\ rest) -> moveClosingsToEnd (Queue.cons i cl) rest
       Nothing -> cl
 
     moveClosingToEnd
-      :: List.CatList RenderableInstruction
-      -> List.CatList RenderableInstruction
+      :: Queue.CatQueue RenderableInstruction
+      -> Queue.CatQueue RenderableInstruction
       -> Core.MakeDynBeacon
-      -> List.CatList RenderableInstruction
-      -> List.CatList RenderableInstruction
-    moveClosingToEnd staging1 staging2 dbc = List.uncons >>> case _ of
+      -> Queue.CatQueue RenderableInstruction
+      -> Queue.CatQueue RenderableInstruction
+    moveClosingToEnd staging1 staging2 dbc = Queue.uncons >>> case _ of
       Just (inst@((MakeOpenDynBeacon odb)) /\ rest)
         | odb.dynFamily == Just dbc.id -> moveClosingToEnd
-            (List.snoc (staging1 <> staging2) inst)
-            List.empty
+            (Queue.snoc (staging1 <> staging2) inst)
+            Queue.empty
             dbc
             rest
-        | otherwise -> moveClosingToEnd staging1 (List.snoc staging2 inst) dbc
+        | otherwise -> moveClosingToEnd staging1 (Queue.snoc staging2 inst) dbc
             rest
       Just (inst@((MakeCloseDynBeacon cdb)) /\ rest)
         | cdb.dynFamily == Just dbc.id -> moveClosingToEnd
-            (List.snoc (staging1 <> staging2) inst)
-            List.empty
+            (Queue.snoc (staging1 <> staging2) inst)
+            Queue.empty
             dbc
             rest
-        | otherwise -> moveClosingToEnd staging1 (List.snoc staging2 inst) dbc
+        | otherwise -> moveClosingToEnd staging1 (Queue.snoc staging2 inst) dbc
             rest
       Just (inst@((MakeText txt)) /\ rest)
         | txt.dynFamily == Just dbc.id -> moveClosingToEnd
-            (List.snoc (staging1 <> staging2) inst)
-            List.empty
+            (Queue.snoc (staging1 <> staging2) inst)
+            Queue.empty
             dbc
             rest
-        | otherwise -> moveClosingToEnd staging1 (List.snoc staging2 inst) dbc
+        | otherwise -> moveClosingToEnd staging1 (Queue.snoc staging2 inst) dbc
             rest
       Just (inst@((MakePursx px)) /\ rest)
         | px.dynFamily == Just dbc.id -> moveClosingToEnd
-            (List.snoc (staging1 <> staging2) inst)
-            List.empty
+            (Queue.snoc (staging1 <> staging2) inst)
+            Queue.empty
             dbc
             rest
-        | otherwise -> moveClosingToEnd staging1 (List.snoc staging2 inst) dbc
+        | otherwise -> moveClosingToEnd staging1 (Queue.snoc staging2 inst) dbc
             rest
       Just (inst@((MakeElement me)) /\ rest)
         | me.dynFamily == Just dbc.id -> moveClosingToEnd
-            (List.snoc (staging1 <> staging2) inst)
-            List.empty
+            (Queue.snoc (staging1 <> staging2) inst)
+            Queue.empty
             dbc
             rest
-        | otherwise -> moveClosingToEnd staging1 (List.snoc staging2 inst) dbc
+        | otherwise -> moveClosingToEnd staging1 (Queue.snoc staging2 inst) dbc
             rest
       Just (inst@((SetProp _)) /\ rest) -> moveClosingToEnd staging1
-        (List.snoc staging2 inst)
+        (Queue.snoc staging2 inst)
         dbc
         rest
       Just (inst@((SetText _)) /\ rest) -> moveClosingToEnd staging1
-        (List.snoc staging2 inst)
+        (Queue.snoc staging2 inst)
         dbc
         rest
-      Nothing -> staging1 <> pure ((MakeCloseDynBeacon dbc)) <> staging2
-    doEliminations cl = List.uncons >>> case _ of
-      Just (RenderableInstruction i /\ rest) -> doEliminations (List.snoc cl i)
+      Nothing -> staging1
+        <> pure ((MakeCloseDynBeacon (dbc { id = dbc.id <> "%-%" })))
+        <> staging2
+    doEliminations cl = Queue.uncons >>> case _ of
+      Just (RenderableInstruction i /\ rest) -> doEliminations (Queue.snoc cl i)
         rest
       Just (EliminatableInstruction (SendToPos stp) /\ rest) ->
         doEliminations (sendPos stp.id stp.pos <$> cl) rest
+      Just (EliminatableInstruction (MakeRoot _) /\ rest) ->
+        doEliminations cl rest
       Just (EliminatableInstruction (GiveNewParent gnp) /\ rest) ->
         doEliminations (giveParent gnp.id gnp.parent <$> cl) rest
       Just (EliminatableInstruction (DisconnectElement dce) /\ rest) ->
         doEliminations (removeParent dce.id <$> cl) rest
       Just (EliminatableInstruction (RemoveDynBeacon rdb) /\ rest) ->
-        doEliminations (doDeleteFromCache List.empty rdb.id cl) rest
+        doEliminations (doDeleteFromCache Queue.empty rdb.id cl) rest
       Just (EliminatableInstruction (DeleteFromCache dfc) /\ rest) ->
-        doEliminations (doDeleteFromCache List.empty dfc.id cl) rest
+        doEliminations (doDeleteFromCache Queue.empty dfc.id cl) rest
       Nothing -> cl
     sendPos id' pos' = case _ of
       elt@(MakeElement elt'@({ id, dynFamily })) ->
@@ -191,30 +195,30 @@ ssr' topTag arr' = "<" <> topTag <> " data-deku-ssr-deku-root=\"true\">"
       elt@(SetText _) -> elt
       elt@(SetProp _) -> elt
 
-    doDeleteFromCache cl id' = List.uncons >>> case _ of
+    doDeleteFromCache cl id' = Queue.uncons >>> case _ of
       Just (elt@(MakeElement { id }) /\ rest) ->
         if id == id' then doDeleteFromCache cl id' rest
-        else doDeleteFromCache (List.snoc cl elt) id' rest
+        else doDeleteFromCache (Queue.snoc cl elt) id' rest
       Just (elt@(MakeText { id }) /\ rest) ->
         if id == id' then doDeleteFromCache cl id' rest
-        else doDeleteFromCache (List.snoc cl elt) id' rest
+        else doDeleteFromCache (Queue.snoc cl elt) id' rest
       Just (elt@(MakePursx { id }) /\ rest) ->
         if id == id' then doDeleteFromCache cl id' rest
-        else doDeleteFromCache (List.snoc cl elt) id' rest
+        else doDeleteFromCache (Queue.snoc cl elt) id' rest
       Just (elt@(MakeOpenDynBeacon { id }) /\ rest) ->
         if id == id' then doDeleteFromCache cl id' rest
-        else doDeleteFromCache (List.snoc cl elt) id' rest
+        else doDeleteFromCache (Queue.snoc cl elt) id' rest
       Just (elt@(MakeCloseDynBeacon { id }) /\ rest) ->
         if id == id' then doDeleteFromCache cl id' rest
-        else doDeleteFromCache (List.snoc cl elt) id' rest
+        else doDeleteFromCache (Queue.snoc cl elt) id' rest
       Just (elt@(SetProp { id }) /\ rest) ->
         if id == id' then doDeleteFromCache cl id' rest
-        else doDeleteFromCache (List.snoc cl elt) id' rest
+        else doDeleteFromCache (Queue.snoc cl elt) id' rest
       Just (elt@(SetText { id }) /\ rest) ->
         if id == id' then doDeleteFromCache cl id' rest
-        else doDeleteFromCache (List.snoc cl elt) id' rest
+        else doDeleteFromCache (Queue.snoc cl elt) id' rest
       Nothing -> cl
-    asList = List.fromFoldable aa
+    asList = Queue.fromFoldable aa
   making parent id action = do
     void $ modify
       ( \s -> s

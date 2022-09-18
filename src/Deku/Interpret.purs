@@ -150,6 +150,7 @@ data RenderableInstruction
 
 data EliminatableInstruction
   = SendToPos Core.SendToPos
+  | MakeRoot Core.MakeRoot
   | GiveNewParent Core.GiveNewParent
   | DisconnectElement Core.DisconnectElement
   | RemoveDynBeacon Core.RemoveDynBeacon
@@ -204,6 +205,10 @@ ssrGiveNewParent
   :: forall r. Core.GiveNewParent -> Ref.STRef r (Array Instruction) -> ST r Unit
 ssrGiveNewParent a i = void $ Ref.modify (_ <> [ EliminatableInstruction $ GiveNewParent a ])
   i
+ssrMakeRoot
+  :: forall r. Core.MakeRoot -> Ref.STRef r (Array Instruction) -> ST r Unit
+ssrMakeRoot a i = void $ Ref.modify (_ <> [ EliminatableInstruction $ MakeRoot a ])
+  i
 
 ssrSendToPos
   :: forall r. Core.SendToPos -> Ref.STRef r (Array Instruction) -> ST r Unit
@@ -239,7 +244,7 @@ ssrDOMInterpret seed = Core.DOMInterpret
       pure o
   , makeElement: ssrMakeElement
   , attributeParent: \_ _ -> pure unit
-  , makeRoot: \_ _ -> pure unit
+  , makeRoot: ssrMakeRoot
   , makeText: ssrMakeText
   , makePursx: ssrMakePursx
   , setProp: ssrSetProp

@@ -143,7 +143,7 @@ export const getAllComments = (state) => () => {
 		}
 	}
 
-	getAllComments(document.body);
+	getAllComments(document.documentElement);
 }
 export const makeDynBeacon_ = (runOnJust) => (tryHydration) => (a) => (state) => () => {
 	var startBeacon;
@@ -203,7 +203,7 @@ export const makeElement_ = (runOnJust) => (tryHydration) => (a) => (state) => (
 		if (
 			state.hydrating &&
 			tryHydration &&
-			(dom = document.body
+			(dom = document.documentElement
 				.querySelectorAll("[data-deku-ssr-" + ptr + "]")
 				.item(0))
 		) {
@@ -248,7 +248,7 @@ export const makeText_ = (runOnJust) => (tryHydration) => (maybe) => (a) => (sta
 			state.hydrating &&
 			tryHydration &&
 			// hack
-			(dom = document.body
+			(dom = document.documentElement
 				// hack
 				.querySelectorAll("[data-deku-ssr-" + parent + "]")
 				.item(0))
@@ -319,7 +319,7 @@ export const setProp_ = (tryHydration) => (a) => (state) => () => {
 			state.hydrating &&
 			tryHydration &&
 			!state.units[ptr] &&
-			(dom = document.body
+			(dom = document.documentElement
 				.querySelectorAll("[data-deku-ssr-" + ptr + "]")
 				.item(0))
 		) {
@@ -357,7 +357,7 @@ export const setCb_ = (tryHydration) => (a) => (state) => () => {
 			state.hydrating &&
 			tryHydration &&
 			!state.units[ptr] &&
-			(dom = document.body
+			(dom = document.documentElement
 				.querySelectorAll("[data-deku-ssr-" + ptr + "]")
 				.item(0))
 		) {
@@ -411,7 +411,7 @@ export const makePursx_ = (runOnJust) => (tryHydration) => (maybe) => (a) => (st
 			state.hydrating &&
 			tryHydration &&
 			// hack
-			(dom = document.body
+			(dom = document.documentElement
 				.querySelectorAll("[data-deku-ssr-" + ptr + "]")
 				.item(0))
 		) {

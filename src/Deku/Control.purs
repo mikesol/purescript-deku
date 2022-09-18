@@ -220,9 +220,9 @@ deku
   -> (forall lock. Domable lock payload)
   -> DOMInterpret payload
   -> Event payload
-deku root children di@(DOMInterpret { ids, makeRoot }) = makeLemmingEvent
+deku root children di@(DOMInterpret { makeRoot }) = makeLemmingEvent
   \mySub k -> do
-    me <- ids
+    let me = "deku-root" -- <- ids
     mySub
       ( pure (makeRoot { id: me, root })
           <|> __internalDekuFlatten
