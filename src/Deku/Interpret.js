@@ -204,7 +204,7 @@ export const makeElement_ = (runOnJust) => (tryHydration) => (a) => (state) => (
 			state.hydrating &&
 			tryHydration &&
 			(dom = document.documentElement
-				.querySelector("[data-deku-ssr-" + ptr + "]")
+				.querySelector(`[data-deku-ssr="${ptr}"]`)
 				)
 		) {
 			state.units[ptr] = {
@@ -250,7 +250,7 @@ export const makeText_ = (runOnJust) => (tryHydration) => (maybe) => (a) => (sta
 			// hack
 			(dom = document.documentElement
 				// hack
-				.querySelector("[data-deku-ssr-" + parent + "]")
+				.querySelector(`[data-deku-ssr="${parent}"]`)
 				)
 		) {
 			var i = 0;
@@ -320,7 +320,7 @@ export const setProp_ = (tryHydration) => (a) => (state) => () => {
 			tryHydration &&
 			!state.units[ptr] &&
 			(dom = document.documentElement
-				.querySelector("[data-deku-ssr-" + ptr + "]")
+				.querySelector(`[data-deku-ssr="${ptr}"]`)
 				)
 		) {
 			state.units[ptr] = {
@@ -358,7 +358,7 @@ export const setCb_ = (tryHydration) => (a) => (state) => () => {
 			tryHydration &&
 			!state.units[ptr] &&
 			(dom = document.documentElement
-				.querySelector("[data-deku-ssr-" + ptr + "]")
+				.querySelector(`[data-deku-ssr="${ptr}"]`)
 				)
 		) {
 			state.units[ptr] = {
@@ -412,7 +412,7 @@ export const makePursx_ = (runOnJust) => (tryHydration) => (maybe) => (a) => (st
 			tryHydration &&
 			// hack
 			(dom = document.documentElement
-				.querySelector("[data-deku-ssr-" + ptr + "]")
+				.querySelector(`[data-deku-ssr="${ptr}"]`)
 				)
 		) {
 			state.units[ptr] = {

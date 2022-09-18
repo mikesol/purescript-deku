@@ -24,7 +24,7 @@ ssr :: Array Instruction -> String
 ssr = ssr' "body"
 
 ssr' :: String -> Array Instruction -> String
-ssr' topTag arr' = "<" <> topTag <> " data-deku-ssr-deku-root=\"true\" data-deku-root=\"" <> rootId <> "\">"
+ssr' topTag arr' = "<" <> topTag <> " data-deku-ssr=\"deku-root\" data-deku-root=\"" <> rootId <> "\">"
   <> oo rootId
   <> "</"
   <> topTag
@@ -298,8 +298,8 @@ ssr' topTag arr' = "<" <> topTag <> " data-deku-ssr-deku-root=\"true\" data-deku
     foldlWithIndex
       ( \i b a -> case hasMake a of
           true -> b
-          false -> String.replace (String.Pattern ("data-deku-ssr-" <> i))
-            (String.Replacement (eltAtts a <> " data-deku-ssr-" <> i))
+          false -> String.replace (String.Pattern ("data-deku-ssr"))
+            (String.Replacement (eltAtts a <> " data-deku-ssr"))
             b
       )
       (o id)
@@ -318,7 +318,7 @@ ssr' topTag arr' = "<" <> topTag <> " data-deku-ssr-deku-root=\"true\" data-deku
         makeElt _ = do
           let tag = eltTag i2a
           let atts = eltAtts i2a
-          "<" <> tag <> " " <> atts <> " data-deku-ssr-" <> id <> "=\"true\">"
+          "<" <> tag <> " " <> atts <> " data-deku-ssr=\"" <> id <> "\">"
             <> o id
             <> "</"
             <> tag
