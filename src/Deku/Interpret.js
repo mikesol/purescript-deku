@@ -204,8 +204,8 @@ export const makeElement_ = (runOnJust) => (tryHydration) => (a) => (state) => (
 			state.hydrating &&
 			tryHydration &&
 			(dom = document.documentElement
-				.querySelectorAll("[data-deku-ssr-" + ptr + "]")
-				.item(0))
+				.querySelector("[data-deku-ssr-" + ptr + "]")
+				)
 		) {
 			state.units[ptr] = {
 				listeners: {},
@@ -250,8 +250,8 @@ export const makeText_ = (runOnJust) => (tryHydration) => (maybe) => (a) => (sta
 			// hack
 			(dom = document.documentElement
 				// hack
-				.querySelectorAll("[data-deku-ssr-" + parent + "]")
-				.item(0))
+				.querySelector("[data-deku-ssr-" + parent + "]")
+				)
 		) {
 			var i = 0;
 			for (; i < dom.childNodes.length; i++) {
@@ -320,8 +320,8 @@ export const setProp_ = (tryHydration) => (a) => (state) => () => {
 			tryHydration &&
 			!state.units[ptr] &&
 			(dom = document.documentElement
-				.querySelectorAll("[data-deku-ssr-" + ptr + "]")
-				.item(0))
+				.querySelector("[data-deku-ssr-" + ptr + "]")
+				)
 		) {
 			state.units[ptr] = {
 				listeners: {},
@@ -358,8 +358,8 @@ export const setCb_ = (tryHydration) => (a) => (state) => () => {
 			tryHydration &&
 			!state.units[ptr] &&
 			(dom = document.documentElement
-				.querySelectorAll("[data-deku-ssr-" + ptr + "]")
-				.item(0))
+				.querySelector("[data-deku-ssr-" + ptr + "]")
+				)
 		) {
 			state.units[ptr] = {
 				listeners: {},
@@ -412,8 +412,8 @@ export const makePursx_ = (runOnJust) => (tryHydration) => (maybe) => (a) => (st
 			tryHydration &&
 			// hack
 			(dom = document.documentElement
-				.querySelectorAll("[data-deku-ssr-" + ptr + "]")
-				.item(0))
+				.querySelector("[data-deku-ssr-" + ptr + "]")
+				)
 		) {
 			state.units[ptr] = {
 				listeners: {},
