@@ -97,7 +97,7 @@ export const attributeParent_ = (runOnJust) => (a) => (state) => () => {
 				// the way we solve that in this function is to replace the
 				// wrapper with its child.
 				if (a.parent.indexOf("@!%") !== -1) {
-					// TODO: do we also need to update revUnits here?
+					// TODO: do we also need to update dkid stuff here?
 					state.units[a.parent].main.parentNode.replaceChild(
 						state.units[a.id].main,
 						state.units[a.parent].main
@@ -187,7 +187,7 @@ export const makeDynBeacon_ = (runOnJust) => (tryHydration) => (a) => (state) =>
 
 export const getPos = (id) => (state) => () => state.units[id] && state.units.id.pos ? state.units.id.pos : (() => { throw new Error(`No positional information for ${id}`) })();
 export const getDynFamily = (id) => (state) => () => state.units[id] && state.units.id.dynFamily ? state.units.id.dynFamily : (() => { throw new Error(`No positional information for ${id}`) })();
-export const getParent = (id) => (state) => () => state.units[id] && state.units[id].main.parentNode && state.revUnits[state.units[id].main.parentNode] ? state.revUnits[state.units[id].main.parentNode] : (() => { throw new Error(`No parent information for ${id}`) })();
+export const getParent = (id) => (state) => () => state.units[id] && state.units[id].main.parentNode && state.units[id].main.parentNode.$dekuId ? state.units[id].main.parentNode.$dekuId : (() => { throw new Error(`No parent information for ${id}`) })();
 export const getScope = (id) => (state) => () => state.units[id] && state.units.id.scope ? state.units.id.scope : (() => { throw new Error(`No scope information for ${id}`) })();
 
 
@@ -215,7 +215,7 @@ export const makeElement_ = (runOnJust) => (tryHydration) => (a) => (state) => (
 				dynFamily: a.dynFamily,
 				main: dom,
 			};
-			state.revUnits[dom] = ptr;
+			dom.$dekuId = ptr;
 			return true;
 		}
 		return false;
@@ -230,7 +230,7 @@ export const makeElement_ = (runOnJust) => (tryHydration) => (a) => (state) => (
 			dynFamily: a.dynFamily,
 			main
 		};
-		state.revUnits[dom] = main;
+		main.$dekuId = ptr;
 	}
 };
 
@@ -281,7 +281,7 @@ export const makeText_ = (runOnJust) => (tryHydration) => (maybe) => (a) => (sta
 				parent: a.parent,
 				scope: a.scope,
 			};
-			state.revUnits[main] = ptr;
+			main.$dekuId = ptr;
 			return true;
 		}
 		return false;
@@ -295,14 +295,13 @@ export const makeText_ = (runOnJust) => (tryHydration) => (maybe) => (a) => (sta
 			pos: a.pos,
 			dynFamily: a.dynFamily
 		};
-		state.revUnits[main] = ptr;
+		main.$dekuId = ptr;
 	}
 };
 
 export function makeFFIDOMSnapshot() {
 	return {
 		units: {},
-		revUnits: {},
 		scopes: {},
 		allBeacons: {}
 	};
@@ -422,7 +421,7 @@ export const makePursx_ = (runOnJust) => (tryHydration) => (maybe) => (a) => (st
 				parent: parent,
 				main: dom,
 			};
-			state.revUnits[dom] = ptr;
+			dom.$dekuId = ptr;
 			return true;
 		}
 		return false;
@@ -456,7 +455,7 @@ export const makePursx_ = (runOnJust) => (tryHydration) => (maybe) => (a) => (st
 			parent: parent,
 			main: tmp.firstChild,
 		};
-		state.revUnits[tmp.firstChild] = ptr;
+		tmp.firstChild.$dekuId = ptr;
 	}
 	if (!state.scopes[scope]) {
 		state.scopes[scope] = [];
@@ -523,9 +522,10 @@ export const giveNewParent_ = (runOnJust) => (b) => (state) => () => {
 			const nodes = state.units[parent].main.childNodes;
 			// todo: binary search would be faster
 			for (var i = 0; i < nodes.length; i++) {
-				if (state.revUnits[nodes[i]]) {
+				var dkid;
+				if (dkid = nodes[i].$dekuId) {
 					// if the positions are equal, insert before and return true
-					const roj = runOnJust(state.units[state.revUnits[nodes[i]]].pos)((pos2) => () => {
+					const roj = runOnJust(state.units[dkid].pos)((pos2) => () => {
 						if (pos2 === pos) {
 							state.units[parent].main.insertBefore(state.units[ptr].main, nodes[i]);
 							return true;
