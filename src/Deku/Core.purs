@@ -168,6 +168,7 @@ type MakeElement =
   , scope :: Scope
   , parent :: Maybe String
   , tag :: String
+  , pos :: Maybe Int
   , dynFamily :: Maybe String
   }
 
@@ -195,6 +196,7 @@ type DisconnectElement =
 
 type MakeText =
   { id :: String
+  , pos :: Maybe Int
   , scope :: Scope
   , parent :: Maybe String
   , dynFamily :: Maybe String
@@ -220,6 +222,7 @@ type MakePursx =
   , parent :: Maybe String
   , html :: String
   , scope :: Scope
+  , pos :: Maybe Int
   , pxScope :: String
   , verb :: String
   , cache :: Object Boolean

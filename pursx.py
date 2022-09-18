@@ -285,6 +285,7 @@ makePursx' verb html r = Domable $ Element' $ Node go
                   , parent
                   , cache
                   , dynFamily
+                  , pos
                   , pxScope: pxScope
                   , scope
                   , html: reflectType html

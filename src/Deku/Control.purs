@@ -38,28 +38,6 @@ import Web.DOM as Web.DOM
 type Neg1 = -1
 
 ----
-unsafeElement
-  :: forall payload
-   . DOMInterpret payload
-  -> { id :: String
-     , parent :: Maybe String
-     , scope :: Scope
-     , tag :: String
-     , dynFamily :: Maybe String
-     }
-  -> payload
-unsafeElement (DOMInterpret { makeElement }) = makeElement
-
-unsafeText
-  :: forall payload
-   . DOMInterpret payload
-  -> { id :: String
-     , parent :: Maybe String
-     , scope :: Scope
-     , dynFamily :: Maybe String
-     }
-  -> payload
-unsafeText (DOMInterpret { makeText }) = makeText
 
 unsafeSetText
   :: forall payload
@@ -96,14 +74,14 @@ elementify tag atts children = Node go
   where
   go
     { parent, scope, raiseId, pos, dynFamily }
-    di@(DOMInterpret { ids, deleteFromCache, attributeParent }) =
+    di@(DOMInterpret { ids, deleteFromCache, makeElement, attributeParent }) =
     makeLemmingEvent \mySub k -> do
       me <- ids
       raiseId me
       unsub <- mySub
         ( ( oneOf
               ( [ pure
-                    (unsafeElement di { id: me, parent, scope, tag, dynFamily })
+                    (makeElement { id: me, parent, scope, tag, pos, dynFamily })
                 , unsafeSetAttribute di me atts
                 ] <> maybe []
                   ( \p ->
@@ -212,13 +190,13 @@ text txt = Domable $ Element' $ Node go
   where
   go
     { parent, scope, raiseId, dynFamily, pos }
-    di@(DOMInterpret { ids, deleteFromCache, attributeParent }) =
+    di@(DOMInterpret { ids, makeText, deleteFromCache, attributeParent }) =
     makeLemmingEvent \mySub k -> do
       me <- ids
       raiseId me
       unsub <- mySub
         ( oneOf
-            [ pure (unsafeText di { id: me, parent, scope, dynFamily })
+            [ pure (makeText { id: me, parent, pos, scope, dynFamily })
             , unsafeSetText di me txt
             , maybe empty
                 ( \p ->

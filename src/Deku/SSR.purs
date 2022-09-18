@@ -39,7 +39,11 @@ ssr' topTag arr' = "<" <> topTag <> " data-deku-ssr-deku-root=\"true\">"
     moveClosingsToEnd processed cl q = case List.uncons q of
       Just (MakeCloseDynBeacon i /\ rest)
         | Array.elem i.id processed -> moveClosingsToEnd processed
-            (List.snoc cl (MakeCloseDynBeacon i))
+            -- because of the way sorting works
+            -- the id needs to be the id that will be in the real cache
+            -- so we append %-%, as we do in Interpret.purs
+            -- otherwise one ID will overwrite the other in the map below
+            (List.snoc cl (MakeCloseDynBeacon (i { id = i.id <> "%-%" })))
             rest
         | otherwise -> moveClosingsToEnd ([ i.id ] <> processed) cl $
             moveClosingToEnd List.empty List.empty i rest
@@ -93,35 +97,122 @@ ssr' topTag arr' = "<" <> topTag <> " data-deku-ssr-deku-root=\"true\">"
             rest
         | otherwise -> moveClosingToEnd staging1 (List.snoc staging2 inst) dbc
             rest
-      Just (inst@((SetProp _)) /\ rest) -> moveClosingToEnd staging1 (List.snoc staging2 inst) dbc
-            rest
-      Just (inst@((SetText _)) /\ rest) -> moveClosingToEnd staging1 (List.snoc staging2 inst) dbc
-            rest
+      Just (inst@((SetProp _)) /\ rest) -> moveClosingToEnd staging1
+        (List.snoc staging2 inst)
+        dbc
+        rest
+      Just (inst@((SetText _)) /\ rest) -> moveClosingToEnd staging1
+        (List.snoc staging2 inst)
+        dbc
+        rest
       Nothing -> staging1 <> pure ((MakeCloseDynBeacon dbc)) <> staging2
     doEliminations cl = List.uncons >>> case _ of
       Just (RenderableInstruction i /\ rest) -> doEliminations (List.snoc cl i)
         rest
-      Just (EliminatableInstruction (SendToPos stp) /\ rest) -> doEliminations
-        cl
-        rest
+      Just (EliminatableInstruction (SendToPos stp) /\ rest) ->
+        doEliminations (sendPos stp.id stp.pos <$> cl) rest
       Just (EliminatableInstruction (GiveNewParent gnp) /\ rest) ->
-        doEliminations cl rest
+        doEliminations (giveParent gnp.id gnp.parent <$> cl) rest
       Just (EliminatableInstruction (DisconnectElement dce) /\ rest) ->
-        doEliminations cl rest
+        doEliminations (removeParent dce.id <$> cl) rest
       Just (EliminatableInstruction (RemoveDynBeacon rdb) /\ rest) ->
-        doEliminations cl rest
+        doEliminations (doDeleteFromCache List.empty rdb.id cl) rest
       Just (EliminatableInstruction (DeleteFromCache dfc) /\ rest) ->
         doEliminations (doDeleteFromCache List.empty dfc.id cl) rest
       Nothing -> cl
+    sendPos id' pos' = case _ of
+      elt@(MakeElement elt'@({ id, dynFamily })) ->
+        if id == id' || dynFamily == Just id then MakeElement
+          (elt' { pos = Just pos' })
+        else elt
+      elt@(MakeText elt'@({ id, dynFamily })) ->
+        if id == id' || dynFamily == Just id then MakeText
+          (elt' { pos = Just pos' })
+        else elt
+      elt@(MakePursx elt'@({ id, dynFamily })) ->
+        if id == id' || dynFamily == Just id then MakePursx
+          (elt' { pos = Just pos' })
+        else elt
+      elt@(MakeOpenDynBeacon elt'@({ id, dynFamily })) ->
+        if id == id' || dynFamily == Just id then MakeOpenDynBeacon
+          (elt' { pos = Just pos' })
+        else elt
+      elt@(MakeCloseDynBeacon elt'@({ id, dynFamily })) ->
+        if id == id' || dynFamily == Just id then MakeCloseDynBeacon
+          (elt' { pos = Just pos' })
+        else elt
+      elt@(SetText _) -> elt
+      elt@(SetProp _) -> elt
+    giveParent id' parent' = case _ of
+      elt@(MakeElement elt'@({ id, dynFamily })) ->
+        if id == id' || dynFamily == Just id then MakeElement
+          (elt' { parent = Just parent' })
+        else elt
+      elt@(MakeText elt'@({ id, dynFamily })) ->
+        if id == id' || dynFamily == Just id then MakeText
+          (elt' { parent = Just parent' })
+        else elt
+      elt@(MakePursx elt'@({ id, dynFamily })) ->
+        if id == id' || dynFamily == Just id then MakePursx
+          (elt' { parent = Just parent' })
+        else elt
+      elt@(MakeOpenDynBeacon elt'@({ id, dynFamily })) ->
+        if id == id' || dynFamily == Just id then MakeOpenDynBeacon
+          (elt' { parent = Just parent' })
+        else elt
+      elt@(MakeCloseDynBeacon elt'@({ id, dynFamily })) ->
+        if id == id' || dynFamily == Just id then MakeCloseDynBeacon
+          (elt' { parent = Just parent' })
+        else elt
+      elt@(SetText _) -> elt
+      elt@(SetProp _) -> elt
+    removeParent id' = case _ of
+      elt@(MakeElement elt'@({ id, dynFamily })) ->
+        if id == id' || dynFamily == Just id then MakeElement
+          (elt' { parent = Nothing })
+        else elt
+      elt@(MakeText elt'@({ id, dynFamily })) ->
+        if id == id' || dynFamily == Just id then MakeText
+          (elt' { parent = Nothing })
+        else elt
+      elt@(MakePursx elt'@({ id, dynFamily })) ->
+        if id == id' || dynFamily == Just id then MakePursx
+          (elt' { parent = Nothing })
+        else elt
+      elt@(MakeOpenDynBeacon elt'@({ id, dynFamily })) ->
+        if id == id' || dynFamily == Just id then MakeOpenDynBeacon
+          (elt' { parent = Nothing })
+        else elt
+      elt@(MakeCloseDynBeacon elt'@({ id, dynFamily })) ->
+        if id == id' || dynFamily == Just id then MakeCloseDynBeacon
+          (elt' { parent = Nothing })
+        else elt
+      elt@(SetText _) -> elt
+      elt@(SetProp _) -> elt
+
     doDeleteFromCache cl id' = List.uncons >>> case _ of
-            Just (elt@(MakeElement { id }) /\ rest) -> if id == id' then doDeleteFromCache cl id' rest else doDeleteFromCache (List.snoc cl elt) id' rest 
-            Just (elt@(MakeText { id }) /\ rest) -> if id == id' then doDeleteFromCache cl id' rest else doDeleteFromCache (List.snoc cl elt) id' rest 
-            Just (elt@(MakePursx { id }) /\ rest) -> if id == id' then doDeleteFromCache cl id' rest else doDeleteFromCache (List.snoc cl elt) id' rest 
-            Just (elt@(MakeOpenDynBeacon { id }) /\ rest) -> if id == id' then doDeleteFromCache cl id' rest else doDeleteFromCache (List.snoc cl elt) id' rest 
-            Just (elt@(MakeCloseDynBeacon { id })  /\ rest)-> if id == id' then doDeleteFromCache cl id' rest else doDeleteFromCache (List.snoc cl elt) id' rest 
-            Just (elt@(SetProp { id }) /\ rest) -> if id == id' then doDeleteFromCache cl id' rest else doDeleteFromCache (List.snoc cl elt) id' rest 
-            Just (elt@(SetText { id }) /\ rest) -> if id == id' then doDeleteFromCache cl id' rest else doDeleteFromCache (List.snoc cl elt) id' rest 
-            Nothing -> cl
+      Just (elt@(MakeElement { id }) /\ rest) ->
+        if id == id' then doDeleteFromCache cl id' rest
+        else doDeleteFromCache (List.snoc cl elt) id' rest
+      Just (elt@(MakeText { id }) /\ rest) ->
+        if id == id' then doDeleteFromCache cl id' rest
+        else doDeleteFromCache (List.snoc cl elt) id' rest
+      Just (elt@(MakePursx { id }) /\ rest) ->
+        if id == id' then doDeleteFromCache cl id' rest
+        else doDeleteFromCache (List.snoc cl elt) id' rest
+      Just (elt@(MakeOpenDynBeacon { id }) /\ rest) ->
+        if id == id' then doDeleteFromCache cl id' rest
+        else doDeleteFromCache (List.snoc cl elt) id' rest
+      Just (elt@(MakeCloseDynBeacon { id }) /\ rest) ->
+        if id == id' then doDeleteFromCache cl id' rest
+        else doDeleteFromCache (List.snoc cl elt) id' rest
+      Just (elt@(SetProp { id }) /\ rest) ->
+        if id == id' then doDeleteFromCache cl id' rest
+        else doDeleteFromCache (List.snoc cl elt) id' rest
+      Just (elt@(SetText { id }) /\ rest) ->
+        if id == id' then doDeleteFromCache cl id' rest
+        else doDeleteFromCache (List.snoc cl elt) id' rest
+      Nothing -> cl
     asList = List.fromFoldable aa
   making parent id action = do
     void $ modify
@@ -199,7 +290,7 @@ ssr' topTag arr' = "<" <> topTag <> " data-deku-ssr-deku-root=\"true\">"
               _ -> Nothing
           )
         makeOpenDynBeacon _ = "<!--%-%" <> id <> "-->"
-        makeCloseDynBeacon _ = "<!--%-%" <> id <> "%-%-->"
+        makeCloseDynBeacon _ = "<!--%-%" <> id <> "-->"
         makeElt _ = do
           let tag = eltTag i2a
           let atts = eltAtts i2a

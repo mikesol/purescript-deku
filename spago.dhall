@@ -11,7 +11,6 @@
   , "foldable-traversable"
   , "foreign-object"
   , "hyrule"
-  , "lists"
   , "maybe"
   , "newtype"
   , "ordered-collections"
