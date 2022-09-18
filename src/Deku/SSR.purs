@@ -8,6 +8,7 @@ import Data.Array as Array
 import Data.CatList as List
 import Data.Filterable (filterMap)
 import Data.FoldableWithIndex (foldlWithIndex)
+import Data.Function (on)
 import Data.Map as Map
 import Data.Maybe (Maybe(..), fromMaybe, isJust, maybe)
 import Data.String as String
@@ -239,22 +240,41 @@ ssr' topTag arr' = "<" <> topTag <> " data-deku-ssr-deku-root=\"true\">"
               s.idToActions
           }
       )
-  { parentToChild, idToActions } = execState
-    ( traverse
-        ( \i -> case i of
-            -- for now, ssr ignores portals
-            -- so we case on parents being Just
-            MakeElement { parent, id } -> for_ parent \p -> making p id i
-            MakeText { parent, id } -> for_ parent \p -> making p id i
-            MakePursx { parent, id } -> for_ parent \p -> making p id i
-            MakeOpenDynBeacon { parent, id } -> for_ parent \p -> making p id i
-            MakeCloseDynBeacon { parent, id } -> for_ parent \p -> making p id i
-            SetProp { id } -> setting id i
-            SetText { id } -> setting id i
-        )
-        arr
-    )
-    { parentToChild: Map.empty, idToActions: Map.empty }
+  { parentToChild, idToActions } =
+    ( \x ->
+        { parentToChild: x.parentToChild <#> Array.sortBy
+            ( compare `on` \i -> Map.lookup i x.idToActions >>= Array.head >>=
+                case _ of
+                  MakeElement { pos } -> pos
+                  MakeText { pos } -> pos
+                  MakePursx { pos } -> pos
+                  MakeOpenDynBeacon { pos } -> pos
+                  MakeCloseDynBeacon { pos } -> pos
+                  -- we can safely push setters to the back
+                  -- todo: is this a true assumption?
+                  SetProp _ -> Just top
+                  SetText _ -> Just top
+            )
+        , idToActions: x.idToActions
+        }
+    ) $ execState
+      ( traverse
+          ( \i -> case i of
+              -- for now, ssr ignores portals
+              -- so we case on parents being Just
+              MakeElement { parent, id } -> for_ parent \p -> making p id i
+              MakeText { parent, id } -> for_ parent \p -> making p id i
+              MakePursx { parent, id } -> for_ parent \p -> making p id i
+              MakeOpenDynBeacon { parent, id } -> for_ parent \p -> making p id
+                i
+              MakeCloseDynBeacon { parent, id } -> for_ parent \p -> making p id
+                i
+              SetProp { id } -> setting id i
+              SetText { id } -> setting id i
+          )
+          arr
+      )
+      { parentToChild: Map.empty, idToActions: Map.empty }
   hasMake a = isJust $ find
     ( case _ of
         MakeElement _ -> true
