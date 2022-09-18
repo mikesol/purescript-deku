@@ -12,10 +12,8 @@ const doTest = (name, closure, onlyWithSSR) => {
   (onlyWithSSR === true ? it.only : it)(name + ' with SSR', () => {
     closure((myTest, myScript) => {
       const myHtml = tests.ssr(myTest)();
-      console.log("WHOLE", myHtml);
       document.getElementsByTagName('html')[0].innerHTML = myHtml;
       const finished = tests.runWithSSR(myTest)();
-      console.log("AFTER", document.documentElement.outerHTML);
       myScript(true);
       finished();
     });
@@ -60,5 +58,24 @@ describe('deku', () => {
     expect($($('#div0').contents()[base + 1]).text()).toBe("incr");
     // there's a new node now with the number "1" as its text
     expect($($('#div0').contents()[base - 1]).text()).toBe("1");
+  }));
+
+  doTest('deeply nested', (f) => f(tests.deeplyNestedPreservesOrder, () => {
+    const $ = require('jquery');
+    expect($('#incr-0').text()).toBe('incr-0');
+    $('#incr-0').trigger("click");
+    $('#incr-0').trigger("click");
+    expect($('#incr-1').text()).toBe('incr-1');
+    $('#incr-1').trigger("click");
+    $('#incr-1').trigger("click");
+    expect($('#incr-2').text()).toBe('incr-2');
+    $('#incr-2').trigger("click");
+    $('#incr-2').trigger("click");
+    // add dyn0-2 with the third click on incr-0
+    $('#incr-0').trigger("click");
+    // incr-1 is inserted _above_ incr-0 in the test
+    expect($('#incr-1').index()).toBeLessThan($('#incr-0').index());
+    expect($('#incr-2').index()).toBeLessThan($('#incr-1').index());
+    expect($('#incr-2').index()).toBeLessThan($('#dyn0-2').index());
   }));
 });

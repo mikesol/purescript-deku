@@ -9,7 +9,7 @@ import Data.Foldable (oneOf)
 import Data.Tuple.Nested ((/\))
 import Deku.Attributes (id_)
 import Deku.Control (text_)
-import Deku.Core (Domable, Nut, dyn, insert_)
+import Deku.Core (Domable, Nut, dyn, fixed, insert_)
 import Deku.DOM as D
 import Deku.Do (useState')
 import Deku.Do as Deku
@@ -76,4 +76,32 @@ dynAppearsCorrectly = Deku.do
             (insert_ (D.span (id_ ("dyn" <> show i)) [ text_ (show i) ]))
         )
     , D.button (oneOf [ id_ "incr", click_ (setItem unit) ]) [ text_ "incr" ]
+    ]
+
+deeplyNestedPreservesOrder :: Nut
+deeplyNestedPreservesOrder = Deku.do
+  let
+    counter :: forall a. Event a -> Event Int
+    counter event = fold (const (add 1)) event (-1)
+  setItem /\ item <- useState'
+  let
+    mydyn n = do
+      let sn = show n
+      fixed
+        [ dyn
+            ( (counter item) <#> \i -> pure
+                ( insert_
+                    ( if i == 1 then mydyn (n + 1)
+                      else D.span (id_ ("dyn" <> sn <> "-" <> show i))
+                        [ text_ (sn <> "-" <> show i) ]
+                    )
+                )
+            )
+        , D.button (oneOf [ id_ $ "incr-" <> sn, click_ (setItem unit) ])
+            [ text_ $ "incr-" <> sn ]
+        ]
+  D.div (id_ "div0")
+    [ text_ "foo"
+    , D.span (id_ "div1") [ text_ "bar" ]
+    , mydyn 0
     ]
