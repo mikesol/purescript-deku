@@ -105,3 +105,23 @@ doTest('sends to position correctly', (f) => f(tests.sendsToPosition, () => {
   // for kicks
   expect($('#dyn4').index()).toBeGreaterThan($('#dyn0').index());
 }));
+
+doTest('sends to position correctly when elt is fixed', (f) => f(tests.sendsToPositionFixed, () => {
+  const $ = require('jquery');
+  expect($('#dyn0a').index()).toBeLessThan($('#dyn1a').index());
+  expect($('#dyn1a').index()).toBeLessThan($('#dyn2a').index());
+  expect($('#dyn2a').index()).toBeLessThan($('#dyn3a').index());
+  expect($('#dyn3a').index()).toBeLessThan($('#dyn4a').index());
+  // for kicks
+  expect($('#dyn4a').index()).toBeGreaterThan($('#dyn0a').index());
+  $('#pos').trigger("click");
+  // 3 is now at 1
+  // so the order is 0, 3, 1, 2, 4
+  expect($('#dyn0a').index()).toBeLessThan($('#dyn3a').index());
+  expect($('#dyn3a').index()).toBeLessThan($('#dyn1a').index());
+  expect($('#dyn1a').index()).toBeLessThan($('#dyn2a').index());
+  expect($('#dyn2a').index()).toBeLessThan($('#dyn4a').index());
+  // for kicks
+  expect($('#dyn4a').index()).toBeGreaterThan($('#dyn0a').index());
+}));
+

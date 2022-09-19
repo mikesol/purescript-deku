@@ -129,3 +129,27 @@ sendsToPosition = Deku.do
     , D.button (oneOf [ id_ "pos", click_ (setPosIdx 1) ])
         [ text_ "send to pos" ]
     ]
+
+sendsToPositionFixed :: Nut
+sendsToPositionFixed = Deku.do
+  setPosIdx /\ posIdx <- useState'
+  D.div (id_ "div0")
+    [ text_ "foo"
+    , D.span (id_ "div1") [ text_ "bar" ]
+    , dyn
+        ( (oneOfMap pure [ 0, 1, 2, 3, 4 ]) <#> \i ->
+            ( oneOf
+                [ pure $ insert_
+                    $ fixed
+                        [ D.span (id_ ("dyn" <> show i <> "a"))
+                            [ text_ (show i <> "a") ]
+                        , D.span (id_ ("dyn" <> show i <> "a"))
+                            [ text_ (show i <> "b") ]
+                        ]
+                , if i == 3 then posIdx <#> sendToPos else empty
+                ]
+            )
+        )
+    , D.button (oneOf [ id_ "pos", click_ (setPosIdx 1) ])
+        [ text_ "send to pos" ]
+    ]

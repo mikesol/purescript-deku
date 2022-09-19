@@ -195,7 +195,7 @@ export const makeDynBeacon_ = (runOnJust) => (tryHydration) => (a) => (state) =>
 
 export const getPos = (id) => (state) => () => state.units[id] && state.units[id].pos ? state.units[id].pos : (() => { throw new Error(`No positional information for ${id}`) })();
 export const getDynFamily = (id) => (state) => () => state.units[id] && state.units[id].dynFamily ? state.units[id].dynFamily : (() => { throw new Error(`No positional information for ${id}`) })();
-export const getParent = (id) => (state) => () => state.units[id] && state.units[id].main.parentNode && state.units[id].main.parentNode.$dekuId ? state.units[id].main.parentNode.$dekuId : (() => { throw new Error(`No parent information for ${id}`) })();
+export const getParent = (id) => (state) => () => state.units[id] && state.units[id].main && state.units[id].main.parentNode && state.units[id].main.parentNode.$dekuId ? state.units[id].main.parentNode.$dekuId : state.units[id] && state.units[id].startBeacon && state.units[id].startBeacon.parentNode && state.units[id].startBeacon.parentNode.$dekuId ? state.units[id].startBeacon.parentNode.$dekuId : (() => { throw new Error(`No parent information for ${id}`) })();
 export const getScope = (id) => (state) => () => state.units[id] && state.units[id].scope ? state.units[id].scope : (() => { throw new Error(`No scope information for ${id}`) })();
 
 export const makeElement_ = (runOnJust) => (tryHydration) => (a) => (state) => () => {
@@ -509,18 +509,9 @@ export const makeRoot_ = (a) => (state) => () => {
 
 export const giveNewParent_ = (just) => (anchorToDynBeacon) => (runOnJust) => (b) => (state) => () => {
 	const runMe = []
-	if (state.units[b.id] && state.units[b.id].startBeacon) {
-		var c = b;
-		while (c) {
-			runMe.push(c);
-			c = c.nextSibling;
-			if (c === state.units[b.id].endBeacon) {
-				break;
-			}
-		}
-	} else {
-		runMe.push(b);
-	}
+	// this is a hold over from when runMe had multiple items
+	// we can safely change it now
+	runMe.push(b);
 	for (var z = 0; z < runMe.length; z++) {
 		const a = runMe[z]
 		const ptr = a.id;
@@ -561,7 +552,20 @@ export const giveNewParent_ = (just) => (anchorToDynBeacon) => (runOnJust) => (b
 					// if the positions are equal, insert before and return true
 					foundEqualPositions = runOnJust(state.units[dkid].pos)((pos2) => () => {
 						if (pos2 === aPos) {
-							state.units[parent].main.insertBefore(state.units[ptr].main, nodes[i]);
+							if (state.units[ptr].startBeacon) {
+								// we continue this operation until we hit the end beacon
+								var x = state.units[ptr].startBeacon;
+								var y = x.nextSibling;
+								state.units[parent].main.insertBefore(x, nodes[i]);
+								x = y;
+								while (x !== state.units[ptr].endBeacon) {
+									y = x.nextSibling;
+									state.units[parent].main.insertBefore(x, nodes[i]);
+									x = y;
+								}
+							} else {
+								state.units[parent].main.insertBefore(state.units[ptr].main, nodes[i]);
+							}
 							// increment pos by one as there's been an insert
 							pos++;
 							return true;
@@ -575,11 +579,33 @@ export const giveNewParent_ = (just) => (anchorToDynBeacon) => (runOnJust) => (b
 			}
 			if (foundEqualPositions) { return true; };
 			// we return true anyway, as this just means that we can tack this onto the end of our structure
-			state.units[parent].main.appendChild(state.units[ptr].main);
+			if (state.units[ptr].main) { state.units[parent].main.appendChild(state.units[ptr].main); }
+			else {
+				var x = state.units[ptr].startBeacon;
+				var y = x.nextSibling;
+				state.units[parent].main.appendChild(x);
+				x = y;
+				while (x !== state.units[ptr].endBeacon) {
+					y = x.nextSibling;
+					state.units[parent].main.appendChild(x);
+					x = y;
+				}
+			}
 			return true;
 		})();
 		if (!iRan) {
-			state.units[parent].main.appendChild(state.units[ptr].main);
+			if (state.units[ptr].main) { state.units[parent].main.appendChild(state.units[ptr].main); }
+			else {
+				var x = state.units[ptr].startBeacon;
+				var y = x.nextSibling;
+				state.units[parent].main.appendChild(x);
+				x = y;
+				while (x !== state.units[ptr].endBeacon) {
+					y = x.nextSibling;
+					state.units[parent].main.appendChild(x);
+					x = y;
+				}
+			}
 		}
 	}
 };
