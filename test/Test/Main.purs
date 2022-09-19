@@ -47,18 +47,17 @@ elementsInCorrectOrder = do
     l n
       | n == 10 = []
       | otherwise =
-          [ let
-              x = "span" <> show n <> "-0"
-            in
+          [ do
+              let x = "span" <> show n <> "-0"
               D.span (id_ x) [ text_ (x <> "A") ]
-          , let
-              x = "span" <> show n <> "-1"
-            in
+          , do
+              let x = "span" <> show n <> "-1"
               D.span (id_ x) [ text_ (x <> "B") ]
-          , let x = "div" <> show n <> "-2" in D.span (id_ x) (l (n + 1))
-          , let
-              x = "span" <> show n <> "-3"
-            in
+          , do
+              let x = "div" <> show n <> "-2"
+              D.span (id_ x) (l (n + 1))
+          , do
+              let x = "span" <> show n <> "-3"
               D.span (id_ x) [ text_ (x <> "D") ]
           ]
   D.div (id_ "div0-0") (l 1)
@@ -73,8 +72,8 @@ dynAppearsCorrectly = Deku.do
     [ text_ "foo"
     , D.span (id_ "div1") [ text_ "bar" ]
     , dyn
-        ( (counter item) <#> \i -> pure
-            (insert_ (D.span (id_ ("dyn" <> show i)) [ text_ (show i) ]))
+        ( counter item <#> \i -> pure
+            $ insert_ (D.span (id_ ("dyn" <> show i)) [ text_ (show i) ])
         )
     , D.button (oneOf [ id_ "incr", click_ (setItem unit) ]) [ text_ "incr" ]
     ]
@@ -90,13 +89,11 @@ deeplyNestedPreservesOrder = Deku.do
       let sn = show n
       fixed
         [ dyn
-            ( (counter item) <#> \i -> pure
-                ( insert_
-                    ( if i == 1 then mydyn (n + 1)
-                      else D.span (id_ ("dyn" <> sn <> "-" <> show i))
-                        [ text_ (sn <> "-" <> show i) ]
-                    )
-                )
+            ( counter item <#> \i -> pure
+                $ insert_
+                    if i == 1 then mydyn (n + 1)
+                    else D.span (id_ ("dyn" <> sn <> "-" <> show i))
+                      [ text_ (sn <> "-" <> show i) ]
             )
         , D.button (oneOf [ id_ $ "incr-" <> sn, click_ (setItem unit) ])
             [ text_ $ "incr-" <> sn ]
@@ -118,13 +115,12 @@ sendsToPosition = Deku.do
     [ text_ "foo"
     , D.span (id_ "div1") [ text_ "bar" ]
     , dyn
-        ( (oneOfMap pure [ 0, 1, 2, 3, 4 ]) <#> \i ->
-            ( oneOf
-                [ pure $ insert_
-                    (D.span (id_ ("dyn" <> show i)) [ text_ (show i) ])
-                , if i == 3 then posIdx <#> sendToPos else empty
-                ]
-            )
+        ( oneOfMap pure [ 0, 1, 2, 3, 4 ] <#> \i ->
+            oneOf
+              [ pure $ insert_
+                  (D.span (id_ ("dyn" <> show i)) [ text_ (show i) ])
+              , if i == 3 then posIdx <#> sendToPos else empty
+              ]
         )
     , D.button (oneOf [ id_ "pos", click_ (setPosIdx 1) ])
         [ text_ "send to pos" ]
@@ -137,18 +133,17 @@ sendsToPositionFixed = Deku.do
     [ text_ "foo"
     , D.span (id_ "div1") [ text_ "bar" ]
     , dyn
-        ( (oneOfMap pure [ 0, 1, 2, 3, 4 ]) <#> \i ->
-            ( oneOf
-                [ pure $ insert_
-                    $ fixed
-                        [ D.span (id_ ("dyn" <> show i <> "a"))
-                            [ text_ (show i <> "a") ]
-                        , D.span (id_ ("dyn" <> show i <> "a"))
-                            [ text_ (show i <> "b") ]
-                        ]
-                , if i == 3 then posIdx <#> sendToPos else empty
-                ]
-            )
+        ( oneOfMap pure [ 0, 1, 2, 3, 4 ] <#> \i ->
+            oneOf
+              [ pure $ insert_
+                  $ fixed
+                      [ D.span (id_ ("dyn" <> show i <> "a"))
+                          [ text_ (show i <> "a") ]
+                      , D.span (id_ ("dyn" <> show i <> "a"))
+                          [ text_ (show i <> "b") ]
+                      ]
+              , if i == 3 then posIdx <#> sendToPos else empty
+              ]
         )
     , D.button (oneOf [ id_ "pos", click_ (setPosIdx 1) ])
         [ text_ "send to pos" ]
@@ -164,11 +159,11 @@ insertsAtCorrectPositions = D.div (id_ "div0")
       -- here, we scramble the order and make sure that the dyns
       -- are inserted in the scrambled order so that they read
       -- 0-1-2-3-4 from top to bottom
-      ( (oneOfMap pure [ 3, 0, 4, 2, 1 ]) <#> \i ->
-          ( oneOf
-              [ pure $ insert i
-                  (D.span (id_ ("dyn" <> show i)) [ text_ (show i) ])
-              ]
-          )
+      ( oneOfMap pure [ 3, 0, 4, 2, 1 ] <#> \i ->
+          oneOf
+            [ pure $ insert i
+                (D.span (id_ ("dyn" <> show i)) [ text_ (show i) ])
+            ]
+
       )
   ]
