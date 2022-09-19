@@ -512,6 +512,11 @@ export const makePursx_ = (runOnJust) => (tryHydration) => (maybe) => (a) => (st
 		};
 		state.scopes[scope].push(namespacedKey);
 	});
+	// fresh node, should be removed from parent
+	if (!iRan) {
+		state.units[ptr].main.remove();
+
+	}
 };
 
 export const makeRoot_ = (a) => (state) => () => {

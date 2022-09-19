@@ -14,7 +14,7 @@ const doTest = (name, closure, onlyWithSSR) => {
       const myHtml = tests.ssr(myTest)();
       document.getElementsByTagName('html')[0].innerHTML = myHtml;
       const $ = require('jquery');
-      $('body').attr('id','mybody');
+      $('body').attr('id', 'mybody');
       const finished = tests.runWithSSR(myTest)();
       myScript(true);
       finished();
@@ -152,4 +152,11 @@ doTest('switcher works for compositional elements', (f) => f(tests.switcherWorks
 
 doTest('tabbed navigation with pursx has correct layout', (f) => f(tests.tabbedNavigationWithPursx, () => {
   const $ = require('jquery');
+  expect($('#home').text()).toBe('home');
+  $('#about-btn').trigger('click')
+  expect($('#home').text()).toBe('');
+  expect($('#about').text()).toBe('about deku');
+  $('#contact-btn').trigger('click')
+  expect($('#about').text()).toBe('');
+  expect($('#contact').text()).toBe("contact mike at site.com thanks");
 }));
