@@ -14,10 +14,10 @@ export const doPursxReplacements = ({ id, html, pxScope, cache, verb }) => {
 				"data-deku-attr-internal=" +
 					'"' +
 					key +
-					'" data-deku-ssr-' +
+					'" data-deku-ssr="' +
 					key + "@!%" +
 					pxScope +
-					'="true"'
+					'"'
 			);
 		} else {
 			vhtml = vhtml.replace(
@@ -25,10 +25,10 @@ export const doPursxReplacements = ({ id, html, pxScope, cache, verb }) => {
 				'<span style="display:contents;" data-deku-elt-internal=' +
 					'"' +
 					key +
-					'" data-deku-ssr-' +
+					'" data-deku-ssr="' +
 					key + "@!%" +
 					pxScope +
-					'="true"></span>'
+					'"></span>'
 			);
 		}
 	}
@@ -36,6 +36,6 @@ export const doPursxReplacements = ({ id, html, pxScope, cache, verb }) => {
 	const cix = vhtml.indexOf("/>");
 	const ix = cix == gtix - 1 ? cix : gtix;
 	return (
-		vhtml.slice(0, ix) + " data-deku-ssr-" + id + '="true" ' + vhtml.slice(ix)
+		vhtml.slice(0, ix) + " data-deku-ssr=\"" + id + '" ' + vhtml.slice(ix)
 	);
 };
