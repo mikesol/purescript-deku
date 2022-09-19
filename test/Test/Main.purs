@@ -216,7 +216,7 @@ portalsCompose = Deku.do
     counter :: forall a. Event a -> Event Int
     counter event = fold (const (add 1)) event 0
   setItem /\ item <- useMemoized (\a -> counter a <|> pure 0)
-  globalPortal1 (fixed [ text_ "a", D.span_ [ text_ "b" ], text_ "c" ]) \e -> do
+  globalPortal1 (D.div_ [ text_ "a", D.span_ [ text_ "b" ], text_ "c" ]) \e -> do
     let
       switchMe n = item # switcher
         ( (_ `mod` 3) >>> case _ of
