@@ -165,31 +165,38 @@ export const makeDynBeacon_ = (runOnJust) => (tryHydration) => (a) => (state) =>
 				listeners: {},
 				parent: a.parent,
 				scope: a.scope,
+				pos: a.pos,
 				dynFamily: a.dynFamily,
 				startBeacon,
 				endBeacon
 			};
+			startBeacon.$dekuId = ptr;
+			endBeacon.$dekuId = ptr;
 			return true;
 		}
 		return false;
 	})();
 	if (!iRan) {
+		const startBeacon = document.createComment(`%-%${a.id}`);
+		const endBeacon = document.createComment(`%-%${a.id}%-%`);
 		state.units[ptr] = {
 			listeners: {},
 			parent: a.parent,
 			dynFamily: a.dynFamily,
 			scope: a.scope,
-			startBeacon: document.createComment(`%-%${a.id}`),
-			endBeacon: document.createComment(`%-%${a.id}%-%`),
+			pos: a.pos,
+			startBeacon,
+			endBeacon
 		};
+		startBeacon.$dekuId = ptr;
+		endBeacon.$dekuId = ptr;
 	}
 }
 
-export const getPos = (id) => (state) => () => state.units[id] && state.units.id.pos ? state.units.id.pos : (() => { throw new Error(`No positional information for ${id}`) })();
-export const getDynFamily = (id) => (state) => () => state.units[id] && state.units.id.dynFamily ? state.units.id.dynFamily : (() => { throw new Error(`No positional information for ${id}`) })();
+export const getPos = (id) => (state) => () => state.units[id] && state.units[id].pos ? state.units[id].pos : (() => { throw new Error(`No positional information for ${id}`) })();
+export const getDynFamily = (id) => (state) => () => state.units[id] && state.units[id].dynFamily ? state.units[id].dynFamily : (() => { throw new Error(`No positional information for ${id}`) })();
 export const getParent = (id) => (state) => () => state.units[id] && state.units[id].main.parentNode && state.units[id].main.parentNode.$dekuId ? state.units[id].main.parentNode.$dekuId : (() => { throw new Error(`No parent information for ${id}`) })();
-export const getScope = (id) => (state) => () => state.units[id] && state.units.id.scope ? state.units.id.scope : (() => { throw new Error(`No scope information for ${id}`) })();
-
+export const getScope = (id) => (state) => () => state.units[id] && state.units[id].scope ? state.units[id].scope : (() => { throw new Error(`No scope information for ${id}`) })();
 
 export const makeElement_ = (runOnJust) => (tryHydration) => (a) => (state) => () => {
 	var dom;
@@ -205,7 +212,7 @@ export const makeElement_ = (runOnJust) => (tryHydration) => (a) => (state) => (
 			tryHydration &&
 			(dom = document.documentElement
 				.querySelector(`[data-deku-ssr="${ptr}"]`)
-				)
+			)
 		) {
 			state.units[ptr] = {
 				listeners: {},
@@ -251,7 +258,7 @@ export const makeText_ = (runOnJust) => (tryHydration) => (maybe) => (a) => (sta
 			(dom = document.documentElement
 				// hack
 				.querySelector(`[data-deku-ssr="${parent}"]`)
-				)
+			)
 		) {
 			var i = 0;
 			for (; i < dom.childNodes.length; i++) {
@@ -320,7 +327,7 @@ export const setProp_ = (tryHydration) => (a) => (state) => () => {
 			!state.units[ptr] &&
 			(dom = document.documentElement
 				.querySelector(`[data-deku-ssr="${ptr}"]`)
-				)
+			)
 		) {
 			state.units[ptr] = {
 				listeners: {},
@@ -358,7 +365,7 @@ export const setCb_ = (tryHydration) => (a) => (state) => () => {
 			!state.units[ptr] &&
 			(dom = document.documentElement
 				.querySelector(`[data-deku-ssr="${ptr}"]`)
-				)
+			)
 		) {
 			state.units[ptr] = {
 				listeners: {},
@@ -412,7 +419,7 @@ export const makePursx_ = (runOnJust) => (tryHydration) => (maybe) => (a) => (st
 			// hack
 			(dom = document.documentElement
 				.querySelector(`[data-deku-ssr="${ptr}"]`)
-				)
+			)
 		) {
 			state.units[ptr] = {
 				listeners: {},
@@ -497,9 +504,10 @@ export const makeRoot_ = (a) => (state) => () => {
 	state.units[ptr] = {
 		main: a.root,
 	};
+	a.root.$dekuId = ptr;
 };
 
-export const giveNewParent_ = (runOnJust) => (b) => (state) => () => {
+export const giveNewParent_ = (just) => (anchorToDynBeacon) => (runOnJust) => (b) => (state) => () => {
 	const runMe = []
 	if (state.units[b.id] && state.units[b.id].startBeacon) {
 		var c = b;
@@ -518,27 +526,54 @@ export const giveNewParent_ = (runOnJust) => (b) => (state) => () => {
 		const ptr = a.id;
 		const parent = a.parent;
 		state.units[ptr].containingScope = a.scope;
-		const iRan = runOnJust(a.pos)((pos) => () => {
+		const iRan = runOnJust(a.pos)((aPos) => () => {
 			const nodes = state.units[parent].main.childNodes;
 			// todo: binary search would be faster
-			for (var i = 0; i < nodes.length; i++) {
+			var i = 0;
+			var foundEqualPositions = false;
+			// we always use this as an opportunity to fix up the positions
+			// which is a full traversal
+			// slow, and we can consider optimizing this
+			// but that way, after this operation, all of the positions are guaranteed to be correct
+			var pos = 0;
+			while (i < nodes.length) {
 				var dkid;
 				if (dkid = nodes[i].$dekuId) {
+					if (anchorToDynBeacon) {
+						if (state.units[dkid].dynFamily !== state.units[ptr].dynFamily) {
+							i++;
+							continue;
+						}
+						// only set if not end beacon, as end beacon will have already
+						// gotten the position when this iterates over the start beacon
+						if (state.units[dkid].endBeacon !== nodes[i]) {
+							state.units[dkid].pos = just(pos);
+							pos++;
+						}
+						// if we've found equal positions already we stop here
+						// as all we care about is the pos fixer-upper happening above
+						if (foundEqualPositions) { i++; continue; }
+					} else {
+						// if we've found equal positions already we stop here
+						// as all we care about is the pos fixer-upper happening above
+						if (foundEqualPositions) { i++; continue; }
+					}
 					// if the positions are equal, insert before and return true
-					const roj = runOnJust(state.units[dkid].pos)((pos2) => () => {
-						if (pos2 === pos) {
+					foundEqualPositions = runOnJust(state.units[dkid].pos)((pos2) => () => {
+						if (pos2 === aPos) {
 							state.units[parent].main.insertBefore(state.units[ptr].main, nodes[i]);
+							// increment pos by one as there's been an insert
+							pos++;
 							return true;
 						}
 						// positions are not equal, so false
 						return false;
 					})();
 					// if true, that means we called insert before, return true to break the loop
-					if (roj) {
-						return true;
-					}
 				}
+				i++;
 			}
+			if (foundEqualPositions) { return true; };
 			// we return true anyway, as this just means that we can tack this onto the end of our structure
 			state.units[parent].main.appendChild(state.units[ptr].main);
 			return true;

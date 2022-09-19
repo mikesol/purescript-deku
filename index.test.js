@@ -86,3 +86,22 @@ doTest('domable is a monoid', (f) => f(tests.isAMonoid, () => {
   const $ = require('jquery');
   expect($('#mybody').text()).toBe('monoid');
 }));
+
+doTest('sends to position correctly', (f) => f(tests.sendsToPosition, () => {
+  const $ = require('jquery');
+  expect($('#dyn0').index()).toBeLessThan($('#dyn1').index());
+  expect($('#dyn1').index()).toBeLessThan($('#dyn2').index());
+  expect($('#dyn2').index()).toBeLessThan($('#dyn3').index());
+  expect($('#dyn3').index()).toBeLessThan($('#dyn4').index());
+  // for kicks
+  expect($('#dyn4').index()).toBeGreaterThan($('#dyn0').index());
+  $('#pos').trigger("click");
+  // 3 is now at 1
+  // so the order is 0, 3, 1, 2, 4
+  expect($('#dyn0').index()).toBeLessThan($('#dyn3').index());
+  expect($('#dyn3').index()).toBeLessThan($('#dyn1').index());
+  expect($('#dyn1').index()).toBeLessThan($('#dyn2').index());
+  expect($('#dyn2').index()).toBeLessThan($('#dyn4').index());
+  // for kicks
+  expect($('#dyn4').index()).toBeGreaterThan($('#dyn0').index());
+}));

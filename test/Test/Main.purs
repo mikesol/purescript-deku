@@ -5,11 +5,12 @@ import Prelude
 import Control.Monad.ST.Global (Global)
 import Control.Monad.ST.Internal (ST)
 import Control.Monad.ST.Internal as RRef
-import Data.Foldable (intercalate, oneOf)
+import Control.Plus (empty)
+import Data.Foldable (intercalate, oneOf, oneOfMap)
 import Data.Tuple.Nested ((/\))
 import Deku.Attributes (id_)
 import Deku.Control (text_)
-import Deku.Core (Domable, Nut, dyn, fixed, insert_)
+import Deku.Core (Domable, Nut, dyn, fixed, insert_, sendToPos)
 import Deku.DOM as D
 import Deku.Do (useState')
 import Deku.Do as Deku
@@ -108,4 +109,23 @@ deeplyNestedPreservesOrder = Deku.do
 
 -- why intercalate with mempty? why not!
 isAMonoid :: Nut
-isAMonoid = intercalate mempty $ map text_ ["m", "o", "n", "o", "i", "d"]
+isAMonoid = intercalate mempty $ map text_ [ "m", "o", "n", "o", "i", "d" ]
+
+sendsToPosition :: Nut
+sendsToPosition = Deku.do
+  setPosIdx /\ posIdx <- useState'
+  D.div (id_ "div0")
+    [ text_ "foo"
+    , D.span (id_ "div1") [ text_ "bar" ]
+    , dyn
+        ( (oneOfMap pure [ 0, 1, 2, 3, 4 ]) <#> \i ->
+            ( oneOf
+                [ pure $ insert_
+                    (D.span (id_ ("dyn" <> show i)) [ text_ (show i) ])
+                , if i == 3 then posIdx <#> sendToPos else empty
+                ]
+            )
+        )
+    , D.button (oneOf [ id_ "pos", click_ (setPosIdx 1) ])
+        [ text_ "send to pos" ]
+    ]

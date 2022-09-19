@@ -132,11 +132,15 @@ instance Monoid (Domable lock payload) where
 
 unsafeSetPos
   :: forall lock payload. Int -> Domable lock payload -> Domable lock payload
-unsafeSetPos i (Domable e) = Domable (f e)
+unsafeSetPos = Just >>> unsafeSetPos'
+
+unsafeSetPos'
+  :: forall lock payload. Maybe Int -> Domable lock payload -> Domable lock payload
+unsafeSetPos' i (Domable e) = Domable (f e)
   where
   f = case _ of
     Bolson.Element' (Node e') -> Bolson.Element'
-      (Node (lcmap (_ { pos = Just i }) e'))
+      (Node (lcmap (_ { pos = i }) e'))
     Bolson.EventfulElement' (Bolson.EventfulElement e') ->
       Bolson.EventfulElement' (Bolson.EventfulElement (map f e'))
     _ -> e
@@ -152,7 +156,7 @@ insert_
   :: forall lock payload
    . Domable lock payload
   -> Bolson.Child Int (Node lock payload) lock
-insert_ (Domable d) = Bolson.Insert d
+insert_ d = Bolson.Insert (unwrap $ unsafeSetPos' Nothing d)
 
 remove :: forall logic obj lock. Bolson.Child logic obj lock
 remove = Bolson.Remove

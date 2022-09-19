@@ -99,7 +99,12 @@ foreign import deleteFromCache_
   :: Core.DeleteFromCache -> FFIDOMSnapshot -> Effect Unit
 
 foreign import giveNewParent_
-  :: RunOnJust -> Core.GiveNewParent -> FFIDOMSnapshot -> Effect Unit
+  :: (Int -> Maybe Int)
+  -> Boolean
+  -> RunOnJust
+  -> Core.GiveNewParent
+  -> FFIDOMSnapshot
+  -> Effect Unit
 
 foreign import disconnectElement_
   :: Core.DisconnectElement -> FFIDOMSnapshot -> Effect Unit
@@ -135,7 +140,7 @@ fullDOMInterpret seed = Core.DOMInterpret
   , sendToPos
   , removeDynBeacon: removeDynBeacon_
   , deleteFromCache: deleteFromCache_
-  , giveNewParent: giveNewParent_ runOnJust
+  , giveNewParent: giveNewParent_ Just false runOnJust
   , disconnectElement: disconnectElement_
   }
 
@@ -202,33 +207,51 @@ ssrSetText a i = void $ Ref.modify (_ <> [ RenderableInstruction $ SetText a ])
   i
 
 ssrGiveNewParent
-  :: forall r. Core.GiveNewParent -> Ref.STRef r (Array Instruction) -> ST r Unit
-ssrGiveNewParent a i = void $ Ref.modify (_ <> [ EliminatableInstruction $ GiveNewParent a ])
+  :: forall r
+   . Core.GiveNewParent
+  -> Ref.STRef r (Array Instruction)
+  -> ST r Unit
+ssrGiveNewParent a i = void $ Ref.modify
+  (_ <> [ EliminatableInstruction $ GiveNewParent a ])
   i
+
 ssrMakeRoot
   :: forall r. Core.MakeRoot -> Ref.STRef r (Array Instruction) -> ST r Unit
-ssrMakeRoot a i = void $ Ref.modify (_ <> [ EliminatableInstruction $ MakeRoot a ])
+ssrMakeRoot a i = void $ Ref.modify
+  (_ <> [ EliminatableInstruction $ MakeRoot a ])
   i
 
 ssrSendToPos
   :: forall r. Core.SendToPos -> Ref.STRef r (Array Instruction) -> ST r Unit
-ssrSendToPos a i = void $ Ref.modify (_ <> [ EliminatableInstruction $ SendToPos a ])
+ssrSendToPos a i = void $ Ref.modify
+  (_ <> [ EliminatableInstruction $ SendToPos a ])
   i
 
 ssrDeleteFromCache
-  :: forall r. Core.DeleteFromCache -> Ref.STRef r (Array Instruction) -> ST r Unit
-ssrDeleteFromCache a i = void $ Ref.modify (_ <> [ EliminatableInstruction $ DeleteFromCache a ])
+  :: forall r
+   . Core.DeleteFromCache
+  -> Ref.STRef r (Array Instruction)
+  -> ST r Unit
+ssrDeleteFromCache a i = void $ Ref.modify
+  (_ <> [ EliminatableInstruction $ DeleteFromCache a ])
   i
 
 ssrRemoveDynBeacon
-  :: forall r. Core.DeleteFromCache -> Ref.STRef r (Array Instruction) -> ST r Unit
-ssrRemoveDynBeacon a i = void $ Ref.modify (_ <> [ EliminatableInstruction $ RemoveDynBeacon a ])
+  :: forall r
+   . Core.DeleteFromCache
+  -> Ref.STRef r (Array Instruction)
+  -> ST r Unit
+ssrRemoveDynBeacon a i = void $ Ref.modify
+  (_ <> [ EliminatableInstruction $ RemoveDynBeacon a ])
   i
 
-
 ssrDisconnectElement
-  :: forall r. Core.DisconnectElement -> Ref.STRef r (Array Instruction) -> ST r Unit
-ssrDisconnectElement a i = void $ Ref.modify (_ <> [ EliminatableInstruction $ DisconnectElement a ])
+  :: forall r
+   . Core.DisconnectElement
+  -> Ref.STRef r (Array Instruction)
+  -> ST r Unit
+ssrDisconnectElement a i = void $ Ref.modify
+  (_ <> [ EliminatableInstruction $ DisconnectElement a ])
   i
 
 ssrDOMInterpret
@@ -264,7 +287,7 @@ sendToPos a state = do
   parent <- getParent a.id state
   dynFamily <- getDynFamily a.id state
   let newA = { scope, parent, dynFamily, id: a.id, pos: Just a.pos }
-  giveNewParent_ runOnJust newA state
+  giveNewParent_ Just true runOnJust newA state
 
 hydratingDOMInterpret
   :: Ref.STRef Region.Global Int
@@ -289,6 +312,6 @@ hydratingDOMInterpret seed = Core.DOMInterpret
   , sendToPos
   , deleteFromCache: deleteFromCache_
   , removeDynBeacon: removeDynBeacon_
-  , giveNewParent: giveNewParent_ runOnJust
+  , giveNewParent: giveNewParent_ Just false runOnJust
   , disconnectElement: disconnectElement_
   }
