@@ -10,7 +10,7 @@ import Data.Foldable (intercalate, oneOf, oneOfMap)
 import Data.Tuple.Nested ((/\))
 import Deku.Attributes (id_)
 import Deku.Control (text_)
-import Deku.Core (Domable, Nut, dyn, fixed, insert_, sendToPos)
+import Deku.Core (Domable, Nut, dyn, fixed, insert, insert_, sendToPos)
 import Deku.DOM as D
 import Deku.Do (useState')
 import Deku.Do as Deku
@@ -153,3 +153,22 @@ sendsToPositionFixed = Deku.do
     , D.button (oneOf [ id_ "pos", click_ (setPosIdx 1) ])
         [ text_ "send to pos" ]
     ]
+
+insertsAtCorrectPositions :: Nut
+insertsAtCorrectPositions = D.div (id_ "div0")
+  [ text_ "foo"
+  , D.span (id_ "div1") [ text_ "bar" ]
+  , dyn
+      -- if we just used insert_ here, it would go in
+      -- linear order
+      -- here, we scramble the order and make sure that the dyns
+      -- are inserted in the scrambled order so that they read
+      -- 0-1-2-3-4 from top to bottom
+      ( (oneOfMap pure [ 3, 0, 4, 2, 1 ]) <#> \i ->
+          ( oneOf
+              [ pure $ insert i
+                  (D.span (id_ ("dyn" <> show i)) [ text_ (show i) ])
+              ]
+          )
+      )
+  ]

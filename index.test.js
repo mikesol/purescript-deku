@@ -125,3 +125,12 @@ doTest('sends to position correctly when elt is fixed', (f) => f(tests.sendsToPo
   expect($('#dyn4a').index()).toBeGreaterThan($('#dyn0a').index());
 }));
 
+doTest('sends to position correctly', (f) => f(tests.insertsAtCorrectPositions, () => {
+  const $ = require('jquery');
+  expect($('#dyn0').index()).toBeLessThan($('#dyn1').index());
+  expect($('#dyn1').index()).toBeLessThan($('#dyn2').index());
+  expect($('#dyn2').index()).toBeLessThan($('#dyn3').index());
+  expect($('#dyn3').index()).toBeLessThan($('#dyn4').index());
+  // for kicks
+  expect($('#dyn4').index()).toBeGreaterThan($('#dyn0').index());
+}));

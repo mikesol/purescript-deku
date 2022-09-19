@@ -50,6 +50,21 @@ export const attributeParent_ = (runOnJust) => (a) => (state) => () => {
 						}
 					}
 					while (j < dom.childNodes.length) {
+						var tmpDekuId;
+						if (tmpDekuId = dom.childNodes[j].$dekuId) {
+							// if this has the same dyn family AND pos information, we take it into account
+							const insertHappened = runOnJust(state.units[tmpDekuId].dynFamily)((tmpDynFamily) => () => {
+								const insertHappened2 = runOnJust(state.units[tmpDekuId].pos)((tmpPos) => () => {
+									if (dynFamily === tmpDynFamily && pos <= tmpPos) {
+										inserter(j);
+										return true;
+									}
+									return false;
+								})();
+								return insertHappened2;
+							})();
+							if (insertHappened) { return true; }
+						}
 						if (i === pos) {
 							inserter(j);
 							return true;
@@ -620,7 +635,18 @@ export const disconnectElement_ = (a) => (state) => () => {
 			return;
 		}
 
-		state.units[ptr].main.remove();
+		if (state.units[ptr].main) { state.units[ptr].main.remove(); }
+		else {
+			var x = state.units[ptr].startBeacon;
+			var y = x.nextSibling;
+			x.remove();
+			x = y;
+			while (x !== state.units[ptr].endBeacon) {
+				y = x.nextSibling;
+				x.remove();
+				x = y;
+			}
+		}
 	}
 };
 

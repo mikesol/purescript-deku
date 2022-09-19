@@ -335,7 +335,13 @@ dynify f es = Domable $ Bolson.Element' (Node go)
                 { parent
                 , scope
                 , raiseId: \_ -> pure unit
-                , pos
+                -- clear the pos
+                -- as we don't want the pointer's positional information
+                -- trickling down to what the pointer points to
+                -- the logic in Interpret.js will always give
+                -- the correct positional information to what
+                -- pointers point to
+                , pos: Nothing
                 , dynFamily: Just me
                 }
                 di
