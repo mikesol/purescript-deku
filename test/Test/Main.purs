@@ -199,8 +199,9 @@ tabbedNavigationWithPursx = Deku.do
     , item # switcher case _ of
         0 -> (Proxy :: _ "<h1 id=\"home\">home</h1>") ~~ {}
         1 -> (Proxy :: _ "<h1 id=\"about\">about ~me~</h1>") ~~ { me: nut $ text_ "me" }
-        _ -> (Proxy :: _ "<h1 id=\"contact\">contact ~a~ at ~b~</h1>") ~~
+        _ -> (Proxy :: _ "<h1 id=\"contact\">contact ~a~ at ~b~ ~c~</h1>") ~~
           { a: nut $ D.span_ [ text_ "mike" ]
           , b: nut $ text_ "site.com"
+          , c: nut $ (Proxy :: _ "<h1 id=\"thanks\">thanks</h1>") ~~ {}
           }
     ]
