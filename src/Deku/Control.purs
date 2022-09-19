@@ -4,6 +4,7 @@ module Deku.Control
   , text_
   , deku
   , globalPortal
+  , globalPortal1
   , portal
   , blank
   , ezDyn
@@ -17,7 +18,7 @@ import Bolson.Core (Child(..), Element(..), Entity(..), PSR, Scope(..))
 import Bolson.Core as BCore
 import Control.Alt ((<|>))
 import Control.Plus (empty)
-import Data.FastVect.FastVect (Vect)
+import Data.FastVect.FastVect (Vect, singleton, index)
 import Data.Filterable (filter)
 import Data.Foldable (oneOf)
 import Data.Maybe (Maybe(..), maybe)
@@ -32,6 +33,7 @@ import FRP.Event (Event, keepLatest, makeLemmingEvent, mapAccum, memoize)
 import Prim.Int (class Compare)
 import Prim.Ordering (GT)
 import Safe.Coerce (coerce)
+import Type.Proxy (Proxy(..))
 import Unsafe.Coerce (unsafeCoerce)
 import Web.DOM as Web.DOM
 
@@ -124,6 +126,13 @@ globalPortal v c = Domable $ Bolson.globalPortalComplexComplex
   }
   (map unwrap v)
   (dimap (map ((_ $ unit) >>> wrap)) unwrap c)
+
+globalPortal1
+  :: forall lock payload
+   . Domable lock payload
+  -> (Domable lock payload -> Domable lock payload)
+  -> Domable lock payload
+globalPortal1 i f = globalPortal (singleton i) (lcmap (index (Proxy :: _ 0)) f)
 
 -- ugh, this isn't sacred, delete it and regenerate if something changes
 portalFlatten

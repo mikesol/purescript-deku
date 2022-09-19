@@ -160,3 +160,8 @@ doTest('tabbed navigation with pursx has correct layout', (f) => f(tests.tabbedN
   expect($('#about').text()).toBe('');
   expect($('#contact').text()).toBe("contact mike at site.com thanks");
 }));
+
+doTest('portals compose', (f) => f(tests.portalsCompose, () => {
+  const $ = require('jquery');
+  expect($('#maindiv').text()).toBe('blah')
+}), true);

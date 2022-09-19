@@ -6,6 +6,7 @@ export const unSetHydrating = (state) => () => {
 };
 export const attributeParent_ = (runOnJust) => (a) => (state) => () => {
 	if (state.units[a.id]) {
+		const dom = state.units[a.parent].main;
 		// only attribute if it is not attributed already
 		if (!((state.units[a.id].main && state.units[a.id].main.parentNode)
 			|| (state.units[a.id].startBeacon && state.units[a.id].startBeacon.parentNode))) {
@@ -19,7 +20,6 @@ export const attributeParent_ = (runOnJust) => (a) => (state) => () => {
 					var i = 0;
 					var j = 0;
 					var terminalDyn;
-					const dom = state.units[a.parent].main;
 					while (j < dom.childNodes.length) {
 						if (
 							dom.childNodes[j].nodeType === 8 &&
@@ -113,18 +113,18 @@ export const attributeParent_ = (runOnJust) => (a) => (state) => () => {
 				// wrapper with its child.
 				if (a.parent.indexOf("@!%") !== -1) {
 					// TODO: do we also need to update dkid stuff here?
-					state.units[a.parent].main.parentNode.replaceChild(
+					dom.main.parentNode.replaceChild(
 						state.units[a.id].main,
-						state.units[a.parent].main
+						dom.main
 					);
 				} else {
 					// we insert it at the end of its dyn family
 					const hasADynFamily = runOnJust(a.dynFamily)((dynFamily) => () => {
 						if (state.units[a.id].startBeacon) {
-							state.units[a.parent].main.insertBefore(state.units[a.id].startBeacon, state.units[dynFamily].endBeacon);
-							state.units[a.parent].main.insertBefore(state.units[a.id].endBeacon, state.units[dynFamily].endBeacon);
+							dom.main.insertBefore(state.units[a.id].startBeacon, state.units[dynFamily].endBeacon);
+							dom.main.insertBefore(state.units[a.id].endBeacon, state.units[dynFamily].endBeacon);
 						} else {
-							state.units[a.parent].main.insertBefore(state.units[a.id].main, state.units[dynFamily].endBeacon);
+							dom.main.insertBefore(state.units[a.id].main, state.units[dynFamily].endBeacon);
 						}
 						return true;
 					})();
@@ -132,10 +132,10 @@ export const attributeParent_ = (runOnJust) => (a) => (state) => () => {
 					// we just tack it on to the end
 					if (!hasADynFamily) {
 						if (state.units[a.id].startBeacon) {
-							state.units[a.parent].main.appendChild(state.units[a.id].startBeacon);
-							state.units[a.parent].main.appendChild(state.units[a.id].endBeacon);
+							dom.main.appendChild(state.units[a.id].startBeacon);
+							dom.main.appendChild(state.units[a.id].endBeacon);
 						} else {
-							state.units[a.parent].main.appendChild(state.units[a.id].main);
+							dom.main.appendChild(state.units[a.id].main);
 						}
 					}
 				}
@@ -528,6 +528,7 @@ export const makeRoot_ = (a) => (state) => () => {
 };
 
 export const giveNewParent_ = (just) => (anchorToDynBeacon) => (runOnJust) => (b) => (state) => () => {
+	console.log('giveNewParent_', b);
 	const runMe = []
 	// this is a hold over from when runMe had multiple items
 	// we can safely change it now
@@ -576,14 +577,17 @@ export const giveNewParent_ = (just) => (anchorToDynBeacon) => (runOnJust) => (b
 								// we continue this operation until we hit the end beacon
 								var x = state.units[ptr].startBeacon;
 								var y = x.nextSibling;
+								console.log('inserting');
 								state.units[parent].main.insertBefore(x, nodes[i]);
 								x = y;
-								while (x !== state.units[ptr].endBeacon) {
+								while (x && x !== state.units[ptr].endBeacon) {
 									y = x.nextSibling;
+									console.log('inserting');
 									state.units[parent].main.insertBefore(x, nodes[i]);
 									x = y;
 								}
 							} else {
+								console.log('inserting');
 								state.units[parent].main.insertBefore(state.units[ptr].main, nodes[i]);
 							}
 							// increment pos by one as there's been an insert
@@ -599,13 +603,17 @@ export const giveNewParent_ = (just) => (anchorToDynBeacon) => (runOnJust) => (b
 			}
 			if (foundEqualPositions) { return true; };
 			// we return true anyway, as this just means that we can tack this onto the end of our structure
-			if (state.units[ptr].main) { state.units[parent].main.appendChild(state.units[ptr].main); }
+			if (state.units[ptr].main) {
+				console.log('appending pos main');
+				state.units[parent].main.appendChild(state.units[ptr].main);
+			}
 			else {
 				var x = state.units[ptr].startBeacon;
 				var y = x.nextSibling;
+				console.log('appending pos dyn');
 				state.units[parent].main.appendChild(x);
 				x = y;
-				while (x !== state.units[ptr].endBeacon) {
+				while (x && x !== state.units[ptr].endBeacon) {
 					y = x.nextSibling;
 					state.units[parent].main.appendChild(x);
 					x = y;
@@ -614,13 +622,14 @@ export const giveNewParent_ = (just) => (anchorToDynBeacon) => (runOnJust) => (b
 			return true;
 		})();
 		if (!iRan) {
-			if (state.units[ptr].main) { state.units[parent].main.appendChild(state.units[ptr].main); }
+			if (state.units[ptr].main) { console.log('appending nonpos main'); state.units[parent].main.appendChild(state.units[ptr].main); }
 			else {
 				var x = state.units[ptr].startBeacon;
 				var y = x.nextSibling;
+				console.log('appending nonpos dyn', x, y);
 				state.units[parent].main.appendChild(x);
 				x = y;
-				while (x !== state.units[ptr].endBeacon) {
+				while (x && x !== state.units[ptr].endBeacon) {
 					y = x.nextSibling;
 					state.units[parent].main.appendChild(x);
 					x = y;
@@ -631,6 +640,7 @@ export const giveNewParent_ = (just) => (anchorToDynBeacon) => (runOnJust) => (b
 };
 
 export const disconnectElement_ = (a) => (state) => () => {
+	console.log('disconnecting');
 	if (state.units[a.id]) {
 		var ptr = a.id;
 		if (
@@ -642,13 +652,20 @@ export const disconnectElement_ = (a) => (state) => () => {
 
 		if (state.units[ptr].main) { state.units[ptr].main.remove(); }
 		else {
+			// when we disconnect a dyn, we _always_ need to
+			// keep the elements grouped together
+			// so instead of removing them
+			// we add them to a dummy element to preserve their order
+			const dummy = document.createElement("div");
 			var x = state.units[ptr].startBeacon;
 			var y = x.nextSibling;
-			x.remove();
+			console.log('appending');
+			dummy.appendChild(x);
 			x = y;
-			while (x !== state.units[ptr].endBeacon) {
+			while (x && x !== state.units[ptr].endBeacon) {
 				y = x.nextSibling;
-				x.remove();
+				dummy.appendChild(x);
+				console.log('appending');
 				x = y;
 			}
 		}
