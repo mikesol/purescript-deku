@@ -113,18 +113,18 @@ export const attributeParent_ = (runOnJust) => (a) => (state) => () => {
 				// wrapper with its child.
 				if (a.parent.indexOf("@!%") !== -1) {
 					// TODO: do we also need to update dkid stuff here?
-					dom.main.parentNode.replaceChild(
+					dom.parentNode.replaceChild(
 						state.units[a.id].main,
-						dom.main
+						dom
 					);
 				} else {
 					// we insert it at the end of its dyn family
 					const hasADynFamily = runOnJust(a.dynFamily)((dynFamily) => () => {
 						if (state.units[a.id].startBeacon) {
-							dom.main.insertBefore(state.units[a.id].startBeacon, state.units[dynFamily].endBeacon);
-							dom.main.insertBefore(state.units[a.id].endBeacon, state.units[dynFamily].endBeacon);
+							dom.insertBefore(state.units[a.id].startBeacon, state.units[dynFamily].endBeacon);
+							dom.insertBefore(state.units[a.id].endBeacon, state.units[dynFamily].endBeacon);
 						} else {
-							dom.main.insertBefore(state.units[a.id].main, state.units[dynFamily].endBeacon);
+							dom.insertBefore(state.units[a.id].main, state.units[dynFamily].endBeacon);
 						}
 						return true;
 					})();
@@ -132,10 +132,10 @@ export const attributeParent_ = (runOnJust) => (a) => (state) => () => {
 					// we just tack it on to the end
 					if (!hasADynFamily) {
 						if (state.units[a.id].startBeacon) {
-							dom.main.appendChild(state.units[a.id].startBeacon);
-							dom.main.appendChild(state.units[a.id].endBeacon);
+							dom.appendChild(state.units[a.id].startBeacon);
+							dom.appendChild(state.units[a.id].endBeacon);
 						} else {
-							dom.main.appendChild(state.units[a.id].main);
+							dom.appendChild(state.units[a.id].main);
 						}
 					}
 				}
