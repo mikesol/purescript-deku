@@ -5,9 +5,11 @@ export const unSetHydrating = (state) => () => {
 	state.hydrating = false;
 };
 export const attributeParent_ = (runOnJust) => (a) => (state) => () => {
+	console.log('attributeParent_', a);
 	if (state.units[a.id]) {
 		const dom = state.units[a.parent].main;
 		// only attribute if it is not attributed already
+		// console.log('attribution',state.units[a.id].main, state.units[a.id].parentNode, state.units[a.id].startBeacon, state.units[a.id].startBeacon.parentNode);
 		if (!((state.units[a.id].main && state.units[a.id].main.parentNode)
 			|| (state.units[a.id].startBeacon && state.units[a.id].startBeacon.parentNode))) {
 			const iRan = runOnJust(a.pos)((pos) => () => {
@@ -34,6 +36,7 @@ export const attributeParent_ = (runOnJust) => (a) => (state) => () => {
 					}
 					const inserter = (k) => {
 						if (state.units[a.id].startBeacon) {
+							console.log('running inserter', dom);
 							dom.insertBefore(
 								state.units[a.id].startBeacon,
 								dom.childNodes[k]
@@ -104,6 +107,7 @@ export const attributeParent_ = (runOnJust) => (a) => (state) => () => {
 				})();
 			})();
 			if (!iRan) {
+				console.log('no pos');
 				// this is a pursx child element
 				// pursx children will _never_ have positional information
 				// as they are one-offs in the pursx tree
@@ -113,18 +117,22 @@ export const attributeParent_ = (runOnJust) => (a) => (state) => () => {
 				// wrapper with its child.
 				if (a.parent.indexOf("@!%") !== -1) {
 					// TODO: do we also need to update dkid stuff here?
-					dom.main.parentNode.replaceChild(
+					dom.parentNode.replaceChild(
 						state.units[a.id].main,
-						dom.main
+						dom
 					);
 				} else {
 					// we insert it at the end of its dyn family
 					const hasADynFamily = runOnJust(a.dynFamily)((dynFamily) => () => {
 						if (state.units[a.id].startBeacon) {
-							dom.main.insertBefore(state.units[a.id].startBeacon, state.units[dynFamily].endBeacon);
-							dom.main.insertBefore(state.units[a.id].endBeacon, state.units[dynFamily].endBeacon);
+							console.log('pre-crash isdyn');
+							dom.insertBefore(state.units[a.id].startBeacon, state.units[dynFamily].endBeacon);
+							dom.insertBefore(state.units[a.id].endBeacon, state.units[dynFamily].endBeacon);
+							console.log('post-crash isdyn')
 						} else {
-							dom.main.insertBefore(state.units[a.id].main, state.units[dynFamily].endBeacon);
+							console.log('pre-crash not dyn')
+							dom.insertBefore(state.units[a.id].main, state.units[dynFamily].endBeacon);
+							console.log('post-crash not dyn')
 						}
 						return true;
 					})();
@@ -132,16 +140,17 @@ export const attributeParent_ = (runOnJust) => (a) => (state) => () => {
 					// we just tack it on to the end
 					if (!hasADynFamily) {
 						if (state.units[a.id].startBeacon) {
-							dom.main.appendChild(state.units[a.id].startBeacon);
-							dom.main.appendChild(state.units[a.id].endBeacon);
+							dom.appendChild(state.units[a.id].startBeacon);
+							dom.appendChild(state.units[a.id].endBeacon);
 						} else {
-							dom.main.appendChild(state.units[a.id].main);
+							dom.appendChild(state.units[a.id].main);
 						}
 					}
 				}
 			}
 		}
 	}
+	console.log('attributeParent_ end')
 };
 export const getAllComments = (state) => () => {
 	function filterNone() {
@@ -191,7 +200,9 @@ export const makeDynBeacon_ = (runOnJust) => (tryHydration) => (a) => (state) =>
 		}
 		return false;
 	})();
+	console.log('makeDynBeacon_', a);
 	if (!iRan) {
+		console.log('creating db', a);
 		const startBeacon = document.createComment(`%-%${a.id}`);
 		const endBeacon = document.createComment(`%-%${a.id}%-%`);
 		state.units[ptr] = {

@@ -164,4 +164,4 @@ doTest('tabbed navigation with pursx has correct layout', (f) => f(tests.tabbedN
 doTest('portals compose', (f) => f(tests.portalsCompose, () => {
   const $ = require('jquery');
   expect($('#maindiv').text()).toBe('blah')
-}), true);
+}), false);

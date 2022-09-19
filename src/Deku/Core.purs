@@ -45,11 +45,11 @@ import Control.Monad.ST (ST)
 import Control.Monad.ST.Global (Global)
 import Control.Plus (empty)
 import Data.Foldable (oneOf)
-import Data.Maybe (Maybe(..), maybe)
+import Data.Maybe (Maybe(..))
 import Data.Newtype (class Newtype, unwrap)
 import Data.Profunctor (lcmap)
 import Data.Tuple (curry)
-import Data.Tuple.Nested (type (/\))
+import Data.Tuple.Nested (type (/\), (/\))
 import Deku.Attribute (Cb)
 import Effect (Effect)
 import FRP.Event (Event, makeLemmingEvent)
@@ -135,7 +135,10 @@ unsafeSetPos
 unsafeSetPos = Just >>> unsafeSetPos'
 
 unsafeSetPos'
-  :: forall lock payload. Maybe Int -> Domable lock payload -> Domable lock payload
+  :: forall lock payload
+   . Maybe Int
+  -> Domable lock payload
+  -> Domable lock payload
 unsafeSetPos' i (Domable e) = Domable (f e)
   where
   f = case _ of
@@ -318,21 +321,41 @@ dynify f es = Domable $ Bolson.Element' (Node go)
   where
   go
     { parent, scope, raiseId, pos, dynFamily }
-    di@(DOMInterpret { ids, makeDynBeacon, attributeParent, removeDynBeacon }) =
+    di@
+      ( DOMInterpret
+          { ids, makeElement, makeDynBeacon, attributeParent, removeDynBeacon }
+      ) =
     makeLemmingEvent \mySub k -> do
       me <- ids
       raiseId me
+      -- for dyns, they NEED to have a parent because they need to
+      -- preserve relational information, which can only be done
+      -- by their having a parent that we can iterate over
+      -- ie via nextSibling
+      -- so if there is no parent, we create a dummy one
+      parentEvent /\ parentId <- case parent of
+        Nothing -> do
+          dummyParent <- ids
+          pure
+            ( ( pure $ makeElement
+                  { id: dummyParent
+                  , parent: Nothing
+                  , scope
+                  , tag: "div"
+                  , pos: Nothing
+                  , dynFamily: Nothing
+                  }
+              ) /\ dummyParent
+            )
+        Just x -> pure (empty /\ x)
       unsub <- mySub
         ( oneOf
-            [ pure $ makeDynBeacon { id: me, parent, scope, dynFamily, pos }
-            , maybe empty
-                ( \p ->
-                    pure $ attributeParent
-                      { id: me, parent: p, pos, dynFamily }
-                )
-                parent
+            [ parentEvent
+            , pure $ makeDynBeacon { id: me, parent: Just parentId, scope, dynFamily, pos }
+            , pure $ attributeParent
+                { id: me, parent: parentId, pos, dynFamily }
             , __internalDekuFlatten
-                { parent
+                { parent: Just parentId
                 , scope
                 , raiseId: \_ -> pure unit
                 -- clear the pos
