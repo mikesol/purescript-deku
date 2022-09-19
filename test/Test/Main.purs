@@ -9,10 +9,10 @@ import Control.Plus (empty)
 import Data.Foldable (intercalate, oneOf, oneOfMap)
 import Data.Tuple.Nested ((/\))
 import Deku.Attributes (id_)
-import Deku.Control (text_)
+import Deku.Control (switcher, text_)
 import Deku.Core (Domable, Nut, dyn, fixed, insert, insert_, sendToPos)
 import Deku.DOM as D
-import Deku.Do (useState')
+import Deku.Do (useState, useState')
 import Deku.Do as Deku
 import Deku.Interpret (FFIDOMSnapshot, Instruction)
 import Deku.Listeners (click_)
@@ -167,3 +167,19 @@ insertsAtCorrectPositions = D.div (id_ "div0")
 
       )
   ]
+
+switcherWorksForCompositinoalElements :: Nut
+switcherWorksForCompositinoalElements = Deku.do
+  let
+    counter :: forall a. Event a -> Event Int
+    counter event = fold (const (add 1)) event (-1)
+  setItem /\ item <- useState unit
+  D.div (id_ "div0")
+    [ text_ "foo"
+    , D.span (id_ "div1") [ text_ "bar" ]
+    , counter item # switcher \i -> fixed
+        ( [ 0, 1, 2 ] <#> \j -> D.span (id_ $ "id" <> show j)
+            [ text_ (show i <> "-" <> show j) ]
+        )
+    , D.button (oneOf [ id_ "incr", click_ (setItem unit) ]) [ text_ "incr" ]
+    ]

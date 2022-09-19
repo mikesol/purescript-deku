@@ -134,3 +134,18 @@ doTest('sends to position correctly', (f) => f(tests.insertsAtCorrectPositions, 
   // for kicks
   expect($('#dyn4').index()).toBeGreaterThan($('#dyn0').index());
 }));
+
+doTest('switcher works for compositional elements', (f) => f(tests.switcherWorksForCompositinoalElements, () => {
+  const $ = require('jquery');
+  expect($('#id0').text()).toBe('0-0');
+  expect($('#id1').text()).toBe('0-1');
+  expect($('#id2').text()).toBe('0-2');
+  $('#incr').trigger("click");
+  expect($('#id0').text()).toBe('1-0');
+  expect($('#id1').text()).toBe('1-1');
+  expect($('#id2').text()).toBe('1-2');
+  $('#incr').trigger("click");
+  expect($('#id0').text()).toBe('2-0');
+  expect($('#id1').text()).toBe('2-1');
+  expect($('#id2').text()).toBe('2-2');
+}));
