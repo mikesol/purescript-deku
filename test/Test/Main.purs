@@ -16,9 +16,11 @@ import Deku.Do (useState, useState')
 import Deku.Do as Deku
 import Deku.Interpret (FFIDOMSnapshot, Instruction)
 import Deku.Listeners (click_)
+import Deku.Pursx (nut, (~~))
 import Deku.Toplevel (Template(..), hydrate', runInBody', runSSR)
 import Effect (Effect)
 import FRP.Event (Event, fold)
+import Type.Proxy (Proxy(..))
 
 runNoSSR
   :: (forall lock. Domable lock (FFIDOMSnapshot -> Effect Unit))
@@ -168,8 +170,8 @@ insertsAtCorrectPositions = D.div (id_ "div0")
       )
   ]
 
-switcherWorksForCompositinoalElements :: Nut
-switcherWorksForCompositinoalElements = Deku.do
+switcherWorksForCompositionalElements :: Nut
+switcherWorksForCompositionalElements = Deku.do
   let
     counter :: forall a. Event a -> Event Int
     counter event = fold (const (add 1)) event (-1)
@@ -182,4 +184,23 @@ switcherWorksForCompositinoalElements = Deku.do
             [ text_ (show i <> "-" <> show j) ]
         )
     , D.button (oneOf [ id_ "incr", click_ (setItem unit) ]) [ text_ "incr" ]
+    ]
+
+tabbedNavigationWithPursx :: Nut
+tabbedNavigationWithPursx = Deku.do
+  setItem /\ item <- useState 0
+  D.div (id_ "div0")
+    [ D.div_
+        [ D.button (oneOf [ id_ "home-btn", click_ (setItem 0) ]) [ text_ "home" ]
+        , D.button (oneOf [ id_ "about-btn", click_ (setItem 1) ]) [ text_ "about" ]
+        , D.button (oneOf [ id_ "contact-btn", click_ (setItem 2) ])
+            [ text_ "contact" ]
+        ]
+    , item # switcher case _ of
+        0 -> (Proxy :: _ "<h1 id=\"home\">home</h1>") ~~ {}
+        1 -> (Proxy :: _ "<h1 id=\"about\">about ~me~</h1>") ~~ { me: nut $ text_ "me" }
+        _ -> (Proxy :: _ "<h1 id=\"contact\">contact ~a~ at ~b~</h1>") ~~
+          { a: nut $ D.span_ [ text_ "mike" ]
+          , b: nut $ text_ "site.com"
+          }
     ]

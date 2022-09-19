@@ -6,15 +6,73 @@ import Control.Monad.State (execState, modify)
 import Data.Array (find, findMap, (!!))
 import Data.Array as Array
 import Data.CatQueue as Queue
-import Data.Filterable (filterMap)
+import Data.Either (Either(..))
+import Data.Filterable (compact, filterMap)
 import Data.Function (on)
 import Data.Map as Map
 import Data.Maybe (Maybe(..), fromMaybe, isJust, maybe)
+import Data.Newtype (class Newtype, unwrap)
 import Data.String as String
 import Data.Traversable (foldMap, foldl, for_, intercalate, traverse)
 import Data.Tuple.Nested ((/\))
+import Deku.Core (MakeDynBeacon)
 import Deku.Core as Core
 import Deku.Interpret (EliminatableInstruction(..), Instruction(..), RenderableInstruction(..))
+
+newtype SortableDyn = SortableDyn
+  { pos :: Maybe Int
+  , elt ::
+      Either RenderableInstruction
+        { o :: MakeDynBeacon, c :: MakeDynBeacon, a :: Array SortableDyn }
+  }
+
+derive instance Newtype SortableDyn _
+
+fromSortableDyns :: Array SortableDyn -> Array RenderableInstruction
+fromSortableDyns arr = join $ arr <#>
+  ( unwrap >>> _.elt >>> case _ of
+      Left x -> [ x ]
+      Right { o, c, a } -> [ MakeOpenDynBeacon o ] <> fromSortableDyns a <>
+        [ MakeCloseDynBeacon c ]
+  )
+
+sortSortableDyns :: Array SortableDyn -> Array SortableDyn
+sortSortableDyns = Array.sortBy (compare `on` (unwrap >>> _.pos)) >>> map
+  \(SortableDyn i) ->
+    case i.elt of
+      Left _ -> SortableDyn i
+      Right x -> SortableDyn
+        { pos: i.pos, elt: Right $ { o: x.o, c: x.c, a: sortSortableDyns x.a } }
+
+toSortableDyns :: Array RenderableInstruction -> Array SortableDyn
+toSortableDyns a = (go [] Nothing a).acc
+  where
+  go acc currentDyn = Array.uncons >>> case _ of
+    Nothing -> { acc, rest: [] }
+    Just { head, tail } -> case head of
+      MakeOpenDynBeacon (e@{ id }) -> do
+        let ar = go [] (Just { id, e }) tail
+        go (acc <> ar.acc) currentDyn ar.rest
+      MakeCloseDynBeacon mcdb -> case currentDyn of
+        Just { e } ->
+          { acc:
+              [ SortableDyn { pos: e.pos, elt: Right { o: e, a: acc, c: mcdb } }
+              ]
+          , rest: tail
+          }
+        -- fail
+        Nothing -> { acc: [], rest: [] }
+      _ -> do
+        let
+          pos' = case head of
+            MakeElement { pos } -> pos
+            MakeText { pos } -> pos
+            MakePursx { pos } -> pos
+            MakeOpenDynBeacon { pos } -> pos
+            MakeCloseDynBeacon { pos } -> pos
+            SetProp _ -> Nothing
+            SetText _ -> Nothing
+        go (acc <> [ SortableDyn { pos: pos', elt: Left head } ]) currentDyn tail
 
 foreign import encodedString :: String -> String
 foreign import doPursxReplacements :: Core.MakePursx -> String
@@ -38,7 +96,6 @@ ssr' topTag arr' = "<" <> topTag
         _ -> Nothing
     )
     arr'
-  arr = instructionsToRenderableInstructions arr'
 
   instructionsToRenderableInstructions
     :: Array Instruction -> Queue.CatQueue RenderableInstruction
@@ -221,19 +278,21 @@ ssr' topTag arr' = "<" <> topTag
         else doDeleteFromCache (Queue.snoc cl elt) id' rest
       Nothing -> cl
     asList = Queue.fromFoldable aa
-  making parent id action = do
-    void $ modify
-      ( \s -> s
-          { parentToChild = Map.alter
-              ( case _ of
-                  Just a -> Just (a <> [ id ])
-                  Nothing -> Just [ id ]
-              )
-              parent
-              s.parentToChild
-          }
-      )
-    setting id action
+  arr = instructionsToRenderableInstructions arr'
+  making parent id action =
+      do
+        void $ modify
+          ( \s -> s
+              { parentToChild = Map.alter
+                  ( case _ of
+                      Just a -> Just (a <> [ id ])
+                      Nothing -> Just [ id ]
+                  )
+                  parent
+                  s.parentToChild
+              }
+          )
+        setting id action
   setting id action = do
     void $ modify
       ( \s -> s
@@ -248,21 +307,28 @@ ssr' topTag arr' = "<" <> topTag
       )
   { parentToChild, idToActions } =
     ( \x ->
-        { parentToChild: x.parentToChild <#> Array.sortBy
-            ( compare `on` \i -> Map.lookup i x.idToActions >>= Array.head >>=
-                case _ of
-                  MakeElement { pos } -> pos
-                  MakeText { pos } -> pos
-                  MakePursx { pos } -> pos
-                  MakeOpenDynBeacon { pos } -> pos
-                  MakeCloseDynBeacon { pos } -> pos
-                  -- we can safely push setters to the back
-                  -- todo: is this a true assumption?
-                  SetProp _ -> Just top
-                  SetText _ -> Just top
-            )
-        , idToActions: x.idToActions
-        }
+        -- this is broken
+        -- we only want to sort based on dyn family
+        -- ugggghhh
+        ( { parentToChild: x.parentToChild <#>
+              ( map
+                  ( \i -> Map.lookup i x.idToActions >>= Array.head
+                  ) >>> compact >>> toSortableDyns >>>  sortSortableDyns
+                  >>> fromSortableDyns
+                  >>> map
+                    ( case _ of
+                        MakeElement { id } -> id
+                        MakeText { id } -> id
+                        MakePursx { id } -> id
+                        MakeOpenDynBeacon { id } -> id
+                        MakeCloseDynBeacon { id } -> id
+                        SetProp { id } -> id
+                        SetText { id } -> id
+                    )
+              )
+          , idToActions: x.idToActions
+          }
+        )
     ) $ execState
       ( traverse
           ( \i -> case i of

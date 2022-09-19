@@ -135,7 +135,7 @@ doTest('sends to position correctly', (f) => f(tests.insertsAtCorrectPositions, 
   expect($('#dyn4').index()).toBeGreaterThan($('#dyn0').index());
 }));
 
-doTest('switcher works for compositional elements', (f) => f(tests.switcherWorksForCompositinoalElements, () => {
+doTest('switcher works for compositional elements', (f) => f(tests.switcherWorksForCompositionalElements, () => {
   const $ = require('jquery');
   expect($('#id0').text()).toBe('0-0');
   expect($('#id1').text()).toBe('0-1');
@@ -148,4 +148,8 @@ doTest('switcher works for compositional elements', (f) => f(tests.switcherWorks
   expect($('#id0').text()).toBe('2-0');
   expect($('#id1').text()).toBe('2-1');
   expect($('#id2').text()).toBe('2-2');
+}));
+
+doTest('tabbed navigation with pursx has correct layout', (f) => f(tests.tabbedNavigationWithPursx, () => {
+  const $ = require('jquery');
 }));
