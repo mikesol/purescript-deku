@@ -7,12 +7,11 @@ import Data.Array (find, findMap, (!!))
 import Data.Array as Array
 import Data.CatQueue as Queue
 import Data.Filterable (filterMap)
-import Data.FoldableWithIndex (foldlWithIndex)
 import Data.Function (on)
 import Data.Map as Map
 import Data.Maybe (Maybe(..), fromMaybe, isJust, maybe)
 import Data.String as String
-import Data.Traversable (foldMap, for_, intercalate, traverse)
+import Data.Traversable (foldMap, foldl, for_, intercalate, traverse)
 import Data.Tuple.Nested ((/\))
 import Deku.Core as Core
 import Deku.Interpret (EliminatableInstruction(..), Instruction(..), RenderableInstruction(..))
@@ -24,7 +23,10 @@ ssr :: Array Instruction -> String
 ssr = ssr' "body"
 
 ssr' :: String -> Array Instruction -> String
-ssr' topTag arr' = "<" <> topTag <> " data-deku-ssr=\"deku-root\" data-deku-root=\"" <> rootId <> "\">"
+ssr' topTag arr' = "<" <> topTag
+  <> " data-deku-ssr=\"deku-root\" data-deku-root=\""
+  <> rootId
+  <> "\">"
   <> oo rootId
   <> "</"
   <> topTag
@@ -295,8 +297,8 @@ ssr' topTag arr' = "<" <> topTag <> " data-deku-ssr=\"deku-root\" data-deku-root
     -- a bit hackish
     -- if we find a MakeElement or MakeText, we assume that SSR is done
     -- otherwise, we assume pursX and do manual replacements
-    foldlWithIndex
-      ( \i b a -> case hasMake a of
+    foldl
+      ( \b a -> case hasMake a of
           true -> b
           false -> String.replace (String.Pattern ("data-deku-ssr"))
             (String.Replacement (eltAtts a <> " data-deku-ssr"))
