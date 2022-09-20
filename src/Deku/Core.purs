@@ -328,11 +328,10 @@ dynify f es = Domable $ Bolson.Element' (Node go)
     makeLemmingEvent \mySub k -> do
       me <- ids
       raiseId me
-      -- for dyns, they NEED to have a parent because they need to
-      -- preserve relational information, which can only be done
-      -- by their having a parent that we can iterate over
-      -- ie via nextSibling
-      -- so if there is no parent, we create a dummy one
+      -- `dyn`-s need to have a parent
+      -- Tis is because we need to preserve the order of children and a parent is the cleanest way to do this.
+      -- Then, we can call `childNodes` and `nextSibling`.
+      -- In practice, they will almost always have a parent, but for portals they don't, so we create a dummy one that is not rendered.
       parentEvent /\ parentId <- case parent of
         Nothing -> do
           dummyParent <- ids
