@@ -181,7 +181,7 @@ instance pursxToElementConsInsert ::
             , scope: info.scope
             , raiseId: \_ -> pure unit
             , pos: info.pos
-            , dynFamily: info.dynFamily
+            , dynFamily: Nothing
             }
             di
             pxe

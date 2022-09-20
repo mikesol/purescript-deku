@@ -113,10 +113,32 @@ export const attributeParent_ = (runOnJust) => (a) => (state) => () => {
 				// wrapper with its child.
 				if (a.parent.indexOf("@!%") !== -1) {
 					// TODO: do we also need to update dkid stuff here?
-					dom.parentNode.replaceChild(
-						state.units[a.id].main,
-						dom
-					);
+					const usedDynBeacon = runOnJust(a.dynFamily)((df) => () => {
+						if (state.units[a.id].main) {
+							state.units[df].endBeacon.parentNode.insertBefore(
+								state.units[a.id].main,
+								state.units[df].endBeacon);
+						} else {
+							state.units[df].endBeacon.parentNode.insertBefore(
+								state.units[a.id].endBeacon,
+								state.units[df].endBeacon);
+							state.units[df].endBeacon.parentNode.insertBefore(state.units[a.id].startBeacon, state.units[a.id].endBeacon);
+						}
+						return true;
+					})();
+					if (usedDynBeacon) { }
+					else if (state.units[a.id].main) {
+						dom.parentNode.replaceChild(
+							state.units[a.id].main,
+							dom
+						);
+					} else {
+						dom.parentNode.replaceChild(
+							state.units[a.id].endBeacon,
+							dom
+						);
+						state.units[a.id].endBeacon.parentNode.insertBefore(state.units[a.id].startBeacon, state.units[a.id].endBeacon);
+					}
 				} else {
 					// we insert it at the end of its dyn family
 					const hasADynFamily = runOnJust(a.dynFamily)((dynFamily) => () => {
