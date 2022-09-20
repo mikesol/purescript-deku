@@ -164,5 +164,11 @@ doTest('tabbed navigation with pursx has correct layout', (f) => f(tests.tabbedN
 doTest('portals compose', (f) => f(tests.portalsCompose, () => {
   const $ = require('jquery');
   // d0, then abc, then d1, then d2, then the button
-  expect($('#maindiv').text()).toBe('d0abcd1d2incr')
+  expect($('#maindiv').text()).toBe('d0abcd1d2incr');
+  $('#incr').trigger("click");
+  // shifts the portal
+  expect($('#maindiv').text()).toBe('d0d1abcd2incr');
+  $('#incr').trigger("click");
+  // shifts the portal
+  expect($('#maindiv').text()).toBe('d0d1d2abcincr');
 }));
