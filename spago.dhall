@@ -6,6 +6,7 @@
   , "catenable-lists"
   , "control"
   , "effect"
+  , "either"
   , "fast-vect"
   , "filterable"
   , "foldable-traversable"

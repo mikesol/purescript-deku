@@ -5,11 +5,9 @@ export const unSetHydrating = (state) => () => {
 	state.hydrating = false;
 };
 export const attributeParent_ = (runOnJust) => (a) => (state) => () => {
-	console.log('attributeParent_', a);
 	if (state.units[a.id]) {
 		const dom = state.units[a.parent].main;
 		// only attribute if it is not attributed already
-		// console.log('attribution',state.units[a.id].main, state.units[a.id].parentNode, state.units[a.id].startBeacon, state.units[a.id].startBeacon.parentNode);
 		if (!((state.units[a.id].main && state.units[a.id].main.parentNode)
 			|| (state.units[a.id].startBeacon && state.units[a.id].startBeacon.parentNode))) {
 			const iRan = runOnJust(a.pos)((pos) => () => {
@@ -36,7 +34,6 @@ export const attributeParent_ = (runOnJust) => (a) => (state) => () => {
 					}
 					const inserter = (k) => {
 						if (state.units[a.id].startBeacon) {
-							console.log('running inserter', dom);
 							dom.insertBefore(
 								state.units[a.id].startBeacon,
 								dom.childNodes[k]
@@ -107,7 +104,6 @@ export const attributeParent_ = (runOnJust) => (a) => (state) => () => {
 				})();
 			})();
 			if (!iRan) {
-				console.log('no pos');
 				// this is a pursx child element
 				// pursx children will _never_ have positional information
 				// as they are one-offs in the pursx tree
@@ -125,14 +121,10 @@ export const attributeParent_ = (runOnJust) => (a) => (state) => () => {
 					// we insert it at the end of its dyn family
 					const hasADynFamily = runOnJust(a.dynFamily)((dynFamily) => () => {
 						if (state.units[a.id].startBeacon) {
-							console.log('pre-crash isdyn');
 							dom.insertBefore(state.units[a.id].startBeacon, state.units[dynFamily].endBeacon);
 							dom.insertBefore(state.units[a.id].endBeacon, state.units[dynFamily].endBeacon);
-							console.log('post-crash isdyn')
 						} else {
-							console.log('pre-crash not dyn')
 							dom.insertBefore(state.units[a.id].main, state.units[dynFamily].endBeacon);
-							console.log('post-crash not dyn')
 						}
 						return true;
 					})();
@@ -150,7 +142,6 @@ export const attributeParent_ = (runOnJust) => (a) => (state) => () => {
 			}
 		}
 	}
-	console.log('attributeParent_ end')
 };
 export const getAllComments = (state) => () => {
 	function filterNone() {
@@ -200,9 +191,7 @@ export const makeDynBeacon_ = (runOnJust) => (tryHydration) => (a) => (state) =>
 		}
 		return false;
 	})();
-	console.log('makeDynBeacon_', a);
 	if (!iRan) {
-		console.log('creating db', a);
 		const startBeacon = document.createComment(`%-%${a.id}`);
 		const endBeacon = document.createComment(`%-%${a.id}%-%`);
 		state.units[ptr] = {
@@ -538,8 +527,23 @@ export const makeRoot_ = (a) => (state) => () => {
 	a.root.$dekuId = ptr;
 };
 
-export const giveNewParent_ = (just) => (anchorToDynBeacon) => (runOnJust) => (b) => (state) => () => {
-	console.log('giveNewParent_', b);
+export const giveNewParent_ = (just) => (runOnJust) => (b) => (state) => () => {
+	const insertAt = (ptr, parent, node) => {
+		if (state.units[ptr].startBeacon) {
+			// we continue this operation until we hit the end beacon
+			var x = state.units[ptr].startBeacon;
+			var y = x.nextSibling;
+			state.units[parent].main.insertBefore(x, node);
+			x = y;
+			while (x && x !== state.units[ptr].endBeacon) {
+				y = x.nextSibling;
+				state.units[parent].main.insertBefore(x, node);
+				x = y;
+			}
+		} else {
+			state.units[parent].main.insertBefore(state.units[ptr].main, node);
+		}
+	}
 	const runMe = []
 	// this is a hold over from when runMe had multiple items
 	// we can safely change it now
@@ -549,109 +553,88 @@ export const giveNewParent_ = (just) => (anchorToDynBeacon) => (runOnJust) => (b
 		const ptr = a.id;
 		const parent = a.parent;
 		state.units[ptr].containingScope = a.scope;
-		const iRan = runOnJust(a.pos)((aPos) => () => {
-			const nodes = state.units[parent].main.childNodes;
-			// todo: binary search would be faster
-			var i = 0;
-			var foundEqualPositions = false;
-			// we always use this as an opportunity to fix up the positions
-			// which is a full traversal
-			// slow, and we can consider optimizing this
-			// but that way, after this operation, all of the positions are guaranteed to be correct
-			var pos = 0;
-			while (i < nodes.length) {
-				var dkid;
-				if (dkid = nodes[i].$dekuId) {
-					if (anchorToDynBeacon) {
-						if (state.units[dkid].dynFamily !== state.units[ptr].dynFamily) {
-							i++;
-							continue;
-						}
-						// only set if not end beacon, as end beacon will have already
-						// gotten the position when this iterates over the start beacon
-						if (state.units[dkid].endBeacon !== nodes[i]) {
-							state.units[dkid].pos = just(pos);
-							pos++;
-						}
-						// if we've found equal positions already we stop here
-						// as all we care about is the pos fixer-upper happening above
-						if (foundEqualPositions) { i++; continue; }
-					} else {
-						// if we've found equal positions already we stop here
-						// as all we care about is the pos fixer-upper happening above
-						if (foundEqualPositions) { i++; continue; }
+		var aPos;
+		runOnJust(a.pos)((myPos) => () => { aPos = myPos; return true; })();
+		if (!aPos) { aPos = Number.MAX_VALUE; }
+		const nodes = state.units[parent].main.childNodes;
+		// todo: binary search would be faster
+		var i = 0;
+		var didInsert = false;
+		// we always use this as an opportunity to fix up the positions
+		// which is a full traversal
+		// slow, and we can consider optimizing this
+		// but that way, after this operation, all of the positions are guaranteed to be correct
+		var pos = 0;
+		while (i < nodes.length) {
+			var dkid;
+			if (dkid = nodes[i].$dekuId) {
+				// first, we check if we're alreay at the end of a dyn family
+				// and we haven't done the insert yet
+				// if so, we perform the insert
+				const insertedBeforeEndBeacon = runOnJust(a.dynFamily)((df) => () => {
+					if (didInsert) { return false; }
+					if (state.units[dkid].endBeacon === nodes[i] && df === dkid) {
+						state.units[ptr].pos = just(pos);
+						insertAt(ptr, parent, nodes[i]);
+						return true;
 					}
-					// if the positions are equal, insert before and return true
-					foundEqualPositions = runOnJust(state.units[dkid].pos)((pos2) => () => {
-						if (pos2 === aPos) {
-							if (state.units[ptr].startBeacon) {
-								// we continue this operation until we hit the end beacon
-								var x = state.units[ptr].startBeacon;
-								var y = x.nextSibling;
-								console.log('inserting');
-								state.units[parent].main.insertBefore(x, nodes[i]);
-								x = y;
-								while (x && x !== state.units[ptr].endBeacon) {
-									y = x.nextSibling;
-									console.log('inserting');
-									state.units[parent].main.insertBefore(x, nodes[i]);
-									x = y;
-								}
-							} else {
-								console.log('inserting');
-								state.units[parent].main.insertBefore(state.units[ptr].main, nodes[i]);
-							}
-							// increment pos by one as there's been an insert
-							pos++;
-							return true;
-						}
-						// positions are not equal, so false
-						return false;
-					})();
-					// if true, that means we called insert before, return true to break the loop
+					return false;
+				})();
+				if (insertedBeforeEndBeacon) {
+					didInsert = true;
+					break;
 				}
-				i++;
+				if (state.units[dkid].dynFamily !== state.units[ptr].dynFamily) {
+					i++;
+					continue;
+				}
+
+				// if we've found equal positions already we stop here
+				// as all we care about is the pos fixer-upper happening above
+				if (didInsert) {
+					i++;
+					continue;
+				}
+
+				// if the positions are equal, insert before and return true
+				if (pos === aPos) {
+					insertAt(ptr, parent, nodes[i]);
+					// increment pos by one as there's been an insert
+					pos++;
+					didInsert = true;
+				}
+				// only set if not end beacon, as end beacon will have already
+				// gotten the position when this iterates over the start beacon
+				else if (state.units[dkid].endBeacon !== nodes[i]) {
+					state.units[dkid].pos = just(pos);
+					pos++;
+				}
 			}
-			if (foundEqualPositions) { return true; };
-			// we return true anyway, as this just means that we can tack this onto the end of our structure
-			if (state.units[ptr].main) {
-				console.log('appending pos main');
-				state.units[parent].main.appendChild(state.units[ptr].main);
-			}
-			else {
-				var x = state.units[ptr].startBeacon;
-				var y = x.nextSibling;
-				console.log('appending pos dyn');
+			i++;
+		}
+		if (didInsert) {
+			return;
+		};
+		// we return true anyway, as this just means that we can tack this onto the end of our structure
+		if (state.units[ptr].main) {
+			state.units[parent].main.appendChild(state.units[ptr].main);
+		}
+		else {
+			var x = state.units[ptr].startBeacon;
+			var y = x.nextSibling;
+			state.units[parent].main.appendChild(x);
+			x = y;
+			while (x && x !== state.units[ptr].endBeacon) {
+				y = x.nextSibling;
 				state.units[parent].main.appendChild(x);
 				x = y;
-				while (x && x !== state.units[ptr].endBeacon) {
-					y = x.nextSibling;
-					state.units[parent].main.appendChild(x);
-					x = y;
-				}
-			}
-			return true;
-		})();
-		if (!iRan) {
-			if (state.units[ptr].main) { console.log('appending nonpos main'); state.units[parent].main.appendChild(state.units[ptr].main); }
-			else {
-				var x = state.units[ptr].startBeacon;
-				var y = x.nextSibling;
-				console.log('appending nonpos dyn', x, y);
-				state.units[parent].main.appendChild(x);
-				x = y;
-				while (x && x !== state.units[ptr].endBeacon) {
-					y = x.nextSibling;
-					state.units[parent].main.appendChild(x);
-					x = y;
-				}
 			}
 		}
 	}
 };
 
+
 export const disconnectElement_ = (a) => (state) => () => {
-	console.log('disconnecting');
 	if (state.units[a.id]) {
 		var ptr = a.id;
 		if (
@@ -670,13 +653,11 @@ export const disconnectElement_ = (a) => (state) => () => {
 			const dummy = document.createElement("div");
 			var x = state.units[ptr].startBeacon;
 			var y = x.nextSibling;
-			console.log('appending');
 			dummy.appendChild(x);
 			x = y;
 			while (x && x !== state.units[ptr].endBeacon) {
 				y = x.nextSibling;
 				dummy.appendChild(x);
-				console.log('appending');
 				x = y;
 			}
 		}
