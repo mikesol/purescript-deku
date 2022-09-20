@@ -100,7 +100,6 @@ foreign import deleteFromCache_
 
 foreign import giveNewParent_
   :: (Int -> Maybe Int)
-  -> Boolean
   -> RunOnJust
   -> Core.GiveNewParent
   -> FFIDOMSnapshot
@@ -140,7 +139,7 @@ fullDOMInterpret seed = Core.DOMInterpret
   , sendToPos
   , removeDynBeacon: removeDynBeacon_
   , deleteFromCache: deleteFromCache_
-  , giveNewParent: giveNewParent_ Just false runOnJust
+  , giveNewParent: giveNewParent_ Just runOnJust
   , disconnectElement: disconnectElement_
   }
 
@@ -287,7 +286,7 @@ sendToPos a state = do
   parent <- getParent a.id state
   dynFamily <- getDynFamily a.id state
   let newA = { scope, parent, dynFamily, id: a.id, pos: Just a.pos }
-  giveNewParent_ Just true runOnJust newA state
+  giveNewParent_ Just runOnJust newA state
 
 hydratingDOMInterpret
   :: Ref.STRef Region.Global Int
@@ -312,6 +311,6 @@ hydratingDOMInterpret seed = Core.DOMInterpret
   , sendToPos
   , deleteFromCache: deleteFromCache_
   , removeDynBeacon: removeDynBeacon_
-  , giveNewParent: giveNewParent_ Just false runOnJust
+  , giveNewParent: giveNewParent_ Just runOnJust
   , disconnectElement: disconnectElement_
   }

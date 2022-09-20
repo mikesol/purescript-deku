@@ -72,7 +72,8 @@ toSortableDyns a = (go [] Nothing a).acc
             MakeCloseDynBeacon { pos } -> pos
             SetProp _ -> Nothing
             SetText _ -> Nothing
-        go (acc <> [ SortableDyn { pos: pos', elt: Left head } ]) currentDyn tail
+        go (acc <> [ SortableDyn { pos: pos', elt: Left head } ]) currentDyn
+          tail
 
 foreign import encodedString :: String -> String
 foreign import doPursxReplacements :: Core.MakePursx -> String
@@ -175,8 +176,14 @@ ssr' topTag arr' = "<" <> topTag
         doEliminations (sendPos stp.id stp.pos <$> cl) rest
       Just (EliminatableInstruction (MakeRoot _) /\ rest) ->
         doEliminations cl rest
-      Just (EliminatableInstruction (GiveNewParent gnp) /\ rest) ->
-        doEliminations (giveParent gnp.id gnp.parent <$> cl) rest
+      -- give new parent is only ever called on a portal
+      -- we do not want to render portals in SSR
+      -- instead, we let the hydration algorithm take care of them
+      -- it may theoretically be possible to handle portals in SSR
+      -- but it's a pain & doesn't move the needle much in real world apps
+      -- implement it if someone asks for it...
+      Just (EliminatableInstruction (GiveNewParent _) /\ rest) ->
+        doEliminations cl rest
       Just (EliminatableInstruction (DisconnectElement dce) /\ rest) ->
         doEliminations (removeParent dce.id <$> cl) rest
       Just (EliminatableInstruction (RemoveDynBeacon rdb) /\ rest) ->
@@ -204,29 +211,6 @@ ssr' topTag arr' = "<" <> topTag
       elt@(MakeCloseDynBeacon elt'@({ id, dynFamily })) ->
         if id == id' || dynFamily == Just id then MakeCloseDynBeacon
           (elt' { pos = Just pos' })
-        else elt
-      elt@(SetText _) -> elt
-      elt@(SetProp _) -> elt
-    giveParent id' parent' = case _ of
-      elt@(MakeElement elt'@({ id, dynFamily })) ->
-        if id == id' || dynFamily == Just id then MakeElement
-          (elt' { parent = Just parent' })
-        else elt
-      elt@(MakeText elt'@({ id, dynFamily })) ->
-        if id == id' || dynFamily == Just id then MakeText
-          (elt' { parent = Just parent' })
-        else elt
-      elt@(MakePursx elt'@({ id, dynFamily })) ->
-        if id == id' || dynFamily == Just id then MakePursx
-          (elt' { parent = Just parent' })
-        else elt
-      elt@(MakeOpenDynBeacon elt'@({ id, dynFamily })) ->
-        if id == id' || dynFamily == Just id then MakeOpenDynBeacon
-          (elt' { parent = Just parent' })
-        else elt
-      elt@(MakeCloseDynBeacon elt'@({ id, dynFamily })) ->
-        if id == id' || dynFamily == Just id then MakeCloseDynBeacon
-          (elt' { parent = Just parent' })
         else elt
       elt@(SetText _) -> elt
       elt@(SetProp _) -> elt
@@ -280,19 +264,19 @@ ssr' topTag arr' = "<" <> topTag
     asList = Queue.fromFoldable aa
   arr = instructionsToRenderableInstructions arr'
   making parent id action =
-      do
-        void $ modify
-          ( \s -> s
-              { parentToChild = Map.alter
-                  ( case _ of
-                      Just a -> Just (a <> [ id ])
-                      Nothing -> Just [ id ]
-                  )
-                  parent
-                  s.parentToChild
-              }
-          )
-        setting id action
+    do
+      void $ modify
+        ( \s -> s
+            { parentToChild = Map.alter
+                ( case _ of
+                    Just a -> Just (a <> [ id ])
+                    Nothing -> Just [ id ]
+                )
+                parent
+                s.parentToChild
+            }
+        )
+      setting id action
   setting id action = do
     void $ modify
       ( \s -> s
@@ -313,7 +297,7 @@ ssr' topTag arr' = "<" <> topTag
         ( { parentToChild: x.parentToChild <#>
               ( map
                   ( \i -> Map.lookup i x.idToActions >>= Array.head
-                  ) >>> compact >>> toSortableDyns >>>  sortSortableDyns
+                  ) >>> compact >>> toSortableDyns >>> sortSortableDyns
                   >>> fromSortableDyns
                   >>> map
                     ( case _ of
