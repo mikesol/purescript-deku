@@ -216,20 +216,29 @@ portalsCompose = Deku.do
     counter :: forall a. Event a -> Event Int
     counter event = fold (const (add 1)) event 0
   setItem /\ item <- useMemoized (\a -> counter a <|> pure 0)
-  globalPortal1 (D.div_ [ text_ "a", D.span_ [ text_ "b" ], text_ "c" ]) \e -> do
-    let
-      switchMe n = item # switcher
-        ( (_ `mod` 3) >>> case _ of
-            i
-              | i == n -> e
-              | otherwise -> blank
-        )
-    D.div (id_ "maindiv")
-      [ D.div_ [ text_ "d0" ]
-      , switchMe 0
-      , D.div_ [ text_ "d1" ]
-      , switchMe 1
-      , D.div_ [ text_ "d2" ]
-      , switchMe 2
-      , D.button (oneOf [ id_ "incr", click_ (setItem unit) ]) [ text_ "incr" ]
-      ]
+  globalPortal1 (D.div_ [ text_ "a", D.span_ [ text_ "b" ], text_ "c" ]) \e ->
+    do
+      let
+        switchMe n = item # switcher
+          ( (_ `mod` 3) >>> case _ of
+              i
+                | i == n -> e
+                | otherwise -> blank
+          )
+      D.div (id_ "maindiv")
+        [ D.div_ [ text_ "d0" ]
+        , switchMe 0
+        , D.div_ [ text_ "d1" ]
+        , switchMe 1
+        , D.div_ [ text_ "d2" ]
+        , switchMe 2
+        , D.button (oneOf [ id_ "incr", click_ (setItem unit) ])
+            [ text_ "incr" ]
+        ]
+
+pursXComposes :: Nut
+pursXComposes = Deku.do
+  D.div (id_ "div0")
+    [ (Proxy :: _ "<h1 id=\"px\">début ~me~ fin</h1>") ~~
+        { me: nut $ fixed [ text_ "milieu", text_ " ", text_ "après-milieu" ] }
+    ]

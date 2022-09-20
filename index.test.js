@@ -80,95 +80,100 @@ describe('deku', () => {
     expect($('#incr-2').index()).toBeLessThan($('#incr-1').index());
     expect($('#incr-2').index()).toBeLessThan($('#dyn0-2').index());
   }));
+  doTest('domable is a monoid', (f) => f(tests.isAMonoid, () => {
+    const $ = require('jquery');
+    expect($('#mybody').text()).toBe('monoid');
+  }));
+  
+  doTest('sends to position correctly', (f) => f(tests.sendsToPosition, () => {
+    const $ = require('jquery');
+    expect($('#dyn0').index()).toBeLessThan($('#dyn1').index());
+    expect($('#dyn1').index()).toBeLessThan($('#dyn2').index());
+    expect($('#dyn2').index()).toBeLessThan($('#dyn3').index());
+    expect($('#dyn3').index()).toBeLessThan($('#dyn4').index());
+    // for kicks
+    expect($('#dyn4').index()).toBeGreaterThan($('#dyn0').index());
+    $('#pos').trigger("click");
+    // 3 is now at 1
+    // so the order is 0, 3, 1, 2, 4
+    expect($('#dyn0').index()).toBeLessThan($('#dyn3').index());
+    expect($('#dyn3').index()).toBeLessThan($('#dyn1').index());
+    expect($('#dyn1').index()).toBeLessThan($('#dyn2').index());
+    expect($('#dyn2').index()).toBeLessThan($('#dyn4').index());
+    // for kicks
+    expect($('#dyn4').index()).toBeGreaterThan($('#dyn0').index());
+  }));
+  
+  doTest('sends to position correctly when elt is fixed', (f) => f(tests.sendsToPositionFixed, () => {
+    const $ = require('jquery');
+    expect($('#dyn0a').index()).toBeLessThan($('#dyn1a').index());
+    expect($('#dyn1a').index()).toBeLessThan($('#dyn2a').index());
+    expect($('#dyn2a').index()).toBeLessThan($('#dyn3a').index());
+    expect($('#dyn3a').index()).toBeLessThan($('#dyn4a').index());
+    // for kicks
+    expect($('#dyn4a').index()).toBeGreaterThan($('#dyn0a').index());
+    $('#pos').trigger("click");
+    // 3 is now at 1
+    // so the order is 0, 3, 1, 2, 4
+    expect($('#dyn0a').index()).toBeLessThan($('#dyn3a').index());
+    expect($('#dyn3a').index()).toBeLessThan($('#dyn1a').index());
+    expect($('#dyn1a').index()).toBeLessThan($('#dyn2a').index());
+    expect($('#dyn2a').index()).toBeLessThan($('#dyn4a').index());
+    // for kicks
+    expect($('#dyn4a').index()).toBeGreaterThan($('#dyn0a').index());
+  }));
+  
+  doTest('sends to position correctly', (f) => f(tests.insertsAtCorrectPositions, () => {
+    const $ = require('jquery');
+    expect($('#dyn0').index()).toBeLessThan($('#dyn1').index());
+    expect($('#dyn1').index()).toBeLessThan($('#dyn2').index());
+    expect($('#dyn2').index()).toBeLessThan($('#dyn3').index());
+    expect($('#dyn3').index()).toBeLessThan($('#dyn4').index());
+    // for kicks
+    expect($('#dyn4').index()).toBeGreaterThan($('#dyn0').index());
+  }));
+  
+  doTest('switcher works for compositional elements', (f) => f(tests.switcherWorksForCompositionalElements, () => {
+    const $ = require('jquery');
+    expect($('#id0').text()).toBe('0-0');
+    expect($('#id1').text()).toBe('0-1');
+    expect($('#id2').text()).toBe('0-2');
+    $('#incr').trigger("click");
+    expect($('#id0').text()).toBe('1-0');
+    expect($('#id1').text()).toBe('1-1');
+    expect($('#id2').text()).toBe('1-2');
+    $('#incr').trigger("click");
+    expect($('#id0').text()).toBe('2-0');
+    expect($('#id1').text()).toBe('2-1');
+    expect($('#id2').text()).toBe('2-2');
+  }));
+  
+  doTest('tabbed navigation with pursx has correct layout', (f) => f(tests.tabbedNavigationWithPursx, () => {
+    const $ = require('jquery');
+    expect($('#home').text()).toBe('home');
+    $('#about-btn').trigger('click')
+    expect($('#home').text()).toBe('');
+    expect($('#about').text()).toBe('about deku');
+    $('#contact-btn').trigger('click')
+    expect($('#about').text()).toBe('');
+    expect($('#contact').text()).toBe("contact mike at site.com thanks");
+  }));
+  
+  doTest('portals compose', (f) => f(tests.portalsCompose, () => {
+    const $ = require('jquery');
+    // d0, then abc, then d1, then d2, then the button
+    expect($('#maindiv').text()).toBe('d0abcd1d2incr');
+    $('#incr').trigger("click");
+    // shifts the portal
+    expect($('#maindiv').text()).toBe('d0d1abcd2incr');
+    $('#incr').trigger("click");
+    // shifts the portal
+    expect($('#maindiv').text()).toBe('d0d1d2abcincr');
+  }));
+  
+  doTest('pursx composes', (f) => f(tests.pursXComposes, () => {
+    const $ = require('jquery');
+    expect($('#div0').text()).toBe('début milieu après-milieu fin');
+  }));
 });
 
-doTest('domable is a monoid', (f) => f(tests.isAMonoid, () => {
-  const $ = require('jquery');
-  expect($('#mybody').text()).toBe('monoid');
-}));
-
-doTest('sends to position correctly', (f) => f(tests.sendsToPosition, () => {
-  const $ = require('jquery');
-  expect($('#dyn0').index()).toBeLessThan($('#dyn1').index());
-  expect($('#dyn1').index()).toBeLessThan($('#dyn2').index());
-  expect($('#dyn2').index()).toBeLessThan($('#dyn3').index());
-  expect($('#dyn3').index()).toBeLessThan($('#dyn4').index());
-  // for kicks
-  expect($('#dyn4').index()).toBeGreaterThan($('#dyn0').index());
-  $('#pos').trigger("click");
-  // 3 is now at 1
-  // so the order is 0, 3, 1, 2, 4
-  expect($('#dyn0').index()).toBeLessThan($('#dyn3').index());
-  expect($('#dyn3').index()).toBeLessThan($('#dyn1').index());
-  expect($('#dyn1').index()).toBeLessThan($('#dyn2').index());
-  expect($('#dyn2').index()).toBeLessThan($('#dyn4').index());
-  // for kicks
-  expect($('#dyn4').index()).toBeGreaterThan($('#dyn0').index());
-}));
-
-doTest('sends to position correctly when elt is fixed', (f) => f(tests.sendsToPositionFixed, () => {
-  const $ = require('jquery');
-  expect($('#dyn0a').index()).toBeLessThan($('#dyn1a').index());
-  expect($('#dyn1a').index()).toBeLessThan($('#dyn2a').index());
-  expect($('#dyn2a').index()).toBeLessThan($('#dyn3a').index());
-  expect($('#dyn3a').index()).toBeLessThan($('#dyn4a').index());
-  // for kicks
-  expect($('#dyn4a').index()).toBeGreaterThan($('#dyn0a').index());
-  $('#pos').trigger("click");
-  // 3 is now at 1
-  // so the order is 0, 3, 1, 2, 4
-  expect($('#dyn0a').index()).toBeLessThan($('#dyn3a').index());
-  expect($('#dyn3a').index()).toBeLessThan($('#dyn1a').index());
-  expect($('#dyn1a').index()).toBeLessThan($('#dyn2a').index());
-  expect($('#dyn2a').index()).toBeLessThan($('#dyn4a').index());
-  // for kicks
-  expect($('#dyn4a').index()).toBeGreaterThan($('#dyn0a').index());
-}));
-
-doTest('sends to position correctly', (f) => f(tests.insertsAtCorrectPositions, () => {
-  const $ = require('jquery');
-  expect($('#dyn0').index()).toBeLessThan($('#dyn1').index());
-  expect($('#dyn1').index()).toBeLessThan($('#dyn2').index());
-  expect($('#dyn2').index()).toBeLessThan($('#dyn3').index());
-  expect($('#dyn3').index()).toBeLessThan($('#dyn4').index());
-  // for kicks
-  expect($('#dyn4').index()).toBeGreaterThan($('#dyn0').index());
-}));
-
-doTest('switcher works for compositional elements', (f) => f(tests.switcherWorksForCompositionalElements, () => {
-  const $ = require('jquery');
-  expect($('#id0').text()).toBe('0-0');
-  expect($('#id1').text()).toBe('0-1');
-  expect($('#id2').text()).toBe('0-2');
-  $('#incr').trigger("click");
-  expect($('#id0').text()).toBe('1-0');
-  expect($('#id1').text()).toBe('1-1');
-  expect($('#id2').text()).toBe('1-2');
-  $('#incr').trigger("click");
-  expect($('#id0').text()).toBe('2-0');
-  expect($('#id1').text()).toBe('2-1');
-  expect($('#id2').text()).toBe('2-2');
-}));
-
-doTest('tabbed navigation with pursx has correct layout', (f) => f(tests.tabbedNavigationWithPursx, () => {
-  const $ = require('jquery');
-  expect($('#home').text()).toBe('home');
-  $('#about-btn').trigger('click')
-  expect($('#home').text()).toBe('');
-  expect($('#about').text()).toBe('about deku');
-  $('#contact-btn').trigger('click')
-  expect($('#about').text()).toBe('');
-  expect($('#contact').text()).toBe("contact mike at site.com thanks");
-}));
-
-doTest('portals compose', (f) => f(tests.portalsCompose, () => {
-  const $ = require('jquery');
-  // d0, then abc, then d1, then d2, then the button
-  expect($('#maindiv').text()).toBe('d0abcd1d2incr');
-  $('#incr').trigger("click");
-  // shifts the portal
-  expect($('#maindiv').text()).toBe('d0d1abcd2incr');
-  $('#incr').trigger("click");
-  // shifts the portal
-  expect($('#maindiv').text()).toBe('d0d1d2abcincr');
-}));

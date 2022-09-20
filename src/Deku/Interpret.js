@@ -306,7 +306,7 @@ export const makeText_ = (runOnJust) => (tryHydration) => (maybe) => (a) => (sta
 				) {
 					i = i - 1;
 					var textWasBlank = i === -1;
-					var textWasBlankAfterDynBeacon = dom.childNodes[i].nodeType === 8;
+					var textWasBlankAfterDynBeacon = i >= 0 && dom.childNodes[i].nodeType === 8;
 					if (textWasBlank) {
 						dom.prepend(document.createTextNode(""));
 					}
