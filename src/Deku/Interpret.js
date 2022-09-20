@@ -575,9 +575,9 @@ export const giveNewParent_ = (just) => (runOnJust) => (b) => (state) => () => {
 		const ptr = a.id;
 		const parent = a.parent;
 		state.units[ptr].containingScope = a.scope;
-		var aPos;
+		var aPos = undefined;
 		runOnJust(a.pos)((myPos) => () => { aPos = myPos; return true; })();
-		if (!aPos) { aPos = Number.MAX_VALUE; }
+		if (aPos === undefined) { aPos = Number.MAX_VALUE; }
 		const nodes = state.units[parent].main.childNodes;
 		// todo: binary search would be faster
 		var i = 0;
