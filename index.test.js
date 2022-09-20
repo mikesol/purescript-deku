@@ -80,6 +80,7 @@ describe('deku', () => {
     expect($('#incr-2').index()).toBeLessThan($('#incr-1').index());
     expect($('#incr-2').index()).toBeLessThan($('#dyn0-2').index());
   }));
+
   doTest('domable is a monoid', (f) => f(tests.isAMonoid, () => {
     const $ = require('jquery');
     expect($('#mybody').text()).toBe('monoid');
