@@ -10,12 +10,12 @@ import Data.Int (floor)
 import Data.Monoid.Additive (Additive(..))
 import Data.Tuple (Tuple(..))
 import Deku.Attribute ((:=))
-import Deku.Control (dyn_, portal, switcher_)
+import Deku.Control (portal, switcher)
 import Deku.Control as C
-import Deku.Core (Domable, insert_, remove, sendToTop)
+import Deku.Core (Domable, dyn, fixed, insert_, remove, sendToTop)
 import Deku.DOM as D
 import Deku.Interpret (FFIDOMSnapshot)
-import Deku.Toplevel (runInBodyA)
+import Deku.Toplevel (runInBody)
 import Effect (Effect)
 import Effect.Random as Random
 import FRP.Behavior (ABehavior, behavior, sample_)
@@ -68,7 +68,7 @@ scene =
               ]
               : V.empty
           )
-          ( \i _ -> switcher_ D.div
+          ( \i _ -> switcher
               ( \rgb -> D.div
                   (pure (D.Style := "background-color: " <> rgb <> ";"))
                   [ V.index (Proxy :: _ 0) i ]
@@ -76,7 +76,7 @@ scene =
               (sample_ rdm (interval 1000))
           )
       ]
-  , dyn_ D.div $ map
+  , dyn $ map
       ( \rgb ->
           pure
             ( insert_ $ D.div
@@ -88,4 +88,4 @@ scene =
   ]
 
 main :: Effect Unit
-main = runInBodyA scene
+main = runInBody (fixed scene)

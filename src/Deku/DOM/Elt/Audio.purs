@@ -1,11 +1,14 @@
 module Deku.DOM.Elt.Audio where
 
+import Bolson.Core (Entity(..), fixed)
 import Control.Plus (empty)
+import Data.Array (mapWithIndex)
 import Deku.Attribute (Attribute)
 import Deku.Control (elementify)
-import Deku.Core (Domable)
-import Bolson.Core (Entity(..), fixed)
+import Deku.Core (Domable(..), Domable', unsafeSetPos)
 import FRP.Event (Event)
+import Safe.Coerce (coerce)
+
 
 
 data Audio_
@@ -15,7 +18,7 @@ audio
    . Event (Attribute Audio_)
   -> Array (Domable lock payload)
   -> Domable lock payload
-audio attributes kids = Element' (elementify "audio" attributes (fixed kids))
+audio attributes kids = Domable (Element' (elementify "audio" attributes ((coerce :: Domable' lock payload -> Domable lock payload)  (fixed (coerce (mapWithIndex unsafeSetPos kids))))))
 
 audio_
   :: forall lock payload

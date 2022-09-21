@@ -26,7 +26,7 @@ All of the static bits are rendered as HTML,
 and all of the dynamic bits are hydrated on page load."""
         ]
     , D.button
-        (click_ (pure push.buttonClicked))
+        (click_ (push.buttonClicked unit))
         [ text_ "Click" ]
     , D.div_
         [ text

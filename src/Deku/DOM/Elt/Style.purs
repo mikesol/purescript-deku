@@ -1,11 +1,14 @@
 module Deku.DOM.Elt.Style where
 
+import Bolson.Core (Entity(..), fixed)
 import Control.Plus (empty)
+import Data.Array (mapWithIndex)
 import Deku.Attribute (Attribute)
 import Deku.Control (elementify)
-import Deku.Core (Domable)
-import Bolson.Core (Entity(..), fixed)
+import Deku.Core (Domable(..), Domable', unsafeSetPos)
 import FRP.Event (Event)
+import Safe.Coerce (coerce)
+
 
 
 data Style_
@@ -15,7 +18,7 @@ style
    . Event (Attribute Style_)
   -> Array (Domable lock payload)
   -> Domable lock payload
-style attributes kids = Element' (elementify "style" attributes (fixed kids))
+style attributes kids = Domable (Element' (elementify "style" attributes ((coerce :: Domable' lock payload -> Domable lock payload)  (fixed (coerce (mapWithIndex unsafeSetPos kids))))))
 
 style_
   :: forall lock payload

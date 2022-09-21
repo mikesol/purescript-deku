@@ -4,6 +4,7 @@ module Deku.Listeners
   , checkbox
   , click
   , click_
+  , click'
   , keyUp
   , keyDown
   , keyPress
@@ -28,21 +29,26 @@ import Web.HTML.HTMLInputElement (checked, fromEventTarget, value, valueAsNumber
 import Web.UIEvent.KeyboardEvent (KeyboardEvent, fromEvent)
 
 click
-  :: forall event cb element
-   . Functor event
-  => Attr element D.OnClick cb
-  => event cb
-  -> event (Attribute element)
+  :: forall cb element
+   . Attr element D.OnClick cb
+  => Event cb
+  -> Event (Attribute element)
 click = map (attr D.OnClick)
 
 click_
-  :: forall m event cb element
-   . Functor event
-  => Monoid m
+  :: forall cb element
+   . Attr element D.OnClick cb
+  => cb
+  -> Event (Attribute element)
+click_ = click <<< pure
+
+click'
+  :: forall m  cb element
+   . Monoid m
   => Attr element D.OnClick cb
-  => event (m -> cb)
-  -> event (Attribute element)
-click_ = map (attr D.OnClick <<< (_ $ mempty))
+  => Event (m -> cb)
+  -> Event (Attribute element)
+click' = map (attr D.OnClick <<< (_ $ mempty))
 
 slider
   :: Event (Number -> Effect Unit)

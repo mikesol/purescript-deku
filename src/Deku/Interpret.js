@@ -1,6 +1,3 @@
-const connectXToY_ = (maybe, x, y$, state) => {
-	maybe((y) => state.units[y].main.appendChild(state.units[x].main))(y$);
-};
 export const setHydrating = (state) => () => {
 	state.hydrating = true;
 };
@@ -8,32 +5,242 @@ export const unSetHydrating = (state) => () => {
 	state.hydrating = false;
 };
 export const attributeParent_ = (runOnJust) => (a) => (state) => () => {
-	// only attribute if it is not attributed already
 	if (state.units[a.id]) {
-		if (!state.units[a.id].main.parentNode) {
-			const iRan = runOnJust(a.pos)((pos) => () => {
-				if (state.units[a.parent].main.children[pos]) {
-					state.units[a.parent].main.insertBefore(
-						state.units[a.id].main,
-						state.units[a.parent].main.children[pos]
-					);
-					return true;
-				}
-				return false;
+		const dom = state.units[a.parent].main;
+		// only attribute if it is not attributed already
+		if (!((state.units[a.id].main && state.units[a.id].main.parentNode)
+			|| (state.units[a.id].startBeacon && state.units[a.id].startBeacon.parentNode))) {
+			const iRan = a.ez ? (() => {
+				if (state.units[a.id].main) {
+					dom.appendChild(state.units[a.id].main)
+				} else {
+					dom.appendChild(state.units[a.id].startBeacon);
+					dom.appendChild(state.units[a.id].endBeacon)
+				} return true;
+			})() : runOnJust(a.pos)((pos) => () => {
+				// when attributing,
+				// we only care about positional information for
+				// things with a dyn family
+				// otherwise, they can't be inserted anywhere
+				// other than at the back of their collection
+				return runOnJust(a.dynFamily)((dynFamily) => () => {
+					var i = 0;
+					var j = 0;
+					var terminalDyn;
+					while (j < dom.childNodes.length) {
+						if (
+							dom.childNodes[j].nodeType === 8 &&
+							dom.childNodes[j].nodeValue === '%-%' + dynFamily
+						) {
+							// we have found our starting position, which is one
+							// after this dyn node
+							j += 1;
+							break;
+						}
+						j++;
+					}
+					const inserter = (k) => {
+						if (state.units[a.id].startBeacon) {
+							dom.insertBefore(
+								state.units[a.id].startBeacon,
+								dom.childNodes[k]
+							);
+							dom.insertBefore(
+								state.units[a.id].endBeacon,
+								dom.childNodes[k]
+							);
+						} else {
+							dom.insertBefore(
+								state.units[a.id].main,
+								dom.childNodes[k]
+							);
+						}
+					}
+					while (j < dom.childNodes.length) {
+						var tmpDekuId;
+						if (tmpDekuId = dom.childNodes[j].$dekuId) {
+							// if this has the same dyn family AND pos information, we take it into account
+							const insertHappened = runOnJust(state.units[tmpDekuId].dynFamily)((tmpDynFamily) => () => {
+								const insertHappened2 = runOnJust(state.units[tmpDekuId].pos)((tmpPos) => () => {
+									if (dynFamily === tmpDynFamily && pos <= tmpPos) {
+										inserter(j);
+										return true;
+									}
+									return false;
+								})();
+								return insertHappened2;
+							})();
+							if (insertHappened) { return true; }
+						}
+						if (i === pos) {
+							inserter(j);
+							return true;
+						} if (
+							dom.childNodes[j].nodeType === 8 &&
+							dom.childNodes[j].nodeValue === '%-%' + dynFamily + '%-%'
+						) {
+							// we have hit the end
+							// insert here
+							inserter(j);
+							return true;
+						}
+						// we are starting a dynamic bloc
+						// suspend incrementing until we hit its end
+						if (
+							dom.childNodes[j].nodeType === 8 &&
+							dom.childNodes[j].nodeValue.substring(0, 3) === '%-%' &&
+							!terminalDyn
+						) {
+							terminalDyn = dom.childNodes[j].nodeValue + '%-%';
+						}
+						// we are not in a dynamic bloc, increment normally
+						if (!terminalDyn) {
+							i++;
+						}
+						// we are ending a dynamic bloc and we can safely increment now
+						if (
+							dom.childNodes[j].nodeType === 8 &&
+							dom.childNodes[j].nodeValue === terminalDyn
+						) {
+							terminalDyn = undefined;
+							i++;
+						}
+						j++;
+					}
+					return false;
+				})();
 			})();
 			if (!iRan) {
+				// this is a pursx child element
+				// pursx children will _never_ have positional information
+				// as they are one-offs in the pursx tree
+				// however, the way that makePursX is done, there is a thin
+				// wrapper node created around the main node
+				// the way we solve that in this function is to replace the
+				// wrapper with its child.
 				if (a.parent.indexOf("@!%") !== -1) {
-					state.units[a.parent].main.parentNode.replaceChild(
-						state.units[a.id].main,
-						state.units[a.parent].main
-					);
+					// TODO: do we also need to update dkid stuff here?
+					const usedDynBeacon = runOnJust(a.dynFamily)((df) => () => {
+						if (state.units[a.id].main) {
+							state.units[df].endBeacon.parentNode.insertBefore(
+								state.units[a.id].main,
+								state.units[df].endBeacon);
+						} else {
+							state.units[df].endBeacon.parentNode.insertBefore(
+								state.units[a.id].endBeacon,
+								state.units[df].endBeacon);
+							state.units[df].endBeacon.parentNode.insertBefore(state.units[a.id].startBeacon, state.units[a.id].endBeacon);
+						}
+						return true;
+					})();
+					if (usedDynBeacon) { }
+					else if (state.units[a.id].main) {
+						dom.parentNode.replaceChild(
+							state.units[a.id].main,
+							dom
+						);
+					} else {
+						dom.parentNode.replaceChild(
+							state.units[a.id].endBeacon,
+							dom
+						);
+						state.units[a.id].endBeacon.parentNode.insertBefore(state.units[a.id].startBeacon, state.units[a.id].endBeacon);
+					}
 				} else {
-					state.units[a.parent].main.appendChild(state.units[a.id].main);
+					// we insert it at the end of its dyn family
+					const hasADynFamily = runOnJust(a.dynFamily)((dynFamily) => () => {
+						if (state.units[a.id].startBeacon) {
+							dom.insertBefore(state.units[a.id].startBeacon, state.units[dynFamily].endBeacon);
+							dom.insertBefore(state.units[a.id].endBeacon, state.units[dynFamily].endBeacon);
+						} else {
+							dom.insertBefore(state.units[a.id].main, state.units[dynFamily].endBeacon);
+						}
+						return true;
+					})();
+					// vanilla node inserting. no need to do any fancy positional stuff
+					// we just tack it on to the end
+					if (!hasADynFamily) {
+						if (state.units[a.id].startBeacon) {
+							dom.appendChild(state.units[a.id].startBeacon);
+							dom.appendChild(state.units[a.id].endBeacon);
+						} else {
+							dom.appendChild(state.units[a.id].main);
+						}
+					}
 				}
 			}
 		}
 	}
 };
+export const getAllComments = (state) => () => {
+	function filterNone() {
+		return NodeFilter.FILTER_ACCEPT;
+	}
+
+	function getAllComments(rootElem) {
+		var iterator = document.createNodeIterator(rootElem, NodeFilter.SHOW_COMMENT, filterNone, false);
+		var curNode;
+		while (curNode = iterator.nextNode()) {
+			if (curNode.nodeValue.substring(0, 3) === '%-%') {
+				state.allBeacons[curNode.nodeValue.substring(3)] = curNode;
+			}
+		}
+	}
+
+	getAllComments(document.documentElement);
+}
+export const makeDynBeacon_ = (runOnJust) => (tryHydration) => (a) => (state) => () => {
+	var startBeacon;
+	var endBeacon;
+	var ptr = a.id;
+	if (!state.scopes[a.scope]) {
+		state.scopes[a.scope] = [];
+	}
+	state.scopes[a.scope].push(ptr);
+	// note that, for portals, this will be broken in its current form
+	const iRan = runOnJust(a.parent)(() => () => {
+		if (
+			state.hydrating &&
+			tryHydration &&
+			(startBeacon = state.allBeacons[a.id]) &&
+			(endBeacon = state.allBeacons[`${a.id}%-%`])
+		) {
+			state.units[ptr] = {
+				listeners: {},
+				parent: a.parent,
+				scope: a.scope,
+				pos: a.pos,
+				dynFamily: a.dynFamily,
+				startBeacon,
+				endBeacon
+			};
+			startBeacon.$dekuId = ptr;
+			endBeacon.$dekuId = ptr;
+			return true;
+		}
+		return false;
+	})();
+	if (!iRan) {
+		const startBeacon = document.createComment(`%-%${a.id}`);
+		const endBeacon = document.createComment(`%-%${a.id}%-%`);
+		state.units[ptr] = {
+			listeners: {},
+			parent: a.parent,
+			dynFamily: a.dynFamily,
+			scope: a.scope,
+			pos: a.pos,
+			startBeacon,
+			endBeacon
+		};
+		startBeacon.$dekuId = ptr;
+		endBeacon.$dekuId = ptr;
+	}
+}
+
+export const getPos = (id) => (state) => () => state.units[id] && state.units[id].pos ? state.units[id].pos : (() => { throw new Error(`No positional information for ${id}`) })();
+export const getDynFamily = (id) => (state) => () => state.units[id] && state.units[id].dynFamily ? state.units[id].dynFamily : (() => { throw new Error(`No positional information for ${id}`) })();
+export const getParent = (id) => (state) => () => state.units[id] && state.units[id].main && state.units[id].main.parentNode && state.units[id].main.parentNode.$dekuId ? state.units[id].main.parentNode.$dekuId : state.units[id] && state.units[id].startBeacon && state.units[id].startBeacon.parentNode && state.units[id].startBeacon.parentNode.$dekuId ? state.units[id].startBeacon.parentNode.$dekuId : (() => { throw new Error(`No parent information for ${id}`) })();
+export const getScope = (id) => (state) => () => state.units[id] && state.units[id].scope ? state.units[id].scope : (() => { throw new Error(`No scope information for ${id}`) })();
 
 export const makeElement_ = (runOnJust) => (tryHydration) => (a) => (state) => () => {
 	var dom;
@@ -47,29 +254,37 @@ export const makeElement_ = (runOnJust) => (tryHydration) => (a) => (state) => (
 		if (
 			state.hydrating &&
 			tryHydration &&
-			(dom = document.body
-				.querySelectorAll("[data-deku-ssr-" + ptr + "]")
-				.item(0))
+			(dom = document.documentElement
+				.querySelector(`[data-deku-ssr="${ptr}"]`)
+			)
 		) {
 			state.units[ptr] = {
 				listeners: {},
+				pos: a.pos,
 				parent: a.parent,
 				scope: a.scope,
+				dynFamily: a.dynFamily,
 				main: dom,
 			};
+			dom.$dekuId = ptr;
 			return true;
 		}
 		return false;
 	})();
 	if (!iRan) {
+		const main = document.createElement(a.tag);
 		state.units[ptr] = {
 			listeners: {},
 			parent: a.parent,
+			pos: a.pos,
 			scope: a.scope,
-			main: document.createElement(a.tag),
+			dynFamily: a.dynFamily,
+			main
 		};
+		main.$dekuId = ptr;
 	}
 };
+
 export const makeText_ = (runOnJust) => (tryHydration) => (maybe) => (a) => (state) => () => {
 	var ptr = a.id;
 	var dom;
@@ -84,46 +299,54 @@ export const makeText_ = (runOnJust) => (tryHydration) => (maybe) => (a) => (sta
 			state.hydrating &&
 			tryHydration &&
 			// hack
-			(dom = document.body
+			(dom = document.documentElement
 				// hack
-				.querySelectorAll("[data-deku-ssr-" + parent + "]")
-				.item(0))
+				.querySelector(`[data-deku-ssr="${parent}"]`)
+			)
 		) {
 			var i = 0;
-			// if the length is one, that means that there is only a comment because
-			// the text is empty
-			// so we need to add a text node
-			if (dom.childNodes.length === 1) {
-				dom.prepend(document.createTextNode(""));
-			} else {
-				for (var i = 0; i < dom.childNodes.length; i++) {
-					if (
-						dom.childNodes[i].nodeType === 8 &&
-						dom.childNodes[i].nodeValue === ptr
-					) {
-						i = i - 1;
-						break;
+			for (; i < dom.childNodes.length; i++) {
+				const ptrSplit = ptr.split('@-@');
+				if (
+					dom.childNodes[i].nodeType === 8 &&
+					dom.childNodes[i].nodeValue === ptrSplit[0]
+				) {
+					i = i - 1;
+					var textWasBlank = i === -1;
+					var textWasBlankAfterDynBeacon = i >= 0 && dom.childNodes[i].nodeType === 8;
+					if (textWasBlank) {
+						dom.prepend(document.createTextNode(""));
 					}
+					if (textWasBlankAfterDynBeacon) {
+						dom.insertBefore(document.createTextNode(""), dom.childNodes[i + 1]);
+					}
+					break;
 				}
 			}
+			const main = dom.childNodes[i];
 			state.units[ptr] = {
 				// if we've done ssr for a text node, it will be a span,
 				// so we want to get the child node
-				main: dom.childNodes[i],
+				main,
+				pos: a.pos,
 				parent: a.parent,
 				scope: a.scope,
 			};
+			main.$dekuId = ptr;
 			return true;
 		}
 		return false;
 	})();
 	if (!iRan) {
+		const main = document.createTextNode("");
 		state.units[ptr] = {
-			main: document.createTextNode(""),
+			main,
 			parent: a.parent,
 			scope: a.scope,
+			pos: a.pos,
+			dynFamily: a.dynFamily
 		};
-		connectXToY_(maybe, ptr, a.parent, state);
+		main.$dekuId = ptr;
 	}
 };
 
@@ -131,6 +354,7 @@ export function makeFFIDOMSnapshot() {
 	return {
 		units: {},
 		scopes: {},
+		allBeacons: {}
 	};
 }
 
@@ -145,9 +369,9 @@ export const setProp_ = (tryHydration) => (a) => (state) => () => {
 			state.hydrating &&
 			tryHydration &&
 			!state.units[ptr] &&
-			(dom = document.body
-				.querySelectorAll("[data-deku-ssr-" + ptr + "]")
-				.item(0))
+			(dom = document.documentElement
+				.querySelector(`[data-deku-ssr="${ptr}"]`)
+			)
 		) {
 			state.units[ptr] = {
 				listeners: {},
@@ -183,9 +407,9 @@ export const setCb_ = (tryHydration) => (a) => (state) => () => {
 			state.hydrating &&
 			tryHydration &&
 			!state.units[ptr] &&
-			(dom = document.body
-				.querySelectorAll("[data-deku-ssr-" + ptr + "]")
-				.item(0))
+			(dom = document.documentElement
+				.querySelector(`[data-deku-ssr="${ptr}"]`)
+			)
 		) {
 			state.units[ptr] = {
 				listeners: {},
@@ -216,7 +440,6 @@ export const setCb_ = (tryHydration) => (a) => (state) => () => {
 
 export const setText_ = (a) => (state) => () => {
 	if (state.units[a.id]) {
-
 		var ptr = a.id;
 		state.units[ptr].main.nodeValue = a.text;
 	}
@@ -238,16 +461,18 @@ export const makePursx_ = (runOnJust) => (tryHydration) => (maybe) => (a) => (st
 			state.hydrating &&
 			tryHydration &&
 			// hack
-			(dom = document.body
-				.querySelectorAll("[data-deku-ssr-" + ptr + "]")
-				.item(0))
+			(dom = document.documentElement
+				.querySelector(`[data-deku-ssr="${ptr}"]`)
+			)
 		) {
 			state.units[ptr] = {
 				listeners: {},
+				pos: a.pos,
 				scope: scope,
 				parent: parent,
 				main: dom,
 			};
+			dom.$dekuId = ptr;
 			return true;
 		}
 		return false;
@@ -276,10 +501,12 @@ export const makePursx_ = (runOnJust) => (tryHydration) => (maybe) => (a) => (st
 		tmp.innerHTML = html.trim();
 		state.units[ptr] = {
 			listeners: {},
+			pos: a.pos,
 			scope: scope,
 			parent: parent,
 			main: tmp.firstChild,
 		};
+		tmp.firstChild.$dekuId = ptr;
 	}
 	if (!state.scopes[scope]) {
 		state.scopes[scope] = [];
@@ -314,8 +541,10 @@ export const makePursx_ = (runOnJust) => (tryHydration) => (maybe) => (a) => (st
 		};
 		state.scopes[scope].push(namespacedKey);
 	});
-	if (!dom) {
-		connectXToY_(maybe, ptr, parent, state);
+	// fresh node, should be removed from parent
+	if (!iRan) {
+		state.units[ptr].main.remove();
+
 	}
 };
 
@@ -324,25 +553,119 @@ export const makeRoot_ = (a) => (state) => () => {
 	state.units[ptr] = {
 		main: a.root,
 	};
+	a.root.$dekuId = ptr;
 };
 
-export const giveNewParent_ = (a) => (state) => () => {
-	if (state.units[a.id]) {
-
-		var ptr = a.id;
-		var parent = a.parent;
+export const giveNewParent_ = (just) => (runOnJust) => (b) => (state) => () => {
+	const insertAt = (ptr, parent, node) => {
+		if (state.units[ptr].startBeacon) {
+			// we continue this operation until we hit the end beacon
+			var x = state.units[ptr].startBeacon;
+			var y = x.nextSibling;
+			state.units[parent].main.insertBefore(x, node);
+			x = y;
+			while (x && x !== state.units[ptr].endBeacon) {
+				y = x.nextSibling;
+				state.units[parent].main.insertBefore(x, node);
+				x = y;
+			}
+		} else {
+			state.units[parent].main.insertBefore(state.units[ptr].main, node);
+		}
+	}
+	const runMe = []
+	// this is a hold over from when runMe had multiple items
+	// we can safely change it now
+	runMe.push(b);
+	for (var z = 0; z < runMe.length; z++) {
+		const a = runMe[z]
+		const ptr = a.id;
+		const parent = a.parent;
 		state.units[ptr].containingScope = a.scope;
-		state.units[parent].main.prepend(state.units[ptr].main);
+		var aPos = undefined;
+		runOnJust(a.pos)((myPos) => () => { aPos = myPos; return true; })();
+		if (aPos === undefined) { aPos = Number.MAX_VALUE; }
+		const nodes = state.units[parent].main.childNodes;
+		// todo: binary search would be faster
+		var i = 0;
+		var didInsert = false;
+		// we always use this as an opportunity to fix up the positions
+		// which is a full traversal
+		// slow, and we can consider optimizing this
+		// but that way, after this operation, all of the positions are guaranteed to be correct
+		var pos = 0;
+		while (i < nodes.length) {
+			var dkid;
+			if (dkid = nodes[i].$dekuId) {
+				// first, we check if we're alreay at the end of a dyn family
+				// and we haven't done the insert yet
+				// if so, we perform the insert
+				const insertedBeforeEndBeacon = runOnJust(a.dynFamily)((df) => () => {
+					if (didInsert) { return false; }
+					if (state.units[dkid].endBeacon === nodes[i] && df === dkid) {
+						state.units[ptr].pos = just(pos);
+						insertAt(ptr, parent, nodes[i]);
+						return true;
+					}
+					return false;
+				})();
+				if (insertedBeforeEndBeacon) {
+					didInsert = true;
+					break;
+				}
+				if (state.units[dkid].dynFamily !== state.units[ptr].dynFamily) {
+					i++;
+					continue;
+				}
+
+				// if we've found equal positions already we stop here
+				// as all we care about is the pos fixer-upper happening above
+				if (didInsert) {
+					i++;
+					continue;
+				}
+
+				// if the positions are equal, insert before and return true
+				if (pos === aPos) {
+					insertAt(ptr, parent, nodes[i]);
+					// increment pos by one as there's been an insert
+					pos++;
+					didInsert = true;
+				}
+				// only set if not end beacon, as end beacon will have already
+				// gotten the position when this iterates over the start beacon
+				else if (state.units[dkid].endBeacon !== nodes[i]) {
+					state.units[dkid].pos = just(pos);
+					pos++;
+				}
+			}
+			i++;
+		}
+		if (didInsert) {
+			return;
+		};
+		// we return true anyway, as this just means that we can tack this onto the end of our structure
+		if (state.units[ptr].main) {
+			state.units[parent].main.appendChild(state.units[ptr].main);
+		}
+		else {
+			var x = state.units[ptr].startBeacon;
+			var y = x.nextSibling;
+			state.units[parent].main.appendChild(x);
+			x = y;
+			while (x && x !== state.units[ptr].endBeacon) {
+				y = x.nextSibling;
+				state.units[parent].main.appendChild(x);
+				x = y;
+			}
+		}
 	}
 };
 
+
 export const disconnectElement_ = (a) => (state) => () => {
 	if (state.units[a.id]) {
-
 		var ptr = a.id;
-		if (state.units[ptr].noop) {
-			return;
-		}
 		if (
 			state.units[ptr].containingScope &&
 			!a.scopeEq(state.units[ptr].containingScope)(a.scope)
@@ -350,29 +673,30 @@ export const disconnectElement_ = (a) => (state) => () => {
 			return;
 		}
 
-		state.units[ptr].main.remove();
+		if (state.units[ptr].main) { state.units[ptr].main.remove(); }
+		else {
+			// when we disconnect a dyn, we _always_ need to
+			// keep the elements grouped together
+			// so instead of removing them
+			// we add them to a dummy element to preserve their order
+			const dummy = document.createElement("div");
+			var x = state.units[ptr].startBeacon;
+			var y = x.nextSibling;
+			dummy.appendChild(x);
+			x = y;
+			while (x && x !== state.units[ptr].endBeacon) {
+				y = x.nextSibling;
+				dummy.appendChild(x);
+				x = y;
+			}
+		}
 	}
 };
 
 export const deleteFromCache_ = (a) => (state) => () => {
 	if (state.units[a.id]) {
-
 		delete state.units[a.id];
 	}
 };
 
-export const sendToPos_ = (a) => (state) => () => {
-	if (state.units[a.id]) {
-		var ptr = a.id;
-		var pos = a.pos;
-		var parent = state.units[ptr].main.parentNode;
-		parent.insertBefore(
-			state.units[ptr].main,
-			parent.children.length <= pos
-				? parent.children[parent.children.length - 1]
-				: pos < 0
-					? parent.children[0]
-					: parent.children[pos]
-		);
-	}
-};
+export const removeDynBeacon_ = deleteFromCache_;

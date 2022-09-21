@@ -70,6 +70,8 @@ px =
 
   <blockquote> ~result~ </blockquote>
 
+  <p>One important thing to note about SSR is that it leaves a lot of things out. For example, it will not respond to send-to-position requests if they are emitted immediately. These are only evaluated on the client once a document is rendered. For this reason, it is recommended to <i>only</i> use SSR for elements that should be statically rendered, like a loading screen or blog. If you need your initial HTML to reflect lots of inserting and deleting of dynamic nodes, deku SSR may not work for you yet.</p>
+
   <h2>Parting shot</h2>
   <p>Thanks for checking out Deku! I had a blast writing it, and I hope you enjoy using it for your projects!</p>
 </div>"""
@@ -84,7 +86,7 @@ All of the static bits are rendered as HTML,
 and all of the dynamic bits are hydrated on page load."""
         ]
     , D.button
-        (click_ (pure push.buttonClicked))
+        (click_ $ push.buttonClicked unit)
         [ text_ "Click" ]
     , D.div_
         [ text

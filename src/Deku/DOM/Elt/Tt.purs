@@ -1,11 +1,14 @@
 module Deku.DOM.Elt.Tt where
 
+import Bolson.Core (Entity(..), fixed)
 import Control.Plus (empty)
+import Data.Array (mapWithIndex)
 import Deku.Attribute (Attribute)
 import Deku.Control (elementify)
-import Deku.Core (Domable)
-import Bolson.Core (Entity(..), fixed)
+import Deku.Core (Domable(..), Domable', unsafeSetPos)
 import FRP.Event (Event)
+import Safe.Coerce (coerce)
+
 
 
 data Tt_
@@ -15,7 +18,7 @@ tt
    . Event (Attribute Tt_)
   -> Array (Domable lock payload)
   -> Domable lock payload
-tt attributes kids = Element' (elementify "tt" attributes (fixed kids))
+tt attributes kids = Domable (Element' (elementify "tt" attributes ((coerce :: Domable' lock payload -> Domable lock payload)  (fixed (coerce (mapWithIndex unsafeSetPos kids))))))
 
 tt_
   :: forall lock payload

@@ -3,68 +3,43 @@ module Deku.Control
   , text
   , text_
   , deku
-  , deku1
-  , dekuA
   , globalPortal
+  , globalPortal1
   , portal
   , blank
-  , dyn
-  , dyn_
   , ezDyn
-  , ezDyn_
-  , fixed
-  , fixed_
-  , envy
-  , envy_
   , switcher
-  , switcher_
   ) where
 
 import Prelude
 
 import Bolson.Control as Bolson
-import Bolson.Core (Element(..), Entity(..), EventfulElement(..), FixedChildren(..), PSR, Scope(..))
+import Bolson.Core (Child(..), Element(..), Entity(..), PSR, Scope(..))
 import Bolson.Core as BCore
 import Control.Alt ((<|>))
 import Control.Plus (empty)
-import Data.FastVect.FastVect (Vect)
+import Data.FastVect.FastVect (Vect, singleton, index)
+import Data.Filterable (filter)
 import Data.Foldable (oneOf)
 import Data.Maybe (Maybe(..), maybe)
-import Data.Newtype (class Newtype, unwrap)
-import Data.Profunctor (lcmap)
+import Data.Newtype (class Newtype, unwrap, wrap)
+import Data.Profunctor (dimap, lcmap)
+import Data.Tuple (snd)
+import Data.Tuple.Nested ((/\))
 import Deku.Attribute (Attribute, AttributeValue(..), unsafeUnAttribute)
-import Deku.Core (DOMInterpret(..), Domable, Node(..), Nut, bus, insert_, remove, sendToPos)
+import Deku.Core (DOMInterpret(..), Domable(..), Node(..), Nut, bus, dyn, insert_, remove, sendToPos)
 import Effect (Effect)
-import FRP.Event (Event, keepLatest, makeLemmingEvent)
+import FRP.Event (Event, keepLatest, makeLemmingEvent, mapAccum, memoize)
 import Prim.Int (class Compare)
 import Prim.Ordering (GT)
 import Safe.Coerce (coerce)
+import Type.Proxy (Proxy(..))
 import Unsafe.Coerce (unsafeCoerce)
 import Web.DOM as Web.DOM
 
 type Neg1 = -1
 
 ----
-unsafeElement
-  :: forall payload
-   . DOMInterpret payload
-  -> { id :: String, parent :: Maybe String, scope :: Scope, tag :: String }
-  -> payload
-unsafeElement (DOMInterpret { makeElement }) = makeElement
-
-unsafeConnect
-  :: forall payload
-   . DOMInterpret payload
-  -> { id :: String, parent :: String, pos :: Maybe Int }
-  -> payload
-unsafeConnect (DOMInterpret { attributeParent }) = attributeParent
-
-unsafeText
-  :: forall payload
-   . DOMInterpret payload
-  -> { id :: String, parent :: Maybe String, scope :: Scope }
-  -> payload
-unsafeText (DOMInterpret { makeText }) = makeText
 
 unsafeSetText
   :: forall payload
@@ -99,26 +74,34 @@ elementify
   -> Node lock payload
 elementify tag atts children = Node go
   where
-  go { parent, scope, raiseId, pos } di@(DOMInterpret { ids, deleteFromCache }) =
+  go
+    { parent, scope, raiseId, pos, dynFamily, ez }
+    di@(DOMInterpret { ids, deleteFromCache, makeElement, attributeParent }) =
     makeLemmingEvent \mySub k -> do
       me <- ids
       raiseId me
       unsub <- mySub
         ( ( oneOf
-              ( [ pure (unsafeElement di { id: me, parent, scope, tag })
+              ( [ pure
+                    (makeElement { id: me, parent, scope, tag, pos, dynFamily })
                 , unsafeSetAttribute di me atts
                 ] <> maybe []
                   ( \p ->
-                      [ pure
-                          $ unsafeConnect di
-                          $ { id: me, parent: p, pos }
+                      [ pure $ attributeParent
+                          { id: me, parent: p, pos, dynFamily, ez }
                       ]
                   )
                   parent
               )
           )
             <|> __internalDekuFlatten
-              { parent: Just me, scope, raiseId: \_ -> pure unit, pos: Nothing }
+              { parent: Just me
+              , scope
+              , ez: true
+              , raiseId: \_ -> pure unit
+              , pos: Nothing
+              , dynFamily: Nothing
+              }
               di
               children
         )
@@ -133,17 +116,24 @@ globalPortal
   => Vect n (Domable lock payload)
   -> (Vect n (Domable lock payload) -> Domable lock payload)
   -> Domable lock payload
-globalPortal v c = Bolson.globalPortalComplexComplex
+globalPortal v c = Domable $ Bolson.globalPortalComplexComplex
   portalFlatten
   { fromEltO1: coerce
   , fromEltO2: coerce
   , toElt: coerce
-  , wrapElt: Element' <<< elementify "div" empty
+  , wrapElt: \i -> Element' (elementify "div" empty (unsafeCoerce i))
   , giveNewParent: \a b _ -> (unwrap a).giveNewParent b
   , deleteFromCache: unwrap >>> _.deleteFromCache
   }
-  v
-  (lcmap (map (_ $ unit)) c)
+  (map unwrap v)
+  (dimap (map ((_ $ unit) >>> wrap)) unwrap c)
+
+globalPortal1
+  :: forall lock payload
+   . Domable lock payload
+  -> (Domable lock payload -> Domable lock payload)
+  -> Domable lock payload
+globalPortal1 i f = globalPortal (singleton i) (lcmap (index (Proxy :: _ 0)) f)
 
 -- ugh, this isn't sacred, delete it and regenerate if something changes
 portalFlatten
@@ -166,6 +156,8 @@ portalFlatten
          Node lock166 payload171
          -> Element (DOMInterpret payload171)
               ( pos :: Maybe Int
+              , dynFamily :: Maybe String
+              , ez :: Boolean
               )
               lock170
               payload171
@@ -189,32 +181,40 @@ portal
        -> Domable lockfoo payload
      )
   -> Domable lock0 payload
-portal a b = Bolson.portalComplexComplex
+portal a b = Domable $ Bolson.portalComplexComplex
   portalFlatten
   { fromEltO1: coerce
   , fromEltO2: coerce
   , toElt: coerce
-  , wrapElt: Element' <<< elementify "div" empty
+  , wrapElt: \i -> Element' (elementify "div" empty (wrap i))
   , giveNewParent: \q r _ -> (unwrap q).giveNewParent r
   , deleteFromCache: unwrap >>> _.deleteFromCache
   }
-  a
+  (map unwrap a)
   (lcmap (map (_ $ unit)) (coerce b))
 
 text
   :: forall lock payload
    . Event String
   -> Domable lock payload
-text txt = Element' $ Node go
+text txt = Domable $ Element' $ Node go
   where
-  go { parent, scope, raiseId } di@(DOMInterpret { ids, deleteFromCache }) =
+  go
+    { parent, scope, raiseId, dynFamily, pos, ez }
+    di@(DOMInterpret { ids, makeText, deleteFromCache, attributeParent }) =
     makeLemmingEvent \mySub k -> do
       me <- ids
       raiseId me
       unsub <- mySub
         ( oneOf
-            [ pure (unsafeText di { id: me, parent, scope })
+            [ pure (makeText { id: me, parent, pos, scope, dynFamily })
             , unsafeSetText di me txt
+            , maybe empty
+                ( \p ->
+                    pure $ attributeParent
+                      { id: me, parent: p, pos, dynFamily, ez }
+                )
+                parent
             ]
         )
         k
@@ -231,172 +231,68 @@ deku
   -> (forall lock. Domable lock payload)
   -> DOMInterpret payload
   -> Event payload
-deku root children di@(DOMInterpret { ids, makeRoot }) = makeLemmingEvent \mySub k -> do
-  me <- ids
-  mySub
-    ( pure (makeRoot { id: me, root })
-        <|> __internalDekuFlatten
-          { parent: Just me
-          , scope: Local "rootScope"
-          , raiseId: \_ -> pure unit
-          , pos: Nothing
-          }
-          di
-          (unsafeCoerce children)
-    )
-    k
-
-deku1
-  :: forall payload
-   . Web.DOM.Element
-  -> (forall lock. Event (Domable lock payload))
-  -> DOMInterpret payload
-  -> Event payload
-deku1 root children = deku root (EventfulElement' $ EventfulElement children)
-
-dekuA
-  :: forall payload
-   . Web.DOM.Element
-  -> (forall lock. Array (Domable lock payload))
-  -> DOMInterpret payload
-  -> Event payload
-dekuA root children = deku root (FixedChildren' $ FixedChildren children)
+deku root children di@(DOMInterpret { makeRoot }) = makeLemmingEvent
+  \mySub k -> do
+    let me = "deku-root" -- <- ids
+    mySub
+      ( pure (makeRoot { id: me, root })
+          <|> __internalDekuFlatten
+            { parent: Just me
+            , scope: Local "rootScope"
+            , raiseId: \_ -> pure unit
+            , ez: true
+            , pos: Nothing
+            , dynFamily: Nothing
+            }
+            di
+            (unsafeCoerce children)
+      )
+      k
 
 data Stage = Begin | Middle | End
 
 __internalDekuFlatten
   :: forall lock payload
-   . PSR (pos :: Maybe Int)
+   . PSR (pos :: Maybe Int, ez :: Boolean, dynFamily :: Maybe String)
   -> DOMInterpret payload
   -> Domable lock payload
   -> Event payload
-__internalDekuFlatten = Bolson.flatten
-  portalFlatten
+__internalDekuFlatten a b (Domable c) = Bolson.flatten portalFlatten a b c
 
 switcher
-  :: forall a element lock payload
-   . ( Event (Attribute element)
-       -> Array (Domable lock payload)
-       -> Domable lock payload
-     )
-  -> Event (Attribute element)
-  -> (a -> Domable lock payload)
+  :: forall a lock payload
+   . (a -> Domable lock payload)
   -> Event a
   -> Domable lock payload
-switcher f e1 i e2 = f e1 [ Bolson.switcher i e2 ]
-
-switcher_
-  :: forall a element lock payload
-   . ( Event (Attribute element)
-       -> Array (Domable lock payload)
-       -> Domable lock payload
-     )
-  -> (a -> Domable lock payload)
-  -> Event a
-  -> Domable lock payload
-switcher_ f i e = f empty [ Bolson.switcher i e ]
-
-dyn
-  :: forall element lock payload
-   . ( Event (Attribute element)
-       -> Array (Domable lock payload)
-       -> Domable lock payload
-     )
-  -> Event (Attribute element)
-  -> Event (Event (BCore.Child Int (Node lock payload) lock))
-  -> Domable lock payload
-dyn f e i = f e [ BCore.dyn i ]
+switcher f event = dyn $ keepLatest
+  $ memoize (counter event) \cenv -> map
+      ( \(p /\ n) -> oneOf
+          [ ((const Remove) <$> filter (eq (n + 1) <<< snd) cenv)
+          , pure (insert_ $ coerce (f p))
+          ]
+      )
+      cenv
+  where
+  counter ev = mapAccum fn ev 0
+    where
+    fn a b = (b + 1) /\ (a /\ b)
 
 ezDyn
-  :: forall element lock payload
-   . ( Event (Attribute element)
-       -> Array (Domable lock payload)
-       -> Domable lock payload
-     )
-  -> Event (Attribute element)
-  -> ( Event
+  :: forall lock payload
+   . ( Event
          ( { remove :: Effect Unit, sendToPos :: Int -> Effect Unit }
            -> Domable lock payload
          )
      )
   -> Domable lock payload
-ezDyn f0 e0 e1 = dyn f0 e0
+ezDyn e1 = dyn
   ( e1 <#> \f1 -> keepLatest $ bus \setRm rm ->
       keepLatest $ bus \setStp stp ->
         (rm $> remove) <|> (stp <#> sendToPos) <|> pure
-          (insert_ (f1 { remove: setRm unit, sendToPos: setStp }))
+          ( insert_
+              (unsafeCoerce (f1 { remove: setRm unit, sendToPos: setStp }))
+          )
   )
-
-ezDyn_
-  :: forall element lock payload
-   . ( Event (Attribute element)
-       -> Array (Domable lock payload)
-       -> Domable lock payload
-     )
-  -> ( Event
-         ( { remove :: Effect Unit, sendToPos :: Int -> Effect Unit }
-           -> Domable lock payload
-         )
-     )
-  -> Domable lock payload
-ezDyn_ f0 e1 = dyn_ f0
-  ( e1 <#> \f1 -> keepLatest $ bus \setRm rm ->
-      keepLatest $ bus \setStp stp ->
-        (rm $> remove) <|> (stp <#> sendToPos) <|> pure
-          (insert_ (f1 { remove: setRm unit, sendToPos: setStp }))
-  )
-
-dyn_
-  :: forall element lock payload
-   . ( Event (Attribute element)
-       -> Array (Domable lock payload)
-       -> Domable lock payload
-     )
-  -> Event (Event (BCore.Child Int (Node lock payload) lock))
-  -> Domable lock payload
-dyn_ f i = f empty [ BCore.dyn i ]
-
-fixed
-  :: forall element lock payload
-   . ( Event (Attribute element)
-       -> Array (Domable lock payload)
-       -> Domable lock payload
-     )
-  -> Event (Attribute element)
-  -> Array (Domable lock payload)
-  -> Domable lock payload
-fixed f e i = f e [ BCore.fixed i ]
-
-fixed_
-  :: forall element lock payload
-   . ( Event (Attribute element)
-       -> Array (Domable lock payload)
-       -> Domable lock payload
-     )
-  -> Array (Domable lock payload)
-  -> Domable lock payload
-fixed_ f i = f empty [ BCore.fixed i ]
-
-envy
-  :: forall element lock payload
-   . ( Event (Attribute element)
-       -> Array (Domable lock payload)
-       -> Domable lock payload
-     )
-  -> Event (Attribute element)
-  -> Event (Domable lock payload)
-  -> Domable lock payload
-envy f e i = f e [ BCore.envy i ]
-
-envy_
-  :: forall element lock payload
-   . ( Event (Attribute element)
-       -> Array (Domable lock payload)
-       -> Domable lock payload
-     )
-  -> Event (Domable lock payload)
-  -> Domable lock payload
-envy_ f i = f empty [ BCore.envy i ]
 
 blank :: Nut
-blank = BCore.envy empty
+blank = Domable $ BCore.envy empty

@@ -7,8 +7,8 @@ import Data.Filterable (compact)
 import Data.Foldable (oneOf)
 import Data.Maybe (Maybe(..))
 import Data.Tuple.Nested ((/\))
-import Deku.Control (dyn_, text_)
-import Deku.Core (Nut, bussed, insert_, remove, sendToTop)
+import Deku.Control (text_)
+import Deku.Core (Nut, dyn, bussed, insert_, remove, sendToTop)
 import Deku.DOM as D
 import Deku.Listeners (click, keyUp, textInput)
 import Deku.Toplevel (runInBody)
@@ -55,20 +55,20 @@ main = runInBody
             ]
       D.div_
         [ top
-        , dyn_ D.div $
-            map
-              ( \txt -> keepLatest $ bus \p' e' ->
-                  ( pure $ insert_ $ D.div_
-                      [ text_ txt
-                      , D.button
-                          (click $ pure (p' sendToTop))
-                          [ text_ "Prioritize" ]
-                      , D.button
-                          (click $ pure (p' remove))
-                          [ text_ "Delete" ]
-                      ]
-                  ) <|> e'
-              )
-              accumulateTextAndEmitOnSubmit
+        , dyn
+            $ map
+                ( \txt -> keepLatest $ bus \p' e' ->
+                    ( pure $ insert_ $ D.div_
+                        [ text_ txt
+                        , D.button
+                            (click $ pure (p' sendToTop))
+                            [ text_ "Prioritize" ]
+                        , D.button
+                            (click $ pure (p' remove))
+                            [ text_ "Delete" ]
+                        ]
+                    ) <|> e'
+                )
+                accumulateTextAndEmitOnSubmit
         ]
   )

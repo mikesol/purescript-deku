@@ -7,9 +7,10 @@ import Data.Compactable (compact)
 import Data.Maybe (Maybe(..))
 import Deku.Attribute ((:=))
 import Deku.Control (text)
+import Deku.Core (envy)
 import Deku.DOM as D
 import Deku.Pursx (nut, (~~))
-import Deku.Toplevel (runInBody1)
+import Deku.Toplevel (runInBody)
 import Effect (Effect)
 import FRP.Event (bus)
 import Type.Proxy (Proxy(..))
@@ -35,8 +36,8 @@ myDom =
 """
 
 main :: Effect Unit
-main = runInBody1
-  ( bus \push event -> myDom ~~
+main = runInBody
+  (envy ( bus \push event -> myDom ~~
       { myli: pure (D.Style := "background-color:rgb(200,240,210);")
       , somethingNew: nut
           ( D.button (pure (D.OnClick := push (Just unit)))
@@ -46,4 +47,4 @@ main = runInBody1
               ]
           )
       }
-  )
+  ))
