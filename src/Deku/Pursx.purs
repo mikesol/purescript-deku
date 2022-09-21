@@ -4162,6 +4162,7 @@ instance pursxToElementConsInsert ::
             , scope: info.scope
             , raiseId: \_ -> pure unit
             , pos: info.pos
+            , ez: false
             , dynFamily: Nothing
             }
             di
@@ -4276,7 +4277,8 @@ makePursx' verb html r = Domable $ Element' $ Node go
             , element z di
             , maybe empty
                 ( \p ->
-                    pure $ attributeParent { id: me, parent: p, pos, dynFamily }
+                    pure $ attributeParent
+                      { id: me, parent: p, pos, dynFamily, ez: false }
                 )
                 parent
             ]
@@ -4288,7 +4290,7 @@ makePursx' verb html r = Domable $ Element' $ Node go
 
 __internalDekuFlatten
   :: forall lock payload
-   . PSR (pos :: Maybe Int, dynFamily :: Maybe String)
+   . PSR (pos :: Maybe Int, dynFamily :: Maybe String, ez :: Boolean)
   -> DOMInterpret payload
   -> Domable lock payload
   -> Event payload

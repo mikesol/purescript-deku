@@ -285,7 +285,7 @@ sendToPos a state = do
   scope <- getScope a.id state
   parent <- getParent a.id state
   dynFamily <- getDynFamily a.id state
-  let newA = { scope, parent, dynFamily, id: a.id, pos: Just a.pos }
+  let newA = { scope, parent, dynFamily, id: a.id, pos: Just a.pos, ez: false }
   giveNewParent_ Just runOnJust newA state
 
 hydratingDOMInterpret

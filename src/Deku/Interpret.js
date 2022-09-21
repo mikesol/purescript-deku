@@ -10,7 +10,14 @@ export const attributeParent_ = (runOnJust) => (a) => (state) => () => {
 		// only attribute if it is not attributed already
 		if (!((state.units[a.id].main && state.units[a.id].main.parentNode)
 			|| (state.units[a.id].startBeacon && state.units[a.id].startBeacon.parentNode))) {
-			const iRan = runOnJust(a.pos)((pos) => () => {
+			const iRan = a.ez ? (() => {
+				if (state.units[a.id].main) {
+					dom.appendChild(state.units[a.id].main)
+				} else {
+					dom.appendChild(state.units[a.id].startBeacon);
+					dom.appendChild(state.units[a.id].endBeacon)
+				} return true;
+			})() : runOnJust(a.pos)((pos) => () => {
 				// when attributing,
 				// we only care about positional information for
 				// things with a dyn family

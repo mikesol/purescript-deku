@@ -75,7 +75,7 @@ elementify
 elementify tag atts children = Node go
   where
   go
-    { parent, scope, raiseId, pos, dynFamily }
+    { parent, scope, raiseId, pos, dynFamily, ez }
     di@(DOMInterpret { ids, deleteFromCache, makeElement, attributeParent }) =
     makeLemmingEvent \mySub k -> do
       me <- ids
@@ -88,7 +88,7 @@ elementify tag atts children = Node go
                 ] <> maybe []
                   ( \p ->
                       [ pure $ attributeParent
-                          { id: me, parent: p, pos, dynFamily }
+                          { id: me, parent: p, pos, dynFamily, ez }
                       ]
                   )
                   parent
@@ -97,6 +97,7 @@ elementify tag atts children = Node go
             <|> __internalDekuFlatten
               { parent: Just me
               , scope
+              , ez: true
               , raiseId: \_ -> pure unit
               , pos: Nothing
               , dynFamily: Nothing
@@ -156,6 +157,7 @@ portalFlatten
          -> Element (DOMInterpret payload171)
               ( pos :: Maybe Int
               , dynFamily :: Maybe String
+              , ez :: Boolean
               )
               lock170
               payload171
@@ -198,7 +200,7 @@ text
 text txt = Domable $ Element' $ Node go
   where
   go
-    { parent, scope, raiseId, dynFamily, pos }
+    { parent, scope, raiseId, dynFamily, pos, ez }
     di@(DOMInterpret { ids, makeText, deleteFromCache, attributeParent }) =
     makeLemmingEvent \mySub k -> do
       me <- ids
@@ -210,7 +212,7 @@ text txt = Domable $ Element' $ Node go
             , maybe empty
                 ( \p ->
                     pure $ attributeParent
-                      { id: me, parent: p, pos, dynFamily }
+                      { id: me, parent: p, pos, dynFamily, ez }
                 )
                 parent
             ]
@@ -238,6 +240,7 @@ deku root children di@(DOMInterpret { makeRoot }) = makeLemmingEvent
             { parent: Just me
             , scope: Local "rootScope"
             , raiseId: \_ -> pure unit
+            , ez: true
             , pos: Nothing
             , dynFamily: Nothing
             }
@@ -250,7 +253,7 @@ data Stage = Begin | Middle | End
 
 __internalDekuFlatten
   :: forall lock payload
-   . PSR (pos :: Maybe Int, dynFamily :: Maybe String)
+   . PSR (pos :: Maybe Int, ez :: Boolean, dynFamily :: Maybe String)
   -> DOMInterpret payload
   -> Domable lock payload
   -> Event payload

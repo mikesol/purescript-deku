@@ -114,7 +114,7 @@ vbussedUncurried
 vbussedUncurried px = curry >>> vbussed px
 
 newtype Node (lock :: Type) payload = Node
-  ( Bolson.PSR (pos :: Maybe Int, dynFamily :: Maybe String)
+  ( Bolson.PSR (pos :: Maybe Int, ez :: Boolean, dynFamily :: Maybe String)
     -> DOMInterpret payload
     -> Event payload
   )
@@ -184,11 +184,13 @@ type AttributeParent =
   , parent :: String
   , pos :: Maybe Int
   , dynFamily :: Maybe String
+  , ez :: Boolean
   }
 
 type GiveNewParent =
   { id :: String
   , parent :: String
+  , ez :: Boolean -- ez is ignored, but it's easier to have in the type to appease the compiler
   , scope :: Scope
   , pos :: Maybe Int
   , dynFamily :: Maybe String
@@ -291,6 +293,7 @@ portalFlatten
          -> Bolson.Element (DOMInterpret payload171)
               ( pos :: Maybe Int
               , dynFamily :: Maybe String
+              , ez :: Boolean
               )
               lock170
               payload171
@@ -306,7 +309,7 @@ portalFlatten =
 
 __internalDekuFlatten
   :: forall lock payload
-   . Bolson.PSR (pos :: Maybe Int, dynFamily :: Maybe String)
+   . Bolson.PSR (pos :: Maybe Int, ez :: Boolean, dynFamily :: Maybe String)
   -> DOMInterpret payload
   -> Domable lock payload
   -> Event payload
@@ -320,7 +323,7 @@ dynify
 dynify f es = Domable $ Bolson.Element' (Node go)
   where
   go
-    { parent, scope, raiseId, pos, dynFamily }
+    { parent, scope, raiseId, pos, dynFamily, ez }
     di@
       ( DOMInterpret
           { ids, makeElement, makeDynBeacon, attributeParent, removeDynBeacon }
@@ -352,10 +355,11 @@ dynify f es = Domable $ Bolson.Element' (Node go)
             [ parentEvent
             , pure $ makeDynBeacon { id: me, parent: Just parentId, scope, dynFamily, pos }
             , pure $ attributeParent
-                { id: me, parent: parentId, pos, dynFamily }
+                { id: me, parent: parentId, pos, dynFamily, ez }
             , __internalDekuFlatten
                 { parent: Just parentId
                 , scope
+                , ez: false
                 , raiseId: \_ -> pure unit
                 -- clear the pos
                 -- as we don't want the pointer's positional information
