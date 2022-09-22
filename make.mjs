@@ -4584,8 +4584,8 @@ var fix3 = function(f) {
   return function(tf, k) {
     var v = create$prime();
     var v1 = f(v.event);
-    var c1 = v1(tf, v.push);
     var c2 = v.event(tf, k);
+    var c1 = v1(tf, v.push);
     return function __do3() {
       c1();
       return c2();
