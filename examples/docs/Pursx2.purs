@@ -8,8 +8,8 @@ import Data.Compactable (compact)
 import Data.Foldable (oneOfMap)
 import Data.Maybe (Maybe(..))
 import Deku.Attribute (cb, (:=))
-import Deku.Control (dyn_, text, text_)
-import Deku.Core (insert_, Nut, bus)
+import Deku.Control (text, text_)
+import Deku.Core (dyn, insert_, Nut, bus)
 import Deku.DOM as D
 import Deku.Example.Docs.Types (Page(..), PageOptions)
 import Deku.Example.Docs.Util (scrollToTop)
@@ -74,7 +74,7 @@ pursx2 options = makePursx' (Proxy :: _ "?") px
           ]
       )
   , result: nut
-      ( dyn_ D.div $ bus \push event ->
+      ( dyn $ bus \push event ->
           pure $ insert_ $ myDom ~~
             { myli: pure (D.Style := "background-color:rgb(200,240,210);")
             , somethingNew: nut

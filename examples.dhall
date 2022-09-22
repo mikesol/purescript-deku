@@ -19,7 +19,6 @@ in      conf
               , "tuples"
               , "affjax"
               , "either"
-              , "monoid-extras"
               , "integers"
               , "random"
               , "aff"

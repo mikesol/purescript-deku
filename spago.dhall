@@ -3,8 +3,10 @@
   [ "aff"
   , "arrays"
   , "bolson"
+  , "catenable-lists"
   , "control"
   , "effect"
+  , "either"
   , "fast-vect"
   , "filterable"
   , "foldable-traversable"
@@ -33,4 +35,3 @@
 , repository = "https://github.com/mikesol/purescript-deku"
 , sources = [ "src/**/*.purs" ]
 }
-

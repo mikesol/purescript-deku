@@ -15,21 +15,20 @@ module Deku.Do
 import Prelude hiding (bind, discard)
 
 import Bolson.Core (Child, envy)
-import Bolson.Core as Bolson
 import Control.Alt ((<|>))
 import Data.Profunctor (lcmap)
 import Data.Symbol (class IsSymbol)
 import Data.Tuple (curry)
 import Data.Tuple.Nested (type (/\), (/\))
-import Deku.Core (bus, remove, bussedUncurried, vbussedUncurried)
+import Deku.Core (Domable(..), bus, bussedUncurried, remove, vbussedUncurried)
 import Effect (Effect)
 import FRP.Event (Event, keepLatest, mailboxed, memoize)
 import FRP.Event.VBus (class VBus, V)
-
 import Prim.Row as R
 import Prim.RowList (class RowToList, RowList)
 import Prim.RowList as RL
 import Record as Record
+import Safe.Coerce (coerce)
 import Type.Proxy (Proxy(..))
 
 bind :: forall a r q. ((a -> r) -> q) -> (a -> r) -> q
@@ -39,39 +38,39 @@ discard :: forall r q. ((Unit -> r) -> q) -> (Unit -> r) -> q
 discard = bind
 
 useState'
-  :: forall lock logic obj a
+  :: forall lock payload a
    . ( ((a -> Effect Unit) /\ Event a)
-       -> Bolson.Entity logic obj lock
+       -> Domable lock payload
      )
-  -> Bolson.Entity logic obj lock
+  -> Domable lock payload
 useState' = bussedUncurried
 
 useMemoized
-  :: forall lock logic obj a b
+  :: forall lock payload a b
    . (Event a -> Event b)
   -> ( ((a -> Effect Unit) /\ Event b)
-       -> Bolson.Entity logic obj lock
+       -> Domable lock payload
      )
-  -> Bolson.Entity logic obj lock
-useMemoized f0 f1 = bussedUncurried \(a /\ b) -> envy
-  (memoize (f0 b) \c -> f1 (a /\ c))
+  -> Domable lock payload
+useMemoized f0 f1 = bussedUncurried \(a /\ b) -> Domable $ envy
+  (coerce (memoize (f0 b) \c -> f1 (a /\ c)))
 
 useState
-  :: forall lock logic obj a
+  :: forall lock payload a
    . a
   -> ( ((a -> Effect Unit) /\ Event a)
-       -> Bolson.Entity logic obj lock
+       -> Domable lock payload
      )
-  -> Bolson.Entity logic obj lock
+  -> Domable lock payload
 useState a = useMemoized (pure a <|> _)
 
 useStates'
-  :: forall logic obj lock rbus bus push event
+  :: forall lock payload rbus bus push event
    . RowToList bus rbus
   => VBus rbus push event
   => Proxy (V bus)
-  -> (({ | push } /\ { | event }) -> Bolson.Entity logic obj lock)
-  -> Bolson.Entity logic obj lock
+  -> (({ | push } /\ { | event }) -> Domable lock payload)
+  -> Domable lock payload
 useStates' = vbussedUncurried
 
 class InitializeEvents :: RowList Type -> Row Type -> Row Type -> Constraint
@@ -106,7 +105,7 @@ initializeEvents
 initializeEvents = initializeEvents' (Proxy :: _ needleRL)
 
 useStates
-  :: forall logic obj lock rbus bus push event needleRL
+  :: forall lock payload rbus bus push event needleRL
        needle
    . RowToList bus rbus
   => RowToList needle needleRL
@@ -114,25 +113,25 @@ useStates
   => VBus rbus push event
   => Proxy (V bus)
   -> { | needle }
-  -> (({ | push } /\ { | event }) -> Bolson.Entity logic obj lock)
-  -> Bolson.Entity logic obj lock
+  -> (({ | push } /\ { | event }) -> Domable lock payload)
+  -> Domable lock payload
 useStates v needle = useStates' v <<< lcmap (map (initializeEvents needle))
 
 useMailboxed
-  :: forall lock logic obj a b
+  :: forall lock payload a b
    . Ord a
   => ( ( ({ address :: a, payload :: b } -> Effect Unit) /\
            (a -> Event b)
        )
-       -> Bolson.Entity logic obj lock
+       -> Domable lock payload
      )
-  -> Bolson.Entity logic obj lock
-useMailboxed f = bussedUncurried \(a /\ b) -> envy
-  (mailboxed b \c -> f (a /\ c))
+  -> Domable lock payload
+useMailboxed f = bussedUncurried \(a /\ b) -> Domable $ envy
+  (coerce (mailboxed b \c -> f (a /\ c)))
 
 useRemoval
-  :: forall a logic obj lock
-   . (Effect Unit /\ (Event (Child logic obj lock)) -> Event a)
+  :: forall a lock payload
+   . (Effect Unit /\ (Event (Child Int lock payload)) -> Event a)
   -> Event a
 useRemoval f = keepLatest do
   setRemoveMe /\ removeMe <- bus <<< curry

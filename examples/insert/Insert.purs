@@ -6,8 +6,8 @@ import Control.Alt ((<|>))
 import Data.DateTime.Instant (Instant, unInstant)
 import Data.Newtype (unwrap)
 import Data.Tuple.Nested ((/\))
-import Deku.Control (dyn_, text_)
-import Deku.Core (insert, remove)
+import Deku.Control (text_)
+import Deku.Core (insert, dyn, remove)
 import Deku.DOM as D
 import Deku.Toplevel (runInBody)
 import Effect (Effect)
@@ -24,7 +24,7 @@ delay n = FRP.Event.delay n
 
 main :: Effect Unit
 main = runInBody
-  ( dyn_ D.div $ map
+  ( dyn $ map
       ( \(x /\ c) ->
           ( pure
               ( insert c

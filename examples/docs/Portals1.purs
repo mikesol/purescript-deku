@@ -8,8 +8,8 @@ import Data.FastVect.FastVect as V
 import Data.Foldable (oneOfMap)
 import Data.Profunctor (lcmap)
 import Deku.Attribute (cb, (:=))
-import Deku.Control (dyn_, portal, switcher_, text_)
-import Deku.Core (Nut, bus, insert_)
+import Deku.Control (portal, switcher, text_)
+import Deku.Core (Nut, dyn, bus, insert_)
 import Deku.DOM as D
 import Deku.Example.Docs.Types (Page(..), PageOptions)
 import Deku.Example.Docs.Util (scrollToTop)
@@ -69,7 +69,7 @@ portals1 options = px ~~
       )
   , result: nut
 
-      ( dyn_ D.div $ bus \push -> lcmap (alt (pure unit))
+      ( dyn $ bus \push -> lcmap (alt (pure unit))
           \event -> do
             pure $ insert_ $ portal
               ( map
@@ -90,7 +90,7 @@ portals1 options = px ~~
                   p0 = index (Proxy :: _ 0) v
                   p1 = index (Proxy :: _ 1) v
                   ev = fold (const not) event
-                  flips = switcher_ D.span (if _ then p0 else p1) <<< ev
+                  flips = D.span_ <<< pure <<< switcher (if _ then p0 else p1) <<< ev
                 D.div_
                   [ D.button (pure $ D.OnClick := cb (const $ push unit))
                       [ text_ "Switch videos" ]

@@ -1,11 +1,14 @@
 module Deku.DOM.Elt.Kbd where
 
+import Bolson.Core (Entity(..), fixed)
 import Control.Plus (empty)
+import Data.Array (mapWithIndex)
 import Deku.Attribute (Attribute)
 import Deku.Control (elementify)
-import Deku.Core (Domable)
-import Bolson.Core (Entity(..), fixed)
+import Deku.Core (Domable(..), Domable', unsafeSetPos)
 import FRP.Event (Event)
+import Safe.Coerce (coerce)
+
 
 
 data Kbd_
@@ -15,7 +18,7 @@ kbd
    . Event (Attribute Kbd_)
   -> Array (Domable lock payload)
   -> Domable lock payload
-kbd attributes kids = Element' (elementify "kbd" attributes (fixed kids))
+kbd attributes kids = Domable (Element' (elementify "kbd" attributes ((coerce :: Domable' lock payload -> Domable lock payload)  (fixed (coerce (mapWithIndex unsafeSetPos kids))))))
 
 kbd_
   :: forall lock payload

@@ -8,15 +8,14 @@ import Deku.Attribute (cb, (:=))
 import Deku.Attributes (style_)
 import Deku.Control (text_)
 import Deku.Control as C
-import Deku.Core (Domable, bus)
+import Deku.Core (Domable, bus, envy)
 import Deku.DOM as D
 import Deku.Interpret (FFIDOMSnapshot)
 import Deku.Pursx (nut, (~~))
 import Deku.Pursx.Anonymous (px, xp)
-import Deku.Toplevel (runInBody1)
+import Deku.Toplevel (runInBody)
 import Effect (Effect)
 import FRP.Event (Event)
-
 import Type.Proxy (Proxy(..))
 
 myPx =
@@ -66,4 +65,4 @@ scene = bus \push event ->
     ]
 
 main :: Effect Unit
-main = runInBody1 scene
+main = runInBody (envy scene)

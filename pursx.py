@@ -10,14 +10,16 @@ import Prelude
 import Bolson.Control as Bolson
 import Bolson.Core (Element(..), Entity(..), PSR)
 import Control.Alt ((<|>))
+import Data.Foldable (oneOf)
 import Control.Plus (empty)
-import Data.Maybe (Maybe(..))
+import Data.Maybe (Maybe(..), maybe)
 import Data.Newtype (unwrap)
+import Safe.Coerce (coerce)
 import Data.Profunctor (lcmap)
 import Data.Reflectable (class Reflectable, reflectType)
 import Data.Symbol (class IsSymbol)
 import Deku.Attribute (Attribute, AttributeValue(..), unsafeUnAttribute)
-import Deku.Core (DOMInterpret(..), Domable, Node(..))
+import Deku.Core (DOMInterpret(..), Domable(..), Domable', Node(..))
 import Deku.DOM (class TagToDeku)
 import FRP.Event (Event, makeLemmingEvent)
 
@@ -179,6 +181,8 @@ instance pursxToElementConsInsert ::
             , scope: info.scope
             , raiseId: \_ -> pure unit
             , pos: info.pos
+            , ez: false
+            , dynFamily: Nothing
             }
             di
             pxe
@@ -261,11 +265,11 @@ makePursx'
   -> Proxy html
   -> { | r }
   -> Domable lock payload
-makePursx' verb html r = Element' $ Node go
+makePursx' verb html r = Domable $ Element' $ Node go
   where
   go
-    z@{ parent, scope, raiseId }
-    di@(DOMInterpret { makePursx: mpx, ids, deleteFromCache }) =
+    z@{ parent, scope, raiseId, dynFamily, pos }
+    di@(DOMInterpret { makePursx: mpx, ids, deleteFromCache, attributeParent }) =
     makeLemmingEvent \mySub k1 -> do
       me <- ids
       pxScope <- ids
@@ -276,17 +280,24 @@ makePursx' verb html r = Element' $ Node go
           (Proxy :: _ rl)
           r
       unsub <- mySub
-          ( ( pure $
+          ( oneOf [pure $
                 mpx
                   { id: me
                   , parent
                   , cache
+                  , dynFamily
+                  , pos
                   , pxScope: pxScope
                   , scope
                   , html: reflectType html
                   , verb: reflectType verb
                   }
-            ) <|> element z di
+            , element z di
+            , maybe empty
+                ( \p ->
+                    pure $ attributeParent { id: me, parent: p, pos, dynFamily, ez: false }
+                )
+                parent]
           )
           k1
       pure do
@@ -295,18 +306,18 @@ makePursx' verb html r = Element' $ Node go
 
 __internalDekuFlatten
   :: forall lock payload
-   . PSR  (pos :: Maybe Int)
+   . PSR (pos :: Maybe Int, dynFamily :: Maybe String, ez :: Boolean)
   -> DOMInterpret payload
   -> Domable lock payload
   -> Event payload
-__internalDekuFlatten = Bolson.flatten
+__internalDekuFlatten a b c = Bolson.flatten
   { doLogic: \pos (DOMInterpret { sendToPos }) id -> sendToPos { id, pos }
   , ids: unwrap >>> _.ids
   , disconnectElement:
       \(DOMInterpret { disconnectElement }) { id, scope, parent } ->
         disconnectElement { id, scope, parent, scopeEq: eq }
   , toElt: \(Node e) -> Element e
-  }
+  }  a b ((coerce :: Domable lock payload -> Domable' lock payload) c)
 
 infixr 5 makePursx as ~~
 
