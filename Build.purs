@@ -81,7 +81,7 @@ main = do
       <script type="module">
         import { main } from """
                     <>
-                     ( if options.top then "\"bundle.js\""
+                     ( if options.top then "\"./bundle.js\""
                       else "\"../bundle.js\"")
                         <>
                           """;

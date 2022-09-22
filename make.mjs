@@ -11938,7 +11938,7 @@ var main2 = function __do2() {
       return '"../style.css"';
     }() + ('>\n      <script type="module">\n        import { main } from ' + (function() {
       if (options2.top) {
-        return '"bundle.js"';
+        return '"./bundle.js"';
       }
       ;
       return '"../bundle.js"';
