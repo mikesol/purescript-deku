@@ -11654,7 +11654,7 @@ var ssrPage = function(v) {
     result: nut(app2),
     codegen: nut(pre_([code_([text(makePureEvent(function(k) {
       return applySecond(applyST)(bind(bindST)(runSSR({
-        head: '<!DOCTYPE html><html><head><script src="./bundle.js" defer><\/script></head>',
+        head: '<!DOCTYPE html><html><head><script src="bundle.js" defer><\/script></head>',
         tail: "</html>"
       })(app2))(k))(pure(applicativeST)(pure(applicativeST)(unit)));
     }))])]))
@@ -11936,13 +11936,13 @@ var main2 = function __do2() {
       }
       ;
       return '"../style.css"';
-    }() + (">\n      <script src=" + (function() {
+    }() + ('>\n      <script type="module">\n        import { main } from ' + (function() {
       if (options2.top) {
         return '"bundle.js"';
       }
       ;
       return '"../bundle.js"';
-    }() + "><\/script>\n    </head>"))),
+    }() + (';\n        main({"startsWith":' + ('"' + (options2.pageString + ('"' + (',"slug":' + ('"' + (options2.slug + '"})();\n      <\/script>\n    </head>')))))))))),
     tail: "</html>"
   })(scene(options2))))(log2)();
 };
