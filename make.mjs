@@ -11654,7 +11654,7 @@ var ssrPage = function(v) {
     result: nut(app2),
     codegen: nut(pre_([code_([text(makePureEvent(function(k) {
       return applySecond(applyST)(bind(bindST)(runSSR({
-        head: '<!DOCTYPE html><html><head><script src="bundle.js" defer><\/script></head>',
+        head: '<!DOCTYPE html><html><head><script src="./bundle.js" defer><\/script></head>',
         tail: "</html>"
       })(app2))(k))(pure(applicativeST)(pure(applicativeST)(unit)));
     }))])]))
