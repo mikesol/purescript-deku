@@ -2,7 +2,7 @@
 
 ![deku](./deku.gif)
 
-A PureScript web micro-framework for apps that need to be fast.
+A PureScript web framework for apps that need to be fast.
 
 ## In anger
 
