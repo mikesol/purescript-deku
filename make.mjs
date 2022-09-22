@@ -4393,21 +4393,35 @@ var monoidEffectFn1 = function(dictMonoid) {
 };
 
 // output/FRP.Event.Class/index.js
+var sampleOnRight = function(dict) {
+  return dict.sampleOnRight;
+};
 var keepLatest = function(dict) {
   return dict.keepLatest;
 };
-var fold3 = function(dict) {
-  return dict.fold;
+var fix2 = function(dict) {
+  return dict.fix;
+};
+var fold3 = function(dictIsEvent) {
+  return function(f) {
+    return function(b2) {
+      return function(e) {
+        return fix2(dictIsEvent)(function(i2) {
+          return sampleOnRight(dictIsEvent)(alt(dictIsEvent.Alternative0().Plus1().Alt0())(i2)(pure(dictIsEvent.Alternative0().Applicative0())(b2)))(map(dictIsEvent.Filterable1().Functor1())(flip(f))(e));
+        });
+      };
+    };
+  };
 };
 var mapAccum = function(dictIsEvent) {
   return function(f) {
-    return function(xs) {
-      return function(acc) {
-        return filterMap(dictIsEvent.Filterable1())(snd)(fold3(dictIsEvent)(function(a2) {
-          return function(v) {
-            return map(functorTuple)(pure(applicativeMaybe))(f(a2)(v.value0));
+    return function(acc) {
+      return function(xs) {
+        return filterMap(dictIsEvent.Filterable1())(snd)(fold3(dictIsEvent)(function(v) {
+          return function(b2) {
+            return map(functorTuple)(pure(applicativeMaybe))(f(v.value0)(b2));
           };
-        })(xs)(new Tuple(acc, Nothing.value)));
+        })(new Tuple(acc, Nothing.value))(xs));
       };
     };
   };
@@ -4438,7 +4452,7 @@ var $runtime_lazy4 = function(name16, moduleName, init3) {
     return val;
   };
 };
-var sampleOn2 = function(v) {
+var sampleOnRight2 = function(v) {
   return function(v1) {
     return function(b2, k) {
       var latest = $$new(Nothing.value)();
@@ -4452,6 +4466,28 @@ var sampleOn2 = function(v) {
             return k(f(a2));
           };
         })();
+      });
+      return function __do3() {
+        c1();
+        return c2();
+      };
+    };
+  };
+};
+var sampleOnLeft = function(v) {
+  return function(v1) {
+    return function(b2, k) {
+      var latest = $$new(Nothing.value)();
+      var c1 = v(b2, function(a2) {
+        var o = read(latest)();
+        return for_(applicativeEffect)(foldableMaybe)(o)(function(f) {
+          return function() {
+            return k(f(a2));
+          };
+        })();
+      });
+      var c2 = v1(b2, function(f) {
+        return write(new Just(f))(latest)();
       });
       return function __do3() {
         c1();
@@ -4487,19 +4523,6 @@ var functorEvent = {
     };
   }
 };
-var fold4 = function(f) {
-  return function(v) {
-    return function(b2) {
-      return function(tf, k) {
-        var result = $$new(b2)();
-        return v(tf, function(a2) {
-          var res = modify(f(a2))(result)();
-          return k(res);
-        });
-      };
-    };
-  };
-};
 var filter5 = function(p2) {
   return function(v) {
     return function(tf, k) {
@@ -4513,7 +4536,7 @@ var filter5 = function(p2) {
           return unit;
         }
         ;
-        throw new Error("Failed pattern match at FRP.Event (line 202, column 31 - line 204, column 35): " + [v1.constructor.name]);
+        throw new Error("Failed pattern match at FRP.Event (line 190, column 31 - line 192, column 35): " + [v1.constructor.name]);
       });
     };
   };
@@ -4561,8 +4584,8 @@ var fix3 = function(f) {
   return function(tf, k) {
     var v = create$prime();
     var v1 = f(v.event);
-    var c1 = v1.input(tf, v.push);
-    var c2 = v1.output(tf, k);
+    var c1 = v1(tf, v.push);
+    var c2 = v.event(tf, k);
     return function __do3() {
       c1();
       return c2();
@@ -4606,9 +4629,9 @@ var filterableEvent = {
       return {
         yes: filter$prime(p2)(xs),
         no: filter$prime(function() {
-          var $146 = not(heytingAlgebraBoolean);
-          return function($147) {
-            return $146(p2($147));
+          var $145 = not(heytingAlgebraBoolean);
+          return function($146) {
+            return $145(p2($146));
           };
         }())(xs)
       };
@@ -4618,13 +4641,13 @@ var filterableEvent = {
     return function(xs) {
       return {
         left: filterMap(filterableEvent)(function() {
-          var $148 = either(Just.create)($$const(Nothing.value));
-          return function($149) {
-            return $148(f($149));
+          var $147 = either(Just.create)($$const(Nothing.value));
+          return function($148) {
+            return $147(f($148));
           };
         }())(xs),
-        right: filterMap(filterableEvent)(function($150) {
-          return hush(f($150));
+        right: filterMap(filterableEvent)(function($149) {
+          return hush(f($149));
         })(xs)
       };
     };
@@ -4704,7 +4727,7 @@ var biSampleOn = function(v) {
 var subscribe = function(i2) {
   return function(v) {
     return v;
-  }($lazy_backdoor(306).subscribe)(i2);
+  }($lazy_backdoor(311).subscribe)(i2);
 };
 var $lazy_backdoor = /* @__PURE__ */ $runtime_lazy4("backdoor", "FRP.Event", function() {
   var create_ = function __do3() {
@@ -4810,7 +4833,7 @@ var $lazy_backdoor = /* @__PURE__ */ $runtime_lazy4("backdoor", "FRP.Event", fun
     bus: function() {
       var bus_ = function(f) {
         return function(v, k) {
-          var v1 = $lazy_create(604)();
+          var v1 = $lazy_create(609)();
           k(f(v1.push)(v1.event));
           return pure(applicativeEffect)(unit);
         };
@@ -4832,7 +4855,7 @@ var $lazy_backdoor = /* @__PURE__ */ $runtime_lazy4("backdoor", "FRP.Event", fun
     hot: function() {
       var hot_ = function(e) {
         return function __do3() {
-          var v = $lazy_create(622)();
+          var v = $lazy_create(627)();
           var unsubscribe = subscribe(e)(v.push)();
           return {
             event: v.event,
@@ -4859,7 +4882,7 @@ var $lazy_backdoor = /* @__PURE__ */ $runtime_lazy4("backdoor", "FRP.Event", fun
                       return new Just(append(semigroupArray)(v2.value0)([k2]));
                     }
                     ;
-                    throw new Error("Failed pattern match at FRP.Event (line 635, column 21 - line 637, column 55): " + [v2.constructor.name]);
+                    throw new Error("Failed pattern match at FRP.Event (line 640, column 21 - line 642, column 55): " + [v2.constructor.name]);
                   })(a2))(r))();
                   return $$void(functorEffect)(modify(alter(dictOrd)(function(v2) {
                     if (v2 instanceof Nothing) {
@@ -4870,7 +4893,7 @@ var $lazy_backdoor = /* @__PURE__ */ $runtime_lazy4("backdoor", "FRP.Event", fun
                       return new Just(deleteBy(unsafeRefEq)(k2)(v2.value0));
                     }
                     ;
-                    throw new Error("Failed pattern match at FRP.Event (line 644, column 21 - line 646, column 69): " + [v2.constructor.name]);
+                    throw new Error("Failed pattern match at FRP.Event (line 649, column 21 - line 651, column 69): " + [v2.constructor.name]);
                   })(a2))(r));
                 };
               }));
@@ -4889,7 +4912,7 @@ var $lazy_backdoor = /* @__PURE__ */ $runtime_lazy4("backdoor", "FRP.Event", fun
                   })();
                 }
                 ;
-                throw new Error("Failed pattern match at FRP.Event (line 653, column 13 - line 655, column 70): " + [v2.constructor.name]);
+                throw new Error("Failed pattern match at FRP.Event (line 658, column 13 - line 660, column 70): " + [v2.constructor.name]);
               });
               return function __do3() {
                 $$void(functorEffect)(write(empty3)(r))();
@@ -4935,11 +4958,11 @@ var $lazy_create = /* @__PURE__ */ $runtime_lazy4("create", "FRP.Event", functio
     unit;
     return function(v) {
       return v;
-    }($lazy_backdoor(383).create)();
+    }($lazy_backdoor(388).create)();
   };
 });
-var backdoor = /* @__PURE__ */ $lazy_backdoor(515);
-var create = /* @__PURE__ */ $lazy_create(380);
+var backdoor = /* @__PURE__ */ $lazy_backdoor(520);
+var create = /* @__PURE__ */ $lazy_create(385);
 var bus = function(i2) {
   return function(v) {
     return v;
@@ -5026,9 +5049,9 @@ var alternativeEvent = {
   }
 };
 var eventIsEvent = {
-  fold: fold4,
   keepLatest: keepLatest2,
-  sampleOn: sampleOn2,
+  sampleOnRight: sampleOnRight2,
+  sampleOnLeft,
   fix: fix3,
   Alternative0: function() {
     return alternativeEvent;
@@ -5900,14 +5923,14 @@ var text_ = function(txt) {
 };
 var switcher = function(f) {
   return function(event) {
-    var counter = function(ev) {
+    var counter = function() {
       var fn = function(a2) {
         return function(b2) {
-          return new Tuple(b2 + 1 | 0, new Tuple(a2, b2));
+          return new Tuple(a2 + 1 | 0, new Tuple(b2, a2));
         };
       };
-      return mapAccum(eventIsEvent)(fn)(ev)(0);
-    };
+      return mapAccum(eventIsEvent)(fn)(0);
+    }();
     return dyn2(keepLatest(eventIsEvent)(memoize(counter(event))(function(cenv) {
       return map(functorEvent)(function(v) {
         return oneOf(foldableArray)(plusEvent)([map(functorEvent)($$const(Remove.value))(filter4(filterableEvent)(function() {
@@ -6614,7 +6637,7 @@ var pursxToElementConsInsert = function() {
 // output/Examples/foreign.js
 var pursx2 = 'module Main where\n\nimport Prelude\n\nimport Control.Alt ((<|>))\nimport Data.Compactable (compact)\nimport Data.Maybe (Maybe(..))\nimport Deku.Attribute ((:=))\nimport Deku.Control (text)\nimport Deku.Core (envy)\nimport Deku.DOM as D\nimport Deku.Pursx (nut, (~~))\nimport Deku.Toplevel (runInBody)\nimport Effect (Effect)\nimport FRP.Event (bus)\nimport Type.Proxy (Proxy(..))\n\nmyDom =\n  Proxy\n    :: Proxy\n         """<div>\n        <button>I do nothing</button>\n        <ul>\n          <li>A</li>\n          <li ~myli~>B</li>\n          <li>C</li>\n        </ul>\n        <div>\n          <a href="https://github.com/mikesol/purescript-deku"></a>\n          <i>bar</i>\n          ~somethingNew~\n          <span style="font-weight:800;">baz</span>\n        </div>\n        <div><div></div><div><input type="range"/></div></div>\n      </div>\n"""\n\nmain :: Effect Unit\nmain = runInBody\n  (envy ( bus \\push event -> myDom ~~\n      { myli: pure (D.Style := "background-color:rgb(200,240,210);")\n      , somethingNew: nut\n          ( D.button (pure (D.OnClick := push (Just unit)))\n              [ text\n                  $ (compact event $> "Thanks for clicking me!") <|>\n                      pure "I was dynamically inserted"\n              ]\n          )\n      }\n  ))';
 var pursx1 = 'module Main where\n\nimport Prelude\n\nimport Deku.Pursx (psx)\nimport Deku.Toplevel (runInBody)\nimport Effect (Effect)\nimport Type.Proxy (Proxy(..))\n\nmyDom =\n  Proxy\n    :: Proxy\n         """<div>\n    <button>I do nothing</button>\n    <ul>\n        <li>A</li>\n        <li>B</li>\n        <li>C</li>\n    </ul>\n    <div>\n        <a href="https://github.com/mikesol/purescript-deku"></a>\n        <i>bar</i>\n        <span style="font-weight:800;">baz</span>\n    </div>\n    <div><div></div><div><input type="range"/></div></div>\n    </div>\n"""\n\nmain :: Effect Unit\nmain = runInBody (psx myDom)';
-var portals1 = 'module Main where\n\nimport Prelude\n\nimport Control.Alt ((<|>))\nimport Data.FastVect.FastVect (index, (:))\nimport Data.FastVect.FastVect as V\nimport Data.Foldable (oneOfMap)\nimport Data.Profunctor (lcmap)\nimport Deku.Attribute ((:=))\nimport Deku.Control (portal, switcher, text_)\nimport Deku.Core (Domable, envy)\nimport Deku.DOM as D\nimport Deku.Toplevel (runInBody)\nimport Effect (Effect)\nimport FRP.Event (Event, bus, fold)\nimport Type.Prelude (Proxy(..))\n\nmain :: Effect Unit\nmain = runInBody\n  (envy $ bus \\push -> lcmap (pure unit <|> _) \\event -> do\n      portal\n        ( map\n            ( \\i -> D.video\n                (oneOfMap pure [ D.Controls := "true", D.Width := "250" ])\n                [ D.source\n                    (oneOfMap pure [ D.Src := i, D.Xtype := "video/mp4" ])\n                    []\n                ]\n            )\n            ( "https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4"\n                : "https://www.w3schools.com/jsref/movie.mp4"\n                : V.empty\n            )\n        )\n        \\v _ -> do\n          let\n            p0 :: Domable _ _\n            p0 = index (Proxy :: _ 0) v\n\n            p1 :: Domable _ _\n            p1 = index (Proxy :: _ 1) v\n\n            ev :: Boolean -> Event Boolean\n            ev = fold (const not) event\n\n            flips :: Boolean -> Domable _ _\n            flips = D.span_ <<< pure <<< switcher (if _ then p0 else p1) <<< ev\n          D.div_\n            [ D.button (pure $ D.OnClick := push unit)\n                [ text_ "Switch videos" ]\n            , D.div_ [ D.span_ [ flips true ], flips false ]\n            ]\n  )\n';
+var portals1 = 'module Main where\n\nimport Prelude\n\nimport Control.Alt ((<|>))\nimport Data.FastVect.FastVect (index, (:))\nimport Data.FastVect.FastVect as V\nimport Data.Foldable (oneOfMap)\nimport Data.Profunctor (lcmap)\nimport Deku.Attribute ((:=))\nimport Deku.Control (portal, switcher, text_)\nimport Deku.Core (Domable, envy)\nimport Deku.DOM as D\nimport Deku.Toplevel (runInBody)\nimport Effect (Effect)\nimport FRP.Event (Event, bus, fold)\nimport Type.Prelude (Proxy(..))\n\nmain :: Effect Unit\nmain = runInBody\n  (envy $ bus \\push -> lcmap (pure unit <|> _) \\event -> do\n      portal\n        ( map\n            ( \\i -> D.video\n                (oneOfMap pure [ D.Controls := "true", D.Width := "250" ])\n                [ D.source\n                    (oneOfMap pure [ D.Src := i, D.Xtype := "video/mp4" ])\n                    []\n                ]\n            )\n            ( "https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4"\n                : "https://www.w3schools.com/jsref/movie.mp4"\n                : V.empty\n            )\n        )\n        \\v _ -> do\n          let\n            p0 :: Domable _ _\n            p0 = index (Proxy :: _ 0) v\n\n            p1 :: Domable _ _\n            p1 = index (Proxy :: _ 1) v\n\n            ev :: Boolean -> Event Boolean\n            ev b = fold (\\a _ -> not a) b event\n\n            flips :: Boolean -> Domable _ _\n            flips = D.span_ <<< pure <<< switcher (if _ then p0 else p1) <<< ev\n          D.div_\n            [ D.button (pure $ D.OnClick := push unit)\n                [ text_ "Switch videos" ]\n            , D.div_ [ D.span_ [ flips true ], flips false ]\n            ]\n  )\n';
 var helloWorld = 'module Main where\n\nimport Prelude\n\nimport Deku.Control (text_)\nimport Deku.Toplevel (runInBody)\nimport Effect (Effect)\n\nmain :: Effect Unit\nmain = runInBody (text_ "Hello world")';
 var events3 = `module Main where
 
@@ -6647,12 +6670,12 @@ main = runInBody
         accumulateTextAndEmitOnSubmit :: Event String
         accumulateTextAndEmitOnSubmit = compact
           ( mapAccum
-              ( \\a b -> case a of
-                  AddTodo -> b /\\ Just b
+              ( \\a b -> case b of
+                  AddTodo -> a /\\ Just a
                   ChangeText s -> s /\\ Nothing
               )
-              actionEvent
               ""
+              actionEvent
           )
 
         top :: Nut
@@ -6691,8 +6714,8 @@ main = runInBody
         ]
   )
 `;
-var events = 'module Main where\n\nimport Prelude\n\nimport Control.Alt ((<|>))\nimport Deku.Control (text, text_)\nimport Deku.Core (vbussed)\nimport Deku.DOM as D\nimport Deku.Listeners (click_, slider)\nimport Deku.Toplevel (runInBody)\nimport Effect (Effect)\nimport FRP.Event (Event, fold)\nimport FRP.Event.VBus (V)\nimport Type.Proxy (Proxy(..))\n\ntype UIEvents = V\n  ( buttonClicked :: Unit\n  , sliderMoved :: Number\n  )\n\nmain :: Effect Unit\nmain = runInBody\n  ( vbussed (Proxy :: _ UIEvents) \\push event -> do\n      let\n        countUp :: Event Int\n        countUp = fold\n          (const (1 + _))\n          (pure unit <|> event.buttonClicked)\n          (-1)\n      D.div_\n        [ D.button\n            (click_ (push.buttonClicked unit))\n            [ text_ "Click" ]\n        , D.div_\n            [ text\n                ( pure "Val: 0" <|>\n                    ( append "Val: " <<< show <$> countUp\n                    )\n                )\n            ]\n        , D.div_\n            [ D.input\n                (slider (pure push.sliderMoved))\n                []\n            , D.div_\n                [ text\n                    ( pure "Val: 50" <|>\n                        ( append "Val: " <<< show\n                            <$> event.sliderMoved\n                        )\n                    )\n                ]\n            ]\n        ]\n  )\n';
-var effects = 'module Main where\n\nimport Prelude\n\nimport Affjax.ResponseFormat as ResponseFormat\nimport Affjax.Web as AX\nimport Control.Alt ((<|>))\nimport Data.Argonaut.Core (stringifyWithIndent)\nimport Data.Either (Either(..))\nimport Data.Filterable (compact, separate)\nimport Data.HTTP.Method (Method(..))\nimport Data.Maybe (Maybe(..))\nimport Data.Profunctor (lcmap)\nimport Data.Tuple.Nested ((/\\))\nimport Deku.Attribute (Cb, cb, (:=))\nimport Deku.Control (text)\nimport Deku.Core (bus, envy)\nimport Deku.DOM as D\nimport Deku.Toplevel (runInBody)\nimport Effect (Effect)\nimport Effect.Aff (launchAff_)\nimport Effect.Class (liftEffect)\nimport FRP.Event (Event, mapAccum)\n\ndata UIAction = Initial | Loading | Result String\n\nclickCb :: (UIAction -> Effect Unit) -> Cb\nclickCb push = cb\n  ( const do\n      push Loading\n      launchAff_ $ do\n        result <- AX.request\n          ( AX.defaultRequest\n              { url = "https://randomuser.me/api/"\n              , method = Left GET\n              , responseFormat = ResponseFormat.json\n              }\n          )\n        case result of\n          Left err -> liftEffect $ push\n            $ Result\n                ( "GET /api response failed to decode: " <>\n                    AX.printError err\n                )\n          Right response -> liftEffect $ push $ Result $\n            stringifyWithIndent 2 response.body\n  )\n\nclickText = "Click to get some random user data." :: String\n\nmain :: Effect Unit\nmain = runInBody\n  (envy $ bus \\push -> lcmap (pure Initial <|> _)\n      \\event -> do\n        let\n          split :: { left :: Event Unit, right :: Event String }\n          split = separate $ compact $\n            map\n              ( case _ of\n                  Loading -> Just $ Left unit\n                  Result s -> Just $ Right s\n                  _ -> Nothing\n              )\n              event\n          { left: loading, right: result } = split\n        D.div_\n          [ D.div_\n              [ D.button (pure (D.OnClick := clickCb push))\n                  [ text\n                      ( pure clickText\n                          <|> (loading $> "Loading...")\n                          <|> (result $> clickText)\n                      )\n                  ]\n              ]\n          , D.div\n              ( (pure (D.Style := "display: none;")) <|>\n                  ( compact\n                      ( mapAccum\n                          ( \\_ b -> (b && false) /\\\n                              if b then Just unit else Nothing\n                          )\n                          result\n                          true\n                      ) $> (D.Style := "display: block;")\n                  )\n              )\n              [ D.pre_ [ D.code_ [ text (pure "" <|> result) ] ] ]\n          ]\n  )\n';
+var events = 'module Main where\n\nimport Prelude\n\nimport Control.Alt ((<|>))\nimport Deku.Control (text, text_)\nimport Deku.Core (vbussed)\nimport Deku.DOM as D\nimport Deku.Listeners (click_, slider)\nimport Deku.Toplevel (runInBody)\nimport Effect (Effect)\nimport FRP.Event (Event, fold)\nimport FRP.Event.VBus (V)\nimport Type.Proxy (Proxy(..))\n\ntype UIEvents = V\n  ( buttonClicked :: Unit\n  , sliderMoved :: Number\n  )\n\nmain :: Effect Unit\nmain = runInBody\n  ( vbussed (Proxy :: _ UIEvents) \\push event -> do\n      let\n        countUp :: Event Int\n        countUp = fold\n          (\\a _ -> 1 + a)\n          (-1)\n          (pure unit <|> event.buttonClicked)\n      D.div_\n        [ D.button\n            (click_ (push.buttonClicked unit))\n            [ text_ "Click" ]\n        , D.div_\n            [ text\n                ( pure "Val: 0" <|>\n                    ( append "Val: " <<< show <$> countUp\n                    )\n                )\n            ]\n        , D.div_\n            [ D.input\n                (slider (pure push.sliderMoved))\n                []\n            , D.div_\n                [ text\n                    ( pure "Val: 50" <|>\n                        ( append "Val: " <<< show\n                            <$> event.sliderMoved\n                        )\n                    )\n                ]\n            ]\n        ]\n  )\n';
+var effects = 'module Main where\n\nimport Prelude\n\nimport Affjax.ResponseFormat as ResponseFormat\nimport Affjax.Web as AX\nimport Control.Alt ((<|>))\nimport Data.Argonaut.Core (stringifyWithIndent)\nimport Data.Either (Either(..))\nimport Data.Filterable (compact, separate)\nimport Data.HTTP.Method (Method(..))\nimport Data.Maybe (Maybe(..))\nimport Data.Profunctor (lcmap)\nimport Data.Tuple.Nested ((/\\))\nimport Deku.Attribute (Cb, cb, (:=))\nimport Deku.Control (text)\nimport Deku.Core (bus, envy)\nimport Deku.DOM as D\nimport Deku.Toplevel (runInBody)\nimport Effect (Effect)\nimport Effect.Aff (launchAff_)\nimport Effect.Class (liftEffect)\nimport FRP.Event (Event, mapAccum)\n\ndata UIAction = Initial | Loading | Result String\n\nclickCb :: (UIAction -> Effect Unit) -> Cb\nclickCb push = cb\n  ( const do\n      push Loading\n      launchAff_ $ do\n        result <- AX.request\n          ( AX.defaultRequest\n              { url = "https://randomuser.me/api/"\n              , method = Left GET\n              , responseFormat = ResponseFormat.json\n              }\n          )\n        case result of\n          Left err -> liftEffect $ push\n            $ Result\n                ( "GET /api response failed to decode: " <>\n                    AX.printError err\n                )\n          Right response -> liftEffect $ push $ Result $\n            stringifyWithIndent 2 response.body\n  )\n\nclickText = "Click to get some random user data." :: String\n\nmain :: Effect Unit\nmain = runInBody\n  (envy $ bus \\push -> lcmap (pure Initial <|> _)\n      \\event -> do\n        let\n          split :: { left :: Event Unit, right :: Event String }\n          split = separate $ compact $\n            map\n              ( case _ of\n                  Loading -> Just $ Left unit\n                  Result s -> Just $ Right s\n                  _ -> Nothing\n              )\n              event\n          { left: loading, right: result } = split\n        D.div_\n          [ D.div_\n              [ D.button (pure (D.OnClick := clickCb push))\n                  [ text\n                      ( pure clickText\n                          <|> (loading $> "Loading...")\n                          <|> (result $> clickText)\n                      )\n                  ]\n              ]\n          , D.div\n              ( (pure (D.Style := "display: none;")) <|>\n                  ( compact\n                      ( mapAccum\n                          ( \\b _ -> (b && false) /\\\n                              if b then Just unit else Nothing\n                          )\n                          true\n                          result\n                      ) $> (D.Style := "display: block;")\n                  )\n              )\n              [ D.pre_ [ D.code_ [ text (pure "" <|> result) ] ] ]\n          ]\n  )\n';
 var component = 'module Main where\n\nimport Prelude\n\nimport Deku.Attribute ((:=))\nimport Deku.Control (text_)\nimport Deku.Core (fixed)\nimport Deku.DOM as D\nimport Deku.Toplevel (runInBody)\nimport Effect (Effect)\n\nmain :: Effect Unit\nmain = runInBody\n  (fixed [ D.button_ [ text_ "I do nothing" ]\n    , D.ul_ $ map (D.li_ <<< pure <<< text_) [ "A", "B", "C" ]\n    , D.div_\n        [ D.a (pure $ D.Href := "https://example.com")\n            [ text_ "foo " ]\n        , D.i_ [ text_ " bar " ]\n        , D.span (pure $ D.Style := "font-weight: 800;")\n            [ text_ " baz" ]\n        ]\n    , D.div_\n        [ D.div_\n            [ D.div_ [ D.input (pure $ D.Xtype := "range") [] ]\n            ]\n        ]\n    ]\n  )';
 var app = `module Main where
 
@@ -6729,9 +6752,9 @@ and all of the dynamic bits are hydrated on page load."""
             ( pure "Val: 0" <|>
                 ( append "Val: " <<< show
                     <$> fold
-                      (const (add 1))
-                      (pure unit <|> event.buttonClicked)
+                      (\\a _ -> a + 1)
                       (-1)
+                      (pure unit <|> event.buttonClicked)
                 )
             )
         ]
@@ -9078,8 +9101,8 @@ var effects2 = function(options2) {
           ;
           return Nothing.value;
         })(loadingOrResult);
-        return div_([div_([button(pure(applicativeEvent)(attr(attrOnClickCb)(OnClick.value)(clickCb(push2))))([text(alt(altEvent)(pure(applicativeEvent)(clickText))(alt(altEvent)(voidLeft(functorEvent)(loading)("Loading..."))(voidLeft(functorEvent)(result)(clickText))))])]), div2(alt(altEvent)(pure(applicativeEvent)(attr(attrDiv_StyleString)(Style.value)("display: none;")))(voidLeft(functorEvent)(compact(compactableEvent)(mapAccum(eventIsEvent)(function(v) {
-          return function(b2) {
+        return div_([div_([button(pure(applicativeEvent)(attr(attrOnClickCb)(OnClick.value)(clickCb(push2))))([text(alt(altEvent)(pure(applicativeEvent)(clickText))(alt(altEvent)(voidLeft(functorEvent)(loading)("Loading..."))(voidLeft(functorEvent)(result)(clickText))))])]), div2(alt(altEvent)(pure(applicativeEvent)(attr(attrDiv_StyleString)(Style.value)("display: none;")))(voidLeft(functorEvent)(compact(compactableEvent)(mapAccum(eventIsEvent)(function(b2) {
+          return function(v) {
             return new Tuple(b2 && false, function() {
               if (b2) {
                 return new Just(unit);
@@ -9088,7 +9111,7 @@ var effects2 = function(options2) {
               return Nothing.value;
             }());
           };
-        })(result)(true)))(attr(attrDiv_StyleString)(Style.value)("display: block;"))))([pre_([code_([text(alt(altEvent)(pure(applicativeEvent)(""))(result))])])])]);
+        })(true)(result)))(attr(attrDiv_StyleString)(Style.value)("display: block;"))))([pre_([code_([text(alt(altEvent)(pure(applicativeEvent)(""))(result))])])])]);
       };
     })),
     next: oneOfMap(foldableArray)(plusEvent)(pure(applicativeEvent))([attr(attrOnClickCb)(OnClick.value)(cb(function(e) {
@@ -9354,16 +9377,20 @@ var events2 = function(options2) {
     })()()(vbusNil)()())()())($$Proxy.value)(function(push2) {
       return function(event) {
         return div_([button(click_(attrOnClickEffectUnit)(push2.buttonClicked(unit)))([text_("Click")]), div_([text(alt(altEvent)(pure(applicativeEvent)("Val: 0"))(map(functorEvent)(function() {
-          var $0 = append(semigroupString)("Val: ");
-          var $1 = show(showInt);
-          return function($2) {
-            return $0($1($2));
+          var $1 = append(semigroupString)("Val: ");
+          var $2 = show(showInt);
+          return function($3) {
+            return $1($2($3));
           };
-        }())(fold3(eventIsEvent)($$const(add(semiringInt)(1)))(alt(altEvent)(pure(applicativeEvent)(unit))(event.buttonClicked))(-1 | 0))))]), div_([input(slider(pure(applicativeEvent)(push2.sliderMoved)))([]), div_([text(alt(altEvent)(pure(applicativeEvent)("Val: 50.0"))(map(functorEvent)(function() {
-          var $3 = append(semigroupString)("Val: ");
-          var $4 = show(showNumber);
-          return function($5) {
-            return $3($4($5));
+        }())(fold3(eventIsEvent)(function(a2) {
+          return function(v) {
+            return 1 + a2 | 0;
+          };
+        })(-1 | 0)(alt(altEvent)(pure(applicativeEvent)(unit))(event.buttonClicked)))))]), div_([input(slider(pure(applicativeEvent)(push2.sliderMoved)))([]), div_([text(alt(altEvent)(pure(applicativeEvent)("Val: 50.0"))(map(functorEvent)(function() {
+          var $4 = append(semigroupString)("Val: ");
+          var $5 = show(showNumber);
+          return function($6) {
+            return $4($5($6));
           };
         }())(event.sliderMoved)))])])]);
       };
@@ -9491,17 +9518,17 @@ var events22 = function(options2) {
           return Nothing.value;
         })(mapAccum(eventIsEvent)(function(a2) {
           return function(b2) {
-            if (a2 instanceof ChangeText) {
-              return new Tuple(a2.value0, new Tuple(false, a2.value0));
+            if (b2 instanceof ChangeText) {
+              return new Tuple(b2.value0, new Tuple(false, b2.value0));
             }
             ;
-            if (a2 instanceof AddTodo) {
-              return new Tuple(b2, new Tuple(true, b2));
+            if (b2 instanceof AddTodo) {
+              return new Tuple(a2, new Tuple(true, a2));
             }
             ;
             return new Tuple("", new Tuple(false, ""));
           };
-        })(event)(""))))]);
+        })("")(event))))]);
       });
     })),
     next: oneOfMap(foldableArray)(plusEvent)(pure(applicativeEvent))([attr(attrOnClickCb)(OnClick.value)(cb(function(e) {
@@ -9688,18 +9715,24 @@ var portals12 = function(options2) {
                 return 0;
               }
             })($$Proxy.value)(v);
-            var ev = fold3(eventIsEvent)($$const(not(heytingAlgebraBoolean)))(event);
+            var ev = function(i2) {
+              return fold3(eventIsEvent)(function(a2) {
+                return function(v2) {
+                  return !a2;
+                };
+              })(i2)(event);
+            };
             var flips = function() {
-              var $3 = pure(applicativeArray);
-              var $4 = switcher(function(v2) {
+              var $4 = pure(applicativeArray);
+              var $5 = switcher(function(v2) {
                 if (v2) {
                   return p0;
                 }
                 ;
                 return p1;
               });
-              return function($5) {
-                return span_($3($4(ev($5))));
+              return function($6) {
+                return span_($4($5(ev($6))));
               };
             }();
             return div_([button(pure(applicativeEvent)(attr(attrOnClickCb)(OnClick.value)(cb($$const(push2(unit))))))([text_("Switch videos")]), div_([flips(true), flips(false)])]);
@@ -11550,16 +11583,20 @@ var app2 = /* @__PURE__ */ function() {
   })()()(vbusNil)()())()())($$Proxy.value)(function(push2) {
     return function(event) {
       return div_([p_([text_("Here's an example of SSR in deku.\nAll of the static bits are rendered as HTML,\nand all of the dynamic bits are hydrated on page load.")]), button(click_(attrOnClickEffectUnit)(push2.buttonClicked(unit)))([text_("Click")]), div_([text(alt(altEvent)(pure(applicativeEvent)("Val: 0"))(map(functorEvent)(function() {
-        var $1 = append(semigroupString)("Val: ");
-        var $2 = show(showInt);
-        return function($3) {
-          return $1($2($3));
+        var $2 = append(semigroupString)("Val: ");
+        var $3 = show(showInt);
+        return function($4) {
+          return $2($3($4));
         };
-      }())(fold3(eventIsEvent)($$const(add(semiringInt)(1)))(alt(altEvent)(pure(applicativeEvent)(unit))(event.buttonClicked))(-1 | 0))))]), div_([input(slider(pure(applicativeEvent)(push2.sliderMoved)))([]), div_([text(alt(altEvent)(pure(applicativeEvent)("Val: 50"))(map(functorEvent)(function() {
-        var $4 = append(semigroupString)("Val: ");
-        var $5 = show(showNumber);
-        return function($6) {
-          return $4($5($6));
+      }())(fold3(eventIsEvent)(function(a2) {
+        return function(v) {
+          return 1 + a2 | 0;
+        };
+      })(-1 | 0)(alt(altEvent)(pure(applicativeEvent)(unit))(event.buttonClicked)))))]), div_([input(slider(pure(applicativeEvent)(push2.sliderMoved)))([]), div_([text(alt(altEvent)(pure(applicativeEvent)("Val: 50"))(map(functorEvent)(function() {
+        var $5 = append(semigroupString)("Val: ");
+        var $6 = show(showNumber);
+        return function($7) {
+          return $5($6($7));
         };
       }())(event.sliderMoved)))])])]);
     };
