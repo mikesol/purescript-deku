@@ -89,7 +89,7 @@ portals1 options = px ~~
                 let
                   p0 = index (Proxy :: _ 0) v
                   p1 = index (Proxy :: _ 1) v
-                  ev = fold (const not) event
+                  ev i = fold (\a _ -> not a) i event
                   flips = D.span_ <<< pure <<< switcher (if _ then p0 else p1) <<< ev
                 D.div_
                   [ D.button (pure $ D.OnClick := cb (const $ push unit))

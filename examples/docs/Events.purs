@@ -68,9 +68,9 @@ events options = px ~~
                     ( pure "Val: 0" <|>
                         ( append "Val: " <<< show
                             <$> fold
-                              (const (add 1))
-                              (pure unit <|> event.buttonClicked)
+                              (\a _ -> 1 + a)
                               (-1)
+                              (pure unit <|> event.buttonClicked)
                         )
                     )
                 ]

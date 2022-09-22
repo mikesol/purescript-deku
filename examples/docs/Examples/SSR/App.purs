@@ -33,9 +33,9 @@ and all of the dynamic bits are hydrated on page load."""
             ( pure "Val: 0" <|>
                 ( append "Val: " <<< show
                     <$> fold
-                      (const (add 1))
-                      (pure unit <|> event.buttonClicked)
+                      (\a _ -> a + 1)
                       (-1)
+                      (pure unit <|> event.buttonClicked)
                 )
             )
         ]

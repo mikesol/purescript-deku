@@ -35,12 +35,12 @@ main = runInBody
           )
       )
       ( mapAccum
-          ( \x (a /\ b) ->
+          ( \(a /\ b) x ->
               if a < b then
                 (((a + 1) /\ b) /\ ((unwrap (unInstant x)) /\ (a + 1)))
               else ((0 /\ (b + 1)) /\ ((unwrap (unInstant x)) /\ 0))
           )
-          (interval 1000)
           (0 /\ 1)
+          (interval 1000)
       )
   )

@@ -130,13 +130,13 @@ events2 options = px ~~
                   )
                   ( filterMap (\(tf /\ s) -> if tf then Just s else Nothing)
                       ( mapAccum
-                          ( \a b -> case a of
+                          ( \a b -> case b of
                               ChangeText s -> s /\ (false /\ s)
-                              AddTodo -> b /\ (true /\ b)
+                              AddTodo -> a /\ (true /\ a)
                               _ -> "" /\ (false /\ "")
                           )
-                          event
                           ""
+                          event
                       )
                   )
               ]

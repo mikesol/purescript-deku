@@ -48,7 +48,7 @@ main = runInBody
                         let
                           p0 = index (Proxy :: _ 0) v
                           p1 = index (Proxy :: _ 1) v
-                          ev = fold (const not) event
+                          ev i = fold (\a _ -> not a) i event
                           flips =  D.div_ <<< pure <<< switcher (if _ then p0 else p1) <<< ev
                         D.div_
                           [ D.button
@@ -87,7 +87,7 @@ main = runInBody
                         let
                           p0 = index (Proxy :: _ 0) v
                           p1 = index (Proxy :: _ 1) v
-                          ev = fold (const not) event
+                          ev i = fold (\a _ ->not a) i event
                           flips = D.div_ <<< pure <<< switcher (if _ then p0 else p1) <<< ev
                         D.div_
                           [ D.button
@@ -123,7 +123,7 @@ main = runInBody
                       \v _ -> do
                         let
                           p0 = index (Proxy :: _ 0) v
-                          ev = fold (const not) event
+                          ev i = fold (\a _ -> not a) i event
                           flips = D.div_ <<< pure <<< switcher (if _ then p0 else D.div_ [])
                             <<< ev
                         D.div_

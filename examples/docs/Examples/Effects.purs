@@ -77,11 +77,11 @@ main = runInBody
               ( (pure (D.Style := "display: none;")) <|>
                   ( compact
                       ( mapAccum
-                          ( \_ b -> (b && false) /\
+                          ( \b _ -> (b && false) /\
                               if b then Just unit else Nothing
                           )
-                          result
                           true
+                          result
                       ) $> (D.Style := "display: block;")
                   )
               )

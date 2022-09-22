@@ -6,7 +6,7 @@ let overrides =
       { bolson =
         { dependencies = [ "prelude" ]
         , repo = "https://github.com/mikesol/purescript-bolson.git"
-        , version = "give-new-parent"
+        , version = "main"
         }
       , hyrule =
         { dependencies =

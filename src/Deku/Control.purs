@@ -273,9 +273,9 @@ switcher f event = dyn $ keepLatest
       )
       cenv
   where
-  counter ev = mapAccum fn ev 0
+  counter = mapAccum fn 0
     where
-    fn a b = (b + 1) /\ (a /\ b)
+    fn a b = (a + 1) /\ (b /\ a)
 
 ezDyn
   :: forall lock payload

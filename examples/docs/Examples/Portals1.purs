@@ -42,7 +42,7 @@ main = runInBody
             p1 = index (Proxy :: _ 1) v
 
             ev :: Boolean -> Event Boolean
-            ev = fold (const not) event
+            ev b = fold (\a _ -> not a) b event
 
             flips :: Boolean -> Domable _ _
             flips = D.span_ <<< pure <<< switcher (if _ then p0 else p1) <<< ev

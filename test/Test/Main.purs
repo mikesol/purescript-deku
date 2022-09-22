@@ -69,7 +69,7 @@ dynAppearsCorrectly :: Nut
 dynAppearsCorrectly = Deku.do
   let
     counter :: forall a. Event a -> Event Int
-    counter event = fold (const (add 1)) event (-1)
+    counter event = fold (\a _ -> a + 1) (-1) event 
   setItem /\ item <- useState'
   D.div (id_ "div0")
     [ text_ "foo"
@@ -85,7 +85,7 @@ deeplyNestedPreservesOrder :: Nut
 deeplyNestedPreservesOrder = Deku.do
   let
     counter :: forall a. Event a -> Event Int
-    counter event = fold (const (add 1)) event (-1)
+    counter event = fold (\a _ -> a + 1) (-1) event 
   setItem /\ item <- useState'
   let
     mydyn n = do
@@ -175,7 +175,7 @@ switcherWorksForCompositionalElements :: Nut
 switcherWorksForCompositionalElements = Deku.do
   let
     counter :: forall a. Event a -> Event Int
-    counter event = fold (const (add 1)) event (-1)
+    counter event = fold (\a _ -> 1 + a) (-1) event
   setItem /\ item <- useState unit
   D.div (id_ "div0")
     [ text_ "foo"
@@ -214,7 +214,7 @@ portalsCompose :: Nut
 portalsCompose = Deku.do
   let
     counter :: forall a. Event a -> Event Int
-    counter event = fold (const (add 1)) event 0
+    counter event = fold (\a _ -> a + 1) 0 event
   setItem /\ item <- useMemoized (\a -> counter a <|> pure 0)
   globalPortal1 (D.div_ [ text_ "a", D.span_ [ text_ "b" ], text_ "c" ]) \e ->
     do

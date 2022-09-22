@@ -71,18 +71,18 @@ containerD initialState = Deku.do
   setDelete /\ delete <- useMailboxed
   setState /\ state <- useMemoized \state' -> do
     let istate = initialState
-    (fold ($) state' istate) <|> pure istate
+    (fold (#) istate state') <|> pure istate
   setUndo /\ undos <- useMemoized \undo' -> do
     let initialUndos = map (_.id >>> UndoAdd) (reverse initialState.todos)
     ( pure initialUndos <|> map snd
         ( fold
-            ( case _ of
-                PushUndo u -> \(x /\ y) -> (x + 1) /\
+            ( \(x /\ y) -> case _ of
+                PushUndo u -> (x + 1) /\
                   if x == 0 then [ u ] else cons u y
-                PopUndo -> \(_ /\ y) -> 0 /\ drop 1 y
+                PopUndo -> 0 /\ drop 1 y
             )
-            undo'
             (1 /\ initialUndos)
+            undo'
         )
     )
   let
@@ -90,12 +90,12 @@ containerD initialState = Deku.do
       ( map
           (\s -> oneOfMap pure (takeEnd s.nAdded s.state.todos))
           ( mapAccum
-              ( \s i -> do
+              ( \i s -> do
                   let l = length s.todos
                   l /\ { state: s, nAdded: max 0 (l - i) }
               )
-              state
               0
+              state
           )
       )
     updateNameAt id n = setState

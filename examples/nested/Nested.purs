@@ -48,9 +48,9 @@ rdm = map
   ({ r: _, g: _, b: _ } <$> random <*> random <*> random)
 
 counter :: forall a. Event a → Event (Tuple a Int)
-counter event = mapAccum f event 0
+counter event = mapAccum f 0 event
   where
-  f a b = Tuple (b + 1) (Tuple a b)
+  f a b = Tuple (a + 1) (Tuple b a)
 
 scene
   :: forall lock. Array (Domable lock (FFIDOMSnapshot -> Effect Unit))

@@ -29,12 +29,12 @@ main = runInBody
         accumulateTextAndEmitOnSubmit :: Event String
         accumulateTextAndEmitOnSubmit = compact
           ( mapAccum
-              ( \a b -> case a of
-                  AddTodo -> b /\ Just b
+              ( \a b -> case b of
+                  AddTodo -> a /\ Just a
                   ChangeText s -> s /\ Nothing
               )
-              actionEvent
               ""
+              actionEvent
           )
 
         top :: Nut

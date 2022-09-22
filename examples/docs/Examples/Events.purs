@@ -24,9 +24,9 @@ main = runInBody
       let
         countUp :: Event Int
         countUp = fold
-          (const (1 + _))
-          (pure unit <|> event.buttonClicked)
+          (\a _ -> 1 + a)
           (-1)
+          (pure unit <|> event.buttonClicked)
       D.div_
         [ D.button
             (click_ (push.buttonClicked unit))
