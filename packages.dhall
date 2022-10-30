@@ -1,18 +1,18 @@
 let upstream =
-      https://github.com/purescript/package-sets/releases/download/psc-0.15.2-20220624/packages.dhall
-        sha256:08989ed9f53e381f879f1b7012ad7684b1ed64d7164c4ad75e306d3210a46c92
+      https://github.com/purescript/package-sets/releases/download/psc-0.15.4-20221018/packages.dhall
+        sha256:b1db2e4a17260ace8d17858602f8c56f460982d6e404818d7f6cb9f053324bb1
 
 let overrides =
       { bolson =
         { dependencies = [ "prelude" ]
         , repo = "https://github.com/mikesol/purescript-bolson.git"
-        , version = "main"
+        , version = "v0.3.1"
         }
       , hyrule =
         { dependencies =
           [ "monoid-extras", "web-uievents", "js-timers", "unsafe-reference" ]
         , repo = "https://github.com/mikesol/purescript-hyrule.git"
-        , version = "master"
+        , version = "v2.3.2"
         }
       , halogen-hooks =
         { dependencies =
