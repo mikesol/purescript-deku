@@ -17,6 +17,7 @@ import Bolson.Control as Bolson
 import Bolson.Core (Child(..), Element(..), Entity(..), PSR, Scope(..))
 import Bolson.Core as BCore
 import Control.Alt ((<|>))
+import Control.Monad.ST.Uncurried (mkSTFn2, runSTFn1, runSTFn2)
 import Control.Plus (empty)
 import Data.FastVect.FastVect (Vect, singleton, index)
 import Data.Filterable (filter)
@@ -29,7 +30,7 @@ import Data.Tuple.Nested ((/\))
 import Deku.Attribute (Attribute, AttributeValue(..), unsafeUnAttribute)
 import Deku.Core (DOMInterpret(..), Domable(..), Node(..), Nut, bus, dyn, insert_, remove, sendToPos)
 import Effect (Effect)
-import FRP.Event (Event, keepLatest, makeLemmingEvent, mapAccum, memoize)
+import FRP.Event (Event, Subscriber(..), keepLatest, makeLemmingEventO, mapAccum, memoize)
 import Prim.Int (class Compare)
 import Prim.Ordering (GT)
 import Safe.Coerce (coerce)
@@ -77,10 +78,10 @@ elementify tag atts children = Node go
   go
     { parent, scope, raiseId, pos, dynFamily, ez }
     di@(DOMInterpret { ids, deleteFromCache, makeElement, attributeParent }) =
-    makeLemmingEvent \mySub k -> do
+    makeLemmingEventO $ mkSTFn2 \(Subscriber mySub) k -> do
       me <- ids
       raiseId me
-      unsub <- mySub
+      unsub <- runSTFn2 mySub
         ( ( oneOf
               ( [ pure
                     (makeElement { id: me, parent, scope, tag, pos, dynFamily })
@@ -107,7 +108,7 @@ elementify tag atts children = Node go
         )
         k
       pure do
-        k (deleteFromCache { id: me })
+        runSTFn1 k (deleteFromCache { id: me })
         unsub
 
 globalPortal
@@ -202,10 +203,10 @@ text txt = Domable $ Element' $ Node go
   go
     { parent, scope, raiseId, dynFamily, pos, ez }
     di@(DOMInterpret { ids, makeText, deleteFromCache, attributeParent }) =
-    makeLemmingEvent \mySub k -> do
+    makeLemmingEventO $ mkSTFn2 \(Subscriber mySub) k -> do
       me <- ids
       raiseId me
-      unsub <- mySub
+      unsub <- runSTFn2 mySub
         ( oneOf
             [ pure (makeText { id: me, parent, pos, scope, dynFamily })
             , unsafeSetText di me txt
@@ -219,7 +220,7 @@ text txt = Domable $ Element' $ Node go
         )
         k
       pure do
-        k (deleteFromCache { id: me })
+        runSTFn1 k (deleteFromCache { id: me })
         unsub
 
 text_ :: forall lock payload. String -> Domable lock payload
@@ -231,10 +232,10 @@ deku
   -> (forall lock. Domable lock payload)
   -> DOMInterpret payload
   -> Event payload
-deku root children di@(DOMInterpret { makeRoot }) = makeLemmingEvent
-  \mySub k -> do
+deku root children di@(DOMInterpret { makeRoot }) = makeLemmingEventO $ mkSTFn2
+  \(Subscriber mySub) k -> do
     let me = "deku-root" -- <- ids
-    mySub
+    runSTFn2 mySub
       ( pure (makeRoot { id: me, root })
           <|> __internalDekuFlatten
             { parent: Just me

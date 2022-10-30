@@ -43,6 +43,7 @@ import Bolson.Core (Scope)
 import Bolson.Core as Bolson
 import Control.Monad.ST (ST)
 import Control.Monad.ST.Global (Global)
+import Control.Monad.ST.Uncurried (mkSTFn2, runSTFn1, runSTFn2)
 import Control.Plus (empty)
 import Data.Foldable (oneOf)
 import Data.Maybe (Maybe(..))
@@ -52,7 +53,7 @@ import Data.Tuple (curry)
 import Data.Tuple.Nested (type (/\), (/\))
 import Deku.Attribute (Cb)
 import Effect (Effect)
-import FRP.Event (Event, makeLemmingEvent)
+import FRP.Event (Event, Subscriber(..), makeLemmingEventO)
 import FRP.Event as FRP.Event
 import FRP.Event.VBus (class VBus, V, vbus)
 import Foreign.Object (Object)
@@ -328,7 +329,7 @@ dynify f es = Domable $ Bolson.Element' (Node go)
       ( DOMInterpret
           { ids, makeElement, makeDynBeacon, attributeParent, removeDynBeacon }
       ) =
-    makeLemmingEvent \mySub k -> do
+    makeLemmingEventO $ mkSTFn2 \(Subscriber mySub) k -> do
       me <- ids
       raiseId me
       -- `dyn`-s need to have a parent
@@ -350,7 +351,7 @@ dynify f es = Domable $ Bolson.Element' (Node go)
               ) /\ dummyParent
             )
         Just x -> pure (empty /\ x)
-      unsub <- mySub
+      unsub <- runSTFn2 mySub
         ( oneOf
             [ parentEvent
             , pure $ makeDynBeacon { id: me, parent: Just parentId, scope, dynFamily, pos }
@@ -376,7 +377,7 @@ dynify f es = Domable $ Bolson.Element' (Node go)
         )
         k
       pure do
-        k (removeDynBeacon { id: me })
+        runSTFn1 k (removeDynBeacon { id: me })
         unsub
 
 dyn

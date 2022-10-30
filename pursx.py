@@ -8,6 +8,7 @@ print_('''module Deku.Pursx where
 import Prelude
 
 import Bolson.Control as Bolson
+import Control.Monad.ST.Uncurried (mkSTFn2, runSTFn1, runSTFn2)
 import Bolson.Core (Element(..), Entity(..), PSR)
 import Control.Alt ((<|>))
 import Data.Foldable (oneOf)
@@ -21,7 +22,7 @@ import Data.Symbol (class IsSymbol)
 import Deku.Attribute (Attribute, AttributeValue(..), unsafeUnAttribute)
 import Deku.Core (DOMInterpret(..), Domable(..), Domable', Node(..))
 import Deku.DOM (class TagToDeku)
-import FRP.Event (Event, makeLemmingEvent)
+import FRP.Event (Event, Subscriber(..), makeLemmingEventO)
 
 import Foreign.Object as Object
 import Prim.Boolean (False, True)
@@ -270,7 +271,7 @@ makePursx' verb html r = Domable $ Element' $ Node go
   go
     z@{ parent, scope, raiseId, dynFamily, pos }
     di@(DOMInterpret { makePursx: mpx, ids, deleteFromCache, attributeParent }) =
-    makeLemmingEvent \mySub k1 -> do
+    makeLemmingEventO $ mkSTFn2 \(Subscriber mySub) k1 -> do
       me <- ids
       pxScope <- ids
       raiseId me
@@ -279,7 +280,7 @@ makePursx' verb html r = Domable $ Element' $ Node go
           pxScope
           (Proxy :: _ rl)
           r
-      unsub <- mySub
+      unsub <- runSTFn2 mySub
           ( oneOf [pure $
                 mpx
                   { id: me
@@ -301,7 +302,7 @@ makePursx' verb html r = Domable $ Element' $ Node go
           )
           k1
       pure do
-        k1 (deleteFromCache { id: me })
+        runSTFn1 k1 (deleteFromCache { id: me })
         unsub
 
 __internalDekuFlatten
