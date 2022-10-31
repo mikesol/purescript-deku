@@ -10,13 +10,16 @@ import Data.Profunctor (lcmap)
 import Data.Tuple.Nested ((/\))
 import Deku.Attribute (cb, (:=))
 import Deku.Control (text_)
-import Deku.Core (Nut, dyn, bus, bussed, insert_, remove, sendToTop)
+import Deku.Core (Nut, bussed, dyn)
 import Deku.DOM as D
+import Deku.Do (useDyn_)
+import Deku.Do as Deku
 import Deku.Example.Docs.Types (Page(..), PageOptions)
 import Deku.Example.Docs.Util (scrollToTop)
+import Deku.Listeners (click)
 import Deku.Pursx (nut, (~~))
 import Examples as Examples
-import FRP.Event (keepLatest, mapAccum)
+import FRP.Event (mapAccum)
 import Type.Proxy (Proxy(..))
 import Web.Event.Event (preventDefault, target)
 import Web.HTML.HTMLInputElement (fromEventTarget, value)
@@ -107,26 +110,22 @@ events2 options = px ~~
                       [ text_ "Add" ]
                   ]
               , dyn $ map
-                  ( \txt -> keepLatest $ bus \p' e' ->
-                      ( pure $ insert_ $ D.div_ do
-                          [ D.span (pure $ D.Style := "margin: 5px;")
-                              [ text_ txt ]
-                          , D.button
-                              ( (pure $ D.Style := "margin: 5px;") <|>
-                                  ( pure $ D.OnClick := cb
-                                      (const $ p' sendToTop)
-                                  )
-                              )
-                              [ text_ "Prioritize" ]
-                          , D.button
-                              ( (pure $ D.Style := "margin: 5px;") <|>
-                                  ( pure $ D.OnClick := cb
-                                      (const $ p' remove)
-                                  )
-                              )
-                              [ text_ "Delete" ]
-                          ]
-                      ) <|> e'
+                  ( \txt -> Deku.do
+                      { remove, sendTo } <- useDyn_
+                      D.div_
+                        [ D.span (pure $ D.Style := "margin: 5px;")
+                            [ text_ txt ]
+                        , D.button
+                            ( (pure $ D.Style := "margin: 5px;") <|>
+                                (click $ pure (sendTo 0))
+                            )
+                            [ text_ "Prioritize" ]
+                        , D.button
+                            ( (pure $ D.Style := "margin: 5px;") <|>
+                                (click $ pure remove)
+                            )
+                            [ text_ "Delete" ]
+                        ]
                   )
                   ( filterMap (\(tf /\ s) -> if tf then Just s else Nothing)
                       ( mapAccum

@@ -21,8 +21,6 @@ data MainUIAction
   = AddTodo
   | ChangeText String
 
-data TodoAction = Prioritize | Delete
-
 main :: Effect Unit
 main = runInBody Deku.do
   pushAction /\ actionEvent <- useState'
