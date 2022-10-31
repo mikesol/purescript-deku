@@ -10,6 +10,8 @@ module Deku.Do
   , useRemoval
   , class InitializeEvents
   , initializeEvents'
+  , useDyn
+  , useDyn_
   ) where
 
 import Prelude hiding (bind, discard)
@@ -20,7 +22,7 @@ import Data.Profunctor (lcmap)
 import Data.Symbol (class IsSymbol)
 import Data.Tuple (curry)
 import Data.Tuple.Nested (type (/\), (/\))
-import Deku.Core (Domable(..), bus, bussedUncurried, remove, vbussedUncurried)
+import Deku.Core (Domable(..), Node, bus, bussedUncurried, insert, remove, sendToPos, vbussedUncurried)
 import Effect (Effect)
 import FRP.Event (Event, keepLatest, mailboxed, memoize)
 import FRP.Event.VBus (class VBus, V)
@@ -131,8 +133,34 @@ useMailboxed f = bussedUncurried \(a /\ b) -> Domable $ envy
 
 useRemoval
   :: forall a lock payload
-   . (Effect Unit /\ (Event (Child Int lock payload)) -> Event a)
+   . (Effect Unit /\ (Event (Child Int (Node lock payload) lock)) -> Event a)
   -> Event a
 useRemoval f = keepLatest do
   setRemoveMe /\ removeMe <- bus <<< curry
   f (setRemoveMe unit /\ (removeMe $> remove))
+
+useDyn
+  :: forall lock payload
+   . Int
+  -> ( { remove :: Effect Unit, sendTo :: Int -> Effect Unit }
+       -> Domable lock payload
+     )
+  -> Event (Child Int (Node lock payload) lock)
+useDyn i f = keepLatest do
+  setChildLogic /\ childLogic <- bus <<< curry
+  pure
+    ( insert i
+        ( f
+            { remove: setChildLogic remove
+            , sendTo: setChildLogic <<< sendToPos
+            }
+        )
+    ) <|> childLogic
+
+useDyn_
+  :: forall lock payload
+   . ( { remove :: Effect Unit, sendTo :: Int -> Effect Unit }
+       -> Domable lock payload
+     )
+  -> Event (Child Int (Node lock payload) lock)
+useDyn_ = useDyn 0
