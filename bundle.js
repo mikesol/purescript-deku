@@ -145,20 +145,19 @@ main = runInBody (text_ "Hello world")`,xp=`module Main where
 
 import Prelude
 
-import Control.Alt ((<|>))
 import Data.Filterable (compact)
 import Data.Foldable (oneOf)
 import Data.Maybe (Maybe(..))
 import Data.Tuple.Nested ((/\\))
 import Deku.Control (text_)
-import Deku.Core (Nut, busUncurried, dyn, insert_, remove, sendToTop)
+import Deku.Core (Nut, dyn)
 import Deku.DOM as D
-import Deku.Do (useState')
+import Deku.Do (useDyn_, useState')
 import Deku.Do as Deku
 import Deku.Listeners (click, keyUp, textInput)
 import Deku.Toplevel (runInBody)
 import Effect (Effect)
-import FRP.Event (Event, keepLatest, mapAccum)
+import FRP.Event (Event, mapAccum)
 import Web.UIEvent.KeyboardEvent (code)
 
 data MainUIAction
@@ -203,17 +202,16 @@ main = runInBody Deku.do
     , dyn
         $ map
             ( \\txt -> Deku.do
-                p' /\\ e' <- keepLatest <<< busUncurried
-                ( pure $ insert_ $ D.div_
-                    [ text_ txt
-                    , D.button
-                        (click $ pure (p' sendToTop))
-                        [ text_ "Prioritize" ]
-                    , D.button
-                        (click $ pure (p' remove))
-                        [ text_ "Delete" ]
-                    ]
-                ) <|> e'
+                { remove, sendTo } <- useDyn_
+                D.div_
+                  [ text_ txt
+                  , D.button
+                      (click $ pure (sendTo 0))
+                      [ text_ "Prioritize" ]
+                  , D.button
+                      (click $ pure remove)
+                      [ text_ "Delete" ]
+                  ]
             )
             accumulateTextAndEmitOnSubmit
     ]
