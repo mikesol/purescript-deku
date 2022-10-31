@@ -1080,13 +1080,13 @@ var fix = function(dictLazy) {
 
 // output/Control.Monad/index.js
 var ap = function(dictMonad) {
-  var bind10 = bind(dictMonad.Bind1());
-  var pure33 = pure(dictMonad.Applicative0());
+  var bind11 = bind(dictMonad.Bind1());
+  var pure34 = pure(dictMonad.Applicative0());
   return function(f) {
     return function(a2) {
-      return bind10(f)(function(f$prime) {
-        return bind10(a2)(function(a$prime) {
-          return pure33(f$prime(a$prime));
+      return bind11(f)(function(f$prime) {
+        return bind11(a2)(function(a$prime) {
+          return pure34(f$prime(a$prime));
         });
       });
     };
@@ -1681,6 +1681,13 @@ var functorTuple = {
     };
   }
 };
+var curry = function(f) {
+  return function(a2) {
+    return function(b2) {
+      return f(new Tuple(a2, b2));
+    };
+  };
+};
 
 // output/Data.Bifunctor/index.js
 var identity5 = /* @__PURE__ */ identity(categoryFn);
@@ -1818,24 +1825,24 @@ var oneOf = function(dictFoldable) {
 var oneOfMap = function(dictFoldable) {
   var foldr22 = foldr(dictFoldable);
   return function(dictPlus) {
-    var alt16 = alt(dictPlus.Alt0());
+    var alt17 = alt(dictPlus.Alt0());
     var empty11 = empty(dictPlus);
     return function(f) {
       return foldr22(function($453) {
-        return alt16(f($453));
+        return alt17(f($453));
       })(empty11);
     };
   };
 };
 var traverse_ = function(dictApplicative) {
   var applySecond14 = applySecond(dictApplicative.Apply0());
-  var pure33 = pure(dictApplicative);
+  var pure34 = pure(dictApplicative);
   return function(dictFoldable) {
     var foldr22 = foldr(dictFoldable);
     return function(f) {
       return foldr22(function($454) {
         return applySecond14(f($454));
-      })(pure33(unit));
+      })(pure34(unit));
     };
   };
 };
@@ -2007,13 +2014,13 @@ var traverseArrayImpl = function() {
   }
   return function(apply7) {
     return function(map31) {
-      return function(pure33) {
+      return function(pure34) {
         return function(f) {
           return function(array) {
             function go2(bot, top3) {
               switch (top3 - bot) {
                 case 0:
-                  return pure33([]);
+                  return pure34([]);
                 case 1:
                   return map31(array1)(f(array[bot]));
                 case 2:
@@ -2186,10 +2193,10 @@ var $$try = function(dictMonadError) {
   var catchError1 = catchError(dictMonadError);
   var Monad0 = dictMonadError.MonadThrow0().Monad0();
   var map31 = map(Monad0.Bind1().Apply0().Functor0());
-  var pure33 = pure(Monad0.Applicative0());
+  var pure34 = pure(Monad0.Applicative0());
   return function(a2) {
     return catchError1(map31(Right.create)(a2))(function($52) {
-      return pure33(Left.create($52));
+      return pure34(Left.create($52));
     });
   };
 };
@@ -2419,7 +2426,7 @@ var empty2 = {};
 function runST(f) {
   return f();
 }
-function _foldM(bind10) {
+function _foldM(bind11) {
   return function(f) {
     return function(mz) {
       return function(m) {
@@ -2431,7 +2438,7 @@ function _foldM(bind10) {
         }
         for (var k in m) {
           if (hasOwnProperty.call(m, k)) {
-            acc = bind10(acc)(g(k));
+            acc = bind11(acc)(g(k));
           }
         }
         return acc;
@@ -4515,14 +4522,14 @@ var fold3 = function(dictIsEvent) {
   var fix1 = fix2(dictIsEvent);
   var sampleOnRight1 = sampleOnRight(dictIsEvent);
   var Alternative0 = dictIsEvent.Alternative0();
-  var alt16 = alt(Alternative0.Plus1().Alt0());
+  var alt17 = alt(Alternative0.Plus1().Alt0());
   var pure113 = pure(Alternative0.Applicative0());
   var map112 = map(dictIsEvent.Filterable1().Functor1());
   return function(f) {
     return function(b2) {
       return function(e) {
         return fix1(function(i2) {
-          return sampleOnRight1(alt16(i2)(pure113(b2)))(map112(flip(f))(e));
+          return sampleOnRight1(alt17(i2)(pure113(b2)))(map112(flip(f))(e));
         });
       };
     };
@@ -5336,7 +5343,7 @@ var vbus = function() {
   };
 };
 var vbusCons2 = function(dictIsSymbol) {
-  var insert7 = insert2(dictIsSymbol)()();
+  var insert8 = insert2(dictIsSymbol)()();
   return function() {
     return function() {
       return function(dictVBus) {
@@ -5348,7 +5355,7 @@ var vbusCons2 = function(dictIsSymbol) {
                 return function __do3() {
                   var v1 = vb1($$Proxy.value)();
                   var v2 = create();
-                  return new Tuple(insert7($$Proxy.value)(v2.push)(v1.value0), insert7($$Proxy.value)(v2.event)(v1.value1));
+                  return new Tuple(insert8($$Proxy.value)(v2.push)(v1.value0), insert8($$Proxy.value)(v2.event)(v1.value1));
                 };
               }
             };
@@ -5917,8 +5924,8 @@ var unsafeSetPos$prime = function(i2) {
 var unsafeSetPos = function($77) {
   return unsafeSetPos$prime(Just.create($77));
 };
-var sendToTop = /* @__PURE__ */ function() {
-  return new Logic(0);
+var sendToPos = /* @__PURE__ */ function() {
+  return Logic.create;
 }();
 var remove = /* @__PURE__ */ function() {
   return Remove.value;
@@ -5958,6 +5965,11 @@ var portalFlatten = function() {
 var portalFlatten1 = /* @__PURE__ */ portalFlatten();
 var insert_ = function(d) {
   return new Insert(unwrap4(unsafeSetPos$prime(Nothing.value)(d)));
+};
+var insert6 = function(i2) {
+  return function(e) {
+    return new Insert(unwrap4(unsafeSetPos(i2)(e)));
+  };
 };
 var bus2 = function(f) {
   return bus(f);
@@ -6940,8 +6952,6 @@ data MainUIAction
   = AddTodo
   | ChangeText String
 
-data TodoAction = Prioritize | Delete
-
 main :: Effect Unit
 main = runInBody Deku.do
   pushAction /\\ actionEvent <- useState'
@@ -7527,13 +7537,13 @@ var monadExceptT = function(dictMonad) {
   };
 };
 var bindExceptT = function(dictMonad) {
-  var bind10 = bind(dictMonad.Bind1());
-  var pure33 = pure(dictMonad.Applicative0());
+  var bind11 = bind(dictMonad.Bind1());
+  var pure34 = pure(dictMonad.Applicative0());
   return {
     bind: function(v) {
       return function(k) {
-        return bind10(v)(either(function($187) {
-          return pure33(Left.create($187));
+        return bind11(v)(either(function($187) {
+          return pure34(Left.create($187));
         })(function(a2) {
           var v1 = k(a2);
           return v1;
@@ -7585,25 +7595,25 @@ var altExceptT = function(dictSemigroup) {
   var append11 = append(dictSemigroup);
   return function(dictMonad) {
     var Bind1 = dictMonad.Bind1();
-    var bind10 = bind(Bind1);
-    var pure33 = pure(dictMonad.Applicative0());
+    var bind11 = bind(Bind1);
+    var pure34 = pure(dictMonad.Applicative0());
     var functorExceptT1 = functorExceptT(Bind1.Apply0().Functor0());
     return {
       alt: function(v) {
         return function(v1) {
-          return bind10(v)(function(rm) {
+          return bind11(v)(function(rm) {
             if (rm instanceof Right) {
-              return pure33(new Right(rm.value0));
+              return pure34(new Right(rm.value0));
             }
             ;
             if (rm instanceof Left) {
-              return bind10(v1)(function(rn) {
+              return bind11(v1)(function(rn) {
                 if (rn instanceof Right) {
-                  return pure33(new Right(rn.value0));
+                  return pure34(new Right(rn.value0));
                 }
                 ;
                 if (rn instanceof Left) {
-                  return pure33(new Left(append11(rm.value0)(rn.value0)));
+                  return pure34(new Left(append11(rm.value0)(rn.value0)));
                 }
                 ;
                 throw new Error("Failed pattern match at Control.Monad.Except.Trans (line 86, column 9 - line 88, column 49): " + [rn.constructor.name]);
@@ -9750,6 +9760,31 @@ var events2 = function(options2) {
   });
 };
 
+// output/Deku.Do/index.js
+var alt9 = /* @__PURE__ */ alt(altEvent);
+var pure21 = /* @__PURE__ */ pure(applicativeEvent);
+var keepLatest5 = /* @__PURE__ */ keepLatest(eventIsEvent);
+var bind6 = function(f) {
+  return function(a2) {
+    return f(a2);
+  };
+};
+var useDyn = function(i2) {
+  return function(f) {
+    return keepLatest5(bind6(function($57) {
+      return bus2(curry($57));
+    })(function(v) {
+      return alt9(pure21(insert6(i2)(f({
+        remove: v.value0(remove),
+        sendTo: function($58) {
+          return v.value0(sendToPos($58));
+        }
+      }))))(v.value1);
+    }));
+  };
+};
+var useDyn_ = /* @__PURE__ */ useDyn(0);
+
 // output/Deku.Example.Docs.Events2/index.js
 var pursxToElementConsInsert5 = /* @__PURE__ */ pursxToElementConsInsert();
 var makePursx5 = /* @__PURE__ */ makePursx({
@@ -9814,21 +9849,21 @@ var makePursx5 = /* @__PURE__ */ makePursx({
   }
 }));
 var lcmap5 = /* @__PURE__ */ lcmap(profunctorFn);
-var alt9 = /* @__PURE__ */ alt(altEvent);
-var pure21 = /* @__PURE__ */ pure(applicativeEvent);
+var alt10 = /* @__PURE__ */ alt(altEvent);
+var pure23 = /* @__PURE__ */ pure(applicativeEvent);
 var oneOfMap6 = /* @__PURE__ */ oneOfMap(foldableArray)(plusEvent);
 var attr7 = /* @__PURE__ */ attr(attrInput_StyleString);
 var attr15 = /* @__PURE__ */ attr(attrOnInputCb);
 var for_5 = /* @__PURE__ */ for_(applicativeEffect)(foldableMaybe);
-var bind6 = /* @__PURE__ */ bind(bindMaybe);
+var bind7 = /* @__PURE__ */ bind(bindMaybe);
 var composeKleisli3 = /* @__PURE__ */ composeKleisli(bindEffect);
 var attr24 = /* @__PURE__ */ attr(attrOnKeyupCb);
 var when3 = /* @__PURE__ */ when(applicativeEffect);
 var attr32 = /* @__PURE__ */ attr(attrButton_StyleString);
 var attr42 = /* @__PURE__ */ attr(attrOnClickCb);
 var map24 = /* @__PURE__ */ map(functorEvent);
-var keepLatest5 = /* @__PURE__ */ keepLatest(eventIsEvent);
 var attr52 = /* @__PURE__ */ attr(attrSpan_StyleString);
+var click2 = /* @__PURE__ */ click(attrOnClickEffectUnit);
 var filterMap3 = /* @__PURE__ */ filterMap(filterableEvent);
 var mapAccum4 = /* @__PURE__ */ mapAccum(eventIsEvent);
 var applySecond6 = /* @__PURE__ */ applySecond(applyEffect);
@@ -9865,22 +9900,20 @@ var events22 = function(options2) {
     code: nut(pre_([code_([text_(events3)])])),
     result: nut(bussed(function(push2) {
       return lcmap5(function(v) {
-        return alt9(pure21(UIShown.value))(v);
+        return alt10(pure23(UIShown.value))(v);
       })(function(event) {
-        return div_([div_([input(oneOfMap6(pure21)([attr7(Style.value)("border-style:solid;border-width: 1px;border-color: black;"), attr15(OnInput.value)(cb(function(e) {
-          return for_5(bind6(target(e))(fromEventTarget))(composeKleisli3(value2)(function($55) {
-            return push2(ChangeText.create($55));
+        return div_([div_([input(oneOfMap6(pure23)([attr7(Style.value)("border-style:solid;border-width: 1px;border-color: black;"), attr15(OnInput.value)(cb(function(e) {
+          return for_5(bind7(target(e))(fromEventTarget))(composeKleisli3(value2)(function($59) {
+            return push2(ChangeText.create($59));
           }));
         })), attr24(OnKeyup.value)(cb(function(e) {
           return for_5(fromEvent(e))(function(evt) {
             return when3(code2(evt) === "Enter")(push2(AddTodo.value));
           });
-        }))]))([]), button(alt9(pure21(attr32(Style.value)("margin: 5px;")))(pure21(attr42(OnClick.value)(cb($$const(push2(AddTodo.value)))))))([text_("Add")])]), dyn2(map24(function(txt) {
-          return keepLatest5(bus2(function(p$prime) {
-            return function(e$prime) {
-              return alt9(pure21(insert_(div_([span(pure21(attr52(Style.value)("margin: 5px;")))([text_(txt)]), button(alt9(pure21(attr32(Style.value)("margin: 5px;")))(pure21(attr42(OnClick.value)(cb($$const(p$prime(sendToTop)))))))([text_("Prioritize")]), button(alt9(pure21(attr32(Style.value)("margin: 5px;")))(pure21(attr42(OnClick.value)(cb($$const(p$prime(remove)))))))([text_("Delete")])]))))(e$prime);
-            };
-          }));
+        }))]))([]), button(alt10(pure23(attr32(Style.value)("margin: 5px;")))(pure23(attr42(OnClick.value)(cb($$const(push2(AddTodo.value)))))))([text_("Add")])]), dyn2(map24(function(txt) {
+          return bind6(useDyn_)(function(v) {
+            return div_([span(pure23(attr52(Style.value)("margin: 5px;")))([text_(txt)]), button(alt10(pure23(attr32(Style.value)("margin: 5px;")))(click2(pure23(v.sendTo(0)))))([text_("Prioritize")]), button(alt10(pure23(attr32(Style.value)("margin: 5px;")))(click2(pure23(v.remove))))([text_("Delete")])]);
+          });
         })(filterMap3(function(v) {
           if (v.value0) {
             return new Just(v.value1);
@@ -9902,7 +9935,7 @@ var events22 = function(options2) {
         })("")(event))))]);
       });
     })),
-    next: oneOfMap6(pure21)([attr42(OnClick.value)(cb(function(e) {
+    next: oneOfMap6(pure23)([attr42(OnClick.value)(cb(function(e) {
       return applySecond6(applySecond6(preventDefault(e))(options2.dpage(Portals.value)))(scrollToTop);
     })), attr62(Href.value)(options2.slug + "portals/")])
   });
@@ -9961,7 +9994,7 @@ var makePursx6 = /* @__PURE__ */ makePursx({
   }
 }));
 var oneOfMap7 = /* @__PURE__ */ oneOfMap(foldableArray)(plusEvent);
-var pure23 = /* @__PURE__ */ pure(applicativeEvent);
+var pure24 = /* @__PURE__ */ pure(applicativeEvent);
 var attr8 = /* @__PURE__ */ attr(attrOnClickCb);
 var applySecond7 = /* @__PURE__ */ applySecond(applyEffect);
 var attr16 = /* @__PURE__ */ attr(attrA_HrefString);
@@ -9972,7 +10005,7 @@ var helloWorld2 = function(options2) {
   return makePursx6(px5)({
     code: nut(pre_([code_([text_(helloWorld)])])),
     result: nut(div_([text_("Hello world")])),
-    next: oneOfMap7(pure23)([attr8(OnClick.value)(cb(function(e) {
+    next: oneOfMap7(pure24)([attr8(OnClick.value)(cb(function(e) {
       return applySecond7(applySecond7(preventDefault(e))(options2.dpage(SimpleComponent.value)))(scrollToTop);
     })), attr16(Href.value)(options2.slug + "component/")])
   });
@@ -10007,7 +10040,7 @@ var makePursx7 = /* @__PURE__ */ makePursx({
   }
 }));
 var oneOfMap8 = /* @__PURE__ */ oneOfMap(foldableArray)(plusEvent);
-var pure24 = /* @__PURE__ */ pure(applicativeEvent);
+var pure25 = /* @__PURE__ */ pure(applicativeEvent);
 var attr9 = /* @__PURE__ */ attr(attrOnClickCb);
 var applySecond8 = /* @__PURE__ */ applySecond(applyEffect);
 var attr17 = /* @__PURE__ */ attr(attrA_HrefString);
@@ -10016,7 +10049,7 @@ var px6 = /* @__PURE__ */ function() {
 }();
 var intro = function(options2) {
   return makePursx7(px6)({
-    next: oneOfMap8(pure24)([attr9(OnClick.value)(cb(function(e) {
+    next: oneOfMap8(pure25)([attr9(OnClick.value)(cb(function(e) {
       return applySecond8(applySecond8(preventDefault(e))(options2.dpage(HelloWorld.value)))(scrollToTop);
     })), attr17(Href.value)(options2.slug + "hello/")])
   });
@@ -10080,8 +10113,8 @@ var makePursx8 = /* @__PURE__ */ makePursx({
   }
 }));
 var lcmap6 = /* @__PURE__ */ lcmap(profunctorFn);
-var alt10 = /* @__PURE__ */ alt(altEvent);
-var pure25 = /* @__PURE__ */ pure(applicativeEvent);
+var alt11 = /* @__PURE__ */ alt(altEvent);
+var pure26 = /* @__PURE__ */ pure(applicativeEvent);
 var portal2 = /* @__PURE__ */ portal();
 var map25 = /* @__PURE__ */ map(functorVect);
 var oneOfMap9 = /* @__PURE__ */ oneOfMap(foldableArray)(plusEvent);
@@ -10113,9 +10146,9 @@ var portals12 = function(options2) {
   return makePursx8(px7)({
     code: nut(pre_([code_([text_(portals1)])])),
     result: nut(dyn2(bus2(function(push2) {
-      return lcmap6(alt10(pure25(unit)))(function(event) {
-        return pure25(insert_(portal2(map25(function(i2) {
-          return video(oneOfMap9(pure25)([attr10(Controls.value)("true"), attr18(Width.value)("250")]))([source(oneOfMap9(pure25)([attr25(Src.value)(i2), attr33(Xtype.value)("video/mp4")]))([])]);
+      return lcmap6(alt11(pure26(unit)))(function(event) {
+        return pure26(insert_(portal2(map25(function(i2) {
+          return video(oneOfMap9(pure26)([attr10(Controls.value)("true"), attr18(Width.value)("250")]))([source(oneOfMap9(pure26)([attr25(Src.value)(i2), attr33(Xtype.value)("video/mp4")]))([])]);
         })(cons4("https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4")(cons4("https://www.w3schools.com/jsref/movie.mp4")(empty5))))(function(v) {
           return function(v1) {
             var p1 = index1($$Proxy.value)(v);
@@ -10139,12 +10172,12 @@ var portals12 = function(options2) {
                 return span_(pure110($56(ev($57))));
               };
             }();
-            return div_([button(pure25(attr43(OnClick.value)(cb($$const(push2(unit))))))([text_("Switch videos")]), div_([flips(true), flips(false)])]);
+            return div_([button(pure26(attr43(OnClick.value)(cb($$const(push2(unit))))))([text_("Switch videos")]), div_([flips(true), flips(false)])]);
           };
         })));
       });
     }))),
-    next: oneOfMap9(pure25)([attr43(OnClick.value)(cb(function(e) {
+    next: oneOfMap9(pure26)([attr43(OnClick.value)(cb(function(e) {
       return applySecond9(applySecond9(preventDefault(e))(options2.dpage(SSR.value)))(scrollToTop);
     })), attr53(Href.value)(options2.slug + "ssr/")])
   });
@@ -10208,7 +10241,7 @@ var psx2 = /* @__PURE__ */ psx({
   }
 })()(pursxToElementNil);
 var oneOfMap10 = /* @__PURE__ */ oneOfMap(foldableArray)(plusEvent);
-var pure26 = /* @__PURE__ */ pure(applicativeEvent);
+var pure27 = /* @__PURE__ */ pure(applicativeEvent);
 var attr11 = /* @__PURE__ */ attr(attrOnClickCb);
 var applySecond10 = /* @__PURE__ */ applySecond(applyEffect);
 var attr19 = /* @__PURE__ */ attr(attrA_HrefString);
@@ -10222,7 +10255,7 @@ var pursx12 = function(options2) {
   return makePursx9(px8)({
     code: nut(pre_([code_([text_(pursx1)])])),
     result: nut(psx2(myDom)),
-    next: oneOfMap10(pure26)([attr11(OnClick.value)(cb(function(e) {
+    next: oneOfMap10(pure27)([attr11(OnClick.value)(cb(function(e) {
       return applySecond10(applySecond10(preventDefault(e))(options2.dpage(Events.value)))(scrollToTop);
     })), attr19(Href.value)(options2.slug + "events1/")])
   });
@@ -10287,7 +10320,7 @@ var makePursx$prime2 = /* @__PURE__ */ makePursx$prime({
     return "code";
   }
 }));
-var pure27 = /* @__PURE__ */ pure(applicativeEvent);
+var pure28 = /* @__PURE__ */ pure(applicativeEvent);
 var makePursx10 = /* @__PURE__ */ makePursx({
   reflectType: function() {
     return '<div>\n        <button>I do nothing</button>\n        <ul>\n          <li>A</li>\n          <li ~myli~>B</li>\n          <li>C</li>\n        </ul>\n        <div>\n          <a href="https://github.com/mikesol/purescript-deku"></a>\n          <i>bar</i>\n          ~somethingNew~\n          <span style="font-weight:800;">baz</span>\n        </div>\n        <div><div></div><div><input type="range"/></div></div>\n      </div>\n';
@@ -10311,7 +10344,7 @@ var makePursx10 = /* @__PURE__ */ makePursx({
 }));
 var attr20 = /* @__PURE__ */ attr(attrLi_StyleString);
 var attr110 = /* @__PURE__ */ attr(attrOnClickEffectUnit);
-var alt11 = /* @__PURE__ */ alt(altEvent);
+var alt12 = /* @__PURE__ */ alt(altEvent);
 var voidLeft4 = /* @__PURE__ */ voidLeft(functorEvent);
 var compact3 = /* @__PURE__ */ compact(compactableEvent);
 var oneOfMap11 = /* @__PURE__ */ oneOfMap(foldableArray)(plusEvent);
@@ -10329,13 +10362,13 @@ var pursx22 = function(options2) {
     code: nut(pre_([code_([text_(pursx2)])])),
     result: nut(dyn2(bus2(function(push2) {
       return function(event) {
-        return pure27(insert_(makePursx10(myDom2)({
-          myli: pure27(attr20(Style.value)("background-color:rgb(200,240,210);")),
-          somethingNew: nut(button(pure27(attr110(OnClick.value)(push2(new Just(unit)))))([text(alt11(voidLeft4(compact3(event))("Thanks for clicking me!"))(pure27("I was dynamically inserted")))]))
+        return pure28(insert_(makePursx10(myDom2)({
+          myli: pure28(attr20(Style.value)("background-color:rgb(200,240,210);")),
+          somethingNew: nut(button(pure28(attr110(OnClick.value)(push2(new Just(unit)))))([text(alt12(voidLeft4(compact3(event))("Thanks for clicking me!"))(pure28("I was dynamically inserted")))]))
         })));
       };
     }))),
-    next: oneOfMap11(pure27)([attr26(OnClick.value)(cb(function(e) {
+    next: oneOfMap11(pure28)([attr26(OnClick.value)(cb(function(e) {
       return applySecond11(applySecond11(preventDefault(e))(options2.dpage(Events2.value)))(scrollToTop);
     })), attr34(Href.value)(options2.slug + "events2/")])
   });
@@ -10461,12 +10494,12 @@ var monadStateT = function(dictMonad) {
   };
 };
 var bindStateT = function(dictMonad) {
-  var bind10 = bind(dictMonad.Bind1());
+  var bind11 = bind(dictMonad.Bind1());
   return {
     bind: function(v) {
       return function(f) {
         return function(s2) {
-          return bind10(v(s2))(function(v1) {
+          return bind11(v(s2))(function(v1) {
             var v3 = f(v1.value0);
             return v3(v1.value1);
           });
@@ -10488,11 +10521,11 @@ var applyStateT = function(dictMonad) {
   };
 };
 var applicativeStateT = function(dictMonad) {
-  var pure33 = pure(dictMonad.Applicative0());
+  var pure34 = pure(dictMonad.Applicative0());
   return {
     pure: function(a2) {
       return function(s2) {
-        return pure33(new Tuple(a2, s2));
+        return pure34(new Tuple(a2, s2));
       };
     },
     Apply0: function() {
@@ -10501,12 +10534,12 @@ var applicativeStateT = function(dictMonad) {
   };
 };
 var monadStateStateT = function(dictMonad) {
-  var pure33 = pure(dictMonad.Applicative0());
+  var pure34 = pure(dictMonad.Applicative0());
   var monadStateT1 = monadStateT(dictMonad);
   return {
     state: function(f) {
       return function($200) {
-        return pure33(f($200));
+        return pure34(f($200));
       };
     },
     Monad0: function() {
@@ -10603,7 +10636,7 @@ var append8 = /* @__PURE__ */ append(semigroupArray);
 var show5 = /* @__PURE__ */ show(showInt);
 var arbitrary2 = /* @__PURE__ */ arbitrary(arbInt);
 var add3 = /* @__PURE__ */ add(semiringInt);
-var pure28 = /* @__PURE__ */ pure(applicativeST);
+var pure29 = /* @__PURE__ */ pure(applicativeST);
 var MakeElement = /* @__PURE__ */ function() {
   function MakeElement2(value0) {
     this.value0 = value0;
@@ -10852,7 +10885,7 @@ var ssrDOMInterpret = function(seed) {
     makeElement: ssrMakeElement,
     attributeParent: function(v) {
       return function(v1) {
-        return pure28(unit);
+        return pure29(unit);
       };
     },
     makeRoot: ssrMakeRoot,
@@ -10862,7 +10895,7 @@ var ssrDOMInterpret = function(seed) {
     makeDynBeacon: ssrMakeDynBeacon,
     setCb: function(v) {
       return function(v1) {
-        return pure28(unit);
+        return pure29(unit);
       };
     },
     setText: ssrSetText,
@@ -11056,7 +11089,7 @@ var traversableCatQueue = {
     var Apply0 = dictApplicative.Apply0();
     var map112 = map(Apply0.Functor0());
     var lift23 = lift2(Apply0);
-    var pure33 = pure(dictApplicative);
+    var pure34 = pure(dictApplicative);
     return function(f) {
       var $123 = map112(foldl5(snoc3)(empty10));
       var $124 = foldl5(function(acc) {
@@ -11064,7 +11097,7 @@ var traversableCatQueue = {
         return function($127) {
           return $126(f($127));
         };
-      })(pure33(empty10));
+      })(pure34(empty10));
       return function($125) {
         return $123($124($125));
       };
@@ -11135,16 +11168,16 @@ var map28 = /* @__PURE__ */ map(functorArray);
 var join2 = /* @__PURE__ */ join(bindArray);
 var mapFlipped3 = /* @__PURE__ */ mapFlipped(functorArray);
 var $$void10 = /* @__PURE__ */ $$void(/* @__PURE__ */ functorStateT(functorIdentity));
-var modify7 = /* @__PURE__ */ modify4(/* @__PURE__ */ monadStateStateT(monadIdentity));
+var modify8 = /* @__PURE__ */ modify4(/* @__PURE__ */ monadStateStateT(monadIdentity));
 var alter2 = /* @__PURE__ */ alter(ordString);
 var discard2 = /* @__PURE__ */ discard(discardUnit)(/* @__PURE__ */ bindStateT(monadIdentity));
 var eq13 = /* @__PURE__ */ eq(/* @__PURE__ */ eqMaybe(eqString));
 var append13 = /* @__PURE__ */ append(semigroupCatQueue);
-var pure29 = /* @__PURE__ */ pure(applicativeCatQueue);
+var pure30 = /* @__PURE__ */ pure(applicativeCatQueue);
 var map110 = /* @__PURE__ */ map(functorCatQueue);
 var fromFoldable6 = /* @__PURE__ */ fromFoldable5(foldableArray);
 var mapFlipped1 = /* @__PURE__ */ mapFlipped(functorMap);
-var bind7 = /* @__PURE__ */ bind(bindMaybe);
+var bind8 = /* @__PURE__ */ bind(bindMaybe);
 var lookup3 = /* @__PURE__ */ lookup2(ordString);
 var compact4 = /* @__PURE__ */ compact(compactableArray);
 var applicativeStateT2 = /* @__PURE__ */ applicativeStateT(monadIdentity);
@@ -11294,7 +11327,7 @@ var ssr$prime = function(topTag) {
   return function(arr$prime) {
     var setting = function(id2) {
       return function(action2) {
-        return $$void10(modify7(function(s2) {
+        return $$void10(modify8(function(s2) {
           var $117 = {};
           for (var $118 in s2) {
             if ({}.hasOwnProperty.call(s2, $118)) {
@@ -11328,7 +11361,7 @@ var ssr$prime = function(topTag) {
     var making = function(parent2) {
       return function(id2) {
         return function(action2) {
-          return discard2($$void10(modify7(function(s2) {
+          return discard2($$void10(modify8(function(s2) {
             var $126 = {};
             for (var $127 in s2) {
               if ({}.hasOwnProperty.call(s2, $127)) {
@@ -11613,7 +11646,7 @@ var ssr$prime = function(topTag) {
                 }
                 ;
                 if (v2 instanceof Nothing) {
-                  return append13(staging1)(append13(pure29(new MakeCloseDynBeacon({
+                  return append13(staging1)(append13(pure30(new MakeCloseDynBeacon({
                     id: dbc.id + "%-%",
                     parent: dbc.parent,
                     pos: dbc.pos,
@@ -11803,7 +11836,7 @@ var ssr$prime = function(topTag) {
             throw new Error("Failed pattern match at Deku.SSR (line 303, column 23 - line 310, column 45): " + [v1.constructor.name]);
           });
           var $366 = map28(function(i2) {
-            return bind7(lookup3(i2)(x.idToActions))(head);
+            return bind8(lookup3(i2)(x.idToActions))(head);
           });
           return function($367) {
             return $365(fromSortableDyns(sortSortableDyns(toSortableDyns(compact4($366($367))))));
@@ -12045,8 +12078,8 @@ var runSSR = /* @__PURE__ */ runSSR$prime("body");
 
 // output/Deku.Example.Docs.SSR/index.js
 var click_3 = /* @__PURE__ */ click_(attrOnClickEffectUnit);
-var alt14 = /* @__PURE__ */ alt(altEvent);
-var pure30 = /* @__PURE__ */ pure(applicativeEvent);
+var alt15 = /* @__PURE__ */ alt(altEvent);
+var pure31 = /* @__PURE__ */ pure(applicativeEvent);
 var map29 = /* @__PURE__ */ map(functorEvent);
 var append10 = /* @__PURE__ */ append(semigroupString);
 var show6 = /* @__PURE__ */ show(showInt);
@@ -12099,7 +12132,7 @@ var makePursx11 = /* @__PURE__ */ makePursx({
   }
 }));
 var applySecond12 = /* @__PURE__ */ applySecond(applyST);
-var bind8 = /* @__PURE__ */ bind(bindST);
+var bind9 = /* @__PURE__ */ bind(bindST);
 var pure112 = /* @__PURE__ */ pure(applicativeST);
 var px10 = /* @__PURE__ */ function() {
   return $$Proxy.value;
@@ -12115,7 +12148,7 @@ var app2 = /* @__PURE__ */ function() {
     }
   })()()(vbusNil)()())()())($$Proxy.value)(function(push2) {
     return function(event) {
-      return div_([p_([text_("Here's an example of SSR in deku.\nAll of the static bits are rendered as HTML,\nand all of the dynamic bits are hydrated on page load.")]), button(click_3(push2.buttonClicked(unit)))([text_("Click")]), div_([text(alt14(pure30("Val: 0"))(map29(function() {
+      return div_([p_([text_("Here's an example of SSR in deku.\nAll of the static bits are rendered as HTML,\nand all of the dynamic bits are hydrated on page load.")]), button(click_3(push2.buttonClicked(unit)))([text_("Click")]), div_([text(alt15(pure31("Val: 0"))(map29(function() {
         var $63 = append10("Val: ");
         return function($64) {
           return $63(show6($64));
@@ -12124,7 +12157,7 @@ var app2 = /* @__PURE__ */ function() {
         return function(v) {
           return 1 + a2 | 0;
         };
-      })(-1 | 0)(alt14(pure30(unit))(event.buttonClicked)))))]), div_([input(slider(pure30(push2.sliderMoved)))([]), div_([text(alt14(pure30("Val: 50"))(map29(function() {
+      })(-1 | 0)(alt15(pure31(unit))(event.buttonClicked)))))]), div_([input(slider(pure31(push2.sliderMoved)))([]), div_([text(alt15(pure31("Val: 50"))(map29(function() {
         var $65 = append10("Val: ");
         return function($66) {
           return $65(show14($66));
@@ -12140,7 +12173,7 @@ var ssrPage = function(v) {
     code0: nut(pre_([code_([text_(app)])])),
     result: nut(app2),
     codegen: nut(pre_([code_([text(makePureEvent(function(k) {
-      return applySecond12(bind8(runSSR({
+      return applySecond12(bind9(runSSR({
         head: '<!DOCTYPE html><html><head><script src="bundle.js" defer><\/script></head>',
         tail: "</html>"
       })(app2))(k))(pure112(pure112(unit)));
@@ -12150,8 +12183,8 @@ var ssrPage = function(v) {
 
 // output/Deku.Example.Docs.Scene/index.js
 var lcmap7 = /* @__PURE__ */ lcmap(profunctorFn);
-var alt15 = /* @__PURE__ */ alt(altEvent);
-var pure31 = /* @__PURE__ */ pure(applicativeEvent);
+var alt16 = /* @__PURE__ */ alt(altEvent);
+var pure32 = /* @__PURE__ */ pure(applicativeEvent);
 var map30 = /* @__PURE__ */ map(functorArray);
 var oneOfMap12 = /* @__PURE__ */ oneOfMap(foldableArray)(plusEvent);
 var attr21 = /* @__PURE__ */ attr(attrOnClickCb);
@@ -12213,12 +12246,12 @@ var scene = function(options2) {
   };
   return bussed(function(push2) {
     return lcmap7(function(v) {
-      return alt15(pure31(options2.startsWith))(v);
+      return alt16(pure32(options2.startsWith))(v);
     })(function(event) {
       return div_([div_(map30(function(v) {
-        return span_([a(oneOfMap12(pure31)([attr21(OnClick.value)(cb(function(e) {
+        return span_([a(oneOfMap12(pure32)([attr21(OnClick.value)(cb(function(e) {
           return applySecond13(preventDefault(e))(push2(v.value0));
-        })), attr111(Style.value)("cursor:pointer;"), attr27(Href.value)(options2.slug + v.value1.value1.value0)]))([text_(v.value1.value0)]), span(pure31(attr35(Style.value)(function() {
+        })), attr111(Style.value)("cursor:pointer;"), attr27(Href.value)(options2.slug + v.value1.value1.value0)]))([text_(v.value1.value0)]), span(pure32(attr35(Style.value)(function() {
           if (v.value1.value1.value1) {
             return "";
           }
@@ -12388,8 +12421,8 @@ var argv = /* @__PURE__ */ function() {
 }();
 
 // output/Deku.Example.Docs.Static.Build/index.js
-var bind9 = /* @__PURE__ */ bind(bindEffect);
-var pure32 = /* @__PURE__ */ pure(applicativeEffect);
+var bind10 = /* @__PURE__ */ bind(bindEffect);
+var pure33 = /* @__PURE__ */ pure(applicativeEffect);
 var show8 = /* @__PURE__ */ show(showString);
 var show15 = /* @__PURE__ */ show(showJsonDecodeError);
 var record3 = /* @__PURE__ */ record2()(/* @__PURE__ */ rowListCodecCons(/* @__PURE__ */ rowListCodecCons(/* @__PURE__ */ rowListCodecCons(rowListCodecNil)()()({
@@ -12407,7 +12440,7 @@ var record3 = /* @__PURE__ */ record2()(/* @__PURE__ */ rowListCodecCons(/* @__P
 }));
 var main2 = function __do2() {
   var args = argv();
-  var options2 = maybe(pure32({
+  var options2 = maybe(pure33({
     pageString: "Intro",
     startsWith: Intro.value,
     slug: "/",
@@ -12417,15 +12450,15 @@ var main2 = function __do2() {
       var s2 = readTextFile(UTF8.value)(f)();
       var parsed = either(function(e) {
         return throwException(error("cannot convert string to json: " + (s2 + (" err: " + show8(e)))));
-      })(pure32)(jsonParser(s2))();
+      })(pure33)(jsonParser(s2))();
       var decoded = either(function(e) {
         return throwException(error("cannot decode json: " + (s2 + (" err: " + show15(e)))));
-      })(pure32)(decode(object("Info")(record3({
+      })(pure33)(decode(object("Info")(record3({
         page: string,
         slug: string,
         top: $$boolean
       })))(parsed))();
-      var page = maybe(throwException(error("cannot parse page: " + decoded.page)))(pure32)(stringToPage(decoded.page))();
+      var page = maybe(throwException(error("cannot parse page: " + decoded.page)))(pure33)(stringToPage(decoded.page))();
       return {
         pageString: decoded.page,
         top: decoded.top,
@@ -12434,7 +12467,7 @@ var main2 = function __do2() {
       };
     };
   })(index(args)(2))();
-  return bind9(toEffect(runSSR({
+  return bind10(toEffect(runSSR({
     head: '<!DOCTYPE html>\n  <html>\n    <head>\n      <title>Deku documentation</title>\n      <meta charset="UTF-8">\n      <meta name="viewport" content="width=device-width">\n      <link rel="stylesheet" href=' + (function() {
       if (options2.top) {
         return '"style.css"';
