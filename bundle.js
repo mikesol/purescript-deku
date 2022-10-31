@@ -222,7 +222,6 @@ main = runInBody Deku.do
 
 import Prelude
 
-import Control.Alt ((<|>))
 import Data.Tuple.Nested ((/\\))
 import Deku.Control (text, text_)
 import Deku.DOM as D
@@ -246,10 +245,7 @@ main = runInBody Deku.do
         [ text_ "Click" ]
     , D.div_
         [ text
-            ( pure "Val: 0" <|>
-                ( append "Val: " <<< show <$> countUp
-                )
-            )
+            (("Val: " <> _) <<< show <$> countUp)
         ]
     , D.div_
         [ D.input
@@ -257,10 +253,7 @@ main = runInBody Deku.do
             []
         , D.div_
             [ text
-                ( append "Val: " <<< show
-                    <$> sliderMoved
-                )
-
+                (("Val: " <> _) <<< show <$> sliderMoved)
             ]
         ]
     ]
