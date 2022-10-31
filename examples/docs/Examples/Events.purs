@@ -3,53 +3,44 @@ module Deku.Examples.Docs.Examples.Events where
 import Prelude
 
 import Control.Alt ((<|>))
+import Data.Tuple.Nested ((/\))
 import Deku.Control (text, text_)
-import Deku.Core (vbussed)
 import Deku.DOM as D
+import Deku.Do (useState)
+import Deku.Do as Deku
 import Deku.Listeners (click_, slider)
 import Deku.Toplevel (runInBody)
 import Effect (Effect)
 import FRP.Event (Event, fold)
-import FRP.Event.VBus (V)
-import Type.Proxy (Proxy(..))
-
-type UIEvents = V
-  ( buttonClicked :: Unit
-  , sliderMoved :: Number
-  )
 
 main :: Effect Unit
-main = runInBody
-  ( vbussed (Proxy :: _ UIEvents) \push event -> do
-      let
-        countUp :: Event Int
-        countUp = fold
-          (\a _ -> 1 + a)
-          (-1)
-          (pure unit <|> event.buttonClicked)
-      D.div_
-        [ D.button
-            (click_ (push.buttonClicked unit))
-            [ text_ "Click" ]
+main = runInBody Deku.do
+  setButtonClicked /\ buttonClicked <- useState unit
+  setSliderMoved /\ sliderMoved <- useState 50.0
+  let
+    countUp :: Event Int
+    countUp = fold (\a _ -> 1 + a) (-1) buttonClicked
+  D.div_
+    [ D.button
+        (click_ (setButtonClicked unit))
+        [ text_ "Click" ]
+    , D.div_
+        [ text
+            ( pure "Val: 0" <|>
+                ( append "Val: " <<< show <$> countUp
+                )
+            )
+        ]
+    , D.div_
+        [ D.input
+            (slider (pure setSliderMoved))
+            []
         , D.div_
             [ text
-                ( pure "Val: 0" <|>
-                    ( append "Val: " <<< show <$> countUp
-                    )
+                ( append "Val: " <<< show
+                    <$> sliderMoved
                 )
-            ]
-        , D.div_
-            [ D.input
-                (slider (pure push.sliderMoved))
-                []
-            , D.div_
-                [ text
-                    ( pure "Val: 50" <|>
-                        ( append "Val: " <<< show
-                            <$> event.sliderMoved
-                        )
-                    )
-                ]
+
             ]
         ]
-  )
+    ]

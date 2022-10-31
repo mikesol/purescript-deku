@@ -10,12 +10,13 @@ import Data.Either (Either(..))
 import Data.Filterable (compact, separate)
 import Data.HTTP.Method (Method(..))
 import Data.Maybe (Maybe(..))
-import Data.Profunctor (lcmap)
 import Data.Tuple.Nested ((/\))
 import Deku.Attribute (Cb, cb, (:=))
 import Deku.Control (text)
-import Deku.Core (bus, envy)
 import Deku.DOM as D
+import Deku.Do (useState)
+import Deku.Do as Deku
+import Deku.Listeners (click_)
 import Deku.Toplevel (runInBody)
 import Effect (Effect)
 import Effect.Aff (launchAff_)
@@ -49,42 +50,40 @@ clickCb push = cb
 clickText = "Click to get some random user data." :: String
 
 main :: Effect Unit
-main = runInBody
-  (envy $ bus \push -> lcmap (pure Initial <|> _)
-      \event -> do
-        let
-          split :: { left :: Event Unit, right :: Event String }
-          split = separate $ compact $
-            map
-              ( case _ of
-                  Loading -> Just $ Left unit
-                  Result s -> Just $ Right s
-                  _ -> Nothing
-              )
-              event
-          { left: loading, right: result } = split
-        D.div_
-          [ D.div_
-              [ D.button (pure (D.OnClick := clickCb push))
-                  [ text
-                      ( pure clickText
-                          <|> (loading $> "Loading...")
-                          <|> (result $> clickText)
-                      )
-                  ]
-              ]
-          , D.div
-              ( (pure (D.Style := "display: none;")) <|>
-                  ( compact
-                      ( mapAccum
-                          ( \b _ -> (b && false) /\
-                              if b then Just unit else Nothing
-                          )
-                          true
-                          result
-                      ) $> (D.Style := "display: block;")
-                  )
-              )
-              [ D.pre_ [ D.code_ [ text (pure "" <|> result) ] ] ]
-          ]
-  )
+main = runInBody Deku.do
+  setUIAction /\ uiAction <- useState Initial
+  let
+    split :: { left :: Event Unit, right :: Event String }
+    split = separate $ compact $
+      map
+        ( case _ of
+            Loading -> Just $ Left unit
+            Result s -> Just $ Right s
+            _ -> Nothing
+        )
+        uiAction
+    { left: loading, right: result } = split
+  D.div_
+    [ D.div_
+        [ D.button (click_ (clickCb setUIAction))
+            [ text
+                ( pure clickText
+                    <|> (loading $> "Loading...")
+                    <|> (result $> clickText)
+                )
+            ]
+        ]
+    , D.div
+        ( (pure (D.Style := "display: none;")) <|>
+            ( compact
+                ( mapAccum
+                    ( \b _ -> (b && false) /\
+                        if b then Just unit else Nothing
+                    )
+                    true
+                    result
+                ) $> (D.Style := "display: block;")
+            )
+        )
+        [ D.pre_ [ D.code_ [ text (pure "" <|> result) ] ] ]
+    ]
