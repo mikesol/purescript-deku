@@ -6863,9 +6863,59 @@ var pursxToElementConsInsert = function() {
 };
 
 // output/Examples/foreign.js
-var pursx2 = 'module Main where\n\nimport Prelude\n\nimport Control.Alt ((<|>))\nimport Data.Compactable (compact)\nimport Data.Maybe (Maybe(..))\nimport Deku.Attribute ((:=))\nimport Deku.Control (text)\nimport Deku.Core (envy)\nimport Deku.DOM as D\nimport Deku.Pursx (nut, (~~))\nimport Deku.Toplevel (runInBody)\nimport Effect (Effect)\nimport FRP.Event (bus)\nimport Type.Proxy (Proxy(..))\n\nmyDom =\n  Proxy\n    :: Proxy\n         """<div>\n        <button>I do nothing</button>\n        <ul>\n          <li>A</li>\n          <li ~myli~>B</li>\n          <li>C</li>\n        </ul>\n        <div>\n          <a href="https://github.com/mikesol/purescript-deku"></a>\n          <i>bar</i>\n          ~somethingNew~\n          <span style="font-weight:800;">baz</span>\n        </div>\n        <div><div></div><div><input type="range"/></div></div>\n      </div>\n"""\n\nmain :: Effect Unit\nmain = runInBody\n  (envy ( bus \\push event -> myDom ~~\n      { myli: pure (D.Style := "background-color:rgb(200,240,210);")\n      , somethingNew: nut\n          ( D.button (pure (D.OnClick := push (Just unit)))\n              [ text\n                  $ (compact event $> "Thanks for clicking me!") <|>\n                      pure "I was dynamically inserted"\n              ]\n          )\n      }\n  ))';
+var pursx2 = `module Main where
+
+import Prelude
+
+import Control.Alt ((<|>))
+import Data.Compactable (compact)
+import Data.Maybe (Maybe(..))
+import Data.Tuple.Nested ((/\\))
+import Deku.Attribute ((:=))
+import Deku.Control (text)
+import Deku.DOM as D
+import Deku.Do (useState')
+import Deku.Do as Deku
+import Deku.Pursx (nut, (~~))
+import Deku.Toplevel (runInBody)
+import Effect (Effect)
+import Type.Proxy (Proxy(..))
+
+myDom =
+  Proxy
+    :: Proxy
+         """<div>
+        <button>I do nothing</button>
+        <ul>
+          <li>A</li>
+          <li ~myli~>B</li>
+          <li>C</li>
+        </ul>
+        <div>
+          <a href="https://github.com/mikesol/purescript-deku"></a>
+          <i>bar</i>
+          ~somethingNew~
+          <span style="font-weight:800;">baz</span>
+        </div>
+        <div><div></div><div><input type="range"/></div></div>
+      </div>
+"""
+
+main :: Effect Unit
+main = runInBody Deku.do
+  push /\\ event <- useState'
+  myDom ~~
+    { myli: pure (D.Style := "background-color:rgb(200,240,210);")
+    , somethingNew: nut
+        ( D.button (pure (D.OnClick := push (Just unit)))
+            [ text
+                $ (compact event $> "Thanks for clicking me!") <|>
+                    pure "I was dynamically inserted"
+            ]
+        )
+    }`;
 var pursx1 = 'module Main where\n\nimport Prelude\n\nimport Deku.Pursx (psx)\nimport Deku.Toplevel (runInBody)\nimport Effect (Effect)\nimport Type.Proxy (Proxy(..))\n\nmyDom =\n  Proxy\n    :: Proxy\n         """<div>\n    <button>I do nothing</button>\n    <ul>\n        <li>A</li>\n        <li>B</li>\n        <li>C</li>\n    </ul>\n    <div>\n        <a href="https://github.com/mikesol/purescript-deku"></a>\n        <i>bar</i>\n        <span style="font-weight:800;">baz</span>\n    </div>\n    <div><div></div><div><input type="range"/></div></div>\n    </div>\n"""\n\nmain :: Effect Unit\nmain = runInBody (psx myDom)';
-var portals1 = 'module Main where\n\nimport Prelude\n\nimport Control.Alt ((<|>))\nimport Data.FastVect.FastVect (index, (:))\nimport Data.FastVect.FastVect as V\nimport Data.Foldable (oneOfMap)\nimport Data.Profunctor (lcmap)\nimport Deku.Attribute ((:=))\nimport Deku.Control (portal, switcher, text_)\nimport Deku.Core (Domable, envy)\nimport Deku.DOM as D\nimport Deku.Toplevel (runInBody)\nimport Effect (Effect)\nimport FRP.Event (Event, bus, fold)\nimport Type.Prelude (Proxy(..))\n\nmain :: Effect Unit\nmain = runInBody\n  (envy $ bus \\push -> lcmap (pure unit <|> _) \\event -> do\n      portal\n        ( map\n            ( \\i -> D.video\n                (oneOfMap pure [ D.Controls := "true", D.Width := "250" ])\n                [ D.source\n                    (oneOfMap pure [ D.Src := i, D.Xtype := "video/mp4" ])\n                    []\n                ]\n            )\n            ( "https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4"\n                : "https://www.w3schools.com/jsref/movie.mp4"\n                : V.empty\n            )\n        )\n        \\v _ -> do\n          let\n            p0 :: Domable _ _\n            p0 = index (Proxy :: _ 0) v\n\n            p1 :: Domable _ _\n            p1 = index (Proxy :: _ 1) v\n\n            ev :: Boolean -> Event Boolean\n            ev b = fold (\\a _ -> not a) b event\n\n            flips :: Boolean -> Domable _ _\n            flips = D.span_ <<< pure <<< switcher (if _ then p0 else p1) <<< ev\n          D.div_\n            [ D.button (pure $ D.OnClick := push unit)\n                [ text_ "Switch videos" ]\n            , D.div_ [ D.span_ [ flips true ], flips false ]\n            ]\n  )\n';
+var portals1 = 'module Main where\n\nimport Prelude\n\nimport Data.FastVect.FastVect (index, (:))\nimport Data.FastVect.FastVect as V\nimport Data.Foldable (oneOfMap)\nimport Data.Tuple.Nested ((/\\))\nimport Deku.Attribute ((:=))\nimport Deku.Control (portal, switcher, text_)\nimport Deku.Core (Domable)\nimport Deku.DOM as D\nimport Deku.Do (useState)\nimport Deku.Do as Deku\nimport Deku.Toplevel (runInBody)\nimport Effect (Effect)\nimport FRP.Event (Event, fold)\nimport Type.Prelude (Proxy(..))\n\nmain :: Effect Unit\nmain = runInBody Deku.do\n  push /\\ event <- useState unit\n  portal\n    ( map\n        ( \\i -> D.video\n            (oneOfMap pure [ D.Controls := "true", D.Width := "250" ])\n            [ D.source\n                (oneOfMap pure [ D.Src := i, D.Xtype := "video/mp4" ])\n                []\n            ]\n        )\n        ( "https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4"\n            : "https://www.w3schools.com/jsref/movie.mp4"\n            : V.empty\n        )\n    )\n    \\v _ -> do\n      let\n        p0 :: Domable _ _\n        p0 = index (Proxy :: _ 0) v\n\n        p1 :: Domable _ _\n        p1 = index (Proxy :: _ 1) v\n\n        ev :: Boolean -> Event Boolean\n        ev b = fold (\\a _ -> not a) b event\n\n        flips :: Boolean -> Domable _ _\n        flips = D.span_ <<< pure <<< switcher (if _ then p0 else p1) <<< ev\n      D.div_\n        [ D.button (pure $ D.OnClick := push unit)\n            [ text_ "Switch videos" ]\n        , D.div_ [ D.span_ [ flips true ], flips false ]\n        ]\n';
 var helloWorld = 'module Main where\n\nimport Prelude\n\nimport Deku.Control (text_)\nimport Deku.Toplevel (runInBody)\nimport Effect (Effect)\n\nmain :: Effect Unit\nmain = runInBody (text_ "Hello world")';
 var events3 = `module Main where
 
@@ -6877,12 +6927,14 @@ import Data.Foldable (oneOf)
 import Data.Maybe (Maybe(..))
 import Data.Tuple.Nested ((/\\))
 import Deku.Control (text_)
-import Deku.Core (Nut, dyn, bussed, insert_, remove, sendToTop)
+import Deku.Core (Nut, busUncurried, dyn, insert_, remove, sendToTop)
 import Deku.DOM as D
+import Deku.Do (useState')
+import Deku.Do as Deku
 import Deku.Listeners (click, keyUp, textInput)
 import Deku.Toplevel (runInBody)
 import Effect (Effect)
-import FRP.Event (Event, bus, keepLatest, mapAccum)
+import FRP.Event (Event, keepLatest, mapAccum)
 import Web.UIEvent.KeyboardEvent (code)
 
 data MainUIAction
@@ -6892,58 +6944,59 @@ data MainUIAction
 data TodoAction = Prioritize | Delete
 
 main :: Effect Unit
-main = runInBody
-  ( bussed \\pushAction actionEvent -> do
-      let
-        accumulateTextAndEmitOnSubmit :: Event String
-        accumulateTextAndEmitOnSubmit = compact
-          ( mapAccum
-              ( \\a b -> case b of
-                  AddTodo -> a /\\ Just a
-                  ChangeText s -> s /\\ Nothing
-              )
-              ""
-              actionEvent
+main = runInBody Deku.do
+  pushAction /\\ actionEvent <- useState'
+  let
+    accumulateTextAndEmitOnSubmit :: Event String
+    accumulateTextAndEmitOnSubmit = compact
+      ( mapAccum
+          ( \\a b -> case b of
+              AddTodo -> a /\\ Just a
+              ChangeText s -> s /\\ Nothing
           )
+          ""
+          actionEvent
+      )
 
-        top :: Nut
-        top =
-          D.div_
-            [ D.input
-                ( oneOf
-                    [ textInput $ pure (pushAction <<< ChangeText)
-                    , keyUp $ pure \\evt -> do
-                        when (code evt == "Enter") $ do
-                          pushAction AddTodo
-                    ]
-                )
-                []
-            , D.button
-                (click $ pure $ pushAction AddTodo)
-                [ text_ "Add" ]
-            ]
+    top :: Nut
+    top =
       D.div_
-        [ top
-        , dyn
-            $ map
-                ( \\txt -> keepLatest $ bus \\p' e' ->
-                    ( pure $ insert_ $ D.div_
-                        [ text_ txt
-                        , D.button
-                            (click $ pure (p' sendToTop))
-                            [ text_ "Prioritize" ]
-                        , D.button
-                            (click $ pure (p' remove))
-                            [ text_ "Delete" ]
-                        ]
-                    ) <|> e'
-                )
-                accumulateTextAndEmitOnSubmit
+        [ D.input
+            ( oneOf
+                [ textInput $ pure (pushAction <<< ChangeText)
+                , keyUp $ pure \\evt -> do
+                    when (code evt == "Enter") $ do
+                      pushAction AddTodo
+                ]
+            )
+            []
+        , D.button
+            (click $ pure $ pushAction AddTodo)
+            [ text_ "Add" ]
         ]
-  )
+  D.div_
+    [ top
+    , dyn
+        $ map
+            ( \\txt -> Deku.do
+                p' /\\ e' <- keepLatest <<< busUncurried
+                ( pure $ insert_ $ D.div_
+                    [ text_ txt
+                    , D.button
+                        (click $ pure (p' sendToTop))
+                        [ text_ "Prioritize" ]
+                    , D.button
+                        (click $ pure (p' remove))
+                        [ text_ "Delete" ]
+                    ]
+                ) <|> e'
+            )
+            accumulateTextAndEmitOnSubmit
+    ]
+
 `;
-var events = 'module Main where\n\nimport Prelude\n\nimport Control.Alt ((<|>))\nimport Deku.Control (text, text_)\nimport Deku.Core (vbussed)\nimport Deku.DOM as D\nimport Deku.Listeners (click_, slider)\nimport Deku.Toplevel (runInBody)\nimport Effect (Effect)\nimport FRP.Event (Event, fold)\nimport FRP.Event.VBus (V)\nimport Type.Proxy (Proxy(..))\n\ntype UIEvents = V\n  ( buttonClicked :: Unit\n  , sliderMoved :: Number\n  )\n\nmain :: Effect Unit\nmain = runInBody\n  ( vbussed (Proxy :: _ UIEvents) \\push event -> do\n      let\n        countUp :: Event Int\n        countUp = fold\n          (\\a _ -> 1 + a)\n          (-1)\n          (pure unit <|> event.buttonClicked)\n      D.div_\n        [ D.button\n            (click_ (push.buttonClicked unit))\n            [ text_ "Click" ]\n        , D.div_\n            [ text\n                ( pure "Val: 0" <|>\n                    ( append "Val: " <<< show <$> countUp\n                    )\n                )\n            ]\n        , D.div_\n            [ D.input\n                (slider (pure push.sliderMoved))\n                []\n            , D.div_\n                [ text\n                    ( pure "Val: 50" <|>\n                        ( append "Val: " <<< show\n                            <$> event.sliderMoved\n                        )\n                    )\n                ]\n            ]\n        ]\n  )\n';
-var effects = 'module Main where\n\nimport Prelude\n\nimport Affjax.ResponseFormat as ResponseFormat\nimport Affjax.Web as AX\nimport Control.Alt ((<|>))\nimport Data.Argonaut.Core (stringifyWithIndent)\nimport Data.Either (Either(..))\nimport Data.Filterable (compact, separate)\nimport Data.HTTP.Method (Method(..))\nimport Data.Maybe (Maybe(..))\nimport Data.Profunctor (lcmap)\nimport Data.Tuple.Nested ((/\\))\nimport Deku.Attribute (Cb, cb, (:=))\nimport Deku.Control (text)\nimport Deku.Core (bus, envy)\nimport Deku.DOM as D\nimport Deku.Toplevel (runInBody)\nimport Effect (Effect)\nimport Effect.Aff (launchAff_)\nimport Effect.Class (liftEffect)\nimport FRP.Event (Event, mapAccum)\n\ndata UIAction = Initial | Loading | Result String\n\nclickCb :: (UIAction -> Effect Unit) -> Cb\nclickCb push = cb\n  ( const do\n      push Loading\n      launchAff_ $ do\n        result <- AX.request\n          ( AX.defaultRequest\n              { url = "https://randomuser.me/api/"\n              , method = Left GET\n              , responseFormat = ResponseFormat.json\n              }\n          )\n        case result of\n          Left err -> liftEffect $ push\n            $ Result\n                ( "GET /api response failed to decode: " <>\n                    AX.printError err\n                )\n          Right response -> liftEffect $ push $ Result $\n            stringifyWithIndent 2 response.body\n  )\n\nclickText = "Click to get some random user data." :: String\n\nmain :: Effect Unit\nmain = runInBody\n  (envy $ bus \\push -> lcmap (pure Initial <|> _)\n      \\event -> do\n        let\n          split :: { left :: Event Unit, right :: Event String }\n          split = separate $ compact $\n            map\n              ( case _ of\n                  Loading -> Just $ Left unit\n                  Result s -> Just $ Right s\n                  _ -> Nothing\n              )\n              event\n          { left: loading, right: result } = split\n        D.div_\n          [ D.div_\n              [ D.button (pure (D.OnClick := clickCb push))\n                  [ text\n                      ( pure clickText\n                          <|> (loading $> "Loading...")\n                          <|> (result $> clickText)\n                      )\n                  ]\n              ]\n          , D.div\n              ( (pure (D.Style := "display: none;")) <|>\n                  ( compact\n                      ( mapAccum\n                          ( \\b _ -> (b && false) /\\\n                              if b then Just unit else Nothing\n                          )\n                          true\n                          result\n                      ) $> (D.Style := "display: block;")\n                  )\n              )\n              [ D.pre_ [ D.code_ [ text (pure "" <|> result) ] ] ]\n          ]\n  )\n';
+var events = 'module Main where\n\nimport Prelude\n\nimport Control.Alt ((<|>))\nimport Data.Tuple.Nested ((/\\))\nimport Deku.Control (text, text_)\nimport Deku.DOM as D\nimport Deku.Do (useState)\nimport Deku.Do as Deku\nimport Deku.Listeners (click_, slider)\nimport Deku.Toplevel (runInBody)\nimport Effect (Effect)\nimport FRP.Event (Event, fold)\n\nmain :: Effect Unit\nmain = runInBody Deku.do\n  setButtonClicked /\\ buttonClicked <- useState unit\n  setSliderMoved /\\ sliderMoved <- useState 50.0\n  let\n    countUp :: Event Int\n    countUp = fold (\\a _ -> 1 + a) (-1) buttonClicked\n  D.div_\n    [ D.button\n        (click_ (setButtonClicked unit))\n        [ text_ "Click" ]\n    , D.div_\n        [ text\n            ( pure "Val: 0" <|>\n                ( append "Val: " <<< show <$> countUp\n                )\n            )\n        ]\n    , D.div_\n        [ D.input\n            (slider (pure setSliderMoved))\n            []\n        , D.div_\n            [ text\n                ( append "Val: " <<< show\n                    <$> sliderMoved\n                )\n\n            ]\n        ]\n    ]\n';
+var effects = 'module Main where\n\nimport Prelude\n\nimport Affjax.ResponseFormat as ResponseFormat\nimport Affjax.Web as AX\nimport Control.Alt ((<|>))\nimport Data.Argonaut.Core (stringifyWithIndent)\nimport Data.Either (Either(..))\nimport Data.Filterable (compact, separate)\nimport Data.HTTP.Method (Method(..))\nimport Data.Maybe (Maybe(..))\nimport Data.Tuple.Nested ((/\\))\nimport Deku.Attribute (Cb, cb, (:=))\nimport Deku.Control (text)\nimport Deku.DOM as D\nimport Deku.Do (useState)\nimport Deku.Do as Deku\nimport Deku.Listeners (click_)\nimport Deku.Toplevel (runInBody)\nimport Effect (Effect)\nimport Effect.Aff (launchAff_)\nimport Effect.Class (liftEffect)\nimport FRP.Event (Event, mapAccum)\n\ndata UIAction = Initial | Loading | Result String\n\nclickCb :: (UIAction -> Effect Unit) -> Cb\nclickCb push = cb\n  ( const do\n      push Loading\n      launchAff_ $ do\n        result <- AX.request\n          ( AX.defaultRequest\n              { url = "https://randomuser.me/api/"\n              , method = Left GET\n              , responseFormat = ResponseFormat.json\n              }\n          )\n        case result of\n          Left err -> liftEffect $ push\n            $ Result\n                ( "GET /api response failed to decode: " <>\n                    AX.printError err\n                )\n          Right response -> liftEffect $ push $ Result $\n            stringifyWithIndent 2 response.body\n  )\n\nclickText = "Click to get some random user data." :: String\n\nmain :: Effect Unit\nmain = runInBody Deku.do\n  setUIAction /\\ uiAction <- useState Initial\n  let\n    split :: { left :: Event Unit, right :: Event String }\n    split = separate $ compact $\n      map\n        ( case _ of\n            Loading -> Just $ Left unit\n            Result s -> Just $ Right s\n            _ -> Nothing\n        )\n        uiAction\n    { left: loading, right: result } = split\n  D.div_\n    [ D.div_\n        [ D.button (click_ (clickCb setUIAction))\n            [ text\n                ( pure clickText\n                    <|> (loading $> "Loading...")\n                    <|> (result $> clickText)\n                )\n            ]\n        ]\n    , D.div\n        ( (pure (D.Style := "display: none;")) <|>\n            ( compact\n                ( mapAccum\n                    ( \\b _ -> (b && false) /\\\n                        if b then Just unit else Nothing\n                    )\n                    true\n                    result\n                ) $> (D.Style := "display: block;")\n            )\n        )\n        [ D.pre_ [ D.code_ [ text (pure "" <|> result) ] ] ]\n    ]\n';
 var component = 'module Main where\n\nimport Prelude\n\nimport Deku.Attribute ((:=))\nimport Deku.Control (text_)\nimport Deku.Core (fixed)\nimport Deku.DOM as D\nimport Deku.Toplevel (runInBody)\nimport Effect (Effect)\n\nmain :: Effect Unit\nmain = runInBody\n  (fixed [ D.button_ [ text_ "I do nothing" ]\n    , D.ul_ $ map (D.li_ <<< pure <<< text_) [ "A", "B", "C" ]\n    , D.div_\n        [ D.a (pure $ D.Href := "https://example.com")\n            [ text_ "foo " ]\n        , D.i_ [ text_ " bar " ]\n        , D.span (pure $ D.Style := "font-weight: 800;")\n            [ text_ " baz" ]\n        ]\n    , D.div_\n        [ D.div_\n            [ D.div_ [ D.input (pure $ D.Xtype := "range") [] ]\n            ]\n        ]\n    ]\n  )';
 var app = `module Main where
 

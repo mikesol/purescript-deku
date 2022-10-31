@@ -6,14 +6,15 @@ import Prelude
 import Control.Alt ((<|>))
 import Data.Compactable (compact)
 import Data.Maybe (Maybe(..))
+import Data.Tuple.Nested ((/\\))
 import Deku.Attribute ((:=))
 import Deku.Control (text)
-import Deku.Core (envy)
 import Deku.DOM as D
+import Deku.Do (useState')
+import Deku.Do as Deku
 import Deku.Pursx (nut, (~~))
 import Deku.Toplevel (runInBody)
 import Effect (Effect)
-import FRP.Event (bus)
 import Type.Proxy (Proxy(..))
 
 myDom =
@@ -37,18 +38,18 @@ myDom =
 """
 
 main :: Effect Unit
-main = runInBody
-  (envy ( bus \\push event -> myDom ~~
-      { myli: pure (D.Style := "background-color:rgb(200,240,210);")
-      , somethingNew: nut
-          ( D.button (pure (D.OnClick := push (Just unit)))
-              [ text
-                  $ (compact event $> "Thanks for clicking me!") <|>
-                      pure "I was dynamically inserted"
-              ]
-          )
-      }
-  ))`,Ep=`module Main where
+main = runInBody Deku.do
+  push /\\ event <- useState'
+  myDom ~~
+    { myli: pure (D.Style := "background-color:rgb(200,240,210);")
+    , somethingNew: nut
+        ( D.button (pure (D.OnClick := push (Just unit)))
+            [ text
+                $ (compact event $> "Thanks for clicking me!") <|>
+                    pure "I was dynamically inserted"
+            ]
+        )
+    }`,Ep=`module Main where
 
 import Prelude
 
@@ -81,56 +82,56 @@ main = runInBody (psx myDom)`,$p=`module Main where
 
 import Prelude
 
-import Control.Alt ((<|>))
 import Data.FastVect.FastVect (index, (:))
 import Data.FastVect.FastVect as V
 import Data.Foldable (oneOfMap)
-import Data.Profunctor (lcmap)
+import Data.Tuple.Nested ((/\\))
 import Deku.Attribute ((:=))
 import Deku.Control (portal, switcher, text_)
-import Deku.Core (Domable, envy)
+import Deku.Core (Domable)
 import Deku.DOM as D
+import Deku.Do (useState)
+import Deku.Do as Deku
 import Deku.Toplevel (runInBody)
 import Effect (Effect)
-import FRP.Event (Event, bus, fold)
+import FRP.Event (Event, fold)
 import Type.Prelude (Proxy(..))
 
 main :: Effect Unit
-main = runInBody
-  (envy $ bus \\push -> lcmap (pure unit <|> _) \\event -> do
-      portal
-        ( map
-            ( \\i -> D.video
-                (oneOfMap pure [ D.Controls := "true", D.Width := "250" ])
-                [ D.source
-                    (oneOfMap pure [ D.Src := i, D.Xtype := "video/mp4" ])
-                    []
-                ]
-            )
-            ( "https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4"
-                : "https://www.w3schools.com/jsref/movie.mp4"
-                : V.empty
-            )
-        )
-        \\v _ -> do
-          let
-            p0 :: Domable _ _
-            p0 = index (Proxy :: _ 0) v
-
-            p1 :: Domable _ _
-            p1 = index (Proxy :: _ 1) v
-
-            ev :: Boolean -> Event Boolean
-            ev b = fold (\\a _ -> not a) b event
-
-            flips :: Boolean -> Domable _ _
-            flips = D.span_ <<< pure <<< switcher (if _ then p0 else p1) <<< ev
-          D.div_
-            [ D.button (pure $ D.OnClick := push unit)
-                [ text_ "Switch videos" ]
-            , D.div_ [ D.span_ [ flips true ], flips false ]
+main = runInBody Deku.do
+  push /\\ event <- useState unit
+  portal
+    ( map
+        ( \\i -> D.video
+            (oneOfMap pure [ D.Controls := "true", D.Width := "250" ])
+            [ D.source
+                (oneOfMap pure [ D.Src := i, D.Xtype := "video/mp4" ])
+                []
             ]
-  )
+        )
+        ( "https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4"
+            : "https://www.w3schools.com/jsref/movie.mp4"
+            : V.empty
+        )
+    )
+    \\v _ -> do
+      let
+        p0 :: Domable _ _
+        p0 = index (Proxy :: _ 0) v
+
+        p1 :: Domable _ _
+        p1 = index (Proxy :: _ 1) v
+
+        ev :: Boolean -> Event Boolean
+        ev b = fold (\\a _ -> not a) b event
+
+        flips :: Boolean -> Domable _ _
+        flips = D.span_ <<< pure <<< switcher (if _ then p0 else p1) <<< ev
+      D.div_
+        [ D.button (pure $ D.OnClick := push unit)
+            [ text_ "Switch videos" ]
+        , D.div_ [ D.span_ [ flips true ], flips false ]
+        ]
 `,Fp=`module Main where
 
 import Prelude
@@ -150,12 +151,14 @@ import Data.Foldable (oneOf)
 import Data.Maybe (Maybe(..))
 import Data.Tuple.Nested ((/\\))
 import Deku.Control (text_)
-import Deku.Core (Nut, dyn, bussed, insert_, remove, sendToTop)
+import Deku.Core (Nut, busUncurried, dyn, insert_, remove, sendToTop)
 import Deku.DOM as D
+import Deku.Do (useState')
+import Deku.Do as Deku
 import Deku.Listeners (click, keyUp, textInput)
 import Deku.Toplevel (runInBody)
 import Effect (Effect)
-import FRP.Event (Event, bus, keepLatest, mapAccum)
+import FRP.Event (Event, keepLatest, mapAccum)
 import Web.UIEvent.KeyboardEvent (code)
 
 data MainUIAction
@@ -165,110 +168,102 @@ data MainUIAction
 data TodoAction = Prioritize | Delete
 
 main :: Effect Unit
-main = runInBody
-  ( bussed \\pushAction actionEvent -> do
-      let
-        accumulateTextAndEmitOnSubmit :: Event String
-        accumulateTextAndEmitOnSubmit = compact
-          ( mapAccum
-              ( \\a b -> case b of
-                  AddTodo -> a /\\ Just a
-                  ChangeText s -> s /\\ Nothing
-              )
-              ""
-              actionEvent
+main = runInBody Deku.do
+  pushAction /\\ actionEvent <- useState'
+  let
+    accumulateTextAndEmitOnSubmit :: Event String
+    accumulateTextAndEmitOnSubmit = compact
+      ( mapAccum
+          ( \\a b -> case b of
+              AddTodo -> a /\\ Just a
+              ChangeText s -> s /\\ Nothing
           )
+          ""
+          actionEvent
+      )
 
-        top :: Nut
-        top =
-          D.div_
-            [ D.input
-                ( oneOf
-                    [ textInput $ pure (pushAction <<< ChangeText)
-                    , keyUp $ pure \\evt -> do
-                        when (code evt == "Enter") $ do
-                          pushAction AddTodo
-                    ]
-                )
-                []
-            , D.button
-                (click $ pure $ pushAction AddTodo)
-                [ text_ "Add" ]
-            ]
+    top :: Nut
+    top =
       D.div_
-        [ top
-        , dyn
-            $ map
-                ( \\txt -> keepLatest $ bus \\p' e' ->
-                    ( pure $ insert_ $ D.div_
-                        [ text_ txt
-                        , D.button
-                            (click $ pure (p' sendToTop))
-                            [ text_ "Prioritize" ]
-                        , D.button
-                            (click $ pure (p' remove))
-                            [ text_ "Delete" ]
-                        ]
-                    ) <|> e'
-                )
-                accumulateTextAndEmitOnSubmit
+        [ D.input
+            ( oneOf
+                [ textInput $ pure (pushAction <<< ChangeText)
+                , keyUp $ pure \\evt -> do
+                    when (code evt == "Enter") $ do
+                      pushAction AddTodo
+                ]
+            )
+            []
+        , D.button
+            (click $ pure $ pushAction AddTodo)
+            [ text_ "Add" ]
         ]
-  )
+  D.div_
+    [ top
+    , dyn
+        $ map
+            ( \\txt -> Deku.do
+                p' /\\ e' <- keepLatest <<< busUncurried
+                ( pure $ insert_ $ D.div_
+                    [ text_ txt
+                    , D.button
+                        (click $ pure (p' sendToTop))
+                        [ text_ "Prioritize" ]
+                    , D.button
+                        (click $ pure (p' remove))
+                        [ text_ "Delete" ]
+                    ]
+                ) <|> e'
+            )
+            accumulateTextAndEmitOnSubmit
+    ]
+
 `,Mp=`module Main where
 
 import Prelude
 
 import Control.Alt ((<|>))
+import Data.Tuple.Nested ((/\\))
 import Deku.Control (text, text_)
-import Deku.Core (vbussed)
 import Deku.DOM as D
+import Deku.Do (useState)
+import Deku.Do as Deku
 import Deku.Listeners (click_, slider)
 import Deku.Toplevel (runInBody)
 import Effect (Effect)
 import FRP.Event (Event, fold)
-import FRP.Event.VBus (V)
-import Type.Proxy (Proxy(..))
-
-type UIEvents = V
-  ( buttonClicked :: Unit
-  , sliderMoved :: Number
-  )
 
 main :: Effect Unit
-main = runInBody
-  ( vbussed (Proxy :: _ UIEvents) \\push event -> do
-      let
-        countUp :: Event Int
-        countUp = fold
-          (\\a _ -> 1 + a)
-          (-1)
-          (pure unit <|> event.buttonClicked)
-      D.div_
-        [ D.button
-            (click_ (push.buttonClicked unit))
-            [ text_ "Click" ]
+main = runInBody Deku.do
+  setButtonClicked /\\ buttonClicked <- useState unit
+  setSliderMoved /\\ sliderMoved <- useState 50.0
+  let
+    countUp :: Event Int
+    countUp = fold (\\a _ -> 1 + a) (-1) buttonClicked
+  D.div_
+    [ D.button
+        (click_ (setButtonClicked unit))
+        [ text_ "Click" ]
+    , D.div_
+        [ text
+            ( pure "Val: 0" <|>
+                ( append "Val: " <<< show <$> countUp
+                )
+            )
+        ]
+    , D.div_
+        [ D.input
+            (slider (pure setSliderMoved))
+            []
         , D.div_
             [ text
-                ( pure "Val: 0" <|>
-                    ( append "Val: " <<< show <$> countUp
-                    )
+                ( append "Val: " <<< show
+                    <$> sliderMoved
                 )
-            ]
-        , D.div_
-            [ D.input
-                (slider (pure push.sliderMoved))
-                []
-            , D.div_
-                [ text
-                    ( pure "Val: 50" <|>
-                        ( append "Val: " <<< show
-                            <$> event.sliderMoved
-                        )
-                    )
-                ]
+
             ]
         ]
-  )
+    ]
 `,wp=`module Main where
 
 import Prelude
@@ -281,12 +276,13 @@ import Data.Either (Either(..))
 import Data.Filterable (compact, separate)
 import Data.HTTP.Method (Method(..))
 import Data.Maybe (Maybe(..))
-import Data.Profunctor (lcmap)
 import Data.Tuple.Nested ((/\\))
 import Deku.Attribute (Cb, cb, (:=))
 import Deku.Control (text)
-import Deku.Core (bus, envy)
 import Deku.DOM as D
+import Deku.Do (useState)
+import Deku.Do as Deku
+import Deku.Listeners (click_)
 import Deku.Toplevel (runInBody)
 import Effect (Effect)
 import Effect.Aff (launchAff_)
@@ -320,45 +316,43 @@ clickCb push = cb
 clickText = "Click to get some random user data." :: String
 
 main :: Effect Unit
-main = runInBody
-  (envy $ bus \\push -> lcmap (pure Initial <|> _)
-      \\event -> do
-        let
-          split :: { left :: Event Unit, right :: Event String }
-          split = separate $ compact $
-            map
-              ( case _ of
-                  Loading -> Just $ Left unit
-                  Result s -> Just $ Right s
-                  _ -> Nothing
-              )
-              event
-          { left: loading, right: result } = split
-        D.div_
-          [ D.div_
-              [ D.button (pure (D.OnClick := clickCb push))
-                  [ text
-                      ( pure clickText
-                          <|> (loading $> "Loading...")
-                          <|> (result $> clickText)
-                      )
-                  ]
-              ]
-          , D.div
-              ( (pure (D.Style := "display: none;")) <|>
-                  ( compact
-                      ( mapAccum
-                          ( \\b _ -> (b && false) /\\
-                              if b then Just unit else Nothing
-                          )
-                          true
-                          result
-                      ) $> (D.Style := "display: block;")
-                  )
-              )
-              [ D.pre_ [ D.code_ [ text (pure "" <|> result) ] ] ]
-          ]
-  )
+main = runInBody Deku.do
+  setUIAction /\\ uiAction <- useState Initial
+  let
+    split :: { left :: Event Unit, right :: Event String }
+    split = separate $ compact $
+      map
+        ( case _ of
+            Loading -> Just $ Left unit
+            Result s -> Just $ Right s
+            _ -> Nothing
+        )
+        uiAction
+    { left: loading, right: result } = split
+  D.div_
+    [ D.div_
+        [ D.button (click_ (clickCb setUIAction))
+            [ text
+                ( pure clickText
+                    <|> (loading $> "Loading...")
+                    <|> (result $> clickText)
+                )
+            ]
+        ]
+    , D.div
+        ( (pure (D.Style := "display: none;")) <|>
+            ( compact
+                ( mapAccum
+                    ( \\b _ -> (b && false) /\\
+                        if b then Just unit else Nothing
+                    )
+                    true
+                    result
+                ) $> (D.Style := "display: block;")
+            )
+        )
+        [ D.pre_ [ D.code_ [ text (pure "" <|> result) ] ] ]
+    ]
 `,Ip=`module Main where
 
 import Prelude
