@@ -6548,7 +6548,7 @@ var pursxToElementConsAttr = function() {
                           });
                         }
                         ;
-                        throw new Error("Failed pattern match at Deku.Pursx (line 4196, column 38 - line 4206, column 24): " + [v3.value.constructor.name]);
+                        throw new Error("Failed pattern match at Deku.Pursx (line 4586, column 38 - line 4596, column 24): " + [v3.value.constructor.name]);
                       }))(get4($$Proxy.value)(r)))(v1.element(parent2)(v2));
                     };
                   }
@@ -6652,10 +6652,10 @@ var __internalDekuFlatten3 = function(a2) {
             };
           };
         },
-        ids: function($479) {
+        ids: function($505) {
           return function(v) {
             return v.ids;
-          }(unwrap5($479));
+          }(unwrap5($505));
         },
         disconnectElement: function(v) {
           return function(v1) {
