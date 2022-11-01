@@ -2273,6 +2273,396 @@ instance
     verb
     hasAttributed
     tag
+    "A"
+    tail
+    pursi
+    purso
+    trailing
+
+instance
+  ( Sym.Cons x y tail
+  , PXTagAttrName lock payload verb hasAttributed tag x y pursi purso trailing
+  ) =>
+  PXTagAttrName lock
+    payload
+    verb
+    hasAttributed
+    tag
+    "B"
+    tail
+    pursi
+    purso
+    trailing
+
+instance
+  ( Sym.Cons x y tail
+  , PXTagAttrName lock payload verb hasAttributed tag x y pursi purso trailing
+  ) =>
+  PXTagAttrName lock
+    payload
+    verb
+    hasAttributed
+    tag
+    "C"
+    tail
+    pursi
+    purso
+    trailing
+
+instance
+  ( Sym.Cons x y tail
+  , PXTagAttrName lock payload verb hasAttributed tag x y pursi purso trailing
+  ) =>
+  PXTagAttrName lock
+    payload
+    verb
+    hasAttributed
+    tag
+    "D"
+    tail
+    pursi
+    purso
+    trailing
+
+instance
+  ( Sym.Cons x y tail
+  , PXTagAttrName lock payload verb hasAttributed tag x y pursi purso trailing
+  ) =>
+  PXTagAttrName lock
+    payload
+    verb
+    hasAttributed
+    tag
+    "E"
+    tail
+    pursi
+    purso
+    trailing
+
+instance
+  ( Sym.Cons x y tail
+  , PXTagAttrName lock payload verb hasAttributed tag x y pursi purso trailing
+  ) =>
+  PXTagAttrName lock
+    payload
+    verb
+    hasAttributed
+    tag
+    "F"
+    tail
+    pursi
+    purso
+    trailing
+
+instance
+  ( Sym.Cons x y tail
+  , PXTagAttrName lock payload verb hasAttributed tag x y pursi purso trailing
+  ) =>
+  PXTagAttrName lock
+    payload
+    verb
+    hasAttributed
+    tag
+    "G"
+    tail
+    pursi
+    purso
+    trailing
+
+instance
+  ( Sym.Cons x y tail
+  , PXTagAttrName lock payload verb hasAttributed tag x y pursi purso trailing
+  ) =>
+  PXTagAttrName lock
+    payload
+    verb
+    hasAttributed
+    tag
+    "H"
+    tail
+    pursi
+    purso
+    trailing
+
+instance
+  ( Sym.Cons x y tail
+  , PXTagAttrName lock payload verb hasAttributed tag x y pursi purso trailing
+  ) =>
+  PXTagAttrName lock
+    payload
+    verb
+    hasAttributed
+    tag
+    "I"
+    tail
+    pursi
+    purso
+    trailing
+
+instance
+  ( Sym.Cons x y tail
+  , PXTagAttrName lock payload verb hasAttributed tag x y pursi purso trailing
+  ) =>
+  PXTagAttrName lock
+    payload
+    verb
+    hasAttributed
+    tag
+    "J"
+    tail
+    pursi
+    purso
+    trailing
+
+instance
+  ( Sym.Cons x y tail
+  , PXTagAttrName lock payload verb hasAttributed tag x y pursi purso trailing
+  ) =>
+  PXTagAttrName lock
+    payload
+    verb
+    hasAttributed
+    tag
+    "K"
+    tail
+    pursi
+    purso
+    trailing
+
+instance
+  ( Sym.Cons x y tail
+  , PXTagAttrName lock payload verb hasAttributed tag x y pursi purso trailing
+  ) =>
+  PXTagAttrName lock
+    payload
+    verb
+    hasAttributed
+    tag
+    "L"
+    tail
+    pursi
+    purso
+    trailing
+
+instance
+  ( Sym.Cons x y tail
+  , PXTagAttrName lock payload verb hasAttributed tag x y pursi purso trailing
+  ) =>
+  PXTagAttrName lock
+    payload
+    verb
+    hasAttributed
+    tag
+    "M"
+    tail
+    pursi
+    purso
+    trailing
+
+instance
+  ( Sym.Cons x y tail
+  , PXTagAttrName lock payload verb hasAttributed tag x y pursi purso trailing
+  ) =>
+  PXTagAttrName lock
+    payload
+    verb
+    hasAttributed
+    tag
+    "N"
+    tail
+    pursi
+    purso
+    trailing
+
+instance
+  ( Sym.Cons x y tail
+  , PXTagAttrName lock payload verb hasAttributed tag x y pursi purso trailing
+  ) =>
+  PXTagAttrName lock
+    payload
+    verb
+    hasAttributed
+    tag
+    "O"
+    tail
+    pursi
+    purso
+    trailing
+
+instance
+  ( Sym.Cons x y tail
+  , PXTagAttrName lock payload verb hasAttributed tag x y pursi purso trailing
+  ) =>
+  PXTagAttrName lock
+    payload
+    verb
+    hasAttributed
+    tag
+    "P"
+    tail
+    pursi
+    purso
+    trailing
+
+instance
+  ( Sym.Cons x y tail
+  , PXTagAttrName lock payload verb hasAttributed tag x y pursi purso trailing
+  ) =>
+  PXTagAttrName lock
+    payload
+    verb
+    hasAttributed
+    tag
+    "Q"
+    tail
+    pursi
+    purso
+    trailing
+
+instance
+  ( Sym.Cons x y tail
+  , PXTagAttrName lock payload verb hasAttributed tag x y pursi purso trailing
+  ) =>
+  PXTagAttrName lock
+    payload
+    verb
+    hasAttributed
+    tag
+    "R"
+    tail
+    pursi
+    purso
+    trailing
+
+instance
+  ( Sym.Cons x y tail
+  , PXTagAttrName lock payload verb hasAttributed tag x y pursi purso trailing
+  ) =>
+  PXTagAttrName lock
+    payload
+    verb
+    hasAttributed
+    tag
+    "S"
+    tail
+    pursi
+    purso
+    trailing
+
+instance
+  ( Sym.Cons x y tail
+  , PXTagAttrName lock payload verb hasAttributed tag x y pursi purso trailing
+  ) =>
+  PXTagAttrName lock
+    payload
+    verb
+    hasAttributed
+    tag
+    "T"
+    tail
+    pursi
+    purso
+    trailing
+
+instance
+  ( Sym.Cons x y tail
+  , PXTagAttrName lock payload verb hasAttributed tag x y pursi purso trailing
+  ) =>
+  PXTagAttrName lock
+    payload
+    verb
+    hasAttributed
+    tag
+    "U"
+    tail
+    pursi
+    purso
+    trailing
+
+instance
+  ( Sym.Cons x y tail
+  , PXTagAttrName lock payload verb hasAttributed tag x y pursi purso trailing
+  ) =>
+  PXTagAttrName lock
+    payload
+    verb
+    hasAttributed
+    tag
+    "V"
+    tail
+    pursi
+    purso
+    trailing
+
+instance
+  ( Sym.Cons x y tail
+  , PXTagAttrName lock payload verb hasAttributed tag x y pursi purso trailing
+  ) =>
+  PXTagAttrName lock
+    payload
+    verb
+    hasAttributed
+    tag
+    "W"
+    tail
+    pursi
+    purso
+    trailing
+
+instance
+  ( Sym.Cons x y tail
+  , PXTagAttrName lock payload verb hasAttributed tag x y pursi purso trailing
+  ) =>
+  PXTagAttrName lock
+    payload
+    verb
+    hasAttributed
+    tag
+    "X"
+    tail
+    pursi
+    purso
+    trailing
+
+instance
+  ( Sym.Cons x y tail
+  , PXTagAttrName lock payload verb hasAttributed tag x y pursi purso trailing
+  ) =>
+  PXTagAttrName lock
+    payload
+    verb
+    hasAttributed
+    tag
+    "Y"
+    tail
+    pursi
+    purso
+    trailing
+
+instance
+  ( Sym.Cons x y tail
+  , PXTagAttrName lock payload verb hasAttributed tag x y pursi purso trailing
+  ) =>
+  PXTagAttrName lock
+    payload
+    verb
+    hasAttributed
+    tag
+    "Z"
+    tail
+    pursi
+    purso
+    trailing
+
+instance
+  ( Sym.Cons x y tail
+  , PXTagAttrName lock payload verb hasAttributed tag x y pursi purso trailing
+  ) =>
+  PXTagAttrName lock
+    payload
+    verb
+    hasAttributed
+    tag
     "-"
     tail
     pursi

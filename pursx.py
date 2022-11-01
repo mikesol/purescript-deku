@@ -104,7 +104,7 @@ for x in string.ascii_letters:
 print_('else instance (Sym.Cons x y tail, DoVerbForAttr verb tag "" x y pursi pursx newTail, Sym.Cons xx yy newTail, PXTagPreAttrName lock payload verb True tag xx yy pursx purso trailing) => PXTagPreAttrName lock payload verb False tag verb tail pursi purso trailing')
 print_('--')
 print_('class PXTagAttrName (lock :: Type) (payload :: Type) (verb :: Symbol) (hasAttributed :: Boolean) (tag :: Symbol) (head :: Symbol) (tail :: Symbol) (pursi :: Row Type) (purso :: Row Type) (trailing :: Symbol) | lock payload verb hasAttributed tag head tail pursi -> purso trailing')
-for x in string.ascii_lowercase+'-'+string.digits:
+for x in string.ascii_lowercase+string.ascii_uppercase+'-'+string.digits:
   print_('instance (Sym.Cons x y tail, PXTagAttrName lock payload verb hasAttributed tag x y pursi purso trailing) => PXTagAttrName lock payload verb hasAttributed tag "%s" tail pursi purso trailing' % x)
 print_('instance (Sym.Cons x y tail, PXTagPreAttrValue lock payload verb hasAttributed tag x y pursi purso trailing) => PXTagAttrName lock payload verb hasAttributed tag "=" tail pursi purso trailing')
 for x in WHITESPACE:
