@@ -6493,9 +6493,6 @@ var Reflectable$dollarDict = {
 var unwrap5 = /* @__PURE__ */ unwrap();
 var eq4 = /* @__PURE__ */ eq(eqScope);
 var coerce15 = /* @__PURE__ */ coerce();
-var PursxElement = function(x) {
-  return x;
-};
 var pursxToElementNil = {
   pursxToElement: function(v) {
     return function(v1) {
@@ -6548,7 +6545,7 @@ var pursxToElementConsAttr = function() {
                           });
                         }
                         ;
-                        throw new Error("Failed pattern match at Deku.Pursx (line 4586, column 38 - line 4596, column 24): " + [v3.value.constructor.name]);
+                        throw new Error("Failed pattern match at Deku.Pursx (line 4578, column 38 - line 4588, column 24): " + [v3.value.constructor.name]);
                       }))(get4($$Proxy.value)(r)))(v1.element(parent2)(v2));
                     };
                   }
@@ -6561,7 +6558,6 @@ var pursxToElementConsAttr = function() {
     };
   };
 };
-var nut = PursxElement;
 var makePursx$prime = function(dictReflectable) {
   var reflectType2 = reflectType(dictReflectable);
   return function(dictReflectable1) {
@@ -6652,10 +6648,10 @@ var __internalDekuFlatten3 = function(a2) {
             };
           };
         },
-        ids: function($505) {
+        ids: function($502) {
           return function(v) {
             return v.ids;
-          }(unwrap5($505));
+          }(unwrap5($502));
         },
         disconnectElement: function(v) {
           return function(v1) {
@@ -6685,22 +6681,22 @@ var pursxToElementConsInsert = function() {
           pursxToElement: function(pxScope) {
             return function(v) {
               return function(r) {
-                var v1 = get4($$Proxy.value)(r);
-                var v2 = pursxToElement1(pxScope)($$Proxy.value)(r);
+                var pxe = get4($$Proxy.value)(r);
+                var v1 = pursxToElement1(pxScope)($$Proxy.value)(r);
                 return {
-                  cache: insert(reflectType2($$Proxy.value))(false)(v2.cache),
+                  cache: insert(reflectType2($$Proxy.value))(false)(v1.cache),
                   element: function(info2) {
                     return function(di) {
                       return alt3(__internalDekuFlatten3({
                         parent: new Just(reflectType2($$Proxy.value) + ("@!%" + pxScope)),
                         scope: info2.scope,
-                        raiseId: function(v3) {
+                        raiseId: function(v2) {
                           return pure15(unit);
                         },
                         pos: info2.pos,
                         ez: false,
                         dynFamily: Nothing.value
-                      })(di)(v1))(v2.element(info2)(di));
+                      })(di)(pxe))(v1.element(info2)(di));
                     };
                   }
                 };
@@ -6727,7 +6723,7 @@ import Deku.Control (text)
 import Deku.DOM as D
 import Deku.Do (useState')
 import Deku.Do as Deku
-import Deku.Pursx (nut, (~~))
+import Deku.Pursx ((~~))
 import Deku.Toplevel (runInBody)
 import Effect (Effect)
 import Type.Proxy (Proxy(..))
@@ -6757,7 +6753,7 @@ main = runInBody Deku.do
   push /\\ event <- useState'
   myDom ~~
     { myli: pure (D.Style := "background-color:rgb(200,240,210);")
-    , somethingNew: nut
+    , somethingNew:
         ( D.button (pure (D.OnClick := push (Just unit)))
             [ text
                 $ (compact event $> "Thanks for clicking me!") <|>
@@ -7013,10 +7009,10 @@ var px = /* @__PURE__ */ function() {
 }();
 var components = function(options2) {
   return makePursx2(px)({
-    code: nut(pre_([code_([text_(component)])])),
-    result: nut(div_([button_([text_("I do nothing")]), ul_(map15(function($34) {
+    code: pre_([code_([text_(component)])]),
+    result: div_([button_([text_("I do nothing")]), ul_(map15(function($34) {
       return li_(pure10(text_($34)));
-    })(["A", "B", "C"])), div_([a(pure16(attr2(Href.value)("https://example.com")))([text_("foo ")]), i_([text_(" bar ")]), span(pure16(attr1(Style.value)("font-weight: 800;")))([text_(" baz")])]), div_([div_([div_([input(pure16(attr22(Xtype.value)("range")))([])])])])])),
+    })(["A", "B", "C"])), div_([a(pure16(attr2(Href.value)("https://example.com")))([text_("foo ")]), i_([text_(" bar ")]), span(pure16(attr1(Style.value)("font-weight: 800;")))([text_(" baz")])]), div_([div_([div_([input(pure16(attr22(Xtype.value)("range")))([])])])])]),
     next: oneOfMap3(pure16)([attr3(OnClick.value)(cb(function(e) {
       return applySecond3(applySecond3(preventDefault(e))(options2.dpage(PURSX1.value)))(scrollToTop);
     })), attr2(Href.value)(options2.slug + "pursx1/")])
@@ -9299,8 +9295,8 @@ var clickCb = function(push2) {
 };
 var effects2 = function(options2) {
   return makePursx3(px2)({
-    code: nut(pre_([code_([text_(effects)])])),
-    result: nut(bussed(function(push2) {
+    code: pre_([code_([text_(effects)])]),
+    result: bussed(function(push2) {
       return function(event) {
         var loadingOrResult = filterMap2(function(v) {
           if (v instanceof Loading) {
@@ -9339,7 +9335,7 @@ var effects2 = function(options2) {
           };
         })(true)(result)))(attr12(Style.value)("display: block;"))))([pre_([code_([text(alt5(pure18(""))(result))])])])]);
       };
-    })),
+    }),
     next: oneOfMap4(pure18)([attr4(OnClick.value)(cb(function(e) {
       return applySecond4(applySecond4(preventDefault(e))(options2.dpage(PURSX2.value)))(scrollToTop);
     })), attr23(Href.value)(options2.slug + "pursx2/")])
@@ -9624,8 +9620,8 @@ var px3 = /* @__PURE__ */ function() {
 }();
 var events2 = function(options2) {
   return makePursx4(px3)({
-    code: nut(pre_([code_([text_(events)])])),
-    result: nut(vbussed2($$Proxy.value)(function(push2) {
+    code: pre_([code_([text_(events)])]),
+    result: vbussed2($$Proxy.value)(function(push2) {
       return function(event) {
         return div_([button(click_2(push2.buttonClicked(unit)))([text_("Click")]), div_([text(alt8(pure20("Val: 0"))(map23(function() {
           var $55 = append7("Val: ");
@@ -9643,7 +9639,7 @@ var events2 = function(options2) {
           };
         }())(event.sliderMoved)))])])]);
       };
-    })),
+    }),
     next: oneOfMap5(pure20)([attr6(OnClick.value)(cb(function(e) {
       return applySecond5(applySecond5(preventDefault(e))(options2.dpage(Effects.value)))(scrollToTop);
     })), attr14(Href.value)(options2.slug + "effects/")])
@@ -9787,8 +9783,8 @@ var px4 = /* @__PURE__ */ function() {
 }();
 var events22 = function(options2) {
   return makePursx5(px4)({
-    code: nut(pre_([code_([text_(events3)])])),
-    result: nut(bussed(function(push2) {
+    code: pre_([code_([text_(events3)])]),
+    result: bussed(function(push2) {
       return lcmap5(function(v) {
         return alt10(pure23(UIShown.value))(v);
       })(function(event) {
@@ -9824,7 +9820,7 @@ var events22 = function(options2) {
           };
         })("")(event))))]);
       });
-    })),
+    }),
     next: oneOfMap6(pure23)([attr42(OnClick.value)(cb(function(e) {
       return applySecond6(applySecond6(preventDefault(e))(options2.dpage(Portals.value)))(scrollToTop);
     })), attr62(Href.value)(options2.slug + "portals/")])
@@ -9893,8 +9889,8 @@ var px5 = /* @__PURE__ */ function() {
 }();
 var helloWorld2 = function(options2) {
   return makePursx6(px5)({
-    code: nut(pre_([code_([text_(helloWorld)])])),
-    result: nut(div_([text_("Hello world")])),
+    code: pre_([code_([text_(helloWorld)])]),
+    result: div_([text_("Hello world")]),
     next: oneOfMap7(pure24)([attr8(OnClick.value)(cb(function(e) {
       return applySecond7(applySecond7(preventDefault(e))(options2.dpage(SimpleComponent.value)))(scrollToTop);
     })), attr16(Href.value)(options2.slug + "component/")])
@@ -10034,8 +10030,8 @@ var px7 = /* @__PURE__ */ function() {
 }();
 var portals12 = function(options2) {
   return makePursx8(px7)({
-    code: nut(pre_([code_([text_(portals1)])])),
-    result: nut(dyn2(bus2(function(push2) {
+    code: pre_([code_([text_(portals1)])]),
+    result: dyn2(bus2(function(push2) {
       return lcmap6(alt11(pure26(unit)))(function(event) {
         return pure26(insert_(portal2(map25(function(i2) {
           return video(oneOfMap9(pure26)([attr10(Controls.value)("true"), attr18(Width.value)("250")]))([source(oneOfMap9(pure26)([attr25(Src.value)(i2), attr33(Xtype.value)("video/mp4")]))([])]);
@@ -10066,7 +10062,7 @@ var portals12 = function(options2) {
           };
         })));
       });
-    }))),
+    })),
     next: oneOfMap9(pure26)([attr43(OnClick.value)(cb(function(e) {
       return applySecond9(applySecond9(preventDefault(e))(options2.dpage(SSR.value)))(scrollToTop);
     })), attr53(Href.value)(options2.slug + "ssr/")])
@@ -10143,8 +10139,8 @@ var myDom = /* @__PURE__ */ function() {
 }();
 var pursx12 = function(options2) {
   return makePursx9(px8)({
-    code: nut(pre_([code_([text_(pursx1)])])),
-    result: nut(psx2(myDom)),
+    code: pre_([code_([text_(pursx1)])]),
+    result: psx2(myDom),
     next: oneOfMap10(pure27)([attr11(OnClick.value)(cb(function(e) {
       return applySecond10(applySecond10(preventDefault(e))(options2.dpage(Events.value)))(scrollToTop);
     })), attr19(Href.value)(options2.slug + "events1/")])
@@ -10249,15 +10245,15 @@ var myDom2 = /* @__PURE__ */ function() {
 }();
 var pursx22 = function(options2) {
   return makePursx$prime2($$Proxy.value)(px9)({
-    code: nut(pre_([code_([text_(pursx2)])])),
-    result: nut(dyn2(bus2(function(push2) {
+    code: pre_([code_([text_(pursx2)])]),
+    result: dyn2(bus2(function(push2) {
       return function(event) {
         return pure28(insert_(makePursx10(myDom2)({
           myli: pure28(attr20(Style.value)("background-color:rgb(200,240,210);")),
-          somethingNew: nut(button(pure28(attr110(OnClick.value)(push2(new Just(unit)))))([text(alt12(voidLeft4(compact3(event))("Thanks for clicking me!"))(pure28("I was dynamically inserted")))]))
+          somethingNew: button(pure28(attr110(OnClick.value)(push2(new Just(unit)))))([text(alt12(voidLeft4(compact3(event))("Thanks for clicking me!"))(pure28("I was dynamically inserted")))])
         })));
       };
-    }))),
+    })),
     next: oneOfMap11(pure28)([attr26(OnClick.value)(cb(function(e) {
       return applySecond11(applySecond11(preventDefault(e))(options2.dpage(Events2.value)))(scrollToTop);
     })), attr34(Href.value)(options2.slug + "events2/")])
@@ -12058,16 +12054,16 @@ var app2 = /* @__PURE__ */ function() {
 }();
 var ssrPage = function(v) {
   return makePursx11(px10)({
-    code2: nut(pre_([code_([text_(live)])])),
-    code1: nut(pre_([code_([text_(build2)])])),
-    code0: nut(pre_([code_([text_(app)])])),
-    result: nut(app2),
-    codegen: nut(pre_([code_([text(makePureEvent(function(k) {
+    code2: pre_([code_([text_(live)])]),
+    code1: pre_([code_([text_(build2)])]),
+    code0: pre_([code_([text_(app)])]),
+    result: app2,
+    codegen: pre_([code_([text(makePureEvent(function(k) {
       return applySecond12(bind9(runSSR({
         head: '<!DOCTYPE html><html><head><script src="bundle.js" defer><\/script></head>',
         tail: "</html>"
       })(app2))(k))(pure112(pure112(unit)));
-    }))])]))
+    }))])])
   });
 };
 
@@ -12083,61 +12079,61 @@ var attr111 = /* @__PURE__ */ attr(attrA_StyleString);
 var attr27 = /* @__PURE__ */ attr(attrA_HrefString);
 var attr35 = /* @__PURE__ */ attr(attrSpan_StyleString);
 var scene = function(options2) {
-  var go2 = function(v) {
-    if (v instanceof Intro) {
-      return intro;
-    }
-    ;
-    if (v instanceof HelloWorld) {
-      return helloWorld2;
-    }
-    ;
-    if (v instanceof SimpleComponent) {
-      return components;
-    }
-    ;
-    if (v instanceof PURSX1) {
-      return pursx12;
-    }
-    ;
-    if (v instanceof Events) {
-      return events2;
-    }
-    ;
-    if (v instanceof Effects) {
-      return effects2;
-    }
-    ;
-    if (v instanceof PURSX2) {
-      return pursx22;
-    }
-    ;
-    if (v instanceof Events2) {
-      return events22;
-    }
-    ;
-    if (v instanceof Portals) {
-      return portals12;
-    }
-    ;
-    if (v instanceof SSR) {
-      return ssrPage;
-    }
-    ;
-    throw new Error("Failed pattern match at Deku.Example.Docs.Scene (line 95, column 3 - line 95, column 25): " + [v.constructor.name]);
-  };
-  var page = function(dpage) {
-    return function(i2) {
-      return go2(i2)({
-        dpage,
-        slug: options2.slug
-      });
-    };
-  };
   return bussed(function(push2) {
     return lcmap7(function(v) {
       return alt16(pure32(options2.startsWith))(v);
     })(function(event) {
+      var go2 = function(v) {
+        if (v instanceof Intro) {
+          return intro;
+        }
+        ;
+        if (v instanceof HelloWorld) {
+          return helloWorld2;
+        }
+        ;
+        if (v instanceof SimpleComponent) {
+          return components;
+        }
+        ;
+        if (v instanceof PURSX1) {
+          return pursx12;
+        }
+        ;
+        if (v instanceof Events) {
+          return events2;
+        }
+        ;
+        if (v instanceof Effects) {
+          return effects2;
+        }
+        ;
+        if (v instanceof PURSX2) {
+          return pursx22;
+        }
+        ;
+        if (v instanceof Events2) {
+          return events22;
+        }
+        ;
+        if (v instanceof Portals) {
+          return portals12;
+        }
+        ;
+        if (v instanceof SSR) {
+          return ssrPage;
+        }
+        ;
+        throw new Error("Failed pattern match at Deku.Example.Docs.Scene (line 32, column 9 - line 32, column 36): " + [v.constructor.name]);
+      };
+      var page = function(dpage) {
+        return function(i2) {
+          return go2(i2)({
+            dpage,
+            slug: options2.slug
+          });
+        };
+      };
       return div_([div_(map30(function(v) {
         return span_([a(oneOfMap12(pure32)([attr21(OnClick.value)(cb(function(e) {
           return applySecond13(preventDefault(e))(push2(v.value0));
