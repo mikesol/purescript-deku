@@ -42,7 +42,6 @@ runInBody' eee = do
   b' <- window >>= document >>= body
   maybe mempty (\elt -> runInElement' elt eee) (toElement <$> b')
 
-
 runInBody
   :: (forall lock. Domable lock (FFIDOMSnapshot -> Effect Unit))
   -> Effect Unit
@@ -142,4 +141,7 @@ __internalDekuFlatten a b c = Bolson.flatten
       \(DOMInterpret { disconnectElement }) { id, scope, parent } ->
         disconnectElement { id, scope, parent, scopeEq: eq }
   , toElt: \(Node e) -> Element e
-  } a b ((coerce :: Domable lock payload -> Domable' lock payload) c)
+  }
+  a
+  b
+  ((coerce :: Domable lock payload -> Domable' lock payload) c)

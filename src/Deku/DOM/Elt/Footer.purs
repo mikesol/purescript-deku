@@ -9,8 +9,6 @@ import Deku.Core (Domable(..), Domable', unsafeSetPos)
 import FRP.Event (Event)
 import Safe.Coerce (coerce)
 
-
-
 data Footer_
 
 footer
@@ -18,7 +16,14 @@ footer
    . Event (Attribute Footer_)
   -> Array (Domable lock payload)
   -> Domable lock payload
-footer attributes kids = Domable (Element' (elementify "footer" attributes ((coerce :: Domable' lock payload -> Domable lock payload)  (fixed (coerce (mapWithIndex unsafeSetPos kids))))))
+footer attributes kids = Domable
+  ( Element'
+      ( elementify "footer" attributes
+          ( (coerce :: Domable' lock payload -> Domable lock payload)
+              (fixed (coerce (mapWithIndex unsafeSetPos kids)))
+          )
+      )
+  )
 
 footer_
   :: forall lock payload

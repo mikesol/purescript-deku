@@ -13,7 +13,7 @@ import Deku.Core (Nut, dyn, bus, insert_)
 import Deku.DOM as D
 import Deku.Example.Docs.Types (Page(..), PageOptions)
 import Deku.Example.Docs.Util (scrollToTop)
-import Deku.Pursx (nut, (~~))
+import Deku.Pursx ((~~))
 import Examples as Examples
 import FRP.Event (fold)
 import Type.Proxy (Proxy(..))
@@ -59,7 +59,7 @@ px =
 
 portals1 :: forall r. { | PageOptions r } -> Nut
 portals1 options = px ~~
-  { code: nut
+  { code:
       ( D.pre_
           [ D.code_
               [ text_
@@ -67,8 +67,7 @@ portals1 options = px ~~
               ]
           ]
       )
-  , result: nut
-
+  , result:
       ( dyn $ bus \push -> lcmap (alt (pure unit))
           \event -> do
             pure $ insert_ $ portal
@@ -90,7 +89,8 @@ portals1 options = px ~~
                   p0 = index (Proxy :: _ 0) v
                   p1 = index (Proxy :: _ 1) v
                   ev i = fold (\a _ -> not a) i event
-                  flips = D.span_ <<< pure <<< switcher (if _ then p0 else p1) <<< ev
+                  flips = D.span_ <<< pure <<< switcher (if _ then p0 else p1)
+                    <<< ev
                 D.div_
                   [ D.button (pure $ D.OnClick := cb (const $ push unit))
                       [ text_ "Switch videos" ]

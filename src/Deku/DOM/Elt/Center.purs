@@ -9,8 +9,6 @@ import Deku.Core (Domable(..), Domable', unsafeSetPos)
 import FRP.Event (Event)
 import Safe.Coerce (coerce)
 
-
-
 data Center_
 
 center
@@ -18,7 +16,14 @@ center
    . Event (Attribute Center_)
   -> Array (Domable lock payload)
   -> Domable lock payload
-center attributes kids = Domable (Element' (elementify "center" attributes ((coerce :: Domable' lock payload -> Domable lock payload)  (fixed (coerce (mapWithIndex unsafeSetPos kids))))))
+center attributes kids = Domable
+  ( Element'
+      ( elementify "center" attributes
+          ( (coerce :: Domable' lock payload -> Domable lock payload)
+              (fixed (coerce (mapWithIndex unsafeSetPos kids)))
+          )
+      )
+  )
 
 center_
   :: forall lock payload

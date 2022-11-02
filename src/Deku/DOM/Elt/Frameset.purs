@@ -9,8 +9,6 @@ import Deku.Core (Domable(..), Domable', unsafeSetPos)
 import FRP.Event (Event)
 import Safe.Coerce (coerce)
 
-
-
 data Frameset_
 
 frameset
@@ -18,7 +16,14 @@ frameset
    . Event (Attribute Frameset_)
   -> Array (Domable lock payload)
   -> Domable lock payload
-frameset attributes kids = Domable (Element' (elementify "frameset" attributes ((coerce :: Domable' lock payload -> Domable lock payload)  (fixed (coerce (mapWithIndex unsafeSetPos kids))))))
+frameset attributes kids = Domable
+  ( Element'
+      ( elementify "frameset" attributes
+          ( (coerce :: Domable' lock payload -> Domable lock payload)
+              (fixed (coerce (mapWithIndex unsafeSetPos kids)))
+          )
+      )
+  )
 
 frameset_
   :: forall lock payload

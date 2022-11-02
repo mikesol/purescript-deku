@@ -9,7 +9,7 @@ import Deku.Core (Nut)
 import Deku.DOM as D
 import Deku.Example.Docs.Types (Page(..), PageOptions)
 import Deku.Example.Docs.Util (scrollToTop)
-import Deku.Pursx (nut, (~~))
+import Deku.Pursx ((~~))
 import Examples as Examples
 import Type.Proxy (Proxy(..))
 import Web.Event.Event (preventDefault)
@@ -45,7 +45,7 @@ helloWorld
    . { | PageOptions r }
   -> Nut
 helloWorld options = px ~~
-  { code: nut
+  { code:
       ( D.pre_
           [ D.code_
               [ text_
@@ -53,7 +53,7 @@ helloWorld options = px ~~
               ]
           ]
       )
-  , result: nut (D.div_ [ text_ "Hello world" ])
+  , result: (D.div_ [ text_ "Hello world" ])
   , next: oneOfMap pure
       [ D.OnClick :=
           ( cb

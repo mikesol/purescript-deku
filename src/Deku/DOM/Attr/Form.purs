@@ -1,16 +1,19 @@
 module Deku.DOM.Attr.Form where
-import Deku.DOM.Elt.Button(Button_)
-import Deku.DOM.Elt.Fieldset(Fieldset_)
-import Deku.DOM.Elt.Input(Input_)
-import Deku.DOM.Elt.Label(Label_)
-import Deku.DOM.Elt.Meter(Meter_)
-import Deku.DOM.Elt.Object(Object_)
-import Deku.DOM.Elt.Output(Output_)
-import Deku.DOM.Elt.Progress(Progress_)
-import Deku.DOM.Elt.Select(Select_)
-import Deku.DOM.Elt.Textarea(Textarea_)
+
+import Deku.DOM.Elt.Button (Button_)
+import Deku.DOM.Elt.Fieldset (Fieldset_)
+import Deku.DOM.Elt.Input (Input_)
+import Deku.DOM.Elt.Label (Label_)
+import Deku.DOM.Elt.Meter (Meter_)
+import Deku.DOM.Elt.Object (Object_)
+import Deku.DOM.Elt.Output (Output_)
+import Deku.DOM.Elt.Progress (Progress_)
+import Deku.DOM.Elt.Select (Select_)
+import Deku.DOM.Elt.Textarea (Textarea_)
 import Deku.Attribute (class Attr, prop', unsafeAttribute)
+
 data Form = Form
+
 instance Attr Button_ Form String where
   attr Form value = unsafeAttribute { key: "form", value: prop' value }
 

@@ -18,7 +18,6 @@ import Deku.Toplevel (runInBody)
 import Effect (Effect)
 import FRP.Event (Event, filterMap, keepLatest, mapAccum)
 
-
 counter :: forall a. Event a → Event (Tuple a Int)
 counter event = mapAccum f 0 event
   where

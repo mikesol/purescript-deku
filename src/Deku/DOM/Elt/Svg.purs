@@ -9,8 +9,6 @@ import Deku.Core (Domable(..), Domable', unsafeSetPos)
 import FRP.Event (Event)
 import Safe.Coerce (coerce)
 
-
-
 data Svg_
 
 svg
@@ -18,7 +16,14 @@ svg
    . Event (Attribute Svg_)
   -> Array (Domable lock payload)
   -> Domable lock payload
-svg attributes kids = Domable (Element' (elementify "svg" attributes ((coerce :: Domable' lock payload -> Domable lock payload)  (fixed (coerce (mapWithIndex unsafeSetPos kids))))))
+svg attributes kids = Domable
+  ( Element'
+      ( elementify "svg" attributes
+          ( (coerce :: Domable' lock payload -> Domable lock payload)
+              (fixed (coerce (mapWithIndex unsafeSetPos kids)))
+          )
+      )
+  )
 
 svg_
   :: forall lock payload

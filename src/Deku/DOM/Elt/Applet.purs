@@ -9,8 +9,6 @@ import Deku.Core (Domable(..), Domable', unsafeSetPos)
 import FRP.Event (Event)
 import Safe.Coerce (coerce)
 
-
-
 data Applet_
 
 applet
@@ -18,7 +16,14 @@ applet
    . Event (Attribute Applet_)
   -> Array (Domable lock payload)
   -> Domable lock payload
-applet attributes kids = Domable (Element' (elementify "applet" attributes ((coerce :: Domable' lock payload -> Domable lock payload)  (fixed (coerce (mapWithIndex unsafeSetPos kids))))))
+applet attributes kids = Domable
+  ( Element'
+      ( elementify "applet" attributes
+          ( (coerce :: Domable' lock payload -> Domable lock payload)
+              (fixed (coerce (mapWithIndex unsafeSetPos kids)))
+          )
+      )
+  )
 
 applet_
   :: forall lock payload

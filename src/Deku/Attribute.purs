@@ -72,18 +72,31 @@ infixr 5 attr as :=
 xdata :: forall e. String -> String -> Attribute e
 xdata k v = unsafeAttribute { key: "data-" <> k, value: Prop' v }
 
-pureAttr :: forall m a b e. Applicative m => Attr e a b => a -> b -> FRP.Event (Attribute e)
+pureAttr
+  :: forall m a b e
+   . Applicative m
+  => Attr e a b
+  => a
+  -> b
+  -> FRP.Event (Attribute e)
 pureAttr a b = pure (a := b)
 
 infixr 5 pureAttr as !:=
 
-maybeAttr :: forall m a b e. Applicative m => Attr e a b => a -> Maybe b -> FRP.Event (Attribute e)
+maybeAttr
+  :: forall m a b e
+   . Applicative m
+  => Attr e a b
+  => a
+  -> Maybe b
+  -> FRP.Event (Attribute e)
 maybeAttr a (Just b) = pure (a := b)
 maybeAttr _ Nothing = empty
 
 infix 5 maybeAttr as ?:=
 
-mapAttr :: forall m a b e. Functor m => Attr e a b => a -> m b -> m (Attribute e)
+mapAttr
+  :: forall m a b e. Functor m => Attr e a b => a -> m b -> m (Attribute e)
 mapAttr a b = (a := _) <$> b
 
 infix 5 mapAttr as <:=>

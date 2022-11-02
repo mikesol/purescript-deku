@@ -4,10 +4,10 @@ import Prelude
 
 import Control.Alt ((<|>))
 import Deku.Control (text, text_)
-import Deku.Core (Nut, vbussed)
+import Deku.Core (Domable, vbussed)
 import Deku.DOM as D
 import Deku.Listeners (click_, slider)
-import Deku.Pursx (nut, (~~))
+import Deku.Pursx ((~~))
 import Deku.Toplevel (Template(..), runSSR)
 import Examples as Examples
 import FRP.Event (fold, makePureEvent)
@@ -76,7 +76,7 @@ px =
   <p>Thanks for checking out Deku! I had a blast writing it, and I hope you enjoy using it for your projects!</p>
 </div>"""
 
-app :: Nut
+app :: forall lock payload. Domable lock payload
 app = vbussed (Proxy :: _ UIEvents) \push event -> do
   D.div_
     [ D.p_
@@ -115,45 +115,44 @@ and all of the dynamic bits are hydrated on page load."""
         ]
     ]
 
-ssrPage :: forall i. i -> Nut
+ssrPage :: forall i lock payload. i -> Domable lock payload
 ssrPage _ = px ~~
-  { code2: nut
+  { code2:
       ( D.pre_
           [ D.code_
               [ text_ Examples.live
               ]
           ]
       )
-  , code1: nut
+  , code1:
       ( D.pre_
           [ D.code_
               [ text_ Examples.build
               ]
           ]
       )
-  , code0: nut
+  , code0:
       ( D.pre_
           [ D.code_
               [ text_ Examples.app
               ]
           ]
       )
-  , result: nut app
-  , codegen: nut
+  , result: app :: Domable lock payload
+  , codegen:
       ( D.pre_
           [ D.code_
               [ text
                   ( makePureEvent \k ->
-                      ( 
-                          ( runSSR
-                              ( Template
-                                  { head:
-                                      "<!DOCTYPE html><html><head><script src=\"bundle.js\" defer></script></head>"
-                                  , tail: "</html>"
-                                  }
-                              )
-                              app
-                          ) >>= k
+                      ( ( runSSR
+                            ( Template
+                                { head:
+                                    "<!DOCTYPE html><html><head><script src=\"bundle.js\" defer></script></head>"
+                                , tail: "</html>"
+                                }
+                            )
+                            app
+                        ) >>= k
                       ) *> (pure (pure unit))
                   )
               ]

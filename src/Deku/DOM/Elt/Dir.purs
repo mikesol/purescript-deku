@@ -9,8 +9,6 @@ import Deku.Core (Domable(..), Domable', unsafeSetPos)
 import FRP.Event (Event)
 import Safe.Coerce (coerce)
 
-
-
 data Dir_
 
 dir
@@ -18,7 +16,14 @@ dir
    . Event (Attribute Dir_)
   -> Array (Domable lock payload)
   -> Domable lock payload
-dir attributes kids = Domable (Element' (elementify "dir" attributes ((coerce :: Domable' lock payload -> Domable lock payload)  (fixed (coerce (mapWithIndex unsafeSetPos kids))))))
+dir attributes kids = Domable
+  ( Element'
+      ( elementify "dir" attributes
+          ( (coerce :: Domable' lock payload -> Domable lock payload)
+              (fixed (coerce (mapWithIndex unsafeSetPos kids)))
+          )
+      )
+  )
 
 dir_
   :: forall lock payload

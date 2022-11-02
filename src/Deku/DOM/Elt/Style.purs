@@ -9,8 +9,6 @@ import Deku.Core (Domable(..), Domable', unsafeSetPos)
 import FRP.Event (Event)
 import Safe.Coerce (coerce)
 
-
-
 data Style_
 
 style
@@ -18,7 +16,14 @@ style
    . Event (Attribute Style_)
   -> Array (Domable lock payload)
   -> Domable lock payload
-style attributes kids = Domable (Element' (elementify "style" attributes ((coerce :: Domable' lock payload -> Domable lock payload)  (fixed (coerce (mapWithIndex unsafeSetPos kids))))))
+style attributes kids = Domable
+  ( Element'
+      ( elementify "style" attributes
+          ( (coerce :: Domable' lock payload -> Domable lock payload)
+              (fixed (coerce (mapWithIndex unsafeSetPos kids)))
+          )
+      )
+  )
 
 style_
   :: forall lock payload

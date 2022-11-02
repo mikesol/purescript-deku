@@ -9,8 +9,6 @@ import Deku.Core (Domable(..), Domable', unsafeSetPos)
 import FRP.Event (Event)
 import Safe.Coerce (coerce)
 
-
-
 data Noframes_
 
 noframes
@@ -18,7 +16,14 @@ noframes
    . Event (Attribute Noframes_)
   -> Array (Domable lock payload)
   -> Domable lock payload
-noframes attributes kids = Domable (Element' (elementify "noframes" attributes ((coerce :: Domable' lock payload -> Domable lock payload)  (fixed (coerce (mapWithIndex unsafeSetPos kids))))))
+noframes attributes kids = Domable
+  ( Element'
+      ( elementify "noframes" attributes
+          ( (coerce :: Domable' lock payload -> Domable lock payload)
+              (fixed (coerce (mapWithIndex unsafeSetPos kids)))
+          )
+      )
+  )
 
 noframes_
   :: forall lock payload

@@ -47,9 +47,11 @@ container = Hooks.component \_ _ -> Hooks.do
 
         SetCompleted id complete -> do
           if complete then
-            Hooks.modify_ stateId _ { completed = Set.insert id state.completed }
+            Hooks.modify_ stateId _
+              { completed = Set.insert id state.completed }
           else
-            Hooks.modify_ stateId _ { completed = Set.delete id state.completed }
+            Hooks.modify_ stateId _
+              { completed = Set.delete id state.completed }
           Hooks.modify_ undosId (cons (UndoCompleted id (not complete)))
 
   Hooks.useLifecycleEffect do
@@ -102,13 +104,16 @@ container = Hooks.component \_ _ -> Hooks.do
       ]
 
 todo :: forall q m. MonadAff m => H.Component q TodoInput TodoOutput m
-todo = Hooks.memoComponent (eq `on` _.todo.id && eq `on` _.completed && eq `on` _.todo.description)
+todo = Hooks.memoComponent
+  (eq `on` _.todo.id && eq `on` _.completed && eq `on` _.todo.description)
   \{ outputToken } input -> Hooks.do
     dirty /\ dirtyId <- Hooks.useState false
     description' /\ descriptionId <- Hooks.useState Nothing
 
     let
-      description = maybe input.todo.description (if dirty then _ else input.todo.description) description'
+      description = maybe input.todo.description
+        (if dirty then _ else input.todo.description)
+        description'
       handleCheckbox (Check bool) = do
         Hooks.raise outputToken $ SetCompleted input.todo.id bool
 

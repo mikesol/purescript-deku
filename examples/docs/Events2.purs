@@ -17,7 +17,7 @@ import Deku.Do as Deku
 import Deku.Example.Docs.Types (Page(..), PageOptions)
 import Deku.Example.Docs.Util (scrollToTop)
 import Deku.Listeners (click)
-import Deku.Pursx (nut, (~~))
+import Deku.Pursx ((~~))
 import Examples as Examples
 import FRP.Event (mapAccum)
 import Type.Proxy (Proxy(..))
@@ -74,14 +74,14 @@ events2
    . { | PageOptions r }
   -> Nut
 events2 options = px ~~
-  { code: nut
+  { code:
       ( D.pre_
           [ D.code_
               [ text_ Examples.events3
               ]
           ]
       )
-  , result: nut
+  , result:
       ( bussed \push -> lcmap (pure UIShown <|> _)
           \event -> do
             D.div_

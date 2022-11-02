@@ -51,7 +51,7 @@ component =
       { emitter, listener } <- H.liftEffect $ HS.create
       void $ H.subscribe emitter
       unsub <- H.liftEffect do
-          (runInElement' (toElement el) (scene (HS.notify listener MarkEnd)))
+        (runInElement' (toElement el) (scene (HS.notify listener MarkEnd)))
       H.modify_ _ { unsub = unsub }
       pure unit
 

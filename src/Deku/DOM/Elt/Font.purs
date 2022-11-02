@@ -9,8 +9,6 @@ import Deku.Core (Domable(..), Domable', unsafeSetPos)
 import FRP.Event (Event)
 import Safe.Coerce (coerce)
 
-
-
 data Font_
 
 font
@@ -18,7 +16,14 @@ font
    . Event (Attribute Font_)
   -> Array (Domable lock payload)
   -> Domable lock payload
-font attributes kids = Domable (Element' (elementify "font" attributes ((coerce :: Domable' lock payload -> Domable lock payload)  (fixed (coerce (mapWithIndex unsafeSetPos kids))))))
+font attributes kids = Domable
+  ( Element'
+      ( elementify "font" attributes
+          ( (coerce :: Domable' lock payload -> Domable lock payload)
+              (fixed (coerce (mapWithIndex unsafeSetPos kids)))
+          )
+      )
+  )
 
 font_
   :: forall lock payload

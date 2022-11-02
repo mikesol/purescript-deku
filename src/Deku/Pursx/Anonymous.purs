@@ -42,7 +42,6 @@ class
   PursxValAnonymous accumulator next res where
   pursxValAnonymous :: accumulator -> next -> res
 
-
 instance endOfTheLineV ::
   ( Reflectable html String
   , PXStart lock payload "~" " " html r
@@ -70,7 +69,11 @@ else instance readingVal ::
   pursxValAnonymous (ll /\ _ /\ b) c = pursxStringAnonymous
     ((Proxy :: _ lll) /\ (Proxy :: _ newHtml) /\ (insert ll c b))
 
-px :: forall next res. PursxStringAnonymous (Proxy "a" /\ Proxy "" /\ {}) next res => next -> res
+px
+  :: forall next res
+   . PursxStringAnonymous (Proxy "a" /\ Proxy "" /\ {}) next res
+  => next
+  -> res
 px = pursxStringAnonymous ((Proxy :: _ "a") /\ (Proxy :: _ "") /\ {})
 
 xp :: EndAnonymousPursX

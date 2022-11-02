@@ -9,7 +9,7 @@ import Deku.Core (Nut)
 import Deku.DOM as D
 import Deku.Example.Docs.Types (Page(..), PageOptions)
 import Deku.Example.Docs.Util (scrollToTop)
-import Deku.Pursx (nut, (~~))
+import Deku.Pursx ((~~))
 import Examples as Examples
 import Type.Proxy (Proxy(..))
 import Web.Event.Event (preventDefault)
@@ -54,14 +54,14 @@ myDivWithNoChildren = D.div attrs blank
 
 components :: forall r. { | PageOptions r } -> Nut
 components options = px ~~
-  { code: nut
+  { code:
       ( D.pre_
           [ D.code_
               [ text_ Examples.component
               ]
           ]
       )
-  , result: nut
+  , result:
       ( D.div_
           [ D.button_ [ text_ "I do nothing" ]
           , D.ul_ $ map (D.li_ <<< pure <<< text_) [ "A", "B", "C" ]
