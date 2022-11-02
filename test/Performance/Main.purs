@@ -21,7 +21,7 @@ import Test.Spec.Runner (defaultConfig, runSpec')
 
 main :: Effect Unit
 main = launchAff_ do
-  runSpec' (defaultConfig { timeout = Just (Milliseconds 45_000.0) })
+  runSpec' (defaultConfig { timeout = Just (Milliseconds 60_000.0) })
     [ consoleReporter ]
     do
       describe "Peformance" spec
