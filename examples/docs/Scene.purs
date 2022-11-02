@@ -8,7 +8,7 @@ import Data.Profunctor (lcmap)
 import Data.Tuple.Nested ((/\))
 import Deku.Attribute (cb, (:=))
 import Deku.Control (switcher, text_)
-import Deku.Core (Domable, Nut, bussed)
+import Deku.Core (Domable, bussed)
 import Deku.DOM as D
 import Deku.Example.Docs.Component as Component
 import Deku.Example.Docs.Effects as Effects
@@ -27,7 +27,9 @@ scene :: forall r l p. { | Options r } -> Domable l p
 scene options = bussed \push -> lcmap (pure options.startsWith <|> _)
   \event -> do
     let
+        page :: _ -> _ -> Domable l p
         page dpage i = go i { dpage, slug: options.slug }
+        go :: _ -> _ -> Domable l p
         go Intro = Intro.intro
         go HelloWorld = HelloWorld.helloWorld
         go SimpleComponent = Component.components
