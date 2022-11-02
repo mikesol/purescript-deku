@@ -149,7 +149,10 @@ todo = H.mkComponent
             && state.todo.description == input.todo.description
         )
         do
-          when (state.todo.description /= input.todo.description && not state.dirty)
+          when
+            ( state.todo.description /= input.todo.description && not
+                state.dirty
+            )
             do
               H.modify_ \st -> st
                 { todo

@@ -9,8 +9,6 @@ import Deku.Core (Domable(..), Domable', unsafeSetPos)
 import FRP.Event (Event)
 import Safe.Coerce (coerce)
 
-
-
 data Audio_
 
 audio
@@ -18,7 +16,14 @@ audio
    . Event (Attribute Audio_)
   -> Array (Domable lock payload)
   -> Domable lock payload
-audio attributes kids = Domable (Element' (elementify "audio" attributes ((coerce :: Domable' lock payload -> Domable lock payload)  (fixed (coerce (mapWithIndex unsafeSetPos kids))))))
+audio attributes kids = Domable
+  ( Element'
+      ( elementify "audio" attributes
+          ( (coerce :: Domable' lock payload -> Domable lock payload)
+              (fixed (coerce (mapWithIndex unsafeSetPos kids)))
+          )
+      )
+  )
 
 audio_
   :: forall lock payload

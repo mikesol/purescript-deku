@@ -15,7 +15,6 @@ import FRP.Event (Event, mapAccum)
 import FRP.Event as FRP.Event
 import FRP.Event.Time as FRP.Event.Time
 
-
 interval :: Int -> Event Instant
 interval = FRP.Event.Time.interval
 

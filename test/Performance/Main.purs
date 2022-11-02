@@ -21,8 +21,10 @@ import Test.Spec.Runner (defaultConfig, runSpec')
 
 main :: Effect Unit
 main = launchAff_ do
-  runSpec' (defaultConfig { timeout = Just (Milliseconds 45_000.0) }) [ consoleReporter ] do
-    describe "Peformance" spec
+  runSpec' (defaultConfig { timeout = Just (Milliseconds 60_000.0) })
+    [ consoleReporter ]
+    do
+      describe "Peformance" spec
 
 -- These tests have wide acceptance ranges because of the variability of banchmarks
 -- via Puppeteer in general. But they do have some light boundaries and should
@@ -41,17 +43,27 @@ spec = around withBrowser do
     result <- compare browser 3 test
     liftEffect do
       writeResult test result
-      Console.log "Wrote state test results to test-results (including snapshot change)."
+      Console.log
+        "Wrote state test results to test-results (including snapshot change)."
 
   it "Should satisfy todo benchmark" \browser -> do
     let test = TodoTest
     result <- compare browser 3 test
     liftEffect do
       writeResult test result
-      Console.log "Wrote todo test results to test-results (including snapshot change)."
+      Console.log
+        "Wrote todo test results to test-results (including snapshot change)."
 
 writeResult :: TestType -> ComparisonSummary -> Effect Unit
-writeResult test { componentAverage, hookAverage, dekuAverage, componentResults, hookResults, dekuResults } = do
+writeResult
+  test
+  { componentAverage
+  , hookAverage
+  , dekuAverage
+  , componentResults
+  , hookResults
+  , dekuResults
+  } = do
   writePath "summary" $ encodeJson
     { componentAverage, hookAverage, dekuAverage }
 

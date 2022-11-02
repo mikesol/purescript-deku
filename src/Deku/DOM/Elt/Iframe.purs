@@ -9,8 +9,6 @@ import Deku.Core (Domable(..), Domable', unsafeSetPos)
 import FRP.Event (Event)
 import Safe.Coerce (coerce)
 
-
-
 data Iframe_
 
 iframe
@@ -18,7 +16,14 @@ iframe
    . Event (Attribute Iframe_)
   -> Array (Domable lock payload)
   -> Domable lock payload
-iframe attributes kids = Domable (Element' (elementify "iframe" attributes ((coerce :: Domable' lock payload -> Domable lock payload)  (fixed (coerce (mapWithIndex unsafeSetPos kids))))))
+iframe attributes kids = Domable
+  ( Element'
+      ( elementify "iframe" attributes
+          ( (coerce :: Domable' lock payload -> Domable lock payload)
+              (fixed (coerce (mapWithIndex unsafeSetPos kids)))
+          )
+      )
+  )
 
 iframe_
   :: forall lock payload

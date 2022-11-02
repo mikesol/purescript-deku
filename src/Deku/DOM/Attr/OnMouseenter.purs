@@ -4,11 +4,16 @@ import Prelude
 import Effect (Effect)
 import Deku.Attribute (class Attr, Cb(..), cb', unsafeAttribute)
 
-
 data OnMouseenter = OnMouseenter
+
 instance Attr anything OnMouseenter Cb where
-  attr OnMouseenter value = unsafeAttribute { key: "mouseenter", value: cb' value }
+  attr OnMouseenter value = unsafeAttribute
+    { key: "mouseenter", value: cb' value }
+
 instance Attr anything OnMouseenter (Effect Unit) where
-  attr OnMouseenter value = unsafeAttribute { key: "mouseenter", value: cb' (Cb (const (value $> true))) }
+  attr OnMouseenter value = unsafeAttribute
+    { key: "mouseenter", value: cb' (Cb (const (value $> true))) }
+
 instance Attr anything OnMouseenter (Effect Boolean) where
-  attr OnMouseenter value = unsafeAttribute { key: "mouseenter", value: cb' (Cb (const value)) }
+  attr OnMouseenter value = unsafeAttribute
+    { key: "mouseenter", value: cb' (Cb (const value)) }

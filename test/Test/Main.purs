@@ -17,7 +17,7 @@ import Deku.Do (useMemoized, useState, useState')
 import Deku.Do as Deku
 import Deku.Interpret (FFIDOMSnapshot, Instruction)
 import Deku.Listeners (click_)
-import Deku.Pursx (nut, (~~))
+import Deku.Pursx ((~~))
 import Deku.Toplevel (Template(..), hydrate', runInBody', runSSR)
 import Effect (Effect)
 import FRP.Event (Event, fold)
@@ -69,7 +69,7 @@ dynAppearsCorrectly :: Nut
 dynAppearsCorrectly = Deku.do
   let
     counter :: forall a. Event a -> Event Int
-    counter event = fold (\a _ -> a + 1) (-1) event 
+    counter event = fold (\a _ -> a + 1) (-1) event
   setItem /\ item <- useState'
   D.div (id_ "div0")
     [ text_ "foo"
@@ -85,7 +85,7 @@ deeplyNestedPreservesOrder :: Nut
 deeplyNestedPreservesOrder = Deku.do
   let
     counter :: forall a. Event a -> Event Int
-    counter event = fold (\a _ -> a + 1) (-1) event 
+    counter event = fold (\a _ -> a + 1) (-1) event
   setItem /\ item <- useState'
   let
     mydyn n = do
@@ -202,11 +202,11 @@ tabbedNavigationWithPursx = Deku.do
     , item # switcher case _ of
         0 -> (Proxy :: _ "<h1 id=\"home\">home</h1>") ~~ {}
         1 -> (Proxy :: _ "<h1 id=\"about\">about ~me~</h1>") ~~
-          { me: nut $ text_ "deku" }
+          { me: text_ "deku" }
         _ -> (Proxy :: _ "<h1 id=\"contact\">contact ~a~ at ~b~ ~c~</h1>") ~~
-          { a: nut $ D.span_ [ text_ "mike" ]
-          , b: nut $ text_ "site.com"
-          , c: nut $ (Proxy :: _ "<h1 id=\"thanks\">thanks</h1>") ~~ {}
+          { a: D.span_ [ text_ "mike" ]
+          , b: text_ "site.com"
+          , c: (Proxy :: _ "<h1 id=\"thanks\">thanks</h1>") ~~ {}
           }
     ]
 
@@ -240,5 +240,5 @@ pursXComposes :: Nut
 pursXComposes = Deku.do
   D.div (id_ "div0")
     [ (Proxy :: _ "<h1 id=\"px\">début ~me~ fin</h1>") ~~
-        { me: nut $ fixed [ text_ "milieu", text_ " ", text_ "après-milieu" ] }
+        { me: fixed [ text_ "milieu", text_ " ", text_ "après-milieu" ] }
     ]

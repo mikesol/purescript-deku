@@ -9,8 +9,6 @@ import Deku.Core (Domable(..), Domable', unsafeSetPos)
 import FRP.Event (Event)
 import Safe.Coerce (coerce)
 
-
-
 data Fieldset_
 
 fieldset
@@ -18,7 +16,14 @@ fieldset
    . Event (Attribute Fieldset_)
   -> Array (Domable lock payload)
   -> Domable lock payload
-fieldset attributes kids = Domable (Element' (elementify "fieldset" attributes ((coerce :: Domable' lock payload -> Domable lock payload)  (fixed (coerce (mapWithIndex unsafeSetPos kids))))))
+fieldset attributes kids = Domable
+  ( Element'
+      ( elementify "fieldset" attributes
+          ( (coerce :: Domable' lock payload -> Domable lock payload)
+              (fixed (coerce (mapWithIndex unsafeSetPos kids)))
+          )
+      )
+  )
 
 fieldset_
   :: forall lock payload

@@ -9,8 +9,6 @@ import Deku.Core (Domable(..), Domable', unsafeSetPos)
 import FRP.Event (Event)
 import Safe.Coerce (coerce)
 
-
-
 data Select_
 
 select
@@ -18,7 +16,14 @@ select
    . Event (Attribute Select_)
   -> Array (Domable lock payload)
   -> Domable lock payload
-select attributes kids = Domable (Element' (elementify "select" attributes ((coerce :: Domable' lock payload -> Domable lock payload)  (fixed (coerce (mapWithIndex unsafeSetPos kids))))))
+select attributes kids = Domable
+  ( Element'
+      ( elementify "select" attributes
+          ( (coerce :: Domable' lock payload -> Domable lock payload)
+              (fixed (coerce (mapWithIndex unsafeSetPos kids)))
+          )
+      )
+  )
 
 select_
   :: forall lock payload

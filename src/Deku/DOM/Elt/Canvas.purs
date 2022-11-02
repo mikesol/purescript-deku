@@ -9,8 +9,6 @@ import Deku.Core (Domable(..), Domable', unsafeSetPos)
 import FRP.Event (Event)
 import Safe.Coerce (coerce)
 
-
-
 data Canvas_
 
 canvas
@@ -18,7 +16,14 @@ canvas
    . Event (Attribute Canvas_)
   -> Array (Domable lock payload)
   -> Domable lock payload
-canvas attributes kids = Domable (Element' (elementify "canvas" attributes ((coerce :: Domable' lock payload -> Domable lock payload)  (fixed (coerce (mapWithIndex unsafeSetPos kids))))))
+canvas attributes kids = Domable
+  ( Element'
+      ( elementify "canvas" attributes
+          ( (coerce :: Domable' lock payload -> Domable lock payload)
+              (fixed (coerce (mapWithIndex unsafeSetPos kids)))
+          )
+      )
+  )
 
 canvas_
   :: forall lock payload

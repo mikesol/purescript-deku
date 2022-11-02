@@ -9,8 +9,6 @@ import Deku.Core (Domable(..), Domable', unsafeSetPos)
 import FRP.Event (Event)
 import Safe.Coerce (coerce)
 
-
-
 data Progress_
 
 progress
@@ -18,7 +16,14 @@ progress
    . Event (Attribute Progress_)
   -> Array (Domable lock payload)
   -> Domable lock payload
-progress attributes kids = Domable (Element' (elementify "progress" attributes ((coerce :: Domable' lock payload -> Domable lock payload)  (fixed (coerce (mapWithIndex unsafeSetPos kids))))))
+progress attributes kids = Domable
+  ( Element'
+      ( elementify "progress" attributes
+          ( (coerce :: Domable' lock payload -> Domable lock payload)
+              (fixed (coerce (mapWithIndex unsafeSetPos kids)))
+          )
+      )
+  )
 
 progress_
   :: forall lock payload

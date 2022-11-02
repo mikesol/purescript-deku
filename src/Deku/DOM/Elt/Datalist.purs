@@ -9,8 +9,6 @@ import Deku.Core (Domable(..), Domable', unsafeSetPos)
 import FRP.Event (Event)
 import Safe.Coerce (coerce)
 
-
-
 data Datalist_
 
 datalist
@@ -18,7 +16,14 @@ datalist
    . Event (Attribute Datalist_)
   -> Array (Domable lock payload)
   -> Domable lock payload
-datalist attributes kids = Domable (Element' (elementify "datalist" attributes ((coerce :: Domable' lock payload -> Domable lock payload)  (fixed (coerce (mapWithIndex unsafeSetPos kids))))))
+datalist attributes kids = Domable
+  ( Element'
+      ( elementify "datalist" attributes
+          ( (coerce :: Domable' lock payload -> Domable lock payload)
+              (fixed (coerce (mapWithIndex unsafeSetPos kids)))
+          )
+      )
+  )
 
 datalist_
   :: forall lock payload

@@ -9,8 +9,6 @@ import Deku.Core (Domable(..), Domable', unsafeSetPos)
 import FRP.Event (Event)
 import Safe.Coerce (coerce)
 
-
-
 data Legend_
 
 legend
@@ -18,7 +16,14 @@ legend
    . Event (Attribute Legend_)
   -> Array (Domable lock payload)
   -> Domable lock payload
-legend attributes kids = Domable (Element' (elementify "legend" attributes ((coerce :: Domable' lock payload -> Domable lock payload)  (fixed (coerce (mapWithIndex unsafeSetPos kids))))))
+legend attributes kids = Domable
+  ( Element'
+      ( elementify "legend" attributes
+          ( (coerce :: Domable' lock payload -> Domable lock payload)
+              (fixed (coerce (mapWithIndex unsafeSetPos kids)))
+          )
+      )
+  )
 
 legend_
   :: forall lock payload

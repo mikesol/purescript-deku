@@ -9,8 +9,6 @@ import Deku.Core (Domable(..), Domable', unsafeSetPos)
 import FRP.Event (Event)
 import Safe.Coerce (coerce)
 
-
-
 data Form_
 
 form
@@ -18,7 +16,14 @@ form
    . Event (Attribute Form_)
   -> Array (Domable lock payload)
   -> Domable lock payload
-form attributes kids = Domable (Element' (elementify "form" attributes ((coerce :: Domable' lock payload -> Domable lock payload)  (fixed (coerce (mapWithIndex unsafeSetPos kids))))))
+form attributes kids = Domable
+  ( Element'
+      ( elementify "form" attributes
+          ( (coerce :: Domable' lock payload -> Domable lock payload)
+              (fixed (coerce (mapWithIndex unsafeSetPos kids)))
+          )
+      )
+  )
 
 form_
   :: forall lock payload

@@ -13,7 +13,7 @@ import Deku.Core (dyn, insert_, Nut, bus)
 import Deku.DOM as D
 import Deku.Example.Docs.Types (Page(..), PageOptions)
 import Deku.Example.Docs.Util (scrollToTop)
-import Deku.Pursx (makePursx', nut, (~~))
+import Deku.Pursx (makePursx', (~~))
 import Type.Proxy (Proxy(..))
 import Web.Event.Event (preventDefault)
 
@@ -66,18 +66,18 @@ myDom =
 
 pursx2 :: forall r. { | PageOptions r } -> Nut
 pursx2 options = makePursx' (Proxy :: _ "?") px
-  { code: nut
+  { code:
       ( D.pre_
           [ D.code_
               [ text_ Examples.pursx2
               ]
           ]
       )
-  , result: nut
+  , result:
       ( dyn $ bus \push event ->
           pure $ insert_ $ myDom ~~
             { myli: pure (D.Style := "background-color:rgb(200,240,210);")
-            , somethingNew: nut
+            , somethingNew:
                 ( D.button (pure (D.OnClick := push (Just unit)))
                     [ text
                         $ (compact event $> "Thanks for clicking me!") <|>

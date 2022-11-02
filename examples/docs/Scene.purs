@@ -8,7 +8,7 @@ import Data.Profunctor (lcmap)
 import Data.Tuple.Nested ((/\))
 import Deku.Attribute (cb, (:=))
 import Deku.Control (switcher, text_)
-import Deku.Core (Nut, bussed)
+import Deku.Core (Domable, bussed)
 import Deku.DOM as D
 import Deku.Example.Docs.Component as Component
 import Deku.Example.Docs.Effects as Effects
@@ -23,9 +23,23 @@ import Deku.Example.Docs.SSR as SSR
 import Deku.Example.Docs.Types (Page(..), Options)
 import Web.Event.Event (preventDefault)
 
-scene :: forall r. { | Options r } -> Nut
+scene :: forall r l p. { | Options r } -> Domable l p
 scene options = bussed \push -> lcmap (pure options.startsWith <|> _)
-  \event ->
+  \event -> do
+    let
+        page :: _ -> _ -> Domable l p
+        page dpage i = go i { dpage, slug: options.slug }
+        go :: _ -> _ -> Domable l p
+        go Intro = Intro.intro
+        go HelloWorld = HelloWorld.helloWorld
+        go SimpleComponent = Component.components
+        go PURSX1 = Pursx1.pursx1
+        go Events = Events.events
+        go Effects = Effects.effects
+        go PURSX2 = Pursx2.pursx2
+        go Events2 = Events2.events2
+        go Portals = Portals1.portals1
+        go SSR = SSR.ssrPage
     D.div_
       [ D.div_
           $ map
@@ -90,15 +104,3 @@ scene options = bussed \push -> lcmap (pure options.startsWith <|> _)
             ]
       , switcher (page push) event
       ]
-  where
-  page dpage i = go i { dpage, slug: options.slug }
-  go Intro = Intro.intro
-  go HelloWorld = HelloWorld.helloWorld
-  go SimpleComponent = Component.components
-  go PURSX1 = Pursx1.pursx1
-  go Events = Events.events
-  go Effects = Effects.effects
-  go PURSX2 = Pursx2.pursx2
-  go Events2 = Events2.events2
-  go Portals = Portals1.portals1
-  go SSR = SSR.ssrPage

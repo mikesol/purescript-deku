@@ -73,28 +73,31 @@ main = do
       <title>Deku documentation</title>
       <meta charset="UTF-8">
       <meta name="viewport" content="width=device-width">
-      <link rel="stylesheet" href=""" <>
-                  (if options.top then "\"style.css\""
-                  else "\"../style.css\"")
-                    <>
-                      """>
+      <link rel="stylesheet" href="""
+                  <>
+                    ( if options.top then "\"style.css\""
+                      else "\"../style.css\""
+                    )
+                  <>
+                    """>
       <script type="module">
         import { main } from """
-                    <>
-                     ( if options.top then "\"bundle.js\""
-                      else "\"../bundle.js\"")
-                        <>
-                          """;
+                  <>
+                    ( if options.top then "\"bundle.js\""
+                      else "\"../bundle.js\""
+                    )
+                  <>
+                    """;
         main({"startsWith":"""
-                        <> "\""
-                        <> options.pageString
-                        <> "\""
-                        <> ""","slug":"""
-                        <> "\""
-                        <> options.slug
-                        <> "\""
-                        <>
-                          """})();
+                  <> "\""
+                  <> options.pageString
+                  <> "\""
+                  <> ""","slug":"""
+                  <> "\""
+                  <> options.slug
+                  <> "\""
+                  <>
+                    """})();
       </script>
     </head>"""
             , tail: "</html>"

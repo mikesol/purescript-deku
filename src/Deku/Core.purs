@@ -354,7 +354,8 @@ dynify f es = Domable $ Bolson.Element' (Node go)
       unsub <- runSTFn2 mySub
         ( oneOf
             [ parentEvent
-            , pure $ makeDynBeacon { id: me, parent: Just parentId, scope, dynFamily, pos }
+            , pure $ makeDynBeacon
+                { id: me, parent: Just parentId, scope, dynFamily, pos }
             , pure $ attributeParent
                 { id: me, parent: parentId, pos, dynFamily, ez }
             , __internalDekuFlatten

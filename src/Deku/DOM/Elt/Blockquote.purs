@@ -9,8 +9,6 @@ import Deku.Core (Domable(..), Domable', unsafeSetPos)
 import FRP.Event (Event)
 import Safe.Coerce (coerce)
 
-
-
 data Blockquote_
 
 blockquote
@@ -18,7 +16,14 @@ blockquote
    . Event (Attribute Blockquote_)
   -> Array (Domable lock payload)
   -> Domable lock payload
-blockquote attributes kids = Domable (Element' (elementify "blockquote" attributes ((coerce :: Domable' lock payload -> Domable lock payload)  (fixed (coerce (mapWithIndex unsafeSetPos kids))))))
+blockquote attributes kids = Domable
+  ( Element'
+      ( elementify "blockquote" attributes
+          ( (coerce :: Domable' lock payload -> Domable lock payload)
+              (fixed (coerce (mapWithIndex unsafeSetPos kids)))
+          )
+      )
+  )
 
 blockquote_
   :: forall lock payload

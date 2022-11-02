@@ -11,7 +11,7 @@ import Deku.DOM as D
 import Deku.Example.Docs.Types (Page(..), PageOptions)
 import Deku.Example.Docs.Util (scrollToTop)
 import Deku.Listeners (click_, slider)
-import Deku.Pursx (nut, (~~))
+import Deku.Pursx ((~~))
 import Examples as Examples
 import FRP.Event (fold)
 import FRP.Event.VBus (V)
@@ -49,7 +49,7 @@ px =
 
 events :: forall r. { | PageOptions r } -> Nut
 events options = px ~~
-  { code: nut
+  { code:
       ( D.pre_
           [ D.code_
               [ text_
@@ -57,7 +57,7 @@ events options = px ~~
               ]
           ]
       )
-  , result: nut
+  , result:
       ( vbussed (Proxy :: _ UIEvents) \push event -> do
           D.div_
             [ D.button

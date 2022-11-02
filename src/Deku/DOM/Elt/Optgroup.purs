@@ -9,8 +9,6 @@ import Deku.Core (Domable(..), Domable', unsafeSetPos)
 import FRP.Event (Event)
 import Safe.Coerce (coerce)
 
-
-
 data Optgroup_
 
 optgroup
@@ -18,7 +16,14 @@ optgroup
    . Event (Attribute Optgroup_)
   -> Array (Domable lock payload)
   -> Domable lock payload
-optgroup attributes kids = Domable (Element' (elementify "optgroup" attributes ((coerce :: Domable' lock payload -> Domable lock payload)  (fixed (coerce (mapWithIndex unsafeSetPos kids))))))
+optgroup attributes kids = Domable
+  ( Element'
+      ( elementify "optgroup" attributes
+          ( (coerce :: Domable' lock payload -> Domable lock payload)
+              (fixed (coerce (mapWithIndex unsafeSetPos kids)))
+          )
+      )
+  )
 
 optgroup_
   :: forall lock payload

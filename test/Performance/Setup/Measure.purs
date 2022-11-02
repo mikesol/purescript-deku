@@ -61,7 +61,14 @@ compare browser n testType = do
     componentAverage = average componentResults
     dekuAverage = average dekuResults
 
-  pure { hookResults, hookAverage, componentResults, componentAverage, dekuResults, dekuAverage }
+  pure
+    { hookResults
+    , hookAverage
+    , componentResults
+    , componentAverage
+    , dekuResults
+    , dekuAverage
+    }
 
 compareOnce
   :: Browser
@@ -203,15 +210,23 @@ runScriptForTest page test = do
     for_ save5 Puppeteer.click
     newValue <- Puppeteer.getInputFieldValue page (prependHash $ editId 5)
     -- assert that the value has changed
-    unless (isJust newValue && newValue == (append <$> oldValue <*> pure "is so fun")) do
-      throwError (error ("Value not updated: " <> show oldValue <> " " <> show newValue))
+    unless
+      ( isJust newValue && newValue ==
+          (append <$> oldValue <*> pure "is so fun")
+      )
+      do
+        throwError
+          ( error
+              ("Value not updated: " <> show oldValue <> " " <> show newValue)
+          )
 
     undo <- Puppeteer.waitForSelector page (prependHash undoId)
     for_ undo Puppeteer.click
     undoValue <- Puppeteer.getInputFieldValue page (prependHash $ editId 5)
     -- assert that the undo operation worked
     unless (oldValue == undoValue) do
-      throwError (error ("Value not undone: " <> show oldValue <> " " <> show newValue))
+      throwError
+        (error ("Value not undone: " <> show oldValue <> " " <> show newValue))
 
     shouldBeChecked <- Puppeteer.getChecked page (prependHash $ checkId 1)
 

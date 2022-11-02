@@ -9,8 +9,6 @@ import Deku.Core (Domable(..), Domable', unsafeSetPos)
 import FRP.Event (Event)
 import Safe.Coerce (coerce)
 
-
-
 data Caption_
 
 caption
@@ -18,7 +16,14 @@ caption
    . Event (Attribute Caption_)
   -> Array (Domable lock payload)
   -> Domable lock payload
-caption attributes kids = Domable (Element' (elementify "caption" attributes ((coerce :: Domable' lock payload -> Domable lock payload)  (fixed (coerce (mapWithIndex unsafeSetPos kids))))))
+caption attributes kids = Domable
+  ( Element'
+      ( elementify "caption" attributes
+          ( (coerce :: Domable' lock payload -> Domable lock payload)
+              (fixed (coerce (mapWithIndex unsafeSetPos kids)))
+          )
+      )
+  )
 
 caption_
   :: forall lock payload

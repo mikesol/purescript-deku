@@ -18,7 +18,7 @@ import Deku.Core (Nut, bussed)
 import Deku.DOM as D
 import Deku.Example.Docs.Types (Page(..), PageOptions)
 import Deku.Example.Docs.Util (scrollToTop)
-import Deku.Pursx (nut, (~~))
+import Deku.Pursx ((~~))
 import Effect (Effect)
 import Effect.Aff (launchAff_)
 import Effect.Class (liftEffect)
@@ -81,13 +81,13 @@ px =
 
 effects :: forall r. { | PageOptions r } -> Nut
 effects options = px ~~
-  { code: nut
+  { code:
       ( D.pre_
           [ D.code_
               [ text_ Examples.effects ]
           ]
       )
-  , result: nut
+  , result:
       ( bussed \push event -> do
           let
             loadingOrResult = filterMap

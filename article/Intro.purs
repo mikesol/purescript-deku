@@ -7,7 +7,7 @@ import Data.Profunctor (lcmap)
 import Deku.Attribute (attr)
 import Deku.Control (text)
 import Deku.DOM as D
-import Deku.Pursx (nut, (~~))
+import Deku.Pursx ((~~))
 import Deku.Toplevel (runInBody1)
 import Effect (Effect)
 import FRP.Event (Event, bus)
@@ -24,8 +24,8 @@ example name = bus
 </div>
 """
     ) ~~
-      { name: nut $ text name
-      , age: nut $ text $ show <$> age
+      { name: text name
+      , age: text $ show <$> age
       , setAge: attr D.OnClick <<< setAge <<< add 1 <$> (age :: Event Int)
       }
 

@@ -43,7 +43,7 @@ click_
 click_ = click <<< pure
 
 click'
-  :: forall m  cb element
+  :: forall m cb element
    . Monoid m
   => Attr element D.OnClick cb
   => Event (m -> cb)

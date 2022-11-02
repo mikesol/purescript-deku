@@ -43,7 +43,8 @@ container = H.mkComponent
   -- Used by Puppeteer to mount a test into the page so that it can be started
   testAction test = do
     let test' = testToString test
-    HH.button [ HP.id test', HE.onClick \_ -> HandleStartTest test ] [ HH.text test' ]
+    HH.button [ HP.id test', HE.onClick \_ -> HandleStartTest test ]
+      [ HH.text test' ]
 
   handleComplete test =
     const (HandleTestComplete test)
@@ -64,22 +65,32 @@ container = H.mkComponent
                 HH.text ""
 
               Running StateHook ->
-                HH.slot State.Hook._stateHook unit State.Hook.component unit (handleComplete StateHook)
+                HH.slot State.Hook._stateHook unit State.Hook.component unit
+                  (handleComplete StateHook)
 
               Running StateComponent ->
-                HH.slot State.Component._stateComponent unit State.Component.component unit (handleComplete StateComponent)
+                HH.slot State.Component._stateComponent unit
+                  State.Component.component
+                  unit
+                  (handleComplete StateComponent)
 
               Running StateDeku ->
-                HH.slot State.Deku._stateDeku unit State.Deku.component unit (handleComplete StateDeku)
+                HH.slot State.Deku._stateDeku unit State.Deku.component unit
+                  (handleComplete StateDeku)
 
               Running TodoHook ->
-                HH.slot Todo.Hook._todoHook unit Todo.Hook.container unit (handleComplete TodoHook)
+                HH.slot Todo.Hook._todoHook unit Todo.Hook.container unit
+                  (handleComplete TodoHook)
 
               Running TodoComponent ->
-                HH.slot Todo.Component._todoComponent unit Todo.Component.container unit (handleComplete TodoComponent)
+                HH.slot Todo.Component._todoComponent unit
+                  Todo.Component.container
+                  unit
+                  (handleComplete TodoComponent)
 
               Running TodoDeku ->
-                HH.slot Todo.Deku._todoDeku unit Todo.Deku.container unit (handleComplete TodoDeku)
+                HH.slot Todo.Deku._todoDeku unit Todo.Deku.container unit
+                  (handleComplete TodoDeku)
 
               Completed test ->
                 HH.div [ HP.id (testToString test <> completedSuffix) ] []

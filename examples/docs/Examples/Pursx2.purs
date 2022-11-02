@@ -11,7 +11,7 @@ import Deku.Control (text)
 import Deku.DOM as D
 import Deku.Do (useState')
 import Deku.Do as Deku
-import Deku.Pursx (nut, (~~))
+import Deku.Pursx ((~~))
 import Deku.Toplevel (runInBody)
 import Effect (Effect)
 import Type.Proxy (Proxy(..))
@@ -41,7 +41,7 @@ main = runInBody Deku.do
   push /\ event <- useState'
   myDom ~~
     { myli: pure (D.Style := "background-color:rgb(200,240,210);")
-    , somethingNew: nut
+    , somethingNew:
         ( D.button (pure (D.OnClick := push (Just unit)))
             [ text
                 $ (compact event $> "Thanks for clicking me!") <|>

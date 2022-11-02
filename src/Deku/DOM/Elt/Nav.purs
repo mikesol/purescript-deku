@@ -9,8 +9,6 @@ import Deku.Core (Domable(..), Domable', unsafeSetPos)
 import FRP.Event (Event)
 import Safe.Coerce (coerce)
 
-
-
 data Nav_
 
 nav
@@ -18,7 +16,14 @@ nav
    . Event (Attribute Nav_)
   -> Array (Domable lock payload)
   -> Domable lock payload
-nav attributes kids = Domable (Element' (elementify "nav" attributes ((coerce :: Domable' lock payload -> Domable lock payload)  (fixed (coerce (mapWithIndex unsafeSetPos kids))))))
+nav attributes kids = Domable
+  ( Element'
+      ( elementify "nav" attributes
+          ( (coerce :: Domable' lock payload -> Domable lock payload)
+              (fixed (coerce (mapWithIndex unsafeSetPos kids)))
+          )
+      )
+  )
 
 nav_
   :: forall lock payload

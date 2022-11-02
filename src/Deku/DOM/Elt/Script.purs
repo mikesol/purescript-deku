@@ -9,8 +9,6 @@ import Deku.Core (Domable(..), Domable', unsafeSetPos)
 import FRP.Event (Event)
 import Safe.Coerce (coerce)
 
-
-
 data Script_
 
 script
@@ -18,7 +16,14 @@ script
    . Event (Attribute Script_)
   -> Array (Domable lock payload)
   -> Domable lock payload
-script attributes kids = Domable (Element' (elementify "script" attributes ((coerce :: Domable' lock payload -> Domable lock payload)  (fixed (coerce (mapWithIndex unsafeSetPos kids))))))
+script attributes kids = Domable
+  ( Element'
+      ( elementify "script" attributes
+          ( (coerce :: Domable' lock payload -> Domable lock payload)
+              (fixed (coerce (mapWithIndex unsafeSetPos kids)))
+          )
+      )
+  )
 
 script_
   :: forall lock payload

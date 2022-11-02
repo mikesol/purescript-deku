@@ -9,8 +9,6 @@ import Deku.Core (Domable(..), Domable', unsafeSetPos)
 import FRP.Event (Event)
 import Safe.Coerce (coerce)
 
-
-
 data Meter_
 
 meter
@@ -18,7 +16,14 @@ meter
    . Event (Attribute Meter_)
   -> Array (Domable lock payload)
   -> Domable lock payload
-meter attributes kids = Domable (Element' (elementify "meter" attributes ((coerce :: Domable' lock payload -> Domable lock payload)  (fixed (coerce (mapWithIndex unsafeSetPos kids))))))
+meter attributes kids = Domable
+  ( Element'
+      ( elementify "meter" attributes
+          ( (coerce :: Domable' lock payload -> Domable lock payload)
+              (fixed (coerce (mapWithIndex unsafeSetPos kids)))
+          )
+      )
+  )
 
 meter_
   :: forall lock payload

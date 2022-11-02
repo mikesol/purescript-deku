@@ -31,14 +31,6 @@ import Prim.RowList as RL
 import Prim.Symbol as Sym
 import Record (get)
 import Type.Proxy (Proxy(..))
-
-newtype PursxElement lock payload = PursxElement (Domable lock payload)
-
-nut
-  :: forall lock payload
-   . Domable lock payload
-  -> PursxElement lock payload
-nut = PursxElement
 ''')
 
 print_('pursx :: forall s. Proxy s')
@@ -48,7 +40,7 @@ print_('instance (TagToDeku tag deku,  Row.Cons acc (Event (Attribute deku)) pur
 print_('else instance (Sym.Append acc anything acc2, Sym.Cons x y tail, DoVerbForAttr verb tag acc2 x y pursi purso newTail) => DoVerbForAttr verb tag acc anything tail pursi purso newTail')
 print_('--')
 print_('class DoVerbForDOM (lock :: Type) (payload :: Type) (verb :: Symbol) (acc :: Symbol) (head :: Symbol) (tail :: Symbol) (pursi :: Row Type) (purso :: Row Type) (newTail :: Symbol) | lock payload verb acc head tail pursi -> purso newTail')
-print_('instance (Row.Cons acc (PursxElement lock payload) pursi purso) => DoVerbForDOM lock payload verb acc verb tail pursi purso tail')
+print_('instance (Row.Cons acc (Domable lock payload) pursi purso) => DoVerbForDOM lock payload verb acc verb tail pursi purso tail')
 print_('else instance (Sym.Append acc anything acc2, Sym.Cons x y tail, DoVerbForDOM lock payload verb acc2 x y pursi purso newTail) => DoVerbForDOM lock payload verb acc anything tail pursi purso newTail')
 print_('--')
 print_('class IsWhiteSpace (space :: Symbol)')
@@ -161,7 +153,7 @@ class
     -> { cache :: Object.Object Boolean, element :: Node lock payload }
 
 instance pursxToElementConsInsert ::
-  ( Row.Cons key (PursxElement lock payload) r' r
+  ( Row.Cons key (Domable lock payload) r' r
   , PursxToElement lock payload rest r
   , Reflectable key String
   , IsSymbol key
@@ -169,7 +161,7 @@ instance pursxToElementConsInsert ::
   PursxToElement
     lock
     payload
-    (RL.Cons key (PursxElement lock payload) rest)
+    (RL.Cons key (Domable lock payload) rest)
     r where
   pursxToElement pxScope _ r =
     let
@@ -191,7 +183,7 @@ instance pursxToElementConsInsert ::
       }
     where
     pxk = Proxy :: _ key
-    PursxElement pxe = get pxk r
+    pxe = get pxk r
 
 else instance pursxToElementConsAttr ::
   ( Row.Cons key (Event (Attribute deku)) r' r

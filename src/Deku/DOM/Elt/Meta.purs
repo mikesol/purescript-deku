@@ -9,8 +9,6 @@ import Deku.Core (Domable(..), Domable', unsafeSetPos)
 import FRP.Event (Event)
 import Safe.Coerce (coerce)
 
-
-
 data Meta_
 
 meta
@@ -18,7 +16,14 @@ meta
    . Event (Attribute Meta_)
   -> Array (Domable lock payload)
   -> Domable lock payload
-meta attributes kids = Domable (Element' (elementify "meta" attributes ((coerce :: Domable' lock payload -> Domable lock payload)  (fixed (coerce (mapWithIndex unsafeSetPos kids))))))
+meta attributes kids = Domable
+  ( Element'
+      ( elementify "meta" attributes
+          ( (coerce :: Domable' lock payload -> Domable lock payload)
+              (fixed (coerce (mapWithIndex unsafeSetPos kids)))
+          )
+      )
+  )
 
 meta_
   :: forall lock payload

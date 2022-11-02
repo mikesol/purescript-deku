@@ -9,7 +9,7 @@ import Deku.Core (Nut)
 import Deku.DOM as D
 import Deku.Example.Docs.Types (Page(..), PageOptions)
 import Deku.Example.Docs.Util (scrollToTop)
-import Deku.Pursx (nut, psx, (~~))
+import Deku.Pursx (psx, (~~))
 import Examples as Examples
 import Type.Proxy (Proxy(..))
 import Web.Event.Event (preventDefault)
@@ -61,14 +61,14 @@ px =
 
 pursx1 :: forall r. { | PageOptions r } -> Nut
 pursx1 options = px ~~
-  { code: nut
+  { code:
       ( D.pre_
           [ D.code_
               [ text_ Examples.pursx1
               ]
           ]
       )
-  , result: nut (psx myDom)
+  , result: (psx myDom)
   , next: oneOfMap pure
       [ D.OnClick :=
           (cb (\e -> preventDefault e *> options.dpage Events *> scrollToTop))
