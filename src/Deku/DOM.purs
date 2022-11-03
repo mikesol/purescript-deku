@@ -1,8 +1,7 @@
 module Deku.DOM
-  ( class TagToDeku
-  , Self(..)
+  ( Self(..)
   , SelfT(..)
-  -- codegen 7
+  , class TagToDeku
   , module Deku.DOM.Attr.Accept
   , module Deku.DOM.Attr.AcceptCharset
   , module Deku.DOM.Attr.Accesskey
@@ -66,9 +65,9 @@ module Deku.DOM
   , module Deku.DOM.Attr.Icon
   , module Deku.DOM.Attr.Id
   , module Deku.DOM.Attr.Importance
+  , module Deku.DOM.Attr.Inputmode
   , module Deku.DOM.Attr.Integrity
   , module Deku.DOM.Attr.Intrinsicsize
-  , module Deku.DOM.Attr.Inputmode
   , module Deku.DOM.Attr.Ismap
   , module Deku.DOM.Attr.Itemprop
   , module Deku.DOM.Attr.Keytype
@@ -76,21 +75,110 @@ module Deku.DOM
   , module Deku.DOM.Attr.Label
   , module Deku.DOM.Attr.Lang
   , module Deku.DOM.Attr.Language
-  , module Deku.DOM.Attr.Loading
   , module Deku.DOM.Attr.List
+  , module Deku.DOM.Attr.Loading
   , module Deku.DOM.Attr.Loop
   , module Deku.DOM.Attr.Low
   , module Deku.DOM.Attr.Manifest
   , module Deku.DOM.Attr.Max
   , module Deku.DOM.Attr.Maxlength
-  , module Deku.DOM.Attr.Minlength
   , module Deku.DOM.Attr.Media
   , module Deku.DOM.Attr.Method
   , module Deku.DOM.Attr.Min
+  , module Deku.DOM.Attr.Minlength
   , module Deku.DOM.Attr.Multiple
   , module Deku.DOM.Attr.Muted
   , module Deku.DOM.Attr.Name
   , module Deku.DOM.Attr.Novalidate
+  , module Deku.DOM.Attr.OnAbort
+  , module Deku.DOM.Attr.OnAnimationcancel
+  , module Deku.DOM.Attr.OnAnimationend
+  , module Deku.DOM.Attr.OnAnimationiteration
+  , module Deku.DOM.Attr.OnAnimationstart
+  , module Deku.DOM.Attr.OnAuxclick
+  , module Deku.DOM.Attr.OnBlur
+  , module Deku.DOM.Attr.OnCancel
+  , module Deku.DOM.Attr.OnCanplay
+  , module Deku.DOM.Attr.OnCanplaythrough
+  , module Deku.DOM.Attr.OnChange
+  , module Deku.DOM.Attr.OnClick
+  , module Deku.DOM.Attr.OnClose
+  , module Deku.DOM.Attr.OnContextmenu
+  , module Deku.DOM.Attr.OnDblclick
+  , module Deku.DOM.Attr.OnDrag
+  , module Deku.DOM.Attr.OnDragend
+  , module Deku.DOM.Attr.OnDragenter
+  , module Deku.DOM.Attr.OnDragleave
+  , module Deku.DOM.Attr.OnDragover
+  , module Deku.DOM.Attr.OnDragstart
+  , module Deku.DOM.Attr.OnDrop
+  , module Deku.DOM.Attr.OnDurationchange
+  , module Deku.DOM.Attr.OnEmptied
+  , module Deku.DOM.Attr.OnEnded
+  , module Deku.DOM.Attr.OnError
+  , module Deku.DOM.Attr.OnFocus
+  , module Deku.DOM.Attr.OnFormdata
+  , module Deku.DOM.Attr.OnGotpointercapture
+  , module Deku.DOM.Attr.OnInput
+  , module Deku.DOM.Attr.OnInvalid
+  , module Deku.DOM.Attr.OnKeydown
+  , module Deku.DOM.Attr.OnKeypress
+  , module Deku.DOM.Attr.OnKeyup
+  , module Deku.DOM.Attr.OnLoad
+  , module Deku.DOM.Attr.OnLoadeddata
+  , module Deku.DOM.Attr.OnLoadedmetadata
+  , module Deku.DOM.Attr.OnLoadend
+  , module Deku.DOM.Attr.OnLoadstart
+  , module Deku.DOM.Attr.OnLostpointercapture
+  , module Deku.DOM.Attr.OnMousedown
+  , module Deku.DOM.Attr.OnMouseenter
+  , module Deku.DOM.Attr.OnMouseleave
+  , module Deku.DOM.Attr.OnMousemove
+  , module Deku.DOM.Attr.OnMouseout
+  , module Deku.DOM.Attr.OnMouseover
+  , module Deku.DOM.Attr.OnMouseup
+  , module Deku.DOM.Attr.OnMousewheel
+  , module Deku.DOM.Attr.OnPause
+  , module Deku.DOM.Attr.OnPlay
+  , module Deku.DOM.Attr.OnPlaying
+  , module Deku.DOM.Attr.OnPointercancel
+  , module Deku.DOM.Attr.OnPointerdown
+  , module Deku.DOM.Attr.OnPointerenter
+  , module Deku.DOM.Attr.OnPointerleave
+  , module Deku.DOM.Attr.OnPointerlockchange
+  , module Deku.DOM.Attr.OnPointerlockerror
+  , module Deku.DOM.Attr.OnPointermove
+  , module Deku.DOM.Attr.OnPointerout
+  , module Deku.DOM.Attr.OnPointerover
+  , module Deku.DOM.Attr.OnPointerup
+  , module Deku.DOM.Attr.OnProgress
+  , module Deku.DOM.Attr.OnRatechange
+  , module Deku.DOM.Attr.OnReset
+  , module Deku.DOM.Attr.OnResize
+  , module Deku.DOM.Attr.OnScroll
+  , module Deku.DOM.Attr.OnSecuritypolicyviolation
+  , module Deku.DOM.Attr.OnSeeked
+  , module Deku.DOM.Attr.OnSeeking
+  , module Deku.DOM.Attr.OnSelect
+  , module Deku.DOM.Attr.OnSelectionchange
+  , module Deku.DOM.Attr.OnSelectstart
+  , module Deku.DOM.Attr.OnShow
+  , module Deku.DOM.Attr.OnSlotchange
+  , module Deku.DOM.Attr.OnStalled
+  , module Deku.DOM.Attr.OnSubmit
+  , module Deku.DOM.Attr.OnSuspend
+  , module Deku.DOM.Attr.OnTimeupdate
+  , module Deku.DOM.Attr.OnTouchcancel
+  , module Deku.DOM.Attr.OnTouchend
+  , module Deku.DOM.Attr.OnTouchmove
+  , module Deku.DOM.Attr.OnTouchstart
+  , module Deku.DOM.Attr.OnTransitioncancel
+  , module Deku.DOM.Attr.OnTransitionend
+  , module Deku.DOM.Attr.OnTransitionrun
+  , module Deku.DOM.Attr.OnTransitionstart
+  , module Deku.DOM.Attr.OnVolumechange
+  , module Deku.DOM.Attr.OnWaiting
+  , module Deku.DOM.Attr.OnWheel
   , module Deku.DOM.Attr.Open
   , module Deku.DOM.Attr.Optimum
   , module Deku.DOM.Attr.Pattern
@@ -133,97 +221,6 @@ module Deku.DOM
   , module Deku.DOM.Attr.Value
   , module Deku.DOM.Attr.Width
   , module Deku.DOM.Attr.Xtype
-  , module Deku.DOM.Attr.OnAbort
-  , module Deku.DOM.Attr.OnAnimationcancel
-  , module Deku.DOM.Attr.OnAnimationend
-  , module Deku.DOM.Attr.OnAnimationiteration
-  , module Deku.DOM.Attr.OnAnimationstart
-  , module Deku.DOM.Attr.OnAuxclick
-  , module Deku.DOM.Attr.OnBlur
-  , module Deku.DOM.Attr.OnError
-  , module Deku.DOM.Attr.OnFocus
-  , module Deku.DOM.Attr.OnCancel
-  , module Deku.DOM.Attr.OnCanplay
-  , module Deku.DOM.Attr.OnCanplaythrough
-  , module Deku.DOM.Attr.OnChange
-  , module Deku.DOM.Attr.OnClick
-  , module Deku.DOM.Attr.OnClose
-  , module Deku.DOM.Attr.OnContextmenu
-  , module Deku.DOM.Attr.OnDblclick
-  , module Deku.DOM.Attr.OnDrag
-  , module Deku.DOM.Attr.OnDragend
-  , module Deku.DOM.Attr.OnDragenter
-  , module Deku.DOM.Attr.OnDragleave
-  , module Deku.DOM.Attr.OnDragover
-  , module Deku.DOM.Attr.OnDragstart
-  , module Deku.DOM.Attr.OnDrop
-  , module Deku.DOM.Attr.OnDurationchange
-  , module Deku.DOM.Attr.OnEmptied
-  , module Deku.DOM.Attr.OnEnded
-  , module Deku.DOM.Attr.OnFormdata
-  , module Deku.DOM.Attr.OnGotpointercapture
-  , module Deku.DOM.Attr.OnInput
-  , module Deku.DOM.Attr.OnInvalid
-  , module Deku.DOM.Attr.OnKeydown
-  , module Deku.DOM.Attr.OnKeypress
-  , module Deku.DOM.Attr.OnKeyup
-  , module Deku.DOM.Attr.OnLoad
-  , module Deku.DOM.Attr.OnLoadeddata
-  , module Deku.DOM.Attr.OnLoadedmetadata
-  , module Deku.DOM.Attr.OnLoadend
-  , module Deku.DOM.Attr.OnLoadstart
-  , module Deku.DOM.Attr.OnLostpointercapture
-  , module Deku.DOM.Attr.OnMousedown
-  , module Deku.DOM.Attr.OnMouseenter
-  , module Deku.DOM.Attr.OnMouseleave
-  , module Deku.DOM.Attr.OnMousemove
-  , module Deku.DOM.Attr.OnMouseout
-  , module Deku.DOM.Attr.OnMouseover
-  , module Deku.DOM.Attr.OnMouseup
-  , module Deku.DOM.Attr.OnMousewheel
-  , module Deku.DOM.Attr.OnWheel
-  , module Deku.DOM.Attr.OnPause
-  , module Deku.DOM.Attr.OnPlay
-  , module Deku.DOM.Attr.OnPlaying
-  , module Deku.DOM.Attr.OnPointerdown
-  , module Deku.DOM.Attr.OnPointermove
-  , module Deku.DOM.Attr.OnPointerup
-  , module Deku.DOM.Attr.OnPointercancel
-  , module Deku.DOM.Attr.OnPointerover
-  , module Deku.DOM.Attr.OnPointerout
-  , module Deku.DOM.Attr.OnPointerenter
-  , module Deku.DOM.Attr.OnPointerleave
-  , module Deku.DOM.Attr.OnPointerlockchange
-  , module Deku.DOM.Attr.OnPointerlockerror
-  , module Deku.DOM.Attr.OnProgress
-  , module Deku.DOM.Attr.OnRatechange
-  , module Deku.DOM.Attr.OnReset
-  , module Deku.DOM.Attr.OnResize
-  , module Deku.DOM.Attr.OnScroll
-  , module Deku.DOM.Attr.OnSecuritypolicyviolation
-  , module Deku.DOM.Attr.OnSeeked
-  , module Deku.DOM.Attr.OnSeeking
-  , module Deku.DOM.Attr.OnSelect
-  , module Deku.DOM.Attr.OnSelectstart
-  , module Deku.DOM.Attr.OnSelectionchange
-  , module Deku.DOM.Attr.OnShow
-  , module Deku.DOM.Attr.OnSlotchange
-  , module Deku.DOM.Attr.OnStalled
-  , module Deku.DOM.Attr.OnSubmit
-  , module Deku.DOM.Attr.OnSuspend
-  , module Deku.DOM.Attr.OnTimeupdate
-  , module Deku.DOM.Attr.OnVolumechange
-  , module Deku.DOM.Attr.OnTouchcancel
-  , module Deku.DOM.Attr.OnTouchend
-  , module Deku.DOM.Attr.OnTouchmove
-  , module Deku.DOM.Attr.OnTouchstart
-  , module Deku.DOM.Attr.OnTransitioncancel
-  , module Deku.DOM.Attr.OnTransitionend
-  , module Deku.DOM.Attr.OnTransitionrun
-  , module Deku.DOM.Attr.OnTransitionstart
-  , module Deku.DOM.Attr.OnWaiting
-  -- codegen 7
-  -- codegen 0
   , module Deku.DOM.Elt.A
   , module Deku.DOM.Elt.Abbr
   , module Deku.DOM.Elt.Acronym
@@ -250,7 +247,6 @@ module Deku.DOM
   , module Deku.DOM.Elt.Code
   , module Deku.DOM.Elt.Col
   , module Deku.DOM.Elt.Colgroup
-  , module Deku.DOM.Elt.Xdata
   , module Deku.DOM.Elt.Datalist
   , module Deku.DOM.Elt.Dd
   , module Deku.DOM.Elt.Del
@@ -346,12 +342,17 @@ module Deku.DOM
   , module Deku.DOM.Elt.Var
   , module Deku.DOM.Elt.Video
   , module Deku.DOM.Elt.Wbr
-  -- codegen 0
-  ) where
+  , module Deku.DOM.Elt.Xdata
+  , unsafeCustomElement
+  )
+  where
 
-import Deku.Attribute (class Attr, Cb(..), unsafeAttribute, cb')
-
--- codegen 9
+import Bolson.Core (Entity(..))
+import Bolson.Core as Bolson
+import Data.FunctorWithIndex (mapWithIndex)
+import Deku.Attribute (class Attr, Attribute, Cb(..), cb', unsafeAttribute)
+import Deku.Control (elementify)
+import Deku.Core (Domable(..), Domable', unsafeSetPos)
 import Deku.DOM.Attr.Accept (Accept(..))
 import Deku.DOM.Attr.AcceptCharset (AcceptCharset(..))
 import Deku.DOM.Attr.Accesskey (Accesskey(..))
@@ -415,9 +416,9 @@ import Deku.DOM.Attr.HttpEquiv (HttpEquiv(..))
 import Deku.DOM.Attr.Icon (Icon(..))
 import Deku.DOM.Attr.Id (Id(..))
 import Deku.DOM.Attr.Importance (Importance(..))
+import Deku.DOM.Attr.Inputmode (Inputmode(..))
 import Deku.DOM.Attr.Integrity (Integrity(..))
 import Deku.DOM.Attr.Intrinsicsize (Intrinsicsize(..))
-import Deku.DOM.Attr.Inputmode (Inputmode(..))
 import Deku.DOM.Attr.Ismap (Ismap(..))
 import Deku.DOM.Attr.Itemprop (Itemprop(..))
 import Deku.DOM.Attr.Keytype (Keytype(..))
@@ -425,21 +426,110 @@ import Deku.DOM.Attr.Kind (Kind(..))
 import Deku.DOM.Attr.Label (Label(..))
 import Deku.DOM.Attr.Lang (Lang(..))
 import Deku.DOM.Attr.Language (Language(..))
-import Deku.DOM.Attr.Loading (Loading(..))
 import Deku.DOM.Attr.List (List(..))
+import Deku.DOM.Attr.Loading (Loading(..))
 import Deku.DOM.Attr.Loop (Loop(..))
 import Deku.DOM.Attr.Low (Low(..))
 import Deku.DOM.Attr.Manifest (Manifest(..))
 import Deku.DOM.Attr.Max (Max(..))
 import Deku.DOM.Attr.Maxlength (Maxlength(..))
-import Deku.DOM.Attr.Minlength (Minlength(..))
 import Deku.DOM.Attr.Media (Media(..))
 import Deku.DOM.Attr.Method (Method(..))
 import Deku.DOM.Attr.Min (Min(..))
+import Deku.DOM.Attr.Minlength (Minlength(..))
 import Deku.DOM.Attr.Multiple (Multiple(..))
 import Deku.DOM.Attr.Muted (Muted(..))
 import Deku.DOM.Attr.Name (Name(..))
 import Deku.DOM.Attr.Novalidate (Novalidate(..))
+import Deku.DOM.Attr.OnAbort (OnAbort(..))
+import Deku.DOM.Attr.OnAnimationcancel (OnAnimationcancel(..))
+import Deku.DOM.Attr.OnAnimationend (OnAnimationend(..))
+import Deku.DOM.Attr.OnAnimationiteration (OnAnimationiteration(..))
+import Deku.DOM.Attr.OnAnimationstart (OnAnimationstart(..))
+import Deku.DOM.Attr.OnAuxclick (OnAuxclick(..))
+import Deku.DOM.Attr.OnBlur (OnBlur(..))
+import Deku.DOM.Attr.OnCancel (OnCancel(..))
+import Deku.DOM.Attr.OnCanplay (OnCanplay(..))
+import Deku.DOM.Attr.OnCanplaythrough (OnCanplaythrough(..))
+import Deku.DOM.Attr.OnChange (OnChange(..))
+import Deku.DOM.Attr.OnClick (OnClick(..))
+import Deku.DOM.Attr.OnClose (OnClose(..))
+import Deku.DOM.Attr.OnContextmenu (OnContextmenu(..))
+import Deku.DOM.Attr.OnDblclick (OnDblclick(..))
+import Deku.DOM.Attr.OnDrag (OnDrag(..))
+import Deku.DOM.Attr.OnDragend (OnDragend(..))
+import Deku.DOM.Attr.OnDragenter (OnDragenter(..))
+import Deku.DOM.Attr.OnDragleave (OnDragleave(..))
+import Deku.DOM.Attr.OnDragover (OnDragover(..))
+import Deku.DOM.Attr.OnDragstart (OnDragstart(..))
+import Deku.DOM.Attr.OnDrop (OnDrop(..))
+import Deku.DOM.Attr.OnDurationchange (OnDurationchange(..))
+import Deku.DOM.Attr.OnEmptied (OnEmptied(..))
+import Deku.DOM.Attr.OnEnded (OnEnded(..))
+import Deku.DOM.Attr.OnError (OnError(..))
+import Deku.DOM.Attr.OnFocus (OnFocus(..))
+import Deku.DOM.Attr.OnFormdata (OnFormdata(..))
+import Deku.DOM.Attr.OnGotpointercapture (OnGotpointercapture(..))
+import Deku.DOM.Attr.OnInput (OnInput(..))
+import Deku.DOM.Attr.OnInvalid (OnInvalid(..))
+import Deku.DOM.Attr.OnKeydown (OnKeydown(..))
+import Deku.DOM.Attr.OnKeypress (OnKeypress(..))
+import Deku.DOM.Attr.OnKeyup (OnKeyup(..))
+import Deku.DOM.Attr.OnLoad (OnLoad(..))
+import Deku.DOM.Attr.OnLoadeddata (OnLoadeddata(..))
+import Deku.DOM.Attr.OnLoadedmetadata (OnLoadedmetadata(..))
+import Deku.DOM.Attr.OnLoadend (OnLoadend(..))
+import Deku.DOM.Attr.OnLoadstart (OnLoadstart(..))
+import Deku.DOM.Attr.OnLostpointercapture (OnLostpointercapture(..))
+import Deku.DOM.Attr.OnMousedown (OnMousedown(..))
+import Deku.DOM.Attr.OnMouseenter (OnMouseenter(..))
+import Deku.DOM.Attr.OnMouseleave (OnMouseleave(..))
+import Deku.DOM.Attr.OnMousemove (OnMousemove(..))
+import Deku.DOM.Attr.OnMouseout (OnMouseout(..))
+import Deku.DOM.Attr.OnMouseover (OnMouseover(..))
+import Deku.DOM.Attr.OnMouseup (OnMouseup(..))
+import Deku.DOM.Attr.OnMousewheel (OnMousewheel(..))
+import Deku.DOM.Attr.OnPause (OnPause(..))
+import Deku.DOM.Attr.OnPlay (OnPlay(..))
+import Deku.DOM.Attr.OnPlaying (OnPlaying(..))
+import Deku.DOM.Attr.OnPointercancel (OnPointercancel(..))
+import Deku.DOM.Attr.OnPointerdown (OnPointerdown(..))
+import Deku.DOM.Attr.OnPointerenter (OnPointerenter(..))
+import Deku.DOM.Attr.OnPointerleave (OnPointerleave(..))
+import Deku.DOM.Attr.OnPointerlockchange (OnPointerlockchange(..))
+import Deku.DOM.Attr.OnPointerlockerror (OnPointerlockerror(..))
+import Deku.DOM.Attr.OnPointermove (OnPointermove(..))
+import Deku.DOM.Attr.OnPointerout (OnPointerout(..))
+import Deku.DOM.Attr.OnPointerover (OnPointerover(..))
+import Deku.DOM.Attr.OnPointerup (OnPointerup(..))
+import Deku.DOM.Attr.OnProgress (OnProgress(..))
+import Deku.DOM.Attr.OnRatechange (OnRatechange(..))
+import Deku.DOM.Attr.OnReset (OnReset(..))
+import Deku.DOM.Attr.OnResize (OnResize(..))
+import Deku.DOM.Attr.OnScroll (OnScroll(..))
+import Deku.DOM.Attr.OnSecuritypolicyviolation (OnSecuritypolicyviolation(..))
+import Deku.DOM.Attr.OnSeeked (OnSeeked(..))
+import Deku.DOM.Attr.OnSeeking (OnSeeking(..))
+import Deku.DOM.Attr.OnSelect (OnSelect(..))
+import Deku.DOM.Attr.OnSelectionchange (OnSelectionchange(..))
+import Deku.DOM.Attr.OnSelectstart (OnSelectstart(..))
+import Deku.DOM.Attr.OnShow (OnShow(..))
+import Deku.DOM.Attr.OnSlotchange (OnSlotchange(..))
+import Deku.DOM.Attr.OnStalled (OnStalled(..))
+import Deku.DOM.Attr.OnSubmit (OnSubmit(..))
+import Deku.DOM.Attr.OnSuspend (OnSuspend(..))
+import Deku.DOM.Attr.OnTimeupdate (OnTimeupdate(..))
+import Deku.DOM.Attr.OnTouchcancel (OnTouchcancel(..))
+import Deku.DOM.Attr.OnTouchend (OnTouchend(..))
+import Deku.DOM.Attr.OnTouchmove (OnTouchmove(..))
+import Deku.DOM.Attr.OnTouchstart (OnTouchstart(..))
+import Deku.DOM.Attr.OnTransitioncancel (OnTransitioncancel(..))
+import Deku.DOM.Attr.OnTransitionend (OnTransitionend(..))
+import Deku.DOM.Attr.OnTransitionrun (OnTransitionrun(..))
+import Deku.DOM.Attr.OnTransitionstart (OnTransitionstart(..))
+import Deku.DOM.Attr.OnVolumechange (OnVolumechange(..))
+import Deku.DOM.Attr.OnWaiting (OnWaiting(..))
+import Deku.DOM.Attr.OnWheel (OnWheel(..))
 import Deku.DOM.Attr.Open (Open(..))
 import Deku.DOM.Attr.Optimum (Optimum(..))
 import Deku.DOM.Attr.Pattern (Pattern(..))
@@ -482,97 +572,6 @@ import Deku.DOM.Attr.Usemap (Usemap(..))
 import Deku.DOM.Attr.Value (Value(..))
 import Deku.DOM.Attr.Width (Width(..))
 import Deku.DOM.Attr.Xtype (Xtype(..))
-import Deku.DOM.Attr.OnAbort (OnAbort(..))
-import Deku.DOM.Attr.OnAnimationcancel (OnAnimationcancel(..))
-import Deku.DOM.Attr.OnAnimationend (OnAnimationend(..))
-import Deku.DOM.Attr.OnAnimationiteration (OnAnimationiteration(..))
-import Deku.DOM.Attr.OnAnimationstart (OnAnimationstart(..))
-import Deku.DOM.Attr.OnAuxclick (OnAuxclick(..))
-import Deku.DOM.Attr.OnBlur (OnBlur(..))
-import Deku.DOM.Attr.OnError (OnError(..))
-import Deku.DOM.Attr.OnFocus (OnFocus(..))
-import Deku.DOM.Attr.OnCancel (OnCancel(..))
-import Deku.DOM.Attr.OnCanplay (OnCanplay(..))
-import Deku.DOM.Attr.OnCanplaythrough (OnCanplaythrough(..))
-import Deku.DOM.Attr.OnChange (OnChange(..))
-import Deku.DOM.Attr.OnClick (OnClick(..))
-import Deku.DOM.Attr.OnClose (OnClose(..))
-import Deku.DOM.Attr.OnContextmenu (OnContextmenu(..))
-import Deku.DOM.Attr.OnDblclick (OnDblclick(..))
-import Deku.DOM.Attr.OnDrag (OnDrag(..))
-import Deku.DOM.Attr.OnDragend (OnDragend(..))
-import Deku.DOM.Attr.OnDragenter (OnDragenter(..))
-import Deku.DOM.Attr.OnDragleave (OnDragleave(..))
-import Deku.DOM.Attr.OnDragover (OnDragover(..))
-import Deku.DOM.Attr.OnDragstart (OnDragstart(..))
-import Deku.DOM.Attr.OnDrop (OnDrop(..))
-import Deku.DOM.Attr.OnDurationchange (OnDurationchange(..))
-import Deku.DOM.Attr.OnEmptied (OnEmptied(..))
-import Deku.DOM.Attr.OnEnded (OnEnded(..))
-import Deku.DOM.Attr.OnFormdata (OnFormdata(..))
-import Deku.DOM.Attr.OnGotpointercapture (OnGotpointercapture(..))
-import Deku.DOM.Attr.OnInput (OnInput(..))
-import Deku.DOM.Attr.OnInvalid (OnInvalid(..))
-import Deku.DOM.Attr.OnKeydown (OnKeydown(..))
-import Deku.DOM.Attr.OnKeypress (OnKeypress(..))
-import Deku.DOM.Attr.OnKeyup (OnKeyup(..))
-import Deku.DOM.Attr.OnLoad (OnLoad(..))
-import Deku.DOM.Attr.OnLoadeddata (OnLoadeddata(..))
-import Deku.DOM.Attr.OnLoadedmetadata (OnLoadedmetadata(..))
-import Deku.DOM.Attr.OnLoadend (OnLoadend(..))
-import Deku.DOM.Attr.OnLoadstart (OnLoadstart(..))
-import Deku.DOM.Attr.OnLostpointercapture (OnLostpointercapture(..))
-import Deku.DOM.Attr.OnMousedown (OnMousedown(..))
-import Deku.DOM.Attr.OnMouseenter (OnMouseenter(..))
-import Deku.DOM.Attr.OnMouseleave (OnMouseleave(..))
-import Deku.DOM.Attr.OnMousemove (OnMousemove(..))
-import Deku.DOM.Attr.OnMouseout (OnMouseout(..))
-import Deku.DOM.Attr.OnMouseover (OnMouseover(..))
-import Deku.DOM.Attr.OnMouseup (OnMouseup(..))
-import Deku.DOM.Attr.OnMousewheel (OnMousewheel(..))
-import Deku.DOM.Attr.OnWheel (OnWheel(..))
-import Deku.DOM.Attr.OnPause (OnPause(..))
-import Deku.DOM.Attr.OnPlay (OnPlay(..))
-import Deku.DOM.Attr.OnPlaying (OnPlaying(..))
-import Deku.DOM.Attr.OnPointerdown (OnPointerdown(..))
-import Deku.DOM.Attr.OnPointermove (OnPointermove(..))
-import Deku.DOM.Attr.OnPointerup (OnPointerup(..))
-import Deku.DOM.Attr.OnPointercancel (OnPointercancel(..))
-import Deku.DOM.Attr.OnPointerover (OnPointerover(..))
-import Deku.DOM.Attr.OnPointerout (OnPointerout(..))
-import Deku.DOM.Attr.OnPointerenter (OnPointerenter(..))
-import Deku.DOM.Attr.OnPointerleave (OnPointerleave(..))
-import Deku.DOM.Attr.OnPointerlockchange (OnPointerlockchange(..))
-import Deku.DOM.Attr.OnPointerlockerror (OnPointerlockerror(..))
-import Deku.DOM.Attr.OnProgress (OnProgress(..))
-import Deku.DOM.Attr.OnRatechange (OnRatechange(..))
-import Deku.DOM.Attr.OnReset (OnReset(..))
-import Deku.DOM.Attr.OnResize (OnResize(..))
-import Deku.DOM.Attr.OnScroll (OnScroll(..))
-import Deku.DOM.Attr.OnSecuritypolicyviolation (OnSecuritypolicyviolation(..))
-import Deku.DOM.Attr.OnSeeked (OnSeeked(..))
-import Deku.DOM.Attr.OnSeeking (OnSeeking(..))
-import Deku.DOM.Attr.OnSelect (OnSelect(..))
-import Deku.DOM.Attr.OnSelectstart (OnSelectstart(..))
-import Deku.DOM.Attr.OnSelectionchange (OnSelectionchange(..))
-import Deku.DOM.Attr.OnShow (OnShow(..))
-import Deku.DOM.Attr.OnSlotchange (OnSlotchange(..))
-import Deku.DOM.Attr.OnStalled (OnStalled(..))
-import Deku.DOM.Attr.OnSubmit (OnSubmit(..))
-import Deku.DOM.Attr.OnSuspend (OnSuspend(..))
-import Deku.DOM.Attr.OnTimeupdate (OnTimeupdate(..))
-import Deku.DOM.Attr.OnVolumechange (OnVolumechange(..))
-import Deku.DOM.Attr.OnTouchcancel (OnTouchcancel(..))
-import Deku.DOM.Attr.OnTouchend (OnTouchend(..))
-import Deku.DOM.Attr.OnTouchmove (OnTouchmove(..))
-import Deku.DOM.Attr.OnTouchstart (OnTouchstart(..))
-import Deku.DOM.Attr.OnTransitioncancel (OnTransitioncancel(..))
-import Deku.DOM.Attr.OnTransitionend (OnTransitionend(..))
-import Deku.DOM.Attr.OnTransitionrun (OnTransitionrun(..))
-import Deku.DOM.Attr.OnTransitionstart (OnTransitionstart(..))
-import Deku.DOM.Attr.OnWaiting (OnWaiting(..))
--- codegen 9
--- codegen 2
 import Deku.DOM.Elt.A (A_, a, a_)
 import Deku.DOM.Elt.Abbr (Abbr_, abbr, abbr_)
 import Deku.DOM.Elt.Acronym (Acronym_, acronym, acronym_)
@@ -599,7 +598,6 @@ import Deku.DOM.Elt.Cite (Cite_, cite, cite_)
 import Deku.DOM.Elt.Code (Code_, code, code_)
 import Deku.DOM.Elt.Col (Col_, col, col_)
 import Deku.DOM.Elt.Colgroup (Colgroup_, colgroup, colgroup_)
-import Deku.DOM.Elt.Xdata (Xdata_, xdata, xdata_)
 import Deku.DOM.Elt.Datalist (Datalist_, datalist, datalist_)
 import Deku.DOM.Elt.Dd (Dd_, dd, dd_)
 import Deku.DOM.Elt.Del (Del_, del, del_)
@@ -695,25 +693,27 @@ import Deku.DOM.Elt.Ul (Ul_, ul, ul_)
 import Deku.DOM.Elt.Var (Var_, var, var_)
 import Deku.DOM.Elt.Video (Video_, video, video_)
 import Deku.DOM.Elt.Wbr (Wbr_, wbr, wbr_)
--- codegen 2
+import Deku.DOM.Elt.Xdata (Xdata_, xdata, xdata_)
 import Effect (Effect)
+import FRP.Event (Event)
 import Prelude (Unit)
+import Safe.Coerce (coerce)
+import Type.Proxy (Proxy)
 import Unsafe.Coerce (unsafeCoerce)
 import Web.DOM as DOM
-
 import Web.HTML.HTMLAnchorElement as HTMLAnchorElement
 import Web.HTML.HTMLAreaElement as HTMLAreaElement
 import Web.HTML.HTMLAudioElement as HTMLAudioElement
+import Web.HTML.HTMLBRElement as HTMLBRElement
 import Web.HTML.HTMLBaseElement as HTMLBaseElement
 import Web.HTML.HTMLBodyElement as HTMLBodyElement
-import Web.HTML.HTMLBRElement as HTMLBRElement
 import Web.HTML.HTMLButtonElement as HTMLButtonElement
 import Web.HTML.HTMLCanvasElement as HTMLCanvasElement
 import Web.HTML.HTMLDivElement as HTMLDivElement
 import Web.HTML.HTMLEmbedElement as HTMLEmbedElement
 import Web.HTML.HTMLFormElement as HTMLFormElement
-import Web.HTML.HTMLHeadElement as HTMLHeadElement
 import Web.HTML.HTMLHRElement as HTMLHRElement
+import Web.HTML.HTMLHeadElement as HTMLHeadElement
 import Web.HTML.HTMLHtmlElement as HTMLHtmlElement
 import Web.HTML.HTMLInputElement as HTMLInputElement
 import Web.HTML.HTMLLabelElement as HTMLLabelElement
@@ -734,8 +734,8 @@ import Web.HTML.HTMLSelectElement as HTMLSelectElement
 import Web.HTML.HTMLSourceElement as HTMLSourceElement
 import Web.HTML.HTMLSpanElement as HTMLSpanElement
 import Web.HTML.HTMLStyleElement as HTMLStyleElement
-import Web.HTML.HTMLTableElement as HTMLTableElement
 import Web.HTML.HTMLTableDataCellElement as HTMLTableDataCellElement
+import Web.HTML.HTMLTableElement as HTMLTableElement
 import Web.HTML.HTMLTemplateElement as HTMLTemplateElement
 import Web.HTML.HTMLTextAreaElement as HTMLTextAreaElement
 import Web.HTML.HTMLTimeElement as HTMLTimeElement
@@ -870,6 +870,23 @@ instance tagToDekuVideo_ :: TagToDeku "video" Video_
 instance tagToDekuWbr_ :: TagToDeku "wbr" Wbr_
 -- codegen 3
 
+
+-- a hack for custom stuff
+unsafeCustomElement
+  :: forall element lock payload
+   . String
+  -> Proxy element
+  -> Event (Attribute element)
+  -> Array (Domable lock payload)
+  -> Domable lock payload
+unsafeCustomElement name _ attributes kids = Domable
+  ( Element'
+      ( elementify name attributes
+          ( (coerce :: Domable' lock payload -> Domable lock payload)
+              (Bolson.fixed (coerce (mapWithIndex unsafeSetPos kids)))
+          )
+      )
+  )
 -- we can always refer to ourself
 data Self = Self
 
