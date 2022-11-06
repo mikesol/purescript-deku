@@ -386,6 +386,8 @@ export const setProp_ = (tryHydration) => (a) => (state) => () => {
 		}
 		if (state.units[ptr].main.tagName === "INPUT" && a.key === "value") {
 			state.units[ptr].main.value = avv;
+		} else if (state.units[ptr].main.tagName === "TEXTAREA" && a.key === "value") {
+			state.units[ptr].main.value = avv;
 		} else if (state.units[ptr].main.tagName === "INPUT" && a.key === "checked") {
 			state.units[ptr].main.checked = avv === "true";
 		} else if (a.key === "disabled") {
