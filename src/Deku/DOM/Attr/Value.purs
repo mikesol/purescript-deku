@@ -1,7 +1,7 @@
 module Deku.DOM.Attr.Value where
 
 import Deku.Attribute (class Attr, prop', unsafeAttribute)
-import Deku.DOM (Textarea_)
+import Deku.DOM.Elt.Textarea (Textarea_)
 import Deku.DOM.Elt.Button (Button_)
 import Deku.DOM.Elt.Input (Input_)
 import Deku.DOM.Elt.Li (Li_)
