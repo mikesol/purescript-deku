@@ -10,9 +10,12 @@ data End = End
 
 instance Attr Animate_ End String where
   attr End value = unsafeAttribute { key: "end", value: prop' value }
+
 instance Attr AnimateMotion_ End String where
   attr End value = unsafeAttribute { key: "end", value: prop' value }
+
 instance Attr AnimateTransform_ End String where
   attr End value = unsafeAttribute { key: "end", value: prop' value }
+
 instance Attr Set_ End String where
   attr End value = unsafeAttribute { key: "end", value: prop' value }

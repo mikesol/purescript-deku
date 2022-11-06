@@ -22,36 +22,69 @@ import Deku.Attribute (class Attr, prop', unsafeAttribute)
 data AriaMultiline = AriaMultiline
 
 instance Attr Circle_ AriaMultiline String where
-  attr AriaMultiline value = unsafeAttribute { key: "aria-multiline", value: prop' value }
+  attr AriaMultiline value = unsafeAttribute
+    { key: "aria-multiline", value: prop' value }
+
 instance Attr Ellipse_ AriaMultiline String where
-  attr AriaMultiline value = unsafeAttribute { key: "aria-multiline", value: prop' value }
+  attr AriaMultiline value = unsafeAttribute
+    { key: "aria-multiline", value: prop' value }
+
 instance Attr ForeignObject_ AriaMultiline String where
-  attr AriaMultiline value = unsafeAttribute { key: "aria-multiline", value: prop' value }
+  attr AriaMultiline value = unsafeAttribute
+    { key: "aria-multiline", value: prop' value }
+
 instance Attr G_ AriaMultiline String where
-  attr AriaMultiline value = unsafeAttribute { key: "aria-multiline", value: prop' value }
+  attr AriaMultiline value = unsafeAttribute
+    { key: "aria-multiline", value: prop' value }
+
 instance Attr Line_ AriaMultiline String where
-  attr AriaMultiline value = unsafeAttribute { key: "aria-multiline", value: prop' value }
+  attr AriaMultiline value = unsafeAttribute
+    { key: "aria-multiline", value: prop' value }
+
 instance Attr Marker_ AriaMultiline String where
-  attr AriaMultiline value = unsafeAttribute { key: "aria-multiline", value: prop' value }
+  attr AriaMultiline value = unsafeAttribute
+    { key: "aria-multiline", value: prop' value }
+
 instance Attr Path_ AriaMultiline String where
-  attr AriaMultiline value = unsafeAttribute { key: "aria-multiline", value: prop' value }
+  attr AriaMultiline value = unsafeAttribute
+    { key: "aria-multiline", value: prop' value }
+
 instance Attr Polygon_ AriaMultiline String where
-  attr AriaMultiline value = unsafeAttribute { key: "aria-multiline", value: prop' value }
+  attr AriaMultiline value = unsafeAttribute
+    { key: "aria-multiline", value: prop' value }
+
 instance Attr Polyline_ AriaMultiline String where
-  attr AriaMultiline value = unsafeAttribute { key: "aria-multiline", value: prop' value }
+  attr AriaMultiline value = unsafeAttribute
+    { key: "aria-multiline", value: prop' value }
+
 instance Attr Rect_ AriaMultiline String where
-  attr AriaMultiline value = unsafeAttribute { key: "aria-multiline", value: prop' value }
+  attr AriaMultiline value = unsafeAttribute
+    { key: "aria-multiline", value: prop' value }
+
 instance Attr Svg_ AriaMultiline String where
-  attr AriaMultiline value = unsafeAttribute { key: "aria-multiline", value: prop' value }
+  attr AriaMultiline value = unsafeAttribute
+    { key: "aria-multiline", value: prop' value }
+
 instance Attr Symbol_ AriaMultiline String where
-  attr AriaMultiline value = unsafeAttribute { key: "aria-multiline", value: prop' value }
+  attr AriaMultiline value = unsafeAttribute
+    { key: "aria-multiline", value: prop' value }
+
 instance Attr Text_ AriaMultiline String where
-  attr AriaMultiline value = unsafeAttribute { key: "aria-multiline", value: prop' value }
+  attr AriaMultiline value = unsafeAttribute
+    { key: "aria-multiline", value: prop' value }
+
 instance Attr TextPath_ AriaMultiline String where
-  attr AriaMultiline value = unsafeAttribute { key: "aria-multiline", value: prop' value }
+  attr AriaMultiline value = unsafeAttribute
+    { key: "aria-multiline", value: prop' value }
+
 instance Attr Tspan_ AriaMultiline String where
-  attr AriaMultiline value = unsafeAttribute { key: "aria-multiline", value: prop' value }
+  attr AriaMultiline value = unsafeAttribute
+    { key: "aria-multiline", value: prop' value }
+
 instance Attr Use_ AriaMultiline String where
-  attr AriaMultiline value = unsafeAttribute { key: "aria-multiline", value: prop' value }
+  attr AriaMultiline value = unsafeAttribute
+    { key: "aria-multiline", value: prop' value }
+
 instance Attr View_ AriaMultiline String where
-  attr AriaMultiline value = unsafeAttribute { key: "aria-multiline", value: prop' value }
+  attr AriaMultiline value = unsafeAttribute
+    { key: "aria-multiline", value: prop' value }

@@ -22,36 +22,69 @@ import Deku.Attribute (class Attr, prop', unsafeAttribute)
 data AriaPressed = AriaPressed
 
 instance Attr Circle_ AriaPressed String where
-  attr AriaPressed value = unsafeAttribute { key: "aria-pressed", value: prop' value }
+  attr AriaPressed value = unsafeAttribute
+    { key: "aria-pressed", value: prop' value }
+
 instance Attr Ellipse_ AriaPressed String where
-  attr AriaPressed value = unsafeAttribute { key: "aria-pressed", value: prop' value }
+  attr AriaPressed value = unsafeAttribute
+    { key: "aria-pressed", value: prop' value }
+
 instance Attr ForeignObject_ AriaPressed String where
-  attr AriaPressed value = unsafeAttribute { key: "aria-pressed", value: prop' value }
+  attr AriaPressed value = unsafeAttribute
+    { key: "aria-pressed", value: prop' value }
+
 instance Attr G_ AriaPressed String where
-  attr AriaPressed value = unsafeAttribute { key: "aria-pressed", value: prop' value }
+  attr AriaPressed value = unsafeAttribute
+    { key: "aria-pressed", value: prop' value }
+
 instance Attr Line_ AriaPressed String where
-  attr AriaPressed value = unsafeAttribute { key: "aria-pressed", value: prop' value }
+  attr AriaPressed value = unsafeAttribute
+    { key: "aria-pressed", value: prop' value }
+
 instance Attr Marker_ AriaPressed String where
-  attr AriaPressed value = unsafeAttribute { key: "aria-pressed", value: prop' value }
+  attr AriaPressed value = unsafeAttribute
+    { key: "aria-pressed", value: prop' value }
+
 instance Attr Path_ AriaPressed String where
-  attr AriaPressed value = unsafeAttribute { key: "aria-pressed", value: prop' value }
+  attr AriaPressed value = unsafeAttribute
+    { key: "aria-pressed", value: prop' value }
+
 instance Attr Polygon_ AriaPressed String where
-  attr AriaPressed value = unsafeAttribute { key: "aria-pressed", value: prop' value }
+  attr AriaPressed value = unsafeAttribute
+    { key: "aria-pressed", value: prop' value }
+
 instance Attr Polyline_ AriaPressed String where
-  attr AriaPressed value = unsafeAttribute { key: "aria-pressed", value: prop' value }
+  attr AriaPressed value = unsafeAttribute
+    { key: "aria-pressed", value: prop' value }
+
 instance Attr Rect_ AriaPressed String where
-  attr AriaPressed value = unsafeAttribute { key: "aria-pressed", value: prop' value }
+  attr AriaPressed value = unsafeAttribute
+    { key: "aria-pressed", value: prop' value }
+
 instance Attr Svg_ AriaPressed String where
-  attr AriaPressed value = unsafeAttribute { key: "aria-pressed", value: prop' value }
+  attr AriaPressed value = unsafeAttribute
+    { key: "aria-pressed", value: prop' value }
+
 instance Attr Symbol_ AriaPressed String where
-  attr AriaPressed value = unsafeAttribute { key: "aria-pressed", value: prop' value }
+  attr AriaPressed value = unsafeAttribute
+    { key: "aria-pressed", value: prop' value }
+
 instance Attr Text_ AriaPressed String where
-  attr AriaPressed value = unsafeAttribute { key: "aria-pressed", value: prop' value }
+  attr AriaPressed value = unsafeAttribute
+    { key: "aria-pressed", value: prop' value }
+
 instance Attr TextPath_ AriaPressed String where
-  attr AriaPressed value = unsafeAttribute { key: "aria-pressed", value: prop' value }
+  attr AriaPressed value = unsafeAttribute
+    { key: "aria-pressed", value: prop' value }
+
 instance Attr Tspan_ AriaPressed String where
-  attr AriaPressed value = unsafeAttribute { key: "aria-pressed", value: prop' value }
+  attr AriaPressed value = unsafeAttribute
+    { key: "aria-pressed", value: prop' value }
+
 instance Attr Use_ AriaPressed String where
-  attr AriaPressed value = unsafeAttribute { key: "aria-pressed", value: prop' value }
+  attr AriaPressed value = unsafeAttribute
+    { key: "aria-pressed", value: prop' value }
+
 instance Attr View_ AriaPressed String where
-  attr AriaPressed value = unsafeAttribute { key: "aria-pressed", value: prop' value }
+  attr AriaPressed value = unsafeAttribute
+    { key: "aria-pressed", value: prop' value }

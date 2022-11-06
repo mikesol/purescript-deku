@@ -28,13 +28,18 @@ instance Attr Link_ Href String where
 
 instance Attr Image_ Href String where
   attr Href value = unsafeAttribute { key: "href", value: prop' value }
+
 instance Attr LinearGradient_ Href String where
   attr Href value = unsafeAttribute { key: "href", value: prop' value }
+
 instance Attr Pattern_ Href String where
   attr Href value = unsafeAttribute { key: "href", value: prop' value }
+
 instance Attr RadialGradient_ Href String where
   attr Href value = unsafeAttribute { key: "href", value: prop' value }
+
 instance Attr TextPath_ Href String where
   attr Href value = unsafeAttribute { key: "href", value: prop' value }
+
 instance Attr Use_ Href String where
   attr Href value = unsafeAttribute { key: "href", value: prop' value }

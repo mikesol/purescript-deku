@@ -6,4 +6,5 @@ import Deku.Attribute (class Attr, prop', unsafeAttribute)
 data LimitingConeAngle = LimitingConeAngle
 
 instance Attr FeSpotLight_ LimitingConeAngle String where
-  attr LimitingConeAngle value = unsafeAttribute { key: "limitingConeAngle", value: prop' value }
+  attr LimitingConeAngle value = unsafeAttribute
+    { key: "limitingConeAngle", value: prop' value }

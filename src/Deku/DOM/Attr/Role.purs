@@ -510,33 +510,48 @@ instance Attr Wbr_ Role String where
 
 instance Attr Circle_ Role String where
   attr Role value = unsafeAttribute { key: "role", value: prop' value }
+
 instance Attr Ellipse_ Role String where
   attr Role value = unsafeAttribute { key: "role", value: prop' value }
+
 instance Attr ForeignObject_ Role String where
   attr Role value = unsafeAttribute { key: "role", value: prop' value }
+
 instance Attr G_ Role String where
   attr Role value = unsafeAttribute { key: "role", value: prop' value }
+
 instance Attr Line_ Role String where
   attr Role value = unsafeAttribute { key: "role", value: prop' value }
+
 instance Attr Marker_ Role String where
   attr Role value = unsafeAttribute { key: "role", value: prop' value }
+
 instance Attr Path_ Role String where
   attr Role value = unsafeAttribute { key: "role", value: prop' value }
+
 instance Attr Polygon_ Role String where
   attr Role value = unsafeAttribute { key: "role", value: prop' value }
+
 instance Attr Polyline_ Role String where
   attr Role value = unsafeAttribute { key: "role", value: prop' value }
+
 instance Attr Rect_ Role String where
   attr Role value = unsafeAttribute { key: "role", value: prop' value }
+
 instance Attr Symbol_ Role String where
   attr Role value = unsafeAttribute { key: "role", value: prop' value }
+
 instance Attr Text_ Role String where
   attr Role value = unsafeAttribute { key: "role", value: prop' value }
+
 instance Attr TextPath_ Role String where
   attr Role value = unsafeAttribute { key: "role", value: prop' value }
+
 instance Attr Tspan_ Role String where
   attr Role value = unsafeAttribute { key: "role", value: prop' value }
+
 instance Attr Use_ Role String where
   attr Role value = unsafeAttribute { key: "role", value: prop' value }
+
 instance Attr View_ Role String where
   attr Role value = unsafeAttribute { key: "role", value: prop' value }

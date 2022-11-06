@@ -27,46 +27,89 @@ import Deku.Attribute (class Attr, prop', unsafeAttribute)
 data RequiredExtensions = RequiredExtensions
 
 instance Attr AnimateTransform_ RequiredExtensions String where
-  attr RequiredExtensions value = unsafeAttribute { key: "requiredExtensions", value: prop' value }
+  attr RequiredExtensions value = unsafeAttribute
+    { key: "requiredExtensions", value: prop' value }
+
 instance Attr Circle_ RequiredExtensions String where
-  attr RequiredExtensions value = unsafeAttribute { key: "requiredExtensions", value: prop' value }
+  attr RequiredExtensions value = unsafeAttribute
+    { key: "requiredExtensions", value: prop' value }
+
 instance Attr ClipPath_ RequiredExtensions String where
-  attr RequiredExtensions value = unsafeAttribute { key: "requiredExtensions", value: prop' value }
+  attr RequiredExtensions value = unsafeAttribute
+    { key: "requiredExtensions", value: prop' value }
+
 instance Attr Discard_ RequiredExtensions String where
-  attr RequiredExtensions value = unsafeAttribute { key: "requiredExtensions", value: prop' value }
+  attr RequiredExtensions value = unsafeAttribute
+    { key: "requiredExtensions", value: prop' value }
+
 instance Attr Ellipse_ RequiredExtensions String where
-  attr RequiredExtensions value = unsafeAttribute { key: "requiredExtensions", value: prop' value }
+  attr RequiredExtensions value = unsafeAttribute
+    { key: "requiredExtensions", value: prop' value }
+
 instance Attr ForeignObject_ RequiredExtensions String where
-  attr RequiredExtensions value = unsafeAttribute { key: "requiredExtensions", value: prop' value }
+  attr RequiredExtensions value = unsafeAttribute
+    { key: "requiredExtensions", value: prop' value }
+
 instance Attr G_ RequiredExtensions String where
-  attr RequiredExtensions value = unsafeAttribute { key: "requiredExtensions", value: prop' value }
+  attr RequiredExtensions value = unsafeAttribute
+    { key: "requiredExtensions", value: prop' value }
+
 instance Attr Image_ RequiredExtensions String where
-  attr RequiredExtensions value = unsafeAttribute { key: "requiredExtensions", value: prop' value }
+  attr RequiredExtensions value = unsafeAttribute
+    { key: "requiredExtensions", value: prop' value }
+
 instance Attr Line_ RequiredExtensions String where
-  attr RequiredExtensions value = unsafeAttribute { key: "requiredExtensions", value: prop' value }
+  attr RequiredExtensions value = unsafeAttribute
+    { key: "requiredExtensions", value: prop' value }
+
 instance Attr Marker_ RequiredExtensions String where
-  attr RequiredExtensions value = unsafeAttribute { key: "requiredExtensions", value: prop' value }
+  attr RequiredExtensions value = unsafeAttribute
+    { key: "requiredExtensions", value: prop' value }
+
 instance Attr Mask_ RequiredExtensions String where
-  attr RequiredExtensions value = unsafeAttribute { key: "requiredExtensions", value: prop' value }
+  attr RequiredExtensions value = unsafeAttribute
+    { key: "requiredExtensions", value: prop' value }
+
 instance Attr Path_ RequiredExtensions String where
-  attr RequiredExtensions value = unsafeAttribute { key: "requiredExtensions", value: prop' value }
+  attr RequiredExtensions value = unsafeAttribute
+    { key: "requiredExtensions", value: prop' value }
+
 instance Attr Pattern_ RequiredExtensions String where
-  attr RequiredExtensions value = unsafeAttribute { key: "requiredExtensions", value: prop' value }
+  attr RequiredExtensions value = unsafeAttribute
+    { key: "requiredExtensions", value: prop' value }
+
 instance Attr Polygon_ RequiredExtensions String where
-  attr RequiredExtensions value = unsafeAttribute { key: "requiredExtensions", value: prop' value }
+  attr RequiredExtensions value = unsafeAttribute
+    { key: "requiredExtensions", value: prop' value }
+
 instance Attr Polyline_ RequiredExtensions String where
-  attr RequiredExtensions value = unsafeAttribute { key: "requiredExtensions", value: prop' value }
+  attr RequiredExtensions value = unsafeAttribute
+    { key: "requiredExtensions", value: prop' value }
+
 instance Attr Rect_ RequiredExtensions String where
-  attr RequiredExtensions value = unsafeAttribute { key: "requiredExtensions", value: prop' value }
+  attr RequiredExtensions value = unsafeAttribute
+    { key: "requiredExtensions", value: prop' value }
+
 instance Attr Svg_ RequiredExtensions String where
-  attr RequiredExtensions value = unsafeAttribute { key: "requiredExtensions", value: prop' value }
+  attr RequiredExtensions value = unsafeAttribute
+    { key: "requiredExtensions", value: prop' value }
+
 instance Attr Switch_ RequiredExtensions String where
-  attr RequiredExtensions value = unsafeAttribute { key: "requiredExtensions", value: prop' value }
+  attr RequiredExtensions value = unsafeAttribute
+    { key: "requiredExtensions", value: prop' value }
+
 instance Attr Text_ RequiredExtensions String where
-  attr RequiredExtensions value = unsafeAttribute { key: "requiredExtensions", value: prop' value }
+  attr RequiredExtensions value = unsafeAttribute
+    { key: "requiredExtensions", value: prop' value }
+
 instance Attr TextPath_ RequiredExtensions String where
-  attr RequiredExtensions value = unsafeAttribute { key: "requiredExtensions", value: prop' value }
+  attr RequiredExtensions value = unsafeAttribute
+    { key: "requiredExtensions", value: prop' value }
+
 instance Attr Tspan_ RequiredExtensions String where
-  attr RequiredExtensions value = unsafeAttribute { key: "requiredExtensions", value: prop' value }
+  attr RequiredExtensions value = unsafeAttribute
+    { key: "requiredExtensions", value: prop' value }
+
 instance Attr Use_ RequiredExtensions String where
-  attr RequiredExtensions value = unsafeAttribute { key: "requiredExtensions", value: prop' value }
+  attr RequiredExtensions value = unsafeAttribute
+    { key: "requiredExtensions", value: prop' value }

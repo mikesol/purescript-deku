@@ -553,119 +553,177 @@ instance Attr Wbr_ Id String where
 
 instance Attr Animate_ Id String where
   attr Id value = unsafeAttribute { key: "id", value: prop' value }
+
 instance Attr AnimateMotion_ Id String where
   attr Id value = unsafeAttribute { key: "id", value: prop' value }
+
 instance Attr AnimateTransform_ Id String where
   attr Id value = unsafeAttribute { key: "id", value: prop' value }
+
 instance Attr Circle_ Id String where
   attr Id value = unsafeAttribute { key: "id", value: prop' value }
+
 instance Attr ClipPath_ Id String where
   attr Id value = unsafeAttribute { key: "id", value: prop' value }
+
 instance Attr Defs_ Id String where
   attr Id value = unsafeAttribute { key: "id", value: prop' value }
+
 instance Attr Desc_ Id String where
   attr Id value = unsafeAttribute { key: "id", value: prop' value }
+
 instance Attr Discard_ Id String where
   attr Id value = unsafeAttribute { key: "id", value: prop' value }
+
 instance Attr Ellipse_ Id String where
   attr Id value = unsafeAttribute { key: "id", value: prop' value }
+
 instance Attr FeBlend_ Id String where
   attr Id value = unsafeAttribute { key: "id", value: prop' value }
+
 instance Attr FeColorMatrix_ Id String where
   attr Id value = unsafeAttribute { key: "id", value: prop' value }
+
 instance Attr FeComponentTransfer_ Id String where
   attr Id value = unsafeAttribute { key: "id", value: prop' value }
+
 instance Attr FeComposite_ Id String where
   attr Id value = unsafeAttribute { key: "id", value: prop' value }
+
 instance Attr FeConvolveMatrix_ Id String where
   attr Id value = unsafeAttribute { key: "id", value: prop' value }
+
 instance Attr FeDiffuseLighting_ Id String where
   attr Id value = unsafeAttribute { key: "id", value: prop' value }
+
 instance Attr FeDisplacementMap_ Id String where
   attr Id value = unsafeAttribute { key: "id", value: prop' value }
+
 instance Attr FeDistantLight_ Id String where
   attr Id value = unsafeAttribute { key: "id", value: prop' value }
+
 instance Attr FeDropShadow_ Id String where
   attr Id value = unsafeAttribute { key: "id", value: prop' value }
+
 instance Attr FeFlood_ Id String where
   attr Id value = unsafeAttribute { key: "id", value: prop' value }
+
 instance Attr FeFuncA_ Id String where
   attr Id value = unsafeAttribute { key: "id", value: prop' value }
+
 instance Attr FeFuncB_ Id String where
   attr Id value = unsafeAttribute { key: "id", value: prop' value }
+
 instance Attr FeFuncG_ Id String where
   attr Id value = unsafeAttribute { key: "id", value: prop' value }
+
 instance Attr FeFuncR_ Id String where
   attr Id value = unsafeAttribute { key: "id", value: prop' value }
+
 instance Attr FeGaussianBlur_ Id String where
   attr Id value = unsafeAttribute { key: "id", value: prop' value }
+
 instance Attr FeImage_ Id String where
   attr Id value = unsafeAttribute { key: "id", value: prop' value }
+
 instance Attr FeMerge_ Id String where
   attr Id value = unsafeAttribute { key: "id", value: prop' value }
+
 instance Attr FeMergeNode_ Id String where
   attr Id value = unsafeAttribute { key: "id", value: prop' value }
+
 instance Attr FeMorphology_ Id String where
   attr Id value = unsafeAttribute { key: "id", value: prop' value }
+
 instance Attr FeOffset_ Id String where
   attr Id value = unsafeAttribute { key: "id", value: prop' value }
+
 instance Attr FePointLight_ Id String where
   attr Id value = unsafeAttribute { key: "id", value: prop' value }
+
 instance Attr FeSpecularLighting_ Id String where
   attr Id value = unsafeAttribute { key: "id", value: prop' value }
+
 instance Attr FeSpotLight_ Id String where
   attr Id value = unsafeAttribute { key: "id", value: prop' value }
+
 instance Attr FeTile_ Id String where
   attr Id value = unsafeAttribute { key: "id", value: prop' value }
+
 instance Attr FeTurbulence_ Id String where
   attr Id value = unsafeAttribute { key: "id", value: prop' value }
+
 instance Attr Filter_ Id String where
   attr Id value = unsafeAttribute { key: "id", value: prop' value }
+
 instance Attr ForeignObject_ Id String where
   attr Id value = unsafeAttribute { key: "id", value: prop' value }
+
 instance Attr G_ Id String where
   attr Id value = unsafeAttribute { key: "id", value: prop' value }
+
 instance Attr Image_ Id String where
   attr Id value = unsafeAttribute { key: "id", value: prop' value }
+
 instance Attr Line_ Id String where
   attr Id value = unsafeAttribute { key: "id", value: prop' value }
+
 instance Attr LinearGradient_ Id String where
   attr Id value = unsafeAttribute { key: "id", value: prop' value }
+
 instance Attr Marker_ Id String where
   attr Id value = unsafeAttribute { key: "id", value: prop' value }
+
 instance Attr Mask_ Id String where
   attr Id value = unsafeAttribute { key: "id", value: prop' value }
+
 instance Attr Metadata_ Id String where
   attr Id value = unsafeAttribute { key: "id", value: prop' value }
+
 instance Attr Mpath_ Id String where
   attr Id value = unsafeAttribute { key: "id", value: prop' value }
+
 instance Attr Path_ Id String where
   attr Id value = unsafeAttribute { key: "id", value: prop' value }
+
 instance Attr Pattern_ Id String where
   attr Id value = unsafeAttribute { key: "id", value: prop' value }
+
 instance Attr Polygon_ Id String where
   attr Id value = unsafeAttribute { key: "id", value: prop' value }
+
 instance Attr Polyline_ Id String where
   attr Id value = unsafeAttribute { key: "id", value: prop' value }
+
 instance Attr RadialGradient_ Id String where
   attr Id value = unsafeAttribute { key: "id", value: prop' value }
+
 instance Attr Rect_ Id String where
   attr Id value = unsafeAttribute { key: "id", value: prop' value }
+
 instance Attr Set_ Id String where
   attr Id value = unsafeAttribute { key: "id", value: prop' value }
+
 instance Attr Stop_ Id String where
   attr Id value = unsafeAttribute { key: "id", value: prop' value }
+
 instance Attr Switch_ Id String where
   attr Id value = unsafeAttribute { key: "id", value: prop' value }
+
 instance Attr Symbol_ Id String where
   attr Id value = unsafeAttribute { key: "id", value: prop' value }
+
 instance Attr Text_ Id String where
   attr Id value = unsafeAttribute { key: "id", value: prop' value }
+
 instance Attr TextPath_ Id String where
   attr Id value = unsafeAttribute { key: "id", value: prop' value }
+
 instance Attr Tspan_ Id String where
   attr Id value = unsafeAttribute { key: "id", value: prop' value }
+
 instance Attr Use_ Id String where
   attr Id value = unsafeAttribute { key: "id", value: prop' value }
+
 instance Attr View_ Id String where
   attr Id value = unsafeAttribute { key: "id", value: prop' value }

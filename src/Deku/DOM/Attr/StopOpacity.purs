@@ -25,42 +25,81 @@ import Deku.Attribute (class Attr, prop', unsafeAttribute)
 data StopOpacity = StopOpacity
 
 instance Attr FeBlend_ StopOpacity String where
-  attr StopOpacity value = unsafeAttribute { key: "stop-opacity", value: prop' value }
+  attr StopOpacity value = unsafeAttribute
+    { key: "stop-opacity", value: prop' value }
+
 instance Attr FeColorMatrix_ StopOpacity String where
-  attr StopOpacity value = unsafeAttribute { key: "stop-opacity", value: prop' value }
+  attr StopOpacity value = unsafeAttribute
+    { key: "stop-opacity", value: prop' value }
+
 instance Attr FeComponentTransfer_ StopOpacity String where
-  attr StopOpacity value = unsafeAttribute { key: "stop-opacity", value: prop' value }
+  attr StopOpacity value = unsafeAttribute
+    { key: "stop-opacity", value: prop' value }
+
 instance Attr FeComposite_ StopOpacity String where
-  attr StopOpacity value = unsafeAttribute { key: "stop-opacity", value: prop' value }
+  attr StopOpacity value = unsafeAttribute
+    { key: "stop-opacity", value: prop' value }
+
 instance Attr FeConvolveMatrix_ StopOpacity String where
-  attr StopOpacity value = unsafeAttribute { key: "stop-opacity", value: prop' value }
+  attr StopOpacity value = unsafeAttribute
+    { key: "stop-opacity", value: prop' value }
+
 instance Attr FeDiffuseLighting_ StopOpacity String where
-  attr StopOpacity value = unsafeAttribute { key: "stop-opacity", value: prop' value }
+  attr StopOpacity value = unsafeAttribute
+    { key: "stop-opacity", value: prop' value }
+
 instance Attr FeDisplacementMap_ StopOpacity String where
-  attr StopOpacity value = unsafeAttribute { key: "stop-opacity", value: prop' value }
+  attr StopOpacity value = unsafeAttribute
+    { key: "stop-opacity", value: prop' value }
+
 instance Attr FeFlood_ StopOpacity String where
-  attr StopOpacity value = unsafeAttribute { key: "stop-opacity", value: prop' value }
+  attr StopOpacity value = unsafeAttribute
+    { key: "stop-opacity", value: prop' value }
+
 instance Attr FeGaussianBlur_ StopOpacity String where
-  attr StopOpacity value = unsafeAttribute { key: "stop-opacity", value: prop' value }
+  attr StopOpacity value = unsafeAttribute
+    { key: "stop-opacity", value: prop' value }
+
 instance Attr FeImage_ StopOpacity String where
-  attr StopOpacity value = unsafeAttribute { key: "stop-opacity", value: prop' value }
+  attr StopOpacity value = unsafeAttribute
+    { key: "stop-opacity", value: prop' value }
+
 instance Attr FeMerge_ StopOpacity String where
-  attr StopOpacity value = unsafeAttribute { key: "stop-opacity", value: prop' value }
+  attr StopOpacity value = unsafeAttribute
+    { key: "stop-opacity", value: prop' value }
+
 instance Attr FeMorphology_ StopOpacity String where
-  attr StopOpacity value = unsafeAttribute { key: "stop-opacity", value: prop' value }
+  attr StopOpacity value = unsafeAttribute
+    { key: "stop-opacity", value: prop' value }
+
 instance Attr FeOffset_ StopOpacity String where
-  attr StopOpacity value = unsafeAttribute { key: "stop-opacity", value: prop' value }
+  attr StopOpacity value = unsafeAttribute
+    { key: "stop-opacity", value: prop' value }
+
 instance Attr FeSpecularLighting_ StopOpacity String where
-  attr StopOpacity value = unsafeAttribute { key: "stop-opacity", value: prop' value }
+  attr StopOpacity value = unsafeAttribute
+    { key: "stop-opacity", value: prop' value }
+
 instance Attr FeTile_ StopOpacity String where
-  attr StopOpacity value = unsafeAttribute { key: "stop-opacity", value: prop' value }
+  attr StopOpacity value = unsafeAttribute
+    { key: "stop-opacity", value: prop' value }
+
 instance Attr FeTurbulence_ StopOpacity String where
-  attr StopOpacity value = unsafeAttribute { key: "stop-opacity", value: prop' value }
+  attr StopOpacity value = unsafeAttribute
+    { key: "stop-opacity", value: prop' value }
+
 instance Attr Filter_ StopOpacity String where
-  attr StopOpacity value = unsafeAttribute { key: "stop-opacity", value: prop' value }
+  attr StopOpacity value = unsafeAttribute
+    { key: "stop-opacity", value: prop' value }
+
 instance Attr Image_ StopOpacity String where
-  attr StopOpacity value = unsafeAttribute { key: "stop-opacity", value: prop' value }
+  attr StopOpacity value = unsafeAttribute
+    { key: "stop-opacity", value: prop' value }
+
 instance Attr Stop_ StopOpacity String where
-  attr StopOpacity value = unsafeAttribute { key: "stop-opacity", value: prop' value }
+  attr StopOpacity value = unsafeAttribute
+    { key: "stop-opacity", value: prop' value }
+
 instance Attr Switch_ StopOpacity String where
-  attr StopOpacity value = unsafeAttribute { key: "stop-opacity", value: prop' value }
+  attr StopOpacity value = unsafeAttribute
+    { key: "stop-opacity", value: prop' value }

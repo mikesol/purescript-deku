@@ -7,6 +7,9 @@ import Deku.Attribute (class Attr, prop', unsafeAttribute)
 data GradientUnits = GradientUnits
 
 instance Attr LinearGradient_ GradientUnits String where
-  attr GradientUnits value = unsafeAttribute { key: "gradientUnits", value: prop' value }
+  attr GradientUnits value = unsafeAttribute
+    { key: "gradientUnits", value: prop' value }
+
 instance Attr RadialGradient_ GradientUnits String where
-  attr GradientUnits value = unsafeAttribute { key: "gradientUnits", value: prop' value }
+  attr GradientUnits value = unsafeAttribute
+    { key: "gradientUnits", value: prop' value }

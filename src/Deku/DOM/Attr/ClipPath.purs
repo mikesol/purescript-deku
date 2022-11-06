@@ -47,83 +47,123 @@ data ClipPath = ClipPath
 
 instance Attr Circle_ ClipPath String where
   attr ClipPath value = unsafeAttribute { key: "clip-path", value: prop' value }
+
 instance Attr ClipPath_ ClipPath String where
   attr ClipPath value = unsafeAttribute { key: "clip-path", value: prop' value }
+
 instance Attr Defs_ ClipPath String where
   attr ClipPath value = unsafeAttribute { key: "clip-path", value: prop' value }
+
 instance Attr Ellipse_ ClipPath String where
   attr ClipPath value = unsafeAttribute { key: "clip-path", value: prop' value }
+
 instance Attr FeBlend_ ClipPath String where
   attr ClipPath value = unsafeAttribute { key: "clip-path", value: prop' value }
+
 instance Attr FeColorMatrix_ ClipPath String where
   attr ClipPath value = unsafeAttribute { key: "clip-path", value: prop' value }
+
 instance Attr FeComponentTransfer_ ClipPath String where
   attr ClipPath value = unsafeAttribute { key: "clip-path", value: prop' value }
+
 instance Attr FeComposite_ ClipPath String where
   attr ClipPath value = unsafeAttribute { key: "clip-path", value: prop' value }
+
 instance Attr FeConvolveMatrix_ ClipPath String where
   attr ClipPath value = unsafeAttribute { key: "clip-path", value: prop' value }
+
 instance Attr FeDiffuseLighting_ ClipPath String where
   attr ClipPath value = unsafeAttribute { key: "clip-path", value: prop' value }
+
 instance Attr FeDisplacementMap_ ClipPath String where
   attr ClipPath value = unsafeAttribute { key: "clip-path", value: prop' value }
+
 instance Attr FeFlood_ ClipPath String where
   attr ClipPath value = unsafeAttribute { key: "clip-path", value: prop' value }
+
 instance Attr FeGaussianBlur_ ClipPath String where
   attr ClipPath value = unsafeAttribute { key: "clip-path", value: prop' value }
+
 instance Attr FeImage_ ClipPath String where
   attr ClipPath value = unsafeAttribute { key: "clip-path", value: prop' value }
+
 instance Attr FeMerge_ ClipPath String where
   attr ClipPath value = unsafeAttribute { key: "clip-path", value: prop' value }
+
 instance Attr FeMorphology_ ClipPath String where
   attr ClipPath value = unsafeAttribute { key: "clip-path", value: prop' value }
+
 instance Attr FeOffset_ ClipPath String where
   attr ClipPath value = unsafeAttribute { key: "clip-path", value: prop' value }
+
 instance Attr FeSpecularLighting_ ClipPath String where
   attr ClipPath value = unsafeAttribute { key: "clip-path", value: prop' value }
+
 instance Attr FeTile_ ClipPath String where
   attr ClipPath value = unsafeAttribute { key: "clip-path", value: prop' value }
+
 instance Attr FeTurbulence_ ClipPath String where
   attr ClipPath value = unsafeAttribute { key: "clip-path", value: prop' value }
+
 instance Attr Filter_ ClipPath String where
   attr ClipPath value = unsafeAttribute { key: "clip-path", value: prop' value }
+
 instance Attr ForeignObject_ ClipPath String where
   attr ClipPath value = unsafeAttribute { key: "clip-path", value: prop' value }
+
 instance Attr G_ ClipPath String where
   attr ClipPath value = unsafeAttribute { key: "clip-path", value: prop' value }
+
 instance Attr Image_ ClipPath String where
   attr ClipPath value = unsafeAttribute { key: "clip-path", value: prop' value }
+
 instance Attr Line_ ClipPath String where
   attr ClipPath value = unsafeAttribute { key: "clip-path", value: prop' value }
+
 instance Attr LinearGradient_ ClipPath String where
   attr ClipPath value = unsafeAttribute { key: "clip-path", value: prop' value }
+
 instance Attr Marker_ ClipPath String where
   attr ClipPath value = unsafeAttribute { key: "clip-path", value: prop' value }
+
 instance Attr Mask_ ClipPath String where
   attr ClipPath value = unsafeAttribute { key: "clip-path", value: prop' value }
+
 instance Attr Path_ ClipPath String where
   attr ClipPath value = unsafeAttribute { key: "clip-path", value: prop' value }
+
 instance Attr Pattern_ ClipPath String where
   attr ClipPath value = unsafeAttribute { key: "clip-path", value: prop' value }
+
 instance Attr Polygon_ ClipPath String where
   attr ClipPath value = unsafeAttribute { key: "clip-path", value: prop' value }
+
 instance Attr Polyline_ ClipPath String where
   attr ClipPath value = unsafeAttribute { key: "clip-path", value: prop' value }
+
 instance Attr RadialGradient_ ClipPath String where
   attr ClipPath value = unsafeAttribute { key: "clip-path", value: prop' value }
+
 instance Attr Rect_ ClipPath String where
   attr ClipPath value = unsafeAttribute { key: "clip-path", value: prop' value }
+
 instance Attr Svg_ ClipPath String where
   attr ClipPath value = unsafeAttribute { key: "clip-path", value: prop' value }
+
 instance Attr Switch_ ClipPath String where
   attr ClipPath value = unsafeAttribute { key: "clip-path", value: prop' value }
+
 instance Attr Symbol_ ClipPath String where
   attr ClipPath value = unsafeAttribute { key: "clip-path", value: prop' value }
+
 instance Attr Text_ ClipPath String where
   attr ClipPath value = unsafeAttribute { key: "clip-path", value: prop' value }
+
 instance Attr TextPath_ ClipPath String where
   attr ClipPath value = unsafeAttribute { key: "clip-path", value: prop' value }
+
 instance Attr Tspan_ ClipPath String where
   attr ClipPath value = unsafeAttribute { key: "clip-path", value: prop' value }
+
 instance Attr Use_ ClipPath String where
   attr ClipPath value = unsafeAttribute { key: "clip-path", value: prop' value }

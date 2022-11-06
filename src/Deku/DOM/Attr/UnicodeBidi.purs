@@ -24,40 +24,77 @@ import Deku.Attribute (class Attr, prop', unsafeAttribute)
 data UnicodeBidi = UnicodeBidi
 
 instance Attr FeBlend_ UnicodeBidi String where
-  attr UnicodeBidi value = unsafeAttribute { key: "unicode-bidi", value: prop' value }
+  attr UnicodeBidi value = unsafeAttribute
+    { key: "unicode-bidi", value: prop' value }
+
 instance Attr FeColorMatrix_ UnicodeBidi String where
-  attr UnicodeBidi value = unsafeAttribute { key: "unicode-bidi", value: prop' value }
+  attr UnicodeBidi value = unsafeAttribute
+    { key: "unicode-bidi", value: prop' value }
+
 instance Attr FeComponentTransfer_ UnicodeBidi String where
-  attr UnicodeBidi value = unsafeAttribute { key: "unicode-bidi", value: prop' value }
+  attr UnicodeBidi value = unsafeAttribute
+    { key: "unicode-bidi", value: prop' value }
+
 instance Attr FeComposite_ UnicodeBidi String where
-  attr UnicodeBidi value = unsafeAttribute { key: "unicode-bidi", value: prop' value }
+  attr UnicodeBidi value = unsafeAttribute
+    { key: "unicode-bidi", value: prop' value }
+
 instance Attr FeConvolveMatrix_ UnicodeBidi String where
-  attr UnicodeBidi value = unsafeAttribute { key: "unicode-bidi", value: prop' value }
+  attr UnicodeBidi value = unsafeAttribute
+    { key: "unicode-bidi", value: prop' value }
+
 instance Attr FeDiffuseLighting_ UnicodeBidi String where
-  attr UnicodeBidi value = unsafeAttribute { key: "unicode-bidi", value: prop' value }
+  attr UnicodeBidi value = unsafeAttribute
+    { key: "unicode-bidi", value: prop' value }
+
 instance Attr FeDisplacementMap_ UnicodeBidi String where
-  attr UnicodeBidi value = unsafeAttribute { key: "unicode-bidi", value: prop' value }
+  attr UnicodeBidi value = unsafeAttribute
+    { key: "unicode-bidi", value: prop' value }
+
 instance Attr FeFlood_ UnicodeBidi String where
-  attr UnicodeBidi value = unsafeAttribute { key: "unicode-bidi", value: prop' value }
+  attr UnicodeBidi value = unsafeAttribute
+    { key: "unicode-bidi", value: prop' value }
+
 instance Attr FeGaussianBlur_ UnicodeBidi String where
-  attr UnicodeBidi value = unsafeAttribute { key: "unicode-bidi", value: prop' value }
+  attr UnicodeBidi value = unsafeAttribute
+    { key: "unicode-bidi", value: prop' value }
+
 instance Attr FeImage_ UnicodeBidi String where
-  attr UnicodeBidi value = unsafeAttribute { key: "unicode-bidi", value: prop' value }
+  attr UnicodeBidi value = unsafeAttribute
+    { key: "unicode-bidi", value: prop' value }
+
 instance Attr FeMerge_ UnicodeBidi String where
-  attr UnicodeBidi value = unsafeAttribute { key: "unicode-bidi", value: prop' value }
+  attr UnicodeBidi value = unsafeAttribute
+    { key: "unicode-bidi", value: prop' value }
+
 instance Attr FeMorphology_ UnicodeBidi String where
-  attr UnicodeBidi value = unsafeAttribute { key: "unicode-bidi", value: prop' value }
+  attr UnicodeBidi value = unsafeAttribute
+    { key: "unicode-bidi", value: prop' value }
+
 instance Attr FeOffset_ UnicodeBidi String where
-  attr UnicodeBidi value = unsafeAttribute { key: "unicode-bidi", value: prop' value }
+  attr UnicodeBidi value = unsafeAttribute
+    { key: "unicode-bidi", value: prop' value }
+
 instance Attr FeSpecularLighting_ UnicodeBidi String where
-  attr UnicodeBidi value = unsafeAttribute { key: "unicode-bidi", value: prop' value }
+  attr UnicodeBidi value = unsafeAttribute
+    { key: "unicode-bidi", value: prop' value }
+
 instance Attr FeTile_ UnicodeBidi String where
-  attr UnicodeBidi value = unsafeAttribute { key: "unicode-bidi", value: prop' value }
+  attr UnicodeBidi value = unsafeAttribute
+    { key: "unicode-bidi", value: prop' value }
+
 instance Attr FeTurbulence_ UnicodeBidi String where
-  attr UnicodeBidi value = unsafeAttribute { key: "unicode-bidi", value: prop' value }
+  attr UnicodeBidi value = unsafeAttribute
+    { key: "unicode-bidi", value: prop' value }
+
 instance Attr Filter_ UnicodeBidi String where
-  attr UnicodeBidi value = unsafeAttribute { key: "unicode-bidi", value: prop' value }
+  attr UnicodeBidi value = unsafeAttribute
+    { key: "unicode-bidi", value: prop' value }
+
 instance Attr Image_ UnicodeBidi String where
-  attr UnicodeBidi value = unsafeAttribute { key: "unicode-bidi", value: prop' value }
+  attr UnicodeBidi value = unsafeAttribute
+    { key: "unicode-bidi", value: prop' value }
+
 instance Attr Switch_ UnicodeBidi String where
-  attr UnicodeBidi value = unsafeAttribute { key: "unicode-bidi", value: prop' value }
+  attr UnicodeBidi value = unsafeAttribute
+    { key: "unicode-bidi", value: prop' value }

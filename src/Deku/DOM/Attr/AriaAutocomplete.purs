@@ -22,36 +22,69 @@ import Deku.Attribute (class Attr, prop', unsafeAttribute)
 data AriaAutocomplete = AriaAutocomplete
 
 instance Attr Circle_ AriaAutocomplete String where
-  attr AriaAutocomplete value = unsafeAttribute { key: "aria-autocomplete", value: prop' value }
+  attr AriaAutocomplete value = unsafeAttribute
+    { key: "aria-autocomplete", value: prop' value }
+
 instance Attr Ellipse_ AriaAutocomplete String where
-  attr AriaAutocomplete value = unsafeAttribute { key: "aria-autocomplete", value: prop' value }
+  attr AriaAutocomplete value = unsafeAttribute
+    { key: "aria-autocomplete", value: prop' value }
+
 instance Attr ForeignObject_ AriaAutocomplete String where
-  attr AriaAutocomplete value = unsafeAttribute { key: "aria-autocomplete", value: prop' value }
+  attr AriaAutocomplete value = unsafeAttribute
+    { key: "aria-autocomplete", value: prop' value }
+
 instance Attr G_ AriaAutocomplete String where
-  attr AriaAutocomplete value = unsafeAttribute { key: "aria-autocomplete", value: prop' value }
+  attr AriaAutocomplete value = unsafeAttribute
+    { key: "aria-autocomplete", value: prop' value }
+
 instance Attr Line_ AriaAutocomplete String where
-  attr AriaAutocomplete value = unsafeAttribute { key: "aria-autocomplete", value: prop' value }
+  attr AriaAutocomplete value = unsafeAttribute
+    { key: "aria-autocomplete", value: prop' value }
+
 instance Attr Marker_ AriaAutocomplete String where
-  attr AriaAutocomplete value = unsafeAttribute { key: "aria-autocomplete", value: prop' value }
+  attr AriaAutocomplete value = unsafeAttribute
+    { key: "aria-autocomplete", value: prop' value }
+
 instance Attr Path_ AriaAutocomplete String where
-  attr AriaAutocomplete value = unsafeAttribute { key: "aria-autocomplete", value: prop' value }
+  attr AriaAutocomplete value = unsafeAttribute
+    { key: "aria-autocomplete", value: prop' value }
+
 instance Attr Polygon_ AriaAutocomplete String where
-  attr AriaAutocomplete value = unsafeAttribute { key: "aria-autocomplete", value: prop' value }
+  attr AriaAutocomplete value = unsafeAttribute
+    { key: "aria-autocomplete", value: prop' value }
+
 instance Attr Polyline_ AriaAutocomplete String where
-  attr AriaAutocomplete value = unsafeAttribute { key: "aria-autocomplete", value: prop' value }
+  attr AriaAutocomplete value = unsafeAttribute
+    { key: "aria-autocomplete", value: prop' value }
+
 instance Attr Rect_ AriaAutocomplete String where
-  attr AriaAutocomplete value = unsafeAttribute { key: "aria-autocomplete", value: prop' value }
+  attr AriaAutocomplete value = unsafeAttribute
+    { key: "aria-autocomplete", value: prop' value }
+
 instance Attr Svg_ AriaAutocomplete String where
-  attr AriaAutocomplete value = unsafeAttribute { key: "aria-autocomplete", value: prop' value }
+  attr AriaAutocomplete value = unsafeAttribute
+    { key: "aria-autocomplete", value: prop' value }
+
 instance Attr Symbol_ AriaAutocomplete String where
-  attr AriaAutocomplete value = unsafeAttribute { key: "aria-autocomplete", value: prop' value }
+  attr AriaAutocomplete value = unsafeAttribute
+    { key: "aria-autocomplete", value: prop' value }
+
 instance Attr Text_ AriaAutocomplete String where
-  attr AriaAutocomplete value = unsafeAttribute { key: "aria-autocomplete", value: prop' value }
+  attr AriaAutocomplete value = unsafeAttribute
+    { key: "aria-autocomplete", value: prop' value }
+
 instance Attr TextPath_ AriaAutocomplete String where
-  attr AriaAutocomplete value = unsafeAttribute { key: "aria-autocomplete", value: prop' value }
+  attr AriaAutocomplete value = unsafeAttribute
+    { key: "aria-autocomplete", value: prop' value }
+
 instance Attr Tspan_ AriaAutocomplete String where
-  attr AriaAutocomplete value = unsafeAttribute { key: "aria-autocomplete", value: prop' value }
+  attr AriaAutocomplete value = unsafeAttribute
+    { key: "aria-autocomplete", value: prop' value }
+
 instance Attr Use_ AriaAutocomplete String where
-  attr AriaAutocomplete value = unsafeAttribute { key: "aria-autocomplete", value: prop' value }
+  attr AriaAutocomplete value = unsafeAttribute
+    { key: "aria-autocomplete", value: prop' value }
+
 instance Attr View_ AriaAutocomplete String where
-  attr AriaAutocomplete value = unsafeAttribute { key: "aria-autocomplete", value: prop' value }
+  attr AriaAutocomplete value = unsafeAttribute
+    { key: "aria-autocomplete", value: prop' value }

@@ -26,44 +26,85 @@ import Deku.Attribute (class Attr, prop', unsafeAttribute)
 data FontFamily = FontFamily
 
 instance Attr FeBlend_ FontFamily String where
-  attr FontFamily value = unsafeAttribute { key: "font-family", value: prop' value }
+  attr FontFamily value = unsafeAttribute
+    { key: "font-family", value: prop' value }
+
 instance Attr FeColorMatrix_ FontFamily String where
-  attr FontFamily value = unsafeAttribute { key: "font-family", value: prop' value }
+  attr FontFamily value = unsafeAttribute
+    { key: "font-family", value: prop' value }
+
 instance Attr FeComponentTransfer_ FontFamily String where
-  attr FontFamily value = unsafeAttribute { key: "font-family", value: prop' value }
+  attr FontFamily value = unsafeAttribute
+    { key: "font-family", value: prop' value }
+
 instance Attr FeComposite_ FontFamily String where
-  attr FontFamily value = unsafeAttribute { key: "font-family", value: prop' value }
+  attr FontFamily value = unsafeAttribute
+    { key: "font-family", value: prop' value }
+
 instance Attr FeConvolveMatrix_ FontFamily String where
-  attr FontFamily value = unsafeAttribute { key: "font-family", value: prop' value }
+  attr FontFamily value = unsafeAttribute
+    { key: "font-family", value: prop' value }
+
 instance Attr FeDiffuseLighting_ FontFamily String where
-  attr FontFamily value = unsafeAttribute { key: "font-family", value: prop' value }
+  attr FontFamily value = unsafeAttribute
+    { key: "font-family", value: prop' value }
+
 instance Attr FeDisplacementMap_ FontFamily String where
-  attr FontFamily value = unsafeAttribute { key: "font-family", value: prop' value }
+  attr FontFamily value = unsafeAttribute
+    { key: "font-family", value: prop' value }
+
 instance Attr FeFlood_ FontFamily String where
-  attr FontFamily value = unsafeAttribute { key: "font-family", value: prop' value }
+  attr FontFamily value = unsafeAttribute
+    { key: "font-family", value: prop' value }
+
 instance Attr FeGaussianBlur_ FontFamily String where
-  attr FontFamily value = unsafeAttribute { key: "font-family", value: prop' value }
+  attr FontFamily value = unsafeAttribute
+    { key: "font-family", value: prop' value }
+
 instance Attr FeImage_ FontFamily String where
-  attr FontFamily value = unsafeAttribute { key: "font-family", value: prop' value }
+  attr FontFamily value = unsafeAttribute
+    { key: "font-family", value: prop' value }
+
 instance Attr FeMerge_ FontFamily String where
-  attr FontFamily value = unsafeAttribute { key: "font-family", value: prop' value }
+  attr FontFamily value = unsafeAttribute
+    { key: "font-family", value: prop' value }
+
 instance Attr FeMorphology_ FontFamily String where
-  attr FontFamily value = unsafeAttribute { key: "font-family", value: prop' value }
+  attr FontFamily value = unsafeAttribute
+    { key: "font-family", value: prop' value }
+
 instance Attr FeOffset_ FontFamily String where
-  attr FontFamily value = unsafeAttribute { key: "font-family", value: prop' value }
+  attr FontFamily value = unsafeAttribute
+    { key: "font-family", value: prop' value }
+
 instance Attr FeSpecularLighting_ FontFamily String where
-  attr FontFamily value = unsafeAttribute { key: "font-family", value: prop' value }
+  attr FontFamily value = unsafeAttribute
+    { key: "font-family", value: prop' value }
+
 instance Attr FeTile_ FontFamily String where
-  attr FontFamily value = unsafeAttribute { key: "font-family", value: prop' value }
+  attr FontFamily value = unsafeAttribute
+    { key: "font-family", value: prop' value }
+
 instance Attr FeTurbulence_ FontFamily String where
-  attr FontFamily value = unsafeAttribute { key: "font-family", value: prop' value }
+  attr FontFamily value = unsafeAttribute
+    { key: "font-family", value: prop' value }
+
 instance Attr Filter_ FontFamily String where
-  attr FontFamily value = unsafeAttribute { key: "font-family", value: prop' value }
+  attr FontFamily value = unsafeAttribute
+    { key: "font-family", value: prop' value }
+
 instance Attr Image_ FontFamily String where
-  attr FontFamily value = unsafeAttribute { key: "font-family", value: prop' value }
+  attr FontFamily value = unsafeAttribute
+    { key: "font-family", value: prop' value }
+
 instance Attr Switch_ FontFamily String where
-  attr FontFamily value = unsafeAttribute { key: "font-family", value: prop' value }
+  attr FontFamily value = unsafeAttribute
+    { key: "font-family", value: prop' value }
+
 instance Attr Text_ FontFamily String where
-  attr FontFamily value = unsafeAttribute { key: "font-family", value: prop' value }
+  attr FontFamily value = unsafeAttribute
+    { key: "font-family", value: prop' value }
+
 instance Attr Tspan_ FontFamily String where
-  attr FontFamily value = unsafeAttribute { key: "font-family", value: prop' value }
+  attr FontFamily value = unsafeAttribute
+    { key: "font-family", value: prop' value }

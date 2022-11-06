@@ -24,40 +24,77 @@ import Deku.Attribute (class Attr, prop', unsafeAttribute)
 data LetterSpacing = LetterSpacing
 
 instance Attr FeBlend_ LetterSpacing String where
-  attr LetterSpacing value = unsafeAttribute { key: "letter-spacing", value: prop' value }
+  attr LetterSpacing value = unsafeAttribute
+    { key: "letter-spacing", value: prop' value }
+
 instance Attr FeColorMatrix_ LetterSpacing String where
-  attr LetterSpacing value = unsafeAttribute { key: "letter-spacing", value: prop' value }
+  attr LetterSpacing value = unsafeAttribute
+    { key: "letter-spacing", value: prop' value }
+
 instance Attr FeComponentTransfer_ LetterSpacing String where
-  attr LetterSpacing value = unsafeAttribute { key: "letter-spacing", value: prop' value }
+  attr LetterSpacing value = unsafeAttribute
+    { key: "letter-spacing", value: prop' value }
+
 instance Attr FeComposite_ LetterSpacing String where
-  attr LetterSpacing value = unsafeAttribute { key: "letter-spacing", value: prop' value }
+  attr LetterSpacing value = unsafeAttribute
+    { key: "letter-spacing", value: prop' value }
+
 instance Attr FeConvolveMatrix_ LetterSpacing String where
-  attr LetterSpacing value = unsafeAttribute { key: "letter-spacing", value: prop' value }
+  attr LetterSpacing value = unsafeAttribute
+    { key: "letter-spacing", value: prop' value }
+
 instance Attr FeDiffuseLighting_ LetterSpacing String where
-  attr LetterSpacing value = unsafeAttribute { key: "letter-spacing", value: prop' value }
+  attr LetterSpacing value = unsafeAttribute
+    { key: "letter-spacing", value: prop' value }
+
 instance Attr FeDisplacementMap_ LetterSpacing String where
-  attr LetterSpacing value = unsafeAttribute { key: "letter-spacing", value: prop' value }
+  attr LetterSpacing value = unsafeAttribute
+    { key: "letter-spacing", value: prop' value }
+
 instance Attr FeFlood_ LetterSpacing String where
-  attr LetterSpacing value = unsafeAttribute { key: "letter-spacing", value: prop' value }
+  attr LetterSpacing value = unsafeAttribute
+    { key: "letter-spacing", value: prop' value }
+
 instance Attr FeGaussianBlur_ LetterSpacing String where
-  attr LetterSpacing value = unsafeAttribute { key: "letter-spacing", value: prop' value }
+  attr LetterSpacing value = unsafeAttribute
+    { key: "letter-spacing", value: prop' value }
+
 instance Attr FeImage_ LetterSpacing String where
-  attr LetterSpacing value = unsafeAttribute { key: "letter-spacing", value: prop' value }
+  attr LetterSpacing value = unsafeAttribute
+    { key: "letter-spacing", value: prop' value }
+
 instance Attr FeMerge_ LetterSpacing String where
-  attr LetterSpacing value = unsafeAttribute { key: "letter-spacing", value: prop' value }
+  attr LetterSpacing value = unsafeAttribute
+    { key: "letter-spacing", value: prop' value }
+
 instance Attr FeMorphology_ LetterSpacing String where
-  attr LetterSpacing value = unsafeAttribute { key: "letter-spacing", value: prop' value }
+  attr LetterSpacing value = unsafeAttribute
+    { key: "letter-spacing", value: prop' value }
+
 instance Attr FeOffset_ LetterSpacing String where
-  attr LetterSpacing value = unsafeAttribute { key: "letter-spacing", value: prop' value }
+  attr LetterSpacing value = unsafeAttribute
+    { key: "letter-spacing", value: prop' value }
+
 instance Attr FeSpecularLighting_ LetterSpacing String where
-  attr LetterSpacing value = unsafeAttribute { key: "letter-spacing", value: prop' value }
+  attr LetterSpacing value = unsafeAttribute
+    { key: "letter-spacing", value: prop' value }
+
 instance Attr FeTile_ LetterSpacing String where
-  attr LetterSpacing value = unsafeAttribute { key: "letter-spacing", value: prop' value }
+  attr LetterSpacing value = unsafeAttribute
+    { key: "letter-spacing", value: prop' value }
+
 instance Attr FeTurbulence_ LetterSpacing String where
-  attr LetterSpacing value = unsafeAttribute { key: "letter-spacing", value: prop' value }
+  attr LetterSpacing value = unsafeAttribute
+    { key: "letter-spacing", value: prop' value }
+
 instance Attr Filter_ LetterSpacing String where
-  attr LetterSpacing value = unsafeAttribute { key: "letter-spacing", value: prop' value }
+  attr LetterSpacing value = unsafeAttribute
+    { key: "letter-spacing", value: prop' value }
+
 instance Attr Image_ LetterSpacing String where
-  attr LetterSpacing value = unsafeAttribute { key: "letter-spacing", value: prop' value }
+  attr LetterSpacing value = unsafeAttribute
+    { key: "letter-spacing", value: prop' value }
+
 instance Attr Switch_ LetterSpacing String where
-  attr LetterSpacing value = unsafeAttribute { key: "letter-spacing", value: prop' value }
+  attr LetterSpacing value = unsafeAttribute
+    { key: "letter-spacing", value: prop' value }

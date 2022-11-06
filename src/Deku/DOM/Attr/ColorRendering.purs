@@ -44,80 +44,157 @@ import Deku.Attribute (class Attr, prop', unsafeAttribute)
 data ColorRendering = ColorRendering
 
 instance Attr Circle_ ColorRendering String where
-  attr ColorRendering value = unsafeAttribute { key: "color-rendering", value: prop' value }
+  attr ColorRendering value = unsafeAttribute
+    { key: "color-rendering", value: prop' value }
+
 instance Attr Defs_ ColorRendering String where
-  attr ColorRendering value = unsafeAttribute { key: "color-rendering", value: prop' value }
+  attr ColorRendering value = unsafeAttribute
+    { key: "color-rendering", value: prop' value }
+
 instance Attr Ellipse_ ColorRendering String where
-  attr ColorRendering value = unsafeAttribute { key: "color-rendering", value: prop' value }
+  attr ColorRendering value = unsafeAttribute
+    { key: "color-rendering", value: prop' value }
+
 instance Attr FeBlend_ ColorRendering String where
-  attr ColorRendering value = unsafeAttribute { key: "color-rendering", value: prop' value }
+  attr ColorRendering value = unsafeAttribute
+    { key: "color-rendering", value: prop' value }
+
 instance Attr FeColorMatrix_ ColorRendering String where
-  attr ColorRendering value = unsafeAttribute { key: "color-rendering", value: prop' value }
+  attr ColorRendering value = unsafeAttribute
+    { key: "color-rendering", value: prop' value }
+
 instance Attr FeComponentTransfer_ ColorRendering String where
-  attr ColorRendering value = unsafeAttribute { key: "color-rendering", value: prop' value }
+  attr ColorRendering value = unsafeAttribute
+    { key: "color-rendering", value: prop' value }
+
 instance Attr FeComposite_ ColorRendering String where
-  attr ColorRendering value = unsafeAttribute { key: "color-rendering", value: prop' value }
+  attr ColorRendering value = unsafeAttribute
+    { key: "color-rendering", value: prop' value }
+
 instance Attr FeConvolveMatrix_ ColorRendering String where
-  attr ColorRendering value = unsafeAttribute { key: "color-rendering", value: prop' value }
+  attr ColorRendering value = unsafeAttribute
+    { key: "color-rendering", value: prop' value }
+
 instance Attr FeDiffuseLighting_ ColorRendering String where
-  attr ColorRendering value = unsafeAttribute { key: "color-rendering", value: prop' value }
+  attr ColorRendering value = unsafeAttribute
+    { key: "color-rendering", value: prop' value }
+
 instance Attr FeDisplacementMap_ ColorRendering String where
-  attr ColorRendering value = unsafeAttribute { key: "color-rendering", value: prop' value }
+  attr ColorRendering value = unsafeAttribute
+    { key: "color-rendering", value: prop' value }
+
 instance Attr FeFlood_ ColorRendering String where
-  attr ColorRendering value = unsafeAttribute { key: "color-rendering", value: prop' value }
+  attr ColorRendering value = unsafeAttribute
+    { key: "color-rendering", value: prop' value }
+
 instance Attr FeGaussianBlur_ ColorRendering String where
-  attr ColorRendering value = unsafeAttribute { key: "color-rendering", value: prop' value }
+  attr ColorRendering value = unsafeAttribute
+    { key: "color-rendering", value: prop' value }
+
 instance Attr FeImage_ ColorRendering String where
-  attr ColorRendering value = unsafeAttribute { key: "color-rendering", value: prop' value }
+  attr ColorRendering value = unsafeAttribute
+    { key: "color-rendering", value: prop' value }
+
 instance Attr FeMerge_ ColorRendering String where
-  attr ColorRendering value = unsafeAttribute { key: "color-rendering", value: prop' value }
+  attr ColorRendering value = unsafeAttribute
+    { key: "color-rendering", value: prop' value }
+
 instance Attr FeMorphology_ ColorRendering String where
-  attr ColorRendering value = unsafeAttribute { key: "color-rendering", value: prop' value }
+  attr ColorRendering value = unsafeAttribute
+    { key: "color-rendering", value: prop' value }
+
 instance Attr FeOffset_ ColorRendering String where
-  attr ColorRendering value = unsafeAttribute { key: "color-rendering", value: prop' value }
+  attr ColorRendering value = unsafeAttribute
+    { key: "color-rendering", value: prop' value }
+
 instance Attr FeSpecularLighting_ ColorRendering String where
-  attr ColorRendering value = unsafeAttribute { key: "color-rendering", value: prop' value }
+  attr ColorRendering value = unsafeAttribute
+    { key: "color-rendering", value: prop' value }
+
 instance Attr FeTile_ ColorRendering String where
-  attr ColorRendering value = unsafeAttribute { key: "color-rendering", value: prop' value }
+  attr ColorRendering value = unsafeAttribute
+    { key: "color-rendering", value: prop' value }
+
 instance Attr FeTurbulence_ ColorRendering String where
-  attr ColorRendering value = unsafeAttribute { key: "color-rendering", value: prop' value }
+  attr ColorRendering value = unsafeAttribute
+    { key: "color-rendering", value: prop' value }
+
 instance Attr Filter_ ColorRendering String where
-  attr ColorRendering value = unsafeAttribute { key: "color-rendering", value: prop' value }
+  attr ColorRendering value = unsafeAttribute
+    { key: "color-rendering", value: prop' value }
+
 instance Attr ForeignObject_ ColorRendering String where
-  attr ColorRendering value = unsafeAttribute { key: "color-rendering", value: prop' value }
+  attr ColorRendering value = unsafeAttribute
+    { key: "color-rendering", value: prop' value }
+
 instance Attr G_ ColorRendering String where
-  attr ColorRendering value = unsafeAttribute { key: "color-rendering", value: prop' value }
+  attr ColorRendering value = unsafeAttribute
+    { key: "color-rendering", value: prop' value }
+
 instance Attr Image_ ColorRendering String where
-  attr ColorRendering value = unsafeAttribute { key: "color-rendering", value: prop' value }
+  attr ColorRendering value = unsafeAttribute
+    { key: "color-rendering", value: prop' value }
+
 instance Attr Line_ ColorRendering String where
-  attr ColorRendering value = unsafeAttribute { key: "color-rendering", value: prop' value }
+  attr ColorRendering value = unsafeAttribute
+    { key: "color-rendering", value: prop' value }
+
 instance Attr LinearGradient_ ColorRendering String where
-  attr ColorRendering value = unsafeAttribute { key: "color-rendering", value: prop' value }
+  attr ColorRendering value = unsafeAttribute
+    { key: "color-rendering", value: prop' value }
+
 instance Attr Marker_ ColorRendering String where
-  attr ColorRendering value = unsafeAttribute { key: "color-rendering", value: prop' value }
+  attr ColorRendering value = unsafeAttribute
+    { key: "color-rendering", value: prop' value }
+
 instance Attr Path_ ColorRendering String where
-  attr ColorRendering value = unsafeAttribute { key: "color-rendering", value: prop' value }
+  attr ColorRendering value = unsafeAttribute
+    { key: "color-rendering", value: prop' value }
+
 instance Attr Pattern_ ColorRendering String where
-  attr ColorRendering value = unsafeAttribute { key: "color-rendering", value: prop' value }
+  attr ColorRendering value = unsafeAttribute
+    { key: "color-rendering", value: prop' value }
+
 instance Attr Polygon_ ColorRendering String where
-  attr ColorRendering value = unsafeAttribute { key: "color-rendering", value: prop' value }
+  attr ColorRendering value = unsafeAttribute
+    { key: "color-rendering", value: prop' value }
+
 instance Attr Polyline_ ColorRendering String where
-  attr ColorRendering value = unsafeAttribute { key: "color-rendering", value: prop' value }
+  attr ColorRendering value = unsafeAttribute
+    { key: "color-rendering", value: prop' value }
+
 instance Attr RadialGradient_ ColorRendering String where
-  attr ColorRendering value = unsafeAttribute { key: "color-rendering", value: prop' value }
+  attr ColorRendering value = unsafeAttribute
+    { key: "color-rendering", value: prop' value }
+
 instance Attr Rect_ ColorRendering String where
-  attr ColorRendering value = unsafeAttribute { key: "color-rendering", value: prop' value }
+  attr ColorRendering value = unsafeAttribute
+    { key: "color-rendering", value: prop' value }
+
 instance Attr Svg_ ColorRendering String where
-  attr ColorRendering value = unsafeAttribute { key: "color-rendering", value: prop' value }
+  attr ColorRendering value = unsafeAttribute
+    { key: "color-rendering", value: prop' value }
+
 instance Attr Switch_ ColorRendering String where
-  attr ColorRendering value = unsafeAttribute { key: "color-rendering", value: prop' value }
+  attr ColorRendering value = unsafeAttribute
+    { key: "color-rendering", value: prop' value }
+
 instance Attr Symbol_ ColorRendering String where
-  attr ColorRendering value = unsafeAttribute { key: "color-rendering", value: prop' value }
+  attr ColorRendering value = unsafeAttribute
+    { key: "color-rendering", value: prop' value }
+
 instance Attr Text_ ColorRendering String where
-  attr ColorRendering value = unsafeAttribute { key: "color-rendering", value: prop' value }
+  attr ColorRendering value = unsafeAttribute
+    { key: "color-rendering", value: prop' value }
+
 instance Attr TextPath_ ColorRendering String where
-  attr ColorRendering value = unsafeAttribute { key: "color-rendering", value: prop' value }
+  attr ColorRendering value = unsafeAttribute
+    { key: "color-rendering", value: prop' value }
+
 instance Attr Tspan_ ColorRendering String where
-  attr ColorRendering value = unsafeAttribute { key: "color-rendering", value: prop' value }
+  attr ColorRendering value = unsafeAttribute
+    { key: "color-rendering", value: prop' value }
+
 instance Attr Use_ ColorRendering String where
-  attr ColorRendering value = unsafeAttribute { key: "color-rendering", value: prop' value }
+  attr ColorRendering value = unsafeAttribute
+    { key: "color-rendering", value: prop' value }

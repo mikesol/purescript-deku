@@ -38,65 +38,96 @@ data XmlSpace = XmlSpace
 
 instance Attr AnimateTransform_ XmlSpace String where
   attr XmlSpace value = unsafeAttribute { key: "xml:space", value: prop' value }
+
 instance Attr Discard_ XmlSpace String where
   attr XmlSpace value = unsafeAttribute { key: "xml:space", value: prop' value }
+
 instance Attr FeBlend_ XmlSpace String where
   attr XmlSpace value = unsafeAttribute { key: "xml:space", value: prop' value }
+
 instance Attr FeColorMatrix_ XmlSpace String where
   attr XmlSpace value = unsafeAttribute { key: "xml:space", value: prop' value }
+
 instance Attr FeComponentTransfer_ XmlSpace String where
   attr XmlSpace value = unsafeAttribute { key: "xml:space", value: prop' value }
+
 instance Attr FeComposite_ XmlSpace String where
   attr XmlSpace value = unsafeAttribute { key: "xml:space", value: prop' value }
+
 instance Attr FeConvolveMatrix_ XmlSpace String where
   attr XmlSpace value = unsafeAttribute { key: "xml:space", value: prop' value }
+
 instance Attr FeDiffuseLighting_ XmlSpace String where
   attr XmlSpace value = unsafeAttribute { key: "xml:space", value: prop' value }
+
 instance Attr FeDisplacementMap_ XmlSpace String where
   attr XmlSpace value = unsafeAttribute { key: "xml:space", value: prop' value }
+
 instance Attr FeDistantLight_ XmlSpace String where
   attr XmlSpace value = unsafeAttribute { key: "xml:space", value: prop' value }
+
 instance Attr FeFlood_ XmlSpace String where
   attr XmlSpace value = unsafeAttribute { key: "xml:space", value: prop' value }
+
 instance Attr FeFuncA_ XmlSpace String where
   attr XmlSpace value = unsafeAttribute { key: "xml:space", value: prop' value }
+
 instance Attr FeFuncB_ XmlSpace String where
   attr XmlSpace value = unsafeAttribute { key: "xml:space", value: prop' value }
+
 instance Attr FeFuncG_ XmlSpace String where
   attr XmlSpace value = unsafeAttribute { key: "xml:space", value: prop' value }
+
 instance Attr FeFuncR_ XmlSpace String where
   attr XmlSpace value = unsafeAttribute { key: "xml:space", value: prop' value }
+
 instance Attr FeGaussianBlur_ XmlSpace String where
   attr XmlSpace value = unsafeAttribute { key: "xml:space", value: prop' value }
+
 instance Attr FeImage_ XmlSpace String where
   attr XmlSpace value = unsafeAttribute { key: "xml:space", value: prop' value }
+
 instance Attr FeMerge_ XmlSpace String where
   attr XmlSpace value = unsafeAttribute { key: "xml:space", value: prop' value }
+
 instance Attr FeMergeNode_ XmlSpace String where
   attr XmlSpace value = unsafeAttribute { key: "xml:space", value: prop' value }
+
 instance Attr FeMorphology_ XmlSpace String where
   attr XmlSpace value = unsafeAttribute { key: "xml:space", value: prop' value }
+
 instance Attr FeOffset_ XmlSpace String where
   attr XmlSpace value = unsafeAttribute { key: "xml:space", value: prop' value }
+
 instance Attr FePointLight_ XmlSpace String where
   attr XmlSpace value = unsafeAttribute { key: "xml:space", value: prop' value }
+
 instance Attr FeSpecularLighting_ XmlSpace String where
   attr XmlSpace value = unsafeAttribute { key: "xml:space", value: prop' value }
+
 instance Attr FeSpotLight_ XmlSpace String where
   attr XmlSpace value = unsafeAttribute { key: "xml:space", value: prop' value }
+
 instance Attr FeTile_ XmlSpace String where
   attr XmlSpace value = unsafeAttribute { key: "xml:space", value: prop' value }
+
 instance Attr FeTurbulence_ XmlSpace String where
   attr XmlSpace value = unsafeAttribute { key: "xml:space", value: prop' value }
+
 instance Attr Filter_ XmlSpace String where
   attr XmlSpace value = unsafeAttribute { key: "xml:space", value: prop' value }
+
 instance Attr Image_ XmlSpace String where
   attr XmlSpace value = unsafeAttribute { key: "xml:space", value: prop' value }
+
 instance Attr Metadata_ XmlSpace String where
   attr XmlSpace value = unsafeAttribute { key: "xml:space", value: prop' value }
+
 instance Attr Mpath_ XmlSpace String where
   attr XmlSpace value = unsafeAttribute { key: "xml:space", value: prop' value }
+
 instance Attr Switch_ XmlSpace String where
   attr XmlSpace value = unsafeAttribute { key: "xml:space", value: prop' value }
+
 instance Attr View_ XmlSpace String where
   attr XmlSpace value = unsafeAttribute { key: "xml:space", value: prop' value }

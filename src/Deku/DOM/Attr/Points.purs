@@ -8,5 +8,6 @@ data Points = Points
 
 instance Attr Polygon_ Points String where
   attr Points value = unsafeAttribute { key: "points", value: prop' value }
+
 instance Attr Polyline_ Points String where
   attr Points value = unsafeAttribute { key: "points", value: prop' value }

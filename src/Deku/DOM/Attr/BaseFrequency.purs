@@ -6,4 +6,5 @@ import Deku.Attribute (class Attr, prop', unsafeAttribute)
 data BaseFrequency = BaseFrequency
 
 instance Attr FeTurbulence_ BaseFrequency String where
-  attr BaseFrequency value = unsafeAttribute { key: "baseFrequency", value: prop' value }
+  attr BaseFrequency value = unsafeAttribute
+    { key: "baseFrequency", value: prop' value }

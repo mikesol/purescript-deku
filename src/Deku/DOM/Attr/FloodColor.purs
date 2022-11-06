@@ -25,42 +25,81 @@ import Deku.Attribute (class Attr, prop', unsafeAttribute)
 data FloodColor = FloodColor
 
 instance Attr FeBlend_ FloodColor String where
-  attr FloodColor value = unsafeAttribute { key: "flood-color", value: prop' value }
+  attr FloodColor value = unsafeAttribute
+    { key: "flood-color", value: prop' value }
+
 instance Attr FeColorMatrix_ FloodColor String where
-  attr FloodColor value = unsafeAttribute { key: "flood-color", value: prop' value }
+  attr FloodColor value = unsafeAttribute
+    { key: "flood-color", value: prop' value }
+
 instance Attr FeComponentTransfer_ FloodColor String where
-  attr FloodColor value = unsafeAttribute { key: "flood-color", value: prop' value }
+  attr FloodColor value = unsafeAttribute
+    { key: "flood-color", value: prop' value }
+
 instance Attr FeComposite_ FloodColor String where
-  attr FloodColor value = unsafeAttribute { key: "flood-color", value: prop' value }
+  attr FloodColor value = unsafeAttribute
+    { key: "flood-color", value: prop' value }
+
 instance Attr FeConvolveMatrix_ FloodColor String where
-  attr FloodColor value = unsafeAttribute { key: "flood-color", value: prop' value }
+  attr FloodColor value = unsafeAttribute
+    { key: "flood-color", value: prop' value }
+
 instance Attr FeDiffuseLighting_ FloodColor String where
-  attr FloodColor value = unsafeAttribute { key: "flood-color", value: prop' value }
+  attr FloodColor value = unsafeAttribute
+    { key: "flood-color", value: prop' value }
+
 instance Attr FeDisplacementMap_ FloodColor String where
-  attr FloodColor value = unsafeAttribute { key: "flood-color", value: prop' value }
+  attr FloodColor value = unsafeAttribute
+    { key: "flood-color", value: prop' value }
+
 instance Attr FeDropShadow_ FloodColor String where
-  attr FloodColor value = unsafeAttribute { key: "flood-color", value: prop' value }
+  attr FloodColor value = unsafeAttribute
+    { key: "flood-color", value: prop' value }
+
 instance Attr FeFlood_ FloodColor String where
-  attr FloodColor value = unsafeAttribute { key: "flood-color", value: prop' value }
+  attr FloodColor value = unsafeAttribute
+    { key: "flood-color", value: prop' value }
+
 instance Attr FeGaussianBlur_ FloodColor String where
-  attr FloodColor value = unsafeAttribute { key: "flood-color", value: prop' value }
+  attr FloodColor value = unsafeAttribute
+    { key: "flood-color", value: prop' value }
+
 instance Attr FeImage_ FloodColor String where
-  attr FloodColor value = unsafeAttribute { key: "flood-color", value: prop' value }
+  attr FloodColor value = unsafeAttribute
+    { key: "flood-color", value: prop' value }
+
 instance Attr FeMerge_ FloodColor String where
-  attr FloodColor value = unsafeAttribute { key: "flood-color", value: prop' value }
+  attr FloodColor value = unsafeAttribute
+    { key: "flood-color", value: prop' value }
+
 instance Attr FeMorphology_ FloodColor String where
-  attr FloodColor value = unsafeAttribute { key: "flood-color", value: prop' value }
+  attr FloodColor value = unsafeAttribute
+    { key: "flood-color", value: prop' value }
+
 instance Attr FeOffset_ FloodColor String where
-  attr FloodColor value = unsafeAttribute { key: "flood-color", value: prop' value }
+  attr FloodColor value = unsafeAttribute
+    { key: "flood-color", value: prop' value }
+
 instance Attr FeSpecularLighting_ FloodColor String where
-  attr FloodColor value = unsafeAttribute { key: "flood-color", value: prop' value }
+  attr FloodColor value = unsafeAttribute
+    { key: "flood-color", value: prop' value }
+
 instance Attr FeTile_ FloodColor String where
-  attr FloodColor value = unsafeAttribute { key: "flood-color", value: prop' value }
+  attr FloodColor value = unsafeAttribute
+    { key: "flood-color", value: prop' value }
+
 instance Attr FeTurbulence_ FloodColor String where
-  attr FloodColor value = unsafeAttribute { key: "flood-color", value: prop' value }
+  attr FloodColor value = unsafeAttribute
+    { key: "flood-color", value: prop' value }
+
 instance Attr Filter_ FloodColor String where
-  attr FloodColor value = unsafeAttribute { key: "flood-color", value: prop' value }
+  attr FloodColor value = unsafeAttribute
+    { key: "flood-color", value: prop' value }
+
 instance Attr Image_ FloodColor String where
-  attr FloodColor value = unsafeAttribute { key: "flood-color", value: prop' value }
+  attr FloodColor value = unsafeAttribute
+    { key: "flood-color", value: prop' value }
+
 instance Attr Switch_ FloodColor String where
-  attr FloodColor value = unsafeAttribute { key: "flood-color", value: prop' value }
+  attr FloodColor value = unsafeAttribute
+    { key: "flood-color", value: prop' value }

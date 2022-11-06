@@ -10,9 +10,12 @@ data Begin = Begin
 
 instance Attr Animate_ Begin String where
   attr Begin value = unsafeAttribute { key: "begin", value: prop' value }
+
 instance Attr AnimateMotion_ Begin String where
   attr Begin value = unsafeAttribute { key: "begin", value: prop' value }
+
 instance Attr AnimateTransform_ Begin String where
   attr Begin value = unsafeAttribute { key: "begin", value: prop' value }
+
 instance Attr Set_ Begin String where
   attr Begin value = unsafeAttribute { key: "begin", value: prop' value }

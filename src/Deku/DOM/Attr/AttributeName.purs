@@ -9,10 +9,17 @@ import Deku.Attribute (class Attr, prop', unsafeAttribute)
 data AttributeName = AttributeName
 
 instance Attr Animate_ AttributeName String where
-  attr AttributeName value = unsafeAttribute { key: "attributeName", value: prop' value }
+  attr AttributeName value = unsafeAttribute
+    { key: "attributeName", value: prop' value }
+
 instance Attr AnimateMotion_ AttributeName String where
-  attr AttributeName value = unsafeAttribute { key: "attributeName", value: prop' value }
+  attr AttributeName value = unsafeAttribute
+    { key: "attributeName", value: prop' value }
+
 instance Attr AnimateTransform_ AttributeName String where
-  attr AttributeName value = unsafeAttribute { key: "attributeName", value: prop' value }
+  attr AttributeName value = unsafeAttribute
+    { key: "attributeName", value: prop' value }
+
 instance Attr Set_ AttributeName String where
-  attr AttributeName value = unsafeAttribute { key: "attributeName", value: prop' value }
+  attr AttributeName value = unsafeAttribute
+    { key: "attributeName", value: prop' value }

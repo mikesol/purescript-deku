@@ -22,36 +22,69 @@ import Deku.Attribute (class Attr, prop', unsafeAttribute)
 data AriaRequired = AriaRequired
 
 instance Attr Circle_ AriaRequired String where
-  attr AriaRequired value = unsafeAttribute { key: "aria-required", value: prop' value }
+  attr AriaRequired value = unsafeAttribute
+    { key: "aria-required", value: prop' value }
+
 instance Attr Ellipse_ AriaRequired String where
-  attr AriaRequired value = unsafeAttribute { key: "aria-required", value: prop' value }
+  attr AriaRequired value = unsafeAttribute
+    { key: "aria-required", value: prop' value }
+
 instance Attr ForeignObject_ AriaRequired String where
-  attr AriaRequired value = unsafeAttribute { key: "aria-required", value: prop' value }
+  attr AriaRequired value = unsafeAttribute
+    { key: "aria-required", value: prop' value }
+
 instance Attr G_ AriaRequired String where
-  attr AriaRequired value = unsafeAttribute { key: "aria-required", value: prop' value }
+  attr AriaRequired value = unsafeAttribute
+    { key: "aria-required", value: prop' value }
+
 instance Attr Line_ AriaRequired String where
-  attr AriaRequired value = unsafeAttribute { key: "aria-required", value: prop' value }
+  attr AriaRequired value = unsafeAttribute
+    { key: "aria-required", value: prop' value }
+
 instance Attr Marker_ AriaRequired String where
-  attr AriaRequired value = unsafeAttribute { key: "aria-required", value: prop' value }
+  attr AriaRequired value = unsafeAttribute
+    { key: "aria-required", value: prop' value }
+
 instance Attr Path_ AriaRequired String where
-  attr AriaRequired value = unsafeAttribute { key: "aria-required", value: prop' value }
+  attr AriaRequired value = unsafeAttribute
+    { key: "aria-required", value: prop' value }
+
 instance Attr Polygon_ AriaRequired String where
-  attr AriaRequired value = unsafeAttribute { key: "aria-required", value: prop' value }
+  attr AriaRequired value = unsafeAttribute
+    { key: "aria-required", value: prop' value }
+
 instance Attr Polyline_ AriaRequired String where
-  attr AriaRequired value = unsafeAttribute { key: "aria-required", value: prop' value }
+  attr AriaRequired value = unsafeAttribute
+    { key: "aria-required", value: prop' value }
+
 instance Attr Rect_ AriaRequired String where
-  attr AriaRequired value = unsafeAttribute { key: "aria-required", value: prop' value }
+  attr AriaRequired value = unsafeAttribute
+    { key: "aria-required", value: prop' value }
+
 instance Attr Svg_ AriaRequired String where
-  attr AriaRequired value = unsafeAttribute { key: "aria-required", value: prop' value }
+  attr AriaRequired value = unsafeAttribute
+    { key: "aria-required", value: prop' value }
+
 instance Attr Symbol_ AriaRequired String where
-  attr AriaRequired value = unsafeAttribute { key: "aria-required", value: prop' value }
+  attr AriaRequired value = unsafeAttribute
+    { key: "aria-required", value: prop' value }
+
 instance Attr Text_ AriaRequired String where
-  attr AriaRequired value = unsafeAttribute { key: "aria-required", value: prop' value }
+  attr AriaRequired value = unsafeAttribute
+    { key: "aria-required", value: prop' value }
+
 instance Attr TextPath_ AriaRequired String where
-  attr AriaRequired value = unsafeAttribute { key: "aria-required", value: prop' value }
+  attr AriaRequired value = unsafeAttribute
+    { key: "aria-required", value: prop' value }
+
 instance Attr Tspan_ AriaRequired String where
-  attr AriaRequired value = unsafeAttribute { key: "aria-required", value: prop' value }
+  attr AriaRequired value = unsafeAttribute
+    { key: "aria-required", value: prop' value }
+
 instance Attr Use_ AriaRequired String where
-  attr AriaRequired value = unsafeAttribute { key: "aria-required", value: prop' value }
+  attr AriaRequired value = unsafeAttribute
+    { key: "aria-required", value: prop' value }
+
 instance Attr View_ AriaRequired String where
-  attr AriaRequired value = unsafeAttribute { key: "aria-required", value: prop' value }
+  attr AriaRequired value = unsafeAttribute
+    { key: "aria-required", value: prop' value }

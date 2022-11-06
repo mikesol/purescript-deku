@@ -6,4 +6,5 @@ import Deku.Attribute (class Attr, prop', unsafeAttribute)
 data KernelMatrix = KernelMatrix
 
 instance Attr FeConvolveMatrix_ KernelMatrix String where
-  attr KernelMatrix value = unsafeAttribute { key: "kernelMatrix", value: prop' value }
+  attr KernelMatrix value = unsafeAttribute
+    { key: "kernelMatrix", value: prop' value }

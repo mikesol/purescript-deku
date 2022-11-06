@@ -8,5 +8,6 @@ data X2 = X2
 
 instance Attr Line_ X2 String where
   attr X2 value = unsafeAttribute { key: "x2", value: prop' value }
+
 instance Attr LinearGradient_ X2 String where
   attr X2 value = unsafeAttribute { key: "x2", value: prop' value }

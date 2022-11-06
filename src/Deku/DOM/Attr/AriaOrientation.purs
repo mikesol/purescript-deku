@@ -22,36 +22,69 @@ import Deku.Attribute (class Attr, prop', unsafeAttribute)
 data AriaOrientation = AriaOrientation
 
 instance Attr Circle_ AriaOrientation String where
-  attr AriaOrientation value = unsafeAttribute { key: "aria-orientation", value: prop' value }
+  attr AriaOrientation value = unsafeAttribute
+    { key: "aria-orientation", value: prop' value }
+
 instance Attr Ellipse_ AriaOrientation String where
-  attr AriaOrientation value = unsafeAttribute { key: "aria-orientation", value: prop' value }
+  attr AriaOrientation value = unsafeAttribute
+    { key: "aria-orientation", value: prop' value }
+
 instance Attr ForeignObject_ AriaOrientation String where
-  attr AriaOrientation value = unsafeAttribute { key: "aria-orientation", value: prop' value }
+  attr AriaOrientation value = unsafeAttribute
+    { key: "aria-orientation", value: prop' value }
+
 instance Attr G_ AriaOrientation String where
-  attr AriaOrientation value = unsafeAttribute { key: "aria-orientation", value: prop' value }
+  attr AriaOrientation value = unsafeAttribute
+    { key: "aria-orientation", value: prop' value }
+
 instance Attr Line_ AriaOrientation String where
-  attr AriaOrientation value = unsafeAttribute { key: "aria-orientation", value: prop' value }
+  attr AriaOrientation value = unsafeAttribute
+    { key: "aria-orientation", value: prop' value }
+
 instance Attr Marker_ AriaOrientation String where
-  attr AriaOrientation value = unsafeAttribute { key: "aria-orientation", value: prop' value }
+  attr AriaOrientation value = unsafeAttribute
+    { key: "aria-orientation", value: prop' value }
+
 instance Attr Path_ AriaOrientation String where
-  attr AriaOrientation value = unsafeAttribute { key: "aria-orientation", value: prop' value }
+  attr AriaOrientation value = unsafeAttribute
+    { key: "aria-orientation", value: prop' value }
+
 instance Attr Polygon_ AriaOrientation String where
-  attr AriaOrientation value = unsafeAttribute { key: "aria-orientation", value: prop' value }
+  attr AriaOrientation value = unsafeAttribute
+    { key: "aria-orientation", value: prop' value }
+
 instance Attr Polyline_ AriaOrientation String where
-  attr AriaOrientation value = unsafeAttribute { key: "aria-orientation", value: prop' value }
+  attr AriaOrientation value = unsafeAttribute
+    { key: "aria-orientation", value: prop' value }
+
 instance Attr Rect_ AriaOrientation String where
-  attr AriaOrientation value = unsafeAttribute { key: "aria-orientation", value: prop' value }
+  attr AriaOrientation value = unsafeAttribute
+    { key: "aria-orientation", value: prop' value }
+
 instance Attr Svg_ AriaOrientation String where
-  attr AriaOrientation value = unsafeAttribute { key: "aria-orientation", value: prop' value }
+  attr AriaOrientation value = unsafeAttribute
+    { key: "aria-orientation", value: prop' value }
+
 instance Attr Symbol_ AriaOrientation String where
-  attr AriaOrientation value = unsafeAttribute { key: "aria-orientation", value: prop' value }
+  attr AriaOrientation value = unsafeAttribute
+    { key: "aria-orientation", value: prop' value }
+
 instance Attr Text_ AriaOrientation String where
-  attr AriaOrientation value = unsafeAttribute { key: "aria-orientation", value: prop' value }
+  attr AriaOrientation value = unsafeAttribute
+    { key: "aria-orientation", value: prop' value }
+
 instance Attr TextPath_ AriaOrientation String where
-  attr AriaOrientation value = unsafeAttribute { key: "aria-orientation", value: prop' value }
+  attr AriaOrientation value = unsafeAttribute
+    { key: "aria-orientation", value: prop' value }
+
 instance Attr Tspan_ AriaOrientation String where
-  attr AriaOrientation value = unsafeAttribute { key: "aria-orientation", value: prop' value }
+  attr AriaOrientation value = unsafeAttribute
+    { key: "aria-orientation", value: prop' value }
+
 instance Attr Use_ AriaOrientation String where
-  attr AriaOrientation value = unsafeAttribute { key: "aria-orientation", value: prop' value }
+  attr AriaOrientation value = unsafeAttribute
+    { key: "aria-orientation", value: prop' value }
+
 instance Attr View_ AriaOrientation String where
-  attr AriaOrientation value = unsafeAttribute { key: "aria-orientation", value: prop' value }
+  attr AriaOrientation value = unsafeAttribute
+    { key: "aria-orientation", value: prop' value }

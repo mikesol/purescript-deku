@@ -22,36 +22,69 @@ import Deku.Attribute (class Attr, prop', unsafeAttribute)
 data AriaFlowto = AriaFlowto
 
 instance Attr Circle_ AriaFlowto String where
-  attr AriaFlowto value = unsafeAttribute { key: "aria-flowto", value: prop' value }
+  attr AriaFlowto value = unsafeAttribute
+    { key: "aria-flowto", value: prop' value }
+
 instance Attr Ellipse_ AriaFlowto String where
-  attr AriaFlowto value = unsafeAttribute { key: "aria-flowto", value: prop' value }
+  attr AriaFlowto value = unsafeAttribute
+    { key: "aria-flowto", value: prop' value }
+
 instance Attr ForeignObject_ AriaFlowto String where
-  attr AriaFlowto value = unsafeAttribute { key: "aria-flowto", value: prop' value }
+  attr AriaFlowto value = unsafeAttribute
+    { key: "aria-flowto", value: prop' value }
+
 instance Attr G_ AriaFlowto String where
-  attr AriaFlowto value = unsafeAttribute { key: "aria-flowto", value: prop' value }
+  attr AriaFlowto value = unsafeAttribute
+    { key: "aria-flowto", value: prop' value }
+
 instance Attr Line_ AriaFlowto String where
-  attr AriaFlowto value = unsafeAttribute { key: "aria-flowto", value: prop' value }
+  attr AriaFlowto value = unsafeAttribute
+    { key: "aria-flowto", value: prop' value }
+
 instance Attr Marker_ AriaFlowto String where
-  attr AriaFlowto value = unsafeAttribute { key: "aria-flowto", value: prop' value }
+  attr AriaFlowto value = unsafeAttribute
+    { key: "aria-flowto", value: prop' value }
+
 instance Attr Path_ AriaFlowto String where
-  attr AriaFlowto value = unsafeAttribute { key: "aria-flowto", value: prop' value }
+  attr AriaFlowto value = unsafeAttribute
+    { key: "aria-flowto", value: prop' value }
+
 instance Attr Polygon_ AriaFlowto String where
-  attr AriaFlowto value = unsafeAttribute { key: "aria-flowto", value: prop' value }
+  attr AriaFlowto value = unsafeAttribute
+    { key: "aria-flowto", value: prop' value }
+
 instance Attr Polyline_ AriaFlowto String where
-  attr AriaFlowto value = unsafeAttribute { key: "aria-flowto", value: prop' value }
+  attr AriaFlowto value = unsafeAttribute
+    { key: "aria-flowto", value: prop' value }
+
 instance Attr Rect_ AriaFlowto String where
-  attr AriaFlowto value = unsafeAttribute { key: "aria-flowto", value: prop' value }
+  attr AriaFlowto value = unsafeAttribute
+    { key: "aria-flowto", value: prop' value }
+
 instance Attr Svg_ AriaFlowto String where
-  attr AriaFlowto value = unsafeAttribute { key: "aria-flowto", value: prop' value }
+  attr AriaFlowto value = unsafeAttribute
+    { key: "aria-flowto", value: prop' value }
+
 instance Attr Symbol_ AriaFlowto String where
-  attr AriaFlowto value = unsafeAttribute { key: "aria-flowto", value: prop' value }
+  attr AriaFlowto value = unsafeAttribute
+    { key: "aria-flowto", value: prop' value }
+
 instance Attr Text_ AriaFlowto String where
-  attr AriaFlowto value = unsafeAttribute { key: "aria-flowto", value: prop' value }
+  attr AriaFlowto value = unsafeAttribute
+    { key: "aria-flowto", value: prop' value }
+
 instance Attr TextPath_ AriaFlowto String where
-  attr AriaFlowto value = unsafeAttribute { key: "aria-flowto", value: prop' value }
+  attr AriaFlowto value = unsafeAttribute
+    { key: "aria-flowto", value: prop' value }
+
 instance Attr Tspan_ AriaFlowto String where
-  attr AriaFlowto value = unsafeAttribute { key: "aria-flowto", value: prop' value }
+  attr AriaFlowto value = unsafeAttribute
+    { key: "aria-flowto", value: prop' value }
+
 instance Attr Use_ AriaFlowto String where
-  attr AriaFlowto value = unsafeAttribute { key: "aria-flowto", value: prop' value }
+  attr AriaFlowto value = unsafeAttribute
+    { key: "aria-flowto", value: prop' value }
+
 instance Attr View_ AriaFlowto String where
-  attr AriaFlowto value = unsafeAttribute { key: "aria-flowto", value: prop' value }
+  attr AriaFlowto value = unsafeAttribute
+    { key: "aria-flowto", value: prop' value }

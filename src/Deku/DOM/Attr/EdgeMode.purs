@@ -8,5 +8,6 @@ data EdgeMode = EdgeMode
 
 instance Attr FeConvolveMatrix_ EdgeMode String where
   attr EdgeMode value = unsafeAttribute { key: "edgeMode", value: prop' value }
+
 instance Attr FeGaussianBlur_ EdgeMode String where
   attr EdgeMode value = unsafeAttribute { key: "edgeMode", value: prop' value }

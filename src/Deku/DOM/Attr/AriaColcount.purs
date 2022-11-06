@@ -22,36 +22,69 @@ import Deku.Attribute (class Attr, prop', unsafeAttribute)
 data AriaColcount = AriaColcount
 
 instance Attr Circle_ AriaColcount String where
-  attr AriaColcount value = unsafeAttribute { key: "aria-colcount", value: prop' value }
+  attr AriaColcount value = unsafeAttribute
+    { key: "aria-colcount", value: prop' value }
+
 instance Attr Ellipse_ AriaColcount String where
-  attr AriaColcount value = unsafeAttribute { key: "aria-colcount", value: prop' value }
+  attr AriaColcount value = unsafeAttribute
+    { key: "aria-colcount", value: prop' value }
+
 instance Attr ForeignObject_ AriaColcount String where
-  attr AriaColcount value = unsafeAttribute { key: "aria-colcount", value: prop' value }
+  attr AriaColcount value = unsafeAttribute
+    { key: "aria-colcount", value: prop' value }
+
 instance Attr G_ AriaColcount String where
-  attr AriaColcount value = unsafeAttribute { key: "aria-colcount", value: prop' value }
+  attr AriaColcount value = unsafeAttribute
+    { key: "aria-colcount", value: prop' value }
+
 instance Attr Line_ AriaColcount String where
-  attr AriaColcount value = unsafeAttribute { key: "aria-colcount", value: prop' value }
+  attr AriaColcount value = unsafeAttribute
+    { key: "aria-colcount", value: prop' value }
+
 instance Attr Marker_ AriaColcount String where
-  attr AriaColcount value = unsafeAttribute { key: "aria-colcount", value: prop' value }
+  attr AriaColcount value = unsafeAttribute
+    { key: "aria-colcount", value: prop' value }
+
 instance Attr Path_ AriaColcount String where
-  attr AriaColcount value = unsafeAttribute { key: "aria-colcount", value: prop' value }
+  attr AriaColcount value = unsafeAttribute
+    { key: "aria-colcount", value: prop' value }
+
 instance Attr Polygon_ AriaColcount String where
-  attr AriaColcount value = unsafeAttribute { key: "aria-colcount", value: prop' value }
+  attr AriaColcount value = unsafeAttribute
+    { key: "aria-colcount", value: prop' value }
+
 instance Attr Polyline_ AriaColcount String where
-  attr AriaColcount value = unsafeAttribute { key: "aria-colcount", value: prop' value }
+  attr AriaColcount value = unsafeAttribute
+    { key: "aria-colcount", value: prop' value }
+
 instance Attr Rect_ AriaColcount String where
-  attr AriaColcount value = unsafeAttribute { key: "aria-colcount", value: prop' value }
+  attr AriaColcount value = unsafeAttribute
+    { key: "aria-colcount", value: prop' value }
+
 instance Attr Svg_ AriaColcount String where
-  attr AriaColcount value = unsafeAttribute { key: "aria-colcount", value: prop' value }
+  attr AriaColcount value = unsafeAttribute
+    { key: "aria-colcount", value: prop' value }
+
 instance Attr Symbol_ AriaColcount String where
-  attr AriaColcount value = unsafeAttribute { key: "aria-colcount", value: prop' value }
+  attr AriaColcount value = unsafeAttribute
+    { key: "aria-colcount", value: prop' value }
+
 instance Attr Text_ AriaColcount String where
-  attr AriaColcount value = unsafeAttribute { key: "aria-colcount", value: prop' value }
+  attr AriaColcount value = unsafeAttribute
+    { key: "aria-colcount", value: prop' value }
+
 instance Attr TextPath_ AriaColcount String where
-  attr AriaColcount value = unsafeAttribute { key: "aria-colcount", value: prop' value }
+  attr AriaColcount value = unsafeAttribute
+    { key: "aria-colcount", value: prop' value }
+
 instance Attr Tspan_ AriaColcount String where
-  attr AriaColcount value = unsafeAttribute { key: "aria-colcount", value: prop' value }
+  attr AriaColcount value = unsafeAttribute
+    { key: "aria-colcount", value: prop' value }
+
 instance Attr Use_ AriaColcount String where
-  attr AriaColcount value = unsafeAttribute { key: "aria-colcount", value: prop' value }
+  attr AriaColcount value = unsafeAttribute
+    { key: "aria-colcount", value: prop' value }
+
 instance Attr View_ AriaColcount String where
-  attr AriaColcount value = unsafeAttribute { key: "aria-colcount", value: prop' value }
+  attr AriaColcount value = unsafeAttribute
+    { key: "aria-colcount", value: prop' value }

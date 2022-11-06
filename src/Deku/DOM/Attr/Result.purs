@@ -23,35 +23,51 @@ data Result = Result
 
 instance Attr FeBlend_ Result String where
   attr Result value = unsafeAttribute { key: "result", value: prop' value }
+
 instance Attr FeColorMatrix_ Result String where
   attr Result value = unsafeAttribute { key: "result", value: prop' value }
+
 instance Attr FeComponentTransfer_ Result String where
   attr Result value = unsafeAttribute { key: "result", value: prop' value }
+
 instance Attr FeComposite_ Result String where
   attr Result value = unsafeAttribute { key: "result", value: prop' value }
+
 instance Attr FeConvolveMatrix_ Result String where
   attr Result value = unsafeAttribute { key: "result", value: prop' value }
+
 instance Attr FeDiffuseLighting_ Result String where
   attr Result value = unsafeAttribute { key: "result", value: prop' value }
+
 instance Attr FeDisplacementMap_ Result String where
   attr Result value = unsafeAttribute { key: "result", value: prop' value }
+
 instance Attr FeDropShadow_ Result String where
   attr Result value = unsafeAttribute { key: "result", value: prop' value }
+
 instance Attr FeFlood_ Result String where
   attr Result value = unsafeAttribute { key: "result", value: prop' value }
+
 instance Attr FeGaussianBlur_ Result String where
   attr Result value = unsafeAttribute { key: "result", value: prop' value }
+
 instance Attr FeImage_ Result String where
   attr Result value = unsafeAttribute { key: "result", value: prop' value }
+
 instance Attr FeMerge_ Result String where
   attr Result value = unsafeAttribute { key: "result", value: prop' value }
+
 instance Attr FeMorphology_ Result String where
   attr Result value = unsafeAttribute { key: "result", value: prop' value }
+
 instance Attr FeOffset_ Result String where
   attr Result value = unsafeAttribute { key: "result", value: prop' value }
+
 instance Attr FeSpecularLighting_ Result String where
   attr Result value = unsafeAttribute { key: "result", value: prop' value }
+
 instance Attr FeTile_ Result String where
   attr Result value = unsafeAttribute { key: "result", value: prop' value }
+
 instance Attr FeTurbulence_ Result String where
   attr Result value = unsafeAttribute { key: "result", value: prop' value }

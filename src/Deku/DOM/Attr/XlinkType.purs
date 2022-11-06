@@ -10,12 +10,21 @@ import Deku.Attribute (class Attr, prop', unsafeAttribute)
 data XlinkType = XlinkType
 
 instance Attr AnimateTransform_ XlinkType String where
-  attr XlinkType value = unsafeAttribute { key: "xlink:type", value: prop' value }
+  attr XlinkType value = unsafeAttribute
+    { key: "xlink:type", value: prop' value }
+
 instance Attr FeImage_ XlinkType String where
-  attr XlinkType value = unsafeAttribute { key: "xlink:type", value: prop' value }
+  attr XlinkType value = unsafeAttribute
+    { key: "xlink:type", value: prop' value }
+
 instance Attr Filter_ XlinkType String where
-  attr XlinkType value = unsafeAttribute { key: "xlink:type", value: prop' value }
+  attr XlinkType value = unsafeAttribute
+    { key: "xlink:type", value: prop' value }
+
 instance Attr Image_ XlinkType String where
-  attr XlinkType value = unsafeAttribute { key: "xlink:type", value: prop' value }
+  attr XlinkType value = unsafeAttribute
+    { key: "xlink:type", value: prop' value }
+
 instance Attr Mpath_ XlinkType String where
-  attr XlinkType value = unsafeAttribute { key: "xlink:type", value: prop' value }
+  attr XlinkType value = unsafeAttribute
+    { key: "xlink:type", value: prop' value }

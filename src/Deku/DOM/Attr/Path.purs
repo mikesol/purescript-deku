@@ -8,5 +8,6 @@ data Path = Path
 
 instance Attr AnimateMotion_ Path String where
   attr Path value = unsafeAttribute { key: "path", value: prop' value }
+
 instance Attr TextPath_ Path String where
   attr Path value = unsafeAttribute { key: "path", value: prop' value }

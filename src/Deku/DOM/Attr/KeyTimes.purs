@@ -9,7 +9,9 @@ data KeyTimes = KeyTimes
 
 instance Attr Animate_ KeyTimes String where
   attr KeyTimes value = unsafeAttribute { key: "keyTimes", value: prop' value }
+
 instance Attr AnimateMotion_ KeyTimes String where
   attr KeyTimes value = unsafeAttribute { key: "keyTimes", value: prop' value }
+
 instance Attr AnimateTransform_ KeyTimes String where
   attr KeyTimes value = unsafeAttribute { key: "keyTimes", value: prop' value }

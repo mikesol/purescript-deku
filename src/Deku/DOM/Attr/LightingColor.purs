@@ -24,40 +24,77 @@ import Deku.Attribute (class Attr, prop', unsafeAttribute)
 data LightingColor = LightingColor
 
 instance Attr FeBlend_ LightingColor String where
-  attr LightingColor value = unsafeAttribute { key: "lighting-color", value: prop' value }
+  attr LightingColor value = unsafeAttribute
+    { key: "lighting-color", value: prop' value }
+
 instance Attr FeColorMatrix_ LightingColor String where
-  attr LightingColor value = unsafeAttribute { key: "lighting-color", value: prop' value }
+  attr LightingColor value = unsafeAttribute
+    { key: "lighting-color", value: prop' value }
+
 instance Attr FeComponentTransfer_ LightingColor String where
-  attr LightingColor value = unsafeAttribute { key: "lighting-color", value: prop' value }
+  attr LightingColor value = unsafeAttribute
+    { key: "lighting-color", value: prop' value }
+
 instance Attr FeComposite_ LightingColor String where
-  attr LightingColor value = unsafeAttribute { key: "lighting-color", value: prop' value }
+  attr LightingColor value = unsafeAttribute
+    { key: "lighting-color", value: prop' value }
+
 instance Attr FeConvolveMatrix_ LightingColor String where
-  attr LightingColor value = unsafeAttribute { key: "lighting-color", value: prop' value }
+  attr LightingColor value = unsafeAttribute
+    { key: "lighting-color", value: prop' value }
+
 instance Attr FeDiffuseLighting_ LightingColor String where
-  attr LightingColor value = unsafeAttribute { key: "lighting-color", value: prop' value }
+  attr LightingColor value = unsafeAttribute
+    { key: "lighting-color", value: prop' value }
+
 instance Attr FeDisplacementMap_ LightingColor String where
-  attr LightingColor value = unsafeAttribute { key: "lighting-color", value: prop' value }
+  attr LightingColor value = unsafeAttribute
+    { key: "lighting-color", value: prop' value }
+
 instance Attr FeFlood_ LightingColor String where
-  attr LightingColor value = unsafeAttribute { key: "lighting-color", value: prop' value }
+  attr LightingColor value = unsafeAttribute
+    { key: "lighting-color", value: prop' value }
+
 instance Attr FeGaussianBlur_ LightingColor String where
-  attr LightingColor value = unsafeAttribute { key: "lighting-color", value: prop' value }
+  attr LightingColor value = unsafeAttribute
+    { key: "lighting-color", value: prop' value }
+
 instance Attr FeImage_ LightingColor String where
-  attr LightingColor value = unsafeAttribute { key: "lighting-color", value: prop' value }
+  attr LightingColor value = unsafeAttribute
+    { key: "lighting-color", value: prop' value }
+
 instance Attr FeMerge_ LightingColor String where
-  attr LightingColor value = unsafeAttribute { key: "lighting-color", value: prop' value }
+  attr LightingColor value = unsafeAttribute
+    { key: "lighting-color", value: prop' value }
+
 instance Attr FeMorphology_ LightingColor String where
-  attr LightingColor value = unsafeAttribute { key: "lighting-color", value: prop' value }
+  attr LightingColor value = unsafeAttribute
+    { key: "lighting-color", value: prop' value }
+
 instance Attr FeOffset_ LightingColor String where
-  attr LightingColor value = unsafeAttribute { key: "lighting-color", value: prop' value }
+  attr LightingColor value = unsafeAttribute
+    { key: "lighting-color", value: prop' value }
+
 instance Attr FeSpecularLighting_ LightingColor String where
-  attr LightingColor value = unsafeAttribute { key: "lighting-color", value: prop' value }
+  attr LightingColor value = unsafeAttribute
+    { key: "lighting-color", value: prop' value }
+
 instance Attr FeTile_ LightingColor String where
-  attr LightingColor value = unsafeAttribute { key: "lighting-color", value: prop' value }
+  attr LightingColor value = unsafeAttribute
+    { key: "lighting-color", value: prop' value }
+
 instance Attr FeTurbulence_ LightingColor String where
-  attr LightingColor value = unsafeAttribute { key: "lighting-color", value: prop' value }
+  attr LightingColor value = unsafeAttribute
+    { key: "lighting-color", value: prop' value }
+
 instance Attr Filter_ LightingColor String where
-  attr LightingColor value = unsafeAttribute { key: "lighting-color", value: prop' value }
+  attr LightingColor value = unsafeAttribute
+    { key: "lighting-color", value: prop' value }
+
 instance Attr Image_ LightingColor String where
-  attr LightingColor value = unsafeAttribute { key: "lighting-color", value: prop' value }
+  attr LightingColor value = unsafeAttribute
+    { key: "lighting-color", value: prop' value }
+
 instance Attr Switch_ LightingColor String where
-  attr LightingColor value = unsafeAttribute { key: "lighting-color", value: prop' value }
+  attr LightingColor value = unsafeAttribute
+    { key: "lighting-color", value: prop' value }

@@ -45,79 +45,117 @@ data Cursor = Cursor
 
 instance Attr Circle_ Cursor String where
   attr Cursor value = unsafeAttribute { key: "cursor", value: prop' value }
+
 instance Attr Defs_ Cursor String where
   attr Cursor value = unsafeAttribute { key: "cursor", value: prop' value }
+
 instance Attr Ellipse_ Cursor String where
   attr Cursor value = unsafeAttribute { key: "cursor", value: prop' value }
+
 instance Attr FeBlend_ Cursor String where
   attr Cursor value = unsafeAttribute { key: "cursor", value: prop' value }
+
 instance Attr FeColorMatrix_ Cursor String where
   attr Cursor value = unsafeAttribute { key: "cursor", value: prop' value }
+
 instance Attr FeComponentTransfer_ Cursor String where
   attr Cursor value = unsafeAttribute { key: "cursor", value: prop' value }
+
 instance Attr FeComposite_ Cursor String where
   attr Cursor value = unsafeAttribute { key: "cursor", value: prop' value }
+
 instance Attr FeConvolveMatrix_ Cursor String where
   attr Cursor value = unsafeAttribute { key: "cursor", value: prop' value }
+
 instance Attr FeDiffuseLighting_ Cursor String where
   attr Cursor value = unsafeAttribute { key: "cursor", value: prop' value }
+
 instance Attr FeDisplacementMap_ Cursor String where
   attr Cursor value = unsafeAttribute { key: "cursor", value: prop' value }
+
 instance Attr FeFlood_ Cursor String where
   attr Cursor value = unsafeAttribute { key: "cursor", value: prop' value }
+
 instance Attr FeGaussianBlur_ Cursor String where
   attr Cursor value = unsafeAttribute { key: "cursor", value: prop' value }
+
 instance Attr FeImage_ Cursor String where
   attr Cursor value = unsafeAttribute { key: "cursor", value: prop' value }
+
 instance Attr FeMerge_ Cursor String where
   attr Cursor value = unsafeAttribute { key: "cursor", value: prop' value }
+
 instance Attr FeMorphology_ Cursor String where
   attr Cursor value = unsafeAttribute { key: "cursor", value: prop' value }
+
 instance Attr FeOffset_ Cursor String where
   attr Cursor value = unsafeAttribute { key: "cursor", value: prop' value }
+
 instance Attr FeSpecularLighting_ Cursor String where
   attr Cursor value = unsafeAttribute { key: "cursor", value: prop' value }
+
 instance Attr FeTile_ Cursor String where
   attr Cursor value = unsafeAttribute { key: "cursor", value: prop' value }
+
 instance Attr FeTurbulence_ Cursor String where
   attr Cursor value = unsafeAttribute { key: "cursor", value: prop' value }
+
 instance Attr Filter_ Cursor String where
   attr Cursor value = unsafeAttribute { key: "cursor", value: prop' value }
+
 instance Attr ForeignObject_ Cursor String where
   attr Cursor value = unsafeAttribute { key: "cursor", value: prop' value }
+
 instance Attr G_ Cursor String where
   attr Cursor value = unsafeAttribute { key: "cursor", value: prop' value }
+
 instance Attr Image_ Cursor String where
   attr Cursor value = unsafeAttribute { key: "cursor", value: prop' value }
+
 instance Attr Line_ Cursor String where
   attr Cursor value = unsafeAttribute { key: "cursor", value: prop' value }
+
 instance Attr LinearGradient_ Cursor String where
   attr Cursor value = unsafeAttribute { key: "cursor", value: prop' value }
+
 instance Attr Marker_ Cursor String where
   attr Cursor value = unsafeAttribute { key: "cursor", value: prop' value }
+
 instance Attr Path_ Cursor String where
   attr Cursor value = unsafeAttribute { key: "cursor", value: prop' value }
+
 instance Attr Pattern_ Cursor String where
   attr Cursor value = unsafeAttribute { key: "cursor", value: prop' value }
+
 instance Attr Polygon_ Cursor String where
   attr Cursor value = unsafeAttribute { key: "cursor", value: prop' value }
+
 instance Attr Polyline_ Cursor String where
   attr Cursor value = unsafeAttribute { key: "cursor", value: prop' value }
+
 instance Attr RadialGradient_ Cursor String where
   attr Cursor value = unsafeAttribute { key: "cursor", value: prop' value }
+
 instance Attr Rect_ Cursor String where
   attr Cursor value = unsafeAttribute { key: "cursor", value: prop' value }
+
 instance Attr Svg_ Cursor String where
   attr Cursor value = unsafeAttribute { key: "cursor", value: prop' value }
+
 instance Attr Switch_ Cursor String where
   attr Cursor value = unsafeAttribute { key: "cursor", value: prop' value }
+
 instance Attr Symbol_ Cursor String where
   attr Cursor value = unsafeAttribute { key: "cursor", value: prop' value }
+
 instance Attr Text_ Cursor String where
   attr Cursor value = unsafeAttribute { key: "cursor", value: prop' value }
+
 instance Attr TextPath_ Cursor String where
   attr Cursor value = unsafeAttribute { key: "cursor", value: prop' value }
+
 instance Attr Tspan_ Cursor String where
   attr Cursor value = unsafeAttribute { key: "cursor", value: prop' value }
+
 instance Attr Use_ Cursor String where
   attr Cursor value = unsafeAttribute { key: "cursor", value: prop' value }

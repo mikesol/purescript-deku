@@ -6,4 +6,5 @@ import Deku.Attribute (class Attr, prop', unsafeAttribute)
 data Decelerate = Decelerate
 
 instance Attr AnimateTransform_ Decelerate String where
-  attr Decelerate value = unsafeAttribute { key: "decelerate", value: prop' value }
+  attr Decelerate value = unsafeAttribute
+    { key: "decelerate", value: prop' value }

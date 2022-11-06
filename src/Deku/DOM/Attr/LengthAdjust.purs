@@ -8,8 +8,13 @@ import Deku.Attribute (class Attr, prop', unsafeAttribute)
 data LengthAdjust = LengthAdjust
 
 instance Attr Text_ LengthAdjust String where
-  attr LengthAdjust value = unsafeAttribute { key: "lengthAdjust", value: prop' value }
+  attr LengthAdjust value = unsafeAttribute
+    { key: "lengthAdjust", value: prop' value }
+
 instance Attr TextPath_ LengthAdjust String where
-  attr LengthAdjust value = unsafeAttribute { key: "lengthAdjust", value: prop' value }
+  attr LengthAdjust value = unsafeAttribute
+    { key: "lengthAdjust", value: prop' value }
+
 instance Attr Tspan_ LengthAdjust String where
-  attr LengthAdjust value = unsafeAttribute { key: "lengthAdjust", value: prop' value }
+  attr LengthAdjust value = unsafeAttribute
+    { key: "lengthAdjust", value: prop' value }

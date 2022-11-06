@@ -47,83 +47,123 @@ data Opacity = Opacity
 
 instance Attr Circle_ Opacity String where
   attr Opacity value = unsafeAttribute { key: "opacity", value: prop' value }
+
 instance Attr ClipPath_ Opacity String where
   attr Opacity value = unsafeAttribute { key: "opacity", value: prop' value }
+
 instance Attr Defs_ Opacity String where
   attr Opacity value = unsafeAttribute { key: "opacity", value: prop' value }
+
 instance Attr Ellipse_ Opacity String where
   attr Opacity value = unsafeAttribute { key: "opacity", value: prop' value }
+
 instance Attr FeBlend_ Opacity String where
   attr Opacity value = unsafeAttribute { key: "opacity", value: prop' value }
+
 instance Attr FeColorMatrix_ Opacity String where
   attr Opacity value = unsafeAttribute { key: "opacity", value: prop' value }
+
 instance Attr FeComponentTransfer_ Opacity String where
   attr Opacity value = unsafeAttribute { key: "opacity", value: prop' value }
+
 instance Attr FeComposite_ Opacity String where
   attr Opacity value = unsafeAttribute { key: "opacity", value: prop' value }
+
 instance Attr FeConvolveMatrix_ Opacity String where
   attr Opacity value = unsafeAttribute { key: "opacity", value: prop' value }
+
 instance Attr FeDiffuseLighting_ Opacity String where
   attr Opacity value = unsafeAttribute { key: "opacity", value: prop' value }
+
 instance Attr FeDisplacementMap_ Opacity String where
   attr Opacity value = unsafeAttribute { key: "opacity", value: prop' value }
+
 instance Attr FeFlood_ Opacity String where
   attr Opacity value = unsafeAttribute { key: "opacity", value: prop' value }
+
 instance Attr FeGaussianBlur_ Opacity String where
   attr Opacity value = unsafeAttribute { key: "opacity", value: prop' value }
+
 instance Attr FeImage_ Opacity String where
   attr Opacity value = unsafeAttribute { key: "opacity", value: prop' value }
+
 instance Attr FeMerge_ Opacity String where
   attr Opacity value = unsafeAttribute { key: "opacity", value: prop' value }
+
 instance Attr FeMorphology_ Opacity String where
   attr Opacity value = unsafeAttribute { key: "opacity", value: prop' value }
+
 instance Attr FeOffset_ Opacity String where
   attr Opacity value = unsafeAttribute { key: "opacity", value: prop' value }
+
 instance Attr FeSpecularLighting_ Opacity String where
   attr Opacity value = unsafeAttribute { key: "opacity", value: prop' value }
+
 instance Attr FeTile_ Opacity String where
   attr Opacity value = unsafeAttribute { key: "opacity", value: prop' value }
+
 instance Attr FeTurbulence_ Opacity String where
   attr Opacity value = unsafeAttribute { key: "opacity", value: prop' value }
+
 instance Attr Filter_ Opacity String where
   attr Opacity value = unsafeAttribute { key: "opacity", value: prop' value }
+
 instance Attr ForeignObject_ Opacity String where
   attr Opacity value = unsafeAttribute { key: "opacity", value: prop' value }
+
 instance Attr G_ Opacity String where
   attr Opacity value = unsafeAttribute { key: "opacity", value: prop' value }
+
 instance Attr Image_ Opacity String where
   attr Opacity value = unsafeAttribute { key: "opacity", value: prop' value }
+
 instance Attr Line_ Opacity String where
   attr Opacity value = unsafeAttribute { key: "opacity", value: prop' value }
+
 instance Attr LinearGradient_ Opacity String where
   attr Opacity value = unsafeAttribute { key: "opacity", value: prop' value }
+
 instance Attr Marker_ Opacity String where
   attr Opacity value = unsafeAttribute { key: "opacity", value: prop' value }
+
 instance Attr Mask_ Opacity String where
   attr Opacity value = unsafeAttribute { key: "opacity", value: prop' value }
+
 instance Attr Path_ Opacity String where
   attr Opacity value = unsafeAttribute { key: "opacity", value: prop' value }
+
 instance Attr Pattern_ Opacity String where
   attr Opacity value = unsafeAttribute { key: "opacity", value: prop' value }
+
 instance Attr Polygon_ Opacity String where
   attr Opacity value = unsafeAttribute { key: "opacity", value: prop' value }
+
 instance Attr Polyline_ Opacity String where
   attr Opacity value = unsafeAttribute { key: "opacity", value: prop' value }
+
 instance Attr RadialGradient_ Opacity String where
   attr Opacity value = unsafeAttribute { key: "opacity", value: prop' value }
+
 instance Attr Rect_ Opacity String where
   attr Opacity value = unsafeAttribute { key: "opacity", value: prop' value }
+
 instance Attr Svg_ Opacity String where
   attr Opacity value = unsafeAttribute { key: "opacity", value: prop' value }
+
 instance Attr Switch_ Opacity String where
   attr Opacity value = unsafeAttribute { key: "opacity", value: prop' value }
+
 instance Attr Symbol_ Opacity String where
   attr Opacity value = unsafeAttribute { key: "opacity", value: prop' value }
+
 instance Attr Text_ Opacity String where
   attr Opacity value = unsafeAttribute { key: "opacity", value: prop' value }
+
 instance Attr TextPath_ Opacity String where
   attr Opacity value = unsafeAttribute { key: "opacity", value: prop' value }
+
 instance Attr Tspan_ Opacity String where
   attr Opacity value = unsafeAttribute { key: "opacity", value: prop' value }
+
 instance Attr Use_ Opacity String where
   attr Opacity value = unsafeAttribute { key: "opacity", value: prop' value }

@@ -6,4 +6,5 @@ import Deku.Attribute (class Attr, prop', unsafeAttribute)
 data MarkerUnits = MarkerUnits
 
 instance Attr Marker_ MarkerUnits String where
-  attr MarkerUnits value = unsafeAttribute { key: "markerUnits", value: prop' value }
+  attr MarkerUnits value = unsafeAttribute
+    { key: "markerUnits", value: prop' value }

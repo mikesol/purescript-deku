@@ -6,4 +6,5 @@ import Deku.Attribute (class Attr, prop', unsafeAttribute)
 data StartOffset = StartOffset
 
 instance Attr TextPath_ StartOffset String where
-  attr StartOffset value = unsafeAttribute { key: "startOffset", value: prop' value }
+  attr StartOffset value = unsafeAttribute
+    { key: "startOffset", value: prop' value }

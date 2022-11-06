@@ -540,93 +540,138 @@ instance Attr Wbr_ Class String where
 
 instance Attr Animate_ Class String where
   attr Class value = unsafeAttribute { key: "class", value: prop' value }
+
 instance Attr AnimateMotion_ Class String where
   attr Class value = unsafeAttribute { key: "class", value: prop' value }
+
 instance Attr Circle_ Class String where
   attr Class value = unsafeAttribute { key: "class", value: prop' value }
+
 instance Attr ClipPath_ Class String where
   attr Class value = unsafeAttribute { key: "class", value: prop' value }
+
 instance Attr Defs_ Class String where
   attr Class value = unsafeAttribute { key: "class", value: prop' value }
+
 instance Attr Desc_ Class String where
   attr Class value = unsafeAttribute { key: "class", value: prop' value }
+
 instance Attr Ellipse_ Class String where
   attr Class value = unsafeAttribute { key: "class", value: prop' value }
+
 instance Attr FeBlend_ Class String where
   attr Class value = unsafeAttribute { key: "class", value: prop' value }
+
 instance Attr FeColorMatrix_ Class String where
   attr Class value = unsafeAttribute { key: "class", value: prop' value }
+
 instance Attr FeComponentTransfer_ Class String where
   attr Class value = unsafeAttribute { key: "class", value: prop' value }
+
 instance Attr FeComposite_ Class String where
   attr Class value = unsafeAttribute { key: "class", value: prop' value }
+
 instance Attr FeConvolveMatrix_ Class String where
   attr Class value = unsafeAttribute { key: "class", value: prop' value }
+
 instance Attr FeDiffuseLighting_ Class String where
   attr Class value = unsafeAttribute { key: "class", value: prop' value }
+
 instance Attr FeDisplacementMap_ Class String where
   attr Class value = unsafeAttribute { key: "class", value: prop' value }
+
 instance Attr FeDropShadow_ Class String where
   attr Class value = unsafeAttribute { key: "class", value: prop' value }
+
 instance Attr FeFlood_ Class String where
   attr Class value = unsafeAttribute { key: "class", value: prop' value }
+
 instance Attr FeGaussianBlur_ Class String where
   attr Class value = unsafeAttribute { key: "class", value: prop' value }
+
 instance Attr FeImage_ Class String where
   attr Class value = unsafeAttribute { key: "class", value: prop' value }
+
 instance Attr FeMerge_ Class String where
   attr Class value = unsafeAttribute { key: "class", value: prop' value }
+
 instance Attr FeMorphology_ Class String where
   attr Class value = unsafeAttribute { key: "class", value: prop' value }
+
 instance Attr FeOffset_ Class String where
   attr Class value = unsafeAttribute { key: "class", value: prop' value }
+
 instance Attr FeSpecularLighting_ Class String where
   attr Class value = unsafeAttribute { key: "class", value: prop' value }
+
 instance Attr FeTile_ Class String where
   attr Class value = unsafeAttribute { key: "class", value: prop' value }
+
 instance Attr FeTurbulence_ Class String where
   attr Class value = unsafeAttribute { key: "class", value: prop' value }
+
 instance Attr Filter_ Class String where
   attr Class value = unsafeAttribute { key: "class", value: prop' value }
+
 instance Attr ForeignObject_ Class String where
   attr Class value = unsafeAttribute { key: "class", value: prop' value }
+
 instance Attr G_ Class String where
   attr Class value = unsafeAttribute { key: "class", value: prop' value }
+
 instance Attr Image_ Class String where
   attr Class value = unsafeAttribute { key: "class", value: prop' value }
+
 instance Attr Line_ Class String where
   attr Class value = unsafeAttribute { key: "class", value: prop' value }
+
 instance Attr LinearGradient_ Class String where
   attr Class value = unsafeAttribute { key: "class", value: prop' value }
+
 instance Attr Marker_ Class String where
   attr Class value = unsafeAttribute { key: "class", value: prop' value }
+
 instance Attr Mask_ Class String where
   attr Class value = unsafeAttribute { key: "class", value: prop' value }
+
 instance Attr Path_ Class String where
   attr Class value = unsafeAttribute { key: "class", value: prop' value }
+
 instance Attr Pattern_ Class String where
   attr Class value = unsafeAttribute { key: "class", value: prop' value }
+
 instance Attr Polygon_ Class String where
   attr Class value = unsafeAttribute { key: "class", value: prop' value }
+
 instance Attr Polyline_ Class String where
   attr Class value = unsafeAttribute { key: "class", value: prop' value }
+
 instance Attr RadialGradient_ Class String where
   attr Class value = unsafeAttribute { key: "class", value: prop' value }
+
 instance Attr Rect_ Class String where
   attr Class value = unsafeAttribute { key: "class", value: prop' value }
+
 instance Attr Set_ Class String where
   attr Class value = unsafeAttribute { key: "class", value: prop' value }
+
 instance Attr Stop_ Class String where
   attr Class value = unsafeAttribute { key: "class", value: prop' value }
+
 instance Attr Switch_ Class String where
   attr Class value = unsafeAttribute { key: "class", value: prop' value }
+
 instance Attr Symbol_ Class String where
   attr Class value = unsafeAttribute { key: "class", value: prop' value }
+
 instance Attr Text_ Class String where
   attr Class value = unsafeAttribute { key: "class", value: prop' value }
+
 instance Attr TextPath_ Class String where
   attr Class value = unsafeAttribute { key: "class", value: prop' value }
+
 instance Attr Tspan_ Class String where
   attr Class value = unsafeAttribute { key: "class", value: prop' value }
+
 instance Attr Use_ Class String where
   attr Class value = unsafeAttribute { key: "class", value: prop' value }

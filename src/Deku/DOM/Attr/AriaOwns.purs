@@ -23,35 +23,51 @@ data AriaOwns = AriaOwns
 
 instance Attr Circle_ AriaOwns String where
   attr AriaOwns value = unsafeAttribute { key: "aria-owns", value: prop' value }
+
 instance Attr Ellipse_ AriaOwns String where
   attr AriaOwns value = unsafeAttribute { key: "aria-owns", value: prop' value }
+
 instance Attr ForeignObject_ AriaOwns String where
   attr AriaOwns value = unsafeAttribute { key: "aria-owns", value: prop' value }
+
 instance Attr G_ AriaOwns String where
   attr AriaOwns value = unsafeAttribute { key: "aria-owns", value: prop' value }
+
 instance Attr Line_ AriaOwns String where
   attr AriaOwns value = unsafeAttribute { key: "aria-owns", value: prop' value }
+
 instance Attr Marker_ AriaOwns String where
   attr AriaOwns value = unsafeAttribute { key: "aria-owns", value: prop' value }
+
 instance Attr Path_ AriaOwns String where
   attr AriaOwns value = unsafeAttribute { key: "aria-owns", value: prop' value }
+
 instance Attr Polygon_ AriaOwns String where
   attr AriaOwns value = unsafeAttribute { key: "aria-owns", value: prop' value }
+
 instance Attr Polyline_ AriaOwns String where
   attr AriaOwns value = unsafeAttribute { key: "aria-owns", value: prop' value }
+
 instance Attr Rect_ AriaOwns String where
   attr AriaOwns value = unsafeAttribute { key: "aria-owns", value: prop' value }
+
 instance Attr Svg_ AriaOwns String where
   attr AriaOwns value = unsafeAttribute { key: "aria-owns", value: prop' value }
+
 instance Attr Symbol_ AriaOwns String where
   attr AriaOwns value = unsafeAttribute { key: "aria-owns", value: prop' value }
+
 instance Attr Text_ AriaOwns String where
   attr AriaOwns value = unsafeAttribute { key: "aria-owns", value: prop' value }
+
 instance Attr TextPath_ AriaOwns String where
   attr AriaOwns value = unsafeAttribute { key: "aria-owns", value: prop' value }
+
 instance Attr Tspan_ AriaOwns String where
   attr AriaOwns value = unsafeAttribute { key: "aria-owns", value: prop' value }
+
 instance Attr Use_ AriaOwns String where
   attr AriaOwns value = unsafeAttribute { key: "aria-owns", value: prop' value }
+
 instance Attr View_ AriaOwns String where
   attr AriaOwns value = unsafeAttribute { key: "aria-owns", value: prop' value }

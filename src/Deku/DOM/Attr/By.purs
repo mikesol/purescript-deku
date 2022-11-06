@@ -9,7 +9,9 @@ data By = By
 
 instance Attr Animate_ By String where
   attr By value = unsafeAttribute { key: "by", value: prop' value }
+
 instance Attr AnimateMotion_ By String where
   attr By value = unsafeAttribute { key: "by", value: prop' value }
+
 instance Attr AnimateTransform_ By String where
   attr By value = unsafeAttribute { key: "by", value: prop' value }

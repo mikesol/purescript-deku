@@ -10,9 +10,12 @@ data To = To
 
 instance Attr Animate_ To String where
   attr To value = unsafeAttribute { key: "to", value: prop' value }
+
 instance Attr AnimateMotion_ To String where
   attr To value = unsafeAttribute { key: "to", value: prop' value }
+
 instance Attr AnimateTransform_ To String where
   attr To value = unsafeAttribute { key: "to", value: prop' value }
+
 instance Attr Set_ To String where
   attr To value = unsafeAttribute { key: "to", value: prop' value }

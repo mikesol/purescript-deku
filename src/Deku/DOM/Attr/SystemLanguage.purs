@@ -27,46 +27,89 @@ import Deku.Attribute (class Attr, prop', unsafeAttribute)
 data SystemLanguage = SystemLanguage
 
 instance Attr AnimateTransform_ SystemLanguage String where
-  attr SystemLanguage value = unsafeAttribute { key: "systemLanguage", value: prop' value }
+  attr SystemLanguage value = unsafeAttribute
+    { key: "systemLanguage", value: prop' value }
+
 instance Attr Circle_ SystemLanguage String where
-  attr SystemLanguage value = unsafeAttribute { key: "systemLanguage", value: prop' value }
+  attr SystemLanguage value = unsafeAttribute
+    { key: "systemLanguage", value: prop' value }
+
 instance Attr ClipPath_ SystemLanguage String where
-  attr SystemLanguage value = unsafeAttribute { key: "systemLanguage", value: prop' value }
+  attr SystemLanguage value = unsafeAttribute
+    { key: "systemLanguage", value: prop' value }
+
 instance Attr Discard_ SystemLanguage String where
-  attr SystemLanguage value = unsafeAttribute { key: "systemLanguage", value: prop' value }
+  attr SystemLanguage value = unsafeAttribute
+    { key: "systemLanguage", value: prop' value }
+
 instance Attr Ellipse_ SystemLanguage String where
-  attr SystemLanguage value = unsafeAttribute { key: "systemLanguage", value: prop' value }
+  attr SystemLanguage value = unsafeAttribute
+    { key: "systemLanguage", value: prop' value }
+
 instance Attr ForeignObject_ SystemLanguage String where
-  attr SystemLanguage value = unsafeAttribute { key: "systemLanguage", value: prop' value }
+  attr SystemLanguage value = unsafeAttribute
+    { key: "systemLanguage", value: prop' value }
+
 instance Attr G_ SystemLanguage String where
-  attr SystemLanguage value = unsafeAttribute { key: "systemLanguage", value: prop' value }
+  attr SystemLanguage value = unsafeAttribute
+    { key: "systemLanguage", value: prop' value }
+
 instance Attr Image_ SystemLanguage String where
-  attr SystemLanguage value = unsafeAttribute { key: "systemLanguage", value: prop' value }
+  attr SystemLanguage value = unsafeAttribute
+    { key: "systemLanguage", value: prop' value }
+
 instance Attr Line_ SystemLanguage String where
-  attr SystemLanguage value = unsafeAttribute { key: "systemLanguage", value: prop' value }
+  attr SystemLanguage value = unsafeAttribute
+    { key: "systemLanguage", value: prop' value }
+
 instance Attr Marker_ SystemLanguage String where
-  attr SystemLanguage value = unsafeAttribute { key: "systemLanguage", value: prop' value }
+  attr SystemLanguage value = unsafeAttribute
+    { key: "systemLanguage", value: prop' value }
+
 instance Attr Mask_ SystemLanguage String where
-  attr SystemLanguage value = unsafeAttribute { key: "systemLanguage", value: prop' value }
+  attr SystemLanguage value = unsafeAttribute
+    { key: "systemLanguage", value: prop' value }
+
 instance Attr Path_ SystemLanguage String where
-  attr SystemLanguage value = unsafeAttribute { key: "systemLanguage", value: prop' value }
+  attr SystemLanguage value = unsafeAttribute
+    { key: "systemLanguage", value: prop' value }
+
 instance Attr Pattern_ SystemLanguage String where
-  attr SystemLanguage value = unsafeAttribute { key: "systemLanguage", value: prop' value }
+  attr SystemLanguage value = unsafeAttribute
+    { key: "systemLanguage", value: prop' value }
+
 instance Attr Polygon_ SystemLanguage String where
-  attr SystemLanguage value = unsafeAttribute { key: "systemLanguage", value: prop' value }
+  attr SystemLanguage value = unsafeAttribute
+    { key: "systemLanguage", value: prop' value }
+
 instance Attr Polyline_ SystemLanguage String where
-  attr SystemLanguage value = unsafeAttribute { key: "systemLanguage", value: prop' value }
+  attr SystemLanguage value = unsafeAttribute
+    { key: "systemLanguage", value: prop' value }
+
 instance Attr Rect_ SystemLanguage String where
-  attr SystemLanguage value = unsafeAttribute { key: "systemLanguage", value: prop' value }
+  attr SystemLanguage value = unsafeAttribute
+    { key: "systemLanguage", value: prop' value }
+
 instance Attr Svg_ SystemLanguage String where
-  attr SystemLanguage value = unsafeAttribute { key: "systemLanguage", value: prop' value }
+  attr SystemLanguage value = unsafeAttribute
+    { key: "systemLanguage", value: prop' value }
+
 instance Attr Switch_ SystemLanguage String where
-  attr SystemLanguage value = unsafeAttribute { key: "systemLanguage", value: prop' value }
+  attr SystemLanguage value = unsafeAttribute
+    { key: "systemLanguage", value: prop' value }
+
 instance Attr Text_ SystemLanguage String where
-  attr SystemLanguage value = unsafeAttribute { key: "systemLanguage", value: prop' value }
+  attr SystemLanguage value = unsafeAttribute
+    { key: "systemLanguage", value: prop' value }
+
 instance Attr TextPath_ SystemLanguage String where
-  attr SystemLanguage value = unsafeAttribute { key: "systemLanguage", value: prop' value }
+  attr SystemLanguage value = unsafeAttribute
+    { key: "systemLanguage", value: prop' value }
+
 instance Attr Tspan_ SystemLanguage String where
-  attr SystemLanguage value = unsafeAttribute { key: "systemLanguage", value: prop' value }
+  attr SystemLanguage value = unsafeAttribute
+    { key: "systemLanguage", value: prop' value }
+
 instance Attr Use_ SystemLanguage String where
-  attr SystemLanguage value = unsafeAttribute { key: "systemLanguage", value: prop' value }
+  attr SystemLanguage value = unsafeAttribute
+    { key: "systemLanguage", value: prop' value }

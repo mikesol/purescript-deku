@@ -46,84 +46,165 @@ import Deku.Attribute (class Attr, prop', unsafeAttribute)
 data StrokeOpacity = StrokeOpacity
 
 instance Attr Circle_ StrokeOpacity String where
-  attr StrokeOpacity value = unsafeAttribute { key: "stroke-opacity", value: prop' value }
+  attr StrokeOpacity value = unsafeAttribute
+    { key: "stroke-opacity", value: prop' value }
+
 instance Attr ClipPath_ StrokeOpacity String where
-  attr StrokeOpacity value = unsafeAttribute { key: "stroke-opacity", value: prop' value }
+  attr StrokeOpacity value = unsafeAttribute
+    { key: "stroke-opacity", value: prop' value }
+
 instance Attr Defs_ StrokeOpacity String where
-  attr StrokeOpacity value = unsafeAttribute { key: "stroke-opacity", value: prop' value }
+  attr StrokeOpacity value = unsafeAttribute
+    { key: "stroke-opacity", value: prop' value }
+
 instance Attr Ellipse_ StrokeOpacity String where
-  attr StrokeOpacity value = unsafeAttribute { key: "stroke-opacity", value: prop' value }
+  attr StrokeOpacity value = unsafeAttribute
+    { key: "stroke-opacity", value: prop' value }
+
 instance Attr FeBlend_ StrokeOpacity String where
-  attr StrokeOpacity value = unsafeAttribute { key: "stroke-opacity", value: prop' value }
+  attr StrokeOpacity value = unsafeAttribute
+    { key: "stroke-opacity", value: prop' value }
+
 instance Attr FeColorMatrix_ StrokeOpacity String where
-  attr StrokeOpacity value = unsafeAttribute { key: "stroke-opacity", value: prop' value }
+  attr StrokeOpacity value = unsafeAttribute
+    { key: "stroke-opacity", value: prop' value }
+
 instance Attr FeComponentTransfer_ StrokeOpacity String where
-  attr StrokeOpacity value = unsafeAttribute { key: "stroke-opacity", value: prop' value }
+  attr StrokeOpacity value = unsafeAttribute
+    { key: "stroke-opacity", value: prop' value }
+
 instance Attr FeComposite_ StrokeOpacity String where
-  attr StrokeOpacity value = unsafeAttribute { key: "stroke-opacity", value: prop' value }
+  attr StrokeOpacity value = unsafeAttribute
+    { key: "stroke-opacity", value: prop' value }
+
 instance Attr FeConvolveMatrix_ StrokeOpacity String where
-  attr StrokeOpacity value = unsafeAttribute { key: "stroke-opacity", value: prop' value }
+  attr StrokeOpacity value = unsafeAttribute
+    { key: "stroke-opacity", value: prop' value }
+
 instance Attr FeDiffuseLighting_ StrokeOpacity String where
-  attr StrokeOpacity value = unsafeAttribute { key: "stroke-opacity", value: prop' value }
+  attr StrokeOpacity value = unsafeAttribute
+    { key: "stroke-opacity", value: prop' value }
+
 instance Attr FeDisplacementMap_ StrokeOpacity String where
-  attr StrokeOpacity value = unsafeAttribute { key: "stroke-opacity", value: prop' value }
+  attr StrokeOpacity value = unsafeAttribute
+    { key: "stroke-opacity", value: prop' value }
+
 instance Attr FeFlood_ StrokeOpacity String where
-  attr StrokeOpacity value = unsafeAttribute { key: "stroke-opacity", value: prop' value }
+  attr StrokeOpacity value = unsafeAttribute
+    { key: "stroke-opacity", value: prop' value }
+
 instance Attr FeGaussianBlur_ StrokeOpacity String where
-  attr StrokeOpacity value = unsafeAttribute { key: "stroke-opacity", value: prop' value }
+  attr StrokeOpacity value = unsafeAttribute
+    { key: "stroke-opacity", value: prop' value }
+
 instance Attr FeImage_ StrokeOpacity String where
-  attr StrokeOpacity value = unsafeAttribute { key: "stroke-opacity", value: prop' value }
+  attr StrokeOpacity value = unsafeAttribute
+    { key: "stroke-opacity", value: prop' value }
+
 instance Attr FeMerge_ StrokeOpacity String where
-  attr StrokeOpacity value = unsafeAttribute { key: "stroke-opacity", value: prop' value }
+  attr StrokeOpacity value = unsafeAttribute
+    { key: "stroke-opacity", value: prop' value }
+
 instance Attr FeMorphology_ StrokeOpacity String where
-  attr StrokeOpacity value = unsafeAttribute { key: "stroke-opacity", value: prop' value }
+  attr StrokeOpacity value = unsafeAttribute
+    { key: "stroke-opacity", value: prop' value }
+
 instance Attr FeOffset_ StrokeOpacity String where
-  attr StrokeOpacity value = unsafeAttribute { key: "stroke-opacity", value: prop' value }
+  attr StrokeOpacity value = unsafeAttribute
+    { key: "stroke-opacity", value: prop' value }
+
 instance Attr FeSpecularLighting_ StrokeOpacity String where
-  attr StrokeOpacity value = unsafeAttribute { key: "stroke-opacity", value: prop' value }
+  attr StrokeOpacity value = unsafeAttribute
+    { key: "stroke-opacity", value: prop' value }
+
 instance Attr FeTile_ StrokeOpacity String where
-  attr StrokeOpacity value = unsafeAttribute { key: "stroke-opacity", value: prop' value }
+  attr StrokeOpacity value = unsafeAttribute
+    { key: "stroke-opacity", value: prop' value }
+
 instance Attr FeTurbulence_ StrokeOpacity String where
-  attr StrokeOpacity value = unsafeAttribute { key: "stroke-opacity", value: prop' value }
+  attr StrokeOpacity value = unsafeAttribute
+    { key: "stroke-opacity", value: prop' value }
+
 instance Attr Filter_ StrokeOpacity String where
-  attr StrokeOpacity value = unsafeAttribute { key: "stroke-opacity", value: prop' value }
+  attr StrokeOpacity value = unsafeAttribute
+    { key: "stroke-opacity", value: prop' value }
+
 instance Attr ForeignObject_ StrokeOpacity String where
-  attr StrokeOpacity value = unsafeAttribute { key: "stroke-opacity", value: prop' value }
+  attr StrokeOpacity value = unsafeAttribute
+    { key: "stroke-opacity", value: prop' value }
+
 instance Attr G_ StrokeOpacity String where
-  attr StrokeOpacity value = unsafeAttribute { key: "stroke-opacity", value: prop' value }
+  attr StrokeOpacity value = unsafeAttribute
+    { key: "stroke-opacity", value: prop' value }
+
 instance Attr Image_ StrokeOpacity String where
-  attr StrokeOpacity value = unsafeAttribute { key: "stroke-opacity", value: prop' value }
+  attr StrokeOpacity value = unsafeAttribute
+    { key: "stroke-opacity", value: prop' value }
+
 instance Attr Line_ StrokeOpacity String where
-  attr StrokeOpacity value = unsafeAttribute { key: "stroke-opacity", value: prop' value }
+  attr StrokeOpacity value = unsafeAttribute
+    { key: "stroke-opacity", value: prop' value }
+
 instance Attr LinearGradient_ StrokeOpacity String where
-  attr StrokeOpacity value = unsafeAttribute { key: "stroke-opacity", value: prop' value }
+  attr StrokeOpacity value = unsafeAttribute
+    { key: "stroke-opacity", value: prop' value }
+
 instance Attr Marker_ StrokeOpacity String where
-  attr StrokeOpacity value = unsafeAttribute { key: "stroke-opacity", value: prop' value }
+  attr StrokeOpacity value = unsafeAttribute
+    { key: "stroke-opacity", value: prop' value }
+
 instance Attr Mask_ StrokeOpacity String where
-  attr StrokeOpacity value = unsafeAttribute { key: "stroke-opacity", value: prop' value }
+  attr StrokeOpacity value = unsafeAttribute
+    { key: "stroke-opacity", value: prop' value }
+
 instance Attr Path_ StrokeOpacity String where
-  attr StrokeOpacity value = unsafeAttribute { key: "stroke-opacity", value: prop' value }
+  attr StrokeOpacity value = unsafeAttribute
+    { key: "stroke-opacity", value: prop' value }
+
 instance Attr Pattern_ StrokeOpacity String where
-  attr StrokeOpacity value = unsafeAttribute { key: "stroke-opacity", value: prop' value }
+  attr StrokeOpacity value = unsafeAttribute
+    { key: "stroke-opacity", value: prop' value }
+
 instance Attr Polygon_ StrokeOpacity String where
-  attr StrokeOpacity value = unsafeAttribute { key: "stroke-opacity", value: prop' value }
+  attr StrokeOpacity value = unsafeAttribute
+    { key: "stroke-opacity", value: prop' value }
+
 instance Attr Polyline_ StrokeOpacity String where
-  attr StrokeOpacity value = unsafeAttribute { key: "stroke-opacity", value: prop' value }
+  attr StrokeOpacity value = unsafeAttribute
+    { key: "stroke-opacity", value: prop' value }
+
 instance Attr RadialGradient_ StrokeOpacity String where
-  attr StrokeOpacity value = unsafeAttribute { key: "stroke-opacity", value: prop' value }
+  attr StrokeOpacity value = unsafeAttribute
+    { key: "stroke-opacity", value: prop' value }
+
 instance Attr Rect_ StrokeOpacity String where
-  attr StrokeOpacity value = unsafeAttribute { key: "stroke-opacity", value: prop' value }
+  attr StrokeOpacity value = unsafeAttribute
+    { key: "stroke-opacity", value: prop' value }
+
 instance Attr Svg_ StrokeOpacity String where
-  attr StrokeOpacity value = unsafeAttribute { key: "stroke-opacity", value: prop' value }
+  attr StrokeOpacity value = unsafeAttribute
+    { key: "stroke-opacity", value: prop' value }
+
 instance Attr Switch_ StrokeOpacity String where
-  attr StrokeOpacity value = unsafeAttribute { key: "stroke-opacity", value: prop' value }
+  attr StrokeOpacity value = unsafeAttribute
+    { key: "stroke-opacity", value: prop' value }
+
 instance Attr Symbol_ StrokeOpacity String where
-  attr StrokeOpacity value = unsafeAttribute { key: "stroke-opacity", value: prop' value }
+  attr StrokeOpacity value = unsafeAttribute
+    { key: "stroke-opacity", value: prop' value }
+
 instance Attr Text_ StrokeOpacity String where
-  attr StrokeOpacity value = unsafeAttribute { key: "stroke-opacity", value: prop' value }
+  attr StrokeOpacity value = unsafeAttribute
+    { key: "stroke-opacity", value: prop' value }
+
 instance Attr TextPath_ StrokeOpacity String where
-  attr StrokeOpacity value = unsafeAttribute { key: "stroke-opacity", value: prop' value }
+  attr StrokeOpacity value = unsafeAttribute
+    { key: "stroke-opacity", value: prop' value }
+
 instance Attr Tspan_ StrokeOpacity String where
-  attr StrokeOpacity value = unsafeAttribute { key: "stroke-opacity", value: prop' value }
+  attr StrokeOpacity value = unsafeAttribute
+    { key: "stroke-opacity", value: prop' value }
+
 instance Attr Use_ StrokeOpacity String where
-  attr StrokeOpacity value = unsafeAttribute { key: "stroke-opacity", value: prop' value }
+  attr StrokeOpacity value = unsafeAttribute
+    { key: "stroke-opacity", value: prop' value }

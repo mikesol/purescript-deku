@@ -9,7 +9,9 @@ data CalcMode = CalcMode
 
 instance Attr Animate_ CalcMode String where
   attr CalcMode value = unsafeAttribute { key: "calcMode", value: prop' value }
+
 instance Attr AnimateMotion_ CalcMode String where
   attr CalcMode value = unsafeAttribute { key: "calcMode", value: prop' value }
+
 instance Attr AnimateTransform_ CalcMode String where
   attr CalcMode value = unsafeAttribute { key: "calcMode", value: prop' value }

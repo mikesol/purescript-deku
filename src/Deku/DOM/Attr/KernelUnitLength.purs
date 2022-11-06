@@ -8,8 +8,13 @@ import Deku.Attribute (class Attr, prop', unsafeAttribute)
 data KernelUnitLength = KernelUnitLength
 
 instance Attr FeConvolveMatrix_ KernelUnitLength String where
-  attr KernelUnitLength value = unsafeAttribute { key: "kernelUnitLength", value: prop' value }
+  attr KernelUnitLength value = unsafeAttribute
+    { key: "kernelUnitLength", value: prop' value }
+
 instance Attr FeDiffuseLighting_ KernelUnitLength String where
-  attr KernelUnitLength value = unsafeAttribute { key: "kernelUnitLength", value: prop' value }
+  attr KernelUnitLength value = unsafeAttribute
+    { key: "kernelUnitLength", value: prop' value }
+
 instance Attr FeSpecularLighting_ KernelUnitLength String where
-  attr KernelUnitLength value = unsafeAttribute { key: "kernelUnitLength", value: prop' value }
+  attr KernelUnitLength value = unsafeAttribute
+    { key: "kernelUnitLength", value: prop' value }

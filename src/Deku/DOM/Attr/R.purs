@@ -8,5 +8,6 @@ data R = R
 
 instance Attr Circle_ R String where
   attr R value = unsafeAttribute { key: "r", value: prop' value }
+
 instance Attr RadialGradient_ R String where
   attr R value = unsafeAttribute { key: "r", value: prop' value }

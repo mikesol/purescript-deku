@@ -24,40 +24,77 @@ import Deku.Attribute (class Attr, prop', unsafeAttribute)
 data ColorProfile = ColorProfile
 
 instance Attr FeBlend_ ColorProfile String where
-  attr ColorProfile value = unsafeAttribute { key: "color-profile", value: prop' value }
+  attr ColorProfile value = unsafeAttribute
+    { key: "color-profile", value: prop' value }
+
 instance Attr FeColorMatrix_ ColorProfile String where
-  attr ColorProfile value = unsafeAttribute { key: "color-profile", value: prop' value }
+  attr ColorProfile value = unsafeAttribute
+    { key: "color-profile", value: prop' value }
+
 instance Attr FeComponentTransfer_ ColorProfile String where
-  attr ColorProfile value = unsafeAttribute { key: "color-profile", value: prop' value }
+  attr ColorProfile value = unsafeAttribute
+    { key: "color-profile", value: prop' value }
+
 instance Attr FeComposite_ ColorProfile String where
-  attr ColorProfile value = unsafeAttribute { key: "color-profile", value: prop' value }
+  attr ColorProfile value = unsafeAttribute
+    { key: "color-profile", value: prop' value }
+
 instance Attr FeConvolveMatrix_ ColorProfile String where
-  attr ColorProfile value = unsafeAttribute { key: "color-profile", value: prop' value }
+  attr ColorProfile value = unsafeAttribute
+    { key: "color-profile", value: prop' value }
+
 instance Attr FeDiffuseLighting_ ColorProfile String where
-  attr ColorProfile value = unsafeAttribute { key: "color-profile", value: prop' value }
+  attr ColorProfile value = unsafeAttribute
+    { key: "color-profile", value: prop' value }
+
 instance Attr FeDisplacementMap_ ColorProfile String where
-  attr ColorProfile value = unsafeAttribute { key: "color-profile", value: prop' value }
+  attr ColorProfile value = unsafeAttribute
+    { key: "color-profile", value: prop' value }
+
 instance Attr FeFlood_ ColorProfile String where
-  attr ColorProfile value = unsafeAttribute { key: "color-profile", value: prop' value }
+  attr ColorProfile value = unsafeAttribute
+    { key: "color-profile", value: prop' value }
+
 instance Attr FeGaussianBlur_ ColorProfile String where
-  attr ColorProfile value = unsafeAttribute { key: "color-profile", value: prop' value }
+  attr ColorProfile value = unsafeAttribute
+    { key: "color-profile", value: prop' value }
+
 instance Attr FeImage_ ColorProfile String where
-  attr ColorProfile value = unsafeAttribute { key: "color-profile", value: prop' value }
+  attr ColorProfile value = unsafeAttribute
+    { key: "color-profile", value: prop' value }
+
 instance Attr FeMerge_ ColorProfile String where
-  attr ColorProfile value = unsafeAttribute { key: "color-profile", value: prop' value }
+  attr ColorProfile value = unsafeAttribute
+    { key: "color-profile", value: prop' value }
+
 instance Attr FeMorphology_ ColorProfile String where
-  attr ColorProfile value = unsafeAttribute { key: "color-profile", value: prop' value }
+  attr ColorProfile value = unsafeAttribute
+    { key: "color-profile", value: prop' value }
+
 instance Attr FeOffset_ ColorProfile String where
-  attr ColorProfile value = unsafeAttribute { key: "color-profile", value: prop' value }
+  attr ColorProfile value = unsafeAttribute
+    { key: "color-profile", value: prop' value }
+
 instance Attr FeSpecularLighting_ ColorProfile String where
-  attr ColorProfile value = unsafeAttribute { key: "color-profile", value: prop' value }
+  attr ColorProfile value = unsafeAttribute
+    { key: "color-profile", value: prop' value }
+
 instance Attr FeTile_ ColorProfile String where
-  attr ColorProfile value = unsafeAttribute { key: "color-profile", value: prop' value }
+  attr ColorProfile value = unsafeAttribute
+    { key: "color-profile", value: prop' value }
+
 instance Attr FeTurbulence_ ColorProfile String where
-  attr ColorProfile value = unsafeAttribute { key: "color-profile", value: prop' value }
+  attr ColorProfile value = unsafeAttribute
+    { key: "color-profile", value: prop' value }
+
 instance Attr Filter_ ColorProfile String where
-  attr ColorProfile value = unsafeAttribute { key: "color-profile", value: prop' value }
+  attr ColorProfile value = unsafeAttribute
+    { key: "color-profile", value: prop' value }
+
 instance Attr Image_ ColorProfile String where
-  attr ColorProfile value = unsafeAttribute { key: "color-profile", value: prop' value }
+  attr ColorProfile value = unsafeAttribute
+    { key: "color-profile", value: prop' value }
+
 instance Attr Switch_ ColorProfile String where
-  attr ColorProfile value = unsafeAttribute { key: "color-profile", value: prop' value }
+  attr ColorProfile value = unsafeAttribute
+    { key: "color-profile", value: prop' value }

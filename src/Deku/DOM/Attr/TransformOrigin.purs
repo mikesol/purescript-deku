@@ -24,40 +24,77 @@ import Deku.Attribute (class Attr, prop', unsafeAttribute)
 data TransformOrigin = TransformOrigin
 
 instance Attr FeBlend_ TransformOrigin String where
-  attr TransformOrigin value = unsafeAttribute { key: "transform-origin", value: prop' value }
+  attr TransformOrigin value = unsafeAttribute
+    { key: "transform-origin", value: prop' value }
+
 instance Attr FeColorMatrix_ TransformOrigin String where
-  attr TransformOrigin value = unsafeAttribute { key: "transform-origin", value: prop' value }
+  attr TransformOrigin value = unsafeAttribute
+    { key: "transform-origin", value: prop' value }
+
 instance Attr FeComponentTransfer_ TransformOrigin String where
-  attr TransformOrigin value = unsafeAttribute { key: "transform-origin", value: prop' value }
+  attr TransformOrigin value = unsafeAttribute
+    { key: "transform-origin", value: prop' value }
+
 instance Attr FeComposite_ TransformOrigin String where
-  attr TransformOrigin value = unsafeAttribute { key: "transform-origin", value: prop' value }
+  attr TransformOrigin value = unsafeAttribute
+    { key: "transform-origin", value: prop' value }
+
 instance Attr FeConvolveMatrix_ TransformOrigin String where
-  attr TransformOrigin value = unsafeAttribute { key: "transform-origin", value: prop' value }
+  attr TransformOrigin value = unsafeAttribute
+    { key: "transform-origin", value: prop' value }
+
 instance Attr FeDiffuseLighting_ TransformOrigin String where
-  attr TransformOrigin value = unsafeAttribute { key: "transform-origin", value: prop' value }
+  attr TransformOrigin value = unsafeAttribute
+    { key: "transform-origin", value: prop' value }
+
 instance Attr FeDisplacementMap_ TransformOrigin String where
-  attr TransformOrigin value = unsafeAttribute { key: "transform-origin", value: prop' value }
+  attr TransformOrigin value = unsafeAttribute
+    { key: "transform-origin", value: prop' value }
+
 instance Attr FeFlood_ TransformOrigin String where
-  attr TransformOrigin value = unsafeAttribute { key: "transform-origin", value: prop' value }
+  attr TransformOrigin value = unsafeAttribute
+    { key: "transform-origin", value: prop' value }
+
 instance Attr FeGaussianBlur_ TransformOrigin String where
-  attr TransformOrigin value = unsafeAttribute { key: "transform-origin", value: prop' value }
+  attr TransformOrigin value = unsafeAttribute
+    { key: "transform-origin", value: prop' value }
+
 instance Attr FeImage_ TransformOrigin String where
-  attr TransformOrigin value = unsafeAttribute { key: "transform-origin", value: prop' value }
+  attr TransformOrigin value = unsafeAttribute
+    { key: "transform-origin", value: prop' value }
+
 instance Attr FeMerge_ TransformOrigin String where
-  attr TransformOrigin value = unsafeAttribute { key: "transform-origin", value: prop' value }
+  attr TransformOrigin value = unsafeAttribute
+    { key: "transform-origin", value: prop' value }
+
 instance Attr FeMorphology_ TransformOrigin String where
-  attr TransformOrigin value = unsafeAttribute { key: "transform-origin", value: prop' value }
+  attr TransformOrigin value = unsafeAttribute
+    { key: "transform-origin", value: prop' value }
+
 instance Attr FeOffset_ TransformOrigin String where
-  attr TransformOrigin value = unsafeAttribute { key: "transform-origin", value: prop' value }
+  attr TransformOrigin value = unsafeAttribute
+    { key: "transform-origin", value: prop' value }
+
 instance Attr FeSpecularLighting_ TransformOrigin String where
-  attr TransformOrigin value = unsafeAttribute { key: "transform-origin", value: prop' value }
+  attr TransformOrigin value = unsafeAttribute
+    { key: "transform-origin", value: prop' value }
+
 instance Attr FeTile_ TransformOrigin String where
-  attr TransformOrigin value = unsafeAttribute { key: "transform-origin", value: prop' value }
+  attr TransformOrigin value = unsafeAttribute
+    { key: "transform-origin", value: prop' value }
+
 instance Attr FeTurbulence_ TransformOrigin String where
-  attr TransformOrigin value = unsafeAttribute { key: "transform-origin", value: prop' value }
+  attr TransformOrigin value = unsafeAttribute
+    { key: "transform-origin", value: prop' value }
+
 instance Attr Filter_ TransformOrigin String where
-  attr TransformOrigin value = unsafeAttribute { key: "transform-origin", value: prop' value }
+  attr TransformOrigin value = unsafeAttribute
+    { key: "transform-origin", value: prop' value }
+
 instance Attr Image_ TransformOrigin String where
-  attr TransformOrigin value = unsafeAttribute { key: "transform-origin", value: prop' value }
+  attr TransformOrigin value = unsafeAttribute
+    { key: "transform-origin", value: prop' value }
+
 instance Attr Switch_ TransformOrigin String where
-  attr TransformOrigin value = unsafeAttribute { key: "transform-origin", value: prop' value }
+  attr TransformOrigin value = unsafeAttribute
+    { key: "transform-origin", value: prop' value }

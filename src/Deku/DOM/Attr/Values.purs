@@ -10,9 +10,12 @@ data Values = Values
 
 instance Attr Animate_ Values String where
   attr Values value = unsafeAttribute { key: "values", value: prop' value }
+
 instance Attr AnimateMotion_ Values String where
   attr Values value = unsafeAttribute { key: "values", value: prop' value }
+
 instance Attr AnimateTransform_ Values String where
   attr Values value = unsafeAttribute { key: "values", value: prop' value }
+
 instance Attr FeColorMatrix_ Values String where
   attr Values value = unsafeAttribute { key: "values", value: prop' value }

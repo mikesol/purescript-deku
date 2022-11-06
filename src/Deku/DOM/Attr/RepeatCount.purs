@@ -9,10 +9,17 @@ import Deku.Attribute (class Attr, prop', unsafeAttribute)
 data RepeatCount = RepeatCount
 
 instance Attr Animate_ RepeatCount String where
-  attr RepeatCount value = unsafeAttribute { key: "repeatCount", value: prop' value }
+  attr RepeatCount value = unsafeAttribute
+    { key: "repeatCount", value: prop' value }
+
 instance Attr AnimateMotion_ RepeatCount String where
-  attr RepeatCount value = unsafeAttribute { key: "repeatCount", value: prop' value }
+  attr RepeatCount value = unsafeAttribute
+    { key: "repeatCount", value: prop' value }
+
 instance Attr AnimateTransform_ RepeatCount String where
-  attr RepeatCount value = unsafeAttribute { key: "repeatCount", value: prop' value }
+  attr RepeatCount value = unsafeAttribute
+    { key: "repeatCount", value: prop' value }
+
 instance Attr Set_ RepeatCount String where
-  attr RepeatCount value = unsafeAttribute { key: "repeatCount", value: prop' value }
+  attr RepeatCount value = unsafeAttribute
+    { key: "repeatCount", value: prop' value }

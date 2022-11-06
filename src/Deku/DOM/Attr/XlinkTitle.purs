@@ -13,18 +13,33 @@ import Deku.Attribute (class Attr, prop', unsafeAttribute)
 data XlinkTitle = XlinkTitle
 
 instance Attr AnimateTransform_ XlinkTitle String where
-  attr XlinkTitle value = unsafeAttribute { key: "xlink:title", value: prop' value }
+  attr XlinkTitle value = unsafeAttribute
+    { key: "xlink:title", value: prop' value }
+
 instance Attr FeImage_ XlinkTitle String where
-  attr XlinkTitle value = unsafeAttribute { key: "xlink:title", value: prop' value }
+  attr XlinkTitle value = unsafeAttribute
+    { key: "xlink:title", value: prop' value }
+
 instance Attr Filter_ XlinkTitle String where
-  attr XlinkTitle value = unsafeAttribute { key: "xlink:title", value: prop' value }
+  attr XlinkTitle value = unsafeAttribute
+    { key: "xlink:title", value: prop' value }
+
 instance Attr Image_ XlinkTitle String where
-  attr XlinkTitle value = unsafeAttribute { key: "xlink:title", value: prop' value }
+  attr XlinkTitle value = unsafeAttribute
+    { key: "xlink:title", value: prop' value }
+
 instance Attr LinearGradient_ XlinkTitle String where
-  attr XlinkTitle value = unsafeAttribute { key: "xlink:title", value: prop' value }
+  attr XlinkTitle value = unsafeAttribute
+    { key: "xlink:title", value: prop' value }
+
 instance Attr Mpath_ XlinkTitle String where
-  attr XlinkTitle value = unsafeAttribute { key: "xlink:title", value: prop' value }
+  attr XlinkTitle value = unsafeAttribute
+    { key: "xlink:title", value: prop' value }
+
 instance Attr Pattern_ XlinkTitle String where
-  attr XlinkTitle value = unsafeAttribute { key: "xlink:title", value: prop' value }
+  attr XlinkTitle value = unsafeAttribute
+    { key: "xlink:title", value: prop' value }
+
 instance Attr RadialGradient_ XlinkTitle String where
-  attr XlinkTitle value = unsafeAttribute { key: "xlink:title", value: prop' value }
+  attr XlinkTitle value = unsafeAttribute
+    { key: "xlink:title", value: prop' value }

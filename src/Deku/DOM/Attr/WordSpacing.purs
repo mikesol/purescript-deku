@@ -24,40 +24,77 @@ import Deku.Attribute (class Attr, prop', unsafeAttribute)
 data WordSpacing = WordSpacing
 
 instance Attr FeBlend_ WordSpacing String where
-  attr WordSpacing value = unsafeAttribute { key: "word-spacing", value: prop' value }
+  attr WordSpacing value = unsafeAttribute
+    { key: "word-spacing", value: prop' value }
+
 instance Attr FeColorMatrix_ WordSpacing String where
-  attr WordSpacing value = unsafeAttribute { key: "word-spacing", value: prop' value }
+  attr WordSpacing value = unsafeAttribute
+    { key: "word-spacing", value: prop' value }
+
 instance Attr FeComponentTransfer_ WordSpacing String where
-  attr WordSpacing value = unsafeAttribute { key: "word-spacing", value: prop' value }
+  attr WordSpacing value = unsafeAttribute
+    { key: "word-spacing", value: prop' value }
+
 instance Attr FeComposite_ WordSpacing String where
-  attr WordSpacing value = unsafeAttribute { key: "word-spacing", value: prop' value }
+  attr WordSpacing value = unsafeAttribute
+    { key: "word-spacing", value: prop' value }
+
 instance Attr FeConvolveMatrix_ WordSpacing String where
-  attr WordSpacing value = unsafeAttribute { key: "word-spacing", value: prop' value }
+  attr WordSpacing value = unsafeAttribute
+    { key: "word-spacing", value: prop' value }
+
 instance Attr FeDiffuseLighting_ WordSpacing String where
-  attr WordSpacing value = unsafeAttribute { key: "word-spacing", value: prop' value }
+  attr WordSpacing value = unsafeAttribute
+    { key: "word-spacing", value: prop' value }
+
 instance Attr FeDisplacementMap_ WordSpacing String where
-  attr WordSpacing value = unsafeAttribute { key: "word-spacing", value: prop' value }
+  attr WordSpacing value = unsafeAttribute
+    { key: "word-spacing", value: prop' value }
+
 instance Attr FeFlood_ WordSpacing String where
-  attr WordSpacing value = unsafeAttribute { key: "word-spacing", value: prop' value }
+  attr WordSpacing value = unsafeAttribute
+    { key: "word-spacing", value: prop' value }
+
 instance Attr FeGaussianBlur_ WordSpacing String where
-  attr WordSpacing value = unsafeAttribute { key: "word-spacing", value: prop' value }
+  attr WordSpacing value = unsafeAttribute
+    { key: "word-spacing", value: prop' value }
+
 instance Attr FeImage_ WordSpacing String where
-  attr WordSpacing value = unsafeAttribute { key: "word-spacing", value: prop' value }
+  attr WordSpacing value = unsafeAttribute
+    { key: "word-spacing", value: prop' value }
+
 instance Attr FeMerge_ WordSpacing String where
-  attr WordSpacing value = unsafeAttribute { key: "word-spacing", value: prop' value }
+  attr WordSpacing value = unsafeAttribute
+    { key: "word-spacing", value: prop' value }
+
 instance Attr FeMorphology_ WordSpacing String where
-  attr WordSpacing value = unsafeAttribute { key: "word-spacing", value: prop' value }
+  attr WordSpacing value = unsafeAttribute
+    { key: "word-spacing", value: prop' value }
+
 instance Attr FeOffset_ WordSpacing String where
-  attr WordSpacing value = unsafeAttribute { key: "word-spacing", value: prop' value }
+  attr WordSpacing value = unsafeAttribute
+    { key: "word-spacing", value: prop' value }
+
 instance Attr FeSpecularLighting_ WordSpacing String where
-  attr WordSpacing value = unsafeAttribute { key: "word-spacing", value: prop' value }
+  attr WordSpacing value = unsafeAttribute
+    { key: "word-spacing", value: prop' value }
+
 instance Attr FeTile_ WordSpacing String where
-  attr WordSpacing value = unsafeAttribute { key: "word-spacing", value: prop' value }
+  attr WordSpacing value = unsafeAttribute
+    { key: "word-spacing", value: prop' value }
+
 instance Attr FeTurbulence_ WordSpacing String where
-  attr WordSpacing value = unsafeAttribute { key: "word-spacing", value: prop' value }
+  attr WordSpacing value = unsafeAttribute
+    { key: "word-spacing", value: prop' value }
+
 instance Attr Filter_ WordSpacing String where
-  attr WordSpacing value = unsafeAttribute { key: "word-spacing", value: prop' value }
+  attr WordSpacing value = unsafeAttribute
+    { key: "word-spacing", value: prop' value }
+
 instance Attr Image_ WordSpacing String where
-  attr WordSpacing value = unsafeAttribute { key: "word-spacing", value: prop' value }
+  attr WordSpacing value = unsafeAttribute
+    { key: "word-spacing", value: prop' value }
+
 instance Attr Switch_ WordSpacing String where
-  attr WordSpacing value = unsafeAttribute { key: "word-spacing", value: prop' value }
+  attr WordSpacing value = unsafeAttribute
+    { key: "word-spacing", value: prop' value }

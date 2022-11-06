@@ -23,35 +23,51 @@ data AriaBusy = AriaBusy
 
 instance Attr Circle_ AriaBusy String where
   attr AriaBusy value = unsafeAttribute { key: "aria-busy", value: prop' value }
+
 instance Attr Ellipse_ AriaBusy String where
   attr AriaBusy value = unsafeAttribute { key: "aria-busy", value: prop' value }
+
 instance Attr ForeignObject_ AriaBusy String where
   attr AriaBusy value = unsafeAttribute { key: "aria-busy", value: prop' value }
+
 instance Attr G_ AriaBusy String where
   attr AriaBusy value = unsafeAttribute { key: "aria-busy", value: prop' value }
+
 instance Attr Line_ AriaBusy String where
   attr AriaBusy value = unsafeAttribute { key: "aria-busy", value: prop' value }
+
 instance Attr Marker_ AriaBusy String where
   attr AriaBusy value = unsafeAttribute { key: "aria-busy", value: prop' value }
+
 instance Attr Path_ AriaBusy String where
   attr AriaBusy value = unsafeAttribute { key: "aria-busy", value: prop' value }
+
 instance Attr Polygon_ AriaBusy String where
   attr AriaBusy value = unsafeAttribute { key: "aria-busy", value: prop' value }
+
 instance Attr Polyline_ AriaBusy String where
   attr AriaBusy value = unsafeAttribute { key: "aria-busy", value: prop' value }
+
 instance Attr Rect_ AriaBusy String where
   attr AriaBusy value = unsafeAttribute { key: "aria-busy", value: prop' value }
+
 instance Attr Svg_ AriaBusy String where
   attr AriaBusy value = unsafeAttribute { key: "aria-busy", value: prop' value }
+
 instance Attr Symbol_ AriaBusy String where
   attr AriaBusy value = unsafeAttribute { key: "aria-busy", value: prop' value }
+
 instance Attr Text_ AriaBusy String where
   attr AriaBusy value = unsafeAttribute { key: "aria-busy", value: prop' value }
+
 instance Attr TextPath_ AriaBusy String where
   attr AriaBusy value = unsafeAttribute { key: "aria-busy", value: prop' value }
+
 instance Attr Tspan_ AriaBusy String where
   attr AriaBusy value = unsafeAttribute { key: "aria-busy", value: prop' value }
+
 instance Attr Use_ AriaBusy String where
   attr AriaBusy value = unsafeAttribute { key: "aria-busy", value: prop' value }
+
 instance Attr View_ AriaBusy String where
   attr AriaBusy value = unsafeAttribute { key: "aria-busy", value: prop' value }

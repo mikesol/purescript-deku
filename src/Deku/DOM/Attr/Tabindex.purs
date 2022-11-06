@@ -539,91 +539,135 @@ instance Attr Wbr_ Tabindex String where
 
 instance Attr Animate_ Tabindex String where
   attr Tabindex value = unsafeAttribute { key: "tabindex", value: prop' value }
+
 instance Attr AnimateMotion_ Tabindex String where
   attr Tabindex value = unsafeAttribute { key: "tabindex", value: prop' value }
+
 instance Attr AnimateTransform_ Tabindex String where
   attr Tabindex value = unsafeAttribute { key: "tabindex", value: prop' value }
+
 instance Attr ClipPath_ Tabindex String where
   attr Tabindex value = unsafeAttribute { key: "tabindex", value: prop' value }
+
 instance Attr Desc_ Tabindex String where
   attr Tabindex value = unsafeAttribute { key: "tabindex", value: prop' value }
+
 instance Attr Discard_ Tabindex String where
   attr Tabindex value = unsafeAttribute { key: "tabindex", value: prop' value }
+
 instance Attr FeBlend_ Tabindex String where
   attr Tabindex value = unsafeAttribute { key: "tabindex", value: prop' value }
+
 instance Attr FeColorMatrix_ Tabindex String where
   attr Tabindex value = unsafeAttribute { key: "tabindex", value: prop' value }
+
 instance Attr FeComponentTransfer_ Tabindex String where
   attr Tabindex value = unsafeAttribute { key: "tabindex", value: prop' value }
+
 instance Attr FeComposite_ Tabindex String where
   attr Tabindex value = unsafeAttribute { key: "tabindex", value: prop' value }
+
 instance Attr FeConvolveMatrix_ Tabindex String where
   attr Tabindex value = unsafeAttribute { key: "tabindex", value: prop' value }
+
 instance Attr FeDiffuseLighting_ Tabindex String where
   attr Tabindex value = unsafeAttribute { key: "tabindex", value: prop' value }
+
 instance Attr FeDisplacementMap_ Tabindex String where
   attr Tabindex value = unsafeAttribute { key: "tabindex", value: prop' value }
+
 instance Attr FeDistantLight_ Tabindex String where
   attr Tabindex value = unsafeAttribute { key: "tabindex", value: prop' value }
+
 instance Attr FeDropShadow_ Tabindex String where
   attr Tabindex value = unsafeAttribute { key: "tabindex", value: prop' value }
+
 instance Attr FeFlood_ Tabindex String where
   attr Tabindex value = unsafeAttribute { key: "tabindex", value: prop' value }
+
 instance Attr FeFuncA_ Tabindex String where
   attr Tabindex value = unsafeAttribute { key: "tabindex", value: prop' value }
+
 instance Attr FeFuncB_ Tabindex String where
   attr Tabindex value = unsafeAttribute { key: "tabindex", value: prop' value }
+
 instance Attr FeFuncG_ Tabindex String where
   attr Tabindex value = unsafeAttribute { key: "tabindex", value: prop' value }
+
 instance Attr FeFuncR_ Tabindex String where
   attr Tabindex value = unsafeAttribute { key: "tabindex", value: prop' value }
+
 instance Attr FeGaussianBlur_ Tabindex String where
   attr Tabindex value = unsafeAttribute { key: "tabindex", value: prop' value }
+
 instance Attr FeImage_ Tabindex String where
   attr Tabindex value = unsafeAttribute { key: "tabindex", value: prop' value }
+
 instance Attr FeMerge_ Tabindex String where
   attr Tabindex value = unsafeAttribute { key: "tabindex", value: prop' value }
+
 instance Attr FeMergeNode_ Tabindex String where
   attr Tabindex value = unsafeAttribute { key: "tabindex", value: prop' value }
+
 instance Attr FeMorphology_ Tabindex String where
   attr Tabindex value = unsafeAttribute { key: "tabindex", value: prop' value }
+
 instance Attr FeOffset_ Tabindex String where
   attr Tabindex value = unsafeAttribute { key: "tabindex", value: prop' value }
+
 instance Attr FePointLight_ Tabindex String where
   attr Tabindex value = unsafeAttribute { key: "tabindex", value: prop' value }
+
 instance Attr FeSpecularLighting_ Tabindex String where
   attr Tabindex value = unsafeAttribute { key: "tabindex", value: prop' value }
+
 instance Attr FeSpotLight_ Tabindex String where
   attr Tabindex value = unsafeAttribute { key: "tabindex", value: prop' value }
+
 instance Attr FeTile_ Tabindex String where
   attr Tabindex value = unsafeAttribute { key: "tabindex", value: prop' value }
+
 instance Attr FeTurbulence_ Tabindex String where
   attr Tabindex value = unsafeAttribute { key: "tabindex", value: prop' value }
+
 instance Attr Filter_ Tabindex String where
   attr Tabindex value = unsafeAttribute { key: "tabindex", value: prop' value }
+
 instance Attr Image_ Tabindex String where
   attr Tabindex value = unsafeAttribute { key: "tabindex", value: prop' value }
+
 instance Attr LinearGradient_ Tabindex String where
   attr Tabindex value = unsafeAttribute { key: "tabindex", value: prop' value }
+
 instance Attr Mask_ Tabindex String where
   attr Tabindex value = unsafeAttribute { key: "tabindex", value: prop' value }
+
 instance Attr Metadata_ Tabindex String where
   attr Tabindex value = unsafeAttribute { key: "tabindex", value: prop' value }
+
 instance Attr Mpath_ Tabindex String where
   attr Tabindex value = unsafeAttribute { key: "tabindex", value: prop' value }
+
 instance Attr RadialGradient_ Tabindex String where
   attr Tabindex value = unsafeAttribute { key: "tabindex", value: prop' value }
+
 instance Attr Set_ Tabindex String where
   attr Tabindex value = unsafeAttribute { key: "tabindex", value: prop' value }
+
 instance Attr Stop_ Tabindex String where
   attr Tabindex value = unsafeAttribute { key: "tabindex", value: prop' value }
+
 instance Attr Switch_ Tabindex String where
   attr Tabindex value = unsafeAttribute { key: "tabindex", value: prop' value }
+
 instance Attr Symbol_ Tabindex String where
   attr Tabindex value = unsafeAttribute { key: "tabindex", value: prop' value }
+
 instance Attr Text_ Tabindex String where
   attr Tabindex value = unsafeAttribute { key: "tabindex", value: prop' value }
+
 instance Attr Tspan_ Tabindex String where
   attr Tabindex value = unsafeAttribute { key: "tabindex", value: prop' value }
+
 instance Attr View_ Tabindex String where
   attr Tabindex value = unsafeAttribute { key: "tabindex", value: prop' value }

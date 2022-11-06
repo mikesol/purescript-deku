@@ -9,7 +9,9 @@ data Cx = Cx
 
 instance Attr Circle_ Cx String where
   attr Cx value = unsafeAttribute { key: "cx", value: prop' value }
+
 instance Attr Ellipse_ Cx String where
   attr Cx value = unsafeAttribute { key: "cx", value: prop' value }
+
 instance Attr RadialGradient_ Cx String where
   attr Cx value = unsafeAttribute { key: "cx", value: prop' value }

@@ -60,53 +60,78 @@ instance Attr Video_ Width String where
 
 instance Attr FeBlend_ Width String where
   attr Width value = unsafeAttribute { key: "width", value: prop' value }
+
 instance Attr FeColorMatrix_ Width String where
   attr Width value = unsafeAttribute { key: "width", value: prop' value }
+
 instance Attr FeComponentTransfer_ Width String where
   attr Width value = unsafeAttribute { key: "width", value: prop' value }
+
 instance Attr FeComposite_ Width String where
   attr Width value = unsafeAttribute { key: "width", value: prop' value }
+
 instance Attr FeConvolveMatrix_ Width String where
   attr Width value = unsafeAttribute { key: "width", value: prop' value }
+
 instance Attr FeDiffuseLighting_ Width String where
   attr Width value = unsafeAttribute { key: "width", value: prop' value }
+
 instance Attr FeDisplacementMap_ Width String where
   attr Width value = unsafeAttribute { key: "width", value: prop' value }
+
 instance Attr FeDropShadow_ Width String where
   attr Width value = unsafeAttribute { key: "width", value: prop' value }
+
 instance Attr FeFlood_ Width String where
   attr Width value = unsafeAttribute { key: "width", value: prop' value }
+
 instance Attr FeGaussianBlur_ Width String where
   attr Width value = unsafeAttribute { key: "width", value: prop' value }
+
 instance Attr FeImage_ Width String where
   attr Width value = unsafeAttribute { key: "width", value: prop' value }
+
 instance Attr FeMerge_ Width String where
   attr Width value = unsafeAttribute { key: "width", value: prop' value }
+
 instance Attr FeMorphology_ Width String where
   attr Width value = unsafeAttribute { key: "width", value: prop' value }
+
 instance Attr FeOffset_ Width String where
   attr Width value = unsafeAttribute { key: "width", value: prop' value }
+
 instance Attr FeSpecularLighting_ Width String where
   attr Width value = unsafeAttribute { key: "width", value: prop' value }
+
 instance Attr FeTile_ Width String where
   attr Width value = unsafeAttribute { key: "width", value: prop' value }
+
 instance Attr FeTurbulence_ Width String where
   attr Width value = unsafeAttribute { key: "width", value: prop' value }
+
 instance Attr Filter_ Width String where
   attr Width value = unsafeAttribute { key: "width", value: prop' value }
+
 instance Attr ForeignObject_ Width String where
   attr Width value = unsafeAttribute { key: "width", value: prop' value }
+
 instance Attr Image_ Width String where
   attr Width value = unsafeAttribute { key: "width", value: prop' value }
+
 instance Attr Mask_ Width String where
   attr Width value = unsafeAttribute { key: "width", value: prop' value }
+
 instance Attr Pattern_ Width String where
   attr Width value = unsafeAttribute { key: "width", value: prop' value }
+
 instance Attr Rect_ Width String where
   attr Width value = unsafeAttribute { key: "width", value: prop' value }
+
 instance Attr Svg_ Width String where
   attr Width value = unsafeAttribute { key: "width", value: prop' value }
+
 instance Attr Symbol_ Width String where
   attr Width value = unsafeAttribute { key: "width", value: prop' value }
+
 instance Attr Use_ Width String where
   attr Width value = unsafeAttribute { key: "width", value: prop' value }

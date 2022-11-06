@@ -24,40 +24,77 @@ import Deku.Attribute (class Attr, prop', unsafeAttribute)
 data ImageRendering = ImageRendering
 
 instance Attr FeBlend_ ImageRendering String where
-  attr ImageRendering value = unsafeAttribute { key: "image-rendering", value: prop' value }
+  attr ImageRendering value = unsafeAttribute
+    { key: "image-rendering", value: prop' value }
+
 instance Attr FeColorMatrix_ ImageRendering String where
-  attr ImageRendering value = unsafeAttribute { key: "image-rendering", value: prop' value }
+  attr ImageRendering value = unsafeAttribute
+    { key: "image-rendering", value: prop' value }
+
 instance Attr FeComponentTransfer_ ImageRendering String where
-  attr ImageRendering value = unsafeAttribute { key: "image-rendering", value: prop' value }
+  attr ImageRendering value = unsafeAttribute
+    { key: "image-rendering", value: prop' value }
+
 instance Attr FeComposite_ ImageRendering String where
-  attr ImageRendering value = unsafeAttribute { key: "image-rendering", value: prop' value }
+  attr ImageRendering value = unsafeAttribute
+    { key: "image-rendering", value: prop' value }
+
 instance Attr FeConvolveMatrix_ ImageRendering String where
-  attr ImageRendering value = unsafeAttribute { key: "image-rendering", value: prop' value }
+  attr ImageRendering value = unsafeAttribute
+    { key: "image-rendering", value: prop' value }
+
 instance Attr FeDiffuseLighting_ ImageRendering String where
-  attr ImageRendering value = unsafeAttribute { key: "image-rendering", value: prop' value }
+  attr ImageRendering value = unsafeAttribute
+    { key: "image-rendering", value: prop' value }
+
 instance Attr FeDisplacementMap_ ImageRendering String where
-  attr ImageRendering value = unsafeAttribute { key: "image-rendering", value: prop' value }
+  attr ImageRendering value = unsafeAttribute
+    { key: "image-rendering", value: prop' value }
+
 instance Attr FeFlood_ ImageRendering String where
-  attr ImageRendering value = unsafeAttribute { key: "image-rendering", value: prop' value }
+  attr ImageRendering value = unsafeAttribute
+    { key: "image-rendering", value: prop' value }
+
 instance Attr FeGaussianBlur_ ImageRendering String where
-  attr ImageRendering value = unsafeAttribute { key: "image-rendering", value: prop' value }
+  attr ImageRendering value = unsafeAttribute
+    { key: "image-rendering", value: prop' value }
+
 instance Attr FeImage_ ImageRendering String where
-  attr ImageRendering value = unsafeAttribute { key: "image-rendering", value: prop' value }
+  attr ImageRendering value = unsafeAttribute
+    { key: "image-rendering", value: prop' value }
+
 instance Attr FeMerge_ ImageRendering String where
-  attr ImageRendering value = unsafeAttribute { key: "image-rendering", value: prop' value }
+  attr ImageRendering value = unsafeAttribute
+    { key: "image-rendering", value: prop' value }
+
 instance Attr FeMorphology_ ImageRendering String where
-  attr ImageRendering value = unsafeAttribute { key: "image-rendering", value: prop' value }
+  attr ImageRendering value = unsafeAttribute
+    { key: "image-rendering", value: prop' value }
+
 instance Attr FeOffset_ ImageRendering String where
-  attr ImageRendering value = unsafeAttribute { key: "image-rendering", value: prop' value }
+  attr ImageRendering value = unsafeAttribute
+    { key: "image-rendering", value: prop' value }
+
 instance Attr FeSpecularLighting_ ImageRendering String where
-  attr ImageRendering value = unsafeAttribute { key: "image-rendering", value: prop' value }
+  attr ImageRendering value = unsafeAttribute
+    { key: "image-rendering", value: prop' value }
+
 instance Attr FeTile_ ImageRendering String where
-  attr ImageRendering value = unsafeAttribute { key: "image-rendering", value: prop' value }
+  attr ImageRendering value = unsafeAttribute
+    { key: "image-rendering", value: prop' value }
+
 instance Attr FeTurbulence_ ImageRendering String where
-  attr ImageRendering value = unsafeAttribute { key: "image-rendering", value: prop' value }
+  attr ImageRendering value = unsafeAttribute
+    { key: "image-rendering", value: prop' value }
+
 instance Attr Filter_ ImageRendering String where
-  attr ImageRendering value = unsafeAttribute { key: "image-rendering", value: prop' value }
+  attr ImageRendering value = unsafeAttribute
+    { key: "image-rendering", value: prop' value }
+
 instance Attr Image_ ImageRendering String where
-  attr ImageRendering value = unsafeAttribute { key: "image-rendering", value: prop' value }
+  attr ImageRendering value = unsafeAttribute
+    { key: "image-rendering", value: prop' value }
+
 instance Attr Switch_ ImageRendering String where
-  attr ImageRendering value = unsafeAttribute { key: "image-rendering", value: prop' value }
+  attr ImageRendering value = unsafeAttribute
+    { key: "image-rendering", value: prop' value }

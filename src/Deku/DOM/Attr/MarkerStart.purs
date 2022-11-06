@@ -24,40 +24,77 @@ import Deku.Attribute (class Attr, prop', unsafeAttribute)
 data MarkerStart = MarkerStart
 
 instance Attr FeBlend_ MarkerStart String where
-  attr MarkerStart value = unsafeAttribute { key: "marker-start", value: prop' value }
+  attr MarkerStart value = unsafeAttribute
+    { key: "marker-start", value: prop' value }
+
 instance Attr FeColorMatrix_ MarkerStart String where
-  attr MarkerStart value = unsafeAttribute { key: "marker-start", value: prop' value }
+  attr MarkerStart value = unsafeAttribute
+    { key: "marker-start", value: prop' value }
+
 instance Attr FeComponentTransfer_ MarkerStart String where
-  attr MarkerStart value = unsafeAttribute { key: "marker-start", value: prop' value }
+  attr MarkerStart value = unsafeAttribute
+    { key: "marker-start", value: prop' value }
+
 instance Attr FeComposite_ MarkerStart String where
-  attr MarkerStart value = unsafeAttribute { key: "marker-start", value: prop' value }
+  attr MarkerStart value = unsafeAttribute
+    { key: "marker-start", value: prop' value }
+
 instance Attr FeConvolveMatrix_ MarkerStart String where
-  attr MarkerStart value = unsafeAttribute { key: "marker-start", value: prop' value }
+  attr MarkerStart value = unsafeAttribute
+    { key: "marker-start", value: prop' value }
+
 instance Attr FeDiffuseLighting_ MarkerStart String where
-  attr MarkerStart value = unsafeAttribute { key: "marker-start", value: prop' value }
+  attr MarkerStart value = unsafeAttribute
+    { key: "marker-start", value: prop' value }
+
 instance Attr FeDisplacementMap_ MarkerStart String where
-  attr MarkerStart value = unsafeAttribute { key: "marker-start", value: prop' value }
+  attr MarkerStart value = unsafeAttribute
+    { key: "marker-start", value: prop' value }
+
 instance Attr FeFlood_ MarkerStart String where
-  attr MarkerStart value = unsafeAttribute { key: "marker-start", value: prop' value }
+  attr MarkerStart value = unsafeAttribute
+    { key: "marker-start", value: prop' value }
+
 instance Attr FeGaussianBlur_ MarkerStart String where
-  attr MarkerStart value = unsafeAttribute { key: "marker-start", value: prop' value }
+  attr MarkerStart value = unsafeAttribute
+    { key: "marker-start", value: prop' value }
+
 instance Attr FeImage_ MarkerStart String where
-  attr MarkerStart value = unsafeAttribute { key: "marker-start", value: prop' value }
+  attr MarkerStart value = unsafeAttribute
+    { key: "marker-start", value: prop' value }
+
 instance Attr FeMerge_ MarkerStart String where
-  attr MarkerStart value = unsafeAttribute { key: "marker-start", value: prop' value }
+  attr MarkerStart value = unsafeAttribute
+    { key: "marker-start", value: prop' value }
+
 instance Attr FeMorphology_ MarkerStart String where
-  attr MarkerStart value = unsafeAttribute { key: "marker-start", value: prop' value }
+  attr MarkerStart value = unsafeAttribute
+    { key: "marker-start", value: prop' value }
+
 instance Attr FeOffset_ MarkerStart String where
-  attr MarkerStart value = unsafeAttribute { key: "marker-start", value: prop' value }
+  attr MarkerStart value = unsafeAttribute
+    { key: "marker-start", value: prop' value }
+
 instance Attr FeSpecularLighting_ MarkerStart String where
-  attr MarkerStart value = unsafeAttribute { key: "marker-start", value: prop' value }
+  attr MarkerStart value = unsafeAttribute
+    { key: "marker-start", value: prop' value }
+
 instance Attr FeTile_ MarkerStart String where
-  attr MarkerStart value = unsafeAttribute { key: "marker-start", value: prop' value }
+  attr MarkerStart value = unsafeAttribute
+    { key: "marker-start", value: prop' value }
+
 instance Attr FeTurbulence_ MarkerStart String where
-  attr MarkerStart value = unsafeAttribute { key: "marker-start", value: prop' value }
+  attr MarkerStart value = unsafeAttribute
+    { key: "marker-start", value: prop' value }
+
 instance Attr Filter_ MarkerStart String where
-  attr MarkerStart value = unsafeAttribute { key: "marker-start", value: prop' value }
+  attr MarkerStart value = unsafeAttribute
+    { key: "marker-start", value: prop' value }
+
 instance Attr Image_ MarkerStart String where
-  attr MarkerStart value = unsafeAttribute { key: "marker-start", value: prop' value }
+  attr MarkerStart value = unsafeAttribute
+    { key: "marker-start", value: prop' value }
+
 instance Attr Switch_ MarkerStart String where
-  attr MarkerStart value = unsafeAttribute { key: "marker-start", value: prop' value }
+  attr MarkerStart value = unsafeAttribute
+    { key: "marker-start", value: prop' value }

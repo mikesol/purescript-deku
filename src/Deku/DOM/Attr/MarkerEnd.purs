@@ -24,40 +24,77 @@ import Deku.Attribute (class Attr, prop', unsafeAttribute)
 data MarkerEnd = MarkerEnd
 
 instance Attr FeBlend_ MarkerEnd String where
-  attr MarkerEnd value = unsafeAttribute { key: "marker-end", value: prop' value }
+  attr MarkerEnd value = unsafeAttribute
+    { key: "marker-end", value: prop' value }
+
 instance Attr FeColorMatrix_ MarkerEnd String where
-  attr MarkerEnd value = unsafeAttribute { key: "marker-end", value: prop' value }
+  attr MarkerEnd value = unsafeAttribute
+    { key: "marker-end", value: prop' value }
+
 instance Attr FeComponentTransfer_ MarkerEnd String where
-  attr MarkerEnd value = unsafeAttribute { key: "marker-end", value: prop' value }
+  attr MarkerEnd value = unsafeAttribute
+    { key: "marker-end", value: prop' value }
+
 instance Attr FeComposite_ MarkerEnd String where
-  attr MarkerEnd value = unsafeAttribute { key: "marker-end", value: prop' value }
+  attr MarkerEnd value = unsafeAttribute
+    { key: "marker-end", value: prop' value }
+
 instance Attr FeConvolveMatrix_ MarkerEnd String where
-  attr MarkerEnd value = unsafeAttribute { key: "marker-end", value: prop' value }
+  attr MarkerEnd value = unsafeAttribute
+    { key: "marker-end", value: prop' value }
+
 instance Attr FeDiffuseLighting_ MarkerEnd String where
-  attr MarkerEnd value = unsafeAttribute { key: "marker-end", value: prop' value }
+  attr MarkerEnd value = unsafeAttribute
+    { key: "marker-end", value: prop' value }
+
 instance Attr FeDisplacementMap_ MarkerEnd String where
-  attr MarkerEnd value = unsafeAttribute { key: "marker-end", value: prop' value }
+  attr MarkerEnd value = unsafeAttribute
+    { key: "marker-end", value: prop' value }
+
 instance Attr FeFlood_ MarkerEnd String where
-  attr MarkerEnd value = unsafeAttribute { key: "marker-end", value: prop' value }
+  attr MarkerEnd value = unsafeAttribute
+    { key: "marker-end", value: prop' value }
+
 instance Attr FeGaussianBlur_ MarkerEnd String where
-  attr MarkerEnd value = unsafeAttribute { key: "marker-end", value: prop' value }
+  attr MarkerEnd value = unsafeAttribute
+    { key: "marker-end", value: prop' value }
+
 instance Attr FeImage_ MarkerEnd String where
-  attr MarkerEnd value = unsafeAttribute { key: "marker-end", value: prop' value }
+  attr MarkerEnd value = unsafeAttribute
+    { key: "marker-end", value: prop' value }
+
 instance Attr FeMerge_ MarkerEnd String where
-  attr MarkerEnd value = unsafeAttribute { key: "marker-end", value: prop' value }
+  attr MarkerEnd value = unsafeAttribute
+    { key: "marker-end", value: prop' value }
+
 instance Attr FeMorphology_ MarkerEnd String where
-  attr MarkerEnd value = unsafeAttribute { key: "marker-end", value: prop' value }
+  attr MarkerEnd value = unsafeAttribute
+    { key: "marker-end", value: prop' value }
+
 instance Attr FeOffset_ MarkerEnd String where
-  attr MarkerEnd value = unsafeAttribute { key: "marker-end", value: prop' value }
+  attr MarkerEnd value = unsafeAttribute
+    { key: "marker-end", value: prop' value }
+
 instance Attr FeSpecularLighting_ MarkerEnd String where
-  attr MarkerEnd value = unsafeAttribute { key: "marker-end", value: prop' value }
+  attr MarkerEnd value = unsafeAttribute
+    { key: "marker-end", value: prop' value }
+
 instance Attr FeTile_ MarkerEnd String where
-  attr MarkerEnd value = unsafeAttribute { key: "marker-end", value: prop' value }
+  attr MarkerEnd value = unsafeAttribute
+    { key: "marker-end", value: prop' value }
+
 instance Attr FeTurbulence_ MarkerEnd String where
-  attr MarkerEnd value = unsafeAttribute { key: "marker-end", value: prop' value }
+  attr MarkerEnd value = unsafeAttribute
+    { key: "marker-end", value: prop' value }
+
 instance Attr Filter_ MarkerEnd String where
-  attr MarkerEnd value = unsafeAttribute { key: "marker-end", value: prop' value }
+  attr MarkerEnd value = unsafeAttribute
+    { key: "marker-end", value: prop' value }
+
 instance Attr Image_ MarkerEnd String where
-  attr MarkerEnd value = unsafeAttribute { key: "marker-end", value: prop' value }
+  attr MarkerEnd value = unsafeAttribute
+    { key: "marker-end", value: prop' value }
+
 instance Attr Switch_ MarkerEnd String where
-  attr MarkerEnd value = unsafeAttribute { key: "marker-end", value: prop' value }
+  attr MarkerEnd value = unsafeAttribute
+    { key: "marker-end", value: prop' value }

@@ -22,36 +22,69 @@ import Deku.Attribute (class Attr, prop', unsafeAttribute)
 data AriaActivedescendant = AriaActivedescendant
 
 instance Attr Circle_ AriaActivedescendant String where
-  attr AriaActivedescendant value = unsafeAttribute { key: "aria-activedescendant", value: prop' value }
+  attr AriaActivedescendant value = unsafeAttribute
+    { key: "aria-activedescendant", value: prop' value }
+
 instance Attr Ellipse_ AriaActivedescendant String where
-  attr AriaActivedescendant value = unsafeAttribute { key: "aria-activedescendant", value: prop' value }
+  attr AriaActivedescendant value = unsafeAttribute
+    { key: "aria-activedescendant", value: prop' value }
+
 instance Attr ForeignObject_ AriaActivedescendant String where
-  attr AriaActivedescendant value = unsafeAttribute { key: "aria-activedescendant", value: prop' value }
+  attr AriaActivedescendant value = unsafeAttribute
+    { key: "aria-activedescendant", value: prop' value }
+
 instance Attr G_ AriaActivedescendant String where
-  attr AriaActivedescendant value = unsafeAttribute { key: "aria-activedescendant", value: prop' value }
+  attr AriaActivedescendant value = unsafeAttribute
+    { key: "aria-activedescendant", value: prop' value }
+
 instance Attr Line_ AriaActivedescendant String where
-  attr AriaActivedescendant value = unsafeAttribute { key: "aria-activedescendant", value: prop' value }
+  attr AriaActivedescendant value = unsafeAttribute
+    { key: "aria-activedescendant", value: prop' value }
+
 instance Attr Marker_ AriaActivedescendant String where
-  attr AriaActivedescendant value = unsafeAttribute { key: "aria-activedescendant", value: prop' value }
+  attr AriaActivedescendant value = unsafeAttribute
+    { key: "aria-activedescendant", value: prop' value }
+
 instance Attr Path_ AriaActivedescendant String where
-  attr AriaActivedescendant value = unsafeAttribute { key: "aria-activedescendant", value: prop' value }
+  attr AriaActivedescendant value = unsafeAttribute
+    { key: "aria-activedescendant", value: prop' value }
+
 instance Attr Polygon_ AriaActivedescendant String where
-  attr AriaActivedescendant value = unsafeAttribute { key: "aria-activedescendant", value: prop' value }
+  attr AriaActivedescendant value = unsafeAttribute
+    { key: "aria-activedescendant", value: prop' value }
+
 instance Attr Polyline_ AriaActivedescendant String where
-  attr AriaActivedescendant value = unsafeAttribute { key: "aria-activedescendant", value: prop' value }
+  attr AriaActivedescendant value = unsafeAttribute
+    { key: "aria-activedescendant", value: prop' value }
+
 instance Attr Rect_ AriaActivedescendant String where
-  attr AriaActivedescendant value = unsafeAttribute { key: "aria-activedescendant", value: prop' value }
+  attr AriaActivedescendant value = unsafeAttribute
+    { key: "aria-activedescendant", value: prop' value }
+
 instance Attr Svg_ AriaActivedescendant String where
-  attr AriaActivedescendant value = unsafeAttribute { key: "aria-activedescendant", value: prop' value }
+  attr AriaActivedescendant value = unsafeAttribute
+    { key: "aria-activedescendant", value: prop' value }
+
 instance Attr Symbol_ AriaActivedescendant String where
-  attr AriaActivedescendant value = unsafeAttribute { key: "aria-activedescendant", value: prop' value }
+  attr AriaActivedescendant value = unsafeAttribute
+    { key: "aria-activedescendant", value: prop' value }
+
 instance Attr Text_ AriaActivedescendant String where
-  attr AriaActivedescendant value = unsafeAttribute { key: "aria-activedescendant", value: prop' value }
+  attr AriaActivedescendant value = unsafeAttribute
+    { key: "aria-activedescendant", value: prop' value }
+
 instance Attr TextPath_ AriaActivedescendant String where
-  attr AriaActivedescendant value = unsafeAttribute { key: "aria-activedescendant", value: prop' value }
+  attr AriaActivedescendant value = unsafeAttribute
+    { key: "aria-activedescendant", value: prop' value }
+
 instance Attr Tspan_ AriaActivedescendant String where
-  attr AriaActivedescendant value = unsafeAttribute { key: "aria-activedescendant", value: prop' value }
+  attr AriaActivedescendant value = unsafeAttribute
+    { key: "aria-activedescendant", value: prop' value }
+
 instance Attr Use_ AriaActivedescendant String where
-  attr AriaActivedescendant value = unsafeAttribute { key: "aria-activedescendant", value: prop' value }
+  attr AriaActivedescendant value = unsafeAttribute
+    { key: "aria-activedescendant", value: prop' value }
+
 instance Attr View_ AriaActivedescendant String where
-  attr AriaActivedescendant value = unsafeAttribute { key: "aria-activedescendant", value: prop' value }
+  attr AriaActivedescendant value = unsafeAttribute
+    { key: "aria-activedescendant", value: prop' value }

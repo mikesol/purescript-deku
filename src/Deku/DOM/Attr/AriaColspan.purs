@@ -22,36 +22,69 @@ import Deku.Attribute (class Attr, prop', unsafeAttribute)
 data AriaColspan = AriaColspan
 
 instance Attr Circle_ AriaColspan String where
-  attr AriaColspan value = unsafeAttribute { key: "aria-colspan", value: prop' value }
+  attr AriaColspan value = unsafeAttribute
+    { key: "aria-colspan", value: prop' value }
+
 instance Attr Ellipse_ AriaColspan String where
-  attr AriaColspan value = unsafeAttribute { key: "aria-colspan", value: prop' value }
+  attr AriaColspan value = unsafeAttribute
+    { key: "aria-colspan", value: prop' value }
+
 instance Attr ForeignObject_ AriaColspan String where
-  attr AriaColspan value = unsafeAttribute { key: "aria-colspan", value: prop' value }
+  attr AriaColspan value = unsafeAttribute
+    { key: "aria-colspan", value: prop' value }
+
 instance Attr G_ AriaColspan String where
-  attr AriaColspan value = unsafeAttribute { key: "aria-colspan", value: prop' value }
+  attr AriaColspan value = unsafeAttribute
+    { key: "aria-colspan", value: prop' value }
+
 instance Attr Line_ AriaColspan String where
-  attr AriaColspan value = unsafeAttribute { key: "aria-colspan", value: prop' value }
+  attr AriaColspan value = unsafeAttribute
+    { key: "aria-colspan", value: prop' value }
+
 instance Attr Marker_ AriaColspan String where
-  attr AriaColspan value = unsafeAttribute { key: "aria-colspan", value: prop' value }
+  attr AriaColspan value = unsafeAttribute
+    { key: "aria-colspan", value: prop' value }
+
 instance Attr Path_ AriaColspan String where
-  attr AriaColspan value = unsafeAttribute { key: "aria-colspan", value: prop' value }
+  attr AriaColspan value = unsafeAttribute
+    { key: "aria-colspan", value: prop' value }
+
 instance Attr Polygon_ AriaColspan String where
-  attr AriaColspan value = unsafeAttribute { key: "aria-colspan", value: prop' value }
+  attr AriaColspan value = unsafeAttribute
+    { key: "aria-colspan", value: prop' value }
+
 instance Attr Polyline_ AriaColspan String where
-  attr AriaColspan value = unsafeAttribute { key: "aria-colspan", value: prop' value }
+  attr AriaColspan value = unsafeAttribute
+    { key: "aria-colspan", value: prop' value }
+
 instance Attr Rect_ AriaColspan String where
-  attr AriaColspan value = unsafeAttribute { key: "aria-colspan", value: prop' value }
+  attr AriaColspan value = unsafeAttribute
+    { key: "aria-colspan", value: prop' value }
+
 instance Attr Svg_ AriaColspan String where
-  attr AriaColspan value = unsafeAttribute { key: "aria-colspan", value: prop' value }
+  attr AriaColspan value = unsafeAttribute
+    { key: "aria-colspan", value: prop' value }
+
 instance Attr Symbol_ AriaColspan String where
-  attr AriaColspan value = unsafeAttribute { key: "aria-colspan", value: prop' value }
+  attr AriaColspan value = unsafeAttribute
+    { key: "aria-colspan", value: prop' value }
+
 instance Attr Text_ AriaColspan String where
-  attr AriaColspan value = unsafeAttribute { key: "aria-colspan", value: prop' value }
+  attr AriaColspan value = unsafeAttribute
+    { key: "aria-colspan", value: prop' value }
+
 instance Attr TextPath_ AriaColspan String where
-  attr AriaColspan value = unsafeAttribute { key: "aria-colspan", value: prop' value }
+  attr AriaColspan value = unsafeAttribute
+    { key: "aria-colspan", value: prop' value }
+
 instance Attr Tspan_ AriaColspan String where
-  attr AriaColspan value = unsafeAttribute { key: "aria-colspan", value: prop' value }
+  attr AriaColspan value = unsafeAttribute
+    { key: "aria-colspan", value: prop' value }
+
 instance Attr Use_ AriaColspan String where
-  attr AriaColspan value = unsafeAttribute { key: "aria-colspan", value: prop' value }
+  attr AriaColspan value = unsafeAttribute
+    { key: "aria-colspan", value: prop' value }
+
 instance Attr View_ AriaColspan String where
-  attr AriaColspan value = unsafeAttribute { key: "aria-colspan", value: prop' value }
+  attr AriaColspan value = unsafeAttribute
+    { key: "aria-colspan", value: prop' value }

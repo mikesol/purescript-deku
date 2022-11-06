@@ -46,84 +46,165 @@ import Deku.Attribute (class Attr, prop', unsafeAttribute)
 data StrokeLinecap = StrokeLinecap
 
 instance Attr Circle_ StrokeLinecap String where
-  attr StrokeLinecap value = unsafeAttribute { key: "stroke-linecap", value: prop' value }
+  attr StrokeLinecap value = unsafeAttribute
+    { key: "stroke-linecap", value: prop' value }
+
 instance Attr ClipPath_ StrokeLinecap String where
-  attr StrokeLinecap value = unsafeAttribute { key: "stroke-linecap", value: prop' value }
+  attr StrokeLinecap value = unsafeAttribute
+    { key: "stroke-linecap", value: prop' value }
+
 instance Attr Defs_ StrokeLinecap String where
-  attr StrokeLinecap value = unsafeAttribute { key: "stroke-linecap", value: prop' value }
+  attr StrokeLinecap value = unsafeAttribute
+    { key: "stroke-linecap", value: prop' value }
+
 instance Attr Ellipse_ StrokeLinecap String where
-  attr StrokeLinecap value = unsafeAttribute { key: "stroke-linecap", value: prop' value }
+  attr StrokeLinecap value = unsafeAttribute
+    { key: "stroke-linecap", value: prop' value }
+
 instance Attr FeBlend_ StrokeLinecap String where
-  attr StrokeLinecap value = unsafeAttribute { key: "stroke-linecap", value: prop' value }
+  attr StrokeLinecap value = unsafeAttribute
+    { key: "stroke-linecap", value: prop' value }
+
 instance Attr FeColorMatrix_ StrokeLinecap String where
-  attr StrokeLinecap value = unsafeAttribute { key: "stroke-linecap", value: prop' value }
+  attr StrokeLinecap value = unsafeAttribute
+    { key: "stroke-linecap", value: prop' value }
+
 instance Attr FeComponentTransfer_ StrokeLinecap String where
-  attr StrokeLinecap value = unsafeAttribute { key: "stroke-linecap", value: prop' value }
+  attr StrokeLinecap value = unsafeAttribute
+    { key: "stroke-linecap", value: prop' value }
+
 instance Attr FeComposite_ StrokeLinecap String where
-  attr StrokeLinecap value = unsafeAttribute { key: "stroke-linecap", value: prop' value }
+  attr StrokeLinecap value = unsafeAttribute
+    { key: "stroke-linecap", value: prop' value }
+
 instance Attr FeConvolveMatrix_ StrokeLinecap String where
-  attr StrokeLinecap value = unsafeAttribute { key: "stroke-linecap", value: prop' value }
+  attr StrokeLinecap value = unsafeAttribute
+    { key: "stroke-linecap", value: prop' value }
+
 instance Attr FeDiffuseLighting_ StrokeLinecap String where
-  attr StrokeLinecap value = unsafeAttribute { key: "stroke-linecap", value: prop' value }
+  attr StrokeLinecap value = unsafeAttribute
+    { key: "stroke-linecap", value: prop' value }
+
 instance Attr FeDisplacementMap_ StrokeLinecap String where
-  attr StrokeLinecap value = unsafeAttribute { key: "stroke-linecap", value: prop' value }
+  attr StrokeLinecap value = unsafeAttribute
+    { key: "stroke-linecap", value: prop' value }
+
 instance Attr FeFlood_ StrokeLinecap String where
-  attr StrokeLinecap value = unsafeAttribute { key: "stroke-linecap", value: prop' value }
+  attr StrokeLinecap value = unsafeAttribute
+    { key: "stroke-linecap", value: prop' value }
+
 instance Attr FeGaussianBlur_ StrokeLinecap String where
-  attr StrokeLinecap value = unsafeAttribute { key: "stroke-linecap", value: prop' value }
+  attr StrokeLinecap value = unsafeAttribute
+    { key: "stroke-linecap", value: prop' value }
+
 instance Attr FeImage_ StrokeLinecap String where
-  attr StrokeLinecap value = unsafeAttribute { key: "stroke-linecap", value: prop' value }
+  attr StrokeLinecap value = unsafeAttribute
+    { key: "stroke-linecap", value: prop' value }
+
 instance Attr FeMerge_ StrokeLinecap String where
-  attr StrokeLinecap value = unsafeAttribute { key: "stroke-linecap", value: prop' value }
+  attr StrokeLinecap value = unsafeAttribute
+    { key: "stroke-linecap", value: prop' value }
+
 instance Attr FeMorphology_ StrokeLinecap String where
-  attr StrokeLinecap value = unsafeAttribute { key: "stroke-linecap", value: prop' value }
+  attr StrokeLinecap value = unsafeAttribute
+    { key: "stroke-linecap", value: prop' value }
+
 instance Attr FeOffset_ StrokeLinecap String where
-  attr StrokeLinecap value = unsafeAttribute { key: "stroke-linecap", value: prop' value }
+  attr StrokeLinecap value = unsafeAttribute
+    { key: "stroke-linecap", value: prop' value }
+
 instance Attr FeSpecularLighting_ StrokeLinecap String where
-  attr StrokeLinecap value = unsafeAttribute { key: "stroke-linecap", value: prop' value }
+  attr StrokeLinecap value = unsafeAttribute
+    { key: "stroke-linecap", value: prop' value }
+
 instance Attr FeTile_ StrokeLinecap String where
-  attr StrokeLinecap value = unsafeAttribute { key: "stroke-linecap", value: prop' value }
+  attr StrokeLinecap value = unsafeAttribute
+    { key: "stroke-linecap", value: prop' value }
+
 instance Attr FeTurbulence_ StrokeLinecap String where
-  attr StrokeLinecap value = unsafeAttribute { key: "stroke-linecap", value: prop' value }
+  attr StrokeLinecap value = unsafeAttribute
+    { key: "stroke-linecap", value: prop' value }
+
 instance Attr Filter_ StrokeLinecap String where
-  attr StrokeLinecap value = unsafeAttribute { key: "stroke-linecap", value: prop' value }
+  attr StrokeLinecap value = unsafeAttribute
+    { key: "stroke-linecap", value: prop' value }
+
 instance Attr ForeignObject_ StrokeLinecap String where
-  attr StrokeLinecap value = unsafeAttribute { key: "stroke-linecap", value: prop' value }
+  attr StrokeLinecap value = unsafeAttribute
+    { key: "stroke-linecap", value: prop' value }
+
 instance Attr G_ StrokeLinecap String where
-  attr StrokeLinecap value = unsafeAttribute { key: "stroke-linecap", value: prop' value }
+  attr StrokeLinecap value = unsafeAttribute
+    { key: "stroke-linecap", value: prop' value }
+
 instance Attr Image_ StrokeLinecap String where
-  attr StrokeLinecap value = unsafeAttribute { key: "stroke-linecap", value: prop' value }
+  attr StrokeLinecap value = unsafeAttribute
+    { key: "stroke-linecap", value: prop' value }
+
 instance Attr Line_ StrokeLinecap String where
-  attr StrokeLinecap value = unsafeAttribute { key: "stroke-linecap", value: prop' value }
+  attr StrokeLinecap value = unsafeAttribute
+    { key: "stroke-linecap", value: prop' value }
+
 instance Attr LinearGradient_ StrokeLinecap String where
-  attr StrokeLinecap value = unsafeAttribute { key: "stroke-linecap", value: prop' value }
+  attr StrokeLinecap value = unsafeAttribute
+    { key: "stroke-linecap", value: prop' value }
+
 instance Attr Marker_ StrokeLinecap String where
-  attr StrokeLinecap value = unsafeAttribute { key: "stroke-linecap", value: prop' value }
+  attr StrokeLinecap value = unsafeAttribute
+    { key: "stroke-linecap", value: prop' value }
+
 instance Attr Mask_ StrokeLinecap String where
-  attr StrokeLinecap value = unsafeAttribute { key: "stroke-linecap", value: prop' value }
+  attr StrokeLinecap value = unsafeAttribute
+    { key: "stroke-linecap", value: prop' value }
+
 instance Attr Path_ StrokeLinecap String where
-  attr StrokeLinecap value = unsafeAttribute { key: "stroke-linecap", value: prop' value }
+  attr StrokeLinecap value = unsafeAttribute
+    { key: "stroke-linecap", value: prop' value }
+
 instance Attr Pattern_ StrokeLinecap String where
-  attr StrokeLinecap value = unsafeAttribute { key: "stroke-linecap", value: prop' value }
+  attr StrokeLinecap value = unsafeAttribute
+    { key: "stroke-linecap", value: prop' value }
+
 instance Attr Polygon_ StrokeLinecap String where
-  attr StrokeLinecap value = unsafeAttribute { key: "stroke-linecap", value: prop' value }
+  attr StrokeLinecap value = unsafeAttribute
+    { key: "stroke-linecap", value: prop' value }
+
 instance Attr Polyline_ StrokeLinecap String where
-  attr StrokeLinecap value = unsafeAttribute { key: "stroke-linecap", value: prop' value }
+  attr StrokeLinecap value = unsafeAttribute
+    { key: "stroke-linecap", value: prop' value }
+
 instance Attr RadialGradient_ StrokeLinecap String where
-  attr StrokeLinecap value = unsafeAttribute { key: "stroke-linecap", value: prop' value }
+  attr StrokeLinecap value = unsafeAttribute
+    { key: "stroke-linecap", value: prop' value }
+
 instance Attr Rect_ StrokeLinecap String where
-  attr StrokeLinecap value = unsafeAttribute { key: "stroke-linecap", value: prop' value }
+  attr StrokeLinecap value = unsafeAttribute
+    { key: "stroke-linecap", value: prop' value }
+
 instance Attr Svg_ StrokeLinecap String where
-  attr StrokeLinecap value = unsafeAttribute { key: "stroke-linecap", value: prop' value }
+  attr StrokeLinecap value = unsafeAttribute
+    { key: "stroke-linecap", value: prop' value }
+
 instance Attr Switch_ StrokeLinecap String where
-  attr StrokeLinecap value = unsafeAttribute { key: "stroke-linecap", value: prop' value }
+  attr StrokeLinecap value = unsafeAttribute
+    { key: "stroke-linecap", value: prop' value }
+
 instance Attr Symbol_ StrokeLinecap String where
-  attr StrokeLinecap value = unsafeAttribute { key: "stroke-linecap", value: prop' value }
+  attr StrokeLinecap value = unsafeAttribute
+    { key: "stroke-linecap", value: prop' value }
+
 instance Attr Text_ StrokeLinecap String where
-  attr StrokeLinecap value = unsafeAttribute { key: "stroke-linecap", value: prop' value }
+  attr StrokeLinecap value = unsafeAttribute
+    { key: "stroke-linecap", value: prop' value }
+
 instance Attr TextPath_ StrokeLinecap String where
-  attr StrokeLinecap value = unsafeAttribute { key: "stroke-linecap", value: prop' value }
+  attr StrokeLinecap value = unsafeAttribute
+    { key: "stroke-linecap", value: prop' value }
+
 instance Attr Tspan_ StrokeLinecap String where
-  attr StrokeLinecap value = unsafeAttribute { key: "stroke-linecap", value: prop' value }
+  attr StrokeLinecap value = unsafeAttribute
+    { key: "stroke-linecap", value: prop' value }
+
 instance Attr Use_ StrokeLinecap String where
-  attr StrokeLinecap value = unsafeAttribute { key: "stroke-linecap", value: prop' value }
+  attr StrokeLinecap value = unsafeAttribute
+    { key: "stroke-linecap", value: prop' value }

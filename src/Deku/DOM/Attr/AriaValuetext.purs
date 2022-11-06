@@ -22,36 +22,69 @@ import Deku.Attribute (class Attr, prop', unsafeAttribute)
 data AriaValuetext = AriaValuetext
 
 instance Attr Circle_ AriaValuetext String where
-  attr AriaValuetext value = unsafeAttribute { key: "aria-valuetext", value: prop' value }
+  attr AriaValuetext value = unsafeAttribute
+    { key: "aria-valuetext", value: prop' value }
+
 instance Attr Ellipse_ AriaValuetext String where
-  attr AriaValuetext value = unsafeAttribute { key: "aria-valuetext", value: prop' value }
+  attr AriaValuetext value = unsafeAttribute
+    { key: "aria-valuetext", value: prop' value }
+
 instance Attr ForeignObject_ AriaValuetext String where
-  attr AriaValuetext value = unsafeAttribute { key: "aria-valuetext", value: prop' value }
+  attr AriaValuetext value = unsafeAttribute
+    { key: "aria-valuetext", value: prop' value }
+
 instance Attr G_ AriaValuetext String where
-  attr AriaValuetext value = unsafeAttribute { key: "aria-valuetext", value: prop' value }
+  attr AriaValuetext value = unsafeAttribute
+    { key: "aria-valuetext", value: prop' value }
+
 instance Attr Line_ AriaValuetext String where
-  attr AriaValuetext value = unsafeAttribute { key: "aria-valuetext", value: prop' value }
+  attr AriaValuetext value = unsafeAttribute
+    { key: "aria-valuetext", value: prop' value }
+
 instance Attr Marker_ AriaValuetext String where
-  attr AriaValuetext value = unsafeAttribute { key: "aria-valuetext", value: prop' value }
+  attr AriaValuetext value = unsafeAttribute
+    { key: "aria-valuetext", value: prop' value }
+
 instance Attr Path_ AriaValuetext String where
-  attr AriaValuetext value = unsafeAttribute { key: "aria-valuetext", value: prop' value }
+  attr AriaValuetext value = unsafeAttribute
+    { key: "aria-valuetext", value: prop' value }
+
 instance Attr Polygon_ AriaValuetext String where
-  attr AriaValuetext value = unsafeAttribute { key: "aria-valuetext", value: prop' value }
+  attr AriaValuetext value = unsafeAttribute
+    { key: "aria-valuetext", value: prop' value }
+
 instance Attr Polyline_ AriaValuetext String where
-  attr AriaValuetext value = unsafeAttribute { key: "aria-valuetext", value: prop' value }
+  attr AriaValuetext value = unsafeAttribute
+    { key: "aria-valuetext", value: prop' value }
+
 instance Attr Rect_ AriaValuetext String where
-  attr AriaValuetext value = unsafeAttribute { key: "aria-valuetext", value: prop' value }
+  attr AriaValuetext value = unsafeAttribute
+    { key: "aria-valuetext", value: prop' value }
+
 instance Attr Svg_ AriaValuetext String where
-  attr AriaValuetext value = unsafeAttribute { key: "aria-valuetext", value: prop' value }
+  attr AriaValuetext value = unsafeAttribute
+    { key: "aria-valuetext", value: prop' value }
+
 instance Attr Symbol_ AriaValuetext String where
-  attr AriaValuetext value = unsafeAttribute { key: "aria-valuetext", value: prop' value }
+  attr AriaValuetext value = unsafeAttribute
+    { key: "aria-valuetext", value: prop' value }
+
 instance Attr Text_ AriaValuetext String where
-  attr AriaValuetext value = unsafeAttribute { key: "aria-valuetext", value: prop' value }
+  attr AriaValuetext value = unsafeAttribute
+    { key: "aria-valuetext", value: prop' value }
+
 instance Attr TextPath_ AriaValuetext String where
-  attr AriaValuetext value = unsafeAttribute { key: "aria-valuetext", value: prop' value }
+  attr AriaValuetext value = unsafeAttribute
+    { key: "aria-valuetext", value: prop' value }
+
 instance Attr Tspan_ AriaValuetext String where
-  attr AriaValuetext value = unsafeAttribute { key: "aria-valuetext", value: prop' value }
+  attr AriaValuetext value = unsafeAttribute
+    { key: "aria-valuetext", value: prop' value }
+
 instance Attr Use_ AriaValuetext String where
-  attr AriaValuetext value = unsafeAttribute { key: "aria-valuetext", value: prop' value }
+  attr AriaValuetext value = unsafeAttribute
+    { key: "aria-valuetext", value: prop' value }
+
 instance Attr View_ AriaValuetext String where
-  attr AriaValuetext value = unsafeAttribute { key: "aria-valuetext", value: prop' value }
+  attr AriaValuetext value = unsafeAttribute
+    { key: "aria-valuetext", value: prop' value }

@@ -14,20 +14,37 @@ import Deku.Attribute (class Attr, prop', unsafeAttribute)
 data XlinkHref = XlinkHref
 
 instance Attr AnimateTransform_ XlinkHref String where
-  attr XlinkHref value = unsafeAttribute { key: "xlink:href", value: prop' value }
+  attr XlinkHref value = unsafeAttribute
+    { key: "xlink:href", value: prop' value }
+
 instance Attr FeImage_ XlinkHref String where
-  attr XlinkHref value = unsafeAttribute { key: "xlink:href", value: prop' value }
+  attr XlinkHref value = unsafeAttribute
+    { key: "xlink:href", value: prop' value }
+
 instance Attr Filter_ XlinkHref String where
-  attr XlinkHref value = unsafeAttribute { key: "xlink:href", value: prop' value }
+  attr XlinkHref value = unsafeAttribute
+    { key: "xlink:href", value: prop' value }
+
 instance Attr Image_ XlinkHref String where
-  attr XlinkHref value = unsafeAttribute { key: "xlink:href", value: prop' value }
+  attr XlinkHref value = unsafeAttribute
+    { key: "xlink:href", value: prop' value }
+
 instance Attr LinearGradient_ XlinkHref String where
-  attr XlinkHref value = unsafeAttribute { key: "xlink:href", value: prop' value }
+  attr XlinkHref value = unsafeAttribute
+    { key: "xlink:href", value: prop' value }
+
 instance Attr Mpath_ XlinkHref String where
-  attr XlinkHref value = unsafeAttribute { key: "xlink:href", value: prop' value }
+  attr XlinkHref value = unsafeAttribute
+    { key: "xlink:href", value: prop' value }
+
 instance Attr Pattern_ XlinkHref String where
-  attr XlinkHref value = unsafeAttribute { key: "xlink:href", value: prop' value }
+  attr XlinkHref value = unsafeAttribute
+    { key: "xlink:href", value: prop' value }
+
 instance Attr RadialGradient_ XlinkHref String where
-  attr XlinkHref value = unsafeAttribute { key: "xlink:href", value: prop' value }
+  attr XlinkHref value = unsafeAttribute
+    { key: "xlink:href", value: prop' value }
+
 instance Attr Use_ XlinkHref String where
-  attr XlinkHref value = unsafeAttribute { key: "xlink:href", value: prop' value }
+  attr XlinkHref value = unsafeAttribute
+    { key: "xlink:href", value: prop' value }

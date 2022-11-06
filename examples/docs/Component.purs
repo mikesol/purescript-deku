@@ -73,7 +73,19 @@ components options = px ~~
               , D.span (pure $ D.Style := "font-weight: 800;")
                   [ text_ " baz" ]
               ]
-          , D.svg (oneOf [D.Height !:= "100", D.Width !:= "100"]) [D.circle (oneOf [D.Cx!:="50", D.Cy!:="50", D.R!:="40", D.Stroke!:="black", D.StrokeWidth!:="3", D.Fill!:="red"]) []]
+          , D.svg (oneOf [ D.Height !:= "100", D.Width !:= "100" ])
+              [ D.circle
+                  ( oneOf
+                      [ D.Cx !:= "50"
+                      , D.Cy !:= "50"
+                      , D.R !:= "40"
+                      , D.Stroke !:= "black"
+                      , D.StrokeWidth !:= "3"
+                      , D.Fill !:= "red"
+                      ]
+                  )
+                  []
+              ]
           ]
       )
   , next: oneOfMap pure

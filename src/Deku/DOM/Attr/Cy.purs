@@ -9,7 +9,9 @@ data Cy = Cy
 
 instance Attr Circle_ Cy String where
   attr Cy value = unsafeAttribute { key: "cy", value: prop' value }
+
 instance Attr Ellipse_ Cy String where
   attr Cy value = unsafeAttribute { key: "cy", value: prop' value }
+
 instance Attr RadialGradient_ Cy String where
   attr Cy value = unsafeAttribute { key: "cy", value: prop' value }

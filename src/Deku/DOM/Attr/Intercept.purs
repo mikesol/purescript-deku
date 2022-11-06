@@ -9,10 +9,17 @@ import Deku.Attribute (class Attr, prop', unsafeAttribute)
 data Intercept = Intercept
 
 instance Attr FeFuncA_ Intercept String where
-  attr Intercept value = unsafeAttribute { key: "intercept", value: prop' value }
+  attr Intercept value = unsafeAttribute
+    { key: "intercept", value: prop' value }
+
 instance Attr FeFuncB_ Intercept String where
-  attr Intercept value = unsafeAttribute { key: "intercept", value: prop' value }
+  attr Intercept value = unsafeAttribute
+    { key: "intercept", value: prop' value }
+
 instance Attr FeFuncG_ Intercept String where
-  attr Intercept value = unsafeAttribute { key: "intercept", value: prop' value }
+  attr Intercept value = unsafeAttribute
+    { key: "intercept", value: prop' value }
+
 instance Attr FeFuncR_ Intercept String where
-  attr Intercept value = unsafeAttribute { key: "intercept", value: prop' value }
+  attr Intercept value = unsafeAttribute
+    { key: "intercept", value: prop' value }

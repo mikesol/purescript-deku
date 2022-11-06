@@ -10,9 +10,12 @@ data Dy = Dy
 
 instance Attr FeDropShadow_ Dy String where
   attr Dy value = unsafeAttribute { key: "dy", value: prop' value }
+
 instance Attr FeOffset_ Dy String where
   attr Dy value = unsafeAttribute { key: "dy", value: prop' value }
+
 instance Attr Text_ Dy String where
   attr Dy value = unsafeAttribute { key: "dy", value: prop' value }
+
 instance Attr Tspan_ Dy String where
   attr Dy value = unsafeAttribute { key: "dy", value: prop' value }

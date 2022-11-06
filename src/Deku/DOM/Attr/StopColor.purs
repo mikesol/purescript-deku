@@ -25,42 +25,81 @@ import Deku.Attribute (class Attr, prop', unsafeAttribute)
 data StopColor = StopColor
 
 instance Attr FeBlend_ StopColor String where
-  attr StopColor value = unsafeAttribute { key: "stop-color", value: prop' value }
+  attr StopColor value = unsafeAttribute
+    { key: "stop-color", value: prop' value }
+
 instance Attr FeColorMatrix_ StopColor String where
-  attr StopColor value = unsafeAttribute { key: "stop-color", value: prop' value }
+  attr StopColor value = unsafeAttribute
+    { key: "stop-color", value: prop' value }
+
 instance Attr FeComponentTransfer_ StopColor String where
-  attr StopColor value = unsafeAttribute { key: "stop-color", value: prop' value }
+  attr StopColor value = unsafeAttribute
+    { key: "stop-color", value: prop' value }
+
 instance Attr FeComposite_ StopColor String where
-  attr StopColor value = unsafeAttribute { key: "stop-color", value: prop' value }
+  attr StopColor value = unsafeAttribute
+    { key: "stop-color", value: prop' value }
+
 instance Attr FeConvolveMatrix_ StopColor String where
-  attr StopColor value = unsafeAttribute { key: "stop-color", value: prop' value }
+  attr StopColor value = unsafeAttribute
+    { key: "stop-color", value: prop' value }
+
 instance Attr FeDiffuseLighting_ StopColor String where
-  attr StopColor value = unsafeAttribute { key: "stop-color", value: prop' value }
+  attr StopColor value = unsafeAttribute
+    { key: "stop-color", value: prop' value }
+
 instance Attr FeDisplacementMap_ StopColor String where
-  attr StopColor value = unsafeAttribute { key: "stop-color", value: prop' value }
+  attr StopColor value = unsafeAttribute
+    { key: "stop-color", value: prop' value }
+
 instance Attr FeFlood_ StopColor String where
-  attr StopColor value = unsafeAttribute { key: "stop-color", value: prop' value }
+  attr StopColor value = unsafeAttribute
+    { key: "stop-color", value: prop' value }
+
 instance Attr FeGaussianBlur_ StopColor String where
-  attr StopColor value = unsafeAttribute { key: "stop-color", value: prop' value }
+  attr StopColor value = unsafeAttribute
+    { key: "stop-color", value: prop' value }
+
 instance Attr FeImage_ StopColor String where
-  attr StopColor value = unsafeAttribute { key: "stop-color", value: prop' value }
+  attr StopColor value = unsafeAttribute
+    { key: "stop-color", value: prop' value }
+
 instance Attr FeMerge_ StopColor String where
-  attr StopColor value = unsafeAttribute { key: "stop-color", value: prop' value }
+  attr StopColor value = unsafeAttribute
+    { key: "stop-color", value: prop' value }
+
 instance Attr FeMorphology_ StopColor String where
-  attr StopColor value = unsafeAttribute { key: "stop-color", value: prop' value }
+  attr StopColor value = unsafeAttribute
+    { key: "stop-color", value: prop' value }
+
 instance Attr FeOffset_ StopColor String where
-  attr StopColor value = unsafeAttribute { key: "stop-color", value: prop' value }
+  attr StopColor value = unsafeAttribute
+    { key: "stop-color", value: prop' value }
+
 instance Attr FeSpecularLighting_ StopColor String where
-  attr StopColor value = unsafeAttribute { key: "stop-color", value: prop' value }
+  attr StopColor value = unsafeAttribute
+    { key: "stop-color", value: prop' value }
+
 instance Attr FeTile_ StopColor String where
-  attr StopColor value = unsafeAttribute { key: "stop-color", value: prop' value }
+  attr StopColor value = unsafeAttribute
+    { key: "stop-color", value: prop' value }
+
 instance Attr FeTurbulence_ StopColor String where
-  attr StopColor value = unsafeAttribute { key: "stop-color", value: prop' value }
+  attr StopColor value = unsafeAttribute
+    { key: "stop-color", value: prop' value }
+
 instance Attr Filter_ StopColor String where
-  attr StopColor value = unsafeAttribute { key: "stop-color", value: prop' value }
+  attr StopColor value = unsafeAttribute
+    { key: "stop-color", value: prop' value }
+
 instance Attr Image_ StopColor String where
-  attr StopColor value = unsafeAttribute { key: "stop-color", value: prop' value }
+  attr StopColor value = unsafeAttribute
+    { key: "stop-color", value: prop' value }
+
 instance Attr Stop_ StopColor String where
-  attr StopColor value = unsafeAttribute { key: "stop-color", value: prop' value }
+  attr StopColor value = unsafeAttribute
+    { key: "stop-color", value: prop' value }
+
 instance Attr Switch_ StopColor String where
-  attr StopColor value = unsafeAttribute { key: "stop-color", value: prop' value }
+  attr StopColor value = unsafeAttribute
+    { key: "stop-color", value: prop' value }

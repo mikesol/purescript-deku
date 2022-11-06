@@ -24,40 +24,77 @@ import Deku.Attribute (class Attr, prop', unsafeAttribute)
 data Direction = Direction
 
 instance Attr FeBlend_ Direction String where
-  attr Direction value = unsafeAttribute { key: "direction", value: prop' value }
+  attr Direction value = unsafeAttribute
+    { key: "direction", value: prop' value }
+
 instance Attr FeColorMatrix_ Direction String where
-  attr Direction value = unsafeAttribute { key: "direction", value: prop' value }
+  attr Direction value = unsafeAttribute
+    { key: "direction", value: prop' value }
+
 instance Attr FeComponentTransfer_ Direction String where
-  attr Direction value = unsafeAttribute { key: "direction", value: prop' value }
+  attr Direction value = unsafeAttribute
+    { key: "direction", value: prop' value }
+
 instance Attr FeComposite_ Direction String where
-  attr Direction value = unsafeAttribute { key: "direction", value: prop' value }
+  attr Direction value = unsafeAttribute
+    { key: "direction", value: prop' value }
+
 instance Attr FeConvolveMatrix_ Direction String where
-  attr Direction value = unsafeAttribute { key: "direction", value: prop' value }
+  attr Direction value = unsafeAttribute
+    { key: "direction", value: prop' value }
+
 instance Attr FeDiffuseLighting_ Direction String where
-  attr Direction value = unsafeAttribute { key: "direction", value: prop' value }
+  attr Direction value = unsafeAttribute
+    { key: "direction", value: prop' value }
+
 instance Attr FeDisplacementMap_ Direction String where
-  attr Direction value = unsafeAttribute { key: "direction", value: prop' value }
+  attr Direction value = unsafeAttribute
+    { key: "direction", value: prop' value }
+
 instance Attr FeFlood_ Direction String where
-  attr Direction value = unsafeAttribute { key: "direction", value: prop' value }
+  attr Direction value = unsafeAttribute
+    { key: "direction", value: prop' value }
+
 instance Attr FeGaussianBlur_ Direction String where
-  attr Direction value = unsafeAttribute { key: "direction", value: prop' value }
+  attr Direction value = unsafeAttribute
+    { key: "direction", value: prop' value }
+
 instance Attr FeImage_ Direction String where
-  attr Direction value = unsafeAttribute { key: "direction", value: prop' value }
+  attr Direction value = unsafeAttribute
+    { key: "direction", value: prop' value }
+
 instance Attr FeMerge_ Direction String where
-  attr Direction value = unsafeAttribute { key: "direction", value: prop' value }
+  attr Direction value = unsafeAttribute
+    { key: "direction", value: prop' value }
+
 instance Attr FeMorphology_ Direction String where
-  attr Direction value = unsafeAttribute { key: "direction", value: prop' value }
+  attr Direction value = unsafeAttribute
+    { key: "direction", value: prop' value }
+
 instance Attr FeOffset_ Direction String where
-  attr Direction value = unsafeAttribute { key: "direction", value: prop' value }
+  attr Direction value = unsafeAttribute
+    { key: "direction", value: prop' value }
+
 instance Attr FeSpecularLighting_ Direction String where
-  attr Direction value = unsafeAttribute { key: "direction", value: prop' value }
+  attr Direction value = unsafeAttribute
+    { key: "direction", value: prop' value }
+
 instance Attr FeTile_ Direction String where
-  attr Direction value = unsafeAttribute { key: "direction", value: prop' value }
+  attr Direction value = unsafeAttribute
+    { key: "direction", value: prop' value }
+
 instance Attr FeTurbulence_ Direction String where
-  attr Direction value = unsafeAttribute { key: "direction", value: prop' value }
+  attr Direction value = unsafeAttribute
+    { key: "direction", value: prop' value }
+
 instance Attr Filter_ Direction String where
-  attr Direction value = unsafeAttribute { key: "direction", value: prop' value }
+  attr Direction value = unsafeAttribute
+    { key: "direction", value: prop' value }
+
 instance Attr Image_ Direction String where
-  attr Direction value = unsafeAttribute { key: "direction", value: prop' value }
+  attr Direction value = unsafeAttribute
+    { key: "direction", value: prop' value }
+
 instance Attr Switch_ Direction String where
-  attr Direction value = unsafeAttribute { key: "direction", value: prop' value }
+  attr Direction value = unsafeAttribute
+    { key: "direction", value: prop' value }

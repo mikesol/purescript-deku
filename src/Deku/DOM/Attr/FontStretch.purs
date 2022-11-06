@@ -26,44 +26,85 @@ import Deku.Attribute (class Attr, prop', unsafeAttribute)
 data FontStretch = FontStretch
 
 instance Attr FeBlend_ FontStretch String where
-  attr FontStretch value = unsafeAttribute { key: "font-stretch", value: prop' value }
+  attr FontStretch value = unsafeAttribute
+    { key: "font-stretch", value: prop' value }
+
 instance Attr FeColorMatrix_ FontStretch String where
-  attr FontStretch value = unsafeAttribute { key: "font-stretch", value: prop' value }
+  attr FontStretch value = unsafeAttribute
+    { key: "font-stretch", value: prop' value }
+
 instance Attr FeComponentTransfer_ FontStretch String where
-  attr FontStretch value = unsafeAttribute { key: "font-stretch", value: prop' value }
+  attr FontStretch value = unsafeAttribute
+    { key: "font-stretch", value: prop' value }
+
 instance Attr FeComposite_ FontStretch String where
-  attr FontStretch value = unsafeAttribute { key: "font-stretch", value: prop' value }
+  attr FontStretch value = unsafeAttribute
+    { key: "font-stretch", value: prop' value }
+
 instance Attr FeConvolveMatrix_ FontStretch String where
-  attr FontStretch value = unsafeAttribute { key: "font-stretch", value: prop' value }
+  attr FontStretch value = unsafeAttribute
+    { key: "font-stretch", value: prop' value }
+
 instance Attr FeDiffuseLighting_ FontStretch String where
-  attr FontStretch value = unsafeAttribute { key: "font-stretch", value: prop' value }
+  attr FontStretch value = unsafeAttribute
+    { key: "font-stretch", value: prop' value }
+
 instance Attr FeDisplacementMap_ FontStretch String where
-  attr FontStretch value = unsafeAttribute { key: "font-stretch", value: prop' value }
+  attr FontStretch value = unsafeAttribute
+    { key: "font-stretch", value: prop' value }
+
 instance Attr FeFlood_ FontStretch String where
-  attr FontStretch value = unsafeAttribute { key: "font-stretch", value: prop' value }
+  attr FontStretch value = unsafeAttribute
+    { key: "font-stretch", value: prop' value }
+
 instance Attr FeGaussianBlur_ FontStretch String where
-  attr FontStretch value = unsafeAttribute { key: "font-stretch", value: prop' value }
+  attr FontStretch value = unsafeAttribute
+    { key: "font-stretch", value: prop' value }
+
 instance Attr FeImage_ FontStretch String where
-  attr FontStretch value = unsafeAttribute { key: "font-stretch", value: prop' value }
+  attr FontStretch value = unsafeAttribute
+    { key: "font-stretch", value: prop' value }
+
 instance Attr FeMerge_ FontStretch String where
-  attr FontStretch value = unsafeAttribute { key: "font-stretch", value: prop' value }
+  attr FontStretch value = unsafeAttribute
+    { key: "font-stretch", value: prop' value }
+
 instance Attr FeMorphology_ FontStretch String where
-  attr FontStretch value = unsafeAttribute { key: "font-stretch", value: prop' value }
+  attr FontStretch value = unsafeAttribute
+    { key: "font-stretch", value: prop' value }
+
 instance Attr FeOffset_ FontStretch String where
-  attr FontStretch value = unsafeAttribute { key: "font-stretch", value: prop' value }
+  attr FontStretch value = unsafeAttribute
+    { key: "font-stretch", value: prop' value }
+
 instance Attr FeSpecularLighting_ FontStretch String where
-  attr FontStretch value = unsafeAttribute { key: "font-stretch", value: prop' value }
+  attr FontStretch value = unsafeAttribute
+    { key: "font-stretch", value: prop' value }
+
 instance Attr FeTile_ FontStretch String where
-  attr FontStretch value = unsafeAttribute { key: "font-stretch", value: prop' value }
+  attr FontStretch value = unsafeAttribute
+    { key: "font-stretch", value: prop' value }
+
 instance Attr FeTurbulence_ FontStretch String where
-  attr FontStretch value = unsafeAttribute { key: "font-stretch", value: prop' value }
+  attr FontStretch value = unsafeAttribute
+    { key: "font-stretch", value: prop' value }
+
 instance Attr Filter_ FontStretch String where
-  attr FontStretch value = unsafeAttribute { key: "font-stretch", value: prop' value }
+  attr FontStretch value = unsafeAttribute
+    { key: "font-stretch", value: prop' value }
+
 instance Attr Image_ FontStretch String where
-  attr FontStretch value = unsafeAttribute { key: "font-stretch", value: prop' value }
+  attr FontStretch value = unsafeAttribute
+    { key: "font-stretch", value: prop' value }
+
 instance Attr Switch_ FontStretch String where
-  attr FontStretch value = unsafeAttribute { key: "font-stretch", value: prop' value }
+  attr FontStretch value = unsafeAttribute
+    { key: "font-stretch", value: prop' value }
+
 instance Attr Text_ FontStretch String where
-  attr FontStretch value = unsafeAttribute { key: "font-stretch", value: prop' value }
+  attr FontStretch value = unsafeAttribute
+    { key: "font-stretch", value: prop' value }
+
 instance Attr Tspan_ FontStretch String where
-  attr FontStretch value = unsafeAttribute { key: "font-stretch", value: prop' value }
+  attr FontStretch value = unsafeAttribute
+    { key: "font-stretch", value: prop' value }

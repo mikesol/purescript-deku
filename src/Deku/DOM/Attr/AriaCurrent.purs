@@ -22,36 +22,69 @@ import Deku.Attribute (class Attr, prop', unsafeAttribute)
 data AriaCurrent = AriaCurrent
 
 instance Attr Circle_ AriaCurrent String where
-  attr AriaCurrent value = unsafeAttribute { key: "aria-current", value: prop' value }
+  attr AriaCurrent value = unsafeAttribute
+    { key: "aria-current", value: prop' value }
+
 instance Attr Ellipse_ AriaCurrent String where
-  attr AriaCurrent value = unsafeAttribute { key: "aria-current", value: prop' value }
+  attr AriaCurrent value = unsafeAttribute
+    { key: "aria-current", value: prop' value }
+
 instance Attr ForeignObject_ AriaCurrent String where
-  attr AriaCurrent value = unsafeAttribute { key: "aria-current", value: prop' value }
+  attr AriaCurrent value = unsafeAttribute
+    { key: "aria-current", value: prop' value }
+
 instance Attr G_ AriaCurrent String where
-  attr AriaCurrent value = unsafeAttribute { key: "aria-current", value: prop' value }
+  attr AriaCurrent value = unsafeAttribute
+    { key: "aria-current", value: prop' value }
+
 instance Attr Line_ AriaCurrent String where
-  attr AriaCurrent value = unsafeAttribute { key: "aria-current", value: prop' value }
+  attr AriaCurrent value = unsafeAttribute
+    { key: "aria-current", value: prop' value }
+
 instance Attr Marker_ AriaCurrent String where
-  attr AriaCurrent value = unsafeAttribute { key: "aria-current", value: prop' value }
+  attr AriaCurrent value = unsafeAttribute
+    { key: "aria-current", value: prop' value }
+
 instance Attr Path_ AriaCurrent String where
-  attr AriaCurrent value = unsafeAttribute { key: "aria-current", value: prop' value }
+  attr AriaCurrent value = unsafeAttribute
+    { key: "aria-current", value: prop' value }
+
 instance Attr Polygon_ AriaCurrent String where
-  attr AriaCurrent value = unsafeAttribute { key: "aria-current", value: prop' value }
+  attr AriaCurrent value = unsafeAttribute
+    { key: "aria-current", value: prop' value }
+
 instance Attr Polyline_ AriaCurrent String where
-  attr AriaCurrent value = unsafeAttribute { key: "aria-current", value: prop' value }
+  attr AriaCurrent value = unsafeAttribute
+    { key: "aria-current", value: prop' value }
+
 instance Attr Rect_ AriaCurrent String where
-  attr AriaCurrent value = unsafeAttribute { key: "aria-current", value: prop' value }
+  attr AriaCurrent value = unsafeAttribute
+    { key: "aria-current", value: prop' value }
+
 instance Attr Svg_ AriaCurrent String where
-  attr AriaCurrent value = unsafeAttribute { key: "aria-current", value: prop' value }
+  attr AriaCurrent value = unsafeAttribute
+    { key: "aria-current", value: prop' value }
+
 instance Attr Symbol_ AriaCurrent String where
-  attr AriaCurrent value = unsafeAttribute { key: "aria-current", value: prop' value }
+  attr AriaCurrent value = unsafeAttribute
+    { key: "aria-current", value: prop' value }
+
 instance Attr Text_ AriaCurrent String where
-  attr AriaCurrent value = unsafeAttribute { key: "aria-current", value: prop' value }
+  attr AriaCurrent value = unsafeAttribute
+    { key: "aria-current", value: prop' value }
+
 instance Attr TextPath_ AriaCurrent String where
-  attr AriaCurrent value = unsafeAttribute { key: "aria-current", value: prop' value }
+  attr AriaCurrent value = unsafeAttribute
+    { key: "aria-current", value: prop' value }
+
 instance Attr Tspan_ AriaCurrent String where
-  attr AriaCurrent value = unsafeAttribute { key: "aria-current", value: prop' value }
+  attr AriaCurrent value = unsafeAttribute
+    { key: "aria-current", value: prop' value }
+
 instance Attr Use_ AriaCurrent String where
-  attr AriaCurrent value = unsafeAttribute { key: "aria-current", value: prop' value }
+  attr AriaCurrent value = unsafeAttribute
+    { key: "aria-current", value: prop' value }
+
 instance Attr View_ AriaCurrent String where
-  attr AriaCurrent value = unsafeAttribute { key: "aria-current", value: prop' value }
+  attr AriaCurrent value = unsafeAttribute
+    { key: "aria-current", value: prop' value }

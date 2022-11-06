@@ -10,12 +10,21 @@ import Deku.Attribute (class Attr, prop', unsafeAttribute)
 data XlinkRole = XlinkRole
 
 instance Attr AnimateTransform_ XlinkRole String where
-  attr XlinkRole value = unsafeAttribute { key: "xlink:role", value: prop' value }
+  attr XlinkRole value = unsafeAttribute
+    { key: "xlink:role", value: prop' value }
+
 instance Attr FeImage_ XlinkRole String where
-  attr XlinkRole value = unsafeAttribute { key: "xlink:role", value: prop' value }
+  attr XlinkRole value = unsafeAttribute
+    { key: "xlink:role", value: prop' value }
+
 instance Attr Filter_ XlinkRole String where
-  attr XlinkRole value = unsafeAttribute { key: "xlink:role", value: prop' value }
+  attr XlinkRole value = unsafeAttribute
+    { key: "xlink:role", value: prop' value }
+
 instance Attr Image_ XlinkRole String where
-  attr XlinkRole value = unsafeAttribute { key: "xlink:role", value: prop' value }
+  attr XlinkRole value = unsafeAttribute
+    { key: "xlink:role", value: prop' value }
+
 instance Attr Mpath_ XlinkRole String where
-  attr XlinkRole value = unsafeAttribute { key: "xlink:role", value: prop' value }
+  attr XlinkRole value = unsafeAttribute
+    { key: "xlink:role", value: prop' value }

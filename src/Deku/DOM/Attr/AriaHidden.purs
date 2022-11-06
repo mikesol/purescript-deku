@@ -22,36 +22,69 @@ import Deku.Attribute (class Attr, prop', unsafeAttribute)
 data AriaHidden = AriaHidden
 
 instance Attr Circle_ AriaHidden String where
-  attr AriaHidden value = unsafeAttribute { key: "aria-hidden", value: prop' value }
+  attr AriaHidden value = unsafeAttribute
+    { key: "aria-hidden", value: prop' value }
+
 instance Attr Ellipse_ AriaHidden String where
-  attr AriaHidden value = unsafeAttribute { key: "aria-hidden", value: prop' value }
+  attr AriaHidden value = unsafeAttribute
+    { key: "aria-hidden", value: prop' value }
+
 instance Attr ForeignObject_ AriaHidden String where
-  attr AriaHidden value = unsafeAttribute { key: "aria-hidden", value: prop' value }
+  attr AriaHidden value = unsafeAttribute
+    { key: "aria-hidden", value: prop' value }
+
 instance Attr G_ AriaHidden String where
-  attr AriaHidden value = unsafeAttribute { key: "aria-hidden", value: prop' value }
+  attr AriaHidden value = unsafeAttribute
+    { key: "aria-hidden", value: prop' value }
+
 instance Attr Line_ AriaHidden String where
-  attr AriaHidden value = unsafeAttribute { key: "aria-hidden", value: prop' value }
+  attr AriaHidden value = unsafeAttribute
+    { key: "aria-hidden", value: prop' value }
+
 instance Attr Marker_ AriaHidden String where
-  attr AriaHidden value = unsafeAttribute { key: "aria-hidden", value: prop' value }
+  attr AriaHidden value = unsafeAttribute
+    { key: "aria-hidden", value: prop' value }
+
 instance Attr Path_ AriaHidden String where
-  attr AriaHidden value = unsafeAttribute { key: "aria-hidden", value: prop' value }
+  attr AriaHidden value = unsafeAttribute
+    { key: "aria-hidden", value: prop' value }
+
 instance Attr Polygon_ AriaHidden String where
-  attr AriaHidden value = unsafeAttribute { key: "aria-hidden", value: prop' value }
+  attr AriaHidden value = unsafeAttribute
+    { key: "aria-hidden", value: prop' value }
+
 instance Attr Polyline_ AriaHidden String where
-  attr AriaHidden value = unsafeAttribute { key: "aria-hidden", value: prop' value }
+  attr AriaHidden value = unsafeAttribute
+    { key: "aria-hidden", value: prop' value }
+
 instance Attr Rect_ AriaHidden String where
-  attr AriaHidden value = unsafeAttribute { key: "aria-hidden", value: prop' value }
+  attr AriaHidden value = unsafeAttribute
+    { key: "aria-hidden", value: prop' value }
+
 instance Attr Svg_ AriaHidden String where
-  attr AriaHidden value = unsafeAttribute { key: "aria-hidden", value: prop' value }
+  attr AriaHidden value = unsafeAttribute
+    { key: "aria-hidden", value: prop' value }
+
 instance Attr Symbol_ AriaHidden String where
-  attr AriaHidden value = unsafeAttribute { key: "aria-hidden", value: prop' value }
+  attr AriaHidden value = unsafeAttribute
+    { key: "aria-hidden", value: prop' value }
+
 instance Attr Text_ AriaHidden String where
-  attr AriaHidden value = unsafeAttribute { key: "aria-hidden", value: prop' value }
+  attr AriaHidden value = unsafeAttribute
+    { key: "aria-hidden", value: prop' value }
+
 instance Attr TextPath_ AriaHidden String where
-  attr AriaHidden value = unsafeAttribute { key: "aria-hidden", value: prop' value }
+  attr AriaHidden value = unsafeAttribute
+    { key: "aria-hidden", value: prop' value }
+
 instance Attr Tspan_ AriaHidden String where
-  attr AriaHidden value = unsafeAttribute { key: "aria-hidden", value: prop' value }
+  attr AriaHidden value = unsafeAttribute
+    { key: "aria-hidden", value: prop' value }
+
 instance Attr Use_ AriaHidden String where
-  attr AriaHidden value = unsafeAttribute { key: "aria-hidden", value: prop' value }
+  attr AriaHidden value = unsafeAttribute
+    { key: "aria-hidden", value: prop' value }
+
 instance Attr View_ AriaHidden String where
-  attr AriaHidden value = unsafeAttribute { key: "aria-hidden", value: prop' value }
+  attr AriaHidden value = unsafeAttribute
+    { key: "aria-hidden", value: prop' value }

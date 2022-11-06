@@ -12,16 +12,29 @@ import Deku.Attribute (class Attr, prop', unsafeAttribute)
 data PreserveAspectRatio = PreserveAspectRatio
 
 instance Attr FeImage_ PreserveAspectRatio String where
-  attr PreserveAspectRatio value = unsafeAttribute { key: "preserveAspectRatio", value: prop' value }
+  attr PreserveAspectRatio value = unsafeAttribute
+    { key: "preserveAspectRatio", value: prop' value }
+
 instance Attr Image_ PreserveAspectRatio String where
-  attr PreserveAspectRatio value = unsafeAttribute { key: "preserveAspectRatio", value: prop' value }
+  attr PreserveAspectRatio value = unsafeAttribute
+    { key: "preserveAspectRatio", value: prop' value }
+
 instance Attr Marker_ PreserveAspectRatio String where
-  attr PreserveAspectRatio value = unsafeAttribute { key: "preserveAspectRatio", value: prop' value }
+  attr PreserveAspectRatio value = unsafeAttribute
+    { key: "preserveAspectRatio", value: prop' value }
+
 instance Attr Pattern_ PreserveAspectRatio String where
-  attr PreserveAspectRatio value = unsafeAttribute { key: "preserveAspectRatio", value: prop' value }
+  attr PreserveAspectRatio value = unsafeAttribute
+    { key: "preserveAspectRatio", value: prop' value }
+
 instance Attr Svg_ PreserveAspectRatio String where
-  attr PreserveAspectRatio value = unsafeAttribute { key: "preserveAspectRatio", value: prop' value }
+  attr PreserveAspectRatio value = unsafeAttribute
+    { key: "preserveAspectRatio", value: prop' value }
+
 instance Attr Symbol_ PreserveAspectRatio String where
-  attr PreserveAspectRatio value = unsafeAttribute { key: "preserveAspectRatio", value: prop' value }
+  attr PreserveAspectRatio value = unsafeAttribute
+    { key: "preserveAspectRatio", value: prop' value }
+
 instance Attr View_ PreserveAspectRatio String where
-  attr PreserveAspectRatio value = unsafeAttribute { key: "preserveAspectRatio", value: prop' value }
+  attr PreserveAspectRatio value = unsafeAttribute
+    { key: "preserveAspectRatio", value: prop' value }

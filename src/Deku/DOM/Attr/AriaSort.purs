@@ -23,35 +23,51 @@ data AriaSort = AriaSort
 
 instance Attr Circle_ AriaSort String where
   attr AriaSort value = unsafeAttribute { key: "aria-sort", value: prop' value }
+
 instance Attr Ellipse_ AriaSort String where
   attr AriaSort value = unsafeAttribute { key: "aria-sort", value: prop' value }
+
 instance Attr ForeignObject_ AriaSort String where
   attr AriaSort value = unsafeAttribute { key: "aria-sort", value: prop' value }
+
 instance Attr G_ AriaSort String where
   attr AriaSort value = unsafeAttribute { key: "aria-sort", value: prop' value }
+
 instance Attr Line_ AriaSort String where
   attr AriaSort value = unsafeAttribute { key: "aria-sort", value: prop' value }
+
 instance Attr Marker_ AriaSort String where
   attr AriaSort value = unsafeAttribute { key: "aria-sort", value: prop' value }
+
 instance Attr Path_ AriaSort String where
   attr AriaSort value = unsafeAttribute { key: "aria-sort", value: prop' value }
+
 instance Attr Polygon_ AriaSort String where
   attr AriaSort value = unsafeAttribute { key: "aria-sort", value: prop' value }
+
 instance Attr Polyline_ AriaSort String where
   attr AriaSort value = unsafeAttribute { key: "aria-sort", value: prop' value }
+
 instance Attr Rect_ AriaSort String where
   attr AriaSort value = unsafeAttribute { key: "aria-sort", value: prop' value }
+
 instance Attr Svg_ AriaSort String where
   attr AriaSort value = unsafeAttribute { key: "aria-sort", value: prop' value }
+
 instance Attr Symbol_ AriaSort String where
   attr AriaSort value = unsafeAttribute { key: "aria-sort", value: prop' value }
+
 instance Attr Text_ AriaSort String where
   attr AriaSort value = unsafeAttribute { key: "aria-sort", value: prop' value }
+
 instance Attr TextPath_ AriaSort String where
   attr AriaSort value = unsafeAttribute { key: "aria-sort", value: prop' value }
+
 instance Attr Tspan_ AriaSort String where
   attr AriaSort value = unsafeAttribute { key: "aria-sort", value: prop' value }
+
 instance Attr Use_ AriaSort String where
   attr AriaSort value = unsafeAttribute { key: "aria-sort", value: prop' value }
+
 instance Attr View_ AriaSort String where
   attr AriaSort value = unsafeAttribute { key: "aria-sort", value: prop' value }

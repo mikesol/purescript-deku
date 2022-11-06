@@ -7,6 +7,9 @@ import Deku.Attribute (class Attr, prop', unsafeAttribute)
 data SurfaceScale = SurfaceScale
 
 instance Attr FeDiffuseLighting_ SurfaceScale String where
-  attr SurfaceScale value = unsafeAttribute { key: "surfaceScale", value: prop' value }
+  attr SurfaceScale value = unsafeAttribute
+    { key: "surfaceScale", value: prop' value }
+
 instance Attr FeSpecularLighting_ SurfaceScale String where
-  attr SurfaceScale value = unsafeAttribute { key: "surfaceScale", value: prop' value }
+  attr SurfaceScale value = unsafeAttribute
+    { key: "surfaceScale", value: prop' value }

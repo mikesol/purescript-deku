@@ -10,9 +10,12 @@ data Restart = Restart
 
 instance Attr Animate_ Restart String where
   attr Restart value = unsafeAttribute { key: "restart", value: prop' value }
+
 instance Attr AnimateMotion_ Restart String where
   attr Restart value = unsafeAttribute { key: "restart", value: prop' value }
+
 instance Attr AnimateTransform_ Restart String where
   attr Restart value = unsafeAttribute { key: "restart", value: prop' value }
+
 instance Attr Set_ Restart String where
   attr Restart value = unsafeAttribute { key: "restart", value: prop' value }

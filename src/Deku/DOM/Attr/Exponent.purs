@@ -10,9 +10,12 @@ data Exponent = Exponent
 
 instance Attr FeFuncA_ Exponent String where
   attr Exponent value = unsafeAttribute { key: "exponent", value: prop' value }
+
 instance Attr FeFuncB_ Exponent String where
   attr Exponent value = unsafeAttribute { key: "exponent", value: prop' value }
+
 instance Attr FeFuncG_ Exponent String where
   attr Exponent value = unsafeAttribute { key: "exponent", value: prop' value }
+
 instance Attr FeFuncR_ Exponent String where
   attr Exponent value = unsafeAttribute { key: "exponent", value: prop' value }

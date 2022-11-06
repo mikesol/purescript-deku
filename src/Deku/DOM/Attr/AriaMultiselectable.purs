@@ -22,36 +22,69 @@ import Deku.Attribute (class Attr, prop', unsafeAttribute)
 data AriaMultiselectable = AriaMultiselectable
 
 instance Attr Circle_ AriaMultiselectable String where
-  attr AriaMultiselectable value = unsafeAttribute { key: "aria-multiselectable", value: prop' value }
+  attr AriaMultiselectable value = unsafeAttribute
+    { key: "aria-multiselectable", value: prop' value }
+
 instance Attr Ellipse_ AriaMultiselectable String where
-  attr AriaMultiselectable value = unsafeAttribute { key: "aria-multiselectable", value: prop' value }
+  attr AriaMultiselectable value = unsafeAttribute
+    { key: "aria-multiselectable", value: prop' value }
+
 instance Attr ForeignObject_ AriaMultiselectable String where
-  attr AriaMultiselectable value = unsafeAttribute { key: "aria-multiselectable", value: prop' value }
+  attr AriaMultiselectable value = unsafeAttribute
+    { key: "aria-multiselectable", value: prop' value }
+
 instance Attr G_ AriaMultiselectable String where
-  attr AriaMultiselectable value = unsafeAttribute { key: "aria-multiselectable", value: prop' value }
+  attr AriaMultiselectable value = unsafeAttribute
+    { key: "aria-multiselectable", value: prop' value }
+
 instance Attr Line_ AriaMultiselectable String where
-  attr AriaMultiselectable value = unsafeAttribute { key: "aria-multiselectable", value: prop' value }
+  attr AriaMultiselectable value = unsafeAttribute
+    { key: "aria-multiselectable", value: prop' value }
+
 instance Attr Marker_ AriaMultiselectable String where
-  attr AriaMultiselectable value = unsafeAttribute { key: "aria-multiselectable", value: prop' value }
+  attr AriaMultiselectable value = unsafeAttribute
+    { key: "aria-multiselectable", value: prop' value }
+
 instance Attr Path_ AriaMultiselectable String where
-  attr AriaMultiselectable value = unsafeAttribute { key: "aria-multiselectable", value: prop' value }
+  attr AriaMultiselectable value = unsafeAttribute
+    { key: "aria-multiselectable", value: prop' value }
+
 instance Attr Polygon_ AriaMultiselectable String where
-  attr AriaMultiselectable value = unsafeAttribute { key: "aria-multiselectable", value: prop' value }
+  attr AriaMultiselectable value = unsafeAttribute
+    { key: "aria-multiselectable", value: prop' value }
+
 instance Attr Polyline_ AriaMultiselectable String where
-  attr AriaMultiselectable value = unsafeAttribute { key: "aria-multiselectable", value: prop' value }
+  attr AriaMultiselectable value = unsafeAttribute
+    { key: "aria-multiselectable", value: prop' value }
+
 instance Attr Rect_ AriaMultiselectable String where
-  attr AriaMultiselectable value = unsafeAttribute { key: "aria-multiselectable", value: prop' value }
+  attr AriaMultiselectable value = unsafeAttribute
+    { key: "aria-multiselectable", value: prop' value }
+
 instance Attr Svg_ AriaMultiselectable String where
-  attr AriaMultiselectable value = unsafeAttribute { key: "aria-multiselectable", value: prop' value }
+  attr AriaMultiselectable value = unsafeAttribute
+    { key: "aria-multiselectable", value: prop' value }
+
 instance Attr Symbol_ AriaMultiselectable String where
-  attr AriaMultiselectable value = unsafeAttribute { key: "aria-multiselectable", value: prop' value }
+  attr AriaMultiselectable value = unsafeAttribute
+    { key: "aria-multiselectable", value: prop' value }
+
 instance Attr Text_ AriaMultiselectable String where
-  attr AriaMultiselectable value = unsafeAttribute { key: "aria-multiselectable", value: prop' value }
+  attr AriaMultiselectable value = unsafeAttribute
+    { key: "aria-multiselectable", value: prop' value }
+
 instance Attr TextPath_ AriaMultiselectable String where
-  attr AriaMultiselectable value = unsafeAttribute { key: "aria-multiselectable", value: prop' value }
+  attr AriaMultiselectable value = unsafeAttribute
+    { key: "aria-multiselectable", value: prop' value }
+
 instance Attr Tspan_ AriaMultiselectable String where
-  attr AriaMultiselectable value = unsafeAttribute { key: "aria-multiselectable", value: prop' value }
+  attr AriaMultiselectable value = unsafeAttribute
+    { key: "aria-multiselectable", value: prop' value }
+
 instance Attr Use_ AriaMultiselectable String where
-  attr AriaMultiselectable value = unsafeAttribute { key: "aria-multiselectable", value: prop' value }
+  attr AriaMultiselectable value = unsafeAttribute
+    { key: "aria-multiselectable", value: prop' value }
+
 instance Attr View_ AriaMultiselectable String where
-  attr AriaMultiselectable value = unsafeAttribute { key: "aria-multiselectable", value: prop' value }
+  attr AriaMultiselectable value = unsafeAttribute
+    { key: "aria-multiselectable", value: prop' value }

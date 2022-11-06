@@ -6,4 +6,5 @@ import Deku.Attribute (class Attr, prop', unsafeAttribute)
 data ClipPathUnits = ClipPathUnits
 
 instance Attr ClipPath_ ClipPathUnits String where
-  attr ClipPathUnits value = unsafeAttribute { key: "clipPathUnits", value: prop' value }
+  attr ClipPathUnits value = unsafeAttribute
+    { key: "clipPathUnits", value: prop' value }

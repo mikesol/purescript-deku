@@ -47,83 +47,123 @@ data Mask = Mask
 
 instance Attr Circle_ Mask String where
   attr Mask value = unsafeAttribute { key: "mask", value: prop' value }
+
 instance Attr ClipPath_ Mask String where
   attr Mask value = unsafeAttribute { key: "mask", value: prop' value }
+
 instance Attr Defs_ Mask String where
   attr Mask value = unsafeAttribute { key: "mask", value: prop' value }
+
 instance Attr Ellipse_ Mask String where
   attr Mask value = unsafeAttribute { key: "mask", value: prop' value }
+
 instance Attr FeBlend_ Mask String where
   attr Mask value = unsafeAttribute { key: "mask", value: prop' value }
+
 instance Attr FeColorMatrix_ Mask String where
   attr Mask value = unsafeAttribute { key: "mask", value: prop' value }
+
 instance Attr FeComponentTransfer_ Mask String where
   attr Mask value = unsafeAttribute { key: "mask", value: prop' value }
+
 instance Attr FeComposite_ Mask String where
   attr Mask value = unsafeAttribute { key: "mask", value: prop' value }
+
 instance Attr FeConvolveMatrix_ Mask String where
   attr Mask value = unsafeAttribute { key: "mask", value: prop' value }
+
 instance Attr FeDiffuseLighting_ Mask String where
   attr Mask value = unsafeAttribute { key: "mask", value: prop' value }
+
 instance Attr FeDisplacementMap_ Mask String where
   attr Mask value = unsafeAttribute { key: "mask", value: prop' value }
+
 instance Attr FeFlood_ Mask String where
   attr Mask value = unsafeAttribute { key: "mask", value: prop' value }
+
 instance Attr FeGaussianBlur_ Mask String where
   attr Mask value = unsafeAttribute { key: "mask", value: prop' value }
+
 instance Attr FeImage_ Mask String where
   attr Mask value = unsafeAttribute { key: "mask", value: prop' value }
+
 instance Attr FeMerge_ Mask String where
   attr Mask value = unsafeAttribute { key: "mask", value: prop' value }
+
 instance Attr FeMorphology_ Mask String where
   attr Mask value = unsafeAttribute { key: "mask", value: prop' value }
+
 instance Attr FeOffset_ Mask String where
   attr Mask value = unsafeAttribute { key: "mask", value: prop' value }
+
 instance Attr FeSpecularLighting_ Mask String where
   attr Mask value = unsafeAttribute { key: "mask", value: prop' value }
+
 instance Attr FeTile_ Mask String where
   attr Mask value = unsafeAttribute { key: "mask", value: prop' value }
+
 instance Attr FeTurbulence_ Mask String where
   attr Mask value = unsafeAttribute { key: "mask", value: prop' value }
+
 instance Attr Filter_ Mask String where
   attr Mask value = unsafeAttribute { key: "mask", value: prop' value }
+
 instance Attr ForeignObject_ Mask String where
   attr Mask value = unsafeAttribute { key: "mask", value: prop' value }
+
 instance Attr G_ Mask String where
   attr Mask value = unsafeAttribute { key: "mask", value: prop' value }
+
 instance Attr Image_ Mask String where
   attr Mask value = unsafeAttribute { key: "mask", value: prop' value }
+
 instance Attr Line_ Mask String where
   attr Mask value = unsafeAttribute { key: "mask", value: prop' value }
+
 instance Attr LinearGradient_ Mask String where
   attr Mask value = unsafeAttribute { key: "mask", value: prop' value }
+
 instance Attr Marker_ Mask String where
   attr Mask value = unsafeAttribute { key: "mask", value: prop' value }
+
 instance Attr Mask_ Mask String where
   attr Mask value = unsafeAttribute { key: "mask", value: prop' value }
+
 instance Attr Path_ Mask String where
   attr Mask value = unsafeAttribute { key: "mask", value: prop' value }
+
 instance Attr Pattern_ Mask String where
   attr Mask value = unsafeAttribute { key: "mask", value: prop' value }
+
 instance Attr Polygon_ Mask String where
   attr Mask value = unsafeAttribute { key: "mask", value: prop' value }
+
 instance Attr Polyline_ Mask String where
   attr Mask value = unsafeAttribute { key: "mask", value: prop' value }
+
 instance Attr RadialGradient_ Mask String where
   attr Mask value = unsafeAttribute { key: "mask", value: prop' value }
+
 instance Attr Rect_ Mask String where
   attr Mask value = unsafeAttribute { key: "mask", value: prop' value }
+
 instance Attr Svg_ Mask String where
   attr Mask value = unsafeAttribute { key: "mask", value: prop' value }
+
 instance Attr Switch_ Mask String where
   attr Mask value = unsafeAttribute { key: "mask", value: prop' value }
+
 instance Attr Symbol_ Mask String where
   attr Mask value = unsafeAttribute { key: "mask", value: prop' value }
+
 instance Attr Text_ Mask String where
   attr Mask value = unsafeAttribute { key: "mask", value: prop' value }
+
 instance Attr TextPath_ Mask String where
   attr Mask value = unsafeAttribute { key: "mask", value: prop' value }
+
 instance Attr Tspan_ Mask String where
   attr Mask value = unsafeAttribute { key: "mask", value: prop' value }
+
 instance Attr Use_ Mask String where
   attr Mask value = unsafeAttribute { key: "mask", value: prop' value }

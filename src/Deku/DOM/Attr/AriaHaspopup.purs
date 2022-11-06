@@ -22,36 +22,69 @@ import Deku.Attribute (class Attr, prop', unsafeAttribute)
 data AriaHaspopup = AriaHaspopup
 
 instance Attr Circle_ AriaHaspopup String where
-  attr AriaHaspopup value = unsafeAttribute { key: "aria-haspopup", value: prop' value }
+  attr AriaHaspopup value = unsafeAttribute
+    { key: "aria-haspopup", value: prop' value }
+
 instance Attr Ellipse_ AriaHaspopup String where
-  attr AriaHaspopup value = unsafeAttribute { key: "aria-haspopup", value: prop' value }
+  attr AriaHaspopup value = unsafeAttribute
+    { key: "aria-haspopup", value: prop' value }
+
 instance Attr ForeignObject_ AriaHaspopup String where
-  attr AriaHaspopup value = unsafeAttribute { key: "aria-haspopup", value: prop' value }
+  attr AriaHaspopup value = unsafeAttribute
+    { key: "aria-haspopup", value: prop' value }
+
 instance Attr G_ AriaHaspopup String where
-  attr AriaHaspopup value = unsafeAttribute { key: "aria-haspopup", value: prop' value }
+  attr AriaHaspopup value = unsafeAttribute
+    { key: "aria-haspopup", value: prop' value }
+
 instance Attr Line_ AriaHaspopup String where
-  attr AriaHaspopup value = unsafeAttribute { key: "aria-haspopup", value: prop' value }
+  attr AriaHaspopup value = unsafeAttribute
+    { key: "aria-haspopup", value: prop' value }
+
 instance Attr Marker_ AriaHaspopup String where
-  attr AriaHaspopup value = unsafeAttribute { key: "aria-haspopup", value: prop' value }
+  attr AriaHaspopup value = unsafeAttribute
+    { key: "aria-haspopup", value: prop' value }
+
 instance Attr Path_ AriaHaspopup String where
-  attr AriaHaspopup value = unsafeAttribute { key: "aria-haspopup", value: prop' value }
+  attr AriaHaspopup value = unsafeAttribute
+    { key: "aria-haspopup", value: prop' value }
+
 instance Attr Polygon_ AriaHaspopup String where
-  attr AriaHaspopup value = unsafeAttribute { key: "aria-haspopup", value: prop' value }
+  attr AriaHaspopup value = unsafeAttribute
+    { key: "aria-haspopup", value: prop' value }
+
 instance Attr Polyline_ AriaHaspopup String where
-  attr AriaHaspopup value = unsafeAttribute { key: "aria-haspopup", value: prop' value }
+  attr AriaHaspopup value = unsafeAttribute
+    { key: "aria-haspopup", value: prop' value }
+
 instance Attr Rect_ AriaHaspopup String where
-  attr AriaHaspopup value = unsafeAttribute { key: "aria-haspopup", value: prop' value }
+  attr AriaHaspopup value = unsafeAttribute
+    { key: "aria-haspopup", value: prop' value }
+
 instance Attr Svg_ AriaHaspopup String where
-  attr AriaHaspopup value = unsafeAttribute { key: "aria-haspopup", value: prop' value }
+  attr AriaHaspopup value = unsafeAttribute
+    { key: "aria-haspopup", value: prop' value }
+
 instance Attr Symbol_ AriaHaspopup String where
-  attr AriaHaspopup value = unsafeAttribute { key: "aria-haspopup", value: prop' value }
+  attr AriaHaspopup value = unsafeAttribute
+    { key: "aria-haspopup", value: prop' value }
+
 instance Attr Text_ AriaHaspopup String where
-  attr AriaHaspopup value = unsafeAttribute { key: "aria-haspopup", value: prop' value }
+  attr AriaHaspopup value = unsafeAttribute
+    { key: "aria-haspopup", value: prop' value }
+
 instance Attr TextPath_ AriaHaspopup String where
-  attr AriaHaspopup value = unsafeAttribute { key: "aria-haspopup", value: prop' value }
+  attr AriaHaspopup value = unsafeAttribute
+    { key: "aria-haspopup", value: prop' value }
+
 instance Attr Tspan_ AriaHaspopup String where
-  attr AriaHaspopup value = unsafeAttribute { key: "aria-haspopup", value: prop' value }
+  attr AriaHaspopup value = unsafeAttribute
+    { key: "aria-haspopup", value: prop' value }
+
 instance Attr Use_ AriaHaspopup String where
-  attr AriaHaspopup value = unsafeAttribute { key: "aria-haspopup", value: prop' value }
+  attr AriaHaspopup value = unsafeAttribute
+    { key: "aria-haspopup", value: prop' value }
+
 instance Attr View_ AriaHaspopup String where
-  attr AriaHaspopup value = unsafeAttribute { key: "aria-haspopup", value: prop' value }
+  attr AriaHaspopup value = unsafeAttribute
+    { key: "aria-haspopup", value: prop' value }

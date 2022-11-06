@@ -44,80 +44,157 @@ import Deku.Attribute (class Attr, prop', unsafeAttribute)
 data PointerEvents = PointerEvents
 
 instance Attr Circle_ PointerEvents String where
-  attr PointerEvents value = unsafeAttribute { key: "pointer-events", value: prop' value }
+  attr PointerEvents value = unsafeAttribute
+    { key: "pointer-events", value: prop' value }
+
 instance Attr Defs_ PointerEvents String where
-  attr PointerEvents value = unsafeAttribute { key: "pointer-events", value: prop' value }
+  attr PointerEvents value = unsafeAttribute
+    { key: "pointer-events", value: prop' value }
+
 instance Attr Ellipse_ PointerEvents String where
-  attr PointerEvents value = unsafeAttribute { key: "pointer-events", value: prop' value }
+  attr PointerEvents value = unsafeAttribute
+    { key: "pointer-events", value: prop' value }
+
 instance Attr FeBlend_ PointerEvents String where
-  attr PointerEvents value = unsafeAttribute { key: "pointer-events", value: prop' value }
+  attr PointerEvents value = unsafeAttribute
+    { key: "pointer-events", value: prop' value }
+
 instance Attr FeColorMatrix_ PointerEvents String where
-  attr PointerEvents value = unsafeAttribute { key: "pointer-events", value: prop' value }
+  attr PointerEvents value = unsafeAttribute
+    { key: "pointer-events", value: prop' value }
+
 instance Attr FeComponentTransfer_ PointerEvents String where
-  attr PointerEvents value = unsafeAttribute { key: "pointer-events", value: prop' value }
+  attr PointerEvents value = unsafeAttribute
+    { key: "pointer-events", value: prop' value }
+
 instance Attr FeComposite_ PointerEvents String where
-  attr PointerEvents value = unsafeAttribute { key: "pointer-events", value: prop' value }
+  attr PointerEvents value = unsafeAttribute
+    { key: "pointer-events", value: prop' value }
+
 instance Attr FeConvolveMatrix_ PointerEvents String where
-  attr PointerEvents value = unsafeAttribute { key: "pointer-events", value: prop' value }
+  attr PointerEvents value = unsafeAttribute
+    { key: "pointer-events", value: prop' value }
+
 instance Attr FeDiffuseLighting_ PointerEvents String where
-  attr PointerEvents value = unsafeAttribute { key: "pointer-events", value: prop' value }
+  attr PointerEvents value = unsafeAttribute
+    { key: "pointer-events", value: prop' value }
+
 instance Attr FeDisplacementMap_ PointerEvents String where
-  attr PointerEvents value = unsafeAttribute { key: "pointer-events", value: prop' value }
+  attr PointerEvents value = unsafeAttribute
+    { key: "pointer-events", value: prop' value }
+
 instance Attr FeFlood_ PointerEvents String where
-  attr PointerEvents value = unsafeAttribute { key: "pointer-events", value: prop' value }
+  attr PointerEvents value = unsafeAttribute
+    { key: "pointer-events", value: prop' value }
+
 instance Attr FeGaussianBlur_ PointerEvents String where
-  attr PointerEvents value = unsafeAttribute { key: "pointer-events", value: prop' value }
+  attr PointerEvents value = unsafeAttribute
+    { key: "pointer-events", value: prop' value }
+
 instance Attr FeImage_ PointerEvents String where
-  attr PointerEvents value = unsafeAttribute { key: "pointer-events", value: prop' value }
+  attr PointerEvents value = unsafeAttribute
+    { key: "pointer-events", value: prop' value }
+
 instance Attr FeMerge_ PointerEvents String where
-  attr PointerEvents value = unsafeAttribute { key: "pointer-events", value: prop' value }
+  attr PointerEvents value = unsafeAttribute
+    { key: "pointer-events", value: prop' value }
+
 instance Attr FeMorphology_ PointerEvents String where
-  attr PointerEvents value = unsafeAttribute { key: "pointer-events", value: prop' value }
+  attr PointerEvents value = unsafeAttribute
+    { key: "pointer-events", value: prop' value }
+
 instance Attr FeOffset_ PointerEvents String where
-  attr PointerEvents value = unsafeAttribute { key: "pointer-events", value: prop' value }
+  attr PointerEvents value = unsafeAttribute
+    { key: "pointer-events", value: prop' value }
+
 instance Attr FeSpecularLighting_ PointerEvents String where
-  attr PointerEvents value = unsafeAttribute { key: "pointer-events", value: prop' value }
+  attr PointerEvents value = unsafeAttribute
+    { key: "pointer-events", value: prop' value }
+
 instance Attr FeTile_ PointerEvents String where
-  attr PointerEvents value = unsafeAttribute { key: "pointer-events", value: prop' value }
+  attr PointerEvents value = unsafeAttribute
+    { key: "pointer-events", value: prop' value }
+
 instance Attr FeTurbulence_ PointerEvents String where
-  attr PointerEvents value = unsafeAttribute { key: "pointer-events", value: prop' value }
+  attr PointerEvents value = unsafeAttribute
+    { key: "pointer-events", value: prop' value }
+
 instance Attr Filter_ PointerEvents String where
-  attr PointerEvents value = unsafeAttribute { key: "pointer-events", value: prop' value }
+  attr PointerEvents value = unsafeAttribute
+    { key: "pointer-events", value: prop' value }
+
 instance Attr ForeignObject_ PointerEvents String where
-  attr PointerEvents value = unsafeAttribute { key: "pointer-events", value: prop' value }
+  attr PointerEvents value = unsafeAttribute
+    { key: "pointer-events", value: prop' value }
+
 instance Attr G_ PointerEvents String where
-  attr PointerEvents value = unsafeAttribute { key: "pointer-events", value: prop' value }
+  attr PointerEvents value = unsafeAttribute
+    { key: "pointer-events", value: prop' value }
+
 instance Attr Image_ PointerEvents String where
-  attr PointerEvents value = unsafeAttribute { key: "pointer-events", value: prop' value }
+  attr PointerEvents value = unsafeAttribute
+    { key: "pointer-events", value: prop' value }
+
 instance Attr Line_ PointerEvents String where
-  attr PointerEvents value = unsafeAttribute { key: "pointer-events", value: prop' value }
+  attr PointerEvents value = unsafeAttribute
+    { key: "pointer-events", value: prop' value }
+
 instance Attr LinearGradient_ PointerEvents String where
-  attr PointerEvents value = unsafeAttribute { key: "pointer-events", value: prop' value }
+  attr PointerEvents value = unsafeAttribute
+    { key: "pointer-events", value: prop' value }
+
 instance Attr Marker_ PointerEvents String where
-  attr PointerEvents value = unsafeAttribute { key: "pointer-events", value: prop' value }
+  attr PointerEvents value = unsafeAttribute
+    { key: "pointer-events", value: prop' value }
+
 instance Attr Path_ PointerEvents String where
-  attr PointerEvents value = unsafeAttribute { key: "pointer-events", value: prop' value }
+  attr PointerEvents value = unsafeAttribute
+    { key: "pointer-events", value: prop' value }
+
 instance Attr Pattern_ PointerEvents String where
-  attr PointerEvents value = unsafeAttribute { key: "pointer-events", value: prop' value }
+  attr PointerEvents value = unsafeAttribute
+    { key: "pointer-events", value: prop' value }
+
 instance Attr Polygon_ PointerEvents String where
-  attr PointerEvents value = unsafeAttribute { key: "pointer-events", value: prop' value }
+  attr PointerEvents value = unsafeAttribute
+    { key: "pointer-events", value: prop' value }
+
 instance Attr Polyline_ PointerEvents String where
-  attr PointerEvents value = unsafeAttribute { key: "pointer-events", value: prop' value }
+  attr PointerEvents value = unsafeAttribute
+    { key: "pointer-events", value: prop' value }
+
 instance Attr RadialGradient_ PointerEvents String where
-  attr PointerEvents value = unsafeAttribute { key: "pointer-events", value: prop' value }
+  attr PointerEvents value = unsafeAttribute
+    { key: "pointer-events", value: prop' value }
+
 instance Attr Rect_ PointerEvents String where
-  attr PointerEvents value = unsafeAttribute { key: "pointer-events", value: prop' value }
+  attr PointerEvents value = unsafeAttribute
+    { key: "pointer-events", value: prop' value }
+
 instance Attr Svg_ PointerEvents String where
-  attr PointerEvents value = unsafeAttribute { key: "pointer-events", value: prop' value }
+  attr PointerEvents value = unsafeAttribute
+    { key: "pointer-events", value: prop' value }
+
 instance Attr Switch_ PointerEvents String where
-  attr PointerEvents value = unsafeAttribute { key: "pointer-events", value: prop' value }
+  attr PointerEvents value = unsafeAttribute
+    { key: "pointer-events", value: prop' value }
+
 instance Attr Symbol_ PointerEvents String where
-  attr PointerEvents value = unsafeAttribute { key: "pointer-events", value: prop' value }
+  attr PointerEvents value = unsafeAttribute
+    { key: "pointer-events", value: prop' value }
+
 instance Attr Text_ PointerEvents String where
-  attr PointerEvents value = unsafeAttribute { key: "pointer-events", value: prop' value }
+  attr PointerEvents value = unsafeAttribute
+    { key: "pointer-events", value: prop' value }
+
 instance Attr TextPath_ PointerEvents String where
-  attr PointerEvents value = unsafeAttribute { key: "pointer-events", value: prop' value }
+  attr PointerEvents value = unsafeAttribute
+    { key: "pointer-events", value: prop' value }
+
 instance Attr Tspan_ PointerEvents String where
-  attr PointerEvents value = unsafeAttribute { key: "pointer-events", value: prop' value }
+  attr PointerEvents value = unsafeAttribute
+    { key: "pointer-events", value: prop' value }
+
 instance Attr Use_ PointerEvents String where
-  attr PointerEvents value = unsafeAttribute { key: "pointer-events", value: prop' value }
+  attr PointerEvents value = unsafeAttribute
+    { key: "pointer-events", value: prop' value }

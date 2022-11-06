@@ -22,36 +22,69 @@ import Deku.Attribute (class Attr, prop', unsafeAttribute)
 data AriaErrormessage = AriaErrormessage
 
 instance Attr Circle_ AriaErrormessage String where
-  attr AriaErrormessage value = unsafeAttribute { key: "aria-errormessage", value: prop' value }
+  attr AriaErrormessage value = unsafeAttribute
+    { key: "aria-errormessage", value: prop' value }
+
 instance Attr Ellipse_ AriaErrormessage String where
-  attr AriaErrormessage value = unsafeAttribute { key: "aria-errormessage", value: prop' value }
+  attr AriaErrormessage value = unsafeAttribute
+    { key: "aria-errormessage", value: prop' value }
+
 instance Attr ForeignObject_ AriaErrormessage String where
-  attr AriaErrormessage value = unsafeAttribute { key: "aria-errormessage", value: prop' value }
+  attr AriaErrormessage value = unsafeAttribute
+    { key: "aria-errormessage", value: prop' value }
+
 instance Attr G_ AriaErrormessage String where
-  attr AriaErrormessage value = unsafeAttribute { key: "aria-errormessage", value: prop' value }
+  attr AriaErrormessage value = unsafeAttribute
+    { key: "aria-errormessage", value: prop' value }
+
 instance Attr Line_ AriaErrormessage String where
-  attr AriaErrormessage value = unsafeAttribute { key: "aria-errormessage", value: prop' value }
+  attr AriaErrormessage value = unsafeAttribute
+    { key: "aria-errormessage", value: prop' value }
+
 instance Attr Marker_ AriaErrormessage String where
-  attr AriaErrormessage value = unsafeAttribute { key: "aria-errormessage", value: prop' value }
+  attr AriaErrormessage value = unsafeAttribute
+    { key: "aria-errormessage", value: prop' value }
+
 instance Attr Path_ AriaErrormessage String where
-  attr AriaErrormessage value = unsafeAttribute { key: "aria-errormessage", value: prop' value }
+  attr AriaErrormessage value = unsafeAttribute
+    { key: "aria-errormessage", value: prop' value }
+
 instance Attr Polygon_ AriaErrormessage String where
-  attr AriaErrormessage value = unsafeAttribute { key: "aria-errormessage", value: prop' value }
+  attr AriaErrormessage value = unsafeAttribute
+    { key: "aria-errormessage", value: prop' value }
+
 instance Attr Polyline_ AriaErrormessage String where
-  attr AriaErrormessage value = unsafeAttribute { key: "aria-errormessage", value: prop' value }
+  attr AriaErrormessage value = unsafeAttribute
+    { key: "aria-errormessage", value: prop' value }
+
 instance Attr Rect_ AriaErrormessage String where
-  attr AriaErrormessage value = unsafeAttribute { key: "aria-errormessage", value: prop' value }
+  attr AriaErrormessage value = unsafeAttribute
+    { key: "aria-errormessage", value: prop' value }
+
 instance Attr Svg_ AriaErrormessage String where
-  attr AriaErrormessage value = unsafeAttribute { key: "aria-errormessage", value: prop' value }
+  attr AriaErrormessage value = unsafeAttribute
+    { key: "aria-errormessage", value: prop' value }
+
 instance Attr Symbol_ AriaErrormessage String where
-  attr AriaErrormessage value = unsafeAttribute { key: "aria-errormessage", value: prop' value }
+  attr AriaErrormessage value = unsafeAttribute
+    { key: "aria-errormessage", value: prop' value }
+
 instance Attr Text_ AriaErrormessage String where
-  attr AriaErrormessage value = unsafeAttribute { key: "aria-errormessage", value: prop' value }
+  attr AriaErrormessage value = unsafeAttribute
+    { key: "aria-errormessage", value: prop' value }
+
 instance Attr TextPath_ AriaErrormessage String where
-  attr AriaErrormessage value = unsafeAttribute { key: "aria-errormessage", value: prop' value }
+  attr AriaErrormessage value = unsafeAttribute
+    { key: "aria-errormessage", value: prop' value }
+
 instance Attr Tspan_ AriaErrormessage String where
-  attr AriaErrormessage value = unsafeAttribute { key: "aria-errormessage", value: prop' value }
+  attr AriaErrormessage value = unsafeAttribute
+    { key: "aria-errormessage", value: prop' value }
+
 instance Attr Use_ AriaErrormessage String where
-  attr AriaErrormessage value = unsafeAttribute { key: "aria-errormessage", value: prop' value }
+  attr AriaErrormessage value = unsafeAttribute
+    { key: "aria-errormessage", value: prop' value }
+
 instance Attr View_ AriaErrormessage String where
-  attr AriaErrormessage value = unsafeAttribute { key: "aria-errormessage", value: prop' value }
+  attr AriaErrormessage value = unsafeAttribute
+    { key: "aria-errormessage", value: prop' value }

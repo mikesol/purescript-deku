@@ -22,36 +22,69 @@ import Deku.Attribute (class Attr, prop', unsafeAttribute)
 data AriaKeyshortcuts = AriaKeyshortcuts
 
 instance Attr Circle_ AriaKeyshortcuts String where
-  attr AriaKeyshortcuts value = unsafeAttribute { key: "aria-keyshortcuts", value: prop' value }
+  attr AriaKeyshortcuts value = unsafeAttribute
+    { key: "aria-keyshortcuts", value: prop' value }
+
 instance Attr Ellipse_ AriaKeyshortcuts String where
-  attr AriaKeyshortcuts value = unsafeAttribute { key: "aria-keyshortcuts", value: prop' value }
+  attr AriaKeyshortcuts value = unsafeAttribute
+    { key: "aria-keyshortcuts", value: prop' value }
+
 instance Attr ForeignObject_ AriaKeyshortcuts String where
-  attr AriaKeyshortcuts value = unsafeAttribute { key: "aria-keyshortcuts", value: prop' value }
+  attr AriaKeyshortcuts value = unsafeAttribute
+    { key: "aria-keyshortcuts", value: prop' value }
+
 instance Attr G_ AriaKeyshortcuts String where
-  attr AriaKeyshortcuts value = unsafeAttribute { key: "aria-keyshortcuts", value: prop' value }
+  attr AriaKeyshortcuts value = unsafeAttribute
+    { key: "aria-keyshortcuts", value: prop' value }
+
 instance Attr Line_ AriaKeyshortcuts String where
-  attr AriaKeyshortcuts value = unsafeAttribute { key: "aria-keyshortcuts", value: prop' value }
+  attr AriaKeyshortcuts value = unsafeAttribute
+    { key: "aria-keyshortcuts", value: prop' value }
+
 instance Attr Marker_ AriaKeyshortcuts String where
-  attr AriaKeyshortcuts value = unsafeAttribute { key: "aria-keyshortcuts", value: prop' value }
+  attr AriaKeyshortcuts value = unsafeAttribute
+    { key: "aria-keyshortcuts", value: prop' value }
+
 instance Attr Path_ AriaKeyshortcuts String where
-  attr AriaKeyshortcuts value = unsafeAttribute { key: "aria-keyshortcuts", value: prop' value }
+  attr AriaKeyshortcuts value = unsafeAttribute
+    { key: "aria-keyshortcuts", value: prop' value }
+
 instance Attr Polygon_ AriaKeyshortcuts String where
-  attr AriaKeyshortcuts value = unsafeAttribute { key: "aria-keyshortcuts", value: prop' value }
+  attr AriaKeyshortcuts value = unsafeAttribute
+    { key: "aria-keyshortcuts", value: prop' value }
+
 instance Attr Polyline_ AriaKeyshortcuts String where
-  attr AriaKeyshortcuts value = unsafeAttribute { key: "aria-keyshortcuts", value: prop' value }
+  attr AriaKeyshortcuts value = unsafeAttribute
+    { key: "aria-keyshortcuts", value: prop' value }
+
 instance Attr Rect_ AriaKeyshortcuts String where
-  attr AriaKeyshortcuts value = unsafeAttribute { key: "aria-keyshortcuts", value: prop' value }
+  attr AriaKeyshortcuts value = unsafeAttribute
+    { key: "aria-keyshortcuts", value: prop' value }
+
 instance Attr Svg_ AriaKeyshortcuts String where
-  attr AriaKeyshortcuts value = unsafeAttribute { key: "aria-keyshortcuts", value: prop' value }
+  attr AriaKeyshortcuts value = unsafeAttribute
+    { key: "aria-keyshortcuts", value: prop' value }
+
 instance Attr Symbol_ AriaKeyshortcuts String where
-  attr AriaKeyshortcuts value = unsafeAttribute { key: "aria-keyshortcuts", value: prop' value }
+  attr AriaKeyshortcuts value = unsafeAttribute
+    { key: "aria-keyshortcuts", value: prop' value }
+
 instance Attr Text_ AriaKeyshortcuts String where
-  attr AriaKeyshortcuts value = unsafeAttribute { key: "aria-keyshortcuts", value: prop' value }
+  attr AriaKeyshortcuts value = unsafeAttribute
+    { key: "aria-keyshortcuts", value: prop' value }
+
 instance Attr TextPath_ AriaKeyshortcuts String where
-  attr AriaKeyshortcuts value = unsafeAttribute { key: "aria-keyshortcuts", value: prop' value }
+  attr AriaKeyshortcuts value = unsafeAttribute
+    { key: "aria-keyshortcuts", value: prop' value }
+
 instance Attr Tspan_ AriaKeyshortcuts String where
-  attr AriaKeyshortcuts value = unsafeAttribute { key: "aria-keyshortcuts", value: prop' value }
+  attr AriaKeyshortcuts value = unsafeAttribute
+    { key: "aria-keyshortcuts", value: prop' value }
+
 instance Attr Use_ AriaKeyshortcuts String where
-  attr AriaKeyshortcuts value = unsafeAttribute { key: "aria-keyshortcuts", value: prop' value }
+  attr AriaKeyshortcuts value = unsafeAttribute
+    { key: "aria-keyshortcuts", value: prop' value }
+
 instance Attr View_ AriaKeyshortcuts String where
-  attr AriaKeyshortcuts value = unsafeAttribute { key: "aria-keyshortcuts", value: prop' value }
+  attr AriaKeyshortcuts value = unsafeAttribute
+    { key: "aria-keyshortcuts", value: prop' value }

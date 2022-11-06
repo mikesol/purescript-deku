@@ -6,4 +6,5 @@ import Deku.Attribute (class Attr, prop', unsafeAttribute)
 data ZoomAndPan = ZoomAndPan
 
 instance Attr View_ ZoomAndPan String where
-  attr ZoomAndPan value = unsafeAttribute { key: "zoomAndPan", value: prop' value }
+  attr ZoomAndPan value = unsafeAttribute
+    { key: "zoomAndPan", value: prop' value }

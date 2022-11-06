@@ -36,61 +36,90 @@ data Y = Y
 
 instance Attr FeBlend_ Y String where
   attr Y value = unsafeAttribute { key: "y", value: prop' value }
+
 instance Attr FeColorMatrix_ Y String where
   attr Y value = unsafeAttribute { key: "y", value: prop' value }
+
 instance Attr FeComponentTransfer_ Y String where
   attr Y value = unsafeAttribute { key: "y", value: prop' value }
+
 instance Attr FeComposite_ Y String where
   attr Y value = unsafeAttribute { key: "y", value: prop' value }
+
 instance Attr FeConvolveMatrix_ Y String where
   attr Y value = unsafeAttribute { key: "y", value: prop' value }
+
 instance Attr FeDiffuseLighting_ Y String where
   attr Y value = unsafeAttribute { key: "y", value: prop' value }
+
 instance Attr FeDisplacementMap_ Y String where
   attr Y value = unsafeAttribute { key: "y", value: prop' value }
+
 instance Attr FeDropShadow_ Y String where
   attr Y value = unsafeAttribute { key: "y", value: prop' value }
+
 instance Attr FeFlood_ Y String where
   attr Y value = unsafeAttribute { key: "y", value: prop' value }
+
 instance Attr FeGaussianBlur_ Y String where
   attr Y value = unsafeAttribute { key: "y", value: prop' value }
+
 instance Attr FeImage_ Y String where
   attr Y value = unsafeAttribute { key: "y", value: prop' value }
+
 instance Attr FeMerge_ Y String where
   attr Y value = unsafeAttribute { key: "y", value: prop' value }
+
 instance Attr FeMorphology_ Y String where
   attr Y value = unsafeAttribute { key: "y", value: prop' value }
+
 instance Attr FeOffset_ Y String where
   attr Y value = unsafeAttribute { key: "y", value: prop' value }
+
 instance Attr FePointLight_ Y String where
   attr Y value = unsafeAttribute { key: "y", value: prop' value }
+
 instance Attr FeSpecularLighting_ Y String where
   attr Y value = unsafeAttribute { key: "y", value: prop' value }
+
 instance Attr FeSpotLight_ Y String where
   attr Y value = unsafeAttribute { key: "y", value: prop' value }
+
 instance Attr FeTile_ Y String where
   attr Y value = unsafeAttribute { key: "y", value: prop' value }
+
 instance Attr FeTurbulence_ Y String where
   attr Y value = unsafeAttribute { key: "y", value: prop' value }
+
 instance Attr Filter_ Y String where
   attr Y value = unsafeAttribute { key: "y", value: prop' value }
+
 instance Attr ForeignObject_ Y String where
   attr Y value = unsafeAttribute { key: "y", value: prop' value }
+
 instance Attr Image_ Y String where
   attr Y value = unsafeAttribute { key: "y", value: prop' value }
+
 instance Attr Mask_ Y String where
   attr Y value = unsafeAttribute { key: "y", value: prop' value }
+
 instance Attr Pattern_ Y String where
   attr Y value = unsafeAttribute { key: "y", value: prop' value }
+
 instance Attr Rect_ Y String where
   attr Y value = unsafeAttribute { key: "y", value: prop' value }
+
 instance Attr Svg_ Y String where
   attr Y value = unsafeAttribute { key: "y", value: prop' value }
+
 instance Attr Symbol_ Y String where
   attr Y value = unsafeAttribute { key: "y", value: prop' value }
+
 instance Attr Text_ Y String where
   attr Y value = unsafeAttribute { key: "y", value: prop' value }
+
 instance Attr Tspan_ Y String where
   attr Y value = unsafeAttribute { key: "y", value: prop' value }
+
 instance Attr Use_ Y String where
   attr Y value = unsafeAttribute { key: "y", value: prop' value }

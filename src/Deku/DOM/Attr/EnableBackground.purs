@@ -24,40 +24,77 @@ import Deku.Attribute (class Attr, prop', unsafeAttribute)
 data EnableBackground = EnableBackground
 
 instance Attr FeBlend_ EnableBackground String where
-  attr EnableBackground value = unsafeAttribute { key: "enable-background", value: prop' value }
+  attr EnableBackground value = unsafeAttribute
+    { key: "enable-background", value: prop' value }
+
 instance Attr FeColorMatrix_ EnableBackground String where
-  attr EnableBackground value = unsafeAttribute { key: "enable-background", value: prop' value }
+  attr EnableBackground value = unsafeAttribute
+    { key: "enable-background", value: prop' value }
+
 instance Attr FeComponentTransfer_ EnableBackground String where
-  attr EnableBackground value = unsafeAttribute { key: "enable-background", value: prop' value }
+  attr EnableBackground value = unsafeAttribute
+    { key: "enable-background", value: prop' value }
+
 instance Attr FeComposite_ EnableBackground String where
-  attr EnableBackground value = unsafeAttribute { key: "enable-background", value: prop' value }
+  attr EnableBackground value = unsafeAttribute
+    { key: "enable-background", value: prop' value }
+
 instance Attr FeConvolveMatrix_ EnableBackground String where
-  attr EnableBackground value = unsafeAttribute { key: "enable-background", value: prop' value }
+  attr EnableBackground value = unsafeAttribute
+    { key: "enable-background", value: prop' value }
+
 instance Attr FeDiffuseLighting_ EnableBackground String where
-  attr EnableBackground value = unsafeAttribute { key: "enable-background", value: prop' value }
+  attr EnableBackground value = unsafeAttribute
+    { key: "enable-background", value: prop' value }
+
 instance Attr FeDisplacementMap_ EnableBackground String where
-  attr EnableBackground value = unsafeAttribute { key: "enable-background", value: prop' value }
+  attr EnableBackground value = unsafeAttribute
+    { key: "enable-background", value: prop' value }
+
 instance Attr FeFlood_ EnableBackground String where
-  attr EnableBackground value = unsafeAttribute { key: "enable-background", value: prop' value }
+  attr EnableBackground value = unsafeAttribute
+    { key: "enable-background", value: prop' value }
+
 instance Attr FeGaussianBlur_ EnableBackground String where
-  attr EnableBackground value = unsafeAttribute { key: "enable-background", value: prop' value }
+  attr EnableBackground value = unsafeAttribute
+    { key: "enable-background", value: prop' value }
+
 instance Attr FeImage_ EnableBackground String where
-  attr EnableBackground value = unsafeAttribute { key: "enable-background", value: prop' value }
+  attr EnableBackground value = unsafeAttribute
+    { key: "enable-background", value: prop' value }
+
 instance Attr FeMerge_ EnableBackground String where
-  attr EnableBackground value = unsafeAttribute { key: "enable-background", value: prop' value }
+  attr EnableBackground value = unsafeAttribute
+    { key: "enable-background", value: prop' value }
+
 instance Attr FeMorphology_ EnableBackground String where
-  attr EnableBackground value = unsafeAttribute { key: "enable-background", value: prop' value }
+  attr EnableBackground value = unsafeAttribute
+    { key: "enable-background", value: prop' value }
+
 instance Attr FeOffset_ EnableBackground String where
-  attr EnableBackground value = unsafeAttribute { key: "enable-background", value: prop' value }
+  attr EnableBackground value = unsafeAttribute
+    { key: "enable-background", value: prop' value }
+
 instance Attr FeSpecularLighting_ EnableBackground String where
-  attr EnableBackground value = unsafeAttribute { key: "enable-background", value: prop' value }
+  attr EnableBackground value = unsafeAttribute
+    { key: "enable-background", value: prop' value }
+
 instance Attr FeTile_ EnableBackground String where
-  attr EnableBackground value = unsafeAttribute { key: "enable-background", value: prop' value }
+  attr EnableBackground value = unsafeAttribute
+    { key: "enable-background", value: prop' value }
+
 instance Attr FeTurbulence_ EnableBackground String where
-  attr EnableBackground value = unsafeAttribute { key: "enable-background", value: prop' value }
+  attr EnableBackground value = unsafeAttribute
+    { key: "enable-background", value: prop' value }
+
 instance Attr Filter_ EnableBackground String where
-  attr EnableBackground value = unsafeAttribute { key: "enable-background", value: prop' value }
+  attr EnableBackground value = unsafeAttribute
+    { key: "enable-background", value: prop' value }
+
 instance Attr Image_ EnableBackground String where
-  attr EnableBackground value = unsafeAttribute { key: "enable-background", value: prop' value }
+  attr EnableBackground value = unsafeAttribute
+    { key: "enable-background", value: prop' value }
+
 instance Attr Switch_ EnableBackground String where
-  attr EnableBackground value = unsafeAttribute { key: "enable-background", value: prop' value }
+  attr EnableBackground value = unsafeAttribute
+    { key: "enable-background", value: prop' value }

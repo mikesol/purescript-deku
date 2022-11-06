@@ -22,36 +22,69 @@ import Deku.Attribute (class Attr, prop', unsafeAttribute)
 data AriaLevel = AriaLevel
 
 instance Attr Circle_ AriaLevel String where
-  attr AriaLevel value = unsafeAttribute { key: "aria-level", value: prop' value }
+  attr AriaLevel value = unsafeAttribute
+    { key: "aria-level", value: prop' value }
+
 instance Attr Ellipse_ AriaLevel String where
-  attr AriaLevel value = unsafeAttribute { key: "aria-level", value: prop' value }
+  attr AriaLevel value = unsafeAttribute
+    { key: "aria-level", value: prop' value }
+
 instance Attr ForeignObject_ AriaLevel String where
-  attr AriaLevel value = unsafeAttribute { key: "aria-level", value: prop' value }
+  attr AriaLevel value = unsafeAttribute
+    { key: "aria-level", value: prop' value }
+
 instance Attr G_ AriaLevel String where
-  attr AriaLevel value = unsafeAttribute { key: "aria-level", value: prop' value }
+  attr AriaLevel value = unsafeAttribute
+    { key: "aria-level", value: prop' value }
+
 instance Attr Line_ AriaLevel String where
-  attr AriaLevel value = unsafeAttribute { key: "aria-level", value: prop' value }
+  attr AriaLevel value = unsafeAttribute
+    { key: "aria-level", value: prop' value }
+
 instance Attr Marker_ AriaLevel String where
-  attr AriaLevel value = unsafeAttribute { key: "aria-level", value: prop' value }
+  attr AriaLevel value = unsafeAttribute
+    { key: "aria-level", value: prop' value }
+
 instance Attr Path_ AriaLevel String where
-  attr AriaLevel value = unsafeAttribute { key: "aria-level", value: prop' value }
+  attr AriaLevel value = unsafeAttribute
+    { key: "aria-level", value: prop' value }
+
 instance Attr Polygon_ AriaLevel String where
-  attr AriaLevel value = unsafeAttribute { key: "aria-level", value: prop' value }
+  attr AriaLevel value = unsafeAttribute
+    { key: "aria-level", value: prop' value }
+
 instance Attr Polyline_ AriaLevel String where
-  attr AriaLevel value = unsafeAttribute { key: "aria-level", value: prop' value }
+  attr AriaLevel value = unsafeAttribute
+    { key: "aria-level", value: prop' value }
+
 instance Attr Rect_ AriaLevel String where
-  attr AriaLevel value = unsafeAttribute { key: "aria-level", value: prop' value }
+  attr AriaLevel value = unsafeAttribute
+    { key: "aria-level", value: prop' value }
+
 instance Attr Svg_ AriaLevel String where
-  attr AriaLevel value = unsafeAttribute { key: "aria-level", value: prop' value }
+  attr AriaLevel value = unsafeAttribute
+    { key: "aria-level", value: prop' value }
+
 instance Attr Symbol_ AriaLevel String where
-  attr AriaLevel value = unsafeAttribute { key: "aria-level", value: prop' value }
+  attr AriaLevel value = unsafeAttribute
+    { key: "aria-level", value: prop' value }
+
 instance Attr Text_ AriaLevel String where
-  attr AriaLevel value = unsafeAttribute { key: "aria-level", value: prop' value }
+  attr AriaLevel value = unsafeAttribute
+    { key: "aria-level", value: prop' value }
+
 instance Attr TextPath_ AriaLevel String where
-  attr AriaLevel value = unsafeAttribute { key: "aria-level", value: prop' value }
+  attr AriaLevel value = unsafeAttribute
+    { key: "aria-level", value: prop' value }
+
 instance Attr Tspan_ AriaLevel String where
-  attr AriaLevel value = unsafeAttribute { key: "aria-level", value: prop' value }
+  attr AriaLevel value = unsafeAttribute
+    { key: "aria-level", value: prop' value }
+
 instance Attr Use_ AriaLevel String where
-  attr AriaLevel value = unsafeAttribute { key: "aria-level", value: prop' value }
+  attr AriaLevel value = unsafeAttribute
+    { key: "aria-level", value: prop' value }
+
 instance Attr View_ AriaLevel String where
-  attr AriaLevel value = unsafeAttribute { key: "aria-level", value: prop' value }
+  attr AriaLevel value = unsafeAttribute
+    { key: "aria-level", value: prop' value }

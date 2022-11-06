@@ -22,36 +22,69 @@ import Deku.Attribute (class Attr, prop', unsafeAttribute)
 data AriaSetsize = AriaSetsize
 
 instance Attr Circle_ AriaSetsize String where
-  attr AriaSetsize value = unsafeAttribute { key: "aria-setsize", value: prop' value }
+  attr AriaSetsize value = unsafeAttribute
+    { key: "aria-setsize", value: prop' value }
+
 instance Attr Ellipse_ AriaSetsize String where
-  attr AriaSetsize value = unsafeAttribute { key: "aria-setsize", value: prop' value }
+  attr AriaSetsize value = unsafeAttribute
+    { key: "aria-setsize", value: prop' value }
+
 instance Attr ForeignObject_ AriaSetsize String where
-  attr AriaSetsize value = unsafeAttribute { key: "aria-setsize", value: prop' value }
+  attr AriaSetsize value = unsafeAttribute
+    { key: "aria-setsize", value: prop' value }
+
 instance Attr G_ AriaSetsize String where
-  attr AriaSetsize value = unsafeAttribute { key: "aria-setsize", value: prop' value }
+  attr AriaSetsize value = unsafeAttribute
+    { key: "aria-setsize", value: prop' value }
+
 instance Attr Line_ AriaSetsize String where
-  attr AriaSetsize value = unsafeAttribute { key: "aria-setsize", value: prop' value }
+  attr AriaSetsize value = unsafeAttribute
+    { key: "aria-setsize", value: prop' value }
+
 instance Attr Marker_ AriaSetsize String where
-  attr AriaSetsize value = unsafeAttribute { key: "aria-setsize", value: prop' value }
+  attr AriaSetsize value = unsafeAttribute
+    { key: "aria-setsize", value: prop' value }
+
 instance Attr Path_ AriaSetsize String where
-  attr AriaSetsize value = unsafeAttribute { key: "aria-setsize", value: prop' value }
+  attr AriaSetsize value = unsafeAttribute
+    { key: "aria-setsize", value: prop' value }
+
 instance Attr Polygon_ AriaSetsize String where
-  attr AriaSetsize value = unsafeAttribute { key: "aria-setsize", value: prop' value }
+  attr AriaSetsize value = unsafeAttribute
+    { key: "aria-setsize", value: prop' value }
+
 instance Attr Polyline_ AriaSetsize String where
-  attr AriaSetsize value = unsafeAttribute { key: "aria-setsize", value: prop' value }
+  attr AriaSetsize value = unsafeAttribute
+    { key: "aria-setsize", value: prop' value }
+
 instance Attr Rect_ AriaSetsize String where
-  attr AriaSetsize value = unsafeAttribute { key: "aria-setsize", value: prop' value }
+  attr AriaSetsize value = unsafeAttribute
+    { key: "aria-setsize", value: prop' value }
+
 instance Attr Svg_ AriaSetsize String where
-  attr AriaSetsize value = unsafeAttribute { key: "aria-setsize", value: prop' value }
+  attr AriaSetsize value = unsafeAttribute
+    { key: "aria-setsize", value: prop' value }
+
 instance Attr Symbol_ AriaSetsize String where
-  attr AriaSetsize value = unsafeAttribute { key: "aria-setsize", value: prop' value }
+  attr AriaSetsize value = unsafeAttribute
+    { key: "aria-setsize", value: prop' value }
+
 instance Attr Text_ AriaSetsize String where
-  attr AriaSetsize value = unsafeAttribute { key: "aria-setsize", value: prop' value }
+  attr AriaSetsize value = unsafeAttribute
+    { key: "aria-setsize", value: prop' value }
+
 instance Attr TextPath_ AriaSetsize String where
-  attr AriaSetsize value = unsafeAttribute { key: "aria-setsize", value: prop' value }
+  attr AriaSetsize value = unsafeAttribute
+    { key: "aria-setsize", value: prop' value }
+
 instance Attr Tspan_ AriaSetsize String where
-  attr AriaSetsize value = unsafeAttribute { key: "aria-setsize", value: prop' value }
+  attr AriaSetsize value = unsafeAttribute
+    { key: "aria-setsize", value: prop' value }
+
 instance Attr Use_ AriaSetsize String where
-  attr AriaSetsize value = unsafeAttribute { key: "aria-setsize", value: prop' value }
+  attr AriaSetsize value = unsafeAttribute
+    { key: "aria-setsize", value: prop' value }
+
 instance Attr View_ AriaSetsize String where
-  attr AriaSetsize value = unsafeAttribute { key: "aria-setsize", value: prop' value }
+  attr AriaSetsize value = unsafeAttribute
+    { key: "aria-setsize", value: prop' value }

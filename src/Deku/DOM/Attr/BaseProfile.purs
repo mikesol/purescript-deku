@@ -6,4 +6,5 @@ import Deku.Attribute (class Attr, prop', unsafeAttribute)
 data BaseProfile = BaseProfile
 
 instance Attr Svg_ BaseProfile String where
-  attr BaseProfile value = unsafeAttribute { key: "baseProfile", value: prop' value }
+  attr BaseProfile value = unsafeAttribute
+    { key: "baseProfile", value: prop' value }

@@ -6,4 +6,5 @@ import Deku.Attribute (class Attr, prop', unsafeAttribute)
 data FilterUnits = FilterUnits
 
 instance Attr Filter_ FilterUnits String where
-  attr FilterUnits value = unsafeAttribute { key: "filterUnits", value: prop' value }
+  attr FilterUnits value = unsafeAttribute
+    { key: "filterUnits", value: prop' value }

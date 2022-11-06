@@ -12,16 +12,29 @@ import Deku.Attribute (class Attr, prop', unsafeAttribute)
 data PathLength = PathLength
 
 instance Attr Circle_ PathLength String where
-  attr PathLength value = unsafeAttribute { key: "pathLength", value: prop' value }
+  attr PathLength value = unsafeAttribute
+    { key: "pathLength", value: prop' value }
+
 instance Attr Ellipse_ PathLength String where
-  attr PathLength value = unsafeAttribute { key: "pathLength", value: prop' value }
+  attr PathLength value = unsafeAttribute
+    { key: "pathLength", value: prop' value }
+
 instance Attr Line_ PathLength String where
-  attr PathLength value = unsafeAttribute { key: "pathLength", value: prop' value }
+  attr PathLength value = unsafeAttribute
+    { key: "pathLength", value: prop' value }
+
 instance Attr Path_ PathLength String where
-  attr PathLength value = unsafeAttribute { key: "pathLength", value: prop' value }
+  attr PathLength value = unsafeAttribute
+    { key: "pathLength", value: prop' value }
+
 instance Attr Polygon_ PathLength String where
-  attr PathLength value = unsafeAttribute { key: "pathLength", value: prop' value }
+  attr PathLength value = unsafeAttribute
+    { key: "pathLength", value: prop' value }
+
 instance Attr Polyline_ PathLength String where
-  attr PathLength value = unsafeAttribute { key: "pathLength", value: prop' value }
+  attr PathLength value = unsafeAttribute
+    { key: "pathLength", value: prop' value }
+
 instance Attr Rect_ PathLength String where
-  attr PathLength value = unsafeAttribute { key: "pathLength", value: prop' value }
+  attr PathLength value = unsafeAttribute
+    { key: "pathLength", value: prop' value }

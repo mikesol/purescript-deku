@@ -18,9 +18,12 @@ instance Attr Meter_ Min String where
 
 instance Attr Animate_ Min String where
   attr Min value = unsafeAttribute { key: "min", value: prop' value }
+
 instance Attr AnimateMotion_ Min String where
   attr Min value = unsafeAttribute { key: "min", value: prop' value }
+
 instance Attr AnimateTransform_ Min String where
   attr Min value = unsafeAttribute { key: "min", value: prop' value }
+
 instance Attr Set_ Min String where
   attr Min value = unsafeAttribute { key: "min", value: prop' value }

@@ -9,7 +9,9 @@ data From = From
 
 instance Attr Animate_ From String where
   attr From value = unsafeAttribute { key: "from", value: prop' value }
+
 instance Attr AnimateMotion_ From String where
   attr From value = unsafeAttribute { key: "from", value: prop' value }
+
 instance Attr AnimateTransform_ From String where
   attr From value = unsafeAttribute { key: "from", value: prop' value }

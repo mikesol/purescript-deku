@@ -24,40 +24,77 @@ import Deku.Attribute (class Attr, prop', unsafeAttribute)
 data MarkerMid = MarkerMid
 
 instance Attr FeBlend_ MarkerMid String where
-  attr MarkerMid value = unsafeAttribute { key: "marker-mid", value: prop' value }
+  attr MarkerMid value = unsafeAttribute
+    { key: "marker-mid", value: prop' value }
+
 instance Attr FeColorMatrix_ MarkerMid String where
-  attr MarkerMid value = unsafeAttribute { key: "marker-mid", value: prop' value }
+  attr MarkerMid value = unsafeAttribute
+    { key: "marker-mid", value: prop' value }
+
 instance Attr FeComponentTransfer_ MarkerMid String where
-  attr MarkerMid value = unsafeAttribute { key: "marker-mid", value: prop' value }
+  attr MarkerMid value = unsafeAttribute
+    { key: "marker-mid", value: prop' value }
+
 instance Attr FeComposite_ MarkerMid String where
-  attr MarkerMid value = unsafeAttribute { key: "marker-mid", value: prop' value }
+  attr MarkerMid value = unsafeAttribute
+    { key: "marker-mid", value: prop' value }
+
 instance Attr FeConvolveMatrix_ MarkerMid String where
-  attr MarkerMid value = unsafeAttribute { key: "marker-mid", value: prop' value }
+  attr MarkerMid value = unsafeAttribute
+    { key: "marker-mid", value: prop' value }
+
 instance Attr FeDiffuseLighting_ MarkerMid String where
-  attr MarkerMid value = unsafeAttribute { key: "marker-mid", value: prop' value }
+  attr MarkerMid value = unsafeAttribute
+    { key: "marker-mid", value: prop' value }
+
 instance Attr FeDisplacementMap_ MarkerMid String where
-  attr MarkerMid value = unsafeAttribute { key: "marker-mid", value: prop' value }
+  attr MarkerMid value = unsafeAttribute
+    { key: "marker-mid", value: prop' value }
+
 instance Attr FeFlood_ MarkerMid String where
-  attr MarkerMid value = unsafeAttribute { key: "marker-mid", value: prop' value }
+  attr MarkerMid value = unsafeAttribute
+    { key: "marker-mid", value: prop' value }
+
 instance Attr FeGaussianBlur_ MarkerMid String where
-  attr MarkerMid value = unsafeAttribute { key: "marker-mid", value: prop' value }
+  attr MarkerMid value = unsafeAttribute
+    { key: "marker-mid", value: prop' value }
+
 instance Attr FeImage_ MarkerMid String where
-  attr MarkerMid value = unsafeAttribute { key: "marker-mid", value: prop' value }
+  attr MarkerMid value = unsafeAttribute
+    { key: "marker-mid", value: prop' value }
+
 instance Attr FeMerge_ MarkerMid String where
-  attr MarkerMid value = unsafeAttribute { key: "marker-mid", value: prop' value }
+  attr MarkerMid value = unsafeAttribute
+    { key: "marker-mid", value: prop' value }
+
 instance Attr FeMorphology_ MarkerMid String where
-  attr MarkerMid value = unsafeAttribute { key: "marker-mid", value: prop' value }
+  attr MarkerMid value = unsafeAttribute
+    { key: "marker-mid", value: prop' value }
+
 instance Attr FeOffset_ MarkerMid String where
-  attr MarkerMid value = unsafeAttribute { key: "marker-mid", value: prop' value }
+  attr MarkerMid value = unsafeAttribute
+    { key: "marker-mid", value: prop' value }
+
 instance Attr FeSpecularLighting_ MarkerMid String where
-  attr MarkerMid value = unsafeAttribute { key: "marker-mid", value: prop' value }
+  attr MarkerMid value = unsafeAttribute
+    { key: "marker-mid", value: prop' value }
+
 instance Attr FeTile_ MarkerMid String where
-  attr MarkerMid value = unsafeAttribute { key: "marker-mid", value: prop' value }
+  attr MarkerMid value = unsafeAttribute
+    { key: "marker-mid", value: prop' value }
+
 instance Attr FeTurbulence_ MarkerMid String where
-  attr MarkerMid value = unsafeAttribute { key: "marker-mid", value: prop' value }
+  attr MarkerMid value = unsafeAttribute
+    { key: "marker-mid", value: prop' value }
+
 instance Attr Filter_ MarkerMid String where
-  attr MarkerMid value = unsafeAttribute { key: "marker-mid", value: prop' value }
+  attr MarkerMid value = unsafeAttribute
+    { key: "marker-mid", value: prop' value }
+
 instance Attr Image_ MarkerMid String where
-  attr MarkerMid value = unsafeAttribute { key: "marker-mid", value: prop' value }
+  attr MarkerMid value = unsafeAttribute
+    { key: "marker-mid", value: prop' value }
+
 instance Attr Switch_ MarkerMid String where
-  attr MarkerMid value = unsafeAttribute { key: "marker-mid", value: prop' value }
+  attr MarkerMid value = unsafeAttribute
+    { key: "marker-mid", value: prop' value }

@@ -24,40 +24,77 @@ import Deku.Attribute (class Attr, prop', unsafeAttribute)
 data TextRendering = TextRendering
 
 instance Attr FeBlend_ TextRendering String where
-  attr TextRendering value = unsafeAttribute { key: "text-rendering", value: prop' value }
+  attr TextRendering value = unsafeAttribute
+    { key: "text-rendering", value: prop' value }
+
 instance Attr FeColorMatrix_ TextRendering String where
-  attr TextRendering value = unsafeAttribute { key: "text-rendering", value: prop' value }
+  attr TextRendering value = unsafeAttribute
+    { key: "text-rendering", value: prop' value }
+
 instance Attr FeComponentTransfer_ TextRendering String where
-  attr TextRendering value = unsafeAttribute { key: "text-rendering", value: prop' value }
+  attr TextRendering value = unsafeAttribute
+    { key: "text-rendering", value: prop' value }
+
 instance Attr FeComposite_ TextRendering String where
-  attr TextRendering value = unsafeAttribute { key: "text-rendering", value: prop' value }
+  attr TextRendering value = unsafeAttribute
+    { key: "text-rendering", value: prop' value }
+
 instance Attr FeConvolveMatrix_ TextRendering String where
-  attr TextRendering value = unsafeAttribute { key: "text-rendering", value: prop' value }
+  attr TextRendering value = unsafeAttribute
+    { key: "text-rendering", value: prop' value }
+
 instance Attr FeDiffuseLighting_ TextRendering String where
-  attr TextRendering value = unsafeAttribute { key: "text-rendering", value: prop' value }
+  attr TextRendering value = unsafeAttribute
+    { key: "text-rendering", value: prop' value }
+
 instance Attr FeDisplacementMap_ TextRendering String where
-  attr TextRendering value = unsafeAttribute { key: "text-rendering", value: prop' value }
+  attr TextRendering value = unsafeAttribute
+    { key: "text-rendering", value: prop' value }
+
 instance Attr FeFlood_ TextRendering String where
-  attr TextRendering value = unsafeAttribute { key: "text-rendering", value: prop' value }
+  attr TextRendering value = unsafeAttribute
+    { key: "text-rendering", value: prop' value }
+
 instance Attr FeGaussianBlur_ TextRendering String where
-  attr TextRendering value = unsafeAttribute { key: "text-rendering", value: prop' value }
+  attr TextRendering value = unsafeAttribute
+    { key: "text-rendering", value: prop' value }
+
 instance Attr FeImage_ TextRendering String where
-  attr TextRendering value = unsafeAttribute { key: "text-rendering", value: prop' value }
+  attr TextRendering value = unsafeAttribute
+    { key: "text-rendering", value: prop' value }
+
 instance Attr FeMerge_ TextRendering String where
-  attr TextRendering value = unsafeAttribute { key: "text-rendering", value: prop' value }
+  attr TextRendering value = unsafeAttribute
+    { key: "text-rendering", value: prop' value }
+
 instance Attr FeMorphology_ TextRendering String where
-  attr TextRendering value = unsafeAttribute { key: "text-rendering", value: prop' value }
+  attr TextRendering value = unsafeAttribute
+    { key: "text-rendering", value: prop' value }
+
 instance Attr FeOffset_ TextRendering String where
-  attr TextRendering value = unsafeAttribute { key: "text-rendering", value: prop' value }
+  attr TextRendering value = unsafeAttribute
+    { key: "text-rendering", value: prop' value }
+
 instance Attr FeSpecularLighting_ TextRendering String where
-  attr TextRendering value = unsafeAttribute { key: "text-rendering", value: prop' value }
+  attr TextRendering value = unsafeAttribute
+    { key: "text-rendering", value: prop' value }
+
 instance Attr FeTile_ TextRendering String where
-  attr TextRendering value = unsafeAttribute { key: "text-rendering", value: prop' value }
+  attr TextRendering value = unsafeAttribute
+    { key: "text-rendering", value: prop' value }
+
 instance Attr FeTurbulence_ TextRendering String where
-  attr TextRendering value = unsafeAttribute { key: "text-rendering", value: prop' value }
+  attr TextRendering value = unsafeAttribute
+    { key: "text-rendering", value: prop' value }
+
 instance Attr Filter_ TextRendering String where
-  attr TextRendering value = unsafeAttribute { key: "text-rendering", value: prop' value }
+  attr TextRendering value = unsafeAttribute
+    { key: "text-rendering", value: prop' value }
+
 instance Attr Image_ TextRendering String where
-  attr TextRendering value = unsafeAttribute { key: "text-rendering", value: prop' value }
+  attr TextRendering value = unsafeAttribute
+    { key: "text-rendering", value: prop' value }
+
 instance Attr Switch_ TextRendering String where
-  attr TextRendering value = unsafeAttribute { key: "text-rendering", value: prop' value }
+  attr TextRendering value = unsafeAttribute
+    { key: "text-rendering", value: prop' value }

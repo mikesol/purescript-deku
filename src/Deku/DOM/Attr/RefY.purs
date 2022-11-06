@@ -8,5 +8,6 @@ data RefY = RefY
 
 instance Attr Marker_ RefY String where
   attr RefY value = unsafeAttribute { key: "refY", value: prop' value }
+
 instance Attr Symbol_ RefY String where
   attr RefY value = unsafeAttribute { key: "refY", value: prop' value }

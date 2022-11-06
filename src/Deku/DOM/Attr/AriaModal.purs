@@ -22,36 +22,69 @@ import Deku.Attribute (class Attr, prop', unsafeAttribute)
 data AriaModal = AriaModal
 
 instance Attr Circle_ AriaModal String where
-  attr AriaModal value = unsafeAttribute { key: "aria-modal", value: prop' value }
+  attr AriaModal value = unsafeAttribute
+    { key: "aria-modal", value: prop' value }
+
 instance Attr Ellipse_ AriaModal String where
-  attr AriaModal value = unsafeAttribute { key: "aria-modal", value: prop' value }
+  attr AriaModal value = unsafeAttribute
+    { key: "aria-modal", value: prop' value }
+
 instance Attr ForeignObject_ AriaModal String where
-  attr AriaModal value = unsafeAttribute { key: "aria-modal", value: prop' value }
+  attr AriaModal value = unsafeAttribute
+    { key: "aria-modal", value: prop' value }
+
 instance Attr G_ AriaModal String where
-  attr AriaModal value = unsafeAttribute { key: "aria-modal", value: prop' value }
+  attr AriaModal value = unsafeAttribute
+    { key: "aria-modal", value: prop' value }
+
 instance Attr Line_ AriaModal String where
-  attr AriaModal value = unsafeAttribute { key: "aria-modal", value: prop' value }
+  attr AriaModal value = unsafeAttribute
+    { key: "aria-modal", value: prop' value }
+
 instance Attr Marker_ AriaModal String where
-  attr AriaModal value = unsafeAttribute { key: "aria-modal", value: prop' value }
+  attr AriaModal value = unsafeAttribute
+    { key: "aria-modal", value: prop' value }
+
 instance Attr Path_ AriaModal String where
-  attr AriaModal value = unsafeAttribute { key: "aria-modal", value: prop' value }
+  attr AriaModal value = unsafeAttribute
+    { key: "aria-modal", value: prop' value }
+
 instance Attr Polygon_ AriaModal String where
-  attr AriaModal value = unsafeAttribute { key: "aria-modal", value: prop' value }
+  attr AriaModal value = unsafeAttribute
+    { key: "aria-modal", value: prop' value }
+
 instance Attr Polyline_ AriaModal String where
-  attr AriaModal value = unsafeAttribute { key: "aria-modal", value: prop' value }
+  attr AriaModal value = unsafeAttribute
+    { key: "aria-modal", value: prop' value }
+
 instance Attr Rect_ AriaModal String where
-  attr AriaModal value = unsafeAttribute { key: "aria-modal", value: prop' value }
+  attr AriaModal value = unsafeAttribute
+    { key: "aria-modal", value: prop' value }
+
 instance Attr Svg_ AriaModal String where
-  attr AriaModal value = unsafeAttribute { key: "aria-modal", value: prop' value }
+  attr AriaModal value = unsafeAttribute
+    { key: "aria-modal", value: prop' value }
+
 instance Attr Symbol_ AriaModal String where
-  attr AriaModal value = unsafeAttribute { key: "aria-modal", value: prop' value }
+  attr AriaModal value = unsafeAttribute
+    { key: "aria-modal", value: prop' value }
+
 instance Attr Text_ AriaModal String where
-  attr AriaModal value = unsafeAttribute { key: "aria-modal", value: prop' value }
+  attr AriaModal value = unsafeAttribute
+    { key: "aria-modal", value: prop' value }
+
 instance Attr TextPath_ AriaModal String where
-  attr AriaModal value = unsafeAttribute { key: "aria-modal", value: prop' value }
+  attr AriaModal value = unsafeAttribute
+    { key: "aria-modal", value: prop' value }
+
 instance Attr Tspan_ AriaModal String where
-  attr AriaModal value = unsafeAttribute { key: "aria-modal", value: prop' value }
+  attr AriaModal value = unsafeAttribute
+    { key: "aria-modal", value: prop' value }
+
 instance Attr Use_ AriaModal String where
-  attr AriaModal value = unsafeAttribute { key: "aria-modal", value: prop' value }
+  attr AriaModal value = unsafeAttribute
+    { key: "aria-modal", value: prop' value }
+
 instance Attr View_ AriaModal String where
-  attr AriaModal value = unsafeAttribute { key: "aria-modal", value: prop' value }
+  attr AriaModal value = unsafeAttribute
+    { key: "aria-modal", value: prop' value }

@@ -22,36 +22,69 @@ import Deku.Attribute (class Attr, prop', unsafeAttribute)
 data AriaGrabbed = AriaGrabbed
 
 instance Attr Circle_ AriaGrabbed String where
-  attr AriaGrabbed value = unsafeAttribute { key: "aria-grabbed", value: prop' value }
+  attr AriaGrabbed value = unsafeAttribute
+    { key: "aria-grabbed", value: prop' value }
+
 instance Attr Ellipse_ AriaGrabbed String where
-  attr AriaGrabbed value = unsafeAttribute { key: "aria-grabbed", value: prop' value }
+  attr AriaGrabbed value = unsafeAttribute
+    { key: "aria-grabbed", value: prop' value }
+
 instance Attr ForeignObject_ AriaGrabbed String where
-  attr AriaGrabbed value = unsafeAttribute { key: "aria-grabbed", value: prop' value }
+  attr AriaGrabbed value = unsafeAttribute
+    { key: "aria-grabbed", value: prop' value }
+
 instance Attr G_ AriaGrabbed String where
-  attr AriaGrabbed value = unsafeAttribute { key: "aria-grabbed", value: prop' value }
+  attr AriaGrabbed value = unsafeAttribute
+    { key: "aria-grabbed", value: prop' value }
+
 instance Attr Line_ AriaGrabbed String where
-  attr AriaGrabbed value = unsafeAttribute { key: "aria-grabbed", value: prop' value }
+  attr AriaGrabbed value = unsafeAttribute
+    { key: "aria-grabbed", value: prop' value }
+
 instance Attr Marker_ AriaGrabbed String where
-  attr AriaGrabbed value = unsafeAttribute { key: "aria-grabbed", value: prop' value }
+  attr AriaGrabbed value = unsafeAttribute
+    { key: "aria-grabbed", value: prop' value }
+
 instance Attr Path_ AriaGrabbed String where
-  attr AriaGrabbed value = unsafeAttribute { key: "aria-grabbed", value: prop' value }
+  attr AriaGrabbed value = unsafeAttribute
+    { key: "aria-grabbed", value: prop' value }
+
 instance Attr Polygon_ AriaGrabbed String where
-  attr AriaGrabbed value = unsafeAttribute { key: "aria-grabbed", value: prop' value }
+  attr AriaGrabbed value = unsafeAttribute
+    { key: "aria-grabbed", value: prop' value }
+
 instance Attr Polyline_ AriaGrabbed String where
-  attr AriaGrabbed value = unsafeAttribute { key: "aria-grabbed", value: prop' value }
+  attr AriaGrabbed value = unsafeAttribute
+    { key: "aria-grabbed", value: prop' value }
+
 instance Attr Rect_ AriaGrabbed String where
-  attr AriaGrabbed value = unsafeAttribute { key: "aria-grabbed", value: prop' value }
+  attr AriaGrabbed value = unsafeAttribute
+    { key: "aria-grabbed", value: prop' value }
+
 instance Attr Svg_ AriaGrabbed String where
-  attr AriaGrabbed value = unsafeAttribute { key: "aria-grabbed", value: prop' value }
+  attr AriaGrabbed value = unsafeAttribute
+    { key: "aria-grabbed", value: prop' value }
+
 instance Attr Symbol_ AriaGrabbed String where
-  attr AriaGrabbed value = unsafeAttribute { key: "aria-grabbed", value: prop' value }
+  attr AriaGrabbed value = unsafeAttribute
+    { key: "aria-grabbed", value: prop' value }
+
 instance Attr Text_ AriaGrabbed String where
-  attr AriaGrabbed value = unsafeAttribute { key: "aria-grabbed", value: prop' value }
+  attr AriaGrabbed value = unsafeAttribute
+    { key: "aria-grabbed", value: prop' value }
+
 instance Attr TextPath_ AriaGrabbed String where
-  attr AriaGrabbed value = unsafeAttribute { key: "aria-grabbed", value: prop' value }
+  attr AriaGrabbed value = unsafeAttribute
+    { key: "aria-grabbed", value: prop' value }
+
 instance Attr Tspan_ AriaGrabbed String where
-  attr AriaGrabbed value = unsafeAttribute { key: "aria-grabbed", value: prop' value }
+  attr AriaGrabbed value = unsafeAttribute
+    { key: "aria-grabbed", value: prop' value }
+
 instance Attr Use_ AriaGrabbed String where
-  attr AriaGrabbed value = unsafeAttribute { key: "aria-grabbed", value: prop' value }
+  attr AriaGrabbed value = unsafeAttribute
+    { key: "aria-grabbed", value: prop' value }
+
 instance Attr View_ AriaGrabbed String where
-  attr AriaGrabbed value = unsafeAttribute { key: "aria-grabbed", value: prop' value }
+  attr AriaGrabbed value = unsafeAttribute
+    { key: "aria-grabbed", value: prop' value }

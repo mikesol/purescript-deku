@@ -9,10 +9,17 @@ import Deku.Attribute (class Attr, prop', unsafeAttribute)
 data Amplitude = Amplitude
 
 instance Attr FeFuncA_ Amplitude String where
-  attr Amplitude value = unsafeAttribute { key: "amplitude", value: prop' value }
+  attr Amplitude value = unsafeAttribute
+    { key: "amplitude", value: prop' value }
+
 instance Attr FeFuncB_ Amplitude String where
-  attr Amplitude value = unsafeAttribute { key: "amplitude", value: prop' value }
+  attr Amplitude value = unsafeAttribute
+    { key: "amplitude", value: prop' value }
+
 instance Attr FeFuncG_ Amplitude String where
-  attr Amplitude value = unsafeAttribute { key: "amplitude", value: prop' value }
+  attr Amplitude value = unsafeAttribute
+    { key: "amplitude", value: prop' value }
+
 instance Attr FeFuncR_ Amplitude String where
-  attr Amplitude value = unsafeAttribute { key: "amplitude", value: prop' value }
+  attr Amplitude value = unsafeAttribute
+    { key: "amplitude", value: prop' value }

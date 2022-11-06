@@ -31,4 +31,5 @@ instance Attr Video_ Crossorigin String where
     { key: "crossorigin", value: prop' value }
 
 instance Attr Image_ Crossorigin String where
-  attr Crossorigin value = unsafeAttribute { key: "crossorigin", value: prop' value }
+  attr Crossorigin value = unsafeAttribute
+    { key: "crossorigin", value: prop' value }

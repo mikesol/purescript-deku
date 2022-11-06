@@ -8,5 +8,6 @@ data Ry = Ry
 
 instance Attr Ellipse_ Ry String where
   attr Ry value = unsafeAttribute { key: "ry", value: prop' value }
+
 instance Attr Rect_ Ry String where
   attr Ry value = unsafeAttribute { key: "ry", value: prop' value }

@@ -8,5 +8,6 @@ data Operator = Operator
 
 instance Attr FeComposite_ Operator String where
   attr Operator value = unsafeAttribute { key: "operator", value: prop' value }
+
 instance Attr FeMorphology_ Operator String where
   attr Operator value = unsafeAttribute { key: "operator", value: prop' value }

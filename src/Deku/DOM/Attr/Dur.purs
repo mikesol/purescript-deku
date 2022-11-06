@@ -10,9 +10,12 @@ data Dur = Dur
 
 instance Attr Animate_ Dur String where
   attr Dur value = unsafeAttribute { key: "dur", value: prop' value }
+
 instance Attr AnimateMotion_ Dur String where
   attr Dur value = unsafeAttribute { key: "dur", value: prop' value }
+
 instance Attr AnimateTransform_ Dur String where
   attr Dur value = unsafeAttribute { key: "dur", value: prop' value }
+
 instance Attr Set_ Dur String where
   attr Dur value = unsafeAttribute { key: "dur", value: prop' value }

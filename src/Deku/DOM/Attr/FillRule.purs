@@ -47,83 +47,123 @@ data FillRule = FillRule
 
 instance Attr Circle_ FillRule String where
   attr FillRule value = unsafeAttribute { key: "fill-rule", value: prop' value }
+
 instance Attr ClipPath_ FillRule String where
   attr FillRule value = unsafeAttribute { key: "fill-rule", value: prop' value }
+
 instance Attr Defs_ FillRule String where
   attr FillRule value = unsafeAttribute { key: "fill-rule", value: prop' value }
+
 instance Attr Ellipse_ FillRule String where
   attr FillRule value = unsafeAttribute { key: "fill-rule", value: prop' value }
+
 instance Attr FeBlend_ FillRule String where
   attr FillRule value = unsafeAttribute { key: "fill-rule", value: prop' value }
+
 instance Attr FeColorMatrix_ FillRule String where
   attr FillRule value = unsafeAttribute { key: "fill-rule", value: prop' value }
+
 instance Attr FeComponentTransfer_ FillRule String where
   attr FillRule value = unsafeAttribute { key: "fill-rule", value: prop' value }
+
 instance Attr FeComposite_ FillRule String where
   attr FillRule value = unsafeAttribute { key: "fill-rule", value: prop' value }
+
 instance Attr FeConvolveMatrix_ FillRule String where
   attr FillRule value = unsafeAttribute { key: "fill-rule", value: prop' value }
+
 instance Attr FeDiffuseLighting_ FillRule String where
   attr FillRule value = unsafeAttribute { key: "fill-rule", value: prop' value }
+
 instance Attr FeDisplacementMap_ FillRule String where
   attr FillRule value = unsafeAttribute { key: "fill-rule", value: prop' value }
+
 instance Attr FeFlood_ FillRule String where
   attr FillRule value = unsafeAttribute { key: "fill-rule", value: prop' value }
+
 instance Attr FeGaussianBlur_ FillRule String where
   attr FillRule value = unsafeAttribute { key: "fill-rule", value: prop' value }
+
 instance Attr FeImage_ FillRule String where
   attr FillRule value = unsafeAttribute { key: "fill-rule", value: prop' value }
+
 instance Attr FeMerge_ FillRule String where
   attr FillRule value = unsafeAttribute { key: "fill-rule", value: prop' value }
+
 instance Attr FeMorphology_ FillRule String where
   attr FillRule value = unsafeAttribute { key: "fill-rule", value: prop' value }
+
 instance Attr FeOffset_ FillRule String where
   attr FillRule value = unsafeAttribute { key: "fill-rule", value: prop' value }
+
 instance Attr FeSpecularLighting_ FillRule String where
   attr FillRule value = unsafeAttribute { key: "fill-rule", value: prop' value }
+
 instance Attr FeTile_ FillRule String where
   attr FillRule value = unsafeAttribute { key: "fill-rule", value: prop' value }
+
 instance Attr FeTurbulence_ FillRule String where
   attr FillRule value = unsafeAttribute { key: "fill-rule", value: prop' value }
+
 instance Attr Filter_ FillRule String where
   attr FillRule value = unsafeAttribute { key: "fill-rule", value: prop' value }
+
 instance Attr ForeignObject_ FillRule String where
   attr FillRule value = unsafeAttribute { key: "fill-rule", value: prop' value }
+
 instance Attr G_ FillRule String where
   attr FillRule value = unsafeAttribute { key: "fill-rule", value: prop' value }
+
 instance Attr Image_ FillRule String where
   attr FillRule value = unsafeAttribute { key: "fill-rule", value: prop' value }
+
 instance Attr Line_ FillRule String where
   attr FillRule value = unsafeAttribute { key: "fill-rule", value: prop' value }
+
 instance Attr LinearGradient_ FillRule String where
   attr FillRule value = unsafeAttribute { key: "fill-rule", value: prop' value }
+
 instance Attr Marker_ FillRule String where
   attr FillRule value = unsafeAttribute { key: "fill-rule", value: prop' value }
+
 instance Attr Mask_ FillRule String where
   attr FillRule value = unsafeAttribute { key: "fill-rule", value: prop' value }
+
 instance Attr Path_ FillRule String where
   attr FillRule value = unsafeAttribute { key: "fill-rule", value: prop' value }
+
 instance Attr Pattern_ FillRule String where
   attr FillRule value = unsafeAttribute { key: "fill-rule", value: prop' value }
+
 instance Attr Polygon_ FillRule String where
   attr FillRule value = unsafeAttribute { key: "fill-rule", value: prop' value }
+
 instance Attr Polyline_ FillRule String where
   attr FillRule value = unsafeAttribute { key: "fill-rule", value: prop' value }
+
 instance Attr RadialGradient_ FillRule String where
   attr FillRule value = unsafeAttribute { key: "fill-rule", value: prop' value }
+
 instance Attr Rect_ FillRule String where
   attr FillRule value = unsafeAttribute { key: "fill-rule", value: prop' value }
+
 instance Attr Svg_ FillRule String where
   attr FillRule value = unsafeAttribute { key: "fill-rule", value: prop' value }
+
 instance Attr Switch_ FillRule String where
   attr FillRule value = unsafeAttribute { key: "fill-rule", value: prop' value }
+
 instance Attr Symbol_ FillRule String where
   attr FillRule value = unsafeAttribute { key: "fill-rule", value: prop' value }
+
 instance Attr Text_ FillRule String where
   attr FillRule value = unsafeAttribute { key: "fill-rule", value: prop' value }
+
 instance Attr TextPath_ FillRule String where
   attr FillRule value = unsafeAttribute { key: "fill-rule", value: prop' value }
+
 instance Attr Tspan_ FillRule String where
   attr FillRule value = unsafeAttribute { key: "fill-rule", value: prop' value }
+
 instance Attr Use_ FillRule String where
   attr FillRule value = unsafeAttribute { key: "fill-rule", value: prop' value }

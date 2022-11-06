@@ -23,35 +23,51 @@ data AriaLive = AriaLive
 
 instance Attr Circle_ AriaLive String where
   attr AriaLive value = unsafeAttribute { key: "aria-live", value: prop' value }
+
 instance Attr Ellipse_ AriaLive String where
   attr AriaLive value = unsafeAttribute { key: "aria-live", value: prop' value }
+
 instance Attr ForeignObject_ AriaLive String where
   attr AriaLive value = unsafeAttribute { key: "aria-live", value: prop' value }
+
 instance Attr G_ AriaLive String where
   attr AriaLive value = unsafeAttribute { key: "aria-live", value: prop' value }
+
 instance Attr Line_ AriaLive String where
   attr AriaLive value = unsafeAttribute { key: "aria-live", value: prop' value }
+
 instance Attr Marker_ AriaLive String where
   attr AriaLive value = unsafeAttribute { key: "aria-live", value: prop' value }
+
 instance Attr Path_ AriaLive String where
   attr AriaLive value = unsafeAttribute { key: "aria-live", value: prop' value }
+
 instance Attr Polygon_ AriaLive String where
   attr AriaLive value = unsafeAttribute { key: "aria-live", value: prop' value }
+
 instance Attr Polyline_ AriaLive String where
   attr AriaLive value = unsafeAttribute { key: "aria-live", value: prop' value }
+
 instance Attr Rect_ AriaLive String where
   attr AriaLive value = unsafeAttribute { key: "aria-live", value: prop' value }
+
 instance Attr Svg_ AriaLive String where
   attr AriaLive value = unsafeAttribute { key: "aria-live", value: prop' value }
+
 instance Attr Symbol_ AriaLive String where
   attr AriaLive value = unsafeAttribute { key: "aria-live", value: prop' value }
+
 instance Attr Text_ AriaLive String where
   attr AriaLive value = unsafeAttribute { key: "aria-live", value: prop' value }
+
 instance Attr TextPath_ AriaLive String where
   attr AriaLive value = unsafeAttribute { key: "aria-live", value: prop' value }
+
 instance Attr Tspan_ AriaLive String where
   attr AriaLive value = unsafeAttribute { key: "aria-live", value: prop' value }
+
 instance Attr Use_ AriaLive String where
   attr AriaLive value = unsafeAttribute { key: "aria-live", value: prop' value }
+
 instance Attr View_ AriaLive String where
   attr AriaLive value = unsafeAttribute { key: "aria-live", value: prop' value }

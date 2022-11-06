@@ -60,53 +60,78 @@ instance Attr Video_ Height String where
 
 instance Attr FeBlend_ Height String where
   attr Height value = unsafeAttribute { key: "height", value: prop' value }
+
 instance Attr FeColorMatrix_ Height String where
   attr Height value = unsafeAttribute { key: "height", value: prop' value }
+
 instance Attr FeComponentTransfer_ Height String where
   attr Height value = unsafeAttribute { key: "height", value: prop' value }
+
 instance Attr FeComposite_ Height String where
   attr Height value = unsafeAttribute { key: "height", value: prop' value }
+
 instance Attr FeConvolveMatrix_ Height String where
   attr Height value = unsafeAttribute { key: "height", value: prop' value }
+
 instance Attr FeDiffuseLighting_ Height String where
   attr Height value = unsafeAttribute { key: "height", value: prop' value }
+
 instance Attr FeDisplacementMap_ Height String where
   attr Height value = unsafeAttribute { key: "height", value: prop' value }
+
 instance Attr FeDropShadow_ Height String where
   attr Height value = unsafeAttribute { key: "height", value: prop' value }
+
 instance Attr FeFlood_ Height String where
   attr Height value = unsafeAttribute { key: "height", value: prop' value }
+
 instance Attr FeGaussianBlur_ Height String where
   attr Height value = unsafeAttribute { key: "height", value: prop' value }
+
 instance Attr FeImage_ Height String where
   attr Height value = unsafeAttribute { key: "height", value: prop' value }
+
 instance Attr FeMerge_ Height String where
   attr Height value = unsafeAttribute { key: "height", value: prop' value }
+
 instance Attr FeMorphology_ Height String where
   attr Height value = unsafeAttribute { key: "height", value: prop' value }
+
 instance Attr FeOffset_ Height String where
   attr Height value = unsafeAttribute { key: "height", value: prop' value }
+
 instance Attr FeSpecularLighting_ Height String where
   attr Height value = unsafeAttribute { key: "height", value: prop' value }
+
 instance Attr FeTile_ Height String where
   attr Height value = unsafeAttribute { key: "height", value: prop' value }
+
 instance Attr FeTurbulence_ Height String where
   attr Height value = unsafeAttribute { key: "height", value: prop' value }
+
 instance Attr Filter_ Height String where
   attr Height value = unsafeAttribute { key: "height", value: prop' value }
+
 instance Attr ForeignObject_ Height String where
   attr Height value = unsafeAttribute { key: "height", value: prop' value }
+
 instance Attr Image_ Height String where
   attr Height value = unsafeAttribute { key: "height", value: prop' value }
+
 instance Attr Mask_ Height String where
   attr Height value = unsafeAttribute { key: "height", value: prop' value }
+
 instance Attr Pattern_ Height String where
   attr Height value = unsafeAttribute { key: "height", value: prop' value }
+
 instance Attr Rect_ Height String where
   attr Height value = unsafeAttribute { key: "height", value: prop' value }
+
 instance Attr Svg_ Height String where
   attr Height value = unsafeAttribute { key: "height", value: prop' value }
+
 instance Attr Symbol_ Height String where
   attr Height value = unsafeAttribute { key: "height", value: prop' value }
+
 instance Attr Use_ Height String where
   attr Height value = unsafeAttribute { key: "height", value: prop' value }

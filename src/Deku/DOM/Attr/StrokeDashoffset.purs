@@ -46,84 +46,165 @@ import Deku.Attribute (class Attr, prop', unsafeAttribute)
 data StrokeDashoffset = StrokeDashoffset
 
 instance Attr Circle_ StrokeDashoffset String where
-  attr StrokeDashoffset value = unsafeAttribute { key: "stroke-dashoffset", value: prop' value }
+  attr StrokeDashoffset value = unsafeAttribute
+    { key: "stroke-dashoffset", value: prop' value }
+
 instance Attr ClipPath_ StrokeDashoffset String where
-  attr StrokeDashoffset value = unsafeAttribute { key: "stroke-dashoffset", value: prop' value }
+  attr StrokeDashoffset value = unsafeAttribute
+    { key: "stroke-dashoffset", value: prop' value }
+
 instance Attr Defs_ StrokeDashoffset String where
-  attr StrokeDashoffset value = unsafeAttribute { key: "stroke-dashoffset", value: prop' value }
+  attr StrokeDashoffset value = unsafeAttribute
+    { key: "stroke-dashoffset", value: prop' value }
+
 instance Attr Ellipse_ StrokeDashoffset String where
-  attr StrokeDashoffset value = unsafeAttribute { key: "stroke-dashoffset", value: prop' value }
+  attr StrokeDashoffset value = unsafeAttribute
+    { key: "stroke-dashoffset", value: prop' value }
+
 instance Attr FeBlend_ StrokeDashoffset String where
-  attr StrokeDashoffset value = unsafeAttribute { key: "stroke-dashoffset", value: prop' value }
+  attr StrokeDashoffset value = unsafeAttribute
+    { key: "stroke-dashoffset", value: prop' value }
+
 instance Attr FeColorMatrix_ StrokeDashoffset String where
-  attr StrokeDashoffset value = unsafeAttribute { key: "stroke-dashoffset", value: prop' value }
+  attr StrokeDashoffset value = unsafeAttribute
+    { key: "stroke-dashoffset", value: prop' value }
+
 instance Attr FeComponentTransfer_ StrokeDashoffset String where
-  attr StrokeDashoffset value = unsafeAttribute { key: "stroke-dashoffset", value: prop' value }
+  attr StrokeDashoffset value = unsafeAttribute
+    { key: "stroke-dashoffset", value: prop' value }
+
 instance Attr FeComposite_ StrokeDashoffset String where
-  attr StrokeDashoffset value = unsafeAttribute { key: "stroke-dashoffset", value: prop' value }
+  attr StrokeDashoffset value = unsafeAttribute
+    { key: "stroke-dashoffset", value: prop' value }
+
 instance Attr FeConvolveMatrix_ StrokeDashoffset String where
-  attr StrokeDashoffset value = unsafeAttribute { key: "stroke-dashoffset", value: prop' value }
+  attr StrokeDashoffset value = unsafeAttribute
+    { key: "stroke-dashoffset", value: prop' value }
+
 instance Attr FeDiffuseLighting_ StrokeDashoffset String where
-  attr StrokeDashoffset value = unsafeAttribute { key: "stroke-dashoffset", value: prop' value }
+  attr StrokeDashoffset value = unsafeAttribute
+    { key: "stroke-dashoffset", value: prop' value }
+
 instance Attr FeDisplacementMap_ StrokeDashoffset String where
-  attr StrokeDashoffset value = unsafeAttribute { key: "stroke-dashoffset", value: prop' value }
+  attr StrokeDashoffset value = unsafeAttribute
+    { key: "stroke-dashoffset", value: prop' value }
+
 instance Attr FeFlood_ StrokeDashoffset String where
-  attr StrokeDashoffset value = unsafeAttribute { key: "stroke-dashoffset", value: prop' value }
+  attr StrokeDashoffset value = unsafeAttribute
+    { key: "stroke-dashoffset", value: prop' value }
+
 instance Attr FeGaussianBlur_ StrokeDashoffset String where
-  attr StrokeDashoffset value = unsafeAttribute { key: "stroke-dashoffset", value: prop' value }
+  attr StrokeDashoffset value = unsafeAttribute
+    { key: "stroke-dashoffset", value: prop' value }
+
 instance Attr FeImage_ StrokeDashoffset String where
-  attr StrokeDashoffset value = unsafeAttribute { key: "stroke-dashoffset", value: prop' value }
+  attr StrokeDashoffset value = unsafeAttribute
+    { key: "stroke-dashoffset", value: prop' value }
+
 instance Attr FeMerge_ StrokeDashoffset String where
-  attr StrokeDashoffset value = unsafeAttribute { key: "stroke-dashoffset", value: prop' value }
+  attr StrokeDashoffset value = unsafeAttribute
+    { key: "stroke-dashoffset", value: prop' value }
+
 instance Attr FeMorphology_ StrokeDashoffset String where
-  attr StrokeDashoffset value = unsafeAttribute { key: "stroke-dashoffset", value: prop' value }
+  attr StrokeDashoffset value = unsafeAttribute
+    { key: "stroke-dashoffset", value: prop' value }
+
 instance Attr FeOffset_ StrokeDashoffset String where
-  attr StrokeDashoffset value = unsafeAttribute { key: "stroke-dashoffset", value: prop' value }
+  attr StrokeDashoffset value = unsafeAttribute
+    { key: "stroke-dashoffset", value: prop' value }
+
 instance Attr FeSpecularLighting_ StrokeDashoffset String where
-  attr StrokeDashoffset value = unsafeAttribute { key: "stroke-dashoffset", value: prop' value }
+  attr StrokeDashoffset value = unsafeAttribute
+    { key: "stroke-dashoffset", value: prop' value }
+
 instance Attr FeTile_ StrokeDashoffset String where
-  attr StrokeDashoffset value = unsafeAttribute { key: "stroke-dashoffset", value: prop' value }
+  attr StrokeDashoffset value = unsafeAttribute
+    { key: "stroke-dashoffset", value: prop' value }
+
 instance Attr FeTurbulence_ StrokeDashoffset String where
-  attr StrokeDashoffset value = unsafeAttribute { key: "stroke-dashoffset", value: prop' value }
+  attr StrokeDashoffset value = unsafeAttribute
+    { key: "stroke-dashoffset", value: prop' value }
+
 instance Attr Filter_ StrokeDashoffset String where
-  attr StrokeDashoffset value = unsafeAttribute { key: "stroke-dashoffset", value: prop' value }
+  attr StrokeDashoffset value = unsafeAttribute
+    { key: "stroke-dashoffset", value: prop' value }
+
 instance Attr ForeignObject_ StrokeDashoffset String where
-  attr StrokeDashoffset value = unsafeAttribute { key: "stroke-dashoffset", value: prop' value }
+  attr StrokeDashoffset value = unsafeAttribute
+    { key: "stroke-dashoffset", value: prop' value }
+
 instance Attr G_ StrokeDashoffset String where
-  attr StrokeDashoffset value = unsafeAttribute { key: "stroke-dashoffset", value: prop' value }
+  attr StrokeDashoffset value = unsafeAttribute
+    { key: "stroke-dashoffset", value: prop' value }
+
 instance Attr Image_ StrokeDashoffset String where
-  attr StrokeDashoffset value = unsafeAttribute { key: "stroke-dashoffset", value: prop' value }
+  attr StrokeDashoffset value = unsafeAttribute
+    { key: "stroke-dashoffset", value: prop' value }
+
 instance Attr Line_ StrokeDashoffset String where
-  attr StrokeDashoffset value = unsafeAttribute { key: "stroke-dashoffset", value: prop' value }
+  attr StrokeDashoffset value = unsafeAttribute
+    { key: "stroke-dashoffset", value: prop' value }
+
 instance Attr LinearGradient_ StrokeDashoffset String where
-  attr StrokeDashoffset value = unsafeAttribute { key: "stroke-dashoffset", value: prop' value }
+  attr StrokeDashoffset value = unsafeAttribute
+    { key: "stroke-dashoffset", value: prop' value }
+
 instance Attr Marker_ StrokeDashoffset String where
-  attr StrokeDashoffset value = unsafeAttribute { key: "stroke-dashoffset", value: prop' value }
+  attr StrokeDashoffset value = unsafeAttribute
+    { key: "stroke-dashoffset", value: prop' value }
+
 instance Attr Mask_ StrokeDashoffset String where
-  attr StrokeDashoffset value = unsafeAttribute { key: "stroke-dashoffset", value: prop' value }
+  attr StrokeDashoffset value = unsafeAttribute
+    { key: "stroke-dashoffset", value: prop' value }
+
 instance Attr Path_ StrokeDashoffset String where
-  attr StrokeDashoffset value = unsafeAttribute { key: "stroke-dashoffset", value: prop' value }
+  attr StrokeDashoffset value = unsafeAttribute
+    { key: "stroke-dashoffset", value: prop' value }
+
 instance Attr Pattern_ StrokeDashoffset String where
-  attr StrokeDashoffset value = unsafeAttribute { key: "stroke-dashoffset", value: prop' value }
+  attr StrokeDashoffset value = unsafeAttribute
+    { key: "stroke-dashoffset", value: prop' value }
+
 instance Attr Polygon_ StrokeDashoffset String where
-  attr StrokeDashoffset value = unsafeAttribute { key: "stroke-dashoffset", value: prop' value }
+  attr StrokeDashoffset value = unsafeAttribute
+    { key: "stroke-dashoffset", value: prop' value }
+
 instance Attr Polyline_ StrokeDashoffset String where
-  attr StrokeDashoffset value = unsafeAttribute { key: "stroke-dashoffset", value: prop' value }
+  attr StrokeDashoffset value = unsafeAttribute
+    { key: "stroke-dashoffset", value: prop' value }
+
 instance Attr RadialGradient_ StrokeDashoffset String where
-  attr StrokeDashoffset value = unsafeAttribute { key: "stroke-dashoffset", value: prop' value }
+  attr StrokeDashoffset value = unsafeAttribute
+    { key: "stroke-dashoffset", value: prop' value }
+
 instance Attr Rect_ StrokeDashoffset String where
-  attr StrokeDashoffset value = unsafeAttribute { key: "stroke-dashoffset", value: prop' value }
+  attr StrokeDashoffset value = unsafeAttribute
+    { key: "stroke-dashoffset", value: prop' value }
+
 instance Attr Svg_ StrokeDashoffset String where
-  attr StrokeDashoffset value = unsafeAttribute { key: "stroke-dashoffset", value: prop' value }
+  attr StrokeDashoffset value = unsafeAttribute
+    { key: "stroke-dashoffset", value: prop' value }
+
 instance Attr Switch_ StrokeDashoffset String where
-  attr StrokeDashoffset value = unsafeAttribute { key: "stroke-dashoffset", value: prop' value }
+  attr StrokeDashoffset value = unsafeAttribute
+    { key: "stroke-dashoffset", value: prop' value }
+
 instance Attr Symbol_ StrokeDashoffset String where
-  attr StrokeDashoffset value = unsafeAttribute { key: "stroke-dashoffset", value: prop' value }
+  attr StrokeDashoffset value = unsafeAttribute
+    { key: "stroke-dashoffset", value: prop' value }
+
 instance Attr Text_ StrokeDashoffset String where
-  attr StrokeDashoffset value = unsafeAttribute { key: "stroke-dashoffset", value: prop' value }
+  attr StrokeDashoffset value = unsafeAttribute
+    { key: "stroke-dashoffset", value: prop' value }
+
 instance Attr TextPath_ StrokeDashoffset String where
-  attr StrokeDashoffset value = unsafeAttribute { key: "stroke-dashoffset", value: prop' value }
+  attr StrokeDashoffset value = unsafeAttribute
+    { key: "stroke-dashoffset", value: prop' value }
+
 instance Attr Tspan_ StrokeDashoffset String where
-  attr StrokeDashoffset value = unsafeAttribute { key: "stroke-dashoffset", value: prop' value }
+  attr StrokeDashoffset value = unsafeAttribute
+    { key: "stroke-dashoffset", value: prop' value }
+
 instance Attr Use_ StrokeDashoffset String where
-  attr StrokeDashoffset value = unsafeAttribute { key: "stroke-dashoffset", value: prop' value }
+  attr StrokeDashoffset value = unsafeAttribute
+    { key: "stroke-dashoffset", value: prop' value }

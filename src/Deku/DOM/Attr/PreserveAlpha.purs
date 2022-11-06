@@ -6,4 +6,5 @@ import Deku.Attribute (class Attr, prop', unsafeAttribute)
 data PreserveAlpha = PreserveAlpha
 
 instance Attr FeConvolveMatrix_ PreserveAlpha String where
-  attr PreserveAlpha value = unsafeAttribute { key: "preserveAlpha", value: prop' value }
+  attr PreserveAlpha value = unsafeAttribute
+    { key: "preserveAlpha", value: prop' value }

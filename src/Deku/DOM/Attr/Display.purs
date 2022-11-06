@@ -48,85 +48,126 @@ data Display = Display
 
 instance Attr Circle_ Display String where
   attr Display value = unsafeAttribute { key: "display", value: prop' value }
+
 instance Attr ClipPath_ Display String where
   attr Display value = unsafeAttribute { key: "display", value: prop' value }
+
 instance Attr Defs_ Display String where
   attr Display value = unsafeAttribute { key: "display", value: prop' value }
+
 instance Attr Ellipse_ Display String where
   attr Display value = unsafeAttribute { key: "display", value: prop' value }
+
 instance Attr FeBlend_ Display String where
   attr Display value = unsafeAttribute { key: "display", value: prop' value }
+
 instance Attr FeColorMatrix_ Display String where
   attr Display value = unsafeAttribute { key: "display", value: prop' value }
+
 instance Attr FeComponentTransfer_ Display String where
   attr Display value = unsafeAttribute { key: "display", value: prop' value }
+
 instance Attr FeComposite_ Display String where
   attr Display value = unsafeAttribute { key: "display", value: prop' value }
+
 instance Attr FeConvolveMatrix_ Display String where
   attr Display value = unsafeAttribute { key: "display", value: prop' value }
+
 instance Attr FeDiffuseLighting_ Display String where
   attr Display value = unsafeAttribute { key: "display", value: prop' value }
+
 instance Attr FeDisplacementMap_ Display String where
   attr Display value = unsafeAttribute { key: "display", value: prop' value }
+
 instance Attr FeFlood_ Display String where
   attr Display value = unsafeAttribute { key: "display", value: prop' value }
+
 instance Attr FeGaussianBlur_ Display String where
   attr Display value = unsafeAttribute { key: "display", value: prop' value }
+
 instance Attr FeImage_ Display String where
   attr Display value = unsafeAttribute { key: "display", value: prop' value }
+
 instance Attr FeMerge_ Display String where
   attr Display value = unsafeAttribute { key: "display", value: prop' value }
+
 instance Attr FeMorphology_ Display String where
   attr Display value = unsafeAttribute { key: "display", value: prop' value }
+
 instance Attr FeOffset_ Display String where
   attr Display value = unsafeAttribute { key: "display", value: prop' value }
+
 instance Attr FeSpecularLighting_ Display String where
   attr Display value = unsafeAttribute { key: "display", value: prop' value }
+
 instance Attr FeTile_ Display String where
   attr Display value = unsafeAttribute { key: "display", value: prop' value }
+
 instance Attr FeTurbulence_ Display String where
   attr Display value = unsafeAttribute { key: "display", value: prop' value }
+
 instance Attr Filter_ Display String where
   attr Display value = unsafeAttribute { key: "display", value: prop' value }
+
 instance Attr ForeignObject_ Display String where
   attr Display value = unsafeAttribute { key: "display", value: prop' value }
+
 instance Attr G_ Display String where
   attr Display value = unsafeAttribute { key: "display", value: prop' value }
+
 instance Attr Image_ Display String where
   attr Display value = unsafeAttribute { key: "display", value: prop' value }
+
 instance Attr Line_ Display String where
   attr Display value = unsafeAttribute { key: "display", value: prop' value }
+
 instance Attr LinearGradient_ Display String where
   attr Display value = unsafeAttribute { key: "display", value: prop' value }
+
 instance Attr Marker_ Display String where
   attr Display value = unsafeAttribute { key: "display", value: prop' value }
+
 instance Attr Mask_ Display String where
   attr Display value = unsafeAttribute { key: "display", value: prop' value }
+
 instance Attr Path_ Display String where
   attr Display value = unsafeAttribute { key: "display", value: prop' value }
+
 instance Attr Pattern_ Display String where
   attr Display value = unsafeAttribute { key: "display", value: prop' value }
+
 instance Attr Polygon_ Display String where
   attr Display value = unsafeAttribute { key: "display", value: prop' value }
+
 instance Attr Polyline_ Display String where
   attr Display value = unsafeAttribute { key: "display", value: prop' value }
+
 instance Attr RadialGradient_ Display String where
   attr Display value = unsafeAttribute { key: "display", value: prop' value }
+
 instance Attr Rect_ Display String where
   attr Display value = unsafeAttribute { key: "display", value: prop' value }
+
 instance Attr Stop_ Display String where
   attr Display value = unsafeAttribute { key: "display", value: prop' value }
+
 instance Attr Svg_ Display String where
   attr Display value = unsafeAttribute { key: "display", value: prop' value }
+
 instance Attr Switch_ Display String where
   attr Display value = unsafeAttribute { key: "display", value: prop' value }
+
 instance Attr Symbol_ Display String where
   attr Display value = unsafeAttribute { key: "display", value: prop' value }
+
 instance Attr Text_ Display String where
   attr Display value = unsafeAttribute { key: "display", value: prop' value }
+
 instance Attr TextPath_ Display String where
   attr Display value = unsafeAttribute { key: "display", value: prop' value }
+
 instance Attr Tspan_ Display String where
   attr Display value = unsafeAttribute { key: "display", value: prop' value }
+
 instance Attr Use_ Display String where
   attr Display value = unsafeAttribute { key: "display", value: prop' value }

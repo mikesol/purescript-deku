@@ -47,86 +47,169 @@ import Deku.Attribute (class Attr, prop', unsafeAttribute)
 data Visibility = Visibility
 
 instance Attr Circle_ Visibility String where
-  attr Visibility value = unsafeAttribute { key: "visibility", value: prop' value }
+  attr Visibility value = unsafeAttribute
+    { key: "visibility", value: prop' value }
+
 instance Attr ClipPath_ Visibility String where
-  attr Visibility value = unsafeAttribute { key: "visibility", value: prop' value }
+  attr Visibility value = unsafeAttribute
+    { key: "visibility", value: prop' value }
+
 instance Attr Defs_ Visibility String where
-  attr Visibility value = unsafeAttribute { key: "visibility", value: prop' value }
+  attr Visibility value = unsafeAttribute
+    { key: "visibility", value: prop' value }
+
 instance Attr Ellipse_ Visibility String where
-  attr Visibility value = unsafeAttribute { key: "visibility", value: prop' value }
+  attr Visibility value = unsafeAttribute
+    { key: "visibility", value: prop' value }
+
 instance Attr FeBlend_ Visibility String where
-  attr Visibility value = unsafeAttribute { key: "visibility", value: prop' value }
+  attr Visibility value = unsafeAttribute
+    { key: "visibility", value: prop' value }
+
 instance Attr FeColorMatrix_ Visibility String where
-  attr Visibility value = unsafeAttribute { key: "visibility", value: prop' value }
+  attr Visibility value = unsafeAttribute
+    { key: "visibility", value: prop' value }
+
 instance Attr FeComponentTransfer_ Visibility String where
-  attr Visibility value = unsafeAttribute { key: "visibility", value: prop' value }
+  attr Visibility value = unsafeAttribute
+    { key: "visibility", value: prop' value }
+
 instance Attr FeComposite_ Visibility String where
-  attr Visibility value = unsafeAttribute { key: "visibility", value: prop' value }
+  attr Visibility value = unsafeAttribute
+    { key: "visibility", value: prop' value }
+
 instance Attr FeConvolveMatrix_ Visibility String where
-  attr Visibility value = unsafeAttribute { key: "visibility", value: prop' value }
+  attr Visibility value = unsafeAttribute
+    { key: "visibility", value: prop' value }
+
 instance Attr FeDiffuseLighting_ Visibility String where
-  attr Visibility value = unsafeAttribute { key: "visibility", value: prop' value }
+  attr Visibility value = unsafeAttribute
+    { key: "visibility", value: prop' value }
+
 instance Attr FeDisplacementMap_ Visibility String where
-  attr Visibility value = unsafeAttribute { key: "visibility", value: prop' value }
+  attr Visibility value = unsafeAttribute
+    { key: "visibility", value: prop' value }
+
 instance Attr FeFlood_ Visibility String where
-  attr Visibility value = unsafeAttribute { key: "visibility", value: prop' value }
+  attr Visibility value = unsafeAttribute
+    { key: "visibility", value: prop' value }
+
 instance Attr FeGaussianBlur_ Visibility String where
-  attr Visibility value = unsafeAttribute { key: "visibility", value: prop' value }
+  attr Visibility value = unsafeAttribute
+    { key: "visibility", value: prop' value }
+
 instance Attr FeImage_ Visibility String where
-  attr Visibility value = unsafeAttribute { key: "visibility", value: prop' value }
+  attr Visibility value = unsafeAttribute
+    { key: "visibility", value: prop' value }
+
 instance Attr FeMerge_ Visibility String where
-  attr Visibility value = unsafeAttribute { key: "visibility", value: prop' value }
+  attr Visibility value = unsafeAttribute
+    { key: "visibility", value: prop' value }
+
 instance Attr FeMorphology_ Visibility String where
-  attr Visibility value = unsafeAttribute { key: "visibility", value: prop' value }
+  attr Visibility value = unsafeAttribute
+    { key: "visibility", value: prop' value }
+
 instance Attr FeOffset_ Visibility String where
-  attr Visibility value = unsafeAttribute { key: "visibility", value: prop' value }
+  attr Visibility value = unsafeAttribute
+    { key: "visibility", value: prop' value }
+
 instance Attr FeSpecularLighting_ Visibility String where
-  attr Visibility value = unsafeAttribute { key: "visibility", value: prop' value }
+  attr Visibility value = unsafeAttribute
+    { key: "visibility", value: prop' value }
+
 instance Attr FeTile_ Visibility String where
-  attr Visibility value = unsafeAttribute { key: "visibility", value: prop' value }
+  attr Visibility value = unsafeAttribute
+    { key: "visibility", value: prop' value }
+
 instance Attr FeTurbulence_ Visibility String where
-  attr Visibility value = unsafeAttribute { key: "visibility", value: prop' value }
+  attr Visibility value = unsafeAttribute
+    { key: "visibility", value: prop' value }
+
 instance Attr Filter_ Visibility String where
-  attr Visibility value = unsafeAttribute { key: "visibility", value: prop' value }
+  attr Visibility value = unsafeAttribute
+    { key: "visibility", value: prop' value }
+
 instance Attr ForeignObject_ Visibility String where
-  attr Visibility value = unsafeAttribute { key: "visibility", value: prop' value }
+  attr Visibility value = unsafeAttribute
+    { key: "visibility", value: prop' value }
+
 instance Attr G_ Visibility String where
-  attr Visibility value = unsafeAttribute { key: "visibility", value: prop' value }
+  attr Visibility value = unsafeAttribute
+    { key: "visibility", value: prop' value }
+
 instance Attr Image_ Visibility String where
-  attr Visibility value = unsafeAttribute { key: "visibility", value: prop' value }
+  attr Visibility value = unsafeAttribute
+    { key: "visibility", value: prop' value }
+
 instance Attr Line_ Visibility String where
-  attr Visibility value = unsafeAttribute { key: "visibility", value: prop' value }
+  attr Visibility value = unsafeAttribute
+    { key: "visibility", value: prop' value }
+
 instance Attr LinearGradient_ Visibility String where
-  attr Visibility value = unsafeAttribute { key: "visibility", value: prop' value }
+  attr Visibility value = unsafeAttribute
+    { key: "visibility", value: prop' value }
+
 instance Attr Marker_ Visibility String where
-  attr Visibility value = unsafeAttribute { key: "visibility", value: prop' value }
+  attr Visibility value = unsafeAttribute
+    { key: "visibility", value: prop' value }
+
 instance Attr Mask_ Visibility String where
-  attr Visibility value = unsafeAttribute { key: "visibility", value: prop' value }
+  attr Visibility value = unsafeAttribute
+    { key: "visibility", value: prop' value }
+
 instance Attr Path_ Visibility String where
-  attr Visibility value = unsafeAttribute { key: "visibility", value: prop' value }
+  attr Visibility value = unsafeAttribute
+    { key: "visibility", value: prop' value }
+
 instance Attr Pattern_ Visibility String where
-  attr Visibility value = unsafeAttribute { key: "visibility", value: prop' value }
+  attr Visibility value = unsafeAttribute
+    { key: "visibility", value: prop' value }
+
 instance Attr Polygon_ Visibility String where
-  attr Visibility value = unsafeAttribute { key: "visibility", value: prop' value }
+  attr Visibility value = unsafeAttribute
+    { key: "visibility", value: prop' value }
+
 instance Attr Polyline_ Visibility String where
-  attr Visibility value = unsafeAttribute { key: "visibility", value: prop' value }
+  attr Visibility value = unsafeAttribute
+    { key: "visibility", value: prop' value }
+
 instance Attr RadialGradient_ Visibility String where
-  attr Visibility value = unsafeAttribute { key: "visibility", value: prop' value }
+  attr Visibility value = unsafeAttribute
+    { key: "visibility", value: prop' value }
+
 instance Attr Rect_ Visibility String where
-  attr Visibility value = unsafeAttribute { key: "visibility", value: prop' value }
+  attr Visibility value = unsafeAttribute
+    { key: "visibility", value: prop' value }
+
 instance Attr Stop_ Visibility String where
-  attr Visibility value = unsafeAttribute { key: "visibility", value: prop' value }
+  attr Visibility value = unsafeAttribute
+    { key: "visibility", value: prop' value }
+
 instance Attr Svg_ Visibility String where
-  attr Visibility value = unsafeAttribute { key: "visibility", value: prop' value }
+  attr Visibility value = unsafeAttribute
+    { key: "visibility", value: prop' value }
+
 instance Attr Switch_ Visibility String where
-  attr Visibility value = unsafeAttribute { key: "visibility", value: prop' value }
+  attr Visibility value = unsafeAttribute
+    { key: "visibility", value: prop' value }
+
 instance Attr Symbol_ Visibility String where
-  attr Visibility value = unsafeAttribute { key: "visibility", value: prop' value }
+  attr Visibility value = unsafeAttribute
+    { key: "visibility", value: prop' value }
+
 instance Attr Text_ Visibility String where
-  attr Visibility value = unsafeAttribute { key: "visibility", value: prop' value }
+  attr Visibility value = unsafeAttribute
+    { key: "visibility", value: prop' value }
+
 instance Attr TextPath_ Visibility String where
-  attr Visibility value = unsafeAttribute { key: "visibility", value: prop' value }
+  attr Visibility value = unsafeAttribute
+    { key: "visibility", value: prop' value }
+
 instance Attr Tspan_ Visibility String where
-  attr Visibility value = unsafeAttribute { key: "visibility", value: prop' value }
+  attr Visibility value = unsafeAttribute
+    { key: "visibility", value: prop' value }
+
 instance Attr Use_ Visibility String where
-  attr Visibility value = unsafeAttribute { key: "visibility", value: prop' value }
+  attr Visibility value = unsafeAttribute
+    { key: "visibility", value: prop' value }

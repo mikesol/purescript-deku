@@ -22,36 +22,69 @@ import Deku.Attribute (class Attr, prop', unsafeAttribute)
 data AriaRoledescription = AriaRoledescription
 
 instance Attr Circle_ AriaRoledescription String where
-  attr AriaRoledescription value = unsafeAttribute { key: "aria-roledescription", value: prop' value }
+  attr AriaRoledescription value = unsafeAttribute
+    { key: "aria-roledescription", value: prop' value }
+
 instance Attr Ellipse_ AriaRoledescription String where
-  attr AriaRoledescription value = unsafeAttribute { key: "aria-roledescription", value: prop' value }
+  attr AriaRoledescription value = unsafeAttribute
+    { key: "aria-roledescription", value: prop' value }
+
 instance Attr ForeignObject_ AriaRoledescription String where
-  attr AriaRoledescription value = unsafeAttribute { key: "aria-roledescription", value: prop' value }
+  attr AriaRoledescription value = unsafeAttribute
+    { key: "aria-roledescription", value: prop' value }
+
 instance Attr G_ AriaRoledescription String where
-  attr AriaRoledescription value = unsafeAttribute { key: "aria-roledescription", value: prop' value }
+  attr AriaRoledescription value = unsafeAttribute
+    { key: "aria-roledescription", value: prop' value }
+
 instance Attr Line_ AriaRoledescription String where
-  attr AriaRoledescription value = unsafeAttribute { key: "aria-roledescription", value: prop' value }
+  attr AriaRoledescription value = unsafeAttribute
+    { key: "aria-roledescription", value: prop' value }
+
 instance Attr Marker_ AriaRoledescription String where
-  attr AriaRoledescription value = unsafeAttribute { key: "aria-roledescription", value: prop' value }
+  attr AriaRoledescription value = unsafeAttribute
+    { key: "aria-roledescription", value: prop' value }
+
 instance Attr Path_ AriaRoledescription String where
-  attr AriaRoledescription value = unsafeAttribute { key: "aria-roledescription", value: prop' value }
+  attr AriaRoledescription value = unsafeAttribute
+    { key: "aria-roledescription", value: prop' value }
+
 instance Attr Polygon_ AriaRoledescription String where
-  attr AriaRoledescription value = unsafeAttribute { key: "aria-roledescription", value: prop' value }
+  attr AriaRoledescription value = unsafeAttribute
+    { key: "aria-roledescription", value: prop' value }
+
 instance Attr Polyline_ AriaRoledescription String where
-  attr AriaRoledescription value = unsafeAttribute { key: "aria-roledescription", value: prop' value }
+  attr AriaRoledescription value = unsafeAttribute
+    { key: "aria-roledescription", value: prop' value }
+
 instance Attr Rect_ AriaRoledescription String where
-  attr AriaRoledescription value = unsafeAttribute { key: "aria-roledescription", value: prop' value }
+  attr AriaRoledescription value = unsafeAttribute
+    { key: "aria-roledescription", value: prop' value }
+
 instance Attr Svg_ AriaRoledescription String where
-  attr AriaRoledescription value = unsafeAttribute { key: "aria-roledescription", value: prop' value }
+  attr AriaRoledescription value = unsafeAttribute
+    { key: "aria-roledescription", value: prop' value }
+
 instance Attr Symbol_ AriaRoledescription String where
-  attr AriaRoledescription value = unsafeAttribute { key: "aria-roledescription", value: prop' value }
+  attr AriaRoledescription value = unsafeAttribute
+    { key: "aria-roledescription", value: prop' value }
+
 instance Attr Text_ AriaRoledescription String where
-  attr AriaRoledescription value = unsafeAttribute { key: "aria-roledescription", value: prop' value }
+  attr AriaRoledescription value = unsafeAttribute
+    { key: "aria-roledescription", value: prop' value }
+
 instance Attr TextPath_ AriaRoledescription String where
-  attr AriaRoledescription value = unsafeAttribute { key: "aria-roledescription", value: prop' value }
+  attr AriaRoledescription value = unsafeAttribute
+    { key: "aria-roledescription", value: prop' value }
+
 instance Attr Tspan_ AriaRoledescription String where
-  attr AriaRoledescription value = unsafeAttribute { key: "aria-roledescription", value: prop' value }
+  attr AriaRoledescription value = unsafeAttribute
+    { key: "aria-roledescription", value: prop' value }
+
 instance Attr Use_ AriaRoledescription String where
-  attr AriaRoledescription value = unsafeAttribute { key: "aria-roledescription", value: prop' value }
+  attr AriaRoledescription value = unsafeAttribute
+    { key: "aria-roledescription", value: prop' value }
+
 instance Attr View_ AriaRoledescription String where
-  attr AriaRoledescription value = unsafeAttribute { key: "aria-roledescription", value: prop' value }
+  attr AriaRoledescription value = unsafeAttribute
+    { key: "aria-roledescription", value: prop' value }

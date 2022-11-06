@@ -22,36 +22,69 @@ import Deku.Attribute (class Attr, prop', unsafeAttribute)
 data AriaAtomic = AriaAtomic
 
 instance Attr Circle_ AriaAtomic String where
-  attr AriaAtomic value = unsafeAttribute { key: "aria-atomic", value: prop' value }
+  attr AriaAtomic value = unsafeAttribute
+    { key: "aria-atomic", value: prop' value }
+
 instance Attr Ellipse_ AriaAtomic String where
-  attr AriaAtomic value = unsafeAttribute { key: "aria-atomic", value: prop' value }
+  attr AriaAtomic value = unsafeAttribute
+    { key: "aria-atomic", value: prop' value }
+
 instance Attr ForeignObject_ AriaAtomic String where
-  attr AriaAtomic value = unsafeAttribute { key: "aria-atomic", value: prop' value }
+  attr AriaAtomic value = unsafeAttribute
+    { key: "aria-atomic", value: prop' value }
+
 instance Attr G_ AriaAtomic String where
-  attr AriaAtomic value = unsafeAttribute { key: "aria-atomic", value: prop' value }
+  attr AriaAtomic value = unsafeAttribute
+    { key: "aria-atomic", value: prop' value }
+
 instance Attr Line_ AriaAtomic String where
-  attr AriaAtomic value = unsafeAttribute { key: "aria-atomic", value: prop' value }
+  attr AriaAtomic value = unsafeAttribute
+    { key: "aria-atomic", value: prop' value }
+
 instance Attr Marker_ AriaAtomic String where
-  attr AriaAtomic value = unsafeAttribute { key: "aria-atomic", value: prop' value }
+  attr AriaAtomic value = unsafeAttribute
+    { key: "aria-atomic", value: prop' value }
+
 instance Attr Path_ AriaAtomic String where
-  attr AriaAtomic value = unsafeAttribute { key: "aria-atomic", value: prop' value }
+  attr AriaAtomic value = unsafeAttribute
+    { key: "aria-atomic", value: prop' value }
+
 instance Attr Polygon_ AriaAtomic String where
-  attr AriaAtomic value = unsafeAttribute { key: "aria-atomic", value: prop' value }
+  attr AriaAtomic value = unsafeAttribute
+    { key: "aria-atomic", value: prop' value }
+
 instance Attr Polyline_ AriaAtomic String where
-  attr AriaAtomic value = unsafeAttribute { key: "aria-atomic", value: prop' value }
+  attr AriaAtomic value = unsafeAttribute
+    { key: "aria-atomic", value: prop' value }
+
 instance Attr Rect_ AriaAtomic String where
-  attr AriaAtomic value = unsafeAttribute { key: "aria-atomic", value: prop' value }
+  attr AriaAtomic value = unsafeAttribute
+    { key: "aria-atomic", value: prop' value }
+
 instance Attr Svg_ AriaAtomic String where
-  attr AriaAtomic value = unsafeAttribute { key: "aria-atomic", value: prop' value }
+  attr AriaAtomic value = unsafeAttribute
+    { key: "aria-atomic", value: prop' value }
+
 instance Attr Symbol_ AriaAtomic String where
-  attr AriaAtomic value = unsafeAttribute { key: "aria-atomic", value: prop' value }
+  attr AriaAtomic value = unsafeAttribute
+    { key: "aria-atomic", value: prop' value }
+
 instance Attr Text_ AriaAtomic String where
-  attr AriaAtomic value = unsafeAttribute { key: "aria-atomic", value: prop' value }
+  attr AriaAtomic value = unsafeAttribute
+    { key: "aria-atomic", value: prop' value }
+
 instance Attr TextPath_ AriaAtomic String where
-  attr AriaAtomic value = unsafeAttribute { key: "aria-atomic", value: prop' value }
+  attr AriaAtomic value = unsafeAttribute
+    { key: "aria-atomic", value: prop' value }
+
 instance Attr Tspan_ AriaAtomic String where
-  attr AriaAtomic value = unsafeAttribute { key: "aria-atomic", value: prop' value }
+  attr AriaAtomic value = unsafeAttribute
+    { key: "aria-atomic", value: prop' value }
+
 instance Attr Use_ AriaAtomic String where
-  attr AriaAtomic value = unsafeAttribute { key: "aria-atomic", value: prop' value }
+  attr AriaAtomic value = unsafeAttribute
+    { key: "aria-atomic", value: prop' value }
+
 instance Attr View_ AriaAtomic String where
-  attr AriaAtomic value = unsafeAttribute { key: "aria-atomic", value: prop' value }
+  attr AriaAtomic value = unsafeAttribute
+    { key: "aria-atomic", value: prop' value }

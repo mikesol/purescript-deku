@@ -10,12 +10,21 @@ import Deku.Attribute (class Attr, prop', unsafeAttribute)
 data XlinkActuate = XlinkActuate
 
 instance Attr AnimateTransform_ XlinkActuate String where
-  attr XlinkActuate value = unsafeAttribute { key: "xlink:actuate", value: prop' value }
+  attr XlinkActuate value = unsafeAttribute
+    { key: "xlink:actuate", value: prop' value }
+
 instance Attr FeImage_ XlinkActuate String where
-  attr XlinkActuate value = unsafeAttribute { key: "xlink:actuate", value: prop' value }
+  attr XlinkActuate value = unsafeAttribute
+    { key: "xlink:actuate", value: prop' value }
+
 instance Attr Filter_ XlinkActuate String where
-  attr XlinkActuate value = unsafeAttribute { key: "xlink:actuate", value: prop' value }
+  attr XlinkActuate value = unsafeAttribute
+    { key: "xlink:actuate", value: prop' value }
+
 instance Attr Image_ XlinkActuate String where
-  attr XlinkActuate value = unsafeAttribute { key: "xlink:actuate", value: prop' value }
+  attr XlinkActuate value = unsafeAttribute
+    { key: "xlink:actuate", value: prop' value }
+
 instance Attr Mpath_ XlinkActuate String where
-  attr XlinkActuate value = unsafeAttribute { key: "xlink:actuate", value: prop' value }
+  attr XlinkActuate value = unsafeAttribute
+    { key: "xlink:actuate", value: prop' value }

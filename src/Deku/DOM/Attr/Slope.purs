@@ -10,9 +10,12 @@ data Slope = Slope
 
 instance Attr FeFuncA_ Slope String where
   attr Slope value = unsafeAttribute { key: "slope", value: prop' value }
+
 instance Attr FeFuncB_ Slope String where
   attr Slope value = unsafeAttribute { key: "slope", value: prop' value }
+
 instance Attr FeFuncG_ Slope String where
   attr Slope value = unsafeAttribute { key: "slope", value: prop' value }
+
 instance Attr FeFuncR_ Slope String where
   attr Slope value = unsafeAttribute { key: "slope", value: prop' value }

@@ -8,8 +8,13 @@ import Deku.Attribute (class Attr, prop', unsafeAttribute)
 data Accumulate = Accumulate
 
 instance Attr Animate_ Accumulate String where
-  attr Accumulate value = unsafeAttribute { key: "accumulate", value: prop' value }
+  attr Accumulate value = unsafeAttribute
+    { key: "accumulate", value: prop' value }
+
 instance Attr AnimateMotion_ Accumulate String where
-  attr Accumulate value = unsafeAttribute { key: "accumulate", value: prop' value }
+  attr Accumulate value = unsafeAttribute
+    { key: "accumulate", value: prop' value }
+
 instance Attr AnimateTransform_ Accumulate String where
-  attr Accumulate value = unsafeAttribute { key: "accumulate", value: prop' value }
+  attr Accumulate value = unsafeAttribute
+    { key: "accumulate", value: prop' value }

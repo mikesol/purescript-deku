@@ -8,5 +8,6 @@ data Z = Z
 
 instance Attr FePointLight_ Z String where
   attr Z value = unsafeAttribute { key: "z", value: prop' value }
+
 instance Attr FeSpotLight_ Z String where
   attr Z value = unsafeAttribute { key: "z", value: prop' value }

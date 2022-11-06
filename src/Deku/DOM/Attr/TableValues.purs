@@ -9,10 +9,17 @@ import Deku.Attribute (class Attr, prop', unsafeAttribute)
 data TableValues = TableValues
 
 instance Attr FeFuncA_ TableValues String where
-  attr TableValues value = unsafeAttribute { key: "tableValues", value: prop' value }
+  attr TableValues value = unsafeAttribute
+    { key: "tableValues", value: prop' value }
+
 instance Attr FeFuncB_ TableValues String where
-  attr TableValues value = unsafeAttribute { key: "tableValues", value: prop' value }
+  attr TableValues value = unsafeAttribute
+    { key: "tableValues", value: prop' value }
+
 instance Attr FeFuncG_ TableValues String where
-  attr TableValues value = unsafeAttribute { key: "tableValues", value: prop' value }
+  attr TableValues value = unsafeAttribute
+    { key: "tableValues", value: prop' value }
+
 instance Attr FeFuncR_ TableValues String where
-  attr TableValues value = unsafeAttribute { key: "tableValues", value: prop' value }
+  attr TableValues value = unsafeAttribute
+    { key: "tableValues", value: prop' value }

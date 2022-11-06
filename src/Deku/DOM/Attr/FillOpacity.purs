@@ -46,84 +46,165 @@ import Deku.Attribute (class Attr, prop', unsafeAttribute)
 data FillOpacity = FillOpacity
 
 instance Attr Circle_ FillOpacity String where
-  attr FillOpacity value = unsafeAttribute { key: "fill-opacity", value: prop' value }
+  attr FillOpacity value = unsafeAttribute
+    { key: "fill-opacity", value: prop' value }
+
 instance Attr ClipPath_ FillOpacity String where
-  attr FillOpacity value = unsafeAttribute { key: "fill-opacity", value: prop' value }
+  attr FillOpacity value = unsafeAttribute
+    { key: "fill-opacity", value: prop' value }
+
 instance Attr Defs_ FillOpacity String where
-  attr FillOpacity value = unsafeAttribute { key: "fill-opacity", value: prop' value }
+  attr FillOpacity value = unsafeAttribute
+    { key: "fill-opacity", value: prop' value }
+
 instance Attr Ellipse_ FillOpacity String where
-  attr FillOpacity value = unsafeAttribute { key: "fill-opacity", value: prop' value }
+  attr FillOpacity value = unsafeAttribute
+    { key: "fill-opacity", value: prop' value }
+
 instance Attr FeBlend_ FillOpacity String where
-  attr FillOpacity value = unsafeAttribute { key: "fill-opacity", value: prop' value }
+  attr FillOpacity value = unsafeAttribute
+    { key: "fill-opacity", value: prop' value }
+
 instance Attr FeColorMatrix_ FillOpacity String where
-  attr FillOpacity value = unsafeAttribute { key: "fill-opacity", value: prop' value }
+  attr FillOpacity value = unsafeAttribute
+    { key: "fill-opacity", value: prop' value }
+
 instance Attr FeComponentTransfer_ FillOpacity String where
-  attr FillOpacity value = unsafeAttribute { key: "fill-opacity", value: prop' value }
+  attr FillOpacity value = unsafeAttribute
+    { key: "fill-opacity", value: prop' value }
+
 instance Attr FeComposite_ FillOpacity String where
-  attr FillOpacity value = unsafeAttribute { key: "fill-opacity", value: prop' value }
+  attr FillOpacity value = unsafeAttribute
+    { key: "fill-opacity", value: prop' value }
+
 instance Attr FeConvolveMatrix_ FillOpacity String where
-  attr FillOpacity value = unsafeAttribute { key: "fill-opacity", value: prop' value }
+  attr FillOpacity value = unsafeAttribute
+    { key: "fill-opacity", value: prop' value }
+
 instance Attr FeDiffuseLighting_ FillOpacity String where
-  attr FillOpacity value = unsafeAttribute { key: "fill-opacity", value: prop' value }
+  attr FillOpacity value = unsafeAttribute
+    { key: "fill-opacity", value: prop' value }
+
 instance Attr FeDisplacementMap_ FillOpacity String where
-  attr FillOpacity value = unsafeAttribute { key: "fill-opacity", value: prop' value }
+  attr FillOpacity value = unsafeAttribute
+    { key: "fill-opacity", value: prop' value }
+
 instance Attr FeFlood_ FillOpacity String where
-  attr FillOpacity value = unsafeAttribute { key: "fill-opacity", value: prop' value }
+  attr FillOpacity value = unsafeAttribute
+    { key: "fill-opacity", value: prop' value }
+
 instance Attr FeGaussianBlur_ FillOpacity String where
-  attr FillOpacity value = unsafeAttribute { key: "fill-opacity", value: prop' value }
+  attr FillOpacity value = unsafeAttribute
+    { key: "fill-opacity", value: prop' value }
+
 instance Attr FeImage_ FillOpacity String where
-  attr FillOpacity value = unsafeAttribute { key: "fill-opacity", value: prop' value }
+  attr FillOpacity value = unsafeAttribute
+    { key: "fill-opacity", value: prop' value }
+
 instance Attr FeMerge_ FillOpacity String where
-  attr FillOpacity value = unsafeAttribute { key: "fill-opacity", value: prop' value }
+  attr FillOpacity value = unsafeAttribute
+    { key: "fill-opacity", value: prop' value }
+
 instance Attr FeMorphology_ FillOpacity String where
-  attr FillOpacity value = unsafeAttribute { key: "fill-opacity", value: prop' value }
+  attr FillOpacity value = unsafeAttribute
+    { key: "fill-opacity", value: prop' value }
+
 instance Attr FeOffset_ FillOpacity String where
-  attr FillOpacity value = unsafeAttribute { key: "fill-opacity", value: prop' value }
+  attr FillOpacity value = unsafeAttribute
+    { key: "fill-opacity", value: prop' value }
+
 instance Attr FeSpecularLighting_ FillOpacity String where
-  attr FillOpacity value = unsafeAttribute { key: "fill-opacity", value: prop' value }
+  attr FillOpacity value = unsafeAttribute
+    { key: "fill-opacity", value: prop' value }
+
 instance Attr FeTile_ FillOpacity String where
-  attr FillOpacity value = unsafeAttribute { key: "fill-opacity", value: prop' value }
+  attr FillOpacity value = unsafeAttribute
+    { key: "fill-opacity", value: prop' value }
+
 instance Attr FeTurbulence_ FillOpacity String where
-  attr FillOpacity value = unsafeAttribute { key: "fill-opacity", value: prop' value }
+  attr FillOpacity value = unsafeAttribute
+    { key: "fill-opacity", value: prop' value }
+
 instance Attr Filter_ FillOpacity String where
-  attr FillOpacity value = unsafeAttribute { key: "fill-opacity", value: prop' value }
+  attr FillOpacity value = unsafeAttribute
+    { key: "fill-opacity", value: prop' value }
+
 instance Attr ForeignObject_ FillOpacity String where
-  attr FillOpacity value = unsafeAttribute { key: "fill-opacity", value: prop' value }
+  attr FillOpacity value = unsafeAttribute
+    { key: "fill-opacity", value: prop' value }
+
 instance Attr G_ FillOpacity String where
-  attr FillOpacity value = unsafeAttribute { key: "fill-opacity", value: prop' value }
+  attr FillOpacity value = unsafeAttribute
+    { key: "fill-opacity", value: prop' value }
+
 instance Attr Image_ FillOpacity String where
-  attr FillOpacity value = unsafeAttribute { key: "fill-opacity", value: prop' value }
+  attr FillOpacity value = unsafeAttribute
+    { key: "fill-opacity", value: prop' value }
+
 instance Attr Line_ FillOpacity String where
-  attr FillOpacity value = unsafeAttribute { key: "fill-opacity", value: prop' value }
+  attr FillOpacity value = unsafeAttribute
+    { key: "fill-opacity", value: prop' value }
+
 instance Attr LinearGradient_ FillOpacity String where
-  attr FillOpacity value = unsafeAttribute { key: "fill-opacity", value: prop' value }
+  attr FillOpacity value = unsafeAttribute
+    { key: "fill-opacity", value: prop' value }
+
 instance Attr Marker_ FillOpacity String where
-  attr FillOpacity value = unsafeAttribute { key: "fill-opacity", value: prop' value }
+  attr FillOpacity value = unsafeAttribute
+    { key: "fill-opacity", value: prop' value }
+
 instance Attr Mask_ FillOpacity String where
-  attr FillOpacity value = unsafeAttribute { key: "fill-opacity", value: prop' value }
+  attr FillOpacity value = unsafeAttribute
+    { key: "fill-opacity", value: prop' value }
+
 instance Attr Path_ FillOpacity String where
-  attr FillOpacity value = unsafeAttribute { key: "fill-opacity", value: prop' value }
+  attr FillOpacity value = unsafeAttribute
+    { key: "fill-opacity", value: prop' value }
+
 instance Attr Pattern_ FillOpacity String where
-  attr FillOpacity value = unsafeAttribute { key: "fill-opacity", value: prop' value }
+  attr FillOpacity value = unsafeAttribute
+    { key: "fill-opacity", value: prop' value }
+
 instance Attr Polygon_ FillOpacity String where
-  attr FillOpacity value = unsafeAttribute { key: "fill-opacity", value: prop' value }
+  attr FillOpacity value = unsafeAttribute
+    { key: "fill-opacity", value: prop' value }
+
 instance Attr Polyline_ FillOpacity String where
-  attr FillOpacity value = unsafeAttribute { key: "fill-opacity", value: prop' value }
+  attr FillOpacity value = unsafeAttribute
+    { key: "fill-opacity", value: prop' value }
+
 instance Attr RadialGradient_ FillOpacity String where
-  attr FillOpacity value = unsafeAttribute { key: "fill-opacity", value: prop' value }
+  attr FillOpacity value = unsafeAttribute
+    { key: "fill-opacity", value: prop' value }
+
 instance Attr Rect_ FillOpacity String where
-  attr FillOpacity value = unsafeAttribute { key: "fill-opacity", value: prop' value }
+  attr FillOpacity value = unsafeAttribute
+    { key: "fill-opacity", value: prop' value }
+
 instance Attr Svg_ FillOpacity String where
-  attr FillOpacity value = unsafeAttribute { key: "fill-opacity", value: prop' value }
+  attr FillOpacity value = unsafeAttribute
+    { key: "fill-opacity", value: prop' value }
+
 instance Attr Switch_ FillOpacity String where
-  attr FillOpacity value = unsafeAttribute { key: "fill-opacity", value: prop' value }
+  attr FillOpacity value = unsafeAttribute
+    { key: "fill-opacity", value: prop' value }
+
 instance Attr Symbol_ FillOpacity String where
-  attr FillOpacity value = unsafeAttribute { key: "fill-opacity", value: prop' value }
+  attr FillOpacity value = unsafeAttribute
+    { key: "fill-opacity", value: prop' value }
+
 instance Attr Text_ FillOpacity String where
-  attr FillOpacity value = unsafeAttribute { key: "fill-opacity", value: prop' value }
+  attr FillOpacity value = unsafeAttribute
+    { key: "fill-opacity", value: prop' value }
+
 instance Attr TextPath_ FillOpacity String where
-  attr FillOpacity value = unsafeAttribute { key: "fill-opacity", value: prop' value }
+  attr FillOpacity value = unsafeAttribute
+    { key: "fill-opacity", value: prop' value }
+
 instance Attr Tspan_ FillOpacity String where
-  attr FillOpacity value = unsafeAttribute { key: "fill-opacity", value: prop' value }
+  attr FillOpacity value = unsafeAttribute
+    { key: "fill-opacity", value: prop' value }
+
 instance Attr Use_ FillOpacity String where
-  attr FillOpacity value = unsafeAttribute { key: "fill-opacity", value: prop' value }
+  attr FillOpacity value = unsafeAttribute
+    { key: "fill-opacity", value: prop' value }

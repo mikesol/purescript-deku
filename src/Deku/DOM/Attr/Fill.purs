@@ -51,91 +51,135 @@ data Fill = Fill
 
 instance Attr Animate_ Fill String where
   attr Fill value = unsafeAttribute { key: "fill", value: prop' value }
+
 instance Attr AnimateMotion_ Fill String where
   attr Fill value = unsafeAttribute { key: "fill", value: prop' value }
+
 instance Attr AnimateTransform_ Fill String where
   attr Fill value = unsafeAttribute { key: "fill", value: prop' value }
+
 instance Attr Circle_ Fill String where
   attr Fill value = unsafeAttribute { key: "fill", value: prop' value }
+
 instance Attr ClipPath_ Fill String where
   attr Fill value = unsafeAttribute { key: "fill", value: prop' value }
+
 instance Attr Defs_ Fill String where
   attr Fill value = unsafeAttribute { key: "fill", value: prop' value }
+
 instance Attr Ellipse_ Fill String where
   attr Fill value = unsafeAttribute { key: "fill", value: prop' value }
+
 instance Attr FeBlend_ Fill String where
   attr Fill value = unsafeAttribute { key: "fill", value: prop' value }
+
 instance Attr FeColorMatrix_ Fill String where
   attr Fill value = unsafeAttribute { key: "fill", value: prop' value }
+
 instance Attr FeComponentTransfer_ Fill String where
   attr Fill value = unsafeAttribute { key: "fill", value: prop' value }
+
 instance Attr FeComposite_ Fill String where
   attr Fill value = unsafeAttribute { key: "fill", value: prop' value }
+
 instance Attr FeConvolveMatrix_ Fill String where
   attr Fill value = unsafeAttribute { key: "fill", value: prop' value }
+
 instance Attr FeDiffuseLighting_ Fill String where
   attr Fill value = unsafeAttribute { key: "fill", value: prop' value }
+
 instance Attr FeDisplacementMap_ Fill String where
   attr Fill value = unsafeAttribute { key: "fill", value: prop' value }
+
 instance Attr FeFlood_ Fill String where
   attr Fill value = unsafeAttribute { key: "fill", value: prop' value }
+
 instance Attr FeGaussianBlur_ Fill String where
   attr Fill value = unsafeAttribute { key: "fill", value: prop' value }
+
 instance Attr FeImage_ Fill String where
   attr Fill value = unsafeAttribute { key: "fill", value: prop' value }
+
 instance Attr FeMerge_ Fill String where
   attr Fill value = unsafeAttribute { key: "fill", value: prop' value }
+
 instance Attr FeMorphology_ Fill String where
   attr Fill value = unsafeAttribute { key: "fill", value: prop' value }
+
 instance Attr FeOffset_ Fill String where
   attr Fill value = unsafeAttribute { key: "fill", value: prop' value }
+
 instance Attr FeSpecularLighting_ Fill String where
   attr Fill value = unsafeAttribute { key: "fill", value: prop' value }
+
 instance Attr FeTile_ Fill String where
   attr Fill value = unsafeAttribute { key: "fill", value: prop' value }
+
 instance Attr FeTurbulence_ Fill String where
   attr Fill value = unsafeAttribute { key: "fill", value: prop' value }
+
 instance Attr Filter_ Fill String where
   attr Fill value = unsafeAttribute { key: "fill", value: prop' value }
+
 instance Attr ForeignObject_ Fill String where
   attr Fill value = unsafeAttribute { key: "fill", value: prop' value }
+
 instance Attr G_ Fill String where
   attr Fill value = unsafeAttribute { key: "fill", value: prop' value }
+
 instance Attr Image_ Fill String where
   attr Fill value = unsafeAttribute { key: "fill", value: prop' value }
+
 instance Attr Line_ Fill String where
   attr Fill value = unsafeAttribute { key: "fill", value: prop' value }
+
 instance Attr LinearGradient_ Fill String where
   attr Fill value = unsafeAttribute { key: "fill", value: prop' value }
+
 instance Attr Marker_ Fill String where
   attr Fill value = unsafeAttribute { key: "fill", value: prop' value }
+
 instance Attr Mask_ Fill String where
   attr Fill value = unsafeAttribute { key: "fill", value: prop' value }
+
 instance Attr Path_ Fill String where
   attr Fill value = unsafeAttribute { key: "fill", value: prop' value }
+
 instance Attr Pattern_ Fill String where
   attr Fill value = unsafeAttribute { key: "fill", value: prop' value }
+
 instance Attr Polygon_ Fill String where
   attr Fill value = unsafeAttribute { key: "fill", value: prop' value }
+
 instance Attr Polyline_ Fill String where
   attr Fill value = unsafeAttribute { key: "fill", value: prop' value }
+
 instance Attr RadialGradient_ Fill String where
   attr Fill value = unsafeAttribute { key: "fill", value: prop' value }
+
 instance Attr Rect_ Fill String where
   attr Fill value = unsafeAttribute { key: "fill", value: prop' value }
+
 instance Attr Set_ Fill String where
   attr Fill value = unsafeAttribute { key: "fill", value: prop' value }
+
 instance Attr Svg_ Fill String where
   attr Fill value = unsafeAttribute { key: "fill", value: prop' value }
+
 instance Attr Switch_ Fill String where
   attr Fill value = unsafeAttribute { key: "fill", value: prop' value }
+
 instance Attr Symbol_ Fill String where
   attr Fill value = unsafeAttribute { key: "fill", value: prop' value }
+
 instance Attr Text_ Fill String where
   attr Fill value = unsafeAttribute { key: "fill", value: prop' value }
+
 instance Attr TextPath_ Fill String where
   attr Fill value = unsafeAttribute { key: "fill", value: prop' value }
+
 instance Attr Tspan_ Fill String where
   attr Fill value = unsafeAttribute { key: "fill", value: prop' value }
+
 instance Attr Use_ Fill String where
   attr Fill value = unsafeAttribute { key: "fill", value: prop' value }

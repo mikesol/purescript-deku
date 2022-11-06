@@ -24,40 +24,77 @@ import Deku.Attribute (class Attr, prop', unsafeAttribute)
 data GlyphOrientationHorizontal = GlyphOrientationHorizontal
 
 instance Attr FeBlend_ GlyphOrientationHorizontal String where
-  attr GlyphOrientationHorizontal value = unsafeAttribute { key: "glyph-orientation-horizontal", value: prop' value }
+  attr GlyphOrientationHorizontal value = unsafeAttribute
+    { key: "glyph-orientation-horizontal", value: prop' value }
+
 instance Attr FeColorMatrix_ GlyphOrientationHorizontal String where
-  attr GlyphOrientationHorizontal value = unsafeAttribute { key: "glyph-orientation-horizontal", value: prop' value }
+  attr GlyphOrientationHorizontal value = unsafeAttribute
+    { key: "glyph-orientation-horizontal", value: prop' value }
+
 instance Attr FeComponentTransfer_ GlyphOrientationHorizontal String where
-  attr GlyphOrientationHorizontal value = unsafeAttribute { key: "glyph-orientation-horizontal", value: prop' value }
+  attr GlyphOrientationHorizontal value = unsafeAttribute
+    { key: "glyph-orientation-horizontal", value: prop' value }
+
 instance Attr FeComposite_ GlyphOrientationHorizontal String where
-  attr GlyphOrientationHorizontal value = unsafeAttribute { key: "glyph-orientation-horizontal", value: prop' value }
+  attr GlyphOrientationHorizontal value = unsafeAttribute
+    { key: "glyph-orientation-horizontal", value: prop' value }
+
 instance Attr FeConvolveMatrix_ GlyphOrientationHorizontal String where
-  attr GlyphOrientationHorizontal value = unsafeAttribute { key: "glyph-orientation-horizontal", value: prop' value }
+  attr GlyphOrientationHorizontal value = unsafeAttribute
+    { key: "glyph-orientation-horizontal", value: prop' value }
+
 instance Attr FeDiffuseLighting_ GlyphOrientationHorizontal String where
-  attr GlyphOrientationHorizontal value = unsafeAttribute { key: "glyph-orientation-horizontal", value: prop' value }
+  attr GlyphOrientationHorizontal value = unsafeAttribute
+    { key: "glyph-orientation-horizontal", value: prop' value }
+
 instance Attr FeDisplacementMap_ GlyphOrientationHorizontal String where
-  attr GlyphOrientationHorizontal value = unsafeAttribute { key: "glyph-orientation-horizontal", value: prop' value }
+  attr GlyphOrientationHorizontal value = unsafeAttribute
+    { key: "glyph-orientation-horizontal", value: prop' value }
+
 instance Attr FeFlood_ GlyphOrientationHorizontal String where
-  attr GlyphOrientationHorizontal value = unsafeAttribute { key: "glyph-orientation-horizontal", value: prop' value }
+  attr GlyphOrientationHorizontal value = unsafeAttribute
+    { key: "glyph-orientation-horizontal", value: prop' value }
+
 instance Attr FeGaussianBlur_ GlyphOrientationHorizontal String where
-  attr GlyphOrientationHorizontal value = unsafeAttribute { key: "glyph-orientation-horizontal", value: prop' value }
+  attr GlyphOrientationHorizontal value = unsafeAttribute
+    { key: "glyph-orientation-horizontal", value: prop' value }
+
 instance Attr FeImage_ GlyphOrientationHorizontal String where
-  attr GlyphOrientationHorizontal value = unsafeAttribute { key: "glyph-orientation-horizontal", value: prop' value }
+  attr GlyphOrientationHorizontal value = unsafeAttribute
+    { key: "glyph-orientation-horizontal", value: prop' value }
+
 instance Attr FeMerge_ GlyphOrientationHorizontal String where
-  attr GlyphOrientationHorizontal value = unsafeAttribute { key: "glyph-orientation-horizontal", value: prop' value }
+  attr GlyphOrientationHorizontal value = unsafeAttribute
+    { key: "glyph-orientation-horizontal", value: prop' value }
+
 instance Attr FeMorphology_ GlyphOrientationHorizontal String where
-  attr GlyphOrientationHorizontal value = unsafeAttribute { key: "glyph-orientation-horizontal", value: prop' value }
+  attr GlyphOrientationHorizontal value = unsafeAttribute
+    { key: "glyph-orientation-horizontal", value: prop' value }
+
 instance Attr FeOffset_ GlyphOrientationHorizontal String where
-  attr GlyphOrientationHorizontal value = unsafeAttribute { key: "glyph-orientation-horizontal", value: prop' value }
+  attr GlyphOrientationHorizontal value = unsafeAttribute
+    { key: "glyph-orientation-horizontal", value: prop' value }
+
 instance Attr FeSpecularLighting_ GlyphOrientationHorizontal String where
-  attr GlyphOrientationHorizontal value = unsafeAttribute { key: "glyph-orientation-horizontal", value: prop' value }
+  attr GlyphOrientationHorizontal value = unsafeAttribute
+    { key: "glyph-orientation-horizontal", value: prop' value }
+
 instance Attr FeTile_ GlyphOrientationHorizontal String where
-  attr GlyphOrientationHorizontal value = unsafeAttribute { key: "glyph-orientation-horizontal", value: prop' value }
+  attr GlyphOrientationHorizontal value = unsafeAttribute
+    { key: "glyph-orientation-horizontal", value: prop' value }
+
 instance Attr FeTurbulence_ GlyphOrientationHorizontal String where
-  attr GlyphOrientationHorizontal value = unsafeAttribute { key: "glyph-orientation-horizontal", value: prop' value }
+  attr GlyphOrientationHorizontal value = unsafeAttribute
+    { key: "glyph-orientation-horizontal", value: prop' value }
+
 instance Attr Filter_ GlyphOrientationHorizontal String where
-  attr GlyphOrientationHorizontal value = unsafeAttribute { key: "glyph-orientation-horizontal", value: prop' value }
+  attr GlyphOrientationHorizontal value = unsafeAttribute
+    { key: "glyph-orientation-horizontal", value: prop' value }
+
 instance Attr Image_ GlyphOrientationHorizontal String where
-  attr GlyphOrientationHorizontal value = unsafeAttribute { key: "glyph-orientation-horizontal", value: prop' value }
+  attr GlyphOrientationHorizontal value = unsafeAttribute
+    { key: "glyph-orientation-horizontal", value: prop' value }
+
 instance Attr Switch_ GlyphOrientationHorizontal String where
-  attr GlyphOrientationHorizontal value = unsafeAttribute { key: "glyph-orientation-horizontal", value: prop' value }
+  attr GlyphOrientationHorizontal value = unsafeAttribute
+    { key: "glyph-orientation-horizontal", value: prop' value }

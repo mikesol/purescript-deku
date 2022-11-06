@@ -22,36 +22,69 @@ import Deku.Attribute (class Attr, prop', unsafeAttribute)
 data AriaDropeffect = AriaDropeffect
 
 instance Attr Circle_ AriaDropeffect String where
-  attr AriaDropeffect value = unsafeAttribute { key: "aria-dropeffect", value: prop' value }
+  attr AriaDropeffect value = unsafeAttribute
+    { key: "aria-dropeffect", value: prop' value }
+
 instance Attr Ellipse_ AriaDropeffect String where
-  attr AriaDropeffect value = unsafeAttribute { key: "aria-dropeffect", value: prop' value }
+  attr AriaDropeffect value = unsafeAttribute
+    { key: "aria-dropeffect", value: prop' value }
+
 instance Attr ForeignObject_ AriaDropeffect String where
-  attr AriaDropeffect value = unsafeAttribute { key: "aria-dropeffect", value: prop' value }
+  attr AriaDropeffect value = unsafeAttribute
+    { key: "aria-dropeffect", value: prop' value }
+
 instance Attr G_ AriaDropeffect String where
-  attr AriaDropeffect value = unsafeAttribute { key: "aria-dropeffect", value: prop' value }
+  attr AriaDropeffect value = unsafeAttribute
+    { key: "aria-dropeffect", value: prop' value }
+
 instance Attr Line_ AriaDropeffect String where
-  attr AriaDropeffect value = unsafeAttribute { key: "aria-dropeffect", value: prop' value }
+  attr AriaDropeffect value = unsafeAttribute
+    { key: "aria-dropeffect", value: prop' value }
+
 instance Attr Marker_ AriaDropeffect String where
-  attr AriaDropeffect value = unsafeAttribute { key: "aria-dropeffect", value: prop' value }
+  attr AriaDropeffect value = unsafeAttribute
+    { key: "aria-dropeffect", value: prop' value }
+
 instance Attr Path_ AriaDropeffect String where
-  attr AriaDropeffect value = unsafeAttribute { key: "aria-dropeffect", value: prop' value }
+  attr AriaDropeffect value = unsafeAttribute
+    { key: "aria-dropeffect", value: prop' value }
+
 instance Attr Polygon_ AriaDropeffect String where
-  attr AriaDropeffect value = unsafeAttribute { key: "aria-dropeffect", value: prop' value }
+  attr AriaDropeffect value = unsafeAttribute
+    { key: "aria-dropeffect", value: prop' value }
+
 instance Attr Polyline_ AriaDropeffect String where
-  attr AriaDropeffect value = unsafeAttribute { key: "aria-dropeffect", value: prop' value }
+  attr AriaDropeffect value = unsafeAttribute
+    { key: "aria-dropeffect", value: prop' value }
+
 instance Attr Rect_ AriaDropeffect String where
-  attr AriaDropeffect value = unsafeAttribute { key: "aria-dropeffect", value: prop' value }
+  attr AriaDropeffect value = unsafeAttribute
+    { key: "aria-dropeffect", value: prop' value }
+
 instance Attr Svg_ AriaDropeffect String where
-  attr AriaDropeffect value = unsafeAttribute { key: "aria-dropeffect", value: prop' value }
+  attr AriaDropeffect value = unsafeAttribute
+    { key: "aria-dropeffect", value: prop' value }
+
 instance Attr Symbol_ AriaDropeffect String where
-  attr AriaDropeffect value = unsafeAttribute { key: "aria-dropeffect", value: prop' value }
+  attr AriaDropeffect value = unsafeAttribute
+    { key: "aria-dropeffect", value: prop' value }
+
 instance Attr Text_ AriaDropeffect String where
-  attr AriaDropeffect value = unsafeAttribute { key: "aria-dropeffect", value: prop' value }
+  attr AriaDropeffect value = unsafeAttribute
+    { key: "aria-dropeffect", value: prop' value }
+
 instance Attr TextPath_ AriaDropeffect String where
-  attr AriaDropeffect value = unsafeAttribute { key: "aria-dropeffect", value: prop' value }
+  attr AriaDropeffect value = unsafeAttribute
+    { key: "aria-dropeffect", value: prop' value }
+
 instance Attr Tspan_ AriaDropeffect String where
-  attr AriaDropeffect value = unsafeAttribute { key: "aria-dropeffect", value: prop' value }
+  attr AriaDropeffect value = unsafeAttribute
+    { key: "aria-dropeffect", value: prop' value }
+
 instance Attr Use_ AriaDropeffect String where
-  attr AriaDropeffect value = unsafeAttribute { key: "aria-dropeffect", value: prop' value }
+  attr AriaDropeffect value = unsafeAttribute
+    { key: "aria-dropeffect", value: prop' value }
+
 instance Attr View_ AriaDropeffect String where
-  attr AriaDropeffect value = unsafeAttribute { key: "aria-dropeffect", value: prop' value }
+  attr AriaDropeffect value = unsafeAttribute
+    { key: "aria-dropeffect", value: prop' value }

@@ -46,15 +46,21 @@ instance Attr Link_ Xtype String where
 
 instance Attr AnimateTransform_ Xtype String where
   attr Xtype value = unsafeAttribute { key: "type", value: prop' value }
+
 instance Attr FeColorMatrix_ Xtype String where
   attr Xtype value = unsafeAttribute { key: "type", value: prop' value }
+
 instance Attr FeFuncA_ Xtype String where
   attr Xtype value = unsafeAttribute { key: "type", value: prop' value }
+
 instance Attr FeFuncB_ Xtype String where
   attr Xtype value = unsafeAttribute { key: "type", value: prop' value }
+
 instance Attr FeFuncG_ Xtype String where
   attr Xtype value = unsafeAttribute { key: "type", value: prop' value }
+
 instance Attr FeFuncR_ Xtype String where
   attr Xtype value = unsafeAttribute { key: "type", value: prop' value }
+
 instance Attr FeTurbulence_ Xtype String where
   attr Xtype value = unsafeAttribute { key: "type", value: prop' value }

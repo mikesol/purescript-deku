@@ -540,93 +540,138 @@ instance Attr Wbr_ Style String where
 
 instance Attr Animate_ Style String where
   attr Style value = unsafeAttribute { key: "style", value: prop' value }
+
 instance Attr AnimateMotion_ Style String where
   attr Style value = unsafeAttribute { key: "style", value: prop' value }
+
 instance Attr Circle_ Style String where
   attr Style value = unsafeAttribute { key: "style", value: prop' value }
+
 instance Attr ClipPath_ Style String where
   attr Style value = unsafeAttribute { key: "style", value: prop' value }
+
 instance Attr Defs_ Style String where
   attr Style value = unsafeAttribute { key: "style", value: prop' value }
+
 instance Attr Desc_ Style String where
   attr Style value = unsafeAttribute { key: "style", value: prop' value }
+
 instance Attr Ellipse_ Style String where
   attr Style value = unsafeAttribute { key: "style", value: prop' value }
+
 instance Attr FeBlend_ Style String where
   attr Style value = unsafeAttribute { key: "style", value: prop' value }
+
 instance Attr FeColorMatrix_ Style String where
   attr Style value = unsafeAttribute { key: "style", value: prop' value }
+
 instance Attr FeComponentTransfer_ Style String where
   attr Style value = unsafeAttribute { key: "style", value: prop' value }
+
 instance Attr FeComposite_ Style String where
   attr Style value = unsafeAttribute { key: "style", value: prop' value }
+
 instance Attr FeConvolveMatrix_ Style String where
   attr Style value = unsafeAttribute { key: "style", value: prop' value }
+
 instance Attr FeDiffuseLighting_ Style String where
   attr Style value = unsafeAttribute { key: "style", value: prop' value }
+
 instance Attr FeDisplacementMap_ Style String where
   attr Style value = unsafeAttribute { key: "style", value: prop' value }
+
 instance Attr FeDropShadow_ Style String where
   attr Style value = unsafeAttribute { key: "style", value: prop' value }
+
 instance Attr FeFlood_ Style String where
   attr Style value = unsafeAttribute { key: "style", value: prop' value }
+
 instance Attr FeGaussianBlur_ Style String where
   attr Style value = unsafeAttribute { key: "style", value: prop' value }
+
 instance Attr FeImage_ Style String where
   attr Style value = unsafeAttribute { key: "style", value: prop' value }
+
 instance Attr FeMerge_ Style String where
   attr Style value = unsafeAttribute { key: "style", value: prop' value }
+
 instance Attr FeMorphology_ Style String where
   attr Style value = unsafeAttribute { key: "style", value: prop' value }
+
 instance Attr FeOffset_ Style String where
   attr Style value = unsafeAttribute { key: "style", value: prop' value }
+
 instance Attr FeSpecularLighting_ Style String where
   attr Style value = unsafeAttribute { key: "style", value: prop' value }
+
 instance Attr FeTile_ Style String where
   attr Style value = unsafeAttribute { key: "style", value: prop' value }
+
 instance Attr FeTurbulence_ Style String where
   attr Style value = unsafeAttribute { key: "style", value: prop' value }
+
 instance Attr Filter_ Style String where
   attr Style value = unsafeAttribute { key: "style", value: prop' value }
+
 instance Attr ForeignObject_ Style String where
   attr Style value = unsafeAttribute { key: "style", value: prop' value }
+
 instance Attr G_ Style String where
   attr Style value = unsafeAttribute { key: "style", value: prop' value }
+
 instance Attr Image_ Style String where
   attr Style value = unsafeAttribute { key: "style", value: prop' value }
+
 instance Attr Line_ Style String where
   attr Style value = unsafeAttribute { key: "style", value: prop' value }
+
 instance Attr LinearGradient_ Style String where
   attr Style value = unsafeAttribute { key: "style", value: prop' value }
+
 instance Attr Marker_ Style String where
   attr Style value = unsafeAttribute { key: "style", value: prop' value }
+
 instance Attr Mask_ Style String where
   attr Style value = unsafeAttribute { key: "style", value: prop' value }
+
 instance Attr Path_ Style String where
   attr Style value = unsafeAttribute { key: "style", value: prop' value }
+
 instance Attr Pattern_ Style String where
   attr Style value = unsafeAttribute { key: "style", value: prop' value }
+
 instance Attr Polygon_ Style String where
   attr Style value = unsafeAttribute { key: "style", value: prop' value }
+
 instance Attr Polyline_ Style String where
   attr Style value = unsafeAttribute { key: "style", value: prop' value }
+
 instance Attr RadialGradient_ Style String where
   attr Style value = unsafeAttribute { key: "style", value: prop' value }
+
 instance Attr Rect_ Style String where
   attr Style value = unsafeAttribute { key: "style", value: prop' value }
+
 instance Attr Set_ Style String where
   attr Style value = unsafeAttribute { key: "style", value: prop' value }
+
 instance Attr Stop_ Style String where
   attr Style value = unsafeAttribute { key: "style", value: prop' value }
+
 instance Attr Switch_ Style String where
   attr Style value = unsafeAttribute { key: "style", value: prop' value }
+
 instance Attr Symbol_ Style String where
   attr Style value = unsafeAttribute { key: "style", value: prop' value }
+
 instance Attr Text_ Style String where
   attr Style value = unsafeAttribute { key: "style", value: prop' value }
+
 instance Attr TextPath_ Style String where
   attr Style value = unsafeAttribute { key: "style", value: prop' value }
+
 instance Attr Tspan_ Style String where
   attr Style value = unsafeAttribute { key: "style", value: prop' value }
+
 instance Attr Use_ Style String where
   attr Style value = unsafeAttribute { key: "style", value: prop' value }

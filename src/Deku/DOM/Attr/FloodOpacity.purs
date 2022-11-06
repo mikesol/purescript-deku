@@ -25,42 +25,81 @@ import Deku.Attribute (class Attr, prop', unsafeAttribute)
 data FloodOpacity = FloodOpacity
 
 instance Attr FeBlend_ FloodOpacity String where
-  attr FloodOpacity value = unsafeAttribute { key: "flood-opacity", value: prop' value }
+  attr FloodOpacity value = unsafeAttribute
+    { key: "flood-opacity", value: prop' value }
+
 instance Attr FeColorMatrix_ FloodOpacity String where
-  attr FloodOpacity value = unsafeAttribute { key: "flood-opacity", value: prop' value }
+  attr FloodOpacity value = unsafeAttribute
+    { key: "flood-opacity", value: prop' value }
+
 instance Attr FeComponentTransfer_ FloodOpacity String where
-  attr FloodOpacity value = unsafeAttribute { key: "flood-opacity", value: prop' value }
+  attr FloodOpacity value = unsafeAttribute
+    { key: "flood-opacity", value: prop' value }
+
 instance Attr FeComposite_ FloodOpacity String where
-  attr FloodOpacity value = unsafeAttribute { key: "flood-opacity", value: prop' value }
+  attr FloodOpacity value = unsafeAttribute
+    { key: "flood-opacity", value: prop' value }
+
 instance Attr FeConvolveMatrix_ FloodOpacity String where
-  attr FloodOpacity value = unsafeAttribute { key: "flood-opacity", value: prop' value }
+  attr FloodOpacity value = unsafeAttribute
+    { key: "flood-opacity", value: prop' value }
+
 instance Attr FeDiffuseLighting_ FloodOpacity String where
-  attr FloodOpacity value = unsafeAttribute { key: "flood-opacity", value: prop' value }
+  attr FloodOpacity value = unsafeAttribute
+    { key: "flood-opacity", value: prop' value }
+
 instance Attr FeDisplacementMap_ FloodOpacity String where
-  attr FloodOpacity value = unsafeAttribute { key: "flood-opacity", value: prop' value }
+  attr FloodOpacity value = unsafeAttribute
+    { key: "flood-opacity", value: prop' value }
+
 instance Attr FeDropShadow_ FloodOpacity String where
-  attr FloodOpacity value = unsafeAttribute { key: "flood-opacity", value: prop' value }
+  attr FloodOpacity value = unsafeAttribute
+    { key: "flood-opacity", value: prop' value }
+
 instance Attr FeFlood_ FloodOpacity String where
-  attr FloodOpacity value = unsafeAttribute { key: "flood-opacity", value: prop' value }
+  attr FloodOpacity value = unsafeAttribute
+    { key: "flood-opacity", value: prop' value }
+
 instance Attr FeGaussianBlur_ FloodOpacity String where
-  attr FloodOpacity value = unsafeAttribute { key: "flood-opacity", value: prop' value }
+  attr FloodOpacity value = unsafeAttribute
+    { key: "flood-opacity", value: prop' value }
+
 instance Attr FeImage_ FloodOpacity String where
-  attr FloodOpacity value = unsafeAttribute { key: "flood-opacity", value: prop' value }
+  attr FloodOpacity value = unsafeAttribute
+    { key: "flood-opacity", value: prop' value }
+
 instance Attr FeMerge_ FloodOpacity String where
-  attr FloodOpacity value = unsafeAttribute { key: "flood-opacity", value: prop' value }
+  attr FloodOpacity value = unsafeAttribute
+    { key: "flood-opacity", value: prop' value }
+
 instance Attr FeMorphology_ FloodOpacity String where
-  attr FloodOpacity value = unsafeAttribute { key: "flood-opacity", value: prop' value }
+  attr FloodOpacity value = unsafeAttribute
+    { key: "flood-opacity", value: prop' value }
+
 instance Attr FeOffset_ FloodOpacity String where
-  attr FloodOpacity value = unsafeAttribute { key: "flood-opacity", value: prop' value }
+  attr FloodOpacity value = unsafeAttribute
+    { key: "flood-opacity", value: prop' value }
+
 instance Attr FeSpecularLighting_ FloodOpacity String where
-  attr FloodOpacity value = unsafeAttribute { key: "flood-opacity", value: prop' value }
+  attr FloodOpacity value = unsafeAttribute
+    { key: "flood-opacity", value: prop' value }
+
 instance Attr FeTile_ FloodOpacity String where
-  attr FloodOpacity value = unsafeAttribute { key: "flood-opacity", value: prop' value }
+  attr FloodOpacity value = unsafeAttribute
+    { key: "flood-opacity", value: prop' value }
+
 instance Attr FeTurbulence_ FloodOpacity String where
-  attr FloodOpacity value = unsafeAttribute { key: "flood-opacity", value: prop' value }
+  attr FloodOpacity value = unsafeAttribute
+    { key: "flood-opacity", value: prop' value }
+
 instance Attr Filter_ FloodOpacity String where
-  attr FloodOpacity value = unsafeAttribute { key: "flood-opacity", value: prop' value }
+  attr FloodOpacity value = unsafeAttribute
+    { key: "flood-opacity", value: prop' value }
+
 instance Attr Image_ FloodOpacity String where
-  attr FloodOpacity value = unsafeAttribute { key: "flood-opacity", value: prop' value }
+  attr FloodOpacity value = unsafeAttribute
+    { key: "flood-opacity", value: prop' value }
+
 instance Attr Switch_ FloodOpacity String where
-  attr FloodOpacity value = unsafeAttribute { key: "flood-opacity", value: prop' value }
+  attr FloodOpacity value = unsafeAttribute
+    { key: "flood-opacity", value: prop' value }

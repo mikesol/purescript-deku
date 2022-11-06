@@ -27,43 +27,63 @@ data FontSize = FontSize
 
 instance Attr FeBlend_ FontSize String where
   attr FontSize value = unsafeAttribute { key: "font-size", value: prop' value }
+
 instance Attr FeColorMatrix_ FontSize String where
   attr FontSize value = unsafeAttribute { key: "font-size", value: prop' value }
+
 instance Attr FeComponentTransfer_ FontSize String where
   attr FontSize value = unsafeAttribute { key: "font-size", value: prop' value }
+
 instance Attr FeComposite_ FontSize String where
   attr FontSize value = unsafeAttribute { key: "font-size", value: prop' value }
+
 instance Attr FeConvolveMatrix_ FontSize String where
   attr FontSize value = unsafeAttribute { key: "font-size", value: prop' value }
+
 instance Attr FeDiffuseLighting_ FontSize String where
   attr FontSize value = unsafeAttribute { key: "font-size", value: prop' value }
+
 instance Attr FeDisplacementMap_ FontSize String where
   attr FontSize value = unsafeAttribute { key: "font-size", value: prop' value }
+
 instance Attr FeFlood_ FontSize String where
   attr FontSize value = unsafeAttribute { key: "font-size", value: prop' value }
+
 instance Attr FeGaussianBlur_ FontSize String where
   attr FontSize value = unsafeAttribute { key: "font-size", value: prop' value }
+
 instance Attr FeImage_ FontSize String where
   attr FontSize value = unsafeAttribute { key: "font-size", value: prop' value }
+
 instance Attr FeMerge_ FontSize String where
   attr FontSize value = unsafeAttribute { key: "font-size", value: prop' value }
+
 instance Attr FeMorphology_ FontSize String where
   attr FontSize value = unsafeAttribute { key: "font-size", value: prop' value }
+
 instance Attr FeOffset_ FontSize String where
   attr FontSize value = unsafeAttribute { key: "font-size", value: prop' value }
+
 instance Attr FeSpecularLighting_ FontSize String where
   attr FontSize value = unsafeAttribute { key: "font-size", value: prop' value }
+
 instance Attr FeTile_ FontSize String where
   attr FontSize value = unsafeAttribute { key: "font-size", value: prop' value }
+
 instance Attr FeTurbulence_ FontSize String where
   attr FontSize value = unsafeAttribute { key: "font-size", value: prop' value }
+
 instance Attr Filter_ FontSize String where
   attr FontSize value = unsafeAttribute { key: "font-size", value: prop' value }
+
 instance Attr Image_ FontSize String where
   attr FontSize value = unsafeAttribute { key: "font-size", value: prop' value }
+
 instance Attr Switch_ FontSize String where
   attr FontSize value = unsafeAttribute { key: "font-size", value: prop' value }
+
 instance Attr Text_ FontSize String where
   attr FontSize value = unsafeAttribute { key: "font-size", value: prop' value }
+
 instance Attr Tspan_ FontSize String where
   attr FontSize value = unsafeAttribute { key: "font-size", value: prop' value }

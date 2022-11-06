@@ -26,44 +26,85 @@ import Deku.Attribute (class Attr, prop', unsafeAttribute)
 data FontStyle = FontStyle
 
 instance Attr FeBlend_ FontStyle String where
-  attr FontStyle value = unsafeAttribute { key: "font-style", value: prop' value }
+  attr FontStyle value = unsafeAttribute
+    { key: "font-style", value: prop' value }
+
 instance Attr FeColorMatrix_ FontStyle String where
-  attr FontStyle value = unsafeAttribute { key: "font-style", value: prop' value }
+  attr FontStyle value = unsafeAttribute
+    { key: "font-style", value: prop' value }
+
 instance Attr FeComponentTransfer_ FontStyle String where
-  attr FontStyle value = unsafeAttribute { key: "font-style", value: prop' value }
+  attr FontStyle value = unsafeAttribute
+    { key: "font-style", value: prop' value }
+
 instance Attr FeComposite_ FontStyle String where
-  attr FontStyle value = unsafeAttribute { key: "font-style", value: prop' value }
+  attr FontStyle value = unsafeAttribute
+    { key: "font-style", value: prop' value }
+
 instance Attr FeConvolveMatrix_ FontStyle String where
-  attr FontStyle value = unsafeAttribute { key: "font-style", value: prop' value }
+  attr FontStyle value = unsafeAttribute
+    { key: "font-style", value: prop' value }
+
 instance Attr FeDiffuseLighting_ FontStyle String where
-  attr FontStyle value = unsafeAttribute { key: "font-style", value: prop' value }
+  attr FontStyle value = unsafeAttribute
+    { key: "font-style", value: prop' value }
+
 instance Attr FeDisplacementMap_ FontStyle String where
-  attr FontStyle value = unsafeAttribute { key: "font-style", value: prop' value }
+  attr FontStyle value = unsafeAttribute
+    { key: "font-style", value: prop' value }
+
 instance Attr FeFlood_ FontStyle String where
-  attr FontStyle value = unsafeAttribute { key: "font-style", value: prop' value }
+  attr FontStyle value = unsafeAttribute
+    { key: "font-style", value: prop' value }
+
 instance Attr FeGaussianBlur_ FontStyle String where
-  attr FontStyle value = unsafeAttribute { key: "font-style", value: prop' value }
+  attr FontStyle value = unsafeAttribute
+    { key: "font-style", value: prop' value }
+
 instance Attr FeImage_ FontStyle String where
-  attr FontStyle value = unsafeAttribute { key: "font-style", value: prop' value }
+  attr FontStyle value = unsafeAttribute
+    { key: "font-style", value: prop' value }
+
 instance Attr FeMerge_ FontStyle String where
-  attr FontStyle value = unsafeAttribute { key: "font-style", value: prop' value }
+  attr FontStyle value = unsafeAttribute
+    { key: "font-style", value: prop' value }
+
 instance Attr FeMorphology_ FontStyle String where
-  attr FontStyle value = unsafeAttribute { key: "font-style", value: prop' value }
+  attr FontStyle value = unsafeAttribute
+    { key: "font-style", value: prop' value }
+
 instance Attr FeOffset_ FontStyle String where
-  attr FontStyle value = unsafeAttribute { key: "font-style", value: prop' value }
+  attr FontStyle value = unsafeAttribute
+    { key: "font-style", value: prop' value }
+
 instance Attr FeSpecularLighting_ FontStyle String where
-  attr FontStyle value = unsafeAttribute { key: "font-style", value: prop' value }
+  attr FontStyle value = unsafeAttribute
+    { key: "font-style", value: prop' value }
+
 instance Attr FeTile_ FontStyle String where
-  attr FontStyle value = unsafeAttribute { key: "font-style", value: prop' value }
+  attr FontStyle value = unsafeAttribute
+    { key: "font-style", value: prop' value }
+
 instance Attr FeTurbulence_ FontStyle String where
-  attr FontStyle value = unsafeAttribute { key: "font-style", value: prop' value }
+  attr FontStyle value = unsafeAttribute
+    { key: "font-style", value: prop' value }
+
 instance Attr Filter_ FontStyle String where
-  attr FontStyle value = unsafeAttribute { key: "font-style", value: prop' value }
+  attr FontStyle value = unsafeAttribute
+    { key: "font-style", value: prop' value }
+
 instance Attr Image_ FontStyle String where
-  attr FontStyle value = unsafeAttribute { key: "font-style", value: prop' value }
+  attr FontStyle value = unsafeAttribute
+    { key: "font-style", value: prop' value }
+
 instance Attr Switch_ FontStyle String where
-  attr FontStyle value = unsafeAttribute { key: "font-style", value: prop' value }
+  attr FontStyle value = unsafeAttribute
+    { key: "font-style", value: prop' value }
+
 instance Attr Text_ FontStyle String where
-  attr FontStyle value = unsafeAttribute { key: "font-style", value: prop' value }
+  attr FontStyle value = unsafeAttribute
+    { key: "font-style", value: prop' value }
+
 instance Attr Tspan_ FontStyle String where
-  attr FontStyle value = unsafeAttribute { key: "font-style", value: prop' value }
+  attr FontStyle value = unsafeAttribute
+    { key: "font-style", value: prop' value }

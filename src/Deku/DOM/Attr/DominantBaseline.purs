@@ -26,44 +26,85 @@ import Deku.Attribute (class Attr, prop', unsafeAttribute)
 data DominantBaseline = DominantBaseline
 
 instance Attr FeBlend_ DominantBaseline String where
-  attr DominantBaseline value = unsafeAttribute { key: "dominant-baseline", value: prop' value }
+  attr DominantBaseline value = unsafeAttribute
+    { key: "dominant-baseline", value: prop' value }
+
 instance Attr FeColorMatrix_ DominantBaseline String where
-  attr DominantBaseline value = unsafeAttribute { key: "dominant-baseline", value: prop' value }
+  attr DominantBaseline value = unsafeAttribute
+    { key: "dominant-baseline", value: prop' value }
+
 instance Attr FeComponentTransfer_ DominantBaseline String where
-  attr DominantBaseline value = unsafeAttribute { key: "dominant-baseline", value: prop' value }
+  attr DominantBaseline value = unsafeAttribute
+    { key: "dominant-baseline", value: prop' value }
+
 instance Attr FeComposite_ DominantBaseline String where
-  attr DominantBaseline value = unsafeAttribute { key: "dominant-baseline", value: prop' value }
+  attr DominantBaseline value = unsafeAttribute
+    { key: "dominant-baseline", value: prop' value }
+
 instance Attr FeConvolveMatrix_ DominantBaseline String where
-  attr DominantBaseline value = unsafeAttribute { key: "dominant-baseline", value: prop' value }
+  attr DominantBaseline value = unsafeAttribute
+    { key: "dominant-baseline", value: prop' value }
+
 instance Attr FeDiffuseLighting_ DominantBaseline String where
-  attr DominantBaseline value = unsafeAttribute { key: "dominant-baseline", value: prop' value }
+  attr DominantBaseline value = unsafeAttribute
+    { key: "dominant-baseline", value: prop' value }
+
 instance Attr FeDisplacementMap_ DominantBaseline String where
-  attr DominantBaseline value = unsafeAttribute { key: "dominant-baseline", value: prop' value }
+  attr DominantBaseline value = unsafeAttribute
+    { key: "dominant-baseline", value: prop' value }
+
 instance Attr FeFlood_ DominantBaseline String where
-  attr DominantBaseline value = unsafeAttribute { key: "dominant-baseline", value: prop' value }
+  attr DominantBaseline value = unsafeAttribute
+    { key: "dominant-baseline", value: prop' value }
+
 instance Attr FeGaussianBlur_ DominantBaseline String where
-  attr DominantBaseline value = unsafeAttribute { key: "dominant-baseline", value: prop' value }
+  attr DominantBaseline value = unsafeAttribute
+    { key: "dominant-baseline", value: prop' value }
+
 instance Attr FeImage_ DominantBaseline String where
-  attr DominantBaseline value = unsafeAttribute { key: "dominant-baseline", value: prop' value }
+  attr DominantBaseline value = unsafeAttribute
+    { key: "dominant-baseline", value: prop' value }
+
 instance Attr FeMerge_ DominantBaseline String where
-  attr DominantBaseline value = unsafeAttribute { key: "dominant-baseline", value: prop' value }
+  attr DominantBaseline value = unsafeAttribute
+    { key: "dominant-baseline", value: prop' value }
+
 instance Attr FeMorphology_ DominantBaseline String where
-  attr DominantBaseline value = unsafeAttribute { key: "dominant-baseline", value: prop' value }
+  attr DominantBaseline value = unsafeAttribute
+    { key: "dominant-baseline", value: prop' value }
+
 instance Attr FeOffset_ DominantBaseline String where
-  attr DominantBaseline value = unsafeAttribute { key: "dominant-baseline", value: prop' value }
+  attr DominantBaseline value = unsafeAttribute
+    { key: "dominant-baseline", value: prop' value }
+
 instance Attr FeSpecularLighting_ DominantBaseline String where
-  attr DominantBaseline value = unsafeAttribute { key: "dominant-baseline", value: prop' value }
+  attr DominantBaseline value = unsafeAttribute
+    { key: "dominant-baseline", value: prop' value }
+
 instance Attr FeTile_ DominantBaseline String where
-  attr DominantBaseline value = unsafeAttribute { key: "dominant-baseline", value: prop' value }
+  attr DominantBaseline value = unsafeAttribute
+    { key: "dominant-baseline", value: prop' value }
+
 instance Attr FeTurbulence_ DominantBaseline String where
-  attr DominantBaseline value = unsafeAttribute { key: "dominant-baseline", value: prop' value }
+  attr DominantBaseline value = unsafeAttribute
+    { key: "dominant-baseline", value: prop' value }
+
 instance Attr Filter_ DominantBaseline String where
-  attr DominantBaseline value = unsafeAttribute { key: "dominant-baseline", value: prop' value }
+  attr DominantBaseline value = unsafeAttribute
+    { key: "dominant-baseline", value: prop' value }
+
 instance Attr Image_ DominantBaseline String where
-  attr DominantBaseline value = unsafeAttribute { key: "dominant-baseline", value: prop' value }
+  attr DominantBaseline value = unsafeAttribute
+    { key: "dominant-baseline", value: prop' value }
+
 instance Attr Switch_ DominantBaseline String where
-  attr DominantBaseline value = unsafeAttribute { key: "dominant-baseline", value: prop' value }
+  attr DominantBaseline value = unsafeAttribute
+    { key: "dominant-baseline", value: prop' value }
+
 instance Attr Text_ DominantBaseline String where
-  attr DominantBaseline value = unsafeAttribute { key: "dominant-baseline", value: prop' value }
+  attr DominantBaseline value = unsafeAttribute
+    { key: "dominant-baseline", value: prop' value }
+
 instance Attr Tspan_ DominantBaseline String where
-  attr DominantBaseline value = unsafeAttribute { key: "dominant-baseline", value: prop' value }
+  attr DominantBaseline value = unsafeAttribute
+    { key: "dominant-baseline", value: prop' value }

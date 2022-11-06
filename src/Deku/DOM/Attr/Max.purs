@@ -22,9 +22,12 @@ instance Attr Progress_ Max String where
 
 instance Attr Animate_ Max String where
   attr Max value = unsafeAttribute { key: "max", value: prop' value }
+
 instance Attr AnimateMotion_ Max String where
   attr Max value = unsafeAttribute { key: "max", value: prop' value }
+
 instance Attr AnimateTransform_ Max String where
   attr Max value = unsafeAttribute { key: "max", value: prop' value }
+
 instance Attr Set_ Max String where
   attr Max value = unsafeAttribute { key: "max", value: prop' value }

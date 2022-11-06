@@ -22,36 +22,69 @@ import Deku.Attribute (class Attr, prop', unsafeAttribute)
 data AriaDetails = AriaDetails
 
 instance Attr Circle_ AriaDetails String where
-  attr AriaDetails value = unsafeAttribute { key: "aria-details", value: prop' value }
+  attr AriaDetails value = unsafeAttribute
+    { key: "aria-details", value: prop' value }
+
 instance Attr Ellipse_ AriaDetails String where
-  attr AriaDetails value = unsafeAttribute { key: "aria-details", value: prop' value }
+  attr AriaDetails value = unsafeAttribute
+    { key: "aria-details", value: prop' value }
+
 instance Attr ForeignObject_ AriaDetails String where
-  attr AriaDetails value = unsafeAttribute { key: "aria-details", value: prop' value }
+  attr AriaDetails value = unsafeAttribute
+    { key: "aria-details", value: prop' value }
+
 instance Attr G_ AriaDetails String where
-  attr AriaDetails value = unsafeAttribute { key: "aria-details", value: prop' value }
+  attr AriaDetails value = unsafeAttribute
+    { key: "aria-details", value: prop' value }
+
 instance Attr Line_ AriaDetails String where
-  attr AriaDetails value = unsafeAttribute { key: "aria-details", value: prop' value }
+  attr AriaDetails value = unsafeAttribute
+    { key: "aria-details", value: prop' value }
+
 instance Attr Marker_ AriaDetails String where
-  attr AriaDetails value = unsafeAttribute { key: "aria-details", value: prop' value }
+  attr AriaDetails value = unsafeAttribute
+    { key: "aria-details", value: prop' value }
+
 instance Attr Path_ AriaDetails String where
-  attr AriaDetails value = unsafeAttribute { key: "aria-details", value: prop' value }
+  attr AriaDetails value = unsafeAttribute
+    { key: "aria-details", value: prop' value }
+
 instance Attr Polygon_ AriaDetails String where
-  attr AriaDetails value = unsafeAttribute { key: "aria-details", value: prop' value }
+  attr AriaDetails value = unsafeAttribute
+    { key: "aria-details", value: prop' value }
+
 instance Attr Polyline_ AriaDetails String where
-  attr AriaDetails value = unsafeAttribute { key: "aria-details", value: prop' value }
+  attr AriaDetails value = unsafeAttribute
+    { key: "aria-details", value: prop' value }
+
 instance Attr Rect_ AriaDetails String where
-  attr AriaDetails value = unsafeAttribute { key: "aria-details", value: prop' value }
+  attr AriaDetails value = unsafeAttribute
+    { key: "aria-details", value: prop' value }
+
 instance Attr Svg_ AriaDetails String where
-  attr AriaDetails value = unsafeAttribute { key: "aria-details", value: prop' value }
+  attr AriaDetails value = unsafeAttribute
+    { key: "aria-details", value: prop' value }
+
 instance Attr Symbol_ AriaDetails String where
-  attr AriaDetails value = unsafeAttribute { key: "aria-details", value: prop' value }
+  attr AriaDetails value = unsafeAttribute
+    { key: "aria-details", value: prop' value }
+
 instance Attr Text_ AriaDetails String where
-  attr AriaDetails value = unsafeAttribute { key: "aria-details", value: prop' value }
+  attr AriaDetails value = unsafeAttribute
+    { key: "aria-details", value: prop' value }
+
 instance Attr TextPath_ AriaDetails String where
-  attr AriaDetails value = unsafeAttribute { key: "aria-details", value: prop' value }
+  attr AriaDetails value = unsafeAttribute
+    { key: "aria-details", value: prop' value }
+
 instance Attr Tspan_ AriaDetails String where
-  attr AriaDetails value = unsafeAttribute { key: "aria-details", value: prop' value }
+  attr AriaDetails value = unsafeAttribute
+    { key: "aria-details", value: prop' value }
+
 instance Attr Use_ AriaDetails String where
-  attr AriaDetails value = unsafeAttribute { key: "aria-details", value: prop' value }
+  attr AriaDetails value = unsafeAttribute
+    { key: "aria-details", value: prop' value }
+
 instance Attr View_ AriaDetails String where
-  attr AriaDetails value = unsafeAttribute { key: "aria-details", value: prop' value }
+  attr AriaDetails value = unsafeAttribute
+    { key: "aria-details", value: prop' value }

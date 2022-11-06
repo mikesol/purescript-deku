@@ -20,29 +20,42 @@ data In = In
 
 instance Attr FeBlend_ In String where
   attr In value = unsafeAttribute { key: "in", value: prop' value }
+
 instance Attr FeColorMatrix_ In String where
   attr In value = unsafeAttribute { key: "in", value: prop' value }
+
 instance Attr FeComponentTransfer_ In String where
   attr In value = unsafeAttribute { key: "in", value: prop' value }
+
 instance Attr FeComposite_ In String where
   attr In value = unsafeAttribute { key: "in", value: prop' value }
+
 instance Attr FeConvolveMatrix_ In String where
   attr In value = unsafeAttribute { key: "in", value: prop' value }
+
 instance Attr FeDiffuseLighting_ In String where
   attr In value = unsafeAttribute { key: "in", value: prop' value }
+
 instance Attr FeDisplacementMap_ In String where
   attr In value = unsafeAttribute { key: "in", value: prop' value }
+
 instance Attr FeDropShadow_ In String where
   attr In value = unsafeAttribute { key: "in", value: prop' value }
+
 instance Attr FeGaussianBlur_ In String where
   attr In value = unsafeAttribute { key: "in", value: prop' value }
+
 instance Attr FeMergeNode_ In String where
   attr In value = unsafeAttribute { key: "in", value: prop' value }
+
 instance Attr FeMorphology_ In String where
   attr In value = unsafeAttribute { key: "in", value: prop' value }
+
 instance Attr FeOffset_ In String where
   attr In value = unsafeAttribute { key: "in", value: prop' value }
+
 instance Attr FeSpecularLighting_ In String where
   attr In value = unsafeAttribute { key: "in", value: prop' value }
+
 instance Attr FeTile_ In String where
   attr In value = unsafeAttribute { key: "in", value: prop' value }

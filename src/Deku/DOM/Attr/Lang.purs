@@ -527,67 +527,99 @@ instance Attr Wbr_ Lang String where
 
 instance Attr AnimateTransform_ Lang String where
   attr Lang value = unsafeAttribute { key: "lang", value: prop' value }
+
 instance Attr Defs_ Lang String where
   attr Lang value = unsafeAttribute { key: "lang", value: prop' value }
+
 instance Attr Discard_ Lang String where
   attr Lang value = unsafeAttribute { key: "lang", value: prop' value }
+
 instance Attr FeBlend_ Lang String where
   attr Lang value = unsafeAttribute { key: "lang", value: prop' value }
+
 instance Attr FeColorMatrix_ Lang String where
   attr Lang value = unsafeAttribute { key: "lang", value: prop' value }
+
 instance Attr FeComponentTransfer_ Lang String where
   attr Lang value = unsafeAttribute { key: "lang", value: prop' value }
+
 instance Attr FeComposite_ Lang String where
   attr Lang value = unsafeAttribute { key: "lang", value: prop' value }
+
 instance Attr FeConvolveMatrix_ Lang String where
   attr Lang value = unsafeAttribute { key: "lang", value: prop' value }
+
 instance Attr FeDiffuseLighting_ Lang String where
   attr Lang value = unsafeAttribute { key: "lang", value: prop' value }
+
 instance Attr FeDisplacementMap_ Lang String where
   attr Lang value = unsafeAttribute { key: "lang", value: prop' value }
+
 instance Attr FeDistantLight_ Lang String where
   attr Lang value = unsafeAttribute { key: "lang", value: prop' value }
+
 instance Attr FeFlood_ Lang String where
   attr Lang value = unsafeAttribute { key: "lang", value: prop' value }
+
 instance Attr FeFuncA_ Lang String where
   attr Lang value = unsafeAttribute { key: "lang", value: prop' value }
+
 instance Attr FeFuncB_ Lang String where
   attr Lang value = unsafeAttribute { key: "lang", value: prop' value }
+
 instance Attr FeFuncG_ Lang String where
   attr Lang value = unsafeAttribute { key: "lang", value: prop' value }
+
 instance Attr FeFuncR_ Lang String where
   attr Lang value = unsafeAttribute { key: "lang", value: prop' value }
+
 instance Attr FeGaussianBlur_ Lang String where
   attr Lang value = unsafeAttribute { key: "lang", value: prop' value }
+
 instance Attr FeImage_ Lang String where
   attr Lang value = unsafeAttribute { key: "lang", value: prop' value }
+
 instance Attr FeMerge_ Lang String where
   attr Lang value = unsafeAttribute { key: "lang", value: prop' value }
+
 instance Attr FeMergeNode_ Lang String where
   attr Lang value = unsafeAttribute { key: "lang", value: prop' value }
+
 instance Attr FeMorphology_ Lang String where
   attr Lang value = unsafeAttribute { key: "lang", value: prop' value }
+
 instance Attr FeOffset_ Lang String where
   attr Lang value = unsafeAttribute { key: "lang", value: prop' value }
+
 instance Attr FePointLight_ Lang String where
   attr Lang value = unsafeAttribute { key: "lang", value: prop' value }
+
 instance Attr FeSpecularLighting_ Lang String where
   attr Lang value = unsafeAttribute { key: "lang", value: prop' value }
+
 instance Attr FeSpotLight_ Lang String where
   attr Lang value = unsafeAttribute { key: "lang", value: prop' value }
+
 instance Attr FeTile_ Lang String where
   attr Lang value = unsafeAttribute { key: "lang", value: prop' value }
+
 instance Attr FeTurbulence_ Lang String where
   attr Lang value = unsafeAttribute { key: "lang", value: prop' value }
+
 instance Attr Filter_ Lang String where
   attr Lang value = unsafeAttribute { key: "lang", value: prop' value }
+
 instance Attr Image_ Lang String where
   attr Lang value = unsafeAttribute { key: "lang", value: prop' value }
+
 instance Attr Metadata_ Lang String where
   attr Lang value = unsafeAttribute { key: "lang", value: prop' value }
+
 instance Attr Mpath_ Lang String where
   attr Lang value = unsafeAttribute { key: "lang", value: prop' value }
+
 instance Attr Switch_ Lang String where
   attr Lang value = unsafeAttribute { key: "lang", value: prop' value }
+
 instance Attr View_ Lang String where
   attr Lang value = unsafeAttribute { key: "lang", value: prop' value }

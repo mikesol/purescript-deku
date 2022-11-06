@@ -26,44 +26,85 @@ import Deku.Attribute (class Attr, prop', unsafeAttribute)
 data FontSizeAdjust = FontSizeAdjust
 
 instance Attr FeBlend_ FontSizeAdjust String where
-  attr FontSizeAdjust value = unsafeAttribute { key: "font-size-adjust", value: prop' value }
+  attr FontSizeAdjust value = unsafeAttribute
+    { key: "font-size-adjust", value: prop' value }
+
 instance Attr FeColorMatrix_ FontSizeAdjust String where
-  attr FontSizeAdjust value = unsafeAttribute { key: "font-size-adjust", value: prop' value }
+  attr FontSizeAdjust value = unsafeAttribute
+    { key: "font-size-adjust", value: prop' value }
+
 instance Attr FeComponentTransfer_ FontSizeAdjust String where
-  attr FontSizeAdjust value = unsafeAttribute { key: "font-size-adjust", value: prop' value }
+  attr FontSizeAdjust value = unsafeAttribute
+    { key: "font-size-adjust", value: prop' value }
+
 instance Attr FeComposite_ FontSizeAdjust String where
-  attr FontSizeAdjust value = unsafeAttribute { key: "font-size-adjust", value: prop' value }
+  attr FontSizeAdjust value = unsafeAttribute
+    { key: "font-size-adjust", value: prop' value }
+
 instance Attr FeConvolveMatrix_ FontSizeAdjust String where
-  attr FontSizeAdjust value = unsafeAttribute { key: "font-size-adjust", value: prop' value }
+  attr FontSizeAdjust value = unsafeAttribute
+    { key: "font-size-adjust", value: prop' value }
+
 instance Attr FeDiffuseLighting_ FontSizeAdjust String where
-  attr FontSizeAdjust value = unsafeAttribute { key: "font-size-adjust", value: prop' value }
+  attr FontSizeAdjust value = unsafeAttribute
+    { key: "font-size-adjust", value: prop' value }
+
 instance Attr FeDisplacementMap_ FontSizeAdjust String where
-  attr FontSizeAdjust value = unsafeAttribute { key: "font-size-adjust", value: prop' value }
+  attr FontSizeAdjust value = unsafeAttribute
+    { key: "font-size-adjust", value: prop' value }
+
 instance Attr FeFlood_ FontSizeAdjust String where
-  attr FontSizeAdjust value = unsafeAttribute { key: "font-size-adjust", value: prop' value }
+  attr FontSizeAdjust value = unsafeAttribute
+    { key: "font-size-adjust", value: prop' value }
+
 instance Attr FeGaussianBlur_ FontSizeAdjust String where
-  attr FontSizeAdjust value = unsafeAttribute { key: "font-size-adjust", value: prop' value }
+  attr FontSizeAdjust value = unsafeAttribute
+    { key: "font-size-adjust", value: prop' value }
+
 instance Attr FeImage_ FontSizeAdjust String where
-  attr FontSizeAdjust value = unsafeAttribute { key: "font-size-adjust", value: prop' value }
+  attr FontSizeAdjust value = unsafeAttribute
+    { key: "font-size-adjust", value: prop' value }
+
 instance Attr FeMerge_ FontSizeAdjust String where
-  attr FontSizeAdjust value = unsafeAttribute { key: "font-size-adjust", value: prop' value }
+  attr FontSizeAdjust value = unsafeAttribute
+    { key: "font-size-adjust", value: prop' value }
+
 instance Attr FeMorphology_ FontSizeAdjust String where
-  attr FontSizeAdjust value = unsafeAttribute { key: "font-size-adjust", value: prop' value }
+  attr FontSizeAdjust value = unsafeAttribute
+    { key: "font-size-adjust", value: prop' value }
+
 instance Attr FeOffset_ FontSizeAdjust String where
-  attr FontSizeAdjust value = unsafeAttribute { key: "font-size-adjust", value: prop' value }
+  attr FontSizeAdjust value = unsafeAttribute
+    { key: "font-size-adjust", value: prop' value }
+
 instance Attr FeSpecularLighting_ FontSizeAdjust String where
-  attr FontSizeAdjust value = unsafeAttribute { key: "font-size-adjust", value: prop' value }
+  attr FontSizeAdjust value = unsafeAttribute
+    { key: "font-size-adjust", value: prop' value }
+
 instance Attr FeTile_ FontSizeAdjust String where
-  attr FontSizeAdjust value = unsafeAttribute { key: "font-size-adjust", value: prop' value }
+  attr FontSizeAdjust value = unsafeAttribute
+    { key: "font-size-adjust", value: prop' value }
+
 instance Attr FeTurbulence_ FontSizeAdjust String where
-  attr FontSizeAdjust value = unsafeAttribute { key: "font-size-adjust", value: prop' value }
+  attr FontSizeAdjust value = unsafeAttribute
+    { key: "font-size-adjust", value: prop' value }
+
 instance Attr Filter_ FontSizeAdjust String where
-  attr FontSizeAdjust value = unsafeAttribute { key: "font-size-adjust", value: prop' value }
+  attr FontSizeAdjust value = unsafeAttribute
+    { key: "font-size-adjust", value: prop' value }
+
 instance Attr Image_ FontSizeAdjust String where
-  attr FontSizeAdjust value = unsafeAttribute { key: "font-size-adjust", value: prop' value }
+  attr FontSizeAdjust value = unsafeAttribute
+    { key: "font-size-adjust", value: prop' value }
+
 instance Attr Switch_ FontSizeAdjust String where
-  attr FontSizeAdjust value = unsafeAttribute { key: "font-size-adjust", value: prop' value }
+  attr FontSizeAdjust value = unsafeAttribute
+    { key: "font-size-adjust", value: prop' value }
+
 instance Attr Text_ FontSizeAdjust String where
-  attr FontSizeAdjust value = unsafeAttribute { key: "font-size-adjust", value: prop' value }
+  attr FontSizeAdjust value = unsafeAttribute
+    { key: "font-size-adjust", value: prop' value }
+
 instance Attr Tspan_ FontSizeAdjust String where
-  attr FontSizeAdjust value = unsafeAttribute { key: "font-size-adjust", value: prop' value }
+  attr FontSizeAdjust value = unsafeAttribute
+    { key: "font-size-adjust", value: prop' value }
