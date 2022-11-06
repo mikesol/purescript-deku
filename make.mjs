@@ -18,9 +18,9 @@ var arrayApply = function(fs) {
 // output/Control.Semigroupoid/index.js
 var semigroupoidFn = {
   compose: function(f) {
-    return function(g) {
+    return function(g2) {
       return function(x) {
-        return f(g(x));
+        return f(g2(x));
       };
     };
   }
@@ -31,8 +31,8 @@ var compose = function(dict) {
 var composeFlipped = function(dictSemigroupoid) {
   var compose1 = compose(dictSemigroupoid);
   return function(f) {
-    return function(g) {
-      return compose1(g)(f);
+    return function(g2) {
+      return compose1(g2)(f);
     };
   };
 };
@@ -55,10 +55,10 @@ var otherwise = true;
 
 // output/Data.Function/index.js
 var on = function(f) {
-  return function(g) {
+  return function(g2) {
     return function(x) {
       return function(y) {
-        return f(g(x))(g(y));
+        return f(g2(x))(g2(y));
       };
     };
   };
@@ -236,9 +236,9 @@ var bindFlipped = function(dictBind) {
 var composeKleisliFlipped = function(dictBind) {
   var bindFlipped1 = bindFlipped(dictBind);
   return function(f) {
-    return function(g) {
+    return function(g2) {
       return function(a2) {
-        return bindFlipped1(f)(g(a2));
+        return bindFlipped1(f)(g2(a2));
       };
     };
   };
@@ -246,9 +246,9 @@ var composeKleisliFlipped = function(dictBind) {
 var composeKleisli = function(dictBind) {
   var bind1 = bind(dictBind);
   return function(f) {
-    return function(g) {
+    return function(g2) {
       return function(a2) {
-        return bind1(f(a2))(g);
+        return bind1(f(a2))(g2);
       };
     };
   };
@@ -1081,12 +1081,12 @@ var fix = function(dictLazy) {
 // output/Control.Monad/index.js
 var ap = function(dictMonad) {
   var bind11 = bind(dictMonad.Bind1());
-  var pure34 = pure(dictMonad.Applicative0());
+  var pure35 = pure(dictMonad.Applicative0());
   return function(f) {
     return function(a2) {
       return bind11(f)(function(f$prime) {
         return bind11(a2)(function(a$prime) {
-          return pure34(f$prime(a$prime));
+          return pure35(f$prime(a$prime));
         });
       });
     };
@@ -1843,13 +1843,13 @@ var oneOfMap = function(dictFoldable) {
 };
 var traverse_ = function(dictApplicative) {
   var applySecond14 = applySecond(dictApplicative.Apply0());
-  var pure34 = pure(dictApplicative);
+  var pure35 = pure(dictApplicative);
   return function(dictFoldable) {
     var foldr22 = foldr(dictFoldable);
     return function(f) {
       return foldr22(function($454) {
         return applySecond14(f($454));
-      })(pure34(unit));
+      })(pure35(unit));
     };
   };
 };
@@ -2021,13 +2021,13 @@ var traverseArrayImpl = function() {
   }
   return function(apply7) {
     return function(map31) {
-      return function(pure34) {
+      return function(pure35) {
         return function(f) {
           return function(array) {
             function go2(bot, top3) {
               switch (top3 - bot) {
                 case 0:
-                  return pure34([]);
+                  return pure35([]);
                 case 1:
                   return map31(array1)(f(array[bot]));
                 case 2:
@@ -2199,16 +2199,16 @@ var decode = function(v) {
   return v.value0;
 };
 var codec$prime = function(f) {
-  return function(g) {
+  return function(g2) {
     return new Codec(f, function(b2) {
-      return new Tuple(g(b2), b2);
+      return new Tuple(g2(b2), b2);
     });
   };
 };
 var codec = function(f) {
-  return function(g) {
+  return function(g2) {
     return new Codec(f, function(b2) {
-      return new Tuple(g(b2), b2);
+      return new Tuple(g2(b2), b2);
     });
   };
 };
@@ -2261,14 +2261,14 @@ function _foldM(bind11) {
     return function(mz) {
       return function(m) {
         var acc = mz;
-        function g(k2) {
+        function g2(k2) {
           return function(z) {
             return f(z)(k2)(m[k2]);
           };
         }
         for (var k in m) {
           if (hasOwnProperty.call(m, k)) {
-            acc = bind11(acc)(g(k));
+            acc = bind11(acc)(g2(k));
           }
         }
         return acc;
@@ -2456,8 +2456,8 @@ var $$delete = function(k) {
 // output/Data.Argonaut.Core/index.js
 var verbJsonType = function(def) {
   return function(f) {
-    return function(g) {
-      return g(def)(f);
+    return function(g2) {
+      return g2(def)(f);
     };
   };
 };
@@ -5072,6 +5072,7 @@ var eventIsEvent = {
 };
 
 // output/Deku.Attribute/index.js
+var pure5 = /* @__PURE__ */ pure(applicativeEvent);
 var Cb = function(x) {
   return x;
 };
@@ -5115,6 +5116,14 @@ var cb = /* @__PURE__ */ function() {
 var attr = function(dict) {
   return dict.attr;
 };
+var pureAttr = function(dictAttr) {
+  var attr112 = attr(dictAttr);
+  return function(a2) {
+    return function(b2) {
+      return pure5(attr112(a2)(b2));
+    };
+  };
+};
 
 // output/Bolson.Control/foreign.js
 function mutAr(a2) {
@@ -5134,10 +5143,10 @@ function readAr(a2) {
 }
 
 // output/FRP.Event.VBus/index.js
-var pure5 = /* @__PURE__ */ pure(applicativeST);
+var pure6 = /* @__PURE__ */ pure(applicativeST);
 var vbusNil = {
   vb: function(v) {
-    return pure5(new Tuple({}, {}));
+    return pure6(new Tuple({}, {}));
   }
 };
 var vb = function(dict) {
@@ -5155,7 +5164,7 @@ var vbackdoor = {
                 return function __do3() {
                   var v2 = vb1($$Proxy.value)();
                   k(f(v2.value0)(v2.value1))();
-                  return pure5(unit);
+                  return pure6(unit);
                 };
               };
             });
@@ -5480,11 +5489,11 @@ var append5 = /* @__PURE__ */ append(semigroupArray);
 var foldl4 = /* @__PURE__ */ foldl(foldableObject);
 var applySecond2 = /* @__PURE__ */ applySecond(applyST);
 var Begin = /* @__PURE__ */ function() {
-  function Begin2() {
+  function Begin3() {
   }
   ;
-  Begin2.value = new Begin2();
-  return Begin2;
+  Begin3.value = new Begin3();
+  return Begin3;
 }();
 var Middle = /* @__PURE__ */ function() {
   function Middle2() {
@@ -5494,11 +5503,11 @@ var Middle = /* @__PURE__ */ function() {
   return Middle2;
 }();
 var End = /* @__PURE__ */ function() {
-  function End2() {
+  function End3() {
   }
   ;
-  End2.value = new End2();
-  return End2;
+  End3.value = new End3();
+  return End3;
 }();
 var flatten = function(v) {
   return function(psr) {
@@ -5721,7 +5730,7 @@ var lcmap2 = /* @__PURE__ */ lcmap(profunctorFn);
 var map9 = /* @__PURE__ */ map(functorEvent);
 var unwrap3 = /* @__PURE__ */ unwrap();
 var eq2 = /* @__PURE__ */ eq(eqScope);
-var pure6 = /* @__PURE__ */ pure(applicativeST);
+var pure7 = /* @__PURE__ */ pure(applicativeST);
 var pure13 = /* @__PURE__ */ pure(applicativeEvent);
 var empty6 = /* @__PURE__ */ empty(plusEvent);
 var oneOf3 = /* @__PURE__ */ oneOf(foldableArray)(plusEvent);
@@ -5866,7 +5875,7 @@ var dynify = function(f) {
             scope: v.scope,
             ez: false,
             raiseId: function(v4) {
-              return pure6(unit);
+              return pure7(unit);
             },
             pos: Nothing.value,
             dynFamily: new Just(me)
@@ -5888,7 +5897,7 @@ var dyn2 = /* @__PURE__ */ dynify(/* @__PURE__ */ coerce3(dyn));
 // output/Deku.Control/index.js
 var map10 = /* @__PURE__ */ map(functorEvent);
 var oneOf4 = /* @__PURE__ */ oneOf(foldableArray)(plusEvent);
-var pure7 = /* @__PURE__ */ pure(applicativeEvent);
+var pure8 = /* @__PURE__ */ pure(applicativeEvent);
 var empty7 = /* @__PURE__ */ empty(plusEvent);
 var pure14 = /* @__PURE__ */ pure(applicativeST);
 var mapAccum2 = /* @__PURE__ */ mapAccum(eventIsEvent);
@@ -5951,14 +5960,14 @@ var text = function(txt) {
       return makeLemmingEventO(function(v2, k) {
         var me = v1.ids();
         v.raiseId(me)();
-        var unsub = v2(oneOf4([pure7(v1.makeText({
+        var unsub = v2(oneOf4([pure8(v1.makeText({
           id: me,
           parent: v.parent,
           pos: v.pos,
           scope: v.scope,
           dynFamily: v.dynFamily
         })), unsafeSetText(v1)(me)(txt), maybe(empty7)(function(p2) {
-          return pure7(v1.attributeParent({
+          return pure8(v1.attributeParent({
             id: me,
             parent: p2,
             pos: v.pos,
@@ -5978,7 +5987,7 @@ var text = function(txt) {
   return new Element$prime(go2);
 };
 var text_ = function(txt) {
-  return text(pure7(txt));
+  return text(pure8(txt));
 };
 var switcher = function(f) {
   return function(event) {
@@ -5997,7 +6006,7 @@ var switcher = function(f) {
           return function($133) {
             return $132(snd($133));
           };
-        }())(cenv)), pure7(insert_(coerce4(f(v.value0))))]);
+        }())(cenv)), pure8(insert_(coerce4(f(v.value0))))]);
       })(cenv);
     })));
   };
@@ -6050,7 +6059,7 @@ var elementify = function(tag) {
           return makeLemmingEventO(function(v2, k) {
             var me = v1.ids();
             v.raiseId(me)();
-            var unsub = v2(alt2(oneOf4(append6([pure7(v1.makeElement({
+            var unsub = v2(alt2(oneOf4(append6([pure8(v1.makeElement({
               id: me,
               parent: v.parent,
               scope: v.scope,
@@ -6058,7 +6067,7 @@ var elementify = function(tag) {
               pos: v.pos,
               dynFamily: v.dynFamily
             })), unsafeSetAttribute(v1)(me)(atts)])(maybe([])(function(p2) {
-              return [pure7(v1.attributeParent({
+              return [pure8(v1.attributeParent({
                 id: me,
                 parent: p2,
                 pos: v.pos,
@@ -6261,29 +6270,162 @@ var span = function(attributes) {
 };
 var span_ = /* @__PURE__ */ span(/* @__PURE__ */ empty(plusEvent));
 
-// output/Deku.DOM.Attr.Xtype/index.js
-var Xtype = /* @__PURE__ */ function() {
-  function Xtype2() {
+// output/Deku.DOM.Attr.Cx/index.js
+var Cx = /* @__PURE__ */ function() {
+  function Cx2() {
   }
   ;
-  Xtype2.value = new Xtype2();
-  return Xtype2;
+  Cx2.value = new Cx2();
+  return Cx2;
 }();
-var attrSource_XtypeString = {
+var attrCircle_CxString = {
   attr: function(v) {
     return function(value13) {
       return unsafeAttribute({
-        key: "type",
+        key: "cx",
         value: prop$prime(value13)
       });
     };
   }
 };
-var attrInput_XtypeString = {
+
+// output/Deku.DOM.Attr.Cy/index.js
+var Cy = /* @__PURE__ */ function() {
+  function Cy2() {
+  }
+  ;
+  Cy2.value = new Cy2();
+  return Cy2;
+}();
+var attrCircle_CyString = {
   attr: function(v) {
     return function(value13) {
       return unsafeAttribute({
-        key: "type",
+        key: "cy",
+        value: prop$prime(value13)
+      });
+    };
+  }
+};
+
+// output/Deku.DOM.Attr.Fill/index.js
+var Fill = /* @__PURE__ */ function() {
+  function Fill2() {
+  }
+  ;
+  Fill2.value = new Fill2();
+  return Fill2;
+}();
+var attrCircle_FillString = {
+  attr: function(v) {
+    return function(value13) {
+      return unsafeAttribute({
+        key: "fill",
+        value: prop$prime(value13)
+      });
+    };
+  }
+};
+
+// output/Deku.DOM.Attr.Height/index.js
+var Height = /* @__PURE__ */ function() {
+  function Height2() {
+  }
+  ;
+  Height2.value = new Height2();
+  return Height2;
+}();
+var attrSvg_HeightString = {
+  attr: function(v) {
+    return function(value13) {
+      return unsafeAttribute({
+        key: "height",
+        value: prop$prime(value13)
+      });
+    };
+  }
+};
+
+// output/Deku.DOM.Attr.R/index.js
+var R = /* @__PURE__ */ function() {
+  function R2() {
+  }
+  ;
+  R2.value = new R2();
+  return R2;
+}();
+var attrCircle_RString = {
+  attr: function(v) {
+    return function(value13) {
+      return unsafeAttribute({
+        key: "r",
+        value: prop$prime(value13)
+      });
+    };
+  }
+};
+
+// output/Deku.DOM.Attr.Stroke/index.js
+var Stroke = /* @__PURE__ */ function() {
+  function Stroke2() {
+  }
+  ;
+  Stroke2.value = new Stroke2();
+  return Stroke2;
+}();
+var attrCircle_StrokeString = {
+  attr: function(v) {
+    return function(value13) {
+      return unsafeAttribute({
+        key: "stroke",
+        value: prop$prime(value13)
+      });
+    };
+  }
+};
+
+// output/Deku.DOM.Attr.StrokeWidth/index.js
+var StrokeWidth = /* @__PURE__ */ function() {
+  function StrokeWidth2() {
+  }
+  ;
+  StrokeWidth2.value = new StrokeWidth2();
+  return StrokeWidth2;
+}();
+var attrCircle_StrokeWidthStr = {
+  attr: function(v) {
+    return function(value13) {
+      return unsafeAttribute({
+        key: "stroke-width",
+        value: prop$prime(value13)
+      });
+    };
+  }
+};
+
+// output/Deku.DOM.Attr.Width/index.js
+var Width = /* @__PURE__ */ function() {
+  function Width2() {
+  }
+  ;
+  Width2.value = new Width2();
+  return Width2;
+}();
+var attrVideo_WidthString = {
+  attr: function(v) {
+    return function(value13) {
+      return unsafeAttribute({
+        key: "width",
+        value: prop$prime(value13)
+      });
+    };
+  }
+};
+var attrSvg_WidthString = {
+  attr: function(v) {
+    return function(value13) {
+      return unsafeAttribute({
+        key: "width",
         value: prop$prime(value13)
       });
     };
@@ -6299,31 +6441,31 @@ var button = function(attributes) {
 };
 var button_ = /* @__PURE__ */ button(/* @__PURE__ */ empty(plusEvent));
 
-// output/Deku.DOM.Elt.Code/index.js
+// output/Deku.DOM.Elt.Circle/index.js
 var coerce9 = /* @__PURE__ */ coerce();
+var circle = function(attributes) {
+  return function(kids) {
+    return new Element$prime(elementify("circle")(attributes)(coerce9(fixed(coerce9(mapWithIndex(unsafeSetPos)(kids))))));
+  };
+};
+
+// output/Deku.DOM.Elt.Code/index.js
+var coerce10 = /* @__PURE__ */ coerce();
 var code = function(attributes) {
   return function(kids) {
-    return new Element$prime(elementify("code")(attributes)(coerce9(fixed(coerce9(mapWithIndex(unsafeSetPos)(kids))))));
+    return new Element$prime(elementify("code")(attributes)(coerce10(fixed(coerce10(mapWithIndex(unsafeSetPos)(kids))))));
   };
 };
 var code_ = /* @__PURE__ */ code(/* @__PURE__ */ empty(plusEvent));
 
 // output/Deku.DOM.Elt.I/index.js
-var coerce10 = /* @__PURE__ */ coerce();
+var coerce11 = /* @__PURE__ */ coerce();
 var i = function(attributes) {
   return function(kids) {
-    return new Element$prime(elementify("i")(attributes)(coerce10(fixed(coerce10(mapWithIndex(unsafeSetPos)(kids))))));
+    return new Element$prime(elementify("i")(attributes)(coerce11(fixed(coerce11(mapWithIndex(unsafeSetPos)(kids))))));
   };
 };
 var i_ = /* @__PURE__ */ i(/* @__PURE__ */ empty(plusEvent));
-
-// output/Deku.DOM.Elt.Input/index.js
-var coerce11 = /* @__PURE__ */ coerce();
-var input = function(attributes) {
-  return function(kids) {
-    return new Element$prime(elementify("input")(attributes)(coerce11(fixed(coerce11(mapWithIndex(unsafeSetPos)(kids))))));
-  };
-};
 
 // output/Deku.DOM.Elt.Li/index.js
 var coerce12 = /* @__PURE__ */ coerce();
@@ -6343,17 +6485,25 @@ var pre = function(attributes) {
 };
 var pre_ = /* @__PURE__ */ pre(/* @__PURE__ */ empty(plusEvent));
 
-// output/Deku.DOM.Elt.Ul/index.js
+// output/Deku.DOM.Elt.Svg/index.js
 var coerce14 = /* @__PURE__ */ coerce();
+var svg = function(attributes) {
+  return function(kids) {
+    return new Element$prime(elementify("svg")(attributes)(coerce14(fixed(coerce14(mapWithIndex(unsafeSetPos)(kids))))));
+  };
+};
+
+// output/Deku.DOM.Elt.Ul/index.js
+var coerce15 = /* @__PURE__ */ coerce();
 var ul = function(attributes) {
   return function(kids) {
-    return new Element$prime(elementify("ul")(attributes)(coerce14(fixed(coerce14(mapWithIndex(unsafeSetPos)(kids))))));
+    return new Element$prime(elementify("ul")(attributes)(coerce15(fixed(coerce15(mapWithIndex(unsafeSetPos)(kids))))));
   };
 };
 var ul_ = /* @__PURE__ */ ul(/* @__PURE__ */ empty(plusEvent));
 
 // output/Deku.Example.Docs.Types/index.js
-var pure8 = /* @__PURE__ */ pure(applicativeMaybe);
+var pure9 = /* @__PURE__ */ pure(applicativeMaybe);
 var empty8 = /* @__PURE__ */ empty(plusMaybe);
 var Intro = /* @__PURE__ */ function() {
   function Intro2() {
@@ -6427,43 +6577,43 @@ var SSR = /* @__PURE__ */ function() {
 }();
 var stringToPage = function(v) {
   if (v === "Intro") {
-    return pure8(Intro.value);
+    return pure9(Intro.value);
   }
   ;
   if (v === "HelloWorld") {
-    return pure8(HelloWorld.value);
+    return pure9(HelloWorld.value);
   }
   ;
   if (v === "SimpleComponent") {
-    return pure8(SimpleComponent.value);
+    return pure9(SimpleComponent.value);
   }
   ;
   if (v === "PURSX1") {
-    return pure8(PURSX1.value);
+    return pure9(PURSX1.value);
   }
   ;
   if (v === "PURSX2") {
-    return pure8(PURSX2.value);
+    return pure9(PURSX2.value);
   }
   ;
   if (v === "Events") {
-    return pure8(Events.value);
+    return pure9(Events.value);
   }
   ;
   if (v === "Effects") {
-    return pure8(Effects.value);
+    return pure9(Effects.value);
   }
   ;
   if (v === "Events2") {
-    return pure8(Events2.value);
+    return pure9(Events2.value);
   }
   ;
   if (v === "Portals") {
-    return pure8(Portals.value);
+    return pure9(Portals.value);
   }
   ;
   if (v === "SSR") {
-    return pure8(SSR.value);
+    return pure9(SSR.value);
   }
   ;
   return empty8;
@@ -6483,7 +6633,7 @@ var alt3 = /* @__PURE__ */ alt(altEvent);
 var map11 = /* @__PURE__ */ map(functorEvent);
 var lcmap4 = /* @__PURE__ */ lcmap(profunctorFn);
 var oneOf5 = /* @__PURE__ */ oneOf(foldableArray)(plusEvent);
-var pure9 = /* @__PURE__ */ pure(applicativeEvent);
+var pure10 = /* @__PURE__ */ pure(applicativeEvent);
 var pure15 = /* @__PURE__ */ pure(applicativeST);
 var Reflectable$dollarDict = {
   reflectType: function() {
@@ -6492,7 +6642,7 @@ var Reflectable$dollarDict = {
 };
 var unwrap5 = /* @__PURE__ */ unwrap();
 var eq4 = /* @__PURE__ */ eq(eqScope);
-var coerce15 = /* @__PURE__ */ coerce();
+var coerce16 = /* @__PURE__ */ coerce();
 var pursxToElementNil = {
   pursxToElement: function(v) {
     return function(v1) {
@@ -6576,7 +6726,7 @@ var makePursx$prime = function(dictReflectable) {
                       var pxScope = v1.ids();
                       v.raiseId(me)();
                       var v3 = pursxToElement1(pxScope)($$Proxy.value)(r);
-                      var unsub = v2(oneOf5([pure9(v1.makePursx({
+                      var unsub = v2(oneOf5([pure10(v1.makePursx({
                         id: me,
                         parent: v.parent,
                         cache: v3.cache,
@@ -6587,7 +6737,7 @@ var makePursx$prime = function(dictReflectable) {
                         html: reflectType2(html2),
                         verb: reflectType1(verb)
                       })), v3.element(v)(v1), maybe(empty9)(function(p2) {
-                        return pure9(v1.attributeParent({
+                        return pure10(v1.attributeParent({
                           id: me,
                           parent: p2,
                           pos: v.pos,
@@ -6666,7 +6816,7 @@ var __internalDekuFlatten3 = function(a2) {
         toElt: function(v) {
           return v;
         }
-      })(a2)(b2)(coerce15(c));
+      })(a2)(b2)(coerce16(c));
     };
   };
 };
@@ -6840,7 +6990,7 @@ main = runInBody Deku.do
 `;
 var events = 'module Main where\n\nimport Prelude\n\nimport Data.Tuple.Nested ((/\\))\nimport Deku.Control (text, text_)\nimport Deku.DOM as D\nimport Deku.Do (useState)\nimport Deku.Do as Deku\nimport Deku.Listeners (click_, slider)\nimport Deku.Toplevel (runInBody)\nimport Effect (Effect)\nimport FRP.Event (Event, fold)\n\nmain :: Effect Unit\nmain = runInBody Deku.do\n  setButtonClicked /\\ buttonClicked <- useState unit\n  setSliderMoved /\\ sliderMoved <- useState 50.0\n  let\n    countUp :: Event Int\n    countUp = fold (\\a _ -> 1 + a) (-1) buttonClicked\n  D.div_\n    [ D.button\n        (click_ (setButtonClicked unit))\n        [ text_ "Click" ]\n    , D.div_\n        [ text\n            (("Val: " <> _) <<< show <$> countUp)\n        ]\n    , D.div_\n        [ D.input\n            (slider (pure setSliderMoved))\n            []\n        , D.div_\n            [ text\n                (("Val: " <> _) <<< show <$> sliderMoved)\n            ]\n        ]\n    ]\n';
 var effects = 'module Main where\n\nimport Prelude\n\nimport Affjax.ResponseFormat as ResponseFormat\nimport Affjax.Web as AX\nimport Control.Alt ((<|>))\nimport Data.Argonaut.Core (stringifyWithIndent)\nimport Data.Either (Either(..))\nimport Data.Filterable (compact, separate)\nimport Data.HTTP.Method (Method(..))\nimport Data.Maybe (Maybe(..))\nimport Data.Tuple.Nested ((/\\))\nimport Deku.Attribute (Cb, cb, (:=))\nimport Deku.Control (text)\nimport Deku.DOM as D\nimport Deku.Do (useState)\nimport Deku.Do as Deku\nimport Deku.Listeners (click_)\nimport Deku.Toplevel (runInBody)\nimport Effect (Effect)\nimport Effect.Aff (launchAff_)\nimport Effect.Class (liftEffect)\nimport FRP.Event (Event, mapAccum)\n\ndata UIAction = Initial | Loading | Result String\n\nclickCb :: (UIAction -> Effect Unit) -> Cb\nclickCb push = cb\n  ( const do\n      push Loading\n      launchAff_ $ do\n        result <- AX.request\n          ( AX.defaultRequest\n              { url = "https://randomuser.me/api/"\n              , method = Left GET\n              , responseFormat = ResponseFormat.json\n              }\n          )\n        case result of\n          Left err -> liftEffect $ push\n            $ Result\n                ( "GET /api response failed to decode: " <>\n                    AX.printError err\n                )\n          Right response -> liftEffect $ push $ Result $\n            stringifyWithIndent 2 response.body\n  )\n\nclickText = "Click to get some random user data." :: String\n\nmain :: Effect Unit\nmain = runInBody Deku.do\n  setUIAction /\\ uiAction <- useState Initial\n  let\n    split :: { left :: Event Unit, right :: Event String }\n    split = separate $ compact $\n      map\n        ( case _ of\n            Loading -> Just $ Left unit\n            Result s -> Just $ Right s\n            _ -> Nothing\n        )\n        uiAction\n    { left: loading, right: result } = split\n  D.div_\n    [ D.div_\n        [ D.button (click_ (clickCb setUIAction))\n            [ text\n                ( pure clickText\n                    <|> (loading $> "Loading...")\n                    <|> (result $> clickText)\n                )\n            ]\n        ]\n    , D.div\n        ( (pure (D.Style := "display: none;")) <|>\n            ( compact\n                ( mapAccum\n                    ( \\b _ -> (b && false) /\\\n                        if b then Just unit else Nothing\n                    )\n                    true\n                    result\n                ) $> (D.Style := "display: block;")\n            )\n        )\n        [ D.pre_ [ D.code_ [ text (pure "" <|> result) ] ] ]\n    ]\n';
-var component = 'module Main where\n\nimport Prelude\n\nimport Deku.Attribute ((:=))\nimport Deku.Control (text_)\nimport Deku.DOM as D\nimport Deku.Toplevel (runInBody)\nimport Effect (Effect)\n\nmain :: Effect Unit\nmain = runInBody\n  ( D.div_\n      [ D.button_ [ text_ "I do nothing" ]\n      , D.ul_ $ map (D.li_ <<< pure <<< text_) [ "A", "B", "C" ]\n      , D.div_\n          [ D.a (pure $ D.Href := "https://example.com")\n              [ text_ "foo " ]\n          , D.i_ [ text_ " bar " ]\n          , D.span (pure $ D.Style := "font-weight: 800;")\n              [ text_ " baz" ]\n          ]\n      , D.div_\n          [ D.div_\n              [ D.div_ [ D.input (pure $ D.Xtype := "range") [] ]\n              ]\n          ]\n      ]\n  )';
+var component = 'module Main where\n\nimport Prelude\n\nimport Data.Foldable (oneOf)\nimport Deku.Attribute ((!:=), (:=))\nimport Deku.Control (text_)\nimport Deku.DOM as D\nimport Deku.Toplevel (runInBody)\nimport Effect (Effect)\n\nmain :: Effect Unit\nmain = runInBody\n  ( D.div_\n      [ D.button_ [ text_ "I do nothing" ]\n      , D.ul_ $ map (D.li_ <<< pure <<< text_) [ "A", "B", "C" ]\n      , D.div_\n          [ D.a (pure $ D.Href := "https://example.com")\n              [ text_ "foo " ]\n          , D.i_ [ text_ " bar " ]\n          , D.span (pure $ D.Style := "font-weight: 800;")\n              [ text_ " baz" ]\n          ]\n      , D.svg (oneOf [ D.Height !:= "100", D.Width !:= "100" ])\n          [ D.circle\n              ( oneOf\n                  [ D.Cx !:= "50"\n                  , D.Cy !:= "50"\n                  , D.R !:= "40"\n                  , D.Stroke !:= "black"\n                  , D.StrokeWidth !:= "3"\n                  , D.Fill !:= "red"\n                  ]\n              )\n              []\n          ]\n\n      ]\n  )';
 var app = `module Main where
 
 import Prelude
@@ -6996,13 +7146,21 @@ myDivWithNoChildren = D.div attrs blank
   }
 }));
 var map15 = /* @__PURE__ */ map(functorArray);
-var pure10 = /* @__PURE__ */ pure(applicativeArray);
+var pure11 = /* @__PURE__ */ pure(applicativeArray);
 var pure16 = /* @__PURE__ */ pure(applicativeEvent);
 var attr2 = /* @__PURE__ */ attr(attrA_HrefString);
 var attr1 = /* @__PURE__ */ attr(attrSpan_StyleString);
-var attr22 = /* @__PURE__ */ attr(attrInput_XtypeString);
+var oneOf6 = /* @__PURE__ */ oneOf(foldableArray)(plusEvent);
+var pureAttr2 = /* @__PURE__ */ pureAttr(attrSvg_HeightString);
+var pureAttr1 = /* @__PURE__ */ pureAttr(attrSvg_WidthString);
+var pureAttr22 = /* @__PURE__ */ pureAttr(attrCircle_CxString);
+var pureAttr3 = /* @__PURE__ */ pureAttr(attrCircle_CyString);
+var pureAttr4 = /* @__PURE__ */ pureAttr(attrCircle_RString);
+var pureAttr5 = /* @__PURE__ */ pureAttr(attrCircle_StrokeString);
+var pureAttr6 = /* @__PURE__ */ pureAttr(attrCircle_StrokeWidthStr);
+var pureAttr7 = /* @__PURE__ */ pureAttr(attrCircle_FillString);
 var oneOfMap3 = /* @__PURE__ */ oneOfMap(foldableArray)(plusEvent);
-var attr3 = /* @__PURE__ */ attr(attrOnClickCb);
+var attr22 = /* @__PURE__ */ attr(attrOnClickCb);
 var applySecond3 = /* @__PURE__ */ applySecond(applyEffect);
 var px = /* @__PURE__ */ function() {
   return $$Proxy.value;
@@ -7010,10 +7168,10 @@ var px = /* @__PURE__ */ function() {
 var components = function(options2) {
   return makePursx2(px)({
     code: pre_([code_([text_(component)])]),
-    result: div_([button_([text_("I do nothing")]), ul_(map15(function($34) {
-      return li_(pure10(text_($34)));
-    })(["A", "B", "C"])), div_([a(pure16(attr2(Href.value)("https://example.com")))([text_("foo ")]), i_([text_(" bar ")]), span(pure16(attr1(Style.value)("font-weight: 800;")))([text_(" baz")])]), div_([div_([div_([input(pure16(attr22(Xtype.value)("range")))([])])])])]),
-    next: oneOfMap3(pure16)([attr3(OnClick.value)(cb(function(e) {
+    result: div_([button_([text_("I do nothing")]), ul_(map15(function($43) {
+      return li_(pure11(text_($43)));
+    })(["A", "B", "C"])), div_([a(pure16(attr2(Href.value)("https://example.com")))([text_("foo ")]), i_([text_(" bar ")]), span(pure16(attr1(Style.value)("font-weight: 800;")))([text_(" baz")])]), svg(oneOf6([pureAttr2(Height.value)("100"), pureAttr1(Width.value)("100")]))([circle(oneOf6([pureAttr22(Cx.value)("50"), pureAttr3(Cy.value)("50"), pureAttr4(R.value)("40"), pureAttr5(Stroke.value)("black"), pureAttr6(StrokeWidth.value)("3"), pureAttr7(Fill.value)("red")]))([])])]),
+    next: oneOfMap3(pure16)([attr22(OnClick.value)(cb(function(e) {
       return applySecond3(applySecond3(preventDefault(e))(options2.dpage(PURSX1.value)))(scrollToTop);
     })), attr2(Href.value)(options2.slug + "pursx1/")])
   });
@@ -7364,10 +7522,10 @@ var $$try = function(dictMonadError) {
   var catchError1 = catchError(dictMonadError);
   var Monad0 = dictMonadError.MonadThrow0().Monad0();
   var map31 = map(Monad0.Bind1().Apply0().Functor0());
-  var pure34 = pure(Monad0.Applicative0());
+  var pure35 = pure(Monad0.Applicative0());
   return function(a2) {
     return catchError1(map31(Right.create)(a2))(function($52) {
-      return pure34(Left.create($52));
+      return pure35(Left.create($52));
     });
   };
 };
@@ -7424,12 +7582,12 @@ var monadExceptT = function(dictMonad) {
 };
 var bindExceptT = function(dictMonad) {
   var bind11 = bind(dictMonad.Bind1());
-  var pure34 = pure(dictMonad.Applicative0());
+  var pure35 = pure(dictMonad.Applicative0());
   return {
     bind: function(v) {
       return function(k) {
         return bind11(v)(either(function($187) {
-          return pure34(Left.create($187));
+          return pure35(Left.create($187));
         })(function(a2) {
           var v1 = k(a2);
           return v1;
@@ -7482,24 +7640,24 @@ var altExceptT = function(dictSemigroup) {
   return function(dictMonad) {
     var Bind1 = dictMonad.Bind1();
     var bind11 = bind(Bind1);
-    var pure34 = pure(dictMonad.Applicative0());
+    var pure35 = pure(dictMonad.Applicative0());
     var functorExceptT1 = functorExceptT(Bind1.Apply0().Functor0());
     return {
       alt: function(v) {
         return function(v1) {
           return bind11(v)(function(rm) {
             if (rm instanceof Right) {
-              return pure34(new Right(rm.value0));
+              return pure35(new Right(rm.value0));
             }
             ;
             if (rm instanceof Left) {
               return bind11(v1)(function(rn) {
                 if (rn instanceof Right) {
-                  return pure34(new Right(rn.value0));
+                  return pure35(new Right(rn.value0));
                 }
                 ;
                 if (rn instanceof Left) {
-                  return pure34(new Left(append11(rm.value0)(rn.value0)));
+                  return pure35(new Left(append11(rm.value0)(rn.value0)));
                 }
                 ;
                 throw new Error("Failed pattern match at Control.Monad.Except.Trans (line 86, column 9 - line 88, column 49): " + [rn.constructor.name]);
@@ -8906,7 +9064,7 @@ var unsafeReadTagged = function(dictMonad) {
 };
 
 // output/Affjax/index.js
-var pure11 = /* @__PURE__ */ pure(/* @__PURE__ */ applicativeExceptT(monadIdentity));
+var pure17 = /* @__PURE__ */ pure(/* @__PURE__ */ applicativeExceptT(monadIdentity));
 var fail2 = /* @__PURE__ */ fail(monadIdentity);
 var unsafeReadTagged2 = /* @__PURE__ */ unsafeReadTagged(monadIdentity);
 var alt4 = /* @__PURE__ */ alt(/* @__PURE__ */ altExceptT(semigroupNonEmptyList)(monadIdentity));
@@ -8918,7 +9076,7 @@ var bindFlipped3 = /* @__PURE__ */ bindFlipped(bindMaybe);
 var map19 = /* @__PURE__ */ map(functorArray);
 var mapFlipped2 = /* @__PURE__ */ mapFlipped(functorAff);
 var $$try2 = /* @__PURE__ */ $$try(monadErrorAff);
-var pure17 = /* @__PURE__ */ pure(applicativeAff);
+var pure18 = /* @__PURE__ */ pure(applicativeAff);
 var RequestContentError = /* @__PURE__ */ function() {
   function RequestContentError2(value0) {
     this.value0 = value0;
@@ -8970,12 +9128,12 @@ var request = function(driver2) {
   return function(req) {
     var parseJSON = function(v2) {
       if (v2 === "") {
-        return pure11(jsonEmptyObject);
+        return pure17(jsonEmptyObject);
       }
       ;
       return either(function($74) {
         return fail2(ForeignError.create($74));
-      })(pure11)(jsonParser(v2));
+      })(pure17)(jsonParser(v2));
     };
     var fromResponse = function() {
       if (req.responseFormat instanceof $$ArrayBuffer) {
@@ -9003,7 +9161,7 @@ var request = function(driver2) {
       }
       ;
       if (req.responseFormat instanceof Ignore) {
-        return $$const(req.responseFormat.value0(pure11(unit)));
+        return $$const(req.responseFormat.value0(pure17(unit)));
       }
       ;
       throw new Error("Failed pattern match at Affjax (line 274, column 18 - line 283, column 57): " + [req.responseFormat.constructor.name]);
@@ -9122,7 +9280,7 @@ var request = function(driver2) {
       }
       ;
       if (v instanceof Left) {
-        return pure17(new Left(new RequestContentError(v.value0)));
+        return pure18(new Left(new RequestContentError(v.value0)));
       }
       ;
       throw new Error("Failed pattern match at Affjax (line 199, column 7 - line 203, column 48): " + [v.constructor.name]);
@@ -9236,8 +9394,8 @@ var makePursx3 = /* @__PURE__ */ makePursx({
   }
 }));
 var filterMap2 = /* @__PURE__ */ filterMap(filterableEvent);
-var pure18 = /* @__PURE__ */ pure(applicativeEvent);
-var attr4 = /* @__PURE__ */ attr(attrOnClickCb);
+var pure19 = /* @__PURE__ */ pure(applicativeEvent);
+var attr3 = /* @__PURE__ */ attr(attrOnClickCb);
 var alt5 = /* @__PURE__ */ alt(altEvent);
 var voidLeft3 = /* @__PURE__ */ voidLeft(functorEvent);
 var attr12 = /* @__PURE__ */ attr(attrDiv_StyleString);
@@ -9254,14 +9412,14 @@ var Loading = /* @__PURE__ */ function() {
   return Loading4;
 }();
 var Result = /* @__PURE__ */ function() {
-  function Result2(value0) {
+  function Result3(value0) {
     this.value0 = value0;
   }
   ;
-  Result2.create = function(value0) {
-    return new Result2(value0);
+  Result3.create = function(value0) {
+    return new Result3(value0);
   };
-  return Result2;
+  return Result3;
 }();
 var px2 = /* @__PURE__ */ function() {
   return $$Proxy.value;
@@ -9323,7 +9481,7 @@ var effects2 = function(options2) {
           ;
           return Nothing.value;
         })(loadingOrResult);
-        return div_([div_([button(pure18(attr4(OnClick.value)(clickCb(push2))))([text(alt5(pure18(clickText))(alt5(voidLeft3(loading)("Loading..."))(voidLeft3(result)(clickText))))])]), div2(alt5(pure18(attr12(Style.value)("display: none;")))(voidLeft3(compact2(mapAccum3(function(b2) {
+        return div_([div_([button(pure19(attr3(OnClick.value)(clickCb(push2))))([text(alt5(pure19(clickText))(alt5(voidLeft3(loading)("Loading..."))(voidLeft3(result)(clickText))))])]), div2(alt5(pure19(attr12(Style.value)("display: none;")))(voidLeft3(compact2(mapAccum3(function(b2) {
           return function(v) {
             return new Tuple(b2 && false, function() {
               if (b2) {
@@ -9333,13 +9491,21 @@ var effects2 = function(options2) {
               return Nothing.value;
             }());
           };
-        })(true)(result)))(attr12(Style.value)("display: block;"))))([pre_([code_([text(alt5(pure18(""))(result))])])])]);
+        })(true)(result)))(attr12(Style.value)("display: block;"))))([pre_([code_([text(alt5(pure19(""))(result))])])])]);
       };
     }),
-    next: oneOfMap4(pure18)([attr4(OnClick.value)(cb(function(e) {
+    next: oneOfMap4(pure19)([attr3(OnClick.value)(cb(function(e) {
       return applySecond4(applySecond4(preventDefault(e))(options2.dpage(PURSX2.value)))(scrollToTop);
     })), attr23(Href.value)(options2.slug + "pursx2/")])
   });
+};
+
+// output/Deku.DOM.Elt.Input/index.js
+var coerce17 = /* @__PURE__ */ coerce();
+var input = function(attributes) {
+  return function(kids) {
+    return new Element$prime(elementify("input")(attributes)(coerce17(fixed(coerce17(mapWithIndex(unsafeSetPos)(kids))))));
+  };
 };
 
 // output/Deku.DOM.Attr.Controls/index.js
@@ -9418,19 +9584,29 @@ var attrSource_SrcString = {
   }
 };
 
-// output/Deku.DOM.Attr.Width/index.js
-var Width = /* @__PURE__ */ function() {
-  function Width2() {
+// output/Deku.DOM.Attr.Xtype/index.js
+var Xtype = /* @__PURE__ */ function() {
+  function Xtype2() {
   }
   ;
-  Width2.value = new Width2();
-  return Width2;
+  Xtype2.value = new Xtype2();
+  return Xtype2;
 }();
-var attrVideo_WidthString = {
+var attrSource_XtypeString = {
   attr: function(v) {
     return function(value13) {
       return unsafeAttribute({
-        key: "width",
+        key: "type",
+        value: prop$prime(value13)
+      });
+    };
+  }
+};
+var attrInput_XtypeString = {
+  attr: function(v) {
+    return function(value13) {
+      return unsafeAttribute({
+        key: "type",
         value: prop$prime(value13)
       });
     };
@@ -9438,27 +9614,27 @@ var attrVideo_WidthString = {
 };
 
 // output/Deku.DOM.Elt.P/index.js
-var coerce16 = /* @__PURE__ */ coerce();
+var coerce18 = /* @__PURE__ */ coerce();
 var p = function(attributes) {
   return function(kids) {
-    return new Element$prime(elementify("p")(attributes)(coerce16(fixed(coerce16(mapWithIndex(unsafeSetPos)(kids))))));
+    return new Element$prime(elementify("p")(attributes)(coerce18(fixed(coerce18(mapWithIndex(unsafeSetPos)(kids))))));
   };
 };
 var p_ = /* @__PURE__ */ p(/* @__PURE__ */ empty(plusEvent));
 
 // output/Deku.DOM.Elt.Source/index.js
-var coerce17 = /* @__PURE__ */ coerce();
+var coerce19 = /* @__PURE__ */ coerce();
 var source = function(attributes) {
   return function(kids) {
-    return new Element$prime(elementify("source")(attributes)(coerce17(fixed(coerce17(mapWithIndex(unsafeSetPos)(kids))))));
+    return new Element$prime(elementify("source")(attributes)(coerce19(fixed(coerce19(mapWithIndex(unsafeSetPos)(kids))))));
   };
 };
 
 // output/Deku.DOM.Elt.Video/index.js
-var coerce18 = /* @__PURE__ */ coerce();
+var coerce20 = /* @__PURE__ */ coerce();
 var video = function(attributes) {
   return function(kids) {
-    return new Element$prime(elementify("video")(attributes)(coerce18(fixed(coerce18(mapWithIndex(unsafeSetPos)(kids))))));
+    return new Element$prime(elementify("video")(attributes)(coerce20(fixed(coerce20(mapWithIndex(unsafeSetPos)(kids))))));
   };
 };
 
@@ -9516,17 +9692,17 @@ var fromEvent = /* @__PURE__ */ unsafeReadProtoTagged("KeyboardEvent");
 
 // output/Deku.Listeners/index.js
 var map21 = /* @__PURE__ */ map(functorEvent);
-var attr5 = /* @__PURE__ */ attr(attrOnInputCb);
+var attr4 = /* @__PURE__ */ attr(attrOnInputCb);
 var for_4 = /* @__PURE__ */ for_(applicativeEffect)(foldableMaybe);
 var bind5 = /* @__PURE__ */ bind(bindMaybe);
 var composeKleisli2 = /* @__PURE__ */ composeKleisli(bindEffect);
 var alt7 = /* @__PURE__ */ alt(altEvent);
-var pure19 = /* @__PURE__ */ pure(applicativeEvent);
+var pure20 = /* @__PURE__ */ pure(applicativeEvent);
 var attr13 = /* @__PURE__ */ attr(attrInput_XtypeString);
 var slider = /* @__PURE__ */ function() {
-  var $33 = alt7(pure19(attr13(Xtype.value)("range")));
+  var $33 = alt7(pure20(attr13(Xtype.value)("range")));
   var $34 = map21(function(push2) {
-    return attr5(OnInput.value)(cb(function(e) {
+    return attr4(OnInput.value)(cb(function(e) {
       return for_4(bind5(target(e))(fromEventTarget))(composeKleisli2(valueAsNumber)(push2));
     }));
   });
@@ -9540,7 +9716,7 @@ var click = function(dictAttr) {
 var click_ = function(dictAttr) {
   var $41 = click(dictAttr);
   return function($42) {
-    return $41(pure19($42));
+    return $41(pure20($42));
   };
 };
 
@@ -9605,14 +9781,14 @@ var vbussed2 = /* @__PURE__ */ vbussed()(/* @__PURE__ */ vbusCons2({
 })()()(vbusNil)()())()());
 var click_2 = /* @__PURE__ */ click_(attrOnClickEffectUnit);
 var alt8 = /* @__PURE__ */ alt(altEvent);
-var pure20 = /* @__PURE__ */ pure(applicativeEvent);
+var pure21 = /* @__PURE__ */ pure(applicativeEvent);
 var map23 = /* @__PURE__ */ map(functorEvent);
 var append7 = /* @__PURE__ */ append(semigroupString);
 var show4 = /* @__PURE__ */ show(showInt);
 var fold4 = /* @__PURE__ */ fold3(eventIsEvent);
 var show13 = /* @__PURE__ */ show(showNumber);
 var oneOfMap5 = /* @__PURE__ */ oneOfMap(foldableArray)(plusEvent);
-var attr6 = /* @__PURE__ */ attr(attrOnClickCb);
+var attr5 = /* @__PURE__ */ attr(attrOnClickCb);
 var applySecond5 = /* @__PURE__ */ applySecond(applyEffect);
 var attr14 = /* @__PURE__ */ attr(attrA_HrefString);
 var px3 = /* @__PURE__ */ function() {
@@ -9623,7 +9799,7 @@ var events2 = function(options2) {
     code: pre_([code_([text_(events)])]),
     result: vbussed2($$Proxy.value)(function(push2) {
       return function(event) {
-        return div_([button(click_2(push2.buttonClicked(unit)))([text_("Click")]), div_([text(alt8(pure20("Val: 0"))(map23(function() {
+        return div_([button(click_2(push2.buttonClicked(unit)))([text_("Click")]), div_([text(alt8(pure21("Val: 0"))(map23(function() {
           var $55 = append7("Val: ");
           return function($56) {
             return $55(show4($56));
@@ -9632,7 +9808,7 @@ var events2 = function(options2) {
           return function(v) {
             return 1 + a2 | 0;
           };
-        })(-1 | 0)(alt8(pure20(unit))(event.buttonClicked)))))]), div_([input(slider(pure20(push2.sliderMoved)))([]), div_([text(alt8(pure20("Val: 50.0"))(map23(function() {
+        })(-1 | 0)(alt8(pure21(unit))(event.buttonClicked)))))]), div_([input(slider(pure21(push2.sliderMoved)))([]), div_([text(alt8(pure21("Val: 50.0"))(map23(function() {
           var $57 = append7("Val: ");
           return function($58) {
             return $57(show13($58));
@@ -9640,7 +9816,7 @@ var events2 = function(options2) {
         }())(event.sliderMoved)))])])]);
       };
     }),
-    next: oneOfMap5(pure20)([attr6(OnClick.value)(cb(function(e) {
+    next: oneOfMap5(pure21)([attr5(OnClick.value)(cb(function(e) {
       return applySecond5(applySecond5(preventDefault(e))(options2.dpage(Effects.value)))(scrollToTop);
     })), attr14(Href.value)(options2.slug + "effects/")])
   });
@@ -9648,7 +9824,7 @@ var events2 = function(options2) {
 
 // output/Deku.Do/index.js
 var alt9 = /* @__PURE__ */ alt(altEvent);
-var pure21 = /* @__PURE__ */ pure(applicativeEvent);
+var pure23 = /* @__PURE__ */ pure(applicativeEvent);
 var keepLatest5 = /* @__PURE__ */ keepLatest(eventIsEvent);
 var bind6 = function(f) {
   return function(a2) {
@@ -9660,7 +9836,7 @@ var useDyn = function(i2) {
     return keepLatest5(bind6(function($57) {
       return bus2(curry($57));
     })(function(v) {
-      return alt9(pure21(insert6(i2)(f({
+      return alt9(pure23(insert6(i2)(f({
         remove: v.value0(remove),
         sendTo: function($58) {
           return v.value0(sendToPos($58));
@@ -9736,9 +9912,9 @@ var makePursx5 = /* @__PURE__ */ makePursx({
 }));
 var lcmap5 = /* @__PURE__ */ lcmap(profunctorFn);
 var alt10 = /* @__PURE__ */ alt(altEvent);
-var pure23 = /* @__PURE__ */ pure(applicativeEvent);
+var pure24 = /* @__PURE__ */ pure(applicativeEvent);
 var oneOfMap6 = /* @__PURE__ */ oneOfMap(foldableArray)(plusEvent);
-var attr7 = /* @__PURE__ */ attr(attrInput_StyleString);
+var attr6 = /* @__PURE__ */ attr(attrInput_StyleString);
 var attr15 = /* @__PURE__ */ attr(attrOnInputCb);
 var for_5 = /* @__PURE__ */ for_(applicativeEffect)(foldableMaybe);
 var bind7 = /* @__PURE__ */ bind(bindMaybe);
@@ -9786,9 +9962,9 @@ var events22 = function(options2) {
     code: pre_([code_([text_(events3)])]),
     result: bussed(function(push2) {
       return lcmap5(function(v) {
-        return alt10(pure23(UIShown.value))(v);
+        return alt10(pure24(UIShown.value))(v);
       })(function(event) {
-        return div_([div_([input(oneOfMap6(pure23)([attr7(Style.value)("border-style:solid;border-width: 1px;border-color: black;"), attr15(OnInput.value)(cb(function(e) {
+        return div_([div_([input(oneOfMap6(pure24)([attr6(Style.value)("border-style:solid;border-width: 1px;border-color: black;"), attr15(OnInput.value)(cb(function(e) {
           return for_5(bind7(target(e))(fromEventTarget))(composeKleisli3(value2)(function($59) {
             return push2(ChangeText.create($59));
           }));
@@ -9796,9 +9972,9 @@ var events22 = function(options2) {
           return for_5(fromEvent(e))(function(evt) {
             return when3(code2(evt) === "Enter")(push2(AddTodo.value));
           });
-        }))]))([]), button(alt10(pure23(attr32(Style.value)("margin: 5px;")))(pure23(attr42(OnClick.value)(cb($$const(push2(AddTodo.value)))))))([text_("Add")])]), dyn2(map24(function(txt) {
+        }))]))([]), button(alt10(pure24(attr32(Style.value)("margin: 5px;")))(pure24(attr42(OnClick.value)(cb($$const(push2(AddTodo.value)))))))([text_("Add")])]), dyn2(map24(function(txt) {
           return bind6(useDyn_)(function(v) {
-            return div_([span(pure23(attr52(Style.value)("margin: 5px;")))([text_(txt)]), button(alt10(pure23(attr32(Style.value)("margin: 5px;")))(click2(pure23(v.sendTo(0)))))([text_("Prioritize")]), button(alt10(pure23(attr32(Style.value)("margin: 5px;")))(click2(pure23(v.remove))))([text_("Delete")])]);
+            return div_([span(pure24(attr52(Style.value)("margin: 5px;")))([text_(txt)]), button(alt10(pure24(attr32(Style.value)("margin: 5px;")))(click2(pure24(v.sendTo(0)))))([text_("Prioritize")]), button(alt10(pure24(attr32(Style.value)("margin: 5px;")))(click2(pure24(v.remove))))([text_("Delete")])]);
           });
         })(filterMap3(function(v) {
           if (v.value0) {
@@ -9821,7 +9997,7 @@ var events22 = function(options2) {
         })("")(event))))]);
       });
     }),
-    next: oneOfMap6(pure23)([attr42(OnClick.value)(cb(function(e) {
+    next: oneOfMap6(pure24)([attr42(OnClick.value)(cb(function(e) {
       return applySecond6(applySecond6(preventDefault(e))(options2.dpage(Portals.value)))(scrollToTop);
     })), attr62(Href.value)(options2.slug + "portals/")])
   });
@@ -9880,8 +10056,8 @@ var makePursx6 = /* @__PURE__ */ makePursx({
   }
 }));
 var oneOfMap7 = /* @__PURE__ */ oneOfMap(foldableArray)(plusEvent);
-var pure24 = /* @__PURE__ */ pure(applicativeEvent);
-var attr8 = /* @__PURE__ */ attr(attrOnClickCb);
+var pure25 = /* @__PURE__ */ pure(applicativeEvent);
+var attr7 = /* @__PURE__ */ attr(attrOnClickCb);
 var applySecond7 = /* @__PURE__ */ applySecond(applyEffect);
 var attr16 = /* @__PURE__ */ attr(attrA_HrefString);
 var px5 = /* @__PURE__ */ function() {
@@ -9891,7 +10067,7 @@ var helloWorld2 = function(options2) {
   return makePursx6(px5)({
     code: pre_([code_([text_(helloWorld)])]),
     result: div_([text_("Hello world")]),
-    next: oneOfMap7(pure24)([attr8(OnClick.value)(cb(function(e) {
+    next: oneOfMap7(pure25)([attr7(OnClick.value)(cb(function(e) {
       return applySecond7(applySecond7(preventDefault(e))(options2.dpage(SimpleComponent.value)))(scrollToTop);
     })), attr16(Href.value)(options2.slug + "component/")])
   });
@@ -9926,8 +10102,8 @@ var makePursx7 = /* @__PURE__ */ makePursx({
   }
 }));
 var oneOfMap8 = /* @__PURE__ */ oneOfMap(foldableArray)(plusEvent);
-var pure25 = /* @__PURE__ */ pure(applicativeEvent);
-var attr9 = /* @__PURE__ */ attr(attrOnClickCb);
+var pure26 = /* @__PURE__ */ pure(applicativeEvent);
+var attr8 = /* @__PURE__ */ attr(attrOnClickCb);
 var applySecond8 = /* @__PURE__ */ applySecond(applyEffect);
 var attr17 = /* @__PURE__ */ attr(attrA_HrefString);
 var px6 = /* @__PURE__ */ function() {
@@ -9935,7 +10111,7 @@ var px6 = /* @__PURE__ */ function() {
 }();
 var intro = function(options2) {
   return makePursx7(px6)({
-    next: oneOfMap8(pure25)([attr9(OnClick.value)(cb(function(e) {
+    next: oneOfMap8(pure26)([attr8(OnClick.value)(cb(function(e) {
       return applySecond8(applySecond8(preventDefault(e))(options2.dpage(HelloWorld.value)))(scrollToTop);
     })), attr17(Href.value)(options2.slug + "hello/")])
   });
@@ -10000,11 +10176,11 @@ var makePursx8 = /* @__PURE__ */ makePursx({
 }));
 var lcmap6 = /* @__PURE__ */ lcmap(profunctorFn);
 var alt11 = /* @__PURE__ */ alt(altEvent);
-var pure26 = /* @__PURE__ */ pure(applicativeEvent);
+var pure27 = /* @__PURE__ */ pure(applicativeEvent);
 var portal2 = /* @__PURE__ */ portal();
 var map25 = /* @__PURE__ */ map(functorVect);
 var oneOfMap9 = /* @__PURE__ */ oneOfMap(foldableArray)(plusEvent);
-var attr10 = /* @__PURE__ */ attr(attrVideo_ControlsString);
+var attr9 = /* @__PURE__ */ attr(attrVideo_ControlsString);
 var attr18 = /* @__PURE__ */ attr(attrVideo_WidthString);
 var attr25 = /* @__PURE__ */ attr(attrSource_SrcString);
 var attr33 = /* @__PURE__ */ attr(attrSource_XtypeString);
@@ -10032,9 +10208,9 @@ var portals12 = function(options2) {
   return makePursx8(px7)({
     code: pre_([code_([text_(portals1)])]),
     result: dyn2(bus2(function(push2) {
-      return lcmap6(alt11(pure26(unit)))(function(event) {
-        return pure26(insert_(portal2(map25(function(i2) {
-          return video(oneOfMap9(pure26)([attr10(Controls.value)("true"), attr18(Width.value)("250")]))([source(oneOfMap9(pure26)([attr25(Src.value)(i2), attr33(Xtype.value)("video/mp4")]))([])]);
+      return lcmap6(alt11(pure27(unit)))(function(event) {
+        return pure27(insert_(portal2(map25(function(i2) {
+          return video(oneOfMap9(pure27)([attr9(Controls.value)("true"), attr18(Width.value)("250")]))([source(oneOfMap9(pure27)([attr25(Src.value)(i2), attr33(Xtype.value)("video/mp4")]))([])]);
         })(cons4("https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4")(cons4("https://www.w3schools.com/jsref/movie.mp4")(empty5))))(function(v) {
           return function(v1) {
             var p1 = index1($$Proxy.value)(v);
@@ -10058,12 +10234,12 @@ var portals12 = function(options2) {
                 return span_(pure110($56(ev($57))));
               };
             }();
-            return div_([button(pure26(attr43(OnClick.value)(cb($$const(push2(unit))))))([text_("Switch videos")]), div_([flips(true), flips(false)])]);
+            return div_([button(pure27(attr43(OnClick.value)(cb($$const(push2(unit))))))([text_("Switch videos")]), div_([flips(true), flips(false)])]);
           };
         })));
       });
     })),
-    next: oneOfMap9(pure26)([attr43(OnClick.value)(cb(function(e) {
+    next: oneOfMap9(pure27)([attr43(OnClick.value)(cb(function(e) {
       return applySecond9(applySecond9(preventDefault(e))(options2.dpage(SSR.value)))(scrollToTop);
     })), attr53(Href.value)(options2.slug + "ssr/")])
   });
@@ -10123,12 +10299,12 @@ var makePursx9 = /* @__PURE__ */ makePursx({
 }));
 var psx2 = /* @__PURE__ */ psx({
   reflectType: function() {
-    return '<div>\n    <button>I do nothing</button>\n    <ul>\n        <li>A</li>\n        <li>B</li>\n        <li>C</li>\n    </ul>\n    <div>\n        <a href="https://example.com">foo</a>\n        <i>bar</i>\n        <span style="font-weight:800;">baz</span>\n    </div>\n    <div><div></div><div><input type="range"/></div></div>\n    </div>\n';
+    return '<div>\n    <button>I do nothing</button>\n    <ul>\n        <li>A</li>\n        <li>B</li>\n        <li>C</li>\n    </ul>\n    <div>\n        <a href="https://example.com">foo</a>\n        <i>bar</i>\n        <span style="font-weight:800;">baz</span>\n    </div>\n    <svg height="100" width="100">\n      <circle cx="50" cy="50" r="40" stroke="black" stroke-width="3" fill="red" />\n    </svg> \n    </div>\n';
   }
 })()(pursxToElementNil);
 var oneOfMap10 = /* @__PURE__ */ oneOfMap(foldableArray)(plusEvent);
-var pure27 = /* @__PURE__ */ pure(applicativeEvent);
-var attr11 = /* @__PURE__ */ attr(attrOnClickCb);
+var pure28 = /* @__PURE__ */ pure(applicativeEvent);
+var attr10 = /* @__PURE__ */ attr(attrOnClickCb);
 var applySecond10 = /* @__PURE__ */ applySecond(applyEffect);
 var attr19 = /* @__PURE__ */ attr(attrA_HrefString);
 var px8 = /* @__PURE__ */ function() {
@@ -10141,7 +10317,7 @@ var pursx12 = function(options2) {
   return makePursx9(px8)({
     code: pre_([code_([text_(pursx1)])]),
     result: psx2(myDom),
-    next: oneOfMap10(pure27)([attr11(OnClick.value)(cb(function(e) {
+    next: oneOfMap10(pure28)([attr10(OnClick.value)(cb(function(e) {
       return applySecond10(applySecond10(preventDefault(e))(options2.dpage(Events.value)))(scrollToTop);
     })), attr19(Href.value)(options2.slug + "events1/")])
   });
@@ -10206,7 +10382,7 @@ var makePursx$prime2 = /* @__PURE__ */ makePursx$prime({
     return "code";
   }
 }));
-var pure28 = /* @__PURE__ */ pure(applicativeEvent);
+var pure29 = /* @__PURE__ */ pure(applicativeEvent);
 var makePursx10 = /* @__PURE__ */ makePursx({
   reflectType: function() {
     return '<div>\n        <button>I do nothing</button>\n        <ul>\n          <li>A</li>\n          <li ~myli~>B</li>\n          <li>C</li>\n        </ul>\n        <div>\n          <a href="https://github.com/mikesol/purescript-deku"></a>\n          <i>bar</i>\n          ~somethingNew~\n          <span style="font-weight:800;">baz</span>\n        </div>\n        <div><div></div><div><input type="range"/></div></div>\n      </div>\n';
@@ -10228,7 +10404,7 @@ var makePursx10 = /* @__PURE__ */ makePursx({
     return "myli";
   }
 }));
-var attr20 = /* @__PURE__ */ attr(attrLi_StyleString);
+var attr11 = /* @__PURE__ */ attr(attrLi_StyleString);
 var attr110 = /* @__PURE__ */ attr(attrOnClickEffectUnit);
 var alt12 = /* @__PURE__ */ alt(altEvent);
 var voidLeft4 = /* @__PURE__ */ voidLeft(functorEvent);
@@ -10248,13 +10424,13 @@ var pursx22 = function(options2) {
     code: pre_([code_([text_(pursx2)])]),
     result: dyn2(bus2(function(push2) {
       return function(event) {
-        return pure28(insert_(makePursx10(myDom2)({
-          myli: pure28(attr20(Style.value)("background-color:rgb(200,240,210);")),
-          somethingNew: button(pure28(attr110(OnClick.value)(push2(new Just(unit)))))([text(alt12(voidLeft4(compact3(event))("Thanks for clicking me!"))(pure28("I was dynamically inserted")))])
+        return pure29(insert_(makePursx10(myDom2)({
+          myli: pure29(attr11(Style.value)("background-color:rgb(200,240,210);")),
+          somethingNew: button(pure29(attr110(OnClick.value)(push2(new Just(unit)))))([text(alt12(voidLeft4(compact3(event))("Thanks for clicking me!"))(pure29("I was dynamically inserted")))])
         })));
       };
     })),
-    next: oneOfMap11(pure28)([attr26(OnClick.value)(cb(function(e) {
+    next: oneOfMap11(pure29)([attr26(OnClick.value)(cb(function(e) {
       return applySecond11(applySecond11(preventDefault(e))(options2.dpage(Events2.value)))(scrollToTop);
     })), attr34(Href.value)(options2.slug + "events2/")])
   });
@@ -10407,11 +10583,11 @@ var applyStateT = function(dictMonad) {
   };
 };
 var applicativeStateT = function(dictMonad) {
-  var pure34 = pure(dictMonad.Applicative0());
+  var pure35 = pure(dictMonad.Applicative0());
   return {
     pure: function(a2) {
       return function(s2) {
-        return pure34(new Tuple(a2, s2));
+        return pure35(new Tuple(a2, s2));
       };
     },
     Apply0: function() {
@@ -10420,12 +10596,12 @@ var applicativeStateT = function(dictMonad) {
   };
 };
 var monadStateStateT = function(dictMonad) {
-  var pure34 = pure(dictMonad.Applicative0());
+  var pure35 = pure(dictMonad.Applicative0());
   var monadStateT1 = monadStateT(dictMonad);
   return {
     state: function(f) {
       return function($200) {
-        return pure34(f($200));
+        return pure35(f($200));
       };
     },
     Monad0: function() {
@@ -10522,7 +10698,7 @@ var append8 = /* @__PURE__ */ append(semigroupArray);
 var show5 = /* @__PURE__ */ show(showInt);
 var arbitrary2 = /* @__PURE__ */ arbitrary(arbInt);
 var add3 = /* @__PURE__ */ add(semiringInt);
-var pure29 = /* @__PURE__ */ pure(applicativeST);
+var pure30 = /* @__PURE__ */ pure(applicativeST);
 var MakeElement = /* @__PURE__ */ function() {
   function MakeElement2(value0) {
     this.value0 = value0;
@@ -10771,7 +10947,7 @@ var ssrDOMInterpret = function(seed) {
     makeElement: ssrMakeElement,
     attributeParent: function(v) {
       return function(v1) {
-        return pure29(unit);
+        return pure30(unit);
       };
     },
     makeRoot: ssrMakeRoot,
@@ -10781,7 +10957,7 @@ var ssrDOMInterpret = function(seed) {
     makeDynBeacon: ssrMakeDynBeacon,
     setCb: function(v) {
       return function(v1) {
-        return pure29(unit);
+        return pure30(unit);
       };
     },
     setText: ssrSetText,
@@ -10975,7 +11151,7 @@ var traversableCatQueue = {
     var Apply0 = dictApplicative.Apply0();
     var map112 = map(Apply0.Functor0());
     var lift23 = lift2(Apply0);
-    var pure34 = pure(dictApplicative);
+    var pure35 = pure(dictApplicative);
     return function(f) {
       var $123 = map112(foldl5(snoc3)(empty10));
       var $124 = foldl5(function(acc) {
@@ -10983,7 +11159,7 @@ var traversableCatQueue = {
         return function($127) {
           return $126(f($127));
         };
-      })(pure34(empty10));
+      })(pure35(empty10));
       return function($125) {
         return $123($124($125));
       };
@@ -11056,10 +11232,10 @@ var mapFlipped3 = /* @__PURE__ */ mapFlipped(functorArray);
 var $$void10 = /* @__PURE__ */ $$void(/* @__PURE__ */ functorStateT(functorIdentity));
 var modify8 = /* @__PURE__ */ modify6(/* @__PURE__ */ monadStateStateT(monadIdentity));
 var alter2 = /* @__PURE__ */ alter(ordString);
-var discard2 = /* @__PURE__ */ discard(discardUnit)(/* @__PURE__ */ bindStateT(monadIdentity));
+var discard3 = /* @__PURE__ */ discard(discardUnit)(/* @__PURE__ */ bindStateT(monadIdentity));
 var eq13 = /* @__PURE__ */ eq(/* @__PURE__ */ eqMaybe(eqString));
 var append13 = /* @__PURE__ */ append(semigroupCatQueue);
-var pure30 = /* @__PURE__ */ pure(applicativeCatQueue);
+var pure31 = /* @__PURE__ */ pure(applicativeCatQueue);
 var map110 = /* @__PURE__ */ map(functorCatQueue);
 var fromFoldable6 = /* @__PURE__ */ fromFoldable5(foldableArray);
 var mapFlipped1 = /* @__PURE__ */ mapFlipped(functorMap);
@@ -11247,7 +11423,7 @@ var ssr$prime = function(topTag) {
     var making = function(parent2) {
       return function(id2) {
         return function(action2) {
-          return discard2($$void10(modify8(function(s2) {
+          return discard3($$void10(modify8(function(s2) {
             var $126 = {};
             for (var $127 in s2) {
               if ({}.hasOwnProperty.call(s2, $127)) {
@@ -11532,7 +11708,7 @@ var ssr$prime = function(topTag) {
                 }
                 ;
                 if (v2 instanceof Nothing) {
-                  return append13(staging1)(append13(pure30(new MakeCloseDynBeacon({
+                  return append13(staging1)(append13(pure31(new MakeCloseDynBeacon({
                     id: dbc.id + "%-%",
                     parent: dbc.parent,
                     pos: dbc.pos,
@@ -11886,7 +12062,7 @@ var ssr$prime = function(topTag) {
 // output/Deku.Toplevel/index.js
 var unwrap9 = /* @__PURE__ */ unwrap();
 var eq6 = /* @__PURE__ */ eq(eqScope);
-var coerce19 = /* @__PURE__ */ coerce();
+var coerce21 = /* @__PURE__ */ coerce();
 var pure111 = /* @__PURE__ */ pure(applicativeST);
 var map111 = /* @__PURE__ */ map(functorST);
 var liftST1 = /* @__PURE__ */ liftST(monadSTST);
@@ -11923,7 +12099,7 @@ var __internalDekuFlatten4 = function(a2) {
         toElt: function(v) {
           return v;
         }
-      })(a2)(b2)(coerce19(c));
+      })(a2)(b2)(coerce21(c));
     };
   };
 };
@@ -11965,7 +12141,7 @@ var runSSR = /* @__PURE__ */ runSSR$prime("body");
 // output/Deku.Example.Docs.SSR/index.js
 var click_3 = /* @__PURE__ */ click_(attrOnClickEffectUnit);
 var alt15 = /* @__PURE__ */ alt(altEvent);
-var pure31 = /* @__PURE__ */ pure(applicativeEvent);
+var pure32 = /* @__PURE__ */ pure(applicativeEvent);
 var map29 = /* @__PURE__ */ map(functorEvent);
 var append10 = /* @__PURE__ */ append(semigroupString);
 var show6 = /* @__PURE__ */ show(showInt);
@@ -12034,7 +12210,7 @@ var app2 = /* @__PURE__ */ function() {
     }
   })()()(vbusNil)()())()())($$Proxy.value)(function(push2) {
     return function(event) {
-      return div_([p_([text_("Here's an example of SSR in deku.\nAll of the static bits are rendered as HTML,\nand all of the dynamic bits are hydrated on page load.")]), button(click_3(push2.buttonClicked(unit)))([text_("Click")]), div_([text(alt15(pure31("Val: 0"))(map29(function() {
+      return div_([p_([text_("Here's an example of SSR in deku.\nAll of the static bits are rendered as HTML,\nand all of the dynamic bits are hydrated on page load.")]), button(click_3(push2.buttonClicked(unit)))([text_("Click")]), div_([text(alt15(pure32("Val: 0"))(map29(function() {
         var $63 = append10("Val: ");
         return function($64) {
           return $63(show6($64));
@@ -12043,7 +12219,7 @@ var app2 = /* @__PURE__ */ function() {
         return function(v) {
           return 1 + a2 | 0;
         };
-      })(-1 | 0)(alt15(pure31(unit))(event.buttonClicked)))))]), div_([input(slider(pure31(push2.sliderMoved)))([]), div_([text(alt15(pure31("Val: 50"))(map29(function() {
+      })(-1 | 0)(alt15(pure32(unit))(event.buttonClicked)))))]), div_([input(slider(pure32(push2.sliderMoved)))([]), div_([text(alt15(pure32("Val: 50"))(map29(function() {
         var $65 = append10("Val: ");
         return function($66) {
           return $65(show14($66));
@@ -12070,10 +12246,10 @@ var ssrPage = function(v) {
 // output/Deku.Example.Docs.Scene/index.js
 var lcmap7 = /* @__PURE__ */ lcmap(profunctorFn);
 var alt16 = /* @__PURE__ */ alt(altEvent);
-var pure32 = /* @__PURE__ */ pure(applicativeEvent);
+var pure33 = /* @__PURE__ */ pure(applicativeEvent);
 var map30 = /* @__PURE__ */ map(functorArray);
 var oneOfMap12 = /* @__PURE__ */ oneOfMap(foldableArray)(plusEvent);
-var attr21 = /* @__PURE__ */ attr(attrOnClickCb);
+var attr20 = /* @__PURE__ */ attr(attrOnClickCb);
 var applySecond13 = /* @__PURE__ */ applySecond(applyEffect);
 var attr111 = /* @__PURE__ */ attr(attrA_StyleString);
 var attr27 = /* @__PURE__ */ attr(attrA_HrefString);
@@ -12081,7 +12257,7 @@ var attr35 = /* @__PURE__ */ attr(attrSpan_StyleString);
 var scene = function(options2) {
   return bussed(function(push2) {
     return lcmap7(function(v) {
-      return alt16(pure32(options2.startsWith))(v);
+      return alt16(pure33(options2.startsWith))(v);
     })(function(event) {
       var go2 = function(v) {
         if (v instanceof Intro) {
@@ -12124,7 +12300,7 @@ var scene = function(options2) {
           return ssrPage;
         }
         ;
-        throw new Error("Failed pattern match at Deku.Example.Docs.Scene (line 32, column 9 - line 32, column 36): " + [v.constructor.name]);
+        throw new Error("Failed pattern match at Deku.Example.Docs.Scene (line 33, column 7 - line 33, column 34): " + [v.constructor.name]);
       };
       var page = function(dpage) {
         return function(i2) {
@@ -12135,9 +12311,9 @@ var scene = function(options2) {
         };
       };
       return div_([div_(map30(function(v) {
-        return span_([a(oneOfMap12(pure32)([attr21(OnClick.value)(cb(function(e) {
+        return span_([a(oneOfMap12(pure33)([attr20(OnClick.value)(cb(function(e) {
           return applySecond13(preventDefault(e))(push2(v.value0));
-        })), attr111(Style.value)("cursor:pointer;"), attr27(Href.value)(options2.slug + v.value1.value1.value0)]))([text_(v.value1.value0)]), span(pure32(attr35(Style.value)(function() {
+        })), attr111(Style.value)("cursor:pointer;"), attr27(Href.value)(options2.slug + v.value1.value1.value0)]))([text_(v.value1.value0)]), span(pure33(attr35(Style.value)(function() {
           if (v.value1.value1.value1) {
             return "";
           }
@@ -12305,7 +12481,7 @@ var argv = /* @__PURE__ */ function() {
 
 // output/Deku.Example.Docs.Static.Build/index.js
 var bind10 = /* @__PURE__ */ bind(bindEffect);
-var pure33 = /* @__PURE__ */ pure(applicativeEffect);
+var pure34 = /* @__PURE__ */ pure(applicativeEffect);
 var show8 = /* @__PURE__ */ show(showString);
 var show15 = /* @__PURE__ */ show(showJsonDecodeError);
 var record3 = /* @__PURE__ */ record2()(/* @__PURE__ */ rowListCodecCons(/* @__PURE__ */ rowListCodecCons(/* @__PURE__ */ rowListCodecCons(rowListCodecNil)()()({
@@ -12323,7 +12499,7 @@ var record3 = /* @__PURE__ */ record2()(/* @__PURE__ */ rowListCodecCons(/* @__P
 }));
 var main2 = function __do2() {
   var args = argv();
-  var options2 = maybe(pure33({
+  var options2 = maybe(pure34({
     pageString: "Intro",
     startsWith: Intro.value,
     slug: "/",
@@ -12333,15 +12509,15 @@ var main2 = function __do2() {
       var s2 = readTextFile(UTF8.value)(f)();
       var parsed = either(function(e) {
         return throwException(error("cannot convert string to json: " + (s2 + (" err: " + show8(e)))));
-      })(pure33)(jsonParser(s2))();
+      })(pure34)(jsonParser(s2))();
       var decoded = either(function(e) {
         return throwException(error("cannot decode json: " + (s2 + (" err: " + show15(e)))));
-      })(pure33)(decode(object("Info")(record3({
+      })(pure34)(decode(object("Info")(record3({
         page: string,
         slug: string,
         top: $$boolean
       })))(parsed))();
-      var page = maybe(throwException(error("cannot parse page: " + decoded.page)))(pure33)(stringToPage(decoded.page))();
+      var page = maybe(throwException(error("cannot parse page: " + decoded.page)))(pure34)(stringToPage(decoded.page))();
       return {
         pageString: decoded.page,
         top: decoded.top,
