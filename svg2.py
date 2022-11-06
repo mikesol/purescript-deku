@@ -356,4 +356,5 @@ A = {
     ),
     "view": aria + ca + gl + s("viewBox preserveAspectRatio zoomAndPan viewTarget"),
 }
-print(json.dumps(A))
+if __name__ == '__main__':
+    print(json.dumps(A))
