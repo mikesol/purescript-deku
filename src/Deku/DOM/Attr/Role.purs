@@ -1,5 +1,22 @@
 module Deku.DOM.Attr.Role where
 
+import Deku.DOM.Elt.View (View_)
+import Deku.DOM.Elt.Use (Use_)
+import Deku.DOM.Elt.Tspan (Tspan_)
+import Deku.DOM.Elt.TextPath (TextPath_)
+import Deku.DOM.Elt.Text (Text_)
+import Deku.DOM.Elt.Symbol (Symbol_)
+import Deku.DOM.Elt.Svg (Svg_)
+import Deku.DOM.Elt.Rect (Rect_)
+import Deku.DOM.Elt.Polyline (Polyline_)
+import Deku.DOM.Elt.Polygon (Polygon_)
+import Deku.DOM.Elt.Path (Path_)
+import Deku.DOM.Elt.Marker (Marker_)
+import Deku.DOM.Elt.Line (Line_)
+import Deku.DOM.Elt.G (G_)
+import Deku.DOM.Elt.ForeignObject (ForeignObject_)
+import Deku.DOM.Elt.Ellipse (Ellipse_)
+import Deku.DOM.Elt.Circle (Circle_)
 import Deku.DOM.Elt.A (A_)
 import Deku.DOM.Elt.Abbr (Abbr_)
 import Deku.DOM.Elt.Acronym (Acronym_)
@@ -103,7 +120,6 @@ import Deku.DOM.Elt.Style (Style_)
 import Deku.DOM.Elt.Sub (Sub_)
 import Deku.DOM.Elt.Summary (Summary_)
 import Deku.DOM.Elt.Sup (Sup_)
-import Deku.DOM.Elt.Svg (Svg_)
 import Deku.DOM.Elt.Table (Table_)
 import Deku.DOM.Elt.Tbody (Tbody_)
 import Deku.DOM.Elt.Td (Td_)
@@ -490,4 +506,52 @@ instance Attr Video_ Role String where
   attr Role value = unsafeAttribute { key: "role", value: prop' value }
 
 instance Attr Wbr_ Role String where
+  attr Role value = unsafeAttribute { key: "role", value: prop' value }
+
+instance Attr Circle_ Role String where
+  attr Role value = unsafeAttribute { key: "role", value: prop' value }
+
+instance Attr Ellipse_ Role String where
+  attr Role value = unsafeAttribute { key: "role", value: prop' value }
+
+instance Attr ForeignObject_ Role String where
+  attr Role value = unsafeAttribute { key: "role", value: prop' value }
+
+instance Attr G_ Role String where
+  attr Role value = unsafeAttribute { key: "role", value: prop' value }
+
+instance Attr Line_ Role String where
+  attr Role value = unsafeAttribute { key: "role", value: prop' value }
+
+instance Attr Marker_ Role String where
+  attr Role value = unsafeAttribute { key: "role", value: prop' value }
+
+instance Attr Path_ Role String where
+  attr Role value = unsafeAttribute { key: "role", value: prop' value }
+
+instance Attr Polygon_ Role String where
+  attr Role value = unsafeAttribute { key: "role", value: prop' value }
+
+instance Attr Polyline_ Role String where
+  attr Role value = unsafeAttribute { key: "role", value: prop' value }
+
+instance Attr Rect_ Role String where
+  attr Role value = unsafeAttribute { key: "role", value: prop' value }
+
+instance Attr Symbol_ Role String where
+  attr Role value = unsafeAttribute { key: "role", value: prop' value }
+
+instance Attr Text_ Role String where
+  attr Role value = unsafeAttribute { key: "role", value: prop' value }
+
+instance Attr TextPath_ Role String where
+  attr Role value = unsafeAttribute { key: "role", value: prop' value }
+
+instance Attr Tspan_ Role String where
+  attr Role value = unsafeAttribute { key: "role", value: prop' value }
+
+instance Attr Use_ Role String where
+  attr Role value = unsafeAttribute { key: "role", value: prop' value }
+
+instance Attr View_ Role String where
   attr Role value = unsafeAttribute { key: "role", value: prop' value }

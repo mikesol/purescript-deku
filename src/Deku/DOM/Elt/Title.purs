@@ -30,4 +30,3 @@ title_
    . Array (Domable lock payload)
   -> Domable lock payload
 title_ = title empty
-

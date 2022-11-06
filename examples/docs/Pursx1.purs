@@ -29,7 +29,9 @@ myDom =
         <i>bar</i>
         <span style="font-weight:800;">baz</span>
     </div>
-    <div><div></div><div><input type="range"/></div></div>
+    <svg height="100" width="100">
+      <circle cx="50" cy="50" r="40" stroke="black" stroke-width="3" fill="red" />
+    </svg> 
     </div>
 """
 

@@ -27,19 +27,20 @@ scene :: forall r l p. { | Options r } -> Domable l p
 scene options = bussed \push -> lcmap (pure options.startsWith <|> _)
   \event -> do
     let
-        page :: _ -> _ -> Domable l p
-        page dpage i = go i { dpage, slug: options.slug }
-        go :: _ -> _ -> Domable l p
-        go Intro = Intro.intro
-        go HelloWorld = HelloWorld.helloWorld
-        go SimpleComponent = Component.components
-        go PURSX1 = Pursx1.pursx1
-        go Events = Events.events
-        go Effects = Effects.effects
-        go PURSX2 = Pursx2.pursx2
-        go Events2 = Events2.events2
-        go Portals = Portals1.portals1
-        go SSR = SSR.ssrPage
+      page :: _ -> _ -> Domable l p
+      page dpage i = go i { dpage, slug: options.slug }
+
+      go :: _ -> _ -> Domable l p
+      go Intro = Intro.intro
+      go HelloWorld = HelloWorld.helloWorld
+      go SimpleComponent = Component.components
+      go PURSX1 = Pursx1.pursx1
+      go Events = Events.events
+      go Effects = Effects.effects
+      go PURSX2 = Pursx2.pursx2
+      go Events2 = Events2.events2
+      go Portals = Portals1.portals1
+      go SSR = SSR.ssrPage
     D.div_
       [ D.div_
           $ map

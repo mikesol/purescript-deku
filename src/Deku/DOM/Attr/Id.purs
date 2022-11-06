@@ -1,5 +1,66 @@
 module Deku.DOM.Attr.Id where
 
+import Deku.DOM.Elt.View (View_)
+import Deku.DOM.Elt.Use (Use_)
+import Deku.DOM.Elt.Tspan (Tspan_)
+import Deku.DOM.Elt.Title (Title_)
+import Deku.DOM.Elt.TextPath (TextPath_)
+import Deku.DOM.Elt.Text (Text_)
+import Deku.DOM.Elt.Symbol (Symbol_)
+import Deku.DOM.Elt.Switch (Switch_)
+import Deku.DOM.Elt.Svg (Svg_)
+import Deku.DOM.Elt.Stop (Stop_)
+import Deku.DOM.Elt.Set (Set_)
+import Deku.DOM.Elt.Rect (Rect_)
+import Deku.DOM.Elt.RadialGradient (RadialGradient_)
+import Deku.DOM.Elt.Polyline (Polyline_)
+import Deku.DOM.Elt.Polygon (Polygon_)
+import Deku.DOM.Elt.Pattern (Pattern_)
+import Deku.DOM.Elt.Path (Path_)
+import Deku.DOM.Elt.Mpath (Mpath_)
+import Deku.DOM.Elt.Metadata (Metadata_)
+import Deku.DOM.Elt.Mask (Mask_)
+import Deku.DOM.Elt.Marker (Marker_)
+import Deku.DOM.Elt.LinearGradient (LinearGradient_)
+import Deku.DOM.Elt.Line (Line_)
+import Deku.DOM.Elt.Image (Image_)
+import Deku.DOM.Elt.G (G_)
+import Deku.DOM.Elt.ForeignObject (ForeignObject_)
+import Deku.DOM.Elt.Filter (Filter_)
+import Deku.DOM.Elt.FeTurbulence (FeTurbulence_)
+import Deku.DOM.Elt.FeTile (FeTile_)
+import Deku.DOM.Elt.FeSpotLight (FeSpotLight_)
+import Deku.DOM.Elt.FeSpecularLighting (FeSpecularLighting_)
+import Deku.DOM.Elt.FePointLight (FePointLight_)
+import Deku.DOM.Elt.FeOffset (FeOffset_)
+import Deku.DOM.Elt.FeMorphology (FeMorphology_)
+import Deku.DOM.Elt.FeMergeNode (FeMergeNode_)
+import Deku.DOM.Elt.FeMerge (FeMerge_)
+import Deku.DOM.Elt.FeImage (FeImage_)
+import Deku.DOM.Elt.FeGaussianBlur (FeGaussianBlur_)
+import Deku.DOM.Elt.FeFuncR (FeFuncR_)
+import Deku.DOM.Elt.FeFuncG (FeFuncG_)
+import Deku.DOM.Elt.FeFuncB (FeFuncB_)
+import Deku.DOM.Elt.FeFuncA (FeFuncA_)
+import Deku.DOM.Elt.FeFlood (FeFlood_)
+import Deku.DOM.Elt.FeDropShadow (FeDropShadow_)
+import Deku.DOM.Elt.FeDistantLight (FeDistantLight_)
+import Deku.DOM.Elt.FeDisplacementMap (FeDisplacementMap_)
+import Deku.DOM.Elt.FeDiffuseLighting (FeDiffuseLighting_)
+import Deku.DOM.Elt.FeConvolveMatrix (FeConvolveMatrix_)
+import Deku.DOM.Elt.FeComposite (FeComposite_)
+import Deku.DOM.Elt.FeComponentTransfer (FeComponentTransfer_)
+import Deku.DOM.Elt.FeColorMatrix (FeColorMatrix_)
+import Deku.DOM.Elt.FeBlend (FeBlend_)
+import Deku.DOM.Elt.Ellipse (Ellipse_)
+import Deku.DOM.Elt.Discard (Discard_)
+import Deku.DOM.Elt.Desc (Desc_)
+import Deku.DOM.Elt.Defs (Defs_)
+import Deku.DOM.Elt.ClipPath (ClipPath_)
+import Deku.DOM.Elt.Circle (Circle_)
+import Deku.DOM.Elt.AnimateTransform (AnimateTransform_)
+import Deku.DOM.Elt.AnimateMotion (AnimateMotion_)
+import Deku.DOM.Elt.Animate (Animate_)
 import Deku.DOM.Elt.A (A_)
 import Deku.DOM.Elt.Abbr (Abbr_)
 import Deku.DOM.Elt.Acronym (Acronym_)
@@ -103,7 +164,6 @@ import Deku.DOM.Elt.Style (Style_)
 import Deku.DOM.Elt.Sub (Sub_)
 import Deku.DOM.Elt.Summary (Summary_)
 import Deku.DOM.Elt.Sup (Sup_)
-import Deku.DOM.Elt.Svg (Svg_)
 import Deku.DOM.Elt.Table (Table_)
 import Deku.DOM.Elt.Tbody (Tbody_)
 import Deku.DOM.Elt.Td (Td_)
@@ -113,7 +173,6 @@ import Deku.DOM.Elt.Tfoot (Tfoot_)
 import Deku.DOM.Elt.Th (Th_)
 import Deku.DOM.Elt.Thead (Thead_)
 import Deku.DOM.Elt.Time (Time_)
-import Deku.DOM.Elt.Title (Title_)
 import Deku.DOM.Elt.Tr (Tr_)
 import Deku.DOM.Elt.Track (Track_)
 import Deku.DOM.Elt.Tt (Tt_)
@@ -490,4 +549,181 @@ instance Attr Video_ Id String where
   attr Id value = unsafeAttribute { key: "id", value: prop' value }
 
 instance Attr Wbr_ Id String where
+  attr Id value = unsafeAttribute { key: "id", value: prop' value }
+
+instance Attr Animate_ Id String where
+  attr Id value = unsafeAttribute { key: "id", value: prop' value }
+
+instance Attr AnimateMotion_ Id String where
+  attr Id value = unsafeAttribute { key: "id", value: prop' value }
+
+instance Attr AnimateTransform_ Id String where
+  attr Id value = unsafeAttribute { key: "id", value: prop' value }
+
+instance Attr Circle_ Id String where
+  attr Id value = unsafeAttribute { key: "id", value: prop' value }
+
+instance Attr ClipPath_ Id String where
+  attr Id value = unsafeAttribute { key: "id", value: prop' value }
+
+instance Attr Defs_ Id String where
+  attr Id value = unsafeAttribute { key: "id", value: prop' value }
+
+instance Attr Desc_ Id String where
+  attr Id value = unsafeAttribute { key: "id", value: prop' value }
+
+instance Attr Discard_ Id String where
+  attr Id value = unsafeAttribute { key: "id", value: prop' value }
+
+instance Attr Ellipse_ Id String where
+  attr Id value = unsafeAttribute { key: "id", value: prop' value }
+
+instance Attr FeBlend_ Id String where
+  attr Id value = unsafeAttribute { key: "id", value: prop' value }
+
+instance Attr FeColorMatrix_ Id String where
+  attr Id value = unsafeAttribute { key: "id", value: prop' value }
+
+instance Attr FeComponentTransfer_ Id String where
+  attr Id value = unsafeAttribute { key: "id", value: prop' value }
+
+instance Attr FeComposite_ Id String where
+  attr Id value = unsafeAttribute { key: "id", value: prop' value }
+
+instance Attr FeConvolveMatrix_ Id String where
+  attr Id value = unsafeAttribute { key: "id", value: prop' value }
+
+instance Attr FeDiffuseLighting_ Id String where
+  attr Id value = unsafeAttribute { key: "id", value: prop' value }
+
+instance Attr FeDisplacementMap_ Id String where
+  attr Id value = unsafeAttribute { key: "id", value: prop' value }
+
+instance Attr FeDistantLight_ Id String where
+  attr Id value = unsafeAttribute { key: "id", value: prop' value }
+
+instance Attr FeDropShadow_ Id String where
+  attr Id value = unsafeAttribute { key: "id", value: prop' value }
+
+instance Attr FeFlood_ Id String where
+  attr Id value = unsafeAttribute { key: "id", value: prop' value }
+
+instance Attr FeFuncA_ Id String where
+  attr Id value = unsafeAttribute { key: "id", value: prop' value }
+
+instance Attr FeFuncB_ Id String where
+  attr Id value = unsafeAttribute { key: "id", value: prop' value }
+
+instance Attr FeFuncG_ Id String where
+  attr Id value = unsafeAttribute { key: "id", value: prop' value }
+
+instance Attr FeFuncR_ Id String where
+  attr Id value = unsafeAttribute { key: "id", value: prop' value }
+
+instance Attr FeGaussianBlur_ Id String where
+  attr Id value = unsafeAttribute { key: "id", value: prop' value }
+
+instance Attr FeImage_ Id String where
+  attr Id value = unsafeAttribute { key: "id", value: prop' value }
+
+instance Attr FeMerge_ Id String where
+  attr Id value = unsafeAttribute { key: "id", value: prop' value }
+
+instance Attr FeMergeNode_ Id String where
+  attr Id value = unsafeAttribute { key: "id", value: prop' value }
+
+instance Attr FeMorphology_ Id String where
+  attr Id value = unsafeAttribute { key: "id", value: prop' value }
+
+instance Attr FeOffset_ Id String where
+  attr Id value = unsafeAttribute { key: "id", value: prop' value }
+
+instance Attr FePointLight_ Id String where
+  attr Id value = unsafeAttribute { key: "id", value: prop' value }
+
+instance Attr FeSpecularLighting_ Id String where
+  attr Id value = unsafeAttribute { key: "id", value: prop' value }
+
+instance Attr FeSpotLight_ Id String where
+  attr Id value = unsafeAttribute { key: "id", value: prop' value }
+
+instance Attr FeTile_ Id String where
+  attr Id value = unsafeAttribute { key: "id", value: prop' value }
+
+instance Attr FeTurbulence_ Id String where
+  attr Id value = unsafeAttribute { key: "id", value: prop' value }
+
+instance Attr Filter_ Id String where
+  attr Id value = unsafeAttribute { key: "id", value: prop' value }
+
+instance Attr ForeignObject_ Id String where
+  attr Id value = unsafeAttribute { key: "id", value: prop' value }
+
+instance Attr G_ Id String where
+  attr Id value = unsafeAttribute { key: "id", value: prop' value }
+
+instance Attr Image_ Id String where
+  attr Id value = unsafeAttribute { key: "id", value: prop' value }
+
+instance Attr Line_ Id String where
+  attr Id value = unsafeAttribute { key: "id", value: prop' value }
+
+instance Attr LinearGradient_ Id String where
+  attr Id value = unsafeAttribute { key: "id", value: prop' value }
+
+instance Attr Marker_ Id String where
+  attr Id value = unsafeAttribute { key: "id", value: prop' value }
+
+instance Attr Mask_ Id String where
+  attr Id value = unsafeAttribute { key: "id", value: prop' value }
+
+instance Attr Metadata_ Id String where
+  attr Id value = unsafeAttribute { key: "id", value: prop' value }
+
+instance Attr Mpath_ Id String where
+  attr Id value = unsafeAttribute { key: "id", value: prop' value }
+
+instance Attr Path_ Id String where
+  attr Id value = unsafeAttribute { key: "id", value: prop' value }
+
+instance Attr Pattern_ Id String where
+  attr Id value = unsafeAttribute { key: "id", value: prop' value }
+
+instance Attr Polygon_ Id String where
+  attr Id value = unsafeAttribute { key: "id", value: prop' value }
+
+instance Attr Polyline_ Id String where
+  attr Id value = unsafeAttribute { key: "id", value: prop' value }
+
+instance Attr RadialGradient_ Id String where
+  attr Id value = unsafeAttribute { key: "id", value: prop' value }
+
+instance Attr Rect_ Id String where
+  attr Id value = unsafeAttribute { key: "id", value: prop' value }
+
+instance Attr Set_ Id String where
+  attr Id value = unsafeAttribute { key: "id", value: prop' value }
+
+instance Attr Stop_ Id String where
+  attr Id value = unsafeAttribute { key: "id", value: prop' value }
+
+instance Attr Switch_ Id String where
+  attr Id value = unsafeAttribute { key: "id", value: prop' value }
+
+instance Attr Symbol_ Id String where
+  attr Id value = unsafeAttribute { key: "id", value: prop' value }
+
+instance Attr Text_ Id String where
+  attr Id value = unsafeAttribute { key: "id", value: prop' value }
+
+instance Attr TextPath_ Id String where
+  attr Id value = unsafeAttribute { key: "id", value: prop' value }
+
+instance Attr Tspan_ Id String where
+  attr Id value = unsafeAttribute { key: "id", value: prop' value }
+
+instance Attr Use_ Id String where
+  attr Id value = unsafeAttribute { key: "id", value: prop' value }
+
+instance Attr View_ Id String where
   attr Id value = unsafeAttribute { key: "id", value: prop' value }

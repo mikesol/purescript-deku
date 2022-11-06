@@ -1,5 +1,53 @@
 module Deku.DOM.Attr.Class where
 
+import Deku.DOM.Elt.Use (Use_)
+import Deku.DOM.Elt.Tspan (Tspan_)
+import Deku.DOM.Elt.Title (Title_)
+import Deku.DOM.Elt.TextPath (TextPath_)
+import Deku.DOM.Elt.Text (Text_)
+import Deku.DOM.Elt.Symbol (Symbol_)
+import Deku.DOM.Elt.Switch (Switch_)
+import Deku.DOM.Elt.Svg (Svg_)
+import Deku.DOM.Elt.Stop (Stop_)
+import Deku.DOM.Elt.Set (Set_)
+import Deku.DOM.Elt.Rect (Rect_)
+import Deku.DOM.Elt.RadialGradient (RadialGradient_)
+import Deku.DOM.Elt.Polyline (Polyline_)
+import Deku.DOM.Elt.Polygon (Polygon_)
+import Deku.DOM.Elt.Pattern (Pattern_)
+import Deku.DOM.Elt.Path (Path_)
+import Deku.DOM.Elt.Mask (Mask_)
+import Deku.DOM.Elt.Marker (Marker_)
+import Deku.DOM.Elt.LinearGradient (LinearGradient_)
+import Deku.DOM.Elt.Line (Line_)
+import Deku.DOM.Elt.Image (Image_)
+import Deku.DOM.Elt.G (G_)
+import Deku.DOM.Elt.ForeignObject (ForeignObject_)
+import Deku.DOM.Elt.Filter (Filter_)
+import Deku.DOM.Elt.FeTurbulence (FeTurbulence_)
+import Deku.DOM.Elt.FeTile (FeTile_)
+import Deku.DOM.Elt.FeSpecularLighting (FeSpecularLighting_)
+import Deku.DOM.Elt.FeOffset (FeOffset_)
+import Deku.DOM.Elt.FeMorphology (FeMorphology_)
+import Deku.DOM.Elt.FeMerge (FeMerge_)
+import Deku.DOM.Elt.FeImage (FeImage_)
+import Deku.DOM.Elt.FeGaussianBlur (FeGaussianBlur_)
+import Deku.DOM.Elt.FeFlood (FeFlood_)
+import Deku.DOM.Elt.FeDropShadow (FeDropShadow_)
+import Deku.DOM.Elt.FeDisplacementMap (FeDisplacementMap_)
+import Deku.DOM.Elt.FeDiffuseLighting (FeDiffuseLighting_)
+import Deku.DOM.Elt.FeConvolveMatrix (FeConvolveMatrix_)
+import Deku.DOM.Elt.FeComposite (FeComposite_)
+import Deku.DOM.Elt.FeComponentTransfer (FeComponentTransfer_)
+import Deku.DOM.Elt.FeColorMatrix (FeColorMatrix_)
+import Deku.DOM.Elt.FeBlend (FeBlend_)
+import Deku.DOM.Elt.Ellipse (Ellipse_)
+import Deku.DOM.Elt.Desc (Desc_)
+import Deku.DOM.Elt.Defs (Defs_)
+import Deku.DOM.Elt.ClipPath (ClipPath_)
+import Deku.DOM.Elt.Circle (Circle_)
+import Deku.DOM.Elt.AnimateMotion (AnimateMotion_)
+import Deku.DOM.Elt.Animate (Animate_)
 import Deku.DOM.Elt.A (A_)
 import Deku.DOM.Elt.Abbr (Abbr_)
 import Deku.DOM.Elt.Acronym (Acronym_)
@@ -103,7 +151,6 @@ import Deku.DOM.Elt.Style (Style_)
 import Deku.DOM.Elt.Sub (Sub_)
 import Deku.DOM.Elt.Summary (Summary_)
 import Deku.DOM.Elt.Sup (Sup_)
-import Deku.DOM.Elt.Svg (Svg_)
 import Deku.DOM.Elt.Table (Table_)
 import Deku.DOM.Elt.Tbody (Tbody_)
 import Deku.DOM.Elt.Td (Td_)
@@ -113,7 +160,6 @@ import Deku.DOM.Elt.Tfoot (Tfoot_)
 import Deku.DOM.Elt.Th (Th_)
 import Deku.DOM.Elt.Thead (Thead_)
 import Deku.DOM.Elt.Time (Time_)
-import Deku.DOM.Elt.Title (Title_)
 import Deku.DOM.Elt.Tr (Tr_)
 import Deku.DOM.Elt.Track (Track_)
 import Deku.DOM.Elt.Tt (Tt_)
@@ -490,4 +536,142 @@ instance Attr Video_ Class String where
   attr Class value = unsafeAttribute { key: "class", value: prop' value }
 
 instance Attr Wbr_ Class String where
+  attr Class value = unsafeAttribute { key: "class", value: prop' value }
+
+instance Attr Animate_ Class String where
+  attr Class value = unsafeAttribute { key: "class", value: prop' value }
+
+instance Attr AnimateMotion_ Class String where
+  attr Class value = unsafeAttribute { key: "class", value: prop' value }
+
+instance Attr Circle_ Class String where
+  attr Class value = unsafeAttribute { key: "class", value: prop' value }
+
+instance Attr ClipPath_ Class String where
+  attr Class value = unsafeAttribute { key: "class", value: prop' value }
+
+instance Attr Defs_ Class String where
+  attr Class value = unsafeAttribute { key: "class", value: prop' value }
+
+instance Attr Desc_ Class String where
+  attr Class value = unsafeAttribute { key: "class", value: prop' value }
+
+instance Attr Ellipse_ Class String where
+  attr Class value = unsafeAttribute { key: "class", value: prop' value }
+
+instance Attr FeBlend_ Class String where
+  attr Class value = unsafeAttribute { key: "class", value: prop' value }
+
+instance Attr FeColorMatrix_ Class String where
+  attr Class value = unsafeAttribute { key: "class", value: prop' value }
+
+instance Attr FeComponentTransfer_ Class String where
+  attr Class value = unsafeAttribute { key: "class", value: prop' value }
+
+instance Attr FeComposite_ Class String where
+  attr Class value = unsafeAttribute { key: "class", value: prop' value }
+
+instance Attr FeConvolveMatrix_ Class String where
+  attr Class value = unsafeAttribute { key: "class", value: prop' value }
+
+instance Attr FeDiffuseLighting_ Class String where
+  attr Class value = unsafeAttribute { key: "class", value: prop' value }
+
+instance Attr FeDisplacementMap_ Class String where
+  attr Class value = unsafeAttribute { key: "class", value: prop' value }
+
+instance Attr FeDropShadow_ Class String where
+  attr Class value = unsafeAttribute { key: "class", value: prop' value }
+
+instance Attr FeFlood_ Class String where
+  attr Class value = unsafeAttribute { key: "class", value: prop' value }
+
+instance Attr FeGaussianBlur_ Class String where
+  attr Class value = unsafeAttribute { key: "class", value: prop' value }
+
+instance Attr FeImage_ Class String where
+  attr Class value = unsafeAttribute { key: "class", value: prop' value }
+
+instance Attr FeMerge_ Class String where
+  attr Class value = unsafeAttribute { key: "class", value: prop' value }
+
+instance Attr FeMorphology_ Class String where
+  attr Class value = unsafeAttribute { key: "class", value: prop' value }
+
+instance Attr FeOffset_ Class String where
+  attr Class value = unsafeAttribute { key: "class", value: prop' value }
+
+instance Attr FeSpecularLighting_ Class String where
+  attr Class value = unsafeAttribute { key: "class", value: prop' value }
+
+instance Attr FeTile_ Class String where
+  attr Class value = unsafeAttribute { key: "class", value: prop' value }
+
+instance Attr FeTurbulence_ Class String where
+  attr Class value = unsafeAttribute { key: "class", value: prop' value }
+
+instance Attr Filter_ Class String where
+  attr Class value = unsafeAttribute { key: "class", value: prop' value }
+
+instance Attr ForeignObject_ Class String where
+  attr Class value = unsafeAttribute { key: "class", value: prop' value }
+
+instance Attr G_ Class String where
+  attr Class value = unsafeAttribute { key: "class", value: prop' value }
+
+instance Attr Image_ Class String where
+  attr Class value = unsafeAttribute { key: "class", value: prop' value }
+
+instance Attr Line_ Class String where
+  attr Class value = unsafeAttribute { key: "class", value: prop' value }
+
+instance Attr LinearGradient_ Class String where
+  attr Class value = unsafeAttribute { key: "class", value: prop' value }
+
+instance Attr Marker_ Class String where
+  attr Class value = unsafeAttribute { key: "class", value: prop' value }
+
+instance Attr Mask_ Class String where
+  attr Class value = unsafeAttribute { key: "class", value: prop' value }
+
+instance Attr Path_ Class String where
+  attr Class value = unsafeAttribute { key: "class", value: prop' value }
+
+instance Attr Pattern_ Class String where
+  attr Class value = unsafeAttribute { key: "class", value: prop' value }
+
+instance Attr Polygon_ Class String where
+  attr Class value = unsafeAttribute { key: "class", value: prop' value }
+
+instance Attr Polyline_ Class String where
+  attr Class value = unsafeAttribute { key: "class", value: prop' value }
+
+instance Attr RadialGradient_ Class String where
+  attr Class value = unsafeAttribute { key: "class", value: prop' value }
+
+instance Attr Rect_ Class String where
+  attr Class value = unsafeAttribute { key: "class", value: prop' value }
+
+instance Attr Set_ Class String where
+  attr Class value = unsafeAttribute { key: "class", value: prop' value }
+
+instance Attr Stop_ Class String where
+  attr Class value = unsafeAttribute { key: "class", value: prop' value }
+
+instance Attr Switch_ Class String where
+  attr Class value = unsafeAttribute { key: "class", value: prop' value }
+
+instance Attr Symbol_ Class String where
+  attr Class value = unsafeAttribute { key: "class", value: prop' value }
+
+instance Attr Text_ Class String where
+  attr Class value = unsafeAttribute { key: "class", value: prop' value }
+
+instance Attr TextPath_ Class String where
+  attr Class value = unsafeAttribute { key: "class", value: prop' value }
+
+instance Attr Tspan_ Class String where
+  attr Class value = unsafeAttribute { key: "class", value: prop' value }
+
+instance Attr Use_ Class String where
   attr Class value = unsafeAttribute { key: "class", value: prop' value }
