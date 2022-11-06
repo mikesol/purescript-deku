@@ -1,4 +1,4 @@
-module Deku.DOM.Elt.Title where
+module Deku.DOM.Elt.Defs where
 
 import Bolson.Core (Entity(..), fixed)
 import Control.Plus (empty)
@@ -9,24 +9,24 @@ import Deku.Core (Domable(..), Domable', unsafeSetPos)
 import FRP.Event (Event)
 import Safe.Coerce (coerce)
 
-data Title_
+data Defs_
 
-title
+defs
   :: forall lock payload
-   . Event (Attribute Title_)
+   . Event (Attribute Defs_)
   -> Array (Domable lock payload)
   -> Domable lock payload
-title attributes kids = Domable
+defs attributes kids = Domable
   ( Element'
-      ( elementify "title" attributes
+      ( elementify "defs" attributes
           ( (coerce :: Domable' lock payload -> Domable lock payload)
               (fixed (coerce (mapWithIndex unsafeSetPos kids)))
           )
       )
   )
 
-title_
+defs_
   :: forall lock payload
    . Array (Domable lock payload)
   -> Domable lock payload
-title_ = title empty
+defs_ = defs empty

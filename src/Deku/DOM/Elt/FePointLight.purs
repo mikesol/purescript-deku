@@ -1,4 +1,4 @@
-module Deku.DOM.Elt.Title where
+module Deku.DOM.Elt.FePointLight where
 
 import Bolson.Core (Entity(..), fixed)
 import Control.Plus (empty)
@@ -9,24 +9,24 @@ import Deku.Core (Domable(..), Domable', unsafeSetPos)
 import FRP.Event (Event)
 import Safe.Coerce (coerce)
 
-data Title_
+data FePointLight_
 
-title
+fePointLight
   :: forall lock payload
-   . Event (Attribute Title_)
+   . Event (Attribute FePointLight_)
   -> Array (Domable lock payload)
   -> Domable lock payload
-title attributes kids = Domable
+fePointLight attributes kids = Domable
   ( Element'
-      ( elementify "title" attributes
+      ( elementify "fePointLight" attributes
           ( (coerce :: Domable' lock payload -> Domable lock payload)
               (fixed (coerce (mapWithIndex unsafeSetPos kids)))
           )
       )
   )
 
-title_
+fePointLight_
   :: forall lock payload
    . Array (Domable lock payload)
   -> Domable lock payload
-title_ = title empty
+fePointLight_ = fePointLight empty

@@ -1,4 +1,4 @@
-module Deku.DOM.Elt.Title where
+module Deku.DOM.Elt.RadialGradient where
 
 import Bolson.Core (Entity(..), fixed)
 import Control.Plus (empty)
@@ -9,24 +9,24 @@ import Deku.Core (Domable(..), Domable', unsafeSetPos)
 import FRP.Event (Event)
 import Safe.Coerce (coerce)
 
-data Title_
+data RadialGradient_
 
-title
+radialGradient
   :: forall lock payload
-   . Event (Attribute Title_)
+   . Event (Attribute RadialGradient_)
   -> Array (Domable lock payload)
   -> Domable lock payload
-title attributes kids = Domable
+radialGradient attributes kids = Domable
   ( Element'
-      ( elementify "title" attributes
+      ( elementify "radialGradient" attributes
           ( (coerce :: Domable' lock payload -> Domable lock payload)
               (fixed (coerce (mapWithIndex unsafeSetPos kids)))
           )
       )
   )
 
-title_
+radialGradient_
   :: forall lock payload
    . Array (Domable lock payload)
   -> Domable lock payload
-title_ = title empty
+radialGradient_ = radialGradient empty

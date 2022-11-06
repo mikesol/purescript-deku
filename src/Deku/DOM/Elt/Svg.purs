@@ -30,4 +30,3 @@ svg_
    . Array (Domable lock payload)
   -> Domable lock payload
 svg_ = svg empty
-

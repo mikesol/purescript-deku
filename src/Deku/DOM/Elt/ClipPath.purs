@@ -1,4 +1,4 @@
-module Deku.DOM.Elt.Title where
+module Deku.DOM.Elt.ClipPath where
 
 import Bolson.Core (Entity(..), fixed)
 import Control.Plus (empty)
@@ -9,24 +9,24 @@ import Deku.Core (Domable(..), Domable', unsafeSetPos)
 import FRP.Event (Event)
 import Safe.Coerce (coerce)
 
-data Title_
+data ClipPath_
 
-title
+clipPath
   :: forall lock payload
-   . Event (Attribute Title_)
+   . Event (Attribute ClipPath_)
   -> Array (Domable lock payload)
   -> Domable lock payload
-title attributes kids = Domable
+clipPath attributes kids = Domable
   ( Element'
-      ( elementify "title" attributes
+      ( elementify "clipPath" attributes
           ( (coerce :: Domable' lock payload -> Domable lock payload)
               (fixed (coerce (mapWithIndex unsafeSetPos kids)))
           )
       )
   )
 
-title_
+clipPath_
   :: forall lock payload
    . Array (Domable lock payload)
   -> Domable lock payload
-title_ = title empty
+clipPath_ = clipPath empty

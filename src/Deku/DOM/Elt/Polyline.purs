@@ -1,4 +1,4 @@
-module Deku.DOM.Elt.Title where
+module Deku.DOM.Elt.Polyline where
 
 import Bolson.Core (Entity(..), fixed)
 import Control.Plus (empty)
@@ -9,24 +9,24 @@ import Deku.Core (Domable(..), Domable', unsafeSetPos)
 import FRP.Event (Event)
 import Safe.Coerce (coerce)
 
-data Title_
+data Polyline_
 
-title
+polyline
   :: forall lock payload
-   . Event (Attribute Title_)
+   . Event (Attribute Polyline_)
   -> Array (Domable lock payload)
   -> Domable lock payload
-title attributes kids = Domable
+polyline attributes kids = Domable
   ( Element'
-      ( elementify "title" attributes
+      ( elementify "polyline" attributes
           ( (coerce :: Domable' lock payload -> Domable lock payload)
               (fixed (coerce (mapWithIndex unsafeSetPos kids)))
           )
       )
   )
 
-title_
+polyline_
   :: forall lock payload
    . Array (Domable lock payload)
   -> Domable lock payload
-title_ = title empty
+polyline_ = polyline empty
