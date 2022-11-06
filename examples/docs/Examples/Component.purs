@@ -2,7 +2,8 @@ module Deku.Examples.Docs.Examples.Component where
 
 import Prelude
 
-import Deku.Attribute ((:=))
+import Data.Foldable (oneOf)
+import Deku.Attribute ((!:=), (:=))
 import Deku.Control (text_)
 import Deku.DOM as D
 import Deku.Toplevel (runInBody)
@@ -20,10 +21,19 @@ main = runInBody
           , D.span (pure $ D.Style := "font-weight: 800;")
               [ text_ " baz" ]
           ]
-      , D.div_
-          [ D.div_
-              [ D.div_ [ D.input (pure $ D.Xtype := "range") [] ]
-              ]
+      , D.svg (oneOf [ D.Height !:= "100", D.Width !:= "100" ])
+          [ D.circle
+              ( oneOf
+                  [ D.Cx !:= "50"
+                  , D.Cy !:= "50"
+                  , D.R !:= "40"
+                  , D.Stroke !:= "black"
+                  , D.StrokeWidth !:= "3"
+                  , D.Fill !:= "red"
+                  ]
+              )
+              []
           ]
+
       ]
   )
