@@ -1,5 +1,3 @@
-import requests
-from bs4 import BeautifulSoup
 import json
 
 
@@ -357,4 +355,5 @@ A = {
     "view": aria + ca + gl + s("viewBox preserveAspectRatio zoomAndPan viewTarget"),
 }
 if __name__ == '__main__':
-    print(json.dumps(A))
+    #print(json.dumps(A))
+    print(json.dumps([x for x in A.keys()]))
