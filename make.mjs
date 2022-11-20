@@ -9833,13 +9833,13 @@ var bind6 = function(f) {
 };
 var useDyn = function(i2) {
   return function(f) {
-    return keepLatest5(bind6(function($57) {
-      return bus2(curry($57));
+    return keepLatest5(bind6(function($68) {
+      return bus2(curry($68));
     })(function(v) {
       return alt9(pure23(insert6(i2)(f({
         remove: v.value0(remove),
-        sendTo: function($58) {
-          return v.value0(sendToPos($58));
+        sendTo: function($69) {
+          return v.value0(sendToPos($69));
         }
       }))))(v.value1);
     }));
