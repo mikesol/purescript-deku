@@ -7,7 +7,7 @@ module Deku.Do
   , useStates
   , useMemoized
   , useMailboxed
-  , useRemoval
+  , useHot
   , class InitializeEvents
   , initializeEvents'
   , useDyn
@@ -18,14 +18,20 @@ import Prelude hiding (bind, discard)
 
 import Bolson.Core (Child, envy)
 import Control.Alt ((<|>))
+import Control.Monad.ST.Class (liftST)
+import Control.Monad.ST.Internal as STRef
+import Control.Monad.ST.Uncurried (mkSTFn1, mkSTFn2, runSTFn1, runSTFn2)
+import Data.Foldable (for_)
+import Data.Maybe (Maybe(..))
 import Data.Profunctor (lcmap)
 import Data.Symbol (class IsSymbol)
 import Data.Tuple (curry)
 import Data.Tuple.Nested (type (/\), (/\))
 import Deku.Core (Domable(..), Node, bus, bussedUncurried, insert, remove, sendToPos, vbussedUncurried)
 import Effect (Effect)
-import FRP.Event (Event, keepLatest, mailboxed, memoize)
+import FRP.Event (Event, Subscriber(..), createPure, keepLatest, mailboxed, makeLemmingEventO, memoize)
 import FRP.Event.VBus (class VBus, V)
+import Prelude as Prelude
 import Prim.Row as R
 import Prim.RowList (class RowToList, RowList)
 import Prim.RowList as RL
@@ -131,14 +137,6 @@ useMailboxed
 useMailboxed f = bussedUncurried \(a /\ b) -> Domable $ envy
   (coerce (mailboxed b \c -> f (a /\ c)))
 
-useRemoval
-  :: forall a lock payload
-   . (Effect Unit /\ (Event (Child Int (Node lock payload) lock)) -> Event a)
-  -> Event a
-useRemoval f = keepLatest do
-  setRemoveMe /\ removeMe <- bus <<< curry
-  f (setRemoveMe unit /\ (removeMe $> remove))
-
 useDyn
   :: forall lock payload
    . Int
@@ -164,3 +162,33 @@ useDyn_
      )
   -> Event (Child Int (Node lock payload) lock)
 useDyn_ = useDyn 0
+
+useHot
+  :: forall l p a. ((a -> Effect Unit) /\ Event a -> Domable l p) -> Domable l p
+useHot f = Domable $ envy $ makeLemmingEventO
+  ( mkSTFn2 \(Subscriber s) k ->
+      let
+        bind = Prelude.bind
+        discard = Prelude.discard
+      in
+        do
+          { push, event } <- createPure
+          current <- STRef.new Nothing
+          let writeVal v = STRef.write (Just v) current
+          let
+            push'' i = liftST do
+              _ <- writeVal i
+              push i
+            push' i = do
+              _ <- writeVal i
+              push i
+          let
+            event' = makeLemmingEventO
+              ( mkSTFn2 \_ k' -> do
+                  val <- STRef.read current
+                  for_ val \x -> runSTFn1 k' x
+                  runSTFn2 s event k'
+              )
+          runSTFn1 k ((\(Domable x) -> x) (f (push'' /\ event')))
+          runSTFn2 s event (mkSTFn1 \v -> writeVal v *> push' v)
+  )
