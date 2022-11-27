@@ -9,19 +9,23 @@ import Control.Monad.ST.Internal as RRef
 import Control.Plus (empty)
 import Data.Foldable (intercalate, oneOf, oneOfMap)
 import Data.Tuple.Nested ((/\))
+import Deku.Attribute ((!:=))
 import Deku.Attributes (id_)
 import Deku.Control (blank, globalPortal1, switcher, text_)
 import Deku.Core (Domable, Nut, dyn, fixed, insert, insert_, sendToPos)
 import Deku.DOM as D
-import Deku.Do (useMemoized, useState, useState')
+import Deku.Hooks (useMemoized, useState, useState')
 import Deku.Do as Deku
 import Deku.Interpret (FFIDOMSnapshot, Instruction)
+import Deku.Lifecycle (onDismount, onMount)
 import Deku.Listeners (click_)
 import Deku.Pursx ((~~))
 import Deku.Toplevel (Template(..), hydrate', runInBody', runSSR)
 import Effect (Effect)
 import FRP.Event (Event, fold)
 import Type.Proxy (Proxy(..))
+
+foreign import hackyInnerHTML :: String -> String -> Effect Unit
 
 runNoSSR
   :: (forall lock. Domable lock (FFIDOMSnapshot -> Effect Unit))
@@ -241,4 +245,24 @@ pursXComposes = Deku.do
   D.div (id_ "div0")
     [ (Proxy :: _ "<h1 id=\"px\">début ~me~ fin</h1>") ~~
         { me: fixed [ text_ "milieu", text_ " ", text_ "après-milieu" ] }
+    ]
+
+lifecycle :: Nut
+lifecycle = Deku.do
+  setItem /\ item <- useState 0
+  D.div (id_ "div0")
+    [ D.div_
+        [ D.button (oneOf [ id_ "home-btn", click_ (setItem 0) ])
+            [ text_ "home" ]
+        , D.button (oneOf [ id_ "about-btn", click_ (setItem 1) ])
+            [ text_ "about" ]
+        , D.button (oneOf [ id_ "contact-btn", click_ (setItem 2) ])
+            [ text_ "contact" ]
+        ]
+    , D.span (D.Id !:= "hack") []
+    , item # switcher case _ of
+        0 -> D.span_ [ text_ "a" ]
+        1 -> onMount (hackyInnerHTML "hack" "hello") $ D.span_ [ text_ "b" ]
+        _ -> onDismount (hackyInnerHTML "hack" "goodbye") $ D.span_
+          [ text_ "c" ]
     ]

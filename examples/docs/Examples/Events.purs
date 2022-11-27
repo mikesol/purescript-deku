@@ -5,7 +5,7 @@ import Prelude
 import Data.Tuple.Nested ((/\))
 import Deku.Control (text, text_)
 import Deku.DOM as D
-import Deku.Do (useState)
+import Deku.Hooks (useState)
 import Deku.Do as Deku
 import Deku.Listeners (click_, slider)
 import Deku.Toplevel (runInBody)
