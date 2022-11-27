@@ -5,6 +5,7 @@
   , "bolson"
   , "catenable-lists"
   , "control"
+  , "css"
   , "effect"
   , "either"
   , "fast-vect"
