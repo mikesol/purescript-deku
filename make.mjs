@@ -9696,27 +9696,27 @@ var attr4 = /* @__PURE__ */ attr(attrOnInputCb);
 var for_4 = /* @__PURE__ */ for_(applicativeEffect)(foldableMaybe);
 var bind5 = /* @__PURE__ */ bind(bindMaybe);
 var composeKleisli2 = /* @__PURE__ */ composeKleisli(bindEffect);
-var alt7 = /* @__PURE__ */ alt(altEvent);
 var pure20 = /* @__PURE__ */ pure(applicativeEvent);
+var alt7 = /* @__PURE__ */ alt(altEvent);
 var attr13 = /* @__PURE__ */ attr(attrInput_XtypeString);
 var slider = /* @__PURE__ */ function() {
-  var $33 = alt7(pure20(attr13(Xtype.value)("range")));
-  var $34 = map21(function(push2) {
+  var $34 = alt7(pure20(attr13(Xtype.value)("range")));
+  var $35 = map21(function(push2) {
     return attr4(OnInput.value)(cb(function(e) {
       return for_4(bind5(target(e))(fromEventTarget))(composeKleisli2(valueAsNumber)(push2));
     }));
   });
-  return function($35) {
-    return $33($34($35));
+  return function($36) {
+    return $34($35($36));
   };
 }();
 var click = function(dictAttr) {
   return map21(attr(dictAttr)(OnClick.value));
 };
 var click_ = function(dictAttr) {
-  var $41 = click(dictAttr);
-  return function($42) {
-    return $41(pure20($42));
+  var $47 = click(dictAttr);
+  return function($48) {
+    return $47(pure20($48));
   };
 };
 
