@@ -1,14 +1,21 @@
 module Deku.Listeners
   ( slider
+  , slider_
   , numeric
+  , numeric_
   , checkbox
+  , checkbox_
   , click
   , click_
   , click'
   , keyUp
+  , keyUp_
   , keyDown
+  , keyDown_
   , keyPress
+  , keyPress_
   , textInput
+  , textInput_
   , injectElement
   , injectElementT
   ) where
@@ -50,6 +57,11 @@ click'
   -> Event (Attribute element)
 click' = map (attr D.OnClick <<< (_ $ mempty))
 
+slider_
+  :: (Number -> Effect Unit)
+  -> Event (Attribute D.Input_)
+slider_ = slider <<< pure
+
 slider
   :: Event (Number -> Effect Unit)
   -> Event (Attribute D.Input_)
@@ -59,6 +71,11 @@ slider = alt (pure $ D.Xtype := "range") <<< map
         (target e >>= fromEventTarget)
         (valueAsNumber >=> push)
   )
+
+numeric_
+  :: (Number -> Effect Unit)
+  -> Event (Attribute D.Input_)
+numeric_ = numeric <<< pure
 
 numeric
   :: Event (Number -> Effect Unit)
@@ -70,6 +87,11 @@ numeric = alt (pure $ D.Xtype := "number") <<< map
         (valueAsNumber >=> push)
   )
 
+checkbox_
+  :: (Boolean -> Effect Unit)
+  -> Event (Attribute D.Input_)
+checkbox_ = checkbox <<< pure
+
 checkbox
   :: Event (Boolean -> Effect Unit)
   -> Event (Attribute D.Input_)
@@ -79,6 +101,12 @@ checkbox = alt (pure $ D.Xtype := "checkbox") <<< map
         (target e >>= fromEventTarget)
         (checked >=> push)
   )
+
+textInput_
+  :: forall e
+   . (String -> Effect Unit)
+  -> Event (Attribute e)
+textInput_ = textInput <<< pure
 
 textInput
   :: forall e
@@ -97,17 +125,35 @@ keyEvent'
   -> f59 (Attribute e64)
 keyEvent' listener = map \f -> listener := cb \e -> for_ (fromEvent e) f
 
+keyUp_
+  :: forall eleemnt
+   . (KeyboardEvent -> Effect Unit)
+  -> Event (Attribute eleemnt)
+keyUp_ = keyUp <<< pure
+
 keyUp
   :: forall eleemnt
    . Event (KeyboardEvent -> Effect Unit)
   -> Event (Attribute eleemnt)
 keyUp = keyEvent' D.OnKeyup
 
+keyDown_
+  :: forall eleemnt
+   . (KeyboardEvent -> Effect Unit)
+  -> Event (Attribute eleemnt)
+keyDown_ = keyDown <<< pure
+
 keyDown
   :: forall eleemnt
    . Event (KeyboardEvent -> Effect Unit)
   -> Event (Attribute eleemnt)
 keyDown = keyEvent' D.OnKeydown
+
+keyPress_
+  :: forall eleemnt
+   . (KeyboardEvent -> Effect Unit)
+  -> Event (Attribute eleemnt)
+keyPress_ = keyPress <<< pure
 
 keyPress
   :: forall eleemnt
