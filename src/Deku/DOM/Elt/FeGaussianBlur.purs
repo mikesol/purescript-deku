@@ -4,7 +4,7 @@ import Bolson.Core (Entity(..), fixed)
 import Control.Plus (empty)
 import Data.Array (mapWithIndex)
 import Deku.Attribute (Attribute)
-import Deku.Control (elementify)
+import Deku.Control as DC
 import Deku.Core (Domable(..), Domable', unsafeSetPos)
 import FRP.Event (Event)
 import Safe.Coerce (coerce)
@@ -18,7 +18,7 @@ feGaussianBlur
   -> Domable lock payload
 feGaussianBlur attributes kids = Domable
   ( Element'
-      ( elementify "feGaussianBlur" attributes
+      ( DC.elementify "feGaussianBlur" attributes
           ( (coerce :: Domable' lock payload -> Domable lock payload)
               (fixed (coerce (mapWithIndex unsafeSetPos kids)))
           )
@@ -30,3 +30,9 @@ feGaussianBlur_
    . Array (Domable lock payload)
   -> Domable lock payload
 feGaussianBlur_ = feGaussianBlur empty
+
+feGaussianBlur__
+  :: forall lock payload
+   . String
+  -> Domable lock payload
+feGaussianBlur__ t = feGaussianBlur_ [ DC.text_ t ]

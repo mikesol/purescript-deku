@@ -4,7 +4,7 @@ import Bolson.Core (Entity(..), fixed)
 import Control.Plus (empty)
 import Data.Array (mapWithIndex)
 import Deku.Attribute (Attribute)
-import Deku.Control (elementify)
+import Deku.Control as DC
 import Deku.Core (Domable(..), Domable', unsafeSetPos)
 import FRP.Event (Event)
 import Safe.Coerce (coerce)
@@ -18,7 +18,7 @@ script
   -> Domable lock payload
 script attributes kids = Domable
   ( Element'
-      ( elementify "script" attributes
+      ( DC.elementify "script" attributes
           ( (coerce :: Domable' lock payload -> Domable lock payload)
               (fixed (coerce (mapWithIndex unsafeSetPos kids)))
           )
@@ -31,3 +31,8 @@ script_
   -> Domable lock payload
 script_ = script empty
 
+script__
+  :: forall lock payload
+   . String
+  -> Domable lock payload
+script__ t = script_ [ DC.text_ t ]
