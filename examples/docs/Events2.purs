@@ -12,7 +12,7 @@ import Deku.Attribute (cb, (:=))
 import Deku.Control (text_)
 import Deku.Core (Nut, bussed, dyn)
 import Deku.DOM as D
-import Deku.Do (useDyn_)
+import Deku.Hooks (useDyn_)
 import Deku.Do as Deku
 import Deku.Example.Docs.Types (Page(..), PageOptions)
 import Deku.Example.Docs.Util (scrollToTop)

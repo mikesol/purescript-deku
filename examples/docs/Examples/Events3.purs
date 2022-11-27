@@ -9,7 +9,7 @@ import Data.Tuple.Nested ((/\))
 import Deku.Control (text_)
 import Deku.Core (Nut, dyn)
 import Deku.DOM as D
-import Deku.Do (useDyn_, useState')
+import Deku.Hooks (useDyn_, useState')
 import Deku.Do as Deku
 import Deku.Listeners (click, keyUp, textInput)
 import Deku.Toplevel (runInBody)

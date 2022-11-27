@@ -14,7 +14,7 @@ import Deku.Attribute ((:=))
 import Deku.Control (text_)
 import Deku.Core (Domable, dyn, bussedUncurried, insert_, remove)
 import Deku.DOM as D
-import Deku.Do (useMailboxed, useMemoized)
+import Deku.Hooks (useMailboxed, useMemoized)
 import Deku.Do as Deku
 import Deku.Listeners (click)
 import Deku.Toplevel (runInElement')

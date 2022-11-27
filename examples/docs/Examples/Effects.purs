@@ -14,7 +14,7 @@ import Data.Tuple.Nested ((/\))
 import Deku.Attribute (Cb, cb, (:=))
 import Deku.Control (text)
 import Deku.DOM as D
-import Deku.Do (useState)
+import Deku.Hooks (useState)
 import Deku.Do as Deku
 import Deku.Listeners (click_)
 import Deku.Toplevel (runInBody)

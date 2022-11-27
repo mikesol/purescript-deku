@@ -9,7 +9,7 @@ import Data.Tuple.Nested ((/\))
 import Deku.Attribute ((:=))
 import Deku.Control (text)
 import Deku.DOM as D
-import Deku.Do (useState')
+import Deku.Hooks (useState')
 import Deku.Do as Deku
 import Deku.Pursx ((~~))
 import Deku.Toplevel (runInBody)

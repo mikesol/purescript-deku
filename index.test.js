@@ -176,5 +176,15 @@ describe('deku', () => {
     const $ = require('jquery');
     expect($('#div0').text()).toBe('début milieu après-milieu fin');
   }));
+
+  doTest('lifecycle events work', (f) => f(tests.lifecycle, () => {
+    const $ = require('jquery');
+    $('#about-btn').trigger('click')
+    expect($('#hack').text()).toBe('hello');
+    $('#contact-btn').trigger('click')
+    expect($('#hack').text()).toBe('hello');
+    $('#home-btn').trigger('click')
+    expect($('#hack').text()).toBe('goodbye');
+  }));
 });
 

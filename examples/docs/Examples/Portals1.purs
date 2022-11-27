@@ -10,7 +10,7 @@ import Deku.Attribute ((:=))
 import Deku.Control (portal, switcher, text_)
 import Deku.Core (Domable)
 import Deku.DOM as D
-import Deku.Do (useState)
+import Deku.Hooks (useState)
 import Deku.Do as Deku
 import Deku.Toplevel (runInBody)
 import Effect (Effect)
