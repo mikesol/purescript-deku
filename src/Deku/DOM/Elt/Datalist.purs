@@ -31,7 +31,6 @@ datalist_
   -> Domable lock payload
 datalist_ = datalist empty
 
-
 datalist__
   :: forall lock payload
    . String

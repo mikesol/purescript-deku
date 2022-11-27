@@ -31,7 +31,6 @@ time_
   -> Domable lock payload
 time_ = time empty
 
-
 time__
   :: forall lock payload
    . String

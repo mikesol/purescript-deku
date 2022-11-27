@@ -31,7 +31,6 @@ ol_
   -> Domable lock payload
 ol_ = ol empty
 
-
 ol__
   :: forall lock payload
    . String

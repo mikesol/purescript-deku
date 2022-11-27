@@ -31,7 +31,6 @@ bdo_
   -> Domable lock payload
 bdo_ = bdo empty
 
-
 bdo__
   :: forall lock payload
    . String

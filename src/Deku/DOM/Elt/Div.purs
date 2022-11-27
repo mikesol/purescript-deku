@@ -31,7 +31,6 @@ div_
   -> Domable lock payload
 div_ = div empty
 
-
 div__
   :: forall lock payload
    . String

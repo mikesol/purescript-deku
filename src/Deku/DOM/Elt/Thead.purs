@@ -31,7 +31,6 @@ thead_
   -> Domable lock payload
 thead_ = thead empty
 
-
 thead__
   :: forall lock payload
    . String

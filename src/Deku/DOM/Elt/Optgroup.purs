@@ -31,7 +31,6 @@ optgroup_
   -> Domable lock payload
 optgroup_ = optgroup empty
 
-
 optgroup__
   :: forall lock payload
    . String

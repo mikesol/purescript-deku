@@ -31,7 +31,6 @@ rp_
   -> Domable lock payload
 rp_ = rp empty
 
-
 rp__
   :: forall lock payload
    . String

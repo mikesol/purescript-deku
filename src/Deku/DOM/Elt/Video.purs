@@ -31,7 +31,6 @@ video_
   -> Domable lock payload
 video_ = video empty
 
-
 video__
   :: forall lock payload
    . String

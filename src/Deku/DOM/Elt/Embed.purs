@@ -31,7 +31,6 @@ embed_
   -> Domable lock payload
 embed_ = embed empty
 
-
 embed__
   :: forall lock payload
    . String

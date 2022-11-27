@@ -31,7 +31,6 @@ mark_
   -> Domable lock payload
 mark_ = mark empty
 
-
 mark__
   :: forall lock payload
    . String

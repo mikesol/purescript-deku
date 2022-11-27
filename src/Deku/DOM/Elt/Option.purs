@@ -31,7 +31,6 @@ option_
   -> Domable lock payload
 option_ = option empty
 
-
 option__
   :: forall lock payload
    . String

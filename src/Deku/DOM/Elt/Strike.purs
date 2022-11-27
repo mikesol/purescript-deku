@@ -31,7 +31,6 @@ strike_
   -> Domable lock payload
 strike_ = strike empty
 
-
 strike__
   :: forall lock payload
    . String

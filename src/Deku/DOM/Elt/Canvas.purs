@@ -31,7 +31,6 @@ canvas_
   -> Domable lock payload
 canvas_ = canvas empty
 
-
 canvas__
   :: forall lock payload
    . String

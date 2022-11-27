@@ -31,7 +31,6 @@ aside_
   -> Domable lock payload
 aside_ = aside empty
 
-
 aside__
   :: forall lock payload
    . String

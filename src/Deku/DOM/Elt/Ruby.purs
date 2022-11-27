@@ -31,7 +31,6 @@ ruby_
   -> Domable lock payload
 ruby_ = ruby empty
 
-
 ruby__
   :: forall lock payload
    . String

@@ -31,7 +31,6 @@ span_
   -> Domable lock payload
 span_ = span empty
 
-
 span__
   :: forall lock payload
    . String

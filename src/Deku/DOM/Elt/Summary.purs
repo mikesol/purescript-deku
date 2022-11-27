@@ -31,7 +31,6 @@ summary_
   -> Domable lock payload
 summary_ = summary empty
 
-
 summary__
   :: forall lock payload
    . String

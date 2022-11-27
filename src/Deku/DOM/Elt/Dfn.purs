@@ -31,7 +31,6 @@ dfn_
   -> Domable lock payload
 dfn_ = dfn empty
 
-
 dfn__
   :: forall lock payload
    . String

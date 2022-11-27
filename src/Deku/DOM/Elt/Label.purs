@@ -31,7 +31,6 @@ label_
   -> Domable lock payload
 label_ = label empty
 
-
 label__
   :: forall lock payload
    . String

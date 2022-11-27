@@ -31,7 +31,6 @@ sub_
   -> Domable lock payload
 sub_ = sub empty
 
-
 sub__
   :: forall lock payload
    . String

@@ -5,7 +5,6 @@ module Deku.Do
 
 import Prelude hiding (bind, discard)
 
-
 bind :: forall a r q. ((a -> r) -> q) -> (a -> r) -> q
 bind f a = f a
 

@@ -31,7 +31,6 @@ samp_
   -> Domable lock payload
 samp_ = samp empty
 
-
 samp__
   :: forall lock payload
    . String

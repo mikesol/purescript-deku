@@ -31,7 +31,6 @@ applet_
   -> Domable lock payload
 applet_ = applet empty
 
-
 applet__
   :: forall lock payload
    . String

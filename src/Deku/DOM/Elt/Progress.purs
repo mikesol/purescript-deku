@@ -31,7 +31,6 @@ progress_
   -> Domable lock payload
 progress_ = progress empty
 
-
 progress__
   :: forall lock payload
    . String

@@ -31,7 +31,6 @@ hr_
   -> Domable lock payload
 hr_ = hr empty
 
-
 hr__
   :: forall lock payload
    . String

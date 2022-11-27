@@ -31,7 +31,6 @@ small_
   -> Domable lock payload
 small_ = small empty
 
-
 small__
   :: forall lock payload
    . String

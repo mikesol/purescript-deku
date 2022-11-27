@@ -31,7 +31,6 @@ img_
   -> Domable lock payload
 img_ = img empty
 
-
 img__
   :: forall lock payload
    . String

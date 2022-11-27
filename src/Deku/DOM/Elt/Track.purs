@@ -31,7 +31,6 @@ track_
   -> Domable lock payload
 track_ = track empty
 
-
 track__
   :: forall lock payload
    . String

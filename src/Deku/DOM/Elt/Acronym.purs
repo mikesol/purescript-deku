@@ -31,7 +31,6 @@ acronym_
   -> Domable lock payload
 acronym_ = acronym empty
 
-
 acronym__
   :: forall lock payload
    . String

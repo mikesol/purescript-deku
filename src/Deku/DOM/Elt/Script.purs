@@ -31,7 +31,6 @@ script_
   -> Domable lock payload
 script_ = script empty
 
-
 script__
   :: forall lock payload
    . String

@@ -31,7 +31,6 @@ caption_
   -> Domable lock payload
 caption_ = caption empty
 
-
 caption__
   :: forall lock payload
    . String

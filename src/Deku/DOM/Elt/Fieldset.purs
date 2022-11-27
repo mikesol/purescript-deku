@@ -31,7 +31,6 @@ fieldset_
   -> Domable lock payload
 fieldset_ = fieldset empty
 
-
 fieldset__
   :: forall lock payload
    . String

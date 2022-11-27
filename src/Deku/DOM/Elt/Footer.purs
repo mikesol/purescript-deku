@@ -31,7 +31,6 @@ footer_
   -> Domable lock payload
 footer_ = footer empty
 
-
 footer__
   :: forall lock payload
    . String

@@ -31,7 +31,6 @@ h2_
   -> Domable lock payload
 h2_ = h2 empty
 
-
 h2__
   :: forall lock payload
    . String

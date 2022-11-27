@@ -31,7 +31,6 @@ frameset_
   -> Domable lock payload
 frameset_ = frameset empty
 
-
 frameset__
   :: forall lock payload
    . String

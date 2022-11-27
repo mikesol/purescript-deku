@@ -31,7 +31,6 @@ blockquote_
   -> Domable lock payload
 blockquote_ = blockquote empty
 
-
 blockquote__
   :: forall lock payload
    . String

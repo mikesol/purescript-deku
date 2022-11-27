@@ -31,7 +31,6 @@ section_
   -> Domable lock payload
 section_ = section empty
 
-
 section__
   :: forall lock payload
    . String

@@ -31,7 +31,6 @@ output_
   -> Domable lock payload
 output_ = output empty
 
-
 output__
   :: forall lock payload
    . String

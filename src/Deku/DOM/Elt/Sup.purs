@@ -31,7 +31,6 @@ sup_
   -> Domable lock payload
 sup_ = sup empty
 
-
 sup__
   :: forall lock payload
    . String

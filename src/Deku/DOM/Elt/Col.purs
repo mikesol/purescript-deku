@@ -31,7 +31,6 @@ col_
   -> Domable lock payload
 col_ = col empty
 
-
 col__
   :: forall lock payload
    . String

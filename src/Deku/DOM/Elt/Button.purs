@@ -31,7 +31,6 @@ button_
   -> Domable lock payload
 button_ = button empty
 
-
 button__
   :: forall lock payload
    . String

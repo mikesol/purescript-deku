@@ -31,7 +31,6 @@ abbr_
   -> Domable lock payload
 abbr_ = abbr empty
 
-
 abbr__
   :: forall lock payload
    . String

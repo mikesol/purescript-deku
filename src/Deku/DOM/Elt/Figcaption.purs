@@ -31,7 +31,6 @@ figcaption_
   -> Domable lock payload
 figcaption_ = figcaption empty
 
-
 figcaption__
   :: forall lock payload
    . String

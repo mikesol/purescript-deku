@@ -31,7 +31,6 @@ header_
   -> Domable lock payload
 header_ = header empty
 
-
 header__
   :: forall lock payload
    . String

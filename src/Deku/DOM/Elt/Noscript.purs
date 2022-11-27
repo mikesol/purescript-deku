@@ -31,7 +31,6 @@ noscript_
   -> Domable lock payload
 noscript_ = noscript empty
 
-
 noscript__
   :: forall lock payload
    . String

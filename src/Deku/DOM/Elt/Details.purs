@@ -31,7 +31,6 @@ details_
   -> Domable lock payload
 details_ = details empty
 
-
 details__
   :: forall lock payload
    . String

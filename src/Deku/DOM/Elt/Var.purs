@@ -31,7 +31,6 @@ var_
   -> Domable lock payload
 var_ = var empty
 
-
 var__
   :: forall lock payload
    . String

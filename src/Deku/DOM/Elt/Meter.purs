@@ -31,7 +31,6 @@ meter_
   -> Domable lock payload
 meter_ = meter empty
 
-
 meter__
   :: forall lock payload
    . String

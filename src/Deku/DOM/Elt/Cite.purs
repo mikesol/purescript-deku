@@ -31,7 +31,6 @@ cite_
   -> Domable lock payload
 cite_ = cite empty
 
-
 cite__
   :: forall lock payload
    . String

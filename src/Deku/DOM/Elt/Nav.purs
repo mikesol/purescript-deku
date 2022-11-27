@@ -31,7 +31,6 @@ nav_
   -> Domable lock payload
 nav_ = nav empty
 
-
 nav__
   :: forall lock payload
    . String

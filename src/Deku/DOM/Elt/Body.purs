@@ -31,7 +31,6 @@ body_
   -> Domable lock payload
 body_ = body empty
 
-
 body__
   :: forall lock payload
    . String

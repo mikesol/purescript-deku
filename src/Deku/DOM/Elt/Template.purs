@@ -31,7 +31,6 @@ template_
   -> Domable lock payload
 template_ = template empty
 
-
 template__
   :: forall lock payload
    . String

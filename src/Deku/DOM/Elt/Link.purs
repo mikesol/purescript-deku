@@ -31,7 +31,6 @@ link_
   -> Domable lock payload
 link_ = link empty
 
-
 link__
   :: forall lock payload
    . String

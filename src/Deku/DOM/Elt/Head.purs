@@ -31,7 +31,6 @@ head_
   -> Domable lock payload
 head_ = head empty
 
-
 head__
   :: forall lock payload
    . String

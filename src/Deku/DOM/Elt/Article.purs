@@ -31,7 +31,6 @@ article_
   -> Domable lock payload
 article_ = article empty
 
-
 article__
   :: forall lock payload
    . String

@@ -31,7 +31,6 @@ source_
   -> Domable lock payload
 source_ = source empty
 
-
 source__
   :: forall lock payload
    . String

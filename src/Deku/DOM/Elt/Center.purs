@@ -31,7 +31,6 @@ center_
   -> Domable lock payload
 center_ = center empty
 
-
 center__
   :: forall lock payload
    . String

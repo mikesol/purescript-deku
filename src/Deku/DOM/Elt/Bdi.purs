@@ -31,7 +31,6 @@ bdi_
   -> Domable lock payload
 bdi_ = bdi empty
 
-
 bdi__
   :: forall lock payload
    . String

@@ -31,7 +31,6 @@ wbr_
   -> Domable lock payload
 wbr_ = wbr empty
 
-
 wbr__
   :: forall lock payload
    . String

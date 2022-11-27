@@ -31,7 +31,6 @@ dialog_
   -> Domable lock payload
 dialog_ = dialog empty
 
-
 dialog__
   :: forall lock payload
    . String

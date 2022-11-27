@@ -31,7 +31,6 @@ form_
   -> Domable lock payload
 form_ = form empty
 
-
 form__
   :: forall lock payload
    . String

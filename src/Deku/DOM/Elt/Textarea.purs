@@ -31,7 +31,6 @@ textarea_
   -> Domable lock payload
 textarea_ = textarea empty
 
-
 textarea__
   :: forall lock payload
    . String

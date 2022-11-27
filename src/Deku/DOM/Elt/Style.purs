@@ -31,7 +31,6 @@ style_
   -> Domable lock payload
 style_ = style empty
 
-
 style__
   :: forall lock payload
    . String

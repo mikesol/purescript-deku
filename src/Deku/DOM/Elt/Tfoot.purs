@@ -31,7 +31,6 @@ tfoot_
   -> Domable lock payload
 tfoot_ = tfoot empty
 
-
 tfoot__
   :: forall lock payload
    . String

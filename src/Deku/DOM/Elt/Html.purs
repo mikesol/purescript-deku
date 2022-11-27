@@ -31,7 +31,6 @@ html_
   -> Domable lock payload
 html_ = html empty
 
-
 html__
   :: forall lock payload
    . String

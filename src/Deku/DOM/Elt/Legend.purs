@@ -31,7 +31,6 @@ legend_
   -> Domable lock payload
 legend_ = legend empty
 
-
 legend__
   :: forall lock payload
    . String

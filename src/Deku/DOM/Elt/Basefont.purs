@@ -31,7 +31,6 @@ basefont_
   -> Domable lock payload
 basefont_ = basefont empty
 
-
 basefont__
   :: forall lock payload
    . String

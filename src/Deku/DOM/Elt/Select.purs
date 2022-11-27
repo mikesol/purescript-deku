@@ -31,7 +31,6 @@ select_
   -> Domable lock payload
 select_ = select empty
 
-
 select__
   :: forall lock payload
    . String

@@ -31,7 +31,6 @@ xdata_
   -> Domable lock payload
 xdata_ = xdata empty
 
-
 xdata__
   :: forall lock payload
    . String

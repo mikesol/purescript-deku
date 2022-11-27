@@ -31,7 +31,6 @@ area_
   -> Domable lock payload
 area_ = area empty
 
-
 area__
   :: forall lock payload
    . String

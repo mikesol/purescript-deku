@@ -31,7 +31,6 @@ dir_
   -> Domable lock payload
 dir_ = dir empty
 
-
 dir__
   :: forall lock payload
    . String

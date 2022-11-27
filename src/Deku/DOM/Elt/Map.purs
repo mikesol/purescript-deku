@@ -31,7 +31,6 @@ map_
   -> Domable lock payload
 map_ = map empty
 
-
 map__
   :: forall lock payload
    . String

@@ -31,7 +31,6 @@ main_
   -> Domable lock payload
 main_ = main empty
 
-
 main__
   :: forall lock payload
    . String

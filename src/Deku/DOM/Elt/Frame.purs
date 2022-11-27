@@ -31,7 +31,6 @@ frame_
   -> Domable lock payload
 frame_ = frame empty
 
-
 frame__
   :: forall lock payload
    . String

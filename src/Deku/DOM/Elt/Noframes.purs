@@ -31,7 +31,6 @@ noframes_
   -> Domable lock payload
 noframes_ = noframes empty
 
-
 noframes__
   :: forall lock payload
    . String

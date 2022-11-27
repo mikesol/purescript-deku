@@ -31,7 +31,6 @@ kbd_
   -> Domable lock payload
 kbd_ = kbd empty
 
-
 kbd__
   :: forall lock payload
    . String

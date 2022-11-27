@@ -31,7 +31,6 @@ address_
   -> Domable lock payload
 address_ = address empty
 
-
 address__
   :: forall lock payload
    . String

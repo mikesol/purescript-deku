@@ -31,7 +31,6 @@ figure_
   -> Domable lock payload
 figure_ = figure empty
 
-
 figure__
   :: forall lock payload
    . String
