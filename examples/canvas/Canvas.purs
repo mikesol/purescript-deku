@@ -51,7 +51,9 @@ myCanvas = D.canvas
 
 scene :: forall lock payload. Domable lock payload
 scene = (Proxy :: _ "<div><h1>hi</h1>~svg~ ~canvas~</div>") ~~
-  { svg: mySVG :: Domable lock payload, canvas: myCanvas :: Domable lock payload }
+  { svg: mySVG :: Domable lock payload
+  , canvas: myCanvas :: Domable lock payload
+  }
 
 foreign import setBodyAs :: String -> Effect Unit
 
