@@ -4,7 +4,7 @@ import Bolson.Core (Entity(..), fixed)
 import Control.Plus (empty)
 import Data.Array (mapWithIndex)
 import Deku.Attribute (Attribute)
-import Deku.Control (elementify)
+import Deku.Control as DC
 import Deku.Core (Domable(..), Domable', unsafeSetPos)
 import FRP.Event (Event)
 import Safe.Coerce (coerce)
@@ -18,7 +18,7 @@ animateMotion
   -> Domable lock payload
 animateMotion attributes kids = Domable
   ( Element'
-      ( elementify "animateMotion" attributes
+      ( DC.elementify "animateMotion" attributes
           ( (coerce :: Domable' lock payload -> Domable lock payload)
               (fixed (coerce (mapWithIndex unsafeSetPos kids)))
           )
@@ -30,3 +30,9 @@ animateMotion_
    . Array (Domable lock payload)
   -> Domable lock payload
 animateMotion_ = animateMotion empty
+
+animateMotion__
+  :: forall lock payload
+   . String
+  -> Domable lock payload
+animateMotion__ t = animateMotion_ [ DC.text_ t ]

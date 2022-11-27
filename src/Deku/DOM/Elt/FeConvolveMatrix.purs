@@ -4,7 +4,7 @@ import Bolson.Core (Entity(..), fixed)
 import Control.Plus (empty)
 import Data.Array (mapWithIndex)
 import Deku.Attribute (Attribute)
-import Deku.Control (elementify)
+import Deku.Control as DC
 import Deku.Core (Domable(..), Domable', unsafeSetPos)
 import FRP.Event (Event)
 import Safe.Coerce (coerce)
@@ -18,7 +18,7 @@ feConvolveMatrix
   -> Domable lock payload
 feConvolveMatrix attributes kids = Domable
   ( Element'
-      ( elementify "feConvolveMatrix" attributes
+      ( DC.elementify "feConvolveMatrix" attributes
           ( (coerce :: Domable' lock payload -> Domable lock payload)
               (fixed (coerce (mapWithIndex unsafeSetPos kids)))
           )
@@ -30,3 +30,9 @@ feConvolveMatrix_
    . Array (Domable lock payload)
   -> Domable lock payload
 feConvolveMatrix_ = feConvolveMatrix empty
+
+feConvolveMatrix__
+  :: forall lock payload
+   . String
+  -> Domable lock payload
+feConvolveMatrix__ t = feConvolveMatrix_ [ DC.text_ t ]

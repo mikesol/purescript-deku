@@ -4,7 +4,7 @@ import Bolson.Core (Entity(..), fixed)
 import Control.Plus (empty)
 import Data.Array (mapWithIndex)
 import Deku.Attribute (Attribute)
-import Deku.Control (elementify)
+import Deku.Control as DC
 import Deku.Core (Domable(..), Domable', unsafeSetPos)
 import FRP.Event (Event)
 import Safe.Coerce (coerce)
@@ -18,7 +18,7 @@ figcaption
   -> Domable lock payload
 figcaption attributes kids = Domable
   ( Element'
-      ( elementify "figcaption" attributes
+      ( DC.elementify "figcaption" attributes
           ( (coerce :: Domable' lock payload -> Domable lock payload)
               (fixed (coerce (mapWithIndex unsafeSetPos kids)))
           )
@@ -31,3 +31,9 @@ figcaption_
   -> Domable lock payload
 figcaption_ = figcaption empty
 
+
+figcaption__
+  :: forall lock payload
+   . String
+  -> Domable lock payload
+figcaption__ t = figcaption_ [ DC.text_ t ]
