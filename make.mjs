@@ -5916,13 +5916,13 @@ var portalComplexComplex2 = /* @__PURE__ */ portalComplexComplex()()();
 var unsafeSetText = function(v) {
   return function(id2) {
     return function(txt) {
-      return map10(function($130) {
+      return map10(function($132) {
         return v.setText(function(v1) {
           return {
             id: id2,
             text: v1
           };
-        }($130));
+        }($132));
       })(txt);
     };
   };
@@ -5930,7 +5930,7 @@ var unsafeSetText = function(v) {
 var unsafeSetAttribute = function(v) {
   return function(id2) {
     return function(atts) {
-      return map10(function($131) {
+      return map10(function($133) {
         return function(v1) {
           if (v1.value instanceof Prop$prime) {
             return v.setProp({
@@ -5948,8 +5948,8 @@ var unsafeSetAttribute = function(v) {
             });
           }
           ;
-          throw new Error("Failed pattern match at Deku.Control (line 65, column 26 - line 67, column 45): " + [v1.value.constructor.name]);
-        }(unsafeUnAttribute($131));
+          throw new Error("Failed pattern match at Deku.Control (line 66, column 26 - line 68, column 45): " + [v1.value.constructor.name]);
+        }(unsafeUnAttribute($133));
       })(atts);
     };
   };
@@ -6002,9 +6002,9 @@ var switcher = function(f) {
     return dyn2(keepLatest4(memoize(counter(event))(function(cenv) {
       return map10(function(v) {
         return oneOf4([map10($$const(Remove.value))(filter6(function() {
-          var $132 = eq3(v.value1 + 1 | 0);
-          return function($133) {
-            return $132(snd($133));
+          var $134 = eq3(v.value1 + 1 | 0);
+          return function($135) {
+            return $134(snd($135));
           };
         }())(cenv)), pure8(insert_(coerce4(f(v.value0))))]);
       })(cenv);
@@ -6023,10 +6023,10 @@ var portalFlatten2 = function() {
         };
       };
     },
-    ids: function($134) {
+    ids: function($136) {
       return function(v) {
         return v.ids;
-      }(unwrap4($134));
+      }(unwrap4($136));
     },
     disconnectElement: function(v) {
       return function(v1) {
@@ -6114,10 +6114,10 @@ var portal = function() {
             };
           };
         },
-        deleteFromCache: function($137) {
+        deleteFromCache: function($139) {
           return function(v) {
             return v.deleteFromCache;
-          }(unwrap4($137));
+          }(unwrap4($139));
         }
       })(map14(unwrap4)(a2))(lcmap3(map14(function(v) {
         return v(unit);
