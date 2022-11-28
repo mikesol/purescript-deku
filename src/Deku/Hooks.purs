@@ -167,9 +167,9 @@ useHot' f = Domable $ envy $ makeLemmingEventO
         push'' i = liftST do
           _ <- writeVal i
           push i
-        push' i = do
-          _ <- writeVal i
-          push i
+        -- push' i = do
+        --   _ <- writeVal i
+        --   push i
       let
         event' = makeLemmingEventO
           ( mkSTFn2 \_ k' -> do
@@ -178,7 +178,7 @@ useHot' f = Domable $ envy $ makeLemmingEventO
               runSTFn2 s event k'
           )
       runSTFn1 k ((\(Domable x) -> x) (f (push'' /\ event')))
-      runSTFn2 s event (mkSTFn1 \v -> writeVal v *> push' v)
+      runSTFn2 s event (mkSTFn1 \v ->void $ writeVal v)
   )
 
 useHot
@@ -192,9 +192,9 @@ useHot a f = Domable $ envy $ makeLemmingEventO
         push'' i = liftST do
           _ <- writeVal i
           push i
-        push' i = do
-          _ <- writeVal i
-          push i
+        -- push' i = do
+        --   _ <- writeVal i
+        --   push i
       let
         event' = makeLemmingEventO
           ( mkSTFn2 \_ k' -> do
@@ -203,5 +203,5 @@ useHot a f = Domable $ envy $ makeLemmingEventO
               runSTFn2 s event k'
           )
       runSTFn1 k ((\(Domable x) -> x) (f (push'' /\ event')))
-      runSTFn2 s event (mkSTFn1 \v -> writeVal v *> push' v)
+      runSTFn2 s event (mkSTFn1 \v -> void $ writeVal v)
   )
