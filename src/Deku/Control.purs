@@ -9,6 +9,9 @@ module Deku.Control
   , blank
   , ezDyn
   , switcher
+  , switcherFlipped
+  , (<$~>)
+  , (<#~>)
   ) where
 
 import Prelude
@@ -277,6 +280,17 @@ switcher f event = dyn $ keepLatest
   counter = mapAccum fn 0
     where
     fn a b = (a + 1) /\ (b /\ a)
+
+infixl 4 switcher as <$~>
+
+switcherFlipped
+  :: forall a lock payload
+   . Event a
+  -> (a -> Domable lock payload)
+  -> Domable lock payload
+switcherFlipped = flip switcher
+
+infixl 1 switcherFlipped as <#~>
 
 ezDyn
   :: forall lock payload
