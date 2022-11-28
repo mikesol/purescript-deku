@@ -1,11 +1,14 @@
 module Deku.Attributes
-  ( klass
+  ( href
+  , href_
+  , id
+  , id_
+  , klass
   , klass_
   , style
   , style_
-  , id
-  , id_
-  ) where
+  )
+  where
 
 import Prelude
 
@@ -42,3 +45,13 @@ id e = e <#> (D.Id := _)
 
 id_ :: forall t47. Attr t47 D.Id String => String -> Event (Attribute t47)
 id_ = id <<< pure
+
+href
+  :: forall e
+   . Attr e D.Href String
+  => Event String
+  -> Event (Attribute e)
+href e = e <#> (D.Href := _)
+
+href_ :: forall t47. Attr t47 D.Href String => String -> Event (Attribute t47)
+href_ = href <<< pure
