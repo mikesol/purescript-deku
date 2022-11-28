@@ -6,6 +6,7 @@ module Deku.Hooks
   , useMemoized
   , useMailboxed
   , useHot
+  , useHot'
   , class InitializeEvents
   , initializeEvents'
   , useDyn
@@ -20,13 +21,13 @@ import Control.Monad.ST.Class (liftST)
 import Control.Monad.ST.Internal as STRef
 import Control.Monad.ST.Uncurried (mkSTFn1, mkSTFn2, runSTFn1, runSTFn2)
 import Data.Foldable (for_)
-import Deku.Do as Deku
-import Data.Maybe (Maybe(..))
+import Data.Maybe (Maybe(..), fromMaybe)
 import Data.Profunctor (lcmap)
 import Data.Symbol (class IsSymbol)
 import Data.Tuple (curry)
 import Data.Tuple.Nested (type (/\), (/\))
 import Deku.Core (Domable(..), Node, bus, bussedUncurried, insert, remove, sendToPos, vbussedUncurried)
+import Deku.Do as Deku
 import Effect (Effect)
 import FRP.Event (Event, Subscriber(..), createPure, keepLatest, mailboxed, makeLemmingEventO, memoize)
 import FRP.Event.VBus (class VBus, V)
@@ -155,9 +156,9 @@ useDyn_
   -> Event (Child Int (Node lock payload) lock)
 useDyn_ = useDyn 0
 
-useHot
+useHot'
   :: forall l p a. ((a -> Effect Unit) /\ Event a -> Domable l p) -> Domable l p
-useHot f = Domable $ envy $ makeLemmingEventO
+useHot' f = Domable $ envy $ makeLemmingEventO
   ( mkSTFn2 \(Subscriber s) k -> do
       { push, event } <- createPure
       current <- STRef.new Nothing
@@ -174,6 +175,31 @@ useHot f = Domable $ envy $ makeLemmingEventO
           ( mkSTFn2 \_ k' -> do
               val <- STRef.read current
               for_ val \x -> runSTFn1 k' x
+              runSTFn2 s event k'
+          )
+      runSTFn1 k ((\(Domable x) -> x) (f (push'' /\ event')))
+      runSTFn2 s event (mkSTFn1 \v -> writeVal v *> push' v)
+  )
+
+useHot
+  :: forall l p a. a -> ((a -> Effect Unit) /\ Event a -> Domable l p) -> Domable l p
+useHot a f = Domable $ envy $ makeLemmingEventO
+  ( mkSTFn2 \(Subscriber s) k -> do
+      { push, event } <- createPure
+      current <- STRef.new Nothing
+      let writeVal v = STRef.write (Just v) current
+      let
+        push'' i = liftST do
+          _ <- writeVal i
+          push i
+        push' i = do
+          _ <- writeVal i
+          push i
+      let
+        event' = makeLemmingEventO
+          ( mkSTFn2 \_ k' -> do
+              val <- STRef.read current
+              runSTFn1 k' (fromMaybe a val)
               runSTFn2 s event k'
           )
       runSTFn1 k ((\(Domable x) -> x) (f (push'' /\ event')))
