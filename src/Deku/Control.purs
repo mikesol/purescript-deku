@@ -1,17 +1,18 @@
 module Deku.Control
-  ( elementify
-  , text
-  , text_
+  ( (<#~>)
+  , (<$~>)
+  , blank
   , deku
+  , elementify
+  , ezDyn
   , globalPortal
   , globalPortal1
+  , guard
   , portal
-  , blank
-  , ezDyn
   , switcher
   , switcherFlipped
-  , (<$~>)
-  , (<#~>)
+  , text
+  , text_
   ) where
 
 import Prelude
@@ -291,6 +292,15 @@ switcherFlipped
 switcherFlipped = flip switcher
 
 infixl 1 switcherFlipped as <#~>
+
+guard
+  :: forall lock payload
+   . Event Boolean
+  -> Domable lock payload
+  -> Domable lock payload
+guard eb d = switcher
+  (if _ then d else blank)
+  eb
 
 ezDyn
   :: forall lock payload
