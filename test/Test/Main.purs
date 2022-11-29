@@ -11,13 +11,13 @@ import Data.Foldable (intercalate, oneOf, oneOfMap)
 import Data.Tuple.Nested ((/\))
 import Deku.Attribute ((!:=))
 import Deku.Attributes (id_)
-import Deku.Control (blank, globalPortal1, switcher, text_)
+import Deku.Control (blank, globalPortal1, switcher, text, text_)
 import Deku.Core (Domable, Nut, dyn, fixed, insert, insert_, sendToPos)
 import Deku.DOM as D
-import Deku.Hooks (useMemoized, useState, useState')
 import Deku.Do as Deku
+import Deku.Hooks (useMemoized, useState, useState')
 import Deku.Interpret (FFIDOMSnapshot, Instruction)
-import Deku.Lifecycle (onDismount, onMount)
+import Deku.Lifecycle (onDidMount, onDismount, onWillMount)
 import Deku.Listeners (click_)
 import Deku.Pursx ((~~))
 import Deku.Toplevel (Template(..), hydrate', runInBody', runSSR)
@@ -262,7 +262,17 @@ lifecycle = Deku.do
     , D.span (D.Id !:= "hack") []
     , item # switcher case _ of
         0 -> D.span_ [ text_ "a" ]
-        1 -> onMount (hackyInnerHTML "hack" "hello") $ D.span_ [ text_ "b" ]
+        1 -> onWillMount (hackyInnerHTML "hack" "hello") $ D.span_ [ text_ "b" ]
         _ -> onDismount (hackyInnerHTML "hack" "goodbye") $ D.span_
           [ text_ "c" ]
     ]
+
+lifecycleWillAndDidMount :: Nut
+lifecycleWillAndDidMount = D.div_
+  [ Deku.do
+      setInt /\ int <- useState'
+      onWillMount (setInt 42) (D.span (id_ "span1") [ text (show <$> int) ])
+  , Deku.do
+      setInt /\ int <- useState'
+      onDidMount (setInt 42) (D.span (id_ "span2") [ text (show <$> int) ])
+  ]
