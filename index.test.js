@@ -186,5 +186,11 @@ describe('deku', () => {
     $('#home-btn').trigger('click')
     expect($('#hack').text()).toBe('goodbye');
   }));
+
+  doTest('lifecycle has a difference before and after mounting', (f) => f(tests.lifecycleWillAndDidMount, () => {
+    const $ = require('jquery');
+    expect($('#span1').text()).toBe('');
+    expect($('#span2').text()).toBe('42');
+  }));
 });
 
