@@ -3,6 +3,7 @@ module Deku.Hooks
   , useState
   , useStates'
   , useStates
+  , useMemoized'
   , useMemoized
   , useMailboxed
   , useHot
@@ -47,13 +48,21 @@ useState'
 useState' = bussedUncurried
 
 useMemoized
+  :: forall lock payload a
+   . (Event a)
+  -> (Event a -> Domable lock payload)
+  -> Domable lock payload
+useMemoized e f1 = Domable $ envy
+  (coerce (memoize e f1))
+
+useMemoized'
   :: forall lock payload a b
    . (Event a -> Event b)
   -> ( ((a -> Effect Unit) /\ Event b)
        -> Domable lock payload
      )
   -> Domable lock payload
-useMemoized f0 f1 = bussedUncurried \(a /\ b) -> Domable $ envy
+useMemoized' f0 f1 = bussedUncurried \(a /\ b) -> Domable $ envy
   (coerce (memoize (f0 b) \c -> f1 (a /\ c)))
 
 useState
@@ -63,7 +72,10 @@ useState
        -> Domable lock payload
      )
   -> Domable lock payload
-useState a = useMemoized (pure a <|> _)
+useState a f = Deku.do
+  x /\ y <- useState'
+  m <- useMemoized (y <|> pure a)
+  f (x /\ m)
 
 useStates'
   :: forall lock payload rbus bus push event
@@ -167,9 +179,9 @@ useHot' f = Domable $ envy $ makeLemmingEventO
         push'' i = liftST do
           _ <- writeVal i
           push i
-        -- push' i = do
-        --   _ <- writeVal i
-        --   push i
+      -- push' i = do
+      --   _ <- writeVal i
+      --   push i
       let
         event' = makeLemmingEventO
           ( mkSTFn2 \_ k' -> do
@@ -178,11 +190,14 @@ useHot' f = Domable $ envy $ makeLemmingEventO
               runSTFn2 s event k'
           )
       runSTFn1 k ((\(Domable x) -> x) (f (push'' /\ event')))
-      runSTFn2 s event (mkSTFn1 \v ->void $ writeVal v)
+      runSTFn2 s event (mkSTFn1 \v -> void $ writeVal v)
   )
 
 useHot
-  :: forall l p a. a -> ((a -> Effect Unit) /\ Event a -> Domable l p) -> Domable l p
+  :: forall l p a
+   . a
+  -> ((a -> Effect Unit) /\ Event a -> Domable l p)
+  -> Domable l p
 useHot a f = Domable $ envy $ makeLemmingEventO
   ( mkSTFn2 \(Subscriber s) k -> do
       { push, event } <- createPure
@@ -192,9 +207,9 @@ useHot a f = Domable $ envy $ makeLemmingEventO
         push'' i = liftST do
           _ <- writeVal i
           push i
-        -- push' i = do
-        --   _ <- writeVal i
-        --   push i
+      -- push' i = do
+      --   _ <- writeVal i
+      --   push i
       let
         event' = makeLemmingEventO
           ( mkSTFn2 \_ k' -> do

@@ -219,7 +219,8 @@ portalsCompose = Deku.do
   let
     counter :: forall a. Event a -> Event Int
     counter event = fold (\a _ -> a + 1) 0 event
-  setItem /\ item <- useMemoized (\a -> counter a <|> pure 0)
+  setItem /\ item' <- useState'
+  item <- useMemoized (counter item' <|> pure 0)
   globalPortal1 (D.div_ [ text_ "a", D.span_ [ text_ "b" ], text_ "c" ]) \e ->
     do
       let

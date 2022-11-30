@@ -14,8 +14,8 @@ import Deku.Attribute ((:=))
 import Deku.Control (text_)
 import Deku.Core (Domable, dyn, bussedUncurried, insert_, remove)
 import Deku.DOM as D
-import Deku.Hooks (useMailboxed, useMemoized)
 import Deku.Do as Deku
+import Deku.Hooks (useMailboxed, useMemoized, useMemoized', useState')
 import Deku.Listeners (click)
 import Deku.Toplevel (runInElement')
 import Effect (Effect)
@@ -25,7 +25,6 @@ import Halogen (liftEffect)
 import Halogen as H
 import Halogen.HTML as HH
 import Halogen.HTML.Properties as HP
-
 import Performance.Test.Todo.Shared as Shared
 import Type.Proxy (Proxy(..))
 import Web.HTML.HTMLElement (toElement)
@@ -69,10 +68,11 @@ containerD initialState = Deku.do
   setCompleteStatus /\ completeStatus <- useMailboxed
   setRename /\ rename <- useMailboxed
   setDelete /\ delete <- useMailboxed
-  setState /\ state <- useMemoized \state' -> do
+  setState /\ state' <- useState'
+  state <- useMemoized do
     let istate = initialState
     (fold (#) istate state') <|> pure istate
-  setUndo /\ undos <- useMemoized \undo' -> do
+  setUndo /\ undos <- useMemoized' \undo' -> do
     let initialUndos = map (_.id >>> UndoAdd) (reverse initialState.todos)
     ( pure initialUndos <|> map snd
         ( fold
