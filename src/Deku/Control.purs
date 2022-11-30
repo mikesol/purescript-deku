@@ -9,6 +9,7 @@ module Deku.Control
   , globalPortal1
   , guard
   , portal
+  , portal1
   , switcher
   , switcherFlipped
   , text
@@ -26,11 +27,12 @@ import Control.Plus (empty)
 import Data.FastVect.FastVect (Vect, singleton, index)
 import Data.Filterable (filter)
 import Data.Foldable (oneOf)
+import Data.Lens (_1, over)
 import Data.Maybe (Maybe(..), maybe)
 import Data.Newtype (class Newtype, unwrap, wrap)
 import Data.Profunctor (dimap, lcmap)
-import Data.Tuple (snd)
-import Data.Tuple.Nested ((/\))
+import Data.Tuple (curry, snd)
+import Data.Tuple.Nested (type (/\), (/\))
 import Deku.Attribute (Attribute, AttributeValue(..), unsafeUnAttribute)
 import Deku.Core (DOMInterpret(..), Domable(..), Node(..), Nut, bus, dyn, insert_, remove, sendToPos)
 import Effect (Effect)
@@ -176,13 +178,26 @@ portalFlatten =
   , toElt: \(Node e) -> Element e
   }
 
+portal1
+  :: forall lock payload
+   . Domable lock payload
+  -> ( forall lockfoo
+        . ( (Domable lockfoo payload)
+              /\ (Domable lock payload -> Domable lockfoo payload)
+          )
+       -> Domable lockfoo payload
+     )
+  -> Domable lock payload
+portal1 i f = portal (singleton i) (lcmap (over _1 (index (Proxy :: _ 0))) f)
+
 portal
   :: forall n lock0 payload
    . Compare n Neg1 GT
   => Vect n (Domable lock0 payload)
   -> ( forall lockfoo
-        . Vect n (Domable lockfoo payload)
-       -> (Domable lock0 payload -> Domable lockfoo payload)
+        . ( Vect n (Domable lockfoo payload)
+              /\ (Domable lock0 payload -> Domable lockfoo payload)
+          )
        -> Domable lockfoo payload
      )
   -> Domable lock0 payload
@@ -196,7 +211,7 @@ portal a b = Domable $ Bolson.portalComplexComplex
   , deleteFromCache: unwrap >>> _.deleteFromCache
   }
   (map unwrap a)
-  (lcmap (map (_ $ unit)) (coerce b))
+  (lcmap (map (_ $ unit)) (coerce (curry b)))
 
 text
   :: forall lock payload

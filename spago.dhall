@@ -18,6 +18,7 @@
   , "ordered-collections"
   , "prelude"
   , "profunctor"
+  , "profunctor-lenses"
   , "quickcheck"
   , "record"
   , "safe-coerce"
