@@ -819,10 +819,15 @@ export const disconnectElement_ = (a) => (state) => () => {
       var y = x.nextSibling;
       dummy.appendChild(x);
       x = y;
+      // iterate up until last beacon
       while (x && x !== state.units[ptr].endBeacon) {
         y = x.nextSibling;
         dummy.appendChild(x);
         x = y;
+      }
+      // account for the last beacon
+      if (x === state.units[ptr].endBeacon) {
+        dummy.appendChild(x);
       }
     }
   }
