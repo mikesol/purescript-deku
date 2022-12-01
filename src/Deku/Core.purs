@@ -14,6 +14,7 @@ module Deku.Core
   , RemoveDynBeacon
   , Node(..)
   , Nut
+  , NutWith
   , SendToPos
   , SetCb
   , SetProp
@@ -63,6 +64,7 @@ import Type.Proxy (Proxy)
 import Web.DOM as Web.DOM
 
 type Nut = forall lock payload. Domable lock payload
+type NutWith env = forall lock payload. env -> Domable lock payload
 
 newtype ANut = ANut Nut
 
