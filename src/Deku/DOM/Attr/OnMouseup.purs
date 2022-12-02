@@ -2,7 +2,8 @@ module Deku.DOM.Attr.OnMouseup where
 
 import Prelude
 import Effect (Effect)
-import Deku.Attribute (class Attr, Cb(..), cb', unsafeAttribute)
+import Deku.Attribute (class Attr, Attribute, Cb(..), cb', unsafeAttribute)
+import FRP.Event (Event)
 
 data OnMouseup = OnMouseup
 
@@ -16,3 +17,5 @@ instance Attr anything OnMouseup (Effect Unit) where
 instance Attr anything OnMouseup (Effect Boolean) where
   attr OnMouseup value = unsafeAttribute
     { key: "mouseup", value: cb' (Cb (const value)) }
+
+type OnMouseupEffect = forall element. Attr element OnMouseup (Effect Unit) => Event (Attribute element)

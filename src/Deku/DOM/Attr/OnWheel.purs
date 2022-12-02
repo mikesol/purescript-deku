@@ -2,7 +2,8 @@ module Deku.DOM.Attr.OnWheel where
 
 import Prelude
 import Effect (Effect)
-import Deku.Attribute (class Attr, Cb(..), cb', unsafeAttribute)
+import Deku.Attribute (class Attr, Attribute, Cb(..), cb', unsafeAttribute)
+import FRP.Event (Event)
 
 data OnWheel = OnWheel
 
@@ -16,3 +17,5 @@ instance Attr anything OnWheel (Effect Unit) where
 instance Attr anything OnWheel (Effect Boolean) where
   attr OnWheel value = unsafeAttribute
     { key: "wheel", value: cb' (Cb (const value)) }
+
+type OnWheelEffect = forall element. Attr element OnWheel (Effect Unit) => Event (Attribute element)

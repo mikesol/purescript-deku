@@ -2,7 +2,8 @@ module Deku.DOM.Attr.OnPointerleave where
 
 import Prelude
 import Effect (Effect)
-import Deku.Attribute (class Attr, Cb(..), cb', unsafeAttribute)
+import Deku.Attribute (class Attr, Attribute, Cb(..), cb', unsafeAttribute)
+import FRP.Event (Event)
 
 data OnPointerleave = OnPointerleave
 
@@ -17,3 +18,5 @@ instance Attr anything OnPointerleave (Effect Unit) where
 instance Attr anything OnPointerleave (Effect Boolean) where
   attr OnPointerleave value = unsafeAttribute
     { key: "pointerleave", value: cb' (Cb (const value)) }
+
+type OnPointerleaveEffect = forall element. Attr element OnPointerleave (Effect Unit) => Event (Attribute element)

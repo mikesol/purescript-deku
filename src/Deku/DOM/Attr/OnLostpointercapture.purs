@@ -2,7 +2,8 @@ module Deku.DOM.Attr.OnLostpointercapture where
 
 import Prelude
 import Effect (Effect)
-import Deku.Attribute (class Attr, Cb(..), cb', unsafeAttribute)
+import Deku.Attribute (class Attr, Attribute, Cb(..), cb', unsafeAttribute)
+import FRP.Event (Event)
 
 data OnLostpointercapture = OnLostpointercapture
 
@@ -17,3 +18,5 @@ instance Attr anything OnLostpointercapture (Effect Unit) where
 instance Attr anything OnLostpointercapture (Effect Boolean) where
   attr OnLostpointercapture value = unsafeAttribute
     { key: "lostpointercapture", value: cb' (Cb (const value)) }
+
+type OnLostpointercaptureEffect = forall element. Attr element OnLostpointercapture (Effect Unit) => Event (Attribute element)

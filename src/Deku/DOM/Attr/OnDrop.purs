@@ -2,7 +2,8 @@ module Deku.DOM.Attr.OnDrop where
 
 import Prelude
 import Effect (Effect)
-import Deku.Attribute (class Attr, Cb(..), cb', unsafeAttribute)
+import Deku.Attribute (class Attr, Attribute, Cb(..), cb', unsafeAttribute)
+import FRP.Event (Event)
 
 data OnDrop = OnDrop
 
@@ -16,3 +17,5 @@ instance Attr anything OnDrop (Effect Unit) where
 instance Attr anything OnDrop (Effect Boolean) where
   attr OnDrop value = unsafeAttribute
     { key: "drop", value: cb' (Cb (const value)) }
+
+type OnDropEffect = forall element. Attr element OnDrop (Effect Unit) => Event (Attribute element)

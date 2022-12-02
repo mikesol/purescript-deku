@@ -2,7 +2,8 @@ module Deku.DOM.Attr.OnSelect where
 
 import Prelude
 import Effect (Effect)
-import Deku.Attribute (class Attr, Cb(..), cb', unsafeAttribute)
+import Deku.Attribute (class Attr, Attribute, Cb(..), cb', unsafeAttribute)
+import FRP.Event (Event)
 
 data OnSelect = OnSelect
 
@@ -16,3 +17,5 @@ instance Attr anything OnSelect (Effect Unit) where
 instance Attr anything OnSelect (Effect Boolean) where
   attr OnSelect value = unsafeAttribute
     { key: "select", value: cb' (Cb (const value)) }
+
+type OnSelectEffect = forall element. Attr element OnSelect (Effect Unit) => Event (Attribute element)

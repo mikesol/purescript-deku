@@ -2,7 +2,8 @@ module Deku.DOM.Attr.OnEnded where
 
 import Prelude
 import Effect (Effect)
-import Deku.Attribute (class Attr, Cb(..), cb', unsafeAttribute)
+import Deku.Attribute (class Attr, Attribute, Cb(..), cb', unsafeAttribute)
+import FRP.Event (Event)
 
 data OnEnded = OnEnded
 
@@ -16,3 +17,5 @@ instance Attr anything OnEnded (Effect Unit) where
 instance Attr anything OnEnded (Effect Boolean) where
   attr OnEnded value = unsafeAttribute
     { key: "ended", value: cb' (Cb (const value)) }
+
+type OnEndedEffect = forall element. Attr element OnEnded (Effect Unit) => Event (Attribute element)

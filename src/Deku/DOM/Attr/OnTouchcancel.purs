@@ -2,7 +2,8 @@ module Deku.DOM.Attr.OnTouchcancel where
 
 import Prelude
 import Effect (Effect)
-import Deku.Attribute (class Attr, Cb(..), cb', unsafeAttribute)
+import Deku.Attribute (class Attr, Attribute, Cb(..), cb', unsafeAttribute)
+import FRP.Event (Event)
 
 data OnTouchcancel = OnTouchcancel
 
@@ -17,3 +18,5 @@ instance Attr anything OnTouchcancel (Effect Unit) where
 instance Attr anything OnTouchcancel (Effect Boolean) where
   attr OnTouchcancel value = unsafeAttribute
     { key: "touchcancel  ", value: cb' (Cb (const value)) }
+
+type OnTouchcancelEffect = forall element. Attr element OnTouchcancel (Effect Unit) => Event (Attribute element)

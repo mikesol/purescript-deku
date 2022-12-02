@@ -7,6 +7,7 @@ import Data.FastVect.FastVect (index, (:))
 import Data.FastVect.FastVect as V
 import Data.Foldable (oneOfMap)
 import Data.Profunctor (lcmap)
+import Data.Tuple.Nested ((/\))
 import Deku.Attribute (cb, (:=))
 import Deku.Control (portal, switcher, text_)
 import Deku.Core (bus, dyn, insert_)
@@ -44,7 +45,7 @@ main = runInBody
                               : V.empty
                           )
                       )
-                      \v _ -> do
+                      \(v /\ _) -> do
                         let
                           p0 = index (Proxy :: _ 0) v
                           p1 = index (Proxy :: _ 1) v
@@ -85,7 +86,7 @@ main = runInBody
                               : V.empty
                           )
                       )
-                      \v _ -> do
+                      \(v /\ _) -> do
                         let
                           p0 = index (Proxy :: _ 0) v
                           p1 = index (Proxy :: _ 1) v
@@ -124,7 +125,7 @@ main = runInBody
                               : V.empty
                           )
                       )
-                      \v _ -> do
+                      \(v /\ _) -> do
                         let
                           p0 = index (Proxy :: _ 0) v
                           ev i = fold (\a _ -> not a) i event

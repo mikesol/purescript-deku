@@ -9,6 +9,7 @@ import Data.FastVect.FastVect as V
 import Data.Int (floor)
 import Data.Monoid.Additive (Additive(..))
 import Data.Tuple (Tuple(..))
+import Data.Tuple.Nested ((/\))
 import Deku.Attribute ((:=))
 import Deku.Control (portal, switcher)
 import Deku.Control as C
@@ -68,7 +69,7 @@ scene =
               ]
               : V.empty
           )
-          ( \i _ -> switcher
+          ( \(i /\ _) -> switcher
               ( \rgb -> D.div
                   (pure (D.Style := "background-color: " <> rgb <> ";"))
                   [ V.index (Proxy :: _ 0) i ]

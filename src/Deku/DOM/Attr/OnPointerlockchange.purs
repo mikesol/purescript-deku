@@ -2,7 +2,8 @@ module Deku.DOM.Attr.OnPointerlockchange where
 
 import Prelude
 import Effect (Effect)
-import Deku.Attribute (class Attr, Cb(..), cb', unsafeAttribute)
+import Deku.Attribute (class Attr, Attribute, Cb(..), cb', unsafeAttribute)
+import FRP.Event (Event)
 
 data OnPointerlockchange = OnPointerlockchange
 
@@ -17,3 +18,5 @@ instance Attr anything OnPointerlockchange (Effect Unit) where
 instance Attr anything OnPointerlockchange (Effect Boolean) where
   attr OnPointerlockchange value = unsafeAttribute
     { key: "pointerlockchange ", value: cb' (Cb (const value)) }
+
+type OnPointerlockchangeEffect = forall element. Attr element OnPointerlockchange (Effect Unit) => Event (Attribute element)

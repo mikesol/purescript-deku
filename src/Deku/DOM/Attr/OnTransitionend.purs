@@ -2,7 +2,8 @@ module Deku.DOM.Attr.OnTransitionend where
 
 import Prelude
 import Effect (Effect)
-import Deku.Attribute (class Attr, Cb(..), cb', unsafeAttribute)
+import Deku.Attribute (class Attr, Attribute, Cb(..), cb', unsafeAttribute)
+import FRP.Event (Event)
 
 data OnTransitionend = OnTransitionend
 
@@ -17,3 +18,5 @@ instance Attr anything OnTransitionend (Effect Unit) where
 instance Attr anything OnTransitionend (Effect Boolean) where
   attr OnTransitionend value = unsafeAttribute
     { key: "transitionend", value: cb' (Cb (const value)) }
+
+type OnTransitionendEffect = forall element. Attr element OnTransitionend (Effect Unit) => Event (Attribute element)

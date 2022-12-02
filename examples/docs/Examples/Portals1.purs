@@ -34,7 +34,7 @@ main = runInBody Deku.do
             : V.empty
         )
     )
-    \v _ -> do
+    \(v /\ _) -> do
       let
         p0 :: Domable _ _
         p0 = index (Proxy :: _ 0) v

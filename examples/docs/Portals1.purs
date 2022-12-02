@@ -7,6 +7,7 @@ import Data.FastVect.FastVect ((:), index)
 import Data.FastVect.FastVect as V
 import Data.Foldable (oneOfMap)
 import Data.Profunctor (lcmap)
+import Data.Tuple.Nested ((/\))
 import Deku.Attribute (cb, (:=))
 import Deku.Control (portal, switcher, text_)
 import Deku.Core (Nut, dyn, bus, insert_)
@@ -84,7 +85,7 @@ portals1 options = px ~~
                       : V.empty
                   )
               )
-              \v _ -> do
+              \(v /\ _) -> do
                 let
                   p0 = index (Proxy :: _ 0) v
                   p1 = index (Proxy :: _ 1) v

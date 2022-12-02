@@ -2,7 +2,8 @@ module Deku.DOM.Attr.OnSecuritypolicyviolation where
 
 import Prelude
 import Effect (Effect)
-import Deku.Attribute (class Attr, Cb(..), cb', unsafeAttribute)
+import Deku.Attribute (class Attr, Attribute, Cb(..), cb', unsafeAttribute)
+import FRP.Event (Event)
 
 data OnSecuritypolicyviolation = OnSecuritypolicyviolation
 
@@ -17,3 +18,5 @@ instance Attr anything OnSecuritypolicyviolation (Effect Unit) where
 instance Attr anything OnSecuritypolicyviolation (Effect Boolean) where
   attr OnSecuritypolicyviolation value = unsafeAttribute
     { key: "securitypolicyviolation", value: cb' (Cb (const value)) }
+
+type OnSecuritypolicyviolationEffect = forall element. Attr element OnSecuritypolicyviolation (Effect Unit) => Event (Attribute element)

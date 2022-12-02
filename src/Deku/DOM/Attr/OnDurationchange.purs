@@ -2,7 +2,8 @@ module Deku.DOM.Attr.OnDurationchange where
 
 import Prelude
 import Effect (Effect)
-import Deku.Attribute (class Attr, Cb(..), cb', unsafeAttribute)
+import Deku.Attribute (class Attr, Attribute, Cb(..), cb', unsafeAttribute)
+import FRP.Event (Event)
 
 data OnDurationchange = OnDurationchange
 
@@ -17,3 +18,5 @@ instance Attr anything OnDurationchange (Effect Unit) where
 instance Attr anything OnDurationchange (Effect Boolean) where
   attr OnDurationchange value = unsafeAttribute
     { key: "durationchange", value: cb' (Cb (const value)) }
+
+type OnDurationchangeEffect = forall element. Attr element OnDurationchange (Effect Unit) => Event (Attribute element)

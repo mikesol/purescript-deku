@@ -2,7 +2,8 @@ module Deku.DOM.Attr.OnInput where
 
 import Prelude
 import Effect (Effect)
-import Deku.Attribute (class Attr, Cb(..), cb', unsafeAttribute)
+import Deku.Attribute (class Attr, Attribute, Cb(..), cb', unsafeAttribute)
+import FRP.Event (Event)
 
 data OnInput = OnInput
 
@@ -16,3 +17,5 @@ instance Attr anything OnInput (Effect Unit) where
 instance Attr anything OnInput (Effect Boolean) where
   attr OnInput value = unsafeAttribute
     { key: "input", value: cb' (Cb (const value)) }
+
+type OnInputEffect = forall element. Attr element OnInput (Effect Unit) => Event (Attribute element)
