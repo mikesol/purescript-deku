@@ -6,22 +6,16 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 
-## [0.9.8] - 2022-12-01
+## [0.9.6] - 2022-12-01
 
 - Adds `NutWith`.
-
-## [0.9.7] - 2022-11-30
-
 - Changes signature of `useMemoized`.
-
-## [0.9.6] - 2022-11-28
-
-- Adds `useHot'`.
 - Splits `onMount` into `onWillMount` and `onDidMount`.
 
 ## [0.9.5] - 2022-11-28
 
--Adds `guard`.
+- Adds `guard`.
+- Adds `useHot'`.
 
 ## [0.9.4] - 2022-11-28
 
