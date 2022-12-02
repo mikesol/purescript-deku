@@ -4671,6 +4671,65 @@ makePursx' verb html r = Domable $ Element' $ Node go
         runSTFn1 k1 (deleteFromCache { id: me })
         unsub
 
+unsafeMakePursx
+  :: forall lock payload r rl
+   . RL.RowToList r rl
+  => PursxToElement lock payload rl r
+  => String
+  -> { | r }
+  -> Domable lock payload
+unsafeMakePursx = unsafeMakePursx' "~"
+
+unsafeMakePursx'
+  :: forall lock payload r rl
+   . RL.RowToList r rl
+  => PursxToElement lock payload rl r
+  => String
+  -> String
+  -> { | r }
+  -> Domable lock payload
+unsafeMakePursx' verb html r = Domable $ Element' $ Node go
+  where
+  go
+    z@{ parent, scope, raiseId, dynFamily, pos }
+    di@(DOMInterpret { makePursx: mpx, ids, deleteFromCache, attributeParent }) =
+    makeLemmingEventO $ mkSTFn2 \(Subscriber mySub) k1 -> do
+      me <- ids
+      pxScope <- ids
+      raiseId me
+      let
+        { cache, element: Node element } = pursxToElement
+          pxScope
+          (Proxy :: _ rl)
+          r
+      unsub <- runSTFn2 mySub
+        ( oneOf
+            [ pure $
+                mpx
+                  { id: me
+                  , parent
+                  , cache
+                  , dynFamily
+                  , pos
+                  , pxScope: pxScope
+                  , scope
+                  , html
+                  , verb
+                  }
+            , element z di
+            , maybe empty
+                ( \p ->
+                    pure $ attributeParent
+                      { id: me, parent: p, pos, dynFamily, ez: false }
+                )
+                parent
+            ]
+        )
+        k1
+      pure do
+        runSTFn1 k1 (deleteFromCache { id: me })
+        unsub
+
 __internalDekuFlatten
   :: forall lock payload
    . PSR (pos :: Maybe Int, dynFamily :: Maybe String, ez :: Boolean)
@@ -4690,4 +4749,5 @@ __internalDekuFlatten a b c = Bolson.flatten
   ((coerce :: Domable lock payload -> Domable' lock payload) c)
 
 infixr 5 makePursx as ~~
+infixr 5 unsafeMakePursx as ~!~
 
