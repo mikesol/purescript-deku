@@ -2,7 +2,8 @@ module Deku.DOM.Attr.OnTransitionstart where
 
 import Prelude
 import Effect (Effect)
-import Deku.Attribute (class Attr, Cb(..), cb', unsafeAttribute)
+import Deku.Attribute (class Attr, Attribute, Cb(..), cb', unsafeAttribute)
+import FRP.Event (Event)
 
 data OnTransitionstart = OnTransitionstart
 
@@ -17,3 +18,5 @@ instance Attr anything OnTransitionstart (Effect Unit) where
 instance Attr anything OnTransitionstart (Effect Boolean) where
   attr OnTransitionstart value = unsafeAttribute
     { key: "transitionstart", value: cb' (Cb (const value)) }
+
+type OnTransitionstartEffect = forall element. Attr element OnTransitionstart (Effect Unit) => Event (Attribute element)

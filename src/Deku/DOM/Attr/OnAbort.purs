@@ -2,7 +2,8 @@ module Deku.DOM.Attr.OnAbort where
 
 import Prelude
 import Effect (Effect)
-import Deku.Attribute (class Attr, Cb(..), cb', unsafeAttribute)
+import Deku.Attribute (class Attr, Attribute, Cb(..), cb', unsafeAttribute)
+import FRP.Event (Event)
 
 data OnAbort = OnAbort
 
@@ -16,3 +17,5 @@ instance Attr anything OnAbort (Effect Unit) where
 instance Attr anything OnAbort (Effect Boolean) where
   attr OnAbort value = unsafeAttribute
     { key: "abort", value: cb' (Cb (const value)) }
+
+type OnAbortEffect = forall element. Attr element OnAbort (Effect Unit) => Event (Attribute element)

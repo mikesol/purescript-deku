@@ -2,7 +2,8 @@ module Deku.DOM.Attr.OnPointermove where
 
 import Prelude
 import Effect (Effect)
-import Deku.Attribute (class Attr, Cb(..), cb', unsafeAttribute)
+import Deku.Attribute (class Attr, Attribute, Cb(..), cb', unsafeAttribute)
+import FRP.Event (Event)
 
 data OnPointermove = OnPointermove
 
@@ -17,3 +18,5 @@ instance Attr anything OnPointermove (Effect Unit) where
 instance Attr anything OnPointermove (Effect Boolean) where
   attr OnPointermove value = unsafeAttribute
     { key: "pointermove", value: cb' (Cb (const value)) }
+
+type OnPointermoveEffect = forall element. Attr element OnPointermove (Effect Unit) => Event (Attribute element)

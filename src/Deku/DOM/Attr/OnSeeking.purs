@@ -2,7 +2,8 @@ module Deku.DOM.Attr.OnSeeking where
 
 import Prelude
 import Effect (Effect)
-import Deku.Attribute (class Attr, Cb(..), cb', unsafeAttribute)
+import Deku.Attribute (class Attr, Attribute, Cb(..), cb', unsafeAttribute)
+import FRP.Event (Event)
 
 data OnSeeking = OnSeeking
 
@@ -16,3 +17,5 @@ instance Attr anything OnSeeking (Effect Unit) where
 instance Attr anything OnSeeking (Effect Boolean) where
   attr OnSeeking value = unsafeAttribute
     { key: "seeking", value: cb' (Cb (const value)) }
+
+type OnSeekingEffect = forall element. Attr element OnSeeking (Effect Unit) => Event (Attribute element)

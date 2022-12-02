@@ -2,7 +2,8 @@ module Deku.DOM.Attr.OnMouseout where
 
 import Prelude
 import Effect (Effect)
-import Deku.Attribute (class Attr, Cb(..), cb', unsafeAttribute)
+import Deku.Attribute (class Attr, Attribute, Cb(..), cb', unsafeAttribute)
+import FRP.Event (Event)
 
 data OnMouseout = OnMouseout
 
@@ -16,3 +17,5 @@ instance Attr anything OnMouseout (Effect Unit) where
 instance Attr anything OnMouseout (Effect Boolean) where
   attr OnMouseout value = unsafeAttribute
     { key: "mouseout", value: cb' (Cb (const value)) }
+
+type OnMouseoutEffect = forall element. Attr element OnMouseout (Effect Unit) => Event (Attribute element)

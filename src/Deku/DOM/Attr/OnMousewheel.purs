@@ -2,7 +2,8 @@ module Deku.DOM.Attr.OnMousewheel where
 
 import Prelude
 import Effect (Effect)
-import Deku.Attribute (class Attr, Cb(..), cb', unsafeAttribute)
+import Deku.Attribute (class Attr, Attribute, Cb(..), cb', unsafeAttribute)
+import FRP.Event (Event)
 
 data OnMousewheel = OnMousewheel
 
@@ -17,3 +18,5 @@ instance Attr anything OnMousewheel (Effect Unit) where
 instance Attr anything OnMousewheel (Effect Boolean) where
   attr OnMousewheel value = unsafeAttribute
     { key: "mousewheel  ", value: cb' (Cb (const value)) }
+
+type OnMousewheelEffect = forall element. Attr element OnMousewheel (Effect Unit) => Event (Attribute element)

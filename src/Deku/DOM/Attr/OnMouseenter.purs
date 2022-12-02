@@ -2,7 +2,8 @@ module Deku.DOM.Attr.OnMouseenter where
 
 import Prelude
 import Effect (Effect)
-import Deku.Attribute (class Attr, Cb(..), cb', unsafeAttribute)
+import Deku.Attribute (class Attr, Attribute, Cb(..), cb', unsafeAttribute)
+import FRP.Event (Event)
 
 data OnMouseenter = OnMouseenter
 
@@ -17,3 +18,5 @@ instance Attr anything OnMouseenter (Effect Unit) where
 instance Attr anything OnMouseenter (Effect Boolean) where
   attr OnMouseenter value = unsafeAttribute
     { key: "mouseenter", value: cb' (Cb (const value)) }
+
+type OnMouseenterEffect = forall element. Attr element OnMouseenter (Effect Unit) => Event (Attribute element)

@@ -2,7 +2,8 @@ module Deku.DOM.Attr.OnAnimationiteration where
 
 import Prelude
 import Effect (Effect)
-import Deku.Attribute (class Attr, Cb(..), cb', unsafeAttribute)
+import Deku.Attribute (class Attr, Attribute, Cb(..), cb', unsafeAttribute)
+import FRP.Event (Event)
 
 data OnAnimationiteration = OnAnimationiteration
 
@@ -17,3 +18,5 @@ instance Attr anything OnAnimationiteration (Effect Unit) where
 instance Attr anything OnAnimationiteration (Effect Boolean) where
   attr OnAnimationiteration value = unsafeAttribute
     { key: "animationiteration ", value: cb' (Cb (const value)) }
+
+type OnAnimationiterationEffect = forall element. Attr element OnAnimationiteration (Effect Unit) => Event (Attribute element)

@@ -2,7 +2,8 @@ module Deku.DOM.Attr.OnLoad where
 
 import Prelude
 import Effect (Effect)
-import Deku.Attribute (class Attr, Cb(..), cb', unsafeAttribute)
+import Deku.Attribute (class Attr, Attribute, Cb(..), cb', unsafeAttribute)
+import FRP.Event (Event)
 
 data OnLoad = OnLoad
 
@@ -16,3 +17,5 @@ instance Attr anything OnLoad (Effect Unit) where
 instance Attr anything OnLoad (Effect Boolean) where
   attr OnLoad value = unsafeAttribute
     { key: "load", value: cb' (Cb (const value)) }
+
+type OnLoadEffect = forall element. Attr element OnLoad (Effect Unit) => Event (Attribute element)

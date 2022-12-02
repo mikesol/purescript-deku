@@ -2,7 +2,8 @@ module Deku.DOM.Attr.OnResize where
 
 import Prelude
 import Effect (Effect)
-import Deku.Attribute (class Attr, Cb(..), cb', unsafeAttribute)
+import Deku.Attribute (class Attr, Attribute, Cb(..), cb', unsafeAttribute)
+import FRP.Event (Event)
 
 data OnResize = OnResize
 
@@ -16,3 +17,5 @@ instance Attr anything OnResize (Effect Unit) where
 instance Attr anything OnResize (Effect Boolean) where
   attr OnResize value = unsafeAttribute
     { key: "resize", value: cb' (Cb (const value)) }
+
+type OnResizeEffect = forall element. Attr element OnResize (Effect Unit) => Event (Attribute element)

@@ -2,7 +2,8 @@ module Deku.DOM.Attr.OnGotpointercapture where
 
 import Prelude
 import Effect (Effect)
-import Deku.Attribute (class Attr, Cb(..), cb', unsafeAttribute)
+import Deku.Attribute (class Attr, Attribute, Cb(..), cb', unsafeAttribute)
+import FRP.Event (Event)
 
 data OnGotpointercapture = OnGotpointercapture
 
@@ -17,3 +18,5 @@ instance Attr anything OnGotpointercapture (Effect Unit) where
 instance Attr anything OnGotpointercapture (Effect Boolean) where
   attr OnGotpointercapture value = unsafeAttribute
     { key: "gotpointercapture", value: cb' (Cb (const value)) }
+
+type OnGotpointercaptureEffect = forall element. Attr element OnGotpointercapture (Effect Unit) => Event (Attribute element)

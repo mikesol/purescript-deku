@@ -2,7 +2,8 @@ module Deku.DOM.Attr.OnTransitioncancel where
 
 import Prelude
 import Effect (Effect)
-import Deku.Attribute (class Attr, Cb(..), cb', unsafeAttribute)
+import Deku.Attribute (class Attr, Attribute, Cb(..), cb', unsafeAttribute)
+import FRP.Event (Event)
 
 data OnTransitioncancel = OnTransitioncancel
 
@@ -17,3 +18,5 @@ instance Attr anything OnTransitioncancel (Effect Unit) where
 instance Attr anything OnTransitioncancel (Effect Boolean) where
   attr OnTransitioncancel value = unsafeAttribute
     { key: "transitioncancel", value: cb' (Cb (const value)) }
+
+type OnTransitioncancelEffect = forall element. Attr element OnTransitioncancel (Effect Unit) => Event (Attribute element)

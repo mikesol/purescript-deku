@@ -2,7 +2,8 @@ module Deku.DOM.Attr.OnPause where
 
 import Prelude
 import Effect (Effect)
-import Deku.Attribute (class Attr, Cb(..), cb', unsafeAttribute)
+import Deku.Attribute (class Attr, Attribute, Cb(..), cb', unsafeAttribute)
+import FRP.Event (Event)
 
 data OnPause = OnPause
 
@@ -16,3 +17,5 @@ instance Attr anything OnPause (Effect Unit) where
 instance Attr anything OnPause (Effect Boolean) where
   attr OnPause value = unsafeAttribute
     { key: "pause", value: cb' (Cb (const value)) }
+
+type OnPauseEffect = forall element. Attr element OnPause (Effect Unit) => Event (Attribute element)

@@ -2,7 +2,8 @@ module Deku.DOM.Attr.OnAnimationend where
 
 import Prelude
 import Effect (Effect)
-import Deku.Attribute (class Attr, Cb(..), cb', unsafeAttribute)
+import Deku.Attribute (class Attr, Attribute, Cb(..), cb', unsafeAttribute)
+import FRP.Event (Event)
 
 data OnAnimationend = OnAnimationend
 
@@ -17,3 +18,5 @@ instance Attr anything OnAnimationend (Effect Unit) where
 instance Attr anything OnAnimationend (Effect Boolean) where
   attr OnAnimationend value = unsafeAttribute
     { key: "animationend ", value: cb' (Cb (const value)) }
+
+type OnAnimationendEffect = forall element. Attr element OnAnimationend (Effect Unit) => Event (Attribute element)

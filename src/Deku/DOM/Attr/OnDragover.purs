@@ -2,7 +2,8 @@ module Deku.DOM.Attr.OnDragover where
 
 import Prelude
 import Effect (Effect)
-import Deku.Attribute (class Attr, Cb(..), cb', unsafeAttribute)
+import Deku.Attribute (class Attr, Attribute, Cb(..), cb', unsafeAttribute)
+import FRP.Event (Event)
 
 data OnDragover = OnDragover
 
@@ -16,3 +17,5 @@ instance Attr anything OnDragover (Effect Unit) where
 instance Attr anything OnDragover (Effect Boolean) where
   attr OnDragover value = unsafeAttribute
     { key: "dragover", value: cb' (Cb (const value)) }
+
+type OnDragoverEffect = forall element. Attr element OnDragover (Effect Unit) => Event (Attribute element)
