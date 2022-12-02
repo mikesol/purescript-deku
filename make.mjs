@@ -5723,6 +5723,20 @@ var portalComplexComplex = function() {
   };
 };
 
+// output/Control.Monad.State.Class/index.js
+var state = function(dict) {
+  return dict.state;
+};
+var modify6 = function(dictMonadState) {
+  var state1 = state(dictMonadState);
+  return function(f) {
+    return state1(function(s2) {
+      var s$prime = f(s2);
+      return new Tuple(s$prime, s$prime);
+    });
+  };
+};
+
 // output/Deku.Core/index.js
 var coerce3 = /* @__PURE__ */ coerce();
 var vbus2 = /* @__PURE__ */ vbus();
@@ -5856,7 +5870,7 @@ var dynify = function(f) {
               return new Tuple(empty6, v.parent.value0);
             }
             ;
-            throw new Error("Failed pattern match at Deku.Core (line 339, column 34 - line 353, column 36): " + [v.parent.constructor.name]);
+            throw new Error("Failed pattern match at Deku.Core (line 341, column 34 - line 355, column 36): " + [v.parent.constructor.name]);
           }();
           var unsub = v2(oneOf3([v3.value0, pure13(v1.makeDynBeacon({
             id: me,
@@ -5916,13 +5930,13 @@ var portalComplexComplex2 = /* @__PURE__ */ portalComplexComplex()()();
 var unsafeSetText = function(v) {
   return function(id2) {
     return function(txt) {
-      return map10(function($132) {
+      return map10(function($134) {
         return v.setText(function(v1) {
           return {
             id: id2,
             text: v1
           };
-        }($132));
+        }($134));
       })(txt);
     };
   };
@@ -5930,7 +5944,7 @@ var unsafeSetText = function(v) {
 var unsafeSetAttribute = function(v) {
   return function(id2) {
     return function(atts) {
-      return map10(function($133) {
+      return map10(function($135) {
         return function(v1) {
           if (v1.value instanceof Prop$prime) {
             return v.setProp({
@@ -5948,8 +5962,8 @@ var unsafeSetAttribute = function(v) {
             });
           }
           ;
-          throw new Error("Failed pattern match at Deku.Control (line 66, column 26 - line 68, column 45): " + [v1.value.constructor.name]);
-        }(unsafeUnAttribute($133));
+          throw new Error("Failed pattern match at Deku.Control (line 68, column 26 - line 70, column 45): " + [v1.value.constructor.name]);
+        }(unsafeUnAttribute($135));
       })(atts);
     };
   };
@@ -6002,9 +6016,9 @@ var switcher = function(f) {
     return dyn2(keepLatest4(memoize(counter(event))(function(cenv) {
       return map10(function(v) {
         return oneOf4([map10($$const(Remove.value))(filter6(function() {
-          var $134 = eq3(v.value1 + 1 | 0);
-          return function($135) {
-            return $134(snd($135));
+          var $136 = eq3(v.value1 + 1 | 0);
+          return function($137) {
+            return $136(snd($137));
           };
         }())(cenv)), pure8(insert_(coerce4(f(v.value0))))]);
       })(cenv);
@@ -6023,10 +6037,10 @@ var portalFlatten2 = function() {
         };
       };
     },
-    ids: function($136) {
+    ids: function($138) {
       return function(v) {
         return v.ids;
-      }(unwrap4($136));
+      }(unwrap4($138));
     },
     disconnectElement: function(v) {
       return function(v1) {
@@ -6114,14 +6128,14 @@ var portal = function() {
             };
           };
         },
-        deleteFromCache: function($139) {
+        deleteFromCache: function($141) {
           return function(v) {
             return v.deleteFromCache;
-          }(unwrap4($139));
+          }(unwrap4($141));
         }
       })(map14(unwrap4)(a2))(lcmap3(map14(function(v) {
         return v(unit);
-      }))(coerce4(b2)));
+      }))(coerce4(curry(b2))));
     };
   };
 };
@@ -6798,10 +6812,10 @@ var __internalDekuFlatten3 = function(a2) {
             };
           };
         },
-        ids: function($502) {
+        ids: function($526) {
           return function(v) {
             return v.ids;
-          }(unwrap5($502));
+          }(unwrap5($526));
         },
         disconnectElement: function(v) {
           return function(v1) {
@@ -6912,7 +6926,7 @@ main = runInBody Deku.do
         )
     }`;
 var pursx1 = 'module Main where\n\nimport Prelude\n\nimport Deku.Pursx (psx)\nimport Deku.Toplevel (runInBody)\nimport Effect (Effect)\nimport Type.Proxy (Proxy(..))\n\nmyDom =\n  Proxy\n    :: Proxy\n         """<div>\n    <button>I do nothing</button>\n    <ul>\n        <li>A</li>\n        <li>B</li>\n        <li>C</li>\n    </ul>\n    <div>\n        <a href="https://github.com/mikesol/purescript-deku"></a>\n        <i>bar</i>\n        <span style="font-weight:800;">baz</span>\n    </div>\n    <div><div></div><div><input type="range"/></div></div>\n    </div>\n"""\n\nmain :: Effect Unit\nmain = runInBody (psx myDom)';
-var portals1 = 'module Main where\n\nimport Prelude\n\nimport Data.FastVect.FastVect (index, (:))\nimport Data.FastVect.FastVect as V\nimport Data.Foldable (oneOfMap)\nimport Data.Tuple.Nested ((/\\))\nimport Deku.Attribute ((:=))\nimport Deku.Control (portal, switcher, text_)\nimport Deku.Core (Domable)\nimport Deku.DOM as D\nimport Deku.Hooks (useState)\nimport Deku.Do as Deku\nimport Deku.Toplevel (runInBody)\nimport Effect (Effect)\nimport FRP.Event (Event, fold)\nimport Type.Prelude (Proxy(..))\n\nmain :: Effect Unit\nmain = runInBody Deku.do\n  push /\\ event <- useState unit\n  portal\n    ( map\n        ( \\i -> D.video\n            (oneOfMap pure [ D.Controls := "true", D.Width := "250" ])\n            [ D.source\n                (oneOfMap pure [ D.Src := i, D.Xtype := "video/mp4" ])\n                []\n            ]\n        )\n        ( "https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4"\n            : "https://www.w3schools.com/jsref/movie.mp4"\n            : V.empty\n        )\n    )\n    \\v _ -> do\n      let\n        p0 :: Domable _ _\n        p0 = index (Proxy :: _ 0) v\n\n        p1 :: Domable _ _\n        p1 = index (Proxy :: _ 1) v\n\n        ev :: Boolean -> Event Boolean\n        ev b = fold (\\a _ -> not a) b event\n\n        flips :: Boolean -> Domable _ _\n        flips = D.span_ <<< pure <<< switcher (if _ then p0 else p1) <<< ev\n      D.div_\n        [ D.button (pure $ D.OnClick := push unit)\n            [ text_ "Switch videos" ]\n        , D.div_ [ D.span_ [ flips true ], flips false ]\n        ]\n';
+var portals1 = 'module Main where\n\nimport Prelude\n\nimport Data.FastVect.FastVect (index, (:))\nimport Data.FastVect.FastVect as V\nimport Data.Foldable (oneOfMap)\nimport Data.Tuple.Nested ((/\\))\nimport Deku.Attribute ((:=))\nimport Deku.Control (portal, switcher, text_)\nimport Deku.Core (Domable)\nimport Deku.DOM as D\nimport Deku.Hooks (useState)\nimport Deku.Do as Deku\nimport Deku.Toplevel (runInBody)\nimport Effect (Effect)\nimport FRP.Event (Event, fold)\nimport Type.Prelude (Proxy(..))\n\nmain :: Effect Unit\nmain = runInBody Deku.do\n  push /\\ event <- useState unit\n  portal\n    ( map\n        ( \\i -> D.video\n            (oneOfMap pure [ D.Controls := "true", D.Width := "250" ])\n            [ D.source\n                (oneOfMap pure [ D.Src := i, D.Xtype := "video/mp4" ])\n                []\n            ]\n        )\n        ( "https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4"\n            : "https://www.w3schools.com/jsref/movie.mp4"\n            : V.empty\n        )\n    )\n    \\(v /\\ _) -> do\n      let\n        p0 :: Domable _ _\n        p0 = index (Proxy :: _ 0) v\n\n        p1 :: Domable _ _\n        p1 = index (Proxy :: _ 1) v\n\n        ev :: Boolean -> Event Boolean\n        ev b = fold (\\a _ -> not a) b event\n\n        flips :: Boolean -> Domable _ _\n        flips = D.span_ <<< pure <<< switcher (if _ then p0 else p1) <<< ev\n      D.div_\n        [ D.button (pure $ D.OnClick := push unit)\n            [ text_ "Switch videos" ]\n        , D.div_ [ D.span_ [ flips true ], flips false ]\n        ]\n';
 var helloWorld = 'module Main where\n\nimport Prelude\n\nimport Deku.Control (text_)\nimport Deku.Toplevel (runInBody)\nimport Effect (Effect)\n\nmain :: Effect Unit\nmain = runInBody (text_ "Hello world")';
 var events3 = `module Main where
 
@@ -7530,20 +7544,6 @@ var $$try = function(dictMonadError) {
   };
 };
 
-// output/Control.Monad.State.Class/index.js
-var state = function(dict) {
-  return dict.state;
-};
-var modify6 = function(dictMonadState) {
-  var state1 = state(dictMonadState);
-  return function(f) {
-    return state1(function(s2) {
-      var s$prime = f(s2);
-      return new Tuple(s$prime, s$prime);
-    });
-  };
-};
-
 // output/Effect.Class/index.js
 var liftEffect = function(dict) {
   return dict.liftEffect;
@@ -7951,15 +7951,15 @@ var Aff = function() {
   var FORKED = "Forked";
   var FIBER = "Fiber";
   var THUNK = "Thunk";
-  function Aff2(tag, _1, _2, _3) {
+  function Aff2(tag, _12, _2, _3) {
     this.tag = tag;
-    this._1 = _1;
+    this._1 = _12;
     this._2 = _2;
     this._3 = _3;
   }
   function AffCtr(tag) {
-    var fn = function(_1, _2, _3) {
-      return new Aff2(tag, _1, _2, _3);
+    var fn = function(_12, _2, _3) {
+      return new Aff2(tag, _12, _2, _3);
     };
     fn.tag = tag;
     return fn;
@@ -7976,18 +7976,18 @@ var Aff = function() {
       }, 0);
     }
   }
-  function runSync(left, right, eff) {
+  function runSync(left2, right2, eff) {
     try {
-      return right(eff());
+      return right2(eff());
     } catch (error3) {
-      return left(error3);
+      return left2(error3);
     }
   }
-  function runAsync(left, eff, k) {
+  function runAsync(left2, eff, k) {
     try {
       return eff(k)();
     } catch (error3) {
-      k(left(error3))();
+      k(left2(error3))();
       return nonCanceler2;
     }
   }
@@ -8795,13 +8795,13 @@ var _delay = function() {
       return clearTimeout(t);
     }
   }
-  return function(right, ms) {
+  return function(right2, ms) {
     return Aff.Async(function(cb2) {
       return function() {
-        var timer = setDelay(ms, cb2(right()));
+        var timer = setDelay(ms, cb2(right2()));
         return function() {
           return Aff.Sync(function() {
-            return right(clearDelay(ms, timer));
+            return right2(clearDelay(ms, timer));
           });
         };
       };
@@ -10214,30 +10214,28 @@ var portals12 = function(options2) {
         return pure27(insert_(portal2(map25(function(i2) {
           return video(oneOfMap9(pure27)([attr9(Controls.value)("true"), attr18(Width.value)("250")]))([source(oneOfMap9(pure27)([attr25(Src.value)(i2), attr33(Xtype.value)("video/mp4")]))([])]);
         })(cons4("https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4")(cons4("https://www.w3schools.com/jsref/movie.mp4")(empty5))))(function(v) {
-          return function(v1) {
-            var p1 = index1($$Proxy.value)(v);
-            var p0 = index22($$Proxy.value)(v);
-            var ev = function(i2) {
-              return fold5(function(a2) {
-                return function(v2) {
-                  return !a2;
-                };
-              })(i2)(event);
-            };
-            var flips = function() {
-              var $56 = switcher(function(v2) {
-                if (v2) {
-                  return p0;
-                }
-                ;
-                return p1;
-              });
-              return function($57) {
-                return span_(pure110($56(ev($57))));
+          var p1 = index1($$Proxy.value)(v.value0);
+          var p0 = index22($$Proxy.value)(v.value0);
+          var ev = function(i2) {
+            return fold5(function(a2) {
+              return function(v2) {
+                return !a2;
               };
-            }();
-            return div_([button(pure27(attr43(OnClick.value)(cb($$const(push2(unit))))))([text_("Switch videos")]), div_([flips(true), flips(false)])]);
+            })(i2)(event);
           };
+          var flips = function() {
+            var $59 = switcher(function(v2) {
+              if (v2) {
+                return p0;
+              }
+              ;
+              return p1;
+            });
+            return function($60) {
+              return span_(pure110($59(ev($60))));
+            };
+          }();
+          return div_([button(pure27(attr43(OnClick.value)(cb($$const(push2(unit))))))([text_("Switch videos")]), div_([flips(true), flips(false)])]);
         })));
       });
     })),
