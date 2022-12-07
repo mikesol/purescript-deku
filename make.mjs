@@ -3065,12 +3065,6 @@ var deleteObjHack = (k, o) => {
 };
 
 // output/Control.Monad.ST.Class/index.js
-var monadSTST = {
-  liftST: /* @__PURE__ */ identity(categoryFn),
-  Monad0: function() {
-    return monadST;
-  }
-};
 var monadSTEffect = {
   liftST: toEffect,
   Monad0: function() {
@@ -12065,7 +12059,6 @@ var eq6 = /* @__PURE__ */ eq(eqScope);
 var coerce21 = /* @__PURE__ */ coerce();
 var pure111 = /* @__PURE__ */ pure(applicativeST);
 var map111 = /* @__PURE__ */ map(functorST);
-var liftST1 = /* @__PURE__ */ liftST(monadSTST);
 var void1 = /* @__PURE__ */ $$void(functorST);
 var __internalDekuFlatten4 = function(a2) {
   return function(b2) {
@@ -12081,10 +12074,10 @@ var __internalDekuFlatten4 = function(a2) {
             };
           };
         },
-        ids: function($52) {
+        ids: function($50) {
           return function(v) {
             return v.ids;
-          }(unwrap9($52));
+          }(unwrap9($50));
         },
         disconnectElement: function(v) {
           return function(v1) {
@@ -12105,17 +12098,17 @@ var __internalDekuFlatten4 = function(a2) {
 };
 var runSSR$prime = function(topTag) {
   return function(v) {
-    return function(children) {
+    var go2 = function(children$prime) {
       return map111(function() {
-        var $53 = ssr$prime(topTag);
-        return function($54) {
+        var $51 = ssr$prime(topTag);
+        return function($52) {
           return function(v1) {
             return v.head + v1;
           }(function(v1) {
             return v1 + v.tail;
-          }($53($54)));
+          }($51($52)));
         };
-      }())(liftST1(function __do3() {
+      }())(function __do3() {
         var seed = newSTRef(0)();
         var instr = newSTRef([])();
         var di = ssrDOMInterpret(seed);
@@ -12128,12 +12121,13 @@ var runSSR$prime = function(topTag) {
           ez: true,
           pos: Nothing.value,
           dynFamily: Nothing.value
-        })(di)(children))(function(i2) {
+        })(di)(children$prime))(function(i2) {
           return i2(instr);
         }))();
         return read2(instr)();
-      }));
+      });
     };
+    return go2;
   };
 };
 var runSSR = /* @__PURE__ */ runSSR$prime("body");
