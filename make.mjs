@@ -172,7 +172,7 @@ var pure = function(dict) {
   return dict.pure;
 };
 var when = function(dictApplicative) {
-  var pure113 = pure(dictApplicative);
+  var pure114 = pure(dictApplicative);
   return function(v) {
     return function(v1) {
       if (v) {
@@ -180,7 +180,7 @@ var when = function(dictApplicative) {
       }
       ;
       if (!v) {
-        return pure113(unit);
+        return pure114(unit);
       }
       ;
       throw new Error("Failed pattern match at Control.Applicative (line 63, column 1 - line 63, column 63): " + [v.constructor.name, v1.constructor.name]);
@@ -189,10 +189,10 @@ var when = function(dictApplicative) {
 };
 var liftA1 = function(dictApplicative) {
   var apply7 = apply(dictApplicative.Apply0());
-  var pure113 = pure(dictApplicative);
+  var pure114 = pure(dictApplicative);
   return function(f) {
     return function(a2) {
-      return apply7(pure113(f))(a2);
+      return apply7(pure114(f))(a2);
     };
   };
 };
@@ -273,14 +273,76 @@ var unsafeCoerce = function(x) {
 // output/Control.Monad.ST.Global/index.js
 var toEffect = unsafeCoerce;
 
-// output/Data.Argonaut.Parser/foreign.js
-function _jsonParser(fail3, succ2, s2) {
-  try {
-    return succ2(JSON.parse(s2));
-  } catch (e) {
-    return fail3(e.message);
-  }
+// output/Control.Monad.ST.Internal/foreign.js
+var map_ = function(f) {
+  return function(a2) {
+    return function() {
+      return f(a2());
+    };
+  };
+};
+var pure_ = function(a2) {
+  return function() {
+    return a2;
+  };
+};
+var bind_ = function(a2) {
+  return function(f) {
+    return function() {
+      return f(a2())();
+    };
+  };
+};
+var foreach = function(as) {
+  return function(f) {
+    return function() {
+      for (var i2 = 0, l = as.length; i2 < l; i2++) {
+        f(as[i2])();
+      }
+    };
+  };
+};
+function newSTRef(val) {
+  return function() {
+    return { value: val };
+  };
 }
+var read = function(ref) {
+  return function() {
+    return ref.value;
+  };
+};
+var modifyImpl = function(f) {
+  return function(ref) {
+    return function() {
+      var t = f(ref.value);
+      ref.value = t.state;
+      return t.value;
+    };
+  };
+};
+var write = function(a2) {
+  return function(ref) {
+    return function() {
+      return ref.value = a2;
+    };
+  };
+};
+
+// output/Control.Monad/index.js
+var ap = function(dictMonad) {
+  var bind11 = bind(dictMonad.Bind1());
+  var pure35 = pure(dictMonad.Applicative0());
+  return function(f) {
+    return function(a2) {
+      return bind11(f)(function(f$prime) {
+        return bind11(a2)(function(a$prime) {
+          return pure35(f$prime(a$prime));
+        });
+      });
+    };
+  };
+};
 
 // output/Data.Semigroup/foreign.js
 var concatString = function(s1) {
@@ -829,6 +891,309 @@ var applicativeEither = /* @__PURE__ */ function() {
   };
 }();
 
+// output/Data.Identity/index.js
+var Identity = function(x) {
+  return x;
+};
+var functorIdentity = {
+  map: function(f) {
+    return function(m) {
+      return f(m);
+    };
+  }
+};
+var applyIdentity = {
+  apply: function(v) {
+    return function(v1) {
+      return v(v1);
+    };
+  },
+  Functor0: function() {
+    return functorIdentity;
+  }
+};
+var bindIdentity = {
+  bind: function(v) {
+    return function(f) {
+      return f(v);
+    };
+  },
+  Apply0: function() {
+    return applyIdentity;
+  }
+};
+var applicativeIdentity = {
+  pure: Identity,
+  Apply0: function() {
+    return applyIdentity;
+  }
+};
+var monadIdentity = {
+  Applicative0: function() {
+    return applicativeIdentity;
+  },
+  Bind1: function() {
+    return bindIdentity;
+  }
+};
+
+// output/Data.EuclideanRing/foreign.js
+var intDegree = function(x) {
+  return Math.min(Math.abs(x), 2147483647);
+};
+var intDiv = function(x) {
+  return function(y) {
+    if (y === 0)
+      return 0;
+    return y > 0 ? Math.floor(x / y) : -Math.floor(x / -y);
+  };
+};
+var intMod = function(x) {
+  return function(y) {
+    if (y === 0)
+      return 0;
+    var yy = Math.abs(y);
+    return (x % yy + yy) % yy;
+  };
+};
+
+// output/Data.CommutativeRing/index.js
+var commutativeRingInt = {
+  Ring0: function() {
+    return ringInt;
+  }
+};
+
+// output/Data.EuclideanRing/index.js
+var mod = function(dict) {
+  return dict.mod;
+};
+var euclideanRingInt = {
+  degree: intDegree,
+  div: intDiv,
+  mod: intMod,
+  CommutativeRing0: function() {
+    return commutativeRingInt;
+  }
+};
+
+// output/Data.Monoid/index.js
+var monoidUnit = {
+  mempty: unit,
+  Semigroup0: function() {
+    return semigroupUnit;
+  }
+};
+var monoidString = {
+  mempty: "",
+  Semigroup0: function() {
+    return semigroupString;
+  }
+};
+var mempty = function(dict) {
+  return dict.mempty;
+};
+
+// output/Effect/foreign.js
+var pureE = function(a2) {
+  return function() {
+    return a2;
+  };
+};
+var bindE = function(a2) {
+  return function(f) {
+    return function() {
+      return f(a2())();
+    };
+  };
+};
+
+// output/Effect/index.js
+var $runtime_lazy = function(name16, moduleName, init3) {
+  var state4 = 0;
+  var val;
+  return function(lineNumber) {
+    if (state4 === 2)
+      return val;
+    if (state4 === 1)
+      throw new ReferenceError(name16 + " was needed before it finished initializing (module " + moduleName + ", line " + lineNumber + ")", moduleName, lineNumber);
+    state4 = 1;
+    val = init3();
+    state4 = 2;
+    return val;
+  };
+};
+var monadEffect = {
+  Applicative0: function() {
+    return applicativeEffect;
+  },
+  Bind1: function() {
+    return bindEffect;
+  }
+};
+var bindEffect = {
+  bind: bindE,
+  Apply0: function() {
+    return $lazy_applyEffect(0);
+  }
+};
+var applicativeEffect = {
+  pure: pureE,
+  Apply0: function() {
+    return $lazy_applyEffect(0);
+  }
+};
+var $lazy_functorEffect = /* @__PURE__ */ $runtime_lazy("functorEffect", "Effect", function() {
+  return {
+    map: liftA1(applicativeEffect)
+  };
+});
+var $lazy_applyEffect = /* @__PURE__ */ $runtime_lazy("applyEffect", "Effect", function() {
+  return {
+    apply: ap(monadEffect),
+    Functor0: function() {
+      return $lazy_functorEffect(0);
+    }
+  };
+});
+var functorEffect = /* @__PURE__ */ $lazy_functorEffect(20);
+var applyEffect = /* @__PURE__ */ $lazy_applyEffect(23);
+var lift22 = /* @__PURE__ */ lift2(applyEffect);
+var semigroupEffect = function(dictSemigroup) {
+  return {
+    append: lift22(append(dictSemigroup))
+  };
+};
+var monoidEffect = function(dictMonoid) {
+  var semigroupEffect1 = semigroupEffect(dictMonoid.Semigroup0());
+  return {
+    mempty: pureE(mempty(dictMonoid)),
+    Semigroup0: function() {
+      return semigroupEffect1;
+    }
+  };
+};
+
+// output/Effect.Ref/foreign.js
+var _new = function(val) {
+  return function() {
+    return { value: val };
+  };
+};
+var read2 = function(ref) {
+  return function() {
+    return ref.value;
+  };
+};
+var modifyImpl2 = function(f) {
+  return function(ref) {
+    return function() {
+      var t = f(ref.value);
+      ref.value = t.state;
+      return t.value;
+    };
+  };
+};
+var write2 = function(val) {
+  return function(ref) {
+    return function() {
+      ref.value = val;
+    };
+  };
+};
+
+// output/Effect.Ref/index.js
+var $$void2 = /* @__PURE__ */ $$void(functorEffect);
+var $$new = _new;
+var modify$prime = modifyImpl2;
+var modify = function(f) {
+  return modify$prime(function(s2) {
+    var s$prime = f(s2);
+    return {
+      state: s$prime,
+      value: s$prime
+    };
+  });
+};
+var modify_ = function(f) {
+  return function(s2) {
+    return $$void2(modify(f)(s2));
+  };
+};
+
+// output/Control.Monad.ST.Internal/index.js
+var $runtime_lazy2 = function(name16, moduleName, init3) {
+  var state4 = 0;
+  var val;
+  return function(lineNumber) {
+    if (state4 === 2)
+      return val;
+    if (state4 === 1)
+      throw new ReferenceError(name16 + " was needed before it finished initializing (module " + moduleName + ", line " + lineNumber + ")", moduleName, lineNumber);
+    state4 = 1;
+    val = init3();
+    state4 = 2;
+    return val;
+  };
+};
+var modify$prime2 = modifyImpl;
+var modify2 = function(f) {
+  return modify$prime2(function(s2) {
+    var s$prime = f(s2);
+    return {
+      state: s$prime,
+      value: s$prime
+    };
+  });
+};
+var functorST = {
+  map: map_
+};
+var monadST = {
+  Applicative0: function() {
+    return applicativeST;
+  },
+  Bind1: function() {
+    return bindST;
+  }
+};
+var bindST = {
+  bind: bind_,
+  Apply0: function() {
+    return $lazy_applyST(0);
+  }
+};
+var applicativeST = {
+  pure: pure_,
+  Apply0: function() {
+    return $lazy_applyST(0);
+  }
+};
+var $lazy_applyST = /* @__PURE__ */ $runtime_lazy2("applyST", "Control.Monad.ST.Internal", function() {
+  return {
+    apply: ap(monadST),
+    Functor0: function() {
+      return functorST;
+    }
+  };
+});
+var applyST = /* @__PURE__ */ $lazy_applyST(47);
+var lift23 = /* @__PURE__ */ lift2(applyST);
+var semigroupST = function(dictSemigroup) {
+  return {
+    append: lift23(append(dictSemigroup))
+  };
+};
+
+// output/Data.Argonaut.Parser/foreign.js
+function _jsonParser(fail3, succ2, s2) {
+  try {
+    return succ2(JSON.parse(s2));
+  } catch (e) {
+    return fail3(e.message);
+  }
+}
+
 // output/Data.Argonaut.Parser/index.js
 var jsonParser = function(j) {
   return _jsonParser(Left.create, Right.create, j);
@@ -1041,7 +1406,7 @@ var unsafeIndexImpl = function(xs) {
 };
 
 // output/Control.Lazy/index.js
-var $runtime_lazy = function(name16, moduleName, init3) {
+var $runtime_lazy3 = function(name16, moduleName, init3) {
   var state4 = 0;
   var val;
   return function(lineNumber) {
@@ -1068,7 +1433,7 @@ var defer = function(dict) {
 var fix = function(dictLazy) {
   var defer1 = defer(dictLazy);
   return function(f) {
-    var $lazy_go = $runtime_lazy("go", "Control.Lazy", function() {
+    var $lazy_go = $runtime_lazy3("go", "Control.Lazy", function() {
       return defer1(function(v) {
         return f($lazy_go(25));
       });
@@ -1077,365 +1442,6 @@ var fix = function(dictLazy) {
     return go2;
   };
 };
-
-// output/Control.Monad/index.js
-var ap = function(dictMonad) {
-  var bind11 = bind(dictMonad.Bind1());
-  var pure35 = pure(dictMonad.Applicative0());
-  return function(f) {
-    return function(a2) {
-      return bind11(f)(function(f$prime) {
-        return bind11(a2)(function(a$prime) {
-          return pure35(f$prime(a$prime));
-        });
-      });
-    };
-  };
-};
-
-// output/Data.Identity/index.js
-var Identity = function(x) {
-  return x;
-};
-var functorIdentity = {
-  map: function(f) {
-    return function(m) {
-      return f(m);
-    };
-  }
-};
-var applyIdentity = {
-  apply: function(v) {
-    return function(v1) {
-      return v(v1);
-    };
-  },
-  Functor0: function() {
-    return functorIdentity;
-  }
-};
-var bindIdentity = {
-  bind: function(v) {
-    return function(f) {
-      return f(v);
-    };
-  },
-  Apply0: function() {
-    return applyIdentity;
-  }
-};
-var applicativeIdentity = {
-  pure: Identity,
-  Apply0: function() {
-    return applyIdentity;
-  }
-};
-var monadIdentity = {
-  Applicative0: function() {
-    return applicativeIdentity;
-  },
-  Bind1: function() {
-    return bindIdentity;
-  }
-};
-
-// output/Data.EuclideanRing/foreign.js
-var intDegree = function(x) {
-  return Math.min(Math.abs(x), 2147483647);
-};
-var intDiv = function(x) {
-  return function(y) {
-    if (y === 0)
-      return 0;
-    return y > 0 ? Math.floor(x / y) : -Math.floor(x / -y);
-  };
-};
-var intMod = function(x) {
-  return function(y) {
-    if (y === 0)
-      return 0;
-    var yy = Math.abs(y);
-    return (x % yy + yy) % yy;
-  };
-};
-
-// output/Data.CommutativeRing/index.js
-var commutativeRingInt = {
-  Ring0: function() {
-    return ringInt;
-  }
-};
-
-// output/Data.EuclideanRing/index.js
-var mod = function(dict) {
-  return dict.mod;
-};
-var euclideanRingInt = {
-  degree: intDegree,
-  div: intDiv,
-  mod: intMod,
-  CommutativeRing0: function() {
-    return commutativeRingInt;
-  }
-};
-
-// output/Data.Monoid/index.js
-var monoidUnit = {
-  mempty: unit,
-  Semigroup0: function() {
-    return semigroupUnit;
-  }
-};
-var monoidString = {
-  mempty: "",
-  Semigroup0: function() {
-    return semigroupString;
-  }
-};
-var mempty = function(dict) {
-  return dict.mempty;
-};
-
-// output/Effect/foreign.js
-var pureE = function(a2) {
-  return function() {
-    return a2;
-  };
-};
-var bindE = function(a2) {
-  return function(f) {
-    return function() {
-      return f(a2())();
-    };
-  };
-};
-
-// output/Effect/index.js
-var $runtime_lazy2 = function(name16, moduleName, init3) {
-  var state4 = 0;
-  var val;
-  return function(lineNumber) {
-    if (state4 === 2)
-      return val;
-    if (state4 === 1)
-      throw new ReferenceError(name16 + " was needed before it finished initializing (module " + moduleName + ", line " + lineNumber + ")", moduleName, lineNumber);
-    state4 = 1;
-    val = init3();
-    state4 = 2;
-    return val;
-  };
-};
-var monadEffect = {
-  Applicative0: function() {
-    return applicativeEffect;
-  },
-  Bind1: function() {
-    return bindEffect;
-  }
-};
-var bindEffect = {
-  bind: bindE,
-  Apply0: function() {
-    return $lazy_applyEffect(0);
-  }
-};
-var applicativeEffect = {
-  pure: pureE,
-  Apply0: function() {
-    return $lazy_applyEffect(0);
-  }
-};
-var $lazy_functorEffect = /* @__PURE__ */ $runtime_lazy2("functorEffect", "Effect", function() {
-  return {
-    map: liftA1(applicativeEffect)
-  };
-});
-var $lazy_applyEffect = /* @__PURE__ */ $runtime_lazy2("applyEffect", "Effect", function() {
-  return {
-    apply: ap(monadEffect),
-    Functor0: function() {
-      return $lazy_functorEffect(0);
-    }
-  };
-});
-var functorEffect = /* @__PURE__ */ $lazy_functorEffect(20);
-var applyEffect = /* @__PURE__ */ $lazy_applyEffect(23);
-var lift22 = /* @__PURE__ */ lift2(applyEffect);
-var semigroupEffect = function(dictSemigroup) {
-  return {
-    append: lift22(append(dictSemigroup))
-  };
-};
-var monoidEffect = function(dictMonoid) {
-  var semigroupEffect1 = semigroupEffect(dictMonoid.Semigroup0());
-  return {
-    mempty: pureE(mempty(dictMonoid)),
-    Semigroup0: function() {
-      return semigroupEffect1;
-    }
-  };
-};
-
-// output/Effect.Ref/foreign.js
-var _new = function(val) {
-  return function() {
-    return { value: val };
-  };
-};
-var read = function(ref) {
-  return function() {
-    return ref.value;
-  };
-};
-var modifyImpl = function(f) {
-  return function(ref) {
-    return function() {
-      var t = f(ref.value);
-      ref.value = t.state;
-      return t.value;
-    };
-  };
-};
-var write = function(val) {
-  return function(ref) {
-    return function() {
-      ref.value = val;
-    };
-  };
-};
-
-// output/Effect.Ref/index.js
-var $$void2 = /* @__PURE__ */ $$void(functorEffect);
-var $$new = _new;
-var modify$prime = modifyImpl;
-var modify = function(f) {
-  return modify$prime(function(s2) {
-    var s$prime = f(s2);
-    return {
-      state: s$prime,
-      value: s$prime
-    };
-  });
-};
-var modify_ = function(f) {
-  return function(s2) {
-    return $$void2(modify(f)(s2));
-  };
-};
-
-// output/Control.Monad.ST.Internal/foreign.js
-var map_ = function(f) {
-  return function(a2) {
-    return function() {
-      return f(a2());
-    };
-  };
-};
-var pure_ = function(a2) {
-  return function() {
-    return a2;
-  };
-};
-var bind_ = function(a2) {
-  return function(f) {
-    return function() {
-      return f(a2())();
-    };
-  };
-};
-var foreach = function(as) {
-  return function(f) {
-    return function() {
-      for (var i2 = 0, l = as.length; i2 < l; i2++) {
-        f(as[i2])();
-      }
-    };
-  };
-};
-function newSTRef(val) {
-  return function() {
-    return { value: val };
-  };
-}
-var read2 = function(ref) {
-  return function() {
-    return ref.value;
-  };
-};
-var modifyImpl2 = function(f) {
-  return function(ref) {
-    return function() {
-      var t = f(ref.value);
-      ref.value = t.state;
-      return t.value;
-    };
-  };
-};
-var write2 = function(a2) {
-  return function(ref) {
-    return function() {
-      return ref.value = a2;
-    };
-  };
-};
-
-// output/Control.Monad.ST.Internal/index.js
-var $runtime_lazy3 = function(name16, moduleName, init3) {
-  var state4 = 0;
-  var val;
-  return function(lineNumber) {
-    if (state4 === 2)
-      return val;
-    if (state4 === 1)
-      throw new ReferenceError(name16 + " was needed before it finished initializing (module " + moduleName + ", line " + lineNumber + ")", moduleName, lineNumber);
-    state4 = 1;
-    val = init3();
-    state4 = 2;
-    return val;
-  };
-};
-var modify$prime2 = modifyImpl2;
-var modify2 = function(f) {
-  return modify$prime2(function(s2) {
-    var s$prime = f(s2);
-    return {
-      state: s$prime,
-      value: s$prime
-    };
-  });
-};
-var functorST = {
-  map: map_
-};
-var monadST = {
-  Applicative0: function() {
-    return applicativeST;
-  },
-  Bind1: function() {
-    return bindST;
-  }
-};
-var bindST = {
-  bind: bind_,
-  Apply0: function() {
-    return $lazy_applyST(0);
-  }
-};
-var applicativeST = {
-  pure: pure_,
-  Apply0: function() {
-    return $lazy_applyST(0);
-  }
-};
-var $lazy_applyST = /* @__PURE__ */ $runtime_lazy3("applyST", "Control.Monad.ST.Internal", function() {
-  return {
-    apply: ap(monadST),
-    Functor0: function() {
-      return functorST;
-    }
-  };
-});
-var applyST = /* @__PURE__ */ $lazy_applyST(47);
 
 // output/Data.Array.ST/foreign.js
 function newSTArray() {
@@ -1592,7 +1598,7 @@ var Iterator = /* @__PURE__ */ function() {
 }();
 var next = function(v) {
   return function __do3() {
-    var i2 = read2(v.value1)();
+    var i2 = read(v.value1)();
     modify2(function(v1) {
       return v1 + 1 | 0;
     })(v.value1)();
@@ -1606,7 +1612,7 @@ var iterate = function(iter) {
   return function(f) {
     return function __do3() {
       var $$break = newSTRef(false)();
-      while (map4(not2)(read2($$break))()) {
+      while (map4(not2)(read($$break))()) {
         (function __do4() {
           var mx = next(iter)();
           if (mx instanceof Just) {
@@ -1614,7 +1620,7 @@ var iterate = function(iter) {
           }
           ;
           if (mx instanceof Nothing) {
-            return $$void3(write2(true)($$break))();
+            return $$void3(write(true)($$break))();
           }
           ;
           throw new Error("Failed pattern match at Data.Array.ST.Iterator (line 42, column 5 - line 44, column 47): " + [mx.constructor.name]);
@@ -1692,11 +1698,11 @@ var curry = function(f) {
   };
 };
 var applyTuple = function(dictSemigroup) {
-  var append14 = append(dictSemigroup);
+  var append16 = append(dictSemigroup);
   return {
     apply: function(v) {
       return function(v1) {
-        return new Tuple(append14(v.value0)(v1.value0), v.value1(v1.value1));
+        return new Tuple(append16(v.value0)(v1.value0), v.value1(v1.value1));
       };
     },
     Functor0: function() {
@@ -1842,13 +1848,13 @@ var oneOfMap = function(dictFoldable) {
   };
 };
 var traverse_ = function(dictApplicative) {
-  var applySecond14 = applySecond(dictApplicative.Apply0());
+  var applySecond13 = applySecond(dictApplicative.Apply0());
   var pure35 = pure(dictApplicative);
   return function(dictFoldable) {
     var foldr22 = foldr(dictFoldable);
     return function(f) {
       return foldr22(function($454) {
-        return applySecond14(f($454));
+        return applySecond13(f($454));
       })(pure35(unit));
     };
   };
@@ -2415,13 +2421,13 @@ var fromFoldable2 = function(dictFoldable) {
 };
 var fold2 = /* @__PURE__ */ _foldM(applyFlipped);
 var foldMap2 = function(dictMonoid) {
-  var append14 = append(dictMonoid.Semigroup0());
+  var append16 = append(dictMonoid.Semigroup0());
   var mempty3 = mempty(dictMonoid);
   return function(f) {
     return fold2(function(acc) {
       return function(k) {
         return function(v) {
-          return append14(acc)(f(k)(v));
+          return append16(acc)(f(k)(v));
         };
       };
     })(mempty3);
@@ -4356,13 +4362,13 @@ var fold3 = function(dictIsEvent) {
   var sampleOnRight1 = sampleOnRight(dictIsEvent);
   var Alternative0 = dictIsEvent.Alternative0();
   var alt17 = alt(Alternative0.Plus1().Alt0());
-  var pure113 = pure(Alternative0.Applicative0());
+  var pure114 = pure(Alternative0.Applicative0());
   var map112 = map(dictIsEvent.Filterable1().Functor1());
   return function(f) {
     return function(b2) {
       return function(e) {
         return fix1(function(i2) {
-          return sampleOnRight1(alt17(i2)(pure113(b2)))(map112(flip(f))(e));
+          return sampleOnRight1(alt17(i2)(pure114(b2)))(map112(flip(f))(e));
         });
       };
     };
@@ -4427,10 +4433,10 @@ var sampleOnRight2 = function(v) {
     return function(b2, k) {
       var latest = $$new(Nothing.value)();
       var c1 = v(b2, function(a2) {
-        return write(new Just(a2))(latest)();
+        return write2(new Just(a2))(latest)();
       });
       var c2 = v1(b2, function(f) {
-        var o = read(latest)();
+        var o = read2(latest)();
         return for_1(o)(function(a2) {
           return function() {
             return k(f(a2));
@@ -4449,7 +4455,7 @@ var sampleOnLeft = function(v) {
     return function(b2, k) {
       var latest = $$new(Nothing.value)();
       var c1 = v(b2, function(a2) {
-        var o = read(latest)();
+        var o = read2(latest)();
         return for_1(o)(function(f) {
           return function() {
             return k(f(a2));
@@ -4457,7 +4463,7 @@ var sampleOnLeft = function(v) {
         })();
       });
       var c2 = v1(b2, function(f) {
-        return write(new Just(f))(latest)();
+        return write2(new Just(f))(latest)();
       });
       return function __do3() {
         c1();
@@ -4470,13 +4476,13 @@ var keepLatest2 = function(v) {
   return function(tf, k) {
     var cancelInner = $$new(pure4(unit))();
     var cancelOuter = v(tf, function(v1) {
-      var ci = read(cancelInner)();
+      var ci = read2(cancelInner)();
       ci();
       var c = v1(tf, k);
-      return write(c)(cancelInner)();
+      return write2(c)(cancelInner)();
     });
     return function __do3() {
-      var ci = read(cancelInner)();
+      var ci = read2(cancelInner)();
       ci();
       return cancelOuter();
     };
@@ -4532,20 +4538,20 @@ var create$prime = function __do() {
   return {
     event: function(v, k) {
       var rk = $$new(k)();
-      var ix = read(idx)();
+      var ix = read2(idx)();
       insertObjHack(ix, rk, subscribers);
       modify_(function(v1) {
         return v1 + 1 | 0;
       })(idx)();
       return function __do3() {
-        write(mempty2)(rk)();
+        write2(mempty2)(rk)();
         deleteObjHack(ix, subscribers);
         return unit;
       };
     },
     push: function(a2) {
       return fastForeachOhE(subscribers, function(rk) {
-        var k = read(rk)();
+        var k = read2(rk)();
         return k(a2);
       });
     }
@@ -4636,13 +4642,13 @@ var biSampleOn = function(v) {
       var replay2 = liftST2(newSTArray)();
       var capturing = $$new(true)();
       var c1 = v(tf, function(a2) {
-        var o = read(capturing)();
+        var o = read2(capturing)();
         if (o) {
           return $$void6(liftST2(push(a2)(replay1)))();
         }
         ;
-        write(new Just(a2))(latest1)();
-        var res = read(latest2)();
+        write2(new Just(a2))(latest1)();
+        var res = read2(latest2)();
         return for_1(res)(function(f) {
           return function() {
             return k(f(a2));
@@ -4650,31 +4656,31 @@ var biSampleOn = function(v) {
         })();
       });
       var c2 = v1(tf, function(f) {
-        var o = read(capturing)();
+        var o = read2(capturing)();
         if (o) {
           return $$void6(liftST2(push(f)(replay2)))();
         }
         ;
-        write(new Just(f))(latest2)();
-        var res = read(latest1)();
+        write2(new Just(f))(latest2)();
+        var res = read2(latest1)();
         return for_1(res)(function(a2) {
           return function() {
             return k(f(a2));
           };
         })();
       });
-      write(false)(capturing)();
+      write2(false)(capturing)();
       var samples1 = liftST2(freeze(replay1))();
       var samples2 = liftST2(freeze(replay2))();
       (function() {
         if (samples1.length === 0) {
-          return write(last(samples2))(latest2)();
+          return write2(last(samples2))(latest2)();
         }
         ;
         return fastForeachE(samples1, function(a2) {
-          write(new Just(a2))(latest1)();
+          write2(new Just(a2))(latest1)();
           return fastForeachE(samples2, function(f) {
-            write(new Just(f))(latest2)();
+            write2(new Just(f))(latest2)();
             return k(f(a2));
           });
         });
@@ -4700,13 +4706,13 @@ var $lazy_backdoor = /* @__PURE__ */ $runtime_lazy4("backdoor", "FRP.Event", fun
     return {
       event: function(v, k) {
         var rk = $$new(k)();
-        var ix = read(idx)();
+        var ix = read2(idx)();
         insertObjHack(ix, rk, subscribers);
         modify_(function(v1) {
           return v1 + 1 | 0;
         })(idx)();
         return function __do4() {
-          write(mempty2)(rk)();
+          write2(mempty2)(rk)();
           deleteObjHack(ix, subscribers);
           return unit;
         };
@@ -4714,7 +4720,7 @@ var $lazy_backdoor = /* @__PURE__ */ $runtime_lazy4("backdoor", "FRP.Event", fun
       push: function(a2) {
         return function() {
           return fastForeachOhE(subscribers, function(rk) {
-            var k = read(rk)();
+            var k = read2(rk)();
             return k(a2);
           });
         };
@@ -4899,7 +4905,7 @@ var $lazy_backdoor = /* @__PURE__ */ $runtime_lazy4("backdoor", "FRP.Event", fun
                 };
               }));
               var unsub = v(tf, function(v1) {
-                var o = read(r)();
+                var o = read2(r)();
                 var v2 = lookup4(v1.address)(o);
                 if (v2 instanceof Nothing) {
                   return unit;
@@ -4914,7 +4920,7 @@ var $lazy_backdoor = /* @__PURE__ */ $runtime_lazy4("backdoor", "FRP.Event", fun
                 throw new Error("Failed pattern match at FRP.Event (line 771, column 13 - line 773, column 99): " + [v2.constructor.name]);
               });
               return function __do3() {
-                $$void6(write(empty3)(r))();
+                $$void6(write2(empty3)(r))();
                 return unsub();
               };
             };
@@ -4932,16 +4938,16 @@ var $lazy_backdoor = /* @__PURE__ */ $runtime_lazy4("backdoor", "FRP.Event", fun
               var localId = $$new(Nothing.value)();
               var id2 = setTimeout2(n)(function __do3() {
                 k(a2);
-                var lid = read(localId)();
+                var lid = read2(localId)();
                 return maybe(pure4(unit))(function(id3) {
                   return modify_($$delete4(id3))(tid);
                 })(lid)();
               })();
-              write(new Just(id2))(localId)();
+              write2(new Just(id2))(localId)();
               return modify_(append12(singleton8(id2)))(tid)();
             });
             return function __do3() {
-              var ids = read(tid)();
+              var ids = read2(tid)();
               for_22(ids)(clearTimeout2)();
               return canceler();
             };
@@ -5535,9 +5541,9 @@ var flatten = function(v) {
               var myScope = map22(Local.create)(v.ids(interpreter))();
               var stageRef = newSTRef(Begin.value)();
               var c0 = v2(inner, function(kid$prime) {
-                var stage = read2(stageRef)();
+                var stage = read(stageRef)();
                 if (kid$prime instanceof Logic && stage instanceof Middle) {
-                  var curId = read2(myIds)();
+                  var curId = read(myIds)();
                   return traverse_2(function(i2) {
                     return function() {
                       return v3(v.doLogic(kid$prime.value0)(interpreter)(i2));
@@ -5546,9 +5552,9 @@ var flatten = function(v) {
                 }
                 ;
                 if (kid$prime instanceof Remove && stage instanceof Middle) {
-                  $$void7(write2(End.value)(stageRef))();
+                  $$void7(write(End.value)(stageRef))();
                   var mic = function __do3() {
-                    var idRef = read2(myIds)();
+                    var idRef = read(myIds)();
                     for_23(idRef)(function(old) {
                       return for_12(psr.parent)(function(pnt) {
                         return function() {
@@ -5560,19 +5566,19 @@ var flatten = function(v) {
                         };
                       });
                     })();
-                    var myu = read2(myUnsub)();
+                    var myu = read(myUnsub)();
                     myu();
-                    var eltu = read2(eltsUnsub)();
+                    var eltu = read(eltsUnsub)();
                     eltu();
                     $$void7(modify2($$delete(myUnsubId))(cancelInner))();
                     return $$void7(modify2($$delete(eltsUnsubId))(cancelInner))();
                   };
-                  $$void7(write2(mic)(myImmediateCancellation))();
+                  $$void7(write(mic)(myImmediateCancellation))();
                   return mic();
                 }
                 ;
                 if (kid$prime instanceof Insert && stage instanceof Begin) {
-                  $$void7(write2(Middle.value)(stageRef))();
+                  $$void7(write(Middle.value)(stageRef))();
                   var c1 = v2(flatten(v)(function() {
                     var $125 = {};
                     for (var $126 in psr) {
@@ -5589,18 +5595,18 @@ var flatten = function(v) {
                     return $125;
                   }())(interpreter)(kid$prime.value0), v3);
                   $$void7(modify2(insert(eltsUnsubId)(c1))(cancelInner))();
-                  return $$void7(write2(c1)(eltsUnsub))();
+                  return $$void7(write(c1)(eltsUnsub))();
                 }
                 ;
                 return unit;
               });
-              $$void7(write2(c0)(myUnsub))();
+              $$void7(write(c0)(myUnsub))();
               $$void7(modify2(insert(myUnsubId)(c0))(cancelInner))();
-              var mican = read2(myImmediateCancellation)();
+              var mican = read(myImmediateCancellation)();
               return mican();
             });
             return function __do3() {
-              bind3(read2(cancelInner))(foldl4(applySecond2)(pure12(unit)))();
+              bind3(read(cancelInner))(foldl4(applySecond2)(pure12(unit)))();
               return cancelOuter();
             };
           });
@@ -5674,7 +5680,7 @@ var internalPortalComplexComplex = function() {
                         })(idz);
                         var realized = flatten(flatArgs)(psr)(interpreter)(closure(injectable)(unsafeCoerce));
                         var u2 = v1(realized, k);
-                        $$void7(write2(u2)(av2))();
+                        $$void7(write(u2)(av2))();
                         return function __do3() {
                           u0();
                           when2(!isGlobal)(for_23(toArray3(idz))(function(id2) {
@@ -5684,7 +5690,7 @@ var internalPortalComplexComplex = function() {
                               }));
                             };
                           }))();
-                          var av2c = read2(av2)();
+                          var av2c = read(av2)();
                           return av2c();
                         };
                       });
@@ -7056,7 +7062,7 @@ and all of the dynamic bits are hydrated on page load."""
         ]
     ]
 `;
-var build2 = 'module Deku.Example.Docs.Examples.SSR.Build where\n\nimport Prelude\n\nimport Control.Monad.ST.Global (toEffect)\nimport Deku.Examples.Docs.Examples.SSR.App (app)\nimport Deku.Toplevel (Template(..), runSSR)\nimport Effect (Effect)\nimport Effect.Console (log)\n\nmain :: Effect Unit\nmain =\n  toEffect\n    ( runSSR\n        ( Template\n            { head:\n                """<!DOCTYPE html>\n<html>\n  <head>\n    <title>My static page</title>\n		<script src="bundle.js" defer><\/script>\n  </head>"""\n            , tail: "</html>"\n            }\n        )\n        app\n    ) >>= log';
+var build2 = 'module Deku.Example.Docs.Examples.SSR.Build where\n\nimport Prelude\n\nimport Control.Monad.ST.Global (toEffect)\nimport Deku.Examples.Docs.Examples.SSR.App (app)\nimport Deku.Toplevel (runSSR)\nimport Effect (Effect)\nimport Effect.Console (log)\n\nmain :: Effect Unit\nmain =\n  toEffect\n    ( pure\n        """<!DOCTYPE html>\n<html>\n  <head>\n    <title>My static page</title>\n		<script src="bundle.js" defer><\/script>\n  </head>""" <> runSSR app <> pure "</html>"\n    ) >>= log';
 var live = "module Deku.Example.Docs.Examples.SSR.Live where\n\nimport Prelude\n\nimport Deku.Examples.Docs.Examples.SSR.App (app)\nimport Deku.Toplevel (hydrate)\nimport Effect (Effect)\n\nmain :: Effect Unit\nmain = hydrate app";
 
 // output/Web.Event.Event/foreign.js
@@ -9040,12 +9046,12 @@ var fail = function(dictMonad) {
   };
 };
 var unsafeReadTagged = function(dictMonad) {
-  var pure113 = pure(applicativeExceptT(dictMonad));
+  var pure114 = pure(applicativeExceptT(dictMonad));
   var fail1 = fail(dictMonad);
   return function(tag) {
     return function(value13) {
       if (tagOf(value13) === tag) {
-        return pure113(unsafeFromForeign(value13));
+        return pure114(unsafeFromForeign(value13));
       }
       ;
       if (otherwise) {
@@ -10930,7 +10936,7 @@ var ssrDeleteFromCache = function(a2) {
 var ssrDOMInterpret = function(seed) {
   return {
     ids: function __do3() {
-      var s2 = read2(seed)();
+      var s2 = read(seed)();
       var o = show5(evalGen(arbitrary2)({
         newSeed: mkSeed(s2),
         size: 5
@@ -11144,12 +11150,12 @@ var traversableCatQueue = {
   traverse: function(dictApplicative) {
     var Apply0 = dictApplicative.Apply0();
     var map112 = map(Apply0.Functor0());
-    var lift23 = lift2(Apply0);
+    var lift24 = lift2(Apply0);
     var pure35 = pure(dictApplicative);
     return function(f) {
       var $123 = map112(foldl5(snoc3)(empty10));
       var $124 = foldl5(function(acc) {
-        var $126 = lift23(snoc3)(acc);
+        var $126 = lift24(snoc3)(acc);
         return function($127) {
           return $126(f($127));
         };
@@ -12074,10 +12080,10 @@ var __internalDekuFlatten4 = function(a2) {
             };
           };
         },
-        ids: function($50) {
+        ids: function($41) {
           return function(v) {
             return v.ids;
-          }(unwrap9($50));
+          }(unwrap9($41));
         },
         disconnectElement: function(v) {
           return function(v1) {
@@ -12097,38 +12103,27 @@ var __internalDekuFlatten4 = function(a2) {
   };
 };
 var runSSR$prime = function(topTag) {
-  return function(v) {
-    var go2 = function(children$prime) {
-      return map111(function() {
-        var $51 = ssr$prime(topTag);
-        return function($52) {
-          return function(v1) {
-            return v.head + v1;
-          }(function(v1) {
-            return v1 + v.tail;
-          }($51($52)));
-        };
-      }())(function __do3() {
-        var seed = newSTRef(0)();
-        var instr = newSTRef([])();
-        var di = ssrDOMInterpret(seed);
-        void1(subscribePure(__internalDekuFlatten4({
-          parent: new Just("deku-root"),
-          scope: new Local("rootScope"),
-          raiseId: function(v1) {
-            return pure111(unit);
-          },
-          ez: true,
-          pos: Nothing.value,
-          dynFamily: Nothing.value
-        })(di)(children$prime))(function(i2) {
-          return i2(instr);
-        }))();
-        return read2(instr)();
-      });
-    };
-    return go2;
+  var go2 = function(children$prime) {
+    return map111(ssr$prime(topTag))(function __do3() {
+      var seed = newSTRef(0)();
+      var instr = newSTRef([])();
+      var di = ssrDOMInterpret(seed);
+      void1(subscribePure(__internalDekuFlatten4({
+        parent: new Just("deku-root"),
+        scope: new Local("rootScope"),
+        raiseId: function(v) {
+          return pure111(unit);
+        },
+        ez: true,
+        pos: Nothing.value,
+        dynFamily: Nothing.value
+      })(di)(children$prime))(function(i2) {
+        return i2(instr);
+      }))();
+      return read(instr)();
+    });
   };
+  return go2;
 };
 var runSSR = /* @__PURE__ */ runSSR$prime("body");
 
@@ -12187,8 +12182,8 @@ var makePursx11 = /* @__PURE__ */ makePursx({
     return "code0";
   }
 }));
-var applySecond12 = /* @__PURE__ */ applySecond(applyST);
 var bind9 = /* @__PURE__ */ bind(bindST);
+var append14 = /* @__PURE__ */ append(/* @__PURE__ */ semigroupST(semigroupString));
 var pure112 = /* @__PURE__ */ pure(applicativeST);
 var px10 = /* @__PURE__ */ function() {
   return $$Proxy.value;
@@ -12205,18 +12200,18 @@ var app2 = /* @__PURE__ */ function() {
   })()()(vbusNil)()())()())($$Proxy.value)(function(push2) {
     return function(event) {
       return div_([p_([text_("Here's an example of SSR in deku.\nAll of the static bits are rendered as HTML,\nand all of the dynamic bits are hydrated on page load.")]), button(click_3(push2.buttonClicked(unit)))([text_("Click")]), div_([text(alt15(pure32("Val: 0"))(map29(function() {
-        var $63 = append10("Val: ");
-        return function($64) {
-          return $63(show6($64));
+        var $66 = append10("Val: ");
+        return function($67) {
+          return $66(show6($67));
         };
       }())(fold6(function(a2) {
         return function(v) {
           return 1 + a2 | 0;
         };
       })(-1 | 0)(alt15(pure32(unit))(event.buttonClicked)))))]), div_([input(slider(pure32(push2.sliderMoved)))([]), div_([text(alt15(pure32("Val: 50"))(map29(function() {
-        var $65 = append10("Val: ");
-        return function($66) {
-          return $65(show14($66));
+        var $68 = append10("Val: ");
+        return function($69) {
+          return $68(show14($69));
         };
       }())(event.sliderMoved)))])])]);
     };
@@ -12229,10 +12224,10 @@ var ssrPage = function(v) {
     code0: pre_([code_([text_(app)])]),
     result: app2,
     codegen: pre_([code_([text(makePureEvent(function(k) {
-      return applySecond12(bind9(runSSR({
-        head: '<!DOCTYPE html><html><head><script src="bundle.js" defer><\/script></head>',
-        tail: "</html>"
-      })(app2))(k))(pure112(pure112(unit)));
+      return function __do3() {
+        bind9(append14(pure112('<!DOCTYPE html><html><head><script src="bundle.js" defer><\/script></head>'))(append14(runSSR(app2))(pure112("</html>"))))(k)();
+        return pure112(unit);
+      };
     }))])])
   });
 };
@@ -12244,7 +12239,7 @@ var pure33 = /* @__PURE__ */ pure(applicativeEvent);
 var map30 = /* @__PURE__ */ map(functorArray);
 var oneOfMap12 = /* @__PURE__ */ oneOfMap(foldableArray)(plusEvent);
 var attr20 = /* @__PURE__ */ attr(attrOnClickCb);
-var applySecond13 = /* @__PURE__ */ applySecond(applyEffect);
+var applySecond12 = /* @__PURE__ */ applySecond(applyEffect);
 var attr111 = /* @__PURE__ */ attr(attrA_StyleString);
 var attr27 = /* @__PURE__ */ attr(attrA_HrefString);
 var attr35 = /* @__PURE__ */ attr(attrSpan_StyleString);
@@ -12306,7 +12301,7 @@ var scene = function(options2) {
       };
       return div_([div_(map30(function(v) {
         return span_([a(oneOfMap12(pure33)([attr20(OnClick.value)(cb(function(e) {
-          return applySecond13(preventDefault(e))(push2(v.value0));
+          return applySecond12(preventDefault(e))(push2(v.value0));
         })), attr111(Style.value)("cursor:pointer;"), attr27(Href.value)(options2.slug + v.value1.value1.value0)]))([text_(v.value1.value0)]), span(pure33(attr35(Style.value)(function() {
           if (v.value1.value1.value1) {
             return "";
@@ -12491,6 +12486,8 @@ var record3 = /* @__PURE__ */ record2()(/* @__PURE__ */ rowListCodecCons(/* @__P
     return "page";
   }
 }));
+var append15 = /* @__PURE__ */ append(/* @__PURE__ */ semigroupST(semigroupString));
+var pure113 = /* @__PURE__ */ pure(applicativeST);
 var main2 = function __do2() {
   var args = argv();
   var options2 = maybe(pure34({
@@ -12520,22 +12517,19 @@ var main2 = function __do2() {
       };
     };
   })(index(args)(2))();
-  return bind10(toEffect(runSSR({
-    head: '<!DOCTYPE html>\n  <html>\n    <head>\n      <title>Deku documentation</title>\n      <meta charset="UTF-8">\n      <meta name="viewport" content="width=device-width">\n      <link rel="stylesheet" href=' + (function() {
-      if (options2.top) {
-        return '"style.css"';
-      }
-      ;
-      return '"../style.css"';
-    }() + ('>\n      <script type="module">\n        import { main } from ' + (function() {
-      if (options2.top) {
-        return '"bundle.js"';
-      }
-      ;
-      return '"../bundle.js"';
-    }() + (';\n        main({"startsWith":' + ('"' + (options2.pageString + ('"' + (',"slug":' + ('"' + (options2.slug + '"})();\n      <\/script>\n    </head>')))))))))),
-    tail: "</html>"
-  })(scene(options2))))(log2)();
+  return bind10(toEffect(append15(pure113('<!DOCTYPE html>\n  <html>\n    <head>\n      <title>Deku documentation</title>\n      <meta charset="UTF-8">\n      <meta name="viewport" content="width=device-width">\n      <link rel="stylesheet" href=' + (function() {
+    if (options2.top) {
+      return '"style.css"';
+    }
+    ;
+    return '"../style.css"';
+  }() + ('>\n      <script type="module">\n        import { main } from ' + (function() {
+    if (options2.top) {
+      return '"bundle.js"';
+    }
+    ;
+    return '"../bundle.js"';
+  }() + (';\n        main({"startsWith":' + ('"' + (options2.pageString + ('"' + (',"slug":' + ('"' + (options2.slug + '"})();\n      <\/script>\n    </head>'))))))))))))(append15(runSSR(scene(options2)))(pure113("</html>")))))(log2)();
 };
 
 // <stdin>
