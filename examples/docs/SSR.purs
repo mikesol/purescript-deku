@@ -8,7 +8,7 @@ import Deku.Core (Domable, vbussed)
 import Deku.DOM as D
 import Deku.Listeners (click_, slider)
 import Deku.Pursx ((~~))
-import Deku.Toplevel (Template(..), runSSR)
+import Deku.Toplevel (runSSR)
 import Examples as Examples
 import FRP.Event (fold, makePureEvent)
 import FRP.Event.VBus (V)
@@ -143,17 +143,11 @@ ssrPage _ = px ~~
       ( D.pre_
           [ D.code_
               [ text
-                  ( makePureEvent \k ->
-                      ( ( runSSR
-                            ( Template
-                                { head:
-                                    "<!DOCTYPE html><html><head><script src=\"bundle.js\" defer></script></head>"
-                                , tail: "</html>"
-                                }
-                            )
-                            app
+                  ( makePureEvent \k -> do
+                      (pure "<!DOCTYPE html><html><head><script src=\"bundle.js\" defer></script></head>" <> runSSR   
+                            app <> pure "</html>"
                         ) >>= k
-                      ) *> (pure (pure unit))
+                      pure (pure unit)
                   )
               ]
           ]

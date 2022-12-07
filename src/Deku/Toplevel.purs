@@ -10,7 +10,7 @@ import Control.Monad.ST.Class (liftST)
 import Control.Monad.ST.Global (Global)
 import Control.Monad.ST.Internal as RRef
 import Data.Maybe (Maybe(..), maybe)
-import Data.Newtype (class Newtype, unwrap)
+import Data.Newtype (unwrap)
 import Deku.Control (deku)
 import Deku.Core (DOMInterpret(..), Domable(..), Node(..), Domable')
 import Deku.Interpret (FFIDOMSnapshot, Instruction, fullDOMInterpret, getAllComments, hydratingDOMInterpret, makeFFIDOMSnapshot, setHydrating, ssrDOMInterpret, unSetHydrating)
@@ -83,28 +83,23 @@ hydrate
 hydrate a = void (hydrate' a)
 
 --
-newtype Template = Template { head :: String, tail :: String }
-
-derive instance Newtype Template _
 
 runSSR
-  :: Template
-  -> ( forall lock r
+  ::  forall lock r
         . Domable lock
             (RRef.STRef r (Array Instruction) -> ST r Unit)
        -> ST r String
-     )
+     
 runSSR = runSSR' "body"
 
 runSSR'
   :: String
-  -> Template
   -> ( forall lock r
         . Domable lock
             (RRef.STRef r (Array Instruction) -> ST r Unit)
        -> ST r String
      )
-runSSR' topTag (Template { head, tail }) = go
+runSSR' topTag = go
   where
   go
     :: forall lock r
@@ -125,7 +120,7 @@ runSSR' topTag (Template { head, tail }) = go
       unglobal = unsafeCoerce :: ST Global String -> ST r String
 
     unglobal
-      ( (head <> _) <<< (_ <> tail) <<< ssr' topTag
+      (ssr' topTag
           <$>
             ( do
                 seed <- RRef.new 0

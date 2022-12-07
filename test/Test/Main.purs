@@ -20,7 +20,7 @@ import Deku.Interpret (FFIDOMSnapshot, Instruction)
 import Deku.Lifecycle (onDidMount, onDismount, onWillMount)
 import Deku.Listeners (click_)
 import Deku.Pursx ((~~))
-import Deku.Toplevel (Template(..), hydrate', runInBody', runSSR)
+import Deku.Toplevel (hydrate', runInBody', runSSR)
 import Effect (Effect)
 import FRP.Event (Event, fold)
 import Type.Proxy (Proxy(..))
@@ -43,7 +43,7 @@ ssr
             (RRef.STRef Global (Array Instruction) -> ST Global Unit)
      )
   -> ST Global String
-ssr = runSSR (Template { head: "<head></head>", tail: "" })
+ssr i = pure "<head></head>" <> runSSR i
 
 sanityCheck :: Nut
 sanityCheck = D.span (id_ "hello") [ text_ "Hello" ]

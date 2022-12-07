@@ -8,7 +8,7 @@ import Deku.Attribute ((!:=))
 import Deku.Core (Domable)
 import Deku.DOM as D
 import Deku.Pursx ((~~))
-import Deku.Toplevel (Template(..), hydrate, runInBody, runSSR)
+import Deku.Toplevel (hydrate, runInBody, runSSR)
 import Effect (Effect)
 import Graphics.Canvas (CanvasElement, fillRect, getContext2D, setFillStyle)
 import Type.Proxy (Proxy(..))
@@ -62,7 +62,7 @@ main =
   if false then do
     runInBody scene
   else do
-    str <- liftST (runSSR (Template { head: "", tail: "" }) scene)
+    str <- liftST (runSSR scene)
     setBodyAs str
     hydrate scene
 
