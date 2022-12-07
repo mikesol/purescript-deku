@@ -89,43 +89,64 @@ derive instance Newtype Template _
 
 runSSR
   :: Template
-  -> ( forall lock
+  -> ( forall lock r
         . Domable lock
-            (RRef.STRef Global (Array Instruction) -> ST Global Unit)
+            (RRef.STRef r (Array Instruction) -> ST r Unit)
+       -> ST r String
      )
-  -> ST Global String
 runSSR = runSSR' "body"
 
 runSSR'
   :: String
   -> Template
-  -> ( forall lock
+  -> ( forall lock r
         . Domable lock
-            (RRef.STRef Global (Array Instruction) -> ST Global Unit)
+            (RRef.STRef r (Array Instruction) -> ST r Unit)
+       -> ST r String
      )
-  -> ST Global String
-runSSR' topTag (Template { head, tail }) children =
-  (head <> _) <<< (_ <> tail) <<< ssr' topTag
-    <$> liftST
-      ( do
-          seed <- RRef.new 0
-          instr <- RRef.new []
-          let di = ssrDOMInterpret seed
-          void $ subscribePure
-            ( ( __internalDekuFlatten
-                  { parent: Just "deku-root"
-                  , scope: Local "rootScope"
-                  , raiseId: \_ -> pure unit
-                  , ez: true
-                  , pos: Nothing
-                  , dynFamily: Nothing
-                  }
-                  di
-                  children
-              )
+runSSR' topTag (Template { head, tail }) = go
+  where
+  go
+    :: forall lock r
+     . Domable lock
+         (RRef.STRef r (Array Instruction) -> ST r Unit)
+    -> ST r String
+  go children' = do
+    let
+      children =
+        ( unsafeCoerce
+            :: ( Domable lock
+                   (RRef.STRef r (Array Instruction) -> ST r Unit)
+               )
+            -> ( Domable lock
+                   (RRef.STRef Global (Array Instruction) -> ST Global Unit)
+               )
+        ) children'
+      unglobal = unsafeCoerce :: ST Global String -> ST r String
+
+    unglobal
+      ( (head <> _) <<< (_ <> tail) <<< ssr' topTag
+          <$>
+            ( do
+                seed <- RRef.new 0
+                instr <- RRef.new []
+                let di = ssrDOMInterpret seed
+                void $ subscribePure
+                  ( ( __internalDekuFlatten
+                        { parent: Just "deku-root"
+                        , scope: Local "rootScope"
+                        , raiseId: \_ -> pure unit
+                        , ez: true
+                        , pos: Nothing
+                        , dynFamily: Nothing
+                        }
+                        di
+                        children
+                    )
+                  )
+                  \i -> i instr
+                RRef.read instr
             )
-            \i -> i instr
-          RRef.read instr
       )
 
 __internalDekuFlatten
