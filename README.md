@@ -13,7 +13,7 @@ A PureScript web framework for apps that need to be fast.
 
 ## Documentation
 
-[Here is a guide](https://mikesol.github.io/purescript-deku/) to building apps with Deku. The guide is written in Deku and its source code can be found [here](./examples/docs/).
+[Here is a guide](https://purescript-deku.netlify.app/) to building apps with Deku. The guide is written in Deku and its source code can be found [here](https://github.com/mikesol/deku-documentation).
 
 If you want to see a full-featured, highly-optimized Deku site with lots of event handlers, race conditions, asynchronous logic, etc, check out the [wags documentation](https://mikesol.github.io/purescript-wags).
 
