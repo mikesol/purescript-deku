@@ -1,5 +1,7 @@
 module Deku.DOM.Attr.Cursor where
 
+import Prelude
+
 import Deku.DOM.Elt.Use (Use_)
 import Deku.DOM.Elt.Tspan (Tspan_)
 import Deku.DOM.Elt.TextPath (TextPath_)
@@ -39,7 +41,7 @@ import Deku.DOM.Elt.FeBlend (FeBlend_)
 import Deku.DOM.Elt.Ellipse (Ellipse_)
 import Deku.DOM.Elt.Defs (Defs_)
 import Deku.DOM.Elt.Circle (Circle_)
-import Deku.Attribute (class Attr, prop', unsafeAttribute)
+import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 
 data Cursor = Cursor
 
@@ -159,3 +161,7 @@ instance Attr Tspan_ Cursor String where
 
 instance Attr Use_ Cursor String where
   attr Cursor value = unsafeAttribute { key: "cursor", value: prop' value }
+
+instance Attr everything Cursor Unit where
+  attr Cursor _ = unsafeAttribute
+    { key: "cursor", value: unset' }

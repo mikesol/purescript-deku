@@ -1,5 +1,7 @@
 module Deku.DOM.Attr.StrokeOpacity where
 
+import Prelude
+
 import Deku.DOM.Elt.Use (Use_)
 import Deku.DOM.Elt.Tspan (Tspan_)
 import Deku.DOM.Elt.TextPath (TextPath_)
@@ -41,7 +43,7 @@ import Deku.DOM.Elt.Ellipse (Ellipse_)
 import Deku.DOM.Elt.Defs (Defs_)
 import Deku.DOM.Elt.ClipPath (ClipPath_)
 import Deku.DOM.Elt.Circle (Circle_)
-import Deku.Attribute (class Attr, prop', unsafeAttribute)
+import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 
 data StrokeOpacity = StrokeOpacity
 
@@ -208,3 +210,7 @@ instance Attr Tspan_ StrokeOpacity String where
 instance Attr Use_ StrokeOpacity String where
   attr StrokeOpacity value = unsafeAttribute
     { key: "stroke-opacity", value: prop' value }
+
+instance Attr everything StrokeOpacity Unit where
+  attr StrokeOpacity _ = unsafeAttribute
+    { key: "stroke-opacity", value: unset' }

@@ -1,5 +1,7 @@
 module Deku.DOM.Attr.PointerEvents where
 
+import Prelude
+
 import Deku.DOM.Elt.Use (Use_)
 import Deku.DOM.Elt.Tspan (Tspan_)
 import Deku.DOM.Elt.TextPath (TextPath_)
@@ -39,7 +41,7 @@ import Deku.DOM.Elt.FeBlend (FeBlend_)
 import Deku.DOM.Elt.Ellipse (Ellipse_)
 import Deku.DOM.Elt.Defs (Defs_)
 import Deku.DOM.Elt.Circle (Circle_)
-import Deku.Attribute (class Attr, prop', unsafeAttribute)
+import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 
 data PointerEvents = PointerEvents
 
@@ -198,3 +200,7 @@ instance Attr Tspan_ PointerEvents String where
 instance Attr Use_ PointerEvents String where
   attr PointerEvents value = unsafeAttribute
     { key: "pointer-events", value: prop' value }
+
+instance Attr everything PointerEvents Unit where
+  attr PointerEvents _ = unsafeAttribute
+    { key: "pointer-events", value: unset' }

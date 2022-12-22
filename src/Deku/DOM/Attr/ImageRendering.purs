@@ -1,5 +1,7 @@
 module Deku.DOM.Attr.ImageRendering where
 
+import Prelude
+
 import Deku.DOM.Elt.Switch (Switch_)
 import Deku.DOM.Elt.Image (Image_)
 import Deku.DOM.Elt.Filter (Filter_)
@@ -19,7 +21,7 @@ import Deku.DOM.Elt.FeComposite (FeComposite_)
 import Deku.DOM.Elt.FeComponentTransfer (FeComponentTransfer_)
 import Deku.DOM.Elt.FeColorMatrix (FeColorMatrix_)
 import Deku.DOM.Elt.FeBlend (FeBlend_)
-import Deku.Attribute (class Attr, prop', unsafeAttribute)
+import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 
 data ImageRendering = ImageRendering
 
@@ -98,3 +100,7 @@ instance Attr Image_ ImageRendering String where
 instance Attr Switch_ ImageRendering String where
   attr ImageRendering value = unsafeAttribute
     { key: "image-rendering", value: prop' value }
+
+instance Attr everything ImageRendering Unit where
+  attr ImageRendering _ = unsafeAttribute
+    { key: "image-rendering", value: unset' }

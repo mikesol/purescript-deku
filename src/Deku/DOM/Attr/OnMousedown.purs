@@ -1,8 +1,10 @@
 module Deku.DOM.Attr.OnMousedown where
 
 import Prelude
+
+import Prelude
 import Effect (Effect)
-import Deku.Attribute (class Attr, Attribute, Cb(..), cb', unsafeAttribute)
+import Deku.Attribute (class Attr, Attribute, Cb(..), cb', unsafeAttribute, unset')
 import FRP.Event (Event)
 
 data OnMousedown = OnMousedown
@@ -19,4 +21,11 @@ instance Attr anything OnMousedown (Effect Boolean) where
   attr OnMousedown value = unsafeAttribute
     { key: "mousedown", value: cb' (Cb (const value)) }
 
-type OnMousedownEffect = forall element. Attr element OnMousedown (Effect Unit) => Event (Attribute element)
+type OnMousedownEffect =
+  forall element
+   . Attr element OnMousedown (Effect Unit)
+  => Event (Attribute element)
+
+instance Attr everything OnMousedown Unit where
+  attr OnMousedown _ = unsafeAttribute
+    { key: "mousedown", value: unset' }

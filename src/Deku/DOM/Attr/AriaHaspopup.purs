@@ -1,5 +1,7 @@
 module Deku.DOM.Attr.AriaHaspopup where
 
+import Prelude
+
 import Deku.DOM.Elt.View (View_)
 import Deku.DOM.Elt.Use (Use_)
 import Deku.DOM.Elt.Tspan (Tspan_)
@@ -17,7 +19,7 @@ import Deku.DOM.Elt.G (G_)
 import Deku.DOM.Elt.ForeignObject (ForeignObject_)
 import Deku.DOM.Elt.Ellipse (Ellipse_)
 import Deku.DOM.Elt.Circle (Circle_)
-import Deku.Attribute (class Attr, prop', unsafeAttribute)
+import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 
 data AriaHaspopup = AriaHaspopup
 
@@ -88,3 +90,7 @@ instance Attr Use_ AriaHaspopup String where
 instance Attr View_ AriaHaspopup String where
   attr AriaHaspopup value = unsafeAttribute
     { key: "aria-haspopup", value: prop' value }
+
+instance Attr everything AriaHaspopup Unit where
+  attr AriaHaspopup _ = unsafeAttribute
+    { key: "aria-haspopup", value: unset' }

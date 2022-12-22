@@ -1,5 +1,7 @@
 module Deku.DOM.Attr.XmlBase where
 
+import Prelude
+
 import Deku.DOM.Elt.View (View_)
 import Deku.DOM.Elt.Switch (Switch_)
 import Deku.DOM.Elt.Mpath (Mpath_)
@@ -32,7 +34,7 @@ import Deku.DOM.Elt.FeColorMatrix (FeColorMatrix_)
 import Deku.DOM.Elt.FeBlend (FeBlend_)
 import Deku.DOM.Elt.Discard (Discard_)
 import Deku.DOM.Elt.AnimateTransform (AnimateTransform_)
-import Deku.Attribute (class Attr, prop', unsafeAttribute)
+import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 
 data XmlBase = XmlBase
 
@@ -131,3 +133,7 @@ instance Attr Switch_ XmlBase String where
 
 instance Attr View_ XmlBase String where
   attr XmlBase value = unsafeAttribute { key: "xml:base", value: prop' value }
+
+instance Attr everything XmlBase Unit where
+  attr XmlBase _ = unsafeAttribute
+    { key: "xml:base", value: unset' }

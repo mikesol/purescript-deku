@@ -1,5 +1,7 @@
 module Deku.DOM.Attr.Fill where
 
+import Prelude
+
 import Deku.DOM.Elt.Use (Use_)
 import Deku.DOM.Elt.Tspan (Tspan_)
 import Deku.DOM.Elt.TextPath (TextPath_)
@@ -45,7 +47,7 @@ import Deku.DOM.Elt.Circle (Circle_)
 import Deku.DOM.Elt.AnimateTransform (AnimateTransform_)
 import Deku.DOM.Elt.AnimateMotion (AnimateMotion_)
 import Deku.DOM.Elt.Animate (Animate_)
-import Deku.Attribute (class Attr, prop', unsafeAttribute)
+import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 
 data Fill = Fill
 
@@ -183,3 +185,7 @@ instance Attr Tspan_ Fill String where
 
 instance Attr Use_ Fill String where
   attr Fill value = unsafeAttribute { key: "fill", value: prop' value }
+
+instance Attr everything Fill Unit where
+  attr Fill _ = unsafeAttribute
+    { key: "fill", value: unset' }

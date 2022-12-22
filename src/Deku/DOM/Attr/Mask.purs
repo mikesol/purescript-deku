@@ -1,5 +1,7 @@
 module Deku.DOM.Attr.Mask where
 
+import Prelude
+
 import Deku.DOM.Elt.Use (Use_)
 import Deku.DOM.Elt.Tspan (Tspan_)
 import Deku.DOM.Elt.TextPath (TextPath_)
@@ -41,7 +43,7 @@ import Deku.DOM.Elt.Ellipse (Ellipse_)
 import Deku.DOM.Elt.Defs (Defs_)
 import Deku.DOM.Elt.ClipPath (ClipPath_)
 import Deku.DOM.Elt.Circle (Circle_)
-import Deku.Attribute (class Attr, prop', unsafeAttribute)
+import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 
 data Mask = Mask
 
@@ -167,3 +169,7 @@ instance Attr Tspan_ Mask String where
 
 instance Attr Use_ Mask String where
   attr Mask value = unsafeAttribute { key: "mask", value: prop' value }
+
+instance Attr everything Mask Unit where
+  attr Mask _ = unsafeAttribute
+    { key: "mask", value: unset' }

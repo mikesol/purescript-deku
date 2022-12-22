@@ -1,5 +1,7 @@
 module Deku.DOM.Attr.AriaColspan where
 
+import Prelude
+
 import Deku.DOM.Elt.View (View_)
 import Deku.DOM.Elt.Use (Use_)
 import Deku.DOM.Elt.Tspan (Tspan_)
@@ -17,7 +19,7 @@ import Deku.DOM.Elt.G (G_)
 import Deku.DOM.Elt.ForeignObject (ForeignObject_)
 import Deku.DOM.Elt.Ellipse (Ellipse_)
 import Deku.DOM.Elt.Circle (Circle_)
-import Deku.Attribute (class Attr, prop', unsafeAttribute)
+import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 
 data AriaColspan = AriaColspan
 
@@ -88,3 +90,7 @@ instance Attr Use_ AriaColspan String where
 instance Attr View_ AriaColspan String where
   attr AriaColspan value = unsafeAttribute
     { key: "aria-colspan", value: prop' value }
+
+instance Attr everything AriaColspan Unit where
+  attr AriaColspan _ = unsafeAttribute
+    { key: "aria-colspan", value: unset' }

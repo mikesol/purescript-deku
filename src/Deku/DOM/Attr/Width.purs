@@ -1,5 +1,7 @@
 module Deku.DOM.Attr.Width where
 
+import Prelude
+
 import Deku.DOM.Elt.Use (Use_)
 import Deku.DOM.Elt.Symbol (Symbol_)
 import Deku.DOM.Elt.Svg (Svg_)
@@ -33,7 +35,7 @@ import Deku.DOM.Elt.Img (Img_)
 import Deku.DOM.Elt.Input (Input_)
 import Deku.DOM.Elt.Object (Object_)
 import Deku.DOM.Elt.Video (Video_)
-import Deku.Attribute (class Attr, prop', unsafeAttribute)
+import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 
 data Width = Width
 
@@ -135,3 +137,7 @@ instance Attr Symbol_ Width String where
 
 instance Attr Use_ Width String where
   attr Width value = unsafeAttribute { key: "width", value: prop' value }
+
+instance Attr everything Width Unit where
+  attr Width _ = unsafeAttribute
+    { key: "width", value: unset' }

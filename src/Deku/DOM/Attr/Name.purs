@@ -1,5 +1,7 @@
 module Deku.DOM.Attr.Name where
 
+import Prelude
+
 import Deku.DOM.Elt.Button (Button_)
 import Deku.DOM.Elt.Form (Form_)
 import Deku.DOM.Elt.Fieldset (Fieldset_)
@@ -12,7 +14,7 @@ import Deku.DOM.Elt.Textarea (Textarea_)
 import Deku.DOM.Elt.Map (Map_)
 import Deku.DOM.Elt.Meta (Meta_)
 import Deku.DOM.Elt.Param (Param_)
-import Deku.Attribute (class Attr, prop', unsafeAttribute)
+import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 
 data Name = Name
 
@@ -51,3 +53,7 @@ instance Attr Meta_ Name String where
 
 instance Attr Param_ Name String where
   attr Name value = unsafeAttribute { key: "name", value: prop' value }
+
+instance Attr everything Name Unit where
+  attr Name _ = unsafeAttribute
+    { key: "name", value: unset' }

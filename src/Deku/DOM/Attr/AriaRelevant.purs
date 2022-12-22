@@ -1,5 +1,7 @@
 module Deku.DOM.Attr.AriaRelevant where
 
+import Prelude
+
 import Deku.DOM.Elt.View (View_)
 import Deku.DOM.Elt.Use (Use_)
 import Deku.DOM.Elt.Tspan (Tspan_)
@@ -17,7 +19,7 @@ import Deku.DOM.Elt.G (G_)
 import Deku.DOM.Elt.ForeignObject (ForeignObject_)
 import Deku.DOM.Elt.Ellipse (Ellipse_)
 import Deku.DOM.Elt.Circle (Circle_)
-import Deku.Attribute (class Attr, prop', unsafeAttribute)
+import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 
 data AriaRelevant = AriaRelevant
 
@@ -88,3 +90,7 @@ instance Attr Use_ AriaRelevant String where
 instance Attr View_ AriaRelevant String where
   attr AriaRelevant value = unsafeAttribute
     { key: "aria-relevant", value: prop' value }
+
+instance Attr everything AriaRelevant Unit where
+  attr AriaRelevant _ = unsafeAttribute
+    { key: "aria-relevant", value: unset' }

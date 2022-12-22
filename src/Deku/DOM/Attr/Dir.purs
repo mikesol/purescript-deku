@@ -1,5 +1,7 @@
 module Deku.DOM.Attr.Dir where
 
+import Prelude
+
 import Deku.DOM.Elt.A (A_)
 import Deku.DOM.Elt.Abbr (Abbr_)
 import Deku.DOM.Elt.Acronym (Acronym_)
@@ -122,7 +124,7 @@ import Deku.DOM.Elt.Ul (Ul_)
 import Deku.DOM.Elt.Var (Var_)
 import Deku.DOM.Elt.Video (Video_)
 import Deku.DOM.Elt.Wbr (Wbr_)
-import Deku.Attribute (class Attr, prop', unsafeAttribute)
+import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 
 data Dir = Dir
 
@@ -491,3 +493,7 @@ instance Attr Video_ Dir String where
 
 instance Attr Wbr_ Dir String where
   attr Dir value = unsafeAttribute { key: "dir", value: prop' value }
+
+instance Attr everything Dir Unit where
+  attr Dir _ = unsafeAttribute
+    { key: "dir", value: unset' }

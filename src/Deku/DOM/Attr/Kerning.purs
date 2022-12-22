@@ -1,5 +1,7 @@
 module Deku.DOM.Attr.Kerning where
 
+import Prelude
+
 import Deku.DOM.Elt.Switch (Switch_)
 import Deku.DOM.Elt.Image (Image_)
 import Deku.DOM.Elt.Filter (Filter_)
@@ -19,7 +21,7 @@ import Deku.DOM.Elt.FeComposite (FeComposite_)
 import Deku.DOM.Elt.FeComponentTransfer (FeComponentTransfer_)
 import Deku.DOM.Elt.FeColorMatrix (FeColorMatrix_)
 import Deku.DOM.Elt.FeBlend (FeBlend_)
-import Deku.Attribute (class Attr, prop', unsafeAttribute)
+import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 
 data Kerning = Kerning
 
@@ -79,3 +81,7 @@ instance Attr Image_ Kerning String where
 
 instance Attr Switch_ Kerning String where
   attr Kerning value = unsafeAttribute { key: "kerning", value: prop' value }
+
+instance Attr everything Kerning Unit where
+  attr Kerning _ = unsafeAttribute
+    { key: "kerning", value: unset' }

@@ -1,5 +1,7 @@
 module Deku.DOM.Attr.ColorInterpolation where
 
+import Prelude
+
 import Deku.DOM.Elt.Use (Use_)
 import Deku.DOM.Elt.Tspan (Tspan_)
 import Deku.DOM.Elt.TextPath (TextPath_)
@@ -39,7 +41,7 @@ import Deku.DOM.Elt.FeBlend (FeBlend_)
 import Deku.DOM.Elt.Ellipse (Ellipse_)
 import Deku.DOM.Elt.Defs (Defs_)
 import Deku.DOM.Elt.Circle (Circle_)
-import Deku.Attribute (class Attr, prop', unsafeAttribute)
+import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 
 data ColorInterpolation = ColorInterpolation
 
@@ -198,3 +200,7 @@ instance Attr Tspan_ ColorInterpolation String where
 instance Attr Use_ ColorInterpolation String where
   attr ColorInterpolation value = unsafeAttribute
     { key: "color-interpolation", value: prop' value }
+
+instance Attr everything ColorInterpolation Unit where
+  attr ColorInterpolation _ = unsafeAttribute
+    { key: "color-interpolation", value: unset' }

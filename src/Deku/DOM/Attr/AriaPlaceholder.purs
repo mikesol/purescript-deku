@@ -1,5 +1,7 @@
 module Deku.DOM.Attr.AriaPlaceholder where
 
+import Prelude
+
 import Deku.DOM.Elt.View (View_)
 import Deku.DOM.Elt.Use (Use_)
 import Deku.DOM.Elt.Tspan (Tspan_)
@@ -17,7 +19,7 @@ import Deku.DOM.Elt.G (G_)
 import Deku.DOM.Elt.ForeignObject (ForeignObject_)
 import Deku.DOM.Elt.Ellipse (Ellipse_)
 import Deku.DOM.Elt.Circle (Circle_)
-import Deku.Attribute (class Attr, prop', unsafeAttribute)
+import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 
 data AriaPlaceholder = AriaPlaceholder
 
@@ -88,3 +90,7 @@ instance Attr Use_ AriaPlaceholder String where
 instance Attr View_ AriaPlaceholder String where
   attr AriaPlaceholder value = unsafeAttribute
     { key: "aria-placeholder", value: prop' value }
+
+instance Attr everything AriaPlaceholder Unit where
+  attr AriaPlaceholder _ = unsafeAttribute
+    { key: "aria-placeholder", value: unset' }

@@ -1,5 +1,7 @@
 module Deku.DOM.Attr.FillRule where
 
+import Prelude
+
 import Deku.DOM.Elt.Use (Use_)
 import Deku.DOM.Elt.Tspan (Tspan_)
 import Deku.DOM.Elt.TextPath (TextPath_)
@@ -41,7 +43,7 @@ import Deku.DOM.Elt.Ellipse (Ellipse_)
 import Deku.DOM.Elt.Defs (Defs_)
 import Deku.DOM.Elt.ClipPath (ClipPath_)
 import Deku.DOM.Elt.Circle (Circle_)
-import Deku.Attribute (class Attr, prop', unsafeAttribute)
+import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 
 data FillRule = FillRule
 
@@ -167,3 +169,7 @@ instance Attr Tspan_ FillRule String where
 
 instance Attr Use_ FillRule String where
   attr FillRule value = unsafeAttribute { key: "fill-rule", value: prop' value }
+
+instance Attr everything FillRule Unit where
+  attr FillRule _ = unsafeAttribute
+    { key: "fill-rule", value: unset' }

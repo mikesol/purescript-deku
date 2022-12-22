@@ -1,5 +1,7 @@
 module Deku.DOM.Attr.TextAnchor where
 
+import Prelude
+
 import Deku.DOM.Elt.Tspan (Tspan_)
 import Deku.DOM.Elt.Text (Text_)
 import Deku.DOM.Elt.Switch (Switch_)
@@ -21,7 +23,7 @@ import Deku.DOM.Elt.FeComposite (FeComposite_)
 import Deku.DOM.Elt.FeComponentTransfer (FeComponentTransfer_)
 import Deku.DOM.Elt.FeColorMatrix (FeColorMatrix_)
 import Deku.DOM.Elt.FeBlend (FeBlend_)
-import Deku.Attribute (class Attr, prop', unsafeAttribute)
+import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 
 data TextAnchor = TextAnchor
 
@@ -108,3 +110,7 @@ instance Attr Text_ TextAnchor String where
 instance Attr Tspan_ TextAnchor String where
   attr TextAnchor value = unsafeAttribute
     { key: "text-anchor", value: prop' value }
+
+instance Attr everything TextAnchor Unit where
+  attr TextAnchor _ = unsafeAttribute
+    { key: "text-anchor", value: unset' }

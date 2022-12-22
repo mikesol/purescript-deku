@@ -1,6 +1,8 @@
 module Deku.DOM.Attr.Value where
 
-import Deku.Attribute (class Attr, prop', unsafeAttribute)
+import Prelude
+
+import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 import Deku.DOM.Elt.Textarea (Textarea_)
 import Deku.DOM.Elt.Button (Button_)
 import Deku.DOM.Elt.Input (Input_)
@@ -35,3 +37,7 @@ instance Attr Progress_ Value String where
 
 instance Attr Param_ Value String where
   attr Value value = unsafeAttribute { key: "value", value: prop' value }
+
+instance Attr everything Value Unit where
+  attr Value _ = unsafeAttribute
+    { key: "value", value: unset' }

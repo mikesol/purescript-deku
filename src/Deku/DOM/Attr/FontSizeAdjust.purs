@@ -1,5 +1,7 @@
 module Deku.DOM.Attr.FontSizeAdjust where
 
+import Prelude
+
 import Deku.DOM.Elt.Tspan (Tspan_)
 import Deku.DOM.Elt.Text (Text_)
 import Deku.DOM.Elt.Switch (Switch_)
@@ -21,7 +23,7 @@ import Deku.DOM.Elt.FeComposite (FeComposite_)
 import Deku.DOM.Elt.FeComponentTransfer (FeComponentTransfer_)
 import Deku.DOM.Elt.FeColorMatrix (FeColorMatrix_)
 import Deku.DOM.Elt.FeBlend (FeBlend_)
-import Deku.Attribute (class Attr, prop', unsafeAttribute)
+import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 
 data FontSizeAdjust = FontSizeAdjust
 
@@ -108,3 +110,7 @@ instance Attr Text_ FontSizeAdjust String where
 instance Attr Tspan_ FontSizeAdjust String where
   attr FontSizeAdjust value = unsafeAttribute
     { key: "font-size-adjust", value: prop' value }
+
+instance Attr everything FontSizeAdjust Unit where
+  attr FontSizeAdjust _ = unsafeAttribute
+    { key: "font-size-adjust", value: unset' }

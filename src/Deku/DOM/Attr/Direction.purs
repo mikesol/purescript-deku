@@ -1,5 +1,7 @@
 module Deku.DOM.Attr.Direction where
 
+import Prelude
+
 import Deku.DOM.Elt.Switch (Switch_)
 import Deku.DOM.Elt.Image (Image_)
 import Deku.DOM.Elt.Filter (Filter_)
@@ -19,7 +21,7 @@ import Deku.DOM.Elt.FeComposite (FeComposite_)
 import Deku.DOM.Elt.FeComponentTransfer (FeComponentTransfer_)
 import Deku.DOM.Elt.FeColorMatrix (FeColorMatrix_)
 import Deku.DOM.Elt.FeBlend (FeBlend_)
-import Deku.Attribute (class Attr, prop', unsafeAttribute)
+import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 
 data Direction = Direction
 
@@ -98,3 +100,7 @@ instance Attr Image_ Direction String where
 instance Attr Switch_ Direction String where
   attr Direction value = unsafeAttribute
     { key: "direction", value: prop' value }
+
+instance Attr everything Direction Unit where
+  attr Direction _ = unsafeAttribute
+    { key: "direction", value: unset' }

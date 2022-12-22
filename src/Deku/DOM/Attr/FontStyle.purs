@@ -1,5 +1,7 @@
 module Deku.DOM.Attr.FontStyle where
 
+import Prelude
+
 import Deku.DOM.Elt.Tspan (Tspan_)
 import Deku.DOM.Elt.Text (Text_)
 import Deku.DOM.Elt.Switch (Switch_)
@@ -21,7 +23,7 @@ import Deku.DOM.Elt.FeComposite (FeComposite_)
 import Deku.DOM.Elt.FeComponentTransfer (FeComponentTransfer_)
 import Deku.DOM.Elt.FeColorMatrix (FeColorMatrix_)
 import Deku.DOM.Elt.FeBlend (FeBlend_)
-import Deku.Attribute (class Attr, prop', unsafeAttribute)
+import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 
 data FontStyle = FontStyle
 
@@ -108,3 +110,7 @@ instance Attr Text_ FontStyle String where
 instance Attr Tspan_ FontStyle String where
   attr FontStyle value = unsafeAttribute
     { key: "font-style", value: prop' value }
+
+instance Attr everything FontStyle Unit where
+  attr FontStyle _ = unsafeAttribute
+    { key: "font-style", value: unset' }

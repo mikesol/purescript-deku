@@ -1,5 +1,7 @@
 module Deku.DOM.Attr.AriaDescribedby where
 
+import Prelude
+
 import Deku.DOM.Elt.View (View_)
 import Deku.DOM.Elt.Use (Use_)
 import Deku.DOM.Elt.Tspan (Tspan_)
@@ -17,7 +19,7 @@ import Deku.DOM.Elt.G (G_)
 import Deku.DOM.Elt.ForeignObject (ForeignObject_)
 import Deku.DOM.Elt.Ellipse (Ellipse_)
 import Deku.DOM.Elt.Circle (Circle_)
-import Deku.Attribute (class Attr, prop', unsafeAttribute)
+import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 
 data AriaDescribedby = AriaDescribedby
 
@@ -88,3 +90,7 @@ instance Attr Use_ AriaDescribedby String where
 instance Attr View_ AriaDescribedby String where
   attr AriaDescribedby value = unsafeAttribute
     { key: "aria-describedby", value: prop' value }
+
+instance Attr everything AriaDescribedby Unit where
+  attr AriaDescribedby _ = unsafeAttribute
+    { key: "aria-describedby", value: unset' }

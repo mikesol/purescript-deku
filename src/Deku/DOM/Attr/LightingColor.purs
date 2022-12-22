@@ -1,5 +1,7 @@
 module Deku.DOM.Attr.LightingColor where
 
+import Prelude
+
 import Deku.DOM.Elt.Switch (Switch_)
 import Deku.DOM.Elt.Image (Image_)
 import Deku.DOM.Elt.Filter (Filter_)
@@ -19,7 +21,7 @@ import Deku.DOM.Elt.FeComposite (FeComposite_)
 import Deku.DOM.Elt.FeComponentTransfer (FeComponentTransfer_)
 import Deku.DOM.Elt.FeColorMatrix (FeColorMatrix_)
 import Deku.DOM.Elt.FeBlend (FeBlend_)
-import Deku.Attribute (class Attr, prop', unsafeAttribute)
+import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 
 data LightingColor = LightingColor
 
@@ -98,3 +100,7 @@ instance Attr Image_ LightingColor String where
 instance Attr Switch_ LightingColor String where
   attr LightingColor value = unsafeAttribute
     { key: "lighting-color", value: prop' value }
+
+instance Attr everything LightingColor Unit where
+  attr LightingColor _ = unsafeAttribute
+    { key: "lighting-color", value: unset' }

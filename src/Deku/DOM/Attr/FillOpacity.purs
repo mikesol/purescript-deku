@@ -1,5 +1,7 @@
 module Deku.DOM.Attr.FillOpacity where
 
+import Prelude
+
 import Deku.DOM.Elt.Use (Use_)
 import Deku.DOM.Elt.Tspan (Tspan_)
 import Deku.DOM.Elt.TextPath (TextPath_)
@@ -41,7 +43,7 @@ import Deku.DOM.Elt.Ellipse (Ellipse_)
 import Deku.DOM.Elt.Defs (Defs_)
 import Deku.DOM.Elt.ClipPath (ClipPath_)
 import Deku.DOM.Elt.Circle (Circle_)
-import Deku.Attribute (class Attr, prop', unsafeAttribute)
+import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 
 data FillOpacity = FillOpacity
 
@@ -208,3 +210,7 @@ instance Attr Tspan_ FillOpacity String where
 instance Attr Use_ FillOpacity String where
   attr FillOpacity value = unsafeAttribute
     { key: "fill-opacity", value: prop' value }
+
+instance Attr everything FillOpacity Unit where
+  attr FillOpacity _ = unsafeAttribute
+    { key: "fill-opacity", value: unset' }

@@ -1,5 +1,7 @@
 module Deku.DOM.Attr.Class where
 
+import Prelude
+
 import Deku.DOM.Elt.Use (Use_)
 import Deku.DOM.Elt.Tspan (Tspan_)
 import Deku.DOM.Elt.Title (Title_)
@@ -168,7 +170,7 @@ import Deku.DOM.Elt.Ul (Ul_)
 import Deku.DOM.Elt.Var (Var_)
 import Deku.DOM.Elt.Video (Video_)
 import Deku.DOM.Elt.Wbr (Wbr_)
-import Deku.Attribute (class Attr, prop', unsafeAttribute)
+import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 
 data Class = Class
 
@@ -675,3 +677,7 @@ instance Attr Tspan_ Class String where
 
 instance Attr Use_ Class String where
   attr Class value = unsafeAttribute { key: "class", value: prop' value }
+
+instance Attr everything Class Unit where
+  attr Class _ = unsafeAttribute
+    { key: "class", value: unset' }

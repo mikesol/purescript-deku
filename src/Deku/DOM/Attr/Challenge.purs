@@ -1,5 +1,7 @@
 module Deku.DOM.Attr.Challenge where
 
+import Prelude
+
 import Deku.DOM.Elt.A (A_)
 import Deku.DOM.Elt.Abbr (Abbr_)
 import Deku.DOM.Elt.Acronym (Acronym_)
@@ -122,7 +124,7 @@ import Deku.DOM.Elt.Ul (Ul_)
 import Deku.DOM.Elt.Var (Var_)
 import Deku.DOM.Elt.Video (Video_)
 import Deku.DOM.Elt.Wbr (Wbr_)
-import Deku.Attribute (class Attr, prop', unsafeAttribute)
+import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 
 data Challenge = Challenge
 
@@ -613,3 +615,7 @@ instance Attr Video_ Challenge String where
 instance Attr Wbr_ Challenge String where
   attr Challenge value = unsafeAttribute
     { key: "challenge", value: prop' value }
+
+instance Attr everything Challenge Unit where
+  attr Challenge _ = unsafeAttribute
+    { key: "challenge", value: unset' }

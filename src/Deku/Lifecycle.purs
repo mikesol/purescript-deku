@@ -6,7 +6,6 @@ import Deku.Core (Domable, envy)
 import Effect (Effect)
 import FRP.Event (makeEvent)
 
-
 onWillMount
   :: forall lock payload
    . Effect Unit

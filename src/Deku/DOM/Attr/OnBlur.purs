@@ -1,8 +1,10 @@
 module Deku.DOM.Attr.OnBlur where
 
 import Prelude
+
+import Prelude
 import Effect (Effect)
-import Deku.Attribute (class Attr, Attribute, Cb(..), cb', unsafeAttribute)
+import Deku.Attribute (class Attr, Attribute, Cb(..), cb', unsafeAttribute, unset')
 import FRP.Event (Event)
 
 data OnBlur = OnBlur
@@ -18,4 +20,9 @@ instance Attr anything OnBlur (Effect Boolean) where
   attr OnBlur value = unsafeAttribute
     { key: "blur", value: cb' (Cb (const value)) }
 
-type OnBlurEffect = forall element. Attr element OnBlur (Effect Unit) => Event (Attribute element)
+type OnBlurEffect =
+  forall element. Attr element OnBlur (Effect Unit) => Event (Attribute element)
+
+instance Attr everything OnBlur Unit where
+  attr OnBlur _ = unsafeAttribute
+    { key: "blur", value: unset' }

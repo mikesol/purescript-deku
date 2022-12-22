@@ -1,5 +1,7 @@
 module Deku.DOM.Attr.Keytype where
 
+import Prelude
+
 import Deku.DOM.Elt.A (A_)
 import Deku.DOM.Elt.Abbr (Abbr_)
 import Deku.DOM.Elt.Acronym (Acronym_)
@@ -122,7 +124,7 @@ import Deku.DOM.Elt.Ul (Ul_)
 import Deku.DOM.Elt.Var (Var_)
 import Deku.DOM.Elt.Video (Video_)
 import Deku.DOM.Elt.Wbr (Wbr_)
-import Deku.Attribute (class Attr, prop', unsafeAttribute)
+import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 
 data Keytype = Keytype
 
@@ -491,3 +493,7 @@ instance Attr Video_ Keytype String where
 
 instance Attr Wbr_ Keytype String where
   attr Keytype value = unsafeAttribute { key: "keytype", value: prop' value }
+
+instance Attr everything Keytype Unit where
+  attr Keytype _ = unsafeAttribute
+    { key: "keytype", value: unset' }

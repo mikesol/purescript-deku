@@ -1631,7 +1631,6 @@ import Deku.DOM.Attr.Span (Span(..))
 import Deku.DOM.Attr.Enterkeyhint (Enterkeyhint(..))
 import Deku.DOM.Attr.Contenteditable (Contenteditable(..))
 
-
 import Effect (Effect)
 import FRP.Event (Event)
 import Prelude (Unit)

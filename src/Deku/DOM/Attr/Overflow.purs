@@ -1,5 +1,7 @@
 module Deku.DOM.Attr.Overflow where
 
+import Prelude
+
 import Deku.DOM.Elt.Switch (Switch_)
 import Deku.DOM.Elt.Image (Image_)
 import Deku.DOM.Elt.Filter (Filter_)
@@ -19,7 +21,7 @@ import Deku.DOM.Elt.FeComposite (FeComposite_)
 import Deku.DOM.Elt.FeComponentTransfer (FeComponentTransfer_)
 import Deku.DOM.Elt.FeColorMatrix (FeColorMatrix_)
 import Deku.DOM.Elt.FeBlend (FeBlend_)
-import Deku.Attribute (class Attr, prop', unsafeAttribute)
+import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 
 data Overflow = Overflow
 
@@ -79,3 +81,7 @@ instance Attr Image_ Overflow String where
 
 instance Attr Switch_ Overflow String where
   attr Overflow value = unsafeAttribute { key: "overflow", value: prop' value }
+
+instance Attr everything Overflow Unit where
+  attr Overflow _ = unsafeAttribute
+    { key: "overflow", value: unset' }

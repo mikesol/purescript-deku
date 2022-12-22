@@ -1,5 +1,7 @@
 module Deku.DOM.Attr.XmlLang where
 
+import Prelude
+
 import Deku.DOM.Elt.View (View_)
 import Deku.DOM.Elt.Switch (Switch_)
 import Deku.DOM.Elt.Mpath (Mpath_)
@@ -32,7 +34,7 @@ import Deku.DOM.Elt.FeColorMatrix (FeColorMatrix_)
 import Deku.DOM.Elt.FeBlend (FeBlend_)
 import Deku.DOM.Elt.Discard (Discard_)
 import Deku.DOM.Elt.AnimateTransform (AnimateTransform_)
-import Deku.Attribute (class Attr, prop', unsafeAttribute)
+import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 
 data XmlLang = XmlLang
 
@@ -131,3 +133,7 @@ instance Attr Switch_ XmlLang String where
 
 instance Attr View_ XmlLang String where
   attr XmlLang value = unsafeAttribute { key: "xml:lang", value: prop' value }
+
+instance Attr everything XmlLang Unit where
+  attr XmlLang _ = unsafeAttribute
+    { key: "xml:lang", value: unset' }

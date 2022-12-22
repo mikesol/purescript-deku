@@ -1,5 +1,7 @@
 module Deku.DOM.Attr.AriaDisabled where
 
+import Prelude
+
 import Deku.DOM.Elt.View (View_)
 import Deku.DOM.Elt.Use (Use_)
 import Deku.DOM.Elt.Tspan (Tspan_)
@@ -17,7 +19,7 @@ import Deku.DOM.Elt.G (G_)
 import Deku.DOM.Elt.ForeignObject (ForeignObject_)
 import Deku.DOM.Elt.Ellipse (Ellipse_)
 import Deku.DOM.Elt.Circle (Circle_)
-import Deku.Attribute (class Attr, prop', unsafeAttribute)
+import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 
 data AriaDisabled = AriaDisabled
 
@@ -88,3 +90,7 @@ instance Attr Use_ AriaDisabled String where
 instance Attr View_ AriaDisabled String where
   attr AriaDisabled value = unsafeAttribute
     { key: "aria-disabled", value: prop' value }
+
+instance Attr everything AriaDisabled Unit where
+  attr AriaDisabled _ = unsafeAttribute
+    { key: "aria-disabled", value: unset' }

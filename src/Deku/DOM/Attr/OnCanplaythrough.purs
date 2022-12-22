@@ -1,8 +1,10 @@
 module Deku.DOM.Attr.OnCanplaythrough where
 
 import Prelude
+
+import Prelude
 import Effect (Effect)
-import Deku.Attribute (class Attr, Attribute, Cb(..), cb', unsafeAttribute)
+import Deku.Attribute (class Attr, Attribute, Cb(..), cb', unsafeAttribute, unset')
 import FRP.Event (Event)
 
 data OnCanplaythrough = OnCanplaythrough
@@ -19,4 +21,11 @@ instance Attr anything OnCanplaythrough (Effect Boolean) where
   attr OnCanplaythrough value = unsafeAttribute
     { key: "canplaythrough", value: cb' (Cb (const value)) }
 
-type OnCanplaythroughEffect = forall element. Attr element OnCanplaythrough (Effect Unit) => Event (Attribute element)
+type OnCanplaythroughEffect =
+  forall element
+   . Attr element OnCanplaythrough (Effect Unit)
+  => Event (Attribute element)
+
+instance Attr everything OnCanplaythrough Unit where
+  attr OnCanplaythrough _ = unsafeAttribute
+    { key: "canplaythrough", value: unset' }

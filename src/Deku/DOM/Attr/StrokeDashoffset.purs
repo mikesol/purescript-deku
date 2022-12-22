@@ -1,5 +1,7 @@
 module Deku.DOM.Attr.StrokeDashoffset where
 
+import Prelude
+
 import Deku.DOM.Elt.Use (Use_)
 import Deku.DOM.Elt.Tspan (Tspan_)
 import Deku.DOM.Elt.TextPath (TextPath_)
@@ -41,7 +43,7 @@ import Deku.DOM.Elt.Ellipse (Ellipse_)
 import Deku.DOM.Elt.Defs (Defs_)
 import Deku.DOM.Elt.ClipPath (ClipPath_)
 import Deku.DOM.Elt.Circle (Circle_)
-import Deku.Attribute (class Attr, prop', unsafeAttribute)
+import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 
 data StrokeDashoffset = StrokeDashoffset
 
@@ -208,3 +210,7 @@ instance Attr Tspan_ StrokeDashoffset String where
 instance Attr Use_ StrokeDashoffset String where
   attr StrokeDashoffset value = unsafeAttribute
     { key: "stroke-dashoffset", value: prop' value }
+
+instance Attr everything StrokeDashoffset Unit where
+  attr StrokeDashoffset _ = unsafeAttribute
+    { key: "stroke-dashoffset", value: unset' }

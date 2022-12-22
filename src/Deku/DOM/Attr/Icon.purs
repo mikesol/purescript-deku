@@ -1,5 +1,7 @@
 module Deku.DOM.Attr.Icon where
 
+import Prelude
+
 import Deku.DOM.Elt.A (A_)
 import Deku.DOM.Elt.Abbr (Abbr_)
 import Deku.DOM.Elt.Acronym (Acronym_)
@@ -122,7 +124,7 @@ import Deku.DOM.Elt.Ul (Ul_)
 import Deku.DOM.Elt.Var (Var_)
 import Deku.DOM.Elt.Video (Video_)
 import Deku.DOM.Elt.Wbr (Wbr_)
-import Deku.Attribute (class Attr, prop', unsafeAttribute)
+import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 
 data Icon = Icon
 
@@ -491,3 +493,7 @@ instance Attr Video_ Icon String where
 
 instance Attr Wbr_ Icon String where
   attr Icon value = unsafeAttribute { key: "icon", value: prop' value }
+
+instance Attr everything Icon Unit where
+  attr Icon _ = unsafeAttribute
+    { key: "icon", value: unset' }

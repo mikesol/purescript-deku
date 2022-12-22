@@ -205,10 +205,14 @@ ssrSetProp
 ssrSetProp a i = void $ Ref.modify (_ <> [ RenderableInstruction $ SetProp a ])
   i
 
-ssrUnsetAttribute :: forall r. Core.UnsetAttribute -> Ref.STRef r (Array Instruction) -> ST r Unit
-ssrUnsetAttribute a i = void $ Ref.modify (_ <> [ RenderableInstruction $ UnsetAttribute a ])
+ssrUnsetAttribute
+  :: forall r
+   . Core.UnsetAttribute
+  -> Ref.STRef r (Array Instruction)
+  -> ST r Unit
+ssrUnsetAttribute a i = void $ Ref.modify
+  (_ <> [ RenderableInstruction $ UnsetAttribute a ])
   i
-
 
 ssrSetText
   :: forall r. Core.SetText -> Ref.STRef r (Array Instruction) -> ST r Unit

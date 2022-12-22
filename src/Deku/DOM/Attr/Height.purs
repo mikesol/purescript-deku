@@ -1,5 +1,7 @@
 module Deku.DOM.Attr.Height where
 
+import Prelude
+
 import Deku.DOM.Elt.Use (Use_)
 import Deku.DOM.Elt.Symbol (Symbol_)
 import Deku.DOM.Elt.Svg (Svg_)
@@ -33,7 +35,7 @@ import Deku.DOM.Elt.Img (Img_)
 import Deku.DOM.Elt.Input (Input_)
 import Deku.DOM.Elt.Object (Object_)
 import Deku.DOM.Elt.Video (Video_)
-import Deku.Attribute (class Attr, prop', unsafeAttribute)
+import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 
 data Height = Height
 
@@ -135,3 +137,7 @@ instance Attr Symbol_ Height String where
 
 instance Attr Use_ Height String where
   attr Height value = unsafeAttribute { key: "height", value: prop' value }
+
+instance Attr everything Height Unit where
+  attr Height _ = unsafeAttribute
+    { key: "height", value: unset' }

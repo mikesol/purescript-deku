@@ -7,8 +7,7 @@ module Deku.Attributes
   , klass_
   , style
   , style_
-  )
-  where
+  ) where
 
 import Prelude
 

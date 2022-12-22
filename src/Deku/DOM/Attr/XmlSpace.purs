@@ -1,5 +1,7 @@
 module Deku.DOM.Attr.XmlSpace where
 
+import Prelude
+
 import Deku.DOM.Elt.View (View_)
 import Deku.DOM.Elt.Switch (Switch_)
 import Deku.DOM.Elt.Mpath (Mpath_)
@@ -32,7 +34,7 @@ import Deku.DOM.Elt.FeColorMatrix (FeColorMatrix_)
 import Deku.DOM.Elt.FeBlend (FeBlend_)
 import Deku.DOM.Elt.Discard (Discard_)
 import Deku.DOM.Elt.AnimateTransform (AnimateTransform_)
-import Deku.Attribute (class Attr, prop', unsafeAttribute)
+import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 
 data XmlSpace = XmlSpace
 
@@ -131,3 +133,7 @@ instance Attr Switch_ XmlSpace String where
 
 instance Attr View_ XmlSpace String where
   attr XmlSpace value = unsafeAttribute { key: "xml:space", value: prop' value }
+
+instance Attr everything XmlSpace Unit where
+  attr XmlSpace _ = unsafeAttribute
+    { key: "xml:space", value: unset' }

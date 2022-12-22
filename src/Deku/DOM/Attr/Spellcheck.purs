@@ -1,5 +1,7 @@
 module Deku.DOM.Attr.Spellcheck where
 
+import Prelude
+
 import Deku.DOM.Elt.A (A_)
 import Deku.DOM.Elt.Abbr (Abbr_)
 import Deku.DOM.Elt.Acronym (Acronym_)
@@ -122,7 +124,7 @@ import Deku.DOM.Elt.Ul (Ul_)
 import Deku.DOM.Elt.Var (Var_)
 import Deku.DOM.Elt.Video (Video_)
 import Deku.DOM.Elt.Wbr (Wbr_)
-import Deku.Attribute (class Attr, prop', unsafeAttribute)
+import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 
 data Spellcheck = Spellcheck
 
@@ -613,3 +615,7 @@ instance Attr Video_ Spellcheck String where
 instance Attr Wbr_ Spellcheck String where
   attr Spellcheck value = unsafeAttribute
     { key: "spellcheck", value: prop' value }
+
+instance Attr everything Spellcheck Unit where
+  attr Spellcheck _ = unsafeAttribute
+    { key: "spellcheck", value: unset' }

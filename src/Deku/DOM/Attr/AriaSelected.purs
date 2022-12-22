@@ -1,5 +1,7 @@
 module Deku.DOM.Attr.AriaSelected where
 
+import Prelude
+
 import Deku.DOM.Elt.View (View_)
 import Deku.DOM.Elt.Use (Use_)
 import Deku.DOM.Elt.Tspan (Tspan_)
@@ -17,7 +19,7 @@ import Deku.DOM.Elt.G (G_)
 import Deku.DOM.Elt.ForeignObject (ForeignObject_)
 import Deku.DOM.Elt.Ellipse (Ellipse_)
 import Deku.DOM.Elt.Circle (Circle_)
-import Deku.Attribute (class Attr, prop', unsafeAttribute)
+import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 
 data AriaSelected = AriaSelected
 
@@ -88,3 +90,7 @@ instance Attr Use_ AriaSelected String where
 instance Attr View_ AriaSelected String where
   attr AriaSelected value = unsafeAttribute
     { key: "aria-selected", value: prop' value }
+
+instance Attr everything AriaSelected Unit where
+  attr AriaSelected _ = unsafeAttribute
+    { key: "aria-selected", value: unset' }

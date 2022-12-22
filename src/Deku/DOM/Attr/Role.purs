@@ -1,5 +1,7 @@
 module Deku.DOM.Attr.Role where
 
+import Prelude
+
 import Deku.DOM.Elt.View (View_)
 import Deku.DOM.Elt.Use (Use_)
 import Deku.DOM.Elt.Tspan (Tspan_)
@@ -138,7 +140,7 @@ import Deku.DOM.Elt.Ul (Ul_)
 import Deku.DOM.Elt.Var (Var_)
 import Deku.DOM.Elt.Video (Video_)
 import Deku.DOM.Elt.Wbr (Wbr_)
-import Deku.Attribute (class Attr, prop', unsafeAttribute)
+import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 
 data Role = Role
 
@@ -555,3 +557,7 @@ instance Attr Use_ Role String where
 
 instance Attr View_ Role String where
   attr Role value = unsafeAttribute { key: "role", value: prop' value }
+
+instance Attr everything Role Unit where
+  attr Role _ = unsafeAttribute
+    { key: "role", value: unset' }
