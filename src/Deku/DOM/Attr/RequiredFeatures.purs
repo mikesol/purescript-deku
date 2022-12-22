@@ -1,5 +1,7 @@
 module Deku.DOM.Attr.RequiredFeatures where
 
+import Prelude
+
 import Deku.DOM.Elt.Use (Use_)
 import Deku.DOM.Elt.Tspan (Tspan_)
 import Deku.DOM.Elt.TextPath (TextPath_)
@@ -20,7 +22,7 @@ import Deku.DOM.Elt.ForeignObject (ForeignObject_)
 import Deku.DOM.Elt.Ellipse (Ellipse_)
 import Deku.DOM.Elt.Discard (Discard_)
 import Deku.DOM.Elt.AnimateTransform (AnimateTransform_)
-import Deku.Attribute (class Attr, prop', unsafeAttribute)
+import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 
 data RequiredFeatures = RequiredFeatures
 
@@ -103,3 +105,7 @@ instance Attr Tspan_ RequiredFeatures String where
 instance Attr Use_ RequiredFeatures String where
   attr RequiredFeatures value = unsafeAttribute
     { key: "requiredFeatures", value: prop' value }
+
+instance Attr everything RequiredFeatures Unit where
+  attr RequiredFeatures _ = unsafeAttribute
+    { key: "requiredFeatures", value: unset' }

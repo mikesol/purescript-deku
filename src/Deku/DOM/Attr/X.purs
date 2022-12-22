@@ -1,5 +1,7 @@
 module Deku.DOM.Attr.X where
 
+import Prelude
+
 import Deku.DOM.Elt.Use (Use_)
 import Deku.DOM.Elt.Tspan (Tspan_)
 import Deku.DOM.Elt.Text (Text_)
@@ -30,7 +32,7 @@ import Deku.DOM.Elt.FeComposite (FeComposite_)
 import Deku.DOM.Elt.FeComponentTransfer (FeComponentTransfer_)
 import Deku.DOM.Elt.FeColorMatrix (FeColorMatrix_)
 import Deku.DOM.Elt.FeBlend (FeBlend_)
-import Deku.Attribute (class Attr, prop', unsafeAttribute)
+import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 
 data X = X
 
@@ -123,3 +125,7 @@ instance Attr Tspan_ X String where
 
 instance Attr Use_ X String where
   attr X value = unsafeAttribute { key: "x", value: prop' value }
+
+instance Attr everything X Unit where
+  attr X _ = unsafeAttribute
+    { key: "x", value: unset' }

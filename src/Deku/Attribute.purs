@@ -8,6 +8,7 @@ module Deku.Attribute
   , unsafeAttribute
   , prop'
   , cb'
+  , unset'
   , cb
   , Cb(..)
   , xdata
@@ -50,7 +51,10 @@ prop' = Prop'
 cb' :: Cb -> AttributeValue
 cb' = Cb'
 
-data AttributeValue = Prop' String | Cb' Cb
+unset' :: AttributeValue
+unset' = Unset'
+
+data AttributeValue = Prop' String | Cb' Cb | Unset'
 newtype Attribute (e :: Type) = Attribute
   { key :: String
   , value :: AttributeValue

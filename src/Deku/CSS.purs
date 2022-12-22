@@ -17,7 +17,8 @@ render = toString
   <<< runS
   where
   toString ∷ Object String → String
-  toString = joinWith "; " <<< Object.foldMap (\key val → [ key <> ": " <> val ])
+  toString = joinWith "; " <<< Object.foldMap
+    (\key val → [ key <> ": " <> val ])
 
   rules ∷ Array Rule → Object String
   rules rs = Object.fromFoldable properties

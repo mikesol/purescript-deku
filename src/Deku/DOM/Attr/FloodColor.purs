@@ -1,5 +1,7 @@
 module Deku.DOM.Attr.FloodColor where
 
+import Prelude
+
 import Deku.DOM.Elt.Switch (Switch_)
 import Deku.DOM.Elt.Image (Image_)
 import Deku.DOM.Elt.Filter (Filter_)
@@ -20,7 +22,7 @@ import Deku.DOM.Elt.FeComposite (FeComposite_)
 import Deku.DOM.Elt.FeComponentTransfer (FeComponentTransfer_)
 import Deku.DOM.Elt.FeColorMatrix (FeColorMatrix_)
 import Deku.DOM.Elt.FeBlend (FeBlend_)
-import Deku.Attribute (class Attr, prop', unsafeAttribute)
+import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 
 data FloodColor = FloodColor
 
@@ -103,3 +105,7 @@ instance Attr Image_ FloodColor String where
 instance Attr Switch_ FloodColor String where
   attr FloodColor value = unsafeAttribute
     { key: "flood-color", value: prop' value }
+
+instance Attr everything FloodColor Unit where
+  attr FloodColor _ = unsafeAttribute
+    { key: "flood-color", value: unset' }

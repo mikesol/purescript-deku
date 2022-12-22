@@ -1,5 +1,7 @@
 module Deku.DOM.Attr.EnableBackground where
 
+import Prelude
+
 import Deku.DOM.Elt.Switch (Switch_)
 import Deku.DOM.Elt.Image (Image_)
 import Deku.DOM.Elt.Filter (Filter_)
@@ -19,7 +21,7 @@ import Deku.DOM.Elt.FeComposite (FeComposite_)
 import Deku.DOM.Elt.FeComponentTransfer (FeComponentTransfer_)
 import Deku.DOM.Elt.FeColorMatrix (FeColorMatrix_)
 import Deku.DOM.Elt.FeBlend (FeBlend_)
-import Deku.Attribute (class Attr, prop', unsafeAttribute)
+import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 
 data EnableBackground = EnableBackground
 
@@ -98,3 +100,7 @@ instance Attr Image_ EnableBackground String where
 instance Attr Switch_ EnableBackground String where
   attr EnableBackground value = unsafeAttribute
     { key: "enable-background", value: prop' value }
+
+instance Attr everything EnableBackground Unit where
+  attr EnableBackground _ = unsafeAttribute
+    { key: "enable-background", value: unset' }

@@ -1,5 +1,7 @@
 module Deku.DOM.Attr.StopColor where
 
+import Prelude
+
 import Deku.DOM.Elt.Switch (Switch_)
 import Deku.DOM.Elt.Stop (Stop_)
 import Deku.DOM.Elt.Image (Image_)
@@ -20,7 +22,7 @@ import Deku.DOM.Elt.FeComposite (FeComposite_)
 import Deku.DOM.Elt.FeComponentTransfer (FeComponentTransfer_)
 import Deku.DOM.Elt.FeColorMatrix (FeColorMatrix_)
 import Deku.DOM.Elt.FeBlend (FeBlend_)
-import Deku.Attribute (class Attr, prop', unsafeAttribute)
+import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 
 data StopColor = StopColor
 
@@ -103,3 +105,7 @@ instance Attr Stop_ StopColor String where
 instance Attr Switch_ StopColor String where
   attr StopColor value = unsafeAttribute
     { key: "stop-color", value: prop' value }
+
+instance Attr everything StopColor Unit where
+  attr StopColor _ = unsafeAttribute
+    { key: "stop-color", value: unset' }

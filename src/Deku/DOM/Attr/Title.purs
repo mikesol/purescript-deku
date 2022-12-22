@@ -1,5 +1,7 @@
 module Deku.DOM.Attr.Title where
 
+import Prelude
+
 import Deku.DOM.Elt.A (A_)
 import Deku.DOM.Elt.Abbr (Abbr_)
 import Deku.DOM.Elt.Acronym (Acronym_)
@@ -122,7 +124,7 @@ import Deku.DOM.Elt.Ul (Ul_)
 import Deku.DOM.Elt.Var (Var_)
 import Deku.DOM.Elt.Video (Video_)
 import Deku.DOM.Elt.Wbr (Wbr_)
-import Deku.Attribute (class Attr, prop', unsafeAttribute)
+import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 
 data Title = Title
 
@@ -491,3 +493,7 @@ instance Attr Video_ Title String where
 
 instance Attr Wbr_ Title String where
   attr Title value = unsafeAttribute { key: "title", value: prop' value }
+
+instance Attr everything Title Unit where
+  attr Title _ = unsafeAttribute
+    { key: "title", value: unset' }

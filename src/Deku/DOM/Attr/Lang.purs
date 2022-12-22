@@ -1,5 +1,7 @@
 module Deku.DOM.Attr.Lang where
 
+import Prelude
+
 import Deku.DOM.Elt.View (View_)
 import Deku.DOM.Elt.Switch (Switch_)
 import Deku.DOM.Elt.Mpath (Mpath_)
@@ -155,7 +157,7 @@ import Deku.DOM.Elt.Ul (Ul_)
 import Deku.DOM.Elt.Var (Var_)
 import Deku.DOM.Elt.Video (Video_)
 import Deku.DOM.Elt.Wbr (Wbr_)
-import Deku.Attribute (class Attr, prop', unsafeAttribute)
+import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 
 data Lang = Lang
 
@@ -623,3 +625,7 @@ instance Attr Switch_ Lang String where
 
 instance Attr View_ Lang String where
   attr Lang value = unsafeAttribute { key: "lang", value: prop' value }
+
+instance Attr everything Lang Unit where
+  attr Lang _ = unsafeAttribute
+    { key: "lang", value: unset' }

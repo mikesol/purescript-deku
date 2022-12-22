@@ -1,9 +1,11 @@
 module Deku.DOM.Attr.Border where
 
+import Prelude
+
 import Deku.DOM.Elt.Img (Img_)
 import Deku.DOM.Elt.Object (Object_)
 import Deku.DOM.Elt.Table (Table_)
-import Deku.Attribute (class Attr, prop', unsafeAttribute)
+import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 
 data Border = Border
 
@@ -15,3 +17,7 @@ instance Attr Object_ Border String where
 
 instance Attr Table_ Border String where
   attr Border value = unsafeAttribute { key: "border", value: prop' value }
+
+instance Attr everything Border Unit where
+  attr Border _ = unsafeAttribute
+    { key: "border", value: unset' }

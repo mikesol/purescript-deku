@@ -1,5 +1,7 @@
 module Deku.DOM.Attr.Color where
 
+import Prelude
+
 import Deku.DOM.Elt.Use (Use_)
 import Deku.DOM.Elt.Tspan (Tspan_)
 import Deku.DOM.Elt.TextPath (TextPath_)
@@ -44,7 +46,7 @@ import Deku.DOM.Elt.ClipPath (ClipPath_)
 import Deku.DOM.Elt.Circle (Circle_)
 import Deku.DOM.Elt.Font (Font_)
 import Deku.DOM.Elt.Hr (Hr_)
-import Deku.Attribute (class Attr, prop', unsafeAttribute)
+import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 
 data Color = Color
 
@@ -179,3 +181,7 @@ instance Attr Tspan_ Color String where
 
 instance Attr Use_ Color String where
   attr Color value = unsafeAttribute { key: "color", value: prop' value }
+
+instance Attr everything Color Unit where
+  attr Color _ = unsafeAttribute
+    { key: "color", value: unset' }

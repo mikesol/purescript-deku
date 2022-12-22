@@ -1,5 +1,7 @@
 module Deku.DOM.Attr.WritingMode where
 
+import Prelude
+
 import Deku.DOM.Elt.Switch (Switch_)
 import Deku.DOM.Elt.Image (Image_)
 import Deku.DOM.Elt.Filter (Filter_)
@@ -19,7 +21,7 @@ import Deku.DOM.Elt.FeComposite (FeComposite_)
 import Deku.DOM.Elt.FeComponentTransfer (FeComponentTransfer_)
 import Deku.DOM.Elt.FeColorMatrix (FeColorMatrix_)
 import Deku.DOM.Elt.FeBlend (FeBlend_)
-import Deku.Attribute (class Attr, prop', unsafeAttribute)
+import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 
 data WritingMode = WritingMode
 
@@ -98,3 +100,7 @@ instance Attr Image_ WritingMode String where
 instance Attr Switch_ WritingMode String where
   attr WritingMode value = unsafeAttribute
     { key: "writing-mode", value: prop' value }
+
+instance Attr everything WritingMode Unit where
+  attr WritingMode _ = unsafeAttribute
+    { key: "writing-mode", value: unset' }

@@ -1,5 +1,7 @@
 module Deku.DOM.Attr.VectorEffect where
 
+import Prelude
+
 import Deku.DOM.Elt.Use (Use_)
 import Deku.DOM.Elt.Tspan (Tspan_)
 import Deku.DOM.Elt.TextPath (TextPath_)
@@ -41,7 +43,7 @@ import Deku.DOM.Elt.Ellipse (Ellipse_)
 import Deku.DOM.Elt.Defs (Defs_)
 import Deku.DOM.Elt.ClipPath (ClipPath_)
 import Deku.DOM.Elt.Circle (Circle_)
-import Deku.Attribute (class Attr, prop', unsafeAttribute)
+import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 
 data VectorEffect = VectorEffect
 
@@ -208,3 +210,7 @@ instance Attr Tspan_ VectorEffect String where
 instance Attr Use_ VectorEffect String where
   attr VectorEffect value = unsafeAttribute
     { key: "vector-effect", value: prop' value }
+
+instance Attr everything VectorEffect Unit where
+  attr VectorEffect _ = unsafeAttribute
+    { key: "vector-effect", value: unset' }

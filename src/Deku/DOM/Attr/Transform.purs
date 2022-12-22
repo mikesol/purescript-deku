@@ -1,5 +1,7 @@
 module Deku.DOM.Attr.Transform where
 
+import Prelude
+
 import Deku.DOM.Elt.Use (Use_)
 import Deku.DOM.Elt.Tspan (Tspan_)
 import Deku.DOM.Elt.TextPath (TextPath_)
@@ -41,7 +43,7 @@ import Deku.DOM.Elt.Ellipse (Ellipse_)
 import Deku.DOM.Elt.Defs (Defs_)
 import Deku.DOM.Elt.ClipPath (ClipPath_)
 import Deku.DOM.Elt.Circle (Circle_)
-import Deku.Attribute (class Attr, prop', unsafeAttribute)
+import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 
 data Transform = Transform
 
@@ -208,3 +210,7 @@ instance Attr Tspan_ Transform String where
 instance Attr Use_ Transform String where
   attr Transform value = unsafeAttribute
     { key: "transform", value: prop' value }
+
+instance Attr everything Transform Unit where
+  attr Transform _ = unsafeAttribute
+    { key: "transform", value: unset' }

@@ -1,5 +1,7 @@
 module Deku.DOM.Attr.TextDecoration where
 
+import Prelude
+
 import Deku.DOM.Elt.Switch (Switch_)
 import Deku.DOM.Elt.Image (Image_)
 import Deku.DOM.Elt.Filter (Filter_)
@@ -19,7 +21,7 @@ import Deku.DOM.Elt.FeComposite (FeComposite_)
 import Deku.DOM.Elt.FeComponentTransfer (FeComponentTransfer_)
 import Deku.DOM.Elt.FeColorMatrix (FeColorMatrix_)
 import Deku.DOM.Elt.FeBlend (FeBlend_)
-import Deku.Attribute (class Attr, prop', unsafeAttribute)
+import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 
 data TextDecoration = TextDecoration
 
@@ -98,3 +100,7 @@ instance Attr Image_ TextDecoration String where
 instance Attr Switch_ TextDecoration String where
   attr TextDecoration value = unsafeAttribute
     { key: "text-decoration", value: prop' value }
+
+instance Attr everything TextDecoration Unit where
+  attr TextDecoration _ = unsafeAttribute
+    { key: "text-decoration", value: unset' }

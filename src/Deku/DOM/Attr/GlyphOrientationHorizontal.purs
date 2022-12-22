@@ -1,5 +1,7 @@
 module Deku.DOM.Attr.GlyphOrientationHorizontal where
 
+import Prelude
+
 import Deku.DOM.Elt.Switch (Switch_)
 import Deku.DOM.Elt.Image (Image_)
 import Deku.DOM.Elt.Filter (Filter_)
@@ -19,7 +21,7 @@ import Deku.DOM.Elt.FeComposite (FeComposite_)
 import Deku.DOM.Elt.FeComponentTransfer (FeComponentTransfer_)
 import Deku.DOM.Elt.FeColorMatrix (FeColorMatrix_)
 import Deku.DOM.Elt.FeBlend (FeBlend_)
-import Deku.Attribute (class Attr, prop', unsafeAttribute)
+import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 
 data GlyphOrientationHorizontal = GlyphOrientationHorizontal
 
@@ -98,3 +100,7 @@ instance Attr Image_ GlyphOrientationHorizontal String where
 instance Attr Switch_ GlyphOrientationHorizontal String where
   attr GlyphOrientationHorizontal value = unsafeAttribute
     { key: "glyph-orientation-horizontal", value: prop' value }
+
+instance Attr everything GlyphOrientationHorizontal Unit where
+  attr GlyphOrientationHorizontal _ = unsafeAttribute
+    { key: "glyph-orientation-horizontal", value: unset' }

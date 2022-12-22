@@ -1,5 +1,7 @@
 module Deku.DOM.Attr.AriaSetsize where
 
+import Prelude
+
 import Deku.DOM.Elt.View (View_)
 import Deku.DOM.Elt.Use (Use_)
 import Deku.DOM.Elt.Tspan (Tspan_)
@@ -17,7 +19,7 @@ import Deku.DOM.Elt.G (G_)
 import Deku.DOM.Elt.ForeignObject (ForeignObject_)
 import Deku.DOM.Elt.Ellipse (Ellipse_)
 import Deku.DOM.Elt.Circle (Circle_)
-import Deku.Attribute (class Attr, prop', unsafeAttribute)
+import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 
 data AriaSetsize = AriaSetsize
 
@@ -88,3 +90,7 @@ instance Attr Use_ AriaSetsize String where
 instance Attr View_ AriaSetsize String where
   attr AriaSetsize value = unsafeAttribute
     { key: "aria-setsize", value: prop' value }
+
+instance Attr everything AriaSetsize Unit where
+  attr AriaSetsize _ = unsafeAttribute
+    { key: "aria-setsize", value: unset' }

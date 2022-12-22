@@ -1,5 +1,7 @@
 module Deku.DOM.Attr.Id where
 
+import Prelude
+
 import Deku.DOM.Elt.View (View_)
 import Deku.DOM.Elt.Use (Use_)
 import Deku.DOM.Elt.Tspan (Tspan_)
@@ -181,7 +183,7 @@ import Deku.DOM.Elt.Ul (Ul_)
 import Deku.DOM.Elt.Var (Var_)
 import Deku.DOM.Elt.Video (Video_)
 import Deku.DOM.Elt.Wbr (Wbr_)
-import Deku.Attribute (class Attr, prop', unsafeAttribute)
+import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 
 data Id = Id
 
@@ -727,3 +729,7 @@ instance Attr Use_ Id String where
 
 instance Attr View_ Id String where
   attr Id value = unsafeAttribute { key: "id", value: prop' value }
+
+instance Attr everything Id Unit where
+  attr Id _ = unsafeAttribute
+    { key: "id", value: unset' }

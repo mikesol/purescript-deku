@@ -1,5 +1,7 @@
 module Deku.DOM.Attr.Tabindex where
 
+import Prelude
+
 import Deku.DOM.Elt.View (View_)
 import Deku.DOM.Elt.Tspan (Tspan_)
 import Deku.DOM.Elt.Title (Title_)
@@ -167,7 +169,7 @@ import Deku.DOM.Elt.Ul (Ul_)
 import Deku.DOM.Elt.Var (Var_)
 import Deku.DOM.Elt.Video (Video_)
 import Deku.DOM.Elt.Wbr (Wbr_)
-import Deku.Attribute (class Attr, prop', unsafeAttribute)
+import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 
 data Tabindex = Tabindex
 
@@ -671,3 +673,7 @@ instance Attr Tspan_ Tabindex String where
 
 instance Attr View_ Tabindex String where
   attr Tabindex value = unsafeAttribute { key: "tabindex", value: prop' value }
+
+instance Attr everything Tabindex Unit where
+  attr Tabindex _ = unsafeAttribute
+    { key: "tabindex", value: unset' }

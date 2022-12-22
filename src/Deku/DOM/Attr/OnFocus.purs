@@ -1,8 +1,10 @@
 module Deku.DOM.Attr.OnFocus where
 
 import Prelude
+
+import Prelude
 import Effect (Effect)
-import Deku.Attribute (class Attr, Attribute, Cb(..), cb', unsafeAttribute)
+import Deku.Attribute (class Attr, Attribute, Cb(..), cb', unsafeAttribute, unset')
 import FRP.Event (Event)
 
 data OnFocus = OnFocus
@@ -18,4 +20,11 @@ instance Attr anything OnFocus (Effect Boolean) where
   attr OnFocus value = unsafeAttribute
     { key: "focus", value: cb' (Cb (const value)) }
 
-type OnFocusEffect = forall element. Attr element OnFocus (Effect Unit) => Event (Attribute element)
+type OnFocusEffect =
+  forall element
+   . Attr element OnFocus (Effect Unit)
+  => Event (Attribute element)
+
+instance Attr everything OnFocus Unit where
+  attr OnFocus _ = unsafeAttribute
+    { key: "focus", value: unset' }

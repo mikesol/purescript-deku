@@ -1,5 +1,7 @@
 module Deku.DOM.Attr.AlignmentBaseline where
 
+import Prelude
+
 import Deku.DOM.Elt.Switch (Switch_)
 import Deku.DOM.Elt.Image (Image_)
 import Deku.DOM.Elt.Filter (Filter_)
@@ -19,7 +21,7 @@ import Deku.DOM.Elt.FeComposite (FeComposite_)
 import Deku.DOM.Elt.FeComponentTransfer (FeComponentTransfer_)
 import Deku.DOM.Elt.FeColorMatrix (FeColorMatrix_)
 import Deku.DOM.Elt.FeBlend (FeBlend_)
-import Deku.Attribute (class Attr, prop', unsafeAttribute)
+import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 
 data AlignmentBaseline = AlignmentBaseline
 
@@ -98,3 +100,7 @@ instance Attr Image_ AlignmentBaseline String where
 instance Attr Switch_ AlignmentBaseline String where
   attr AlignmentBaseline value = unsafeAttribute
     { key: "alignment-baseline", value: prop' value }
+
+instance Attr everything AlignmentBaseline Unit where
+  attr AlignmentBaseline _ = unsafeAttribute
+    { key: "alignment-baseline", value: unset' }

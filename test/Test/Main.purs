@@ -9,7 +9,7 @@ import Control.Monad.ST.Internal as RRef
 import Control.Plus (empty)
 import Data.Foldable (intercalate, oneOf, oneOfMap)
 import Data.Tuple.Nested ((/\))
-import Deku.Attribute ((!:=))
+import Deku.Attribute ((!:=), (:=))
 import Deku.Attributes (id_)
 import Deku.Control (blank, globalPortal1, switcher, text, text_)
 import Deku.Core (Domable, Nut, dyn, fixed, insert, insert_, sendToPos)
@@ -277,3 +277,19 @@ lifecycleWillAndDidMount = D.div_
       setInt /\ int <- useState'
       onDidMount (setInt 42) (D.span (id_ "span2") [ text (show <$> int) ])
   ]
+
+unsetUnsets :: Nut
+unsetUnsets = Deku.do
+  unsetAttr /\ unset <- useState true
+  D.div (id_ "div0")
+    [ text_ "foo"
+    , D.span
+        ( oneOf
+            [ id_ "span1"
+            , unset <#> if _ then D.Style := "color:red;" else D.Style := unit
+            ]
+        )
+        [ text_ "bar" ]
+    , D.button (oneOf [ id_ "unsetter", click_ (unsetAttr false) ])
+        [ text_ "unset" ]
+    ]

@@ -1,5 +1,7 @@
 module Deku.DOM.Attr.AriaReadonly where
 
+import Prelude
+
 import Deku.DOM.Elt.View (View_)
 import Deku.DOM.Elt.Use (Use_)
 import Deku.DOM.Elt.Tspan (Tspan_)
@@ -17,7 +19,7 @@ import Deku.DOM.Elt.G (G_)
 import Deku.DOM.Elt.ForeignObject (ForeignObject_)
 import Deku.DOM.Elt.Ellipse (Ellipse_)
 import Deku.DOM.Elt.Circle (Circle_)
-import Deku.Attribute (class Attr, prop', unsafeAttribute)
+import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 
 data AriaReadonly = AriaReadonly
 
@@ -88,3 +90,7 @@ instance Attr Use_ AriaReadonly String where
 instance Attr View_ AriaReadonly String where
   attr AriaReadonly value = unsafeAttribute
     { key: "aria-readonly", value: prop' value }
+
+instance Attr everything AriaReadonly Unit where
+  attr AriaReadonly _ = unsafeAttribute
+    { key: "aria-readonly", value: unset' }

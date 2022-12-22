@@ -1,5 +1,7 @@
 module Deku.DOM.Attr.Clip where
 
+import Prelude
+
 import Deku.DOM.Elt.Switch (Switch_)
 import Deku.DOM.Elt.Image (Image_)
 import Deku.DOM.Elt.Filter (Filter_)
@@ -19,7 +21,7 @@ import Deku.DOM.Elt.FeComposite (FeComposite_)
 import Deku.DOM.Elt.FeComponentTransfer (FeComponentTransfer_)
 import Deku.DOM.Elt.FeColorMatrix (FeColorMatrix_)
 import Deku.DOM.Elt.FeBlend (FeBlend_)
-import Deku.Attribute (class Attr, prop', unsafeAttribute)
+import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 
 data Clip = Clip
 
@@ -79,3 +81,7 @@ instance Attr Image_ Clip String where
 
 instance Attr Switch_ Clip String where
   attr Clip value = unsafeAttribute { key: "clip", value: prop' value }
+
+instance Attr everything Clip Unit where
+  attr Clip _ = unsafeAttribute
+    { key: "clip", value: unset' }

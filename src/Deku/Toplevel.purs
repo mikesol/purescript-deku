@@ -85,11 +85,11 @@ hydrate a = void (hydrate' a)
 --
 
 runSSR
-  ::  forall lock r
-        . Domable lock
-            (RRef.STRef r (Array Instruction) -> ST r Unit)
-       -> ST r String
-     
+  :: forall lock r
+   . Domable lock
+       (RRef.STRef r (Array Instruction) -> ST r Unit)
+  -> ST r String
+
 runSSR = runSSR' "body"
 
 runSSR'
@@ -120,7 +120,7 @@ runSSR' topTag = go
       unglobal = unsafeCoerce :: ST Global String -> ST r String
 
     unglobal
-      (ssr' topTag
+      ( ssr' topTag
           <$>
             ( do
                 seed <- RRef.new 0

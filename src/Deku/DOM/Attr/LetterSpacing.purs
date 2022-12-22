@@ -1,5 +1,7 @@
 module Deku.DOM.Attr.LetterSpacing where
 
+import Prelude
+
 import Deku.DOM.Elt.Switch (Switch_)
 import Deku.DOM.Elt.Image (Image_)
 import Deku.DOM.Elt.Filter (Filter_)
@@ -19,7 +21,7 @@ import Deku.DOM.Elt.FeComposite (FeComposite_)
 import Deku.DOM.Elt.FeComponentTransfer (FeComponentTransfer_)
 import Deku.DOM.Elt.FeColorMatrix (FeColorMatrix_)
 import Deku.DOM.Elt.FeBlend (FeBlend_)
-import Deku.Attribute (class Attr, prop', unsafeAttribute)
+import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 
 data LetterSpacing = LetterSpacing
 
@@ -98,3 +100,7 @@ instance Attr Image_ LetterSpacing String where
 instance Attr Switch_ LetterSpacing String where
   attr LetterSpacing value = unsafeAttribute
     { key: "letter-spacing", value: prop' value }
+
+instance Attr everything LetterSpacing Unit where
+  attr LetterSpacing _ = unsafeAttribute
+    { key: "letter-spacing", value: unset' }

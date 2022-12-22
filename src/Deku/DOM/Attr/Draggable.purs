@@ -1,5 +1,7 @@
 module Deku.DOM.Attr.Draggable where
 
+import Prelude
+
 import Deku.DOM.Elt.A (A_)
 import Deku.DOM.Elt.Abbr (Abbr_)
 import Deku.DOM.Elt.Acronym (Acronym_)
@@ -122,7 +124,7 @@ import Deku.DOM.Elt.Ul (Ul_)
 import Deku.DOM.Elt.Var (Var_)
 import Deku.DOM.Elt.Video (Video_)
 import Deku.DOM.Elt.Wbr (Wbr_)
-import Deku.Attribute (class Attr, prop', unsafeAttribute)
+import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 
 data Draggable = Draggable
 
@@ -613,3 +615,7 @@ instance Attr Video_ Draggable String where
 instance Attr Wbr_ Draggable String where
   attr Draggable value = unsafeAttribute
     { key: "draggable", value: prop' value }
+
+instance Attr everything Draggable Unit where
+  attr Draggable _ = unsafeAttribute
+    { key: "draggable", value: unset' }

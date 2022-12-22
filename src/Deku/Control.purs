@@ -64,14 +64,16 @@ unsafeSetAttribute
   -> String
   -> Event (Attribute element)
   -> Event payload
-unsafeSetAttribute (DOMInterpret { setProp, setCb }) id atts = map
-  ( ( \{ key, value } -> case value of
-        Prop' s -> setProp { id, key, value: s }
-        Cb' c -> setCb { id, key, value: c }
-    ) <<<
-      unsafeUnAttribute
-  )
-  (atts)
+unsafeSetAttribute (DOMInterpret { setProp, setCb, unsetAttribute }) id atts =
+  map
+    ( ( \{ key, value } -> case value of
+          Prop' s -> setProp { id, key, value: s }
+          Cb' c -> setCb { id, key, value: c }
+          Unset' -> unsetAttribute { id, key }
+      ) <<<
+        unsafeUnAttribute
+    )
+    (atts)
 
 elementify
   :: forall element lock payload

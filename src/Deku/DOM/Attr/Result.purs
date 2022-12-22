@@ -1,5 +1,7 @@
 module Deku.DOM.Attr.Result where
 
+import Prelude
+
 import Deku.DOM.Elt.FeTurbulence (FeTurbulence_)
 import Deku.DOM.Elt.FeTile (FeTile_)
 import Deku.DOM.Elt.FeSpecularLighting (FeSpecularLighting_)
@@ -17,7 +19,7 @@ import Deku.DOM.Elt.FeComposite (FeComposite_)
 import Deku.DOM.Elt.FeComponentTransfer (FeComponentTransfer_)
 import Deku.DOM.Elt.FeColorMatrix (FeColorMatrix_)
 import Deku.DOM.Elt.FeBlend (FeBlend_)
-import Deku.Attribute (class Attr, prop', unsafeAttribute)
+import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 
 data Result = Result
 
@@ -71,3 +73,7 @@ instance Attr FeTile_ Result String where
 
 instance Attr FeTurbulence_ Result String where
   attr Result value = unsafeAttribute { key: "result", value: prop' value }
+
+instance Attr everything Result Unit where
+  attr Result _ = unsafeAttribute
+    { key: "result", value: unset' }

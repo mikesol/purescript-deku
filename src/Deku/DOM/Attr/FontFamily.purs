@@ -1,5 +1,7 @@
 module Deku.DOM.Attr.FontFamily where
 
+import Prelude
+
 import Deku.DOM.Elt.Tspan (Tspan_)
 import Deku.DOM.Elt.Text (Text_)
 import Deku.DOM.Elt.Switch (Switch_)
@@ -21,7 +23,7 @@ import Deku.DOM.Elt.FeComposite (FeComposite_)
 import Deku.DOM.Elt.FeComponentTransfer (FeComponentTransfer_)
 import Deku.DOM.Elt.FeColorMatrix (FeColorMatrix_)
 import Deku.DOM.Elt.FeBlend (FeBlend_)
-import Deku.Attribute (class Attr, prop', unsafeAttribute)
+import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 
 data FontFamily = FontFamily
 
@@ -108,3 +110,7 @@ instance Attr Text_ FontFamily String where
 instance Attr Tspan_ FontFamily String where
   attr FontFamily value = unsafeAttribute
     { key: "font-family", value: prop' value }
+
+instance Attr everything FontFamily Unit where
+  attr FontFamily _ = unsafeAttribute
+    { key: "font-family", value: unset' }

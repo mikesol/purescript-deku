@@ -1,5 +1,7 @@
 module Deku.DOM.Attr.AriaErrormessage where
 
+import Prelude
+
 import Deku.DOM.Elt.View (View_)
 import Deku.DOM.Elt.Use (Use_)
 import Deku.DOM.Elt.Tspan (Tspan_)
@@ -17,7 +19,7 @@ import Deku.DOM.Elt.G (G_)
 import Deku.DOM.Elt.ForeignObject (ForeignObject_)
 import Deku.DOM.Elt.Ellipse (Ellipse_)
 import Deku.DOM.Elt.Circle (Circle_)
-import Deku.Attribute (class Attr, prop', unsafeAttribute)
+import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 
 data AriaErrormessage = AriaErrormessage
 
@@ -88,3 +90,7 @@ instance Attr Use_ AriaErrormessage String where
 instance Attr View_ AriaErrormessage String where
   attr AriaErrormessage value = unsafeAttribute
     { key: "aria-errormessage", value: prop' value }
+
+instance Attr everything AriaErrormessage Unit where
+  attr AriaErrormessage _ = unsafeAttribute
+    { key: "aria-errormessage", value: unset' }

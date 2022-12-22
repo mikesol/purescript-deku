@@ -71,6 +71,7 @@ toSortableDyns a = (go [] Nothing a).acc
             MakeOpenDynBeacon { pos } -> pos
             MakeCloseDynBeacon { pos } -> pos
             SetProp _ -> Nothing
+            UnsetAttribute _ -> Nothing
             SetText _ -> Nothing
         go (acc <> [ SortableDyn { pos: pos', elt: Left head } ]) currentDyn
           tail
@@ -162,6 +163,10 @@ ssr' topTag arr' = "<" <> topTag
         (Queue.snoc staging2 inst)
         dbc
         rest
+      Just (inst@((UnsetAttribute _)) /\ rest) -> moveClosingToEnd staging1
+        (Queue.snoc staging2 inst)
+        dbc
+        rest
       Just (inst@((SetText _)) /\ rest) -> moveClosingToEnd staging1
         (Queue.snoc staging2 inst)
         dbc
@@ -214,6 +219,7 @@ ssr' topTag arr' = "<" <> topTag
         else elt
       elt@(SetText _) -> elt
       elt@(SetProp _) -> elt
+      elt@(UnsetAttribute _) -> elt
     removeParent id' = case _ of
       elt@(MakeElement elt'@({ id, dynFamily })) ->
         if id == id' || dynFamily == Just id then MakeElement
@@ -237,6 +243,7 @@ ssr' topTag arr' = "<" <> topTag
         else elt
       elt@(SetText _) -> elt
       elt@(SetProp _) -> elt
+      elt@(UnsetAttribute _) -> elt
 
     doDeleteFromCache cl id' = Queue.uncons >>> case _ of
       Just (elt@(MakeElement { id }) /\ rest) ->
@@ -260,6 +267,9 @@ ssr' topTag arr' = "<" <> topTag
       Just (elt@(SetText { id }) /\ rest) ->
         if id == id' then doDeleteFromCache cl id' rest
         else doDeleteFromCache (Queue.snoc cl elt) id' rest
+      Just (elt@(UnsetAttribute { id }) /\ rest) ->
+        if id == id' then doDeleteFromCache cl id' rest
+        else doDeleteFromCache (Queue.snoc cl elt) id' rest
       Nothing -> cl
     asList = Queue.fromFoldable aa
   arr = instructionsToRenderableInstructions arr'
@@ -277,6 +287,27 @@ ssr' topTag arr' = "<" <> topTag
             }
         )
       setting id action
+  unsetting id key = do
+    void $ modify
+      ( \s -> s
+          { idToActions = Map.alter
+              ( case _ of
+                  Just a -> Just
+                    ( filterMap
+                        ( case _ of
+                            SetProp x
+                              | x.key == key -> Nothing
+                              | otherwise -> Just (SetProp x)
+                            i -> Just i
+                        )
+                        a
+                    )
+                  Nothing -> Nothing
+              )
+              id
+              s.idToActions
+          }
+      )
   setting id action = do
     void $ modify
       ( \s -> s
@@ -308,6 +339,7 @@ ssr' topTag arr' = "<" <> topTag
                         MakeCloseDynBeacon { id } -> id
                         SetProp { id } -> id
                         SetText { id } -> id
+                        UnsetAttribute { id } -> id
                     )
               )
           , idToActions: x.idToActions
@@ -327,6 +359,7 @@ ssr' topTag arr' = "<" <> topTag
                 i
               SetProp { id } -> setting id i
               SetText { id } -> setting id i
+              UnsetAttribute { id, key } -> unsetting id key
           )
           arr
       )

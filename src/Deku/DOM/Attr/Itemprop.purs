@@ -1,5 +1,7 @@
 module Deku.DOM.Attr.Itemprop where
 
+import Prelude
+
 import Deku.DOM.Elt.A (A_)
 import Deku.DOM.Elt.Abbr (Abbr_)
 import Deku.DOM.Elt.Acronym (Acronym_)
@@ -122,7 +124,7 @@ import Deku.DOM.Elt.Ul (Ul_)
 import Deku.DOM.Elt.Var (Var_)
 import Deku.DOM.Elt.Video (Video_)
 import Deku.DOM.Elt.Wbr (Wbr_)
-import Deku.Attribute (class Attr, prop', unsafeAttribute)
+import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 
 data Itemprop = Itemprop
 
@@ -491,3 +493,7 @@ instance Attr Video_ Itemprop String where
 
 instance Attr Wbr_ Itemprop String where
   attr Itemprop value = unsafeAttribute { key: "itemprop", value: prop' value }
+
+instance Attr everything Itemprop Unit where
+  attr Itemprop _ = unsafeAttribute
+    { key: "itemprop", value: unset' }

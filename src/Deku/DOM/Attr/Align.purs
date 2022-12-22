@@ -1,5 +1,7 @@
 module Deku.DOM.Attr.Align where
 
+import Prelude
+
 import Deku.DOM.Elt.Applet (Applet_)
 import Deku.DOM.Elt.Caption (Caption_)
 import Deku.DOM.Elt.Col (Col_)
@@ -14,7 +16,7 @@ import Deku.DOM.Elt.Tfoot (Tfoot_)
 import Deku.DOM.Elt.Th (Th_)
 import Deku.DOM.Elt.Thead (Thead_)
 import Deku.DOM.Elt.Tr (Tr_)
-import Deku.Attribute (class Attr, prop', unsafeAttribute)
+import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 
 data Align = Align
 
@@ -59,3 +61,7 @@ instance Attr Thead_ Align String where
 
 instance Attr Tr_ Align String where
   attr Align value = unsafeAttribute { key: "align", value: prop' value }
+
+instance Attr everything Align Unit where
+  attr Align _ = unsafeAttribute
+    { key: "align", value: unset' }

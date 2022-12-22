@@ -1,5 +1,7 @@
 module Deku.DOM.Attr.DominantBaseline where
 
+import Prelude
+
 import Deku.DOM.Elt.Tspan (Tspan_)
 import Deku.DOM.Elt.Text (Text_)
 import Deku.DOM.Elt.Switch (Switch_)
@@ -21,7 +23,7 @@ import Deku.DOM.Elt.FeComposite (FeComposite_)
 import Deku.DOM.Elt.FeComponentTransfer (FeComponentTransfer_)
 import Deku.DOM.Elt.FeColorMatrix (FeColorMatrix_)
 import Deku.DOM.Elt.FeBlend (FeBlend_)
-import Deku.Attribute (class Attr, prop', unsafeAttribute)
+import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 
 data DominantBaseline = DominantBaseline
 
@@ -108,3 +110,7 @@ instance Attr Text_ DominantBaseline String where
 instance Attr Tspan_ DominantBaseline String where
   attr DominantBaseline value = unsafeAttribute
     { key: "dominant-baseline", value: prop' value }
+
+instance Attr everything DominantBaseline Unit where
+  attr DominantBaseline _ = unsafeAttribute
+    { key: "dominant-baseline", value: unset' }

@@ -1,5 +1,7 @@
 module Deku.DOM.Attr.AriaColcount where
 
+import Prelude
+
 import Deku.DOM.Elt.View (View_)
 import Deku.DOM.Elt.Use (Use_)
 import Deku.DOM.Elt.Tspan (Tspan_)
@@ -17,7 +19,7 @@ import Deku.DOM.Elt.G (G_)
 import Deku.DOM.Elt.ForeignObject (ForeignObject_)
 import Deku.DOM.Elt.Ellipse (Ellipse_)
 import Deku.DOM.Elt.Circle (Circle_)
-import Deku.Attribute (class Attr, prop', unsafeAttribute)
+import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 
 data AriaColcount = AriaColcount
 
@@ -88,3 +90,7 @@ instance Attr Use_ AriaColcount String where
 instance Attr View_ AriaColcount String where
   attr AriaColcount value = unsafeAttribute
     { key: "aria-colcount", value: prop' value }
+
+instance Attr everything AriaColcount Unit where
+  attr AriaColcount _ = unsafeAttribute
+    { key: "aria-colcount", value: unset' }

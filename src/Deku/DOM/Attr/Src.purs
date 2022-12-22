@@ -1,5 +1,7 @@
 module Deku.DOM.Attr.Src where
 
+import Prelude
+
 import Deku.DOM.Elt.Audio (Audio_)
 import Deku.DOM.Elt.Embed (Embed_)
 import Deku.DOM.Elt.Iframe (Iframe_)
@@ -9,7 +11,7 @@ import Deku.DOM.Elt.Script (Script_)
 import Deku.DOM.Elt.Source (Source_)
 import Deku.DOM.Elt.Track (Track_)
 import Deku.DOM.Elt.Video (Video_)
-import Deku.Attribute (class Attr, prop', unsafeAttribute)
+import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 
 data Src = Src
 
@@ -39,3 +41,7 @@ instance Attr Track_ Src String where
 
 instance Attr Video_ Src String where
   attr Src value = unsafeAttribute { key: "src", value: prop' value }
+
+instance Attr everything Src Unit where
+  attr Src _ = unsafeAttribute
+    { key: "src", value: unset' }

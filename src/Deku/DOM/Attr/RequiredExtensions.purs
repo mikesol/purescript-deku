@@ -1,5 +1,7 @@
 module Deku.DOM.Attr.RequiredExtensions where
 
+import Prelude
+
 import Deku.DOM.Elt.Use (Use_)
 import Deku.DOM.Elt.Tspan (Tspan_)
 import Deku.DOM.Elt.TextPath (TextPath_)
@@ -22,7 +24,7 @@ import Deku.DOM.Elt.Discard (Discard_)
 import Deku.DOM.Elt.ClipPath (ClipPath_)
 import Deku.DOM.Elt.Circle (Circle_)
 import Deku.DOM.Elt.AnimateTransform (AnimateTransform_)
-import Deku.Attribute (class Attr, prop', unsafeAttribute)
+import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 
 data RequiredExtensions = RequiredExtensions
 
@@ -113,3 +115,7 @@ instance Attr Tspan_ RequiredExtensions String where
 instance Attr Use_ RequiredExtensions String where
   attr RequiredExtensions value = unsafeAttribute
     { key: "requiredExtensions", value: prop' value }
+
+instance Attr everything RequiredExtensions Unit where
+  attr RequiredExtensions _ = unsafeAttribute
+    { key: "requiredExtensions", value: unset' }

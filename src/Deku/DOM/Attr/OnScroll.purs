@@ -1,8 +1,10 @@
 module Deku.DOM.Attr.OnScroll where
 
 import Prelude
+
+import Prelude
 import Effect (Effect)
-import Deku.Attribute (class Attr, Attribute, Cb(..), cb', unsafeAttribute)
+import Deku.Attribute (class Attr, Attribute, Cb(..), cb', unsafeAttribute, unset')
 import FRP.Event (Event)
 
 data OnScroll = OnScroll
@@ -18,4 +20,11 @@ instance Attr anything OnScroll (Effect Boolean) where
   attr OnScroll value = unsafeAttribute
     { key: "scroll", value: cb' (Cb (const value)) }
 
-type OnScrollEffect = forall element. Attr element OnScroll (Effect Unit) => Event (Attribute element)
+type OnScrollEffect =
+  forall element
+   . Attr element OnScroll (Effect Unit)
+  => Event (Attribute element)
+
+instance Attr everything OnScroll Unit where
+  attr OnScroll _ = unsafeAttribute
+    { key: "scroll", value: unset' }

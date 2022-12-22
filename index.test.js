@@ -192,5 +192,11 @@ describe('deku', () => {
     expect($('#span1').text()).toBe('');
     expect($('#span2').text()).toBe('42');
   }));
+  doTest('attributes are correctly unset', (f) => f(tests.unsetUnsets, () => {
+    const $ = require('jquery');
+    expect($('#span1').attr('style')).toBe('color:red;');
+    $('#unsetter').trigger('click');
+    expect($('#span1').attr('style')).toBe(undefined);
+  }));
 });
 

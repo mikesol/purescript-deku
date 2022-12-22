@@ -1,5 +1,7 @@
 module Deku.DOM.Attr.Xtype where
 
+import Prelude
+
 import Deku.DOM.Elt.Button (Button_)
 import Deku.DOM.Elt.Input (Input_)
 import Deku.DOM.Elt.Embed (Embed_)
@@ -8,7 +10,7 @@ import Deku.DOM.Elt.Script (Script_)
 import Deku.DOM.Elt.Source (Source_)
 import Deku.DOM.Elt.Style (Style_)
 import Deku.DOM.Elt.Link (Link_)
-import Deku.Attribute (class Attr, prop', unsafeAttribute)
+import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 
 import Deku.DOM.Elt.FeTurbulence (FeTurbulence_)
 import Deku.DOM.Elt.FeFuncR (FeFuncR_)
@@ -64,3 +66,7 @@ instance Attr FeFuncR_ Xtype String where
 
 instance Attr FeTurbulence_ Xtype String where
   attr Xtype value = unsafeAttribute { key: "type", value: prop' value }
+
+instance Attr everything Xtype Unit where
+  attr Xtype _ = unsafeAttribute
+    { key: "type", value: unset' }

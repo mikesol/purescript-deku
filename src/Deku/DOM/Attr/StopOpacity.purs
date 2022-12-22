@@ -1,5 +1,7 @@
 module Deku.DOM.Attr.StopOpacity where
 
+import Prelude
+
 import Deku.DOM.Elt.Switch (Switch_)
 import Deku.DOM.Elt.Stop (Stop_)
 import Deku.DOM.Elt.Image (Image_)
@@ -20,7 +22,7 @@ import Deku.DOM.Elt.FeComposite (FeComposite_)
 import Deku.DOM.Elt.FeComponentTransfer (FeComponentTransfer_)
 import Deku.DOM.Elt.FeColorMatrix (FeColorMatrix_)
 import Deku.DOM.Elt.FeBlend (FeBlend_)
-import Deku.Attribute (class Attr, prop', unsafeAttribute)
+import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 
 data StopOpacity = StopOpacity
 
@@ -103,3 +105,7 @@ instance Attr Stop_ StopOpacity String where
 instance Attr Switch_ StopOpacity String where
   attr StopOpacity value = unsafeAttribute
     { key: "stop-opacity", value: prop' value }
+
+instance Attr everything StopOpacity Unit where
+  attr StopOpacity _ = unsafeAttribute
+    { key: "stop-opacity", value: unset' }

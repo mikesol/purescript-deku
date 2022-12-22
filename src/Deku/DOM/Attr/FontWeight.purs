@@ -1,5 +1,7 @@
 module Deku.DOM.Attr.FontWeight where
 
+import Prelude
+
 import Deku.DOM.Elt.Tspan (Tspan_)
 import Deku.DOM.Elt.Text (Text_)
 import Deku.DOM.Elt.Switch (Switch_)
@@ -21,7 +23,7 @@ import Deku.DOM.Elt.FeComposite (FeComposite_)
 import Deku.DOM.Elt.FeComponentTransfer (FeComponentTransfer_)
 import Deku.DOM.Elt.FeColorMatrix (FeColorMatrix_)
 import Deku.DOM.Elt.FeBlend (FeBlend_)
-import Deku.Attribute (class Attr, prop', unsafeAttribute)
+import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 
 data FontWeight = FontWeight
 
@@ -108,3 +110,7 @@ instance Attr Text_ FontWeight String where
 instance Attr Tspan_ FontWeight String where
   attr FontWeight value = unsafeAttribute
     { key: "font-weight", value: prop' value }
+
+instance Attr everything FontWeight Unit where
+  attr FontWeight _ = unsafeAttribute
+    { key: "font-weight", value: unset' }

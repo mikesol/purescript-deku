@@ -84,6 +84,9 @@ foreign import setText_
 foreign import setProp_
   :: Boolean -> Core.SetProp -> FFIDOMSnapshot -> Effect Unit
 
+foreign import unsetAttribute_
+  :: Boolean -> Core.UnsetAttribute -> FFIDOMSnapshot -> Effect Unit
+
 foreign import setCb_
   :: Boolean -> Core.SetCb -> FFIDOMSnapshot -> Effect Unit
 
@@ -135,6 +138,7 @@ fullDOMInterpret seed = Core.DOMInterpret
   , makePursx: makePursx_ runOnJust false (maybe unit)
   , setProp: setProp_ false
   , setCb: setCb_ false
+  , unsetAttribute: unsetAttribute_ false
   , setText: setText_
   , sendToPos
   , removeDynBeacon: removeDynBeacon_
@@ -151,6 +155,7 @@ data RenderableInstruction
   | MakePursx Core.MakePursx
   | SetProp Core.SetProp
   | SetText Core.SetText
+  | UnsetAttribute Core.UnsetAttribute
 
 data EliminatableInstruction
   = SendToPos Core.SendToPos
@@ -198,6 +203,15 @@ ssrMakePursx a i = void $ Ref.modify
 ssrSetProp
   :: forall r. Core.SetProp -> Ref.STRef r (Array Instruction) -> ST r Unit
 ssrSetProp a i = void $ Ref.modify (_ <> [ RenderableInstruction $ SetProp a ])
+  i
+
+ssrUnsetAttribute
+  :: forall r
+   . Core.UnsetAttribute
+  -> Ref.STRef r (Array Instruction)
+  -> ST r Unit
+ssrUnsetAttribute a i = void $ Ref.modify
+  (_ <> [ RenderableInstruction $ UnsetAttribute a ])
   i
 
 ssrSetText
@@ -270,6 +284,7 @@ ssrDOMInterpret seed = Core.DOMInterpret
   , makeText: ssrMakeText
   , makePursx: ssrMakePursx
   , setProp: ssrSetProp
+  , unsetAttribute: ssrUnsetAttribute
   , makeDynBeacon: ssrMakeDynBeacon
   , setCb: \_ _ -> pure unit
   , setText: ssrSetText
@@ -307,6 +322,7 @@ hydratingDOMInterpret seed = Core.DOMInterpret
   , makePursx: makePursx_ runOnJust true (maybe unit)
   , setProp: setProp_ true
   , setCb: setCb_ true
+  , unsetAttribute: unsetAttribute_ true
   , setText: setText_
   , sendToPos
   , deleteFromCache: deleteFromCache_

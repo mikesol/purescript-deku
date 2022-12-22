@@ -1,5 +1,7 @@
 module Deku.DOM.Attr.SystemLanguage where
 
+import Prelude
+
 import Deku.DOM.Elt.Use (Use_)
 import Deku.DOM.Elt.Tspan (Tspan_)
 import Deku.DOM.Elt.TextPath (TextPath_)
@@ -22,7 +24,7 @@ import Deku.DOM.Elt.Discard (Discard_)
 import Deku.DOM.Elt.ClipPath (ClipPath_)
 import Deku.DOM.Elt.Circle (Circle_)
 import Deku.DOM.Elt.AnimateTransform (AnimateTransform_)
-import Deku.Attribute (class Attr, prop', unsafeAttribute)
+import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 
 data SystemLanguage = SystemLanguage
 
@@ -113,3 +115,7 @@ instance Attr Tspan_ SystemLanguage String where
 instance Attr Use_ SystemLanguage String where
   attr SystemLanguage value = unsafeAttribute
     { key: "systemLanguage", value: prop' value }
+
+instance Attr everything SystemLanguage Unit where
+  attr SystemLanguage _ = unsafeAttribute
+    { key: "systemLanguage", value: unset' }

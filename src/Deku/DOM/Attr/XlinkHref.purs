@@ -1,5 +1,7 @@
 module Deku.DOM.Attr.XlinkHref where
 
+import Prelude
+
 import Deku.DOM.Elt.Use (Use_)
 import Deku.DOM.Elt.RadialGradient (RadialGradient_)
 import Deku.DOM.Elt.Pattern (Pattern_)
@@ -9,7 +11,7 @@ import Deku.DOM.Elt.Image (Image_)
 import Deku.DOM.Elt.Filter (Filter_)
 import Deku.DOM.Elt.FeImage (FeImage_)
 import Deku.DOM.Elt.AnimateTransform (AnimateTransform_)
-import Deku.Attribute (class Attr, prop', unsafeAttribute)
+import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 
 data XlinkHref = XlinkHref
 
@@ -48,3 +50,7 @@ instance Attr RadialGradient_ XlinkHref String where
 instance Attr Use_ XlinkHref String where
   attr XlinkHref value = unsafeAttribute
     { key: "xlink:href", value: prop' value }
+
+instance Attr everything XlinkHref Unit where
+  attr XlinkHref _ = unsafeAttribute
+    { key: "xlink:href", value: unset' }

@@ -18,6 +18,7 @@ module Deku.Core
   , SendToPos
   , SetCb
   , SetProp
+  , UnsetAttribute
   , SetText
   , Domable'
   , bus
@@ -217,6 +218,11 @@ type MakeText =
 type DeleteFromCache = { id :: String }
 type MakeRoot = { id :: String, root :: Web.DOM.Element }
 type SetText = { id :: String, text :: String }
+type UnsetAttribute =
+  { id :: String
+  , key :: String
+  }
+
 type SetProp =
   { id :: String
   , key :: String
@@ -271,6 +277,7 @@ newtype DOMInterpret payload = DOMInterpret
   , sendToPos :: SendToPos -> payload
   , setProp :: SetProp -> payload
   , setCb :: SetCb -> payload
+  , unsetAttribute :: UnsetAttribute -> payload
   , setText :: SetText -> payload
   , removeDynBeacon :: RemoveDynBeacon -> payload
   }

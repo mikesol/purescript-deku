@@ -1,5 +1,7 @@
 module Deku.DOM.Attr.Contextmenu where
 
+import Prelude
+
 import Deku.DOM.Elt.A (A_)
 import Deku.DOM.Elt.Abbr (Abbr_)
 import Deku.DOM.Elt.Acronym (Acronym_)
@@ -122,7 +124,7 @@ import Deku.DOM.Elt.Ul (Ul_)
 import Deku.DOM.Elt.Var (Var_)
 import Deku.DOM.Elt.Video (Video_)
 import Deku.DOM.Elt.Wbr (Wbr_)
-import Deku.Attribute (class Attr, prop', unsafeAttribute)
+import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 
 data Contextmenu = Contextmenu
 
@@ -613,3 +615,7 @@ instance Attr Video_ Contextmenu String where
 instance Attr Wbr_ Contextmenu String where
   attr Contextmenu value = unsafeAttribute
     { key: "contextmenu", value: prop' value }
+
+instance Attr everything Contextmenu Unit where
+  attr Contextmenu _ = unsafeAttribute
+    { key: "contextmenu", value: unset' }

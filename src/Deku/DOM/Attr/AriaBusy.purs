@@ -1,5 +1,7 @@
 module Deku.DOM.Attr.AriaBusy where
 
+import Prelude
+
 import Deku.DOM.Elt.View (View_)
 import Deku.DOM.Elt.Use (Use_)
 import Deku.DOM.Elt.Tspan (Tspan_)
@@ -17,7 +19,7 @@ import Deku.DOM.Elt.G (G_)
 import Deku.DOM.Elt.ForeignObject (ForeignObject_)
 import Deku.DOM.Elt.Ellipse (Ellipse_)
 import Deku.DOM.Elt.Circle (Circle_)
-import Deku.Attribute (class Attr, prop', unsafeAttribute)
+import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 
 data AriaBusy = AriaBusy
 
@@ -71,3 +73,7 @@ instance Attr Use_ AriaBusy String where
 
 instance Attr View_ AriaBusy String where
   attr AriaBusy value = unsafeAttribute { key: "aria-busy", value: prop' value }
+
+instance Attr everything AriaBusy Unit where
+  attr AriaBusy _ = unsafeAttribute
+    { key: "aria-busy", value: unset' }
