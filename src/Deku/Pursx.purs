@@ -4572,24 +4572,29 @@ else instance pursxToElementConsAttr ::
       { cache, element } = pursxToElement pxScope (Proxy :: Proxy rest) r
     in
       { cache: Object.insert (reflectType pxk) true cache
-      , element: Node \parent di@(DOMInterpret { setProp, setCb }) ->
-          map
-            ( lcmap unsafeUnAttribute
-                ( \{ key, value } -> case value of
-                    Prop' p -> setProp
-                      { id: ((reflectType pxk) <> "@!%" <> pxScope)
-                      , key
-                      , value: p
-                      }
-                    Cb' c -> setCb
-                      { id: ((reflectType pxk) <> "@!%" <> pxScope)
-                      , key
-                      , value: c
-                      }
-                )
-            )
-            (get pxk r)
-            <|> (let Node y = element in y) parent di
+      , element: Node
+          \parent di@(DOMInterpret { setProp, setCb, unsetAttribute }) ->
+            map
+              ( lcmap unsafeUnAttribute
+                  ( \{ key, value } -> case value of
+                      Prop' p -> setProp
+                        { id: ((reflectType pxk) <> "@!%" <> pxScope)
+                        , key
+                        , value: p
+                        }
+                      Cb' c -> setCb
+                        { id: ((reflectType pxk) <> "@!%" <> pxScope)
+                        , key
+                        , value: c
+                        }
+                      Unset' -> unsetAttribute
+                        { id: ((reflectType pxk) <> "@!%" <> pxScope)
+                        , key
+                        }
+                  )
+              )
+              (get pxk r)
+              <|> (let Node y = element in y) parent di
       }
     where
     pxk = Proxy :: _ key

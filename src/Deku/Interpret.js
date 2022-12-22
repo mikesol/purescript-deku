@@ -567,6 +567,31 @@ export const setCb_ = (tryHydration) => (a) => (state) => () => {
   }
 };
 
+export const unsetAttribute_ = (tryHydration) => (a) => (state) => () => {
+  if (state.units[a.id]) {
+    var ptr = a.id;
+    // it may be the case that we have created an element via
+    // pursx but not added it to the global state yet
+    if (
+      state.hydrating &&
+      tryHydration &&
+      !state.units[ptr] &&
+      (dom = document.documentElement.querySelector(`[data-deku-ssr="${ptr}"]`))
+    ) {
+      state.units[ptr] = {
+        listeners: {},
+        parent: a.parent,
+        scope: a.scope,
+        main: dom,
+      };
+      if (!state.scopes[a.scope]) {
+        state.scopes[a.scope] = [];
+      }
+      state.scopes[a.scope].push(ptr);
+    }
+    state.units[ptr].main.removeAttribute(a.key);
+  }
+};
 export const setText_ = (a) => (state) => () => {
   if (state.units[a.id]) {
     var ptr = a.id;

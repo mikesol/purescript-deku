@@ -201,7 +201,7 @@ else instance pursxToElementConsAttr ::
       { cache, element } = pursxToElement pxScope (Proxy :: Proxy rest) r
     in
       { cache: Object.insert (reflectType pxk) true cache
-      , element: Node \parent di@(DOMInterpret { setProp, setCb }) ->
+      , element: Node \parent di@(DOMInterpret { setProp, setCb, unsetAttribute }) ->
           map
             ( lcmap unsafeUnAttribute
                 ( \{ key, value } -> case value of
@@ -214,6 +214,10 @@ else instance pursxToElementConsAttr ::
                       { id: ((reflectType pxk) <> "@!%" <> pxScope)
                       , key
                       , value: c
+                      }
+                    Unset' -> unsetAttribute
+                      { id: ((reflectType pxk) <> "@!%" <> pxScope)
+                      , key
                       }
                 )
             )
