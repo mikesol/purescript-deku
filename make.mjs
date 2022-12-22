@@ -5096,6 +5096,13 @@ var Cb$prime = /* @__PURE__ */ function() {
   };
   return Cb$prime2;
 }();
+var Unset$prime = /* @__PURE__ */ function() {
+  function Unset$prime2() {
+  }
+  ;
+  Unset$prime2.value = new Unset$prime2();
+  return Unset$prime2;
+}();
 var Attribute = function(x) {
   return x;
 };
@@ -5870,7 +5877,7 @@ var dynify = function(f) {
               return new Tuple(empty6, v.parent.value0);
             }
             ;
-            throw new Error("Failed pattern match at Deku.Core (line 341, column 34 - line 355, column 36): " + [v.parent.constructor.name]);
+            throw new Error("Failed pattern match at Deku.Core (line 348, column 34 - line 362, column 36): " + [v.parent.constructor.name]);
           }();
           var unsub = v2(oneOf3([v3.value0, pure13(v1.makeDynBeacon({
             id: me,
@@ -5930,13 +5937,13 @@ var portalComplexComplex2 = /* @__PURE__ */ portalComplexComplex()()();
 var unsafeSetText = function(v) {
   return function(id2) {
     return function(txt) {
-      return map10(function($134) {
+      return map10(function($135) {
         return v.setText(function(v1) {
           return {
             id: id2,
             text: v1
           };
-        }($134));
+        }($135));
       })(txt);
     };
   };
@@ -5944,7 +5951,7 @@ var unsafeSetText = function(v) {
 var unsafeSetAttribute = function(v) {
   return function(id2) {
     return function(atts) {
-      return map10(function($135) {
+      return map10(function($136) {
         return function(v1) {
           if (v1.value instanceof Prop$prime) {
             return v.setProp({
@@ -5962,8 +5969,15 @@ var unsafeSetAttribute = function(v) {
             });
           }
           ;
-          throw new Error("Failed pattern match at Deku.Control (line 68, column 26 - line 70, column 45): " + [v1.value.constructor.name]);
-        }(unsafeUnAttribute($135));
+          if (v1.value instanceof Unset$prime) {
+            return v.unsetAttribute({
+              id: id2,
+              key: v1.key
+            });
+          }
+          ;
+          throw new Error("Failed pattern match at Deku.Control (line 69, column 28 - line 72, column 47): " + [v1.value.constructor.name]);
+        }(unsafeUnAttribute($136));
       })(atts);
     };
   };
@@ -6016,9 +6030,9 @@ var switcher = function(f) {
     return dyn2(keepLatest4(memoize(counter(event))(function(cenv) {
       return map10(function(v) {
         return oneOf4([map10($$const(Remove.value))(filter6(function() {
-          var $136 = eq3(v.value1 + 1 | 0);
-          return function($137) {
-            return $136(snd($137));
+          var $137 = eq3(v.value1 + 1 | 0);
+          return function($138) {
+            return $137(snd($138));
           };
         }())(cenv)), pure8(insert_(coerce4(f(v.value0))))]);
       })(cenv);
@@ -6037,10 +6051,10 @@ var portalFlatten2 = function() {
         };
       };
     },
-    ids: function($138) {
+    ids: function($139) {
       return function(v) {
         return v.ids;
-      }(unwrap4($138));
+      }(unwrap4($139));
     },
     disconnectElement: function(v) {
       return function(v1) {
@@ -6128,10 +6142,10 @@ var portal = function() {
             };
           };
         },
-        deleteFromCache: function($141) {
+        deleteFromCache: function($142) {
           return function(v) {
             return v.deleteFromCache;
-          }(unwrap4($141));
+          }(unwrap4($142));
         }
       })(map14(unwrap4)(a2))(lcmap3(map14(function(v) {
         return v(unit);
@@ -6709,7 +6723,14 @@ var pursxToElementConsAttr = function() {
                           });
                         }
                         ;
-                        throw new Error("Failed pattern match at Deku.Pursx (line 4578, column 38 - line 4588, column 24): " + [v3.value.constructor.name]);
+                        if (v3.value instanceof Unset$prime) {
+                          return v2.unsetAttribute({
+                            id: reflectType2($$Proxy.value) + ("@!%" + pxScope),
+                            key: v3.key
+                          });
+                        }
+                        ;
+                        throw new Error("Failed pattern match at Deku.Pursx (line 4579, column 40 - line 4593, column 26): " + [v3.value.constructor.name]);
                       }))(get4($$Proxy.value)(r)))(v1.element(parent2)(v2));
                     };
                   }
@@ -6812,10 +6833,10 @@ var __internalDekuFlatten3 = function(a2) {
             };
           };
         },
-        ids: function($526) {
+        ids: function($527) {
           return function(v) {
             return v.ids;
-          }(unwrap5($526));
+          }(unwrap5($527));
         },
         disconnectElement: function(v) {
           return function(v1) {
@@ -10769,6 +10790,16 @@ var SetText = /* @__PURE__ */ function() {
   };
   return SetText2;
 }();
+var UnsetAttribute = /* @__PURE__ */ function() {
+  function UnsetAttribute2(value0) {
+    this.value0 = value0;
+  }
+  ;
+  UnsetAttribute2.create = function(value0) {
+    return new UnsetAttribute2(value0);
+  };
+  return UnsetAttribute2;
+}();
 var SendToPos = /* @__PURE__ */ function() {
   function SendToPos2(value0) {
     this.value0 = value0;
@@ -10849,6 +10880,13 @@ var EliminatableInstruction = /* @__PURE__ */ function() {
   };
   return EliminatableInstruction2;
 }();
+var ssrUnsetAttribute = function(a2) {
+  return function(i2) {
+    return $$void9(modify2(function(v) {
+      return append8(v)([new RenderableInstruction(new UnsetAttribute(a2))]);
+    })(i2));
+  };
+};
 var ssrSetText = function(a2) {
   return function(i2) {
     return $$void9(modify2(function(v) {
@@ -10954,6 +10992,7 @@ var ssrDOMInterpret = function(seed) {
     makeText: ssrMakeText,
     makePursx: ssrMakePursx,
     setProp: ssrSetProp,
+    unsetAttribute: ssrUnsetAttribute,
     makeDynBeacon: ssrMakeDynBeacon,
     setCb: function(v) {
       return function(v1) {
@@ -11232,6 +11271,7 @@ var mapFlipped3 = /* @__PURE__ */ mapFlipped(functorArray);
 var $$void10 = /* @__PURE__ */ $$void(/* @__PURE__ */ functorStateT(functorIdentity));
 var modify8 = /* @__PURE__ */ modify6(/* @__PURE__ */ monadStateStateT(monadIdentity));
 var alter2 = /* @__PURE__ */ alter(ordString);
+var filterMap4 = /* @__PURE__ */ filterMap(filterableArray);
 var discard3 = /* @__PURE__ */ discard(discardUnit)(/* @__PURE__ */ bindStateT(monadIdentity));
 var eq13 = /* @__PURE__ */ eq(/* @__PURE__ */ eqMaybe(eqString));
 var append13 = /* @__PURE__ */ append(semigroupCatQueue);
@@ -11246,13 +11286,12 @@ var applicativeStateT2 = /* @__PURE__ */ applicativeStateT(monadIdentity);
 var traverse3 = /* @__PURE__ */ traverse(traversableCatQueue)(applicativeStateT2);
 var for_6 = /* @__PURE__ */ for_(applicativeStateT2)(foldableMaybe);
 var intercalate3 = /* @__PURE__ */ intercalate(foldableArray)(monoidString);
-var filterMap4 = /* @__PURE__ */ filterMap(filterableArray);
 var foldMap4 = /* @__PURE__ */ foldMap(foldableArray)(monoidString);
 var foldl6 = /* @__PURE__ */ foldl(foldableMap);
 var toSortableDyns = function(a2) {
   var go2 = function(acc) {
     return function(currentDyn) {
-      return function($355) {
+      return function($383) {
         return function(v) {
           if (v instanceof Nothing) {
             return {
@@ -11320,11 +11359,15 @@ var toSortableDyns = function(a2) {
                 return Nothing.value;
               }
               ;
+              if (v.value0.head instanceof UnsetAttribute) {
+                return Nothing.value;
+              }
+              ;
               if (v.value0.head instanceof SetText) {
                 return Nothing.value;
               }
               ;
-              throw new Error("Failed pattern match at Deku.SSR (line 67, column 18 - line 74, column 33): " + [v.value0.head.constructor.name]);
+              throw new Error("Failed pattern match at Deku.SSR (line 67, column 18 - line 75, column 33): " + [v.value0.head.constructor.name]);
             }();
             return go2(append9(acc)([{
               pos: pos$prime,
@@ -11332,15 +11375,15 @@ var toSortableDyns = function(a2) {
             }]))(currentDyn)(v.value0.tail);
           }
           ;
-          throw new Error("Failed pattern match at Deku.SSR (line 50, column 40 - line 76, column 15): " + [v.constructor.name]);
-        }(uncons($355));
+          throw new Error("Failed pattern match at Deku.SSR (line 50, column 40 - line 77, column 15): " + [v.constructor.name]);
+        }(uncons($383));
       };
     };
   };
   return go2([])(Nothing.value)(a2).acc;
 };
 var $lazy_sortSortableDyns = /* @__PURE__ */ $runtime_lazy7("sortSortableDyns", "Deku.SSR", function() {
-  var $356 = map28(function(v) {
+  var $384 = map28(function(v) {
     if (v.elt instanceof Left) {
       return v;
     }
@@ -11358,18 +11401,18 @@ var $lazy_sortSortableDyns = /* @__PURE__ */ $runtime_lazy7("sortSortableDyns", 
     ;
     throw new Error("Failed pattern match at Deku.SSR (line 42, column 5 - line 45, column 81): " + [v.elt.constructor.name]);
   });
-  var $357 = sortBy(on(compare(ordMaybe(ordInt)))(function($359) {
+  var $385 = sortBy(on(compare(ordMaybe(ordInt)))(function($387) {
     return function(v) {
       return v.pos;
-    }(unwrap8($359));
+    }(unwrap8($387));
   }));
-  return function($358) {
-    return $356($357($358));
+  return function($386) {
+    return $384($385($386));
   };
 });
 var sortSortableDyns = /* @__PURE__ */ $lazy_sortSortableDyns(39);
 var fromSortableDyns = function(arr) {
-  return join2(mapFlipped3(arr)(function($360) {
+  return join2(mapFlipped3(arr)(function($388) {
     return function(v) {
       if (v instanceof Left) {
         return [v.value0];
@@ -11382,23 +11425,62 @@ var fromSortableDyns = function(arr) {
       throw new Error("Failed pattern match at Deku.SSR (line 33, column 26 - line 36, column 33): " + [v.constructor.name]);
     }(function(v) {
       return v.elt;
-    }(unwrap8($360)));
+    }(unwrap8($388)));
   }));
 };
 var ssr$prime = function(topTag) {
   return function(arr$prime) {
-    var setting = function(id2) {
-      return function(action2) {
+    var unsetting = function(id2) {
+      return function(key2) {
         return $$void10(modify8(function(s2) {
-          var $117 = {};
-          for (var $118 in s2) {
-            if ({}.hasOwnProperty.call(s2, $118)) {
-              $117[$118] = s2[$118];
+          var $123 = {};
+          for (var $124 in s2) {
+            if ({}.hasOwnProperty.call(s2, $124)) {
+              $123[$124] = s2[$124];
             }
             ;
           }
           ;
-          $117.idToActions = alter2(function(v1) {
+          $123.idToActions = alter2(function(v1) {
+            if (v1 instanceof Just) {
+              return new Just(filterMap4(function(v2) {
+                if (v2 instanceof SetProp) {
+                  if (v2.value0.key === key2) {
+                    return Nothing.value;
+                  }
+                  ;
+                  if (otherwise) {
+                    return new Just(new SetProp(v2.value0));
+                  }
+                  ;
+                }
+                ;
+                return new Just(v2);
+              })(v1.value0));
+            }
+            ;
+            if (v1 instanceof Nothing) {
+              return Nothing.value;
+            }
+            ;
+            throw new Error("Failed pattern match at Deku.SSR (line 294, column 17 - line 305, column 37): " + [v1.constructor.name]);
+          })(id2)(s2.idToActions);
+          return $123;
+        }));
+      };
+    };
+    var setting = function(id2) {
+      return function(action2) {
+        return $$void10(modify8(function(s2) {
+          var $128 = {};
+          for (var $129 in s2) {
+            if ({}.hasOwnProperty.call(s2, $129)) {
+              $128[$129] = s2[$129];
+            }
+            ;
+          }
+          ;
+          $128.idToActions = alter2(function(v1) {
             if (v1 instanceof Just) {
               return new Just(append9(v1.value0)([action2]));
             }
@@ -11407,9 +11489,9 @@ var ssr$prime = function(topTag) {
               return new Just([action2]);
             }
             ;
-            throw new Error("Failed pattern match at Deku.SSR (line 284, column 17 - line 286, column 45): " + [v1.constructor.name]);
+            throw new Error("Failed pattern match at Deku.SSR (line 315, column 17 - line 317, column 45): " + [v1.constructor.name]);
           })(id2)(s2.idToActions);
-          return $117;
+          return $128;
         }));
       };
     };
@@ -11424,15 +11506,15 @@ var ssr$prime = function(topTag) {
       return function(id2) {
         return function(action2) {
           return discard3($$void10(modify8(function(s2) {
-            var $126 = {};
-            for (var $127 in s2) {
-              if ({}.hasOwnProperty.call(s2, $127)) {
-                $126[$127] = s2[$127];
+            var $137 = {};
+            for (var $138 in s2) {
+              if ({}.hasOwnProperty.call(s2, $138)) {
+                $137[$138] = s2[$138];
               }
               ;
             }
             ;
-            $126.parentToChild = alter2(function(v1) {
+            $137.parentToChild = alter2(function(v1) {
               if (v1 instanceof Just) {
                 return new Just(append9(v1.value0)([id2]));
               }
@@ -11441,9 +11523,9 @@ var ssr$prime = function(topTag) {
                 return new Just([id2]);
               }
               ;
-              throw new Error("Failed pattern match at Deku.SSR (line 271, column 19 - line 273, column 43): " + [v1.constructor.name]);
+              throw new Error("Failed pattern match at Deku.SSR (line 281, column 19 - line 283, column 43): " + [v1.constructor.name]);
             })(parent2)(s2.parentToChild);
-            return $126;
+            return $137;
           })))(function() {
             return setting(id2)(action2);
           });
@@ -11455,8 +11537,8 @@ var ssr$prime = function(topTag) {
         return function(pos$prime) {
           return function(v2) {
             if (v2 instanceof MakeElement) {
-              var $130 = v2.value0.id === id$prime || eq13(v2.value0.dynFamily)(new Just(v2.value0.id));
-              if ($130) {
+              var $141 = v2.value0.id === id$prime || eq13(v2.value0.dynFamily)(new Just(v2.value0.id));
+              if ($141) {
                 return new MakeElement({
                   id: v2.value0.id,
                   scope: v2.value0.scope,
@@ -11471,8 +11553,8 @@ var ssr$prime = function(topTag) {
             }
             ;
             if (v2 instanceof MakeText) {
-              var $134 = v2.value0.id === id$prime || eq13(v2.value0.dynFamily)(new Just(v2.value0.id));
-              if ($134) {
+              var $145 = v2.value0.id === id$prime || eq13(v2.value0.dynFamily)(new Just(v2.value0.id));
+              if ($145) {
                 return new MakeText({
                   id: v2.value0.id,
                   pos: new Just(pos$prime),
@@ -11486,8 +11568,8 @@ var ssr$prime = function(topTag) {
             }
             ;
             if (v2 instanceof MakePursx) {
-              var $138 = v2.value0.id === id$prime || eq13(v2.value0.dynFamily)(new Just(v2.value0.id));
-              if ($138) {
+              var $149 = v2.value0.id === id$prime || eq13(v2.value0.dynFamily)(new Just(v2.value0.id));
+              if ($149) {
                 return new MakePursx({
                   id: v2.value0.id,
                   parent: v2.value0.parent,
@@ -11505,8 +11587,8 @@ var ssr$prime = function(topTag) {
             }
             ;
             if (v2 instanceof MakeOpenDynBeacon) {
-              var $142 = v2.value0.id === id$prime || eq13(v2.value0.dynFamily)(new Just(v2.value0.id));
-              if ($142) {
+              var $153 = v2.value0.id === id$prime || eq13(v2.value0.dynFamily)(new Just(v2.value0.id));
+              if ($153) {
                 return new MakeOpenDynBeacon({
                   id: v2.value0.id,
                   parent: v2.value0.parent,
@@ -11520,8 +11602,8 @@ var ssr$prime = function(topTag) {
             }
             ;
             if (v2 instanceof MakeCloseDynBeacon) {
-              var $146 = v2.value0.id === id$prime || eq13(v2.value0.dynFamily)(new Just(v2.value0.id));
-              if ($146) {
+              var $157 = v2.value0.id === id$prime || eq13(v2.value0.dynFamily)(new Just(v2.value0.id));
+              if ($157) {
                 return new MakeCloseDynBeacon({
                   id: v2.value0.id,
                   parent: v2.value0.parent,
@@ -11542,15 +11624,19 @@ var ssr$prime = function(topTag) {
               return v2;
             }
             ;
-            throw new Error("Failed pattern match at Deku.SSR (line 194, column 24 - line 216, column 29): " + [v2.constructor.name]);
+            if (v2 instanceof UnsetAttribute) {
+              return v2;
+            }
+            ;
+            throw new Error("Failed pattern match at Deku.SSR (line 199, column 24 - line 222, column 36): " + [v2.constructor.name]);
           };
         };
       };
       var removeParent = function(id$prime) {
         return function(v2) {
           if (v2 instanceof MakeElement) {
-            var $153 = v2.value0.id === id$prime || eq13(v2.value0.dynFamily)(new Just(v2.value0.id));
-            if ($153) {
+            var $165 = v2.value0.id === id$prime || eq13(v2.value0.dynFamily)(new Just(v2.value0.id));
+            if ($165) {
               return new MakeElement({
                 id: v2.value0.id,
                 scope: v2.value0.scope,
@@ -11565,8 +11651,8 @@ var ssr$prime = function(topTag) {
           }
           ;
           if (v2 instanceof MakeText) {
-            var $157 = v2.value0.id === id$prime || eq13(v2.value0.dynFamily)(new Just(v2.value0.id));
-            if ($157) {
+            var $169 = v2.value0.id === id$prime || eq13(v2.value0.dynFamily)(new Just(v2.value0.id));
+            if ($169) {
               return new MakeText({
                 id: v2.value0.id,
                 pos: v2.value0.pos,
@@ -11580,8 +11666,8 @@ var ssr$prime = function(topTag) {
           }
           ;
           if (v2 instanceof MakePursx) {
-            var $161 = v2.value0.id === id$prime || eq13(v2.value0.dynFamily)(new Just(v2.value0.id));
-            if ($161) {
+            var $173 = v2.value0.id === id$prime || eq13(v2.value0.dynFamily)(new Just(v2.value0.id));
+            if ($173) {
               return new MakePursx({
                 id: v2.value0.id,
                 parent: Nothing.value,
@@ -11599,8 +11685,8 @@ var ssr$prime = function(topTag) {
           }
           ;
           if (v2 instanceof MakeOpenDynBeacon) {
-            var $165 = v2.value0.id === id$prime || eq13(v2.value0.dynFamily)(new Just(v2.value0.id));
-            if ($165) {
+            var $177 = v2.value0.id === id$prime || eq13(v2.value0.dynFamily)(new Just(v2.value0.id));
+            if ($177) {
               return new MakeOpenDynBeacon({
                 id: v2.value0.id,
                 parent: Nothing.value,
@@ -11614,8 +11700,8 @@ var ssr$prime = function(topTag) {
           }
           ;
           if (v2 instanceof MakeCloseDynBeacon) {
-            var $169 = v2.value0.id === id$prime || eq13(v2.value0.dynFamily)(new Just(v2.value0.id));
-            if ($169) {
+            var $181 = v2.value0.id === id$prime || eq13(v2.value0.dynFamily)(new Just(v2.value0.id));
+            if ($181) {
               return new MakeCloseDynBeacon({
                 id: v2.value0.id,
                 parent: Nothing.value,
@@ -11636,13 +11722,17 @@ var ssr$prime = function(topTag) {
             return v2;
           }
           ;
-          throw new Error("Failed pattern match at Deku.SSR (line 217, column 24 - line 239, column 29): " + [v2.constructor.name]);
+          if (v2 instanceof UnsetAttribute) {
+            return v2;
+          }
+          ;
+          throw new Error("Failed pattern match at Deku.SSR (line 223, column 24 - line 246, column 36): " + [v2.constructor.name]);
         };
       };
       var moveClosingToEnd = function(staging1) {
         return function(staging2) {
           return function(dbc) {
-            return function($361) {
+            return function($389) {
               return function(v2) {
                 if (v2 instanceof Just && v2.value0.value0 instanceof MakeOpenDynBeacon) {
                   if (eq13(v2.value0.value0.value0.dynFamily)(new Just(dbc.id))) {
@@ -11703,6 +11793,10 @@ var ssr$prime = function(topTag) {
                   return moveClosingToEnd(staging1)(snoc3(staging2)(v2.value0.value0))(dbc)(v2.value0.value1);
                 }
                 ;
+                if (v2 instanceof Just && v2.value0.value0 instanceof UnsetAttribute) {
+                  return moveClosingToEnd(staging1)(snoc3(staging2)(v2.value0.value0))(dbc)(v2.value0.value1);
+                }
+                ;
                 if (v2 instanceof Just && v2.value0.value0 instanceof SetText) {
                   return moveClosingToEnd(staging1)(snoc3(staging2)(v2.value0.value0))(dbc)(v2.value0.value1);
                 }
@@ -11717,14 +11811,14 @@ var ssr$prime = function(topTag) {
                   })))(staging2));
                 }
                 ;
-                throw new Error("Failed pattern match at Deku.SSR (line 120, column 63 - line 171, column 20): " + [v2.constructor.name]);
-              }(uncons3($361));
+                throw new Error("Failed pattern match at Deku.SSR (line 121, column 63 - line 176, column 20): " + [v2.constructor.name]);
+              }(uncons3($389));
             };
           };
         };
       };
       var moveClosingsToEnd = function(cl) {
-        return function($362) {
+        return function($390) {
           return function(v2) {
             if (v2 instanceof Just && v2.value0.value0 instanceof MakeCloseDynBeacon) {
               return moveClosingsToEnd(moveClosingToEnd(empty10)(empty10)(v2.value0.value0.value0)(cl))(v2.value0.value1);
@@ -11738,17 +11832,17 @@ var ssr$prime = function(topTag) {
               return cl;
             }
             ;
-            throw new Error("Failed pattern match at Deku.SSR (line 107, column 45 - line 112, column 20): " + [v2.constructor.name]);
-          }(unsnoc3($362));
+            throw new Error("Failed pattern match at Deku.SSR (line 108, column 45 - line 113, column 20): " + [v2.constructor.name]);
+          }(unsnoc3($390));
         };
       };
       var doDeleteFromCache = function(cl) {
         return function(id$prime) {
-          return function($363) {
+          return function($391) {
             return function(v2) {
               if (v2 instanceof Just && v2.value0.value0 instanceof MakeElement) {
-                var $213 = v2.value0.value0.value0.id === id$prime;
-                if ($213) {
+                var $230 = v2.value0.value0.value0.id === id$prime;
+                if ($230) {
                   return doDeleteFromCache(cl)(id$prime)(v2.value0.value1);
                 }
                 ;
@@ -11756,8 +11850,8 @@ var ssr$prime = function(topTag) {
               }
               ;
               if (v2 instanceof Just && v2.value0.value0 instanceof MakeText) {
-                var $219 = v2.value0.value0.value0.id === id$prime;
-                if ($219) {
+                var $236 = v2.value0.value0.value0.id === id$prime;
+                if ($236) {
                   return doDeleteFromCache(cl)(id$prime)(v2.value0.value1);
                 }
                 ;
@@ -11765,8 +11859,8 @@ var ssr$prime = function(topTag) {
               }
               ;
               if (v2 instanceof Just && v2.value0.value0 instanceof MakePursx) {
-                var $225 = v2.value0.value0.value0.id === id$prime;
-                if ($225) {
+                var $242 = v2.value0.value0.value0.id === id$prime;
+                if ($242) {
                   return doDeleteFromCache(cl)(id$prime)(v2.value0.value1);
                 }
                 ;
@@ -11774,8 +11868,8 @@ var ssr$prime = function(topTag) {
               }
               ;
               if (v2 instanceof Just && v2.value0.value0 instanceof MakeOpenDynBeacon) {
-                var $231 = v2.value0.value0.value0.id === id$prime;
-                if ($231) {
+                var $248 = v2.value0.value0.value0.id === id$prime;
+                if ($248) {
                   return doDeleteFromCache(cl)(id$prime)(v2.value0.value1);
                 }
                 ;
@@ -11783,8 +11877,8 @@ var ssr$prime = function(topTag) {
               }
               ;
               if (v2 instanceof Just && v2.value0.value0 instanceof MakeCloseDynBeacon) {
-                var $237 = v2.value0.value0.value0.id === id$prime;
-                if ($237) {
+                var $254 = v2.value0.value0.value0.id === id$prime;
+                if ($254) {
                   return doDeleteFromCache(cl)(id$prime)(v2.value0.value1);
                 }
                 ;
@@ -11792,8 +11886,8 @@ var ssr$prime = function(topTag) {
               }
               ;
               if (v2 instanceof Just && v2.value0.value0 instanceof SetProp) {
-                var $243 = v2.value0.value0.value0.id === id$prime;
-                if ($243) {
+                var $260 = v2.value0.value0.value0.id === id$prime;
+                if ($260) {
                   return doDeleteFromCache(cl)(id$prime)(v2.value0.value1);
                 }
                 ;
@@ -11801,8 +11895,17 @@ var ssr$prime = function(topTag) {
               }
               ;
               if (v2 instanceof Just && v2.value0.value0 instanceof SetText) {
-                var $249 = v2.value0.value0.value0.id === id$prime;
-                if ($249) {
+                var $266 = v2.value0.value0.value0.id === id$prime;
+                if ($266) {
+                  return doDeleteFromCache(cl)(id$prime)(v2.value0.value1);
+                }
+                ;
+                return doDeleteFromCache(snoc3(cl)(v2.value0.value0))(id$prime)(v2.value0.value1);
+              }
+              ;
+              if (v2 instanceof Just && v2.value0.value0 instanceof UnsetAttribute) {
+                var $272 = v2.value0.value0.value0.id === id$prime;
+                if ($272) {
                   return doDeleteFromCache(cl)(id$prime)(v2.value0.value1);
                 }
                 ;
@@ -11813,13 +11916,13 @@ var ssr$prime = function(topTag) {
                 return cl;
               }
               ;
-              throw new Error("Failed pattern match at Deku.SSR (line 241, column 49 - line 263, column 20): " + [v2.constructor.name]);
-            }(uncons3($363));
+              throw new Error("Failed pattern match at Deku.SSR (line 248, column 49 - line 273, column 20): " + [v2.constructor.name]);
+            }(uncons3($391));
           };
         };
       };
       var doEliminations = function(cl) {
-        return function($364) {
+        return function($392) {
           return function(v2) {
             if (v2 instanceof Just && v2.value0.value0 instanceof RenderableInstruction) {
               return doEliminations(snoc3(cl)(v2.value0.value0.value0))(v2.value0.value1);
@@ -11853,8 +11956,8 @@ var ssr$prime = function(topTag) {
               return cl;
             }
             ;
-            throw new Error("Failed pattern match at Deku.SSR (line 172, column 42 - line 193, column 20): " + [v2.constructor.name]);
-          }(uncons3($364));
+            throw new Error("Failed pattern match at Deku.SSR (line 177, column 42 - line 198, column 20): " + [v2.constructor.name]);
+          }(uncons3($392));
         };
       };
       var asList = fromFoldable6(aa);
@@ -11866,7 +11969,7 @@ var ssr$prime = function(topTag) {
     var v = function(x) {
       return {
         parentToChild: mapFlipped1(x.parentToChild)(function() {
-          var $365 = map28(function(v1) {
+          var $393 = map28(function(v1) {
             if (v1 instanceof MakeElement) {
               return v1.value0.id;
             }
@@ -11895,13 +11998,17 @@ var ssr$prime = function(topTag) {
               return v1.value0.id;
             }
             ;
-            throw new Error("Failed pattern match at Deku.SSR (line 303, column 23 - line 310, column 45): " + [v1.constructor.name]);
+            if (v1 instanceof UnsetAttribute) {
+              return v1.value0.id;
+            }
+            ;
+            throw new Error("Failed pattern match at Deku.SSR (line 334, column 23 - line 342, column 52): " + [v1.constructor.name]);
           });
-          var $366 = map28(function(i2) {
+          var $394 = map28(function(i2) {
             return bind8(lookup3(i2)(x.idToActions))(head);
           });
-          return function($367) {
-            return $365(fromSortableDyns(sortSortableDyns(toSortableDyns(compact4($366($367))))));
+          return function($395) {
+            return $393(fromSortableDyns(sortSortableDyns(toSortableDyns(compact4($394($395))))));
           };
         }()),
         idToActions: x.idToActions
@@ -11945,7 +12052,11 @@ var ssr$prime = function(topTag) {
         return setting(i2.value0.id)(i2);
       }
       ;
-      throw new Error("Failed pattern match at Deku.SSR (line 318, column 19 - line 329, column 45): " + [i2.constructor.name]);
+      if (i2 instanceof UnsetAttribute) {
+        return unsetting(i2.value0.id)(i2.value0.key);
+      }
+      ;
+      throw new Error("Failed pattern match at Deku.SSR (line 350, column 19 - line 362, column 61): " + [i2.constructor.name]);
     })(arr))({
       parentToChild: empty3,
       idToActions: empty3
@@ -12051,7 +12162,7 @@ var ssr$prime = function(topTag) {
             return replace("data-deku-ssr")(eltAtts(a2) + " data-deku-ssr")(b2);
           }
           ;
-          throw new Error("Failed pattern match at Deku.SSR (line 351, column 17 - line 355, column 14): " + [v1.constructor.name]);
+          throw new Error("Failed pattern match at Deku.SSR (line 384, column 17 - line 388, column 14): " + [v1.constructor.name]);
         };
       })(o(id2))(v.idToActions);
     };
