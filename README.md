@@ -68,11 +68,26 @@ main =
         ]
 ```
 
+So, in summary, ignore the voluminous number of modules in Deku (which makes browsing Pursuit difficult) and focus on the modules used in the example above, namely:
+
+- [`Deku.Toplevel`](https://pursuit.purescript.org/packages/purescript-deku/docs/Deku.Toplevel)
+- [`Deku.Core`](https://pursuit.purescript.org/packages/purescript-deku/docs/Deku.Core)
+- [`Deku.Do`](https://pursuit.purescript.org/packages/purescript-deku/docs/Deku.Do)
+- [`Deku.Hooks`](https://pursuit.purescript.org/packages/purescript-deku/docs/Deku.Hooks)
+- [`Deku.DOM`](https://pursuit.purescript.org/packages/purescript-deku/docs/Deku.DOM)
+- [`Deku.Listeners`](https://pursuit.purescript.org/packages/purescript-deku/docs/Deku.Listeners)
+- [`Deku.Attributes`](https://pursuit.purescript.org/packages/purescript-deku/docs/Deku.Attributes)
+- [`Deku.CSS`](https://pursuit.purescript.org/packages/purescript-deku/docs/Deku.CSS)
+- [`Deku.Attribute`](https://pursuit.purescript.org/packages/purescript-deku/docs/Deku.Attribute)
+- [`Deku.Control`](https://pursuit.purescript.org/packages/purescript-deku/docs/Deku.Control)
+- [`Deku.Pursx`](https://pursuit.purescript.org/packages/purescript-deku/docs/Deku.Pursx)
+
+
 There are a few more modules to be aware of for advanced usage:
 
-- `Deku.Lifecycle` contains methods for arbitrary side effects to run when the Deku Nuts mount and dismount from the DOM.
-- `Deku.Pursx.Anonymous` contains an experimental `pursx` syntax that could theoretically be made better by Visible Type Applications. As that feature develops, if the syntax becomes ergonomic, it may supercede the current `pursx` syntax.
-- `Deku.Interpret` is for folks that wish to build a custom Deku backend. Deku currently supports Single-page applications (the default), static site rendering, and hydrated static site rendering.
+- [`Deku.Lifecycle`](https://pursuit.purescript.org/packages/purescript-deku/docs/Deku.Lifecycle) contains methods for arbitrary side effects to run when the Deku Nuts mount and dismount from the DOM.
+- [`Deku.Pursx.Anonymous`](https://pursuit.purescript.org/packages/purescript-deku/docs/Deku.Pursx.Anonymous) contains an experimental `pursx` syntax that could theoretically be made better by Visible Type Applications. As that feature develops, if the syntax becomes ergonomic, it may supercede the current `pursx` syntax.
+- [`Deku.Interpret`](https://pursuit.purescript.org/packages/purescript-deku/docs/Deku.Interpret) is for folks that wish to build a custom Deku backend. Deku currently supports Single-page applications (the default), static site rendering, and hydrated static site rendering.
 
 Deku is a small codebase. All of the heavy lifting is done via primitives from [`purescript-hyrule`](https://github.com/mikesol/purescript-hyrule), the documentation of which is also on [Pursuit](https://pursuit.purescript.org/packages/purescript-hyrule).
 
