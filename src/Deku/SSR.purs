@@ -1,3 +1,5 @@
+-- | This module contains all of the logic for SSR in Deku.
+-- | It should not be used directly, but instead via `runSSR` in `Deku.Toplevel`.
 module Deku.SSR where
 
 import Prelude

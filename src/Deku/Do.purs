@@ -1,3 +1,5 @@
+-- | Rebindable `do` notation for Deku apps. See the [Deku readme](https://github.com/mikesol/purescript-deku/blob/main/README.md) and the [Deku guide](https://purescript-deku.netlify.app) for examples of where
+-- | to use `Deku.Do`.
 module Deku.Do
   ( bind
   , discard
