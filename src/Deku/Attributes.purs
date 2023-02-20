@@ -1,3 +1,4 @@
+-- | This module contains various helper functions for setting attributes on elements.
 module Deku.Attributes
   ( href
   , href_

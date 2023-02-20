@@ -1,3 +1,8 @@
+-- | This module is for internal use only, and should only be consulted by people
+-- | implementing a Deku backend. It is not part of the public API, and does not yet
+-- | have documentation. If you are not implementing a Deku backend, please ping
+-- | the #frp channel of the PureScript Discord. If enough people are implementing
+-- | Deku backends, someone may document this stuff at some point.
 module Deku.Interpret
   ( FFIDOMSnapshot
   , fullDOMInterpret

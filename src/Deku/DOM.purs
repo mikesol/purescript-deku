@@ -1,3 +1,5 @@
+-- | This large, unwieldy module contains reexports of all the DOM elements plus a few extra functions
+-- | for working with the DOM. It just documents the esoteric bits, namely `Self`, `SelfT`, and `unsafeCustomElement`.
 module Deku.DOM
   ( Self(..)
   , SelfT(..)
@@ -1879,7 +1881,8 @@ instance tagToDekuDefs_ :: TagToDeku "defs" Defs_
 
 -- codegen 3
 
--- a hack for custom stuff
+-- | Unsafely create a custom element. This is useful when using Stencil-based
+-- | frameworks like Ionic in Deku.
 unsafeCustomElement
   :: forall element lock payload
    . String
@@ -1896,14 +1899,19 @@ unsafeCustomElement name _ attributes kids = Domable
       )
   )
 
--- we can always refer to ourself
+-- | Creates a special event where an Deku element can have its raw DOM element
+-- | injected into a closure. All bets are off type-safety wise. This is useful
+-- | when you need to manipualte the element itself, like for example attaching
+-- | properties to it, etc. 
 data Self = Self
 
 instance Attr anything Self (DOM.Element -> Effect Unit) where
   attr Self value = unsafeAttribute
     { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
 
--- sometimes, we can refer to ourself with a more specific type
+-- | A slightly less permissive version of `Self` that associates Deku Elements to
+-- | the primitive element definitions form `purescript-web`. For example, `A_` from `deku`
+-- | gets translated to `HTMLAnchorElement` from `purescript-web`, etc.
 data SelfT = SelfT
 
 instance Attr anything SelfT (DOM.Element -> Effect Unit) where

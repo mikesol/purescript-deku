@@ -1,3 +1,15 @@
+-- | Deku Hooks, modeled after React Hooks, are a way to have stateful behavior in Deku.
+-- | At a basic level, Deku hooks look very much like their react counterparts:
+-- |
+-- | ```purescript
+-- | Deku.do
+-- |  setCount /\ count <- useState 0
+-- |  Deku.button (click $ counter <#> add 1 >>> setCount) [ text (show count) ]
+-- | ```
+-- |
+-- | Deku hooks are covered more extensively in the
+-- | [Deku guide section on state](https://purescript-deku.netlify.app/core-concepts/state)
+-- | and the [Deku guide section on collections](https://purescript-deku.netlify.app/core-concepts/collections).
 module Deku.Hooks
   ( useState'
   , useState

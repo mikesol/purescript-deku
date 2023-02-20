@@ -1,3 +1,8 @@
+-- | This module contains various helper functions for setting listeners on elements.
+-- |
+-- | Listeners are usually of type `Effect Unit` but can also be of type `Effect Boolean`
+-- | and `DOM.Event -> Effect Boolean`. This comes from the constraint
+-- | `Attr element D.MyListener cb`, where `cb` will be whatever listener is permissable.
 module Deku.Listeners
   ( slider
   , slider_
@@ -7,7 +12,6 @@ module Deku.Listeners
   , checkbox_
   , click
   , click_
-  , click'
   , keyUp
   , keyUp_
   , keyDown
@@ -35,6 +39,8 @@ import Web.Event.Event (target)
 import Web.HTML.HTMLInputElement (checked, fromEventTarget, value, valueAsNumber)
 import Web.UIEvent.KeyboardEvent (KeyboardEvent, fromEvent)
 
+-- | Set a `click` listener for an element using an event emitting listeners.
+-- | Each `click` listener emitted replaces the previous `click` listener.
 click
   :: forall cb element
    . Attr element D.OnClick cb
@@ -42,6 +48,7 @@ click
   -> Event (Attribute element)
 click = map (attr D.OnClick)
 
+-- | Set a `click` listener for an element using a constant listener.
 click_
   :: forall cb element
    . Attr element D.OnClick cb
@@ -49,19 +56,14 @@ click_
   -> Event (Attribute element)
 click_ = click <<< pure
 
-click'
-  :: forall m cb element
-   . Monoid m
-  => Attr element D.OnClick cb
-  => Event (m -> cb)
-  -> Event (Attribute element)
-click' = map (attr D.OnClick <<< (_ $ mempty))
-
+-- | Sets a `slider` listener for an element using a constant listener.
 slider_
   :: (Number -> Effect Unit)
   -> Event (Attribute D.Input_)
 slider_ = slider <<< pure
 
+-- | Sets a `slider` listener for an element using an event emitting listeners.
+-- | Each `slider` listener emitted replaces the previous `slider` listener.
 slider
   :: Event (Number -> Effect Unit)
   -> Event (Attribute D.Input_)
@@ -72,11 +74,14 @@ slider = alt (pure $ D.Xtype := "range") <<< map
         (valueAsNumber >=> push)
   )
 
+-- | Sets a numeric `input` listener for an element using a constant listener.
 numeric_
   :: (Number -> Effect Unit)
   -> Event (Attribute D.Input_)
 numeric_ = numeric <<< pure
 
+-- | Sets a numeric `input` listener for an element using an event emitting listeners.
+-- | Each `input` listener emitted replaces the previous `input` listener.
 numeric
   :: Event (Number -> Effect Unit)
   -> Event (Attribute D.Input_)
@@ -87,11 +92,14 @@ numeric = alt (pure $ D.Xtype := "number") <<< map
         (valueAsNumber >=> push)
   )
 
+-- | Sets a `checkbox` listener for an element using a constant listener.
 checkbox_
   :: (Boolean -> Effect Unit)
   -> Event (Attribute D.Input_)
 checkbox_ = checkbox <<< pure
 
+-- | Sets a `checkbox` listener for an element using an event emitting listeners.
+-- | Each `checkbox` listener emitted replaces the previous `checkbox` listener.
 checkbox
   :: Event (Boolean -> Effect Unit)
   -> Event (Attribute D.Input_)
@@ -102,12 +110,15 @@ checkbox = alt (pure $ D.Xtype := "checkbox") <<< map
         (checked >=> push)
   )
 
+-- | Sets a text-based `input` listener for an element using a constant listener.
 textInput_
   :: forall e
    . (String -> Effect Unit)
   -> Event (Attribute e)
 textInput_ = textInput <<< pure
 
+-- | Sets a text-based `input` listener for an element using an event emitting listeners.
+-- | Each `input` listener emitted replaces the previous `input` listener.
 textInput
   :: forall e
    . Event (String -> Effect Unit)
@@ -125,42 +136,56 @@ keyEvent'
   -> f59 (Attribute e64)
 keyEvent' listener = map \f -> listener := cb \e -> for_ (fromEvent e) f
 
+-- | Sets a `keyup` listener for an element using a constant listener.
 keyUp_
   :: forall eleemnt
    . (KeyboardEvent -> Effect Unit)
   -> Event (Attribute eleemnt)
 keyUp_ = keyUp <<< pure
 
+-- | Sets a `keyup` listener for an element using an event emitting listeners.
+-- | Each `keyup` listener emitted replaces the previous `keyup` listener.
 keyUp
   :: forall eleemnt
    . Event (KeyboardEvent -> Effect Unit)
   -> Event (Attribute eleemnt)
 keyUp = keyEvent' D.OnKeyup
 
+-- | Sets a `keydown` listener for an element using a constant listener.
 keyDown_
   :: forall eleemnt
    . (KeyboardEvent -> Effect Unit)
   -> Event (Attribute eleemnt)
 keyDown_ = keyDown <<< pure
 
+-- | Sets a `keydown` listener for an element using an event emitting listeners.
+-- | Each `keydown` listener emitted replaces the previous `keydown` listener.
 keyDown
   :: forall eleemnt
    . Event (KeyboardEvent -> Effect Unit)
   -> Event (Attribute eleemnt)
 keyDown = keyEvent' D.OnKeydown
 
+-- | Sets a `keypress` listener for an element using a constant listener.
 keyPress_
   :: forall eleemnt
    . (KeyboardEvent -> Effect Unit)
   -> Event (Attribute eleemnt)
 keyPress_ = keyPress <<< pure
 
+-- | Sets a `keypress` listener for an element using an event emitting listeners.
+-- | Each `keypress` listener emitted replaces the previous `keypress` listener.
 keyPress
   :: forall eleemnt
    . Event (KeyboardEvent -> Effect Unit)
   -> Event (Attribute eleemnt)
 keyPress = keyEvent' D.OnKeypress
 
+-- | Sets a listener that injects a primitive DOM element into a closed scope immediately after element creation.
+-- | Importantly, this does _not happen_ on the same tick as the element creation but rather during the next DOM tick.
+-- | This is to guarantee that element creation happens before trying to use the element.
+-- | In practice this delay will be on the order of microseconds but it can veer into milliseconds if
+-- | the UI thread is particularly busy.
 injectElement
   :: forall e
    . Attr e D.Self (Element -> Effect Unit)
@@ -169,6 +194,7 @@ injectElement
 injectElement f = pure
   (D.Self := \s -> launchAff_ (delay (Milliseconds 0.0) *> liftEffect (f s)))
 
+-- | A typesafe version of `injectElement` that uses `SelfT` instead of `Self`.
 injectElementT
   :: forall e te
    . Attr e D.SelfT (te -> Effect Unit)
