@@ -24,3 +24,5 @@ packages.json
 /test/test.js
 /test/.spago
 /test/output/
+__pycache__
+.vscode
