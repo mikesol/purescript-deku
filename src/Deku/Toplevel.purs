@@ -1,3 +1,10 @@
+-- | These functions are used to run a Deku application. Running deku applications comes in three flavors:
+-- |
+-- | - Single-page applications
+-- | - Static site rendering
+-- | - Hydrated static sites
+-- |
+-- | The documentation in this module covers those three cases
 module Deku.Toplevel where
 
 import Prelude
@@ -26,6 +33,8 @@ import Web.HTML.HTMLDocument (body)
 import Web.HTML.HTMLElement (toElement)
 import Web.HTML.Window (document)
 
+-- | Runs a deku application in a DOM element, returning a canceler that can
+-- | be used to cancel the application.
 runInElement'
   :: Web.DOM.Element
   -> (forall lock. Domable lock (FFIDOMSnapshot -> Effect Unit))
@@ -35,6 +44,8 @@ runInElement' elt eee = do
   evt <- liftST (RRef.new 0) <#> (deku elt eee <<< fullDOMInterpret)
   subscribe evt \i -> i ffi
 
+-- | Runs a deku application in the body of a document, returning a canceler that can
+-- | be used to cancel the application.
 runInBody'
   :: (forall lock. Domable lock (FFIDOMSnapshot -> Effect Unit))
   -> Effect (Effect Unit)
@@ -42,6 +53,7 @@ runInBody' eee = do
   b' <- window >>= document >>= body
   maybe mempty (\elt -> runInElement' elt eee) (toElement <$> b')
 
+-- | Runs a deku application in the body of a document
 runInBody
   :: (forall lock. Domable lock (FFIDOMSnapshot -> Effect Unit))
   -> Effect Unit
@@ -51,6 +63,8 @@ runInBody a = void (runInBody' a)
 
 foreign import dekuRoot :: Effect DOM.Element
 
+-- | Hydrates an application created using `runSSR`, returning a canceler that can
+-- | be used to end the application.
 hydrate'
   :: (forall lock. Domable lock (FFIDOMSnapshot -> Effect Unit))
   -> Effect (Effect Unit)
@@ -77,6 +91,7 @@ hydrate' children = do
   unSetHydrating ffi
   pure u
 
+-- | Hydrates an application created using `runSSR`.
 hydrate
   :: (forall lock. Domable lock (FFIDOMSnapshot -> Effect Unit))
   -> Effect Unit
@@ -84,6 +99,7 @@ hydrate a = void (hydrate' a)
 
 --
 
+-- | Creates a static site from a deku application. The top-level element for this site is `body`.
 runSSR
   :: forall lock r
    . Domable lock
@@ -92,6 +108,8 @@ runSSR
 
 runSSR = runSSR' "body"
 
+-- | Creates a static site from a deku application. The top-level element for this site is the tag
+-- | passed to this function as a first argument.
 runSSR'
   :: String
   -> ( forall lock r
