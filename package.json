@@ -34,7 +34,7 @@
 		"jquery": "^3.6.1",
 		"netlify-cli": "^8.0.1",
 		"psc-package": "^4.0.1",
-		"pulp": "^15.0.0",
+		"pulp": "^16.0.2",
 		"puppeteer": "^5.2.0",
 		"purescript": "^0.15.6",
 		"purs-backend-es": "^1.2.0",
