@@ -5877,7 +5877,7 @@ var dynify = function(f) {
               return new Tuple(empty6, v.parent.value0);
             }
             ;
-            throw new Error("Failed pattern match at Deku.Core (line 348, column 34 - line 362, column 36): " + [v.parent.constructor.name]);
+            throw new Error("Failed pattern match at Deku.Core (line 408, column 34 - line 422, column 36): " + [v.parent.constructor.name]);
           }();
           var unsub = v2(oneOf3([v3.value0, pure13(v1.makeDynBeacon({
             id: me,
@@ -5937,13 +5937,13 @@ var portalComplexComplex2 = /* @__PURE__ */ portalComplexComplex()()();
 var unsafeSetText = function(v) {
   return function(id2) {
     return function(txt) {
-      return map10(function($135) {
+      return map10(function($133) {
         return v.setText(function(v1) {
           return {
             id: id2,
             text: v1
           };
-        }($135));
+        }($133));
       })(txt);
     };
   };
@@ -5951,7 +5951,7 @@ var unsafeSetText = function(v) {
 var unsafeSetAttribute = function(v) {
   return function(id2) {
     return function(atts) {
-      return map10(function($136) {
+      return map10(function($134) {
         return function(v1) {
           if (v1.value instanceof Prop$prime) {
             return v.setProp({
@@ -5976,8 +5976,8 @@ var unsafeSetAttribute = function(v) {
             });
           }
           ;
-          throw new Error("Failed pattern match at Deku.Control (line 69, column 28 - line 72, column 47): " + [v1.value.constructor.name]);
-        }(unsafeUnAttribute($136));
+          throw new Error("Failed pattern match at Deku.Control (line 71, column 28 - line 74, column 47): " + [v1.value.constructor.name]);
+        }(unsafeUnAttribute($134));
       })(atts);
     };
   };
@@ -6030,9 +6030,9 @@ var switcher = function(f) {
     return dyn2(keepLatest4(memoize(counter(event))(function(cenv) {
       return map10(function(v) {
         return oneOf4([map10($$const(Remove.value))(filter6(function() {
-          var $137 = eq3(v.value1 + 1 | 0);
-          return function($138) {
-            return $137(snd($138));
+          var $135 = eq3(v.value1 + 1 | 0);
+          return function($136) {
+            return $135(snd($136));
           };
         }())(cenv)), pure8(insert_(coerce4(f(v.value0))))]);
       })(cenv);
@@ -6051,10 +6051,10 @@ var portalFlatten2 = function() {
         };
       };
     },
-    ids: function($139) {
+    ids: function($137) {
       return function(v) {
         return v.ids;
-      }(unwrap4($139));
+      }(unwrap4($137));
     },
     disconnectElement: function(v) {
       return function(v1) {
@@ -6142,10 +6142,10 @@ var portal = function() {
             };
           };
         },
-        deleteFromCache: function($142) {
+        deleteFromCache: function($140) {
           return function(v) {
             return v.deleteFromCache;
-          }(unwrap4($142));
+          }(unwrap4($140));
         }
       })(map14(unwrap4)(a2))(lcmap3(map14(function(v) {
         return v(unit);
@@ -9721,23 +9721,23 @@ var pure20 = /* @__PURE__ */ pure(applicativeEvent);
 var alt7 = /* @__PURE__ */ alt(altEvent);
 var attr13 = /* @__PURE__ */ attr(attrInput_XtypeString);
 var slider = /* @__PURE__ */ function() {
-  var $34 = alt7(pure20(attr13(Xtype.value)("range")));
-  var $35 = map21(function(push2) {
+  var $29 = alt7(pure20(attr13(Xtype.value)("range")));
+  var $30 = map21(function(push2) {
     return attr4(OnInput.value)(cb(function(e) {
       return for_4(bind5(target(e))(fromEventTarget))(composeKleisli2(valueAsNumber)(push2));
     }));
   });
-  return function($36) {
-    return $34($35($36));
+  return function($31) {
+    return $29($30($31));
   };
 }();
 var click = function(dictAttr) {
   return map21(attr(dictAttr)(OnClick.value));
 };
 var click_ = function(dictAttr) {
-  var $47 = click(dictAttr);
-  return function($48) {
-    return $47(pure20($48));
+  var $40 = click(dictAttr);
+  return function($41) {
+    return $40(pure20($41));
   };
 };
 
@@ -9856,13 +9856,13 @@ var pure23 = /* @__PURE__ */ pure(applicativeEvent);
 var keepLatest5 = /* @__PURE__ */ keepLatest(eventIsEvent);
 var useDyn = function(i2) {
   return function(f) {
-    return keepLatest5(bind6(function($77) {
-      return bus2(curry($77));
+    return keepLatest5(bind6(function($48) {
+      return bus2(curry($48));
     })(function(v) {
       return alt9(pure23(insert6(i2)(f({
         remove: v.value0(remove),
-        sendTo: function($78) {
-          return v.value0(sendToPos($78));
+        sendTo: function($49) {
+          return v.value0(sendToPos($49));
         }
       }))))(v.value1);
     }));
@@ -11269,7 +11269,7 @@ var map28 = /* @__PURE__ */ map(functorArray);
 var join2 = /* @__PURE__ */ join(bindArray);
 var mapFlipped3 = /* @__PURE__ */ mapFlipped(functorArray);
 var $$void10 = /* @__PURE__ */ $$void(/* @__PURE__ */ functorStateT(functorIdentity));
-var modify8 = /* @__PURE__ */ modify6(/* @__PURE__ */ monadStateStateT(monadIdentity));
+var modify7 = /* @__PURE__ */ modify6(/* @__PURE__ */ monadStateStateT(monadIdentity));
 var alter2 = /* @__PURE__ */ alter(ordString);
 var filterMap4 = /* @__PURE__ */ filterMap(filterableArray);
 var discard3 = /* @__PURE__ */ discard(discardUnit)(/* @__PURE__ */ bindStateT(monadIdentity));
@@ -11331,7 +11331,7 @@ var toSortableDyns = function(a2) {
                 };
               }
               ;
-              throw new Error("Failed pattern match at Deku.SSR (line 56, column 34 - line 64, column 41): " + [currentDyn.constructor.name]);
+              throw new Error("Failed pattern match at Deku.SSR (line 58, column 34 - line 66, column 41): " + [currentDyn.constructor.name]);
             }
             ;
             var pos$prime = function() {
@@ -11367,7 +11367,7 @@ var toSortableDyns = function(a2) {
                 return Nothing.value;
               }
               ;
-              throw new Error("Failed pattern match at Deku.SSR (line 67, column 18 - line 75, column 33): " + [v.value0.head.constructor.name]);
+              throw new Error("Failed pattern match at Deku.SSR (line 69, column 18 - line 77, column 33): " + [v.value0.head.constructor.name]);
             }();
             return go2(append9(acc)([{
               pos: pos$prime,
@@ -11375,7 +11375,7 @@ var toSortableDyns = function(a2) {
             }]))(currentDyn)(v.value0.tail);
           }
           ;
-          throw new Error("Failed pattern match at Deku.SSR (line 50, column 40 - line 77, column 15): " + [v.constructor.name]);
+          throw new Error("Failed pattern match at Deku.SSR (line 52, column 40 - line 79, column 15): " + [v.constructor.name]);
         }(uncons($383));
       };
     };
@@ -11394,12 +11394,12 @@ var $lazy_sortSortableDyns = /* @__PURE__ */ $runtime_lazy7("sortSortableDyns", 
         elt: new Right({
           o: v.elt.value0.o,
           c: v.elt.value0.c,
-          a: $lazy_sortSortableDyns(45)(v.elt.value0.a)
+          a: $lazy_sortSortableDyns(47)(v.elt.value0.a)
         })
       };
     }
     ;
-    throw new Error("Failed pattern match at Deku.SSR (line 42, column 5 - line 45, column 81): " + [v.elt.constructor.name]);
+    throw new Error("Failed pattern match at Deku.SSR (line 44, column 5 - line 47, column 81): " + [v.elt.constructor.name]);
   });
   var $385 = sortBy(on(compare(ordMaybe(ordInt)))(function($387) {
     return function(v) {
@@ -11410,7 +11410,7 @@ var $lazy_sortSortableDyns = /* @__PURE__ */ $runtime_lazy7("sortSortableDyns", 
     return $384($385($386));
   };
 });
-var sortSortableDyns = /* @__PURE__ */ $lazy_sortSortableDyns(39);
+var sortSortableDyns = /* @__PURE__ */ $lazy_sortSortableDyns(41);
 var fromSortableDyns = function(arr) {
   return join2(mapFlipped3(arr)(function($388) {
     return function(v) {
@@ -11422,7 +11422,7 @@ var fromSortableDyns = function(arr) {
         return append9([new MakeOpenDynBeacon(v.value0.o)])(append9(fromSortableDyns(v.value0.a))([new MakeCloseDynBeacon(v.value0.c)]));
       }
       ;
-      throw new Error("Failed pattern match at Deku.SSR (line 33, column 26 - line 36, column 33): " + [v.constructor.name]);
+      throw new Error("Failed pattern match at Deku.SSR (line 35, column 26 - line 38, column 33): " + [v.constructor.name]);
     }(function(v) {
       return v.elt;
     }(unwrap8($388)));
@@ -11432,7 +11432,7 @@ var ssr$prime = function(topTag) {
   return function(arr$prime) {
     var unsetting = function(id2) {
       return function(key2) {
-        return $$void10(modify8(function(s2) {
+        return $$void10(modify7(function(s2) {
           var $123 = {};
           for (var $124 in s2) {
             if ({}.hasOwnProperty.call(s2, $124)) {
@@ -11463,7 +11463,7 @@ var ssr$prime = function(topTag) {
               return Nothing.value;
             }
             ;
-            throw new Error("Failed pattern match at Deku.SSR (line 294, column 17 - line 305, column 37): " + [v1.constructor.name]);
+            throw new Error("Failed pattern match at Deku.SSR (line 296, column 17 - line 307, column 37): " + [v1.constructor.name]);
           })(id2)(s2.idToActions);
           return $123;
         }));
@@ -11471,7 +11471,7 @@ var ssr$prime = function(topTag) {
     };
     var setting = function(id2) {
       return function(action2) {
-        return $$void10(modify8(function(s2) {
+        return $$void10(modify7(function(s2) {
           var $128 = {};
           for (var $129 in s2) {
             if ({}.hasOwnProperty.call(s2, $129)) {
@@ -11489,7 +11489,7 @@ var ssr$prime = function(topTag) {
               return new Just([action2]);
             }
             ;
-            throw new Error("Failed pattern match at Deku.SSR (line 315, column 17 - line 317, column 45): " + [v1.constructor.name]);
+            throw new Error("Failed pattern match at Deku.SSR (line 317, column 17 - line 319, column 45): " + [v1.constructor.name]);
           })(id2)(s2.idToActions);
           return $128;
         }));
@@ -11505,7 +11505,7 @@ var ssr$prime = function(topTag) {
     var making = function(parent2) {
       return function(id2) {
         return function(action2) {
-          return discard3($$void10(modify8(function(s2) {
+          return discard3($$void10(modify7(function(s2) {
             var $137 = {};
             for (var $138 in s2) {
               if ({}.hasOwnProperty.call(s2, $138)) {
@@ -11523,7 +11523,7 @@ var ssr$prime = function(topTag) {
                 return new Just([id2]);
               }
               ;
-              throw new Error("Failed pattern match at Deku.SSR (line 281, column 19 - line 283, column 43): " + [v1.constructor.name]);
+              throw new Error("Failed pattern match at Deku.SSR (line 283, column 19 - line 285, column 43): " + [v1.constructor.name]);
             })(parent2)(s2.parentToChild);
             return $137;
           })))(function() {
@@ -11628,7 +11628,7 @@ var ssr$prime = function(topTag) {
               return v2;
             }
             ;
-            throw new Error("Failed pattern match at Deku.SSR (line 199, column 24 - line 222, column 36): " + [v2.constructor.name]);
+            throw new Error("Failed pattern match at Deku.SSR (line 201, column 24 - line 224, column 36): " + [v2.constructor.name]);
           };
         };
       };
@@ -11726,7 +11726,7 @@ var ssr$prime = function(topTag) {
             return v2;
           }
           ;
-          throw new Error("Failed pattern match at Deku.SSR (line 223, column 24 - line 246, column 36): " + [v2.constructor.name]);
+          throw new Error("Failed pattern match at Deku.SSR (line 225, column 24 - line 248, column 36): " + [v2.constructor.name]);
         };
       };
       var moveClosingToEnd = function(staging1) {
@@ -11811,7 +11811,7 @@ var ssr$prime = function(topTag) {
                   })))(staging2));
                 }
                 ;
-                throw new Error("Failed pattern match at Deku.SSR (line 121, column 63 - line 176, column 20): " + [v2.constructor.name]);
+                throw new Error("Failed pattern match at Deku.SSR (line 123, column 63 - line 178, column 20): " + [v2.constructor.name]);
               }(uncons3($389));
             };
           };
@@ -11832,7 +11832,7 @@ var ssr$prime = function(topTag) {
               return cl;
             }
             ;
-            throw new Error("Failed pattern match at Deku.SSR (line 108, column 45 - line 113, column 20): " + [v2.constructor.name]);
+            throw new Error("Failed pattern match at Deku.SSR (line 110, column 45 - line 115, column 20): " + [v2.constructor.name]);
           }(unsnoc3($390));
         };
       };
@@ -11916,7 +11916,7 @@ var ssr$prime = function(topTag) {
                 return cl;
               }
               ;
-              throw new Error("Failed pattern match at Deku.SSR (line 248, column 49 - line 273, column 20): " + [v2.constructor.name]);
+              throw new Error("Failed pattern match at Deku.SSR (line 250, column 49 - line 275, column 20): " + [v2.constructor.name]);
             }(uncons3($391));
           };
         };
@@ -11956,7 +11956,7 @@ var ssr$prime = function(topTag) {
               return cl;
             }
             ;
-            throw new Error("Failed pattern match at Deku.SSR (line 177, column 42 - line 198, column 20): " + [v2.constructor.name]);
+            throw new Error("Failed pattern match at Deku.SSR (line 179, column 42 - line 200, column 20): " + [v2.constructor.name]);
           }(uncons3($392));
         };
       };
@@ -12002,7 +12002,7 @@ var ssr$prime = function(topTag) {
               return v1.value0.id;
             }
             ;
-            throw new Error("Failed pattern match at Deku.SSR (line 334, column 23 - line 342, column 52): " + [v1.constructor.name]);
+            throw new Error("Failed pattern match at Deku.SSR (line 336, column 23 - line 344, column 52): " + [v1.constructor.name]);
           });
           var $394 = map28(function(i2) {
             return bind8(lookup3(i2)(x.idToActions))(head);
@@ -12056,7 +12056,7 @@ var ssr$prime = function(topTag) {
         return unsetting(i2.value0.id)(i2.value0.key);
       }
       ;
-      throw new Error("Failed pattern match at Deku.SSR (line 350, column 19 - line 362, column 61): " + [i2.constructor.name]);
+      throw new Error("Failed pattern match at Deku.SSR (line 352, column 19 - line 364, column 61): " + [i2.constructor.name]);
     })(arr))({
       parentToChild: empty3,
       idToActions: empty3
@@ -12162,7 +12162,7 @@ var ssr$prime = function(topTag) {
             return replace("data-deku-ssr")(eltAtts(a2) + " data-deku-ssr")(b2);
           }
           ;
-          throw new Error("Failed pattern match at Deku.SSR (line 384, column 17 - line 388, column 14): " + [v1.constructor.name]);
+          throw new Error("Failed pattern match at Deku.SSR (line 386, column 17 - line 390, column 14): " + [v1.constructor.name]);
         };
       })(o(id2))(v.idToActions);
     };
