@@ -13,15 +13,11 @@
 module Deku.Hooks
   ( useState'
   , useState
-  , useStates'
-  , useStates
   , useMemoized'
   , useMemoized
   , useMailboxed
   , useHot
   , useHot'
-  , class InitializeEvents
-  , initializeEvents'
   , useDyn
   , useDyn_
   ) where
@@ -35,22 +31,15 @@ import Control.Monad.ST.Internal as STRef
 import Control.Monad.ST.Uncurried (mkSTFn1, mkSTFn2, runSTFn1, runSTFn2)
 import Data.Foldable (for_)
 import Data.Maybe (Maybe(..), fromMaybe)
-import Data.Profunctor (lcmap)
-import Data.Symbol (class IsSymbol)
 import Data.Tuple (curry)
 import Data.Tuple.Nested (type (/\), (/\))
-import Deku.Core (Domable(..), Node, bus, bussedUncurried, insert, remove, sendToPos, vbussedUncurried)
+import Deku.Core (Domable(..), Node, bus, bussedUncurried, insert, remove, sendToPos)
 import Deku.Do as Deku
 import Effect (Effect)
 import FRP.Event (Event, Subscriber(..), createPure, keepLatest, mailboxed, makeLemmingEventO, memoize)
-import FRP.Event.VBus (class VBus, V)
-import Prim.Row as R
-import Prim.RowList (class RowToList, RowList)
-import Prim.RowList as RL
-import Record as Record
 import Safe.Coerce (coerce)
-import Type.Proxy (Proxy(..))
 
+-- | A state hook for states without initial values. See [`useState'`](https://purescript-deku.netlify.app/core-concepts/state#state-without-initial-values) in the Deku guide for example usage.
 useState'
   :: forall lock payload a
    . ( ((a -> Effect Unit) /\ Event a)
@@ -59,6 +48,7 @@ useState'
   -> Domable lock payload
 useState' = bussedUncurried
 
+-- | A hook to work with memoized values. See [`useMemoized`](https://purescript-deku.netlify.app/core-concepts/more-hooks#the-case-for-memoization) in the Deku guide for example usage.
 useMemoized
   :: forall lock payload a
    . (Event a)
@@ -67,6 +57,7 @@ useMemoized
 useMemoized e f1 = Domable $ envy
   (coerce (memoize e f1))
 
+-- | A hook to work with memoized values that lack an initial value. See [`useMemoized'`](https://purescript-deku.netlify.app/core-concepts/more-hooks#memoizing-without-an-initial-event) in the Deku guid for example usage.
 useMemoized'
   :: forall lock payload a b
    . (Event a -> Event b)
@@ -77,6 +68,7 @@ useMemoized'
 useMemoized' f0 f1 = bussedUncurried \(a /\ b) -> Domable $ envy
   (coerce (memoize (f0 b) \c -> f1 (a /\ c)))
 
+-- | A state hook. See [`useState`](https://purescript-deku.netlify.app/core-concepts/state#the-state-hook) in the Deku guide for example usage.
 useState
   :: forall lock payload a
    . a
@@ -89,59 +81,10 @@ useState a f = Deku.do
   m <- useMemoized (y <|> pure a)
   f (x /\ m)
 
-useStates'
-  :: forall lock payload rbus bus push event
-   . RowToList bus rbus
-  => VBus rbus push event
-  => Proxy (V bus)
-  -> (({ | push } /\ { | event }) -> Domable lock payload)
-  -> Domable lock payload
-useStates' = vbussedUncurried
-
-class InitializeEvents :: RowList Type -> Row Type -> Row Type -> Constraint
-class InitializeEvents needleRL needle haystack where
-  initializeEvents'
-    :: Proxy needleRL -> { | needle } -> { | haystack } -> { | haystack }
-
-instance InitializeEvents RL.Nil r1 r2 where
-  initializeEvents' _ _ = identity
-
-instance
-  ( IsSymbol key
-  , R.Cons key value needle' needle
-  , R.Cons key (Event value) haystack' haystack
-  , InitializeEvents rest needle haystack
-  ) =>
-  InitializeEvents (RL.Cons key value rest) needle haystack where
-  initializeEvents' _ needle haystack =
-    let
-      key = Proxy :: _ key
-    in
-      initializeEvents' (Proxy :: _ rest) needle
-        (Record.modify key (pure (Record.get key needle) <|> _) haystack)
-
-initializeEvents
-  :: forall needleRL needle haystack
-   . RL.RowToList needle needleRL
-  => InitializeEvents needleRL needle haystack
-  => { | needle }
-  -> { | haystack }
-  -> { | haystack }
-initializeEvents = initializeEvents' (Proxy :: _ needleRL)
-
-useStates
-  :: forall lock payload rbus bus push event needleRL
-       needle
-   . RowToList bus rbus
-  => RowToList needle needleRL
-  => InitializeEvents needleRL needle event
-  => VBus rbus push event
-  => Proxy (V bus)
-  -> { | needle }
-  -> (({ | push } /\ { | event }) -> Domable lock payload)
-  -> Domable lock payload
-useStates v needle = useStates' v <<< lcmap (map (initializeEvents needle))
-
+-- | A hook that provides an event creator instead of events. Event creators turn into events when
+-- | given an address, at which point they listen for a payload. This is useful when listening to
+-- | large domains like updates of single items over large lists. It runs in _O(log n)_ time.
+-- | For example usage, see [`useMailboxed`](https://purescript-deku.netlify.app/core-concepts/more-hooks#use-mailboxed) in the Deku guide.
 useMailboxed
   :: forall lock payload a b
    . Ord a
@@ -154,6 +97,8 @@ useMailboxed
 useMailboxed f = bussedUncurried \(a /\ b) -> Domable $ envy
   (coerce (mailboxed b \c -> f (a /\ c)))
 
+-- | A hook to create dynamic collections like one would find in a contact list or todo mvc.
+-- | See [`useDyn`](https://purescript-deku.netlify.app/core-concepts/collections#dynamic-components) in the Deku guide for example usage.
 useDyn
   :: forall lock payload
    . Int
@@ -172,6 +117,7 @@ useDyn i f = keepLatest Deku.do
         )
     ) <|> childLogic
 
+-- | A version of `useDyn` that uses `0` as the initial position for a dynamic element.
 useDyn_
   :: forall lock payload
    . ( { remove :: Effect Unit, sendTo :: Int -> Effect Unit }
@@ -180,6 +126,7 @@ useDyn_
   -> Event (Child Int (Node lock payload) lock)
 useDyn_ = useDyn 0
 
+-- | A hook that remembers its most recent value and plays it back upon subscription _without_ an initial value. See [`useHot'`](https://purescript-deku.netlify.app/core-concepts/state#memoization-and-usehot) in the Deku guide for more info.
 useHot'
   :: forall l p a. ((a -> Effect Unit) /\ Event a -> Domable l p) -> Domable l p
 useHot' f = Domable $ envy $ makeLemmingEventO
@@ -205,6 +152,7 @@ useHot' f = Domable $ envy $ makeLemmingEventO
       runSTFn2 s event (mkSTFn1 \v -> void $ writeVal v)
   )
 
+-- | A hook that remembers its most recent value and plays it back upon subscription. See [`useHot`](https://purescript-deku.netlify.app/core-concepts/state#memoization-and-usehot) in the Deku guide for more info.
 useHot
   :: forall l p a
    . a

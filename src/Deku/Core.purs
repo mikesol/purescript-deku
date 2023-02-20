@@ -450,8 +450,8 @@ dynify f es = Domable $ Bolson.Element' (Node go)
         runSTFn1 k (removeDynBeacon { id: me })
         unsub
 
--- | Once upon a time, this function was used to create a dynamic `Domable`. Nowadays, this
--- | is used internally. You should use `useDyn` instead.
+-- | This function is used along with `useDyn` to create dynamic collections of elements, like todo items in a todo mvc app.
+-- | See [**Dynamic components**](https://purescript-deku.netlify.app/core-concepts/collections#dynamic-components) in the Deku guide for more information.
 dyn
   :: forall lock payload
    . Event (Event (Bolson.Child Int (Node lock payload) lock))
