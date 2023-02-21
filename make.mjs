@@ -578,30 +578,33 @@ var showNumberImpl = function(n) {
 };
 var showStringImpl = function(s2) {
   var l = s2.length;
-  return '"' + s2.replace(/[\0-\x1F\x7F"\\]/g, function(c, i2) {
-    switch (c) {
-      case '"':
-      case "\\":
-        return "\\" + c;
-      case "\x07":
-        return "\\a";
-      case "\b":
-        return "\\b";
-      case "\f":
-        return "\\f";
-      case "\n":
-        return "\\n";
-      case "\r":
-        return "\\r";
-      case "	":
-        return "\\t";
-      case "\v":
-        return "\\v";
+  return '"' + s2.replace(
+    /[\0-\x1F\x7F"\\]/g,
+    function(c, i2) {
+      switch (c) {
+        case '"':
+        case "\\":
+          return "\\" + c;
+        case "\x07":
+          return "\\a";
+        case "\b":
+          return "\\b";
+        case "\f":
+          return "\\f";
+        case "\n":
+          return "\\n";
+        case "\r":
+          return "\\r";
+        case "	":
+          return "\\t";
+        case "\v":
+          return "\\v";
+      }
+      var k = i2 + 1;
+      var empty11 = k < l && s2[k] >= "0" && s2[k] <= "9" ? "\\&" : "";
+      return "\\" + c.charCodeAt(0).toString(10) + empty11;
     }
-    var k = i2 + 1;
-    var empty11 = k < l && s2[k] >= "0" && s2[k] <= "9" ? "\\&" : "";
-    return "\\" + c.charCodeAt(0).toString(10) + empty11;
-  }) + '"';
+  ) + '"';
 };
 
 // output/Data.Show/index.js
@@ -11018,9 +11021,15 @@ var doPursxReplacements = ({ id: id2, html: html2, pxScope, cache, verb }) => {
   for (var i2 = 0; i2 < entries.length; i2++) {
     const key2 = entries[i2][0];
     if (entries[i2][1] === true) {
-      vhtml = vhtml.replace(verb + key2 + verb, 'data-deku-attr-internal="' + key2 + '" data-deku-ssr="' + key2 + "@!%" + pxScope + '"');
+      vhtml = vhtml.replace(
+        verb + key2 + verb,
+        'data-deku-attr-internal="' + key2 + '" data-deku-ssr="' + key2 + "@!%" + pxScope + '"'
+      );
     } else {
-      vhtml = vhtml.replace(verb + key2 + verb, '<span style="display:contents;" data-deku-elt-internal="' + key2 + '" data-deku-ssr="' + key2 + "@!%" + pxScope + '"></span>');
+      vhtml = vhtml.replace(
+        verb + key2 + verb,
+        '<span style="display:contents;" data-deku-elt-internal="' + key2 + '" data-deku-ssr="' + key2 + "@!%" + pxScope + '"></span>'
+      );
     }
   }
   const gtix = vhtml.indexOf(">");
