@@ -434,18 +434,16 @@ export const makeText_ =
             dom.childNodes[i].nodeType === 8 &&
             dom.childNodes[i].nodeValue === ptrSplit[0]
           ) {
-            i = i - 1;
-            var textWasBlank = i === -1;
-            var textWasBlankAfterDynBeacon =
-              i >= 0 && dom.childNodes[i].nodeType === 8;
-            if (textWasBlank) {
-              dom.prepend(document.createTextNode(""));
-            }
-            if (textWasBlankAfterDynBeacon) {
+            var textWasBlank = i === 0 || dom.childNodes[i - 1].nodeType !== 3;
+            if (textWasBlank && i !== 0) {
               dom.insertBefore(
                 document.createTextNode(""),
-                dom.childNodes[i + 1]
+                dom.childNodes[i]
               );
+            } else if (textWasBlank) {
+              dom.prepend(document.createTextNode(""));
+            } else {
+              i = i - 1;
             }
             break;
           }

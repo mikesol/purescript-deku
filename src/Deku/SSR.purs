@@ -398,7 +398,7 @@ ssr' topTag arr' = "<" <> topTag
           ( fromMaybe "" <<< findMap case _ of
               SetText { text } -> Just $
                 (encodedString text <> "<!--" <> id <> "-->")
-              _ -> Nothing
+              _ -> Just $ "<!--" <> id <> "-->"
           )
         makeOpenDynBeacon _ = "<!--%-%" <> id <> "-->"
         makeCloseDynBeacon _ = "<!--%-%" <> id <> "-->"

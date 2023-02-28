@@ -192,11 +192,46 @@ describe('deku', () => {
     expect($('#span1').text()).toBe('');
     expect($('#span2').text()).toBe('42');
   }));
+
   doTest('attributes are correctly unset', (f) => f(tests.unsetUnsets, () => {
     const $ = require('jquery');
     expect($('#span1').attr('style')).toBe('color:red;');
     $('#unsetter').trigger('click');
     expect($('#span1').attr('style')).toBe(undefined);
+  }));
+
+  // this test has no assertions - just makes sure that emptiness is
+  // typeset without breaking the engine
+  doTest('empty text does not break ssr', (f) => f(tests.emptyTextIsSet, () => {
+  }));
+
+  doTest('useRef has correct behavior', (f) => f(tests.useRefWorks, () => {
+    const $ = require('jquery');
+    expect($('#b0').text()).toBe('');
+    expect($('#b1').text()).toBe('');
+    expect($('#b2').text()).toBe('');
+    expect($('#b3').text()).toBe('');
+    expect($('#b4').text()).toBe('');
+    $('#b3').trigger('click');
+    expect($('#b0').text()).toBe('');
+    expect($('#b1').text()).toBe('');
+    expect($('#b2').text()).toBe('');
+    expect($('#b3').text()).toBe('0');
+    expect($('#b4').text()).toBe('');
+    $('#counter').trigger('click');
+    $('#counter').trigger('click');
+    $('#b1').trigger('click');
+    expect($('#b0').text()).toBe('');
+    expect($('#b1').text()).toBe('2');
+    expect($('#b2').text()).toBe('');
+    expect($('#b3').text()).toBe('0');
+    expect($('#b4').text()).toBe('');
+    $('#b3').trigger('click');
+    expect($('#b0').text()).toBe('');
+    expect($('#b1').text()).toBe('2');
+    expect($('#b2').text()).toBe('');
+    expect($('#b3').text()).toBe('2');
+    expect($('#b4').text()).toBe('');
   }));
 });
 

@@ -7,6 +7,7 @@ import Control.Monad.ST.Global (Global)
 import Control.Monad.ST.Internal (ST)
 import Control.Monad.ST.Internal as RRef
 import Control.Plus (empty)
+import Data.Array ((..))
 import Data.Foldable (intercalate, oneOf, oneOfMap)
 import Data.Tuple.Nested ((/\))
 import Deku.Attribute ((!:=), (:=))
@@ -15,14 +16,14 @@ import Deku.Control (blank, globalPortal1, switcher, text, text_)
 import Deku.Core (Domable, Nut, dyn, fixed, insert, insert_, sendToPos)
 import Deku.DOM as D
 import Deku.Do as Deku
-import Deku.Hooks (useMemoized, useState, useState')
+import Deku.Hooks (useMemoized, useRef, useState, useState')
 import Deku.Interpret (FFIDOMSnapshot, Instruction)
 import Deku.Lifecycle (onDidMount, onDismount, onWillMount)
-import Deku.Listeners (click_)
+import Deku.Listeners (click, click_)
 import Deku.Pursx ((~~))
 import Deku.Toplevel (hydrate', runInBody', runSSR)
 import Effect (Effect)
-import FRP.Event (Event, fold)
+import FRP.Event (Event, fold, merge)
 import Type.Proxy (Proxy(..))
 
 foreign import hackyInnerHTML :: String -> String -> Effect Unit
@@ -292,4 +293,33 @@ unsetUnsets = Deku.do
         [ text_ "bar" ]
     , D.button (oneOf [ id_ "unsetter", click_ (unsetAttr false) ])
         [ text_ "unset" ]
+    ]
+
+emptyTextIsSet :: Nut
+emptyTextIsSet = text mempty
+
+useRefWorks :: Nut
+useRefWorks = Deku.do
+  let startsAt = 0
+  setCounter /\ counter <- useState startsAt
+  cref <- useRef startsAt counter
+  D.div_
+    [ D.button
+        ( merge
+            [ click $ counter <#> add 1 >>> setCounter
+            , id_ "counter"
+            ]
+        )
+        [ text_ "Increment" ]
+    , D.div_
+        ( 0 .. 9 <#> \i -> Deku.do
+            setButtonTxt /\ buttonTxt <- useState'
+            D.button
+              ( merge
+                  [ click_ $ cref identity >>= setButtonTxt
+                  , id_ $ "b" <> show i
+                  ]
+              )
+              [ text (show <$> buttonTxt) ]
+        )
     ]

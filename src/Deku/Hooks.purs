@@ -13,6 +13,7 @@
 module Deku.Hooks
   ( useState'
   , useState
+  , useRef
   , useMemoized'
   , useMemoized
   , useMailboxed
@@ -36,7 +37,7 @@ import Data.Tuple.Nested (type (/\), (/\))
 import Deku.Core (Domable(..), Node, bus, bussedUncurried, insert, remove, sendToPos)
 import Deku.Do as Deku
 import Effect (Effect)
-import FRP.Event (Event, Subscriber(..), createPure, keepLatest, mailboxed, makeLemmingEventO, memoize)
+import FRP.Event (Event, Subscriber(..), createPure, keepLatest, mailboxed, makeLemmingEvent, makeLemmingEventO, memoize)
 import Safe.Coerce (coerce)
 
 -- | A state hook for states without initial values. See [`useState'`](https://purescript-deku.netlify.app/core-concepts/state#state-without-initial-values) in the Deku guide for example usage.
@@ -80,6 +81,21 @@ useState a f = Deku.do
   x /\ y <- useState'
   m <- useMemoized (y <|> pure a)
   f (x /\ m)
+
+-- | A hook that takes an initial value and an event and produces
+-- | a mutable reference to the value that can be used in listeners.
+useRef
+  :: forall lock payload a
+   . a
+  -> Event a
+  -> ( ((a -> a) -> Effect a)
+       -> Domable lock payload
+     )
+  -> Domable lock payload
+useRef a e f = Domable $ envy $ coerce $ makeLemmingEvent \s k -> do
+  r <- STRef.new a
+  k $ f (liftST <<< flip STRef.modify r)
+  s e \i -> void $ STRef.write i r
 
 -- | A hook that provides an event creator instead of events. Event creators turn into events when
 -- | given an address, at which point they listen for a payload. This is useful when listening to
