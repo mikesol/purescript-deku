@@ -8,6 +8,7 @@ module Deku.Control
   , blank
   , deku
   , elementify
+  , toDeku
   , globalPortal
   , globalPortal1
   , guard
@@ -37,7 +38,7 @@ import Data.Profunctor (dimap, lcmap)
 import Data.Tuple (curry, snd)
 import Data.Tuple.Nested (type (/\), (/\))
 import Deku.Attribute (Attribute, AttributeValue(..), unsafeUnAttribute)
-import Deku.Core (DOMInterpret(..), Domable(..), Node(..), Nut, dyn, insert_)
+import Deku.Core (DOMInterpret(..), Domable(..), Node(..), Nut, envy, dyn, insert_)
 import FRP.Event (Event, Subscriber(..), keepLatest, makeLemmingEventO, mapAccum, memoize)
 import Prim.Int (class Compare)
 import Prim.Ordering (GT)
@@ -379,5 +380,9 @@ guard eb d = switcher
   (if _ then d else blank)
   eb
 
+-- | An empty domable. `mempty` also works.
 blank :: Nut
 blank = Domable $ BCore.envy empty
+
+toDeku :: forall a lock payload. (a -> Event (Domable lock payload)) -> a -> Domable lock payload
+toDeku = compose envy
