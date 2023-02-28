@@ -1,8 +1,6 @@
 module Deku.DOM.Attr.OnMouseleave where
 
 import Prelude
-
-import Prelude
 import Effect (Effect)
 import Deku.Attribute (class Attr, Attribute, Cb(..), cb', unsafeAttribute, unset')
 import FRP.Event (Event)

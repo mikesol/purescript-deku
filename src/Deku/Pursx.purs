@@ -6,7 +6,6 @@ import Bolson.Control as Bolson
 import Control.Monad.ST.Uncurried (mkSTFn2, runSTFn1, runSTFn2)
 import Bolson.Core (Element(..), Entity(..), PSR)
 import Control.Alt ((<|>))
-import Data.Foldable (oneOf)
 import Control.Plus (empty)
 import Data.Maybe (Maybe(..), maybe)
 import Data.Newtype (unwrap)
@@ -17,8 +16,7 @@ import Data.Symbol (class IsSymbol)
 import Deku.Attribute (Attribute, AttributeValue(..), unsafeUnAttribute)
 import Deku.Core (DOMInterpret(..), Domable(..), Domable', Node(..))
 import Deku.DOM (class TagToDeku)
-import FRP.Event (Event, Subscriber(..), makeLemmingEventO)
-
+import FRP.Event (Event, Subscriber(..), merge, makeLemmingEventO)
 import Foreign.Object as Object
 import Prim.Boolean (False, True)
 import Prim.Row as Row
@@ -4649,7 +4647,7 @@ makePursx' verb html r = Domable $ Element' $ Node go
           (Proxy :: _ rl)
           r
       unsub <- runSTFn2 mySub
-        ( oneOf
+        ( merge
             [ pure $
                 mpx
                   { id: me
@@ -4708,7 +4706,7 @@ unsafeMakePursx' verb html r = Domable $ Element' $ Node go
           (Proxy :: _ rl)
           r
       unsub <- runSTFn2 mySub
-        ( oneOf
+        ( merge
             [ pure $
                 mpx
                   { id: me

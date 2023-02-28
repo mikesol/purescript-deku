@@ -30,7 +30,6 @@ import Control.Monad.ST.Uncurried (mkSTFn2, runSTFn1, runSTFn2)
 import Control.Plus (empty)
 import Data.FastVect.FastVect (Vect, singleton, index)
 import Data.Filterable (filter)
-import Data.Foldable (oneOf)
 import Data.Lens (_1, over)
 import Data.Maybe (Maybe(..), maybe)
 import Data.Newtype (class Newtype, unwrap, wrap)
@@ -39,7 +38,7 @@ import Data.Tuple (curry, snd)
 import Data.Tuple.Nested (type (/\), (/\))
 import Deku.Attribute (Attribute, AttributeValue(..), unsafeUnAttribute)
 import Deku.Core (DOMInterpret(..), Domable(..), Node(..), Nut, envy, dyn, insert_)
-import FRP.Event (Event, Subscriber(..), keepLatest, makeLemmingEventO, mapAccum, memoize)
+import FRP.Event (Event, Subscriber(..), merge, keepLatest, makeLemmingEventO, mapAccum, memoize)
 import Prim.Int (class Compare)
 import Prim.Ordering (GT)
 import Safe.Coerce (coerce)
@@ -95,7 +94,7 @@ elementify tag atts children = Node go
       me <- ids
       raiseId me
       unsub <- runSTFn2 mySub
-        ( ( oneOf
+        ( ( merge
               ( [ pure
                     (makeElement { id: me, parent, scope, tag, pos, dynFamily })
                 , unsafeSetAttribute di me atts
@@ -277,7 +276,7 @@ text txt = Domable $ Element' $ Node go
       me <- ids
       raiseId me
       unsub <- runSTFn2 mySub
-        ( oneOf
+        ( merge
             [ pure (makeText { id: me, parent, pos, scope, dynFamily })
             , unsafeSetText di me txt
             , maybe empty
@@ -347,7 +346,7 @@ switcher
   -> Domable lock payload
 switcher f event = dyn $ keepLatest
   $ memoize (counter event) \cenv -> map
-      ( \(p /\ n) -> oneOf
+      ( \(p /\ n) -> merge
           [ ((const Remove) <$> filter (eq (n + 1) <<< snd) cenv)
           , pure (insert_ $ coerce (f p))
           ]

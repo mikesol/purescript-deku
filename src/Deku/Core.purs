@@ -52,7 +52,6 @@ import Control.Monad.ST (ST)
 import Control.Monad.ST.Global (Global)
 import Control.Monad.ST.Uncurried (mkSTFn2, runSTFn1, runSTFn2)
 import Control.Plus (empty)
-import Data.Foldable (oneOf)
 import Data.Maybe (Maybe(..))
 import Data.Newtype (class Newtype, unwrap)
 import Data.Profunctor (lcmap)
@@ -60,7 +59,7 @@ import Data.Tuple (curry)
 import Data.Tuple.Nested (type (/\), (/\))
 import Deku.Attribute (Cb)
 import Effect (Effect)
-import FRP.Event (Event, Subscriber(..), makeLemmingEventO)
+import FRP.Event (Event, Subscriber(..), merge, makeLemmingEventO)
 import FRP.Event as FRP.Event
 import FRP.Event.VBus (class VBus, V, vbus)
 import Foreign.Object (Object)
@@ -421,7 +420,7 @@ dynify f es = Domable $ Bolson.Element' (Node go)
             )
         Just x -> pure (empty /\ x)
       unsub <- runSTFn2 mySub
-        ( oneOf
+        ( merge
             [ parentEvent
             , pure $ makeDynBeacon
                 { id: me, parent: Just parentId, scope, dynFamily, pos }
