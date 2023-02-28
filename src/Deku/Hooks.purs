@@ -83,7 +83,8 @@ useState a f = Deku.do
   f (x /\ m)
 
 -- | A hook that takes an initial value and an event and produces
--- | a mutable reference to the value that can be used in listeners.
+-- | a reference to the value that can be used in listeners. While the value
+-- | itself is mutable, it cannot be changed by the consumer of the ref.
 useRef
   :: forall lock payload a
    . a
