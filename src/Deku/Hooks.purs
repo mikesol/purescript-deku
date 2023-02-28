@@ -88,13 +88,13 @@ useRef
   :: forall lock payload a
    . a
   -> Event a
-  -> ( ((a -> a) -> Effect a)
+  -> (  Effect a
        -> Domable lock payload
      )
   -> Domable lock payload
 useRef a e f = Domable $ envy $ coerce $ makeLemmingEvent \s k -> do
   r <- STRef.new a
-  k $ f (liftST <<< flip STRef.modify r)
+  k $ f (liftST $ STRef.read r)
   s e \i -> void $ STRef.write i r
 
 -- | A hook that provides an event creator instead of events. Event creators turn into events when

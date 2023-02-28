@@ -316,7 +316,7 @@ useRefWorks = Deku.do
             setButtonTxt /\ buttonTxt <- useState'
             D.button
               ( merge
-                  [ click_ $ cref identity >>= setButtonTxt
+                  [ click_ $ cref >>= setButtonTxt
                   , id_ $ "b" <> show i
                   ]
               )

@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Uses `merge` instead of `oneOf`.
 - Adds `toDeku`.
+- Adds `useRef`.
 
 ## [0.9.9 - 0.9.12] - 2023-02-15
 
