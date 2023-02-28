@@ -12131,7 +12131,7 @@ var ssr$prime = function(topTag) {
               return new Just(encodedString(v2.value0.text) + ("<!--" + (id2 + "-->")));
             }
             ;
-            return Nothing.value;
+            return new Just("<!--" + (id2 + "-->"));
           })(i2a));
         };
         var makeOpenDynBeacon = function(v12) {
