@@ -48,17 +48,18 @@ export const attributeParent_ = (runOnJust) => (a) => (state) => () => {
                 j++;
               }
               const inserter = (k) => {
+                const anchorNode = dom.childNodes[k];
                 if (state.units[a.id].startBeacon) {
                   dom.insertBefore(
                     state.units[a.id].startBeacon,
-                    dom.childNodes[k]
+                    anchorNode
                   );
                   dom.insertBefore(
                     state.units[a.id].endBeacon,
-                    dom.childNodes[k]
+                    anchorNode
                   );
                 } else {
-                  dom.insertBefore(state.units[a.id].main, dom.childNodes[k]);
+                  dom.insertBefore(state.units[a.id].main, anchorNode);
                 }
               };
               while (j < dom.childNodes.length) {
