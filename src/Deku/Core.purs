@@ -5,7 +5,7 @@
 -- | type signature (for which `Nut` is an alias).
 module Deku.Core
   ( ANut(..)
-  , AttributeParent
+  , assignParentToComponent
   , DOMInterpret(..)
   , DeleteFromCache
   , DisconnectElement
@@ -221,7 +221,7 @@ type MakeElement =
   }
 
 -- | Type used by Deku backends to give a parent to an element. For internal use only unless you're writing a custom backend.
-type AttributeParent =
+type assignParentToComponent =
   { id :: String
   , parent :: String
   , pos :: Maybe Int
@@ -327,7 +327,7 @@ newtype DOMInterpret payload = DOMInterpret
   , makeRoot :: MakeRoot -> payload
   , makeElement :: MakeElement -> payload
   , makeDynBeacon :: MakeDynBeacon -> payload
-  , attributeParent :: AttributeParent -> payload
+  , assignParentToComponent :: assignParentToComponent -> payload
   , makeText :: MakeText -> payload
   , makePursx :: MakePursx -> payload
   , giveNewParent :: GiveNewParent -> payload
@@ -395,7 +395,7 @@ dynify f es = Domable $ Bolson.Element' (Node go)
     { parent, scope, raiseId, pos, dynFamily, ez }
     di@
       ( DOMInterpret
-          { ids, makeElement, makeDynBeacon, attributeParent, removeDynBeacon }
+          { ids, makeElement, makeDynBeacon, assignParentToComponent, removeDynBeacon }
       ) =
     makeLemmingEventO $ mkSTFn2 \(Subscriber mySub) k -> do
       me <- ids
@@ -424,7 +424,7 @@ dynify f es = Domable $ Bolson.Element' (Node go)
             [ parentEvent
             , pure $ makeDynBeacon
                 { id: me, parent: Just parentId, scope, dynFamily, pos }
-            , pure $ attributeParent
+            , pure $ assignParentToComponent
                 { id: me, parent: parentId, pos, dynFamily, ez }
             , __internalDekuFlatten
                 { parent: Just parentId

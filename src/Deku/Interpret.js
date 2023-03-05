@@ -4,10 +4,10 @@ export const setHydrating = (state) => () => {
 export const unSetHydrating = (state) => () => {
   state.hydrating = false;
 };
-export const attributeParent_ = (runOnJust) => (a) => (state) => () => {
+export const assignParentToComponent_ = (runOnJust) => (a) => (state) => () => {
   if (state.units[a.id]) {
     const dom = state.units[a.parent].main;
-    // only attribute if it is not attributed already
+    // only assign if it is not attributed already
     if (
       !(
         (state.units[a.id].main && state.units[a.id].main.parentNode) ||

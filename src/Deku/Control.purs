@@ -89,7 +89,7 @@ elementify tag atts children = Node go
   where
   go
     { parent, scope, raiseId, pos, dynFamily, ez }
-    di@(DOMInterpret { ids, deleteFromCache, makeElement, attributeParent }) =
+    di@(DOMInterpret { ids, deleteFromCache, makeElement, assignParentToComponent }) =
     makeLemmingEventO $ mkSTFn2 \(Subscriber mySub) k -> do
       me <- ids
       raiseId me
@@ -100,7 +100,7 @@ elementify tag atts children = Node go
                 , unsafeSetAttribute di me atts
                 ] <> maybe []
                   ( \p ->
-                      [ pure $ attributeParent
+                      [ pure $ assignParentToComponent
                           { id: me, parent: p, pos, dynFamily, ez }
                       ]
                   )
@@ -271,7 +271,7 @@ text txt = Domable $ Element' $ Node go
   where
   go
     { parent, scope, raiseId, dynFamily, pos, ez }
-    di@(DOMInterpret { ids, makeText, deleteFromCache, attributeParent }) =
+    di@(DOMInterpret { ids, makeText, deleteFromCache, assignParentToComponent }) =
     makeLemmingEventO $ mkSTFn2 \(Subscriber mySub) k -> do
       me <- ids
       raiseId me
@@ -281,7 +281,7 @@ text txt = Domable $ Element' $ Node go
             , unsafeSetText di me txt
             , maybe empty
                 ( \p ->
-                    pure $ attributeParent
+                    pure $ assignParentToComponent
                       { id: me, parent: p, pos, dynFamily, ez }
                 )
                 parent

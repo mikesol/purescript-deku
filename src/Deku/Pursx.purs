@@ -4636,7 +4636,7 @@ makePursx' verb html r = Domable $ Element' $ Node go
   where
   go
     z@{ parent, scope, raiseId, dynFamily, pos }
-    di@(DOMInterpret { makePursx: mpx, ids, deleteFromCache, attributeParent }) =
+    di@(DOMInterpret { makePursx: mpx, ids, deleteFromCache, assignParentToComponent }) =
     makeLemmingEventO $ mkSTFn2 \(Subscriber mySub) k1 -> do
       me <- ids
       pxScope <- ids
@@ -4663,7 +4663,7 @@ makePursx' verb html r = Domable $ Element' $ Node go
             , element z di
             , maybe empty
                 ( \p ->
-                    pure $ attributeParent
+                    pure $ assignParentToComponent
                       { id: me, parent: p, pos, dynFamily, ez: false }
                 )
                 parent
@@ -4695,7 +4695,7 @@ unsafeMakePursx' verb html r = Domable $ Element' $ Node go
   where
   go
     z@{ parent, scope, raiseId, dynFamily, pos }
-    di@(DOMInterpret { makePursx: mpx, ids, deleteFromCache, attributeParent }) =
+    di@(DOMInterpret { makePursx: mpx, ids, deleteFromCache, assignParentToComponent }) =
     makeLemmingEventO $ mkSTFn2 \(Subscriber mySub) k1 -> do
       me <- ids
       pxScope <- ids
@@ -4722,7 +4722,7 @@ unsafeMakePursx' verb html r = Domable $ Element' $ Node go
             , element z di
             , maybe empty
                 ( \p ->
-                    pure $ attributeParent
+                    pure $ assignParentToComponent
                       { id: me, parent: p, pos, dynFamily, ez: false }
                 )
                 parent

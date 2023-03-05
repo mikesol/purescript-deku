@@ -62,9 +62,9 @@ foreign import removeDynBeacon_
   -> FFIDOMSnapshot
   -> Effect Unit
 
-foreign import attributeParent_
+foreign import assignParentToComponent_
   :: RunOnJust
-  -> Core.AttributeParent
+  -> Core.assignParentToComponent
   -> FFIDOMSnapshot
   -> Effect Unit
 
@@ -137,7 +137,7 @@ fullDOMInterpret seed = Core.DOMInterpret
       pure o
   , makeElement: makeElement_ runOnJust false
   , makeDynBeacon: makeDynBeacon_ runOnJust false
-  , attributeParent: attributeParent_ runOnJust
+  , assignParentToComponent: assignParentToComponent_ runOnJust
   , makeRoot: makeRoot_
   , makeText: makeText_ runOnJust false (maybe unit)
   , makePursx: makePursx_ runOnJust false (maybe unit)
@@ -284,7 +284,7 @@ ssrDOMInterpret seed = Core.DOMInterpret
       void $ Ref.modify (add 1) seed
       pure o
   , makeElement: ssrMakeElement
-  , attributeParent: \_ _ -> pure unit
+  , assignParentToComponent: \_ _ -> pure unit
   , makeRoot: ssrMakeRoot
   , makeText: ssrMakeText
   , makePursx: ssrMakePursx
@@ -321,7 +321,7 @@ hydratingDOMInterpret seed = Core.DOMInterpret
       pure o
   , makeElement: makeElement_ runOnJust true
   , makeDynBeacon: makeDynBeacon_ runOnJust true
-  , attributeParent: attributeParent_ runOnJust
+  , assignParentToComponent: assignParentToComponent_ runOnJust
   , makeRoot: makeRoot_
   , makeText: makeText_ runOnJust true (maybe unit)
   , makePursx: makePursx_ runOnJust true (maybe unit)
