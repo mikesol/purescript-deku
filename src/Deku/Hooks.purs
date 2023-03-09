@@ -41,7 +41,6 @@ import Deku.Core (Domable(..), Node, bus, bussedUncurried, insert, remove, sendT
 import Deku.Do as Deku
 import Effect (Effect)
 import Effect.Aff (Aff, error, killFiber, launchAff, launchAff_)
-import Effect.Ref as Ref
 import Effect.Uncurried (mkEffectFn1, runEffectFn1, runEffectFn2)
 import FRP.Event (Event, Subscriber(..), createPure, keepLatest, mailboxed, makeEventO, makeLemmingEvent, makeLemmingEventO, memoize, subscribeO)
 import Safe.Coerce (coerce)
@@ -230,11 +229,11 @@ useAffWithCancellation
   -> (Unit -> Domable lock payload)
   -> Domable lock payload
 useAffWithCancellation e f1 f2 = Domable $ envy $ coerce $ makeEventO $ mkEffectFn1 \k -> do
-  r <- Ref.new (pure unit)
+  r <- liftST $ STRef.new (pure unit)
   runEffectFn1 k (f2 unit)
   runEffectFn2 subscribeO e $ mkEffectFn1 \a -> do
-    r' <- Ref.read r
+    r' <- liftST $ STRef.read r
     r'' <- launchAff do
       killFiber (error "useAffWithCancellation") r'
       f1 a
-    Ref.write r'' r
+    liftST $ void $ STRef.write r'' r
