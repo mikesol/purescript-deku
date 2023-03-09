@@ -203,7 +203,7 @@ useHot a f = Domable $ envy $ makeLemmingEventO
       runSTFn2 s event (mkSTFn1 \v -> void $ writeVal v)
   )
 
--- | A hook that runs an arbitrary effect when an event's value changes
+-- | A hook that runs an arbitrary effect when an event's value changes.
 useEffect
   :: forall lock payload a
    . Event a
@@ -214,6 +214,7 @@ useEffect e f1 f2 = Domable $ envy $ coerce $ makeEventO $ mkEffectFn1 \k -> do
   runEffectFn1 k (f2 unit)
   runEffectFn2 subscribeO e $ mkEffectFn1 f1
 
+-- | A hook that runs an arbitrary aff when an event's value changes.
 useAff
   :: forall lock payload a
    . Event a
@@ -222,6 +223,7 @@ useAff
   -> Domable lock payload
 useAff e = useEffect e <<< map launchAff_
 
+-- | A hook that runs an arbitrary aff when an event's value changes, cancelling the previous aff.
 useAffWithCancellation
   :: forall lock payload a
    . Event a
