@@ -233,5 +233,18 @@ describe('deku', () => {
     expect($('#b3').text()).toBe('2');
     expect($('#b4').text()).toBe('');
   }));
+
+  doTest('useEffect has correct behavior', (f) => f(tests.useEffectWorks, () => {
+    const $ = require('jquery');
+    expect($('#mydiv').text()).toBe('0');
+    $('#counter').trigger('click');
+    expect($('#mydiv').text()).toBe('2');
+    $('#counter').trigger('click');
+    expect($('#mydiv').text()).toBe('3');
+    $('#counter').trigger('click');
+    expect($('#mydiv').text()).toBe('4');
+    $('#counter').trigger('click');
+    expect($('#mydiv').text()).toBe('6');
+  }));
 });
 

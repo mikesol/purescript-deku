@@ -17,6 +17,9 @@ module Deku.Hooks
   , useMemoized'
   , useMemoized
   , useMailboxed
+  , useEffect
+  , useAff
+  , useAffWithCancellation
   , useHot
   , useHot'
   , useDyn
@@ -37,7 +40,9 @@ import Data.Tuple.Nested (type (/\), (/\))
 import Deku.Core (Domable(..), Node, bus, bussedUncurried, insert, remove, sendToPos)
 import Deku.Do as Deku
 import Effect (Effect)
-import FRP.Event (Event, Subscriber(..), createPure, keepLatest, mailboxed, makeLemmingEvent, makeLemmingEventO, memoize)
+import Effect.Aff (Aff, error, killFiber, launchAff, launchAff_)
+import Effect.Uncurried (mkEffectFn1, runEffectFn1, runEffectFn2)
+import FRP.Event (Event, Subscriber(..), createPure, keepLatest, mailboxed, makeEventO, makeLemmingEvent, makeLemmingEventO, memoize, subscribeO)
 import Safe.Coerce (coerce)
 
 -- | A state hook for states without initial values. See [`useState'`](https://purescript-deku.netlify.app/core-concepts/state#state-without-initial-values) in the Deku guide for example usage.
@@ -89,7 +94,7 @@ useRef
   :: forall lock payload a
    . a
   -> Event a
-  -> (  Effect a
+  -> ( Effect a
        -> Domable lock payload
      )
   -> Domable lock payload
@@ -197,3 +202,40 @@ useHot a f = Domable $ envy $ makeLemmingEventO
       runSTFn1 k ((\(Domable x) -> x) (f (push'' /\ event')))
       runSTFn2 s event (mkSTFn1 \v -> void $ writeVal v)
   )
+
+-- | A hook that runs an arbitrary effect when an event's value changes.
+useEffect
+  :: forall lock payload a
+   . Event a
+  -> (a -> Effect Unit)
+  -> (Unit -> Domable lock payload)
+  -> Domable lock payload
+useEffect e f1 f2 = Domable $ envy $ coerce $ makeEventO $ mkEffectFn1 \k -> do
+  runEffectFn1 k (f2 unit)
+  runEffectFn2 subscribeO e $ mkEffectFn1 f1
+
+-- | A hook that runs an arbitrary aff when an event's value changes.
+useAff
+  :: forall lock payload a
+   . Event a
+  -> (a -> Aff Unit)
+  -> (Unit -> Domable lock payload)
+  -> Domable lock payload
+useAff e = useEffect e <<< map launchAff_
+
+-- | A hook that runs an arbitrary aff when an event's value changes, cancelling the previous aff.
+useAffWithCancellation
+  :: forall lock payload a
+   . Event a
+  -> (a -> Aff Unit)
+  -> (Unit -> Domable lock payload)
+  -> Domable lock payload
+useAffWithCancellation e f1 f2 = Domable $ envy $ coerce $ makeEventO $ mkEffectFn1 \k -> do
+  r <- liftST $ STRef.new (pure unit)
+  runEffectFn1 k (f2 unit)
+  runEffectFn2 subscribeO e $ mkEffectFn1 \a -> do
+    r' <- liftST $ STRef.read r
+    r'' <- launchAff do
+      killFiber (error "useAffWithCancellation") r'
+      f1 a
+    liftST $ void $ STRef.write r'' r

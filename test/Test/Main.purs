@@ -16,7 +16,7 @@ import Deku.Control (blank, globalPortal1, switcher, text, text_)
 import Deku.Core (Domable, Nut, dyn, fixed, insert, insert_, sendToPos)
 import Deku.DOM as D
 import Deku.Do as Deku
-import Deku.Hooks (useMemoized, useRef, useState, useState')
+import Deku.Hooks (useEffect, useMemoized, useRef, useState, useState')
 import Deku.Interpret (FFIDOMSnapshot, Instruction)
 import Deku.Lifecycle (onDidMount, onDismount, onWillMount)
 import Deku.Listeners (click, click_)
@@ -322,4 +322,21 @@ useRefWorks = Deku.do
               )
               [ text (show <$> buttonTxt) ]
         )
+    ]
+
+useEffectWorks :: Nut
+useEffectWorks = Deku.do
+  let startsAt = 0
+  setCounter /\ counter <- useState startsAt
+  useEffect counter \i -> when (i `mod` 4 == 1) do
+    setCounter (i + 1)
+  D.div_
+    [ D.button
+        ( merge
+            [ click $ counter <#> add 1 >>> setCounter
+            , id_ "counter"
+            ]
+        )
+        [ text_ "Increment" ]
+    , D.div (id_ "mydiv") [ text (show <$> counter) ]
     ]
