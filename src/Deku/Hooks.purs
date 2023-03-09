@@ -234,6 +234,7 @@ useAffWithCancellation e f1 f2 = Domable $ envy $ coerce $ makeEventO $ mkEffect
   runEffectFn1 k (f2 unit)
   runEffectFn2 subscribeO e $ mkEffectFn1 \a -> do
     r' <- Ref.read r
-    launchAff_ $ killFiber (error "useAffWithCancellation") r'
-    r'' <- launchAff (f1 a)
+    r'' <- launchAff do
+      killFiber (error "useAffWithCancellation") r'
+      f1 a
     Ref.write r'' r
