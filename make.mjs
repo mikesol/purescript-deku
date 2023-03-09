@@ -9931,13 +9931,13 @@ var pure23 = /* @__PURE__ */ pure(applicativeEvent);
 var keepLatest5 = /* @__PURE__ */ keepLatest(eventIsEvent);
 var useDyn = function(i2) {
   return function(f) {
-    return keepLatest5(bind6(function($48) {
-      return bus2(curry($48));
+    return keepLatest5(bind6(function($53) {
+      return bus2(curry($53));
     })(function(v) {
       return alt9(pure23(insert7(i2)(f({
         remove: v.value0(remove),
-        sendTo: function($49) {
-          return v.value0(sendToPos($49));
+        sendTo: function($54) {
+          return v.value0(sendToPos($54));
         }
       }))))(v.value1);
     }));
