@@ -12,7 +12,7 @@ A PureScript web framework for apps that need to be fast.
 
 ## Documentation
 
-[Here is a guide](https://purescript-deku.netlify.app/) to building apps with Deku. The guide is written in Deku and its source code can be found [here](https://github.com/mikesol/deku-documentation). **You should probably start your Deku journey with theis guide.** It contains everything you need to build a Deku app, from bootstrapping a project to `Hello World` to a Discord clone!
+[Here is a guide](https://purescript-deku.netlify.app/) to building apps with Deku. The guide is written in Deku and its source code can be found [here](https://github.com/mikesol/deku-documentation). **You should probably start your Deku journey with this guide.** It contains everything you need to build a Deku app, from bootstrapping a project to `Hello World` to a Discord clone!
 
 Indexed documentation for Deku is published on [Pursuit](https://pursuit.purescript.org/packages/purescript-deku). Deku's structure is currently highly decentralized, so it can be tough to know where to look. Here's a small Deku app that acts as a legend for the Pursuit docs.
 
@@ -86,7 +86,7 @@ So, in summary, ignore the voluminous number of modules in Deku (which makes bro
 There are a few more modules to be aware of for advanced usage:
 
 - [`Deku.Lifecycle`](https://pursuit.purescript.org/packages/purescript-deku/docs/Deku.Lifecycle) contains methods for arbitrary side effects to run when the Deku Nuts mount and dismount from the DOM.
-- [`Deku.Pursx.Anonymous`](https://pursuit.purescript.org/packages/purescript-deku/docs/Deku.Pursx.Anonymous) contains an experimental `pursx` syntax that could theoretically be made better by Visible Type Applications. As that feature develops, if the syntax becomes ergonomic, it may supercede the current `pursx` syntax.
+- [`Deku.Pursx.Anonymous`](https://pursuit.purescript.org/packages/purescript-deku/docs/Deku.Pursx.Anonymous) contains an experimental `pursx` syntax that could theoretically be made better by Visible Type Applications. As that feature develops, if the syntax becomes ergonomic, it may supersede the current `pursx` syntax.
 - [`Deku.Interpret`](https://pursuit.purescript.org/packages/purescript-deku/docs/Deku.Interpret) is for folks that wish to build a custom Deku backend. Deku currently supports Single-page applications (the default), static site rendering, and hydrated static site rendering.
 
 Deku is a small codebase. All of the heavy lifting is done via primitives from [`purescript-hyrule`](https://github.com/mikesol/purescript-hyrule), the documentation of which is also on [Pursuit](https://pursuit.purescript.org/packages/purescript-hyrule).
@@ -96,7 +96,7 @@ Deku is a small codebase. All of the heavy lifting is done via primitives from [
 Deku aims to be:
 
 - **fast**: it's up to 2x faster than Halogen for a simple Todo MVC app.
-- **small**: the average Deku program tends to be less lines of code than its React or Halogen counterparts.
+- **small**: the average Deku program tends to be fewer lines of code than its React or Halogen counterparts.
 - **ssr-friendly**: Deku has out-of-the-box server-side rendering capabilities. 
 
 ## What does Deku mean?
