@@ -9,11 +9,12 @@ import Control.Monad.ST.Internal as RRef
 import Control.Plus (empty)
 import Data.Array ((..))
 import Data.Foldable (intercalate, oneOf, oneOfMap)
+import Data.Tuple (Tuple(..))
 import Data.Tuple.Nested ((/\))
 import Deku.Attribute ((!:=), (:=))
 import Deku.Attributes (id_)
 import Deku.Control (blank, globalPortal1, switcher, text, text_)
-import Deku.Core (Domable, Nut, dyn, fixed, insert, insert_, sendToPos)
+import Deku.Core (Domable, Hook, Nut, dyn, fixed, insert, insert_, sendToPos)
 import Deku.DOM as D
 import Deku.Do as Deku
 import Deku.Hooks (useEffect, useMemoized, useRef, useState, useState')
@@ -340,3 +341,25 @@ useEffectWorks = Deku.do
         [ text_ "Increment" ]
     , D.div (id_ "mydiv") [ text (show <$> counter) ]
     ]
+  
+customHooksDoTheirThing :: Nut
+customHooksDoTheirThing = Deku.do
+  setCounter /\ counter <- useState 0
+  e1 /\ e2 <- myHook counter
+  D.div_
+    [ D.button
+        ( merge
+            [ click $ counter <#> add 1 >>> setCounter
+            , id_ "counter"
+            ]
+        )
+        [ text_ "Increment" ]
+    , D.div (id_ "mydiv1") [ text (show <$> e1) ]
+    , D.div (id_ "mydiv2") [ text (show <$> e2) ]
+    ]
+  where
+  myHook :: Event Int -> Hook (Tuple (Event Int) (Event Int))
+  myHook e makeHook = Deku.do
+    e1 <- useMemoized (add 42 <$> e)
+    e2 <- useMemoized (add 48 <$> e)
+    makeHook (Tuple e1 e2)

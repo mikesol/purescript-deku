@@ -246,5 +246,14 @@ describe('deku', () => {
     $('#counter').trigger('click');
     expect($('#mydiv').text()).toBe('6');
   }));
+
+  doTest('custom hooks do their thing', (f) => f(tests.customHooksDoTheirThing, () => {
+    const $ = require('jquery');
+    expect($('#mydiv1').text()).toBe('42');
+    expect($('#mydiv2').text()).toBe('48');
+    $('#counter').trigger('click');
+    expect($('#mydiv1').text()).toBe('43');
+    expect($('#mydiv2').text()).toBe('49');
+  }));
 });
 

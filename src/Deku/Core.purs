@@ -19,6 +19,7 @@ module Deku.Core
   , RemoveDynBeacon
   , Node(..)
   , Nut
+  , Hook
   , NutWith
   , SendToPos
   , SetCb
@@ -72,6 +73,11 @@ import Web.DOM as Web.DOM
 -- | don't need to be used explicitly. When using these variables explicitly, opt for using
 -- | `Domable` directly.
 type Nut = forall lock payload. Domable lock payload
+
+-- | The signature of a custom Deku hook. This works when `lock` and `payload` variables
+-- | don't need to be used explicitly. When using these variables explicitly, opt for using
+-- | `Domable` directly (meaning write out the definition by hand).
+type Hook a = forall lock payload. (a -> Domable lock payload) -> Domable lock payload
 
 -- | A helper for using `Nut` with an environment.
 type NutWith env = forall lock payload. env -> Domable lock payload
