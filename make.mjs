@@ -5952,7 +5952,7 @@ var dynify = function(f) {
               return new Tuple(empty6, v.parent.value0);
             }
             ;
-            throw new Error("Failed pattern match at Deku.Core (line 407, column 34 - line 421, column 36): " + [v.parent.constructor.name]);
+            throw new Error("Failed pattern match at Deku.Core (line 413, column 34 - line 427, column 36): " + [v.parent.constructor.name]);
           }();
           var unsub = v2(merge2([v3.value0, pure13(v1.makeDynBeacon({
             id: me,
