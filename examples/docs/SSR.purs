@@ -76,7 +76,7 @@ px =
   <p>Thanks for checking out Deku! I had a blast writing it, and I hope you enjoy using it for your projects!</p>
 </div>"""
 
-app :: forall lock payload. Domable lock payload
+app :: forall payload. Domable payload
 app = vbussed (Proxy :: _ UIEvents) \push event -> do
   D.div_
     [ D.p_
@@ -115,7 +115,7 @@ and all of the dynamic bits are hydrated on page load."""
         ]
     ]
 
-ssrPage :: forall i lock payload. i -> Domable lock payload
+ssrPage :: forall i lock payload. i -> Domable payload
 ssrPage _ = px ~~
   { code2:
       ( D.pre_
@@ -138,7 +138,7 @@ ssrPage _ = px ~~
               ]
           ]
       )
-  , result: app :: Domable lock payload
+  , result: app :: Domable payload
   , codegen:
       ( D.pre_
           [ D.code_

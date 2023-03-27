@@ -12,27 +12,27 @@ import Safe.Coerce (coerce)
 data Acronym_
 
 acronym
-  :: forall lock payload
+  :: forall payload
    . Event (Attribute Acronym_)
-  -> Array (Domable lock payload)
-  -> Domable lock payload
+  -> Array (Domable payload)
+  -> Domable payload
 acronym attributes kids = Domable
   ( Element'
       ( DC.elementify "acronym" attributes
-          ( (coerce :: Domable' lock payload -> Domable lock payload)
+          ( (coerce :: Domable' payload -> Domable payload)
               (fixed (coerce (mapWithIndex unsafeSetPos kids)))
           )
       )
   )
 
 acronym_
-  :: forall lock payload
-   . Array (Domable lock payload)
-  -> Domable lock payload
+  :: forall payload
+   . Array (Domable payload)
+  -> Domable payload
 acronym_ = acronym empty
 
 acronym__
-  :: forall lock payload
+  :: forall payload
    . String
-  -> Domable lock payload
+  -> Domable payload
 acronym__ t = acronym_ [ DC.text_ t ]

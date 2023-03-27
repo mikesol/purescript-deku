@@ -12,27 +12,27 @@ import Safe.Coerce (coerce)
 data FeImage_
 
 feImage
-  :: forall lock payload
+  :: forall payload
    . Event (Attribute FeImage_)
-  -> Array (Domable lock payload)
-  -> Domable lock payload
+  -> Array (Domable payload)
+  -> Domable payload
 feImage attributes kids = Domable
   ( Element'
       ( DC.elementify "feImage" attributes
-          ( (coerce :: Domable' lock payload -> Domable lock payload)
+          ( (coerce :: Domable' payload -> Domable payload)
               (fixed (coerce (mapWithIndex unsafeSetPos kids)))
           )
       )
   )
 
 feImage_
-  :: forall lock payload
-   . Array (Domable lock payload)
-  -> Domable lock payload
+  :: forall payload
+   . Array (Domable payload)
+  -> Domable payload
 feImage_ = feImage empty
 
 feImage__
-  :: forall lock payload
+  :: forall payload
    . String
-  -> Domable lock payload
+  -> Domable payload
 feImage__ t = feImage_ [ DC.text_ t ]

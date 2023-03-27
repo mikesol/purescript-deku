@@ -12,27 +12,27 @@ import Safe.Coerce (coerce)
 data ForeignObject_
 
 foreignObject
-  :: forall lock payload
+  :: forall payload
    . Event (Attribute ForeignObject_)
-  -> Array (Domable lock payload)
-  -> Domable lock payload
+  -> Array (Domable payload)
+  -> Domable payload
 foreignObject attributes kids = Domable
   ( Element'
       ( DC.elementify "foreignObject" attributes
-          ( (coerce :: Domable' lock payload -> Domable lock payload)
+          ( (coerce :: Domable' payload -> Domable payload)
               (fixed (coerce (mapWithIndex unsafeSetPos kids)))
           )
       )
   )
 
 foreignObject_
-  :: forall lock payload
-   . Array (Domable lock payload)
-  -> Domable lock payload
+  :: forall payload
+   . Array (Domable payload)
+  -> Domable payload
 foreignObject_ = foreignObject empty
 
 foreignObject__
-  :: forall lock payload
+  :: forall payload
    . String
-  -> Domable lock payload
+  -> Domable payload
 foreignObject__ t = foreignObject_ [ DC.text_ t ]

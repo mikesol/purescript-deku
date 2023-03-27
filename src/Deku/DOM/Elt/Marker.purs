@@ -12,27 +12,27 @@ import Safe.Coerce (coerce)
 data Marker_
 
 marker
-  :: forall lock payload
+  :: forall payload
    . Event (Attribute Marker_)
-  -> Array (Domable lock payload)
-  -> Domable lock payload
+  -> Array (Domable payload)
+  -> Domable payload
 marker attributes kids = Domable
   ( Element'
       ( DC.elementify "marker" attributes
-          ( (coerce :: Domable' lock payload -> Domable lock payload)
+          ( (coerce :: Domable' payload -> Domable payload)
               (fixed (coerce (mapWithIndex unsafeSetPos kids)))
           )
       )
   )
 
 marker_
-  :: forall lock payload
-   . Array (Domable lock payload)
-  -> Domable lock payload
+  :: forall payload
+   . Array (Domable payload)
+  -> Domable payload
 marker_ = marker empty
 
 marker__
-  :: forall lock payload
+  :: forall payload
    . String
-  -> Domable lock payload
+  -> Domable payload
 marker__ t = marker_ [ DC.text_ t ]

@@ -19,13 +19,13 @@ class
 
 instance endOfTheLine ::
   ( Reflectable html String
-  , PXStart lock payload "~" " " html r
+  , PXStart payload "~" " " html r
   , RL.RowToList r rl
-  , PursxToElement lock payload rl r
+  , PursxToElement payload rl r
   ) =>
   PursxStringAnonymous (Proxy ll /\ Proxy html /\ { | r })
     EndAnonymousPursX
-    (Domable lock payload) where
+    (Domable payload) where
   pursxStringAnonymous (_ /\ a /\ b) _ = a ~~ b
 
 instance readingPursx ::
@@ -44,13 +44,13 @@ class
 
 instance endOfTheLineV ::
   ( Reflectable html String
-  , PXStart lock payload "~" " " html r
+  , PXStart payload "~" " " html r
   , RL.RowToList r rl
-  , PursxToElement lock payload rl r
+  , PursxToElement payload rl r
   ) =>
   PursxValAnonymous (Proxy ll /\ Proxy html /\ { | r })
     EndAnonymousPursX
-    (Domable lock payload) where
+    (Domable payload) where
   pursxValAnonymous (_ /\ a /\ b) _ = a ~~ b
 
 else instance readingVal ::

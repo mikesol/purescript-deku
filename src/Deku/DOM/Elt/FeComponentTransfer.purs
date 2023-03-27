@@ -12,27 +12,27 @@ import Safe.Coerce (coerce)
 data FeComponentTransfer_
 
 feComponentTransfer
-  :: forall lock payload
+  :: forall payload
    . Event (Attribute FeComponentTransfer_)
-  -> Array (Domable lock payload)
-  -> Domable lock payload
+  -> Array (Domable payload)
+  -> Domable payload
 feComponentTransfer attributes kids = Domable
   ( Element'
       ( DC.elementify "feComponentTransfer" attributes
-          ( (coerce :: Domable' lock payload -> Domable lock payload)
+          ( (coerce :: Domable' payload -> Domable payload)
               (fixed (coerce (mapWithIndex unsafeSetPos kids)))
           )
       )
   )
 
 feComponentTransfer_
-  :: forall lock payload
-   . Array (Domable lock payload)
-  -> Domable lock payload
+  :: forall payload
+   . Array (Domable payload)
+  -> Domable payload
 feComponentTransfer_ = feComponentTransfer empty
 
 feComponentTransfer__
-  :: forall lock payload
+  :: forall payload
    . String
-  -> Domable lock payload
+  -> Domable payload
 feComponentTransfer__ t = feComponentTransfer_ [ DC.text_ t ]

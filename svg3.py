@@ -20,23 +20,23 @@ import Safe.Coerce (coerce)
 data {nameUc}_
 
 {name}
-  :: forall lock payload
+  :: forall payload
    . Event (Attribute {nameUc}_)
-  -> Array (Domable lock payload)
-  -> Domable lock payload
+  -> Array (Domable payload)
+  -> Domable payload
 {name} attributes kids = Domable
   ( Element'
       ( elementify "{name}" attributes
-          ( (coerce :: Domable' lock payload -> Domable lock payload)
+          ( (coerce :: Domable' payload -> Domable payload)
               (fixed (coerce (mapWithIndex unsafeSetPos kids)))
           )
       )
   )
 
 {name}_
-  :: forall lock payload
-   . Array (Domable lock payload)
-  -> Domable lock payload
+  :: forall payload
+   . Array (Domable payload)
+  -> Domable payload
 {name}_ = {name} empty
 '''
     return o

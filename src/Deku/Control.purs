@@ -41,9 +41,9 @@ import Deku.Core (DOMInterpret(..), Domable(..), Node(..), Nut, envy, dyn, inser
 import FRP.Event (Event, Subscriber(..), merge, keepLatest, makeLemmingEventO, mapAccum, memoize)
 import Prim.Int (class Compare)
 import Prim.Ordering (GT)
+import Record (union)
 import Safe.Coerce (coerce)
 import Type.Proxy (Proxy(..))
-import Unsafe.Coerce (unsafeCoerce)
 import Web.DOM as Web.DOM
 
 type Neg1 = -1
@@ -80,11 +80,11 @@ unsafeSetAttribute (DOMInterpret { setProp, setCb, unsetAttribute }) id atts =
 -- | Used internally to create new [`Element`-s](https://developer.mozilla.org/en-US/docs/Web/API/Element).
 -- | Do not use this directly. Instead, use `unsafeCustomElement` from `Deku.DOM`.
 elementify
-  :: forall element lock payload
+  :: forall element payload
    . String
   -> Event (Attribute element)
-  -> Domable lock payload
-  -> Node lock payload
+  -> Domable payload
+  -> Node payload
 elementify tag atts children = Node go
   where
   go
@@ -143,18 +143,19 @@ elementify tag atts children = Node go
 -- | For examples of portals in use, see the
 -- | [portals section](https://purescript-deku.netlify.app/core-concepts/portals) of the Deku guide.
 globalPortal
-  :: forall n lock payload
+  :: forall n payload
    . Compare n Neg1 GT
-  => Vect n (Domable lock payload)
-  -> (Vect n (Domable lock payload) -> Domable lock payload)
-  -> Domable lock payload
+  => Vect n (Domable payload)
+  -> (Vect n (Domable payload) -> Domable payload)
+  -> Domable payload
 globalPortal v c = Domable $ Bolson.globalPortalComplexComplex
   portalFlatten
   { fromEltO1: coerce
   , fromEltO2: coerce
   , toElt: coerce
-  , wrapElt: \i -> Element' (elementify "div" empty (unsafeCoerce i))
-  , giveNewParent: \a b _ -> (unwrap a).giveNewParent b
+  , wrapElt: \i -> Element' (elementify "div" empty (coerce i))
+  , giveNewParent: \a b ctor _ -> (unwrap a).giveNewParent
+      (b `union` { ctor: coerce ctor })
   , deleteFromCache: unwrap >>> _.deleteFromCache
   }
   (map unwrap v)
@@ -162,15 +163,15 @@ globalPortal v c = Domable $ Bolson.globalPortalComplexComplex
 
 -- | A variation of global portal that takes a single element instead of a vector of elements.
 globalPortal1
-  :: forall lock payload
-   . Domable lock payload
-  -> (Domable lock payload -> Domable lock payload)
-  -> Domable lock payload
+  :: forall payload
+   . Domable payload
+  -> (Domable payload -> Domable payload)
+  -> Domable payload
 globalPortal1 i f = globalPortal (singleton i) (lcmap (index (Proxy :: _ 0)) f)
 
 -- ugh, this isn't sacred, delete it and regenerate if something changes
 portalFlatten
-  :: forall payload136 b143 d145 t149 t157 t159 lock166 lock170 payload171
+  :: forall payload136 b143 d145 t149 t157 t159 payload171
    . Newtype b143
        { ids :: d145
        | t149
@@ -186,13 +187,12 @@ portalFlatten
      , doLogic :: Int -> DOMInterpret payload136 -> String -> payload136
      , ids :: b143 -> d145
      , toElt ::
-         Node lock166 payload171
+         Node payload171
          -> Element (DOMInterpret payload171)
               ( pos :: Maybe Int
               , dynFamily :: Maybe String
               , ez :: Boolean
               )
-              lock170
               payload171
      }
 portalFlatten =
@@ -206,15 +206,14 @@ portalFlatten =
 
 -- | A variation of portal that takes a single element instead of a vector of elements.
 portal1
-  :: forall lock payload
-   . Domable lock payload
-  -> ( forall lockfoo
-        . ( (Domable lockfoo payload)
-              /\ (Domable lock payload -> Domable lockfoo payload)
-          )
-       -> Domable lockfoo payload
+  :: forall payload
+   . Domable payload
+  -> ( ( (Domable payload)
+           /\ (Domable payload -> Domable payload)
+       )
+       -> Domable payload
      )
-  -> Domable lock payload
+  -> Domable payload
 portal1 i f = portal (singleton i) (lcmap (over _1 (index (Proxy :: _ 0))) f)
 
 -- | Creates a portal.
@@ -239,23 +238,23 @@ portal1 i f = portal (singleton i) (lcmap (over _1 (index (Proxy :: _ 0))) f)
 -- | For examples of portals in use, see the
 -- | [portals section](https://purescript-deku.netlify.app/core-concepts/portals) of the Deku guide.
 portal
-  :: forall n lock0 payload
+  :: forall n payload
    . Compare n Neg1 GT
-  => Vect n (Domable lock0 payload)
-  -> ( forall lockfoo
-        . ( Vect n (Domable lockfoo payload)
-              /\ (Domable lock0 payload -> Domable lockfoo payload)
-          )
-       -> Domable lockfoo payload
+  => Vect n (Domable payload)
+  -> ( ( Vect n (Domable payload)
+           /\ (Domable payload -> Domable payload)
+       )
+       -> Domable payload
      )
-  -> Domable lock0 payload
+  -> Domable payload
 portal a b = Domable $ Bolson.portalComplexComplex
   portalFlatten
   { fromEltO1: coerce
   , fromEltO2: coerce
   , toElt: coerce
   , wrapElt: \i -> Element' (elementify "div" empty (wrap i))
-  , giveNewParent: \q r _ -> (unwrap q).giveNewParent r
+  , giveNewParent: \x y ctor _ -> (unwrap x).giveNewParent
+      (y `union` { ctor: coerce ctor })
   , deleteFromCache: unwrap >>> _.deleteFromCache
   }
   (map unwrap a)
@@ -264,9 +263,9 @@ portal a b = Domable $ Bolson.portalComplexComplex
 -- | Create a [`Text`](https://developer.mozilla.org/en-US/docs/Web/API/Text) node from
 -- | the emitted strings. Each emitted string replaces the previous string.
 text
-  :: forall lock payload
+  :: forall payload
    . Event String
-  -> Domable lock payload
+  -> Domable payload
 text txt = Domable $ Element' $ Node go
   where
   go
@@ -294,7 +293,7 @@ text txt = Domable $ Element' $ Node go
 
 -- | Create a [`Text`](https://developer.mozilla.org/en-US/docs/Web/API/Text) node from
 -- | a string. The node is set immediately with the string and does not change.
-text_ :: forall lock payload. String -> Domable lock payload
+text_ :: forall payload. String -> Domable payload
 text_ txt = text (pure txt)
 
 -- | A low-level function that creates a Deku application.
@@ -302,7 +301,7 @@ text_ txt = text (pure txt)
 deku
   :: forall payload
    . Web.DOM.Element
-  -> (forall lock. Domable lock payload)
+  -> Domable payload
   -> DOMInterpret payload
   -> Event payload
 deku root children di@(DOMInterpret { makeRoot }) = makeLemmingEventO $ mkSTFn2
@@ -319,17 +318,17 @@ deku root children di@(DOMInterpret { makeRoot }) = makeLemmingEventO $ mkSTFn2
             , dynFamily: Nothing
             }
             di
-            (unsafeCoerce children)
+            (coerce children)
       )
       k
 
 data Stage = Begin | Middle | End
 
 __internalDekuFlatten
-  :: forall lock payload
+  :: forall payload
    . PSR (pos :: Maybe Int, ez :: Boolean, dynFamily :: Maybe String)
   -> DOMInterpret payload
-  -> Domable lock payload
+  -> Domable payload
   -> Event payload
 __internalDekuFlatten a b (Domable c) = Bolson.flatten portalFlatten a b c
 
@@ -340,10 +339,10 @@ __internalDekuFlatten a b (Domable c) = Bolson.flatten portalFlatten a b c
 -- | and should be used when the content needs to be replaced wholesale. For a more efficient
 -- | approach, see the `useDyn` hook.
 switcher
-  :: forall a lock payload
-   . (a -> Domable lock payload)
+  :: forall a payload
+   . (a -> Domable payload)
   -> Event a
-  -> Domable lock payload
+  -> Domable payload
 switcher f event = dyn $ keepLatest
   $ memoize (counter event) \cenv -> map
       ( \(p /\ n) -> merge
@@ -361,20 +360,20 @@ infixl 4 switcher as <$~>
 
 -- | A flipped version of `switcher`.
 switcherFlipped
-  :: forall a lock payload
+  :: forall a payload
    . Event a
-  -> (a -> Domable lock payload)
-  -> Domable lock payload
+  -> (a -> Domable payload)
+  -> Domable payload
 switcherFlipped = flip switcher
 
 infixl 1 switcherFlipped as <#~>
 
 -- | Inserts the Deku Nut when an event emits `true`, otherwise destroys the element.
 guard
-  :: forall lock payload
+  :: forall payload
    . Event Boolean
-  -> Domable lock payload
-  -> Domable lock payload
+  -> Domable payload
+  -> Domable payload
 guard eb d = switcher
   (if _ then d else blank)
   eb
@@ -383,5 +382,6 @@ guard eb d = switcher
 blank :: Nut
 blank = Domable $ BCore.envy empty
 
-toDeku :: forall a lock payload. (a -> Event (Domable lock payload)) -> a -> Domable lock payload
+toDeku
+  :: forall a payload. (a -> Event (Domable payload)) -> a -> Domable payload
 toDeku = compose envy

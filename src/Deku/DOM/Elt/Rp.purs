@@ -12,27 +12,27 @@ import Safe.Coerce (coerce)
 data Rp_
 
 rp
-  :: forall lock payload
+  :: forall payload
    . Event (Attribute Rp_)
-  -> Array (Domable lock payload)
-  -> Domable lock payload
+  -> Array (Domable payload)
+  -> Domable payload
 rp attributes kids = Domable
   ( Element'
       ( DC.elementify "rp" attributes
-          ( (coerce :: Domable' lock payload -> Domable lock payload)
+          ( (coerce :: Domable' payload -> Domable payload)
               (fixed (coerce (mapWithIndex unsafeSetPos kids)))
           )
       )
   )
 
 rp_
-  :: forall lock payload
-   . Array (Domable lock payload)
-  -> Domable lock payload
+  :: forall payload
+   . Array (Domable payload)
+  -> Domable payload
 rp_ = rp empty
 
 rp__
-  :: forall lock payload
+  :: forall payload
    . String
-  -> Domable lock payload
+  -> Domable payload
 rp__ t = rp_ [ DC.text_ t ]

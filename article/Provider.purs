@@ -132,7 +132,7 @@ incrementToken = bus \setN n -> do
     ]
 
 authorized
-  :: forall lock payload
+  :: forall payload
    . _
   -> Domable Effect lock payload
 authorized = do

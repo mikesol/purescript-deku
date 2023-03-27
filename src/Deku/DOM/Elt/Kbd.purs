@@ -12,27 +12,27 @@ import Safe.Coerce (coerce)
 data Kbd_
 
 kbd
-  :: forall lock payload
+  :: forall payload
    . Event (Attribute Kbd_)
-  -> Array (Domable lock payload)
-  -> Domable lock payload
+  -> Array (Domable payload)
+  -> Domable payload
 kbd attributes kids = Domable
   ( Element'
       ( DC.elementify "kbd" attributes
-          ( (coerce :: Domable' lock payload -> Domable lock payload)
+          ( (coerce :: Domable' payload -> Domable payload)
               (fixed (coerce (mapWithIndex unsafeSetPos kids)))
           )
       )
   )
 
 kbd_
-  :: forall lock payload
-   . Array (Domable lock payload)
-  -> Domable lock payload
+  :: forall payload
+   . Array (Domable payload)
+  -> Domable payload
 kbd_ = kbd empty
 
 kbd__
-  :: forall lock payload
+  :: forall payload
    . String
-  -> Domable lock payload
+  -> Domable payload
 kbd__ t = kbd_ [ DC.text_ t ]

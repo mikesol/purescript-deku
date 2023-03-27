@@ -12,27 +12,27 @@ import Safe.Coerce (coerce)
 data Applet_
 
 applet
-  :: forall lock payload
+  :: forall payload
    . Event (Attribute Applet_)
-  -> Array (Domable lock payload)
-  -> Domable lock payload
+  -> Array (Domable payload)
+  -> Domable payload
 applet attributes kids = Domable
   ( Element'
       ( DC.elementify "applet" attributes
-          ( (coerce :: Domable' lock payload -> Domable lock payload)
+          ( (coerce :: Domable' payload -> Domable payload)
               (fixed (coerce (mapWithIndex unsafeSetPos kids)))
           )
       )
   )
 
 applet_
-  :: forall lock payload
-   . Array (Domable lock payload)
-  -> Domable lock payload
+  :: forall payload
+   . Array (Domable payload)
+  -> Domable payload
 applet_ = applet empty
 
 applet__
-  :: forall lock payload
+  :: forall payload
    . String
-  -> Domable lock payload
+  -> Domable payload
 applet__ t = applet_ [ DC.text_ t ]

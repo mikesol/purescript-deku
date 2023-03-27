@@ -12,27 +12,27 @@ import Safe.Coerce (coerce)
 data Mpath_
 
 mpath
-  :: forall lock payload
+  :: forall payload
    . Event (Attribute Mpath_)
-  -> Array (Domable lock payload)
-  -> Domable lock payload
+  -> Array (Domable payload)
+  -> Domable payload
 mpath attributes kids = Domable
   ( Element'
       ( DC.elementify "mpath" attributes
-          ( (coerce :: Domable' lock payload -> Domable lock payload)
+          ( (coerce :: Domable' payload -> Domable payload)
               (fixed (coerce (mapWithIndex unsafeSetPos kids)))
           )
       )
   )
 
 mpath_
-  :: forall lock payload
-   . Array (Domable lock payload)
-  -> Domable lock payload
+  :: forall payload
+   . Array (Domable payload)
+  -> Domable payload
 mpath_ = mpath empty
 
 mpath__
-  :: forall lock payload
+  :: forall payload
    . String
-  -> Domable lock payload
+  -> Domable payload
 mpath__ t = mpath_ [ DC.text_ t ]

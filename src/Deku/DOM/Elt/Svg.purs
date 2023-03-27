@@ -12,27 +12,27 @@ import Safe.Coerce (coerce)
 data Svg_
 
 svg
-  :: forall lock payload
+  :: forall payload
    . Event (Attribute Svg_)
-  -> Array (Domable lock payload)
-  -> Domable lock payload
+  -> Array (Domable payload)
+  -> Domable payload
 svg attributes kids = Domable
   ( Element'
       ( DC.elementify "svg" attributes
-          ( (coerce :: Domable' lock payload -> Domable lock payload)
+          ( (coerce :: Domable' payload -> Domable payload)
               (fixed (coerce (mapWithIndex unsafeSetPos kids)))
           )
       )
   )
 
 svg_
-  :: forall lock payload
-   . Array (Domable lock payload)
-  -> Domable lock payload
+  :: forall payload
+   . Array (Domable payload)
+  -> Domable payload
 svg_ = svg empty
 
 svg__
-  :: forall lock payload
+  :: forall payload
    . String
-  -> Domable lock payload
+  -> Domable payload
 svg__ t = svg_ [ DC.text_ t ]

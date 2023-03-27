@@ -15,7 +15,7 @@ import Type.Proxy (Proxy(..))
 import Unsafe.Coerce (unsafeCoerce)
 import Web.HTML.HTMLCanvasElement as HTMLCanvasElement
 
-mySVG :: forall lock payload. Domable lock payload
+mySVG :: forall payload. Domable payload
 mySVG = D.div_
   [ D.svg (oneOf [ D.Height !:= "100", D.Width !:= "100" ])
       [ D.circle
@@ -32,7 +32,7 @@ mySVG = D.div_
       ]
   ]
 
-myCanvas :: forall lock payload. Domable lock payload
+myCanvas :: forall payload. Domable payload
 myCanvas = D.canvas
   ( oneOf
       [ D.Width !:= "400px"
@@ -49,10 +49,10 @@ myCanvas = D.canvas
   )
   []
 
-scene :: forall lock payload. Domable lock payload
+scene :: forall payload. Domable payload
 scene = (Proxy :: _ "<div><h1>hi</h1>~svg~ ~canvas~</div>") ~~
-  { svg: mySVG :: Domable lock payload
-  , canvas: myCanvas :: Domable lock payload
+  { svg: mySVG :: Domable payload
+  , canvas: myCanvas :: Domable payload
   }
 
 foreign import setBodyAs :: String -> Effect Unit

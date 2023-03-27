@@ -12,27 +12,27 @@ import Safe.Coerce (coerce)
 data Pattern_
 
 pattern
-  :: forall lock payload
+  :: forall payload
    . Event (Attribute Pattern_)
-  -> Array (Domable lock payload)
-  -> Domable lock payload
+  -> Array (Domable payload)
+  -> Domable payload
 pattern attributes kids = Domable
   ( Element'
       ( DC.elementify "pattern" attributes
-          ( (coerce :: Domable' lock payload -> Domable lock payload)
+          ( (coerce :: Domable' payload -> Domable payload)
               (fixed (coerce (mapWithIndex unsafeSetPos kids)))
           )
       )
   )
 
 pattern_
-  :: forall lock payload
-   . Array (Domable lock payload)
-  -> Domable lock payload
+  :: forall payload
+   . Array (Domable payload)
+  -> Domable payload
 pattern_ = pattern empty
 
 pattern__
-  :: forall lock payload
+  :: forall payload
    . String
-  -> Domable lock payload
+  -> Domable payload
 pattern__ t = pattern_ [ DC.text_ t ]

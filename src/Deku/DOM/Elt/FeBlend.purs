@@ -12,27 +12,27 @@ import Safe.Coerce (coerce)
 data FeBlend_
 
 feBlend
-  :: forall lock payload
+  :: forall payload
    . Event (Attribute FeBlend_)
-  -> Array (Domable lock payload)
-  -> Domable lock payload
+  -> Array (Domable payload)
+  -> Domable payload
 feBlend attributes kids = Domable
   ( Element'
       ( DC.elementify "feBlend" attributes
-          ( (coerce :: Domable' lock payload -> Domable lock payload)
+          ( (coerce :: Domable' payload -> Domable payload)
               (fixed (coerce (mapWithIndex unsafeSetPos kids)))
           )
       )
   )
 
 feBlend_
-  :: forall lock payload
-   . Array (Domable lock payload)
-  -> Domable lock payload
+  :: forall payload
+   . Array (Domable payload)
+  -> Domable payload
 feBlend_ = feBlend empty
 
 feBlend__
-  :: forall lock payload
+  :: forall payload
    . String
-  -> Domable lock payload
+  -> Domable payload
 feBlend__ t = feBlend_ [ DC.text_ t ]

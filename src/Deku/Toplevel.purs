@@ -20,7 +20,7 @@ import Data.Maybe (Maybe(..), maybe)
 import Data.Newtype (unwrap)
 import Deku.Control (deku)
 import Deku.Core (DOMInterpret(..), Domable(..), Node(..), Domable')
-import Deku.Interpret (FFIDOMSnapshot, Instruction, fullDOMInterpret, getAllComments, hydratingDOMInterpret, makeFFIDOMSnapshot, setHydrating, ssrDOMInterpret, unSetHydrating)
+import Deku.Interpret (FunctionOfFFIDOMSnaphot(..), Instruction, fullDOMInterpret, getAllComments, hydratingDOMInterpret, makeFFIDOMSnapshot, setHydrating, ssrDOMInterpret, unSetHydrating)
 import Deku.SSR (ssr')
 import Effect (Effect)
 import FRP.Event (Event, subscribe, subscribePure)
@@ -37,17 +37,17 @@ import Web.HTML.Window (document)
 -- | be used to cancel the application.
 runInElement'
   :: Web.DOM.Element
-  -> (forall lock. Domable lock (FFIDOMSnapshot -> Effect Unit))
+  -> (Domable FunctionOfFFIDOMSnaphot)
   -> Effect (Effect Unit)
 runInElement' elt eee = do
   ffi <- makeFFIDOMSnapshot
   evt <- liftST (RRef.new 0) <#> (deku elt eee <<< fullDOMInterpret)
-  subscribe evt \i -> i ffi
+  subscribe evt \(FunctionOfFFIDOMSnaphot i) -> i ffi
 
 -- | Runs a deku application in the body of a document, returning a canceler that can
 -- | be used to cancel the application.
 runInBody'
-  :: (forall lock. Domable lock (FFIDOMSnapshot -> Effect Unit))
+  :: (Domable FunctionOfFFIDOMSnaphot)
   -> Effect (Effect Unit)
 runInBody' eee = do
   b' <- window >>= document >>= body
@@ -55,7 +55,7 @@ runInBody' eee = do
 
 -- | Runs a deku application in the body of a document
 runInBody
-  :: (forall lock. Domable lock (FFIDOMSnapshot -> Effect Unit))
+  :: (Domable FunctionOfFFIDOMSnaphot)
   -> Effect Unit
 runInBody a = void (runInBody' a)
 
@@ -66,13 +66,13 @@ foreign import dekuRoot :: Effect DOM.Element
 -- | Hydrates an application created using `runSSR`, returning a canceler that can
 -- | be used to end the application.
 hydrate'
-  :: (forall lock. Domable lock (FFIDOMSnapshot -> Effect Unit))
+  :: (Domable FunctionOfFFIDOMSnaphot)
   -> Effect (Effect Unit)
 hydrate' children = do
   ffi <- makeFFIDOMSnapshot
   getAllComments ffi
   di <- liftST (RRef.new 0) <#> hydratingDOMInterpret
-  setHydrating ffi
+  (coerce setHydrating :: _ -> _ Unit) ffi
   let me = "deku-root"
   root <- dekuRoot
   u <- subscribe
@@ -87,13 +87,13 @@ hydrate' children = do
         di
         (unsafeCoerce children)
     )
-    \i -> i ffi
-  unSetHydrating ffi
+    \(FunctionOfFFIDOMSnaphot i) -> i ffi
+  (coerce unSetHydrating :: _ -> _ Unit) ffi
   pure u
 
 -- | Hydrates an application created using `runSSR`.
 hydrate
-  :: (forall lock. Domable lock (FFIDOMSnapshot -> Effect Unit))
+  :: (Domable FunctionOfFFIDOMSnaphot)
   -> Effect Unit
 hydrate a = void (hydrate' a)
 
@@ -101,8 +101,8 @@ hydrate a = void (hydrate' a)
 
 -- | Creates a static site from a deku application. The top-level element for this site is `body`.
 runSSR
-  :: forall lock r
-   . Domable lock
+  :: forall r
+   . Domable
        (RRef.STRef r (Array Instruction) -> ST r Unit)
   -> ST r String
 
@@ -112,26 +112,26 @@ runSSR = runSSR' "body"
 -- | passed to this function as a first argument.
 runSSR'
   :: String
-  -> ( forall lock r
-        . Domable lock
+  -> ( forall r
+        . Domable
             (RRef.STRef r (Array Instruction) -> ST r Unit)
        -> ST r String
      )
 runSSR' topTag = go
   where
   go
-    :: forall lock r
-     . Domable lock
+    :: forall r
+     . Domable
          (RRef.STRef r (Array Instruction) -> ST r Unit)
     -> ST r String
   go children' = do
     let
       children =
         ( unsafeCoerce
-            :: ( Domable lock
+            :: ( Domable
                    (RRef.STRef r (Array Instruction) -> ST r Unit)
                )
-            -> ( Domable lock
+            -> ( Domable
                    (RRef.STRef Global (Array Instruction) -> ST Global Unit)
                )
         ) children'
@@ -163,10 +163,10 @@ runSSR' topTag = go
       )
 
 __internalDekuFlatten
-  :: forall lock payload
+  :: forall payload
    . PSR (pos :: Maybe Int, dynFamily :: Maybe String, ez :: Boolean)
   -> DOMInterpret payload
-  -> Domable lock payload
+  -> Domable payload
   -> Event payload
 __internalDekuFlatten a b c = Bolson.flatten
   { doLogic: \pos (DOMInterpret { sendToPos }) id -> sendToPos { id, pos }
@@ -178,4 +178,4 @@ __internalDekuFlatten a b c = Bolson.flatten
   }
   a
   b
-  ((coerce :: Domable lock payload -> Domable' lock payload) c)
+  ((coerce :: Domable payload -> Domable' payload) c)

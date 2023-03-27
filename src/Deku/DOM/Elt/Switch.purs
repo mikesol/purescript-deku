@@ -12,27 +12,27 @@ import Safe.Coerce (coerce)
 data Switch_
 
 switch
-  :: forall lock payload
+  :: forall payload
    . Event (Attribute Switch_)
-  -> Array (Domable lock payload)
-  -> Domable lock payload
+  -> Array (Domable payload)
+  -> Domable payload
 switch attributes kids = Domable
   ( Element'
       ( DC.elementify "switch" attributes
-          ( (coerce :: Domable' lock payload -> Domable lock payload)
+          ( (coerce :: Domable' payload -> Domable payload)
               (fixed (coerce (mapWithIndex unsafeSetPos kids)))
           )
       )
   )
 
 switch_
-  :: forall lock payload
-   . Array (Domable lock payload)
-  -> Domable lock payload
+  :: forall payload
+   . Array (Domable payload)
+  -> Domable payload
 switch_ = switch empty
 
 switch__
-  :: forall lock payload
+  :: forall payload
    . String
-  -> Domable lock payload
+  -> Domable payload
 switch__ t = switch_ [ DC.text_ t ]

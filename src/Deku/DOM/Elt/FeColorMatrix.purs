@@ -12,27 +12,27 @@ import Safe.Coerce (coerce)
 data FeColorMatrix_
 
 feColorMatrix
-  :: forall lock payload
+  :: forall payload
    . Event (Attribute FeColorMatrix_)
-  -> Array (Domable lock payload)
-  -> Domable lock payload
+  -> Array (Domable payload)
+  -> Domable payload
 feColorMatrix attributes kids = Domable
   ( Element'
       ( DC.elementify "feColorMatrix" attributes
-          ( (coerce :: Domable' lock payload -> Domable lock payload)
+          ( (coerce :: Domable' payload -> Domable payload)
               (fixed (coerce (mapWithIndex unsafeSetPos kids)))
           )
       )
   )
 
 feColorMatrix_
-  :: forall lock payload
-   . Array (Domable lock payload)
-  -> Domable lock payload
+  :: forall payload
+   . Array (Domable payload)
+  -> Domable payload
 feColorMatrix_ = feColorMatrix empty
 
 feColorMatrix__
-  :: forall lock payload
+  :: forall payload
    . String
-  -> Domable lock payload
+  -> Domable payload
 feColorMatrix__ t = feColorMatrix_ [ DC.text_ t ]

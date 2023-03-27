@@ -12,27 +12,27 @@ import Safe.Coerce (coerce)
 data Mask_
 
 mask
-  :: forall lock payload
+  :: forall payload
    . Event (Attribute Mask_)
-  -> Array (Domable lock payload)
-  -> Domable lock payload
+  -> Array (Domable payload)
+  -> Domable payload
 mask attributes kids = Domable
   ( Element'
       ( DC.elementify "mask" attributes
-          ( (coerce :: Domable' lock payload -> Domable lock payload)
+          ( (coerce :: Domable' payload -> Domable payload)
               (fixed (coerce (mapWithIndex unsafeSetPos kids)))
           )
       )
   )
 
 mask_
-  :: forall lock payload
-   . Array (Domable lock payload)
-  -> Domable lock payload
+  :: forall payload
+   . Array (Domable payload)
+  -> Domable payload
 mask_ = mask empty
 
 mask__
-  :: forall lock payload
+  :: forall payload
    . String
-  -> Domable lock payload
+  -> Domable payload
 mask__ t = mask_ [ DC.text_ t ]

@@ -12,27 +12,27 @@ import Safe.Coerce (coerce)
 data Set_
 
 set
-  :: forall lock payload
+  :: forall payload
    . Event (Attribute Set_)
-  -> Array (Domable lock payload)
-  -> Domable lock payload
+  -> Array (Domable payload)
+  -> Domable payload
 set attributes kids = Domable
   ( Element'
       ( DC.elementify "set" attributes
-          ( (coerce :: Domable' lock payload -> Domable lock payload)
+          ( (coerce :: Domable' payload -> Domable payload)
               (fixed (coerce (mapWithIndex unsafeSetPos kids)))
           )
       )
   )
 
 set_
-  :: forall lock payload
-   . Array (Domable lock payload)
-  -> Domable lock payload
+  :: forall payload
+   . Array (Domable payload)
+  -> Domable payload
 set_ = set empty
 
 set__
-  :: forall lock payload
+  :: forall payload
    . String
-  -> Domable lock payload
+  -> Domable payload
 set__ t = set_ [ DC.text_ t ]

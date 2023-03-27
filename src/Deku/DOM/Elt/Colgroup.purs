@@ -12,27 +12,27 @@ import Safe.Coerce (coerce)
 data Colgroup_
 
 colgroup
-  :: forall lock payload
+  :: forall payload
    . Event (Attribute Colgroup_)
-  -> Array (Domable lock payload)
-  -> Domable lock payload
+  -> Array (Domable payload)
+  -> Domable payload
 colgroup attributes kids = Domable
   ( Element'
       ( DC.elementify "colgroup" attributes
-          ( (coerce :: Domable' lock payload -> Domable lock payload)
+          ( (coerce :: Domable' payload -> Domable payload)
               (fixed (coerce (mapWithIndex unsafeSetPos kids)))
           )
       )
   )
 
 colgroup_
-  :: forall lock payload
-   . Array (Domable lock payload)
-  -> Domable lock payload
+  :: forall payload
+   . Array (Domable payload)
+  -> Domable payload
 colgroup_ = colgroup empty
 
 colgroup__
-  :: forall lock payload
+  :: forall payload
    . String
-  -> Domable lock payload
+  -> Domable payload
 colgroup__ t = colgroup_ [ DC.text_ t ]

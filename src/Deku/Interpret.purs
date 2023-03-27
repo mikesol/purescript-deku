@@ -12,6 +12,7 @@ module Deku.Interpret
   , Instruction(..)
   , EliminatableInstruction(..)
   , RenderableInstruction(..)
+  , FunctionOfFFIDOMSnaphot(..)
   , setHydrating
   , unSetHydrating
   , getAllComments
@@ -27,11 +28,14 @@ import Control.Monad.ST.Internal as Ref
 import Data.Maybe (Maybe(..), maybe)
 import Deku.Core as Core
 import Effect (Effect)
+import Safe.Coerce (coerce)
 import Test.QuickCheck (arbitrary, mkSeed)
 import Test.QuickCheck.Gen (Gen, evalGen)
 
 -- foreign
 data FFIDOMSnapshot
+
+newtype FunctionOfFFIDOMSnaphot = FunctionOfFFIDOMSnaphot (FFIDOMSnapshot -> Effect Unit)
 
 foreign import makeFFIDOMSnapshot :: Effect FFIDOMSnapshot
 
@@ -47,77 +51,67 @@ foreign import makeElement_
   :: RunOnJust
   -> Boolean
   -> Core.MakeElement
-  -> FFIDOMSnapshot
-  -> Effect Unit
-
+  -> FunctionOfFFIDOMSnaphot
 foreign import makeDynBeacon_
   :: RunOnJust
   -> Boolean
   -> Core.MakeDynBeacon
-  -> FFIDOMSnapshot
-  -> Effect Unit
+  -> FunctionOfFFIDOMSnaphot
 
 foreign import removeDynBeacon_
   :: Core.RemoveDynBeacon
-  -> FFIDOMSnapshot
-  -> Effect Unit
+  -> FunctionOfFFIDOMSnaphot
 
 foreign import attributeParent_
   :: RunOnJust
   -> Core.AttributeParent
-  -> FFIDOMSnapshot
-  -> Effect Unit
+  -> FunctionOfFFIDOMSnaphot
 
 foreign import makeRoot_
   :: Core.MakeRoot
-  -> FFIDOMSnapshot
-  -> Effect Unit
+  -> FunctionOfFFIDOMSnaphot
 
 foreign import makeText_
   :: RunOnJust
   -> Boolean
   -> (forall a. (a -> Unit) -> Maybe a -> Unit)
   -> Core.MakeText
-  -> FFIDOMSnapshot
-  -> Effect Unit
+  -> FunctionOfFFIDOMSnaphot
 
 foreign import setText_
   :: Core.SetText
-  -> FFIDOMSnapshot
-  -> Effect Unit
+  -> FunctionOfFFIDOMSnaphot
 
 foreign import setProp_
-  :: Boolean -> Core.SetProp -> FFIDOMSnapshot -> Effect Unit
+  :: Boolean -> Core.SetProp -> FunctionOfFFIDOMSnaphot
 
 foreign import unsetAttribute_
-  :: Boolean -> Core.UnsetAttribute -> FFIDOMSnapshot -> Effect Unit
+  :: Boolean -> Core.UnsetAttribute -> FunctionOfFFIDOMSnaphot
 
 foreign import setCb_
-  :: Boolean -> Core.SetCb -> FFIDOMSnapshot -> Effect Unit
+  :: Boolean -> Core.SetCb -> FunctionOfFFIDOMSnaphot
 
 foreign import makePursx_
   :: RunOnJust
   -> Boolean
   -> (forall a. (a -> Unit) -> Maybe a -> Unit)
   -> Core.MakePursx
-  -> FFIDOMSnapshot
-  -> Effect Unit
+  -> FunctionOfFFIDOMSnaphot
 
 foreign import deleteFromCache_
-  :: Core.DeleteFromCache -> FFIDOMSnapshot -> Effect Unit
+  :: Core.DeleteFromCache -> FunctionOfFFIDOMSnaphot
 
 foreign import giveNewParent_
   :: (Int -> Maybe Int)
   -> RunOnJust
-  -> Core.GiveNewParent
-  -> FFIDOMSnapshot
-  -> Effect Unit
+  -> Core.GiveNewParent FunctionOfFFIDOMSnaphot
+  -> FunctionOfFFIDOMSnaphot
 
 foreign import disconnectElement_
-  :: Core.DisconnectElement -> FFIDOMSnapshot -> Effect Unit
+  :: Core.DisconnectElement -> FunctionOfFFIDOMSnaphot
 
-foreign import setHydrating :: FFIDOMSnapshot -> Effect Unit
-foreign import unSetHydrating :: FFIDOMSnapshot -> Effect Unit
+foreign import setHydrating :: FunctionOfFFIDOMSnaphot
+foreign import unSetHydrating :: FunctionOfFFIDOMSnaphot
 
 foreign import getPos :: String -> FFIDOMSnapshot -> Effect (Maybe Int)
 foreign import getDynFamily :: String -> FFIDOMSnapshot -> Effect (Maybe String)
@@ -126,7 +120,7 @@ foreign import getScope :: String -> FFIDOMSnapshot -> Effect Scope
 
 fullDOMInterpret
   :: Ref.STRef Region.Global Int
-  -> Core.DOMInterpret (FFIDOMSnapshot -> Effect Unit)
+  -> Core.DOMInterpret FunctionOfFFIDOMSnaphot
 fullDOMInterpret seed = Core.DOMInterpret
   { ids: do
       s <- Ref.read seed
@@ -165,7 +159,10 @@ data RenderableInstruction
 data EliminatableInstruction
   = SendToPos Core.SendToPos
   | MakeRoot Core.MakeRoot
-  | GiveNewParent Core.GiveNewParent
+  | GiveNewParent
+      ( Core.GiveNewParent
+          (Ref.STRef Global (Array Instruction) -> ST Global Unit)
+      )
   | DisconnectElement Core.DisconnectElement
   | RemoveDynBeacon Core.RemoveDynBeacon
   | DeleteFromCache Core.DeleteFromCache
@@ -226,7 +223,9 @@ ssrSetText a i = void $ Ref.modify (_ <> [ RenderableInstruction $ SetText a ])
 
 ssrGiveNewParent
   :: forall r
-   . Core.GiveNewParent
+   . ( Core.GiveNewParent
+         (Ref.STRef Global (Array Instruction) -> ST Global Unit)
+     )
   -> Ref.STRef r (Array Instruction)
   -> ST r Unit
 ssrGiveNewParent a i = void $ Ref.modify
@@ -300,17 +299,27 @@ ssrDOMInterpret seed = Core.DOMInterpret
   , disconnectElement: ssrDisconnectElement
   }
 
-sendToPos :: Core.SendToPos -> FFIDOMSnapshot -> Effect Unit
-sendToPos a state = do
+sendToPos :: Core.SendToPos -> FunctionOfFFIDOMSnaphot
+sendToPos a = FunctionOfFFIDOMSnaphot \state -> do
   scope <- getScope a.id state
   parent <- getParent a.id state
   dynFamily <- getDynFamily a.id state
-  let newA = { scope, parent, dynFamily, id: a.id, pos: Just a.pos, ez: false }
-  giveNewParent_ Just runOnJust newA state
+  let
+    newA =
+      { scope
+      , parent
+      , dynFamily
+      , id: a.id
+      , pos: Just a.pos
+      , ez: false
+      -- change me!
+      , ctor: mempty
+      }
+  coerce (giveNewParent_ Just runOnJust newA) state
 
 hydratingDOMInterpret
   :: Ref.STRef Region.Global Int
-  -> Core.DOMInterpret (FFIDOMSnapshot -> Effect Unit)
+  -> Core.DOMInterpret FunctionOfFFIDOMSnaphot
 hydratingDOMInterpret seed = Core.DOMInterpret
   { ids: do
       s <- Ref.read seed

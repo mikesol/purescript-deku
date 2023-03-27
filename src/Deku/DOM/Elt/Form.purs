@@ -12,27 +12,27 @@ import Safe.Coerce (coerce)
 data Form_
 
 form
-  :: forall lock payload
+  :: forall payload
    . Event (Attribute Form_)
-  -> Array (Domable lock payload)
-  -> Domable lock payload
+  -> Array (Domable payload)
+  -> Domable payload
 form attributes kids = Domable
   ( Element'
       ( DC.elementify "form" attributes
-          ( (coerce :: Domable' lock payload -> Domable lock payload)
+          ( (coerce :: Domable' payload -> Domable payload)
               (fixed (coerce (mapWithIndex unsafeSetPos kids)))
           )
       )
   )
 
 form_
-  :: forall lock payload
-   . Array (Domable lock payload)
-  -> Domable lock payload
+  :: forall payload
+   . Array (Domable payload)
+  -> Domable payload
 form_ = form empty
 
 form__
-  :: forall lock payload
+  :: forall payload
    . String
-  -> Domable lock payload
+  -> Domable payload
 form__ t = form_ [ DC.text_ t ]

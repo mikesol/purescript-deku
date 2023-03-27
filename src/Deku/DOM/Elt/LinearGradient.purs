@@ -12,27 +12,27 @@ import Safe.Coerce (coerce)
 data LinearGradient_
 
 linearGradient
-  :: forall lock payload
+  :: forall payload
    . Event (Attribute LinearGradient_)
-  -> Array (Domable lock payload)
-  -> Domable lock payload
+  -> Array (Domable payload)
+  -> Domable payload
 linearGradient attributes kids = Domable
   ( Element'
       ( DC.elementify "linearGradient" attributes
-          ( (coerce :: Domable' lock payload -> Domable lock payload)
+          ( (coerce :: Domable' payload -> Domable payload)
               (fixed (coerce (mapWithIndex unsafeSetPos kids)))
           )
       )
   )
 
 linearGradient_
-  :: forall lock payload
-   . Array (Domable lock payload)
-  -> Domable lock payload
+  :: forall payload
+   . Array (Domable payload)
+  -> Domable payload
 linearGradient_ = linearGradient empty
 
 linearGradient__
-  :: forall lock payload
+  :: forall payload
    . String
-  -> Domable lock payload
+  -> Domable payload
 linearGradient__ t = linearGradient_ [ DC.text_ t ]

@@ -61,9 +61,9 @@ container =
       pure unit
 
 containerD
-  :: forall lock payload
+  :: forall payload
    . Shared.ContainerState
-  -> Domable lock payload
+  -> Domable payload
 containerD initialState = Deku.do
   setCompleteStatus /\ completeStatus <- useMailboxed
   setRename /\ rename <- useMailboxed
@@ -183,13 +183,13 @@ containerD initialState = Deku.do
     ]
 
 todoD
-  :: forall lock payload
+  :: forall payload
    . { id :: Int, description :: String }
   -> Event Boolean
   -> Event String
   -> (String -> Effect Unit)
   -> (Boolean -> Effect Unit)
-  -> Domable lock payload
+  -> Domable payload
 todoD { id, description } completeStatus newName doEditName doChecked = Deku.do
   setName /\ name' <- bussedUncurried
   let name = name' <|> pure description
@@ -209,11 +209,11 @@ todoD { id, description } completeStatus newName doEditName doChecked = Deku.do
     ]
 
 checkboxD
-  :: forall lock payload
+  :: forall payload
    . { id :: Int }
   -> Event Boolean
   -> (Boolean -> Effect Unit)
-  -> Domable lock payload
+  -> Domable payload
 checkboxD { id } completeStatus doChecked = Deku.do
   localSetChecked /\ localChecked <- bussedUncurried
   let checked = pure true <|> completeStatus

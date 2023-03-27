@@ -1884,16 +1884,16 @@ instance tagToDekuDefs_ :: TagToDeku "defs" Defs_
 -- | Unsafely create a custom element. This is useful when using Stencil-based
 -- | frameworks like Ionic in Deku.
 unsafeCustomElement
-  :: forall element lock payload
+  :: forall element payload
    . String
   -> Proxy element
   -> Event (Attribute element)
-  -> Array (Domable lock payload)
-  -> Domable lock payload
+  -> Array (Domable payload)
+  -> Domable payload
 unsafeCustomElement name _ attributes kids = Domable
   ( Element'
       ( elementify name attributes
-          ( (coerce :: Domable' lock payload -> Domable lock payload)
+          ( (coerce :: Domable' payload -> Domable payload)
               (Bolson.fixed (coerce (mapWithIndex unsafeSetPos kids)))
           )
       )

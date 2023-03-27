@@ -12,27 +12,27 @@ import Safe.Coerce (coerce)
 data Frameset_
 
 frameset
-  :: forall lock payload
+  :: forall payload
    . Event (Attribute Frameset_)
-  -> Array (Domable lock payload)
-  -> Domable lock payload
+  -> Array (Domable payload)
+  -> Domable payload
 frameset attributes kids = Domable
   ( Element'
       ( DC.elementify "frameset" attributes
-          ( (coerce :: Domable' lock payload -> Domable lock payload)
+          ( (coerce :: Domable' payload -> Domable payload)
               (fixed (coerce (mapWithIndex unsafeSetPos kids)))
           )
       )
   )
 
 frameset_
-  :: forall lock payload
-   . Array (Domable lock payload)
-  -> Domable lock payload
+  :: forall payload
+   . Array (Domable payload)
+  -> Domable payload
 frameset_ = frameset empty
 
 frameset__
-  :: forall lock payload
+  :: forall payload
    . String
-  -> Domable lock payload
+  -> Domable payload
 frameset__ t = frameset_ [ DC.text_ t ]

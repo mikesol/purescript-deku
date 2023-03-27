@@ -12,27 +12,27 @@ import Safe.Coerce (coerce)
 data Select_
 
 select
-  :: forall lock payload
+  :: forall payload
    . Event (Attribute Select_)
-  -> Array (Domable lock payload)
-  -> Domable lock payload
+  -> Array (Domable payload)
+  -> Domable payload
 select attributes kids = Domable
   ( Element'
       ( DC.elementify "select" attributes
-          ( (coerce :: Domable' lock payload -> Domable lock payload)
+          ( (coerce :: Domable' payload -> Domable payload)
               (fixed (coerce (mapWithIndex unsafeSetPos kids)))
           )
       )
   )
 
 select_
-  :: forall lock payload
-   . Array (Domable lock payload)
-  -> Domable lock payload
+  :: forall payload
+   . Array (Domable payload)
+  -> Domable payload
 select_ = select empty
 
 select__
-  :: forall lock payload
+  :: forall payload
    . String
-  -> Domable lock payload
+  -> Domable payload
 select__ t = select_ [ DC.text_ t ]

@@ -12,27 +12,27 @@ import Safe.Coerce (coerce)
 data Cite_
 
 cite
-  :: forall lock payload
+  :: forall payload
    . Event (Attribute Cite_)
-  -> Array (Domable lock payload)
-  -> Domable lock payload
+  -> Array (Domable payload)
+  -> Domable payload
 cite attributes kids = Domable
   ( Element'
       ( DC.elementify "cite" attributes
-          ( (coerce :: Domable' lock payload -> Domable lock payload)
+          ( (coerce :: Domable' payload -> Domable payload)
               (fixed (coerce (mapWithIndex unsafeSetPos kids)))
           )
       )
   )
 
 cite_
-  :: forall lock payload
-   . Array (Domable lock payload)
-  -> Domable lock payload
+  :: forall payload
+   . Array (Domable payload)
+  -> Domable payload
 cite_ = cite empty
 
 cite__
-  :: forall lock payload
+  :: forall payload
    . String
-  -> Domable lock payload
+  -> Domable payload
 cite__ t = cite_ [ DC.text_ t ]

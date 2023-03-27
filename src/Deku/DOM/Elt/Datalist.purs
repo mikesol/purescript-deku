@@ -12,27 +12,27 @@ import Safe.Coerce (coerce)
 data Datalist_
 
 datalist
-  :: forall lock payload
+  :: forall payload
    . Event (Attribute Datalist_)
-  -> Array (Domable lock payload)
-  -> Domable lock payload
+  -> Array (Domable payload)
+  -> Domable payload
 datalist attributes kids = Domable
   ( Element'
       ( DC.elementify "datalist" attributes
-          ( (coerce :: Domable' lock payload -> Domable lock payload)
+          ( (coerce :: Domable' payload -> Domable payload)
               (fixed (coerce (mapWithIndex unsafeSetPos kids)))
           )
       )
   )
 
 datalist_
-  :: forall lock payload
-   . Array (Domable lock payload)
-  -> Domable lock payload
+  :: forall payload
+   . Array (Domable payload)
+  -> Domable payload
 datalist_ = datalist empty
 
 datalist__
-  :: forall lock payload
+  :: forall payload
    . String
-  -> Domable lock payload
+  -> Domable payload
 datalist__ t = datalist_ [ DC.text_ t ]

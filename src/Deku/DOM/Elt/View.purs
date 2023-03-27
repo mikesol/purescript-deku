@@ -12,27 +12,27 @@ import Safe.Coerce (coerce)
 data View_
 
 view
-  :: forall lock payload
+  :: forall payload
    . Event (Attribute View_)
-  -> Array (Domable lock payload)
-  -> Domable lock payload
+  -> Array (Domable payload)
+  -> Domable payload
 view attributes kids = Domable
   ( Element'
       ( DC.elementify "view" attributes
-          ( (coerce :: Domable' lock payload -> Domable lock payload)
+          ( (coerce :: Domable' payload -> Domable payload)
               (fixed (coerce (mapWithIndex unsafeSetPos kids)))
           )
       )
   )
 
 view_
-  :: forall lock payload
-   . Array (Domable lock payload)
-  -> Domable lock payload
+  :: forall payload
+   . Array (Domable payload)
+  -> Domable payload
 view_ = view empty
 
 view__
-  :: forall lock payload
+  :: forall payload
    . String
-  -> Domable lock payload
+  -> Domable payload
 view__ t = view_ [ DC.text_ t ]
