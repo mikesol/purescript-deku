@@ -36,8 +36,6 @@ module Deku.Core
   , remove
   , sendToPos
   , sendToTop
-  , vbussed
-  , vbussedUncurried
   , dyn
   , fixed
   , envy
@@ -53,6 +51,7 @@ import Control.Monad.ST (ST)
 import Control.Monad.ST.Global (Global)
 import Control.Monad.ST.Uncurried (mkSTFn2, runSTFn1, runSTFn2)
 import Control.Plus (empty)
+import Data.Exists (Exists)
 import Data.Maybe (Maybe(..))
 import Data.Newtype (class Newtype, unwrap)
 import Data.Profunctor (lcmap)
@@ -72,15 +71,15 @@ import Web.DOM as Web.DOM
 -- | The signature of a Deku application. This works when `payload` variables
 -- | don't need to be used explicitly. When using these variables explicitly, opt for using
 -- | `Domable` directly.
-type Nut = forall payload. Domable payload
+type Nut = Domable
 
 -- | The signature of a custom Deku hook. This works when `payload` variables
 -- | don't need to be used explicitly. When using these variables explicitly, opt for using
 -- | `Domable` directly (meaning write out the definition by hand).
-type Hook a = forall payload. (a -> Domable payload) -> Domable payload
+type Hook a = (a -> Domable) -> Domable
 
 -- | A helper for using `Nut` with an environment.
-type NutWith env = forall payload. env -> Domable payload
+type NutWith env = env -> Domable
 
 -- | A helper for when you need to use `Nut` as a fully saturated type.
 -- | This is the same as using [`Exists`](https://github.com/purescript/purescript-exists)
@@ -104,8 +103,8 @@ busUncurried = curry >>> bus
 -- | For internal use only in deku's hooks. See `Deku.Hooks` for more information.
 bussed
   :: forall payload a
-   . ((a -> Effect Unit) -> Event a -> Domable payload)
-  -> Domable payload
+   . ((a -> Effect Unit) -> Event a -> Domable)
+  -> Domable
 bussed f = Domable $ Bolson.EventfulElement'
   (Bolson.EventfulElement (coerce $ bus f))
 
@@ -113,33 +112,11 @@ bussed f = Domable $ Bolson.EventfulElement'
 bussedUncurried
   :: forall payload a
    . ( ((a -> Effect Unit) /\ Event a)
-       -> Domable payload
+       -> Domable
      )
-  -> Domable payload
+  -> Domable
 bussedUncurried = curry >>> bussed
 
---
-
--- | For internal use only in deku's hooks. See `Deku.Hooks` for more information.
-vbussed
-  :: forall payload rbus bus push event
-   . RowToList bus rbus
-  => VBus rbus push event
-  => Proxy (V bus)
-  -> ({ | push } -> { | event } -> Domable payload)
-  -> Domable payload
-vbussed px f = Domable $ Bolson.EventfulElement'
-  (Bolson.EventfulElement (coerce (vbus px f)))
-
--- | For internal use only in deku's hooks. See `Deku.Hooks` for more information.
-vbussedUncurried
-  :: forall payload rbus bus push event
-   . RowToList bus rbus
-  => VBus rbus push event
-  => Proxy (V bus)
-  -> (({ | push } /\ { | event }) -> Domable payload)
-  -> Domable payload
-vbussedUncurried px = curry >>> vbussed px
 
 -- | For internal use in the `Domable` type signature. `Domable` uses `Bolson` under the
 -- | hood, and this is used with `Bolson`'s `Entity` type.
@@ -154,27 +131,28 @@ type Domable' payload = Bolson.Entity Int (Node payload)
 
 -- | _The_ type that represents a Deku application. To be used when `Nut` doesn't cut it
 -- | (for example, when different locks need to be used because of the use of portals).
-newtype Domable payload = Domable (Domable' payload)
+newtype DomableF payload = DomableF (Domable' payload)
+derive instance Newtype (DomableF payload) _
+newtype Domable = Domable (forall payload. DomableF payload)
 
-derive instance Newtype (Domable payload) _
 
-instance Semigroup (Domable payload) where
+instance Semigroup Domable where
   append a b = fixed [ a, b ]
 
-instance Monoid (Domable payload) where
-  mempty = Domable (Bolson.envy empty)
+instance Monoid Domable where
+  mempty = Domable (DomableF (Bolson.envy empty))
 
 -- | For internal use only in deku's hooks. See `useDyn` in `Deku.Hooks` for more information.
 unsafeSetPos
-  :: forall payload. Int -> Domable payload -> Domable payload
+  :: Int -> Domable -> Domable
 unsafeSetPos = Just >>> unsafeSetPos'
 
 unsafeSetPos'
   :: forall payload
    . Maybe Int
-  -> Domable payload
-  -> Domable payload
-unsafeSetPos' i (Domable e) = Domable (f e)
+  -> Domable
+  -> Domable
+unsafeSetPos' i (Domable (DomableF e)) = Domable (DomableF (f e))
   where
   f = case _ of
     Bolson.Element' (Node e') -> Bolson.Element'
@@ -187,13 +165,13 @@ unsafeSetPos' i (Domable e) = Domable (f e)
 insert
   :: forall payload
    . Int
-  -> Domable payload
+  -> Domable
   -> Bolson.Child Int (Node payload)
 insert i e = Bolson.Insert (unwrap $ unsafeSetPos i e)
 
 insert_
   :: forall payload
-   . Domable payload
+   . Domable
   -> Bolson.Child Int (Node payload)
 insert_ d = Bolson.Insert (unwrap $ unsafeSetPos' Nothing d)
 
@@ -202,11 +180,11 @@ remove :: forall logic payload. Bolson.Child logic payload
 remove = Bolson.Remove
 
 -- | For internal use only in deku's hooks. See `useDyn` in `Deku.Hooks` for more information.
-sendToTop :: forall payload. Bolson.Child Int payload
+sendToTop :: Bolson.Child Int payload
 sendToTop = Bolson.Logic 0
 
 -- | For internal use only in deku's hooks. See `useDyn` in `Deku.Hooks` for more information.
-sendToPos :: forall payload. Int -> Bolson.Child Int payload
+sendToPos :: Int -> Bolson.Child Int payload
 sendToPos = Bolson.Logic
 
 -- | Type used by Deku backends to create an element. For internal use only unless you're writing a custom backend.
@@ -236,7 +214,7 @@ type GiveNewParent payload =
   , scope :: Scope
   , pos :: Maybe Int
   , dynFamily :: Maybe String
-  , ctor :: Domable payload
+  , ctor :: Domable
   }
 
 -- | Type used by Deku backends to disconnect an element from the DOM. For internal use only unless you're writing a custom backend.
@@ -379,15 +357,15 @@ __internalDekuFlatten
   :: forall payload
    . Bolson.PSR (pos :: Maybe Int, ez :: Boolean, dynFamily :: Maybe String)
   -> DOMInterpret payload
-  -> Domable payload
+  -> Domable
   -> Event payload
 __internalDekuFlatten a b (Domable c) = BControl.flatten portalFlatten a b c
 
 dynify
   :: forall i payload
-   . (i -> Domable payload)
+   . (i -> Domable)
   -> i
-  -> Domable payload
+  -> Domable
 dynify f es = Domable $ Bolson.Element' (Node go)
   where
   go
@@ -453,7 +431,7 @@ dynify f es = Domable $ Bolson.Element' (Node go)
 dyn
   :: forall payload
    . Event (Event (Bolson.Child Int (Node payload)))
-  -> Domable payload
+  -> Domable
 dyn = dynify
   ( coerce
       ( Bolson.dyn
@@ -466,8 +444,8 @@ dyn = dynify
 -- | together. Now, as `Domable` is a `Monoid`, you can use `fold` instead.
 fixed
   :: forall payload
-   . Array (Domable payload)
-  -> Domable payload
+   . Array Domable
+  -> Domable
 fixed = dynify
   ( coerce
       (Bolson.fixed :: Array (Domable' payload) -> Domable' payload)
@@ -480,8 +458,8 @@ fixed = dynify
 -- | a revisionist history of the library that denies it ever existed.
 envy
   :: forall payload
-   . Event (Domable payload)
-  -> Domable payload
+   . Event Domable
+  -> Domable
 envy = dynify
   ( coerce
       (Bolson.envy :: Event (Domable' payload) -> Domable' payload)
