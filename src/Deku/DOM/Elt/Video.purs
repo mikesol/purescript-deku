@@ -12,27 +12,24 @@ import Safe.Coerce (coerce)
 data Video_
 
 video
-  :: forall payload
-   . Event (Attribute Video_)
-  -> Array (Domable payload)
-  -> Domable payload
+  :: Event (Attribute Video_)
+  -> Array Domable
+  -> Domable
 video attributes kids = Domable
   ( Element'
       ( DC.elementify "video" attributes
-          ( (coerce :: Domable' payload -> Domable payload)
+          ( (coerce :: Domable' payload -> Domable)
               (fixed (coerce (mapWithIndex unsafeSetPos kids)))
           )
       )
   )
 
 video_
-  :: forall payload
-   . Array (Domable payload)
-  -> Domable payload
+  :: Array Domable
+  -> Domable
 video_ = video empty
 
 video__
-  :: forall payload
-   . String
-  -> Domable payload
+  :: String
+  -> Domable
 video__ t = video_ [ DC.text_ t ]

@@ -12,27 +12,24 @@ import Safe.Coerce (coerce)
 data Filter_
 
 filter
-  :: forall payload
-   . Event (Attribute Filter_)
-  -> Array (Domable payload)
-  -> Domable payload
+  :: Event (Attribute Filter_)
+  -> Array Domable
+  -> Domable
 filter attributes kids = Domable
   ( Element'
       ( DC.elementify "filter" attributes
-          ( (coerce :: Domable' payload -> Domable payload)
+          ( (coerce :: Domable' payload -> Domable)
               (fixed (coerce (mapWithIndex unsafeSetPos kids)))
           )
       )
   )
 
 filter_
-  :: forall payload
-   . Array (Domable payload)
-  -> Domable payload
+  :: Array Domable
+  -> Domable
 filter_ = filter empty
 
 filter__
-  :: forall payload
-   . String
-  -> Domable payload
+  :: String
+  -> Domable
 filter__ t = filter_ [ DC.text_ t ]

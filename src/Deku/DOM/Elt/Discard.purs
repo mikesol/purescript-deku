@@ -12,27 +12,24 @@ import Safe.Coerce (coerce)
 data Discard_
 
 discard
-  :: forall payload
-   . Event (Attribute Discard_)
-  -> Array (Domable payload)
-  -> Domable payload
+  :: Event (Attribute Discard_)
+  -> Array Domable
+  -> Domable
 discard attributes kids = Domable
   ( Element'
       ( DC.elementify "discard" attributes
-          ( (coerce :: Domable' payload -> Domable payload)
+          ( (coerce :: Domable' payload -> Domable)
               (fixed (coerce (mapWithIndex unsafeSetPos kids)))
           )
       )
   )
 
 discard_
-  :: forall payload
-   . Array (Domable payload)
-  -> Domable payload
+  :: Array Domable
+  -> Domable
 discard_ = discard empty
 
 discard__
-  :: forall payload
-   . String
-  -> Domable payload
+  :: String
+  -> Domable
 discard__ t = discard_ [ DC.text_ t ]

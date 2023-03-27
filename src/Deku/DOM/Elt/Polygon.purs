@@ -12,27 +12,24 @@ import Safe.Coerce (coerce)
 data Polygon_
 
 polygon
-  :: forall payload
-   . Event (Attribute Polygon_)
-  -> Array (Domable payload)
-  -> Domable payload
+  :: Event (Attribute Polygon_)
+  -> Array Domable
+  -> Domable
 polygon attributes kids = Domable
   ( Element'
       ( DC.elementify "polygon" attributes
-          ( (coerce :: Domable' payload -> Domable payload)
+          ( (coerce :: Domable' payload -> Domable)
               (fixed (coerce (mapWithIndex unsafeSetPos kids)))
           )
       )
   )
 
 polygon_
-  :: forall payload
-   . Array (Domable payload)
-  -> Domable payload
+  :: Array Domable
+  -> Domable
 polygon_ = polygon empty
 
 polygon__
-  :: forall payload
-   . String
-  -> Domable payload
+  :: String
+  -> Domable
 polygon__ t = polygon_ [ DC.text_ t ]

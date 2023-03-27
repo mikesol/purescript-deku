@@ -12,27 +12,24 @@ import Safe.Coerce (coerce)
 data Progress_
 
 progress
-  :: forall payload
-   . Event (Attribute Progress_)
-  -> Array (Domable payload)
-  -> Domable payload
+  :: Event (Attribute Progress_)
+  -> Array Domable
+  -> Domable
 progress attributes kids = Domable
   ( Element'
       ( DC.elementify "progress" attributes
-          ( (coerce :: Domable' payload -> Domable payload)
+          ( (coerce :: Domable' payload -> Domable)
               (fixed (coerce (mapWithIndex unsafeSetPos kids)))
           )
       )
   )
 
 progress_
-  :: forall payload
-   . Array (Domable payload)
-  -> Domable payload
+  :: Array Domable
+  -> Domable
 progress_ = progress empty
 
 progress__
-  :: forall payload
-   . String
-  -> Domable payload
+  :: String
+  -> Domable
 progress__ t = progress_ [ DC.text_ t ]

@@ -12,27 +12,24 @@ import Safe.Coerce (coerce)
 data Figcaption_
 
 figcaption
-  :: forall payload
-   . Event (Attribute Figcaption_)
-  -> Array (Domable payload)
-  -> Domable payload
+  :: Event (Attribute Figcaption_)
+  -> Array Domable
+  -> Domable
 figcaption attributes kids = Domable
   ( Element'
       ( DC.elementify "figcaption" attributes
-          ( (coerce :: Domable' payload -> Domable payload)
+          ( (coerce :: Domable' payload -> Domable)
               (fixed (coerce (mapWithIndex unsafeSetPos kids)))
           )
       )
   )
 
 figcaption_
-  :: forall payload
-   . Array (Domable payload)
-  -> Domable payload
+  :: Array Domable
+  -> Domable
 figcaption_ = figcaption empty
 
 figcaption__
-  :: forall payload
-   . String
-  -> Domable payload
+  :: String
+  -> Domable
 figcaption__ t = figcaption_ [ DC.text_ t ]

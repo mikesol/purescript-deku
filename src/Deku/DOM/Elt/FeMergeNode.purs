@@ -12,27 +12,24 @@ import Safe.Coerce (coerce)
 data FeMergeNode_
 
 feMergeNode
-  :: forall payload
-   . Event (Attribute FeMergeNode_)
-  -> Array (Domable payload)
-  -> Domable payload
+  :: Event (Attribute FeMergeNode_)
+  -> Array Domable
+  -> Domable
 feMergeNode attributes kids = Domable
   ( Element'
       ( DC.elementify "feMergeNode" attributes
-          ( (coerce :: Domable' payload -> Domable payload)
+          ( (coerce :: Domable' payload -> Domable)
               (fixed (coerce (mapWithIndex unsafeSetPos kids)))
           )
       )
   )
 
 feMergeNode_
-  :: forall payload
-   . Array (Domable payload)
-  -> Domable payload
+  :: Array Domable
+  -> Domable
 feMergeNode_ = feMergeNode empty
 
 feMergeNode__
-  :: forall payload
-   . String
-  -> Domable payload
+  :: String
+  -> Domable
 feMergeNode__ t = feMergeNode_ [ DC.text_ t ]

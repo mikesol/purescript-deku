@@ -12,27 +12,24 @@ import Safe.Coerce (coerce)
 data Textarea_
 
 textarea
-  :: forall payload
-   . Event (Attribute Textarea_)
-  -> Array (Domable payload)
-  -> Domable payload
+  :: Event (Attribute Textarea_)
+  -> Array Domable
+  -> Domable
 textarea attributes kids = Domable
   ( Element'
       ( DC.elementify "textarea" attributes
-          ( (coerce :: Domable' payload -> Domable payload)
+          ( (coerce :: Domable' payload -> Domable)
               (fixed (coerce (mapWithIndex unsafeSetPos kids)))
           )
       )
   )
 
 textarea_
-  :: forall payload
-   . Array (Domable payload)
-  -> Domable payload
+  :: Array Domable
+  -> Domable
 textarea_ = textarea empty
 
 textarea__
-  :: forall payload
-   . String
-  -> Domable payload
+  :: String
+  -> Domable
 textarea__ t = textarea_ [ DC.text_ t ]

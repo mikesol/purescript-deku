@@ -12,27 +12,24 @@ import Safe.Coerce (coerce)
 data AnimateTransform_
 
 animateTransform
-  :: forall payload
-   . Event (Attribute AnimateTransform_)
-  -> Array (Domable payload)
-  -> Domable payload
+  :: Event (Attribute AnimateTransform_)
+  -> Array Domable
+  -> Domable
 animateTransform attributes kids = Domable
   ( Element'
       ( DC.elementify "animateTransform" attributes
-          ( (coerce :: Domable' payload -> Domable payload)
+          ( (coerce :: Domable' payload -> Domable)
               (fixed (coerce (mapWithIndex unsafeSetPos kids)))
           )
       )
   )
 
 animateTransform_
-  :: forall payload
-   . Array (Domable payload)
-  -> Domable payload
+  :: Array Domable
+  -> Domable
 animateTransform_ = animateTransform empty
 
 animateTransform__
-  :: forall payload
-   . String
-  -> Domable payload
+  :: String
+  -> Domable
 animateTransform__ t = animateTransform_ [ DC.text_ t ]

@@ -12,27 +12,24 @@ import Safe.Coerce (coerce)
 data FeGaussianBlur_
 
 feGaussianBlur
-  :: forall payload
-   . Event (Attribute FeGaussianBlur_)
-  -> Array (Domable payload)
-  -> Domable payload
+  :: Event (Attribute FeGaussianBlur_)
+  -> Array Domable
+  -> Domable
 feGaussianBlur attributes kids = Domable
   ( Element'
       ( DC.elementify "feGaussianBlur" attributes
-          ( (coerce :: Domable' payload -> Domable payload)
+          ( (coerce :: Domable' payload -> Domable)
               (fixed (coerce (mapWithIndex unsafeSetPos kids)))
           )
       )
   )
 
 feGaussianBlur_
-  :: forall payload
-   . Array (Domable payload)
-  -> Domable payload
+  :: Array Domable
+  -> Domable
 feGaussianBlur_ = feGaussianBlur empty
 
 feGaussianBlur__
-  :: forall payload
-   . String
-  -> Domable payload
+  :: String
+  -> Domable
 feGaussianBlur__ t = feGaussianBlur_ [ DC.text_ t ]

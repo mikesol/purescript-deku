@@ -12,27 +12,24 @@ import Safe.Coerce (coerce)
 data Template_
 
 template
-  :: forall payload
-   . Event (Attribute Template_)
-  -> Array (Domable payload)
-  -> Domable payload
+  :: Event (Attribute Template_)
+  -> Array Domable
+  -> Domable
 template attributes kids = Domable
   ( Element'
       ( DC.elementify "template" attributes
-          ( (coerce :: Domable' payload -> Domable payload)
+          ( (coerce :: Domable' payload -> Domable)
               (fixed (coerce (mapWithIndex unsafeSetPos kids)))
           )
       )
   )
 
 template_
-  :: forall payload
-   . Array (Domable payload)
-  -> Domable payload
+  :: Array Domable
+  -> Domable
 template_ = template empty
 
 template__
-  :: forall payload
-   . String
-  -> Domable payload
+  :: String
+  -> Domable
 template__ t = template_ [ DC.text_ t ]

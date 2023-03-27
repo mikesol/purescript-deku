@@ -1888,12 +1888,12 @@ unsafeCustomElement
    . String
   -> Proxy element
   -> Event (Attribute element)
-  -> Array (Domable payload)
-  -> Domable payload
+  -> Array Domable
+  -> Domable
 unsafeCustomElement name _ attributes kids = Domable
   ( Element'
       ( elementify name attributes
-          ( (coerce :: Domable' payload -> Domable payload)
+          ( (coerce :: Domable' payload -> Domable)
               (Bolson.fixed (coerce (mapWithIndex unsafeSetPos kids)))
           )
       )

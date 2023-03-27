@@ -12,27 +12,24 @@ import Safe.Coerce (coerce)
 data Iframe_
 
 iframe
-  :: forall payload
-   . Event (Attribute Iframe_)
-  -> Array (Domable payload)
-  -> Domable payload
+  :: Event (Attribute Iframe_)
+  -> Array Domable
+  -> Domable
 iframe attributes kids = Domable
   ( Element'
       ( DC.elementify "iframe" attributes
-          ( (coerce :: Domable' payload -> Domable payload)
+          ( (coerce :: Domable' payload -> Domable)
               (fixed (coerce (mapWithIndex unsafeSetPos kids)))
           )
       )
   )
 
 iframe_
-  :: forall payload
-   . Array (Domable payload)
-  -> Domable payload
+  :: Array Domable
+  -> Domable
 iframe_ = iframe empty
 
 iframe__
-  :: forall payload
-   . String
-  -> Domable payload
+  :: String
+  -> Domable
 iframe__ t = iframe_ [ DC.text_ t ]

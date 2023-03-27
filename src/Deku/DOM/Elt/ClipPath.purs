@@ -12,27 +12,24 @@ import Safe.Coerce (coerce)
 data ClipPath_
 
 clipPath
-  :: forall payload
-   . Event (Attribute ClipPath_)
-  -> Array (Domable payload)
-  -> Domable payload
+  :: Event (Attribute ClipPath_)
+  -> Array Domable
+  -> Domable
 clipPath attributes kids = Domable
   ( Element'
       ( DC.elementify "clipPath" attributes
-          ( (coerce :: Domable' payload -> Domable payload)
+          ( (coerce :: Domable' payload -> Domable)
               (fixed (coerce (mapWithIndex unsafeSetPos kids)))
           )
       )
   )
 
 clipPath_
-  :: forall payload
-   . Array (Domable payload)
-  -> Domable payload
+  :: Array Domable
+  -> Domable
 clipPath_ = clipPath empty
 
 clipPath__
-  :: forall payload
-   . String
-  -> Domable payload
+  :: String
+  -> Domable
 clipPath__ t = clipPath_ [ DC.text_ t ]

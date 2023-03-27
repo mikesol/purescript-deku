@@ -12,27 +12,24 @@ import Safe.Coerce (coerce)
 data FeDropShadow_
 
 feDropShadow
-  :: forall payload
-   . Event (Attribute FeDropShadow_)
-  -> Array (Domable payload)
-  -> Domable payload
+  :: Event (Attribute FeDropShadow_)
+  -> Array Domable
+  -> Domable
 feDropShadow attributes kids = Domable
   ( Element'
       ( DC.elementify "feDropShadow" attributes
-          ( (coerce :: Domable' payload -> Domable payload)
+          ( (coerce :: Domable' payload -> Domable)
               (fixed (coerce (mapWithIndex unsafeSetPos kids)))
           )
       )
   )
 
 feDropShadow_
-  :: forall payload
-   . Array (Domable payload)
-  -> Domable payload
+  :: Array Domable
+  -> Domable
 feDropShadow_ = feDropShadow empty
 
 feDropShadow__
-  :: forall payload
-   . String
-  -> Domable payload
+  :: String
+  -> Domable
 feDropShadow__ t = feDropShadow_ [ DC.text_ t ]

@@ -12,27 +12,24 @@ import Safe.Coerce (coerce)
 data Basefont_
 
 basefont
-  :: forall payload
-   . Event (Attribute Basefont_)
-  -> Array (Domable payload)
-  -> Domable payload
+  :: Event (Attribute Basefont_)
+  -> Array Domable
+  -> Domable
 basefont attributes kids = Domable
   ( Element'
       ( DC.elementify "basefont" attributes
-          ( (coerce :: Domable' payload -> Domable payload)
+          ( (coerce :: Domable' payload -> Domable)
               (fixed (coerce (mapWithIndex unsafeSetPos kids)))
           )
       )
   )
 
 basefont_
-  :: forall payload
-   . Array (Domable payload)
-  -> Domable payload
+  :: Array Domable
+  -> Domable
 basefont_ = basefont empty
 
 basefont__
-  :: forall payload
-   . String
-  -> Domable payload
+  :: String
+  -> Domable
 basefont__ t = basefont_ [ DC.text_ t ]

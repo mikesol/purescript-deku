@@ -12,27 +12,24 @@ import Safe.Coerce (coerce)
 data Canvas_
 
 canvas
-  :: forall payload
-   . Event (Attribute Canvas_)
-  -> Array (Domable payload)
-  -> Domable payload
+  :: Event (Attribute Canvas_)
+  -> Array Domable
+  -> Domable
 canvas attributes kids = Domable
   ( Element'
       ( DC.elementify "canvas" attributes
-          ( (coerce :: Domable' payload -> Domable payload)
+          ( (coerce :: Domable' payload -> Domable)
               (fixed (coerce (mapWithIndex unsafeSetPos kids)))
           )
       )
   )
 
 canvas_
-  :: forall payload
-   . Array (Domable payload)
-  -> Domable payload
+  :: Array Domable
+  -> Domable
 canvas_ = canvas empty
 
 canvas__
-  :: forall payload
-   . String
-  -> Domable payload
+  :: String
+  -> Domable
 canvas__ t = canvas_ [ DC.text_ t ]

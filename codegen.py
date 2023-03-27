@@ -122,16 +122,14 @@ import Safe.Coerce (coerce)
 data {term}
 
 {x}
-  :: forall payload
-   . Event (Attribute {term})
-  -> Array (Domable payload)
-  -> Domable payload
-{x} attributes kids = Domable (Element' (elementify "{astag(x)}" attributes ((coerce :: Domable' payload -> Domable payload)  (fixed (coerce (mapWithIndex unsafeSetPos kids))))))
+  :: Event (Attribute {term})
+  -> Array Domable
+  -> Domable
+{x} attributes kids = Domable (Element' (elementify "{astag(x)}" attributes ((coerce :: Domable' payload -> Domable)  (fixed (coerce (mapWithIndex unsafeSetPos kids))))))
 
 {x}_
-  :: forall payload
-   . Array (Domable payload)
-  -> Domable payload
+  :: Array Domable
+  -> Domable
 {x}_ = {x} empty
 
 ''')

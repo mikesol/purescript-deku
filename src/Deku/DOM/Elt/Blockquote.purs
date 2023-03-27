@@ -12,27 +12,24 @@ import Safe.Coerce (coerce)
 data Blockquote_
 
 blockquote
-  :: forall payload
-   . Event (Attribute Blockquote_)
-  -> Array (Domable payload)
-  -> Domable payload
+  :: Event (Attribute Blockquote_)
+  -> Array Domable
+  -> Domable
 blockquote attributes kids = Domable
   ( Element'
       ( DC.elementify "blockquote" attributes
-          ( (coerce :: Domable' payload -> Domable payload)
+          ( (coerce :: Domable' payload -> Domable)
               (fixed (coerce (mapWithIndex unsafeSetPos kids)))
           )
       )
   )
 
 blockquote_
-  :: forall payload
-   . Array (Domable payload)
-  -> Domable payload
+  :: Array Domable
+  -> Domable
 blockquote_ = blockquote empty
 
 blockquote__
-  :: forall payload
-   . String
-  -> Domable payload
+  :: String
+  -> Domable
 blockquote__ t = blockquote_ [ DC.text_ t ]

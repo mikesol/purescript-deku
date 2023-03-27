@@ -12,27 +12,24 @@ import Safe.Coerce (coerce)
 data Fieldset_
 
 fieldset
-  :: forall payload
-   . Event (Attribute Fieldset_)
-  -> Array (Domable payload)
-  -> Domable payload
+  :: Event (Attribute Fieldset_)
+  -> Array Domable
+  -> Domable
 fieldset attributes kids = Domable
   ( Element'
       ( DC.elementify "fieldset" attributes
-          ( (coerce :: Domable' payload -> Domable payload)
+          ( (coerce :: Domable' payload -> Domable)
               (fixed (coerce (mapWithIndex unsafeSetPos kids)))
           )
       )
   )
 
 fieldset_
-  :: forall payload
-   . Array (Domable payload)
-  -> Domable payload
+  :: Array Domable
+  -> Domable
 fieldset_ = fieldset empty
 
 fieldset__
-  :: forall payload
-   . String
-  -> Domable payload
+  :: String
+  -> Domable
 fieldset__ t = fieldset_ [ DC.text_ t ]

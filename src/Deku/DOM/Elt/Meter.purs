@@ -12,27 +12,24 @@ import Safe.Coerce (coerce)
 data Meter_
 
 meter
-  :: forall payload
-   . Event (Attribute Meter_)
-  -> Array (Domable payload)
-  -> Domable payload
+  :: Event (Attribute Meter_)
+  -> Array Domable
+  -> Domable
 meter attributes kids = Domable
   ( Element'
       ( DC.elementify "meter" attributes
-          ( (coerce :: Domable' payload -> Domable payload)
+          ( (coerce :: Domable' payload -> Domable)
               (fixed (coerce (mapWithIndex unsafeSetPos kids)))
           )
       )
   )
 
 meter_
-  :: forall payload
-   . Array (Domable payload)
-  -> Domable payload
+  :: Array Domable
+  -> Domable
 meter_ = meter empty
 
 meter__
-  :: forall payload
-   . String
-  -> Domable payload
+  :: String
+  -> Domable
 meter__ t = meter_ [ DC.text_ t ]

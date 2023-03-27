@@ -12,27 +12,24 @@ import Safe.Coerce (coerce)
 data Noframes_
 
 noframes
-  :: forall payload
-   . Event (Attribute Noframes_)
-  -> Array (Domable payload)
-  -> Domable payload
+  :: Event (Attribute Noframes_)
+  -> Array Domable
+  -> Domable
 noframes attributes kids = Domable
   ( Element'
       ( DC.elementify "noframes" attributes
-          ( (coerce :: Domable' payload -> Domable payload)
+          ( (coerce :: Domable' payload -> Domable)
               (fixed (coerce (mapWithIndex unsafeSetPos kids)))
           )
       )
   )
 
 noframes_
-  :: forall payload
-   . Array (Domable payload)
-  -> Domable payload
+  :: Array Domable
+  -> Domable
 noframes_ = noframes empty
 
 noframes__
-  :: forall payload
-   . String
-  -> Domable payload
+  :: String
+  -> Domable
 noframes__ t = noframes_ [ DC.text_ t ]

@@ -12,27 +12,24 @@ import Safe.Coerce (coerce)
 data Stop_
 
 stop
-  :: forall payload
-   . Event (Attribute Stop_)
-  -> Array (Domable payload)
-  -> Domable payload
+  :: Event (Attribute Stop_)
+  -> Array Domable
+  -> Domable
 stop attributes kids = Domable
   ( Element'
       ( DC.elementify "stop" attributes
-          ( (coerce :: Domable' payload -> Domable payload)
+          ( (coerce :: Domable' payload -> Domable)
               (fixed (coerce (mapWithIndex unsafeSetPos kids)))
           )
       )
   )
 
 stop_
-  :: forall payload
-   . Array (Domable payload)
-  -> Domable payload
+  :: Array Domable
+  -> Domable
 stop_ = stop empty
 
 stop__
-  :: forall payload
-   . String
-  -> Domable payload
+  :: String
+  -> Domable
 stop__ t = stop_ [ DC.text_ t ]

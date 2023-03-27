@@ -12,27 +12,24 @@ import Safe.Coerce (coerce)
 data Polyline_
 
 polyline
-  :: forall payload
-   . Event (Attribute Polyline_)
-  -> Array (Domable payload)
-  -> Domable payload
+  :: Event (Attribute Polyline_)
+  -> Array Domable
+  -> Domable
 polyline attributes kids = Domable
   ( Element'
       ( DC.elementify "polyline" attributes
-          ( (coerce :: Domable' payload -> Domable payload)
+          ( (coerce :: Domable' payload -> Domable)
               (fixed (coerce (mapWithIndex unsafeSetPos kids)))
           )
       )
   )
 
 polyline_
-  :: forall payload
-   . Array (Domable payload)
-  -> Domable payload
+  :: Array Domable
+  -> Domable
 polyline_ = polyline empty
 
 polyline__
-  :: forall payload
-   . String
-  -> Domable payload
+  :: String
+  -> Domable
 polyline__ t = polyline_ [ DC.text_ t ]

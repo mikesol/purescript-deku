@@ -12,27 +12,24 @@ import Safe.Coerce (coerce)
 data Audio_
 
 audio
-  :: forall payload
-   . Event (Attribute Audio_)
-  -> Array (Domable payload)
-  -> Domable payload
+  :: Event (Attribute Audio_)
+  -> Array Domable
+  -> Domable
 audio attributes kids = Domable
   ( Element'
       ( DC.elementify "audio" attributes
-          ( (coerce :: Domable' payload -> Domable payload)
+          ( (coerce :: Domable' payload -> Domable)
               (fixed (coerce (mapWithIndex unsafeSetPos kids)))
           )
       )
   )
 
 audio_
-  :: forall payload
-   . Array (Domable payload)
-  -> Domable payload
+  :: Array Domable
+  -> Domable
 audio_ = audio empty
 
 audio__
-  :: forall payload
-   . String
-  -> Domable payload
+  :: String
+  -> Domable
 audio__ t = audio_ [ DC.text_ t ]

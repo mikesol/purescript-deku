@@ -12,27 +12,24 @@ import Safe.Coerce (coerce)
 data Picture_
 
 picture
-  :: forall payload
-   . Event (Attribute Picture_)
-  -> Array (Domable payload)
-  -> Domable payload
+  :: Event (Attribute Picture_)
+  -> Array Domable
+  -> Domable
 picture attributes kids = Domable
   ( Element'
       ( DC.elementify "picture" attributes
-          ( (coerce :: Domable' payload -> Domable payload)
+          ( (coerce :: Domable' payload -> Domable)
               (fixed (coerce (mapWithIndex unsafeSetPos kids)))
           )
       )
   )
 
 picture_
-  :: forall payload
-   . Array (Domable payload)
-  -> Domable payload
+  :: Array Domable
+  -> Domable
 picture_ = picture empty
 
 picture__
-  :: forall payload
-   . String
-  -> Domable payload
+  :: String
+  -> Domable
 picture__ t = picture_ [ DC.text_ t ]

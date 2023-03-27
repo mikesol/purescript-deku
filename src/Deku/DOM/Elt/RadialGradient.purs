@@ -12,27 +12,24 @@ import Safe.Coerce (coerce)
 data RadialGradient_
 
 radialGradient
-  :: forall payload
-   . Event (Attribute RadialGradient_)
-  -> Array (Domable payload)
-  -> Domable payload
+  :: Event (Attribute RadialGradient_)
+  -> Array Domable
+  -> Domable
 radialGradient attributes kids = Domable
   ( Element'
       ( DC.elementify "radialGradient" attributes
-          ( (coerce :: Domable' payload -> Domable payload)
+          ( (coerce :: Domable' payload -> Domable)
               (fixed (coerce (mapWithIndex unsafeSetPos kids)))
           )
       )
   )
 
 radialGradient_
-  :: forall payload
-   . Array (Domable payload)
-  -> Domable payload
+  :: Array Domable
+  -> Domable
 radialGradient_ = radialGradient empty
 
 radialGradient__
-  :: forall payload
-   . String
-  -> Domable payload
+  :: String
+  -> Domable
 radialGradient__ t = radialGradient_ [ DC.text_ t ]

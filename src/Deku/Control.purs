@@ -7,7 +7,7 @@ module Deku.Control
   , (<$~>)
   , blank
   , deku
-  , elementify
+  , elementify2
   , toDeku
   , globalPortal
   , globalPortal1
@@ -23,27 +23,28 @@ module Deku.Control
 import Prelude
 
 import Bolson.Control as Bolson
-import Bolson.Core (Child(..), Element(..), Entity(..), PSR, Scope(..))
+import Bolson.Core (Element(..), Entity(..), PSR, Scope(..))
 import Bolson.Core as BCore
 import Control.Alt ((<|>))
 import Control.Monad.ST.Uncurried (mkSTFn2, runSTFn1, runSTFn2)
 import Control.Plus (empty)
 import Data.FastVect.FastVect (Vect, singleton, index)
 import Data.Filterable (filter)
-import Data.Lens (_1, over)
+import Data.FunctorWithIndex (mapWithIndex)
 import Data.Maybe (Maybe(..), maybe)
 import Data.Newtype (class Newtype, unwrap, wrap)
 import Data.Profunctor (dimap, lcmap)
-import Data.Tuple (curry, snd)
-import Data.Tuple.Nested (type (/\), (/\))
+import Data.Tuple (snd)
+import Data.Tuple.Nested ((/\))
 import Deku.Attribute (Attribute, AttributeValue(..), unsafeUnAttribute)
-import Deku.Core (DOMInterpret(..), Domable(..), Node(..), Nut, envy, dyn, insert_)
+import Deku.Core (DOMInterpret(..), Domable(..), DomableF(..), Node(..), Nut, unsafeSetPos, dyn, envy, insert_, remove)
 import FRP.Event (Event, Subscriber(..), merge, keepLatest, makeLemmingEventO, mapAccum, memoize)
 import Prim.Int (class Compare)
 import Prim.Ordering (GT)
 import Record (union)
 import Safe.Coerce (coerce)
 import Type.Proxy (Proxy(..))
+import Unsafe.Coerce (unsafeCoerce)
 import Web.DOM as Web.DOM
 
 type Neg1 = -1
@@ -51,8 +52,7 @@ type Neg1 = -1
 ----
 
 unsafeSetText
-  :: forall payload
-   . DOMInterpret payload
+  :: forall payload. DOMInterpret payload
   -> String
   -> Event String
   -> Event payload
@@ -79,11 +79,29 @@ unsafeSetAttribute (DOMInterpret { setProp, setCb, unsetAttribute }) id atts =
 
 -- | Used internally to create new [`Element`-s](https://developer.mozilla.org/en-US/docs/Web/API/Element).
 -- | Do not use this directly. Instead, use `unsafeCustomElement` from `Deku.DOM`.
-elementify
-  :: forall element payload
+elementify2
+  :: forall element
    . String
   -> Event (Attribute element)
-  -> Domable payload
+  -> Array Domable
+  -> Domable
+elementify2 en attributes kids = Domable
+  (step1 (mapWithIndex ((map <<< map) (\(Domable df) -> df) unsafeSetPos) kids))
+  where
+  step1 :: forall payload. Array (DomableF payload) -> DomableF payload
+  step1 arr = DomableF
+    ( Element'
+        ( elementify en attributes
+            ( DomableF (BCore.fixed (coerce arr))
+            )
+        )
+    )
+
+elementify
+  :: forall payload element
+   . String
+  -> Event (Attribute element)
+  -> DomableF payload
   -> Node payload
 elementify tag atts children = Node go
   where
@@ -96,7 +114,9 @@ elementify tag atts children = Node go
       unsub <- runSTFn2 mySub
         ( ( merge
               ( [ pure
-                    (makeElement { id: me, parent, scope, tag, pos, dynFamily })
+                    ( makeElement
+                        { id: me, parent, scope, tag, pos, dynFamily }
+                    )
                 , unsafeSetAttribute di me atts
                 ] <> maybe []
                   ( \p ->
@@ -143,30 +163,43 @@ elementify tag atts children = Node go
 -- | For examples of portals in use, see the
 -- | [portals section](https://purescript-deku.netlify.app/core-concepts/portals) of the Deku guide.
 globalPortal
-  :: forall n payload
+  :: forall n
    . Compare n Neg1 GT
-  => Vect n (Domable payload)
-  -> (Vect n (Domable payload) -> Domable payload)
-  -> Domable payload
-globalPortal v c = Domable $ Bolson.globalPortalComplexComplex
-  portalFlatten
-  { fromEltO1: coerce
-  , fromEltO2: coerce
-  , toElt: coerce
-  , wrapElt: \i -> Element' (elementify "div" empty (coerce i))
-  , giveNewParent: \a b ctor _ -> (unwrap a).giveNewParent
-      (b `union` { ctor: coerce ctor })
-  , deleteFromCache: unwrap >>> _.deleteFromCache
-  }
-  (map unwrap v)
-  (dimap (map ((_ $ unit) >>> wrap)) unwrap c)
+  => Vect n Domable
+  -> (Vect n Domable -> Domable)
+  -> Domable
+globalPortal v' c' = Domable
+  ( go (map (\(Domable df) -> df) v')
+      (unsafeCoerce c')
+  )
+  where
+  go
+    :: forall payload
+     . Vect n (DomableF payload)
+    -> (Vect n (DomableF payload) -> DomableF payload)
+    -> DomableF payload
+  go v c = DomableF
+    ( Bolson.globalPortalComplexComplex
+        portalFlatten
+        { fromEltO1: coerce
+        , fromEltO2: coerce
+        , toElt: coerce
+        -- stuck here
+        -- coerce won't work
+        , wrapElt: \i -> Element' ((elementify "div" empty (coerce i)))
+        , giveNewParent: \a b ctor _ -> (unwrap a).giveNewParent
+            (b `union` { ctor: coerce ctor })
+        , deleteFromCache: unwrap >>> _.deleteFromCache
+        }
+        (map unwrap v)
+        (dimap (map ((_ $ unit) >>> wrap)) unwrap c)
+    )
 
 -- | A variation of global portal that takes a single element instead of a vector of elements.
 globalPortal1
-  :: forall payload
-   . Domable payload
-  -> (Domable payload -> Domable payload)
-  -> Domable payload
+  :: Domable
+  -> (Domable -> Domable)
+  -> Domable
 globalPortal1 i f = globalPortal (singleton i) (lcmap (index (Proxy :: _ 0)) f)
 
 -- ugh, this isn't sacred, delete it and regenerate if something changes
@@ -206,15 +239,12 @@ portalFlatten =
 
 -- | A variation of portal that takes a single element instead of a vector of elements.
 portal1
-  :: forall payload
-   . Domable payload
-  -> ( ( (Domable payload)
-           /\ (Domable payload -> Domable payload)
-       )
-       -> Domable payload
+  :: Domable
+  -> ( Domable 
+       -> Domable
      )
-  -> Domable payload
-portal1 i f = portal (singleton i) (lcmap (over _1 (index (Proxy :: _ 0))) f)
+  -> Domable
+portal1 i f = portal (singleton i) (lcmap ((index (Proxy :: _ 0))) f)
 
 -- | Creates a portal.
 -- |
@@ -238,36 +268,66 @@ portal1 i f = portal (singleton i) (lcmap (over _1 (index (Proxy :: _ 0))) f)
 -- | For examples of portals in use, see the
 -- | [portals section](https://purescript-deku.netlify.app/core-concepts/portals) of the Deku guide.
 portal
-  :: forall n payload
+  :: forall n
    . Compare n Neg1 GT
-  => Vect n (Domable payload)
-  -> ( ( Vect n (Domable payload)
-           /\ (Domable payload -> Domable payload)
-       )
-       -> Domable payload
-     )
-  -> Domable payload
-portal a b = Domable $ Bolson.portalComplexComplex
-  portalFlatten
-  { fromEltO1: coerce
-  , fromEltO2: coerce
-  , toElt: coerce
-  , wrapElt: \i -> Element' (elementify "div" empty (wrap i))
-  , giveNewParent: \x y ctor _ -> (unwrap x).giveNewParent
-      (y `union` { ctor: coerce ctor })
-  , deleteFromCache: unwrap >>> _.deleteFromCache
-  }
-  (map unwrap a)
-  (lcmap (map (_ $ unit)) (coerce (curry b)))
+  => Vect n Domable
+  -> (Vect n Domable -> Domable)
+  -> Domable
+portal v' c' = Domable
+  ( go (map (\(Domable df) -> df) v')
+      (unsafeCoerce c')
+  )
+  where
+  go
+    :: forall payload
+     . Vect n (DomableF payload)
+    -> (Vect n (DomableF payload) -> DomableF payload)
+    -> DomableF payload
+  go v c = DomableF
+    ( Bolson.portalComplexComplex
+        portalFlatten
+        { fromEltO1: coerce
+        , fromEltO2: coerce
+        , toElt: coerce
+        -- stuck here
+        -- coerce won't work
+        , wrapElt: \i -> Element' ((elementify "div" empty (coerce i)))
+        , giveNewParent: \a b ctor _ -> (unwrap a).giveNewParent
+            (b `union` { ctor: coerce ctor })
+        , deleteFromCache: unwrap >>> _.deleteFromCache
+        }
+        (map unwrap v)
+        (dimap (map ((_ $ unit) >>> wrap)) unwrap c)
+    )
+
+-- Domable $ Bolson.portalComplexComplex
+--   portalFlatten
+--   { fromEltO1: coerce
+--   , fromEltO2: coerce
+--   , toElt: coerce
+--   , wrapElt: \i -> Element' (elementify "div" empty (wrap i))
+--   , giveNewParent: \x y ctor _ -> (unwrap x).giveNewParent
+--       (y `union` { ctor: coerce ctor })
+--   , deleteFromCache: unwrap >>> _.deleteFromCache
+--   }
+--   (map unwrap a)
+--   (dimap (map ((_ $ unit) >>> wrap)) unwrap c)
 
 -- | Create a [`Text`](https://developer.mozilla.org/en-US/docs/Web/API/Text) node from
 -- | the emitted strings. Each emitted string replaces the previous string.
 text
-  :: forall payload
-   . Event String
-  -> Domable payload
-text txt = Domable $ Element' $ Node go
+  :: Event String
+  -> Domable
+text txt = Domable go'
   where
+  go' :: forall payload. DomableF payload
+  go' = DomableF (Element' (Node go))
+
+  go
+    :: forall payload
+     . PSR (pos :: Maybe Int, ez :: Boolean, dynFamily :: Maybe String)
+    -> DOMInterpret payload
+    -> Event payload
   go
     { parent, scope, raiseId, dynFamily, pos, ez }
     di@(DOMInterpret { ids, makeText, deleteFromCache, attributeParent }) =
@@ -293,44 +353,51 @@ text txt = Domable $ Element' $ Node go
 
 -- | Create a [`Text`](https://developer.mozilla.org/en-US/docs/Web/API/Text) node from
 -- | a string. The node is set immediately with the string and does not change.
-text_ :: forall payload. String -> Domable payload
+text_ :: String -> Domable
 text_ txt = text (pure txt)
 
 -- | A low-level function that creates a Deku application.
 -- | In most situations this should not be used. Instead, use functions from `Deku.Toplevel`.
 deku
-  :: forall payload
-   . Web.DOM.Element
-  -> Domable payload
-  -> DOMInterpret payload
-  -> Event payload
-deku root children di@(DOMInterpret { makeRoot }) = makeLemmingEventO $ mkSTFn2
-  \(Subscriber mySub) k -> do
-    let me = "deku-root" -- <- ids
-    runSTFn2 mySub
-      ( pure (makeRoot { id: me, root })
-          <|> __internalDekuFlatten
-            { parent: Just me
-            , scope: Local "rootScope"
-            , raiseId: \_ -> pure unit
-            , ez: true
-            , pos: Nothing
-            , dynFamily: Nothing
-            }
-            di
-            (coerce children)
-      )
-      k
+  :: Web.DOM.Element
+  -> Domable
+  -> ( forall payload
+        . DOMInterpret payload
+       -> Event payload
+     )
+deku root (Domable cc) = go cc
+  where
+  go
+    :: forall payload
+     . DomableF payload
+    -> DOMInterpret payload
+    -> Event payload
+  go children di@(DOMInterpret { makeRoot }) = makeLemmingEventO $ mkSTFn2
+    \(Subscriber mySub) k -> do
+      let me = "deku-root" -- <- ids
+      runSTFn2 mySub
+        ( pure (makeRoot { id: me, root })
+            <|> __internalDekuFlatten
+              { parent: Just me
+              , scope: Local "rootScope"
+              , raiseId: \_ -> pure unit
+              , ez: true
+              , pos: Nothing
+              , dynFamily: Nothing
+              }
+              di
+              children
+        )
+        k
 
 data Stage = Begin | Middle | End
 
 __internalDekuFlatten
-  :: forall payload
-   . PSR (pos :: Maybe Int, ez :: Boolean, dynFamily :: Maybe String)
+  :: forall payload. PSR (pos :: Maybe Int, ez :: Boolean, dynFamily :: Maybe String)
   -> DOMInterpret payload
-  -> Domable payload
+  -> DomableF payload
   -> Event payload
-__internalDekuFlatten a b (Domable c) = Bolson.flatten portalFlatten a b c
+__internalDekuFlatten a b (DomableF c) = Bolson.flatten portalFlatten a b c
 
 -- | Like `bindFlipped`, except instead of working with a monad, it dipts into an `Event`
 -- | and creates a `Domable`. This allows you to use an event to switch between different
@@ -339,14 +406,14 @@ __internalDekuFlatten a b (Domable c) = Bolson.flatten portalFlatten a b c
 -- | and should be used when the content needs to be replaced wholesale. For a more efficient
 -- | approach, see the `useDyn` hook.
 switcher
-  :: forall a payload
-   . (a -> Domable payload)
+  :: forall a
+   . (a -> Domable)
   -> Event a
-  -> Domable payload
+  -> Domable
 switcher f event = dyn $ keepLatest
   $ memoize (counter event) \cenv -> map
       ( \(p /\ n) -> merge
-          [ ((const Remove) <$> filter (eq (n + 1) <<< snd) cenv)
+          [ ((const remove) <$> filter (eq (n + 1) <<< snd) cenv)
           , pure (insert_ $ coerce (f p))
           ]
       )
@@ -360,28 +427,26 @@ infixl 4 switcher as <$~>
 
 -- | A flipped version of `switcher`.
 switcherFlipped
-  :: forall a payload
+  :: forall a
    . Event a
-  -> (a -> Domable payload)
-  -> Domable payload
+  -> (a -> Domable)
+  -> Domable
 switcherFlipped = flip switcher
 
 infixl 1 switcherFlipped as <#~>
 
 -- | Inserts the Deku Nut when an event emits `true`, otherwise destroys the element.
 guard
-  :: forall payload
-   . Event Boolean
-  -> Domable payload
-  -> Domable payload
+  :: Event Boolean
+  -> Domable
+  -> Domable
 guard eb d = switcher
   (if _ then d else blank)
   eb
 
 -- | An empty domable. `mempty` also works.
 blank :: Nut
-blank = Domable $ BCore.envy empty
+blank = mempty
 
-toDeku
-  :: forall a payload. (a -> Event (Domable payload)) -> a -> Domable payload
+toDeku :: forall a. (a -> Event Domable) -> a -> Domable
 toDeku = compose envy

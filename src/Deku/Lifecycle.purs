@@ -12,10 +12,9 @@ import FRP.Event (makeEvent)
 
 -- | Run effect `e` before nut `d` is added to the DOM.
 onWillMount
-  :: forall payload
-   . Effect Unit
-  -> Domable payload
-  -> Domable payload
+  :: Effect Unit
+  -> Domable
+  -> Domable
 onWillMount e d = envy $ makeEvent \k -> do
   e
   k d
@@ -23,10 +22,9 @@ onWillMount e d = envy $ makeEvent \k -> do
 
 -- | Run effect `e` after nut `d` is added to the DOM.
 onDidMount
-  :: forall payload
-   . Effect Unit
-  -> Domable payload
-  -> Domable payload
+  :: Effect Unit
+  -> Domable
+  -> Domable
 onDidMount e d = envy $ makeEvent \k -> do
   k d
   e
@@ -34,10 +32,9 @@ onDidMount e d = envy $ makeEvent \k -> do
 
 -- | Run effect `e` when nut `d` is removed from the DOM.
 onDismount
-  :: forall payload
-   . Effect Unit
-  -> Domable payload
-  -> Domable payload
+  :: Effect Unit
+  -> Domable
+  -> Domable
 onDismount e d = envy $ makeEvent \k -> do
   k d
   pure e

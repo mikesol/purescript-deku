@@ -12,27 +12,24 @@ import Safe.Coerce (coerce)
 data Meta_
 
 meta
-  :: forall payload
-   . Event (Attribute Meta_)
-  -> Array (Domable payload)
-  -> Domable payload
+  :: Event (Attribute Meta_)
+  -> Array Domable
+  -> Domable
 meta attributes kids = Domable
   ( Element'
       ( DC.elementify "meta" attributes
-          ( (coerce :: Domable' payload -> Domable payload)
+          ( (coerce :: Domable' payload -> Domable)
               (fixed (coerce (mapWithIndex unsafeSetPos kids)))
           )
       )
   )
 
 meta_
-  :: forall payload
-   . Array (Domable payload)
-  -> Domable payload
+  :: Array Domable
+  -> Domable
 meta_ = meta empty
 
 meta__
-  :: forall payload
-   . String
-  -> Domable payload
+  :: String
+  -> Domable
 meta__ t = meta_ [ DC.text_ t ]

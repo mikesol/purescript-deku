@@ -12,27 +12,24 @@ import Safe.Coerce (coerce)
 data Header_
 
 header
-  :: forall payload
-   . Event (Attribute Header_)
-  -> Array (Domable payload)
-  -> Domable payload
+  :: Event (Attribute Header_)
+  -> Array Domable
+  -> Domable
 header attributes kids = Domable
   ( Element'
       ( DC.elementify "header" attributes
-          ( (coerce :: Domable' payload -> Domable payload)
+          ( (coerce :: Domable' payload -> Domable)
               (fixed (coerce (mapWithIndex unsafeSetPos kids)))
           )
       )
   )
 
 header_
-  :: forall payload
-   . Array (Domable payload)
-  -> Domable payload
+  :: Array Domable
+  -> Domable
 header_ = header empty
 
 header__
-  :: forall payload
-   . String
-  -> Domable payload
+  :: String
+  -> Domable
 header__ t = header_ [ DC.text_ t ]

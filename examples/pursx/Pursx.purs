@@ -30,10 +30,9 @@ myPx =
 """
 
 myPxInception
-  :: forall payload
-   . (Boolean -> Effect Unit)
-  -> Domable payload
-  -> Domable payload
+  :: (Boolean -> Effect Unit)
+  -> Domable
+  -> Domable
 myPxInception push aThirdThing = myPx ~~
   { btn: pure (D.Style := "background-color: rgb(133,151,217)")
   , somethingElse:

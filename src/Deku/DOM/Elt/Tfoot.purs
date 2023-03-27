@@ -12,27 +12,24 @@ import Safe.Coerce (coerce)
 data Tfoot_
 
 tfoot
-  :: forall payload
-   . Event (Attribute Tfoot_)
-  -> Array (Domable payload)
-  -> Domable payload
+  :: Event (Attribute Tfoot_)
+  -> Array Domable
+  -> Domable
 tfoot attributes kids = Domable
   ( Element'
       ( DC.elementify "tfoot" attributes
-          ( (coerce :: Domable' payload -> Domable payload)
+          ( (coerce :: Domable' payload -> Domable)
               (fixed (coerce (mapWithIndex unsafeSetPos kids)))
           )
       )
   )
 
 tfoot_
-  :: forall payload
-   . Array (Domable payload)
-  -> Domable payload
+  :: Array Domable
+  -> Domable
 tfoot_ = tfoot empty
 
 tfoot__
-  :: forall payload
-   . String
-  -> Domable payload
+  :: String
+  -> Domable
 tfoot__ t = tfoot_ [ DC.text_ t ]

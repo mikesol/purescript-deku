@@ -12,27 +12,24 @@ import Safe.Coerce (coerce)
 data FeMorphology_
 
 feMorphology
-  :: forall payload
-   . Event (Attribute FeMorphology_)
-  -> Array (Domable payload)
-  -> Domable payload
+  :: Event (Attribute FeMorphology_)
+  -> Array Domable
+  -> Domable
 feMorphology attributes kids = Domable
   ( Element'
       ( DC.elementify "feMorphology" attributes
-          ( (coerce :: Domable' payload -> Domable payload)
+          ( (coerce :: Domable' payload -> Domable)
               (fixed (coerce (mapWithIndex unsafeSetPos kids)))
           )
       )
   )
 
 feMorphology_
-  :: forall payload
-   . Array (Domable payload)
-  -> Domable payload
+  :: Array Domable
+  -> Domable
 feMorphology_ = feMorphology empty
 
 feMorphology__
-  :: forall payload
-   . String
-  -> Domable payload
+  :: String
+  -> Domable
 feMorphology__ t = feMorphology_ [ DC.text_ t ]

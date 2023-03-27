@@ -38,7 +38,7 @@ print_('instance (TagToDeku tag deku,  Row.Cons acc (Event (Attribute deku)) pur
 print_('else instance (Sym.Append acc anything acc2, Sym.Cons x y tail, DoVerbForAttr verb tag acc2 x y pursi purso newTail) => DoVerbForAttr verb tag acc anything tail pursi purso newTail')
 print_('--')
 print_('class DoVerbForDOM (payload :: Type) (verb :: Symbol) (acc :: Symbol) (head :: Symbol) (tail :: Symbol) (pursi :: Row Type) (purso :: Row Type) (newTail :: Symbol) | payload verb acc head tail pursi -> purso newTail')
-print_('instance (Row.Cons acc (Domable payload) pursi purso) => DoVerbForDOM payload verb acc verb tail pursi purso tail')
+print_('instance (Row.Cons acc (Domable) pursi purso) => DoVerbForDOM payload verb acc verb tail pursi purso tail')
 print_('else instance (Sym.Append acc anything acc2, Sym.Cons x y tail, DoVerbForDOM payload verb acc2 x y pursi purso newTail) => DoVerbForDOM payload verb acc anything tail pursi purso newTail')
 print_('--')
 print_('class IsWhiteSpace (space :: Symbol)')
@@ -151,14 +151,14 @@ class
     -> { cache :: Object.Object Boolean, element :: Node payload }
 
 instance pursxToElementConsInsert ::
-  ( Row.Cons key (Domable payload) r' r
+  ( Row.Cons key (Domable) r' r
   , PursxToElement payload rest r
   , Reflectable key String
   , IsSymbol key
   ) =>
   PursxToElement
     payload
-    (RL.Cons key (Domable payload) rest)
+    (RL.Cons key (Domable) rest)
     r where
   pursxToElement pxScope _ r =
     let
@@ -233,7 +233,7 @@ psx
   => PXStart payload "~" " " html ()
   => PursxToElement payload RL.Nil ()
   => Proxy html
-  -> Domable payload
+  -> Domable
 psx px = makePursx px {}
 
 makePursx
@@ -244,7 +244,7 @@ makePursx
   => PursxToElement payload rl r
   => Proxy html
   -> { | r }
-  -> Domable payload
+  -> Domable
 makePursx = makePursx' (Proxy :: _ "~")
 
 makePursx'
@@ -257,7 +257,7 @@ makePursx'
   => Proxy verb
   -> Proxy html
   -> { | r }
-  -> Domable payload
+  -> Domable
 makePursx' verb html r = Domable $ Element' $ Node go
   where
   go
@@ -303,7 +303,7 @@ unsafeMakePursx
   => PursxToElement payload rl r
   => String
   -> { | r }
-  -> Domable payload
+  -> Domable
 unsafeMakePursx = unsafeMakePursx' "~"
 
 unsafeMakePursx'
@@ -313,7 +313,7 @@ unsafeMakePursx'
   => String
   -> String
   -> { | r }
-  -> Domable payload
+  -> Domable
 unsafeMakePursx' verb html r = Domable $ Element' $ Node go
   where
   go
@@ -357,10 +357,9 @@ unsafeMakePursx' verb html r = Domable $ Element' $ Node go
         unsub
 
 __internalDekuFlatten
-  :: forall payload
-   . PSR (pos :: Maybe Int, dynFamily :: Maybe String, ez :: Boolean)
+  :: PSR (pos :: Maybe Int, dynFamily :: Maybe String, ez :: Boolean)
   -> DOMInterpret payload
-  -> Domable payload
+  -> Domable
   -> Event payload
 __internalDekuFlatten a b c = Bolson.flatten
   { doLogic: \pos (DOMInterpret { sendToPos }) id -> sendToPos { id, pos }
@@ -372,7 +371,7 @@ __internalDekuFlatten a b c = Bolson.flatten
   }
   a
   b
-  ((coerce :: Domable payload -> Domable' payload) c)
+  ((coerce :: Domable -> Domable' payload) c)
 
 infixr 5 makePursx as ~~
 infixr 5 unsafeMakePursx as ~!~

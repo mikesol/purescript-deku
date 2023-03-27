@@ -12,27 +12,24 @@ import Safe.Coerce (coerce)
 data FeConvolveMatrix_
 
 feConvolveMatrix
-  :: forall payload
-   . Event (Attribute FeConvolveMatrix_)
-  -> Array (Domable payload)
-  -> Domable payload
+  :: Event (Attribute FeConvolveMatrix_)
+  -> Array Domable
+  -> Domable
 feConvolveMatrix attributes kids = Domable
   ( Element'
       ( DC.elementify "feConvolveMatrix" attributes
-          ( (coerce :: Domable' payload -> Domable payload)
+          ( (coerce :: Domable' payload -> Domable)
               (fixed (coerce (mapWithIndex unsafeSetPos kids)))
           )
       )
   )
 
 feConvolveMatrix_
-  :: forall payload
-   . Array (Domable payload)
-  -> Domable payload
+  :: Array Domable
+  -> Domable
 feConvolveMatrix_ = feConvolveMatrix empty
 
 feConvolveMatrix__
-  :: forall payload
-   . String
-  -> Domable payload
+  :: String
+  -> Domable
 feConvolveMatrix__ t = feConvolveMatrix_ [ DC.text_ t ]

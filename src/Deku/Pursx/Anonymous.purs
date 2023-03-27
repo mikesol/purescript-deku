@@ -25,7 +25,7 @@ instance endOfTheLine ::
   ) =>
   PursxStringAnonymous (Proxy ll /\ Proxy html /\ { | r })
     EndAnonymousPursX
-    (Domable payload) where
+    (Domable) where
   pursxStringAnonymous (_ /\ a /\ b) _ = a ~~ b
 
 instance readingPursx ::
@@ -50,7 +50,7 @@ instance endOfTheLineV ::
   ) =>
   PursxValAnonymous (Proxy ll /\ Proxy html /\ { | r })
     EndAnonymousPursX
-    (Domable payload) where
+    (Domable) where
   pursxValAnonymous (_ /\ a /\ b) _ = a ~~ b
 
 else instance readingVal ::

@@ -12,27 +12,24 @@ import Safe.Coerce (coerce)
 data Ellipse_
 
 ellipse
-  :: forall payload
-   . Event (Attribute Ellipse_)
-  -> Array (Domable payload)
-  -> Domable payload
+  :: Event (Attribute Ellipse_)
+  -> Array Domable
+  -> Domable
 ellipse attributes kids = Domable
   ( Element'
       ( DC.elementify "ellipse" attributes
-          ( (coerce :: Domable' payload -> Domable payload)
+          ( (coerce :: Domable' payload -> Domable)
               (fixed (coerce (mapWithIndex unsafeSetPos kids)))
           )
       )
   )
 
 ellipse_
-  :: forall payload
-   . Array (Domable payload)
-  -> Domable payload
+  :: Array Domable
+  -> Domable
 ellipse_ = ellipse empty
 
 ellipse__
-  :: forall payload
-   . String
-  -> Domable payload
+  :: String
+  -> Domable
 ellipse__ t = ellipse_ [ DC.text_ t ]

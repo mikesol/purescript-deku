@@ -12,27 +12,24 @@ import Safe.Coerce (coerce)
 data Footer_
 
 footer
-  :: forall payload
-   . Event (Attribute Footer_)
-  -> Array (Domable payload)
-  -> Domable payload
+  :: Event (Attribute Footer_)
+  -> Array Domable
+  -> Domable
 footer attributes kids = Domable
   ( Element'
       ( DC.elementify "footer" attributes
-          ( (coerce :: Domable' payload -> Domable payload)
+          ( (coerce :: Domable' payload -> Domable)
               (fixed (coerce (mapWithIndex unsafeSetPos kids)))
           )
       )
   )
 
 footer_
-  :: forall payload
-   . Array (Domable payload)
-  -> Domable payload
+  :: Array Domable
+  -> Domable
 footer_ = footer empty
 
 footer__
-  :: forall payload
-   . String
-  -> Domable payload
+  :: String
+  -> Domable
 footer__ t = footer_ [ DC.text_ t ]

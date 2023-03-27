@@ -12,27 +12,24 @@ import Safe.Coerce (coerce)
 data Noscript_
 
 noscript
-  :: forall payload
-   . Event (Attribute Noscript_)
-  -> Array (Domable payload)
-  -> Domable payload
+  :: Event (Attribute Noscript_)
+  -> Array Domable
+  -> Domable
 noscript attributes kids = Domable
   ( Element'
       ( DC.elementify "noscript" attributes
-          ( (coerce :: Domable' payload -> Domable payload)
+          ( (coerce :: Domable' payload -> Domable)
               (fixed (coerce (mapWithIndex unsafeSetPos kids)))
           )
       )
   )
 
 noscript_
-  :: forall payload
-   . Array (Domable payload)
-  -> Domable payload
+  :: Array Domable
+  -> Domable
 noscript_ = noscript empty
 
 noscript__
-  :: forall payload
-   . String
-  -> Domable payload
+  :: String
+  -> Domable
 noscript__ t = noscript_ [ DC.text_ t ]

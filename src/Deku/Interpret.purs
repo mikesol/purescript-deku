@@ -21,11 +21,14 @@ module Deku.Interpret
 import Prelude
 
 import Bolson.Core (Scope)
+import Bolson.Core as Bolson
 import Control.Monad.ST (ST)
 import Control.Monad.ST.Global (Global)
 import Control.Monad.ST.Global as Region
 import Control.Monad.ST.Internal as Ref
+import Control.Plus (empty)
 import Data.Maybe (Maybe(..), maybe)
+import Deku.Core (DomableF(..))
 import Deku.Core as Core
 import Effect (Effect)
 import Safe.Coerce (coerce)
@@ -313,7 +316,7 @@ sendToPos a = FunctionOfFFIDOMSnaphot \state -> do
       , pos: Just a.pos
       , ez: false
       -- change me!
-      , ctor: mempty
+      , ctor: DomableF (Bolson.envy empty)
       }
   coerce (giveNewParent_ Just runOnJust newA) state
 

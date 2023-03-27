@@ -12,27 +12,24 @@ import Safe.Coerce (coerce)
 data Time_
 
 time
-  :: forall payload
-   . Event (Attribute Time_)
-  -> Array (Domable payload)
-  -> Domable payload
+  :: Event (Attribute Time_)
+  -> Array Domable
+  -> Domable
 time attributes kids = Domable
   ( Element'
       ( DC.elementify "time" attributes
-          ( (coerce :: Domable' payload -> Domable payload)
+          ( (coerce :: Domable' payload -> Domable)
               (fixed (coerce (mapWithIndex unsafeSetPos kids)))
           )
       )
   )
 
 time_
-  :: forall payload
-   . Array (Domable payload)
-  -> Domable payload
+  :: Array Domable
+  -> Domable
 time_ = time empty
 
 time__
-  :: forall payload
-   . String
-  -> Domable payload
+  :: String
+  -> Domable
 time__ t = time_ [ DC.text_ t ]
