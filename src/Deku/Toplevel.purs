@@ -142,7 +142,7 @@ runSSR' topTag = go
       )
 
 __internalDekuFlatten
-  :: PSR (pos :: Maybe Int, dynFamily :: Maybe String, ez :: Boolean)
+  :: forall payload.PSR (pos :: Maybe Int, dynFamily :: Maybe String, ez :: Boolean)
   -> DOMInterpret payload
   -> DomableF payload
   -> Event payload

@@ -1,13 +1,10 @@
 module Deku.DOM.Elt.Select where
 
-import Bolson.Core (Entity(..), fixed)
 import Control.Plus (empty)
-import Data.Array (mapWithIndex)
 import Deku.Attribute (Attribute)
 import Deku.Control as DC
-import Deku.Core (Domable(..), Domable', unsafeSetPos)
+import Deku.Core (Domable)
 import FRP.Event (Event)
-import Safe.Coerce (coerce)
 
 data Select_
 
@@ -15,14 +12,7 @@ select
   :: Event (Attribute Select_)
   -> Array Domable
   -> Domable
-select attributes kids = Domable
-  ( Element'
-      ( DC.elementify "select" attributes
-          ( (coerce :: Domable' payload -> Domable)
-              (fixed (coerce (mapWithIndex unsafeSetPos kids)))
-          )
-      )
-  )
+select = DC.elementify2 "select"
 
 select_
   :: Array Domable

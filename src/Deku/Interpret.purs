@@ -38,7 +38,8 @@ import Test.QuickCheck.Gen (Gen, evalGen)
 -- foreign
 data FFIDOMSnapshot
 
-newtype FunctionOfFFIDOMSnaphot = FunctionOfFFIDOMSnaphot (FFIDOMSnapshot -> Effect Unit)
+newtype FunctionOfFFIDOMSnaphot = FunctionOfFFIDOMSnaphot
+  (FFIDOMSnapshot -> Effect Unit)
 
 foreign import makeFFIDOMSnapshot :: Effect FFIDOMSnapshot
 
@@ -55,6 +56,7 @@ foreign import makeElement_
   -> Boolean
   -> Core.MakeElement
   -> FunctionOfFFIDOMSnaphot
+
 foreign import makeDynBeacon_
   :: RunOnJust
   -> Boolean

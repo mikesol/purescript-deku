@@ -1,13 +1,10 @@
 module Deku.DOM.Elt.FeMerge where
 
-import Bolson.Core (Entity(..), fixed)
 import Control.Plus (empty)
-import Data.Array (mapWithIndex)
 import Deku.Attribute (Attribute)
 import Deku.Control as DC
-import Deku.Core (Domable(..), Domable', unsafeSetPos)
+import Deku.Core (Domable)
 import FRP.Event (Event)
-import Safe.Coerce (coerce)
 
 data FeMerge_
 
@@ -15,14 +12,7 @@ feMerge
   :: Event (Attribute FeMerge_)
   -> Array Domable
   -> Domable
-feMerge attributes kids = Domable
-  ( Element'
-      ( DC.elementify "feMerge" attributes
-          ( (coerce :: Domable' payload -> Domable)
-              (fixed (coerce (mapWithIndex unsafeSetPos kids)))
-          )
-      )
-  )
+feMerge = DC.elementify2 "feMerge"
 
 feMerge_
   :: Array Domable

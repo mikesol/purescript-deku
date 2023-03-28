@@ -1,6 +1,6 @@
 -- | Exports a single function, `render`, which takes a `CSS` value from `purescript-css`
 -- | and returns a `String` of CSS that can be used with `style_` from `Deku.Attributes`.
-module Deku.CSS(render) where
+module Deku.CSS (render) where
 
 import Prelude
 

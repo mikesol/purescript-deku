@@ -1,13 +1,10 @@
 module Deku.DOM.Elt.Html where
 
-import Bolson.Core (Entity(..), fixed)
 import Control.Plus (empty)
-import Data.Array (mapWithIndex)
 import Deku.Attribute (Attribute)
 import Deku.Control as DC
-import Deku.Core (Domable(..), Domable', unsafeSetPos)
+import Deku.Core (Domable)
 import FRP.Event (Event)
-import Safe.Coerce (coerce)
 
 data Html_
 
@@ -15,14 +12,7 @@ html
   :: Event (Attribute Html_)
   -> Array Domable
   -> Domable
-html attributes kids = Domable
-  ( Element'
-      ( DC.elementify "html" attributes
-          ( (coerce :: Domable' payload -> Domable)
-              (fixed (coerce (mapWithIndex unsafeSetPos kids)))
-          )
-      )
-  )
+html = DC.elementify2 "html"
 
 html_
   :: Array Domable

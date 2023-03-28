@@ -1,13 +1,10 @@
 module Deku.DOM.Elt.Pattern where
 
-import Bolson.Core (Entity(..), fixed)
 import Control.Plus (empty)
-import Data.Array (mapWithIndex)
 import Deku.Attribute (Attribute)
 import Deku.Control as DC
-import Deku.Core (Domable(..), Domable', unsafeSetPos)
+import Deku.Core (Domable)
 import FRP.Event (Event)
-import Safe.Coerce (coerce)
 
 data Pattern_
 
@@ -15,14 +12,7 @@ pattern
   :: Event (Attribute Pattern_)
   -> Array Domable
   -> Domable
-pattern attributes kids = Domable
-  ( Element'
-      ( DC.elementify "pattern" attributes
-          ( (coerce :: Domable' payload -> Domable)
-              (fixed (coerce (mapWithIndex unsafeSetPos kids)))
-          )
-      )
-  )
+pattern = DC.elementify2 "pattern"
 
 pattern_
   :: Array Domable

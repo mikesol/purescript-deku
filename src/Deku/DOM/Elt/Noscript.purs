@@ -1,13 +1,10 @@
 module Deku.DOM.Elt.Noscript where
 
-import Bolson.Core (Entity(..), fixed)
 import Control.Plus (empty)
-import Data.Array (mapWithIndex)
 import Deku.Attribute (Attribute)
 import Deku.Control as DC
-import Deku.Core (Domable(..), Domable', unsafeSetPos)
+import Deku.Core (Domable)
 import FRP.Event (Event)
-import Safe.Coerce (coerce)
 
 data Noscript_
 
@@ -15,14 +12,7 @@ noscript
   :: Event (Attribute Noscript_)
   -> Array Domable
   -> Domable
-noscript attributes kids = Domable
-  ( Element'
-      ( DC.elementify "noscript" attributes
-          ( (coerce :: Domable' payload -> Domable)
-              (fixed (coerce (mapWithIndex unsafeSetPos kids)))
-          )
-      )
-  )
+noscript = DC.elementify2 "noscript"
 
 noscript_
   :: Array Domable

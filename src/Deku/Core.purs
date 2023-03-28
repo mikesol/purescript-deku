@@ -379,11 +379,13 @@ portalFlatten =
   }
 
 __internalDekuFlatten
-  :: forall payload. Bolson.PSR (pos :: Maybe Int, ez :: Boolean, dynFamily :: Maybe String)
+  :: forall payload
+   . Bolson.PSR (pos :: Maybe Int, ez :: Boolean, dynFamily :: Maybe String)
   -> DOMInterpret payload
   -> DomableF payload
   -> Event payload
-__internalDekuFlatten a b c = BControl.flatten portalFlatten a b ((\(DomableF x) -> x) c)
+__internalDekuFlatten a b c = BControl.flatten portalFlatten a b
+  ((\(DomableF x) -> x) c)
 
 dynify
   :: forall i
@@ -474,6 +476,7 @@ dyn = dynify myDyn
   where
   myDyn :: Event (Event Child) -> Domable
   myDyn e = Domable (myDyn' ((map <<< map) (\(Child c) -> c) e))
+
   myDyn'
     :: forall payload
      . Event (Event (Bolson.Child Int (Node payload)))
@@ -489,6 +492,7 @@ fixed = dynify myFixed
   where
   myFixed :: Array Domable -> Domable
   myFixed e = Domable (myFixed' (map (\(Domable c) -> c) e))
+
   myFixed'
     :: forall payload
      . Array (DomableF payload)
@@ -512,6 +516,7 @@ envy = dynify myEnvy
   where
   myEnvy :: Event Domable -> Domable
   myEnvy e = Domable (myEnvy' (map (\(Domable c) -> c) e))
+
   myEnvy'
     :: forall payload
      . Event (DomableF payload)

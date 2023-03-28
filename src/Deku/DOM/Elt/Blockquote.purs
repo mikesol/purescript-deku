@@ -1,13 +1,10 @@
 module Deku.DOM.Elt.Blockquote where
 
-import Bolson.Core (Entity(..), fixed)
 import Control.Plus (empty)
-import Data.Array (mapWithIndex)
 import Deku.Attribute (Attribute)
 import Deku.Control as DC
-import Deku.Core (Domable(..), Domable', unsafeSetPos)
+import Deku.Core (Domable)
 import FRP.Event (Event)
-import Safe.Coerce (coerce)
 
 data Blockquote_
 
@@ -15,14 +12,7 @@ blockquote
   :: Event (Attribute Blockquote_)
   -> Array Domable
   -> Domable
-blockquote attributes kids = Domable
-  ( Element'
-      ( DC.elementify "blockquote" attributes
-          ( (coerce :: Domable' payload -> Domable)
-              (fixed (coerce (mapWithIndex unsafeSetPos kids)))
-          )
-      )
-  )
+blockquote = DC.elementify2 "blockquote"
 
 blockquote_
   :: Array Domable

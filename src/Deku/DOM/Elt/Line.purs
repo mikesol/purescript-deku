@@ -1,13 +1,10 @@
 module Deku.DOM.Elt.Line where
 
-import Bolson.Core (Entity(..), fixed)
 import Control.Plus (empty)
-import Data.Array (mapWithIndex)
 import Deku.Attribute (Attribute)
 import Deku.Control as DC
-import Deku.Core (Domable(..), Domable', unsafeSetPos)
+import Deku.Core (Domable)
 import FRP.Event (Event)
-import Safe.Coerce (coerce)
 
 data Line_
 
@@ -15,14 +12,7 @@ line
   :: Event (Attribute Line_)
   -> Array Domable
   -> Domable
-line attributes kids = Domable
-  ( Element'
-      ( DC.elementify "line" attributes
-          ( (coerce :: Domable' payload -> Domable)
-              (fixed (coerce (mapWithIndex unsafeSetPos kids)))
-          )
-      )
-  )
+line = DC.elementify2 "line"
 
 line_
   :: Array Domable

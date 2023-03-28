@@ -1,13 +1,10 @@
 module Deku.DOM.Elt.Rt where
 
-import Bolson.Core (Entity(..), fixed)
 import Control.Plus (empty)
-import Data.Array (mapWithIndex)
 import Deku.Attribute (Attribute)
 import Deku.Control as DC
-import Deku.Core (Domable(..), Domable', unsafeSetPos)
+import Deku.Core (Domable)
 import FRP.Event (Event)
-import Safe.Coerce (coerce)
 
 data Rt_
 
@@ -15,14 +12,7 @@ rt
   :: Event (Attribute Rt_)
   -> Array Domable
   -> Domable
-rt attributes kids = Domable
-  ( Element'
-      ( DC.elementify "rt" attributes
-          ( (coerce :: Domable' payload -> Domable)
-              (fixed (coerce (mapWithIndex unsafeSetPos kids)))
-          )
-      )
-  )
+rt = DC.elementify2 "rt"
 
 rt_
   :: Array Domable

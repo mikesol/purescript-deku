@@ -1,13 +1,10 @@
 module Deku.DOM.Elt.Title where
 
-import Bolson.Core (Entity(..), fixed)
 import Control.Plus (empty)
-import Data.Array (mapWithIndex)
 import Deku.Attribute (Attribute)
 import Deku.Control as DC
-import Deku.Core (Domable(..), Domable', unsafeSetPos)
+import Deku.Core (Domable)
 import FRP.Event (Event)
-import Safe.Coerce (coerce)
 
 data Title_
 
@@ -15,14 +12,7 @@ title
   :: Event (Attribute Title_)
   -> Array Domable
   -> Domable
-title attributes kids = Domable
-  ( Element'
-      ( DC.elementify "title" attributes
-          ( (coerce :: Domable' payload -> Domable)
-              (fixed (coerce (mapWithIndex unsafeSetPos kids)))
-          )
-      )
-  )
+title = DC.elementify2 "title"
 
 title_
   :: Array Domable

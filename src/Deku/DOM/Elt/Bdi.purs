@@ -1,13 +1,10 @@
 module Deku.DOM.Elt.Bdi where
 
-import Bolson.Core (Entity(..), fixed)
 import Control.Plus (empty)
-import Data.Array (mapWithIndex)
 import Deku.Attribute (Attribute)
 import Deku.Control as DC
-import Deku.Core (Domable(..), Domable', unsafeSetPos)
+import Deku.Core (Domable)
 import FRP.Event (Event)
-import Safe.Coerce (coerce)
 
 data Bdi_
 
@@ -15,14 +12,7 @@ bdi
   :: Event (Attribute Bdi_)
   -> Array Domable
   -> Domable
-bdi attributes kids = Domable
-  ( Element'
-      ( DC.elementify "bdi" attributes
-          ( (coerce :: Domable' payload -> Domable)
-              (fixed (coerce (mapWithIndex unsafeSetPos kids)))
-          )
-      )
-  )
+bdi = DC.elementify2 "bdi"
 
 bdi_
   :: Array Domable

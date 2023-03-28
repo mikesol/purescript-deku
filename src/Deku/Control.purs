@@ -52,7 +52,8 @@ type Neg1 = -1
 ----
 
 unsafeSetText
-  :: forall payload. DOMInterpret payload
+  :: forall payload
+   . DOMInterpret payload
   -> String
   -> Event String
   -> Event payload
@@ -240,7 +241,7 @@ portalFlatten =
 -- | A variation of portal that takes a single element instead of a vector of elements.
 portal1
   :: Domable
-  -> ( Domable 
+  -> ( Domable
        -> Domable
      )
   -> Domable
@@ -393,7 +394,8 @@ deku root (Domable cc) = go cc
 data Stage = Begin | Middle | End
 
 __internalDekuFlatten
-  :: forall payload. PSR (pos :: Maybe Int, ez :: Boolean, dynFamily :: Maybe String)
+  :: forall payload
+   . PSR (pos :: Maybe Int, ez :: Boolean, dynFamily :: Maybe String)
   -> DOMInterpret payload
   -> DomableF payload
   -> Event payload

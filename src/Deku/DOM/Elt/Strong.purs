@@ -1,13 +1,10 @@
 module Deku.DOM.Elt.Strong where
 
-import Bolson.Core (Entity(..), fixed)
 import Control.Plus (empty)
-import Data.Array (mapWithIndex)
 import Deku.Attribute (Attribute)
 import Deku.Control as DC
-import Deku.Core (Domable(..), Domable', unsafeSetPos)
+import Deku.Core (Domable)
 import FRP.Event (Event)
-import Safe.Coerce (coerce)
 
 data Strong_
 
@@ -15,14 +12,7 @@ strong
   :: Event (Attribute Strong_)
   -> Array Domable
   -> Domable
-strong attributes kids = Domable
-  ( Element'
-      ( DC.elementify "strong" attributes
-          ( (coerce :: Domable' payload -> Domable)
-              (fixed (coerce (mapWithIndex unsafeSetPos kids)))
-          )
-      )
-  )
+strong = DC.elementify2 "strong"
 
 strong_
   :: Array Domable

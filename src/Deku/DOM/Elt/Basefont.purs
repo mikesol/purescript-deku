@@ -1,13 +1,10 @@
 module Deku.DOM.Elt.Basefont where
 
-import Bolson.Core (Entity(..), fixed)
 import Control.Plus (empty)
-import Data.Array (mapWithIndex)
 import Deku.Attribute (Attribute)
 import Deku.Control as DC
-import Deku.Core (Domable(..), Domable', unsafeSetPos)
+import Deku.Core (Domable)
 import FRP.Event (Event)
-import Safe.Coerce (coerce)
 
 data Basefont_
 
@@ -15,14 +12,7 @@ basefont
   :: Event (Attribute Basefont_)
   -> Array Domable
   -> Domable
-basefont attributes kids = Domable
-  ( Element'
-      ( DC.elementify "basefont" attributes
-          ( (coerce :: Domable' payload -> Domable)
-              (fixed (coerce (mapWithIndex unsafeSetPos kids)))
-          )
-      )
-  )
+basefont = DC.elementify2 "basefont"
 
 basefont_
   :: Array Domable

@@ -1,13 +1,10 @@
 module Deku.DOM.Elt.Progress where
 
-import Bolson.Core (Entity(..), fixed)
 import Control.Plus (empty)
-import Data.Array (mapWithIndex)
 import Deku.Attribute (Attribute)
 import Deku.Control as DC
-import Deku.Core (Domable(..), Domable', unsafeSetPos)
+import Deku.Core (Domable)
 import FRP.Event (Event)
-import Safe.Coerce (coerce)
 
 data Progress_
 
@@ -15,14 +12,7 @@ progress
   :: Event (Attribute Progress_)
   -> Array Domable
   -> Domable
-progress attributes kids = Domable
-  ( Element'
-      ( DC.elementify "progress" attributes
-          ( (coerce :: Domable' payload -> Domable)
-              (fixed (coerce (mapWithIndex unsafeSetPos kids)))
-          )
-      )
-  )
+progress = DC.elementify2 "progress"
 
 progress_
   :: Array Domable

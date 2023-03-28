@@ -1,13 +1,10 @@
 module Deku.DOM.Elt.Form where
 
-import Bolson.Core (Entity(..), fixed)
 import Control.Plus (empty)
-import Data.Array (mapWithIndex)
 import Deku.Attribute (Attribute)
 import Deku.Control as DC
-import Deku.Core (Domable(..), Domable', unsafeSetPos)
+import Deku.Core (Domable)
 import FRP.Event (Event)
-import Safe.Coerce (coerce)
 
 data Form_
 
@@ -15,14 +12,7 @@ form
   :: Event (Attribute Form_)
   -> Array Domable
   -> Domable
-form attributes kids = Domable
-  ( Element'
-      ( DC.elementify "form" attributes
-          ( (coerce :: Domable' payload -> Domable)
-              (fixed (coerce (mapWithIndex unsafeSetPos kids)))
-          )
-      )
-  )
+form = DC.elementify2 "form"
 
 form_
   :: Array Domable

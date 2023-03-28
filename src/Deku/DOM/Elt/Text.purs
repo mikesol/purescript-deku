@@ -1,13 +1,10 @@
 module Deku.DOM.Elt.Text where
 
-import Bolson.Core (Entity(..), fixed)
 import Control.Plus (empty)
-import Data.Array (mapWithIndex)
 import Deku.Attribute (Attribute)
 import Deku.Control as DC
-import Deku.Core (Domable(..), Domable', unsafeSetPos)
+import Deku.Core (Domable)
 import FRP.Event (Event)
-import Safe.Coerce (coerce)
 
 data Text_
 
@@ -15,14 +12,7 @@ text
   :: Event (Attribute Text_)
   -> Array Domable
   -> Domable
-text attributes kids = Domable
-  ( Element'
-      ( DC.elementify "text" attributes
-          ( (coerce :: Domable' payload -> Domable)
-              (fixed (coerce (mapWithIndex unsafeSetPos kids)))
-          )
-      )
-  )
+text = DC.elementify2 "text"
 
 text_
   :: Array Domable

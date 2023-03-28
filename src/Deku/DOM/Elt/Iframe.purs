@@ -1,13 +1,10 @@
 module Deku.DOM.Elt.Iframe where
 
-import Bolson.Core (Entity(..), fixed)
 import Control.Plus (empty)
-import Data.Array (mapWithIndex)
 import Deku.Attribute (Attribute)
 import Deku.Control as DC
-import Deku.Core (Domable(..), Domable', unsafeSetPos)
+import Deku.Core (Domable)
 import FRP.Event (Event)
-import Safe.Coerce (coerce)
 
 data Iframe_
 
@@ -15,14 +12,7 @@ iframe
   :: Event (Attribute Iframe_)
   -> Array Domable
   -> Domable
-iframe attributes kids = Domable
-  ( Element'
-      ( DC.elementify "iframe" attributes
-          ( (coerce :: Domable' payload -> Domable)
-              (fixed (coerce (mapWithIndex unsafeSetPos kids)))
-          )
-      )
-  )
+iframe = DC.elementify2 "iframe"
 
 iframe_
   :: Array Domable

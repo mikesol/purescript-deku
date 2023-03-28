@@ -650,7 +650,7 @@ import Bolson.Core (Entity(..))
 import Bolson.Core as Bolson
 import Data.FunctorWithIndex (mapWithIndex)
 import Deku.Attribute (class Attr, Attribute, Cb(..), cb', unsafeAttribute)
-import Deku.Control (elementify)
+import Deku.Control (elementify2)
 import Deku.Core (Domable(..), Domable', unsafeSetPos)
 -- import Deku.DOM.Attr.Accept (Accept(..))
 -- import Deku.DOM.Attr.AcceptCharset (AcceptCharset(..))
@@ -1890,14 +1890,7 @@ unsafeCustomElement
   -> Event (Attribute element)
   -> Array Domable
   -> Domable
-unsafeCustomElement name _ attributes kids = Domable
-  ( Element'
-      ( elementify name attributes
-          ( (coerce :: Domable' payload -> Domable)
-              (Bolson.fixed (coerce (mapWithIndex unsafeSetPos kids)))
-          )
-      )
-  )
+unsafeCustomElement name _ = elementify2 name
 
 -- | Creates a special event where an Deku element can have its raw DOM element
 -- | injected into a closure. All bets are off type-safety wise. This is useful

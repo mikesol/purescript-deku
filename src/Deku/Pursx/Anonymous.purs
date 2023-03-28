@@ -19,9 +19,9 @@ class
 
 instance endOfTheLine ::
   ( Reflectable html String
-  , PXStart payload "~" " " html r
+  , PXStart "~" " " html r
   , RL.RowToList r rl
-  , PursxToElement payload rl r
+  , PursxToElement rl r
   ) =>
   PursxStringAnonymous (Proxy ll /\ Proxy html /\ { | r })
     EndAnonymousPursX
@@ -44,9 +44,9 @@ class
 
 instance endOfTheLineV ::
   ( Reflectable html String
-  , PXStart payload "~" " " html r
+  , PXStart "~" " " html r
   , RL.RowToList r rl
-  , PursxToElement payload rl r
+  , PursxToElement rl r
   ) =>
   PursxValAnonymous (Proxy ll /\ Proxy html /\ { | r })
     EndAnonymousPursX

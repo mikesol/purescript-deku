@@ -1,13 +1,10 @@
 module Deku.DOM.Elt.Img where
 
-import Bolson.Core (Entity(..), fixed)
 import Control.Plus (empty)
-import Data.Array (mapWithIndex)
 import Deku.Attribute (Attribute)
 import Deku.Control as DC
-import Deku.Core (Domable(..), Domable', unsafeSetPos)
+import Deku.Core (Domable)
 import FRP.Event (Event)
-import Safe.Coerce (coerce)
 
 data Img_
 
@@ -15,14 +12,7 @@ img
   :: Event (Attribute Img_)
   -> Array Domable
   -> Domable
-img attributes kids = Domable
-  ( Element'
-      ( DC.elementify "img" attributes
-          ( (coerce :: Domable' payload -> Domable)
-              (fixed (coerce (mapWithIndex unsafeSetPos kids)))
-          )
-      )
-  )
+img = DC.elementify2 "img"
 
 img_
   :: Array Domable

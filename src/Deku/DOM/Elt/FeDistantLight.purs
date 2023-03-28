@@ -1,13 +1,10 @@
 module Deku.DOM.Elt.FeDistantLight where
 
-import Bolson.Core (Entity(..), fixed)
 import Control.Plus (empty)
-import Data.Array (mapWithIndex)
 import Deku.Attribute (Attribute)
 import Deku.Control as DC
-import Deku.Core (Domable(..), Domable', unsafeSetPos)
+import Deku.Core (Domable)
 import FRP.Event (Event)
-import Safe.Coerce (coerce)
 
 data FeDistantLight_
 
@@ -15,14 +12,7 @@ feDistantLight
   :: Event (Attribute FeDistantLight_)
   -> Array Domable
   -> Domable
-feDistantLight attributes kids = Domable
-  ( Element'
-      ( DC.elementify "feDistantLight" attributes
-          ( (coerce :: Domable' payload -> Domable)
-              (fixed (coerce (mapWithIndex unsafeSetPos kids)))
-          )
-      )
-  )
+feDistantLight = DC.elementify2 "feDistantLight"
 
 feDistantLight_
   :: Array Domable

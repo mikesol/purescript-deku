@@ -1,13 +1,10 @@
 module Deku.DOM.Elt.Style where
 
-import Bolson.Core (Entity(..), fixed)
 import Control.Plus (empty)
-import Data.Array (mapWithIndex)
 import Deku.Attribute (Attribute)
 import Deku.Control as DC
-import Deku.Core (Domable(..), Domable', unsafeSetPos)
+import Deku.Core (Domable)
 import FRP.Event (Event)
-import Safe.Coerce (coerce)
 
 data Style_
 
@@ -15,14 +12,7 @@ style
   :: Event (Attribute Style_)
   -> Array Domable
   -> Domable
-style attributes kids = Domable
-  ( Element'
-      ( DC.elementify "style" attributes
-          ( (coerce :: Domable' payload -> Domable)
-              (fixed (coerce (mapWithIndex unsafeSetPos kids)))
-          )
-      )
-  )
+style = DC.elementify2 "style"
 
 style_
   :: Array Domable

@@ -1,13 +1,10 @@
 module Deku.DOM.Elt.RadialGradient where
 
-import Bolson.Core (Entity(..), fixed)
 import Control.Plus (empty)
-import Data.Array (mapWithIndex)
 import Deku.Attribute (Attribute)
 import Deku.Control as DC
-import Deku.Core (Domable(..), Domable', unsafeSetPos)
+import Deku.Core (Domable)
 import FRP.Event (Event)
-import Safe.Coerce (coerce)
 
 data RadialGradient_
 
@@ -15,14 +12,7 @@ radialGradient
   :: Event (Attribute RadialGradient_)
   -> Array Domable
   -> Domable
-radialGradient attributes kids = Domable
-  ( Element'
-      ( DC.elementify "radialGradient" attributes
-          ( (coerce :: Domable' payload -> Domable)
-              (fixed (coerce (mapWithIndex unsafeSetPos kids)))
-          )
-      )
-  )
+radialGradient = DC.elementify2 "radialGradient"
 
 radialGradient_
   :: Array Domable
