@@ -12,6 +12,7 @@
   , "filterable"
   , "foldable-traversable"
   , "foreign-object"
+  , "free"
   , "hyrule"
   , "maybe"
   , "newtype"

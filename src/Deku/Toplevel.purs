@@ -12,18 +12,20 @@ import Prelude
 import Bolson.Control as Bolson
 import Bolson.Core (Element(..), PSR, Scope(..))
 import Control.Alt ((<|>))
+import Control.Monad.Free (resume)
 import Control.Monad.ST (ST)
 import Control.Monad.ST.Class (liftST)
 import Control.Monad.ST.Global (Global)
 import Control.Monad.ST.Internal as RRef
+import Data.Either (Either(..))
 import Data.Maybe (Maybe(..), maybe)
 import Data.Newtype (unwrap)
 import Deku.Control (deku)
 import Deku.Core (DOMInterpret(..), Domable(..), Domable', DomableF(..), Node(..))
-import Deku.Interpret (FunctionOfFFIDOMSnaphot(..), fullDOMInterpret, getAllComments, hydratingDOMInterpret, makeFFIDOMSnapshot, setHydrating, ssrDOMInterpret, unSetHydrating)
+import Deku.Interpret (FreeEFunctionOfFFIDOMSnapshotU, FunctionOfFFIDOMSnapshotU, fullDOMInterpret, getAllComments, hydratingDOMInterpret, makeFFIDOMSnapshot, setHydrating, ssrDOMInterpret, unSetHydrating)
 import Deku.SSR (ssr')
 import Effect (Effect)
-import FRP.Event (Event, subscribe, subscribePure)
+import FRP.Event (Event, keepLatest, subscribe, subscribePure)
 import Safe.Coerce (coerce)
 import Unsafe.Coerce (unsafeCoerce)
 import Web.DOM.Element as DOM
@@ -32,6 +34,14 @@ import Web.HTML (window)
 import Web.HTML.HTMLDocument (body)
 import Web.HTML.HTMLElement (toElement)
 import Web.HTML.Window (document)
+
+flattenToSingleEvent
+  :: Event FreeEFunctionOfFFIDOMSnapshotU -> Event FunctionOfFFIDOMSnapshotU
+flattenToSingleEvent = keepLatest <<< map go
+  where
+  go = resume >>> case _ of
+    Left l -> keepLatest (map go l)
+    Right r -> pure r
 
 -- | Runs a deku application in a DOM element, returning a canceler that can
 -- | be used to cancel the application.
@@ -42,7 +52,7 @@ runInElement'
 runInElement' elt eee = do
   ffi <- makeFFIDOMSnapshot
   evt <- liftST (RRef.new 0) <#> (deku elt eee <<< fullDOMInterpret)
-  subscribe evt \(FunctionOfFFIDOMSnaphot i) -> i ffi
+  subscribe (flattenToSingleEvent evt) \i -> i ffi
 
 -- | Runs a deku application in the body of a document, returning a canceler that can
 -- | be used to cancel the application.
@@ -74,18 +84,20 @@ hydrate' children = do
   let me = "deku-root"
   root <- dekuRoot
   u <- subscribe
-    ( pure ((unwrap di).makeRoot { id: me, root }) <|> __internalDekuFlatten
-        { parent: Just "deku-root"
-        , scope: Local "rootScope"
-        , raiseId: \_ -> pure unit
-        , ez: true
-        , pos: Nothing
-        , dynFamily: Nothing
-        }
-        di
-        (unsafeCoerce children)
+    ( flattenToSingleEvent
+        ( pure ((unwrap di).makeRoot { id: me, root }) <|> __internalDekuFlatten
+            { parent: Just "deku-root"
+            , scope: Local "rootScope"
+            , raiseId: \_ -> pure unit
+            , ez: true
+            , pos: Nothing
+            , dynFamily: Nothing
+            }
+            di
+            (unsafeCoerce children)
+        )
     )
-    \(FunctionOfFFIDOMSnaphot i) -> i ffi
+    \i -> i ffi
   (coerce unSetHydrating :: _ -> _ Unit) ffi
   pure u
 
@@ -142,7 +154,8 @@ runSSR' topTag = go
       )
 
 __internalDekuFlatten
-  :: forall payload.PSR (pos :: Maybe Int, dynFamily :: Maybe String, ez :: Boolean)
+  :: forall payload
+   . PSR (pos :: Maybe Int, dynFamily :: Maybe String, ez :: Boolean)
   -> DOMInterpret payload
   -> DomableF payload
   -> Event payload

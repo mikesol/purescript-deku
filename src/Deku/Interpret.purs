@@ -4,24 +4,28 @@
 -- | the #frp channel of the PureScript Discord. If enough people are implementing
 -- | Deku backends, someone may document this stuff at some point.
 module Deku.Interpret
-  ( FFIDOMSnapshot
-  , fullDOMInterpret
-  , makeFFIDOMSnapshot
-  , ssrDOMInterpret
-  , hydratingDOMInterpret
+  ( EliminatableInstruction(..)
+  , FFIDOMSnapshot(..)
+  , FunctionOfFFIDOMSnapshot(..)
+  , FunctionOfFFIDOMSnapshotU
   , Instruction(..)
-  , EliminatableInstruction(..)
   , RenderableInstruction(..)
-  , FunctionOfFFIDOMSnaphot(..)
-  , setHydrating
-  , unSetHydrating
+  , FreeEFunctionOfFFIDOMSnapshotU
+  , FreeE
+  , fullDOMInterpret
   , getAllComments
+  , hydratingDOMInterpret
+  , makeFFIDOMSnapshot
+  , setHydrating
+  , ssrDOMInterpret
+  , unSetHydrating
   ) where
 
 import Prelude
 
 import Bolson.Core (Scope)
 import Bolson.Core as Bolson
+import Control.Monad.Free (Free, liftF)
 import Control.Monad.ST (ST)
 import Control.Monad.ST.Global (Global)
 import Control.Monad.ST.Global as Region
@@ -31,6 +35,7 @@ import Data.Maybe (Maybe(..), maybe)
 import Deku.Core (DomableF(..))
 import Deku.Core as Core
 import Effect (Effect)
+import FRP.Event (Event)
 import Safe.Coerce (coerce)
 import Test.QuickCheck (arbitrary, mkSeed)
 import Test.QuickCheck.Gen (Gen, evalGen)
@@ -38,8 +43,13 @@ import Test.QuickCheck.Gen (Gen, evalGen)
 -- foreign
 data FFIDOMSnapshot
 
-newtype FunctionOfFFIDOMSnaphot = FunctionOfFFIDOMSnaphot
-  (FFIDOMSnapshot -> Effect Unit)
+type FunctionOfFFIDOMSnapshot a =
+  (FFIDOMSnapshot -> Effect a)
+
+type FunctionOfFFIDOMSnapshotU = FunctionOfFFIDOMSnapshot Unit
+
+type FreeE a = Free Event a
+type FreeEFunctionOfFFIDOMSnapshotU = FreeE FunctionOfFFIDOMSnapshotU
 
 foreign import makeFFIDOMSnapshot :: Effect FFIDOMSnapshot
 
@@ -55,68 +65,68 @@ foreign import makeElement_
   :: RunOnJust
   -> Boolean
   -> Core.MakeElement
-  -> FunctionOfFFIDOMSnaphot
+  -> FunctionOfFFIDOMSnapshotU
 
 foreign import makeDynBeacon_
   :: RunOnJust
   -> Boolean
   -> Core.MakeDynBeacon
-  -> FunctionOfFFIDOMSnaphot
+  -> FunctionOfFFIDOMSnapshotU
 
 foreign import removeDynBeacon_
   :: Core.RemoveDynBeacon
-  -> FunctionOfFFIDOMSnaphot
+  -> FunctionOfFFIDOMSnapshotU
 
 foreign import attributeParent_
   :: RunOnJust
   -> Core.AttributeParent
-  -> FunctionOfFFIDOMSnaphot
+  -> FunctionOfFFIDOMSnapshotU
 
 foreign import makeRoot_
   :: Core.MakeRoot
-  -> FunctionOfFFIDOMSnaphot
+  -> FunctionOfFFIDOMSnapshotU
 
 foreign import makeText_
   :: RunOnJust
   -> Boolean
   -> (forall a. (a -> Unit) -> Maybe a -> Unit)
   -> Core.MakeText
-  -> FunctionOfFFIDOMSnaphot
+  -> FunctionOfFFIDOMSnapshotU
 
 foreign import setText_
   :: Core.SetText
-  -> FunctionOfFFIDOMSnaphot
+  -> FunctionOfFFIDOMSnapshotU
 
 foreign import setProp_
-  :: Boolean -> Core.SetProp -> FunctionOfFFIDOMSnaphot
+  :: Boolean -> Core.SetProp -> FunctionOfFFIDOMSnapshotU
 
 foreign import unsetAttribute_
-  :: Boolean -> Core.UnsetAttribute -> FunctionOfFFIDOMSnaphot
+  :: Boolean -> Core.UnsetAttribute -> FunctionOfFFIDOMSnapshotU
 
 foreign import setCb_
-  :: Boolean -> Core.SetCb -> FunctionOfFFIDOMSnaphot
+  :: Boolean -> Core.SetCb -> FunctionOfFFIDOMSnapshotU
 
 foreign import makePursx_
   :: RunOnJust
   -> Boolean
   -> (forall a. (a -> Unit) -> Maybe a -> Unit)
   -> Core.MakePursx
-  -> FunctionOfFFIDOMSnaphot
+  -> FunctionOfFFIDOMSnapshotU
 
 foreign import deleteFromCache_
-  :: Core.DeleteFromCache -> FunctionOfFFIDOMSnaphot
+  :: Core.DeleteFromCache -> FunctionOfFFIDOMSnapshotU
 
 foreign import giveNewParent_
   :: (Int -> Maybe Int)
   -> RunOnJust
-  -> Core.GiveNewParent FunctionOfFFIDOMSnaphot
-  -> FunctionOfFFIDOMSnaphot
+  -> Core.GiveNewParent FreeEFunctionOfFFIDOMSnapshotU
+  -> FunctionOfFFIDOMSnapshotU
 
 foreign import disconnectElement_
-  :: Core.DisconnectElement -> FunctionOfFFIDOMSnaphot
+  :: Core.DisconnectElement -> FunctionOfFFIDOMSnapshotU
 
-foreign import setHydrating :: FunctionOfFFIDOMSnaphot
-foreign import unSetHydrating :: FunctionOfFFIDOMSnaphot
+foreign import setHydrating :: FunctionOfFFIDOMSnapshotU
+foreign import unSetHydrating :: FunctionOfFFIDOMSnapshotU
 
 foreign import getPos :: String -> FFIDOMSnapshot -> Effect (Maybe Int)
 foreign import getDynFamily :: String -> FFIDOMSnapshot -> Effect (Maybe String)
@@ -125,7 +135,7 @@ foreign import getScope :: String -> FFIDOMSnapshot -> Effect Scope
 
 fullDOMInterpret
   :: Ref.STRef Region.Global Int
-  -> Core.DOMInterpret FunctionOfFFIDOMSnaphot
+  -> Core.DOMInterpret FreeEFunctionOfFFIDOMSnapshotU
 fullDOMInterpret seed = Core.DOMInterpret
   { ids: do
       s <- Ref.read seed
@@ -134,21 +144,21 @@ fullDOMInterpret seed = Core.DOMInterpret
           (evalGen (arbitrary :: Gen Int) { newSeed: mkSeed s, size: 5 })
       void $ Ref.modify (add 1) seed
       pure o
-  , makeElement: makeElement_ runOnJust false
-  , makeDynBeacon: makeDynBeacon_ runOnJust false
-  , attributeParent: attributeParent_ runOnJust
-  , makeRoot: makeRoot_
-  , makeText: makeText_ runOnJust false (maybe unit)
-  , makePursx: makePursx_ runOnJust false (maybe unit)
-  , setProp: setProp_ false
-  , setCb: setCb_ false
-  , unsetAttribute: unsetAttribute_ false
-  , setText: setText_
-  , sendToPos
-  , removeDynBeacon: removeDynBeacon_
-  , deleteFromCache: deleteFromCache_
-  , giveNewParent: giveNewParent_ Just runOnJust
-  , disconnectElement: disconnectElement_
+  , makeElement:liftF <<<  pure <<<  makeElement_ runOnJust false
+  , makeDynBeacon:liftF <<<  pure <<<  makeDynBeacon_ runOnJust false
+  , attributeParent: liftF <<<  pure <<< attributeParent_ runOnJust
+  , makeRoot: liftF <<<  pure <<< makeRoot_
+  , makeText: liftF <<<  pure <<< makeText_ runOnJust false (maybe unit)
+  , makePursx: liftF <<<  pure <<<  makePursx_ runOnJust false (maybe unit)
+  , setProp: liftF <<<  pure <<< setProp_ false
+  , setCb: liftF <<<  pure <<< setCb_ false
+  , unsetAttribute: liftF <<<  pure <<< unsetAttribute_ false
+  , setText: liftF <<<  pure <<< setText_
+  , sendToPos: liftF <<<  pure <<< sendToPos
+  , removeDynBeacon: liftF <<<  pure <<< removeDynBeacon_
+  , deleteFromCache: liftF <<<  pure <<< deleteFromCache_
+  , giveNewParent: liftF <<<  pure <<< giveNewParent_ Just runOnJust
+  , disconnectElement: liftF <<<  pure <<< disconnectElement_
   }
 
 data RenderableInstruction
@@ -304,8 +314,8 @@ ssrDOMInterpret seed = Core.DOMInterpret
   , disconnectElement: ssrDisconnectElement
   }
 
-sendToPos :: Core.SendToPos -> FunctionOfFFIDOMSnaphot
-sendToPos a = FunctionOfFFIDOMSnaphot \state -> do
+sendToPos :: Core.SendToPos -> FunctionOfFFIDOMSnapshotU
+sendToPos a = \state -> do
   scope <- getScope a.id state
   parent <- getParent a.id state
   dynFamily <- getDynFamily a.id state
@@ -324,7 +334,7 @@ sendToPos a = FunctionOfFFIDOMSnaphot \state -> do
 
 hydratingDOMInterpret
   :: Ref.STRef Region.Global Int
-  -> Core.DOMInterpret FunctionOfFFIDOMSnaphot
+  -> Core.DOMInterpret FreeEFunctionOfFFIDOMSnapshotU
 hydratingDOMInterpret seed = Core.DOMInterpret
   { ids: do
       s <- Ref.read seed
@@ -333,19 +343,19 @@ hydratingDOMInterpret seed = Core.DOMInterpret
           (evalGen (arbitrary :: Gen Int) { newSeed: mkSeed s, size: 5 })
       void $ Ref.modify (add 1) seed
       pure o
-  , makeElement: makeElement_ runOnJust true
-  , makeDynBeacon: makeDynBeacon_ runOnJust true
-  , attributeParent: attributeParent_ runOnJust
-  , makeRoot: makeRoot_
-  , makeText: makeText_ runOnJust true (maybe unit)
-  , makePursx: makePursx_ runOnJust true (maybe unit)
-  , setProp: setProp_ true
-  , setCb: setCb_ true
-  , unsetAttribute: unsetAttribute_ true
-  , setText: setText_
-  , sendToPos
-  , deleteFromCache: deleteFromCache_
-  , removeDynBeacon: removeDynBeacon_
-  , giveNewParent: giveNewParent_ Just runOnJust
-  , disconnectElement: disconnectElement_
+  , makeElement: liftF <<<  pure <<< makeElement_ runOnJust true
+  , makeDynBeacon: liftF <<<  pure <<< makeDynBeacon_ runOnJust true
+  , attributeParent: liftF <<<  pure <<< attributeParent_ runOnJust
+  , makeRoot: liftF <<<  pure <<< makeRoot_
+  , makeText: liftF <<<  pure <<< makeText_ runOnJust true (maybe unit)
+  , makePursx: liftF <<<  pure <<< makePursx_ runOnJust true (maybe unit)
+  , setProp: liftF <<<  pure <<< setProp_ true
+  , setCb: liftF <<<  pure <<< setCb_ true
+  , unsetAttribute: liftF <<<  pure <<< unsetAttribute_ true
+  , setText: liftF <<<  pure <<< setText_
+  , sendToPos: liftF <<<  pure <<< sendToPos
+  , deleteFromCache: liftF <<<  pure <<< deleteFromCache_
+  , removeDynBeacon: liftF <<<  pure <<< removeDynBeacon_
+  , giveNewParent: liftF <<<  pure <<< giveNewParent_ Just runOnJust
+  , disconnectElement: liftF <<<  pure <<< disconnectElement_
   }
