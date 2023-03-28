@@ -11,7 +11,8 @@ module Deku.Interpret
   , Instruction(..)
   , RenderableInstruction(..)
   , FreeEFunctionOfFFIDOMSnapshotU
-  , FreeE
+  , FreeEFunctionOfFFIDOMSnapshot
+  , EFunctionOfFFIDOMSnapshot(..)
   , fullDOMInterpret
   , getAllComments
   , hydratingDOMInterpret
@@ -48,8 +49,13 @@ type FunctionOfFFIDOMSnapshot a =
 
 type FunctionOfFFIDOMSnapshotU = FunctionOfFFIDOMSnapshot Unit
 
-type FreeE a = Free Event a
-type FreeEFunctionOfFFIDOMSnapshotU = FreeE FunctionOfFFIDOMSnapshotU
+newtype EFunctionOfFFIDOMSnapshot a = EFunctionOfFFIDOMSnapshot
+  (Event (FunctionOfFFIDOMSnapshot a))
+
+derive instance Functor EFunctionOfFFIDOMSnapshot
+
+type FreeEFunctionOfFFIDOMSnapshot a = Free EFunctionOfFFIDOMSnapshot a
+type FreeEFunctionOfFFIDOMSnapshotU = FreeEFunctionOfFFIDOMSnapshot Unit
 
 foreign import makeFFIDOMSnapshot :: Effect FFIDOMSnapshot
 
@@ -144,21 +150,21 @@ fullDOMInterpret seed = Core.DOMInterpret
           (evalGen (arbitrary :: Gen Int) { newSeed: mkSeed s, size: 5 })
       void $ Ref.modify (add 1) seed
       pure o
-  , makeElement:liftF <<<  pure <<<  makeElement_ runOnJust false
-  , makeDynBeacon:liftF <<<  pure <<<  makeDynBeacon_ runOnJust false
-  , attributeParent: liftF <<<  pure <<< attributeParent_ runOnJust
-  , makeRoot: liftF <<<  pure <<< makeRoot_
-  , makeText: liftF <<<  pure <<< makeText_ runOnJust false (maybe unit)
-  , makePursx: liftF <<<  pure <<<  makePursx_ runOnJust false (maybe unit)
-  , setProp: liftF <<<  pure <<< setProp_ false
-  , setCb: liftF <<<  pure <<< setCb_ false
-  , unsetAttribute: liftF <<<  pure <<< unsetAttribute_ false
-  , setText: liftF <<<  pure <<< setText_
-  , sendToPos: liftF <<<  pure <<< sendToPos
-  , removeDynBeacon: liftF <<<  pure <<< removeDynBeacon_
-  , deleteFromCache: liftF <<<  pure <<< deleteFromCache_
-  , giveNewParent: liftF <<<  pure <<< giveNewParent_ Just runOnJust
-  , disconnectElement: liftF <<<  pure <<< disconnectElement_
+  , makeElement:liftF <<<  EFunctionOfFFIDOMSnapshot <<< pure <<<  makeElement_ runOnJust false
+  , makeDynBeacon:liftF <<<  EFunctionOfFFIDOMSnapshot <<< pure <<<  makeDynBeacon_ runOnJust false
+  , attributeParent: liftF <<<  EFunctionOfFFIDOMSnapshot <<< pure <<< attributeParent_ runOnJust
+  , makeRoot: liftF <<<  EFunctionOfFFIDOMSnapshot <<< pure <<< makeRoot_
+  , makeText: liftF <<<  EFunctionOfFFIDOMSnapshot <<< pure <<< makeText_ runOnJust false (maybe unit)
+  , makePursx: liftF <<<  EFunctionOfFFIDOMSnapshot <<< pure <<<  makePursx_ runOnJust false (maybe unit)
+  , setProp: liftF <<<  EFunctionOfFFIDOMSnapshot <<< pure <<< setProp_ false
+  , setCb: liftF <<<  EFunctionOfFFIDOMSnapshot <<< pure <<< setCb_ false
+  , unsetAttribute: liftF <<<  EFunctionOfFFIDOMSnapshot <<< pure <<< unsetAttribute_ false
+  , setText: liftF <<<  EFunctionOfFFIDOMSnapshot <<< pure <<< setText_
+  , sendToPos: liftF <<<  EFunctionOfFFIDOMSnapshot <<< pure <<< sendToPos
+  , removeDynBeacon: liftF <<<  EFunctionOfFFIDOMSnapshot <<< pure <<< removeDynBeacon_
+  , deleteFromCache: liftF <<<  EFunctionOfFFIDOMSnapshot <<< pure <<< deleteFromCache_
+  , giveNewParent: liftF <<<  EFunctionOfFFIDOMSnapshot <<< pure <<< giveNewParent_ Just runOnJust
+  , disconnectElement: liftF <<<  EFunctionOfFFIDOMSnapshot <<< pure <<< disconnectElement_
   }
 
 data RenderableInstruction
@@ -343,19 +349,19 @@ hydratingDOMInterpret seed = Core.DOMInterpret
           (evalGen (arbitrary :: Gen Int) { newSeed: mkSeed s, size: 5 })
       void $ Ref.modify (add 1) seed
       pure o
-  , makeElement: liftF <<<  pure <<< makeElement_ runOnJust true
-  , makeDynBeacon: liftF <<<  pure <<< makeDynBeacon_ runOnJust true
-  , attributeParent: liftF <<<  pure <<< attributeParent_ runOnJust
-  , makeRoot: liftF <<<  pure <<< makeRoot_
-  , makeText: liftF <<<  pure <<< makeText_ runOnJust true (maybe unit)
-  , makePursx: liftF <<<  pure <<< makePursx_ runOnJust true (maybe unit)
-  , setProp: liftF <<<  pure <<< setProp_ true
-  , setCb: liftF <<<  pure <<< setCb_ true
-  , unsetAttribute: liftF <<<  pure <<< unsetAttribute_ true
-  , setText: liftF <<<  pure <<< setText_
-  , sendToPos: liftF <<<  pure <<< sendToPos
-  , deleteFromCache: liftF <<<  pure <<< deleteFromCache_
-  , removeDynBeacon: liftF <<<  pure <<< removeDynBeacon_
-  , giveNewParent: liftF <<<  pure <<< giveNewParent_ Just runOnJust
-  , disconnectElement: liftF <<<  pure <<< disconnectElement_
+  , makeElement: liftF <<<  EFunctionOfFFIDOMSnapshot <<< pure <<< makeElement_ runOnJust true
+  , makeDynBeacon: liftF <<<  EFunctionOfFFIDOMSnapshot <<< pure <<< makeDynBeacon_ runOnJust true
+  , attributeParent: liftF <<<  EFunctionOfFFIDOMSnapshot <<< pure <<< attributeParent_ runOnJust
+  , makeRoot: liftF <<<  EFunctionOfFFIDOMSnapshot <<< pure <<< makeRoot_
+  , makeText: liftF <<<  EFunctionOfFFIDOMSnapshot <<< pure <<< makeText_ runOnJust true (maybe unit)
+  , makePursx: liftF <<<  EFunctionOfFFIDOMSnapshot <<< pure <<< makePursx_ runOnJust true (maybe unit)
+  , setProp: liftF <<<  EFunctionOfFFIDOMSnapshot <<< pure <<< setProp_ true
+  , setCb: liftF <<<  EFunctionOfFFIDOMSnapshot <<< pure <<< setCb_ true
+  , unsetAttribute: liftF <<<  EFunctionOfFFIDOMSnapshot <<< pure <<< unsetAttribute_ true
+  , setText: liftF <<<  EFunctionOfFFIDOMSnapshot <<< pure <<< setText_
+  , sendToPos: liftF <<<  EFunctionOfFFIDOMSnapshot <<< pure <<< sendToPos
+  , deleteFromCache: liftF <<<  EFunctionOfFFIDOMSnapshot <<< pure <<< deleteFromCache_
+  , removeDynBeacon: liftF <<<  EFunctionOfFFIDOMSnapshot <<< pure <<< removeDynBeacon_
+  , giveNewParent: liftF <<<  EFunctionOfFFIDOMSnapshot <<< pure <<< giveNewParent_ Just runOnJust
+  , disconnectElement: liftF <<<  EFunctionOfFFIDOMSnapshot <<< pure <<< disconnectElement_
   }

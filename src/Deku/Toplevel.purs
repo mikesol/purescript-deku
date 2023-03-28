@@ -12,7 +12,7 @@ import Prelude
 import Bolson.Control as Bolson
 import Bolson.Core (Element(..), PSR, Scope(..))
 import Control.Alt ((<|>))
-import Control.Monad.Free (resume)
+import Control.Monad.Free (Free, resume)
 import Control.Monad.ST (ST)
 import Control.Monad.ST.Class (liftST)
 import Control.Monad.ST.Global (Global)
@@ -22,10 +22,10 @@ import Data.Maybe (Maybe(..), maybe)
 import Data.Newtype (unwrap)
 import Deku.Control (deku)
 import Deku.Core (DOMInterpret(..), Domable(..), Domable', DomableF(..), Node(..))
-import Deku.Interpret (FreeEFunctionOfFFIDOMSnapshotU, FunctionOfFFIDOMSnapshotU, fullDOMInterpret, getAllComments, hydratingDOMInterpret, makeFFIDOMSnapshot, setHydrating, ssrDOMInterpret, unSetHydrating)
+import Deku.Interpret (EFunctionOfFFIDOMSnapshot(..), FFIDOMSnapshot, FreeEFunctionOfFFIDOMSnapshotU, FunctionOfFFIDOMSnapshotU, fullDOMInterpret, getAllComments, hydratingDOMInterpret, makeFFIDOMSnapshot, setHydrating, ssrDOMInterpret, unSetHydrating)
 import Deku.SSR (ssr')
 import Effect (Effect)
-import FRP.Event (Event, keepLatest, subscribe, subscribePure)
+import FRP.Event (Event, keepLatest, makeEvent, subscribe, subscribePure)
 import Safe.Coerce (coerce)
 import Unsafe.Coerce (unsafeCoerce)
 import Web.DOM.Element as DOM
@@ -39,9 +39,25 @@ flattenToSingleEvent
   :: Event FreeEFunctionOfFFIDOMSnapshotU -> Event FunctionOfFFIDOMSnapshotU
 flattenToSingleEvent = keepLatest <<< map go
   where
+  go :: FreeEFunctionOfFFIDOMSnapshotU -> Event FunctionOfFFIDOMSnapshotU
   go = resume >>> case _ of
-    Left l -> keepLatest (map go l)
-    Right r -> pure r
+    Left (EFunctionOfFFIDOMSnapshot l) -> keepLatest (map f l)
+    Right r -> mempty
+
+  f
+    :: (FFIDOMSnapshot -> Effect FreeEFunctionOfFFIDOMSnapshotU)
+    -> Event FunctionOfFFIDOMSnapshotU
+  f i = ?hole
+    where
+    ii :: FFIDOMSnapshot -> Effect (Event FunctionOfFFIDOMSnapshotU)
+    ii = (map <<< map) go i
+
+    iii :: FFIDOMSnapshot -> Event FunctionOfFFIDOMSnapshotU
+    iii = ii <#> \e -> makeEvent \k -> do
+      ev <- e
+      subscribe ev k
+    iiii :: Event (FFIDOMSnapshot -> Event FunctionOfFFIDOMSnapshotU)
+    iiii = pure iii
 
 -- | Runs a deku application in a DOM element, returning a canceler that can
 -- | be used to cancel the application.
