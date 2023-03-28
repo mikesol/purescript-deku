@@ -646,12 +646,9 @@ module Deku.DOM
   , unsafeCustomElement
   ) where
 
-import Bolson.Core (Entity(..))
-import Bolson.Core as Bolson
-import Data.FunctorWithIndex (mapWithIndex)
 import Deku.Attribute (class Attr, Attribute, Cb(..), cb', unsafeAttribute)
 import Deku.Control (elementify2)
-import Deku.Core (Domable(..), Domable', unsafeSetPos)
+import Deku.Core (Domable)
 -- import Deku.DOM.Attr.Accept (Accept(..))
 -- import Deku.DOM.Attr.AcceptCharset (AcceptCharset(..))
 -- import Deku.DOM.Attr.Accesskey (Accesskey(..))
@@ -1636,7 +1633,6 @@ import Deku.DOM.Attr.Contenteditable (Contenteditable(..))
 import Effect (Effect)
 import FRP.Event (Event)
 import Prelude (Unit)
-import Safe.Coerce (coerce)
 import Type.Proxy (Proxy)
 import Unsafe.Coerce (unsafeCoerce)
 import Web.DOM as DOM
@@ -1884,7 +1880,7 @@ instance tagToDekuDefs_ :: TagToDeku "defs" Defs_
 -- | Unsafely create a custom element. This is useful when using Stencil-based
 -- | frameworks like Ionic in Deku.
 unsafeCustomElement
-  :: forall element payload
+  :: forall element
    . String
   -> Proxy element
   -> Event (Attribute element)

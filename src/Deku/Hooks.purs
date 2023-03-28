@@ -43,7 +43,7 @@ import Effect (Effect)
 import Effect.Aff (Aff, error, killFiber, launchAff, launchAff_)
 import Effect.Uncurried (mkEffectFn1, runEffectFn1, runEffectFn2)
 import FRP.Event (Event, Subscriber(..), createPure, keepLatest, mailboxed, makeEventO, makeLemmingEvent, makeLemmingEventO, memoize, subscribeO)
-import Unsafe.Coerce (unsafeCoerce)
+import Safe.Coerce (coerce)
 
 -- | A state hook for states without initial values. See [`useState'`](https://purescript-deku.netlify.app/core-concepts/state#state-without-initial-values) in the Deku guide for example usage.
 useState'
@@ -189,7 +189,7 @@ useHot' f = Domable ee
   ee :: forall payload. DomableF payload
   ee = DomableF $ envy
     $
-      ( unsafeCoerce
+      ( coerce
           :: Event (DomableF payload) -> Event (Entity Int (Node payload))
       )
     $ makeLemmingEventO
@@ -226,7 +226,7 @@ useHot a f = Domable ee
   ee :: forall payload. DomableF payload
   ee = DomableF $ envy
     $
-      ( unsafeCoerce
+      ( coerce
           :: Event (DomableF payload) -> Event (Entity Int (Node payload))
       )
     $ makeLemmingEventO
@@ -262,12 +262,16 @@ useEffect
 useEffect e f1 f2 = Domable ee
   where
   ee :: forall payload. DomableF payload
-  ee = DomableF $ envy
-    $
-      ( unsafeCoerce
-          :: Event Domable -> Event (Entity Int (Node payload))
-      )
-    $ makeEventO
+  ee = DomableF $ envy eeeee
+
+  eeeee :: forall payload. Event (Entity Int (Node payload))
+  eeeee = map (\(DomableF d) -> d) eeee
+
+  eeee :: forall payload. Event (DomableF payload)
+  eeee = map (\(Domable d) -> d) eee
+
+  eee :: Event Domable
+  eee = makeEventO
     $ mkEffectFn1 \k -> do
         runEffectFn1 k (f2 unit)
         runEffectFn2 subscribeO e $ mkEffectFn1 f1
@@ -291,15 +295,22 @@ useAffWithCancellation
 useAffWithCancellation e f1 f2 = Domable ee
   where
   ee :: forall payload. DomableF payload
-  ee = DomableF $ envy
-    $ (unsafeCoerce :: Event Domable -> Event (Entity Int (Node payload)))
-    $ makeEventO
-    $ mkEffectFn1 \k -> do
-        r <- liftST $ STRef.new (pure unit)
-        runEffectFn1 k (f2 unit)
-        runEffectFn2 subscribeO e $ mkEffectFn1 \a -> do
-          r' <- liftST $ STRef.read r
-          r'' <- launchAff do
-            killFiber (error "useAffWithCancellation") r'
-            f1 a
-          liftST $ void $ STRef.write r'' r
+  ee = DomableF (envy eeeee)
+
+  eeeee :: forall payload. Event (Entity Int (Node payload))
+  eeeee = map (\(DomableF d) -> d) eeee
+
+  eeee :: forall payload. Event (DomableF payload)
+  eeee = map (\(Domable d) -> d) eee
+
+  eee :: Event Domable
+  eee =
+    makeEventO $ mkEffectFn1 \k -> do
+      r <- liftST $ STRef.new (pure unit)
+      runEffectFn1 k (f2 unit)
+      runEffectFn2 subscribeO e $ mkEffectFn1 \a -> do
+        r' <- liftST $ STRef.read r
+        r'' <- launchAff do
+          killFiber (error "useAffWithCancellation") r'
+          f1 a
+        liftST $ void $ STRef.write r'' r
