@@ -171,9 +171,11 @@ globalPortal
   -> Domable
 globalPortal v' c' = Domable
   ( go (map (\(Domable df) -> df) v')
-      (unsafeCoerce c')
+      (shouldBeSafe c')
   )
   where
+  shouldBeSafe :: forall payload. (Vect n Domable -> Domable) -> Vect n (DomableF payload) -> DomableF payload
+  shouldBeSafe = unsafeCoerce
   go
     :: forall payload
      . Vect n (DomableF payload)
@@ -276,9 +278,11 @@ portal
   -> Domable
 portal v' c' = Domable
   ( go (map (\(Domable df) -> df) v')
-      (unsafeCoerce c')
+      (shouldBeSafe c')
   )
   where
+  shouldBeSafe :: forall payload. (Vect n Domable -> Domable) -> Vect n (DomableF payload) -> DomableF payload
+  shouldBeSafe = unsafeCoerce
   go
     :: forall payload
      . Vect n (DomableF payload)
