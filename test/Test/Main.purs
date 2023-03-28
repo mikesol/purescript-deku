@@ -5,7 +5,6 @@ import Prelude
 import Control.Alt ((<|>))
 import Control.Monad.ST.Global (Global)
 import Control.Monad.ST.Internal (ST)
-import Control.Monad.ST.Internal as RRef
 import Control.Plus (empty)
 import Data.Array ((..))
 import Data.Foldable (intercalate, oneOf, oneOfMap)
@@ -18,7 +17,6 @@ import Deku.Core (Domable, Hook, Nut, dyn, fixed, insert, insert_, sendToPos)
 import Deku.DOM as D
 import Deku.Do as Deku
 import Deku.Hooks (useEffect, useMemoized, useRef, useState, useState')
-import Deku.Interpret (FFIDOMSnapshot, Instruction)
 import Deku.Lifecycle (onDidMount, onDismount, onWillMount)
 import Deku.Listeners (click, click_)
 import Deku.Pursx ((~~))
@@ -29,22 +27,13 @@ import Type.Proxy (Proxy(..))
 
 foreign import hackyInnerHTML :: String -> String -> Effect Unit
 
-runNoSSR
-  :: (forall lock. Domable lock (FFIDOMSnapshot -> Effect Unit))
-  -> Effect (Effect Unit)
+runNoSSR :: Domable -> Effect (Effect Unit)
 runNoSSR = runInBody'
 
-runWithSSR
-  :: (forall lock. Domable lock (FFIDOMSnapshot -> Effect Unit))
-  -> Effect (Effect Unit)
+runWithSSR :: Domable -> Effect (Effect Unit)
 runWithSSR = hydrate'
 
-ssr
-  :: ( forall lock
-        . Domable lock
-            (RRef.STRef Global (Array Instruction) -> ST Global Unit)
-     )
-  -> ST Global String
+ssr :: Domable -> ST Global String
 ssr i = pure "<head></head>" <> runSSR i
 
 sanityCheck :: Nut
@@ -341,7 +330,7 @@ useEffectWorks = Deku.do
         [ text_ "Increment" ]
     , D.div (id_ "mydiv") [ text (show <$> counter) ]
     ]
-  
+
 customHooksDoTheirThing :: Nut
 customHooksDoTheirThing = Deku.do
   setCounter /\ counter <- useState 0

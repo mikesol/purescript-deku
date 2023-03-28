@@ -13,7 +13,6 @@ import Deku.Control as C
 import Deku.Core (Domable, bus)
 import Deku.Core as CC
 import Deku.DOM as D
-import Deku.Interpret (FFIDOMSnapshot)
 import Deku.Toplevel (runInBody)
 import Effect (Effect)
 import FRP.Event (Event, filterMap, keepLatest, mapAccum)
@@ -23,7 +22,7 @@ counter event = mapAccum f 0 event
   where
   f a b = Tuple (a + 1) (Tuple b a)
 
-scene :: forall lock. Domable lock (FFIDOMSnapshot -> Effect Unit)
+scene :: Domable
 scene = CC.envy $ bus $ \push -> lcmap (alt (pure true)) \event -> do
   D.div_
     [ D.div_

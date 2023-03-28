@@ -53,8 +53,7 @@ counter event = mapAccum f 0 event
   where
   f a b = Tuple (a + 1) (Tuple b a)
 
-scene
-  :: forall lock. Array (Domable lock (FFIDOMSnapshot -> Effect Unit))
+scene :: Array Domable
 scene =
   [ D.div_
       [ portal
@@ -69,7 +68,7 @@ scene =
               ]
               : V.empty
           )
-          ( \(i /\ _) -> switcher
+          ( \i -> switcher
               ( \rgb -> D.div
                   (pure (D.Style := "background-color: " <> rgb <> ";"))
                   [ V.index (Proxy :: _ 0) i ]

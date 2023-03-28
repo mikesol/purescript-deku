@@ -46,7 +46,7 @@ myPxInception push aThirdThing = myPx ~~
   }
 
 scene
-  :: forall lock. Event (Domable lock (FFIDOMSnapshot -> Effect Unit))
+  :: Event Domable
 scene = bus \push event ->
   D.div empty
     [ myPxInception push
