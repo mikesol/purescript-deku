@@ -105,8 +105,6 @@ hydrate' children = do
 hydrate :: Domable -> Effect Unit
 hydrate a = void (hydrate' a)
 
---
-
 -- | Creates a static site from a deku application. The top-level element for this site is `body`.
 runSSR
   :: forall r
