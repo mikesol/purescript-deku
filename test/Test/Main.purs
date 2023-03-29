@@ -7,12 +7,13 @@ import Control.Monad.ST.Global (Global)
 import Control.Monad.ST.Internal (ST)
 import Control.Plus (empty)
 import Data.Array ((..))
+import Data.Filterable (filter)
 import Data.Foldable (intercalate, oneOf, oneOfMap)
-import Data.Tuple (Tuple(..))
-import Data.Tuple.Nested ((/\))
+import Data.Tuple (Tuple(..), snd)
+import Data.Tuple.Nested (type (/\), (/\))
 import Deku.Attribute ((!:=), (:=))
 import Deku.Attributes (id_)
-import Deku.Control (blank, globalPortal1, switcher, text, text_)
+import Deku.Control (blank, globalPortal1, switcher, text, text_, (<#~>))
 import Deku.Core (Domable, Hook, Nut, dyn, fixed, insert, insert_, sendToPos)
 import Deku.DOM as D
 import Deku.Do as Deku
@@ -22,7 +23,7 @@ import Deku.Listeners (click, click_)
 import Deku.Pursx ((~~))
 import Deku.Toplevel (hydrate', runInBody', runSSR)
 import Effect (Effect)
-import FRP.Event (Event, fold, merge)
+import FRP.Event (Event, fold, mapAccum, merge)
 import Type.Proxy (Proxy(..))
 
 foreign import hackyInnerHTML :: String -> String -> Effect Unit
@@ -231,6 +232,33 @@ portalsCompose = Deku.do
         , D.button (oneOf [ id_ "incr", click_ (setItem unit) ])
             [ text_ "incr" ]
         ]
+
+globalPortalsRetainPortalnessWhenSentOutOfScope :: Nut
+globalPortalsRetainPortalnessWhenSentOutOfScope = Deku.do
+  let
+    counter :: forall a. Event a -> Event (Int /\ a)
+    counter event = mapAccum (\a b -> (a + 1) /\ ((a + 1) /\ b)) (-1) event
+    limitTo :: Int -> Event ~> Event
+    limitTo i e = map snd $ filter (\(n /\ _ ) -> n < i) $ counter e
+  setPortalInContext /\ portalInContext <- useState true
+  setPortedNut /\ portedNut <- useState'
+  D.div_
+    [ D.div (id_ "outer-scope")
+        [ limitTo 2 (Tuple <$> portalInContext <*> portedNut)
+            <#~> \(Tuple tf p) -> if not tf then p else D.div_ [text_ "no dice!"]
+        ]
+    , ( globalPortal1 (D.div_ [ text_ "foo" ]) \e ->
+          Deku.do
+            useEffect (pure unit) (const (setPortedNut e))
+            D.div (id_ "inner-scope") [ (Tuple <$> portalInContext <*> portedNut)
+                  <#~> \(Tuple tf p) -> if tf then p else D.div_ [text_ "no dice!" ]]
+      )
+    , D.button
+        ( merge
+            [ id_ "portal-btn", click $ portalInContext <#> not >>> setPortalInContext ]
+        )
+        [ text_ "switch" ]
+    ]
 
 pursXComposes :: Nut
 pursXComposes = Deku.do
