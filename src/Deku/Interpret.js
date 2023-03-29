@@ -857,6 +857,10 @@ export const disconnectElement_ = (a) => (state) => () => {
   }
 };
 
+export const stateHasKey = (id) => (state) => () => {
+  return state.units[id] !== undefined;
+};
+
 export const deleteFromCache_ = (a) => (state) => () => {
   if (state.units[a.id]) {
     delete state.units[a.id];

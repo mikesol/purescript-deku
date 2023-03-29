@@ -12,7 +12,7 @@ import Prelude
 import Bolson.Control as Bolson
 import Bolson.Core (Element(..), PSR, Scope(..))
 import Control.Alt ((<|>))
-import Control.Monad.Free (Free, resume)
+import Control.Monad.Free (resume)
 import Control.Monad.ST (ST)
 import Control.Monad.ST.Class (liftST)
 import Control.Monad.ST.Global (Global)
@@ -36,28 +36,20 @@ import Web.HTML.HTMLElement (toElement)
 import Web.HTML.Window (document)
 
 flattenToSingleEvent
-  :: Event FreeEFunctionOfFFIDOMSnapshotU -> Event FunctionOfFFIDOMSnapshotU
-flattenToSingleEvent = keepLatest <<< map go
+  :: FFIDOMSnapshot -> Event FreeEFunctionOfFFIDOMSnapshotU -> Event FunctionOfFFIDOMSnapshotU
+flattenToSingleEvent ffi = keepLatest <<< map go
   where
   go :: FreeEFunctionOfFFIDOMSnapshotU -> Event FunctionOfFFIDOMSnapshotU
   go = resume >>> case _ of
     Left (EFunctionOfFFIDOMSnapshot l) -> keepLatest (map f l)
-    Right r -> mempty
+    Right _ -> mempty
 
   f
     :: (FFIDOMSnapshot -> Effect FreeEFunctionOfFFIDOMSnapshotU)
     -> Event FunctionOfFFIDOMSnapshotU
-  f i = ?hole
-    where
-    ii :: FFIDOMSnapshot -> Effect (Event FunctionOfFFIDOMSnapshotU)
-    ii = (map <<< map) go i
-
-    iii :: FFIDOMSnapshot -> Event FunctionOfFFIDOMSnapshotU
-    iii = ii <#> \e -> makeEvent \k -> do
-      ev <- e
-      subscribe ev k
-    iiii :: Event (FFIDOMSnapshot -> Event FunctionOfFFIDOMSnapshotU)
-    iiii = pure iii
+  f i = flattenToSingleEvent ffi $ makeEvent \k -> do
+      i ffi >>= k
+      pure (pure unit)
 
 -- | Runs a deku application in a DOM element, returning a canceler that can
 -- | be used to cancel the application.
@@ -68,7 +60,7 @@ runInElement'
 runInElement' elt eee = do
   ffi <- makeFFIDOMSnapshot
   evt <- liftST (RRef.new 0) <#> (deku elt eee <<< fullDOMInterpret)
-  subscribe (flattenToSingleEvent evt) \i -> i ffi
+  subscribe (flattenToSingleEvent ffi evt) \i -> i ffi
 
 -- | Runs a deku application in the body of a document, returning a canceler that can
 -- | be used to cancel the application.
@@ -100,7 +92,7 @@ hydrate' children = do
   let me = "deku-root"
   root <- dekuRoot
   u <- subscribe
-    ( flattenToSingleEvent
+    ( flattenToSingleEvent ffi
         ( pure ((unwrap di).makeRoot { id: me, root }) <|> __internalDekuFlatten
             { parent: Just "deku-root"
             , scope: Local "rootScope"

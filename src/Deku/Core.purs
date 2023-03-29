@@ -50,7 +50,9 @@ import Bolson.Control as BControl
 import Bolson.Core (Scope)
 import Bolson.Core as Bolson
 import Control.Monad.ST (ST)
+import Control.Monad.ST as ST
 import Control.Monad.ST.Global (Global)
+import Control.Monad.ST.Global as Region
 import Control.Monad.ST.Uncurried (mkSTFn2, runSTFn1, runSTFn2)
 import Control.Plus (empty)
 import Data.Maybe (Maybe(..))
@@ -237,6 +239,7 @@ type GiveNewParent payload =
   , pos :: Maybe Int
   , dynFamily :: Maybe String
   , ctor :: DomableF payload
+  , raiseId :: String -> ST.ST Region.Global Unit
   }
 
 -- | Type used by Deku backends to disconnect an element from the DOM. For internal use only unless you're writing a custom backend.
