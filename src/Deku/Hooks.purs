@@ -37,7 +37,7 @@ import Data.Foldable (for_)
 import Data.Maybe (Maybe(..), fromMaybe)
 import Data.Tuple (curry)
 import Data.Tuple.Nested (type (/\), (/\))
-import Deku.Core (Domable(..), DomableF(..), Node, Child, bus, bussedUncurried, insert, remove, sendToPos)
+import Deku.Core (Nut(..), NutF(..), Node, Child, bus, bussedUncurried, insert, remove, sendToPos)
 import Deku.Do as Deku
 import Effect (Effect)
 import Effect.Aff (Aff, error, killFiber, launchAff, launchAff_)
@@ -49,26 +49,26 @@ import Safe.Coerce (coerce)
 useState'
   :: forall a
    . ( ((a -> Effect Unit) /\ Event a)
-       -> Domable
+       -> Nut
      )
-  -> Domable
+  -> Nut
 useState' = bussedUncurried
 
 -- | A hook to work with memoized values. See [`useMemoized`](https://purescript-deku.netlify.app/core-concepts/more-hooks#the-case-for-memoization) in the Deku guide for example usage.
 useMemoized
   :: forall a
    . (Event a)
-  -> (Event a -> Domable)
-  -> Domable
-useMemoized e f1 = Domable eeee
+  -> (Event a -> Nut)
+  -> Nut
+useMemoized e f1 = Nut eeee
   where
-  eeee :: forall payload. DomableF payload
-  eeee = DomableF (envy (map (\(DomableF x) -> x) eee))
+  eeee :: forall payload. NutF payload
+  eeee = NutF (envy (map (\(NutF x) -> x) eee))
 
-  eee :: forall payload. Event (DomableF payload)
-  eee = map (\(Domable df) -> df) ee
+  eee :: forall payload. Event (NutF payload)
+  eee = map (\(Nut df) -> df) ee
 
-  ee :: Event Domable
+  ee :: Event Nut
   ee = memoize e f1
 
 -- | A hook to work with memoized values that lack an initial value. See [`useMemoized'`](https://purescript-deku.netlify.app/core-concepts/more-hooks#memoizing-without-an-initial-event) in the Deku guid for example usage.
@@ -76,20 +76,20 @@ useMemoized'
   :: forall a b
    . (Event a -> Event b)
   -> ( ((a -> Effect Unit) /\ Event b)
-       -> Domable
+       -> Nut
      )
-  -> Domable
+  -> Nut
 useMemoized' f0 f1 = bussedUncurried fx
   where
-  fx (a /\ b) = Domable eeee
+  fx (a /\ b) = Nut eeee
     where
-    eeee :: forall payload. DomableF payload
-    eeee = DomableF (envy (map (\(DomableF x) -> x) eee))
+    eeee :: forall payload. NutF payload
+    eeee = NutF (envy (map (\(NutF x) -> x) eee))
 
-    eee :: forall payload. Event (DomableF payload)
-    eee = map (\(Domable df) -> df) ee
+    eee :: forall payload. Event (NutF payload)
+    eee = map (\(Nut df) -> df) ee
 
-    ee :: Event Domable
+    ee :: Event Nut
     ee = memoize (f0 b) \c -> f1 (a /\ c)
 
 -- | A state hook. See [`useState`](https://purescript-deku.netlify.app/core-concepts/state#the-state-hook) in the Deku guide for example usage.
@@ -97,9 +97,9 @@ useState
   :: forall a
    . a
   -> ( ((a -> Effect Unit) /\ Event a)
-       -> Domable
+       -> Nut
      )
-  -> Domable
+  -> Nut
 useState a f = Deku.do
   x /\ y <- useState'
   m <- useMemoized (y <|> pure a)
@@ -112,17 +112,17 @@ useRef
   :: forall a
    . a
   -> Event a
-  -> (Effect a -> Domable)
-  -> Domable
-useRef a e f = Domable eeee
+  -> (Effect a -> Nut)
+  -> Nut
+useRef a e f = Nut eeee
   where
-  eeee :: forall payload. DomableF payload
-  eeee = DomableF (envy (map (\(DomableF x) -> x) eee))
+  eeee :: forall payload. NutF payload
+  eeee = NutF (envy (map (\(NutF x) -> x) eee))
 
-  eee :: forall payload. Event (DomableF payload)
-  eee = map (\(Domable df) -> df) ee
+  eee :: forall payload. Event (NutF payload)
+  eee = map (\(Nut df) -> df) ee
 
-  ee :: Event Domable
+  ee :: Event Nut
   ee = makeLemmingEvent \s k -> do
     r <- STRef.new a
     k $ f (liftST $ STRef.read r)
@@ -138,20 +138,20 @@ useMailboxed
   => ( ( ({ address :: a, payload :: b } -> Effect Unit) /\
            (a -> Event b)
        )
-       -> Domable
+       -> Nut
      )
-  -> Domable
+  -> Nut
 useMailboxed f = bussedUncurried fx
   where
-  fx (a /\ b) = Domable eeee
+  fx (a /\ b) = Nut eeee
     where
-    eeee :: forall payload. DomableF payload
-    eeee = DomableF (envy (map (\(DomableF x) -> x) eee))
+    eeee :: forall payload. NutF payload
+    eeee = NutF (envy (map (\(NutF x) -> x) eee))
 
-    eee :: forall payload. Event (DomableF payload)
-    eee = map (\(Domable df) -> df) ee
+    eee :: forall payload. Event (NutF payload)
+    eee = map (\(Nut df) -> df) ee
 
-    ee :: Event Domable
+    ee :: Event Nut
     ee = mailboxed b \c -> f (a /\ c)
 
 -- | A hook to create dynamic collections like one would find in a contact list or todo mvc.
@@ -159,7 +159,7 @@ useMailboxed f = bussedUncurried fx
 useDyn
   :: Int
   -> ( { remove :: Effect Unit, sendTo :: Int -> Effect Unit }
-       -> Domable
+       -> Nut
      )
   -> Event Child
 useDyn i f = keepLatest Deku.do
@@ -176,21 +176,21 @@ useDyn i f = keepLatest Deku.do
 -- | A version of `useDyn` that uses `0` as the initial position for a dynamic element.
 useDyn_
   :: ( { remove :: Effect Unit, sendTo :: Int -> Effect Unit }
-       -> Domable
+       -> Nut
      )
   -> Event Child
 useDyn_ = useDyn 0
 
 -- | A hook that remembers its most recent value and plays it back upon subscription _without_ an initial value. See [`useHot'`](https://purescript-deku.netlify.app/core-concepts/state#memoization-and-usehot) in the Deku guide for more info.
 useHot'
-  :: forall a. ((a -> Effect Unit) /\ Event a -> Domable) -> Domable
-useHot' f = Domable ee
+  :: forall a. ((a -> Effect Unit) /\ Event a -> Nut) -> Nut
+useHot' f = Nut ee
   where
-  ee :: forall payload. DomableF payload
-  ee = DomableF $ envy
+  ee :: forall payload. NutF payload
+  ee = NutF $ envy
     $
       ( coerce
-          :: Event (DomableF payload) -> Event (Entity Int (Node payload))
+          :: Event (NutF payload) -> Event (Entity Int (Node payload))
       )
     $ makeLemmingEventO
         ( mkSTFn2 \(Subscriber s) k -> do
@@ -211,7 +211,7 @@ useHot' f = Domable ee
                     for_ val \x -> runSTFn1 k' x
                     runSTFn2 s event k'
                 )
-            runSTFn1 k ((\(Domable x) -> x) (f (push'' /\ event')))
+            runSTFn1 k ((\(Nut x) -> x) (f (push'' /\ event')))
             runSTFn2 s event (mkSTFn1 \v -> void $ writeVal v)
         )
 
@@ -219,15 +219,15 @@ useHot' f = Domable ee
 useHot
   :: forall a
    . a
-  -> ((a -> Effect Unit) /\ Event a -> Domable)
-  -> Domable
-useHot a f = Domable ee
+  -> ((a -> Effect Unit) /\ Event a -> Nut)
+  -> Nut
+useHot a f = Nut ee
   where
-  ee :: forall payload. DomableF payload
-  ee = DomableF $ envy
+  ee :: forall payload. NutF payload
+  ee = NutF $ envy
     $
       ( coerce
-          :: Event (DomableF payload) -> Event (Entity Int (Node payload))
+          :: Event (NutF payload) -> Event (Entity Int (Node payload))
       )
     $ makeLemmingEventO
         ( mkSTFn2 \(Subscriber s) k -> do
@@ -248,7 +248,7 @@ useHot a f = Domable ee
                     runSTFn1 k' (fromMaybe a val)
                     runSTFn2 s event k'
                 )
-            runSTFn1 k ((\(Domable x) -> x) (f (push'' /\ event')))
+            runSTFn1 k ((\(Nut x) -> x) (f (push'' /\ event')))
             runSTFn2 s event (mkSTFn1 \v -> void $ writeVal v)
         )
 
@@ -257,20 +257,20 @@ useEffect
   :: forall a
    . Event a
   -> (a -> Effect Unit)
-  -> (Unit -> Domable)
-  -> Domable
-useEffect e f1 f2 = Domable ee
+  -> (Unit -> Nut)
+  -> Nut
+useEffect e f1 f2 = Nut ee
   where
-  ee :: forall payload. DomableF payload
-  ee = DomableF $ envy eeeee
+  ee :: forall payload. NutF payload
+  ee = NutF $ envy eeeee
 
   eeeee :: forall payload. Event (Entity Int (Node payload))
-  eeeee = map (\(DomableF d) -> d) eeee
+  eeeee = map (\(NutF d) -> d) eeee
 
-  eeee :: forall payload. Event (DomableF payload)
-  eeee = map (\(Domable d) -> d) eee
+  eeee :: forall payload. Event (NutF payload)
+  eeee = map (\(Nut d) -> d) eee
 
-  eee :: Event Domable
+  eee :: Event Nut
   eee = makeEventO
     $ mkEffectFn1 \k -> do
         runEffectFn1 k (f2 unit)
@@ -281,8 +281,8 @@ useAff
   :: forall a
    . Event a
   -> (a -> Aff Unit)
-  -> (Unit -> Domable)
-  -> Domable
+  -> (Unit -> Nut)
+  -> Nut
 useAff e = useEffect e <<< map launchAff_
 
 -- | A hook that runs an arbitrary aff when an event's value changes, cancelling the previous aff.
@@ -290,20 +290,20 @@ useAffWithCancellation
   :: forall a
    . Event a
   -> (a -> Aff Unit)
-  -> (Unit -> Domable)
-  -> Domable
-useAffWithCancellation e f1 f2 = Domable ee
+  -> (Unit -> Nut)
+  -> Nut
+useAffWithCancellation e f1 f2 = Nut ee
   where
-  ee :: forall payload. DomableF payload
-  ee = DomableF (envy eeeee)
+  ee :: forall payload. NutF payload
+  ee = NutF (envy eeeee)
 
   eeeee :: forall payload. Event (Entity Int (Node payload))
-  eeeee = map (\(DomableF d) -> d) eeee
+  eeeee = map (\(NutF d) -> d) eeee
 
-  eeee :: forall payload. Event (DomableF payload)
-  eeee = map (\(Domable d) -> d) eee
+  eeee :: forall payload. Event (NutF payload)
+  eeee = map (\(Nut d) -> d) eee
 
-  eee :: Event Domable
+  eee :: Event Nut
   eee =
     makeEventO $ mkEffectFn1 \k -> do
       r <- liftST $ STRef.new (pure unit)

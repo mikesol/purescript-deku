@@ -25,7 +25,7 @@ module Deku.Interpret
 import Prelude
 
 import Bolson.Control as BC
-import Bolson.Core (Element(..), PSR, Scope)
+import Bolson.Core (Element(..), PSR, Scope(..))
 import Bolson.Core as Bolson
 import Control.Monad.Free (Free, liftF, wrap)
 import Control.Monad.ST (ST)
@@ -35,7 +35,8 @@ import Control.Monad.ST.Internal as Ref
 import Control.Plus (empty)
 import Data.Maybe (Maybe(..), maybe)
 import Data.Newtype (unwrap)
-import Deku.Core (DOMInterpret(..), Domable', DomableF(..), Node(..))
+import Data.String.Utils (includes)
+import Deku.Core (DOMInterpret(..), Nut', NutF(..), Node(..))
 import Deku.Core as Core
 import Effect (Effect)
 import FRP.Event (Event)
@@ -141,42 +142,54 @@ giveNewParentOrReconstruct
 giveNewParentOrReconstruct di just roj gnp = join $ liftF
   $ EFunctionOfFFIDOMSnapshot
   $ pure \ffi -> do
-      hasId <- stateHasKey gnp.id ffi
-      if hasId then pure $ liftF $ EFunctionOfFFIDOMSnapshot $ pure $
-        giveNewParent_ just roj gnp
-      else do
-        let
-          { dynFamily
-          , ez
-          , parent
-          , pos
-          , raiseId
-          , scope
-          } = gnp
-        let
-          ( ee
-              :: EFunctionOfFFIDOMSnapshot (Free EFunctionOfFFIDOMSnapshot Unit)
-          ) = EFunctionOfFFIDOMSnapshot $ map (\a _ -> pure a) $
-            __internalDekuFlatten
+      let
+        hasIdAndInScope = do
+          pure $ liftF $ EFunctionOfFFIDOMSnapshot $ pure $
+              giveNewParent_ just roj gnp
+        needsFreshNut =
+          do
+            let
               { dynFamily
               , ez
-              , parent: Just parent
+              , parent
               , pos
               , raiseId
               , scope
-              }
-              di
-              gnp.ctor
-        pure $ wrap ee
+              } = gnp
+            let
+              ( ee
+                  :: EFunctionOfFFIDOMSnapshot
+                       (Free EFunctionOfFFIDOMSnapshot Unit)
+              ) = EFunctionOfFFIDOMSnapshot $ map (\a _ -> pure a) $
+                __internalDekuFlatten
+                  { dynFamily
+                  , ez
+                  , parent: Just parent
+                  , pos
+                  , raiseId
+                  , scope
+                  }
+                  di
+                  gnp.ctor
+            pure (wrap ee)
+      hasId <- stateHasKey gnp.id ffi
+      if hasId then do
+        scope <- getScope gnp.id ffi
+        case scope, gnp.scope of
+          Global, _ -> hasIdAndInScope
+          Local x, Local y -> if includes x y then hasIdAndInScope else needsFreshNut
+          _, _ -> needsFreshNut
+      else needsFreshNut
 
 __internalDekuFlatten
   :: forall payload
    . PSR (pos :: Maybe Int, dynFamily :: Maybe String, ez :: Boolean)
   -> DOMInterpret payload
-  -> DomableF payload
+  -> NutF payload
   -> Event payload
 __internalDekuFlatten a b c = BC.flatten
-  { doLogic: \pos (DOMInterpret { sendToPos: sendToPos' }) id -> sendToPos' { id, pos }
+  { doLogic: \pos (DOMInterpret { sendToPos: sendToPos' }) id -> sendToPos'
+      { id, pos }
   , ids: unwrap >>> _.ids
   , disconnectElement:
       \(DOMInterpret { disconnectElement }) { id, scope, parent } ->
@@ -185,7 +198,7 @@ __internalDekuFlatten a b c = BC.flatten
   }
   a
   b
-  ((coerce :: DomableF payload -> Domable' payload) c)
+  ((coerce :: NutF payload -> Nut' payload) c)
 
 foreign import disconnectElement_
   :: Core.DisconnectElement -> FunctionOfFFIDOMSnapshotU
@@ -413,7 +426,7 @@ sendToPos a = \state -> do
       , ez: false
       , raiseId: mempty
       -- change me!
-      , ctor: DomableF (Bolson.envy empty)
+      , ctor: NutF (Bolson.envy empty)
       }
   coerce (giveNewParent_ Just runOnJust newA) state
 

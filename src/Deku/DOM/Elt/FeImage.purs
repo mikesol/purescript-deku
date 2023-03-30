@@ -3,23 +3,23 @@ module Deku.DOM.Elt.FeImage where
 import Control.Plus (empty)
 import Deku.Attribute (Attribute)
 import Deku.Control as DC
-import Deku.Core (Domable)
+import Deku.Core (Nut)
 import FRP.Event (Event)
 
 data FeImage_
 
 feImage
   :: Event (Attribute FeImage_)
-  -> Array Domable
-  -> Domable
+  -> Array Nut
+  -> Nut
 feImage = DC.elementify2 "feImage"
 
 feImage_
-  :: Array Domable
-  -> Domable
+  :: Array Nut
+  -> Nut
 feImage_ = feImage empty
 
 feImage__
   :: String
-  -> Domable
+  -> Nut
 feImage__ t = feImage_ [ DC.text_ t ]

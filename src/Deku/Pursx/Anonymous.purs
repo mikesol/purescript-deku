@@ -3,7 +3,7 @@ module Deku.Pursx.Anonymous where
 import Data.Reflectable (class Reflectable)
 import Data.Symbol (class IsSymbol)
 import Data.Tuple.Nested (type (/\), (/\))
-import Deku.Core (Domable)
+import Deku.Core (Nut)
 import Deku.Pursx (class PXStart, class PursxToElement, (~~))
 import Prim.Row (class Cons, class Lacks)
 import Prim.RowList as RL
@@ -25,7 +25,7 @@ instance endOfTheLine ::
   ) =>
   PursxStringAnonymous (Proxy ll /\ Proxy html /\ { | r })
     EndAnonymousPursX
-    (Domable) where
+    (Nut) where
   pursxStringAnonymous (_ /\ a /\ b) _ = a ~~ b
 
 instance readingPursx ::
@@ -50,7 +50,7 @@ instance endOfTheLineV ::
   ) =>
   PursxValAnonymous (Proxy ll /\ Proxy html /\ { | r })
     EndAnonymousPursX
-    (Domable) where
+    (Nut) where
   pursxValAnonymous (_ /\ a /\ b) _ = a ~~ b
 
 else instance readingVal ::

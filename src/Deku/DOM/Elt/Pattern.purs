@@ -3,23 +3,23 @@ module Deku.DOM.Elt.Pattern where
 import Control.Plus (empty)
 import Deku.Attribute (Attribute)
 import Deku.Control as DC
-import Deku.Core (Domable)
+import Deku.Core (Nut)
 import FRP.Event (Event)
 
 data Pattern_
 
 pattern
   :: Event (Attribute Pattern_)
-  -> Array Domable
-  -> Domable
+  -> Array Nut
+  -> Nut
 pattern = DC.elementify2 "pattern"
 
 pattern_
-  :: Array Domable
-  -> Domable
+  :: Array Nut
+  -> Nut
 pattern_ = pattern empty
 
 pattern__
   :: String
-  -> Domable
+  -> Nut
 pattern__ t = pattern_ [ DC.text_ t ]

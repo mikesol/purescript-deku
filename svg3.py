@@ -13,7 +13,7 @@ import Control.Plus (empty)
 import Data.Array (mapWithIndex)
 import Deku.Attribute (Attribute)
 import Deku.Control (elementify)
-import Deku.Core (Domable(..), Domable', unsafeSetPos)
+import Deku.Core (Nut(..), Nut', unsafeSetPos)
 import FRP.Event (Event)
 import Safe.Coerce (coerce)
 
@@ -21,20 +21,20 @@ data {nameUc}_
 
 {name}
   :: Event (Attribute {nameUc}_)
-  -> Array Domable
-  -> Domable
-{name} attributes kids = Domable
+  -> Array Nut
+  -> Nut
+{name} attributes kids = Nut
   ( Element'
       ( elementify "{name}" attributes
-          ( (coerce :: Domable' payload -> Domable)
+          ( (coerce :: Nut' payload -> Nut)
               (fixed (coerce (mapWithIndex unsafeSetPos kids)))
           )
       )
   )
 
 {name}_
-  :: Array Domable
-  -> Domable
+  :: Array Nut
+  -> Nut
 {name}_ = {name} empty
 '''
     return o

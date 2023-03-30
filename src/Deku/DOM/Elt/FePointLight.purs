@@ -3,23 +3,23 @@ module Deku.DOM.Elt.FePointLight where
 import Control.Plus (empty)
 import Deku.Attribute (Attribute)
 import Deku.Control as DC
-import Deku.Core (Domable)
+import Deku.Core (Nut)
 import FRP.Event (Event)
 
 data FePointLight_
 
 fePointLight
   :: Event (Attribute FePointLight_)
-  -> Array Domable
-  -> Domable
+  -> Array Nut
+  -> Nut
 fePointLight = DC.elementify2 "fePointLight"
 
 fePointLight_
-  :: Array Domable
-  -> Domable
+  :: Array Nut
+  -> Nut
 fePointLight_ = fePointLight empty
 
 fePointLight__
   :: String
-  -> Domable
+  -> Nut
 fePointLight__ t = fePointLight_ [ DC.text_ t ]

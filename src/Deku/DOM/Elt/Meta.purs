@@ -3,23 +3,23 @@ module Deku.DOM.Elt.Meta where
 import Control.Plus (empty)
 import Deku.Attribute (Attribute)
 import Deku.Control as DC
-import Deku.Core (Domable)
+import Deku.Core (Nut)
 import FRP.Event (Event)
 
 data Meta_
 
 meta
   :: Event (Attribute Meta_)
-  -> Array Domable
-  -> Domable
+  -> Array Nut
+  -> Nut
 meta = DC.elementify2 "meta"
 
 meta_
-  :: Array Domable
-  -> Domable
+  :: Array Nut
+  -> Nut
 meta_ = meta empty
 
 meta__
   :: String
-  -> Domable
+  -> Nut
 meta__ t = meta_ [ DC.text_ t ]

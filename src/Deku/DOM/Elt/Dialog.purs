@@ -3,23 +3,23 @@ module Deku.DOM.Elt.Dialog where
 import Control.Plus (empty)
 import Deku.Attribute (Attribute)
 import Deku.Control as DC
-import Deku.Core (Domable)
+import Deku.Core (Nut)
 import FRP.Event (Event)
 
 data Dialog_
 
 dialog
   :: Event (Attribute Dialog_)
-  -> Array Domable
-  -> Domable
+  -> Array Nut
+  -> Nut
 dialog = DC.elementify2 "dialog"
 
 dialog_
-  :: Array Domable
-  -> Domable
+  :: Array Nut
+  -> Nut
 dialog_ = dialog empty
 
 dialog__
   :: String
-  -> Domable
+  -> Nut
 dialog__ t = dialog_ [ DC.text_ t ]

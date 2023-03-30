@@ -3,23 +3,23 @@ module Deku.DOM.Elt.Noscript where
 import Control.Plus (empty)
 import Deku.Attribute (Attribute)
 import Deku.Control as DC
-import Deku.Core (Domable)
+import Deku.Core (Nut)
 import FRP.Event (Event)
 
 data Noscript_
 
 noscript
   :: Event (Attribute Noscript_)
-  -> Array Domable
-  -> Domable
+  -> Array Nut
+  -> Nut
 noscript = DC.elementify2 "noscript"
 
 noscript_
-  :: Array Domable
-  -> Domable
+  :: Array Nut
+  -> Nut
 noscript_ = noscript empty
 
 noscript__
   :: String
-  -> Domable
+  -> Nut
 noscript__ t = noscript_ [ DC.text_ t ]

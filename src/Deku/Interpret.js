@@ -5,6 +5,7 @@ export const unSetHydrating = (state) => () => {
   state.hydrating = false;
 };
 export const attributeParent_ = (runOnJust) => (a) => (state) => () => {
+  // console.log("attributeParent_", a);
   if (state.units[a.id]) {
     const dom = state.units[a.parent].main;
     // only attribute if it is not attributed already
@@ -220,6 +221,7 @@ export const getAllComments = (state) => () => {
 };
 export const makeDynBeacon_ =
   (runOnJust) => (tryHydration) => (a) => (state) => () => {
+    // console.log("makeDynBeacon_", a);
     var startBeacon;
     var endBeacon;
     var ptr = a.id;
@@ -365,6 +367,7 @@ export const getScope = (id) => (state) => () =>
 
 export const makeElement_ =
   (runOnJust) => (tryHydration) => (a) => (state) => () => {
+    // console.log("makeElement_", a);
     var dom;
     var ptr = a.id;
     if (!state.scopes[a.scope]) {
@@ -411,6 +414,7 @@ export const makeElement_ =
 
 export const makeText_ =
   (runOnJust) => (tryHydration) => (maybe) => (a) => (state) => () => {
+    // console.log("makeText_", a);
     var ptr = a.id;
     var dom;
     if (!state.scopes[a.scope]) {
@@ -485,6 +489,7 @@ export function makeFFIDOMSnapshot() {
 }
 
 export const setProp_ = (tryHydration) => (a) => (state) => () => {
+  // console.log("setProp_", a);
   if (state.units[a.id]) {
     var ptr = a.id;
     var avv = a.value;
@@ -528,6 +533,7 @@ export const setProp_ = (tryHydration) => (a) => (state) => () => {
 };
 
 export const setCb_ = (tryHydration) => (a) => (state) => () => {
+  // console.log("setCb_", a);
   if (state.units[a.id]) {
     var ptr = a.id;
     var avv = a.value;
@@ -567,6 +573,7 @@ export const setCb_ = (tryHydration) => (a) => (state) => () => {
 };
 
 export const unsetAttribute_ = (tryHydration) => (a) => (state) => () => {
+  // console.log("unsetAttribute_", a);
   if (state.units[a.id]) {
     var ptr = a.id;
     // it may be the case that we have created an element via
@@ -592,6 +599,7 @@ export const unsetAttribute_ = (tryHydration) => (a) => (state) => () => {
   }
 };
 export const setText_ = (a) => (state) => () => {
+  // console.log("setText_", a);
   if (state.units[a.id]) {
     var ptr = a.id;
     state.units[ptr].main.nodeValue = a.text;
@@ -600,6 +608,7 @@ export const setText_ = (a) => (state) => () => {
 
 export const makePursx_ =
   (runOnJust) => (tryHydration) => (maybe) => (a) => (state) => () => {
+    // console.log("makePursx_", a);
     var dom;
     var tmp;
     var ptr = a.id;
@@ -702,6 +711,7 @@ export const makePursx_ =
   };
 
 export const makeRoot_ = (a) => (state) => () => {
+  // console.log("makeRoot_", a);
   var ptr = a.id;
   state.units[ptr] = {
     main: a.root,
@@ -710,6 +720,7 @@ export const makeRoot_ = (a) => (state) => () => {
 };
 
 export const giveNewParent_ = (just) => (runOnJust) => (b) => (state) => () => {
+  // console.log("giveNewParent_", b);
   const insertAt = (ptr, parent, node) => {
     if (state.units[ptr].startBeacon) {
       // we continue this operation until we hit the end beacon
@@ -822,6 +833,7 @@ export const giveNewParent_ = (just) => (runOnJust) => (b) => (state) => () => {
 };
 
 export const disconnectElement_ = (a) => (state) => () => {
+  // console.log("disconnectElement_", a);
   if (state.units[a.id]) {
     var ptr = a.id;
     if (
@@ -862,6 +874,7 @@ export const stateHasKey = (id) => (state) => () => {
 };
 
 export const deleteFromCache_ = (a) => (state) => () => {
+  // console.log("deleteFromCache_", a);
   if (state.units[a.id]) {
     delete state.units[a.id];
   }

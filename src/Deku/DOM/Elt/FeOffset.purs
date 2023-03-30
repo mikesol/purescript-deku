@@ -3,23 +3,23 @@ module Deku.DOM.Elt.FeOffset where
 import Control.Plus (empty)
 import Deku.Attribute (Attribute)
 import Deku.Control as DC
-import Deku.Core (Domable)
+import Deku.Core (Nut)
 import FRP.Event (Event)
 
 data FeOffset_
 
 feOffset
   :: Event (Attribute FeOffset_)
-  -> Array Domable
-  -> Domable
+  -> Array Nut
+  -> Nut
 feOffset = DC.elementify2 "feOffset"
 
 feOffset_
-  :: Array Domable
-  -> Domable
+  :: Array Nut
+  -> Nut
 feOffset_ = feOffset empty
 
 feOffset__
   :: String
-  -> Domable
+  -> Nut
 feOffset__ t = feOffset_ [ DC.text_ t ]

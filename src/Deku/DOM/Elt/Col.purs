@@ -3,23 +3,23 @@ module Deku.DOM.Elt.Col where
 import Control.Plus (empty)
 import Deku.Attribute (Attribute)
 import Deku.Control as DC
-import Deku.Core (Domable)
+import Deku.Core (Nut)
 import FRP.Event (Event)
 
 data Col_
 
 col
   :: Event (Attribute Col_)
-  -> Array Domable
-  -> Domable
+  -> Array Nut
+  -> Nut
 col = DC.elementify2 "col"
 
 col_
-  :: Array Domable
-  -> Domable
+  :: Array Nut
+  -> Nut
 col_ = col empty
 
 col__
   :: String
-  -> Domable
+  -> Nut
 col__ t = col_ [ DC.text_ t ]

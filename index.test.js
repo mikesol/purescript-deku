@@ -195,7 +195,7 @@ describe('deku', () => {
     expect($('#inner-scope').text()).toBe('foo');
   }));
 
-  doTest('local portals lose portalness when sent out of scope', (f) => f(tests.globalPortalsRetainPortalnessWhenSentOutOfScope, () => {
+  doTest('local portals lose portalness when sent out of scope', (f) => f(tests.localPortalsLosePortalnessWhenSentOutOfScope, () => {
     const $ = require('jquery');
     expect($('#outer-scope').text()).toBe('no dice!');
     expect($('#inner-scope').text()).toBe('foo');
@@ -208,13 +208,13 @@ describe('deku', () => {
     // local/global portal split
     // the "foo" should linger in the outer scope
     // because a fresh constructor is used
-    expect($('#outer-scope').text()).toBe('');
+    expect($('#outer-scope').text()).toBe('foo');
     expect($('#inner-scope').text()).toBe('foo');
     $('#portal-btn').trigger("click");
-    expect($('#outer-scope').text()).toBe('');
+    expect($('#outer-scope').text()).toBe('foo');
     expect($('#inner-scope').text()).toBe('no dice!');
     $('#portal-btn').trigger("click");
-    expect($('#outer-scope').text()).toBe('');
+    expect($('#outer-scope').text()).toBe('foo');
     expect($('#inner-scope').text()).toBe('foo');
   }));
 

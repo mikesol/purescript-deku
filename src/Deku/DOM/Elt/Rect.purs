@@ -3,23 +3,23 @@ module Deku.DOM.Elt.Rect where
 import Control.Plus (empty)
 import Deku.Attribute (Attribute)
 import Deku.Control as DC
-import Deku.Core (Domable)
+import Deku.Core (Nut)
 import FRP.Event (Event)
 
 data Rect_
 
 rect
   :: Event (Attribute Rect_)
-  -> Array Domable
-  -> Domable
+  -> Array Nut
+  -> Nut
 rect = DC.elementify2 "rect"
 
 rect_
-  :: Array Domable
-  -> Domable
+  :: Array Nut
+  -> Nut
 rect_ = rect empty
 
 rect__
   :: String
-  -> Domable
+  -> Nut
 rect__ t = rect_ [ DC.text_ t ]

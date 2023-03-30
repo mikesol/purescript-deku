@@ -3,23 +3,23 @@ module Deku.DOM.Elt.Time where
 import Control.Plus (empty)
 import Deku.Attribute (Attribute)
 import Deku.Control as DC
-import Deku.Core (Domable)
+import Deku.Core (Nut)
 import FRP.Event (Event)
 
 data Time_
 
 time
   :: Event (Attribute Time_)
-  -> Array Domable
-  -> Domable
+  -> Array Nut
+  -> Nut
 time = DC.elementify2 "time"
 
 time_
-  :: Array Domable
-  -> Domable
+  :: Array Nut
+  -> Nut
 time_ = time empty
 
 time__
   :: String
-  -> Domable
+  -> Nut
 time__ t = time_ [ DC.text_ t ]

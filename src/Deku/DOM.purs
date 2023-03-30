@@ -648,7 +648,7 @@ module Deku.DOM
 
 import Deku.Attribute (class Attr, Attribute, Cb(..), cb', unsafeAttribute)
 import Deku.Control (elementify2)
-import Deku.Core (Domable)
+import Deku.Core (Nut)
 -- import Deku.DOM.Attr.Accept (Accept(..))
 -- import Deku.DOM.Attr.AcceptCharset (AcceptCharset(..))
 -- import Deku.DOM.Attr.Accesskey (Accesskey(..))
@@ -1884,8 +1884,8 @@ unsafeCustomElement
    . String
   -> Proxy element
   -> Event (Attribute element)
-  -> Array Domable
-  -> Domable
+  -> Array Nut
+  -> Nut
 unsafeCustomElement name _ = elementify2 name
 
 -- | Creates a special event where an Deku element can have its raw DOM element

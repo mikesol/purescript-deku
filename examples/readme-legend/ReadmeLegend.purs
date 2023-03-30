@@ -15,7 +15,7 @@ import Deku.Attributes (klass_, style_)
 import Deku.CSS (render)
 import Deku.Control (text, text_)
 import Deku.Control as C
-import Deku.Core (Domable, Nut, bus)
+import Deku.Core (Nut, Nut, bus)
 import Deku.Core as CC
 import Deku.DOM as D
 import Deku.Do as Deku

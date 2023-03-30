@@ -3,23 +3,23 @@ module Deku.DOM.Elt.FeTile where
 import Control.Plus (empty)
 import Deku.Attribute (Attribute)
 import Deku.Control as DC
-import Deku.Core (Domable)
+import Deku.Core (Nut)
 import FRP.Event (Event)
 
 data FeTile_
 
 feTile
   :: Event (Attribute FeTile_)
-  -> Array Domable
-  -> Domable
+  -> Array Nut
+  -> Nut
 feTile = DC.elementify2 "feTile"
 
 feTile_
-  :: Array Domable
-  -> Domable
+  :: Array Nut
+  -> Nut
 feTile_ = feTile empty
 
 feTile__
   :: String
-  -> Domable
+  -> Nut
 feTile__ t = feTile_ [ DC.text_ t ]

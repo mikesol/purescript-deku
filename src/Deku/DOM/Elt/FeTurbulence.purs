@@ -3,23 +3,23 @@ module Deku.DOM.Elt.FeTurbulence where
 import Control.Plus (empty)
 import Deku.Attribute (Attribute)
 import Deku.Control as DC
-import Deku.Core (Domable)
+import Deku.Core (Nut)
 import FRP.Event (Event)
 
 data FeTurbulence_
 
 feTurbulence
   :: Event (Attribute FeTurbulence_)
-  -> Array Domable
-  -> Domable
+  -> Array Nut
+  -> Nut
 feTurbulence = DC.elementify2 "feTurbulence"
 
 feTurbulence_
-  :: Array Domable
-  -> Domable
+  :: Array Nut
+  -> Nut
 feTurbulence_ = feTurbulence empty
 
 feTurbulence__
   :: String
-  -> Domable
+  -> Nut
 feTurbulence__ t = feTurbulence_ [ DC.text_ t ]

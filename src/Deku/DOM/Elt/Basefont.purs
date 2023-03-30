@@ -3,23 +3,23 @@ module Deku.DOM.Elt.Basefont where
 import Control.Plus (empty)
 import Deku.Attribute (Attribute)
 import Deku.Control as DC
-import Deku.Core (Domable)
+import Deku.Core (Nut)
 import FRP.Event (Event)
 
 data Basefont_
 
 basefont
   :: Event (Attribute Basefont_)
-  -> Array Domable
-  -> Domable
+  -> Array Nut
+  -> Nut
 basefont = DC.elementify2 "basefont"
 
 basefont_
-  :: Array Domable
-  -> Domable
+  :: Array Nut
+  -> Nut
 basefont_ = basefont empty
 
 basefont__
   :: String
-  -> Domable
+  -> Nut
 basefont__ t = basefont_ [ DC.text_ t ]

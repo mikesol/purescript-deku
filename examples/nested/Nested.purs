@@ -13,7 +13,7 @@ import Data.Tuple.Nested ((/\))
 import Deku.Attribute ((:=))
 import Deku.Control (portal, switcher)
 import Deku.Control as C
-import Deku.Core (Domable, dyn, fixed, insert_, remove, sendToTop)
+import Deku.Core (Nut, dyn, fixed, insert_, remove, sendToTop)
 import Deku.DOM as D
 import Deku.Interpret (FFIDOMSnapshot)
 import Deku.Toplevel (runInBody)
@@ -53,7 +53,7 @@ counter event = mapAccum f 0 event
   where
   f a b = Tuple (a + 1) (Tuple b a)
 
-scene :: Array Domable
+scene :: Array Nut
 scene =
   [ D.div_
       [ portal

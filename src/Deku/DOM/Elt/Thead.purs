@@ -3,23 +3,23 @@ module Deku.DOM.Elt.Thead where
 import Control.Plus (empty)
 import Deku.Attribute (Attribute)
 import Deku.Control as DC
-import Deku.Core (Domable)
+import Deku.Core (Nut)
 import FRP.Event (Event)
 
 data Thead_
 
 thead
   :: Event (Attribute Thead_)
-  -> Array Domable
-  -> Domable
+  -> Array Nut
+  -> Nut
 thead = DC.elementify2 "thead"
 
 thead_
-  :: Array Domable
-  -> Domable
+  :: Array Nut
+  -> Nut
 thead_ = thead empty
 
 thead__
   :: String
-  -> Domable
+  -> Nut
 thead__ t = thead_ [ DC.text_ t ]

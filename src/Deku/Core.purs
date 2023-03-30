@@ -1,7 +1,7 @@
 -- | This module contains the low-level functionality of Deku, including
 -- | the primitive `Nut` type, which is the type of a Deku application.
 -- | In general, this module is not intended to be used directly, with the
--- | exception of the `Nut` type signature and, when needed, the `Domable`
+-- | exception of the `Nut` type signature and, when needed, the `Nut`
 -- | type signature (for which `Nut` is an alias).
 module Deku.Core
   ( ANut(..)
@@ -9,7 +9,7 @@ module Deku.Core
   , DOMInterpret(..)
   , DeleteFromCache
   , DisconnectElement
-  , Domable(..)
+  , Nut(..)
   , GiveNewParent
   , MakeElement
   , MakeDynBeacon
@@ -26,8 +26,8 @@ module Deku.Core
   , SetProp
   , UnsetAttribute
   , SetText
-  , Domable'
-  , DomableF(..)
+  , Nut'
+  , NutF(..)
   , Child(..)
   , bus
   , busUncurried
@@ -68,18 +68,13 @@ import Foreign.Object (Object)
 import Safe.Coerce (coerce)
 import Web.DOM as Web.DOM
 
--- | The signature of a Deku application. This works when `payload` variables
--- | don't need to be used explicitly. When using these variables explicitly, opt for using
--- | `Domable` directly.
-type Nut = Domable
-
 -- | The signature of a custom Deku hook. This works when `payload` variables
 -- | don't need to be used explicitly. When using these variables explicitly, opt for using
--- | `Domable` directly (meaning write out the definition by hand).
-type Hook a = (a -> Domable) -> Domable
+-- | `Nut` directly (meaning write out the definition by hand).
+type Hook a = (a -> Nut) -> Nut
 
 -- | A helper for using `Nut` with an environment.
-type NutWith env = env -> Domable
+type NutWith env = env -> Nut
 
 -- | A helper for when you need to use `Nut` as a fully saturated type.
 -- | This is the same as using [`Exists`](https://github.com/purescript/purescript-exists)
@@ -103,15 +98,15 @@ busUncurried = curry >>> bus
 -- | For internal use only in deku's hooks. See `Deku.Hooks` for more information.
 bussed
   :: forall a
-   . ((a -> Effect Unit) -> Event a -> Domable)
-  -> Domable
-bussed f = Domable (z (map (\(Domable i) -> i) g))
+   . ((a -> Effect Unit) -> Event a -> Nut)
+  -> Nut
+bussed f = Nut (z (map (\(Nut i) -> i) g))
   where
-  g :: Event Domable
+  g :: Event Nut
   g = bus f
 
-  z :: forall payload. Event (DomableF payload) -> DomableF payload
-  z x = DomableF
+  z :: forall payload. Event (NutF payload) -> NutF payload
+  z x = NutF
     ( Bolson.EventfulElement'
         (Bolson.EventfulElement (coerce x))
     )
@@ -120,12 +115,12 @@ bussed f = Domable (z (map (\(Domable i) -> i) g))
 bussedUncurried
   :: forall a
    . ( ((a -> Effect Unit) /\ Event a)
-       -> Domable
+       -> Nut
      )
-  -> Domable
+  -> Nut
 bussedUncurried = curry >>> bussed
 
--- | For internal use in the `Domable` type signature. `Domable` uses `Bolson` under the
+-- | For internal use in the `Nut` type signature. `Nut` uses `Bolson` under the
 -- | hood, and this is used with `Bolson`'s `Entity` type.
 newtype Node payload = Node
   ( Bolson.PSR (pos :: Maybe Int, ez :: Boolean, dynFamily :: Maybe String)
@@ -133,35 +128,35 @@ newtype Node payload = Node
     -> Event payload
   )
 
--- | For internal use in the construction of Domable.
-type Domable' payload = Bolson.Entity Int (Node payload)
+-- | For internal use in the construction of Nut.
+type Nut' payload = Bolson.Entity Int (Node payload)
 
 -- | _The_ type that represents a Deku application. To be used when `Nut` doesn't cut it
 -- | (for example, when different locks need to be used because of the use of portals).
-newtype DomableF payload = DomableF (Domable' payload)
+newtype NutF payload = NutF (Nut' payload)
 
-derive instance Newtype (DomableF payload) _
-newtype Domable = Domable (forall payload. DomableF payload)
+derive instance Newtype (NutF payload) _
+newtype Nut = Nut (forall payload. NutF payload)
 
-instance Semigroup Domable where
+instance Semigroup Nut where
   append a b = fixed [ a, b ]
 
-instance Monoid Domable where
-  mempty = Domable (DomableF (Bolson.envy empty))
+instance Monoid Nut where
+  mempty = Nut (NutF (Bolson.envy empty))
 
 -- | For internal use only in deku's hooks. See `useDyn` in `Deku.Hooks` for more information.
 unsafeSetPos
-  :: Int -> Domable -> Domable
+  :: Int -> Nut -> Nut
 unsafeSetPos = Just >>> unsafeSetPos'
 
 unsafeSetPos'
   :: Maybe Int
-  -> Domable
-  -> Domable
-unsafeSetPos' i (Domable df) = Domable (g df)
+  -> Nut
+  -> Nut
+unsafeSetPos' i (Nut df) = Nut (g df)
   where
-  g :: forall payload. DomableF payload -> DomableF payload
-  g (DomableF e) = (DomableF (f e))
+  g :: forall payload. NutF payload -> NutF payload
+  g (NutF e) = (NutF (f e))
     where
     f
       :: Bolson.Entity Int (Node payload)
@@ -178,26 +173,26 @@ newtype Child = Child (forall payload. Bolson.Child Int (Node payload))
 -- | For internal use only in deku's hooks. See `useDyn` in `Deku.Hooks` for more information.
 insert
   :: Int
-  -> Domable
+  -> Nut
   -> Child
-insert i x = Child (f ((\(Domable z) -> z) b))
+insert i x = Child (f ((\(Nut z) -> z) b))
   where
-  b :: Domable
+  b :: Nut
   b = unsafeSetPos i x
 
-  f :: forall payload. DomableF payload -> Bolson.Child Int (Node payload)
-  f (DomableF d) = Bolson.Insert d
+  f :: forall payload. NutF payload -> Bolson.Child Int (Node payload)
+  f (NutF d) = Bolson.Insert d
 
 insert_
-  :: Domable
+  :: Nut
   -> Child
-insert_ x = Child (f ((\(Domable z) -> z) b))
+insert_ x = Child (f ((\(Nut z) -> z) b))
   where
-  b :: Domable
+  b :: Nut
   b = unsafeSetPos' Nothing x
 
-  f :: forall payload. DomableF payload -> Bolson.Child Int (Node payload)
-  f (DomableF d) = Bolson.Insert d
+  f :: forall payload. NutF payload -> Bolson.Child Int (Node payload)
+  f (NutF d) = Bolson.Insert d
 
 -- | For internal use only in deku's hooks. See `useDyn` in `Deku.Hooks` for more information.
 remove :: Child
@@ -238,7 +233,7 @@ type GiveNewParent payload =
   , scope :: Scope
   , pos :: Maybe Int
   , dynFamily :: Maybe String
-  , ctor :: DomableF payload
+  , ctor :: NutF payload
   , raiseId :: String -> ST.ST Region.Global Unit
   }
 
@@ -385,24 +380,24 @@ __internalDekuFlatten
   :: forall payload
    . Bolson.PSR (pos :: Maybe Int, ez :: Boolean, dynFamily :: Maybe String)
   -> DOMInterpret payload
-  -> DomableF payload
+  -> NutF payload
   -> Event payload
 __internalDekuFlatten a b c = BControl.flatten portalFlatten a b
-  ((\(DomableF x) -> x) c)
+  ((\(NutF x) -> x) c)
 
 dynify
   :: forall i
-   . (i -> Domable)
+   . (i -> Nut)
   -> i
-  -> Domable
-dynify f es = Domable (go' ((\(Domable df) -> df) (f es)))
+  -> Nut
+dynify f es = Nut (go' ((\(Nut df) -> df) (f es)))
   where
-  go' :: forall payload. DomableF payload -> DomableF payload
-  go' x = DomableF (Bolson.Element' (Node (go x)))
+  go' :: forall payload. NutF payload -> NutF payload
+  go' x = NutF (Bolson.Element' (Node (go x)))
 
   go
     :: forall payload
-     . DomableF payload
+     . NutF payload
     -> Bolson.PSR (pos :: Maybe Int, ez :: Boolean, dynFamily :: Maybe String)
     -> DOMInterpret payload
     -> Event payload
@@ -474,54 +469,54 @@ dynify f es = Domable (go' ((\(Domable df) -> df) (f es)))
 -- | See [**Dynamic components**](https://purescript-deku.netlify.app/core-concepts/collections#dynamic-components) in the Deku guide for more information.
 dyn
   :: Event (Event Child)
-  -> Domable
+  -> Nut
 dyn = dynify myDyn
   where
-  myDyn :: Event (Event Child) -> Domable
-  myDyn e = Domable (myDyn' ((map <<< map) (\(Child c) -> c) e))
+  myDyn :: Event (Event Child) -> Nut
+  myDyn e = Nut (myDyn' ((map <<< map) (\(Child c) -> c) e))
 
   myDyn'
     :: forall payload
      . Event (Event (Bolson.Child Int (Node payload)))
-    -> DomableF payload
-  myDyn' x = DomableF (Bolson.dyn x)
+    -> NutF payload
+  myDyn' x = NutF (Bolson.dyn x)
 
--- | Once upon a time, this function was used to create a list of `Domable`-s that are merged
--- | together. Now, as `Domable` is a `Monoid`, you can use `fold` instead.
+-- | Once upon a time, this function was used to create a list of `Nut`-s that are merged
+-- | together. Now, as `Nut` is a `Monoid`, you can use `fold` instead.
 fixed
-  :: Array Domable
-  -> Domable
+  :: Array Nut
+  -> Nut
 fixed = dynify myFixed
   where
-  myFixed :: Array Domable -> Domable
-  myFixed e = Domable (myFixed' (map (\(Domable c) -> c) e))
+  myFixed :: Array Nut -> Nut
+  myFixed e = Nut (myFixed' (map (\(Nut c) -> c) e))
 
   myFixed'
     :: forall payload
-     . Array (DomableF payload)
-    -> DomableF payload
-  myFixed' x = DomableF (Bolson.fixed (map (\(DomableF y) -> y) x))
+     . Array (NutF payload)
+    -> NutF payload
+  myFixed' x = NutF (Bolson.fixed (map (\(NutF y) -> y) x))
 
 -- dynify
 --   ( coerce
---       (Bolson.fixed :: Array (Domable' payload) -> Domable' payload)
+--       (Bolson.fixed :: Array (Nut' payload) -> Nut' payload)
 --   )
 
--- | Once upon a time, this function was used to emit arbitrary `Domable`-s using an event.
--- | Nowadays, its use is discouraged as there are other patterns in place to emit Domables, like
+-- | Once upon a time, this function was used to emit arbitrary `Nut`-s using an event.
+-- | Nowadays, its use is discouraged as there are other patterns in place to emit Nuts, like
 -- | for example `switcher`. It is left in the library for backwards compatibility, but will
 -- | likely be deprecated, and then all traces of it will be purged, and then people will be forced to study
 -- | a revisionist history of the library that denies it ever existed.
 envy
-  :: Event Domable
-  -> Domable
+  :: Event Nut
+  -> Nut
 envy = dynify myEnvy
   where
-  myEnvy :: Event Domable -> Domable
-  myEnvy e = Domable (myEnvy' (map (\(Domable c) -> c) e))
+  myEnvy :: Event Nut -> Nut
+  myEnvy e = Nut (myEnvy' (map (\(Nut c) -> c) e))
 
   myEnvy'
     :: forall payload
-     . Event (DomableF payload)
-    -> DomableF payload
-  myEnvy' x = DomableF (Bolson.envy (map (\(DomableF y) -> y) x))
+     . Event (NutF payload)
+    -> NutF payload
+  myEnvy' x = NutF (Bolson.envy (map (\(NutF y) -> y) x))

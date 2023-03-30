@@ -3,23 +3,23 @@ module Deku.DOM.Elt.Frameset where
 import Control.Plus (empty)
 import Deku.Attribute (Attribute)
 import Deku.Control as DC
-import Deku.Core (Domable)
+import Deku.Core (Nut)
 import FRP.Event (Event)
 
 data Frameset_
 
 frameset
   :: Event (Attribute Frameset_)
-  -> Array Domable
-  -> Domable
+  -> Array Nut
+  -> Nut
 frameset = DC.elementify2 "frameset"
 
 frameset_
-  :: Array Domable
-  -> Domable
+  :: Array Nut
+  -> Nut
 frameset_ = frameset empty
 
 frameset__
   :: String
-  -> Domable
+  -> Nut
 frameset__ t = frameset_ [ DC.text_ t ]

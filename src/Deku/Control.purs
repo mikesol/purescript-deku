@@ -37,7 +37,7 @@ import Data.Profunctor (dimap, lcmap)
 import Data.Tuple (snd)
 import Data.Tuple.Nested ((/\))
 import Deku.Attribute (Attribute, AttributeValue(..), unsafeUnAttribute)
-import Deku.Core (DOMInterpret(..), Domable(..), DomableF(..), Node(..), Nut, unsafeSetPos, dyn, envy, insert_, remove)
+import Deku.Core (DOMInterpret(..), Nut(..), NutF(..), Node(..), Nut, unsafeSetPos, dyn, fixed, envy, insert_, remove)
 import FRP.Event (Event, Subscriber(..), merge, keepLatest, makeLemmingEventO, mapAccum, memoize)
 import Prim.Int (class Compare)
 import Prim.Ordering (GT)
@@ -84,16 +84,16 @@ elementify2
   :: forall element
    . String
   -> Event (Attribute element)
-  -> Array Domable
-  -> Domable
-elementify2 en attributes kids = Domable
-  (step1 (mapWithIndex ((map <<< map) (\(Domable df) -> df) unsafeSetPos) kids))
+  -> Array Nut
+  -> Nut
+elementify2 en attributes kids = Nut
+  (step1 (mapWithIndex ((map <<< map) (\(Nut df) -> df) unsafeSetPos) kids))
   where
-  step1 :: forall payload. Array (DomableF payload) -> DomableF payload
-  step1 arr = DomableF
+  step1 :: forall payload. Array (NutF payload) -> NutF payload
+  step1 arr = NutF
     ( Element'
         ( elementify en attributes
-            ( DomableF (BCore.fixed (coerce arr))
+            ( NutF (BCore.fixed (coerce arr))
             )
         )
     )
@@ -102,7 +102,7 @@ elementify
   :: forall payload element
    . String
   -> Event (Attribute element)
-  -> DomableF payload
+  -> NutF payload
   -> Node payload
 elementify tag atts children = Node go
   where
@@ -166,22 +166,22 @@ elementify tag atts children = Node go
 globalPortal
   :: forall n
    . Compare n Neg1 GT
-  => Vect n Domable
-  -> (Vect n Domable -> Domable)
-  -> Domable
-globalPortal v' c' = Domable
-  ( go (map (\(Domable df) -> df) v')
+  => Vect n Nut
+  -> (Vect n Nut -> Nut)
+  -> Nut
+globalPortal v' c' = Nut
+  ( go (map (\(Nut df) -> df) v')
       (shouldBeSafe c')
   )
   where
-  shouldBeSafe :: forall payload. (Vect n Domable -> Domable) -> Vect n (DomableF payload) -> DomableF payload
+  shouldBeSafe :: forall payload. (Vect n Nut -> Nut) -> Vect n (NutF payload) -> NutF payload
   shouldBeSafe = unsafeCoerce
   go
     :: forall payload
-     . Vect n (DomableF payload)
-    -> (Vect n (DomableF payload) -> DomableF payload)
-    -> DomableF payload
-  go v c = DomableF
+     . Vect n (NutF payload)
+    -> (Vect n (NutF payload) -> NutF payload)
+    -> NutF payload
+  go v c = NutF
     ( Bolson.globalPortalComplexComplex
         portalFlatten
         { fromEltO1: coerce
@@ -200,9 +200,9 @@ globalPortal v' c' = Domable
 
 -- | A variation of global portal that takes a single element instead of a vector of elements.
 globalPortal1
-  :: Domable
-  -> (Domable -> Domable)
-  -> Domable
+  :: Nut
+  -> (Nut -> Nut)
+  -> Nut
 globalPortal1 i f = globalPortal (singleton i) (lcmap (index (Proxy :: _ 0)) f)
 
 -- ugh, this isn't sacred, delete it and regenerate if something changes
@@ -242,11 +242,11 @@ portalFlatten =
 
 -- | A variation of portal that takes a single element instead of a vector of elements.
 portal1
-  :: Domable
-  -> ( Domable
-       -> Domable
+  :: Nut
+  -> ( Nut
+       -> Nut
      )
-  -> Domable
+  -> Nut
 portal1 i f = portal (singleton i) (lcmap ((index (Proxy :: _ 0))) f)
 
 -- | Creates a portal.
@@ -273,22 +273,22 @@ portal1 i f = portal (singleton i) (lcmap ((index (Proxy :: _ 0))) f)
 portal
   :: forall n
    . Compare n Neg1 GT
-  => Vect n Domable
-  -> (Vect n Domable -> Domable)
-  -> Domable
-portal v' c' = Domable
-  ( go (map (\(Domable df) -> df) v')
+  => Vect n Nut
+  -> (Vect n Nut -> Nut)
+  -> Nut
+portal v' c' = Nut
+  ( go (map (\(Nut df) -> df) v')
       (shouldBeSafe c')
   )
   where
-  shouldBeSafe :: forall payload. (Vect n Domable -> Domable) -> Vect n (DomableF payload) -> DomableF payload
+  shouldBeSafe :: forall payload. (Vect n Nut -> Nut) -> Vect n (NutF payload) -> NutF payload
   shouldBeSafe = unsafeCoerce
   go
     :: forall payload
-     . Vect n (DomableF payload)
-    -> (Vect n (DomableF payload) -> DomableF payload)
-    -> DomableF payload
-  go v c = DomableF
+     . Vect n (NutF payload)
+    -> (Vect n (NutF payload) -> NutF payload)
+    -> NutF payload
+  go v c = NutF
     ( Bolson.portalComplexComplex
         portalFlatten
         { fromEltO1: coerce
@@ -305,28 +305,15 @@ portal v' c' = Domable
         (dimap (map ((_ $ unit) >>> wrap)) unwrap c)
     )
 
--- Domable $ Bolson.portalComplexComplex
---   portalFlatten
---   { fromEltO1: coerce
---   , fromEltO2: coerce
---   , toElt: coerce
---   , wrapElt: \i -> Element' (elementify "div" empty (wrap i))
---   , giveNewParent: \x y ctor _ -> (unwrap x).giveNewParent
---       (y `union` { ctor: coerce ctor })
---   , deleteFromCache: unwrap >>> _.deleteFromCache
---   }
---   (map unwrap a)
---   (dimap (map ((_ $ unit) >>> wrap)) unwrap c)
-
 -- | Create a [`Text`](https://developer.mozilla.org/en-US/docs/Web/API/Text) node from
 -- | the emitted strings. Each emitted string replaces the previous string.
 text
   :: Event String
-  -> Domable
-text txt = Domable go'
+  -> Nut
+text txt = Nut go'
   where
-  go' :: forall payload. DomableF payload
-  go' = DomableF (Element' (Node go))
+  go' :: forall payload. NutF payload
+  go' = NutF (Element' (Node go))
 
   go
     :: forall payload
@@ -358,23 +345,23 @@ text txt = Domable go'
 
 -- | Create a [`Text`](https://developer.mozilla.org/en-US/docs/Web/API/Text) node from
 -- | a string. The node is set immediately with the string and does not change.
-text_ :: String -> Domable
+text_ :: String -> Nut
 text_ txt = text (pure txt)
 
 -- | A low-level function that creates a Deku application.
 -- | In most situations this should not be used. Instead, use functions from `Deku.Toplevel`.
 deku
   :: Web.DOM.Element
-  -> Domable
+  -> Nut
   -> ( forall payload
         . DOMInterpret payload
        -> Event payload
      )
-deku root (Domable cc) = go cc
+deku root (Nut cc) = go cc
   where
   go
     :: forall payload
-     . DomableF payload
+     . NutF payload
     -> DOMInterpret payload
     -> Event payload
   go children di@(DOMInterpret { makeRoot }) = makeLemmingEventO $ mkSTFn2
@@ -401,21 +388,21 @@ __internalDekuFlatten
   :: forall payload
    . PSR (pos :: Maybe Int, ez :: Boolean, dynFamily :: Maybe String)
   -> DOMInterpret payload
-  -> DomableF payload
+  -> NutF payload
   -> Event payload
-__internalDekuFlatten a b (DomableF c) = Bolson.flatten portalFlatten a b c
+__internalDekuFlatten a b (NutF c) = Bolson.flatten portalFlatten a b c
 
 -- | Like `bindFlipped`, except instead of working with a monad, it dipts into an `Event`
--- | and creates a `Domable`. This allows you to use an event to switch between different
+-- | and creates a `Nut`. This allows you to use an event to switch between different
 -- | bits of DOM. This is how a [Virtual DOM](https://en.wikipedia.org/wiki/Virtual_DOM) works
 -- | in its most basic, unoptimized form. As a result, `switcher`, while convenient, is inefficient
 -- | and should be used when the content needs to be replaced wholesale. For a more efficient
 -- | approach, see the `useDyn` hook.
 switcher
   :: forall a
-   . (a -> Domable)
+   . (a -> Nut)
   -> Event a
-  -> Domable
+  -> Nut
 switcher f event = dyn $ keepLatest
   $ memoize (counter event) \cenv -> map
       ( \(p /\ n) -> merge
@@ -435,8 +422,8 @@ infixl 4 switcher as <$~>
 switcherFlipped
   :: forall a
    . Event a
-  -> (a -> Domable)
-  -> Domable
+  -> (a -> Nut)
+  -> Nut
 switcherFlipped = flip switcher
 
 infixl 1 switcherFlipped as <#~>
@@ -444,8 +431,8 @@ infixl 1 switcherFlipped as <#~>
 -- | Inserts the Deku Nut when an event emits `true`, otherwise destroys the element.
 guard
   :: Event Boolean
-  -> Domable
-  -> Domable
+  -> Nut
+  -> Nut
 guard eb d = switcher
   (if _ then d else blank)
   eb
@@ -454,5 +441,5 @@ guard eb d = switcher
 blank :: Nut
 blank = mempty
 
-toDeku :: forall a. (a -> Event Domable) -> a -> Domable
+toDeku :: forall a. (a -> Event Nut) -> a -> Nut
 toDeku = compose envy

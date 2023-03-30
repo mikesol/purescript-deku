@@ -10,7 +10,7 @@ import Data.Profunctor (lcmap)
 import Data.Tuple (Tuple(..))
 import Deku.Attribute (cb, xdata, (:=))
 import Deku.Control as C
-import Deku.Core (Domable, bus)
+import Deku.Core (Nut, bus)
 import Deku.Core as CC
 import Deku.DOM as D
 import Deku.Toplevel (runInBody)
@@ -22,7 +22,7 @@ counter event = mapAccum f 0 event
   where
   f a b = Tuple (a + 1) (Tuple b a)
 
-scene :: Domable
+scene :: Nut
 scene = CC.envy $ bus $ \push -> lcmap (alt (pure true)) \event -> do
   D.div_
     [ D.div_

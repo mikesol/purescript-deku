@@ -3,23 +3,23 @@ module Deku.DOM.Elt.Br where
 import Control.Plus (empty)
 import Deku.Attribute (Attribute)
 import Deku.Control as DC
-import Deku.Core (Domable)
+import Deku.Core (Nut)
 import FRP.Event (Event)
 
 data Br_
 
 br
   :: Event (Attribute Br_)
-  -> Array Domable
-  -> Domable
+  -> Array Nut
+  -> Nut
 br = DC.elementify2 "br"
 
 br_
-  :: Array Domable
-  -> Domable
+  :: Array Nut
+  -> Nut
 br_ = br empty
 
 br__
   :: String
-  -> Domable
+  -> Nut
 br__ t = br_ [ DC.text_ t ]

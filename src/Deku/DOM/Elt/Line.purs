@@ -3,23 +3,23 @@ module Deku.DOM.Elt.Line where
 import Control.Plus (empty)
 import Deku.Attribute (Attribute)
 import Deku.Control as DC
-import Deku.Core (Domable)
+import Deku.Core (Nut)
 import FRP.Event (Event)
 
 data Line_
 
 line
   :: Event (Attribute Line_)
-  -> Array Domable
-  -> Domable
+  -> Array Nut
+  -> Nut
 line = DC.elementify2 "line"
 
 line_
-  :: Array Domable
-  -> Domable
+  :: Array Nut
+  -> Nut
 line_ = line empty
 
 line__
   :: String
-  -> Domable
+  -> Nut
 line__ t = line_ [ DC.text_ t ]

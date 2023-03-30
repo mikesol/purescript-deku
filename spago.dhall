@@ -24,6 +24,7 @@
   , "safe-coerce"
   , "st"
   , "strings"
+  , "stringutils"
   , "transformers"
   , "tuples"
   , "unsafe-coerce"

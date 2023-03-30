@@ -3,23 +3,23 @@ module Deku.DOM.Elt.FeBlend where
 import Control.Plus (empty)
 import Deku.Attribute (Attribute)
 import Deku.Control as DC
-import Deku.Core (Domable)
+import Deku.Core (Nut)
 import FRP.Event (Event)
 
 data FeBlend_
 
 feBlend
   :: Event (Attribute FeBlend_)
-  -> Array Domable
-  -> Domable
+  -> Array Nut
+  -> Nut
 feBlend = DC.elementify2 "feBlend"
 
 feBlend_
-  :: Array Domable
-  -> Domable
+  :: Array Nut
+  -> Nut
 feBlend_ = feBlend empty
 
 feBlend__
   :: String
-  -> Domable
+  -> Nut
 feBlend__ t = feBlend_ [ DC.text_ t ]

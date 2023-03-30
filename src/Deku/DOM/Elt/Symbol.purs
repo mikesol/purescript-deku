@@ -3,23 +3,23 @@ module Deku.DOM.Elt.Symbol where
 import Control.Plus (empty)
 import Deku.Attribute (Attribute)
 import Deku.Control as DC
-import Deku.Core (Domable)
+import Deku.Core (Nut)
 import FRP.Event (Event)
 
 data Symbol_
 
 symbol
   :: Event (Attribute Symbol_)
-  -> Array Domable
-  -> Domable
+  -> Array Nut
+  -> Nut
 symbol = DC.elementify2 "symbol"
 
 symbol_
-  :: Array Domable
-  -> Domable
+  :: Array Nut
+  -> Nut
 symbol_ = symbol empty
 
 symbol__
   :: String
-  -> Domable
+  -> Nut
 symbol__ t = symbol_ [ DC.text_ t ]

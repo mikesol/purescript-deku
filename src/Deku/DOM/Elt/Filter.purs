@@ -3,23 +3,23 @@ module Deku.DOM.Elt.Filter where
 import Control.Plus (empty)
 import Deku.Attribute (Attribute)
 import Deku.Control as DC
-import Deku.Core (Domable)
+import Deku.Core (Nut)
 import FRP.Event (Event)
 
 data Filter_
 
 filter
   :: Event (Attribute Filter_)
-  -> Array Domable
-  -> Domable
+  -> Array Nut
+  -> Nut
 filter = DC.elementify2 "filter"
 
 filter_
-  :: Array Domable
-  -> Domable
+  :: Array Nut
+  -> Nut
 filter_ = filter empty
 
 filter__
   :: String
-  -> Domable
+  -> Nut
 filter__ t = filter_ [ DC.text_ t ]

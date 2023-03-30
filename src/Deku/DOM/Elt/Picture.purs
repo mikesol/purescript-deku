@@ -3,23 +3,23 @@ module Deku.DOM.Elt.Picture where
 import Control.Plus (empty)
 import Deku.Attribute (Attribute)
 import Deku.Control as DC
-import Deku.Core (Domable)
+import Deku.Core (Nut)
 import FRP.Event (Event)
 
 data Picture_
 
 picture
   :: Event (Attribute Picture_)
-  -> Array Domable
-  -> Domable
+  -> Array Nut
+  -> Nut
 picture = DC.elementify2 "picture"
 
 picture_
-  :: Array Domable
-  -> Domable
+  :: Array Nut
+  -> Nut
 picture_ = picture empty
 
 picture__
   :: String
-  -> Domable
+  -> Nut
 picture__ t = picture_ [ DC.text_ t ]

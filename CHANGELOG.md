@@ -87,7 +87,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.8.0] - 2022-09-22
 
-- `Domable` is a monoid!
+- `Nut` is a monoid!
 
 ## [0.7.0] - 2022-09-10
 

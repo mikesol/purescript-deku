@@ -3,23 +3,23 @@ module Deku.DOM.Elt.Applet where
 import Control.Plus (empty)
 import Deku.Attribute (Attribute)
 import Deku.Control as DC
-import Deku.Core (Domable)
+import Deku.Core (Nut)
 import FRP.Event (Event)
 
 data Applet_
 
 applet
   :: Event (Attribute Applet_)
-  -> Array Domable
-  -> Domable
+  -> Array Nut
+  -> Nut
 applet = DC.elementify2 "applet"
 
 applet_
-  :: Array Domable
-  -> Domable
+  :: Array Nut
+  -> Nut
 applet_ = applet empty
 
 applet__
   :: String
-  -> Domable
+  -> Nut
 applet__ t = applet_ [ DC.text_ t ]

@@ -3,23 +3,23 @@ module Deku.DOM.Elt.Strike where
 import Control.Plus (empty)
 import Deku.Attribute (Attribute)
 import Deku.Control as DC
-import Deku.Core (Domable)
+import Deku.Core (Nut)
 import FRP.Event (Event)
 
 data Strike_
 
 strike
   :: Event (Attribute Strike_)
-  -> Array Domable
-  -> Domable
+  -> Array Nut
+  -> Nut
 strike = DC.elementify2 "strike"
 
 strike_
-  :: Array Domable
-  -> Domable
+  :: Array Nut
+  -> Nut
 strike_ = strike empty
 
 strike__
   :: String
-  -> Domable
+  -> Nut
 strike__ t = strike_ [ DC.text_ t ]

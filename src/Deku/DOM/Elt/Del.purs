@@ -3,23 +3,23 @@ module Deku.DOM.Elt.Del where
 import Control.Plus (empty)
 import Deku.Attribute (Attribute)
 import Deku.Control as DC
-import Deku.Core (Domable)
+import Deku.Core (Nut)
 import FRP.Event (Event)
 
 data Del_
 
 del
   :: Event (Attribute Del_)
-  -> Array Domable
-  -> Domable
+  -> Array Nut
+  -> Nut
 del = DC.elementify2 "del"
 
 del_
-  :: Array Domable
-  -> Domable
+  :: Array Nut
+  -> Nut
 del_ = del empty
 
 del__
   :: String
-  -> Domable
+  -> Nut
 del__ t = del_ [ DC.text_ t ]

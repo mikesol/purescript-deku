@@ -18,7 +18,7 @@ import Data.Profunctor (lcmap)
 import Data.Reflectable (class Reflectable, reflectType)
 import Data.Symbol (class IsSymbol)
 import Deku.Attribute (Attribute, AttributeValue(..), unsafeUnAttribute)
-import Deku.Core (DOMInterpret(..), Domable(..), Domable', DomableF(..), Node(..))
+import Deku.Core (DOMInterpret(..), Nut(..), Nut', NutF(..), Node(..))
 import Deku.DOM (class TagToDeku)
 import FRP.Event (Event, Subscriber(..), merge, makeLemmingEventO)
 import Foreign.Object as Object
@@ -38,7 +38,7 @@ print_('instance (TagToDeku tag deku,  Row.Cons acc (Event (Attribute deku)) pur
 print_('else instance (Sym.Append acc anything acc2, Sym.Cons x y tail, DoVerbForAttr verb tag acc2 x y pursi purso newTail) => DoVerbForAttr verb tag acc anything tail pursi purso newTail')
 print_('--')
 print_('class DoVerbForDOM (verb :: Symbol) (acc :: Symbol) (head :: Symbol) (tail :: Symbol) (pursi :: Row Type) (purso :: Row Type) (newTail :: Symbol) |  verb acc head tail pursi -> purso newTail')
-print_('instance (Row.Cons acc (Domable) pursi purso) => DoVerbForDOM  verb acc verb tail pursi purso tail')
+print_('instance (Row.Cons acc (Nut) pursi purso) => DoVerbForDOM  verb acc verb tail pursi purso tail')
 print_('else instance (Sym.Append acc anything acc2, Sym.Cons x y tail, DoVerbForDOM  verb acc2 x y pursi purso newTail) => DoVerbForDOM  verb acc anything tail pursi purso newTail')
 print_('--')
 print_('class IsWhiteSpace (space :: Symbol)')
@@ -149,30 +149,30 @@ class
     :: String
     -> Proxy rl
     -> { | r }
-    -> { cache :: Object.Object Boolean, element :: Domable }
+    -> { cache :: Object.Object Boolean, element :: Nut }
 
-domableToNode :: Domable -> forall payload. Node payload
-domableToNode (Domable df) = step1 df
+domableToNode :: Nut -> forall payload. Node payload
+domableToNode (Nut df) = step1 df
   where
-  step1 :: forall payload. DomableF payload -> Node payload
-  step1 (DomableF (Element' n)) = n
+  step1 :: forall payload. NutF payload -> Node payload
+  step1 (NutF (Element' n)) = n
   step1 _ = Node \_ _ -> empty
 
 instance pursxToElementConsInsert ::
-  ( Row.Cons key (Domable) r' r
+  ( Row.Cons key (Nut) r' r
   , PursxToElement rest r
   , Reflectable key String
   , IsSymbol key
   ) =>
   PursxToElement
-    (RL.Cons key (Domable) rest)
+    (RL.Cons key (Nut) rest)
     r where
   pursxToElement pxScope _ r =
     let
       { cache, element } = pursxToElement pxScope (Proxy :: Proxy rest) r
     in
       { cache: Object.insert (reflectType pxk) false cache
-      , element: Domable (DomableF (Element' $ Node \info di ->
+      , element: Nut (NutF (Element' $ Node \info di ->
           __internalDekuFlatten
             { parent: Just (reflectType pxk <> "@!%" <> pxScope)
             , scope: info.scope
@@ -182,7 +182,7 @@ instance pursxToElementConsInsert ::
             , dynFamily: Nothing
             }
             di
-            ((\(Domable df) -> df) (get pxk r))
+            ((\(Nut df) -> df) (get pxk r))
             <|> (let Node y = (domableToNode element) in y) info di))
       }
     where
@@ -202,8 +202,8 @@ else instance pursxToElementConsAttr ::
       { cache, element } = pursxToElement pxScope (Proxy :: Proxy rest) r
     in
       { cache: Object.insert (reflectType pxk) true cache
-      , element: Domable
-          ( DomableF
+      , element: Nut
+          ( NutF
               ( Element'
                   ( Node
                       \parent
@@ -244,7 +244,7 @@ instance pursxToElementNil ::
   PursxToElement RL.Nil r where
   pursxToElement _ _ _ =
     { cache: Object.empty
-    , element: Domable (DomableF $ Element' $ Node \_ _ -> empty)
+    , element: Nut (NutF $ Element' $ Node \_ _ -> empty)
     }
 
 psx
@@ -253,7 +253,7 @@ psx
   => PXStart "~" " " html ()
   => PursxToElement RL.Nil ()
   => Proxy html
-  -> Domable
+  -> Nut
 psx px = makePursx px {}
 
 makePursx
@@ -264,7 +264,7 @@ makePursx
   => PursxToElement rl r
   => Proxy html
   -> { | r }
-  -> Domable
+  -> Nut
 makePursx = makePursx' (Proxy :: _ "~")
 
 makePursx'
@@ -277,11 +277,11 @@ makePursx'
   => Proxy verb
   -> Proxy html
   -> { | r }
-  -> Domable
-makePursx' verb html r = Domable ee
+  -> Nut
+makePursx' verb html r = Nut ee
   where
-  ee :: forall payload. DomableF payload
-  ee = DomableF (Element' (Node go))
+  ee :: forall payload. NutF payload
+  ee = NutF (Element' (Node go))
 
   go
     :: forall payload
@@ -335,7 +335,7 @@ unsafeMakePursx
   => PursxToElement rl r
   => String
   -> { | r }
-  -> Domable
+  -> Nut
 unsafeMakePursx = unsafeMakePursx' "~"
 
 unsafeMakePursx'
@@ -345,11 +345,11 @@ unsafeMakePursx'
   => String
   -> String
   -> { | r }
-  -> Domable
-unsafeMakePursx' verb html r = Domable ee
+  -> Nut
+unsafeMakePursx' verb html r = Nut ee
   where
-  ee :: forall payload. DomableF payload
-  ee = DomableF (Element' (Node go))
+  ee :: forall payload. NutF payload
+  ee = NutF (Element' (Node go))
 
   go
     :: forall payload
@@ -401,7 +401,7 @@ __internalDekuFlatten
   :: forall payload
    . PSR (pos :: Maybe Int, dynFamily :: Maybe String, ez :: Boolean)
   -> DOMInterpret payload
-  -> DomableF payload
+  -> NutF payload
   -> Event payload
 __internalDekuFlatten a b c = Bolson.flatten
   { doLogic: \pos (DOMInterpret { sendToPos }) id -> sendToPos { id, pos }
@@ -413,7 +413,7 @@ __internalDekuFlatten a b c = Bolson.flatten
   }
   a
   b
-  ((coerce :: DomableF payload -> Domable' payload) c)
+  ((coerce :: NutF payload -> Nut' payload) c)
 
 infixr 5 makePursx as ~~
 infixr 5 unsafeMakePursx as ~!~

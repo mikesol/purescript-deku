@@ -3,23 +3,23 @@ module Deku.DOM.Elt.Mark where
 import Control.Plus (empty)
 import Deku.Attribute (Attribute)
 import Deku.Control as DC
-import Deku.Core (Domable)
+import Deku.Core (Nut)
 import FRP.Event (Event)
 
 data Mark_
 
 mark
   :: Event (Attribute Mark_)
-  -> Array Domable
-  -> Domable
+  -> Array Nut
+  -> Nut
 mark = DC.elementify2 "mark"
 
 mark_
-  :: Array Domable
-  -> Domable
+  :: Array Nut
+  -> Nut
 mark_ = mark empty
 
 mark__
   :: String
-  -> Domable
+  -> Nut
 mark__ t = mark_ [ DC.text_ t ]

@@ -21,7 +21,7 @@ import Data.Either (Either(..))
 import Data.Maybe (Maybe(..), maybe)
 import Data.Newtype (unwrap)
 import Deku.Control (deku)
-import Deku.Core (DOMInterpret(..), Domable(..), Domable', DomableF(..), Node(..))
+import Deku.Core (DOMInterpret(..), Nut(..), Nut', NutF(..), Node(..))
 import Deku.Interpret (EFunctionOfFFIDOMSnapshot(..), FFIDOMSnapshot, FreeEFunctionOfFFIDOMSnapshotU, FunctionOfFFIDOMSnapshotU, fullDOMInterpret, getAllComments, hydratingDOMInterpret, makeFFIDOMSnapshot, setHydrating, ssrDOMInterpret, unSetHydrating)
 import Deku.SSR (ssr')
 import Effect (Effect)
@@ -36,26 +36,32 @@ import Web.HTML.HTMLElement (toElement)
 import Web.HTML.Window (document)
 
 flattenToSingleEvent
-  :: FFIDOMSnapshot -> Event FreeEFunctionOfFFIDOMSnapshotU -> Event FunctionOfFFIDOMSnapshotU
-flattenToSingleEvent ffi = keepLatest <<< map go
+  :: FFIDOMSnapshot
+  -> Event FreeEFunctionOfFFIDOMSnapshotU
+  -> Event FunctionOfFFIDOMSnapshotU
+flattenToSingleEvent ffi = go' 0
   where
-  go :: FreeEFunctionOfFFIDOMSnapshotU -> Event FunctionOfFFIDOMSnapshotU
-  go = resume >>> case _ of
-    Left (EFunctionOfFFIDOMSnapshot l) -> keepLatest (map f l)
+  go' n = keepLatest <<< map (go n)
+
+  go :: Int -> FreeEFunctionOfFFIDOMSnapshotU -> Event FunctionOfFFIDOMSnapshotU
+  go n = resume >>> case _ of
+    Left (EFunctionOfFFIDOMSnapshot l) -> keepLatest (map (f n) l)
     Right _ -> mempty
 
   f
-    :: (FFIDOMSnapshot -> Effect FreeEFunctionOfFFIDOMSnapshotU)
+    :: Int
+    -> (FFIDOMSnapshot -> Effect FreeEFunctionOfFFIDOMSnapshotU)
     -> Event FunctionOfFFIDOMSnapshotU
-  f i = flattenToSingleEvent ffi $ makeEvent \k -> do
-      i ffi >>= k
-      pure (pure unit)
+  f n i = go' (n + 1) $ makeEvent \k -> do
+    pure unit
+    i ffi >>= k
+    pure (pure unit)
 
 -- | Runs a deku application in a DOM element, returning a canceler that can
 -- | be used to cancel the application.
 runInElement'
   :: Web.DOM.Element
-  -> Domable
+  -> Nut
   -> Effect (Effect Unit)
 runInElement' elt eee = do
   ffi <- makeFFIDOMSnapshot
@@ -65,7 +71,7 @@ runInElement' elt eee = do
 -- | Runs a deku application in the body of a document, returning a canceler that can
 -- | be used to cancel the application.
 runInBody'
-  :: Domable
+  :: Nut
   -> Effect (Effect Unit)
 runInBody' eee = do
   b' <- window >>= document >>= body
@@ -73,7 +79,7 @@ runInBody' eee = do
 
 -- | Runs a deku application in the body of a document
 runInBody
-  :: Domable
+  :: Nut
   -> Effect Unit
 runInBody a = void (runInBody' a)
 
@@ -83,7 +89,7 @@ foreign import dekuRoot :: Effect DOM.Element
 
 -- | Hydrates an application created using `runSSR`, returning a canceler that can
 -- | be used to end the application.
-hydrate' :: Domable -> Effect (Effect Unit)
+hydrate' :: Nut -> Effect (Effect Unit)
 hydrate' children = do
   ffi <- makeFFIDOMSnapshot
   getAllComments ffi
@@ -110,13 +116,13 @@ hydrate' children = do
   pure u
 
 -- | Hydrates an application created using `runSSR`.
-hydrate :: Domable -> Effect Unit
+hydrate :: Nut -> Effect Unit
 hydrate a = void (hydrate' a)
 
 -- | Creates a static site from a deku application. The top-level element for this site is `body`.
 runSSR
   :: forall r
-   . Domable
+   . Nut
   -> ST r String
 
 runSSR = runSSR' "body"
@@ -125,12 +131,12 @@ runSSR = runSSR' "body"
 -- | passed to this function as a first argument.
 runSSR'
   :: String
-  -> (forall r. Domable -> ST r String)
+  -> (forall r. Nut -> ST r String)
 runSSR' topTag = go
   where
   go
-    :: forall r. Domable -> ST r String
-  go (Domable children) = do
+    :: forall r. Nut -> ST r String
+  go (Nut children) = do
     let
       unglobal = unsafeCoerce :: ST Global String -> ST r String
 
@@ -163,7 +169,7 @@ __internalDekuFlatten
   :: forall payload
    . PSR (pos :: Maybe Int, dynFamily :: Maybe String, ez :: Boolean)
   -> DOMInterpret payload
-  -> DomableF payload
+  -> NutF payload
   -> Event payload
 __internalDekuFlatten a b c = Bolson.flatten
   { doLogic: \pos (DOMInterpret { sendToPos }) id -> sendToPos { id, pos }
@@ -175,4 +181,4 @@ __internalDekuFlatten a b c = Bolson.flatten
   }
   a
   b
-  ((coerce :: DomableF payload -> Domable' payload) c)
+  ((coerce :: NutF payload -> Nut' payload) c)

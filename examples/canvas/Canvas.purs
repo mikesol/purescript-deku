@@ -5,7 +5,7 @@ import Prelude
 import Control.Monad.ST.Class (liftST)
 import Data.Foldable (oneOf, traverse_)
 import Deku.Attribute ((!:=))
-import Deku.Core (Domable)
+import Deku.Core (Nut)
 import Deku.DOM as D
 import Deku.Pursx ((~~))
 import Deku.Toplevel (hydrate, runInBody, runSSR)
@@ -15,7 +15,7 @@ import Type.Proxy (Proxy(..))
 import Unsafe.Coerce (unsafeCoerce)
 import Web.HTML.HTMLCanvasElement as HTMLCanvasElement
 
-mySVG :: Domable
+mySVG :: Nut
 mySVG = D.div_
   [ D.svg (oneOf [ D.Height !:= "100", D.Width !:= "100" ])
       [ D.circle
@@ -32,7 +32,7 @@ mySVG = D.div_
       ]
   ]
 
-myCanvas :: Domable
+myCanvas :: Nut
 myCanvas = D.canvas
   ( oneOf
       [ D.Width !:= "400px"
@@ -49,10 +49,10 @@ myCanvas = D.canvas
   )
   []
 
-scene :: Domable
+scene :: Nut
 scene = (Proxy :: _ "<div><h1>hi</h1>~svg~ ~canvas~</div>") ~~
-  { svg: mySVG :: Domable
-  , canvas: myCanvas :: Domable
+  { svg: mySVG :: Nut
+  , canvas: myCanvas :: Nut
   }
 
 foreign import setBodyAs :: String -> Effect Unit

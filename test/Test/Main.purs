@@ -13,8 +13,8 @@ import Data.Tuple (Tuple(..), snd)
 import Data.Tuple.Nested (type (/\), (/\))
 import Deku.Attribute ((!:=), (:=))
 import Deku.Attributes (id_)
-import Deku.Control (blank, globalPortal1, switcher, text, text_, (<#~>))
-import Deku.Core (Domable, Hook, Nut, dyn, fixed, insert, insert_, sendToPos)
+import Deku.Control (blank, globalPortal1, portal1, switcher, text, text_, (<#~>))
+import Deku.Core (Nut, Hook, Nut, dyn, fixed, insert, insert_, sendToPos)
 import Deku.DOM as D
 import Deku.Do as Deku
 import Deku.Hooks (useEffect, useMemoized, useRef, useState, useState')
@@ -28,13 +28,13 @@ import Type.Proxy (Proxy(..))
 
 foreign import hackyInnerHTML :: String -> String -> Effect Unit
 
-runNoSSR :: Domable -> Effect (Effect Unit)
+runNoSSR :: Nut -> Effect (Effect Unit)
 runNoSSR = runInBody'
 
-runWithSSR :: Domable -> Effect (Effect Unit)
+runWithSSR :: Nut -> Effect (Effect Unit)
 runWithSSR = hydrate'
 
-ssr :: Domable -> ST Global String
+ssr :: Nut -> ST Global String
 ssr i = pure "<head></head>" <> runSSR i
 
 sanityCheck :: Nut
@@ -253,6 +253,39 @@ globalPortalsRetainPortalnessWhenSentOutOfScope = Deku.do
             D.div (id_ "inner-scope") [ (Tuple <$> portalInContext <*> portedNut)
                   <#~> \(Tuple tf p) -> if tf then p else D.div_ [text_ "no dice!" ]]
       )
+    , D.button
+        ( merge
+            [ id_ "portal-btn", click $ portalInContext <#> not >>> setPortalInContext ]
+        )
+        [ text_ "switch" ]
+    ]
+
+localPortalsLosePortalnessWhenSentOutOfScope :: Nut
+localPortalsLosePortalnessWhenSentOutOfScope = Deku.do
+  let
+    counter :: forall a. Event a -> Event (Int /\ a)
+    counter event = mapAccum (\a b -> (a + 1) /\ ((a + 1) /\ b)) (-1) event
+    limitTo :: Int -> Event ~> Event
+    limitTo i e = map snd $ filter (\(n /\ _ ) -> n < i) $ counter e
+  setPortalInContext /\ portalInContext <- useState true
+  setPortedNut /\ portedNut <- useState'
+  D.div_
+    [ 
+      D.div (id_ "outer-scope")
+        [ limitTo 2 (Tuple <$> portalInContext <*> portedNut)
+            <#~> \(Tuple tf p) -> if not tf then p else D.div_ [text_ "no dice!"]
+        ]
+    , 
+    dyn
+        ( pure unit <#> \_ -> pure
+            $ insert_ ( portal1 (D.div_ [ text_ "foo" ]) \e ->
+          Deku.do
+            useEffect (pure unit) (const (setPortedNut e))
+            D.div (id_ "inner-scope") [ (Tuple <$> portalInContext <*> portedNut)
+                  <#~> \(Tuple tf p) -> if tf then p else D.div_ [text_ "no dice!" ]]
+      )
+        )
+    
     , D.button
         ( merge
             [ id_ "portal-btn", click $ portalInContext <#> not >>> setPortalInContext ]
