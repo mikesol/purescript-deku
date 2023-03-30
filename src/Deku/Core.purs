@@ -9,7 +9,6 @@ module Deku.Core
   , DOMInterpret(..)
   , DeleteFromCache
   , DisconnectElement
-  , Nut(..)
   , GiveNewParent
   , MakeElement
   , MakeDynBeacon
@@ -18,7 +17,7 @@ module Deku.Core
   , MakeText
   , RemoveDynBeacon
   , Node(..)
-  , Nut
+  , Nut(..)
   , Hook
   , NutWith
   , SendToPos
@@ -33,6 +32,8 @@ module Deku.Core
   , busUncurried
   , bussed
   , bussedUncurried
+  , vbussed
+  , vbussedUncurried
   , insert
   , insert_
   , remove
@@ -64,8 +65,11 @@ import Deku.Attribute (Cb)
 import Effect (Effect)
 import FRP.Event (Event, Subscriber(..), merge, makeLemmingEventO)
 import FRP.Event as FRP.Event
+import FRP.Event.VBus (class VBus, V, vbus)
 import Foreign.Object (Object)
+import Prim.RowList (class RowToList)
 import Safe.Coerce (coerce)
+import Type.Proxy (Proxy)
 import Web.DOM as Web.DOM
 
 -- | The signature of a custom Deku hook. This works when `payload` variables
@@ -119,6 +123,34 @@ bussedUncurried
      )
   -> Nut
 bussedUncurried = curry >>> bussed
+
+
+vbussed
+  :: forall rbus bus push event
+   . RowToList bus rbus
+  => VBus rbus push event
+  => Proxy (V bus)
+  -> ({ | push } -> { | event } -> Nut)
+  -> Nut
+vbussed px f = Nut (NutF (Bolson.EventfulElement'
+  (Bolson.EventfulElement gooo)))
+  where
+  go :: Event Nut
+  go = vbus px f
+  goo :: forall payload. Event (NutF payload)
+  goo = map (\(Nut nf) -> nf) go
+  gooo :: forall payload. Event (Bolson.Entity Int (Node payload))
+  gooo = map (\(NutF e) -> e) goo
+
+-- | For internal use only in deku's hooks. See `Deku.Hooks` for more information.
+vbussedUncurried
+  :: forall rbus bus push event
+   . RowToList bus rbus
+  => VBus rbus push event
+  => Proxy (V bus)
+  -> (({ | push } /\ { | event }) -> Nut)
+  -> Nut
+vbussedUncurried px = curry >>> vbussed px
 
 -- | For internal use in the `Nut` type signature. `Nut` uses `Bolson` under the
 -- | hood, and this is used with `Bolson`'s `Entity` type.
