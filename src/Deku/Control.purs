@@ -37,7 +37,7 @@ import Data.Profunctor (dimap, lcmap)
 import Data.Tuple (snd)
 import Data.Tuple.Nested ((/\))
 import Deku.Attribute (Attribute, AttributeValue(..), unsafeUnAttribute)
-import Deku.Core (DOMInterpret(..), Nut(..), NutF(..), Node(..), Nut, unsafeSetPos, dyn, fixed, envy, insert_, remove)
+import Deku.Core (DOMInterpret(..), Node(..), Nut(..), NutF(..), dyn, envy, insert_, remove, unsafeSetPos)
 import FRP.Event (Event, Subscriber(..), merge, keepLatest, makeLemmingEventO, mapAccum, memoize)
 import Prim.Int (class Compare)
 import Prim.Ordering (GT)
@@ -169,13 +169,20 @@ globalPortal
   => Vect n Nut
   -> (Vect n Nut -> Nut)
   -> Nut
-globalPortal v' c' = Nut
-  ( go (map (\(Nut df) -> df) v')
-      (shouldBeSafe c')
-  )
+globalPortal v' c' =
+  Nut
+    ( go (map (\(Nut df) -> df) v')
+        (shouldBeSafe c')
+    )
+
   where
-  shouldBeSafe :: forall payload. (Vect n Nut -> Nut) -> Vect n (NutF payload) -> NutF payload
+  shouldBeSafe
+    :: forall payload
+     . (Vect n Nut -> Nut)
+    -> Vect n (NutF payload)
+    -> NutF payload
   shouldBeSafe = unsafeCoerce
+
   go
     :: forall payload
      . Vect n (NutF payload)
@@ -276,13 +283,28 @@ portal
   => Vect n Nut
   -> (Vect n Nut -> Nut)
   -> Nut
-portal v' c' = Nut
-  ( go (map (\(Nut df) -> df) v')
-      (shouldBeSafe c')
-  )
+portal v' c' =
+  -- all local portals are wrapped in a `dyn`
+  -- otherwise, they would have no unique scope, which would not
+  -- allow us to determine if they've exacped their scope
+  -- for global portals, this is not needed as they use the global scope
+  dyn
+    ( pure unit <#> \_ -> pure
+        $ insert_
+            ( Nut
+                ( go (map (\(Nut df) -> df) v')
+                    (shouldBeSafe c')
+                )
+            )
+    )
   where
-  shouldBeSafe :: forall payload. (Vect n Nut -> Nut) -> Vect n (NutF payload) -> NutF payload
+  shouldBeSafe
+    :: forall payload
+     . (Vect n Nut -> Nut)
+    -> Vect n (NutF payload)
+    -> NutF payload
   shouldBeSafe = unsafeCoerce
+
   go
     :: forall payload
      . Vect n (NutF payload)
