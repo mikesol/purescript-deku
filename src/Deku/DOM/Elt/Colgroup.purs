@@ -1,38 +1,25 @@
 module Deku.DOM.Elt.Colgroup where
 
-import Bolson.Core (Entity(..), fixed)
 import Control.Plus (empty)
-import Data.Array (mapWithIndex)
 import Deku.Attribute (Attribute)
 import Deku.Control as DC
-import Deku.Core (Domable(..), Domable', unsafeSetPos)
+import Deku.Core (Nut)
 import FRP.Event (Event)
-import Safe.Coerce (coerce)
 
 data Colgroup_
 
 colgroup
-  :: forall lock payload
-   . Event (Attribute Colgroup_)
-  -> Array (Domable lock payload)
-  -> Domable lock payload
-colgroup attributes kids = Domable
-  ( Element'
-      ( DC.elementify "colgroup" attributes
-          ( (coerce :: Domable' lock payload -> Domable lock payload)
-              (fixed (coerce (mapWithIndex unsafeSetPos kids)))
-          )
-      )
-  )
+  :: Event (Attribute Colgroup_)
+  -> Array Nut
+  -> Nut
+colgroup = DC.elementify2 "colgroup"
 
 colgroup_
-  :: forall lock payload
-   . Array (Domable lock payload)
-  -> Domable lock payload
+  :: Array Nut
+  -> Nut
 colgroup_ = colgroup empty
 
 colgroup__
-  :: forall lock payload
-   . String
-  -> Domable lock payload
+  :: String
+  -> Nut
 colgroup__ t = colgroup_ [ DC.text_ t ]

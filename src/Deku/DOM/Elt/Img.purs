@@ -1,38 +1,25 @@
 module Deku.DOM.Elt.Img where
 
-import Bolson.Core (Entity(..), fixed)
 import Control.Plus (empty)
-import Data.Array (mapWithIndex)
 import Deku.Attribute (Attribute)
 import Deku.Control as DC
-import Deku.Core (Domable(..), Domable', unsafeSetPos)
+import Deku.Core (Nut)
 import FRP.Event (Event)
-import Safe.Coerce (coerce)
 
 data Img_
 
 img
-  :: forall lock payload
-   . Event (Attribute Img_)
-  -> Array (Domable lock payload)
-  -> Domable lock payload
-img attributes kids = Domable
-  ( Element'
-      ( DC.elementify "img" attributes
-          ( (coerce :: Domable' lock payload -> Domable lock payload)
-              (fixed (coerce (mapWithIndex unsafeSetPos kids)))
-          )
-      )
-  )
+  :: Event (Attribute Img_)
+  -> Array Nut
+  -> Nut
+img = DC.elementify2 "img"
 
 img_
-  :: forall lock payload
-   . Array (Domable lock payload)
-  -> Domable lock payload
+  :: Array Nut
+  -> Nut
 img_ = img empty
 
 img__
-  :: forall lock payload
-   . String
-  -> Domable lock payload
+  :: String
+  -> Nut
 img__ t = img_ [ DC.text_ t ]

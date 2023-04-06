@@ -1,38 +1,25 @@
 module Deku.DOM.Elt.Center where
 
-import Bolson.Core (Entity(..), fixed)
 import Control.Plus (empty)
-import Data.Array (mapWithIndex)
 import Deku.Attribute (Attribute)
 import Deku.Control as DC
-import Deku.Core (Domable(..), Domable', unsafeSetPos)
+import Deku.Core (Nut)
 import FRP.Event (Event)
-import Safe.Coerce (coerce)
 
 data Center_
 
 center
-  :: forall lock payload
-   . Event (Attribute Center_)
-  -> Array (Domable lock payload)
-  -> Domable lock payload
-center attributes kids = Domable
-  ( Element'
-      ( DC.elementify "center" attributes
-          ( (coerce :: Domable' lock payload -> Domable lock payload)
-              (fixed (coerce (mapWithIndex unsafeSetPos kids)))
-          )
-      )
-  )
+  :: Event (Attribute Center_)
+  -> Array Nut
+  -> Nut
+center = DC.elementify2 "center"
 
 center_
-  :: forall lock payload
-   . Array (Domable lock payload)
-  -> Domable lock payload
+  :: Array Nut
+  -> Nut
 center_ = center empty
 
 center__
-  :: forall lock payload
-   . String
-  -> Domable lock payload
+  :: String
+  -> Nut
 center__ t = center_ [ DC.text_ t ]

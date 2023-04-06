@@ -12,7 +12,7 @@ import Data.Tuple (snd)
 import Data.Tuple.Nested ((/\))
 import Deku.Attribute ((:=))
 import Deku.Control (text_)
-import Deku.Core (Domable, dyn, bussedUncurried, insert_, remove)
+import Deku.Core (Nut, dyn, bussedUncurried, insert_, remove)
 import Deku.DOM as D
 import Deku.Do as Deku
 import Deku.Hooks (useMailboxed, useMemoized, useMemoized', useState')
@@ -61,9 +61,8 @@ container =
       pure unit
 
 containerD
-  :: forall lock payload
-   . Shared.ContainerState
-  -> Domable lock payload
+  :: Shared.ContainerState
+  -> Nut
 containerD initialState = Deku.do
   setCompleteStatus /\ completeStatus <- useMailboxed
   setRename /\ rename <- useMailboxed
@@ -183,13 +182,12 @@ containerD initialState = Deku.do
     ]
 
 todoD
-  :: forall lock payload
-   . { id :: Int, description :: String }
+  :: { id :: Int, description :: String }
   -> Event Boolean
   -> Event String
   -> (String -> Effect Unit)
   -> (Boolean -> Effect Unit)
-  -> Domable lock payload
+  -> Nut
 todoD { id, description } completeStatus newName doEditName doChecked = Deku.do
   setName /\ name' <- bussedUncurried
   let name = name' <|> pure description
@@ -209,11 +207,10 @@ todoD { id, description } completeStatus newName doEditName doChecked = Deku.do
     ]
 
 checkboxD
-  :: forall lock payload
-   . { id :: Int }
+  :: { id :: Int }
   -> Event Boolean
   -> (Boolean -> Effect Unit)
-  -> Domable lock payload
+  -> Nut
 checkboxD { id } completeStatus doChecked = Deku.do
   localSetChecked /\ localChecked <- bussedUncurried
   let checked = pure true <|> completeStatus

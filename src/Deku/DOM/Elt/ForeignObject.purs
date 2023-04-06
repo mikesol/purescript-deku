@@ -1,38 +1,25 @@
 module Deku.DOM.Elt.ForeignObject where
 
-import Bolson.Core (Entity(..), fixed)
 import Control.Plus (empty)
-import Data.Array (mapWithIndex)
 import Deku.Attribute (Attribute)
 import Deku.Control as DC
-import Deku.Core (Domable(..), Domable', unsafeSetPos)
+import Deku.Core (Nut)
 import FRP.Event (Event)
-import Safe.Coerce (coerce)
 
 data ForeignObject_
 
 foreignObject
-  :: forall lock payload
-   . Event (Attribute ForeignObject_)
-  -> Array (Domable lock payload)
-  -> Domable lock payload
-foreignObject attributes kids = Domable
-  ( Element'
-      ( DC.elementify "foreignObject" attributes
-          ( (coerce :: Domable' lock payload -> Domable lock payload)
-              (fixed (coerce (mapWithIndex unsafeSetPos kids)))
-          )
-      )
-  )
+  :: Event (Attribute ForeignObject_)
+  -> Array Nut
+  -> Nut
+foreignObject = DC.elementify2 "foreignObject"
 
 foreignObject_
-  :: forall lock payload
-   . Array (Domable lock payload)
-  -> Domable lock payload
+  :: Array Nut
+  -> Nut
 foreignObject_ = foreignObject empty
 
 foreignObject__
-  :: forall lock payload
-   . String
-  -> Domable lock payload
+  :: String
+  -> Nut
 foreignObject__ t = foreignObject_ [ DC.text_ t ]

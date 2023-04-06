@@ -1,38 +1,25 @@
 module Deku.DOM.Elt.Sup where
 
-import Bolson.Core (Entity(..), fixed)
 import Control.Plus (empty)
-import Data.Array (mapWithIndex)
 import Deku.Attribute (Attribute)
 import Deku.Control as DC
-import Deku.Core (Domable(..), Domable', unsafeSetPos)
+import Deku.Core (Nut)
 import FRP.Event (Event)
-import Safe.Coerce (coerce)
 
 data Sup_
 
 sup
-  :: forall lock payload
-   . Event (Attribute Sup_)
-  -> Array (Domable lock payload)
-  -> Domable lock payload
-sup attributes kids = Domable
-  ( Element'
-      ( DC.elementify "sup" attributes
-          ( (coerce :: Domable' lock payload -> Domable lock payload)
-              (fixed (coerce (mapWithIndex unsafeSetPos kids)))
-          )
-      )
-  )
+  :: Event (Attribute Sup_)
+  -> Array Nut
+  -> Nut
+sup = DC.elementify2 "sup"
 
 sup_
-  :: forall lock payload
-   . Array (Domable lock payload)
-  -> Domable lock payload
+  :: Array Nut
+  -> Nut
 sup_ = sup empty
 
 sup__
-  :: forall lock payload
-   . String
-  -> Domable lock payload
+  :: String
+  -> Nut
 sup__ t = sup_ [ DC.text_ t ]

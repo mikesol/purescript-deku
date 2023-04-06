@@ -1,38 +1,25 @@
 module Deku.DOM.Elt.Iframe where
 
-import Bolson.Core (Entity(..), fixed)
 import Control.Plus (empty)
-import Data.Array (mapWithIndex)
 import Deku.Attribute (Attribute)
 import Deku.Control as DC
-import Deku.Core (Domable(..), Domable', unsafeSetPos)
+import Deku.Core (Nut)
 import FRP.Event (Event)
-import Safe.Coerce (coerce)
 
 data Iframe_
 
 iframe
-  :: forall lock payload
-   . Event (Attribute Iframe_)
-  -> Array (Domable lock payload)
-  -> Domable lock payload
-iframe attributes kids = Domable
-  ( Element'
-      ( DC.elementify "iframe" attributes
-          ( (coerce :: Domable' lock payload -> Domable lock payload)
-              (fixed (coerce (mapWithIndex unsafeSetPos kids)))
-          )
-      )
-  )
+  :: Event (Attribute Iframe_)
+  -> Array Nut
+  -> Nut
+iframe = DC.elementify2 "iframe"
 
 iframe_
-  :: forall lock payload
-   . Array (Domable lock payload)
-  -> Domable lock payload
+  :: Array Nut
+  -> Nut
 iframe_ = iframe empty
 
 iframe__
-  :: forall lock payload
-   . String
-  -> Domable lock payload
+  :: String
+  -> Nut
 iframe__ t = iframe_ [ DC.text_ t ]

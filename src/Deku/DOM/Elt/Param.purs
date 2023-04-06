@@ -1,38 +1,25 @@
 module Deku.DOM.Elt.Param where
 
-import Bolson.Core (Entity(..), fixed)
 import Control.Plus (empty)
-import Data.Array (mapWithIndex)
 import Deku.Attribute (Attribute)
 import Deku.Control as DC
-import Deku.Core (Domable(..), Domable', unsafeSetPos)
+import Deku.Core (Nut)
 import FRP.Event (Event)
-import Safe.Coerce (coerce)
 
 data Param_
 
 param
-  :: forall lock payload
-   . Event (Attribute Param_)
-  -> Array (Domable lock payload)
-  -> Domable lock payload
-param attributes kids = Domable
-  ( Element'
-      ( DC.elementify "param" attributes
-          ( (coerce :: Domable' lock payload -> Domable lock payload)
-              (fixed (coerce (mapWithIndex unsafeSetPos kids)))
-          )
-      )
-  )
+  :: Event (Attribute Param_)
+  -> Array Nut
+  -> Nut
+param = DC.elementify2 "param"
 
 param_
-  :: forall lock payload
-   . Array (Domable lock payload)
-  -> Domable lock payload
+  :: Array Nut
+  -> Nut
 param_ = param empty
 
 param__
-  :: forall lock payload
-   . String
-  -> Domable lock payload
+  :: String
+  -> Nut
 param__ t = param_ [ DC.text_ t ]

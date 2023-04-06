@@ -1,38 +1,25 @@
 module Deku.DOM.Elt.Del where
 
-import Bolson.Core (Entity(..), fixed)
 import Control.Plus (empty)
-import Data.Array (mapWithIndex)
 import Deku.Attribute (Attribute)
 import Deku.Control as DC
-import Deku.Core (Domable(..), Domable', unsafeSetPos)
+import Deku.Core (Nut)
 import FRP.Event (Event)
-import Safe.Coerce (coerce)
 
 data Del_
 
 del
-  :: forall lock payload
-   . Event (Attribute Del_)
-  -> Array (Domable lock payload)
-  -> Domable lock payload
-del attributes kids = Domable
-  ( Element'
-      ( DC.elementify "del" attributes
-          ( (coerce :: Domable' lock payload -> Domable lock payload)
-              (fixed (coerce (mapWithIndex unsafeSetPos kids)))
-          )
-      )
-  )
+  :: Event (Attribute Del_)
+  -> Array Nut
+  -> Nut
+del = DC.elementify2 "del"
 
 del_
-  :: forall lock payload
-   . Array (Domable lock payload)
-  -> Domable lock payload
+  :: Array Nut
+  -> Nut
 del_ = del empty
 
 del__
-  :: forall lock payload
-   . String
-  -> Domable lock payload
+  :: String
+  -> Nut
 del__ t = del_ [ DC.text_ t ]

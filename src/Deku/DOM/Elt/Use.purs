@@ -1,38 +1,25 @@
 module Deku.DOM.Elt.Use where
 
-import Bolson.Core (Entity(..), fixed)
 import Control.Plus (empty)
-import Data.Array (mapWithIndex)
 import Deku.Attribute (Attribute)
 import Deku.Control as DC
-import Deku.Core (Domable(..), Domable', unsafeSetPos)
+import Deku.Core (Nut)
 import FRP.Event (Event)
-import Safe.Coerce (coerce)
 
 data Use_
 
 use
-  :: forall lock payload
-   . Event (Attribute Use_)
-  -> Array (Domable lock payload)
-  -> Domable lock payload
-use attributes kids = Domable
-  ( Element'
-      ( DC.elementify "use" attributes
-          ( (coerce :: Domable' lock payload -> Domable lock payload)
-              (fixed (coerce (mapWithIndex unsafeSetPos kids)))
-          )
-      )
-  )
+  :: Event (Attribute Use_)
+  -> Array Nut
+  -> Nut
+use = DC.elementify2 "use"
 
 use_
-  :: forall lock payload
-   . Array (Domable lock payload)
-  -> Domable lock payload
+  :: Array Nut
+  -> Nut
 use_ = use empty
 
 use__
-  :: forall lock payload
-   . String
-  -> Domable lock payload
+  :: String
+  -> Nut
 use__ t = use_ [ DC.text_ t ]

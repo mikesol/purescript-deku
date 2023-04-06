@@ -1,38 +1,25 @@
 module Deku.DOM.Elt.Small where
 
-import Bolson.Core (Entity(..), fixed)
 import Control.Plus (empty)
-import Data.Array (mapWithIndex)
 import Deku.Attribute (Attribute)
 import Deku.Control as DC
-import Deku.Core (Domable(..), Domable', unsafeSetPos)
+import Deku.Core (Nut)
 import FRP.Event (Event)
-import Safe.Coerce (coerce)
 
 data Small_
 
 small
-  :: forall lock payload
-   . Event (Attribute Small_)
-  -> Array (Domable lock payload)
-  -> Domable lock payload
-small attributes kids = Domable
-  ( Element'
-      ( DC.elementify "small" attributes
-          ( (coerce :: Domable' lock payload -> Domable lock payload)
-              (fixed (coerce (mapWithIndex unsafeSetPos kids)))
-          )
-      )
-  )
+  :: Event (Attribute Small_)
+  -> Array Nut
+  -> Nut
+small = DC.elementify2 "small"
 
 small_
-  :: forall lock payload
-   . Array (Domable lock payload)
-  -> Domable lock payload
+  :: Array Nut
+  -> Nut
 small_ = small empty
 
 small__
-  :: forall lock payload
-   . String
-  -> Domable lock payload
+  :: String
+  -> Nut
 small__ t = small_ [ DC.text_ t ]

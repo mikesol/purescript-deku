@@ -30,8 +30,6 @@ jobs:
         run: npm ci
       - name: Test
         run: npm t
-      - name: Build example strings
-        run: python makeExampleStrings.py
       - name: Spago build examples
         run: npm run build:examples
       - name: Build make

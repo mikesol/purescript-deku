@@ -1,38 +1,25 @@
 module Deku.DOM.Elt.Tspan where
 
-import Bolson.Core (Entity(..), fixed)
 import Control.Plus (empty)
-import Data.Array (mapWithIndex)
 import Deku.Attribute (Attribute)
 import Deku.Control as DC
-import Deku.Core (Domable(..), Domable', unsafeSetPos)
+import Deku.Core (Nut)
 import FRP.Event (Event)
-import Safe.Coerce (coerce)
 
 data Tspan_
 
 tspan
-  :: forall lock payload
-   . Event (Attribute Tspan_)
-  -> Array (Domable lock payload)
-  -> Domable lock payload
-tspan attributes kids = Domable
-  ( Element'
-      ( DC.elementify "tspan" attributes
-          ( (coerce :: Domable' lock payload -> Domable lock payload)
-              (fixed (coerce (mapWithIndex unsafeSetPos kids)))
-          )
-      )
-  )
+  :: Event (Attribute Tspan_)
+  -> Array Nut
+  -> Nut
+tspan = DC.elementify2 "tspan"
 
 tspan_
-  :: forall lock payload
-   . Array (Domable lock payload)
-  -> Domable lock payload
+  :: Array Nut
+  -> Nut
 tspan_ = tspan empty
 
 tspan__
-  :: forall lock payload
-   . String
-  -> Domable lock payload
+  :: String
+  -> Nut
 tspan__ t = tspan_ [ DC.text_ t ]

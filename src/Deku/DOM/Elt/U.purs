@@ -1,38 +1,25 @@
 module Deku.DOM.Elt.U where
 
-import Bolson.Core (Entity(..), fixed)
 import Control.Plus (empty)
-import Data.Array (mapWithIndex)
 import Deku.Attribute (Attribute)
 import Deku.Control as DC
-import Deku.Core (Domable(..), Domable', unsafeSetPos)
+import Deku.Core (Nut)
 import FRP.Event (Event)
-import Safe.Coerce (coerce)
 
 data U_
 
 u
-  :: forall lock payload
-   . Event (Attribute U_)
-  -> Array (Domable lock payload)
-  -> Domable lock payload
-u attributes kids = Domable
-  ( Element'
-      ( DC.elementify "u" attributes
-          ( (coerce :: Domable' lock payload -> Domable lock payload)
-              (fixed (coerce (mapWithIndex unsafeSetPos kids)))
-          )
-      )
-  )
+  :: Event (Attribute U_)
+  -> Array Nut
+  -> Nut
+u = DC.elementify2 "u"
 
 u_
-  :: forall lock payload
-   . Array (Domable lock payload)
-  -> Domable lock payload
+  :: Array Nut
+  -> Nut
 u_ = u empty
 
 u__
-  :: forall lock payload
-   . String
-  -> Domable lock payload
+  :: String
+  -> Nut
 u__ t = u_ [ DC.text_ t ]

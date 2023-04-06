@@ -8,7 +8,7 @@ import Deku.Attribute (cb, (:=))
 import Deku.Attributes (style_)
 import Deku.Control (text_)
 import Deku.Control as C
-import Deku.Core (Domable, bus, envy)
+import Deku.Core (Nut, bus, envy)
 import Deku.DOM as D
 import Deku.Interpret (FFIDOMSnapshot)
 import Deku.Pursx ((~~))
@@ -30,10 +30,9 @@ myPx =
 """
 
 myPxInception
-  :: forall lock payload
-   . (Boolean -> Effect Unit)
-  -> Domable lock payload
-  -> Domable lock payload
+  :: (Boolean -> Effect Unit)
+  -> Nut
+  -> Nut
 myPxInception push aThirdThing = myPx ~~
   { btn: pure (D.Style := "background-color: rgb(133,151,217)")
   , somethingElse:
@@ -47,7 +46,7 @@ myPxInception push aThirdThing = myPx ~~
   }
 
 scene
-  :: forall lock. Event (Domable lock (FFIDOMSnapshot -> Effect Unit))
+  :: Event Nut
 scene = bus \push event ->
   D.div empty
     [ myPxInception push

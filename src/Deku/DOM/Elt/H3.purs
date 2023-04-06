@@ -1,38 +1,25 @@
 module Deku.DOM.Elt.H3 where
 
-import Bolson.Core (Entity(..), fixed)
 import Control.Plus (empty)
-import Data.Array (mapWithIndex)
 import Deku.Attribute (Attribute)
 import Deku.Control as DC
-import Deku.Core (Domable(..), Domable', unsafeSetPos)
+import Deku.Core (Nut)
 import FRP.Event (Event)
-import Safe.Coerce (coerce)
 
 data H3_
 
 h3
-  :: forall lock payload
-   . Event (Attribute H3_)
-  -> Array (Domable lock payload)
-  -> Domable lock payload
-h3 attributes kids = Domable
-  ( Element'
-      ( DC.elementify "h3" attributes
-          ( (coerce :: Domable' lock payload -> Domable lock payload)
-              (fixed (coerce (mapWithIndex unsafeSetPos kids)))
-          )
-      )
-  )
+  :: Event (Attribute H3_)
+  -> Array Nut
+  -> Nut
+h3 = DC.elementify2 "h3"
 
 h3_
-  :: forall lock payload
-   . Array (Domable lock payload)
-  -> Domable lock payload
+  :: Array Nut
+  -> Nut
 h3_ = h3 empty
 
 h3__
-  :: forall lock payload
-   . String
-  -> Domable lock payload
+  :: String
+  -> Nut
 h3__ t = h3_ [ DC.text_ t ]

@@ -646,12 +646,9 @@ module Deku.DOM
   , unsafeCustomElement
   ) where
 
-import Bolson.Core (Entity(..))
-import Bolson.Core as Bolson
-import Data.FunctorWithIndex (mapWithIndex)
 import Deku.Attribute (class Attr, Attribute, Cb(..), cb', unsafeAttribute)
-import Deku.Control (elementify)
-import Deku.Core (Domable(..), Domable', unsafeSetPos)
+import Deku.Control (elementify2)
+import Deku.Core (Nut)
 -- import Deku.DOM.Attr.Accept (Accept(..))
 -- import Deku.DOM.Attr.AcceptCharset (AcceptCharset(..))
 -- import Deku.DOM.Attr.Accesskey (Accesskey(..))
@@ -1636,7 +1633,6 @@ import Deku.DOM.Attr.Contenteditable (Contenteditable(..))
 import Effect (Effect)
 import FRP.Event (Event)
 import Prelude (Unit)
-import Safe.Coerce (coerce)
 import Type.Proxy (Proxy)
 import Unsafe.Coerce (unsafeCoerce)
 import Web.DOM as DOM
@@ -1884,20 +1880,13 @@ instance tagToDekuDefs_ :: TagToDeku "defs" Defs_
 -- | Unsafely create a custom element. This is useful when using Stencil-based
 -- | frameworks like Ionic in Deku.
 unsafeCustomElement
-  :: forall element lock payload
+  :: forall element
    . String
   -> Proxy element
   -> Event (Attribute element)
-  -> Array (Domable lock payload)
-  -> Domable lock payload
-unsafeCustomElement name _ attributes kids = Domable
-  ( Element'
-      ( elementify name attributes
-          ( (coerce :: Domable' lock payload -> Domable lock payload)
-              (Bolson.fixed (coerce (mapWithIndex unsafeSetPos kids)))
-          )
-      )
-  )
+  -> Array Nut
+  -> Nut
+unsafeCustomElement name _ = elementify2 name
 
 -- | Creates a special event where an Deku element can have its raw DOM element
 -- | injected into a closure. All bets are off type-safety wise. This is useful

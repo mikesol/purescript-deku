@@ -1,7 +1,7 @@
 -- | This module contains the low-level functionality of Deku, including
 -- | the primitive `Nut` type, which is the type of a Deku application.
 -- | In general, this module is not intended to be used directly, with the
--- | exception of the `Nut` type signature and, when needed, the `Domable`
+-- | exception of the `Nut` type signature and, when needed, the `Nut`
 -- | type signature (for which `Nut` is an alias).
 module Deku.Core
   ( ANut(..)
@@ -9,7 +9,6 @@ module Deku.Core
   , DOMInterpret(..)
   , DeleteFromCache
   , DisconnectElement
-  , Domable(..)
   , GiveNewParent
   , MakeElement
   , MakeDynBeacon
@@ -18,7 +17,7 @@ module Deku.Core
   , MakeText
   , RemoveDynBeacon
   , Node(..)
-  , Nut
+  , Nut(..)
   , Hook
   , NutWith
   , SendToPos
@@ -26,18 +25,20 @@ module Deku.Core
   , SetProp
   , UnsetAttribute
   , SetText
-  , Domable'
+  , Nut'
+  , NutF(..)
+  , Child(..)
   , bus
   , busUncurried
   , bussed
   , bussedUncurried
+  , vbussed
+  , vbussedUncurried
   , insert
   , insert_
   , remove
   , sendToPos
   , sendToTop
-  , vbussed
-  , vbussedUncurried
   , dyn
   , fixed
   , envy
@@ -50,7 +51,9 @@ import Bolson.Control as BControl
 import Bolson.Core (Scope)
 import Bolson.Core as Bolson
 import Control.Monad.ST (ST)
+import Control.Monad.ST as ST
 import Control.Monad.ST.Global (Global)
+import Control.Monad.ST.Global as Region
 import Control.Monad.ST.Uncurried (mkSTFn2, runSTFn1, runSTFn2)
 import Control.Plus (empty)
 import Data.Maybe (Maybe(..))
@@ -69,18 +72,13 @@ import Safe.Coerce (coerce)
 import Type.Proxy (Proxy)
 import Web.DOM as Web.DOM
 
--- | The signature of a Deku application. This works when `lock` and `payload` variables
+-- | The signature of a custom Deku hook. This works when `payload` variables
 -- | don't need to be used explicitly. When using these variables explicitly, opt for using
--- | `Domable` directly.
-type Nut = forall lock payload. Domable lock payload
-
--- | The signature of a custom Deku hook. This works when `lock` and `payload` variables
--- | don't need to be used explicitly. When using these variables explicitly, opt for using
--- | `Domable` directly (meaning write out the definition by hand).
-type Hook a = forall lock payload. (a -> Domable lock payload) -> Domable lock payload
+-- | `Nut` directly (meaning write out the definition by hand).
+type Hook a = (a -> Nut) -> Nut
 
 -- | A helper for using `Nut` with an environment.
-type NutWith env = forall lock payload. env -> Domable lock payload
+type NutWith env = env -> Nut
 
 -- | A helper for when you need to use `Nut` as a fully saturated type.
 -- | This is the same as using [`Exists`](https://github.com/purescript/purescript-exists)
@@ -103,118 +101,142 @@ busUncurried = curry >>> bus
 
 -- | For internal use only in deku's hooks. See `Deku.Hooks` for more information.
 bussed
-  :: forall lock obj a
-   . ((a -> Effect Unit) -> Event a -> Domable obj lock)
-  -> Domable obj lock
-bussed f = Domable $ Bolson.EventfulElement'
-  (Bolson.EventfulElement (coerce $ bus f))
+  :: forall a
+   . ((a -> Effect Unit) -> Event a -> Nut)
+  -> Nut
+bussed f = Nut (z (map (\(Nut i) -> i) g))
+  where
+  g :: Event Nut
+  g = bus f
+
+  z :: forall payload. Event (NutF payload) -> NutF payload
+  z x = NutF
+    ( Bolson.EventfulElement'
+        (Bolson.EventfulElement (coerce x))
+    )
 
 -- | For internal use only in deku's hooks. See `Deku.Hooks` for more information.
 bussedUncurried
-  :: forall lock obj a
+  :: forall a
    . ( ((a -> Effect Unit) /\ Event a)
-       -> Domable obj lock
+       -> Nut
      )
-  -> Domable obj lock
+  -> Nut
 bussedUncurried = curry >>> bussed
 
---
 
--- | For internal use only in deku's hooks. See `Deku.Hooks` for more information.
 vbussed
-  :: forall obj lock rbus bus push event
+  :: forall rbus bus push event
    . RowToList bus rbus
   => VBus rbus push event
   => Proxy (V bus)
-  -> ({ | push } -> { | event } -> Domable obj lock)
-  -> Domable obj lock
-vbussed px f = Domable $ Bolson.EventfulElement'
-  (Bolson.EventfulElement (coerce (vbus px f)))
+  -> ({ | push } -> { | event } -> Nut)
+  -> Nut
+vbussed px f = Nut (NutF (Bolson.EventfulElement'
+  (Bolson.EventfulElement gooo)))
+  where
+  go :: Event Nut
+  go = vbus px f
+  goo :: forall payload. Event (NutF payload)
+  goo = map (\(Nut nf) -> nf) go
+  gooo :: forall payload. Event (Bolson.Entity Int (Node payload))
+  gooo = map (\(NutF e) -> e) goo
 
 -- | For internal use only in deku's hooks. See `Deku.Hooks` for more information.
 vbussedUncurried
-  :: forall obj lock rbus bus push event
+  :: forall rbus bus push event
    . RowToList bus rbus
   => VBus rbus push event
   => Proxy (V bus)
-  -> (({ | push } /\ { | event }) -> Domable obj lock)
-  -> Domable obj lock
+  -> (({ | push } /\ { | event }) -> Nut)
+  -> Nut
 vbussedUncurried px = curry >>> vbussed px
 
--- | For internal use in the `Domable` type signature. `Domable` uses `Bolson` under the
+-- | For internal use in the `Nut` type signature. `Nut` uses `Bolson` under the
 -- | hood, and this is used with `Bolson`'s `Entity` type.
-newtype Node (lock :: Type) payload = Node
+newtype Node payload = Node
   ( Bolson.PSR (pos :: Maybe Int, ez :: Boolean, dynFamily :: Maybe String)
     -> DOMInterpret payload
     -> Event payload
   )
 
--- | For internal use in the construction of Domable.
-type Domable' lock payload = Bolson.Entity Int (Node lock payload) lock
+-- | For internal use in the construction of Nut.
+type Nut' payload = Bolson.Entity Int (Node payload)
 
 -- | _The_ type that represents a Deku application. To be used when `Nut` doesn't cut it
 -- | (for example, when different locks need to be used because of the use of portals).
--- | The lock and payload variables mean the following this:
--- |
--- | - `lock` is an internal scope that applies to each portal. It is used so that `Domable`-s don't
--- |    escape their scope, which allows them to be automatically memory-managed by Deku. You can think
--- |    of this like Rust's borrow checker.
--- | - `payload` is the backend being used. It changes for SPAs versus SSR. You can also impelement your
--- |    own custom backend if you're doing something exotic (see `Deku.Interpret`).
-newtype Domable lock payload = Domable (Domable' lock payload)
+newtype NutF payload = NutF (Nut' payload)
 
-derive instance Newtype (Domable lock payload) _
+derive instance Newtype (NutF payload) _
+newtype Nut = Nut (forall payload. NutF payload)
 
-instance Semigroup (Domable lock payload) where
+instance Semigroup Nut where
   append a b = fixed [ a, b ]
 
-instance Monoid (Domable lock payload) where
-  mempty = Domable (Bolson.envy empty)
+instance Monoid Nut where
+  mempty = Nut (NutF (Bolson.envy empty))
 
 -- | For internal use only in deku's hooks. See `useDyn` in `Deku.Hooks` for more information.
 unsafeSetPos
-  :: forall lock payload. Int -> Domable lock payload -> Domable lock payload
+  :: Int -> Nut -> Nut
 unsafeSetPos = Just >>> unsafeSetPos'
 
 unsafeSetPos'
-  :: forall lock payload
-   . Maybe Int
-  -> Domable lock payload
-  -> Domable lock payload
-unsafeSetPos' i (Domable e) = Domable (f e)
+  :: Maybe Int
+  -> Nut
+  -> Nut
+unsafeSetPos' i (Nut df) = Nut (g df)
   where
-  f = case _ of
-    Bolson.Element' (Node e') -> Bolson.Element'
-      (Node (lcmap (_ { pos = i }) e'))
-    Bolson.EventfulElement' (Bolson.EventfulElement e') ->
-      Bolson.EventfulElement' (Bolson.EventfulElement (map f e'))
-    _ -> e
+  g :: forall payload. NutF payload -> NutF payload
+  g (NutF e) = (NutF (f e))
+    where
+    f
+      :: Bolson.Entity Int (Node payload)
+      -> Bolson.Entity Int (Node payload)
+    f ii = case ii of
+      Bolson.Element' (Node e') -> Bolson.Element'
+        (Node (lcmap (_ { pos = i }) e'))
+      Bolson.EventfulElement' (Bolson.EventfulElement e') ->
+        Bolson.EventfulElement' (Bolson.EventfulElement (map f e'))
+      _ -> ii
+
+newtype Child = Child (forall payload. Bolson.Child Int (Node payload))
 
 -- | For internal use only in deku's hooks. See `useDyn` in `Deku.Hooks` for more information.
 insert
-  :: forall lock payload
-   . Int
-  -> Domable lock payload
-  -> Bolson.Child Int (Node lock payload) lock
-insert i e = Bolson.Insert (unwrap $ unsafeSetPos i e)
+  :: Int
+  -> Nut
+  -> Child
+insert i x = Child (f ((\(Nut z) -> z) b))
+  where
+  b :: Nut
+  b = unsafeSetPos i x
+
+  f :: forall payload. NutF payload -> Bolson.Child Int (Node payload)
+  f (NutF d) = Bolson.Insert d
 
 insert_
-  :: forall lock payload
-   . Domable lock payload
-  -> Bolson.Child Int (Node lock payload) lock
-insert_ d = Bolson.Insert (unwrap $ unsafeSetPos' Nothing d)
+  :: Nut
+  -> Child
+insert_ x = Child (f ((\(Nut z) -> z) b))
+  where
+  b :: Nut
+  b = unsafeSetPos' Nothing x
+
+  f :: forall payload. NutF payload -> Bolson.Child Int (Node payload)
+  f (NutF d) = Bolson.Insert d
 
 -- | For internal use only in deku's hooks. See `useDyn` in `Deku.Hooks` for more information.
-remove :: forall logic obj lock. Bolson.Child logic obj lock
-remove = Bolson.Remove
+remove :: Child
+remove = Child Bolson.Remove
 
 -- | For internal use only in deku's hooks. See `useDyn` in `Deku.Hooks` for more information.
-sendToTop :: forall obj lock. Bolson.Child Int obj lock
-sendToTop = Bolson.Logic 0
+sendToTop :: Child
+sendToTop = Child (Bolson.Logic 0)
 
 -- | For internal use only in deku's hooks. See `useDyn` in `Deku.Hooks` for more information.
-sendToPos :: forall obj lock. Int -> Bolson.Child Int obj lock
-sendToPos = Bolson.Logic
+sendToPos :: Int -> Child
+sendToPos i = Child (Bolson.Logic i)
 
 -- | Type used by Deku backends to create an element. For internal use only unless you're writing a custom backend.
 type MakeElement =
@@ -236,13 +258,15 @@ type AttributeParent =
   }
 
 -- | Type used by Deku backends to set give an element a new parent. For internal use only unless you're writing a custom backend.
-type GiveNewParent =
+type GiveNewParent payload =
   { id :: String
   , parent :: String
   , ez :: Boolean -- ez is ignored, but it's easier to have in the type to appease the compiler
   , scope :: Scope
   , pos :: Maybe Int
   , dynFamily :: Maybe String
+  , ctor :: NutF payload
+  , raiseId :: String -> ST.ST Region.Global Unit
   }
 
 -- | Type used by Deku backends to disconnect an element from the DOM. For internal use only unless you're writing a custom backend.
@@ -336,7 +360,7 @@ newtype DOMInterpret payload = DOMInterpret
   , attributeParent :: AttributeParent -> payload
   , makeText :: MakeText -> payload
   , makePursx :: MakePursx -> payload
-  , giveNewParent :: GiveNewParent -> payload
+  , giveNewParent :: GiveNewParent payload -> payload
   , disconnectElement :: DisconnectElement -> payload
   , deleteFromCache :: DeleteFromCache -> payload
   , sendToPos :: SendToPos -> payload
@@ -347,8 +371,11 @@ newtype DOMInterpret payload = DOMInterpret
   , removeDynBeacon :: RemoveDynBeacon -> payload
   }
 
+newtype ExDOMInterpret = ExDOMInterpret (forall payload. DOMInterpret payload)
+newtype ExEvent = ExEvent (forall payload. Event payload)
+
 portalFlatten
-  :: forall payload136 b143 d145 t149 t157 t159 lock166 lock170 payload171
+  :: forall payload136 b143 d145 t149 t157 t159 payload171
    . Newtype b143
        { ids :: d145
        | t149
@@ -364,13 +391,12 @@ portalFlatten
      , doLogic :: Int -> DOMInterpret payload136 -> String -> payload136
      , ids :: b143 -> d145
      , toElt ::
-         Node lock166 payload171
+         Node payload171
          -> Bolson.Element (DOMInterpret payload171)
               ( pos :: Maybe Int
               , dynFamily :: Maybe String
               , ez :: Boolean
               )
-              lock170
               payload171
      }
 portalFlatten =
@@ -383,113 +409,146 @@ portalFlatten =
   }
 
 __internalDekuFlatten
-  :: forall lock payload
+  :: forall payload
    . Bolson.PSR (pos :: Maybe Int, ez :: Boolean, dynFamily :: Maybe String)
   -> DOMInterpret payload
-  -> Domable lock payload
+  -> NutF payload
   -> Event payload
-__internalDekuFlatten a b (Domable c) = BControl.flatten portalFlatten a b c
+__internalDekuFlatten a b c = BControl.flatten portalFlatten a b
+  ((\(NutF x) -> x) c)
 
 dynify
-  :: forall i payload lock
-   . (i -> Domable payload lock)
+  :: forall i
+   . (i -> Nut)
   -> i
-  -> Domable payload lock
-dynify f es = Domable $ Bolson.Element' (Node go)
+  -> Nut
+dynify f es = Nut (go' ((\(Nut df) -> df) (f es)))
   where
+  go' :: forall payload. NutF payload -> NutF payload
+  go' x = NutF (Bolson.Element' (Node (go x)))
+
   go
+    :: forall payload
+     . NutF payload
+    -> Bolson.PSR (pos :: Maybe Int, ez :: Boolean, dynFamily :: Maybe String)
+    -> DOMInterpret payload
+    -> Event payload
+  go
+    fes
     { parent, scope, raiseId, pos, dynFamily, ez }
     di@
       ( DOMInterpret
           { ids, makeElement, makeDynBeacon, attributeParent, removeDynBeacon }
       ) =
-    makeLemmingEventO $ mkSTFn2 \(Subscriber mySub) k -> do
-      me <- ids
-      raiseId me
-      -- `dyn`-s need to have a parent
-      -- Tis is because we need to preserve the order of children and a parent is the cleanest way to do this.
-      -- Then, we can call `childNodes` and `nextSibling`.
-      -- In practice, they will almost always have a parent, but for portals they don't, so we create a dummy one that is not rendered.
-      parentEvent /\ parentId <- case parent of
-        Nothing -> do
-          dummyParent <- ids
-          pure
-            ( ( pure $ makeElement
-                  { id: dummyParent
-                  , parent: Nothing
-                  , scope
-                  , tag: "div"
-                  , pos: Nothing
-                  , dynFamily: Nothing
-                  }
-              ) /\ dummyParent
+    makeLemmingEventO
+      ( mkSTFn2 \(Subscriber mySub) k -> do
+          me <- ids
+          raiseId me
+          -- `dyn`-s need to have a parent
+          -- Tis is because we need to preserve the order of children and a parent is the cleanest way to do this.
+          -- Then, we can call `childNodes` and `nextSibling`.
+          -- In practice, they will almost always have a parent, but for portals they don't, so we create a dummy one that is not rendered.
+          parentEvent /\ parentId <- case parent of
+            Nothing -> do
+              dummyParent <- ids
+              pure
+                ( ( pure
+                      ( makeElement
+                          { id: dummyParent
+                          , parent: Nothing
+                          , scope
+                          , tag: "div"
+                          , pos: Nothing
+                          , dynFamily: Nothing
+                          }
+                      )
+                  ) /\ dummyParent
+                )
+            Just x -> pure (empty /\ x)
+          unsub <- runSTFn2 mySub
+            ( merge
+                [ parentEvent
+                , pure $ makeDynBeacon
+                    { id: me, parent: Just parentId, scope, dynFamily, pos }
+                , pure $ attributeParent
+                    { id: me, parent: parentId, pos, dynFamily, ez }
+                , ( __internalDekuFlatten
+                      { parent: Just parentId
+                      , scope
+                      , ez: false
+                      , raiseId: \_ -> pure unit
+                      -- clear the pos
+                      -- as we don't want the pointer's positional information
+                      -- trickling down to what the pointer points to
+                      -- the logic in Interpret.js will always give
+                      -- the correct positional information to what
+                      -- pointers point to
+                      , pos: Nothing
+                      , dynFamily: Just me
+                      }
+                      di
+                      fes
+                  )
+                ]
             )
-        Just x -> pure (empty /\ x)
-      unsub <- runSTFn2 mySub
-        ( merge
-            [ parentEvent
-            , pure $ makeDynBeacon
-                { id: me, parent: Just parentId, scope, dynFamily, pos }
-            , pure $ attributeParent
-                { id: me, parent: parentId, pos, dynFamily, ez }
-            , __internalDekuFlatten
-                { parent: Just parentId
-                , scope
-                , ez: false
-                , raiseId: \_ -> pure unit
-                -- clear the pos
-                -- as we don't want the pointer's positional information
-                -- trickling down to what the pointer points to
-                -- the logic in Interpret.js will always give
-                -- the correct positional information to what
-                -- pointers point to
-                , pos: Nothing
-                , dynFamily: Just me
-                }
-                di
-                (f es)
-            ]
-        )
-        k
-      pure do
-        runSTFn1 k (removeDynBeacon { id: me })
-        unsub
+            k
+          pure do
+            runSTFn1 k (removeDynBeacon { id: me })
+            unsub
+      )
 
 -- | This function is used along with `useDyn` to create dynamic collections of elements, like todo items in a todo mvc app.
 -- | See [**Dynamic components**](https://purescript-deku.netlify.app/core-concepts/collections#dynamic-components) in the Deku guide for more information.
 dyn
-  :: forall lock payload
-   . Event (Event (Bolson.Child Int (Node lock payload) lock))
-  -> Domable lock payload
-dyn = dynify
-  ( coerce
-      ( Bolson.dyn
-          :: Event (Event (Bolson.Child Int (Node lock payload) lock))
-          -> Domable' lock payload
-      )
-  )
+  :: Event (Event Child)
+  -> Nut
+dyn = dynify myDyn
+  where
+  myDyn :: Event (Event Child) -> Nut
+  myDyn e = Nut (myDyn' ((map <<< map) (\(Child c) -> c) e))
 
--- | Once upon a time, this function was used to create a list of `Domable`-s that are merged
--- | together. Now, as `Domable` is a `Monoid`, you can use `fold` instead.
+  myDyn'
+    :: forall payload
+     . Event (Event (Bolson.Child Int (Node payload)))
+    -> NutF payload
+  myDyn' x = NutF (Bolson.dyn x)
+
+-- | Once upon a time, this function was used to create a list of `Nut`-s that are merged
+-- | together. Now, as `Nut` is a `Monoid`, you can use `fold` instead.
 fixed
-  :: forall lock payload
-   . Array (Domable lock payload)
-  -> Domable lock payload
-fixed = dynify
-  ( coerce
-      (Bolson.fixed :: Array (Domable' lock payload) -> Domable' lock payload)
-  )
+  :: Array Nut
+  -> Nut
+fixed = dynify myFixed
+  where
+  myFixed :: Array Nut -> Nut
+  myFixed e = Nut (myFixed' (map (\(Nut c) -> c) e))
 
--- | Once upon a time, this function was used to emit arbitrary `Domable`-s using an event.
--- | Nowadays, its use is discouraged as there are other patterns in place to emit Domables, like
+  myFixed'
+    :: forall payload
+     . Array (NutF payload)
+    -> NutF payload
+  myFixed' x = NutF (Bolson.fixed (map (\(NutF y) -> y) x))
+
+-- dynify
+--   ( coerce
+--       (Bolson.fixed :: Array (Nut' payload) -> Nut' payload)
+--   )
+
+-- | Once upon a time, this function was used to emit arbitrary `Nut`-s using an event.
+-- | Nowadays, its use is discouraged as there are other patterns in place to emit Nuts, like
 -- | for example `switcher`. It is left in the library for backwards compatibility, but will
 -- | likely be deprecated, and then all traces of it will be purged, and then people will be forced to study
 -- | a revisionist history of the library that denies it ever existed.
 envy
-  :: forall lock payload
-   . Event (Domable lock payload)
-  -> Domable lock payload
-envy = dynify
-  ( coerce
-      (Bolson.envy :: Event (Domable' lock payload) -> Domable' lock payload)
-  )
+  :: Event Nut
+  -> Nut
+envy = dynify myEnvy
+  where
+  myEnvy :: Event Nut -> Nut
+  myEnvy e = Nut (myEnvy' (map (\(Nut c) -> c) e))
+
+  myEnvy'
+    :: forall payload
+     . Event (NutF payload)
+    -> NutF payload
+  myEnvy' x = NutF (Bolson.envy (map (\(NutF y) -> y) x))

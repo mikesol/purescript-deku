@@ -1,38 +1,25 @@
 module Deku.DOM.Elt.Datalist where
 
-import Bolson.Core (Entity(..), fixed)
 import Control.Plus (empty)
-import Data.Array (mapWithIndex)
 import Deku.Attribute (Attribute)
 import Deku.Control as DC
-import Deku.Core (Domable(..), Domable', unsafeSetPos)
+import Deku.Core (Nut)
 import FRP.Event (Event)
-import Safe.Coerce (coerce)
 
 data Datalist_
 
 datalist
-  :: forall lock payload
-   . Event (Attribute Datalist_)
-  -> Array (Domable lock payload)
-  -> Domable lock payload
-datalist attributes kids = Domable
-  ( Element'
-      ( DC.elementify "datalist" attributes
-          ( (coerce :: Domable' lock payload -> Domable lock payload)
-              (fixed (coerce (mapWithIndex unsafeSetPos kids)))
-          )
-      )
-  )
+  :: Event (Attribute Datalist_)
+  -> Array Nut
+  -> Nut
+datalist = DC.elementify2 "datalist"
 
 datalist_
-  :: forall lock payload
-   . Array (Domable lock payload)
-  -> Domable lock payload
+  :: Array Nut
+  -> Nut
 datalist_ = datalist empty
 
 datalist__
-  :: forall lock payload
-   . String
-  -> Domable lock payload
+  :: String
+  -> Nut
 datalist__ t = datalist_ [ DC.text_ t ]

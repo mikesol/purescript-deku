@@ -1,38 +1,25 @@
 module Deku.DOM.Elt.Font where
 
-import Bolson.Core (Entity(..), fixed)
 import Control.Plus (empty)
-import Data.Array (mapWithIndex)
 import Deku.Attribute (Attribute)
 import Deku.Control as DC
-import Deku.Core (Domable(..), Domable', unsafeSetPos)
+import Deku.Core (Nut)
 import FRP.Event (Event)
-import Safe.Coerce (coerce)
 
 data Font_
 
 font
-  :: forall lock payload
-   . Event (Attribute Font_)
-  -> Array (Domable lock payload)
-  -> Domable lock payload
-font attributes kids = Domable
-  ( Element'
-      ( DC.elementify "font" attributes
-          ( (coerce :: Domable' lock payload -> Domable lock payload)
-              (fixed (coerce (mapWithIndex unsafeSetPos kids)))
-          )
-      )
-  )
+  :: Event (Attribute Font_)
+  -> Array Nut
+  -> Nut
+font = DC.elementify2 "font"
 
 font_
-  :: forall lock payload
-   . Array (Domable lock payload)
-  -> Domable lock payload
+  :: Array Nut
+  -> Nut
 font_ = font empty
 
 font__
-  :: forall lock payload
-   . String
-  -> Domable lock payload
+  :: String
+  -> Nut
 font__ t = font_ [ DC.text_ t ]

@@ -1,38 +1,25 @@
 module Deku.DOM.Elt.Footer where
 
-import Bolson.Core (Entity(..), fixed)
 import Control.Plus (empty)
-import Data.Array (mapWithIndex)
 import Deku.Attribute (Attribute)
 import Deku.Control as DC
-import Deku.Core (Domable(..), Domable', unsafeSetPos)
+import Deku.Core (Nut)
 import FRP.Event (Event)
-import Safe.Coerce (coerce)
 
 data Footer_
 
 footer
-  :: forall lock payload
-   . Event (Attribute Footer_)
-  -> Array (Domable lock payload)
-  -> Domable lock payload
-footer attributes kids = Domable
-  ( Element'
-      ( DC.elementify "footer" attributes
-          ( (coerce :: Domable' lock payload -> Domable lock payload)
-              (fixed (coerce (mapWithIndex unsafeSetPos kids)))
-          )
-      )
-  )
+  :: Event (Attribute Footer_)
+  -> Array Nut
+  -> Nut
+footer = DC.elementify2 "footer"
 
 footer_
-  :: forall lock payload
-   . Array (Domable lock payload)
-  -> Domable lock payload
+  :: Array Nut
+  -> Nut
 footer_ = footer empty
 
 footer__
-  :: forall lock payload
-   . String
-  -> Domable lock payload
+  :: String
+  -> Nut
 footer__ t = footer_ [ DC.text_ t ]

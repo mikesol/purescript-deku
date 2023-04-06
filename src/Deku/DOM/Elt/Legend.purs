@@ -1,38 +1,25 @@
 module Deku.DOM.Elt.Legend where
 
-import Bolson.Core (Entity(..), fixed)
 import Control.Plus (empty)
-import Data.Array (mapWithIndex)
 import Deku.Attribute (Attribute)
 import Deku.Control as DC
-import Deku.Core (Domable(..), Domable', unsafeSetPos)
+import Deku.Core (Nut)
 import FRP.Event (Event)
-import Safe.Coerce (coerce)
 
 data Legend_
 
 legend
-  :: forall lock payload
-   . Event (Attribute Legend_)
-  -> Array (Domable lock payload)
-  -> Domable lock payload
-legend attributes kids = Domable
-  ( Element'
-      ( DC.elementify "legend" attributes
-          ( (coerce :: Domable' lock payload -> Domable lock payload)
-              (fixed (coerce (mapWithIndex unsafeSetPos kids)))
-          )
-      )
-  )
+  :: Event (Attribute Legend_)
+  -> Array Nut
+  -> Nut
+legend = DC.elementify2 "legend"
 
 legend_
-  :: forall lock payload
-   . Array (Domable lock payload)
-  -> Domable lock payload
+  :: Array Nut
+  -> Nut
 legend_ = legend empty
 
 legend__
-  :: forall lock payload
-   . String
-  -> Domable lock payload
+  :: String
+  -> Nut
 legend__ t = legend_ [ DC.text_ t ]

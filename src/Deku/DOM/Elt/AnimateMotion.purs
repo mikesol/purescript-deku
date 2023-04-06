@@ -1,38 +1,25 @@
 module Deku.DOM.Elt.AnimateMotion where
 
-import Bolson.Core (Entity(..), fixed)
 import Control.Plus (empty)
-import Data.Array (mapWithIndex)
 import Deku.Attribute (Attribute)
 import Deku.Control as DC
-import Deku.Core (Domable(..), Domable', unsafeSetPos)
+import Deku.Core (Nut)
 import FRP.Event (Event)
-import Safe.Coerce (coerce)
 
 data AnimateMotion_
 
 animateMotion
-  :: forall lock payload
-   . Event (Attribute AnimateMotion_)
-  -> Array (Domable lock payload)
-  -> Domable lock payload
-animateMotion attributes kids = Domable
-  ( Element'
-      ( DC.elementify "animateMotion" attributes
-          ( (coerce :: Domable' lock payload -> Domable lock payload)
-              (fixed (coerce (mapWithIndex unsafeSetPos kids)))
-          )
-      )
-  )
+  :: Event (Attribute AnimateMotion_)
+  -> Array Nut
+  -> Nut
+animateMotion = DC.elementify2 "animateMotion"
 
 animateMotion_
-  :: forall lock payload
-   . Array (Domable lock payload)
-  -> Domable lock payload
+  :: Array Nut
+  -> Nut
 animateMotion_ = animateMotion empty
 
 animateMotion__
-  :: forall lock payload
-   . String
-  -> Domable lock payload
+  :: String
+  -> Nut
 animateMotion__ t = animateMotion_ [ DC.text_ t ]

@@ -1,38 +1,25 @@
 module Deku.DOM.Elt.Col where
 
-import Bolson.Core (Entity(..), fixed)
 import Control.Plus (empty)
-import Data.Array (mapWithIndex)
 import Deku.Attribute (Attribute)
 import Deku.Control as DC
-import Deku.Core (Domable(..), Domable', unsafeSetPos)
+import Deku.Core (Nut)
 import FRP.Event (Event)
-import Safe.Coerce (coerce)
 
 data Col_
 
 col
-  :: forall lock payload
-   . Event (Attribute Col_)
-  -> Array (Domable lock payload)
-  -> Domable lock payload
-col attributes kids = Domable
-  ( Element'
-      ( DC.elementify "col" attributes
-          ( (coerce :: Domable' lock payload -> Domable lock payload)
-              (fixed (coerce (mapWithIndex unsafeSetPos kids)))
-          )
-      )
-  )
+  :: Event (Attribute Col_)
+  -> Array Nut
+  -> Nut
+col = DC.elementify2 "col"
 
 col_
-  :: forall lock payload
-   . Array (Domable lock payload)
-  -> Domable lock payload
+  :: Array Nut
+  -> Nut
 col_ = col empty
 
 col__
-  :: forall lock payload
-   . String
-  -> Domable lock payload
+  :: String
+  -> Nut
 col__ t = col_ [ DC.text_ t ]

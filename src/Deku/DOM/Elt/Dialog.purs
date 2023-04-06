@@ -1,38 +1,25 @@
 module Deku.DOM.Elt.Dialog where
 
-import Bolson.Core (Entity(..), fixed)
 import Control.Plus (empty)
-import Data.Array (mapWithIndex)
 import Deku.Attribute (Attribute)
 import Deku.Control as DC
-import Deku.Core (Domable(..), Domable', unsafeSetPos)
+import Deku.Core (Nut)
 import FRP.Event (Event)
-import Safe.Coerce (coerce)
 
 data Dialog_
 
 dialog
-  :: forall lock payload
-   . Event (Attribute Dialog_)
-  -> Array (Domable lock payload)
-  -> Domable lock payload
-dialog attributes kids = Domable
-  ( Element'
-      ( DC.elementify "dialog" attributes
-          ( (coerce :: Domable' lock payload -> Domable lock payload)
-              (fixed (coerce (mapWithIndex unsafeSetPos kids)))
-          )
-      )
-  )
+  :: Event (Attribute Dialog_)
+  -> Array Nut
+  -> Nut
+dialog = DC.elementify2 "dialog"
 
 dialog_
-  :: forall lock payload
-   . Array (Domable lock payload)
-  -> Domable lock payload
+  :: Array Nut
+  -> Nut
 dialog_ = dialog empty
 
 dialog__
-  :: forall lock payload
-   . String
-  -> Domable lock payload
+  :: String
+  -> Nut
 dialog__ t = dialog_ [ DC.text_ t ]

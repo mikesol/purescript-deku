@@ -1,38 +1,25 @@
 module Deku.DOM.Elt.Rect where
 
-import Bolson.Core (Entity(..), fixed)
 import Control.Plus (empty)
-import Data.Array (mapWithIndex)
 import Deku.Attribute (Attribute)
 import Deku.Control as DC
-import Deku.Core (Domable(..), Domable', unsafeSetPos)
+import Deku.Core (Nut)
 import FRP.Event (Event)
-import Safe.Coerce (coerce)
 
 data Rect_
 
 rect
-  :: forall lock payload
-   . Event (Attribute Rect_)
-  -> Array (Domable lock payload)
-  -> Domable lock payload
-rect attributes kids = Domable
-  ( Element'
-      ( DC.elementify "rect" attributes
-          ( (coerce :: Domable' lock payload -> Domable lock payload)
-              (fixed (coerce (mapWithIndex unsafeSetPos kids)))
-          )
-      )
-  )
+  :: Event (Attribute Rect_)
+  -> Array Nut
+  -> Nut
+rect = DC.elementify2 "rect"
 
 rect_
-  :: forall lock payload
-   . Array (Domable lock payload)
-  -> Domable lock payload
+  :: Array Nut
+  -> Nut
 rect_ = rect empty
 
 rect__
-  :: forall lock payload
-   . String
-  -> Domable lock payload
+  :: String
+  -> Nut
 rect__ t = rect_ [ DC.text_ t ]

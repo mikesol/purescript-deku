@@ -5,46 +5,36 @@ import Prelude
 import Control.Alt ((<|>))
 import Control.Monad.ST.Global (Global)
 import Control.Monad.ST.Internal (ST)
-import Control.Monad.ST.Internal as RRef
 import Control.Plus (empty)
 import Data.Array ((..))
+import Data.Filterable (filter)
 import Data.Foldable (intercalate, oneOf, oneOfMap)
-import Data.Tuple (Tuple(..))
-import Data.Tuple.Nested ((/\))
+import Data.Tuple (Tuple(..), snd)
+import Data.Tuple.Nested (type (/\), (/\))
 import Deku.Attribute ((!:=), (:=))
 import Deku.Attributes (id_)
-import Deku.Control (blank, globalPortal1, switcher, text, text_)
-import Deku.Core (Domable, Hook, Nut, dyn, fixed, insert, insert_, sendToPos)
+import Deku.Control (blank, globalPortal1, portal1, switcher, text, text_, (<#~>))
+import Deku.Core (Nut, Hook, dyn, fixed, insert, insert_, sendToPos)
 import Deku.DOM as D
 import Deku.Do as Deku
 import Deku.Hooks (useEffect, useMemoized, useRef, useState, useState')
-import Deku.Interpret (FFIDOMSnapshot, Instruction)
 import Deku.Lifecycle (onDidMount, onDismount, onWillMount)
 import Deku.Listeners (click, click_)
 import Deku.Pursx ((~~))
 import Deku.Toplevel (hydrate', runInBody', runSSR)
 import Effect (Effect)
-import FRP.Event (Event, fold, merge)
+import FRP.Event (Event, fold, mapAccum, merge)
 import Type.Proxy (Proxy(..))
 
 foreign import hackyInnerHTML :: String -> String -> Effect Unit
 
-runNoSSR
-  :: (forall lock. Domable lock (FFIDOMSnapshot -> Effect Unit))
-  -> Effect (Effect Unit)
+runNoSSR :: Nut -> Effect (Effect Unit)
 runNoSSR = runInBody'
 
-runWithSSR
-  :: (forall lock. Domable lock (FFIDOMSnapshot -> Effect Unit))
-  -> Effect (Effect Unit)
+runWithSSR :: Nut -> Effect (Effect Unit)
 runWithSSR = hydrate'
 
-ssr
-  :: ( forall lock
-        . Domable lock
-            (RRef.STRef Global (Array Instruction) -> ST Global Unit)
-     )
-  -> ST Global String
+ssr :: Nut -> ST Global String
 ssr i = pure "<head></head>" <> runSSR i
 
 sanityCheck :: Nut
@@ -243,6 +233,73 @@ portalsCompose = Deku.do
             [ text_ "incr" ]
         ]
 
+globalPortalsRetainPortalnessWhenSentOutOfScope :: Nut
+globalPortalsRetainPortalnessWhenSentOutOfScope = Deku.do
+  let
+    counter :: forall a. Event a -> Event (Int /\ a)
+    counter event = mapAccum (\a b -> (a + 1) /\ ((a + 1) /\ b)) (-1) event
+
+    limitTo :: Int -> Event ~> Event
+    limitTo i e = map snd $ filter (\(n /\ _) -> n < i) $ counter e
+  setPortalInContext /\ portalInContext <- useState true
+  setPortedNut /\ portedNut <- useState'
+  D.div_
+    [ D.div (id_ "outer-scope")
+        [ limitTo 2 (Tuple <$> portalInContext <*> portedNut)
+            <#~> \(Tuple tf p) ->
+              if not tf then p else D.div_ [ text_ "no dice!" ]
+        ]
+    , ( globalPortal1 (D.div_ [ text_ "foo" ]) \e ->
+          Deku.do
+            useEffect (pure unit) (const (setPortedNut e))
+            D.div (id_ "inner-scope")
+              [ (Tuple <$> portalInContext <*> portedNut)
+                  <#~> \(Tuple tf p) ->
+                    if tf then p else D.div_ [ text_ "no dice!" ]
+              ]
+      )
+    , D.button
+        ( merge
+            [ id_ "portal-btn"
+            , click $ portalInContext <#> not >>> setPortalInContext
+            ]
+        )
+        [ text_ "switch" ]
+    ]
+
+localPortalsLosePortalnessWhenSentOutOfScope :: Nut
+localPortalsLosePortalnessWhenSentOutOfScope = Deku.do
+  let
+    counter :: forall a. Event a -> Event (Int /\ a)
+    counter event = mapAccum (\a b -> (a + 1) /\ ((a + 1) /\ b)) (-1) event
+
+    limitTo :: Int -> Event ~> Event
+    limitTo i e = map snd $ filter (\(n /\ _) -> n < i) $ counter e
+  setPortalInContext /\ portalInContext <- useState true
+  setPortedNut /\ portedNut <- useState'
+  D.div_
+    [ D.div (id_ "outer-scope")
+        [ limitTo 2 (Tuple <$> portalInContext <*> portedNut)
+            <#~> \(Tuple tf p) ->
+              if not tf then p else D.div_ [ text_ "no dice!" ]
+        ]
+    , portal1 (D.div_ [ text_ "foo" ]) \e ->
+        Deku.do
+          useEffect (pure unit) (const (setPortedNut e))
+          D.div (id_ "inner-scope")
+            [ (Tuple <$> portalInContext <*> portedNut)
+                <#~> \(Tuple tf p) ->
+                  if tf then p else D.div_ [ text_ "no dice!" ]
+            ]
+    , D.button
+        ( merge
+            [ id_ "portal-btn"
+            , click $ portalInContext <#> not >>> setPortalInContext
+            ]
+        )
+        [ text_ "switch" ]
+    ]
+
 pursXComposes :: Nut
 pursXComposes = Deku.do
   D.div (id_ "div0")
@@ -341,7 +398,7 @@ useEffectWorks = Deku.do
         [ text_ "Increment" ]
     , D.div (id_ "mydiv") [ text (show <$> counter) ]
     ]
-  
+
 customHooksDoTheirThing :: Nut
 customHooksDoTheirThing = Deku.do
   setCounter /\ counter <- useState 0

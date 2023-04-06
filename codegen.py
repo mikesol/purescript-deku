@@ -113,7 +113,7 @@ import Control.Plus (empty)
 import Data.Array (mapWithIndex)
 import Deku.Attribute (Attribute)
 import Deku.Control (elementify)
-import Deku.Core (Domable(..), Domable', unsafeSetPos)
+import Deku.Core (Nut(..), Nut', unsafeSetPos)
 import FRP.Event (Event)
 import Safe.Coerce (coerce)
 
@@ -122,16 +122,14 @@ import Safe.Coerce (coerce)
 data {term}
 
 {x}
-  :: forall lock payload
-   . Event (Attribute {term})
-  -> Array (Domable lock payload)
-  -> Domable lock payload
-{x} attributes kids = Domable (Element' (elementify "{astag(x)}" attributes ((coerce :: Domable' lock payload -> Domable lock payload)  (fixed (coerce (mapWithIndex unsafeSetPos kids))))))
+  :: Event (Attribute {term})
+  -> Array Nut
+  -> Nut
+{x} attributes kids = Nut (Element' (elementify "{astag(x)}" attributes ((coerce :: Nut' payload -> Nut)  (fixed (coerce (mapWithIndex unsafeSetPos kids))))))
 
 {x}_
-  :: forall lock payload
-   . Array (Domable lock payload)
-  -> Domable lock payload
+  :: Array Nut
+  -> Nut
 {x}_ = {x} empty
 
 ''')

@@ -1,38 +1,25 @@
 module Deku.DOM.Elt.Polygon where
 
-import Bolson.Core (Entity(..), fixed)
 import Control.Plus (empty)
-import Data.Array (mapWithIndex)
 import Deku.Attribute (Attribute)
 import Deku.Control as DC
-import Deku.Core (Domable(..), Domable', unsafeSetPos)
+import Deku.Core (Nut)
 import FRP.Event (Event)
-import Safe.Coerce (coerce)
 
 data Polygon_
 
 polygon
-  :: forall lock payload
-   . Event (Attribute Polygon_)
-  -> Array (Domable lock payload)
-  -> Domable lock payload
-polygon attributes kids = Domable
-  ( Element'
-      ( DC.elementify "polygon" attributes
-          ( (coerce :: Domable' lock payload -> Domable lock payload)
-              (fixed (coerce (mapWithIndex unsafeSetPos kids)))
-          )
-      )
-  )
+  :: Event (Attribute Polygon_)
+  -> Array Nut
+  -> Nut
+polygon = DC.elementify2 "polygon"
 
 polygon_
-  :: forall lock payload
-   . Array (Domable lock payload)
-  -> Domable lock payload
+  :: Array Nut
+  -> Nut
 polygon_ = polygon empty
 
 polygon__
-  :: forall lock payload
-   . String
-  -> Domable lock payload
+  :: String
+  -> Nut
 polygon__ t = polygon_ [ DC.text_ t ]

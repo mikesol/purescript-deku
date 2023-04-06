@@ -1,38 +1,25 @@
 module Deku.DOM.Elt.FePointLight where
 
-import Bolson.Core (Entity(..), fixed)
 import Control.Plus (empty)
-import Data.Array (mapWithIndex)
 import Deku.Attribute (Attribute)
 import Deku.Control as DC
-import Deku.Core (Domable(..), Domable', unsafeSetPos)
+import Deku.Core (Nut)
 import FRP.Event (Event)
-import Safe.Coerce (coerce)
 
 data FePointLight_
 
 fePointLight
-  :: forall lock payload
-   . Event (Attribute FePointLight_)
-  -> Array (Domable lock payload)
-  -> Domable lock payload
-fePointLight attributes kids = Domable
-  ( Element'
-      ( DC.elementify "fePointLight" attributes
-          ( (coerce :: Domable' lock payload -> Domable lock payload)
-              (fixed (coerce (mapWithIndex unsafeSetPos kids)))
-          )
-      )
-  )
+  :: Event (Attribute FePointLight_)
+  -> Array Nut
+  -> Nut
+fePointLight = DC.elementify2 "fePointLight"
 
 fePointLight_
-  :: forall lock payload
-   . Array (Domable lock payload)
-  -> Domable lock payload
+  :: Array Nut
+  -> Nut
 fePointLight_ = fePointLight empty
 
 fePointLight__
-  :: forall lock payload
-   . String
-  -> Domable lock payload
+  :: String
+  -> Nut
 fePointLight__ t = fePointLight_ [ DC.text_ t ]

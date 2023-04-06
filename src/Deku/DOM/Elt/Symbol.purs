@@ -1,38 +1,25 @@
 module Deku.DOM.Elt.Symbol where
 
-import Bolson.Core (Entity(..), fixed)
 import Control.Plus (empty)
-import Data.Array (mapWithIndex)
 import Deku.Attribute (Attribute)
 import Deku.Control as DC
-import Deku.Core (Domable(..), Domable', unsafeSetPos)
+import Deku.Core (Nut)
 import FRP.Event (Event)
-import Safe.Coerce (coerce)
 
 data Symbol_
 
 symbol
-  :: forall lock payload
-   . Event (Attribute Symbol_)
-  -> Array (Domable lock payload)
-  -> Domable lock payload
-symbol attributes kids = Domable
-  ( Element'
-      ( DC.elementify "symbol" attributes
-          ( (coerce :: Domable' lock payload -> Domable lock payload)
-              (fixed (coerce (mapWithIndex unsafeSetPos kids)))
-          )
-      )
-  )
+  :: Event (Attribute Symbol_)
+  -> Array Nut
+  -> Nut
+symbol = DC.elementify2 "symbol"
 
 symbol_
-  :: forall lock payload
-   . Array (Domable lock payload)
-  -> Domable lock payload
+  :: Array Nut
+  -> Nut
 symbol_ = symbol empty
 
 symbol__
-  :: forall lock payload
-   . String
-  -> Domable lock payload
+  :: String
+  -> Nut
 symbol__ t = symbol_ [ DC.text_ t ]

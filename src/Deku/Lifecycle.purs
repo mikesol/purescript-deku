@@ -6,16 +6,15 @@ module Deku.Lifecycle where
 
 import Prelude
 
-import Deku.Core (Domable, envy)
+import Deku.Core (Nut, envy)
 import Effect (Effect)
 import FRP.Event (makeEvent)
 
 -- | Run effect `e` before nut `d` is added to the DOM.
 onWillMount
-  :: forall lock payload
-   . Effect Unit
-  -> Domable lock payload
-  -> Domable lock payload
+  :: Effect Unit
+  -> Nut
+  -> Nut
 onWillMount e d = envy $ makeEvent \k -> do
   e
   k d
@@ -23,10 +22,9 @@ onWillMount e d = envy $ makeEvent \k -> do
 
 -- | Run effect `e` after nut `d` is added to the DOM.
 onDidMount
-  :: forall lock payload
-   . Effect Unit
-  -> Domable lock payload
-  -> Domable lock payload
+  :: Effect Unit
+  -> Nut
+  -> Nut
 onDidMount e d = envy $ makeEvent \k -> do
   k d
   e
@@ -34,10 +32,9 @@ onDidMount e d = envy $ makeEvent \k -> do
 
 -- | Run effect `e` when nut `d` is removed from the DOM.
 onDismount
-  :: forall lock payload
-   . Effect Unit
-  -> Domable lock payload
-  -> Domable lock payload
+  :: Effect Unit
+  -> Nut
+  -> Nut
 onDismount e d = envy $ makeEvent \k -> do
   k d
   pure e

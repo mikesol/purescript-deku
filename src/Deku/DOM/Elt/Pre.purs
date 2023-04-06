@@ -1,38 +1,25 @@
 module Deku.DOM.Elt.Pre where
 
-import Bolson.Core (Entity(..), fixed)
 import Control.Plus (empty)
-import Data.Array (mapWithIndex)
 import Deku.Attribute (Attribute)
 import Deku.Control as DC
-import Deku.Core (Domable(..), Domable', unsafeSetPos)
+import Deku.Core (Nut)
 import FRP.Event (Event)
-import Safe.Coerce (coerce)
 
 data Pre_
 
 pre
-  :: forall lock payload
-   . Event (Attribute Pre_)
-  -> Array (Domable lock payload)
-  -> Domable lock payload
-pre attributes kids = Domable
-  ( Element'
-      ( DC.elementify "pre" attributes
-          ( (coerce :: Domable' lock payload -> Domable lock payload)
-              (fixed (coerce (mapWithIndex unsafeSetPos kids)))
-          )
-      )
-  )
+  :: Event (Attribute Pre_)
+  -> Array Nut
+  -> Nut
+pre = DC.elementify2 "pre"
 
 pre_
-  :: forall lock payload
-   . Array (Domable lock payload)
-  -> Domable lock payload
+  :: Array Nut
+  -> Nut
 pre_ = pre empty
 
 pre__
-  :: forall lock payload
-   . String
-  -> Domable lock payload
+  :: String
+  -> Nut
 pre__ t = pre_ [ DC.text_ t ]

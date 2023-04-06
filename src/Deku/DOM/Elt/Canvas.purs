@@ -1,38 +1,25 @@
 module Deku.DOM.Elt.Canvas where
 
-import Bolson.Core (Entity(..), fixed)
 import Control.Plus (empty)
-import Data.Array (mapWithIndex)
 import Deku.Attribute (Attribute)
 import Deku.Control as DC
-import Deku.Core (Domable(..), Domable', unsafeSetPos)
+import Deku.Core (Nut)
 import FRP.Event (Event)
-import Safe.Coerce (coerce)
 
 data Canvas_
 
 canvas
-  :: forall lock payload
-   . Event (Attribute Canvas_)
-  -> Array (Domable lock payload)
-  -> Domable lock payload
-canvas attributes kids = Domable
-  ( Element'
-      ( DC.elementify "canvas" attributes
-          ( (coerce :: Domable' lock payload -> Domable lock payload)
-              (fixed (coerce (mapWithIndex unsafeSetPos kids)))
-          )
-      )
-  )
+  :: Event (Attribute Canvas_)
+  -> Array Nut
+  -> Nut
+canvas = DC.elementify2 "canvas"
 
 canvas_
-  :: forall lock payload
-   . Array (Domable lock payload)
-  -> Domable lock payload
+  :: Array Nut
+  -> Nut
 canvas_ = canvas empty
 
 canvas__
-  :: forall lock payload
-   . String
-  -> Domable lock payload
+  :: String
+  -> Nut
 canvas__ t = canvas_ [ DC.text_ t ]
