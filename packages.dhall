@@ -8,5 +8,5 @@ in  upstream
       [ "hyrule"
       ]
     , repo = "https://github.com/mikesol/purescript-bolson.git"
-    , version = "lockless"
+    , version = "main"
     }
