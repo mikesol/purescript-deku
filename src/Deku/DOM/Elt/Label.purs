@@ -9,7 +9,7 @@ import FRP.Event (Event)
 data Label_
 
 label
-  :: Event (Attribute Label_)
+  :: Array (Event (Attribute Label_))
   -> Array Nut
   -> Nut
 label = DC.elementify2 "label"

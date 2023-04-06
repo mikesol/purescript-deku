@@ -9,7 +9,7 @@ import FRP.Event (Event)
 data Legend_
 
 legend
-  :: Event (Attribute Legend_)
+  :: Array (Event (Attribute Legend_))
   -> Array Nut
   -> Nut
 legend = DC.elementify2 "legend"

@@ -9,7 +9,7 @@ import FRP.Event (Event)
 data Basefont_
 
 basefont
-  :: Event (Attribute Basefont_)
+  :: Array (Event (Attribute Basefont_))
   -> Array Nut
   -> Nut
 basefont = DC.elementify2 "basefont"

@@ -9,7 +9,7 @@ import FRP.Event (Event)
 data FeDropShadow_
 
 feDropShadow
-  :: Event (Attribute FeDropShadow_)
+  :: Array (Event (Attribute FeDropShadow_))
   -> Array Nut
   -> Nut
 feDropShadow = DC.elementify2 "feDropShadow"

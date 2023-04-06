@@ -9,7 +9,7 @@ import FRP.Event (Event)
 data Table_
 
 table
-  :: Event (Attribute Table_)
+  :: Array (Event (Attribute Table_))
   -> Array Nut
   -> Nut
 table = DC.elementify2 "table"

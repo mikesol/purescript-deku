@@ -9,7 +9,7 @@ import FRP.Event (Event)
 data Pattern_
 
 pattern
-  :: Event (Attribute Pattern_)
+  :: Array (Event (Attribute Pattern_))
   -> Array Nut
   -> Nut
 pattern = DC.elementify2 "pattern"

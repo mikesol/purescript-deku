@@ -1883,7 +1883,7 @@ unsafeCustomElement
   :: forall element
    . String
   -> Proxy element
-  -> Event (Attribute element)
+  -> Array (Event (Attribute element))
   -> Array Nut
   -> Nut
 unsafeCustomElement name _ = elementify2 name

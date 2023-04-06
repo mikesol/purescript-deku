@@ -9,7 +9,7 @@ import FRP.Event (Event)
 data Summary_
 
 summary
-  :: Event (Attribute Summary_)
+  :: Array (Event (Attribute Summary_))
   -> Array Nut
   -> Nut
 summary = DC.elementify2 "summary"

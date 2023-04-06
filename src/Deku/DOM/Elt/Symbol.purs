@@ -9,7 +9,7 @@ import FRP.Event (Event)
 data Symbol_
 
 symbol
-  :: Event (Attribute Symbol_)
+  :: Array (Event (Attribute Symbol_))
   -> Array Nut
   -> Nut
 symbol = DC.elementify2 "symbol"

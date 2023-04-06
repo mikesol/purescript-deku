@@ -9,7 +9,7 @@ import FRP.Event (Event)
 data Strong_
 
 strong
-  :: Event (Attribute Strong_)
+  :: Array (Event (Attribute Strong_))
   -> Array Nut
   -> Nut
 strong = DC.elementify2 "strong"

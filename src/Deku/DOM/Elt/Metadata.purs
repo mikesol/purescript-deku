@@ -9,7 +9,7 @@ import FRP.Event (Event)
 data Metadata_
 
 metadata
-  :: Event (Attribute Metadata_)
+  :: Array (Event (Attribute Metadata_))
   -> Array Nut
   -> Nut
 metadata = DC.elementify2 "metadata"

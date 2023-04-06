@@ -9,7 +9,7 @@ import FRP.Event (Event)
 data Template_
 
 template
-  :: Event (Attribute Template_)
+  :: Array (Event (Attribute Template_))
   -> Array Nut
   -> Nut
 template = DC.elementify2 "template"

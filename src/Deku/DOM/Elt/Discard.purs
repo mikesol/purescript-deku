@@ -9,7 +9,7 @@ import FRP.Event (Event)
 data Discard_
 
 discard
-  :: Event (Attribute Discard_)
+  :: Array (Event (Attribute Discard_))
   -> Array Nut
   -> Nut
 discard = DC.elementify2 "discard"

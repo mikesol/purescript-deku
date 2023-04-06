@@ -9,7 +9,7 @@ import FRP.Event (Event)
 data Body_
 
 body
-  :: Event (Attribute Body_)
+  :: Array (Event (Attribute Body_))
   -> Array Nut
   -> Nut
 body = DC.elementify2 "body"

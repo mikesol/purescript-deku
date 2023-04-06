@@ -9,7 +9,7 @@ import FRP.Event (Event)
 data ClipPath_
 
 clipPath
-  :: Event (Attribute ClipPath_)
+  :: Array (Event (Attribute ClipPath_))
   -> Array Nut
   -> Nut
 clipPath = DC.elementify2 "clipPath"

@@ -9,7 +9,7 @@ import FRP.Event (Event)
 data FeComponentTransfer_
 
 feComponentTransfer
-  :: Event (Attribute FeComponentTransfer_)
+  :: Array (Event (Attribute FeComponentTransfer_))
   -> Array Nut
   -> Nut
 feComponentTransfer = DC.elementify2 "feComponentTransfer"

@@ -9,7 +9,7 @@ import FRP.Event (Event)
 data Frameset_
 
 frameset
-  :: Event (Attribute Frameset_)
+  :: Array (Event (Attribute Frameset_))
   -> Array Nut
   -> Nut
 frameset = DC.elementify2 "frameset"

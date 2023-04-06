@@ -9,7 +9,7 @@ import FRP.Event (Event)
 data Style_
 
 style
-  :: Event (Attribute Style_)
+  :: Array (Event (Attribute Style_))
   -> Array Nut
   -> Nut
 style = DC.elementify2 "style"

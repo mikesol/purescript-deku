@@ -9,7 +9,7 @@ import FRP.Event (Event)
 data RadialGradient_
 
 radialGradient
-  :: Event (Attribute RadialGradient_)
+  :: Array (Event (Attribute RadialGradient_))
   -> Array Nut
   -> Nut
 radialGradient = DC.elementify2 "radialGradient"

@@ -9,7 +9,7 @@ import FRP.Event (Event)
 data Set_
 
 set
-  :: Event (Attribute Set_)
+  :: Array (Event (Attribute Set_))
   -> Array Nut
   -> Nut
 set = DC.elementify2 "set"

@@ -9,7 +9,7 @@ import FRP.Event (Event)
 data Optgroup_
 
 optgroup
-  :: Event (Attribute Optgroup_)
+  :: Array (Event (Attribute Optgroup_))
   -> Array Nut
   -> Nut
 optgroup = DC.elementify2 "optgroup"

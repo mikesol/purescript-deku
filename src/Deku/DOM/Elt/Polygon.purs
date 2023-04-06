@@ -9,7 +9,7 @@ import FRP.Event (Event)
 data Polygon_
 
 polygon
-  :: Event (Attribute Polygon_)
+  :: Array (Event (Attribute Polygon_))
   -> Array Nut
   -> Nut
 polygon = DC.elementify2 "polygon"

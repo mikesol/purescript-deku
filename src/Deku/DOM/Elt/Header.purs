@@ -9,7 +9,7 @@ import FRP.Event (Event)
 data Header_
 
 header
-  :: Event (Attribute Header_)
+  :: Array (Event (Attribute Header_))
   -> Array Nut
   -> Nut
 header = DC.elementify2 "header"

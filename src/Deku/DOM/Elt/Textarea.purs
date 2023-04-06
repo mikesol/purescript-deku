@@ -9,7 +9,7 @@ import FRP.Event (Event)
 data Textarea_
 
 textarea
-  :: Event (Attribute Textarea_)
+  :: Array (Event (Attribute Textarea_))
   -> Array Nut
   -> Nut
 textarea = DC.elementify2 "textarea"

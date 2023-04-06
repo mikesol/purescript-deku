@@ -9,7 +9,7 @@ import FRP.Event (Event)
 data Noframes_
 
 noframes
-  :: Event (Attribute Noframes_)
+  :: Array (Event (Attribute Noframes_))
   -> Array Nut
   -> Nut
 noframes = DC.elementify2 "noframes"

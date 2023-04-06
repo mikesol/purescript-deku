@@ -9,7 +9,7 @@ import FRP.Event (Event)
 data Main_
 
 main
-  :: Event (Attribute Main_)
+  :: Array (Event (Attribute Main_))
   -> Array Nut
   -> Nut
 main = DC.elementify2 "main"

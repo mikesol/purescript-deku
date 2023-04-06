@@ -9,7 +9,7 @@ import FRP.Event (Event)
 data Embed_
 
 embed
-  :: Event (Attribute Embed_)
+  :: Array (Event (Attribute Embed_))
   -> Array Nut
   -> Nut
 embed = DC.elementify2 "embed"

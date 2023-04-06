@@ -9,7 +9,7 @@ import FRP.Event (Event)
 data FeDisplacementMap_
 
 feDisplacementMap
-  :: Event (Attribute FeDisplacementMap_)
+  :: Array (Event (Attribute FeDisplacementMap_))
   -> Array Nut
   -> Nut
 feDisplacementMap = DC.elementify2 "feDisplacementMap"

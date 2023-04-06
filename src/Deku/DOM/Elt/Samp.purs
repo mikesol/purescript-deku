@@ -9,7 +9,7 @@ import FRP.Event (Event)
 data Samp_
 
 samp
-  :: Event (Attribute Samp_)
+  :: Array (Event (Attribute Samp_))
   -> Array Nut
   -> Nut
 samp = DC.elementify2 "samp"

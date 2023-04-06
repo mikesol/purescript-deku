@@ -9,7 +9,7 @@ import FRP.Event (Event)
 data Font_
 
 font
-  :: Event (Attribute Font_)
+  :: Array (Event (Attribute Font_))
   -> Array Nut
   -> Nut
 font = DC.elementify2 "font"

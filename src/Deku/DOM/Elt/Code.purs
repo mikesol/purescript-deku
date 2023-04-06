@@ -9,7 +9,7 @@ import FRP.Event (Event)
 data Code_
 
 code
-  :: Event (Attribute Code_)
+  :: Array (Event (Attribute Code_))
   -> Array Nut
   -> Nut
 code = DC.elementify2 "code"

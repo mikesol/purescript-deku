@@ -9,7 +9,7 @@ import FRP.Event (Event)
 data Html_
 
 html
-  :: Event (Attribute Html_)
+  :: Array (Event (Attribute Html_))
   -> Array Nut
   -> Nut
 html = DC.elementify2 "html"

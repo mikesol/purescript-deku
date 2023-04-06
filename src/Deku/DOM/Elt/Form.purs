@@ -9,7 +9,7 @@ import FRP.Event (Event)
 data Form_
 
 form
-  :: Event (Attribute Form_)
+  :: Array (Event (Attribute Form_))
   -> Array Nut
   -> Nut
 form = DC.elementify2 "form"

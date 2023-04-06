@@ -9,7 +9,7 @@ import FRP.Event (Event)
 data Iframe_
 
 iframe
-  :: Event (Attribute Iframe_)
+  :: Array (Event (Attribute Iframe_))
   -> Array Nut
   -> Nut
 iframe = DC.elementify2 "iframe"

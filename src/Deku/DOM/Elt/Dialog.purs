@@ -9,7 +9,7 @@ import FRP.Event (Event)
 data Dialog_
 
 dialog
-  :: Event (Attribute Dialog_)
+  :: Array (Event (Attribute Dialog_))
   -> Array Nut
   -> Nut
 dialog = DC.elementify2 "dialog"

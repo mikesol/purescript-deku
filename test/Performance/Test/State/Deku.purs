@@ -4,7 +4,7 @@ import Prelude
 
 import Control.Alt ((<|>))
 import Data.Array.NonEmpty (replicate)
-import Data.Foldable (oneOf, sequence_, traverse_)
+import Data.Foldable (sequence_, traverse_)
 import Data.Maybe (Maybe(..))
 import Deku.Attribute ((:=))
 import Deku.Control (text, text_)
@@ -67,29 +67,27 @@ scene notifyEnd =
       in
         ( D.div_
             [ D.button
-                ( oneOf
-                    [ pure $ D.Id := (testToString StateDeku <> startSuffix)
-                    , stateE <#> \state -> D.OnClick := do
-                        ref <- Ref.new state
-                        let modify = flip Ref.modify ref
-                        sequence_ $ replicate stateUpdates' $ modify
-                          (\s -> s { n = s.n + 1 })
-                        sequence_ $ replicate stateUpdates' $ modify \s ->
-                          s
-                            { n1 = s.n1 + 1 }
-                        sequence_ $ replicate stateUpdates' $ modify \s ->
-                          s
-                            { n2 = s.n2 + 1 }
-                        sequence_ $ replicate stateUpdates' $ modify \s ->
-                          s
-                            { n3 = s.n3 + 1 }
-                        sequence_ $ replicate stateUpdates' $ modify \s ->
-                          s
-                            { n4 = s.n4 + 1 }
-                        Ref.read ref >>= setState
-                        notifyEnd
-                    ]
-                )
+                [ pure $ D.Id := (testToString StateDeku <> startSuffix)
+                , stateE <#> \state -> D.OnClick := do
+                    ref <- Ref.new state
+                    let modify = flip Ref.modify ref
+                    sequence_ $ replicate stateUpdates' $ modify
+                      (\s -> s { n = s.n + 1 })
+                    sequence_ $ replicate stateUpdates' $ modify \s ->
+                      s
+                        { n1 = s.n1 + 1 }
+                    sequence_ $ replicate stateUpdates' $ modify \s ->
+                      s
+                        { n2 = s.n2 + 1 }
+                    sequence_ $ replicate stateUpdates' $ modify \s ->
+                      s
+                        { n3 = s.n3 + 1 }
+                    sequence_ $ replicate stateUpdates' $ modify \s ->
+                      s
+                        { n4 = s.n4 + 1 }
+                    Ref.read ref >>= setState
+                    notifyEnd
+                ]
                 [ text_ "Start Test" ]
             , text (show <$> stateE)
             ]

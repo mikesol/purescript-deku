@@ -9,7 +9,7 @@ import FRP.Event (Event)
 data Figcaption_
 
 figcaption
-  :: Event (Attribute Figcaption_)
+  :: Array (Event (Attribute Figcaption_))
   -> Array Nut
   -> Nut
 figcaption = DC.elementify2 "figcaption"

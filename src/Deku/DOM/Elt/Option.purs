@@ -9,7 +9,7 @@ import FRP.Event (Event)
 data Option_
 
 option
-  :: Event (Attribute Option_)
+  :: Array (Event (Attribute Option_))
   -> Array Nut
   -> Nut
 option = DC.elementify2 "option"

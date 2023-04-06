@@ -9,7 +9,7 @@ import FRP.Event (Event)
 data FeMerge_
 
 feMerge
-  :: Event (Attribute FeMerge_)
+  :: Array (Event (Attribute FeMerge_))
   -> Array Nut
   -> Nut
 feMerge = DC.elementify2 "feMerge"

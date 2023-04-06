@@ -9,7 +9,7 @@ import FRP.Event (Event)
 data Applet_
 
 applet
-  :: Event (Attribute Applet_)
+  :: Array (Event (Attribute Applet_))
   -> Array Nut
   -> Nut
 applet = DC.elementify2 "applet"

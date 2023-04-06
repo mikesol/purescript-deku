@@ -9,7 +9,7 @@ import FRP.Event (Event)
 data Script_
 
 script
-  :: Event (Attribute Script_)
+  :: Array (Event (Attribute Script_))
   -> Array Nut
   -> Nut
 script = DC.elementify2 "script"

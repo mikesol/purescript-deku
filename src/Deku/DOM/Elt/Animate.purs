@@ -9,7 +9,7 @@ import FRP.Event (Event)
 data Animate_
 
 animate
-  :: Event (Attribute Animate_)
+  :: Array (Event (Attribute Animate_))
   -> Array Nut
   -> Nut
 animate = DC.elementify2 "animate"

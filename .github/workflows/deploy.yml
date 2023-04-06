@@ -32,10 +32,10 @@ jobs:
         run: npm t
       - name: Spago build examples
         run: npm run build:examples
-      - name: Build make
-        run: npx spago -x examples.dhall bundle-app --main Deku.Example.Docs.Static.Build --to examples/docs/Static/make.mjs --platform node
-      - name: Build hydration
-        run: npx spago -x examples.dhall bundle-module --main Deku.Example.Docs.Static.Live --to examples/docs/Static/bundle.js --minify
+      # - name: Build make
+      #   run: npx spago -x examples.dhall bundle-app --main Deku.Example.Docs.Static.Build --to examples/docs/Static/make.mjs --platform node
+      # - name: Build hydration
+      #   run: npx spago -x examples.dhall bundle-module --main Deku.Example.Docs.Static.Live --to examples/docs/Static/bundle.js --minify
       # - name: Make index.html for netlify
       #   run: |
       #     cd examples/docs/Static

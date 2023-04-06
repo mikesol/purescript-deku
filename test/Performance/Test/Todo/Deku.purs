@@ -5,7 +5,7 @@ import Prelude
 import Control.Alt ((<|>))
 import Data.Array (cons, drop, head, length, reverse, takeEnd)
 import Data.Filterable (filter)
-import Data.Foldable (for_, oneOf, oneOfMap, traverse_)
+import Data.Foldable (for_, oneOfMap, traverse_)
 import Data.Maybe (Maybe(..))
 import Data.Set as Set
 import Data.Tuple (snd)
@@ -106,51 +106,47 @@ containerD initialState = Deku.do
       )
   D.div_
     [ D.button
-        ( oneOf
-            [ pure $ D.Id := Shared.addNewId
-            , click $ state <#> \st -> do
-                newState <- liftEffect $ Shared.createTodo st
-                setUndo (PushUndo (UndoAdd newState.lastIndex))
-                setState
-                  ( const newState
-                  )
-            ]
-        )
+        [ pure $ D.Id := Shared.addNewId
+        , click $ state <#> \st -> do
+            newState <- liftEffect $ Shared.createTodo st
+            setUndo (PushUndo (UndoAdd newState.lastIndex))
+            setState
+              ( const newState
+              )
+        ]
         [ text_ "Add New" ]
     , D.button
-        ( oneOf
-            [ pure $ D.Id := Shared.undoId
-            , click $ undos <#> \uu ->
-                for_ (head uu) \u -> do
-                  case u of
-                    UndoRename id s -> do
-                      updateNameAt id s
-                      setRename { address: id, payload: s }
-                      pure unit
-                    UndoAdd id -> do
-                      setState
-                        ( \x -> x
-                            { todos = filter
-                                ( \y -> y.id /= id
-                                )
-                                x.todos
-                            }
-                        )
-                      setDelete { address: id, payload: unit }
-                    UndoCompleted id cs -> do
-                      setState
-                        ( \x -> x
-                            { completed =
-                                (if cs then Set.insert else Set.delete) id
-                                  x.completed
-                            }
-                        )
-                      setCompleteStatus { address: id, payload: cs }
-                  setUndo PopUndo
-            ]
-        )
+        [ pure $ D.Id := Shared.undoId
+        , click $ undos <#> \uu ->
+            for_ (head uu) \u -> do
+              case u of
+                UndoRename id s -> do
+                  updateNameAt id s
+                  setRename { address: id, payload: s }
+                  pure unit
+                UndoAdd id -> do
+                  setState
+                    ( \x -> x
+                        { todos = filter
+                            ( \y -> y.id /= id
+                            )
+                            x.todos
+                        }
+                    )
+                  setDelete { address: id, payload: unit }
+                UndoCompleted id cs -> do
+                  setState
+                    ( \x -> x
+                        { completed =
+                            (if cs then Set.insert else Set.delete) id
+                              x.completed
+                        }
+                    )
+                  setCompleteStatus { address: id, payload: cs }
+              setUndo PopUndo
+        ]
         [ text_ "Undo" ]
-    , D.div (oneOf [ pure $ D.Id := Shared.todosId ])
+    , D.div [ pure $ D.Id := Shared.todosId ]
         [ dyn
             ( toDyn # map
                 \td -> do
@@ -193,16 +189,15 @@ todoD { id, description } completeStatus newName doEditName doChecked = Deku.do
   let name = name' <|> pure description
   D.div_
     [ D.input
-        ( oneOf
-            [ pure $ D.Id := Shared.editId id
-            , (pure description <|> newName) <#> (D.Value := _)
-            , name <#> setName >>> (D.OnInput := _)
-            ]
-        )
+        [ pure $ D.Id := Shared.editId id
+        , (pure description <|> newName) <#> (D.Value := _)
+        , name <#> setName >>> (D.OnInput := _)
+        ]
+    
         []
     , checkboxD { id } completeStatus doChecked
     , D.button
-        (oneOf [ pure $ D.Id := Shared.saveId id, click (name <#> doEditName) ])
+        [ pure $ D.Id := Shared.saveId id, click (name <#> doEditName) ]
         [ text_ "Save Changes" ]
     ]
 
@@ -215,12 +210,12 @@ checkboxD { id } completeStatus doChecked = Deku.do
   localSetChecked /\ localChecked <- bussedUncurried
   let checked = pure true <|> completeStatus
   D.input
-    ( oneOf
-        [ pure $ D.Id := (Shared.checkId id)
+    
+    [ pure $ D.Id := (Shared.checkId id)
         , pure $ D.Xtype := "checkbox"
         , completeStatus <#> show >>> (D.Checked := _)
         , (checked <|> localChecked) <#>
             (\x -> doChecked x *> localSetChecked (not x)) >>> (D.OnInput := _)
-        ]
-    )
+    ]
+    
     []

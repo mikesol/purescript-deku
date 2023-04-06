@@ -9,7 +9,7 @@ import FRP.Event (Event)
 data Fieldset_
 
 fieldset
-  :: Event (Attribute Fieldset_)
+  :: Array (Event (Attribute Fieldset_))
   -> Array Nut
   -> Nut
 fieldset = DC.elementify2 "fieldset"

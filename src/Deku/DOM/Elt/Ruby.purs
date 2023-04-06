@@ -9,7 +9,7 @@ import FRP.Event (Event)
 data Ruby_
 
 ruby
-  :: Event (Attribute Ruby_)
+  :: Array (Event (Attribute Ruby_))
   -> Array Nut
   -> Nut
 ruby = DC.elementify2 "ruby"
