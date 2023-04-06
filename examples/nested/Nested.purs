@@ -9,13 +9,11 @@ import Data.FastVect.FastVect as V
 import Data.Int (floor)
 import Data.Monoid.Additive (Additive(..))
 import Data.Tuple (Tuple(..))
-import Data.Tuple.Nested ((/\))
 import Deku.Attribute ((:=))
 import Deku.Control (portal, switcher)
 import Deku.Control as C
 import Deku.Core (Nut, dyn, fixed, insert_, remove, sendToTop)
 import Deku.DOM as D
-import Deku.Interpret (FFIDOMSnapshot)
 import Deku.Toplevel (runInBody)
 import Effect (Effect)
 import Effect.Random as Random
@@ -57,20 +55,20 @@ scene :: Array Nut
 scene =
   [ D.div_
       [ portal
-          ( D.video (pure (D.Controls := "true") <|> pure (D.Width := "250"))
+          ( D.video [pure (D.Controls := "true") <|> pure (D.Width := "250")]
               [ D.source
-                  ( pure
+                  [pure
                       ( D.Src :=
                           "https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.webm"
                       ) <|> pure (D.Xtype := "video/webm")
-                  )
+                  ]
                   []
               ]
               : V.empty
           )
           ( \i -> switcher
               ( \rgb -> D.div
-                  (pure (D.Style := "background-color: " <> rgb <> ";"))
+                  [pure (D.Style := "background-color: " <> rgb <> ";")]
                   [ V.index (Proxy :: _ 0) i ]
               )
               (sample_ rdm (interval 1000))
@@ -80,7 +78,7 @@ scene =
       ( \rgb ->
           pure
             ( insert_ $ D.div
-                (pure (D.Style := "background-color: " <> rgb <> ";"))
+                [pure (D.Style := "background-color: " <> rgb <> ";")]
                 [ C.text_ "hello" ]
             ) <|> delay 1432 (pure sendToTop) <|> delay 2000 (pure remove)
       )

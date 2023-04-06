@@ -10,7 +10,6 @@ import Deku.Control (text_)
 import Deku.Control as C
 import Deku.Core (Nut, bus, envy)
 import Deku.DOM as D
-import Deku.Interpret (FFIDOMSnapshot)
 import Deku.Pursx ((~~))
 import Deku.Pursx.Anonymous (px, xp)
 import Deku.Toplevel (runInBody)
@@ -37,9 +36,9 @@ myPxInception push aThirdThing = myPx ~~
   { btn: pure (D.Style := "background-color: rgb(133,151,217)")
   , somethingElse:
       ( D.button
-          ( pure $ D.OnClick :=
+          [pure $ D.OnClick :=
               (cb (const $ push false))
-          )
+          ]
           [ C.text_ "I was dynamically inserted " ]
       )
   , aThirdThing: aThirdThing
