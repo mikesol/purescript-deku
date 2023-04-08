@@ -92,11 +92,14 @@ elementify2 en attributes kids = Nut
   step1 :: forall payload. Array (NutF payload) -> NutF payload
   step1 arr = NutF
     ( Element'
-        ( elementify en (merge attributes)
+        ( elementify en (aa attributes)
             ( NutF (BCore.fixed (coerce arr))
             )
         )
     )
+  aa [] = empty
+  aa [ aaa ] = aaa
+  aa x = merge x
 
 elementify
   :: forall payload element
