@@ -9,7 +9,7 @@ import FRP.Event (Event)
 data FeBlend_
 
 feBlend
-  :: Event (Attribute FeBlend_)
+  :: Array (Event (Attribute FeBlend_))
   -> Array Nut
   -> Nut
 feBlend = DC.elementify2 "feBlend"

@@ -9,7 +9,7 @@ import FRP.Event (Event)
 data Circle_
 
 circle
-  :: Event (Attribute Circle_)
+  :: Array (Event (Attribute Circle_))
   -> Array Nut
   -> Nut
 circle = DC.elementify2 "circle"

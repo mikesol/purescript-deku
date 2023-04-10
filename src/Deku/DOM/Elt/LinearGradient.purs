@@ -9,7 +9,7 @@ import FRP.Event (Event)
 data LinearGradient_
 
 linearGradient
-  :: Event (Attribute LinearGradient_)
+  :: Array (Event (Attribute LinearGradient_))
   -> Array Nut
   -> Nut
 linearGradient = DC.elementify2 "linearGradient"

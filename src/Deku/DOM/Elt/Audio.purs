@@ -9,7 +9,7 @@ import FRP.Event (Event)
 data Audio_
 
 audio
-  :: Event (Attribute Audio_)
+  :: Array (Event (Attribute Audio_))
   -> Array Nut
   -> Nut
 audio = DC.elementify2 "audio"

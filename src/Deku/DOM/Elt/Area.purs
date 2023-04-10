@@ -9,7 +9,7 @@ import FRP.Event (Event)
 data Area_
 
 area
-  :: Event (Attribute Area_)
+  :: Array (Event (Attribute Area_))
   -> Array Nut
   -> Nut
 area = DC.elementify2 "area"

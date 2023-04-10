@@ -9,7 +9,7 @@ import FRP.Event (Event)
 data Progress_
 
 progress
-  :: Event (Attribute Progress_)
+  :: Array (Event (Attribute Progress_))
   -> Array Nut
   -> Nut
 progress = DC.elementify2 "progress"

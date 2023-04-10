@@ -9,7 +9,7 @@ import FRP.Event (Event)
 data FeMorphology_
 
 feMorphology
-  :: Event (Attribute FeMorphology_)
+  :: Array (Event (Attribute FeMorphology_))
   -> Array Nut
   -> Nut
 feMorphology = DC.elementify2 "feMorphology"

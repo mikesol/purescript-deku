@@ -9,7 +9,7 @@ import FRP.Event (Event)
 data FeColorMatrix_
 
 feColorMatrix
-  :: Event (Attribute FeColorMatrix_)
+  :: Array (Event (Attribute FeColorMatrix_))
   -> Array Nut
   -> Nut
 feColorMatrix = DC.elementify2 "feColorMatrix"

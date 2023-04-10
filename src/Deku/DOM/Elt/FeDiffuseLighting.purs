@@ -9,7 +9,7 @@ import FRP.Event (Event)
 data FeDiffuseLighting_
 
 feDiffuseLighting
-  :: Event (Attribute FeDiffuseLighting_)
+  :: Array (Event (Attribute FeDiffuseLighting_))
   -> Array Nut
   -> Nut
 feDiffuseLighting = DC.elementify2 "feDiffuseLighting"

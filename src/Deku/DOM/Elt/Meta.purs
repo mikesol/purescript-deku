@@ -9,7 +9,7 @@ import FRP.Event (Event)
 data Meta_
 
 meta
-  :: Event (Attribute Meta_)
+  :: Array (Event (Attribute Meta_))
   -> Array Nut
   -> Nut
 meta = DC.elementify2 "meta"

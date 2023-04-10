@@ -38,7 +38,7 @@ import Data.Tuple (snd)
 import Data.Tuple.Nested ((/\))
 import Deku.Attribute (Attribute, AttributeValue(..), unsafeUnAttribute)
 import Deku.Core (DOMInterpret(..), Node(..), Nut(..), NutF(..), dyn, envy, insert_, remove, unsafeSetPos)
-import FRP.Event (Event, Subscriber(..), merge, keepLatest, makeLemmingEventO, mapAccum, memoize)
+import FRP.Event (Event, Subscriber(..), keepLatest, makeLemmingEventO, mapAccum, memoize, merge)
 import Prim.Int (class Compare)
 import Prim.Ordering (GT)
 import Record (union)
@@ -83,7 +83,7 @@ unsafeSetAttribute (DOMInterpret { setProp, setCb, unsetAttribute }) id atts =
 elementify2
   :: forall element
    . String
-  -> Event (Attribute element)
+  -> Array (Event (Attribute element))
   -> Array Nut
   -> Nut
 elementify2 en attributes kids = Nut
@@ -92,11 +92,14 @@ elementify2 en attributes kids = Nut
   step1 :: forall payload. Array (NutF payload) -> NutF payload
   step1 arr = NutF
     ( Element'
-        ( elementify en attributes
+        ( elementify en (aa attributes)
             ( NutF (BCore.fixed (coerce arr))
             )
         )
     )
+  aa [] = empty
+  aa [ aaa ] = aaa
+  aa x = merge x
 
 elementify
   :: forall payload element

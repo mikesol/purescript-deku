@@ -9,7 +9,7 @@ import FRP.Event (Event)
 data Stop_
 
 stop
-  :: Event (Attribute Stop_)
+  :: Array (Event (Attribute Stop_))
   -> Array Nut
   -> Nut
 stop = DC.elementify2 "stop"

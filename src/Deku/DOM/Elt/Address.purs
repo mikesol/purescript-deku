@@ -9,7 +9,7 @@ import FRP.Event (Event)
 data Address_
 
 address
-  :: Event (Attribute Address_)
+  :: Array (Event (Attribute Address_))
   -> Array Nut
   -> Nut
 address = DC.elementify2 "address"

@@ -17,6 +17,7 @@ A PureScript web framework for apps that need to be fast.
 Indexed documentation for Deku is published on [Pursuit](https://pursuit.purescript.org/packages/purescript-deku). Deku's structure is currently highly decentralized, so it can be tough to know where to look. Here's a small Deku app that acts as a legend for the Pursuit docs.
 
 ```purescript
+
 main :: Effect Unit
 main =
   -- `Deku.Toplevel` contains runInBody
@@ -36,24 +37,22 @@ main =
       -- `Deku.DOM`, often imported as `D`, contains all DOM elements,
       -- attributes, and event handlers
       D.div
-        ( oneOf
-            [
-              -- `Deku.Listeners` contains helper functions for various common
-              -- listeners like `click` and `keyUp`
-              click $ counter <#> add 1 >>> setCounter
-            -- `Deku.Attributes` contains helper functions for various common
-            -- attributes like `style` and `klass` (an alias for `class`)
-            , klass_ "color: crimson;"
-            -- `Deku.CSS` contains `render`, which allows you to take `CSS` from
-            -- `purescript-css` and use it in a Deku application
-            , style_ $ render do
-               color (rgb 42 142 242)
-               fontWeight bold
-            -- `Deku.Attribute` contains constructors for
-            -- uncommon and ad hoc `x-` attributes
-            , pure (xdata "my-attr" "my-val")
-            ]
-        )
+          [
+            -- `Deku.Listeners` contains helper functions for various common
+            -- listeners like `click` and `keyUp`
+            click $ counter <#> add 1 >>> setCounter
+          -- `Deku.Attributes` contains helper functions for various common
+          -- attributes like `style` and `klass` (an alias for `class`)
+          , klass_ "color: crimson;"
+          -- `Deku.CSS` contains `render`, which allows you to take `CSS` from
+          -- `purescript-css` and use it in a Deku application
+          , style_ $ render do
+              color (rgb 42 142 242)
+              fontWeight bold
+          -- `Deku.Attribute` contains constructors for
+          -- uncommon and ad hoc `x-` attributes
+          , pure (xdata "my-attr" "my-val")
+          ]
         [
           -- `Deku.Control` contains all non-element buiding blocks
           -- for applications, including `text` and `<#~>`, which

@@ -9,7 +9,7 @@ import FRP.Event (Event)
 data FeTurbulence_
 
 feTurbulence
-  :: Event (Attribute FeTurbulence_)
+  :: Array (Event (Attribute FeTurbulence_))
   -> Array Nut
   -> Nut
 feTurbulence = DC.elementify2 "feTurbulence"

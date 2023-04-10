@@ -9,7 +9,7 @@ import FRP.Event (Event)
 data Noscript_
 
 noscript
-  :: Event (Attribute Noscript_)
+  :: Array (Event (Attribute Noscript_))
   -> Array Nut
   -> Nut
 noscript = DC.elementify2 "noscript"

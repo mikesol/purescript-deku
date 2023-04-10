@@ -9,7 +9,7 @@ import FRP.Event (Event)
 data Polyline_
 
 polyline
-  :: Event (Attribute Polyline_)
+  :: Array (Event (Attribute Polyline_))
   -> Array Nut
   -> Nut
 polyline = DC.elementify2 "polyline"

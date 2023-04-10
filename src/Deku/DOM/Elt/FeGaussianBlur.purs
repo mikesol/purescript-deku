@@ -9,7 +9,7 @@ import FRP.Event (Event)
 data FeGaussianBlur_
 
 feGaussianBlur
-  :: Event (Attribute FeGaussianBlur_)
+  :: Array (Event (Attribute FeGaussianBlur_))
   -> Array Nut
   -> Nut
 feGaussianBlur = DC.elementify2 "feGaussianBlur"

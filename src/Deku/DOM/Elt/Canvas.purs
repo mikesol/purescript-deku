@@ -9,7 +9,7 @@ import FRP.Event (Event)
 data Canvas_
 
 canvas
-  :: Event (Attribute Canvas_)
+  :: Array (Event (Attribute Canvas_))
   -> Array Nut
   -> Nut
 canvas = DC.elementify2 "canvas"

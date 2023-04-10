@@ -9,7 +9,7 @@ import FRP.Event (Event)
 data View_
 
 view
-  :: Event (Attribute View_)
+  :: Array (Event (Attribute View_))
   -> Array Nut
   -> Nut
 view = DC.elementify2 "view"

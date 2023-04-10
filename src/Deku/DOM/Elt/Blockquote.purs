@@ -9,7 +9,7 @@ import FRP.Event (Event)
 data Blockquote_
 
 blockquote
-  :: Event (Attribute Blockquote_)
+  :: Array (Event (Attribute Blockquote_))
   -> Array Nut
   -> Nut
 blockquote = DC.elementify2 "blockquote"

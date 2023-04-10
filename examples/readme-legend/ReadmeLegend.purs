@@ -3,29 +3,19 @@ module Deku.Example.ReadmeLegend where
 import Prelude
 
 import CSS (bold, color, fontWeight, rgb)
-import Control.Alt (alt)
-import Control.Plus (empty)
-import Data.Foldable (oneOf, oneOfMap)
-import Data.Maybe (Maybe(..))
-import Data.Profunctor (lcmap)
-import Data.Tuple (Tuple(..))
 import Data.Tuple.Nested ((/\))
-import Deku.Attribute (cb, xdata, (:=))
+import Deku.Attribute (xdata)
 import Deku.Attributes (klass_, style_)
 import Deku.CSS (render)
-import Deku.Control (text, text_)
-import Deku.Control as C
-import Deku.Core (Nut, Nut, bus)
-import Deku.Core as CC
+import Deku.Control (text)
+import Deku.Core (Nut)
 import Deku.DOM as D
 import Deku.Do as Deku
 import Deku.Hooks (useState)
-import Deku.Interpret (FFIDOMSnapshot)
 import Deku.Listeners (click)
 import Deku.Pursx ((~~))
 import Deku.Toplevel (runInBody)
 import Effect (Effect)
-import FRP.Event (Event, filterMap, keepLatest, mapAccum)
 import Type.Proxy (Proxy(..))
 
 main :: Effect Unit
@@ -47,24 +37,22 @@ main =
       -- `Deku.DOM`, often imported as `D`, contains all DOM elements,
       -- attributes, and event handlers
       D.div
-        ( oneOf
-            [
-              -- `Deku.Listeners` contains helper functions for various common
-              -- listeners like `click` and `keyUp`
-              click $ counter <#> add 1 >>> setCounter
-            -- `Deku.Attributes` contains helper functions for various common
-            -- attributes like `style` and `klass` (an alias for `class`)
-            , klass_ "color: crimson;"
-            -- `Deku.CSS` contains `render`, which allows you to take `CSS` from
-            -- `purescript-css` and use it in a Deku application
-            , style_ $ render do
-               color (rgb 42 142 242)
-               fontWeight bold
-            -- `Deku.Attribute` contains constructors for
-            -- uncommon and ad hoc `x-` attributes
-            , pure (xdata "my-attr" "my-val")
-            ]
-        )
+          [
+            -- `Deku.Listeners` contains helper functions for various common
+            -- listeners like `click` and `keyUp`
+            click $ counter <#> add 1 >>> setCounter
+          -- `Deku.Attributes` contains helper functions for various common
+          -- attributes like `style` and `klass` (an alias for `class`)
+          , klass_ "color: crimson;"
+          -- `Deku.CSS` contains `render`, which allows you to take `CSS` from
+          -- `purescript-css` and use it in a Deku application
+          , style_ $ render do
+              color (rgb 42 142 242)
+              fontWeight bold
+          -- `Deku.Attribute` contains constructors for
+          -- uncommon and ad hoc `x-` attributes
+          , pure (xdata "my-attr" "my-val")
+          ]
         [
           -- `Deku.Control` contains all non-element buiding blocks
           -- for applications, including `text` and `<#~>`, which

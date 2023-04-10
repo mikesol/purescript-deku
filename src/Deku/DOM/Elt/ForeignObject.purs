@@ -9,7 +9,7 @@ import FRP.Event (Event)
 data ForeignObject_
 
 foreignObject
-  :: Event (Attribute ForeignObject_)
+  :: Array (Event (Attribute ForeignObject_))
   -> Array Nut
   -> Nut
 foreignObject = DC.elementify2 "foreignObject"

@@ -9,7 +9,7 @@ import FRP.Event (Event)
 data Meter_
 
 meter
-  :: Event (Attribute Meter_)
+  :: Array (Event (Attribute Meter_))
   -> Array Nut
   -> Nut
 meter = DC.elementify2 "meter"

@@ -7,7 +7,6 @@
 		"postinstall": "node node_modules/puppeteer/install.js",
 		"clean": "rm -rf .spago output node_modules *.lock",
 		"build": "spago build",
-		"build-docs": "npx spago -x examples.dhall bundle-app --main Deku.Example.Docs.Static.Build --to examples/docs/Static/make.js && npx spago -x examples.dhall bundle-app --main Deku.Example.Docs.Static.Live --to examples/docs/Static/bundle.js --minify && cd examples/docs/Static && node make.js > index.html && cd ../../..",
 		"build:examples": "spago -x examples.dhall build",
 		"build:test": "spago -x test/test.dhall build",
 		"snapshot": "npm run bundle:performance && spago -x test/test.dhall run --main Performance.Snapshot.Write",

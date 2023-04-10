@@ -9,7 +9,7 @@ import FRP.Event (Event)
 data Cite_
 
 cite
-  :: Event (Attribute Cite_)
+  :: Array (Event (Attribute Cite_))
   -> Array Nut
   -> Nut
 cite = DC.elementify2 "cite"

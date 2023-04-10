@@ -29,13 +29,13 @@ main = runInBody
                   $ portal
                       ( map
                           ( \i -> D.video
-                              ( oneOfMap pure
+                              [ oneOfMap pure
                                   [ D.Controls := "true", D.Width := "250" ]
-                              )
+                              ]
                               [ D.source
-                                  ( oneOfMap pure
+                                  [oneOfMap pure
                                       [ D.Src := i, D.Xtype := "video/mp4" ]
-                                  )
+                                  ]
                                   []
                               ]
                           )
@@ -54,7 +54,7 @@ main = runInBody
                             <<< ev
                         D.div_
                           [ D.button
-                              (pure $ D.OnClick := cb (const $ push unit))
+                              [pure $ D.OnClick := cb (const $ push unit)]
                               [ text_ "Switch videos" ]
                           , D.div_
                               [ flips true, flips false ]
@@ -70,13 +70,13 @@ main = runInBody
                   $ portal
                       ( map
                           ( \i -> D.video
-                              ( oneOfMap pure
+                              [oneOfMap pure
                                   [ D.Controls := "true", D.Width := "250" ]
-                              )
+                              ]
                               [ D.source
-                                  ( oneOfMap pure
+                                  [oneOfMap pure
                                       [ D.Src := i, D.Xtype := "video/mp4" ]
-                                  )
+                                  ]
                                   []
                               ]
                           )
@@ -95,7 +95,7 @@ main = runInBody
                             <<< ev
                         D.div_
                           [ D.button
-                              (pure $ D.OnClick := cb (const $ push unit))
+                              [pure $ D.OnClick := cb (const $ push unit)]
                               [ text_ "Toggle videos" ]
                           , flips true
                           ]
@@ -110,13 +110,13 @@ main = runInBody
                   $ portal
                       ( map
                           ( \i -> D.video
-                              ( oneOfMap pure
+                              [oneOfMap pure
                                   [ D.Controls := "true", D.Width := "250" ]
-                              )
+                              ]
                               [ D.source
-                                  ( oneOfMap pure
+                                  [oneOfMap pure
                                       [ D.Src := i, D.Xtype := "video/mp4" ]
-                                  )
+                                  ]
                                   []
                               ]
                           )
@@ -133,7 +133,7 @@ main = runInBody
                             <<< ev
                         D.div_
                           [ D.button
-                              (pure $ D.OnClick := cb (const $ push unit))
+                              [pure $ D.OnClick := cb (const $ push unit)]
                               [ text_ "Toggle videos" ]
                           , flips true
                           ]

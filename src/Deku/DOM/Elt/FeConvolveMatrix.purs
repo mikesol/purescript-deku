@@ -9,7 +9,7 @@ import FRP.Event (Event)
 data FeConvolveMatrix_
 
 feConvolveMatrix
-  :: Event (Attribute FeConvolveMatrix_)
+  :: Array (Event (Attribute FeConvolveMatrix_))
   -> Array Nut
   -> Nut
 feConvolveMatrix = DC.elementify2 "feConvolveMatrix"

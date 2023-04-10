@@ -29,7 +29,7 @@ scene = CC.envy $ bus $ \push -> lcmap (alt (pure true)) \event -> do
         [ D.div empty [ C.text (pure "Stops after 4 clicks") ]
         , C.text (event <#> if _ then "click " else "kcilc ")
         , D.button
-            ( counter event
+            [counter event
                 # filterMap
                     (\(Tuple x y) -> if y < 4 then Just x else Nothing)
                 # map
@@ -42,10 +42,10 @@ scene = CC.envy $ bus $ \push -> lcmap (alt (pure true)) \event -> do
 
                     )
                 # keepLatest
-            )
+            ]
             [ C.text_ "me" ]
         ]
-    , D.input (pure $ D.Autofocus := "") []
+    , D.input [pure $ D.Autofocus := ""] []
     ]
 
 main :: Effect Unit

@@ -9,7 +9,7 @@ import FRP.Event (Event)
 data Bdo_
 
 bdo
-  :: Event (Attribute Bdo_)
+  :: Array (Event (Attribute Bdo_))
   -> Array Nut
   -> Nut
 bdo = DC.elementify2 "bdo"

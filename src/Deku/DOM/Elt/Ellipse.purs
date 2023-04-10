@@ -9,7 +9,7 @@ import FRP.Event (Event)
 data Ellipse_
 
 ellipse
-  :: Event (Attribute Ellipse_)
+  :: Array (Event (Attribute Ellipse_))
   -> Array Nut
   -> Nut
 ellipse = DC.elementify2 "ellipse"

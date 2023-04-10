@@ -9,7 +9,7 @@ import FRP.Event (Event)
 data Switch_
 
 switch
-  :: Event (Attribute Switch_)
+  :: Array (Event (Attribute Switch_))
   -> Array Nut
   -> Nut
 switch = DC.elementify2 "switch"

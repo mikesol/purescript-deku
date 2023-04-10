@@ -9,7 +9,7 @@ import FRP.Event (Event)
 data Center_
 
 center
-  :: Event (Attribute Center_)
+  :: Array (Event (Attribute Center_))
   -> Array Nut
   -> Nut
 center = DC.elementify2 "center"

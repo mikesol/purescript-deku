@@ -9,7 +9,7 @@ import FRP.Event (Event)
 data Footer_
 
 footer
-  :: Event (Attribute Footer_)
+  :: Array (Event (Attribute Footer_))
   -> Array Nut
   -> Nut
 footer = DC.elementify2 "footer"

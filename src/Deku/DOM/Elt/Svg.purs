@@ -9,7 +9,7 @@ import FRP.Event (Event)
 data Svg_
 
 svg
-  :: Event (Attribute Svg_)
+  :: Array (Event (Attribute Svg_))
   -> Array Nut
   -> Nut
 svg = DC.elementify2 "svg"

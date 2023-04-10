@@ -9,7 +9,7 @@ import FRP.Event (Event)
 data FeComposite_
 
 feComposite
-  :: Event (Attribute FeComposite_)
+  :: Array (Event (Attribute FeComposite_))
   -> Array Nut
   -> Nut
 feComposite = DC.elementify2 "feComposite"

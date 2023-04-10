@@ -9,7 +9,7 @@ import FRP.Event (Event)
 data Thead_
 
 thead
-  :: Event (Attribute Thead_)
+  :: Array (Event (Attribute Thead_))
   -> Array Nut
   -> Nut
 thead = DC.elementify2 "thead"

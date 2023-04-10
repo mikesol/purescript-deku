@@ -9,7 +9,7 @@ import FRP.Event (Event)
 data TextPath_
 
 textPath
-  :: Event (Attribute TextPath_)
+  :: Array (Event (Attribute TextPath_))
   -> Array Nut
   -> Nut
 textPath = DC.elementify2 "textPath"

@@ -9,7 +9,7 @@ import FRP.Event (Event)
 data Filter_
 
 filter
-  :: Event (Attribute Filter_)
+  :: Array (Event (Attribute Filter_))
   -> Array Nut
   -> Nut
 filter = DC.elementify2 "filter"

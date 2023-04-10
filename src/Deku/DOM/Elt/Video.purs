@@ -9,7 +9,7 @@ import FRP.Event (Event)
 data Video_
 
 video
-  :: Event (Attribute Video_)
+  :: Array (Event (Attribute Video_))
   -> Array Nut
   -> Nut
 video = DC.elementify2 "video"

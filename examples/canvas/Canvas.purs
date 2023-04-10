@@ -3,7 +3,7 @@ module Deku.Example.SVG where
 import Prelude
 
 import Control.Monad.ST.Class (liftST)
-import Data.Foldable (oneOf, traverse_)
+import Data.Foldable (traverse_)
 import Deku.Attribute ((!:=))
 import Deku.Core (Nut)
 import Deku.DOM as D
@@ -17,36 +17,33 @@ import Web.HTML.HTMLCanvasElement as HTMLCanvasElement
 
 mySVG :: Nut
 mySVG = D.div_
-  [ D.svg (oneOf [ D.Height !:= "100", D.Width !:= "100" ])
+  [ D.svg [ D.Height !:= "100", D.Width !:= "100" ]
       [ D.circle
-          ( oneOf
-              [ D.Cx !:= "50"
-              , D.Cy !:= "50"
-              , D.R !:= "40"
-              , D.Stroke !:= "black"
-              , D.StrokeWidth !:= "3"
-              , D.Fill !:= "red"
-              ]
-          )
+          [ D.Cx !:= "50"
+          , D.Cy !:= "50"
+          , D.R !:= "40"
+          , D.Stroke !:= "black"
+          , D.StrokeWidth !:= "3"
+          , D.Fill !:= "red"
+          ]
+      
           []
       ]
   ]
 
 myCanvas :: Nut
 myCanvas = D.canvas
-  ( oneOf
-      [ D.Width !:= "400px"
-      , D.Height !:= "400px"
-      , D.Self !:= HTMLCanvasElement.fromElement >>> traverse_ \e -> do
-          ctx <- getContext2D
-            ( ( unsafeCoerce
-                  :: HTMLCanvasElement.HTMLCanvasElement -> CanvasElement
-              ) e
-            )
-          setFillStyle ctx "blue"
-          fillRect ctx { height: 100.0, width: 100.0, x: 0.0, y: 0.0 }
-      ]
-  )
+  [ D.Width !:= "400px"
+  , D.Height !:= "400px"
+  , D.Self !:= HTMLCanvasElement.fromElement >>> traverse_ \e -> do
+      ctx <- getContext2D
+        ( ( unsafeCoerce
+              :: HTMLCanvasElement.HTMLCanvasElement -> CanvasElement
+          ) e
+        )
+      setFillStyle ctx "blue"
+      fillRect ctx { height: 100.0, width: 100.0, x: 0.0, y: 0.0 }
+  ]
   []
 
 scene :: Nut

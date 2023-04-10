@@ -9,7 +9,7 @@ import FRP.Event (Event)
 data Span_
 
 span
-  :: Event (Attribute Span_)
+  :: Array (Event (Attribute Span_))
   -> Array Nut
   -> Nut
 span = DC.elementify2 "span"

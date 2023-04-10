@@ -9,7 +9,7 @@ import FRP.Event (Event)
 data Path_
 
 path
-  :: Event (Attribute Path_)
+  :: Array (Event (Attribute Path_))
   -> Array Nut
   -> Nut
 path = DC.elementify2 "path"

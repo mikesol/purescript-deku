@@ -9,7 +9,7 @@ import FRP.Event (Event)
 data Acronym_
 
 acronym
-  :: Event (Attribute Acronym_)
+  :: Array (Event (Attribute Acronym_))
   -> Array Nut
   -> Nut
 acronym = DC.elementify2 "acronym"

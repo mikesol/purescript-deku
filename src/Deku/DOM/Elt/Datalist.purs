@@ -9,7 +9,7 @@ import FRP.Event (Event)
 data Datalist_
 
 datalist
-  :: Event (Attribute Datalist_)
+  :: Array (Event (Attribute Datalist_))
   -> Array Nut
   -> Nut
 datalist = DC.elementify2 "datalist"

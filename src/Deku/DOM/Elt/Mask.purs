@@ -9,7 +9,7 @@ import FRP.Event (Event)
 data Mask_
 
 mask
-  :: Event (Attribute Mask_)
+  :: Array (Event (Attribute Mask_))
   -> Array Nut
   -> Nut
 mask = DC.elementify2 "mask"

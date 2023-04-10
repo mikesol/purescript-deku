@@ -9,7 +9,7 @@ import FRP.Event (Event)
 data FeTile_
 
 feTile
-  :: Event (Attribute FeTile_)
+  :: Array (Event (Attribute FeTile_))
   -> Array Nut
   -> Nut
 feTile = DC.elementify2 "feTile"

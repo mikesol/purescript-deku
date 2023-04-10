@@ -9,7 +9,7 @@ import FRP.Event (Event)
 data Frame_
 
 frame
-  :: Event (Attribute Frame_)
+  :: Array (Event (Attribute Frame_))
   -> Array Nut
   -> Nut
 frame = DC.elementify2 "frame"
