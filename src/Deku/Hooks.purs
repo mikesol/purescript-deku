@@ -36,6 +36,7 @@ import Control.Alt ((<|>))
 import Control.Monad.ST.Class (liftST)
 import Control.Monad.ST.Internal as STRef
 import Control.Monad.ST.Uncurried (mkSTFn1, mkSTFn2, runSTFn1, runSTFn2)
+import Data.Array as Array
 import Data.Either (Either(..))
 import Data.Foldable (for_)
 import Data.Maybe (Maybe(..), fromMaybe)
@@ -412,7 +413,7 @@ useAffOrDie e f1 f2 = Nut ee
         Right a -> do
           r' <- launchAff do
             f1 a
-          liftST $ void $ STRef.modify ([ r' ] <> _) r
+          liftST $ void $ STRef.modify (Array.cons r') r
         Left err -> do
           arr <- liftST $ STRef.read r
           liftST $ void $ STRef.write [] r
