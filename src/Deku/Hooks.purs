@@ -20,6 +20,9 @@ module Deku.Hooks
   , useEffect
   , useAff
   , useAffWithCancellation
+  , useAffSequentially
+  , useAffSequentiallyOrDie
+  , useAffOrDie
   , useHot
   , useHot'
   , useDyn
@@ -33,14 +36,15 @@ import Control.Alt ((<|>))
 import Control.Monad.ST.Class (liftST)
 import Control.Monad.ST.Internal as STRef
 import Control.Monad.ST.Uncurried (mkSTFn1, mkSTFn2, runSTFn1, runSTFn2)
+import Data.Either (Either(..))
 import Data.Foldable (for_)
 import Data.Maybe (Maybe(..), fromMaybe)
 import Data.Tuple (curry)
 import Data.Tuple.Nested (type (/\), (/\))
 import Deku.Core (Nut(..), NutF(..), Node, Child, bus, bussedUncurried, insert, remove, sendToPos)
 import Deku.Do as Deku
-import Effect (Effect)
-import Effect.Aff (Aff, error, killFiber, launchAff, launchAff_)
+import Effect (Effect, foreachE)
+import Effect.Aff (Aff, Error, error, joinFiber, killFiber, launchAff, launchAff_)
 import Effect.Uncurried (mkEffectFn1, runEffectFn1, runEffectFn2)
 import FRP.Event (Event, Subscriber(..), createPure, keepLatest, mailboxed, makeEventO, makeLemmingEvent, makeLemmingEventO, memoize, subscribeO)
 import Safe.Coerce (coerce)
@@ -314,3 +318,103 @@ useAffWithCancellation e f1 f2 = Nut ee
           killFiber (error "useAffWithCancellation") r'
           f1 a
         liftST $ void $ STRef.write r'' r
+
+-- | A hook that runs an arbitrary aff when an event's value changes, only running after all previous computations from this hook done.
+useAffSequentially
+  :: forall a
+   . Event a
+  -> (a -> Aff Unit)
+  -> (Unit -> Nut)
+  -> Nut
+useAffSequentially e f1 f2 = Nut ee
+  where
+  ee :: forall payload. NutF payload
+  ee = NutF (envy eeeee)
+
+  eeeee :: forall payload. Event (Entity Int (Node payload))
+  eeeee = map (\(NutF d) -> d) eeee
+
+  eeee :: forall payload. Event (NutF payload)
+  eeee = map (\(Nut d) -> d) eee
+
+  eee :: Event Nut
+  eee =
+    makeEventO $ mkEffectFn1 \k -> do
+      r <- liftST $ STRef.new (pure unit)
+      runEffectFn1 k (f2 unit)
+      runEffectFn2 subscribeO e $ mkEffectFn1 \a -> do
+        r' <- liftST $ STRef.read r
+        r'' <- launchAff do
+          _ <- joinFiber r'
+          f1 a
+        liftST $ void $ STRef.write r'' r
+
+-- | A hook that runs an arbitrary aff when an event's value changes, only running after all previous computations from this hook done. A `Left Error` value kills the sequence, allowing you to start fresh if desired.
+useAffSequentiallyOrDie
+  :: forall a
+   . Event (Either Error a)
+  -> (a -> Aff Unit)
+  -> (Unit -> Nut)
+  -> Nut
+useAffSequentiallyOrDie e f1 f2 = Nut ee
+  where
+  ee :: forall payload. NutF payload
+  ee = NutF (envy eeeee)
+
+  eeeee :: forall payload. Event (Entity Int (Node payload))
+  eeeee = map (\(NutF d) -> d) eeee
+
+  eeee :: forall payload. Event (NutF payload)
+  eeee = map (\(Nut d) -> d) eee
+
+  eee :: Event Nut
+  eee =
+    makeEventO $ mkEffectFn1 \k -> do
+      r <- liftST $ STRef.new (pure unit)
+      runEffectFn1 k (f2 unit)
+      runEffectFn2 subscribeO e $ mkEffectFn1 $ case _ of
+        Right a -> do
+          r' <- liftST $ STRef.read r
+          r'' <- launchAff do
+            _ <- joinFiber r'
+            f1 a
+          liftST $ void $ STRef.write r'' r
+        Left err -> do
+          r' <- liftST $ STRef.read r
+          _ <- launchAff do
+            killFiber err r'
+          liftST $ void $ STRef.write (pure unit) r
+
+-- | A hook that runs an arbitrary aff when an event's value changes. A `Left Error` value kills the sequence, allowing you to start fresh if desired.
+useAffOrDie
+  :: forall a
+   . Event (Either Error a)
+  -> (a -> Aff Unit)
+  -> (Unit -> Nut)
+  -> Nut
+useAffOrDie e f1 f2 = Nut ee
+  where
+  ee :: forall payload. NutF payload
+  ee = NutF (envy eeeee)
+
+  eeeee :: forall payload. Event (Entity Int (Node payload))
+  eeeee = map (\(NutF d) -> d) eeee
+
+  eeee :: forall payload. Event (NutF payload)
+  eeee = map (\(Nut d) -> d) eee
+
+  eee :: Event Nut
+  eee =
+    makeEventO $ mkEffectFn1 \k -> do
+      r <- liftST $ STRef.new []
+      runEffectFn1 k (f2 unit)
+      runEffectFn2 subscribeO e $ mkEffectFn1 $ case _ of
+        Right a -> do
+          r' <- launchAff do
+            f1 a
+          liftST $ void $ STRef.modify ([ r' ] <> _) r
+        Left err -> do
+          arr <- liftST $ STRef.read r
+          liftST $ void $ STRef.write [] r
+          foreachE arr \r' -> launchAff_ do
+            killFiber err r'
