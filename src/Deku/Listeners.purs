@@ -138,47 +138,47 @@ keyEvent' listener = map \f -> listener := cb \e -> for_ (fromEvent e) f
 
 -- | Sets a `keyup` listener for an element using a constant listener.
 keyUp_
-  :: forall eleemnt
+  :: forall element
    . (KeyboardEvent -> Effect Unit)
-  -> Event (Attribute eleemnt)
+  -> Event (Attribute element)
 keyUp_ = keyUp <<< pure
 
 -- | Sets a `keyup` listener for an element using an event emitting listeners.
 -- | Each `keyup` listener emitted replaces the previous `keyup` listener.
 keyUp
-  :: forall eleemnt
+  :: forall element
    . Event (KeyboardEvent -> Effect Unit)
-  -> Event (Attribute eleemnt)
+  -> Event (Attribute element)
 keyUp = keyEvent' D.OnKeyup
 
 -- | Sets a `keydown` listener for an element using a constant listener.
 keyDown_
-  :: forall eleemnt
+  :: forall element
    . (KeyboardEvent -> Effect Unit)
-  -> Event (Attribute eleemnt)
+  -> Event (Attribute element)
 keyDown_ = keyDown <<< pure
 
 -- | Sets a `keydown` listener for an element using an event emitting listeners.
 -- | Each `keydown` listener emitted replaces the previous `keydown` listener.
 keyDown
-  :: forall eleemnt
+  :: forall element
    . Event (KeyboardEvent -> Effect Unit)
-  -> Event (Attribute eleemnt)
+  -> Event (Attribute element)
 keyDown = keyEvent' D.OnKeydown
 
 -- | Sets a `keypress` listener for an element using a constant listener.
 keyPress_
-  :: forall eleemnt
+  :: forall element
    . (KeyboardEvent -> Effect Unit)
-  -> Event (Attribute eleemnt)
+  -> Event (Attribute element)
 keyPress_ = keyPress <<< pure
 
 -- | Sets a `keypress` listener for an element using an event emitting listeners.
 -- | Each `keypress` listener emitted replaces the previous `keypress` listener.
 keyPress
-  :: forall eleemnt
+  :: forall element
    . Event (KeyboardEvent -> Effect Unit)
-  -> Event (Attribute eleemnt)
+  -> Event (Attribute element)
 keyPress = keyEvent' D.OnKeypress
 
 -- | Sets a listener that injects a primitive DOM element into a closed scope immediately after element creation.
