@@ -646,7 +646,7 @@ module Deku.DOM
   , unsafeCustomElement
   ) where
 
-import Deku.Attribute (class Attr, Attribute, Cb(..), cb', unsafeAttribute)
+import Deku.Attribute (class Attr, attr, Attribute, Cb(..), cb', unsafeAttribute)
 import Deku.Control (elementify2)
 import Deku.Core (Nut)
 -- import Deku.DOM.Attr.Accept (Accept(..))
@@ -1906,6 +1906,9 @@ data SelfT = SelfT
 instance Attr anything SelfT (DOM.Element -> Effect Unit) where
   attr SelfT value = unsafeAttribute
     { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
+
+instance Attr anything SelfT (Effect Unit) where
+  attr SelfT value = attr SelfT (\(_ :: DOM.Element) -> value)
 
 instance Attr A_ SelfT (HTMLAnchorElement.HTMLAnchorElement -> Effect Unit) where
   attr SelfT value = unsafeAttribute
