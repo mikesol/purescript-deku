@@ -28,8 +28,6 @@ module Deku.Hooks
   , useDyn
   , useDynAtBeginning
   , useDynAtEnd
-  , Dyn(..)
-  , (//\\)
   ) where
 
 import Prelude
@@ -43,7 +41,7 @@ import Data.Array as Array
 import Data.Either (Either(..))
 import Data.Foldable (for_)
 import Data.Maybe (Maybe(..), fromMaybe)
-import Data.Tuple (curry)
+import Data.Tuple (Tuple(..), curry)
 import Data.Tuple.Nested (type (/\), (/\))
 import Deku.Core (Nut(..), NutF(..), Node, Child, bus, bussedUncurried, insert, remove, sendToPos, dyn)
 import Deku.Do as Deku
@@ -162,20 +160,16 @@ useMailboxed f = bussedUncurried fx
     ee :: Event Nut
     ee = mailboxed b \c -> f (a /\ c)
 
-data Dyn a = Dyn (a -> Int) a
-
-infixl 4 Dyn as //\\
-
 useDyn
   :: forall value
-   . Event (Dyn value)
+   . Event (Tuple Int value)
   -> ( { value :: value, remove :: Effect Unit, sendTo :: Int -> Effect Unit }
        -> Nut
      )
   -> Nut
 useDyn e f = dyn $ map
-  ( \(Dyn fi value) -> Deku.do
-      { remove, sendTo } <- useDyn' (fi value)
+  ( \(Tuple pos value) -> Deku.do
+      { remove, sendTo } <- useDyn' pos
       f { remove, sendTo, value }
   )
   e
@@ -187,7 +181,7 @@ useDynAtBeginning
        -> Nut
      )
   -> Nut
-useDynAtBeginning e = useDyn ((const 0 //\\ _) <$> e)
+useDynAtBeginning e = useDyn ((0 /\ _) <$> e)
 
 useDynAtEnd
   :: forall value
@@ -196,7 +190,7 @@ useDynAtEnd
        -> Nut
      )
   -> Nut
-useDynAtEnd e = useDyn (mapAccum (\a b -> (a + 1) /\ (const a //\\ b)) 0 e)
+useDynAtEnd e = useDyn (mapAccum (\a b -> (a + 1) /\ (a /\ b)) 0 e)
 
 useDyn'
   :: Int

@@ -17,7 +17,7 @@ import Deku.Control (blank, globalPortal1, portal1, switcher, text, text_, (<#~>
 import Deku.Core (Hook, Nut, fixed)
 import Deku.DOM as D
 import Deku.Do as Deku
-import Deku.Hooks (useDyn, useDynAtBeginning, useDynAtEnd, useEffect, useMemoized, useRef, useState, useState', (//\\))
+import Deku.Hooks (useDyn, useDynAtBeginning, useDynAtEnd, useEffect, useMemoized, useRef, useState, useState')
 import Deku.Lifecycle (onDidMount, onDismount, onWillMount)
 import Deku.Listeners (click, click_)
 import Deku.Pursx ((~~))
@@ -163,7 +163,7 @@ insertsAtCorrectPositions = D.div [ id_ "div0" ]
       -- are inserted in the scrambled order so that they read
       -- 0-1-2-3-4 from top to bottom
       { value: i } <- useDyn
-        ((identity //\\ _) <$> oneOfMap pure [ 3, 0, 4, 2, 1 ])
+        ((Tuple <*> identity) <$> oneOfMap pure [ 3, 0, 4, 2, 1 ])
       D.span [ id_ ("dyn" <> show i) ] [ text_ (show i) ]
   ]
 
