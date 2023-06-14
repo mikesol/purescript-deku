@@ -39,7 +39,32 @@ describe('deku', () => {
     expect($('#span9-3').text()).toBe('span9-3D');
   }));
 
-  doTest('has dyn appearing in the correct composable order', (f) => f(tests.dynAppearsCorrectly, (usingSSR) => {
+  doTest('has dyn appearing in the correct composable order when used at beginning', (f) => f(tests.dynAppearsCorrectlyAtBeginning, (usingSSR) => {
+    const $ = require('jquery');
+    // text, span, start beacon, end beacon, button
+    const base = usingSSR ? 6 : 5;
+    expect($('#div0').contents().length).toBe(base);
+    expect($($('#div0').contents()[0]).text()).toBe("foo");
+    expect($($('#div0').contents()[base - 4]).text()).toBe("bar");
+    expect($($('#div0').contents()[base - 1]).text()).toBe("incr");
+    $($('#div0').contents()[base - 1]).trigger("click");
+    expect($('#div0').contents().length).toBe(base + 1);
+    // has shifted button by 1
+    expect($($('#div0').contents()[base]).text()).toBe("incr");
+    // there's a new node now with the number "0" as its text
+    expect($($('#div0').contents()[base - 2]).text()).toBe("0");
+    // index is now 5 as it has moved back by 1
+    $($('#div0').contents()[base]).trigger("click");
+    expect($('#div0').contents().length).toBe(base + 2);
+    // has again shifted button by 1
+    expect($($('#div0').contents()[base + 1]).text()).toBe("incr");
+    // there's a new node now with the number "1" as its text
+    expect($($('#div0').contents()[base - 2]).text()).toBe("1");
+    // the old node is to the right of the new node
+    expect($($('#div0').contents()[base - 1]).text()).toBe("0");
+  }));
+
+  doTest('has dyn appearing in the correct composable order when used at end', (f) => f(tests.dynAppearsCorrectlyAtEnd, (usingSSR) => {
     const $ = require('jquery');
     // text, span, start beacon, end beacon, button
     const base = usingSSR ? 6 : 5;
@@ -60,7 +85,10 @@ describe('deku', () => {
     expect($($('#div0').contents()[base + 1]).text()).toBe("incr");
     // there's a new node now with the number "1" as its text
     expect($($('#div0').contents()[base - 1]).text()).toBe("1");
+    // the old node is to the left of the new node
+    expect($($('#div0').contents()[base - 2]).text()).toBe("0");
   }));
+
 
   doTest('deeply nested', (f) => f(tests.deeplyNestedPreservesOrder, () => {
     const $ = require('jquery');

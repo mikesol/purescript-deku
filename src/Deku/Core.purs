@@ -124,7 +124,6 @@ bussedUncurried
   -> Nut
 bussedUncurried = curry >>> bussed
 
-
 vbussed
   :: forall rbus bus push event
    . RowToList bus rbus
@@ -132,13 +131,19 @@ vbussed
   => Proxy (V bus)
   -> ({ | push } -> { | event } -> Nut)
   -> Nut
-vbussed px f = Nut (NutF (Bolson.EventfulElement'
-  (Bolson.EventfulElement gooo)))
+vbussed px f = Nut
+  ( NutF
+      ( Bolson.EventfulElement'
+          (Bolson.EventfulElement gooo)
+      )
+  )
   where
   go :: Event Nut
   go = vbus px f
+
   goo :: forall payload. Event (NutF payload)
   goo = map (\(Nut nf) -> nf) go
+
   gooo :: forall payload. Event (Bolson.Entity Int (Node payload))
   gooo = map (\(NutF e) -> e) goo
 

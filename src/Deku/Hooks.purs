@@ -26,7 +26,10 @@ module Deku.Hooks
   , useHot
   , useHot'
   , useDyn
-  , useDyn_
+  , useDynAtBeginning
+  , useDynAtEnd
+  , Dyn(..)
+  , (//\\)
   ) where
 
 import Prelude
@@ -42,12 +45,12 @@ import Data.Foldable (for_)
 import Data.Maybe (Maybe(..), fromMaybe)
 import Data.Tuple (curry)
 import Data.Tuple.Nested (type (/\), (/\))
-import Deku.Core (Nut(..), NutF(..), Node, Child, bus, bussedUncurried, insert, remove, sendToPos)
+import Deku.Core (Nut(..), NutF(..), Node, Child, bus, bussedUncurried, insert, remove, sendToPos, dyn)
 import Deku.Do as Deku
 import Effect (Effect, foreachE)
 import Effect.Aff (Aff, Error, error, joinFiber, killFiber, launchAff, launchAff_)
 import Effect.Uncurried (mkEffectFn1, runEffectFn1, runEffectFn2)
-import FRP.Event (Event, Subscriber(..), createPure, keepLatest, mailboxed, makeEventO, makeLemmingEvent, makeLemmingEventO, memoize, subscribeO)
+import FRP.Event (Event, Subscriber(..), createPure, keepLatest, mailboxed, makeEventO, makeLemmingEvent, makeLemmingEventO, mapAccum, memoize, subscribeO)
 import Safe.Coerce (coerce)
 
 -- | A state hook for states without initial values. See [`useState'`](https://purescript-deku.netlify.app/core-concepts/state#state-without-initial-values) in the Deku guide for example usage.
@@ -159,15 +162,49 @@ useMailboxed f = bussedUncurried fx
     ee :: Event Nut
     ee = mailboxed b \c -> f (a /\ c)
 
--- | A hook to create dynamic collections like one would find in a contact list or todo mvc.
--- | See [`useDyn`](https://purescript-deku.netlify.app/core-concepts/collections#dynamic-components) in the Deku guide for example usage.
+data Dyn a = Dyn (a -> Int) a
+
+infixl 4 Dyn as //\\
+
 useDyn
+  :: forall value
+   . Event (Dyn value)
+  -> ( { value :: value, remove :: Effect Unit, sendTo :: Int -> Effect Unit }
+       -> Nut
+     )
+  -> Nut
+useDyn e f = dyn $ map
+  ( \(Dyn fi value) -> Deku.do
+      { remove, sendTo } <- useDyn' (fi value)
+      f { remove, sendTo, value }
+  )
+  e
+
+useDynAtBeginning
+  :: forall value
+   . Event value
+  -> ( { value :: value, remove :: Effect Unit, sendTo :: Int -> Effect Unit }
+       -> Nut
+     )
+  -> Nut
+useDynAtBeginning e = useDyn ((const 0 //\\ _) <$> e)
+
+useDynAtEnd
+  :: forall value
+   . Event value
+  -> ( { value :: value, remove :: Effect Unit, sendTo :: Int -> Effect Unit }
+       -> Nut
+     )
+  -> Nut
+useDynAtEnd e = useDyn (mapAccum (\a b -> (a + 1) /\ (const a //\\ b)) 0 e)
+
+useDyn'
   :: Int
   -> ( { remove :: Effect Unit, sendTo :: Int -> Effect Unit }
        -> Nut
      )
   -> Event Child
-useDyn i f = keepLatest Deku.do
+useDyn' i f = keepLatest Deku.do
   setChildLogic /\ childLogic <- bus <<< curry
   pure
     ( insert i
@@ -177,14 +214,6 @@ useDyn i f = keepLatest Deku.do
             }
         )
     ) <|> childLogic
-
--- | A version of `useDyn` that uses `0` as the initial position for a dynamic element.
-useDyn_
-  :: ( { remove :: Effect Unit, sendTo :: Int -> Effect Unit }
-       -> Nut
-     )
-  -> Event Child
-useDyn_ = useDyn 0
 
 -- | A hook that remembers its most recent value and plays it back upon subscription _without_ an initial value. See [`useHot'`](https://purescript-deku.netlify.app/core-concepts/state#memoization-and-usehot) in the Deku guide for more info.
 useHot'

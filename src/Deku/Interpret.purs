@@ -145,7 +145,7 @@ giveNewParentOrReconstruct di just roj gnp = join $ liftF
       let
         hasIdAndInScope = do
           pure $ liftF $ EFunctionOfFFIDOMSnapshot $ pure $
-              giveNewParent_ just roj gnp
+            giveNewParent_ just roj gnp
         needsFreshNut =
           do
             let
@@ -177,7 +177,8 @@ giveNewParentOrReconstruct di just roj gnp = join $ liftF
         scope <- getScope gnp.id ffi
         case scope, gnp.scope of
           Global, _ -> hasIdAndInScope
-          Local x, Local y -> if includes x y then hasIdAndInScope else needsFreshNut
+          Local x, Local y ->
+            if includes x y then hasIdAndInScope else needsFreshNut
           _, _ -> needsFreshNut
       else needsFreshNut
 

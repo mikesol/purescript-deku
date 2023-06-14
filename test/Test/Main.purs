@@ -17,7 +17,7 @@ import Deku.Control (blank, globalPortal1, portal1, switcher, text, text_, (<#~>
 import Deku.Core (Nut, Hook, dyn, fixed, insert, insert_, sendToPos)
 import Deku.DOM as D
 import Deku.Do as Deku
-import Deku.Hooks (useEffect, useMemoized, useRef, useState, useState')
+import Deku.Hooks (useDyn, useDynAtBeginning, useDynAtEnd, useEffect, useMemoized, useRef, useState, useState', (//\\))
 import Deku.Lifecycle (onDidMount, onDismount, onWillMount)
 import Deku.Listeners (click, click_)
 import Deku.Pursx ((~~))
@@ -61,8 +61,8 @@ elementsInCorrectOrder = do
           ]
   D.div [ id_ "div0-0" ] (l 1)
 
-dynAppearsCorrectly :: Nut
-dynAppearsCorrectly = Deku.do
+dynAppearsCorrectlyAtBeginning :: Nut
+dynAppearsCorrectlyAtBeginning = Deku.do
   let
     counter :: forall a. Event a -> Event Int
     counter event = fold (\a _ -> a + 1) (-1) event
@@ -70,10 +70,24 @@ dynAppearsCorrectly = Deku.do
   D.div [ id_ "div0" ]
     [ text_ "foo"
     , D.span [ id_ "div1" ] [ text_ "bar" ]
-    , dyn
-        ( counter item <#> \i -> pure
-            $ insert_ (D.span [ id_ ("dyn" <> show i) ] [ text_ (show i) ])
-        )
+    , Deku.do
+        { value: i } <- useDynAtBeginning (counter item)
+        D.span [ id_ ("dyn" <> show i) ] [ text_ (show i) ]
+    , D.button [ id_ "incr", click_ (setItem unit) ] [ text_ "incr" ]
+    ]
+
+dynAppearsCorrectlyAtEnd :: Nut
+dynAppearsCorrectlyAtEnd = Deku.do
+  let
+    counter :: forall a. Event a -> Event Int
+    counter event = fold (\a _ -> a + 1) (-1) event
+  setItem /\ item <- useState'
+  D.div [ id_ "div0" ]
+    [ text_ "foo"
+    , D.span [ id_ "div1" ] [ text_ "bar" ]
+    , Deku.do
+        { value: i } <- useDynAtEnd (counter item)
+        D.span [ id_ ("dyn" <> show i) ] [ text_ (show i) ]
     , D.button [ id_ "incr", click_ (setItem unit) ] [ text_ "incr" ]
     ]
 
@@ -87,13 +101,11 @@ deeplyNestedPreservesOrder = Deku.do
     mydyn n = do
       let sn = show n
       fixed
-        [ dyn
-            ( counter item <#> \i -> pure
-                $ insert_
-                    if i == 1 then mydyn (n + 1)
-                    else D.span [ id_ ("dyn" <> sn <> "-" <> show i) ]
-                      [ text_ (sn <> "-" <> show i) ]
-            )
+        [ Deku.do
+            { value: i } <- useDyn ((identity //\\ _) <$> counter item)
+            if i == 1 then mydyn (n + 1)
+            else D.span [ id_ ("dyn" <> sn <> "-" <> show i) ]
+              [ text_ (sn <> "-" <> show i) ]
         , D.button [ id_ $ "incr-" <> sn, click_ (setItem unit) ]
             [ text_ $ "incr-" <> sn ]
         ]
