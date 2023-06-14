@@ -125,14 +125,10 @@ sendsToPosition = Deku.do
   D.div [ id_ "div0" ]
     [ text_ "foo"
     , D.span [ id_ "div1" ] [ text_ "bar" ]
-    , dyn
-        ( oneOfMap pure [ 0, 1, 2, 3, 4 ] <#> \i ->
-            oneOf
-              [ pure $ insert_
-                  (D.span [ id_ ("dyn" <> show i) ] [ text_ (show i) ])
-              , if i == 3 then posIdx <#> sendToPos else empty
-              ]
-        )
+    , Deku.do
+        { value: i, sendTo } <- useDynAtEnd (oneOfMap pure [ 0, 1, 2, 3, 4 ])
+        useEffect (if i == 3 then posIdx else empty) sendTo
+        D.span [ id_ ("dyn" <> show i) ] [ text_ (show i) ]
     , D.button [ id_ "pos", click_ (setPosIdx 1) ]
         [ text_ "send to pos" ]
     ]

@@ -305,10 +305,10 @@ useEffect e f1 f2 = Nut ee
   eeee = map (\(Nut d) -> d) eee
 
   eee :: Event Nut
-  eee = makeEventO
-    $ mkEffectFn1 \k -> do
-        runEffectFn1 k (f2 unit)
+  eee = pure (f2 unit) <|> makeEventO
+    ( mkEffectFn1 \_ -> do
         runEffectFn2 subscribeO e $ mkEffectFn1 f1
+    )
 
 -- | A hook that runs an arbitrary aff when an event's value changes.
 useAff
