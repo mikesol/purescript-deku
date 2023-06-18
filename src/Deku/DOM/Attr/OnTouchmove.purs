@@ -9,15 +9,15 @@ data OnTouchmove = OnTouchmove
 
 instance Attr anything OnTouchmove Cb where
   attr OnTouchmove value = unsafeAttribute
-    { key: "touchmove  ", value: cb' value }
+    { key: "touchmove", value: cb' value }
 
 instance Attr anything OnTouchmove (Effect Unit) where
   attr OnTouchmove value = unsafeAttribute
-    { key: "touchmove  ", value: cb' (Cb (const (value $> true))) }
+    { key: "touchmove", value: cb' (Cb (const (value $> true))) }
 
 instance Attr anything OnTouchmove (Effect Boolean) where
   attr OnTouchmove value = unsafeAttribute
-    { key: "touchmove  ", value: cb' (Cb (const value)) }
+    { key: "touchmove", value: cb' (Cb (const value)) }
 
 type OnTouchmoveEffect =
   forall element
@@ -26,4 +26,4 @@ type OnTouchmoveEffect =
 
 instance Attr everything OnTouchmove Unit where
   attr OnTouchmove _ = unsafeAttribute
-    { key: "touchmove  ", value: unset' }
+    { key: "touchmove", value: unset' }

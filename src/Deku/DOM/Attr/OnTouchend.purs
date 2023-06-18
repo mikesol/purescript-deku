@@ -9,15 +9,15 @@ data OnTouchend = OnTouchend
 
 instance Attr anything OnTouchend Cb where
   attr OnTouchend value = unsafeAttribute
-    { key: "touchend  ", value: cb' value }
+    { key: "touchend", value: cb' value }
 
 instance Attr anything OnTouchend (Effect Unit) where
   attr OnTouchend value = unsafeAttribute
-    { key: "touchend  ", value: cb' (Cb (const (value $> true))) }
+    { key: "touchend", value: cb' (Cb (const (value $> true))) }
 
 instance Attr anything OnTouchend (Effect Boolean) where
   attr OnTouchend value = unsafeAttribute
-    { key: "touchend  ", value: cb' (Cb (const value)) }
+    { key: "touchend", value: cb' (Cb (const value)) }
 
 type OnTouchendEffect =
   forall element
@@ -26,4 +26,4 @@ type OnTouchendEffect =
 
 instance Attr everything OnTouchend Unit where
   attr OnTouchend _ = unsafeAttribute
-    { key: "touchend  ", value: unset' }
+    { key: "touchend", value: unset' }

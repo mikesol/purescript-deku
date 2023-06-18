@@ -9,15 +9,15 @@ data OnMousewheel = OnMousewheel
 
 instance Attr anything OnMousewheel Cb where
   attr OnMousewheel value = unsafeAttribute
-    { key: "mousewheel  ", value: cb' value }
+    { key: "mousewheel", value: cb' value }
 
 instance Attr anything OnMousewheel (Effect Unit) where
   attr OnMousewheel value = unsafeAttribute
-    { key: "mousewheel  ", value: cb' (Cb (const (value $> true))) }
+    { key: "mousewheel", value: cb' (Cb (const (value $> true))) }
 
 instance Attr anything OnMousewheel (Effect Boolean) where
   attr OnMousewheel value = unsafeAttribute
-    { key: "mousewheel  ", value: cb' (Cb (const value)) }
+    { key: "mousewheel", value: cb' (Cb (const value)) }
 
 type OnMousewheelEffect =
   forall element
@@ -26,4 +26,4 @@ type OnMousewheelEffect =
 
 instance Attr everything OnMousewheel Unit where
   attr OnMousewheel _ = unsafeAttribute
-    { key: "mousewheel  ", value: unset' }
+    { key: "mousewheel", value: unset' }

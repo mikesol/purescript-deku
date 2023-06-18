@@ -9,15 +9,15 @@ data OnTouchstart = OnTouchstart
 
 instance Attr anything OnTouchstart Cb where
   attr OnTouchstart value = unsafeAttribute
-    { key: "touchstart  ", value: cb' value }
+    { key: "touchstart", value: cb' value }
 
 instance Attr anything OnTouchstart (Effect Unit) where
   attr OnTouchstart value = unsafeAttribute
-    { key: "touchstart  ", value: cb' (Cb (const (value $> true))) }
+    { key: "touchstart", value: cb' (Cb (const (value $> true))) }
 
 instance Attr anything OnTouchstart (Effect Boolean) where
   attr OnTouchstart value = unsafeAttribute
-    { key: "touchstart  ", value: cb' (Cb (const value)) }
+    { key: "touchstart", value: cb' (Cb (const value)) }
 
 type OnTouchstartEffect =
   forall element
@@ -26,4 +26,4 @@ type OnTouchstartEffect =
 
 instance Attr everything OnTouchstart Unit where
   attr OnTouchstart _ = unsafeAttribute
-    { key: "touchstart  ", value: unset' }
+    { key: "touchstart", value: unset' }
