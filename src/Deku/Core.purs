@@ -66,12 +66,14 @@ import Control.Monad.ST.Global as Region
 import Control.Monad.ST.Uncurried (mkSTFn2, runSTFn1, runSTFn2)
 import Control.Plus (empty)
 import Data.Either (Either(..))
-import Data.Maybe (Maybe(..))
+import Data.Foldable (foldl)
+import Data.Maybe (Maybe(..), maybe)
 import Data.Newtype (class Newtype, unwrap)
 import Data.Profunctor (lcmap)
-import Data.Tuple (curry)
+import Data.Tuple (Tuple(..), curry)
 import Data.Tuple.Nested (type (/\), (/\))
-import Deku.Attribute (AttributeValue(..), Cb, VolatileAttribute, unsafeUnAttribute, unsafeUnVolatileAttribute)
+import Deku.Attribute (AttributeValue(..), Cb, VolatileAttribute, unsafeUnVolatileAttribute)
+import Deku.Delimiter (delimiter)
 import Effect (Effect)
 import FRP.Event (Event, Subscriber(..), merge, makeLemmingEventO)
 import FRP.Event as FRP.Event
@@ -335,9 +337,109 @@ vbussedUncurried
   -> Nut
 vbussedUncurried px = curry >>> vbussed px
 
+processNuts
+  :: String
+  -> { cache :: Object Boolean
+     , element :: Korok
+     }
+  -> Object Korok
+  -> { cache :: Object Boolean
+     , element :: Korok
+     }
+processNuts pxScope i r = foldl
+  ( \b (Tuple k v) -> do
+      let
+        { cache, element } = b
+        ce = makeCachedPursxElement k cache pxScope
+          v
+          element
+      { cache: ce.cache, element: ce.element }
+
+  )
+  i
+  ((Object.toUnfoldable :: _ -> Array _) r)
+
+processAtts
+  :: String
+  -> { cache :: Object Boolean
+     , element :: Korok
+     }
+  -> Object (Event VolatileAttribute)
+  -> { cache :: Object Boolean
+     , element :: Korok
+     }
+processAtts pxScope i r = foldl
+  ( \b (Tuple k v) -> do
+      let
+        { cache, element } = b
+        ce = makeCachedPursxAttribute
+          k cache pxScope
+          v element
+      { cache: ce.cache, element: ce.element }
+  )
+  i
+  ((Object.toUnfoldable :: _ -> Array _) r)
+
 resolveNut :: Nut -> Korok
 resolveNut (Nut (Right korok)) = korok
-resolveNut _ = Korok (NutF (Bolson.envy empty))
+resolveNut (Nut (Left (PureKorok pureKorok))) =
+  Korok ee
+  where
+  resolved = pureKorok { count: 0 }
+
+  ee :: forall payload. NutF payload
+  ee = NutF (Element' (Node go))
+
+  go
+    :: forall payload
+     . PSR (pos :: Maybe Int, ez :: Boolean, dynFamily :: Maybe String)
+    -> DOMInterpret payload
+    -> Event payload
+  go
+    z@{ parent, scope, raiseId, dynFamily, pos }
+    di@(DOMInterpret { makePursx: mpx, ids, deleteFromCache, attributeParent }) =
+    makeLemmingEventO $ mkSTFn2 \(Subscriber mySub) k1 -> do
+      me <- ids
+      pxScope <- ids
+      raiseId me
+      let
+        { cache, element: element' } = processNuts
+          pxScope
+          ( processAtts pxScope
+              { cache: Object.empty
+              , element: Korok (NutF (Bolson.envy empty))
+              }
+              resolved.attributes
+          )
+          resolved.nuts
+      let Node element = domableToNode element'
+      unsub <- runSTFn2 mySub
+        ( merge
+            [ pure $
+                mpx
+                  { id: me
+                  , parent
+                  , cache
+                  , dynFamily
+                  , pos
+                  , pxScope: pxScope
+                  , scope
+                  , html: resolved.html
+                  , verb: delimiter
+                  }
+            , element z di
+            , maybe empty
+                ( \p ->
+                    pure $ attributeParent
+                      { id: me, parent: p, pos, dynFamily, ez: false }
+                )
+                parent
+            ]
+        )
+        k1
+      pure do
+        runSTFn1 k1 (deleteFromCache { id: me })
+        unsub
 
 nuttyKorok :: Korok -> Nut
 nuttyKorok = Nut <<< Right
@@ -644,24 +746,25 @@ makeCachedPursxAttribute pxk cache pxScope attr element =
                   \parent
                    di@(DOMInterpret { setProp, setCb, unsetAttribute }) ->
                     map
-                      ( unsafeUnVolatileAttribute >>> \{ key, value } -> case value of
-                          Prop' p -> setProp
-                            { id:
-                                (pxk <> "@!%" <> pxScope)
-                            , key
-                            , value: p
-                            }
-                          Cb' c -> setCb
-                            { id:
-                                (pxk <> "@!%" <> pxScope)
-                            , key
-                            , value: c
-                            }
-                          Unset' -> unsetAttribute
-                            { id:
-                                (pxk <> "@!%" <> pxScope)
-                            , key
-                            }
+                      ( unsafeUnVolatileAttribute >>> \{ key, value } ->
+                          case value of
+                            Prop' p -> setProp
+                              { id:
+                                  (pxk <> "@!%" <> pxScope)
+                              , key
+                              , value: p
+                              }
+                            Cb' c -> setCb
+                              { id:
+                                  (pxk <> "@!%" <> pxScope)
+                              , key
+                              , value: c
+                              }
+                            Unset' -> unsetAttribute
+                              { id:
+                                  (pxk <> "@!%" <> pxScope)
+                              , key
+                              }
                       )
                       attr
                       <|> (let Node y = (domableToNode element) in y) parent

@@ -11,7 +11,7 @@ import Data.Filterable (filter)
 import Data.Foldable (intercalate, oneOfMap)
 import Data.Tuple (Tuple(..), snd)
 import Data.Tuple.Nested (type (/\), (/\))
-import Deku.Attribute ((!:=), (:=))
+import Deku.Attribute ((!:=), (<:=>))
 import Deku.Attributes (id_)
 import Deku.Control (blank, globalPortal1, portal1, switcher, text, text_, (<#~>))
 import Deku.Core (Hook, Nut, fixed)
@@ -341,7 +341,8 @@ unsetUnsets = Deku.do
     [ text_ "foo"
     , D.span
         [ id_ "span1"
-        , unset <#> if _ then D.Style := "color:red;" else D.Style := unit
+        , D.Style <:=> (filter identity unset $> "color:red;")
+        , D.Style <:=> (filter not unset $> unit)
         ]
         [ text_ "bar" ]
     , D.button [ id_ "unsetter", click_ (unsetAttr false) ]
