@@ -1,15 +1,23 @@
 module Deku.DOM.Attr.High where
 
 import Prelude
+import Data.Either (Either(..))
 
-import Deku.DOM.Elt.Meter (Meter_)
-import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
+import Deku.Attribute (class Attr, prop', unsafeAttribute, unsafePureAttribute, unsafeVolatileAttribute, unset')
+import Deku.DOM.Tags as Tags
 
 data High = High
 
-instance Attr Meter_ High String where
-  attr High value = unsafeAttribute { key: "high", value: prop' value }
+instance Attr Tags.Meter_ High String where
+  pureAttr High value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "high", value }
+
+  mapAttr High evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "high", value: prop' value }
 
 instance Attr everything High Unit where
-  attr High _ = unsafeAttribute
+  pureAttr High _ = unsafeAttribute $ Right $ pure $ unsafeVolatileAttribute
     { key: "high", value: unset' }
+  mapAttr High evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "high", value: unset' }

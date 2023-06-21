@@ -1,23 +1,37 @@
 module Deku.DOM.Attr.Rotate where
 
 import Prelude
+import Data.Either (Either(..))
 
-import Deku.DOM.Elt.Tspan (Tspan_)
-import Deku.DOM.Elt.Text (Text_)
-import Deku.DOM.Elt.AnimateMotion (AnimateMotion_)
-import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
+import Deku.Attribute (class Attr, prop', unsafeAttribute, unsafePureAttribute, unsafeVolatileAttribute, unset')
+import Deku.DOM.Tags as Tags
 
 data Rotate = Rotate
 
-instance Attr AnimateMotion_ Rotate String where
-  attr Rotate value = unsafeAttribute { key: "rotate", value: prop' value }
+instance Attr Tags.AnimateMotion_ Rotate String where
+  pureAttr Rotate value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "rotate", value }
 
-instance Attr Text_ Rotate String where
-  attr Rotate value = unsafeAttribute { key: "rotate", value: prop' value }
+  mapAttr Rotate evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "rotate", value: prop' value }
 
-instance Attr Tspan_ Rotate String where
-  attr Rotate value = unsafeAttribute { key: "rotate", value: prop' value }
+instance Attr Tags.Text_ Rotate String where
+  pureAttr Rotate value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "rotate", value }
+
+  mapAttr Rotate evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "rotate", value: prop' value }
+
+instance Attr Tags.Tspan_ Rotate String where
+  pureAttr Rotate value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "rotate", value }
+
+  mapAttr Rotate evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "rotate", value: prop' value }
 
 instance Attr everything Rotate Unit where
-  attr Rotate _ = unsafeAttribute
+  pureAttr Rotate _ = unsafeAttribute $ Right $ pure $ unsafeVolatileAttribute
     { key: "rotate", value: unset' }
+  mapAttr Rotate evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "rotate", value: unset' }

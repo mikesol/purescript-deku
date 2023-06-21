@@ -1,27 +1,44 @@
 module Deku.DOM.Attr.Alt where
 
 import Prelude
+import Data.Either (Either(..))
 
-import Deku.DOM.Elt.Applet (Applet_)
-import Deku.DOM.Elt.Area (Area_)
-import Deku.DOM.Elt.Img (Img_)
-import Deku.DOM.Elt.Input (Input_)
-import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
+import Deku.Attribute (class Attr, prop', unsafeAttribute, unsafePureAttribute, unsafeVolatileAttribute, unset')
+import Deku.DOM.Tags as Tags
 
 data Alt = Alt
 
-instance Attr Applet_ Alt String where
-  attr Alt value = unsafeAttribute { key: "alt", value: prop' value }
+instance Attr Tags.Applet_ Alt String where
+  pureAttr Alt value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "alt", value }
 
-instance Attr Area_ Alt String where
-  attr Alt value = unsafeAttribute { key: "alt", value: prop' value }
+  mapAttr Alt evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "alt", value: prop' value }
 
-instance Attr Img_ Alt String where
-  attr Alt value = unsafeAttribute { key: "alt", value: prop' value }
+instance Attr Tags.Area_ Alt String where
+  pureAttr Alt value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "alt", value }
 
-instance Attr Input_ Alt String where
-  attr Alt value = unsafeAttribute { key: "alt", value: prop' value }
+  mapAttr Alt evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "alt", value: prop' value }
+
+instance Attr Tags.Img_ Alt String where
+  pureAttr Alt value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "alt", value }
+
+  mapAttr Alt evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "alt", value: prop' value }
+
+instance Attr Tags.Input_ Alt String where
+  pureAttr Alt value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "alt", value }
+
+  mapAttr Alt evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "alt", value: prop' value }
 
 instance Attr everything Alt Unit where
-  attr Alt _ = unsafeAttribute
+  pureAttr Alt _ = unsafeAttribute $ Right $ pure $ unsafeVolatileAttribute
     { key: "alt", value: unset' }
+  mapAttr Alt evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "alt", value: unset' }

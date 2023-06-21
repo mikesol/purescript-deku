@@ -1,21 +1,31 @@
 module Deku.DOM.Attr.GradientUnits where
 
 import Prelude
+import Data.Either (Either(..))
 
-import Deku.DOM.Elt.RadialGradient (RadialGradient_)
-import Deku.DOM.Elt.LinearGradient (LinearGradient_)
-import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
+import Deku.Attribute (class Attr, prop', unsafeAttribute, unsafePureAttribute, unsafeVolatileAttribute, unset')
+import Deku.DOM.Tags as Tags
 
 data GradientUnits = GradientUnits
 
-instance Attr LinearGradient_ GradientUnits String where
-  attr GradientUnits value = unsafeAttribute
-    { key: "gradientUnits", value: prop' value }
+instance Attr Tags.LinearGradient_ GradientUnits String where
+  pureAttr GradientUnits value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "gradientUnits", value }
+  mapAttr GradientUnits evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "gradientUnits", value: prop' value }
 
-instance Attr RadialGradient_ GradientUnits String where
-  attr GradientUnits value = unsafeAttribute
-    { key: "gradientUnits", value: prop' value }
+instance Attr Tags.RadialGradient_ GradientUnits String where
+  pureAttr GradientUnits value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "gradientUnits", value }
+  mapAttr GradientUnits evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "gradientUnits", value: prop' value }
 
 instance Attr everything GradientUnits Unit where
-  attr GradientUnits _ = unsafeAttribute
-    { key: "gradientUnits", value: unset' }
+  pureAttr GradientUnits _ = unsafeAttribute $ Right $ pure $
+    unsafeVolatileAttribute
+      { key: "gradientUnits", value: unset' }
+  mapAttr GradientUnits evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "gradientUnits", value: unset' }

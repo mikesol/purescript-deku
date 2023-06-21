@@ -4,12 +4,11 @@ import Control.Plus (empty)
 import Deku.Attribute (Attribute)
 import Deku.Control as DC
 import Deku.Core (Nut)
-import FRP.Event (Event)
 
 import Deku.DOM.Tags as Tags
 
 feTurbulence
-  :: Array (Event (Attribute Tags.FeTurbulence_))
+  :: Array (Attribute Tags.FeTurbulence_)
   -> Array Nut
   -> Nut
 feTurbulence = DC.elementify3 "feTurbulence"

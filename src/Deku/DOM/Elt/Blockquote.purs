@@ -4,12 +4,11 @@ import Control.Plus (empty)
 import Deku.Attribute (Attribute)
 import Deku.Control as DC
 import Deku.Core (Nut)
-import FRP.Event (Event)
 
 import Deku.DOM.Tags as Tags
 
 blockquote
-  :: Array (Event (Attribute Tags.Blockquote_))
+  :: Array (Attribute Tags.Blockquote_)
   -> Array Nut
   -> Nut
 blockquote = DC.elementify3 "blockquote"

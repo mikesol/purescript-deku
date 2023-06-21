@@ -1,23 +1,37 @@
 module Deku.DOM.Attr.KeyTimes where
 
 import Prelude
+import Data.Either (Either(..))
 
-import Deku.DOM.Elt.AnimateTransform (AnimateTransform_)
-import Deku.DOM.Elt.AnimateMotion (AnimateMotion_)
-import Deku.DOM.Elt.Animate (Animate_)
-import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
+import Deku.Attribute (class Attr, prop', unsafeAttribute, unsafePureAttribute, unsafeVolatileAttribute, unset')
+import Deku.DOM.Tags as Tags
 
 data KeyTimes = KeyTimes
 
-instance Attr Animate_ KeyTimes String where
-  attr KeyTimes value = unsafeAttribute { key: "keyTimes", value: prop' value }
+instance Attr Tags.Animate_ KeyTimes String where
+  pureAttr KeyTimes value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "keyTimes", value }
 
-instance Attr AnimateMotion_ KeyTimes String where
-  attr KeyTimes value = unsafeAttribute { key: "keyTimes", value: prop' value }
+  mapAttr KeyTimes evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "keyTimes", value: prop' value }
 
-instance Attr AnimateTransform_ KeyTimes String where
-  attr KeyTimes value = unsafeAttribute { key: "keyTimes", value: prop' value }
+instance Attr Tags.AnimateMotion_ KeyTimes String where
+  pureAttr KeyTimes value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "keyTimes", value }
+
+  mapAttr KeyTimes evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "keyTimes", value: prop' value }
+
+instance Attr Tags.AnimateTransform_ KeyTimes String where
+  pureAttr KeyTimes value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "keyTimes", value }
+
+  mapAttr KeyTimes evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "keyTimes", value: prop' value }
 
 instance Attr everything KeyTimes Unit where
-  attr KeyTimes _ = unsafeAttribute
+  pureAttr KeyTimes _ = unsafeAttribute $ Right $ pure $ unsafeVolatileAttribute
     { key: "keyTimes", value: unset' }
+  mapAttr KeyTimes evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "keyTimes", value: unset' }

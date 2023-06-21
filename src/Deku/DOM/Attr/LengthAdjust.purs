@@ -1,26 +1,38 @@
 module Deku.DOM.Attr.LengthAdjust where
 
 import Prelude
+import Data.Either (Either(..))
 
-import Deku.DOM.Elt.Tspan (Tspan_)
-import Deku.DOM.Elt.TextPath (TextPath_)
-import Deku.DOM.Elt.Text (Text_)
-import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
+import Deku.Attribute (class Attr, prop', unsafeAttribute, unsafePureAttribute, unsafeVolatileAttribute, unset')
+import Deku.DOM.Tags as Tags
 
 data LengthAdjust = LengthAdjust
 
-instance Attr Text_ LengthAdjust String where
-  attr LengthAdjust value = unsafeAttribute
-    { key: "lengthAdjust", value: prop' value }
+instance Attr Tags.Text_ LengthAdjust String where
+  pureAttr LengthAdjust value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "lengthAdjust", value }
+  mapAttr LengthAdjust evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "lengthAdjust", value: prop' value }
 
-instance Attr TextPath_ LengthAdjust String where
-  attr LengthAdjust value = unsafeAttribute
-    { key: "lengthAdjust", value: prop' value }
+instance Attr Tags.TextPath_ LengthAdjust String where
+  pureAttr LengthAdjust value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "lengthAdjust", value }
+  mapAttr LengthAdjust evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "lengthAdjust", value: prop' value }
 
-instance Attr Tspan_ LengthAdjust String where
-  attr LengthAdjust value = unsafeAttribute
-    { key: "lengthAdjust", value: prop' value }
+instance Attr Tags.Tspan_ LengthAdjust String where
+  pureAttr LengthAdjust value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "lengthAdjust", value }
+  mapAttr LengthAdjust evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "lengthAdjust", value: prop' value }
 
 instance Attr everything LengthAdjust Unit where
-  attr LengthAdjust _ = unsafeAttribute
-    { key: "lengthAdjust", value: unset' }
+  pureAttr LengthAdjust _ = unsafeAttribute $ Right $ pure $
+    unsafeVolatileAttribute
+      { key: "lengthAdjust", value: unset' }
+  mapAttr LengthAdjust evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "lengthAdjust", value: unset' }

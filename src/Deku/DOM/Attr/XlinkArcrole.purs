@@ -1,36 +1,52 @@
 module Deku.DOM.Attr.XlinkArcrole where
 
 import Prelude
+import Data.Either (Either(..))
 
-import Deku.DOM.Elt.Mpath (Mpath_)
-import Deku.DOM.Elt.Image (Image_)
-import Deku.DOM.Elt.Filter (Filter_)
-import Deku.DOM.Elt.FeImage (FeImage_)
-import Deku.DOM.Elt.AnimateTransform (AnimateTransform_)
-import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
+import Deku.Attribute (class Attr, prop', unsafeAttribute, unsafePureAttribute, unsafeVolatileAttribute, unset')
+import Deku.DOM.Tags as Tags
 
 data XlinkArcrole = XlinkArcrole
 
-instance Attr AnimateTransform_ XlinkArcrole String where
-  attr XlinkArcrole value = unsafeAttribute
-    { key: "xlink:arcrole", value: prop' value }
+instance Attr Tags.AnimateTransform_ XlinkArcrole String where
+  pureAttr XlinkArcrole value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "xlink:arcrole", value }
+  mapAttr XlinkArcrole evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "xlink:arcrole", value: prop' value }
 
-instance Attr FeImage_ XlinkArcrole String where
-  attr XlinkArcrole value = unsafeAttribute
-    { key: "xlink:arcrole", value: prop' value }
+instance Attr Tags.FeImage_ XlinkArcrole String where
+  pureAttr XlinkArcrole value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "xlink:arcrole", value }
+  mapAttr XlinkArcrole evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "xlink:arcrole", value: prop' value }
 
-instance Attr Filter_ XlinkArcrole String where
-  attr XlinkArcrole value = unsafeAttribute
-    { key: "xlink:arcrole", value: prop' value }
+instance Attr Tags.Filter_ XlinkArcrole String where
+  pureAttr XlinkArcrole value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "xlink:arcrole", value }
+  mapAttr XlinkArcrole evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "xlink:arcrole", value: prop' value }
 
-instance Attr Image_ XlinkArcrole String where
-  attr XlinkArcrole value = unsafeAttribute
-    { key: "xlink:arcrole", value: prop' value }
+instance Attr Tags.Image_ XlinkArcrole String where
+  pureAttr XlinkArcrole value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "xlink:arcrole", value }
+  mapAttr XlinkArcrole evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "xlink:arcrole", value: prop' value }
 
-instance Attr Mpath_ XlinkArcrole String where
-  attr XlinkArcrole value = unsafeAttribute
-    { key: "xlink:arcrole", value: prop' value }
+instance Attr Tags.Mpath_ XlinkArcrole String where
+  pureAttr XlinkArcrole value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "xlink:arcrole", value }
+  mapAttr XlinkArcrole evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "xlink:arcrole", value: prop' value }
 
 instance Attr everything XlinkArcrole Unit where
-  attr XlinkArcrole _ = unsafeAttribute
-    { key: "xlink:arcrole", value: unset' }
+  pureAttr XlinkArcrole _ = unsafeAttribute $ Right $ pure $
+    unsafeVolatileAttribute
+      { key: "xlink:arcrole", value: unset' }
+  mapAttr XlinkArcrole evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "xlink:arcrole", value: unset' }

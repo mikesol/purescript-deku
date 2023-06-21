@@ -277,7 +277,8 @@ useHot a f = nuttyKorok $ Korok ee
                     runSTFn1 k' (fromMaybe a val)
                     runSTFn2 s event k'
                 )
-            runSTFn1 k (((\(Korok df) -> df) <<< resolveNut) (f (push'' /\ event')))
+            runSTFn1 k
+              (((\(Korok df) -> df) <<< resolveNut) (f (push'' /\ event')))
             runSTFn2 s event (mkSTFn1 \v -> void $ writeVal v)
         )
 

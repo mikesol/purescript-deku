@@ -1,23 +1,34 @@
 module Deku.DOM.Attr.OnMouseenter where
 
 import Prelude
+import Data.Either (Either(..))
 import Effect (Effect)
-import Deku.Attribute (class Attr, Attribute, Cb(..), cb', unsafeAttribute, unset')
+import Deku.Attribute (class Attr, Attribute, Cb(..), cb', unsafeAttribute, unsafePureAttribute, unsafeVolatileAttribute, unset')
+import Deku.DOM.Tags as Tags
 import FRP.Event (Event)
 
 data OnMouseenter = OnMouseenter
 
 instance Attr anything OnMouseenter Cb where
-  attr OnMouseenter value = unsafeAttribute
-    { key: "mouseenter", value: cb' value }
+  pureAttr OnMouseenter value = unsafeAttribute $ Right $ pure $
+    unsafeVolatileAttribute
+  mapAttr OnMouseenter evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "mouseenter", value: cb' value }
 
 instance Attr anything OnMouseenter (Effect Unit) where
-  attr OnMouseenter value = unsafeAttribute
-    { key: "mouseenter", value: cb' (Cb (const (value $> true))) }
+  pureAttr OnMouseenter value = unsafeAttribute $ Right $ pure $
+    unsafeVolatileAttribute
+  mapAttr OnMouseenter evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "mouseenter", value: cb' (Cb (const (value $> true))) }
 
 instance Attr anything OnMouseenter (Effect Boolean) where
-  attr OnMouseenter value = unsafeAttribute
-    { key: "mouseenter", value: cb' (Cb (const value)) }
+  pureAttr OnMouseenter value = unsafeAttribute $ Right $ pure $
+    unsafeVolatileAttribute
+  mapAttr OnMouseenter evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "mouseenter", value: cb' (Cb (const value)) }
 
 type OnMouseenterEffect =
   forall element
@@ -25,5 +36,6 @@ type OnMouseenterEffect =
   => Event (Attribute element)
 
 instance Attr everything OnMouseenter Unit where
-  attr OnMouseenter _ = unsafeAttribute
-    { key: "mouseenter", value: unset' }
+  pureAttr OnMouseenter _ = unsafeAttribute $ Right $ pure $
+    unsafeVolatileAttribute
+      { key: "mouseenter", value: unset' }

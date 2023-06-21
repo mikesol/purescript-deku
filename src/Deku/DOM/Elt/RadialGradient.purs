@@ -4,12 +4,11 @@ import Control.Plus (empty)
 import Deku.Attribute (Attribute)
 import Deku.Control as DC
 import Deku.Core (Nut)
-import FRP.Event (Event)
 
 import Deku.DOM.Tags as Tags
 
 radialGradient
-  :: Array (Event (Attribute Tags.RadialGradient_))
+  :: Array (Attribute Tags.RadialGradient_)
   -> Array Nut
   -> Nut
 radialGradient = DC.elementify3 "radialGradient"

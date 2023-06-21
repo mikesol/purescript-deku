@@ -1,15 +1,23 @@
 module Deku.DOM.Attr.Cols where
 
 import Prelude
+import Data.Either (Either(..))
 
-import Deku.DOM.Elt.Textarea (Textarea_)
-import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
+import Deku.Attribute (class Attr, prop', unsafeAttribute, unsafePureAttribute, unsafeVolatileAttribute, unset')
+import Deku.DOM.Tags as Tags
 
 data Cols = Cols
 
-instance Attr Textarea_ Cols String where
-  attr Cols value = unsafeAttribute { key: "cols", value: prop' value }
+instance Attr Tags.Textarea_ Cols String where
+  pureAttr Cols value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "cols", value }
+
+  mapAttr Cols evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "cols", value: prop' value }
 
 instance Attr everything Cols Unit where
-  attr Cols _ = unsafeAttribute
+  pureAttr Cols _ = unsafeAttribute $ Right $ pure $ unsafeVolatileAttribute
     { key: "cols", value: unset' }
+  mapAttr Cols evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "cols", value: unset' }

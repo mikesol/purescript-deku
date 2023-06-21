@@ -1,31 +1,45 @@
 module Deku.DOM.Attr.Background where
 
 import Prelude
+import Data.Either (Either(..))
 
-import Deku.DOM.Elt.Body (Body_)
-import Deku.DOM.Elt.Table (Table_)
-import Deku.DOM.Elt.Td (Td_)
-import Deku.DOM.Elt.Th (Th_)
-import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
+import Deku.Attribute (class Attr, prop', unsafeAttribute, unsafePureAttribute, unsafeVolatileAttribute, unset')
+import Deku.DOM.Tags as Tags
 
 data Background = Background
 
-instance Attr Body_ Background String where
-  attr Background value = unsafeAttribute
-    { key: "background", value: prop' value }
+instance Attr Tags.Body_ Background String where
+  pureAttr Background value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "background", value }
+  mapAttr Background evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "background", value: prop' value }
 
-instance Attr Table_ Background String where
-  attr Background value = unsafeAttribute
-    { key: "background", value: prop' value }
+instance Attr Tags.Table_ Background String where
+  pureAttr Background value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "background", value }
+  mapAttr Background evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "background", value: prop' value }
 
-instance Attr Td_ Background String where
-  attr Background value = unsafeAttribute
-    { key: "background", value: prop' value }
+instance Attr Tags.Td_ Background String where
+  pureAttr Background value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "background", value }
+  mapAttr Background evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "background", value: prop' value }
 
-instance Attr Th_ Background String where
-  attr Background value = unsafeAttribute
-    { key: "background", value: prop' value }
+instance Attr Tags.Th_ Background String where
+  pureAttr Background value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "background", value }
+  mapAttr Background evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "background", value: prop' value }
 
 instance Attr everything Background Unit where
-  attr Background _ = unsafeAttribute
-    { key: "background", value: unset' }
+  pureAttr Background _ = unsafeAttribute $ Right $ pure $
+    unsafeVolatileAttribute
+      { key: "background", value: unset' }
+  mapAttr Background evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "background", value: unset' }

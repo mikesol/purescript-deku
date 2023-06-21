@@ -1,27 +1,44 @@
 module Deku.DOM.Attr.Values where
 
 import Prelude
+import Data.Either (Either(..))
 
-import Deku.DOM.Elt.FeColorMatrix (FeColorMatrix_)
-import Deku.DOM.Elt.AnimateTransform (AnimateTransform_)
-import Deku.DOM.Elt.AnimateMotion (AnimateMotion_)
-import Deku.DOM.Elt.Animate (Animate_)
-import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
+import Deku.Attribute (class Attr, prop', unsafeAttribute, unsafePureAttribute, unsafeVolatileAttribute, unset')
+import Deku.DOM.Tags as Tags
 
 data Values = Values
 
-instance Attr Animate_ Values String where
-  attr Values value = unsafeAttribute { key: "values", value: prop' value }
+instance Attr Tags.Animate_ Values String where
+  pureAttr Values value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "values", value }
 
-instance Attr AnimateMotion_ Values String where
-  attr Values value = unsafeAttribute { key: "values", value: prop' value }
+  mapAttr Values evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "evalues", value: prop' value }
 
-instance Attr AnimateTransform_ Values String where
-  attr Values value = unsafeAttribute { key: "values", value: prop' value }
+instance Attr Tags.AnimateMotion_ Values String where
+  pureAttr Values value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "values", value }
 
-instance Attr FeColorMatrix_ Values String where
-  attr Values value = unsafeAttribute { key: "values", value: prop' value }
+  mapAttr Values evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "evalues", value: prop' value }
+
+instance Attr Tags.AnimateTransform_ Values String where
+  pureAttr Values value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "values", value }
+
+  mapAttr Values evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "evalues", value: prop' value }
+
+instance Attr Tags.FeColorMatrix_ Values String where
+  pureAttr Values value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "values", value }
+
+  mapAttr Values evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "evalues", value: prop' value }
 
 instance Attr everything Values Unit where
-  attr Values _ = unsafeAttribute
+  pureAttr Values _ = unsafeAttribute $ Right $ pure $ unsafeVolatileAttribute
     { key: "values", value: unset' }
+  mapAttr Values evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "values", value: unset' }

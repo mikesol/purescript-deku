@@ -1,23 +1,37 @@
 module Deku.DOM.Attr.Sizes where
 
 import Prelude
+import Data.Either (Either(..))
 
-import Deku.DOM.Elt.Link (Link_)
-import Deku.DOM.Elt.Img (Img_)
-import Deku.DOM.Elt.Source (Source_)
-import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
+import Deku.Attribute (class Attr, prop', unsafeAttribute, unsafePureAttribute, unsafeVolatileAttribute, unset')
+import Deku.DOM.Tags as Tags
 
 data Sizes = Sizes
 
-instance Attr Link_ Sizes String where
-  attr Sizes value = unsafeAttribute { key: "sizes", value: prop' value }
+instance Attr Tags.Link_ Sizes String where
+  pureAttr Sizes value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "sizes", value }
 
-instance Attr Img_ Sizes String where
-  attr Sizes value = unsafeAttribute { key: "sizes", value: prop' value }
+  mapAttr Sizes evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "sizes", value: prop' value }
 
-instance Attr Source_ Sizes String where
-  attr Sizes value = unsafeAttribute { key: "sizes", value: prop' value }
+instance Attr Tags.Img_ Sizes String where
+  pureAttr Sizes value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "sizes", value }
+
+  mapAttr Sizes evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "sizes", value: prop' value }
+
+instance Attr Tags.Source_ Sizes String where
+  pureAttr Sizes value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "sizes", value }
+
+  mapAttr Sizes evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "sizes", value: prop' value }
 
 instance Attr everything Sizes Unit where
-  attr Sizes _ = unsafeAttribute
+  pureAttr Sizes _ = unsafeAttribute $ Right $ pure $ unsafeVolatileAttribute
     { key: "sizes", value: unset' }
+  mapAttr Sizes evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "sizes", value: unset' }

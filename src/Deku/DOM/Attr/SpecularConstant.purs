@@ -1,16 +1,24 @@
 module Deku.DOM.Attr.SpecularConstant where
 
 import Prelude
+import Data.Either (Either(..))
 
-import Deku.DOM.Elt.FeSpecularLighting (FeSpecularLighting_)
-import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
+import Deku.Attribute (class Attr, prop', unsafeAttribute, unsafePureAttribute, unsafeVolatileAttribute, unset')
+import Deku.DOM.Tags as Tags
 
 data SpecularConstant = SpecularConstant
 
-instance Attr FeSpecularLighting_ SpecularConstant String where
-  attr SpecularConstant value = unsafeAttribute
-    { key: "specularConstant", value: prop' value }
+instance Attr Tags.FeSpecularLighting_ SpecularConstant String where
+  pureAttr SpecularConstant value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "specularConstant", value }
+  mapAttr SpecularConstant evalue = unsafeAttribute $ Right $ evalue <#>
+    \value -> unsafeVolatileAttribute
+      { key: "specularConstant", value: prop' value }
 
 instance Attr everything SpecularConstant Unit where
-  attr SpecularConstant _ = unsafeAttribute
-    { key: "specularConstant", value: unset' }
+  pureAttr SpecularConstant _ = unsafeAttribute $ Right $ pure $
+    unsafeVolatileAttribute
+      { key: "specularConstant", value: unset' }
+  mapAttr SpecularConstant evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "specularConstant", value: unset' }

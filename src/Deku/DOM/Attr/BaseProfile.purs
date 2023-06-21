@@ -1,16 +1,24 @@
 module Deku.DOM.Attr.BaseProfile where
 
 import Prelude
+import Data.Either (Either(..))
 
-import Deku.DOM.Elt.Svg (Svg_)
-import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
+import Deku.Attribute (class Attr, prop', unsafeAttribute, unsafePureAttribute, unsafeVolatileAttribute, unset')
+import Deku.DOM.Tags as Tags
 
 data BaseProfile = BaseProfile
 
-instance Attr Svg_ BaseProfile String where
-  attr BaseProfile value = unsafeAttribute
-    { key: "baseProfile", value: prop' value }
+instance Attr Tags.Svg_ BaseProfile String where
+  pureAttr BaseProfile value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "baseProfile", value }
+  mapAttr BaseProfile evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "baseProfile", value: prop' value }
 
 instance Attr everything BaseProfile Unit where
-  attr BaseProfile _ = unsafeAttribute
-    { key: "baseProfile", value: unset' }
+  pureAttr BaseProfile _ = unsafeAttribute $ Right $ pure $
+    unsafeVolatileAttribute
+      { key: "baseProfile", value: unset' }
+  mapAttr BaseProfile evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "baseProfile", value: unset' }

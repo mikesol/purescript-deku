@@ -1,15 +1,23 @@
 module Deku.DOM.Attr.Summary where
 
 import Prelude
+import Data.Either (Either(..))
 
-import Deku.DOM.Elt.Table (Table_)
-import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
+import Deku.Attribute (class Attr, prop', unsafeAttribute, unsafePureAttribute, unsafeVolatileAttribute, unset')
+import Deku.DOM.Tags as Tags
 
 data Summary = Summary
 
-instance Attr Table_ Summary String where
-  attr Summary value = unsafeAttribute { key: "summary", value: prop' value }
+instance Attr Tags.Table_ Summary String where
+  pureAttr Summary value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "summary", value }
+
+  mapAttr Summary evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "summary", value: prop' value }
 
 instance Attr everything Summary Unit where
-  attr Summary _ = unsafeAttribute
+  pureAttr Summary _ = unsafeAttribute $ Right $ pure $ unsafeVolatileAttribute
     { key: "summary", value: unset' }
+  mapAttr Summary evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "summary", value: unset' }

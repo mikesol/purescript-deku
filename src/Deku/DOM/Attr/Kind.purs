@@ -1,15 +1,23 @@
 module Deku.DOM.Attr.Kind where
 
 import Prelude
+import Data.Either (Either(..))
 
-import Deku.DOM.Elt.Track (Track_)
-import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
+import Deku.Attribute (class Attr, prop', unsafeAttribute, unsafePureAttribute, unsafeVolatileAttribute, unset')
+import Deku.DOM.Tags as Tags
 
 data Kind = Kind
 
-instance Attr Track_ Kind String where
-  attr Kind value = unsafeAttribute { key: "kind", value: prop' value }
+instance Attr Tags.Track_ Kind String where
+  pureAttr Kind value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "kind", value }
+
+  mapAttr Kind evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "kind", value: prop' value }
 
 instance Attr everything Kind Unit where
-  attr Kind _ = unsafeAttribute
+  pureAttr Kind _ = unsafeAttribute $ Right $ pure $ unsafeVolatileAttribute
     { key: "kind", value: unset' }
+  mapAttr Kind evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "kind", value: unset' }

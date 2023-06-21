@@ -1,22 +1,33 @@
 module Deku.DOM.Attr.OnAuxclick where
 
 import Prelude
+import Data.Either (Either(..))
 import Effect (Effect)
-import Deku.Attribute (class Attr, Attribute, Cb(..), cb', unsafeAttribute, unset')
+import Deku.Attribute (class Attr, Attribute, Cb(..), cb', unsafeAttribute, unsafePureAttribute, unsafeVolatileAttribute, unset')
+import Deku.DOM.Tags as Tags
 import FRP.Event (Event)
 
 data OnAuxclick = OnAuxclick
 
 instance Attr anything OnAuxclick Cb where
-  attr OnAuxclick value = unsafeAttribute { key: "auxclick ", value: cb' value }
+  pureAttr OnAuxclick value = unsafeAttribute $ Right $ pure $
+    unsafeVolatileAttribute { key: "auxclick ", value: cb' value }
+  mapAttr OnAuxclick evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "auxclick ", value: cb' value }
 
 instance Attr anything OnAuxclick (Effect Unit) where
-  attr OnAuxclick value = unsafeAttribute
-    { key: "auxclick ", value: cb' (Cb (const (value $> true))) }
+  pureAttr OnAuxclick value = unsafeAttribute $ Right $ pure $
+    unsafeVolatileAttribute
+  mapAttr OnAuxclick evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "auxclick ", value: cb' (Cb (const (value $> true))) }
 
 instance Attr anything OnAuxclick (Effect Boolean) where
-  attr OnAuxclick value = unsafeAttribute
-    { key: "auxclick ", value: cb' (Cb (const value)) }
+  pureAttr OnAuxclick value = unsafeAttribute $ Right $ pure $
+    unsafeVolatileAttribute
+  mapAttr OnAuxclick evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "auxclick ", value: cb' (Cb (const value)) }
 
 type OnAuxclickEffect =
   forall element
@@ -24,5 +35,6 @@ type OnAuxclickEffect =
   => Event (Attribute element)
 
 instance Attr everything OnAuxclick Unit where
-  attr OnAuxclick _ = unsafeAttribute
-    { key: "auxclick ", value: unset' }
+  pureAttr OnAuxclick _ = unsafeAttribute $ Right $ pure $
+    unsafeVolatileAttribute
+      { key: "auxclick ", value: unset' }

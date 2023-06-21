@@ -1,139 +1,240 @@
 module Deku.DOM.Attr.XmlBase where
 
 import Prelude
+import Data.Either (Either(..))
 
-import Deku.DOM.Elt.View (View_)
-import Deku.DOM.Elt.Switch (Switch_)
-import Deku.DOM.Elt.Mpath (Mpath_)
-import Deku.DOM.Elt.Metadata (Metadata_)
-import Deku.DOM.Elt.Image (Image_)
-import Deku.DOM.Elt.Filter (Filter_)
-import Deku.DOM.Elt.FeTurbulence (FeTurbulence_)
-import Deku.DOM.Elt.FeTile (FeTile_)
-import Deku.DOM.Elt.FeSpotLight (FeSpotLight_)
-import Deku.DOM.Elt.FeSpecularLighting (FeSpecularLighting_)
-import Deku.DOM.Elt.FePointLight (FePointLight_)
-import Deku.DOM.Elt.FeOffset (FeOffset_)
-import Deku.DOM.Elt.FeMorphology (FeMorphology_)
-import Deku.DOM.Elt.FeMergeNode (FeMergeNode_)
-import Deku.DOM.Elt.FeMerge (FeMerge_)
-import Deku.DOM.Elt.FeImage (FeImage_)
-import Deku.DOM.Elt.FeGaussianBlur (FeGaussianBlur_)
-import Deku.DOM.Elt.FeFuncR (FeFuncR_)
-import Deku.DOM.Elt.FeFuncG (FeFuncG_)
-import Deku.DOM.Elt.FeFuncB (FeFuncB_)
-import Deku.DOM.Elt.FeFuncA (FeFuncA_)
-import Deku.DOM.Elt.FeFlood (FeFlood_)
-import Deku.DOM.Elt.FeDistantLight (FeDistantLight_)
-import Deku.DOM.Elt.FeDisplacementMap (FeDisplacementMap_)
-import Deku.DOM.Elt.FeDiffuseLighting (FeDiffuseLighting_)
-import Deku.DOM.Elt.FeConvolveMatrix (FeConvolveMatrix_)
-import Deku.DOM.Elt.FeComposite (FeComposite_)
-import Deku.DOM.Elt.FeComponentTransfer (FeComponentTransfer_)
-import Deku.DOM.Elt.FeColorMatrix (FeColorMatrix_)
-import Deku.DOM.Elt.FeBlend (FeBlend_)
-import Deku.DOM.Elt.Discard (Discard_)
-import Deku.DOM.Elt.AnimateTransform (AnimateTransform_)
-import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
+import Deku.Attribute (class Attr, prop', unsafeAttribute, unsafePureAttribute, unsafeVolatileAttribute, unset')
+import Deku.DOM.Tags as Tags
 
 data XmlBase = XmlBase
 
-instance Attr AnimateTransform_ XmlBase String where
-  attr XmlBase value = unsafeAttribute { key: "xml:base", value: prop' value }
+instance Attr Tags.AnimateTransform_ XmlBase String where
+  pureAttr XmlBase value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "xml:base", value }
 
-instance Attr Discard_ XmlBase String where
-  attr XmlBase value = unsafeAttribute { key: "xml:base", value: prop' value }
+  mapAttr XmlBase evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "xml:base", value: prop' value }
 
-instance Attr FeBlend_ XmlBase String where
-  attr XmlBase value = unsafeAttribute { key: "xml:base", value: prop' value }
+instance Attr Tags.Discard_ XmlBase String where
+  pureAttr XmlBase value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "xml:base", value }
 
-instance Attr FeColorMatrix_ XmlBase String where
-  attr XmlBase value = unsafeAttribute { key: "xml:base", value: prop' value }
+  mapAttr XmlBase evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "xml:base", value: prop' value }
 
-instance Attr FeComponentTransfer_ XmlBase String where
-  attr XmlBase value = unsafeAttribute { key: "xml:base", value: prop' value }
+instance Attr Tags.FeBlend_ XmlBase String where
+  pureAttr XmlBase value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "xml:base", value }
 
-instance Attr FeComposite_ XmlBase String where
-  attr XmlBase value = unsafeAttribute { key: "xml:base", value: prop' value }
+  mapAttr XmlBase evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "xml:base", value: prop' value }
 
-instance Attr FeConvolveMatrix_ XmlBase String where
-  attr XmlBase value = unsafeAttribute { key: "xml:base", value: prop' value }
+instance Attr Tags.FeColorMatrix_ XmlBase String where
+  pureAttr XmlBase value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "xml:base", value }
 
-instance Attr FeDiffuseLighting_ XmlBase String where
-  attr XmlBase value = unsafeAttribute { key: "xml:base", value: prop' value }
+  mapAttr XmlBase evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "xml:base", value: prop' value }
 
-instance Attr FeDisplacementMap_ XmlBase String where
-  attr XmlBase value = unsafeAttribute { key: "xml:base", value: prop' value }
+instance Attr Tags.FeComponentTransfer_ XmlBase String where
+  pureAttr XmlBase value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "xml:base", value }
 
-instance Attr FeDistantLight_ XmlBase String where
-  attr XmlBase value = unsafeAttribute { key: "xml:base", value: prop' value }
+  mapAttr XmlBase evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "xml:base", value: prop' value }
 
-instance Attr FeFlood_ XmlBase String where
-  attr XmlBase value = unsafeAttribute { key: "xml:base", value: prop' value }
+instance Attr Tags.FeComposite_ XmlBase String where
+  pureAttr XmlBase value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "xml:base", value }
 
-instance Attr FeFuncA_ XmlBase String where
-  attr XmlBase value = unsafeAttribute { key: "xml:base", value: prop' value }
+  mapAttr XmlBase evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "xml:base", value: prop' value }
 
-instance Attr FeFuncB_ XmlBase String where
-  attr XmlBase value = unsafeAttribute { key: "xml:base", value: prop' value }
+instance Attr Tags.FeConvolveMatrix_ XmlBase String where
+  pureAttr XmlBase value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "xml:base", value }
 
-instance Attr FeFuncG_ XmlBase String where
-  attr XmlBase value = unsafeAttribute { key: "xml:base", value: prop' value }
+  mapAttr XmlBase evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "xml:base", value: prop' value }
 
-instance Attr FeFuncR_ XmlBase String where
-  attr XmlBase value = unsafeAttribute { key: "xml:base", value: prop' value }
+instance Attr Tags.FeDiffuseLighting_ XmlBase String where
+  pureAttr XmlBase value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "xml:base", value }
 
-instance Attr FeGaussianBlur_ XmlBase String where
-  attr XmlBase value = unsafeAttribute { key: "xml:base", value: prop' value }
+  mapAttr XmlBase evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "xml:base", value: prop' value }
 
-instance Attr FeImage_ XmlBase String where
-  attr XmlBase value = unsafeAttribute { key: "xml:base", value: prop' value }
+instance Attr Tags.FeDisplacementMap_ XmlBase String where
+  pureAttr XmlBase value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "xml:base", value }
 
-instance Attr FeMerge_ XmlBase String where
-  attr XmlBase value = unsafeAttribute { key: "xml:base", value: prop' value }
+  mapAttr XmlBase evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "xml:base", value: prop' value }
 
-instance Attr FeMergeNode_ XmlBase String where
-  attr XmlBase value = unsafeAttribute { key: "xml:base", value: prop' value }
+instance Attr Tags.FeDistantLight_ XmlBase String where
+  pureAttr XmlBase value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "xml:base", value }
 
-instance Attr FeMorphology_ XmlBase String where
-  attr XmlBase value = unsafeAttribute { key: "xml:base", value: prop' value }
+  mapAttr XmlBase evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "xml:base", value: prop' value }
 
-instance Attr FeOffset_ XmlBase String where
-  attr XmlBase value = unsafeAttribute { key: "xml:base", value: prop' value }
+instance Attr Tags.FeFlood_ XmlBase String where
+  pureAttr XmlBase value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "xml:base", value }
 
-instance Attr FePointLight_ XmlBase String where
-  attr XmlBase value = unsafeAttribute { key: "xml:base", value: prop' value }
+  mapAttr XmlBase evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "xml:base", value: prop' value }
 
-instance Attr FeSpecularLighting_ XmlBase String where
-  attr XmlBase value = unsafeAttribute { key: "xml:base", value: prop' value }
+instance Attr Tags.FeFuncA_ XmlBase String where
+  pureAttr XmlBase value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "xml:base", value }
 
-instance Attr FeSpotLight_ XmlBase String where
-  attr XmlBase value = unsafeAttribute { key: "xml:base", value: prop' value }
+  mapAttr XmlBase evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "xml:base", value: prop' value }
 
-instance Attr FeTile_ XmlBase String where
-  attr XmlBase value = unsafeAttribute { key: "xml:base", value: prop' value }
+instance Attr Tags.FeFuncB_ XmlBase String where
+  pureAttr XmlBase value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "xml:base", value }
 
-instance Attr FeTurbulence_ XmlBase String where
-  attr XmlBase value = unsafeAttribute { key: "xml:base", value: prop' value }
+  mapAttr XmlBase evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "xml:base", value: prop' value }
 
-instance Attr Filter_ XmlBase String where
-  attr XmlBase value = unsafeAttribute { key: "xml:base", value: prop' value }
+instance Attr Tags.FeFuncG_ XmlBase String where
+  pureAttr XmlBase value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "xml:base", value }
 
-instance Attr Image_ XmlBase String where
-  attr XmlBase value = unsafeAttribute { key: "xml:base", value: prop' value }
+  mapAttr XmlBase evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "xml:base", value: prop' value }
 
-instance Attr Metadata_ XmlBase String where
-  attr XmlBase value = unsafeAttribute { key: "xml:base", value: prop' value }
+instance Attr Tags.FeFuncR_ XmlBase String where
+  pureAttr XmlBase value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "xml:base", value }
 
-instance Attr Mpath_ XmlBase String where
-  attr XmlBase value = unsafeAttribute { key: "xml:base", value: prop' value }
+  mapAttr XmlBase evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "xml:base", value: prop' value }
 
-instance Attr Switch_ XmlBase String where
-  attr XmlBase value = unsafeAttribute { key: "xml:base", value: prop' value }
+instance Attr Tags.FeGaussianBlur_ XmlBase String where
+  pureAttr XmlBase value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "xml:base", value }
 
-instance Attr View_ XmlBase String where
-  attr XmlBase value = unsafeAttribute { key: "xml:base", value: prop' value }
+  mapAttr XmlBase evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "xml:base", value: prop' value }
+
+instance Attr Tags.FeImage_ XmlBase String where
+  pureAttr XmlBase value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "xml:base", value }
+
+  mapAttr XmlBase evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "xml:base", value: prop' value }
+
+instance Attr Tags.FeMerge_ XmlBase String where
+  pureAttr XmlBase value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "xml:base", value }
+
+  mapAttr XmlBase evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "xml:base", value: prop' value }
+
+instance Attr Tags.FeMergeNode_ XmlBase String where
+  pureAttr XmlBase value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "xml:base", value }
+
+  mapAttr XmlBase evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "xml:base", value: prop' value }
+
+instance Attr Tags.FeMorphology_ XmlBase String where
+  pureAttr XmlBase value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "xml:base", value }
+
+  mapAttr XmlBase evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "xml:base", value: prop' value }
+
+instance Attr Tags.FeOffset_ XmlBase String where
+  pureAttr XmlBase value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "xml:base", value }
+
+  mapAttr XmlBase evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "xml:base", value: prop' value }
+
+instance Attr Tags.FePointLight_ XmlBase String where
+  pureAttr XmlBase value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "xml:base", value }
+
+  mapAttr XmlBase evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "xml:base", value: prop' value }
+
+instance Attr Tags.FeSpecularLighting_ XmlBase String where
+  pureAttr XmlBase value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "xml:base", value }
+
+  mapAttr XmlBase evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "xml:base", value: prop' value }
+
+instance Attr Tags.FeSpotLight_ XmlBase String where
+  pureAttr XmlBase value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "xml:base", value }
+
+  mapAttr XmlBase evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "xml:base", value: prop' value }
+
+instance Attr Tags.FeTile_ XmlBase String where
+  pureAttr XmlBase value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "xml:base", value }
+
+  mapAttr XmlBase evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "xml:base", value: prop' value }
+
+instance Attr Tags.FeTurbulence_ XmlBase String where
+  pureAttr XmlBase value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "xml:base", value }
+
+  mapAttr XmlBase evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "xml:base", value: prop' value }
+
+instance Attr Tags.Filter_ XmlBase String where
+  pureAttr XmlBase value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "xml:base", value }
+
+  mapAttr XmlBase evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "xml:base", value: prop' value }
+
+instance Attr Tags.Image_ XmlBase String where
+  pureAttr XmlBase value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "xml:base", value }
+
+  mapAttr XmlBase evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "xml:base", value: prop' value }
+
+instance Attr Tags.Metadata_ XmlBase String where
+  pureAttr XmlBase value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "xml:base", value }
+
+  mapAttr XmlBase evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "xml:base", value: prop' value }
+
+instance Attr Tags.Mpath_ XmlBase String where
+  pureAttr XmlBase value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "xml:base", value }
+
+  mapAttr XmlBase evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "xml:base", value: prop' value }
+
+instance Attr Tags.Switch_ XmlBase String where
+  pureAttr XmlBase value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "xml:base", value }
+
+  mapAttr XmlBase evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "xml:base", value: prop' value }
+
+instance Attr Tags.View_ XmlBase String where
+  pureAttr XmlBase value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "xml:base", value }
+
+  mapAttr XmlBase evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "xml:base", value: prop' value }
 
 instance Attr everything XmlBase Unit where
-  attr XmlBase _ = unsafeAttribute
+  pureAttr XmlBase _ = unsafeAttribute $ Right $ pure $ unsafeVolatileAttribute
     { key: "xml:base", value: unset' }
+  mapAttr XmlBase evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "xml:base", value: unset' }

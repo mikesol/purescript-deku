@@ -1,23 +1,34 @@
 module Deku.DOM.Attr.OnMousemove where
 
 import Prelude
+import Data.Either (Either(..))
 import Effect (Effect)
-import Deku.Attribute (class Attr, Attribute, Cb(..), cb', unsafeAttribute, unset')
+import Deku.Attribute (class Attr, Attribute, Cb(..), cb', unsafeAttribute, unsafePureAttribute, unsafeVolatileAttribute, unset')
+import Deku.DOM.Tags as Tags
 import FRP.Event (Event)
 
 data OnMousemove = OnMousemove
 
 instance Attr anything OnMousemove Cb where
-  attr OnMousemove value = unsafeAttribute
-    { key: "mousemove", value: cb' value }
+  pureAttr OnMousemove value = unsafeAttribute $ Right $ pure $
+    unsafeVolatileAttribute
+  mapAttr OnMousemove evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "mousemove", value: cb' value }
 
 instance Attr anything OnMousemove (Effect Unit) where
-  attr OnMousemove value = unsafeAttribute
-    { key: "mousemove", value: cb' (Cb (const (value $> true))) }
+  pureAttr OnMousemove value = unsafeAttribute $ Right $ pure $
+    unsafeVolatileAttribute
+  mapAttr OnMousemove evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "mousemove", value: cb' (Cb (const (value $> true))) }
 
 instance Attr anything OnMousemove (Effect Boolean) where
-  attr OnMousemove value = unsafeAttribute
-    { key: "mousemove", value: cb' (Cb (const value)) }
+  pureAttr OnMousemove value = unsafeAttribute $ Right $ pure $
+    unsafeVolatileAttribute
+  mapAttr OnMousemove evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "mousemove", value: cb' (Cb (const value)) }
 
 type OnMousemoveEffect =
   forall element
@@ -25,5 +36,6 @@ type OnMousemoveEffect =
   => Event (Attribute element)
 
 instance Attr everything OnMousemove Unit where
-  attr OnMousemove _ = unsafeAttribute
-    { key: "mousemove", value: unset' }
+  pureAttr OnMousemove _ = unsafeAttribute $ Right $ pure $
+    unsafeVolatileAttribute
+      { key: "mousemove", value: unset' }

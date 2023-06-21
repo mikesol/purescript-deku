@@ -1,19 +1,30 @@
 module Deku.DOM.Attr.Rowspan where
 
 import Prelude
+import Data.Either (Either(..))
 
-import Deku.DOM.Elt.Td (Td_)
-import Deku.DOM.Elt.Th (Th_)
-import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
+import Deku.Attribute (class Attr, prop', unsafeAttribute, unsafePureAttribute, unsafeVolatileAttribute, unset')
+import Deku.DOM.Tags as Tags
 
 data Rowspan = Rowspan
 
-instance Attr Td_ Rowspan String where
-  attr Rowspan value = unsafeAttribute { key: "rowspan", value: prop' value }
+instance Attr Tags.Td_ Rowspan String where
+  pureAttr Rowspan value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "rowspan", value }
 
-instance Attr Th_ Rowspan String where
-  attr Rowspan value = unsafeAttribute { key: "rowspan", value: prop' value }
+  mapAttr Rowspan evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "rowspan", value: prop' value }
+
+instance Attr Tags.Th_ Rowspan String where
+  pureAttr Rowspan value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "rowspan", value }
+
+  mapAttr Rowspan evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "rowspan", value: prop' value }
 
 instance Attr everything Rowspan Unit where
-  attr Rowspan _ = unsafeAttribute
+  pureAttr Rowspan _ = unsafeAttribute $ Right $ pure $ unsafeVolatileAttribute
     { key: "rowspan", value: unset' }
+  mapAttr Rowspan evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "rowspan", value: unset' }

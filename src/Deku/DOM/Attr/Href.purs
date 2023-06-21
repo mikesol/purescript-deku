@@ -1,51 +1,86 @@
 module Deku.DOM.Attr.Href where
 
 import Prelude
+import Data.Either (Either(..))
 
-import Deku.DOM.Elt.Use (Use_)
-import Deku.DOM.Elt.TextPath (TextPath_)
-import Deku.DOM.Elt.RadialGradient (RadialGradient_)
-import Deku.DOM.Elt.Pattern (Pattern_)
-import Deku.DOM.Elt.LinearGradient (LinearGradient_)
-import Deku.DOM.Elt.Image (Image_)
-import Deku.DOM.Elt.A (A_)
-import Deku.DOM.Elt.Area (Area_)
-import Deku.DOM.Elt.Base (Base_)
-import Deku.DOM.Elt.Link (Link_)
-import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
+import Deku.Attribute (class Attr, prop', unsafeAttribute, unsafePureAttribute, unsafeVolatileAttribute, unset')
+import Deku.DOM.Tags as Tags
 
 data Href = Href
 
-instance Attr A_ Href String where
-  attr Href value = unsafeAttribute { key: "href", value: prop' value }
+instance Attr Tags.A_ Href String where
+  pureAttr Href value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "href", value }
 
-instance Attr Area_ Href String where
-  attr Href value = unsafeAttribute { key: "href", value: prop' value }
+  mapAttr Href evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "href", value: prop' value }
 
-instance Attr Base_ Href String where
-  attr Href value = unsafeAttribute { key: "href", value: prop' value }
+instance Attr Tags.Area_ Href String where
+  pureAttr Href value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "href", value }
 
-instance Attr Link_ Href String where
-  attr Href value = unsafeAttribute { key: "href", value: prop' value }
+  mapAttr Href evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "href", value: prop' value }
 
-instance Attr Image_ Href String where
-  attr Href value = unsafeAttribute { key: "href", value: prop' value }
+instance Attr Tags.Base_ Href String where
+  pureAttr Href value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "href", value }
 
-instance Attr LinearGradient_ Href String where
-  attr Href value = unsafeAttribute { key: "href", value: prop' value }
+  mapAttr Href evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "href", value: prop' value }
 
-instance Attr Pattern_ Href String where
-  attr Href value = unsafeAttribute { key: "href", value: prop' value }
+instance Attr Tags.Link_ Href String where
+  pureAttr Href value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "href", value }
 
-instance Attr RadialGradient_ Href String where
-  attr Href value = unsafeAttribute { key: "href", value: prop' value }
+  mapAttr Href evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "href", value: prop' value }
 
-instance Attr TextPath_ Href String where
-  attr Href value = unsafeAttribute { key: "href", value: prop' value }
+instance Attr Tags.Image_ Href String where
+  pureAttr Href value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "href", value }
 
-instance Attr Use_ Href String where
-  attr Href value = unsafeAttribute { key: "href", value: prop' value }
+  mapAttr Href evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "href", value: prop' value }
+
+instance Attr Tags.LinearGradient_ Href String where
+  pureAttr Href value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "href", value }
+
+  mapAttr Href evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "href", value: prop' value }
+
+instance Attr Tags.Pattern_ Href String where
+  pureAttr Href value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "href", value }
+
+  mapAttr Href evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "href", value: prop' value }
+
+instance Attr Tags.RadialGradient_ Href String where
+  pureAttr Href value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "href", value }
+
+  mapAttr Href evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "href", value: prop' value }
+
+instance Attr Tags.TextPath_ Href String where
+  pureAttr Href value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "href", value }
+
+  mapAttr Href evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "href", value: prop' value }
+
+instance Attr Tags.Use_ Href String where
+  pureAttr Href value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "href", value }
+
+  mapAttr Href evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "href", value: prop' value }
 
 instance Attr everything Href Unit where
-  attr Href _ = unsafeAttribute
+  pureAttr Href _ = unsafeAttribute $ Right $ pure $ unsafeVolatileAttribute
     { key: "href", value: unset' }
+  mapAttr Href evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "href", value: unset' }

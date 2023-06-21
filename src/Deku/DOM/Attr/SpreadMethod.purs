@@ -1,21 +1,31 @@
 module Deku.DOM.Attr.SpreadMethod where
 
 import Prelude
+import Data.Either (Either(..))
 
-import Deku.DOM.Elt.RadialGradient (RadialGradient_)
-import Deku.DOM.Elt.LinearGradient (LinearGradient_)
-import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
+import Deku.Attribute (class Attr, prop', unsafeAttribute, unsafePureAttribute, unsafeVolatileAttribute, unset')
+import Deku.DOM.Tags as Tags
 
 data SpreadMethod = SpreadMethod
 
-instance Attr LinearGradient_ SpreadMethod String where
-  attr SpreadMethod value = unsafeAttribute
-    { key: "spreadMethod", value: prop' value }
+instance Attr Tags.LinearGradient_ SpreadMethod String where
+  pureAttr SpreadMethod value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "spreadMethod", value }
+  mapAttr SpreadMethod evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "spreadMethod", value: prop' value }
 
-instance Attr RadialGradient_ SpreadMethod String where
-  attr SpreadMethod value = unsafeAttribute
-    { key: "spreadMethod", value: prop' value }
+instance Attr Tags.RadialGradient_ SpreadMethod String where
+  pureAttr SpreadMethod value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "spreadMethod", value }
+  mapAttr SpreadMethod evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "spreadMethod", value: prop' value }
 
 instance Attr everything SpreadMethod Unit where
-  attr SpreadMethod _ = unsafeAttribute
-    { key: "spreadMethod", value: unset' }
+  pureAttr SpreadMethod _ = unsafeAttribute $ Right $ pure $
+    unsafeVolatileAttribute
+      { key: "spreadMethod", value: unset' }
+  mapAttr SpreadMethod evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "spreadMethod", value: unset' }

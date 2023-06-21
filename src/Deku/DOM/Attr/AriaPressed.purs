@@ -1,96 +1,136 @@
 module Deku.DOM.Attr.AriaPressed where
 
 import Prelude
+import Data.Either (Either(..))
 
-import Deku.DOM.Elt.View (View_)
-import Deku.DOM.Elt.Use (Use_)
-import Deku.DOM.Elt.Tspan (Tspan_)
-import Deku.DOM.Elt.TextPath (TextPath_)
-import Deku.DOM.Elt.Text (Text_)
-import Deku.DOM.Elt.Symbol (Symbol_)
-import Deku.DOM.Elt.Svg (Svg_)
-import Deku.DOM.Elt.Rect (Rect_)
-import Deku.DOM.Elt.Polyline (Polyline_)
-import Deku.DOM.Elt.Polygon (Polygon_)
-import Deku.DOM.Elt.Path (Path_)
-import Deku.DOM.Elt.Marker (Marker_)
-import Deku.DOM.Elt.Line (Line_)
-import Deku.DOM.Elt.G (G_)
-import Deku.DOM.Elt.ForeignObject (ForeignObject_)
-import Deku.DOM.Elt.Ellipse (Ellipse_)
-import Deku.DOM.Elt.Circle (Circle_)
-import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
+import Deku.Attribute (class Attr, prop', unsafeAttribute, unsafePureAttribute, unsafeVolatileAttribute, unset')
+import Deku.DOM.Tags as Tags
 
 data AriaPressed = AriaPressed
 
-instance Attr Circle_ AriaPressed String where
-  attr AriaPressed value = unsafeAttribute
-    { key: "aria-pressed", value: prop' value }
+instance Attr Tags.Circle_ AriaPressed String where
+  pureAttr AriaPressed value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "aria-pressed", value }
+  mapAttr AriaPressed evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "aria-pressed", value: prop' value }
 
-instance Attr Ellipse_ AriaPressed String where
-  attr AriaPressed value = unsafeAttribute
-    { key: "aria-pressed", value: prop' value }
+instance Attr Tags.Ellipse_ AriaPressed String where
+  pureAttr AriaPressed value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "aria-pressed", value }
+  mapAttr AriaPressed evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "aria-pressed", value: prop' value }
 
-instance Attr ForeignObject_ AriaPressed String where
-  attr AriaPressed value = unsafeAttribute
-    { key: "aria-pressed", value: prop' value }
+instance Attr Tags.ForeignObject_ AriaPressed String where
+  pureAttr AriaPressed value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "aria-pressed", value }
+  mapAttr AriaPressed evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "aria-pressed", value: prop' value }
 
-instance Attr G_ AriaPressed String where
-  attr AriaPressed value = unsafeAttribute
-    { key: "aria-pressed", value: prop' value }
+instance Attr Tags.G_ AriaPressed String where
+  pureAttr AriaPressed value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "aria-pressed", value }
+  mapAttr AriaPressed evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "aria-pressed", value: prop' value }
 
-instance Attr Line_ AriaPressed String where
-  attr AriaPressed value = unsafeAttribute
-    { key: "aria-pressed", value: prop' value }
+instance Attr Tags.Line_ AriaPressed String where
+  pureAttr AriaPressed value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "aria-pressed", value }
+  mapAttr AriaPressed evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "aria-pressed", value: prop' value }
 
-instance Attr Marker_ AriaPressed String where
-  attr AriaPressed value = unsafeAttribute
-    { key: "aria-pressed", value: prop' value }
+instance Attr Tags.Marker_ AriaPressed String where
+  pureAttr AriaPressed value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "aria-pressed", value }
+  mapAttr AriaPressed evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "aria-pressed", value: prop' value }
 
-instance Attr Path_ AriaPressed String where
-  attr AriaPressed value = unsafeAttribute
-    { key: "aria-pressed", value: prop' value }
+instance Attr Tags.Path_ AriaPressed String where
+  pureAttr AriaPressed value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "aria-pressed", value }
+  mapAttr AriaPressed evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "aria-pressed", value: prop' value }
 
-instance Attr Polygon_ AriaPressed String where
-  attr AriaPressed value = unsafeAttribute
-    { key: "aria-pressed", value: prop' value }
+instance Attr Tags.Polygon_ AriaPressed String where
+  pureAttr AriaPressed value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "aria-pressed", value }
+  mapAttr AriaPressed evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "aria-pressed", value: prop' value }
 
-instance Attr Polyline_ AriaPressed String where
-  attr AriaPressed value = unsafeAttribute
-    { key: "aria-pressed", value: prop' value }
+instance Attr Tags.Polyline_ AriaPressed String where
+  pureAttr AriaPressed value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "aria-pressed", value }
+  mapAttr AriaPressed evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "aria-pressed", value: prop' value }
 
-instance Attr Rect_ AriaPressed String where
-  attr AriaPressed value = unsafeAttribute
-    { key: "aria-pressed", value: prop' value }
+instance Attr Tags.Rect_ AriaPressed String where
+  pureAttr AriaPressed value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "aria-pressed", value }
+  mapAttr AriaPressed evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "aria-pressed", value: prop' value }
 
-instance Attr Svg_ AriaPressed String where
-  attr AriaPressed value = unsafeAttribute
-    { key: "aria-pressed", value: prop' value }
+instance Attr Tags.Svg_ AriaPressed String where
+  pureAttr AriaPressed value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "aria-pressed", value }
+  mapAttr AriaPressed evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "aria-pressed", value: prop' value }
 
-instance Attr Symbol_ AriaPressed String where
-  attr AriaPressed value = unsafeAttribute
-    { key: "aria-pressed", value: prop' value }
+instance Attr Tags.Symbol_ AriaPressed String where
+  pureAttr AriaPressed value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "aria-pressed", value }
+  mapAttr AriaPressed evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "aria-pressed", value: prop' value }
 
-instance Attr Text_ AriaPressed String where
-  attr AriaPressed value = unsafeAttribute
-    { key: "aria-pressed", value: prop' value }
+instance Attr Tags.Text_ AriaPressed String where
+  pureAttr AriaPressed value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "aria-pressed", value }
+  mapAttr AriaPressed evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "aria-pressed", value: prop' value }
 
-instance Attr TextPath_ AriaPressed String where
-  attr AriaPressed value = unsafeAttribute
-    { key: "aria-pressed", value: prop' value }
+instance Attr Tags.TextPath_ AriaPressed String where
+  pureAttr AriaPressed value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "aria-pressed", value }
+  mapAttr AriaPressed evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "aria-pressed", value: prop' value }
 
-instance Attr Tspan_ AriaPressed String where
-  attr AriaPressed value = unsafeAttribute
-    { key: "aria-pressed", value: prop' value }
+instance Attr Tags.Tspan_ AriaPressed String where
+  pureAttr AriaPressed value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "aria-pressed", value }
+  mapAttr AriaPressed evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "aria-pressed", value: prop' value }
 
-instance Attr Use_ AriaPressed String where
-  attr AriaPressed value = unsafeAttribute
-    { key: "aria-pressed", value: prop' value }
+instance Attr Tags.Use_ AriaPressed String where
+  pureAttr AriaPressed value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "aria-pressed", value }
+  mapAttr AriaPressed evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "aria-pressed", value: prop' value }
 
-instance Attr View_ AriaPressed String where
-  attr AriaPressed value = unsafeAttribute
-    { key: "aria-pressed", value: prop' value }
+instance Attr Tags.View_ AriaPressed String where
+  pureAttr AriaPressed value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "aria-pressed", value }
+  mapAttr AriaPressed evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "aria-pressed", value: prop' value }
 
 instance Attr everything AriaPressed Unit where
-  attr AriaPressed _ = unsafeAttribute
-    { key: "aria-pressed", value: unset' }
+  pureAttr AriaPressed _ = unsafeAttribute $ Right $ pure $
+    unsafeVolatileAttribute
+      { key: "aria-pressed", value: unset' }
+  mapAttr AriaPressed evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "aria-pressed", value: unset' }

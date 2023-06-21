@@ -1,121 +1,193 @@
 module Deku.DOM.Attr.RequiredExtensions where
 
 import Prelude
+import Data.Either (Either(..))
 
-import Deku.DOM.Elt.Use (Use_)
-import Deku.DOM.Elt.Tspan (Tspan_)
-import Deku.DOM.Elt.TextPath (TextPath_)
-import Deku.DOM.Elt.Text (Text_)
-import Deku.DOM.Elt.Switch (Switch_)
-import Deku.DOM.Elt.Svg (Svg_)
-import Deku.DOM.Elt.Rect (Rect_)
-import Deku.DOM.Elt.Polyline (Polyline_)
-import Deku.DOM.Elt.Polygon (Polygon_)
-import Deku.DOM.Elt.Pattern (Pattern_)
-import Deku.DOM.Elt.Path (Path_)
-import Deku.DOM.Elt.Mask (Mask_)
-import Deku.DOM.Elt.Marker (Marker_)
-import Deku.DOM.Elt.Line (Line_)
-import Deku.DOM.Elt.Image (Image_)
-import Deku.DOM.Elt.G (G_)
-import Deku.DOM.Elt.ForeignObject (ForeignObject_)
-import Deku.DOM.Elt.Ellipse (Ellipse_)
-import Deku.DOM.Elt.Discard (Discard_)
-import Deku.DOM.Elt.ClipPath (ClipPath_)
-import Deku.DOM.Elt.Circle (Circle_)
-import Deku.DOM.Elt.AnimateTransform (AnimateTransform_)
-import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
+import Deku.Attribute (class Attr, prop', unsafeAttribute, unsafePureAttribute, unsafeVolatileAttribute, unset')
+import Deku.DOM.Tags as Tags
 
 data RequiredExtensions = RequiredExtensions
 
-instance Attr AnimateTransform_ RequiredExtensions String where
-  attr RequiredExtensions value = unsafeAttribute
-    { key: "requiredExtensions", value: prop' value }
+instance Attr Tags.AnimateTransform_ RequiredExtensions String where
+  pureAttr RequiredExtensions value = unsafeAttribute $ Left $
+    unsafePureAttribute
+      { key: "requiredExtensions", value }
+  mapAttr RequiredExtensions evalue = unsafeAttribute $ Right $ evalue <#>
+    \value -> unsafeVolatileAttribute
+      { key: "requiredExtensions", value: prop' value }
 
-instance Attr Circle_ RequiredExtensions String where
-  attr RequiredExtensions value = unsafeAttribute
-    { key: "requiredExtensions", value: prop' value }
+instance Attr Tags.Circle_ RequiredExtensions String where
+  pureAttr RequiredExtensions value = unsafeAttribute $ Left $
+    unsafePureAttribute
+      { key: "requiredExtensions", value }
+  mapAttr RequiredExtensions evalue = unsafeAttribute $ Right $ evalue <#>
+    \value -> unsafeVolatileAttribute
+      { key: "requiredExtensions", value: prop' value }
 
-instance Attr ClipPath_ RequiredExtensions String where
-  attr RequiredExtensions value = unsafeAttribute
-    { key: "requiredExtensions", value: prop' value }
+instance Attr Tags.ClipPath_ RequiredExtensions String where
+  pureAttr RequiredExtensions value = unsafeAttribute $ Left $
+    unsafePureAttribute
+      { key: "requiredExtensions", value }
+  mapAttr RequiredExtensions evalue = unsafeAttribute $ Right $ evalue <#>
+    \value -> unsafeVolatileAttribute
+      { key: "requiredExtensions", value: prop' value }
 
-instance Attr Discard_ RequiredExtensions String where
-  attr RequiredExtensions value = unsafeAttribute
-    { key: "requiredExtensions", value: prop' value }
+instance Attr Tags.Discard_ RequiredExtensions String where
+  pureAttr RequiredExtensions value = unsafeAttribute $ Left $
+    unsafePureAttribute
+      { key: "requiredExtensions", value }
+  mapAttr RequiredExtensions evalue = unsafeAttribute $ Right $ evalue <#>
+    \value -> unsafeVolatileAttribute
+      { key: "requiredExtensions", value: prop' value }
 
-instance Attr Ellipse_ RequiredExtensions String where
-  attr RequiredExtensions value = unsafeAttribute
-    { key: "requiredExtensions", value: prop' value }
+instance Attr Tags.Ellipse_ RequiredExtensions String where
+  pureAttr RequiredExtensions value = unsafeAttribute $ Left $
+    unsafePureAttribute
+      { key: "requiredExtensions", value }
+  mapAttr RequiredExtensions evalue = unsafeAttribute $ Right $ evalue <#>
+    \value -> unsafeVolatileAttribute
+      { key: "requiredExtensions", value: prop' value }
 
-instance Attr ForeignObject_ RequiredExtensions String where
-  attr RequiredExtensions value = unsafeAttribute
-    { key: "requiredExtensions", value: prop' value }
+instance Attr Tags.ForeignObject_ RequiredExtensions String where
+  pureAttr RequiredExtensions value = unsafeAttribute $ Left $
+    unsafePureAttribute
+      { key: "requiredExtensions", value }
+  mapAttr RequiredExtensions evalue = unsafeAttribute $ Right $ evalue <#>
+    \value -> unsafeVolatileAttribute
+      { key: "requiredExtensions", value: prop' value }
 
-instance Attr G_ RequiredExtensions String where
-  attr RequiredExtensions value = unsafeAttribute
-    { key: "requiredExtensions", value: prop' value }
+instance Attr Tags.G_ RequiredExtensions String where
+  pureAttr RequiredExtensions value = unsafeAttribute $ Left $
+    unsafePureAttribute
+      { key: "requiredExtensions", value }
+  mapAttr RequiredExtensions evalue = unsafeAttribute $ Right $ evalue <#>
+    \value -> unsafeVolatileAttribute
+      { key: "requiredExtensions", value: prop' value }
 
-instance Attr Image_ RequiredExtensions String where
-  attr RequiredExtensions value = unsafeAttribute
-    { key: "requiredExtensions", value: prop' value }
+instance Attr Tags.Image_ RequiredExtensions String where
+  pureAttr RequiredExtensions value = unsafeAttribute $ Left $
+    unsafePureAttribute
+      { key: "requiredExtensions", value }
+  mapAttr RequiredExtensions evalue = unsafeAttribute $ Right $ evalue <#>
+    \value -> unsafeVolatileAttribute
+      { key: "requiredExtensions", value: prop' value }
 
-instance Attr Line_ RequiredExtensions String where
-  attr RequiredExtensions value = unsafeAttribute
-    { key: "requiredExtensions", value: prop' value }
+instance Attr Tags.Line_ RequiredExtensions String where
+  pureAttr RequiredExtensions value = unsafeAttribute $ Left $
+    unsafePureAttribute
+      { key: "requiredExtensions", value }
+  mapAttr RequiredExtensions evalue = unsafeAttribute $ Right $ evalue <#>
+    \value -> unsafeVolatileAttribute
+      { key: "requiredExtensions", value: prop' value }
 
-instance Attr Marker_ RequiredExtensions String where
-  attr RequiredExtensions value = unsafeAttribute
-    { key: "requiredExtensions", value: prop' value }
+instance Attr Tags.Marker_ RequiredExtensions String where
+  pureAttr RequiredExtensions value = unsafeAttribute $ Left $
+    unsafePureAttribute
+      { key: "requiredExtensions", value }
+  mapAttr RequiredExtensions evalue = unsafeAttribute $ Right $ evalue <#>
+    \value -> unsafeVolatileAttribute
+      { key: "requiredExtensions", value: prop' value }
 
-instance Attr Mask_ RequiredExtensions String where
-  attr RequiredExtensions value = unsafeAttribute
-    { key: "requiredExtensions", value: prop' value }
+instance Attr Tags.Mask_ RequiredExtensions String where
+  pureAttr RequiredExtensions value = unsafeAttribute $ Left $
+    unsafePureAttribute
+      { key: "requiredExtensions", value }
+  mapAttr RequiredExtensions evalue = unsafeAttribute $ Right $ evalue <#>
+    \value -> unsafeVolatileAttribute
+      { key: "requiredExtensions", value: prop' value }
 
-instance Attr Path_ RequiredExtensions String where
-  attr RequiredExtensions value = unsafeAttribute
-    { key: "requiredExtensions", value: prop' value }
+instance Attr Tags.Path_ RequiredExtensions String where
+  pureAttr RequiredExtensions value = unsafeAttribute $ Left $
+    unsafePureAttribute
+      { key: "requiredExtensions", value }
+  mapAttr RequiredExtensions evalue = unsafeAttribute $ Right $ evalue <#>
+    \value -> unsafeVolatileAttribute
+      { key: "requiredExtensions", value: prop' value }
 
-instance Attr Pattern_ RequiredExtensions String where
-  attr RequiredExtensions value = unsafeAttribute
-    { key: "requiredExtensions", value: prop' value }
+instance Attr Tags.Pattern_ RequiredExtensions String where
+  pureAttr RequiredExtensions value = unsafeAttribute $ Left $
+    unsafePureAttribute
+      { key: "requiredExtensions", value }
+  mapAttr RequiredExtensions evalue = unsafeAttribute $ Right $ evalue <#>
+    \value -> unsafeVolatileAttribute
+      { key: "requiredExtensions", value: prop' value }
 
-instance Attr Polygon_ RequiredExtensions String where
-  attr RequiredExtensions value = unsafeAttribute
-    { key: "requiredExtensions", value: prop' value }
+instance Attr Tags.Polygon_ RequiredExtensions String where
+  pureAttr RequiredExtensions value = unsafeAttribute $ Left $
+    unsafePureAttribute
+      { key: "requiredExtensions", value }
+  mapAttr RequiredExtensions evalue = unsafeAttribute $ Right $ evalue <#>
+    \value -> unsafeVolatileAttribute
+      { key: "requiredExtensions", value: prop' value }
 
-instance Attr Polyline_ RequiredExtensions String where
-  attr RequiredExtensions value = unsafeAttribute
-    { key: "requiredExtensions", value: prop' value }
+instance Attr Tags.Polyline_ RequiredExtensions String where
+  pureAttr RequiredExtensions value = unsafeAttribute $ Left $
+    unsafePureAttribute
+      { key: "requiredExtensions", value }
+  mapAttr RequiredExtensions evalue = unsafeAttribute $ Right $ evalue <#>
+    \value -> unsafeVolatileAttribute
+      { key: "requiredExtensions", value: prop' value }
 
-instance Attr Rect_ RequiredExtensions String where
-  attr RequiredExtensions value = unsafeAttribute
-    { key: "requiredExtensions", value: prop' value }
+instance Attr Tags.Rect_ RequiredExtensions String where
+  pureAttr RequiredExtensions value = unsafeAttribute $ Left $
+    unsafePureAttribute
+      { key: "requiredExtensions", value }
+  mapAttr RequiredExtensions evalue = unsafeAttribute $ Right $ evalue <#>
+    \value -> unsafeVolatileAttribute
+      { key: "requiredExtensions", value: prop' value }
 
-instance Attr Svg_ RequiredExtensions String where
-  attr RequiredExtensions value = unsafeAttribute
-    { key: "requiredExtensions", value: prop' value }
+instance Attr Tags.Svg_ RequiredExtensions String where
+  pureAttr RequiredExtensions value = unsafeAttribute $ Left $
+    unsafePureAttribute
+      { key: "requiredExtensions", value }
+  mapAttr RequiredExtensions evalue = unsafeAttribute $ Right $ evalue <#>
+    \value -> unsafeVolatileAttribute
+      { key: "requiredExtensions", value: prop' value }
 
-instance Attr Switch_ RequiredExtensions String where
-  attr RequiredExtensions value = unsafeAttribute
-    { key: "requiredExtensions", value: prop' value }
+instance Attr Tags.Switch_ RequiredExtensions String where
+  pureAttr RequiredExtensions value = unsafeAttribute $ Left $
+    unsafePureAttribute
+      { key: "requiredExtensions", value }
+  mapAttr RequiredExtensions evalue = unsafeAttribute $ Right $ evalue <#>
+    \value -> unsafeVolatileAttribute
+      { key: "requiredExtensions", value: prop' value }
 
-instance Attr Text_ RequiredExtensions String where
-  attr RequiredExtensions value = unsafeAttribute
-    { key: "requiredExtensions", value: prop' value }
+instance Attr Tags.Text_ RequiredExtensions String where
+  pureAttr RequiredExtensions value = unsafeAttribute $ Left $
+    unsafePureAttribute
+      { key: "requiredExtensions", value }
+  mapAttr RequiredExtensions evalue = unsafeAttribute $ Right $ evalue <#>
+    \value -> unsafeVolatileAttribute
+      { key: "requiredExtensions", value: prop' value }
 
-instance Attr TextPath_ RequiredExtensions String where
-  attr RequiredExtensions value = unsafeAttribute
-    { key: "requiredExtensions", value: prop' value }
+instance Attr Tags.TextPath_ RequiredExtensions String where
+  pureAttr RequiredExtensions value = unsafeAttribute $ Left $
+    unsafePureAttribute
+      { key: "requiredExtensions", value }
+  mapAttr RequiredExtensions evalue = unsafeAttribute $ Right $ evalue <#>
+    \value -> unsafeVolatileAttribute
+      { key: "requiredExtensions", value: prop' value }
 
-instance Attr Tspan_ RequiredExtensions String where
-  attr RequiredExtensions value = unsafeAttribute
-    { key: "requiredExtensions", value: prop' value }
+instance Attr Tags.Tspan_ RequiredExtensions String where
+  pureAttr RequiredExtensions value = unsafeAttribute $ Left $
+    unsafePureAttribute
+      { key: "requiredExtensions", value }
+  mapAttr RequiredExtensions evalue = unsafeAttribute $ Right $ evalue <#>
+    \value -> unsafeVolatileAttribute
+      { key: "requiredExtensions", value: prop' value }
 
-instance Attr Use_ RequiredExtensions String where
-  attr RequiredExtensions value = unsafeAttribute
-    { key: "requiredExtensions", value: prop' value }
+instance Attr Tags.Use_ RequiredExtensions String where
+  pureAttr RequiredExtensions value = unsafeAttribute $ Left $
+    unsafePureAttribute
+      { key: "requiredExtensions", value }
+  mapAttr RequiredExtensions evalue = unsafeAttribute $ Right $ evalue <#>
+    \value -> unsafeVolatileAttribute
+      { key: "requiredExtensions", value: prop' value }
 
 instance Attr everything RequiredExtensions Unit where
-  attr RequiredExtensions _ = unsafeAttribute
-    { key: "requiredExtensions", value: unset' }
+  pureAttr RequiredExtensions _ = unsafeAttribute $ Right $ pure $
+    unsafeVolatileAttribute
+      { key: "requiredExtensions", value: unset' }
+  mapAttr RequiredExtensions evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "requiredExtensions", value: unset' }

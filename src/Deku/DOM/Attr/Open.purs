@@ -1,19 +1,30 @@
 module Deku.DOM.Attr.Open where
 
 import Prelude
+import Data.Either (Either(..))
 
-import Deku.DOM.Elt.Details (Details_)
-import Deku.DOM.Elt.Dialog (Dialog_)
-import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
+import Deku.Attribute (class Attr, prop', unsafeAttribute, unsafePureAttribute, unsafeVolatileAttribute, unset')
+import Deku.DOM.Tags as Tags
 
 data Open = Open
 
-instance Attr Details_ Open String where
-  attr Open value = unsafeAttribute { key: "open", value: prop' value }
+instance Attr Tags.Details_ Open String where
+  pureAttr Open value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "open", value }
 
-instance Attr Dialog_ Open String where
-  attr Open value = unsafeAttribute { key: "open", value: prop' value }
+  mapAttr Open evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "open", value: prop' value }
+
+instance Attr Tags.Dialog_ Open String where
+  pureAttr Open value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "open", value }
+
+  mapAttr Open evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "open", value: prop' value }
 
 instance Attr everything Open Unit where
-  attr Open _ = unsafeAttribute
+  pureAttr Open _ = unsafeAttribute $ Right $ pure $ unsafeVolatileAttribute
     { key: "open", value: unset' }
+  mapAttr Open evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "open", value: unset' }

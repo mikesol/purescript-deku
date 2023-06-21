@@ -1,26 +1,39 @@
 module Deku.DOM.Attr.OnLoad where
 
 import Prelude
+import Data.Either (Either(..))
 import Effect (Effect)
-import Deku.Attribute (class Attr, Attribute, Cb(..), cb', unsafeAttribute, unset')
+import Deku.Attribute (class Attr, Attribute, Cb(..), cb', unsafeAttribute, unsafePureAttribute, unsafeVolatileAttribute, unset')
+import Deku.DOM.Tags as Tags
 import FRP.Event (Event)
 
 data OnLoad = OnLoad
 
 instance Attr anything OnLoad Cb where
-  attr OnLoad value = unsafeAttribute { key: "load", value: cb' value }
+  pureAttr OnLoad value = unsafeAttribute $ Right $ pure $
+    unsafeVolatileAttribute { key: "load", value: cb' value }
+  mapAttr OnLoad evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "load", value: cb' value }
 
 instance Attr anything OnLoad (Effect Unit) where
-  attr OnLoad value = unsafeAttribute
-    { key: "load", value: cb' (Cb (const (value $> true))) }
+  pureAttr OnLoad value = unsafeAttribute $ Right $ pure $
+    unsafeVolatileAttribute
+  mapAttr OnLoad evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "load", value: cb' (Cb (const (value $> true))) }
 
 instance Attr anything OnLoad (Effect Boolean) where
-  attr OnLoad value = unsafeAttribute
-    { key: "load", value: cb' (Cb (const value)) }
+  pureAttr OnLoad value = unsafeAttribute $ Right $ pure $
+    unsafeVolatileAttribute
+  mapAttr OnLoad evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "load", value: cb' (Cb (const value)) }
 
 type OnLoadEffect =
   forall element. Attr element OnLoad (Effect Unit) => Event (Attribute element)
 
 instance Attr everything OnLoad Unit where
-  attr OnLoad _ = unsafeAttribute
+  pureAttr OnLoad _ = unsafeAttribute $ Right $ pure $ unsafeVolatileAttribute
+    { key: "load", value: unset' }
+  mapAttr OnLoad evalue = unsafeAttribute $ Right $ evalue <#> \value -> unsafeVolatileAttribute
     { key: "load", value: unset' }

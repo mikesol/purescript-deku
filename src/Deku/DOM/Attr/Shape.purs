@@ -1,19 +1,30 @@
 module Deku.DOM.Attr.Shape where
 
 import Prelude
+import Data.Either (Either(..))
 
-import Deku.DOM.Elt.A (A_)
-import Deku.DOM.Elt.Area (Area_)
-import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
+import Deku.Attribute (class Attr, prop', unsafeAttribute, unsafePureAttribute, unsafeVolatileAttribute, unset')
+import Deku.DOM.Tags as Tags
 
 data Shape = Shape
 
-instance Attr A_ Shape String where
-  attr Shape value = unsafeAttribute { key: "shape", value: prop' value }
+instance Attr Tags.A_ Shape String where
+  pureAttr Shape value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "shape", value }
 
-instance Attr Area_ Shape String where
-  attr Shape value = unsafeAttribute { key: "shape", value: prop' value }
+  mapAttr Shape evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "shape", value: prop' value }
+
+instance Attr Tags.Area_ Shape String where
+  pureAttr Shape value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "shape", value }
+
+  mapAttr Shape evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "shape", value: prop' value }
 
 instance Attr everything Shape Unit where
-  attr Shape _ = unsafeAttribute
+  pureAttr Shape _ = unsafeAttribute $ Right $ pure $ unsafeVolatileAttribute
     { key: "shape", value: unset' }
+  mapAttr Shape evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "shape", value: unset' }

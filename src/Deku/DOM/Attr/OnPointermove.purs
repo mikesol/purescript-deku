@@ -1,23 +1,34 @@
 module Deku.DOM.Attr.OnPointermove where
 
 import Prelude
+import Data.Either (Either(..))
 import Effect (Effect)
-import Deku.Attribute (class Attr, Attribute, Cb(..), cb', unsafeAttribute, unset')
+import Deku.Attribute (class Attr, Attribute, Cb(..), cb', unsafeAttribute, unsafePureAttribute, unsafeVolatileAttribute, unset')
+import Deku.DOM.Tags as Tags
 import FRP.Event (Event)
 
 data OnPointermove = OnPointermove
 
 instance Attr anything OnPointermove Cb where
-  attr OnPointermove value = unsafeAttribute
-    { key: "pointermove", value: cb' value }
+  pureAttr OnPointermove value = unsafeAttribute $ Right $ pure $
+    unsafeVolatileAttribute
+  mapAttr OnPointermove evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "pointermove", value: cb' value }
 
 instance Attr anything OnPointermove (Effect Unit) where
-  attr OnPointermove value = unsafeAttribute
-    { key: "pointermove", value: cb' (Cb (const (value $> true))) }
+  pureAttr OnPointermove value = unsafeAttribute $ Right $ pure $
+    unsafeVolatileAttribute
+  mapAttr OnPointermove evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "pointermove", value: cb' (Cb (const (value $> true))) }
 
 instance Attr anything OnPointermove (Effect Boolean) where
-  attr OnPointermove value = unsafeAttribute
-    { key: "pointermove", value: cb' (Cb (const value)) }
+  pureAttr OnPointermove value = unsafeAttribute $ Right $ pure $
+    unsafeVolatileAttribute
+  mapAttr OnPointermove evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "pointermove", value: cb' (Cb (const value)) }
 
 type OnPointermoveEffect =
   forall element
@@ -25,5 +36,6 @@ type OnPointermoveEffect =
   => Event (Attribute element)
 
 instance Attr everything OnPointermove Unit where
-  attr OnPointermove _ = unsafeAttribute
-    { key: "pointermove", value: unset' }
+  pureAttr OnPointermove _ = unsafeAttribute $ Right $ pure $
+    unsafeVolatileAttribute
+      { key: "pointermove", value: unset' }

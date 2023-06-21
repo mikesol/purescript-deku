@@ -1,96 +1,153 @@
 module Deku.DOM.Attr.AriaRoledescription where
 
 import Prelude
+import Data.Either (Either(..))
 
-import Deku.DOM.Elt.View (View_)
-import Deku.DOM.Elt.Use (Use_)
-import Deku.DOM.Elt.Tspan (Tspan_)
-import Deku.DOM.Elt.TextPath (TextPath_)
-import Deku.DOM.Elt.Text (Text_)
-import Deku.DOM.Elt.Symbol (Symbol_)
-import Deku.DOM.Elt.Svg (Svg_)
-import Deku.DOM.Elt.Rect (Rect_)
-import Deku.DOM.Elt.Polyline (Polyline_)
-import Deku.DOM.Elt.Polygon (Polygon_)
-import Deku.DOM.Elt.Path (Path_)
-import Deku.DOM.Elt.Marker (Marker_)
-import Deku.DOM.Elt.Line (Line_)
-import Deku.DOM.Elt.G (G_)
-import Deku.DOM.Elt.ForeignObject (ForeignObject_)
-import Deku.DOM.Elt.Ellipse (Ellipse_)
-import Deku.DOM.Elt.Circle (Circle_)
-import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
+import Deku.Attribute (class Attr, prop', unsafeAttribute, unsafePureAttribute, unsafeVolatileAttribute, unset')
+import Deku.DOM.Tags as Tags
 
 data AriaRoledescription = AriaRoledescription
 
-instance Attr Circle_ AriaRoledescription String where
-  attr AriaRoledescription value = unsafeAttribute
-    { key: "aria-roledescription", value: prop' value }
+instance Attr Tags.Circle_ AriaRoledescription String where
+  pureAttr AriaRoledescription value = unsafeAttribute $ Left $
+    unsafePureAttribute
+      { key: "aria-roledescription", value }
+  mapAttr AriaRoledescription evalue = unsafeAttribute $ Right $ evalue <#>
+    \value -> unsafeVolatileAttribute
+      { key: "aria-roledescription", value: prop' value }
 
-instance Attr Ellipse_ AriaRoledescription String where
-  attr AriaRoledescription value = unsafeAttribute
-    { key: "aria-roledescription", value: prop' value }
+instance Attr Tags.Ellipse_ AriaRoledescription String where
+  pureAttr AriaRoledescription value = unsafeAttribute $ Left $
+    unsafePureAttribute
+      { key: "aria-roledescription", value }
+  mapAttr AriaRoledescription evalue = unsafeAttribute $ Right $ evalue <#>
+    \value -> unsafeVolatileAttribute
+      { key: "aria-roledescription", value: prop' value }
 
-instance Attr ForeignObject_ AriaRoledescription String where
-  attr AriaRoledescription value = unsafeAttribute
-    { key: "aria-roledescription", value: prop' value }
+instance Attr Tags.ForeignObject_ AriaRoledescription String where
+  pureAttr AriaRoledescription value = unsafeAttribute $ Left $
+    unsafePureAttribute
+      { key: "aria-roledescription", value }
+  mapAttr AriaRoledescription evalue = unsafeAttribute $ Right $ evalue <#>
+    \value -> unsafeVolatileAttribute
+      { key: "aria-roledescription", value: prop' value }
 
-instance Attr G_ AriaRoledescription String where
-  attr AriaRoledescription value = unsafeAttribute
-    { key: "aria-roledescription", value: prop' value }
+instance Attr Tags.G_ AriaRoledescription String where
+  pureAttr AriaRoledescription value = unsafeAttribute $ Left $
+    unsafePureAttribute
+      { key: "aria-roledescription", value }
+  mapAttr AriaRoledescription evalue = unsafeAttribute $ Right $ evalue <#>
+    \value -> unsafeVolatileAttribute
+      { key: "aria-roledescription", value: prop' value }
 
-instance Attr Line_ AriaRoledescription String where
-  attr AriaRoledescription value = unsafeAttribute
-    { key: "aria-roledescription", value: prop' value }
+instance Attr Tags.Line_ AriaRoledescription String where
+  pureAttr AriaRoledescription value = unsafeAttribute $ Left $
+    unsafePureAttribute
+      { key: "aria-roledescription", value }
+  mapAttr AriaRoledescription evalue = unsafeAttribute $ Right $ evalue <#>
+    \value -> unsafeVolatileAttribute
+      { key: "aria-roledescription", value: prop' value }
 
-instance Attr Marker_ AriaRoledescription String where
-  attr AriaRoledescription value = unsafeAttribute
-    { key: "aria-roledescription", value: prop' value }
+instance Attr Tags.Marker_ AriaRoledescription String where
+  pureAttr AriaRoledescription value = unsafeAttribute $ Left $
+    unsafePureAttribute
+      { key: "aria-roledescription", value }
+  mapAttr AriaRoledescription evalue = unsafeAttribute $ Right $ evalue <#>
+    \value -> unsafeVolatileAttribute
+      { key: "aria-roledescription", value: prop' value }
 
-instance Attr Path_ AriaRoledescription String where
-  attr AriaRoledescription value = unsafeAttribute
-    { key: "aria-roledescription", value: prop' value }
+instance Attr Tags.Path_ AriaRoledescription String where
+  pureAttr AriaRoledescription value = unsafeAttribute $ Left $
+    unsafePureAttribute
+      { key: "aria-roledescription", value }
+  mapAttr AriaRoledescription evalue = unsafeAttribute $ Right $ evalue <#>
+    \value -> unsafeVolatileAttribute
+      { key: "aria-roledescription", value: prop' value }
 
-instance Attr Polygon_ AriaRoledescription String where
-  attr AriaRoledescription value = unsafeAttribute
-    { key: "aria-roledescription", value: prop' value }
+instance Attr Tags.Polygon_ AriaRoledescription String where
+  pureAttr AriaRoledescription value = unsafeAttribute $ Left $
+    unsafePureAttribute
+      { key: "aria-roledescription", value }
+  mapAttr AriaRoledescription evalue = unsafeAttribute $ Right $ evalue <#>
+    \value -> unsafeVolatileAttribute
+      { key: "aria-roledescription", value: prop' value }
 
-instance Attr Polyline_ AriaRoledescription String where
-  attr AriaRoledescription value = unsafeAttribute
-    { key: "aria-roledescription", value: prop' value }
+instance Attr Tags.Polyline_ AriaRoledescription String where
+  pureAttr AriaRoledescription value = unsafeAttribute $ Left $
+    unsafePureAttribute
+      { key: "aria-roledescription", value }
+  mapAttr AriaRoledescription evalue = unsafeAttribute $ Right $ evalue <#>
+    \value -> unsafeVolatileAttribute
+      { key: "aria-roledescription", value: prop' value }
 
-instance Attr Rect_ AriaRoledescription String where
-  attr AriaRoledescription value = unsafeAttribute
-    { key: "aria-roledescription", value: prop' value }
+instance Attr Tags.Rect_ AriaRoledescription String where
+  pureAttr AriaRoledescription value = unsafeAttribute $ Left $
+    unsafePureAttribute
+      { key: "aria-roledescription", value }
+  mapAttr AriaRoledescription evalue = unsafeAttribute $ Right $ evalue <#>
+    \value -> unsafeVolatileAttribute
+      { key: "aria-roledescription", value: prop' value }
 
-instance Attr Svg_ AriaRoledescription String where
-  attr AriaRoledescription value = unsafeAttribute
-    { key: "aria-roledescription", value: prop' value }
+instance Attr Tags.Svg_ AriaRoledescription String where
+  pureAttr AriaRoledescription value = unsafeAttribute $ Left $
+    unsafePureAttribute
+      { key: "aria-roledescription", value }
+  mapAttr AriaRoledescription evalue = unsafeAttribute $ Right $ evalue <#>
+    \value -> unsafeVolatileAttribute
+      { key: "aria-roledescription", value: prop' value }
 
-instance Attr Symbol_ AriaRoledescription String where
-  attr AriaRoledescription value = unsafeAttribute
-    { key: "aria-roledescription", value: prop' value }
+instance Attr Tags.Symbol_ AriaRoledescription String where
+  pureAttr AriaRoledescription value = unsafeAttribute $ Left $
+    unsafePureAttribute
+      { key: "aria-roledescription", value }
+  mapAttr AriaRoledescription evalue = unsafeAttribute $ Right $ evalue <#>
+    \value -> unsafeVolatileAttribute
+      { key: "aria-roledescription", value: prop' value }
 
-instance Attr Text_ AriaRoledescription String where
-  attr AriaRoledescription value = unsafeAttribute
-    { key: "aria-roledescription", value: prop' value }
+instance Attr Tags.Text_ AriaRoledescription String where
+  pureAttr AriaRoledescription value = unsafeAttribute $ Left $
+    unsafePureAttribute
+      { key: "aria-roledescription", value }
+  mapAttr AriaRoledescription evalue = unsafeAttribute $ Right $ evalue <#>
+    \value -> unsafeVolatileAttribute
+      { key: "aria-roledescription", value: prop' value }
 
-instance Attr TextPath_ AriaRoledescription String where
-  attr AriaRoledescription value = unsafeAttribute
-    { key: "aria-roledescription", value: prop' value }
+instance Attr Tags.TextPath_ AriaRoledescription String where
+  pureAttr AriaRoledescription value = unsafeAttribute $ Left $
+    unsafePureAttribute
+      { key: "aria-roledescription", value }
+  mapAttr AriaRoledescription evalue = unsafeAttribute $ Right $ evalue <#>
+    \value -> unsafeVolatileAttribute
+      { key: "aria-roledescription", value: prop' value }
 
-instance Attr Tspan_ AriaRoledescription String where
-  attr AriaRoledescription value = unsafeAttribute
-    { key: "aria-roledescription", value: prop' value }
+instance Attr Tags.Tspan_ AriaRoledescription String where
+  pureAttr AriaRoledescription value = unsafeAttribute $ Left $
+    unsafePureAttribute
+      { key: "aria-roledescription", value }
+  mapAttr AriaRoledescription evalue = unsafeAttribute $ Right $ evalue <#>
+    \value -> unsafeVolatileAttribute
+      { key: "aria-roledescription", value: prop' value }
 
-instance Attr Use_ AriaRoledescription String where
-  attr AriaRoledescription value = unsafeAttribute
-    { key: "aria-roledescription", value: prop' value }
+instance Attr Tags.Use_ AriaRoledescription String where
+  pureAttr AriaRoledescription value = unsafeAttribute $ Left $
+    unsafePureAttribute
+      { key: "aria-roledescription", value }
+  mapAttr AriaRoledescription evalue = unsafeAttribute $ Right $ evalue <#>
+    \value -> unsafeVolatileAttribute
+      { key: "aria-roledescription", value: prop' value }
 
-instance Attr View_ AriaRoledescription String where
-  attr AriaRoledescription value = unsafeAttribute
-    { key: "aria-roledescription", value: prop' value }
+instance Attr Tags.View_ AriaRoledescription String where
+  pureAttr AriaRoledescription value = unsafeAttribute $ Left $
+    unsafePureAttribute
+      { key: "aria-roledescription", value }
+  mapAttr AriaRoledescription evalue = unsafeAttribute $ Right $ evalue <#>
+    \value -> unsafeVolatileAttribute
+      { key: "aria-roledescription", value: prop' value }
 
 instance Attr everything AriaRoledescription Unit where
-  attr AriaRoledescription _ = unsafeAttribute
-    { key: "aria-roledescription", value: unset' }
+  pureAttr AriaRoledescription _ = unsafeAttribute $ Right $ pure $
+    unsafeVolatileAttribute
+      { key: "aria-roledescription", value: unset' }
+  mapAttr AriaRoledescription evalue = unsafeAttribute $ Right $ evalue <#>
+    \_ -> unsafeVolatileAttribute
+      { key: "aria-roledescription", value: unset' }

@@ -1,499 +1,870 @@
 module Deku.DOM.Attr.Slot where
 
 import Prelude
+import Data.Either (Either(..))
 
-import Deku.DOM.Elt.A (A_)
-import Deku.DOM.Elt.Abbr (Abbr_)
-import Deku.DOM.Elt.Acronym (Acronym_)
-import Deku.DOM.Elt.Address (Address_)
-import Deku.DOM.Elt.Applet (Applet_)
-import Deku.DOM.Elt.Area (Area_)
-import Deku.DOM.Elt.Article (Article_)
-import Deku.DOM.Elt.Aside (Aside_)
-import Deku.DOM.Elt.Audio (Audio_)
-import Deku.DOM.Elt.B (B_)
-import Deku.DOM.Elt.Base (Base_)
-import Deku.DOM.Elt.Basefont (Basefont_)
-import Deku.DOM.Elt.Bdi (Bdi_)
-import Deku.DOM.Elt.Bdo (Bdo_)
-import Deku.DOM.Elt.Big (Big_)
-import Deku.DOM.Elt.Blockquote (Blockquote_)
-import Deku.DOM.Elt.Body (Body_)
-import Deku.DOM.Elt.Br (Br_)
-import Deku.DOM.Elt.Button (Button_)
-import Deku.DOM.Elt.Canvas (Canvas_)
-import Deku.DOM.Elt.Caption (Caption_)
-import Deku.DOM.Elt.Center (Center_)
-import Deku.DOM.Elt.Cite (Cite_)
-import Deku.DOM.Elt.Code (Code_)
-import Deku.DOM.Elt.Col (Col_)
-import Deku.DOM.Elt.Colgroup (Colgroup_)
-import Deku.DOM.Elt.Xdata (Xdata_)
-import Deku.DOM.Elt.Datalist (Datalist_)
-import Deku.DOM.Elt.Dd (Dd_)
-import Deku.DOM.Elt.Del (Del_)
-import Deku.DOM.Elt.Details (Details_)
-import Deku.DOM.Elt.Dfn (Dfn_)
-import Deku.DOM.Elt.Dialog (Dialog_)
-import Deku.DOM.Elt.Dir (Dir_)
-import Deku.DOM.Elt.Div (Div_)
-import Deku.DOM.Elt.Dl (Dl_)
-import Deku.DOM.Elt.Dt (Dt_)
-import Deku.DOM.Elt.Em (Em_)
-import Deku.DOM.Elt.Embed (Embed_)
-import Deku.DOM.Elt.Fieldset (Fieldset_)
-import Deku.DOM.Elt.Figcaption (Figcaption_)
-import Deku.DOM.Elt.Figure (Figure_)
-import Deku.DOM.Elt.Font (Font_)
-import Deku.DOM.Elt.Footer (Footer_)
-import Deku.DOM.Elt.Form (Form_)
-import Deku.DOM.Elt.Frame (Frame_)
-import Deku.DOM.Elt.Frameset (Frameset_)
-import Deku.DOM.Elt.H1 (H1_)
-import Deku.DOM.Elt.H2 (H2_)
-import Deku.DOM.Elt.H3 (H3_)
-import Deku.DOM.Elt.H4 (H4_)
-import Deku.DOM.Elt.H5 (H5_)
-import Deku.DOM.Elt.H6 (H6_)
-import Deku.DOM.Elt.Head (Head_)
-import Deku.DOM.Elt.Header (Header_)
-import Deku.DOM.Elt.Hr (Hr_)
-import Deku.DOM.Elt.Html (Html_)
-import Deku.DOM.Elt.I (I_)
-import Deku.DOM.Elt.Iframe (Iframe_)
-import Deku.DOM.Elt.Img (Img_)
-import Deku.DOM.Elt.Input (Input_)
-import Deku.DOM.Elt.Ins (Ins_)
-import Deku.DOM.Elt.Kbd (Kbd_)
-import Deku.DOM.Elt.Label (Label_)
-import Deku.DOM.Elt.Legend (Legend_)
-import Deku.DOM.Elt.Li (Li_)
-import Deku.DOM.Elt.Link (Link_)
-import Deku.DOM.Elt.Main (Main_)
-import Deku.DOM.Elt.Map (Map_)
-import Deku.DOM.Elt.Mark (Mark_)
-import Deku.DOM.Elt.Meta (Meta_)
-import Deku.DOM.Elt.Meter (Meter_)
-import Deku.DOM.Elt.Nav (Nav_)
-import Deku.DOM.Elt.Noframes (Noframes_)
-import Deku.DOM.Elt.Noscript (Noscript_)
-import Deku.DOM.Elt.Object (Object_)
-import Deku.DOM.Elt.Ol (Ol_)
-import Deku.DOM.Elt.Optgroup (Optgroup_)
-import Deku.DOM.Elt.Option (Option_)
-import Deku.DOM.Elt.Output (Output_)
-import Deku.DOM.Elt.P (P_)
-import Deku.DOM.Elt.Param (Param_)
-import Deku.DOM.Elt.Picture (Picture_)
-import Deku.DOM.Elt.Pre (Pre_)
-import Deku.DOM.Elt.Progress (Progress_)
-import Deku.DOM.Elt.Q (Q_)
-import Deku.DOM.Elt.Rp (Rp_)
-import Deku.DOM.Elt.Rt (Rt_)
-import Deku.DOM.Elt.Ruby (Ruby_)
-import Deku.DOM.Elt.S (S_)
-import Deku.DOM.Elt.Samp (Samp_)
-import Deku.DOM.Elt.Script (Script_)
-import Deku.DOM.Elt.Section (Section_)
-import Deku.DOM.Elt.Select (Select_)
-import Deku.DOM.Elt.Small (Small_)
-import Deku.DOM.Elt.Source (Source_)
-import Deku.DOM.Elt.Span (Span_)
-import Deku.DOM.Elt.Strike (Strike_)
-import Deku.DOM.Elt.Strong (Strong_)
-import Deku.DOM.Elt.Style (Style_)
-import Deku.DOM.Elt.Sub (Sub_)
-import Deku.DOM.Elt.Summary (Summary_)
-import Deku.DOM.Elt.Sup (Sup_)
-import Deku.DOM.Elt.Svg (Svg_)
-import Deku.DOM.Elt.Table (Table_)
-import Deku.DOM.Elt.Tbody (Tbody_)
-import Deku.DOM.Elt.Td (Td_)
-import Deku.DOM.Elt.Template (Template_)
-import Deku.DOM.Elt.Textarea (Textarea_)
-import Deku.DOM.Elt.Tfoot (Tfoot_)
-import Deku.DOM.Elt.Th (Th_)
-import Deku.DOM.Elt.Thead (Thead_)
-import Deku.DOM.Elt.Time (Time_)
-import Deku.DOM.Elt.Title (Title_)
-import Deku.DOM.Elt.Tr (Tr_)
-import Deku.DOM.Elt.Track (Track_)
-import Deku.DOM.Elt.Tt (Tt_)
-import Deku.DOM.Elt.U (U_)
-import Deku.DOM.Elt.Ul (Ul_)
-import Deku.DOM.Elt.Var (Var_)
-import Deku.DOM.Elt.Video (Video_)
-import Deku.DOM.Elt.Wbr (Wbr_)
-import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
+import Deku.Attribute (class Attr, prop', unsafeAttribute, unsafePureAttribute, unsafeVolatileAttribute, unset')
+import Deku.DOM.Tags as Tags
 
 data Slot = Slot
 
-instance Attr A_ Slot String where
-  attr Slot value = unsafeAttribute { key: "slot", value: prop' value }
+instance Attr Tags.A_ Slot String where
+  pureAttr Slot value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "slot", value }
 
-instance Attr Abbr_ Slot String where
-  attr Slot value = unsafeAttribute { key: "slot", value: prop' value }
+  mapAttr Slot evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "slot", value: prop' value }
 
-instance Attr Acronym_ Slot String where
-  attr Slot value = unsafeAttribute { key: "slot", value: prop' value }
+instance Attr Tags.Abbr_ Slot String where
+  pureAttr Slot value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "slot", value }
 
-instance Attr Address_ Slot String where
-  attr Slot value = unsafeAttribute { key: "slot", value: prop' value }
+  mapAttr Slot evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "slot", value: prop' value }
 
-instance Attr Applet_ Slot String where
-  attr Slot value = unsafeAttribute { key: "slot", value: prop' value }
+instance Attr Tags.Acronym_ Slot String where
+  pureAttr Slot value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "slot", value }
 
-instance Attr Area_ Slot String where
-  attr Slot value = unsafeAttribute { key: "slot", value: prop' value }
+  mapAttr Slot evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "slot", value: prop' value }
 
-instance Attr Article_ Slot String where
-  attr Slot value = unsafeAttribute { key: "slot", value: prop' value }
+instance Attr Tags.Address_ Slot String where
+  pureAttr Slot value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "slot", value }
 
-instance Attr Aside_ Slot String where
-  attr Slot value = unsafeAttribute { key: "slot", value: prop' value }
+  mapAttr Slot evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "slot", value: prop' value }
 
-instance Attr Audio_ Slot String where
-  attr Slot value = unsafeAttribute { key: "slot", value: prop' value }
+instance Attr Tags.Applet_ Slot String where
+  pureAttr Slot value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "slot", value }
 
-instance Attr B_ Slot String where
-  attr Slot value = unsafeAttribute { key: "slot", value: prop' value }
+  mapAttr Slot evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "slot", value: prop' value }
 
-instance Attr Base_ Slot String where
-  attr Slot value = unsafeAttribute { key: "slot", value: prop' value }
+instance Attr Tags.Area_ Slot String where
+  pureAttr Slot value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "slot", value }
 
-instance Attr Basefont_ Slot String where
-  attr Slot value = unsafeAttribute { key: "slot", value: prop' value }
+  mapAttr Slot evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "slot", value: prop' value }
 
-instance Attr Bdi_ Slot String where
-  attr Slot value = unsafeAttribute { key: "slot", value: prop' value }
+instance Attr Tags.Article_ Slot String where
+  pureAttr Slot value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "slot", value }
 
-instance Attr Bdo_ Slot String where
-  attr Slot value = unsafeAttribute { key: "slot", value: prop' value }
+  mapAttr Slot evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "slot", value: prop' value }
 
-instance Attr Big_ Slot String where
-  attr Slot value = unsafeAttribute { key: "slot", value: prop' value }
+instance Attr Tags.Aside_ Slot String where
+  pureAttr Slot value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "slot", value }
 
-instance Attr Blockquote_ Slot String where
-  attr Slot value = unsafeAttribute { key: "slot", value: prop' value }
+  mapAttr Slot evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "slot", value: prop' value }
 
-instance Attr Body_ Slot String where
-  attr Slot value = unsafeAttribute { key: "slot", value: prop' value }
+instance Attr Tags.Audio_ Slot String where
+  pureAttr Slot value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "slot", value }
 
-instance Attr Br_ Slot String where
-  attr Slot value = unsafeAttribute { key: "slot", value: prop' value }
+  mapAttr Slot evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "slot", value: prop' value }
 
-instance Attr Button_ Slot String where
-  attr Slot value = unsafeAttribute { key: "slot", value: prop' value }
+instance Attr Tags.B_ Slot String where
+  pureAttr Slot value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "slot", value }
 
-instance Attr Canvas_ Slot String where
-  attr Slot value = unsafeAttribute { key: "slot", value: prop' value }
+  mapAttr Slot evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "slot", value: prop' value }
 
-instance Attr Caption_ Slot String where
-  attr Slot value = unsafeAttribute { key: "slot", value: prop' value }
+instance Attr Tags.Base_ Slot String where
+  pureAttr Slot value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "slot", value }
 
-instance Attr Center_ Slot String where
-  attr Slot value = unsafeAttribute { key: "slot", value: prop' value }
+  mapAttr Slot evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "slot", value: prop' value }
 
-instance Attr Cite_ Slot String where
-  attr Slot value = unsafeAttribute { key: "slot", value: prop' value }
+instance Attr Tags.Basefont_ Slot String where
+  pureAttr Slot value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "slot", value }
 
-instance Attr Code_ Slot String where
-  attr Slot value = unsafeAttribute { key: "slot", value: prop' value }
+  mapAttr Slot evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "slot", value: prop' value }
 
-instance Attr Col_ Slot String where
-  attr Slot value = unsafeAttribute { key: "slot", value: prop' value }
+instance Attr Tags.Bdi_ Slot String where
+  pureAttr Slot value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "slot", value }
 
-instance Attr Colgroup_ Slot String where
-  attr Slot value = unsafeAttribute { key: "slot", value: prop' value }
+  mapAttr Slot evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "slot", value: prop' value }
 
-instance Attr Xdata_ Slot String where
-  attr Slot value = unsafeAttribute { key: "slot", value: prop' value }
+instance Attr Tags.Bdo_ Slot String where
+  pureAttr Slot value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "slot", value }
 
-instance Attr Datalist_ Slot String where
-  attr Slot value = unsafeAttribute { key: "slot", value: prop' value }
+  mapAttr Slot evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "slot", value: prop' value }
 
-instance Attr Dd_ Slot String where
-  attr Slot value = unsafeAttribute { key: "slot", value: prop' value }
+instance Attr Tags.Big_ Slot String where
+  pureAttr Slot value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "slot", value }
 
-instance Attr Del_ Slot String where
-  attr Slot value = unsafeAttribute { key: "slot", value: prop' value }
+  mapAttr Slot evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "slot", value: prop' value }
 
-instance Attr Details_ Slot String where
-  attr Slot value = unsafeAttribute { key: "slot", value: prop' value }
+instance Attr Tags.Blockquote_ Slot String where
+  pureAttr Slot value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "slot", value }
 
-instance Attr Dfn_ Slot String where
-  attr Slot value = unsafeAttribute { key: "slot", value: prop' value }
+  mapAttr Slot evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "slot", value: prop' value }
 
-instance Attr Dialog_ Slot String where
-  attr Slot value = unsafeAttribute { key: "slot", value: prop' value }
+instance Attr Tags.Body_ Slot String where
+  pureAttr Slot value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "slot", value }
 
-instance Attr Dir_ Slot String where
-  attr Slot value = unsafeAttribute { key: "slot", value: prop' value }
+  mapAttr Slot evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "slot", value: prop' value }
 
-instance Attr Div_ Slot String where
-  attr Slot value = unsafeAttribute { key: "slot", value: prop' value }
+instance Attr Tags.Br_ Slot String where
+  pureAttr Slot value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "slot", value }
 
-instance Attr Dl_ Slot String where
-  attr Slot value = unsafeAttribute { key: "slot", value: prop' value }
+  mapAttr Slot evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "slot", value: prop' value }
 
-instance Attr Dt_ Slot String where
-  attr Slot value = unsafeAttribute { key: "slot", value: prop' value }
+instance Attr Tags.Button_ Slot String where
+  pureAttr Slot value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "slot", value }
 
-instance Attr Em_ Slot String where
-  attr Slot value = unsafeAttribute { key: "slot", value: prop' value }
+  mapAttr Slot evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "slot", value: prop' value }
 
-instance Attr Embed_ Slot String where
-  attr Slot value = unsafeAttribute { key: "slot", value: prop' value }
+instance Attr Tags.Canvas_ Slot String where
+  pureAttr Slot value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "slot", value }
 
-instance Attr Fieldset_ Slot String where
-  attr Slot value = unsafeAttribute { key: "slot", value: prop' value }
+  mapAttr Slot evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "slot", value: prop' value }
 
-instance Attr Figcaption_ Slot String where
-  attr Slot value = unsafeAttribute { key: "slot", value: prop' value }
+instance Attr Tags.Caption_ Slot String where
+  pureAttr Slot value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "slot", value }
 
-instance Attr Figure_ Slot String where
-  attr Slot value = unsafeAttribute { key: "slot", value: prop' value }
+  mapAttr Slot evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "slot", value: prop' value }
 
-instance Attr Font_ Slot String where
-  attr Slot value = unsafeAttribute { key: "slot", value: prop' value }
+instance Attr Tags.Center_ Slot String where
+  pureAttr Slot value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "slot", value }
 
-instance Attr Footer_ Slot String where
-  attr Slot value = unsafeAttribute { key: "slot", value: prop' value }
+  mapAttr Slot evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "slot", value: prop' value }
 
-instance Attr Form_ Slot String where
-  attr Slot value = unsafeAttribute { key: "slot", value: prop' value }
+instance Attr Tags.Cite_ Slot String where
+  pureAttr Slot value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "slot", value }
 
-instance Attr Frame_ Slot String where
-  attr Slot value = unsafeAttribute { key: "slot", value: prop' value }
+  mapAttr Slot evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "slot", value: prop' value }
 
-instance Attr Frameset_ Slot String where
-  attr Slot value = unsafeAttribute { key: "slot", value: prop' value }
+instance Attr Tags.Code_ Slot String where
+  pureAttr Slot value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "slot", value }
 
-instance Attr H1_ Slot String where
-  attr Slot value = unsafeAttribute { key: "slot", value: prop' value }
+  mapAttr Slot evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "slot", value: prop' value }
 
-instance Attr H2_ Slot String where
-  attr Slot value = unsafeAttribute { key: "slot", value: prop' value }
+instance Attr Tags.Col_ Slot String where
+  pureAttr Slot value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "slot", value }
 
-instance Attr H3_ Slot String where
-  attr Slot value = unsafeAttribute { key: "slot", value: prop' value }
+  mapAttr Slot evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "slot", value: prop' value }
 
-instance Attr H4_ Slot String where
-  attr Slot value = unsafeAttribute { key: "slot", value: prop' value }
+instance Attr Tags.Colgroup_ Slot String where
+  pureAttr Slot value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "slot", value }
 
-instance Attr H5_ Slot String where
-  attr Slot value = unsafeAttribute { key: "slot", value: prop' value }
+  mapAttr Slot evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "slot", value: prop' value }
 
-instance Attr H6_ Slot String where
-  attr Slot value = unsafeAttribute { key: "slot", value: prop' value }
+instance Attr Tags.Xdata_ Slot String where
+  pureAttr Slot value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "slot", value }
 
-instance Attr Head_ Slot String where
-  attr Slot value = unsafeAttribute { key: "slot", value: prop' value }
+  mapAttr Slot evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "slot", value: prop' value }
 
-instance Attr Header_ Slot String where
-  attr Slot value = unsafeAttribute { key: "slot", value: prop' value }
+instance Attr Tags.Datalist_ Slot String where
+  pureAttr Slot value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "slot", value }
 
-instance Attr Hr_ Slot String where
-  attr Slot value = unsafeAttribute { key: "slot", value: prop' value }
+  mapAttr Slot evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "slot", value: prop' value }
 
-instance Attr Html_ Slot String where
-  attr Slot value = unsafeAttribute { key: "slot", value: prop' value }
+instance Attr Tags.Dd_ Slot String where
+  pureAttr Slot value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "slot", value }
 
-instance Attr I_ Slot String where
-  attr Slot value = unsafeAttribute { key: "slot", value: prop' value }
+  mapAttr Slot evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "slot", value: prop' value }
 
-instance Attr Iframe_ Slot String where
-  attr Slot value = unsafeAttribute { key: "slot", value: prop' value }
+instance Attr Tags.Del_ Slot String where
+  pureAttr Slot value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "slot", value }
 
-instance Attr Img_ Slot String where
-  attr Slot value = unsafeAttribute { key: "slot", value: prop' value }
+  mapAttr Slot evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "slot", value: prop' value }
 
-instance Attr Input_ Slot String where
-  attr Slot value = unsafeAttribute { key: "slot", value: prop' value }
+instance Attr Tags.Details_ Slot String where
+  pureAttr Slot value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "slot", value }
 
-instance Attr Ins_ Slot String where
-  attr Slot value = unsafeAttribute { key: "slot", value: prop' value }
+  mapAttr Slot evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "slot", value: prop' value }
 
-instance Attr Kbd_ Slot String where
-  attr Slot value = unsafeAttribute { key: "slot", value: prop' value }
+instance Attr Tags.Dfn_ Slot String where
+  pureAttr Slot value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "slot", value }
 
-instance Attr Label_ Slot String where
-  attr Slot value = unsafeAttribute { key: "slot", value: prop' value }
+  mapAttr Slot evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "slot", value: prop' value }
 
-instance Attr Legend_ Slot String where
-  attr Slot value = unsafeAttribute { key: "slot", value: prop' value }
+instance Attr Tags.Dialog_ Slot String where
+  pureAttr Slot value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "slot", value }
 
-instance Attr Li_ Slot String where
-  attr Slot value = unsafeAttribute { key: "slot", value: prop' value }
+  mapAttr Slot evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "slot", value: prop' value }
 
-instance Attr Link_ Slot String where
-  attr Slot value = unsafeAttribute { key: "slot", value: prop' value }
+instance Attr Tags.Dir_ Slot String where
+  pureAttr Slot value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "slot", value }
 
-instance Attr Main_ Slot String where
-  attr Slot value = unsafeAttribute { key: "slot", value: prop' value }
+  mapAttr Slot evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "slot", value: prop' value }
 
-instance Attr Map_ Slot String where
-  attr Slot value = unsafeAttribute { key: "slot", value: prop' value }
+instance Attr Tags.Div_ Slot String where
+  pureAttr Slot value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "slot", value }
 
-instance Attr Mark_ Slot String where
-  attr Slot value = unsafeAttribute { key: "slot", value: prop' value }
+  mapAttr Slot evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "slot", value: prop' value }
 
-instance Attr Meta_ Slot String where
-  attr Slot value = unsafeAttribute { key: "slot", value: prop' value }
+instance Attr Tags.Dl_ Slot String where
+  pureAttr Slot value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "slot", value }
 
-instance Attr Meter_ Slot String where
-  attr Slot value = unsafeAttribute { key: "slot", value: prop' value }
+  mapAttr Slot evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "slot", value: prop' value }
 
-instance Attr Nav_ Slot String where
-  attr Slot value = unsafeAttribute { key: "slot", value: prop' value }
+instance Attr Tags.Dt_ Slot String where
+  pureAttr Slot value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "slot", value }
 
-instance Attr Noframes_ Slot String where
-  attr Slot value = unsafeAttribute { key: "slot", value: prop' value }
+  mapAttr Slot evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "slot", value: prop' value }
 
-instance Attr Noscript_ Slot String where
-  attr Slot value = unsafeAttribute { key: "slot", value: prop' value }
+instance Attr Tags.Em_ Slot String where
+  pureAttr Slot value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "slot", value }
 
-instance Attr Object_ Slot String where
-  attr Slot value = unsafeAttribute { key: "slot", value: prop' value }
+  mapAttr Slot evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "slot", value: prop' value }
 
-instance Attr Ol_ Slot String where
-  attr Slot value = unsafeAttribute { key: "slot", value: prop' value }
+instance Attr Tags.Embed_ Slot String where
+  pureAttr Slot value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "slot", value }
 
-instance Attr Optgroup_ Slot String where
-  attr Slot value = unsafeAttribute { key: "slot", value: prop' value }
+  mapAttr Slot evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "slot", value: prop' value }
 
-instance Attr Option_ Slot String where
-  attr Slot value = unsafeAttribute { key: "slot", value: prop' value }
+instance Attr Tags.Fieldset_ Slot String where
+  pureAttr Slot value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "slot", value }
 
-instance Attr Output_ Slot String where
-  attr Slot value = unsafeAttribute { key: "slot", value: prop' value }
+  mapAttr Slot evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "slot", value: prop' value }
 
-instance Attr P_ Slot String where
-  attr Slot value = unsafeAttribute { key: "slot", value: prop' value }
+instance Attr Tags.Figcaption_ Slot String where
+  pureAttr Slot value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "slot", value }
 
-instance Attr Param_ Slot String where
-  attr Slot value = unsafeAttribute { key: "slot", value: prop' value }
+  mapAttr Slot evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "slot", value: prop' value }
 
-instance Attr Picture_ Slot String where
-  attr Slot value = unsafeAttribute { key: "slot", value: prop' value }
+instance Attr Tags.Figure_ Slot String where
+  pureAttr Slot value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "slot", value }
 
-instance Attr Pre_ Slot String where
-  attr Slot value = unsafeAttribute { key: "slot", value: prop' value }
+  mapAttr Slot evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "slot", value: prop' value }
 
-instance Attr Progress_ Slot String where
-  attr Slot value = unsafeAttribute { key: "slot", value: prop' value }
+instance Attr Tags.Font_ Slot String where
+  pureAttr Slot value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "slot", value }
 
-instance Attr Q_ Slot String where
-  attr Slot value = unsafeAttribute { key: "slot", value: prop' value }
+  mapAttr Slot evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "slot", value: prop' value }
 
-instance Attr Rp_ Slot String where
-  attr Slot value = unsafeAttribute { key: "slot", value: prop' value }
+instance Attr Tags.Footer_ Slot String where
+  pureAttr Slot value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "slot", value }
 
-instance Attr Rt_ Slot String where
-  attr Slot value = unsafeAttribute { key: "slot", value: prop' value }
+  mapAttr Slot evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "slot", value: prop' value }
 
-instance Attr Ruby_ Slot String where
-  attr Slot value = unsafeAttribute { key: "slot", value: prop' value }
+instance Attr Tags.Form_ Slot String where
+  pureAttr Slot value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "slot", value }
 
-instance Attr S_ Slot String where
-  attr Slot value = unsafeAttribute { key: "slot", value: prop' value }
+  mapAttr Slot evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "slot", value: prop' value }
 
-instance Attr Samp_ Slot String where
-  attr Slot value = unsafeAttribute { key: "slot", value: prop' value }
+instance Attr Tags.Frame_ Slot String where
+  pureAttr Slot value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "slot", value }
 
-instance Attr Script_ Slot String where
-  attr Slot value = unsafeAttribute { key: "slot", value: prop' value }
+  mapAttr Slot evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "slot", value: prop' value }
 
-instance Attr Section_ Slot String where
-  attr Slot value = unsafeAttribute { key: "slot", value: prop' value }
+instance Attr Tags.Frameset_ Slot String where
+  pureAttr Slot value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "slot", value }
 
-instance Attr Select_ Slot String where
-  attr Slot value = unsafeAttribute { key: "slot", value: prop' value }
+  mapAttr Slot evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "slot", value: prop' value }
 
-instance Attr Small_ Slot String where
-  attr Slot value = unsafeAttribute { key: "slot", value: prop' value }
+instance Attr Tags.H1_ Slot String where
+  pureAttr Slot value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "slot", value }
 
-instance Attr Source_ Slot String where
-  attr Slot value = unsafeAttribute { key: "slot", value: prop' value }
+  mapAttr Slot evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "slot", value: prop' value }
 
-instance Attr Span_ Slot String where
-  attr Slot value = unsafeAttribute { key: "slot", value: prop' value }
+instance Attr Tags.H2_ Slot String where
+  pureAttr Slot value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "slot", value }
 
-instance Attr Strike_ Slot String where
-  attr Slot value = unsafeAttribute { key: "slot", value: prop' value }
+  mapAttr Slot evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "slot", value: prop' value }
 
-instance Attr Strong_ Slot String where
-  attr Slot value = unsafeAttribute { key: "slot", value: prop' value }
+instance Attr Tags.H3_ Slot String where
+  pureAttr Slot value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "slot", value }
 
-instance Attr Style_ Slot String where
-  attr Slot value = unsafeAttribute { key: "slot", value: prop' value }
+  mapAttr Slot evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "slot", value: prop' value }
 
-instance Attr Sub_ Slot String where
-  attr Slot value = unsafeAttribute { key: "slot", value: prop' value }
+instance Attr Tags.H4_ Slot String where
+  pureAttr Slot value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "slot", value }
 
-instance Attr Summary_ Slot String where
-  attr Slot value = unsafeAttribute { key: "slot", value: prop' value }
+  mapAttr Slot evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "slot", value: prop' value }
 
-instance Attr Sup_ Slot String where
-  attr Slot value = unsafeAttribute { key: "slot", value: prop' value }
+instance Attr Tags.H5_ Slot String where
+  pureAttr Slot value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "slot", value }
 
-instance Attr Svg_ Slot String where
-  attr Slot value = unsafeAttribute { key: "slot", value: prop' value }
+  mapAttr Slot evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "slot", value: prop' value }
 
-instance Attr Table_ Slot String where
-  attr Slot value = unsafeAttribute { key: "slot", value: prop' value }
+instance Attr Tags.H6_ Slot String where
+  pureAttr Slot value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "slot", value }
 
-instance Attr Tbody_ Slot String where
-  attr Slot value = unsafeAttribute { key: "slot", value: prop' value }
+  mapAttr Slot evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "slot", value: prop' value }
 
-instance Attr Td_ Slot String where
-  attr Slot value = unsafeAttribute { key: "slot", value: prop' value }
+instance Attr Tags.Head_ Slot String where
+  pureAttr Slot value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "slot", value }
 
-instance Attr Template_ Slot String where
-  attr Slot value = unsafeAttribute { key: "slot", value: prop' value }
+  mapAttr Slot evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "slot", value: prop' value }
 
-instance Attr Textarea_ Slot String where
-  attr Slot value = unsafeAttribute { key: "slot", value: prop' value }
+instance Attr Tags.Header_ Slot String where
+  pureAttr Slot value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "slot", value }
 
-instance Attr Tfoot_ Slot String where
-  attr Slot value = unsafeAttribute { key: "slot", value: prop' value }
+  mapAttr Slot evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "slot", value: prop' value }
 
-instance Attr Th_ Slot String where
-  attr Slot value = unsafeAttribute { key: "slot", value: prop' value }
+instance Attr Tags.Hr_ Slot String where
+  pureAttr Slot value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "slot", value }
 
-instance Attr Thead_ Slot String where
-  attr Slot value = unsafeAttribute { key: "slot", value: prop' value }
+  mapAttr Slot evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "slot", value: prop' value }
 
-instance Attr Time_ Slot String where
-  attr Slot value = unsafeAttribute { key: "slot", value: prop' value }
+instance Attr Tags.Html_ Slot String where
+  pureAttr Slot value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "slot", value }
 
-instance Attr Title_ Slot String where
-  attr Slot value = unsafeAttribute { key: "slot", value: prop' value }
+  mapAttr Slot evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "slot", value: prop' value }
 
-instance Attr Tr_ Slot String where
-  attr Slot value = unsafeAttribute { key: "slot", value: prop' value }
+instance Attr Tags.I_ Slot String where
+  pureAttr Slot value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "slot", value }
 
-instance Attr Track_ Slot String where
-  attr Slot value = unsafeAttribute { key: "slot", value: prop' value }
+  mapAttr Slot evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "slot", value: prop' value }
 
-instance Attr Tt_ Slot String where
-  attr Slot value = unsafeAttribute { key: "slot", value: prop' value }
+instance Attr Tags.Iframe_ Slot String where
+  pureAttr Slot value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "slot", value }
 
-instance Attr U_ Slot String where
-  attr Slot value = unsafeAttribute { key: "slot", value: prop' value }
+  mapAttr Slot evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "slot", value: prop' value }
 
-instance Attr Ul_ Slot String where
-  attr Slot value = unsafeAttribute { key: "slot", value: prop' value }
+instance Attr Tags.Img_ Slot String where
+  pureAttr Slot value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "slot", value }
 
-instance Attr Var_ Slot String where
-  attr Slot value = unsafeAttribute { key: "slot", value: prop' value }
+  mapAttr Slot evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "slot", value: prop' value }
 
-instance Attr Video_ Slot String where
-  attr Slot value = unsafeAttribute { key: "slot", value: prop' value }
+instance Attr Tags.Input_ Slot String where
+  pureAttr Slot value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "slot", value }
 
-instance Attr Wbr_ Slot String where
-  attr Slot value = unsafeAttribute { key: "slot", value: prop' value }
+  mapAttr Slot evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "slot", value: prop' value }
+
+instance Attr Tags.Ins_ Slot String where
+  pureAttr Slot value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "slot", value }
+
+  mapAttr Slot evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "slot", value: prop' value }
+
+instance Attr Tags.Kbd_ Slot String where
+  pureAttr Slot value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "slot", value }
+
+  mapAttr Slot evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "slot", value: prop' value }
+
+instance Attr Tags.Label_ Slot String where
+  pureAttr Slot value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "slot", value }
+
+  mapAttr Slot evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "slot", value: prop' value }
+
+instance Attr Tags.Legend_ Slot String where
+  pureAttr Slot value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "slot", value }
+
+  mapAttr Slot evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "slot", value: prop' value }
+
+instance Attr Tags.Li_ Slot String where
+  pureAttr Slot value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "slot", value }
+
+  mapAttr Slot evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "slot", value: prop' value }
+
+instance Attr Tags.Link_ Slot String where
+  pureAttr Slot value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "slot", value }
+
+  mapAttr Slot evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "slot", value: prop' value }
+
+instance Attr Tags.Main_ Slot String where
+  pureAttr Slot value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "slot", value }
+
+  mapAttr Slot evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "slot", value: prop' value }
+
+instance Attr Tags.Map_ Slot String where
+  pureAttr Slot value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "slot", value }
+
+  mapAttr Slot evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "slot", value: prop' value }
+
+instance Attr Tags.Mark_ Slot String where
+  pureAttr Slot value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "slot", value }
+
+  mapAttr Slot evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "slot", value: prop' value }
+
+instance Attr Tags.Meta_ Slot String where
+  pureAttr Slot value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "slot", value }
+
+  mapAttr Slot evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "slot", value: prop' value }
+
+instance Attr Tags.Meter_ Slot String where
+  pureAttr Slot value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "slot", value }
+
+  mapAttr Slot evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "slot", value: prop' value }
+
+instance Attr Tags.Nav_ Slot String where
+  pureAttr Slot value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "slot", value }
+
+  mapAttr Slot evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "slot", value: prop' value }
+
+instance Attr Tags.Noframes_ Slot String where
+  pureAttr Slot value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "slot", value }
+
+  mapAttr Slot evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "slot", value: prop' value }
+
+instance Attr Tags.Noscript_ Slot String where
+  pureAttr Slot value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "slot", value }
+
+  mapAttr Slot evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "slot", value: prop' value }
+
+instance Attr Tags.Object_ Slot String where
+  pureAttr Slot value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "slot", value }
+
+  mapAttr Slot evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "slot", value: prop' value }
+
+instance Attr Tags.Ol_ Slot String where
+  pureAttr Slot value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "slot", value }
+
+  mapAttr Slot evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "slot", value: prop' value }
+
+instance Attr Tags.Optgroup_ Slot String where
+  pureAttr Slot value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "slot", value }
+
+  mapAttr Slot evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "slot", value: prop' value }
+
+instance Attr Tags.Option_ Slot String where
+  pureAttr Slot value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "slot", value }
+
+  mapAttr Slot evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "slot", value: prop' value }
+
+instance Attr Tags.Output_ Slot String where
+  pureAttr Slot value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "slot", value }
+
+  mapAttr Slot evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "slot", value: prop' value }
+
+instance Attr Tags.P_ Slot String where
+  pureAttr Slot value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "slot", value }
+
+  mapAttr Slot evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "slot", value: prop' value }
+
+instance Attr Tags.Param_ Slot String where
+  pureAttr Slot value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "slot", value }
+
+  mapAttr Slot evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "slot", value: prop' value }
+
+instance Attr Tags.Picture_ Slot String where
+  pureAttr Slot value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "slot", value }
+
+  mapAttr Slot evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "slot", value: prop' value }
+
+instance Attr Tags.Pre_ Slot String where
+  pureAttr Slot value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "slot", value }
+
+  mapAttr Slot evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "slot", value: prop' value }
+
+instance Attr Tags.Progress_ Slot String where
+  pureAttr Slot value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "slot", value }
+
+  mapAttr Slot evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "slot", value: prop' value }
+
+instance Attr Tags.Q_ Slot String where
+  pureAttr Slot value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "slot", value }
+
+  mapAttr Slot evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "slot", value: prop' value }
+
+instance Attr Tags.Rp_ Slot String where
+  pureAttr Slot value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "slot", value }
+
+  mapAttr Slot evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "slot", value: prop' value }
+
+instance Attr Tags.Rt_ Slot String where
+  pureAttr Slot value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "slot", value }
+
+  mapAttr Slot evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "slot", value: prop' value }
+
+instance Attr Tags.Ruby_ Slot String where
+  pureAttr Slot value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "slot", value }
+
+  mapAttr Slot evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "slot", value: prop' value }
+
+instance Attr Tags.S_ Slot String where
+  pureAttr Slot value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "slot", value }
+
+  mapAttr Slot evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "slot", value: prop' value }
+
+instance Attr Tags.Samp_ Slot String where
+  pureAttr Slot value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "slot", value }
+
+  mapAttr Slot evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "slot", value: prop' value }
+
+instance Attr Tags.Script_ Slot String where
+  pureAttr Slot value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "slot", value }
+
+  mapAttr Slot evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "slot", value: prop' value }
+
+instance Attr Tags.Section_ Slot String where
+  pureAttr Slot value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "slot", value }
+
+  mapAttr Slot evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "slot", value: prop' value }
+
+instance Attr Tags.Select_ Slot String where
+  pureAttr Slot value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "slot", value }
+
+  mapAttr Slot evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "slot", value: prop' value }
+
+instance Attr Tags.Small_ Slot String where
+  pureAttr Slot value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "slot", value }
+
+  mapAttr Slot evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "slot", value: prop' value }
+
+instance Attr Tags.Source_ Slot String where
+  pureAttr Slot value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "slot", value }
+
+  mapAttr Slot evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "slot", value: prop' value }
+
+instance Attr Tags.Span_ Slot String where
+  pureAttr Slot value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "slot", value }
+
+  mapAttr Slot evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "slot", value: prop' value }
+
+instance Attr Tags.Strike_ Slot String where
+  pureAttr Slot value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "slot", value }
+
+  mapAttr Slot evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "slot", value: prop' value }
+
+instance Attr Tags.Strong_ Slot String where
+  pureAttr Slot value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "slot", value }
+
+  mapAttr Slot evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "slot", value: prop' value }
+
+instance Attr Tags.Style_ Slot String where
+  pureAttr Slot value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "slot", value }
+
+  mapAttr Slot evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "slot", value: prop' value }
+
+instance Attr Tags.Sub_ Slot String where
+  pureAttr Slot value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "slot", value }
+
+  mapAttr Slot evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "slot", value: prop' value }
+
+instance Attr Tags.Summary_ Slot String where
+  pureAttr Slot value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "slot", value }
+
+  mapAttr Slot evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "slot", value: prop' value }
+
+instance Attr Tags.Sup_ Slot String where
+  pureAttr Slot value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "slot", value }
+
+  mapAttr Slot evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "slot", value: prop' value }
+
+instance Attr Tags.Svg_ Slot String where
+  pureAttr Slot value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "slot", value }
+
+  mapAttr Slot evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "slot", value: prop' value }
+
+instance Attr Tags.Table_ Slot String where
+  pureAttr Slot value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "slot", value }
+
+  mapAttr Slot evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "slot", value: prop' value }
+
+instance Attr Tags.Tbody_ Slot String where
+  pureAttr Slot value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "slot", value }
+
+  mapAttr Slot evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "slot", value: prop' value }
+
+instance Attr Tags.Td_ Slot String where
+  pureAttr Slot value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "slot", value }
+
+  mapAttr Slot evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "slot", value: prop' value }
+
+instance Attr Tags.Template_ Slot String where
+  pureAttr Slot value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "slot", value }
+
+  mapAttr Slot evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "slot", value: prop' value }
+
+instance Attr Tags.Textarea_ Slot String where
+  pureAttr Slot value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "slot", value }
+
+  mapAttr Slot evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "slot", value: prop' value }
+
+instance Attr Tags.Tfoot_ Slot String where
+  pureAttr Slot value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "slot", value }
+
+  mapAttr Slot evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "slot", value: prop' value }
+
+instance Attr Tags.Th_ Slot String where
+  pureAttr Slot value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "slot", value }
+
+  mapAttr Slot evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "slot", value: prop' value }
+
+instance Attr Tags.Thead_ Slot String where
+  pureAttr Slot value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "slot", value }
+
+  mapAttr Slot evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "slot", value: prop' value }
+
+instance Attr Tags.Time_ Slot String where
+  pureAttr Slot value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "slot", value }
+
+  mapAttr Slot evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "slot", value: prop' value }
+
+instance Attr Tags.Title_ Slot String where
+  pureAttr Slot value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "slot", value }
+
+  mapAttr Slot evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "slot", value: prop' value }
+
+instance Attr Tags.Tr_ Slot String where
+  pureAttr Slot value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "slot", value }
+
+  mapAttr Slot evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "slot", value: prop' value }
+
+instance Attr Tags.Track_ Slot String where
+  pureAttr Slot value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "slot", value }
+
+  mapAttr Slot evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "slot", value: prop' value }
+
+instance Attr Tags.Tt_ Slot String where
+  pureAttr Slot value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "slot", value }
+
+  mapAttr Slot evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "slot", value: prop' value }
+
+instance Attr Tags.U_ Slot String where
+  pureAttr Slot value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "slot", value }
+
+  mapAttr Slot evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "slot", value: prop' value }
+
+instance Attr Tags.Ul_ Slot String where
+  pureAttr Slot value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "slot", value }
+
+  mapAttr Slot evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "slot", value: prop' value }
+
+instance Attr Tags.Var_ Slot String where
+  pureAttr Slot value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "slot", value }
+
+  mapAttr Slot evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "slot", value: prop' value }
+
+instance Attr Tags.Video_ Slot String where
+  pureAttr Slot value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "slot", value }
+
+  mapAttr Slot evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "slot", value: prop' value }
+
+instance Attr Tags.Wbr_ Slot String where
+  pureAttr Slot value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "slot", value }
+
+  mapAttr Slot evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "slot", value: prop' value }
 
 instance Attr everything Slot Unit where
-  attr Slot _ = unsafeAttribute
+  pureAttr Slot _ = unsafeAttribute $ Right $ pure $ unsafeVolatileAttribute
     { key: "slot", value: unset' }
+  mapAttr Slot evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "slot", value: unset' }

@@ -1,72 +1,121 @@
 module Deku.DOM.Attr.Xtype where
 
 import Prelude
+import Data.Either (Either(..))
 
-import Deku.DOM.Elt.Button (Button_)
-import Deku.DOM.Elt.Input (Input_)
-import Deku.DOM.Elt.Embed (Embed_)
-import Deku.DOM.Elt.Object (Object_)
-import Deku.DOM.Elt.Script (Script_)
-import Deku.DOM.Elt.Source (Source_)
-import Deku.DOM.Elt.Style (Style_)
-import Deku.DOM.Elt.Link (Link_)
-import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
-
-import Deku.DOM.Elt.FeTurbulence (FeTurbulence_)
-import Deku.DOM.Elt.FeFuncR (FeFuncR_)
-import Deku.DOM.Elt.FeFuncG (FeFuncG_)
-import Deku.DOM.Elt.FeFuncB (FeFuncB_)
-import Deku.DOM.Elt.FeFuncA (FeFuncA_)
-import Deku.DOM.Elt.FeColorMatrix (FeColorMatrix_)
-import Deku.DOM.Elt.AnimateTransform (AnimateTransform_)
+import Deku.Attribute (class Attr, prop', unsafeAttribute, unsafePureAttribute, unsafeVolatileAttribute, unset')
+import Deku.DOM.Tags as Tags
 
 data Xtype = Xtype
 
-instance Attr Button_ Xtype String where
-  attr Xtype value = unsafeAttribute { key: "type", value: prop' value }
+instance Attr Tags.Button_ Xtype String where
+  pureAttr Xtype value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "type", value }
 
-instance Attr Input_ Xtype String where
-  attr Xtype value = unsafeAttribute { key: "type", value: prop' value }
+  mapAttr Xtype evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "type", value: prop' value }
 
-instance Attr Embed_ Xtype String where
-  attr Xtype value = unsafeAttribute { key: "type", value: prop' value }
+instance Attr Tags.Input_ Xtype String where
+  pureAttr Xtype value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "type", value }
 
-instance Attr Object_ Xtype String where
-  attr Xtype value = unsafeAttribute { key: "type", value: prop' value }
+  mapAttr Xtype evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "type", value: prop' value }
 
-instance Attr Script_ Xtype String where
-  attr Xtype value = unsafeAttribute { key: "type", value: prop' value }
+instance Attr Tags.Embed_ Xtype String where
+  pureAttr Xtype value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "type", value }
 
-instance Attr Source_ Xtype String where
-  attr Xtype value = unsafeAttribute { key: "type", value: prop' value }
+  mapAttr Xtype evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "type", value: prop' value }
 
-instance Attr Style_ Xtype String where
-  attr Xtype value = unsafeAttribute { key: "type", value: prop' value }
+instance Attr Tags.Object_ Xtype String where
+  pureAttr Xtype value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "type", value }
 
-instance Attr Link_ Xtype String where
-  attr Xtype value = unsafeAttribute { key: "type", value: prop' value }
+  mapAttr Xtype evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "type", value: prop' value }
 
-instance Attr AnimateTransform_ Xtype String where
-  attr Xtype value = unsafeAttribute { key: "type", value: prop' value }
+instance Attr Tags.Script_ Xtype String where
+  pureAttr Xtype value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "type", value }
 
-instance Attr FeColorMatrix_ Xtype String where
-  attr Xtype value = unsafeAttribute { key: "type", value: prop' value }
+  mapAttr Xtype evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "type", value: prop' value }
 
-instance Attr FeFuncA_ Xtype String where
-  attr Xtype value = unsafeAttribute { key: "type", value: prop' value }
+instance Attr Tags.Source_ Xtype String where
+  pureAttr Xtype value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "type", value }
 
-instance Attr FeFuncB_ Xtype String where
-  attr Xtype value = unsafeAttribute { key: "type", value: prop' value }
+  mapAttr Xtype evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "type", value: prop' value }
 
-instance Attr FeFuncG_ Xtype String where
-  attr Xtype value = unsafeAttribute { key: "type", value: prop' value }
+instance Attr Tags.Style_ Xtype String where
+  pureAttr Xtype value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "type", value }
 
-instance Attr FeFuncR_ Xtype String where
-  attr Xtype value = unsafeAttribute { key: "type", value: prop' value }
+  mapAttr Xtype evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "type", value: prop' value }
 
-instance Attr FeTurbulence_ Xtype String where
-  attr Xtype value = unsafeAttribute { key: "type", value: prop' value }
+instance Attr Tags.Link_ Xtype String where
+  pureAttr Xtype value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "type", value }
+
+  mapAttr Xtype evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "type", value: prop' value }
+
+instance Attr Tags.AnimateTransform_ Xtype String where
+  pureAttr Xtype value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "type", value }
+
+  mapAttr Xtype evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "type", value: prop' value }
+
+instance Attr Tags.FeColorMatrix_ Xtype String where
+  pureAttr Xtype value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "type", value }
+
+  mapAttr Xtype evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "type", value: prop' value }
+
+instance Attr Tags.FeFuncA_ Xtype String where
+  pureAttr Xtype value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "type", value }
+
+  mapAttr Xtype evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "type", value: prop' value }
+
+instance Attr Tags.FeFuncB_ Xtype String where
+  pureAttr Xtype value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "type", value }
+
+  mapAttr Xtype evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "type", value: prop' value }
+
+instance Attr Tags.FeFuncG_ Xtype String where
+  pureAttr Xtype value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "type", value }
+
+  mapAttr Xtype evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "type", value: prop' value }
+
+instance Attr Tags.FeFuncR_ Xtype String where
+  pureAttr Xtype value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "type", value }
+
+  mapAttr Xtype evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "type", value: prop' value }
+
+instance Attr Tags.FeTurbulence_ Xtype String where
+  pureAttr Xtype value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "type", value }
+
+  mapAttr Xtype evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "type", value: prop' value }
 
 instance Attr everything Xtype Unit where
-  attr Xtype _ = unsafeAttribute
+  pureAttr Xtype _ = unsafeAttribute $ Right $ pure $ unsafeVolatileAttribute
     { key: "type", value: unset' }
+  mapAttr Xtype evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "type", value: unset' }

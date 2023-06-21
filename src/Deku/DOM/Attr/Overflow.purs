@@ -1,87 +1,149 @@
 module Deku.DOM.Attr.Overflow where
 
 import Prelude
+import Data.Either (Either(..))
 
-import Deku.DOM.Elt.Switch (Switch_)
-import Deku.DOM.Elt.Image (Image_)
-import Deku.DOM.Elt.Filter (Filter_)
-import Deku.DOM.Elt.FeTurbulence (FeTurbulence_)
-import Deku.DOM.Elt.FeTile (FeTile_)
-import Deku.DOM.Elt.FeSpecularLighting (FeSpecularLighting_)
-import Deku.DOM.Elt.FeOffset (FeOffset_)
-import Deku.DOM.Elt.FeMorphology (FeMorphology_)
-import Deku.DOM.Elt.FeMerge (FeMerge_)
-import Deku.DOM.Elt.FeImage (FeImage_)
-import Deku.DOM.Elt.FeGaussianBlur (FeGaussianBlur_)
-import Deku.DOM.Elt.FeFlood (FeFlood_)
-import Deku.DOM.Elt.FeDisplacementMap (FeDisplacementMap_)
-import Deku.DOM.Elt.FeDiffuseLighting (FeDiffuseLighting_)
-import Deku.DOM.Elt.FeConvolveMatrix (FeConvolveMatrix_)
-import Deku.DOM.Elt.FeComposite (FeComposite_)
-import Deku.DOM.Elt.FeComponentTransfer (FeComponentTransfer_)
-import Deku.DOM.Elt.FeColorMatrix (FeColorMatrix_)
-import Deku.DOM.Elt.FeBlend (FeBlend_)
-import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
+import Deku.Attribute (class Attr, prop', unsafeAttribute, unsafePureAttribute, unsafeVolatileAttribute, unset')
+import Deku.DOM.Tags as Tags
 
 data Overflow = Overflow
 
-instance Attr FeBlend_ Overflow String where
-  attr Overflow value = unsafeAttribute { key: "overflow", value: prop' value }
+instance Attr Tags.FeBlend_ Overflow String where
+  pureAttr Overflow value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "overflow", value }
 
-instance Attr FeColorMatrix_ Overflow String where
-  attr Overflow value = unsafeAttribute { key: "overflow", value: prop' value }
+  mapAttr Overflow evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "overflow", value: prop' value }
 
-instance Attr FeComponentTransfer_ Overflow String where
-  attr Overflow value = unsafeAttribute { key: "overflow", value: prop' value }
+instance Attr Tags.FeColorMatrix_ Overflow String where
+  pureAttr Overflow value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "overflow", value }
 
-instance Attr FeComposite_ Overflow String where
-  attr Overflow value = unsafeAttribute { key: "overflow", value: prop' value }
+  mapAttr Overflow evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "overflow", value: prop' value }
 
-instance Attr FeConvolveMatrix_ Overflow String where
-  attr Overflow value = unsafeAttribute { key: "overflow", value: prop' value }
+instance Attr Tags.FeComponentTransfer_ Overflow String where
+  pureAttr Overflow value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "overflow", value }
 
-instance Attr FeDiffuseLighting_ Overflow String where
-  attr Overflow value = unsafeAttribute { key: "overflow", value: prop' value }
+  mapAttr Overflow evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "overflow", value: prop' value }
 
-instance Attr FeDisplacementMap_ Overflow String where
-  attr Overflow value = unsafeAttribute { key: "overflow", value: prop' value }
+instance Attr Tags.FeComposite_ Overflow String where
+  pureAttr Overflow value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "overflow", value }
 
-instance Attr FeFlood_ Overflow String where
-  attr Overflow value = unsafeAttribute { key: "overflow", value: prop' value }
+  mapAttr Overflow evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "overflow", value: prop' value }
 
-instance Attr FeGaussianBlur_ Overflow String where
-  attr Overflow value = unsafeAttribute { key: "overflow", value: prop' value }
+instance Attr Tags.FeConvolveMatrix_ Overflow String where
+  pureAttr Overflow value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "overflow", value }
 
-instance Attr FeImage_ Overflow String where
-  attr Overflow value = unsafeAttribute { key: "overflow", value: prop' value }
+  mapAttr Overflow evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "overflow", value: prop' value }
 
-instance Attr FeMerge_ Overflow String where
-  attr Overflow value = unsafeAttribute { key: "overflow", value: prop' value }
+instance Attr Tags.FeDiffuseLighting_ Overflow String where
+  pureAttr Overflow value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "overflow", value }
 
-instance Attr FeMorphology_ Overflow String where
-  attr Overflow value = unsafeAttribute { key: "overflow", value: prop' value }
+  mapAttr Overflow evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "overflow", value: prop' value }
 
-instance Attr FeOffset_ Overflow String where
-  attr Overflow value = unsafeAttribute { key: "overflow", value: prop' value }
+instance Attr Tags.FeDisplacementMap_ Overflow String where
+  pureAttr Overflow value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "overflow", value }
 
-instance Attr FeSpecularLighting_ Overflow String where
-  attr Overflow value = unsafeAttribute { key: "overflow", value: prop' value }
+  mapAttr Overflow evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "overflow", value: prop' value }
 
-instance Attr FeTile_ Overflow String where
-  attr Overflow value = unsafeAttribute { key: "overflow", value: prop' value }
+instance Attr Tags.FeFlood_ Overflow String where
+  pureAttr Overflow value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "overflow", value }
 
-instance Attr FeTurbulence_ Overflow String where
-  attr Overflow value = unsafeAttribute { key: "overflow", value: prop' value }
+  mapAttr Overflow evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "overflow", value: prop' value }
 
-instance Attr Filter_ Overflow String where
-  attr Overflow value = unsafeAttribute { key: "overflow", value: prop' value }
+instance Attr Tags.FeGaussianBlur_ Overflow String where
+  pureAttr Overflow value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "overflow", value }
 
-instance Attr Image_ Overflow String where
-  attr Overflow value = unsafeAttribute { key: "overflow", value: prop' value }
+  mapAttr Overflow evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "overflow", value: prop' value }
 
-instance Attr Switch_ Overflow String where
-  attr Overflow value = unsafeAttribute { key: "overflow", value: prop' value }
+instance Attr Tags.FeImage_ Overflow String where
+  pureAttr Overflow value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "overflow", value }
+
+  mapAttr Overflow evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "overflow", value: prop' value }
+
+instance Attr Tags.FeMerge_ Overflow String where
+  pureAttr Overflow value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "overflow", value }
+
+  mapAttr Overflow evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "overflow", value: prop' value }
+
+instance Attr Tags.FeMorphology_ Overflow String where
+  pureAttr Overflow value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "overflow", value }
+
+  mapAttr Overflow evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "overflow", value: prop' value }
+
+instance Attr Tags.FeOffset_ Overflow String where
+  pureAttr Overflow value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "overflow", value }
+
+  mapAttr Overflow evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "overflow", value: prop' value }
+
+instance Attr Tags.FeSpecularLighting_ Overflow String where
+  pureAttr Overflow value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "overflow", value }
+
+  mapAttr Overflow evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "overflow", value: prop' value }
+
+instance Attr Tags.FeTile_ Overflow String where
+  pureAttr Overflow value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "overflow", value }
+
+  mapAttr Overflow evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "overflow", value: prop' value }
+
+instance Attr Tags.FeTurbulence_ Overflow String where
+  pureAttr Overflow value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "overflow", value }
+
+  mapAttr Overflow evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "overflow", value: prop' value }
+
+instance Attr Tags.Filter_ Overflow String where
+  pureAttr Overflow value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "overflow", value }
+
+  mapAttr Overflow evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "overflow", value: prop' value }
+
+instance Attr Tags.Image_ Overflow String where
+  pureAttr Overflow value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "overflow", value }
+
+  mapAttr Overflow evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "overflow", value: prop' value }
+
+instance Attr Tags.Switch_ Overflow String where
+  pureAttr Overflow value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "overflow", value }
+
+  mapAttr Overflow evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "overflow", value: prop' value }
 
 instance Attr everything Overflow Unit where
-  attr Overflow _ = unsafeAttribute
+  pureAttr Overflow _ = unsafeAttribute $ Right $ pure $ unsafeVolatileAttribute
     { key: "overflow", value: unset' }
+  mapAttr Overflow evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "overflow", value: unset' }

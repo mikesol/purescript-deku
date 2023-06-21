@@ -1,16 +1,24 @@
 module Deku.DOM.Attr.Intrinsicsize where
 
 import Prelude
+import Data.Either (Either(..))
 
-import Deku.DOM.Elt.Img (Img_)
-import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
+import Deku.Attribute (class Attr, prop', unsafeAttribute, unsafePureAttribute, unsafeVolatileAttribute, unset')
+import Deku.DOM.Tags as Tags
 
 data Intrinsicsize = Intrinsicsize
 
-instance Attr Img_ Intrinsicsize String where
-  attr Intrinsicsize value = unsafeAttribute
-    { key: "intrinsicsize", value: prop' value }
+instance Attr Tags.Img_ Intrinsicsize String where
+  pureAttr Intrinsicsize value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "intrinsicsize", value }
+  mapAttr Intrinsicsize evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "intrinsicsize", value: prop' value }
 
 instance Attr everything Intrinsicsize Unit where
-  attr Intrinsicsize _ = unsafeAttribute
-    { key: "intrinsicsize", value: unset' }
+  pureAttr Intrinsicsize _ = unsafeAttribute $ Right $ pure $
+    unsafeVolatileAttribute
+      { key: "intrinsicsize", value: unset' }
+  mapAttr Intrinsicsize evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "intrinsicsize", value: unset' }

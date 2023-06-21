@@ -1,21 +1,31 @@
 module Deku.DOM.Attr.Maxlength where
 
 import Prelude
+import Data.Either (Either(..))
 
-import Deku.DOM.Elt.Input (Input_)
-import Deku.DOM.Elt.Textarea (Textarea_)
-import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
+import Deku.Attribute (class Attr, prop', unsafeAttribute, unsafePureAttribute, unsafeVolatileAttribute, unset')
+import Deku.DOM.Tags as Tags
 
 data Maxlength = Maxlength
 
-instance Attr Input_ Maxlength String where
-  attr Maxlength value = unsafeAttribute
-    { key: "maxlength", value: prop' value }
+instance Attr Tags.Input_ Maxlength String where
+  pureAttr Maxlength value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "maxlength", value }
+  mapAttr Maxlength evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "maxlength", value: prop' value }
 
-instance Attr Textarea_ Maxlength String where
-  attr Maxlength value = unsafeAttribute
-    { key: "maxlength", value: prop' value }
+instance Attr Tags.Textarea_ Maxlength String where
+  pureAttr Maxlength value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "maxlength", value }
+  mapAttr Maxlength evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "maxlength", value: prop' value }
 
 instance Attr everything Maxlength Unit where
-  attr Maxlength _ = unsafeAttribute
-    { key: "maxlength", value: unset' }
+  pureAttr Maxlength _ = unsafeAttribute $ Right $ pure $
+    unsafeVolatileAttribute
+      { key: "maxlength", value: unset' }
+  mapAttr Maxlength evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "maxlength", value: unset' }

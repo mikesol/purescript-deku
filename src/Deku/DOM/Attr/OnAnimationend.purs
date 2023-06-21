@@ -1,23 +1,34 @@
 module Deku.DOM.Attr.OnAnimationend where
 
 import Prelude
+import Data.Either (Either(..))
 import Effect (Effect)
-import Deku.Attribute (class Attr, Attribute, Cb(..), cb', unsafeAttribute, unset')
+import Deku.Attribute (class Attr, Attribute, Cb(..), cb', unsafeAttribute, unsafePureAttribute, unsafeVolatileAttribute, unset')
+import Deku.DOM.Tags as Tags
 import FRP.Event (Event)
 
 data OnAnimationend = OnAnimationend
 
 instance Attr anything OnAnimationend Cb where
-  attr OnAnimationend value = unsafeAttribute
-    { key: "animationend ", value: cb' value }
+  pureAttr OnAnimationend value = unsafeAttribute $ Right $ pure $
+    unsafeVolatileAttribute
+  mapAttr OnAnimationend evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "animationend ", value: cb' value }
 
 instance Attr anything OnAnimationend (Effect Unit) where
-  attr OnAnimationend value = unsafeAttribute
-    { key: "animationend ", value: cb' (Cb (const (value $> true))) }
+  pureAttr OnAnimationend value = unsafeAttribute $ Right $ pure $
+    unsafeVolatileAttribute
+  mapAttr OnAnimationend evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "animationend ", value: cb' (Cb (const (value $> true))) }
 
 instance Attr anything OnAnimationend (Effect Boolean) where
-  attr OnAnimationend value = unsafeAttribute
-    { key: "animationend ", value: cb' (Cb (const value)) }
+  pureAttr OnAnimationend value = unsafeAttribute $ Right $ pure $
+    unsafeVolatileAttribute
+  mapAttr OnAnimationend evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "animationend ", value: cb' (Cb (const value)) }
 
 type OnAnimationendEffect =
   forall element
@@ -25,5 +36,6 @@ type OnAnimationendEffect =
   => Event (Attribute element)
 
 instance Attr everything OnAnimationend Unit where
-  attr OnAnimationend _ = unsafeAttribute
-    { key: "animationend ", value: unset' }
+  pureAttr OnAnimationend _ = unsafeAttribute $ Right $ pure $
+    unsafeVolatileAttribute
+      { key: "animationend ", value: unset' }

@@ -1,22 +1,33 @@
 module Deku.DOM.Attr.OnLoadend where
 
 import Prelude
+import Data.Either (Either(..))
 import Effect (Effect)
-import Deku.Attribute (class Attr, Attribute, Cb(..), cb', unsafeAttribute, unset')
+import Deku.Attribute (class Attr, Attribute, Cb(..), cb', unsafeAttribute, unsafePureAttribute, unsafeVolatileAttribute, unset')
+import Deku.DOM.Tags as Tags
 import FRP.Event (Event)
 
 data OnLoadend = OnLoadend
 
 instance Attr anything OnLoadend Cb where
-  attr OnLoadend value = unsafeAttribute { key: "loadend", value: cb' value }
+  pureAttr OnLoadend value = unsafeAttribute $ Right $ pure $
+    unsafeVolatileAttribute { key: "loadend", value: cb' value }
+  mapAttr OnLoadend evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "loadend", value: cb' value }
 
 instance Attr anything OnLoadend (Effect Unit) where
-  attr OnLoadend value = unsafeAttribute
-    { key: "loadend", value: cb' (Cb (const (value $> true))) }
+  pureAttr OnLoadend value = unsafeAttribute $ Right $ pure $
+    unsafeVolatileAttribute
+  mapAttr OnLoadend evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "loadend", value: cb' (Cb (const (value $> true))) }
 
 instance Attr anything OnLoadend (Effect Boolean) where
-  attr OnLoadend value = unsafeAttribute
-    { key: "loadend", value: cb' (Cb (const value)) }
+  pureAttr OnLoadend value = unsafeAttribute $ Right $ pure $
+    unsafeVolatileAttribute
+  mapAttr OnLoadend evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "loadend", value: cb' (Cb (const value)) }
 
 type OnLoadendEffect =
   forall element
@@ -24,5 +35,6 @@ type OnLoadendEffect =
   => Event (Attribute element)
 
 instance Attr everything OnLoadend Unit where
-  attr OnLoadend _ = unsafeAttribute
-    { key: "loadend", value: unset' }
+  pureAttr OnLoadend _ = unsafeAttribute $ Right $ pure $
+    unsafeVolatileAttribute
+      { key: "loadend", value: unset' }

@@ -1,22 +1,33 @@
 module Deku.DOM.Attr.OnEmptied where
 
 import Prelude
+import Data.Either (Either(..))
 import Effect (Effect)
-import Deku.Attribute (class Attr, Attribute, Cb(..), cb', unsafeAttribute, unset')
+import Deku.Attribute (class Attr, Attribute, Cb(..), cb', unsafeAttribute, unsafePureAttribute, unsafeVolatileAttribute, unset')
+import Deku.DOM.Tags as Tags
 import FRP.Event (Event)
 
 data OnEmptied = OnEmptied
 
 instance Attr anything OnEmptied Cb where
-  attr OnEmptied value = unsafeAttribute { key: "emptied", value: cb' value }
+  pureAttr OnEmptied value = unsafeAttribute $ Right $ pure $
+    unsafeVolatileAttribute { key: "emptied", value: cb' value }
+  mapAttr OnEmptied evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "emptied", value: cb' value }
 
 instance Attr anything OnEmptied (Effect Unit) where
-  attr OnEmptied value = unsafeAttribute
-    { key: "emptied", value: cb' (Cb (const (value $> true))) }
+  pureAttr OnEmptied value = unsafeAttribute $ Right $ pure $
+    unsafeVolatileAttribute
+  mapAttr OnEmptied evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "emptied", value: cb' (Cb (const (value $> true))) }
 
 instance Attr anything OnEmptied (Effect Boolean) where
-  attr OnEmptied value = unsafeAttribute
-    { key: "emptied", value: cb' (Cb (const value)) }
+  pureAttr OnEmptied value = unsafeAttribute $ Right $ pure $
+    unsafeVolatileAttribute
+  mapAttr OnEmptied evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "emptied", value: cb' (Cb (const value)) }
 
 type OnEmptiedEffect =
   forall element
@@ -24,5 +35,6 @@ type OnEmptiedEffect =
   => Event (Attribute element)
 
 instance Attr everything OnEmptied Unit where
-  attr OnEmptied _ = unsafeAttribute
-    { key: "emptied", value: unset' }
+  pureAttr OnEmptied _ = unsafeAttribute $ Right $ pure $
+    unsafeVolatileAttribute
+      { key: "emptied", value: unset' }

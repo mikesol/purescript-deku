@@ -1,19 +1,30 @@
 module Deku.DOM.Attr.Path where
 
 import Prelude
+import Data.Either (Either(..))
 
-import Deku.DOM.Elt.TextPath (TextPath_)
-import Deku.DOM.Elt.AnimateMotion (AnimateMotion_)
-import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
+import Deku.Attribute (class Attr, prop', unsafeAttribute, unsafePureAttribute, unsafeVolatileAttribute, unset')
+import Deku.DOM.Tags as Tags
 
 data Path = Path
 
-instance Attr AnimateMotion_ Path String where
-  attr Path value = unsafeAttribute { key: "path", value: prop' value }
+instance Attr Tags.AnimateMotion_ Path String where
+  pureAttr Path value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "path", value }
 
-instance Attr TextPath_ Path String where
-  attr Path value = unsafeAttribute { key: "path", value: prop' value }
+  mapAttr Path evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "path", value: prop' value }
+
+instance Attr Tags.TextPath_ Path String where
+  pureAttr Path value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "path", value }
+
+  mapAttr Path evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "path", value: prop' value }
 
 instance Attr everything Path Unit where
-  attr Path _ = unsafeAttribute
+  pureAttr Path _ = unsafeAttribute $ Right $ pure $ unsafeVolatileAttribute
     { key: "path", value: unset' }
+  mapAttr Path evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "path", value: unset' }

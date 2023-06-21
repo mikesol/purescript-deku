@@ -1,23 +1,34 @@
 module Deku.DOM.Attr.OnDragleave where
 
 import Prelude
+import Data.Either (Either(..))
 import Effect (Effect)
-import Deku.Attribute (class Attr, Attribute, Cb(..), cb', unsafeAttribute, unset')
+import Deku.Attribute (class Attr, Attribute, Cb(..), cb', unsafeAttribute, unsafePureAttribute, unsafeVolatileAttribute, unset')
+import Deku.DOM.Tags as Tags
 import FRP.Event (Event)
 
 data OnDragleave = OnDragleave
 
 instance Attr anything OnDragleave Cb where
-  attr OnDragleave value = unsafeAttribute
-    { key: "dragleave", value: cb' value }
+  pureAttr OnDragleave value = unsafeAttribute $ Right $ pure $
+    unsafeVolatileAttribute
+  mapAttr OnDragleave evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "dragleave", value: cb' value }
 
 instance Attr anything OnDragleave (Effect Unit) where
-  attr OnDragleave value = unsafeAttribute
-    { key: "dragleave", value: cb' (Cb (const (value $> true))) }
+  pureAttr OnDragleave value = unsafeAttribute $ Right $ pure $
+    unsafeVolatileAttribute
+  mapAttr OnDragleave evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "dragleave", value: cb' (Cb (const (value $> true))) }
 
 instance Attr anything OnDragleave (Effect Boolean) where
-  attr OnDragleave value = unsafeAttribute
-    { key: "dragleave", value: cb' (Cb (const value)) }
+  pureAttr OnDragleave value = unsafeAttribute $ Right $ pure $
+    unsafeVolatileAttribute
+  mapAttr OnDragleave evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "dragleave", value: cb' (Cb (const value)) }
 
 type OnDragleaveEffect =
   forall element
@@ -25,5 +36,6 @@ type OnDragleaveEffect =
   => Event (Attribute element)
 
 instance Attr everything OnDragleave Unit where
-  attr OnDragleave _ = unsafeAttribute
-    { key: "dragleave", value: unset' }
+  pureAttr OnDragleave _ = unsafeAttribute $ Right $ pure $
+    unsafeVolatileAttribute
+      { key: "dragleave", value: unset' }

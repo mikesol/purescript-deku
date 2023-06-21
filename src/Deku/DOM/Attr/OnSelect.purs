@@ -1,22 +1,33 @@
 module Deku.DOM.Attr.OnSelect where
 
 import Prelude
+import Data.Either (Either(..))
 import Effect (Effect)
-import Deku.Attribute (class Attr, Attribute, Cb(..), cb', unsafeAttribute, unset')
+import Deku.Attribute (class Attr, Attribute, Cb(..), cb', unsafeAttribute, unsafePureAttribute, unsafeVolatileAttribute, unset')
+import Deku.DOM.Tags as Tags
 import FRP.Event (Event)
 
 data OnSelect = OnSelect
 
 instance Attr anything OnSelect Cb where
-  attr OnSelect value = unsafeAttribute { key: "select", value: cb' value }
+  pureAttr OnSelect value = unsafeAttribute $ Right $ pure $
+    unsafeVolatileAttribute { key: "select", value: cb' value }
+  mapAttr OnSelect evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "select", value: cb' value }
 
 instance Attr anything OnSelect (Effect Unit) where
-  attr OnSelect value = unsafeAttribute
-    { key: "select", value: cb' (Cb (const (value $> true))) }
+  pureAttr OnSelect value = unsafeAttribute $ Right $ pure $
+    unsafeVolatileAttribute
+  mapAttr OnSelect evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "select", value: cb' (Cb (const (value $> true))) }
 
 instance Attr anything OnSelect (Effect Boolean) where
-  attr OnSelect value = unsafeAttribute
-    { key: "select", value: cb' (Cb (const value)) }
+  pureAttr OnSelect value = unsafeAttribute $ Right $ pure $
+    unsafeVolatileAttribute
+  mapAttr OnSelect evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "select", value: cb' (Cb (const value)) }
 
 type OnSelectEffect =
   forall element
@@ -24,5 +35,7 @@ type OnSelectEffect =
   => Event (Attribute element)
 
 instance Attr everything OnSelect Unit where
-  attr OnSelect _ = unsafeAttribute
+  pureAttr OnSelect _ = unsafeAttribute $ Right $ pure $ unsafeVolatileAttribute
+    { key: "select", value: unset' }
+  mapAttr OnSelect evalue = unsafeAttribute $ Right $ evalue <#> \value -> unsafeVolatileAttribute
     { key: "select", value: unset' }

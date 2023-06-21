@@ -4,12 +4,11 @@ import Control.Plus (empty)
 import Deku.Attribute (Attribute)
 import Deku.Control as DC
 import Deku.Core (Nut)
-import FRP.Event (Event)
 
 import Deku.DOM.Tags as Tags
 
 sup
-  :: Array (Event (Attribute Tags.Sup_))
+  :: Array (Attribute Tags.Sup_)
   -> Array Nut
   -> Nut
 sup = DC.elementify3 "sup"

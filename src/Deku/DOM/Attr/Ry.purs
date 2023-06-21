@@ -1,19 +1,30 @@
 module Deku.DOM.Attr.Ry where
 
 import Prelude
+import Data.Either (Either(..))
 
-import Deku.DOM.Elt.Rect (Rect_)
-import Deku.DOM.Elt.Ellipse (Ellipse_)
-import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
+import Deku.Attribute (class Attr, prop', unsafeAttribute, unsafePureAttribute, unsafeVolatileAttribute, unset')
+import Deku.DOM.Tags as Tags
 
 data Ry = Ry
 
-instance Attr Ellipse_ Ry String where
-  attr Ry value = unsafeAttribute { key: "ry", value: prop' value }
+instance Attr Tags.Ellipse_ Ry String where
+  pureAttr Ry value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "ry", value }
 
-instance Attr Rect_ Ry String where
-  attr Ry value = unsafeAttribute { key: "ry", value: prop' value }
+  mapAttr Ry evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "ry", value: prop' value }
+
+instance Attr Tags.Rect_ Ry String where
+  pureAttr Ry value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "ry", value }
+
+  mapAttr Ry evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "ry", value: prop' value }
 
 instance Attr everything Ry Unit where
-  attr Ry _ = unsafeAttribute
+  pureAttr Ry _ = unsafeAttribute $ Right $ pure $ unsafeVolatileAttribute
     { key: "ry", value: unset' }
+  mapAttr Ry evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "ry", value: unset' }

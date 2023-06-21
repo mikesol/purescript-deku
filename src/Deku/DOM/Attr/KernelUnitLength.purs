@@ -1,26 +1,38 @@
 module Deku.DOM.Attr.KernelUnitLength where
 
 import Prelude
+import Data.Either (Either(..))
 
-import Deku.DOM.Elt.FeSpecularLighting (FeSpecularLighting_)
-import Deku.DOM.Elt.FeDiffuseLighting (FeDiffuseLighting_)
-import Deku.DOM.Elt.FeConvolveMatrix (FeConvolveMatrix_)
-import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
+import Deku.Attribute (class Attr, prop', unsafeAttribute, unsafePureAttribute, unsafeVolatileAttribute, unset')
+import Deku.DOM.Tags as Tags
 
 data KernelUnitLength = KernelUnitLength
 
-instance Attr FeConvolveMatrix_ KernelUnitLength String where
-  attr KernelUnitLength value = unsafeAttribute
-    { key: "kernelUnitLength", value: prop' value }
+instance Attr Tags.FeConvolveMatrix_ KernelUnitLength String where
+  pureAttr KernelUnitLength value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "kernelUnitLength", value }
+  mapAttr KernelUnitLength evalue = unsafeAttribute $ Right $ evalue <#>
+    \value -> unsafeVolatileAttribute
+      { key: "kernelUnitLength", value: prop' value }
 
-instance Attr FeDiffuseLighting_ KernelUnitLength String where
-  attr KernelUnitLength value = unsafeAttribute
-    { key: "kernelUnitLength", value: prop' value }
+instance Attr Tags.FeDiffuseLighting_ KernelUnitLength String where
+  pureAttr KernelUnitLength value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "kernelUnitLength", value }
+  mapAttr KernelUnitLength evalue = unsafeAttribute $ Right $ evalue <#>
+    \value -> unsafeVolatileAttribute
+      { key: "kernelUnitLength", value: prop' value }
 
-instance Attr FeSpecularLighting_ KernelUnitLength String where
-  attr KernelUnitLength value = unsafeAttribute
-    { key: "kernelUnitLength", value: prop' value }
+instance Attr Tags.FeSpecularLighting_ KernelUnitLength String where
+  pureAttr KernelUnitLength value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "kernelUnitLength", value }
+  mapAttr KernelUnitLength evalue = unsafeAttribute $ Right $ evalue <#>
+    \value -> unsafeVolatileAttribute
+      { key: "kernelUnitLength", value: prop' value }
 
 instance Attr everything KernelUnitLength Unit where
-  attr KernelUnitLength _ = unsafeAttribute
-    { key: "kernelUnitLength", value: unset' }
+  pureAttr KernelUnitLength _ = unsafeAttribute $ Right $ pure $
+    unsafeVolatileAttribute
+      { key: "kernelUnitLength", value: unset' }
+  mapAttr KernelUnitLength evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "kernelUnitLength", value: unset' }

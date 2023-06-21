@@ -1,22 +1,33 @@
 module Deku.DOM.Attr.OnProgress where
 
 import Prelude
+import Data.Either (Either(..))
 import Effect (Effect)
-import Deku.Attribute (class Attr, Attribute, Cb(..), cb', unsafeAttribute, unset')
+import Deku.Attribute (class Attr, Attribute, Cb(..), cb', unsafeAttribute, unsafePureAttribute, unsafeVolatileAttribute, unset')
+import Deku.DOM.Tags as Tags
 import FRP.Event (Event)
 
 data OnProgress = OnProgress
 
 instance Attr anything OnProgress Cb where
-  attr OnProgress value = unsafeAttribute { key: "progress", value: cb' value }
+  pureAttr OnProgress value = unsafeAttribute $ Right $ pure $
+    unsafeVolatileAttribute { key: "progress", value: cb' value }
+  mapAttr OnProgress evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "progress", value: cb' value }
 
 instance Attr anything OnProgress (Effect Unit) where
-  attr OnProgress value = unsafeAttribute
-    { key: "progress", value: cb' (Cb (const (value $> true))) }
+  pureAttr OnProgress value = unsafeAttribute $ Right $ pure $
+    unsafeVolatileAttribute
+  mapAttr OnProgress evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "progress", value: cb' (Cb (const (value $> true))) }
 
 instance Attr anything OnProgress (Effect Boolean) where
-  attr OnProgress value = unsafeAttribute
-    { key: "progress", value: cb' (Cb (const value)) }
+  pureAttr OnProgress value = unsafeAttribute $ Right $ pure $
+    unsafeVolatileAttribute
+  mapAttr OnProgress evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "progress", value: cb' (Cb (const value)) }
 
 type OnProgressEffect =
   forall element
@@ -24,5 +35,6 @@ type OnProgressEffect =
   => Event (Attribute element)
 
 instance Attr everything OnProgress Unit where
-  attr OnProgress _ = unsafeAttribute
-    { key: "progress", value: unset' }
+  pureAttr OnProgress _ = unsafeAttribute $ Right $ pure $
+    unsafeVolatileAttribute
+      { key: "progress", value: unset' }

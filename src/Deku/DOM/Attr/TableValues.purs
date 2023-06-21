@@ -1,31 +1,45 @@
 module Deku.DOM.Attr.TableValues where
 
 import Prelude
+import Data.Either (Either(..))
 
-import Deku.DOM.Elt.FeFuncR (FeFuncR_)
-import Deku.DOM.Elt.FeFuncG (FeFuncG_)
-import Deku.DOM.Elt.FeFuncB (FeFuncB_)
-import Deku.DOM.Elt.FeFuncA (FeFuncA_)
-import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
+import Deku.Attribute (class Attr, prop', unsafeAttribute, unsafePureAttribute, unsafeVolatileAttribute, unset')
+import Deku.DOM.Tags as Tags
 
 data TableValues = TableValues
 
-instance Attr FeFuncA_ TableValues String where
-  attr TableValues value = unsafeAttribute
-    { key: "tableValues", value: prop' value }
+instance Attr Tags.FeFuncA_ TableValues String where
+  pureAttr TableValues value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "tableValues", value }
+  mapAttr TableValues evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "tableValues", value: prop' value }
 
-instance Attr FeFuncB_ TableValues String where
-  attr TableValues value = unsafeAttribute
-    { key: "tableValues", value: prop' value }
+instance Attr Tags.FeFuncB_ TableValues String where
+  pureAttr TableValues value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "tableValues", value }
+  mapAttr TableValues evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "tableValues", value: prop' value }
 
-instance Attr FeFuncG_ TableValues String where
-  attr TableValues value = unsafeAttribute
-    { key: "tableValues", value: prop' value }
+instance Attr Tags.FeFuncG_ TableValues String where
+  pureAttr TableValues value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "tableValues", value }
+  mapAttr TableValues evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "tableValues", value: prop' value }
 
-instance Attr FeFuncR_ TableValues String where
-  attr TableValues value = unsafeAttribute
-    { key: "tableValues", value: prop' value }
+instance Attr Tags.FeFuncR_ TableValues String where
+  pureAttr TableValues value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "tableValues", value }
+  mapAttr TableValues evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "tableValues", value: prop' value }
 
 instance Attr everything TableValues Unit where
-  attr TableValues _ = unsafeAttribute
-    { key: "tableValues", value: unset' }
+  pureAttr TableValues _ = unsafeAttribute $ Right $ pure $
+    unsafeVolatileAttribute
+      { key: "tableValues", value: unset' }
+  mapAttr TableValues evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "tableValues", value: unset' }

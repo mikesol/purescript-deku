@@ -1,23 +1,34 @@
 module Deku.DOM.Attr.OnDragstart where
 
 import Prelude
+import Data.Either (Either(..))
 import Effect (Effect)
-import Deku.Attribute (class Attr, Attribute, Cb(..), cb', unsafeAttribute, unset')
+import Deku.Attribute (class Attr, Attribute, Cb(..), cb', unsafeAttribute, unsafePureAttribute, unsafeVolatileAttribute, unset')
+import Deku.DOM.Tags as Tags
 import FRP.Event (Event)
 
 data OnDragstart = OnDragstart
 
 instance Attr anything OnDragstart Cb where
-  attr OnDragstart value = unsafeAttribute
-    { key: "dragstart", value: cb' value }
+  pureAttr OnDragstart value = unsafeAttribute $ Right $ pure $
+    unsafeVolatileAttribute
+  mapAttr OnDragstart evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "dragstart", value: cb' value }
 
 instance Attr anything OnDragstart (Effect Unit) where
-  attr OnDragstart value = unsafeAttribute
-    { key: "dragstart", value: cb' (Cb (const (value $> true))) }
+  pureAttr OnDragstart value = unsafeAttribute $ Right $ pure $
+    unsafeVolatileAttribute
+  mapAttr OnDragstart evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "dragstart", value: cb' (Cb (const (value $> true))) }
 
 instance Attr anything OnDragstart (Effect Boolean) where
-  attr OnDragstart value = unsafeAttribute
-    { key: "dragstart", value: cb' (Cb (const value)) }
+  pureAttr OnDragstart value = unsafeAttribute $ Right $ pure $
+    unsafeVolatileAttribute
+  mapAttr OnDragstart evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "dragstart", value: cb' (Cb (const value)) }
 
 type OnDragstartEffect =
   forall element
@@ -25,5 +36,6 @@ type OnDragstartEffect =
   => Event (Attribute element)
 
 instance Attr everything OnDragstart Unit where
-  attr OnDragstart _ = unsafeAttribute
-    { key: "dragstart", value: unset' }
+  pureAttr OnDragstart _ = unsafeAttribute $ Right $ pure $
+    unsafeVolatileAttribute
+      { key: "dragstart", value: unset' }

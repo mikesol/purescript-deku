@@ -4,12 +4,11 @@ import Control.Plus (empty)
 import Deku.Attribute (Attribute)
 import Deku.Control as DC
 import Deku.Core (Nut)
-import FRP.Event (Event)
 
 import Deku.DOM.Tags as Tags
 
 svg
-  :: Array (Event (Attribute Tags.Svg_))
+  :: Array (Attribute Tags.Svg_)
   -> Array Nut
   -> Nut
 svg = DC.elementify3 "svg"

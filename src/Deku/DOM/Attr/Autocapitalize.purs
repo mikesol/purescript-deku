@@ -1,621 +1,871 @@
 module Deku.DOM.Attr.Autocapitalize where
 
 import Prelude
+import Data.Either (Either(..))
 
-import Deku.DOM.Elt.A (A_)
-import Deku.DOM.Elt.Abbr (Abbr_)
-import Deku.DOM.Elt.Acronym (Acronym_)
-import Deku.DOM.Elt.Address (Address_)
-import Deku.DOM.Elt.Applet (Applet_)
-import Deku.DOM.Elt.Area (Area_)
-import Deku.DOM.Elt.Article (Article_)
-import Deku.DOM.Elt.Aside (Aside_)
-import Deku.DOM.Elt.Audio (Audio_)
-import Deku.DOM.Elt.B (B_)
-import Deku.DOM.Elt.Base (Base_)
-import Deku.DOM.Elt.Basefont (Basefont_)
-import Deku.DOM.Elt.Bdi (Bdi_)
-import Deku.DOM.Elt.Bdo (Bdo_)
-import Deku.DOM.Elt.Big (Big_)
-import Deku.DOM.Elt.Blockquote (Blockquote_)
-import Deku.DOM.Elt.Body (Body_)
-import Deku.DOM.Elt.Br (Br_)
-import Deku.DOM.Elt.Button (Button_)
-import Deku.DOM.Elt.Canvas (Canvas_)
-import Deku.DOM.Elt.Caption (Caption_)
-import Deku.DOM.Elt.Center (Center_)
-import Deku.DOM.Elt.Cite (Cite_)
-import Deku.DOM.Elt.Code (Code_)
-import Deku.DOM.Elt.Col (Col_)
-import Deku.DOM.Elt.Colgroup (Colgroup_)
-import Deku.DOM.Elt.Xdata (Xdata_)
-import Deku.DOM.Elt.Datalist (Datalist_)
-import Deku.DOM.Elt.Dd (Dd_)
-import Deku.DOM.Elt.Del (Del_)
-import Deku.DOM.Elt.Details (Details_)
-import Deku.DOM.Elt.Dfn (Dfn_)
-import Deku.DOM.Elt.Dialog (Dialog_)
-import Deku.DOM.Elt.Dir (Dir_)
-import Deku.DOM.Elt.Div (Div_)
-import Deku.DOM.Elt.Dl (Dl_)
-import Deku.DOM.Elt.Dt (Dt_)
-import Deku.DOM.Elt.Em (Em_)
-import Deku.DOM.Elt.Embed (Embed_)
-import Deku.DOM.Elt.Fieldset (Fieldset_)
-import Deku.DOM.Elt.Figcaption (Figcaption_)
-import Deku.DOM.Elt.Figure (Figure_)
-import Deku.DOM.Elt.Font (Font_)
-import Deku.DOM.Elt.Footer (Footer_)
-import Deku.DOM.Elt.Form (Form_)
-import Deku.DOM.Elt.Frame (Frame_)
-import Deku.DOM.Elt.Frameset (Frameset_)
-import Deku.DOM.Elt.H1 (H1_)
-import Deku.DOM.Elt.H2 (H2_)
-import Deku.DOM.Elt.H3 (H3_)
-import Deku.DOM.Elt.H4 (H4_)
-import Deku.DOM.Elt.H5 (H5_)
-import Deku.DOM.Elt.H6 (H6_)
-import Deku.DOM.Elt.Head (Head_)
-import Deku.DOM.Elt.Header (Header_)
-import Deku.DOM.Elt.Hr (Hr_)
-import Deku.DOM.Elt.Html (Html_)
-import Deku.DOM.Elt.I (I_)
-import Deku.DOM.Elt.Iframe (Iframe_)
-import Deku.DOM.Elt.Img (Img_)
-import Deku.DOM.Elt.Input (Input_)
-import Deku.DOM.Elt.Ins (Ins_)
-import Deku.DOM.Elt.Kbd (Kbd_)
-import Deku.DOM.Elt.Label (Label_)
-import Deku.DOM.Elt.Legend (Legend_)
-import Deku.DOM.Elt.Li (Li_)
-import Deku.DOM.Elt.Link (Link_)
-import Deku.DOM.Elt.Main (Main_)
-import Deku.DOM.Elt.Map (Map_)
-import Deku.DOM.Elt.Mark (Mark_)
-import Deku.DOM.Elt.Meta (Meta_)
-import Deku.DOM.Elt.Meter (Meter_)
-import Deku.DOM.Elt.Nav (Nav_)
-import Deku.DOM.Elt.Noframes (Noframes_)
-import Deku.DOM.Elt.Noscript (Noscript_)
-import Deku.DOM.Elt.Object (Object_)
-import Deku.DOM.Elt.Ol (Ol_)
-import Deku.DOM.Elt.Optgroup (Optgroup_)
-import Deku.DOM.Elt.Option (Option_)
-import Deku.DOM.Elt.Output (Output_)
-import Deku.DOM.Elt.P (P_)
-import Deku.DOM.Elt.Param (Param_)
-import Deku.DOM.Elt.Picture (Picture_)
-import Deku.DOM.Elt.Pre (Pre_)
-import Deku.DOM.Elt.Progress (Progress_)
-import Deku.DOM.Elt.Q (Q_)
-import Deku.DOM.Elt.Rp (Rp_)
-import Deku.DOM.Elt.Rt (Rt_)
-import Deku.DOM.Elt.Ruby (Ruby_)
-import Deku.DOM.Elt.S (S_)
-import Deku.DOM.Elt.Samp (Samp_)
-import Deku.DOM.Elt.Script (Script_)
-import Deku.DOM.Elt.Section (Section_)
-import Deku.DOM.Elt.Select (Select_)
-import Deku.DOM.Elt.Small (Small_)
-import Deku.DOM.Elt.Source (Source_)
-import Deku.DOM.Elt.Span (Span_)
-import Deku.DOM.Elt.Strike (Strike_)
-import Deku.DOM.Elt.Strong (Strong_)
-import Deku.DOM.Elt.Style (Style_)
-import Deku.DOM.Elt.Sub (Sub_)
-import Deku.DOM.Elt.Summary (Summary_)
-import Deku.DOM.Elt.Sup (Sup_)
-import Deku.DOM.Elt.Svg (Svg_)
-import Deku.DOM.Elt.Table (Table_)
-import Deku.DOM.Elt.Tbody (Tbody_)
-import Deku.DOM.Elt.Td (Td_)
-import Deku.DOM.Elt.Template (Template_)
-import Deku.DOM.Elt.Textarea (Textarea_)
-import Deku.DOM.Elt.Tfoot (Tfoot_)
-import Deku.DOM.Elt.Th (Th_)
-import Deku.DOM.Elt.Thead (Thead_)
-import Deku.DOM.Elt.Time (Time_)
-import Deku.DOM.Elt.Title (Title_)
-import Deku.DOM.Elt.Tr (Tr_)
-import Deku.DOM.Elt.Track (Track_)
-import Deku.DOM.Elt.Tt (Tt_)
-import Deku.DOM.Elt.U (U_)
-import Deku.DOM.Elt.Ul (Ul_)
-import Deku.DOM.Elt.Var (Var_)
-import Deku.DOM.Elt.Video (Video_)
-import Deku.DOM.Elt.Wbr (Wbr_)
-import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
+import Deku.Attribute (class Attr, prop', unsafeAttribute, unsafePureAttribute, unsafeVolatileAttribute, unset')
+import Deku.DOM.Tags as Tags
 
 data Autocapitalize = Autocapitalize
 
-instance Attr A_ Autocapitalize String where
-  attr Autocapitalize value = unsafeAttribute
-    { key: "autocapitalize", value: prop' value }
-
-instance Attr Abbr_ Autocapitalize String where
-  attr Autocapitalize value = unsafeAttribute
-    { key: "autocapitalize", value: prop' value }
-
-instance Attr Acronym_ Autocapitalize String where
-  attr Autocapitalize value = unsafeAttribute
-    { key: "autocapitalize", value: prop' value }
-
-instance Attr Address_ Autocapitalize String where
-  attr Autocapitalize value = unsafeAttribute
-    { key: "autocapitalize", value: prop' value }
-
-instance Attr Applet_ Autocapitalize String where
-  attr Autocapitalize value = unsafeAttribute
-    { key: "autocapitalize", value: prop' value }
-
-instance Attr Area_ Autocapitalize String where
-  attr Autocapitalize value = unsafeAttribute
-    { key: "autocapitalize", value: prop' value }
-
-instance Attr Article_ Autocapitalize String where
-  attr Autocapitalize value = unsafeAttribute
-    { key: "autocapitalize", value: prop' value }
-
-instance Attr Aside_ Autocapitalize String where
-  attr Autocapitalize value = unsafeAttribute
-    { key: "autocapitalize", value: prop' value }
-
-instance Attr Audio_ Autocapitalize String where
-  attr Autocapitalize value = unsafeAttribute
-    { key: "autocapitalize", value: prop' value }
-
-instance Attr B_ Autocapitalize String where
-  attr Autocapitalize value = unsafeAttribute
-    { key: "autocapitalize", value: prop' value }
-
-instance Attr Base_ Autocapitalize String where
-  attr Autocapitalize value = unsafeAttribute
-    { key: "autocapitalize", value: prop' value }
-
-instance Attr Basefont_ Autocapitalize String where
-  attr Autocapitalize value = unsafeAttribute
-    { key: "autocapitalize", value: prop' value }
-
-instance Attr Bdi_ Autocapitalize String where
-  attr Autocapitalize value = unsafeAttribute
-    { key: "autocapitalize", value: prop' value }
-
-instance Attr Bdo_ Autocapitalize String where
-  attr Autocapitalize value = unsafeAttribute
-    { key: "autocapitalize", value: prop' value }
-
-instance Attr Big_ Autocapitalize String where
-  attr Autocapitalize value = unsafeAttribute
-    { key: "autocapitalize", value: prop' value }
-
-instance Attr Blockquote_ Autocapitalize String where
-  attr Autocapitalize value = unsafeAttribute
-    { key: "autocapitalize", value: prop' value }
-
-instance Attr Body_ Autocapitalize String where
-  attr Autocapitalize value = unsafeAttribute
-    { key: "autocapitalize", value: prop' value }
-
-instance Attr Br_ Autocapitalize String where
-  attr Autocapitalize value = unsafeAttribute
-    { key: "autocapitalize", value: prop' value }
-
-instance Attr Button_ Autocapitalize String where
-  attr Autocapitalize value = unsafeAttribute
-    { key: "autocapitalize", value: prop' value }
-
-instance Attr Canvas_ Autocapitalize String where
-  attr Autocapitalize value = unsafeAttribute
-    { key: "autocapitalize", value: prop' value }
-
-instance Attr Caption_ Autocapitalize String where
-  attr Autocapitalize value = unsafeAttribute
-    { key: "autocapitalize", value: prop' value }
-
-instance Attr Center_ Autocapitalize String where
-  attr Autocapitalize value = unsafeAttribute
-    { key: "autocapitalize", value: prop' value }
-
-instance Attr Cite_ Autocapitalize String where
-  attr Autocapitalize value = unsafeAttribute
-    { key: "autocapitalize", value: prop' value }
-
-instance Attr Code_ Autocapitalize String where
-  attr Autocapitalize value = unsafeAttribute
-    { key: "autocapitalize", value: prop' value }
-
-instance Attr Col_ Autocapitalize String where
-  attr Autocapitalize value = unsafeAttribute
-    { key: "autocapitalize", value: prop' value }
-
-instance Attr Colgroup_ Autocapitalize String where
-  attr Autocapitalize value = unsafeAttribute
-    { key: "autocapitalize", value: prop' value }
-
-instance Attr Xdata_ Autocapitalize String where
-  attr Autocapitalize value = unsafeAttribute
-    { key: "autocapitalize", value: prop' value }
-
-instance Attr Datalist_ Autocapitalize String where
-  attr Autocapitalize value = unsafeAttribute
-    { key: "autocapitalize", value: prop' value }
-
-instance Attr Dd_ Autocapitalize String where
-  attr Autocapitalize value = unsafeAttribute
-    { key: "autocapitalize", value: prop' value }
-
-instance Attr Del_ Autocapitalize String where
-  attr Autocapitalize value = unsafeAttribute
-    { key: "autocapitalize", value: prop' value }
-
-instance Attr Details_ Autocapitalize String where
-  attr Autocapitalize value = unsafeAttribute
-    { key: "autocapitalize", value: prop' value }
-
-instance Attr Dfn_ Autocapitalize String where
-  attr Autocapitalize value = unsafeAttribute
-    { key: "autocapitalize", value: prop' value }
-
-instance Attr Dialog_ Autocapitalize String where
-  attr Autocapitalize value = unsafeAttribute
-    { key: "autocapitalize", value: prop' value }
-
-instance Attr Dir_ Autocapitalize String where
-  attr Autocapitalize value = unsafeAttribute
-    { key: "autocapitalize", value: prop' value }
-
-instance Attr Div_ Autocapitalize String where
-  attr Autocapitalize value = unsafeAttribute
-    { key: "autocapitalize", value: prop' value }
-
-instance Attr Dl_ Autocapitalize String where
-  attr Autocapitalize value = unsafeAttribute
-    { key: "autocapitalize", value: prop' value }
-
-instance Attr Dt_ Autocapitalize String where
-  attr Autocapitalize value = unsafeAttribute
-    { key: "autocapitalize", value: prop' value }
-
-instance Attr Em_ Autocapitalize String where
-  attr Autocapitalize value = unsafeAttribute
-    { key: "autocapitalize", value: prop' value }
-
-instance Attr Embed_ Autocapitalize String where
-  attr Autocapitalize value = unsafeAttribute
-    { key: "autocapitalize", value: prop' value }
-
-instance Attr Fieldset_ Autocapitalize String where
-  attr Autocapitalize value = unsafeAttribute
-    { key: "autocapitalize", value: prop' value }
-
-instance Attr Figcaption_ Autocapitalize String where
-  attr Autocapitalize value = unsafeAttribute
-    { key: "autocapitalize", value: prop' value }
-
-instance Attr Figure_ Autocapitalize String where
-  attr Autocapitalize value = unsafeAttribute
-    { key: "autocapitalize", value: prop' value }
-
-instance Attr Font_ Autocapitalize String where
-  attr Autocapitalize value = unsafeAttribute
-    { key: "autocapitalize", value: prop' value }
-
-instance Attr Footer_ Autocapitalize String where
-  attr Autocapitalize value = unsafeAttribute
-    { key: "autocapitalize", value: prop' value }
-
-instance Attr Form_ Autocapitalize String where
-  attr Autocapitalize value = unsafeAttribute
-    { key: "autocapitalize", value: prop' value }
-
-instance Attr Frame_ Autocapitalize String where
-  attr Autocapitalize value = unsafeAttribute
-    { key: "autocapitalize", value: prop' value }
-
-instance Attr Frameset_ Autocapitalize String where
-  attr Autocapitalize value = unsafeAttribute
-    { key: "autocapitalize", value: prop' value }
-
-instance Attr H1_ Autocapitalize String where
-  attr Autocapitalize value = unsafeAttribute
-    { key: "autocapitalize", value: prop' value }
-
-instance Attr H2_ Autocapitalize String where
-  attr Autocapitalize value = unsafeAttribute
-    { key: "autocapitalize", value: prop' value }
-
-instance Attr H3_ Autocapitalize String where
-  attr Autocapitalize value = unsafeAttribute
-    { key: "autocapitalize", value: prop' value }
-
-instance Attr H4_ Autocapitalize String where
-  attr Autocapitalize value = unsafeAttribute
-    { key: "autocapitalize", value: prop' value }
-
-instance Attr H5_ Autocapitalize String where
-  attr Autocapitalize value = unsafeAttribute
-    { key: "autocapitalize", value: prop' value }
-
-instance Attr H6_ Autocapitalize String where
-  attr Autocapitalize value = unsafeAttribute
-    { key: "autocapitalize", value: prop' value }
-
-instance Attr Head_ Autocapitalize String where
-  attr Autocapitalize value = unsafeAttribute
-    { key: "autocapitalize", value: prop' value }
-
-instance Attr Header_ Autocapitalize String where
-  attr Autocapitalize value = unsafeAttribute
-    { key: "autocapitalize", value: prop' value }
-
-instance Attr Hr_ Autocapitalize String where
-  attr Autocapitalize value = unsafeAttribute
-    { key: "autocapitalize", value: prop' value }
-
-instance Attr Html_ Autocapitalize String where
-  attr Autocapitalize value = unsafeAttribute
-    { key: "autocapitalize", value: prop' value }
-
-instance Attr I_ Autocapitalize String where
-  attr Autocapitalize value = unsafeAttribute
-    { key: "autocapitalize", value: prop' value }
-
-instance Attr Iframe_ Autocapitalize String where
-  attr Autocapitalize value = unsafeAttribute
-    { key: "autocapitalize", value: prop' value }
-
-instance Attr Img_ Autocapitalize String where
-  attr Autocapitalize value = unsafeAttribute
-    { key: "autocapitalize", value: prop' value }
-
-instance Attr Input_ Autocapitalize String where
-  attr Autocapitalize value = unsafeAttribute
-    { key: "autocapitalize", value: prop' value }
-
-instance Attr Ins_ Autocapitalize String where
-  attr Autocapitalize value = unsafeAttribute
-    { key: "autocapitalize", value: prop' value }
-
-instance Attr Kbd_ Autocapitalize String where
-  attr Autocapitalize value = unsafeAttribute
-    { key: "autocapitalize", value: prop' value }
-
-instance Attr Label_ Autocapitalize String where
-  attr Autocapitalize value = unsafeAttribute
-    { key: "autocapitalize", value: prop' value }
-
-instance Attr Legend_ Autocapitalize String where
-  attr Autocapitalize value = unsafeAttribute
-    { key: "autocapitalize", value: prop' value }
-
-instance Attr Li_ Autocapitalize String where
-  attr Autocapitalize value = unsafeAttribute
-    { key: "autocapitalize", value: prop' value }
-
-instance Attr Link_ Autocapitalize String where
-  attr Autocapitalize value = unsafeAttribute
-    { key: "autocapitalize", value: prop' value }
-
-instance Attr Main_ Autocapitalize String where
-  attr Autocapitalize value = unsafeAttribute
-    { key: "autocapitalize", value: prop' value }
-
-instance Attr Map_ Autocapitalize String where
-  attr Autocapitalize value = unsafeAttribute
-    { key: "autocapitalize", value: prop' value }
-
-instance Attr Mark_ Autocapitalize String where
-  attr Autocapitalize value = unsafeAttribute
-    { key: "autocapitalize", value: prop' value }
-
-instance Attr Meta_ Autocapitalize String where
-  attr Autocapitalize value = unsafeAttribute
-    { key: "autocapitalize", value: prop' value }
-
-instance Attr Meter_ Autocapitalize String where
-  attr Autocapitalize value = unsafeAttribute
-    { key: "autocapitalize", value: prop' value }
-
-instance Attr Nav_ Autocapitalize String where
-  attr Autocapitalize value = unsafeAttribute
-    { key: "autocapitalize", value: prop' value }
-
-instance Attr Noframes_ Autocapitalize String where
-  attr Autocapitalize value = unsafeAttribute
-    { key: "autocapitalize", value: prop' value }
-
-instance Attr Noscript_ Autocapitalize String where
-  attr Autocapitalize value = unsafeAttribute
-    { key: "autocapitalize", value: prop' value }
-
-instance Attr Object_ Autocapitalize String where
-  attr Autocapitalize value = unsafeAttribute
-    { key: "autocapitalize", value: prop' value }
-
-instance Attr Ol_ Autocapitalize String where
-  attr Autocapitalize value = unsafeAttribute
-    { key: "autocapitalize", value: prop' value }
-
-instance Attr Optgroup_ Autocapitalize String where
-  attr Autocapitalize value = unsafeAttribute
-    { key: "autocapitalize", value: prop' value }
-
-instance Attr Option_ Autocapitalize String where
-  attr Autocapitalize value = unsafeAttribute
-    { key: "autocapitalize", value: prop' value }
-
-instance Attr Output_ Autocapitalize String where
-  attr Autocapitalize value = unsafeAttribute
-    { key: "autocapitalize", value: prop' value }
-
-instance Attr P_ Autocapitalize String where
-  attr Autocapitalize value = unsafeAttribute
-    { key: "autocapitalize", value: prop' value }
-
-instance Attr Param_ Autocapitalize String where
-  attr Autocapitalize value = unsafeAttribute
-    { key: "autocapitalize", value: prop' value }
-
-instance Attr Picture_ Autocapitalize String where
-  attr Autocapitalize value = unsafeAttribute
-    { key: "autocapitalize", value: prop' value }
-
-instance Attr Pre_ Autocapitalize String where
-  attr Autocapitalize value = unsafeAttribute
-    { key: "autocapitalize", value: prop' value }
-
-instance Attr Progress_ Autocapitalize String where
-  attr Autocapitalize value = unsafeAttribute
-    { key: "autocapitalize", value: prop' value }
-
-instance Attr Q_ Autocapitalize String where
-  attr Autocapitalize value = unsafeAttribute
-    { key: "autocapitalize", value: prop' value }
-
-instance Attr Rp_ Autocapitalize String where
-  attr Autocapitalize value = unsafeAttribute
-    { key: "autocapitalize", value: prop' value }
-
-instance Attr Rt_ Autocapitalize String where
-  attr Autocapitalize value = unsafeAttribute
-    { key: "autocapitalize", value: prop' value }
-
-instance Attr Ruby_ Autocapitalize String where
-  attr Autocapitalize value = unsafeAttribute
-    { key: "autocapitalize", value: prop' value }
-
-instance Attr S_ Autocapitalize String where
-  attr Autocapitalize value = unsafeAttribute
-    { key: "autocapitalize", value: prop' value }
-
-instance Attr Samp_ Autocapitalize String where
-  attr Autocapitalize value = unsafeAttribute
-    { key: "autocapitalize", value: prop' value }
-
-instance Attr Script_ Autocapitalize String where
-  attr Autocapitalize value = unsafeAttribute
-    { key: "autocapitalize", value: prop' value }
-
-instance Attr Section_ Autocapitalize String where
-  attr Autocapitalize value = unsafeAttribute
-    { key: "autocapitalize", value: prop' value }
-
-instance Attr Select_ Autocapitalize String where
-  attr Autocapitalize value = unsafeAttribute
-    { key: "autocapitalize", value: prop' value }
-
-instance Attr Small_ Autocapitalize String where
-  attr Autocapitalize value = unsafeAttribute
-    { key: "autocapitalize", value: prop' value }
-
-instance Attr Source_ Autocapitalize String where
-  attr Autocapitalize value = unsafeAttribute
-    { key: "autocapitalize", value: prop' value }
-
-instance Attr Span_ Autocapitalize String where
-  attr Autocapitalize value = unsafeAttribute
-    { key: "autocapitalize", value: prop' value }
-
-instance Attr Strike_ Autocapitalize String where
-  attr Autocapitalize value = unsafeAttribute
-    { key: "autocapitalize", value: prop' value }
-
-instance Attr Strong_ Autocapitalize String where
-  attr Autocapitalize value = unsafeAttribute
-    { key: "autocapitalize", value: prop' value }
-
-instance Attr Style_ Autocapitalize String where
-  attr Autocapitalize value = unsafeAttribute
-    { key: "autocapitalize", value: prop' value }
-
-instance Attr Sub_ Autocapitalize String where
-  attr Autocapitalize value = unsafeAttribute
-    { key: "autocapitalize", value: prop' value }
-
-instance Attr Summary_ Autocapitalize String where
-  attr Autocapitalize value = unsafeAttribute
-    { key: "autocapitalize", value: prop' value }
-
-instance Attr Sup_ Autocapitalize String where
-  attr Autocapitalize value = unsafeAttribute
-    { key: "autocapitalize", value: prop' value }
-
-instance Attr Svg_ Autocapitalize String where
-  attr Autocapitalize value = unsafeAttribute
-    { key: "autocapitalize", value: prop' value }
-
-instance Attr Table_ Autocapitalize String where
-  attr Autocapitalize value = unsafeAttribute
-    { key: "autocapitalize", value: prop' value }
-
-instance Attr Tbody_ Autocapitalize String where
-  attr Autocapitalize value = unsafeAttribute
-    { key: "autocapitalize", value: prop' value }
-
-instance Attr Td_ Autocapitalize String where
-  attr Autocapitalize value = unsafeAttribute
-    { key: "autocapitalize", value: prop' value }
-
-instance Attr Template_ Autocapitalize String where
-  attr Autocapitalize value = unsafeAttribute
-    { key: "autocapitalize", value: prop' value }
-
-instance Attr Textarea_ Autocapitalize String where
-  attr Autocapitalize value = unsafeAttribute
-    { key: "autocapitalize", value: prop' value }
-
-instance Attr Tfoot_ Autocapitalize String where
-  attr Autocapitalize value = unsafeAttribute
-    { key: "autocapitalize", value: prop' value }
-
-instance Attr Th_ Autocapitalize String where
-  attr Autocapitalize value = unsafeAttribute
-    { key: "autocapitalize", value: prop' value }
-
-instance Attr Thead_ Autocapitalize String where
-  attr Autocapitalize value = unsafeAttribute
-    { key: "autocapitalize", value: prop' value }
-
-instance Attr Time_ Autocapitalize String where
-  attr Autocapitalize value = unsafeAttribute
-    { key: "autocapitalize", value: prop' value }
-
-instance Attr Title_ Autocapitalize String where
-  attr Autocapitalize value = unsafeAttribute
-    { key: "autocapitalize", value: prop' value }
-
-instance Attr Tr_ Autocapitalize String where
-  attr Autocapitalize value = unsafeAttribute
-    { key: "autocapitalize", value: prop' value }
-
-instance Attr Track_ Autocapitalize String where
-  attr Autocapitalize value = unsafeAttribute
-    { key: "autocapitalize", value: prop' value }
-
-instance Attr Tt_ Autocapitalize String where
-  attr Autocapitalize value = unsafeAttribute
-    { key: "autocapitalize", value: prop' value }
-
-instance Attr U_ Autocapitalize String where
-  attr Autocapitalize value = unsafeAttribute
-    { key: "autocapitalize", value: prop' value }
-
-instance Attr Ul_ Autocapitalize String where
-  attr Autocapitalize value = unsafeAttribute
-    { key: "autocapitalize", value: prop' value }
-
-instance Attr Var_ Autocapitalize String where
-  attr Autocapitalize value = unsafeAttribute
-    { key: "autocapitalize", value: prop' value }
-
-instance Attr Video_ Autocapitalize String where
-  attr Autocapitalize value = unsafeAttribute
-    { key: "autocapitalize", value: prop' value }
-
-instance Attr Wbr_ Autocapitalize String where
-  attr Autocapitalize value = unsafeAttribute
-    { key: "autocapitalize", value: prop' value }
+instance Attr Tags.A_ Autocapitalize String where
+  pureAttr Autocapitalize value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "autocapitalize", value }
+  mapAttr Autocapitalize evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "autocapitalize", value: prop' value }
+
+instance Attr Tags.Abbr_ Autocapitalize String where
+  pureAttr Autocapitalize value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "autocapitalize", value }
+  mapAttr Autocapitalize evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "autocapitalize", value: prop' value }
+
+instance Attr Tags.Acronym_ Autocapitalize String where
+  pureAttr Autocapitalize value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "autocapitalize", value }
+  mapAttr Autocapitalize evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "autocapitalize", value: prop' value }
+
+instance Attr Tags.Address_ Autocapitalize String where
+  pureAttr Autocapitalize value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "autocapitalize", value }
+  mapAttr Autocapitalize evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "autocapitalize", value: prop' value }
+
+instance Attr Tags.Applet_ Autocapitalize String where
+  pureAttr Autocapitalize value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "autocapitalize", value }
+  mapAttr Autocapitalize evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "autocapitalize", value: prop' value }
+
+instance Attr Tags.Area_ Autocapitalize String where
+  pureAttr Autocapitalize value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "autocapitalize", value }
+  mapAttr Autocapitalize evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "autocapitalize", value: prop' value }
+
+instance Attr Tags.Article_ Autocapitalize String where
+  pureAttr Autocapitalize value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "autocapitalize", value }
+  mapAttr Autocapitalize evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "autocapitalize", value: prop' value }
+
+instance Attr Tags.Aside_ Autocapitalize String where
+  pureAttr Autocapitalize value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "autocapitalize", value }
+  mapAttr Autocapitalize evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "autocapitalize", value: prop' value }
+
+instance Attr Tags.Audio_ Autocapitalize String where
+  pureAttr Autocapitalize value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "autocapitalize", value }
+  mapAttr Autocapitalize evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "autocapitalize", value: prop' value }
+
+instance Attr Tags.B_ Autocapitalize String where
+  pureAttr Autocapitalize value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "autocapitalize", value }
+  mapAttr Autocapitalize evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "autocapitalize", value: prop' value }
+
+instance Attr Tags.Base_ Autocapitalize String where
+  pureAttr Autocapitalize value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "autocapitalize", value }
+  mapAttr Autocapitalize evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "autocapitalize", value: prop' value }
+
+instance Attr Tags.Basefont_ Autocapitalize String where
+  pureAttr Autocapitalize value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "autocapitalize", value }
+  mapAttr Autocapitalize evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "autocapitalize", value: prop' value }
+
+instance Attr Tags.Bdi_ Autocapitalize String where
+  pureAttr Autocapitalize value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "autocapitalize", value }
+  mapAttr Autocapitalize evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "autocapitalize", value: prop' value }
+
+instance Attr Tags.Bdo_ Autocapitalize String where
+  pureAttr Autocapitalize value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "autocapitalize", value }
+  mapAttr Autocapitalize evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "autocapitalize", value: prop' value }
+
+instance Attr Tags.Big_ Autocapitalize String where
+  pureAttr Autocapitalize value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "autocapitalize", value }
+  mapAttr Autocapitalize evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "autocapitalize", value: prop' value }
+
+instance Attr Tags.Blockquote_ Autocapitalize String where
+  pureAttr Autocapitalize value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "autocapitalize", value }
+  mapAttr Autocapitalize evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "autocapitalize", value: prop' value }
+
+instance Attr Tags.Body_ Autocapitalize String where
+  pureAttr Autocapitalize value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "autocapitalize", value }
+  mapAttr Autocapitalize evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "autocapitalize", value: prop' value }
+
+instance Attr Tags.Br_ Autocapitalize String where
+  pureAttr Autocapitalize value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "autocapitalize", value }
+  mapAttr Autocapitalize evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "autocapitalize", value: prop' value }
+
+instance Attr Tags.Button_ Autocapitalize String where
+  pureAttr Autocapitalize value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "autocapitalize", value }
+  mapAttr Autocapitalize evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "autocapitalize", value: prop' value }
+
+instance Attr Tags.Canvas_ Autocapitalize String where
+  pureAttr Autocapitalize value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "autocapitalize", value }
+  mapAttr Autocapitalize evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "autocapitalize", value: prop' value }
+
+instance Attr Tags.Caption_ Autocapitalize String where
+  pureAttr Autocapitalize value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "autocapitalize", value }
+  mapAttr Autocapitalize evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "autocapitalize", value: prop' value }
+
+instance Attr Tags.Center_ Autocapitalize String where
+  pureAttr Autocapitalize value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "autocapitalize", value }
+  mapAttr Autocapitalize evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "autocapitalize", value: prop' value }
+
+instance Attr Tags.Cite_ Autocapitalize String where
+  pureAttr Autocapitalize value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "autocapitalize", value }
+  mapAttr Autocapitalize evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "autocapitalize", value: prop' value }
+
+instance Attr Tags.Code_ Autocapitalize String where
+  pureAttr Autocapitalize value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "autocapitalize", value }
+  mapAttr Autocapitalize evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "autocapitalize", value: prop' value }
+
+instance Attr Tags.Col_ Autocapitalize String where
+  pureAttr Autocapitalize value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "autocapitalize", value }
+  mapAttr Autocapitalize evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "autocapitalize", value: prop' value }
+
+instance Attr Tags.Colgroup_ Autocapitalize String where
+  pureAttr Autocapitalize value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "autocapitalize", value }
+  mapAttr Autocapitalize evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "autocapitalize", value: prop' value }
+
+instance Attr Tags.Xdata_ Autocapitalize String where
+  pureAttr Autocapitalize value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "autocapitalize", value }
+  mapAttr Autocapitalize evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "autocapitalize", value: prop' value }
+
+instance Attr Tags.Datalist_ Autocapitalize String where
+  pureAttr Autocapitalize value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "autocapitalize", value }
+  mapAttr Autocapitalize evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "autocapitalize", value: prop' value }
+
+instance Attr Tags.Dd_ Autocapitalize String where
+  pureAttr Autocapitalize value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "autocapitalize", value }
+  mapAttr Autocapitalize evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "autocapitalize", value: prop' value }
+
+instance Attr Tags.Del_ Autocapitalize String where
+  pureAttr Autocapitalize value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "autocapitalize", value }
+  mapAttr Autocapitalize evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "autocapitalize", value: prop' value }
+
+instance Attr Tags.Details_ Autocapitalize String where
+  pureAttr Autocapitalize value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "autocapitalize", value }
+  mapAttr Autocapitalize evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "autocapitalize", value: prop' value }
+
+instance Attr Tags.Dfn_ Autocapitalize String where
+  pureAttr Autocapitalize value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "autocapitalize", value }
+  mapAttr Autocapitalize evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "autocapitalize", value: prop' value }
+
+instance Attr Tags.Dialog_ Autocapitalize String where
+  pureAttr Autocapitalize value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "autocapitalize", value }
+  mapAttr Autocapitalize evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "autocapitalize", value: prop' value }
+
+instance Attr Tags.Dir_ Autocapitalize String where
+  pureAttr Autocapitalize value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "autocapitalize", value }
+  mapAttr Autocapitalize evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "autocapitalize", value: prop' value }
+
+instance Attr Tags.Div_ Autocapitalize String where
+  pureAttr Autocapitalize value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "autocapitalize", value }
+  mapAttr Autocapitalize evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "autocapitalize", value: prop' value }
+
+instance Attr Tags.Dl_ Autocapitalize String where
+  pureAttr Autocapitalize value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "autocapitalize", value }
+  mapAttr Autocapitalize evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "autocapitalize", value: prop' value }
+
+instance Attr Tags.Dt_ Autocapitalize String where
+  pureAttr Autocapitalize value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "autocapitalize", value }
+  mapAttr Autocapitalize evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "autocapitalize", value: prop' value }
+
+instance Attr Tags.Em_ Autocapitalize String where
+  pureAttr Autocapitalize value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "autocapitalize", value }
+  mapAttr Autocapitalize evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "autocapitalize", value: prop' value }
+
+instance Attr Tags.Embed_ Autocapitalize String where
+  pureAttr Autocapitalize value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "autocapitalize", value }
+  mapAttr Autocapitalize evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "autocapitalize", value: prop' value }
+
+instance Attr Tags.Fieldset_ Autocapitalize String where
+  pureAttr Autocapitalize value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "autocapitalize", value }
+  mapAttr Autocapitalize evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "autocapitalize", value: prop' value }
+
+instance Attr Tags.Figcaption_ Autocapitalize String where
+  pureAttr Autocapitalize value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "autocapitalize", value }
+  mapAttr Autocapitalize evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "autocapitalize", value: prop' value }
+
+instance Attr Tags.Figure_ Autocapitalize String where
+  pureAttr Autocapitalize value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "autocapitalize", value }
+  mapAttr Autocapitalize evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "autocapitalize", value: prop' value }
+
+instance Attr Tags.Font_ Autocapitalize String where
+  pureAttr Autocapitalize value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "autocapitalize", value }
+  mapAttr Autocapitalize evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "autocapitalize", value: prop' value }
+
+instance Attr Tags.Footer_ Autocapitalize String where
+  pureAttr Autocapitalize value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "autocapitalize", value }
+  mapAttr Autocapitalize evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "autocapitalize", value: prop' value }
+
+instance Attr Tags.Form_ Autocapitalize String where
+  pureAttr Autocapitalize value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "autocapitalize", value }
+  mapAttr Autocapitalize evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "autocapitalize", value: prop' value }
+
+instance Attr Tags.Frame_ Autocapitalize String where
+  pureAttr Autocapitalize value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "autocapitalize", value }
+  mapAttr Autocapitalize evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "autocapitalize", value: prop' value }
+
+instance Attr Tags.Frameset_ Autocapitalize String where
+  pureAttr Autocapitalize value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "autocapitalize", value }
+  mapAttr Autocapitalize evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "autocapitalize", value: prop' value }
+
+instance Attr Tags.H1_ Autocapitalize String where
+  pureAttr Autocapitalize value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "autocapitalize", value }
+  mapAttr Autocapitalize evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "autocapitalize", value: prop' value }
+
+instance Attr Tags.H2_ Autocapitalize String where
+  pureAttr Autocapitalize value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "autocapitalize", value }
+  mapAttr Autocapitalize evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "autocapitalize", value: prop' value }
+
+instance Attr Tags.H3_ Autocapitalize String where
+  pureAttr Autocapitalize value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "autocapitalize", value }
+  mapAttr Autocapitalize evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "autocapitalize", value: prop' value }
+
+instance Attr Tags.H4_ Autocapitalize String where
+  pureAttr Autocapitalize value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "autocapitalize", value }
+  mapAttr Autocapitalize evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "autocapitalize", value: prop' value }
+
+instance Attr Tags.H5_ Autocapitalize String where
+  pureAttr Autocapitalize value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "autocapitalize", value }
+  mapAttr Autocapitalize evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "autocapitalize", value: prop' value }
+
+instance Attr Tags.H6_ Autocapitalize String where
+  pureAttr Autocapitalize value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "autocapitalize", value }
+  mapAttr Autocapitalize evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "autocapitalize", value: prop' value }
+
+instance Attr Tags.Head_ Autocapitalize String where
+  pureAttr Autocapitalize value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "autocapitalize", value }
+  mapAttr Autocapitalize evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "autocapitalize", value: prop' value }
+
+instance Attr Tags.Header_ Autocapitalize String where
+  pureAttr Autocapitalize value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "autocapitalize", value }
+  mapAttr Autocapitalize evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "autocapitalize", value: prop' value }
+
+instance Attr Tags.Hr_ Autocapitalize String where
+  pureAttr Autocapitalize value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "autocapitalize", value }
+  mapAttr Autocapitalize evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "autocapitalize", value: prop' value }
+
+instance Attr Tags.Html_ Autocapitalize String where
+  pureAttr Autocapitalize value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "autocapitalize", value }
+  mapAttr Autocapitalize evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "autocapitalize", value: prop' value }
+
+instance Attr Tags.I_ Autocapitalize String where
+  pureAttr Autocapitalize value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "autocapitalize", value }
+  mapAttr Autocapitalize evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "autocapitalize", value: prop' value }
+
+instance Attr Tags.Iframe_ Autocapitalize String where
+  pureAttr Autocapitalize value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "autocapitalize", value }
+  mapAttr Autocapitalize evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "autocapitalize", value: prop' value }
+
+instance Attr Tags.Img_ Autocapitalize String where
+  pureAttr Autocapitalize value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "autocapitalize", value }
+  mapAttr Autocapitalize evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "autocapitalize", value: prop' value }
+
+instance Attr Tags.Input_ Autocapitalize String where
+  pureAttr Autocapitalize value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "autocapitalize", value }
+  mapAttr Autocapitalize evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "autocapitalize", value: prop' value }
+
+instance Attr Tags.Ins_ Autocapitalize String where
+  pureAttr Autocapitalize value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "autocapitalize", value }
+  mapAttr Autocapitalize evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "autocapitalize", value: prop' value }
+
+instance Attr Tags.Kbd_ Autocapitalize String where
+  pureAttr Autocapitalize value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "autocapitalize", value }
+  mapAttr Autocapitalize evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "autocapitalize", value: prop' value }
+
+instance Attr Tags.Label_ Autocapitalize String where
+  pureAttr Autocapitalize value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "autocapitalize", value }
+  mapAttr Autocapitalize evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "autocapitalize", value: prop' value }
+
+instance Attr Tags.Legend_ Autocapitalize String where
+  pureAttr Autocapitalize value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "autocapitalize", value }
+  mapAttr Autocapitalize evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "autocapitalize", value: prop' value }
+
+instance Attr Tags.Li_ Autocapitalize String where
+  pureAttr Autocapitalize value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "autocapitalize", value }
+  mapAttr Autocapitalize evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "autocapitalize", value: prop' value }
+
+instance Attr Tags.Link_ Autocapitalize String where
+  pureAttr Autocapitalize value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "autocapitalize", value }
+  mapAttr Autocapitalize evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "autocapitalize", value: prop' value }
+
+instance Attr Tags.Main_ Autocapitalize String where
+  pureAttr Autocapitalize value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "autocapitalize", value }
+  mapAttr Autocapitalize evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "autocapitalize", value: prop' value }
+
+instance Attr Tags.Map_ Autocapitalize String where
+  pureAttr Autocapitalize value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "autocapitalize", value }
+  mapAttr Autocapitalize evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "autocapitalize", value: prop' value }
+
+instance Attr Tags.Mark_ Autocapitalize String where
+  pureAttr Autocapitalize value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "autocapitalize", value }
+  mapAttr Autocapitalize evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "autocapitalize", value: prop' value }
+
+instance Attr Tags.Meta_ Autocapitalize String where
+  pureAttr Autocapitalize value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "autocapitalize", value }
+  mapAttr Autocapitalize evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "autocapitalize", value: prop' value }
+
+instance Attr Tags.Meter_ Autocapitalize String where
+  pureAttr Autocapitalize value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "autocapitalize", value }
+  mapAttr Autocapitalize evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "autocapitalize", value: prop' value }
+
+instance Attr Tags.Nav_ Autocapitalize String where
+  pureAttr Autocapitalize value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "autocapitalize", value }
+  mapAttr Autocapitalize evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "autocapitalize", value: prop' value }
+
+instance Attr Tags.Noframes_ Autocapitalize String where
+  pureAttr Autocapitalize value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "autocapitalize", value }
+  mapAttr Autocapitalize evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "autocapitalize", value: prop' value }
+
+instance Attr Tags.Noscript_ Autocapitalize String where
+  pureAttr Autocapitalize value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "autocapitalize", value }
+  mapAttr Autocapitalize evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "autocapitalize", value: prop' value }
+
+instance Attr Tags.Object_ Autocapitalize String where
+  pureAttr Autocapitalize value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "autocapitalize", value }
+  mapAttr Autocapitalize evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "autocapitalize", value: prop' value }
+
+instance Attr Tags.Ol_ Autocapitalize String where
+  pureAttr Autocapitalize value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "autocapitalize", value }
+  mapAttr Autocapitalize evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "autocapitalize", value: prop' value }
+
+instance Attr Tags.Optgroup_ Autocapitalize String where
+  pureAttr Autocapitalize value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "autocapitalize", value }
+  mapAttr Autocapitalize evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "autocapitalize", value: prop' value }
+
+instance Attr Tags.Option_ Autocapitalize String where
+  pureAttr Autocapitalize value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "autocapitalize", value }
+  mapAttr Autocapitalize evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "autocapitalize", value: prop' value }
+
+instance Attr Tags.Output_ Autocapitalize String where
+  pureAttr Autocapitalize value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "autocapitalize", value }
+  mapAttr Autocapitalize evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "autocapitalize", value: prop' value }
+
+instance Attr Tags.P_ Autocapitalize String where
+  pureAttr Autocapitalize value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "autocapitalize", value }
+  mapAttr Autocapitalize evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "autocapitalize", value: prop' value }
+
+instance Attr Tags.Param_ Autocapitalize String where
+  pureAttr Autocapitalize value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "autocapitalize", value }
+  mapAttr Autocapitalize evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "autocapitalize", value: prop' value }
+
+instance Attr Tags.Picture_ Autocapitalize String where
+  pureAttr Autocapitalize value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "autocapitalize", value }
+  mapAttr Autocapitalize evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "autocapitalize", value: prop' value }
+
+instance Attr Tags.Pre_ Autocapitalize String where
+  pureAttr Autocapitalize value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "autocapitalize", value }
+  mapAttr Autocapitalize evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "autocapitalize", value: prop' value }
+
+instance Attr Tags.Progress_ Autocapitalize String where
+  pureAttr Autocapitalize value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "autocapitalize", value }
+  mapAttr Autocapitalize evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "autocapitalize", value: prop' value }
+
+instance Attr Tags.Q_ Autocapitalize String where
+  pureAttr Autocapitalize value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "autocapitalize", value }
+  mapAttr Autocapitalize evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "autocapitalize", value: prop' value }
+
+instance Attr Tags.Rp_ Autocapitalize String where
+  pureAttr Autocapitalize value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "autocapitalize", value }
+  mapAttr Autocapitalize evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "autocapitalize", value: prop' value }
+
+instance Attr Tags.Rt_ Autocapitalize String where
+  pureAttr Autocapitalize value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "autocapitalize", value }
+  mapAttr Autocapitalize evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "autocapitalize", value: prop' value }
+
+instance Attr Tags.Ruby_ Autocapitalize String where
+  pureAttr Autocapitalize value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "autocapitalize", value }
+  mapAttr Autocapitalize evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "autocapitalize", value: prop' value }
+
+instance Attr Tags.S_ Autocapitalize String where
+  pureAttr Autocapitalize value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "autocapitalize", value }
+  mapAttr Autocapitalize evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "autocapitalize", value: prop' value }
+
+instance Attr Tags.Samp_ Autocapitalize String where
+  pureAttr Autocapitalize value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "autocapitalize", value }
+  mapAttr Autocapitalize evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "autocapitalize", value: prop' value }
+
+instance Attr Tags.Script_ Autocapitalize String where
+  pureAttr Autocapitalize value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "autocapitalize", value }
+  mapAttr Autocapitalize evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "autocapitalize", value: prop' value }
+
+instance Attr Tags.Section_ Autocapitalize String where
+  pureAttr Autocapitalize value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "autocapitalize", value }
+  mapAttr Autocapitalize evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "autocapitalize", value: prop' value }
+
+instance Attr Tags.Select_ Autocapitalize String where
+  pureAttr Autocapitalize value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "autocapitalize", value }
+  mapAttr Autocapitalize evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "autocapitalize", value: prop' value }
+
+instance Attr Tags.Small_ Autocapitalize String where
+  pureAttr Autocapitalize value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "autocapitalize", value }
+  mapAttr Autocapitalize evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "autocapitalize", value: prop' value }
+
+instance Attr Tags.Source_ Autocapitalize String where
+  pureAttr Autocapitalize value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "autocapitalize", value }
+  mapAttr Autocapitalize evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "autocapitalize", value: prop' value }
+
+instance Attr Tags.Span_ Autocapitalize String where
+  pureAttr Autocapitalize value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "autocapitalize", value }
+  mapAttr Autocapitalize evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "autocapitalize", value: prop' value }
+
+instance Attr Tags.Strike_ Autocapitalize String where
+  pureAttr Autocapitalize value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "autocapitalize", value }
+  mapAttr Autocapitalize evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "autocapitalize", value: prop' value }
+
+instance Attr Tags.Strong_ Autocapitalize String where
+  pureAttr Autocapitalize value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "autocapitalize", value }
+  mapAttr Autocapitalize evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "autocapitalize", value: prop' value }
+
+instance Attr Tags.Style_ Autocapitalize String where
+  pureAttr Autocapitalize value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "autocapitalize", value }
+  mapAttr Autocapitalize evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "autocapitalize", value: prop' value }
+
+instance Attr Tags.Sub_ Autocapitalize String where
+  pureAttr Autocapitalize value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "autocapitalize", value }
+  mapAttr Autocapitalize evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "autocapitalize", value: prop' value }
+
+instance Attr Tags.Summary_ Autocapitalize String where
+  pureAttr Autocapitalize value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "autocapitalize", value }
+  mapAttr Autocapitalize evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "autocapitalize", value: prop' value }
+
+instance Attr Tags.Sup_ Autocapitalize String where
+  pureAttr Autocapitalize value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "autocapitalize", value }
+  mapAttr Autocapitalize evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "autocapitalize", value: prop' value }
+
+instance Attr Tags.Svg_ Autocapitalize String where
+  pureAttr Autocapitalize value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "autocapitalize", value }
+  mapAttr Autocapitalize evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "autocapitalize", value: prop' value }
+
+instance Attr Tags.Table_ Autocapitalize String where
+  pureAttr Autocapitalize value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "autocapitalize", value }
+  mapAttr Autocapitalize evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "autocapitalize", value: prop' value }
+
+instance Attr Tags.Tbody_ Autocapitalize String where
+  pureAttr Autocapitalize value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "autocapitalize", value }
+  mapAttr Autocapitalize evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "autocapitalize", value: prop' value }
+
+instance Attr Tags.Td_ Autocapitalize String where
+  pureAttr Autocapitalize value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "autocapitalize", value }
+  mapAttr Autocapitalize evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "autocapitalize", value: prop' value }
+
+instance Attr Tags.Template_ Autocapitalize String where
+  pureAttr Autocapitalize value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "autocapitalize", value }
+  mapAttr Autocapitalize evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "autocapitalize", value: prop' value }
+
+instance Attr Tags.Textarea_ Autocapitalize String where
+  pureAttr Autocapitalize value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "autocapitalize", value }
+  mapAttr Autocapitalize evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "autocapitalize", value: prop' value }
+
+instance Attr Tags.Tfoot_ Autocapitalize String where
+  pureAttr Autocapitalize value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "autocapitalize", value }
+  mapAttr Autocapitalize evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "autocapitalize", value: prop' value }
+
+instance Attr Tags.Th_ Autocapitalize String where
+  pureAttr Autocapitalize value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "autocapitalize", value }
+  mapAttr Autocapitalize evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "autocapitalize", value: prop' value }
+
+instance Attr Tags.Thead_ Autocapitalize String where
+  pureAttr Autocapitalize value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "autocapitalize", value }
+  mapAttr Autocapitalize evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "autocapitalize", value: prop' value }
+
+instance Attr Tags.Time_ Autocapitalize String where
+  pureAttr Autocapitalize value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "autocapitalize", value }
+  mapAttr Autocapitalize evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "autocapitalize", value: prop' value }
+
+instance Attr Tags.Title_ Autocapitalize String where
+  pureAttr Autocapitalize value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "autocapitalize", value }
+  mapAttr Autocapitalize evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "autocapitalize", value: prop' value }
+
+instance Attr Tags.Tr_ Autocapitalize String where
+  pureAttr Autocapitalize value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "autocapitalize", value }
+  mapAttr Autocapitalize evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "autocapitalize", value: prop' value }
+
+instance Attr Tags.Track_ Autocapitalize String where
+  pureAttr Autocapitalize value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "autocapitalize", value }
+  mapAttr Autocapitalize evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "autocapitalize", value: prop' value }
+
+instance Attr Tags.Tt_ Autocapitalize String where
+  pureAttr Autocapitalize value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "autocapitalize", value }
+  mapAttr Autocapitalize evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "autocapitalize", value: prop' value }
+
+instance Attr Tags.U_ Autocapitalize String where
+  pureAttr Autocapitalize value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "autocapitalize", value }
+  mapAttr Autocapitalize evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "autocapitalize", value: prop' value }
+
+instance Attr Tags.Ul_ Autocapitalize String where
+  pureAttr Autocapitalize value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "autocapitalize", value }
+  mapAttr Autocapitalize evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "autocapitalize", value: prop' value }
+
+instance Attr Tags.Var_ Autocapitalize String where
+  pureAttr Autocapitalize value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "autocapitalize", value }
+  mapAttr Autocapitalize evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "autocapitalize", value: prop' value }
+
+instance Attr Tags.Video_ Autocapitalize String where
+  pureAttr Autocapitalize value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "autocapitalize", value }
+  mapAttr Autocapitalize evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "autocapitalize", value: prop' value }
+
+instance Attr Tags.Wbr_ Autocapitalize String where
+  pureAttr Autocapitalize value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "autocapitalize", value }
+  mapAttr Autocapitalize evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "autocapitalize", value: prop' value }
 
 instance Attr everything Autocapitalize Unit where
-  attr Autocapitalize _ = unsafeAttribute
-    { key: "autocapitalize", value: unset' }
+  pureAttr Autocapitalize _ = unsafeAttribute $ Right $ pure $
+    unsafeVolatileAttribute
+      { key: "autocapitalize", value: unset' }
+  mapAttr Autocapitalize evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "autocapitalize", value: unset' }

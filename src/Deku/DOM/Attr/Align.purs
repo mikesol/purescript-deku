@@ -1,67 +1,114 @@
 module Deku.DOM.Attr.Align where
 
 import Prelude
+import Data.Either (Either(..))
 
-import Deku.DOM.Elt.Applet (Applet_)
-import Deku.DOM.Elt.Caption (Caption_)
-import Deku.DOM.Elt.Col (Col_)
-import Deku.DOM.Elt.Colgroup (Colgroup_)
-import Deku.DOM.Elt.Hr (Hr_)
-import Deku.DOM.Elt.Iframe (Iframe_)
-import Deku.DOM.Elt.Img (Img_)
-import Deku.DOM.Elt.Table (Table_)
-import Deku.DOM.Elt.Tbody (Tbody_)
-import Deku.DOM.Elt.Td (Td_)
-import Deku.DOM.Elt.Tfoot (Tfoot_)
-import Deku.DOM.Elt.Th (Th_)
-import Deku.DOM.Elt.Thead (Thead_)
-import Deku.DOM.Elt.Tr (Tr_)
-import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
+import Deku.Attribute (class Attr, prop', unsafeAttribute, unsafePureAttribute, unsafeVolatileAttribute, unset')
+import Deku.DOM.Tags as Tags
 
 data Align = Align
 
-instance Attr Applet_ Align String where
-  attr Align value = unsafeAttribute { key: "align", value: prop' value }
+instance Attr Tags.Applet_ Align String where
+  pureAttr Align value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "align", value }
 
-instance Attr Caption_ Align String where
-  attr Align value = unsafeAttribute { key: "align", value: prop' value }
+  mapAttr Align evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "align", value: prop' value }
 
-instance Attr Col_ Align String where
-  attr Align value = unsafeAttribute { key: "align", value: prop' value }
+instance Attr Tags.Caption_ Align String where
+  pureAttr Align value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "align", value }
 
-instance Attr Colgroup_ Align String where
-  attr Align value = unsafeAttribute { key: "align", value: prop' value }
+  mapAttr Align evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "align", value: prop' value }
 
-instance Attr Hr_ Align String where
-  attr Align value = unsafeAttribute { key: "align", value: prop' value }
+instance Attr Tags.Col_ Align String where
+  pureAttr Align value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "align", value }
 
-instance Attr Iframe_ Align String where
-  attr Align value = unsafeAttribute { key: "align", value: prop' value }
+  mapAttr Align evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "align", value: prop' value }
 
-instance Attr Img_ Align String where
-  attr Align value = unsafeAttribute { key: "align", value: prop' value }
+instance Attr Tags.Colgroup_ Align String where
+  pureAttr Align value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "align", value }
 
-instance Attr Table_ Align String where
-  attr Align value = unsafeAttribute { key: "align", value: prop' value }
+  mapAttr Align evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "align", value: prop' value }
 
-instance Attr Tbody_ Align String where
-  attr Align value = unsafeAttribute { key: "align", value: prop' value }
+instance Attr Tags.Hr_ Align String where
+  pureAttr Align value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "align", value }
 
-instance Attr Td_ Align String where
-  attr Align value = unsafeAttribute { key: "align", value: prop' value }
+  mapAttr Align evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "align", value: prop' value }
 
-instance Attr Tfoot_ Align String where
-  attr Align value = unsafeAttribute { key: "align", value: prop' value }
+instance Attr Tags.Iframe_ Align String where
+  pureAttr Align value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "align", value }
 
-instance Attr Th_ Align String where
-  attr Align value = unsafeAttribute { key: "align", value: prop' value }
+  mapAttr Align evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "align", value: prop' value }
 
-instance Attr Thead_ Align String where
-  attr Align value = unsafeAttribute { key: "align", value: prop' value }
+instance Attr Tags.Img_ Align String where
+  pureAttr Align value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "align", value }
 
-instance Attr Tr_ Align String where
-  attr Align value = unsafeAttribute { key: "align", value: prop' value }
+  mapAttr Align evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "align", value: prop' value }
+
+instance Attr Tags.Table_ Align String where
+  pureAttr Align value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "align", value }
+
+  mapAttr Align evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "align", value: prop' value }
+
+instance Attr Tags.Tbody_ Align String where
+  pureAttr Align value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "align", value }
+
+  mapAttr Align evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "align", value: prop' value }
+
+instance Attr Tags.Td_ Align String where
+  pureAttr Align value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "align", value }
+
+  mapAttr Align evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "align", value: prop' value }
+
+instance Attr Tags.Tfoot_ Align String where
+  pureAttr Align value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "align", value }
+
+  mapAttr Align evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "align", value: prop' value }
+
+instance Attr Tags.Th_ Align String where
+  pureAttr Align value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "align", value }
+
+  mapAttr Align evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "align", value: prop' value }
+
+instance Attr Tags.Thead_ Align String where
+  pureAttr Align value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "align", value }
+
+  mapAttr Align evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "align", value: prop' value }
+
+instance Attr Tags.Tr_ Align String where
+  pureAttr Align value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "align", value }
+
+  mapAttr Align evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "align", value: prop' value }
 
 instance Attr everything Align Unit where
-  attr Align _ = unsafeAttribute
+  pureAttr Align _ = unsafeAttribute $ Right $ pure $ unsafeVolatileAttribute
     { key: "align", value: unset' }
+  mapAttr Align evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "align", value: unset' }

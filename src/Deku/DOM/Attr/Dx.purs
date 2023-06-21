@@ -1,27 +1,44 @@
 module Deku.DOM.Attr.Dx where
 
 import Prelude
+import Data.Either (Either(..))
 
-import Deku.DOM.Elt.Tspan (Tspan_)
-import Deku.DOM.Elt.Text (Text_)
-import Deku.DOM.Elt.FeOffset (FeOffset_)
-import Deku.DOM.Elt.FeDropShadow (FeDropShadow_)
-import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
+import Deku.Attribute (class Attr, prop', unsafeAttribute, unsafePureAttribute, unsafeVolatileAttribute, unset')
+import Deku.DOM.Tags as Tags
 
 data Dx = Dx
 
-instance Attr FeDropShadow_ Dx String where
-  attr Dx value = unsafeAttribute { key: "dx", value: prop' value }
+instance Attr Tags.FeDropShadow_ Dx String where
+  pureAttr Dx value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "dx", value }
 
-instance Attr FeOffset_ Dx String where
-  attr Dx value = unsafeAttribute { key: "dx", value: prop' value }
+  mapAttr Dx evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "dx", value: prop' value }
 
-instance Attr Text_ Dx String where
-  attr Dx value = unsafeAttribute { key: "dx", value: prop' value }
+instance Attr Tags.FeOffset_ Dx String where
+  pureAttr Dx value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "dx", value }
 
-instance Attr Tspan_ Dx String where
-  attr Dx value = unsafeAttribute { key: "dx", value: prop' value }
+  mapAttr Dx evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "dx", value: prop' value }
+
+instance Attr Tags.Text_ Dx String where
+  pureAttr Dx value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "dx", value }
+
+  mapAttr Dx evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "dx", value: prop' value }
+
+instance Attr Tags.Tspan_ Dx String where
+  pureAttr Dx value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "dx", value }
+
+  mapAttr Dx evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "dx", value: prop' value }
 
 instance Attr everything Dx Unit where
-  attr Dx _ = unsafeAttribute
+  pureAttr Dx _ = unsafeAttribute $ Right $ pure $ unsafeVolatileAttribute
     { key: "dx", value: unset' }
+  mapAttr Dx evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "dx", value: unset' }

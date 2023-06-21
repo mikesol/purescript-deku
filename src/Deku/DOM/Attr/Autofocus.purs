@@ -1,31 +1,45 @@
 module Deku.DOM.Attr.Autofocus where
 
 import Prelude
+import Data.Either (Either(..))
 
-import Deku.DOM.Elt.Button (Button_)
-import Deku.DOM.Elt.Input (Input_)
-import Deku.DOM.Elt.Select (Select_)
-import Deku.DOM.Elt.Textarea (Textarea_)
-import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
+import Deku.Attribute (class Attr, prop', unsafeAttribute, unsafePureAttribute, unsafeVolatileAttribute, unset')
+import Deku.DOM.Tags as Tags
 
 data Autofocus = Autofocus
 
-instance Attr Button_ Autofocus String where
-  attr Autofocus value = unsafeAttribute
-    { key: "autofocus", value: prop' value }
+instance Attr Tags.Button_ Autofocus String where
+  pureAttr Autofocus value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "autofocus", value }
+  mapAttr Autofocus evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "autofocus", value: prop' value }
 
-instance Attr Input_ Autofocus String where
-  attr Autofocus value = unsafeAttribute
-    { key: "autofocus", value: prop' value }
+instance Attr Tags.Input_ Autofocus String where
+  pureAttr Autofocus value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "autofocus", value }
+  mapAttr Autofocus evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "autofocus", value: prop' value }
 
-instance Attr Select_ Autofocus String where
-  attr Autofocus value = unsafeAttribute
-    { key: "autofocus", value: prop' value }
+instance Attr Tags.Select_ Autofocus String where
+  pureAttr Autofocus value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "autofocus", value }
+  mapAttr Autofocus evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "autofocus", value: prop' value }
 
-instance Attr Textarea_ Autofocus String where
-  attr Autofocus value = unsafeAttribute
-    { key: "autofocus", value: prop' value }
+instance Attr Tags.Textarea_ Autofocus String where
+  pureAttr Autofocus value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "autofocus", value }
+  mapAttr Autofocus evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "autofocus", value: prop' value }
 
 instance Attr everything Autofocus Unit where
-  attr Autofocus _ = unsafeAttribute
-    { key: "autofocus", value: unset' }
+  pureAttr Autofocus _ = unsafeAttribute $ Right $ pure $
+    unsafeVolatileAttribute
+      { key: "autofocus", value: unset' }
+  mapAttr Autofocus evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "autofocus", value: unset' }

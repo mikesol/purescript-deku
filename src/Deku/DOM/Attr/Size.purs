@@ -1,19 +1,30 @@
 module Deku.DOM.Attr.Size where
 
 import Prelude
+import Data.Either (Either(..))
 
-import Deku.DOM.Elt.Input (Input_)
-import Deku.DOM.Elt.Select (Select_)
-import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
+import Deku.Attribute (class Attr, prop', unsafeAttribute, unsafePureAttribute, unsafeVolatileAttribute, unset')
+import Deku.DOM.Tags as Tags
 
 data Size = Size
 
-instance Attr Input_ Size String where
-  attr Size value = unsafeAttribute { key: "size", value: prop' value }
+instance Attr Tags.Input_ Size String where
+  pureAttr Size value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "size", value }
 
-instance Attr Select_ Size String where
-  attr Size value = unsafeAttribute { key: "size", value: prop' value }
+  mapAttr Size evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "size", value: prop' value }
+
+instance Attr Tags.Select_ Size String where
+  pureAttr Size value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "size", value }
+
+  mapAttr Size evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "size", value: prop' value }
 
 instance Attr everything Size Unit where
-  attr Size _ = unsafeAttribute
+  pureAttr Size _ = unsafeAttribute $ Right $ pure $ unsafeVolatileAttribute
     { key: "size", value: unset' }
+  mapAttr Size evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "size", value: unset' }

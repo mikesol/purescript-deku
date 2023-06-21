@@ -1,31 +1,51 @@
 module Deku.DOM.Attr.Media where
 
 import Prelude
+import Data.Either (Either(..))
 
-import Deku.DOM.Elt.A (A_)
-import Deku.DOM.Elt.Area (Area_)
-import Deku.DOM.Elt.Link (Link_)
-import Deku.DOM.Elt.Source (Source_)
-import Deku.DOM.Elt.Style (Style_)
-import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
+import Deku.Attribute (class Attr, prop', unsafeAttribute, unsafePureAttribute, unsafeVolatileAttribute, unset')
+import Deku.DOM.Tags as Tags
 
 data Media = Media
 
-instance Attr A_ Media String where
-  attr Media value = unsafeAttribute { key: "media", value: prop' value }
+instance Attr Tags.A_ Media String where
+  pureAttr Media value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "media", value }
 
-instance Attr Area_ Media String where
-  attr Media value = unsafeAttribute { key: "media", value: prop' value }
+  mapAttr Media evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "media", value: prop' value }
 
-instance Attr Link_ Media String where
-  attr Media value = unsafeAttribute { key: "media", value: prop' value }
+instance Attr Tags.Area_ Media String where
+  pureAttr Media value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "media", value }
 
-instance Attr Source_ Media String where
-  attr Media value = unsafeAttribute { key: "media", value: prop' value }
+  mapAttr Media evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "media", value: prop' value }
 
-instance Attr Style_ Media String where
-  attr Media value = unsafeAttribute { key: "media", value: prop' value }
+instance Attr Tags.Link_ Media String where
+  pureAttr Media value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "media", value }
+
+  mapAttr Media evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "media", value: prop' value }
+
+instance Attr Tags.Source_ Media String where
+  pureAttr Media value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "media", value }
+
+  mapAttr Media evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "media", value: prop' value }
+
+instance Attr Tags.Style_ Media String where
+  pureAttr Media value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "media", value }
+
+  mapAttr Media evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "media", value: prop' value }
 
 instance Attr everything Media Unit where
-  attr Media _ = unsafeAttribute
+  pureAttr Media _ = unsafeAttribute $ Right $ pure $ unsafeVolatileAttribute
     { key: "media", value: unset' }
+  mapAttr Media evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "media", value: unset' }

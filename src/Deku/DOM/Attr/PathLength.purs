@@ -1,46 +1,66 @@
 module Deku.DOM.Attr.PathLength where
 
 import Prelude
+import Data.Either (Either(..))
 
-import Deku.DOM.Elt.Rect (Rect_)
-import Deku.DOM.Elt.Polyline (Polyline_)
-import Deku.DOM.Elt.Polygon (Polygon_)
-import Deku.DOM.Elt.Path (Path_)
-import Deku.DOM.Elt.Line (Line_)
-import Deku.DOM.Elt.Ellipse (Ellipse_)
-import Deku.DOM.Elt.Circle (Circle_)
-import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
+import Deku.Attribute (class Attr, prop', unsafeAttribute, unsafePureAttribute, unsafeVolatileAttribute, unset')
+import Deku.DOM.Tags as Tags
 
 data PathLength = PathLength
 
-instance Attr Circle_ PathLength String where
-  attr PathLength value = unsafeAttribute
-    { key: "pathLength", value: prop' value }
+instance Attr Tags.Circle_ PathLength String where
+  pureAttr PathLength value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "pathLength", value }
+  mapAttr PathLength evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "pathLength", value: prop' value }
 
-instance Attr Ellipse_ PathLength String where
-  attr PathLength value = unsafeAttribute
-    { key: "pathLength", value: prop' value }
+instance Attr Tags.Ellipse_ PathLength String where
+  pureAttr PathLength value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "pathLength", value }
+  mapAttr PathLength evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "pathLength", value: prop' value }
 
-instance Attr Line_ PathLength String where
-  attr PathLength value = unsafeAttribute
-    { key: "pathLength", value: prop' value }
+instance Attr Tags.Line_ PathLength String where
+  pureAttr PathLength value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "pathLength", value }
+  mapAttr PathLength evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "pathLength", value: prop' value }
 
-instance Attr Path_ PathLength String where
-  attr PathLength value = unsafeAttribute
-    { key: "pathLength", value: prop' value }
+instance Attr Tags.Path_ PathLength String where
+  pureAttr PathLength value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "pathLength", value }
+  mapAttr PathLength evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "pathLength", value: prop' value }
 
-instance Attr Polygon_ PathLength String where
-  attr PathLength value = unsafeAttribute
-    { key: "pathLength", value: prop' value }
+instance Attr Tags.Polygon_ PathLength String where
+  pureAttr PathLength value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "pathLength", value }
+  mapAttr PathLength evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "pathLength", value: prop' value }
 
-instance Attr Polyline_ PathLength String where
-  attr PathLength value = unsafeAttribute
-    { key: "pathLength", value: prop' value }
+instance Attr Tags.Polyline_ PathLength String where
+  pureAttr PathLength value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "pathLength", value }
+  mapAttr PathLength evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "pathLength", value: prop' value }
 
-instance Attr Rect_ PathLength String where
-  attr PathLength value = unsafeAttribute
-    { key: "pathLength", value: prop' value }
+instance Attr Tags.Rect_ PathLength String where
+  pureAttr PathLength value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "pathLength", value }
+  mapAttr PathLength evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "pathLength", value: prop' value }
 
 instance Attr everything PathLength Unit where
-  attr PathLength _ = unsafeAttribute
-    { key: "pathLength", value: unset' }
+  pureAttr PathLength _ = unsafeAttribute $ Right $ pure $
+    unsafeVolatileAttribute
+      { key: "pathLength", value: unset' }
+  mapAttr PathLength evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "pathLength", value: unset' }

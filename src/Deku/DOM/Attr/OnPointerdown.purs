@@ -1,23 +1,34 @@
 module Deku.DOM.Attr.OnPointerdown where
 
 import Prelude
+import Data.Either (Either(..))
 import Effect (Effect)
-import Deku.Attribute (class Attr, Attribute, Cb(..), cb', unsafeAttribute, unset')
+import Deku.Attribute (class Attr, Attribute, Cb(..), cb', unsafeAttribute, unsafePureAttribute, unsafeVolatileAttribute, unset')
+import Deku.DOM.Tags as Tags
 import FRP.Event (Event)
 
 data OnPointerdown = OnPointerdown
 
 instance Attr anything OnPointerdown Cb where
-  attr OnPointerdown value = unsafeAttribute
-    { key: "pointerdown", value: cb' value }
+  pureAttr OnPointerdown value = unsafeAttribute $ Right $ pure $
+    unsafeVolatileAttribute
+  mapAttr OnPointerdown evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "pointerdown", value: cb' value }
 
 instance Attr anything OnPointerdown (Effect Unit) where
-  attr OnPointerdown value = unsafeAttribute
-    { key: "pointerdown", value: cb' (Cb (const (value $> true))) }
+  pureAttr OnPointerdown value = unsafeAttribute $ Right $ pure $
+    unsafeVolatileAttribute
+  mapAttr OnPointerdown evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "pointerdown", value: cb' (Cb (const (value $> true))) }
 
 instance Attr anything OnPointerdown (Effect Boolean) where
-  attr OnPointerdown value = unsafeAttribute
-    { key: "pointerdown", value: cb' (Cb (const value)) }
+  pureAttr OnPointerdown value = unsafeAttribute $ Right $ pure $
+    unsafeVolatileAttribute
+  mapAttr OnPointerdown evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "pointerdown", value: cb' (Cb (const value)) }
 
 type OnPointerdownEffect =
   forall element
@@ -25,5 +36,6 @@ type OnPointerdownEffect =
   => Event (Attribute element)
 
 instance Attr everything OnPointerdown Unit where
-  attr OnPointerdown _ = unsafeAttribute
-    { key: "pointerdown", value: unset' }
+  pureAttr OnPointerdown _ = unsafeAttribute $ Right $ pure $
+    unsafeVolatileAttribute
+      { key: "pointerdown", value: unset' }

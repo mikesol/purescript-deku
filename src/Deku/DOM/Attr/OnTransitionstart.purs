@@ -1,23 +1,34 @@
 module Deku.DOM.Attr.OnTransitionstart where
 
 import Prelude
+import Data.Either (Either(..))
 import Effect (Effect)
-import Deku.Attribute (class Attr, Attribute, Cb(..), cb', unsafeAttribute, unset')
+import Deku.Attribute (class Attr, Attribute, Cb(..), cb', unsafeAttribute, unsafePureAttribute, unsafeVolatileAttribute, unset')
+import Deku.DOM.Tags as Tags
 import FRP.Event (Event)
 
 data OnTransitionstart = OnTransitionstart
 
 instance Attr anything OnTransitionstart Cb where
-  attr OnTransitionstart value = unsafeAttribute
-    { key: "transitionstart", value: cb' value }
+  pureAttr OnTransitionstart value = unsafeAttribute $ Right $ pure $
+    unsafeVolatileAttribute
+  mapAttr OnTransitionstart evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "transitionstart", value: cb' value }
 
 instance Attr anything OnTransitionstart (Effect Unit) where
-  attr OnTransitionstart value = unsafeAttribute
-    { key: "transitionstart", value: cb' (Cb (const (value $> true))) }
+  pureAttr OnTransitionstart value = unsafeAttribute $ Right $ pure $
+    unsafeVolatileAttribute
+  mapAttr OnTransitionstart evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "transitionstart", value: cb' (Cb (const (value $> true))) }
 
 instance Attr anything OnTransitionstart (Effect Boolean) where
-  attr OnTransitionstart value = unsafeAttribute
-    { key: "transitionstart", value: cb' (Cb (const value)) }
+  pureAttr OnTransitionstart value = unsafeAttribute $ Right $ pure $
+    unsafeVolatileAttribute
+  mapAttr OnTransitionstart evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "transitionstart", value: cb' (Cb (const value)) }
 
 type OnTransitionstartEffect =
   forall element
@@ -25,5 +36,6 @@ type OnTransitionstartEffect =
   => Event (Attribute element)
 
 instance Attr everything OnTransitionstart Unit where
-  attr OnTransitionstart _ = unsafeAttribute
-    { key: "transitionstart", value: unset' }
+  pureAttr OnTransitionstart _ = unsafeAttribute $ Right $ pure $
+    unsafeVolatileAttribute
+      { key: "transitionstart", value: unset' }

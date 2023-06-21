@@ -1,15 +1,23 @@
 module Deku.DOM.Attr.Data where
 
 import Prelude
+import Data.Either (Either(..))
 
-import Deku.DOM.Elt.Object (Object_)
-import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
+import Deku.Attribute (class Attr, prop', unsafeAttribute, unsafePureAttribute, unsafeVolatileAttribute, unset')
+import Deku.DOM.Tags as Tags
 
 data Data = Data
 
-instance Attr Object_ Data String where
-  attr Data value = unsafeAttribute { key: "data", value: prop' value }
+instance Attr Tags.Object_ Data String where
+  pureAttr Data value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "data", value }
+
+  mapAttr Data evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "data", value: prop' value }
 
 instance Attr everything Data Unit where
-  attr Data _ = unsafeAttribute
+  pureAttr Data _ = unsafeAttribute $ Right $ pure $ unsafeVolatileAttribute
     { key: "data", value: unset' }
+  mapAttr Data evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "data", value: unset' }

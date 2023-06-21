@@ -1,22 +1,33 @@
 module Deku.DOM.Attr.OnPause where
 
 import Prelude
+import Data.Either (Either(..))
 import Effect (Effect)
-import Deku.Attribute (class Attr, Attribute, Cb(..), cb', unsafeAttribute, unset')
+import Deku.Attribute (class Attr, Attribute, Cb(..), cb', unsafeAttribute, unsafePureAttribute, unsafeVolatileAttribute, unset')
+import Deku.DOM.Tags as Tags
 import FRP.Event (Event)
 
 data OnPause = OnPause
 
 instance Attr anything OnPause Cb where
-  attr OnPause value = unsafeAttribute { key: "pause", value: cb' value }
+  pureAttr OnPause value = unsafeAttribute $ Right $ pure $
+    unsafeVolatileAttribute { key: "pause", value: cb' value }
+  mapAttr OnPause evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "pause", value: cb' value }
 
 instance Attr anything OnPause (Effect Unit) where
-  attr OnPause value = unsafeAttribute
-    { key: "pause", value: cb' (Cb (const (value $> true))) }
+  pureAttr OnPause value = unsafeAttribute $ Right $ pure $
+    unsafeVolatileAttribute
+  mapAttr OnPause evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "pause", value: cb' (Cb (const (value $> true))) }
 
 instance Attr anything OnPause (Effect Boolean) where
-  attr OnPause value = unsafeAttribute
-    { key: "pause", value: cb' (Cb (const value)) }
+  pureAttr OnPause value = unsafeAttribute $ Right $ pure $
+    unsafeVolatileAttribute
+  mapAttr OnPause evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "pause", value: cb' (Cb (const value)) }
 
 type OnPauseEffect =
   forall element
@@ -24,5 +35,7 @@ type OnPauseEffect =
   => Event (Attribute element)
 
 instance Attr everything OnPause Unit where
-  attr OnPause _ = unsafeAttribute
+  pureAttr OnPause _ = unsafeAttribute $ Right $ pure $ unsafeVolatileAttribute
+    { key: "pause", value: unset' }
+  mapAttr OnPause evalue = unsafeAttribute $ Right $ evalue <#> \value -> unsafeVolatileAttribute
     { key: "pause", value: unset' }

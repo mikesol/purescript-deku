@@ -1,15 +1,23 @@
 module Deku.DOM.Attr.Reversed where
 
 import Prelude
+import Data.Either (Either(..))
 
-import Deku.DOM.Elt.Ol (Ol_)
-import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
+import Deku.Attribute (class Attr, prop', unsafeAttribute, unsafePureAttribute, unsafeVolatileAttribute, unset')
+import Deku.DOM.Tags as Tags
 
 data Reversed = Reversed
 
-instance Attr Ol_ Reversed String where
-  attr Reversed value = unsafeAttribute { key: "reversed", value: prop' value }
+instance Attr Tags.Ol_ Reversed String where
+  pureAttr Reversed value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "reversed", value }
+
+  mapAttr Reversed evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "reversed", value: prop' value }
 
 instance Attr everything Reversed Unit where
-  attr Reversed _ = unsafeAttribute
+  pureAttr Reversed _ = unsafeAttribute $ Right $ pure $ unsafeVolatileAttribute
     { key: "reversed", value: unset' }
+  mapAttr Reversed evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "reversed", value: unset' }

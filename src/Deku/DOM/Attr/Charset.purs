@@ -1,19 +1,30 @@
 module Deku.DOM.Attr.Charset where
 
 import Prelude
+import Data.Either (Either(..))
 
-import Deku.DOM.Elt.Meta (Meta_)
-import Deku.DOM.Elt.Script (Script_)
-import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
+import Deku.Attribute (class Attr, prop', unsafeAttribute, unsafePureAttribute, unsafeVolatileAttribute, unset')
+import Deku.DOM.Tags as Tags
 
 data Charset = Charset
 
-instance Attr Meta_ Charset String where
-  attr Charset value = unsafeAttribute { key: "charset", value: prop' value }
+instance Attr Tags.Meta_ Charset String where
+  pureAttr Charset value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "charset", value }
 
-instance Attr Script_ Charset String where
-  attr Charset value = unsafeAttribute { key: "charset", value: prop' value }
+  mapAttr Charset evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "charset", value: prop' value }
+
+instance Attr Tags.Script_ Charset String where
+  pureAttr Charset value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "charset", value }
+
+  mapAttr Charset evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "charset", value: prop' value }
 
 instance Attr everything Charset Unit where
-  attr Charset _ = unsafeAttribute
+  pureAttr Charset _ = unsafeAttribute $ Right $ pure $ unsafeVolatileAttribute
     { key: "charset", value: unset' }
+  mapAttr Charset evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "charset", value: unset' }

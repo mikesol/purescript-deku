@@ -1,19 +1,30 @@
 module Deku.DOM.Attr.Points where
 
 import Prelude
+import Data.Either (Either(..))
 
-import Deku.DOM.Elt.Polyline (Polyline_)
-import Deku.DOM.Elt.Polygon (Polygon_)
-import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
+import Deku.Attribute (class Attr, prop', unsafeAttribute, unsafePureAttribute, unsafeVolatileAttribute, unset')
+import Deku.DOM.Tags as Tags
 
 data Points = Points
 
-instance Attr Polygon_ Points String where
-  attr Points value = unsafeAttribute { key: "points", value: prop' value }
+instance Attr Tags.Polygon_ Points String where
+  pureAttr Points value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "points", value }
 
-instance Attr Polyline_ Points String where
-  attr Points value = unsafeAttribute { key: "points", value: prop' value }
+  mapAttr Points evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "points", value: prop' value }
+
+instance Attr Tags.Polyline_ Points String where
+  pureAttr Points value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "points", value }
+
+  mapAttr Points evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "points", value: prop' value }
 
 instance Attr everything Points Unit where
-  attr Points _ = unsafeAttribute
+  pureAttr Points _ = unsafeAttribute $ Right $ pure $ unsafeVolatileAttribute
     { key: "points", value: unset' }
+  mapAttr Points evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "points", value: unset' }

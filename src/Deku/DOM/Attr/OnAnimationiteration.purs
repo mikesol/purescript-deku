@@ -1,23 +1,34 @@
 module Deku.DOM.Attr.OnAnimationiteration where
 
 import Prelude
+import Data.Either (Either(..))
 import Effect (Effect)
-import Deku.Attribute (class Attr, Attribute, Cb(..), cb', unsafeAttribute, unset')
+import Deku.Attribute (class Attr, Attribute, Cb(..), cb', unsafeAttribute, unsafePureAttribute, unsafeVolatileAttribute, unset')
+import Deku.DOM.Tags as Tags
 import FRP.Event (Event)
 
 data OnAnimationiteration = OnAnimationiteration
 
 instance Attr anything OnAnimationiteration Cb where
-  attr OnAnimationiteration value = unsafeAttribute
-    { key: "animationiteration ", value: cb' value }
+  pureAttr OnAnimationiteration value = unsafeAttribute $ Right $ pure $
+    unsafeVolatileAttribute
+  mapAttr OnAnimationiteration evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "animationiteration ", value: cb' value }
 
 instance Attr anything OnAnimationiteration (Effect Unit) where
-  attr OnAnimationiteration value = unsafeAttribute
-    { key: "animationiteration ", value: cb' (Cb (const (value $> true))) }
+  pureAttr OnAnimationiteration value = unsafeAttribute $ Right $ pure $
+    unsafeVolatileAttribute
+  mapAttr OnAnimationiteration evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "animationiteration ", value: cb' (Cb (const (value $> true))) }
 
 instance Attr anything OnAnimationiteration (Effect Boolean) where
-  attr OnAnimationiteration value = unsafeAttribute
-    { key: "animationiteration ", value: cb' (Cb (const value)) }
+  pureAttr OnAnimationiteration value = unsafeAttribute $ Right $ pure $
+    unsafeVolatileAttribute
+  mapAttr OnAnimationiteration evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "animationiteration ", value: cb' (Cb (const value)) }
 
 type OnAnimationiterationEffect =
   forall element
@@ -25,5 +36,6 @@ type OnAnimationiterationEffect =
   => Event (Attribute element)
 
 instance Attr everything OnAnimationiteration Unit where
-  attr OnAnimationiteration _ = unsafeAttribute
-    { key: "animationiteration ", value: unset' }
+  pureAttr OnAnimationiteration _ = unsafeAttribute $ Right $ pure $
+    unsafeVolatileAttribute
+      { key: "animationiteration ", value: unset' }

@@ -1,22 +1,33 @@
 module Deku.DOM.Attr.OnSubmit where
 
 import Prelude
+import Data.Either (Either(..))
 import Effect (Effect)
-import Deku.Attribute (class Attr, Attribute, Cb(..), cb', unsafeAttribute, unset')
+import Deku.Attribute (class Attr, Attribute, Cb(..), cb', unsafeAttribute, unsafePureAttribute, unsafeVolatileAttribute, unset')
+import Deku.DOM.Tags as Tags
 import FRP.Event (Event)
 
 data OnSubmit = OnSubmit
 
 instance Attr anything OnSubmit Cb where
-  attr OnSubmit value = unsafeAttribute { key: "submit", value: cb' value }
+  pureAttr OnSubmit value = unsafeAttribute $ Right $ pure $
+    unsafeVolatileAttribute { key: "submit", value: cb' value }
+  mapAttr OnSubmit evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "submit", value: cb' value }
 
 instance Attr anything OnSubmit (Effect Unit) where
-  attr OnSubmit value = unsafeAttribute
-    { key: "submit", value: cb' (Cb (const (value $> true))) }
+  pureAttr OnSubmit value = unsafeAttribute $ Right $ pure $
+    unsafeVolatileAttribute
+  mapAttr OnSubmit evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "submit", value: cb' (Cb (const (value $> true))) }
 
 instance Attr anything OnSubmit (Effect Boolean) where
-  attr OnSubmit value = unsafeAttribute
-    { key: "submit", value: cb' (Cb (const value)) }
+  pureAttr OnSubmit value = unsafeAttribute $ Right $ pure $
+    unsafeVolatileAttribute
+  mapAttr OnSubmit evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "submit", value: cb' (Cb (const value)) }
 
 type OnSubmitEffect =
   forall element
@@ -24,5 +35,7 @@ type OnSubmitEffect =
   => Event (Attribute element)
 
 instance Attr everything OnSubmit Unit where
-  attr OnSubmit _ = unsafeAttribute
+  pureAttr OnSubmit _ = unsafeAttribute $ Right $ pure $ unsafeVolatileAttribute
+    { key: "submit", value: unset' }
+  mapAttr OnSubmit evalue = unsafeAttribute $ Right $ evalue <#> \value -> unsafeVolatileAttribute
     { key: "submit", value: unset' }

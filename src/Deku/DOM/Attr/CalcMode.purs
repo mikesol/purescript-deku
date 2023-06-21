@@ -1,23 +1,37 @@
 module Deku.DOM.Attr.CalcMode where
 
 import Prelude
+import Data.Either (Either(..))
 
-import Deku.DOM.Elt.AnimateTransform (AnimateTransform_)
-import Deku.DOM.Elt.AnimateMotion (AnimateMotion_)
-import Deku.DOM.Elt.Animate (Animate_)
-import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
+import Deku.Attribute (class Attr, prop', unsafeAttribute, unsafePureAttribute, unsafeVolatileAttribute, unset')
+import Deku.DOM.Tags as Tags
 
 data CalcMode = CalcMode
 
-instance Attr Animate_ CalcMode String where
-  attr CalcMode value = unsafeAttribute { key: "calcMode", value: prop' value }
+instance Attr Tags.Animate_ CalcMode String where
+  pureAttr CalcMode value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "calcMode", value }
 
-instance Attr AnimateMotion_ CalcMode String where
-  attr CalcMode value = unsafeAttribute { key: "calcMode", value: prop' value }
+  mapAttr CalcMode evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "calcMode", value: prop' value }
 
-instance Attr AnimateTransform_ CalcMode String where
-  attr CalcMode value = unsafeAttribute { key: "calcMode", value: prop' value }
+instance Attr Tags.AnimateMotion_ CalcMode String where
+  pureAttr CalcMode value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "calcMode", value }
+
+  mapAttr CalcMode evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "calcMode", value: prop' value }
+
+instance Attr Tags.AnimateTransform_ CalcMode String where
+  pureAttr CalcMode value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "calcMode", value }
+
+  mapAttr CalcMode evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "calcMode", value: prop' value }
 
 instance Attr everything CalcMode Unit where
-  attr CalcMode _ = unsafeAttribute
+  pureAttr CalcMode _ = unsafeAttribute $ Right $ pure $ unsafeVolatileAttribute
     { key: "calcMode", value: unset' }
+  mapAttr CalcMode evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "calcMode", value: unset' }

@@ -1,15 +1,23 @@
 module Deku.DOM.Attr.Radius where
 
 import Prelude
+import Data.Either (Either(..))
 
-import Deku.DOM.Elt.FeMorphology (FeMorphology_)
-import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
+import Deku.Attribute (class Attr, prop', unsafeAttribute, unsafePureAttribute, unsafeVolatileAttribute, unset')
+import Deku.DOM.Tags as Tags
 
 data Radius = Radius
 
-instance Attr FeMorphology_ Radius String where
-  attr Radius value = unsafeAttribute { key: "radius", value: prop' value }
+instance Attr Tags.FeMorphology_ Radius String where
+  pureAttr Radius value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "radius", value }
+
+  mapAttr Radius evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "radius", value: prop' value }
 
 instance Attr everything Radius Unit where
-  attr Radius _ = unsafeAttribute
+  pureAttr Radius _ = unsafeAttribute $ Right $ pure $ unsafeVolatileAttribute
     { key: "radius", value: unset' }
+  mapAttr Radius evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "radius", value: unset' }

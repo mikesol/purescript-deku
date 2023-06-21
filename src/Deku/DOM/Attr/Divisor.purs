@@ -1,15 +1,23 @@
 module Deku.DOM.Attr.Divisor where
 
 import Prelude
+import Data.Either (Either(..))
 
-import Deku.DOM.Elt.FeConvolveMatrix (FeConvolveMatrix_)
-import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
+import Deku.Attribute (class Attr, prop', unsafeAttribute, unsafePureAttribute, unsafeVolatileAttribute, unset')
+import Deku.DOM.Tags as Tags
 
 data Divisor = Divisor
 
-instance Attr FeConvolveMatrix_ Divisor String where
-  attr Divisor value = unsafeAttribute { key: "divisor", value: prop' value }
+instance Attr Tags.FeConvolveMatrix_ Divisor String where
+  pureAttr Divisor value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "divisor", value }
+
+  mapAttr Divisor evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "divisor", value: prop' value }
 
 instance Attr everything Divisor Unit where
-  attr Divisor _ = unsafeAttribute
+  pureAttr Divisor _ = unsafeAttribute $ Right $ pure $ unsafeVolatileAttribute
     { key: "divisor", value: unset' }
+  mapAttr Divisor evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "divisor", value: unset' }

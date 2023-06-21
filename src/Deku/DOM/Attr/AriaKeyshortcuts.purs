@@ -1,96 +1,136 @@
 module Deku.DOM.Attr.AriaKeyshortcuts where
 
 import Prelude
+import Data.Either (Either(..))
 
-import Deku.DOM.Elt.View (View_)
-import Deku.DOM.Elt.Use (Use_)
-import Deku.DOM.Elt.Tspan (Tspan_)
-import Deku.DOM.Elt.TextPath (TextPath_)
-import Deku.DOM.Elt.Text (Text_)
-import Deku.DOM.Elt.Symbol (Symbol_)
-import Deku.DOM.Elt.Svg (Svg_)
-import Deku.DOM.Elt.Rect (Rect_)
-import Deku.DOM.Elt.Polyline (Polyline_)
-import Deku.DOM.Elt.Polygon (Polygon_)
-import Deku.DOM.Elt.Path (Path_)
-import Deku.DOM.Elt.Marker (Marker_)
-import Deku.DOM.Elt.Line (Line_)
-import Deku.DOM.Elt.G (G_)
-import Deku.DOM.Elt.ForeignObject (ForeignObject_)
-import Deku.DOM.Elt.Ellipse (Ellipse_)
-import Deku.DOM.Elt.Circle (Circle_)
-import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
+import Deku.Attribute (class Attr, prop', unsafeAttribute, unsafePureAttribute, unsafeVolatileAttribute, unset')
+import Deku.DOM.Tags as Tags
 
 data AriaKeyshortcuts = AriaKeyshortcuts
 
-instance Attr Circle_ AriaKeyshortcuts String where
-  attr AriaKeyshortcuts value = unsafeAttribute
-    { key: "aria-keyshortcuts", value: prop' value }
+instance Attr Tags.Circle_ AriaKeyshortcuts String where
+  pureAttr AriaKeyshortcuts value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "aria-keyshortcuts", value }
+  mapAttr AriaKeyshortcuts evalue = unsafeAttribute $ Right $ evalue <#>
+    \value -> unsafeVolatileAttribute
+      { key: "aria-keyshortcuts", value: prop' value }
 
-instance Attr Ellipse_ AriaKeyshortcuts String where
-  attr AriaKeyshortcuts value = unsafeAttribute
-    { key: "aria-keyshortcuts", value: prop' value }
+instance Attr Tags.Ellipse_ AriaKeyshortcuts String where
+  pureAttr AriaKeyshortcuts value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "aria-keyshortcuts", value }
+  mapAttr AriaKeyshortcuts evalue = unsafeAttribute $ Right $ evalue <#>
+    \value -> unsafeVolatileAttribute
+      { key: "aria-keyshortcuts", value: prop' value }
 
-instance Attr ForeignObject_ AriaKeyshortcuts String where
-  attr AriaKeyshortcuts value = unsafeAttribute
-    { key: "aria-keyshortcuts", value: prop' value }
+instance Attr Tags.ForeignObject_ AriaKeyshortcuts String where
+  pureAttr AriaKeyshortcuts value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "aria-keyshortcuts", value }
+  mapAttr AriaKeyshortcuts evalue = unsafeAttribute $ Right $ evalue <#>
+    \value -> unsafeVolatileAttribute
+      { key: "aria-keyshortcuts", value: prop' value }
 
-instance Attr G_ AriaKeyshortcuts String where
-  attr AriaKeyshortcuts value = unsafeAttribute
-    { key: "aria-keyshortcuts", value: prop' value }
+instance Attr Tags.G_ AriaKeyshortcuts String where
+  pureAttr AriaKeyshortcuts value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "aria-keyshortcuts", value }
+  mapAttr AriaKeyshortcuts evalue = unsafeAttribute $ Right $ evalue <#>
+    \value -> unsafeVolatileAttribute
+      { key: "aria-keyshortcuts", value: prop' value }
 
-instance Attr Line_ AriaKeyshortcuts String where
-  attr AriaKeyshortcuts value = unsafeAttribute
-    { key: "aria-keyshortcuts", value: prop' value }
+instance Attr Tags.Line_ AriaKeyshortcuts String where
+  pureAttr AriaKeyshortcuts value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "aria-keyshortcuts", value }
+  mapAttr AriaKeyshortcuts evalue = unsafeAttribute $ Right $ evalue <#>
+    \value -> unsafeVolatileAttribute
+      { key: "aria-keyshortcuts", value: prop' value }
 
-instance Attr Marker_ AriaKeyshortcuts String where
-  attr AriaKeyshortcuts value = unsafeAttribute
-    { key: "aria-keyshortcuts", value: prop' value }
+instance Attr Tags.Marker_ AriaKeyshortcuts String where
+  pureAttr AriaKeyshortcuts value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "aria-keyshortcuts", value }
+  mapAttr AriaKeyshortcuts evalue = unsafeAttribute $ Right $ evalue <#>
+    \value -> unsafeVolatileAttribute
+      { key: "aria-keyshortcuts", value: prop' value }
 
-instance Attr Path_ AriaKeyshortcuts String where
-  attr AriaKeyshortcuts value = unsafeAttribute
-    { key: "aria-keyshortcuts", value: prop' value }
+instance Attr Tags.Path_ AriaKeyshortcuts String where
+  pureAttr AriaKeyshortcuts value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "aria-keyshortcuts", value }
+  mapAttr AriaKeyshortcuts evalue = unsafeAttribute $ Right $ evalue <#>
+    \value -> unsafeVolatileAttribute
+      { key: "aria-keyshortcuts", value: prop' value }
 
-instance Attr Polygon_ AriaKeyshortcuts String where
-  attr AriaKeyshortcuts value = unsafeAttribute
-    { key: "aria-keyshortcuts", value: prop' value }
+instance Attr Tags.Polygon_ AriaKeyshortcuts String where
+  pureAttr AriaKeyshortcuts value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "aria-keyshortcuts", value }
+  mapAttr AriaKeyshortcuts evalue = unsafeAttribute $ Right $ evalue <#>
+    \value -> unsafeVolatileAttribute
+      { key: "aria-keyshortcuts", value: prop' value }
 
-instance Attr Polyline_ AriaKeyshortcuts String where
-  attr AriaKeyshortcuts value = unsafeAttribute
-    { key: "aria-keyshortcuts", value: prop' value }
+instance Attr Tags.Polyline_ AriaKeyshortcuts String where
+  pureAttr AriaKeyshortcuts value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "aria-keyshortcuts", value }
+  mapAttr AriaKeyshortcuts evalue = unsafeAttribute $ Right $ evalue <#>
+    \value -> unsafeVolatileAttribute
+      { key: "aria-keyshortcuts", value: prop' value }
 
-instance Attr Rect_ AriaKeyshortcuts String where
-  attr AriaKeyshortcuts value = unsafeAttribute
-    { key: "aria-keyshortcuts", value: prop' value }
+instance Attr Tags.Rect_ AriaKeyshortcuts String where
+  pureAttr AriaKeyshortcuts value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "aria-keyshortcuts", value }
+  mapAttr AriaKeyshortcuts evalue = unsafeAttribute $ Right $ evalue <#>
+    \value -> unsafeVolatileAttribute
+      { key: "aria-keyshortcuts", value: prop' value }
 
-instance Attr Svg_ AriaKeyshortcuts String where
-  attr AriaKeyshortcuts value = unsafeAttribute
-    { key: "aria-keyshortcuts", value: prop' value }
+instance Attr Tags.Svg_ AriaKeyshortcuts String where
+  pureAttr AriaKeyshortcuts value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "aria-keyshortcuts", value }
+  mapAttr AriaKeyshortcuts evalue = unsafeAttribute $ Right $ evalue <#>
+    \value -> unsafeVolatileAttribute
+      { key: "aria-keyshortcuts", value: prop' value }
 
-instance Attr Symbol_ AriaKeyshortcuts String where
-  attr AriaKeyshortcuts value = unsafeAttribute
-    { key: "aria-keyshortcuts", value: prop' value }
+instance Attr Tags.Symbol_ AriaKeyshortcuts String where
+  pureAttr AriaKeyshortcuts value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "aria-keyshortcuts", value }
+  mapAttr AriaKeyshortcuts evalue = unsafeAttribute $ Right $ evalue <#>
+    \value -> unsafeVolatileAttribute
+      { key: "aria-keyshortcuts", value: prop' value }
 
-instance Attr Text_ AriaKeyshortcuts String where
-  attr AriaKeyshortcuts value = unsafeAttribute
-    { key: "aria-keyshortcuts", value: prop' value }
+instance Attr Tags.Text_ AriaKeyshortcuts String where
+  pureAttr AriaKeyshortcuts value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "aria-keyshortcuts", value }
+  mapAttr AriaKeyshortcuts evalue = unsafeAttribute $ Right $ evalue <#>
+    \value -> unsafeVolatileAttribute
+      { key: "aria-keyshortcuts", value: prop' value }
 
-instance Attr TextPath_ AriaKeyshortcuts String where
-  attr AriaKeyshortcuts value = unsafeAttribute
-    { key: "aria-keyshortcuts", value: prop' value }
+instance Attr Tags.TextPath_ AriaKeyshortcuts String where
+  pureAttr AriaKeyshortcuts value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "aria-keyshortcuts", value }
+  mapAttr AriaKeyshortcuts evalue = unsafeAttribute $ Right $ evalue <#>
+    \value -> unsafeVolatileAttribute
+      { key: "aria-keyshortcuts", value: prop' value }
 
-instance Attr Tspan_ AriaKeyshortcuts String where
-  attr AriaKeyshortcuts value = unsafeAttribute
-    { key: "aria-keyshortcuts", value: prop' value }
+instance Attr Tags.Tspan_ AriaKeyshortcuts String where
+  pureAttr AriaKeyshortcuts value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "aria-keyshortcuts", value }
+  mapAttr AriaKeyshortcuts evalue = unsafeAttribute $ Right $ evalue <#>
+    \value -> unsafeVolatileAttribute
+      { key: "aria-keyshortcuts", value: prop' value }
 
-instance Attr Use_ AriaKeyshortcuts String where
-  attr AriaKeyshortcuts value = unsafeAttribute
-    { key: "aria-keyshortcuts", value: prop' value }
+instance Attr Tags.Use_ AriaKeyshortcuts String where
+  pureAttr AriaKeyshortcuts value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "aria-keyshortcuts", value }
+  mapAttr AriaKeyshortcuts evalue = unsafeAttribute $ Right $ evalue <#>
+    \value -> unsafeVolatileAttribute
+      { key: "aria-keyshortcuts", value: prop' value }
 
-instance Attr View_ AriaKeyshortcuts String where
-  attr AriaKeyshortcuts value = unsafeAttribute
-    { key: "aria-keyshortcuts", value: prop' value }
+instance Attr Tags.View_ AriaKeyshortcuts String where
+  pureAttr AriaKeyshortcuts value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "aria-keyshortcuts", value }
+  mapAttr AriaKeyshortcuts evalue = unsafeAttribute $ Right $ evalue <#>
+    \value -> unsafeVolatileAttribute
+      { key: "aria-keyshortcuts", value: prop' value }
 
 instance Attr everything AriaKeyshortcuts Unit where
-  attr AriaKeyshortcuts _ = unsafeAttribute
-    { key: "aria-keyshortcuts", value: unset' }
+  pureAttr AriaKeyshortcuts _ = unsafeAttribute $ Right $ pure $
+    unsafeVolatileAttribute
+      { key: "aria-keyshortcuts", value: unset' }
+  mapAttr AriaKeyshortcuts evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "aria-keyshortcuts", value: unset' }

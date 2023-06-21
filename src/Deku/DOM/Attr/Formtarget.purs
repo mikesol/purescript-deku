@@ -1,21 +1,31 @@
 module Deku.DOM.Attr.Formtarget where
 
 import Prelude
+import Data.Either (Either(..))
 
-import Deku.DOM.Elt.Button (Button_)
-import Deku.DOM.Elt.Input (Input_)
-import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
+import Deku.Attribute (class Attr, prop', unsafeAttribute, unsafePureAttribute, unsafeVolatileAttribute, unset')
+import Deku.DOM.Tags as Tags
 
 data Formtarget = Formtarget
 
-instance Attr Button_ Formtarget String where
-  attr Formtarget value = unsafeAttribute
-    { key: "formtarget", value: prop' value }
+instance Attr Tags.Button_ Formtarget String where
+  pureAttr Formtarget value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "formtarget", value }
+  mapAttr Formtarget evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "formtarget", value: prop' value }
 
-instance Attr Input_ Formtarget String where
-  attr Formtarget value = unsafeAttribute
-    { key: "formtarget", value: prop' value }
+instance Attr Tags.Input_ Formtarget String where
+  pureAttr Formtarget value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "formtarget", value }
+  mapAttr Formtarget evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "formtarget", value: prop' value }
 
 instance Attr everything Formtarget Unit where
-  attr Formtarget _ = unsafeAttribute
-    { key: "formtarget", value: unset' }
+  pureAttr Formtarget _ = unsafeAttribute $ Right $ pure $
+    unsafeVolatileAttribute
+      { key: "formtarget", value: unset' }
+  mapAttr Formtarget evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "formtarget", value: unset' }

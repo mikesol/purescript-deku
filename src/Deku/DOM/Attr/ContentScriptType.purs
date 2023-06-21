@@ -1,16 +1,25 @@
 module Deku.DOM.Attr.ContentScriptType where
 
 import Prelude
+import Data.Either (Either(..))
 
-import Deku.DOM.Elt.Svg (Svg_)
-import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
+import Deku.Attribute (class Attr, prop', unsafeAttribute, unsafePureAttribute, unsafeVolatileAttribute, unset')
+import Deku.DOM.Tags as Tags
 
 data ContentScriptType = ContentScriptType
 
-instance Attr Svg_ ContentScriptType String where
-  attr ContentScriptType value = unsafeAttribute
-    { key: "contentScriptType", value: prop' value }
+instance Attr Tags.Svg_ ContentScriptType String where
+  pureAttr ContentScriptType value = unsafeAttribute $ Left $
+    unsafePureAttribute
+      { key: "contentScriptType", value }
+  mapAttr ContentScriptType evalue = unsafeAttribute $ Right $ evalue <#>
+    \value -> unsafeVolatileAttribute
+      { key: "contentScriptType", value: prop' value }
 
 instance Attr everything ContentScriptType Unit where
-  attr ContentScriptType _ = unsafeAttribute
-    { key: "contentScriptType", value: unset' }
+  pureAttr ContentScriptType _ = unsafeAttribute $ Right $ pure $
+    unsafeVolatileAttribute
+      { key: "contentScriptType", value: unset' }
+  mapAttr ContentScriptType evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "contentScriptType", value: unset' }

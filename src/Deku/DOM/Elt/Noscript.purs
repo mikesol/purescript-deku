@@ -4,12 +4,11 @@ import Control.Plus (empty)
 import Deku.Attribute (Attribute)
 import Deku.Control as DC
 import Deku.Core (Nut)
-import FRP.Event (Event)
 
 import Deku.DOM.Tags as Tags
 
 noscript
-  :: Array (Event (Attribute Tags.Noscript_))
+  :: Array (Attribute Tags.Noscript_)
   -> Array Nut
   -> Nut
 noscript = DC.elementify3 "noscript"

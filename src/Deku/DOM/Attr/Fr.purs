@@ -1,15 +1,23 @@
 module Deku.DOM.Attr.Fr where
 
 import Prelude
+import Data.Either (Either(..))
 
-import Deku.DOM.Elt.RadialGradient (RadialGradient_)
-import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
+import Deku.Attribute (class Attr, prop', unsafeAttribute, unsafePureAttribute, unsafeVolatileAttribute, unset')
+import Deku.DOM.Tags as Tags
 
 data Fr = Fr
 
-instance Attr RadialGradient_ Fr String where
-  attr Fr value = unsafeAttribute { key: "fr", value: prop' value }
+instance Attr Tags.RadialGradient_ Fr String where
+  pureAttr Fr value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "fr", value }
+
+  mapAttr Fr evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "fr", value: prop' value }
 
 instance Attr everything Fr Unit where
-  attr Fr _ = unsafeAttribute
+  pureAttr Fr _ = unsafeAttribute $ Right $ pure $ unsafeVolatileAttribute
     { key: "fr", value: unset' }
+  mapAttr Fr evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "fr", value: unset' }

@@ -4,12 +4,11 @@ import Control.Plus (empty)
 import Deku.Attribute (Attribute)
 import Deku.Control as DC
 import Deku.Core (Nut)
-import FRP.Event (Event)
 
 import Deku.DOM.Tags as Tags
 
 circle
-  :: Array (Event (Attribute Tags.Circle_))
+  :: Array (Attribute Tags.Circle_)
   -> Array Nut
   -> Nut
 circle = DC.elementify3 "circle"

@@ -1,19 +1,30 @@
 module Deku.DOM.Attr.Ping where
 
 import Prelude
+import Data.Either (Either(..))
 
-import Deku.DOM.Elt.A (A_)
-import Deku.DOM.Elt.Area (Area_)
-import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
+import Deku.Attribute (class Attr, prop', unsafeAttribute, unsafePureAttribute, unsafeVolatileAttribute, unset')
+import Deku.DOM.Tags as Tags
 
 data Ping = Ping
 
-instance Attr A_ Ping String where
-  attr Ping value = unsafeAttribute { key: "ping", value: prop' value }
+instance Attr Tags.A_ Ping String where
+  pureAttr Ping value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "ping", value }
 
-instance Attr Area_ Ping String where
-  attr Ping value = unsafeAttribute { key: "ping", value: prop' value }
+  mapAttr Ping evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "ping", value: prop' value }
+
+instance Attr Tags.Area_ Ping String where
+  pureAttr Ping value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "ping", value }
+
+  mapAttr Ping evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "ping", value: prop' value }
 
 instance Attr everything Ping Unit where
-  attr Ping _ = unsafeAttribute
+  pureAttr Ping _ = unsafeAttribute $ Right $ pure $ unsafeVolatileAttribute
     { key: "ping", value: unset' }
+  mapAttr Ping evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "ping", value: unset' }

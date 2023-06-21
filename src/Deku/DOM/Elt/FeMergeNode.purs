@@ -4,12 +4,11 @@ import Control.Plus (empty)
 import Deku.Attribute (Attribute)
 import Deku.Control as DC
 import Deku.Core (Nut)
-import FRP.Event (Event)
 
 import Deku.DOM.Tags as Tags
 
 feMergeNode
-  :: Array (Event (Attribute Tags.FeMergeNode_))
+  :: Array (Attribute Tags.FeMergeNode_)
   -> Array Nut
   -> Nut
 feMergeNode = DC.elementify3 "feMergeNode"

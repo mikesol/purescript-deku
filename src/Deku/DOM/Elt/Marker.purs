@@ -4,12 +4,11 @@ import Control.Plus (empty)
 import Deku.Attribute (Attribute)
 import Deku.Control as DC
 import Deku.Core (Nut)
-import FRP.Event (Event)
 
 import Deku.DOM.Tags as Tags
 
 marker
-  :: Array (Event (Attribute Tags.Marker_))
+  :: Array (Attribute Tags.Marker_)
   -> Array Nut
   -> Nut
 marker = DC.elementify3 "marker"

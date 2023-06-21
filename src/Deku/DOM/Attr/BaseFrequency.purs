@@ -1,16 +1,24 @@
 module Deku.DOM.Attr.BaseFrequency where
 
 import Prelude
+import Data.Either (Either(..))
 
-import Deku.DOM.Elt.FeTurbulence (FeTurbulence_)
-import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
+import Deku.Attribute (class Attr, prop', unsafeAttribute, unsafePureAttribute, unsafeVolatileAttribute, unset')
+import Deku.DOM.Tags as Tags
 
 data BaseFrequency = BaseFrequency
 
-instance Attr FeTurbulence_ BaseFrequency String where
-  attr BaseFrequency value = unsafeAttribute
-    { key: "baseFrequency", value: prop' value }
+instance Attr Tags.FeTurbulence_ BaseFrequency String where
+  pureAttr BaseFrequency value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "baseFrequency", value }
+  mapAttr BaseFrequency evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "baseFrequency", value: prop' value }
 
 instance Attr everything BaseFrequency Unit where
-  attr BaseFrequency _ = unsafeAttribute
-    { key: "baseFrequency", value: unset' }
+  pureAttr BaseFrequency _ = unsafeAttribute $ Right $ pure $
+    unsafeVolatileAttribute
+      { key: "baseFrequency", value: unset' }
+  mapAttr BaseFrequency evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "baseFrequency", value: unset' }

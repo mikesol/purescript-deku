@@ -1,26 +1,39 @@
 module Deku.DOM.Attr.OnDrag where
 
 import Prelude
+import Data.Either (Either(..))
 import Effect (Effect)
-import Deku.Attribute (class Attr, Attribute, Cb(..), cb', unsafeAttribute, unset')
+import Deku.Attribute (class Attr, Attribute, Cb(..), cb', unsafeAttribute, unsafePureAttribute, unsafeVolatileAttribute, unset')
+import Deku.DOM.Tags as Tags
 import FRP.Event (Event)
 
 data OnDrag = OnDrag
 
 instance Attr anything OnDrag Cb where
-  attr OnDrag value = unsafeAttribute { key: "drag", value: cb' value }
+  pureAttr OnDrag value = unsafeAttribute $ Right $ pure $
+    unsafeVolatileAttribute { key: "drag", value: cb' value }
+  mapAttr OnDrag evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "drag", value: cb' value }
 
 instance Attr anything OnDrag (Effect Unit) where
-  attr OnDrag value = unsafeAttribute
-    { key: "drag", value: cb' (Cb (const (value $> true))) }
+  pureAttr OnDrag value = unsafeAttribute $ Right $ pure $
+    unsafeVolatileAttribute
+  mapAttr OnDrag evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "drag", value: cb' (Cb (const (value $> true))) }
 
 instance Attr anything OnDrag (Effect Boolean) where
-  attr OnDrag value = unsafeAttribute
-    { key: "drag", value: cb' (Cb (const value)) }
+  pureAttr OnDrag value = unsafeAttribute $ Right $ pure $
+    unsafeVolatileAttribute
+  mapAttr OnDrag evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "drag", value: cb' (Cb (const value)) }
 
 type OnDragEffect =
   forall element. Attr element OnDrag (Effect Unit) => Event (Attribute element)
 
 instance Attr everything OnDrag Unit where
-  attr OnDrag _ = unsafeAttribute
+  pureAttr OnDrag _ = unsafeAttribute $ Right $ pure $ unsafeVolatileAttribute
+    { key: "drag", value: unset' }
+  mapAttr OnDrag evalue = unsafeAttribute $ Right $ evalue <#> \value -> unsafeVolatileAttribute
     { key: "drag", value: unset' }

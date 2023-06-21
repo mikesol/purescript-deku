@@ -1,15 +1,23 @@
 module Deku.DOM.Attr.Allow where
 
 import Prelude
+import Data.Either (Either(..))
 
-import Deku.DOM.Elt.Iframe (Iframe_)
-import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
+import Deku.Attribute (class Attr, prop', unsafeAttribute, unsafePureAttribute, unsafeVolatileAttribute, unset')
+import Deku.DOM.Tags as Tags
 
 data Allow = Allow
 
-instance Attr Iframe_ Allow String where
-  attr Allow value = unsafeAttribute { key: "allow", value: prop' value }
+instance Attr Tags.Iframe_ Allow String where
+  pureAttr Allow value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "allow", value }
+
+  mapAttr Allow evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "allow", value: prop' value }
 
 instance Attr everything Allow Unit where
-  attr Allow _ = unsafeAttribute
+  pureAttr Allow _ = unsafeAttribute $ Right $ pure $ unsafeVolatileAttribute
     { key: "allow", value: unset' }
+  mapAttr Allow evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "allow", value: unset' }

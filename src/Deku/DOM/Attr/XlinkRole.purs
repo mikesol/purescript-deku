@@ -1,36 +1,52 @@
 module Deku.DOM.Attr.XlinkRole where
 
 import Prelude
+import Data.Either (Either(..))
 
-import Deku.DOM.Elt.Mpath (Mpath_)
-import Deku.DOM.Elt.Image (Image_)
-import Deku.DOM.Elt.Filter (Filter_)
-import Deku.DOM.Elt.FeImage (FeImage_)
-import Deku.DOM.Elt.AnimateTransform (AnimateTransform_)
-import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
+import Deku.Attribute (class Attr, prop', unsafeAttribute, unsafePureAttribute, unsafeVolatileAttribute, unset')
+import Deku.DOM.Tags as Tags
 
 data XlinkRole = XlinkRole
 
-instance Attr AnimateTransform_ XlinkRole String where
-  attr XlinkRole value = unsafeAttribute
-    { key: "xlink:role", value: prop' value }
+instance Attr Tags.AnimateTransform_ XlinkRole String where
+  pureAttr XlinkRole value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "xlink:role", value }
+  mapAttr XlinkRole evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "xlink:role", value: prop' value }
 
-instance Attr FeImage_ XlinkRole String where
-  attr XlinkRole value = unsafeAttribute
-    { key: "xlink:role", value: prop' value }
+instance Attr Tags.FeImage_ XlinkRole String where
+  pureAttr XlinkRole value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "xlink:role", value }
+  mapAttr XlinkRole evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "xlink:role", value: prop' value }
 
-instance Attr Filter_ XlinkRole String where
-  attr XlinkRole value = unsafeAttribute
-    { key: "xlink:role", value: prop' value }
+instance Attr Tags.Filter_ XlinkRole String where
+  pureAttr XlinkRole value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "xlink:role", value }
+  mapAttr XlinkRole evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "xlink:role", value: prop' value }
 
-instance Attr Image_ XlinkRole String where
-  attr XlinkRole value = unsafeAttribute
-    { key: "xlink:role", value: prop' value }
+instance Attr Tags.Image_ XlinkRole String where
+  pureAttr XlinkRole value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "xlink:role", value }
+  mapAttr XlinkRole evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "xlink:role", value: prop' value }
 
-instance Attr Mpath_ XlinkRole String where
-  attr XlinkRole value = unsafeAttribute
-    { key: "xlink:role", value: prop' value }
+instance Attr Tags.Mpath_ XlinkRole String where
+  pureAttr XlinkRole value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "xlink:role", value }
+  mapAttr XlinkRole evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "xlink:role", value: prop' value }
 
 instance Attr everything XlinkRole Unit where
-  attr XlinkRole _ = unsafeAttribute
-    { key: "xlink:role", value: unset' }
+  pureAttr XlinkRole _ = unsafeAttribute $ Right $ pure $
+    unsafeVolatileAttribute
+      { key: "xlink:role", value: unset' }
+  mapAttr XlinkRole evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "xlink:role", value: unset' }

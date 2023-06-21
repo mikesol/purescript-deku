@@ -1,15 +1,23 @@
 module Deku.DOM.Attr.Version where
 
 import Prelude
+import Data.Either (Either(..))
 
-import Deku.DOM.Elt.Svg (Svg_)
-import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
+import Deku.Attribute (class Attr, prop', unsafeAttribute, unsafePureAttribute, unsafeVolatileAttribute, unset')
+import Deku.DOM.Tags as Tags
 
 data Version = Version
 
-instance Attr Svg_ Version String where
-  attr Version value = unsafeAttribute { key: "version", value: prop' value }
+instance Attr Tags.Svg_ Version String where
+  pureAttr Version value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "version", value }
+
+  mapAttr Version evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "version", value: prop' value }
 
 instance Attr everything Version Unit where
-  attr Version _ = unsafeAttribute
+  pureAttr Version _ = unsafeAttribute $ Right $ pure $ unsafeVolatileAttribute
     { key: "version", value: unset' }
+  mapAttr Version evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "version", value: unset' }

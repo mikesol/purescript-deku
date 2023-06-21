@@ -1,26 +1,39 @@
 module Deku.DOM.Attr.OnPlay where
 
 import Prelude
+import Data.Either (Either(..))
 import Effect (Effect)
-import Deku.Attribute (class Attr, Attribute, Cb(..), cb', unsafeAttribute, unset')
+import Deku.Attribute (class Attr, Attribute, Cb(..), cb', unsafeAttribute, unsafePureAttribute, unsafeVolatileAttribute, unset')
+import Deku.DOM.Tags as Tags
 import FRP.Event (Event)
 
 data OnPlay = OnPlay
 
 instance Attr anything OnPlay Cb where
-  attr OnPlay value = unsafeAttribute { key: "play", value: cb' value }
+  pureAttr OnPlay value = unsafeAttribute $ Right $ pure $
+    unsafeVolatileAttribute { key: "play", value: cb' value }
+  mapAttr OnPlay evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "play", value: cb' value }
 
 instance Attr anything OnPlay (Effect Unit) where
-  attr OnPlay value = unsafeAttribute
-    { key: "play", value: cb' (Cb (const (value $> true))) }
+  pureAttr OnPlay value = unsafeAttribute $ Right $ pure $
+    unsafeVolatileAttribute
+  mapAttr OnPlay evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "play", value: cb' (Cb (const (value $> true))) }
 
 instance Attr anything OnPlay (Effect Boolean) where
-  attr OnPlay value = unsafeAttribute
-    { key: "play", value: cb' (Cb (const value)) }
+  pureAttr OnPlay value = unsafeAttribute $ Right $ pure $
+    unsafeVolatileAttribute
+  mapAttr OnPlay evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "play", value: cb' (Cb (const value)) }
 
 type OnPlayEffect =
   forall element. Attr element OnPlay (Effect Unit) => Event (Attribute element)
 
 instance Attr everything OnPlay Unit where
-  attr OnPlay _ = unsafeAttribute
+  pureAttr OnPlay _ = unsafeAttribute $ Right $ pure $ unsafeVolatileAttribute
+    { key: "play", value: unset' }
+  mapAttr OnPlay evalue = unsafeAttribute $ Right $ evalue <#> \value -> unsafeVolatileAttribute
     { key: "play", value: unset' }

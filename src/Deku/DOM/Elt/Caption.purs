@@ -4,12 +4,11 @@ import Control.Plus (empty)
 import Deku.Attribute (Attribute)
 import Deku.Control as DC
 import Deku.Core (Nut)
-import FRP.Event (Event)
 
 import Deku.DOM.Tags as Tags
 
 caption
-  :: Array (Event (Attribute Tags.Caption_))
+  :: Array (Attribute Tags.Caption_)
   -> Array Nut
   -> Nut
 caption = DC.elementify3 "caption"

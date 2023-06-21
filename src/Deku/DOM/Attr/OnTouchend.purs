@@ -1,23 +1,34 @@
 module Deku.DOM.Attr.OnTouchend where
 
 import Prelude
+import Data.Either (Either(..))
 import Effect (Effect)
-import Deku.Attribute (class Attr, Attribute, Cb(..), cb', unsafeAttribute, unset')
+import Deku.Attribute (class Attr, Attribute, Cb(..), cb', unsafeAttribute, unsafePureAttribute, unsafeVolatileAttribute, unset')
+import Deku.DOM.Tags as Tags
 import FRP.Event (Event)
 
 data OnTouchend = OnTouchend
 
 instance Attr anything OnTouchend Cb where
-  attr OnTouchend value = unsafeAttribute
-    { key: "touchend", value: cb' value }
+  pureAttr OnTouchend value = unsafeAttribute $ Right $ pure $
+    unsafeVolatileAttribute
+  mapAttr OnTouchend evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "touchend", value: cb' value }
 
 instance Attr anything OnTouchend (Effect Unit) where
-  attr OnTouchend value = unsafeAttribute
-    { key: "touchend", value: cb' (Cb (const (value $> true))) }
+  pureAttr OnTouchend value = unsafeAttribute $ Right $ pure $
+    unsafeVolatileAttribute
+  mapAttr OnTouchend evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "touchend", value: cb' (Cb (const (value $> true))) }
 
 instance Attr anything OnTouchend (Effect Boolean) where
-  attr OnTouchend value = unsafeAttribute
-    { key: "touchend", value: cb' (Cb (const value)) }
+  pureAttr OnTouchend value = unsafeAttribute $ Right $ pure $
+    unsafeVolatileAttribute
+  mapAttr OnTouchend evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "touchend", value: cb' (Cb (const value)) }
 
 type OnTouchendEffect =
   forall element
@@ -25,5 +36,6 @@ type OnTouchendEffect =
   => Event (Attribute element)
 
 instance Attr everything OnTouchend Unit where
-  attr OnTouchend _ = unsafeAttribute
-    { key: "touchend", value: unset' }
+  pureAttr OnTouchend _ = unsafeAttribute $ Right $ pure $
+    unsafeVolatileAttribute
+      { key: "touchend", value: unset' }

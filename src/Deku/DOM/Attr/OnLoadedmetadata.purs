@@ -1,23 +1,34 @@
 module Deku.DOM.Attr.OnLoadedmetadata where
 
 import Prelude
+import Data.Either (Either(..))
 import Effect (Effect)
-import Deku.Attribute (class Attr, Attribute, Cb(..), cb', unsafeAttribute, unset')
+import Deku.Attribute (class Attr, Attribute, Cb(..), cb', unsafeAttribute, unsafePureAttribute, unsafeVolatileAttribute, unset')
+import Deku.DOM.Tags as Tags
 import FRP.Event (Event)
 
 data OnLoadedmetadata = OnLoadedmetadata
 
 instance Attr anything OnLoadedmetadata Cb where
-  attr OnLoadedmetadata value = unsafeAttribute
-    { key: "loadedmetadata", value: cb' value }
+  pureAttr OnLoadedmetadata value = unsafeAttribute $ Right $ pure $
+    unsafeVolatileAttribute
+  mapAttr OnLoadedmetadata evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "loadedmetadata", value: cb' value }
 
 instance Attr anything OnLoadedmetadata (Effect Unit) where
-  attr OnLoadedmetadata value = unsafeAttribute
-    { key: "loadedmetadata", value: cb' (Cb (const (value $> true))) }
+  pureAttr OnLoadedmetadata value = unsafeAttribute $ Right $ pure $
+    unsafeVolatileAttribute
+  mapAttr OnLoadedmetadata evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "loadedmetadata", value: cb' (Cb (const (value $> true))) }
 
 instance Attr anything OnLoadedmetadata (Effect Boolean) where
-  attr OnLoadedmetadata value = unsafeAttribute
-    { key: "loadedmetadata", value: cb' (Cb (const value)) }
+  pureAttr OnLoadedmetadata value = unsafeAttribute $ Right $ pure $
+    unsafeVolatileAttribute
+  mapAttr OnLoadedmetadata evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "loadedmetadata", value: cb' (Cb (const value)) }
 
 type OnLoadedmetadataEffect =
   forall element
@@ -25,5 +36,6 @@ type OnLoadedmetadataEffect =
   => Event (Attribute element)
 
 instance Attr everything OnLoadedmetadata Unit where
-  attr OnLoadedmetadata _ = unsafeAttribute
-    { key: "loadedmetadata", value: unset' }
+  pureAttr OnLoadedmetadata _ = unsafeAttribute $ Right $ pure $
+    unsafeVolatileAttribute
+      { key: "loadedmetadata", value: unset' }

@@ -1,23 +1,34 @@
 module Deku.DOM.Attr.OnTimeupdate where
 
 import Prelude
+import Data.Either (Either(..))
 import Effect (Effect)
-import Deku.Attribute (class Attr, Attribute, Cb(..), cb', unsafeAttribute, unset')
+import Deku.Attribute (class Attr, Attribute, Cb(..), cb', unsafeAttribute, unsafePureAttribute, unsafeVolatileAttribute, unset')
+import Deku.DOM.Tags as Tags
 import FRP.Event (Event)
 
 data OnTimeupdate = OnTimeupdate
 
 instance Attr anything OnTimeupdate Cb where
-  attr OnTimeupdate value = unsafeAttribute
-    { key: "timeupdate", value: cb' value }
+  pureAttr OnTimeupdate value = unsafeAttribute $ Right $ pure $
+    unsafeVolatileAttribute
+  mapAttr OnTimeupdate evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "timeupdate", value: cb' value }
 
 instance Attr anything OnTimeupdate (Effect Unit) where
-  attr OnTimeupdate value = unsafeAttribute
-    { key: "timeupdate", value: cb' (Cb (const (value $> true))) }
+  pureAttr OnTimeupdate value = unsafeAttribute $ Right $ pure $
+    unsafeVolatileAttribute
+  mapAttr OnTimeupdate evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "timeupdate", value: cb' (Cb (const (value $> true))) }
 
 instance Attr anything OnTimeupdate (Effect Boolean) where
-  attr OnTimeupdate value = unsafeAttribute
-    { key: "timeupdate", value: cb' (Cb (const value)) }
+  pureAttr OnTimeupdate value = unsafeAttribute $ Right $ pure $
+    unsafeVolatileAttribute
+  mapAttr OnTimeupdate evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "timeupdate", value: cb' (Cb (const value)) }
 
 type OnTimeupdateEffect =
   forall element
@@ -25,5 +36,6 @@ type OnTimeupdateEffect =
   => Event (Attribute element)
 
 instance Attr everything OnTimeupdate Unit where
-  attr OnTimeupdate _ = unsafeAttribute
-    { key: "timeupdate", value: unset' }
+  pureAttr OnTimeupdate _ = unsafeAttribute $ Right $ pure $
+    unsafeVolatileAttribute
+      { key: "timeupdate", value: unset' }

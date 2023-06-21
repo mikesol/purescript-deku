@@ -1,22 +1,33 @@
 module Deku.DOM.Attr.OnDragover where
 
 import Prelude
+import Data.Either (Either(..))
 import Effect (Effect)
-import Deku.Attribute (class Attr, Attribute, Cb(..), cb', unsafeAttribute, unset')
+import Deku.Attribute (class Attr, Attribute, Cb(..), cb', unsafeAttribute, unsafePureAttribute, unsafeVolatileAttribute, unset')
+import Deku.DOM.Tags as Tags
 import FRP.Event (Event)
 
 data OnDragover = OnDragover
 
 instance Attr anything OnDragover Cb where
-  attr OnDragover value = unsafeAttribute { key: "dragover", value: cb' value }
+  pureAttr OnDragover value = unsafeAttribute $ Right $ pure $
+    unsafeVolatileAttribute { key: "dragover", value: cb' value }
+  mapAttr OnDragover evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "dragover", value: cb' value }
 
 instance Attr anything OnDragover (Effect Unit) where
-  attr OnDragover value = unsafeAttribute
-    { key: "dragover", value: cb' (Cb (const (value $> true))) }
+  pureAttr OnDragover value = unsafeAttribute $ Right $ pure $
+    unsafeVolatileAttribute
+  mapAttr OnDragover evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "dragover", value: cb' (Cb (const (value $> true))) }
 
 instance Attr anything OnDragover (Effect Boolean) where
-  attr OnDragover value = unsafeAttribute
-    { key: "dragover", value: cb' (Cb (const value)) }
+  pureAttr OnDragover value = unsafeAttribute $ Right $ pure $
+    unsafeVolatileAttribute
+  mapAttr OnDragover evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "dragover", value: cb' (Cb (const value)) }
 
 type OnDragoverEffect =
   forall element
@@ -24,5 +35,6 @@ type OnDragoverEffect =
   => Event (Attribute element)
 
 instance Attr everything OnDragover Unit where
-  attr OnDragover _ = unsafeAttribute
-    { key: "dragover", value: unset' }
+  pureAttr OnDragover _ = unsafeAttribute $ Right $ pure $
+    unsafeVolatileAttribute
+      { key: "dragover", value: unset' }

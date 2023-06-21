@@ -1,26 +1,38 @@
 module Deku.DOM.Attr.Accumulate where
 
 import Prelude
+import Data.Either (Either(..))
 
-import Deku.DOM.Elt.AnimateTransform (AnimateTransform_)
-import Deku.DOM.Elt.AnimateMotion (AnimateMotion_)
-import Deku.DOM.Elt.Animate (Animate_)
-import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
+import Deku.Attribute (class Attr, prop', unsafeAttribute, unsafePureAttribute, unsafeVolatileAttribute, unset')
+import Deku.DOM.Tags as Tags
 
 data Accumulate = Accumulate
 
-instance Attr Animate_ Accumulate String where
-  attr Accumulate value = unsafeAttribute
-    { key: "accumulate", value: prop' value }
+instance Attr Tags.Animate_ Accumulate String where
+  pureAttr Accumulate value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "accumulate", value }
+  mapAttr Accumulate evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "accumulate", value: prop' value }
 
-instance Attr AnimateMotion_ Accumulate String where
-  attr Accumulate value = unsafeAttribute
-    { key: "accumulate", value: prop' value }
+instance Attr Tags.AnimateMotion_ Accumulate String where
+  pureAttr Accumulate value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "accumulate", value }
+  mapAttr Accumulate evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "accumulate", value: prop' value }
 
-instance Attr AnimateTransform_ Accumulate String where
-  attr Accumulate value = unsafeAttribute
-    { key: "accumulate", value: prop' value }
+instance Attr Tags.AnimateTransform_ Accumulate String where
+  pureAttr Accumulate value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "accumulate", value }
+  mapAttr Accumulate evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "accumulate", value: prop' value }
 
 instance Attr everything Accumulate Unit where
-  attr Accumulate _ = unsafeAttribute
-    { key: "accumulate", value: unset' }
+  pureAttr Accumulate _ = unsafeAttribute $ Right $ pure $
+    unsafeVolatileAttribute
+      { key: "accumulate", value: unset' }
+  mapAttr Accumulate evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "accumulate", value: unset' }

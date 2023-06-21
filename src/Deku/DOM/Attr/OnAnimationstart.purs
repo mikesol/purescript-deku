@@ -1,23 +1,34 @@
 module Deku.DOM.Attr.OnAnimationstart where
 
 import Prelude
+import Data.Either (Either(..))
 import Effect (Effect)
-import Deku.Attribute (class Attr, Attribute, Cb(..), cb', unsafeAttribute, unset')
+import Deku.Attribute (class Attr, Attribute, Cb(..), cb', unsafeAttribute, unsafePureAttribute, unsafeVolatileAttribute, unset')
+import Deku.DOM.Tags as Tags
 import FRP.Event (Event)
 
 data OnAnimationstart = OnAnimationstart
 
 instance Attr anything OnAnimationstart Cb where
-  attr OnAnimationstart value = unsafeAttribute
-    { key: "animationstart ", value: cb' value }
+  pureAttr OnAnimationstart value = unsafeAttribute $ Right $ pure $
+    unsafeVolatileAttribute
+  mapAttr OnAnimationstart evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "animationstart ", value: cb' value }
 
 instance Attr anything OnAnimationstart (Effect Unit) where
-  attr OnAnimationstart value = unsafeAttribute
-    { key: "animationstart ", value: cb' (Cb (const (value $> true))) }
+  pureAttr OnAnimationstart value = unsafeAttribute $ Right $ pure $
+    unsafeVolatileAttribute
+  mapAttr OnAnimationstart evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "animationstart ", value: cb' (Cb (const (value $> true))) }
 
 instance Attr anything OnAnimationstart (Effect Boolean) where
-  attr OnAnimationstart value = unsafeAttribute
-    { key: "animationstart ", value: cb' (Cb (const value)) }
+  pureAttr OnAnimationstart value = unsafeAttribute $ Right $ pure $
+    unsafeVolatileAttribute
+  mapAttr OnAnimationstart evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "animationstart ", value: cb' (Cb (const value)) }
 
 type OnAnimationstartEffect =
   forall element
@@ -25,5 +36,6 @@ type OnAnimationstartEffect =
   => Event (Attribute element)
 
 instance Attr everything OnAnimationstart Unit where
-  attr OnAnimationstart _ = unsafeAttribute
-    { key: "animationstart ", value: unset' }
+  pureAttr OnAnimationstart _ = unsafeAttribute $ Right $ pure $
+    unsafeVolatileAttribute
+      { key: "animationstart ", value: unset' }

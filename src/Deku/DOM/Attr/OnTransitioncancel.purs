@@ -1,23 +1,34 @@
 module Deku.DOM.Attr.OnTransitioncancel where
 
 import Prelude
+import Data.Either (Either(..))
 import Effect (Effect)
-import Deku.Attribute (class Attr, Attribute, Cb(..), cb', unsafeAttribute, unset')
+import Deku.Attribute (class Attr, Attribute, Cb(..), cb', unsafeAttribute, unsafePureAttribute, unsafeVolatileAttribute, unset')
+import Deku.DOM.Tags as Tags
 import FRP.Event (Event)
 
 data OnTransitioncancel = OnTransitioncancel
 
 instance Attr anything OnTransitioncancel Cb where
-  attr OnTransitioncancel value = unsafeAttribute
-    { key: "transitioncancel", value: cb' value }
+  pureAttr OnTransitioncancel value = unsafeAttribute $ Right $ pure $
+    unsafeVolatileAttribute
+  mapAttr OnTransitioncancel evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "transitioncancel", value: cb' value }
 
 instance Attr anything OnTransitioncancel (Effect Unit) where
-  attr OnTransitioncancel value = unsafeAttribute
-    { key: "transitioncancel", value: cb' (Cb (const (value $> true))) }
+  pureAttr OnTransitioncancel value = unsafeAttribute $ Right $ pure $
+    unsafeVolatileAttribute
+  mapAttr OnTransitioncancel evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "transitioncancel", value: cb' (Cb (const (value $> true))) }
 
 instance Attr anything OnTransitioncancel (Effect Boolean) where
-  attr OnTransitioncancel value = unsafeAttribute
-    { key: "transitioncancel", value: cb' (Cb (const value)) }
+  pureAttr OnTransitioncancel value = unsafeAttribute $ Right $ pure $
+    unsafeVolatileAttribute
+  mapAttr OnTransitioncancel evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "transitioncancel", value: cb' (Cb (const value)) }
 
 type OnTransitioncancelEffect =
   forall element
@@ -25,5 +36,6 @@ type OnTransitioncancelEffect =
   => Event (Attribute element)
 
 instance Attr everything OnTransitioncancel Unit where
-  attr OnTransitioncancel _ = unsafeAttribute
-    { key: "transitioncancel", value: unset' }
+  pureAttr OnTransitioncancel _ = unsafeAttribute $ Right $ pure $
+    unsafeVolatileAttribute
+      { key: "transitioncancel", value: unset' }

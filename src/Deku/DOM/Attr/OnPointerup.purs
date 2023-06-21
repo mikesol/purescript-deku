@@ -1,23 +1,34 @@
 module Deku.DOM.Attr.OnPointerup where
 
 import Prelude
+import Data.Either (Either(..))
 import Effect (Effect)
-import Deku.Attribute (class Attr, Attribute, Cb(..), cb', unsafeAttribute, unset')
+import Deku.Attribute (class Attr, Attribute, Cb(..), cb', unsafeAttribute, unsafePureAttribute, unsafeVolatileAttribute, unset')
+import Deku.DOM.Tags as Tags
 import FRP.Event (Event)
 
 data OnPointerup = OnPointerup
 
 instance Attr anything OnPointerup Cb where
-  attr OnPointerup value = unsafeAttribute
-    { key: "pointerup", value: cb' value }
+  pureAttr OnPointerup value = unsafeAttribute $ Right $ pure $
+    unsafeVolatileAttribute
+  mapAttr OnPointerup evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "pointerup", value: cb' value }
 
 instance Attr anything OnPointerup (Effect Unit) where
-  attr OnPointerup value = unsafeAttribute
-    { key: "pointerup", value: cb' (Cb (const (value $> true))) }
+  pureAttr OnPointerup value = unsafeAttribute $ Right $ pure $
+    unsafeVolatileAttribute
+  mapAttr OnPointerup evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "pointerup", value: cb' (Cb (const (value $> true))) }
 
 instance Attr anything OnPointerup (Effect Boolean) where
-  attr OnPointerup value = unsafeAttribute
-    { key: "pointerup", value: cb' (Cb (const value)) }
+  pureAttr OnPointerup value = unsafeAttribute $ Right $ pure $
+    unsafeVolatileAttribute
+  mapAttr OnPointerup evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "pointerup", value: cb' (Cb (const value)) }
 
 type OnPointerupEffect =
   forall element
@@ -25,5 +36,6 @@ type OnPointerupEffect =
   => Event (Attribute element)
 
 instance Attr everything OnPointerup Unit where
-  attr OnPointerup _ = unsafeAttribute
-    { key: "pointerup", value: unset' }
+  pureAttr OnPointerup _ = unsafeAttribute $ Right $ pure $
+    unsafeVolatileAttribute
+      { key: "pointerup", value: unset' }

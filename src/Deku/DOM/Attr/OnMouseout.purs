@@ -1,22 +1,33 @@
 module Deku.DOM.Attr.OnMouseout where
 
 import Prelude
+import Data.Either (Either(..))
 import Effect (Effect)
-import Deku.Attribute (class Attr, Attribute, Cb(..), cb', unsafeAttribute, unset')
+import Deku.Attribute (class Attr, Attribute, Cb(..), cb', unsafeAttribute, unsafePureAttribute, unsafeVolatileAttribute, unset')
+import Deku.DOM.Tags as Tags
 import FRP.Event (Event)
 
 data OnMouseout = OnMouseout
 
 instance Attr anything OnMouseout Cb where
-  attr OnMouseout value = unsafeAttribute { key: "mouseout", value: cb' value }
+  pureAttr OnMouseout value = unsafeAttribute $ Right $ pure $
+    unsafeVolatileAttribute { key: "mouseout", value: cb' value }
+  mapAttr OnMouseout evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "mouseout", value: cb' value }
 
 instance Attr anything OnMouseout (Effect Unit) where
-  attr OnMouseout value = unsafeAttribute
-    { key: "mouseout", value: cb' (Cb (const (value $> true))) }
+  pureAttr OnMouseout value = unsafeAttribute $ Right $ pure $
+    unsafeVolatileAttribute
+  mapAttr OnMouseout evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "mouseout", value: cb' (Cb (const (value $> true))) }
 
 instance Attr anything OnMouseout (Effect Boolean) where
-  attr OnMouseout value = unsafeAttribute
-    { key: "mouseout", value: cb' (Cb (const value)) }
+  pureAttr OnMouseout value = unsafeAttribute $ Right $ pure $
+    unsafeVolatileAttribute
+  mapAttr OnMouseout evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "mouseout", value: cb' (Cb (const value)) }
 
 type OnMouseoutEffect =
   forall element
@@ -24,5 +35,6 @@ type OnMouseoutEffect =
   => Event (Attribute element)
 
 instance Attr everything OnMouseout Unit where
-  attr OnMouseout _ = unsafeAttribute
-    { key: "mouseout", value: unset' }
+  pureAttr OnMouseout _ = unsafeAttribute $ Right $ pure $
+    unsafeVolatileAttribute
+      { key: "mouseout", value: unset' }

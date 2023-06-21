@@ -4,12 +4,11 @@ import Control.Plus (empty)
 import Deku.Attribute (Attribute)
 import Deku.Control as DC
 import Deku.Core (Nut)
-import FRP.Event (Event)
 
 import Deku.DOM.Tags as Tags
 
 line
-  :: Array (Event (Attribute Tags.Line_))
+  :: Array (Attribute Tags.Line_)
   -> Array Nut
   -> Nut
 line = DC.elementify3 "line"

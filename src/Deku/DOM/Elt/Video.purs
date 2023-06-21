@@ -4,12 +4,11 @@ import Control.Plus (empty)
 import Deku.Attribute (Attribute)
 import Deku.Control as DC
 import Deku.Core (Nut)
-import FRP.Event (Event)
 
 import Deku.DOM.Tags as Tags
 
 video
-  :: Array (Event (Attribute Tags.Video_))
+  :: Array (Attribute Tags.Video_)
   -> Array Nut
   -> Nut
 video = DC.elementify3 "video"

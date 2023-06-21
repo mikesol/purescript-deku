@@ -1,19 +1,30 @@
 module Deku.DOM.Attr.R where
 
 import Prelude
+import Data.Either (Either(..))
 
-import Deku.DOM.Elt.RadialGradient (RadialGradient_)
-import Deku.DOM.Elt.Circle (Circle_)
-import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
+import Deku.Attribute (class Attr, prop', unsafeAttribute, unsafePureAttribute, unsafeVolatileAttribute, unset')
+import Deku.DOM.Tags as Tags
 
 data R = R
 
-instance Attr Circle_ R String where
-  attr R value = unsafeAttribute { key: "r", value: prop' value }
+instance Attr Tags.Circle_ R String where
+  pureAttr R value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "r", value }
 
-instance Attr RadialGradient_ R String where
-  attr R value = unsafeAttribute { key: "r", value: prop' value }
+  mapAttr R evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "r", value: prop' value }
+
+instance Attr Tags.RadialGradient_ R String where
+  pureAttr R value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "r", value }
+
+  mapAttr R evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "r", value: prop' value }
 
 instance Attr everything R Unit where
-  attr R _ = unsafeAttribute
+  pureAttr R _ = unsafeAttribute $ Right $ pure $ unsafeVolatileAttribute
     { key: "r", value: unset' }
+  mapAttr R evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "r", value: unset' }

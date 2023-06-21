@@ -1,87 +1,149 @@
 module Deku.DOM.Attr.Clip where
 
 import Prelude
+import Data.Either (Either(..))
 
-import Deku.DOM.Elt.Switch (Switch_)
-import Deku.DOM.Elt.Image (Image_)
-import Deku.DOM.Elt.Filter (Filter_)
-import Deku.DOM.Elt.FeTurbulence (FeTurbulence_)
-import Deku.DOM.Elt.FeTile (FeTile_)
-import Deku.DOM.Elt.FeSpecularLighting (FeSpecularLighting_)
-import Deku.DOM.Elt.FeOffset (FeOffset_)
-import Deku.DOM.Elt.FeMorphology (FeMorphology_)
-import Deku.DOM.Elt.FeMerge (FeMerge_)
-import Deku.DOM.Elt.FeImage (FeImage_)
-import Deku.DOM.Elt.FeGaussianBlur (FeGaussianBlur_)
-import Deku.DOM.Elt.FeFlood (FeFlood_)
-import Deku.DOM.Elt.FeDisplacementMap (FeDisplacementMap_)
-import Deku.DOM.Elt.FeDiffuseLighting (FeDiffuseLighting_)
-import Deku.DOM.Elt.FeConvolveMatrix (FeConvolveMatrix_)
-import Deku.DOM.Elt.FeComposite (FeComposite_)
-import Deku.DOM.Elt.FeComponentTransfer (FeComponentTransfer_)
-import Deku.DOM.Elt.FeColorMatrix (FeColorMatrix_)
-import Deku.DOM.Elt.FeBlend (FeBlend_)
-import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
+import Deku.Attribute (class Attr, prop', unsafeAttribute, unsafePureAttribute, unsafeVolatileAttribute, unset')
+import Deku.DOM.Tags as Tags
 
 data Clip = Clip
 
-instance Attr FeBlend_ Clip String where
-  attr Clip value = unsafeAttribute { key: "clip", value: prop' value }
+instance Attr Tags.FeBlend_ Clip String where
+  pureAttr Clip value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "clip", value }
 
-instance Attr FeColorMatrix_ Clip String where
-  attr Clip value = unsafeAttribute { key: "clip", value: prop' value }
+  mapAttr Clip evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "clip", value: prop' value }
 
-instance Attr FeComponentTransfer_ Clip String where
-  attr Clip value = unsafeAttribute { key: "clip", value: prop' value }
+instance Attr Tags.FeColorMatrix_ Clip String where
+  pureAttr Clip value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "clip", value }
 
-instance Attr FeComposite_ Clip String where
-  attr Clip value = unsafeAttribute { key: "clip", value: prop' value }
+  mapAttr Clip evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "clip", value: prop' value }
 
-instance Attr FeConvolveMatrix_ Clip String where
-  attr Clip value = unsafeAttribute { key: "clip", value: prop' value }
+instance Attr Tags.FeComponentTransfer_ Clip String where
+  pureAttr Clip value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "clip", value }
 
-instance Attr FeDiffuseLighting_ Clip String where
-  attr Clip value = unsafeAttribute { key: "clip", value: prop' value }
+  mapAttr Clip evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "clip", value: prop' value }
 
-instance Attr FeDisplacementMap_ Clip String where
-  attr Clip value = unsafeAttribute { key: "clip", value: prop' value }
+instance Attr Tags.FeComposite_ Clip String where
+  pureAttr Clip value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "clip", value }
 
-instance Attr FeFlood_ Clip String where
-  attr Clip value = unsafeAttribute { key: "clip", value: prop' value }
+  mapAttr Clip evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "clip", value: prop' value }
 
-instance Attr FeGaussianBlur_ Clip String where
-  attr Clip value = unsafeAttribute { key: "clip", value: prop' value }
+instance Attr Tags.FeConvolveMatrix_ Clip String where
+  pureAttr Clip value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "clip", value }
 
-instance Attr FeImage_ Clip String where
-  attr Clip value = unsafeAttribute { key: "clip", value: prop' value }
+  mapAttr Clip evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "clip", value: prop' value }
 
-instance Attr FeMerge_ Clip String where
-  attr Clip value = unsafeAttribute { key: "clip", value: prop' value }
+instance Attr Tags.FeDiffuseLighting_ Clip String where
+  pureAttr Clip value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "clip", value }
 
-instance Attr FeMorphology_ Clip String where
-  attr Clip value = unsafeAttribute { key: "clip", value: prop' value }
+  mapAttr Clip evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "clip", value: prop' value }
 
-instance Attr FeOffset_ Clip String where
-  attr Clip value = unsafeAttribute { key: "clip", value: prop' value }
+instance Attr Tags.FeDisplacementMap_ Clip String where
+  pureAttr Clip value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "clip", value }
 
-instance Attr FeSpecularLighting_ Clip String where
-  attr Clip value = unsafeAttribute { key: "clip", value: prop' value }
+  mapAttr Clip evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "clip", value: prop' value }
 
-instance Attr FeTile_ Clip String where
-  attr Clip value = unsafeAttribute { key: "clip", value: prop' value }
+instance Attr Tags.FeFlood_ Clip String where
+  pureAttr Clip value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "clip", value }
 
-instance Attr FeTurbulence_ Clip String where
-  attr Clip value = unsafeAttribute { key: "clip", value: prop' value }
+  mapAttr Clip evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "clip", value: prop' value }
 
-instance Attr Filter_ Clip String where
-  attr Clip value = unsafeAttribute { key: "clip", value: prop' value }
+instance Attr Tags.FeGaussianBlur_ Clip String where
+  pureAttr Clip value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "clip", value }
 
-instance Attr Image_ Clip String where
-  attr Clip value = unsafeAttribute { key: "clip", value: prop' value }
+  mapAttr Clip evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "clip", value: prop' value }
 
-instance Attr Switch_ Clip String where
-  attr Clip value = unsafeAttribute { key: "clip", value: prop' value }
+instance Attr Tags.FeImage_ Clip String where
+  pureAttr Clip value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "clip", value }
+
+  mapAttr Clip evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "clip", value: prop' value }
+
+instance Attr Tags.FeMerge_ Clip String where
+  pureAttr Clip value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "clip", value }
+
+  mapAttr Clip evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "clip", value: prop' value }
+
+instance Attr Tags.FeMorphology_ Clip String where
+  pureAttr Clip value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "clip", value }
+
+  mapAttr Clip evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "clip", value: prop' value }
+
+instance Attr Tags.FeOffset_ Clip String where
+  pureAttr Clip value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "clip", value }
+
+  mapAttr Clip evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "clip", value: prop' value }
+
+instance Attr Tags.FeSpecularLighting_ Clip String where
+  pureAttr Clip value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "clip", value }
+
+  mapAttr Clip evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "clip", value: prop' value }
+
+instance Attr Tags.FeTile_ Clip String where
+  pureAttr Clip value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "clip", value }
+
+  mapAttr Clip evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "clip", value: prop' value }
+
+instance Attr Tags.FeTurbulence_ Clip String where
+  pureAttr Clip value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "clip", value }
+
+  mapAttr Clip evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "clip", value: prop' value }
+
+instance Attr Tags.Filter_ Clip String where
+  pureAttr Clip value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "clip", value }
+
+  mapAttr Clip evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "clip", value: prop' value }
+
+instance Attr Tags.Image_ Clip String where
+  pureAttr Clip value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "clip", value }
+
+  mapAttr Clip evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "clip", value: prop' value }
+
+instance Attr Tags.Switch_ Clip String where
+  pureAttr Clip value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "clip", value }
+
+  mapAttr Clip evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "clip", value: prop' value }
 
 instance Attr everything Clip Unit where
-  attr Clip _ = unsafeAttribute
+  pureAttr Clip _ = unsafeAttribute $ Right $ pure $ unsafeVolatileAttribute
     { key: "clip", value: unset' }
+  mapAttr Clip evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "clip", value: unset' }

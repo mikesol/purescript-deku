@@ -1,23 +1,37 @@
 module Deku.DOM.Attr.Usemap where
 
 import Prelude
+import Data.Either (Either(..))
 
-import Deku.DOM.Elt.Img (Img_)
-import Deku.DOM.Elt.Input (Input_)
-import Deku.DOM.Elt.Object (Object_)
-import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
+import Deku.Attribute (class Attr, prop', unsafeAttribute, unsafePureAttribute, unsafeVolatileAttribute, unset')
+import Deku.DOM.Tags as Tags
 
 data Usemap = Usemap
 
-instance Attr Img_ Usemap String where
-  attr Usemap value = unsafeAttribute { key: "usemap", value: prop' value }
+instance Attr Tags.Img_ Usemap String where
+  pureAttr Usemap value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "usemap", value }
 
-instance Attr Input_ Usemap String where
-  attr Usemap value = unsafeAttribute { key: "usemap", value: prop' value }
+  mapAttr Usemap evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "usemap", value: prop' value }
 
-instance Attr Object_ Usemap String where
-  attr Usemap value = unsafeAttribute { key: "usemap", value: prop' value }
+instance Attr Tags.Input_ Usemap String where
+  pureAttr Usemap value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "usemap", value }
+
+  mapAttr Usemap evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "usemap", value: prop' value }
+
+instance Attr Tags.Object_ Usemap String where
+  pureAttr Usemap value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "usemap", value }
+
+  mapAttr Usemap evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "usemap", value: prop' value }
 
 instance Attr everything Usemap Unit where
-  attr Usemap _ = unsafeAttribute
+  pureAttr Usemap _ = unsafeAttribute $ Right $ pure $ unsafeVolatileAttribute
     { key: "usemap", value: unset' }
+  mapAttr Usemap evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "usemap", value: unset' }

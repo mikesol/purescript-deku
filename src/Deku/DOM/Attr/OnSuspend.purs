@@ -1,22 +1,33 @@
 module Deku.DOM.Attr.OnSuspend where
 
 import Prelude
+import Data.Either (Either(..))
 import Effect (Effect)
-import Deku.Attribute (class Attr, Attribute, Cb(..), cb', unsafeAttribute, unset')
+import Deku.Attribute (class Attr, Attribute, Cb(..), cb', unsafeAttribute, unsafePureAttribute, unsafeVolatileAttribute, unset')
+import Deku.DOM.Tags as Tags
 import FRP.Event (Event)
 
 data OnSuspend = OnSuspend
 
 instance Attr anything OnSuspend Cb where
-  attr OnSuspend value = unsafeAttribute { key: "suspend", value: cb' value }
+  pureAttr OnSuspend value = unsafeAttribute $ Right $ pure $
+    unsafeVolatileAttribute { key: "suspend", value: cb' value }
+  mapAttr OnSuspend evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "suspend", value: cb' value }
 
 instance Attr anything OnSuspend (Effect Unit) where
-  attr OnSuspend value = unsafeAttribute
-    { key: "suspend", value: cb' (Cb (const (value $> true))) }
+  pureAttr OnSuspend value = unsafeAttribute $ Right $ pure $
+    unsafeVolatileAttribute
+  mapAttr OnSuspend evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "suspend", value: cb' (Cb (const (value $> true))) }
 
 instance Attr anything OnSuspend (Effect Boolean) where
-  attr OnSuspend value = unsafeAttribute
-    { key: "suspend", value: cb' (Cb (const value)) }
+  pureAttr OnSuspend value = unsafeAttribute $ Right $ pure $
+    unsafeVolatileAttribute
+  mapAttr OnSuspend evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "suspend", value: cb' (Cb (const value)) }
 
 type OnSuspendEffect =
   forall element
@@ -24,5 +35,6 @@ type OnSuspendEffect =
   => Event (Attribute element)
 
 instance Attr everything OnSuspend Unit where
-  attr OnSuspend _ = unsafeAttribute
-    { key: "suspend", value: unset' }
+  pureAttr OnSuspend _ = unsafeAttribute $ Right $ pure $
+    unsafeVolatileAttribute
+      { key: "suspend", value: unset' }

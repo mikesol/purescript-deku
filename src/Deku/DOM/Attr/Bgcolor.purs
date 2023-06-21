@@ -1,47 +1,79 @@
 module Deku.DOM.Attr.Bgcolor where
 
 import Prelude
+import Data.Either (Either(..))
 
-import Deku.DOM.Elt.Body (Body_)
-import Deku.DOM.Elt.Col (Col_)
-import Deku.DOM.Elt.Colgroup (Colgroup_)
-import Deku.DOM.Elt.Table (Table_)
-import Deku.DOM.Elt.Tbody (Tbody_)
-import Deku.DOM.Elt.Tfoot (Tfoot_)
-import Deku.DOM.Elt.Td (Td_)
-import Deku.DOM.Elt.Th (Th_)
-import Deku.DOM.Elt.Tr (Tr_)
-import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
+import Deku.Attribute (class Attr, prop', unsafeAttribute, unsafePureAttribute, unsafeVolatileAttribute, unset')
+import Deku.DOM.Tags as Tags
 
 data Bgcolor = Bgcolor
 
-instance Attr Body_ Bgcolor String where
-  attr Bgcolor value = unsafeAttribute { key: "bgcolor", value: prop' value }
+instance Attr Tags.Body_ Bgcolor String where
+  pureAttr Bgcolor value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "bgcolor", value }
 
-instance Attr Col_ Bgcolor String where
-  attr Bgcolor value = unsafeAttribute { key: "bgcolor", value: prop' value }
+  mapAttr Bgcolor evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "bgcolor", value: prop' value }
 
-instance Attr Colgroup_ Bgcolor String where
-  attr Bgcolor value = unsafeAttribute { key: "bgcolor", value: prop' value }
+instance Attr Tags.Col_ Bgcolor String where
+  pureAttr Bgcolor value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "bgcolor", value }
 
-instance Attr Table_ Bgcolor String where
-  attr Bgcolor value = unsafeAttribute { key: "bgcolor", value: prop' value }
+  mapAttr Bgcolor evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "bgcolor", value: prop' value }
 
-instance Attr Tbody_ Bgcolor String where
-  attr Bgcolor value = unsafeAttribute { key: "bgcolor", value: prop' value }
+instance Attr Tags.Colgroup_ Bgcolor String where
+  pureAttr Bgcolor value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "bgcolor", value }
 
-instance Attr Tfoot_ Bgcolor String where
-  attr Bgcolor value = unsafeAttribute { key: "bgcolor", value: prop' value }
+  mapAttr Bgcolor evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "bgcolor", value: prop' value }
 
-instance Attr Td_ Bgcolor String where
-  attr Bgcolor value = unsafeAttribute { key: "bgcolor", value: prop' value }
+instance Attr Tags.Table_ Bgcolor String where
+  pureAttr Bgcolor value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "bgcolor", value }
 
-instance Attr Th_ Bgcolor String where
-  attr Bgcolor value = unsafeAttribute { key: "bgcolor", value: prop' value }
+  mapAttr Bgcolor evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "bgcolor", value: prop' value }
 
-instance Attr Tr_ Bgcolor String where
-  attr Bgcolor value = unsafeAttribute { key: "bgcolor", value: prop' value }
+instance Attr Tags.Tbody_ Bgcolor String where
+  pureAttr Bgcolor value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "bgcolor", value }
+
+  mapAttr Bgcolor evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "bgcolor", value: prop' value }
+
+instance Attr Tags.Tfoot_ Bgcolor String where
+  pureAttr Bgcolor value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "bgcolor", value }
+
+  mapAttr Bgcolor evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "bgcolor", value: prop' value }
+
+instance Attr Tags.Td_ Bgcolor String where
+  pureAttr Bgcolor value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "bgcolor", value }
+
+  mapAttr Bgcolor evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "bgcolor", value: prop' value }
+
+instance Attr Tags.Th_ Bgcolor String where
+  pureAttr Bgcolor value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "bgcolor", value }
+
+  mapAttr Bgcolor evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "bgcolor", value: prop' value }
+
+instance Attr Tags.Tr_ Bgcolor String where
+  pureAttr Bgcolor value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "bgcolor", value }
+
+  mapAttr Bgcolor evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "bgcolor", value: prop' value }
 
 instance Attr everything Bgcolor Unit where
-  attr Bgcolor _ = unsafeAttribute
+  pureAttr Bgcolor _ = unsafeAttribute $ Right $ pure $ unsafeVolatileAttribute
     { key: "bgcolor", value: unset' }
+  mapAttr Bgcolor evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "bgcolor", value: unset' }

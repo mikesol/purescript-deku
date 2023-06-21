@@ -1,22 +1,33 @@
 module Deku.DOM.Attr.OnClick where
 
 import Prelude
+import Data.Either (Either(..))
 import Effect (Effect)
-import Deku.Attribute (class Attr, Attribute, Cb(..), cb', unsafeAttribute, unset')
+import Deku.Attribute (class Attr, Attribute, Cb(..), cb', unsafeAttribute, unsafePureAttribute, unsafeVolatileAttribute, unset')
+import Deku.DOM.Tags as Tags
 import FRP.Event (Event)
 
 data OnClick = OnClick
 
 instance Attr anything OnClick Cb where
-  attr OnClick value = unsafeAttribute { key: "click", value: cb' value }
+  pureAttr OnClick value = unsafeAttribute $ Right $ pure $
+    unsafeVolatileAttribute { key: "click", value: cb' value }
+  mapAttr OnClick evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "click", value: cb' value }
 
 instance Attr anything OnClick (Effect Unit) where
-  attr OnClick value = unsafeAttribute
-    { key: "click", value: cb' (Cb (const (value $> true))) }
+  pureAttr OnClick value = unsafeAttribute $ Right $ pure $
+    unsafeVolatileAttribute
+  mapAttr OnClick evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "click", value: cb' (Cb (const (value $> true))) }
 
 instance Attr anything OnClick (Effect Boolean) where
-  attr OnClick value = unsafeAttribute
-    { key: "click", value: cb' (Cb (const value)) }
+  pureAttr OnClick value = unsafeAttribute $ Right $ pure $
+    unsafeVolatileAttribute
+  mapAttr OnClick evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "click", value: cb' (Cb (const value)) }
 
 type OnClickEffect =
   forall element
@@ -24,5 +35,7 @@ type OnClickEffect =
   => Event (Attribute element)
 
 instance Attr everything OnClick Unit where
-  attr OnClick _ = unsafeAttribute
+  pureAttr OnClick _ = unsafeAttribute $ Right $ pure $ unsafeVolatileAttribute
+    { key: "click", value: unset' }
+  mapAttr OnClick evalue = unsafeAttribute $ Right $ evalue <#> \value -> unsafeVolatileAttribute
     { key: "click", value: unset' }

@@ -1,31 +1,45 @@
 module Deku.DOM.Attr.AttributeName where
 
 import Prelude
+import Data.Either (Either(..))
 
-import Deku.DOM.Elt.Set (Set_)
-import Deku.DOM.Elt.AnimateTransform (AnimateTransform_)
-import Deku.DOM.Elt.AnimateMotion (AnimateMotion_)
-import Deku.DOM.Elt.Animate (Animate_)
-import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
+import Deku.Attribute (class Attr, prop', unsafeAttribute, unsafePureAttribute, unsafeVolatileAttribute, unset')
+import Deku.DOM.Tags as Tags
 
 data AttributeName = AttributeName
 
-instance Attr Animate_ AttributeName String where
-  attr AttributeName value = unsafeAttribute
-    { key: "attributeName", value: prop' value }
+instance Attr Tags.Animate_ AttributeName String where
+  pureAttr AttributeName value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "attributeName", value }
+  mapAttr AttributeName evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "attributeName", value: prop' value }
 
-instance Attr AnimateMotion_ AttributeName String where
-  attr AttributeName value = unsafeAttribute
-    { key: "attributeName", value: prop' value }
+instance Attr Tags.AnimateMotion_ AttributeName String where
+  pureAttr AttributeName value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "attributeName", value }
+  mapAttr AttributeName evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "attributeName", value: prop' value }
 
-instance Attr AnimateTransform_ AttributeName String where
-  attr AttributeName value = unsafeAttribute
-    { key: "attributeName", value: prop' value }
+instance Attr Tags.AnimateTransform_ AttributeName String where
+  pureAttr AttributeName value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "attributeName", value }
+  mapAttr AttributeName evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "attributeName", value: prop' value }
 
-instance Attr Set_ AttributeName String where
-  attr AttributeName value = unsafeAttribute
-    { key: "attributeName", value: prop' value }
+instance Attr Tags.Set_ AttributeName String where
+  pureAttr AttributeName value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "attributeName", value }
+  mapAttr AttributeName evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "attributeName", value: prop' value }
 
 instance Attr everything AttributeName Unit where
-  attr AttributeName _ = unsafeAttribute
-    { key: "attributeName", value: unset' }
+  pureAttr AttributeName _ = unsafeAttribute $ Right $ pure $
+    unsafeVolatileAttribute
+      { key: "attributeName", value: unset' }
+  mapAttr AttributeName evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "attributeName", value: unset' }

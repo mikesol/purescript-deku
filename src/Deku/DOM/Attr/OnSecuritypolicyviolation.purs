@@ -1,23 +1,36 @@
 module Deku.DOM.Attr.OnSecuritypolicyviolation where
 
 import Prelude
+import Data.Either (Either(..))
 import Effect (Effect)
-import Deku.Attribute (class Attr, Attribute, Cb(..), cb', unsafeAttribute, unset')
+import Deku.Attribute (class Attr, Attribute, Cb(..), cb', unsafeAttribute, unsafePureAttribute, unsafeVolatileAttribute, unset')
+import Deku.DOM.Tags as Tags
 import FRP.Event (Event)
 
 data OnSecuritypolicyviolation = OnSecuritypolicyviolation
 
 instance Attr anything OnSecuritypolicyviolation Cb where
-  attr OnSecuritypolicyviolation value = unsafeAttribute
-    { key: "securitypolicyviolation", value: cb' value }
+  pureAttr OnSecuritypolicyviolation value = unsafeAttribute $ Right $ pure $
+    unsafeVolatileAttribute
+  mapAttr OnSecuritypolicyviolation evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "securitypolicyviolation", value: cb' value }
 
 instance Attr anything OnSecuritypolicyviolation (Effect Unit) where
-  attr OnSecuritypolicyviolation value = unsafeAttribute
-    { key: "securitypolicyviolation", value: cb' (Cb (const (value $> true))) }
+  pureAttr OnSecuritypolicyviolation value = unsafeAttribute $ Right $ pure $
+    unsafeVolatileAttribute
+  mapAttr OnSecuritypolicyviolation evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "securitypolicyviolation"
+      , value: cb' (Cb (const (value $> true)))
+      }
 
 instance Attr anything OnSecuritypolicyviolation (Effect Boolean) where
-  attr OnSecuritypolicyviolation value = unsafeAttribute
-    { key: "securitypolicyviolation", value: cb' (Cb (const value)) }
+  pureAttr OnSecuritypolicyviolation value = unsafeAttribute $ Right $ pure $
+    unsafeVolatileAttribute
+  mapAttr OnSecuritypolicyviolation evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "securitypolicyviolation", value: cb' (Cb (const value)) }
 
 type OnSecuritypolicyviolationEffect =
   forall element
@@ -25,5 +38,6 @@ type OnSecuritypolicyviolationEffect =
   => Event (Attribute element)
 
 instance Attr everything OnSecuritypolicyviolation Unit where
-  attr OnSecuritypolicyviolation _ = unsafeAttribute
-    { key: "securitypolicyviolation", value: unset' }
+  pureAttr OnSecuritypolicyviolation _ = unsafeAttribute $ Right $ pure $
+    unsafeVolatileAttribute
+      { key: "securitypolicyviolation", value: unset' }

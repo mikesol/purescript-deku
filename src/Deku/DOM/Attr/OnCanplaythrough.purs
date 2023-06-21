@@ -1,23 +1,34 @@
 module Deku.DOM.Attr.OnCanplaythrough where
 
 import Prelude
+import Data.Either (Either(..))
 import Effect (Effect)
-import Deku.Attribute (class Attr, Attribute, Cb(..), cb', unsafeAttribute, unset')
+import Deku.Attribute (class Attr, Attribute, Cb(..), cb', unsafeAttribute, unsafePureAttribute, unsafeVolatileAttribute, unset')
+import Deku.DOM.Tags as Tags
 import FRP.Event (Event)
 
 data OnCanplaythrough = OnCanplaythrough
 
 instance Attr anything OnCanplaythrough Cb where
-  attr OnCanplaythrough value = unsafeAttribute
-    { key: "canplaythrough", value: cb' value }
+  pureAttr OnCanplaythrough value = unsafeAttribute $ Right $ pure $
+    unsafeVolatileAttribute
+  mapAttr OnCanplaythrough evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "canplaythrough", value: cb' value }
 
 instance Attr anything OnCanplaythrough (Effect Unit) where
-  attr OnCanplaythrough value = unsafeAttribute
-    { key: "canplaythrough", value: cb' (Cb (const (value $> true))) }
+  pureAttr OnCanplaythrough value = unsafeAttribute $ Right $ pure $
+    unsafeVolatileAttribute
+  mapAttr OnCanplaythrough evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "canplaythrough", value: cb' (Cb (const (value $> true))) }
 
 instance Attr anything OnCanplaythrough (Effect Boolean) where
-  attr OnCanplaythrough value = unsafeAttribute
-    { key: "canplaythrough", value: cb' (Cb (const value)) }
+  pureAttr OnCanplaythrough value = unsafeAttribute $ Right $ pure $
+    unsafeVolatileAttribute
+  mapAttr OnCanplaythrough evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "canplaythrough", value: cb' (Cb (const value)) }
 
 type OnCanplaythroughEffect =
   forall element
@@ -25,5 +36,6 @@ type OnCanplaythroughEffect =
   => Event (Attribute element)
 
 instance Attr everything OnCanplaythrough Unit where
-  attr OnCanplaythrough _ = unsafeAttribute
-    { key: "canplaythrough", value: unset' }
+  pureAttr OnCanplaythrough _ = unsafeAttribute $ Right $ pure $
+    unsafeVolatileAttribute
+      { key: "canplaythrough", value: unset' }

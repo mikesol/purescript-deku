@@ -1,15 +1,23 @@
 module Deku.DOM.Attr.K2 where
 
 import Prelude
+import Data.Either (Either(..))
 
-import Deku.DOM.Elt.FeComposite (FeComposite_)
-import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
+import Deku.Attribute (class Attr, prop', unsafeAttribute, unsafePureAttribute, unsafeVolatileAttribute, unset')
+import Deku.DOM.Tags as Tags
 
 data K2 = K2
 
-instance Attr FeComposite_ K2 String where
-  attr K2 value = unsafeAttribute { key: "k2", value: prop' value }
+instance Attr Tags.FeComposite_ K2 String where
+  pureAttr K2 value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "k2", value }
+
+  mapAttr K2 evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "k2", value: prop' value }
 
 instance Attr everything K2 Unit where
-  attr K2 _ = unsafeAttribute
+  pureAttr K2 _ = unsafeAttribute $ Right $ pure $ unsafeVolatileAttribute
     { key: "k2", value: unset' }
+  mapAttr K2 evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "k2", value: unset' }

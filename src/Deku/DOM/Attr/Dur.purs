@@ -1,27 +1,44 @@
 module Deku.DOM.Attr.Dur where
 
 import Prelude
+import Data.Either (Either(..))
 
-import Deku.DOM.Elt.Set (Set_)
-import Deku.DOM.Elt.AnimateTransform (AnimateTransform_)
-import Deku.DOM.Elt.AnimateMotion (AnimateMotion_)
-import Deku.DOM.Elt.Animate (Animate_)
-import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
+import Deku.Attribute (class Attr, prop', unsafeAttribute, unsafePureAttribute, unsafeVolatileAttribute, unset')
+import Deku.DOM.Tags as Tags
 
 data Dur = Dur
 
-instance Attr Animate_ Dur String where
-  attr Dur value = unsafeAttribute { key: "dur", value: prop' value }
+instance Attr Tags.Animate_ Dur String where
+  pureAttr Dur value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "dur", value }
 
-instance Attr AnimateMotion_ Dur String where
-  attr Dur value = unsafeAttribute { key: "dur", value: prop' value }
+  mapAttr Dur evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "dur", value: prop' value }
 
-instance Attr AnimateTransform_ Dur String where
-  attr Dur value = unsafeAttribute { key: "dur", value: prop' value }
+instance Attr Tags.AnimateMotion_ Dur String where
+  pureAttr Dur value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "dur", value }
 
-instance Attr Set_ Dur String where
-  attr Dur value = unsafeAttribute { key: "dur", value: prop' value }
+  mapAttr Dur evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "dur", value: prop' value }
+
+instance Attr Tags.AnimateTransform_ Dur String where
+  pureAttr Dur value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "dur", value }
+
+  mapAttr Dur evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "dur", value: prop' value }
+
+instance Attr Tags.Set_ Dur String where
+  pureAttr Dur value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "dur", value }
+
+  mapAttr Dur evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "dur", value: prop' value }
 
 instance Attr everything Dur Unit where
-  attr Dur _ = unsafeAttribute
+  pureAttr Dur _ = unsafeAttribute $ Right $ pure $ unsafeVolatileAttribute
     { key: "dur", value: unset' }
+  mapAttr Dur evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "dur", value: unset' }

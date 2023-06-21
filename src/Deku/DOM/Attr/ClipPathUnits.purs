@@ -1,16 +1,24 @@
 module Deku.DOM.Attr.ClipPathUnits where
 
 import Prelude
+import Data.Either (Either(..))
 
-import Deku.DOM.Elt.ClipPath (ClipPath_)
-import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
+import Deku.Attribute (class Attr, prop', unsafeAttribute, unsafePureAttribute, unsafeVolatileAttribute, unset')
+import Deku.DOM.Tags as Tags
 
 data ClipPathUnits = ClipPathUnits
 
-instance Attr ClipPath_ ClipPathUnits String where
-  attr ClipPathUnits value = unsafeAttribute
-    { key: "clipPathUnits", value: prop' value }
+instance Attr Tags.ClipPath_ ClipPathUnits String where
+  pureAttr ClipPathUnits value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "clipPathUnits", value }
+  mapAttr ClipPathUnits evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "clipPathUnits", value: prop' value }
 
 instance Attr everything ClipPathUnits Unit where
-  attr ClipPathUnits _ = unsafeAttribute
-    { key: "clipPathUnits", value: unset' }
+  pureAttr ClipPathUnits _ = unsafeAttribute $ Right $ pure $
+    unsafeVolatileAttribute
+      { key: "clipPathUnits", value: unset' }
+  mapAttr ClipPathUnits evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "clipPathUnits", value: unset' }

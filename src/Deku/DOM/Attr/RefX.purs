@@ -1,19 +1,30 @@
 module Deku.DOM.Attr.RefX where
 
 import Prelude
+import Data.Either (Either(..))
 
-import Deku.DOM.Elt.Symbol (Symbol_)
-import Deku.DOM.Elt.Marker (Marker_)
-import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
+import Deku.Attribute (class Attr, prop', unsafeAttribute, unsafePureAttribute, unsafeVolatileAttribute, unset')
+import Deku.DOM.Tags as Tags
 
 data RefX = RefX
 
-instance Attr Marker_ RefX String where
-  attr RefX value = unsafeAttribute { key: "refX", value: prop' value }
+instance Attr Tags.Marker_ RefX String where
+  pureAttr RefX value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "refX", value }
 
-instance Attr Symbol_ RefX String where
-  attr RefX value = unsafeAttribute { key: "refX", value: prop' value }
+  mapAttr RefX evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "refX", value: prop' value }
+
+instance Attr Tags.Symbol_ RefX String where
+  pureAttr RefX value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "refX", value }
+
+  mapAttr RefX evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "refX", value: prop' value }
 
 instance Attr everything RefX Unit where
-  attr RefX _ = unsafeAttribute
+  pureAttr RefX _ = unsafeAttribute $ Right $ pure $ unsafeVolatileAttribute
     { key: "refX", value: unset' }
+  mapAttr RefX evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "refX", value: unset' }

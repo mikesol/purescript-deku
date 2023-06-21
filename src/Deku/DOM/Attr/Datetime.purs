@@ -1,23 +1,37 @@
 module Deku.DOM.Attr.Datetime where
 
 import Prelude
+import Data.Either (Either(..))
 
-import Deku.DOM.Elt.Del (Del_)
-import Deku.DOM.Elt.Ins (Ins_)
-import Deku.DOM.Elt.Time (Time_)
-import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
+import Deku.Attribute (class Attr, prop', unsafeAttribute, unsafePureAttribute, unsafeVolatileAttribute, unset')
+import Deku.DOM.Tags as Tags
 
 data Datetime = Datetime
 
-instance Attr Del_ Datetime String where
-  attr Datetime value = unsafeAttribute { key: "datetime", value: prop' value }
+instance Attr Tags.Del_ Datetime String where
+  pureAttr Datetime value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "datetime", value }
 
-instance Attr Ins_ Datetime String where
-  attr Datetime value = unsafeAttribute { key: "datetime", value: prop' value }
+  mapAttr Datetime evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "datetime", value: prop' value }
 
-instance Attr Time_ Datetime String where
-  attr Datetime value = unsafeAttribute { key: "datetime", value: prop' value }
+instance Attr Tags.Ins_ Datetime String where
+  pureAttr Datetime value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "datetime", value }
+
+  mapAttr Datetime evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "datetime", value: prop' value }
+
+instance Attr Tags.Time_ Datetime String where
+  pureAttr Datetime value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "datetime", value }
+
+  mapAttr Datetime evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "datetime", value: prop' value }
 
 instance Attr everything Datetime Unit where
-  attr Datetime _ = unsafeAttribute
+  pureAttr Datetime _ = unsafeAttribute $ Right $ pure $ unsafeVolatileAttribute
     { key: "datetime", value: unset' }
+  mapAttr Datetime evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "datetime", value: unset' }

@@ -1,19 +1,30 @@
 module Deku.DOM.Attr.Method where
 
 import Prelude
+import Data.Either (Either(..))
 
-import Deku.DOM.Elt.TextPath (TextPath_)
-import Deku.DOM.Elt.Form (Form_)
-import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
+import Deku.Attribute (class Attr, prop', unsafeAttribute, unsafePureAttribute, unsafeVolatileAttribute, unset')
+import Deku.DOM.Tags as Tags
 
 data Method = Method
 
-instance Attr Form_ Method String where
-  attr Method value = unsafeAttribute { key: "method", value: prop' value }
+instance Attr Tags.Form_ Method String where
+  pureAttr Method value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "method", value }
 
-instance Attr TextPath_ Method String where
-  attr Method value = unsafeAttribute { key: "method", value: prop' value }
+  mapAttr Method evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "method", value: prop' value }
+
+instance Attr Tags.TextPath_ Method String where
+  pureAttr Method value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "method", value }
+
+  mapAttr Method evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "method", value: prop' value }
 
 instance Attr everything Method Unit where
-  attr Method _ = unsafeAttribute
+  pureAttr Method _ = unsafeAttribute $ Right $ pure $ unsafeVolatileAttribute
     { key: "method", value: unset' }
+  mapAttr Method evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "method", value: unset' }

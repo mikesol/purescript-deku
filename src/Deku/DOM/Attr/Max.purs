@@ -1,39 +1,65 @@
 module Deku.DOM.Attr.Max where
 
 import Prelude
+import Data.Either (Either(..))
 
-import Deku.DOM.Elt.Set (Set_)
-import Deku.DOM.Elt.AnimateTransform (AnimateTransform_)
-import Deku.DOM.Elt.AnimateMotion (AnimateMotion_)
-import Deku.DOM.Elt.Animate (Animate_)
-import Deku.DOM.Elt.Input (Input_)
-import Deku.DOM.Elt.Meter (Meter_)
-import Deku.DOM.Elt.Progress (Progress_)
-import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
+import Deku.Attribute (class Attr, prop', unsafeAttribute, unsafePureAttribute, unsafeVolatileAttribute, unset')
+import Deku.DOM.Tags as Tags
 
 data Max = Max
 
-instance Attr Input_ Max String where
-  attr Max value = unsafeAttribute { key: "max", value: prop' value }
+instance Attr Tags.Input_ Max String where
+  pureAttr Max value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "max", value }
 
-instance Attr Meter_ Max String where
-  attr Max value = unsafeAttribute { key: "max", value: prop' value }
+  mapAttr Max evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "max", value: prop' value }
 
-instance Attr Progress_ Max String where
-  attr Max value = unsafeAttribute { key: "max", value: prop' value }
+instance Attr Tags.Meter_ Max String where
+  pureAttr Max value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "max", value }
 
-instance Attr Animate_ Max String where
-  attr Max value = unsafeAttribute { key: "max", value: prop' value }
+  mapAttr Max evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "max", value: prop' value }
 
-instance Attr AnimateMotion_ Max String where
-  attr Max value = unsafeAttribute { key: "max", value: prop' value }
+instance Attr Tags.Progress_ Max String where
+  pureAttr Max value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "max", value }
 
-instance Attr AnimateTransform_ Max String where
-  attr Max value = unsafeAttribute { key: "max", value: prop' value }
+  mapAttr Max evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "max", value: prop' value }
 
-instance Attr Set_ Max String where
-  attr Max value = unsafeAttribute { key: "max", value: prop' value }
+instance Attr Tags.Animate_ Max String where
+  pureAttr Max value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "max", value }
+
+  mapAttr Max evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "max", value: prop' value }
+
+instance Attr Tags.AnimateMotion_ Max String where
+  pureAttr Max value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "max", value }
+
+  mapAttr Max evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "max", value: prop' value }
+
+instance Attr Tags.AnimateTransform_ Max String where
+  pureAttr Max value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "max", value }
+
+  mapAttr Max evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "max", value: prop' value }
+
+instance Attr Tags.Set_ Max String where
+  pureAttr Max value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "max", value }
+
+  mapAttr Max evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "max", value: prop' value }
 
 instance Attr everything Max Unit where
-  attr Max _ = unsafeAttribute
+  pureAttr Max _ = unsafeAttribute $ Right $ pure $ unsafeVolatileAttribute
     { key: "max", value: unset' }
+  mapAttr Max evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "max", value: unset' }

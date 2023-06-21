@@ -1,23 +1,37 @@
 module Deku.DOM.Attr.Cx where
 
 import Prelude
+import Data.Either (Either(..))
 
-import Deku.DOM.Elt.RadialGradient (RadialGradient_)
-import Deku.DOM.Elt.Ellipse (Ellipse_)
-import Deku.DOM.Elt.Circle (Circle_)
-import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
+import Deku.Attribute (class Attr, prop', unsafeAttribute, unsafePureAttribute, unsafeVolatileAttribute, unset')
+import Deku.DOM.Tags as Tags
 
 data Cx = Cx
 
-instance Attr Circle_ Cx String where
-  attr Cx value = unsafeAttribute { key: "cx", value: prop' value }
+instance Attr Tags.Circle_ Cx String where
+  pureAttr Cx value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "cx", value }
 
-instance Attr Ellipse_ Cx String where
-  attr Cx value = unsafeAttribute { key: "cx", value: prop' value }
+  mapAttr Cx evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "cx", value: prop' value }
 
-instance Attr RadialGradient_ Cx String where
-  attr Cx value = unsafeAttribute { key: "cx", value: prop' value }
+instance Attr Tags.Ellipse_ Cx String where
+  pureAttr Cx value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "cx", value }
+
+  mapAttr Cx evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "cx", value: prop' value }
+
+instance Attr Tags.RadialGradient_ Cx String where
+  pureAttr Cx value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "cx", value }
+
+  mapAttr Cx evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "cx", value: prop' value }
 
 instance Attr everything Cx Unit where
-  attr Cx _ = unsafeAttribute
+  pureAttr Cx _ = unsafeAttribute $ Right $ pure $ unsafeVolatileAttribute
     { key: "cx", value: unset' }
+  mapAttr Cx evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "cx", value: unset' }

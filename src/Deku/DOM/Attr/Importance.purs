@@ -1,31 +1,45 @@
 module Deku.DOM.Attr.Importance where
 
 import Prelude
+import Data.Either (Either(..))
 
-import Deku.DOM.Elt.Iframe (Iframe_)
-import Deku.DOM.Elt.Img (Img_)
-import Deku.DOM.Elt.Link (Link_)
-import Deku.DOM.Elt.Script (Script_)
-import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
+import Deku.Attribute (class Attr, prop', unsafeAttribute, unsafePureAttribute, unsafeVolatileAttribute, unset')
+import Deku.DOM.Tags as Tags
 
 data Importance = Importance
 
-instance Attr Iframe_ Importance String where
-  attr Importance value = unsafeAttribute
-    { key: "importance", value: prop' value }
+instance Attr Tags.Iframe_ Importance String where
+  pureAttr Importance value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "importance", value }
+  mapAttr Importance evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "importance", value: prop' value }
 
-instance Attr Img_ Importance String where
-  attr Importance value = unsafeAttribute
-    { key: "importance", value: prop' value }
+instance Attr Tags.Img_ Importance String where
+  pureAttr Importance value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "importance", value }
+  mapAttr Importance evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "importance", value: prop' value }
 
-instance Attr Link_ Importance String where
-  attr Importance value = unsafeAttribute
-    { key: "importance", value: prop' value }
+instance Attr Tags.Link_ Importance String where
+  pureAttr Importance value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "importance", value }
+  mapAttr Importance evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "importance", value: prop' value }
 
-instance Attr Script_ Importance String where
-  attr Importance value = unsafeAttribute
-    { key: "importance", value: prop' value }
+instance Attr Tags.Script_ Importance String where
+  pureAttr Importance value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "importance", value }
+  mapAttr Importance evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "importance", value: prop' value }
 
 instance Attr everything Importance Unit where
-  attr Importance _ = unsafeAttribute
-    { key: "importance", value: unset' }
+  pureAttr Importance _ = unsafeAttribute $ Right $ pure $
+    unsafeVolatileAttribute
+      { key: "importance", value: unset' }
+  mapAttr Importance evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "importance", value: unset' }

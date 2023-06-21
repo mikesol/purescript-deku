@@ -1,16 +1,25 @@
 module Deku.DOM.Attr.PatternContentUnits where
 
 import Prelude
+import Data.Either (Either(..))
 
-import Deku.DOM.Elt.Pattern (Pattern_)
-import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
+import Deku.Attribute (class Attr, prop', unsafeAttribute, unsafePureAttribute, unsafeVolatileAttribute, unset')
+import Deku.DOM.Tags as Tags
 
 data PatternContentUnits = PatternContentUnits
 
-instance Attr Pattern_ PatternContentUnits String where
-  attr PatternContentUnits value = unsafeAttribute
-    { key: "patternContentUnits", value: prop' value }
+instance Attr Tags.Pattern_ PatternContentUnits String where
+  pureAttr PatternContentUnits value = unsafeAttribute $ Left $
+    unsafePureAttribute
+      { key: "patternContentUnits", value }
+  mapAttr PatternContentUnits evalue = unsafeAttribute $ Right $ evalue <#>
+    \value -> unsafeVolatileAttribute
+      { key: "patternContentUnits", value: prop' value }
 
 instance Attr everything PatternContentUnits Unit where
-  attr PatternContentUnits _ = unsafeAttribute
-    { key: "patternContentUnits", value: unset' }
+  pureAttr PatternContentUnits _ = unsafeAttribute $ Right $ pure $
+    unsafeVolatileAttribute
+      { key: "patternContentUnits", value: unset' }
+  mapAttr PatternContentUnits evalue = unsafeAttribute $ Right $ evalue <#>
+    \_ -> unsafeVolatileAttribute
+      { key: "patternContentUnits", value: unset' }

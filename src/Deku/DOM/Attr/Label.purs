@@ -1,23 +1,37 @@
 module Deku.DOM.Attr.Label where
 
 import Prelude
+import Data.Either (Either(..))
 
-import Deku.DOM.Elt.Optgroup (Optgroup_)
-import Deku.DOM.Elt.Option (Option_)
-import Deku.DOM.Elt.Track (Track_)
-import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
+import Deku.Attribute (class Attr, prop', unsafeAttribute, unsafePureAttribute, unsafeVolatileAttribute, unset')
+import Deku.DOM.Tags as Tags
 
 data Label = Label
 
-instance Attr Optgroup_ Label String where
-  attr Label value = unsafeAttribute { key: "label", value: prop' value }
+instance Attr Tags.Optgroup_ Label String where
+  pureAttr Label value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "label", value }
 
-instance Attr Option_ Label String where
-  attr Label value = unsafeAttribute { key: "label", value: prop' value }
+  mapAttr Label evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "label", value: prop' value }
 
-instance Attr Track_ Label String where
-  attr Label value = unsafeAttribute { key: "label", value: prop' value }
+instance Attr Tags.Option_ Label String where
+  pureAttr Label value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "label", value }
+
+  mapAttr Label evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "label", value: prop' value }
+
+instance Attr Tags.Track_ Label String where
+  pureAttr Label value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "label", value }
+
+  mapAttr Label evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "label", value: prop' value }
 
 instance Attr everything Label Unit where
-  attr Label _ = unsafeAttribute
+  pureAttr Label _ = unsafeAttribute $ Right $ pure $ unsafeVolatileAttribute
     { key: "label", value: unset' }
+  mapAttr Label evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "label", value: unset' }

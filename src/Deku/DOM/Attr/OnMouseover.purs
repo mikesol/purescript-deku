@@ -1,23 +1,34 @@
 module Deku.DOM.Attr.OnMouseover where
 
 import Prelude
+import Data.Either (Either(..))
 import Effect (Effect)
-import Deku.Attribute (class Attr, Attribute, Cb(..), cb', unsafeAttribute, unset')
+import Deku.Attribute (class Attr, Attribute, Cb(..), cb', unsafeAttribute, unsafePureAttribute, unsafeVolatileAttribute, unset')
+import Deku.DOM.Tags as Tags
 import FRP.Event (Event)
 
 data OnMouseover = OnMouseover
 
 instance Attr anything OnMouseover Cb where
-  attr OnMouseover value = unsafeAttribute
-    { key: "mouseover", value: cb' value }
+  pureAttr OnMouseover value = unsafeAttribute $ Right $ pure $
+    unsafeVolatileAttribute
+  mapAttr OnMouseover evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "mouseover", value: cb' value }
 
 instance Attr anything OnMouseover (Effect Unit) where
-  attr OnMouseover value = unsafeAttribute
-    { key: "mouseover", value: cb' (Cb (const (value $> true))) }
+  pureAttr OnMouseover value = unsafeAttribute $ Right $ pure $
+    unsafeVolatileAttribute
+  mapAttr OnMouseover evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "mouseover", value: cb' (Cb (const (value $> true))) }
 
 instance Attr anything OnMouseover (Effect Boolean) where
-  attr OnMouseover value = unsafeAttribute
-    { key: "mouseover", value: cb' (Cb (const value)) }
+  pureAttr OnMouseover value = unsafeAttribute $ Right $ pure $
+    unsafeVolatileAttribute
+  mapAttr OnMouseover evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "mouseover", value: cb' (Cb (const value)) }
 
 type OnMouseoverEffect =
   forall element
@@ -25,5 +36,6 @@ type OnMouseoverEffect =
   => Event (Attribute element)
 
 instance Attr everything OnMouseover Unit where
-  attr OnMouseover _ = unsafeAttribute
-    { key: "mouseover", value: unset' }
+  pureAttr OnMouseover _ = unsafeAttribute $ Right $ pure $
+    unsafeVolatileAttribute
+      { key: "mouseover", value: unset' }

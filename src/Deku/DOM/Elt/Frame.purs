@@ -4,12 +4,11 @@ import Control.Plus (empty)
 import Deku.Attribute (Attribute)
 import Deku.Control as DC
 import Deku.Core (Nut)
-import FRP.Event (Event)
 
 import Deku.DOM.Tags as Tags
 
 frame
-  :: Array (Event (Attribute Tags.Frame_))
+  :: Array (Attribute Tags.Frame_)
   -> Array Nut
   -> Nut
 frame = DC.elementify3 "frame"

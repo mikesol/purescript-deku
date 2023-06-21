@@ -1,16 +1,24 @@
 module Deku.DOM.Attr.MarkerWidth where
 
 import Prelude
+import Data.Either (Either(..))
 
-import Deku.DOM.Elt.Marker (Marker_)
-import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
+import Deku.Attribute (class Attr, prop', unsafeAttribute, unsafePureAttribute, unsafeVolatileAttribute, unset')
+import Deku.DOM.Tags as Tags
 
 data MarkerWidth = MarkerWidth
 
-instance Attr Marker_ MarkerWidth String where
-  attr MarkerWidth value = unsafeAttribute
-    { key: "markerWidth", value: prop' value }
+instance Attr Tags.Marker_ MarkerWidth String where
+  pureAttr MarkerWidth value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "markerWidth", value }
+  mapAttr MarkerWidth evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "markerWidth", value: prop' value }
 
 instance Attr everything MarkerWidth Unit where
-  attr MarkerWidth _ = unsafeAttribute
-    { key: "markerWidth", value: unset' }
+  pureAttr MarkerWidth _ = unsafeAttribute $ Right $ pure $
+    unsafeVolatileAttribute
+      { key: "markerWidth", value: unset' }
+  mapAttr MarkerWidth evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "markerWidth", value: unset' }

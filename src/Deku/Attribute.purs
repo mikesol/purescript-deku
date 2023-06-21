@@ -6,11 +6,11 @@ module Deku.Attribute
   ( AttributeValue(..)
   , VolatileAttribute
   , UnsafeAttribute
-  , Attribute(..)
-  , PureAttribute(..)
+  , Attribute
+  , PureAttribute
   , class Attr
-  , biAttr
-  , (<**>)
+  , unsafeUnVolatileAttribute
+  , unsafeVolatileAttribute
   , unsafeUnAttribute
   , unsafeAttribute
   , unsafeUnPureAttribute
@@ -91,7 +91,7 @@ newtype Attribute (e :: Type) = Attribute UnsafeAttribute
 
 type UnsafeAttribute = Either PureAttribute (FRP.Event VolatileAttribute)
 
-newtype VolatileAttribute= VolatileAttribute
+newtype VolatileAttribute = VolatileAttribute
   { key :: String
   , value :: AttributeValue
   }
@@ -100,14 +100,22 @@ newtype PureAttribute = PureAttribute
   { key :: String, value :: String }
 
 -- | For internal use only, exported to be used by other modules. Ignore this.
-unsafeUnAttribute
+unsafeUnVolatileAttribute
   :: VolatileAttribute -> { key :: String, value :: AttributeValue }
-unsafeUnAttribute = coerce
+unsafeUnVolatileAttribute = coerce
 
 -- | For internal use only, exported to be used by other modules. Ignore this.
-unsafeAttribute
+unsafeVolatileAttribute
   :: { key :: String, value :: AttributeValue } -> VolatileAttribute
-unsafeAttribute = VolatileAttribute
+unsafeVolatileAttribute = VolatileAttribute
+
+unsafeAttribute
+  :: forall e. UnsafeAttribute -> Attribute e
+unsafeAttribute = Attribute
+
+unsafeUnAttribute
+  :: forall e. Attribute e -> UnsafeAttribute
+unsafeUnAttribute = coerce
 
 unsafeUnPureAttribute
   :: PureAttribute -> { key :: String, value :: String }
@@ -128,18 +136,16 @@ class Attr e a b where
   -- | A version of `attr` that creates a `pure` event fired immediately
   -- | upon the element's creation. More commonly used in its alias `!:=`,
   pureAttr :: a -> b -> Attribute e
-  -- | A function, almost never used, for the theoretically possible case 
-  -- | where the attribute name changes as well
-  biAttr :: FRP.Event a -> FRP.Event b -> Attribute e
 
 infixr 5 pureAttr as !:=
 infix 5 mapAttr as <:=>
-infix 5 biAttr as <**>
 
 -- | Construct a [data attribute](https://developer.mozilla.org/en-US/docs/Learn/HTML/Howto/Use_data_attributes).
 xdata :: forall e. String -> FRP.Event String -> Attribute e
-xdata k v = Attribute $ Right $ v <#> \v' -> unsafeAttribute { key: "data-" <> k, value: Prop' v' }
+xdata k v = Attribute $ Right $ v <#> \v' -> unsafeVolatileAttribute
+  { key: "data-" <> k, value: Prop' v' }
 
 -- | Construct an unchanging [data attribute](https://developer.mozilla.org/en-US/docs/Learn/HTML/Howto/Use_data_attributes).
 xdata_ :: forall e. String -> String -> Attribute e
-xdata_ k v = Attribute $ Left $ unsafePureAttribute { key: "data-" <> k, value: v }
+xdata_ k v = Attribute $ Left $ unsafePureAttribute
+  { key: "data-" <> k, value: v }

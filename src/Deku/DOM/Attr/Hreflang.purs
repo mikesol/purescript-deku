@@ -1,23 +1,37 @@
 module Deku.DOM.Attr.Hreflang where
 
 import Prelude
+import Data.Either (Either(..))
 
-import Deku.DOM.Elt.A (A_)
-import Deku.DOM.Elt.Area (Area_)
-import Deku.DOM.Elt.Link (Link_)
-import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
+import Deku.Attribute (class Attr, prop', unsafeAttribute, unsafePureAttribute, unsafeVolatileAttribute, unset')
+import Deku.DOM.Tags as Tags
 
 data Hreflang = Hreflang
 
-instance Attr A_ Hreflang String where
-  attr Hreflang value = unsafeAttribute { key: "hreflang", value: prop' value }
+instance Attr Tags.A_ Hreflang String where
+  pureAttr Hreflang value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "hreflang", value }
 
-instance Attr Area_ Hreflang String where
-  attr Hreflang value = unsafeAttribute { key: "hreflang", value: prop' value }
+  mapAttr Hreflang evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "hreflang", value: prop' value }
 
-instance Attr Link_ Hreflang String where
-  attr Hreflang value = unsafeAttribute { key: "hreflang", value: prop' value }
+instance Attr Tags.Area_ Hreflang String where
+  pureAttr Hreflang value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "hreflang", value }
+
+  mapAttr Hreflang evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "hreflang", value: prop' value }
+
+instance Attr Tags.Link_ Hreflang String where
+  pureAttr Hreflang value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "hreflang", value }
+
+  mapAttr Hreflang evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "hreflang", value: prop' value }
 
 instance Attr everything Hreflang Unit where
-  attr Hreflang _ = unsafeAttribute
+  pureAttr Hreflang _ = unsafeAttribute $ Right $ pure $ unsafeVolatileAttribute
     { key: "hreflang", value: unset' }
+  mapAttr Hreflang evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "hreflang", value: unset' }

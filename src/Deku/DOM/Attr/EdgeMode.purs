@@ -1,19 +1,30 @@
 module Deku.DOM.Attr.EdgeMode where
 
 import Prelude
+import Data.Either (Either(..))
 
-import Deku.DOM.Elt.FeGaussianBlur (FeGaussianBlur_)
-import Deku.DOM.Elt.FeConvolveMatrix (FeConvolveMatrix_)
-import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
+import Deku.Attribute (class Attr, prop', unsafeAttribute, unsafePureAttribute, unsafeVolatileAttribute, unset')
+import Deku.DOM.Tags as Tags
 
 data EdgeMode = EdgeMode
 
-instance Attr FeConvolveMatrix_ EdgeMode String where
-  attr EdgeMode value = unsafeAttribute { key: "edgeMode", value: prop' value }
+instance Attr Tags.FeConvolveMatrix_ EdgeMode String where
+  pureAttr EdgeMode value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "edgeMode", value }
 
-instance Attr FeGaussianBlur_ EdgeMode String where
-  attr EdgeMode value = unsafeAttribute { key: "edgeMode", value: prop' value }
+  mapAttr EdgeMode evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "edgeMode", value: prop' value }
+
+instance Attr Tags.FeGaussianBlur_ EdgeMode String where
+  pureAttr EdgeMode value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "edgeMode", value }
+
+  mapAttr EdgeMode evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "edgeMode", value: prop' value }
 
 instance Attr everything EdgeMode Unit where
-  attr EdgeMode _ = unsafeAttribute
+  pureAttr EdgeMode _ = unsafeAttribute $ Right $ pure $ unsafeVolatileAttribute
     { key: "edgeMode", value: unset' }
+  mapAttr EdgeMode evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "edgeMode", value: unset' }

@@ -1,23 +1,34 @@
 module Deku.DOM.Attr.OnMousewheel where
 
 import Prelude
+import Data.Either (Either(..))
 import Effect (Effect)
-import Deku.Attribute (class Attr, Attribute, Cb(..), cb', unsafeAttribute, unset')
+import Deku.Attribute (class Attr, Attribute, Cb(..), cb', unsafeAttribute, unsafePureAttribute, unsafeVolatileAttribute, unset')
+import Deku.DOM.Tags as Tags
 import FRP.Event (Event)
 
 data OnMousewheel = OnMousewheel
 
 instance Attr anything OnMousewheel Cb where
-  attr OnMousewheel value = unsafeAttribute
-    { key: "mousewheel", value: cb' value }
+  pureAttr OnMousewheel value = unsafeAttribute $ Right $ pure $
+    unsafeVolatileAttribute
+  mapAttr OnMousewheel evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "mousewheel", value: cb' value }
 
 instance Attr anything OnMousewheel (Effect Unit) where
-  attr OnMousewheel value = unsafeAttribute
-    { key: "mousewheel", value: cb' (Cb (const (value $> true))) }
+  pureAttr OnMousewheel value = unsafeAttribute $ Right $ pure $
+    unsafeVolatileAttribute
+  mapAttr OnMousewheel evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "mousewheel", value: cb' (Cb (const (value $> true))) }
 
 instance Attr anything OnMousewheel (Effect Boolean) where
-  attr OnMousewheel value = unsafeAttribute
-    { key: "mousewheel", value: cb' (Cb (const value)) }
+  pureAttr OnMousewheel value = unsafeAttribute $ Right $ pure $
+    unsafeVolatileAttribute
+  mapAttr OnMousewheel evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "mousewheel", value: cb' (Cb (const value)) }
 
 type OnMousewheelEffect =
   forall element
@@ -25,5 +36,6 @@ type OnMousewheelEffect =
   => Event (Attribute element)
 
 instance Attr everything OnMousewheel Unit where
-  attr OnMousewheel _ = unsafeAttribute
-    { key: "mousewheel", value: unset' }
+  pureAttr OnMousewheel _ = unsafeAttribute $ Right $ pure $
+    unsafeVolatileAttribute
+      { key: "mousewheel", value: unset' }

@@ -1,59 +1,100 @@
 module Deku.DOM.Attr.Name where
 
 import Prelude
+import Data.Either (Either(..))
 
-import Deku.DOM.Elt.Button (Button_)
-import Deku.DOM.Elt.Form (Form_)
-import Deku.DOM.Elt.Fieldset (Fieldset_)
-import Deku.DOM.Elt.Iframe (Iframe_)
-import Deku.DOM.Elt.Input (Input_)
-import Deku.DOM.Elt.Object (Object_)
-import Deku.DOM.Elt.Output (Output_)
-import Deku.DOM.Elt.Select (Select_)
-import Deku.DOM.Elt.Textarea (Textarea_)
-import Deku.DOM.Elt.Map (Map_)
-import Deku.DOM.Elt.Meta (Meta_)
-import Deku.DOM.Elt.Param (Param_)
-import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
+import Deku.Attribute (class Attr, prop', unsafeAttribute, unsafePureAttribute, unsafeVolatileAttribute, unset')
+import Deku.DOM.Tags as Tags
 
 data Name = Name
 
-instance Attr Button_ Name String where
-  attr Name value = unsafeAttribute { key: "name", value: prop' value }
+instance Attr Tags.Button_ Name String where
+  pureAttr Name value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "name", value }
 
-instance Attr Form_ Name String where
-  attr Name value = unsafeAttribute { key: "name", value: prop' value }
+  mapAttr Name evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "name", value: prop' value }
 
-instance Attr Fieldset_ Name String where
-  attr Name value = unsafeAttribute { key: "name", value: prop' value }
+instance Attr Tags.Form_ Name String where
+  pureAttr Name value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "name", value }
 
-instance Attr Iframe_ Name String where
-  attr Name value = unsafeAttribute { key: "name", value: prop' value }
+  mapAttr Name evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "name", value: prop' value }
 
-instance Attr Input_ Name String where
-  attr Name value = unsafeAttribute { key: "name", value: prop' value }
+instance Attr Tags.Fieldset_ Name String where
+  pureAttr Name value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "name", value }
 
-instance Attr Object_ Name String where
-  attr Name value = unsafeAttribute { key: "name", value: prop' value }
+  mapAttr Name evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "name", value: prop' value }
 
-instance Attr Output_ Name String where
-  attr Name value = unsafeAttribute { key: "name", value: prop' value }
+instance Attr Tags.Iframe_ Name String where
+  pureAttr Name value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "name", value }
 
-instance Attr Select_ Name String where
-  attr Name value = unsafeAttribute { key: "name", value: prop' value }
+  mapAttr Name evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "name", value: prop' value }
 
-instance Attr Textarea_ Name String where
-  attr Name value = unsafeAttribute { key: "name", value: prop' value }
+instance Attr Tags.Input_ Name String where
+  pureAttr Name value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "name", value }
 
-instance Attr Map_ Name String where
-  attr Name value = unsafeAttribute { key: "name", value: prop' value }
+  mapAttr Name evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "name", value: prop' value }
 
-instance Attr Meta_ Name String where
-  attr Name value = unsafeAttribute { key: "name", value: prop' value }
+instance Attr Tags.Object_ Name String where
+  pureAttr Name value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "name", value }
 
-instance Attr Param_ Name String where
-  attr Name value = unsafeAttribute { key: "name", value: prop' value }
+  mapAttr Name evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "name", value: prop' value }
+
+instance Attr Tags.Output_ Name String where
+  pureAttr Name value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "name", value }
+
+  mapAttr Name evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "name", value: prop' value }
+
+instance Attr Tags.Select_ Name String where
+  pureAttr Name value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "name", value }
+
+  mapAttr Name evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "name", value: prop' value }
+
+instance Attr Tags.Textarea_ Name String where
+  pureAttr Name value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "name", value }
+
+  mapAttr Name evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "name", value: prop' value }
+
+instance Attr Tags.Map_ Name String where
+  pureAttr Name value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "name", value }
+
+  mapAttr Name evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "name", value: prop' value }
+
+instance Attr Tags.Meta_ Name String where
+  pureAttr Name value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "name", value }
+
+  mapAttr Name evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "name", value: prop' value }
+
+instance Attr Tags.Param_ Name String where
+  pureAttr Name value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "name", value }
+
+  mapAttr Name evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "name", value: prop' value }
 
 instance Attr everything Name Unit where
-  attr Name _ = unsafeAttribute
+  pureAttr Name _ = unsafeAttribute $ Right $ pure $ unsafeVolatileAttribute
     { key: "name", value: unset' }
+  mapAttr Name evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "name", value: unset' }

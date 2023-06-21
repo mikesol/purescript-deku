@@ -1,23 +1,34 @@
 module Deku.DOM.Attr.OnPointerout where
 
 import Prelude
+import Data.Either (Either(..))
 import Effect (Effect)
-import Deku.Attribute (class Attr, Attribute, Cb(..), cb', unsafeAttribute, unset')
+import Deku.Attribute (class Attr, Attribute, Cb(..), cb', unsafeAttribute, unsafePureAttribute, unsafeVolatileAttribute, unset')
+import Deku.DOM.Tags as Tags
 import FRP.Event (Event)
 
 data OnPointerout = OnPointerout
 
 instance Attr anything OnPointerout Cb where
-  attr OnPointerout value = unsafeAttribute
-    { key: "pointerout", value: cb' value }
+  pureAttr OnPointerout value = unsafeAttribute $ Right $ pure $
+    unsafeVolatileAttribute
+  mapAttr OnPointerout evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "pointerout", value: cb' value }
 
 instance Attr anything OnPointerout (Effect Unit) where
-  attr OnPointerout value = unsafeAttribute
-    { key: "pointerout", value: cb' (Cb (const (value $> true))) }
+  pureAttr OnPointerout value = unsafeAttribute $ Right $ pure $
+    unsafeVolatileAttribute
+  mapAttr OnPointerout evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "pointerout", value: cb' (Cb (const (value $> true))) }
 
 instance Attr anything OnPointerout (Effect Boolean) where
-  attr OnPointerout value = unsafeAttribute
-    { key: "pointerout", value: cb' (Cb (const value)) }
+  pureAttr OnPointerout value = unsafeAttribute $ Right $ pure $
+    unsafeVolatileAttribute
+  mapAttr OnPointerout evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "pointerout", value: cb' (Cb (const value)) }
 
 type OnPointeroutEffect =
   forall element
@@ -25,5 +36,6 @@ type OnPointeroutEffect =
   => Event (Attribute element)
 
 instance Attr everything OnPointerout Unit where
-  attr OnPointerout _ = unsafeAttribute
-    { key: "pointerout", value: unset' }
+  pureAttr OnPointerout _ = unsafeAttribute $ Right $ pure $
+    unsafeVolatileAttribute
+      { key: "pointerout", value: unset' }

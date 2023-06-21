@@ -1,19 +1,30 @@
 module Deku.DOM.Attr.Y1 where
 
 import Prelude
+import Data.Either (Either(..))
 
-import Deku.DOM.Elt.LinearGradient (LinearGradient_)
-import Deku.DOM.Elt.Line (Line_)
-import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
+import Deku.Attribute (class Attr, prop', unsafeAttribute, unsafePureAttribute, unsafeVolatileAttribute, unset')
+import Deku.DOM.Tags as Tags
 
 data Y1 = Y1
 
-instance Attr Line_ Y1 String where
-  attr Y1 value = unsafeAttribute { key: "y1", value: prop' value }
+instance Attr Tags.Line_ Y1 String where
+  pureAttr Y1 value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "y1", value }
 
-instance Attr LinearGradient_ Y1 String where
-  attr Y1 value = unsafeAttribute { key: "y1", value: prop' value }
+  mapAttr Y1 evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "y1", value: prop' value }
+
+instance Attr Tags.LinearGradient_ Y1 String where
+  pureAttr Y1 value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "y1", value }
+
+  mapAttr Y1 evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "y1", value: prop' value }
 
 instance Attr everything Y1 Unit where
-  attr Y1 _ = unsafeAttribute
+  pureAttr Y1 _ = unsafeAttribute $ Right $ pure $ unsafeVolatileAttribute
     { key: "y1", value: unset' }
+  mapAttr Y1 evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "y1", value: unset' }

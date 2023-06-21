@@ -1,43 +1,72 @@
 module Deku.DOM.Attr.Value where
 
 import Prelude
+import Data.Either (Either(..))
 
-import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
-import Deku.DOM.Elt.Textarea (Textarea_)
-import Deku.DOM.Elt.Button (Button_)
-import Deku.DOM.Elt.Input (Input_)
-import Deku.DOM.Elt.Li (Li_)
-import Deku.DOM.Elt.Meter (Meter_)
-import Deku.DOM.Elt.Option (Option_)
-import Deku.DOM.Elt.Param (Param_)
-import Deku.DOM.Elt.Progress (Progress_)
+import Deku.Attribute (class Attr, prop', unsafeAttribute, unsafePureAttribute, unsafeVolatileAttribute, unset')
+import Deku.DOM.Tags as Tags
 
 data Value = Value
 
-instance Attr Textarea_ Value String where
-  attr Value value = unsafeAttribute { key: "value", value: prop' value }
+instance Attr Tags.Textarea_ Value String where
+  pureAttr Value value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "value", value }
 
-instance Attr Button_ Value String where
-  attr Value value = unsafeAttribute { key: "value", value: prop' value }
+  mapAttr Value evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "evalue", value: prop' value }
 
-instance Attr Input_ Value String where
-  attr Value value = unsafeAttribute { key: "value", value: prop' value }
+instance Attr Tags.Button_ Value String where
+  pureAttr Value value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "value", value }
 
-instance Attr Li_ Value String where
-  attr Value value = unsafeAttribute { key: "value", value: prop' value }
+  mapAttr Value evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "evalue", value: prop' value }
 
-instance Attr Meter_ Value String where
-  attr Value value = unsafeAttribute { key: "value", value: prop' value }
+instance Attr Tags.Input_ Value String where
+  pureAttr Value value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "value", value }
 
-instance Attr Option_ Value String where
-  attr Value value = unsafeAttribute { key: "value", value: prop' value }
+  mapAttr Value evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "evalue", value: prop' value }
 
-instance Attr Progress_ Value String where
-  attr Value value = unsafeAttribute { key: "value", value: prop' value }
+instance Attr Tags.Li_ Value String where
+  pureAttr Value value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "value", value }
 
-instance Attr Param_ Value String where
-  attr Value value = unsafeAttribute { key: "value", value: prop' value }
+  mapAttr Value evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "evalue", value: prop' value }
+
+instance Attr Tags.Meter_ Value String where
+  pureAttr Value value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "value", value }
+
+  mapAttr Value evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "evalue", value: prop' value }
+
+instance Attr Tags.Option_ Value String where
+  pureAttr Value value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "value", value }
+
+  mapAttr Value evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "evalue", value: prop' value }
+
+instance Attr Tags.Progress_ Value String where
+  pureAttr Value value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "value", value }
+
+  mapAttr Value evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "evalue", value: prop' value }
+
+instance Attr Tags.Param_ Value String where
+  pureAttr Value value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "value", value }
+
+  mapAttr Value evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "evalue", value: prop' value }
 
 instance Attr everything Value Unit where
-  attr Value _ = unsafeAttribute
+  pureAttr Value _ = unsafeAttribute $ Right $ pure $ unsafeVolatileAttribute
     { key: "value", value: unset' }
+  mapAttr Value evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "value", value: unset' }

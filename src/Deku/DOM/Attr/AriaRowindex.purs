@@ -1,96 +1,136 @@
 module Deku.DOM.Attr.AriaRowindex where
 
 import Prelude
+import Data.Either (Either(..))
 
-import Deku.DOM.Elt.View (View_)
-import Deku.DOM.Elt.Use (Use_)
-import Deku.DOM.Elt.Tspan (Tspan_)
-import Deku.DOM.Elt.TextPath (TextPath_)
-import Deku.DOM.Elt.Text (Text_)
-import Deku.DOM.Elt.Symbol (Symbol_)
-import Deku.DOM.Elt.Svg (Svg_)
-import Deku.DOM.Elt.Rect (Rect_)
-import Deku.DOM.Elt.Polyline (Polyline_)
-import Deku.DOM.Elt.Polygon (Polygon_)
-import Deku.DOM.Elt.Path (Path_)
-import Deku.DOM.Elt.Marker (Marker_)
-import Deku.DOM.Elt.Line (Line_)
-import Deku.DOM.Elt.G (G_)
-import Deku.DOM.Elt.ForeignObject (ForeignObject_)
-import Deku.DOM.Elt.Ellipse (Ellipse_)
-import Deku.DOM.Elt.Circle (Circle_)
-import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
+import Deku.Attribute (class Attr, prop', unsafeAttribute, unsafePureAttribute, unsafeVolatileAttribute, unset')
+import Deku.DOM.Tags as Tags
 
 data AriaRowindex = AriaRowindex
 
-instance Attr Circle_ AriaRowindex String where
-  attr AriaRowindex value = unsafeAttribute
-    { key: "aria-rowindex", value: prop' value }
+instance Attr Tags.Circle_ AriaRowindex String where
+  pureAttr AriaRowindex value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "aria-rowindex", value }
+  mapAttr AriaRowindex evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "aria-rowindex", value: prop' value }
 
-instance Attr Ellipse_ AriaRowindex String where
-  attr AriaRowindex value = unsafeAttribute
-    { key: "aria-rowindex", value: prop' value }
+instance Attr Tags.Ellipse_ AriaRowindex String where
+  pureAttr AriaRowindex value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "aria-rowindex", value }
+  mapAttr AriaRowindex evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "aria-rowindex", value: prop' value }
 
-instance Attr ForeignObject_ AriaRowindex String where
-  attr AriaRowindex value = unsafeAttribute
-    { key: "aria-rowindex", value: prop' value }
+instance Attr Tags.ForeignObject_ AriaRowindex String where
+  pureAttr AriaRowindex value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "aria-rowindex", value }
+  mapAttr AriaRowindex evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "aria-rowindex", value: prop' value }
 
-instance Attr G_ AriaRowindex String where
-  attr AriaRowindex value = unsafeAttribute
-    { key: "aria-rowindex", value: prop' value }
+instance Attr Tags.G_ AriaRowindex String where
+  pureAttr AriaRowindex value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "aria-rowindex", value }
+  mapAttr AriaRowindex evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "aria-rowindex", value: prop' value }
 
-instance Attr Line_ AriaRowindex String where
-  attr AriaRowindex value = unsafeAttribute
-    { key: "aria-rowindex", value: prop' value }
+instance Attr Tags.Line_ AriaRowindex String where
+  pureAttr AriaRowindex value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "aria-rowindex", value }
+  mapAttr AriaRowindex evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "aria-rowindex", value: prop' value }
 
-instance Attr Marker_ AriaRowindex String where
-  attr AriaRowindex value = unsafeAttribute
-    { key: "aria-rowindex", value: prop' value }
+instance Attr Tags.Marker_ AriaRowindex String where
+  pureAttr AriaRowindex value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "aria-rowindex", value }
+  mapAttr AriaRowindex evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "aria-rowindex", value: prop' value }
 
-instance Attr Path_ AriaRowindex String where
-  attr AriaRowindex value = unsafeAttribute
-    { key: "aria-rowindex", value: prop' value }
+instance Attr Tags.Path_ AriaRowindex String where
+  pureAttr AriaRowindex value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "aria-rowindex", value }
+  mapAttr AriaRowindex evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "aria-rowindex", value: prop' value }
 
-instance Attr Polygon_ AriaRowindex String where
-  attr AriaRowindex value = unsafeAttribute
-    { key: "aria-rowindex", value: prop' value }
+instance Attr Tags.Polygon_ AriaRowindex String where
+  pureAttr AriaRowindex value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "aria-rowindex", value }
+  mapAttr AriaRowindex evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "aria-rowindex", value: prop' value }
 
-instance Attr Polyline_ AriaRowindex String where
-  attr AriaRowindex value = unsafeAttribute
-    { key: "aria-rowindex", value: prop' value }
+instance Attr Tags.Polyline_ AriaRowindex String where
+  pureAttr AriaRowindex value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "aria-rowindex", value }
+  mapAttr AriaRowindex evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "aria-rowindex", value: prop' value }
 
-instance Attr Rect_ AriaRowindex String where
-  attr AriaRowindex value = unsafeAttribute
-    { key: "aria-rowindex", value: prop' value }
+instance Attr Tags.Rect_ AriaRowindex String where
+  pureAttr AriaRowindex value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "aria-rowindex", value }
+  mapAttr AriaRowindex evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "aria-rowindex", value: prop' value }
 
-instance Attr Svg_ AriaRowindex String where
-  attr AriaRowindex value = unsafeAttribute
-    { key: "aria-rowindex", value: prop' value }
+instance Attr Tags.Svg_ AriaRowindex String where
+  pureAttr AriaRowindex value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "aria-rowindex", value }
+  mapAttr AriaRowindex evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "aria-rowindex", value: prop' value }
 
-instance Attr Symbol_ AriaRowindex String where
-  attr AriaRowindex value = unsafeAttribute
-    { key: "aria-rowindex", value: prop' value }
+instance Attr Tags.Symbol_ AriaRowindex String where
+  pureAttr AriaRowindex value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "aria-rowindex", value }
+  mapAttr AriaRowindex evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "aria-rowindex", value: prop' value }
 
-instance Attr Text_ AriaRowindex String where
-  attr AriaRowindex value = unsafeAttribute
-    { key: "aria-rowindex", value: prop' value }
+instance Attr Tags.Text_ AriaRowindex String where
+  pureAttr AriaRowindex value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "aria-rowindex", value }
+  mapAttr AriaRowindex evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "aria-rowindex", value: prop' value }
 
-instance Attr TextPath_ AriaRowindex String where
-  attr AriaRowindex value = unsafeAttribute
-    { key: "aria-rowindex", value: prop' value }
+instance Attr Tags.TextPath_ AriaRowindex String where
+  pureAttr AriaRowindex value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "aria-rowindex", value }
+  mapAttr AriaRowindex evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "aria-rowindex", value: prop' value }
 
-instance Attr Tspan_ AriaRowindex String where
-  attr AriaRowindex value = unsafeAttribute
-    { key: "aria-rowindex", value: prop' value }
+instance Attr Tags.Tspan_ AriaRowindex String where
+  pureAttr AriaRowindex value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "aria-rowindex", value }
+  mapAttr AriaRowindex evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "aria-rowindex", value: prop' value }
 
-instance Attr Use_ AriaRowindex String where
-  attr AriaRowindex value = unsafeAttribute
-    { key: "aria-rowindex", value: prop' value }
+instance Attr Tags.Use_ AriaRowindex String where
+  pureAttr AriaRowindex value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "aria-rowindex", value }
+  mapAttr AriaRowindex evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "aria-rowindex", value: prop' value }
 
-instance Attr View_ AriaRowindex String where
-  attr AriaRowindex value = unsafeAttribute
-    { key: "aria-rowindex", value: prop' value }
+instance Attr Tags.View_ AriaRowindex String where
+  pureAttr AriaRowindex value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "aria-rowindex", value }
+  mapAttr AriaRowindex evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "aria-rowindex", value: prop' value }
 
 instance Attr everything AriaRowindex Unit where
-  attr AriaRowindex _ = unsafeAttribute
-    { key: "aria-rowindex", value: unset' }
+  pureAttr AriaRowindex _ = unsafeAttribute $ Right $ pure $
+    unsafeVolatileAttribute
+      { key: "aria-rowindex", value: unset' }
+  mapAttr AriaRowindex evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "aria-rowindex", value: unset' }

@@ -4,12 +4,11 @@ import Control.Plus (empty)
 import Deku.Attribute (Attribute)
 import Deku.Control as DC
 import Deku.Core (Nut)
-import FRP.Event (Event)
 
 import Deku.DOM.Tags as Tags
 
 address
-  :: Array (Event (Attribute Tags.Address_))
+  :: Array (Attribute Tags.Address_)
   -> Array Nut
   -> Nut
 address = DC.elementify3 "address"

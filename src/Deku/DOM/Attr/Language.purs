@@ -1,15 +1,23 @@
 module Deku.DOM.Attr.Language where
 
 import Prelude
+import Data.Either (Either(..))
 
-import Deku.DOM.Elt.Script (Script_)
-import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
+import Deku.Attribute (class Attr, prop', unsafeAttribute, unsafePureAttribute, unsafeVolatileAttribute, unset')
+import Deku.DOM.Tags as Tags
 
 data Language = Language
 
-instance Attr Script_ Language String where
-  attr Language value = unsafeAttribute { key: "language", value: prop' value }
+instance Attr Tags.Script_ Language String where
+  pureAttr Language value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "language", value }
+
+  mapAttr Language evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "language", value: prop' value }
 
 instance Attr everything Language Unit where
-  attr Language _ = unsafeAttribute
+  pureAttr Language _ = unsafeAttribute $ Right $ pure $ unsafeVolatileAttribute
     { key: "language", value: unset' }
+  mapAttr Language evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "language", value: unset' }

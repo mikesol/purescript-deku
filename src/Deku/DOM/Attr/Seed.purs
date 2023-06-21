@@ -1,15 +1,23 @@
 module Deku.DOM.Attr.Seed where
 
 import Prelude
+import Data.Either (Either(..))
 
-import Deku.DOM.Elt.FeTurbulence (FeTurbulence_)
-import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
+import Deku.Attribute (class Attr, prop', unsafeAttribute, unsafePureAttribute, unsafeVolatileAttribute, unset')
+import Deku.DOM.Tags as Tags
 
 data Seed = Seed
 
-instance Attr FeTurbulence_ Seed String where
-  attr Seed value = unsafeAttribute { key: "seed", value: prop' value }
+instance Attr Tags.FeTurbulence_ Seed String where
+  pureAttr Seed value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "seed", value }
+
+  mapAttr Seed evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "seed", value: prop' value }
 
 instance Attr everything Seed Unit where
-  attr Seed _ = unsafeAttribute
+  pureAttr Seed _ = unsafeAttribute $ Right $ pure $ unsafeVolatileAttribute
     { key: "seed", value: unset' }
+  mapAttr Seed evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "seed", value: unset' }

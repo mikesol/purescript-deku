@@ -1,96 +1,136 @@
 module Deku.DOM.Attr.AriaAutocomplete where
 
 import Prelude
+import Data.Either (Either(..))
 
-import Deku.DOM.Elt.View (View_)
-import Deku.DOM.Elt.Use (Use_)
-import Deku.DOM.Elt.Tspan (Tspan_)
-import Deku.DOM.Elt.TextPath (TextPath_)
-import Deku.DOM.Elt.Text (Text_)
-import Deku.DOM.Elt.Symbol (Symbol_)
-import Deku.DOM.Elt.Svg (Svg_)
-import Deku.DOM.Elt.Rect (Rect_)
-import Deku.DOM.Elt.Polyline (Polyline_)
-import Deku.DOM.Elt.Polygon (Polygon_)
-import Deku.DOM.Elt.Path (Path_)
-import Deku.DOM.Elt.Marker (Marker_)
-import Deku.DOM.Elt.Line (Line_)
-import Deku.DOM.Elt.G (G_)
-import Deku.DOM.Elt.ForeignObject (ForeignObject_)
-import Deku.DOM.Elt.Ellipse (Ellipse_)
-import Deku.DOM.Elt.Circle (Circle_)
-import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
+import Deku.Attribute (class Attr, prop', unsafeAttribute, unsafePureAttribute, unsafeVolatileAttribute, unset')
+import Deku.DOM.Tags as Tags
 
 data AriaAutocomplete = AriaAutocomplete
 
-instance Attr Circle_ AriaAutocomplete String where
-  attr AriaAutocomplete value = unsafeAttribute
-    { key: "aria-autocomplete", value: prop' value }
+instance Attr Tags.Circle_ AriaAutocomplete String where
+  pureAttr AriaAutocomplete value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "aria-autocomplete", value }
+  mapAttr AriaAutocomplete evalue = unsafeAttribute $ Right $ evalue <#>
+    \value -> unsafeVolatileAttribute
+      { key: "aria-autocomplete", value: prop' value }
 
-instance Attr Ellipse_ AriaAutocomplete String where
-  attr AriaAutocomplete value = unsafeAttribute
-    { key: "aria-autocomplete", value: prop' value }
+instance Attr Tags.Ellipse_ AriaAutocomplete String where
+  pureAttr AriaAutocomplete value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "aria-autocomplete", value }
+  mapAttr AriaAutocomplete evalue = unsafeAttribute $ Right $ evalue <#>
+    \value -> unsafeVolatileAttribute
+      { key: "aria-autocomplete", value: prop' value }
 
-instance Attr ForeignObject_ AriaAutocomplete String where
-  attr AriaAutocomplete value = unsafeAttribute
-    { key: "aria-autocomplete", value: prop' value }
+instance Attr Tags.ForeignObject_ AriaAutocomplete String where
+  pureAttr AriaAutocomplete value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "aria-autocomplete", value }
+  mapAttr AriaAutocomplete evalue = unsafeAttribute $ Right $ evalue <#>
+    \value -> unsafeVolatileAttribute
+      { key: "aria-autocomplete", value: prop' value }
 
-instance Attr G_ AriaAutocomplete String where
-  attr AriaAutocomplete value = unsafeAttribute
-    { key: "aria-autocomplete", value: prop' value }
+instance Attr Tags.G_ AriaAutocomplete String where
+  pureAttr AriaAutocomplete value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "aria-autocomplete", value }
+  mapAttr AriaAutocomplete evalue = unsafeAttribute $ Right $ evalue <#>
+    \value -> unsafeVolatileAttribute
+      { key: "aria-autocomplete", value: prop' value }
 
-instance Attr Line_ AriaAutocomplete String where
-  attr AriaAutocomplete value = unsafeAttribute
-    { key: "aria-autocomplete", value: prop' value }
+instance Attr Tags.Line_ AriaAutocomplete String where
+  pureAttr AriaAutocomplete value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "aria-autocomplete", value }
+  mapAttr AriaAutocomplete evalue = unsafeAttribute $ Right $ evalue <#>
+    \value -> unsafeVolatileAttribute
+      { key: "aria-autocomplete", value: prop' value }
 
-instance Attr Marker_ AriaAutocomplete String where
-  attr AriaAutocomplete value = unsafeAttribute
-    { key: "aria-autocomplete", value: prop' value }
+instance Attr Tags.Marker_ AriaAutocomplete String where
+  pureAttr AriaAutocomplete value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "aria-autocomplete", value }
+  mapAttr AriaAutocomplete evalue = unsafeAttribute $ Right $ evalue <#>
+    \value -> unsafeVolatileAttribute
+      { key: "aria-autocomplete", value: prop' value }
 
-instance Attr Path_ AriaAutocomplete String where
-  attr AriaAutocomplete value = unsafeAttribute
-    { key: "aria-autocomplete", value: prop' value }
+instance Attr Tags.Path_ AriaAutocomplete String where
+  pureAttr AriaAutocomplete value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "aria-autocomplete", value }
+  mapAttr AriaAutocomplete evalue = unsafeAttribute $ Right $ evalue <#>
+    \value -> unsafeVolatileAttribute
+      { key: "aria-autocomplete", value: prop' value }
 
-instance Attr Polygon_ AriaAutocomplete String where
-  attr AriaAutocomplete value = unsafeAttribute
-    { key: "aria-autocomplete", value: prop' value }
+instance Attr Tags.Polygon_ AriaAutocomplete String where
+  pureAttr AriaAutocomplete value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "aria-autocomplete", value }
+  mapAttr AriaAutocomplete evalue = unsafeAttribute $ Right $ evalue <#>
+    \value -> unsafeVolatileAttribute
+      { key: "aria-autocomplete", value: prop' value }
 
-instance Attr Polyline_ AriaAutocomplete String where
-  attr AriaAutocomplete value = unsafeAttribute
-    { key: "aria-autocomplete", value: prop' value }
+instance Attr Tags.Polyline_ AriaAutocomplete String where
+  pureAttr AriaAutocomplete value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "aria-autocomplete", value }
+  mapAttr AriaAutocomplete evalue = unsafeAttribute $ Right $ evalue <#>
+    \value -> unsafeVolatileAttribute
+      { key: "aria-autocomplete", value: prop' value }
 
-instance Attr Rect_ AriaAutocomplete String where
-  attr AriaAutocomplete value = unsafeAttribute
-    { key: "aria-autocomplete", value: prop' value }
+instance Attr Tags.Rect_ AriaAutocomplete String where
+  pureAttr AriaAutocomplete value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "aria-autocomplete", value }
+  mapAttr AriaAutocomplete evalue = unsafeAttribute $ Right $ evalue <#>
+    \value -> unsafeVolatileAttribute
+      { key: "aria-autocomplete", value: prop' value }
 
-instance Attr Svg_ AriaAutocomplete String where
-  attr AriaAutocomplete value = unsafeAttribute
-    { key: "aria-autocomplete", value: prop' value }
+instance Attr Tags.Svg_ AriaAutocomplete String where
+  pureAttr AriaAutocomplete value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "aria-autocomplete", value }
+  mapAttr AriaAutocomplete evalue = unsafeAttribute $ Right $ evalue <#>
+    \value -> unsafeVolatileAttribute
+      { key: "aria-autocomplete", value: prop' value }
 
-instance Attr Symbol_ AriaAutocomplete String where
-  attr AriaAutocomplete value = unsafeAttribute
-    { key: "aria-autocomplete", value: prop' value }
+instance Attr Tags.Symbol_ AriaAutocomplete String where
+  pureAttr AriaAutocomplete value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "aria-autocomplete", value }
+  mapAttr AriaAutocomplete evalue = unsafeAttribute $ Right $ evalue <#>
+    \value -> unsafeVolatileAttribute
+      { key: "aria-autocomplete", value: prop' value }
 
-instance Attr Text_ AriaAutocomplete String where
-  attr AriaAutocomplete value = unsafeAttribute
-    { key: "aria-autocomplete", value: prop' value }
+instance Attr Tags.Text_ AriaAutocomplete String where
+  pureAttr AriaAutocomplete value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "aria-autocomplete", value }
+  mapAttr AriaAutocomplete evalue = unsafeAttribute $ Right $ evalue <#>
+    \value -> unsafeVolatileAttribute
+      { key: "aria-autocomplete", value: prop' value }
 
-instance Attr TextPath_ AriaAutocomplete String where
-  attr AriaAutocomplete value = unsafeAttribute
-    { key: "aria-autocomplete", value: prop' value }
+instance Attr Tags.TextPath_ AriaAutocomplete String where
+  pureAttr AriaAutocomplete value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "aria-autocomplete", value }
+  mapAttr AriaAutocomplete evalue = unsafeAttribute $ Right $ evalue <#>
+    \value -> unsafeVolatileAttribute
+      { key: "aria-autocomplete", value: prop' value }
 
-instance Attr Tspan_ AriaAutocomplete String where
-  attr AriaAutocomplete value = unsafeAttribute
-    { key: "aria-autocomplete", value: prop' value }
+instance Attr Tags.Tspan_ AriaAutocomplete String where
+  pureAttr AriaAutocomplete value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "aria-autocomplete", value }
+  mapAttr AriaAutocomplete evalue = unsafeAttribute $ Right $ evalue <#>
+    \value -> unsafeVolatileAttribute
+      { key: "aria-autocomplete", value: prop' value }
 
-instance Attr Use_ AriaAutocomplete String where
-  attr AriaAutocomplete value = unsafeAttribute
-    { key: "aria-autocomplete", value: prop' value }
+instance Attr Tags.Use_ AriaAutocomplete String where
+  pureAttr AriaAutocomplete value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "aria-autocomplete", value }
+  mapAttr AriaAutocomplete evalue = unsafeAttribute $ Right $ evalue <#>
+    \value -> unsafeVolatileAttribute
+      { key: "aria-autocomplete", value: prop' value }
 
-instance Attr View_ AriaAutocomplete String where
-  attr AriaAutocomplete value = unsafeAttribute
-    { key: "aria-autocomplete", value: prop' value }
+instance Attr Tags.View_ AriaAutocomplete String where
+  pureAttr AriaAutocomplete value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "aria-autocomplete", value }
+  mapAttr AriaAutocomplete evalue = unsafeAttribute $ Right $ evalue <#>
+    \value -> unsafeVolatileAttribute
+      { key: "aria-autocomplete", value: prop' value }
 
 instance Attr everything AriaAutocomplete Unit where
-  attr AriaAutocomplete _ = unsafeAttribute
-    { key: "aria-autocomplete", value: unset' }
+  pureAttr AriaAutocomplete _ = unsafeAttribute $ Right $ pure $
+    unsafeVolatileAttribute
+      { key: "aria-autocomplete", value: unset' }
+  mapAttr AriaAutocomplete evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "aria-autocomplete", value: unset' }

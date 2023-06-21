@@ -1,96 +1,136 @@
 module Deku.DOM.Attr.AriaSetsize where
 
 import Prelude
+import Data.Either (Either(..))
 
-import Deku.DOM.Elt.View (View_)
-import Deku.DOM.Elt.Use (Use_)
-import Deku.DOM.Elt.Tspan (Tspan_)
-import Deku.DOM.Elt.TextPath (TextPath_)
-import Deku.DOM.Elt.Text (Text_)
-import Deku.DOM.Elt.Symbol (Symbol_)
-import Deku.DOM.Elt.Svg (Svg_)
-import Deku.DOM.Elt.Rect (Rect_)
-import Deku.DOM.Elt.Polyline (Polyline_)
-import Deku.DOM.Elt.Polygon (Polygon_)
-import Deku.DOM.Elt.Path (Path_)
-import Deku.DOM.Elt.Marker (Marker_)
-import Deku.DOM.Elt.Line (Line_)
-import Deku.DOM.Elt.G (G_)
-import Deku.DOM.Elt.ForeignObject (ForeignObject_)
-import Deku.DOM.Elt.Ellipse (Ellipse_)
-import Deku.DOM.Elt.Circle (Circle_)
-import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
+import Deku.Attribute (class Attr, prop', unsafeAttribute, unsafePureAttribute, unsafeVolatileAttribute, unset')
+import Deku.DOM.Tags as Tags
 
 data AriaSetsize = AriaSetsize
 
-instance Attr Circle_ AriaSetsize String where
-  attr AriaSetsize value = unsafeAttribute
-    { key: "aria-setsize", value: prop' value }
+instance Attr Tags.Circle_ AriaSetsize String where
+  pureAttr AriaSetsize value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "aria-setsize", value }
+  mapAttr AriaSetsize evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "aria-setsize", value: prop' value }
 
-instance Attr Ellipse_ AriaSetsize String where
-  attr AriaSetsize value = unsafeAttribute
-    { key: "aria-setsize", value: prop' value }
+instance Attr Tags.Ellipse_ AriaSetsize String where
+  pureAttr AriaSetsize value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "aria-setsize", value }
+  mapAttr AriaSetsize evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "aria-setsize", value: prop' value }
 
-instance Attr ForeignObject_ AriaSetsize String where
-  attr AriaSetsize value = unsafeAttribute
-    { key: "aria-setsize", value: prop' value }
+instance Attr Tags.ForeignObject_ AriaSetsize String where
+  pureAttr AriaSetsize value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "aria-setsize", value }
+  mapAttr AriaSetsize evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "aria-setsize", value: prop' value }
 
-instance Attr G_ AriaSetsize String where
-  attr AriaSetsize value = unsafeAttribute
-    { key: "aria-setsize", value: prop' value }
+instance Attr Tags.G_ AriaSetsize String where
+  pureAttr AriaSetsize value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "aria-setsize", value }
+  mapAttr AriaSetsize evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "aria-setsize", value: prop' value }
 
-instance Attr Line_ AriaSetsize String where
-  attr AriaSetsize value = unsafeAttribute
-    { key: "aria-setsize", value: prop' value }
+instance Attr Tags.Line_ AriaSetsize String where
+  pureAttr AriaSetsize value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "aria-setsize", value }
+  mapAttr AriaSetsize evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "aria-setsize", value: prop' value }
 
-instance Attr Marker_ AriaSetsize String where
-  attr AriaSetsize value = unsafeAttribute
-    { key: "aria-setsize", value: prop' value }
+instance Attr Tags.Marker_ AriaSetsize String where
+  pureAttr AriaSetsize value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "aria-setsize", value }
+  mapAttr AriaSetsize evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "aria-setsize", value: prop' value }
 
-instance Attr Path_ AriaSetsize String where
-  attr AriaSetsize value = unsafeAttribute
-    { key: "aria-setsize", value: prop' value }
+instance Attr Tags.Path_ AriaSetsize String where
+  pureAttr AriaSetsize value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "aria-setsize", value }
+  mapAttr AriaSetsize evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "aria-setsize", value: prop' value }
 
-instance Attr Polygon_ AriaSetsize String where
-  attr AriaSetsize value = unsafeAttribute
-    { key: "aria-setsize", value: prop' value }
+instance Attr Tags.Polygon_ AriaSetsize String where
+  pureAttr AriaSetsize value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "aria-setsize", value }
+  mapAttr AriaSetsize evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "aria-setsize", value: prop' value }
 
-instance Attr Polyline_ AriaSetsize String where
-  attr AriaSetsize value = unsafeAttribute
-    { key: "aria-setsize", value: prop' value }
+instance Attr Tags.Polyline_ AriaSetsize String where
+  pureAttr AriaSetsize value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "aria-setsize", value }
+  mapAttr AriaSetsize evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "aria-setsize", value: prop' value }
 
-instance Attr Rect_ AriaSetsize String where
-  attr AriaSetsize value = unsafeAttribute
-    { key: "aria-setsize", value: prop' value }
+instance Attr Tags.Rect_ AriaSetsize String where
+  pureAttr AriaSetsize value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "aria-setsize", value }
+  mapAttr AriaSetsize evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "aria-setsize", value: prop' value }
 
-instance Attr Svg_ AriaSetsize String where
-  attr AriaSetsize value = unsafeAttribute
-    { key: "aria-setsize", value: prop' value }
+instance Attr Tags.Svg_ AriaSetsize String where
+  pureAttr AriaSetsize value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "aria-setsize", value }
+  mapAttr AriaSetsize evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "aria-setsize", value: prop' value }
 
-instance Attr Symbol_ AriaSetsize String where
-  attr AriaSetsize value = unsafeAttribute
-    { key: "aria-setsize", value: prop' value }
+instance Attr Tags.Symbol_ AriaSetsize String where
+  pureAttr AriaSetsize value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "aria-setsize", value }
+  mapAttr AriaSetsize evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "aria-setsize", value: prop' value }
 
-instance Attr Text_ AriaSetsize String where
-  attr AriaSetsize value = unsafeAttribute
-    { key: "aria-setsize", value: prop' value }
+instance Attr Tags.Text_ AriaSetsize String where
+  pureAttr AriaSetsize value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "aria-setsize", value }
+  mapAttr AriaSetsize evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "aria-setsize", value: prop' value }
 
-instance Attr TextPath_ AriaSetsize String where
-  attr AriaSetsize value = unsafeAttribute
-    { key: "aria-setsize", value: prop' value }
+instance Attr Tags.TextPath_ AriaSetsize String where
+  pureAttr AriaSetsize value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "aria-setsize", value }
+  mapAttr AriaSetsize evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "aria-setsize", value: prop' value }
 
-instance Attr Tspan_ AriaSetsize String where
-  attr AriaSetsize value = unsafeAttribute
-    { key: "aria-setsize", value: prop' value }
+instance Attr Tags.Tspan_ AriaSetsize String where
+  pureAttr AriaSetsize value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "aria-setsize", value }
+  mapAttr AriaSetsize evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "aria-setsize", value: prop' value }
 
-instance Attr Use_ AriaSetsize String where
-  attr AriaSetsize value = unsafeAttribute
-    { key: "aria-setsize", value: prop' value }
+instance Attr Tags.Use_ AriaSetsize String where
+  pureAttr AriaSetsize value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "aria-setsize", value }
+  mapAttr AriaSetsize evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "aria-setsize", value: prop' value }
 
-instance Attr View_ AriaSetsize String where
-  attr AriaSetsize value = unsafeAttribute
-    { key: "aria-setsize", value: prop' value }
+instance Attr Tags.View_ AriaSetsize String where
+  pureAttr AriaSetsize value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "aria-setsize", value }
+  mapAttr AriaSetsize evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "aria-setsize", value: prop' value }
 
 instance Attr everything AriaSetsize Unit where
-  attr AriaSetsize _ = unsafeAttribute
-    { key: "aria-setsize", value: unset' }
+  pureAttr AriaSetsize _ = unsafeAttribute $ Right $ pure $
+    unsafeVolatileAttribute
+      { key: "aria-setsize", value: unset' }
+  mapAttr AriaSetsize evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "aria-setsize", value: unset' }

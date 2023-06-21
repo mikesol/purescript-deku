@@ -1,15 +1,23 @@
 module Deku.DOM.Attr.Async where
 
 import Prelude
+import Data.Either (Either(..))
 
-import Deku.DOM.Elt.Script (Script_)
-import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
+import Deku.Attribute (class Attr, prop', unsafeAttribute, unsafePureAttribute, unsafeVolatileAttribute, unset')
+import Deku.DOM.Tags as Tags
 
 data Async = Async
 
-instance Attr Script_ Async String where
-  attr Async value = unsafeAttribute { key: "async", value: prop' value }
+instance Attr Tags.Script_ Async String where
+  pureAttr Async value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "async", value }
+
+  mapAttr Async evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "async", value: prop' value }
 
 instance Attr everything Async Unit where
-  attr Async _ = unsafeAttribute
+  pureAttr Async _ = unsafeAttribute $ Right $ pure $ unsafeVolatileAttribute
     { key: "async", value: unset' }
+  mapAttr Async evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "async", value: unset' }

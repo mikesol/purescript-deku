@@ -1,31 +1,45 @@
 module Deku.DOM.Attr.RepeatCount where
 
 import Prelude
+import Data.Either (Either(..))
 
-import Deku.DOM.Elt.Set (Set_)
-import Deku.DOM.Elt.AnimateTransform (AnimateTransform_)
-import Deku.DOM.Elt.AnimateMotion (AnimateMotion_)
-import Deku.DOM.Elt.Animate (Animate_)
-import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
+import Deku.Attribute (class Attr, prop', unsafeAttribute, unsafePureAttribute, unsafeVolatileAttribute, unset')
+import Deku.DOM.Tags as Tags
 
 data RepeatCount = RepeatCount
 
-instance Attr Animate_ RepeatCount String where
-  attr RepeatCount value = unsafeAttribute
-    { key: "repeatCount", value: prop' value }
+instance Attr Tags.Animate_ RepeatCount String where
+  pureAttr RepeatCount value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "repeatCount", value }
+  mapAttr RepeatCount evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "repeatCount", value: prop' value }
 
-instance Attr AnimateMotion_ RepeatCount String where
-  attr RepeatCount value = unsafeAttribute
-    { key: "repeatCount", value: prop' value }
+instance Attr Tags.AnimateMotion_ RepeatCount String where
+  pureAttr RepeatCount value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "repeatCount", value }
+  mapAttr RepeatCount evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "repeatCount", value: prop' value }
 
-instance Attr AnimateTransform_ RepeatCount String where
-  attr RepeatCount value = unsafeAttribute
-    { key: "repeatCount", value: prop' value }
+instance Attr Tags.AnimateTransform_ RepeatCount String where
+  pureAttr RepeatCount value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "repeatCount", value }
+  mapAttr RepeatCount evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "repeatCount", value: prop' value }
 
-instance Attr Set_ RepeatCount String where
-  attr RepeatCount value = unsafeAttribute
-    { key: "repeatCount", value: prop' value }
+instance Attr Tags.Set_ RepeatCount String where
+  pureAttr RepeatCount value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "repeatCount", value }
+  mapAttr RepeatCount evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "repeatCount", value: prop' value }
 
 instance Attr everything RepeatCount Unit where
-  attr RepeatCount _ = unsafeAttribute
-    { key: "repeatCount", value: unset' }
+  pureAttr RepeatCount _ = unsafeAttribute $ Right $ pure $
+    unsafeVolatileAttribute
+      { key: "repeatCount", value: unset' }
+  mapAttr RepeatCount evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "repeatCount", value: unset' }

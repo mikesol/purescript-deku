@@ -1,15 +1,23 @@
 module Deku.DOM.Attr.Coords where
 
 import Prelude
+import Data.Either (Either(..))
 
-import Deku.DOM.Elt.Area (Area_)
-import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
+import Deku.Attribute (class Attr, prop', unsafeAttribute, unsafePureAttribute, unsafeVolatileAttribute, unset')
+import Deku.DOM.Tags as Tags
 
 data Coords = Coords
 
-instance Attr Area_ Coords String where
-  attr Coords value = unsafeAttribute { key: "coords", value: prop' value }
+instance Attr Tags.Area_ Coords String where
+  pureAttr Coords value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "coords", value }
+
+  mapAttr Coords evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "coords", value: prop' value }
 
 instance Attr everything Coords Unit where
-  attr Coords _ = unsafeAttribute
+  pureAttr Coords _ = unsafeAttribute $ Right $ pure $ unsafeVolatileAttribute
     { key: "coords", value: unset' }
+  mapAttr Coords evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "coords", value: unset' }

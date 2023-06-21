@@ -1,23 +1,34 @@
 module Deku.DOM.Attr.OnPointerlockchange where
 
 import Prelude
+import Data.Either (Either(..))
 import Effect (Effect)
-import Deku.Attribute (class Attr, Attribute, Cb(..), cb', unsafeAttribute, unset')
+import Deku.Attribute (class Attr, Attribute, Cb(..), cb', unsafeAttribute, unsafePureAttribute, unsafeVolatileAttribute, unset')
+import Deku.DOM.Tags as Tags
 import FRP.Event (Event)
 
 data OnPointerlockchange = OnPointerlockchange
 
 instance Attr anything OnPointerlockchange Cb where
-  attr OnPointerlockchange value = unsafeAttribute
-    { key: "pointerlockchange ", value: cb' value }
+  pureAttr OnPointerlockchange value = unsafeAttribute $ Right $ pure $
+    unsafeVolatileAttribute
+  mapAttr OnPointerlockchange evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "pointerlockchange ", value: cb' value }
 
 instance Attr anything OnPointerlockchange (Effect Unit) where
-  attr OnPointerlockchange value = unsafeAttribute
-    { key: "pointerlockchange ", value: cb' (Cb (const (value $> true))) }
+  pureAttr OnPointerlockchange value = unsafeAttribute $ Right $ pure $
+    unsafeVolatileAttribute
+  mapAttr OnPointerlockchange evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "pointerlockchange ", value: cb' (Cb (const (value $> true))) }
 
 instance Attr anything OnPointerlockchange (Effect Boolean) where
-  attr OnPointerlockchange value = unsafeAttribute
-    { key: "pointerlockchange ", value: cb' (Cb (const value)) }
+  pureAttr OnPointerlockchange value = unsafeAttribute $ Right $ pure $
+    unsafeVolatileAttribute
+  mapAttr OnPointerlockchange evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "pointerlockchange ", value: cb' (Cb (const value)) }
 
 type OnPointerlockchangeEffect =
   forall element
@@ -25,5 +36,6 @@ type OnPointerlockchangeEffect =
   => Event (Attribute element)
 
 instance Attr everything OnPointerlockchange Unit where
-  attr OnPointerlockchange _ = unsafeAttribute
-    { key: "pointerlockchange ", value: unset' }
+  pureAttr OnPointerlockchange _ = unsafeAttribute $ Right $ pure $
+    unsafeVolatileAttribute
+      { key: "pointerlockchange ", value: unset' }

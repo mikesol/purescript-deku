@@ -1,96 +1,136 @@
 module Deku.DOM.Attr.AriaChecked where
 
 import Prelude
+import Data.Either (Either(..))
 
-import Deku.DOM.Elt.View (View_)
-import Deku.DOM.Elt.Use (Use_)
-import Deku.DOM.Elt.Tspan (Tspan_)
-import Deku.DOM.Elt.TextPath (TextPath_)
-import Deku.DOM.Elt.Text (Text_)
-import Deku.DOM.Elt.Symbol (Symbol_)
-import Deku.DOM.Elt.Svg (Svg_)
-import Deku.DOM.Elt.Rect (Rect_)
-import Deku.DOM.Elt.Polyline (Polyline_)
-import Deku.DOM.Elt.Polygon (Polygon_)
-import Deku.DOM.Elt.Path (Path_)
-import Deku.DOM.Elt.Marker (Marker_)
-import Deku.DOM.Elt.Line (Line_)
-import Deku.DOM.Elt.G (G_)
-import Deku.DOM.Elt.ForeignObject (ForeignObject_)
-import Deku.DOM.Elt.Ellipse (Ellipse_)
-import Deku.DOM.Elt.Circle (Circle_)
-import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
+import Deku.Attribute (class Attr, prop', unsafeAttribute, unsafePureAttribute, unsafeVolatileAttribute, unset')
+import Deku.DOM.Tags as Tags
 
 data AriaChecked = AriaChecked
 
-instance Attr Circle_ AriaChecked String where
-  attr AriaChecked value = unsafeAttribute
-    { key: "aria-checked", value: prop' value }
+instance Attr Tags.Circle_ AriaChecked String where
+  pureAttr AriaChecked value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "aria-checked", value }
+  mapAttr AriaChecked evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "aria-checked", value: prop' value }
 
-instance Attr Ellipse_ AriaChecked String where
-  attr AriaChecked value = unsafeAttribute
-    { key: "aria-checked", value: prop' value }
+instance Attr Tags.Ellipse_ AriaChecked String where
+  pureAttr AriaChecked value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "aria-checked", value }
+  mapAttr AriaChecked evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "aria-checked", value: prop' value }
 
-instance Attr ForeignObject_ AriaChecked String where
-  attr AriaChecked value = unsafeAttribute
-    { key: "aria-checked", value: prop' value }
+instance Attr Tags.ForeignObject_ AriaChecked String where
+  pureAttr AriaChecked value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "aria-checked", value }
+  mapAttr AriaChecked evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "aria-checked", value: prop' value }
 
-instance Attr G_ AriaChecked String where
-  attr AriaChecked value = unsafeAttribute
-    { key: "aria-checked", value: prop' value }
+instance Attr Tags.G_ AriaChecked String where
+  pureAttr AriaChecked value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "aria-checked", value }
+  mapAttr AriaChecked evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "aria-checked", value: prop' value }
 
-instance Attr Line_ AriaChecked String where
-  attr AriaChecked value = unsafeAttribute
-    { key: "aria-checked", value: prop' value }
+instance Attr Tags.Line_ AriaChecked String where
+  pureAttr AriaChecked value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "aria-checked", value }
+  mapAttr AriaChecked evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "aria-checked", value: prop' value }
 
-instance Attr Marker_ AriaChecked String where
-  attr AriaChecked value = unsafeAttribute
-    { key: "aria-checked", value: prop' value }
+instance Attr Tags.Marker_ AriaChecked String where
+  pureAttr AriaChecked value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "aria-checked", value }
+  mapAttr AriaChecked evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "aria-checked", value: prop' value }
 
-instance Attr Path_ AriaChecked String where
-  attr AriaChecked value = unsafeAttribute
-    { key: "aria-checked", value: prop' value }
+instance Attr Tags.Path_ AriaChecked String where
+  pureAttr AriaChecked value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "aria-checked", value }
+  mapAttr AriaChecked evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "aria-checked", value: prop' value }
 
-instance Attr Polygon_ AriaChecked String where
-  attr AriaChecked value = unsafeAttribute
-    { key: "aria-checked", value: prop' value }
+instance Attr Tags.Polygon_ AriaChecked String where
+  pureAttr AriaChecked value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "aria-checked", value }
+  mapAttr AriaChecked evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "aria-checked", value: prop' value }
 
-instance Attr Polyline_ AriaChecked String where
-  attr AriaChecked value = unsafeAttribute
-    { key: "aria-checked", value: prop' value }
+instance Attr Tags.Polyline_ AriaChecked String where
+  pureAttr AriaChecked value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "aria-checked", value }
+  mapAttr AriaChecked evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "aria-checked", value: prop' value }
 
-instance Attr Rect_ AriaChecked String where
-  attr AriaChecked value = unsafeAttribute
-    { key: "aria-checked", value: prop' value }
+instance Attr Tags.Rect_ AriaChecked String where
+  pureAttr AriaChecked value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "aria-checked", value }
+  mapAttr AriaChecked evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "aria-checked", value: prop' value }
 
-instance Attr Svg_ AriaChecked String where
-  attr AriaChecked value = unsafeAttribute
-    { key: "aria-checked", value: prop' value }
+instance Attr Tags.Svg_ AriaChecked String where
+  pureAttr AriaChecked value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "aria-checked", value }
+  mapAttr AriaChecked evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "aria-checked", value: prop' value }
 
-instance Attr Symbol_ AriaChecked String where
-  attr AriaChecked value = unsafeAttribute
-    { key: "aria-checked", value: prop' value }
+instance Attr Tags.Symbol_ AriaChecked String where
+  pureAttr AriaChecked value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "aria-checked", value }
+  mapAttr AriaChecked evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "aria-checked", value: prop' value }
 
-instance Attr Text_ AriaChecked String where
-  attr AriaChecked value = unsafeAttribute
-    { key: "aria-checked", value: prop' value }
+instance Attr Tags.Text_ AriaChecked String where
+  pureAttr AriaChecked value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "aria-checked", value }
+  mapAttr AriaChecked evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "aria-checked", value: prop' value }
 
-instance Attr TextPath_ AriaChecked String where
-  attr AriaChecked value = unsafeAttribute
-    { key: "aria-checked", value: prop' value }
+instance Attr Tags.TextPath_ AriaChecked String where
+  pureAttr AriaChecked value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "aria-checked", value }
+  mapAttr AriaChecked evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "aria-checked", value: prop' value }
 
-instance Attr Tspan_ AriaChecked String where
-  attr AriaChecked value = unsafeAttribute
-    { key: "aria-checked", value: prop' value }
+instance Attr Tags.Tspan_ AriaChecked String where
+  pureAttr AriaChecked value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "aria-checked", value }
+  mapAttr AriaChecked evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "aria-checked", value: prop' value }
 
-instance Attr Use_ AriaChecked String where
-  attr AriaChecked value = unsafeAttribute
-    { key: "aria-checked", value: prop' value }
+instance Attr Tags.Use_ AriaChecked String where
+  pureAttr AriaChecked value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "aria-checked", value }
+  mapAttr AriaChecked evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "aria-checked", value: prop' value }
 
-instance Attr View_ AriaChecked String where
-  attr AriaChecked value = unsafeAttribute
-    { key: "aria-checked", value: prop' value }
+instance Attr Tags.View_ AriaChecked String where
+  pureAttr AriaChecked value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "aria-checked", value }
+  mapAttr AriaChecked evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "aria-checked", value: prop' value }
 
 instance Attr everything AriaChecked Unit where
-  attr AriaChecked _ = unsafeAttribute
-    { key: "aria-checked", value: unset' }
+  pureAttr AriaChecked _ = unsafeAttribute $ Right $ pure $
+    unsafeVolatileAttribute
+      { key: "aria-checked", value: unset' }
+  mapAttr AriaChecked evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "aria-checked", value: unset' }

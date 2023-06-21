@@ -4,12 +4,11 @@ import Control.Plus (empty)
 import Deku.Attribute (Attribute)
 import Deku.Control as DC
 import Deku.Core (Nut)
-import FRP.Event (Event)
 
 import Deku.DOM.Tags as Tags
 
 mask
-  :: Array (Event (Attribute Tags.Mask_))
+  :: Array (Attribute Tags.Mask_)
   -> Array Nut
   -> Nut
 mask = DC.elementify3 "mask"

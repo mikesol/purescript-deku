@@ -1,23 +1,34 @@
 module Deku.DOM.Attr.OnMouseleave where
 
 import Prelude
+import Data.Either (Either(..))
 import Effect (Effect)
-import Deku.Attribute (class Attr, Attribute, Cb(..), cb', unsafeAttribute, unset')
+import Deku.Attribute (class Attr, Attribute, Cb(..), cb', unsafeAttribute, unsafePureAttribute, unsafeVolatileAttribute, unset')
+import Deku.DOM.Tags as Tags
 import FRP.Event (Event)
 
 data OnMouseleave = OnMouseleave
 
 instance Attr anything OnMouseleave Cb where
-  attr OnMouseleave value = unsafeAttribute
-    { key: "mouseleave", value: cb' value }
+  pureAttr OnMouseleave value = unsafeAttribute $ Right $ pure $
+    unsafeVolatileAttribute
+  mapAttr OnMouseleave evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "mouseleave", value: cb' value }
 
 instance Attr anything OnMouseleave (Effect Unit) where
-  attr OnMouseleave value = unsafeAttribute
-    { key: "mouseleave", value: cb' (Cb (const (value $> true))) }
+  pureAttr OnMouseleave value = unsafeAttribute $ Right $ pure $
+    unsafeVolatileAttribute
+  mapAttr OnMouseleave evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "mouseleave", value: cb' (Cb (const (value $> true))) }
 
 instance Attr anything OnMouseleave (Effect Boolean) where
-  attr OnMouseleave value = unsafeAttribute
-    { key: "mouseleave", value: cb' (Cb (const value)) }
+  pureAttr OnMouseleave value = unsafeAttribute $ Right $ pure $
+    unsafeVolatileAttribute
+  mapAttr OnMouseleave evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "mouseleave", value: cb' (Cb (const value)) }
 
 type OnMouseleaveEffect =
   forall element
@@ -25,5 +36,6 @@ type OnMouseleaveEffect =
   => Event (Attribute element)
 
 instance Attr everything OnMouseleave Unit where
-  attr OnMouseleave _ = unsafeAttribute
-    { key: "mouseleave", value: unset' }
+  pureAttr OnMouseleave _ = unsafeAttribute $ Right $ pure $
+    unsafeVolatileAttribute
+      { key: "mouseleave", value: unset' }

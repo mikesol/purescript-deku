@@ -1,22 +1,33 @@
 module Deku.DOM.Attr.OnDragend where
 
 import Prelude
+import Data.Either (Either(..))
 import Effect (Effect)
-import Deku.Attribute (class Attr, Attribute, Cb(..), cb', unsafeAttribute, unset')
+import Deku.Attribute (class Attr, Attribute, Cb(..), cb', unsafeAttribute, unsafePureAttribute, unsafeVolatileAttribute, unset')
+import Deku.DOM.Tags as Tags
 import FRP.Event (Event)
 
 data OnDragend = OnDragend
 
 instance Attr anything OnDragend Cb where
-  attr OnDragend value = unsafeAttribute { key: "dragend", value: cb' value }
+  pureAttr OnDragend value = unsafeAttribute $ Right $ pure $
+    unsafeVolatileAttribute { key: "dragend", value: cb' value }
+  mapAttr OnDragend evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "dragend", value: cb' value }
 
 instance Attr anything OnDragend (Effect Unit) where
-  attr OnDragend value = unsafeAttribute
-    { key: "dragend", value: cb' (Cb (const (value $> true))) }
+  pureAttr OnDragend value = unsafeAttribute $ Right $ pure $
+    unsafeVolatileAttribute
+  mapAttr OnDragend evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "dragend", value: cb' (Cb (const (value $> true))) }
 
 instance Attr anything OnDragend (Effect Boolean) where
-  attr OnDragend value = unsafeAttribute
-    { key: "dragend", value: cb' (Cb (const value)) }
+  pureAttr OnDragend value = unsafeAttribute $ Right $ pure $
+    unsafeVolatileAttribute
+  mapAttr OnDragend evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "dragend", value: cb' (Cb (const value)) }
 
 type OnDragendEffect =
   forall element
@@ -24,5 +35,6 @@ type OnDragendEffect =
   => Event (Attribute element)
 
 instance Attr everything OnDragend Unit where
-  attr OnDragend _ = unsafeAttribute
-    { key: "dragend", value: unset' }
+  pureAttr OnDragend _ = unsafeAttribute $ Right $ pure $
+    unsafeVolatileAttribute
+      { key: "dragend", value: unset' }

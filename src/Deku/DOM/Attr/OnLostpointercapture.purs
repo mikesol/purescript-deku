@@ -1,23 +1,34 @@
 module Deku.DOM.Attr.OnLostpointercapture where
 
 import Prelude
+import Data.Either (Either(..))
 import Effect (Effect)
-import Deku.Attribute (class Attr, Attribute, Cb(..), cb', unsafeAttribute, unset')
+import Deku.Attribute (class Attr, Attribute, Cb(..), cb', unsafeAttribute, unsafePureAttribute, unsafeVolatileAttribute, unset')
+import Deku.DOM.Tags as Tags
 import FRP.Event (Event)
 
 data OnLostpointercapture = OnLostpointercapture
 
 instance Attr anything OnLostpointercapture Cb where
-  attr OnLostpointercapture value = unsafeAttribute
-    { key: "lostpointercapture", value: cb' value }
+  pureAttr OnLostpointercapture value = unsafeAttribute $ Right $ pure $
+    unsafeVolatileAttribute
+  mapAttr OnLostpointercapture evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "lostpointercapture", value: cb' value }
 
 instance Attr anything OnLostpointercapture (Effect Unit) where
-  attr OnLostpointercapture value = unsafeAttribute
-    { key: "lostpointercapture", value: cb' (Cb (const (value $> true))) }
+  pureAttr OnLostpointercapture value = unsafeAttribute $ Right $ pure $
+    unsafeVolatileAttribute
+  mapAttr OnLostpointercapture evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "lostpointercapture", value: cb' (Cb (const (value $> true))) }
 
 instance Attr anything OnLostpointercapture (Effect Boolean) where
-  attr OnLostpointercapture value = unsafeAttribute
-    { key: "lostpointercapture", value: cb' (Cb (const value)) }
+  pureAttr OnLostpointercapture value = unsafeAttribute $ Right $ pure $
+    unsafeVolatileAttribute
+  mapAttr OnLostpointercapture evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "lostpointercapture", value: cb' (Cb (const value)) }
 
 type OnLostpointercaptureEffect =
   forall element
@@ -25,5 +36,6 @@ type OnLostpointercaptureEffect =
   => Event (Attribute element)
 
 instance Attr everything OnLostpointercapture Unit where
-  attr OnLostpointercapture _ = unsafeAttribute
-    { key: "lostpointercapture", value: unset' }
+  pureAttr OnLostpointercapture _ = unsafeAttribute $ Right $ pure $
+    unsafeVolatileAttribute
+      { key: "lostpointercapture", value: unset' }

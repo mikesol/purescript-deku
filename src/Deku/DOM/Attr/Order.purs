@@ -1,15 +1,23 @@
 module Deku.DOM.Attr.Order where
 
 import Prelude
+import Data.Either (Either(..))
 
-import Deku.DOM.Elt.FeConvolveMatrix (FeConvolveMatrix_)
-import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
+import Deku.Attribute (class Attr, prop', unsafeAttribute, unsafePureAttribute, unsafeVolatileAttribute, unset')
+import Deku.DOM.Tags as Tags
 
 data Order = Order
 
-instance Attr FeConvolveMatrix_ Order String where
-  attr Order value = unsafeAttribute { key: "order", value: prop' value }
+instance Attr Tags.FeConvolveMatrix_ Order String where
+  pureAttr Order value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "order", value }
+
+  mapAttr Order evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "order", value: prop' value }
 
 instance Attr everything Order Unit where
-  attr Order _ = unsafeAttribute
+  pureAttr Order _ = unsafeAttribute $ Right $ pure $ unsafeVolatileAttribute
     { key: "order", value: unset' }
+  mapAttr Order evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "order", value: unset' }

@@ -1,23 +1,37 @@
 module Deku.DOM.Attr.In2 where
 
 import Prelude
+import Data.Either (Either(..))
 
-import Deku.DOM.Elt.FeDisplacementMap (FeDisplacementMap_)
-import Deku.DOM.Elt.FeComposite (FeComposite_)
-import Deku.DOM.Elt.FeBlend (FeBlend_)
-import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
+import Deku.Attribute (class Attr, prop', unsafeAttribute, unsafePureAttribute, unsafeVolatileAttribute, unset')
+import Deku.DOM.Tags as Tags
 
 data In2 = In2
 
-instance Attr FeBlend_ In2 String where
-  attr In2 value = unsafeAttribute { key: "in2", value: prop' value }
+instance Attr Tags.FeBlend_ In2 String where
+  pureAttr In2 value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "in2", value }
 
-instance Attr FeComposite_ In2 String where
-  attr In2 value = unsafeAttribute { key: "in2", value: prop' value }
+  mapAttr In2 evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "in2", value: prop' value }
 
-instance Attr FeDisplacementMap_ In2 String where
-  attr In2 value = unsafeAttribute { key: "in2", value: prop' value }
+instance Attr Tags.FeComposite_ In2 String where
+  pureAttr In2 value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "in2", value }
+
+  mapAttr In2 evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "in2", value: prop' value }
+
+instance Attr Tags.FeDisplacementMap_ In2 String where
+  pureAttr In2 value = unsafeAttribute $ Left $ unsafePureAttribute
+    { key: "in2", value }
+
+  mapAttr In2 evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "in2", value: prop' value }
 
 instance Attr everything In2 Unit where
-  attr In2 _ = unsafeAttribute
+  pureAttr In2 _ = unsafeAttribute $ Right $ pure $ unsafeVolatileAttribute
     { key: "in2", value: unset' }
+  mapAttr In2 evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "in2", value: unset' }

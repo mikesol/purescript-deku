@@ -1,22 +1,33 @@
 module Deku.DOM.Attr.OnKeydown where
 
 import Prelude
+import Data.Either (Either(..))
 import Effect (Effect)
-import Deku.Attribute (class Attr, Attribute, Cb(..), cb', unsafeAttribute, unset')
+import Deku.Attribute (class Attr, Attribute, Cb(..), cb', unsafeAttribute, unsafePureAttribute, unsafeVolatileAttribute, unset')
+import Deku.DOM.Tags as Tags
 import FRP.Event (Event)
 
 data OnKeydown = OnKeydown
 
 instance Attr anything OnKeydown Cb where
-  attr OnKeydown value = unsafeAttribute { key: "keydown", value: cb' value }
+  pureAttr OnKeydown value = unsafeAttribute $ Right $ pure $
+    unsafeVolatileAttribute { key: "keydown", value: cb' value }
+  mapAttr OnKeydown evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute { key: "keydown", value: cb' value }
 
 instance Attr anything OnKeydown (Effect Unit) where
-  attr OnKeydown value = unsafeAttribute
-    { key: "keydown", value: cb' (Cb (const (value $> true))) }
+  pureAttr OnKeydown value = unsafeAttribute $ Right $ pure $
+    unsafeVolatileAttribute
+  mapAttr OnKeydown evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "keydown", value: cb' (Cb (const (value $> true))) }
 
 instance Attr anything OnKeydown (Effect Boolean) where
-  attr OnKeydown value = unsafeAttribute
-    { key: "keydown", value: cb' (Cb (const value)) }
+  pureAttr OnKeydown value = unsafeAttribute $ Right $ pure $
+    unsafeVolatileAttribute
+  mapAttr OnKeydown evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "keydown", value: cb' (Cb (const value)) }
 
 type OnKeydownEffect =
   forall element
@@ -24,5 +35,6 @@ type OnKeydownEffect =
   => Event (Attribute element)
 
 instance Attr everything OnKeydown Unit where
-  attr OnKeydown _ = unsafeAttribute
-    { key: "keydown", value: unset' }
+  pureAttr OnKeydown _ = unsafeAttribute $ Right $ pure $
+    unsafeVolatileAttribute
+      { key: "keydown", value: unset' }
