@@ -866,6 +866,7 @@ instance Attr everything Contenteditable Unit where
   pureAttr Contenteditable _ = unsafeAttribute $ Right $ pure $
     unsafeVolatileAttribute
       { key: "contenteditable", value: unset' }
-  mapAttr Contenteditable evalue = unsafeAttribute $ Right $ evalue <#> \value ->
-    unsafeVolatileAttribute
-      { key: "contenteditable", value: unset' }
+  mapAttr Contenteditable evalue = unsafeAttribute $ Right $ evalue <#>
+    \value ->
+      unsafeVolatileAttribute
+        { key: "contenteditable", value: unset' }

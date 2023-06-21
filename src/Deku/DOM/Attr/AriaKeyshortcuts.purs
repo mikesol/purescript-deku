@@ -131,6 +131,7 @@ instance Attr everything AriaKeyshortcuts Unit where
   pureAttr AriaKeyshortcuts _ = unsafeAttribute $ Right $ pure $
     unsafeVolatileAttribute
       { key: "aria-keyshortcuts", value: unset' }
-  mapAttr AriaKeyshortcuts evalue = unsafeAttribute $ Right $ evalue <#> \value ->
-    unsafeVolatileAttribute
-      { key: "aria-keyshortcuts", value: unset' }
+  mapAttr AriaKeyshortcuts evalue = unsafeAttribute $ Right $ evalue <#>
+    \value ->
+      unsafeVolatileAttribute
+        { key: "aria-keyshortcuts", value: unset' }

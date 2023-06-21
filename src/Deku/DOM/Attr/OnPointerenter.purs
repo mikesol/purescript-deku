@@ -12,6 +12,7 @@ data OnPointerenter = OnPointerenter
 instance Attr anything OnPointerenter Cb where
   pureAttr OnPointerenter value = unsafeAttribute $ Right $ pure $
     unsafeVolatileAttribute
+      { key: "pointerenter", value: cb' value }
   mapAttr OnPointerenter evalue = unsafeAttribute $ Right $ evalue <#> \value ->
     unsafeVolatileAttribute
       { key: "pointerenter", value: cb' value }
@@ -19,6 +20,7 @@ instance Attr anything OnPointerenter Cb where
 instance Attr anything OnPointerenter (Effect Unit) where
   pureAttr OnPointerenter value = unsafeAttribute $ Right $ pure $
     unsafeVolatileAttribute
+      { key: "pointerenter", value: cb' (Cb (const (value $> true))) }
   mapAttr OnPointerenter evalue = unsafeAttribute $ Right $ evalue <#> \value ->
     unsafeVolatileAttribute
       { key: "pointerenter", value: cb' (Cb (const (value $> true))) }
@@ -26,6 +28,7 @@ instance Attr anything OnPointerenter (Effect Unit) where
 instance Attr anything OnPointerenter (Effect Boolean) where
   pureAttr OnPointerenter value = unsafeAttribute $ Right $ pure $
     unsafeVolatileAttribute
+      { key: "pointerenter", value: cb' (Cb (const value)) }
   mapAttr OnPointerenter evalue = unsafeAttribute $ Right $ evalue <#> \value ->
     unsafeVolatileAttribute
       { key: "pointerenter", value: cb' (Cb (const value)) }
@@ -37,5 +40,9 @@ type OnPointerenterEffect =
 
 instance Attr everything OnPointerenter Unit where
   pureAttr OnPointerenter _ = unsafeAttribute $ Right $ pure $
+    unsafeVolatileAttribute
+      { key: "pointerenter", value: unset' }
+
+  mapAttr OnPointerenter evalue = unsafeAttribute $ Right $ evalue <#> \_ ->
     unsafeVolatileAttribute
       { key: "pointerenter", value: unset' }

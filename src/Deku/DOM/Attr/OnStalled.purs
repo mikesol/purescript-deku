@@ -18,6 +18,7 @@ instance Attr anything OnStalled Cb where
 instance Attr anything OnStalled (Effect Unit) where
   pureAttr OnStalled value = unsafeAttribute $ Right $ pure $
     unsafeVolatileAttribute
+      { key: "stalled", value: cb' (Cb (const (value $> true))) }
   mapAttr OnStalled evalue = unsafeAttribute $ Right $ evalue <#> \value ->
     unsafeVolatileAttribute
       { key: "stalled", value: cb' (Cb (const (value $> true))) }
@@ -25,6 +26,7 @@ instance Attr anything OnStalled (Effect Unit) where
 instance Attr anything OnStalled (Effect Boolean) where
   pureAttr OnStalled value = unsafeAttribute $ Right $ pure $
     unsafeVolatileAttribute
+      { key: "stalled", value: cb' (Cb (const value)) }
   mapAttr OnStalled evalue = unsafeAttribute $ Right $ evalue <#> \value ->
     unsafeVolatileAttribute
       { key: "stalled", value: cb' (Cb (const value)) }
@@ -36,5 +38,9 @@ type OnStalledEffect =
 
 instance Attr everything OnStalled Unit where
   pureAttr OnStalled _ = unsafeAttribute $ Right $ pure $
+    unsafeVolatileAttribute
+      { key: "stalled", value: unset' }
+
+  mapAttr OnStalled evalue = unsafeAttribute $ Right $ evalue <#> \_ ->
     unsafeVolatileAttribute
       { key: "stalled", value: unset' }

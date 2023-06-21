@@ -12,6 +12,7 @@ data OnContextmenu = OnContextmenu
 instance Attr anything OnContextmenu Cb where
   pureAttr OnContextmenu value = unsafeAttribute $ Right $ pure $
     unsafeVolatileAttribute
+      { key: "contextmenu", value: cb' value }
   mapAttr OnContextmenu evalue = unsafeAttribute $ Right $ evalue <#> \value ->
     unsafeVolatileAttribute
       { key: "contextmenu", value: cb' value }
@@ -19,6 +20,7 @@ instance Attr anything OnContextmenu Cb where
 instance Attr anything OnContextmenu (Effect Unit) where
   pureAttr OnContextmenu value = unsafeAttribute $ Right $ pure $
     unsafeVolatileAttribute
+      { key: "contextmenu", value: cb' (Cb (const (value $> true))) }
   mapAttr OnContextmenu evalue = unsafeAttribute $ Right $ evalue <#> \value ->
     unsafeVolatileAttribute
       { key: "contextmenu", value: cb' (Cb (const (value $> true))) }
@@ -26,6 +28,7 @@ instance Attr anything OnContextmenu (Effect Unit) where
 instance Attr anything OnContextmenu (Effect Boolean) where
   pureAttr OnContextmenu value = unsafeAttribute $ Right $ pure $
     unsafeVolatileAttribute
+      { key: "contextmenu", value: cb' (Cb (const value)) }
   mapAttr OnContextmenu evalue = unsafeAttribute $ Right $ evalue <#> \value ->
     unsafeVolatileAttribute
       { key: "contextmenu", value: cb' (Cb (const value)) }
@@ -37,5 +40,9 @@ type OnContextmenuEffect =
 
 instance Attr everything OnContextmenu Unit where
   pureAttr OnContextmenu _ = unsafeAttribute $ Right $ pure $
+    unsafeVolatileAttribute
+      { key: "contextmenu", value: unset' }
+
+  mapAttr OnContextmenu evalue = unsafeAttribute $ Right $ evalue <#> \_ ->
     unsafeVolatileAttribute
       { key: "contextmenu", value: unset' }

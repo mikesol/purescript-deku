@@ -131,6 +131,7 @@ instance Attr everything AriaPlaceholder Unit where
   pureAttr AriaPlaceholder _ = unsafeAttribute $ Right $ pure $
     unsafeVolatileAttribute
       { key: "aria-placeholder", value: unset' }
-  mapAttr AriaPlaceholder evalue = unsafeAttribute $ Right $ evalue <#> \value ->
-    unsafeVolatileAttribute
-      { key: "aria-placeholder", value: unset' }
+  mapAttr AriaPlaceholder evalue = unsafeAttribute $ Right $ evalue <#>
+    \value ->
+      unsafeVolatileAttribute
+        { key: "aria-placeholder", value: unset' }

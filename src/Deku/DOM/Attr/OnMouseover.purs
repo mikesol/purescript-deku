@@ -12,6 +12,7 @@ data OnMouseover = OnMouseover
 instance Attr anything OnMouseover Cb where
   pureAttr OnMouseover value = unsafeAttribute $ Right $ pure $
     unsafeVolatileAttribute
+      { key: "mouseover", value: cb' value }
   mapAttr OnMouseover evalue = unsafeAttribute $ Right $ evalue <#> \value ->
     unsafeVolatileAttribute
       { key: "mouseover", value: cb' value }
@@ -19,6 +20,7 @@ instance Attr anything OnMouseover Cb where
 instance Attr anything OnMouseover (Effect Unit) where
   pureAttr OnMouseover value = unsafeAttribute $ Right $ pure $
     unsafeVolatileAttribute
+      { key: "mouseover", value: cb' (Cb (const (value $> true))) }
   mapAttr OnMouseover evalue = unsafeAttribute $ Right $ evalue <#> \value ->
     unsafeVolatileAttribute
       { key: "mouseover", value: cb' (Cb (const (value $> true))) }
@@ -26,6 +28,7 @@ instance Attr anything OnMouseover (Effect Unit) where
 instance Attr anything OnMouseover (Effect Boolean) where
   pureAttr OnMouseover value = unsafeAttribute $ Right $ pure $
     unsafeVolatileAttribute
+      { key: "mouseover", value: cb' (Cb (const value)) }
   mapAttr OnMouseover evalue = unsafeAttribute $ Right $ evalue <#> \value ->
     unsafeVolatileAttribute
       { key: "mouseover", value: cb' (Cb (const value)) }
@@ -37,5 +40,9 @@ type OnMouseoverEffect =
 
 instance Attr everything OnMouseover Unit where
   pureAttr OnMouseover _ = unsafeAttribute $ Right $ pure $
+    unsafeVolatileAttribute
+      { key: "mouseover", value: unset' }
+
+  mapAttr OnMouseover evalue = unsafeAttribute $ Right $ evalue <#> \_ ->
     unsafeVolatileAttribute
       { key: "mouseover", value: unset' }

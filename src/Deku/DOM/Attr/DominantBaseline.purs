@@ -159,6 +159,7 @@ instance Attr everything DominantBaseline Unit where
   pureAttr DominantBaseline _ = unsafeAttribute $ Right $ pure $
     unsafeVolatileAttribute
       { key: "dominant-baseline", value: unset' }
-  mapAttr DominantBaseline evalue = unsafeAttribute $ Right $ evalue <#> \value ->
-    unsafeVolatileAttribute
-      { key: "dominant-baseline", value: unset' }
+  mapAttr DominantBaseline evalue = unsafeAttribute $ Right $ evalue <#>
+    \value ->
+      unsafeVolatileAttribute
+        { key: "dominant-baseline", value: unset' }

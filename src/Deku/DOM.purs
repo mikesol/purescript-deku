@@ -645,7 +645,7 @@ module Deku.DOM
   , unsafeCustomElement
   ) where
 
-import Deku.Attribute (class Attr, attr, Attribute, Cb(..), cb', unsafeAttribute)
+import Deku.Attribute (class Attr, Attribute, Cb(..), cb', mapAttr, pureAttr, unsafeAttribute, unsafeVolatileAttribute)
 import Deku.Control (elementify3)
 import Deku.Core (Nut)
 import Deku.DOM.Attr.Accelerate (Accelerate(..))
@@ -1106,191 +1106,191 @@ import Deku.DOM.Attr.Y2 (Y2(..))
 import Deku.DOM.Attr.YChannelSelector (YChannelSelector(..))
 import Deku.DOM.Attr.Z (Z(..))
 import Deku.DOM.Attr.ZoomAndPan (ZoomAndPan(..))
-import Deku.DOM.Elt.A (A_, a, a_, a__)
-import Deku.DOM.Elt.Abbr (Abbr_, abbr, abbr_, abbr__)
-import Deku.DOM.Elt.Acronym (Acronym_, acronym, acronym_, acronym__)
-import Deku.DOM.Elt.Address (Address_, address, address_, address__)
-import Deku.DOM.Elt.Animate (Animate_, animate, animate_, animate__)
-import Deku.DOM.Elt.AnimateMotion (AnimateMotion_, animateMotion, animateMotion_, animateMotion__)
-import Deku.DOM.Elt.AnimateTransform (AnimateTransform_, animateTransform, animateTransform_, animateTransform__)
-import Deku.DOM.Elt.Applet (Applet_, applet, applet_, applet__)
-import Deku.DOM.Elt.Area (Area_, area, area_, area__)
-import Deku.DOM.Elt.Article (Article_, article, article_, article__)
-import Deku.DOM.Elt.Aside (Aside_, aside, aside_, aside__)
-import Deku.DOM.Elt.Audio (Audio_, audio, audio_, audio__)
-import Deku.DOM.Elt.B (B_, b, b_, b__)
-import Deku.DOM.Elt.Base (Base_, base, base_, base__)
-import Deku.DOM.Elt.Basefont (Basefont_, basefont, basefont_, basefont__)
-import Deku.DOM.Elt.Bdi (Bdi_, bdi, bdi_, bdi__)
-import Deku.DOM.Elt.Bdo (Bdo_, bdo, bdo_, bdo__)
-import Deku.DOM.Elt.Big (Big_, big, big_, big__)
-import Deku.DOM.Elt.Blockquote (Blockquote_, blockquote, blockquote_, blockquote__)
-import Deku.DOM.Elt.Body (Body_, body, body_, body__)
-import Deku.DOM.Elt.Br (Br_, br, br_, br__)
-import Deku.DOM.Elt.Button (Button_, button, button_, button__)
-import Deku.DOM.Elt.Canvas (Canvas_, canvas, canvas_, canvas__)
-import Deku.DOM.Elt.Caption (Caption_, caption, caption_, caption__)
-import Deku.DOM.Elt.Center (Center_, center, center_, center__)
-import Deku.DOM.Elt.Circle (Circle_, circle, circle_, circle__)
-import Deku.DOM.Elt.Cite (Cite_, cite, cite_, cite__)
-import Deku.DOM.Elt.ClipPath (ClipPath_, clipPath, clipPath_, clipPath__)
-import Deku.DOM.Elt.Code (Code_, code, code_, code__)
-import Deku.DOM.Elt.Col (Col_, col, col_, col__)
-import Deku.DOM.Elt.Colgroup (Colgroup_, colgroup, colgroup_, colgroup__)
-import Deku.DOM.Elt.Datalist (Datalist_, datalist, datalist_, datalist__)
-import Deku.DOM.Elt.Dd (Dd_, dd, dd_, dd__)
-import Deku.DOM.Elt.Defs (Defs_, defs, defs_, defs__)
-import Deku.DOM.Elt.Del (Del_, del, del_, del__)
-import Deku.DOM.Elt.Desc (Desc_, desc, desc_, desc__)
-import Deku.DOM.Elt.Details (Details_, details, details_, details__)
-import Deku.DOM.Elt.Dfn (Dfn_, dfn, dfn_, dfn__)
-import Deku.DOM.Elt.Dialog (Dialog_, dialog, dialog_, dialog__)
-import Deku.DOM.Elt.Dir (Dir_, dir, dir_, dir__)
-import Deku.DOM.Elt.Discard (Discard_, discard, discard_, discard__)
-import Deku.DOM.Elt.Div (Div_, div, div_, div__)
-import Deku.DOM.Elt.Dl (Dl_, dl, dl_, dl__)
-import Deku.DOM.Elt.Dt (Dt_, dt, dt_, dt__)
-import Deku.DOM.Elt.Ellipse (Ellipse_, ellipse, ellipse_, ellipse__)
-import Deku.DOM.Elt.Em (Em_, em, em_, em__)
-import Deku.DOM.Elt.Embed (Embed_, embed, embed_, embed__)
-import Deku.DOM.Elt.FeBlend (FeBlend_, feBlend, feBlend_, feBlend__)
-import Deku.DOM.Elt.FeColorMatrix (FeColorMatrix_, feColorMatrix, feColorMatrix_, feColorMatrix__)
-import Deku.DOM.Elt.FeComponentTransfer (FeComponentTransfer_, feComponentTransfer, feComponentTransfer_, feComponentTransfer__)
-import Deku.DOM.Elt.FeComposite (FeComposite_, feComposite, feComposite_, feComposite__)
-import Deku.DOM.Elt.FeConvolveMatrix (FeConvolveMatrix_, feConvolveMatrix, feConvolveMatrix_, feConvolveMatrix__)
-import Deku.DOM.Elt.FeDiffuseLighting (FeDiffuseLighting_, feDiffuseLighting, feDiffuseLighting_, feDiffuseLighting__)
-import Deku.DOM.Elt.FeDisplacementMap (FeDisplacementMap_, feDisplacementMap, feDisplacementMap_, feDisplacementMap__)
-import Deku.DOM.Elt.FeDistantLight (FeDistantLight_, feDistantLight, feDistantLight_, feDistantLight__)
-import Deku.DOM.Elt.FeDropShadow (FeDropShadow_, feDropShadow, feDropShadow_, feDropShadow__)
-import Deku.DOM.Elt.FeFlood (FeFlood_, feFlood, feFlood_, feFlood__)
-import Deku.DOM.Elt.FeFuncA (FeFuncA_, feFuncA, feFuncA_, feFuncA__)
-import Deku.DOM.Elt.FeFuncB (FeFuncB_, feFuncB, feFuncB_, feFuncB__)
-import Deku.DOM.Elt.FeFuncG (FeFuncG_, feFuncG, feFuncG_, feFuncG__)
-import Deku.DOM.Elt.FeFuncR (FeFuncR_, feFuncR, feFuncR_, feFuncR__)
-import Deku.DOM.Elt.FeGaussianBlur (FeGaussianBlur_, feGaussianBlur, feGaussianBlur_, feGaussianBlur__)
-import Deku.DOM.Elt.FeImage (FeImage_, feImage, feImage_, feImage__)
-import Deku.DOM.Elt.FeMerge (FeMerge_, feMerge, feMerge_, feMerge__)
-import Deku.DOM.Elt.FeMergeNode (FeMergeNode_, feMergeNode, feMergeNode_, feMergeNode__)
-import Deku.DOM.Elt.FeMorphology (FeMorphology_, feMorphology, feMorphology_, feMorphology__)
-import Deku.DOM.Elt.FeOffset (FeOffset_, feOffset, feOffset_, feOffset__)
-import Deku.DOM.Elt.FePointLight (FePointLight_, fePointLight, fePointLight_, fePointLight__)
-import Deku.DOM.Elt.FeSpecularLighting (FeSpecularLighting_, feSpecularLighting, feSpecularLighting_, feSpecularLighting__)
-import Deku.DOM.Elt.FeSpotLight (FeSpotLight_, feSpotLight, feSpotLight_, feSpotLight__)
-import Deku.DOM.Elt.FeTile (FeTile_, feTile, feTile_, feTile__)
-import Deku.DOM.Elt.FeTurbulence (FeTurbulence_, feTurbulence, feTurbulence_, feTurbulence__)
-import Deku.DOM.Elt.Fieldset (Fieldset_, fieldset, fieldset_, fieldset__)
-import Deku.DOM.Elt.Figcaption (Figcaption_, figcaption, figcaption_, figcaption__)
-import Deku.DOM.Elt.Figure (Figure_, figure, figure_, figure__)
-import Deku.DOM.Elt.Filter (Filter_, filter, filter_, filter__)
-import Deku.DOM.Elt.Font (Font_, font, font_, font__)
-import Deku.DOM.Elt.Footer (Footer_, footer, footer_, footer__)
-import Deku.DOM.Elt.ForeignObject (ForeignObject_, foreignObject, foreignObject_, foreignObject__)
-import Deku.DOM.Elt.Form (Form_, form, form_, form__)
-import Deku.DOM.Elt.Frame (Frame_, frame, frame_, frame__)
-import Deku.DOM.Elt.Frameset (Frameset_, frameset, frameset_, frameset__)
-import Deku.DOM.Elt.G (G_, g, g_, g__)
-import Deku.DOM.Elt.H1 (H1_, h1, h1_, h1__)
-import Deku.DOM.Elt.H2 (H2_, h2, h2_, h2__)
-import Deku.DOM.Elt.H3 (H3_, h3, h3_, h3__)
-import Deku.DOM.Elt.H4 (H4_, h4, h4_, h4__)
-import Deku.DOM.Elt.H5 (H5_, h5, h5_, h5__)
-import Deku.DOM.Elt.H6 (H6_, h6, h6_, h6__)
-import Deku.DOM.Elt.Head (Head_, head, head_, head__)
-import Deku.DOM.Elt.Header (Header_, header, header_, header__)
-import Deku.DOM.Elt.Hr (Hr_, hr, hr_, hr__)
-import Deku.DOM.Elt.Html (Html_, html, html_, html__)
-import Deku.DOM.Elt.I (I_, i, i_, i__)
-import Deku.DOM.Elt.Iframe (Iframe_, iframe, iframe_, iframe__)
-import Deku.DOM.Elt.Image (Image_, image, image_, image__)
-import Deku.DOM.Elt.Img (Img_, img, img_, img__)
-import Deku.DOM.Elt.Input (Input_, input, input_, input__)
-import Deku.DOM.Elt.Ins (Ins_, ins, ins_, ins__)
-import Deku.DOM.Elt.Kbd (Kbd_, kbd, kbd_, kbd__)
-import Deku.DOM.Elt.Label (Label_, label, label_, label__)
-import Deku.DOM.Elt.Legend (Legend_, legend, legend_, legend__)
-import Deku.DOM.Elt.Li (Li_, li, li_, li__)
-import Deku.DOM.Elt.Line (Line_, line, line_, line__)
-import Deku.DOM.Elt.LinearGradient (LinearGradient_, linearGradient, linearGradient_, linearGradient__)
-import Deku.DOM.Elt.Link (Link_, link, link_, link__)
-import Deku.DOM.Elt.Main (Main_, main, main_, main__)
-import Deku.DOM.Elt.Map (Map_, map, map_, map__)
-import Deku.DOM.Elt.Mark (Mark_, mark, mark_, mark__)
-import Deku.DOM.Elt.Marker (Marker_, marker, marker_, marker__)
-import Deku.DOM.Elt.Mask (Mask_, mask, mask_, mask__)
-import Deku.DOM.Elt.Meta (Meta_, meta, meta_, meta__)
-import Deku.DOM.Elt.Metadata (Metadata_, metadata, metadata_, metadata__)
-import Deku.DOM.Elt.Meter (Meter_, meter, meter_, meter__)
-import Deku.DOM.Elt.Mpath (Mpath_, mpath, mpath_, mpath__)
-import Deku.DOM.Elt.Nav (Nav_, nav, nav_, nav__)
-import Deku.DOM.Elt.Noframes (Noframes_, noframes, noframes_, noframes__)
-import Deku.DOM.Elt.Noscript (Noscript_, noscript, noscript_, noscript__)
-import Deku.DOM.Elt.Object (Object_, object, object_, object__)
-import Deku.DOM.Elt.Ol (Ol_, ol, ol_, ol__)
-import Deku.DOM.Elt.Optgroup (Optgroup_, optgroup, optgroup_, optgroup__)
-import Deku.DOM.Elt.Option (Option_, option, option_, option__)
-import Deku.DOM.Elt.Output (Output_, output, output_, output__)
-import Deku.DOM.Elt.P (P_, p, p_, p__)
-import Deku.DOM.Elt.Param (Param_, param, param_, param__)
-import Deku.DOM.Elt.Path (Path_, path, path_, path__)
-import Deku.DOM.Elt.Pattern (Pattern_, pattern, pattern_, pattern__)
-import Deku.DOM.Elt.Picture (Picture_, picture, picture_, picture__)
-import Deku.DOM.Elt.Polygon (Polygon_, polygon, polygon_, polygon__)
-import Deku.DOM.Elt.Polyline (Polyline_, polyline, polyline_, polyline__)
-import Deku.DOM.Elt.Pre (Pre_, pre, pre_, pre__)
-import Deku.DOM.Elt.Progress (Progress_, progress, progress_, progress__)
-import Deku.DOM.Elt.Q (Q_, q, q_, q__)
-import Deku.DOM.Elt.RadialGradient (RadialGradient_, radialGradient, radialGradient_, radialGradient__)
-import Deku.DOM.Elt.Rect (Rect_, rect, rect_, rect__)
-import Deku.DOM.Elt.Rp (Rp_, rp, rp_, rp__)
-import Deku.DOM.Elt.Rt (Rt_, rt, rt_, rt__)
-import Deku.DOM.Elt.Ruby (Ruby_, ruby, ruby_, ruby__)
-import Deku.DOM.Elt.S (S_, s, s_, s__)
-import Deku.DOM.Elt.Samp (Samp_, samp, samp_, samp__)
-import Deku.DOM.Elt.Script (Script_, script, script_, script__)
-import Deku.DOM.Elt.Section (Section_, section, section_, section__)
-import Deku.DOM.Elt.Select (Select_, select, select_, select__)
-import Deku.DOM.Elt.Set (Set_, set, set_, set__)
-import Deku.DOM.Elt.Small (Small_, small, small_, small__)
-import Deku.DOM.Elt.Source (Source_, source, source_, source__)
-import Deku.DOM.Elt.Span (Span_, span, span_, span__)
-import Deku.DOM.Elt.Stop (Stop_, stop, stop_, stop__)
-import Deku.DOM.Elt.Strike (Strike_, strike, strike_, strike__)
-import Deku.DOM.Elt.Strong (Strong_, strong, strong_, strong__)
-import Deku.DOM.Elt.Style (Style_, style, style_, style__)
-import Deku.DOM.Elt.Sub (Sub_, sub, sub_, sub__)
-import Deku.DOM.Elt.Summary (Summary_, summary, summary_, summary__)
-import Deku.DOM.Elt.Sup (Sup_, sup, sup_, sup__)
-import Deku.DOM.Elt.Svg (Svg_, svg, svg_, svg__)
-import Deku.DOM.Elt.Switch (Switch_, switch, switch_, switch__)
-import Deku.DOM.Elt.Symbol (Symbol_, symbol, symbol_, symbol__)
-import Deku.DOM.Elt.Table (Table_, table, table_, table__)
-import Deku.DOM.Elt.Tbody (Tbody_, tbody, tbody_, tbody__)
-import Deku.DOM.Elt.Td (Td_, td, td_, td__)
-import Deku.DOM.Elt.Template (Template_, template, template_, template__)
-import Deku.DOM.Elt.Text (Text_, text, text_, text__)
-import Deku.DOM.Elt.TextPath (TextPath_, textPath, textPath_, textPath__)
-import Deku.DOM.Elt.Textarea (Textarea_, textarea, textarea_, textarea__)
-import Deku.DOM.Elt.Tfoot (Tfoot_, tfoot, tfoot_, tfoot__)
-import Deku.DOM.Elt.Th (Th_, th, th_, th__)
-import Deku.DOM.Elt.Thead (Thead_, thead, thead_, thead__)
-import Deku.DOM.Elt.Time (Time_, time, time_, time__)
-import Deku.DOM.Elt.Title (Title_, title, title_, title__)
-import Deku.DOM.Elt.Tr (Tr_, tr, tr_, tr__)
-import Deku.DOM.Elt.Track (Track_, track, track_, track__)
-import Deku.DOM.Elt.Tspan (Tspan_, tspan, tspan_, tspan__)
-import Deku.DOM.Elt.Tt (Tt_, tt, tt_, tt__)
-import Deku.DOM.Elt.U (U_, u, u_, u__)
-import Deku.DOM.Elt.Ul (Ul_, ul, ul_, ul__)
-import Deku.DOM.Elt.Use (Use_, use, use_, use__)
-import Deku.DOM.Elt.Var (Var_, var, var_, var__)
-import Deku.DOM.Elt.Video (Video_, video, video_, video__)
-import Deku.DOM.Elt.View (View_, view, view_, view__)
-import Deku.DOM.Elt.Wbr (Wbr_, wbr, wbr_, wbr__)
-import Deku.DOM.Elt.Xdata (Xdata_, xdata, xdata_, xdata__)
-import Deku.TagToDeku (class TagToDeku)
+import Deku.DOM.Elt.A ( a, a_, a__)
+import Deku.DOM.Elt.Abbr ( abbr, abbr_, abbr__)
+import Deku.DOM.Elt.Acronym ( acronym, acronym_, acronym__)
+import Deku.DOM.Elt.Address ( address, address_, address__)
+import Deku.DOM.Elt.Animate ( animate, animate_, animate__)
+import Deku.DOM.Elt.AnimateMotion ( animateMotion, animateMotion_, animateMotion__)
+import Deku.DOM.Elt.AnimateTransform ( animateTransform, animateTransform_, animateTransform__)
+import Deku.DOM.Elt.Applet ( applet, applet_, applet__)
+import Deku.DOM.Elt.Area ( area, area_, area__)
+import Deku.DOM.Elt.Article ( article, article_, article__)
+import Deku.DOM.Elt.Aside ( aside, aside_, aside__)
+import Deku.DOM.Elt.Audio ( audio, audio_, audio__)
+import Deku.DOM.Elt.B ( b, b_, b__)
+import Deku.DOM.Elt.Base ( base, base_, base__)
+import Deku.DOM.Elt.Basefont ( basefont, basefont_, basefont__)
+import Deku.DOM.Elt.Bdi ( bdi, bdi_, bdi__)
+import Deku.DOM.Elt.Bdo ( bdo, bdo_, bdo__)
+import Deku.DOM.Elt.Big ( big, big_, big__)
+import Deku.DOM.Elt.Blockquote ( blockquote, blockquote_, blockquote__)
+import Deku.DOM.Elt.Body ( body, body_, body__)
+import Deku.DOM.Elt.Br ( br, br_, br__)
+import Deku.DOM.Elt.Button ( button, button_, button__)
+import Deku.DOM.Elt.Canvas ( canvas, canvas_, canvas__)
+import Deku.DOM.Elt.Caption ( caption, caption_, caption__)
+import Deku.DOM.Elt.Center ( center, center_, center__)
+import Deku.DOM.Elt.Circle ( circle, circle_, circle__)
+import Deku.DOM.Elt.Cite ( cite, cite_, cite__)
+import Deku.DOM.Elt.ClipPath ( clipPath, clipPath_, clipPath__)
+import Deku.DOM.Elt.Code ( code, code_, code__)
+import Deku.DOM.Elt.Col ( col, col_, col__)
+import Deku.DOM.Elt.Colgroup ( colgroup, colgroup_, colgroup__)
+import Deku.DOM.Elt.Datalist ( datalist, datalist_, datalist__)
+import Deku.DOM.Elt.Dd ( dd, dd_, dd__)
+import Deku.DOM.Elt.Defs ( defs, defs_, defs__)
+import Deku.DOM.Elt.Del ( del, del_, del__)
+import Deku.DOM.Elt.Desc ( desc, desc_, desc__)
+import Deku.DOM.Elt.Details ( details, details_, details__)
+import Deku.DOM.Elt.Dfn ( dfn, dfn_, dfn__)
+import Deku.DOM.Elt.Dialog ( dialog, dialog_, dialog__)
+import Deku.DOM.Elt.Dir ( dir, dir_, dir__)
+import Deku.DOM.Elt.Discard ( discard, discard_, discard__)
+import Deku.DOM.Elt.Div ( div, div_, div__)
+import Deku.DOM.Elt.Dl ( dl, dl_, dl__)
+import Deku.DOM.Elt.Dt ( dt, dt_, dt__)
+import Deku.DOM.Elt.Ellipse ( ellipse, ellipse_, ellipse__)
+import Deku.DOM.Elt.Em ( em, em_, em__)
+import Deku.DOM.Elt.Embed ( embed, embed_, embed__)
+import Deku.DOM.Elt.FeBlend ( feBlend, feBlend_, feBlend__)
+import Deku.DOM.Elt.FeColorMatrix ( feColorMatrix, feColorMatrix_, feColorMatrix__)
+import Deku.DOM.Elt.FeComponentTransfer ( feComponentTransfer, feComponentTransfer_, feComponentTransfer__)
+import Deku.DOM.Elt.FeComposite ( feComposite, feComposite_, feComposite__)
+import Deku.DOM.Elt.FeConvolveMatrix ( feConvolveMatrix, feConvolveMatrix_, feConvolveMatrix__)
+import Deku.DOM.Elt.FeDiffuseLighting ( feDiffuseLighting, feDiffuseLighting_, feDiffuseLighting__)
+import Deku.DOM.Elt.FeDisplacementMap ( feDisplacementMap, feDisplacementMap_, feDisplacementMap__)
+import Deku.DOM.Elt.FeDistantLight ( feDistantLight, feDistantLight_, feDistantLight__)
+import Deku.DOM.Elt.FeDropShadow ( feDropShadow, feDropShadow_, feDropShadow__)
+import Deku.DOM.Elt.FeFlood ( feFlood, feFlood_, feFlood__)
+import Deku.DOM.Elt.FeFuncA ( feFuncA, feFuncA_, feFuncA__)
+import Deku.DOM.Elt.FeFuncB ( feFuncB, feFuncB_, feFuncB__)
+import Deku.DOM.Elt.FeFuncG ( feFuncG, feFuncG_, feFuncG__)
+import Deku.DOM.Elt.FeFuncR ( feFuncR, feFuncR_, feFuncR__)
+import Deku.DOM.Elt.FeGaussianBlur ( feGaussianBlur, feGaussianBlur_, feGaussianBlur__)
+import Deku.DOM.Elt.FeImage ( feImage, feImage_, feImage__)
+import Deku.DOM.Elt.FeMerge ( feMerge, feMerge_, feMerge__)
+import Deku.DOM.Elt.FeMergeNode ( feMergeNode, feMergeNode_, feMergeNode__)
+import Deku.DOM.Elt.FeMorphology ( feMorphology, feMorphology_, feMorphology__)
+import Deku.DOM.Elt.FeOffset ( feOffset, feOffset_, feOffset__)
+import Deku.DOM.Elt.FePointLight ( fePointLight, fePointLight_, fePointLight__)
+import Deku.DOM.Elt.FeSpecularLighting ( feSpecularLighting, feSpecularLighting_, feSpecularLighting__)
+import Deku.DOM.Elt.FeSpotLight ( feSpotLight, feSpotLight_, feSpotLight__)
+import Deku.DOM.Elt.FeTile ( feTile, feTile_, feTile__)
+import Deku.DOM.Elt.FeTurbulence ( feTurbulence, feTurbulence_, feTurbulence__)
+import Deku.DOM.Elt.Fieldset ( fieldset, fieldset_, fieldset__)
+import Deku.DOM.Elt.Figcaption ( figcaption, figcaption_, figcaption__)
+import Deku.DOM.Elt.Figure ( figure, figure_, figure__)
+import Deku.DOM.Elt.Filter ( filter, filter_, filter__)
+import Deku.DOM.Elt.Font ( font, font_, font__)
+import Deku.DOM.Elt.Footer ( footer, footer_, footer__)
+import Deku.DOM.Elt.ForeignObject ( foreignObject, foreignObject_, foreignObject__)
+import Deku.DOM.Elt.Form ( form, form_, form__)
+import Deku.DOM.Elt.Frame ( frame, frame_, frame__)
+import Deku.DOM.Elt.Frameset ( frameset, frameset_, frameset__)
+import Deku.DOM.Elt.G ( g, g_, g__)
+import Deku.DOM.Elt.H1 ( h1, h1_, h1__)
+import Deku.DOM.Elt.H2 ( h2, h2_, h2__)
+import Deku.DOM.Elt.H3 ( h3, h3_, h3__)
+import Deku.DOM.Elt.H4 ( h4, h4_, h4__)
+import Deku.DOM.Elt.H5 ( h5, h5_, h5__)
+import Deku.DOM.Elt.H6 ( h6, h6_, h6__)
+import Deku.DOM.Elt.Head ( head, head_, head__)
+import Deku.DOM.Elt.Header ( header, header_, header__)
+import Deku.DOM.Elt.Hr ( hr, hr_, hr__)
+import Deku.DOM.Elt.Html ( html, html_, html__)
+import Deku.DOM.Elt.I ( i, i_, i__)
+import Deku.DOM.Elt.Iframe ( iframe, iframe_, iframe__)
+import Deku.DOM.Elt.Image ( image, image_, image__)
+import Deku.DOM.Elt.Img ( img, img_, img__)
+import Deku.DOM.Elt.Input ( input, input_, input__)
+import Deku.DOM.Elt.Ins ( ins, ins_, ins__)
+import Deku.DOM.Elt.Kbd ( kbd, kbd_, kbd__)
+import Deku.DOM.Elt.Label ( label, label_, label__)
+import Deku.DOM.Elt.Legend ( legend, legend_, legend__)
+import Deku.DOM.Elt.Li ( li, li_, li__)
+import Deku.DOM.Elt.Line ( line, line_, line__)
+import Deku.DOM.Elt.LinearGradient ( linearGradient, linearGradient_, linearGradient__)
+import Deku.DOM.Elt.Link ( link, link_, link__)
+import Deku.DOM.Elt.Main ( main, main_, main__)
+import Deku.DOM.Elt.Map ( map, map_, map__)
+import Deku.DOM.Elt.Mark ( mark, mark_, mark__)
+import Deku.DOM.Elt.Marker ( marker, marker_, marker__)
+import Deku.DOM.Elt.Mask ( mask, mask_, mask__)
+import Deku.DOM.Elt.Meta ( meta, meta_, meta__)
+import Deku.DOM.Elt.Metadata ( metadata, metadata_, metadata__)
+import Deku.DOM.Elt.Meter ( meter, meter_, meter__)
+import Deku.DOM.Elt.Mpath ( mpath, mpath_, mpath__)
+import Deku.DOM.Elt.Nav ( nav, nav_, nav__)
+import Deku.DOM.Elt.Noframes ( noframes, noframes_, noframes__)
+import Deku.DOM.Elt.Noscript ( noscript, noscript_, noscript__)
+import Deku.DOM.Elt.Object ( object, object_, object__)
+import Deku.DOM.Elt.Ol ( ol, ol_, ol__)
+import Deku.DOM.Elt.Optgroup ( optgroup, optgroup_, optgroup__)
+import Deku.DOM.Elt.Option ( option, option_, option__)
+import Deku.DOM.Elt.Output ( output, output_, output__)
+import Deku.DOM.Elt.P ( p, p_, p__)
+import Deku.DOM.Elt.Param ( param, param_, param__)
+import Deku.DOM.Elt.Path ( path, path_, path__)
+import Deku.DOM.Elt.Pattern ( pattern, pattern_, pattern__)
+import Deku.DOM.Elt.Picture ( picture, picture_, picture__)
+import Deku.DOM.Elt.Polygon ( polygon, polygon_, polygon__)
+import Deku.DOM.Elt.Polyline ( polyline, polyline_, polyline__)
+import Deku.DOM.Elt.Pre ( pre, pre_, pre__)
+import Deku.DOM.Elt.Progress ( progress, progress_, progress__)
+import Deku.DOM.Elt.Q ( q, q_, q__)
+import Deku.DOM.Elt.RadialGradient ( radialGradient, radialGradient_, radialGradient__)
+import Deku.DOM.Elt.Rect ( rect, rect_, rect__)
+import Deku.DOM.Elt.Rp ( rp, rp_, rp__)
+import Deku.DOM.Elt.Rt ( rt, rt_, rt__)
+import Deku.DOM.Elt.Ruby ( ruby, ruby_, ruby__)
+import Deku.DOM.Elt.S ( s, s_, s__)
+import Deku.DOM.Elt.Samp ( samp, samp_, samp__)
+import Deku.DOM.Elt.Script ( script, script_, script__)
+import Deku.DOM.Elt.Section ( section, section_, section__)
+import Deku.DOM.Elt.Select ( select, select_, select__)
+import Deku.DOM.Elt.Set ( set, set_, set__)
+import Deku.DOM.Elt.Small ( small, small_, small__)
+import Deku.DOM.Elt.Source ( source, source_, source__)
+import Deku.DOM.Elt.Span ( span, span_, span__)
+import Deku.DOM.Elt.Stop ( stop, stop_, stop__)
+import Deku.DOM.Elt.Strike ( strike, strike_, strike__)
+import Deku.DOM.Elt.Strong ( strong, strong_, strong__)
+import Deku.DOM.Elt.Style ( style, style_, style__)
+import Deku.DOM.Elt.Sub ( sub, sub_, sub__)
+import Deku.DOM.Elt.Summary ( summary, summary_, summary__)
+import Deku.DOM.Elt.Sup ( sup, sup_, sup__)
+import Deku.DOM.Elt.Svg ( svg, svg_, svg__)
+import Deku.DOM.Elt.Switch ( switch, switch_, switch__)
+import Deku.DOM.Elt.Symbol ( symbol, symbol_, symbol__)
+import Deku.DOM.Elt.Table ( table, table_, table__)
+import Deku.DOM.Elt.Tbody ( tbody, tbody_, tbody__)
+import Deku.DOM.Elt.Td ( td, td_, td__)
+import Deku.DOM.Elt.Template ( template, template_, template__)
+import Deku.DOM.Elt.Text ( text, text_, text__)
+import Deku.DOM.Elt.TextPath ( textPath, textPath_, textPath__)
+import Deku.DOM.Elt.Textarea ( textarea, textarea_, textarea__)
+import Deku.DOM.Elt.Tfoot ( tfoot, tfoot_, tfoot__)
+import Deku.DOM.Elt.Th ( th, th_, th__)
+import Deku.DOM.Elt.Thead ( thead, thead_, thead__)
+import Deku.DOM.Elt.Time ( time, time_, time__)
+import Deku.DOM.Elt.Title ( title, title_, title__)
+import Deku.DOM.Elt.Tr ( tr, tr_, tr__)
+import Deku.DOM.Elt.Track ( track, track_, track__)
+import Deku.DOM.Elt.Tspan ( tspan, tspan_, tspan__)
+import Deku.DOM.Elt.Tt ( tt, tt_, tt__)
+import Deku.DOM.Elt.U ( u, u_, u__)
+import Deku.DOM.Elt.Ul ( ul, ul_, ul__)
+import Deku.DOM.Elt.Use ( use, use_, use__)
+import Deku.DOM.Elt.Var ( var, var_, var__)
+import Deku.DOM.Elt.Video ( video, video_, video__)
+import Deku.DOM.Elt.View ( view, view_, view__)
+import Deku.DOM.Elt.Wbr ( wbr, wbr_, wbr__)
+import Deku.DOM.Elt.Xdata ( xdata, xdata_, xdata__)
+import Prelude (($), pure, (<#>), Unit)
 import Effect (Effect)
-import FRP.Event (Event)
-import Prelude (Unit)
+import Data.Either (Either (..))
+import Deku.DOM.Tags as Tags
 import Type.Proxy (Proxy)
 import Unsafe.Coerce (unsafeCoerce)
 import Web.DOM as DOM
@@ -1344,7 +1344,7 @@ unsafeCustomElement
   :: forall element
    . String
   -> Proxy element
-  -> Array (Event (Attribute element))
+  -> Array (Attribute element)
   -> Array Nut
   -> Nut
 unsafeCustomElement name _ = elementify3 name
@@ -1356,7 +1356,9 @@ unsafeCustomElement name _ = elementify3 name
 data Self = Self
 
 instance Attr anything Self (DOM.Element -> Effect Unit) where
-  attr Self value = unsafeAttribute $ Left $ unsafePureAttribute
+  pureAttr Self value = unsafeAttribute $ Right $ pure $ unsafeVolatileAttribute
+    { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
+  mapAttr Self evalue = unsafeAttribute $ Right $ evalue <#> \value -> unsafeVolatileAttribute
     { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
 
 -- | A slightly less permissive version of `Self` that associates Deku Elements to
@@ -1365,179 +1367,182 @@ instance Attr anything Self (DOM.Element -> Effect Unit) where
 data SelfT = SelfT
 
 instance Attr anything SelfT (DOM.Element -> Effect Unit) where
-  attr SelfT value = unsafeAttribute $ Left $ unsafePureAttribute
+  pureAttr SelfT value = unsafeAttribute $ Right $ pure $ unsafeVolatileAttribute
+    { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
+  mapAttr SelfT evalue = unsafeAttribute $ Right $ evalue <#> \value -> unsafeVolatileAttribute
     { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
 
 instance Attr anything SelfT (Effect Unit) where
-  attr SelfT value = attr SelfT (\(_ :: DOM.Element) -> value)
+  pureAttr SelfT value = pureAttr SelfT (\(_ :: DOM.Element) -> value)
+  mapAttr SelfT evalue = mapAttr SelfT $ evalue <#> \value (_ :: DOM.Element) -> value
 
-instance Attr A_ SelfT (HTMLAnchorElement.HTMLAnchorElement -> Effect Unit) where
-  attr SelfT value = unsafeAttribute $ Left $ unsafePureAttribute
-    { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
+instance Attr Tags.A_ SelfT (HTMLAnchorElement.HTMLAnchorElement -> Effect Unit) where
+  pureAttr SelfT value = unsafeAttribute $ Right $ pure $ unsafeVolatileAttribute    { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
+  mapAttr SelfT evalue = unsafeAttribute $ Right $ evalue <#> \value ->unsafeVolatileAttribute    { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
 
-instance Attr Area_ SelfT (HTMLAreaElement.HTMLAreaElement -> Effect Unit) where
-  attr SelfT value = unsafeAttribute $ Left $ unsafePureAttribute
-    { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
+instance Attr Tags.Area_ SelfT (HTMLAreaElement.HTMLAreaElement -> Effect Unit) where
+  pureAttr SelfT value = unsafeAttribute $ Right $ pure $ unsafeVolatileAttribute    { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
+  mapAttr SelfT evalue = unsafeAttribute $ Right $ evalue <#> \value ->unsafeVolatileAttribute    { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
 
-instance Attr Audio_ SelfT (HTMLAudioElement.HTMLAudioElement -> Effect Unit) where
-  attr SelfT value = unsafeAttribute $ Left $ unsafePureAttribute
-    { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
+instance Attr Tags.Audio_ SelfT (HTMLAudioElement.HTMLAudioElement -> Effect Unit) where
+  pureAttr SelfT value = unsafeAttribute $ Right $ pure $ unsafeVolatileAttribute    { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
+  mapAttr SelfT evalue = unsafeAttribute $ Right $ evalue <#> \value ->unsafeVolatileAttribute    { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
 
-instance Attr Base_ SelfT (HTMLBaseElement.HTMLBaseElement -> Effect Unit) where
-  attr SelfT value = unsafeAttribute $ Left $ unsafePureAttribute
-    { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
+instance Attr Tags.Base_ SelfT (HTMLBaseElement.HTMLBaseElement -> Effect Unit) where
+  pureAttr SelfT value = unsafeAttribute $ Right $ pure $ unsafeVolatileAttribute    { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
+  mapAttr SelfT evalue = unsafeAttribute $ Right $ evalue <#> \value ->unsafeVolatileAttribute    { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
 
-instance Attr Body_ SelfT (HTMLBodyElement.HTMLBodyElement -> Effect Unit) where
-  attr SelfT value = unsafeAttribute $ Left $ unsafePureAttribute
-    { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
+instance Attr Tags.Body_ SelfT (HTMLBodyElement.HTMLBodyElement -> Effect Unit) where
+  pureAttr SelfT value = unsafeAttribute $ Right $ pure $ unsafeVolatileAttribute    { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
+  mapAttr SelfT evalue = unsafeAttribute $ Right $ evalue <#> \value ->unsafeVolatileAttribute    { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
 
-instance Attr Br_ SelfT (HTMLBRElement.HTMLBRElement -> Effect Unit) where
-  attr SelfT value = unsafeAttribute $ Left $ unsafePureAttribute
-    { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
+instance Attr Tags.Br_ SelfT (HTMLBRElement.HTMLBRElement -> Effect Unit) where
+  pureAttr SelfT value = unsafeAttribute $ Right $ pure $ unsafeVolatileAttribute    { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
+  mapAttr SelfT evalue = unsafeAttribute $ Right $ evalue <#> \value ->unsafeVolatileAttribute    { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
 
-instance Attr Button_ SelfT (HTMLButtonElement.HTMLButtonElement -> Effect Unit) where
-  attr SelfT value = unsafeAttribute $ Left $ unsafePureAttribute
-    { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
+instance Attr Tags.Button_ SelfT (HTMLButtonElement.HTMLButtonElement -> Effect Unit) where
+  pureAttr SelfT value = unsafeAttribute $ Right $ pure $ unsafeVolatileAttribute    { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
+  mapAttr SelfT evalue = unsafeAttribute $ Right $ evalue <#> \value ->unsafeVolatileAttribute    { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
 
-instance Attr Canvas_ SelfT (HTMLCanvasElement.HTMLCanvasElement -> Effect Unit) where
-  attr SelfT value = unsafeAttribute $ Left $ unsafePureAttribute
-    { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
+instance Attr Tags.Canvas_ SelfT (HTMLCanvasElement.HTMLCanvasElement -> Effect Unit) where
+  pureAttr SelfT value = unsafeAttribute $ Right $ pure $ unsafeVolatileAttribute    { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
+  mapAttr SelfT evalue = unsafeAttribute $ Right $ evalue <#> \value ->unsafeVolatileAttribute    { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
 
-instance Attr Div_ SelfT (HTMLDivElement.HTMLDivElement -> Effect Unit) where
-  attr SelfT value = unsafeAttribute $ Left $ unsafePureAttribute
-    { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
+instance Attr Tags.Div_ SelfT (HTMLDivElement.HTMLDivElement -> Effect Unit) where
+  pureAttr SelfT value = unsafeAttribute $ Right $ pure $ unsafeVolatileAttribute    { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
+  mapAttr SelfT evalue = unsafeAttribute $ Right $ evalue <#> \value ->unsafeVolatileAttribute    { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
 
-instance Attr Embed_ SelfT (HTMLEmbedElement.HTMLEmbedElement -> Effect Unit) where
-  attr SelfT value = unsafeAttribute $ Left $ unsafePureAttribute
-    { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
+instance Attr Tags.Embed_ SelfT (HTMLEmbedElement.HTMLEmbedElement -> Effect Unit) where
+  pureAttr SelfT value = unsafeAttribute $ Right $ pure $ unsafeVolatileAttribute    { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
+  mapAttr SelfT evalue = unsafeAttribute $ Right $ evalue <#> \value ->unsafeVolatileAttribute    { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
 
-instance Attr Form_ SelfT (HTMLFormElement.HTMLFormElement -> Effect Unit) where
-  attr SelfT value = unsafeAttribute $ Left $ unsafePureAttribute
-    { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
+instance Attr Tags.Form_ SelfT (HTMLFormElement.HTMLFormElement -> Effect Unit) where
+  pureAttr SelfT value = unsafeAttribute $ Right $ pure $ unsafeVolatileAttribute    { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
+  mapAttr SelfT evalue = unsafeAttribute $ Right $ evalue <#> \value ->unsafeVolatileAttribute    { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
 
-instance Attr Head_ SelfT (HTMLHeadElement.HTMLHeadElement -> Effect Unit) where
-  attr SelfT value = unsafeAttribute $ Left $ unsafePureAttribute
-    { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
+instance Attr Tags.Head_ SelfT (HTMLHeadElement.HTMLHeadElement -> Effect Unit) where
+  pureAttr SelfT value = unsafeAttribute $ Right $ pure $ unsafeVolatileAttribute    { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
+  mapAttr SelfT evalue = unsafeAttribute $ Right $ evalue <#> \value ->unsafeVolatileAttribute    { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
 
-instance Attr Hr_ SelfT (HTMLHRElement.HTMLHRElement -> Effect Unit) where
-  attr SelfT value = unsafeAttribute $ Left $ unsafePureAttribute
-    { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
+instance Attr Tags.Hr_ SelfT (HTMLHRElement.HTMLHRElement -> Effect Unit) where
+  pureAttr SelfT value = unsafeAttribute $ Right $ pure $ unsafeVolatileAttribute    { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
+  mapAttr SelfT evalue = unsafeAttribute $ Right $ evalue <#> \value ->unsafeVolatileAttribute    { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
 
-instance Attr Html_ SelfT (HTMLHtmlElement.HTMLHtmlElement -> Effect Unit) where
-  attr SelfT value = unsafeAttribute $ Left $ unsafePureAttribute
-    { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
+instance Attr Tags.Html_ SelfT (HTMLHtmlElement.HTMLHtmlElement -> Effect Unit) where
+  pureAttr SelfT value = unsafeAttribute $ Right $ pure $ unsafeVolatileAttribute    { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
+  mapAttr SelfT evalue = unsafeAttribute $ Right $ evalue <#> \value ->unsafeVolatileAttribute    { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
 
-instance Attr Input_ SelfT (HTMLInputElement.HTMLInputElement -> Effect Unit) where
-  attr SelfT value = unsafeAttribute $ Left $ unsafePureAttribute
-    { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
+instance Attr Tags.Input_ SelfT (HTMLInputElement.HTMLInputElement -> Effect Unit) where
+  pureAttr SelfT value = unsafeAttribute $ Right $ pure $ unsafeVolatileAttribute    { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
+  mapAttr SelfT evalue = unsafeAttribute $ Right $ evalue <#> \value ->unsafeVolatileAttribute    { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
 
-instance Attr Label_ SelfT (HTMLLabelElement.HTMLLabelElement -> Effect Unit) where
-  attr SelfT value = unsafeAttribute $ Left $ unsafePureAttribute
-    { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
+instance Attr Tags.Label_ SelfT (HTMLLabelElement.HTMLLabelElement -> Effect Unit) where
+  pureAttr SelfT value = unsafeAttribute $ Right $ pure $ unsafeVolatileAttribute    { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
+  mapAttr SelfT evalue = unsafeAttribute $ Right $ evalue <#> \value ->unsafeVolatileAttribute    { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
 
-instance Attr Legend_ SelfT (HTMLLegendElement.HTMLLegendElement -> Effect Unit) where
-  attr SelfT value = unsafeAttribute $ Left $ unsafePureAttribute
-    { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
+instance Attr Tags.Legend_ SelfT (HTMLLegendElement.HTMLLegendElement -> Effect Unit) where
+  pureAttr SelfT value = unsafeAttribute $ Right $ pure $ unsafeVolatileAttribute    { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
+  mapAttr SelfT evalue = unsafeAttribute $ Right $ evalue <#> \value ->unsafeVolatileAttribute    { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
 
-instance Attr Link_ SelfT (HTMLLinkElement.HTMLLinkElement -> Effect Unit) where
-  attr SelfT value = unsafeAttribute $ Left $ unsafePureAttribute
-    { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
+instance Attr Tags.Link_ SelfT (HTMLLinkElement.HTMLLinkElement -> Effect Unit) where
+  pureAttr SelfT value = unsafeAttribute $ Right $ pure $ unsafeVolatileAttribute    { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
+  mapAttr SelfT evalue = unsafeAttribute $ Right $ evalue <#> \value ->unsafeVolatileAttribute    { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
 
-instance Attr Map_ SelfT (HTMLMapElement.HTMLMapElement -> Effect Unit) where
-  attr SelfT value = unsafeAttribute $ Left $ unsafePureAttribute
-    { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
+instance Attr Tags.Map_ SelfT (HTMLMapElement.HTMLMapElement -> Effect Unit) where
+  pureAttr SelfT value = unsafeAttribute $ Right $ pure $ unsafeVolatileAttribute    { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
+  mapAttr SelfT evalue = unsafeAttribute $ Right $ evalue <#> \value ->unsafeVolatileAttribute    { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
 
-instance Attr Meta_ SelfT (HTMLMetaElement.HTMLMetaElement -> Effect Unit) where
-  attr SelfT value = unsafeAttribute $ Left $ unsafePureAttribute
-    { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
+instance Attr Tags.Meta_ SelfT (HTMLMetaElement.HTMLMetaElement -> Effect Unit) where
+  pureAttr SelfT value = unsafeAttribute $ Right $ pure $ unsafeVolatileAttribute    { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
+  mapAttr SelfT evalue = unsafeAttribute $ Right $ evalue <#> \value ->unsafeVolatileAttribute    { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
 
-instance Attr Meter_ SelfT (HTMLMeterElement.HTMLMeterElement -> Effect Unit) where
-  attr SelfT value = unsafeAttribute $ Left $ unsafePureAttribute
-    { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
+instance Attr Tags.Meter_ SelfT (HTMLMeterElement.HTMLMeterElement -> Effect Unit) where
+  pureAttr SelfT value = unsafeAttribute $ Right $ pure $ unsafeVolatileAttribute    { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
+  mapAttr SelfT evalue = unsafeAttribute $ Right $ evalue <#> \value ->unsafeVolatileAttribute    { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
 
-instance Attr Object_ SelfT (HTMLObjectElement.HTMLObjectElement -> Effect Unit) where
-  attr SelfT value = unsafeAttribute $ Left $ unsafePureAttribute
-    { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
+instance Attr Tags.Object_ SelfT (HTMLObjectElement.HTMLObjectElement -> Effect Unit) where
+  pureAttr SelfT value = unsafeAttribute $ Right $ pure $ unsafeVolatileAttribute    { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
+  mapAttr SelfT evalue = unsafeAttribute $ Right $ evalue <#> \value ->unsafeVolatileAttribute    { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
 
-instance Attr Option_ SelfT (HTMLOptionElement.HTMLOptionElement -> Effect Unit) where
-  attr SelfT value = unsafeAttribute $ Left $ unsafePureAttribute
-    { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
+instance Attr Tags.Option_ SelfT (HTMLOptionElement.HTMLOptionElement -> Effect Unit) where
+  pureAttr SelfT value = unsafeAttribute $ Right $ pure $ unsafeVolatileAttribute    { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
+  mapAttr SelfT evalue = unsafeAttribute $ Right $ evalue <#> \value ->unsafeVolatileAttribute    { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
 
-instance Attr Output_ SelfT (HTMLOutputElement.HTMLOutputElement -> Effect Unit) where
-  attr SelfT value = unsafeAttribute $ Left $ unsafePureAttribute
-    { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
-
-instance
-  Attr P_ SelfT (HTMLParagraphElement.HTMLParagraphElement -> Effect Unit) where
-  attr SelfT value = unsafeAttribute $ Left $ unsafePureAttribute
-    { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
-
-instance Attr Param_ SelfT (HTMLParamElement.HTMLParamElement -> Effect Unit) where
-  attr SelfT value = unsafeAttribute $ Left $ unsafePureAttribute
-    { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
-
-instance Attr Pre_ SelfT (HTMLPreElement.HTMLPreElement -> Effect Unit) where
-  attr SelfT value = unsafeAttribute $ Left $ unsafePureAttribute
-    { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
+instance Attr Tags.Output_ SelfT (HTMLOutputElement.HTMLOutputElement -> Effect Unit) where
+  pureAttr SelfT value = unsafeAttribute $ Right $ pure $ unsafeVolatileAttribute    { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
+  mapAttr SelfT evalue = unsafeAttribute $ Right $ evalue <#> \value ->unsafeVolatileAttribute    { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
 
 instance
-  Attr Progress_ SelfT (HTMLProgressElement.HTMLProgressElement -> Effect Unit) where
-  attr SelfT value = unsafeAttribute $ Left $ unsafePureAttribute
-    { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
+  Attr Tags.P_ SelfT (HTMLParagraphElement.HTMLParagraphElement -> Effect Unit) where
+  pureAttr SelfT value = unsafeAttribute $ Right $ pure $ unsafeVolatileAttribute    { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
+  mapAttr SelfT evalue = unsafeAttribute $ Right $ evalue <#> \value ->unsafeVolatileAttribute    { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
 
-instance Attr Script_ SelfT (HTMLScriptElement.HTMLScriptElement -> Effect Unit) where
-  attr SelfT value = unsafeAttribute $ Left $ unsafePureAttribute
-    { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
+instance Attr Tags.Param_ SelfT (HTMLParamElement.HTMLParamElement -> Effect Unit) where
+  pureAttr SelfT value = unsafeAttribute $ Right $ pure $ unsafeVolatileAttribute    { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
+  mapAttr SelfT evalue = unsafeAttribute $ Right $ evalue <#> \value ->unsafeVolatileAttribute    { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
 
-instance Attr Select_ SelfT (HTMLSelectElement.HTMLSelectElement -> Effect Unit) where
-  attr SelfT value = unsafeAttribute $ Left $ unsafePureAttribute
-    { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
-
-instance Attr Source_ SelfT (HTMLSourceElement.HTMLSourceElement -> Effect Unit) where
-  attr SelfT value = unsafeAttribute $ Left $ unsafePureAttribute
-    { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
-
-instance Attr Span_ SelfT (HTMLSpanElement.HTMLSpanElement -> Effect Unit) where
-  attr SelfT value = unsafeAttribute $ Left $ unsafePureAttribute
-    { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
-
-instance Attr Style_ SelfT (HTMLStyleElement.HTMLStyleElement -> Effect Unit) where
-  attr SelfT value = unsafeAttribute $ Left $ unsafePureAttribute
-    { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
-
-instance Attr Table_ SelfT (HTMLTableElement.HTMLTableElement -> Effect Unit) where
-  attr SelfT value = unsafeAttribute $ Left $ unsafePureAttribute
-    { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
+instance Attr Tags.Pre_ SelfT (HTMLPreElement.HTMLPreElement -> Effect Unit) where
+  pureAttr SelfT value = unsafeAttribute $ Right $ pure $ unsafeVolatileAttribute    { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
+  mapAttr SelfT evalue = unsafeAttribute $ Right $ evalue <#> \value ->unsafeVolatileAttribute    { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
 
 instance
-  Attr Td_
+  Attr Tags.Progress_ SelfT (HTMLProgressElement.HTMLProgressElement -> Effect Unit) where
+  pureAttr SelfT value = unsafeAttribute $ Right $ pure $ unsafeVolatileAttribute    { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
+  mapAttr SelfT evalue = unsafeAttribute $ Right $ evalue <#> \value ->unsafeVolatileAttribute    { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
+
+instance Attr Tags.Script_ SelfT (HTMLScriptElement.HTMLScriptElement -> Effect Unit) where
+  pureAttr SelfT value = unsafeAttribute $ Right $ pure $ unsafeVolatileAttribute    { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
+  mapAttr SelfT evalue = unsafeAttribute $ Right $ evalue <#> \value ->unsafeVolatileAttribute    { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
+
+instance Attr Tags.Select_ SelfT (HTMLSelectElement.HTMLSelectElement -> Effect Unit) where
+  pureAttr SelfT value = unsafeAttribute $ Right $ pure $ unsafeVolatileAttribute    { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
+  mapAttr SelfT evalue = unsafeAttribute $ Right $ evalue <#> \value ->unsafeVolatileAttribute    { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
+
+instance Attr Tags.Source_ SelfT (HTMLSourceElement.HTMLSourceElement -> Effect Unit) where
+  pureAttr SelfT value = unsafeAttribute $ Right $ pure $ unsafeVolatileAttribute    { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
+  mapAttr SelfT evalue = unsafeAttribute $ Right $ evalue <#> \value ->unsafeVolatileAttribute    { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
+
+instance Attr Tags.Span_ SelfT (HTMLSpanElement.HTMLSpanElement -> Effect Unit) where
+  pureAttr SelfT value = unsafeAttribute $ Right $ pure $ unsafeVolatileAttribute    { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
+  mapAttr SelfT evalue = unsafeAttribute $ Right $ evalue <#> \value ->unsafeVolatileAttribute    { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
+
+instance Attr Tags.Style_ SelfT (HTMLStyleElement.HTMLStyleElement -> Effect Unit) where
+  pureAttr SelfT value = unsafeAttribute $ Right $ pure $ unsafeVolatileAttribute    { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
+  mapAttr SelfT evalue = unsafeAttribute $ Right $ evalue <#> \value ->unsafeVolatileAttribute    { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
+
+instance Attr Tags.Table_ SelfT (HTMLTableElement.HTMLTableElement -> Effect Unit) where
+  pureAttr SelfT value = unsafeAttribute $ Right $ pure $ unsafeVolatileAttribute    { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
+  mapAttr SelfT evalue = unsafeAttribute $ Right $ evalue <#> \value ->unsafeVolatileAttribute    { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
+
+instance
+  Attr Tags.Td_
     SelfT
     (HTMLTableDataCellElement.HTMLTableDataCellElement -> Effect Unit) where
-  attr SelfT value = unsafeAttribute $ Left $ unsafePureAttribute
-    { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
+  pureAttr SelfT value = unsafeAttribute $ Right $ pure $ unsafeVolatileAttribute    { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
+  mapAttr SelfT evalue = unsafeAttribute $ Right $ evalue <#> \value ->unsafeVolatileAttribute    { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
 
 instance
-  Attr Template_ SelfT (HTMLTemplateElement.HTMLTemplateElement -> Effect Unit) where
-  attr SelfT value = unsafeAttribute $ Left $ unsafePureAttribute
-    { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
+  Attr Tags.Template_ SelfT (HTMLTemplateElement.HTMLTemplateElement -> Effect Unit) where
+  pureAttr SelfT value = unsafeAttribute $ Right $ pure $ unsafeVolatileAttribute    { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
+  mapAttr SelfT evalue = unsafeAttribute $ Right $ evalue <#> \value ->unsafeVolatileAttribute    { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
 
 instance
-  Attr Textarea_ SelfT (HTMLTextAreaElement.HTMLTextAreaElement -> Effect Unit) where
-  attr SelfT value = unsafeAttribute $ Left $ unsafePureAttribute
-    { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
+  Attr Tags.Textarea_ SelfT (HTMLTextAreaElement.HTMLTextAreaElement -> Effect Unit) where
+  pureAttr SelfT value = unsafeAttribute $ Right $ pure $ unsafeVolatileAttribute    { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
+  mapAttr SelfT evalue = unsafeAttribute $ Right $ evalue <#> \value ->unsafeVolatileAttribute    { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
 
-instance Attr Time_ SelfT (HTMLTimeElement.HTMLTimeElement -> Effect Unit) where
-  attr SelfT value = unsafeAttribute $ Left $ unsafePureAttribute
-    { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
+instance Attr Tags.Time_ SelfT (HTMLTimeElement.HTMLTimeElement -> Effect Unit) where
+  pureAttr SelfT value = unsafeAttribute $ Right $ pure $ unsafeVolatileAttribute    { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
+  mapAttr SelfT evalue = unsafeAttribute $ Right $ evalue <#> \value ->unsafeVolatileAttribute    { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
 
-instance Attr Title_ SelfT (HTMLTitleElement.HTMLTitleElement -> Effect Unit) where
-  attr SelfT value = unsafeAttribute $ Left $ unsafePureAttribute
-    { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
+instance Attr Tags.Title_ SelfT (HTMLTitleElement.HTMLTitleElement -> Effect Unit) where
+  pureAttr SelfT value = unsafeAttribute $ Right $ pure $ unsafeVolatileAttribute    { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
+  mapAttr SelfT evalue = unsafeAttribute $ Right $ evalue <#> \value ->unsafeVolatileAttribute    { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
 
-instance Attr Track_ SelfT (HTMLTrackElement.HTMLTrackElement -> Effect Unit) where
-  attr SelfT value = unsafeAttribute $ Left $ unsafePureAttribute
-    { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
+instance Attr Tags.Track_ SelfT (HTMLTrackElement.HTMLTrackElement -> Effect Unit) where
+  pureAttr SelfT value = unsafeAttribute $ Right $ pure $ unsafeVolatileAttribute    { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
+  mapAttr SelfT evalue = unsafeAttribute $ Right $ evalue <#> \value ->unsafeVolatileAttribute    { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
 
-instance Attr Video_ SelfT (HTMLVideoElement.HTMLVideoElement -> Effect Unit) where
-  attr SelfT value = unsafeAttribute $ Left $ unsafePureAttribute
-    { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
+instance Attr Tags.Video_ SelfT (HTMLVideoElement.HTMLVideoElement -> Effect Unit) where
+  pureAttr SelfT value = unsafeAttribute $ Right $ pure $ unsafeVolatileAttribute    { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
+  mapAttr SelfT evalue = unsafeAttribute $ Right $ evalue <#> \value ->unsafeVolatileAttribute    { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }

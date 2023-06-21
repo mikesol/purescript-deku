@@ -18,6 +18,7 @@ instance Attr anything OnBlur Cb where
 instance Attr anything OnBlur (Effect Unit) where
   pureAttr OnBlur value = unsafeAttribute $ Right $ pure $
     unsafeVolatileAttribute
+      { key: "blur", value: cb' (Cb (const (value $> true))) }
   mapAttr OnBlur evalue = unsafeAttribute $ Right $ evalue <#> \value ->
     unsafeVolatileAttribute
       { key: "blur", value: cb' (Cb (const (value $> true))) }
@@ -25,6 +26,7 @@ instance Attr anything OnBlur (Effect Unit) where
 instance Attr anything OnBlur (Effect Boolean) where
   pureAttr OnBlur value = unsafeAttribute $ Right $ pure $
     unsafeVolatileAttribute
+      { key: "blur", value: cb' (Cb (const value)) }
   mapAttr OnBlur evalue = unsafeAttribute $ Right $ evalue <#> \value ->
     unsafeVolatileAttribute
       { key: "blur", value: cb' (Cb (const value)) }
@@ -35,5 +37,6 @@ type OnBlurEffect =
 instance Attr everything OnBlur Unit where
   pureAttr OnBlur _ = unsafeAttribute $ Right $ pure $ unsafeVolatileAttribute
     { key: "blur", value: unset' }
-  mapAttr OnBlur evalue = unsafeAttribute $ Right $ evalue <#> \value -> unsafeVolatileAttribute
-    { key: "blur", value: unset' }
+  mapAttr OnBlur evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "blur", value: unset' }

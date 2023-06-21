@@ -12,23 +12,29 @@ data OnSelectionchange = OnSelectionchange
 instance Attr anything OnSelectionchange Cb where
   pureAttr OnSelectionchange value = unsafeAttribute $ Right $ pure $
     unsafeVolatileAttribute
-  mapAttr OnSelectionchange evalue = unsafeAttribute $ Right $ evalue <#> \value ->
-    unsafeVolatileAttribute
       { key: "selectionchange", value: cb' value }
+  mapAttr OnSelectionchange evalue = unsafeAttribute $ Right $ evalue <#>
+    \value ->
+      unsafeVolatileAttribute
+        { key: "selectionchange", value: cb' value }
 
 instance Attr anything OnSelectionchange (Effect Unit) where
   pureAttr OnSelectionchange value = unsafeAttribute $ Right $ pure $
     unsafeVolatileAttribute
-  mapAttr OnSelectionchange evalue = unsafeAttribute $ Right $ evalue <#> \value ->
-    unsafeVolatileAttribute
       { key: "selectionchange", value: cb' (Cb (const (value $> true))) }
+  mapAttr OnSelectionchange evalue = unsafeAttribute $ Right $ evalue <#>
+    \value ->
+      unsafeVolatileAttribute
+        { key: "selectionchange", value: cb' (Cb (const (value $> true))) }
 
 instance Attr anything OnSelectionchange (Effect Boolean) where
   pureAttr OnSelectionchange value = unsafeAttribute $ Right $ pure $
     unsafeVolatileAttribute
-  mapAttr OnSelectionchange evalue = unsafeAttribute $ Right $ evalue <#> \value ->
-    unsafeVolatileAttribute
       { key: "selectionchange", value: cb' (Cb (const value)) }
+  mapAttr OnSelectionchange evalue = unsafeAttribute $ Right $ evalue <#>
+    \value ->
+      unsafeVolatileAttribute
+        { key: "selectionchange", value: cb' (Cb (const value)) }
 
 type OnSelectionchangeEffect =
   forall element
@@ -37,5 +43,9 @@ type OnSelectionchangeEffect =
 
 instance Attr everything OnSelectionchange Unit where
   pureAttr OnSelectionchange _ = unsafeAttribute $ Right $ pure $
+    unsafeVolatileAttribute
+      { key: "selectionchange", value: unset' }
+
+  mapAttr OnSelectionchange evalue = unsafeAttribute $ Right $ evalue <#> \_ ->
     unsafeVolatileAttribute
       { key: "selectionchange", value: unset' }

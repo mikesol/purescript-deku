@@ -18,6 +18,7 @@ instance Attr anything OnDragover Cb where
 instance Attr anything OnDragover (Effect Unit) where
   pureAttr OnDragover value = unsafeAttribute $ Right $ pure $
     unsafeVolatileAttribute
+      { key: "dragover", value: cb' (Cb (const (value $> true))) }
   mapAttr OnDragover evalue = unsafeAttribute $ Right $ evalue <#> \value ->
     unsafeVolatileAttribute
       { key: "dragover", value: cb' (Cb (const (value $> true))) }
@@ -25,6 +26,7 @@ instance Attr anything OnDragover (Effect Unit) where
 instance Attr anything OnDragover (Effect Boolean) where
   pureAttr OnDragover value = unsafeAttribute $ Right $ pure $
     unsafeVolatileAttribute
+      { key: "dragover", value: cb' (Cb (const value)) }
   mapAttr OnDragover evalue = unsafeAttribute $ Right $ evalue <#> \value ->
     unsafeVolatileAttribute
       { key: "dragover", value: cb' (Cb (const value)) }
@@ -36,5 +38,9 @@ type OnDragoverEffect =
 
 instance Attr everything OnDragover Unit where
   pureAttr OnDragover _ = unsafeAttribute $ Right $ pure $
+    unsafeVolatileAttribute
+      { key: "dragover", value: unset' }
+
+  mapAttr OnDragover evalue = unsafeAttribute $ Right $ evalue <#> \_ ->
     unsafeVolatileAttribute
       { key: "dragover", value: unset' }

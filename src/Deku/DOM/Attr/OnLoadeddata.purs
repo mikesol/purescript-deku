@@ -12,6 +12,7 @@ data OnLoadeddata = OnLoadeddata
 instance Attr anything OnLoadeddata Cb where
   pureAttr OnLoadeddata value = unsafeAttribute $ Right $ pure $
     unsafeVolatileAttribute
+      { key: "loadeddata", value: cb' value }
   mapAttr OnLoadeddata evalue = unsafeAttribute $ Right $ evalue <#> \value ->
     unsafeVolatileAttribute
       { key: "loadeddata", value: cb' value }
@@ -19,6 +20,7 @@ instance Attr anything OnLoadeddata Cb where
 instance Attr anything OnLoadeddata (Effect Unit) where
   pureAttr OnLoadeddata value = unsafeAttribute $ Right $ pure $
     unsafeVolatileAttribute
+      { key: "loadeddata", value: cb' (Cb (const (value $> true))) }
   mapAttr OnLoadeddata evalue = unsafeAttribute $ Right $ evalue <#> \value ->
     unsafeVolatileAttribute
       { key: "loadeddata", value: cb' (Cb (const (value $> true))) }
@@ -26,6 +28,7 @@ instance Attr anything OnLoadeddata (Effect Unit) where
 instance Attr anything OnLoadeddata (Effect Boolean) where
   pureAttr OnLoadeddata value = unsafeAttribute $ Right $ pure $
     unsafeVolatileAttribute
+      { key: "loadeddata", value: cb' (Cb (const value)) }
   mapAttr OnLoadeddata evalue = unsafeAttribute $ Right $ evalue <#> \value ->
     unsafeVolatileAttribute
       { key: "loadeddata", value: cb' (Cb (const value)) }
@@ -37,5 +40,9 @@ type OnLoadeddataEffect =
 
 instance Attr everything OnLoadeddata Unit where
   pureAttr OnLoadeddata _ = unsafeAttribute $ Right $ pure $
+    unsafeVolatileAttribute
+      { key: "loadeddata", value: unset' }
+
+  mapAttr OnLoadeddata evalue = unsafeAttribute $ Right $ evalue <#> \_ ->
     unsafeVolatileAttribute
       { key: "loadeddata", value: unset' }

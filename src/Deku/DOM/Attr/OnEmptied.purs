@@ -18,6 +18,7 @@ instance Attr anything OnEmptied Cb where
 instance Attr anything OnEmptied (Effect Unit) where
   pureAttr OnEmptied value = unsafeAttribute $ Right $ pure $
     unsafeVolatileAttribute
+      { key: "emptied", value: cb' (Cb (const (value $> true))) }
   mapAttr OnEmptied evalue = unsafeAttribute $ Right $ evalue <#> \value ->
     unsafeVolatileAttribute
       { key: "emptied", value: cb' (Cb (const (value $> true))) }
@@ -25,6 +26,7 @@ instance Attr anything OnEmptied (Effect Unit) where
 instance Attr anything OnEmptied (Effect Boolean) where
   pureAttr OnEmptied value = unsafeAttribute $ Right $ pure $
     unsafeVolatileAttribute
+      { key: "emptied", value: cb' (Cb (const value)) }
   mapAttr OnEmptied evalue = unsafeAttribute $ Right $ evalue <#> \value ->
     unsafeVolatileAttribute
       { key: "emptied", value: cb' (Cb (const value)) }
@@ -36,5 +38,9 @@ type OnEmptiedEffect =
 
 instance Attr everything OnEmptied Unit where
   pureAttr OnEmptied _ = unsafeAttribute $ Right $ pure $
+    unsafeVolatileAttribute
+      { key: "emptied", value: unset' }
+
+  mapAttr OnEmptied evalue = unsafeAttribute $ Right $ evalue <#> \_ ->
     unsafeVolatileAttribute
       { key: "emptied", value: unset' }

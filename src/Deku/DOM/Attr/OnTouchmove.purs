@@ -12,6 +12,7 @@ data OnTouchmove = OnTouchmove
 instance Attr anything OnTouchmove Cb where
   pureAttr OnTouchmove value = unsafeAttribute $ Right $ pure $
     unsafeVolatileAttribute
+      { key: "touchmove", value: cb' value }
   mapAttr OnTouchmove evalue = unsafeAttribute $ Right $ evalue <#> \value ->
     unsafeVolatileAttribute
       { key: "touchmove", value: cb' value }
@@ -19,6 +20,7 @@ instance Attr anything OnTouchmove Cb where
 instance Attr anything OnTouchmove (Effect Unit) where
   pureAttr OnTouchmove value = unsafeAttribute $ Right $ pure $
     unsafeVolatileAttribute
+      { key: "touchmove", value: cb' (Cb (const (value $> true))) }
   mapAttr OnTouchmove evalue = unsafeAttribute $ Right $ evalue <#> \value ->
     unsafeVolatileAttribute
       { key: "touchmove", value: cb' (Cb (const (value $> true))) }
@@ -26,6 +28,7 @@ instance Attr anything OnTouchmove (Effect Unit) where
 instance Attr anything OnTouchmove (Effect Boolean) where
   pureAttr OnTouchmove value = unsafeAttribute $ Right $ pure $
     unsafeVolatileAttribute
+      { key: "touchmove", value: cb' (Cb (const value)) }
   mapAttr OnTouchmove evalue = unsafeAttribute $ Right $ evalue <#> \value ->
     unsafeVolatileAttribute
       { key: "touchmove", value: cb' (Cb (const value)) }
@@ -37,5 +40,9 @@ type OnTouchmoveEffect =
 
 instance Attr everything OnTouchmove Unit where
   pureAttr OnTouchmove _ = unsafeAttribute $ Right $ pure $
+    unsafeVolatileAttribute
+      { key: "touchmove", value: unset' }
+
+  mapAttr OnTouchmove evalue = unsafeAttribute $ Right $ evalue <#> \_ ->
     unsafeVolatileAttribute
       { key: "touchmove", value: unset' }

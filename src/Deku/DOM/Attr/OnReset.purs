@@ -18,6 +18,7 @@ instance Attr anything OnReset Cb where
 instance Attr anything OnReset (Effect Unit) where
   pureAttr OnReset value = unsafeAttribute $ Right $ pure $
     unsafeVolatileAttribute
+      { key: "reset", value: cb' (Cb (const (value $> true))) }
   mapAttr OnReset evalue = unsafeAttribute $ Right $ evalue <#> \value ->
     unsafeVolatileAttribute
       { key: "reset", value: cb' (Cb (const (value $> true))) }
@@ -25,6 +26,7 @@ instance Attr anything OnReset (Effect Unit) where
 instance Attr anything OnReset (Effect Boolean) where
   pureAttr OnReset value = unsafeAttribute $ Right $ pure $
     unsafeVolatileAttribute
+      { key: "reset", value: cb' (Cb (const value)) }
   mapAttr OnReset evalue = unsafeAttribute $ Right $ evalue <#> \value ->
     unsafeVolatileAttribute
       { key: "reset", value: cb' (Cb (const value)) }
@@ -37,5 +39,6 @@ type OnResetEffect =
 instance Attr everything OnReset Unit where
   pureAttr OnReset _ = unsafeAttribute $ Right $ pure $ unsafeVolatileAttribute
     { key: "reset", value: unset' }
-  mapAttr OnReset evalue = unsafeAttribute $ Right $ evalue <#> \value -> unsafeVolatileAttribute
-    { key: "reset", value: unset' }
+  mapAttr OnReset evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "reset", value: unset' }

@@ -18,6 +18,7 @@ instance Attr anything OnDrag Cb where
 instance Attr anything OnDrag (Effect Unit) where
   pureAttr OnDrag value = unsafeAttribute $ Right $ pure $
     unsafeVolatileAttribute
+      { key: "drag", value: cb' (Cb (const (value $> true))) }
   mapAttr OnDrag evalue = unsafeAttribute $ Right $ evalue <#> \value ->
     unsafeVolatileAttribute
       { key: "drag", value: cb' (Cb (const (value $> true))) }
@@ -25,6 +26,7 @@ instance Attr anything OnDrag (Effect Unit) where
 instance Attr anything OnDrag (Effect Boolean) where
   pureAttr OnDrag value = unsafeAttribute $ Right $ pure $
     unsafeVolatileAttribute
+      { key: "drag", value: cb' (Cb (const value)) }
   mapAttr OnDrag evalue = unsafeAttribute $ Right $ evalue <#> \value ->
     unsafeVolatileAttribute
       { key: "drag", value: cb' (Cb (const value)) }
@@ -35,5 +37,6 @@ type OnDragEffect =
 instance Attr everything OnDrag Unit where
   pureAttr OnDrag _ = unsafeAttribute $ Right $ pure $ unsafeVolatileAttribute
     { key: "drag", value: unset' }
-  mapAttr OnDrag evalue = unsafeAttribute $ Right $ evalue <#> \value -> unsafeVolatileAttribute
-    { key: "drag", value: unset' }
+  mapAttr OnDrag evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "drag", value: unset' }

@@ -12,6 +12,7 @@ data OnAnimationend = OnAnimationend
 instance Attr anything OnAnimationend Cb where
   pureAttr OnAnimationend value = unsafeAttribute $ Right $ pure $
     unsafeVolatileAttribute
+      { key: "animationend ", value: cb' value }
   mapAttr OnAnimationend evalue = unsafeAttribute $ Right $ evalue <#> \value ->
     unsafeVolatileAttribute
       { key: "animationend ", value: cb' value }
@@ -19,6 +20,7 @@ instance Attr anything OnAnimationend Cb where
 instance Attr anything OnAnimationend (Effect Unit) where
   pureAttr OnAnimationend value = unsafeAttribute $ Right $ pure $
     unsafeVolatileAttribute
+      { key: "animationend ", value: cb' (Cb (const (value $> true))) }
   mapAttr OnAnimationend evalue = unsafeAttribute $ Right $ evalue <#> \value ->
     unsafeVolatileAttribute
       { key: "animationend ", value: cb' (Cb (const (value $> true))) }
@@ -26,6 +28,7 @@ instance Attr anything OnAnimationend (Effect Unit) where
 instance Attr anything OnAnimationend (Effect Boolean) where
   pureAttr OnAnimationend value = unsafeAttribute $ Right $ pure $
     unsafeVolatileAttribute
+      { key: "animationend ", value: cb' (Cb (const value)) }
   mapAttr OnAnimationend evalue = unsafeAttribute $ Right $ evalue <#> \value ->
     unsafeVolatileAttribute
       { key: "animationend ", value: cb' (Cb (const value)) }
@@ -37,5 +40,9 @@ type OnAnimationendEffect =
 
 instance Attr everything OnAnimationend Unit where
   pureAttr OnAnimationend _ = unsafeAttribute $ Right $ pure $
+    unsafeVolatileAttribute
+      { key: "animationend ", value: unset' }
+
+  mapAttr OnAnimationend evalue = unsafeAttribute $ Right $ evalue <#> \_ ->
     unsafeVolatileAttribute
       { key: "animationend ", value: unset' }

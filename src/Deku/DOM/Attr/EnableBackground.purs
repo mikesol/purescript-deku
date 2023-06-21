@@ -145,6 +145,7 @@ instance Attr everything EnableBackground Unit where
   pureAttr EnableBackground _ = unsafeAttribute $ Right $ pure $
     unsafeVolatileAttribute
       { key: "enable-background", value: unset' }
-  mapAttr EnableBackground evalue = unsafeAttribute $ Right $ evalue <#> \value ->
-    unsafeVolatileAttribute
-      { key: "enable-background", value: unset' }
+  mapAttr EnableBackground evalue = unsafeAttribute $ Right $ evalue <#>
+    \value ->
+      unsafeVolatileAttribute
+        { key: "enable-background", value: unset' }

@@ -18,6 +18,7 @@ instance Attr anything OnSubmit Cb where
 instance Attr anything OnSubmit (Effect Unit) where
   pureAttr OnSubmit value = unsafeAttribute $ Right $ pure $
     unsafeVolatileAttribute
+      { key: "submit", value: cb' (Cb (const (value $> true))) }
   mapAttr OnSubmit evalue = unsafeAttribute $ Right $ evalue <#> \value ->
     unsafeVolatileAttribute
       { key: "submit", value: cb' (Cb (const (value $> true))) }
@@ -25,6 +26,7 @@ instance Attr anything OnSubmit (Effect Unit) where
 instance Attr anything OnSubmit (Effect Boolean) where
   pureAttr OnSubmit value = unsafeAttribute $ Right $ pure $
     unsafeVolatileAttribute
+      { key: "submit", value: cb' (Cb (const value)) }
   mapAttr OnSubmit evalue = unsafeAttribute $ Right $ evalue <#> \value ->
     unsafeVolatileAttribute
       { key: "submit", value: cb' (Cb (const value)) }
@@ -37,5 +39,6 @@ type OnSubmitEffect =
 instance Attr everything OnSubmit Unit where
   pureAttr OnSubmit _ = unsafeAttribute $ Right $ pure $ unsafeVolatileAttribute
     { key: "submit", value: unset' }
-  mapAttr OnSubmit evalue = unsafeAttribute $ Right $ evalue <#> \value -> unsafeVolatileAttribute
-    { key: "submit", value: unset' }
+  mapAttr OnSubmit evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "submit", value: unset' }

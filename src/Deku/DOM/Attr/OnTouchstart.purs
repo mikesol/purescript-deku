@@ -12,6 +12,7 @@ data OnTouchstart = OnTouchstart
 instance Attr anything OnTouchstart Cb where
   pureAttr OnTouchstart value = unsafeAttribute $ Right $ pure $
     unsafeVolatileAttribute
+      { key: "touchstart", value: cb' value }
   mapAttr OnTouchstart evalue = unsafeAttribute $ Right $ evalue <#> \value ->
     unsafeVolatileAttribute
       { key: "touchstart", value: cb' value }
@@ -19,6 +20,7 @@ instance Attr anything OnTouchstart Cb where
 instance Attr anything OnTouchstart (Effect Unit) where
   pureAttr OnTouchstart value = unsafeAttribute $ Right $ pure $
     unsafeVolatileAttribute
+      { key: "touchstart", value: cb' (Cb (const (value $> true))) }
   mapAttr OnTouchstart evalue = unsafeAttribute $ Right $ evalue <#> \value ->
     unsafeVolatileAttribute
       { key: "touchstart", value: cb' (Cb (const (value $> true))) }
@@ -26,6 +28,7 @@ instance Attr anything OnTouchstart (Effect Unit) where
 instance Attr anything OnTouchstart (Effect Boolean) where
   pureAttr OnTouchstart value = unsafeAttribute $ Right $ pure $
     unsafeVolatileAttribute
+      { key: "touchstart", value: cb' (Cb (const value)) }
   mapAttr OnTouchstart evalue = unsafeAttribute $ Right $ evalue <#> \value ->
     unsafeVolatileAttribute
       { key: "touchstart", value: cb' (Cb (const value)) }
@@ -37,5 +40,9 @@ type OnTouchstartEffect =
 
 instance Attr everything OnTouchstart Unit where
   pureAttr OnTouchstart _ = unsafeAttribute $ Right $ pure $
+    unsafeVolatileAttribute
+      { key: "touchstart", value: unset' }
+
+  mapAttr OnTouchstart evalue = unsafeAttribute $ Right $ evalue <#> \_ ->
     unsafeVolatileAttribute
       { key: "touchstart", value: unset' }

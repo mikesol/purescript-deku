@@ -18,6 +18,7 @@ instance Attr anything OnAbort Cb where
 instance Attr anything OnAbort (Effect Unit) where
   pureAttr OnAbort value = unsafeAttribute $ Right $ pure $
     unsafeVolatileAttribute
+      { key: "abort", value: cb' (Cb (const (value $> true))) }
   mapAttr OnAbort evalue = unsafeAttribute $ Right $ evalue <#> \value ->
     unsafeVolatileAttribute
       { key: "abort", value: cb' (Cb (const (value $> true))) }
@@ -25,6 +26,7 @@ instance Attr anything OnAbort (Effect Unit) where
 instance Attr anything OnAbort (Effect Boolean) where
   pureAttr OnAbort value = unsafeAttribute $ Right $ pure $
     unsafeVolatileAttribute
+      { key: "abort", value: cb' (Cb (const value)) }
   mapAttr OnAbort evalue = unsafeAttribute $ Right $ evalue <#> \value ->
     unsafeVolatileAttribute
       { key: "abort", value: cb' (Cb (const value)) }
@@ -37,5 +39,6 @@ type OnAbortEffect =
 instance Attr everything OnAbort Unit where
   pureAttr OnAbort _ = unsafeAttribute $ Right $ pure $ unsafeVolatileAttribute
     { key: "abort", value: unset' }
-  mapAttr OnAbort evalue = unsafeAttribute $ Right $ evalue <#> \value -> unsafeVolatileAttribute
-    { key: "abort", value: unset' }
+  mapAttr OnAbort evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "abort", value: unset' }

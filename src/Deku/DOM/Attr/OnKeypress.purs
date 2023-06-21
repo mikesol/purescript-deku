@@ -18,6 +18,7 @@ instance Attr anything OnKeypress Cb where
 instance Attr anything OnKeypress (Effect Unit) where
   pureAttr OnKeypress value = unsafeAttribute $ Right $ pure $
     unsafeVolatileAttribute
+      { key: "keypress", value: cb' (Cb (const (value $> true))) }
   mapAttr OnKeypress evalue = unsafeAttribute $ Right $ evalue <#> \value ->
     unsafeVolatileAttribute
       { key: "keypress", value: cb' (Cb (const (value $> true))) }
@@ -25,6 +26,7 @@ instance Attr anything OnKeypress (Effect Unit) where
 instance Attr anything OnKeypress (Effect Boolean) where
   pureAttr OnKeypress value = unsafeAttribute $ Right $ pure $
     unsafeVolatileAttribute
+      { key: "keypress", value: cb' (Cb (const value)) }
   mapAttr OnKeypress evalue = unsafeAttribute $ Right $ evalue <#> \value ->
     unsafeVolatileAttribute
       { key: "keypress", value: cb' (Cb (const value)) }
@@ -36,5 +38,9 @@ type OnKeypressEffect =
 
 instance Attr everything OnKeypress Unit where
   pureAttr OnKeypress _ = unsafeAttribute $ Right $ pure $
+    unsafeVolatileAttribute
+      { key: "keypress", value: unset' }
+
+  mapAttr OnKeypress evalue = unsafeAttribute $ Right $ evalue <#> \_ ->
     unsafeVolatileAttribute
       { key: "keypress", value: unset' }

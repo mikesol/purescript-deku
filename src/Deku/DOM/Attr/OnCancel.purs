@@ -18,6 +18,7 @@ instance Attr anything OnCancel Cb where
 instance Attr anything OnCancel (Effect Unit) where
   pureAttr OnCancel value = unsafeAttribute $ Right $ pure $
     unsafeVolatileAttribute
+      { key: "cancel", value: cb' (Cb (const (value $> true))) }
   mapAttr OnCancel evalue = unsafeAttribute $ Right $ evalue <#> \value ->
     unsafeVolatileAttribute
       { key: "cancel", value: cb' (Cb (const (value $> true))) }
@@ -25,6 +26,7 @@ instance Attr anything OnCancel (Effect Unit) where
 instance Attr anything OnCancel (Effect Boolean) where
   pureAttr OnCancel value = unsafeAttribute $ Right $ pure $
     unsafeVolatileAttribute
+      { key: "cancel", value: cb' (Cb (const value)) }
   mapAttr OnCancel evalue = unsafeAttribute $ Right $ evalue <#> \value ->
     unsafeVolatileAttribute
       { key: "cancel", value: cb' (Cb (const value)) }
@@ -37,5 +39,6 @@ type OnCancelEffect =
 instance Attr everything OnCancel Unit where
   pureAttr OnCancel _ = unsafeAttribute $ Right $ pure $ unsafeVolatileAttribute
     { key: "cancel", value: unset' }
-  mapAttr OnCancel evalue = unsafeAttribute $ Right $ evalue <#> \value -> unsafeVolatileAttribute
-    { key: "cancel", value: unset' }
+  mapAttr OnCancel evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "cancel", value: unset' }

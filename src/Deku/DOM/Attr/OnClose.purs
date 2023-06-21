@@ -18,6 +18,7 @@ instance Attr anything OnClose Cb where
 instance Attr anything OnClose (Effect Unit) where
   pureAttr OnClose value = unsafeAttribute $ Right $ pure $
     unsafeVolatileAttribute
+      { key: "close", value: cb' (Cb (const (value $> true))) }
   mapAttr OnClose evalue = unsafeAttribute $ Right $ evalue <#> \value ->
     unsafeVolatileAttribute
       { key: "close", value: cb' (Cb (const (value $> true))) }
@@ -25,6 +26,7 @@ instance Attr anything OnClose (Effect Unit) where
 instance Attr anything OnClose (Effect Boolean) where
   pureAttr OnClose value = unsafeAttribute $ Right $ pure $
     unsafeVolatileAttribute
+      { key: "close", value: cb' (Cb (const value)) }
   mapAttr OnClose evalue = unsafeAttribute $ Right $ evalue <#> \value ->
     unsafeVolatileAttribute
       { key: "close", value: cb' (Cb (const value)) }
@@ -37,5 +39,6 @@ type OnCloseEffect =
 instance Attr everything OnClose Unit where
   pureAttr OnClose _ = unsafeAttribute $ Right $ pure $ unsafeVolatileAttribute
     { key: "close", value: unset' }
-  mapAttr OnClose evalue = unsafeAttribute $ Right $ evalue <#> \value -> unsafeVolatileAttribute
-    { key: "close", value: unset' }
+  mapAttr OnClose evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "close", value: unset' }

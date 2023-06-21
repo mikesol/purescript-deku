@@ -18,6 +18,7 @@ instance Attr anything OnMouseout Cb where
 instance Attr anything OnMouseout (Effect Unit) where
   pureAttr OnMouseout value = unsafeAttribute $ Right $ pure $
     unsafeVolatileAttribute
+      { key: "mouseout", value: cb' (Cb (const (value $> true))) }
   mapAttr OnMouseout evalue = unsafeAttribute $ Right $ evalue <#> \value ->
     unsafeVolatileAttribute
       { key: "mouseout", value: cb' (Cb (const (value $> true))) }
@@ -25,6 +26,7 @@ instance Attr anything OnMouseout (Effect Unit) where
 instance Attr anything OnMouseout (Effect Boolean) where
   pureAttr OnMouseout value = unsafeAttribute $ Right $ pure $
     unsafeVolatileAttribute
+      { key: "mouseout", value: cb' (Cb (const value)) }
   mapAttr OnMouseout evalue = unsafeAttribute $ Right $ evalue <#> \value ->
     unsafeVolatileAttribute
       { key: "mouseout", value: cb' (Cb (const value)) }
@@ -36,5 +38,9 @@ type OnMouseoutEffect =
 
 instance Attr everything OnMouseout Unit where
   pureAttr OnMouseout _ = unsafeAttribute $ Right $ pure $
+    unsafeVolatileAttribute
+      { key: "mouseout", value: unset' }
+
+  mapAttr OnMouseout evalue = unsafeAttribute $ Right $ evalue <#> \_ ->
     unsafeVolatileAttribute
       { key: "mouseout", value: unset' }

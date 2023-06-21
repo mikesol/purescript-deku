@@ -299,6 +299,7 @@ instance Attr everything StrokeMiterlimit Unit where
   pureAttr StrokeMiterlimit _ = unsafeAttribute $ Right $ pure $
     unsafeVolatileAttribute
       { key: "stroke-miterlimit", value: unset' }
-  mapAttr StrokeMiterlimit evalue = unsafeAttribute $ Right $ evalue <#> \value ->
-    unsafeVolatileAttribute
-      { key: "stroke-miterlimit", value: unset' }
+  mapAttr StrokeMiterlimit evalue = unsafeAttribute $ Right $ evalue <#>
+    \value ->
+      unsafeVolatileAttribute
+        { key: "stroke-miterlimit", value: unset' }

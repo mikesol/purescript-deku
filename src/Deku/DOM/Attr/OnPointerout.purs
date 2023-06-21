@@ -12,6 +12,7 @@ data OnPointerout = OnPointerout
 instance Attr anything OnPointerout Cb where
   pureAttr OnPointerout value = unsafeAttribute $ Right $ pure $
     unsafeVolatileAttribute
+      { key: "pointerout", value: cb' value }
   mapAttr OnPointerout evalue = unsafeAttribute $ Right $ evalue <#> \value ->
     unsafeVolatileAttribute
       { key: "pointerout", value: cb' value }
@@ -19,6 +20,7 @@ instance Attr anything OnPointerout Cb where
 instance Attr anything OnPointerout (Effect Unit) where
   pureAttr OnPointerout value = unsafeAttribute $ Right $ pure $
     unsafeVolatileAttribute
+      { key: "pointerout", value: cb' (Cb (const (value $> true))) }
   mapAttr OnPointerout evalue = unsafeAttribute $ Right $ evalue <#> \value ->
     unsafeVolatileAttribute
       { key: "pointerout", value: cb' (Cb (const (value $> true))) }
@@ -26,6 +28,7 @@ instance Attr anything OnPointerout (Effect Unit) where
 instance Attr anything OnPointerout (Effect Boolean) where
   pureAttr OnPointerout value = unsafeAttribute $ Right $ pure $
     unsafeVolatileAttribute
+      { key: "pointerout", value: cb' (Cb (const value)) }
   mapAttr OnPointerout evalue = unsafeAttribute $ Right $ evalue <#> \value ->
     unsafeVolatileAttribute
       { key: "pointerout", value: cb' (Cb (const value)) }
@@ -37,5 +40,9 @@ type OnPointeroutEffect =
 
 instance Attr everything OnPointerout Unit where
   pureAttr OnPointerout _ = unsafeAttribute $ Right $ pure $
+    unsafeVolatileAttribute
+      { key: "pointerout", value: unset' }
+
+  mapAttr OnPointerout evalue = unsafeAttribute $ Right $ evalue <#> \_ ->
     unsafeVolatileAttribute
       { key: "pointerout", value: unset' }

@@ -12,6 +12,7 @@ data OnSlotchange = OnSlotchange
 instance Attr anything OnSlotchange Cb where
   pureAttr OnSlotchange value = unsafeAttribute $ Right $ pure $
     unsafeVolatileAttribute
+      { key: "slotchange", value: cb' value }
   mapAttr OnSlotchange evalue = unsafeAttribute $ Right $ evalue <#> \value ->
     unsafeVolatileAttribute
       { key: "slotchange", value: cb' value }
@@ -19,6 +20,7 @@ instance Attr anything OnSlotchange Cb where
 instance Attr anything OnSlotchange (Effect Unit) where
   pureAttr OnSlotchange value = unsafeAttribute $ Right $ pure $
     unsafeVolatileAttribute
+      { key: "slotchange", value: cb' (Cb (const (value $> true))) }
   mapAttr OnSlotchange evalue = unsafeAttribute $ Right $ evalue <#> \value ->
     unsafeVolatileAttribute
       { key: "slotchange", value: cb' (Cb (const (value $> true))) }
@@ -26,6 +28,7 @@ instance Attr anything OnSlotchange (Effect Unit) where
 instance Attr anything OnSlotchange (Effect Boolean) where
   pureAttr OnSlotchange value = unsafeAttribute $ Right $ pure $
     unsafeVolatileAttribute
+      { key: "slotchange", value: cb' (Cb (const value)) }
   mapAttr OnSlotchange evalue = unsafeAttribute $ Right $ evalue <#> \value ->
     unsafeVolatileAttribute
       { key: "slotchange", value: cb' (Cb (const value)) }
@@ -37,5 +40,9 @@ type OnSlotchangeEffect =
 
 instance Attr everything OnSlotchange Unit where
   pureAttr OnSlotchange _ = unsafeAttribute $ Right $ pure $
+    unsafeVolatileAttribute
+      { key: "slotchange", value: unset' }
+
+  mapAttr OnSlotchange evalue = unsafeAttribute $ Right $ evalue <#> \_ ->
     unsafeVolatileAttribute
       { key: "slotchange", value: unset' }

@@ -18,6 +18,7 @@ instance Attr anything OnPause Cb where
 instance Attr anything OnPause (Effect Unit) where
   pureAttr OnPause value = unsafeAttribute $ Right $ pure $
     unsafeVolatileAttribute
+      { key: "pause", value: cb' (Cb (const (value $> true))) }
   mapAttr OnPause evalue = unsafeAttribute $ Right $ evalue <#> \value ->
     unsafeVolatileAttribute
       { key: "pause", value: cb' (Cb (const (value $> true))) }
@@ -25,6 +26,7 @@ instance Attr anything OnPause (Effect Unit) where
 instance Attr anything OnPause (Effect Boolean) where
   pureAttr OnPause value = unsafeAttribute $ Right $ pure $
     unsafeVolatileAttribute
+      { key: "pause", value: cb' (Cb (const value)) }
   mapAttr OnPause evalue = unsafeAttribute $ Right $ evalue <#> \value ->
     unsafeVolatileAttribute
       { key: "pause", value: cb' (Cb (const value)) }
@@ -37,5 +39,6 @@ type OnPauseEffect =
 instance Attr everything OnPause Unit where
   pureAttr OnPause _ = unsafeAttribute $ Right $ pure $ unsafeVolatileAttribute
     { key: "pause", value: unset' }
-  mapAttr OnPause evalue = unsafeAttribute $ Right $ evalue <#> \value -> unsafeVolatileAttribute
-    { key: "pause", value: unset' }
+  mapAttr OnPause evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "pause", value: unset' }

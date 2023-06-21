@@ -19,6 +19,7 @@ instance Attr everything DiffuseConstant Unit where
   pureAttr DiffuseConstant _ = unsafeAttribute $ Right $ pure $
     unsafeVolatileAttribute
       { key: "diffuseConstant", value: unset' }
-  mapAttr DiffuseConstant evalue = unsafeAttribute $ Right $ evalue <#> \value ->
-    unsafeVolatileAttribute
-      { key: "diffuseConstant", value: unset' }
+  mapAttr DiffuseConstant evalue = unsafeAttribute $ Right $ evalue <#>
+    \value ->
+      unsafeVolatileAttribute
+        { key: "diffuseConstant", value: unset' }

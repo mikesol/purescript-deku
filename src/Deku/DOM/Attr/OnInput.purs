@@ -18,6 +18,7 @@ instance Attr anything OnInput Cb where
 instance Attr anything OnInput (Effect Unit) where
   pureAttr OnInput value = unsafeAttribute $ Right $ pure $
     unsafeVolatileAttribute
+      { key: "input", value: cb' (Cb (const (value $> true))) }
   mapAttr OnInput evalue = unsafeAttribute $ Right $ evalue <#> \value ->
     unsafeVolatileAttribute
       { key: "input", value: cb' (Cb (const (value $> true))) }
@@ -25,6 +26,7 @@ instance Attr anything OnInput (Effect Unit) where
 instance Attr anything OnInput (Effect Boolean) where
   pureAttr OnInput value = unsafeAttribute $ Right $ pure $
     unsafeVolatileAttribute
+      { key: "input", value: cb' (Cb (const value)) }
   mapAttr OnInput evalue = unsafeAttribute $ Right $ evalue <#> \value ->
     unsafeVolatileAttribute
       { key: "input", value: cb' (Cb (const value)) }
@@ -37,5 +39,6 @@ type OnInputEffect =
 instance Attr everything OnInput Unit where
   pureAttr OnInput _ = unsafeAttribute $ Right $ pure $ unsafeVolatileAttribute
     { key: "input", value: unset' }
-  mapAttr OnInput evalue = unsafeAttribute $ Right $ evalue <#> \value -> unsafeVolatileAttribute
-    { key: "input", value: unset' }
+  mapAttr OnInput evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "input", value: unset' }

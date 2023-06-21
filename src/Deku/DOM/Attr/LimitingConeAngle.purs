@@ -20,6 +20,7 @@ instance Attr everything LimitingConeAngle Unit where
   pureAttr LimitingConeAngle _ = unsafeAttribute $ Right $ pure $
     unsafeVolatileAttribute
       { key: "limitingConeAngle", value: unset' }
-  mapAttr LimitingConeAngle evalue = unsafeAttribute $ Right $ evalue <#> \value ->
-    unsafeVolatileAttribute
-      { key: "limitingConeAngle", value: unset' }
+  mapAttr LimitingConeAngle evalue = unsafeAttribute $ Right $ evalue <#>
+    \value ->
+      unsafeVolatileAttribute
+        { key: "limitingConeAngle", value: unset' }

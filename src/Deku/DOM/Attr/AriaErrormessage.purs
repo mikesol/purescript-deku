@@ -131,6 +131,7 @@ instance Attr everything AriaErrormessage Unit where
   pureAttr AriaErrormessage _ = unsafeAttribute $ Right $ pure $
     unsafeVolatileAttribute
       { key: "aria-errormessage", value: unset' }
-  mapAttr AriaErrormessage evalue = unsafeAttribute $ Right $ evalue <#> \value ->
-    unsafeVolatileAttribute
-      { key: "aria-errormessage", value: unset' }
+  mapAttr AriaErrormessage evalue = unsafeAttribute $ Right $ evalue <#>
+    \value ->
+      unsafeVolatileAttribute
+        { key: "aria-errormessage", value: unset' }

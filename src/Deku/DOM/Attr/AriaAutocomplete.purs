@@ -131,6 +131,7 @@ instance Attr everything AriaAutocomplete Unit where
   pureAttr AriaAutocomplete _ = unsafeAttribute $ Right $ pure $
     unsafeVolatileAttribute
       { key: "aria-autocomplete", value: unset' }
-  mapAttr AriaAutocomplete evalue = unsafeAttribute $ Right $ evalue <#> \value ->
-    unsafeVolatileAttribute
-      { key: "aria-autocomplete", value: unset' }
+  mapAttr AriaAutocomplete evalue = unsafeAttribute $ Right $ evalue <#>
+    \value ->
+      unsafeVolatileAttribute
+        { key: "aria-autocomplete", value: unset' }

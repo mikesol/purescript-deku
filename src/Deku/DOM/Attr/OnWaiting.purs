@@ -17,7 +17,8 @@ instance Attr anything OnWaiting Cb where
 
 instance Attr anything OnWaiting (Effect Unit) where
   pureAttr OnWaiting value = unsafeAttribute $ Right $ pure $
-    unsafeVolatileAttribute { key: "waiting", value: cb' (Cb (const (value $> true))) }
+    unsafeVolatileAttribute
+      { key: "waiting", value: cb' (Cb (const (value $> true))) }
   mapAttr OnWaiting evalue = unsafeAttribute $ Right $ evalue <#> \value ->
     unsafeVolatileAttribute
       { key: "waiting", value: cb' (Cb (const (value $> true))) }

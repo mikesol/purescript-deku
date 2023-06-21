@@ -152,6 +152,7 @@ instance Attr everything RequiredFeatures Unit where
   pureAttr RequiredFeatures _ = unsafeAttribute $ Right $ pure $
     unsafeVolatileAttribute
       { key: "requiredFeatures", value: unset' }
-  mapAttr RequiredFeatures evalue = unsafeAttribute $ Right $ evalue <#> \value ->
-    unsafeVolatileAttribute
-      { key: "requiredFeatures", value: unset' }
+  mapAttr RequiredFeatures evalue = unsafeAttribute $ Right $ evalue <#>
+    \value ->
+      unsafeVolatileAttribute
+        { key: "requiredFeatures", value: unset' }

@@ -18,6 +18,7 @@ instance Attr anything OnResize Cb where
 instance Attr anything OnResize (Effect Unit) where
   pureAttr OnResize value = unsafeAttribute $ Right $ pure $
     unsafeVolatileAttribute
+      { key: "resize", value: cb' (Cb (const (value $> true))) }
   mapAttr OnResize evalue = unsafeAttribute $ Right $ evalue <#> \value ->
     unsafeVolatileAttribute
       { key: "resize", value: cb' (Cb (const (value $> true))) }
@@ -25,6 +26,7 @@ instance Attr anything OnResize (Effect Unit) where
 instance Attr anything OnResize (Effect Boolean) where
   pureAttr OnResize value = unsafeAttribute $ Right $ pure $
     unsafeVolatileAttribute
+      { key: "resize", value: cb' (Cb (const value)) }
   mapAttr OnResize evalue = unsafeAttribute $ Right $ evalue <#> \value ->
     unsafeVolatileAttribute
       { key: "resize", value: cb' (Cb (const value)) }
@@ -37,5 +39,6 @@ type OnResizeEffect =
 instance Attr everything OnResize Unit where
   pureAttr OnResize _ = unsafeAttribute $ Right $ pure $ unsafeVolatileAttribute
     { key: "resize", value: unset' }
-  mapAttr OnResize evalue = unsafeAttribute $ Right $ evalue <#> \value -> unsafeVolatileAttribute
-    { key: "resize", value: unset' }
+  mapAttr OnResize evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "resize", value: unset' }

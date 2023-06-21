@@ -39,7 +39,7 @@ import Data.Profunctor (dimap, lcmap)
 import Data.Traversable (traverse)
 import Data.Tuple (Tuple(..), snd)
 import Data.Tuple.Nested ((/\))
-import Deku.Attribute (Attribute(..), AttributeValue(..), PureAttribute(..), UnsafeAttribute, VolatileAttribute, unsafeUnAttribute)
+import Deku.Attribute (Attribute(..), AttributeValue(..), PureAttribute(..), UnsafeAttribute, VolatileAttribute, unsafeUnVolatileAttribute, unsafeUnAttribute)
 import Deku.Core (ActualizedKorok, DOMInterpret(..), Korok(..), Node(..), Nut(..), NutF(..), PureKorok(..), dyn, envy, insert_, remove, resolveNut)
 import Deku.Delimiter (delimiter)
 import FRP.Event (Event, Subscriber(..), keepLatest, makeLemmingEventO, mapAccum, memoize, merge)
@@ -79,7 +79,7 @@ unsafeSetAttribute (DOMInterpret { setProp, setCb, unsetAttribute }) id atts =
           Cb' c -> setCb { id, key, value: c }
           Unset' -> unsetAttribute { id, key }
       ) <<<
-        unsafeUnAttribute
+        unsafeUnVolatileAttribute
     )
     atts
 

@@ -17,7 +17,8 @@ instance Attr anything OnWheel Cb where
 
 instance Attr anything OnWheel (Effect Unit) where
   pureAttr OnWheel value = unsafeAttribute $ Right $ pure $
-    unsafeVolatileAttribute { key: "wheel", value: cb' (Cb (const (value $> true))) }
+    unsafeVolatileAttribute
+      { key: "wheel", value: cb' (Cb (const (value $> true))) }
   mapAttr OnWheel evalue = unsafeAttribute $ Right $ evalue <#> \value ->
     unsafeVolatileAttribute
       { key: "wheel", value: cb' (Cb (const (value $> true))) }
@@ -37,5 +38,6 @@ type OnWheelEffect =
 instance Attr everything OnWheel Unit where
   pureAttr OnWheel _ = unsafeAttribute $ Right $ pure $ unsafeVolatileAttribute
     { key: "wheel", value: unset' }
-  mapAttr OnWheel evalue = unsafeAttribute $ Right $ evalue <#> \value -> unsafeVolatileAttribute
-    { key: "wheel", value: unset' }
+  mapAttr OnWheel evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "wheel", value: unset' }

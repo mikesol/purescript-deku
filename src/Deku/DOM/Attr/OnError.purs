@@ -18,6 +18,7 @@ instance Attr anything OnError Cb where
 instance Attr anything OnError (Effect Unit) where
   pureAttr OnError value = unsafeAttribute $ Right $ pure $
     unsafeVolatileAttribute
+      { key: "error", value: cb' (Cb (const (value $> true))) }
   mapAttr OnError evalue = unsafeAttribute $ Right $ evalue <#> \value ->
     unsafeVolatileAttribute
       { key: "error", value: cb' (Cb (const (value $> true))) }
@@ -25,6 +26,7 @@ instance Attr anything OnError (Effect Unit) where
 instance Attr anything OnError (Effect Boolean) where
   pureAttr OnError value = unsafeAttribute $ Right $ pure $
     unsafeVolatileAttribute
+      { key: "error", value: cb' (Cb (const value)) }
   mapAttr OnError evalue = unsafeAttribute $ Right $ evalue <#> \value ->
     unsafeVolatileAttribute
       { key: "error", value: cb' (Cb (const value)) }
@@ -37,5 +39,6 @@ type OnErrorEffect =
 instance Attr everything OnError Unit where
   pureAttr OnError _ = unsafeAttribute $ Right $ pure $ unsafeVolatileAttribute
     { key: "error", value: unset' }
-  mapAttr OnError evalue = unsafeAttribute $ Right $ evalue <#> \value -> unsafeVolatileAttribute
-    { key: "error", value: unset' }
+  mapAttr OnError evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "error", value: unset' }

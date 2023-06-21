@@ -18,6 +18,7 @@ instance Attr anything OnShow Cb where
 instance Attr anything OnShow (Effect Unit) where
   pureAttr OnShow value = unsafeAttribute $ Right $ pure $
     unsafeVolatileAttribute
+      { key: "show ", value: cb' (Cb (const (value $> true))) }
   mapAttr OnShow evalue = unsafeAttribute $ Right $ evalue <#> \value ->
     unsafeVolatileAttribute
       { key: "show ", value: cb' (Cb (const (value $> true))) }
@@ -25,6 +26,7 @@ instance Attr anything OnShow (Effect Unit) where
 instance Attr anything OnShow (Effect Boolean) where
   pureAttr OnShow value = unsafeAttribute $ Right $ pure $
     unsafeVolatileAttribute
+      { key: "show ", value: cb' (Cb (const value)) }
   mapAttr OnShow evalue = unsafeAttribute $ Right $ evalue <#> \value ->
     unsafeVolatileAttribute
       { key: "show ", value: cb' (Cb (const value)) }
@@ -35,5 +37,6 @@ type OnShowEffect =
 instance Attr everything OnShow Unit where
   pureAttr OnShow _ = unsafeAttribute $ Right $ pure $ unsafeVolatileAttribute
     { key: "show ", value: unset' }
-  mapAttr OnShow evalue = unsafeAttribute $ Right $ evalue <#> \value -> unsafeVolatileAttribute
-    { key: "show ", value: unset' }
+  mapAttr OnShow evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "show ", value: unset' }

@@ -18,6 +18,7 @@ instance Attr anything OnScroll Cb where
 instance Attr anything OnScroll (Effect Unit) where
   pureAttr OnScroll value = unsafeAttribute $ Right $ pure $
     unsafeVolatileAttribute
+      { key: "scroll", value: cb' (Cb (const (value $> true))) }
   mapAttr OnScroll evalue = unsafeAttribute $ Right $ evalue <#> \value ->
     unsafeVolatileAttribute
       { key: "scroll", value: cb' (Cb (const (value $> true))) }
@@ -25,6 +26,7 @@ instance Attr anything OnScroll (Effect Unit) where
 instance Attr anything OnScroll (Effect Boolean) where
   pureAttr OnScroll value = unsafeAttribute $ Right $ pure $
     unsafeVolatileAttribute
+      { key: "scroll", value: cb' (Cb (const value)) }
   mapAttr OnScroll evalue = unsafeAttribute $ Right $ evalue <#> \value ->
     unsafeVolatileAttribute
       { key: "scroll", value: cb' (Cb (const value)) }
@@ -37,5 +39,6 @@ type OnScrollEffect =
 instance Attr everything OnScroll Unit where
   pureAttr OnScroll _ = unsafeAttribute $ Right $ pure $ unsafeVolatileAttribute
     { key: "scroll", value: unset' }
-  mapAttr OnScroll evalue = unsafeAttribute $ Right $ evalue <#> \value -> unsafeVolatileAttribute
-    { key: "scroll", value: unset' }
+  mapAttr OnScroll evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "scroll", value: unset' }

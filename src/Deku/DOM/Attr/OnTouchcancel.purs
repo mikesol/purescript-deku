@@ -12,6 +12,7 @@ data OnTouchcancel = OnTouchcancel
 instance Attr anything OnTouchcancel Cb where
   pureAttr OnTouchcancel value = unsafeAttribute $ Right $ pure $
     unsafeVolatileAttribute
+      { key: "touchcancel", value: cb' value }
   mapAttr OnTouchcancel evalue = unsafeAttribute $ Right $ evalue <#> \value ->
     unsafeVolatileAttribute
       { key: "touchcancel", value: cb' value }
@@ -19,6 +20,7 @@ instance Attr anything OnTouchcancel Cb where
 instance Attr anything OnTouchcancel (Effect Unit) where
   pureAttr OnTouchcancel value = unsafeAttribute $ Right $ pure $
     unsafeVolatileAttribute
+      { key: "touchcancel", value: cb' (Cb (const (value $> true))) }
   mapAttr OnTouchcancel evalue = unsafeAttribute $ Right $ evalue <#> \value ->
     unsafeVolatileAttribute
       { key: "touchcancel", value: cb' (Cb (const (value $> true))) }
@@ -26,6 +28,7 @@ instance Attr anything OnTouchcancel (Effect Unit) where
 instance Attr anything OnTouchcancel (Effect Boolean) where
   pureAttr OnTouchcancel value = unsafeAttribute $ Right $ pure $
     unsafeVolatileAttribute
+      { key: "touchcancel", value: cb' (Cb (const value)) }
   mapAttr OnTouchcancel evalue = unsafeAttribute $ Right $ evalue <#> \value ->
     unsafeVolatileAttribute
       { key: "touchcancel", value: cb' (Cb (const value)) }
@@ -37,5 +40,9 @@ type OnTouchcancelEffect =
 
 instance Attr everything OnTouchcancel Unit where
   pureAttr OnTouchcancel _ = unsafeAttribute $ Right $ pure $
+    unsafeVolatileAttribute
+      { key: "touchcancel", value: unset' }
+
+  mapAttr OnTouchcancel evalue = unsafeAttribute $ Right $ evalue <#> \_ ->
     unsafeVolatileAttribute
       { key: "touchcancel", value: unset' }

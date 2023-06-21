@@ -12,6 +12,7 @@ data OnLoadstart = OnLoadstart
 instance Attr anything OnLoadstart Cb where
   pureAttr OnLoadstart value = unsafeAttribute $ Right $ pure $
     unsafeVolatileAttribute
+      { key: "loadstart", value: cb' value }
   mapAttr OnLoadstart evalue = unsafeAttribute $ Right $ evalue <#> \value ->
     unsafeVolatileAttribute
       { key: "loadstart", value: cb' value }
@@ -19,6 +20,7 @@ instance Attr anything OnLoadstart Cb where
 instance Attr anything OnLoadstart (Effect Unit) where
   pureAttr OnLoadstart value = unsafeAttribute $ Right $ pure $
     unsafeVolatileAttribute
+      { key: "loadstart", value: cb' (Cb (const (value $> true))) }
   mapAttr OnLoadstart evalue = unsafeAttribute $ Right $ evalue <#> \value ->
     unsafeVolatileAttribute
       { key: "loadstart", value: cb' (Cb (const (value $> true))) }
@@ -26,6 +28,7 @@ instance Attr anything OnLoadstart (Effect Unit) where
 instance Attr anything OnLoadstart (Effect Boolean) where
   pureAttr OnLoadstart value = unsafeAttribute $ Right $ pure $
     unsafeVolatileAttribute
+      { key: "loadstart", value: cb' (Cb (const value)) }
   mapAttr OnLoadstart evalue = unsafeAttribute $ Right $ evalue <#> \value ->
     unsafeVolatileAttribute
       { key: "loadstart", value: cb' (Cb (const value)) }
@@ -37,5 +40,9 @@ type OnLoadstartEffect =
 
 instance Attr everything OnLoadstart Unit where
   pureAttr OnLoadstart _ = unsafeAttribute $ Right $ pure $
+    unsafeVolatileAttribute
+      { key: "loadstart", value: unset' }
+
+  mapAttr OnLoadstart evalue = unsafeAttribute $ Right $ evalue <#> \_ ->
     unsafeVolatileAttribute
       { key: "loadstart", value: unset' }

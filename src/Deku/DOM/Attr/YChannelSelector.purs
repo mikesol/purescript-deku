@@ -19,6 +19,7 @@ instance Attr everything YChannelSelector Unit where
   pureAttr YChannelSelector _ = unsafeAttribute $ Right $ pure $
     unsafeVolatileAttribute
       { key: "yChannelSelector", value: unset' }
-  mapAttr YChannelSelector evalue = unsafeAttribute $ Right $ evalue <#> \value ->
-    unsafeVolatileAttribute
-      { key: "yChannelSelector", value: unset' }
+  mapAttr YChannelSelector evalue = unsafeAttribute $ Right $ evalue <#>
+    \value ->
+      unsafeVolatileAttribute
+        { key: "yChannelSelector", value: unset' }

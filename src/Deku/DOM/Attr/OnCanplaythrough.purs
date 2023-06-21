@@ -12,23 +12,29 @@ data OnCanplaythrough = OnCanplaythrough
 instance Attr anything OnCanplaythrough Cb where
   pureAttr OnCanplaythrough value = unsafeAttribute $ Right $ pure $
     unsafeVolatileAttribute
-  mapAttr OnCanplaythrough evalue = unsafeAttribute $ Right $ evalue <#> \value ->
-    unsafeVolatileAttribute
       { key: "canplaythrough", value: cb' value }
+  mapAttr OnCanplaythrough evalue = unsafeAttribute $ Right $ evalue <#>
+    \value ->
+      unsafeVolatileAttribute
+        { key: "canplaythrough", value: cb' value }
 
 instance Attr anything OnCanplaythrough (Effect Unit) where
   pureAttr OnCanplaythrough value = unsafeAttribute $ Right $ pure $
     unsafeVolatileAttribute
-  mapAttr OnCanplaythrough evalue = unsafeAttribute $ Right $ evalue <#> \value ->
-    unsafeVolatileAttribute
       { key: "canplaythrough", value: cb' (Cb (const (value $> true))) }
+  mapAttr OnCanplaythrough evalue = unsafeAttribute $ Right $ evalue <#>
+    \value ->
+      unsafeVolatileAttribute
+        { key: "canplaythrough", value: cb' (Cb (const (value $> true))) }
 
 instance Attr anything OnCanplaythrough (Effect Boolean) where
   pureAttr OnCanplaythrough value = unsafeAttribute $ Right $ pure $
     unsafeVolatileAttribute
-  mapAttr OnCanplaythrough evalue = unsafeAttribute $ Right $ evalue <#> \value ->
-    unsafeVolatileAttribute
       { key: "canplaythrough", value: cb' (Cb (const value)) }
+  mapAttr OnCanplaythrough evalue = unsafeAttribute $ Right $ evalue <#>
+    \value ->
+      unsafeVolatileAttribute
+        { key: "canplaythrough", value: cb' (Cb (const value)) }
 
 type OnCanplaythroughEffect =
   forall element
@@ -37,5 +43,9 @@ type OnCanplaythroughEffect =
 
 instance Attr everything OnCanplaythrough Unit where
   pureAttr OnCanplaythrough _ = unsafeAttribute $ Right $ pure $
+    unsafeVolatileAttribute
+      { key: "canplaythrough", value: unset' }
+
+  mapAttr OnCanplaythrough evalue = unsafeAttribute $ Right $ evalue <#> \_ ->
     unsafeVolatileAttribute
       { key: "canplaythrough", value: unset' }

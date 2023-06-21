@@ -18,6 +18,7 @@ instance Attr anything OnDblclick Cb where
 instance Attr anything OnDblclick (Effect Unit) where
   pureAttr OnDblclick value = unsafeAttribute $ Right $ pure $
     unsafeVolatileAttribute
+      { key: "dblclick", value: cb' (Cb (const (value $> true))) }
   mapAttr OnDblclick evalue = unsafeAttribute $ Right $ evalue <#> \value ->
     unsafeVolatileAttribute
       { key: "dblclick", value: cb' (Cb (const (value $> true))) }
@@ -25,6 +26,7 @@ instance Attr anything OnDblclick (Effect Unit) where
 instance Attr anything OnDblclick (Effect Boolean) where
   pureAttr OnDblclick value = unsafeAttribute $ Right $ pure $
     unsafeVolatileAttribute
+      { key: "dblclick", value: cb' (Cb (const value)) }
   mapAttr OnDblclick evalue = unsafeAttribute $ Right $ evalue <#> \value ->
     unsafeVolatileAttribute
       { key: "dblclick", value: cb' (Cb (const value)) }
@@ -36,5 +38,9 @@ type OnDblclickEffect =
 
 instance Attr everything OnDblclick Unit where
   pureAttr OnDblclick _ = unsafeAttribute $ Right $ pure $
+    unsafeVolatileAttribute
+      { key: "dblclick", value: unset' }
+
+  mapAttr OnDblclick evalue = unsafeAttribute $ Right $ evalue <#> \_ ->
     unsafeVolatileAttribute
       { key: "dblclick", value: unset' }

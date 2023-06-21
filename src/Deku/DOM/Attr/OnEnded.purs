@@ -18,6 +18,7 @@ instance Attr anything OnEnded Cb where
 instance Attr anything OnEnded (Effect Unit) where
   pureAttr OnEnded value = unsafeAttribute $ Right $ pure $
     unsafeVolatileAttribute
+      { key: "ended", value: cb' (Cb (const (value $> true))) }
   mapAttr OnEnded evalue = unsafeAttribute $ Right $ evalue <#> \value ->
     unsafeVolatileAttribute
       { key: "ended", value: cb' (Cb (const (value $> true))) }
@@ -25,6 +26,7 @@ instance Attr anything OnEnded (Effect Unit) where
 instance Attr anything OnEnded (Effect Boolean) where
   pureAttr OnEnded value = unsafeAttribute $ Right $ pure $
     unsafeVolatileAttribute
+      { key: "ended", value: cb' (Cb (const value)) }
   mapAttr OnEnded evalue = unsafeAttribute $ Right $ evalue <#> \value ->
     unsafeVolatileAttribute
       { key: "ended", value: cb' (Cb (const value)) }
@@ -37,5 +39,6 @@ type OnEndedEffect =
 instance Attr everything OnEnded Unit where
   pureAttr OnEnded _ = unsafeAttribute $ Right $ pure $ unsafeVolatileAttribute
     { key: "ended", value: unset' }
-  mapAttr OnEnded evalue = unsafeAttribute $ Right $ evalue <#> \value -> unsafeVolatileAttribute
-    { key: "ended", value: unset' }
+  mapAttr OnEnded evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "ended", value: unset' }

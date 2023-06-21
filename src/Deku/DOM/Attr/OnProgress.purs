@@ -18,6 +18,7 @@ instance Attr anything OnProgress Cb where
 instance Attr anything OnProgress (Effect Unit) where
   pureAttr OnProgress value = unsafeAttribute $ Right $ pure $
     unsafeVolatileAttribute
+      { key: "progress", value: cb' (Cb (const (value $> true))) }
   mapAttr OnProgress evalue = unsafeAttribute $ Right $ evalue <#> \value ->
     unsafeVolatileAttribute
       { key: "progress", value: cb' (Cb (const (value $> true))) }
@@ -25,6 +26,7 @@ instance Attr anything OnProgress (Effect Unit) where
 instance Attr anything OnProgress (Effect Boolean) where
   pureAttr OnProgress value = unsafeAttribute $ Right $ pure $
     unsafeVolatileAttribute
+      { key: "progress", value: cb' (Cb (const value)) }
   mapAttr OnProgress evalue = unsafeAttribute $ Right $ evalue <#> \value ->
     unsafeVolatileAttribute
       { key: "progress", value: cb' (Cb (const value)) }
@@ -36,5 +38,9 @@ type OnProgressEffect =
 
 instance Attr everything OnProgress Unit where
   pureAttr OnProgress _ = unsafeAttribute $ Right $ pure $
+    unsafeVolatileAttribute
+      { key: "progress", value: unset' }
+
+  mapAttr OnProgress evalue = unsafeAttribute $ Right $ evalue <#> \_ ->
     unsafeVolatileAttribute
       { key: "progress", value: unset' }

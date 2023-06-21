@@ -18,6 +18,7 @@ instance Attr anything OnSeeking Cb where
 instance Attr anything OnSeeking (Effect Unit) where
   pureAttr OnSeeking value = unsafeAttribute $ Right $ pure $
     unsafeVolatileAttribute
+      { key: "seeking", value: cb' (Cb (const (value $> true))) }
   mapAttr OnSeeking evalue = unsafeAttribute $ Right $ evalue <#> \value ->
     unsafeVolatileAttribute
       { key: "seeking", value: cb' (Cb (const (value $> true))) }
@@ -25,6 +26,7 @@ instance Attr anything OnSeeking (Effect Unit) where
 instance Attr anything OnSeeking (Effect Boolean) where
   pureAttr OnSeeking value = unsafeAttribute $ Right $ pure $
     unsafeVolatileAttribute
+      { key: "seeking", value: cb' (Cb (const value)) }
   mapAttr OnSeeking evalue = unsafeAttribute $ Right $ evalue <#> \value ->
     unsafeVolatileAttribute
       { key: "seeking", value: cb' (Cb (const value)) }
@@ -36,5 +38,9 @@ type OnSeekingEffect =
 
 instance Attr everything OnSeeking Unit where
   pureAttr OnSeeking _ = unsafeAttribute $ Right $ pure $
+    unsafeVolatileAttribute
+      { key: "seeking", value: unset' }
+
+  mapAttr OnSeeking evalue = unsafeAttribute $ Right $ evalue <#> \_ ->
     unsafeVolatileAttribute
       { key: "seeking", value: unset' }

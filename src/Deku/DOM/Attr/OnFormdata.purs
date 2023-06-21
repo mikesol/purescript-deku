@@ -18,6 +18,7 @@ instance Attr anything OnFormdata Cb where
 instance Attr anything OnFormdata (Effect Unit) where
   pureAttr OnFormdata value = unsafeAttribute $ Right $ pure $
     unsafeVolatileAttribute
+      { key: "formdata", value: cb' (Cb (const (value $> true))) }
   mapAttr OnFormdata evalue = unsafeAttribute $ Right $ evalue <#> \value ->
     unsafeVolatileAttribute
       { key: "formdata", value: cb' (Cb (const (value $> true))) }
@@ -25,6 +26,7 @@ instance Attr anything OnFormdata (Effect Unit) where
 instance Attr anything OnFormdata (Effect Boolean) where
   pureAttr OnFormdata value = unsafeAttribute $ Right $ pure $
     unsafeVolatileAttribute
+      { key: "formdata", value: cb' (Cb (const value)) }
   mapAttr OnFormdata evalue = unsafeAttribute $ Right $ evalue <#> \value ->
     unsafeVolatileAttribute
       { key: "formdata", value: cb' (Cb (const value)) }
@@ -36,5 +38,9 @@ type OnFormdataEffect =
 
 instance Attr everything OnFormdata Unit where
   pureAttr OnFormdata _ = unsafeAttribute $ Right $ pure $
+    unsafeVolatileAttribute
+      { key: "formdata", value: unset' }
+
+  mapAttr OnFormdata evalue = unsafeAttribute $ Right $ evalue <#> \_ ->
     unsafeVolatileAttribute
       { key: "formdata", value: unset' }

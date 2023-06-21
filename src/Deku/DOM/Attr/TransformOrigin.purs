@@ -145,6 +145,7 @@ instance Attr everything TransformOrigin Unit where
   pureAttr TransformOrigin _ = unsafeAttribute $ Right $ pure $
     unsafeVolatileAttribute
       { key: "transform-origin", value: unset' }
-  mapAttr TransformOrigin evalue = unsafeAttribute $ Right $ evalue <#> \value ->
-    unsafeVolatileAttribute
-      { key: "transform-origin", value: unset' }
+  mapAttr TransformOrigin evalue = unsafeAttribute $ Right $ evalue <#>
+    \value ->
+      unsafeVolatileAttribute
+        { key: "transform-origin", value: unset' }

@@ -12,6 +12,7 @@ data OnMousemove = OnMousemove
 instance Attr anything OnMousemove Cb where
   pureAttr OnMousemove value = unsafeAttribute $ Right $ pure $
     unsafeVolatileAttribute
+      { key: "mousemove", value: cb' value }
   mapAttr OnMousemove evalue = unsafeAttribute $ Right $ evalue <#> \value ->
     unsafeVolatileAttribute
       { key: "mousemove", value: cb' value }
@@ -19,6 +20,7 @@ instance Attr anything OnMousemove Cb where
 instance Attr anything OnMousemove (Effect Unit) where
   pureAttr OnMousemove value = unsafeAttribute $ Right $ pure $
     unsafeVolatileAttribute
+      { key: "mousemove", value: cb' (Cb (const (value $> true))) }
   mapAttr OnMousemove evalue = unsafeAttribute $ Right $ evalue <#> \value ->
     unsafeVolatileAttribute
       { key: "mousemove", value: cb' (Cb (const (value $> true))) }
@@ -26,6 +28,7 @@ instance Attr anything OnMousemove (Effect Unit) where
 instance Attr anything OnMousemove (Effect Boolean) where
   pureAttr OnMousemove value = unsafeAttribute $ Right $ pure $
     unsafeVolatileAttribute
+      { key: "mousemove", value: cb' (Cb (const value)) }
   mapAttr OnMousemove evalue = unsafeAttribute $ Right $ evalue <#> \value ->
     unsafeVolatileAttribute
       { key: "mousemove", value: cb' (Cb (const value)) }
@@ -37,5 +40,9 @@ type OnMousemoveEffect =
 
 instance Attr everything OnMousemove Unit where
   pureAttr OnMousemove _ = unsafeAttribute $ Right $ pure $
+    unsafeVolatileAttribute
+      { key: "mousemove", value: unset' }
+
+  mapAttr OnMousemove evalue = unsafeAttribute $ Right $ evalue <#> \_ ->
     unsafeVolatileAttribute
       { key: "mousemove", value: unset' }

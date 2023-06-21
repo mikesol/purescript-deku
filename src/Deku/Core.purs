@@ -71,7 +71,7 @@ import Data.Newtype (class Newtype, unwrap)
 import Data.Profunctor (lcmap)
 import Data.Tuple (curry)
 import Data.Tuple.Nested (type (/\), (/\))
-import Deku.Attribute (AttributeValue(..), Cb, VolatileAttribute, unsafeUnAttribute)
+import Deku.Attribute (AttributeValue(..), Cb, VolatileAttribute, unsafeUnAttribute, unsafeUnVolatileAttribute)
 import Effect (Effect)
 import FRP.Event (Event, Subscriber(..), merge, makeLemmingEventO)
 import FRP.Event as FRP.Event
@@ -644,7 +644,7 @@ makeCachedPursxAttribute pxk cache pxScope attr element =
                   \parent
                    di@(DOMInterpret { setProp, setCb, unsetAttribute }) ->
                     map
-                      ( unsafeUnAttribute >>> \{ key, value } -> case value of
+                      ( unsafeUnVolatileAttribute >>> \{ key, value } -> case value of
                           Prop' p -> setProp
                             { id:
                                 (pxk <> "@!%" <> pxScope)

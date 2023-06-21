@@ -12,6 +12,7 @@ data OnSelectstart = OnSelectstart
 instance Attr anything OnSelectstart Cb where
   pureAttr OnSelectstart value = unsafeAttribute $ Right $ pure $
     unsafeVolatileAttribute
+      { key: "selectstart", value: cb' value }
   mapAttr OnSelectstart evalue = unsafeAttribute $ Right $ evalue <#> \value ->
     unsafeVolatileAttribute
       { key: "selectstart", value: cb' value }
@@ -19,6 +20,7 @@ instance Attr anything OnSelectstart Cb where
 instance Attr anything OnSelectstart (Effect Unit) where
   pureAttr OnSelectstart value = unsafeAttribute $ Right $ pure $
     unsafeVolatileAttribute
+      { key: "selectstart", value: cb' (Cb (const (value $> true))) }
   mapAttr OnSelectstart evalue = unsafeAttribute $ Right $ evalue <#> \value ->
     unsafeVolatileAttribute
       { key: "selectstart", value: cb' (Cb (const (value $> true))) }
@@ -26,6 +28,7 @@ instance Attr anything OnSelectstart (Effect Unit) where
 instance Attr anything OnSelectstart (Effect Boolean) where
   pureAttr OnSelectstart value = unsafeAttribute $ Right $ pure $
     unsafeVolatileAttribute
+      { key: "selectstart", value: cb' (Cb (const value)) }
   mapAttr OnSelectstart evalue = unsafeAttribute $ Right $ evalue <#> \value ->
     unsafeVolatileAttribute
       { key: "selectstart", value: cb' (Cb (const value)) }
@@ -37,5 +40,9 @@ type OnSelectstartEffect =
 
 instance Attr everything OnSelectstart Unit where
   pureAttr OnSelectstart _ = unsafeAttribute $ Right $ pure $
+    unsafeVolatileAttribute
+      { key: "selectstart", value: unset' }
+
+  mapAttr OnSelectstart evalue = unsafeAttribute $ Right $ evalue <#> \_ ->
     unsafeVolatileAttribute
       { key: "selectstart", value: unset' }

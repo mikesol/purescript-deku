@@ -12,23 +12,29 @@ data OnTransitionend = OnTransitionend
 instance Attr anything OnTransitionend Cb where
   pureAttr OnTransitionend value = unsafeAttribute $ Right $ pure $
     unsafeVolatileAttribute
-  mapAttr OnTransitionend evalue = unsafeAttribute $ Right $ evalue <#> \value ->
-    unsafeVolatileAttribute
       { key: "transitionend", value: cb' value }
+  mapAttr OnTransitionend evalue = unsafeAttribute $ Right $ evalue <#>
+    \value ->
+      unsafeVolatileAttribute
+        { key: "transitionend", value: cb' value }
 
 instance Attr anything OnTransitionend (Effect Unit) where
   pureAttr OnTransitionend value = unsafeAttribute $ Right $ pure $
     unsafeVolatileAttribute
-  mapAttr OnTransitionend evalue = unsafeAttribute $ Right $ evalue <#> \value ->
-    unsafeVolatileAttribute
       { key: "transitionend", value: cb' (Cb (const (value $> true))) }
+  mapAttr OnTransitionend evalue = unsafeAttribute $ Right $ evalue <#>
+    \value ->
+      unsafeVolatileAttribute
+        { key: "transitionend", value: cb' (Cb (const (value $> true))) }
 
 instance Attr anything OnTransitionend (Effect Boolean) where
   pureAttr OnTransitionend value = unsafeAttribute $ Right $ pure $
     unsafeVolatileAttribute
-  mapAttr OnTransitionend evalue = unsafeAttribute $ Right $ evalue <#> \value ->
-    unsafeVolatileAttribute
       { key: "transitionend", value: cb' (Cb (const value)) }
+  mapAttr OnTransitionend evalue = unsafeAttribute $ Right $ evalue <#>
+    \value ->
+      unsafeVolatileAttribute
+        { key: "transitionend", value: cb' (Cb (const value)) }
 
 type OnTransitionendEffect =
   forall element
@@ -37,5 +43,9 @@ type OnTransitionendEffect =
 
 instance Attr everything OnTransitionend Unit where
   pureAttr OnTransitionend _ = unsafeAttribute $ Right $ pure $
+    unsafeVolatileAttribute
+      { key: "transitionend", value: unset' }
+
+  mapAttr OnTransitionend evalue = unsafeAttribute $ Right $ evalue <#> \_ ->
     unsafeVolatileAttribute
       { key: "transitionend", value: unset' }

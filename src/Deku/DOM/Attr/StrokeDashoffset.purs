@@ -299,6 +299,7 @@ instance Attr everything StrokeDashoffset Unit where
   pureAttr StrokeDashoffset _ = unsafeAttribute $ Right $ pure $
     unsafeVolatileAttribute
       { key: "stroke-dashoffset", value: unset' }
-  mapAttr StrokeDashoffset evalue = unsafeAttribute $ Right $ evalue <#> \value ->
-    unsafeVolatileAttribute
-      { key: "stroke-dashoffset", value: unset' }
+  mapAttr StrokeDashoffset evalue = unsafeAttribute $ Right $ evalue <#>
+    \value ->
+      unsafeVolatileAttribute
+        { key: "stroke-dashoffset", value: unset' }

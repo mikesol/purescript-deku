@@ -28,6 +28,7 @@ instance Attr everything GradientTransform Unit where
   pureAttr GradientTransform _ = unsafeAttribute $ Right $ pure $
     unsafeVolatileAttribute
       { key: "gradientTransform", value: unset' }
-  mapAttr GradientTransform evalue = unsafeAttribute $ Right $ evalue <#> \value ->
-    unsafeVolatileAttribute
-      { key: "gradientTransform", value: unset' }
+  mapAttr GradientTransform evalue = unsafeAttribute $ Right $ evalue <#>
+    \value ->
+      unsafeVolatileAttribute
+        { key: "gradientTransform", value: unset' }

@@ -164,6 +164,7 @@ instance Attr everything AlignmentBaseline Unit where
   pureAttr AlignmentBaseline _ = unsafeAttribute $ Right $ pure $
     unsafeVolatileAttribute
       { key: "alignment-baseline", value: unset' }
-  mapAttr AlignmentBaseline evalue = unsafeAttribute $ Right $ evalue <#> \value ->
-    unsafeVolatileAttribute
-      { key: "alignment-baseline", value: unset' }
+  mapAttr AlignmentBaseline evalue = unsafeAttribute $ Right $ evalue <#>
+    \value ->
+      unsafeVolatileAttribute
+        { key: "alignment-baseline", value: unset' }

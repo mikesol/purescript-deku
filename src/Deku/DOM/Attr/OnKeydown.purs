@@ -18,6 +18,7 @@ instance Attr anything OnKeydown Cb where
 instance Attr anything OnKeydown (Effect Unit) where
   pureAttr OnKeydown value = unsafeAttribute $ Right $ pure $
     unsafeVolatileAttribute
+      { key: "keydown", value: cb' (Cb (const (value $> true))) }
   mapAttr OnKeydown evalue = unsafeAttribute $ Right $ evalue <#> \value ->
     unsafeVolatileAttribute
       { key: "keydown", value: cb' (Cb (const (value $> true))) }
@@ -25,6 +26,7 @@ instance Attr anything OnKeydown (Effect Unit) where
 instance Attr anything OnKeydown (Effect Boolean) where
   pureAttr OnKeydown value = unsafeAttribute $ Right $ pure $
     unsafeVolatileAttribute
+      { key: "keydown", value: cb' (Cb (const value)) }
   mapAttr OnKeydown evalue = unsafeAttribute $ Right $ evalue <#> \value ->
     unsafeVolatileAttribute
       { key: "keydown", value: cb' (Cb (const value)) }
@@ -36,5 +38,9 @@ type OnKeydownEffect =
 
 instance Attr everything OnKeydown Unit where
   pureAttr OnKeydown _ = unsafeAttribute $ Right $ pure $
+    unsafeVolatileAttribute
+      { key: "keydown", value: unset' }
+
+  mapAttr OnKeydown evalue = unsafeAttribute $ Right $ evalue <#> \_ ->
     unsafeVolatileAttribute
       { key: "keydown", value: unset' }

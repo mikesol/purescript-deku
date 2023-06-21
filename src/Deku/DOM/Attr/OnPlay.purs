@@ -18,6 +18,7 @@ instance Attr anything OnPlay Cb where
 instance Attr anything OnPlay (Effect Unit) where
   pureAttr OnPlay value = unsafeAttribute $ Right $ pure $
     unsafeVolatileAttribute
+      { key: "play", value: cb' (Cb (const (value $> true))) }
   mapAttr OnPlay evalue = unsafeAttribute $ Right $ evalue <#> \value ->
     unsafeVolatileAttribute
       { key: "play", value: cb' (Cb (const (value $> true))) }
@@ -25,6 +26,7 @@ instance Attr anything OnPlay (Effect Unit) where
 instance Attr anything OnPlay (Effect Boolean) where
   pureAttr OnPlay value = unsafeAttribute $ Right $ pure $
     unsafeVolatileAttribute
+      { key: "play", value: cb' (Cb (const value)) }
   mapAttr OnPlay evalue = unsafeAttribute $ Right $ evalue <#> \value ->
     unsafeVolatileAttribute
       { key: "play", value: cb' (Cb (const value)) }
@@ -35,5 +37,6 @@ type OnPlayEffect =
 instance Attr everything OnPlay Unit where
   pureAttr OnPlay _ = unsafeAttribute $ Right $ pure $ unsafeVolatileAttribute
     { key: "play", value: unset' }
-  mapAttr OnPlay evalue = unsafeAttribute $ Right $ evalue <#> \value -> unsafeVolatileAttribute
-    { key: "play", value: unset' }
+  mapAttr OnPlay evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "play", value: unset' }

@@ -19,6 +19,7 @@ instance Attr everything ContentStyleType Unit where
   pureAttr ContentStyleType _ = unsafeAttribute $ Right $ pure $
     unsafeVolatileAttribute
       { key: "contentStyleType", value: unset' }
-  mapAttr ContentStyleType evalue = unsafeAttribute $ Right $ evalue <#> \value ->
-    unsafeVolatileAttribute
-      { key: "contentStyleType", value: unset' }
+  mapAttr ContentStyleType evalue = unsafeAttribute $ Right $ evalue <#>
+    \value ->
+      unsafeVolatileAttribute
+        { key: "contentStyleType", value: unset' }

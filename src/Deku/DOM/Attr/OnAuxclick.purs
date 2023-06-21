@@ -18,6 +18,7 @@ instance Attr anything OnAuxclick Cb where
 instance Attr anything OnAuxclick (Effect Unit) where
   pureAttr OnAuxclick value = unsafeAttribute $ Right $ pure $
     unsafeVolatileAttribute
+      { key: "auxclick ", value: cb' (Cb (const (value $> true))) }
   mapAttr OnAuxclick evalue = unsafeAttribute $ Right $ evalue <#> \value ->
     unsafeVolatileAttribute
       { key: "auxclick ", value: cb' (Cb (const (value $> true))) }
@@ -25,6 +26,7 @@ instance Attr anything OnAuxclick (Effect Unit) where
 instance Attr anything OnAuxclick (Effect Boolean) where
   pureAttr OnAuxclick value = unsafeAttribute $ Right $ pure $
     unsafeVolatileAttribute
+      { key: "auxclick ", value: cb' (Cb (const value)) }
   mapAttr OnAuxclick evalue = unsafeAttribute $ Right $ evalue <#> \value ->
     unsafeVolatileAttribute
       { key: "auxclick ", value: cb' (Cb (const value)) }
@@ -36,5 +38,9 @@ type OnAuxclickEffect =
 
 instance Attr everything OnAuxclick Unit where
   pureAttr OnAuxclick _ = unsafeAttribute $ Right $ pure $
+    unsafeVolatileAttribute
+      { key: "auxclick ", value: unset' }
+
+  mapAttr OnAuxclick evalue = unsafeAttribute $ Right $ evalue <#> \_ ->
     unsafeVolatileAttribute
       { key: "auxclick ", value: unset' }

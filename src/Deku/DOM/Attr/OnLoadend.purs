@@ -18,6 +18,7 @@ instance Attr anything OnLoadend Cb where
 instance Attr anything OnLoadend (Effect Unit) where
   pureAttr OnLoadend value = unsafeAttribute $ Right $ pure $
     unsafeVolatileAttribute
+      { key: "loadend", value: cb' (Cb (const (value $> true))) }
   mapAttr OnLoadend evalue = unsafeAttribute $ Right $ evalue <#> \value ->
     unsafeVolatileAttribute
       { key: "loadend", value: cb' (Cb (const (value $> true))) }
@@ -25,6 +26,7 @@ instance Attr anything OnLoadend (Effect Unit) where
 instance Attr anything OnLoadend (Effect Boolean) where
   pureAttr OnLoadend value = unsafeAttribute $ Right $ pure $
     unsafeVolatileAttribute
+      { key: "loadend", value: cb' (Cb (const value)) }
   mapAttr OnLoadend evalue = unsafeAttribute $ Right $ evalue <#> \value ->
     unsafeVolatileAttribute
       { key: "loadend", value: cb' (Cb (const value)) }
@@ -36,5 +38,9 @@ type OnLoadendEffect =
 
 instance Attr everything OnLoadend Unit where
   pureAttr OnLoadend _ = unsafeAttribute $ Right $ pure $
+    unsafeVolatileAttribute
+      { key: "loadend", value: unset' }
+
+  mapAttr OnLoadend evalue = unsafeAttribute $ Right $ evalue <#> \_ ->
     unsafeVolatileAttribute
       { key: "loadend", value: unset' }

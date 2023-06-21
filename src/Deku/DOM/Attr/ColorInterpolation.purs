@@ -324,6 +324,7 @@ instance Attr everything ColorInterpolation Unit where
   pureAttr ColorInterpolation _ = unsafeAttribute $ Right $ pure $
     unsafeVolatileAttribute
       { key: "color-interpolation", value: unset' }
-  mapAttr ColorInterpolation evalue = unsafeAttribute $ Right $ evalue <#> \value ->
-    unsafeVolatileAttribute
-      { key: "color-interpolation", value: unset' }
+  mapAttr ColorInterpolation evalue = unsafeAttribute $ Right $ evalue <#>
+    \value ->
+      unsafeVolatileAttribute
+        { key: "color-interpolation", value: unset' }

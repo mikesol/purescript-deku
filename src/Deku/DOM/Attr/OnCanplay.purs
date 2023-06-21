@@ -18,6 +18,7 @@ instance Attr anything OnCanplay Cb where
 instance Attr anything OnCanplay (Effect Unit) where
   pureAttr OnCanplay value = unsafeAttribute $ Right $ pure $
     unsafeVolatileAttribute
+      { key: "canplay", value: cb' (Cb (const (value $> true))) }
   mapAttr OnCanplay evalue = unsafeAttribute $ Right $ evalue <#> \value ->
     unsafeVolatileAttribute
       { key: "canplay", value: cb' (Cb (const (value $> true))) }
@@ -25,6 +26,7 @@ instance Attr anything OnCanplay (Effect Unit) where
 instance Attr anything OnCanplay (Effect Boolean) where
   pureAttr OnCanplay value = unsafeAttribute $ Right $ pure $
     unsafeVolatileAttribute
+      { key: "canplay", value: cb' (Cb (const value)) }
   mapAttr OnCanplay evalue = unsafeAttribute $ Right $ evalue <#> \value ->
     unsafeVolatileAttribute
       { key: "canplay", value: cb' (Cb (const value)) }
@@ -36,5 +38,9 @@ type OnCanplayEffect =
 
 instance Attr everything OnCanplay Unit where
   pureAttr OnCanplay _ = unsafeAttribute $ Right $ pure $
+    unsafeVolatileAttribute
+      { key: "canplay", value: unset' }
+
+  mapAttr OnCanplay evalue = unsafeAttribute $ Right $ evalue <#> \_ ->
     unsafeVolatileAttribute
       { key: "canplay", value: unset' }

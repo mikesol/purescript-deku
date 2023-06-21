@@ -18,6 +18,7 @@ instance Attr anything OnFocus Cb where
 instance Attr anything OnFocus (Effect Unit) where
   pureAttr OnFocus value = unsafeAttribute $ Right $ pure $
     unsafeVolatileAttribute
+      { key: "focus", value: cb' (Cb (const (value $> true))) }
   mapAttr OnFocus evalue = unsafeAttribute $ Right $ evalue <#> \value ->
     unsafeVolatileAttribute
       { key: "focus", value: cb' (Cb (const (value $> true))) }
@@ -25,6 +26,7 @@ instance Attr anything OnFocus (Effect Unit) where
 instance Attr anything OnFocus (Effect Boolean) where
   pureAttr OnFocus value = unsafeAttribute $ Right $ pure $
     unsafeVolatileAttribute
+      { key: "focus", value: cb' (Cb (const value)) }
   mapAttr OnFocus evalue = unsafeAttribute $ Right $ evalue <#> \value ->
     unsafeVolatileAttribute
       { key: "focus", value: cb' (Cb (const value)) }
@@ -37,5 +39,6 @@ type OnFocusEffect =
 instance Attr everything OnFocus Unit where
   pureAttr OnFocus _ = unsafeAttribute $ Right $ pure $ unsafeVolatileAttribute
     { key: "focus", value: unset' }
-  mapAttr OnFocus evalue = unsafeAttribute $ Right $ evalue <#> \value -> unsafeVolatileAttribute
-    { key: "focus", value: unset' }
+  mapAttr OnFocus evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "focus", value: unset' }

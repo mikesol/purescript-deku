@@ -299,6 +299,7 @@ instance Attr everything StrokeDasharray Unit where
   pureAttr StrokeDasharray _ = unsafeAttribute $ Right $ pure $
     unsafeVolatileAttribute
       { key: "stroke-dasharray", value: unset' }
-  mapAttr StrokeDasharray evalue = unsafeAttribute $ Right $ evalue <#> \value ->
-    unsafeVolatileAttribute
-      { key: "stroke-dasharray", value: unset' }
+  mapAttr StrokeDasharray evalue = unsafeAttribute $ Right $ evalue <#>
+    \value ->
+      unsafeVolatileAttribute
+        { key: "stroke-dasharray", value: unset' }

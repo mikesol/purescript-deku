@@ -12,23 +12,29 @@ data OnDurationchange = OnDurationchange
 instance Attr anything OnDurationchange Cb where
   pureAttr OnDurationchange value = unsafeAttribute $ Right $ pure $
     unsafeVolatileAttribute
-  mapAttr OnDurationchange evalue = unsafeAttribute $ Right $ evalue <#> \value ->
-    unsafeVolatileAttribute
       { key: "durationchange", value: cb' value }
+  mapAttr OnDurationchange evalue = unsafeAttribute $ Right $ evalue <#>
+    \value ->
+      unsafeVolatileAttribute
+        { key: "durationchange", value: cb' value }
 
 instance Attr anything OnDurationchange (Effect Unit) where
   pureAttr OnDurationchange value = unsafeAttribute $ Right $ pure $
     unsafeVolatileAttribute
-  mapAttr OnDurationchange evalue = unsafeAttribute $ Right $ evalue <#> \value ->
-    unsafeVolatileAttribute
       { key: "durationchange", value: cb' (Cb (const (value $> true))) }
+  mapAttr OnDurationchange evalue = unsafeAttribute $ Right $ evalue <#>
+    \value ->
+      unsafeVolatileAttribute
+        { key: "durationchange", value: cb' (Cb (const (value $> true))) }
 
 instance Attr anything OnDurationchange (Effect Boolean) where
   pureAttr OnDurationchange value = unsafeAttribute $ Right $ pure $
     unsafeVolatileAttribute
-  mapAttr OnDurationchange evalue = unsafeAttribute $ Right $ evalue <#> \value ->
-    unsafeVolatileAttribute
       { key: "durationchange", value: cb' (Cb (const value)) }
+  mapAttr OnDurationchange evalue = unsafeAttribute $ Right $ evalue <#>
+    \value ->
+      unsafeVolatileAttribute
+        { key: "durationchange", value: cb' (Cb (const value)) }
 
 type OnDurationchangeEffect =
   forall element
@@ -37,5 +43,9 @@ type OnDurationchangeEffect =
 
 instance Attr everything OnDurationchange Unit where
   pureAttr OnDurationchange _ = unsafeAttribute $ Right $ pure $
+    unsafeVolatileAttribute
+      { key: "durationchange", value: unset' }
+
+  mapAttr OnDurationchange evalue = unsafeAttribute $ Right $ evalue <#> \_ ->
     unsafeVolatileAttribute
       { key: "durationchange", value: unset' }

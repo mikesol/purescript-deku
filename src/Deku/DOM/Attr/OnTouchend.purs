@@ -12,6 +12,7 @@ data OnTouchend = OnTouchend
 instance Attr anything OnTouchend Cb where
   pureAttr OnTouchend value = unsafeAttribute $ Right $ pure $
     unsafeVolatileAttribute
+      { key: "touchend", value: cb' value }
   mapAttr OnTouchend evalue = unsafeAttribute $ Right $ evalue <#> \value ->
     unsafeVolatileAttribute
       { key: "touchend", value: cb' value }
@@ -19,6 +20,7 @@ instance Attr anything OnTouchend Cb where
 instance Attr anything OnTouchend (Effect Unit) where
   pureAttr OnTouchend value = unsafeAttribute $ Right $ pure $
     unsafeVolatileAttribute
+      { key: "touchend", value: cb' (Cb (const (value $> true))) }
   mapAttr OnTouchend evalue = unsafeAttribute $ Right $ evalue <#> \value ->
     unsafeVolatileAttribute
       { key: "touchend", value: cb' (Cb (const (value $> true))) }
@@ -26,6 +28,7 @@ instance Attr anything OnTouchend (Effect Unit) where
 instance Attr anything OnTouchend (Effect Boolean) where
   pureAttr OnTouchend value = unsafeAttribute $ Right $ pure $
     unsafeVolatileAttribute
+      { key: "touchend", value: cb' (Cb (const value)) }
   mapAttr OnTouchend evalue = unsafeAttribute $ Right $ evalue <#> \value ->
     unsafeVolatileAttribute
       { key: "touchend", value: cb' (Cb (const value)) }
@@ -37,5 +40,9 @@ type OnTouchendEffect =
 
 instance Attr everything OnTouchend Unit where
   pureAttr OnTouchend _ = unsafeAttribute $ Right $ pure $
+    unsafeVolatileAttribute
+      { key: "touchend", value: unset' }
+
+  mapAttr OnTouchend evalue = unsafeAttribute $ Right $ evalue <#> \_ ->
     unsafeVolatileAttribute
       { key: "touchend", value: unset' }

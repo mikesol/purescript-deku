@@ -19,6 +19,7 @@ instance Attr everything SpecularConstant Unit where
   pureAttr SpecularConstant _ = unsafeAttribute $ Right $ pure $
     unsafeVolatileAttribute
       { key: "specularConstant", value: unset' }
-  mapAttr SpecularConstant evalue = unsafeAttribute $ Right $ evalue <#> \value ->
-    unsafeVolatileAttribute
-      { key: "specularConstant", value: unset' }
+  mapAttr SpecularConstant evalue = unsafeAttribute $ Right $ evalue <#>
+    \value ->
+      unsafeVolatileAttribute
+        { key: "specularConstant", value: unset' }

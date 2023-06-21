@@ -4,13 +4,14 @@
 -- | There's also the `xdata` function that allows you to construct an aribitrary data attribute.
 module Deku.Attribute
   ( AttributeValue(..)
-  , VolatileAttribute
+  , VolatileAttribute(..)
   , UnsafeAttribute
-  , Attribute
-  , PureAttribute
+  , Attribute(..)
+  , PureAttribute(..)
   , class Attr
   , unsafeUnVolatileAttribute
   , unsafeVolatileAttribute
+  , unsafeMakeVolatile
   , unsafeUnAttribute
   , unsafeAttribute
   , unsafeUnPureAttribute
@@ -88,6 +89,11 @@ data AttributeValue = Prop' String | Cb' Cb | Unset'
 -- | In general, this type is for internal use only. In practice, you'll use
 -- | the `:=` family of operators and helpers like `style` and `klass` instead.
 newtype Attribute (e :: Type) = Attribute UnsafeAttribute
+
+unsafeMakeVolatile :: forall e. Attribute e -> FRP.Event VolatileAttribute
+unsafeMakeVolatile (Attribute (Right a)) = a
+unsafeMakeVolatile (Attribute (Left (PureAttribute a))) = pure $ VolatileAttribute
+  { key: a.key, value: Prop' a.value }
 
 type UnsafeAttribute = Either PureAttribute (FRP.Event VolatileAttribute)
 

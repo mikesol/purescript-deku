@@ -33,6 +33,7 @@ instance Attr everything KernelUnitLength Unit where
   pureAttr KernelUnitLength _ = unsafeAttribute $ Right $ pure $
     unsafeVolatileAttribute
       { key: "kernelUnitLength", value: unset' }
-  mapAttr KernelUnitLength evalue = unsafeAttribute $ Right $ evalue <#> \value ->
-    unsafeVolatileAttribute
-      { key: "kernelUnitLength", value: unset' }
+  mapAttr KernelUnitLength evalue = unsafeAttribute $ Right $ evalue <#>
+    \value ->
+      unsafeVolatileAttribute
+        { key: "kernelUnitLength", value: unset' }

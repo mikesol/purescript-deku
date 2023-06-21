@@ -9,7 +9,7 @@ import Data.Either (Either(..))
 import Data.Maybe (Maybe, maybe)
 import Data.Reflectable (class Reflectable, reflectType)
 import Data.Symbol (class IsSymbol)
-import Deku.Attribute (Attribute, unsafeUnAttribute)
+import Deku.Attribute (Attribute, unsafeMakeVolatile)
 import Deku.Core (DOMInterpret(..), Korok(..), Node(..), Nut(..), NutF(..), makeCachedPursxAttribute, makeCachedPursxElement, nuttyKorok, resolveNut)
 import Deku.TagToDeku (class TagToDeku)
 import FRP.Event (Event, Subscriber(..), makeLemmingEventO, merge)
@@ -38,7 +38,7 @@ class
 
 instance
   ( TagToDeku tag deku
-  , Row.Cons acc (Event (Attribute deku)) pursi purso
+  , Row.Cons acc (Attribute deku) pursi purso
   ) =>
   DoVerbForAttr verb tag acc verb tail pursi purso tail
 else instance
@@ -2446,19 +2446,19 @@ instance pursxToElementConsInsert ::
     pxk = Proxy :: _ key
 
 else instance pursxToElementConsAttr ::
-  ( Row.Cons key (Event (Attribute deku)) r' r
+  ( Row.Cons key (Attribute deku) r' r
   , PursxToElement rest r
   , Reflectable key String
   , IsSymbol key
   ) =>
   PursxToElement
-    (RL.Cons key (Event (Attribute deku)) rest)
+    (RL.Cons key (Attribute deku) rest)
     r where
   pursxToElement pxScope _ r =
     let
       { cache, element } = pursxToElement pxScope (Proxy :: Proxy rest) r
       ce = makeCachedPursxAttribute (reflectType pxk) cache pxScope
-        (unsafeUnAttribute <$> (get pxk r))
+        (unsafeMakeVolatile (get pxk r))
         (resolveNut element)
     in
       { cache: ce.cache, element: nuttyKorok ce.element }

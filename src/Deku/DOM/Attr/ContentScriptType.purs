@@ -20,6 +20,7 @@ instance Attr everything ContentScriptType Unit where
   pureAttr ContentScriptType _ = unsafeAttribute $ Right $ pure $
     unsafeVolatileAttribute
       { key: "contentScriptType", value: unset' }
-  mapAttr ContentScriptType evalue = unsafeAttribute $ Right $ evalue <#> \value ->
-    unsafeVolatileAttribute
-      { key: "contentScriptType", value: unset' }
+  mapAttr ContentScriptType evalue = unsafeAttribute $ Right $ evalue <#>
+    \value ->
+      unsafeVolatileAttribute
+        { key: "contentScriptType", value: unset' }

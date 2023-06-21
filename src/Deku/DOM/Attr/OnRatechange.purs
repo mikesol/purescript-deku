@@ -12,6 +12,7 @@ data OnRatechange = OnRatechange
 instance Attr anything OnRatechange Cb where
   pureAttr OnRatechange value = unsafeAttribute $ Right $ pure $
     unsafeVolatileAttribute
+      { key: "ratechange", value: cb' value }
   mapAttr OnRatechange evalue = unsafeAttribute $ Right $ evalue <#> \value ->
     unsafeVolatileAttribute
       { key: "ratechange", value: cb' value }
@@ -19,6 +20,7 @@ instance Attr anything OnRatechange Cb where
 instance Attr anything OnRatechange (Effect Unit) where
   pureAttr OnRatechange value = unsafeAttribute $ Right $ pure $
     unsafeVolatileAttribute
+      { key: "ratechange", value: cb' (Cb (const (value $> true))) }
   mapAttr OnRatechange evalue = unsafeAttribute $ Right $ evalue <#> \value ->
     unsafeVolatileAttribute
       { key: "ratechange", value: cb' (Cb (const (value $> true))) }
@@ -26,6 +28,7 @@ instance Attr anything OnRatechange (Effect Unit) where
 instance Attr anything OnRatechange (Effect Boolean) where
   pureAttr OnRatechange value = unsafeAttribute $ Right $ pure $
     unsafeVolatileAttribute
+      { key: "ratechange", value: cb' (Cb (const value)) }
   mapAttr OnRatechange evalue = unsafeAttribute $ Right $ evalue <#> \value ->
     unsafeVolatileAttribute
       { key: "ratechange", value: cb' (Cb (const value)) }
@@ -37,5 +40,9 @@ type OnRatechangeEffect =
 
 instance Attr everything OnRatechange Unit where
   pureAttr OnRatechange _ = unsafeAttribute $ Right $ pure $
+    unsafeVolatileAttribute
+      { key: "ratechange", value: unset' }
+
+  mapAttr OnRatechange evalue = unsafeAttribute $ Right $ evalue <#> \_ ->
     unsafeVolatileAttribute
       { key: "ratechange", value: unset' }

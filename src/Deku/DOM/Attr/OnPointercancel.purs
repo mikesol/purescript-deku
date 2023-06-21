@@ -12,23 +12,29 @@ data OnPointercancel = OnPointercancel
 instance Attr anything OnPointercancel Cb where
   pureAttr OnPointercancel value = unsafeAttribute $ Right $ pure $
     unsafeVolatileAttribute
-  mapAttr OnPointercancel evalue = unsafeAttribute $ Right $ evalue <#> \value ->
-    unsafeVolatileAttribute
       { key: "pointercancel", value: cb' value }
+  mapAttr OnPointercancel evalue = unsafeAttribute $ Right $ evalue <#>
+    \value ->
+      unsafeVolatileAttribute
+        { key: "pointercancel", value: cb' value }
 
 instance Attr anything OnPointercancel (Effect Unit) where
   pureAttr OnPointercancel value = unsafeAttribute $ Right $ pure $
     unsafeVolatileAttribute
-  mapAttr OnPointercancel evalue = unsafeAttribute $ Right $ evalue <#> \value ->
-    unsafeVolatileAttribute
       { key: "pointercancel", value: cb' (Cb (const (value $> true))) }
+  mapAttr OnPointercancel evalue = unsafeAttribute $ Right $ evalue <#>
+    \value ->
+      unsafeVolatileAttribute
+        { key: "pointercancel", value: cb' (Cb (const (value $> true))) }
 
 instance Attr anything OnPointercancel (Effect Boolean) where
   pureAttr OnPointercancel value = unsafeAttribute $ Right $ pure $
     unsafeVolatileAttribute
-  mapAttr OnPointercancel evalue = unsafeAttribute $ Right $ evalue <#> \value ->
-    unsafeVolatileAttribute
       { key: "pointercancel", value: cb' (Cb (const value)) }
+  mapAttr OnPointercancel evalue = unsafeAttribute $ Right $ evalue <#>
+    \value ->
+      unsafeVolatileAttribute
+        { key: "pointercancel", value: cb' (Cb (const value)) }
 
 type OnPointercancelEffect =
   forall element
@@ -37,5 +43,9 @@ type OnPointercancelEffect =
 
 instance Attr everything OnPointercancel Unit where
   pureAttr OnPointercancel _ = unsafeAttribute $ Right $ pure $
+    unsafeVolatileAttribute
+      { key: "pointercancel", value: unset' }
+
+  mapAttr OnPointercancel evalue = unsafeAttribute $ Right $ evalue <#> \_ ->
     unsafeVolatileAttribute
       { key: "pointercancel", value: unset' }

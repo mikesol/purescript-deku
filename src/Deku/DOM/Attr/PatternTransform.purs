@@ -19,6 +19,7 @@ instance Attr everything PatternTransform Unit where
   pureAttr PatternTransform _ = unsafeAttribute $ Right $ pure $
     unsafeVolatileAttribute
       { key: "patternTransform", value: unset' }
-  mapAttr PatternTransform evalue = unsafeAttribute $ Right $ evalue <#> \value ->
-    unsafeVolatileAttribute
-      { key: "patternTransform", value: unset' }
+  mapAttr PatternTransform evalue = unsafeAttribute $ Right $ evalue <#>
+    \value ->
+      unsafeVolatileAttribute
+        { key: "patternTransform", value: unset' }

@@ -12,6 +12,7 @@ data OnPointerleave = OnPointerleave
 instance Attr anything OnPointerleave Cb where
   pureAttr OnPointerleave value = unsafeAttribute $ Right $ pure $
     unsafeVolatileAttribute
+      { key: "pointerleave", value: cb' value }
   mapAttr OnPointerleave evalue = unsafeAttribute $ Right $ evalue <#> \value ->
     unsafeVolatileAttribute
       { key: "pointerleave", value: cb' value }
@@ -19,6 +20,7 @@ instance Attr anything OnPointerleave Cb where
 instance Attr anything OnPointerleave (Effect Unit) where
   pureAttr OnPointerleave value = unsafeAttribute $ Right $ pure $
     unsafeVolatileAttribute
+      { key: "pointerleave", value: cb' (Cb (const (value $> true))) }
   mapAttr OnPointerleave evalue = unsafeAttribute $ Right $ evalue <#> \value ->
     unsafeVolatileAttribute
       { key: "pointerleave", value: cb' (Cb (const (value $> true))) }
@@ -26,6 +28,7 @@ instance Attr anything OnPointerleave (Effect Unit) where
 instance Attr anything OnPointerleave (Effect Boolean) where
   pureAttr OnPointerleave value = unsafeAttribute $ Right $ pure $
     unsafeVolatileAttribute
+      { key: "pointerleave", value: cb' (Cb (const value)) }
   mapAttr OnPointerleave evalue = unsafeAttribute $ Right $ evalue <#> \value ->
     unsafeVolatileAttribute
       { key: "pointerleave", value: cb' (Cb (const value)) }
@@ -37,5 +40,9 @@ type OnPointerleaveEffect =
 
 instance Attr everything OnPointerleave Unit where
   pureAttr OnPointerleave _ = unsafeAttribute $ Right $ pure $
+    unsafeVolatileAttribute
+      { key: "pointerleave", value: unset' }
+
+  mapAttr OnPointerleave evalue = unsafeAttribute $ Right $ evalue <#> \_ ->
     unsafeVolatileAttribute
       { key: "pointerleave", value: unset' }

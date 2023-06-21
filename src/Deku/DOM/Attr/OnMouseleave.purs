@@ -12,6 +12,7 @@ data OnMouseleave = OnMouseleave
 instance Attr anything OnMouseleave Cb where
   pureAttr OnMouseleave value = unsafeAttribute $ Right $ pure $
     unsafeVolatileAttribute
+      { key: "mouseleave", value: cb' value }
   mapAttr OnMouseleave evalue = unsafeAttribute $ Right $ evalue <#> \value ->
     unsafeVolatileAttribute
       { key: "mouseleave", value: cb' value }
@@ -19,6 +20,7 @@ instance Attr anything OnMouseleave Cb where
 instance Attr anything OnMouseleave (Effect Unit) where
   pureAttr OnMouseleave value = unsafeAttribute $ Right $ pure $
     unsafeVolatileAttribute
+      { key: "mouseleave", value: cb' (Cb (const (value $> true))) }
   mapAttr OnMouseleave evalue = unsafeAttribute $ Right $ evalue <#> \value ->
     unsafeVolatileAttribute
       { key: "mouseleave", value: cb' (Cb (const (value $> true))) }
@@ -26,6 +28,7 @@ instance Attr anything OnMouseleave (Effect Unit) where
 instance Attr anything OnMouseleave (Effect Boolean) where
   pureAttr OnMouseleave value = unsafeAttribute $ Right $ pure $
     unsafeVolatileAttribute
+      { key: "mouseleave", value: cb' (Cb (const value)) }
   mapAttr OnMouseleave evalue = unsafeAttribute $ Right $ evalue <#> \value ->
     unsafeVolatileAttribute
       { key: "mouseleave", value: cb' (Cb (const value)) }
@@ -37,5 +40,9 @@ type OnMouseleaveEffect =
 
 instance Attr everything OnMouseleave Unit where
   pureAttr OnMouseleave _ = unsafeAttribute $ Right $ pure $
+    unsafeVolatileAttribute
+      { key: "mouseleave", value: unset' }
+
+  mapAttr OnMouseleave evalue = unsafeAttribute $ Right $ evalue <#> \_ ->
     unsafeVolatileAttribute
       { key: "mouseleave", value: unset' }

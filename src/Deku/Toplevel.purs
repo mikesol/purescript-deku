@@ -21,7 +21,7 @@ import Data.Either (Either(..))
 import Data.Maybe (Maybe(..), maybe)
 import Data.Newtype (unwrap)
 import Deku.Control (deku)
-import Deku.Core (DOMInterpret(..), Nut(..), Nut', NutF(..), Node(..))
+import Deku.Core (DOMInterpret(..), Nut(..), Korok(..), Nut', NutF(..), Node(..), resolveNut)
 import Deku.Interpret (EFunctionOfFFIDOMSnapshot(..), FFIDOMSnapshot, FreeEFunctionOfFFIDOMSnapshotU, FunctionOfFFIDOMSnapshotU, fullDOMInterpret, getAllComments, hydratingDOMInterpret, makeFFIDOMSnapshot, setHydrating, ssrDOMInterpret, unSetHydrating)
 import Deku.SSR (ssr')
 import Effect (Effect)
@@ -136,10 +136,10 @@ runSSR' topTag = go
   where
   go
     :: forall r. Nut -> ST r String
-  go (Nut children) = do
+  go children' = do
     let
       unglobal = unsafeCoerce :: ST Global String -> ST r String
-
+      Korok children = resolveNut children'
     unglobal
       ( ssr' topTag
           <$>

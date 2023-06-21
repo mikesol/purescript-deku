@@ -19,6 +19,7 @@ instance Attr everything XChannelSelector Unit where
   pureAttr XChannelSelector _ = unsafeAttribute $ Right $ pure $
     unsafeVolatileAttribute
       { key: "xChannelSelector", value: unset' }
-  mapAttr XChannelSelector evalue = unsafeAttribute $ Right $ evalue <#> \value ->
-    unsafeVolatileAttribute
-      { key: "xChannelSelector", value: unset' }
+  mapAttr XChannelSelector evalue = unsafeAttribute $ Right $ evalue <#>
+    \value ->
+      unsafeVolatileAttribute
+        { key: "xChannelSelector", value: unset' }

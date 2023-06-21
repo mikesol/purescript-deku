@@ -12,6 +12,7 @@ data OnTimeupdate = OnTimeupdate
 instance Attr anything OnTimeupdate Cb where
   pureAttr OnTimeupdate value = unsafeAttribute $ Right $ pure $
     unsafeVolatileAttribute
+      { key: "timeupdate", value: cb' value }
   mapAttr OnTimeupdate evalue = unsafeAttribute $ Right $ evalue <#> \value ->
     unsafeVolatileAttribute
       { key: "timeupdate", value: cb' value }
@@ -19,6 +20,7 @@ instance Attr anything OnTimeupdate Cb where
 instance Attr anything OnTimeupdate (Effect Unit) where
   pureAttr OnTimeupdate value = unsafeAttribute $ Right $ pure $
     unsafeVolatileAttribute
+      { key: "timeupdate", value: cb' (Cb (const (value $> true))) }
   mapAttr OnTimeupdate evalue = unsafeAttribute $ Right $ evalue <#> \value ->
     unsafeVolatileAttribute
       { key: "timeupdate", value: cb' (Cb (const (value $> true))) }
@@ -26,6 +28,7 @@ instance Attr anything OnTimeupdate (Effect Unit) where
 instance Attr anything OnTimeupdate (Effect Boolean) where
   pureAttr OnTimeupdate value = unsafeAttribute $ Right $ pure $
     unsafeVolatileAttribute
+      { key: "timeupdate", value: cb' (Cb (const value)) }
   mapAttr OnTimeupdate evalue = unsafeAttribute $ Right $ evalue <#> \value ->
     unsafeVolatileAttribute
       { key: "timeupdate", value: cb' (Cb (const value)) }
@@ -37,5 +40,9 @@ type OnTimeupdateEffect =
 
 instance Attr everything OnTimeupdate Unit where
   pureAttr OnTimeupdate _ = unsafeAttribute $ Right $ pure $
+    unsafeVolatileAttribute
+      { key: "timeupdate", value: unset' }
+
+  mapAttr OnTimeupdate evalue = unsafeAttribute $ Right $ evalue <#> \_ ->
     unsafeVolatileAttribute
       { key: "timeupdate", value: unset' }

@@ -18,14 +18,16 @@ instance Attr anything OnVolumechange Cb where
 
 instance Attr anything OnVolumechange (Effect Unit) where
   pureAttr OnVolumechange value = unsafeAttribute $ Right $ pure $
-    unsafeVolatileAttribute { key: "volumechange", value: cb' (Cb (const (value $> true))) }
+    unsafeVolatileAttribute
+      { key: "volumechange", value: cb' (Cb (const (value $> true))) }
   mapAttr OnVolumechange evalue = unsafeAttribute $ Right $ evalue <#> \value ->
     unsafeVolatileAttribute
       { key: "volumechange", value: cb' (Cb (const (value $> true))) }
 
 instance Attr anything OnVolumechange (Effect Boolean) where
   pureAttr OnVolumechange value = unsafeAttribute $ Right $ pure $
-    unsafeVolatileAttribute { key: "volumechange", value: cb' (Cb (const value)) }
+    unsafeVolatileAttribute
+      { key: "volumechange", value: cb' (Cb (const value)) }
   mapAttr OnVolumechange evalue = unsafeAttribute $ Right $ evalue <#> \value ->
     unsafeVolatileAttribute
       { key: "volumechange", value: cb' (Cb (const value)) }

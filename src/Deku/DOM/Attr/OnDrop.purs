@@ -18,6 +18,7 @@ instance Attr anything OnDrop Cb where
 instance Attr anything OnDrop (Effect Unit) where
   pureAttr OnDrop value = unsafeAttribute $ Right $ pure $
     unsafeVolatileAttribute
+      { key: "drop", value: cb' (Cb (const (value $> true))) }
   mapAttr OnDrop evalue = unsafeAttribute $ Right $ evalue <#> \value ->
     unsafeVolatileAttribute
       { key: "drop", value: cb' (Cb (const (value $> true))) }
@@ -25,6 +26,7 @@ instance Attr anything OnDrop (Effect Unit) where
 instance Attr anything OnDrop (Effect Boolean) where
   pureAttr OnDrop value = unsafeAttribute $ Right $ pure $
     unsafeVolatileAttribute
+      { key: "drop", value: cb' (Cb (const value)) }
   mapAttr OnDrop evalue = unsafeAttribute $ Right $ evalue <#> \value ->
     unsafeVolatileAttribute
       { key: "drop", value: cb' (Cb (const value)) }
@@ -35,5 +37,6 @@ type OnDropEffect =
 instance Attr everything OnDrop Unit where
   pureAttr OnDrop _ = unsafeAttribute $ Right $ pure $ unsafeVolatileAttribute
     { key: "drop", value: unset' }
-  mapAttr OnDrop evalue = unsafeAttribute $ Right $ evalue <#> \value -> unsafeVolatileAttribute
-    { key: "drop", value: unset' }
+  mapAttr OnDrop evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "drop", value: unset' }

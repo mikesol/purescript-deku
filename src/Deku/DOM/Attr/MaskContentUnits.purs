@@ -19,6 +19,7 @@ instance Attr everything MaskContentUnits Unit where
   pureAttr MaskContentUnits _ = unsafeAttribute $ Right $ pure $
     unsafeVolatileAttribute
       { key: "maskContentUnits", value: unset' }
-  mapAttr MaskContentUnits evalue = unsafeAttribute $ Right $ evalue <#> \value ->
-    unsafeVolatileAttribute
-      { key: "maskContentUnits", value: unset' }
+  mapAttr MaskContentUnits evalue = unsafeAttribute $ Right $ evalue <#>
+    \value ->
+      unsafeVolatileAttribute
+        { key: "maskContentUnits", value: unset' }

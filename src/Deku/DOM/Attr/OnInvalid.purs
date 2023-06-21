@@ -18,6 +18,7 @@ instance Attr anything OnInvalid Cb where
 instance Attr anything OnInvalid (Effect Unit) where
   pureAttr OnInvalid value = unsafeAttribute $ Right $ pure $
     unsafeVolatileAttribute
+      { key: "invalid", value: cb' (Cb (const (value $> true))) }
   mapAttr OnInvalid evalue = unsafeAttribute $ Right $ evalue <#> \value ->
     unsafeVolatileAttribute
       { key: "invalid", value: cb' (Cb (const (value $> true))) }
@@ -25,6 +26,7 @@ instance Attr anything OnInvalid (Effect Unit) where
 instance Attr anything OnInvalid (Effect Boolean) where
   pureAttr OnInvalid value = unsafeAttribute $ Right $ pure $
     unsafeVolatileAttribute
+      { key: "invalid", value: cb' (Cb (const value)) }
   mapAttr OnInvalid evalue = unsafeAttribute $ Right $ evalue <#> \value ->
     unsafeVolatileAttribute
       { key: "invalid", value: cb' (Cb (const value)) }
@@ -36,5 +38,9 @@ type OnInvalidEffect =
 
 instance Attr everything OnInvalid Unit where
   pureAttr OnInvalid _ = unsafeAttribute $ Right $ pure $
+    unsafeVolatileAttribute
+      { key: "invalid", value: unset' }
+
+  mapAttr OnInvalid evalue = unsafeAttribute $ Right $ evalue <#> \_ ->
     unsafeVolatileAttribute
       { key: "invalid", value: unset' }

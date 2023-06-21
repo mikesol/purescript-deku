@@ -12,6 +12,7 @@ data OnDragenter = OnDragenter
 instance Attr anything OnDragenter Cb where
   pureAttr OnDragenter value = unsafeAttribute $ Right $ pure $
     unsafeVolatileAttribute
+      { key: "dragenter", value: cb' value }
   mapAttr OnDragenter evalue = unsafeAttribute $ Right $ evalue <#> \value ->
     unsafeVolatileAttribute
       { key: "dragenter", value: cb' value }
@@ -19,6 +20,7 @@ instance Attr anything OnDragenter Cb where
 instance Attr anything OnDragenter (Effect Unit) where
   pureAttr OnDragenter value = unsafeAttribute $ Right $ pure $
     unsafeVolatileAttribute
+      { key: "dragenter", value: cb' (Cb (const (value $> true))) }
   mapAttr OnDragenter evalue = unsafeAttribute $ Right $ evalue <#> \value ->
     unsafeVolatileAttribute
       { key: "dragenter", value: cb' (Cb (const (value $> true))) }
@@ -26,6 +28,7 @@ instance Attr anything OnDragenter (Effect Unit) where
 instance Attr anything OnDragenter (Effect Boolean) where
   pureAttr OnDragenter value = unsafeAttribute $ Right $ pure $
     unsafeVolatileAttribute
+      { key: "dragenter", value: cb' (Cb (const value)) }
   mapAttr OnDragenter evalue = unsafeAttribute $ Right $ evalue <#> \value ->
     unsafeVolatileAttribute
       { key: "dragenter", value: cb' (Cb (const value)) }
@@ -37,5 +40,9 @@ type OnDragenterEffect =
 
 instance Attr everything OnDragenter Unit where
   pureAttr OnDragenter _ = unsafeAttribute $ Right $ pure $
+    unsafeVolatileAttribute
+      { key: "dragenter", value: unset' }
+
+  mapAttr OnDragenter evalue = unsafeAttribute $ Right $ evalue <#> \_ ->
     unsafeVolatileAttribute
       { key: "dragenter", value: unset' }

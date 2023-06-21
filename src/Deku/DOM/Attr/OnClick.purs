@@ -18,6 +18,7 @@ instance Attr anything OnClick Cb where
 instance Attr anything OnClick (Effect Unit) where
   pureAttr OnClick value = unsafeAttribute $ Right $ pure $
     unsafeVolatileAttribute
+      { key: "click", value: cb' (Cb (const (value $> true))) }
   mapAttr OnClick evalue = unsafeAttribute $ Right $ evalue <#> \value ->
     unsafeVolatileAttribute
       { key: "click", value: cb' (Cb (const (value $> true))) }
@@ -25,6 +26,7 @@ instance Attr anything OnClick (Effect Unit) where
 instance Attr anything OnClick (Effect Boolean) where
   pureAttr OnClick value = unsafeAttribute $ Right $ pure $
     unsafeVolatileAttribute
+      { key: "click", value: cb' (Cb (const value)) }
   mapAttr OnClick evalue = unsafeAttribute $ Right $ evalue <#> \value ->
     unsafeVolatileAttribute
       { key: "click", value: cb' (Cb (const value)) }
@@ -37,5 +39,6 @@ type OnClickEffect =
 instance Attr everything OnClick Unit where
   pureAttr OnClick _ = unsafeAttribute $ Right $ pure $ unsafeVolatileAttribute
     { key: "click", value: unset' }
-  mapAttr OnClick evalue = unsafeAttribute $ Right $ evalue <#> \value -> unsafeVolatileAttribute
-    { key: "click", value: unset' }
+  mapAttr OnClick evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "click", value: unset' }

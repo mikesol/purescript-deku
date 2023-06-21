@@ -12,6 +12,7 @@ data OnMousewheel = OnMousewheel
 instance Attr anything OnMousewheel Cb where
   pureAttr OnMousewheel value = unsafeAttribute $ Right $ pure $
     unsafeVolatileAttribute
+      { key: "mousewheel", value: cb' value }
   mapAttr OnMousewheel evalue = unsafeAttribute $ Right $ evalue <#> \value ->
     unsafeVolatileAttribute
       { key: "mousewheel", value: cb' value }
@@ -19,6 +20,7 @@ instance Attr anything OnMousewheel Cb where
 instance Attr anything OnMousewheel (Effect Unit) where
   pureAttr OnMousewheel value = unsafeAttribute $ Right $ pure $
     unsafeVolatileAttribute
+      { key: "mousewheel", value: cb' (Cb (const (value $> true))) }
   mapAttr OnMousewheel evalue = unsafeAttribute $ Right $ evalue <#> \value ->
     unsafeVolatileAttribute
       { key: "mousewheel", value: cb' (Cb (const (value $> true))) }
@@ -26,6 +28,7 @@ instance Attr anything OnMousewheel (Effect Unit) where
 instance Attr anything OnMousewheel (Effect Boolean) where
   pureAttr OnMousewheel value = unsafeAttribute $ Right $ pure $
     unsafeVolatileAttribute
+      { key: "mousewheel", value: cb' (Cb (const value)) }
   mapAttr OnMousewheel evalue = unsafeAttribute $ Right $ evalue <#> \value ->
     unsafeVolatileAttribute
       { key: "mousewheel", value: cb' (Cb (const value)) }
@@ -37,5 +40,9 @@ type OnMousewheelEffect =
 
 instance Attr everything OnMousewheel Unit where
   pureAttr OnMousewheel _ = unsafeAttribute $ Right $ pure $
+    unsafeVolatileAttribute
+      { key: "mousewheel", value: unset' }
+
+  mapAttr OnMousewheel evalue = unsafeAttribute $ Right $ evalue <#> \_ ->
     unsafeVolatileAttribute
       { key: "mousewheel", value: unset' }

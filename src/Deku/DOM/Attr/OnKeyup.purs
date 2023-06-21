@@ -18,6 +18,7 @@ instance Attr anything OnKeyup Cb where
 instance Attr anything OnKeyup (Effect Unit) where
   pureAttr OnKeyup value = unsafeAttribute $ Right $ pure $
     unsafeVolatileAttribute
+      { key: "keyup", value: cb' (Cb (const (value $> true))) }
   mapAttr OnKeyup evalue = unsafeAttribute $ Right $ evalue <#> \value ->
     unsafeVolatileAttribute
       { key: "keyup", value: cb' (Cb (const (value $> true))) }
@@ -25,6 +26,7 @@ instance Attr anything OnKeyup (Effect Unit) where
 instance Attr anything OnKeyup (Effect Boolean) where
   pureAttr OnKeyup value = unsafeAttribute $ Right $ pure $
     unsafeVolatileAttribute
+      { key: "keyup", value: cb' (Cb (const value)) }
   mapAttr OnKeyup evalue = unsafeAttribute $ Right $ evalue <#> \value ->
     unsafeVolatileAttribute
       { key: "keyup", value: cb' (Cb (const value)) }
@@ -37,5 +39,6 @@ type OnKeyupEffect =
 instance Attr everything OnKeyup Unit where
   pureAttr OnKeyup _ = unsafeAttribute $ Right $ pure $ unsafeVolatileAttribute
     { key: "keyup", value: unset' }
-  mapAttr OnKeyup evalue = unsafeAttribute $ Right $ evalue <#> \value -> unsafeVolatileAttribute
-    { key: "keyup", value: unset' }
+  mapAttr OnKeyup evalue = unsafeAttribute $ Right $ evalue <#> \value ->
+    unsafeVolatileAttribute
+      { key: "keyup", value: unset' }

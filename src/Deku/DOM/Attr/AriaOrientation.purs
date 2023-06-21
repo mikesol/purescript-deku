@@ -131,6 +131,7 @@ instance Attr everything AriaOrientation Unit where
   pureAttr AriaOrientation _ = unsafeAttribute $ Right $ pure $
     unsafeVolatileAttribute
       { key: "aria-orientation", value: unset' }
-  mapAttr AriaOrientation evalue = unsafeAttribute $ Right $ evalue <#> \value ->
-    unsafeVolatileAttribute
-      { key: "aria-orientation", value: unset' }
+  mapAttr AriaOrientation evalue = unsafeAttribute $ Right $ evalue <#>
+    \value ->
+      unsafeVolatileAttribute
+        { key: "aria-orientation", value: unset' }

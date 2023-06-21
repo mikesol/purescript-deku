@@ -131,6 +131,7 @@ instance Attr everything AriaDescribedby Unit where
   pureAttr AriaDescribedby _ = unsafeAttribute $ Right $ pure $
     unsafeVolatileAttribute
       { key: "aria-describedby", value: unset' }
-  mapAttr AriaDescribedby evalue = unsafeAttribute $ Right $ evalue <#> \value ->
-    unsafeVolatileAttribute
-      { key: "aria-describedby", value: unset' }
+  mapAttr AriaDescribedby evalue = unsafeAttribute $ Right $ evalue <#>
+    \value ->
+      unsafeVolatileAttribute
+        { key: "aria-describedby", value: unset' }
