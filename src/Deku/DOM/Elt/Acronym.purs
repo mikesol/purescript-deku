@@ -6,13 +6,13 @@ import Deku.Control as DC
 import Deku.Core (Nut)
 import FRP.Event (Event)
 
-data Acronym_
+import Deku.DOM.Tags as Tags
 
 acronym
-  :: Array (Event (Attribute Acronym_))
+  :: Array (Event (Attribute Tags.Acronym_))
   -> Array Nut
   -> Nut
-acronym = DC.elementify2 "acronym"
+acronym = DC.elementify3 "acronym"
 
 acronym_
   :: Array Nut

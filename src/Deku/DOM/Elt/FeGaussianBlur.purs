@@ -6,13 +6,13 @@ import Deku.Control as DC
 import Deku.Core (Nut)
 import FRP.Event (Event)
 
-data FeGaussianBlur_
+import Deku.DOM.Tags as Tags
 
 feGaussianBlur
-  :: Array (Event (Attribute FeGaussianBlur_))
+  :: Array (Event (Attribute Tags.FeGaussianBlur_))
   -> Array Nut
   -> Nut
-feGaussianBlur = DC.elementify2 "feGaussianBlur"
+feGaussianBlur = DC.elementify3 "feGaussianBlur"
 
 feGaussianBlur_
   :: Array Nut

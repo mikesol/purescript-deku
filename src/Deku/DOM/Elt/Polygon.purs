@@ -6,13 +6,13 @@ import Deku.Control as DC
 import Deku.Core (Nut)
 import FRP.Event (Event)
 
-data Polygon_
+import Deku.DOM.Tags as Tags
 
 polygon
-  :: Array (Event (Attribute Polygon_))
+  :: Array (Event (Attribute Tags.Polygon_))
   -> Array Nut
   -> Nut
-polygon = DC.elementify2 "polygon"
+polygon = DC.elementify3 "polygon"
 
 polygon_
   :: Array Nut

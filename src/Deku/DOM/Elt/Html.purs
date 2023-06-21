@@ -6,13 +6,13 @@ import Deku.Control as DC
 import Deku.Core (Nut)
 import FRP.Event (Event)
 
-data Html_
+import Deku.DOM.Tags as Tags
 
 html
-  :: Array (Event (Attribute Html_))
+  :: Array (Event (Attribute Tags.Html_))
   -> Array Nut
   -> Nut
-html = DC.elementify2 "html"
+html = DC.elementify3 "html"
 
 html_
   :: Array Nut

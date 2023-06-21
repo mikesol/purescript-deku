@@ -6,13 +6,13 @@ import Deku.Control as DC
 import Deku.Core (Nut)
 import FRP.Event (Event)
 
-data Iframe_
+import Deku.DOM.Tags as Tags
 
 iframe
-  :: Array (Event (Attribute Iframe_))
+  :: Array (Event (Attribute Tags.Iframe_))
   -> Array Nut
   -> Nut
-iframe = DC.elementify2 "iframe"
+iframe = DC.elementify3 "iframe"
 
 iframe_
   :: Array Nut

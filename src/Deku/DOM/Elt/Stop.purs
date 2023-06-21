@@ -6,13 +6,13 @@ import Deku.Control as DC
 import Deku.Core (Nut)
 import FRP.Event (Event)
 
-data Stop_
+import Deku.DOM.Tags as Tags
 
 stop
-  :: Array (Event (Attribute Stop_))
+  :: Array (Event (Attribute Tags.Stop_))
   -> Array Nut
   -> Nut
-stop = DC.elementify2 "stop"
+stop = DC.elementify3 "stop"
 
 stop_
   :: Array Nut

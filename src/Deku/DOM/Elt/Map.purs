@@ -6,13 +6,13 @@ import Deku.Control as DC
 import Deku.Core (Nut)
 import FRP.Event (Event)
 
-data Map_
+import Deku.DOM.Tags as Tags
 
 map
-  :: Array (Event (Attribute Map_))
+  :: Array (Event (Attribute Tags.Map_))
   -> Array Nut
   -> Nut
-map = DC.elementify2 "map"
+map = DC.elementify3 "map"
 
 map_
   :: Array Nut

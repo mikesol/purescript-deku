@@ -6,13 +6,13 @@ import Deku.Control as DC
 import Deku.Core (Nut)
 import FRP.Event (Event)
 
-data Discard_
+import Deku.DOM.Tags as Tags
 
 discard
-  :: Array (Event (Attribute Discard_))
+  :: Array (Event (Attribute Tags.Discard_))
   -> Array Nut
   -> Nut
-discard = DC.elementify2 "discard"
+discard = DC.elementify3 "discard"
 
 discard_
   :: Array Nut

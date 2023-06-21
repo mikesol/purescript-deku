@@ -6,13 +6,13 @@ import Deku.Control as DC
 import Deku.Core (Nut)
 import FRP.Event (Event)
 
-data Basefont_
+import Deku.DOM.Tags as Tags
 
 basefont
-  :: Array (Event (Attribute Basefont_))
+  :: Array (Event (Attribute Tags.Basefont_))
   -> Array Nut
   -> Nut
-basefont = DC.elementify2 "basefont"
+basefont = DC.elementify3 "basefont"
 
 basefont_
   :: Array Nut

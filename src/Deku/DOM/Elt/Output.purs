@@ -6,13 +6,13 @@ import Deku.Control as DC
 import Deku.Core (Nut)
 import FRP.Event (Event)
 
-data Output_
+import Deku.DOM.Tags as Tags
 
 output
-  :: Array (Event (Attribute Output_))
+  :: Array (Event (Attribute Tags.Output_))
   -> Array Nut
   -> Nut
-output = DC.elementify2 "output"
+output = DC.elementify3 "output"
 
 output_
   :: Array Nut

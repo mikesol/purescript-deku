@@ -6,13 +6,13 @@ import Deku.Control as DC
 import Deku.Core (Nut)
 import FRP.Event (Event)
 
-data ForeignObject_
+import Deku.DOM.Tags as Tags
 
 foreignObject
-  :: Array (Event (Attribute ForeignObject_))
+  :: Array (Event (Attribute Tags.ForeignObject_))
   -> Array Nut
   -> Nut
-foreignObject = DC.elementify2 "foreignObject"
+foreignObject = DC.elementify3 "foreignObject"
 
 foreignObject_
   :: Array Nut

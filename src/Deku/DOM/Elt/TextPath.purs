@@ -6,13 +6,13 @@ import Deku.Control as DC
 import Deku.Core (Nut)
 import FRP.Event (Event)
 
-data TextPath_
+import Deku.DOM.Tags as Tags
 
 textPath
-  :: Array (Event (Attribute TextPath_))
+  :: Array (Event (Attribute Tags.TextPath_))
   -> Array Nut
   -> Nut
-textPath = DC.elementify2 "textPath"
+textPath = DC.elementify3 "textPath"
 
 textPath_
   :: Array Nut

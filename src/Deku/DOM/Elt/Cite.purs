@@ -6,13 +6,13 @@ import Deku.Control as DC
 import Deku.Core (Nut)
 import FRP.Event (Event)
 
-data Cite_
+import Deku.DOM.Tags as Tags
 
 cite
-  :: Array (Event (Attribute Cite_))
+  :: Array (Event (Attribute Tags.Cite_))
   -> Array Nut
   -> Nut
-cite = DC.elementify2 "cite"
+cite = DC.elementify3 "cite"
 
 cite_
   :: Array Nut

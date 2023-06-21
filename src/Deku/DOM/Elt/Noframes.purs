@@ -6,13 +6,13 @@ import Deku.Control as DC
 import Deku.Core (Nut)
 import FRP.Event (Event)
 
-data Noframes_
+import Deku.DOM.Tags as Tags
 
 noframes
-  :: Array (Event (Attribute Noframes_))
+  :: Array (Event (Attribute Tags.Noframes_))
   -> Array Nut
   -> Nut
-noframes = DC.elementify2 "noframes"
+noframes = DC.elementify3 "noframes"
 
 noframes_
   :: Array Nut

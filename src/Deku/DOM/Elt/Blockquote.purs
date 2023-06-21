@@ -6,13 +6,13 @@ import Deku.Control as DC
 import Deku.Core (Nut)
 import FRP.Event (Event)
 
-data Blockquote_
+import Deku.DOM.Tags as Tags
 
 blockquote
-  :: Array (Event (Attribute Blockquote_))
+  :: Array (Event (Attribute Tags.Blockquote_))
   -> Array Nut
   -> Nut
-blockquote = DC.elementify2 "blockquote"
+blockquote = DC.elementify3 "blockquote"
 
 blockquote_
   :: Array Nut

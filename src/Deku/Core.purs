@@ -4,7 +4,25 @@
 -- | exception of the `Nut` type signature and, when needed, the `Nut`
 -- | type signature (for which `Nut` is an alias).
 module Deku.Core
-  ( ANut(..)
+  ( Hook
+  , NutWith
+  , Child(..)
+  , Korok(..)
+  , PureKorok(..)
+  , ActualizedKorok
+  , resolveNut
+  , nuttyKorok
+  , portalFlatten
+  , vbussed
+  , vbussedUncurried
+  , insert
+  , insert_
+  , remove
+  , sendToPos
+  , sendToTop
+  , fixed
+  , envy
+  , unsafeSetPos
   , AttributeParent
   , DOMInterpret(..)
   , DeleteFromCache
@@ -18,8 +36,6 @@ module Deku.Core
   , RemoveDynBeacon
   , Node(..)
   , Nut(..)
-  , Hook
-  , NutWith
   , SendToPos
   , SetCb
   , SetProp
@@ -27,135 +43,47 @@ module Deku.Core
   , SetText
   , Nut'
   , NutF(..)
-  , Child(..)
   , bus
   , busUncurried
   , bussed
   , bussedUncurried
-  , vbussed
-  , vbussedUncurried
-  , insert
-  , insert_
-  , remove
-  , sendToPos
-  , sendToTop
   , dyn
-  , fixed
-  , envy
-  , unsafeSetPos
+  --- internal
+  , makeCachedPursxAttribute
+  , makeCachedPursxElement
   ) where
 
 import Prelude
 
 import Bolson.Control as BControl
-import Bolson.Core (Scope)
+import Bolson.Core (Scope, Element(..), Entity(..), PSR)
 import Bolson.Core as Bolson
+import Control.Alt ((<|>))
 import Control.Monad.ST (ST)
 import Control.Monad.ST as ST
 import Control.Monad.ST.Global (Global)
 import Control.Monad.ST.Global as Region
 import Control.Monad.ST.Uncurried (mkSTFn2, runSTFn1, runSTFn2)
 import Control.Plus (empty)
+import Data.Either (Either(..))
 import Data.Maybe (Maybe(..))
 import Data.Newtype (class Newtype, unwrap)
 import Data.Profunctor (lcmap)
 import Data.Tuple (curry)
 import Data.Tuple.Nested (type (/\), (/\))
-import Deku.Attribute (Cb)
+import Deku.Attribute (AttributeValue(..), Cb, VolatileAttribute, unsafeUnAttribute)
 import Effect (Effect)
 import FRP.Event (Event, Subscriber(..), merge, makeLemmingEventO)
 import FRP.Event as FRP.Event
 import FRP.Event.VBus (class VBus, V, vbus)
 import Foreign.Object (Object)
+import Foreign.Object as Object
 import Prim.RowList (class RowToList)
 import Safe.Coerce (coerce)
 import Type.Proxy (Proxy)
 import Web.DOM as Web.DOM
 
--- | The signature of a custom Deku hook. This works when `payload` variables
--- | don't need to be used explicitly. When using these variables explicitly, opt for using
--- | `Nut` directly (meaning write out the definition by hand).
-type Hook a = (a -> Nut) -> Nut
-
--- | A helper for using `Nut` with an environment.
-type NutWith env = env -> Nut
-
--- | A helper for when you need to use `Nut` as a fully saturated type.
--- | This is the same as using [`Exists`](https://github.com/purescript/purescript-exists)
--- | twice on `Nut`.
-newtype ANut = ANut Nut
-
--- | For internal use only in deku's hooks. See `Deku.Hooks` for more information.
-bus
-  :: forall a b
-   . ((a -> Effect Unit) -> Event a -> b)
-  -> Event b
-bus f = FRP.Event.bus f
-
--- | For internal use only in deku's hooks. See `Deku.Hooks` for more information.
-busUncurried
-  :: forall a b
-   . (((a -> Effect Unit) /\ Event a) -> b)
-  -> Event b
-busUncurried = curry >>> bus
-
--- | For internal use only in deku's hooks. See `Deku.Hooks` for more information.
-bussed
-  :: forall a
-   . ((a -> Effect Unit) -> Event a -> Nut)
-  -> Nut
-bussed f = Nut (z (map (\(Nut i) -> i) g))
-  where
-  g :: Event Nut
-  g = bus f
-
-  z :: forall payload. Event (NutF payload) -> NutF payload
-  z x = NutF
-    ( Bolson.EventfulElement'
-        (Bolson.EventfulElement (coerce x))
-    )
-
--- | For internal use only in deku's hooks. See `Deku.Hooks` for more information.
-bussedUncurried
-  :: forall a
-   . ( ((a -> Effect Unit) /\ Event a)
-       -> Nut
-     )
-  -> Nut
-bussedUncurried = curry >>> bussed
-
-vbussed
-  :: forall rbus bus push event
-   . RowToList bus rbus
-  => VBus rbus push event
-  => Proxy (V bus)
-  -> ({ | push } -> { | event } -> Nut)
-  -> Nut
-vbussed px f = Nut
-  ( NutF
-      ( Bolson.EventfulElement'
-          (Bolson.EventfulElement gooo)
-      )
-  )
-  where
-  go :: Event Nut
-  go = vbus px f
-
-  goo :: forall payload. Event (NutF payload)
-  goo = map (\(Nut nf) -> nf) go
-
-  gooo :: forall payload. Event (Bolson.Entity Int (Node payload))
-  gooo = map (\(NutF e) -> e) goo
-
--- | For internal use only in deku's hooks. See `Deku.Hooks` for more information.
-vbussedUncurried
-  :: forall rbus bus push event
-   . RowToList bus rbus
-  => VBus rbus push event
-  => Proxy (V bus)
-  -> (({ | push } /\ { | event }) -> Nut)
-  -> Nut
-vbussedUncurried px = curry >>> vbussed px
+------- types
 
 -- | For internal use in the `Nut` type signature. `Nut` uses `Bolson` under the
 -- | hood, and this is used with `Bolson`'s `Entity` type.
@@ -172,76 +100,46 @@ type Nut' payload = Bolson.Entity Int (Node payload)
 -- | (for example, when different locks need to be used because of the use of portals).
 newtype NutF payload = NutF (Nut' payload)
 
+derive instance Newtype (DOMInterpret payload) _
+
+-- | This is the interpreter that any Deku backend creator needs to impelement.
+-- | Three interpreters are included with Deku: SPA, SSR, and hydrated SSR.
+-- | As an example, if you want to create a nullary interpreter that
+-- | spits out `unit`, you can set everything to `mempty`.
+newtype DOMInterpret payload = DOMInterpret
+  { ids :: ST Global String
+  , makeRoot :: MakeRoot -> payload
+  , makeElement :: MakeElement -> payload
+  , makeDynBeacon :: MakeDynBeacon -> payload
+  , attributeParent :: AttributeParent -> payload
+  , makeText :: MakeText -> payload
+  , makePursx :: MakePursx -> payload
+  , giveNewParent :: GiveNewParent payload -> payload
+  , disconnectElement :: DisconnectElement -> payload
+  , deleteFromCache :: DeleteFromCache -> payload
+  , sendToPos :: SendToPos -> payload
+  , setProp :: SetProp -> payload
+  , setCb :: SetCb -> payload
+  , unsetAttribute :: UnsetAttribute -> payload
+  , setText :: SetText -> payload
+  , removeDynBeacon :: RemoveDynBeacon -> payload
+  }
+
+newtype ExDOMInterpret = ExDOMInterpret (forall payload. DOMInterpret payload)
+newtype ExEvent = ExEvent (forall payload. Event payload)
+type ActualizedKorok =
+  { html :: String
+  , attributes :: Object (Event VolatileAttribute)
+  , nuts :: Object Korok
+  , count :: Int
+  }
+
+newtype PureKorok = PureKorok
+  ({ count :: Int } -> ActualizedKorok)
+
 derive instance Newtype (NutF payload) _
-newtype Nut = Nut (forall payload. NutF payload)
-
-instance Semigroup Nut where
-  append a b = fixed [ a, b ]
-
-instance Monoid Nut where
-  mempty = Nut (NutF (Bolson.envy empty))
-
--- | For internal use only in deku's hooks. See `useDyn` in `Deku.Hooks` for more information.
-unsafeSetPos
-  :: Int -> Nut -> Nut
-unsafeSetPos = Just >>> unsafeSetPos'
-
-unsafeSetPos'
-  :: Maybe Int
-  -> Nut
-  -> Nut
-unsafeSetPos' i (Nut df) = Nut (g df)
-  where
-  g :: forall payload. NutF payload -> NutF payload
-  g (NutF e) = (NutF (f e))
-    where
-    f
-      :: Bolson.Entity Int (Node payload)
-      -> Bolson.Entity Int (Node payload)
-    f ii = case ii of
-      Bolson.Element' (Node e') -> Bolson.Element'
-        (Node (lcmap (_ { pos = i }) e'))
-      Bolson.EventfulElement' (Bolson.EventfulElement e') ->
-        Bolson.EventfulElement' (Bolson.EventfulElement (map f e'))
-      _ -> ii
-
-newtype Child = Child (forall payload. Bolson.Child Int (Node payload))
-
--- | For internal use only in deku's hooks. See `useDyn` in `Deku.Hooks` for more information.
-insert
-  :: Int
-  -> Nut
-  -> Child
-insert i x = Child (f ((\(Nut z) -> z) b))
-  where
-  b :: Nut
-  b = unsafeSetPos i x
-
-  f :: forall payload. NutF payload -> Bolson.Child Int (Node payload)
-  f (NutF d) = Bolson.Insert d
-
-insert_
-  :: Nut
-  -> Child
-insert_ x = Child (f ((\(Nut z) -> z) b))
-  where
-  b :: Nut
-  b = unsafeSetPos' Nothing x
-
-  f :: forall payload. NutF payload -> Bolson.Child Int (Node payload)
-  f (NutF d) = Bolson.Insert d
-
--- | For internal use only in deku's hooks. See `useDyn` in `Deku.Hooks` for more information.
-remove :: Child
-remove = Child Bolson.Remove
-
--- | For internal use only in deku's hooks. See `useDyn` in `Deku.Hooks` for more information.
-sendToTop :: Child
-sendToTop = Child (Bolson.Logic 0)
-
--- | For internal use only in deku's hooks. See `useDyn` in `Deku.Hooks` for more information.
-sendToPos :: Int -> Child
-sendToPos i = Child (Bolson.Logic i)
+newtype Korok = Korok (forall payload. NutF payload)
+newtype Nut = Nut (Either PureKorok Korok)
 
 -- | Type used by Deku backends to create an element. For internal use only unless you're writing a custom backend.
 type MakeElement =
@@ -351,33 +249,167 @@ type MakeDynBeacon =
   , dynFamily :: Maybe String
   }
 
-derive instance Newtype (DOMInterpret payload) _
+------- end types
 
--- | This is the interpreter that any Deku backend creator needs to impelement.
--- | Three interpreters are included with Deku: SPA, SSR, and hydrated SSR.
--- | As an example, if you want to create a nullary interpreter that
--- | spits out `unit`, you can set everything to `mempty`.
-newtype DOMInterpret payload = DOMInterpret
-  { ids :: ST Global String
-  , makeRoot :: MakeRoot -> payload
-  , makeElement :: MakeElement -> payload
-  , makeDynBeacon :: MakeDynBeacon -> payload
-  , attributeParent :: AttributeParent -> payload
-  , makeText :: MakeText -> payload
-  , makePursx :: MakePursx -> payload
-  , giveNewParent :: GiveNewParent payload -> payload
-  , disconnectElement :: DisconnectElement -> payload
-  , deleteFromCache :: DeleteFromCache -> payload
-  , sendToPos :: SendToPos -> payload
-  , setProp :: SetProp -> payload
-  , setCb :: SetCb -> payload
-  , unsetAttribute :: UnsetAttribute -> payload
-  , setText :: SetText -> payload
-  , removeDynBeacon :: RemoveDynBeacon -> payload
-  }
+-- | The signature of a custom Deku hook. This works when `payload` variables
+-- | don't need to be used explicitly. When using these variables explicitly, opt for using
+-- | `Nut` directly (meaning write out the definition by hand).
+type Hook a = (a -> Nut) -> Nut
 
-newtype ExDOMInterpret = ExDOMInterpret (forall payload. DOMInterpret payload)
-newtype ExEvent = ExEvent (forall payload. Event payload)
+-- | A helper for using `Nut` with an environment.
+type NutWith env = env -> Nut
+
+-- | For internal use only in deku's hooks. See `Deku.Hooks` for more information.
+bus
+  :: forall a b
+   . ((a -> Effect Unit) -> Event a -> b)
+  -> Event b
+bus f = FRP.Event.bus f
+
+-- | For internal use only in deku's hooks. See `Deku.Hooks` for more information.
+busUncurried
+  :: forall a b
+   . (((a -> Effect Unit) /\ Event a) -> b)
+  -> Event b
+busUncurried = curry >>> bus
+
+-- | For internal use only in deku's hooks. See `Deku.Hooks` for more information.
+bussed
+  :: forall a
+   . ((a -> Effect Unit) -> Event a -> Nut)
+  -> Nut
+bussed f = Nut (Right (Korok (z (map ((\(Korok i) -> i) <<< resolveNut) g))))
+  where
+  g :: Event Nut
+  g = bus f
+
+  z :: forall payload. Event (NutF payload) -> NutF payload
+  z x = NutF
+    ( Bolson.EventfulElement'
+        (Bolson.EventfulElement (coerce x))
+    )
+
+-- | For internal use only in deku's hooks. See `Deku.Hooks` for more information.
+bussedUncurried
+  :: forall a
+   . ( ((a -> Effect Unit) /\ Event a)
+       -> Nut
+     )
+  -> Nut
+bussedUncurried = curry >>> bussed
+
+vbussed
+  :: forall rbus bus push event
+   . RowToList bus rbus
+  => VBus rbus push event
+  => Proxy (V bus)
+  -> ({ | push } -> { | event } -> Nut)
+  -> Nut
+vbussed px f = Nut
+  ( Right
+      ( Korok
+          ( NutF
+              ( Bolson.EventfulElement'
+                  (Bolson.EventfulElement gooo)
+              )
+          )
+      )
+  )
+  where
+  go :: Event Korok
+  go = vbus px ((map <<< map) resolveNut f)
+
+  goo :: forall payload. Event (NutF payload)
+  goo = map (\(Korok nf) -> nf) go
+
+  gooo :: forall payload. Event (Bolson.Entity Int (Node payload))
+  gooo = map (\(NutF e) -> e) goo
+
+-- | For internal use only in deku's hooks. See `Deku.Hooks` for more information.
+vbussedUncurried
+  :: forall rbus bus push event
+   . RowToList bus rbus
+  => VBus rbus push event
+  => Proxy (V bus)
+  -> (({ | push } /\ { | event }) -> Nut)
+  -> Nut
+vbussedUncurried px = curry >>> vbussed px
+
+resolveNut :: Nut -> Korok
+resolveNut (Nut (Right korok)) = korok
+resolveNut _ = Korok (NutF (Bolson.envy empty))
+
+nuttyKorok :: Korok -> Nut
+nuttyKorok = Nut <<< Right
+
+instance Monoid Nut where
+  mempty = Nut $ Right $ Korok (NutF (Bolson.envy empty))
+
+instance Semigroup Nut where
+  append a b = fixed [ a, b ]
+
+-- | For internal use only in deku's hooks. See `useDyn` in `Deku.Hooks` for more information.
+unsafeSetPos
+  :: Int -> Korok -> Korok
+unsafeSetPos = Just >>> unsafeSetPos'
+
+unsafeSetPos'
+  :: Maybe Int
+  -> Korok
+  -> Korok
+unsafeSetPos' i (Korok df) = Korok (g df)
+  where
+
+  g :: forall payload. NutF payload -> NutF payload
+  g (NutF e) = (NutF (f e))
+    where
+    f
+      :: Bolson.Entity Int (Node payload)
+      -> Bolson.Entity Int (Node payload)
+    f ii = case ii of
+      Bolson.Element' (Node e') -> Bolson.Element'
+        (Node (lcmap (_ { pos = i }) e'))
+      Bolson.EventfulElement' (Bolson.EventfulElement e') ->
+        Bolson.EventfulElement' (Bolson.EventfulElement (map f e'))
+      _ -> ii
+
+newtype Child = Child (forall payload. Bolson.Child Int (Node payload))
+
+-- | For internal use only in deku's hooks. See `useDyn` in `Deku.Hooks` for more information.
+insert
+  :: Int
+  -> Nut
+  -> Child
+insert i x = Child (f ((\(Korok z) -> z) $ resolveNut b))
+  where
+  b :: Nut
+  b = Nut (Right (unsafeSetPos i (resolveNut x)))
+
+  f :: forall payload. NutF payload -> Bolson.Child Int (Node payload)
+  f (NutF d) = Bolson.Insert d
+
+insert_
+  :: Nut
+  -> Child
+insert_ x = Child (f ((\(Korok z) -> z) $ resolveNut b))
+  where
+  b :: Nut
+  b = Nut (Right (unsafeSetPos' Nothing (resolveNut x)))
+
+  f :: forall payload. NutF payload -> Bolson.Child Int (Node payload)
+  f (NutF d) = Bolson.Insert d
+
+-- | For internal use only in deku's hooks. See `useDyn` in `Deku.Hooks` for more information.
+remove :: Child
+remove = Child Bolson.Remove
+
+-- | For internal use only in deku's hooks. See `useDyn` in `Deku.Hooks` for more information.
+sendToTop :: Child
+sendToTop = Child (Bolson.Logic 0)
+
+-- | For internal use only in deku's hooks. See `useDyn` in `Deku.Hooks` for more information.
+sendToPos :: Int -> Child
+sendToPos i = Child (Bolson.Logic i)
 
 portalFlatten
   :: forall payload136 b143 d145 t149 t157 t159 payload171
@@ -413,21 +445,22 @@ portalFlatten =
   , toElt: \(Node e) -> Bolson.Element e
   }
 
-__internalDekuFlatten
-  :: forall payload
-   . Bolson.PSR (pos :: Maybe Int, ez :: Boolean, dynFamily :: Maybe String)
-  -> DOMInterpret payload
-  -> NutF payload
-  -> Event payload
-__internalDekuFlatten a b c = BControl.flatten portalFlatten a b
-  ((\(NutF x) -> x) c)
+-- __internalDekuFlatten
+--   :: forall payload
+--    . Bolson.PSR (pos :: Maybe Int, ez :: Boolean, dynFamily :: Maybe String)
+--   -> DOMInterpret payload
+--   -> NutF payload
+--   -> Event payload
+-- __internalDekuFlatten a b c = BControl.flatten portalFlatten a b
+--   ((\(NutF x) -> x) c)
 
 dynify
   :: forall i
    . (i -> Nut)
   -> i
   -> Nut
-dynify f es = Nut (go' ((\(Nut df) -> df) (f es)))
+dynify f es = Nut
+  (Right (Korok (go' ((\(Korok df) -> df) $ resolveNut (f es)))))
   where
   go' :: forall payload. NutF payload -> NutF payload
   go' x = NutF (Bolson.Element' (Node (go x)))
@@ -510,7 +543,7 @@ dyn
 dyn = dynify myDyn
   where
   myDyn :: Event (Event Child) -> Nut
-  myDyn e = Nut (myDyn' ((map <<< map) (\(Child c) -> c) e))
+  myDyn e = Nut (Right (Korok (myDyn' ((map <<< map) (\(Child c) -> c) e))))
 
   myDyn'
     :: forall payload
@@ -526,18 +559,14 @@ fixed
 fixed = dynify myFixed
   where
   myFixed :: Array Nut -> Nut
-  myFixed e = Nut (myFixed' (map (\(Nut c) -> c) e))
+  myFixed e = Nut
+    (Right (Korok (myFixed' (map ((\(Korok c) -> c) <<< resolveNut) e))))
 
   myFixed'
     :: forall payload
      . Array (NutF payload)
     -> NutF payload
   myFixed' x = NutF (Bolson.fixed (map (\(NutF y) -> y) x))
-
--- dynify
---   ( coerce
---       (Bolson.fixed :: Array (Nut' payload) -> Nut' payload)
---   )
 
 -- | Once upon a time, this function was used to emit arbitrary `Nut`-s using an event.
 -- | Nowadays, its use is discouraged as there are other patterns in place to emit Nuts, like
@@ -550,10 +579,112 @@ envy
 envy = dynify myEnvy
   where
   myEnvy :: Event Nut -> Nut
-  myEnvy e = Nut (myEnvy' (map (\(Nut c) -> c) e))
+  myEnvy e = Nut
+    (Right (Korok (myEnvy' (map ((\(Korok c) -> c) <<< resolveNut) e))))
 
   myEnvy'
     :: forall payload
      . Event (NutF payload)
     -> NutF payload
   myEnvy' x = NutF (Bolson.envy (map (\(NutF y) -> y) x))
+
+------ internal
+--- internal
+domableToNode :: Korok -> forall payload. Node payload
+domableToNode (Korok df) = step1 df
+  where
+  step1 :: forall payload. NutF payload -> Node payload
+  step1 (NutF (Element' n)) = n
+  step1 _ = Node \_ _ -> empty
+
+makeCachedPursxElement
+  :: String
+  -> Object Boolean
+  -> String
+  -> Korok
+  -> Korok
+  -> { cache :: Object Boolean
+     , element :: Korok
+     }
+makeCachedPursxElement pxk cache pxScope nut element =
+  { cache: Object.insert pxk false cache
+  , element: Korok
+      ( NutF
+          ( Element' $ Node \info di ->
+              __internalDekuFlatten
+                { parent: Just (pxk <> "@!%" <> pxScope)
+                , scope: info.scope
+                , raiseId: \_ -> pure unit
+                , pos: info.pos
+                , ez: false
+                , dynFamily: Nothing
+                }
+                di
+                ((\(Korok df) -> df) nut)
+                <|> (let Node y = (domableToNode element) in y) info di
+          )
+      )
+  }
+
+makeCachedPursxAttribute
+  :: String
+  -> Object Boolean
+  -> String
+  -> Event VolatileAttribute
+  -> Korok
+  -> { cache :: Object Boolean
+     , element :: Korok
+     }
+makeCachedPursxAttribute pxk cache pxScope attr element =
+  { cache: Object.insert pxk true cache
+  , element: Korok
+      ( NutF
+          ( Element'
+              ( Node
+                  \parent
+                   di@(DOMInterpret { setProp, setCb, unsetAttribute }) ->
+                    map
+                      ( unsafeUnAttribute >>> \{ key, value } -> case value of
+                          Prop' p -> setProp
+                            { id:
+                                (pxk <> "@!%" <> pxScope)
+                            , key
+                            , value: p
+                            }
+                          Cb' c -> setCb
+                            { id:
+                                (pxk <> "@!%" <> pxScope)
+                            , key
+                            , value: c
+                            }
+                          Unset' -> unsetAttribute
+                            { id:
+                                (pxk <> "@!%" <> pxScope)
+                            , key
+                            }
+                      )
+                      attr
+                      <|> (let Node y = (domableToNode element) in y) parent
+                        di
+              )
+          )
+      )
+  }
+
+__internalDekuFlatten
+  :: forall payload
+   . PSR (pos :: Maybe Int, dynFamily :: Maybe String, ez :: Boolean)
+  -> DOMInterpret payload
+  -> NutF payload
+  -> Event payload
+__internalDekuFlatten a b c = BControl.flatten
+  { doLogic: \pos (DOMInterpret { sendToPos: stp }) id -> stp { id, pos }
+  , ids: unwrap >>> _.ids
+  , disconnectElement:
+      \(DOMInterpret { disconnectElement }) { id, scope, parent } ->
+        disconnectElement { id, scope, parent, scopeEq: eq }
+  , toElt: \(Node e) -> Element e
+  }
+  a
+  b
+  ((coerce :: NutF payload -> Nut' payload) c)

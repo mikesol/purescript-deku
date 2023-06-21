@@ -6,13 +6,13 @@ import Deku.Control as DC
 import Deku.Core (Nut)
 import FRP.Event (Event)
 
-data Frameset_
+import Deku.DOM.Tags as Tags
 
 frameset
-  :: Array (Event (Attribute Frameset_))
+  :: Array (Event (Attribute Tags.Frameset_))
   -> Array Nut
   -> Nut
-frameset = DC.elementify2 "frameset"
+frameset = DC.elementify3 "frameset"
 
 frameset_
   :: Array Nut

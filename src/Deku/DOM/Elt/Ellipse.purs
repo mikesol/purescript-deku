@@ -6,13 +6,13 @@ import Deku.Control as DC
 import Deku.Core (Nut)
 import FRP.Event (Event)
 
-data Ellipse_
+import Deku.DOM.Tags as Tags
 
 ellipse
-  :: Array (Event (Attribute Ellipse_))
+  :: Array (Event (Attribute Tags.Ellipse_))
   -> Array Nut
   -> Nut
-ellipse = DC.elementify2 "ellipse"
+ellipse = DC.elementify3 "ellipse"
 
 ellipse_
   :: Array Nut

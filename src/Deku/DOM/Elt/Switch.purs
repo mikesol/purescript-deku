@@ -6,13 +6,13 @@ import Deku.Control as DC
 import Deku.Core (Nut)
 import FRP.Event (Event)
 
-data Switch_
+import Deku.DOM.Tags as Tags
 
 switch
-  :: Array (Event (Attribute Switch_))
+  :: Array (Event (Attribute Tags.Switch_))
   -> Array Nut
   -> Nut
-switch = DC.elementify2 "switch"
+switch = DC.elementify3 "switch"
 
 switch_
   :: Array Nut

@@ -6,13 +6,13 @@ import Deku.Control as DC
 import Deku.Core (Nut)
 import FRP.Event (Event)
 
-data Embed_
+import Deku.DOM.Tags as Tags
 
 embed
-  :: Array (Event (Attribute Embed_))
+  :: Array (Event (Attribute Tags.Embed_))
   -> Array Nut
   -> Nut
-embed = DC.elementify2 "embed"
+embed = DC.elementify3 "embed"
 
 embed_
   :: Array Nut

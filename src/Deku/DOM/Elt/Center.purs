@@ -6,13 +6,13 @@ import Deku.Control as DC
 import Deku.Core (Nut)
 import FRP.Event (Event)
 
-data Center_
+import Deku.DOM.Tags as Tags
 
 center
-  :: Array (Event (Attribute Center_))
+  :: Array (Event (Attribute Tags.Center_))
   -> Array Nut
   -> Nut
-center = DC.elementify2 "center"
+center = DC.elementify3 "center"
 
 center_
   :: Array Nut

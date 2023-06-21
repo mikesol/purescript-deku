@@ -6,13 +6,13 @@ import Deku.Control as DC
 import Deku.Core (Nut)
 import FRP.Event (Event)
 
-data FeDisplacementMap_
+import Deku.DOM.Tags as Tags
 
 feDisplacementMap
-  :: Array (Event (Attribute FeDisplacementMap_))
+  :: Array (Event (Attribute Tags.FeDisplacementMap_))
   -> Array Nut
   -> Nut
-feDisplacementMap = DC.elementify2 "feDisplacementMap"
+feDisplacementMap = DC.elementify3 "feDisplacementMap"
 
 feDisplacementMap_
   :: Array Nut

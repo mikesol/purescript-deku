@@ -6,13 +6,13 @@ import Deku.Control as DC
 import Deku.Core (Nut)
 import FRP.Event (Event)
 
-data Strike_
+import Deku.DOM.Tags as Tags
 
 strike
-  :: Array (Event (Attribute Strike_))
+  :: Array (Event (Attribute Tags.Strike_))
   -> Array Nut
   -> Nut
-strike = DC.elementify2 "strike"
+strike = DC.elementify3 "strike"
 
 strike_
   :: Array Nut

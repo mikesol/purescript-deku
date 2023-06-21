@@ -6,13 +6,13 @@ import Deku.Control as DC
 import Deku.Core (Nut)
 import FRP.Event (Event)
 
-data Canvas_
+import Deku.DOM.Tags as Tags
 
 canvas
-  :: Array (Event (Attribute Canvas_))
+  :: Array (Event (Attribute Tags.Canvas_))
   -> Array Nut
   -> Nut
-canvas = DC.elementify2 "canvas"
+canvas = DC.elementify3 "canvas"
 
 canvas_
   :: Array Nut

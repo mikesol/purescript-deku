@@ -6,13 +6,13 @@ import Deku.Control as DC
 import Deku.Core (Nut)
 import FRP.Event (Event)
 
-data Table_
+import Deku.DOM.Tags as Tags
 
 table
-  :: Array (Event (Attribute Table_))
+  :: Array (Event (Attribute Tags.Table_))
   -> Array Nut
   -> Nut
-table = DC.elementify2 "table"
+table = DC.elementify3 "table"
 
 table_
   :: Array Nut

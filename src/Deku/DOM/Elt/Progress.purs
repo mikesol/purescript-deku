@@ -6,13 +6,13 @@ import Deku.Control as DC
 import Deku.Core (Nut)
 import FRP.Event (Event)
 
-data Progress_
+import Deku.DOM.Tags as Tags
 
 progress
-  :: Array (Event (Attribute Progress_))
+  :: Array (Event (Attribute Tags.Progress_))
   -> Array Nut
   -> Nut
-progress = DC.elementify2 "progress"
+progress = DC.elementify3 "progress"
 
 progress_
   :: Array Nut

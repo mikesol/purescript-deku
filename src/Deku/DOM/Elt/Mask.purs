@@ -6,13 +6,13 @@ import Deku.Control as DC
 import Deku.Core (Nut)
 import FRP.Event (Event)
 
-data Mask_
+import Deku.DOM.Tags as Tags
 
 mask
-  :: Array (Event (Attribute Mask_))
+  :: Array (Event (Attribute Tags.Mask_))
   -> Array Nut
   -> Nut
-mask = DC.elementify2 "mask"
+mask = DC.elementify3 "mask"
 
 mask_
   :: Array Nut

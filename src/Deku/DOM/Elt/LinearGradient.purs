@@ -6,13 +6,13 @@ import Deku.Control as DC
 import Deku.Core (Nut)
 import FRP.Event (Event)
 
-data LinearGradient_
+import Deku.DOM.Tags as Tags
 
 linearGradient
-  :: Array (Event (Attribute LinearGradient_))
+  :: Array (Event (Attribute Tags.LinearGradient_))
   -> Array Nut
   -> Nut
-linearGradient = DC.elementify2 "linearGradient"
+linearGradient = DC.elementify3 "linearGradient"
 
 linearGradient_
   :: Array Nut

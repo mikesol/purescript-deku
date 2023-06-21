@@ -6,13 +6,13 @@ import Deku.Control as DC
 import Deku.Core (Nut)
 import FRP.Event (Event)
 
-data Audio_
+import Deku.DOM.Tags as Tags
 
 audio
-  :: Array (Event (Attribute Audio_))
+  :: Array (Event (Attribute Tags.Audio_))
   -> Array Nut
   -> Nut
-audio = DC.elementify2 "audio"
+audio = DC.elementify3 "audio"
 
 audio_
   :: Array Nut

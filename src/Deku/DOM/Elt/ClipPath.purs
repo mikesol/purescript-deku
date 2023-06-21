@@ -6,13 +6,13 @@ import Deku.Control as DC
 import Deku.Core (Nut)
 import FRP.Event (Event)
 
-data ClipPath_
+import Deku.DOM.Tags as Tags
 
 clipPath
-  :: Array (Event (Attribute ClipPath_))
+  :: Array (Event (Attribute Tags.ClipPath_))
   -> Array Nut
   -> Nut
-clipPath = DC.elementify2 "clipPath"
+clipPath = DC.elementify3 "clipPath"
 
 clipPath_
   :: Array Nut

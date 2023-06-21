@@ -6,13 +6,13 @@ import Deku.Control as DC
 import Deku.Core (Nut)
 import FRP.Event (Event)
 
-data Nav_
+import Deku.DOM.Tags as Tags
 
 nav
-  :: Array (Event (Attribute Nav_))
+  :: Array (Event (Attribute Tags.Nav_))
   -> Array Nut
   -> Nut
-nav = DC.elementify2 "nav"
+nav = DC.elementify3 "nav"
 
 nav_
   :: Array Nut

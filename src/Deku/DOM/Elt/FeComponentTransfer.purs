@@ -6,13 +6,13 @@ import Deku.Control as DC
 import Deku.Core (Nut)
 import FRP.Event (Event)
 
-data FeComponentTransfer_
+import Deku.DOM.Tags as Tags
 
 feComponentTransfer
-  :: Array (Event (Attribute FeComponentTransfer_))
+  :: Array (Event (Attribute Tags.FeComponentTransfer_))
   -> Array Nut
   -> Nut
-feComponentTransfer = DC.elementify2 "feComponentTransfer"
+feComponentTransfer = DC.elementify3 "feComponentTransfer"
 
 feComponentTransfer_
   :: Array Nut

@@ -6,13 +6,13 @@ import Deku.Control as DC
 import Deku.Core (Nut)
 import FRP.Event (Event)
 
-data Fieldset_
+import Deku.DOM.Tags as Tags
 
 fieldset
-  :: Array (Event (Attribute Fieldset_))
+  :: Array (Event (Attribute Tags.Fieldset_))
   -> Array Nut
   -> Nut
-fieldset = DC.elementify2 "fieldset"
+fieldset = DC.elementify3 "fieldset"
 
 fieldset_
   :: Array Nut

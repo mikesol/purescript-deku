@@ -6,13 +6,13 @@ import Deku.Control as DC
 import Deku.Core (Nut)
 import FRP.Event (Event)
 
-data Figcaption_
+import Deku.DOM.Tags as Tags
 
 figcaption
-  :: Array (Event (Attribute Figcaption_))
+  :: Array (Event (Attribute Tags.Figcaption_))
   -> Array Nut
   -> Nut
-figcaption = DC.elementify2 "figcaption"
+figcaption = DC.elementify3 "figcaption"
 
 figcaption_
   :: Array Nut

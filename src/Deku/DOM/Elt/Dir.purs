@@ -6,13 +6,13 @@ import Deku.Control as DC
 import Deku.Core (Nut)
 import FRP.Event (Event)
 
-data Dir_
+import Deku.DOM.Tags as Tags
 
 dir
-  :: Array (Event (Attribute Dir_))
+  :: Array (Event (Attribute Tags.Dir_))
   -> Array Nut
   -> Nut
-dir = DC.elementify2 "dir"
+dir = DC.elementify3 "dir"
 
 dir_
   :: Array Nut

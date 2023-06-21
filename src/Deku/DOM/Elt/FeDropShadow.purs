@@ -6,13 +6,13 @@ import Deku.Control as DC
 import Deku.Core (Nut)
 import FRP.Event (Event)
 
-data FeDropShadow_
+import Deku.DOM.Tags as Tags
 
 feDropShadow
-  :: Array (Event (Attribute FeDropShadow_))
+  :: Array (Event (Attribute Tags.FeDropShadow_))
   -> Array Nut
   -> Nut
-feDropShadow = DC.elementify2 "feDropShadow"
+feDropShadow = DC.elementify3 "feDropShadow"
 
 feDropShadow_
   :: Array Nut

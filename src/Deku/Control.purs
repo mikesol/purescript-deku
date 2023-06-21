@@ -7,7 +7,7 @@ module Deku.Control
   , (<$~>)
   , blank
   , deku
-  , elementify2
+  , elementify3
   , toDeku
   , globalPortal
   , globalPortal1
@@ -24,21 +24,26 @@ import Prelude
 
 import Bolson.Control as Bolson
 import Bolson.Core (Element(..), Entity(..), PSR, Scope(..))
-import Bolson.Core as BCore
 import Control.Alt ((<|>))
 import Control.Monad.ST.Uncurried (mkSTFn2, runSTFn1, runSTFn2)
+import Control.Monad.State (evalState, get, put, runState)
 import Control.Plus (empty)
+import Data.Array (fold, length, null)
+import Data.Either (Either(..), either, isRight)
 import Data.FastVect.FastVect (Vect, singleton, index)
-import Data.Filterable (filter)
-import Data.FunctorWithIndex (mapWithIndex)
+import Data.Filterable (compact, filter, partitionMap)
+import Data.Foldable (foldl)
 import Data.Maybe (Maybe(..), maybe)
 import Data.Newtype (class Newtype, unwrap, wrap)
 import Data.Profunctor (dimap, lcmap)
-import Data.Tuple (snd)
+import Data.Traversable (traverse)
+import Data.Tuple (Tuple(..), snd)
 import Data.Tuple.Nested ((/\))
-import Deku.Attribute (Attribute, AttributeValue(..), unsafeUnAttribute)
-import Deku.Core (DOMInterpret(..), Node(..), Nut(..), NutF(..), dyn, envy, insert_, remove, unsafeSetPos)
+import Deku.Attribute (Attribute(..), AttributeValue(..), PureAttribute(..), UnsafeAttribute, VolatileAttribute, unsafeUnAttribute)
+import Deku.Core (ActualizedKorok, DOMInterpret(..), Korok(..), Node(..), Nut(..), NutF(..), PureKorok(..), dyn, envy, insert_, remove, resolveNut)
+import Deku.Delimiter (delimiter)
 import FRP.Event (Event, Subscriber(..), keepLatest, makeLemmingEventO, mapAccum, memoize, merge)
+import Foreign.Object as Object
 import Prim.Int (class Compare)
 import Prim.Ordering (GT)
 import Record (union)
@@ -65,7 +70,7 @@ unsafeSetAttribute
   :: forall element payload
    . DOMInterpret payload
   -> String
-  -> Event (Attribute element)
+  -> Event VolatileAttribute
   -> Event payload
 unsafeSetAttribute (DOMInterpret { setProp, setCb, unsetAttribute }) id atts =
   map
@@ -76,38 +81,122 @@ unsafeSetAttribute (DOMInterpret { setProp, setCb, unsetAttribute }) id atts =
       ) <<<
         unsafeUnAttribute
     )
-    (atts)
+    atts
 
 -- | Used internally to create new [`Element`-s](https://developer.mozilla.org/en-US/docs/Web/API/Element).
 -- | Do not use this directly. Instead, use `unsafeCustomElement` from `Deku.DOM`.
-elementify2
+elementify3
   :: forall element
    . String
-  -> Array (Event (Attribute element))
+  -> Array (Attribute element)
   -> Array Nut
   -> Nut
-elementify2 en attributes kids = Nut
-  (step1 (mapWithIndex ((map <<< map) (\(Nut df) -> df) unsafeSetPos) kids))
+elementify3 tag attributes kids = pureNut
   where
-  step1 :: forall payload. Array (NutF payload) -> NutF payload
-  step1 arr = NutF
-    ( Element'
-        ( elementify en (aa attributes)
-            ( NutF (BCore.fixed (coerce arr))
+  -- 1. we split the attribute list into pure and impure attributes
+  atts = partitionMap identity
+    ((coerce :: Array (Attribute element) -> Array UnsafeAttribute) attributes)
+  writableAtts = foldl (\b a -> b <> " " <> a.key <> "\"" <> a.value <> "\"") ""
+    ( ( coerce
+          :: Array PureAttribute
+          -> Array
+               { key :: String
+               , value :: String
+               }
+      ) atts.left
+    )
+  -- 2. we split the nuts
+  nuts = (coerce :: Array Nut -> Array (Either PureKorok Korok)) kids
+
+  actualizeNuts :: Int -> Tuple (Array (Either ActualizedKorok Korok)) Int
+  actualizeNuts count = runState
+    ( traverse
+        ( either
+            ( \(PureKorok k) -> do
+                n <- get
+                let korok = k { count: n }
+                put korok.count
+                pure $ Left korok
+            )
+            (pure <<< Right)
+        )
+        nuts
+    )
+    (count + 1)
+  nutsToHtml actualized count = fold $ evalState
+    ( traverse
+        ( either
+            ( \k -> do
+                pure k.html
+            )
+            ( \_ -> do
+                c <- get
+                put (c + 1)
+                pure (delimiter <> show c <> delimiter)
             )
         )
+        actualized
     )
-  aa [] = empty
-  aa [ aaa ] = aaa
-  aa x = merge x
+    count
+  amassKoroks actualized count = Object.fromFoldable $ compact $ evalState
+    ( traverse
+        ( either
+            ( \k -> do
+                pure Nothing
+            )
+            ( \i -> do
+                c <- get
+                put (c + 1)
+                pure (Just $ Tuple (delimiter <> show c <> delimiter) i)
+            )
+        )
+        actualized
+    )
+    count
+  -- 3. we build our pure korok
+  pureNut = Nut $ Left $ PureKorok \{ count } -> do
+    let noAtts = null atts.right
+    let attributeCount = if noAtts then 0 else 1
+    let ownComponentCount = length $ filter isRight nuts
+    let myCount = count + attributeCount + ownComponentCount
+    let Tuple actualizedNuts newCount = actualizeNuts myCount
+    let delimited = delimiter <> show count <> delimiter
+    { html: "<" <> tag
+        <> writableAtts
+        <> " "
+        <> delimited
+        <> " "
+        <> " >"
+        -- not quite this because we need to intersperse the other koroks
+        <> nutsToHtml actualizedNuts (count + attributeCount)
+        <> "</"
+        <> tag
+        <> ">"
+    , attributes: foldl Object.union
+        ( if noAtts then Object.empty
+          else Object.singleton delimited (merge atts.right)
+        )
+        ( compact
+            ( map (either (_.attributes >>> Just) (const Nothing))
+                actualizedNuts
+            )
+        )
+    , nuts: foldl Object.union
+        (amassKoroks actualizedNuts (count + attributeCount))
+        ( compact
+            ( map (either (_.nuts >>> Just) (const Nothing))
+                actualizedNuts
+            )
+        )
+    , count: myCount
+    }
 
 elementify
   :: forall payload element
    . String
-  -> Event (Attribute element)
   -> NutF payload
   -> Node payload
-elementify tag atts children = Node go
+elementify tag children = Node go
   where
   go
     { parent, scope, raiseId, pos, dynFamily, ez }
@@ -121,7 +210,6 @@ elementify tag atts children = Node go
                     ( makeElement
                         { id: me, parent, scope, tag, pos, dynFamily }
                     )
-                , unsafeSetAttribute di me atts
                 ] <> maybe []
                   ( \p ->
                       [ pure $ attributeParent
@@ -174,9 +262,11 @@ globalPortal
   -> Nut
 globalPortal v' c' =
   Nut
-    ( go (map (\(Nut df) -> df) v')
-        (shouldBeSafe c')
-    )
+    $ Right
+    $ Korok
+        ( go (map (resolveNut >>> \(Korok df) -> df) v')
+            (shouldBeSafe c')
+        )
 
   where
   shouldBeSafe
@@ -199,7 +289,7 @@ globalPortal v' c' =
         , toElt: coerce
         -- stuck here
         -- coerce won't work
-        , wrapElt: \i -> Element' ((elementify "div" empty (coerce i)))
+        , wrapElt: \i -> Element' ((elementify "div" (coerce i)))
         , giveNewParent: \a b ctor _ -> (unwrap a).giveNewParent
             (b `union` { ctor: coerce ctor })
         , deleteFromCache: unwrap >>> _.deleteFromCache
@@ -294,8 +384,8 @@ portal v' c' =
   dyn
     ( pure unit <#> \_ -> pure
         $ insert_
-            ( Nut
-                ( go (map (\(Nut df) -> df) v')
+            ( Nut $ Right $ Korok
+                ( go (map (resolveNut >>> \(Korok df) -> df) v')
                     (shouldBeSafe c')
                 )
             )
@@ -321,7 +411,7 @@ portal v' c' =
         , toElt: coerce
         -- stuck here
         -- coerce won't work
-        , wrapElt: \i -> Element' ((elementify "div" empty (coerce i)))
+        , wrapElt: \i -> Element' (elementify "div" (coerce i))
         , giveNewParent: \a b ctor _ -> (unwrap a).giveNewParent
             (b `union` { ctor: coerce ctor })
         , deleteFromCache: unwrap >>> _.deleteFromCache
@@ -335,7 +425,7 @@ portal v' c' =
 text
   :: Event String
   -> Nut
-text txt = Nut go'
+text txt = Nut $ Right $ Korok go'
   where
   go' :: forall payload. NutF payload
   go' = NutF (Element' (Node go))
@@ -382,8 +472,10 @@ deku
         . DOMInterpret payload
        -> Event payload
      )
-deku root (Nut cc) = go cc
+deku root nt = go cc
   where
+  Korok cc = resolveNut nt
+
   go
     :: forall payload
      . NutF payload

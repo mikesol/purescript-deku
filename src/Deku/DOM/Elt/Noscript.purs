@@ -6,13 +6,13 @@ import Deku.Control as DC
 import Deku.Core (Nut)
 import FRP.Event (Event)
 
-data Noscript_
+import Deku.DOM.Tags as Tags
 
 noscript
-  :: Array (Event (Attribute Noscript_))
+  :: Array (Event (Attribute Tags.Noscript_))
   -> Array Nut
   -> Nut
-noscript = DC.elementify2 "noscript"
+noscript = DC.elementify3 "noscript"
 
 noscript_
   :: Array Nut

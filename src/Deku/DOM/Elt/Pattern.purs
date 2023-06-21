@@ -6,13 +6,13 @@ import Deku.Control as DC
 import Deku.Core (Nut)
 import FRP.Event (Event)
 
-data Pattern_
+import Deku.DOM.Tags as Tags
 
 pattern
-  :: Array (Event (Attribute Pattern_))
+  :: Array (Event (Attribute Tags.Pattern_))
   -> Array Nut
   -> Nut
-pattern = DC.elementify2 "pattern"
+pattern = DC.elementify3 "pattern"
 
 pattern_
   :: Array Nut

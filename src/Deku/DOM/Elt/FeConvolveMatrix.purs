@@ -6,13 +6,13 @@ import Deku.Control as DC
 import Deku.Core (Nut)
 import FRP.Event (Event)
 
-data FeConvolveMatrix_
+import Deku.DOM.Tags as Tags
 
 feConvolveMatrix
-  :: Array (Event (Attribute FeConvolveMatrix_))
+  :: Array (Event (Attribute Tags.FeConvolveMatrix_))
   -> Array Nut
   -> Nut
-feConvolveMatrix = DC.elementify2 "feConvolveMatrix"
+feConvolveMatrix = DC.elementify3 "feConvolveMatrix"
 
 feConvolveMatrix_
   :: Array Nut

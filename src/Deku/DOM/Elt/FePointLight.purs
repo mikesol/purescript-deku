@@ -6,13 +6,13 @@ import Deku.Control as DC
 import Deku.Core (Nut)
 import FRP.Event (Event)
 
-data FePointLight_
+import Deku.DOM.Tags as Tags
 
 fePointLight
-  :: Array (Event (Attribute FePointLight_))
+  :: Array (Event (Attribute Tags.FePointLight_))
   -> Array Nut
   -> Nut
-fePointLight = DC.elementify2 "fePointLight"
+fePointLight = DC.elementify3 "fePointLight"
 
 fePointLight_
   :: Array Nut

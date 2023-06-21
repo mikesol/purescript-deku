@@ -43,7 +43,7 @@ import Data.Foldable (for_)
 import Data.Maybe (Maybe(..), fromMaybe)
 import Data.Tuple (Tuple(..), curry)
 import Data.Tuple.Nested (type (/\), (/\))
-import Deku.Core (Nut(..), NutF(..), Node, Child, bus, bussedUncurried, insert, remove, sendToPos, dyn)
+import Deku.Core (Child, Korok(..), Node, Nut, NutF(..), bus, bussedUncurried, dyn, insert, nuttyKorok, remove, resolveNut, sendToPos)
 import Deku.Do as Deku
 import Effect (Effect, foreachE)
 import Effect.Aff (Aff, Error, error, joinFiber, killFiber, launchAff, launchAff_)
@@ -66,13 +66,13 @@ useMemoized
    . (Event a)
   -> (Event a -> Nut)
   -> Nut
-useMemoized e f1 = Nut eeee
+useMemoized e f1 = nuttyKorok $ Korok eeee
   where
   eeee :: forall payload. NutF payload
   eeee = NutF (envy (map (\(NutF x) -> x) eee))
 
   eee :: forall payload. Event (NutF payload)
-  eee = map (\(Nut df) -> df) ee
+  eee = map ((\(Korok df) -> df) <<< resolveNut) ee
 
   ee :: Event Nut
   ee = memoize e f1
@@ -87,13 +87,13 @@ useMemoized'
   -> Nut
 useMemoized' f0 f1 = bussedUncurried fx
   where
-  fx (a /\ b) = Nut eeee
+  fx (a /\ b) = nuttyKorok $ Korok eeee
     where
     eeee :: forall payload. NutF payload
     eeee = NutF (envy (map (\(NutF x) -> x) eee))
 
     eee :: forall payload. Event (NutF payload)
-    eee = map (\(Nut df) -> df) ee
+    eee = map ((\(Korok df) -> df) <<< resolveNut) ee
 
     ee :: Event Nut
     ee = memoize (f0 b) \c -> f1 (a /\ c)
@@ -120,13 +120,13 @@ useRef
   -> Event a
   -> (Effect a -> Nut)
   -> Nut
-useRef a e f = Nut eeee
+useRef a e f = nuttyKorok $ Korok eeee
   where
   eeee :: forall payload. NutF payload
   eeee = NutF (envy (map (\(NutF x) -> x) eee))
 
   eee :: forall payload. Event (NutF payload)
-  eee = map (\(Nut df) -> df) ee
+  eee = map ((\(Korok df) -> df) <<< resolveNut) ee
 
   ee :: Event Nut
   ee = makeLemmingEvent \s k -> do
@@ -149,13 +149,13 @@ useMailboxed
   -> Nut
 useMailboxed f = bussedUncurried fx
   where
-  fx (a /\ b) = Nut eeee
+  fx (a /\ b) = nuttyKorok $ Korok eeee
     where
     eeee :: forall payload. NutF payload
     eeee = NutF (envy (map (\(NutF x) -> x) eee))
 
     eee :: forall payload. Event (NutF payload)
-    eee = map (\(Nut df) -> df) ee
+    eee = map ((\(Korok df) -> df) <<< resolveNut) ee
 
     ee :: Event Nut
     ee = mailboxed b \c -> f (a /\ c)
@@ -212,7 +212,7 @@ useDyn' i f = keepLatest Deku.do
 -- | A hook that remembers its most recent value and plays it back upon subscription _without_ an initial value. See [`useHot'`](https://purescript-deku.netlify.app/core-concepts/state#memoization-and-usehot) in the Deku guide for more info.
 useHot'
   :: forall a. ((a -> Effect Unit) /\ Event a -> Nut) -> Nut
-useHot' f = Nut ee
+useHot' f = nuttyKorok $ Korok ee
   where
   ee :: forall payload. NutF payload
   ee = NutF $ envy
@@ -239,7 +239,8 @@ useHot' f = Nut ee
                     for_ val \x -> runSTFn1 k' x
                     runSTFn2 s event k'
                 )
-            runSTFn1 k ((\(Nut x) -> x) (f (push'' /\ event')))
+            runSTFn1 k
+              (((\(Korok df) -> df) <<< resolveNut) (f (push'' /\ event')))
             runSTFn2 s event (mkSTFn1 \v -> void $ writeVal v)
         )
 
@@ -249,7 +250,7 @@ useHot
    . a
   -> ((a -> Effect Unit) /\ Event a -> Nut)
   -> Nut
-useHot a f = Nut ee
+useHot a f = nuttyKorok $ Korok ee
   where
   ee :: forall payload. NutF payload
   ee = NutF $ envy
@@ -276,7 +277,7 @@ useHot a f = Nut ee
                     runSTFn1 k' (fromMaybe a val)
                     runSTFn2 s event k'
                 )
-            runSTFn1 k ((\(Nut x) -> x) (f (push'' /\ event')))
+            runSTFn1 k (((\(Korok df) -> df) <<< resolveNut) (f (push'' /\ event')))
             runSTFn2 s event (mkSTFn1 \v -> void $ writeVal v)
         )
 
@@ -287,7 +288,7 @@ useEffect
   -> (a -> Effect Unit)
   -> (Unit -> Nut)
   -> Nut
-useEffect e f1 f2 = Nut ee
+useEffect e f1 f2 = nuttyKorok $ Korok ee
   where
   ee :: forall payload. NutF payload
   ee = NutF $ envy eeeee
@@ -296,7 +297,7 @@ useEffect e f1 f2 = Nut ee
   eeeee = map (\(NutF d) -> d) eeee
 
   eeee :: forall payload. Event (NutF payload)
-  eeee = map (\(Nut d) -> d) eee
+  eeee = map ((\(Korok df) -> df) <<< resolveNut) eee
 
   eee :: Event Nut
   eee = pure (f2 unit) <|> makeEventO
@@ -320,7 +321,7 @@ useAffWithCancellation
   -> (a -> Aff Unit)
   -> (Unit -> Nut)
   -> Nut
-useAffWithCancellation e f1 f2 = Nut ee
+useAffWithCancellation e f1 f2 = nuttyKorok $ Korok ee
   where
   ee :: forall payload. NutF payload
   ee = NutF (envy eeeee)
@@ -329,7 +330,7 @@ useAffWithCancellation e f1 f2 = Nut ee
   eeeee = map (\(NutF d) -> d) eeee
 
   eeee :: forall payload. Event (NutF payload)
-  eeee = map (\(Nut d) -> d) eee
+  eeee = map ((\(Korok df) -> df) <<< resolveNut) eee
 
   eee :: Event Nut
   eee =
@@ -350,7 +351,7 @@ useAffSequentially
   -> (a -> Aff Unit)
   -> (Unit -> Nut)
   -> Nut
-useAffSequentially e f1 f2 = Nut ee
+useAffSequentially e f1 f2 = nuttyKorok $ Korok ee
   where
   ee :: forall payload. NutF payload
   ee = NutF (envy eeeee)
@@ -359,7 +360,7 @@ useAffSequentially e f1 f2 = Nut ee
   eeeee = map (\(NutF d) -> d) eeee
 
   eeee :: forall payload. Event (NutF payload)
-  eeee = map (\(Nut d) -> d) eee
+  eeee = map ((\(Korok df) -> df) <<< resolveNut) eee
 
   eee :: Event Nut
   eee =
@@ -380,7 +381,7 @@ useAffSequentiallyOrDie
   -> (a -> Aff Unit)
   -> (Unit -> Nut)
   -> Nut
-useAffSequentiallyOrDie e f1 f2 = Nut ee
+useAffSequentiallyOrDie e f1 f2 = nuttyKorok $ Korok ee
   where
   ee :: forall payload. NutF payload
   ee = NutF (envy eeeee)
@@ -389,7 +390,7 @@ useAffSequentiallyOrDie e f1 f2 = Nut ee
   eeeee = map (\(NutF d) -> d) eeee
 
   eeee :: forall payload. Event (NutF payload)
-  eeee = map (\(Nut d) -> d) eee
+  eeee = map ((\(Korok df) -> df) <<< resolveNut) eee
 
   eee :: Event Nut
   eee =
@@ -416,7 +417,7 @@ useAffOrDie
   -> (a -> Aff Unit)
   -> (Unit -> Nut)
   -> Nut
-useAffOrDie e f1 f2 = Nut ee
+useAffOrDie e f1 f2 = nuttyKorok $ Korok ee
   where
   ee :: forall payload. NutF payload
   ee = NutF (envy eeeee)
@@ -425,7 +426,7 @@ useAffOrDie e f1 f2 = Nut ee
   eeeee = map (\(NutF d) -> d) eeee
 
   eeee :: forall payload. Event (NutF payload)
-  eeee = map (\(Nut d) -> d) eee
+  eeee = map ((\(Korok df) -> df) <<< resolveNut) eee
 
   eee :: Event Nut
   eee =

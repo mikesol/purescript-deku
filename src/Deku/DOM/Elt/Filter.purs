@@ -6,13 +6,13 @@ import Deku.Control as DC
 import Deku.Core (Nut)
 import FRP.Event (Event)
 
-data Filter_
+import Deku.DOM.Tags as Tags
 
 filter
-  :: Array (Event (Attribute Filter_))
+  :: Array (Event (Attribute Tags.Filter_))
   -> Array Nut
   -> Nut
-filter = DC.elementify2 "filter"
+filter = DC.elementify3 "filter"
 
 filter_
   :: Array Nut

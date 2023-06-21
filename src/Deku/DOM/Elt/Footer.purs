@@ -6,13 +6,13 @@ import Deku.Control as DC
 import Deku.Core (Nut)
 import FRP.Event (Event)
 
-data Footer_
+import Deku.DOM.Tags as Tags
 
 footer
-  :: Array (Event (Attribute Footer_))
+  :: Array (Event (Attribute Tags.Footer_))
   -> Array Nut
   -> Nut
-footer = DC.elementify2 "footer"
+footer = DC.elementify3 "footer"
 
 footer_
   :: Array Nut

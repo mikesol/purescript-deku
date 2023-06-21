@@ -6,13 +6,13 @@ import Deku.Control as DC
 import Deku.Core (Nut)
 import FRP.Event (Event)
 
-data Textarea_
+import Deku.DOM.Tags as Tags
 
 textarea
-  :: Array (Event (Attribute Textarea_))
+  :: Array (Event (Attribute Tags.Textarea_))
   -> Array Nut
   -> Nut
-textarea = DC.elementify2 "textarea"
+textarea = DC.elementify3 "textarea"
 
 textarea_
   :: Array Nut

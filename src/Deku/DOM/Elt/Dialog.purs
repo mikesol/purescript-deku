@@ -6,13 +6,13 @@ import Deku.Control as DC
 import Deku.Core (Nut)
 import FRP.Event (Event)
 
-data Dialog_
+import Deku.DOM.Tags as Tags
 
 dialog
-  :: Array (Event (Attribute Dialog_))
+  :: Array (Event (Attribute Tags.Dialog_))
   -> Array Nut
   -> Nut
-dialog = DC.elementify2 "dialog"
+dialog = DC.elementify3 "dialog"
 
 dialog_
   :: Array Nut

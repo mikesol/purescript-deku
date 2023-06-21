@@ -6,13 +6,13 @@ import Deku.Control as DC
 import Deku.Core (Nut)
 import FRP.Event (Event)
 
-data Legend_
+import Deku.DOM.Tags as Tags
 
 legend
-  :: Array (Event (Attribute Legend_))
+  :: Array (Event (Attribute Tags.Legend_))
   -> Array Nut
   -> Nut
-legend = DC.elementify2 "legend"
+legend = DC.elementify3 "legend"
 
 legend_
   :: Array Nut

@@ -6,13 +6,13 @@ import Deku.Control as DC
 import Deku.Core (Nut)
 import FRP.Event (Event)
 
-data Template_
+import Deku.DOM.Tags as Tags
 
 template
-  :: Array (Event (Attribute Template_))
+  :: Array (Event (Attribute Tags.Template_))
   -> Array Nut
   -> Nut
-template = DC.elementify2 "template"
+template = DC.elementify3 "template"
 
 template_
   :: Array Nut
