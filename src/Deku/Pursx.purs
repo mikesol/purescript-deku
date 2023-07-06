@@ -64,10 +64,7 @@ class
     (newTail :: Symbol)
   | verb acc head tail pursi -> purso newTail
 
-instance
-  ( Row.Cons acc (Nut) pursi purso
-  ) =>
-  DoVerbForDOM verb acc verb tail pursi purso tail
+instance (Row.Cons acc (Nut) pursi purso) => DoVerbForDOM verb acc verb tail pursi purso tail
 else instance
   ( Sym.Append acc anything acc2
   , Sym.Cons x y tail
@@ -79,12 +76,7 @@ else instance
 class IsWhiteSpace (space :: Symbol)
 
 instance IsWhiteSpace ""
-else instance
-  ( Sym.Cons x y s
-  , IsSingleWhiteSpace x
-  , IsWhiteSpace y
-  ) =>
-  IsWhiteSpace s
+else instance (Sym.Cons x y s, IsSingleWhiteSpace x, IsWhiteSpace y) => IsWhiteSpace s
 
 class IsSingleWhiteSpace (s :: Symbol)
 
@@ -96,24 +88,9 @@ class
   PXStart (verb :: Symbol) (head :: Symbol) (tail :: Symbol) (purs :: Row Type)
   | verb head tail -> purs
 
-instance
-  ( Sym.Cons x y tail
-  , PXStart verb x y purs
-  ) =>
-  PXStart verb " " tail purs
-
-instance
-  ( Sym.Cons x y tail
-  , PXStart verb x y purs
-  ) =>
-  PXStart verb "\t" tail purs
-
-instance
-  ( Sym.Cons x y tail
-  , PXStart verb x y purs
-  ) =>
-  PXStart verb "\n" tail purs
-
+instance (Sym.Cons x y tail, PXStart verb x y purs) => PXStart verb " " tail purs
+instance (Sym.Cons x y tail, PXStart verb x y purs) => PXStart verb "\t" tail purs
+instance (Sym.Cons x y tail, PXStart verb x y purs) => PXStart verb "\n" tail purs
 instance
   ( Sym.Cons x y tail
   , PXTagPreName verb x y () purso trailing
@@ -151,133 +128,107 @@ instance
   PXTagPreName verb "\n" tail pursi purso trailing
 
 instance
-  ( PXTagName verb "" "a" tail pursi purso trailing
-  ) =>
+  PXTagName verb "" "a" tail pursi purso trailing =>
   PXTagPreName verb "a" tail pursi purso trailing
 
 instance
-  ( PXTagName verb "" "b" tail pursi purso trailing
-  ) =>
+  PXTagName verb "" "b" tail pursi purso trailing =>
   PXTagPreName verb "b" tail pursi purso trailing
 
 instance
-  ( PXTagName verb "" "c" tail pursi purso trailing
-  ) =>
+  PXTagName verb "" "c" tail pursi purso trailing =>
   PXTagPreName verb "c" tail pursi purso trailing
 
 instance
-  ( PXTagName verb "" "d" tail pursi purso trailing
-  ) =>
+  PXTagName verb "" "d" tail pursi purso trailing =>
   PXTagPreName verb "d" tail pursi purso trailing
 
 instance
-  ( PXTagName verb "" "e" tail pursi purso trailing
-  ) =>
+  PXTagName verb "" "e" tail pursi purso trailing =>
   PXTagPreName verb "e" tail pursi purso trailing
 
 instance
-  ( PXTagName verb "" "f" tail pursi purso trailing
-  ) =>
+  PXTagName verb "" "f" tail pursi purso trailing =>
   PXTagPreName verb "f" tail pursi purso trailing
 
 instance
-  ( PXTagName verb "" "g" tail pursi purso trailing
-  ) =>
+  PXTagName verb "" "g" tail pursi purso trailing =>
   PXTagPreName verb "g" tail pursi purso trailing
 
 instance
-  ( PXTagName verb "" "h" tail pursi purso trailing
-  ) =>
+  PXTagName verb "" "h" tail pursi purso trailing =>
   PXTagPreName verb "h" tail pursi purso trailing
 
 instance
-  ( PXTagName verb "" "i" tail pursi purso trailing
-  ) =>
+  PXTagName verb "" "i" tail pursi purso trailing =>
   PXTagPreName verb "i" tail pursi purso trailing
 
 instance
-  ( PXTagName verb "" "j" tail pursi purso trailing
-  ) =>
+  PXTagName verb "" "j" tail pursi purso trailing =>
   PXTagPreName verb "j" tail pursi purso trailing
 
 instance
-  ( PXTagName verb "" "k" tail pursi purso trailing
-  ) =>
+  PXTagName verb "" "k" tail pursi purso trailing =>
   PXTagPreName verb "k" tail pursi purso trailing
 
 instance
-  ( PXTagName verb "" "l" tail pursi purso trailing
-  ) =>
+  PXTagName verb "" "l" tail pursi purso trailing =>
   PXTagPreName verb "l" tail pursi purso trailing
 
 instance
-  ( PXTagName verb "" "m" tail pursi purso trailing
-  ) =>
+  PXTagName verb "" "m" tail pursi purso trailing =>
   PXTagPreName verb "m" tail pursi purso trailing
 
 instance
-  ( PXTagName verb "" "n" tail pursi purso trailing
-  ) =>
+  PXTagName verb "" "n" tail pursi purso trailing =>
   PXTagPreName verb "n" tail pursi purso trailing
 
 instance
-  ( PXTagName verb "" "o" tail pursi purso trailing
-  ) =>
+  PXTagName verb "" "o" tail pursi purso trailing =>
   PXTagPreName verb "o" tail pursi purso trailing
 
 instance
-  ( PXTagName verb "" "p" tail pursi purso trailing
-  ) =>
+  PXTagName verb "" "p" tail pursi purso trailing =>
   PXTagPreName verb "p" tail pursi purso trailing
 
 instance
-  ( PXTagName verb "" "q" tail pursi purso trailing
-  ) =>
+  PXTagName verb "" "q" tail pursi purso trailing =>
   PXTagPreName verb "q" tail pursi purso trailing
 
 instance
-  ( PXTagName verb "" "r" tail pursi purso trailing
-  ) =>
+  PXTagName verb "" "r" tail pursi purso trailing =>
   PXTagPreName verb "r" tail pursi purso trailing
 
 instance
-  ( PXTagName verb "" "s" tail pursi purso trailing
-  ) =>
+  PXTagName verb "" "s" tail pursi purso trailing =>
   PXTagPreName verb "s" tail pursi purso trailing
 
 instance
-  ( PXTagName verb "" "t" tail pursi purso trailing
-  ) =>
+  PXTagName verb "" "t" tail pursi purso trailing =>
   PXTagPreName verb "t" tail pursi purso trailing
 
 instance
-  ( PXTagName verb "" "u" tail pursi purso trailing
-  ) =>
+  PXTagName verb "" "u" tail pursi purso trailing =>
   PXTagPreName verb "u" tail pursi purso trailing
 
 instance
-  ( PXTagName verb "" "v" tail pursi purso trailing
-  ) =>
+  PXTagName verb "" "v" tail pursi purso trailing =>
   PXTagPreName verb "v" tail pursi purso trailing
 
 instance
-  ( PXTagName verb "" "w" tail pursi purso trailing
-  ) =>
+  PXTagName verb "" "w" tail pursi purso trailing =>
   PXTagPreName verb "w" tail pursi purso trailing
 
 instance
-  ( PXTagName verb "" "x" tail pursi purso trailing
-  ) =>
+  PXTagName verb "" "x" tail pursi purso trailing =>
   PXTagPreName verb "x" tail pursi purso trailing
 
 instance
-  ( PXTagName verb "" "y" tail pursi purso trailing
-  ) =>
+  PXTagName verb "" "y" tail pursi purso trailing =>
   PXTagPreName verb "y" tail pursi purso trailing
 
 instance
-  ( PXTagName verb "" "z" tail pursi purso trailing
-  ) =>
+  PXTagName verb "" "z" tail pursi purso trailing =>
   PXTagPreName verb "z" tail pursi purso trailing
 
 --
@@ -291,14 +242,6 @@ class
     (purso :: Row Type)
     (trailing :: Symbol)
   | verb tag head tail pursi -> purso trailing
-
-instance
-  ( Sym.Cons q r tail
-  , PXBody verb q r pursi purso trailing
-  , Sym.Cons x y trailing
-  , PreEndTagFromTrailing x y tag newTrailing
-  ) =>
-  PXTagName verb tag ">" tail pursi purso newTrailing
 
 instance
   ( Sym.Cons x y tail
@@ -577,13 +520,17 @@ instance
   ) =>
   PXTagName verb tag "\n" tail pursi purso trailing
 
+instance
+  ( Sym.Cons q r tail
+  , PXBody verb q r pursi purso trailing
+  , Sym.Cons x y trailing
+  , PreEndTagFromTrailing x y tag newTrailing
+  ) =>
+  PXTagName verb tag ">" tail pursi purso newTrailing
+
 --
 class
-  PreEndTagFromTrailing
-    (head :: Symbol)
-    (tail :: Symbol)
-    (tag :: Symbol)
-    (newTrailing :: Symbol)
+  PreEndTagFromTrailing (head :: Symbol) (tail :: Symbol) (tag :: Symbol) (newTrailing :: Symbol)
   | head tail -> tag newTrailing
 
 instance
@@ -604,140 +551,33 @@ instance
   ) =>
   PreEndTagFromTrailing "\n" tail tag trailing
 
-instance
-  ( EndTagFromTrailing "a" tail "" tag trailing
-  ) =>
-  PreEndTagFromTrailing "a" tail tag trailing
-
-instance
-  ( EndTagFromTrailing "b" tail "" tag trailing
-  ) =>
-  PreEndTagFromTrailing "b" tail tag trailing
-
-instance
-  ( EndTagFromTrailing "c" tail "" tag trailing
-  ) =>
-  PreEndTagFromTrailing "c" tail tag trailing
-
-instance
-  ( EndTagFromTrailing "d" tail "" tag trailing
-  ) =>
-  PreEndTagFromTrailing "d" tail tag trailing
-
-instance
-  ( EndTagFromTrailing "e" tail "" tag trailing
-  ) =>
-  PreEndTagFromTrailing "e" tail tag trailing
-
-instance
-  ( EndTagFromTrailing "f" tail "" tag trailing
-  ) =>
-  PreEndTagFromTrailing "f" tail tag trailing
-
-instance
-  ( EndTagFromTrailing "g" tail "" tag trailing
-  ) =>
-  PreEndTagFromTrailing "g" tail tag trailing
-
-instance
-  ( EndTagFromTrailing "h" tail "" tag trailing
-  ) =>
-  PreEndTagFromTrailing "h" tail tag trailing
-
-instance
-  ( EndTagFromTrailing "i" tail "" tag trailing
-  ) =>
-  PreEndTagFromTrailing "i" tail tag trailing
-
-instance
-  ( EndTagFromTrailing "j" tail "" tag trailing
-  ) =>
-  PreEndTagFromTrailing "j" tail tag trailing
-
-instance
-  ( EndTagFromTrailing "k" tail "" tag trailing
-  ) =>
-  PreEndTagFromTrailing "k" tail tag trailing
-
-instance
-  ( EndTagFromTrailing "l" tail "" tag trailing
-  ) =>
-  PreEndTagFromTrailing "l" tail tag trailing
-
-instance
-  ( EndTagFromTrailing "m" tail "" tag trailing
-  ) =>
-  PreEndTagFromTrailing "m" tail tag trailing
-
-instance
-  ( EndTagFromTrailing "n" tail "" tag trailing
-  ) =>
-  PreEndTagFromTrailing "n" tail tag trailing
-
-instance
-  ( EndTagFromTrailing "o" tail "" tag trailing
-  ) =>
-  PreEndTagFromTrailing "o" tail tag trailing
-
-instance
-  ( EndTagFromTrailing "p" tail "" tag trailing
-  ) =>
-  PreEndTagFromTrailing "p" tail tag trailing
-
-instance
-  ( EndTagFromTrailing "q" tail "" tag trailing
-  ) =>
-  PreEndTagFromTrailing "q" tail tag trailing
-
-instance
-  ( EndTagFromTrailing "r" tail "" tag trailing
-  ) =>
-  PreEndTagFromTrailing "r" tail tag trailing
-
-instance
-  ( EndTagFromTrailing "s" tail "" tag trailing
-  ) =>
-  PreEndTagFromTrailing "s" tail tag trailing
-
-instance
-  ( EndTagFromTrailing "t" tail "" tag trailing
-  ) =>
-  PreEndTagFromTrailing "t" tail tag trailing
-
-instance
-  ( EndTagFromTrailing "u" tail "" tag trailing
-  ) =>
-  PreEndTagFromTrailing "u" tail tag trailing
-
-instance
-  ( EndTagFromTrailing "v" tail "" tag trailing
-  ) =>
-  PreEndTagFromTrailing "v" tail tag trailing
-
-instance
-  ( EndTagFromTrailing "w" tail "" tag trailing
-  ) =>
-  PreEndTagFromTrailing "w" tail tag trailing
-
-instance
-  ( EndTagFromTrailing "x" tail "" tag trailing
-  ) =>
-  PreEndTagFromTrailing "x" tail tag trailing
-
-instance
-  ( EndTagFromTrailing "y" tail "" tag trailing
-  ) =>
-  PreEndTagFromTrailing "y" tail tag trailing
-
-instance
-  ( EndTagFromTrailing "z" tail "" tag trailing
-  ) =>
-  PreEndTagFromTrailing "z" tail tag trailing
-
-instance
-  ( EndTagFromTrailing "-" tail "" tag trailing
-  ) =>
-  PreEndTagFromTrailing "-" tail tag trailing
+instance EndTagFromTrailing "a" tail "" tag trailing => PreEndTagFromTrailing "a" tail tag trailing
+instance EndTagFromTrailing "b" tail "" tag trailing => PreEndTagFromTrailing "b" tail tag trailing
+instance EndTagFromTrailing "c" tail "" tag trailing => PreEndTagFromTrailing "c" tail tag trailing
+instance EndTagFromTrailing "d" tail "" tag trailing => PreEndTagFromTrailing "d" tail tag trailing
+instance EndTagFromTrailing "e" tail "" tag trailing => PreEndTagFromTrailing "e" tail tag trailing
+instance EndTagFromTrailing "f" tail "" tag trailing => PreEndTagFromTrailing "f" tail tag trailing
+instance EndTagFromTrailing "g" tail "" tag trailing => PreEndTagFromTrailing "g" tail tag trailing
+instance EndTagFromTrailing "h" tail "" tag trailing => PreEndTagFromTrailing "h" tail tag trailing
+instance EndTagFromTrailing "i" tail "" tag trailing => PreEndTagFromTrailing "i" tail tag trailing
+instance EndTagFromTrailing "j" tail "" tag trailing => PreEndTagFromTrailing "j" tail tag trailing
+instance EndTagFromTrailing "k" tail "" tag trailing => PreEndTagFromTrailing "k" tail tag trailing
+instance EndTagFromTrailing "l" tail "" tag trailing => PreEndTagFromTrailing "l" tail tag trailing
+instance EndTagFromTrailing "m" tail "" tag trailing => PreEndTagFromTrailing "m" tail tag trailing
+instance EndTagFromTrailing "n" tail "" tag trailing => PreEndTagFromTrailing "n" tail tag trailing
+instance EndTagFromTrailing "o" tail "" tag trailing => PreEndTagFromTrailing "o" tail tag trailing
+instance EndTagFromTrailing "p" tail "" tag trailing => PreEndTagFromTrailing "p" tail tag trailing
+instance EndTagFromTrailing "q" tail "" tag trailing => PreEndTagFromTrailing "q" tail tag trailing
+instance EndTagFromTrailing "r" tail "" tag trailing => PreEndTagFromTrailing "r" tail tag trailing
+instance EndTagFromTrailing "s" tail "" tag trailing => PreEndTagFromTrailing "s" tail tag trailing
+instance EndTagFromTrailing "t" tail "" tag trailing => PreEndTagFromTrailing "t" tail tag trailing
+instance EndTagFromTrailing "u" tail "" tag trailing => PreEndTagFromTrailing "u" tail tag trailing
+instance EndTagFromTrailing "v" tail "" tag trailing => PreEndTagFromTrailing "v" tail tag trailing
+instance EndTagFromTrailing "w" tail "" tag trailing => PreEndTagFromTrailing "w" tail tag trailing
+instance EndTagFromTrailing "x" tail "" tag trailing => PreEndTagFromTrailing "x" tail tag trailing
+instance EndTagFromTrailing "y" tail "" tag trailing => PreEndTagFromTrailing "y" tail tag trailing
+instance EndTagFromTrailing "z" tail "" tag trailing => PreEndTagFromTrailing "z" tail tag trailing
+instance EndTagFromTrailing "-" tail "" tag trailing => PreEndTagFromTrailing "-" tail tag trailing
 
 --
 class
@@ -749,265 +589,7 @@ class
     (newTrailing :: Symbol)
   | head tail tagAcc -> tag newTrailing
 
-instance
-  ( Sym.Cons x y tail
-  , Sym.Append tag_ "a" tag
-  , EndTagFromTrailing x y tag otag trailing
-  ) =>
-  EndTagFromTrailing "a" tail tag_ otag trailing
-
-instance
-  ( Sym.Cons x y tail
-  , Sym.Append tag_ "b" tag
-  , EndTagFromTrailing x y tag otag trailing
-  ) =>
-  EndTagFromTrailing "b" tail tag_ otag trailing
-
-instance
-  ( Sym.Cons x y tail
-  , Sym.Append tag_ "c" tag
-  , EndTagFromTrailing x y tag otag trailing
-  ) =>
-  EndTagFromTrailing "c" tail tag_ otag trailing
-
-instance
-  ( Sym.Cons x y tail
-  , Sym.Append tag_ "d" tag
-  , EndTagFromTrailing x y tag otag trailing
-  ) =>
-  EndTagFromTrailing "d" tail tag_ otag trailing
-
-instance
-  ( Sym.Cons x y tail
-  , Sym.Append tag_ "e" tag
-  , EndTagFromTrailing x y tag otag trailing
-  ) =>
-  EndTagFromTrailing "e" tail tag_ otag trailing
-
-instance
-  ( Sym.Cons x y tail
-  , Sym.Append tag_ "f" tag
-  , EndTagFromTrailing x y tag otag trailing
-  ) =>
-  EndTagFromTrailing "f" tail tag_ otag trailing
-
-instance
-  ( Sym.Cons x y tail
-  , Sym.Append tag_ "g" tag
-  , EndTagFromTrailing x y tag otag trailing
-  ) =>
-  EndTagFromTrailing "g" tail tag_ otag trailing
-
-instance
-  ( Sym.Cons x y tail
-  , Sym.Append tag_ "h" tag
-  , EndTagFromTrailing x y tag otag trailing
-  ) =>
-  EndTagFromTrailing "h" tail tag_ otag trailing
-
-instance
-  ( Sym.Cons x y tail
-  , Sym.Append tag_ "i" tag
-  , EndTagFromTrailing x y tag otag trailing
-  ) =>
-  EndTagFromTrailing "i" tail tag_ otag trailing
-
-instance
-  ( Sym.Cons x y tail
-  , Sym.Append tag_ "j" tag
-  , EndTagFromTrailing x y tag otag trailing
-  ) =>
-  EndTagFromTrailing "j" tail tag_ otag trailing
-
-instance
-  ( Sym.Cons x y tail
-  , Sym.Append tag_ "k" tag
-  , EndTagFromTrailing x y tag otag trailing
-  ) =>
-  EndTagFromTrailing "k" tail tag_ otag trailing
-
-instance
-  ( Sym.Cons x y tail
-  , Sym.Append tag_ "l" tag
-  , EndTagFromTrailing x y tag otag trailing
-  ) =>
-  EndTagFromTrailing "l" tail tag_ otag trailing
-
-instance
-  ( Sym.Cons x y tail
-  , Sym.Append tag_ "m" tag
-  , EndTagFromTrailing x y tag otag trailing
-  ) =>
-  EndTagFromTrailing "m" tail tag_ otag trailing
-
-instance
-  ( Sym.Cons x y tail
-  , Sym.Append tag_ "n" tag
-  , EndTagFromTrailing x y tag otag trailing
-  ) =>
-  EndTagFromTrailing "n" tail tag_ otag trailing
-
-instance
-  ( Sym.Cons x y tail
-  , Sym.Append tag_ "o" tag
-  , EndTagFromTrailing x y tag otag trailing
-  ) =>
-  EndTagFromTrailing "o" tail tag_ otag trailing
-
-instance
-  ( Sym.Cons x y tail
-  , Sym.Append tag_ "p" tag
-  , EndTagFromTrailing x y tag otag trailing
-  ) =>
-  EndTagFromTrailing "p" tail tag_ otag trailing
-
-instance
-  ( Sym.Cons x y tail
-  , Sym.Append tag_ "q" tag
-  , EndTagFromTrailing x y tag otag trailing
-  ) =>
-  EndTagFromTrailing "q" tail tag_ otag trailing
-
-instance
-  ( Sym.Cons x y tail
-  , Sym.Append tag_ "r" tag
-  , EndTagFromTrailing x y tag otag trailing
-  ) =>
-  EndTagFromTrailing "r" tail tag_ otag trailing
-
-instance
-  ( Sym.Cons x y tail
-  , Sym.Append tag_ "s" tag
-  , EndTagFromTrailing x y tag otag trailing
-  ) =>
-  EndTagFromTrailing "s" tail tag_ otag trailing
-
-instance
-  ( Sym.Cons x y tail
-  , Sym.Append tag_ "t" tag
-  , EndTagFromTrailing x y tag otag trailing
-  ) =>
-  EndTagFromTrailing "t" tail tag_ otag trailing
-
-instance
-  ( Sym.Cons x y tail
-  , Sym.Append tag_ "u" tag
-  , EndTagFromTrailing x y tag otag trailing
-  ) =>
-  EndTagFromTrailing "u" tail tag_ otag trailing
-
-instance
-  ( Sym.Cons x y tail
-  , Sym.Append tag_ "v" tag
-  , EndTagFromTrailing x y tag otag trailing
-  ) =>
-  EndTagFromTrailing "v" tail tag_ otag trailing
-
-instance
-  ( Sym.Cons x y tail
-  , Sym.Append tag_ "w" tag
-  , EndTagFromTrailing x y tag otag trailing
-  ) =>
-  EndTagFromTrailing "w" tail tag_ otag trailing
-
-instance
-  ( Sym.Cons x y tail
-  , Sym.Append tag_ "x" tag
-  , EndTagFromTrailing x y tag otag trailing
-  ) =>
-  EndTagFromTrailing "x" tail tag_ otag trailing
-
-instance
-  ( Sym.Cons x y tail
-  , Sym.Append tag_ "y" tag
-  , EndTagFromTrailing x y tag otag trailing
-  ) =>
-  EndTagFromTrailing "y" tail tag_ otag trailing
-
-instance
-  ( Sym.Cons x y tail
-  , Sym.Append tag_ "z" tag
-  , EndTagFromTrailing x y tag otag trailing
-  ) =>
-  EndTagFromTrailing "z" tail tag_ otag trailing
-
-instance
-  ( Sym.Cons x y tail
-  , Sym.Append tag_ "-" tag
-  , EndTagFromTrailing x y tag otag trailing
-  ) =>
-  EndTagFromTrailing "-" tail tag_ otag trailing
-
-instance
-  ( Sym.Cons x y tail
-  , Sym.Append tag_ "0" tag
-  , EndTagFromTrailing x y tag otag trailing
-  ) =>
-  EndTagFromTrailing "0" tail tag_ otag trailing
-
-instance
-  ( Sym.Cons x y tail
-  , Sym.Append tag_ "1" tag
-  , EndTagFromTrailing x y tag otag trailing
-  ) =>
-  EndTagFromTrailing "1" tail tag_ otag trailing
-
-instance
-  ( Sym.Cons x y tail
-  , Sym.Append tag_ "2" tag
-  , EndTagFromTrailing x y tag otag trailing
-  ) =>
-  EndTagFromTrailing "2" tail tag_ otag trailing
-
-instance
-  ( Sym.Cons x y tail
-  , Sym.Append tag_ "3" tag
-  , EndTagFromTrailing x y tag otag trailing
-  ) =>
-  EndTagFromTrailing "3" tail tag_ otag trailing
-
-instance
-  ( Sym.Cons x y tail
-  , Sym.Append tag_ "4" tag
-  , EndTagFromTrailing x y tag otag trailing
-  ) =>
-  EndTagFromTrailing "4" tail tag_ otag trailing
-
-instance
-  ( Sym.Cons x y tail
-  , Sym.Append tag_ "5" tag
-  , EndTagFromTrailing x y tag otag trailing
-  ) =>
-  EndTagFromTrailing "5" tail tag_ otag trailing
-
-instance
-  ( Sym.Cons x y tail
-  , Sym.Append tag_ "6" tag
-  , EndTagFromTrailing x y tag otag trailing
-  ) =>
-  EndTagFromTrailing "6" tail tag_ otag trailing
-
-instance
-  ( Sym.Cons x y tail
-  , Sym.Append tag_ "7" tag
-  , EndTagFromTrailing x y tag otag trailing
-  ) =>
-  EndTagFromTrailing "7" tail tag_ otag trailing
-
-instance
-  ( Sym.Cons x y tail
-  , Sym.Append tag_ "8" tag
-  , EndTagFromTrailing x y tag otag trailing
-  ) =>
-  EndTagFromTrailing "8" tail tag_ otag trailing
-
-instance
-  ( Sym.Cons x y tail
-  , Sym.Append tag_ "9" tag
-  , EndTagFromTrailing x y tag otag trailing
-  ) =>
-  EndTagFromTrailing "9" tail tag_ otag trailing
-
+--
 instance EndTagFromTrailing ">" tail tag tag tail
 
 --
@@ -1024,10 +606,8 @@ class
   | verb hasAttributed tag head tail pursi -> purso trailing
 
 instance
-  ( Sym.Cons ">" trailing tail
-  ) =>
+  Sym.Cons ">" trailing tail =>
   PXTagPreAttrName verb hasAttributed tag "/" tail purs purs trailing
--- trailing will be by definition whatever comes after the closing tag, ie </ foo> will be " foo>"
 else instance
   ( Sym.Cons q r tail
   , PXBody verb q r pursi purso trailing
@@ -1035,7 +615,6 @@ else instance
   , PreEndTagFromTrailing x y tag newTrailing
   ) =>
   PXTagPreAttrName verb hasAttributed tag ">" tail pursi purso newTrailing
---
 else instance
   ( Sym.Cons x y tail
   , PXTagPreAttrName verb hasAttributed tag x y pursi purso trailing
@@ -1052,212 +631,160 @@ else instance
   ) =>
   PXTagPreAttrName verb hasAttributed tag "\n" tail pursi purso trailing
 else instance
-  ( PXTagAttrName verb hasAttributed tag "a" tail pursi purso trailing
-  ) =>
+  PXTagAttrName verb hasAttributed tag "a" tail pursi purso trailing =>
   PXTagPreAttrName verb hasAttributed tag "a" tail pursi purso trailing
 else instance
-  ( PXTagAttrName verb hasAttributed tag "b" tail pursi purso trailing
-  ) =>
+  PXTagAttrName verb hasAttributed tag "b" tail pursi purso trailing =>
   PXTagPreAttrName verb hasAttributed tag "b" tail pursi purso trailing
 else instance
-  ( PXTagAttrName verb hasAttributed tag "c" tail pursi purso trailing
-  ) =>
+  PXTagAttrName verb hasAttributed tag "c" tail pursi purso trailing =>
   PXTagPreAttrName verb hasAttributed tag "c" tail pursi purso trailing
 else instance
-  ( PXTagAttrName verb hasAttributed tag "d" tail pursi purso trailing
-  ) =>
+  PXTagAttrName verb hasAttributed tag "d" tail pursi purso trailing =>
   PXTagPreAttrName verb hasAttributed tag "d" tail pursi purso trailing
 else instance
-  ( PXTagAttrName verb hasAttributed tag "e" tail pursi purso trailing
-  ) =>
+  PXTagAttrName verb hasAttributed tag "e" tail pursi purso trailing =>
   PXTagPreAttrName verb hasAttributed tag "e" tail pursi purso trailing
 else instance
-  ( PXTagAttrName verb hasAttributed tag "f" tail pursi purso trailing
-  ) =>
+  PXTagAttrName verb hasAttributed tag "f" tail pursi purso trailing =>
   PXTagPreAttrName verb hasAttributed tag "f" tail pursi purso trailing
 else instance
-  ( PXTagAttrName verb hasAttributed tag "g" tail pursi purso trailing
-  ) =>
+  PXTagAttrName verb hasAttributed tag "g" tail pursi purso trailing =>
   PXTagPreAttrName verb hasAttributed tag "g" tail pursi purso trailing
 else instance
-  ( PXTagAttrName verb hasAttributed tag "h" tail pursi purso trailing
-  ) =>
+  PXTagAttrName verb hasAttributed tag "h" tail pursi purso trailing =>
   PXTagPreAttrName verb hasAttributed tag "h" tail pursi purso trailing
 else instance
-  ( PXTagAttrName verb hasAttributed tag "i" tail pursi purso trailing
-  ) =>
+  PXTagAttrName verb hasAttributed tag "i" tail pursi purso trailing =>
   PXTagPreAttrName verb hasAttributed tag "i" tail pursi purso trailing
 else instance
-  ( PXTagAttrName verb hasAttributed tag "j" tail pursi purso trailing
-  ) =>
+  PXTagAttrName verb hasAttributed tag "j" tail pursi purso trailing =>
   PXTagPreAttrName verb hasAttributed tag "j" tail pursi purso trailing
 else instance
-  ( PXTagAttrName verb hasAttributed tag "k" tail pursi purso trailing
-  ) =>
+  PXTagAttrName verb hasAttributed tag "k" tail pursi purso trailing =>
   PXTagPreAttrName verb hasAttributed tag "k" tail pursi purso trailing
 else instance
-  ( PXTagAttrName verb hasAttributed tag "l" tail pursi purso trailing
-  ) =>
+  PXTagAttrName verb hasAttributed tag "l" tail pursi purso trailing =>
   PXTagPreAttrName verb hasAttributed tag "l" tail pursi purso trailing
 else instance
-  ( PXTagAttrName verb hasAttributed tag "m" tail pursi purso trailing
-  ) =>
+  PXTagAttrName verb hasAttributed tag "m" tail pursi purso trailing =>
   PXTagPreAttrName verb hasAttributed tag "m" tail pursi purso trailing
 else instance
-  ( PXTagAttrName verb hasAttributed tag "n" tail pursi purso trailing
-  ) =>
+  PXTagAttrName verb hasAttributed tag "n" tail pursi purso trailing =>
   PXTagPreAttrName verb hasAttributed tag "n" tail pursi purso trailing
 else instance
-  ( PXTagAttrName verb hasAttributed tag "o" tail pursi purso trailing
-  ) =>
+  PXTagAttrName verb hasAttributed tag "o" tail pursi purso trailing =>
   PXTagPreAttrName verb hasAttributed tag "o" tail pursi purso trailing
 else instance
-  ( PXTagAttrName verb hasAttributed tag "p" tail pursi purso trailing
-  ) =>
+  PXTagAttrName verb hasAttributed tag "p" tail pursi purso trailing =>
   PXTagPreAttrName verb hasAttributed tag "p" tail pursi purso trailing
 else instance
-  ( PXTagAttrName verb hasAttributed tag "q" tail pursi purso trailing
-  ) =>
+  PXTagAttrName verb hasAttributed tag "q" tail pursi purso trailing =>
   PXTagPreAttrName verb hasAttributed tag "q" tail pursi purso trailing
 else instance
-  ( PXTagAttrName verb hasAttributed tag "r" tail pursi purso trailing
-  ) =>
+  PXTagAttrName verb hasAttributed tag "r" tail pursi purso trailing =>
   PXTagPreAttrName verb hasAttributed tag "r" tail pursi purso trailing
 else instance
-  ( PXTagAttrName verb hasAttributed tag "s" tail pursi purso trailing
-  ) =>
+  PXTagAttrName verb hasAttributed tag "s" tail pursi purso trailing =>
   PXTagPreAttrName verb hasAttributed tag "s" tail pursi purso trailing
 else instance
-  ( PXTagAttrName verb hasAttributed tag "t" tail pursi purso trailing
-  ) =>
+  PXTagAttrName verb hasAttributed tag "t" tail pursi purso trailing =>
   PXTagPreAttrName verb hasAttributed tag "t" tail pursi purso trailing
 else instance
-  ( PXTagAttrName verb hasAttributed tag "u" tail pursi purso trailing
-  ) =>
+  PXTagAttrName verb hasAttributed tag "u" tail pursi purso trailing =>
   PXTagPreAttrName verb hasAttributed tag "u" tail pursi purso trailing
 else instance
-  ( PXTagAttrName verb hasAttributed tag "v" tail pursi purso trailing
-  ) =>
+  PXTagAttrName verb hasAttributed tag "v" tail pursi purso trailing =>
   PXTagPreAttrName verb hasAttributed tag "v" tail pursi purso trailing
 else instance
-  ( PXTagAttrName verb hasAttributed tag "w" tail pursi purso trailing
-  ) =>
+  PXTagAttrName verb hasAttributed tag "w" tail pursi purso trailing =>
   PXTagPreAttrName verb hasAttributed tag "w" tail pursi purso trailing
 else instance
-  ( PXTagAttrName verb hasAttributed tag "x" tail pursi purso trailing
-  ) =>
+  PXTagAttrName verb hasAttributed tag "x" tail pursi purso trailing =>
   PXTagPreAttrName verb hasAttributed tag "x" tail pursi purso trailing
 else instance
-  ( PXTagAttrName verb hasAttributed tag "y" tail pursi purso trailing
-  ) =>
+  PXTagAttrName verb hasAttributed tag "y" tail pursi purso trailing =>
   PXTagPreAttrName verb hasAttributed tag "y" tail pursi purso trailing
 else instance
-  ( PXTagAttrName verb hasAttributed tag "z" tail pursi purso trailing
-  ) =>
+  PXTagAttrName verb hasAttributed tag "z" tail pursi purso trailing =>
   PXTagPreAttrName verb hasAttributed tag "z" tail pursi purso trailing
 else instance
-  ( PXTagAttrName verb hasAttributed tag "A" tail pursi purso trailing
-  ) =>
+  PXTagAttrName verb hasAttributed tag "A" tail pursi purso trailing =>
   PXTagPreAttrName verb hasAttributed tag "A" tail pursi purso trailing
 else instance
-  ( PXTagAttrName verb hasAttributed tag "B" tail pursi purso trailing
-  ) =>
+  PXTagAttrName verb hasAttributed tag "B" tail pursi purso trailing =>
   PXTagPreAttrName verb hasAttributed tag "B" tail pursi purso trailing
 else instance
-  ( PXTagAttrName verb hasAttributed tag "C" tail pursi purso trailing
-  ) =>
+  PXTagAttrName verb hasAttributed tag "C" tail pursi purso trailing =>
   PXTagPreAttrName verb hasAttributed tag "C" tail pursi purso trailing
 else instance
-  ( PXTagAttrName verb hasAttributed tag "D" tail pursi purso trailing
-  ) =>
+  PXTagAttrName verb hasAttributed tag "D" tail pursi purso trailing =>
   PXTagPreAttrName verb hasAttributed tag "D" tail pursi purso trailing
 else instance
-  ( PXTagAttrName verb hasAttributed tag "E" tail pursi purso trailing
-  ) =>
+  PXTagAttrName verb hasAttributed tag "E" tail pursi purso trailing =>
   PXTagPreAttrName verb hasAttributed tag "E" tail pursi purso trailing
 else instance
-  ( PXTagAttrName verb hasAttributed tag "F" tail pursi purso trailing
-  ) =>
+  PXTagAttrName verb hasAttributed tag "F" tail pursi purso trailing =>
   PXTagPreAttrName verb hasAttributed tag "F" tail pursi purso trailing
 else instance
-  ( PXTagAttrName verb hasAttributed tag "G" tail pursi purso trailing
-  ) =>
+  PXTagAttrName verb hasAttributed tag "G" tail pursi purso trailing =>
   PXTagPreAttrName verb hasAttributed tag "G" tail pursi purso trailing
 else instance
-  ( PXTagAttrName verb hasAttributed tag "H" tail pursi purso trailing
-  ) =>
+  PXTagAttrName verb hasAttributed tag "H" tail pursi purso trailing =>
   PXTagPreAttrName verb hasAttributed tag "H" tail pursi purso trailing
 else instance
-  ( PXTagAttrName verb hasAttributed tag "I" tail pursi purso trailing
-  ) =>
+  PXTagAttrName verb hasAttributed tag "I" tail pursi purso trailing =>
   PXTagPreAttrName verb hasAttributed tag "I" tail pursi purso trailing
 else instance
-  ( PXTagAttrName verb hasAttributed tag "J" tail pursi purso trailing
-  ) =>
+  PXTagAttrName verb hasAttributed tag "J" tail pursi purso trailing =>
   PXTagPreAttrName verb hasAttributed tag "J" tail pursi purso trailing
 else instance
-  ( PXTagAttrName verb hasAttributed tag "K" tail pursi purso trailing
-  ) =>
+  PXTagAttrName verb hasAttributed tag "K" tail pursi purso trailing =>
   PXTagPreAttrName verb hasAttributed tag "K" tail pursi purso trailing
 else instance
-  ( PXTagAttrName verb hasAttributed tag "L" tail pursi purso trailing
-  ) =>
+  PXTagAttrName verb hasAttributed tag "L" tail pursi purso trailing =>
   PXTagPreAttrName verb hasAttributed tag "L" tail pursi purso trailing
 else instance
-  ( PXTagAttrName verb hasAttributed tag "M" tail pursi purso trailing
-  ) =>
+  PXTagAttrName verb hasAttributed tag "M" tail pursi purso trailing =>
   PXTagPreAttrName verb hasAttributed tag "M" tail pursi purso trailing
 else instance
-  ( PXTagAttrName verb hasAttributed tag "N" tail pursi purso trailing
-  ) =>
+  PXTagAttrName verb hasAttributed tag "N" tail pursi purso trailing =>
   PXTagPreAttrName verb hasAttributed tag "N" tail pursi purso trailing
 else instance
-  ( PXTagAttrName verb hasAttributed tag "O" tail pursi purso trailing
-  ) =>
+  PXTagAttrName verb hasAttributed tag "O" tail pursi purso trailing =>
   PXTagPreAttrName verb hasAttributed tag "O" tail pursi purso trailing
 else instance
-  ( PXTagAttrName verb hasAttributed tag "P" tail pursi purso trailing
-  ) =>
+  PXTagAttrName verb hasAttributed tag "P" tail pursi purso trailing =>
   PXTagPreAttrName verb hasAttributed tag "P" tail pursi purso trailing
 else instance
-  ( PXTagAttrName verb hasAttributed tag "Q" tail pursi purso trailing
-  ) =>
+  PXTagAttrName verb hasAttributed tag "Q" tail pursi purso trailing =>
   PXTagPreAttrName verb hasAttributed tag "Q" tail pursi purso trailing
 else instance
-  ( PXTagAttrName verb hasAttributed tag "R" tail pursi purso trailing
-  ) =>
+  PXTagAttrName verb hasAttributed tag "R" tail pursi purso trailing =>
   PXTagPreAttrName verb hasAttributed tag "R" tail pursi purso trailing
 else instance
-  ( PXTagAttrName verb hasAttributed tag "S" tail pursi purso trailing
-  ) =>
+  PXTagAttrName verb hasAttributed tag "S" tail pursi purso trailing =>
   PXTagPreAttrName verb hasAttributed tag "S" tail pursi purso trailing
 else instance
-  ( PXTagAttrName verb hasAttributed tag "T" tail pursi purso trailing
-  ) =>
+  PXTagAttrName verb hasAttributed tag "T" tail pursi purso trailing =>
   PXTagPreAttrName verb hasAttributed tag "T" tail pursi purso trailing
 else instance
-  ( PXTagAttrName verb hasAttributed tag "U" tail pursi purso trailing
-  ) =>
+  PXTagAttrName verb hasAttributed tag "U" tail pursi purso trailing =>
   PXTagPreAttrName verb hasAttributed tag "U" tail pursi purso trailing
 else instance
-  ( PXTagAttrName verb hasAttributed tag "V" tail pursi purso trailing
-  ) =>
+  PXTagAttrName verb hasAttributed tag "V" tail pursi purso trailing =>
   PXTagPreAttrName verb hasAttributed tag "V" tail pursi purso trailing
 else instance
-  ( PXTagAttrName verb hasAttributed tag "W" tail pursi purso trailing
-  ) =>
+  PXTagAttrName verb hasAttributed tag "W" tail pursi purso trailing =>
   PXTagPreAttrName verb hasAttributed tag "W" tail pursi purso trailing
 else instance
-  ( PXTagAttrName verb hasAttributed tag "X" tail pursi purso trailing
-  ) =>
+  PXTagAttrName verb hasAttributed tag "X" tail pursi purso trailing =>
   PXTagPreAttrName verb hasAttributed tag "X" tail pursi purso trailing
 else instance
-  ( PXTagAttrName verb hasAttributed tag "Y" tail pursi purso trailing
-  ) =>
+  PXTagAttrName verb hasAttributed tag "Y" tail pursi purso trailing =>
   PXTagPreAttrName verb hasAttributed tag "Y" tail pursi purso trailing
 else instance
-  ( PXTagAttrName verb hasAttributed tag "Z" tail pursi purso trailing
-  ) =>
+  PXTagAttrName verb hasAttributed tag "Z" tail pursi purso trailing =>
   PXTagPreAttrName verb hasAttributed tag "Z" tail pursi purso trailing
 else instance
   ( Sym.Cons x y tail
@@ -1660,12 +1187,6 @@ instance
 
 instance
   ( Sym.Cons x y tail
-  , PXTagPreAttrValue verb hasAttributed tag x y pursi purso trailing
-  ) =>
-  PXTagAttrName verb hasAttributed tag "=" tail pursi purso trailing
-
-instance
-  ( Sym.Cons x y tail
   , PXTagPostAttrName verb hasAttributed tag x y pursi purso trailing
   ) =>
   PXTagAttrName verb hasAttributed tag " " tail pursi purso trailing
@@ -1681,6 +1202,12 @@ instance
   , PXTagPostAttrName verb hasAttributed tag x y pursi purso trailing
   ) =>
   PXTagAttrName verb hasAttributed tag "\n" tail pursi purso trailing
+
+instance
+  ( Sym.Cons x y tail
+  , PXTagPreAttrValue verb hasAttributed tag x y pursi purso trailing
+  ) =>
+  PXTagAttrName verb hasAttributed tag "=" tail pursi purso trailing
 
 --
 class
@@ -2691,4 +2218,3 @@ __internalDekuFlatten a b c = Bolson.flatten
 
 infixr 5 makePursx as ~~
 infixr 5 unsafeMakePursx as ~!~
-

@@ -15,7 +15,8 @@
 		"test:performance": "npm run bundle:performance && spago -x test/test.dhall run --main Performance.Main",
 		"bundle:examples": "spago -x examples.dhall bundle-app --main Deku.Example.HelloWorld --to examples/hello-world/index.js",
 		"bundle:performance": "spago -x test/test.dhall bundle-app --minify --main Performance.Test.App --to test/test.js",
-		"bundle:optimizer-performance": "spago -x test/test-optimized.dhall build && purs-backend-es bundle-app --main Performance.Test.App --to test/test.js"
+		"bundle:optimizer-performance": "spago -x test/test-optimized.dhall build && purs-backend-es bundle-app --main Performance.Test.App --to test/test.js",
+		"generate": "npx spago -x codegen/codegen.dhall run"
 	},
 	"keywords": [],
 	"author": "",
@@ -38,7 +39,7 @@
 		"purescript": "^0.15.6",
 		"purs-backend-es": "^1.2.0",
 		"purs-tidy": "^0.9.2",
-		"spago": "^0.20.9",
+		"spago": "^0.21.0",
 		"test": "^0.6.0",
 		"tracealyzer": "^0.10.3"
 	}
