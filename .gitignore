@@ -26,3 +26,4 @@ packages.json
 /test/output/
 __pycache__
 .vscode
+codegen/cache

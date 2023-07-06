@@ -1,7 +1,6 @@
 { name = "kievit-fragments"
 , dependencies =
-    [ "debug"
-    , "effect"
+    [ "effect"
     , "aff"
     , "tuples"
     , "foreign-object"
@@ -12,6 +11,7 @@
     , "tidy-codegen"
     , "node-buffer"
     , "node-fs-aff"
+    , "node-path"
     , "language-cst-parser"
     , "argonaut-core"
     , "either"

@@ -36,7 +36,7 @@
 		"psc-package": "^4.0.1",
 		"pulp": "^16.0.2",
 		"puppeteer": "^5.2.0",
-		"purescript": "^0.15.6",
+		"purescript": "^0.15.9",
 		"purs-backend-es": "^1.2.0",
 		"purs-tidy": "^0.9.2",
 		"spago": "^0.21.0",
