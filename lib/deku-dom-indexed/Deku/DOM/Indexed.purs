@@ -647,6 +647,9 @@ type SVGAnimatedPoints (r :: Row Type) = (__nominal :: Proxy "SVGAnimatedPoints"
 type SVGCircleElement (r :: Row Type) =
   (__nominal :: Proxy "SVGCircleElement" | SVGGeometryElement r)
 
+type SVGComponentTransferFunctionElement (r :: Row Type) =
+  (__nominal :: Proxy "SVGComponentTransferFunctionElement" | SVGElement r)
+
 type SVGDefsElement (r :: Row Type) = (__nominal :: Proxy "SVGDefsElement" | SVGGraphicsElement r)
 type SVGDescElement (r :: Row Type) = (__nominal :: Proxy "SVGDescElement" | SVGElement r)
 type SVGElement (r :: Row Type) =
@@ -657,6 +660,109 @@ type SVGElement (r :: Row Type) =
 type SVGElementInstance (r :: Row Type) = (__nominal :: Proxy "SVGElementInstance" | r)
 type SVGEllipseElement (r :: Row Type) =
   (__nominal :: Proxy "SVGEllipseElement" | SVGGeometryElement r)
+
+type SVGFEBlendElement (r :: Row Type) =
+  (__nominal :: Proxy "SVGFEBlendElement" | SVGElement (SVGFilterPrimitiveStandardAttributes r))
+
+type SVGFEColorMatrixElement (r :: Row Type) =
+  ( __nominal :: Proxy "SVGFEColorMatrixElement"
+  | SVGElement (SVGFilterPrimitiveStandardAttributes r)
+  )
+
+type SVGFEComponentTransferElement (r :: Row Type) =
+  ( __nominal :: Proxy "SVGFEComponentTransferElement"
+  | SVGElement (SVGFilterPrimitiveStandardAttributes r)
+  )
+
+type SVGFECompositeElement (r :: Row Type) =
+  (__nominal :: Proxy "SVGFECompositeElement" | SVGElement (SVGFilterPrimitiveStandardAttributes r))
+
+type SVGFEConvolveMatrixElement (r :: Row Type) =
+  ( __nominal :: Proxy "SVGFEConvolveMatrixElement"
+  | SVGElement (SVGFilterPrimitiveStandardAttributes r)
+  )
+
+type SVGFEDiffuseLightingElement (r :: Row Type) =
+  ( __nominal :: Proxy "SVGFEDiffuseLightingElement"
+  | SVGElement (SVGFilterPrimitiveStandardAttributes r)
+  )
+
+type SVGFEDisplacementMapElement (r :: Row Type) =
+  ( __nominal :: Proxy "SVGFEDisplacementMapElement"
+  | SVGElement (SVGFilterPrimitiveStandardAttributes r)
+  )
+
+type SVGFEDistantLightElement (r :: Row Type) =
+  (__nominal :: Proxy "SVGFEDistantLightElement" | SVGElement r)
+
+type SVGFEDropShadowElement (r :: Row Type) =
+  ( __nominal :: Proxy "SVGFEDropShadowElement"
+  | SVGElement (SVGFilterPrimitiveStandardAttributes r)
+  )
+
+type SVGFEFloodElement (r :: Row Type) =
+  (__nominal :: Proxy "SVGFEFloodElement" | SVGElement (SVGFilterPrimitiveStandardAttributes r))
+
+type SVGFEFuncAElement (r :: Row Type) =
+  (__nominal :: Proxy "SVGFEFuncAElement" | SVGComponentTransferFunctionElement r)
+
+type SVGFEFuncBElement (r :: Row Type) =
+  (__nominal :: Proxy "SVGFEFuncBElement" | SVGComponentTransferFunctionElement r)
+
+type SVGFEFuncGElement (r :: Row Type) =
+  (__nominal :: Proxy "SVGFEFuncGElement" | SVGComponentTransferFunctionElement r)
+
+type SVGFEFuncRElement (r :: Row Type) =
+  (__nominal :: Proxy "SVGFEFuncRElement" | SVGComponentTransferFunctionElement r)
+
+type SVGFEGaussianBlurElement (r :: Row Type) =
+  ( __nominal :: Proxy "SVGFEGaussianBlurElement"
+  | SVGElement (SVGFilterPrimitiveStandardAttributes r)
+  )
+
+type SVGFEImageElement (r :: Row Type) =
+  ( __nominal :: Proxy "SVGFEImageElement"
+  | SVGElement (SVGURIReference (SVGFilterPrimitiveStandardAttributes r))
+  )
+
+type SVGFEMergeElement (r :: Row Type) =
+  (__nominal :: Proxy "SVGFEMergeElement" | SVGElement (SVGFilterPrimitiveStandardAttributes r))
+
+type SVGFEMergeNodeElement (r :: Row Type) =
+  (__nominal :: Proxy "SVGFEMergeNodeElement" | SVGElement r)
+
+type SVGFEMorphologyElement (r :: Row Type) =
+  ( __nominal :: Proxy "SVGFEMorphologyElement"
+  | SVGElement (SVGFilterPrimitiveStandardAttributes r)
+  )
+
+type SVGFEOffsetElement (r :: Row Type) =
+  (__nominal :: Proxy "SVGFEOffsetElement" | SVGElement (SVGFilterPrimitiveStandardAttributes r))
+
+type SVGFEPointLightElement (r :: Row Type) =
+  (__nominal :: Proxy "SVGFEPointLightElement" | SVGElement r)
+
+type SVGFESpecularLightingElement (r :: Row Type) =
+  ( __nominal :: Proxy "SVGFESpecularLightingElement"
+  | SVGElement (SVGFilterPrimitiveStandardAttributes r)
+  )
+
+type SVGFESpotLightElement (r :: Row Type) =
+  (__nominal :: Proxy "SVGFESpotLightElement" | SVGElement r)
+
+type SVGFETileElement (r :: Row Type) =
+  (__nominal :: Proxy "SVGFETileElement" | SVGElement (SVGFilterPrimitiveStandardAttributes r))
+
+type SVGFETurbulenceElement (r :: Row Type) =
+  ( __nominal :: Proxy "SVGFETurbulenceElement"
+  | SVGElement (SVGFilterPrimitiveStandardAttributes r)
+  )
+
+type SVGFilterElement (r :: Row Type) =
+  (__nominal :: Proxy "SVGFilterElement" | SVGElement (SVGURIReference r))
+
+type SVGFilterPrimitiveStandardAttributes (r :: Row Type) =
+  (__nominal :: Proxy "SVGFilterPrimitiveStandardAttributes" | r)
 
 type SVGFitToViewBox (r :: Row Type) = (__nominal :: Proxy "SVGFitToViewBox" | r)
 type SVGForeignObjectElement (r :: Row Type) =
@@ -1775,6 +1881,170 @@ view = elementify2 "view"
 
 view_ :: Array Nut -> Nut
 view_ = elementify2 "view" []
+
+filter :: Array (Event (Attribute (Indexed (SVGFilterElement ())))) -> Array Nut -> Nut
+filter = elementify2 "filter"
+
+filter_ :: Array Nut -> Nut
+filter_ = elementify2 "filter" []
+
+feBlend :: Array (Event (Attribute (Indexed (SVGFEBlendElement ())))) -> Array Nut -> Nut
+feBlend = elementify2 "feBlend"
+
+feBlend_ :: Array Nut -> Nut
+feBlend_ = elementify2 "feBlend" []
+
+feColorMatrix
+  :: Array (Event (Attribute (Indexed (SVGFEColorMatrixElement ())))) -> Array Nut -> Nut
+feColorMatrix = elementify2 "feColorMatrix"
+
+feColorMatrix_ :: Array Nut -> Nut
+feColorMatrix_ = elementify2 "feColorMatrix" []
+
+feComponentTransfer
+  :: Array (Event (Attribute (Indexed (SVGFEComponentTransferElement ())))) -> Array Nut -> Nut
+feComponentTransfer = elementify2 "feComponentTransfer"
+
+feComponentTransfer_ :: Array Nut -> Nut
+feComponentTransfer_ = elementify2 "feComponentTransfer" []
+
+feFuncR :: Array (Event (Attribute (Indexed (SVGFEFuncRElement ())))) -> Array Nut -> Nut
+feFuncR = elementify2 "feFuncR"
+
+feFuncR_ :: Array Nut -> Nut
+feFuncR_ = elementify2 "feFuncR" []
+
+feFuncG :: Array (Event (Attribute (Indexed (SVGFEFuncGElement ())))) -> Array Nut -> Nut
+feFuncG = elementify2 "feFuncG"
+
+feFuncG_ :: Array Nut -> Nut
+feFuncG_ = elementify2 "feFuncG" []
+
+feFuncB :: Array (Event (Attribute (Indexed (SVGFEFuncBElement ())))) -> Array Nut -> Nut
+feFuncB = elementify2 "feFuncB"
+
+feFuncB_ :: Array Nut -> Nut
+feFuncB_ = elementify2 "feFuncB" []
+
+feFuncA :: Array (Event (Attribute (Indexed (SVGFEFuncAElement ())))) -> Array Nut -> Nut
+feFuncA = elementify2 "feFuncA"
+
+feFuncA_ :: Array Nut -> Nut
+feFuncA_ = elementify2 "feFuncA" []
+
+feComposite :: Array (Event (Attribute (Indexed (SVGFECompositeElement ())))) -> Array Nut -> Nut
+feComposite = elementify2 "feComposite"
+
+feComposite_ :: Array Nut -> Nut
+feComposite_ = elementify2 "feComposite" []
+
+feConvolveMatrix
+  :: Array (Event (Attribute (Indexed (SVGFEConvolveMatrixElement ())))) -> Array Nut -> Nut
+feConvolveMatrix = elementify2 "feConvolveMatrix"
+
+feConvolveMatrix_ :: Array Nut -> Nut
+feConvolveMatrix_ = elementify2 "feConvolveMatrix" []
+
+feDiffuseLighting
+  :: Array (Event (Attribute (Indexed (SVGFEDiffuseLightingElement ())))) -> Array Nut -> Nut
+feDiffuseLighting = elementify2 "feDiffuseLighting"
+
+feDiffuseLighting_ :: Array Nut -> Nut
+feDiffuseLighting_ = elementify2 "feDiffuseLighting" []
+
+feDisplacementMap
+  :: Array (Event (Attribute (Indexed (SVGFEDisplacementMapElement ())))) -> Array Nut -> Nut
+feDisplacementMap = elementify2 "feDisplacementMap"
+
+feDisplacementMap_ :: Array Nut -> Nut
+feDisplacementMap_ = elementify2 "feDisplacementMap" []
+
+feDropShadow :: Array (Event (Attribute (Indexed (SVGFEDropShadowElement ())))) -> Array Nut -> Nut
+feDropShadow = elementify2 "feDropShadow"
+
+feDropShadow_ :: Array Nut -> Nut
+feDropShadow_ = elementify2 "feDropShadow" []
+
+feFlood :: Array (Event (Attribute (Indexed (SVGFEFloodElement ())))) -> Array Nut -> Nut
+feFlood = elementify2 "feFlood"
+
+feFlood_ :: Array Nut -> Nut
+feFlood_ = elementify2 "feFlood" []
+
+feGaussianBlur
+  :: Array (Event (Attribute (Indexed (SVGFEGaussianBlurElement ())))) -> Array Nut -> Nut
+feGaussianBlur = elementify2 "feGaussianBlur"
+
+feGaussianBlur_ :: Array Nut -> Nut
+feGaussianBlur_ = elementify2 "feGaussianBlur" []
+
+feImage :: Array (Event (Attribute (Indexed (SVGFEImageElement ())))) -> Array Nut -> Nut
+feImage = elementify2 "feImage"
+
+feImage_ :: Array Nut -> Nut
+feImage_ = elementify2 "feImage" []
+
+feMerge :: Array (Event (Attribute (Indexed (SVGFEMergeElement ())))) -> Array Nut -> Nut
+feMerge = elementify2 "feMerge"
+
+feMerge_ :: Array Nut -> Nut
+feMerge_ = elementify2 "feMerge" []
+
+feMergeNode :: Array (Event (Attribute (Indexed (SVGFEMergeNodeElement ())))) -> Array Nut -> Nut
+feMergeNode = elementify2 "feMergeNode"
+
+feMergeNode_ :: Array Nut -> Nut
+feMergeNode_ = elementify2 "feMergeNode" []
+
+feMorphology :: Array (Event (Attribute (Indexed (SVGFEMorphologyElement ())))) -> Array Nut -> Nut
+feMorphology = elementify2 "feMorphology"
+
+feMorphology_ :: Array Nut -> Nut
+feMorphology_ = elementify2 "feMorphology" []
+
+feOffset :: Array (Event (Attribute (Indexed (SVGFEOffsetElement ())))) -> Array Nut -> Nut
+feOffset = elementify2 "feOffset"
+
+feOffset_ :: Array Nut -> Nut
+feOffset_ = elementify2 "feOffset" []
+
+feSpecularLighting
+  :: Array (Event (Attribute (Indexed (SVGFESpecularLightingElement ())))) -> Array Nut -> Nut
+feSpecularLighting = elementify2 "feSpecularLighting"
+
+feSpecularLighting_ :: Array Nut -> Nut
+feSpecularLighting_ = elementify2 "feSpecularLighting" []
+
+feTile :: Array (Event (Attribute (Indexed (SVGFETileElement ())))) -> Array Nut -> Nut
+feTile = elementify2 "feTile"
+
+feTile_ :: Array Nut -> Nut
+feTile_ = elementify2 "feTile" []
+
+feTurbulence :: Array (Event (Attribute (Indexed (SVGFETurbulenceElement ())))) -> Array Nut -> Nut
+feTurbulence = elementify2 "feTurbulence"
+
+feTurbulence_ :: Array Nut -> Nut
+feTurbulence_ = elementify2 "feTurbulence" []
+
+feDistantLight
+  :: Array (Event (Attribute (Indexed (SVGFEDistantLightElement ())))) -> Array Nut -> Nut
+feDistantLight = elementify2 "feDistantLight"
+
+feDistantLight_ :: Array Nut -> Nut
+feDistantLight_ = elementify2 "feDistantLight" []
+
+fePointLight :: Array (Event (Attribute (Indexed (SVGFEPointLightElement ())))) -> Array Nut -> Nut
+fePointLight = elementify2 "fePointLight"
+
+fePointLight_ :: Array Nut -> Nut
+fePointLight_ = elementify2 "fePointLight" []
+
+feSpotLight :: Array (Event (Attribute (Indexed (SVGFESpotLightElement ())))) -> Array Nut -> Nut
+feSpotLight = elementify2 "feSpotLight"
+
+feSpotLight_ :: Array Nut -> Nut
+feSpotLight_ = elementify2 "feSpotLight" []
 
 boolAttributeValue :: Boolean -> AttributeValue
 boolAttributeValue = prop' <<< Show.show

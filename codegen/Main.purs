@@ -47,6 +47,14 @@ svgInterfaceReference :: String
 svgInterfaceReference =
     "https://raw.githubusercontent.com/w3c/webref/curated/ed/idlparsed/SVG2.json"
 
+svgFilterTagReference :: String
+svgFilterTagReference =
+    "https://raw.githubusercontent.com/w3c/webref/curated/ed/elements/filter-effects-1.json"
+
+svgFilterInterfaceReference :: String
+svgFilterInterfaceReference =
+    "https://raw.githubusercontent.com/w3c/webref/curated/ed/idlparsed/filter-effects-1.json"
+
 ariaInterfaceReference :: String
 ariaInterfaceReference =
     "https://raw.githubusercontent.com/w3c/webref/curated/ed/idlparsed/wai-aria-1.2.json"
@@ -57,21 +65,25 @@ generate = do
     FS.createDir "codegen/cache/svg"
     FS.createDir "codegen/cache/aria"
 
-    keywordSpec <- FS.cachedFetch "./codegen/cache/html/keyword.json" keywordReference :: _ KeywordSpec
+    keyword <- FS.cachedFetch "./codegen/cache/html/keyword.json" keywordReference :: _ KeywordSpec
 
-    htmlTagSpec <- FS.cachedFetch "./codegen/cache/html/tags.json" htmlTagReference :: _ TagSpec
-    htmlInterfaceSpec <- FS.cachedFetch "./codegen/cache/html/interface.json" htmlInterfaceReference :: _ InterfaceSpec
+    htmlTag <- FS.cachedFetch "./codegen/cache/html/tags.json" htmlTagReference :: _ TagSpec
+    htmlInterface <- FS.cachedFetch "./codegen/cache/html/interface.json" htmlInterfaceReference :: _ InterfaceSpec
 
-    ariaInterfaceSpec <- FS.cachedFetch "./codegen/cache/dom/interface.json" ariaInterfaceReference :: _ InterfaceSpec
+    ariaInterface <- FS.cachedFetch "./codegen/cache/dom/interface.json" ariaInterfaceReference :: _ InterfaceSpec
 
-    svgTagSpec <- FS.cachedFetch "./codegen/cache/svg/tags.json" svgTagReference :: _ TagSpec
-    svgInterfaceSpec <- FS.cachedFetch "./codegen/cache/svg/interface.json" svgInterfaceReference :: _ InterfaceSpec
+    svgTag <- FS.cachedFetch "./codegen/cache/svg/tags.json" svgTagReference :: _ TagSpec
+    svgInterface <- FS.cachedFetch "./codegen/cache/svg/interface.json" svgInterfaceReference :: _ InterfaceSpec
+
+    svgFilterTag <- FS.cachedFetch "./codegen/cache/svg/filter-tags.json" svgFilterTagReference :: _ TagSpec
+    svgFilterInterface <- FS.cachedFetch "./codegen/cache/svg/filter-interface.json" svgFilterInterfaceReference :: _ InterfaceSpec
+
 
     let
         -- | We could parse and union the actual spec but it contains mostly empty garbage and the only thing we are 
         -- | interested in is the link to ARIA.
-        domSpec :: IDL
-        domSpec = 
+        dom :: IDL
+        dom = 
             { idlNames : Foreign.singleton "Element"
                 { type : "interface"
                 , name : "Element"
@@ -87,21 +99,23 @@ generate = do
                 ]
             }
 
-        tagSpec :: Array Tag
-        tagSpec = Array.concat
-            [ htmlTagSpec.elements
-            , svgTagSpec.elements
+        tag :: Array Tag
+        tag = Array.concat
+            [ htmlTag.elements
+            , svgTag.elements
+            , svgFilterTag.elements
             ]
 
-        interfaceSpec :: IDL
-        interfaceSpec =
-            mergeIDL domSpec
-                $ mergeIDL htmlInterfaceSpec.idlparsed
-                $ mergeIDL svgInterfaceSpec.idlparsed ariaInterfaceSpec.idlparsed
+        interface :: IDL
+        interface =
+            mergeIDL dom
+                $ mergeIDL htmlInterface.idlparsed
+                $ mergeIDL svgFilterInterface.idlparsed
+                $ mergeIDL svgInterface.idlparsed ariaInterface.idlparsed
 
 
-    Indexed.generate keywordSpec.dfns tagSpec interfaceSpec
-    DOM.generate keywordSpec.dfns tagSpec interfaceSpec
+    Indexed.generate keyword.dfns tag interface
+    DOM.generate keyword.dfns tag interface
 
     Parser.generate
 
