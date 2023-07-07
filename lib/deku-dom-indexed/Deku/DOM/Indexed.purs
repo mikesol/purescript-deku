@@ -1,1301 +1,4 @@
-module Deku.DOM.Indexed
-  ( html
-  , html_
-  , head
-  , head_
-  , title
-  , title_
-  , base
-  , base_
-  , link
-  , link_
-  , meta
-  , meta_
-  , style
-  , style_
-  , body
-  , body_
-  , article
-  , article_
-  , section
-  , section_
-  , nav
-  , nav_
-  , aside
-  , aside_
-  , h1
-  , h1_
-  , h2
-  , h2_
-  , h3
-  , h3_
-  , h4
-  , h4_
-  , h5
-  , h5_
-  , h6
-  , h6_
-  , hgroup
-  , hgroup_
-  , header
-  , header_
-  , footer
-  , footer_
-  , address
-  , address_
-  , p
-  , p_
-  , hr
-  , hr_
-  , pre
-  , pre_
-  , blockquote
-  , blockquote_
-  , ol
-  , ol_
-  , ul
-  , ul_
-  , menu
-  , menu_
-  , li
-  , li_
-  , dl
-  , dl_
-  , dt
-  , dt_
-  , dd
-  , dd_
-  , figure
-  , figure_
-  , figcaption
-  , figcaption_
-  , main
-  , main_
-  , search
-  , search_
-  , div
-  , div_
-  , a
-  , a_
-  , em
-  , em_
-  , strong
-  , strong_
-  , small
-  , small_
-  , s
-  , s_
-  , cite
-  , cite_
-  , q
-  , q_
-  , dfn
-  , dfn_
-  , abbr
-  , abbr_
-  , ruby
-  , ruby_
-  , rt
-  , rt_
-  , rp
-  , rp_
-  , xdata
-  , xdata_
-  , time
-  , time_
-  , code
-  , code_
-  , var
-  , var_
-  , samp
-  , samp_
-  , kbd
-  , kbd_
-  , sub
-  , sub_
-  , sup
-  , sup_
-  , i
-  , i_
-  , b
-  , b_
-  , u
-  , u_
-  , mark
-  , mark_
-  , bdi
-  , bdi_
-  , bdo
-  , bdo_
-  , span
-  , span_
-  , br
-  , br_
-  , wbr
-  , wbr_
-  , ins
-  , ins_
-  , del
-  , del_
-  , picture
-  , picture_
-  , source
-  , source_
-  , img
-  , img_
-  , iframe
-  , iframe_
-  , embed
-  , embed_
-  , object
-  , object_
-  , video
-  , video_
-  , audio
-  , audio_
-  , track
-  , track_
-  , map
-  , map_
-  , area
-  , area_
-  , table
-  , table_
-  , caption
-  , caption_
-  , colgroup
-  , colgroup_
-  , col
-  , col_
-  , tbody
-  , tbody_
-  , thead
-  , thead_
-  , tfoot
-  , tfoot_
-  , tr
-  , tr_
-  , td
-  , td_
-  , th
-  , th_
-  , form
-  , form_
-  , label
-  , label_
-  , input
-  , input_
-  , button
-  , button_
-  , select
-  , select_
-  , datalist
-  , datalist_
-  , optgroup
-  , optgroup_
-  , option
-  , option_
-  , textarea
-  , textarea_
-  , output
-  , output_
-  , progress
-  , progress_
-  , meter
-  , meter_
-  , fieldset
-  , fieldset_
-  , legend
-  , legend_
-  , details
-  , details_
-  , summary
-  , summary_
-  , dialog
-  , dialog_
-  , script
-  , script_
-  , noscript
-  , noscript_
-  , template
-  , template_
-  , slot
-  , slot_
-  , canvas
-  , canvas_
-  , applet
-  , applet_
-  , acronym
-  , acronym_
-  , bgsound
-  , bgsound_
-  , dir
-  , dir_
-  , frame
-  , frame_
-  , frameset
-  , frameset_
-  , noframes
-  , noframes_
-  , isindex
-  , isindex_
-  , keygen
-  , keygen_
-  , listing
-  , listing_
-  , menuitem
-  , menuitem_
-  , nextid
-  , nextid_
-  , noembed
-  , noembed_
-  , param
-  , param_
-  , plaintext
-  , plaintext_
-  , rb
-  , rb_
-  , rtc
-  , rtc_
-  , strike
-  , strike_
-  , xmp
-  , xmp_
-  , basefont
-  , basefont_
-  , big
-  , big_
-  , blink
-  , blink_
-  , center
-  , center_
-  , font
-  , font_
-  , marquee
-  , marquee_
-  , multicol
-  , multicol_
-  , nobr
-  , nobr_
-  , spacer
-  , spacer_
-  , tt
-  , tt_
-  , svg
-  , svg_
-  , g
-  , g_
-  , defs
-  , defs_
-  , symbol
-  , symbol_
-  , use
-  , use_
-  , switch
-  , switch_
-  , desc
-  , desc_
-  , metadata
-  , metadata_
-  , path
-  , path_
-  , rect
-  , rect_
-  , circle
-  , circle_
-  , ellipse
-  , ellipse_
-  , line
-  , line_
-  , polyline
-  , polyline_
-  , polygon
-  , polygon_
-  , text
-  , text_
-  , tspan
-  , tspan_
-  , textPath
-  , textPath_
-  , image
-  , image_
-  , foreignObject
-  , foreignObject_
-  , marker
-  , marker_
-  , linearGradient
-  , linearGradient_
-  , radialGradient
-  , radialGradient_
-  , stop
-  , stop_
-  , pattern
-  , pattern_
-  , view
-  , view_
-  , Indexed(..)
-  , ARIAMixin
-  , Element
-  , ElementContentEditable
-  , GlobalEventHandlers
-  , HTMLAreaElement
-  , HTMLAudioElement
-  , HTMLBRElement
-  , HTMLBaseElement
-  , HTMLBodyElement
-  , HTMLButtonElement
-  , HTMLCanvasElement
-  , HTMLDListElement
-  , HTMLDataElement
-  , HTMLDataListElement
-  , HTMLDetailsElement
-  , HTMLDialogElement
-  , HTMLDirectoryElement
-  , HTMLDivElement
-  , HTMLElement
-  , HTMLEmbedElement
-  , HTMLFieldSetElement
-  , HTMLFontElement
-  , HTMLFormElement
-  , HTMLFrameElement
-  , HTMLFrameSetElement
-  , HTMLHRElement
-  , HTMLHeadElement
-  , HTMLHeadingElement
-  , HTMLHtmlElement
-  , HTMLHyperlinkElementUtils
-  , HTMLIFrameElement
-  , HTMLImageElement
-  , HTMLInputElement
-  , HTMLLIElement
-  , HTMLLabelElement
-  , HTMLLegendElement
-  , HTMLLinkElement
-  , HTMLMapElement
-  , HTMLMarqueeElement
-  , HTMLMediaElement
-  , HTMLMenuElement
-  , HTMLMetaElement
-  , HTMLMeterElement
-  , HTMLModElement
-  , HTMLOListElement
-  , HTMLObjectElement
-  , HTMLOptGroupElement
-  , HTMLOptionElement
-  , HTMLOrSVGElement
-  , HTMLOutputElement
-  , HTMLParagraphElement
-  , HTMLParamElement
-  , HTMLPictureElement
-  , HTMLPreElement
-  , HTMLProgressElement
-  , HTMLQuoteElement
-  , HTMLSelectElement
-  , HTMLSlotElement
-  , HTMLSourceElement
-  , HTMLSpanElement
-  , HTMLTableCaptionElement
-  , HTMLTableCellElement
-  , HTMLTableColElement
-  , HTMLTableElement
-  , HTMLTableRowElement
-  , HTMLTableSectionElement
-  , HTMLTemplateElement
-  , HTMLTextAreaElement
-  , HTMLTimeElement
-  , HTMLTrackElement
-  , HTMLUListElement
-  , HTMLUnknownElement
-  , HTMLVideoElement
-  , PopoverInvokerElement
-  , SVGAElement
-  , SVGAnimatedPoints
-  , SVGCircleElement
-  , SVGDefsElement
-  , SVGDescElement
-  , SVGElement
-  , SVGElementInstance
-  , SVGEllipseElement
-  , SVGFitToViewBox
-  , SVGForeignObjectElement
-  , SVGGElement
-  , SVGGeometryElement
-  , SVGGradientElement
-  , SVGGraphicsElement
-  , SVGImageElement
-  , SVGLineElement
-  , SVGLinearGradientElement
-  , SVGMarkerElement
-  , SVGMetadataElement
-  , SVGPathElement
-  , SVGPatternElement
-  , SVGPolygonElement
-  , SVGPolylineElement
-  , SVGRadialGradientElement
-  , SVGRectElement
-  , SVGSVGElement
-  , SVGScriptElement
-  , SVGStopElement
-  , SVGStyleElement
-  , SVGSwitchElement
-  , SVGSymbolElement
-  , SVGTSpanElement
-  , SVGTests
-  , SVGTextContentElement
-  , SVGTextElement
-  , SVGTextPathElement
-  , SVGTextPositioningElement
-  , SVGTitleElement
-  , SVGURIReference
-  , SVGUseElement
-  , SVGViewElement
-  , WindowEventHandlers
-  , Keyword(..)
-  , __anonymous
-  , __useCredentials
-  , __lazy
-  , __eager
-  , __high
-  , __low
-  , __auto
-  , __ltr
-  , __rtl
-  , __applicationName
-  , __author
-  , __description
-  , __generator
-  , __keywords
-  , __referrer
-  , __themeColor
-  , __colorScheme
-  , __contentLanguage
-  , __contentType
-  , __defaultStyle
-  , __refresh
-  , __setCookie
-  , __xUaCompatible
-  , __contentSecurityPolicy
-  , __x1
-  , __a
-  , __xA
-  , __i
-  , __xI
-  , __alternate
-  , __bookmark
-  , __canonical
-  , __dnsPrefetch
-  , __external
-  , __help
-  , __icon
-  , __license
-  , __manifest
-  , __modulepreload
-  , __nofollow
-  , __noopener
-  , __noreferrer
-  , __opener
-  , __pingback
-  , __preconnect
-  , __prefetch
-  , __preload
-  , __search
-  , __stylesheet
-  , __tag
-  , __next
-  , __prev
-  , __sync
-  , __async
-  , __subtitles
-  , __captions
-  , __descriptions
-  , __chapters
-  , __metadata
-  , __none
-  , __circleState
-  , __defaultState
-  , __polygonState
-  , __rectangleState
-  , __row
-  , __col
-  , __rowgroup
-  , __colgroup
-  , __hidden
-  , __text
-  , __tel
-  , __url
-  , __email
-  , __password
-  , __date
-  , __month
-  , __week
-  , __time
-  , __datetimeLocal
-  , __number
-  , __range
-  , __color
-  , __checkbox
-  , __radio
-  , __file
-  , __submit
-  , __image
-  , __reset
-  , __button
-  , __soft
-  , __hard
-  , __get
-  , __post
-  , __dialog
-  , __applicationXWwwFormUrlencoded
-  , __multipartFormData
-  , __textPlain
-  , __shipping
-  , __billing
-  , __home
-  , __work
-  , __mobile
-  , __fax
-  , __pager
-  , __off
-  , __on
-  , __name
-  , __honorificPrefix
-  , __givenName
-  , __additionalName
-  , __familyName
-  , __honorificSuffix
-  , __nickname
-  , __organizationTitle
-  , __username
-  , __newPassword
-  , __currentPassword
-  , __oneTimeCode
-  , __organization
-  , __streetAddress
-  , __addressLine1
-  , __addressLine2
-  , __addressLine3
-  , __addressLevel4
-  , __addressLevel3
-  , __addressLevel2
-  , __addressLevel1
-  , __country
-  , __countryName
-  , __postalCode
-  , __ccName
-  , __ccGivenName
-  , __ccAdditionalName
-  , __ccFamilyName
-  , __ccNumber
-  , __ccExp
-  , __ccExpMonth
-  , __ccExpYear
-  , __ccCsc
-  , __ccType
-  , __transactionCurrency
-  , __transactionAmount
-  , __language
-  , __bday
-  , __bdayDay
-  , __bdayMonth
-  , __bdayYear
-  , __sex
-  , __photo
-  , __telCountryCode
-  , __telNational
-  , __telAreaCode
-  , __telLocal
-  , __telLocalPrefix
-  , __telLocalSuffix
-  , __telExtension
-  , __impp
-  , __value
-  , __untilFound
-  , __sentences
-  , __words
-  , __characters
-  , __numeric
-  , __decimal
-  , __enter
-  , __done
-  , __go
-  , __previous
-  , __send
-  , __manual
-  , __toggle
-  , __show
-  , __hide
-  , __allowPopups
-  , __allowTopNavigation
-  , __allowTopNavigationByUserActivation
-  , __allowSameOrigin
-  , __allowForms
-  , __allowPointerLock
-  , __allowScripts
-  , __allowPopupsToEscapeSandbox
-  , __allowModals
-  , __allowOrientationLock
-  , __allowPresentation
-  , __allowDownloads
-  , __allowTopNavigationToCustomProtocols
-  , _crossorigin
-  , _crossorigin_
-  , class IsCrossorigin
-  , isCrossorigin
-  , _loading
-  , _loading_
-  , class IsLoading
-  , isLoading
-  , _fetchpriority
-  , _fetchpriority_
-  , class IsFetchpriority
-  , isFetchpriority
-  , _dir
-  , _dir_
-  , class IsDir
-  , isDir
-  , _name
-  , _name_
-  , class IsName
-  , isName
-  , _httpEquiv
-  , _httpEquiv_
-  , class IsHttpEquiv
-  , isHttpEquiv
-  , _xtype
-  , _xtype_
-  , class IsXtype
-  , isXtype
-  , _rel
-  , _rel_
-  , class IsRel
-  , isRel
-  , _decoding
-  , _decoding_
-  , class IsDecoding
-  , isDecoding
-  , _kind
-  , _kind_
-  , class IsKind
-  , isKind
-  , _preload
-  , _preload_
-  , class IsPreload
-  , isPreload
-  , _shape
-  , _shape_
-  , class IsShape
-  , isShape
-  , _scope
-  , _scope_
-  , class IsScope
-  , isScope
-  , _wrap
-  , _wrap_
-  , class IsWrap
-  , isWrap
-  , _method
-  , _method_
-  , class IsMethod
-  , isMethod
-  , _enctype
-  , _enctype_
-  , class IsEnctype
-  , isEnctype
-  , _autocomplete
-  , _autocomplete_
-  , class IsAutocomplete
-  , isAutocomplete
-  , _entry
-  , _entry_
-  , class IsEntry
-  , isEntry
-  , _hidden
-  , _hidden_
-  , class IsHidden
-  , isHidden
-  , _autocapitalize
-  , _autocapitalize_
-  , class IsAutocapitalize
-  , isAutocapitalize
-  , _inputmode
-  , _inputmode_
-  , class IsInputmode
-  , isInputmode
-  , _enterkeyhint
-  , _enterkeyhint_
-  , class IsEnterkeyhint
-  , isEnterkeyhint
-  , _popover
-  , _popover_
-  , class IsPopover
-  , isPopover
-  , _popovertargetaction
-  , _popovertargetaction_
-  , class IsPopovertargetaction
-  , isPopovertargetaction
-  , _sandbox
-  , _sandbox_
-  , class IsSandbox
-  , isSandbox
-  , _role
-  , _role_
-  , _ariaAtomic
-  , _ariaAtomic_
-  , _ariaAutoComplete
-  , _ariaAutoComplete_
-  , _ariaBusy
-  , _ariaBusy_
-  , _ariaChecked
-  , _ariaChecked_
-  , _ariaColCount
-  , _ariaColCount_
-  , _ariaColIndex
-  , _ariaColIndex_
-  , _ariaColIndexText
-  , _ariaColIndexText_
-  , _ariaColSpan
-  , _ariaColSpan_
-  , _ariaCurrent
-  , _ariaCurrent_
-  , _ariaDescription
-  , _ariaDescription_
-  , _ariaDisabled
-  , _ariaDisabled_
-  , _ariaExpanded
-  , _ariaExpanded_
-  , _ariaHasPopup
-  , _ariaHasPopup_
-  , _ariaHidden
-  , _ariaHidden_
-  , _ariaInvalid
-  , _ariaInvalid_
-  , _ariaKeyShortcuts
-  , _ariaKeyShortcuts_
-  , _ariaLabel
-  , _ariaLabel_
-  , _ariaLevel
-  , _ariaLevel_
-  , _ariaLive
-  , _ariaLive_
-  , _ariaModal
-  , _ariaModal_
-  , _ariaMultiLine
-  , _ariaMultiLine_
-  , _ariaMultiSelectable
-  , _ariaMultiSelectable_
-  , _ariaOrientation
-  , _ariaOrientation_
-  , _ariaPlaceholder
-  , _ariaPlaceholder_
-  , _ariaPosInSet
-  , _ariaPosInSet_
-  , _ariaPressed
-  , _ariaPressed_
-  , _ariaReadOnly
-  , _ariaReadOnly_
-  , _ariaRequired
-  , _ariaRequired_
-  , _ariaRoleDescription
-  , _ariaRoleDescription_
-  , _ariaRowCount
-  , _ariaRowCount_
-  , _ariaRowIndex
-  , _ariaRowIndex_
-  , _ariaRowIndexText
-  , _ariaRowIndexText_
-  , _ariaRowSpan
-  , _ariaRowSpan_
-  , _ariaSelected
-  , _ariaSelected_
-  , _ariaSetSize
-  , _ariaSetSize_
-  , _ariaSort
-  , _ariaSort_
-  , _ariaValueMax
-  , _ariaValueMax_
-  , _ariaValueMin
-  , _ariaValueMin_
-  , _ariaValueNow
-  , _ariaValueNow_
-  , _ariaValueText
-  , _ariaValueText_
-  , _contentEditable
-  , _contentEditable_
-  , _enterKeyHint
-  , _enterKeyHint_
-  , _inputMode
-  , _inputMode_
-  , _onabort
-  , _onabort_
-  , _onauxclick
-  , _onauxclick_
-  , _onbeforeinput
-  , _onbeforeinput_
-  , _onbeforematch
-  , _onbeforematch_
-  , _onbeforetoggle
-  , _onbeforetoggle_
-  , _onblur
-  , _onblur_
-  , _oncancel
-  , _oncancel_
-  , _oncanplay
-  , _oncanplay_
-  , _oncanplaythrough
-  , _oncanplaythrough_
-  , _onchange
-  , _onchange_
-  , _onclick
-  , _onclick_
-  , _onclose
-  , _onclose_
-  , _oncontextlost
-  , _oncontextlost_
-  , _oncontextmenu
-  , _oncontextmenu_
-  , _oncontextrestored
-  , _oncontextrestored_
-  , _oncopy
-  , _oncopy_
-  , _oncuechange
-  , _oncuechange_
-  , _oncut
-  , _oncut_
-  , _ondblclick
-  , _ondblclick_
-  , _ondrag
-  , _ondrag_
-  , _ondragend
-  , _ondragend_
-  , _ondragenter
-  , _ondragenter_
-  , _ondragleave
-  , _ondragleave_
-  , _ondragover
-  , _ondragover_
-  , _ondragstart
-  , _ondragstart_
-  , _ondrop
-  , _ondrop_
-  , _ondurationchange
-  , _ondurationchange_
-  , _onemptied
-  , _onemptied_
-  , _onended
-  , _onended_
-  , _onfocus
-  , _onfocus_
-  , _onformdata
-  , _onformdata_
-  , _oninput
-  , _oninput_
-  , _oninvalid
-  , _oninvalid_
-  , _onkeydown
-  , _onkeydown_
-  , _onkeypress
-  , _onkeypress_
-  , _onkeyup
-  , _onkeyup_
-  , _onload
-  , _onload_
-  , _onloadeddata
-  , _onloadeddata_
-  , _onloadedmetadata
-  , _onloadedmetadata_
-  , _onloadstart
-  , _onloadstart_
-  , _onmousedown
-  , _onmousedown_
-  , _onmouseenter
-  , _onmouseenter_
-  , _onmouseleave
-  , _onmouseleave_
-  , _onmousemove
-  , _onmousemove_
-  , _onmouseout
-  , _onmouseout_
-  , _onmouseover
-  , _onmouseover_
-  , _onmouseup
-  , _onmouseup_
-  , _onpaste
-  , _onpaste_
-  , _onpause
-  , _onpause_
-  , _onplay
-  , _onplay_
-  , _onplaying
-  , _onplaying_
-  , _onprogress
-  , _onprogress_
-  , _onratechange
-  , _onratechange_
-  , _onreset
-  , _onreset_
-  , _onresize
-  , _onresize_
-  , _onscroll
-  , _onscroll_
-  , _onscrollend
-  , _onscrollend_
-  , _onsecuritypolicyviolation
-  , _onsecuritypolicyviolation_
-  , _onseeked
-  , _onseeked_
-  , _onseeking
-  , _onseeking_
-  , _onselect
-  , _onselect_
-  , _onslotchange
-  , _onslotchange_
-  , _onstalled
-  , _onstalled_
-  , _onsubmit
-  , _onsubmit_
-  , _onsuspend
-  , _onsuspend_
-  , _ontimeupdate
-  , _ontimeupdate_
-  , _ontoggle
-  , _ontoggle_
-  , _onvolumechange
-  , _onvolumechange_
-  , _onwaiting
-  , _onwaiting_
-  , _onwebkitanimationend
-  , _onwebkitanimationend_
-  , _onwebkitanimationiteration
-  , _onwebkitanimationiteration_
-  , _onwebkitanimationstart
-  , _onwebkitanimationstart_
-  , _onwebkittransitionend
-  , _onwebkittransitionend_
-  , _onwheel
-  , _onwheel_
-  , _alt
-  , _alt_
-  , _coords
-  , _coords_
-  , _target
-  , _target_
-  , _download
-  , _download_
-  , _ping
-  , _ping_
-  , _referrerPolicy
-  , _referrerPolicy_
-  , _href
-  , _href_
-  , _disabled
-  , _disabled_
-  , _formAction
-  , _formAction_
-  , _formEnctype
-  , _formEnctype_
-  , _formMethod
-  , _formMethod_
-  , _formNoValidate
-  , _formNoValidate_
-  , _formTarget
-  , _formTarget_
-  , _value
-  , _value_
-  , class IsValue
-  , isValue
-  , _width
-  , _width_
-  , class IsWidth
-  , isWidth
-  , _height
-  , _height_
-  , class IsHeight
-  , isHeight
-  , _open
-  , _open_
-  , _returnValue
-  , _returnValue_
-  , _compact
-  , _compact_
-  , _title
-  , _title_
-  , _lang
-  , _lang_
-  , _translate
-  , _translate_
-  , _inert
-  , _inert_
-  , _accessKey
-  , _accessKey_
-  , _draggable
-  , _draggable_
-  , _spellcheck
-  , _spellcheck_
-  , _innerText
-  , _innerText_
-  , _outerText
-  , _outerText_
-  , _src
-  , _src_
-  , _color
-  , _color_
-  , _face
-  , _face_
-  , _size
-  , _size_
-  , class IsSize
-  , isSize
-  , _acceptCharset
-  , _acceptCharset_
-  , _action
-  , _action_
-  , _encoding
-  , _encoding_
-  , _noValidate
-  , _noValidate_
-  , _scrolling
-  , _scrolling_
-  , _frameBorder
-  , _frameBorder_
-  , _longDesc
-  , _longDesc_
-  , _noResize
-  , _noResize_
-  , _marginHeight
-  , _marginHeight_
-  , _marginWidth
-  , _marginWidth_
-  , _cols
-  , _cols_
-  , class IsCols
-  , isCols
-  , _rows
-  , _rows_
-  , class IsRows
-  , isRows
-  , _protocol
-  , _protocol_
-  , _username
-  , _username_
-  , _password
-  , _password_
-  , _host
-  , _host_
-  , _hostname
-  , _hostname_
-  , _port
-  , _port_
-  , _pathname
-  , _pathname_
-  , _search
-  , _search_
-  , _hash
-  , _hash_
-  , _srcdoc
-  , _srcdoc_
-  , _allow
-  , _allow_
-  , _allowFullscreen
-  , _allowFullscreen_
-  , _srcset
-  , _srcset_
-  , _sizes
-  , _sizes_
-  , _crossOrigin
-  , _crossOrigin_
-  , _useMap
-  , _useMap_
-  , _isMap
-  , _isMap_
-  , _fetchPriority
-  , _fetchPriority_
-  , _accept
-  , _accept_
-  , _defaultChecked
-  , _defaultChecked_
-  , _checked
-  , _checked_
-  , _dirName
-  , _dirName_
-  , _indeterminate
-  , _indeterminate_
-  , _max
-  , _max_
-  , class IsMax
-  , isMax
-  , _maxLength
-  , _maxLength_
-  , _min
-  , _min_
-  , class IsMin
-  , isMin
-  , _minLength
-  , _minLength_
-  , _multiple
-  , _multiple_
-  , _pattern
-  , _pattern_
-  , _placeholder
-  , _placeholder_
-  , _readOnly
-  , _readOnly_
-  , _required
-  , _required_
-  , _step
-  , _step_
-  , _defaultValue
-  , _defaultValue_
-  , _valueAsNumber
-  , _valueAsNumber_
-  , _selectionStart
-  , _selectionStart_
-  , _selectionEnd
-  , _selectionEnd_
-  , _selectionDirection
-  , _selectionDirection_
-  , _htmlFor
-  , _htmlFor_
-  , _as
-  , _as_
-  , _media
-  , _media_
-  , _integrity
-  , _integrity_
-  , _hreflang
-  , _hreflang_
-  , _imageSrcset
-  , _imageSrcset_
-  , _imageSizes
-  , _imageSizes_
-  , _behavior
-  , _behavior_
-  , _bgColor
-  , _bgColor_
-  , _direction
-  , _direction_
-  , _hspace
-  , _hspace_
-  , _loop
-  , _loop_
-  , class IsLoop
-  , isLoop
-  , _scrollAmount
-  , _scrollAmount_
-  , _scrollDelay
-  , _scrollDelay_
-  , _trueSpeed
-  , _trueSpeed_
-  , _vspace
-  , _vspace_
-  , _currentTime
-  , _currentTime_
-  , _defaultPlaybackRate
-  , _defaultPlaybackRate_
-  , _playbackRate
-  , _playbackRate_
-  , _preservesPitch
-  , _preservesPitch_
-  , _autoplay
-  , _autoplay_
-  , _controls
-  , _controls_
-  , _volume
-  , _volume_
-  , _muted
-  , _muted_
-  , _defaultMuted
-  , _defaultMuted_
-  , _content
-  , _content_
-  , _low
-  , _low_
-  , _high
-  , _high_
-  , _optimum
-  , _optimum_
-  , _cite
-  , _cite_
-  , _dateTime
-  , _dateTime_
-  , _reversed
-  , _reversed_
-  , _start
-  , _start_
-  , _xdata
-  , _xdata_
-  , _label
-  , _label_
-  , _defaultSelected
-  , _defaultSelected_
-  , _selected
-  , _selected_
-  , _text
-  , _text_
-  , _nonce
-  , _nonce_
-  , _autofocus
-  , _autofocus_
-  , _tabIndex
-  , _tabIndex_
-  , _valueType
-  , _valueType_
-  , _length
-  , _length_
-  , _selectedIndex
-  , _selectedIndex_
-  , _colSpan
-  , _colSpan_
-  , _rowSpan
-  , _rowSpan_
-  , _headers
-  , _headers_
-  , _abbr
-  , _abbr_
-  , _span
-  , _span_
-  , _srclang
-  , _srclang_
-  , _default
-  , _default_
-  , _poster
-  , _poster_
-  , _playsInline
-  , _playsInline_
-  , _popoverTargetAction
-  , _popoverTargetAction_
-  , _orient
-  , _orient_
-  , _onafterprint
-  , _onafterprint_
-  , _onbeforeprint
-  , _onbeforeprint_
-  , _onhashchange
-  , _onhashchange_
-  , _onlanguagechange
-  , _onlanguagechange_
-  , _onmessage
-  , _onmessage_
-  , _onmessageerror
-  , _onmessageerror_
-  , _onoffline
-  , _onoffline_
-  , _ononline
-  , _ononline_
-  , _onpagehide
-  , _onpagehide_
-  , _onpageshow
-  , _onpageshow_
-  , _onpopstate
-  , _onpopstate_
-  , _onrejectionhandled
-  , _onrejectionhandled_
-  , _onstorage
-  , _onstorage_
-  , _onunhandledrejection
-  , _onunhandledrejection_
-  , _onunload
-  , _onunload_
-  ) where
+module Deku.DOM.Indexed where
 
 import Control.Applicative (pure) as Applicative
 import Control.Category ((<<<))
@@ -1307,6 +10,766 @@ import Deku.Attribute (Cb, Attribute, AttributeValue, unsafeAttribute, prop', cb
 import Deku.Control (elementify2)
 import Deku.Core (Nut)
 import FRP.Event (Event)
+import Type.Proxy (Proxy)
+
+data Indexed (r :: Row Type)
+
+type role Indexed phantom
+type ARIAMixin (r :: Row Type) =
+  ( __nominal :: Proxy "ARIAMixin"
+  , role :: String
+  , ariaAtomic :: String
+  , ariaAutoComplete :: String
+  , ariaBusy :: String
+  , ariaChecked :: String
+  , ariaColCount :: String
+  , ariaColIndex :: String
+  , ariaColIndexText :: String
+  , ariaColSpan :: String
+  , ariaCurrent :: String
+  , ariaDescription :: String
+  , ariaDisabled :: String
+  , ariaExpanded :: String
+  , ariaHasPopup :: String
+  , ariaHidden :: String
+  , ariaInvalid :: String
+  , ariaKeyShortcuts :: String
+  , ariaLabel :: String
+  , ariaLevel :: String
+  , ariaLive :: String
+  , ariaModal :: String
+  , ariaMultiLine :: String
+  , ariaMultiSelectable :: String
+  , ariaOrientation :: String
+  , ariaPlaceholder :: String
+  , ariaPosInSet :: String
+  , ariaPressed :: String
+  , ariaReadOnly :: String
+  , ariaRequired :: String
+  , ariaRoleDescription :: String
+  , ariaRowCount :: String
+  , ariaRowIndex :: String
+  , ariaRowIndexText :: String
+  , ariaRowSpan :: String
+  , ariaSelected :: String
+  , ariaSetSize :: String
+  , ariaSort :: String
+  , ariaValueMax :: String
+  , ariaValueMin :: String
+  , ariaValueNow :: String
+  , ariaValueText :: String
+  | r
+  )
+
+type Element (r :: Row Type) = (__nominal :: Proxy "Element" | ARIAMixin (ARIAMixin r))
+type ElementContentEditable (r :: Row Type) =
+  ( __nominal :: Proxy "ElementContentEditable"
+  , contentEditable :: String
+  , enterKeyHint :: String
+  , inputMode :: String
+  | r
+  )
+
+type GlobalEventHandlers (r :: Row Type) =
+  ( __nominal :: Proxy "GlobalEventHandlers"
+  , onabort :: Cb
+  , onauxclick :: Cb
+  , onbeforeinput :: Cb
+  , onbeforematch :: Cb
+  , onbeforetoggle :: Cb
+  , onblur :: Cb
+  , oncancel :: Cb
+  , oncanplay :: Cb
+  , oncanplaythrough :: Cb
+  , onchange :: Cb
+  , onclick :: Cb
+  , onclose :: Cb
+  , oncontextlost :: Cb
+  , oncontextmenu :: Cb
+  , oncontextrestored :: Cb
+  , oncopy :: Cb
+  , oncuechange :: Cb
+  , oncut :: Cb
+  , ondblclick :: Cb
+  , ondrag :: Cb
+  , ondragend :: Cb
+  , ondragenter :: Cb
+  , ondragleave :: Cb
+  , ondragover :: Cb
+  , ondragstart :: Cb
+  , ondrop :: Cb
+  , ondurationchange :: Cb
+  , onemptied :: Cb
+  , onended :: Cb
+  , onfocus :: Cb
+  , onformdata :: Cb
+  , oninput :: Cb
+  , oninvalid :: Cb
+  , onkeydown :: Cb
+  , onkeypress :: Cb
+  , onkeyup :: Cb
+  , onload :: Cb
+  , onloadeddata :: Cb
+  , onloadedmetadata :: Cb
+  , onloadstart :: Cb
+  , onmousedown :: Cb
+  , onmouseenter :: Cb
+  , onmouseleave :: Cb
+  , onmousemove :: Cb
+  , onmouseout :: Cb
+  , onmouseover :: Cb
+  , onmouseup :: Cb
+  , onpaste :: Cb
+  , onpause :: Cb
+  , onplay :: Cb
+  , onplaying :: Cb
+  , onprogress :: Cb
+  , onratechange :: Cb
+  , onreset :: Cb
+  , onresize :: Cb
+  , onscroll :: Cb
+  , onscrollend :: Cb
+  , onsecuritypolicyviolation :: Cb
+  , onseeked :: Cb
+  , onseeking :: Cb
+  , onselect :: Cb
+  , onslotchange :: Cb
+  , onstalled :: Cb
+  , onsubmit :: Cb
+  , onsuspend :: Cb
+  , ontimeupdate :: Cb
+  , ontoggle :: Cb
+  , onvolumechange :: Cb
+  , onwaiting :: Cb
+  , onwebkitanimationend :: Cb
+  , onwebkitanimationiteration :: Cb
+  , onwebkitanimationstart :: Cb
+  , onwebkittransitionend :: Cb
+  , onwheel :: Cb
+  | r
+  )
+
+type HTMLAreaElement (r :: Row Type) =
+  ( __nominal :: Proxy "HTMLAreaElement"
+  , alt :: String
+  , coords :: String
+  , shape :: String
+  , target :: String
+  , download :: String
+  , ping :: String
+  , rel :: String
+  , referrerPolicy :: String
+  | HTMLElement (HTMLHyperlinkElementUtils r)
+  )
+
+type HTMLAudioElement (r :: Row Type) =
+  (__nominal :: Proxy "HTMLAudioElement" | HTMLMediaElement r)
+
+type HTMLBRElement (r :: Row Type) = (__nominal :: Proxy "HTMLBRElement" | HTMLElement r)
+type HTMLBaseElement (r :: Row Type) =
+  (__nominal :: Proxy "HTMLBaseElement", href :: String, target :: String | HTMLElement r)
+
+type HTMLBodyElement (r :: Row Type) =
+  (__nominal :: Proxy "HTMLBodyElement" | HTMLElement (WindowEventHandlers r))
+
+type HTMLButtonElement (r :: Row Type) =
+  ( __nominal :: Proxy "HTMLButtonElement"
+  , disabled :: Boolean
+  , formAction :: String
+  , formEnctype :: String
+  , formMethod :: String
+  , formNoValidate :: Boolean
+  , formTarget :: String
+  , name :: String
+  , type :: String
+  , value :: String
+  | HTMLElement (PopoverInvokerElement r)
+  )
+
+type HTMLCanvasElement (r :: Row Type) =
+  (__nominal :: Proxy "HTMLCanvasElement", width :: Int, height :: Int | HTMLElement r)
+
+type HTMLDListElement (r :: Row Type) = (__nominal :: Proxy "HTMLDListElement" | HTMLElement r)
+type HTMLDataElement (r :: Row Type) =
+  (__nominal :: Proxy "HTMLDataElement", value :: String | HTMLElement r)
+
+type HTMLDataListElement (r :: Row Type) =
+  (__nominal :: Proxy "HTMLDataListElement" | HTMLElement r)
+
+type HTMLDetailsElement (r :: Row Type) =
+  (__nominal :: Proxy "HTMLDetailsElement", open :: Boolean | HTMLElement r)
+
+type HTMLDialogElement (r :: Row Type) =
+  (__nominal :: Proxy "HTMLDialogElement", open :: Boolean, returnValue :: String | HTMLElement r)
+
+type HTMLDirectoryElement (r :: Row Type) =
+  (__nominal :: Proxy "HTMLDirectoryElement", compact :: Boolean | HTMLElement r)
+
+type HTMLDivElement (r :: Row Type) = (__nominal :: Proxy "HTMLDivElement" | HTMLElement r)
+type HTMLElement (r :: Row Type) =
+  ( __nominal :: Proxy "HTMLElement"
+  , title :: String
+  , lang :: String
+  , translate :: Boolean
+  , dir :: String
+  , hidden :: Boolean
+  , hidden :: Number
+  , hidden :: String
+  , inert :: Boolean
+  , accessKey :: String
+  , draggable :: Boolean
+  , spellcheck :: Boolean
+  , autocapitalize :: String
+  , innerText :: String
+  , outerText :: String
+  , popover :: String
+  | Element (HTMLOrSVGElement (ElementContentEditable (GlobalEventHandlers r)))
+  )
+
+type HTMLEmbedElement (r :: Row Type) =
+  ( __nominal :: Proxy "HTMLEmbedElement"
+  , src :: String
+  , type :: String
+  , width :: String
+  , height :: String
+  | HTMLElement r
+  )
+
+type HTMLFieldSetElement (r :: Row Type) =
+  (__nominal :: Proxy "HTMLFieldSetElement", disabled :: Boolean, name :: String | HTMLElement r)
+
+type HTMLFontElement (r :: Row Type) =
+  ( __nominal :: Proxy "HTMLFontElement"
+  , color :: String
+  , face :: String
+  , size :: String
+  | HTMLElement r
+  )
+
+type HTMLFormElement (r :: Row Type) =
+  ( __nominal :: Proxy "HTMLFormElement"
+  , acceptCharset :: String
+  , action :: String
+  , autocomplete :: String
+  , enctype :: String
+  , encoding :: String
+  , method :: String
+  , name :: String
+  , noValidate :: Boolean
+  , target :: String
+  , rel :: String
+  | HTMLElement r
+  )
+
+type HTMLFrameElement (r :: Row Type) =
+  ( __nominal :: Proxy "HTMLFrameElement"
+  , name :: String
+  , scrolling :: String
+  , src :: String
+  , frameBorder :: String
+  , longDesc :: String
+  , noResize :: Boolean
+  , marginHeight :: String
+  , marginWidth :: String
+  | HTMLElement r
+  )
+
+type HTMLFrameSetElement (r :: Row Type) =
+  ( __nominal :: Proxy "HTMLFrameSetElement"
+  , cols :: String
+  , rows :: String
+  | HTMLElement (WindowEventHandlers r)
+  )
+
+type HTMLHRElement (r :: Row Type) = (__nominal :: Proxy "HTMLHRElement" | HTMLElement r)
+type HTMLHeadElement (r :: Row Type) = (__nominal :: Proxy "HTMLHeadElement" | HTMLElement r)
+type HTMLHeadingElement (r :: Row Type) = (__nominal :: Proxy "HTMLHeadingElement" | HTMLElement r)
+type HTMLHtmlElement (r :: Row Type) = (__nominal :: Proxy "HTMLHtmlElement" | HTMLElement r)
+type HTMLHyperlinkElementUtils (r :: Row Type) =
+  ( __nominal :: Proxy "HTMLHyperlinkElementUtils"
+  , href :: String
+  , protocol :: String
+  , username :: String
+  , password :: String
+  , host :: String
+  , hostname :: String
+  , port :: String
+  , pathname :: String
+  , search :: String
+  , hash :: String
+  | r
+  )
+
+type HTMLIFrameElement (r :: Row Type) =
+  ( __nominal :: Proxy "HTMLIFrameElement"
+  , src :: String
+  , srcdoc :: String
+  , name :: String
+  , allow :: String
+  , allowFullscreen :: Boolean
+  , width :: String
+  , height :: String
+  , referrerPolicy :: String
+  , loading :: String
+  | HTMLElement r
+  )
+
+type HTMLImageElement (r :: Row Type) =
+  ( __nominal :: Proxy "HTMLImageElement"
+  , alt :: String
+  , src :: String
+  , srcset :: String
+  , sizes :: String
+  , crossOrigin :: String
+  , useMap :: String
+  , isMap :: Boolean
+  , width :: Int
+  , height :: Int
+  , referrerPolicy :: String
+  , decoding :: String
+  , loading :: String
+  , fetchPriority :: String
+  | HTMLElement r
+  )
+
+type HTMLInputElement (r :: Row Type) =
+  ( __nominal :: Proxy "HTMLInputElement"
+  , accept :: String
+  , alt :: String
+  , autocomplete :: String
+  , defaultChecked :: Boolean
+  , checked :: Boolean
+  , dirName :: String
+  , disabled :: Boolean
+  , formAction :: String
+  , formEnctype :: String
+  , formMethod :: String
+  , formNoValidate :: Boolean
+  , formTarget :: String
+  , height :: Int
+  , indeterminate :: Boolean
+  , max :: String
+  , maxLength :: Int
+  , min :: String
+  , minLength :: Int
+  , multiple :: Boolean
+  , name :: String
+  , pattern :: String
+  , placeholder :: String
+  , readOnly :: Boolean
+  , required :: Boolean
+  , size :: Int
+  , src :: String
+  , step :: String
+  , type :: String
+  , defaultValue :: String
+  , value :: String
+  , valueAsNumber :: Number
+  , width :: Int
+  , selectionStart :: Int
+  , selectionEnd :: Int
+  , selectionDirection :: String
+  | HTMLElement (PopoverInvokerElement r)
+  )
+
+type HTMLLIElement (r :: Row Type) =
+  (__nominal :: Proxy "HTMLLIElement", value :: Int | HTMLElement r)
+
+type HTMLLabelElement (r :: Row Type) =
+  (__nominal :: Proxy "HTMLLabelElement", htmlFor :: String | HTMLElement r)
+
+type HTMLLegendElement (r :: Row Type) = (__nominal :: Proxy "HTMLLegendElement" | HTMLElement r)
+type HTMLLinkElement (r :: Row Type) =
+  ( __nominal :: Proxy "HTMLLinkElement"
+  , href :: String
+  , crossOrigin :: String
+  , rel :: String
+  , as :: String
+  , media :: String
+  , integrity :: String
+  , hreflang :: String
+  , type :: String
+  , imageSrcset :: String
+  , imageSizes :: String
+  , referrerPolicy :: String
+  , disabled :: Boolean
+  , fetchPriority :: String
+  | HTMLElement r
+  )
+
+type HTMLMapElement (r :: Row Type) =
+  (__nominal :: Proxy "HTMLMapElement", name :: String | HTMLElement r)
+
+type HTMLMarqueeElement (r :: Row Type) =
+  ( __nominal :: Proxy "HTMLMarqueeElement"
+  , behavior :: String
+  , bgColor :: String
+  , direction :: String
+  , height :: String
+  , hspace :: Int
+  , loop :: Int
+  , scrollAmount :: Int
+  , scrollDelay :: Int
+  , trueSpeed :: Boolean
+  , vspace :: Int
+  , width :: String
+  | HTMLElement r
+  )
+
+type HTMLMediaElement (r :: Row Type) =
+  ( __nominal :: Proxy "HTMLMediaElement"
+  , src :: String
+  , crossOrigin :: String
+  , preload :: String
+  , currentTime :: Number
+  , defaultPlaybackRate :: Number
+  , playbackRate :: Number
+  , preservesPitch :: Boolean
+  , autoplay :: Boolean
+  , loop :: Boolean
+  , controls :: Boolean
+  , volume :: Number
+  , muted :: Boolean
+  , defaultMuted :: Boolean
+  | HTMLElement r
+  )
+
+type HTMLMenuElement (r :: Row Type) = (__nominal :: Proxy "HTMLMenuElement" | HTMLElement r)
+type HTMLMetaElement (r :: Row Type) =
+  ( __nominal :: Proxy "HTMLMetaElement"
+  , name :: String
+  , httpEquiv :: String
+  , content :: String
+  , media :: String
+  | HTMLElement r
+  )
+
+type HTMLMeterElement (r :: Row Type) =
+  ( __nominal :: Proxy "HTMLMeterElement"
+  , value :: Number
+  , min :: Number
+  , max :: Number
+  , low :: Number
+  , high :: Number
+  , optimum :: Number
+  | HTMLElement r
+  )
+
+type HTMLModElement (r :: Row Type) =
+  (__nominal :: Proxy "HTMLModElement", cite :: String, dateTime :: String | HTMLElement r)
+
+type HTMLOListElement (r :: Row Type) =
+  ( __nominal :: Proxy "HTMLOListElement"
+  , reversed :: Boolean
+  , start :: Int
+  , type :: String
+  | HTMLElement r
+  )
+
+type HTMLObjectElement (r :: Row Type) =
+  ( __nominal :: Proxy "HTMLObjectElement"
+  , data :: String
+  , type :: String
+  , name :: String
+  , width :: String
+  , height :: String
+  | HTMLElement r
+  )
+
+type HTMLOptGroupElement (r :: Row Type) =
+  (__nominal :: Proxy "HTMLOptGroupElement", disabled :: Boolean, label :: String | HTMLElement r)
+
+type HTMLOptionElement (r :: Row Type) =
+  ( __nominal :: Proxy "HTMLOptionElement"
+  , disabled :: Boolean
+  , label :: String
+  , defaultSelected :: Boolean
+  , selected :: Boolean
+  , value :: String
+  , text :: String
+  | HTMLElement r
+  )
+
+type HTMLOrSVGElement (r :: Row Type) =
+  ( __nominal :: Proxy "HTMLOrSVGElement"
+  , nonce :: String
+  , autofocus :: Boolean
+  , tabIndex :: Int
+  | r
+  )
+
+type HTMLOutputElement (r :: Row Type) =
+  ( __nominal :: Proxy "HTMLOutputElement"
+  , name :: String
+  , defaultValue :: String
+  , value :: String
+  | HTMLElement r
+  )
+
+type HTMLParagraphElement (r :: Row Type) =
+  (__nominal :: Proxy "HTMLParagraphElement" | HTMLElement r)
+
+type HTMLParamElement (r :: Row Type) =
+  ( __nominal :: Proxy "HTMLParamElement"
+  , name :: String
+  , value :: String
+  , type :: String
+  , valueType :: String
+  | HTMLElement r
+  )
+
+type HTMLPictureElement (r :: Row Type) = (__nominal :: Proxy "HTMLPictureElement" | HTMLElement r)
+type HTMLPreElement (r :: Row Type) = (__nominal :: Proxy "HTMLPreElement" | HTMLElement r)
+type HTMLProgressElement (r :: Row Type) =
+  (__nominal :: Proxy "HTMLProgressElement", value :: Number, max :: Number | HTMLElement r)
+
+type HTMLQuoteElement (r :: Row Type) =
+  (__nominal :: Proxy "HTMLQuoteElement", cite :: String | HTMLElement r)
+
+type HTMLSelectElement (r :: Row Type) =
+  ( __nominal :: Proxy "HTMLSelectElement"
+  , autocomplete :: String
+  , disabled :: Boolean
+  , multiple :: Boolean
+  , name :: String
+  , required :: Boolean
+  , size :: Int
+  , length :: Int
+  , selectedIndex :: Int
+  , value :: String
+  | HTMLElement r
+  )
+
+type HTMLSlotElement (r :: Row Type) =
+  (__nominal :: Proxy "HTMLSlotElement", name :: String | HTMLElement r)
+
+type HTMLSourceElement (r :: Row Type) =
+  ( __nominal :: Proxy "HTMLSourceElement"
+  , src :: String
+  , type :: String
+  , srcset :: String
+  , sizes :: String
+  , media :: String
+  , width :: Int
+  , height :: Int
+  | HTMLElement r
+  )
+
+type HTMLSpanElement (r :: Row Type) = (__nominal :: Proxy "HTMLSpanElement" | HTMLElement r)
+type HTMLTableCaptionElement (r :: Row Type) =
+  (__nominal :: Proxy "HTMLTableCaptionElement" | HTMLElement r)
+
+type HTMLTableCellElement (r :: Row Type) =
+  ( __nominal :: Proxy "HTMLTableCellElement"
+  , colSpan :: Int
+  , rowSpan :: Int
+  , headers :: String
+  , scope :: String
+  , abbr :: String
+  | HTMLElement r
+  )
+
+type HTMLTableColElement (r :: Row Type) =
+  (__nominal :: Proxy "HTMLTableColElement", span :: Int | HTMLElement r)
+
+type HTMLTableElement (r :: Row Type) = (__nominal :: Proxy "HTMLTableElement" | HTMLElement r)
+type HTMLTableRowElement (r :: Row Type) =
+  (__nominal :: Proxy "HTMLTableRowElement" | HTMLElement r)
+
+type HTMLTableSectionElement (r :: Row Type) =
+  (__nominal :: Proxy "HTMLTableSectionElement" | HTMLElement r)
+
+type HTMLTemplateElement (r :: Row Type) =
+  (__nominal :: Proxy "HTMLTemplateElement" | HTMLElement r)
+
+type HTMLTextAreaElement (r :: Row Type) =
+  ( __nominal :: Proxy "HTMLTextAreaElement"
+  , autocomplete :: String
+  , cols :: Int
+  , dirName :: String
+  , disabled :: Boolean
+  , maxLength :: Int
+  , minLength :: Int
+  , name :: String
+  , placeholder :: String
+  , readOnly :: Boolean
+  , required :: Boolean
+  , rows :: Int
+  , wrap :: String
+  , defaultValue :: String
+  , value :: String
+  , selectionStart :: Int
+  , selectionEnd :: Int
+  , selectionDirection :: String
+  | HTMLElement r
+  )
+
+type HTMLTimeElement (r :: Row Type) =
+  (__nominal :: Proxy "HTMLTimeElement", dateTime :: String | HTMLElement r)
+
+type HTMLTrackElement (r :: Row Type) =
+  ( __nominal :: Proxy "HTMLTrackElement"
+  , kind :: String
+  , src :: String
+  , srclang :: String
+  , label :: String
+  , default :: Boolean
+  | HTMLElement r
+  )
+
+type HTMLUListElement (r :: Row Type) = (__nominal :: Proxy "HTMLUListElement" | HTMLElement r)
+type HTMLUnknownElement (r :: Row Type) = (__nominal :: Proxy "HTMLUnknownElement" | HTMLElement r)
+type HTMLVideoElement (r :: Row Type) =
+  ( __nominal :: Proxy "HTMLVideoElement"
+  , width :: Int
+  , height :: Int
+  , poster :: String
+  , playsInline :: Boolean
+  | HTMLMediaElement r
+  )
+
+type PopoverInvokerElement (r :: Row Type) =
+  (__nominal :: Proxy "PopoverInvokerElement", popoverTargetAction :: String | r)
+
+type SVGAElement (r :: Row Type) =
+  ( __nominal :: Proxy "SVGAElement"
+  , download :: String
+  , ping :: String
+  , rel :: String
+  , hreflang :: String
+  , type :: String
+  , text :: String
+  , referrerPolicy :: String
+  | SVGGraphicsElement (SVGURIReference r)
+  )
+
+type SVGAnimatedPoints (r :: Row Type) = (__nominal :: Proxy "SVGAnimatedPoints" | r)
+type SVGCircleElement (r :: Row Type) =
+  (__nominal :: Proxy "SVGCircleElement" | SVGGeometryElement r)
+
+type SVGDefsElement (r :: Row Type) = (__nominal :: Proxy "SVGDefsElement" | SVGGraphicsElement r)
+type SVGDescElement (r :: Row Type) = (__nominal :: Proxy "SVGDescElement" | SVGElement r)
+type SVGElement (r :: Row Type) =
+  ( __nominal :: Proxy "SVGElement"
+  | Element (HTMLOrSVGElement (SVGElementInstance (GlobalEventHandlers r)))
+  )
+
+type SVGElementInstance (r :: Row Type) = (__nominal :: Proxy "SVGElementInstance" | r)
+type SVGEllipseElement (r :: Row Type) =
+  (__nominal :: Proxy "SVGEllipseElement" | SVGGeometryElement r)
+
+type SVGFitToViewBox (r :: Row Type) = (__nominal :: Proxy "SVGFitToViewBox" | r)
+type SVGForeignObjectElement (r :: Row Type) =
+  (__nominal :: Proxy "SVGForeignObjectElement" | SVGGraphicsElement r)
+
+type SVGGElement (r :: Row Type) = (__nominal :: Proxy "SVGGElement" | SVGGraphicsElement r)
+type SVGGeometryElement (r :: Row Type) =
+  (__nominal :: Proxy "SVGGeometryElement" | SVGGraphicsElement r)
+
+type SVGGradientElement (r :: Row Type) =
+  (__nominal :: Proxy "SVGGradientElement" | SVGElement (SVGURIReference r))
+
+type SVGGraphicsElement (r :: Row Type) =
+  (__nominal :: Proxy "SVGGraphicsElement" | SVGElement (SVGTests r))
+
+type SVGImageElement (r :: Row Type) =
+  ( __nominal :: Proxy "SVGImageElement"
+  , crossOrigin :: String
+  | SVGGraphicsElement (SVGURIReference r)
+  )
+
+type SVGLineElement (r :: Row Type) = (__nominal :: Proxy "SVGLineElement" | SVGGeometryElement r)
+type SVGLinearGradientElement (r :: Row Type) =
+  (__nominal :: Proxy "SVGLinearGradientElement" | SVGGradientElement r)
+
+type SVGMarkerElement (r :: Row Type) =
+  (__nominal :: Proxy "SVGMarkerElement", orient :: String | SVGElement (SVGFitToViewBox r))
+
+type SVGMetadataElement (r :: Row Type) = (__nominal :: Proxy "SVGMetadataElement" | SVGElement r)
+type SVGPathElement (r :: Row Type) = (__nominal :: Proxy "SVGPathElement" | SVGGeometryElement r)
+type SVGPatternElement (r :: Row Type) =
+  (__nominal :: Proxy "SVGPatternElement" | SVGElement (SVGURIReference (SVGFitToViewBox r)))
+
+type SVGPolygonElement (r :: Row Type) =
+  (__nominal :: Proxy "SVGPolygonElement" | SVGGeometryElement (SVGAnimatedPoints r))
+
+type SVGPolylineElement (r :: Row Type) =
+  (__nominal :: Proxy "SVGPolylineElement" | SVGGeometryElement (SVGAnimatedPoints r))
+
+type SVGRadialGradientElement (r :: Row Type) =
+  (__nominal :: Proxy "SVGRadialGradientElement" | SVGGradientElement r)
+
+type SVGRectElement (r :: Row Type) = (__nominal :: Proxy "SVGRectElement" | SVGGeometryElement r)
+type SVGSVGElement (r :: Row Type) =
+  ( __nominal :: Proxy "SVGSVGElement"
+  | SVGGraphicsElement (WindowEventHandlers (SVGFitToViewBox r))
+  )
+
+type SVGScriptElement (r :: Row Type) =
+  ( __nominal :: Proxy "SVGScriptElement"
+  , type :: String
+  , crossOrigin :: String
+  | SVGElement (SVGURIReference r)
+  )
+
+type SVGStopElement (r :: Row Type) = (__nominal :: Proxy "SVGStopElement" | SVGElement r)
+type SVGStyleElement (r :: Row Type) =
+  ( __nominal :: Proxy "SVGStyleElement"
+  , type :: String
+  , media :: String
+  , title :: String
+  | SVGElement r
+  )
+
+type SVGSwitchElement (r :: Row Type) =
+  (__nominal :: Proxy "SVGSwitchElement" | SVGGraphicsElement r)
+
+type SVGSymbolElement (r :: Row Type) =
+  (__nominal :: Proxy "SVGSymbolElement" | SVGGraphicsElement (SVGFitToViewBox r))
+
+type SVGTSpanElement (r :: Row Type) =
+  (__nominal :: Proxy "SVGTSpanElement" | SVGTextPositioningElement r)
+
+type SVGTests (r :: Row Type) = (__nominal :: Proxy "SVGTests" | r)
+type SVGTextContentElement (r :: Row Type) =
+  (__nominal :: Proxy "SVGTextContentElement" | SVGGraphicsElement r)
+
+type SVGTextElement (r :: Row Type) =
+  (__nominal :: Proxy "SVGTextElement" | SVGTextPositioningElement r)
+
+type SVGTextPathElement (r :: Row Type) =
+  (__nominal :: Proxy "SVGTextPathElement" | SVGTextContentElement (SVGURIReference r))
+
+type SVGTextPositioningElement (r :: Row Type) =
+  (__nominal :: Proxy "SVGTextPositioningElement" | SVGTextContentElement r)
+
+type SVGTitleElement (r :: Row Type) = (__nominal :: Proxy "SVGTitleElement" | SVGElement r)
+type SVGURIReference (r :: Row Type) = (__nominal :: Proxy "SVGURIReference" | r)
+type SVGUseElement (r :: Row Type) =
+  (__nominal :: Proxy "SVGUseElement" | SVGGraphicsElement (SVGURIReference r))
+
+type SVGViewElement (r :: Row Type) =
+  (__nominal :: Proxy "SVGViewElement" | SVGElement (SVGFitToViewBox r))
+
+type WindowEventHandlers (r :: Row Type) =
+  ( __nominal :: Proxy "WindowEventHandlers"
+  , onafterprint :: Cb
+  , onbeforeprint :: Cb
+  , onhashchange :: Cb
+  , onlanguagechange :: Cb
+  , onmessage :: Cb
+  , onmessageerror :: Cb
+  , onoffline :: Cb
+  , ononline :: Cb
+  , onpagehide :: Cb
+  , onpageshow :: Cb
+  , onpopstate :: Cb
+  , onrejectionhandled :: Cb
+  , onstorage :: Cb
+  , onunhandledrejection :: Cb
+  , onunload :: Cb
+  | r
+  )
 
 html :: Array (Event (Attribute (Indexed (HTMLHtmlElement ())))) -> Array Nut -> Nut
 html = elementify2 "html"
@@ -2312,1142 +1775,6 @@ view = elementify2 "view"
 
 view_ :: Array Nut -> Nut
 view_ = elementify2 "view" []
-
-data Indexed (r :: Row Type)
-
-type role Indexed phantom
-type ARIAMixin (r :: Row Type) =
-  ( role :: String
-  , ariaAtomic :: String
-  , ariaAutoComplete :: String
-  , ariaBusy :: String
-  , ariaChecked :: String
-  , ariaColCount :: String
-  , ariaColIndex :: String
-  , ariaColIndexText :: String
-  , ariaColSpan :: String
-  , ariaCurrent :: String
-  , ariaDescription :: String
-  , ariaDisabled :: String
-  , ariaExpanded :: String
-  , ariaHasPopup :: String
-  , ariaHidden :: String
-  , ariaInvalid :: String
-  , ariaKeyShortcuts :: String
-  , ariaLabel :: String
-  , ariaLevel :: String
-  , ariaLive :: String
-  , ariaModal :: String
-  , ariaMultiLine :: String
-  , ariaMultiSelectable :: String
-  , ariaOrientation :: String
-  , ariaPlaceholder :: String
-  , ariaPosInSet :: String
-  , ariaPressed :: String
-  , ariaReadOnly :: String
-  , ariaRequired :: String
-  , ariaRoleDescription :: String
-  , ariaRowCount :: String
-  , ariaRowIndex :: String
-  , ariaRowIndexText :: String
-  , ariaRowSpan :: String
-  , ariaSelected :: String
-  , ariaSetSize :: String
-  , ariaSort :: String
-  , ariaValueMax :: String
-  , ariaValueMin :: String
-  , ariaValueNow :: String
-  , ariaValueText :: String
-  | r
-  )
-
-type Element (r :: Row Type) = (| ARIAMixin (ARIAMixin r))
-type ElementContentEditable (r :: Row Type) =
-  (contentEditable :: String, enterKeyHint :: String, inputMode :: String | r)
-
-type GlobalEventHandlers (r :: Row Type) =
-  ( onabort :: Cb
-  , onauxclick :: Cb
-  , onbeforeinput :: Cb
-  , onbeforematch :: Cb
-  , onbeforetoggle :: Cb
-  , onblur :: Cb
-  , oncancel :: Cb
-  , oncanplay :: Cb
-  , oncanplaythrough :: Cb
-  , onchange :: Cb
-  , onclick :: Cb
-  , onclose :: Cb
-  , oncontextlost :: Cb
-  , oncontextmenu :: Cb
-  , oncontextrestored :: Cb
-  , oncopy :: Cb
-  , oncuechange :: Cb
-  , oncut :: Cb
-  , ondblclick :: Cb
-  , ondrag :: Cb
-  , ondragend :: Cb
-  , ondragenter :: Cb
-  , ondragleave :: Cb
-  , ondragover :: Cb
-  , ondragstart :: Cb
-  , ondrop :: Cb
-  , ondurationchange :: Cb
-  , onemptied :: Cb
-  , onended :: Cb
-  , onfocus :: Cb
-  , onformdata :: Cb
-  , oninput :: Cb
-  , oninvalid :: Cb
-  , onkeydown :: Cb
-  , onkeypress :: Cb
-  , onkeyup :: Cb
-  , onload :: Cb
-  , onloadeddata :: Cb
-  , onloadedmetadata :: Cb
-  , onloadstart :: Cb
-  , onmousedown :: Cb
-  , onmouseenter :: Cb
-  , onmouseleave :: Cb
-  , onmousemove :: Cb
-  , onmouseout :: Cb
-  , onmouseover :: Cb
-  , onmouseup :: Cb
-  , onpaste :: Cb
-  , onpause :: Cb
-  , onplay :: Cb
-  , onplaying :: Cb
-  , onprogress :: Cb
-  , onratechange :: Cb
-  , onreset :: Cb
-  , onresize :: Cb
-  , onscroll :: Cb
-  , onscrollend :: Cb
-  , onsecuritypolicyviolation :: Cb
-  , onseeked :: Cb
-  , onseeking :: Cb
-  , onselect :: Cb
-  , onslotchange :: Cb
-  , onstalled :: Cb
-  , onsubmit :: Cb
-  , onsuspend :: Cb
-  , ontimeupdate :: Cb
-  , ontoggle :: Cb
-  , onvolumechange :: Cb
-  , onwaiting :: Cb
-  , onwebkitanimationend :: Cb
-  , onwebkitanimationiteration :: Cb
-  , onwebkitanimationstart :: Cb
-  , onwebkittransitionend :: Cb
-  , onwheel :: Cb
-  | r
-  )
-
-type HTMLAreaElement (r :: Row Type) =
-  ( alt :: String
-  , coords :: String
-  , shape :: String
-  , target :: String
-  , download :: String
-  , ping :: String
-  , rel :: String
-  , referrerPolicy :: String
-  | HTMLElement (HTMLHyperlinkElementUtils r)
-  )
-
-type HTMLAudioElement (r :: Row Type) = (| HTMLMediaElement r)
-type HTMLBRElement (r :: Row Type) = (| HTMLElement r)
-type HTMLBaseElement (r :: Row Type) = (href :: String, target :: String | HTMLElement r)
-type HTMLBodyElement (r :: Row Type) = (| HTMLElement (WindowEventHandlers r))
-type HTMLButtonElement (r :: Row Type) =
-  ( disabled :: Boolean
-  , formAction :: String
-  , formEnctype :: String
-  , formMethod :: String
-  , formNoValidate :: Boolean
-  , formTarget :: String
-  , name :: String
-  , type :: String
-  , value :: String
-  | HTMLElement (PopoverInvokerElement r)
-  )
-
-type HTMLCanvasElement (r :: Row Type) = (width :: Int, height :: Int | HTMLElement r)
-type HTMLDListElement (r :: Row Type) = (| HTMLElement r)
-type HTMLDataElement (r :: Row Type) = (value :: String | HTMLElement r)
-type HTMLDataListElement (r :: Row Type) = (| HTMLElement r)
-type HTMLDetailsElement (r :: Row Type) = (open :: Boolean | HTMLElement r)
-type HTMLDialogElement (r :: Row Type) = (open :: Boolean, returnValue :: String | HTMLElement r)
-type HTMLDirectoryElement (r :: Row Type) = (compact :: Boolean | HTMLElement r)
-type HTMLDivElement (r :: Row Type) = (| HTMLElement r)
-type HTMLElement (r :: Row Type) =
-  ( title :: String
-  , lang :: String
-  , translate :: Boolean
-  , dir :: String
-  , hidden :: Boolean
-  , hidden :: Number
-  , hidden :: String
-  , inert :: Boolean
-  , accessKey :: String
-  , draggable :: Boolean
-  , spellcheck :: Boolean
-  , autocapitalize :: String
-  , innerText :: String
-  , outerText :: String
-  , popover :: String
-  | Element (HTMLOrSVGElement (ElementContentEditable (GlobalEventHandlers r)))
-  )
-
-type HTMLEmbedElement (r :: Row Type) =
-  (src :: String, type :: String, width :: String, height :: String | HTMLElement r)
-
-type HTMLFieldSetElement (r :: Row Type) = (disabled :: Boolean, name :: String | HTMLElement r)
-type HTMLFontElement (r :: Row Type) =
-  (color :: String, face :: String, size :: String | HTMLElement r)
-
-type HTMLFormElement (r :: Row Type) =
-  ( acceptCharset :: String
-  , action :: String
-  , autocomplete :: String
-  , enctype :: String
-  , encoding :: String
-  , method :: String
-  , name :: String
-  , noValidate :: Boolean
-  , target :: String
-  , rel :: String
-  | HTMLElement r
-  )
-
-type HTMLFrameElement (r :: Row Type) =
-  ( name :: String
-  , scrolling :: String
-  , src :: String
-  , frameBorder :: String
-  , longDesc :: String
-  , noResize :: Boolean
-  , marginHeight :: String
-  , marginWidth :: String
-  | HTMLElement r
-  )
-
-type HTMLFrameSetElement (r :: Row Type) =
-  (cols :: String, rows :: String | HTMLElement (WindowEventHandlers r))
-
-type HTMLHRElement (r :: Row Type) = (| HTMLElement r)
-type HTMLHeadElement (r :: Row Type) = (| HTMLElement r)
-type HTMLHeadingElement (r :: Row Type) = (| HTMLElement r)
-type HTMLHtmlElement (r :: Row Type) = (| HTMLElement r)
-type HTMLHyperlinkElementUtils (r :: Row Type) =
-  ( href :: String
-  , protocol :: String
-  , username :: String
-  , password :: String
-  , host :: String
-  , hostname :: String
-  , port :: String
-  , pathname :: String
-  , search :: String
-  , hash :: String
-  | r
-  )
-
-type HTMLIFrameElement (r :: Row Type) =
-  ( src :: String
-  , srcdoc :: String
-  , name :: String
-  , allow :: String
-  , allowFullscreen :: Boolean
-  , width :: String
-  , height :: String
-  , referrerPolicy :: String
-  , loading :: String
-  | HTMLElement r
-  )
-
-type HTMLImageElement (r :: Row Type) =
-  ( alt :: String
-  , src :: String
-  , srcset :: String
-  , sizes :: String
-  , crossOrigin :: String
-  , useMap :: String
-  , isMap :: Boolean
-  , width :: Int
-  , height :: Int
-  , referrerPolicy :: String
-  , decoding :: String
-  , loading :: String
-  , fetchPriority :: String
-  | HTMLElement r
-  )
-
-type HTMLInputElement (r :: Row Type) =
-  ( accept :: String
-  , alt :: String
-  , autocomplete :: String
-  , defaultChecked :: Boolean
-  , checked :: Boolean
-  , dirName :: String
-  , disabled :: Boolean
-  , formAction :: String
-  , formEnctype :: String
-  , formMethod :: String
-  , formNoValidate :: Boolean
-  , formTarget :: String
-  , height :: Int
-  , indeterminate :: Boolean
-  , max :: String
-  , maxLength :: Int
-  , min :: String
-  , minLength :: Int
-  , multiple :: Boolean
-  , name :: String
-  , pattern :: String
-  , placeholder :: String
-  , readOnly :: Boolean
-  , required :: Boolean
-  , size :: Int
-  , src :: String
-  , step :: String
-  , type :: String
-  , defaultValue :: String
-  , value :: String
-  , valueAsNumber :: Number
-  , width :: Int
-  , selectionStart :: Int
-  , selectionEnd :: Int
-  , selectionDirection :: String
-  | HTMLElement (PopoverInvokerElement r)
-  )
-
-type HTMLLIElement (r :: Row Type) = (value :: Int | HTMLElement r)
-type HTMLLabelElement (r :: Row Type) = (htmlFor :: String | HTMLElement r)
-type HTMLLegendElement (r :: Row Type) = (| HTMLElement r)
-type HTMLLinkElement (r :: Row Type) =
-  ( href :: String
-  , crossOrigin :: String
-  , rel :: String
-  , as :: String
-  , media :: String
-  , integrity :: String
-  , hreflang :: String
-  , type :: String
-  , imageSrcset :: String
-  , imageSizes :: String
-  , referrerPolicy :: String
-  , disabled :: Boolean
-  , fetchPriority :: String
-  | HTMLElement r
-  )
-
-type HTMLMapElement (r :: Row Type) = (name :: String | HTMLElement r)
-type HTMLMarqueeElement (r :: Row Type) =
-  ( behavior :: String
-  , bgColor :: String
-  , direction :: String
-  , height :: String
-  , hspace :: Int
-  , loop :: Int
-  , scrollAmount :: Int
-  , scrollDelay :: Int
-  , trueSpeed :: Boolean
-  , vspace :: Int
-  , width :: String
-  | HTMLElement r
-  )
-
-type HTMLMediaElement (r :: Row Type) =
-  ( src :: String
-  , crossOrigin :: String
-  , preload :: String
-  , currentTime :: Number
-  , defaultPlaybackRate :: Number
-  , playbackRate :: Number
-  , preservesPitch :: Boolean
-  , autoplay :: Boolean
-  , loop :: Boolean
-  , controls :: Boolean
-  , volume :: Number
-  , muted :: Boolean
-  , defaultMuted :: Boolean
-  | HTMLElement r
-  )
-
-type HTMLMenuElement (r :: Row Type) = (| HTMLElement r)
-type HTMLMetaElement (r :: Row Type) =
-  (name :: String, httpEquiv :: String, content :: String, media :: String | HTMLElement r)
-
-type HTMLMeterElement (r :: Row Type) =
-  ( value :: Number
-  , min :: Number
-  , max :: Number
-  , low :: Number
-  , high :: Number
-  , optimum :: Number
-  | HTMLElement r
-  )
-
-type HTMLModElement (r :: Row Type) = (cite :: String, dateTime :: String | HTMLElement r)
-type HTMLOListElement (r :: Row Type) =
-  (reversed :: Boolean, start :: Int, type :: String | HTMLElement r)
-
-type HTMLObjectElement (r :: Row Type) =
-  ( data :: String
-  , type :: String
-  , name :: String
-  , width :: String
-  , height :: String
-  | HTMLElement r
-  )
-
-type HTMLOptGroupElement (r :: Row Type) = (disabled :: Boolean, label :: String | HTMLElement r)
-type HTMLOptionElement (r :: Row Type) =
-  ( disabled :: Boolean
-  , label :: String
-  , defaultSelected :: Boolean
-  , selected :: Boolean
-  , value :: String
-  , text :: String
-  | HTMLElement r
-  )
-
-type HTMLOrSVGElement (r :: Row Type) =
-  (nonce :: String, autofocus :: Boolean, tabIndex :: Int | r)
-
-type HTMLOutputElement (r :: Row Type) =
-  (name :: String, defaultValue :: String, value :: String | HTMLElement r)
-
-type HTMLParagraphElement (r :: Row Type) = (| HTMLElement r)
-type HTMLParamElement (r :: Row Type) =
-  (name :: String, value :: String, type :: String, valueType :: String | HTMLElement r)
-
-type HTMLPictureElement (r :: Row Type) = (| HTMLElement r)
-type HTMLPreElement (r :: Row Type) = (| HTMLElement r)
-type HTMLProgressElement (r :: Row Type) = (value :: Number, max :: Number | HTMLElement r)
-type HTMLQuoteElement (r :: Row Type) = (cite :: String | HTMLElement r)
-type HTMLSelectElement (r :: Row Type) =
-  ( autocomplete :: String
-  , disabled :: Boolean
-  , multiple :: Boolean
-  , name :: String
-  , required :: Boolean
-  , size :: Int
-  , length :: Int
-  , selectedIndex :: Int
-  , value :: String
-  | HTMLElement r
-  )
-
-type HTMLSlotElement (r :: Row Type) = (name :: String | HTMLElement r)
-type HTMLSourceElement (r :: Row Type) =
-  ( src :: String
-  , type :: String
-  , srcset :: String
-  , sizes :: String
-  , media :: String
-  , width :: Int
-  , height :: Int
-  | HTMLElement r
-  )
-
-type HTMLSpanElement (r :: Row Type) = (| HTMLElement r)
-type HTMLTableCaptionElement (r :: Row Type) = (| HTMLElement r)
-type HTMLTableCellElement (r :: Row Type) =
-  ( colSpan :: Int
-  , rowSpan :: Int
-  , headers :: String
-  , scope :: String
-  , abbr :: String
-  | HTMLElement r
-  )
-
-type HTMLTableColElement (r :: Row Type) = (span :: Int | HTMLElement r)
-type HTMLTableElement (r :: Row Type) = (| HTMLElement r)
-type HTMLTableRowElement (r :: Row Type) = (| HTMLElement r)
-type HTMLTableSectionElement (r :: Row Type) = (| HTMLElement r)
-type HTMLTemplateElement (r :: Row Type) = (| HTMLElement r)
-type HTMLTextAreaElement (r :: Row Type) =
-  ( autocomplete :: String
-  , cols :: Int
-  , dirName :: String
-  , disabled :: Boolean
-  , maxLength :: Int
-  , minLength :: Int
-  , name :: String
-  , placeholder :: String
-  , readOnly :: Boolean
-  , required :: Boolean
-  , rows :: Int
-  , wrap :: String
-  , defaultValue :: String
-  , value :: String
-  , selectionStart :: Int
-  , selectionEnd :: Int
-  , selectionDirection :: String
-  | HTMLElement r
-  )
-
-type HTMLTimeElement (r :: Row Type) = (dateTime :: String | HTMLElement r)
-type HTMLTrackElement (r :: Row Type) =
-  ( kind :: String
-  , src :: String
-  , srclang :: String
-  , label :: String
-  , default :: Boolean
-  | HTMLElement r
-  )
-
-type HTMLUListElement (r :: Row Type) = (| HTMLElement r)
-type HTMLUnknownElement (r :: Row Type) = (| HTMLElement r)
-type HTMLVideoElement (r :: Row Type) =
-  (width :: Int, height :: Int, poster :: String, playsInline :: Boolean | HTMLMediaElement r)
-
-type PopoverInvokerElement (r :: Row Type) = (popoverTargetAction :: String | r)
-type SVGAElement (r :: Row Type) =
-  ( download :: String
-  , ping :: String
-  , rel :: String
-  , hreflang :: String
-  , type :: String
-  , text :: String
-  , referrerPolicy :: String
-  | SVGGraphicsElement (SVGURIReference r)
-  )
-
-type SVGAnimatedPoints (r :: Row Type) = (| r)
-type SVGCircleElement (r :: Row Type) = (| SVGGeometryElement r)
-type SVGDefsElement (r :: Row Type) = (| SVGGraphicsElement r)
-type SVGDescElement (r :: Row Type) = (| SVGElement r)
-type SVGElement (r :: Row Type) =
-  (| Element (HTMLOrSVGElement (SVGElementInstance (GlobalEventHandlers r))))
-
-type SVGElementInstance (r :: Row Type) = (| r)
-type SVGEllipseElement (r :: Row Type) = (| SVGGeometryElement r)
-type SVGFitToViewBox (r :: Row Type) = (| r)
-type SVGForeignObjectElement (r :: Row Type) = (| SVGGraphicsElement r)
-type SVGGElement (r :: Row Type) = (| SVGGraphicsElement r)
-type SVGGeometryElement (r :: Row Type) = (| SVGGraphicsElement r)
-type SVGGradientElement (r :: Row Type) = (| SVGElement (SVGURIReference r))
-type SVGGraphicsElement (r :: Row Type) = (| SVGElement (SVGTests r))
-type SVGImageElement (r :: Row Type) =
-  (crossOrigin :: String | SVGGraphicsElement (SVGURIReference r))
-
-type SVGLineElement (r :: Row Type) = (| SVGGeometryElement r)
-type SVGLinearGradientElement (r :: Row Type) = (| SVGGradientElement r)
-type SVGMarkerElement (r :: Row Type) = (orient :: String | SVGElement (SVGFitToViewBox r))
-type SVGMetadataElement (r :: Row Type) = (| SVGElement r)
-type SVGPathElement (r :: Row Type) = (| SVGGeometryElement r)
-type SVGPatternElement (r :: Row Type) = (| SVGElement (SVGURIReference (SVGFitToViewBox r)))
-type SVGPolygonElement (r :: Row Type) = (| SVGGeometryElement (SVGAnimatedPoints r))
-type SVGPolylineElement (r :: Row Type) = (| SVGGeometryElement (SVGAnimatedPoints r))
-type SVGRadialGradientElement (r :: Row Type) = (| SVGGradientElement r)
-type SVGRectElement (r :: Row Type) = (| SVGGeometryElement r)
-type SVGSVGElement (r :: Row Type) =
-  (| SVGGraphicsElement (WindowEventHandlers (SVGFitToViewBox r)))
-
-type SVGScriptElement (r :: Row Type) =
-  (type :: String, crossOrigin :: String | SVGElement (SVGURIReference r))
-
-type SVGStopElement (r :: Row Type) = (| SVGElement r)
-type SVGStyleElement (r :: Row Type) =
-  (type :: String, media :: String, title :: String | SVGElement r)
-
-type SVGSwitchElement (r :: Row Type) = (| SVGGraphicsElement r)
-type SVGSymbolElement (r :: Row Type) = (| SVGGraphicsElement (SVGFitToViewBox r))
-type SVGTSpanElement (r :: Row Type) = (| SVGTextPositioningElement r)
-type SVGTests (r :: Row Type) = (| r)
-type SVGTextContentElement (r :: Row Type) = (| SVGGraphicsElement r)
-type SVGTextElement (r :: Row Type) = (| SVGTextPositioningElement r)
-type SVGTextPathElement (r :: Row Type) = (| SVGTextContentElement (SVGURIReference r))
-type SVGTextPositioningElement (r :: Row Type) = (| SVGTextContentElement r)
-type SVGTitleElement (r :: Row Type) = (| SVGElement r)
-type SVGURIReference (r :: Row Type) = (| r)
-type SVGUseElement (r :: Row Type) = (| SVGGraphicsElement (SVGURIReference r))
-type SVGViewElement (r :: Row Type) = (| SVGElement (SVGFitToViewBox r))
-type WindowEventHandlers (r :: Row Type) =
-  ( onafterprint :: Cb
-  , onbeforeprint :: Cb
-  , onhashchange :: Cb
-  , onlanguagechange :: Cb
-  , onmessage :: Cb
-  , onmessageerror :: Cb
-  , onoffline :: Cb
-  , ononline :: Cb
-  , onpagehide :: Cb
-  , onpageshow :: Cb
-  , onpopstate :: Cb
-  , onrejectionhandled :: Cb
-  , onstorage :: Cb
-  , onunhandledrejection :: Cb
-  , onunload :: Cb
-  | r
-  )
-
-newtype Keyword (v :: Symbol) = Keyword String
-
-type role Keyword phantom
-
-derive instance Newtype.Newtype (Keyword v) _
-
-__anonymous :: Keyword "anonymous"
-__anonymous = Keyword "anonymous"
-
-__useCredentials :: Keyword "use-credentials"
-__useCredentials = Keyword "use-credentials"
-
-__lazy :: Keyword "lazy"
-__lazy = Keyword "lazy"
-
-__eager :: Keyword "eager"
-__eager = Keyword "eager"
-
-__high :: Keyword "high"
-__high = Keyword "high"
-
-__low :: Keyword "low"
-__low = Keyword "low"
-
-__auto :: Keyword "auto"
-__auto = Keyword "auto"
-
-__ltr :: Keyword "ltr"
-__ltr = Keyword "ltr"
-
-__rtl :: Keyword "rtl"
-__rtl = Keyword "rtl"
-
-__applicationName :: Keyword "application-name"
-__applicationName = Keyword "application-name"
-
-__author :: Keyword "author"
-__author = Keyword "author"
-
-__description :: Keyword "description"
-__description = Keyword "description"
-
-__generator :: Keyword "generator"
-__generator = Keyword "generator"
-
-__keywords :: Keyword "keywords"
-__keywords = Keyword "keywords"
-
-__referrer :: Keyword "referrer"
-__referrer = Keyword "referrer"
-
-__themeColor :: Keyword "theme-color"
-__themeColor = Keyword "theme-color"
-
-__colorScheme :: Keyword "color-scheme"
-__colorScheme = Keyword "color-scheme"
-
-__contentLanguage :: Keyword "content-language"
-__contentLanguage = Keyword "content-language"
-
-__contentType :: Keyword "content-type"
-__contentType = Keyword "content-type"
-
-__defaultStyle :: Keyword "default-style"
-__defaultStyle = Keyword "default-style"
-
-__refresh :: Keyword "refresh"
-__refresh = Keyword "refresh"
-
-__setCookie :: Keyword "set-cookie"
-__setCookie = Keyword "set-cookie"
-
-__xUaCompatible :: Keyword "x-ua-compatible"
-__xUaCompatible = Keyword "x-ua-compatible"
-
-__contentSecurityPolicy :: Keyword "content-security-policy"
-__contentSecurityPolicy = Keyword "content-security-policy"
-
-__x1 :: Keyword "1"
-__x1 = Keyword "1"
-
-__a :: Keyword "a"
-__a = Keyword "a"
-
-__xA :: Keyword "A"
-__xA = Keyword "A"
-
-__i :: Keyword "i"
-__i = Keyword "i"
-
-__xI :: Keyword "I"
-__xI = Keyword "I"
-
-__alternate :: Keyword "alternate"
-__alternate = Keyword "alternate"
-
-__bookmark :: Keyword "bookmark"
-__bookmark = Keyword "bookmark"
-
-__canonical :: Keyword "canonical"
-__canonical = Keyword "canonical"
-
-__dnsPrefetch :: Keyword "dns-prefetch"
-__dnsPrefetch = Keyword "dns-prefetch"
-
-__external :: Keyword "external"
-__external = Keyword "external"
-
-__help :: Keyword "help"
-__help = Keyword "help"
-
-__icon :: Keyword "icon"
-__icon = Keyword "icon"
-
-__license :: Keyword "license"
-__license = Keyword "license"
-
-__manifest :: Keyword "manifest"
-__manifest = Keyword "manifest"
-
-__modulepreload :: Keyword "modulepreload"
-__modulepreload = Keyword "modulepreload"
-
-__nofollow :: Keyword "nofollow"
-__nofollow = Keyword "nofollow"
-
-__noopener :: Keyword "noopener"
-__noopener = Keyword "noopener"
-
-__noreferrer :: Keyword "noreferrer"
-__noreferrer = Keyword "noreferrer"
-
-__opener :: Keyword "opener"
-__opener = Keyword "opener"
-
-__pingback :: Keyword "pingback"
-__pingback = Keyword "pingback"
-
-__preconnect :: Keyword "preconnect"
-__preconnect = Keyword "preconnect"
-
-__prefetch :: Keyword "prefetch"
-__prefetch = Keyword "prefetch"
-
-__preload :: Keyword "preload"
-__preload = Keyword "preload"
-
-__search :: Keyword "search"
-__search = Keyword "search"
-
-__stylesheet :: Keyword "stylesheet"
-__stylesheet = Keyword "stylesheet"
-
-__tag :: Keyword "tag"
-__tag = Keyword "tag"
-
-__next :: Keyword "next"
-__next = Keyword "next"
-
-__prev :: Keyword "prev"
-__prev = Keyword "prev"
-
-__sync :: Keyword "sync"
-__sync = Keyword "sync"
-
-__async :: Keyword "async"
-__async = Keyword "async"
-
-__subtitles :: Keyword "subtitles"
-__subtitles = Keyword "subtitles"
-
-__captions :: Keyword "captions"
-__captions = Keyword "captions"
-
-__descriptions :: Keyword "descriptions"
-__descriptions = Keyword "descriptions"
-
-__chapters :: Keyword "chapters"
-__chapters = Keyword "chapters"
-
-__metadata :: Keyword "metadata"
-__metadata = Keyword "metadata"
-
-__none :: Keyword "none"
-__none = Keyword "none"
-
-__circleState :: Keyword "circle state"
-__circleState = Keyword "circle state"
-
-__defaultState :: Keyword "default state"
-__defaultState = Keyword "default state"
-
-__polygonState :: Keyword "polygon state"
-__polygonState = Keyword "polygon state"
-
-__rectangleState :: Keyword "rectangle state"
-__rectangleState = Keyword "rectangle state"
-
-__row :: Keyword "row"
-__row = Keyword "row"
-
-__col :: Keyword "col"
-__col = Keyword "col"
-
-__rowgroup :: Keyword "rowgroup"
-__rowgroup = Keyword "rowgroup"
-
-__colgroup :: Keyword "colgroup"
-__colgroup = Keyword "colgroup"
-
-__hidden :: Keyword "hidden"
-__hidden = Keyword "hidden"
-
-__text :: Keyword "text"
-__text = Keyword "text"
-
-__tel :: Keyword "tel"
-__tel = Keyword "tel"
-
-__url :: Keyword "url"
-__url = Keyword "url"
-
-__email :: Keyword "email"
-__email = Keyword "email"
-
-__password :: Keyword "password"
-__password = Keyword "password"
-
-__date :: Keyword "date"
-__date = Keyword "date"
-
-__month :: Keyword "month"
-__month = Keyword "month"
-
-__week :: Keyword "week"
-__week = Keyword "week"
-
-__time :: Keyword "time"
-__time = Keyword "time"
-
-__datetimeLocal :: Keyword "datetime-local"
-__datetimeLocal = Keyword "datetime-local"
-
-__number :: Keyword "number"
-__number = Keyword "number"
-
-__range :: Keyword "range"
-__range = Keyword "range"
-
-__color :: Keyword "color"
-__color = Keyword "color"
-
-__checkbox :: Keyword "checkbox"
-__checkbox = Keyword "checkbox"
-
-__radio :: Keyword "radio"
-__radio = Keyword "radio"
-
-__file :: Keyword "file"
-__file = Keyword "file"
-
-__submit :: Keyword "submit"
-__submit = Keyword "submit"
-
-__image :: Keyword "image"
-__image = Keyword "image"
-
-__reset :: Keyword "reset"
-__reset = Keyword "reset"
-
-__button :: Keyword "button"
-__button = Keyword "button"
-
-__soft :: Keyword "soft"
-__soft = Keyword "soft"
-
-__hard :: Keyword "hard"
-__hard = Keyword "hard"
-
-__get :: Keyword "get"
-__get = Keyword "get"
-
-__post :: Keyword "post"
-__post = Keyword "post"
-
-__dialog :: Keyword "dialog"
-__dialog = Keyword "dialog"
-
-__applicationXWwwFormUrlencoded :: Keyword "application/x-www-form-urlencoded"
-__applicationXWwwFormUrlencoded = Keyword "application/x-www-form-urlencoded"
-
-__multipartFormData :: Keyword "multipart/form-data"
-__multipartFormData = Keyword "multipart/form-data"
-
-__textPlain :: Keyword "text/plain"
-__textPlain = Keyword "text/plain"
-
-__shipping :: Keyword "shipping"
-__shipping = Keyword "shipping"
-
-__billing :: Keyword "billing"
-__billing = Keyword "billing"
-
-__home :: Keyword "home"
-__home = Keyword "home"
-
-__work :: Keyword "work"
-__work = Keyword "work"
-
-__mobile :: Keyword "mobile"
-__mobile = Keyword "mobile"
-
-__fax :: Keyword "fax"
-__fax = Keyword "fax"
-
-__pager :: Keyword "pager"
-__pager = Keyword "pager"
-
-__off :: Keyword "off"
-__off = Keyword "off"
-
-__on :: Keyword "on"
-__on = Keyword "on"
-
-__name :: Keyword "name"
-__name = Keyword "name"
-
-__honorificPrefix :: Keyword "honorific-prefix"
-__honorificPrefix = Keyword "honorific-prefix"
-
-__givenName :: Keyword "given-name"
-__givenName = Keyword "given-name"
-
-__additionalName :: Keyword "additional-name"
-__additionalName = Keyword "additional-name"
-
-__familyName :: Keyword "family-name"
-__familyName = Keyword "family-name"
-
-__honorificSuffix :: Keyword "honorific-suffix"
-__honorificSuffix = Keyword "honorific-suffix"
-
-__nickname :: Keyword "nickname"
-__nickname = Keyword "nickname"
-
-__organizationTitle :: Keyword "organization-title"
-__organizationTitle = Keyword "organization-title"
-
-__username :: Keyword "username"
-__username = Keyword "username"
-
-__newPassword :: Keyword "new-password"
-__newPassword = Keyword "new-password"
-
-__currentPassword :: Keyword "current-password"
-__currentPassword = Keyword "current-password"
-
-__oneTimeCode :: Keyword "one-time-code"
-__oneTimeCode = Keyword "one-time-code"
-
-__organization :: Keyword "organization"
-__organization = Keyword "organization"
-
-__streetAddress :: Keyword "street-address"
-__streetAddress = Keyword "street-address"
-
-__addressLine1 :: Keyword "address-line1"
-__addressLine1 = Keyword "address-line1"
-
-__addressLine2 :: Keyword "address-line2"
-__addressLine2 = Keyword "address-line2"
-
-__addressLine3 :: Keyword "address-line3"
-__addressLine3 = Keyword "address-line3"
-
-__addressLevel4 :: Keyword "address-level4"
-__addressLevel4 = Keyword "address-level4"
-
-__addressLevel3 :: Keyword "address-level3"
-__addressLevel3 = Keyword "address-level3"
-
-__addressLevel2 :: Keyword "address-level2"
-__addressLevel2 = Keyword "address-level2"
-
-__addressLevel1 :: Keyword "address-level1"
-__addressLevel1 = Keyword "address-level1"
-
-__country :: Keyword "country"
-__country = Keyword "country"
-
-__countryName :: Keyword "country-name"
-__countryName = Keyword "country-name"
-
-__postalCode :: Keyword "postal-code"
-__postalCode = Keyword "postal-code"
-
-__ccName :: Keyword "cc-name"
-__ccName = Keyword "cc-name"
-
-__ccGivenName :: Keyword "cc-given-name"
-__ccGivenName = Keyword "cc-given-name"
-
-__ccAdditionalName :: Keyword "cc-additional-name"
-__ccAdditionalName = Keyword "cc-additional-name"
-
-__ccFamilyName :: Keyword "cc-family-name"
-__ccFamilyName = Keyword "cc-family-name"
-
-__ccNumber :: Keyword "cc-number"
-__ccNumber = Keyword "cc-number"
-
-__ccExp :: Keyword "cc-exp"
-__ccExp = Keyword "cc-exp"
-
-__ccExpMonth :: Keyword "cc-exp-month"
-__ccExpMonth = Keyword "cc-exp-month"
-
-__ccExpYear :: Keyword "cc-exp-year"
-__ccExpYear = Keyword "cc-exp-year"
-
-__ccCsc :: Keyword "cc-csc"
-__ccCsc = Keyword "cc-csc"
-
-__ccType :: Keyword "cc-type"
-__ccType = Keyword "cc-type"
-
-__transactionCurrency :: Keyword "transaction-currency"
-__transactionCurrency = Keyword "transaction-currency"
-
-__transactionAmount :: Keyword "transaction-amount"
-__transactionAmount = Keyword "transaction-amount"
-
-__language :: Keyword "language"
-__language = Keyword "language"
-
-__bday :: Keyword "bday"
-__bday = Keyword "bday"
-
-__bdayDay :: Keyword "bday-day"
-__bdayDay = Keyword "bday-day"
-
-__bdayMonth :: Keyword "bday-month"
-__bdayMonth = Keyword "bday-month"
-
-__bdayYear :: Keyword "bday-year"
-__bdayYear = Keyword "bday-year"
-
-__sex :: Keyword "sex"
-__sex = Keyword "sex"
-
-__photo :: Keyword "photo"
-__photo = Keyword "photo"
-
-__telCountryCode :: Keyword "tel-country-code"
-__telCountryCode = Keyword "tel-country-code"
-
-__telNational :: Keyword "tel-national"
-__telNational = Keyword "tel-national"
-
-__telAreaCode :: Keyword "tel-area-code"
-__telAreaCode = Keyword "tel-area-code"
-
-__telLocal :: Keyword "tel-local"
-__telLocal = Keyword "tel-local"
-
-__telLocalPrefix :: Keyword "tel-local-prefix"
-__telLocalPrefix = Keyword "tel-local-prefix"
-
-__telLocalSuffix :: Keyword "tel-local-suffix"
-__telLocalSuffix = Keyword "tel-local-suffix"
-
-__telExtension :: Keyword "tel-extension"
-__telExtension = Keyword "tel-extension"
-
-__impp :: Keyword "impp"
-__impp = Keyword "impp"
-
-__value :: Keyword "value"
-__value = Keyword "value"
-
-__untilFound :: Keyword "until-found"
-__untilFound = Keyword "until-found"
-
-__sentences :: Keyword "sentences"
-__sentences = Keyword "sentences"
-
-__words :: Keyword "words"
-__words = Keyword "words"
-
-__characters :: Keyword "characters"
-__characters = Keyword "characters"
-
-__numeric :: Keyword "numeric"
-__numeric = Keyword "numeric"
-
-__decimal :: Keyword "decimal"
-__decimal = Keyword "decimal"
-
-__enter :: Keyword "enter"
-__enter = Keyword "enter"
-
-__done :: Keyword "done"
-__done = Keyword "done"
-
-__go :: Keyword "go"
-__go = Keyword "go"
-
-__previous :: Keyword "previous"
-__previous = Keyword "previous"
-
-__send :: Keyword "send"
-__send = Keyword "send"
-
-__manual :: Keyword "manual"
-__manual = Keyword "manual"
-
-__toggle :: Keyword "toggle"
-__toggle = Keyword "toggle"
-
-__show :: Keyword "show"
-__show = Keyword "show"
-
-__hide :: Keyword "hide"
-__hide = Keyword "hide"
-
-__allowPopups :: Keyword "allow-popups"
-__allowPopups = Keyword "allow-popups"
-
-__allowTopNavigation :: Keyword "allow-top-navigation"
-__allowTopNavigation = Keyword "allow-top-navigation"
-
-__allowTopNavigationByUserActivation :: Keyword "allow-top-navigation-by-user-activation"
-__allowTopNavigationByUserActivation = Keyword "allow-top-navigation-by-user-activation"
-
-__allowSameOrigin :: Keyword "allow-same-origin"
-__allowSameOrigin = Keyword "allow-same-origin"
-
-__allowForms :: Keyword "allow-forms"
-__allowForms = Keyword "allow-forms"
-
-__allowPointerLock :: Keyword "allow-pointer-lock"
-__allowPointerLock = Keyword "allow-pointer-lock"
-
-__allowScripts :: Keyword "allow-scripts"
-__allowScripts = Keyword "allow-scripts"
-
-__allowPopupsToEscapeSandbox :: Keyword "allow-popups-to-escape-sandbox"
-__allowPopupsToEscapeSandbox = Keyword "allow-popups-to-escape-sandbox"
-
-__allowModals :: Keyword "allow-modals"
-__allowModals = Keyword "allow-modals"
-
-__allowOrientationLock :: Keyword "allow-orientation-lock"
-__allowOrientationLock = Keyword "allow-orientation-lock"
-
-__allowPresentation :: Keyword "allow-presentation"
-__allowPresentation = Keyword "allow-presentation"
-
-__allowDownloads :: Keyword "allow-downloads"
-__allowDownloads = Keyword "allow-downloads"
-
-__allowTopNavigationToCustomProtocols :: Keyword "allow-top-navigation-to-custom-protocols"
-__allowTopNavigationToCustomProtocols = Keyword "allow-top-navigation-to-custom-protocols"
 
 boolAttributeValue :: Boolean -> AttributeValue
 boolAttributeValue = prop' <<< Show.show
@@ -6248,3 +4575,567 @@ _onunload = Functor.map $ (unsafeAttribute <<< { key: "onunload", value: _ } <<<
 
 _onunload_ :: forall r. Cb -> Event (Attribute (Indexed (onunload :: Cb | r)))
 _onunload_ = _onunload <<< Applicative.pure
+
+newtype Keyword (v :: Symbol) = Keyword String
+
+type role Keyword phantom
+
+derive instance Newtype.Newtype (Keyword v) _
+
+__anonymous :: Keyword "anonymous"
+__anonymous = Keyword "anonymous"
+
+__useCredentials :: Keyword "use-credentials"
+__useCredentials = Keyword "use-credentials"
+
+__lazy :: Keyword "lazy"
+__lazy = Keyword "lazy"
+
+__eager :: Keyword "eager"
+__eager = Keyword "eager"
+
+__high :: Keyword "high"
+__high = Keyword "high"
+
+__low :: Keyword "low"
+__low = Keyword "low"
+
+__auto :: Keyword "auto"
+__auto = Keyword "auto"
+
+__ltr :: Keyword "ltr"
+__ltr = Keyword "ltr"
+
+__rtl :: Keyword "rtl"
+__rtl = Keyword "rtl"
+
+__applicationName :: Keyword "application-name"
+__applicationName = Keyword "application-name"
+
+__author :: Keyword "author"
+__author = Keyword "author"
+
+__description :: Keyword "description"
+__description = Keyword "description"
+
+__generator :: Keyword "generator"
+__generator = Keyword "generator"
+
+__keywords :: Keyword "keywords"
+__keywords = Keyword "keywords"
+
+__referrer :: Keyword "referrer"
+__referrer = Keyword "referrer"
+
+__themeColor :: Keyword "theme-color"
+__themeColor = Keyword "theme-color"
+
+__colorScheme :: Keyword "color-scheme"
+__colorScheme = Keyword "color-scheme"
+
+__contentLanguage :: Keyword "content-language"
+__contentLanguage = Keyword "content-language"
+
+__contentType :: Keyword "content-type"
+__contentType = Keyword "content-type"
+
+__defaultStyle :: Keyword "default-style"
+__defaultStyle = Keyword "default-style"
+
+__refresh :: Keyword "refresh"
+__refresh = Keyword "refresh"
+
+__setCookie :: Keyword "set-cookie"
+__setCookie = Keyword "set-cookie"
+
+__xUaCompatible :: Keyword "x-ua-compatible"
+__xUaCompatible = Keyword "x-ua-compatible"
+
+__contentSecurityPolicy :: Keyword "content-security-policy"
+__contentSecurityPolicy = Keyword "content-security-policy"
+
+__x1 :: Keyword "1"
+__x1 = Keyword "1"
+
+__a :: Keyword "a"
+__a = Keyword "a"
+
+__xA :: Keyword "A"
+__xA = Keyword "A"
+
+__i :: Keyword "i"
+__i = Keyword "i"
+
+__xI :: Keyword "I"
+__xI = Keyword "I"
+
+__alternate :: Keyword "alternate"
+__alternate = Keyword "alternate"
+
+__bookmark :: Keyword "bookmark"
+__bookmark = Keyword "bookmark"
+
+__canonical :: Keyword "canonical"
+__canonical = Keyword "canonical"
+
+__dnsPrefetch :: Keyword "dns-prefetch"
+__dnsPrefetch = Keyword "dns-prefetch"
+
+__external :: Keyword "external"
+__external = Keyword "external"
+
+__help :: Keyword "help"
+__help = Keyword "help"
+
+__icon :: Keyword "icon"
+__icon = Keyword "icon"
+
+__license :: Keyword "license"
+__license = Keyword "license"
+
+__manifest :: Keyword "manifest"
+__manifest = Keyword "manifest"
+
+__modulepreload :: Keyword "modulepreload"
+__modulepreload = Keyword "modulepreload"
+
+__nofollow :: Keyword "nofollow"
+__nofollow = Keyword "nofollow"
+
+__noopener :: Keyword "noopener"
+__noopener = Keyword "noopener"
+
+__noreferrer :: Keyword "noreferrer"
+__noreferrer = Keyword "noreferrer"
+
+__opener :: Keyword "opener"
+__opener = Keyword "opener"
+
+__pingback :: Keyword "pingback"
+__pingback = Keyword "pingback"
+
+__preconnect :: Keyword "preconnect"
+__preconnect = Keyword "preconnect"
+
+__prefetch :: Keyword "prefetch"
+__prefetch = Keyword "prefetch"
+
+__preload :: Keyword "preload"
+__preload = Keyword "preload"
+
+__search :: Keyword "search"
+__search = Keyword "search"
+
+__stylesheet :: Keyword "stylesheet"
+__stylesheet = Keyword "stylesheet"
+
+__tag :: Keyword "tag"
+__tag = Keyword "tag"
+
+__next :: Keyword "next"
+__next = Keyword "next"
+
+__prev :: Keyword "prev"
+__prev = Keyword "prev"
+
+__sync :: Keyword "sync"
+__sync = Keyword "sync"
+
+__async :: Keyword "async"
+__async = Keyword "async"
+
+__subtitles :: Keyword "subtitles"
+__subtitles = Keyword "subtitles"
+
+__captions :: Keyword "captions"
+__captions = Keyword "captions"
+
+__descriptions :: Keyword "descriptions"
+__descriptions = Keyword "descriptions"
+
+__chapters :: Keyword "chapters"
+__chapters = Keyword "chapters"
+
+__metadata :: Keyword "metadata"
+__metadata = Keyword "metadata"
+
+__none :: Keyword "none"
+__none = Keyword "none"
+
+__circleState :: Keyword "circle state"
+__circleState = Keyword "circle state"
+
+__defaultState :: Keyword "default state"
+__defaultState = Keyword "default state"
+
+__polygonState :: Keyword "polygon state"
+__polygonState = Keyword "polygon state"
+
+__rectangleState :: Keyword "rectangle state"
+__rectangleState = Keyword "rectangle state"
+
+__row :: Keyword "row"
+__row = Keyword "row"
+
+__col :: Keyword "col"
+__col = Keyword "col"
+
+__rowgroup :: Keyword "rowgroup"
+__rowgroup = Keyword "rowgroup"
+
+__colgroup :: Keyword "colgroup"
+__colgroup = Keyword "colgroup"
+
+__hidden :: Keyword "hidden"
+__hidden = Keyword "hidden"
+
+__text :: Keyword "text"
+__text = Keyword "text"
+
+__tel :: Keyword "tel"
+__tel = Keyword "tel"
+
+__url :: Keyword "url"
+__url = Keyword "url"
+
+__email :: Keyword "email"
+__email = Keyword "email"
+
+__password :: Keyword "password"
+__password = Keyword "password"
+
+__date :: Keyword "date"
+__date = Keyword "date"
+
+__month :: Keyword "month"
+__month = Keyword "month"
+
+__week :: Keyword "week"
+__week = Keyword "week"
+
+__time :: Keyword "time"
+__time = Keyword "time"
+
+__datetimeLocal :: Keyword "datetime-local"
+__datetimeLocal = Keyword "datetime-local"
+
+__number :: Keyword "number"
+__number = Keyword "number"
+
+__range :: Keyword "range"
+__range = Keyword "range"
+
+__color :: Keyword "color"
+__color = Keyword "color"
+
+__checkbox :: Keyword "checkbox"
+__checkbox = Keyword "checkbox"
+
+__radio :: Keyword "radio"
+__radio = Keyword "radio"
+
+__file :: Keyword "file"
+__file = Keyword "file"
+
+__submit :: Keyword "submit"
+__submit = Keyword "submit"
+
+__image :: Keyword "image"
+__image = Keyword "image"
+
+__reset :: Keyword "reset"
+__reset = Keyword "reset"
+
+__button :: Keyword "button"
+__button = Keyword "button"
+
+__soft :: Keyword "soft"
+__soft = Keyword "soft"
+
+__hard :: Keyword "hard"
+__hard = Keyword "hard"
+
+__get :: Keyword "get"
+__get = Keyword "get"
+
+__post :: Keyword "post"
+__post = Keyword "post"
+
+__dialog :: Keyword "dialog"
+__dialog = Keyword "dialog"
+
+__applicationXWwwFormUrlencoded :: Keyword "application/x-www-form-urlencoded"
+__applicationXWwwFormUrlencoded = Keyword "application/x-www-form-urlencoded"
+
+__multipartFormData :: Keyword "multipart/form-data"
+__multipartFormData = Keyword "multipart/form-data"
+
+__textPlain :: Keyword "text/plain"
+__textPlain = Keyword "text/plain"
+
+__shipping :: Keyword "shipping"
+__shipping = Keyword "shipping"
+
+__billing :: Keyword "billing"
+__billing = Keyword "billing"
+
+__home :: Keyword "home"
+__home = Keyword "home"
+
+__work :: Keyword "work"
+__work = Keyword "work"
+
+__mobile :: Keyword "mobile"
+__mobile = Keyword "mobile"
+
+__fax :: Keyword "fax"
+__fax = Keyword "fax"
+
+__pager :: Keyword "pager"
+__pager = Keyword "pager"
+
+__off :: Keyword "off"
+__off = Keyword "off"
+
+__on :: Keyword "on"
+__on = Keyword "on"
+
+__name :: Keyword "name"
+__name = Keyword "name"
+
+__honorificPrefix :: Keyword "honorific-prefix"
+__honorificPrefix = Keyword "honorific-prefix"
+
+__givenName :: Keyword "given-name"
+__givenName = Keyword "given-name"
+
+__additionalName :: Keyword "additional-name"
+__additionalName = Keyword "additional-name"
+
+__familyName :: Keyword "family-name"
+__familyName = Keyword "family-name"
+
+__honorificSuffix :: Keyword "honorific-suffix"
+__honorificSuffix = Keyword "honorific-suffix"
+
+__nickname :: Keyword "nickname"
+__nickname = Keyword "nickname"
+
+__organizationTitle :: Keyword "organization-title"
+__organizationTitle = Keyword "organization-title"
+
+__username :: Keyword "username"
+__username = Keyword "username"
+
+__newPassword :: Keyword "new-password"
+__newPassword = Keyword "new-password"
+
+__currentPassword :: Keyword "current-password"
+__currentPassword = Keyword "current-password"
+
+__oneTimeCode :: Keyword "one-time-code"
+__oneTimeCode = Keyword "one-time-code"
+
+__organization :: Keyword "organization"
+__organization = Keyword "organization"
+
+__streetAddress :: Keyword "street-address"
+__streetAddress = Keyword "street-address"
+
+__addressLine1 :: Keyword "address-line1"
+__addressLine1 = Keyword "address-line1"
+
+__addressLine2 :: Keyword "address-line2"
+__addressLine2 = Keyword "address-line2"
+
+__addressLine3 :: Keyword "address-line3"
+__addressLine3 = Keyword "address-line3"
+
+__addressLevel4 :: Keyword "address-level4"
+__addressLevel4 = Keyword "address-level4"
+
+__addressLevel3 :: Keyword "address-level3"
+__addressLevel3 = Keyword "address-level3"
+
+__addressLevel2 :: Keyword "address-level2"
+__addressLevel2 = Keyword "address-level2"
+
+__addressLevel1 :: Keyword "address-level1"
+__addressLevel1 = Keyword "address-level1"
+
+__country :: Keyword "country"
+__country = Keyword "country"
+
+__countryName :: Keyword "country-name"
+__countryName = Keyword "country-name"
+
+__postalCode :: Keyword "postal-code"
+__postalCode = Keyword "postal-code"
+
+__ccName :: Keyword "cc-name"
+__ccName = Keyword "cc-name"
+
+__ccGivenName :: Keyword "cc-given-name"
+__ccGivenName = Keyword "cc-given-name"
+
+__ccAdditionalName :: Keyword "cc-additional-name"
+__ccAdditionalName = Keyword "cc-additional-name"
+
+__ccFamilyName :: Keyword "cc-family-name"
+__ccFamilyName = Keyword "cc-family-name"
+
+__ccNumber :: Keyword "cc-number"
+__ccNumber = Keyword "cc-number"
+
+__ccExp :: Keyword "cc-exp"
+__ccExp = Keyword "cc-exp"
+
+__ccExpMonth :: Keyword "cc-exp-month"
+__ccExpMonth = Keyword "cc-exp-month"
+
+__ccExpYear :: Keyword "cc-exp-year"
+__ccExpYear = Keyword "cc-exp-year"
+
+__ccCsc :: Keyword "cc-csc"
+__ccCsc = Keyword "cc-csc"
+
+__ccType :: Keyword "cc-type"
+__ccType = Keyword "cc-type"
+
+__transactionCurrency :: Keyword "transaction-currency"
+__transactionCurrency = Keyword "transaction-currency"
+
+__transactionAmount :: Keyword "transaction-amount"
+__transactionAmount = Keyword "transaction-amount"
+
+__language :: Keyword "language"
+__language = Keyword "language"
+
+__bday :: Keyword "bday"
+__bday = Keyword "bday"
+
+__bdayDay :: Keyword "bday-day"
+__bdayDay = Keyword "bday-day"
+
+__bdayMonth :: Keyword "bday-month"
+__bdayMonth = Keyword "bday-month"
+
+__bdayYear :: Keyword "bday-year"
+__bdayYear = Keyword "bday-year"
+
+__sex :: Keyword "sex"
+__sex = Keyword "sex"
+
+__photo :: Keyword "photo"
+__photo = Keyword "photo"
+
+__telCountryCode :: Keyword "tel-country-code"
+__telCountryCode = Keyword "tel-country-code"
+
+__telNational :: Keyword "tel-national"
+__telNational = Keyword "tel-national"
+
+__telAreaCode :: Keyword "tel-area-code"
+__telAreaCode = Keyword "tel-area-code"
+
+__telLocal :: Keyword "tel-local"
+__telLocal = Keyword "tel-local"
+
+__telLocalPrefix :: Keyword "tel-local-prefix"
+__telLocalPrefix = Keyword "tel-local-prefix"
+
+__telLocalSuffix :: Keyword "tel-local-suffix"
+__telLocalSuffix = Keyword "tel-local-suffix"
+
+__telExtension :: Keyword "tel-extension"
+__telExtension = Keyword "tel-extension"
+
+__impp :: Keyword "impp"
+__impp = Keyword "impp"
+
+__value :: Keyword "value"
+__value = Keyword "value"
+
+__untilFound :: Keyword "until-found"
+__untilFound = Keyword "until-found"
+
+__sentences :: Keyword "sentences"
+__sentences = Keyword "sentences"
+
+__words :: Keyword "words"
+__words = Keyword "words"
+
+__characters :: Keyword "characters"
+__characters = Keyword "characters"
+
+__numeric :: Keyword "numeric"
+__numeric = Keyword "numeric"
+
+__decimal :: Keyword "decimal"
+__decimal = Keyword "decimal"
+
+__enter :: Keyword "enter"
+__enter = Keyword "enter"
+
+__done :: Keyword "done"
+__done = Keyword "done"
+
+__go :: Keyword "go"
+__go = Keyword "go"
+
+__previous :: Keyword "previous"
+__previous = Keyword "previous"
+
+__send :: Keyword "send"
+__send = Keyword "send"
+
+__manual :: Keyword "manual"
+__manual = Keyword "manual"
+
+__toggle :: Keyword "toggle"
+__toggle = Keyword "toggle"
+
+__show :: Keyword "show"
+__show = Keyword "show"
+
+__hide :: Keyword "hide"
+__hide = Keyword "hide"
+
+__allowPopups :: Keyword "allow-popups"
+__allowPopups = Keyword "allow-popups"
+
+__allowTopNavigation :: Keyword "allow-top-navigation"
+__allowTopNavigation = Keyword "allow-top-navigation"
+
+__allowTopNavigationByUserActivation :: Keyword "allow-top-navigation-by-user-activation"
+__allowTopNavigationByUserActivation = Keyword "allow-top-navigation-by-user-activation"
+
+__allowSameOrigin :: Keyword "allow-same-origin"
+__allowSameOrigin = Keyword "allow-same-origin"
+
+__allowForms :: Keyword "allow-forms"
+__allowForms = Keyword "allow-forms"
+
+__allowPointerLock :: Keyword "allow-pointer-lock"
+__allowPointerLock = Keyword "allow-pointer-lock"
+
+__allowScripts :: Keyword "allow-scripts"
+__allowScripts = Keyword "allow-scripts"
+
+__allowPopupsToEscapeSandbox :: Keyword "allow-popups-to-escape-sandbox"
+__allowPopupsToEscapeSandbox = Keyword "allow-popups-to-escape-sandbox"
+
+__allowModals :: Keyword "allow-modals"
+__allowModals = Keyword "allow-modals"
+
+__allowOrientationLock :: Keyword "allow-orientation-lock"
+__allowOrientationLock = Keyword "allow-orientation-lock"
+
+__allowPresentation :: Keyword "allow-presentation"
+__allowPresentation = Keyword "allow-presentation"
+
+__allowDownloads :: Keyword "allow-downloads"
+__allowDownloads = Keyword "allow-downloads"
+
+__allowTopNavigationToCustomProtocols :: Keyword "allow-top-navigation-to-custom-protocols"
+__allowTopNavigationToCustomProtocols = Keyword "allow-top-navigation-to-custom-protocols"

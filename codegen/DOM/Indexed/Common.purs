@@ -10,12 +10,12 @@ import Data.Set (Set)
 import Data.Set as Set
 import Data.Tuple.Nested (type (/\), (/\))
 import Partial.Unsafe (unsafePartial)
-import PureScript.CST.Types (Expr, ImportDecl, Type)
-import Tidy.Codegen (declImport, declImportAs, exprIdent, importClass, importOp, importType, importValue, typeApp, typeCtor, typeString)
+import PureScript.CST.Types (Declaration, Expr, ImportDecl, Type)
+import Tidy.Codegen (binaryOp, declImport, declImportAs, declValue, exprIdent, exprOp, exprRecord, exprSection, exprString, importClass, importOp, importType, importValue, typeApp, typeArrow, typeCtor, typeString)
 
 requires :: Array ( ImportDecl Void )
 requires =
-    unsafePartial
+    unsafePartial $
         [ declImportAs "Control.Applicative" [ importValue "pure" ] "Applicative"
         , declImport "Control.Category" [ importOp "<<<" ]
         , declImport "Data.Function" [ importOp "$"]
@@ -34,22 +34,37 @@ requires =
         , declImport "Deku.Control" [ importValue "elementify2" ]
         , declImport "Deku.Core" [ importType "Nut" ]
         , declImport "FRP.Event" [ importType "Event" ]
+        , declImport "Type.Proxy" [ importType "Proxy" ]
+        ]
+
+declHandler :: String -> String -> Expr Void -> Declaration Void
+declHandler name srcName handler =
+    unsafePartial
+        $ declValue name []
+        $ exprOp ( exprIdent "Functor.map" )
+        [ binaryOp "$"
+            $ exprOp ( exprIdent "unsafeAttribute" )
+                [ binaryOp "<<<" $ exprRecord [ "key" /\ exprString srcName, "value" /\ exprSection ]
+                , binaryOp "<<<" handler
+                ]
         ]
 
 simpleType :: String -> TypeStub
 simpleType =
-    TypeStub <<< { ctor : _, args : [], symbol : false }
+    TypeIdent []
 
-newtype TypeStub =
-    TypeStub
-        { ctor :: String, args :: Array TypeStub, symbol :: Boolean }
+data TypeStub 
+    = TypeSymbol String
+    | TypeIdent ( Array TypeStub ) String
+    | TypeArrow ( Array TypeStub ) TypeStub
 derive instance Eq TypeStub
 derive instance Ord TypeStub
 
 construct :: forall e . TypeStub -> Type e
-construct ( TypeStub { ctor, symbol : true } ) = unsafePartial $ typeString ctor
-construct ( TypeStub { ctor, args : [] } ) = unsafePartial $ typeCtor ctor
-construct ( TypeStub { ctor, args } ) = unsafePartial $ typeApp ( typeCtor ctor ) $ map construct args
+construct ( TypeSymbol ctor ) = unsafePartial $ typeString ctor
+construct ( TypeIdent [] ctor ) = unsafePartial $ typeCtor ctor
+construct ( TypeIdent args ctor ) = unsafePartial $ typeApp ( typeCtor ctor ) $ map construct args
+construct ( TypeArrow args v ) = unsafePartial $ typeArrow ( construct <$> args ) $ construct v
 
 type Keyword =
     { name :: String
@@ -115,6 +130,10 @@ attributeMember = case _ of
         _ ->
             []
 
+nominal :: String
+nominal =
+    "__nominal"
+
 mapType :: IDLType -> Array AttributeType
 mapType = case _ of
     Descriptor t -> mapType t.idlType
@@ -157,7 +176,7 @@ mapType = case _ of
 
     Primitive "USVString" ->
         pure string
-    
+
     Union s ->
         bind s mapType
 

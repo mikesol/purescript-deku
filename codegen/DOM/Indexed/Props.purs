@@ -3,7 +3,7 @@ module DOM.Indexed.Props where
 import Prelude
 import Prim hiding (Type)
 
-import DOM.Indexed.Common (AttributeType, Keyword, TypeStub(..), attributeMember, attributeName, construct, escape, mapType, overloaded, simpleType)
+import DOM.Indexed.Common (AttributeType, Keyword, TypeStub(..), declHandler, attributeMember, attributeName, construct, escape, mapType, overloaded, simpleType)
 import DOM.Spec (Interface)
 import Data.Array as Array
 import Data.Array.NonEmpty as NEA
@@ -13,31 +13,33 @@ import Data.Tuple.Nested (type (/\), (/\))
 import Foreign.Object as Foreign
 import Partial.Unsafe (unsafePartial)
 import PureScript.CST.Types (ClassFundep(..), Declaration, Export, Expr, Type)
-import Tidy.Codegen (binaryOp, classMember, declClass, declInstance, declSignature, declValue, exportClass, exportValue, exprIdent, exprOp, exprRecord, exprSection, exprString, instValue, typeApp, typeArrow, typeConstrained, typeCtor, typeForall, typeRow, typeVar, typeVarKinded)
+import Tidy.Codegen (binaryOp, classMember, declClass, declInstance, declSignature, declValue, exportClass, exportValue, exprIdent, exprOp, instValue, typeApp, typeArrow, typeConstrained, typeCtor, typeForall, typeRow, typeVar, typeVarKinded)
 import Tidy.Codegen.Class (toName)
 import Tidy.Codegen.Common (tokRightArrow)
 
 exports :: Foreign.Object ( Array AttributeType ) -> Array ( Export Void )
 exports attributes =
-    unsafePartial $ bind ( Foreign.toUnfoldable attributes ) \( srcName /\ types ) -> do
-        let name = escape srcName
-            ctor /\ shortHand = attributeName srcName
-        case types of
-            [] ->
-                []
+    unsafePartial
+        $ append [ exportValue "self", exportValue "self_" ]
+        $ bind ( Foreign.toUnfoldable attributes ) \( srcName /\ types ) -> do
+            let name = escape srcName
+                ctor /\ shortHand = attributeName srcName
+            case types of
+                [] ->
+                    []
 
-            [ _ ] ->
-                [ exportValue ctor
-                , exportValue shortHand
-                ]
-        
-            _ -> do
-                let overloadedHandler /\ overloadedClass = overloaded name
-                [ exportValue ctor
-                , exportValue shortHand
-                , exportClass overloadedClass
-                , exportValue overloadedHandler
-                ]
+                [ _ ] ->
+                    [ exportValue ctor
+                    , exportValue shortHand
+                    ]
+            
+                _ -> do
+                    let overloadedHandler /\ overloadedClass = overloaded name
+                    [ exportValue ctor
+                    , exportValue shortHand
+                    , exportClass overloadedClass
+                    , exportValue overloadedHandler
+                    ]
 
 generate :: Foreign.Object ( Array AttributeType ) -> Array ( Declaration Void )
 generate attributes =
@@ -110,32 +112,20 @@ declAttr attributes =
                 ]
                 [ instValue member [] handler ]
 
-    declHandler :: String -> String -> Expr Void -> Declaration Void
-    declHandler name srcName handler =
-        unsafePartial
-            $ declValue name [] 
-            $ exprOp ( exprIdent "Functor.map" )
-            [ binaryOp "$"
-                $ exprOp ( exprIdent "unsafeAttribute" )
-                    [ binaryOp "<<<" $ exprRecord [ "key" /\ exprString srcName, "value" /\ exprSection ]
-                    , binaryOp "<<<" handler
-                    ]
+typeEvented :: String -> Type Void -> Type Void
+typeEvented name typeDecl =
+    unsafePartial
+        $ typeApp ( typeCtor "Event" ) [ typePure name typeDecl ]
+
+typePure :: String -> Type Void -> Type Void
+typePure name typeDecl = 
+    unsafePartial
+        $ typeApp ( typeCtor "Attribute" ) 
+        [ typeApp ( typeCtor "Indexed" )
+            [ typeRow [ name /\ typeDecl ]
+                $ Just $ typeVar "r"
             ]
-    
-    typeEvented :: String -> Type Void -> Type Void
-    typeEvented name typeDecl =
-        unsafePartial
-            $ typeApp ( typeCtor "Event" ) [ typePure name typeDecl ]
-    
-    typePure :: String -> Type Void -> Type Void
-    typePure name typeDecl = 
-        unsafePartial
-            $ typeApp ( typeCtor "Attribute" ) 
-            [ typeApp ( typeCtor "Indexed" )
-                [ typeRow [ name /\ typeDecl ]
-                    $ Just $ typeVar "r"
-                ]
-            ]
+        ]
 
 coalesceAttributes :: Array Keyword -> Foreign.Object ( Interface /\ Array String ) -> Foreign.Object ( Array AttributeType )
 coalesceAttributes keywords interfaces = do
@@ -145,7 +135,7 @@ coalesceAttributes keywords interfaces = do
             Foreign.fromFoldableWith append do
                 { attribute, value } <- keywords
                 pure $ attribute /\ pure
-                    { type : TypeStub { ctor : "Keyword", symbol : false, args : [ TypeStub { ctor : value, symbol : true, args : [] }  ] }
+                    { type : TypeIdent [ TypeSymbol value ] "Keyword" 
                     , original : simpleType "String"
                     , handler : keywordAttributeValue
                     }

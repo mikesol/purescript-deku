@@ -82,3 +82,52 @@ resolveInterface spec name = do
         
         _ ->
             Nothing
+
+-- | Elements that have an implementation in the current web-html package
+webElements :: Set String
+webElements =
+    Set.fromFoldable
+        [ "Element"
+        , "HTMLElement"
+        , "HTMLAnchorElement"
+        , "HTMLAreaElement"
+        , "HTMLAudioElement"
+        , "HTMLBRElement"
+        , "HTMLBaseElement"
+        , "HTMLBodyElement"
+        , "HTMLButtonElement"
+        , "HTMLCanvasElement"
+        , "HTMLDivElement"
+        , "HTMLEmbedElement"
+        , "HTMLFormElement"
+        , "HTMLHRElement"
+        , "HTMLHeadElement"
+        , "HTMLHtmlElement"
+        , "HTMLInputElement"
+        , "HTMLLabelElement"
+        , "HTMLLegendElement"
+        , "HTMLLinkElement"
+        , "HTMLMapElement"
+        , "HTMLMetaElement"
+        , "HTMLMeterElement"
+        , "HTMLObjectElement"
+        , "HTMLOptionElement"
+        , "HTMLOutputElement"
+        , "HTMLParagraphElement"
+        , "HTMLParamElement"
+        , "HTMLPreElement"
+        , "HTMLProgressElement"
+        , "HTMLScriptElement"
+        , "HTMLSelectElement"
+        , "HTMLSourceElement"
+        , "HTMLSpanElement"
+        , "HTMLStyleElement"
+        , "HTMLTableDataCellElement"
+        , "HTMLTableElement"
+        , "HTMLTemplateElement"
+        , "HTMLTextAreaElement"
+        , "HTMLTimeElement"
+        , "HTMLTitleElement"
+        , "HTMLTrackElement"
+        , "HTMLVideoElement"
+        ]
