@@ -10,9 +10,8 @@ module Deku.Attributes
   , style_
   ) where
 
-import Prelude
 
-import Deku.Attribute (class Attr, Attribute, (<:=>))
+import Deku.Attribute (class Attr, Attribute, (<:=>), (!:=))
 import Deku.DOM as D
 import FRP.Event (Event)
 
@@ -29,7 +28,7 @@ klass e = D.Class <:=> e
 -- | This is a pure event, meaning that it sets the class string immediately upon being
 -- | fired.
 klass_ :: forall e. Attr e D.Class String => String -> Attribute e
-klass_ = klass <<< pure
+klass_ e = D.Class !:= e
 
 -- | Set the `style` attribute of an element using an event emitting strings.
 -- | Each `style` string emitted replaces the previous style string.
@@ -44,7 +43,7 @@ style e = D.Style <:=> e
 -- | This is a pure event, meaning that it sets the style string immediately upon being
 -- | fired.
 style_ :: forall e. Attr e D.Style String => String -> Attribute e
-style_ = style <<< pure
+style_ e = D.Style !:= e
 
 -- | Set the `id` attribute of an element using an event emitting strings.
 -- | Each `id` string emitted replaces the previous id string.
@@ -59,7 +58,7 @@ id e = D.Id <:=> e
 -- | This is a pure event, meaning that it sets the id string immediately upon being
 -- | fired.
 id_ :: forall e. Attr e D.Id String => String -> Attribute e
-id_ = id <<< pure
+id_ e = D.Id !:= e
 
 -- | Set the `href` attribute of an element using an event emitting strings.
 -- | Each `href` string emitted replaces the previous href string.
@@ -74,4 +73,4 @@ href e = D.Href <:=> e
 -- | This is a pure event, meaning that it sets the href string immediately upon being
 -- | fired.
 href_ :: forall e. Attr e D.Href String => String -> Attribute e
-href_ = href <<< pure
+href_ e = D.Href !:= e

@@ -9,7 +9,7 @@ module Deku.Core
   , Child(..)
   , Korok(..)
   , PureKorok(..)
-  , ActualizedKorok
+  , ActualizedKorok(..)
   , resolveNut
   , nuttyKorok
   , portalFlatten
@@ -129,12 +129,14 @@ newtype DOMInterpret payload = DOMInterpret
 
 newtype ExDOMInterpret = ExDOMInterpret (forall payload. DOMInterpret payload)
 newtype ExEvent = ExEvent (forall payload. Event payload)
-type ActualizedKorok =
-  { html :: String
-  , attributes :: Object (Event VolatileAttribute)
-  , nuts :: Object Korok
-  , count :: Int
-  }
+newtype ActualizedKorok = ActualizedKorok
+  ( Either String
+      { html :: String
+      , attributes :: Array (Tuple String (Event VolatileAttribute))
+      , nuts :: Array (Tuple String Korok)
+      , count :: Int
+      }
+  )
 
 newtype PureKorok = PureKorok
   ({ count :: Int } -> ActualizedKorok)
@@ -373,8 +375,11 @@ processAtts pxScope i r = foldl
       let
         { cache, element } = b
         ce = makeCachedPursxAttribute
-          k cache pxScope
-          v element
+          k
+          cache
+          pxScope
+          v
+          element
       { cache: ce.cache, element: ce.element }
   )
   i
@@ -385,7 +390,7 @@ resolveNut (Nut (Right korok)) = korok
 resolveNut (Nut (Left (PureKorok pureKorok))) =
   Korok ee
   where
-  resolved = pureKorok { count: 0 }
+  ActualizedKorok resolved = pureKorok { count: 0 }
 
   ee :: forall payload. NutF payload
   ee = NutF (Element' (Node go))
@@ -403,15 +408,16 @@ resolveNut (Nut (Left (PureKorok pureKorok))) =
       pxScope <- ids
       raiseId me
       let
-        { cache, element: element' } = processNuts
-          pxScope
-          ( processAtts pxScope
-              { cache: Object.empty
-              , element: Korok (NutF (Bolson.envy empty))
-              }
-              resolved.attributes
-          )
-          resolved.nuts
+        acc =
+          { cache: Object.empty
+          , element: Korok (NutF (Bolson.envy empty))
+          }
+        { cache, element: element' } = resolved # case _ of
+          Left _ -> acc
+          Right resolved' -> processNuts
+            pxScope
+            (processAtts pxScope acc $ Object.fromFoldable resolved'.attributes)
+            (Object.fromFoldable resolved'.nuts)
       let Node element = domableToNode element'
       unsub <- runSTFn2 mySub
         ( merge
@@ -424,7 +430,9 @@ resolveNut (Nut (Left (PureKorok pureKorok))) =
                   , pos
                   , pxScope: pxScope
                   , scope
-                  , html: resolved.html
+                  , html: case resolved of
+                      Left text -> text
+                      Right { html } -> html
                   , verb: delimiter
                   }
             , element z di

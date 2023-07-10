@@ -5,9 +5,8 @@ import Prelude
 import Control.Alt (alt)
 import Data.FastVect.FastVect (index, (:))
 import Data.FastVect.FastVect as V
-import Data.Foldable (oneOfMap)
 import Data.Profunctor (lcmap)
-import Deku.Attribute (cb, (:=))
+import Deku.Attribute (cb, (!:=))
 import Deku.Control (portal, switcher, text_)
 import Deku.Core (bus, dyn, insert_)
 import Deku.DOM as D
@@ -29,13 +28,13 @@ main = runInBody
                   $ portal
                       ( map
                           ( \i -> D.video
-                              [ oneOfMap pure
-                                  [ D.Controls := "true", D.Width := "250" ]
-                              ]
+                              
+                                  [ D.Controls !:= "true", D.Width !:= "250" ]
+                              
                               [ D.source
-                                  [oneOfMap pure
-                                      [ D.Src := i, D.Xtype := "video/mp4" ]
-                                  ]
+                                  
+                                      [ D.Src !:= i, D.Xtype !:= "video/mp4" ]
+                                  
                                   []
                               ]
                           )
@@ -54,7 +53,7 @@ main = runInBody
                             <<< ev
                         D.div_
                           [ D.button
-                              [pure $ D.OnClick := cb (const $ push unit)]
+                              [ D.OnClick !:= cb (const $ push unit)]
                               [ text_ "Switch videos" ]
                           , D.div_
                               [ flips true, flips false ]
@@ -70,13 +69,11 @@ main = runInBody
                   $ portal
                       ( map
                           ( \i -> D.video
-                              [oneOfMap pure
-                                  [ D.Controls := "true", D.Width := "250" ]
-                              ]
+                                  [ D.Controls !:= "true", D.Width !:= "250" ]
+                              
                               [ D.source
-                                  [oneOfMap pure
-                                      [ D.Src := i, D.Xtype := "video/mp4" ]
-                                  ]
+                                      [ D.Src !:= i, D.Xtype !:= "video/mp4" ]
+                                  
                                   []
                               ]
                           )
@@ -95,7 +92,7 @@ main = runInBody
                             <<< ev
                         D.div_
                           [ D.button
-                              [pure $ D.OnClick := cb (const $ push unit)]
+                              [  D.OnClick !:= cb (const $ push unit)]
                               [ text_ "Toggle videos" ]
                           , flips true
                           ]
@@ -110,13 +107,10 @@ main = runInBody
                   $ portal
                       ( map
                           ( \i -> D.video
-                              [oneOfMap pure
-                                  [ D.Controls := "true", D.Width := "250" ]
-                              ]
+                                  [ D.Controls !:= "true", D.Width !:= "250" ]
                               [ D.source
-                                  [oneOfMap pure
-                                      [ D.Src := i, D.Xtype := "video/mp4" ]
-                                  ]
+                                      [ D.Src !:= i, D.Xtype !:= "video/mp4" ]
+                                  
                                   []
                               ]
                           )
@@ -133,7 +127,7 @@ main = runInBody
                             <<< ev
                         D.div_
                           [ D.button
-                              [pure $ D.OnClick := cb (const $ push unit)]
+                              [ D.OnClick !:= cb (const $ push unit)]
                               [ text_ "Toggle videos" ]
                           , flips true
                           ]

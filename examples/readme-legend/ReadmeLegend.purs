@@ -51,7 +51,7 @@ main =
               fontWeight bold
           -- `Deku.Attribute` contains constructors for
           -- uncommon and ad hoc `x-` attributes
-          , pure (xdata "my-attr" "my-val")
+          , xdata "my-attr" $ pure "my-val"
           ]
         [
           -- `Deku.Control` contains all non-element buiding blocks

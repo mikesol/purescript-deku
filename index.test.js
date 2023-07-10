@@ -30,7 +30,7 @@ describe('deku', () => {
   doTest('is sane', (f) => f(tests.sanityCheck, () => {
     const $ = require('jquery');
     expect($('#hello').text()).toBe('Hello');
-  }));
+  }), false);
 
   doTest('has elements in the correct order', (f) => f(tests.elementsInCorrectOrder, () => {
     const $ = require('jquery');

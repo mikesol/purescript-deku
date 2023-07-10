@@ -4,7 +4,7 @@ import Prelude
 
 import Control.Alt ((<|>))
 import Control.Plus (empty)
-import Deku.Attribute (cb, (:=))
+import Deku.Attribute (cb, (!:=))
 import Deku.Attributes (style_)
 import Deku.Control (text_)
 import Deku.Control as C
@@ -33,10 +33,10 @@ myPxInception
   -> Nut
   -> Nut
 myPxInception push aThirdThing = myPx ~~
-  { btn: pure (D.Style := "background-color: rgb(133,151,217)")
+  { btn:  (D.Style !:= "background-color: rgb(133,151,217)")
   , somethingElse:
       ( D.button
-          [pure $ D.OnClick :=
+          [ D.OnClick !:=
               (cb (const $ push false))
           ]
           [ C.text_ "I was dynamically inserted " ]

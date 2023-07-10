@@ -5,20 +5,30 @@
 module Deku.Control
   ( (<#~>)
   , (<$~>)
+  , actualizeNuts
+  , amassKoroks
   , blank
+  , compactArray
   , deku
   , elementify3
-  , toDeku
+  , filterArray
+  , filterMapArray
+  , foldArray
+  , foldlArray
+  , foldlArray2
   , globalPortal
   , globalPortal1
   , guard
+  , nutsToHtml
   , portal
   , portal1
   , switcher
   , switcherFlipped
   , text
   , text_
-  ) where
+  , toDeku
+  )
+  where
 
 import Prelude
 
@@ -26,24 +36,24 @@ import Bolson.Control as Bolson
 import Bolson.Core (Element(..), Entity(..), PSR, Scope(..))
 import Control.Alt ((<|>))
 import Control.Monad.ST.Uncurried (mkSTFn2, runSTFn1, runSTFn2)
-import Control.Monad.State (evalState, get, put, runState)
 import Control.Plus (empty)
-import Data.Array (fold, length, null)
-import Data.Either (Either(..), either, isRight)
+import Data.Array (length, null, unsafeIndex)
+import Data.Array as Array
+import Data.Either (Either(..), hush)
 import Data.FastVect.FastVect (Vect, singleton, index)
-import Data.Filterable (compact, filter, partitionMap)
+import Data.Filterable (filter)
 import Data.Foldable (foldl)
 import Data.Maybe (Maybe(..), maybe)
 import Data.Newtype (class Newtype, unwrap, wrap)
 import Data.Profunctor (dimap, lcmap)
-import Data.Traversable (traverse)
 import Data.Tuple (Tuple(..), snd)
 import Data.Tuple.Nested ((/\))
-import Deku.Attribute (Attribute(..), AttributeValue(..), PureAttribute(..), UnsafeAttribute, VolatileAttribute, unsafeUnVolatileAttribute, unsafeUnAttribute)
-import Deku.Core (ActualizedKorok, DOMInterpret(..), Korok(..), Node(..), Nut(..), NutF(..), PureKorok(..), dyn, envy, insert_, remove, resolveNut)
+import Deku.Attribute (Attribute(..), AttributeValue(..), PureAttribute(..), UnsafeAttribute, VolatileAttribute, unsafeUnVolatileAttribute)
+import Deku.Core (ActualizedKorok(..), DOMInterpret(..), Korok(..), Node(..), Nut(..), NutF(..), PureKorok(..), dyn, envy, insert_, remove, resolveNut)
 import Deku.Delimiter (delimiter)
 import FRP.Event (Event, Subscriber(..), keepLatest, makeLemmingEventO, mapAccum, memoize, merge)
 import Foreign.Object as Object
+import Partial.Unsafe (unsafePartial)
 import Prim.Int (class Compare)
 import Prim.Ordering (GT)
 import Record (union)
@@ -67,7 +77,7 @@ unsafeSetText (DOMInterpret { setText }) id txt = map
   txt
 
 unsafeSetAttribute
-  :: forall element payload
+  :: forall payload
    . DOMInterpret payload
   -> String
   -> Event VolatileAttribute
@@ -83,6 +93,78 @@ unsafeSetAttribute (DOMInterpret { setProp, setCb, unsetAttribute }) id atts =
     )
     atts
 
+-- use this to get the optimizer to kick in
+foldlArray :: forall a b. (b -> a -> b) -> b -> Array a -> b
+foldlArray bab b arr = foldlArray2 0 len bab b arr
+  where
+  len = Array.length arr
+
+foldlArray2 :: forall a b. Int -> Int -> (b -> a -> b) -> b -> Array a -> b
+foldlArray2 n i bab b arr
+  | n == i = b
+  | otherwise = foldlArray2 (n + 1) i bab
+      (bab b (unsafePartial $ unsafeIndex arr n))
+      arr
+
+foldArray :: forall m. Monoid m => Array m -> m
+foldArray = foldlArray (<>) mempty
+
+unzipArray
+  :: forall a b
+   . Array (Tuple a b)
+  -> { left :: Array a, right :: Array b }
+unzipArray arr = foldlArray
+  ( \{ left, right } (Tuple l r) ->
+      { left: left <> [ l ], right: right <> [ r ] }
+  )
+  { left: [], right: [] }
+  arr
+
+amassKoroks
+  :: Array (Either ActualizedKorok Korok) -> Int -> Array (Tuple String Korok)
+amassKoroks actualized count = compactArray res
+  where
+  Tuple res _ = foldlArray
+    ( \(Tuple arr c) -> case _ of
+        Left _ -> do
+          Tuple (arr <> [ Nothing ]) c
+        Right i ->
+          Tuple (arr <> [ Just $ Tuple (delimiter <> show c <> delimiter) i ])
+            (c + 1)
+    )
+    (Tuple [] count)
+    actualized
+
+nutsToHtml :: Array (Either ActualizedKorok Korok) -> Int -> String
+nutsToHtml actualized count = acc
+  where
+  (Tuple acc _) = foldlArray
+    ( \(Tuple acc c) -> case _ of
+        Left (ActualizedKorok k) -> case k of
+          Left txt -> Tuple (acc <> txt) c
+          Right { html } -> Tuple (acc <> html) c
+        Right _ ->
+          Tuple (acc <> delimiter <> show c <> delimiter) (c + 1)
+    )
+    (Tuple "" count)
+    actualized
+
+actualizeNuts :: Int -> Array (Either PureKorok Korok) -> Tuple (Array (Either ActualizedKorok Korok)) Int
+actualizeNuts count nuts = foldlArray
+  ( \(Tuple arr n) -> case _ of
+      Left (PureKorok k) -> do
+        let korok@(ActualizedKorok ak) = k { count: n }
+        Tuple
+          (arr <> [ Left korok ])
+          ( case ak of
+              Left _ -> n
+              Right { count: c } -> c
+          )
+      Right x -> Tuple (arr <> [ Right x ]) n
+  )
+  (Tuple [] (count + 1))
+  nuts
+
 -- | Used internally to create new [`Element`-s](https://developer.mozilla.org/en-US/docs/Web/API/Element).
 -- | Do not use this directly. Instead, use `unsafeCustomElement` from `Deku.DOM`.
 elementify3
@@ -94,10 +176,17 @@ elementify3
 elementify3 tag attributes kids = pureNut
   where
   -- 1. we split the attribute list into pure and impure attributes
-  atts = partitionMap identity
+  atts = foldlArray
+    ( \{ left, right } -> case _ of
+        Left x -> { left: left <> [ x ], right }
+        Right x -> { left, right: right <> [ x ] }
+    )
+    { left: [], right: [] }
     ((coerce :: Array (Attribute element) -> Array UnsafeAttribute) attributes)
-  writableAtts = foldl (\b a -> b <> " " <> a.key <> "\"" <> a.value <> "\"") ""
-    ( ( coerce
+  writableAtts = foldlArray
+    (\b a -> b <> " " <> a.key <> "=\"" <> a.value <> "\"")
+    ""
+    ( ( coerce -- the list from foldable is to avoid the optimizer hitting the foreign wall for Array's foldable
           :: Array PureAttribute
           -> Array
                { key :: String
@@ -107,92 +196,56 @@ elementify3 tag attributes kids = pureNut
     )
   -- 2. we split the nuts
   nuts = (coerce :: Array Nut -> Array (Either PureKorok Korok)) kids
+  ownComponentCount = length $ filterMapArray hush nuts
+  noAtts = null atts.right
+  attributeCount = if noAtts then 0 else 1
 
-  actualizeNuts :: Int -> Tuple (Array (Either ActualizedKorok Korok)) Int
-  actualizeNuts count = runState
-    ( traverse
-        ( either
-            ( \(PureKorok k) -> do
-                n <- get
-                let korok = k { count: n }
-                put korok.count
-                pure $ Left korok
-            )
-            (pure <<< Right)
-        )
-        nuts
-    )
-    (count + 1)
-  nutsToHtml actualized count = fold $ evalState
-    ( traverse
-        ( either
-            ( \k -> do
-                pure k.html
-            )
-            ( \_ -> do
-                c <- get
-                put (c + 1)
-                pure (delimiter <> show c <> delimiter)
-            )
-        )
-        actualized
-    )
-    count
-  amassKoroks actualized count = Object.fromFoldable $ compact $ evalState
-    ( traverse
-        ( either
-            ( \k -> do
-                pure Nothing
-            )
-            ( \i -> do
-                c <- get
-                put (c + 1)
-                pure (Just $ Tuple (delimiter <> show c <> delimiter) i)
-            )
-        )
-        actualized
-    )
-    count
+
   -- 3. we build our pure korok
   pureNut = Nut $ Left $ PureKorok \{ count } -> do
-    let noAtts = null atts.right
-    let attributeCount = if noAtts then 0 else 1
-    let ownComponentCount = length $ filter isRight nuts
     let myCount = count + attributeCount + ownComponentCount
-    let Tuple actualizedNuts newCount = actualizeNuts myCount
+    -- oops - did I mean to do something with newCount?
+    let Tuple actualizedNuts newCount = actualizeNuts myCount nuts
     let delimited = delimiter <> show count <> delimiter
-    { html: "<" <> tag
-        <> writableAtts
-        <> " "
-        <> delimited
-        <> " "
-        <> " >"
-        -- not quite this because we need to intersperse the other koroks
-        <> nutsToHtml actualizedNuts (count + attributeCount)
-        <> "</"
-        <> tag
-        <> ">"
-    , attributes: foldl Object.union
-        ( if noAtts then Object.empty
-          else Object.singleton delimited (merge atts.right)
+    let
+      filtered = filterMapArray
+        ( case _ of
+            Left (ActualizedKorok k) -> case k of
+              Left _ -> Nothing
+              Right { attributes: attz, nuts: nutz } -> Just
+                (Tuple attz nutz)
+            Right _ -> Nothing
         )
-        ( compact
-            ( map (either (_.attributes >>> Just) (const Nothing))
-                actualizedNuts
-            )
-        )
-    , nuts: foldl Object.union
-        (amassKoroks actualizedNuts (count + attributeCount))
-        ( compact
-            ( map (either (_.nuts >>> Just) (const Nothing))
-                actualizedNuts
-            )
-        )
-    , count: myCount
-    }
+        actualizedNuts
+    let { left: attz, right: nutz } = unzipArray filtered
+    let nuttyString = nutsToHtml actualizedNuts (count + attributeCount)
+    let myKoroks = amassKoroks actualizedNuts (count + attributeCount)
+
+    ActualizedKorok $ Right $
+      { html: "<" <> tag
+          <> writableAtts
+          <> " "
+          <> delimited
+          <> " "
+          <> " >"
+          -- not quite this because we need to intersperse the other koroks
+          <> nuttyString
+          <> "</"
+          <> tag
+          <> ">"
+      , attributes: foldlArray (<>)
+          ( if noAtts then []
+            else [ Tuple delimited (merge atts.right) ]
+          )
+          attz
+      , nuts: foldlArray (<>)
+          myKoroks
+          nutz
+      , count: myCount
+      }
 
 elementify
-  :: forall payload element
+  :: forall payload
    . String
   -> NutF payload
   -> Node payload
@@ -458,10 +511,23 @@ text txt = Nut $ Right $ Korok go'
         runSTFn1 k (deleteFromCache { id: me })
         unsub
 
+filterArray :: forall a. (a -> Boolean) -> Array a -> Array a
+filterArray f = filterMapArray \i -> if f i then Just i else Nothing
+
+filterMapArray :: forall a b. (a -> Maybe b) -> Array a -> Array b
+filterMapArray f arr = foldlArray ff [] arr
+  where
+  ff b a = case f a of
+    Just x -> b <> [ x ]
+    Nothing -> b
+
+compactArray :: forall a. Array (Maybe a) -> Array a
+compactArray = filterMapArray identity
+
 -- | Create a [`Text`](https://developer.mozilla.org/en-US/docs/Web/API/Text) node from
 -- | a string. The node is set immediately with the string and does not change.
 text_ :: String -> Nut
-text_ txt = text (pure txt)
+text_ txt = Nut $ Left $ PureKorok \_ -> ActualizedKorok $ Left txt
 
 -- | A low-level function that creates a Deku application.
 -- | In most situations this should not be used. Instead, use functions from `Deku.Toplevel`.

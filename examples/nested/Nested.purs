@@ -9,7 +9,7 @@ import Data.FastVect.FastVect as V
 import Data.Int (floor)
 import Data.Monoid.Additive (Additive(..))
 import Data.Tuple (Tuple(..))
-import Deku.Attribute ((:=))
+import Deku.Attribute ((!:=))
 import Deku.Control (portal, switcher)
 import Deku.Control as C
 import Deku.Core (Nut, dyn, fixed, insert_, remove, sendToTop)
@@ -55,12 +55,12 @@ scene :: Array Nut
 scene =
   [ D.div_
       [ portal
-          ( D.video [pure (D.Controls := "true") <|> pure (D.Width := "250")]
+          ( D.video [ (D.Controls !:= "true"),  (D.Width !:= "250")]
               [ D.source
-                  [pure
-                      ( D.Src :=
+                  [
+                     D.Src !:=
                           "https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.webm"
-                      ) <|> pure (D.Xtype := "video/webm")
+                       ,D.Xtype !:= "video/webm"
                   ]
                   []
               ]
@@ -68,7 +68,7 @@ scene =
           )
           ( \i -> switcher
               ( \rgb -> D.div
-                  [pure (D.Style := "background-color: " <> rgb <> ";")]
+                  [ (D.Style !:= "background-color: " <> rgb <> ";")]
                   [ V.index (Proxy :: _ 0) i ]
               )
               (sample_ rdm (interval 1000))
@@ -78,7 +78,7 @@ scene =
       ( \rgb ->
           pure
             ( insert_ $ D.div
-                [pure (D.Style := "background-color: " <> rgb <> ";")]
+                [ (D.Style !:= "background-color: " <> rgb <> ";")]
                 [ C.text_ "hello" ]
             ) <|> delay 1432 (pure sendToTop) <|> delay 2000 (pure remove)
       )
