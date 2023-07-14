@@ -3,16 +3,13 @@ module DOM.Indexed.Elements where
 import Prelude
 import Prim hiding (Type)
 
-import DOM.Indexed.Common (escape, tagName)
+import DOM.Common (escape, typeArrayed, typeAttributed, typeEvented, typeNut)
+import DOM.Indexed.Common (tagName, typeIndexed)
 import Data.Tuple.Nested ((/\))
 import Foreign.Object as Foreign
 import Partial.Unsafe (unsafePartial)
-import PureScript.CST.Types (Declaration, Export, Type)
+import PureScript.CST.Types (Declaration, Export)
 import Tidy.Codegen (declSignature, declValue, exportValue, exprApp, exprArray, exprIdent, exprString, typeApp, typeArrow, typeCtor, typeRowEmpty)
-
-typeNut :: Type Void
-typeNut =
-    unsafePartial $ typeCtor "Nut"
 
 exports :: Foreign.Object String -> Array ( Export Void )
 exports tags =
@@ -27,15 +24,7 @@ generate tags = unsafePartial
             name = escape interface
         [ declSignature tag
             $ typeArrow
-                [ typeApp ( typeCtor "Array" )
-                    [ typeApp ( typeCtor "Event" )
-                        [ typeApp ( typeCtor "Attribute" )
-                            [ typeApp ( typeCtor "Indexed" )
-                                [ typeApp ( typeCtor name ) [ typeRowEmpty ]
-                                ]
-                            ]
-                        ]
-                    ]
+                [ typeArrayed $ typeEvented $ typeAttributed $ typeIndexed $ typeApp ( typeCtor name ) [ typeRowEmpty ]
                 , typeApp ( typeCtor "Array" ) [ typeNut ]
                 ]
                 typeNut

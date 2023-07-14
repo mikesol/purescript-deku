@@ -3,7 +3,8 @@ module DOM.Indexed.Interfaces where
 import Prelude
 import Prim hiding (Type)
 
-import DOM.Indexed.Common (attributeMember, construct, escape, mapType, nominal)
+import DOM.Common (attributeMember, construct, escape, mapType)
+import DOM.Indexed.Common (nominal)
 import DOM.Spec (Interface)
 import Data.Array as Array
 import Data.Maybe (Maybe(..), fromMaybe)
@@ -49,7 +50,7 @@ declInterface interfaces =
             $ Array.nub
             $ bind
                 ( fromMaybe [] interface.members )
-                ( traverse ( map _.type <<< mapType ) <=< attributeMember )
+                ( traverse mapType <=< attributeMember )
         ]
 
 typeIndex :: Array String -> Array ( String /\ Type Void ) -> Type Void 

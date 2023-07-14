@@ -4,13 +4,17 @@ import Control.Applicative (pure) as Applicative
 import Control.Category ((<<<))
 import Data.Function (($))
 import Data.Functor (map) as Functor
-import Data.Newtype (unwrap, class Newtype) as Newtype
-import Data.Show (show) as Show
-import Deku.Attribute (Cb, Attribute, AttributeValue, unsafeAttribute, prop', cb')
+import Deku.Attribute (Attribute, AttributeValue, unsafeAttribute)
 import Deku.Control (elementify2)
 import Deku.Core (Nut)
 import FRP.Event (Event)
 import Type.Proxy (Proxy)
+import Data.Newtype as Data.Newtype
+import Data.Show as Data.Show
+import Data.Unit as Data.Unit
+import Deku.Attribute as Deku.Attribute
+import Effect as Effect
+import Web.DOM as Web.DOM
 
 data Indexed (r :: Row Type)
 
@@ -72,81 +76,94 @@ type ElementContentEditable (r :: Row Type) =
 
 type GlobalEventHandlers (r :: Row Type) =
   ( __nominal :: Proxy "GlobalEventHandlers"
-  , onabort :: Cb
-  , onauxclick :: Cb
-  , onbeforeinput :: Cb
-  , onbeforematch :: Cb
-  , onbeforetoggle :: Cb
-  , onblur :: Cb
-  , oncancel :: Cb
-  , oncanplay :: Cb
-  , oncanplaythrough :: Cb
-  , onchange :: Cb
-  , onclick :: Cb
-  , onclose :: Cb
-  , oncontextlost :: Cb
-  , oncontextmenu :: Cb
-  , oncontextrestored :: Cb
-  , oncopy :: Cb
-  , oncuechange :: Cb
-  , oncut :: Cb
-  , ondblclick :: Cb
-  , ondrag :: Cb
-  , ondragend :: Cb
-  , ondragenter :: Cb
-  , ondragleave :: Cb
-  , ondragover :: Cb
-  , ondragstart :: Cb
-  , ondrop :: Cb
-  , ondurationchange :: Cb
-  , onemptied :: Cb
-  , onended :: Cb
-  , onfocus :: Cb
-  , onformdata :: Cb
-  , oninput :: Cb
-  , oninvalid :: Cb
-  , onkeydown :: Cb
-  , onkeypress :: Cb
-  , onkeyup :: Cb
-  , onload :: Cb
-  , onloadeddata :: Cb
-  , onloadedmetadata :: Cb
-  , onloadstart :: Cb
-  , onmousedown :: Cb
-  , onmouseenter :: Cb
-  , onmouseleave :: Cb
-  , onmousemove :: Cb
-  , onmouseout :: Cb
-  , onmouseover :: Cb
-  , onmouseup :: Cb
-  , onpaste :: Cb
-  , onpause :: Cb
-  , onplay :: Cb
-  , onplaying :: Cb
-  , onprogress :: Cb
-  , onratechange :: Cb
-  , onreset :: Cb
-  , onresize :: Cb
-  , onscroll :: Cb
-  , onscrollend :: Cb
-  , onsecuritypolicyviolation :: Cb
-  , onseeked :: Cb
-  , onseeking :: Cb
-  , onselect :: Cb
-  , onslotchange :: Cb
-  , onstalled :: Cb
-  , onsubmit :: Cb
-  , onsuspend :: Cb
-  , ontimeupdate :: Cb
-  , ontoggle :: Cb
-  , onvolumechange :: Cb
-  , onwaiting :: Cb
-  , onwebkitanimationend :: Cb
-  , onwebkitanimationiteration :: Cb
-  , onwebkitanimationstart :: Cb
-  , onwebkittransitionend :: Cb
-  , onwheel :: Cb
+  , onabort :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit
+  , onauxclick :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit
+  , onbeforeinput :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit
+  , onbeforematch :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit
+  , onbeforetoggle :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit
+  , onblur :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit
+  , oncancel :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit
+  , oncanplay :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit
+  , oncanplaythrough :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit
+  , onchange :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit
+  , onclick :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit
+  , onclose :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit
+  , oncontextlost :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit
+  , oncontextmenu :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit
+  , oncontextrestored :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit
+  , oncopy :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit
+  , oncuechange :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit
+  , oncut :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit
+  , ondblclick :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit
+  , ondrag :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit
+  , ondragend :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit
+  , ondragenter :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit
+  , ondragleave :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit
+  , ondragover :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit
+  , ondragstart :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit
+  , ondrop :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit
+  , ondurationchange :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit
+  , onemptied :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit
+  , onended :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit
+  , onfocus :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit
+  , onformdata :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit
+  , oninput :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit
+  , oninvalid :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit
+  , onkeydown :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit
+  , onkeypress :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit
+  , onkeyup :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit
+  , onload :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit
+  , onloadeddata :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit
+  , onloadedmetadata :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit
+  , onloadstart :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit
+  , onmousedown :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit
+  , onmouseenter :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit
+  , onmouseleave :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit
+  , onmousemove :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit
+  , onmouseout :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit
+  , onmouseover :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit
+  , onmouseup :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit
+  , onpaste :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit
+  , onpause :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit
+  , onplay :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit
+  , onplaying :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit
+  , onprogress :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit
+  , onratechange :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit
+  , onreset :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit
+  , onresize :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit
+  , onscroll :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit
+  , onscrollend :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit
+  , onsecuritypolicyviolation :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit
+  , onseeked :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit
+  , onseeking :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit
+  , onselect :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit
+  , onslotchange :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit
+  , onstalled :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit
+  , onsubmit :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit
+  , onsuspend :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit
+  , ontimeupdate :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit
+  , ontoggle :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit
+  , onvolumechange :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit
+  , onwaiting :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit
+  , onwebkitanimationend :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit
+  , onwebkitanimationiteration :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit
+  , onwebkitanimationstart :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit
+  , onwebkittransitionend :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit
+  , onwheel :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit
   | r
+  )
+
+type HTMLAnchorElement (r :: Row Type) =
+  ( __nominal :: Proxy "HTMLAnchorElement"
+  , target :: String
+  , download :: String
+  , ping :: String
+  , rel :: String
+  , hreflang :: String
+  , type :: String
+  , text :: String
+  , referrerPolicy :: String
+  | HTMLElement (HTMLHyperlinkElementUtils r)
   )
 
 type HTMLAreaElement (r :: Row Type) =
@@ -202,9 +219,6 @@ type HTMLDetailsElement (r :: Row Type) =
 type HTMLDialogElement (r :: Row Type) =
   (__nominal :: Proxy "HTMLDialogElement", open :: Boolean, returnValue :: String | HTMLElement r)
 
-type HTMLDirectoryElement (r :: Row Type) =
-  (__nominal :: Proxy "HTMLDirectoryElement", compact :: Boolean | HTMLElement r)
-
 type HTMLDivElement (r :: Row Type) = (__nominal :: Proxy "HTMLDivElement" | HTMLElement r)
 type HTMLElement (r :: Row Type) =
   ( __nominal :: Proxy "HTMLElement"
@@ -238,14 +252,6 @@ type HTMLEmbedElement (r :: Row Type) =
 type HTMLFieldSetElement (r :: Row Type) =
   (__nominal :: Proxy "HTMLFieldSetElement", disabled :: Boolean, name :: String | HTMLElement r)
 
-type HTMLFontElement (r :: Row Type) =
-  ( __nominal :: Proxy "HTMLFontElement"
-  , color :: String
-  , face :: String
-  , size :: String
-  | HTMLElement r
-  )
-
 type HTMLFormElement (r :: Row Type) =
   ( __nominal :: Proxy "HTMLFormElement"
   , acceptCharset :: String
@@ -259,26 +265,6 @@ type HTMLFormElement (r :: Row Type) =
   , target :: String
   , rel :: String
   | HTMLElement r
-  )
-
-type HTMLFrameElement (r :: Row Type) =
-  ( __nominal :: Proxy "HTMLFrameElement"
-  , name :: String
-  , scrolling :: String
-  , src :: String
-  , frameBorder :: String
-  , longDesc :: String
-  , noResize :: Boolean
-  , marginHeight :: String
-  , marginWidth :: String
-  | HTMLElement r
-  )
-
-type HTMLFrameSetElement (r :: Row Type) =
-  ( __nominal :: Proxy "HTMLFrameSetElement"
-  , cols :: String
-  , rows :: String
-  | HTMLElement (WindowEventHandlers r)
   )
 
 type HTMLHRElement (r :: Row Type) = (__nominal :: Proxy "HTMLHRElement" | HTMLElement r)
@@ -400,22 +386,6 @@ type HTMLLinkElement (r :: Row Type) =
 type HTMLMapElement (r :: Row Type) =
   (__nominal :: Proxy "HTMLMapElement", name :: String | HTMLElement r)
 
-type HTMLMarqueeElement (r :: Row Type) =
-  ( __nominal :: Proxy "HTMLMarqueeElement"
-  , behavior :: String
-  , bgColor :: String
-  , direction :: String
-  , height :: String
-  , hspace :: Int
-  , loop :: Int
-  , scrollAmount :: Int
-  , scrollDelay :: Int
-  , trueSpeed :: Boolean
-  , vspace :: Int
-  , width :: String
-  | HTMLElement r
-  )
-
 type HTMLMediaElement (r :: Row Type) =
   ( __nominal :: Proxy "HTMLMediaElement"
   , src :: String
@@ -509,15 +479,6 @@ type HTMLOutputElement (r :: Row Type) =
 type HTMLParagraphElement (r :: Row Type) =
   (__nominal :: Proxy "HTMLParagraphElement" | HTMLElement r)
 
-type HTMLParamElement (r :: Row Type) =
-  ( __nominal :: Proxy "HTMLParamElement"
-  , name :: String
-  , value :: String
-  , type :: String
-  , valueType :: String
-  | HTMLElement r
-  )
-
 type HTMLPictureElement (r :: Row Type) = (__nominal :: Proxy "HTMLPictureElement" | HTMLElement r)
 type HTMLPreElement (r :: Row Type) = (__nominal :: Proxy "HTMLPreElement" | HTMLElement r)
 type HTMLProgressElement (r :: Row Type) =
@@ -525,6 +486,21 @@ type HTMLProgressElement (r :: Row Type) =
 
 type HTMLQuoteElement (r :: Row Type) =
   (__nominal :: Proxy "HTMLQuoteElement", cite :: String | HTMLElement r)
+
+type HTMLScriptElement (r :: Row Type) =
+  ( __nominal :: Proxy "HTMLScriptElement"
+  , src :: String
+  , type :: String
+  , noModule :: Boolean
+  , async :: Boolean
+  , defer :: Boolean
+  , crossOrigin :: String
+  , text :: String
+  , integrity :: String
+  , referrerPolicy :: String
+  , fetchPriority :: String
+  | HTMLElement r
+  )
 
 type HTMLSelectElement (r :: Row Type) =
   ( __nominal :: Proxy "HTMLSelectElement"
@@ -556,6 +532,9 @@ type HTMLSourceElement (r :: Row Type) =
   )
 
 type HTMLSpanElement (r :: Row Type) = (__nominal :: Proxy "HTMLSpanElement" | HTMLElement r)
+type HTMLStyleElement (r :: Row Type) =
+  (__nominal :: Proxy "HTMLStyleElement", disabled :: Boolean, media :: String | HTMLElement r)
+
 type HTMLTableCaptionElement (r :: Row Type) =
   (__nominal :: Proxy "HTMLTableCaptionElement" | HTMLElement r)
 
@@ -607,6 +586,9 @@ type HTMLTextAreaElement (r :: Row Type) =
 type HTMLTimeElement (r :: Row Type) =
   (__nominal :: Proxy "HTMLTimeElement", dateTime :: String | HTMLElement r)
 
+type HTMLTitleElement (r :: Row Type) =
+  (__nominal :: Proxy "HTMLTitleElement", text :: String | HTMLElement r)
+
 type HTMLTrackElement (r :: Row Type) =
   ( __nominal :: Proxy "HTMLTrackElement"
   , kind :: String
@@ -618,7 +600,6 @@ type HTMLTrackElement (r :: Row Type) =
   )
 
 type HTMLUListElement (r :: Row Type) = (__nominal :: Proxy "HTMLUListElement" | HTMLElement r)
-type HTMLUnknownElement (r :: Row Type) = (__nominal :: Proxy "HTMLUnknownElement" | HTMLElement r)
 type HTMLVideoElement (r :: Row Type) =
   ( __nominal :: Proxy "HTMLVideoElement"
   , width :: Int
@@ -631,19 +612,24 @@ type HTMLVideoElement (r :: Row Type) =
 type PopoverInvokerElement (r :: Row Type) =
   (__nominal :: Proxy "PopoverInvokerElement", popoverTargetAction :: String | r)
 
-type SVGAElement (r :: Row Type) =
-  ( __nominal :: Proxy "SVGAElement"
-  , download :: String
-  , ping :: String
-  , rel :: String
-  , hreflang :: String
-  , type :: String
-  , text :: String
-  , referrerPolicy :: String
-  | SVGGraphicsElement (SVGURIReference r)
-  )
+type SVGAnimateElement (r :: Row Type) =
+  (__nominal :: Proxy "SVGAnimateElement" | SVGAnimationElement r)
+
+type SVGAnimateMotionElement (r :: Row Type) =
+  (__nominal :: Proxy "SVGAnimateMotionElement" | SVGAnimationElement r)
+
+type SVGAnimateTransformElement (r :: Row Type) =
+  (__nominal :: Proxy "SVGAnimateTransformElement" | SVGAnimationElement r)
 
 type SVGAnimatedPoints (r :: Row Type) = (__nominal :: Proxy "SVGAnimatedPoints" | r)
+type SVGAnimationElement (r :: Row Type) =
+  ( __nominal :: Proxy "SVGAnimationElement"
+  , onbegin :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit
+  , onend :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit
+  , onrepeat :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit
+  | SVGElement (SVGTests r)
+  )
+
 type SVGCircleElement (r :: Row Type) =
   (__nominal :: Proxy "SVGCircleElement" | SVGGeometryElement r)
 
@@ -788,6 +774,9 @@ type SVGLineElement (r :: Row Type) = (__nominal :: Proxy "SVGLineElement" | SVG
 type SVGLinearGradientElement (r :: Row Type) =
   (__nominal :: Proxy "SVGLinearGradientElement" | SVGGradientElement r)
 
+type SVGMPathElement (r :: Row Type) =
+  (__nominal :: Proxy "SVGMPathElement" | SVGElement (SVGURIReference r))
+
 type SVGMarkerElement (r :: Row Type) =
   (__nominal :: Proxy "SVGMarkerElement", orient :: String | SVGElement (SVGFitToViewBox r))
 
@@ -811,22 +800,8 @@ type SVGSVGElement (r :: Row Type) =
   | SVGGraphicsElement (WindowEventHandlers (SVGFitToViewBox r))
   )
 
-type SVGScriptElement (r :: Row Type) =
-  ( __nominal :: Proxy "SVGScriptElement"
-  , type :: String
-  , crossOrigin :: String
-  | SVGElement (SVGURIReference r)
-  )
-
+type SVGSetElement (r :: Row Type) = (__nominal :: Proxy "SVGSetElement" | SVGAnimationElement r)
 type SVGStopElement (r :: Row Type) = (__nominal :: Proxy "SVGStopElement" | SVGElement r)
-type SVGStyleElement (r :: Row Type) =
-  ( __nominal :: Proxy "SVGStyleElement"
-  , type :: String
-  , media :: String
-  , title :: String
-  | SVGElement r
-  )
-
 type SVGSwitchElement (r :: Row Type) =
   (__nominal :: Proxy "SVGSwitchElement" | SVGGraphicsElement r)
 
@@ -849,7 +824,6 @@ type SVGTextPathElement (r :: Row Type) =
 type SVGTextPositioningElement (r :: Row Type) =
   (__nominal :: Proxy "SVGTextPositioningElement" | SVGTextContentElement r)
 
-type SVGTitleElement (r :: Row Type) = (__nominal :: Proxy "SVGTitleElement" | SVGElement r)
 type SVGURIReference (r :: Row Type) = (__nominal :: Proxy "SVGURIReference" | r)
 type SVGUseElement (r :: Row Type) =
   (__nominal :: Proxy "SVGUseElement" | SVGGraphicsElement (SVGURIReference r))
@@ -859,23 +833,402 @@ type SVGViewElement (r :: Row Type) =
 
 type WindowEventHandlers (r :: Row Type) =
   ( __nominal :: Proxy "WindowEventHandlers"
-  , onafterprint :: Cb
-  , onbeforeprint :: Cb
-  , onhashchange :: Cb
-  , onlanguagechange :: Cb
-  , onmessage :: Cb
-  , onmessageerror :: Cb
-  , onoffline :: Cb
-  , ononline :: Cb
-  , onpagehide :: Cb
-  , onpageshow :: Cb
-  , onpopstate :: Cb
-  , onrejectionhandled :: Cb
-  , onstorage :: Cb
-  , onunhandledrejection :: Cb
-  , onunload :: Cb
+  , onafterprint :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit
+  , onbeforeprint :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit
+  , onhashchange :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit
+  , onlanguagechange :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit
+  , onmessage :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit
+  , onmessageerror :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit
+  , onoffline :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit
+  , ononline :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit
+  , onpagehide :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit
+  , onpageshow :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit
+  , onpopstate :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit
+  , onrejectionhandled :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit
+  , onstorage :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit
+  , onunhandledrejection :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit
+  , onunload :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit
   | r
   )
+
+svg :: Array (Event (Attribute (Indexed (SVGSVGElement ())))) -> Array Nut -> Nut
+svg = elementify2 "svg"
+
+svg_ :: Array Nut -> Nut
+svg_ = elementify2 "svg" []
+
+g :: Array (Event (Attribute (Indexed (SVGGElement ())))) -> Array Nut -> Nut
+g = elementify2 "g"
+
+g_ :: Array Nut -> Nut
+g_ = elementify2 "g" []
+
+defs :: Array (Event (Attribute (Indexed (SVGDefsElement ())))) -> Array Nut -> Nut
+defs = elementify2 "defs"
+
+defs_ :: Array Nut -> Nut
+defs_ = elementify2 "defs" []
+
+symbol :: Array (Event (Attribute (Indexed (SVGSymbolElement ())))) -> Array Nut -> Nut
+symbol = elementify2 "symbol"
+
+symbol_ :: Array Nut -> Nut
+symbol_ = elementify2 "symbol" []
+
+use :: Array (Event (Attribute (Indexed (SVGUseElement ())))) -> Array Nut -> Nut
+use = elementify2 "use"
+
+use_ :: Array Nut -> Nut
+use_ = elementify2 "use" []
+
+switch :: Array (Event (Attribute (Indexed (SVGSwitchElement ())))) -> Array Nut -> Nut
+switch = elementify2 "switch"
+
+switch_ :: Array Nut -> Nut
+switch_ = elementify2 "switch" []
+
+title :: Array (Event (Attribute (Indexed (HTMLTitleElement ())))) -> Array Nut -> Nut
+title = elementify2 "title"
+
+title_ :: Array Nut -> Nut
+title_ = elementify2 "title" []
+
+desc :: Array (Event (Attribute (Indexed (SVGDescElement ())))) -> Array Nut -> Nut
+desc = elementify2 "desc"
+
+desc_ :: Array Nut -> Nut
+desc_ = elementify2 "desc" []
+
+metadata :: Array (Event (Attribute (Indexed (SVGMetadataElement ())))) -> Array Nut -> Nut
+metadata = elementify2 "metadata"
+
+metadata_ :: Array Nut -> Nut
+metadata_ = elementify2 "metadata" []
+
+style :: Array (Event (Attribute (Indexed (HTMLStyleElement ())))) -> Array Nut -> Nut
+style = elementify2 "style"
+
+style_ :: Array Nut -> Nut
+style_ = elementify2 "style" []
+
+path :: Array (Event (Attribute (Indexed (SVGPathElement ())))) -> Array Nut -> Nut
+path = elementify2 "path"
+
+path_ :: Array Nut -> Nut
+path_ = elementify2 "path" []
+
+rect :: Array (Event (Attribute (Indexed (SVGRectElement ())))) -> Array Nut -> Nut
+rect = elementify2 "rect"
+
+rect_ :: Array Nut -> Nut
+rect_ = elementify2 "rect" []
+
+circle :: Array (Event (Attribute (Indexed (SVGCircleElement ())))) -> Array Nut -> Nut
+circle = elementify2 "circle"
+
+circle_ :: Array Nut -> Nut
+circle_ = elementify2 "circle" []
+
+ellipse :: Array (Event (Attribute (Indexed (SVGEllipseElement ())))) -> Array Nut -> Nut
+ellipse = elementify2 "ellipse"
+
+ellipse_ :: Array Nut -> Nut
+ellipse_ = elementify2 "ellipse" []
+
+line :: Array (Event (Attribute (Indexed (SVGLineElement ())))) -> Array Nut -> Nut
+line = elementify2 "line"
+
+line_ :: Array Nut -> Nut
+line_ = elementify2 "line" []
+
+polyline :: Array (Event (Attribute (Indexed (SVGPolylineElement ())))) -> Array Nut -> Nut
+polyline = elementify2 "polyline"
+
+polyline_ :: Array Nut -> Nut
+polyline_ = elementify2 "polyline" []
+
+polygon :: Array (Event (Attribute (Indexed (SVGPolygonElement ())))) -> Array Nut -> Nut
+polygon = elementify2 "polygon"
+
+polygon_ :: Array Nut -> Nut
+polygon_ = elementify2 "polygon" []
+
+text :: Array (Event (Attribute (Indexed (SVGTextElement ())))) -> Array Nut -> Nut
+text = elementify2 "text"
+
+text_ :: Array Nut -> Nut
+text_ = elementify2 "text" []
+
+tspan :: Array (Event (Attribute (Indexed (SVGTSpanElement ())))) -> Array Nut -> Nut
+tspan = elementify2 "tspan"
+
+tspan_ :: Array Nut -> Nut
+tspan_ = elementify2 "tspan" []
+
+textPath :: Array (Event (Attribute (Indexed (SVGTextPathElement ())))) -> Array Nut -> Nut
+textPath = elementify2 "textPath"
+
+textPath_ :: Array Nut -> Nut
+textPath_ = elementify2 "textPath" []
+
+image :: Array (Event (Attribute (Indexed (SVGImageElement ())))) -> Array Nut -> Nut
+image = elementify2 "image"
+
+image_ :: Array Nut -> Nut
+image_ = elementify2 "image" []
+
+foreignObject
+  :: Array (Event (Attribute (Indexed (SVGForeignObjectElement ())))) -> Array Nut -> Nut
+foreignObject = elementify2 "foreignObject"
+
+foreignObject_ :: Array Nut -> Nut
+foreignObject_ = elementify2 "foreignObject" []
+
+marker :: Array (Event (Attribute (Indexed (SVGMarkerElement ())))) -> Array Nut -> Nut
+marker = elementify2 "marker"
+
+marker_ :: Array Nut -> Nut
+marker_ = elementify2 "marker" []
+
+linearGradient
+  :: Array (Event (Attribute (Indexed (SVGLinearGradientElement ())))) -> Array Nut -> Nut
+linearGradient = elementify2 "linearGradient"
+
+linearGradient_ :: Array Nut -> Nut
+linearGradient_ = elementify2 "linearGradient" []
+
+radialGradient
+  :: Array (Event (Attribute (Indexed (SVGRadialGradientElement ())))) -> Array Nut -> Nut
+radialGradient = elementify2 "radialGradient"
+
+radialGradient_ :: Array Nut -> Nut
+radialGradient_ = elementify2 "radialGradient" []
+
+stop :: Array (Event (Attribute (Indexed (SVGStopElement ())))) -> Array Nut -> Nut
+stop = elementify2 "stop"
+
+stop_ :: Array Nut -> Nut
+stop_ = elementify2 "stop" []
+
+pattern :: Array (Event (Attribute (Indexed (SVGPatternElement ())))) -> Array Nut -> Nut
+pattern = elementify2 "pattern"
+
+pattern_ :: Array Nut -> Nut
+pattern_ = elementify2 "pattern" []
+
+script :: Array (Event (Attribute (Indexed (HTMLScriptElement ())))) -> Array Nut -> Nut
+script = elementify2 "script"
+
+script_ :: Array Nut -> Nut
+script_ = elementify2 "script" []
+
+a :: Array (Event (Attribute (Indexed (HTMLAnchorElement ())))) -> Array Nut -> Nut
+a = elementify2 "a"
+
+a_ :: Array Nut -> Nut
+a_ = elementify2 "a" []
+
+view :: Array (Event (Attribute (Indexed (SVGViewElement ())))) -> Array Nut -> Nut
+view = elementify2 "view"
+
+view_ :: Array Nut -> Nut
+view_ = elementify2 "view" []
+
+filter :: Array (Event (Attribute (Indexed (SVGFilterElement ())))) -> Array Nut -> Nut
+filter = elementify2 "filter"
+
+filter_ :: Array Nut -> Nut
+filter_ = elementify2 "filter" []
+
+feBlend :: Array (Event (Attribute (Indexed (SVGFEBlendElement ())))) -> Array Nut -> Nut
+feBlend = elementify2 "feBlend"
+
+feBlend_ :: Array Nut -> Nut
+feBlend_ = elementify2 "feBlend" []
+
+feColorMatrix
+  :: Array (Event (Attribute (Indexed (SVGFEColorMatrixElement ())))) -> Array Nut -> Nut
+feColorMatrix = elementify2 "feColorMatrix"
+
+feColorMatrix_ :: Array Nut -> Nut
+feColorMatrix_ = elementify2 "feColorMatrix" []
+
+feComponentTransfer
+  :: Array (Event (Attribute (Indexed (SVGFEComponentTransferElement ())))) -> Array Nut -> Nut
+feComponentTransfer = elementify2 "feComponentTransfer"
+
+feComponentTransfer_ :: Array Nut -> Nut
+feComponentTransfer_ = elementify2 "feComponentTransfer" []
+
+feFuncR :: Array (Event (Attribute (Indexed (SVGFEFuncRElement ())))) -> Array Nut -> Nut
+feFuncR = elementify2 "feFuncR"
+
+feFuncR_ :: Array Nut -> Nut
+feFuncR_ = elementify2 "feFuncR" []
+
+feFuncG :: Array (Event (Attribute (Indexed (SVGFEFuncGElement ())))) -> Array Nut -> Nut
+feFuncG = elementify2 "feFuncG"
+
+feFuncG_ :: Array Nut -> Nut
+feFuncG_ = elementify2 "feFuncG" []
+
+feFuncB :: Array (Event (Attribute (Indexed (SVGFEFuncBElement ())))) -> Array Nut -> Nut
+feFuncB = elementify2 "feFuncB"
+
+feFuncB_ :: Array Nut -> Nut
+feFuncB_ = elementify2 "feFuncB" []
+
+feFuncA :: Array (Event (Attribute (Indexed (SVGFEFuncAElement ())))) -> Array Nut -> Nut
+feFuncA = elementify2 "feFuncA"
+
+feFuncA_ :: Array Nut -> Nut
+feFuncA_ = elementify2 "feFuncA" []
+
+feComposite :: Array (Event (Attribute (Indexed (SVGFECompositeElement ())))) -> Array Nut -> Nut
+feComposite = elementify2 "feComposite"
+
+feComposite_ :: Array Nut -> Nut
+feComposite_ = elementify2 "feComposite" []
+
+feConvolveMatrix
+  :: Array (Event (Attribute (Indexed (SVGFEConvolveMatrixElement ())))) -> Array Nut -> Nut
+feConvolveMatrix = elementify2 "feConvolveMatrix"
+
+feConvolveMatrix_ :: Array Nut -> Nut
+feConvolveMatrix_ = elementify2 "feConvolveMatrix" []
+
+feDiffuseLighting
+  :: Array (Event (Attribute (Indexed (SVGFEDiffuseLightingElement ())))) -> Array Nut -> Nut
+feDiffuseLighting = elementify2 "feDiffuseLighting"
+
+feDiffuseLighting_ :: Array Nut -> Nut
+feDiffuseLighting_ = elementify2 "feDiffuseLighting" []
+
+feDisplacementMap
+  :: Array (Event (Attribute (Indexed (SVGFEDisplacementMapElement ())))) -> Array Nut -> Nut
+feDisplacementMap = elementify2 "feDisplacementMap"
+
+feDisplacementMap_ :: Array Nut -> Nut
+feDisplacementMap_ = elementify2 "feDisplacementMap" []
+
+feDropShadow :: Array (Event (Attribute (Indexed (SVGFEDropShadowElement ())))) -> Array Nut -> Nut
+feDropShadow = elementify2 "feDropShadow"
+
+feDropShadow_ :: Array Nut -> Nut
+feDropShadow_ = elementify2 "feDropShadow" []
+
+feFlood :: Array (Event (Attribute (Indexed (SVGFEFloodElement ())))) -> Array Nut -> Nut
+feFlood = elementify2 "feFlood"
+
+feFlood_ :: Array Nut -> Nut
+feFlood_ = elementify2 "feFlood" []
+
+feGaussianBlur
+  :: Array (Event (Attribute (Indexed (SVGFEGaussianBlurElement ())))) -> Array Nut -> Nut
+feGaussianBlur = elementify2 "feGaussianBlur"
+
+feGaussianBlur_ :: Array Nut -> Nut
+feGaussianBlur_ = elementify2 "feGaussianBlur" []
+
+feImage :: Array (Event (Attribute (Indexed (SVGFEImageElement ())))) -> Array Nut -> Nut
+feImage = elementify2 "feImage"
+
+feImage_ :: Array Nut -> Nut
+feImage_ = elementify2 "feImage" []
+
+feMerge :: Array (Event (Attribute (Indexed (SVGFEMergeElement ())))) -> Array Nut -> Nut
+feMerge = elementify2 "feMerge"
+
+feMerge_ :: Array Nut -> Nut
+feMerge_ = elementify2 "feMerge" []
+
+feMergeNode :: Array (Event (Attribute (Indexed (SVGFEMergeNodeElement ())))) -> Array Nut -> Nut
+feMergeNode = elementify2 "feMergeNode"
+
+feMergeNode_ :: Array Nut -> Nut
+feMergeNode_ = elementify2 "feMergeNode" []
+
+feMorphology :: Array (Event (Attribute (Indexed (SVGFEMorphologyElement ())))) -> Array Nut -> Nut
+feMorphology = elementify2 "feMorphology"
+
+feMorphology_ :: Array Nut -> Nut
+feMorphology_ = elementify2 "feMorphology" []
+
+feOffset :: Array (Event (Attribute (Indexed (SVGFEOffsetElement ())))) -> Array Nut -> Nut
+feOffset = elementify2 "feOffset"
+
+feOffset_ :: Array Nut -> Nut
+feOffset_ = elementify2 "feOffset" []
+
+feSpecularLighting
+  :: Array (Event (Attribute (Indexed (SVGFESpecularLightingElement ())))) -> Array Nut -> Nut
+feSpecularLighting = elementify2 "feSpecularLighting"
+
+feSpecularLighting_ :: Array Nut -> Nut
+feSpecularLighting_ = elementify2 "feSpecularLighting" []
+
+feTile :: Array (Event (Attribute (Indexed (SVGFETileElement ())))) -> Array Nut -> Nut
+feTile = elementify2 "feTile"
+
+feTile_ :: Array Nut -> Nut
+feTile_ = elementify2 "feTile" []
+
+feTurbulence :: Array (Event (Attribute (Indexed (SVGFETurbulenceElement ())))) -> Array Nut -> Nut
+feTurbulence = elementify2 "feTurbulence"
+
+feTurbulence_ :: Array Nut -> Nut
+feTurbulence_ = elementify2 "feTurbulence" []
+
+feDistantLight
+  :: Array (Event (Attribute (Indexed (SVGFEDistantLightElement ())))) -> Array Nut -> Nut
+feDistantLight = elementify2 "feDistantLight"
+
+feDistantLight_ :: Array Nut -> Nut
+feDistantLight_ = elementify2 "feDistantLight" []
+
+fePointLight :: Array (Event (Attribute (Indexed (SVGFEPointLightElement ())))) -> Array Nut -> Nut
+fePointLight = elementify2 "fePointLight"
+
+fePointLight_ :: Array Nut -> Nut
+fePointLight_ = elementify2 "fePointLight" []
+
+feSpotLight :: Array (Event (Attribute (Indexed (SVGFESpotLightElement ())))) -> Array Nut -> Nut
+feSpotLight = elementify2 "feSpotLight"
+
+feSpotLight_ :: Array Nut -> Nut
+feSpotLight_ = elementify2 "feSpotLight" []
+
+animate :: Array (Event (Attribute (Indexed (SVGAnimateElement ())))) -> Array Nut -> Nut
+animate = elementify2 "animate"
+
+animate_ :: Array Nut -> Nut
+animate_ = elementify2 "animate" []
+
+set :: Array (Event (Attribute (Indexed (SVGSetElement ())))) -> Array Nut -> Nut
+set = elementify2 "set"
+
+set_ :: Array Nut -> Nut
+set_ = elementify2 "set" []
+
+animateMotion
+  :: Array (Event (Attribute (Indexed (SVGAnimateMotionElement ())))) -> Array Nut -> Nut
+animateMotion = elementify2 "animateMotion"
+
+animateMotion_ :: Array Nut -> Nut
+animateMotion_ = elementify2 "animateMotion" []
+
+mpath :: Array (Event (Attribute (Indexed (SVGMPathElement ())))) -> Array Nut -> Nut
+mpath = elementify2 "mpath"
+
+mpath_ :: Array Nut -> Nut
+mpath_ = elementify2 "mpath" []
+
+animateTransform
+  :: Array (Event (Attribute (Indexed (SVGAnimateTransformElement ())))) -> Array Nut -> Nut
+animateTransform = elementify2 "animateTransform"
+
+animateTransform_ :: Array Nut -> Nut
+animateTransform_ = elementify2 "animateTransform" []
 
 html :: Array (Event (Attribute (Indexed (HTMLHtmlElement ())))) -> Array Nut -> Nut
 html = elementify2 "html"
@@ -888,12 +1241,6 @@ head = elementify2 "head"
 
 head_ :: Array Nut -> Nut
 head_ = elementify2 "head" []
-
-title :: Array (Event (Attribute (Indexed (SVGTitleElement ())))) -> Array Nut -> Nut
-title = elementify2 "title"
-
-title_ :: Array Nut -> Nut
-title_ = elementify2 "title" []
 
 base :: Array (Event (Attribute (Indexed (HTMLBaseElement ())))) -> Array Nut -> Nut
 base = elementify2 "base"
@@ -912,12 +1259,6 @@ meta = elementify2 "meta"
 
 meta_ :: Array Nut -> Nut
 meta_ = elementify2 "meta" []
-
-style :: Array (Event (Attribute (Indexed (SVGStyleElement ())))) -> Array Nut -> Nut
-style = elementify2 "style"
-
-style_ :: Array Nut -> Nut
-style_ = elementify2 "style" []
 
 body :: Array (Event (Attribute (Indexed (HTMLBodyElement ())))) -> Array Nut -> Nut
 body = elementify2 "body"
@@ -1104,12 +1445,6 @@ div = elementify2 "div"
 
 div_ :: Array Nut -> Nut
 div_ = elementify2 "div" []
-
-a :: Array (Event (Attribute (Indexed (SVGAElement ())))) -> Array Nut -> Nut
-a = elementify2 "a"
-
-a_ :: Array Nut -> Nut
-a_ = elementify2 "a" []
 
 em :: Array (Event (Attribute (Indexed (HTMLElement ())))) -> Array Nut -> Nut
 em = elementify2 "em"
@@ -1519,12 +1854,6 @@ dialog = elementify2 "dialog"
 dialog_ :: Array Nut -> Nut
 dialog_ = elementify2 "dialog" []
 
-script :: Array (Event (Attribute (Indexed (SVGScriptElement ())))) -> Array Nut -> Nut
-script = elementify2 "script"
-
-script_ :: Array Nut -> Nut
-script_ = elementify2 "script" []
-
 noscript :: Array (Event (Attribute (Indexed (HTMLElement ())))) -> Array Nut -> Nut
 noscript = elementify2 "noscript"
 
@@ -1549,523 +1878,14 @@ canvas = elementify2 "canvas"
 canvas_ :: Array Nut -> Nut
 canvas_ = elementify2 "canvas" []
 
-applet :: Array (Event (Attribute (Indexed (HTMLUnknownElement ())))) -> Array Nut -> Nut
-applet = elementify2 "applet"
-
-applet_ :: Array Nut -> Nut
-applet_ = elementify2 "applet" []
-
-acronym :: Array (Event (Attribute (Indexed (HTMLElement ())))) -> Array Nut -> Nut
-acronym = elementify2 "acronym"
-
-acronym_ :: Array Nut -> Nut
-acronym_ = elementify2 "acronym" []
-
-bgsound :: Array (Event (Attribute (Indexed (HTMLUnknownElement ())))) -> Array Nut -> Nut
-bgsound = elementify2 "bgsound"
-
-bgsound_ :: Array Nut -> Nut
-bgsound_ = elementify2 "bgsound" []
-
-dir :: Array (Event (Attribute (Indexed (HTMLDirectoryElement ())))) -> Array Nut -> Nut
-dir = elementify2 "dir"
-
-dir_ :: Array Nut -> Nut
-dir_ = elementify2 "dir" []
-
-frame :: Array (Event (Attribute (Indexed (HTMLFrameElement ())))) -> Array Nut -> Nut
-frame = elementify2 "frame"
-
-frame_ :: Array Nut -> Nut
-frame_ = elementify2 "frame" []
-
-frameset :: Array (Event (Attribute (Indexed (HTMLFrameSetElement ())))) -> Array Nut -> Nut
-frameset = elementify2 "frameset"
-
-frameset_ :: Array Nut -> Nut
-frameset_ = elementify2 "frameset" []
-
-noframes :: Array (Event (Attribute (Indexed (HTMLElement ())))) -> Array Nut -> Nut
-noframes = elementify2 "noframes"
-
-noframes_ :: Array Nut -> Nut
-noframes_ = elementify2 "noframes" []
-
-isindex :: Array (Event (Attribute (Indexed (HTMLUnknownElement ())))) -> Array Nut -> Nut
-isindex = elementify2 "isindex"
-
-isindex_ :: Array Nut -> Nut
-isindex_ = elementify2 "isindex" []
-
-keygen :: Array (Event (Attribute (Indexed (HTMLUnknownElement ())))) -> Array Nut -> Nut
-keygen = elementify2 "keygen"
-
-keygen_ :: Array Nut -> Nut
-keygen_ = elementify2 "keygen" []
-
-listing :: Array (Event (Attribute (Indexed (HTMLPreElement ())))) -> Array Nut -> Nut
-listing = elementify2 "listing"
-
-listing_ :: Array Nut -> Nut
-listing_ = elementify2 "listing" []
-
-menuitem :: Array (Event (Attribute (Indexed (HTMLElement ())))) -> Array Nut -> Nut
-menuitem = elementify2 "menuitem"
-
-menuitem_ :: Array Nut -> Nut
-menuitem_ = elementify2 "menuitem" []
-
-nextid :: Array (Event (Attribute (Indexed (HTMLUnknownElement ())))) -> Array Nut -> Nut
-nextid = elementify2 "nextid"
-
-nextid_ :: Array Nut -> Nut
-nextid_ = elementify2 "nextid" []
-
-noembed :: Array (Event (Attribute (Indexed (HTMLElement ())))) -> Array Nut -> Nut
-noembed = elementify2 "noembed"
-
-noembed_ :: Array Nut -> Nut
-noembed_ = elementify2 "noembed" []
-
-param :: Array (Event (Attribute (Indexed (HTMLParamElement ())))) -> Array Nut -> Nut
-param = elementify2 "param"
-
-param_ :: Array Nut -> Nut
-param_ = elementify2 "param" []
-
-plaintext :: Array (Event (Attribute (Indexed (HTMLElement ())))) -> Array Nut -> Nut
-plaintext = elementify2 "plaintext"
-
-plaintext_ :: Array Nut -> Nut
-plaintext_ = elementify2 "plaintext" []
-
-rb :: Array (Event (Attribute (Indexed (HTMLElement ())))) -> Array Nut -> Nut
-rb = elementify2 "rb"
-
-rb_ :: Array Nut -> Nut
-rb_ = elementify2 "rb" []
-
-rtc :: Array (Event (Attribute (Indexed (HTMLElement ())))) -> Array Nut -> Nut
-rtc = elementify2 "rtc"
-
-rtc_ :: Array Nut -> Nut
-rtc_ = elementify2 "rtc" []
-
-strike :: Array (Event (Attribute (Indexed (HTMLElement ())))) -> Array Nut -> Nut
-strike = elementify2 "strike"
-
-strike_ :: Array Nut -> Nut
-strike_ = elementify2 "strike" []
-
-xmp :: Array (Event (Attribute (Indexed (HTMLPreElement ())))) -> Array Nut -> Nut
-xmp = elementify2 "xmp"
-
-xmp_ :: Array Nut -> Nut
-xmp_ = elementify2 "xmp" []
-
-basefont :: Array (Event (Attribute (Indexed (HTMLElement ())))) -> Array Nut -> Nut
-basefont = elementify2 "basefont"
-
-basefont_ :: Array Nut -> Nut
-basefont_ = elementify2 "basefont" []
-
-big :: Array (Event (Attribute (Indexed (HTMLElement ())))) -> Array Nut -> Nut
-big = elementify2 "big"
-
-big_ :: Array Nut -> Nut
-big_ = elementify2 "big" []
-
-blink :: Array (Event (Attribute (Indexed (HTMLUnknownElement ())))) -> Array Nut -> Nut
-blink = elementify2 "blink"
-
-blink_ :: Array Nut -> Nut
-blink_ = elementify2 "blink" []
-
-center :: Array (Event (Attribute (Indexed (HTMLElement ())))) -> Array Nut -> Nut
-center = elementify2 "center"
-
-center_ :: Array Nut -> Nut
-center_ = elementify2 "center" []
-
-font :: Array (Event (Attribute (Indexed (HTMLFontElement ())))) -> Array Nut -> Nut
-font = elementify2 "font"
-
-font_ :: Array Nut -> Nut
-font_ = elementify2 "font" []
-
-marquee :: Array (Event (Attribute (Indexed (HTMLMarqueeElement ())))) -> Array Nut -> Nut
-marquee = elementify2 "marquee"
-
-marquee_ :: Array Nut -> Nut
-marquee_ = elementify2 "marquee" []
-
-multicol :: Array (Event (Attribute (Indexed (HTMLUnknownElement ())))) -> Array Nut -> Nut
-multicol = elementify2 "multicol"
-
-multicol_ :: Array Nut -> Nut
-multicol_ = elementify2 "multicol" []
-
-nobr :: Array (Event (Attribute (Indexed (HTMLElement ())))) -> Array Nut -> Nut
-nobr = elementify2 "nobr"
-
-nobr_ :: Array Nut -> Nut
-nobr_ = elementify2 "nobr" []
-
-spacer :: Array (Event (Attribute (Indexed (HTMLUnknownElement ())))) -> Array Nut -> Nut
-spacer = elementify2 "spacer"
-
-spacer_ :: Array Nut -> Nut
-spacer_ = elementify2 "spacer" []
-
-tt :: Array (Event (Attribute (Indexed (HTMLElement ())))) -> Array Nut -> Nut
-tt = elementify2 "tt"
-
-tt_ :: Array Nut -> Nut
-tt_ = elementify2 "tt" []
-
-svg :: Array (Event (Attribute (Indexed (SVGSVGElement ())))) -> Array Nut -> Nut
-svg = elementify2 "svg"
-
-svg_ :: Array Nut -> Nut
-svg_ = elementify2 "svg" []
-
-g :: Array (Event (Attribute (Indexed (SVGGElement ())))) -> Array Nut -> Nut
-g = elementify2 "g"
-
-g_ :: Array Nut -> Nut
-g_ = elementify2 "g" []
-
-defs :: Array (Event (Attribute (Indexed (SVGDefsElement ())))) -> Array Nut -> Nut
-defs = elementify2 "defs"
-
-defs_ :: Array Nut -> Nut
-defs_ = elementify2 "defs" []
-
-symbol :: Array (Event (Attribute (Indexed (SVGSymbolElement ())))) -> Array Nut -> Nut
-symbol = elementify2 "symbol"
-
-symbol_ :: Array Nut -> Nut
-symbol_ = elementify2 "symbol" []
-
-use :: Array (Event (Attribute (Indexed (SVGUseElement ())))) -> Array Nut -> Nut
-use = elementify2 "use"
-
-use_ :: Array Nut -> Nut
-use_ = elementify2 "use" []
-
-switch :: Array (Event (Attribute (Indexed (SVGSwitchElement ())))) -> Array Nut -> Nut
-switch = elementify2 "switch"
-
-switch_ :: Array Nut -> Nut
-switch_ = elementify2 "switch" []
-
-desc :: Array (Event (Attribute (Indexed (SVGDescElement ())))) -> Array Nut -> Nut
-desc = elementify2 "desc"
-
-desc_ :: Array Nut -> Nut
-desc_ = elementify2 "desc" []
-
-metadata :: Array (Event (Attribute (Indexed (SVGMetadataElement ())))) -> Array Nut -> Nut
-metadata = elementify2 "metadata"
-
-metadata_ :: Array Nut -> Nut
-metadata_ = elementify2 "metadata" []
-
-path :: Array (Event (Attribute (Indexed (SVGPathElement ())))) -> Array Nut -> Nut
-path = elementify2 "path"
-
-path_ :: Array Nut -> Nut
-path_ = elementify2 "path" []
-
-rect :: Array (Event (Attribute (Indexed (SVGRectElement ())))) -> Array Nut -> Nut
-rect = elementify2 "rect"
-
-rect_ :: Array Nut -> Nut
-rect_ = elementify2 "rect" []
-
-circle :: Array (Event (Attribute (Indexed (SVGCircleElement ())))) -> Array Nut -> Nut
-circle = elementify2 "circle"
-
-circle_ :: Array Nut -> Nut
-circle_ = elementify2 "circle" []
-
-ellipse :: Array (Event (Attribute (Indexed (SVGEllipseElement ())))) -> Array Nut -> Nut
-ellipse = elementify2 "ellipse"
-
-ellipse_ :: Array Nut -> Nut
-ellipse_ = elementify2 "ellipse" []
-
-line :: Array (Event (Attribute (Indexed (SVGLineElement ())))) -> Array Nut -> Nut
-line = elementify2 "line"
-
-line_ :: Array Nut -> Nut
-line_ = elementify2 "line" []
-
-polyline :: Array (Event (Attribute (Indexed (SVGPolylineElement ())))) -> Array Nut -> Nut
-polyline = elementify2 "polyline"
-
-polyline_ :: Array Nut -> Nut
-polyline_ = elementify2 "polyline" []
-
-polygon :: Array (Event (Attribute (Indexed (SVGPolygonElement ())))) -> Array Nut -> Nut
-polygon = elementify2 "polygon"
-
-polygon_ :: Array Nut -> Nut
-polygon_ = elementify2 "polygon" []
-
-text :: Array (Event (Attribute (Indexed (SVGTextElement ())))) -> Array Nut -> Nut
-text = elementify2 "text"
-
-text_ :: Array Nut -> Nut
-text_ = elementify2 "text" []
-
-tspan :: Array (Event (Attribute (Indexed (SVGTSpanElement ())))) -> Array Nut -> Nut
-tspan = elementify2 "tspan"
-
-tspan_ :: Array Nut -> Nut
-tspan_ = elementify2 "tspan" []
-
-textPath :: Array (Event (Attribute (Indexed (SVGTextPathElement ())))) -> Array Nut -> Nut
-textPath = elementify2 "textPath"
-
-textPath_ :: Array Nut -> Nut
-textPath_ = elementify2 "textPath" []
-
-image :: Array (Event (Attribute (Indexed (SVGImageElement ())))) -> Array Nut -> Nut
-image = elementify2 "image"
-
-image_ :: Array Nut -> Nut
-image_ = elementify2 "image" []
-
-foreignObject
-  :: Array (Event (Attribute (Indexed (SVGForeignObjectElement ())))) -> Array Nut -> Nut
-foreignObject = elementify2 "foreignObject"
-
-foreignObject_ :: Array Nut -> Nut
-foreignObject_ = elementify2 "foreignObject" []
-
-marker :: Array (Event (Attribute (Indexed (SVGMarkerElement ())))) -> Array Nut -> Nut
-marker = elementify2 "marker"
-
-marker_ :: Array Nut -> Nut
-marker_ = elementify2 "marker" []
-
-linearGradient
-  :: Array (Event (Attribute (Indexed (SVGLinearGradientElement ())))) -> Array Nut -> Nut
-linearGradient = elementify2 "linearGradient"
-
-linearGradient_ :: Array Nut -> Nut
-linearGradient_ = elementify2 "linearGradient" []
-
-radialGradient
-  :: Array (Event (Attribute (Indexed (SVGRadialGradientElement ())))) -> Array Nut -> Nut
-radialGradient = elementify2 "radialGradient"
-
-radialGradient_ :: Array Nut -> Nut
-radialGradient_ = elementify2 "radialGradient" []
-
-stop :: Array (Event (Attribute (Indexed (SVGStopElement ())))) -> Array Nut -> Nut
-stop = elementify2 "stop"
-
-stop_ :: Array Nut -> Nut
-stop_ = elementify2 "stop" []
-
-pattern :: Array (Event (Attribute (Indexed (SVGPatternElement ())))) -> Array Nut -> Nut
-pattern = elementify2 "pattern"
-
-pattern_ :: Array Nut -> Nut
-pattern_ = elementify2 "pattern" []
-
-view :: Array (Event (Attribute (Indexed (SVGViewElement ())))) -> Array Nut -> Nut
-view = elementify2 "view"
-
-view_ :: Array Nut -> Nut
-view_ = elementify2 "view" []
-
-filter :: Array (Event (Attribute (Indexed (SVGFilterElement ())))) -> Array Nut -> Nut
-filter = elementify2 "filter"
-
-filter_ :: Array Nut -> Nut
-filter_ = elementify2 "filter" []
-
-feBlend :: Array (Event (Attribute (Indexed (SVGFEBlendElement ())))) -> Array Nut -> Nut
-feBlend = elementify2 "feBlend"
-
-feBlend_ :: Array Nut -> Nut
-feBlend_ = elementify2 "feBlend" []
-
-feColorMatrix
-  :: Array (Event (Attribute (Indexed (SVGFEColorMatrixElement ())))) -> Array Nut -> Nut
-feColorMatrix = elementify2 "feColorMatrix"
-
-feColorMatrix_ :: Array Nut -> Nut
-feColorMatrix_ = elementify2 "feColorMatrix" []
-
-feComponentTransfer
-  :: Array (Event (Attribute (Indexed (SVGFEComponentTransferElement ())))) -> Array Nut -> Nut
-feComponentTransfer = elementify2 "feComponentTransfer"
-
-feComponentTransfer_ :: Array Nut -> Nut
-feComponentTransfer_ = elementify2 "feComponentTransfer" []
-
-feFuncR :: Array (Event (Attribute (Indexed (SVGFEFuncRElement ())))) -> Array Nut -> Nut
-feFuncR = elementify2 "feFuncR"
-
-feFuncR_ :: Array Nut -> Nut
-feFuncR_ = elementify2 "feFuncR" []
-
-feFuncG :: Array (Event (Attribute (Indexed (SVGFEFuncGElement ())))) -> Array Nut -> Nut
-feFuncG = elementify2 "feFuncG"
-
-feFuncG_ :: Array Nut -> Nut
-feFuncG_ = elementify2 "feFuncG" []
-
-feFuncB :: Array (Event (Attribute (Indexed (SVGFEFuncBElement ())))) -> Array Nut -> Nut
-feFuncB = elementify2 "feFuncB"
-
-feFuncB_ :: Array Nut -> Nut
-feFuncB_ = elementify2 "feFuncB" []
-
-feFuncA :: Array (Event (Attribute (Indexed (SVGFEFuncAElement ())))) -> Array Nut -> Nut
-feFuncA = elementify2 "feFuncA"
-
-feFuncA_ :: Array Nut -> Nut
-feFuncA_ = elementify2 "feFuncA" []
-
-feComposite :: Array (Event (Attribute (Indexed (SVGFECompositeElement ())))) -> Array Nut -> Nut
-feComposite = elementify2 "feComposite"
-
-feComposite_ :: Array Nut -> Nut
-feComposite_ = elementify2 "feComposite" []
-
-feConvolveMatrix
-  :: Array (Event (Attribute (Indexed (SVGFEConvolveMatrixElement ())))) -> Array Nut -> Nut
-feConvolveMatrix = elementify2 "feConvolveMatrix"
-
-feConvolveMatrix_ :: Array Nut -> Nut
-feConvolveMatrix_ = elementify2 "feConvolveMatrix" []
-
-feDiffuseLighting
-  :: Array (Event (Attribute (Indexed (SVGFEDiffuseLightingElement ())))) -> Array Nut -> Nut
-feDiffuseLighting = elementify2 "feDiffuseLighting"
-
-feDiffuseLighting_ :: Array Nut -> Nut
-feDiffuseLighting_ = elementify2 "feDiffuseLighting" []
-
-feDisplacementMap
-  :: Array (Event (Attribute (Indexed (SVGFEDisplacementMapElement ())))) -> Array Nut -> Nut
-feDisplacementMap = elementify2 "feDisplacementMap"
-
-feDisplacementMap_ :: Array Nut -> Nut
-feDisplacementMap_ = elementify2 "feDisplacementMap" []
-
-feDropShadow :: Array (Event (Attribute (Indexed (SVGFEDropShadowElement ())))) -> Array Nut -> Nut
-feDropShadow = elementify2 "feDropShadow"
-
-feDropShadow_ :: Array Nut -> Nut
-feDropShadow_ = elementify2 "feDropShadow" []
-
-feFlood :: Array (Event (Attribute (Indexed (SVGFEFloodElement ())))) -> Array Nut -> Nut
-feFlood = elementify2 "feFlood"
-
-feFlood_ :: Array Nut -> Nut
-feFlood_ = elementify2 "feFlood" []
-
-feGaussianBlur
-  :: Array (Event (Attribute (Indexed (SVGFEGaussianBlurElement ())))) -> Array Nut -> Nut
-feGaussianBlur = elementify2 "feGaussianBlur"
-
-feGaussianBlur_ :: Array Nut -> Nut
-feGaussianBlur_ = elementify2 "feGaussianBlur" []
-
-feImage :: Array (Event (Attribute (Indexed (SVGFEImageElement ())))) -> Array Nut -> Nut
-feImage = elementify2 "feImage"
-
-feImage_ :: Array Nut -> Nut
-feImage_ = elementify2 "feImage" []
-
-feMerge :: Array (Event (Attribute (Indexed (SVGFEMergeElement ())))) -> Array Nut -> Nut
-feMerge = elementify2 "feMerge"
-
-feMerge_ :: Array Nut -> Nut
-feMerge_ = elementify2 "feMerge" []
-
-feMergeNode :: Array (Event (Attribute (Indexed (SVGFEMergeNodeElement ())))) -> Array Nut -> Nut
-feMergeNode = elementify2 "feMergeNode"
-
-feMergeNode_ :: Array Nut -> Nut
-feMergeNode_ = elementify2 "feMergeNode" []
-
-feMorphology :: Array (Event (Attribute (Indexed (SVGFEMorphologyElement ())))) -> Array Nut -> Nut
-feMorphology = elementify2 "feMorphology"
-
-feMorphology_ :: Array Nut -> Nut
-feMorphology_ = elementify2 "feMorphology" []
-
-feOffset :: Array (Event (Attribute (Indexed (SVGFEOffsetElement ())))) -> Array Nut -> Nut
-feOffset = elementify2 "feOffset"
-
-feOffset_ :: Array Nut -> Nut
-feOffset_ = elementify2 "feOffset" []
-
-feSpecularLighting
-  :: Array (Event (Attribute (Indexed (SVGFESpecularLightingElement ())))) -> Array Nut -> Nut
-feSpecularLighting = elementify2 "feSpecularLighting"
-
-feSpecularLighting_ :: Array Nut -> Nut
-feSpecularLighting_ = elementify2 "feSpecularLighting" []
-
-feTile :: Array (Event (Attribute (Indexed (SVGFETileElement ())))) -> Array Nut -> Nut
-feTile = elementify2 "feTile"
-
-feTile_ :: Array Nut -> Nut
-feTile_ = elementify2 "feTile" []
-
-feTurbulence :: Array (Event (Attribute (Indexed (SVGFETurbulenceElement ())))) -> Array Nut -> Nut
-feTurbulence = elementify2 "feTurbulence"
-
-feTurbulence_ :: Array Nut -> Nut
-feTurbulence_ = elementify2 "feTurbulence" []
-
-feDistantLight
-  :: Array (Event (Attribute (Indexed (SVGFEDistantLightElement ())))) -> Array Nut -> Nut
-feDistantLight = elementify2 "feDistantLight"
-
-feDistantLight_ :: Array Nut -> Nut
-feDistantLight_ = elementify2 "feDistantLight" []
-
-fePointLight :: Array (Event (Attribute (Indexed (SVGFEPointLightElement ())))) -> Array Nut -> Nut
-fePointLight = elementify2 "fePointLight"
-
-fePointLight_ :: Array Nut -> Nut
-fePointLight_ = elementify2 "fePointLight" []
-
-feSpotLight :: Array (Event (Attribute (Indexed (SVGFESpotLightElement ())))) -> Array Nut -> Nut
-feSpotLight = elementify2 "feSpotLight"
-
-feSpotLight_ :: Array Nut -> Nut
-feSpotLight_ = elementify2 "feSpotLight" []
-
-boolAttributeValue :: Boolean -> AttributeValue
-boolAttributeValue = prop' <<< Show.show
-
-numberAttributeValue :: Number -> AttributeValue
-numberAttributeValue = prop' <<< Show.show
-
-intAttributeValue :: Int -> AttributeValue
-intAttributeValue = prop' <<< Show.show
-
-keywordAttributeValue :: forall v. Keyword v -> AttributeValue
-keywordAttributeValue = prop' <<< Newtype.unwrap
-
 class IsCrossorigin (v :: Type) (a :: Type) | v -> a where
   isCrossorigin :: v -> AttributeValue
 
 instance IsCrossorigin (Keyword "use-credentials") String where
-  isCrossorigin = keywordAttributeValue
+  isCrossorigin = prop' <<< Newtype.unwrap
 
 instance IsCrossorigin (Keyword "anonymous") String where
-  isCrossorigin = keywordAttributeValue
+  isCrossorigin = prop' <<< Newtype.unwrap
 
 _crossorigin
   :: forall r v a
@@ -2086,10 +1906,10 @@ instance IsLoading String String where
   isLoading = prop'
 
 instance IsLoading (Keyword "eager") String where
-  isLoading = keywordAttributeValue
+  isLoading = prop' <<< Newtype.unwrap
 
 instance IsLoading (Keyword "lazy") String where
-  isLoading = keywordAttributeValue
+  isLoading = prop' <<< Newtype.unwrap
 
 _loading
   :: forall r v a. IsLoading v a => Event v -> Event (Attribute (Indexed (loading :: a | r)))
@@ -2102,13 +1922,13 @@ class IsFetchpriority (v :: Type) (a :: Type) | v -> a where
   isFetchpriority :: v -> AttributeValue
 
 instance IsFetchpriority (Keyword "auto") String where
-  isFetchpriority = keywordAttributeValue
+  isFetchpriority = prop' <<< Newtype.unwrap
 
 instance IsFetchpriority (Keyword "low") String where
-  isFetchpriority = keywordAttributeValue
+  isFetchpriority = prop' <<< Newtype.unwrap
 
 instance IsFetchpriority (Keyword "high") String where
-  isFetchpriority = keywordAttributeValue
+  isFetchpriority = prop' <<< Newtype.unwrap
 
 _fetchpriority
   :: forall r v a
@@ -2129,13 +1949,13 @@ instance IsDir String String where
   isDir = prop'
 
 instance IsDir (Keyword "auto") String where
-  isDir = keywordAttributeValue
+  isDir = prop' <<< Newtype.unwrap
 
 instance IsDir (Keyword "rtl") String where
-  isDir = keywordAttributeValue
+  isDir = prop' <<< Newtype.unwrap
 
 instance IsDir (Keyword "ltr") String where
-  isDir = keywordAttributeValue
+  isDir = prop' <<< Newtype.unwrap
 
 _dir :: forall r v a. IsDir v a => Event v -> Event (Attribute (Indexed (dir :: a | r)))
 _dir = Functor.map $ (unsafeAttribute <<< { key: "dir", value: _ } <<< isDir)
@@ -2150,28 +1970,28 @@ instance IsName String String where
   isName = prop'
 
 instance IsName (Keyword "color-scheme") String where
-  isName = keywordAttributeValue
+  isName = prop' <<< Newtype.unwrap
 
 instance IsName (Keyword "theme-color") String where
-  isName = keywordAttributeValue
+  isName = prop' <<< Newtype.unwrap
 
 instance IsName (Keyword "referrer") String where
-  isName = keywordAttributeValue
+  isName = prop' <<< Newtype.unwrap
 
 instance IsName (Keyword "keywords") String where
-  isName = keywordAttributeValue
+  isName = prop' <<< Newtype.unwrap
 
 instance IsName (Keyword "generator") String where
-  isName = keywordAttributeValue
+  isName = prop' <<< Newtype.unwrap
 
 instance IsName (Keyword "description") String where
-  isName = keywordAttributeValue
+  isName = prop' <<< Newtype.unwrap
 
 instance IsName (Keyword "author") String where
-  isName = keywordAttributeValue
+  isName = prop' <<< Newtype.unwrap
 
 instance IsName (Keyword "application-name") String where
-  isName = keywordAttributeValue
+  isName = prop' <<< Newtype.unwrap
 
 _name :: forall r v a. IsName v a => Event v -> Event (Attribute (Indexed (name :: a | r)))
 _name = Functor.map $ (unsafeAttribute <<< { key: "name", value: _ } <<< isName)
@@ -2186,25 +2006,25 @@ instance IsHttpEquiv String String where
   isHttpEquiv = prop'
 
 instance IsHttpEquiv (Keyword "content-security-policy") String where
-  isHttpEquiv = keywordAttributeValue
+  isHttpEquiv = prop' <<< Newtype.unwrap
 
 instance IsHttpEquiv (Keyword "x-ua-compatible") String where
-  isHttpEquiv = keywordAttributeValue
+  isHttpEquiv = prop' <<< Newtype.unwrap
 
 instance IsHttpEquiv (Keyword "set-cookie") String where
-  isHttpEquiv = keywordAttributeValue
+  isHttpEquiv = prop' <<< Newtype.unwrap
 
 instance IsHttpEquiv (Keyword "refresh") String where
-  isHttpEquiv = keywordAttributeValue
+  isHttpEquiv = prop' <<< Newtype.unwrap
 
 instance IsHttpEquiv (Keyword "default-style") String where
-  isHttpEquiv = keywordAttributeValue
+  isHttpEquiv = prop' <<< Newtype.unwrap
 
 instance IsHttpEquiv (Keyword "content-type") String where
-  isHttpEquiv = keywordAttributeValue
+  isHttpEquiv = prop' <<< Newtype.unwrap
 
 instance IsHttpEquiv (Keyword "content-language") String where
-  isHttpEquiv = keywordAttributeValue
+  isHttpEquiv = prop' <<< Newtype.unwrap
 
 _httpEquiv
   :: forall r v a. IsHttpEquiv v a => Event v -> Event (Attribute (Indexed (httpEquiv :: a | r)))
@@ -2221,85 +2041,85 @@ instance IsXtype String String where
   isXtype = prop'
 
 instance IsXtype (Keyword "button") String where
-  isXtype = keywordAttributeValue
+  isXtype = prop' <<< Newtype.unwrap
 
 instance IsXtype (Keyword "reset") String where
-  isXtype = keywordAttributeValue
+  isXtype = prop' <<< Newtype.unwrap
 
 instance IsXtype (Keyword "submit") String where
-  isXtype = keywordAttributeValue
+  isXtype = prop' <<< Newtype.unwrap
 
 instance IsXtype (Keyword "image") String where
-  isXtype = keywordAttributeValue
+  isXtype = prop' <<< Newtype.unwrap
 
 instance IsXtype (Keyword "file") String where
-  isXtype = keywordAttributeValue
+  isXtype = prop' <<< Newtype.unwrap
 
 instance IsXtype (Keyword "radio") String where
-  isXtype = keywordAttributeValue
+  isXtype = prop' <<< Newtype.unwrap
 
 instance IsXtype (Keyword "checkbox") String where
-  isXtype = keywordAttributeValue
+  isXtype = prop' <<< Newtype.unwrap
 
 instance IsXtype (Keyword "color") String where
-  isXtype = keywordAttributeValue
+  isXtype = prop' <<< Newtype.unwrap
 
 instance IsXtype (Keyword "range") String where
-  isXtype = keywordAttributeValue
+  isXtype = prop' <<< Newtype.unwrap
 
 instance IsXtype (Keyword "number") String where
-  isXtype = keywordAttributeValue
+  isXtype = prop' <<< Newtype.unwrap
 
 instance IsXtype (Keyword "datetime-local") String where
-  isXtype = keywordAttributeValue
+  isXtype = prop' <<< Newtype.unwrap
 
 instance IsXtype (Keyword "time") String where
-  isXtype = keywordAttributeValue
+  isXtype = prop' <<< Newtype.unwrap
 
 instance IsXtype (Keyword "week") String where
-  isXtype = keywordAttributeValue
+  isXtype = prop' <<< Newtype.unwrap
 
 instance IsXtype (Keyword "month") String where
-  isXtype = keywordAttributeValue
+  isXtype = prop' <<< Newtype.unwrap
 
 instance IsXtype (Keyword "date") String where
-  isXtype = keywordAttributeValue
+  isXtype = prop' <<< Newtype.unwrap
 
 instance IsXtype (Keyword "password") String where
-  isXtype = keywordAttributeValue
+  isXtype = prop' <<< Newtype.unwrap
 
 instance IsXtype (Keyword "email") String where
-  isXtype = keywordAttributeValue
+  isXtype = prop' <<< Newtype.unwrap
 
 instance IsXtype (Keyword "url") String where
-  isXtype = keywordAttributeValue
+  isXtype = prop' <<< Newtype.unwrap
 
 instance IsXtype (Keyword "tel") String where
-  isXtype = keywordAttributeValue
+  isXtype = prop' <<< Newtype.unwrap
 
 instance IsXtype (Keyword "search") String where
-  isXtype = keywordAttributeValue
+  isXtype = prop' <<< Newtype.unwrap
 
 instance IsXtype (Keyword "text") String where
-  isXtype = keywordAttributeValue
+  isXtype = prop' <<< Newtype.unwrap
 
 instance IsXtype (Keyword "hidden") String where
-  isXtype = keywordAttributeValue
+  isXtype = prop' <<< Newtype.unwrap
 
 instance IsXtype (Keyword "I") String where
-  isXtype = keywordAttributeValue
+  isXtype = prop' <<< Newtype.unwrap
 
 instance IsXtype (Keyword "i") String where
-  isXtype = keywordAttributeValue
+  isXtype = prop' <<< Newtype.unwrap
 
 instance IsXtype (Keyword "A") String where
-  isXtype = keywordAttributeValue
+  isXtype = prop' <<< Newtype.unwrap
 
 instance IsXtype (Keyword "a") String where
-  isXtype = keywordAttributeValue
+  isXtype = prop' <<< Newtype.unwrap
 
 instance IsXtype (Keyword "1") String where
-  isXtype = keywordAttributeValue
+  isXtype = prop' <<< Newtype.unwrap
 
 _xtype :: forall r v a. IsXtype v a => Event v -> Event (Attribute (Indexed (xtype :: a | r)))
 _xtype = Functor.map $ (unsafeAttribute <<< { key: "type", value: _ } <<< isXtype)
@@ -2314,76 +2134,76 @@ instance IsRel String String where
   isRel = prop'
 
 instance IsRel (Keyword "prev") String where
-  isRel = keywordAttributeValue
+  isRel = prop' <<< Newtype.unwrap
 
 instance IsRel (Keyword "next") String where
-  isRel = keywordAttributeValue
+  isRel = prop' <<< Newtype.unwrap
 
 instance IsRel (Keyword "tag") String where
-  isRel = keywordAttributeValue
+  isRel = prop' <<< Newtype.unwrap
 
 instance IsRel (Keyword "stylesheet") String where
-  isRel = keywordAttributeValue
+  isRel = prop' <<< Newtype.unwrap
 
 instance IsRel (Keyword "search") String where
-  isRel = keywordAttributeValue
+  isRel = prop' <<< Newtype.unwrap
 
 instance IsRel (Keyword "preload") String where
-  isRel = keywordAttributeValue
+  isRel = prop' <<< Newtype.unwrap
 
 instance IsRel (Keyword "prefetch") String where
-  isRel = keywordAttributeValue
+  isRel = prop' <<< Newtype.unwrap
 
 instance IsRel (Keyword "preconnect") String where
-  isRel = keywordAttributeValue
+  isRel = prop' <<< Newtype.unwrap
 
 instance IsRel (Keyword "pingback") String where
-  isRel = keywordAttributeValue
+  isRel = prop' <<< Newtype.unwrap
 
 instance IsRel (Keyword "opener") String where
-  isRel = keywordAttributeValue
+  isRel = prop' <<< Newtype.unwrap
 
 instance IsRel (Keyword "noreferrer") String where
-  isRel = keywordAttributeValue
+  isRel = prop' <<< Newtype.unwrap
 
 instance IsRel (Keyword "noopener") String where
-  isRel = keywordAttributeValue
+  isRel = prop' <<< Newtype.unwrap
 
 instance IsRel (Keyword "nofollow") String where
-  isRel = keywordAttributeValue
+  isRel = prop' <<< Newtype.unwrap
 
 instance IsRel (Keyword "modulepreload") String where
-  isRel = keywordAttributeValue
+  isRel = prop' <<< Newtype.unwrap
 
 instance IsRel (Keyword "manifest") String where
-  isRel = keywordAttributeValue
+  isRel = prop' <<< Newtype.unwrap
 
 instance IsRel (Keyword "license") String where
-  isRel = keywordAttributeValue
+  isRel = prop' <<< Newtype.unwrap
 
 instance IsRel (Keyword "icon") String where
-  isRel = keywordAttributeValue
+  isRel = prop' <<< Newtype.unwrap
 
 instance IsRel (Keyword "help") String where
-  isRel = keywordAttributeValue
+  isRel = prop' <<< Newtype.unwrap
 
 instance IsRel (Keyword "external") String where
-  isRel = keywordAttributeValue
+  isRel = prop' <<< Newtype.unwrap
 
 instance IsRel (Keyword "dns-prefetch") String where
-  isRel = keywordAttributeValue
+  isRel = prop' <<< Newtype.unwrap
 
 instance IsRel (Keyword "canonical") String where
-  isRel = keywordAttributeValue
+  isRel = prop' <<< Newtype.unwrap
 
 instance IsRel (Keyword "bookmark") String where
-  isRel = keywordAttributeValue
+  isRel = prop' <<< Newtype.unwrap
 
 instance IsRel (Keyword "author") String where
-  isRel = keywordAttributeValue
+  isRel = prop' <<< Newtype.unwrap
 
 instance IsRel (Keyword "alternate") String where
-  isRel = keywordAttributeValue
+  isRel = prop' <<< Newtype.unwrap
 
 _rel :: forall r v a. IsRel v a => Event v -> Event (Attribute (Indexed (rel :: a | r)))
 _rel = Functor.map $ (unsafeAttribute <<< { key: "rel", value: _ } <<< isRel)
@@ -2398,13 +2218,13 @@ instance IsDecoding String String where
   isDecoding = prop'
 
 instance IsDecoding (Keyword "auto") String where
-  isDecoding = keywordAttributeValue
+  isDecoding = prop' <<< Newtype.unwrap
 
 instance IsDecoding (Keyword "async") String where
-  isDecoding = keywordAttributeValue
+  isDecoding = prop' <<< Newtype.unwrap
 
 instance IsDecoding (Keyword "sync") String where
-  isDecoding = keywordAttributeValue
+  isDecoding = prop' <<< Newtype.unwrap
 
 _decoding
   :: forall r v a. IsDecoding v a => Event v -> Event (Attribute (Indexed (decoding :: a | r)))
@@ -2420,19 +2240,19 @@ instance IsKind String String where
   isKind = prop'
 
 instance IsKind (Keyword "metadata") String where
-  isKind = keywordAttributeValue
+  isKind = prop' <<< Newtype.unwrap
 
 instance IsKind (Keyword "chapters") String where
-  isKind = keywordAttributeValue
+  isKind = prop' <<< Newtype.unwrap
 
 instance IsKind (Keyword "descriptions") String where
-  isKind = keywordAttributeValue
+  isKind = prop' <<< Newtype.unwrap
 
 instance IsKind (Keyword "captions") String where
-  isKind = keywordAttributeValue
+  isKind = prop' <<< Newtype.unwrap
 
 instance IsKind (Keyword "subtitles") String where
-  isKind = keywordAttributeValue
+  isKind = prop' <<< Newtype.unwrap
 
 _kind :: forall r v a. IsKind v a => Event v -> Event (Attribute (Indexed (kind :: a | r)))
 _kind = Functor.map $ (unsafeAttribute <<< { key: "kind", value: _ } <<< isKind)
@@ -2447,13 +2267,13 @@ instance IsPreload String String where
   isPreload = prop'
 
 instance IsPreload (Keyword "auto") String where
-  isPreload = keywordAttributeValue
+  isPreload = prop' <<< Newtype.unwrap
 
 instance IsPreload (Keyword "metadata") String where
-  isPreload = keywordAttributeValue
+  isPreload = prop' <<< Newtype.unwrap
 
 instance IsPreload (Keyword "none") String where
-  isPreload = keywordAttributeValue
+  isPreload = prop' <<< Newtype.unwrap
 
 _preload
   :: forall r v a. IsPreload v a => Event v -> Event (Attribute (Indexed (preload :: a | r)))
@@ -2469,16 +2289,16 @@ instance IsShape String String where
   isShape = prop'
 
 instance IsShape (Keyword "rectangle state") String where
-  isShape = keywordAttributeValue
+  isShape = prop' <<< Newtype.unwrap
 
 instance IsShape (Keyword "polygon state") String where
-  isShape = keywordAttributeValue
+  isShape = prop' <<< Newtype.unwrap
 
 instance IsShape (Keyword "default state") String where
-  isShape = keywordAttributeValue
+  isShape = prop' <<< Newtype.unwrap
 
 instance IsShape (Keyword "circle state") String where
-  isShape = keywordAttributeValue
+  isShape = prop' <<< Newtype.unwrap
 
 _shape :: forall r v a. IsShape v a => Event v -> Event (Attribute (Indexed (shape :: a | r)))
 _shape = Functor.map $ (unsafeAttribute <<< { key: "shape", value: _ } <<< isShape)
@@ -2493,19 +2313,19 @@ instance IsScope String String where
   isScope = prop'
 
 instance IsScope (Keyword "auto") String where
-  isScope = keywordAttributeValue
+  isScope = prop' <<< Newtype.unwrap
 
 instance IsScope (Keyword "colgroup") String where
-  isScope = keywordAttributeValue
+  isScope = prop' <<< Newtype.unwrap
 
 instance IsScope (Keyword "rowgroup") String where
-  isScope = keywordAttributeValue
+  isScope = prop' <<< Newtype.unwrap
 
 instance IsScope (Keyword "col") String where
-  isScope = keywordAttributeValue
+  isScope = prop' <<< Newtype.unwrap
 
 instance IsScope (Keyword "row") String where
-  isScope = keywordAttributeValue
+  isScope = prop' <<< Newtype.unwrap
 
 _scope :: forall r v a. IsScope v a => Event v -> Event (Attribute (Indexed (scope :: a | r)))
 _scope = Functor.map $ (unsafeAttribute <<< { key: "scope", value: _ } <<< isScope)
@@ -2520,10 +2340,10 @@ instance IsWrap String String where
   isWrap = prop'
 
 instance IsWrap (Keyword "hard") String where
-  isWrap = keywordAttributeValue
+  isWrap = prop' <<< Newtype.unwrap
 
 instance IsWrap (Keyword "soft") String where
-  isWrap = keywordAttributeValue
+  isWrap = prop' <<< Newtype.unwrap
 
 _wrap :: forall r v a. IsWrap v a => Event v -> Event (Attribute (Indexed (wrap :: a | r)))
 _wrap = Functor.map $ (unsafeAttribute <<< { key: "wrap", value: _ } <<< isWrap)
@@ -2538,13 +2358,13 @@ instance IsMethod String String where
   isMethod = prop'
 
 instance IsMethod (Keyword "dialog") String where
-  isMethod = keywordAttributeValue
+  isMethod = prop' <<< Newtype.unwrap
 
 instance IsMethod (Keyword "post") String where
-  isMethod = keywordAttributeValue
+  isMethod = prop' <<< Newtype.unwrap
 
 instance IsMethod (Keyword "get") String where
-  isMethod = keywordAttributeValue
+  isMethod = prop' <<< Newtype.unwrap
 
 _method :: forall r v a. IsMethod v a => Event v -> Event (Attribute (Indexed (method :: a | r)))
 _method = Functor.map $ (unsafeAttribute <<< { key: "method", value: _ } <<< isMethod)
@@ -2559,13 +2379,13 @@ instance IsEnctype String String where
   isEnctype = prop'
 
 instance IsEnctype (Keyword "text/plain") String where
-  isEnctype = keywordAttributeValue
+  isEnctype = prop' <<< Newtype.unwrap
 
 instance IsEnctype (Keyword "multipart/form-data") String where
-  isEnctype = keywordAttributeValue
+  isEnctype = prop' <<< Newtype.unwrap
 
 instance IsEnctype (Keyword "application/x-www-form-urlencoded") String where
-  isEnctype = keywordAttributeValue
+  isEnctype = prop' <<< Newtype.unwrap
 
 _enctype
   :: forall r v a. IsEnctype v a => Event v -> Event (Attribute (Indexed (enctype :: a | r)))
@@ -2581,193 +2401,193 @@ instance IsAutocomplete String String where
   isAutocomplete = prop'
 
 instance IsAutocomplete (Keyword "impp") String where
-  isAutocomplete = keywordAttributeValue
+  isAutocomplete = prop' <<< Newtype.unwrap
 
 instance IsAutocomplete (Keyword "email") String where
-  isAutocomplete = keywordAttributeValue
+  isAutocomplete = prop' <<< Newtype.unwrap
 
 instance IsAutocomplete (Keyword "tel-extension") String where
-  isAutocomplete = keywordAttributeValue
+  isAutocomplete = prop' <<< Newtype.unwrap
 
 instance IsAutocomplete (Keyword "tel-local-suffix") String where
-  isAutocomplete = keywordAttributeValue
+  isAutocomplete = prop' <<< Newtype.unwrap
 
 instance IsAutocomplete (Keyword "tel-local-prefix") String where
-  isAutocomplete = keywordAttributeValue
+  isAutocomplete = prop' <<< Newtype.unwrap
 
 instance IsAutocomplete (Keyword "tel-local") String where
-  isAutocomplete = keywordAttributeValue
+  isAutocomplete = prop' <<< Newtype.unwrap
 
 instance IsAutocomplete (Keyword "tel-area-code") String where
-  isAutocomplete = keywordAttributeValue
+  isAutocomplete = prop' <<< Newtype.unwrap
 
 instance IsAutocomplete (Keyword "tel-national") String where
-  isAutocomplete = keywordAttributeValue
+  isAutocomplete = prop' <<< Newtype.unwrap
 
 instance IsAutocomplete (Keyword "tel-country-code") String where
-  isAutocomplete = keywordAttributeValue
+  isAutocomplete = prop' <<< Newtype.unwrap
 
 instance IsAutocomplete (Keyword "tel") String where
-  isAutocomplete = keywordAttributeValue
+  isAutocomplete = prop' <<< Newtype.unwrap
 
 instance IsAutocomplete (Keyword "photo") String where
-  isAutocomplete = keywordAttributeValue
+  isAutocomplete = prop' <<< Newtype.unwrap
 
 instance IsAutocomplete (Keyword "url") String where
-  isAutocomplete = keywordAttributeValue
+  isAutocomplete = prop' <<< Newtype.unwrap
 
 instance IsAutocomplete (Keyword "sex") String where
-  isAutocomplete = keywordAttributeValue
+  isAutocomplete = prop' <<< Newtype.unwrap
 
 instance IsAutocomplete (Keyword "bday-year") String where
-  isAutocomplete = keywordAttributeValue
+  isAutocomplete = prop' <<< Newtype.unwrap
 
 instance IsAutocomplete (Keyword "bday-month") String where
-  isAutocomplete = keywordAttributeValue
+  isAutocomplete = prop' <<< Newtype.unwrap
 
 instance IsAutocomplete (Keyword "bday-day") String where
-  isAutocomplete = keywordAttributeValue
+  isAutocomplete = prop' <<< Newtype.unwrap
 
 instance IsAutocomplete (Keyword "bday") String where
-  isAutocomplete = keywordAttributeValue
+  isAutocomplete = prop' <<< Newtype.unwrap
 
 instance IsAutocomplete (Keyword "language") String where
-  isAutocomplete = keywordAttributeValue
+  isAutocomplete = prop' <<< Newtype.unwrap
 
 instance IsAutocomplete (Keyword "transaction-amount") String where
-  isAutocomplete = keywordAttributeValue
+  isAutocomplete = prop' <<< Newtype.unwrap
 
 instance IsAutocomplete (Keyword "transaction-currency") String where
-  isAutocomplete = keywordAttributeValue
+  isAutocomplete = prop' <<< Newtype.unwrap
 
 instance IsAutocomplete (Keyword "cc-type") String where
-  isAutocomplete = keywordAttributeValue
+  isAutocomplete = prop' <<< Newtype.unwrap
 
 instance IsAutocomplete (Keyword "cc-csc") String where
-  isAutocomplete = keywordAttributeValue
+  isAutocomplete = prop' <<< Newtype.unwrap
 
 instance IsAutocomplete (Keyword "cc-exp-year") String where
-  isAutocomplete = keywordAttributeValue
+  isAutocomplete = prop' <<< Newtype.unwrap
 
 instance IsAutocomplete (Keyword "cc-exp-month") String where
-  isAutocomplete = keywordAttributeValue
+  isAutocomplete = prop' <<< Newtype.unwrap
 
 instance IsAutocomplete (Keyword "cc-exp") String where
-  isAutocomplete = keywordAttributeValue
+  isAutocomplete = prop' <<< Newtype.unwrap
 
 instance IsAutocomplete (Keyword "cc-number") String where
-  isAutocomplete = keywordAttributeValue
+  isAutocomplete = prop' <<< Newtype.unwrap
 
 instance IsAutocomplete (Keyword "cc-family-name") String where
-  isAutocomplete = keywordAttributeValue
+  isAutocomplete = prop' <<< Newtype.unwrap
 
 instance IsAutocomplete (Keyword "cc-additional-name") String where
-  isAutocomplete = keywordAttributeValue
+  isAutocomplete = prop' <<< Newtype.unwrap
 
 instance IsAutocomplete (Keyword "cc-given-name") String where
-  isAutocomplete = keywordAttributeValue
+  isAutocomplete = prop' <<< Newtype.unwrap
 
 instance IsAutocomplete (Keyword "cc-name") String where
-  isAutocomplete = keywordAttributeValue
+  isAutocomplete = prop' <<< Newtype.unwrap
 
 instance IsAutocomplete (Keyword "postal-code") String where
-  isAutocomplete = keywordAttributeValue
+  isAutocomplete = prop' <<< Newtype.unwrap
 
 instance IsAutocomplete (Keyword "country-name") String where
-  isAutocomplete = keywordAttributeValue
+  isAutocomplete = prop' <<< Newtype.unwrap
 
 instance IsAutocomplete (Keyword "country") String where
-  isAutocomplete = keywordAttributeValue
+  isAutocomplete = prop' <<< Newtype.unwrap
 
 instance IsAutocomplete (Keyword "address-level1") String where
-  isAutocomplete = keywordAttributeValue
+  isAutocomplete = prop' <<< Newtype.unwrap
 
 instance IsAutocomplete (Keyword "address-level2") String where
-  isAutocomplete = keywordAttributeValue
+  isAutocomplete = prop' <<< Newtype.unwrap
 
 instance IsAutocomplete (Keyword "address-level3") String where
-  isAutocomplete = keywordAttributeValue
+  isAutocomplete = prop' <<< Newtype.unwrap
 
 instance IsAutocomplete (Keyword "address-level4") String where
-  isAutocomplete = keywordAttributeValue
+  isAutocomplete = prop' <<< Newtype.unwrap
 
 instance IsAutocomplete (Keyword "address-line3") String where
-  isAutocomplete = keywordAttributeValue
+  isAutocomplete = prop' <<< Newtype.unwrap
 
 instance IsAutocomplete (Keyword "address-line2") String where
-  isAutocomplete = keywordAttributeValue
+  isAutocomplete = prop' <<< Newtype.unwrap
 
 instance IsAutocomplete (Keyword "address-line1") String where
-  isAutocomplete = keywordAttributeValue
+  isAutocomplete = prop' <<< Newtype.unwrap
 
 instance IsAutocomplete (Keyword "street-address") String where
-  isAutocomplete = keywordAttributeValue
+  isAutocomplete = prop' <<< Newtype.unwrap
 
 instance IsAutocomplete (Keyword "organization") String where
-  isAutocomplete = keywordAttributeValue
+  isAutocomplete = prop' <<< Newtype.unwrap
 
 instance IsAutocomplete (Keyword "one-time-code") String where
-  isAutocomplete = keywordAttributeValue
+  isAutocomplete = prop' <<< Newtype.unwrap
 
 instance IsAutocomplete (Keyword "current-password") String where
-  isAutocomplete = keywordAttributeValue
+  isAutocomplete = prop' <<< Newtype.unwrap
 
 instance IsAutocomplete (Keyword "new-password") String where
-  isAutocomplete = keywordAttributeValue
+  isAutocomplete = prop' <<< Newtype.unwrap
 
 instance IsAutocomplete (Keyword "username") String where
-  isAutocomplete = keywordAttributeValue
+  isAutocomplete = prop' <<< Newtype.unwrap
 
 instance IsAutocomplete (Keyword "organization-title") String where
-  isAutocomplete = keywordAttributeValue
+  isAutocomplete = prop' <<< Newtype.unwrap
 
 instance IsAutocomplete (Keyword "nickname") String where
-  isAutocomplete = keywordAttributeValue
+  isAutocomplete = prop' <<< Newtype.unwrap
 
 instance IsAutocomplete (Keyword "honorific-suffix") String where
-  isAutocomplete = keywordAttributeValue
+  isAutocomplete = prop' <<< Newtype.unwrap
 
 instance IsAutocomplete (Keyword "family-name") String where
-  isAutocomplete = keywordAttributeValue
+  isAutocomplete = prop' <<< Newtype.unwrap
 
 instance IsAutocomplete (Keyword "additional-name") String where
-  isAutocomplete = keywordAttributeValue
+  isAutocomplete = prop' <<< Newtype.unwrap
 
 instance IsAutocomplete (Keyword "given-name") String where
-  isAutocomplete = keywordAttributeValue
+  isAutocomplete = prop' <<< Newtype.unwrap
 
 instance IsAutocomplete (Keyword "honorific-prefix") String where
-  isAutocomplete = keywordAttributeValue
+  isAutocomplete = prop' <<< Newtype.unwrap
 
 instance IsAutocomplete (Keyword "name") String where
-  isAutocomplete = keywordAttributeValue
+  isAutocomplete = prop' <<< Newtype.unwrap
 
 instance IsAutocomplete (Keyword "on") String where
-  isAutocomplete = keywordAttributeValue
+  isAutocomplete = prop' <<< Newtype.unwrap
 
 instance IsAutocomplete (Keyword "off") String where
-  isAutocomplete = keywordAttributeValue
+  isAutocomplete = prop' <<< Newtype.unwrap
 
 instance IsAutocomplete (Keyword "pager") String where
-  isAutocomplete = keywordAttributeValue
+  isAutocomplete = prop' <<< Newtype.unwrap
 
 instance IsAutocomplete (Keyword "fax") String where
-  isAutocomplete = keywordAttributeValue
+  isAutocomplete = prop' <<< Newtype.unwrap
 
 instance IsAutocomplete (Keyword "mobile") String where
-  isAutocomplete = keywordAttributeValue
+  isAutocomplete = prop' <<< Newtype.unwrap
 
 instance IsAutocomplete (Keyword "work") String where
-  isAutocomplete = keywordAttributeValue
+  isAutocomplete = prop' <<< Newtype.unwrap
 
 instance IsAutocomplete (Keyword "home") String where
-  isAutocomplete = keywordAttributeValue
+  isAutocomplete = prop' <<< Newtype.unwrap
 
 instance IsAutocomplete (Keyword "billing") String where
-  isAutocomplete = keywordAttributeValue
+  isAutocomplete = prop' <<< Newtype.unwrap
 
 instance IsAutocomplete (Keyword "shipping") String where
-  isAutocomplete = keywordAttributeValue
+  isAutocomplete = prop' <<< Newtype.unwrap
 
 _autocomplete
   :: forall r v a
@@ -2785,10 +2605,10 @@ class IsEntry (v :: Type) (a :: Type) | v -> a where
   isEntry :: v -> AttributeValue
 
 instance IsEntry (Keyword "value") String where
-  isEntry = keywordAttributeValue
+  isEntry = prop' <<< Newtype.unwrap
 
 instance IsEntry (Keyword "name") String where
-  isEntry = keywordAttributeValue
+  isEntry = prop' <<< Newtype.unwrap
 
 _entry :: forall r v a. IsEntry v a => Event v -> Event (Attribute (Indexed (entry :: a | r)))
 _entry = Functor.map $ (unsafeAttribute <<< { key: "entry", value: _ } <<< isEntry)
@@ -2800,19 +2620,19 @@ class IsHidden (v :: Type) (a :: Type) | v -> a where
   isHidden :: v -> AttributeValue
 
 instance IsHidden Boolean Boolean where
-  isHidden = boolAttributeValue
+  isHidden = prop' <<< Show.show
 
 instance IsHidden Number Number where
-  isHidden = numberAttributeValue
+  isHidden = prop' <<< Show.show
 
 instance IsHidden String String where
   isHidden = prop'
 
 instance IsHidden (Keyword "hidden") String where
-  isHidden = keywordAttributeValue
+  isHidden = prop' <<< Newtype.unwrap
 
 instance IsHidden (Keyword "until-found") String where
-  isHidden = keywordAttributeValue
+  isHidden = prop' <<< Newtype.unwrap
 
 _hidden :: forall r v a. IsHidden v a => Event v -> Event (Attribute (Indexed (hidden :: a | r)))
 _hidden = Functor.map $ (unsafeAttribute <<< { key: "hidden", value: _ } <<< isHidden)
@@ -2827,22 +2647,22 @@ instance IsAutocapitalize String String where
   isAutocapitalize = prop'
 
 instance IsAutocapitalize (Keyword "characters") String where
-  isAutocapitalize = keywordAttributeValue
+  isAutocapitalize = prop' <<< Newtype.unwrap
 
 instance IsAutocapitalize (Keyword "words") String where
-  isAutocapitalize = keywordAttributeValue
+  isAutocapitalize = prop' <<< Newtype.unwrap
 
 instance IsAutocapitalize (Keyword "sentences") String where
-  isAutocapitalize = keywordAttributeValue
+  isAutocapitalize = prop' <<< Newtype.unwrap
 
 instance IsAutocapitalize (Keyword "on") String where
-  isAutocapitalize = keywordAttributeValue
+  isAutocapitalize = prop' <<< Newtype.unwrap
 
 instance IsAutocapitalize (Keyword "none") String where
-  isAutocapitalize = keywordAttributeValue
+  isAutocapitalize = prop' <<< Newtype.unwrap
 
 instance IsAutocapitalize (Keyword "off") String where
-  isAutocapitalize = keywordAttributeValue
+  isAutocapitalize = prop' <<< Newtype.unwrap
 
 _autocapitalize
   :: forall r v a
@@ -2863,28 +2683,28 @@ class IsInputmode (v :: Type) (a :: Type) | v -> a where
   isInputmode :: v -> AttributeValue
 
 instance IsInputmode (Keyword "search") String where
-  isInputmode = keywordAttributeValue
+  isInputmode = prop' <<< Newtype.unwrap
 
 instance IsInputmode (Keyword "decimal") String where
-  isInputmode = keywordAttributeValue
+  isInputmode = prop' <<< Newtype.unwrap
 
 instance IsInputmode (Keyword "numeric") String where
-  isInputmode = keywordAttributeValue
+  isInputmode = prop' <<< Newtype.unwrap
 
 instance IsInputmode (Keyword "email") String where
-  isInputmode = keywordAttributeValue
+  isInputmode = prop' <<< Newtype.unwrap
 
 instance IsInputmode (Keyword "url") String where
-  isInputmode = keywordAttributeValue
+  isInputmode = prop' <<< Newtype.unwrap
 
 instance IsInputmode (Keyword "tel") String where
-  isInputmode = keywordAttributeValue
+  isInputmode = prop' <<< Newtype.unwrap
 
 instance IsInputmode (Keyword "text") String where
-  isInputmode = keywordAttributeValue
+  isInputmode = prop' <<< Newtype.unwrap
 
 instance IsInputmode (Keyword "none") String where
-  isInputmode = keywordAttributeValue
+  isInputmode = prop' <<< Newtype.unwrap
 
 _inputmode
   :: forall r v a. IsInputmode v a => Event v -> Event (Attribute (Indexed (inputmode :: a | r)))
@@ -2898,25 +2718,25 @@ class IsEnterkeyhint (v :: Type) (a :: Type) | v -> a where
   isEnterkeyhint :: v -> AttributeValue
 
 instance IsEnterkeyhint (Keyword "send") String where
-  isEnterkeyhint = keywordAttributeValue
+  isEnterkeyhint = prop' <<< Newtype.unwrap
 
 instance IsEnterkeyhint (Keyword "search") String where
-  isEnterkeyhint = keywordAttributeValue
+  isEnterkeyhint = prop' <<< Newtype.unwrap
 
 instance IsEnterkeyhint (Keyword "previous") String where
-  isEnterkeyhint = keywordAttributeValue
+  isEnterkeyhint = prop' <<< Newtype.unwrap
 
 instance IsEnterkeyhint (Keyword "next") String where
-  isEnterkeyhint = keywordAttributeValue
+  isEnterkeyhint = prop' <<< Newtype.unwrap
 
 instance IsEnterkeyhint (Keyword "go") String where
-  isEnterkeyhint = keywordAttributeValue
+  isEnterkeyhint = prop' <<< Newtype.unwrap
 
 instance IsEnterkeyhint (Keyword "done") String where
-  isEnterkeyhint = keywordAttributeValue
+  isEnterkeyhint = prop' <<< Newtype.unwrap
 
 instance IsEnterkeyhint (Keyword "enter") String where
-  isEnterkeyhint = keywordAttributeValue
+  isEnterkeyhint = prop' <<< Newtype.unwrap
 
 _enterkeyhint
   :: forall r v a
@@ -2937,10 +2757,10 @@ instance IsPopover String String where
   isPopover = prop'
 
 instance IsPopover (Keyword "manual") String where
-  isPopover = keywordAttributeValue
+  isPopover = prop' <<< Newtype.unwrap
 
 instance IsPopover (Keyword "auto") String where
-  isPopover = keywordAttributeValue
+  isPopover = prop' <<< Newtype.unwrap
 
 _popover
   :: forall r v a. IsPopover v a => Event v -> Event (Attribute (Indexed (popover :: a | r)))
@@ -2953,13 +2773,13 @@ class IsPopovertargetaction (v :: Type) (a :: Type) | v -> a where
   isPopovertargetaction :: v -> AttributeValue
 
 instance IsPopovertargetaction (Keyword "hide") String where
-  isPopovertargetaction = keywordAttributeValue
+  isPopovertargetaction = prop' <<< Newtype.unwrap
 
 instance IsPopovertargetaction (Keyword "show") String where
-  isPopovertargetaction = keywordAttributeValue
+  isPopovertargetaction = prop' <<< Newtype.unwrap
 
 instance IsPopovertargetaction (Keyword "toggle") String where
-  isPopovertargetaction = keywordAttributeValue
+  isPopovertargetaction = prop' <<< Newtype.unwrap
 
 _popovertargetaction
   :: forall r v a
@@ -2980,43 +2800,43 @@ class IsSandbox (v :: Type) (a :: Type) | v -> a where
   isSandbox :: v -> AttributeValue
 
 instance IsSandbox (Keyword "allow-top-navigation-to-custom-protocols") String where
-  isSandbox = keywordAttributeValue
+  isSandbox = prop' <<< Newtype.unwrap
 
 instance IsSandbox (Keyword "allow-downloads") String where
-  isSandbox = keywordAttributeValue
+  isSandbox = prop' <<< Newtype.unwrap
 
 instance IsSandbox (Keyword "allow-presentation") String where
-  isSandbox = keywordAttributeValue
+  isSandbox = prop' <<< Newtype.unwrap
 
 instance IsSandbox (Keyword "allow-orientation-lock") String where
-  isSandbox = keywordAttributeValue
+  isSandbox = prop' <<< Newtype.unwrap
 
 instance IsSandbox (Keyword "allow-modals") String where
-  isSandbox = keywordAttributeValue
+  isSandbox = prop' <<< Newtype.unwrap
 
 instance IsSandbox (Keyword "allow-popups-to-escape-sandbox") String where
-  isSandbox = keywordAttributeValue
+  isSandbox = prop' <<< Newtype.unwrap
 
 instance IsSandbox (Keyword "allow-scripts") String where
-  isSandbox = keywordAttributeValue
+  isSandbox = prop' <<< Newtype.unwrap
 
 instance IsSandbox (Keyword "allow-pointer-lock") String where
-  isSandbox = keywordAttributeValue
+  isSandbox = prop' <<< Newtype.unwrap
 
 instance IsSandbox (Keyword "allow-forms") String where
-  isSandbox = keywordAttributeValue
+  isSandbox = prop' <<< Newtype.unwrap
 
 instance IsSandbox (Keyword "allow-same-origin") String where
-  isSandbox = keywordAttributeValue
+  isSandbox = prop' <<< Newtype.unwrap
 
 instance IsSandbox (Keyword "allow-top-navigation-by-user-activation") String where
-  isSandbox = keywordAttributeValue
+  isSandbox = prop' <<< Newtype.unwrap
 
 instance IsSandbox (Keyword "allow-top-navigation") String where
-  isSandbox = keywordAttributeValue
+  isSandbox = prop' <<< Newtype.unwrap
 
 instance IsSandbox (Keyword "allow-popups") String where
-  isSandbox = keywordAttributeValue
+  isSandbox = prop' <<< Newtype.unwrap
 
 _sandbox
   :: forall r v a. IsSandbox v a => Event v -> Event (Attribute (Indexed (sandbox :: a | r)))
@@ -3321,481 +3141,973 @@ _inputMode = Functor.map $ (unsafeAttribute <<< { key: "inputMode", value: _ } <
 _inputMode_ :: forall r. String -> Event (Attribute (Indexed (inputMode :: String | r)))
 _inputMode_ = _inputMode <<< Applicative.pure
 
-_onabort :: forall r. Event Cb -> Event (Attribute (Indexed (onabort :: Cb | r)))
-_onabort = Functor.map $ (unsafeAttribute <<< { key: "onabort", value: _ } <<< cb')
-
-_onabort_ :: forall r. Cb -> Event (Attribute (Indexed (onabort :: Cb | r)))
-_onabort_ = _onabort <<< Applicative.pure
-
-_onauxclick :: forall r. Event Cb -> Event (Attribute (Indexed (onauxclick :: Cb | r)))
-_onauxclick = Functor.map $ (unsafeAttribute <<< { key: "onauxclick", value: _ } <<< cb')
-
-_onauxclick_ :: forall r. Cb -> Event (Attribute (Indexed (onauxclick :: Cb | r)))
-_onauxclick_ = _onauxclick <<< Applicative.pure
-
-_onbeforeinput :: forall r. Event Cb -> Event (Attribute (Indexed (onbeforeinput :: Cb | r)))
-_onbeforeinput = Functor.map $ (unsafeAttribute <<< { key: "onbeforeinput", value: _ } <<< cb')
-
-_onbeforeinput_ :: forall r. Cb -> Event (Attribute (Indexed (onbeforeinput :: Cb | r)))
-_onbeforeinput_ = _onbeforeinput <<< Applicative.pure
-
-_onbeforematch :: forall r. Event Cb -> Event (Attribute (Indexed (onbeforematch :: Cb | r)))
-_onbeforematch = Functor.map $ (unsafeAttribute <<< { key: "onbeforematch", value: _ } <<< cb')
-
-_onbeforematch_ :: forall r. Cb -> Event (Attribute (Indexed (onbeforematch :: Cb | r)))
-_onbeforematch_ = _onbeforematch <<< Applicative.pure
-
-_onbeforetoggle :: forall r. Event Cb -> Event (Attribute (Indexed (onbeforetoggle :: Cb | r)))
-_onbeforetoggle = Functor.map $ (unsafeAttribute <<< { key: "onbeforetoggle", value: _ } <<< cb')
-
-_onbeforetoggle_ :: forall r. Cb -> Event (Attribute (Indexed (onbeforetoggle :: Cb | r)))
-_onbeforetoggle_ = _onbeforetoggle <<< Applicative.pure
-
-_onblur :: forall r. Event Cb -> Event (Attribute (Indexed (onblur :: Cb | r)))
-_onblur = Functor.map $ (unsafeAttribute <<< { key: "onblur", value: _ } <<< cb')
-
-_onblur_ :: forall r. Cb -> Event (Attribute (Indexed (onblur :: Cb | r)))
-_onblur_ = _onblur <<< Applicative.pure
-
-_oncancel :: forall r. Event Cb -> Event (Attribute (Indexed (oncancel :: Cb | r)))
-_oncancel = Functor.map $ (unsafeAttribute <<< { key: "oncancel", value: _ } <<< cb')
-
-_oncancel_ :: forall r. Cb -> Event (Attribute (Indexed (oncancel :: Cb | r)))
-_oncancel_ = _oncancel <<< Applicative.pure
-
-_oncanplay :: forall r. Event Cb -> Event (Attribute (Indexed (oncanplay :: Cb | r)))
-_oncanplay = Functor.map $ (unsafeAttribute <<< { key: "oncanplay", value: _ } <<< cb')
-
-_oncanplay_ :: forall r. Cb -> Event (Attribute (Indexed (oncanplay :: Cb | r)))
-_oncanplay_ = _oncanplay <<< Applicative.pure
-
-_oncanplaythrough :: forall r. Event Cb -> Event (Attribute (Indexed (oncanplaythrough :: Cb | r)))
-_oncanplaythrough = Functor.map $
-  (unsafeAttribute <<< { key: "oncanplaythrough", value: _ } <<< cb')
-
-_oncanplaythrough_ :: forall r. Cb -> Event (Attribute (Indexed (oncanplaythrough :: Cb | r)))
-_oncanplaythrough_ = _oncanplaythrough <<< Applicative.pure
-
-_onchange :: forall r. Event Cb -> Event (Attribute (Indexed (onchange :: Cb | r)))
-_onchange = Functor.map $ (unsafeAttribute <<< { key: "onchange", value: _ } <<< cb')
-
-_onchange_ :: forall r. Cb -> Event (Attribute (Indexed (onchange :: Cb | r)))
-_onchange_ = _onchange <<< Applicative.pure
-
-_onclick :: forall r. Event Cb -> Event (Attribute (Indexed (onclick :: Cb | r)))
-_onclick = Functor.map $ (unsafeAttribute <<< { key: "onclick", value: _ } <<< cb')
-
-_onclick_ :: forall r. Cb -> Event (Attribute (Indexed (onclick :: Cb | r)))
-_onclick_ = _onclick <<< Applicative.pure
-
-_onclose :: forall r. Event Cb -> Event (Attribute (Indexed (onclose :: Cb | r)))
-_onclose = Functor.map $ (unsafeAttribute <<< { key: "onclose", value: _ } <<< cb')
-
-_onclose_ :: forall r. Cb -> Event (Attribute (Indexed (onclose :: Cb | r)))
-_onclose_ = _onclose <<< Applicative.pure
-
-_oncontextlost :: forall r. Event Cb -> Event (Attribute (Indexed (oncontextlost :: Cb | r)))
-_oncontextlost = Functor.map $ (unsafeAttribute <<< { key: "oncontextlost", value: _ } <<< cb')
-
-_oncontextlost_ :: forall r. Cb -> Event (Attribute (Indexed (oncontextlost :: Cb | r)))
-_oncontextlost_ = _oncontextlost <<< Applicative.pure
-
-_oncontextmenu :: forall r. Event Cb -> Event (Attribute (Indexed (oncontextmenu :: Cb | r)))
-_oncontextmenu = Functor.map $ (unsafeAttribute <<< { key: "oncontextmenu", value: _ } <<< cb')
-
-_oncontextmenu_ :: forall r. Cb -> Event (Attribute (Indexed (oncontextmenu :: Cb | r)))
-_oncontextmenu_ = _oncontextmenu <<< Applicative.pure
-
-_oncontextrestored
-  :: forall r. Event Cb -> Event (Attribute (Indexed (oncontextrestored :: Cb | r)))
-_oncontextrestored = Functor.map $
-  (unsafeAttribute <<< { key: "oncontextrestored", value: _ } <<< cb')
-
-_oncontextrestored_ :: forall r. Cb -> Event (Attribute (Indexed (oncontextrestored :: Cb | r)))
-_oncontextrestored_ = _oncontextrestored <<< Applicative.pure
-
-_oncopy :: forall r. Event Cb -> Event (Attribute (Indexed (oncopy :: Cb | r)))
-_oncopy = Functor.map $ (unsafeAttribute <<< { key: "oncopy", value: _ } <<< cb')
-
-_oncopy_ :: forall r. Cb -> Event (Attribute (Indexed (oncopy :: Cb | r)))
-_oncopy_ = _oncopy <<< Applicative.pure
-
-_oncuechange :: forall r. Event Cb -> Event (Attribute (Indexed (oncuechange :: Cb | r)))
-_oncuechange = Functor.map $ (unsafeAttribute <<< { key: "oncuechange", value: _ } <<< cb')
-
-_oncuechange_ :: forall r. Cb -> Event (Attribute (Indexed (oncuechange :: Cb | r)))
-_oncuechange_ = _oncuechange <<< Applicative.pure
-
-_oncut :: forall r. Event Cb -> Event (Attribute (Indexed (oncut :: Cb | r)))
-_oncut = Functor.map $ (unsafeAttribute <<< { key: "oncut", value: _ } <<< cb')
-
-_oncut_ :: forall r. Cb -> Event (Attribute (Indexed (oncut :: Cb | r)))
-_oncut_ = _oncut <<< Applicative.pure
-
-_ondblclick :: forall r. Event Cb -> Event (Attribute (Indexed (ondblclick :: Cb | r)))
-_ondblclick = Functor.map $ (unsafeAttribute <<< { key: "ondblclick", value: _ } <<< cb')
-
-_ondblclick_ :: forall r. Cb -> Event (Attribute (Indexed (ondblclick :: Cb | r)))
-_ondblclick_ = _ondblclick <<< Applicative.pure
-
-_ondrag :: forall r. Event Cb -> Event (Attribute (Indexed (ondrag :: Cb | r)))
-_ondrag = Functor.map $ (unsafeAttribute <<< { key: "ondrag", value: _ } <<< cb')
-
-_ondrag_ :: forall r. Cb -> Event (Attribute (Indexed (ondrag :: Cb | r)))
-_ondrag_ = _ondrag <<< Applicative.pure
-
-_ondragend :: forall r. Event Cb -> Event (Attribute (Indexed (ondragend :: Cb | r)))
-_ondragend = Functor.map $ (unsafeAttribute <<< { key: "ondragend", value: _ } <<< cb')
-
-_ondragend_ :: forall r. Cb -> Event (Attribute (Indexed (ondragend :: Cb | r)))
-_ondragend_ = _ondragend <<< Applicative.pure
-
-_ondragenter :: forall r. Event Cb -> Event (Attribute (Indexed (ondragenter :: Cb | r)))
-_ondragenter = Functor.map $ (unsafeAttribute <<< { key: "ondragenter", value: _ } <<< cb')
-
-_ondragenter_ :: forall r. Cb -> Event (Attribute (Indexed (ondragenter :: Cb | r)))
-_ondragenter_ = _ondragenter <<< Applicative.pure
-
-_ondragleave :: forall r. Event Cb -> Event (Attribute (Indexed (ondragleave :: Cb | r)))
-_ondragleave = Functor.map $ (unsafeAttribute <<< { key: "ondragleave", value: _ } <<< cb')
-
-_ondragleave_ :: forall r. Cb -> Event (Attribute (Indexed (ondragleave :: Cb | r)))
-_ondragleave_ = _ondragleave <<< Applicative.pure
-
-_ondragover :: forall r. Event Cb -> Event (Attribute (Indexed (ondragover :: Cb | r)))
-_ondragover = Functor.map $ (unsafeAttribute <<< { key: "ondragover", value: _ } <<< cb')
-
-_ondragover_ :: forall r. Cb -> Event (Attribute (Indexed (ondragover :: Cb | r)))
-_ondragover_ = _ondragover <<< Applicative.pure
-
-_ondragstart :: forall r. Event Cb -> Event (Attribute (Indexed (ondragstart :: Cb | r)))
-_ondragstart = Functor.map $ (unsafeAttribute <<< { key: "ondragstart", value: _ } <<< cb')
-
-_ondragstart_ :: forall r. Cb -> Event (Attribute (Indexed (ondragstart :: Cb | r)))
-_ondragstart_ = _ondragstart <<< Applicative.pure
-
-_ondrop :: forall r. Event Cb -> Event (Attribute (Indexed (ondrop :: Cb | r)))
-_ondrop = Functor.map $ (unsafeAttribute <<< { key: "ondrop", value: _ } <<< cb')
-
-_ondrop_ :: forall r. Cb -> Event (Attribute (Indexed (ondrop :: Cb | r)))
-_ondrop_ = _ondrop <<< Applicative.pure
-
-_ondurationchange :: forall r. Event Cb -> Event (Attribute (Indexed (ondurationchange :: Cb | r)))
-_ondurationchange = Functor.map $
-  (unsafeAttribute <<< { key: "ondurationchange", value: _ } <<< cb')
-
-_ondurationchange_ :: forall r. Cb -> Event (Attribute (Indexed (ondurationchange :: Cb | r)))
-_ondurationchange_ = _ondurationchange <<< Applicative.pure
-
-_onemptied :: forall r. Event Cb -> Event (Attribute (Indexed (onemptied :: Cb | r)))
-_onemptied = Functor.map $ (unsafeAttribute <<< { key: "onemptied", value: _ } <<< cb')
-
-_onemptied_ :: forall r. Cb -> Event (Attribute (Indexed (onemptied :: Cb | r)))
-_onemptied_ = _onemptied <<< Applicative.pure
-
-_onended :: forall r. Event Cb -> Event (Attribute (Indexed (onended :: Cb | r)))
-_onended = Functor.map $ (unsafeAttribute <<< { key: "onended", value: _ } <<< cb')
-
-_onended_ :: forall r. Cb -> Event (Attribute (Indexed (onended :: Cb | r)))
-_onended_ = _onended <<< Applicative.pure
-
-_onfocus :: forall r. Event Cb -> Event (Attribute (Indexed (onfocus :: Cb | r)))
-_onfocus = Functor.map $ (unsafeAttribute <<< { key: "onfocus", value: _ } <<< cb')
-
-_onfocus_ :: forall r. Cb -> Event (Attribute (Indexed (onfocus :: Cb | r)))
-_onfocus_ = _onfocus <<< Applicative.pure
-
-_onformdata :: forall r. Event Cb -> Event (Attribute (Indexed (onformdata :: Cb | r)))
-_onformdata = Functor.map $ (unsafeAttribute <<< { key: "onformdata", value: _ } <<< cb')
-
-_onformdata_ :: forall r. Cb -> Event (Attribute (Indexed (onformdata :: Cb | r)))
-_onformdata_ = _onformdata <<< Applicative.pure
-
-_oninput :: forall r. Event Cb -> Event (Attribute (Indexed (oninput :: Cb | r)))
-_oninput = Functor.map $ (unsafeAttribute <<< { key: "oninput", value: _ } <<< cb')
-
-_oninput_ :: forall r. Cb -> Event (Attribute (Indexed (oninput :: Cb | r)))
-_oninput_ = _oninput <<< Applicative.pure
-
-_oninvalid :: forall r. Event Cb -> Event (Attribute (Indexed (oninvalid :: Cb | r)))
-_oninvalid = Functor.map $ (unsafeAttribute <<< { key: "oninvalid", value: _ } <<< cb')
-
-_oninvalid_ :: forall r. Cb -> Event (Attribute (Indexed (oninvalid :: Cb | r)))
-_oninvalid_ = _oninvalid <<< Applicative.pure
-
-_onkeydown :: forall r. Event Cb -> Event (Attribute (Indexed (onkeydown :: Cb | r)))
-_onkeydown = Functor.map $ (unsafeAttribute <<< { key: "onkeydown", value: _ } <<< cb')
-
-_onkeydown_ :: forall r. Cb -> Event (Attribute (Indexed (onkeydown :: Cb | r)))
-_onkeydown_ = _onkeydown <<< Applicative.pure
-
-_onkeypress :: forall r. Event Cb -> Event (Attribute (Indexed (onkeypress :: Cb | r)))
-_onkeypress = Functor.map $ (unsafeAttribute <<< { key: "onkeypress", value: _ } <<< cb')
-
-_onkeypress_ :: forall r. Cb -> Event (Attribute (Indexed (onkeypress :: Cb | r)))
-_onkeypress_ = _onkeypress <<< Applicative.pure
-
-_onkeyup :: forall r. Event Cb -> Event (Attribute (Indexed (onkeyup :: Cb | r)))
-_onkeyup = Functor.map $ (unsafeAttribute <<< { key: "onkeyup", value: _ } <<< cb')
-
-_onkeyup_ :: forall r. Cb -> Event (Attribute (Indexed (onkeyup :: Cb | r)))
-_onkeyup_ = _onkeyup <<< Applicative.pure
-
-_onload :: forall r. Event Cb -> Event (Attribute (Indexed (onload :: Cb | r)))
-_onload = Functor.map $ (unsafeAttribute <<< { key: "onload", value: _ } <<< cb')
-
-_onload_ :: forall r. Cb -> Event (Attribute (Indexed (onload :: Cb | r)))
-_onload_ = _onload <<< Applicative.pure
-
-_onloadeddata :: forall r. Event Cb -> Event (Attribute (Indexed (onloadeddata :: Cb | r)))
-_onloadeddata = Functor.map $ (unsafeAttribute <<< { key: "onloadeddata", value: _ } <<< cb')
-
-_onloadeddata_ :: forall r. Cb -> Event (Attribute (Indexed (onloadeddata :: Cb | r)))
-_onloadeddata_ = _onloadeddata <<< Applicative.pure
-
-_onloadedmetadata :: forall r. Event Cb -> Event (Attribute (Indexed (onloadedmetadata :: Cb | r)))
-_onloadedmetadata = Functor.map $
-  (unsafeAttribute <<< { key: "onloadedmetadata", value: _ } <<< cb')
-
-_onloadedmetadata_ :: forall r. Cb -> Event (Attribute (Indexed (onloadedmetadata :: Cb | r)))
-_onloadedmetadata_ = _onloadedmetadata <<< Applicative.pure
-
-_onloadstart :: forall r. Event Cb -> Event (Attribute (Indexed (onloadstart :: Cb | r)))
-_onloadstart = Functor.map $ (unsafeAttribute <<< { key: "onloadstart", value: _ } <<< cb')
-
-_onloadstart_ :: forall r. Cb -> Event (Attribute (Indexed (onloadstart :: Cb | r)))
-_onloadstart_ = _onloadstart <<< Applicative.pure
-
-_onmousedown :: forall r. Event Cb -> Event (Attribute (Indexed (onmousedown :: Cb | r)))
-_onmousedown = Functor.map $ (unsafeAttribute <<< { key: "onmousedown", value: _ } <<< cb')
-
-_onmousedown_ :: forall r. Cb -> Event (Attribute (Indexed (onmousedown :: Cb | r)))
-_onmousedown_ = _onmousedown <<< Applicative.pure
-
-_onmouseenter :: forall r. Event Cb -> Event (Attribute (Indexed (onmouseenter :: Cb | r)))
-_onmouseenter = Functor.map $ (unsafeAttribute <<< { key: "onmouseenter", value: _ } <<< cb')
-
-_onmouseenter_ :: forall r. Cb -> Event (Attribute (Indexed (onmouseenter :: Cb | r)))
-_onmouseenter_ = _onmouseenter <<< Applicative.pure
-
-_onmouseleave :: forall r. Event Cb -> Event (Attribute (Indexed (onmouseleave :: Cb | r)))
-_onmouseleave = Functor.map $ (unsafeAttribute <<< { key: "onmouseleave", value: _ } <<< cb')
-
-_onmouseleave_ :: forall r. Cb -> Event (Attribute (Indexed (onmouseleave :: Cb | r)))
-_onmouseleave_ = _onmouseleave <<< Applicative.pure
-
-_onmousemove :: forall r. Event Cb -> Event (Attribute (Indexed (onmousemove :: Cb | r)))
-_onmousemove = Functor.map $ (unsafeAttribute <<< { key: "onmousemove", value: _ } <<< cb')
-
-_onmousemove_ :: forall r. Cb -> Event (Attribute (Indexed (onmousemove :: Cb | r)))
-_onmousemove_ = _onmousemove <<< Applicative.pure
-
-_onmouseout :: forall r. Event Cb -> Event (Attribute (Indexed (onmouseout :: Cb | r)))
-_onmouseout = Functor.map $ (unsafeAttribute <<< { key: "onmouseout", value: _ } <<< cb')
-
-_onmouseout_ :: forall r. Cb -> Event (Attribute (Indexed (onmouseout :: Cb | r)))
-_onmouseout_ = _onmouseout <<< Applicative.pure
-
-_onmouseover :: forall r. Event Cb -> Event (Attribute (Indexed (onmouseover :: Cb | r)))
-_onmouseover = Functor.map $ (unsafeAttribute <<< { key: "onmouseover", value: _ } <<< cb')
-
-_onmouseover_ :: forall r. Cb -> Event (Attribute (Indexed (onmouseover :: Cb | r)))
-_onmouseover_ = _onmouseover <<< Applicative.pure
-
-_onmouseup :: forall r. Event Cb -> Event (Attribute (Indexed (onmouseup :: Cb | r)))
-_onmouseup = Functor.map $ (unsafeAttribute <<< { key: "onmouseup", value: _ } <<< cb')
-
-_onmouseup_ :: forall r. Cb -> Event (Attribute (Indexed (onmouseup :: Cb | r)))
-_onmouseup_ = _onmouseup <<< Applicative.pure
-
-_onpaste :: forall r. Event Cb -> Event (Attribute (Indexed (onpaste :: Cb | r)))
-_onpaste = Functor.map $ (unsafeAttribute <<< { key: "onpaste", value: _ } <<< cb')
-
-_onpaste_ :: forall r. Cb -> Event (Attribute (Indexed (onpaste :: Cb | r)))
-_onpaste_ = _onpaste <<< Applicative.pure
-
-_onpause :: forall r. Event Cb -> Event (Attribute (Indexed (onpause :: Cb | r)))
-_onpause = Functor.map $ (unsafeAttribute <<< { key: "onpause", value: _ } <<< cb')
-
-_onpause_ :: forall r. Cb -> Event (Attribute (Indexed (onpause :: Cb | r)))
-_onpause_ = _onpause <<< Applicative.pure
-
-_onplay :: forall r. Event Cb -> Event (Attribute (Indexed (onplay :: Cb | r)))
-_onplay = Functor.map $ (unsafeAttribute <<< { key: "onplay", value: _ } <<< cb')
-
-_onplay_ :: forall r. Cb -> Event (Attribute (Indexed (onplay :: Cb | r)))
-_onplay_ = _onplay <<< Applicative.pure
-
-_onplaying :: forall r. Event Cb -> Event (Attribute (Indexed (onplaying :: Cb | r)))
-_onplaying = Functor.map $ (unsafeAttribute <<< { key: "onplaying", value: _ } <<< cb')
-
-_onplaying_ :: forall r. Cb -> Event (Attribute (Indexed (onplaying :: Cb | r)))
-_onplaying_ = _onplaying <<< Applicative.pure
-
-_onprogress :: forall r. Event Cb -> Event (Attribute (Indexed (onprogress :: Cb | r)))
-_onprogress = Functor.map $ (unsafeAttribute <<< { key: "onprogress", value: _ } <<< cb')
-
-_onprogress_ :: forall r. Cb -> Event (Attribute (Indexed (onprogress :: Cb | r)))
-_onprogress_ = _onprogress <<< Applicative.pure
-
-_onratechange :: forall r. Event Cb -> Event (Attribute (Indexed (onratechange :: Cb | r)))
-_onratechange = Functor.map $ (unsafeAttribute <<< { key: "onratechange", value: _ } <<< cb')
-
-_onratechange_ :: forall r. Cb -> Event (Attribute (Indexed (onratechange :: Cb | r)))
-_onratechange_ = _onratechange <<< Applicative.pure
-
-_onreset :: forall r. Event Cb -> Event (Attribute (Indexed (onreset :: Cb | r)))
-_onreset = Functor.map $ (unsafeAttribute <<< { key: "onreset", value: _ } <<< cb')
-
-_onreset_ :: forall r. Cb -> Event (Attribute (Indexed (onreset :: Cb | r)))
-_onreset_ = _onreset <<< Applicative.pure
-
-_onresize :: forall r. Event Cb -> Event (Attribute (Indexed (onresize :: Cb | r)))
-_onresize = Functor.map $ (unsafeAttribute <<< { key: "onresize", value: _ } <<< cb')
-
-_onresize_ :: forall r. Cb -> Event (Attribute (Indexed (onresize :: Cb | r)))
-_onresize_ = _onresize <<< Applicative.pure
-
-_onscroll :: forall r. Event Cb -> Event (Attribute (Indexed (onscroll :: Cb | r)))
-_onscroll = Functor.map $ (unsafeAttribute <<< { key: "onscroll", value: _ } <<< cb')
-
-_onscroll_ :: forall r. Cb -> Event (Attribute (Indexed (onscroll :: Cb | r)))
-_onscroll_ = _onscroll <<< Applicative.pure
-
-_onscrollend :: forall r. Event Cb -> Event (Attribute (Indexed (onscrollend :: Cb | r)))
-_onscrollend = Functor.map $ (unsafeAttribute <<< { key: "onscrollend", value: _ } <<< cb')
-
-_onscrollend_ :: forall r. Cb -> Event (Attribute (Indexed (onscrollend :: Cb | r)))
-_onscrollend_ = _onscrollend <<< Applicative.pure
-
-_onsecuritypolicyviolation
-  :: forall r. Event Cb -> Event (Attribute (Indexed (onsecuritypolicyviolation :: Cb | r)))
-_onsecuritypolicyviolation = Functor.map $
-  (unsafeAttribute <<< { key: "onsecuritypolicyviolation", value: _ } <<< cb')
-
-_onsecuritypolicyviolation_
-  :: forall r. Cb -> Event (Attribute (Indexed (onsecuritypolicyviolation :: Cb | r)))
-_onsecuritypolicyviolation_ = _onsecuritypolicyviolation <<< Applicative.pure
-
-_onseeked :: forall r. Event Cb -> Event (Attribute (Indexed (onseeked :: Cb | r)))
-_onseeked = Functor.map $ (unsafeAttribute <<< { key: "onseeked", value: _ } <<< cb')
-
-_onseeked_ :: forall r. Cb -> Event (Attribute (Indexed (onseeked :: Cb | r)))
-_onseeked_ = _onseeked <<< Applicative.pure
-
-_onseeking :: forall r. Event Cb -> Event (Attribute (Indexed (onseeking :: Cb | r)))
-_onseeking = Functor.map $ (unsafeAttribute <<< { key: "onseeking", value: _ } <<< cb')
-
-_onseeking_ :: forall r. Cb -> Event (Attribute (Indexed (onseeking :: Cb | r)))
-_onseeking_ = _onseeking <<< Applicative.pure
-
-_onselect :: forall r. Event Cb -> Event (Attribute (Indexed (onselect :: Cb | r)))
-_onselect = Functor.map $ (unsafeAttribute <<< { key: "onselect", value: _ } <<< cb')
-
-_onselect_ :: forall r. Cb -> Event (Attribute (Indexed (onselect :: Cb | r)))
-_onselect_ = _onselect <<< Applicative.pure
-
-_onslotchange :: forall r. Event Cb -> Event (Attribute (Indexed (onslotchange :: Cb | r)))
-_onslotchange = Functor.map $ (unsafeAttribute <<< { key: "onslotchange", value: _ } <<< cb')
-
-_onslotchange_ :: forall r. Cb -> Event (Attribute (Indexed (onslotchange :: Cb | r)))
-_onslotchange_ = _onslotchange <<< Applicative.pure
-
-_onstalled :: forall r. Event Cb -> Event (Attribute (Indexed (onstalled :: Cb | r)))
-_onstalled = Functor.map $ (unsafeAttribute <<< { key: "onstalled", value: _ } <<< cb')
-
-_onstalled_ :: forall r. Cb -> Event (Attribute (Indexed (onstalled :: Cb | r)))
-_onstalled_ = _onstalled <<< Applicative.pure
-
-_onsubmit :: forall r. Event Cb -> Event (Attribute (Indexed (onsubmit :: Cb | r)))
-_onsubmit = Functor.map $ (unsafeAttribute <<< { key: "onsubmit", value: _ } <<< cb')
-
-_onsubmit_ :: forall r. Cb -> Event (Attribute (Indexed (onsubmit :: Cb | r)))
-_onsubmit_ = _onsubmit <<< Applicative.pure
-
-_onsuspend :: forall r. Event Cb -> Event (Attribute (Indexed (onsuspend :: Cb | r)))
-_onsuspend = Functor.map $ (unsafeAttribute <<< { key: "onsuspend", value: _ } <<< cb')
-
-_onsuspend_ :: forall r. Cb -> Event (Attribute (Indexed (onsuspend :: Cb | r)))
-_onsuspend_ = _onsuspend <<< Applicative.pure
-
-_ontimeupdate :: forall r. Event Cb -> Event (Attribute (Indexed (ontimeupdate :: Cb | r)))
-_ontimeupdate = Functor.map $ (unsafeAttribute <<< { key: "ontimeupdate", value: _ } <<< cb')
-
-_ontimeupdate_ :: forall r. Cb -> Event (Attribute (Indexed (ontimeupdate :: Cb | r)))
-_ontimeupdate_ = _ontimeupdate <<< Applicative.pure
-
-_ontoggle :: forall r. Event Cb -> Event (Attribute (Indexed (ontoggle :: Cb | r)))
-_ontoggle = Functor.map $ (unsafeAttribute <<< { key: "ontoggle", value: _ } <<< cb')
-
-_ontoggle_ :: forall r. Cb -> Event (Attribute (Indexed (ontoggle :: Cb | r)))
-_ontoggle_ = _ontoggle <<< Applicative.pure
-
-_onvolumechange :: forall r. Event Cb -> Event (Attribute (Indexed (onvolumechange :: Cb | r)))
-_onvolumechange = Functor.map $ (unsafeAttribute <<< { key: "onvolumechange", value: _ } <<< cb')
-
-_onvolumechange_ :: forall r. Cb -> Event (Attribute (Indexed (onvolumechange :: Cb | r)))
-_onvolumechange_ = _onvolumechange <<< Applicative.pure
-
-_onwaiting :: forall r. Event Cb -> Event (Attribute (Indexed (onwaiting :: Cb | r)))
-_onwaiting = Functor.map $ (unsafeAttribute <<< { key: "onwaiting", value: _ } <<< cb')
-
-_onwaiting_ :: forall r. Cb -> Event (Attribute (Indexed (onwaiting :: Cb | r)))
-_onwaiting_ = _onwaiting <<< Applicative.pure
-
-_onwebkitanimationend
-  :: forall r. Event Cb -> Event (Attribute (Indexed (onwebkitanimationend :: Cb | r)))
-_onwebkitanimationend = Functor.map $
-  (unsafeAttribute <<< { key: "onwebkitanimationend", value: _ } <<< cb')
-
-_onwebkitanimationend_
-  :: forall r. Cb -> Event (Attribute (Indexed (onwebkitanimationend :: Cb | r)))
-_onwebkitanimationend_ = _onwebkitanimationend <<< Applicative.pure
-
-_onwebkitanimationiteration
-  :: forall r. Event Cb -> Event (Attribute (Indexed (onwebkitanimationiteration :: Cb | r)))
-_onwebkitanimationiteration = Functor.map $
-  (unsafeAttribute <<< { key: "onwebkitanimationiteration", value: _ } <<< cb')
-
-_onwebkitanimationiteration_
-  :: forall r. Cb -> Event (Attribute (Indexed (onwebkitanimationiteration :: Cb | r)))
-_onwebkitanimationiteration_ = _onwebkitanimationiteration <<< Applicative.pure
-
-_onwebkitanimationstart
-  :: forall r. Event Cb -> Event (Attribute (Indexed (onwebkitanimationstart :: Cb | r)))
-_onwebkitanimationstart = Functor.map $
-  (unsafeAttribute <<< { key: "onwebkitanimationstart", value: _ } <<< cb')
-
-_onwebkitanimationstart_
-  :: forall r. Cb -> Event (Attribute (Indexed (onwebkitanimationstart :: Cb | r)))
-_onwebkitanimationstart_ = _onwebkitanimationstart <<< Applicative.pure
-
-_onwebkittransitionend
-  :: forall r. Event Cb -> Event (Attribute (Indexed (onwebkittransitionend :: Cb | r)))
-_onwebkittransitionend = Functor.map $
-  (unsafeAttribute <<< { key: "onwebkittransitionend", value: _ } <<< cb')
-
-_onwebkittransitionend_
-  :: forall r. Cb -> Event (Attribute (Indexed (onwebkittransitionend :: Cb | r)))
-_onwebkittransitionend_ = _onwebkittransitionend <<< Applicative.pure
-
-_onwheel :: forall r. Event Cb -> Event (Attribute (Indexed (onwheel :: Cb | r)))
-_onwheel = Functor.map $ (unsafeAttribute <<< { key: "onwheel", value: _ } <<< cb')
-
-_onwheel_ :: forall r. Cb -> Event (Attribute (Indexed (onwheel :: Cb | r)))
-_onwheel_ = _onwheel <<< Applicative.pure
-
-_alt :: forall r. Event String -> Event (Attribute (Indexed (alt :: String | r)))
-_alt = Functor.map $ (unsafeAttribute <<< { key: "alt", value: _ } <<< prop')
-
-_alt_ :: forall r. String -> Event (Attribute (Indexed (alt :: String | r)))
-_alt_ = _alt <<< Applicative.pure
-
-_coords :: forall r. Event String -> Event (Attribute (Indexed (coords :: String | r)))
-_coords = Functor.map $ (unsafeAttribute <<< { key: "coords", value: _ } <<< prop')
-
-_coords_ :: forall r. String -> Event (Attribute (Indexed (coords :: String | r)))
-_coords_ = _coords <<< Applicative.pure
+_onAbort
+  :: forall r
+   . Event (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
+  -> Event (Attribute (Indexed (onabort :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r)))
+_onAbort = Functor.map $ (unsafeAttribute <<< { key: "onabort", value: _ } <<< (cb' <<< cb))
+
+_onAbort_
+  :: forall r
+   . (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
+  -> Event (Attribute (Indexed (onabort :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r)))
+_onAbort_ = _onAbort <<< Applicative.pure
+
+_onAuxclick
+  :: forall r
+   . Event (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
+  -> Event (Attribute (Indexed (onauxclick :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r)))
+_onAuxclick = Functor.map $ (unsafeAttribute <<< { key: "onauxclick", value: _ } <<< (cb' <<< cb))
+
+_onAuxclick_
+  :: forall r
+   . (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
+  -> Event (Attribute (Indexed (onauxclick :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r)))
+_onAuxclick_ = _onAuxclick <<< Applicative.pure
+
+_onBeforeinput
+  :: forall r
+   . Event (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
+  -> Event
+       (Attribute (Indexed (onbeforeinput :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r)))
+_onBeforeinput = Functor.map $
+  (unsafeAttribute <<< { key: "onbeforeinput", value: _ } <<< (cb' <<< cb))
+
+_onBeforeinput_
+  :: forall r
+   . (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
+  -> Event
+       (Attribute (Indexed (onbeforeinput :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r)))
+_onBeforeinput_ = _onBeforeinput <<< Applicative.pure
+
+_onBeforematch
+  :: forall r
+   . Event (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
+  -> Event
+       (Attribute (Indexed (onbeforematch :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r)))
+_onBeforematch = Functor.map $
+  (unsafeAttribute <<< { key: "onbeforematch", value: _ } <<< (cb' <<< cb))
+
+_onBeforematch_
+  :: forall r
+   . (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
+  -> Event
+       (Attribute (Indexed (onbeforematch :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r)))
+_onBeforematch_ = _onBeforematch <<< Applicative.pure
+
+_onBeforetoggle
+  :: forall r
+   . Event (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
+  -> Event
+       (Attribute (Indexed (onbeforetoggle :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r)))
+_onBeforetoggle = Functor.map $
+  (unsafeAttribute <<< { key: "onbeforetoggle", value: _ } <<< (cb' <<< cb))
+
+_onBeforetoggle_
+  :: forall r
+   . (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
+  -> Event
+       (Attribute (Indexed (onbeforetoggle :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r)))
+_onBeforetoggle_ = _onBeforetoggle <<< Applicative.pure
+
+_onBlur
+  :: forall r
+   . Event (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
+  -> Event (Attribute (Indexed (onblur :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r)))
+_onBlur = Functor.map $ (unsafeAttribute <<< { key: "onblur", value: _ } <<< (cb' <<< cb))
+
+_onBlur_
+  :: forall r
+   . (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
+  -> Event (Attribute (Indexed (onblur :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r)))
+_onBlur_ = _onBlur <<< Applicative.pure
+
+_onCancel
+  :: forall r
+   . Event (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
+  -> Event (Attribute (Indexed (oncancel :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r)))
+_onCancel = Functor.map $ (unsafeAttribute <<< { key: "oncancel", value: _ } <<< (cb' <<< cb))
+
+_onCancel_
+  :: forall r
+   . (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
+  -> Event (Attribute (Indexed (oncancel :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r)))
+_onCancel_ = _onCancel <<< Applicative.pure
+
+_onCanplay
+  :: forall r
+   . Event (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
+  -> Event (Attribute (Indexed (oncanplay :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r)))
+_onCanplay = Functor.map $ (unsafeAttribute <<< { key: "oncanplay", value: _ } <<< (cb' <<< cb))
+
+_onCanplay_
+  :: forall r
+   . (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
+  -> Event (Attribute (Indexed (oncanplay :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r)))
+_onCanplay_ = _onCanplay <<< Applicative.pure
+
+_onCanplaythrough
+  :: forall r
+   . Event (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
+  -> Event
+       (Attribute (Indexed (oncanplaythrough :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r)))
+_onCanplaythrough = Functor.map $
+  (unsafeAttribute <<< { key: "oncanplaythrough", value: _ } <<< (cb' <<< cb))
+
+_onCanplaythrough_
+  :: forall r
+   . (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
+  -> Event
+       (Attribute (Indexed (oncanplaythrough :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r)))
+_onCanplaythrough_ = _onCanplaythrough <<< Applicative.pure
+
+_onChange
+  :: forall r
+   . Event (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
+  -> Event (Attribute (Indexed (onchange :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r)))
+_onChange = Functor.map $ (unsafeAttribute <<< { key: "onchange", value: _ } <<< (cb' <<< cb))
+
+_onChange_
+  :: forall r
+   . (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
+  -> Event (Attribute (Indexed (onchange :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r)))
+_onChange_ = _onChange <<< Applicative.pure
+
+_onClick
+  :: forall r
+   . Event (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
+  -> Event (Attribute (Indexed (onclick :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r)))
+_onClick = Functor.map $ (unsafeAttribute <<< { key: "onclick", value: _ } <<< (cb' <<< cb))
+
+_onClick_
+  :: forall r
+   . (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
+  -> Event (Attribute (Indexed (onclick :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r)))
+_onClick_ = _onClick <<< Applicative.pure
+
+_onClose
+  :: forall r
+   . Event (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
+  -> Event (Attribute (Indexed (onclose :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r)))
+_onClose = Functor.map $ (unsafeAttribute <<< { key: "onclose", value: _ } <<< (cb' <<< cb))
+
+_onClose_
+  :: forall r
+   . (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
+  -> Event (Attribute (Indexed (onclose :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r)))
+_onClose_ = _onClose <<< Applicative.pure
+
+_onContextlost
+  :: forall r
+   . Event (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
+  -> Event
+       (Attribute (Indexed (oncontextlost :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r)))
+_onContextlost = Functor.map $
+  (unsafeAttribute <<< { key: "oncontextlost", value: _ } <<< (cb' <<< cb))
+
+_onContextlost_
+  :: forall r
+   . (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
+  -> Event
+       (Attribute (Indexed (oncontextlost :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r)))
+_onContextlost_ = _onContextlost <<< Applicative.pure
+
+_onContextmenu
+  :: forall r
+   . Event (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
+  -> Event
+       (Attribute (Indexed (oncontextmenu :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r)))
+_onContextmenu = Functor.map $
+  (unsafeAttribute <<< { key: "oncontextmenu", value: _ } <<< (cb' <<< cb))
+
+_onContextmenu_
+  :: forall r
+   . (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
+  -> Event
+       (Attribute (Indexed (oncontextmenu :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r)))
+_onContextmenu_ = _onContextmenu <<< Applicative.pure
+
+_onContextrestored
+  :: forall r
+   . Event (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
+  -> Event
+       (Attribute (Indexed (oncontextrestored :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r)))
+_onContextrestored = Functor.map $
+  (unsafeAttribute <<< { key: "oncontextrestored", value: _ } <<< (cb' <<< cb))
+
+_onContextrestored_
+  :: forall r
+   . (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
+  -> Event
+       (Attribute (Indexed (oncontextrestored :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r)))
+_onContextrestored_ = _onContextrestored <<< Applicative.pure
+
+_onCopy
+  :: forall r
+   . Event (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
+  -> Event (Attribute (Indexed (oncopy :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r)))
+_onCopy = Functor.map $ (unsafeAttribute <<< { key: "oncopy", value: _ } <<< (cb' <<< cb))
+
+_onCopy_
+  :: forall r
+   . (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
+  -> Event (Attribute (Indexed (oncopy :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r)))
+_onCopy_ = _onCopy <<< Applicative.pure
+
+_onCuechange
+  :: forall r
+   . Event (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
+  -> Event (Attribute (Indexed (oncuechange :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r)))
+_onCuechange = Functor.map $
+  (unsafeAttribute <<< { key: "oncuechange", value: _ } <<< (cb' <<< cb))
+
+_onCuechange_
+  :: forall r
+   . (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
+  -> Event (Attribute (Indexed (oncuechange :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r)))
+_onCuechange_ = _onCuechange <<< Applicative.pure
+
+_onCut
+  :: forall r
+   . Event (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
+  -> Event (Attribute (Indexed (oncut :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r)))
+_onCut = Functor.map $ (unsafeAttribute <<< { key: "oncut", value: _ } <<< (cb' <<< cb))
+
+_onCut_
+  :: forall r
+   . (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
+  -> Event (Attribute (Indexed (oncut :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r)))
+_onCut_ = _onCut <<< Applicative.pure
+
+_onDblclick
+  :: forall r
+   . Event (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
+  -> Event (Attribute (Indexed (ondblclick :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r)))
+_onDblclick = Functor.map $ (unsafeAttribute <<< { key: "ondblclick", value: _ } <<< (cb' <<< cb))
+
+_onDblclick_
+  :: forall r
+   . (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
+  -> Event (Attribute (Indexed (ondblclick :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r)))
+_onDblclick_ = _onDblclick <<< Applicative.pure
+
+_onDrag
+  :: forall r
+   . Event (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
+  -> Event (Attribute (Indexed (ondrag :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r)))
+_onDrag = Functor.map $ (unsafeAttribute <<< { key: "ondrag", value: _ } <<< (cb' <<< cb))
+
+_onDrag_
+  :: forall r
+   . (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
+  -> Event (Attribute (Indexed (ondrag :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r)))
+_onDrag_ = _onDrag <<< Applicative.pure
+
+_onDragend
+  :: forall r
+   . Event (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
+  -> Event (Attribute (Indexed (ondragend :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r)))
+_onDragend = Functor.map $ (unsafeAttribute <<< { key: "ondragend", value: _ } <<< (cb' <<< cb))
+
+_onDragend_
+  :: forall r
+   . (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
+  -> Event (Attribute (Indexed (ondragend :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r)))
+_onDragend_ = _onDragend <<< Applicative.pure
+
+_onDragenter
+  :: forall r
+   . Event (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
+  -> Event (Attribute (Indexed (ondragenter :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r)))
+_onDragenter = Functor.map $
+  (unsafeAttribute <<< { key: "ondragenter", value: _ } <<< (cb' <<< cb))
+
+_onDragenter_
+  :: forall r
+   . (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
+  -> Event (Attribute (Indexed (ondragenter :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r)))
+_onDragenter_ = _onDragenter <<< Applicative.pure
+
+_onDragleave
+  :: forall r
+   . Event (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
+  -> Event (Attribute (Indexed (ondragleave :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r)))
+_onDragleave = Functor.map $
+  (unsafeAttribute <<< { key: "ondragleave", value: _ } <<< (cb' <<< cb))
+
+_onDragleave_
+  :: forall r
+   . (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
+  -> Event (Attribute (Indexed (ondragleave :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r)))
+_onDragleave_ = _onDragleave <<< Applicative.pure
+
+_onDragover
+  :: forall r
+   . Event (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
+  -> Event (Attribute (Indexed (ondragover :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r)))
+_onDragover = Functor.map $ (unsafeAttribute <<< { key: "ondragover", value: _ } <<< (cb' <<< cb))
+
+_onDragover_
+  :: forall r
+   . (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
+  -> Event (Attribute (Indexed (ondragover :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r)))
+_onDragover_ = _onDragover <<< Applicative.pure
+
+_onDragstart
+  :: forall r
+   . Event (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
+  -> Event (Attribute (Indexed (ondragstart :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r)))
+_onDragstart = Functor.map $
+  (unsafeAttribute <<< { key: "ondragstart", value: _ } <<< (cb' <<< cb))
+
+_onDragstart_
+  :: forall r
+   . (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
+  -> Event (Attribute (Indexed (ondragstart :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r)))
+_onDragstart_ = _onDragstart <<< Applicative.pure
+
+_onDrop
+  :: forall r
+   . Event (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
+  -> Event (Attribute (Indexed (ondrop :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r)))
+_onDrop = Functor.map $ (unsafeAttribute <<< { key: "ondrop", value: _ } <<< (cb' <<< cb))
+
+_onDrop_
+  :: forall r
+   . (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
+  -> Event (Attribute (Indexed (ondrop :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r)))
+_onDrop_ = _onDrop <<< Applicative.pure
+
+_onDurationchange
+  :: forall r
+   . Event (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
+  -> Event
+       (Attribute (Indexed (ondurationchange :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r)))
+_onDurationchange = Functor.map $
+  (unsafeAttribute <<< { key: "ondurationchange", value: _ } <<< (cb' <<< cb))
+
+_onDurationchange_
+  :: forall r
+   . (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
+  -> Event
+       (Attribute (Indexed (ondurationchange :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r)))
+_onDurationchange_ = _onDurationchange <<< Applicative.pure
+
+_onEmptied
+  :: forall r
+   . Event (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
+  -> Event (Attribute (Indexed (onemptied :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r)))
+_onEmptied = Functor.map $ (unsafeAttribute <<< { key: "onemptied", value: _ } <<< (cb' <<< cb))
+
+_onEmptied_
+  :: forall r
+   . (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
+  -> Event (Attribute (Indexed (onemptied :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r)))
+_onEmptied_ = _onEmptied <<< Applicative.pure
+
+_onEnded
+  :: forall r
+   . Event (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
+  -> Event (Attribute (Indexed (onended :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r)))
+_onEnded = Functor.map $ (unsafeAttribute <<< { key: "onended", value: _ } <<< (cb' <<< cb))
+
+_onEnded_
+  :: forall r
+   . (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
+  -> Event (Attribute (Indexed (onended :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r)))
+_onEnded_ = _onEnded <<< Applicative.pure
+
+_onFocus
+  :: forall r
+   . Event (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
+  -> Event (Attribute (Indexed (onfocus :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r)))
+_onFocus = Functor.map $ (unsafeAttribute <<< { key: "onfocus", value: _ } <<< (cb' <<< cb))
+
+_onFocus_
+  :: forall r
+   . (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
+  -> Event (Attribute (Indexed (onfocus :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r)))
+_onFocus_ = _onFocus <<< Applicative.pure
+
+_onFormdata
+  :: forall r
+   . Event (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
+  -> Event (Attribute (Indexed (onformdata :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r)))
+_onFormdata = Functor.map $ (unsafeAttribute <<< { key: "onformdata", value: _ } <<< (cb' <<< cb))
+
+_onFormdata_
+  :: forall r
+   . (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
+  -> Event (Attribute (Indexed (onformdata :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r)))
+_onFormdata_ = _onFormdata <<< Applicative.pure
+
+_onInput
+  :: forall r
+   . Event (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
+  -> Event (Attribute (Indexed (oninput :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r)))
+_onInput = Functor.map $ (unsafeAttribute <<< { key: "oninput", value: _ } <<< (cb' <<< cb))
+
+_onInput_
+  :: forall r
+   . (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
+  -> Event (Attribute (Indexed (oninput :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r)))
+_onInput_ = _onInput <<< Applicative.pure
+
+_onInvalid
+  :: forall r
+   . Event (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
+  -> Event (Attribute (Indexed (oninvalid :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r)))
+_onInvalid = Functor.map $ (unsafeAttribute <<< { key: "oninvalid", value: _ } <<< (cb' <<< cb))
+
+_onInvalid_
+  :: forall r
+   . (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
+  -> Event (Attribute (Indexed (oninvalid :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r)))
+_onInvalid_ = _onInvalid <<< Applicative.pure
+
+_onKeydown
+  :: forall r
+   . Event (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
+  -> Event (Attribute (Indexed (onkeydown :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r)))
+_onKeydown = Functor.map $ (unsafeAttribute <<< { key: "onkeydown", value: _ } <<< (cb' <<< cb))
+
+_onKeydown_
+  :: forall r
+   . (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
+  -> Event (Attribute (Indexed (onkeydown :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r)))
+_onKeydown_ = _onKeydown <<< Applicative.pure
+
+_onKeypress
+  :: forall r
+   . Event (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
+  -> Event (Attribute (Indexed (onkeypress :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r)))
+_onKeypress = Functor.map $ (unsafeAttribute <<< { key: "onkeypress", value: _ } <<< (cb' <<< cb))
+
+_onKeypress_
+  :: forall r
+   . (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
+  -> Event (Attribute (Indexed (onkeypress :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r)))
+_onKeypress_ = _onKeypress <<< Applicative.pure
+
+_onKeyup
+  :: forall r
+   . Event (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
+  -> Event (Attribute (Indexed (onkeyup :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r)))
+_onKeyup = Functor.map $ (unsafeAttribute <<< { key: "onkeyup", value: _ } <<< (cb' <<< cb))
+
+_onKeyup_
+  :: forall r
+   . (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
+  -> Event (Attribute (Indexed (onkeyup :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r)))
+_onKeyup_ = _onKeyup <<< Applicative.pure
+
+_onLoad
+  :: forall r
+   . Event (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
+  -> Event (Attribute (Indexed (onload :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r)))
+_onLoad = Functor.map $ (unsafeAttribute <<< { key: "onload", value: _ } <<< (cb' <<< cb))
+
+_onLoad_
+  :: forall r
+   . (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
+  -> Event (Attribute (Indexed (onload :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r)))
+_onLoad_ = _onLoad <<< Applicative.pure
+
+_onLoadeddata
+  :: forall r
+   . Event (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
+  -> Event (Attribute (Indexed (onloadeddata :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r)))
+_onLoadeddata = Functor.map $
+  (unsafeAttribute <<< { key: "onloadeddata", value: _ } <<< (cb' <<< cb))
+
+_onLoadeddata_
+  :: forall r
+   . (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
+  -> Event (Attribute (Indexed (onloadeddata :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r)))
+_onLoadeddata_ = _onLoadeddata <<< Applicative.pure
+
+_onLoadedmetadata
+  :: forall r
+   . Event (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
+  -> Event
+       (Attribute (Indexed (onloadedmetadata :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r)))
+_onLoadedmetadata = Functor.map $
+  (unsafeAttribute <<< { key: "onloadedmetadata", value: _ } <<< (cb' <<< cb))
+
+_onLoadedmetadata_
+  :: forall r
+   . (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
+  -> Event
+       (Attribute (Indexed (onloadedmetadata :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r)))
+_onLoadedmetadata_ = _onLoadedmetadata <<< Applicative.pure
+
+_onLoadstart
+  :: forall r
+   . Event (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
+  -> Event (Attribute (Indexed (onloadstart :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r)))
+_onLoadstart = Functor.map $
+  (unsafeAttribute <<< { key: "onloadstart", value: _ } <<< (cb' <<< cb))
+
+_onLoadstart_
+  :: forall r
+   . (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
+  -> Event (Attribute (Indexed (onloadstart :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r)))
+_onLoadstart_ = _onLoadstart <<< Applicative.pure
+
+_onMousedown
+  :: forall r
+   . Event (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
+  -> Event (Attribute (Indexed (onmousedown :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r)))
+_onMousedown = Functor.map $
+  (unsafeAttribute <<< { key: "onmousedown", value: _ } <<< (cb' <<< cb))
+
+_onMousedown_
+  :: forall r
+   . (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
+  -> Event (Attribute (Indexed (onmousedown :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r)))
+_onMousedown_ = _onMousedown <<< Applicative.pure
+
+_onMouseenter
+  :: forall r
+   . Event (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
+  -> Event (Attribute (Indexed (onmouseenter :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r)))
+_onMouseenter = Functor.map $
+  (unsafeAttribute <<< { key: "onmouseenter", value: _ } <<< (cb' <<< cb))
+
+_onMouseenter_
+  :: forall r
+   . (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
+  -> Event (Attribute (Indexed (onmouseenter :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r)))
+_onMouseenter_ = _onMouseenter <<< Applicative.pure
+
+_onMouseleave
+  :: forall r
+   . Event (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
+  -> Event (Attribute (Indexed (onmouseleave :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r)))
+_onMouseleave = Functor.map $
+  (unsafeAttribute <<< { key: "onmouseleave", value: _ } <<< (cb' <<< cb))
+
+_onMouseleave_
+  :: forall r
+   . (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
+  -> Event (Attribute (Indexed (onmouseleave :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r)))
+_onMouseleave_ = _onMouseleave <<< Applicative.pure
+
+_onMousemove
+  :: forall r
+   . Event (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
+  -> Event (Attribute (Indexed (onmousemove :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r)))
+_onMousemove = Functor.map $
+  (unsafeAttribute <<< { key: "onmousemove", value: _ } <<< (cb' <<< cb))
+
+_onMousemove_
+  :: forall r
+   . (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
+  -> Event (Attribute (Indexed (onmousemove :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r)))
+_onMousemove_ = _onMousemove <<< Applicative.pure
+
+_onMouseout
+  :: forall r
+   . Event (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
+  -> Event (Attribute (Indexed (onmouseout :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r)))
+_onMouseout = Functor.map $ (unsafeAttribute <<< { key: "onmouseout", value: _ } <<< (cb' <<< cb))
+
+_onMouseout_
+  :: forall r
+   . (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
+  -> Event (Attribute (Indexed (onmouseout :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r)))
+_onMouseout_ = _onMouseout <<< Applicative.pure
+
+_onMouseover
+  :: forall r
+   . Event (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
+  -> Event (Attribute (Indexed (onmouseover :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r)))
+_onMouseover = Functor.map $
+  (unsafeAttribute <<< { key: "onmouseover", value: _ } <<< (cb' <<< cb))
+
+_onMouseover_
+  :: forall r
+   . (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
+  -> Event (Attribute (Indexed (onmouseover :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r)))
+_onMouseover_ = _onMouseover <<< Applicative.pure
+
+_onMouseup
+  :: forall r
+   . Event (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
+  -> Event (Attribute (Indexed (onmouseup :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r)))
+_onMouseup = Functor.map $ (unsafeAttribute <<< { key: "onmouseup", value: _ } <<< (cb' <<< cb))
+
+_onMouseup_
+  :: forall r
+   . (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
+  -> Event (Attribute (Indexed (onmouseup :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r)))
+_onMouseup_ = _onMouseup <<< Applicative.pure
+
+_onPaste
+  :: forall r
+   . Event (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
+  -> Event (Attribute (Indexed (onpaste :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r)))
+_onPaste = Functor.map $ (unsafeAttribute <<< { key: "onpaste", value: _ } <<< (cb' <<< cb))
+
+_onPaste_
+  :: forall r
+   . (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
+  -> Event (Attribute (Indexed (onpaste :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r)))
+_onPaste_ = _onPaste <<< Applicative.pure
+
+_onPause
+  :: forall r
+   . Event (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
+  -> Event (Attribute (Indexed (onpause :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r)))
+_onPause = Functor.map $ (unsafeAttribute <<< { key: "onpause", value: _ } <<< (cb' <<< cb))
+
+_onPause_
+  :: forall r
+   . (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
+  -> Event (Attribute (Indexed (onpause :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r)))
+_onPause_ = _onPause <<< Applicative.pure
+
+_onPlay
+  :: forall r
+   . Event (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
+  -> Event (Attribute (Indexed (onplay :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r)))
+_onPlay = Functor.map $ (unsafeAttribute <<< { key: "onplay", value: _ } <<< (cb' <<< cb))
+
+_onPlay_
+  :: forall r
+   . (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
+  -> Event (Attribute (Indexed (onplay :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r)))
+_onPlay_ = _onPlay <<< Applicative.pure
+
+_onPlaying
+  :: forall r
+   . Event (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
+  -> Event (Attribute (Indexed (onplaying :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r)))
+_onPlaying = Functor.map $ (unsafeAttribute <<< { key: "onplaying", value: _ } <<< (cb' <<< cb))
+
+_onPlaying_
+  :: forall r
+   . (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
+  -> Event (Attribute (Indexed (onplaying :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r)))
+_onPlaying_ = _onPlaying <<< Applicative.pure
+
+_onProgress
+  :: forall r
+   . Event (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
+  -> Event (Attribute (Indexed (onprogress :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r)))
+_onProgress = Functor.map $ (unsafeAttribute <<< { key: "onprogress", value: _ } <<< (cb' <<< cb))
+
+_onProgress_
+  :: forall r
+   . (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
+  -> Event (Attribute (Indexed (onprogress :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r)))
+_onProgress_ = _onProgress <<< Applicative.pure
+
+_onRatechange
+  :: forall r
+   . Event (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
+  -> Event (Attribute (Indexed (onratechange :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r)))
+_onRatechange = Functor.map $
+  (unsafeAttribute <<< { key: "onratechange", value: _ } <<< (cb' <<< cb))
+
+_onRatechange_
+  :: forall r
+   . (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
+  -> Event (Attribute (Indexed (onratechange :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r)))
+_onRatechange_ = _onRatechange <<< Applicative.pure
+
+_onReset
+  :: forall r
+   . Event (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
+  -> Event (Attribute (Indexed (onreset :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r)))
+_onReset = Functor.map $ (unsafeAttribute <<< { key: "onreset", value: _ } <<< (cb' <<< cb))
+
+_onReset_
+  :: forall r
+   . (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
+  -> Event (Attribute (Indexed (onreset :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r)))
+_onReset_ = _onReset <<< Applicative.pure
+
+_onResize
+  :: forall r
+   . Event (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
+  -> Event (Attribute (Indexed (onresize :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r)))
+_onResize = Functor.map $ (unsafeAttribute <<< { key: "onresize", value: _ } <<< (cb' <<< cb))
+
+_onResize_
+  :: forall r
+   . (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
+  -> Event (Attribute (Indexed (onresize :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r)))
+_onResize_ = _onResize <<< Applicative.pure
+
+_onScroll
+  :: forall r
+   . Event (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
+  -> Event (Attribute (Indexed (onscroll :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r)))
+_onScroll = Functor.map $ (unsafeAttribute <<< { key: "onscroll", value: _ } <<< (cb' <<< cb))
+
+_onScroll_
+  :: forall r
+   . (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
+  -> Event (Attribute (Indexed (onscroll :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r)))
+_onScroll_ = _onScroll <<< Applicative.pure
+
+_onScrollend
+  :: forall r
+   . Event (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
+  -> Event (Attribute (Indexed (onscrollend :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r)))
+_onScrollend = Functor.map $
+  (unsafeAttribute <<< { key: "onscrollend", value: _ } <<< (cb' <<< cb))
+
+_onScrollend_
+  :: forall r
+   . (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
+  -> Event (Attribute (Indexed (onscrollend :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r)))
+_onScrollend_ = _onScrollend <<< Applicative.pure
+
+_onSecuritypolicyviolation
+  :: forall r
+   . Event (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
+  -> Event
+       ( Attribute
+           (Indexed (onsecuritypolicyviolation :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r))
+       )
+_onSecuritypolicyviolation = Functor.map $
+  (unsafeAttribute <<< { key: "onsecuritypolicyviolation", value: _ } <<< (cb' <<< cb))
+
+_onSecuritypolicyviolation_
+  :: forall r
+   . (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
+  -> Event
+       ( Attribute
+           (Indexed (onsecuritypolicyviolation :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r))
+       )
+_onSecuritypolicyviolation_ = _onSecuritypolicyviolation <<< Applicative.pure
+
+_onSeeked
+  :: forall r
+   . Event (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
+  -> Event (Attribute (Indexed (onseeked :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r)))
+_onSeeked = Functor.map $ (unsafeAttribute <<< { key: "onseeked", value: _ } <<< (cb' <<< cb))
+
+_onSeeked_
+  :: forall r
+   . (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
+  -> Event (Attribute (Indexed (onseeked :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r)))
+_onSeeked_ = _onSeeked <<< Applicative.pure
+
+_onSeeking
+  :: forall r
+   . Event (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
+  -> Event (Attribute (Indexed (onseeking :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r)))
+_onSeeking = Functor.map $ (unsafeAttribute <<< { key: "onseeking", value: _ } <<< (cb' <<< cb))
+
+_onSeeking_
+  :: forall r
+   . (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
+  -> Event (Attribute (Indexed (onseeking :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r)))
+_onSeeking_ = _onSeeking <<< Applicative.pure
+
+_onSelect
+  :: forall r
+   . Event (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
+  -> Event (Attribute (Indexed (onselect :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r)))
+_onSelect = Functor.map $ (unsafeAttribute <<< { key: "onselect", value: _ } <<< (cb' <<< cb))
+
+_onSelect_
+  :: forall r
+   . (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
+  -> Event (Attribute (Indexed (onselect :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r)))
+_onSelect_ = _onSelect <<< Applicative.pure
+
+_onSlotchange
+  :: forall r
+   . Event (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
+  -> Event (Attribute (Indexed (onslotchange :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r)))
+_onSlotchange = Functor.map $
+  (unsafeAttribute <<< { key: "onslotchange", value: _ } <<< (cb' <<< cb))
+
+_onSlotchange_
+  :: forall r
+   . (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
+  -> Event (Attribute (Indexed (onslotchange :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r)))
+_onSlotchange_ = _onSlotchange <<< Applicative.pure
+
+_onStalled
+  :: forall r
+   . Event (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
+  -> Event (Attribute (Indexed (onstalled :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r)))
+_onStalled = Functor.map $ (unsafeAttribute <<< { key: "onstalled", value: _ } <<< (cb' <<< cb))
+
+_onStalled_
+  :: forall r
+   . (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
+  -> Event (Attribute (Indexed (onstalled :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r)))
+_onStalled_ = _onStalled <<< Applicative.pure
+
+_onSubmit
+  :: forall r
+   . Event (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
+  -> Event (Attribute (Indexed (onsubmit :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r)))
+_onSubmit = Functor.map $ (unsafeAttribute <<< { key: "onsubmit", value: _ } <<< (cb' <<< cb))
+
+_onSubmit_
+  :: forall r
+   . (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
+  -> Event (Attribute (Indexed (onsubmit :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r)))
+_onSubmit_ = _onSubmit <<< Applicative.pure
+
+_onSuspend
+  :: forall r
+   . Event (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
+  -> Event (Attribute (Indexed (onsuspend :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r)))
+_onSuspend = Functor.map $ (unsafeAttribute <<< { key: "onsuspend", value: _ } <<< (cb' <<< cb))
+
+_onSuspend_
+  :: forall r
+   . (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
+  -> Event (Attribute (Indexed (onsuspend :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r)))
+_onSuspend_ = _onSuspend <<< Applicative.pure
+
+_onTimeupdate
+  :: forall r
+   . Event (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
+  -> Event (Attribute (Indexed (ontimeupdate :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r)))
+_onTimeupdate = Functor.map $
+  (unsafeAttribute <<< { key: "ontimeupdate", value: _ } <<< (cb' <<< cb))
+
+_onTimeupdate_
+  :: forall r
+   . (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
+  -> Event (Attribute (Indexed (ontimeupdate :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r)))
+_onTimeupdate_ = _onTimeupdate <<< Applicative.pure
+
+_onToggle
+  :: forall r
+   . Event (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
+  -> Event (Attribute (Indexed (ontoggle :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r)))
+_onToggle = Functor.map $ (unsafeAttribute <<< { key: "ontoggle", value: _ } <<< (cb' <<< cb))
+
+_onToggle_
+  :: forall r
+   . (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
+  -> Event (Attribute (Indexed (ontoggle :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r)))
+_onToggle_ = _onToggle <<< Applicative.pure
+
+_onVolumechange
+  :: forall r
+   . Event (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
+  -> Event
+       (Attribute (Indexed (onvolumechange :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r)))
+_onVolumechange = Functor.map $
+  (unsafeAttribute <<< { key: "onvolumechange", value: _ } <<< (cb' <<< cb))
+
+_onVolumechange_
+  :: forall r
+   . (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
+  -> Event
+       (Attribute (Indexed (onvolumechange :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r)))
+_onVolumechange_ = _onVolumechange <<< Applicative.pure
+
+_onWaiting
+  :: forall r
+   . Event (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
+  -> Event (Attribute (Indexed (onwaiting :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r)))
+_onWaiting = Functor.map $ (unsafeAttribute <<< { key: "onwaiting", value: _ } <<< (cb' <<< cb))
+
+_onWaiting_
+  :: forall r
+   . (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
+  -> Event (Attribute (Indexed (onwaiting :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r)))
+_onWaiting_ = _onWaiting <<< Applicative.pure
+
+_onWebkitanimationend
+  :: forall r
+   . Event (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
+  -> Event
+       ( Attribute
+           (Indexed (onwebkitanimationend :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r))
+       )
+_onWebkitanimationend = Functor.map $
+  (unsafeAttribute <<< { key: "onwebkitanimationend", value: _ } <<< (cb' <<< cb))
+
+_onWebkitanimationend_
+  :: forall r
+   . (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
+  -> Event
+       ( Attribute
+           (Indexed (onwebkitanimationend :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r))
+       )
+_onWebkitanimationend_ = _onWebkitanimationend <<< Applicative.pure
+
+_onWebkitanimationiteration
+  :: forall r
+   . Event (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
+  -> Event
+       ( Attribute
+           (Indexed (onwebkitanimationiteration :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r))
+       )
+_onWebkitanimationiteration = Functor.map $
+  (unsafeAttribute <<< { key: "onwebkitanimationiteration", value: _ } <<< (cb' <<< cb))
+
+_onWebkitanimationiteration_
+  :: forall r
+   . (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
+  -> Event
+       ( Attribute
+           (Indexed (onwebkitanimationiteration :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r))
+       )
+_onWebkitanimationiteration_ = _onWebkitanimationiteration <<< Applicative.pure
+
+_onWebkitanimationstart
+  :: forall r
+   . Event (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
+  -> Event
+       ( Attribute
+           (Indexed (onwebkitanimationstart :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r))
+       )
+_onWebkitanimationstart = Functor.map $
+  (unsafeAttribute <<< { key: "onwebkitanimationstart", value: _ } <<< (cb' <<< cb))
+
+_onWebkitanimationstart_
+  :: forall r
+   . (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
+  -> Event
+       ( Attribute
+           (Indexed (onwebkitanimationstart :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r))
+       )
+_onWebkitanimationstart_ = _onWebkitanimationstart <<< Applicative.pure
+
+_onWebkittransitionend
+  :: forall r
+   . Event (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
+  -> Event
+       ( Attribute
+           (Indexed (onwebkittransitionend :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r))
+       )
+_onWebkittransitionend = Functor.map $
+  (unsafeAttribute <<< { key: "onwebkittransitionend", value: _ } <<< (cb' <<< cb))
+
+_onWebkittransitionend_
+  :: forall r
+   . (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
+  -> Event
+       ( Attribute
+           (Indexed (onwebkittransitionend :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r))
+       )
+_onWebkittransitionend_ = _onWebkittransitionend <<< Applicative.pure
+
+_onWheel
+  :: forall r
+   . Event (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
+  -> Event (Attribute (Indexed (onwheel :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r)))
+_onWheel = Functor.map $ (unsafeAttribute <<< { key: "onwheel", value: _ } <<< (cb' <<< cb))
+
+_onWheel_
+  :: forall r
+   . (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
+  -> Event (Attribute (Indexed (onwheel :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r)))
+_onWheel_ = _onWheel <<< Applicative.pure
 
 _target :: forall r. Event String -> Event (Attribute (Indexed (target :: String | r)))
 _target = Functor.map $ (unsafeAttribute <<< { key: "target", value: _ } <<< prop')
@@ -3815,12 +4127,36 @@ _ping = Functor.map $ (unsafeAttribute <<< { key: "ping", value: _ } <<< prop')
 _ping_ :: forall r. String -> Event (Attribute (Indexed (ping :: String | r)))
 _ping_ = _ping <<< Applicative.pure
 
+_hreflang :: forall r. Event String -> Event (Attribute (Indexed (hreflang :: String | r)))
+_hreflang = Functor.map $ (unsafeAttribute <<< { key: "hreflang", value: _ } <<< prop')
+
+_hreflang_ :: forall r. String -> Event (Attribute (Indexed (hreflang :: String | r)))
+_hreflang_ = _hreflang <<< Applicative.pure
+
+_text :: forall r. Event String -> Event (Attribute (Indexed (text :: String | r)))
+_text = Functor.map $ (unsafeAttribute <<< { key: "text", value: _ } <<< prop')
+
+_text_ :: forall r. String -> Event (Attribute (Indexed (text :: String | r)))
+_text_ = _text <<< Applicative.pure
+
 _referrerPolicy
   :: forall r. Event String -> Event (Attribute (Indexed (referrerPolicy :: String | r)))
 _referrerPolicy = Functor.map $ (unsafeAttribute <<< { key: "referrerPolicy", value: _ } <<< prop')
 
 _referrerPolicy_ :: forall r. String -> Event (Attribute (Indexed (referrerPolicy :: String | r)))
 _referrerPolicy_ = _referrerPolicy <<< Applicative.pure
+
+_alt :: forall r. Event String -> Event (Attribute (Indexed (alt :: String | r)))
+_alt = Functor.map $ (unsafeAttribute <<< { key: "alt", value: _ } <<< prop')
+
+_alt_ :: forall r. String -> Event (Attribute (Indexed (alt :: String | r)))
+_alt_ = _alt <<< Applicative.pure
+
+_coords :: forall r. Event String -> Event (Attribute (Indexed (coords :: String | r)))
+_coords = Functor.map $ (unsafeAttribute <<< { key: "coords", value: _ } <<< prop')
+
+_coords_ :: forall r. String -> Event (Attribute (Indexed (coords :: String | r)))
+_coords_ = _coords <<< Applicative.pure
 
 _href :: forall r. Event String -> Event (Attribute (Indexed (href :: String | r)))
 _href = Functor.map $ (unsafeAttribute <<< { key: "href", value: _ } <<< prop')
@@ -3830,7 +4166,7 @@ _href_ = _href <<< Applicative.pure
 
 _disabled :: forall r. Event Boolean -> Event (Attribute (Indexed (disabled :: Boolean | r)))
 _disabled = Functor.map $
-  (unsafeAttribute <<< { key: "disabled", value: _ } <<< boolAttributeValue)
+  (unsafeAttribute <<< { key: "disabled", value: _ } <<< (prop' <<< Show.show))
 
 _disabled_ :: forall r. Boolean -> Event (Attribute (Indexed (disabled :: Boolean | r)))
 _disabled_ = _disabled <<< Applicative.pure
@@ -3856,7 +4192,7 @@ _formMethod_ = _formMethod <<< Applicative.pure
 _formNoValidate
   :: forall r. Event Boolean -> Event (Attribute (Indexed (formNoValidate :: Boolean | r)))
 _formNoValidate = Functor.map $
-  (unsafeAttribute <<< { key: "formNoValidate", value: _ } <<< boolAttributeValue)
+  (unsafeAttribute <<< { key: "formNoValidate", value: _ } <<< (prop' <<< Show.show))
 
 _formNoValidate_
   :: forall r. Boolean -> Event (Attribute (Indexed (formNoValidate :: Boolean | r)))
@@ -3875,10 +4211,10 @@ instance IsValue String String where
   isValue = prop'
 
 instance IsValue Number Number where
-  isValue = numberAttributeValue
+  isValue = prop' <<< Show.show
 
 instance IsValue Int Int where
-  isValue = intAttributeValue
+  isValue = prop' <<< Show.show
 
 _value :: forall r v a. IsValue v a => Event v -> Event (Attribute (Indexed (value :: a | r)))
 _value = Functor.map $ (unsafeAttribute <<< { key: "value", value: _ } <<< isValue)
@@ -3890,7 +4226,7 @@ class IsWidth (v :: Type) (a :: Type) | v -> a where
   isWidth :: v -> AttributeValue
 
 instance IsWidth Int Int where
-  isWidth = intAttributeValue
+  isWidth = prop' <<< Show.show
 
 instance IsWidth String String where
   isWidth = prop'
@@ -3905,7 +4241,7 @@ class IsHeight (v :: Type) (a :: Type) | v -> a where
   isHeight :: v -> AttributeValue
 
 instance IsHeight Int Int where
-  isHeight = intAttributeValue
+  isHeight = prop' <<< Show.show
 
 instance IsHeight String String where
   isHeight = prop'
@@ -3917,7 +4253,7 @@ _height_ :: forall r v a. IsHeight v a => v -> Event (Attribute (Indexed (height
 _height_ = _height <<< Applicative.pure
 
 _open :: forall r. Event Boolean -> Event (Attribute (Indexed (open :: Boolean | r)))
-_open = Functor.map $ (unsafeAttribute <<< { key: "open", value: _ } <<< boolAttributeValue)
+_open = Functor.map $ (unsafeAttribute <<< { key: "open", value: _ } <<< (prop' <<< Show.show))
 
 _open_ :: forall r. Boolean -> Event (Attribute (Indexed (open :: Boolean | r)))
 _open_ = _open <<< Applicative.pure
@@ -3927,12 +4263,6 @@ _returnValue = Functor.map $ (unsafeAttribute <<< { key: "returnValue", value: _
 
 _returnValue_ :: forall r. String -> Event (Attribute (Indexed (returnValue :: String | r)))
 _returnValue_ = _returnValue <<< Applicative.pure
-
-_compact :: forall r. Event Boolean -> Event (Attribute (Indexed (compact :: Boolean | r)))
-_compact = Functor.map $ (unsafeAttribute <<< { key: "compact", value: _ } <<< boolAttributeValue)
-
-_compact_ :: forall r. Boolean -> Event (Attribute (Indexed (compact :: Boolean | r)))
-_compact_ = _compact <<< Applicative.pure
 
 _title :: forall r. Event String -> Event (Attribute (Indexed (title :: String | r)))
 _title = Functor.map $ (unsafeAttribute <<< { key: "title", value: _ } <<< prop')
@@ -3948,13 +4278,13 @@ _lang_ = _lang <<< Applicative.pure
 
 _translate :: forall r. Event Boolean -> Event (Attribute (Indexed (translate :: Boolean | r)))
 _translate = Functor.map $
-  (unsafeAttribute <<< { key: "translate", value: _ } <<< boolAttributeValue)
+  (unsafeAttribute <<< { key: "translate", value: _ } <<< (prop' <<< Show.show))
 
 _translate_ :: forall r. Boolean -> Event (Attribute (Indexed (translate :: Boolean | r)))
 _translate_ = _translate <<< Applicative.pure
 
 _inert :: forall r. Event Boolean -> Event (Attribute (Indexed (inert :: Boolean | r)))
-_inert = Functor.map $ (unsafeAttribute <<< { key: "inert", value: _ } <<< boolAttributeValue)
+_inert = Functor.map $ (unsafeAttribute <<< { key: "inert", value: _ } <<< (prop' <<< Show.show))
 
 _inert_ :: forall r. Boolean -> Event (Attribute (Indexed (inert :: Boolean | r)))
 _inert_ = _inert <<< Applicative.pure
@@ -3967,14 +4297,14 @@ _accessKey_ = _accessKey <<< Applicative.pure
 
 _draggable :: forall r. Event Boolean -> Event (Attribute (Indexed (draggable :: Boolean | r)))
 _draggable = Functor.map $
-  (unsafeAttribute <<< { key: "draggable", value: _ } <<< boolAttributeValue)
+  (unsafeAttribute <<< { key: "draggable", value: _ } <<< (prop' <<< Show.show))
 
 _draggable_ :: forall r. Boolean -> Event (Attribute (Indexed (draggable :: Boolean | r)))
 _draggable_ = _draggable <<< Applicative.pure
 
 _spellcheck :: forall r. Event Boolean -> Event (Attribute (Indexed (spellcheck :: Boolean | r)))
 _spellcheck = Functor.map $
-  (unsafeAttribute <<< { key: "spellcheck", value: _ } <<< boolAttributeValue)
+  (unsafeAttribute <<< { key: "spellcheck", value: _ } <<< (prop' <<< Show.show))
 
 _spellcheck_ :: forall r. Boolean -> Event (Attribute (Indexed (spellcheck :: Boolean | r)))
 _spellcheck_ = _spellcheck <<< Applicative.pure
@@ -3997,33 +4327,6 @@ _src = Functor.map $ (unsafeAttribute <<< { key: "src", value: _ } <<< prop')
 _src_ :: forall r. String -> Event (Attribute (Indexed (src :: String | r)))
 _src_ = _src <<< Applicative.pure
 
-_color :: forall r. Event String -> Event (Attribute (Indexed (color :: String | r)))
-_color = Functor.map $ (unsafeAttribute <<< { key: "color", value: _ } <<< prop')
-
-_color_ :: forall r. String -> Event (Attribute (Indexed (color :: String | r)))
-_color_ = _color <<< Applicative.pure
-
-_face :: forall r. Event String -> Event (Attribute (Indexed (face :: String | r)))
-_face = Functor.map $ (unsafeAttribute <<< { key: "face", value: _ } <<< prop')
-
-_face_ :: forall r. String -> Event (Attribute (Indexed (face :: String | r)))
-_face_ = _face <<< Applicative.pure
-
-class IsSize (v :: Type) (a :: Type) | v -> a where
-  isSize :: v -> AttributeValue
-
-instance IsSize Int Int where
-  isSize = intAttributeValue
-
-instance IsSize String String where
-  isSize = prop'
-
-_size :: forall r v a. IsSize v a => Event v -> Event (Attribute (Indexed (size :: a | r)))
-_size = Functor.map $ (unsafeAttribute <<< { key: "size", value: _ } <<< isSize)
-
-_size_ :: forall r v a. IsSize v a => v -> Event (Attribute (Indexed (size :: a | r)))
-_size_ = _size <<< Applicative.pure
-
 _acceptCharset
   :: forall r. Event String -> Event (Attribute (Indexed (acceptCharset :: String | r)))
 _acceptCharset = Functor.map $ (unsafeAttribute <<< { key: "acceptCharset", value: _ } <<< prop')
@@ -4045,77 +4348,10 @@ _encoding_ = _encoding <<< Applicative.pure
 
 _noValidate :: forall r. Event Boolean -> Event (Attribute (Indexed (noValidate :: Boolean | r)))
 _noValidate = Functor.map $
-  (unsafeAttribute <<< { key: "noValidate", value: _ } <<< boolAttributeValue)
+  (unsafeAttribute <<< { key: "noValidate", value: _ } <<< (prop' <<< Show.show))
 
 _noValidate_ :: forall r. Boolean -> Event (Attribute (Indexed (noValidate :: Boolean | r)))
 _noValidate_ = _noValidate <<< Applicative.pure
-
-_scrolling :: forall r. Event String -> Event (Attribute (Indexed (scrolling :: String | r)))
-_scrolling = Functor.map $ (unsafeAttribute <<< { key: "scrolling", value: _ } <<< prop')
-
-_scrolling_ :: forall r. String -> Event (Attribute (Indexed (scrolling :: String | r)))
-_scrolling_ = _scrolling <<< Applicative.pure
-
-_frameBorder :: forall r. Event String -> Event (Attribute (Indexed (frameBorder :: String | r)))
-_frameBorder = Functor.map $ (unsafeAttribute <<< { key: "frameBorder", value: _ } <<< prop')
-
-_frameBorder_ :: forall r. String -> Event (Attribute (Indexed (frameBorder :: String | r)))
-_frameBorder_ = _frameBorder <<< Applicative.pure
-
-_longDesc :: forall r. Event String -> Event (Attribute (Indexed (longDesc :: String | r)))
-_longDesc = Functor.map $ (unsafeAttribute <<< { key: "longDesc", value: _ } <<< prop')
-
-_longDesc_ :: forall r. String -> Event (Attribute (Indexed (longDesc :: String | r)))
-_longDesc_ = _longDesc <<< Applicative.pure
-
-_noResize :: forall r. Event Boolean -> Event (Attribute (Indexed (noResize :: Boolean | r)))
-_noResize = Functor.map $
-  (unsafeAttribute <<< { key: "noResize", value: _ } <<< boolAttributeValue)
-
-_noResize_ :: forall r. Boolean -> Event (Attribute (Indexed (noResize :: Boolean | r)))
-_noResize_ = _noResize <<< Applicative.pure
-
-_marginHeight :: forall r. Event String -> Event (Attribute (Indexed (marginHeight :: String | r)))
-_marginHeight = Functor.map $ (unsafeAttribute <<< { key: "marginHeight", value: _ } <<< prop')
-
-_marginHeight_ :: forall r. String -> Event (Attribute (Indexed (marginHeight :: String | r)))
-_marginHeight_ = _marginHeight <<< Applicative.pure
-
-_marginWidth :: forall r. Event String -> Event (Attribute (Indexed (marginWidth :: String | r)))
-_marginWidth = Functor.map $ (unsafeAttribute <<< { key: "marginWidth", value: _ } <<< prop')
-
-_marginWidth_ :: forall r. String -> Event (Attribute (Indexed (marginWidth :: String | r)))
-_marginWidth_ = _marginWidth <<< Applicative.pure
-
-class IsCols (v :: Type) (a :: Type) | v -> a where
-  isCols :: v -> AttributeValue
-
-instance IsCols Int Int where
-  isCols = intAttributeValue
-
-instance IsCols String String where
-  isCols = prop'
-
-_cols :: forall r v a. IsCols v a => Event v -> Event (Attribute (Indexed (cols :: a | r)))
-_cols = Functor.map $ (unsafeAttribute <<< { key: "cols", value: _ } <<< isCols)
-
-_cols_ :: forall r v a. IsCols v a => v -> Event (Attribute (Indexed (cols :: a | r)))
-_cols_ = _cols <<< Applicative.pure
-
-class IsRows (v :: Type) (a :: Type) | v -> a where
-  isRows :: v -> AttributeValue
-
-instance IsRows Int Int where
-  isRows = intAttributeValue
-
-instance IsRows String String where
-  isRows = prop'
-
-_rows :: forall r v a. IsRows v a => Event v -> Event (Attribute (Indexed (rows :: a | r)))
-_rows = Functor.map $ (unsafeAttribute <<< { key: "rows", value: _ } <<< isRows)
-
-_rows_ :: forall r v a. IsRows v a => v -> Event (Attribute (Indexed (rows :: a | r)))
-_rows_ = _rows <<< Applicative.pure
 
 _protocol :: forall r. Event String -> Event (Attribute (Indexed (protocol :: String | r)))
 _protocol = Functor.map $ (unsafeAttribute <<< { key: "protocol", value: _ } <<< prop')
@@ -4186,7 +4422,7 @@ _allow_ = _allow <<< Applicative.pure
 _allowFullscreen
   :: forall r. Event Boolean -> Event (Attribute (Indexed (allowFullscreen :: Boolean | r)))
 _allowFullscreen = Functor.map $
-  (unsafeAttribute <<< { key: "allowFullscreen", value: _ } <<< boolAttributeValue)
+  (unsafeAttribute <<< { key: "allowFullscreen", value: _ } <<< (prop' <<< Show.show))
 
 _allowFullscreen_
   :: forall r. Boolean -> Event (Attribute (Indexed (allowFullscreen :: Boolean | r)))
@@ -4217,7 +4453,7 @@ _useMap_ :: forall r. String -> Event (Attribute (Indexed (useMap :: String | r)
 _useMap_ = _useMap <<< Applicative.pure
 
 _isMap :: forall r. Event Boolean -> Event (Attribute (Indexed (isMap :: Boolean | r)))
-_isMap = Functor.map $ (unsafeAttribute <<< { key: "isMap", value: _ } <<< boolAttributeValue)
+_isMap = Functor.map $ (unsafeAttribute <<< { key: "isMap", value: _ } <<< (prop' <<< Show.show))
 
 _isMap_ :: forall r. Boolean -> Event (Attribute (Indexed (isMap :: Boolean | r)))
 _isMap_ = _isMap <<< Applicative.pure
@@ -4238,14 +4474,15 @@ _accept_ = _accept <<< Applicative.pure
 _defaultChecked
   :: forall r. Event Boolean -> Event (Attribute (Indexed (defaultChecked :: Boolean | r)))
 _defaultChecked = Functor.map $
-  (unsafeAttribute <<< { key: "defaultChecked", value: _ } <<< boolAttributeValue)
+  (unsafeAttribute <<< { key: "defaultChecked", value: _ } <<< (prop' <<< Show.show))
 
 _defaultChecked_
   :: forall r. Boolean -> Event (Attribute (Indexed (defaultChecked :: Boolean | r)))
 _defaultChecked_ = _defaultChecked <<< Applicative.pure
 
 _checked :: forall r. Event Boolean -> Event (Attribute (Indexed (checked :: Boolean | r)))
-_checked = Functor.map $ (unsafeAttribute <<< { key: "checked", value: _ } <<< boolAttributeValue)
+_checked = Functor.map $
+  (unsafeAttribute <<< { key: "checked", value: _ } <<< (prop' <<< Show.show))
 
 _checked_ :: forall r. Boolean -> Event (Attribute (Indexed (checked :: Boolean | r)))
 _checked_ = _checked <<< Applicative.pure
@@ -4259,7 +4496,7 @@ _dirName_ = _dirName <<< Applicative.pure
 _indeterminate
   :: forall r. Event Boolean -> Event (Attribute (Indexed (indeterminate :: Boolean | r)))
 _indeterminate = Functor.map $
-  (unsafeAttribute <<< { key: "indeterminate", value: _ } <<< boolAttributeValue)
+  (unsafeAttribute <<< { key: "indeterminate", value: _ } <<< (prop' <<< Show.show))
 
 _indeterminate_ :: forall r. Boolean -> Event (Attribute (Indexed (indeterminate :: Boolean | r)))
 _indeterminate_ = _indeterminate <<< Applicative.pure
@@ -4268,7 +4505,7 @@ class IsMax (v :: Type) (a :: Type) | v -> a where
   isMax :: v -> AttributeValue
 
 instance IsMax Number Number where
-  isMax = numberAttributeValue
+  isMax = prop' <<< Show.show
 
 instance IsMax String String where
   isMax = prop'
@@ -4281,7 +4518,7 @@ _max_ = _max <<< Applicative.pure
 
 _maxLength :: forall r. Event Int -> Event (Attribute (Indexed (maxLength :: Int | r)))
 _maxLength = Functor.map $
-  (unsafeAttribute <<< { key: "maxLength", value: _ } <<< intAttributeValue)
+  (unsafeAttribute <<< { key: "maxLength", value: _ } <<< (prop' <<< Show.show))
 
 _maxLength_ :: forall r. Int -> Event (Attribute (Indexed (maxLength :: Int | r)))
 _maxLength_ = _maxLength <<< Applicative.pure
@@ -4290,7 +4527,7 @@ class IsMin (v :: Type) (a :: Type) | v -> a where
   isMin :: v -> AttributeValue
 
 instance IsMin Number Number where
-  isMin = numberAttributeValue
+  isMin = prop' <<< Show.show
 
 instance IsMin String String where
   isMin = prop'
@@ -4303,14 +4540,14 @@ _min_ = _min <<< Applicative.pure
 
 _minLength :: forall r. Event Int -> Event (Attribute (Indexed (minLength :: Int | r)))
 _minLength = Functor.map $
-  (unsafeAttribute <<< { key: "minLength", value: _ } <<< intAttributeValue)
+  (unsafeAttribute <<< { key: "minLength", value: _ } <<< (prop' <<< Show.show))
 
 _minLength_ :: forall r. Int -> Event (Attribute (Indexed (minLength :: Int | r)))
 _minLength_ = _minLength <<< Applicative.pure
 
 _multiple :: forall r. Event Boolean -> Event (Attribute (Indexed (multiple :: Boolean | r)))
 _multiple = Functor.map $
-  (unsafeAttribute <<< { key: "multiple", value: _ } <<< boolAttributeValue)
+  (unsafeAttribute <<< { key: "multiple", value: _ } <<< (prop' <<< Show.show))
 
 _multiple_ :: forall r. Boolean -> Event (Attribute (Indexed (multiple :: Boolean | r)))
 _multiple_ = _multiple <<< Applicative.pure
@@ -4329,17 +4566,23 @@ _placeholder_ = _placeholder <<< Applicative.pure
 
 _readOnly :: forall r. Event Boolean -> Event (Attribute (Indexed (readOnly :: Boolean | r)))
 _readOnly = Functor.map $
-  (unsafeAttribute <<< { key: "readOnly", value: _ } <<< boolAttributeValue)
+  (unsafeAttribute <<< { key: "readOnly", value: _ } <<< (prop' <<< Show.show))
 
 _readOnly_ :: forall r. Boolean -> Event (Attribute (Indexed (readOnly :: Boolean | r)))
 _readOnly_ = _readOnly <<< Applicative.pure
 
 _required :: forall r. Event Boolean -> Event (Attribute (Indexed (required :: Boolean | r)))
 _required = Functor.map $
-  (unsafeAttribute <<< { key: "required", value: _ } <<< boolAttributeValue)
+  (unsafeAttribute <<< { key: "required", value: _ } <<< (prop' <<< Show.show))
 
 _required_ :: forall r. Boolean -> Event (Attribute (Indexed (required :: Boolean | r)))
 _required_ = _required <<< Applicative.pure
+
+_size :: forall r. Event Int -> Event (Attribute (Indexed (size :: Int | r)))
+_size = Functor.map $ (unsafeAttribute <<< { key: "size", value: _ } <<< (prop' <<< Show.show))
+
+_size_ :: forall r. Int -> Event (Attribute (Indexed (size :: Int | r)))
+_size_ = _size <<< Applicative.pure
 
 _step :: forall r. Event String -> Event (Attribute (Indexed (step :: String | r)))
 _step = Functor.map $ (unsafeAttribute <<< { key: "step", value: _ } <<< prop')
@@ -4356,21 +4599,21 @@ _defaultValue_ = _defaultValue <<< Applicative.pure
 _valueAsNumber
   :: forall r. Event Number -> Event (Attribute (Indexed (valueAsNumber :: Number | r)))
 _valueAsNumber = Functor.map $
-  (unsafeAttribute <<< { key: "valueAsNumber", value: _ } <<< numberAttributeValue)
+  (unsafeAttribute <<< { key: "valueAsNumber", value: _ } <<< (prop' <<< Show.show))
 
 _valueAsNumber_ :: forall r. Number -> Event (Attribute (Indexed (valueAsNumber :: Number | r)))
 _valueAsNumber_ = _valueAsNumber <<< Applicative.pure
 
 _selectionStart :: forall r. Event Int -> Event (Attribute (Indexed (selectionStart :: Int | r)))
 _selectionStart = Functor.map $
-  (unsafeAttribute <<< { key: "selectionStart", value: _ } <<< intAttributeValue)
+  (unsafeAttribute <<< { key: "selectionStart", value: _ } <<< (prop' <<< Show.show))
 
 _selectionStart_ :: forall r. Int -> Event (Attribute (Indexed (selectionStart :: Int | r)))
 _selectionStart_ = _selectionStart <<< Applicative.pure
 
 _selectionEnd :: forall r. Event Int -> Event (Attribute (Indexed (selectionEnd :: Int | r)))
 _selectionEnd = Functor.map $
-  (unsafeAttribute <<< { key: "selectionEnd", value: _ } <<< intAttributeValue)
+  (unsafeAttribute <<< { key: "selectionEnd", value: _ } <<< (prop' <<< Show.show))
 
 _selectionEnd_ :: forall r. Int -> Event (Attribute (Indexed (selectionEnd :: Int | r)))
 _selectionEnd_ = _selectionEnd <<< Applicative.pure
@@ -4408,12 +4651,6 @@ _integrity = Functor.map $ (unsafeAttribute <<< { key: "integrity", value: _ } <
 _integrity_ :: forall r. String -> Event (Attribute (Indexed (integrity :: String | r)))
 _integrity_ = _integrity <<< Applicative.pure
 
-_hreflang :: forall r. Event String -> Event (Attribute (Indexed (hreflang :: String | r)))
-_hreflang = Functor.map $ (unsafeAttribute <<< { key: "hreflang", value: _ } <<< prop')
-
-_hreflang_ :: forall r. String -> Event (Attribute (Indexed (hreflang :: String | r)))
-_hreflang_ = _hreflang <<< Applicative.pure
-
 _imageSrcset :: forall r. Event String -> Event (Attribute (Indexed (imageSrcset :: String | r)))
 _imageSrcset = Functor.map $ (unsafeAttribute <<< { key: "imageSrcset", value: _ } <<< prop')
 
@@ -4426,75 +4663,9 @@ _imageSizes = Functor.map $ (unsafeAttribute <<< { key: "imageSizes", value: _ }
 _imageSizes_ :: forall r. String -> Event (Attribute (Indexed (imageSizes :: String | r)))
 _imageSizes_ = _imageSizes <<< Applicative.pure
 
-_behavior :: forall r. Event String -> Event (Attribute (Indexed (behavior :: String | r)))
-_behavior = Functor.map $ (unsafeAttribute <<< { key: "behavior", value: _ } <<< prop')
-
-_behavior_ :: forall r. String -> Event (Attribute (Indexed (behavior :: String | r)))
-_behavior_ = _behavior <<< Applicative.pure
-
-_bgColor :: forall r. Event String -> Event (Attribute (Indexed (bgColor :: String | r)))
-_bgColor = Functor.map $ (unsafeAttribute <<< { key: "bgColor", value: _ } <<< prop')
-
-_bgColor_ :: forall r. String -> Event (Attribute (Indexed (bgColor :: String | r)))
-_bgColor_ = _bgColor <<< Applicative.pure
-
-_direction :: forall r. Event String -> Event (Attribute (Indexed (direction :: String | r)))
-_direction = Functor.map $ (unsafeAttribute <<< { key: "direction", value: _ } <<< prop')
-
-_direction_ :: forall r. String -> Event (Attribute (Indexed (direction :: String | r)))
-_direction_ = _direction <<< Applicative.pure
-
-_hspace :: forall r. Event Int -> Event (Attribute (Indexed (hspace :: Int | r)))
-_hspace = Functor.map $ (unsafeAttribute <<< { key: "hspace", value: _ } <<< intAttributeValue)
-
-_hspace_ :: forall r. Int -> Event (Attribute (Indexed (hspace :: Int | r)))
-_hspace_ = _hspace <<< Applicative.pure
-
-class IsLoop (v :: Type) (a :: Type) | v -> a where
-  isLoop :: v -> AttributeValue
-
-instance IsLoop Boolean Boolean where
-  isLoop = boolAttributeValue
-
-instance IsLoop Int Int where
-  isLoop = intAttributeValue
-
-_loop :: forall r v a. IsLoop v a => Event v -> Event (Attribute (Indexed (loop :: a | r)))
-_loop = Functor.map $ (unsafeAttribute <<< { key: "loop", value: _ } <<< isLoop)
-
-_loop_ :: forall r v a. IsLoop v a => v -> Event (Attribute (Indexed (loop :: a | r)))
-_loop_ = _loop <<< Applicative.pure
-
-_scrollAmount :: forall r. Event Int -> Event (Attribute (Indexed (scrollAmount :: Int | r)))
-_scrollAmount = Functor.map $
-  (unsafeAttribute <<< { key: "scrollAmount", value: _ } <<< intAttributeValue)
-
-_scrollAmount_ :: forall r. Int -> Event (Attribute (Indexed (scrollAmount :: Int | r)))
-_scrollAmount_ = _scrollAmount <<< Applicative.pure
-
-_scrollDelay :: forall r. Event Int -> Event (Attribute (Indexed (scrollDelay :: Int | r)))
-_scrollDelay = Functor.map $
-  (unsafeAttribute <<< { key: "scrollDelay", value: _ } <<< intAttributeValue)
-
-_scrollDelay_ :: forall r. Int -> Event (Attribute (Indexed (scrollDelay :: Int | r)))
-_scrollDelay_ = _scrollDelay <<< Applicative.pure
-
-_trueSpeed :: forall r. Event Boolean -> Event (Attribute (Indexed (trueSpeed :: Boolean | r)))
-_trueSpeed = Functor.map $
-  (unsafeAttribute <<< { key: "trueSpeed", value: _ } <<< boolAttributeValue)
-
-_trueSpeed_ :: forall r. Boolean -> Event (Attribute (Indexed (trueSpeed :: Boolean | r)))
-_trueSpeed_ = _trueSpeed <<< Applicative.pure
-
-_vspace :: forall r. Event Int -> Event (Attribute (Indexed (vspace :: Int | r)))
-_vspace = Functor.map $ (unsafeAttribute <<< { key: "vspace", value: _ } <<< intAttributeValue)
-
-_vspace_ :: forall r. Int -> Event (Attribute (Indexed (vspace :: Int | r)))
-_vspace_ = _vspace <<< Applicative.pure
-
 _currentTime :: forall r. Event Number -> Event (Attribute (Indexed (currentTime :: Number | r)))
 _currentTime = Functor.map $
-  (unsafeAttribute <<< { key: "currentTime", value: _ } <<< numberAttributeValue)
+  (unsafeAttribute <<< { key: "currentTime", value: _ } <<< (prop' <<< Show.show))
 
 _currentTime_ :: forall r. Number -> Event (Attribute (Indexed (currentTime :: Number | r)))
 _currentTime_ = _currentTime <<< Applicative.pure
@@ -4502,7 +4673,7 @@ _currentTime_ = _currentTime <<< Applicative.pure
 _defaultPlaybackRate
   :: forall r. Event Number -> Event (Attribute (Indexed (defaultPlaybackRate :: Number | r)))
 _defaultPlaybackRate = Functor.map $
-  (unsafeAttribute <<< { key: "defaultPlaybackRate", value: _ } <<< numberAttributeValue)
+  (unsafeAttribute <<< { key: "defaultPlaybackRate", value: _ } <<< (prop' <<< Show.show))
 
 _defaultPlaybackRate_
   :: forall r. Number -> Event (Attribute (Indexed (defaultPlaybackRate :: Number | r)))
@@ -4510,7 +4681,7 @@ _defaultPlaybackRate_ = _defaultPlaybackRate <<< Applicative.pure
 
 _playbackRate :: forall r. Event Number -> Event (Attribute (Indexed (playbackRate :: Number | r)))
 _playbackRate = Functor.map $
-  (unsafeAttribute <<< { key: "playbackRate", value: _ } <<< numberAttributeValue)
+  (unsafeAttribute <<< { key: "playbackRate", value: _ } <<< (prop' <<< Show.show))
 
 _playbackRate_ :: forall r. Number -> Event (Attribute (Indexed (playbackRate :: Number | r)))
 _playbackRate_ = _playbackRate <<< Applicative.pure
@@ -4518,7 +4689,7 @@ _playbackRate_ = _playbackRate <<< Applicative.pure
 _preservesPitch
   :: forall r. Event Boolean -> Event (Attribute (Indexed (preservesPitch :: Boolean | r)))
 _preservesPitch = Functor.map $
-  (unsafeAttribute <<< { key: "preservesPitch", value: _ } <<< boolAttributeValue)
+  (unsafeAttribute <<< { key: "preservesPitch", value: _ } <<< (prop' <<< Show.show))
 
 _preservesPitch_
   :: forall r. Boolean -> Event (Attribute (Indexed (preservesPitch :: Boolean | r)))
@@ -4526,26 +4697,32 @@ _preservesPitch_ = _preservesPitch <<< Applicative.pure
 
 _autoplay :: forall r. Event Boolean -> Event (Attribute (Indexed (autoplay :: Boolean | r)))
 _autoplay = Functor.map $
-  (unsafeAttribute <<< { key: "autoplay", value: _ } <<< boolAttributeValue)
+  (unsafeAttribute <<< { key: "autoplay", value: _ } <<< (prop' <<< Show.show))
 
 _autoplay_ :: forall r. Boolean -> Event (Attribute (Indexed (autoplay :: Boolean | r)))
 _autoplay_ = _autoplay <<< Applicative.pure
 
+_loop :: forall r. Event Boolean -> Event (Attribute (Indexed (loop :: Boolean | r)))
+_loop = Functor.map $ (unsafeAttribute <<< { key: "loop", value: _ } <<< (prop' <<< Show.show))
+
+_loop_ :: forall r. Boolean -> Event (Attribute (Indexed (loop :: Boolean | r)))
+_loop_ = _loop <<< Applicative.pure
+
 _controls :: forall r. Event Boolean -> Event (Attribute (Indexed (controls :: Boolean | r)))
 _controls = Functor.map $
-  (unsafeAttribute <<< { key: "controls", value: _ } <<< boolAttributeValue)
+  (unsafeAttribute <<< { key: "controls", value: _ } <<< (prop' <<< Show.show))
 
 _controls_ :: forall r. Boolean -> Event (Attribute (Indexed (controls :: Boolean | r)))
 _controls_ = _controls <<< Applicative.pure
 
 _volume :: forall r. Event Number -> Event (Attribute (Indexed (volume :: Number | r)))
-_volume = Functor.map $ (unsafeAttribute <<< { key: "volume", value: _ } <<< numberAttributeValue)
+_volume = Functor.map $ (unsafeAttribute <<< { key: "volume", value: _ } <<< (prop' <<< Show.show))
 
 _volume_ :: forall r. Number -> Event (Attribute (Indexed (volume :: Number | r)))
 _volume_ = _volume <<< Applicative.pure
 
 _muted :: forall r. Event Boolean -> Event (Attribute (Indexed (muted :: Boolean | r)))
-_muted = Functor.map $ (unsafeAttribute <<< { key: "muted", value: _ } <<< boolAttributeValue)
+_muted = Functor.map $ (unsafeAttribute <<< { key: "muted", value: _ } <<< (prop' <<< Show.show))
 
 _muted_ :: forall r. Boolean -> Event (Attribute (Indexed (muted :: Boolean | r)))
 _muted_ = _muted <<< Applicative.pure
@@ -4553,7 +4730,7 @@ _muted_ = _muted <<< Applicative.pure
 _defaultMuted
   :: forall r. Event Boolean -> Event (Attribute (Indexed (defaultMuted :: Boolean | r)))
 _defaultMuted = Functor.map $
-  (unsafeAttribute <<< { key: "defaultMuted", value: _ } <<< boolAttributeValue)
+  (unsafeAttribute <<< { key: "defaultMuted", value: _ } <<< (prop' <<< Show.show))
 
 _defaultMuted_ :: forall r. Boolean -> Event (Attribute (Indexed (defaultMuted :: Boolean | r)))
 _defaultMuted_ = _defaultMuted <<< Applicative.pure
@@ -4565,20 +4742,20 @@ _content_ :: forall r. String -> Event (Attribute (Indexed (content :: String | 
 _content_ = _content <<< Applicative.pure
 
 _low :: forall r. Event Number -> Event (Attribute (Indexed (low :: Number | r)))
-_low = Functor.map $ (unsafeAttribute <<< { key: "low", value: _ } <<< numberAttributeValue)
+_low = Functor.map $ (unsafeAttribute <<< { key: "low", value: _ } <<< (prop' <<< Show.show))
 
 _low_ :: forall r. Number -> Event (Attribute (Indexed (low :: Number | r)))
 _low_ = _low <<< Applicative.pure
 
 _high :: forall r. Event Number -> Event (Attribute (Indexed (high :: Number | r)))
-_high = Functor.map $ (unsafeAttribute <<< { key: "high", value: _ } <<< numberAttributeValue)
+_high = Functor.map $ (unsafeAttribute <<< { key: "high", value: _ } <<< (prop' <<< Show.show))
 
 _high_ :: forall r. Number -> Event (Attribute (Indexed (high :: Number | r)))
 _high_ = _high <<< Applicative.pure
 
 _optimum :: forall r. Event Number -> Event (Attribute (Indexed (optimum :: Number | r)))
 _optimum = Functor.map $
-  (unsafeAttribute <<< { key: "optimum", value: _ } <<< numberAttributeValue)
+  (unsafeAttribute <<< { key: "optimum", value: _ } <<< (prop' <<< Show.show))
 
 _optimum_ :: forall r. Number -> Event (Attribute (Indexed (optimum :: Number | r)))
 _optimum_ = _optimum <<< Applicative.pure
@@ -4597,13 +4774,13 @@ _dateTime_ = _dateTime <<< Applicative.pure
 
 _reversed :: forall r. Event Boolean -> Event (Attribute (Indexed (reversed :: Boolean | r)))
 _reversed = Functor.map $
-  (unsafeAttribute <<< { key: "reversed", value: _ } <<< boolAttributeValue)
+  (unsafeAttribute <<< { key: "reversed", value: _ } <<< (prop' <<< Show.show))
 
 _reversed_ :: forall r. Boolean -> Event (Attribute (Indexed (reversed :: Boolean | r)))
 _reversed_ = _reversed <<< Applicative.pure
 
 _start :: forall r. Event Int -> Event (Attribute (Indexed (start :: Int | r)))
-_start = Functor.map $ (unsafeAttribute <<< { key: "start", value: _ } <<< intAttributeValue)
+_start = Functor.map $ (unsafeAttribute <<< { key: "start", value: _ } <<< (prop' <<< Show.show))
 
 _start_ :: forall r. Int -> Event (Attribute (Indexed (start :: Int | r)))
 _start_ = _start <<< Applicative.pure
@@ -4623,7 +4800,7 @@ _label_ = _label <<< Applicative.pure
 _defaultSelected
   :: forall r. Event Boolean -> Event (Attribute (Indexed (defaultSelected :: Boolean | r)))
 _defaultSelected = Functor.map $
-  (unsafeAttribute <<< { key: "defaultSelected", value: _ } <<< boolAttributeValue)
+  (unsafeAttribute <<< { key: "defaultSelected", value: _ } <<< (prop' <<< Show.show))
 
 _defaultSelected_
   :: forall r. Boolean -> Event (Attribute (Indexed (defaultSelected :: Boolean | r)))
@@ -4631,16 +4808,10 @@ _defaultSelected_ = _defaultSelected <<< Applicative.pure
 
 _selected :: forall r. Event Boolean -> Event (Attribute (Indexed (selected :: Boolean | r)))
 _selected = Functor.map $
-  (unsafeAttribute <<< { key: "selected", value: _ } <<< boolAttributeValue)
+  (unsafeAttribute <<< { key: "selected", value: _ } <<< (prop' <<< Show.show))
 
 _selected_ :: forall r. Boolean -> Event (Attribute (Indexed (selected :: Boolean | r)))
 _selected_ = _selected <<< Applicative.pure
-
-_text :: forall r. Event String -> Event (Attribute (Indexed (text :: String | r)))
-_text = Functor.map $ (unsafeAttribute <<< { key: "text", value: _ } <<< prop')
-
-_text_ :: forall r. String -> Event (Attribute (Indexed (text :: String | r)))
-_text_ = _text <<< Applicative.pure
 
 _nonce :: forall r. Event String -> Event (Attribute (Indexed (nonce :: String | r)))
 _nonce = Functor.map $ (unsafeAttribute <<< { key: "nonce", value: _ } <<< prop')
@@ -4650,44 +4821,60 @@ _nonce_ = _nonce <<< Applicative.pure
 
 _autofocus :: forall r. Event Boolean -> Event (Attribute (Indexed (autofocus :: Boolean | r)))
 _autofocus = Functor.map $
-  (unsafeAttribute <<< { key: "autofocus", value: _ } <<< boolAttributeValue)
+  (unsafeAttribute <<< { key: "autofocus", value: _ } <<< (prop' <<< Show.show))
 
 _autofocus_ :: forall r. Boolean -> Event (Attribute (Indexed (autofocus :: Boolean | r)))
 _autofocus_ = _autofocus <<< Applicative.pure
 
 _tabIndex :: forall r. Event Int -> Event (Attribute (Indexed (tabIndex :: Int | r)))
-_tabIndex = Functor.map $ (unsafeAttribute <<< { key: "tabIndex", value: _ } <<< intAttributeValue)
+_tabIndex = Functor.map $
+  (unsafeAttribute <<< { key: "tabIndex", value: _ } <<< (prop' <<< Show.show))
 
 _tabIndex_ :: forall r. Int -> Event (Attribute (Indexed (tabIndex :: Int | r)))
 _tabIndex_ = _tabIndex <<< Applicative.pure
 
-_valueType :: forall r. Event String -> Event (Attribute (Indexed (valueType :: String | r)))
-_valueType = Functor.map $ (unsafeAttribute <<< { key: "valueType", value: _ } <<< prop')
+_noModule :: forall r. Event Boolean -> Event (Attribute (Indexed (noModule :: Boolean | r)))
+_noModule = Functor.map $
+  (unsafeAttribute <<< { key: "noModule", value: _ } <<< (prop' <<< Show.show))
 
-_valueType_ :: forall r. String -> Event (Attribute (Indexed (valueType :: String | r)))
-_valueType_ = _valueType <<< Applicative.pure
+_noModule_ :: forall r. Boolean -> Event (Attribute (Indexed (noModule :: Boolean | r)))
+_noModule_ = _noModule <<< Applicative.pure
+
+_async :: forall r. Event Boolean -> Event (Attribute (Indexed (async :: Boolean | r)))
+_async = Functor.map $ (unsafeAttribute <<< { key: "async", value: _ } <<< (prop' <<< Show.show))
+
+_async_ :: forall r. Boolean -> Event (Attribute (Indexed (async :: Boolean | r)))
+_async_ = _async <<< Applicative.pure
+
+_defer :: forall r. Event Boolean -> Event (Attribute (Indexed (defer :: Boolean | r)))
+_defer = Functor.map $ (unsafeAttribute <<< { key: "defer", value: _ } <<< (prop' <<< Show.show))
+
+_defer_ :: forall r. Boolean -> Event (Attribute (Indexed (defer :: Boolean | r)))
+_defer_ = _defer <<< Applicative.pure
 
 _length :: forall r. Event Int -> Event (Attribute (Indexed (length :: Int | r)))
-_length = Functor.map $ (unsafeAttribute <<< { key: "length", value: _ } <<< intAttributeValue)
+_length = Functor.map $ (unsafeAttribute <<< { key: "length", value: _ } <<< (prop' <<< Show.show))
 
 _length_ :: forall r. Int -> Event (Attribute (Indexed (length :: Int | r)))
 _length_ = _length <<< Applicative.pure
 
 _selectedIndex :: forall r. Event Int -> Event (Attribute (Indexed (selectedIndex :: Int | r)))
 _selectedIndex = Functor.map $
-  (unsafeAttribute <<< { key: "selectedIndex", value: _ } <<< intAttributeValue)
+  (unsafeAttribute <<< { key: "selectedIndex", value: _ } <<< (prop' <<< Show.show))
 
 _selectedIndex_ :: forall r. Int -> Event (Attribute (Indexed (selectedIndex :: Int | r)))
 _selectedIndex_ = _selectedIndex <<< Applicative.pure
 
 _colSpan :: forall r. Event Int -> Event (Attribute (Indexed (colSpan :: Int | r)))
-_colSpan = Functor.map $ (unsafeAttribute <<< { key: "colSpan", value: _ } <<< intAttributeValue)
+_colSpan = Functor.map $
+  (unsafeAttribute <<< { key: "colSpan", value: _ } <<< (prop' <<< Show.show))
 
 _colSpan_ :: forall r. Int -> Event (Attribute (Indexed (colSpan :: Int | r)))
 _colSpan_ = _colSpan <<< Applicative.pure
 
 _rowSpan :: forall r. Event Int -> Event (Attribute (Indexed (rowSpan :: Int | r)))
-_rowSpan = Functor.map $ (unsafeAttribute <<< { key: "rowSpan", value: _ } <<< intAttributeValue)
+_rowSpan = Functor.map $
+  (unsafeAttribute <<< { key: "rowSpan", value: _ } <<< (prop' <<< Show.show))
 
 _rowSpan_ :: forall r. Int -> Event (Attribute (Indexed (rowSpan :: Int | r)))
 _rowSpan_ = _rowSpan <<< Applicative.pure
@@ -4705,10 +4892,22 @@ _abbr_ :: forall r. String -> Event (Attribute (Indexed (abbr :: String | r)))
 _abbr_ = _abbr <<< Applicative.pure
 
 _span :: forall r. Event Int -> Event (Attribute (Indexed (span :: Int | r)))
-_span = Functor.map $ (unsafeAttribute <<< { key: "span", value: _ } <<< intAttributeValue)
+_span = Functor.map $ (unsafeAttribute <<< { key: "span", value: _ } <<< (prop' <<< Show.show))
 
 _span_ :: forall r. Int -> Event (Attribute (Indexed (span :: Int | r)))
 _span_ = _span <<< Applicative.pure
+
+_cols :: forall r. Event Int -> Event (Attribute (Indexed (cols :: Int | r)))
+_cols = Functor.map $ (unsafeAttribute <<< { key: "cols", value: _ } <<< (prop' <<< Show.show))
+
+_cols_ :: forall r. Int -> Event (Attribute (Indexed (cols :: Int | r)))
+_cols_ = _cols <<< Applicative.pure
+
+_rows :: forall r. Event Int -> Event (Attribute (Indexed (rows :: Int | r)))
+_rows = Functor.map $ (unsafeAttribute <<< { key: "rows", value: _ } <<< (prop' <<< Show.show))
+
+_rows_ :: forall r. Int -> Event (Attribute (Indexed (rows :: Int | r)))
+_rows_ = _rows <<< Applicative.pure
 
 _srclang :: forall r. Event String -> Event (Attribute (Indexed (srclang :: String | r)))
 _srclang = Functor.map $ (unsafeAttribute <<< { key: "srclang", value: _ } <<< prop')
@@ -4717,7 +4916,8 @@ _srclang_ :: forall r. String -> Event (Attribute (Indexed (srclang :: String | 
 _srclang_ = _srclang <<< Applicative.pure
 
 _default :: forall r. Event Boolean -> Event (Attribute (Indexed (default :: Boolean | r)))
-_default = Functor.map $ (unsafeAttribute <<< { key: "default", value: _ } <<< boolAttributeValue)
+_default = Functor.map $
+  (unsafeAttribute <<< { key: "default", value: _ } <<< (prop' <<< Show.show))
 
 _default_ :: forall r. Boolean -> Event (Attribute (Indexed (default :: Boolean | r)))
 _default_ = _default <<< Applicative.pure
@@ -4730,7 +4930,7 @@ _poster_ = _poster <<< Applicative.pure
 
 _playsInline :: forall r. Event Boolean -> Event (Attribute (Indexed (playsInline :: Boolean | r)))
 _playsInline = Functor.map $
-  (unsafeAttribute <<< { key: "playsInline", value: _ } <<< boolAttributeValue)
+  (unsafeAttribute <<< { key: "playsInline", value: _ } <<< (prop' <<< Show.show))
 
 _playsInline_ :: forall r. Boolean -> Event (Attribute (Indexed (playsInline :: Boolean | r)))
 _playsInline_ = _playsInline <<< Applicative.pure
@@ -4744,107 +4944,248 @@ _popoverTargetAction_
   :: forall r. String -> Event (Attribute (Indexed (popoverTargetAction :: String | r)))
 _popoverTargetAction_ = _popoverTargetAction <<< Applicative.pure
 
+_onBegin
+  :: forall r
+   . Event (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
+  -> Event (Attribute (Indexed (onbegin :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r)))
+_onBegin = Functor.map $ (unsafeAttribute <<< { key: "onbegin", value: _ } <<< (cb' <<< cb))
+
+_onBegin_
+  :: forall r
+   . (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
+  -> Event (Attribute (Indexed (onbegin :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r)))
+_onBegin_ = _onBegin <<< Applicative.pure
+
+_onEnd
+  :: forall r
+   . Event (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
+  -> Event (Attribute (Indexed (onend :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r)))
+_onEnd = Functor.map $ (unsafeAttribute <<< { key: "onend", value: _ } <<< (cb' <<< cb))
+
+_onEnd_
+  :: forall r
+   . (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
+  -> Event (Attribute (Indexed (onend :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r)))
+_onEnd_ = _onEnd <<< Applicative.pure
+
+_onRepeat
+  :: forall r
+   . Event (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
+  -> Event (Attribute (Indexed (onrepeat :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r)))
+_onRepeat = Functor.map $ (unsafeAttribute <<< { key: "onrepeat", value: _ } <<< (cb' <<< cb))
+
+_onRepeat_
+  :: forall r
+   . (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
+  -> Event (Attribute (Indexed (onrepeat :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r)))
+_onRepeat_ = _onRepeat <<< Applicative.pure
+
 _orient :: forall r. Event String -> Event (Attribute (Indexed (orient :: String | r)))
 _orient = Functor.map $ (unsafeAttribute <<< { key: "orient", value: _ } <<< prop')
 
 _orient_ :: forall r. String -> Event (Attribute (Indexed (orient :: String | r)))
 _orient_ = _orient <<< Applicative.pure
 
-_onafterprint :: forall r. Event Cb -> Event (Attribute (Indexed (onafterprint :: Cb | r)))
-_onafterprint = Functor.map $ (unsafeAttribute <<< { key: "onafterprint", value: _ } <<< cb')
+_onAfterprint
+  :: forall r
+   . Event (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
+  -> Event (Attribute (Indexed (onafterprint :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r)))
+_onAfterprint = Functor.map $
+  (unsafeAttribute <<< { key: "onafterprint", value: _ } <<< (cb' <<< cb))
 
-_onafterprint_ :: forall r. Cb -> Event (Attribute (Indexed (onafterprint :: Cb | r)))
-_onafterprint_ = _onafterprint <<< Applicative.pure
+_onAfterprint_
+  :: forall r
+   . (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
+  -> Event (Attribute (Indexed (onafterprint :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r)))
+_onAfterprint_ = _onAfterprint <<< Applicative.pure
 
-_onbeforeprint :: forall r. Event Cb -> Event (Attribute (Indexed (onbeforeprint :: Cb | r)))
-_onbeforeprint = Functor.map $ (unsafeAttribute <<< { key: "onbeforeprint", value: _ } <<< cb')
+_onBeforeprint
+  :: forall r
+   . Event (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
+  -> Event
+       (Attribute (Indexed (onbeforeprint :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r)))
+_onBeforeprint = Functor.map $
+  (unsafeAttribute <<< { key: "onbeforeprint", value: _ } <<< (cb' <<< cb))
 
-_onbeforeprint_ :: forall r. Cb -> Event (Attribute (Indexed (onbeforeprint :: Cb | r)))
-_onbeforeprint_ = _onbeforeprint <<< Applicative.pure
+_onBeforeprint_
+  :: forall r
+   . (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
+  -> Event
+       (Attribute (Indexed (onbeforeprint :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r)))
+_onBeforeprint_ = _onBeforeprint <<< Applicative.pure
 
-_onhashchange :: forall r. Event Cb -> Event (Attribute (Indexed (onhashchange :: Cb | r)))
-_onhashchange = Functor.map $ (unsafeAttribute <<< { key: "onhashchange", value: _ } <<< cb')
+_onHashchange
+  :: forall r
+   . Event (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
+  -> Event (Attribute (Indexed (onhashchange :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r)))
+_onHashchange = Functor.map $
+  (unsafeAttribute <<< { key: "onhashchange", value: _ } <<< (cb' <<< cb))
 
-_onhashchange_ :: forall r. Cb -> Event (Attribute (Indexed (onhashchange :: Cb | r)))
-_onhashchange_ = _onhashchange <<< Applicative.pure
+_onHashchange_
+  :: forall r
+   . (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
+  -> Event (Attribute (Indexed (onhashchange :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r)))
+_onHashchange_ = _onHashchange <<< Applicative.pure
 
-_onlanguagechange :: forall r. Event Cb -> Event (Attribute (Indexed (onlanguagechange :: Cb | r)))
-_onlanguagechange = Functor.map $
-  (unsafeAttribute <<< { key: "onlanguagechange", value: _ } <<< cb')
+_onLanguagechange
+  :: forall r
+   . Event (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
+  -> Event
+       (Attribute (Indexed (onlanguagechange :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r)))
+_onLanguagechange = Functor.map $
+  (unsafeAttribute <<< { key: "onlanguagechange", value: _ } <<< (cb' <<< cb))
 
-_onlanguagechange_ :: forall r. Cb -> Event (Attribute (Indexed (onlanguagechange :: Cb | r)))
-_onlanguagechange_ = _onlanguagechange <<< Applicative.pure
+_onLanguagechange_
+  :: forall r
+   . (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
+  -> Event
+       (Attribute (Indexed (onlanguagechange :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r)))
+_onLanguagechange_ = _onLanguagechange <<< Applicative.pure
 
-_onmessage :: forall r. Event Cb -> Event (Attribute (Indexed (onmessage :: Cb | r)))
-_onmessage = Functor.map $ (unsafeAttribute <<< { key: "onmessage", value: _ } <<< cb')
+_onMessage
+  :: forall r
+   . Event (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
+  -> Event (Attribute (Indexed (onmessage :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r)))
+_onMessage = Functor.map $ (unsafeAttribute <<< { key: "onmessage", value: _ } <<< (cb' <<< cb))
 
-_onmessage_ :: forall r. Cb -> Event (Attribute (Indexed (onmessage :: Cb | r)))
-_onmessage_ = _onmessage <<< Applicative.pure
+_onMessage_
+  :: forall r
+   . (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
+  -> Event (Attribute (Indexed (onmessage :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r)))
+_onMessage_ = _onMessage <<< Applicative.pure
 
-_onmessageerror :: forall r. Event Cb -> Event (Attribute (Indexed (onmessageerror :: Cb | r)))
-_onmessageerror = Functor.map $ (unsafeAttribute <<< { key: "onmessageerror", value: _ } <<< cb')
+_onMessageerror
+  :: forall r
+   . Event (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
+  -> Event
+       (Attribute (Indexed (onmessageerror :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r)))
+_onMessageerror = Functor.map $
+  (unsafeAttribute <<< { key: "onmessageerror", value: _ } <<< (cb' <<< cb))
 
-_onmessageerror_ :: forall r. Cb -> Event (Attribute (Indexed (onmessageerror :: Cb | r)))
-_onmessageerror_ = _onmessageerror <<< Applicative.pure
+_onMessageerror_
+  :: forall r
+   . (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
+  -> Event
+       (Attribute (Indexed (onmessageerror :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r)))
+_onMessageerror_ = _onMessageerror <<< Applicative.pure
 
-_onoffline :: forall r. Event Cb -> Event (Attribute (Indexed (onoffline :: Cb | r)))
-_onoffline = Functor.map $ (unsafeAttribute <<< { key: "onoffline", value: _ } <<< cb')
+_onOffline
+  :: forall r
+   . Event (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
+  -> Event (Attribute (Indexed (onoffline :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r)))
+_onOffline = Functor.map $ (unsafeAttribute <<< { key: "onoffline", value: _ } <<< (cb' <<< cb))
 
-_onoffline_ :: forall r. Cb -> Event (Attribute (Indexed (onoffline :: Cb | r)))
-_onoffline_ = _onoffline <<< Applicative.pure
+_onOffline_
+  :: forall r
+   . (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
+  -> Event (Attribute (Indexed (onoffline :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r)))
+_onOffline_ = _onOffline <<< Applicative.pure
 
-_ononline :: forall r. Event Cb -> Event (Attribute (Indexed (ononline :: Cb | r)))
-_ononline = Functor.map $ (unsafeAttribute <<< { key: "ononline", value: _ } <<< cb')
+_onOnline
+  :: forall r
+   . Event (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
+  -> Event (Attribute (Indexed (ononline :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r)))
+_onOnline = Functor.map $ (unsafeAttribute <<< { key: "ononline", value: _ } <<< (cb' <<< cb))
 
-_ononline_ :: forall r. Cb -> Event (Attribute (Indexed (ononline :: Cb | r)))
-_ononline_ = _ononline <<< Applicative.pure
+_onOnline_
+  :: forall r
+   . (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
+  -> Event (Attribute (Indexed (ononline :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r)))
+_onOnline_ = _onOnline <<< Applicative.pure
 
-_onpagehide :: forall r. Event Cb -> Event (Attribute (Indexed (onpagehide :: Cb | r)))
-_onpagehide = Functor.map $ (unsafeAttribute <<< { key: "onpagehide", value: _ } <<< cb')
+_onPagehide
+  :: forall r
+   . Event (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
+  -> Event (Attribute (Indexed (onpagehide :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r)))
+_onPagehide = Functor.map $ (unsafeAttribute <<< { key: "onpagehide", value: _ } <<< (cb' <<< cb))
 
-_onpagehide_ :: forall r. Cb -> Event (Attribute (Indexed (onpagehide :: Cb | r)))
-_onpagehide_ = _onpagehide <<< Applicative.pure
+_onPagehide_
+  :: forall r
+   . (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
+  -> Event (Attribute (Indexed (onpagehide :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r)))
+_onPagehide_ = _onPagehide <<< Applicative.pure
 
-_onpageshow :: forall r. Event Cb -> Event (Attribute (Indexed (onpageshow :: Cb | r)))
-_onpageshow = Functor.map $ (unsafeAttribute <<< { key: "onpageshow", value: _ } <<< cb')
+_onPageshow
+  :: forall r
+   . Event (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
+  -> Event (Attribute (Indexed (onpageshow :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r)))
+_onPageshow = Functor.map $ (unsafeAttribute <<< { key: "onpageshow", value: _ } <<< (cb' <<< cb))
 
-_onpageshow_ :: forall r. Cb -> Event (Attribute (Indexed (onpageshow :: Cb | r)))
-_onpageshow_ = _onpageshow <<< Applicative.pure
+_onPageshow_
+  :: forall r
+   . (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
+  -> Event (Attribute (Indexed (onpageshow :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r)))
+_onPageshow_ = _onPageshow <<< Applicative.pure
 
-_onpopstate :: forall r. Event Cb -> Event (Attribute (Indexed (onpopstate :: Cb | r)))
-_onpopstate = Functor.map $ (unsafeAttribute <<< { key: "onpopstate", value: _ } <<< cb')
+_onPopstate
+  :: forall r
+   . Event (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
+  -> Event (Attribute (Indexed (onpopstate :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r)))
+_onPopstate = Functor.map $ (unsafeAttribute <<< { key: "onpopstate", value: _ } <<< (cb' <<< cb))
 
-_onpopstate_ :: forall r. Cb -> Event (Attribute (Indexed (onpopstate :: Cb | r)))
-_onpopstate_ = _onpopstate <<< Applicative.pure
+_onPopstate_
+  :: forall r
+   . (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
+  -> Event (Attribute (Indexed (onpopstate :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r)))
+_onPopstate_ = _onPopstate <<< Applicative.pure
 
-_onrejectionhandled
-  :: forall r. Event Cb -> Event (Attribute (Indexed (onrejectionhandled :: Cb | r)))
-_onrejectionhandled = Functor.map $
-  (unsafeAttribute <<< { key: "onrejectionhandled", value: _ } <<< cb')
+_onRejectionhandled
+  :: forall r
+   . Event (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
+  -> Event
+       (Attribute (Indexed (onrejectionhandled :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r)))
+_onRejectionhandled = Functor.map $
+  (unsafeAttribute <<< { key: "onrejectionhandled", value: _ } <<< (cb' <<< cb))
 
-_onrejectionhandled_ :: forall r. Cb -> Event (Attribute (Indexed (onrejectionhandled :: Cb | r)))
-_onrejectionhandled_ = _onrejectionhandled <<< Applicative.pure
+_onRejectionhandled_
+  :: forall r
+   . (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
+  -> Event
+       (Attribute (Indexed (onrejectionhandled :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r)))
+_onRejectionhandled_ = _onRejectionhandled <<< Applicative.pure
 
-_onstorage :: forall r. Event Cb -> Event (Attribute (Indexed (onstorage :: Cb | r)))
-_onstorage = Functor.map $ (unsafeAttribute <<< { key: "onstorage", value: _ } <<< cb')
+_onStorage
+  :: forall r
+   . Event (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
+  -> Event (Attribute (Indexed (onstorage :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r)))
+_onStorage = Functor.map $ (unsafeAttribute <<< { key: "onstorage", value: _ } <<< (cb' <<< cb))
 
-_onstorage_ :: forall r. Cb -> Event (Attribute (Indexed (onstorage :: Cb | r)))
-_onstorage_ = _onstorage <<< Applicative.pure
+_onStorage_
+  :: forall r
+   . (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
+  -> Event (Attribute (Indexed (onstorage :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r)))
+_onStorage_ = _onStorage <<< Applicative.pure
 
-_onunhandledrejection
-  :: forall r. Event Cb -> Event (Attribute (Indexed (onunhandledrejection :: Cb | r)))
-_onunhandledrejection = Functor.map $
-  (unsafeAttribute <<< { key: "onunhandledrejection", value: _ } <<< cb')
+_onUnhandledrejection
+  :: forall r
+   . Event (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
+  -> Event
+       ( Attribute
+           (Indexed (onunhandledrejection :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r))
+       )
+_onUnhandledrejection = Functor.map $
+  (unsafeAttribute <<< { key: "onunhandledrejection", value: _ } <<< (cb' <<< cb))
 
-_onunhandledrejection_
-  :: forall r. Cb -> Event (Attribute (Indexed (onunhandledrejection :: Cb | r)))
-_onunhandledrejection_ = _onunhandledrejection <<< Applicative.pure
+_onUnhandledrejection_
+  :: forall r
+   . (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
+  -> Event
+       ( Attribute
+           (Indexed (onunhandledrejection :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r))
+       )
+_onUnhandledrejection_ = _onUnhandledrejection <<< Applicative.pure
 
-_onunload :: forall r. Event Cb -> Event (Attribute (Indexed (onunload :: Cb | r)))
-_onunload = Functor.map $ (unsafeAttribute <<< { key: "onunload", value: _ } <<< cb')
+_onUnload
+  :: forall r
+   . Event (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
+  -> Event (Attribute (Indexed (onunload :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r)))
+_onUnload = Functor.map $ (unsafeAttribute <<< { key: "onunload", value: _ } <<< (cb' <<< cb))
 
-_onunload_ :: forall r. Cb -> Event (Attribute (Indexed (onunload :: Cb | r)))
-_onunload_ = _onunload <<< Applicative.pure
+_onUnload_
+  :: forall r
+   . (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
+  -> Event (Attribute (Indexed (onunload :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r)))
+_onUnload_ = _onUnload <<< Applicative.pure
 
 newtype Keyword (v :: Symbol) = Keyword String
 

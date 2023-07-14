@@ -23,6 +23,8 @@
     , "ordered-collections"
     , "arrays"
     , "strings"
+    , "debug"
+    , "st"
     ]
 , sources =
     [ "codegen/**/*.purs"

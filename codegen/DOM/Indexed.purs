@@ -3,8 +3,8 @@ module DOM.Indexed where
 import Prelude
 
 import Control.Monad.Except (ExceptT(..))
-import DOM.Common (correctionInterfaces, correctionKeyword, crawlInterfaces, resolveInterface, unSnake, webElements)
-import DOM.Indexed.Common (AttributeType, Keyword, requires)
+import DOM.Common (correctionInterfaces, correctionKeyword, resolveInterface, unSnake, validTag, webElements)
+import DOM.Indexed.Common (Keyword, requires)
 import DOM.Indexed.Elements as Elements
 import DOM.Indexed.Interfaces as Interfaces
 import DOM.Indexed.Props as Props
@@ -12,10 +12,11 @@ import DOM.Indexed.Self as Self
 import DOM.Indexed.Values as Values
 import DOM.Spec (Definition, IDL, Interface, Tag)
 import Data.Array as Array
-import Data.Maybe (Maybe(..))
+import Data.Maybe (Maybe(..), maybe)
+import Data.Set (Set)
 import Data.Set as Set
 import Data.String as String
-import Data.Tuple (Tuple(..))
+import Data.Tuple (Tuple(..), snd)
 import Data.Tuple.Nested (type (/\), (/\))
 import Effect.Aff (Aff, Error, attempt)
 import FS as FS
@@ -31,7 +32,7 @@ generate keywordSpec tagSpec ifSpec = do
         tags ::Foreign.Object String
         tags =
             Foreign.fromFoldable
-                $ map (\{ name, interface } -> name /\ interface ) tagSpec
+                $ Array.mapMaybe validTag tagSpec
 
         interfaces :: Foreign.Object ( Interface /\ Array String ) 
         interfaces = do
@@ -65,7 +66,7 @@ generate keywordSpec tagSpec ifSpec = do
         uniqueKeywords =
             ( Array.nub $ map (\{ name, value } -> { name, value } ) keywords )
 
-        attributes :: Foreign.Object ( Array AttributeType )
+        attributes :: Foreign.Object ( Array Props.AttributeType )
         attributes =
             Props.coalesceAttributes keywords interfaces
 
@@ -92,3 +93,12 @@ generate keywordSpec tagSpec ifSpec = do
         $ module_ "Deku.DOM.Indexed.Self" []
             ( Self.imports webElements )
             ( Self.generates webElements )
+
+-- | Crawls through the given set finding all inherited interfaces of a given set of interfaces.
+crawlInterfaces :: IDL -> Set String -> Set String -> Array String
+crawlInterfaces _ seen next | Set.isEmpty next = Set.toUnfoldable seen
+crawlInterfaces spec seen next = do
+    let found :: Set String
+        found = Set.fromFoldable $ Array.foldMap ( maybe [] snd <<< resolveInterface spec ) $ Set.toUnfoldable next
+    
+    crawlInterfaces spec ( Set.union seen found ) ( Set.difference found seen )

@@ -23,41 +23,20 @@ main = launchAff_ do
     for_ ( blush r ) \e -> do
         Console.log $ message e
 
-htmlTagReference :: String
-htmlTagReference = 
-    "https://raw.githubusercontent.com/w3c/webref/curated/ed/elements/html.json"
+domInterfaceReference = "https://raw.githubusercontent.com/w3c/webref/curated/ed/idlparsed/dom.json" :: String
 
-htmlInterfaceReference :: String
-htmlInterfaceReference =
-    "https://raw.githubusercontent.com/w3c/webref/curated/ed/idlparsed/html.json"
+ariaInterfaceReference = "https://raw.githubusercontent.com/w3c/webref/curated/ed/idlparsed/wai-aria-1.2.json" :: String
+keywordReference = "https://raw.githubusercontent.com/w3c/webref/curated/ed/dfns/html.json" :: String
 
-keywordReference :: String
-keywordReference = 
-    "https://raw.githubusercontent.com/w3c/webref/curated/ed/dfns/html.json"
+htmlTagReference = "https://raw.githubusercontent.com/w3c/webref/curated/ed/elements/html.json" :: String
+htmlInterfaceReference = "https://raw.githubusercontent.com/w3c/webref/curated/ed/idlparsed/html.json" :: String
 
-domInterfaceReference :: String
-domInterfaceReference =
-    "https://raw.githubusercontent.com/w3c/webref/curated/ed/idlparsed/dom.json"
-
-svgTagReference :: String
-svgTagReference =
-    "https://raw.githubusercontent.com/w3c/webref/curated/ed/elements/SVG2.json"
-
-svgInterfaceReference :: String
-svgInterfaceReference =
-    "https://raw.githubusercontent.com/w3c/webref/curated/ed/idlparsed/SVG2.json"
-
-svgFilterTagReference :: String
-svgFilterTagReference =
-    "https://raw.githubusercontent.com/w3c/webref/curated/ed/elements/filter-effects-1.json"
-
-svgFilterInterfaceReference :: String
-svgFilterInterfaceReference =
-    "https://raw.githubusercontent.com/w3c/webref/curated/ed/idlparsed/filter-effects-1.json"
-
-ariaInterfaceReference :: String
-ariaInterfaceReference =
-    "https://raw.githubusercontent.com/w3c/webref/curated/ed/idlparsed/wai-aria-1.2.json"
+svgTagReference = "https://raw.githubusercontent.com/w3c/webref/curated/ed/elements/SVG2.json" :: String
+svgInterfaceReference = "https://raw.githubusercontent.com/w3c/webref/curated/ed/idlparsed/SVG2.json" :: String
+svgFilterTagReference = "https://raw.githubusercontent.com/w3c/webref/curated/ed/elements/filter-effects-1.json" :: String
+svgFilterInterfaceReference = "https://raw.githubusercontent.com/w3c/webref/curated/ed/idlparsed/filter-effects-1.json" :: String
+svgAnimationTagReference = "https://raw.githubusercontent.com/w3c/webref/curated/ed/elements/svg-animations.json" :: String
+svgAnimationInterfaceReference = "https://raw.githubusercontent.com/w3c/webref/curated/ed/idlparsed/svg-animations.json" :: String
 
 generate :: ExceptT Error Aff Unit
 generate = do
@@ -66,11 +45,10 @@ generate = do
     FS.createDir "codegen/cache/aria"
 
     keyword <- FS.cachedFetch "./codegen/cache/html/keyword.json" keywordReference :: _ KeywordSpec
+    ariaInterface <- FS.cachedFetch "./codegen/cache/dom/interface.json" ariaInterfaceReference :: _ InterfaceSpec
 
     htmlTag <- FS.cachedFetch "./codegen/cache/html/tags.json" htmlTagReference :: _ TagSpec
     htmlInterface <- FS.cachedFetch "./codegen/cache/html/interface.json" htmlInterfaceReference :: _ InterfaceSpec
-
-    ariaInterface <- FS.cachedFetch "./codegen/cache/dom/interface.json" ariaInterfaceReference :: _ InterfaceSpec
 
     svgTag <- FS.cachedFetch "./codegen/cache/svg/tags.json" svgTagReference :: _ TagSpec
     svgInterface <- FS.cachedFetch "./codegen/cache/svg/interface.json" svgInterfaceReference :: _ InterfaceSpec
@@ -78,6 +56,8 @@ generate = do
     svgFilterTag <- FS.cachedFetch "./codegen/cache/svg/filter-tags.json" svgFilterTagReference :: _ TagSpec
     svgFilterInterface <- FS.cachedFetch "./codegen/cache/svg/filter-interface.json" svgFilterInterfaceReference :: _ InterfaceSpec
 
+    svgAnimationTag <- FS.cachedFetch "./codegen/cache/svg/animation-tags.json" svgAnimationTagReference :: _ TagSpec
+    svgAnimationInterface <- FS.cachedFetch "./codegen/cache/svg/animation-interface.json" svgAnimationInterfaceReference :: _ InterfaceSpec
 
     let
         -- | We could parse and union the actual spec but it contains mostly empty garbage and the only thing we are 
@@ -101,17 +81,19 @@ generate = do
 
         tag :: Array Tag
         tag = Array.concat
-            [ htmlTag.elements
-            , svgTag.elements
+            [ svgTag.elements
             , svgFilterTag.elements
+            , svgAnimationTag.elements
+            , htmlTag.elements
             ]
 
         interface :: IDL
         interface =
-            mergeIDL dom
-                $ mergeIDL htmlInterface.idlparsed
+            mergeIDL htmlInterface.idlparsed
+                $ mergeIDL svgInterface.idlparsed
                 $ mergeIDL svgFilterInterface.idlparsed
-                $ mergeIDL svgInterface.idlparsed ariaInterface.idlparsed
+                $ mergeIDL svgAnimationInterface.idlparsed
+                $ mergeIDL dom ariaInterface.idlparsed
 
 
     Indexed.generate keyword.dfns tag interface

@@ -19,7 +19,8 @@ type TagSpec =
 
 type Tag =
     { name :: String
-    , interface :: String
+    , interface :: Maybe String
+    , obsolete :: Maybe Boolean
     }
 
 

@@ -3,8 +3,8 @@ module DOM.Indexed.Self where
 import Prelude
 import Prim hiding (Type)
 
-import DOM.Indexed.Common (declHandler, nominal)
-import DOM.Indexed.Props (typeEvented)
+import DOM.Common (typeAttributed, typeEvented)
+import DOM.Indexed.Common (declHandler, nominal, typeIndexedAt)
 import Data.Array.NonEmpty as NEA
 import Data.Maybe (Maybe(..))
 import Data.Set (Set)
@@ -58,7 +58,7 @@ generates es =
             $ typeForall [ typeVar "name", typeVar "e", typeVar "r" ]
             $ typeConstrained [ typeApp ( typeCtor "IsSelf" ) [ typeVar "e" , typeVar "name"  ] ]
             $ typeArrow [ typeApp ( typeCtor "Event" ) [ selfHandler $ typeVar "e" ] ]
-            $ typeEvented nominal $ typeApp ( typeCtor "Proxy" ) [ typeVar "name" ]
+            $ typeEvented $ typeAttributed $ typeIndexedAt nominal $ typeApp ( typeCtor "Proxy" ) [ typeVar "name" ]
         , declHandler "self" selfKey $
             exprOp ( exprIdent "cb'" )
                 [ binaryOp "<<<" $ exprCtor "Cb"
@@ -69,7 +69,7 @@ generates es =
             $ typeForall [ typeVar "name", typeVar "e", typeVar "r" ]
             $ typeConstrained [ typeApp ( typeCtor "IsSelf" ) [ typeVar "e" , typeVar "name"  ] ]
             $ typeArrow [ selfHandler $ typeVar "e" ]
-            $ typeEvented nominal $ typeApp ( typeCtor "Proxy" ) [ typeVar "name" ]
+            $ typeEvented $ typeAttributed $ typeIndexedAt nominal $ typeApp ( typeCtor "Proxy" ) [ typeVar "name" ]
         , declValue "self_" [] $ exprOp ( exprIdent "self" ) [ binaryOp "<<<" $ exprIdent "Applicative.pure" ]  
         ]
         $ flip map ( Set.toUnfoldable es ) \e ->
