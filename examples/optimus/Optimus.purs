@@ -1,6 +1,9 @@
 -- @inline Data.Filterable.filterableArray(..).partitionMap always
 -- @inline Data.List.fromFoldable always
 -- @inline Deku.Core.resolveNut always
+-- @inline Deku.Control.switcher always
+-- @inline Deku.Core.dynify always
+-- @inline Deku.Core.dyn always
 -- @inline Deku.Control.foldlArray always
 -- @inline Deku.Control.foldlArray2 always
 -- @inline Deku.Control.elementify3 always
@@ -29,21 +32,21 @@ import Deku.Toplevel (runInBody)
 import Effect (Effect)
 import FRP.Event (create)
 
--- main1 :: Effect Unit
--- main1 = do
---   runInBody do
---     D.div [ klass_ "green-text" ] [ D.ul_ [ D.li__ "hello", D.li__ "world" ] ]
+main1 :: Effect Unit
+main1 = do
+  runInBody do
+    D.div [ klass_ "green-text" ] [ D.ul_ [ D.li__ "hello", D.li__ "world" ] ]
 
--- main2 :: Effect Unit
--- main2 = do
---   { event } <- create
---   runInBody do
---     D.div [ klass_ "white-text" ]
---       [ D.ul_
---           [ D.li__ "test.no.2"
---           , D.li [ klass event ] [ text_ "works" ]
---           ]
---       ]
+main2 :: Effect Unit
+main2 = do
+  { event } <- create
+  runInBody do
+    D.div [ klass_ "white-text" ]
+      [ D.ul_
+          [ D.li__ "test.no.2"
+          , D.li [ klass event ] [ text_ "works" ]
+          ]
+      ]
 
 main3 :: Effect Unit
 main3 = runInBody do
@@ -57,24 +60,18 @@ main3 = runInBody do
       , D.ul_ [ D.li__ "hello" ]
       , D.ul_ [ D.li__ "hello" ]
       ]
-  -- craaaash
-  -- d $ d $ d $ d $ d $ text_ "world"
-  -- craaaash
-  -- d $ d $ d $ d $ text_ "world"
-  -- fails to inline
-  -- d $ d $ d $ text_ "world"
-  d $ d $ text_ "world"
+  d $ d $ d $ text_ "world"
 
--- main4 :: Effect Unit
--- main4 = do
---   { event } <- create
---   runInBody do
---     D.div [ klass_ "white-text" ]
---       [ D.ul_
---           [ D.li__ "test.no.2"
---           , event <#~> case _ of
---               "foo" -> D.p_ [ D.div__ "pThenDiv" ]
---               _ -> D.div_ [ D.p__ "divThenP" ]
---           , D.li [ klass event ] [ text_ "works" ]
---           ]
---       ]
+main4 :: Effect Unit
+main4 = do
+  { event } <- create
+  runInBody do
+    D.div [ klass_ "white-text" ]
+      [ D.ul_
+          [ D.li__ "test.no.2"
+          , event <#~> case _ of
+              "foo" -> D.p_ [ D.div__ "pThenDiv" ]
+              _ -> D.div_ [ D.p__ "divThenP" ]
+          , D.li [ klass event ] [ text_ "works" ]
+          ]
+      ]

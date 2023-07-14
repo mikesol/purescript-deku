@@ -23,6 +23,7 @@ module Deku.Core
   , fixed
   , envy
   , unsafeSetPos
+  , dynify
   , AttributeParent
   , DOMInterpret(..)
   , DeleteFromCache
