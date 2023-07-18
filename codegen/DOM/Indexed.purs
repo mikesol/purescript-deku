@@ -70,6 +70,8 @@ generate keywordSpec tagSpec ifSpec = do
         attributes =
             Props.coalesceAttributes keywords interfaces
 
+    FS.dump "dump.json" $ crawlInterfaces ifSpec ( Set.singleton "GlobalEventHandlers" ) ( Set.singleton "GlobalEventHandlers" )
+
     FS.createDir "lib/deku-dom-indexed/Deku/DOM/Indexed"
 
     ExceptT $ attempt

@@ -3,7 +3,9 @@ module FS where
 import Prelude
 
 import Control.Monad.Except (ExceptT(..), except, withExceptT)
+import Data.Argonaut.Core as Json
 import Data.Argonaut.Decode (class DecodeJson, JsonDecodeError, decodeJson, parseJson, printJsonDecodeError)
+import Data.Argonaut.Encode (class EncodeJson, encodeJson)
 import Data.Array as Array
 import Data.Either (Either(..))
 import Data.Foldable (for_)
@@ -51,3 +53,8 @@ createDir dirs = do
 
             _ ->
                 pure unit
+
+dump :: forall a . EncodeJson a => String -> a -> ExceptT Error Aff Unit
+dump file content = do
+    let txt = Json.stringifyWithIndent 4 $ encodeJson content
+    ExceptT $ attempt $ writeTextFile UTF8 file txt

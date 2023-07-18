@@ -5,7 +5,10 @@ import Prelude
 import Data.Argonaut.Core (isArray, isObject)
 import Data.Argonaut.Decode (class DecodeJson, JsonDecodeError(..), decodeJson)
 import Data.Argonaut.Decode.Decoders (decodeJObject)
+import Data.Argonaut.Encode (class EncodeJson)
+import Data.Argonaut.Encode.Generic (genericEncodeJson)
 import Data.Either (Either(..), note)
+import Data.Generic.Rep (class Generic)
 import Data.Maybe (Maybe)
 import Foreign.Object as Foreign
 
@@ -53,13 +56,15 @@ mergeIDL { idlNames : nl, idlExtendedNames : enl } { idlNames : nr, idlExtendedN
 
 data Member 
     = Constructor
-    | Operation Attribute
+    | Operation { name :: String }
     | Attribute Attribute
     | Const
     | Field { name :: String }
+    | Iterable
 
 derive instance Eq Member
 derive instance Ord Member
+derive instance Generic Member _
 instance DecodeJson Member where
     decodeJson json = do
         member <- decodeJObject json
@@ -80,8 +85,17 @@ instance DecodeJson Member where
             "field" ->
                 Field <$> decodeJson json
 
+            "iterable" ->
+                pure Iterable
+
             _ ->
                 Left $ UnexpectedValue json
+
+instance EncodeJson Member where
+    encodeJson = genericEncodeJson
+
+
+
 
 data Mixin 
     = Includes 
@@ -97,6 +111,7 @@ data Mixin
 
 derive instance Eq Mixin
 derive instance Ord Mixin
+derive instance Generic Mixin _
 instance DecodeJson Mixin where
     decodeJson json = do
         member <- decodeJObject json
@@ -113,7 +128,8 @@ instance DecodeJson Mixin where
 
             _ ->
                 Left $ UnexpectedValue json
-
+instance EncodeJson Mixin where
+    encodeJson = genericEncodeJson
 
 type Attribute = 
     { name :: String
@@ -127,6 +143,7 @@ data IDLType
     | Primitive String
 derive instance Eq IDLType
 derive instance Ord IDLType
+derive instance Generic IDLType _
 instance DecodeJson IDLType where
     decodeJson json = 
         if isObject json then
@@ -137,6 +154,8 @@ instance DecodeJson IDLType where
 
         else
             Primitive <$> decodeJson json
+instance EncodeJson IDLType where
+    encodeJson a = genericEncodeJson a
 
 type IDLDescriptor =
     { nullable :: Boolean

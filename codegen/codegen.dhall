@@ -14,6 +14,7 @@
     , "node-path"
     , "language-cst-parser"
     , "argonaut-core"
+    , "argonaut-generic"
     , "either"
     , "foldable-traversable"
     , "maybe"

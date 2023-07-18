@@ -28,7 +28,7 @@ generate keywords =
     $ append 
         [ declNewtype "Keyword" [ typeVarKinded "v" $ typeCtor "Symbol" ] "Keyword" $ typeCtor "String"
         , declRole "Keyword" [ Phantom ]
-        , declDerive Nothing [] "Newtype.Newtype" [ typeApp ( typeCtor "Keyword" ) [ typeVar "v" ], typeWildcard ]
+        , declDerive Nothing [] "Data.Newtype.Newtype" [ typeApp ( typeCtor "Keyword" ) [ typeVar "v" ], typeWildcard ]
         ]
     $ bind keywords \{ name : srcName, value } -> do
         let name = valueName srcName

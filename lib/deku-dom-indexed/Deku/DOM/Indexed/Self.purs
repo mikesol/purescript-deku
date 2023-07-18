@@ -62,7 +62,7 @@ self
    . IsSelf e name
   => Event (e -> Effect Unit)
   -> Event (Attribute (Indexed (__nominal :: Proxy name | r)))
-self = Functor.map $
+self = Functor.map
   (unsafeAttribute <<< { key: "@self@", value: _ } <<< (cb' <<< Cb <<< unsafeCoerce))
 
 self_

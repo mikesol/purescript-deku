@@ -2,7 +2,6 @@ module Deku.DOM.Indexed where
 
 import Control.Applicative (pure) as Applicative
 import Control.Category ((<<<))
-import Data.Function (($))
 import Data.Functor (map) as Functor
 import Deku.Attribute (Attribute, AttributeValue, unsafeAttribute)
 import Deku.Control (elementify2)
@@ -14,7 +13,7 @@ import Data.Show as Data.Show
 import Data.Unit as Data.Unit
 import Deku.Attribute as Deku.Attribute
 import Effect as Effect
-import Web.DOM as Web.DOM
+import Web.Event.Internal.Types as Web.Event.Internal.Types
 
 data Indexed (r :: Row Type)
 
@@ -65,7 +64,15 @@ type ARIAMixin (r :: Row Type) =
   | r
   )
 
-type Element (r :: Row Type) = (__nominal :: Proxy "Element" | ARIAMixin (ARIAMixin r))
+type ChildNode (r :: Row Type) = (__nominal :: Proxy "ChildNode" | r)
+type Element (r :: Row Type) =
+  ( __nominal :: Proxy "Element"
+  , id :: String
+  , className :: String
+  , slot :: String
+  | Node (ARIAMixin (Slottable (ChildNode (NonDocumentTypeChildNode (ParentNode r)))))
+  )
+
 type ElementContentEditable (r :: Row Type) =
   ( __nominal :: Proxy "ElementContentEditable"
   , contentEditable :: String
@@ -74,87 +81,104 @@ type ElementContentEditable (r :: Row Type) =
   | r
   )
 
+type EventTarget (r :: Row Type) = (__nominal :: Proxy "EventTarget" | r)
 type GlobalEventHandlers (r :: Row Type) =
   ( __nominal :: Proxy "GlobalEventHandlers"
-  , onabort :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit
-  , onauxclick :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit
-  , onbeforeinput :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit
-  , onbeforematch :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit
-  , onbeforetoggle :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit
-  , onblur :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit
-  , oncancel :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit
-  , oncanplay :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit
-  , oncanplaythrough :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit
-  , onchange :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit
-  , onclick :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit
-  , onclose :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit
-  , oncontextlost :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit
-  , oncontextmenu :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit
-  , oncontextrestored :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit
-  , oncopy :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit
-  , oncuechange :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit
-  , oncut :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit
-  , ondblclick :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit
-  , ondrag :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit
-  , ondragend :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit
-  , ondragenter :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit
-  , ondragleave :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit
-  , ondragover :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit
-  , ondragstart :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit
-  , ondrop :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit
-  , ondurationchange :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit
-  , onemptied :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit
-  , onended :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit
-  , onfocus :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit
-  , onformdata :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit
-  , oninput :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit
-  , oninvalid :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit
-  , onkeydown :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit
-  , onkeypress :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit
-  , onkeyup :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit
-  , onload :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit
-  , onloadeddata :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit
-  , onloadedmetadata :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit
-  , onloadstart :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit
-  , onmousedown :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit
-  , onmouseenter :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit
-  , onmouseleave :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit
-  , onmousemove :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit
-  , onmouseout :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit
-  , onmouseover :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit
-  , onmouseup :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit
-  , onpaste :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit
-  , onpause :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit
-  , onplay :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit
-  , onplaying :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit
-  , onprogress :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit
-  , onratechange :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit
-  , onreset :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit
-  , onresize :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit
-  , onscroll :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit
-  , onscrollend :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit
-  , onsecuritypolicyviolation :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit
-  , onseeked :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit
-  , onseeking :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit
-  , onselect :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit
-  , onslotchange :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit
-  , onstalled :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit
-  , onsubmit :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit
-  , onsuspend :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit
-  , ontimeupdate :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit
-  , ontoggle :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit
-  , onvolumechange :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit
-  , onwaiting :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit
-  , onwebkitanimationend :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit
-  , onwebkitanimationiteration :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit
-  , onwebkitanimationstart :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit
-  , onwebkittransitionend :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit
-  , onwheel :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit
+  , onpointerover :: Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit
+  , onpointerenter :: Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit
+  , onpointerdown :: Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit
+  , onpointermove :: Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit
+  , onpointerrawupdate :: Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit
+  , onpointerup :: Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit
+  , onpointercancel :: Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit
+  , onpointerout :: Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit
+  , onpointerleave :: Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit
+  , ongotpointercapture :: Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit
+  , onlostpointercapture :: Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit
+  , onabort :: Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit
+  , onauxclick :: Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit
+  , onbeforeinput :: Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit
+  , onbeforematch :: Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit
+  , onbeforetoggle :: Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit
+  , onblur :: Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit
+  , oncancel :: Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit
+  , oncanplay :: Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit
+  , oncanplaythrough :: Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit
+  , onchange :: Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit
+  , onclick :: Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit
+  , onclose :: Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit
+  , oncontextlost :: Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit
+  , oncontextmenu :: Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit
+  , oncontextrestored :: Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit
+  , oncopy :: Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit
+  , oncuechange :: Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit
+  , oncut :: Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit
+  , ondblclick :: Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit
+  , ondrag :: Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit
+  , ondragend :: Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit
+  , ondragenter :: Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit
+  , ondragleave :: Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit
+  , ondragover :: Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit
+  , ondragstart :: Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit
+  , ondrop :: Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit
+  , ondurationchange :: Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit
+  , onemptied :: Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit
+  , onended :: Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit
+  , onfocus :: Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit
+  , onformdata :: Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit
+  , oninput :: Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit
+  , oninvalid :: Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit
+  , onkeydown :: Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit
+  , onkeypress :: Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit
+  , onkeyup :: Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit
+  , onload :: Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit
+  , onloadeddata :: Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit
+  , onloadedmetadata :: Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit
+  , onloadstart :: Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit
+  , onmousedown :: Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit
+  , onmouseenter :: Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit
+  , onmouseleave :: Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit
+  , onmousemove :: Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit
+  , onmouseout :: Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit
+  , onmouseover :: Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit
+  , onmouseup :: Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit
+  , onpaste :: Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit
+  , onpause :: Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit
+  , onplay :: Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit
+  , onplaying :: Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit
+  , onprogress :: Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit
+  , onratechange :: Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit
+  , onreset :: Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit
+  , onresize :: Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit
+  , onscroll :: Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit
+  , onscrollend :: Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit
+  , onsecuritypolicyviolation :: Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit
+  , onseeked :: Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit
+  , onseeking :: Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit
+  , onselect :: Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit
+  , onslotchange :: Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit
+  , onstalled :: Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit
+  , onsubmit :: Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit
+  , onsuspend :: Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit
+  , ontimeupdate :: Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit
+  , ontoggle :: Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit
+  , onvolumechange :: Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit
+  , onwaiting :: Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit
+  , onwebkitanimationend :: Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit
+  , onwebkitanimationiteration :: Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit
+  , onwebkitanimationstart :: Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit
+  , onwebkittransitionend :: Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit
+  , onwheel :: Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit
   | r
   )
 
 type HTMLAnchorElement (r :: Row Type) =
   ( __nominal :: Proxy "HTMLAnchorElement"
+  , coords :: String
+  , charset :: String
+  , name :: String
+  , rev :: String
+  , shape :: String
   , target :: String
   , download :: String
   , ping :: String
@@ -168,6 +192,7 @@ type HTMLAnchorElement (r :: Row Type) =
 
 type HTMLAreaElement (r :: Row Type) =
   ( __nominal :: Proxy "HTMLAreaElement"
+  , noHref :: Boolean
   , alt :: String
   , coords :: String
   , shape :: String
@@ -182,12 +207,22 @@ type HTMLAreaElement (r :: Row Type) =
 type HTMLAudioElement (r :: Row Type) =
   (__nominal :: Proxy "HTMLAudioElement" | HTMLMediaElement r)
 
-type HTMLBRElement (r :: Row Type) = (__nominal :: Proxy "HTMLBRElement" | HTMLElement r)
+type HTMLBRElement (r :: Row Type) =
+  (__nominal :: Proxy "HTMLBRElement", clear :: String | HTMLElement r)
+
 type HTMLBaseElement (r :: Row Type) =
   (__nominal :: Proxy "HTMLBaseElement", href :: String, target :: String | HTMLElement r)
 
 type HTMLBodyElement (r :: Row Type) =
-  (__nominal :: Proxy "HTMLBodyElement" | HTMLElement (WindowEventHandlers r))
+  ( __nominal :: Proxy "HTMLBodyElement"
+  , text :: String
+  , link :: String
+  , vLink :: String
+  , aLink :: String
+  , bgColor :: String
+  , background :: String
+  | HTMLElement (WindowEventHandlers r)
+  )
 
 type HTMLButtonElement (r :: Row Type) =
   ( __nominal :: Proxy "HTMLButtonElement"
@@ -206,7 +241,9 @@ type HTMLButtonElement (r :: Row Type) =
 type HTMLCanvasElement (r :: Row Type) =
   (__nominal :: Proxy "HTMLCanvasElement", width :: Int, height :: Int | HTMLElement r)
 
-type HTMLDListElement (r :: Row Type) = (__nominal :: Proxy "HTMLDListElement" | HTMLElement r)
+type HTMLDListElement (r :: Row Type) =
+  (__nominal :: Proxy "HTMLDListElement", compact :: Boolean | HTMLElement r)
+
 type HTMLDataElement (r :: Row Type) =
   (__nominal :: Proxy "HTMLDataElement", value :: String | HTMLElement r)
 
@@ -219,7 +256,9 @@ type HTMLDetailsElement (r :: Row Type) =
 type HTMLDialogElement (r :: Row Type) =
   (__nominal :: Proxy "HTMLDialogElement", open :: Boolean, returnValue :: String | HTMLElement r)
 
-type HTMLDivElement (r :: Row Type) = (__nominal :: Proxy "HTMLDivElement" | HTMLElement r)
+type HTMLDivElement (r :: Row Type) =
+  (__nominal :: Proxy "HTMLDivElement", align :: String | HTMLElement r)
+
 type HTMLElement (r :: Row Type) =
   ( __nominal :: Proxy "HTMLElement"
   , title :: String
@@ -242,6 +281,8 @@ type HTMLElement (r :: Row Type) =
 
 type HTMLEmbedElement (r :: Row Type) =
   ( __nominal :: Proxy "HTMLEmbedElement"
+  , align :: String
+  , name :: String
   , src :: String
   , type :: String
   , width :: String
@@ -267,10 +308,23 @@ type HTMLFormElement (r :: Row Type) =
   | HTMLElement r
   )
 
-type HTMLHRElement (r :: Row Type) = (__nominal :: Proxy "HTMLHRElement" | HTMLElement r)
+type HTMLHRElement (r :: Row Type) =
+  ( __nominal :: Proxy "HTMLHRElement"
+  , align :: String
+  , color :: String
+  , noShade :: Boolean
+  , size :: String
+  , width :: String
+  | HTMLElement r
+  )
+
 type HTMLHeadElement (r :: Row Type) = (__nominal :: Proxy "HTMLHeadElement" | HTMLElement r)
-type HTMLHeadingElement (r :: Row Type) = (__nominal :: Proxy "HTMLHeadingElement" | HTMLElement r)
-type HTMLHtmlElement (r :: Row Type) = (__nominal :: Proxy "HTMLHtmlElement" | HTMLElement r)
+type HTMLHeadingElement (r :: Row Type) =
+  (__nominal :: Proxy "HTMLHeadingElement", align :: String | HTMLElement r)
+
+type HTMLHtmlElement (r :: Row Type) =
+  (__nominal :: Proxy "HTMLHtmlElement", version :: String | HTMLElement r)
+
 type HTMLHyperlinkElementUtils (r :: Row Type) =
   ( __nominal :: Proxy "HTMLHyperlinkElementUtils"
   , href :: String
@@ -288,6 +342,12 @@ type HTMLHyperlinkElementUtils (r :: Row Type) =
 
 type HTMLIFrameElement (r :: Row Type) =
   ( __nominal :: Proxy "HTMLIFrameElement"
+  , align :: String
+  , scrolling :: String
+  , frameBorder :: String
+  , longDesc :: String
+  , marginHeight :: String
+  , marginWidth :: String
   , src :: String
   , srcdoc :: String
   , name :: String
@@ -302,6 +362,13 @@ type HTMLIFrameElement (r :: Row Type) =
 
 type HTMLImageElement (r :: Row Type) =
   ( __nominal :: Proxy "HTMLImageElement"
+  , name :: String
+  , lowsrc :: String
+  , align :: String
+  , hspace :: Int
+  , vspace :: Int
+  , longDesc :: String
+  , border :: String
   , alt :: String
   , src :: String
   , srcset :: String
@@ -320,6 +387,8 @@ type HTMLImageElement (r :: Row Type) =
 
 type HTMLInputElement (r :: Row Type) =
   ( __nominal :: Proxy "HTMLInputElement"
+  , align :: String
+  , useMap :: String
   , accept :: String
   , alt :: String
   , autocomplete :: String
@@ -359,14 +428,19 @@ type HTMLInputElement (r :: Row Type) =
   )
 
 type HTMLLIElement (r :: Row Type) =
-  (__nominal :: Proxy "HTMLLIElement", value :: Int | HTMLElement r)
+  (__nominal :: Proxy "HTMLLIElement", type :: String, value :: Int | HTMLElement r)
 
 type HTMLLabelElement (r :: Row Type) =
   (__nominal :: Proxy "HTMLLabelElement", htmlFor :: String | HTMLElement r)
 
-type HTMLLegendElement (r :: Row Type) = (__nominal :: Proxy "HTMLLegendElement" | HTMLElement r)
+type HTMLLegendElement (r :: Row Type) =
+  (__nominal :: Proxy "HTMLLegendElement", align :: String | HTMLElement r)
+
 type HTMLLinkElement (r :: Row Type) =
   ( __nominal :: Proxy "HTMLLinkElement"
+  , charset :: String
+  , rev :: String
+  , target :: String
   , href :: String
   , crossOrigin :: String
   , rel :: String
@@ -404,9 +478,12 @@ type HTMLMediaElement (r :: Row Type) =
   | HTMLElement r
   )
 
-type HTMLMenuElement (r :: Row Type) = (__nominal :: Proxy "HTMLMenuElement" | HTMLElement r)
+type HTMLMenuElement (r :: Row Type) =
+  (__nominal :: Proxy "HTMLMenuElement", compact :: Boolean | HTMLElement r)
+
 type HTMLMetaElement (r :: Row Type) =
   ( __nominal :: Proxy "HTMLMetaElement"
+  , scheme :: String
   , name :: String
   , httpEquiv :: String
   , content :: String
@@ -430,6 +507,7 @@ type HTMLModElement (r :: Row Type) =
 
 type HTMLOListElement (r :: Row Type) =
   ( __nominal :: Proxy "HTMLOListElement"
+  , compact :: Boolean
   , reversed :: Boolean
   , start :: Int
   , type :: String
@@ -438,6 +516,17 @@ type HTMLOListElement (r :: Row Type) =
 
 type HTMLObjectElement (r :: Row Type) =
   ( __nominal :: Proxy "HTMLObjectElement"
+  , align :: String
+  , archive :: String
+  , code :: String
+  , declare :: Boolean
+  , hspace :: Int
+  , standby :: String
+  , vspace :: Int
+  , codeBase :: String
+  , codeType :: String
+  , useMap :: String
+  , border :: String
   , data :: String
   , type :: String
   , name :: String
@@ -477,10 +566,12 @@ type HTMLOutputElement (r :: Row Type) =
   )
 
 type HTMLParagraphElement (r :: Row Type) =
-  (__nominal :: Proxy "HTMLParagraphElement" | HTMLElement r)
+  (__nominal :: Proxy "HTMLParagraphElement", align :: String | HTMLElement r)
 
 type HTMLPictureElement (r :: Row Type) = (__nominal :: Proxy "HTMLPictureElement" | HTMLElement r)
-type HTMLPreElement (r :: Row Type) = (__nominal :: Proxy "HTMLPreElement" | HTMLElement r)
+type HTMLPreElement (r :: Row Type) =
+  (__nominal :: Proxy "HTMLPreElement", width :: Int | HTMLElement r)
+
 type HTMLProgressElement (r :: Row Type) =
   (__nominal :: Proxy "HTMLProgressElement", value :: Number, max :: Number | HTMLElement r)
 
@@ -489,6 +580,9 @@ type HTMLQuoteElement (r :: Row Type) =
 
 type HTMLScriptElement (r :: Row Type) =
   ( __nominal :: Proxy "HTMLScriptElement"
+  , charset :: String
+  , event :: String
+  , htmlFor :: String
   , src :: String
   , type :: String
   , noModule :: Boolean
@@ -533,13 +627,27 @@ type HTMLSourceElement (r :: Row Type) =
 
 type HTMLSpanElement (r :: Row Type) = (__nominal :: Proxy "HTMLSpanElement" | HTMLElement r)
 type HTMLStyleElement (r :: Row Type) =
-  (__nominal :: Proxy "HTMLStyleElement", disabled :: Boolean, media :: String | HTMLElement r)
+  ( __nominal :: Proxy "HTMLStyleElement"
+  , type :: String
+  , disabled :: Boolean
+  , media :: String
+  | HTMLElement r
+  )
 
 type HTMLTableCaptionElement (r :: Row Type) =
-  (__nominal :: Proxy "HTMLTableCaptionElement" | HTMLElement r)
+  (__nominal :: Proxy "HTMLTableCaptionElement", align :: String | HTMLElement r)
 
 type HTMLTableCellElement (r :: Row Type) =
   ( __nominal :: Proxy "HTMLTableCellElement"
+  , align :: String
+  , axis :: String
+  , height :: String
+  , width :: String
+  , ch :: String
+  , chOff :: String
+  , noWrap :: Boolean
+  , vAlign :: String
+  , bgColor :: String
   , colSpan :: Int
   , rowSpan :: Int
   , headers :: String
@@ -549,14 +657,48 @@ type HTMLTableCellElement (r :: Row Type) =
   )
 
 type HTMLTableColElement (r :: Row Type) =
-  (__nominal :: Proxy "HTMLTableColElement", span :: Int | HTMLElement r)
+  ( __nominal :: Proxy "HTMLTableColElement"
+  , align :: String
+  , ch :: String
+  , chOff :: String
+  , vAlign :: String
+  , width :: String
+  , span :: Int
+  | HTMLElement r
+  )
 
-type HTMLTableElement (r :: Row Type) = (__nominal :: Proxy "HTMLTableElement" | HTMLElement r)
+type HTMLTableElement (r :: Row Type) =
+  ( __nominal :: Proxy "HTMLTableElement"
+  , align :: String
+  , border :: String
+  , frame :: String
+  , rules :: String
+  , summary :: String
+  , width :: String
+  , bgColor :: String
+  , cellPadding :: String
+  , cellSpacing :: String
+  | HTMLElement r
+  )
+
 type HTMLTableRowElement (r :: Row Type) =
-  (__nominal :: Proxy "HTMLTableRowElement" | HTMLElement r)
+  ( __nominal :: Proxy "HTMLTableRowElement"
+  , align :: String
+  , ch :: String
+  , chOff :: String
+  , vAlign :: String
+  , bgColor :: String
+  | HTMLElement r
+  )
 
 type HTMLTableSectionElement (r :: Row Type) =
-  (__nominal :: Proxy "HTMLTableSectionElement" | HTMLElement r)
+  ( __nominal :: Proxy "HTMLTableSectionElement"
+  , align :: String
+  , ch :: String
+  , chOff :: String
+  , vAlign :: String
+  | HTMLElement r
+  )
 
 type HTMLTemplateElement (r :: Row Type) =
   (__nominal :: Proxy "HTMLTemplateElement" | HTMLElement r)
@@ -599,7 +741,9 @@ type HTMLTrackElement (r :: Row Type) =
   | HTMLElement r
   )
 
-type HTMLUListElement (r :: Row Type) = (__nominal :: Proxy "HTMLUListElement" | HTMLElement r)
+type HTMLUListElement (r :: Row Type) =
+  (__nominal :: Proxy "HTMLUListElement", compact :: Boolean, type :: String | HTMLElement r)
+
 type HTMLVideoElement (r :: Row Type) =
   ( __nominal :: Proxy "HTMLVideoElement"
   , width :: Int
@@ -609,6 +753,11 @@ type HTMLVideoElement (r :: Row Type) =
   | HTMLMediaElement r
   )
 
+type Node (r :: Row Type) =
+  (__nominal :: Proxy "Node", nodeValue :: String, textContent :: String | EventTarget r)
+
+type NonDocumentTypeChildNode (r :: Row Type) = (__nominal :: Proxy "NonDocumentTypeChildNode" | r)
+type ParentNode (r :: Row Type) = (__nominal :: Proxy "ParentNode" | r)
 type PopoverInvokerElement (r :: Row Type) =
   (__nominal :: Proxy "PopoverInvokerElement", popoverTargetAction :: String | r)
 
@@ -624,9 +773,9 @@ type SVGAnimateTransformElement (r :: Row Type) =
 type SVGAnimatedPoints (r :: Row Type) = (__nominal :: Proxy "SVGAnimatedPoints" | r)
 type SVGAnimationElement (r :: Row Type) =
   ( __nominal :: Proxy "SVGAnimationElement"
-  , onbegin :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit
-  , onend :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit
-  , onrepeat :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit
+  , onbegin :: Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit
+  , onend :: Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit
+  , onrepeat :: Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit
   | SVGElement (SVGTests r)
   )
 
@@ -831,23 +980,24 @@ type SVGUseElement (r :: Row Type) =
 type SVGViewElement (r :: Row Type) =
   (__nominal :: Proxy "SVGViewElement" | SVGElement (SVGFitToViewBox r))
 
+type Slottable (r :: Row Type) = (__nominal :: Proxy "Slottable" | r)
 type WindowEventHandlers (r :: Row Type) =
   ( __nominal :: Proxy "WindowEventHandlers"
-  , onafterprint :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit
-  , onbeforeprint :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit
-  , onhashchange :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit
-  , onlanguagechange :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit
-  , onmessage :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit
-  , onmessageerror :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit
-  , onoffline :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit
-  , ononline :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit
-  , onpagehide :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit
-  , onpageshow :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit
-  , onpopstate :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit
-  , onrejectionhandled :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit
-  , onstorage :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit
-  , onunhandledrejection :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit
-  , onunload :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit
+  , onafterprint :: Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit
+  , onbeforeprint :: Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit
+  , onhashchange :: Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit
+  , onlanguagechange :: Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit
+  , onmessage :: Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit
+  , onmessageerror :: Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit
+  , onoffline :: Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit
+  , ononline :: Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit
+  , onpagehide :: Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit
+  , onpageshow :: Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit
+  , onpopstate :: Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit
+  , onrejectionhandled :: Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit
+  , onstorage :: Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit
+  , onunhandledrejection :: Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit
+  , onunload :: Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit
   | r
   )
 
@@ -1882,18 +2032,17 @@ class IsCrossorigin (v :: Type) (a :: Type) | v -> a where
   isCrossorigin :: v -> AttributeValue
 
 instance IsCrossorigin (Keyword "use-credentials") String where
-  isCrossorigin = prop' <<< Newtype.unwrap
+  isCrossorigin = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
 instance IsCrossorigin (Keyword "anonymous") String where
-  isCrossorigin = prop' <<< Newtype.unwrap
+  isCrossorigin = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
 _crossorigin
   :: forall r v a
    . IsCrossorigin v a
   => Event v
   -> Event (Attribute (Indexed (crossorigin :: a | r)))
-_crossorigin = Functor.map $
-  (unsafeAttribute <<< { key: "crossorigin", value: _ } <<< isCrossorigin)
+_crossorigin = Functor.map (unsafeAttribute <<< { key: "crossorigin", value: _ } <<< isCrossorigin)
 
 _crossorigin_
   :: forall r v a. IsCrossorigin v a => v -> Event (Attribute (Indexed (crossorigin :: a | r)))
@@ -1903,17 +2052,17 @@ class IsLoading (v :: Type) (a :: Type) | v -> a where
   isLoading :: v -> AttributeValue
 
 instance IsLoading String String where
-  isLoading = prop'
+  isLoading = Deku.Attribute.prop'
 
 instance IsLoading (Keyword "eager") String where
-  isLoading = prop' <<< Newtype.unwrap
+  isLoading = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
 instance IsLoading (Keyword "lazy") String where
-  isLoading = prop' <<< Newtype.unwrap
+  isLoading = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
 _loading
   :: forall r v a. IsLoading v a => Event v -> Event (Attribute (Indexed (loading :: a | r)))
-_loading = Functor.map $ (unsafeAttribute <<< { key: "loading", value: _ } <<< isLoading)
+_loading = Functor.map (unsafeAttribute <<< { key: "loading", value: _ } <<< isLoading)
 
 _loading_ :: forall r v a. IsLoading v a => v -> Event (Attribute (Indexed (loading :: a | r)))
 _loading_ = _loading <<< Applicative.pure
@@ -1922,20 +2071,20 @@ class IsFetchpriority (v :: Type) (a :: Type) | v -> a where
   isFetchpriority :: v -> AttributeValue
 
 instance IsFetchpriority (Keyword "auto") String where
-  isFetchpriority = prop' <<< Newtype.unwrap
+  isFetchpriority = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
 instance IsFetchpriority (Keyword "low") String where
-  isFetchpriority = prop' <<< Newtype.unwrap
+  isFetchpriority = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
 instance IsFetchpriority (Keyword "high") String where
-  isFetchpriority = prop' <<< Newtype.unwrap
+  isFetchpriority = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
 _fetchpriority
   :: forall r v a
    . IsFetchpriority v a
   => Event v
   -> Event (Attribute (Indexed (fetchpriority :: a | r)))
-_fetchpriority = Functor.map $
+_fetchpriority = Functor.map
   (unsafeAttribute <<< { key: "fetchpriority", value: _ } <<< isFetchpriority)
 
 _fetchpriority_
@@ -1946,19 +2095,19 @@ class IsDir (v :: Type) (a :: Type) | v -> a where
   isDir :: v -> AttributeValue
 
 instance IsDir String String where
-  isDir = prop'
+  isDir = Deku.Attribute.prop'
 
 instance IsDir (Keyword "auto") String where
-  isDir = prop' <<< Newtype.unwrap
+  isDir = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
 instance IsDir (Keyword "rtl") String where
-  isDir = prop' <<< Newtype.unwrap
+  isDir = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
 instance IsDir (Keyword "ltr") String where
-  isDir = prop' <<< Newtype.unwrap
+  isDir = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
 _dir :: forall r v a. IsDir v a => Event v -> Event (Attribute (Indexed (dir :: a | r)))
-_dir = Functor.map $ (unsafeAttribute <<< { key: "dir", value: _ } <<< isDir)
+_dir = Functor.map (unsafeAttribute <<< { key: "dir", value: _ } <<< isDir)
 
 _dir_ :: forall r v a. IsDir v a => v -> Event (Attribute (Indexed (dir :: a | r)))
 _dir_ = _dir <<< Applicative.pure
@@ -1967,34 +2116,34 @@ class IsName (v :: Type) (a :: Type) | v -> a where
   isName :: v -> AttributeValue
 
 instance IsName String String where
-  isName = prop'
+  isName = Deku.Attribute.prop'
 
 instance IsName (Keyword "color-scheme") String where
-  isName = prop' <<< Newtype.unwrap
+  isName = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
 instance IsName (Keyword "theme-color") String where
-  isName = prop' <<< Newtype.unwrap
+  isName = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
 instance IsName (Keyword "referrer") String where
-  isName = prop' <<< Newtype.unwrap
+  isName = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
 instance IsName (Keyword "keywords") String where
-  isName = prop' <<< Newtype.unwrap
+  isName = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
 instance IsName (Keyword "generator") String where
-  isName = prop' <<< Newtype.unwrap
+  isName = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
 instance IsName (Keyword "description") String where
-  isName = prop' <<< Newtype.unwrap
+  isName = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
 instance IsName (Keyword "author") String where
-  isName = prop' <<< Newtype.unwrap
+  isName = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
 instance IsName (Keyword "application-name") String where
-  isName = prop' <<< Newtype.unwrap
+  isName = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
 _name :: forall r v a. IsName v a => Event v -> Event (Attribute (Indexed (name :: a | r)))
-_name = Functor.map $ (unsafeAttribute <<< { key: "name", value: _ } <<< isName)
+_name = Functor.map (unsafeAttribute <<< { key: "name", value: _ } <<< isName)
 
 _name_ :: forall r v a. IsName v a => v -> Event (Attribute (Indexed (name :: a | r)))
 _name_ = _name <<< Applicative.pure
@@ -2003,32 +2152,32 @@ class IsHttpEquiv (v :: Type) (a :: Type) | v -> a where
   isHttpEquiv :: v -> AttributeValue
 
 instance IsHttpEquiv String String where
-  isHttpEquiv = prop'
+  isHttpEquiv = Deku.Attribute.prop'
 
 instance IsHttpEquiv (Keyword "content-security-policy") String where
-  isHttpEquiv = prop' <<< Newtype.unwrap
+  isHttpEquiv = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
 instance IsHttpEquiv (Keyword "x-ua-compatible") String where
-  isHttpEquiv = prop' <<< Newtype.unwrap
+  isHttpEquiv = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
 instance IsHttpEquiv (Keyword "set-cookie") String where
-  isHttpEquiv = prop' <<< Newtype.unwrap
+  isHttpEquiv = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
 instance IsHttpEquiv (Keyword "refresh") String where
-  isHttpEquiv = prop' <<< Newtype.unwrap
+  isHttpEquiv = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
 instance IsHttpEquiv (Keyword "default-style") String where
-  isHttpEquiv = prop' <<< Newtype.unwrap
+  isHttpEquiv = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
 instance IsHttpEquiv (Keyword "content-type") String where
-  isHttpEquiv = prop' <<< Newtype.unwrap
+  isHttpEquiv = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
 instance IsHttpEquiv (Keyword "content-language") String where
-  isHttpEquiv = prop' <<< Newtype.unwrap
+  isHttpEquiv = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
 _httpEquiv
   :: forall r v a. IsHttpEquiv v a => Event v -> Event (Attribute (Indexed (httpEquiv :: a | r)))
-_httpEquiv = Functor.map $ (unsafeAttribute <<< { key: "httpEquiv", value: _ } <<< isHttpEquiv)
+_httpEquiv = Functor.map (unsafeAttribute <<< { key: "httpEquiv", value: _ } <<< isHttpEquiv)
 
 _httpEquiv_
   :: forall r v a. IsHttpEquiv v a => v -> Event (Attribute (Indexed (httpEquiv :: a | r)))
@@ -2038,175 +2187,175 @@ class IsXtype (v :: Type) (a :: Type) | v -> a where
   isXtype :: v -> AttributeValue
 
 instance IsXtype String String where
-  isXtype = prop'
+  isXtype = Deku.Attribute.prop'
 
 instance IsXtype (Keyword "button") String where
-  isXtype = prop' <<< Newtype.unwrap
+  isXtype = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
 instance IsXtype (Keyword "reset") String where
-  isXtype = prop' <<< Newtype.unwrap
+  isXtype = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
 instance IsXtype (Keyword "submit") String where
-  isXtype = prop' <<< Newtype.unwrap
+  isXtype = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
 instance IsXtype (Keyword "image") String where
-  isXtype = prop' <<< Newtype.unwrap
+  isXtype = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
 instance IsXtype (Keyword "file") String where
-  isXtype = prop' <<< Newtype.unwrap
+  isXtype = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
 instance IsXtype (Keyword "radio") String where
-  isXtype = prop' <<< Newtype.unwrap
+  isXtype = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
 instance IsXtype (Keyword "checkbox") String where
-  isXtype = prop' <<< Newtype.unwrap
+  isXtype = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
 instance IsXtype (Keyword "color") String where
-  isXtype = prop' <<< Newtype.unwrap
+  isXtype = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
 instance IsXtype (Keyword "range") String where
-  isXtype = prop' <<< Newtype.unwrap
+  isXtype = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
 instance IsXtype (Keyword "number") String where
-  isXtype = prop' <<< Newtype.unwrap
+  isXtype = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
 instance IsXtype (Keyword "datetime-local") String where
-  isXtype = prop' <<< Newtype.unwrap
+  isXtype = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
 instance IsXtype (Keyword "time") String where
-  isXtype = prop' <<< Newtype.unwrap
+  isXtype = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
 instance IsXtype (Keyword "week") String where
-  isXtype = prop' <<< Newtype.unwrap
+  isXtype = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
 instance IsXtype (Keyword "month") String where
-  isXtype = prop' <<< Newtype.unwrap
+  isXtype = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
 instance IsXtype (Keyword "date") String where
-  isXtype = prop' <<< Newtype.unwrap
+  isXtype = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
 instance IsXtype (Keyword "password") String where
-  isXtype = prop' <<< Newtype.unwrap
+  isXtype = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
 instance IsXtype (Keyword "email") String where
-  isXtype = prop' <<< Newtype.unwrap
+  isXtype = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
 instance IsXtype (Keyword "url") String where
-  isXtype = prop' <<< Newtype.unwrap
+  isXtype = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
 instance IsXtype (Keyword "tel") String where
-  isXtype = prop' <<< Newtype.unwrap
+  isXtype = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
 instance IsXtype (Keyword "search") String where
-  isXtype = prop' <<< Newtype.unwrap
+  isXtype = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
 instance IsXtype (Keyword "text") String where
-  isXtype = prop' <<< Newtype.unwrap
+  isXtype = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
 instance IsXtype (Keyword "hidden") String where
-  isXtype = prop' <<< Newtype.unwrap
+  isXtype = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
 instance IsXtype (Keyword "I") String where
-  isXtype = prop' <<< Newtype.unwrap
+  isXtype = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
 instance IsXtype (Keyword "i") String where
-  isXtype = prop' <<< Newtype.unwrap
+  isXtype = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
 instance IsXtype (Keyword "A") String where
-  isXtype = prop' <<< Newtype.unwrap
+  isXtype = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
 instance IsXtype (Keyword "a") String where
-  isXtype = prop' <<< Newtype.unwrap
+  isXtype = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
 instance IsXtype (Keyword "1") String where
-  isXtype = prop' <<< Newtype.unwrap
+  isXtype = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
-_xtype :: forall r v a. IsXtype v a => Event v -> Event (Attribute (Indexed (xtype :: a | r)))
-_xtype = Functor.map $ (unsafeAttribute <<< { key: "type", value: _ } <<< isXtype)
+_type :: forall r v a. IsXtype v a => Event v -> Event (Attribute (Indexed (xtype :: a | r)))
+_type = Functor.map (unsafeAttribute <<< { key: "type", value: _ } <<< isXtype)
 
-_xtype_ :: forall r v a. IsXtype v a => v -> Event (Attribute (Indexed (xtype :: a | r)))
-_xtype_ = _xtype <<< Applicative.pure
+_type_ :: forall r v a. IsXtype v a => v -> Event (Attribute (Indexed (xtype :: a | r)))
+_type_ = _type <<< Applicative.pure
 
 class IsRel (v :: Type) (a :: Type) | v -> a where
   isRel :: v -> AttributeValue
 
 instance IsRel String String where
-  isRel = prop'
+  isRel = Deku.Attribute.prop'
 
 instance IsRel (Keyword "prev") String where
-  isRel = prop' <<< Newtype.unwrap
+  isRel = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
 instance IsRel (Keyword "next") String where
-  isRel = prop' <<< Newtype.unwrap
+  isRel = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
 instance IsRel (Keyword "tag") String where
-  isRel = prop' <<< Newtype.unwrap
+  isRel = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
 instance IsRel (Keyword "stylesheet") String where
-  isRel = prop' <<< Newtype.unwrap
+  isRel = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
 instance IsRel (Keyword "search") String where
-  isRel = prop' <<< Newtype.unwrap
+  isRel = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
 instance IsRel (Keyword "preload") String where
-  isRel = prop' <<< Newtype.unwrap
+  isRel = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
 instance IsRel (Keyword "prefetch") String where
-  isRel = prop' <<< Newtype.unwrap
+  isRel = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
 instance IsRel (Keyword "preconnect") String where
-  isRel = prop' <<< Newtype.unwrap
+  isRel = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
 instance IsRel (Keyword "pingback") String where
-  isRel = prop' <<< Newtype.unwrap
+  isRel = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
 instance IsRel (Keyword "opener") String where
-  isRel = prop' <<< Newtype.unwrap
+  isRel = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
 instance IsRel (Keyword "noreferrer") String where
-  isRel = prop' <<< Newtype.unwrap
+  isRel = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
 instance IsRel (Keyword "noopener") String where
-  isRel = prop' <<< Newtype.unwrap
+  isRel = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
 instance IsRel (Keyword "nofollow") String where
-  isRel = prop' <<< Newtype.unwrap
+  isRel = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
 instance IsRel (Keyword "modulepreload") String where
-  isRel = prop' <<< Newtype.unwrap
+  isRel = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
 instance IsRel (Keyword "manifest") String where
-  isRel = prop' <<< Newtype.unwrap
+  isRel = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
 instance IsRel (Keyword "license") String where
-  isRel = prop' <<< Newtype.unwrap
+  isRel = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
 instance IsRel (Keyword "icon") String where
-  isRel = prop' <<< Newtype.unwrap
+  isRel = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
 instance IsRel (Keyword "help") String where
-  isRel = prop' <<< Newtype.unwrap
+  isRel = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
 instance IsRel (Keyword "external") String where
-  isRel = prop' <<< Newtype.unwrap
+  isRel = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
 instance IsRel (Keyword "dns-prefetch") String where
-  isRel = prop' <<< Newtype.unwrap
+  isRel = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
 instance IsRel (Keyword "canonical") String where
-  isRel = prop' <<< Newtype.unwrap
+  isRel = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
 instance IsRel (Keyword "bookmark") String where
-  isRel = prop' <<< Newtype.unwrap
+  isRel = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
 instance IsRel (Keyword "author") String where
-  isRel = prop' <<< Newtype.unwrap
+  isRel = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
 instance IsRel (Keyword "alternate") String where
-  isRel = prop' <<< Newtype.unwrap
+  isRel = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
 _rel :: forall r v a. IsRel v a => Event v -> Event (Attribute (Indexed (rel :: a | r)))
-_rel = Functor.map $ (unsafeAttribute <<< { key: "rel", value: _ } <<< isRel)
+_rel = Functor.map (unsafeAttribute <<< { key: "rel", value: _ } <<< isRel)
 
 _rel_ :: forall r v a. IsRel v a => v -> Event (Attribute (Indexed (rel :: a | r)))
 _rel_ = _rel <<< Applicative.pure
@@ -2215,20 +2364,20 @@ class IsDecoding (v :: Type) (a :: Type) | v -> a where
   isDecoding :: v -> AttributeValue
 
 instance IsDecoding String String where
-  isDecoding = prop'
+  isDecoding = Deku.Attribute.prop'
 
 instance IsDecoding (Keyword "auto") String where
-  isDecoding = prop' <<< Newtype.unwrap
+  isDecoding = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
 instance IsDecoding (Keyword "async") String where
-  isDecoding = prop' <<< Newtype.unwrap
+  isDecoding = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
 instance IsDecoding (Keyword "sync") String where
-  isDecoding = prop' <<< Newtype.unwrap
+  isDecoding = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
 _decoding
   :: forall r v a. IsDecoding v a => Event v -> Event (Attribute (Indexed (decoding :: a | r)))
-_decoding = Functor.map $ (unsafeAttribute <<< { key: "decoding", value: _ } <<< isDecoding)
+_decoding = Functor.map (unsafeAttribute <<< { key: "decoding", value: _ } <<< isDecoding)
 
 _decoding_ :: forall r v a. IsDecoding v a => v -> Event (Attribute (Indexed (decoding :: a | r)))
 _decoding_ = _decoding <<< Applicative.pure
@@ -2237,25 +2386,25 @@ class IsKind (v :: Type) (a :: Type) | v -> a where
   isKind :: v -> AttributeValue
 
 instance IsKind String String where
-  isKind = prop'
+  isKind = Deku.Attribute.prop'
 
 instance IsKind (Keyword "metadata") String where
-  isKind = prop' <<< Newtype.unwrap
+  isKind = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
 instance IsKind (Keyword "chapters") String where
-  isKind = prop' <<< Newtype.unwrap
+  isKind = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
 instance IsKind (Keyword "descriptions") String where
-  isKind = prop' <<< Newtype.unwrap
+  isKind = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
 instance IsKind (Keyword "captions") String where
-  isKind = prop' <<< Newtype.unwrap
+  isKind = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
 instance IsKind (Keyword "subtitles") String where
-  isKind = prop' <<< Newtype.unwrap
+  isKind = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
 _kind :: forall r v a. IsKind v a => Event v -> Event (Attribute (Indexed (kind :: a | r)))
-_kind = Functor.map $ (unsafeAttribute <<< { key: "kind", value: _ } <<< isKind)
+_kind = Functor.map (unsafeAttribute <<< { key: "kind", value: _ } <<< isKind)
 
 _kind_ :: forall r v a. IsKind v a => v -> Event (Attribute (Indexed (kind :: a | r)))
 _kind_ = _kind <<< Applicative.pure
@@ -2264,20 +2413,20 @@ class IsPreload (v :: Type) (a :: Type) | v -> a where
   isPreload :: v -> AttributeValue
 
 instance IsPreload String String where
-  isPreload = prop'
+  isPreload = Deku.Attribute.prop'
 
 instance IsPreload (Keyword "auto") String where
-  isPreload = prop' <<< Newtype.unwrap
+  isPreload = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
 instance IsPreload (Keyword "metadata") String where
-  isPreload = prop' <<< Newtype.unwrap
+  isPreload = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
 instance IsPreload (Keyword "none") String where
-  isPreload = prop' <<< Newtype.unwrap
+  isPreload = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
 _preload
   :: forall r v a. IsPreload v a => Event v -> Event (Attribute (Indexed (preload :: a | r)))
-_preload = Functor.map $ (unsafeAttribute <<< { key: "preload", value: _ } <<< isPreload)
+_preload = Functor.map (unsafeAttribute <<< { key: "preload", value: _ } <<< isPreload)
 
 _preload_ :: forall r v a. IsPreload v a => v -> Event (Attribute (Indexed (preload :: a | r)))
 _preload_ = _preload <<< Applicative.pure
@@ -2286,22 +2435,22 @@ class IsShape (v :: Type) (a :: Type) | v -> a where
   isShape :: v -> AttributeValue
 
 instance IsShape String String where
-  isShape = prop'
+  isShape = Deku.Attribute.prop'
 
 instance IsShape (Keyword "rectangle state") String where
-  isShape = prop' <<< Newtype.unwrap
+  isShape = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
 instance IsShape (Keyword "polygon state") String where
-  isShape = prop' <<< Newtype.unwrap
+  isShape = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
 instance IsShape (Keyword "default state") String where
-  isShape = prop' <<< Newtype.unwrap
+  isShape = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
 instance IsShape (Keyword "circle state") String where
-  isShape = prop' <<< Newtype.unwrap
+  isShape = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
 _shape :: forall r v a. IsShape v a => Event v -> Event (Attribute (Indexed (shape :: a | r)))
-_shape = Functor.map $ (unsafeAttribute <<< { key: "shape", value: _ } <<< isShape)
+_shape = Functor.map (unsafeAttribute <<< { key: "shape", value: _ } <<< isShape)
 
 _shape_ :: forall r v a. IsShape v a => v -> Event (Attribute (Indexed (shape :: a | r)))
 _shape_ = _shape <<< Applicative.pure
@@ -2310,25 +2459,25 @@ class IsScope (v :: Type) (a :: Type) | v -> a where
   isScope :: v -> AttributeValue
 
 instance IsScope String String where
-  isScope = prop'
+  isScope = Deku.Attribute.prop'
 
 instance IsScope (Keyword "auto") String where
-  isScope = prop' <<< Newtype.unwrap
+  isScope = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
 instance IsScope (Keyword "colgroup") String where
-  isScope = prop' <<< Newtype.unwrap
+  isScope = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
 instance IsScope (Keyword "rowgroup") String where
-  isScope = prop' <<< Newtype.unwrap
+  isScope = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
 instance IsScope (Keyword "col") String where
-  isScope = prop' <<< Newtype.unwrap
+  isScope = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
 instance IsScope (Keyword "row") String where
-  isScope = prop' <<< Newtype.unwrap
+  isScope = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
 _scope :: forall r v a. IsScope v a => Event v -> Event (Attribute (Indexed (scope :: a | r)))
-_scope = Functor.map $ (unsafeAttribute <<< { key: "scope", value: _ } <<< isScope)
+_scope = Functor.map (unsafeAttribute <<< { key: "scope", value: _ } <<< isScope)
 
 _scope_ :: forall r v a. IsScope v a => v -> Event (Attribute (Indexed (scope :: a | r)))
 _scope_ = _scope <<< Applicative.pure
@@ -2337,16 +2486,16 @@ class IsWrap (v :: Type) (a :: Type) | v -> a where
   isWrap :: v -> AttributeValue
 
 instance IsWrap String String where
-  isWrap = prop'
+  isWrap = Deku.Attribute.prop'
 
 instance IsWrap (Keyword "hard") String where
-  isWrap = prop' <<< Newtype.unwrap
+  isWrap = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
 instance IsWrap (Keyword "soft") String where
-  isWrap = prop' <<< Newtype.unwrap
+  isWrap = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
 _wrap :: forall r v a. IsWrap v a => Event v -> Event (Attribute (Indexed (wrap :: a | r)))
-_wrap = Functor.map $ (unsafeAttribute <<< { key: "wrap", value: _ } <<< isWrap)
+_wrap = Functor.map (unsafeAttribute <<< { key: "wrap", value: _ } <<< isWrap)
 
 _wrap_ :: forall r v a. IsWrap v a => v -> Event (Attribute (Indexed (wrap :: a | r)))
 _wrap_ = _wrap <<< Applicative.pure
@@ -2355,19 +2504,19 @@ class IsMethod (v :: Type) (a :: Type) | v -> a where
   isMethod :: v -> AttributeValue
 
 instance IsMethod String String where
-  isMethod = prop'
+  isMethod = Deku.Attribute.prop'
 
 instance IsMethod (Keyword "dialog") String where
-  isMethod = prop' <<< Newtype.unwrap
+  isMethod = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
 instance IsMethod (Keyword "post") String where
-  isMethod = prop' <<< Newtype.unwrap
+  isMethod = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
 instance IsMethod (Keyword "get") String where
-  isMethod = prop' <<< Newtype.unwrap
+  isMethod = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
 _method :: forall r v a. IsMethod v a => Event v -> Event (Attribute (Indexed (method :: a | r)))
-_method = Functor.map $ (unsafeAttribute <<< { key: "method", value: _ } <<< isMethod)
+_method = Functor.map (unsafeAttribute <<< { key: "method", value: _ } <<< isMethod)
 
 _method_ :: forall r v a. IsMethod v a => v -> Event (Attribute (Indexed (method :: a | r)))
 _method_ = _method <<< Applicative.pure
@@ -2376,20 +2525,20 @@ class IsEnctype (v :: Type) (a :: Type) | v -> a where
   isEnctype :: v -> AttributeValue
 
 instance IsEnctype String String where
-  isEnctype = prop'
+  isEnctype = Deku.Attribute.prop'
 
 instance IsEnctype (Keyword "text/plain") String where
-  isEnctype = prop' <<< Newtype.unwrap
+  isEnctype = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
 instance IsEnctype (Keyword "multipart/form-data") String where
-  isEnctype = prop' <<< Newtype.unwrap
+  isEnctype = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
 instance IsEnctype (Keyword "application/x-www-form-urlencoded") String where
-  isEnctype = prop' <<< Newtype.unwrap
+  isEnctype = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
 _enctype
   :: forall r v a. IsEnctype v a => Event v -> Event (Attribute (Indexed (enctype :: a | r)))
-_enctype = Functor.map $ (unsafeAttribute <<< { key: "enctype", value: _ } <<< isEnctype)
+_enctype = Functor.map (unsafeAttribute <<< { key: "enctype", value: _ } <<< isEnctype)
 
 _enctype_ :: forall r v a. IsEnctype v a => v -> Event (Attribute (Indexed (enctype :: a | r)))
 _enctype_ = _enctype <<< Applicative.pure
@@ -2398,203 +2547,203 @@ class IsAutocomplete (v :: Type) (a :: Type) | v -> a where
   isAutocomplete :: v -> AttributeValue
 
 instance IsAutocomplete String String where
-  isAutocomplete = prop'
+  isAutocomplete = Deku.Attribute.prop'
 
 instance IsAutocomplete (Keyword "impp") String where
-  isAutocomplete = prop' <<< Newtype.unwrap
+  isAutocomplete = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
 instance IsAutocomplete (Keyword "email") String where
-  isAutocomplete = prop' <<< Newtype.unwrap
+  isAutocomplete = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
 instance IsAutocomplete (Keyword "tel-extension") String where
-  isAutocomplete = prop' <<< Newtype.unwrap
+  isAutocomplete = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
 instance IsAutocomplete (Keyword "tel-local-suffix") String where
-  isAutocomplete = prop' <<< Newtype.unwrap
+  isAutocomplete = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
 instance IsAutocomplete (Keyword "tel-local-prefix") String where
-  isAutocomplete = prop' <<< Newtype.unwrap
+  isAutocomplete = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
 instance IsAutocomplete (Keyword "tel-local") String where
-  isAutocomplete = prop' <<< Newtype.unwrap
+  isAutocomplete = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
 instance IsAutocomplete (Keyword "tel-area-code") String where
-  isAutocomplete = prop' <<< Newtype.unwrap
+  isAutocomplete = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
 instance IsAutocomplete (Keyword "tel-national") String where
-  isAutocomplete = prop' <<< Newtype.unwrap
+  isAutocomplete = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
 instance IsAutocomplete (Keyword "tel-country-code") String where
-  isAutocomplete = prop' <<< Newtype.unwrap
+  isAutocomplete = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
 instance IsAutocomplete (Keyword "tel") String where
-  isAutocomplete = prop' <<< Newtype.unwrap
+  isAutocomplete = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
 instance IsAutocomplete (Keyword "photo") String where
-  isAutocomplete = prop' <<< Newtype.unwrap
+  isAutocomplete = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
 instance IsAutocomplete (Keyword "url") String where
-  isAutocomplete = prop' <<< Newtype.unwrap
+  isAutocomplete = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
 instance IsAutocomplete (Keyword "sex") String where
-  isAutocomplete = prop' <<< Newtype.unwrap
+  isAutocomplete = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
 instance IsAutocomplete (Keyword "bday-year") String where
-  isAutocomplete = prop' <<< Newtype.unwrap
+  isAutocomplete = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
 instance IsAutocomplete (Keyword "bday-month") String where
-  isAutocomplete = prop' <<< Newtype.unwrap
+  isAutocomplete = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
 instance IsAutocomplete (Keyword "bday-day") String where
-  isAutocomplete = prop' <<< Newtype.unwrap
+  isAutocomplete = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
 instance IsAutocomplete (Keyword "bday") String where
-  isAutocomplete = prop' <<< Newtype.unwrap
+  isAutocomplete = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
 instance IsAutocomplete (Keyword "language") String where
-  isAutocomplete = prop' <<< Newtype.unwrap
+  isAutocomplete = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
 instance IsAutocomplete (Keyword "transaction-amount") String where
-  isAutocomplete = prop' <<< Newtype.unwrap
+  isAutocomplete = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
 instance IsAutocomplete (Keyword "transaction-currency") String where
-  isAutocomplete = prop' <<< Newtype.unwrap
+  isAutocomplete = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
 instance IsAutocomplete (Keyword "cc-type") String where
-  isAutocomplete = prop' <<< Newtype.unwrap
+  isAutocomplete = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
 instance IsAutocomplete (Keyword "cc-csc") String where
-  isAutocomplete = prop' <<< Newtype.unwrap
+  isAutocomplete = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
 instance IsAutocomplete (Keyword "cc-exp-year") String where
-  isAutocomplete = prop' <<< Newtype.unwrap
+  isAutocomplete = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
 instance IsAutocomplete (Keyword "cc-exp-month") String where
-  isAutocomplete = prop' <<< Newtype.unwrap
+  isAutocomplete = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
 instance IsAutocomplete (Keyword "cc-exp") String where
-  isAutocomplete = prop' <<< Newtype.unwrap
+  isAutocomplete = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
 instance IsAutocomplete (Keyword "cc-number") String where
-  isAutocomplete = prop' <<< Newtype.unwrap
+  isAutocomplete = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
 instance IsAutocomplete (Keyword "cc-family-name") String where
-  isAutocomplete = prop' <<< Newtype.unwrap
+  isAutocomplete = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
 instance IsAutocomplete (Keyword "cc-additional-name") String where
-  isAutocomplete = prop' <<< Newtype.unwrap
+  isAutocomplete = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
 instance IsAutocomplete (Keyword "cc-given-name") String where
-  isAutocomplete = prop' <<< Newtype.unwrap
+  isAutocomplete = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
 instance IsAutocomplete (Keyword "cc-name") String where
-  isAutocomplete = prop' <<< Newtype.unwrap
+  isAutocomplete = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
 instance IsAutocomplete (Keyword "postal-code") String where
-  isAutocomplete = prop' <<< Newtype.unwrap
+  isAutocomplete = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
 instance IsAutocomplete (Keyword "country-name") String where
-  isAutocomplete = prop' <<< Newtype.unwrap
+  isAutocomplete = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
 instance IsAutocomplete (Keyword "country") String where
-  isAutocomplete = prop' <<< Newtype.unwrap
+  isAutocomplete = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
 instance IsAutocomplete (Keyword "address-level1") String where
-  isAutocomplete = prop' <<< Newtype.unwrap
+  isAutocomplete = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
 instance IsAutocomplete (Keyword "address-level2") String where
-  isAutocomplete = prop' <<< Newtype.unwrap
+  isAutocomplete = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
 instance IsAutocomplete (Keyword "address-level3") String where
-  isAutocomplete = prop' <<< Newtype.unwrap
+  isAutocomplete = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
 instance IsAutocomplete (Keyword "address-level4") String where
-  isAutocomplete = prop' <<< Newtype.unwrap
+  isAutocomplete = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
 instance IsAutocomplete (Keyword "address-line3") String where
-  isAutocomplete = prop' <<< Newtype.unwrap
+  isAutocomplete = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
 instance IsAutocomplete (Keyword "address-line2") String where
-  isAutocomplete = prop' <<< Newtype.unwrap
+  isAutocomplete = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
 instance IsAutocomplete (Keyword "address-line1") String where
-  isAutocomplete = prop' <<< Newtype.unwrap
+  isAutocomplete = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
 instance IsAutocomplete (Keyword "street-address") String where
-  isAutocomplete = prop' <<< Newtype.unwrap
+  isAutocomplete = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
 instance IsAutocomplete (Keyword "organization") String where
-  isAutocomplete = prop' <<< Newtype.unwrap
+  isAutocomplete = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
 instance IsAutocomplete (Keyword "one-time-code") String where
-  isAutocomplete = prop' <<< Newtype.unwrap
+  isAutocomplete = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
 instance IsAutocomplete (Keyword "current-password") String where
-  isAutocomplete = prop' <<< Newtype.unwrap
+  isAutocomplete = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
 instance IsAutocomplete (Keyword "new-password") String where
-  isAutocomplete = prop' <<< Newtype.unwrap
+  isAutocomplete = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
 instance IsAutocomplete (Keyword "username") String where
-  isAutocomplete = prop' <<< Newtype.unwrap
+  isAutocomplete = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
 instance IsAutocomplete (Keyword "organization-title") String where
-  isAutocomplete = prop' <<< Newtype.unwrap
+  isAutocomplete = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
 instance IsAutocomplete (Keyword "nickname") String where
-  isAutocomplete = prop' <<< Newtype.unwrap
+  isAutocomplete = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
 instance IsAutocomplete (Keyword "honorific-suffix") String where
-  isAutocomplete = prop' <<< Newtype.unwrap
+  isAutocomplete = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
 instance IsAutocomplete (Keyword "family-name") String where
-  isAutocomplete = prop' <<< Newtype.unwrap
+  isAutocomplete = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
 instance IsAutocomplete (Keyword "additional-name") String where
-  isAutocomplete = prop' <<< Newtype.unwrap
+  isAutocomplete = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
 instance IsAutocomplete (Keyword "given-name") String where
-  isAutocomplete = prop' <<< Newtype.unwrap
+  isAutocomplete = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
 instance IsAutocomplete (Keyword "honorific-prefix") String where
-  isAutocomplete = prop' <<< Newtype.unwrap
+  isAutocomplete = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
 instance IsAutocomplete (Keyword "name") String where
-  isAutocomplete = prop' <<< Newtype.unwrap
+  isAutocomplete = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
 instance IsAutocomplete (Keyword "on") String where
-  isAutocomplete = prop' <<< Newtype.unwrap
+  isAutocomplete = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
 instance IsAutocomplete (Keyword "off") String where
-  isAutocomplete = prop' <<< Newtype.unwrap
+  isAutocomplete = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
 instance IsAutocomplete (Keyword "pager") String where
-  isAutocomplete = prop' <<< Newtype.unwrap
+  isAutocomplete = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
 instance IsAutocomplete (Keyword "fax") String where
-  isAutocomplete = prop' <<< Newtype.unwrap
+  isAutocomplete = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
 instance IsAutocomplete (Keyword "mobile") String where
-  isAutocomplete = prop' <<< Newtype.unwrap
+  isAutocomplete = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
 instance IsAutocomplete (Keyword "work") String where
-  isAutocomplete = prop' <<< Newtype.unwrap
+  isAutocomplete = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
 instance IsAutocomplete (Keyword "home") String where
-  isAutocomplete = prop' <<< Newtype.unwrap
+  isAutocomplete = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
 instance IsAutocomplete (Keyword "billing") String where
-  isAutocomplete = prop' <<< Newtype.unwrap
+  isAutocomplete = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
 instance IsAutocomplete (Keyword "shipping") String where
-  isAutocomplete = prop' <<< Newtype.unwrap
+  isAutocomplete = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
 _autocomplete
   :: forall r v a
    . IsAutocomplete v a
   => Event v
   -> Event (Attribute (Indexed (autocomplete :: a | r)))
-_autocomplete = Functor.map $
+_autocomplete = Functor.map
   (unsafeAttribute <<< { key: "autocomplete", value: _ } <<< isAutocomplete)
 
 _autocomplete_
@@ -2605,13 +2754,13 @@ class IsEntry (v :: Type) (a :: Type) | v -> a where
   isEntry :: v -> AttributeValue
 
 instance IsEntry (Keyword "value") String where
-  isEntry = prop' <<< Newtype.unwrap
+  isEntry = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
 instance IsEntry (Keyword "name") String where
-  isEntry = prop' <<< Newtype.unwrap
+  isEntry = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
 _entry :: forall r v a. IsEntry v a => Event v -> Event (Attribute (Indexed (entry :: a | r)))
-_entry = Functor.map $ (unsafeAttribute <<< { key: "entry", value: _ } <<< isEntry)
+_entry = Functor.map (unsafeAttribute <<< { key: "entry", value: _ } <<< isEntry)
 
 _entry_ :: forall r v a. IsEntry v a => v -> Event (Attribute (Indexed (entry :: a | r)))
 _entry_ = _entry <<< Applicative.pure
@@ -2620,22 +2769,22 @@ class IsHidden (v :: Type) (a :: Type) | v -> a where
   isHidden :: v -> AttributeValue
 
 instance IsHidden Boolean Boolean where
-  isHidden = prop' <<< Show.show
+  isHidden = Deku.Attribute.prop' <<< Data.Show.show
 
 instance IsHidden Number Number where
-  isHidden = prop' <<< Show.show
+  isHidden = Deku.Attribute.prop' <<< Data.Show.show
 
 instance IsHidden String String where
-  isHidden = prop'
+  isHidden = Deku.Attribute.prop'
 
 instance IsHidden (Keyword "hidden") String where
-  isHidden = prop' <<< Newtype.unwrap
+  isHidden = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
 instance IsHidden (Keyword "until-found") String where
-  isHidden = prop' <<< Newtype.unwrap
+  isHidden = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
 _hidden :: forall r v a. IsHidden v a => Event v -> Event (Attribute (Indexed (hidden :: a | r)))
-_hidden = Functor.map $ (unsafeAttribute <<< { key: "hidden", value: _ } <<< isHidden)
+_hidden = Functor.map (unsafeAttribute <<< { key: "hidden", value: _ } <<< isHidden)
 
 _hidden_ :: forall r v a. IsHidden v a => v -> Event (Attribute (Indexed (hidden :: a | r)))
 _hidden_ = _hidden <<< Applicative.pure
@@ -2644,32 +2793,32 @@ class IsAutocapitalize (v :: Type) (a :: Type) | v -> a where
   isAutocapitalize :: v -> AttributeValue
 
 instance IsAutocapitalize String String where
-  isAutocapitalize = prop'
+  isAutocapitalize = Deku.Attribute.prop'
 
 instance IsAutocapitalize (Keyword "characters") String where
-  isAutocapitalize = prop' <<< Newtype.unwrap
+  isAutocapitalize = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
 instance IsAutocapitalize (Keyword "words") String where
-  isAutocapitalize = prop' <<< Newtype.unwrap
+  isAutocapitalize = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
 instance IsAutocapitalize (Keyword "sentences") String where
-  isAutocapitalize = prop' <<< Newtype.unwrap
+  isAutocapitalize = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
 instance IsAutocapitalize (Keyword "on") String where
-  isAutocapitalize = prop' <<< Newtype.unwrap
+  isAutocapitalize = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
 instance IsAutocapitalize (Keyword "none") String where
-  isAutocapitalize = prop' <<< Newtype.unwrap
+  isAutocapitalize = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
 instance IsAutocapitalize (Keyword "off") String where
-  isAutocapitalize = prop' <<< Newtype.unwrap
+  isAutocapitalize = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
 _autocapitalize
   :: forall r v a
    . IsAutocapitalize v a
   => Event v
   -> Event (Attribute (Indexed (autocapitalize :: a | r)))
-_autocapitalize = Functor.map $
+_autocapitalize = Functor.map
   (unsafeAttribute <<< { key: "autocapitalize", value: _ } <<< isAutocapitalize)
 
 _autocapitalize_
@@ -2683,32 +2832,32 @@ class IsInputmode (v :: Type) (a :: Type) | v -> a where
   isInputmode :: v -> AttributeValue
 
 instance IsInputmode (Keyword "search") String where
-  isInputmode = prop' <<< Newtype.unwrap
+  isInputmode = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
 instance IsInputmode (Keyword "decimal") String where
-  isInputmode = prop' <<< Newtype.unwrap
+  isInputmode = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
 instance IsInputmode (Keyword "numeric") String where
-  isInputmode = prop' <<< Newtype.unwrap
+  isInputmode = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
 instance IsInputmode (Keyword "email") String where
-  isInputmode = prop' <<< Newtype.unwrap
+  isInputmode = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
 instance IsInputmode (Keyword "url") String where
-  isInputmode = prop' <<< Newtype.unwrap
+  isInputmode = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
 instance IsInputmode (Keyword "tel") String where
-  isInputmode = prop' <<< Newtype.unwrap
+  isInputmode = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
 instance IsInputmode (Keyword "text") String where
-  isInputmode = prop' <<< Newtype.unwrap
+  isInputmode = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
 instance IsInputmode (Keyword "none") String where
-  isInputmode = prop' <<< Newtype.unwrap
+  isInputmode = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
 _inputmode
   :: forall r v a. IsInputmode v a => Event v -> Event (Attribute (Indexed (inputmode :: a | r)))
-_inputmode = Functor.map $ (unsafeAttribute <<< { key: "inputmode", value: _ } <<< isInputmode)
+_inputmode = Functor.map (unsafeAttribute <<< { key: "inputmode", value: _ } <<< isInputmode)
 
 _inputmode_
   :: forall r v a. IsInputmode v a => v -> Event (Attribute (Indexed (inputmode :: a | r)))
@@ -2718,32 +2867,32 @@ class IsEnterkeyhint (v :: Type) (a :: Type) | v -> a where
   isEnterkeyhint :: v -> AttributeValue
 
 instance IsEnterkeyhint (Keyword "send") String where
-  isEnterkeyhint = prop' <<< Newtype.unwrap
+  isEnterkeyhint = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
 instance IsEnterkeyhint (Keyword "search") String where
-  isEnterkeyhint = prop' <<< Newtype.unwrap
+  isEnterkeyhint = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
 instance IsEnterkeyhint (Keyword "previous") String where
-  isEnterkeyhint = prop' <<< Newtype.unwrap
+  isEnterkeyhint = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
 instance IsEnterkeyhint (Keyword "next") String where
-  isEnterkeyhint = prop' <<< Newtype.unwrap
+  isEnterkeyhint = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
 instance IsEnterkeyhint (Keyword "go") String where
-  isEnterkeyhint = prop' <<< Newtype.unwrap
+  isEnterkeyhint = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
 instance IsEnterkeyhint (Keyword "done") String where
-  isEnterkeyhint = prop' <<< Newtype.unwrap
+  isEnterkeyhint = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
 instance IsEnterkeyhint (Keyword "enter") String where
-  isEnterkeyhint = prop' <<< Newtype.unwrap
+  isEnterkeyhint = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
 _enterkeyhint
   :: forall r v a
    . IsEnterkeyhint v a
   => Event v
   -> Event (Attribute (Indexed (enterkeyhint :: a | r)))
-_enterkeyhint = Functor.map $
+_enterkeyhint = Functor.map
   (unsafeAttribute <<< { key: "enterkeyhint", value: _ } <<< isEnterkeyhint)
 
 _enterkeyhint_
@@ -2754,17 +2903,17 @@ class IsPopover (v :: Type) (a :: Type) | v -> a where
   isPopover :: v -> AttributeValue
 
 instance IsPopover String String where
-  isPopover = prop'
+  isPopover = Deku.Attribute.prop'
 
 instance IsPopover (Keyword "manual") String where
-  isPopover = prop' <<< Newtype.unwrap
+  isPopover = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
 instance IsPopover (Keyword "auto") String where
-  isPopover = prop' <<< Newtype.unwrap
+  isPopover = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
 _popover
   :: forall r v a. IsPopover v a => Event v -> Event (Attribute (Indexed (popover :: a | r)))
-_popover = Functor.map $ (unsafeAttribute <<< { key: "popover", value: _ } <<< isPopover)
+_popover = Functor.map (unsafeAttribute <<< { key: "popover", value: _ } <<< isPopover)
 
 _popover_ :: forall r v a. IsPopover v a => v -> Event (Attribute (Indexed (popover :: a | r)))
 _popover_ = _popover <<< Applicative.pure
@@ -2773,20 +2922,20 @@ class IsPopovertargetaction (v :: Type) (a :: Type) | v -> a where
   isPopovertargetaction :: v -> AttributeValue
 
 instance IsPopovertargetaction (Keyword "hide") String where
-  isPopovertargetaction = prop' <<< Newtype.unwrap
+  isPopovertargetaction = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
 instance IsPopovertargetaction (Keyword "show") String where
-  isPopovertargetaction = prop' <<< Newtype.unwrap
+  isPopovertargetaction = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
 instance IsPopovertargetaction (Keyword "toggle") String where
-  isPopovertargetaction = prop' <<< Newtype.unwrap
+  isPopovertargetaction = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
 _popovertargetaction
   :: forall r v a
    . IsPopovertargetaction v a
   => Event v
   -> Event (Attribute (Indexed (popovertargetaction :: a | r)))
-_popovertargetaction = Functor.map $
+_popovertargetaction = Functor.map
   (unsafeAttribute <<< { key: "popovertargetaction", value: _ } <<< isPopovertargetaction)
 
 _popovertargetaction_
@@ -2800,200 +2949,217 @@ class IsSandbox (v :: Type) (a :: Type) | v -> a where
   isSandbox :: v -> AttributeValue
 
 instance IsSandbox (Keyword "allow-top-navigation-to-custom-protocols") String where
-  isSandbox = prop' <<< Newtype.unwrap
+  isSandbox = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
 instance IsSandbox (Keyword "allow-downloads") String where
-  isSandbox = prop' <<< Newtype.unwrap
+  isSandbox = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
 instance IsSandbox (Keyword "allow-presentation") String where
-  isSandbox = prop' <<< Newtype.unwrap
+  isSandbox = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
 instance IsSandbox (Keyword "allow-orientation-lock") String where
-  isSandbox = prop' <<< Newtype.unwrap
+  isSandbox = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
 instance IsSandbox (Keyword "allow-modals") String where
-  isSandbox = prop' <<< Newtype.unwrap
+  isSandbox = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
 instance IsSandbox (Keyword "allow-popups-to-escape-sandbox") String where
-  isSandbox = prop' <<< Newtype.unwrap
+  isSandbox = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
 instance IsSandbox (Keyword "allow-scripts") String where
-  isSandbox = prop' <<< Newtype.unwrap
+  isSandbox = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
 instance IsSandbox (Keyword "allow-pointer-lock") String where
-  isSandbox = prop' <<< Newtype.unwrap
+  isSandbox = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
 instance IsSandbox (Keyword "allow-forms") String where
-  isSandbox = prop' <<< Newtype.unwrap
+  isSandbox = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
 instance IsSandbox (Keyword "allow-same-origin") String where
-  isSandbox = prop' <<< Newtype.unwrap
+  isSandbox = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
 instance IsSandbox (Keyword "allow-top-navigation-by-user-activation") String where
-  isSandbox = prop' <<< Newtype.unwrap
+  isSandbox = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
 instance IsSandbox (Keyword "allow-top-navigation") String where
-  isSandbox = prop' <<< Newtype.unwrap
+  isSandbox = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
 instance IsSandbox (Keyword "allow-popups") String where
-  isSandbox = prop' <<< Newtype.unwrap
+  isSandbox = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
 _sandbox
   :: forall r v a. IsSandbox v a => Event v -> Event (Attribute (Indexed (sandbox :: a | r)))
-_sandbox = Functor.map $ (unsafeAttribute <<< { key: "sandbox", value: _ } <<< isSandbox)
+_sandbox = Functor.map (unsafeAttribute <<< { key: "sandbox", value: _ } <<< isSandbox)
 
 _sandbox_ :: forall r v a. IsSandbox v a => v -> Event (Attribute (Indexed (sandbox :: a | r)))
 _sandbox_ = _sandbox <<< Applicative.pure
 
 _role :: forall r. Event String -> Event (Attribute (Indexed (role :: String | r)))
-_role = Functor.map $ (unsafeAttribute <<< { key: "role", value: _ } <<< prop')
+_role = Functor.map (unsafeAttribute <<< { key: "role", value: _ } <<< Deku.Attribute.prop')
 
 _role_ :: forall r. String -> Event (Attribute (Indexed (role :: String | r)))
 _role_ = _role <<< Applicative.pure
 
 _ariaAtomic :: forall r. Event String -> Event (Attribute (Indexed (ariaAtomic :: String | r)))
-_ariaAtomic = Functor.map $ (unsafeAttribute <<< { key: "ariaAtomic", value: _ } <<< prop')
+_ariaAtomic = Functor.map
+  (unsafeAttribute <<< { key: "ariaAtomic", value: _ } <<< Deku.Attribute.prop')
 
 _ariaAtomic_ :: forall r. String -> Event (Attribute (Indexed (ariaAtomic :: String | r)))
 _ariaAtomic_ = _ariaAtomic <<< Applicative.pure
 
 _ariaAutoComplete
   :: forall r. Event String -> Event (Attribute (Indexed (ariaAutoComplete :: String | r)))
-_ariaAutoComplete = Functor.map $
-  (unsafeAttribute <<< { key: "ariaAutoComplete", value: _ } <<< prop')
+_ariaAutoComplete = Functor.map
+  (unsafeAttribute <<< { key: "ariaAutoComplete", value: _ } <<< Deku.Attribute.prop')
 
 _ariaAutoComplete_
   :: forall r. String -> Event (Attribute (Indexed (ariaAutoComplete :: String | r)))
 _ariaAutoComplete_ = _ariaAutoComplete <<< Applicative.pure
 
 _ariaBusy :: forall r. Event String -> Event (Attribute (Indexed (ariaBusy :: String | r)))
-_ariaBusy = Functor.map $ (unsafeAttribute <<< { key: "ariaBusy", value: _ } <<< prop')
+_ariaBusy = Functor.map
+  (unsafeAttribute <<< { key: "ariaBusy", value: _ } <<< Deku.Attribute.prop')
 
 _ariaBusy_ :: forall r. String -> Event (Attribute (Indexed (ariaBusy :: String | r)))
 _ariaBusy_ = _ariaBusy <<< Applicative.pure
 
 _ariaChecked :: forall r. Event String -> Event (Attribute (Indexed (ariaChecked :: String | r)))
-_ariaChecked = Functor.map $ (unsafeAttribute <<< { key: "ariaChecked", value: _ } <<< prop')
+_ariaChecked = Functor.map
+  (unsafeAttribute <<< { key: "ariaChecked", value: _ } <<< Deku.Attribute.prop')
 
 _ariaChecked_ :: forall r. String -> Event (Attribute (Indexed (ariaChecked :: String | r)))
 _ariaChecked_ = _ariaChecked <<< Applicative.pure
 
 _ariaColCount :: forall r. Event String -> Event (Attribute (Indexed (ariaColCount :: String | r)))
-_ariaColCount = Functor.map $ (unsafeAttribute <<< { key: "ariaColCount", value: _ } <<< prop')
+_ariaColCount = Functor.map
+  (unsafeAttribute <<< { key: "ariaColCount", value: _ } <<< Deku.Attribute.prop')
 
 _ariaColCount_ :: forall r. String -> Event (Attribute (Indexed (ariaColCount :: String | r)))
 _ariaColCount_ = _ariaColCount <<< Applicative.pure
 
 _ariaColIndex :: forall r. Event String -> Event (Attribute (Indexed (ariaColIndex :: String | r)))
-_ariaColIndex = Functor.map $ (unsafeAttribute <<< { key: "ariaColIndex", value: _ } <<< prop')
+_ariaColIndex = Functor.map
+  (unsafeAttribute <<< { key: "ariaColIndex", value: _ } <<< Deku.Attribute.prop')
 
 _ariaColIndex_ :: forall r. String -> Event (Attribute (Indexed (ariaColIndex :: String | r)))
 _ariaColIndex_ = _ariaColIndex <<< Applicative.pure
 
 _ariaColIndexText
   :: forall r. Event String -> Event (Attribute (Indexed (ariaColIndexText :: String | r)))
-_ariaColIndexText = Functor.map $
-  (unsafeAttribute <<< { key: "ariaColIndexText", value: _ } <<< prop')
+_ariaColIndexText = Functor.map
+  (unsafeAttribute <<< { key: "ariaColIndexText", value: _ } <<< Deku.Attribute.prop')
 
 _ariaColIndexText_
   :: forall r. String -> Event (Attribute (Indexed (ariaColIndexText :: String | r)))
 _ariaColIndexText_ = _ariaColIndexText <<< Applicative.pure
 
 _ariaColSpan :: forall r. Event String -> Event (Attribute (Indexed (ariaColSpan :: String | r)))
-_ariaColSpan = Functor.map $ (unsafeAttribute <<< { key: "ariaColSpan", value: _ } <<< prop')
+_ariaColSpan = Functor.map
+  (unsafeAttribute <<< { key: "ariaColSpan", value: _ } <<< Deku.Attribute.prop')
 
 _ariaColSpan_ :: forall r. String -> Event (Attribute (Indexed (ariaColSpan :: String | r)))
 _ariaColSpan_ = _ariaColSpan <<< Applicative.pure
 
 _ariaCurrent :: forall r. Event String -> Event (Attribute (Indexed (ariaCurrent :: String | r)))
-_ariaCurrent = Functor.map $ (unsafeAttribute <<< { key: "ariaCurrent", value: _ } <<< prop')
+_ariaCurrent = Functor.map
+  (unsafeAttribute <<< { key: "ariaCurrent", value: _ } <<< Deku.Attribute.prop')
 
 _ariaCurrent_ :: forall r. String -> Event (Attribute (Indexed (ariaCurrent :: String | r)))
 _ariaCurrent_ = _ariaCurrent <<< Applicative.pure
 
 _ariaDescription
   :: forall r. Event String -> Event (Attribute (Indexed (ariaDescription :: String | r)))
-_ariaDescription = Functor.map $
-  (unsafeAttribute <<< { key: "ariaDescription", value: _ } <<< prop')
+_ariaDescription = Functor.map
+  (unsafeAttribute <<< { key: "ariaDescription", value: _ } <<< Deku.Attribute.prop')
 
 _ariaDescription_
   :: forall r. String -> Event (Attribute (Indexed (ariaDescription :: String | r)))
 _ariaDescription_ = _ariaDescription <<< Applicative.pure
 
 _ariaDisabled :: forall r. Event String -> Event (Attribute (Indexed (ariaDisabled :: String | r)))
-_ariaDisabled = Functor.map $ (unsafeAttribute <<< { key: "ariaDisabled", value: _ } <<< prop')
+_ariaDisabled = Functor.map
+  (unsafeAttribute <<< { key: "ariaDisabled", value: _ } <<< Deku.Attribute.prop')
 
 _ariaDisabled_ :: forall r. String -> Event (Attribute (Indexed (ariaDisabled :: String | r)))
 _ariaDisabled_ = _ariaDisabled <<< Applicative.pure
 
 _ariaExpanded :: forall r. Event String -> Event (Attribute (Indexed (ariaExpanded :: String | r)))
-_ariaExpanded = Functor.map $ (unsafeAttribute <<< { key: "ariaExpanded", value: _ } <<< prop')
+_ariaExpanded = Functor.map
+  (unsafeAttribute <<< { key: "ariaExpanded", value: _ } <<< Deku.Attribute.prop')
 
 _ariaExpanded_ :: forall r. String -> Event (Attribute (Indexed (ariaExpanded :: String | r)))
 _ariaExpanded_ = _ariaExpanded <<< Applicative.pure
 
 _ariaHasPopup :: forall r. Event String -> Event (Attribute (Indexed (ariaHasPopup :: String | r)))
-_ariaHasPopup = Functor.map $ (unsafeAttribute <<< { key: "ariaHasPopup", value: _ } <<< prop')
+_ariaHasPopup = Functor.map
+  (unsafeAttribute <<< { key: "ariaHasPopup", value: _ } <<< Deku.Attribute.prop')
 
 _ariaHasPopup_ :: forall r. String -> Event (Attribute (Indexed (ariaHasPopup :: String | r)))
 _ariaHasPopup_ = _ariaHasPopup <<< Applicative.pure
 
 _ariaHidden :: forall r. Event String -> Event (Attribute (Indexed (ariaHidden :: String | r)))
-_ariaHidden = Functor.map $ (unsafeAttribute <<< { key: "ariaHidden", value: _ } <<< prop')
+_ariaHidden = Functor.map
+  (unsafeAttribute <<< { key: "ariaHidden", value: _ } <<< Deku.Attribute.prop')
 
 _ariaHidden_ :: forall r. String -> Event (Attribute (Indexed (ariaHidden :: String | r)))
 _ariaHidden_ = _ariaHidden <<< Applicative.pure
 
 _ariaInvalid :: forall r. Event String -> Event (Attribute (Indexed (ariaInvalid :: String | r)))
-_ariaInvalid = Functor.map $ (unsafeAttribute <<< { key: "ariaInvalid", value: _ } <<< prop')
+_ariaInvalid = Functor.map
+  (unsafeAttribute <<< { key: "ariaInvalid", value: _ } <<< Deku.Attribute.prop')
 
 _ariaInvalid_ :: forall r. String -> Event (Attribute (Indexed (ariaInvalid :: String | r)))
 _ariaInvalid_ = _ariaInvalid <<< Applicative.pure
 
 _ariaKeyShortcuts
   :: forall r. Event String -> Event (Attribute (Indexed (ariaKeyShortcuts :: String | r)))
-_ariaKeyShortcuts = Functor.map $
-  (unsafeAttribute <<< { key: "ariaKeyShortcuts", value: _ } <<< prop')
+_ariaKeyShortcuts = Functor.map
+  (unsafeAttribute <<< { key: "ariaKeyShortcuts", value: _ } <<< Deku.Attribute.prop')
 
 _ariaKeyShortcuts_
   :: forall r. String -> Event (Attribute (Indexed (ariaKeyShortcuts :: String | r)))
 _ariaKeyShortcuts_ = _ariaKeyShortcuts <<< Applicative.pure
 
 _ariaLabel :: forall r. Event String -> Event (Attribute (Indexed (ariaLabel :: String | r)))
-_ariaLabel = Functor.map $ (unsafeAttribute <<< { key: "ariaLabel", value: _ } <<< prop')
+_ariaLabel = Functor.map
+  (unsafeAttribute <<< { key: "ariaLabel", value: _ } <<< Deku.Attribute.prop')
 
 _ariaLabel_ :: forall r. String -> Event (Attribute (Indexed (ariaLabel :: String | r)))
 _ariaLabel_ = _ariaLabel <<< Applicative.pure
 
 _ariaLevel :: forall r. Event String -> Event (Attribute (Indexed (ariaLevel :: String | r)))
-_ariaLevel = Functor.map $ (unsafeAttribute <<< { key: "ariaLevel", value: _ } <<< prop')
+_ariaLevel = Functor.map
+  (unsafeAttribute <<< { key: "ariaLevel", value: _ } <<< Deku.Attribute.prop')
 
 _ariaLevel_ :: forall r. String -> Event (Attribute (Indexed (ariaLevel :: String | r)))
 _ariaLevel_ = _ariaLevel <<< Applicative.pure
 
 _ariaLive :: forall r. Event String -> Event (Attribute (Indexed (ariaLive :: String | r)))
-_ariaLive = Functor.map $ (unsafeAttribute <<< { key: "ariaLive", value: _ } <<< prop')
+_ariaLive = Functor.map
+  (unsafeAttribute <<< { key: "ariaLive", value: _ } <<< Deku.Attribute.prop')
 
 _ariaLive_ :: forall r. String -> Event (Attribute (Indexed (ariaLive :: String | r)))
 _ariaLive_ = _ariaLive <<< Applicative.pure
 
 _ariaModal :: forall r. Event String -> Event (Attribute (Indexed (ariaModal :: String | r)))
-_ariaModal = Functor.map $ (unsafeAttribute <<< { key: "ariaModal", value: _ } <<< prop')
+_ariaModal = Functor.map
+  (unsafeAttribute <<< { key: "ariaModal", value: _ } <<< Deku.Attribute.prop')
 
 _ariaModal_ :: forall r. String -> Event (Attribute (Indexed (ariaModal :: String | r)))
 _ariaModal_ = _ariaModal <<< Applicative.pure
 
 _ariaMultiLine
   :: forall r. Event String -> Event (Attribute (Indexed (ariaMultiLine :: String | r)))
-_ariaMultiLine = Functor.map $ (unsafeAttribute <<< { key: "ariaMultiLine", value: _ } <<< prop')
+_ariaMultiLine = Functor.map
+  (unsafeAttribute <<< { key: "ariaMultiLine", value: _ } <<< Deku.Attribute.prop')
 
 _ariaMultiLine_ :: forall r. String -> Event (Attribute (Indexed (ariaMultiLine :: String | r)))
 _ariaMultiLine_ = _ariaMultiLine <<< Applicative.pure
 
 _ariaMultiSelectable
   :: forall r. Event String -> Event (Attribute (Indexed (ariaMultiSelectable :: String | r)))
-_ariaMultiSelectable = Functor.map $
-  (unsafeAttribute <<< { key: "ariaMultiSelectable", value: _ } <<< prop')
+_ariaMultiSelectable = Functor.map
+  (unsafeAttribute <<< { key: "ariaMultiSelectable", value: _ } <<< Deku.Attribute.prop')
 
 _ariaMultiSelectable_
   :: forall r. String -> Event (Attribute (Indexed (ariaMultiSelectable :: String | r)))
@@ -3001,8 +3167,8 @@ _ariaMultiSelectable_ = _ariaMultiSelectable <<< Applicative.pure
 
 _ariaOrientation
   :: forall r. Event String -> Event (Attribute (Indexed (ariaOrientation :: String | r)))
-_ariaOrientation = Functor.map $
-  (unsafeAttribute <<< { key: "ariaOrientation", value: _ } <<< prop')
+_ariaOrientation = Functor.map
+  (unsafeAttribute <<< { key: "ariaOrientation", value: _ } <<< Deku.Attribute.prop')
 
 _ariaOrientation_
   :: forall r. String -> Event (Attribute (Indexed (ariaOrientation :: String | r)))
@@ -3010,1196 +3176,2216 @@ _ariaOrientation_ = _ariaOrientation <<< Applicative.pure
 
 _ariaPlaceholder
   :: forall r. Event String -> Event (Attribute (Indexed (ariaPlaceholder :: String | r)))
-_ariaPlaceholder = Functor.map $
-  (unsafeAttribute <<< { key: "ariaPlaceholder", value: _ } <<< prop')
+_ariaPlaceholder = Functor.map
+  (unsafeAttribute <<< { key: "ariaPlaceholder", value: _ } <<< Deku.Attribute.prop')
 
 _ariaPlaceholder_
   :: forall r. String -> Event (Attribute (Indexed (ariaPlaceholder :: String | r)))
 _ariaPlaceholder_ = _ariaPlaceholder <<< Applicative.pure
 
 _ariaPosInSet :: forall r. Event String -> Event (Attribute (Indexed (ariaPosInSet :: String | r)))
-_ariaPosInSet = Functor.map $ (unsafeAttribute <<< { key: "ariaPosInSet", value: _ } <<< prop')
+_ariaPosInSet = Functor.map
+  (unsafeAttribute <<< { key: "ariaPosInSet", value: _ } <<< Deku.Attribute.prop')
 
 _ariaPosInSet_ :: forall r. String -> Event (Attribute (Indexed (ariaPosInSet :: String | r)))
 _ariaPosInSet_ = _ariaPosInSet <<< Applicative.pure
 
 _ariaPressed :: forall r. Event String -> Event (Attribute (Indexed (ariaPressed :: String | r)))
-_ariaPressed = Functor.map $ (unsafeAttribute <<< { key: "ariaPressed", value: _ } <<< prop')
+_ariaPressed = Functor.map
+  (unsafeAttribute <<< { key: "ariaPressed", value: _ } <<< Deku.Attribute.prop')
 
 _ariaPressed_ :: forall r. String -> Event (Attribute (Indexed (ariaPressed :: String | r)))
 _ariaPressed_ = _ariaPressed <<< Applicative.pure
 
 _ariaReadOnly :: forall r. Event String -> Event (Attribute (Indexed (ariaReadOnly :: String | r)))
-_ariaReadOnly = Functor.map $ (unsafeAttribute <<< { key: "ariaReadOnly", value: _ } <<< prop')
+_ariaReadOnly = Functor.map
+  (unsafeAttribute <<< { key: "ariaReadOnly", value: _ } <<< Deku.Attribute.prop')
 
 _ariaReadOnly_ :: forall r. String -> Event (Attribute (Indexed (ariaReadOnly :: String | r)))
 _ariaReadOnly_ = _ariaReadOnly <<< Applicative.pure
 
 _ariaRequired :: forall r. Event String -> Event (Attribute (Indexed (ariaRequired :: String | r)))
-_ariaRequired = Functor.map $ (unsafeAttribute <<< { key: "ariaRequired", value: _ } <<< prop')
+_ariaRequired = Functor.map
+  (unsafeAttribute <<< { key: "ariaRequired", value: _ } <<< Deku.Attribute.prop')
 
 _ariaRequired_ :: forall r. String -> Event (Attribute (Indexed (ariaRequired :: String | r)))
 _ariaRequired_ = _ariaRequired <<< Applicative.pure
 
 _ariaRoleDescription
   :: forall r. Event String -> Event (Attribute (Indexed (ariaRoleDescription :: String | r)))
-_ariaRoleDescription = Functor.map $
-  (unsafeAttribute <<< { key: "ariaRoleDescription", value: _ } <<< prop')
+_ariaRoleDescription = Functor.map
+  (unsafeAttribute <<< { key: "ariaRoleDescription", value: _ } <<< Deku.Attribute.prop')
 
 _ariaRoleDescription_
   :: forall r. String -> Event (Attribute (Indexed (ariaRoleDescription :: String | r)))
 _ariaRoleDescription_ = _ariaRoleDescription <<< Applicative.pure
 
 _ariaRowCount :: forall r. Event String -> Event (Attribute (Indexed (ariaRowCount :: String | r)))
-_ariaRowCount = Functor.map $ (unsafeAttribute <<< { key: "ariaRowCount", value: _ } <<< prop')
+_ariaRowCount = Functor.map
+  (unsafeAttribute <<< { key: "ariaRowCount", value: _ } <<< Deku.Attribute.prop')
 
 _ariaRowCount_ :: forall r. String -> Event (Attribute (Indexed (ariaRowCount :: String | r)))
 _ariaRowCount_ = _ariaRowCount <<< Applicative.pure
 
 _ariaRowIndex :: forall r. Event String -> Event (Attribute (Indexed (ariaRowIndex :: String | r)))
-_ariaRowIndex = Functor.map $ (unsafeAttribute <<< { key: "ariaRowIndex", value: _ } <<< prop')
+_ariaRowIndex = Functor.map
+  (unsafeAttribute <<< { key: "ariaRowIndex", value: _ } <<< Deku.Attribute.prop')
 
 _ariaRowIndex_ :: forall r. String -> Event (Attribute (Indexed (ariaRowIndex :: String | r)))
 _ariaRowIndex_ = _ariaRowIndex <<< Applicative.pure
 
 _ariaRowIndexText
   :: forall r. Event String -> Event (Attribute (Indexed (ariaRowIndexText :: String | r)))
-_ariaRowIndexText = Functor.map $
-  (unsafeAttribute <<< { key: "ariaRowIndexText", value: _ } <<< prop')
+_ariaRowIndexText = Functor.map
+  (unsafeAttribute <<< { key: "ariaRowIndexText", value: _ } <<< Deku.Attribute.prop')
 
 _ariaRowIndexText_
   :: forall r. String -> Event (Attribute (Indexed (ariaRowIndexText :: String | r)))
 _ariaRowIndexText_ = _ariaRowIndexText <<< Applicative.pure
 
 _ariaRowSpan :: forall r. Event String -> Event (Attribute (Indexed (ariaRowSpan :: String | r)))
-_ariaRowSpan = Functor.map $ (unsafeAttribute <<< { key: "ariaRowSpan", value: _ } <<< prop')
+_ariaRowSpan = Functor.map
+  (unsafeAttribute <<< { key: "ariaRowSpan", value: _ } <<< Deku.Attribute.prop')
 
 _ariaRowSpan_ :: forall r. String -> Event (Attribute (Indexed (ariaRowSpan :: String | r)))
 _ariaRowSpan_ = _ariaRowSpan <<< Applicative.pure
 
 _ariaSelected :: forall r. Event String -> Event (Attribute (Indexed (ariaSelected :: String | r)))
-_ariaSelected = Functor.map $ (unsafeAttribute <<< { key: "ariaSelected", value: _ } <<< prop')
+_ariaSelected = Functor.map
+  (unsafeAttribute <<< { key: "ariaSelected", value: _ } <<< Deku.Attribute.prop')
 
 _ariaSelected_ :: forall r. String -> Event (Attribute (Indexed (ariaSelected :: String | r)))
 _ariaSelected_ = _ariaSelected <<< Applicative.pure
 
 _ariaSetSize :: forall r. Event String -> Event (Attribute (Indexed (ariaSetSize :: String | r)))
-_ariaSetSize = Functor.map $ (unsafeAttribute <<< { key: "ariaSetSize", value: _ } <<< prop')
+_ariaSetSize = Functor.map
+  (unsafeAttribute <<< { key: "ariaSetSize", value: _ } <<< Deku.Attribute.prop')
 
 _ariaSetSize_ :: forall r. String -> Event (Attribute (Indexed (ariaSetSize :: String | r)))
 _ariaSetSize_ = _ariaSetSize <<< Applicative.pure
 
 _ariaSort :: forall r. Event String -> Event (Attribute (Indexed (ariaSort :: String | r)))
-_ariaSort = Functor.map $ (unsafeAttribute <<< { key: "ariaSort", value: _ } <<< prop')
+_ariaSort = Functor.map
+  (unsafeAttribute <<< { key: "ariaSort", value: _ } <<< Deku.Attribute.prop')
 
 _ariaSort_ :: forall r. String -> Event (Attribute (Indexed (ariaSort :: String | r)))
 _ariaSort_ = _ariaSort <<< Applicative.pure
 
 _ariaValueMax :: forall r. Event String -> Event (Attribute (Indexed (ariaValueMax :: String | r)))
-_ariaValueMax = Functor.map $ (unsafeAttribute <<< { key: "ariaValueMax", value: _ } <<< prop')
+_ariaValueMax = Functor.map
+  (unsafeAttribute <<< { key: "ariaValueMax", value: _ } <<< Deku.Attribute.prop')
 
 _ariaValueMax_ :: forall r. String -> Event (Attribute (Indexed (ariaValueMax :: String | r)))
 _ariaValueMax_ = _ariaValueMax <<< Applicative.pure
 
 _ariaValueMin :: forall r. Event String -> Event (Attribute (Indexed (ariaValueMin :: String | r)))
-_ariaValueMin = Functor.map $ (unsafeAttribute <<< { key: "ariaValueMin", value: _ } <<< prop')
+_ariaValueMin = Functor.map
+  (unsafeAttribute <<< { key: "ariaValueMin", value: _ } <<< Deku.Attribute.prop')
 
 _ariaValueMin_ :: forall r. String -> Event (Attribute (Indexed (ariaValueMin :: String | r)))
 _ariaValueMin_ = _ariaValueMin <<< Applicative.pure
 
 _ariaValueNow :: forall r. Event String -> Event (Attribute (Indexed (ariaValueNow :: String | r)))
-_ariaValueNow = Functor.map $ (unsafeAttribute <<< { key: "ariaValueNow", value: _ } <<< prop')
+_ariaValueNow = Functor.map
+  (unsafeAttribute <<< { key: "ariaValueNow", value: _ } <<< Deku.Attribute.prop')
 
 _ariaValueNow_ :: forall r. String -> Event (Attribute (Indexed (ariaValueNow :: String | r)))
 _ariaValueNow_ = _ariaValueNow <<< Applicative.pure
 
 _ariaValueText
   :: forall r. Event String -> Event (Attribute (Indexed (ariaValueText :: String | r)))
-_ariaValueText = Functor.map $ (unsafeAttribute <<< { key: "ariaValueText", value: _ } <<< prop')
+_ariaValueText = Functor.map
+  (unsafeAttribute <<< { key: "ariaValueText", value: _ } <<< Deku.Attribute.prop')
 
 _ariaValueText_ :: forall r. String -> Event (Attribute (Indexed (ariaValueText :: String | r)))
 _ariaValueText_ = _ariaValueText <<< Applicative.pure
 
+_id :: forall r. Event String -> Event (Attribute (Indexed (id :: String | r)))
+_id = Functor.map (unsafeAttribute <<< { key: "id", value: _ } <<< Deku.Attribute.prop')
+
+_id_ :: forall r. String -> Event (Attribute (Indexed (id :: String | r)))
+_id_ = _id <<< Applicative.pure
+
+_class :: forall r. Event String -> Event (Attribute (Indexed (className :: String | r)))
+_class = Functor.map (unsafeAttribute <<< { key: "className", value: _ } <<< Deku.Attribute.prop')
+
+_class_ :: forall r. String -> Event (Attribute (Indexed (className :: String | r)))
+_class_ = _class <<< Applicative.pure
+
+_slot :: forall r. Event String -> Event (Attribute (Indexed (slot :: String | r)))
+_slot = Functor.map (unsafeAttribute <<< { key: "slot", value: _ } <<< Deku.Attribute.prop')
+
+_slot_ :: forall r. String -> Event (Attribute (Indexed (slot :: String | r)))
+_slot_ = _slot <<< Applicative.pure
+
 _contentEditable
   :: forall r. Event String -> Event (Attribute (Indexed (contentEditable :: String | r)))
-_contentEditable = Functor.map $
-  (unsafeAttribute <<< { key: "contentEditable", value: _ } <<< prop')
+_contentEditable = Functor.map
+  (unsafeAttribute <<< { key: "contentEditable", value: _ } <<< Deku.Attribute.prop')
 
 _contentEditable_
   :: forall r. String -> Event (Attribute (Indexed (contentEditable :: String | r)))
 _contentEditable_ = _contentEditable <<< Applicative.pure
 
 _enterKeyHint :: forall r. Event String -> Event (Attribute (Indexed (enterKeyHint :: String | r)))
-_enterKeyHint = Functor.map $ (unsafeAttribute <<< { key: "enterKeyHint", value: _ } <<< prop')
+_enterKeyHint = Functor.map
+  (unsafeAttribute <<< { key: "enterKeyHint", value: _ } <<< Deku.Attribute.prop')
 
 _enterKeyHint_ :: forall r. String -> Event (Attribute (Indexed (enterKeyHint :: String | r)))
 _enterKeyHint_ = _enterKeyHint <<< Applicative.pure
 
 _inputMode :: forall r. Event String -> Event (Attribute (Indexed (inputMode :: String | r)))
-_inputMode = Functor.map $ (unsafeAttribute <<< { key: "inputMode", value: _ } <<< prop')
+_inputMode = Functor.map
+  (unsafeAttribute <<< { key: "inputMode", value: _ } <<< Deku.Attribute.prop')
 
 _inputMode_ :: forall r. String -> Event (Attribute (Indexed (inputMode :: String | r)))
 _inputMode_ = _inputMode <<< Applicative.pure
 
+_onPointerover
+  :: forall r
+   . Event (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+  -> Event
+       ( Attribute
+           ( Indexed
+               (onpointerover :: Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit | r)
+           )
+       )
+_onPointerover = Functor.map
+  ( unsafeAttribute <<< { key: "onpointerover", value: _ } <<<
+      (Deku.Attribute.cb' <<< Deku.Attribute.cb)
+  )
+
+_onPointerover_
+  :: forall r
+   . (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+  -> Event
+       ( Attribute
+           ( Indexed
+               (onpointerover :: Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit | r)
+           )
+       )
+_onPointerover_ = _onPointerover <<< Applicative.pure
+
+_onPointerenter
+  :: forall r
+   . Event (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+  -> Event
+       ( Attribute
+           ( Indexed
+               (onpointerenter :: Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit | r)
+           )
+       )
+_onPointerenter = Functor.map
+  ( unsafeAttribute <<< { key: "onpointerenter", value: _ } <<<
+      (Deku.Attribute.cb' <<< Deku.Attribute.cb)
+  )
+
+_onPointerenter_
+  :: forall r
+   . (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+  -> Event
+       ( Attribute
+           ( Indexed
+               (onpointerenter :: Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit | r)
+           )
+       )
+_onPointerenter_ = _onPointerenter <<< Applicative.pure
+
+_onPointerdown
+  :: forall r
+   . Event (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+  -> Event
+       ( Attribute
+           ( Indexed
+               (onpointerdown :: Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit | r)
+           )
+       )
+_onPointerdown = Functor.map
+  ( unsafeAttribute <<< { key: "onpointerdown", value: _ } <<<
+      (Deku.Attribute.cb' <<< Deku.Attribute.cb)
+  )
+
+_onPointerdown_
+  :: forall r
+   . (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+  -> Event
+       ( Attribute
+           ( Indexed
+               (onpointerdown :: Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit | r)
+           )
+       )
+_onPointerdown_ = _onPointerdown <<< Applicative.pure
+
+_onPointermove
+  :: forall r
+   . Event (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+  -> Event
+       ( Attribute
+           ( Indexed
+               (onpointermove :: Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit | r)
+           )
+       )
+_onPointermove = Functor.map
+  ( unsafeAttribute <<< { key: "onpointermove", value: _ } <<<
+      (Deku.Attribute.cb' <<< Deku.Attribute.cb)
+  )
+
+_onPointermove_
+  :: forall r
+   . (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+  -> Event
+       ( Attribute
+           ( Indexed
+               (onpointermove :: Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit | r)
+           )
+       )
+_onPointermove_ = _onPointermove <<< Applicative.pure
+
+_onPointerrawupdate
+  :: forall r
+   . Event (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+  -> Event
+       ( Attribute
+           ( Indexed
+               (onpointerrawupdate :: Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit | r)
+           )
+       )
+_onPointerrawupdate = Functor.map
+  ( unsafeAttribute <<< { key: "onpointerrawupdate", value: _ } <<<
+      (Deku.Attribute.cb' <<< Deku.Attribute.cb)
+  )
+
+_onPointerrawupdate_
+  :: forall r
+   . (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+  -> Event
+       ( Attribute
+           ( Indexed
+               (onpointerrawupdate :: Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit | r)
+           )
+       )
+_onPointerrawupdate_ = _onPointerrawupdate <<< Applicative.pure
+
+_onPointerup
+  :: forall r
+   . Event (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+  -> Event
+       ( Attribute
+           (Indexed (onpointerup :: Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit | r))
+       )
+_onPointerup = Functor.map
+  ( unsafeAttribute <<< { key: "onpointerup", value: _ } <<<
+      (Deku.Attribute.cb' <<< Deku.Attribute.cb)
+  )
+
+_onPointerup_
+  :: forall r
+   . (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+  -> Event
+       ( Attribute
+           (Indexed (onpointerup :: Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit | r))
+       )
+_onPointerup_ = _onPointerup <<< Applicative.pure
+
+_onPointercancel
+  :: forall r
+   . Event (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+  -> Event
+       ( Attribute
+           ( Indexed
+               (onpointercancel :: Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit | r)
+           )
+       )
+_onPointercancel = Functor.map
+  ( unsafeAttribute <<< { key: "onpointercancel", value: _ } <<<
+      (Deku.Attribute.cb' <<< Deku.Attribute.cb)
+  )
+
+_onPointercancel_
+  :: forall r
+   . (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+  -> Event
+       ( Attribute
+           ( Indexed
+               (onpointercancel :: Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit | r)
+           )
+       )
+_onPointercancel_ = _onPointercancel <<< Applicative.pure
+
+_onPointerout
+  :: forall r
+   . Event (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+  -> Event
+       ( Attribute
+           ( Indexed
+               (onpointerout :: Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit | r)
+           )
+       )
+_onPointerout = Functor.map
+  ( unsafeAttribute <<< { key: "onpointerout", value: _ } <<<
+      (Deku.Attribute.cb' <<< Deku.Attribute.cb)
+  )
+
+_onPointerout_
+  :: forall r
+   . (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+  -> Event
+       ( Attribute
+           ( Indexed
+               (onpointerout :: Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit | r)
+           )
+       )
+_onPointerout_ = _onPointerout <<< Applicative.pure
+
+_onPointerleave
+  :: forall r
+   . Event (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+  -> Event
+       ( Attribute
+           ( Indexed
+               (onpointerleave :: Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit | r)
+           )
+       )
+_onPointerleave = Functor.map
+  ( unsafeAttribute <<< { key: "onpointerleave", value: _ } <<<
+      (Deku.Attribute.cb' <<< Deku.Attribute.cb)
+  )
+
+_onPointerleave_
+  :: forall r
+   . (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+  -> Event
+       ( Attribute
+           ( Indexed
+               (onpointerleave :: Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit | r)
+           )
+       )
+_onPointerleave_ = _onPointerleave <<< Applicative.pure
+
+_onGotpointercapture
+  :: forall r
+   . Event (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+  -> Event
+       ( Attribute
+           ( Indexed
+               ( ongotpointercapture :: Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit
+               | r
+               )
+           )
+       )
+_onGotpointercapture = Functor.map
+  ( unsafeAttribute <<< { key: "ongotpointercapture", value: _ } <<<
+      (Deku.Attribute.cb' <<< Deku.Attribute.cb)
+  )
+
+_onGotpointercapture_
+  :: forall r
+   . (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+  -> Event
+       ( Attribute
+           ( Indexed
+               ( ongotpointercapture :: Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit
+               | r
+               )
+           )
+       )
+_onGotpointercapture_ = _onGotpointercapture <<< Applicative.pure
+
+_onLostpointercapture
+  :: forall r
+   . Event (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+  -> Event
+       ( Attribute
+           ( Indexed
+               ( onlostpointercapture :: Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit
+               | r
+               )
+           )
+       )
+_onLostpointercapture = Functor.map
+  ( unsafeAttribute <<< { key: "onlostpointercapture", value: _ } <<<
+      (Deku.Attribute.cb' <<< Deku.Attribute.cb)
+  )
+
+_onLostpointercapture_
+  :: forall r
+   . (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+  -> Event
+       ( Attribute
+           ( Indexed
+               ( onlostpointercapture :: Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit
+               | r
+               )
+           )
+       )
+_onLostpointercapture_ = _onLostpointercapture <<< Applicative.pure
+
 _onAbort
   :: forall r
-   . Event (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
-  -> Event (Attribute (Indexed (onabort :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r)))
-_onAbort = Functor.map $ (unsafeAttribute <<< { key: "onabort", value: _ } <<< (cb' <<< cb))
+   . Event (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+  -> Event
+       ( Attribute
+           (Indexed (onabort :: Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit | r))
+       )
+_onAbort = Functor.map
+  (unsafeAttribute <<< { key: "onabort", value: _ } <<< (Deku.Attribute.cb' <<< Deku.Attribute.cb))
 
 _onAbort_
   :: forall r
-   . (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
-  -> Event (Attribute (Indexed (onabort :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r)))
+   . (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+  -> Event
+       ( Attribute
+           (Indexed (onabort :: Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit | r))
+       )
 _onAbort_ = _onAbort <<< Applicative.pure
 
 _onAuxclick
   :: forall r
-   . Event (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
-  -> Event (Attribute (Indexed (onauxclick :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r)))
-_onAuxclick = Functor.map $ (unsafeAttribute <<< { key: "onauxclick", value: _ } <<< (cb' <<< cb))
+   . Event (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+  -> Event
+       ( Attribute
+           (Indexed (onauxclick :: Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit | r))
+       )
+_onAuxclick = Functor.map
+  ( unsafeAttribute <<< { key: "onauxclick", value: _ } <<<
+      (Deku.Attribute.cb' <<< Deku.Attribute.cb)
+  )
 
 _onAuxclick_
   :: forall r
-   . (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
-  -> Event (Attribute (Indexed (onauxclick :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r)))
+   . (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+  -> Event
+       ( Attribute
+           (Indexed (onauxclick :: Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit | r))
+       )
 _onAuxclick_ = _onAuxclick <<< Applicative.pure
 
 _onBeforeinput
   :: forall r
-   . Event (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
+   . Event (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
   -> Event
-       (Attribute (Indexed (onbeforeinput :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r)))
-_onBeforeinput = Functor.map $
-  (unsafeAttribute <<< { key: "onbeforeinput", value: _ } <<< (cb' <<< cb))
+       ( Attribute
+           ( Indexed
+               (onbeforeinput :: Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit | r)
+           )
+       )
+_onBeforeinput = Functor.map
+  ( unsafeAttribute <<< { key: "onbeforeinput", value: _ } <<<
+      (Deku.Attribute.cb' <<< Deku.Attribute.cb)
+  )
 
 _onBeforeinput_
   :: forall r
-   . (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
+   . (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
   -> Event
-       (Attribute (Indexed (onbeforeinput :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r)))
+       ( Attribute
+           ( Indexed
+               (onbeforeinput :: Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit | r)
+           )
+       )
 _onBeforeinput_ = _onBeforeinput <<< Applicative.pure
 
 _onBeforematch
   :: forall r
-   . Event (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
+   . Event (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
   -> Event
-       (Attribute (Indexed (onbeforematch :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r)))
-_onBeforematch = Functor.map $
-  (unsafeAttribute <<< { key: "onbeforematch", value: _ } <<< (cb' <<< cb))
+       ( Attribute
+           ( Indexed
+               (onbeforematch :: Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit | r)
+           )
+       )
+_onBeforematch = Functor.map
+  ( unsafeAttribute <<< { key: "onbeforematch", value: _ } <<<
+      (Deku.Attribute.cb' <<< Deku.Attribute.cb)
+  )
 
 _onBeforematch_
   :: forall r
-   . (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
+   . (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
   -> Event
-       (Attribute (Indexed (onbeforematch :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r)))
+       ( Attribute
+           ( Indexed
+               (onbeforematch :: Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit | r)
+           )
+       )
 _onBeforematch_ = _onBeforematch <<< Applicative.pure
 
 _onBeforetoggle
   :: forall r
-   . Event (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
+   . Event (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
   -> Event
-       (Attribute (Indexed (onbeforetoggle :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r)))
-_onBeforetoggle = Functor.map $
-  (unsafeAttribute <<< { key: "onbeforetoggle", value: _ } <<< (cb' <<< cb))
+       ( Attribute
+           ( Indexed
+               (onbeforetoggle :: Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit | r)
+           )
+       )
+_onBeforetoggle = Functor.map
+  ( unsafeAttribute <<< { key: "onbeforetoggle", value: _ } <<<
+      (Deku.Attribute.cb' <<< Deku.Attribute.cb)
+  )
 
 _onBeforetoggle_
   :: forall r
-   . (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
+   . (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
   -> Event
-       (Attribute (Indexed (onbeforetoggle :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r)))
+       ( Attribute
+           ( Indexed
+               (onbeforetoggle :: Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit | r)
+           )
+       )
 _onBeforetoggle_ = _onBeforetoggle <<< Applicative.pure
 
 _onBlur
   :: forall r
-   . Event (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
-  -> Event (Attribute (Indexed (onblur :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r)))
-_onBlur = Functor.map $ (unsafeAttribute <<< { key: "onblur", value: _ } <<< (cb' <<< cb))
+   . Event (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+  -> Event
+       ( Attribute
+           (Indexed (onblur :: Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit | r))
+       )
+_onBlur = Functor.map
+  (unsafeAttribute <<< { key: "onblur", value: _ } <<< (Deku.Attribute.cb' <<< Deku.Attribute.cb))
 
 _onBlur_
   :: forall r
-   . (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
-  -> Event (Attribute (Indexed (onblur :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r)))
+   . (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+  -> Event
+       ( Attribute
+           (Indexed (onblur :: Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit | r))
+       )
 _onBlur_ = _onBlur <<< Applicative.pure
 
 _onCancel
   :: forall r
-   . Event (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
-  -> Event (Attribute (Indexed (oncancel :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r)))
-_onCancel = Functor.map $ (unsafeAttribute <<< { key: "oncancel", value: _ } <<< (cb' <<< cb))
+   . Event (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+  -> Event
+       ( Attribute
+           (Indexed (oncancel :: Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit | r))
+       )
+_onCancel = Functor.map
+  (unsafeAttribute <<< { key: "oncancel", value: _ } <<< (Deku.Attribute.cb' <<< Deku.Attribute.cb))
 
 _onCancel_
   :: forall r
-   . (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
-  -> Event (Attribute (Indexed (oncancel :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r)))
+   . (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+  -> Event
+       ( Attribute
+           (Indexed (oncancel :: Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit | r))
+       )
 _onCancel_ = _onCancel <<< Applicative.pure
 
 _onCanplay
   :: forall r
-   . Event (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
-  -> Event (Attribute (Indexed (oncanplay :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r)))
-_onCanplay = Functor.map $ (unsafeAttribute <<< { key: "oncanplay", value: _ } <<< (cb' <<< cb))
+   . Event (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+  -> Event
+       ( Attribute
+           (Indexed (oncanplay :: Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit | r))
+       )
+_onCanplay = Functor.map
+  ( unsafeAttribute <<< { key: "oncanplay", value: _ } <<<
+      (Deku.Attribute.cb' <<< Deku.Attribute.cb)
+  )
 
 _onCanplay_
   :: forall r
-   . (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
-  -> Event (Attribute (Indexed (oncanplay :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r)))
+   . (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+  -> Event
+       ( Attribute
+           (Indexed (oncanplay :: Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit | r))
+       )
 _onCanplay_ = _onCanplay <<< Applicative.pure
 
 _onCanplaythrough
   :: forall r
-   . Event (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
+   . Event (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
   -> Event
-       (Attribute (Indexed (oncanplaythrough :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r)))
-_onCanplaythrough = Functor.map $
-  (unsafeAttribute <<< { key: "oncanplaythrough", value: _ } <<< (cb' <<< cb))
+       ( Attribute
+           ( Indexed
+               (oncanplaythrough :: Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit | r)
+           )
+       )
+_onCanplaythrough = Functor.map
+  ( unsafeAttribute <<< { key: "oncanplaythrough", value: _ } <<<
+      (Deku.Attribute.cb' <<< Deku.Attribute.cb)
+  )
 
 _onCanplaythrough_
   :: forall r
-   . (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
+   . (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
   -> Event
-       (Attribute (Indexed (oncanplaythrough :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r)))
+       ( Attribute
+           ( Indexed
+               (oncanplaythrough :: Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit | r)
+           )
+       )
 _onCanplaythrough_ = _onCanplaythrough <<< Applicative.pure
 
 _onChange
   :: forall r
-   . Event (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
-  -> Event (Attribute (Indexed (onchange :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r)))
-_onChange = Functor.map $ (unsafeAttribute <<< { key: "onchange", value: _ } <<< (cb' <<< cb))
+   . Event (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+  -> Event
+       ( Attribute
+           (Indexed (onchange :: Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit | r))
+       )
+_onChange = Functor.map
+  (unsafeAttribute <<< { key: "onchange", value: _ } <<< (Deku.Attribute.cb' <<< Deku.Attribute.cb))
 
 _onChange_
   :: forall r
-   . (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
-  -> Event (Attribute (Indexed (onchange :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r)))
+   . (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+  -> Event
+       ( Attribute
+           (Indexed (onchange :: Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit | r))
+       )
 _onChange_ = _onChange <<< Applicative.pure
 
 _onClick
   :: forall r
-   . Event (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
-  -> Event (Attribute (Indexed (onclick :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r)))
-_onClick = Functor.map $ (unsafeAttribute <<< { key: "onclick", value: _ } <<< (cb' <<< cb))
+   . Event (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+  -> Event
+       ( Attribute
+           (Indexed (onclick :: Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit | r))
+       )
+_onClick = Functor.map
+  (unsafeAttribute <<< { key: "onclick", value: _ } <<< (Deku.Attribute.cb' <<< Deku.Attribute.cb))
 
 _onClick_
   :: forall r
-   . (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
-  -> Event (Attribute (Indexed (onclick :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r)))
+   . (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+  -> Event
+       ( Attribute
+           (Indexed (onclick :: Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit | r))
+       )
 _onClick_ = _onClick <<< Applicative.pure
 
 _onClose
   :: forall r
-   . Event (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
-  -> Event (Attribute (Indexed (onclose :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r)))
-_onClose = Functor.map $ (unsafeAttribute <<< { key: "onclose", value: _ } <<< (cb' <<< cb))
+   . Event (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+  -> Event
+       ( Attribute
+           (Indexed (onclose :: Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit | r))
+       )
+_onClose = Functor.map
+  (unsafeAttribute <<< { key: "onclose", value: _ } <<< (Deku.Attribute.cb' <<< Deku.Attribute.cb))
 
 _onClose_
   :: forall r
-   . (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
-  -> Event (Attribute (Indexed (onclose :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r)))
+   . (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+  -> Event
+       ( Attribute
+           (Indexed (onclose :: Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit | r))
+       )
 _onClose_ = _onClose <<< Applicative.pure
 
 _onContextlost
   :: forall r
-   . Event (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
+   . Event (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
   -> Event
-       (Attribute (Indexed (oncontextlost :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r)))
-_onContextlost = Functor.map $
-  (unsafeAttribute <<< { key: "oncontextlost", value: _ } <<< (cb' <<< cb))
+       ( Attribute
+           ( Indexed
+               (oncontextlost :: Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit | r)
+           )
+       )
+_onContextlost = Functor.map
+  ( unsafeAttribute <<< { key: "oncontextlost", value: _ } <<<
+      (Deku.Attribute.cb' <<< Deku.Attribute.cb)
+  )
 
 _onContextlost_
   :: forall r
-   . (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
+   . (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
   -> Event
-       (Attribute (Indexed (oncontextlost :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r)))
+       ( Attribute
+           ( Indexed
+               (oncontextlost :: Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit | r)
+           )
+       )
 _onContextlost_ = _onContextlost <<< Applicative.pure
 
 _onContextmenu
   :: forall r
-   . Event (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
+   . Event (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
   -> Event
-       (Attribute (Indexed (oncontextmenu :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r)))
-_onContextmenu = Functor.map $
-  (unsafeAttribute <<< { key: "oncontextmenu", value: _ } <<< (cb' <<< cb))
+       ( Attribute
+           ( Indexed
+               (oncontextmenu :: Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit | r)
+           )
+       )
+_onContextmenu = Functor.map
+  ( unsafeAttribute <<< { key: "oncontextmenu", value: _ } <<<
+      (Deku.Attribute.cb' <<< Deku.Attribute.cb)
+  )
 
 _onContextmenu_
   :: forall r
-   . (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
+   . (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
   -> Event
-       (Attribute (Indexed (oncontextmenu :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r)))
+       ( Attribute
+           ( Indexed
+               (oncontextmenu :: Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit | r)
+           )
+       )
 _onContextmenu_ = _onContextmenu <<< Applicative.pure
 
 _onContextrestored
   :: forall r
-   . Event (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
+   . Event (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
   -> Event
-       (Attribute (Indexed (oncontextrestored :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r)))
-_onContextrestored = Functor.map $
-  (unsafeAttribute <<< { key: "oncontextrestored", value: _ } <<< (cb' <<< cb))
+       ( Attribute
+           ( Indexed
+               (oncontextrestored :: Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit | r)
+           )
+       )
+_onContextrestored = Functor.map
+  ( unsafeAttribute <<< { key: "oncontextrestored", value: _ } <<<
+      (Deku.Attribute.cb' <<< Deku.Attribute.cb)
+  )
 
 _onContextrestored_
   :: forall r
-   . (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
+   . (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
   -> Event
-       (Attribute (Indexed (oncontextrestored :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r)))
+       ( Attribute
+           ( Indexed
+               (oncontextrestored :: Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit | r)
+           )
+       )
 _onContextrestored_ = _onContextrestored <<< Applicative.pure
 
 _onCopy
   :: forall r
-   . Event (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
-  -> Event (Attribute (Indexed (oncopy :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r)))
-_onCopy = Functor.map $ (unsafeAttribute <<< { key: "oncopy", value: _ } <<< (cb' <<< cb))
+   . Event (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+  -> Event
+       ( Attribute
+           (Indexed (oncopy :: Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit | r))
+       )
+_onCopy = Functor.map
+  (unsafeAttribute <<< { key: "oncopy", value: _ } <<< (Deku.Attribute.cb' <<< Deku.Attribute.cb))
 
 _onCopy_
   :: forall r
-   . (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
-  -> Event (Attribute (Indexed (oncopy :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r)))
+   . (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+  -> Event
+       ( Attribute
+           (Indexed (oncopy :: Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit | r))
+       )
 _onCopy_ = _onCopy <<< Applicative.pure
 
 _onCuechange
   :: forall r
-   . Event (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
-  -> Event (Attribute (Indexed (oncuechange :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r)))
-_onCuechange = Functor.map $
-  (unsafeAttribute <<< { key: "oncuechange", value: _ } <<< (cb' <<< cb))
+   . Event (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+  -> Event
+       ( Attribute
+           (Indexed (oncuechange :: Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit | r))
+       )
+_onCuechange = Functor.map
+  ( unsafeAttribute <<< { key: "oncuechange", value: _ } <<<
+      (Deku.Attribute.cb' <<< Deku.Attribute.cb)
+  )
 
 _onCuechange_
   :: forall r
-   . (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
-  -> Event (Attribute (Indexed (oncuechange :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r)))
+   . (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+  -> Event
+       ( Attribute
+           (Indexed (oncuechange :: Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit | r))
+       )
 _onCuechange_ = _onCuechange <<< Applicative.pure
 
 _onCut
   :: forall r
-   . Event (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
-  -> Event (Attribute (Indexed (oncut :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r)))
-_onCut = Functor.map $ (unsafeAttribute <<< { key: "oncut", value: _ } <<< (cb' <<< cb))
+   . Event (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+  -> Event
+       ( Attribute
+           (Indexed (oncut :: Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit | r))
+       )
+_onCut = Functor.map
+  (unsafeAttribute <<< { key: "oncut", value: _ } <<< (Deku.Attribute.cb' <<< Deku.Attribute.cb))
 
 _onCut_
   :: forall r
-   . (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
-  -> Event (Attribute (Indexed (oncut :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r)))
+   . (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+  -> Event
+       ( Attribute
+           (Indexed (oncut :: Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit | r))
+       )
 _onCut_ = _onCut <<< Applicative.pure
 
 _onDblclick
   :: forall r
-   . Event (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
-  -> Event (Attribute (Indexed (ondblclick :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r)))
-_onDblclick = Functor.map $ (unsafeAttribute <<< { key: "ondblclick", value: _ } <<< (cb' <<< cb))
+   . Event (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+  -> Event
+       ( Attribute
+           (Indexed (ondblclick :: Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit | r))
+       )
+_onDblclick = Functor.map
+  ( unsafeAttribute <<< { key: "ondblclick", value: _ } <<<
+      (Deku.Attribute.cb' <<< Deku.Attribute.cb)
+  )
 
 _onDblclick_
   :: forall r
-   . (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
-  -> Event (Attribute (Indexed (ondblclick :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r)))
+   . (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+  -> Event
+       ( Attribute
+           (Indexed (ondblclick :: Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit | r))
+       )
 _onDblclick_ = _onDblclick <<< Applicative.pure
 
 _onDrag
   :: forall r
-   . Event (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
-  -> Event (Attribute (Indexed (ondrag :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r)))
-_onDrag = Functor.map $ (unsafeAttribute <<< { key: "ondrag", value: _ } <<< (cb' <<< cb))
+   . Event (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+  -> Event
+       ( Attribute
+           (Indexed (ondrag :: Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit | r))
+       )
+_onDrag = Functor.map
+  (unsafeAttribute <<< { key: "ondrag", value: _ } <<< (Deku.Attribute.cb' <<< Deku.Attribute.cb))
 
 _onDrag_
   :: forall r
-   . (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
-  -> Event (Attribute (Indexed (ondrag :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r)))
+   . (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+  -> Event
+       ( Attribute
+           (Indexed (ondrag :: Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit | r))
+       )
 _onDrag_ = _onDrag <<< Applicative.pure
 
 _onDragend
   :: forall r
-   . Event (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
-  -> Event (Attribute (Indexed (ondragend :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r)))
-_onDragend = Functor.map $ (unsafeAttribute <<< { key: "ondragend", value: _ } <<< (cb' <<< cb))
+   . Event (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+  -> Event
+       ( Attribute
+           (Indexed (ondragend :: Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit | r))
+       )
+_onDragend = Functor.map
+  ( unsafeAttribute <<< { key: "ondragend", value: _ } <<<
+      (Deku.Attribute.cb' <<< Deku.Attribute.cb)
+  )
 
 _onDragend_
   :: forall r
-   . (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
-  -> Event (Attribute (Indexed (ondragend :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r)))
+   . (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+  -> Event
+       ( Attribute
+           (Indexed (ondragend :: Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit | r))
+       )
 _onDragend_ = _onDragend <<< Applicative.pure
 
 _onDragenter
   :: forall r
-   . Event (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
-  -> Event (Attribute (Indexed (ondragenter :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r)))
-_onDragenter = Functor.map $
-  (unsafeAttribute <<< { key: "ondragenter", value: _ } <<< (cb' <<< cb))
+   . Event (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+  -> Event
+       ( Attribute
+           (Indexed (ondragenter :: Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit | r))
+       )
+_onDragenter = Functor.map
+  ( unsafeAttribute <<< { key: "ondragenter", value: _ } <<<
+      (Deku.Attribute.cb' <<< Deku.Attribute.cb)
+  )
 
 _onDragenter_
   :: forall r
-   . (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
-  -> Event (Attribute (Indexed (ondragenter :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r)))
+   . (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+  -> Event
+       ( Attribute
+           (Indexed (ondragenter :: Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit | r))
+       )
 _onDragenter_ = _onDragenter <<< Applicative.pure
 
 _onDragleave
   :: forall r
-   . Event (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
-  -> Event (Attribute (Indexed (ondragleave :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r)))
-_onDragleave = Functor.map $
-  (unsafeAttribute <<< { key: "ondragleave", value: _ } <<< (cb' <<< cb))
+   . Event (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+  -> Event
+       ( Attribute
+           (Indexed (ondragleave :: Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit | r))
+       )
+_onDragleave = Functor.map
+  ( unsafeAttribute <<< { key: "ondragleave", value: _ } <<<
+      (Deku.Attribute.cb' <<< Deku.Attribute.cb)
+  )
 
 _onDragleave_
   :: forall r
-   . (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
-  -> Event (Attribute (Indexed (ondragleave :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r)))
+   . (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+  -> Event
+       ( Attribute
+           (Indexed (ondragleave :: Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit | r))
+       )
 _onDragleave_ = _onDragleave <<< Applicative.pure
 
 _onDragover
   :: forall r
-   . Event (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
-  -> Event (Attribute (Indexed (ondragover :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r)))
-_onDragover = Functor.map $ (unsafeAttribute <<< { key: "ondragover", value: _ } <<< (cb' <<< cb))
+   . Event (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+  -> Event
+       ( Attribute
+           (Indexed (ondragover :: Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit | r))
+       )
+_onDragover = Functor.map
+  ( unsafeAttribute <<< { key: "ondragover", value: _ } <<<
+      (Deku.Attribute.cb' <<< Deku.Attribute.cb)
+  )
 
 _onDragover_
   :: forall r
-   . (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
-  -> Event (Attribute (Indexed (ondragover :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r)))
+   . (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+  -> Event
+       ( Attribute
+           (Indexed (ondragover :: Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit | r))
+       )
 _onDragover_ = _onDragover <<< Applicative.pure
 
 _onDragstart
   :: forall r
-   . Event (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
-  -> Event (Attribute (Indexed (ondragstart :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r)))
-_onDragstart = Functor.map $
-  (unsafeAttribute <<< { key: "ondragstart", value: _ } <<< (cb' <<< cb))
+   . Event (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+  -> Event
+       ( Attribute
+           (Indexed (ondragstart :: Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit | r))
+       )
+_onDragstart = Functor.map
+  ( unsafeAttribute <<< { key: "ondragstart", value: _ } <<<
+      (Deku.Attribute.cb' <<< Deku.Attribute.cb)
+  )
 
 _onDragstart_
   :: forall r
-   . (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
-  -> Event (Attribute (Indexed (ondragstart :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r)))
+   . (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+  -> Event
+       ( Attribute
+           (Indexed (ondragstart :: Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit | r))
+       )
 _onDragstart_ = _onDragstart <<< Applicative.pure
 
 _onDrop
   :: forall r
-   . Event (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
-  -> Event (Attribute (Indexed (ondrop :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r)))
-_onDrop = Functor.map $ (unsafeAttribute <<< { key: "ondrop", value: _ } <<< (cb' <<< cb))
+   . Event (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+  -> Event
+       ( Attribute
+           (Indexed (ondrop :: Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit | r))
+       )
+_onDrop = Functor.map
+  (unsafeAttribute <<< { key: "ondrop", value: _ } <<< (Deku.Attribute.cb' <<< Deku.Attribute.cb))
 
 _onDrop_
   :: forall r
-   . (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
-  -> Event (Attribute (Indexed (ondrop :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r)))
+   . (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+  -> Event
+       ( Attribute
+           (Indexed (ondrop :: Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit | r))
+       )
 _onDrop_ = _onDrop <<< Applicative.pure
 
 _onDurationchange
   :: forall r
-   . Event (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
+   . Event (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
   -> Event
-       (Attribute (Indexed (ondurationchange :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r)))
-_onDurationchange = Functor.map $
-  (unsafeAttribute <<< { key: "ondurationchange", value: _ } <<< (cb' <<< cb))
+       ( Attribute
+           ( Indexed
+               (ondurationchange :: Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit | r)
+           )
+       )
+_onDurationchange = Functor.map
+  ( unsafeAttribute <<< { key: "ondurationchange", value: _ } <<<
+      (Deku.Attribute.cb' <<< Deku.Attribute.cb)
+  )
 
 _onDurationchange_
   :: forall r
-   . (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
+   . (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
   -> Event
-       (Attribute (Indexed (ondurationchange :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r)))
+       ( Attribute
+           ( Indexed
+               (ondurationchange :: Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit | r)
+           )
+       )
 _onDurationchange_ = _onDurationchange <<< Applicative.pure
 
 _onEmptied
   :: forall r
-   . Event (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
-  -> Event (Attribute (Indexed (onemptied :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r)))
-_onEmptied = Functor.map $ (unsafeAttribute <<< { key: "onemptied", value: _ } <<< (cb' <<< cb))
+   . Event (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+  -> Event
+       ( Attribute
+           (Indexed (onemptied :: Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit | r))
+       )
+_onEmptied = Functor.map
+  ( unsafeAttribute <<< { key: "onemptied", value: _ } <<<
+      (Deku.Attribute.cb' <<< Deku.Attribute.cb)
+  )
 
 _onEmptied_
   :: forall r
-   . (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
-  -> Event (Attribute (Indexed (onemptied :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r)))
+   . (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+  -> Event
+       ( Attribute
+           (Indexed (onemptied :: Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit | r))
+       )
 _onEmptied_ = _onEmptied <<< Applicative.pure
 
 _onEnded
   :: forall r
-   . Event (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
-  -> Event (Attribute (Indexed (onended :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r)))
-_onEnded = Functor.map $ (unsafeAttribute <<< { key: "onended", value: _ } <<< (cb' <<< cb))
+   . Event (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+  -> Event
+       ( Attribute
+           (Indexed (onended :: Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit | r))
+       )
+_onEnded = Functor.map
+  (unsafeAttribute <<< { key: "onended", value: _ } <<< (Deku.Attribute.cb' <<< Deku.Attribute.cb))
 
 _onEnded_
   :: forall r
-   . (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
-  -> Event (Attribute (Indexed (onended :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r)))
+   . (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+  -> Event
+       ( Attribute
+           (Indexed (onended :: Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit | r))
+       )
 _onEnded_ = _onEnded <<< Applicative.pure
 
 _onFocus
   :: forall r
-   . Event (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
-  -> Event (Attribute (Indexed (onfocus :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r)))
-_onFocus = Functor.map $ (unsafeAttribute <<< { key: "onfocus", value: _ } <<< (cb' <<< cb))
+   . Event (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+  -> Event
+       ( Attribute
+           (Indexed (onfocus :: Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit | r))
+       )
+_onFocus = Functor.map
+  (unsafeAttribute <<< { key: "onfocus", value: _ } <<< (Deku.Attribute.cb' <<< Deku.Attribute.cb))
 
 _onFocus_
   :: forall r
-   . (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
-  -> Event (Attribute (Indexed (onfocus :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r)))
+   . (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+  -> Event
+       ( Attribute
+           (Indexed (onfocus :: Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit | r))
+       )
 _onFocus_ = _onFocus <<< Applicative.pure
 
 _onFormdata
   :: forall r
-   . Event (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
-  -> Event (Attribute (Indexed (onformdata :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r)))
-_onFormdata = Functor.map $ (unsafeAttribute <<< { key: "onformdata", value: _ } <<< (cb' <<< cb))
+   . Event (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+  -> Event
+       ( Attribute
+           (Indexed (onformdata :: Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit | r))
+       )
+_onFormdata = Functor.map
+  ( unsafeAttribute <<< { key: "onformdata", value: _ } <<<
+      (Deku.Attribute.cb' <<< Deku.Attribute.cb)
+  )
 
 _onFormdata_
   :: forall r
-   . (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
-  -> Event (Attribute (Indexed (onformdata :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r)))
+   . (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+  -> Event
+       ( Attribute
+           (Indexed (onformdata :: Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit | r))
+       )
 _onFormdata_ = _onFormdata <<< Applicative.pure
 
 _onInput
   :: forall r
-   . Event (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
-  -> Event (Attribute (Indexed (oninput :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r)))
-_onInput = Functor.map $ (unsafeAttribute <<< { key: "oninput", value: _ } <<< (cb' <<< cb))
+   . Event (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+  -> Event
+       ( Attribute
+           (Indexed (oninput :: Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit | r))
+       )
+_onInput = Functor.map
+  (unsafeAttribute <<< { key: "oninput", value: _ } <<< (Deku.Attribute.cb' <<< Deku.Attribute.cb))
 
 _onInput_
   :: forall r
-   . (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
-  -> Event (Attribute (Indexed (oninput :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r)))
+   . (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+  -> Event
+       ( Attribute
+           (Indexed (oninput :: Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit | r))
+       )
 _onInput_ = _onInput <<< Applicative.pure
 
 _onInvalid
   :: forall r
-   . Event (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
-  -> Event (Attribute (Indexed (oninvalid :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r)))
-_onInvalid = Functor.map $ (unsafeAttribute <<< { key: "oninvalid", value: _ } <<< (cb' <<< cb))
+   . Event (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+  -> Event
+       ( Attribute
+           (Indexed (oninvalid :: Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit | r))
+       )
+_onInvalid = Functor.map
+  ( unsafeAttribute <<< { key: "oninvalid", value: _ } <<<
+      (Deku.Attribute.cb' <<< Deku.Attribute.cb)
+  )
 
 _onInvalid_
   :: forall r
-   . (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
-  -> Event (Attribute (Indexed (oninvalid :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r)))
+   . (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+  -> Event
+       ( Attribute
+           (Indexed (oninvalid :: Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit | r))
+       )
 _onInvalid_ = _onInvalid <<< Applicative.pure
 
 _onKeydown
   :: forall r
-   . Event (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
-  -> Event (Attribute (Indexed (onkeydown :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r)))
-_onKeydown = Functor.map $ (unsafeAttribute <<< { key: "onkeydown", value: _ } <<< (cb' <<< cb))
+   . Event (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+  -> Event
+       ( Attribute
+           (Indexed (onkeydown :: Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit | r))
+       )
+_onKeydown = Functor.map
+  ( unsafeAttribute <<< { key: "onkeydown", value: _ } <<<
+      (Deku.Attribute.cb' <<< Deku.Attribute.cb)
+  )
 
 _onKeydown_
   :: forall r
-   . (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
-  -> Event (Attribute (Indexed (onkeydown :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r)))
+   . (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+  -> Event
+       ( Attribute
+           (Indexed (onkeydown :: Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit | r))
+       )
 _onKeydown_ = _onKeydown <<< Applicative.pure
 
 _onKeypress
   :: forall r
-   . Event (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
-  -> Event (Attribute (Indexed (onkeypress :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r)))
-_onKeypress = Functor.map $ (unsafeAttribute <<< { key: "onkeypress", value: _ } <<< (cb' <<< cb))
+   . Event (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+  -> Event
+       ( Attribute
+           (Indexed (onkeypress :: Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit | r))
+       )
+_onKeypress = Functor.map
+  ( unsafeAttribute <<< { key: "onkeypress", value: _ } <<<
+      (Deku.Attribute.cb' <<< Deku.Attribute.cb)
+  )
 
 _onKeypress_
   :: forall r
-   . (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
-  -> Event (Attribute (Indexed (onkeypress :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r)))
+   . (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+  -> Event
+       ( Attribute
+           (Indexed (onkeypress :: Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit | r))
+       )
 _onKeypress_ = _onKeypress <<< Applicative.pure
 
 _onKeyup
   :: forall r
-   . Event (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
-  -> Event (Attribute (Indexed (onkeyup :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r)))
-_onKeyup = Functor.map $ (unsafeAttribute <<< { key: "onkeyup", value: _ } <<< (cb' <<< cb))
+   . Event (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+  -> Event
+       ( Attribute
+           (Indexed (onkeyup :: Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit | r))
+       )
+_onKeyup = Functor.map
+  (unsafeAttribute <<< { key: "onkeyup", value: _ } <<< (Deku.Attribute.cb' <<< Deku.Attribute.cb))
 
 _onKeyup_
   :: forall r
-   . (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
-  -> Event (Attribute (Indexed (onkeyup :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r)))
+   . (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+  -> Event
+       ( Attribute
+           (Indexed (onkeyup :: Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit | r))
+       )
 _onKeyup_ = _onKeyup <<< Applicative.pure
 
 _onLoad
   :: forall r
-   . Event (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
-  -> Event (Attribute (Indexed (onload :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r)))
-_onLoad = Functor.map $ (unsafeAttribute <<< { key: "onload", value: _ } <<< (cb' <<< cb))
+   . Event (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+  -> Event
+       ( Attribute
+           (Indexed (onload :: Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit | r))
+       )
+_onLoad = Functor.map
+  (unsafeAttribute <<< { key: "onload", value: _ } <<< (Deku.Attribute.cb' <<< Deku.Attribute.cb))
 
 _onLoad_
   :: forall r
-   . (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
-  -> Event (Attribute (Indexed (onload :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r)))
+   . (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+  -> Event
+       ( Attribute
+           (Indexed (onload :: Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit | r))
+       )
 _onLoad_ = _onLoad <<< Applicative.pure
 
 _onLoadeddata
   :: forall r
-   . Event (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
-  -> Event (Attribute (Indexed (onloadeddata :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r)))
-_onLoadeddata = Functor.map $
-  (unsafeAttribute <<< { key: "onloadeddata", value: _ } <<< (cb' <<< cb))
+   . Event (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+  -> Event
+       ( Attribute
+           ( Indexed
+               (onloadeddata :: Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit | r)
+           )
+       )
+_onLoadeddata = Functor.map
+  ( unsafeAttribute <<< { key: "onloadeddata", value: _ } <<<
+      (Deku.Attribute.cb' <<< Deku.Attribute.cb)
+  )
 
 _onLoadeddata_
   :: forall r
-   . (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
-  -> Event (Attribute (Indexed (onloadeddata :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r)))
+   . (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+  -> Event
+       ( Attribute
+           ( Indexed
+               (onloadeddata :: Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit | r)
+           )
+       )
 _onLoadeddata_ = _onLoadeddata <<< Applicative.pure
 
 _onLoadedmetadata
   :: forall r
-   . Event (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
+   . Event (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
   -> Event
-       (Attribute (Indexed (onloadedmetadata :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r)))
-_onLoadedmetadata = Functor.map $
-  (unsafeAttribute <<< { key: "onloadedmetadata", value: _ } <<< (cb' <<< cb))
+       ( Attribute
+           ( Indexed
+               (onloadedmetadata :: Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit | r)
+           )
+       )
+_onLoadedmetadata = Functor.map
+  ( unsafeAttribute <<< { key: "onloadedmetadata", value: _ } <<<
+      (Deku.Attribute.cb' <<< Deku.Attribute.cb)
+  )
 
 _onLoadedmetadata_
   :: forall r
-   . (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
+   . (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
   -> Event
-       (Attribute (Indexed (onloadedmetadata :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r)))
+       ( Attribute
+           ( Indexed
+               (onloadedmetadata :: Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit | r)
+           )
+       )
 _onLoadedmetadata_ = _onLoadedmetadata <<< Applicative.pure
 
 _onLoadstart
   :: forall r
-   . Event (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
-  -> Event (Attribute (Indexed (onloadstart :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r)))
-_onLoadstart = Functor.map $
-  (unsafeAttribute <<< { key: "onloadstart", value: _ } <<< (cb' <<< cb))
+   . Event (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+  -> Event
+       ( Attribute
+           (Indexed (onloadstart :: Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit | r))
+       )
+_onLoadstart = Functor.map
+  ( unsafeAttribute <<< { key: "onloadstart", value: _ } <<<
+      (Deku.Attribute.cb' <<< Deku.Attribute.cb)
+  )
 
 _onLoadstart_
   :: forall r
-   . (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
-  -> Event (Attribute (Indexed (onloadstart :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r)))
+   . (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+  -> Event
+       ( Attribute
+           (Indexed (onloadstart :: Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit | r))
+       )
 _onLoadstart_ = _onLoadstart <<< Applicative.pure
 
 _onMousedown
   :: forall r
-   . Event (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
-  -> Event (Attribute (Indexed (onmousedown :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r)))
-_onMousedown = Functor.map $
-  (unsafeAttribute <<< { key: "onmousedown", value: _ } <<< (cb' <<< cb))
+   . Event (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+  -> Event
+       ( Attribute
+           (Indexed (onmousedown :: Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit | r))
+       )
+_onMousedown = Functor.map
+  ( unsafeAttribute <<< { key: "onmousedown", value: _ } <<<
+      (Deku.Attribute.cb' <<< Deku.Attribute.cb)
+  )
 
 _onMousedown_
   :: forall r
-   . (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
-  -> Event (Attribute (Indexed (onmousedown :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r)))
+   . (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+  -> Event
+       ( Attribute
+           (Indexed (onmousedown :: Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit | r))
+       )
 _onMousedown_ = _onMousedown <<< Applicative.pure
 
 _onMouseenter
   :: forall r
-   . Event (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
-  -> Event (Attribute (Indexed (onmouseenter :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r)))
-_onMouseenter = Functor.map $
-  (unsafeAttribute <<< { key: "onmouseenter", value: _ } <<< (cb' <<< cb))
+   . Event (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+  -> Event
+       ( Attribute
+           ( Indexed
+               (onmouseenter :: Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit | r)
+           )
+       )
+_onMouseenter = Functor.map
+  ( unsafeAttribute <<< { key: "onmouseenter", value: _ } <<<
+      (Deku.Attribute.cb' <<< Deku.Attribute.cb)
+  )
 
 _onMouseenter_
   :: forall r
-   . (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
-  -> Event (Attribute (Indexed (onmouseenter :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r)))
+   . (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+  -> Event
+       ( Attribute
+           ( Indexed
+               (onmouseenter :: Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit | r)
+           )
+       )
 _onMouseenter_ = _onMouseenter <<< Applicative.pure
 
 _onMouseleave
   :: forall r
-   . Event (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
-  -> Event (Attribute (Indexed (onmouseleave :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r)))
-_onMouseleave = Functor.map $
-  (unsafeAttribute <<< { key: "onmouseleave", value: _ } <<< (cb' <<< cb))
+   . Event (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+  -> Event
+       ( Attribute
+           ( Indexed
+               (onmouseleave :: Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit | r)
+           )
+       )
+_onMouseleave = Functor.map
+  ( unsafeAttribute <<< { key: "onmouseleave", value: _ } <<<
+      (Deku.Attribute.cb' <<< Deku.Attribute.cb)
+  )
 
 _onMouseleave_
   :: forall r
-   . (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
-  -> Event (Attribute (Indexed (onmouseleave :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r)))
+   . (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+  -> Event
+       ( Attribute
+           ( Indexed
+               (onmouseleave :: Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit | r)
+           )
+       )
 _onMouseleave_ = _onMouseleave <<< Applicative.pure
 
 _onMousemove
   :: forall r
-   . Event (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
-  -> Event (Attribute (Indexed (onmousemove :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r)))
-_onMousemove = Functor.map $
-  (unsafeAttribute <<< { key: "onmousemove", value: _ } <<< (cb' <<< cb))
+   . Event (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+  -> Event
+       ( Attribute
+           (Indexed (onmousemove :: Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit | r))
+       )
+_onMousemove = Functor.map
+  ( unsafeAttribute <<< { key: "onmousemove", value: _ } <<<
+      (Deku.Attribute.cb' <<< Deku.Attribute.cb)
+  )
 
 _onMousemove_
   :: forall r
-   . (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
-  -> Event (Attribute (Indexed (onmousemove :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r)))
+   . (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+  -> Event
+       ( Attribute
+           (Indexed (onmousemove :: Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit | r))
+       )
 _onMousemove_ = _onMousemove <<< Applicative.pure
 
 _onMouseout
   :: forall r
-   . Event (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
-  -> Event (Attribute (Indexed (onmouseout :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r)))
-_onMouseout = Functor.map $ (unsafeAttribute <<< { key: "onmouseout", value: _ } <<< (cb' <<< cb))
+   . Event (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+  -> Event
+       ( Attribute
+           (Indexed (onmouseout :: Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit | r))
+       )
+_onMouseout = Functor.map
+  ( unsafeAttribute <<< { key: "onmouseout", value: _ } <<<
+      (Deku.Attribute.cb' <<< Deku.Attribute.cb)
+  )
 
 _onMouseout_
   :: forall r
-   . (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
-  -> Event (Attribute (Indexed (onmouseout :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r)))
+   . (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+  -> Event
+       ( Attribute
+           (Indexed (onmouseout :: Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit | r))
+       )
 _onMouseout_ = _onMouseout <<< Applicative.pure
 
 _onMouseover
   :: forall r
-   . Event (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
-  -> Event (Attribute (Indexed (onmouseover :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r)))
-_onMouseover = Functor.map $
-  (unsafeAttribute <<< { key: "onmouseover", value: _ } <<< (cb' <<< cb))
+   . Event (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+  -> Event
+       ( Attribute
+           (Indexed (onmouseover :: Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit | r))
+       )
+_onMouseover = Functor.map
+  ( unsafeAttribute <<< { key: "onmouseover", value: _ } <<<
+      (Deku.Attribute.cb' <<< Deku.Attribute.cb)
+  )
 
 _onMouseover_
   :: forall r
-   . (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
-  -> Event (Attribute (Indexed (onmouseover :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r)))
+   . (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+  -> Event
+       ( Attribute
+           (Indexed (onmouseover :: Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit | r))
+       )
 _onMouseover_ = _onMouseover <<< Applicative.pure
 
 _onMouseup
   :: forall r
-   . Event (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
-  -> Event (Attribute (Indexed (onmouseup :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r)))
-_onMouseup = Functor.map $ (unsafeAttribute <<< { key: "onmouseup", value: _ } <<< (cb' <<< cb))
+   . Event (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+  -> Event
+       ( Attribute
+           (Indexed (onmouseup :: Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit | r))
+       )
+_onMouseup = Functor.map
+  ( unsafeAttribute <<< { key: "onmouseup", value: _ } <<<
+      (Deku.Attribute.cb' <<< Deku.Attribute.cb)
+  )
 
 _onMouseup_
   :: forall r
-   . (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
-  -> Event (Attribute (Indexed (onmouseup :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r)))
+   . (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+  -> Event
+       ( Attribute
+           (Indexed (onmouseup :: Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit | r))
+       )
 _onMouseup_ = _onMouseup <<< Applicative.pure
 
 _onPaste
   :: forall r
-   . Event (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
-  -> Event (Attribute (Indexed (onpaste :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r)))
-_onPaste = Functor.map $ (unsafeAttribute <<< { key: "onpaste", value: _ } <<< (cb' <<< cb))
+   . Event (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+  -> Event
+       ( Attribute
+           (Indexed (onpaste :: Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit | r))
+       )
+_onPaste = Functor.map
+  (unsafeAttribute <<< { key: "onpaste", value: _ } <<< (Deku.Attribute.cb' <<< Deku.Attribute.cb))
 
 _onPaste_
   :: forall r
-   . (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
-  -> Event (Attribute (Indexed (onpaste :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r)))
+   . (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+  -> Event
+       ( Attribute
+           (Indexed (onpaste :: Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit | r))
+       )
 _onPaste_ = _onPaste <<< Applicative.pure
 
 _onPause
   :: forall r
-   . Event (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
-  -> Event (Attribute (Indexed (onpause :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r)))
-_onPause = Functor.map $ (unsafeAttribute <<< { key: "onpause", value: _ } <<< (cb' <<< cb))
+   . Event (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+  -> Event
+       ( Attribute
+           (Indexed (onpause :: Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit | r))
+       )
+_onPause = Functor.map
+  (unsafeAttribute <<< { key: "onpause", value: _ } <<< (Deku.Attribute.cb' <<< Deku.Attribute.cb))
 
 _onPause_
   :: forall r
-   . (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
-  -> Event (Attribute (Indexed (onpause :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r)))
+   . (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+  -> Event
+       ( Attribute
+           (Indexed (onpause :: Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit | r))
+       )
 _onPause_ = _onPause <<< Applicative.pure
 
 _onPlay
   :: forall r
-   . Event (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
-  -> Event (Attribute (Indexed (onplay :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r)))
-_onPlay = Functor.map $ (unsafeAttribute <<< { key: "onplay", value: _ } <<< (cb' <<< cb))
+   . Event (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+  -> Event
+       ( Attribute
+           (Indexed (onplay :: Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit | r))
+       )
+_onPlay = Functor.map
+  (unsafeAttribute <<< { key: "onplay", value: _ } <<< (Deku.Attribute.cb' <<< Deku.Attribute.cb))
 
 _onPlay_
   :: forall r
-   . (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
-  -> Event (Attribute (Indexed (onplay :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r)))
+   . (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+  -> Event
+       ( Attribute
+           (Indexed (onplay :: Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit | r))
+       )
 _onPlay_ = _onPlay <<< Applicative.pure
 
 _onPlaying
   :: forall r
-   . Event (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
-  -> Event (Attribute (Indexed (onplaying :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r)))
-_onPlaying = Functor.map $ (unsafeAttribute <<< { key: "onplaying", value: _ } <<< (cb' <<< cb))
+   . Event (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+  -> Event
+       ( Attribute
+           (Indexed (onplaying :: Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit | r))
+       )
+_onPlaying = Functor.map
+  ( unsafeAttribute <<< { key: "onplaying", value: _ } <<<
+      (Deku.Attribute.cb' <<< Deku.Attribute.cb)
+  )
 
 _onPlaying_
   :: forall r
-   . (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
-  -> Event (Attribute (Indexed (onplaying :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r)))
+   . (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+  -> Event
+       ( Attribute
+           (Indexed (onplaying :: Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit | r))
+       )
 _onPlaying_ = _onPlaying <<< Applicative.pure
 
 _onProgress
   :: forall r
-   . Event (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
-  -> Event (Attribute (Indexed (onprogress :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r)))
-_onProgress = Functor.map $ (unsafeAttribute <<< { key: "onprogress", value: _ } <<< (cb' <<< cb))
+   . Event (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+  -> Event
+       ( Attribute
+           (Indexed (onprogress :: Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit | r))
+       )
+_onProgress = Functor.map
+  ( unsafeAttribute <<< { key: "onprogress", value: _ } <<<
+      (Deku.Attribute.cb' <<< Deku.Attribute.cb)
+  )
 
 _onProgress_
   :: forall r
-   . (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
-  -> Event (Attribute (Indexed (onprogress :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r)))
+   . (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+  -> Event
+       ( Attribute
+           (Indexed (onprogress :: Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit | r))
+       )
 _onProgress_ = _onProgress <<< Applicative.pure
 
 _onRatechange
   :: forall r
-   . Event (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
-  -> Event (Attribute (Indexed (onratechange :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r)))
-_onRatechange = Functor.map $
-  (unsafeAttribute <<< { key: "onratechange", value: _ } <<< (cb' <<< cb))
+   . Event (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+  -> Event
+       ( Attribute
+           ( Indexed
+               (onratechange :: Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit | r)
+           )
+       )
+_onRatechange = Functor.map
+  ( unsafeAttribute <<< { key: "onratechange", value: _ } <<<
+      (Deku.Attribute.cb' <<< Deku.Attribute.cb)
+  )
 
 _onRatechange_
   :: forall r
-   . (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
-  -> Event (Attribute (Indexed (onratechange :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r)))
+   . (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+  -> Event
+       ( Attribute
+           ( Indexed
+               (onratechange :: Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit | r)
+           )
+       )
 _onRatechange_ = _onRatechange <<< Applicative.pure
 
 _onReset
   :: forall r
-   . Event (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
-  -> Event (Attribute (Indexed (onreset :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r)))
-_onReset = Functor.map $ (unsafeAttribute <<< { key: "onreset", value: _ } <<< (cb' <<< cb))
+   . Event (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+  -> Event
+       ( Attribute
+           (Indexed (onreset :: Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit | r))
+       )
+_onReset = Functor.map
+  (unsafeAttribute <<< { key: "onreset", value: _ } <<< (Deku.Attribute.cb' <<< Deku.Attribute.cb))
 
 _onReset_
   :: forall r
-   . (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
-  -> Event (Attribute (Indexed (onreset :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r)))
+   . (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+  -> Event
+       ( Attribute
+           (Indexed (onreset :: Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit | r))
+       )
 _onReset_ = _onReset <<< Applicative.pure
 
 _onResize
   :: forall r
-   . Event (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
-  -> Event (Attribute (Indexed (onresize :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r)))
-_onResize = Functor.map $ (unsafeAttribute <<< { key: "onresize", value: _ } <<< (cb' <<< cb))
+   . Event (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+  -> Event
+       ( Attribute
+           (Indexed (onresize :: Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit | r))
+       )
+_onResize = Functor.map
+  (unsafeAttribute <<< { key: "onresize", value: _ } <<< (Deku.Attribute.cb' <<< Deku.Attribute.cb))
 
 _onResize_
   :: forall r
-   . (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
-  -> Event (Attribute (Indexed (onresize :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r)))
+   . (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+  -> Event
+       ( Attribute
+           (Indexed (onresize :: Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit | r))
+       )
 _onResize_ = _onResize <<< Applicative.pure
 
 _onScroll
   :: forall r
-   . Event (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
-  -> Event (Attribute (Indexed (onscroll :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r)))
-_onScroll = Functor.map $ (unsafeAttribute <<< { key: "onscroll", value: _ } <<< (cb' <<< cb))
+   . Event (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+  -> Event
+       ( Attribute
+           (Indexed (onscroll :: Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit | r))
+       )
+_onScroll = Functor.map
+  (unsafeAttribute <<< { key: "onscroll", value: _ } <<< (Deku.Attribute.cb' <<< Deku.Attribute.cb))
 
 _onScroll_
   :: forall r
-   . (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
-  -> Event (Attribute (Indexed (onscroll :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r)))
+   . (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+  -> Event
+       ( Attribute
+           (Indexed (onscroll :: Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit | r))
+       )
 _onScroll_ = _onScroll <<< Applicative.pure
 
 _onScrollend
   :: forall r
-   . Event (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
-  -> Event (Attribute (Indexed (onscrollend :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r)))
-_onScrollend = Functor.map $
-  (unsafeAttribute <<< { key: "onscrollend", value: _ } <<< (cb' <<< cb))
+   . Event (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+  -> Event
+       ( Attribute
+           (Indexed (onscrollend :: Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit | r))
+       )
+_onScrollend = Functor.map
+  ( unsafeAttribute <<< { key: "onscrollend", value: _ } <<<
+      (Deku.Attribute.cb' <<< Deku.Attribute.cb)
+  )
 
 _onScrollend_
   :: forall r
-   . (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
-  -> Event (Attribute (Indexed (onscrollend :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r)))
+   . (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+  -> Event
+       ( Attribute
+           (Indexed (onscrollend :: Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit | r))
+       )
 _onScrollend_ = _onScrollend <<< Applicative.pure
 
 _onSecuritypolicyviolation
   :: forall r
-   . Event (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
+   . Event (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
   -> Event
        ( Attribute
-           (Indexed (onsecuritypolicyviolation :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r))
+           ( Indexed
+               ( onsecuritypolicyviolation ::
+                   Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit
+               | r
+               )
+           )
        )
-_onSecuritypolicyviolation = Functor.map $
-  (unsafeAttribute <<< { key: "onsecuritypolicyviolation", value: _ } <<< (cb' <<< cb))
+_onSecuritypolicyviolation = Functor.map
+  ( unsafeAttribute <<< { key: "onsecuritypolicyviolation", value: _ } <<<
+      (Deku.Attribute.cb' <<< Deku.Attribute.cb)
+  )
 
 _onSecuritypolicyviolation_
   :: forall r
-   . (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
+   . (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
   -> Event
        ( Attribute
-           (Indexed (onsecuritypolicyviolation :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r))
+           ( Indexed
+               ( onsecuritypolicyviolation ::
+                   Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit
+               | r
+               )
+           )
        )
 _onSecuritypolicyviolation_ = _onSecuritypolicyviolation <<< Applicative.pure
 
 _onSeeked
   :: forall r
-   . Event (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
-  -> Event (Attribute (Indexed (onseeked :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r)))
-_onSeeked = Functor.map $ (unsafeAttribute <<< { key: "onseeked", value: _ } <<< (cb' <<< cb))
+   . Event (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+  -> Event
+       ( Attribute
+           (Indexed (onseeked :: Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit | r))
+       )
+_onSeeked = Functor.map
+  (unsafeAttribute <<< { key: "onseeked", value: _ } <<< (Deku.Attribute.cb' <<< Deku.Attribute.cb))
 
 _onSeeked_
   :: forall r
-   . (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
-  -> Event (Attribute (Indexed (onseeked :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r)))
+   . (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+  -> Event
+       ( Attribute
+           (Indexed (onseeked :: Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit | r))
+       )
 _onSeeked_ = _onSeeked <<< Applicative.pure
 
 _onSeeking
   :: forall r
-   . Event (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
-  -> Event (Attribute (Indexed (onseeking :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r)))
-_onSeeking = Functor.map $ (unsafeAttribute <<< { key: "onseeking", value: _ } <<< (cb' <<< cb))
+   . Event (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+  -> Event
+       ( Attribute
+           (Indexed (onseeking :: Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit | r))
+       )
+_onSeeking = Functor.map
+  ( unsafeAttribute <<< { key: "onseeking", value: _ } <<<
+      (Deku.Attribute.cb' <<< Deku.Attribute.cb)
+  )
 
 _onSeeking_
   :: forall r
-   . (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
-  -> Event (Attribute (Indexed (onseeking :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r)))
+   . (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+  -> Event
+       ( Attribute
+           (Indexed (onseeking :: Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit | r))
+       )
 _onSeeking_ = _onSeeking <<< Applicative.pure
 
 _onSelect
   :: forall r
-   . Event (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
-  -> Event (Attribute (Indexed (onselect :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r)))
-_onSelect = Functor.map $ (unsafeAttribute <<< { key: "onselect", value: _ } <<< (cb' <<< cb))
+   . Event (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+  -> Event
+       ( Attribute
+           (Indexed (onselect :: Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit | r))
+       )
+_onSelect = Functor.map
+  (unsafeAttribute <<< { key: "onselect", value: _ } <<< (Deku.Attribute.cb' <<< Deku.Attribute.cb))
 
 _onSelect_
   :: forall r
-   . (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
-  -> Event (Attribute (Indexed (onselect :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r)))
+   . (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+  -> Event
+       ( Attribute
+           (Indexed (onselect :: Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit | r))
+       )
 _onSelect_ = _onSelect <<< Applicative.pure
 
 _onSlotchange
   :: forall r
-   . Event (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
-  -> Event (Attribute (Indexed (onslotchange :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r)))
-_onSlotchange = Functor.map $
-  (unsafeAttribute <<< { key: "onslotchange", value: _ } <<< (cb' <<< cb))
+   . Event (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+  -> Event
+       ( Attribute
+           ( Indexed
+               (onslotchange :: Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit | r)
+           )
+       )
+_onSlotchange = Functor.map
+  ( unsafeAttribute <<< { key: "onslotchange", value: _ } <<<
+      (Deku.Attribute.cb' <<< Deku.Attribute.cb)
+  )
 
 _onSlotchange_
   :: forall r
-   . (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
-  -> Event (Attribute (Indexed (onslotchange :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r)))
+   . (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+  -> Event
+       ( Attribute
+           ( Indexed
+               (onslotchange :: Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit | r)
+           )
+       )
 _onSlotchange_ = _onSlotchange <<< Applicative.pure
 
 _onStalled
   :: forall r
-   . Event (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
-  -> Event (Attribute (Indexed (onstalled :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r)))
-_onStalled = Functor.map $ (unsafeAttribute <<< { key: "onstalled", value: _ } <<< (cb' <<< cb))
+   . Event (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+  -> Event
+       ( Attribute
+           (Indexed (onstalled :: Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit | r))
+       )
+_onStalled = Functor.map
+  ( unsafeAttribute <<< { key: "onstalled", value: _ } <<<
+      (Deku.Attribute.cb' <<< Deku.Attribute.cb)
+  )
 
 _onStalled_
   :: forall r
-   . (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
-  -> Event (Attribute (Indexed (onstalled :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r)))
+   . (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+  -> Event
+       ( Attribute
+           (Indexed (onstalled :: Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit | r))
+       )
 _onStalled_ = _onStalled <<< Applicative.pure
 
 _onSubmit
   :: forall r
-   . Event (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
-  -> Event (Attribute (Indexed (onsubmit :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r)))
-_onSubmit = Functor.map $ (unsafeAttribute <<< { key: "onsubmit", value: _ } <<< (cb' <<< cb))
+   . Event (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+  -> Event
+       ( Attribute
+           (Indexed (onsubmit :: Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit | r))
+       )
+_onSubmit = Functor.map
+  (unsafeAttribute <<< { key: "onsubmit", value: _ } <<< (Deku.Attribute.cb' <<< Deku.Attribute.cb))
 
 _onSubmit_
   :: forall r
-   . (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
-  -> Event (Attribute (Indexed (onsubmit :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r)))
+   . (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+  -> Event
+       ( Attribute
+           (Indexed (onsubmit :: Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit | r))
+       )
 _onSubmit_ = _onSubmit <<< Applicative.pure
 
 _onSuspend
   :: forall r
-   . Event (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
-  -> Event (Attribute (Indexed (onsuspend :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r)))
-_onSuspend = Functor.map $ (unsafeAttribute <<< { key: "onsuspend", value: _ } <<< (cb' <<< cb))
+   . Event (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+  -> Event
+       ( Attribute
+           (Indexed (onsuspend :: Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit | r))
+       )
+_onSuspend = Functor.map
+  ( unsafeAttribute <<< { key: "onsuspend", value: _ } <<<
+      (Deku.Attribute.cb' <<< Deku.Attribute.cb)
+  )
 
 _onSuspend_
   :: forall r
-   . (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
-  -> Event (Attribute (Indexed (onsuspend :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r)))
+   . (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+  -> Event
+       ( Attribute
+           (Indexed (onsuspend :: Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit | r))
+       )
 _onSuspend_ = _onSuspend <<< Applicative.pure
 
 _onTimeupdate
   :: forall r
-   . Event (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
-  -> Event (Attribute (Indexed (ontimeupdate :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r)))
-_onTimeupdate = Functor.map $
-  (unsafeAttribute <<< { key: "ontimeupdate", value: _ } <<< (cb' <<< cb))
+   . Event (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+  -> Event
+       ( Attribute
+           ( Indexed
+               (ontimeupdate :: Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit | r)
+           )
+       )
+_onTimeupdate = Functor.map
+  ( unsafeAttribute <<< { key: "ontimeupdate", value: _ } <<<
+      (Deku.Attribute.cb' <<< Deku.Attribute.cb)
+  )
 
 _onTimeupdate_
   :: forall r
-   . (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
-  -> Event (Attribute (Indexed (ontimeupdate :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r)))
+   . (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+  -> Event
+       ( Attribute
+           ( Indexed
+               (ontimeupdate :: Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit | r)
+           )
+       )
 _onTimeupdate_ = _onTimeupdate <<< Applicative.pure
 
 _onToggle
   :: forall r
-   . Event (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
-  -> Event (Attribute (Indexed (ontoggle :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r)))
-_onToggle = Functor.map $ (unsafeAttribute <<< { key: "ontoggle", value: _ } <<< (cb' <<< cb))
+   . Event (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+  -> Event
+       ( Attribute
+           (Indexed (ontoggle :: Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit | r))
+       )
+_onToggle = Functor.map
+  (unsafeAttribute <<< { key: "ontoggle", value: _ } <<< (Deku.Attribute.cb' <<< Deku.Attribute.cb))
 
 _onToggle_
   :: forall r
-   . (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
-  -> Event (Attribute (Indexed (ontoggle :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r)))
+   . (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+  -> Event
+       ( Attribute
+           (Indexed (ontoggle :: Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit | r))
+       )
 _onToggle_ = _onToggle <<< Applicative.pure
 
 _onVolumechange
   :: forall r
-   . Event (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
+   . Event (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
   -> Event
-       (Attribute (Indexed (onvolumechange :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r)))
-_onVolumechange = Functor.map $
-  (unsafeAttribute <<< { key: "onvolumechange", value: _ } <<< (cb' <<< cb))
+       ( Attribute
+           ( Indexed
+               (onvolumechange :: Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit | r)
+           )
+       )
+_onVolumechange = Functor.map
+  ( unsafeAttribute <<< { key: "onvolumechange", value: _ } <<<
+      (Deku.Attribute.cb' <<< Deku.Attribute.cb)
+  )
 
 _onVolumechange_
   :: forall r
-   . (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
+   . (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
   -> Event
-       (Attribute (Indexed (onvolumechange :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r)))
+       ( Attribute
+           ( Indexed
+               (onvolumechange :: Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit | r)
+           )
+       )
 _onVolumechange_ = _onVolumechange <<< Applicative.pure
 
 _onWaiting
   :: forall r
-   . Event (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
-  -> Event (Attribute (Indexed (onwaiting :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r)))
-_onWaiting = Functor.map $ (unsafeAttribute <<< { key: "onwaiting", value: _ } <<< (cb' <<< cb))
+   . Event (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+  -> Event
+       ( Attribute
+           (Indexed (onwaiting :: Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit | r))
+       )
+_onWaiting = Functor.map
+  ( unsafeAttribute <<< { key: "onwaiting", value: _ } <<<
+      (Deku.Attribute.cb' <<< Deku.Attribute.cb)
+  )
 
 _onWaiting_
   :: forall r
-   . (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
-  -> Event (Attribute (Indexed (onwaiting :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r)))
+   . (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+  -> Event
+       ( Attribute
+           (Indexed (onwaiting :: Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit | r))
+       )
 _onWaiting_ = _onWaiting <<< Applicative.pure
 
 _onWebkitanimationend
   :: forall r
-   . Event (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
+   . Event (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
   -> Event
        ( Attribute
-           (Indexed (onwebkitanimationend :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r))
+           ( Indexed
+               ( onwebkitanimationend :: Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit
+               | r
+               )
+           )
        )
-_onWebkitanimationend = Functor.map $
-  (unsafeAttribute <<< { key: "onwebkitanimationend", value: _ } <<< (cb' <<< cb))
+_onWebkitanimationend = Functor.map
+  ( unsafeAttribute <<< { key: "onwebkitanimationend", value: _ } <<<
+      (Deku.Attribute.cb' <<< Deku.Attribute.cb)
+  )
 
 _onWebkitanimationend_
   :: forall r
-   . (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
+   . (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
   -> Event
        ( Attribute
-           (Indexed (onwebkitanimationend :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r))
+           ( Indexed
+               ( onwebkitanimationend :: Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit
+               | r
+               )
+           )
        )
 _onWebkitanimationend_ = _onWebkitanimationend <<< Applicative.pure
 
 _onWebkitanimationiteration
   :: forall r
-   . Event (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
+   . Event (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
   -> Event
        ( Attribute
-           (Indexed (onwebkitanimationiteration :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r))
+           ( Indexed
+               ( onwebkitanimationiteration ::
+                   Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit
+               | r
+               )
+           )
        )
-_onWebkitanimationiteration = Functor.map $
-  (unsafeAttribute <<< { key: "onwebkitanimationiteration", value: _ } <<< (cb' <<< cb))
+_onWebkitanimationiteration = Functor.map
+  ( unsafeAttribute <<< { key: "onwebkitanimationiteration", value: _ } <<<
+      (Deku.Attribute.cb' <<< Deku.Attribute.cb)
+  )
 
 _onWebkitanimationiteration_
   :: forall r
-   . (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
+   . (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
   -> Event
        ( Attribute
-           (Indexed (onwebkitanimationiteration :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r))
+           ( Indexed
+               ( onwebkitanimationiteration ::
+                   Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit
+               | r
+               )
+           )
        )
 _onWebkitanimationiteration_ = _onWebkitanimationiteration <<< Applicative.pure
 
 _onWebkitanimationstart
   :: forall r
-   . Event (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
+   . Event (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
   -> Event
        ( Attribute
-           (Indexed (onwebkitanimationstart :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r))
+           ( Indexed
+               ( onwebkitanimationstart :: Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit
+               | r
+               )
+           )
        )
-_onWebkitanimationstart = Functor.map $
-  (unsafeAttribute <<< { key: "onwebkitanimationstart", value: _ } <<< (cb' <<< cb))
+_onWebkitanimationstart = Functor.map
+  ( unsafeAttribute <<< { key: "onwebkitanimationstart", value: _ } <<<
+      (Deku.Attribute.cb' <<< Deku.Attribute.cb)
+  )
 
 _onWebkitanimationstart_
   :: forall r
-   . (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
+   . (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
   -> Event
        ( Attribute
-           (Indexed (onwebkitanimationstart :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r))
+           ( Indexed
+               ( onwebkitanimationstart :: Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit
+               | r
+               )
+           )
        )
 _onWebkitanimationstart_ = _onWebkitanimationstart <<< Applicative.pure
 
 _onWebkittransitionend
   :: forall r
-   . Event (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
+   . Event (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
   -> Event
        ( Attribute
-           (Indexed (onwebkittransitionend :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r))
+           ( Indexed
+               ( onwebkittransitionend :: Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit
+               | r
+               )
+           )
        )
-_onWebkittransitionend = Functor.map $
-  (unsafeAttribute <<< { key: "onwebkittransitionend", value: _ } <<< (cb' <<< cb))
+_onWebkittransitionend = Functor.map
+  ( unsafeAttribute <<< { key: "onwebkittransitionend", value: _ } <<<
+      (Deku.Attribute.cb' <<< Deku.Attribute.cb)
+  )
 
 _onWebkittransitionend_
   :: forall r
-   . (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
+   . (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
   -> Event
        ( Attribute
-           (Indexed (onwebkittransitionend :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r))
+           ( Indexed
+               ( onwebkittransitionend :: Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit
+               | r
+               )
+           )
        )
 _onWebkittransitionend_ = _onWebkittransitionend <<< Applicative.pure
 
 _onWheel
   :: forall r
-   . Event (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
-  -> Event (Attribute (Indexed (onwheel :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r)))
-_onWheel = Functor.map $ (unsafeAttribute <<< { key: "onwheel", value: _ } <<< (cb' <<< cb))
+   . Event (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+  -> Event
+       ( Attribute
+           (Indexed (onwheel :: Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit | r))
+       )
+_onWheel = Functor.map
+  (unsafeAttribute <<< { key: "onwheel", value: _ } <<< (Deku.Attribute.cb' <<< Deku.Attribute.cb))
 
 _onWheel_
   :: forall r
-   . (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
-  -> Event (Attribute (Indexed (onwheel :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r)))
+   . (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+  -> Event
+       ( Attribute
+           (Indexed (onwheel :: Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit | r))
+       )
 _onWheel_ = _onWheel <<< Applicative.pure
 
+_coords :: forall r. Event String -> Event (Attribute (Indexed (coords :: String | r)))
+_coords = Functor.map (unsafeAttribute <<< { key: "coords", value: _ } <<< Deku.Attribute.prop')
+
+_coords_ :: forall r. String -> Event (Attribute (Indexed (coords :: String | r)))
+_coords_ = _coords <<< Applicative.pure
+
+_charset :: forall r. Event String -> Event (Attribute (Indexed (charset :: String | r)))
+_charset = Functor.map (unsafeAttribute <<< { key: "charset", value: _ } <<< Deku.Attribute.prop')
+
+_charset_ :: forall r. String -> Event (Attribute (Indexed (charset :: String | r)))
+_charset_ = _charset <<< Applicative.pure
+
+_rev :: forall r. Event String -> Event (Attribute (Indexed (rev :: String | r)))
+_rev = Functor.map (unsafeAttribute <<< { key: "rev", value: _ } <<< Deku.Attribute.prop')
+
+_rev_ :: forall r. String -> Event (Attribute (Indexed (rev :: String | r)))
+_rev_ = _rev <<< Applicative.pure
+
 _target :: forall r. Event String -> Event (Attribute (Indexed (target :: String | r)))
-_target = Functor.map $ (unsafeAttribute <<< { key: "target", value: _ } <<< prop')
+_target = Functor.map (unsafeAttribute <<< { key: "target", value: _ } <<< Deku.Attribute.prop')
 
 _target_ :: forall r. String -> Event (Attribute (Indexed (target :: String | r)))
 _target_ = _target <<< Applicative.pure
 
 _download :: forall r. Event String -> Event (Attribute (Indexed (download :: String | r)))
-_download = Functor.map $ (unsafeAttribute <<< { key: "download", value: _ } <<< prop')
+_download = Functor.map
+  (unsafeAttribute <<< { key: "download", value: _ } <<< Deku.Attribute.prop')
 
 _download_ :: forall r. String -> Event (Attribute (Indexed (download :: String | r)))
 _download_ = _download <<< Applicative.pure
 
 _ping :: forall r. Event String -> Event (Attribute (Indexed (ping :: String | r)))
-_ping = Functor.map $ (unsafeAttribute <<< { key: "ping", value: _ } <<< prop')
+_ping = Functor.map (unsafeAttribute <<< { key: "ping", value: _ } <<< Deku.Attribute.prop')
 
 _ping_ :: forall r. String -> Event (Attribute (Indexed (ping :: String | r)))
 _ping_ = _ping <<< Applicative.pure
 
 _hreflang :: forall r. Event String -> Event (Attribute (Indexed (hreflang :: String | r)))
-_hreflang = Functor.map $ (unsafeAttribute <<< { key: "hreflang", value: _ } <<< prop')
+_hreflang = Functor.map
+  (unsafeAttribute <<< { key: "hreflang", value: _ } <<< Deku.Attribute.prop')
 
 _hreflang_ :: forall r. String -> Event (Attribute (Indexed (hreflang :: String | r)))
 _hreflang_ = _hreflang <<< Applicative.pure
 
 _text :: forall r. Event String -> Event (Attribute (Indexed (text :: String | r)))
-_text = Functor.map $ (unsafeAttribute <<< { key: "text", value: _ } <<< prop')
+_text = Functor.map (unsafeAttribute <<< { key: "text", value: _ } <<< Deku.Attribute.prop')
 
 _text_ :: forall r. String -> Event (Attribute (Indexed (text :: String | r)))
 _text_ = _text <<< Applicative.pure
 
 _referrerPolicy
   :: forall r. Event String -> Event (Attribute (Indexed (referrerPolicy :: String | r)))
-_referrerPolicy = Functor.map $ (unsafeAttribute <<< { key: "referrerPolicy", value: _ } <<< prop')
+_referrerPolicy = Functor.map
+  (unsafeAttribute <<< { key: "referrerPolicy", value: _ } <<< Deku.Attribute.prop')
 
 _referrerPolicy_ :: forall r. String -> Event (Attribute (Indexed (referrerPolicy :: String | r)))
 _referrerPolicy_ = _referrerPolicy <<< Applicative.pure
 
+_noHref :: forall r. Event Boolean -> Event (Attribute (Indexed (noHref :: Boolean | r)))
+_noHref = Functor.map
+  (unsafeAttribute <<< { key: "noHref", value: _ } <<< (Deku.Attribute.prop' <<< Data.Show.show))
+
+_noHref_ :: forall r. Boolean -> Event (Attribute (Indexed (noHref :: Boolean | r)))
+_noHref_ = _noHref <<< Applicative.pure
+
 _alt :: forall r. Event String -> Event (Attribute (Indexed (alt :: String | r)))
-_alt = Functor.map $ (unsafeAttribute <<< { key: "alt", value: _ } <<< prop')
+_alt = Functor.map (unsafeAttribute <<< { key: "alt", value: _ } <<< Deku.Attribute.prop')
 
 _alt_ :: forall r. String -> Event (Attribute (Indexed (alt :: String | r)))
 _alt_ = _alt <<< Applicative.pure
 
-_coords :: forall r. Event String -> Event (Attribute (Indexed (coords :: String | r)))
-_coords = Functor.map $ (unsafeAttribute <<< { key: "coords", value: _ } <<< prop')
+_clear :: forall r. Event String -> Event (Attribute (Indexed (clear :: String | r)))
+_clear = Functor.map (unsafeAttribute <<< { key: "clear", value: _ } <<< Deku.Attribute.prop')
 
-_coords_ :: forall r. String -> Event (Attribute (Indexed (coords :: String | r)))
-_coords_ = _coords <<< Applicative.pure
+_clear_ :: forall r. String -> Event (Attribute (Indexed (clear :: String | r)))
+_clear_ = _clear <<< Applicative.pure
 
 _href :: forall r. Event String -> Event (Attribute (Indexed (href :: String | r)))
-_href = Functor.map $ (unsafeAttribute <<< { key: "href", value: _ } <<< prop')
+_href = Functor.map (unsafeAttribute <<< { key: "href", value: _ } <<< Deku.Attribute.prop')
 
 _href_ :: forall r. String -> Event (Attribute (Indexed (href :: String | r)))
 _href_ = _href <<< Applicative.pure
 
+_link :: forall r. Event String -> Event (Attribute (Indexed (link :: String | r)))
+_link = Functor.map (unsafeAttribute <<< { key: "link", value: _ } <<< Deku.Attribute.prop')
+
+_link_ :: forall r. String -> Event (Attribute (Indexed (link :: String | r)))
+_link_ = _link <<< Applicative.pure
+
+_vLink :: forall r. Event String -> Event (Attribute (Indexed (vLink :: String | r)))
+_vLink = Functor.map (unsafeAttribute <<< { key: "vLink", value: _ } <<< Deku.Attribute.prop')
+
+_vLink_ :: forall r. String -> Event (Attribute (Indexed (vLink :: String | r)))
+_vLink_ = _vLink <<< Applicative.pure
+
+_aLink :: forall r. Event String -> Event (Attribute (Indexed (aLink :: String | r)))
+_aLink = Functor.map (unsafeAttribute <<< { key: "aLink", value: _ } <<< Deku.Attribute.prop')
+
+_aLink_ :: forall r. String -> Event (Attribute (Indexed (aLink :: String | r)))
+_aLink_ = _aLink <<< Applicative.pure
+
+_bgColor :: forall r. Event String -> Event (Attribute (Indexed (bgColor :: String | r)))
+_bgColor = Functor.map (unsafeAttribute <<< { key: "bgColor", value: _ } <<< Deku.Attribute.prop')
+
+_bgColor_ :: forall r. String -> Event (Attribute (Indexed (bgColor :: String | r)))
+_bgColor_ = _bgColor <<< Applicative.pure
+
+_background :: forall r. Event String -> Event (Attribute (Indexed (background :: String | r)))
+_background = Functor.map
+  (unsafeAttribute <<< { key: "background", value: _ } <<< Deku.Attribute.prop')
+
+_background_ :: forall r. String -> Event (Attribute (Indexed (background :: String | r)))
+_background_ = _background <<< Applicative.pure
+
 _disabled :: forall r. Event Boolean -> Event (Attribute (Indexed (disabled :: Boolean | r)))
-_disabled = Functor.map $
-  (unsafeAttribute <<< { key: "disabled", value: _ } <<< (prop' <<< Show.show))
+_disabled = Functor.map
+  (unsafeAttribute <<< { key: "disabled", value: _ } <<< (Deku.Attribute.prop' <<< Data.Show.show))
 
 _disabled_ :: forall r. Boolean -> Event (Attribute (Indexed (disabled :: Boolean | r)))
 _disabled_ = _disabled <<< Applicative.pure
 
 _formAction :: forall r. Event String -> Event (Attribute (Indexed (formAction :: String | r)))
-_formAction = Functor.map $ (unsafeAttribute <<< { key: "formAction", value: _ } <<< prop')
+_formAction = Functor.map
+  (unsafeAttribute <<< { key: "formAction", value: _ } <<< Deku.Attribute.prop')
 
 _formAction_ :: forall r. String -> Event (Attribute (Indexed (formAction :: String | r)))
 _formAction_ = _formAction <<< Applicative.pure
 
 _formEnctype :: forall r. Event String -> Event (Attribute (Indexed (formEnctype :: String | r)))
-_formEnctype = Functor.map $ (unsafeAttribute <<< { key: "formEnctype", value: _ } <<< prop')
+_formEnctype = Functor.map
+  (unsafeAttribute <<< { key: "formEnctype", value: _ } <<< Deku.Attribute.prop')
 
 _formEnctype_ :: forall r. String -> Event (Attribute (Indexed (formEnctype :: String | r)))
 _formEnctype_ = _formEnctype <<< Applicative.pure
 
 _formMethod :: forall r. Event String -> Event (Attribute (Indexed (formMethod :: String | r)))
-_formMethod = Functor.map $ (unsafeAttribute <<< { key: "formMethod", value: _ } <<< prop')
+_formMethod = Functor.map
+  (unsafeAttribute <<< { key: "formMethod", value: _ } <<< Deku.Attribute.prop')
 
 _formMethod_ :: forall r. String -> Event (Attribute (Indexed (formMethod :: String | r)))
 _formMethod_ = _formMethod <<< Applicative.pure
 
 _formNoValidate
   :: forall r. Event Boolean -> Event (Attribute (Indexed (formNoValidate :: Boolean | r)))
-_formNoValidate = Functor.map $
-  (unsafeAttribute <<< { key: "formNoValidate", value: _ } <<< (prop' <<< Show.show))
+_formNoValidate = Functor.map
+  ( unsafeAttribute <<< { key: "formNoValidate", value: _ } <<<
+      (Deku.Attribute.prop' <<< Data.Show.show)
+  )
 
 _formNoValidate_
   :: forall r. Boolean -> Event (Attribute (Indexed (formNoValidate :: Boolean | r)))
 _formNoValidate_ = _formNoValidate <<< Applicative.pure
 
 _formTarget :: forall r. Event String -> Event (Attribute (Indexed (formTarget :: String | r)))
-_formTarget = Functor.map $ (unsafeAttribute <<< { key: "formTarget", value: _ } <<< prop')
+_formTarget = Functor.map
+  (unsafeAttribute <<< { key: "formTarget", value: _ } <<< Deku.Attribute.prop')
 
 _formTarget_ :: forall r. String -> Event (Attribute (Indexed (formTarget :: String | r)))
 _formTarget_ = _formTarget <<< Applicative.pure
@@ -4208,16 +5394,16 @@ class IsValue (v :: Type) (a :: Type) | v -> a where
   isValue :: v -> AttributeValue
 
 instance IsValue String String where
-  isValue = prop'
+  isValue = Deku.Attribute.prop'
 
 instance IsValue Number Number where
-  isValue = prop' <<< Show.show
+  isValue = Deku.Attribute.prop' <<< Data.Show.show
 
 instance IsValue Int Int where
-  isValue = prop' <<< Show.show
+  isValue = Deku.Attribute.prop' <<< Data.Show.show
 
 _value :: forall r v a. IsValue v a => Event v -> Event (Attribute (Indexed (value :: a | r)))
-_value = Functor.map $ (unsafeAttribute <<< { key: "value", value: _ } <<< isValue)
+_value = Functor.map (unsafeAttribute <<< { key: "value", value: _ } <<< isValue)
 
 _value_ :: forall r v a. IsValue v a => v -> Event (Attribute (Indexed (value :: a | r)))
 _value_ = _value <<< Applicative.pure
@@ -4226,13 +5412,13 @@ class IsWidth (v :: Type) (a :: Type) | v -> a where
   isWidth :: v -> AttributeValue
 
 instance IsWidth Int Int where
-  isWidth = prop' <<< Show.show
+  isWidth = Deku.Attribute.prop' <<< Data.Show.show
 
 instance IsWidth String String where
-  isWidth = prop'
+  isWidth = Deku.Attribute.prop'
 
 _width :: forall r v a. IsWidth v a => Event v -> Event (Attribute (Indexed (width :: a | r)))
-_width = Functor.map $ (unsafeAttribute <<< { key: "width", value: _ } <<< isWidth)
+_width = Functor.map (unsafeAttribute <<< { key: "width", value: _ } <<< isWidth)
 
 _width_ :: forall r v a. IsWidth v a => v -> Event (Attribute (Indexed (width :: a | r)))
 _width_ = _width <<< Applicative.pure
@@ -4241,262 +5427,396 @@ class IsHeight (v :: Type) (a :: Type) | v -> a where
   isHeight :: v -> AttributeValue
 
 instance IsHeight Int Int where
-  isHeight = prop' <<< Show.show
+  isHeight = Deku.Attribute.prop' <<< Data.Show.show
 
 instance IsHeight String String where
-  isHeight = prop'
+  isHeight = Deku.Attribute.prop'
 
 _height :: forall r v a. IsHeight v a => Event v -> Event (Attribute (Indexed (height :: a | r)))
-_height = Functor.map $ (unsafeAttribute <<< { key: "height", value: _ } <<< isHeight)
+_height = Functor.map (unsafeAttribute <<< { key: "height", value: _ } <<< isHeight)
 
 _height_ :: forall r v a. IsHeight v a => v -> Event (Attribute (Indexed (height :: a | r)))
 _height_ = _height <<< Applicative.pure
 
+_compact :: forall r. Event Boolean -> Event (Attribute (Indexed (compact :: Boolean | r)))
+_compact = Functor.map
+  (unsafeAttribute <<< { key: "compact", value: _ } <<< (Deku.Attribute.prop' <<< Data.Show.show))
+
+_compact_ :: forall r. Boolean -> Event (Attribute (Indexed (compact :: Boolean | r)))
+_compact_ = _compact <<< Applicative.pure
+
 _open :: forall r. Event Boolean -> Event (Attribute (Indexed (open :: Boolean | r)))
-_open = Functor.map $ (unsafeAttribute <<< { key: "open", value: _ } <<< (prop' <<< Show.show))
+_open = Functor.map
+  (unsafeAttribute <<< { key: "open", value: _ } <<< (Deku.Attribute.prop' <<< Data.Show.show))
 
 _open_ :: forall r. Boolean -> Event (Attribute (Indexed (open :: Boolean | r)))
 _open_ = _open <<< Applicative.pure
 
 _returnValue :: forall r. Event String -> Event (Attribute (Indexed (returnValue :: String | r)))
-_returnValue = Functor.map $ (unsafeAttribute <<< { key: "returnValue", value: _ } <<< prop')
+_returnValue = Functor.map
+  (unsafeAttribute <<< { key: "returnValue", value: _ } <<< Deku.Attribute.prop')
 
 _returnValue_ :: forall r. String -> Event (Attribute (Indexed (returnValue :: String | r)))
 _returnValue_ = _returnValue <<< Applicative.pure
 
+_align :: forall r. Event String -> Event (Attribute (Indexed (align :: String | r)))
+_align = Functor.map (unsafeAttribute <<< { key: "align", value: _ } <<< Deku.Attribute.prop')
+
+_align_ :: forall r. String -> Event (Attribute (Indexed (align :: String | r)))
+_align_ = _align <<< Applicative.pure
+
 _title :: forall r. Event String -> Event (Attribute (Indexed (title :: String | r)))
-_title = Functor.map $ (unsafeAttribute <<< { key: "title", value: _ } <<< prop')
+_title = Functor.map (unsafeAttribute <<< { key: "title", value: _ } <<< Deku.Attribute.prop')
 
 _title_ :: forall r. String -> Event (Attribute (Indexed (title :: String | r)))
 _title_ = _title <<< Applicative.pure
 
 _lang :: forall r. Event String -> Event (Attribute (Indexed (lang :: String | r)))
-_lang = Functor.map $ (unsafeAttribute <<< { key: "lang", value: _ } <<< prop')
+_lang = Functor.map (unsafeAttribute <<< { key: "lang", value: _ } <<< Deku.Attribute.prop')
 
 _lang_ :: forall r. String -> Event (Attribute (Indexed (lang :: String | r)))
 _lang_ = _lang <<< Applicative.pure
 
 _translate :: forall r. Event Boolean -> Event (Attribute (Indexed (translate :: Boolean | r)))
-_translate = Functor.map $
-  (unsafeAttribute <<< { key: "translate", value: _ } <<< (prop' <<< Show.show))
+_translate = Functor.map
+  (unsafeAttribute <<< { key: "translate", value: _ } <<< (Deku.Attribute.prop' <<< Data.Show.show))
 
 _translate_ :: forall r. Boolean -> Event (Attribute (Indexed (translate :: Boolean | r)))
 _translate_ = _translate <<< Applicative.pure
 
 _inert :: forall r. Event Boolean -> Event (Attribute (Indexed (inert :: Boolean | r)))
-_inert = Functor.map $ (unsafeAttribute <<< { key: "inert", value: _ } <<< (prop' <<< Show.show))
+_inert = Functor.map
+  (unsafeAttribute <<< { key: "inert", value: _ } <<< (Deku.Attribute.prop' <<< Data.Show.show))
 
 _inert_ :: forall r. Boolean -> Event (Attribute (Indexed (inert :: Boolean | r)))
 _inert_ = _inert <<< Applicative.pure
 
 _accessKey :: forall r. Event String -> Event (Attribute (Indexed (accessKey :: String | r)))
-_accessKey = Functor.map $ (unsafeAttribute <<< { key: "accessKey", value: _ } <<< prop')
+_accessKey = Functor.map
+  (unsafeAttribute <<< { key: "accessKey", value: _ } <<< Deku.Attribute.prop')
 
 _accessKey_ :: forall r. String -> Event (Attribute (Indexed (accessKey :: String | r)))
 _accessKey_ = _accessKey <<< Applicative.pure
 
 _draggable :: forall r. Event Boolean -> Event (Attribute (Indexed (draggable :: Boolean | r)))
-_draggable = Functor.map $
-  (unsafeAttribute <<< { key: "draggable", value: _ } <<< (prop' <<< Show.show))
+_draggable = Functor.map
+  (unsafeAttribute <<< { key: "draggable", value: _ } <<< (Deku.Attribute.prop' <<< Data.Show.show))
 
 _draggable_ :: forall r. Boolean -> Event (Attribute (Indexed (draggable :: Boolean | r)))
 _draggable_ = _draggable <<< Applicative.pure
 
 _spellcheck :: forall r. Event Boolean -> Event (Attribute (Indexed (spellcheck :: Boolean | r)))
-_spellcheck = Functor.map $
-  (unsafeAttribute <<< { key: "spellcheck", value: _ } <<< (prop' <<< Show.show))
+_spellcheck = Functor.map
+  ( unsafeAttribute <<< { key: "spellcheck", value: _ } <<<
+      (Deku.Attribute.prop' <<< Data.Show.show)
+  )
 
 _spellcheck_ :: forall r. Boolean -> Event (Attribute (Indexed (spellcheck :: Boolean | r)))
 _spellcheck_ = _spellcheck <<< Applicative.pure
 
 _innerText :: forall r. Event String -> Event (Attribute (Indexed (innerText :: String | r)))
-_innerText = Functor.map $ (unsafeAttribute <<< { key: "innerText", value: _ } <<< prop')
+_innerText = Functor.map
+  (unsafeAttribute <<< { key: "innerText", value: _ } <<< Deku.Attribute.prop')
 
 _innerText_ :: forall r. String -> Event (Attribute (Indexed (innerText :: String | r)))
 _innerText_ = _innerText <<< Applicative.pure
 
 _outerText :: forall r. Event String -> Event (Attribute (Indexed (outerText :: String | r)))
-_outerText = Functor.map $ (unsafeAttribute <<< { key: "outerText", value: _ } <<< prop')
+_outerText = Functor.map
+  (unsafeAttribute <<< { key: "outerText", value: _ } <<< Deku.Attribute.prop')
 
 _outerText_ :: forall r. String -> Event (Attribute (Indexed (outerText :: String | r)))
 _outerText_ = _outerText <<< Applicative.pure
 
 _src :: forall r. Event String -> Event (Attribute (Indexed (src :: String | r)))
-_src = Functor.map $ (unsafeAttribute <<< { key: "src", value: _ } <<< prop')
+_src = Functor.map (unsafeAttribute <<< { key: "src", value: _ } <<< Deku.Attribute.prop')
 
 _src_ :: forall r. String -> Event (Attribute (Indexed (src :: String | r)))
 _src_ = _src <<< Applicative.pure
 
 _acceptCharset
   :: forall r. Event String -> Event (Attribute (Indexed (acceptCharset :: String | r)))
-_acceptCharset = Functor.map $ (unsafeAttribute <<< { key: "acceptCharset", value: _ } <<< prop')
+_acceptCharset = Functor.map
+  (unsafeAttribute <<< { key: "acceptCharset", value: _ } <<< Deku.Attribute.prop')
 
 _acceptCharset_ :: forall r. String -> Event (Attribute (Indexed (acceptCharset :: String | r)))
 _acceptCharset_ = _acceptCharset <<< Applicative.pure
 
 _action :: forall r. Event String -> Event (Attribute (Indexed (action :: String | r)))
-_action = Functor.map $ (unsafeAttribute <<< { key: "action", value: _ } <<< prop')
+_action = Functor.map (unsafeAttribute <<< { key: "action", value: _ } <<< Deku.Attribute.prop')
 
 _action_ :: forall r. String -> Event (Attribute (Indexed (action :: String | r)))
 _action_ = _action <<< Applicative.pure
 
 _encoding :: forall r. Event String -> Event (Attribute (Indexed (encoding :: String | r)))
-_encoding = Functor.map $ (unsafeAttribute <<< { key: "encoding", value: _ } <<< prop')
+_encoding = Functor.map
+  (unsafeAttribute <<< { key: "encoding", value: _ } <<< Deku.Attribute.prop')
 
 _encoding_ :: forall r. String -> Event (Attribute (Indexed (encoding :: String | r)))
 _encoding_ = _encoding <<< Applicative.pure
 
 _noValidate :: forall r. Event Boolean -> Event (Attribute (Indexed (noValidate :: Boolean | r)))
-_noValidate = Functor.map $
-  (unsafeAttribute <<< { key: "noValidate", value: _ } <<< (prop' <<< Show.show))
+_noValidate = Functor.map
+  ( unsafeAttribute <<< { key: "noValidate", value: _ } <<<
+      (Deku.Attribute.prop' <<< Data.Show.show)
+  )
 
 _noValidate_ :: forall r. Boolean -> Event (Attribute (Indexed (noValidate :: Boolean | r)))
 _noValidate_ = _noValidate <<< Applicative.pure
 
+_color :: forall r. Event String -> Event (Attribute (Indexed (color :: String | r)))
+_color = Functor.map (unsafeAttribute <<< { key: "color", value: _ } <<< Deku.Attribute.prop')
+
+_color_ :: forall r. String -> Event (Attribute (Indexed (color :: String | r)))
+_color_ = _color <<< Applicative.pure
+
+_noShade :: forall r. Event Boolean -> Event (Attribute (Indexed (noShade :: Boolean | r)))
+_noShade = Functor.map
+  (unsafeAttribute <<< { key: "noShade", value: _ } <<< (Deku.Attribute.prop' <<< Data.Show.show))
+
+_noShade_ :: forall r. Boolean -> Event (Attribute (Indexed (noShade :: Boolean | r)))
+_noShade_ = _noShade <<< Applicative.pure
+
+class IsSize (v :: Type) (a :: Type) | v -> a where
+  isSize :: v -> AttributeValue
+
+instance IsSize Int Int where
+  isSize = Deku.Attribute.prop' <<< Data.Show.show
+
+instance IsSize String String where
+  isSize = Deku.Attribute.prop'
+
+_size :: forall r v a. IsSize v a => Event v -> Event (Attribute (Indexed (size :: a | r)))
+_size = Functor.map (unsafeAttribute <<< { key: "size", value: _ } <<< isSize)
+
+_size_ :: forall r v a. IsSize v a => v -> Event (Attribute (Indexed (size :: a | r)))
+_size_ = _size <<< Applicative.pure
+
+_version :: forall r. Event String -> Event (Attribute (Indexed (version :: String | r)))
+_version = Functor.map (unsafeAttribute <<< { key: "version", value: _ } <<< Deku.Attribute.prop')
+
+_version_ :: forall r. String -> Event (Attribute (Indexed (version :: String | r)))
+_version_ = _version <<< Applicative.pure
+
 _protocol :: forall r. Event String -> Event (Attribute (Indexed (protocol :: String | r)))
-_protocol = Functor.map $ (unsafeAttribute <<< { key: "protocol", value: _ } <<< prop')
+_protocol = Functor.map
+  (unsafeAttribute <<< { key: "protocol", value: _ } <<< Deku.Attribute.prop')
 
 _protocol_ :: forall r. String -> Event (Attribute (Indexed (protocol :: String | r)))
 _protocol_ = _protocol <<< Applicative.pure
 
 _username :: forall r. Event String -> Event (Attribute (Indexed (username :: String | r)))
-_username = Functor.map $ (unsafeAttribute <<< { key: "username", value: _ } <<< prop')
+_username = Functor.map
+  (unsafeAttribute <<< { key: "username", value: _ } <<< Deku.Attribute.prop')
 
 _username_ :: forall r. String -> Event (Attribute (Indexed (username :: String | r)))
 _username_ = _username <<< Applicative.pure
 
 _password :: forall r. Event String -> Event (Attribute (Indexed (password :: String | r)))
-_password = Functor.map $ (unsafeAttribute <<< { key: "password", value: _ } <<< prop')
+_password = Functor.map
+  (unsafeAttribute <<< { key: "password", value: _ } <<< Deku.Attribute.prop')
 
 _password_ :: forall r. String -> Event (Attribute (Indexed (password :: String | r)))
 _password_ = _password <<< Applicative.pure
 
 _host :: forall r. Event String -> Event (Attribute (Indexed (host :: String | r)))
-_host = Functor.map $ (unsafeAttribute <<< { key: "host", value: _ } <<< prop')
+_host = Functor.map (unsafeAttribute <<< { key: "host", value: _ } <<< Deku.Attribute.prop')
 
 _host_ :: forall r. String -> Event (Attribute (Indexed (host :: String | r)))
 _host_ = _host <<< Applicative.pure
 
 _hostname :: forall r. Event String -> Event (Attribute (Indexed (hostname :: String | r)))
-_hostname = Functor.map $ (unsafeAttribute <<< { key: "hostname", value: _ } <<< prop')
+_hostname = Functor.map
+  (unsafeAttribute <<< { key: "hostname", value: _ } <<< Deku.Attribute.prop')
 
 _hostname_ :: forall r. String -> Event (Attribute (Indexed (hostname :: String | r)))
 _hostname_ = _hostname <<< Applicative.pure
 
 _port :: forall r. Event String -> Event (Attribute (Indexed (port :: String | r)))
-_port = Functor.map $ (unsafeAttribute <<< { key: "port", value: _ } <<< prop')
+_port = Functor.map (unsafeAttribute <<< { key: "port", value: _ } <<< Deku.Attribute.prop')
 
 _port_ :: forall r. String -> Event (Attribute (Indexed (port :: String | r)))
 _port_ = _port <<< Applicative.pure
 
 _pathname :: forall r. Event String -> Event (Attribute (Indexed (pathname :: String | r)))
-_pathname = Functor.map $ (unsafeAttribute <<< { key: "pathname", value: _ } <<< prop')
+_pathname = Functor.map
+  (unsafeAttribute <<< { key: "pathname", value: _ } <<< Deku.Attribute.prop')
 
 _pathname_ :: forall r. String -> Event (Attribute (Indexed (pathname :: String | r)))
 _pathname_ = _pathname <<< Applicative.pure
 
 _search :: forall r. Event String -> Event (Attribute (Indexed (search :: String | r)))
-_search = Functor.map $ (unsafeAttribute <<< { key: "search", value: _ } <<< prop')
+_search = Functor.map (unsafeAttribute <<< { key: "search", value: _ } <<< Deku.Attribute.prop')
 
 _search_ :: forall r. String -> Event (Attribute (Indexed (search :: String | r)))
 _search_ = _search <<< Applicative.pure
 
 _hash :: forall r. Event String -> Event (Attribute (Indexed (hash :: String | r)))
-_hash = Functor.map $ (unsafeAttribute <<< { key: "hash", value: _ } <<< prop')
+_hash = Functor.map (unsafeAttribute <<< { key: "hash", value: _ } <<< Deku.Attribute.prop')
 
 _hash_ :: forall r. String -> Event (Attribute (Indexed (hash :: String | r)))
 _hash_ = _hash <<< Applicative.pure
 
+_scrolling :: forall r. Event String -> Event (Attribute (Indexed (scrolling :: String | r)))
+_scrolling = Functor.map
+  (unsafeAttribute <<< { key: "scrolling", value: _ } <<< Deku.Attribute.prop')
+
+_scrolling_ :: forall r. String -> Event (Attribute (Indexed (scrolling :: String | r)))
+_scrolling_ = _scrolling <<< Applicative.pure
+
+_frameBorder :: forall r. Event String -> Event (Attribute (Indexed (frameBorder :: String | r)))
+_frameBorder = Functor.map
+  (unsafeAttribute <<< { key: "frameBorder", value: _ } <<< Deku.Attribute.prop')
+
+_frameBorder_ :: forall r. String -> Event (Attribute (Indexed (frameBorder :: String | r)))
+_frameBorder_ = _frameBorder <<< Applicative.pure
+
+_longDesc :: forall r. Event String -> Event (Attribute (Indexed (longDesc :: String | r)))
+_longDesc = Functor.map
+  (unsafeAttribute <<< { key: "longDesc", value: _ } <<< Deku.Attribute.prop')
+
+_longDesc_ :: forall r. String -> Event (Attribute (Indexed (longDesc :: String | r)))
+_longDesc_ = _longDesc <<< Applicative.pure
+
+_marginHeight :: forall r. Event String -> Event (Attribute (Indexed (marginHeight :: String | r)))
+_marginHeight = Functor.map
+  (unsafeAttribute <<< { key: "marginHeight", value: _ } <<< Deku.Attribute.prop')
+
+_marginHeight_ :: forall r. String -> Event (Attribute (Indexed (marginHeight :: String | r)))
+_marginHeight_ = _marginHeight <<< Applicative.pure
+
+_marginWidth :: forall r. Event String -> Event (Attribute (Indexed (marginWidth :: String | r)))
+_marginWidth = Functor.map
+  (unsafeAttribute <<< { key: "marginWidth", value: _ } <<< Deku.Attribute.prop')
+
+_marginWidth_ :: forall r. String -> Event (Attribute (Indexed (marginWidth :: String | r)))
+_marginWidth_ = _marginWidth <<< Applicative.pure
+
 _srcdoc :: forall r. Event String -> Event (Attribute (Indexed (srcdoc :: String | r)))
-_srcdoc = Functor.map $ (unsafeAttribute <<< { key: "srcdoc", value: _ } <<< prop')
+_srcdoc = Functor.map (unsafeAttribute <<< { key: "srcdoc", value: _ } <<< Deku.Attribute.prop')
 
 _srcdoc_ :: forall r. String -> Event (Attribute (Indexed (srcdoc :: String | r)))
 _srcdoc_ = _srcdoc <<< Applicative.pure
 
 _allow :: forall r. Event String -> Event (Attribute (Indexed (allow :: String | r)))
-_allow = Functor.map $ (unsafeAttribute <<< { key: "allow", value: _ } <<< prop')
+_allow = Functor.map (unsafeAttribute <<< { key: "allow", value: _ } <<< Deku.Attribute.prop')
 
 _allow_ :: forall r. String -> Event (Attribute (Indexed (allow :: String | r)))
 _allow_ = _allow <<< Applicative.pure
 
 _allowFullscreen
   :: forall r. Event Boolean -> Event (Attribute (Indexed (allowFullscreen :: Boolean | r)))
-_allowFullscreen = Functor.map $
-  (unsafeAttribute <<< { key: "allowFullscreen", value: _ } <<< (prop' <<< Show.show))
+_allowFullscreen = Functor.map
+  ( unsafeAttribute <<< { key: "allowFullscreen", value: _ } <<<
+      (Deku.Attribute.prop' <<< Data.Show.show)
+  )
 
 _allowFullscreen_
   :: forall r. Boolean -> Event (Attribute (Indexed (allowFullscreen :: Boolean | r)))
 _allowFullscreen_ = _allowFullscreen <<< Applicative.pure
 
+_lowsrc :: forall r. Event String -> Event (Attribute (Indexed (lowsrc :: String | r)))
+_lowsrc = Functor.map (unsafeAttribute <<< { key: "lowsrc", value: _ } <<< Deku.Attribute.prop')
+
+_lowsrc_ :: forall r. String -> Event (Attribute (Indexed (lowsrc :: String | r)))
+_lowsrc_ = _lowsrc <<< Applicative.pure
+
+_hspace :: forall r. Event Int -> Event (Attribute (Indexed (hspace :: Int | r)))
+_hspace = Functor.map
+  (unsafeAttribute <<< { key: "hspace", value: _ } <<< (Deku.Attribute.prop' <<< Data.Show.show))
+
+_hspace_ :: forall r. Int -> Event (Attribute (Indexed (hspace :: Int | r)))
+_hspace_ = _hspace <<< Applicative.pure
+
+_vspace :: forall r. Event Int -> Event (Attribute (Indexed (vspace :: Int | r)))
+_vspace = Functor.map
+  (unsafeAttribute <<< { key: "vspace", value: _ } <<< (Deku.Attribute.prop' <<< Data.Show.show))
+
+_vspace_ :: forall r. Int -> Event (Attribute (Indexed (vspace :: Int | r)))
+_vspace_ = _vspace <<< Applicative.pure
+
+_border :: forall r. Event String -> Event (Attribute (Indexed (border :: String | r)))
+_border = Functor.map (unsafeAttribute <<< { key: "border", value: _ } <<< Deku.Attribute.prop')
+
+_border_ :: forall r. String -> Event (Attribute (Indexed (border :: String | r)))
+_border_ = _border <<< Applicative.pure
+
 _srcset :: forall r. Event String -> Event (Attribute (Indexed (srcset :: String | r)))
-_srcset = Functor.map $ (unsafeAttribute <<< { key: "srcset", value: _ } <<< prop')
+_srcset = Functor.map (unsafeAttribute <<< { key: "srcset", value: _ } <<< Deku.Attribute.prop')
 
 _srcset_ :: forall r. String -> Event (Attribute (Indexed (srcset :: String | r)))
 _srcset_ = _srcset <<< Applicative.pure
 
 _sizes :: forall r. Event String -> Event (Attribute (Indexed (sizes :: String | r)))
-_sizes = Functor.map $ (unsafeAttribute <<< { key: "sizes", value: _ } <<< prop')
+_sizes = Functor.map (unsafeAttribute <<< { key: "sizes", value: _ } <<< Deku.Attribute.prop')
 
 _sizes_ :: forall r. String -> Event (Attribute (Indexed (sizes :: String | r)))
 _sizes_ = _sizes <<< Applicative.pure
 
 _crossOrigin :: forall r. Event String -> Event (Attribute (Indexed (crossOrigin :: String | r)))
-_crossOrigin = Functor.map $ (unsafeAttribute <<< { key: "crossOrigin", value: _ } <<< prop')
+_crossOrigin = Functor.map
+  (unsafeAttribute <<< { key: "crossOrigin", value: _ } <<< Deku.Attribute.prop')
 
 _crossOrigin_ :: forall r. String -> Event (Attribute (Indexed (crossOrigin :: String | r)))
 _crossOrigin_ = _crossOrigin <<< Applicative.pure
 
 _useMap :: forall r. Event String -> Event (Attribute (Indexed (useMap :: String | r)))
-_useMap = Functor.map $ (unsafeAttribute <<< { key: "useMap", value: _ } <<< prop')
+_useMap = Functor.map (unsafeAttribute <<< { key: "useMap", value: _ } <<< Deku.Attribute.prop')
 
 _useMap_ :: forall r. String -> Event (Attribute (Indexed (useMap :: String | r)))
 _useMap_ = _useMap <<< Applicative.pure
 
 _isMap :: forall r. Event Boolean -> Event (Attribute (Indexed (isMap :: Boolean | r)))
-_isMap = Functor.map $ (unsafeAttribute <<< { key: "isMap", value: _ } <<< (prop' <<< Show.show))
+_isMap = Functor.map
+  (unsafeAttribute <<< { key: "isMap", value: _ } <<< (Deku.Attribute.prop' <<< Data.Show.show))
 
 _isMap_ :: forall r. Boolean -> Event (Attribute (Indexed (isMap :: Boolean | r)))
 _isMap_ = _isMap <<< Applicative.pure
 
 _fetchPriority
   :: forall r. Event String -> Event (Attribute (Indexed (fetchPriority :: String | r)))
-_fetchPriority = Functor.map $ (unsafeAttribute <<< { key: "fetchPriority", value: _ } <<< prop')
+_fetchPriority = Functor.map
+  (unsafeAttribute <<< { key: "fetchPriority", value: _ } <<< Deku.Attribute.prop')
 
 _fetchPriority_ :: forall r. String -> Event (Attribute (Indexed (fetchPriority :: String | r)))
 _fetchPriority_ = _fetchPriority <<< Applicative.pure
 
 _accept :: forall r. Event String -> Event (Attribute (Indexed (accept :: String | r)))
-_accept = Functor.map $ (unsafeAttribute <<< { key: "accept", value: _ } <<< prop')
+_accept = Functor.map (unsafeAttribute <<< { key: "accept", value: _ } <<< Deku.Attribute.prop')
 
 _accept_ :: forall r. String -> Event (Attribute (Indexed (accept :: String | r)))
 _accept_ = _accept <<< Applicative.pure
 
 _defaultChecked
   :: forall r. Event Boolean -> Event (Attribute (Indexed (defaultChecked :: Boolean | r)))
-_defaultChecked = Functor.map $
-  (unsafeAttribute <<< { key: "defaultChecked", value: _ } <<< (prop' <<< Show.show))
+_defaultChecked = Functor.map
+  ( unsafeAttribute <<< { key: "defaultChecked", value: _ } <<<
+      (Deku.Attribute.prop' <<< Data.Show.show)
+  )
 
 _defaultChecked_
   :: forall r. Boolean -> Event (Attribute (Indexed (defaultChecked :: Boolean | r)))
 _defaultChecked_ = _defaultChecked <<< Applicative.pure
 
 _checked :: forall r. Event Boolean -> Event (Attribute (Indexed (checked :: Boolean | r)))
-_checked = Functor.map $
-  (unsafeAttribute <<< { key: "checked", value: _ } <<< (prop' <<< Show.show))
+_checked = Functor.map
+  (unsafeAttribute <<< { key: "checked", value: _ } <<< (Deku.Attribute.prop' <<< Data.Show.show))
 
 _checked_ :: forall r. Boolean -> Event (Attribute (Indexed (checked :: Boolean | r)))
 _checked_ = _checked <<< Applicative.pure
 
 _dirName :: forall r. Event String -> Event (Attribute (Indexed (dirName :: String | r)))
-_dirName = Functor.map $ (unsafeAttribute <<< { key: "dirName", value: _ } <<< prop')
+_dirName = Functor.map (unsafeAttribute <<< { key: "dirName", value: _ } <<< Deku.Attribute.prop')
 
 _dirName_ :: forall r. String -> Event (Attribute (Indexed (dirName :: String | r)))
 _dirName_ = _dirName <<< Applicative.pure
 
 _indeterminate
   :: forall r. Event Boolean -> Event (Attribute (Indexed (indeterminate :: Boolean | r)))
-_indeterminate = Functor.map $
-  (unsafeAttribute <<< { key: "indeterminate", value: _ } <<< (prop' <<< Show.show))
+_indeterminate = Functor.map
+  ( unsafeAttribute <<< { key: "indeterminate", value: _ } <<<
+      (Deku.Attribute.prop' <<< Data.Show.show)
+  )
 
 _indeterminate_ :: forall r. Boolean -> Event (Attribute (Indexed (indeterminate :: Boolean | r)))
 _indeterminate_ = _indeterminate <<< Applicative.pure
@@ -4505,20 +5825,20 @@ class IsMax (v :: Type) (a :: Type) | v -> a where
   isMax :: v -> AttributeValue
 
 instance IsMax Number Number where
-  isMax = prop' <<< Show.show
+  isMax = Deku.Attribute.prop' <<< Data.Show.show
 
 instance IsMax String String where
-  isMax = prop'
+  isMax = Deku.Attribute.prop'
 
 _max :: forall r v a. IsMax v a => Event v -> Event (Attribute (Indexed (max :: a | r)))
-_max = Functor.map $ (unsafeAttribute <<< { key: "max", value: _ } <<< isMax)
+_max = Functor.map (unsafeAttribute <<< { key: "max", value: _ } <<< isMax)
 
 _max_ :: forall r v a. IsMax v a => v -> Event (Attribute (Indexed (max :: a | r)))
 _max_ = _max <<< Applicative.pure
 
 _maxLength :: forall r. Event Int -> Event (Attribute (Indexed (maxLength :: Int | r)))
-_maxLength = Functor.map $
-  (unsafeAttribute <<< { key: "maxLength", value: _ } <<< (prop' <<< Show.show))
+_maxLength = Functor.map
+  (unsafeAttribute <<< { key: "maxLength", value: _ } <<< (Deku.Attribute.prop' <<< Data.Show.show))
 
 _maxLength_ :: forall r. Int -> Event (Attribute (Indexed (maxLength :: Int | r)))
 _maxLength_ = _maxLength <<< Applicative.pure
@@ -4527,418 +5847,580 @@ class IsMin (v :: Type) (a :: Type) | v -> a where
   isMin :: v -> AttributeValue
 
 instance IsMin Number Number where
-  isMin = prop' <<< Show.show
+  isMin = Deku.Attribute.prop' <<< Data.Show.show
 
 instance IsMin String String where
-  isMin = prop'
+  isMin = Deku.Attribute.prop'
 
 _min :: forall r v a. IsMin v a => Event v -> Event (Attribute (Indexed (min :: a | r)))
-_min = Functor.map $ (unsafeAttribute <<< { key: "min", value: _ } <<< isMin)
+_min = Functor.map (unsafeAttribute <<< { key: "min", value: _ } <<< isMin)
 
 _min_ :: forall r v a. IsMin v a => v -> Event (Attribute (Indexed (min :: a | r)))
 _min_ = _min <<< Applicative.pure
 
 _minLength :: forall r. Event Int -> Event (Attribute (Indexed (minLength :: Int | r)))
-_minLength = Functor.map $
-  (unsafeAttribute <<< { key: "minLength", value: _ } <<< (prop' <<< Show.show))
+_minLength = Functor.map
+  (unsafeAttribute <<< { key: "minLength", value: _ } <<< (Deku.Attribute.prop' <<< Data.Show.show))
 
 _minLength_ :: forall r. Int -> Event (Attribute (Indexed (minLength :: Int | r)))
 _minLength_ = _minLength <<< Applicative.pure
 
 _multiple :: forall r. Event Boolean -> Event (Attribute (Indexed (multiple :: Boolean | r)))
-_multiple = Functor.map $
-  (unsafeAttribute <<< { key: "multiple", value: _ } <<< (prop' <<< Show.show))
+_multiple = Functor.map
+  (unsafeAttribute <<< { key: "multiple", value: _ } <<< (Deku.Attribute.prop' <<< Data.Show.show))
 
 _multiple_ :: forall r. Boolean -> Event (Attribute (Indexed (multiple :: Boolean | r)))
 _multiple_ = _multiple <<< Applicative.pure
 
 _pattern :: forall r. Event String -> Event (Attribute (Indexed (pattern :: String | r)))
-_pattern = Functor.map $ (unsafeAttribute <<< { key: "pattern", value: _ } <<< prop')
+_pattern = Functor.map (unsafeAttribute <<< { key: "pattern", value: _ } <<< Deku.Attribute.prop')
 
 _pattern_ :: forall r. String -> Event (Attribute (Indexed (pattern :: String | r)))
 _pattern_ = _pattern <<< Applicative.pure
 
 _placeholder :: forall r. Event String -> Event (Attribute (Indexed (placeholder :: String | r)))
-_placeholder = Functor.map $ (unsafeAttribute <<< { key: "placeholder", value: _ } <<< prop')
+_placeholder = Functor.map
+  (unsafeAttribute <<< { key: "placeholder", value: _ } <<< Deku.Attribute.prop')
 
 _placeholder_ :: forall r. String -> Event (Attribute (Indexed (placeholder :: String | r)))
 _placeholder_ = _placeholder <<< Applicative.pure
 
 _readOnly :: forall r. Event Boolean -> Event (Attribute (Indexed (readOnly :: Boolean | r)))
-_readOnly = Functor.map $
-  (unsafeAttribute <<< { key: "readOnly", value: _ } <<< (prop' <<< Show.show))
+_readOnly = Functor.map
+  (unsafeAttribute <<< { key: "readOnly", value: _ } <<< (Deku.Attribute.prop' <<< Data.Show.show))
 
 _readOnly_ :: forall r. Boolean -> Event (Attribute (Indexed (readOnly :: Boolean | r)))
 _readOnly_ = _readOnly <<< Applicative.pure
 
 _required :: forall r. Event Boolean -> Event (Attribute (Indexed (required :: Boolean | r)))
-_required = Functor.map $
-  (unsafeAttribute <<< { key: "required", value: _ } <<< (prop' <<< Show.show))
+_required = Functor.map
+  (unsafeAttribute <<< { key: "required", value: _ } <<< (Deku.Attribute.prop' <<< Data.Show.show))
 
 _required_ :: forall r. Boolean -> Event (Attribute (Indexed (required :: Boolean | r)))
 _required_ = _required <<< Applicative.pure
 
-_size :: forall r. Event Int -> Event (Attribute (Indexed (size :: Int | r)))
-_size = Functor.map $ (unsafeAttribute <<< { key: "size", value: _ } <<< (prop' <<< Show.show))
-
-_size_ :: forall r. Int -> Event (Attribute (Indexed (size :: Int | r)))
-_size_ = _size <<< Applicative.pure
-
 _step :: forall r. Event String -> Event (Attribute (Indexed (step :: String | r)))
-_step = Functor.map $ (unsafeAttribute <<< { key: "step", value: _ } <<< prop')
+_step = Functor.map (unsafeAttribute <<< { key: "step", value: _ } <<< Deku.Attribute.prop')
 
 _step_ :: forall r. String -> Event (Attribute (Indexed (step :: String | r)))
 _step_ = _step <<< Applicative.pure
 
 _defaultValue :: forall r. Event String -> Event (Attribute (Indexed (defaultValue :: String | r)))
-_defaultValue = Functor.map $ (unsafeAttribute <<< { key: "defaultValue", value: _ } <<< prop')
+_defaultValue = Functor.map
+  (unsafeAttribute <<< { key: "defaultValue", value: _ } <<< Deku.Attribute.prop')
 
 _defaultValue_ :: forall r. String -> Event (Attribute (Indexed (defaultValue :: String | r)))
 _defaultValue_ = _defaultValue <<< Applicative.pure
 
 _valueAsNumber
   :: forall r. Event Number -> Event (Attribute (Indexed (valueAsNumber :: Number | r)))
-_valueAsNumber = Functor.map $
-  (unsafeAttribute <<< { key: "valueAsNumber", value: _ } <<< (prop' <<< Show.show))
+_valueAsNumber = Functor.map
+  ( unsafeAttribute <<< { key: "valueAsNumber", value: _ } <<<
+      (Deku.Attribute.prop' <<< Data.Show.show)
+  )
 
 _valueAsNumber_ :: forall r. Number -> Event (Attribute (Indexed (valueAsNumber :: Number | r)))
 _valueAsNumber_ = _valueAsNumber <<< Applicative.pure
 
 _selectionStart :: forall r. Event Int -> Event (Attribute (Indexed (selectionStart :: Int | r)))
-_selectionStart = Functor.map $
-  (unsafeAttribute <<< { key: "selectionStart", value: _ } <<< (prop' <<< Show.show))
+_selectionStart = Functor.map
+  ( unsafeAttribute <<< { key: "selectionStart", value: _ } <<<
+      (Deku.Attribute.prop' <<< Data.Show.show)
+  )
 
 _selectionStart_ :: forall r. Int -> Event (Attribute (Indexed (selectionStart :: Int | r)))
 _selectionStart_ = _selectionStart <<< Applicative.pure
 
 _selectionEnd :: forall r. Event Int -> Event (Attribute (Indexed (selectionEnd :: Int | r)))
-_selectionEnd = Functor.map $
-  (unsafeAttribute <<< { key: "selectionEnd", value: _ } <<< (prop' <<< Show.show))
+_selectionEnd = Functor.map
+  ( unsafeAttribute <<< { key: "selectionEnd", value: _ } <<<
+      (Deku.Attribute.prop' <<< Data.Show.show)
+  )
 
 _selectionEnd_ :: forall r. Int -> Event (Attribute (Indexed (selectionEnd :: Int | r)))
 _selectionEnd_ = _selectionEnd <<< Applicative.pure
 
 _selectionDirection
   :: forall r. Event String -> Event (Attribute (Indexed (selectionDirection :: String | r)))
-_selectionDirection = Functor.map $
-  (unsafeAttribute <<< { key: "selectionDirection", value: _ } <<< prop')
+_selectionDirection = Functor.map
+  (unsafeAttribute <<< { key: "selectionDirection", value: _ } <<< Deku.Attribute.prop')
 
 _selectionDirection_
   :: forall r. String -> Event (Attribute (Indexed (selectionDirection :: String | r)))
 _selectionDirection_ = _selectionDirection <<< Applicative.pure
 
 _htmlFor :: forall r. Event String -> Event (Attribute (Indexed (htmlFor :: String | r)))
-_htmlFor = Functor.map $ (unsafeAttribute <<< { key: "htmlFor", value: _ } <<< prop')
+_htmlFor = Functor.map (unsafeAttribute <<< { key: "htmlFor", value: _ } <<< Deku.Attribute.prop')
 
 _htmlFor_ :: forall r. String -> Event (Attribute (Indexed (htmlFor :: String | r)))
 _htmlFor_ = _htmlFor <<< Applicative.pure
 
 _as :: forall r. Event String -> Event (Attribute (Indexed (as :: String | r)))
-_as = Functor.map $ (unsafeAttribute <<< { key: "as", value: _ } <<< prop')
+_as = Functor.map (unsafeAttribute <<< { key: "as", value: _ } <<< Deku.Attribute.prop')
 
 _as_ :: forall r. String -> Event (Attribute (Indexed (as :: String | r)))
 _as_ = _as <<< Applicative.pure
 
 _media :: forall r. Event String -> Event (Attribute (Indexed (media :: String | r)))
-_media = Functor.map $ (unsafeAttribute <<< { key: "media", value: _ } <<< prop')
+_media = Functor.map (unsafeAttribute <<< { key: "media", value: _ } <<< Deku.Attribute.prop')
 
 _media_ :: forall r. String -> Event (Attribute (Indexed (media :: String | r)))
 _media_ = _media <<< Applicative.pure
 
 _integrity :: forall r. Event String -> Event (Attribute (Indexed (integrity :: String | r)))
-_integrity = Functor.map $ (unsafeAttribute <<< { key: "integrity", value: _ } <<< prop')
+_integrity = Functor.map
+  (unsafeAttribute <<< { key: "integrity", value: _ } <<< Deku.Attribute.prop')
 
 _integrity_ :: forall r. String -> Event (Attribute (Indexed (integrity :: String | r)))
 _integrity_ = _integrity <<< Applicative.pure
 
 _imageSrcset :: forall r. Event String -> Event (Attribute (Indexed (imageSrcset :: String | r)))
-_imageSrcset = Functor.map $ (unsafeAttribute <<< { key: "imageSrcset", value: _ } <<< prop')
+_imageSrcset = Functor.map
+  (unsafeAttribute <<< { key: "imageSrcset", value: _ } <<< Deku.Attribute.prop')
 
 _imageSrcset_ :: forall r. String -> Event (Attribute (Indexed (imageSrcset :: String | r)))
 _imageSrcset_ = _imageSrcset <<< Applicative.pure
 
 _imageSizes :: forall r. Event String -> Event (Attribute (Indexed (imageSizes :: String | r)))
-_imageSizes = Functor.map $ (unsafeAttribute <<< { key: "imageSizes", value: _ } <<< prop')
+_imageSizes = Functor.map
+  (unsafeAttribute <<< { key: "imageSizes", value: _ } <<< Deku.Attribute.prop')
 
 _imageSizes_ :: forall r. String -> Event (Attribute (Indexed (imageSizes :: String | r)))
 _imageSizes_ = _imageSizes <<< Applicative.pure
 
 _currentTime :: forall r. Event Number -> Event (Attribute (Indexed (currentTime :: Number | r)))
-_currentTime = Functor.map $
-  (unsafeAttribute <<< { key: "currentTime", value: _ } <<< (prop' <<< Show.show))
+_currentTime = Functor.map
+  ( unsafeAttribute <<< { key: "currentTime", value: _ } <<<
+      (Deku.Attribute.prop' <<< Data.Show.show)
+  )
 
 _currentTime_ :: forall r. Number -> Event (Attribute (Indexed (currentTime :: Number | r)))
 _currentTime_ = _currentTime <<< Applicative.pure
 
 _defaultPlaybackRate
   :: forall r. Event Number -> Event (Attribute (Indexed (defaultPlaybackRate :: Number | r)))
-_defaultPlaybackRate = Functor.map $
-  (unsafeAttribute <<< { key: "defaultPlaybackRate", value: _ } <<< (prop' <<< Show.show))
+_defaultPlaybackRate = Functor.map
+  ( unsafeAttribute <<< { key: "defaultPlaybackRate", value: _ } <<<
+      (Deku.Attribute.prop' <<< Data.Show.show)
+  )
 
 _defaultPlaybackRate_
   :: forall r. Number -> Event (Attribute (Indexed (defaultPlaybackRate :: Number | r)))
 _defaultPlaybackRate_ = _defaultPlaybackRate <<< Applicative.pure
 
 _playbackRate :: forall r. Event Number -> Event (Attribute (Indexed (playbackRate :: Number | r)))
-_playbackRate = Functor.map $
-  (unsafeAttribute <<< { key: "playbackRate", value: _ } <<< (prop' <<< Show.show))
+_playbackRate = Functor.map
+  ( unsafeAttribute <<< { key: "playbackRate", value: _ } <<<
+      (Deku.Attribute.prop' <<< Data.Show.show)
+  )
 
 _playbackRate_ :: forall r. Number -> Event (Attribute (Indexed (playbackRate :: Number | r)))
 _playbackRate_ = _playbackRate <<< Applicative.pure
 
 _preservesPitch
   :: forall r. Event Boolean -> Event (Attribute (Indexed (preservesPitch :: Boolean | r)))
-_preservesPitch = Functor.map $
-  (unsafeAttribute <<< { key: "preservesPitch", value: _ } <<< (prop' <<< Show.show))
+_preservesPitch = Functor.map
+  ( unsafeAttribute <<< { key: "preservesPitch", value: _ } <<<
+      (Deku.Attribute.prop' <<< Data.Show.show)
+  )
 
 _preservesPitch_
   :: forall r. Boolean -> Event (Attribute (Indexed (preservesPitch :: Boolean | r)))
 _preservesPitch_ = _preservesPitch <<< Applicative.pure
 
 _autoplay :: forall r. Event Boolean -> Event (Attribute (Indexed (autoplay :: Boolean | r)))
-_autoplay = Functor.map $
-  (unsafeAttribute <<< { key: "autoplay", value: _ } <<< (prop' <<< Show.show))
+_autoplay = Functor.map
+  (unsafeAttribute <<< { key: "autoplay", value: _ } <<< (Deku.Attribute.prop' <<< Data.Show.show))
 
 _autoplay_ :: forall r. Boolean -> Event (Attribute (Indexed (autoplay :: Boolean | r)))
 _autoplay_ = _autoplay <<< Applicative.pure
 
 _loop :: forall r. Event Boolean -> Event (Attribute (Indexed (loop :: Boolean | r)))
-_loop = Functor.map $ (unsafeAttribute <<< { key: "loop", value: _ } <<< (prop' <<< Show.show))
+_loop = Functor.map
+  (unsafeAttribute <<< { key: "loop", value: _ } <<< (Deku.Attribute.prop' <<< Data.Show.show))
 
 _loop_ :: forall r. Boolean -> Event (Attribute (Indexed (loop :: Boolean | r)))
 _loop_ = _loop <<< Applicative.pure
 
 _controls :: forall r. Event Boolean -> Event (Attribute (Indexed (controls :: Boolean | r)))
-_controls = Functor.map $
-  (unsafeAttribute <<< { key: "controls", value: _ } <<< (prop' <<< Show.show))
+_controls = Functor.map
+  (unsafeAttribute <<< { key: "controls", value: _ } <<< (Deku.Attribute.prop' <<< Data.Show.show))
 
 _controls_ :: forall r. Boolean -> Event (Attribute (Indexed (controls :: Boolean | r)))
 _controls_ = _controls <<< Applicative.pure
 
 _volume :: forall r. Event Number -> Event (Attribute (Indexed (volume :: Number | r)))
-_volume = Functor.map $ (unsafeAttribute <<< { key: "volume", value: _ } <<< (prop' <<< Show.show))
+_volume = Functor.map
+  (unsafeAttribute <<< { key: "volume", value: _ } <<< (Deku.Attribute.prop' <<< Data.Show.show))
 
 _volume_ :: forall r. Number -> Event (Attribute (Indexed (volume :: Number | r)))
 _volume_ = _volume <<< Applicative.pure
 
 _muted :: forall r. Event Boolean -> Event (Attribute (Indexed (muted :: Boolean | r)))
-_muted = Functor.map $ (unsafeAttribute <<< { key: "muted", value: _ } <<< (prop' <<< Show.show))
+_muted = Functor.map
+  (unsafeAttribute <<< { key: "muted", value: _ } <<< (Deku.Attribute.prop' <<< Data.Show.show))
 
 _muted_ :: forall r. Boolean -> Event (Attribute (Indexed (muted :: Boolean | r)))
 _muted_ = _muted <<< Applicative.pure
 
 _defaultMuted
   :: forall r. Event Boolean -> Event (Attribute (Indexed (defaultMuted :: Boolean | r)))
-_defaultMuted = Functor.map $
-  (unsafeAttribute <<< { key: "defaultMuted", value: _ } <<< (prop' <<< Show.show))
+_defaultMuted = Functor.map
+  ( unsafeAttribute <<< { key: "defaultMuted", value: _ } <<<
+      (Deku.Attribute.prop' <<< Data.Show.show)
+  )
 
 _defaultMuted_ :: forall r. Boolean -> Event (Attribute (Indexed (defaultMuted :: Boolean | r)))
 _defaultMuted_ = _defaultMuted <<< Applicative.pure
 
+_scheme :: forall r. Event String -> Event (Attribute (Indexed (scheme :: String | r)))
+_scheme = Functor.map (unsafeAttribute <<< { key: "scheme", value: _ } <<< Deku.Attribute.prop')
+
+_scheme_ :: forall r. String -> Event (Attribute (Indexed (scheme :: String | r)))
+_scheme_ = _scheme <<< Applicative.pure
+
 _content :: forall r. Event String -> Event (Attribute (Indexed (content :: String | r)))
-_content = Functor.map $ (unsafeAttribute <<< { key: "content", value: _ } <<< prop')
+_content = Functor.map (unsafeAttribute <<< { key: "content", value: _ } <<< Deku.Attribute.prop')
 
 _content_ :: forall r. String -> Event (Attribute (Indexed (content :: String | r)))
 _content_ = _content <<< Applicative.pure
 
 _low :: forall r. Event Number -> Event (Attribute (Indexed (low :: Number | r)))
-_low = Functor.map $ (unsafeAttribute <<< { key: "low", value: _ } <<< (prop' <<< Show.show))
+_low = Functor.map
+  (unsafeAttribute <<< { key: "low", value: _ } <<< (Deku.Attribute.prop' <<< Data.Show.show))
 
 _low_ :: forall r. Number -> Event (Attribute (Indexed (low :: Number | r)))
 _low_ = _low <<< Applicative.pure
 
 _high :: forall r. Event Number -> Event (Attribute (Indexed (high :: Number | r)))
-_high = Functor.map $ (unsafeAttribute <<< { key: "high", value: _ } <<< (prop' <<< Show.show))
+_high = Functor.map
+  (unsafeAttribute <<< { key: "high", value: _ } <<< (Deku.Attribute.prop' <<< Data.Show.show))
 
 _high_ :: forall r. Number -> Event (Attribute (Indexed (high :: Number | r)))
 _high_ = _high <<< Applicative.pure
 
 _optimum :: forall r. Event Number -> Event (Attribute (Indexed (optimum :: Number | r)))
-_optimum = Functor.map $
-  (unsafeAttribute <<< { key: "optimum", value: _ } <<< (prop' <<< Show.show))
+_optimum = Functor.map
+  (unsafeAttribute <<< { key: "optimum", value: _ } <<< (Deku.Attribute.prop' <<< Data.Show.show))
 
 _optimum_ :: forall r. Number -> Event (Attribute (Indexed (optimum :: Number | r)))
 _optimum_ = _optimum <<< Applicative.pure
 
 _cite :: forall r. Event String -> Event (Attribute (Indexed (cite :: String | r)))
-_cite = Functor.map $ (unsafeAttribute <<< { key: "cite", value: _ } <<< prop')
+_cite = Functor.map (unsafeAttribute <<< { key: "cite", value: _ } <<< Deku.Attribute.prop')
 
 _cite_ :: forall r. String -> Event (Attribute (Indexed (cite :: String | r)))
 _cite_ = _cite <<< Applicative.pure
 
 _dateTime :: forall r. Event String -> Event (Attribute (Indexed (dateTime :: String | r)))
-_dateTime = Functor.map $ (unsafeAttribute <<< { key: "dateTime", value: _ } <<< prop')
+_dateTime = Functor.map
+  (unsafeAttribute <<< { key: "dateTime", value: _ } <<< Deku.Attribute.prop')
 
 _dateTime_ :: forall r. String -> Event (Attribute (Indexed (dateTime :: String | r)))
 _dateTime_ = _dateTime <<< Applicative.pure
 
 _reversed :: forall r. Event Boolean -> Event (Attribute (Indexed (reversed :: Boolean | r)))
-_reversed = Functor.map $
-  (unsafeAttribute <<< { key: "reversed", value: _ } <<< (prop' <<< Show.show))
+_reversed = Functor.map
+  (unsafeAttribute <<< { key: "reversed", value: _ } <<< (Deku.Attribute.prop' <<< Data.Show.show))
 
 _reversed_ :: forall r. Boolean -> Event (Attribute (Indexed (reversed :: Boolean | r)))
 _reversed_ = _reversed <<< Applicative.pure
 
 _start :: forall r. Event Int -> Event (Attribute (Indexed (start :: Int | r)))
-_start = Functor.map $ (unsafeAttribute <<< { key: "start", value: _ } <<< (prop' <<< Show.show))
+_start = Functor.map
+  (unsafeAttribute <<< { key: "start", value: _ } <<< (Deku.Attribute.prop' <<< Data.Show.show))
 
 _start_ :: forall r. Int -> Event (Attribute (Indexed (start :: Int | r)))
 _start_ = _start <<< Applicative.pure
 
-_xdata :: forall r. Event String -> Event (Attribute (Indexed (xdata :: String | r)))
-_xdata = Functor.map $ (unsafeAttribute <<< { key: "data", value: _ } <<< prop')
+_archive :: forall r. Event String -> Event (Attribute (Indexed (archive :: String | r)))
+_archive = Functor.map (unsafeAttribute <<< { key: "archive", value: _ } <<< Deku.Attribute.prop')
 
-_xdata_ :: forall r. String -> Event (Attribute (Indexed (xdata :: String | r)))
-_xdata_ = _xdata <<< Applicative.pure
+_archive_ :: forall r. String -> Event (Attribute (Indexed (archive :: String | r)))
+_archive_ = _archive <<< Applicative.pure
+
+_code :: forall r. Event String -> Event (Attribute (Indexed (code :: String | r)))
+_code = Functor.map (unsafeAttribute <<< { key: "code", value: _ } <<< Deku.Attribute.prop')
+
+_code_ :: forall r. String -> Event (Attribute (Indexed (code :: String | r)))
+_code_ = _code <<< Applicative.pure
+
+_declare :: forall r. Event Boolean -> Event (Attribute (Indexed (declare :: Boolean | r)))
+_declare = Functor.map
+  (unsafeAttribute <<< { key: "declare", value: _ } <<< (Deku.Attribute.prop' <<< Data.Show.show))
+
+_declare_ :: forall r. Boolean -> Event (Attribute (Indexed (declare :: Boolean | r)))
+_declare_ = _declare <<< Applicative.pure
+
+_standby :: forall r. Event String -> Event (Attribute (Indexed (standby :: String | r)))
+_standby = Functor.map (unsafeAttribute <<< { key: "standby", value: _ } <<< Deku.Attribute.prop')
+
+_standby_ :: forall r. String -> Event (Attribute (Indexed (standby :: String | r)))
+_standby_ = _standby <<< Applicative.pure
+
+_codeBase :: forall r. Event String -> Event (Attribute (Indexed (codeBase :: String | r)))
+_codeBase = Functor.map
+  (unsafeAttribute <<< { key: "codeBase", value: _ } <<< Deku.Attribute.prop')
+
+_codeBase_ :: forall r. String -> Event (Attribute (Indexed (codeBase :: String | r)))
+_codeBase_ = _codeBase <<< Applicative.pure
+
+_codeType :: forall r. Event String -> Event (Attribute (Indexed (codeType :: String | r)))
+_codeType = Functor.map
+  (unsafeAttribute <<< { key: "codeType", value: _ } <<< Deku.Attribute.prop')
+
+_codeType_ :: forall r. String -> Event (Attribute (Indexed (codeType :: String | r)))
+_codeType_ = _codeType <<< Applicative.pure
+
+_data :: forall r. Event String -> Event (Attribute (Indexed (xdata :: String | r)))
+_data = Functor.map (unsafeAttribute <<< { key: "data", value: _ } <<< Deku.Attribute.prop')
+
+_data_ :: forall r. String -> Event (Attribute (Indexed (xdata :: String | r)))
+_data_ = _data <<< Applicative.pure
 
 _label :: forall r. Event String -> Event (Attribute (Indexed (label :: String | r)))
-_label = Functor.map $ (unsafeAttribute <<< { key: "label", value: _ } <<< prop')
+_label = Functor.map (unsafeAttribute <<< { key: "label", value: _ } <<< Deku.Attribute.prop')
 
 _label_ :: forall r. String -> Event (Attribute (Indexed (label :: String | r)))
 _label_ = _label <<< Applicative.pure
 
 _defaultSelected
   :: forall r. Event Boolean -> Event (Attribute (Indexed (defaultSelected :: Boolean | r)))
-_defaultSelected = Functor.map $
-  (unsafeAttribute <<< { key: "defaultSelected", value: _ } <<< (prop' <<< Show.show))
+_defaultSelected = Functor.map
+  ( unsafeAttribute <<< { key: "defaultSelected", value: _ } <<<
+      (Deku.Attribute.prop' <<< Data.Show.show)
+  )
 
 _defaultSelected_
   :: forall r. Boolean -> Event (Attribute (Indexed (defaultSelected :: Boolean | r)))
 _defaultSelected_ = _defaultSelected <<< Applicative.pure
 
 _selected :: forall r. Event Boolean -> Event (Attribute (Indexed (selected :: Boolean | r)))
-_selected = Functor.map $
-  (unsafeAttribute <<< { key: "selected", value: _ } <<< (prop' <<< Show.show))
+_selected = Functor.map
+  (unsafeAttribute <<< { key: "selected", value: _ } <<< (Deku.Attribute.prop' <<< Data.Show.show))
 
 _selected_ :: forall r. Boolean -> Event (Attribute (Indexed (selected :: Boolean | r)))
 _selected_ = _selected <<< Applicative.pure
 
 _nonce :: forall r. Event String -> Event (Attribute (Indexed (nonce :: String | r)))
-_nonce = Functor.map $ (unsafeAttribute <<< { key: "nonce", value: _ } <<< prop')
+_nonce = Functor.map (unsafeAttribute <<< { key: "nonce", value: _ } <<< Deku.Attribute.prop')
 
 _nonce_ :: forall r. String -> Event (Attribute (Indexed (nonce :: String | r)))
 _nonce_ = _nonce <<< Applicative.pure
 
 _autofocus :: forall r. Event Boolean -> Event (Attribute (Indexed (autofocus :: Boolean | r)))
-_autofocus = Functor.map $
-  (unsafeAttribute <<< { key: "autofocus", value: _ } <<< (prop' <<< Show.show))
+_autofocus = Functor.map
+  (unsafeAttribute <<< { key: "autofocus", value: _ } <<< (Deku.Attribute.prop' <<< Data.Show.show))
 
 _autofocus_ :: forall r. Boolean -> Event (Attribute (Indexed (autofocus :: Boolean | r)))
 _autofocus_ = _autofocus <<< Applicative.pure
 
 _tabIndex :: forall r. Event Int -> Event (Attribute (Indexed (tabIndex :: Int | r)))
-_tabIndex = Functor.map $
-  (unsafeAttribute <<< { key: "tabIndex", value: _ } <<< (prop' <<< Show.show))
+_tabIndex = Functor.map
+  (unsafeAttribute <<< { key: "tabIndex", value: _ } <<< (Deku.Attribute.prop' <<< Data.Show.show))
 
 _tabIndex_ :: forall r. Int -> Event (Attribute (Indexed (tabIndex :: Int | r)))
 _tabIndex_ = _tabIndex <<< Applicative.pure
 
+_event :: forall r. Event String -> Event (Attribute (Indexed (event :: String | r)))
+_event = Functor.map (unsafeAttribute <<< { key: "event", value: _ } <<< Deku.Attribute.prop')
+
+_event_ :: forall r. String -> Event (Attribute (Indexed (event :: String | r)))
+_event_ = _event <<< Applicative.pure
+
 _noModule :: forall r. Event Boolean -> Event (Attribute (Indexed (noModule :: Boolean | r)))
-_noModule = Functor.map $
-  (unsafeAttribute <<< { key: "noModule", value: _ } <<< (prop' <<< Show.show))
+_noModule = Functor.map
+  (unsafeAttribute <<< { key: "noModule", value: _ } <<< (Deku.Attribute.prop' <<< Data.Show.show))
 
 _noModule_ :: forall r. Boolean -> Event (Attribute (Indexed (noModule :: Boolean | r)))
 _noModule_ = _noModule <<< Applicative.pure
 
 _async :: forall r. Event Boolean -> Event (Attribute (Indexed (async :: Boolean | r)))
-_async = Functor.map $ (unsafeAttribute <<< { key: "async", value: _ } <<< (prop' <<< Show.show))
+_async = Functor.map
+  (unsafeAttribute <<< { key: "async", value: _ } <<< (Deku.Attribute.prop' <<< Data.Show.show))
 
 _async_ :: forall r. Boolean -> Event (Attribute (Indexed (async :: Boolean | r)))
 _async_ = _async <<< Applicative.pure
 
 _defer :: forall r. Event Boolean -> Event (Attribute (Indexed (defer :: Boolean | r)))
-_defer = Functor.map $ (unsafeAttribute <<< { key: "defer", value: _ } <<< (prop' <<< Show.show))
+_defer = Functor.map
+  (unsafeAttribute <<< { key: "defer", value: _ } <<< (Deku.Attribute.prop' <<< Data.Show.show))
 
 _defer_ :: forall r. Boolean -> Event (Attribute (Indexed (defer :: Boolean | r)))
 _defer_ = _defer <<< Applicative.pure
 
 _length :: forall r. Event Int -> Event (Attribute (Indexed (length :: Int | r)))
-_length = Functor.map $ (unsafeAttribute <<< { key: "length", value: _ } <<< (prop' <<< Show.show))
+_length = Functor.map
+  (unsafeAttribute <<< { key: "length", value: _ } <<< (Deku.Attribute.prop' <<< Data.Show.show))
 
 _length_ :: forall r. Int -> Event (Attribute (Indexed (length :: Int | r)))
 _length_ = _length <<< Applicative.pure
 
 _selectedIndex :: forall r. Event Int -> Event (Attribute (Indexed (selectedIndex :: Int | r)))
-_selectedIndex = Functor.map $
-  (unsafeAttribute <<< { key: "selectedIndex", value: _ } <<< (prop' <<< Show.show))
+_selectedIndex = Functor.map
+  ( unsafeAttribute <<< { key: "selectedIndex", value: _ } <<<
+      (Deku.Attribute.prop' <<< Data.Show.show)
+  )
 
 _selectedIndex_ :: forall r. Int -> Event (Attribute (Indexed (selectedIndex :: Int | r)))
 _selectedIndex_ = _selectedIndex <<< Applicative.pure
 
+_axis :: forall r. Event String -> Event (Attribute (Indexed (axis :: String | r)))
+_axis = Functor.map (unsafeAttribute <<< { key: "axis", value: _ } <<< Deku.Attribute.prop')
+
+_axis_ :: forall r. String -> Event (Attribute (Indexed (axis :: String | r)))
+_axis_ = _axis <<< Applicative.pure
+
+_ch :: forall r. Event String -> Event (Attribute (Indexed (ch :: String | r)))
+_ch = Functor.map (unsafeAttribute <<< { key: "ch", value: _ } <<< Deku.Attribute.prop')
+
+_ch_ :: forall r. String -> Event (Attribute (Indexed (ch :: String | r)))
+_ch_ = _ch <<< Applicative.pure
+
+_chOff :: forall r. Event String -> Event (Attribute (Indexed (chOff :: String | r)))
+_chOff = Functor.map (unsafeAttribute <<< { key: "chOff", value: _ } <<< Deku.Attribute.prop')
+
+_chOff_ :: forall r. String -> Event (Attribute (Indexed (chOff :: String | r)))
+_chOff_ = _chOff <<< Applicative.pure
+
+_noWrap :: forall r. Event Boolean -> Event (Attribute (Indexed (noWrap :: Boolean | r)))
+_noWrap = Functor.map
+  (unsafeAttribute <<< { key: "noWrap", value: _ } <<< (Deku.Attribute.prop' <<< Data.Show.show))
+
+_noWrap_ :: forall r. Boolean -> Event (Attribute (Indexed (noWrap :: Boolean | r)))
+_noWrap_ = _noWrap <<< Applicative.pure
+
+_vAlign :: forall r. Event String -> Event (Attribute (Indexed (vAlign :: String | r)))
+_vAlign = Functor.map (unsafeAttribute <<< { key: "vAlign", value: _ } <<< Deku.Attribute.prop')
+
+_vAlign_ :: forall r. String -> Event (Attribute (Indexed (vAlign :: String | r)))
+_vAlign_ = _vAlign <<< Applicative.pure
+
 _colSpan :: forall r. Event Int -> Event (Attribute (Indexed (colSpan :: Int | r)))
-_colSpan = Functor.map $
-  (unsafeAttribute <<< { key: "colSpan", value: _ } <<< (prop' <<< Show.show))
+_colSpan = Functor.map
+  (unsafeAttribute <<< { key: "colSpan", value: _ } <<< (Deku.Attribute.prop' <<< Data.Show.show))
 
 _colSpan_ :: forall r. Int -> Event (Attribute (Indexed (colSpan :: Int | r)))
 _colSpan_ = _colSpan <<< Applicative.pure
 
 _rowSpan :: forall r. Event Int -> Event (Attribute (Indexed (rowSpan :: Int | r)))
-_rowSpan = Functor.map $
-  (unsafeAttribute <<< { key: "rowSpan", value: _ } <<< (prop' <<< Show.show))
+_rowSpan = Functor.map
+  (unsafeAttribute <<< { key: "rowSpan", value: _ } <<< (Deku.Attribute.prop' <<< Data.Show.show))
 
 _rowSpan_ :: forall r. Int -> Event (Attribute (Indexed (rowSpan :: Int | r)))
 _rowSpan_ = _rowSpan <<< Applicative.pure
 
 _headers :: forall r. Event String -> Event (Attribute (Indexed (headers :: String | r)))
-_headers = Functor.map $ (unsafeAttribute <<< { key: "headers", value: _ } <<< prop')
+_headers = Functor.map (unsafeAttribute <<< { key: "headers", value: _ } <<< Deku.Attribute.prop')
 
 _headers_ :: forall r. String -> Event (Attribute (Indexed (headers :: String | r)))
 _headers_ = _headers <<< Applicative.pure
 
 _abbr :: forall r. Event String -> Event (Attribute (Indexed (abbr :: String | r)))
-_abbr = Functor.map $ (unsafeAttribute <<< { key: "abbr", value: _ } <<< prop')
+_abbr = Functor.map (unsafeAttribute <<< { key: "abbr", value: _ } <<< Deku.Attribute.prop')
 
 _abbr_ :: forall r. String -> Event (Attribute (Indexed (abbr :: String | r)))
 _abbr_ = _abbr <<< Applicative.pure
 
 _span :: forall r. Event Int -> Event (Attribute (Indexed (span :: Int | r)))
-_span = Functor.map $ (unsafeAttribute <<< { key: "span", value: _ } <<< (prop' <<< Show.show))
+_span = Functor.map
+  (unsafeAttribute <<< { key: "span", value: _ } <<< (Deku.Attribute.prop' <<< Data.Show.show))
 
 _span_ :: forall r. Int -> Event (Attribute (Indexed (span :: Int | r)))
 _span_ = _span <<< Applicative.pure
 
+_frame :: forall r. Event String -> Event (Attribute (Indexed (frame :: String | r)))
+_frame = Functor.map (unsafeAttribute <<< { key: "frame", value: _ } <<< Deku.Attribute.prop')
+
+_frame_ :: forall r. String -> Event (Attribute (Indexed (frame :: String | r)))
+_frame_ = _frame <<< Applicative.pure
+
+_rules :: forall r. Event String -> Event (Attribute (Indexed (rules :: String | r)))
+_rules = Functor.map (unsafeAttribute <<< { key: "rules", value: _ } <<< Deku.Attribute.prop')
+
+_rules_ :: forall r. String -> Event (Attribute (Indexed (rules :: String | r)))
+_rules_ = _rules <<< Applicative.pure
+
+_summary :: forall r. Event String -> Event (Attribute (Indexed (summary :: String | r)))
+_summary = Functor.map (unsafeAttribute <<< { key: "summary", value: _ } <<< Deku.Attribute.prop')
+
+_summary_ :: forall r. String -> Event (Attribute (Indexed (summary :: String | r)))
+_summary_ = _summary <<< Applicative.pure
+
+_cellPadding :: forall r. Event String -> Event (Attribute (Indexed (cellPadding :: String | r)))
+_cellPadding = Functor.map
+  (unsafeAttribute <<< { key: "cellPadding", value: _ } <<< Deku.Attribute.prop')
+
+_cellPadding_ :: forall r. String -> Event (Attribute (Indexed (cellPadding :: String | r)))
+_cellPadding_ = _cellPadding <<< Applicative.pure
+
+_cellSpacing :: forall r. Event String -> Event (Attribute (Indexed (cellSpacing :: String | r)))
+_cellSpacing = Functor.map
+  (unsafeAttribute <<< { key: "cellSpacing", value: _ } <<< Deku.Attribute.prop')
+
+_cellSpacing_ :: forall r. String -> Event (Attribute (Indexed (cellSpacing :: String | r)))
+_cellSpacing_ = _cellSpacing <<< Applicative.pure
+
 _cols :: forall r. Event Int -> Event (Attribute (Indexed (cols :: Int | r)))
-_cols = Functor.map $ (unsafeAttribute <<< { key: "cols", value: _ } <<< (prop' <<< Show.show))
+_cols = Functor.map
+  (unsafeAttribute <<< { key: "cols", value: _ } <<< (Deku.Attribute.prop' <<< Data.Show.show))
 
 _cols_ :: forall r. Int -> Event (Attribute (Indexed (cols :: Int | r)))
 _cols_ = _cols <<< Applicative.pure
 
 _rows :: forall r. Event Int -> Event (Attribute (Indexed (rows :: Int | r)))
-_rows = Functor.map $ (unsafeAttribute <<< { key: "rows", value: _ } <<< (prop' <<< Show.show))
+_rows = Functor.map
+  (unsafeAttribute <<< { key: "rows", value: _ } <<< (Deku.Attribute.prop' <<< Data.Show.show))
 
 _rows_ :: forall r. Int -> Event (Attribute (Indexed (rows :: Int | r)))
 _rows_ = _rows <<< Applicative.pure
 
 _srclang :: forall r. Event String -> Event (Attribute (Indexed (srclang :: String | r)))
-_srclang = Functor.map $ (unsafeAttribute <<< { key: "srclang", value: _ } <<< prop')
+_srclang = Functor.map (unsafeAttribute <<< { key: "srclang", value: _ } <<< Deku.Attribute.prop')
 
 _srclang_ :: forall r. String -> Event (Attribute (Indexed (srclang :: String | r)))
 _srclang_ = _srclang <<< Applicative.pure
 
 _default :: forall r. Event Boolean -> Event (Attribute (Indexed (default :: Boolean | r)))
-_default = Functor.map $
-  (unsafeAttribute <<< { key: "default", value: _ } <<< (prop' <<< Show.show))
+_default = Functor.map
+  (unsafeAttribute <<< { key: "default", value: _ } <<< (Deku.Attribute.prop' <<< Data.Show.show))
 
 _default_ :: forall r. Boolean -> Event (Attribute (Indexed (default :: Boolean | r)))
 _default_ = _default <<< Applicative.pure
 
 _poster :: forall r. Event String -> Event (Attribute (Indexed (poster :: String | r)))
-_poster = Functor.map $ (unsafeAttribute <<< { key: "poster", value: _ } <<< prop')
+_poster = Functor.map (unsafeAttribute <<< { key: "poster", value: _ } <<< Deku.Attribute.prop')
 
 _poster_ :: forall r. String -> Event (Attribute (Indexed (poster :: String | r)))
 _poster_ = _poster <<< Applicative.pure
 
 _playsInline :: forall r. Event Boolean -> Event (Attribute (Indexed (playsInline :: Boolean | r)))
-_playsInline = Functor.map $
-  (unsafeAttribute <<< { key: "playsInline", value: _ } <<< (prop' <<< Show.show))
+_playsInline = Functor.map
+  ( unsafeAttribute <<< { key: "playsInline", value: _ } <<<
+      (Deku.Attribute.prop' <<< Data.Show.show)
+  )
 
 _playsInline_ :: forall r. Boolean -> Event (Attribute (Indexed (playsInline :: Boolean | r)))
 _playsInline_ = _playsInline <<< Applicative.pure
 
+_nodeValue :: forall r. Event String -> Event (Attribute (Indexed (nodeValue :: String | r)))
+_nodeValue = Functor.map
+  (unsafeAttribute <<< { key: "nodeValue", value: _ } <<< Deku.Attribute.prop')
+
+_nodeValue_ :: forall r. String -> Event (Attribute (Indexed (nodeValue :: String | r)))
+_nodeValue_ = _nodeValue <<< Applicative.pure
+
+_textContent :: forall r. Event String -> Event (Attribute (Indexed (textContent :: String | r)))
+_textContent = Functor.map
+  (unsafeAttribute <<< { key: "textContent", value: _ } <<< Deku.Attribute.prop')
+
+_textContent_ :: forall r. String -> Event (Attribute (Indexed (textContent :: String | r)))
+_textContent_ = _textContent <<< Applicative.pure
+
 _popoverTargetAction
   :: forall r. Event String -> Event (Attribute (Indexed (popoverTargetAction :: String | r)))
-_popoverTargetAction = Functor.map $
-  (unsafeAttribute <<< { key: "popoverTargetAction", value: _ } <<< prop')
+_popoverTargetAction = Functor.map
+  (unsafeAttribute <<< { key: "popoverTargetAction", value: _ } <<< Deku.Attribute.prop')
 
 _popoverTargetAction_
   :: forall r. String -> Event (Attribute (Indexed (popoverTargetAction :: String | r)))
@@ -4946,252 +6428,415 @@ _popoverTargetAction_ = _popoverTargetAction <<< Applicative.pure
 
 _onBegin
   :: forall r
-   . Event (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
-  -> Event (Attribute (Indexed (onbegin :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r)))
-_onBegin = Functor.map $ (unsafeAttribute <<< { key: "onbegin", value: _ } <<< (cb' <<< cb))
+   . Event (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+  -> Event
+       ( Attribute
+           (Indexed (onbegin :: Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit | r))
+       )
+_onBegin = Functor.map
+  (unsafeAttribute <<< { key: "onbegin", value: _ } <<< (Deku.Attribute.cb' <<< Deku.Attribute.cb))
 
 _onBegin_
   :: forall r
-   . (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
-  -> Event (Attribute (Indexed (onbegin :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r)))
+   . (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+  -> Event
+       ( Attribute
+           (Indexed (onbegin :: Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit | r))
+       )
 _onBegin_ = _onBegin <<< Applicative.pure
 
 _onEnd
   :: forall r
-   . Event (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
-  -> Event (Attribute (Indexed (onend :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r)))
-_onEnd = Functor.map $ (unsafeAttribute <<< { key: "onend", value: _ } <<< (cb' <<< cb))
+   . Event (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+  -> Event
+       ( Attribute
+           (Indexed (onend :: Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit | r))
+       )
+_onEnd = Functor.map
+  (unsafeAttribute <<< { key: "onend", value: _ } <<< (Deku.Attribute.cb' <<< Deku.Attribute.cb))
 
 _onEnd_
   :: forall r
-   . (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
-  -> Event (Attribute (Indexed (onend :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r)))
+   . (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+  -> Event
+       ( Attribute
+           (Indexed (onend :: Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit | r))
+       )
 _onEnd_ = _onEnd <<< Applicative.pure
 
 _onRepeat
   :: forall r
-   . Event (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
-  -> Event (Attribute (Indexed (onrepeat :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r)))
-_onRepeat = Functor.map $ (unsafeAttribute <<< { key: "onrepeat", value: _ } <<< (cb' <<< cb))
+   . Event (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+  -> Event
+       ( Attribute
+           (Indexed (onrepeat :: Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit | r))
+       )
+_onRepeat = Functor.map
+  (unsafeAttribute <<< { key: "onrepeat", value: _ } <<< (Deku.Attribute.cb' <<< Deku.Attribute.cb))
 
 _onRepeat_
   :: forall r
-   . (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
-  -> Event (Attribute (Indexed (onrepeat :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r)))
+   . (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+  -> Event
+       ( Attribute
+           (Indexed (onrepeat :: Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit | r))
+       )
 _onRepeat_ = _onRepeat <<< Applicative.pure
 
 _orient :: forall r. Event String -> Event (Attribute (Indexed (orient :: String | r)))
-_orient = Functor.map $ (unsafeAttribute <<< { key: "orient", value: _ } <<< prop')
+_orient = Functor.map (unsafeAttribute <<< { key: "orient", value: _ } <<< Deku.Attribute.prop')
 
 _orient_ :: forall r. String -> Event (Attribute (Indexed (orient :: String | r)))
 _orient_ = _orient <<< Applicative.pure
 
 _onAfterprint
   :: forall r
-   . Event (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
-  -> Event (Attribute (Indexed (onafterprint :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r)))
-_onAfterprint = Functor.map $
-  (unsafeAttribute <<< { key: "onafterprint", value: _ } <<< (cb' <<< cb))
+   . Event (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+  -> Event
+       ( Attribute
+           ( Indexed
+               (onafterprint :: Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit | r)
+           )
+       )
+_onAfterprint = Functor.map
+  ( unsafeAttribute <<< { key: "onafterprint", value: _ } <<<
+      (Deku.Attribute.cb' <<< Deku.Attribute.cb)
+  )
 
 _onAfterprint_
   :: forall r
-   . (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
-  -> Event (Attribute (Indexed (onafterprint :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r)))
+   . (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+  -> Event
+       ( Attribute
+           ( Indexed
+               (onafterprint :: Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit | r)
+           )
+       )
 _onAfterprint_ = _onAfterprint <<< Applicative.pure
 
 _onBeforeprint
   :: forall r
-   . Event (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
+   . Event (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
   -> Event
-       (Attribute (Indexed (onbeforeprint :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r)))
-_onBeforeprint = Functor.map $
-  (unsafeAttribute <<< { key: "onbeforeprint", value: _ } <<< (cb' <<< cb))
+       ( Attribute
+           ( Indexed
+               (onbeforeprint :: Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit | r)
+           )
+       )
+_onBeforeprint = Functor.map
+  ( unsafeAttribute <<< { key: "onbeforeprint", value: _ } <<<
+      (Deku.Attribute.cb' <<< Deku.Attribute.cb)
+  )
 
 _onBeforeprint_
   :: forall r
-   . (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
+   . (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
   -> Event
-       (Attribute (Indexed (onbeforeprint :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r)))
+       ( Attribute
+           ( Indexed
+               (onbeforeprint :: Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit | r)
+           )
+       )
 _onBeforeprint_ = _onBeforeprint <<< Applicative.pure
 
 _onHashchange
   :: forall r
-   . Event (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
-  -> Event (Attribute (Indexed (onhashchange :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r)))
-_onHashchange = Functor.map $
-  (unsafeAttribute <<< { key: "onhashchange", value: _ } <<< (cb' <<< cb))
+   . Event (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+  -> Event
+       ( Attribute
+           ( Indexed
+               (onhashchange :: Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit | r)
+           )
+       )
+_onHashchange = Functor.map
+  ( unsafeAttribute <<< { key: "onhashchange", value: _ } <<<
+      (Deku.Attribute.cb' <<< Deku.Attribute.cb)
+  )
 
 _onHashchange_
   :: forall r
-   . (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
-  -> Event (Attribute (Indexed (onhashchange :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r)))
+   . (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+  -> Event
+       ( Attribute
+           ( Indexed
+               (onhashchange :: Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit | r)
+           )
+       )
 _onHashchange_ = _onHashchange <<< Applicative.pure
 
 _onLanguagechange
   :: forall r
-   . Event (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
+   . Event (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
   -> Event
-       (Attribute (Indexed (onlanguagechange :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r)))
-_onLanguagechange = Functor.map $
-  (unsafeAttribute <<< { key: "onlanguagechange", value: _ } <<< (cb' <<< cb))
+       ( Attribute
+           ( Indexed
+               (onlanguagechange :: Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit | r)
+           )
+       )
+_onLanguagechange = Functor.map
+  ( unsafeAttribute <<< { key: "onlanguagechange", value: _ } <<<
+      (Deku.Attribute.cb' <<< Deku.Attribute.cb)
+  )
 
 _onLanguagechange_
   :: forall r
-   . (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
+   . (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
   -> Event
-       (Attribute (Indexed (onlanguagechange :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r)))
+       ( Attribute
+           ( Indexed
+               (onlanguagechange :: Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit | r)
+           )
+       )
 _onLanguagechange_ = _onLanguagechange <<< Applicative.pure
 
 _onMessage
   :: forall r
-   . Event (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
-  -> Event (Attribute (Indexed (onmessage :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r)))
-_onMessage = Functor.map $ (unsafeAttribute <<< { key: "onmessage", value: _ } <<< (cb' <<< cb))
+   . Event (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+  -> Event
+       ( Attribute
+           (Indexed (onmessage :: Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit | r))
+       )
+_onMessage = Functor.map
+  ( unsafeAttribute <<< { key: "onmessage", value: _ } <<<
+      (Deku.Attribute.cb' <<< Deku.Attribute.cb)
+  )
 
 _onMessage_
   :: forall r
-   . (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
-  -> Event (Attribute (Indexed (onmessage :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r)))
+   . (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+  -> Event
+       ( Attribute
+           (Indexed (onmessage :: Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit | r))
+       )
 _onMessage_ = _onMessage <<< Applicative.pure
 
 _onMessageerror
   :: forall r
-   . Event (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
+   . Event (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
   -> Event
-       (Attribute (Indexed (onmessageerror :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r)))
-_onMessageerror = Functor.map $
-  (unsafeAttribute <<< { key: "onmessageerror", value: _ } <<< (cb' <<< cb))
+       ( Attribute
+           ( Indexed
+               (onmessageerror :: Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit | r)
+           )
+       )
+_onMessageerror = Functor.map
+  ( unsafeAttribute <<< { key: "onmessageerror", value: _ } <<<
+      (Deku.Attribute.cb' <<< Deku.Attribute.cb)
+  )
 
 _onMessageerror_
   :: forall r
-   . (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
+   . (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
   -> Event
-       (Attribute (Indexed (onmessageerror :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r)))
+       ( Attribute
+           ( Indexed
+               (onmessageerror :: Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit | r)
+           )
+       )
 _onMessageerror_ = _onMessageerror <<< Applicative.pure
 
 _onOffline
   :: forall r
-   . Event (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
-  -> Event (Attribute (Indexed (onoffline :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r)))
-_onOffline = Functor.map $ (unsafeAttribute <<< { key: "onoffline", value: _ } <<< (cb' <<< cb))
+   . Event (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+  -> Event
+       ( Attribute
+           (Indexed (onoffline :: Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit | r))
+       )
+_onOffline = Functor.map
+  ( unsafeAttribute <<< { key: "onoffline", value: _ } <<<
+      (Deku.Attribute.cb' <<< Deku.Attribute.cb)
+  )
 
 _onOffline_
   :: forall r
-   . (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
-  -> Event (Attribute (Indexed (onoffline :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r)))
+   . (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+  -> Event
+       ( Attribute
+           (Indexed (onoffline :: Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit | r))
+       )
 _onOffline_ = _onOffline <<< Applicative.pure
 
 _onOnline
   :: forall r
-   . Event (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
-  -> Event (Attribute (Indexed (ononline :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r)))
-_onOnline = Functor.map $ (unsafeAttribute <<< { key: "ononline", value: _ } <<< (cb' <<< cb))
+   . Event (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+  -> Event
+       ( Attribute
+           (Indexed (ononline :: Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit | r))
+       )
+_onOnline = Functor.map
+  (unsafeAttribute <<< { key: "ononline", value: _ } <<< (Deku.Attribute.cb' <<< Deku.Attribute.cb))
 
 _onOnline_
   :: forall r
-   . (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
-  -> Event (Attribute (Indexed (ononline :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r)))
+   . (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+  -> Event
+       ( Attribute
+           (Indexed (ononline :: Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit | r))
+       )
 _onOnline_ = _onOnline <<< Applicative.pure
 
 _onPagehide
   :: forall r
-   . Event (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
-  -> Event (Attribute (Indexed (onpagehide :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r)))
-_onPagehide = Functor.map $ (unsafeAttribute <<< { key: "onpagehide", value: _ } <<< (cb' <<< cb))
+   . Event (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+  -> Event
+       ( Attribute
+           (Indexed (onpagehide :: Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit | r))
+       )
+_onPagehide = Functor.map
+  ( unsafeAttribute <<< { key: "onpagehide", value: _ } <<<
+      (Deku.Attribute.cb' <<< Deku.Attribute.cb)
+  )
 
 _onPagehide_
   :: forall r
-   . (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
-  -> Event (Attribute (Indexed (onpagehide :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r)))
+   . (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+  -> Event
+       ( Attribute
+           (Indexed (onpagehide :: Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit | r))
+       )
 _onPagehide_ = _onPagehide <<< Applicative.pure
 
 _onPageshow
   :: forall r
-   . Event (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
-  -> Event (Attribute (Indexed (onpageshow :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r)))
-_onPageshow = Functor.map $ (unsafeAttribute <<< { key: "onpageshow", value: _ } <<< (cb' <<< cb))
+   . Event (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+  -> Event
+       ( Attribute
+           (Indexed (onpageshow :: Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit | r))
+       )
+_onPageshow = Functor.map
+  ( unsafeAttribute <<< { key: "onpageshow", value: _ } <<<
+      (Deku.Attribute.cb' <<< Deku.Attribute.cb)
+  )
 
 _onPageshow_
   :: forall r
-   . (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
-  -> Event (Attribute (Indexed (onpageshow :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r)))
+   . (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+  -> Event
+       ( Attribute
+           (Indexed (onpageshow :: Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit | r))
+       )
 _onPageshow_ = _onPageshow <<< Applicative.pure
 
 _onPopstate
   :: forall r
-   . Event (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
-  -> Event (Attribute (Indexed (onpopstate :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r)))
-_onPopstate = Functor.map $ (unsafeAttribute <<< { key: "onpopstate", value: _ } <<< (cb' <<< cb))
+   . Event (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+  -> Event
+       ( Attribute
+           (Indexed (onpopstate :: Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit | r))
+       )
+_onPopstate = Functor.map
+  ( unsafeAttribute <<< { key: "onpopstate", value: _ } <<<
+      (Deku.Attribute.cb' <<< Deku.Attribute.cb)
+  )
 
 _onPopstate_
   :: forall r
-   . (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
-  -> Event (Attribute (Indexed (onpopstate :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r)))
+   . (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+  -> Event
+       ( Attribute
+           (Indexed (onpopstate :: Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit | r))
+       )
 _onPopstate_ = _onPopstate <<< Applicative.pure
 
 _onRejectionhandled
   :: forall r
-   . Event (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
+   . Event (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
   -> Event
-       (Attribute (Indexed (onrejectionhandled :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r)))
-_onRejectionhandled = Functor.map $
-  (unsafeAttribute <<< { key: "onrejectionhandled", value: _ } <<< (cb' <<< cb))
+       ( Attribute
+           ( Indexed
+               (onrejectionhandled :: Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit | r)
+           )
+       )
+_onRejectionhandled = Functor.map
+  ( unsafeAttribute <<< { key: "onrejectionhandled", value: _ } <<<
+      (Deku.Attribute.cb' <<< Deku.Attribute.cb)
+  )
 
 _onRejectionhandled_
   :: forall r
-   . (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
+   . (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
   -> Event
-       (Attribute (Indexed (onrejectionhandled :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r)))
+       ( Attribute
+           ( Indexed
+               (onrejectionhandled :: Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit | r)
+           )
+       )
 _onRejectionhandled_ = _onRejectionhandled <<< Applicative.pure
 
 _onStorage
   :: forall r
-   . Event (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
-  -> Event (Attribute (Indexed (onstorage :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r)))
-_onStorage = Functor.map $ (unsafeAttribute <<< { key: "onstorage", value: _ } <<< (cb' <<< cb))
+   . Event (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+  -> Event
+       ( Attribute
+           (Indexed (onstorage :: Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit | r))
+       )
+_onStorage = Functor.map
+  ( unsafeAttribute <<< { key: "onstorage", value: _ } <<<
+      (Deku.Attribute.cb' <<< Deku.Attribute.cb)
+  )
 
 _onStorage_
   :: forall r
-   . (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
-  -> Event (Attribute (Indexed (onstorage :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r)))
+   . (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+  -> Event
+       ( Attribute
+           (Indexed (onstorage :: Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit | r))
+       )
 _onStorage_ = _onStorage <<< Applicative.pure
 
 _onUnhandledrejection
   :: forall r
-   . Event (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
+   . Event (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
   -> Event
        ( Attribute
-           (Indexed (onunhandledrejection :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r))
+           ( Indexed
+               ( onunhandledrejection :: Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit
+               | r
+               )
+           )
        )
-_onUnhandledrejection = Functor.map $
-  (unsafeAttribute <<< { key: "onunhandledrejection", value: _ } <<< (cb' <<< cb))
+_onUnhandledrejection = Functor.map
+  ( unsafeAttribute <<< { key: "onunhandledrejection", value: _ } <<<
+      (Deku.Attribute.cb' <<< Deku.Attribute.cb)
+  )
 
 _onUnhandledrejection_
   :: forall r
-   . (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
+   . (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
   -> Event
        ( Attribute
-           (Indexed (onunhandledrejection :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r))
+           ( Indexed
+               ( onunhandledrejection :: Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit
+               | r
+               )
+           )
        )
 _onUnhandledrejection_ = _onUnhandledrejection <<< Applicative.pure
 
 _onUnload
   :: forall r
-   . Event (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
-  -> Event (Attribute (Indexed (onunload :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r)))
-_onUnload = Functor.map $ (unsafeAttribute <<< { key: "onunload", value: _ } <<< (cb' <<< cb))
+   . Event (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+  -> Event
+       ( Attribute
+           (Indexed (onunload :: Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit | r))
+       )
+_onUnload = Functor.map
+  (unsafeAttribute <<< { key: "onunload", value: _ } <<< (Deku.Attribute.cb' <<< Deku.Attribute.cb))
 
 _onUnload_
   :: forall r
-   . (Web.DOM.Event -> Effect.Effect Data.Unit.Unit)
-  -> Event (Attribute (Indexed (onunload :: Web.DOM.Event -> Effect.Effect Data.Unit.Unit | r)))
+   . (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+  -> Event
+       ( Attribute
+           (Indexed (onunload :: Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit | r))
+       )
 _onUnload_ = _onUnload <<< Applicative.pure
 
 newtype Keyword (v :: Symbol) = Keyword String
 
 type role Keyword phantom
 
-derive instance Newtype.Newtype (Keyword v) _
+derive instance Data.Newtype.Newtype (Keyword v) _
 
 __anonymous :: Keyword "anonymous"
 __anonymous = Keyword "anonymous"

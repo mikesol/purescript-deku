@@ -3,7 +3,7 @@ module DOM.Common where
 import Prelude
 import Prim hiding (Type)
 
-import DOM.Spec (IDL, IDLType(..), Interface, Member(..), Mixin(..), Tag)
+import DOM.Spec (IDL, IDLType(..), Member(..), Mixin(..), Tag, Interface)
 import Data.Array as Array
 import Data.Foldable (foldl)
 import Data.Maybe (Maybe(..), fromMaybe, maybe)
@@ -12,7 +12,6 @@ import Data.Set as Set
 import Data.String as String
 import Data.String.CodeUnits as CU
 import Data.Tuple.Nested (type (/\), (/\))
-import Debug as Debug
 import Foreign.Object as Foreign
 import Partial.Unsafe (unsafePartial)
 import PureScript.CST.Types (Expr, ImportDecl, Type)
@@ -110,19 +109,38 @@ camelCaseOn haystack =
 -- | Looks up an interface and returns all inherited and mixed in interfaces.
 resolveInterface :: IDL -> String -> Maybe ( Interface /\ Array String )
 resolveInterface spec name = do
-    let mixins =
-            Array.mapMaybe included 
-                $ fromMaybe []
+    let
+        extensions :: Array Mixin
+        extensions =
+            fromMaybe []
                 $ Foreign.lookup name spec.idlExtendedNames
+
+        extendSuper :: Array String
+        extendSuper = 
+            Array.mapMaybe included extensions
+
+        extendAttr :: Array Member
+        extendAttr =
+            bind extensions case _ of
+                Interface { members : Just m } ->
+                    m
+
+                _ ->
+                    []
 
     intf <- Foreign.lookup name spec.idlNames
     let
         bases :: Array String
         bases =
             Array.mapMaybe correctionInterfaces
-                $ maybe mixins ( Array.snoc mixins ) intf.inheritance 
-    
-    pure $ intf /\ bases
+                $ maybe extendSuper ( Array.snoc extendSuper ) intf.inheritance
+
+
+        members :: Array Member
+        members =
+            maybe extendAttr ( append extendAttr ) intf.members
+
+    pure $ intf { members = Just members } /\ bases
 
     where
 
@@ -151,7 +169,11 @@ construct = unsafePartial case _ of
     TypeString -> typeCtor "String"
     TypeBoolean -> typeCtor "Boolean"
     TypeNumber -> typeCtor "Number"
-    TypeEventHandler -> typeArrow [ typeCtor "Web.DOM.Event" ] $ typeApp ( typeCtor "Effect.Effect" ) [ typeCtor "Data.Unit.Unit" ]
+    TypeEventHandler ->
+        typeArrow
+            [ typeCtor "Web.Event.Internal.Types.Event" ]
+            $ typeApp ( typeCtor "Effect.Effect" ) [ typeCtor "Data.Unit.Unit" ]
+    
     TypeKeyword ix -> typeApp ( typeCtor "Keyword" ) [ typeString ix ]
     TypeUnit ->
         typeCtor "Unit"
@@ -173,7 +195,7 @@ typeImports stubs =
         TypeNumber -> [ "Deku.Attribute", "Data.Show" ] -- prop', show
         TypeEventHandler ->
             [ "Effect" -- Effect
-            , "Web.DOM" -- Event
+            , "Web.Event.Internal.Types" -- Event
             , "Data.Unit" -- Unit
             , "Deku.Attribute" -- cb, cb'
             ]
@@ -186,22 +208,22 @@ typeImports stubs =
 handler :: forall e . TypeStub -> Expr e 
 handler = unsafePartial case _ of
     TypeInt ->
-        exprOp ( exprIdent "prop'" ) [ binaryOp "<<<" $ exprIdent "Show.show" ] 
+        exprOp ( exprIdent "Deku.Attribute.prop'" ) [ binaryOp "<<<" $ exprIdent "Data.Show.show" ] 
     
     TypeString ->
-        exprIdent "prop'"
+        exprIdent "Deku.Attribute.prop'"
     
     TypeBoolean ->
-        exprOp ( exprIdent "prop'" ) [ binaryOp "<<<" $ exprIdent "Show.show" ] 
+        exprOp ( exprIdent "Deku.Attribute.prop'" ) [ binaryOp "<<<" $ exprIdent "Data.Show.show" ] 
     
     TypeNumber ->
-        exprOp ( exprIdent "prop'" ) [ binaryOp "<<<" $ exprIdent "Show.show" ] 
+        exprOp ( exprIdent "Deku.Attribute.prop'" ) [ binaryOp "<<<" $ exprIdent "Data.Show.show" ] 
     
     TypeEventHandler ->
-        unsafePartial $ exprOp ( exprIdent "cb'" ) [ binaryOp "<<<" $ exprIdent "cb" ]
+        unsafePartial $ exprOp ( exprIdent "Deku.Attribute.cb'" ) [ binaryOp "<<<" $ exprIdent "Deku.Attribute.cb" ]
 
     TypeKeyword _ ->
-        exprOp ( exprIdent "prop'" ) [ binaryOp "<<<" $ exprIdent "Newtype.unwrap" ]
+        exprOp ( exprIdent "Deku.Attribute.prop'" ) [ binaryOp "<<<" $ exprIdent "Data.Newtype.unwrap" ]
 
 mapType :: IDLType -> Array TypeStub
 mapType = case _ of
@@ -258,7 +280,7 @@ mapType = case _ of
     Union s ->
         bind s mapType
 
-    Primitive t ->
+    Primitive _ ->
         []
 
 -- | Elements that have an implementation in the current web-html package

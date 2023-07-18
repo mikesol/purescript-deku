@@ -30,6 +30,7 @@ keywordReference = "https://raw.githubusercontent.com/w3c/webref/curated/ed/dfns
 
 htmlTagReference = "https://raw.githubusercontent.com/w3c/webref/curated/ed/elements/html.json" :: String
 htmlInterfaceReference = "https://raw.githubusercontent.com/w3c/webref/curated/ed/idlparsed/html.json" :: String
+htmlPointerInterfaceReference = "https://raw.githubusercontent.com/w3c/webref/curated/ed/idlparsed/pointerevents3.json" :: String
 
 svgTagReference = "https://raw.githubusercontent.com/w3c/webref/curated/ed/elements/SVG2.json" :: String
 svgInterfaceReference = "https://raw.githubusercontent.com/w3c/webref/curated/ed/idlparsed/SVG2.json" :: String
@@ -47,8 +48,10 @@ generate = do
     keyword <- FS.cachedFetch "./codegen/cache/html/keyword.json" keywordReference :: _ KeywordSpec
     ariaInterface <- FS.cachedFetch "./codegen/cache/dom/interface.json" ariaInterfaceReference :: _ InterfaceSpec
 
+    domInterface <- FS.cachedFetch "./codegen/cache/html/dom-interface.json" domInterfaceReference :: _ InterfaceSpec
     htmlTag <- FS.cachedFetch "./codegen/cache/html/tags.json" htmlTagReference :: _ TagSpec
     htmlInterface <- FS.cachedFetch "./codegen/cache/html/interface.json" htmlInterfaceReference :: _ InterfaceSpec
+    htmlPointerEventInterface <- FS.cachedFetch "./codegen/cache/html/pointer-interface.json" htmlPointerInterfaceReference :: _ InterfaceSpec
 
     svgTag <- FS.cachedFetch "./codegen/cache/svg/tags.json" svgTagReference :: _ TagSpec
     svgInterface <- FS.cachedFetch "./codegen/cache/svg/interface.json" svgInterfaceReference :: _ InterfaceSpec
@@ -60,25 +63,6 @@ generate = do
     svgAnimationInterface <- FS.cachedFetch "./codegen/cache/svg/animation-interface.json" svgAnimationInterfaceReference :: _ InterfaceSpec
 
     let
-        -- | We could parse and union the actual spec but it contains mostly empty garbage and the only thing we are 
-        -- | interested in is the link to ARIA.
-        dom :: IDL
-        dom = 
-            { idlNames : Foreign.singleton "Element"
-                { type : "interface"
-                , name : "Element"
-                , inheritance : Nothing
-                , members : Nothing
-                , fragment : ""
-                }
-            , idlExtendedNames : Foreign.singleton "Element"
-                [ Includes
-                    { fragment : ""
-                    , includes : "ARIAMixin"
-                    }
-                ]
-            }
-
         tag :: Array Tag
         tag = Array.concat
             [ svgTag.elements
@@ -90,10 +74,11 @@ generate = do
         interface :: IDL
         interface =
             mergeIDL htmlInterface.idlparsed
+                $ mergeIDL htmlPointerEventInterface.idlparsed
                 $ mergeIDL svgInterface.idlparsed
                 $ mergeIDL svgFilterInterface.idlparsed
                 $ mergeIDL svgAnimationInterface.idlparsed
-                $ mergeIDL dom ariaInterface.idlparsed
+                $ mergeIDL domInterface.idlparsed ariaInterface.idlparsed
 
 
     Indexed.generate keyword.dfns tag interface

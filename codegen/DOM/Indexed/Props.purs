@@ -12,7 +12,6 @@ import Data.Function (on)
 import Data.Maybe (Maybe(..), fromMaybe)
 import Data.Tuple.Nested (type (/\), (/\))
 import Foreign.Object as Foreign
-import Partial.Unsafe (unsafePartial)
 import PureScript.CST.Types (ClassFundep(..), Declaration, Export)
 import Tidy.Codegen (binaryOp, classMember, declClass, declInstance, declSignature, declValue, exportClass, exportValue, exprIdent, exprOp, instValue, typeApp, typeArrow, typeConstrained, typeCtor, typeForall, typeVar, typeVarKinded)
 import Tidy.Codegen.Class (toName)

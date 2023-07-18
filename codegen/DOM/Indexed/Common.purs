@@ -8,7 +8,7 @@ import Data.Maybe (Maybe(..))
 import Data.Tuple.Nested (type (/\), (/\))
 import Partial.Unsafe (unsafePartial)
 import PureScript.CST.Types (Declaration, Expr, ImportDecl, Type)
-import Tidy.Codegen (binaryOp, declImport, declImportAs, declValue, exprIdent, exprOp, exprRecord, exprSection, exprString, importOp, importType, importValue, typeApp, typeCtor, typeRow, typeVar)
+import Tidy.Codegen (binaryOp, declImport, declImportAs, declValue, exprApp, exprIdent, exprOp, exprRecord, exprSection, exprString, importOp, importType, importValue, typeApp, typeCtor, typeRow, typeVar)
 
 requires :: Array ( ImportDecl Void )
 requires =
@@ -16,7 +16,6 @@ requires =
         $ append
             [ declImportAs "Control.Applicative" [ importValue "pure" ] "Applicative"
             , declImport "Control.Category" [ importOp "<<<" ]
-            , declImport "Data.Function" [ importOp "$"]
             , declImportAs "Data.Functor" [ importValue "map" ] "Functor"
             
             , declImport "Deku.Attribute"
@@ -35,12 +34,11 @@ declHandler :: String -> String -> Expr Void -> Declaration Void
 declHandler name srcName handler =
     unsafePartial
         $ declValue name []
-        $ exprOp ( exprIdent "Functor.map" )
-        [ binaryOp "$"
-            $ exprOp ( exprIdent "unsafeAttribute" )
-                [ binaryOp "<<<" $ exprRecord [ "key" /\ exprString srcName, "value" /\ exprSection ]
-                , binaryOp "<<<" handler
-                ]
+        $ exprApp ( exprIdent "Functor.map" )
+        [ exprOp ( exprIdent "unsafeAttribute" )
+            [ binaryOp "<<<" $ exprRecord [ "key" /\ exprString srcName, "value" /\ exprSection ]
+            , binaryOp "<<<" handler
+            ]
         ]
 
 typeIndexed :: Type Void -> Type Void
@@ -59,9 +57,10 @@ tagName src = do
     e /\ short
 
 attributeName :: String -> String /\ String
+attributeName "className" = "_class" /\ "_class_"
 attributeName src = do
     let
-        e = "_" <> ( camelCaseOn $ escape src )
+        e = "_" <> camelCaseOn src
         short = e <> "_"
     e /\ short
 
