@@ -43,7 +43,7 @@ createDir :: String -> ExceptT Error Aff Unit
 createDir dirs = do
     let 
         paths :: Array String
-        paths = Array.scanl (\l r -> Path.concat [ l, r ] ) "." $ String.split ( String.Pattern Path.sep ) dirs
+        paths = Array.scanl (\l r -> Path.concat [ l, r ] ) "." $ String.split ( String.Pattern "/" ) dirs
 
     for_ paths \dir -> do
         exists <- liftAff $ attempt $ stat dir

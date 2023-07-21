@@ -21,7 +21,6 @@ imports es =
         $ append
             [ declImportAs "Control.Applicative" [ importValue "pure" ] "Applicative"
             , declImport "Control.Category" [ importOp "<<<" ]
-            , declImport "Data.Function" [ importOp "$"]
             , declImportAs "Data.Functor" [ importValue "map" ] "Functor"
             , declImport "Data.Unit" [ importType "Unit" ]
             , declImport "Effect" [ importType "Effect" ]
@@ -32,19 +31,16 @@ imports es =
                 , importValue "unsafeAttribute"
                 , importValue "cb'"
                 ]
-            , declImport "Deku.DOM.Indexed" [ importType "Indexed" ]
+            , declImport "Deku.DOM.Indexed.Index" [ importType "Indexed" ]
             , declImport "FRP.Event" [ importType "Event" ]
             , declImport "Type.Proxy" [ importType "Proxy" ]
+            , declImportAs ( "Web.DOM.Element" ) [ importType "Element" ] "Web"
             ]
-        $ flip map ( Set.toUnfoldable es ) case _ of
-            "Element" ->
-                declImportAs ( "Web.DOM.Element" ) [ importType "Element" ] "Web"
+        $ flip map ( Set.toUnfoldable es ) \e ->
+            declImportAs ( "Web.HTML." <> e ) [ importType e ] "Web"
 
-            e ->
-                declImportAs ( "Web.HTML." <> e ) [ importType e ] "Web"
-
-generates :: Set String -> Array ( Declaration Void )
-generates es =
+generate :: Set String -> Array ( Declaration Void )
+generate es =
     unsafePartial $ append 
         [ declClass [] "IsSelf"
             [ typeVarKinded "element" $ typeCtor "Type"
@@ -70,13 +66,19 @@ generates es =
             $ typeConstrained [ typeApp ( typeCtor "IsSelf" ) [ typeVar "e" , typeVar "name"  ] ]
             $ typeArrow [ selfHandler $ typeVar "e" ]
             $ typeEvented $ typeAttributed $ typeIndexedAt nominal $ typeApp ( typeCtor "Proxy" ) [ typeVar "name" ]
-        , declValue "self_" [] $ exprOp ( exprIdent "self" ) [ binaryOp "<<<" $ exprIdent "Applicative.pure" ]  
+        , declValue "self_" [] $ exprOp ( exprIdent "self" ) [ binaryOp "<<<" $ exprIdent "Applicative.pure" ]
+
+        , declInstance Nothing [] "IsSelf"
+            [ typeCtor ( "Web.Element" )
+            , typeString "global"
+            ]
+            []
         ]
         $ flip map ( Set.toUnfoldable es ) \e ->
             declInstance Nothing []
                 "IsSelf"
                 [ typeCtor ( "Web." <> e )
-                , typeString e
+                , typeString $ e
                 ]
                 []
 

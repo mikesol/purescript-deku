@@ -2,13 +2,12 @@ module Deku.DOM.Indexed.Self where
 
 import Control.Applicative (pure) as Applicative
 import Control.Category ((<<<))
-import Data.Function (($))
 import Data.Functor (map) as Functor
 import Data.Unit (Unit)
 import Effect (Effect)
 import Unsafe.Coerce (unsafeCoerce)
 import Deku.Attribute (Cb(..), Attribute, unsafeAttribute, cb')
-import Deku.DOM.Indexed (Indexed)
+import Deku.DOM.Indexed.Index (Indexed)
 import FRP.Event (Event)
 import Type.Proxy (Proxy)
 import Web.DOM.Element (Element) as Web
@@ -72,7 +71,7 @@ self_
   -> Event (Attribute (Indexed (__nominal :: Proxy name | r)))
 self_ = self <<< Applicative.pure
 
-instance IsSelf Web.Element "Element"
+instance IsSelf Web.Element "global"
 instance IsSelf Web.HTMLAnchorElement "HTMLAnchorElement"
 instance IsSelf Web.HTMLAreaElement "HTMLAreaElement"
 instance IsSelf Web.HTMLAudioElement "HTMLAudioElement"

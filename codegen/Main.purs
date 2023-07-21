@@ -4,17 +4,20 @@ import Prelude
 
 import Control.Monad.Except (ExceptT, runExceptT)
 import DOM as DOM
+import DOM.Common (Ctor(..), Interface, Specification, TagNS(..), TypeStub(..), mkAttribute, preprocess)
 import DOM.Indexed as Indexed
-import DOM.Spec (IDL, InterfaceSpec, KeywordSpec, Mixin(..), Tag, TagSpec, mergeIDL)
+import DOM.Spec (Definition, KeywordSpec)
 import Data.Array as Array
 import Data.Either (blush)
 import Data.Foldable (for_)
 import Data.Maybe (Maybe(..))
+import Data.String as String
+import Data.Traversable (traverse)
 import Effect (Effect)
 import Effect.Aff (Aff, Error, launchAff_, message)
 import Effect.Class.Console as Console
 import FS as FS
-import Foreign.Object as Foreign
+import Node.Path as Path
 import Parser as Parser
 
 main :: Effect Unit
@@ -23,67 +26,125 @@ main = launchAff_ do
     for_ ( blush r ) \e -> do
         Console.log $ message e
 
-domInterfaceReference = "https://raw.githubusercontent.com/w3c/webref/curated/ed/idlparsed/dom.json" :: String
-
-ariaInterfaceReference = "https://raw.githubusercontent.com/w3c/webref/curated/ed/idlparsed/wai-aria-1.2.json" :: String
-keywordReference = "https://raw.githubusercontent.com/w3c/webref/curated/ed/dfns/html.json" :: String
-
-htmlTagReference = "https://raw.githubusercontent.com/w3c/webref/curated/ed/elements/html.json" :: String
-htmlInterfaceReference = "https://raw.githubusercontent.com/w3c/webref/curated/ed/idlparsed/html.json" :: String
-htmlPointerInterfaceReference = "https://raw.githubusercontent.com/w3c/webref/curated/ed/idlparsed/pointerevents3.json" :: String
-
-svgTagReference = "https://raw.githubusercontent.com/w3c/webref/curated/ed/elements/SVG2.json" :: String
-svgInterfaceReference = "https://raw.githubusercontent.com/w3c/webref/curated/ed/idlparsed/SVG2.json" :: String
-svgFilterTagReference = "https://raw.githubusercontent.com/w3c/webref/curated/ed/elements/filter-effects-1.json" :: String
-svgFilterInterfaceReference = "https://raw.githubusercontent.com/w3c/webref/curated/ed/idlparsed/filter-effects-1.json" :: String
-svgAnimationTagReference = "https://raw.githubusercontent.com/w3c/webref/curated/ed/elements/svg-animations.json" :: String
-svgAnimationInterfaceReference = "https://raw.githubusercontent.com/w3c/webref/curated/ed/idlparsed/svg-animations.json" :: String
-
 generate :: ExceptT Error Aff Unit
 generate = do
-    FS.createDir "codegen/cache/html"
-    FS.createDir "codegen/cache/svg"
-    FS.createDir "codegen/cache/aria"
+    let cachePath = "codegen/cache"
+        
+        keywordFetch url = do
+            let urlFilename = Path.basename url
+                localFilename = Path.concat [ cachePath, urlFilename ]
+            FS.cachedFetch localFilename url :: _ KeywordSpec
 
-    keyword <- FS.cachedFetch "./codegen/cache/html/keyword.json" keywordReference :: _ KeywordSpec
-    ariaInterface <- FS.cachedFetch "./codegen/cache/dom/interface.json" ariaInterfaceReference :: _ InterfaceSpec
+        mergeSpec :: Array KeywordSpec -> Array Definition
+        mergeSpec =
+            flip bind _.dfns 
 
-    domInterface <- FS.cachedFetch "./codegen/cache/html/dom-interface.json" domInterfaceReference :: _ InterfaceSpec
-    htmlTag <- FS.cachedFetch "./codegen/cache/html/tags.json" htmlTagReference :: _ TagSpec
-    htmlInterface <- FS.cachedFetch "./codegen/cache/html/interface.json" htmlInterfaceReference :: _ InterfaceSpec
-    htmlPointerEventInterface <- FS.cachedFetch "./codegen/cache/html/pointer-interface.json" htmlPointerInterfaceReference :: _ InterfaceSpec
+    FS.createDir cachePath
 
-    svgTag <- FS.cachedFetch "./codegen/cache/svg/tags.json" svgTagReference :: _ TagSpec
-    svgInterface <- FS.cachedFetch "./codegen/cache/svg/interface.json" svgInterfaceReference :: _ InterfaceSpec
+    html <- preprocess HTML <<< mergeSpec <$> traverse keywordFetch
+        [ "https://raw.githubusercontent.com/w3c/webref/curated/ed/dfns/html.json"
+        , "https://raw.githubusercontent.com/w3c/webref/curated/ed/dfns/html-media-capture.json"
 
-    svgFilterTag <- FS.cachedFetch "./codegen/cache/svg/filter-tags.json" svgFilterTagReference :: _ TagSpec
-    svgFilterInterface <- FS.cachedFetch "./codegen/cache/svg/filter-interface.json" svgFilterInterfaceReference :: _ InterfaceSpec
+        , "https://raw.githubusercontent.com/w3c/webref/curated/ed/dfns/pointerevents3.json"
+        , "https://raw.githubusercontent.com/w3c/webref/curated/ed/dfns/pointerlock-2.json"
+        , "https://raw.githubusercontent.com/w3c/webref/curated/ed/dfns/touch-events.json"
+        , "https://raw.githubusercontent.com/w3c/webref/curated/ed/dfns/selection-api.json"
 
-    svgAnimationTag <- FS.cachedFetch "./codegen/cache/svg/animation-tags.json" svgAnimationTagReference :: _ TagSpec
-    svgAnimationInterface <- FS.cachedFetch "./codegen/cache/svg/animation-interface.json" svgAnimationInterfaceReference :: _ InterfaceSpec
+        , "https://raw.githubusercontent.com/w3c/webref/curated/ed/dfns/css-transitions-1.json"
+        , "https://raw.githubusercontent.com/w3c/webref/curated/ed/dfns/css-transitions-2.json"
+        , "https://raw.githubusercontent.com/w3c/webref/curated/ed/dfns/css-animations-1.json"
 
-    let
-        tag :: Array Tag
-        tag = Array.concat
-            [ svgTag.elements
-            , svgFilterTag.elements
-            , svgAnimationTag.elements
-            , htmlTag.elements
-            ]
+        , "https://raw.githubusercontent.com/w3c/webref/curated/ed/dfns/wai-aria-1.2.json" 
+        ]
+    
+    svg <- fixSVG <<< preprocess SVG <<< mergeSpec <$> traverse keywordFetch
+        [ "https://raw.githubusercontent.com/w3c/webref/curated/ed/dfns/SVG2.json"
+        , "https://raw.githubusercontent.com/w3c/webref/curated/ed/dfns/svg-integration.json"
+        , "https://raw.githubusercontent.com/w3c/webref/curated/ed/dfns/svg-strokes.json"
+        , "https://raw.githubusercontent.com/w3c/webref/curated/ed/dfns/fill-stroke-3.json"
+        
+        , "https://raw.githubusercontent.com/w3c/webref/curated/ed/dfns/filter-effects-1.json"
+        , "https://raw.githubusercontent.com/w3c/webref/curated/ed/dfns/svg-animations.json"
+        ]
 
-        interface :: IDL
-        interface =
-            mergeIDL htmlInterface.idlparsed
-                $ mergeIDL htmlPointerEventInterface.idlparsed
-                $ mergeIDL svgInterface.idlparsed
-                $ mergeIDL svgFilterInterface.idlparsed
-                $ mergeIDL svgAnimationInterface.idlparsed
-                $ mergeIDL domInterface.idlparsed ariaInterface.idlparsed
+    mathml <- preprocess MathML <<< mergeSpec <$> traverse keywordFetch
+        [ "https://raw.githubusercontent.com/w3c/webref/curated/ed/dfns/mathml-core.json"
+        , "https://raw.githubusercontent.com/w3c/webref/curated/ed/dfns/mathml-aam.json"
+        ]
 
-
-    Indexed.generate keyword.dfns tag interface
-    DOM.generate keyword.dfns tag interface
+    Indexed.generate html svg mathml
+    DOM.generate html svg
 
     Parser.generate
 
-    pure unit
+
+-- SVG spec is barely useful
+fixSVG :: Specification -> Specification 
+fixSVG svgBase =
+    svgBase
+        { interfaces =
+            map ( missingPresentationProperties ) svgBase.interfaces
+                <> [ svgText, svgPresentation ]
+        }
+
+missingPresentationProperties :: Interface -> Interface
+missingPresentationProperties = case _ of
+    txt@{ name } | name `Array.elem` [ "SVGTextElement", "SVGTextPathElement", "SVGTspanElement" ] ->
+        txt { bases = txt.bases <> [ svgText.ctor, svgPresentation.ctor ] }
+
+    fe@{ name } | Just _ <- String.stripPrefix ( String.Pattern "SVGFe" ) name ->
+        fe { bases = fe.bases <> [ svgPresentation.ctor, Ctor "SVGFilterPrimitiveElement" ] }
+
+    animate@{ name : "SVGAnimateElement" } ->
+        animate { members = animate.members <> [ { index : Ctor "by", name : "by", type : TypeString } ] }
+
+    animate@{ name } | Just _ <- String.stripPrefix ( String.Pattern "SVGAnimate" ) name ->
+        animate { bases = animate.bases <> [ svgPresentation.ctor, Ctor "SVGAnimateElement" ] }
+
+    id ->
+        id { bases = id.bases <> [ svgPresentation.ctor ] }
+
+svgText :: Interface
+svgText =
+    { ctor : Ctor "SvgText"
+    , name : "SvgText"
+    , bases : []
+    , members :
+        Array.mapMaybe ( mkAttribute TypeString )
+            [ "alignment-baseline"
+            , "baseline-shift"
+            , "dominant-baseline"
+            , "font-family"
+            , "font-size"
+            , "font-size-adjust"
+            , "font-stretch"
+            , "font-style"
+            , "font-variant"
+            , "font-weight"
+            , "letter-spacing"
+            , "text-decoration"
+            , "word-spacing"
+            , "writing-mode"
+            , "unicode-bidi" 
+            ]
+    }
+
+svgPresentation :: Interface
+svgPresentation =
+    { ctor : Ctor "SvgPresentation"
+    , name : "SvgPresentation"
+    , bases : []
+    , members :
+        Array.mapMaybe ( mkAttribute TypeString )
+            [ "pathLength"
+            , "mask"
+            , "opacity"
+            , "overflow"
+            , "clip-path"
+            , "cursor"
+            , "display"
+            , "transform"
+            , "transform-origin"
+            , "visibility"
+            ]
+    }

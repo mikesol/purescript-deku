@@ -3,51 +3,139 @@ module DOM.Common where
 import Prelude
 import Prim hiding (Type)
 
-import DOM.Spec (IDL, IDLType(..), Member(..), Mixin(..), Tag, Interface)
+import DOM.Spec (Definition)
 import Data.Array as Array
 import Data.Foldable (foldl)
-import Data.Maybe (Maybe(..), fromMaybe, maybe)
+import Data.Generic.Rep (class Generic)
+import Data.Maybe (Maybe(..), isJust)
+import Data.Newtype (class Newtype, un)
 import Data.Set (Set)
 import Data.Set as Set
 import Data.String as String
 import Data.String.CodeUnits as CU
+import Data.Tuple (uncurry)
 import Data.Tuple.Nested (type (/\), (/\))
 import Foreign.Object as Foreign
 import Partial.Unsafe (unsafePartial)
-import PureScript.CST.Types (Expr, ImportDecl, Type)
+import PureScript.CST.Types (Expr, Ident(..), ImportDecl, Label, Proper(..), Type)
+import Safe.Coerce (coerce)
 import Tidy.Codegen (binaryOp, declImportAs, exprIdent, exprOp, typeApp, typeArrow, typeCtor, typeString)
+import Tidy.Codegen.Class (class ToName, class ToQualifiedName, defaultToName, toName, toQualifiedName)
+import Tidy.Codegen.Types (Qualified(..))
 
-typeArrayed :: Type Void -> Type Void
-typeArrayed t = 
-    unsafePartial $ typeApp ( typeCtor "Array" ) $ pure t
+newtype Ctor = Ctor String
+derive newtype instance Eq Ctor
+derive newtype instance Ord Ctor
+derive instance Newtype Ctor _
+instance ToQualifiedName Ctor Proper where toQualifiedName = toQualifiedName <<< Qualified Nothing <<< Proper <<< un Ctor
+instance ToName Ctor Label where toName = defaultToName <<< un Ctor
+instance ToName Ctor Proper where toName = toName <<< Proper <<< un Ctor
+instance ToName Ctor Ident where toName = toName <<< Ident <<< un Ctor
 
-typeEvented :: Type Void -> Type Void
-typeEvented t =
-    unsafePartial $ typeApp ( typeCtor "Event" ) $ pure t
+type Interface =
+    { ctor :: Ctor
+    , name :: String
+    , bases :: Array Ctor
+    , members :: Array Attribute
+    }
 
-typeAttributed :: Type Void -> Type Void
-typeAttributed t =
-    unsafePartial $ typeApp ( typeCtor "Attribute" ) $ pure t
+type Element =
+    { ctor :: Ctor -- name in source
+    , ns :: TagNS
+    , tag :: String
+    , interface :: Ctor
+    }
 
-typeNut :: Type Void
-typeNut =
-    unsafePartial $ typeCtor "Nut"
+type Keyword =
+    { ctor :: Ctor
+    , value :: String
+    , index :: Ctor -- name in source and row index
+    , attribute :: String 
+    }
 
--- | Interfaces which should not show up in generated code because they have not been implemented yet.
-correctionInterfaces :: String -> Maybe String
-correctionInterfaces = case _ of
-    "LinkStyle" -> Nothing
+type Attribute =
+    { name :: String
+    , index :: Ctor -- name in source and row index
+    , type :: TypeStub
+    }
+
+data TagNS = HTML | SVG | MathML
+derive instance Eq TagNS
+derive instance Ord TagNS
+
+xhtmlNamespace :: TagNS -> Maybe String
+xhtmlNamespace = case _ of
+    HTML ->
+        Nothing
     
-    id -> Just id
+    SVG ->
+        Just "http://www.w3.org/2000/svg"
 
-correctionKeyword :: String -> Maybe ( String /\ String )
-correctionKeyword = case _ of
+    MathML ->
+        Just "http://www.w3.org/1998/Math/MathML"
+
+namespaceBases :: TagNS -> Array String
+namespaceBases = case _ of
+    HTML ->
+        [ "HtmlsvgGlobal"
+        , "HtmlGlobal"
+        , "Global"
+        , "GlobalEventHandlers"
+        , "ARIAMixin"
+        ]
+
+    SVG ->
+        [ "HtmlsvgGlobal"
+        , "SvgGlobal"
+        , "Global"
+        , "GlobalEventHandlers"
+        , "ARIAMixin"
+        ]
+
+    MathML ->
+        [ "Global"
+        , "GlobalEventHandlers"
+        , "ARIAMixin"
+        ]
+
+baseInterfaces :: Array String
+baseInterfaces =
+    Array.nub $ bind [ HTML, SVG, MathML ] namespaceBases
+
+mkKeyword :: String -> String -> Maybe Keyword
+mkKeyword attribute value = case value of
     "section-" -> Nothing
-    "1" -> Just ( "x1" /\ "1" )
-    "A" -> Just ( "xA" /\ "A" )
-    "I" -> Just ( "xI" /\ "I" )
+    "1" -> Just { ctor : Ctor "x1", value : "1", index, attribute }
+    "A" -> Just { ctor : Ctor "xA", value : "A", index, attribute }
+    "I" -> Just { ctor : Ctor "xI", value : "I", index, attribute }
 
-    id -> Just ( unSnake id /\ id )
+    _ -> Just { ctor : Ctor $ unSnake value, value : value, index, attribute }
+
+    where
+
+    index :: Ctor
+    index =
+        Ctor $ unSnake attribute
+
+mkAttribute :: TypeStub -> String -> Maybe Attribute
+mkAttribute t name =
+    Just { name, index : Ctor $ unSnake name, type : t }
+
+mkElement :: TagNS -> String -> Maybe Element
+mkElement ns name =
+    Just
+        { ctor : Ctor $ unSnake $ escape name
+        , ns : ns
+        , tag : name
+        , interface : Ctor $ tagToInterface ns name
+        }
+
+mkInterface :: TagNS -> String -> Array Attribute -> Maybe Interface
+mkInterface ns name members =
+    if name `Array.elem` baseInterfaces then
+        Just { name, ctor : Ctor name, members, bases : [] }
+    else
+        Just { name, ctor : Ctor name, members, bases : coerce $ namespaceBases ns }
 
 escape :: String -> String
 escape n = 
@@ -63,19 +151,20 @@ reserved =
         , "module"
         ]
         
-validTag :: Tag -> Maybe ( String /\ String )
-validTag { obsolete : Just true } = Nothing
-validTag { interface : Nothing } = Nothing
-validTag { interface : Just interface, name } = Just $ name /\ interface
+tagToInterface :: TagNS -> String -> String
+tagToInterface ns tag = do
+    let formatted = ( capitalize $ unSnake tag )
+    if formatted `Array.elem` baseInterfaces then
+        formatted
+    else
+        prefix <> ( capitalize $ unSnake tag ) <> "Element"
+    
+    where
 
-attributeMember :: Member -> Array ( String /\ IDLType )
-attributeMember = case _ of
-        -- only emit writeable(not readonly attributes)
-        Attribute { idlType, name : attrName, readonly } | maybe true not readonly ->
-            [ attrName /\ idlType ]
-        
-        _ ->
-            []
+    prefix = case ns of
+        SVG -> "SVG"
+        HTML -> "HTML"
+        MathML -> "MathML"
 
 unSnake :: String -> String
 unSnake =
@@ -85,9 +174,9 @@ unSnake =
                 _, '-' -> { dropped : true, acc }
                 _, ' ' -> { dropped : true, acc }
                 _, '/' -> { dropped : true, acc }
+                _, ':' -> { dropped : true, acc }
                 true, _ -> { dropped : false, acc : acc <> ( String.toUpper $ CU.singleton c ) }
-                _, _ ->
-                    { dropped : false, acc : acc <> CU.singleton c }
+                _, _ -> { dropped : false, acc : acc <> CU.singleton c }
             )
             { dropped : false, acc : "" }
         <<< CU.toCharArray
@@ -106,50 +195,146 @@ camelCaseOn haystack =
         Nothing  ->
             haystack
 
--- | Looks up an interface and returns all inherited and mixed in interfaces.
-resolveInterface :: IDL -> String -> Maybe ( Interface /\ Array String )
-resolveInterface spec name = do
+
+eltModule :: Ctor -> String
+eltModule ( Ctor name ) =
+    "Deku.DOM.Elt." <> capitalize name
+
+eltType :: Ctor -> String
+eltType ( Ctor name ) =
+    capitalize name <> "_"
+
+attrModule :: Ctor -> String
+attrModule ( Ctor name ) =
+    "Deku.DOM.Attr." <> capitalize name
+
+attrType :: Ctor -> String
+attrType ( Ctor name ) =
+    capitalize name
+
+type Specification =
+    { keywords :: Array Keyword
+    , interfaces :: Array Interface
+    , elements :: Array Element
+    }
+
+-- | 
+preprocess :: TagNS -> Array Definition -> Specification
+preprocess ns defs = do
     let
-        extensions :: Array Mixin
-        extensions =
-            fromMaybe []
-                $ Foreign.lookup name spec.idlExtendedNames
+        keywords :: Array Keyword
+        keywords =
+            Array.mapMaybe ( uncurry mkKeyword ) do
+                dfn <- Array.filter ( not <<< eq "argument" <<< _.type ) defs
+                text <- dfn.linkingText
+                for <- Array.nub $ Array.mapMaybe forAttribute dfn.for
+                pure $ for /\ text
 
-        extendSuper :: Array String
-        extendSuper = 
-            Array.mapMaybe included extensions
+            where
 
-        extendAttr :: Array Member
-        extendAttr =
-            bind extensions case _ of
-                Interface { members : Just m } ->
-                    m
+            forAttribute :: String -> Maybe String
+            forAttribute f =
+                case String.split ( String.Pattern "/" ) f of
+                    [ _, attr ] | attr /= "" ->
+                        Just attr
+                    
+                    _ ->
+                        Nothing
 
+        elements :: Array Element
+        elements =
+            bind defs case _ of
+                { type : "element", linkingText } ->  
+                    Array.mapMaybe ( mkElement ns ) linkingText
+                
                 _ ->
                     []
 
-    intf <- Foreign.lookup name spec.idlNames
-    let
-        bases :: Array String
-        bases =
-            Array.mapMaybe correctionInterfaces
-                $ maybe extendSuper ( Array.snoc extendSuper ) intf.inheritance
+        interfaceMembers :: Foreign.Object ( Array Attribute )
+        interfaceMembers =
+            Foreign.fromFoldableWith append do
+                bind defs case _ of
+                    -- basic attributes
+                    { type : "element-attr", for, linkingText } -> do
+                        let
+                            filtered = flip Array.mapMaybe linkingText \attr -> do
+                                let typeHint =
+                                        if isJust $ String.stripPrefix ( String.Pattern "on" ) attr then
+                                            TypeEventHandler
+                                        else
+                                            TypeString
+                                
+                                mkAttribute typeHint attr
+                        
+                        map ( ( _ /\  filtered ) <<< tagToInterface ns ) for
 
+                    -- could not find a definition for aria attributes so we translate the properties instead
+                    { type : "attribute", for : [ "ARIAMixin" ], linkingText } -> do
+                        [ "ARIAMixin" /\ Array.mapMaybe ( mkAttribute TypeString <<< unAria ) linkingText ]
+                    
+                    -- detect event handler attributes
+                    { type : "attribute", for, linkingText } -> do
+                        let filtered =
+                                flip Array.mapMaybe linkingText
+                                    $ mkAttribute TypeEventHandler
+                                    <=< pure <<< append "on" <<< capitalize
+                                    <=< String.stripPrefix ( String.Pattern "on" )
+                        
+                        if filtered == [] then [] else map ( _ /\ filtered ) for
 
-        members :: Array Member
-        members =
-            maybe extendAttr ( append extendAttr ) intf.members
+                    -- css styling properties for svg
+                    { type : "property", for :[], linkingText } | ns == SVG -> do
+                        let members = Array.mapMaybe ( mkAttribute TypeString ) linkingText
+                        [ "SvgGlobal" /\ members ]
 
-    pure $ intf { members = Just members } /\ bases
+                    { type : "property", for, linkingText } | ns == SVG -> do
+                        let members = Array.mapMaybe ( mkAttribute TypeString ) linkingText
+                        map ( ( _ /\ members ) <<< tagToInterface ns ) for
 
-    where
+                    _ ->
+                        []
+            where
 
-    included = case _ of
-        Includes { includes } ->
-            Just includes
+            -- | Converts the property name of the ARIAMixin interface to the corresponding attribute name
+            unAria :: String -> String
+            unAria prop = case String.stripPrefix ( String.Pattern "aria" ) prop of
+                Nothing -> 
+                    prop -- role is not prefixed with aria
+
+                Just rawAttr -> case rawAttr of
+                    _ | Just elementStripped <- String.stripSuffix ( String.Pattern "Element" ) rawAttr ->
+                        "aria-" <> String.toLower elementStripped
+
+                    _ | Just elementsStripped <- String.stripSuffix ( String.Pattern "Elements" ) rawAttr ->
+                        "aria-" <> String.toLower elementsStripped
+
+                    _ ->
+                        "aria-" <> String.toLower rawAttr
         
-        _ ->
-            Nothing
+        elementInterfaces :: Foreign.Object ( Array Attribute )
+        elementInterfaces =
+            Foreign.fromFoldable $ map (\{ interface : Ctor intf } -> intf /\ [] ) elements
+
+        interfaces :: Array Interface
+        interfaces = do
+            let
+                referenced :: Array String
+                referenced =
+                    Foreign.keys elementInterfaces <> namespaceBases ns
+
+                filtered :: Array ( String /\ Array Attribute )    
+                filtered =
+                    Foreign.toUnfoldable
+                        $ Foreign.filterKeys ( _ `Array.elem` referenced )
+                        $ Foreign.union interfaceMembers elementInterfaces
+            
+            flip Array.mapMaybe filtered \( name /\ members ) ->
+                mkInterface ns name members
+                
+    { keywords
+    , elements
+    , interfaces
+    }
 
 -- | Intermediate type between `IDLType` and `Type Void` so we can generate an `Ord` and `Eq` instance for deduping. 
 data TypeStub 
@@ -162,6 +347,7 @@ data TypeStub
     | TypeUnit
 derive instance Eq TypeStub
 derive instance Ord TypeStub
+derive instance Generic TypeStub _
 
 construct :: forall e . TypeStub -> Type e
 construct = unsafePartial case _ of
@@ -225,70 +411,31 @@ handler = unsafePartial case _ of
     TypeKeyword _ ->
         exprOp ( exprIdent "Deku.Attribute.prop'" ) [ binaryOp "<<<" $ exprIdent "Data.Newtype.unwrap" ]
 
-mapType :: IDLType -> Array TypeStub
-mapType = case _ of
-    Descriptor t -> mapType t.idlType
+typeArrayed :: Type Void -> Type Void
+typeArrayed t = 
+    unsafePartial $ typeApp ( typeCtor "Array" ) $ pure t
 
-    Primitive "boolean" ->
-        pure TypeBoolean
-    
-    Primitive "long" ->
-        pure TypeInt
+typeEvented :: Type Void -> Type Void
+typeEvented t =
+    unsafePartial $ typeApp ( typeCtor "Event" ) $ pure t
 
-    Primitive "unsigned long" ->
-        pure TypeInt
+typeAttributed :: Type Void -> Type Void
+typeAttributed t =
+    unsafePartial $ typeApp ( typeCtor "Attribute" ) $ pure t
 
-    Primitive "long long" ->
-        pure TypeInt
-    
-    Primitive "unsigned long long" -> 
-        pure TypeInt
+typeNut :: Type Void
+typeNut =
+    unsafePartial $ typeCtor "Nut"
 
-    Primitive "unsigned short" ->
-        pure TypeInt
-
-    Primitive "double" -> 
-        pure TypeNumber
-
-    Primitive "unrestricted double" ->
-        pure TypeNumber
-        
-    Primitive "Number" ->
-        pure TypeNumber
-
-    Primitive "SVGAnimatedNumber" ->
-        pure TypeNumber
-
-    Primitive "EventHandler" ->
-        pure TypeEventHandler
-
-    Primitive "any" ->
-        pure TypeString
-
-    Primitive "DOMString" ->
-        pure TypeString
-
-    Primitive "DOMTokenList" ->
-        pure TypeString
-
-    Primitive "USVString" ->
-        pure TypeString
-
-    Primitive "SVGAnimatedEnumeration" ->
-        pure TypeString
-
-    Union s ->
-        bind s mapType
-
-    Primitive _ ->
-        []
+escapeBaseInterface :: String -> String /\ Ctor
+escapeBaseInterface name =
+    name /\ ( Ctor $ capitalize $ unSnake name ) 
 
 -- | Elements that have an implementation in the current web-html package
 webElements :: Set String
 webElements =
     Set.fromFoldable
-        [ "Element"
-        , "HTMLElement"
+        [ "HTMLElement"
         , "HTMLAnchorElement"
         , "HTMLAreaElement"
         , "HTMLAudioElement"

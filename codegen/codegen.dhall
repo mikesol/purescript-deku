@@ -2,6 +2,9 @@
 , dependencies =
     [ "effect"
     , "aff"
+    , "bifunctors"
+    , "newtype"
+    , "safe-coerce"
     , "tuples"
     , "foreign-object"
     , "tuples"
@@ -24,8 +27,6 @@
     , "ordered-collections"
     , "arrays"
     , "strings"
-    , "debug"
-    , "st"
     ]
 , sources =
     [ "codegen/**/*.purs"

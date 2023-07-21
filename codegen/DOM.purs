@@ -3,98 +3,95 @@ module DOM where
 import Prelude
 
 import Control.Monad.Except (ExceptT(..))
-import Control.Monad.ST (foreach)
 import DOM.Attr as Attr
-import DOM.Common (TypeStub, attributeMember, camelCaseOn, capitalize, capitalize, escape, mapType, resolveInterface, validTag)
+import DOM.Common (Attribute, Ctor(..), Element, Interface, Specification, TagNS, attrModule, attrType, baseInterfaces, capitalize, eltModule, namespaceBases, typeImports)
 import DOM.Elt as Elt
-import DOM.Spec (Definition, IDL, Tag)
 import Data.Array as Array
-import Data.Maybe (Maybe(..), fromMaybe)
+import Data.Map (Map)
+import Data.Map as Map
+import Data.Maybe (Maybe(..))
+import Data.Newtype (un)
 import Data.Set (Set)
 import Data.Set as Set
-import Data.Traversable (foldl, for)
-import Data.Tuple (snd)
+import Data.Traversable (for_)
 import Data.Tuple.Nested (type (/\), (/\))
-import Debug as Debug
 import Effect.Aff (Aff, Error, attempt)
 import FS as FS
-import Foreign.Object as Foreign
-import Foreign.Object.ST as Foreign.ST
 import Node.Encoding (Encoding(..))
 import Node.FS.Aff (writeTextFile)
 import Partial.Unsafe (unsafePartial)
+import Safe.Coerce (coerce)
 import Tidy.Codegen (module_, printModule)
 
--- | Crawls through the spec finding all attributes for given interface and all inheriting interfaces
-crawlInterfaces :: IDL -> Set String /\ Set ( String /\ TypeStub ) -> String -> Set String /\ Set ( String /\ TypeStub )
-crawlInterfaces idl acc@( seen /\ members ) intf = case resolveInterface idl intf of
-    Just ( interface /\ inherits ) -> do
-        let 
-            direct :: Set ( String /\ TypeStub )
-            direct = Set.fromFoldable do
-                member <- fromMaybe [] interface.members
-                attributeName /\ attributeType <- attributeMember member
-                mapped <- mapType attributeType
-                pure $ attributeName /\ mapped
+-- | Crawls through the spec finding all attributes for given interface and all inheriting interfaces. Uses the fact
+-- | currently all interfaces only have a inheritance depth of 1.
+crawlInterfaces :: TagNS -> Map Ctor Interface -> Ctor -> Array Attribute
+crawlInterfaces ns interfaces intf@( Ctor name ) =
+    if name `Array.elem` namespaceBases ns then
+        []
+    else case Map.lookup intf interfaces of
+        Just { members, bases : [] } ->
+            members
+        
+        Just { members, bases } -> members <> bind bases ( crawlInterfaces ns interfaces ) 
+        
+        Nothing ->
+            []
 
-            found :: Set String
-            found = 
-                Set.fromFoldable inherits
-
-        foldl
-            ( crawlInterfaces idl )
-            ( Set.union seen found /\ Set.union members direct )
-            ( Set.difference found seen )
-
-    Nothing ->
-        acc
-
-generate :: Array Definition -> Array Tag -> IDL -> ExceptT Error Aff Unit
-generate _ tags idl = do
+generate :: Specification -> Specification -> ExceptT Error Aff Unit
+generate html svg = do
     FS.createDir "lib/deku-dom/Deku/DOM/Elt"
 
-    elts <- for ( Array.mapMaybe validTag tags ) \( tag /\ interface ) -> do
-        let name = escape tag
-            cap = capitalize name  
-            typeName = cap <> "_"
-            elt = { name, type: typeName, tag : name, module : "Deku.DOM.Elt." <> cap, interface }
+    let
+        elements :: Array Element
+        elements = html.elements <> svg.elements
 
+        interfaces :: Map Ctor Interface
+        interfaces = Map.fromFoldable $ map (\attr@{ ctor } -> ctor /\ attr )  $ html.interfaces <> svg.interfaces
+        
+    for_ elements \element -> do
         ExceptT $ attempt
-            $ writeTextFile UTF8 ( "./lib/deku-dom/Deku/DOM/Elt/" <> cap <> ".purs" )
+            $ writeTextFile UTF8 ( "./lib/deku-dom/Deku/DOM/Elt/" <> capitalize ( un Ctor element.ctor ) <> ".purs" )
             $ printModule
             $ unsafePartial
-            $ module_ ( elt.module ) [] Elt.imports
-            $ Elt.generate elt
-        
-        pure elt
-    
-    let
-        transposed :: Foreign.Object ( Set ( TypeStub /\ Elt.Elt ) )
-        transposed = Foreign.runST do
-            attrs <- Foreign.ST.new
-            foreach elts \elt -> do
-                foreach ( Array.fromFoldable $ snd $ crawlInterfaces idl mempty elt.interface ) \( attrName /\ attrType ) -> do
-                    found <- Foreign.ST.peek attrName attrs
-                    let existing = fromMaybe Set.empty found
-                    void $ Foreign.ST.poke attrName ( Set.insert ( attrType /\ elt ) existing ) attrs
+            $ module_ ( eltModule element.ctor ) [] Elt.imports
+            $ Elt.generate element
 
-            pure attrs
-    
+    let
+        elementAttributes :: Map Ctor ( Set ( Attribute /\ Element ) )
+        elementAttributes =
+            Map.fromFoldableWith Set.union do
+                elt <- elements
+                attr <- crawlInterfaces elt.ns interfaces elt.interface
+
+                pure $ attr.index /\ Set.singleton ( attr /\ elt )
+
     FS.createDir "lib/deku-dom/Deku/DOM/Attr"
 
-    attrs <- for ( Foreign.toUnfoldable transposed :: Array _ ) \( attrName /\ typeAndElts ) -> do
-        let name = camelCaseOn $ escape attrName
-            cap = capitalize name
-            attr = { name, srcName: attrName, type : cap, module : "Deku.DOM.Attr." <> cap }
-
+    for_ ( Map.toUnfoldable elementAttributes :: Array _ ) \( index /\ attrAndElts ) -> do
         ExceptT $ attempt
-            $ writeTextFile UTF8 ( "./lib/deku-dom/Deku/DOM/Attr/" <> cap <> ".purs" )
+            $ writeTextFile UTF8 ( "./lib/deku-dom/Deku/DOM/Attr/" <> attrType index <> ".purs" )
             $ printModule
             $ unsafePartial
-            $ module_ ( attr.module ) [] 
-                ( Attr.imports typeAndElts )
-                ( Attr.generate attr typeAndElts )
+            $ module_ ( attrModule index ) [] 
+                ( Attr.imports attrAndElts )
+                ( Attr.generate attrAndElts )
 
-        pure attr
+    let
+        globalAttributes :: Array Attribute
+        globalAttributes = do
+            Array.concatMap _.members
+                $ Array.fromFoldable
+                $ Map.values
+                $ Map.filterKeys ( ( _ `Array.elem` baseInterfaces ) <<< coerce ) interfaces
+
+    for_ globalAttributes \attr -> do
+        ExceptT $ attempt
+            $ writeTextFile UTF8 ( "./lib/deku-dom/Deku/DOM/Attr/" <> attrType attr.index <> ".purs" )
+            $ printModule
+            $ unsafePartial
+            $ module_ ( attrModule attr.index ) [] 
+                ( Attr.importRequired <> typeImports [ attr.type ] )
+                ( Attr.generateEverything attr )
 
     pure unit

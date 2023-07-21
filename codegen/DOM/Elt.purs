@@ -3,18 +3,11 @@ module DOM.Elt where
 import Prelude
 import Prim hiding (Type)
 
-import DOM.Common (typeArrayed, typeAttributed, typeEvented, typeNut)
+import DOM.Common (Ctor(..), Element, eltType, typeArrayed, typeAttributed, typeEvented, typeNut)
+import Data.Newtype (un)
 import Partial.Unsafe (unsafePartial)
 import PureScript.CST.Types (Declaration, ImportDecl)
 import Tidy.Codegen (binderVar, declData, declImport, declImportAs, declSignature, declValue, exprApp, exprArray, exprIdent, exprString, importType, importValue, typeArrow, typeCtor)
-
-type Elt =
-    { tag :: String
-    , name :: String
-    , module :: String
-    , type :: String
-    , interface :: String
-    }
 
 imports :: Array ( ImportDecl Void )
 imports =
@@ -26,31 +19,34 @@ imports =
         , declImport "FRP.Event" [ importType "Event" ] 
         ]
 
-generate :: Elt -> Array ( Declaration Void )
-generate element =
-    unsafePartial $
-        [ declData element.type [] []
-            
-        , declSignature element.name 
-            $ typeArrow
-                [ typeArrayed $ typeEvented $ typeAttributed $ typeCtor element.type
-                , typeArrayed typeNut
-                ]
-            $ typeNut
-        , declValue element.name []
-            $ exprApp ( exprIdent "DC.elementify2" ) [ exprString element.tag ]
+generate :: Partial => Element -> Array ( Declaration Void )
+generate element = do
+    let
+        typeName :: String
+        typeName = eltType element.ctor
+        
+    [ declData typeName [] []
+        
+    , declSignature element.ctor
+        $ typeArrow
+            [ typeArrayed $ typeEvented $ typeAttributed $ typeCtor typeName
+            , typeArrayed typeNut
+            ]
+        $ typeNut
+    , declValue element.ctor []
+        $ exprApp ( exprIdent "DC.elementify2" ) [ exprString element.tag ]
 
-        , declSignature ( element.name <> "_" ) 
-            $ typeArrow [ typeArrayed typeNut ]
-            $ typeNut
-        , declValue ( element.name <> "_" ) []
-            $ exprApp ( exprIdent element.name ) [ exprIdent "empty" ]
-        
-        
-        , declSignature ( element.name <> "__" ) 
-            $ typeArrow [ typeCtor "String" ]
-            $ typeNut
-        , declValue ( element.name <> "__" ) [ binderVar "t" ]
-            $ exprApp ( exprIdent $ element.name <> "_" )
-            [ exprArray [ exprApp ( exprIdent "DC.text_" ) [ exprIdent "t" ] ] ]
-        ]
+    , declSignature ( un Ctor element.ctor <> "_" ) 
+        $ typeArrow [ typeArrayed typeNut ]
+        $ typeNut
+    , declValue ( un Ctor element.ctor <> "_" ) []
+        $ exprApp ( exprIdent $ un Ctor element.ctor ) [ exprIdent "empty" ]
+    
+    
+    , declSignature ( un Ctor element.ctor <> "__" ) 
+        $ typeArrow [ typeCtor "String" ]
+        $ typeNut
+    , declValue ( un Ctor element.ctor <> "__" ) [ binderVar "t" ]
+        $ exprApp ( exprIdent $ un Ctor element.ctor <> "_" )
+        [ exprArray [ exprApp ( exprIdent "DC.text_" ) [ exprIdent "t" ] ] ]
+    ]

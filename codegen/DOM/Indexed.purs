@@ -3,104 +3,92 @@ module DOM.Indexed where
 import Prelude
 
 import Control.Monad.Except (ExceptT(..))
-import DOM.Common (correctionInterfaces, correctionKeyword, resolveInterface, unSnake, validTag, webElements)
-import DOM.Indexed.Common (Keyword, requires)
+import DOM.Common (Ctor(..), Specification, TagNS(..), TypeStub(..), namespaceBases, typeImports, webElements)
+import DOM.Indexed.Common (requires)
 import DOM.Indexed.Elements as Elements
+import DOM.Indexed.Index as Index
 import DOM.Indexed.Interfaces as Interfaces
 import DOM.Indexed.Props as Props
 import DOM.Indexed.Self as Self
 import DOM.Indexed.Values as Values
-import DOM.Spec (Definition, IDL, Interface, Tag)
 import Data.Array as Array
-import Data.Maybe (Maybe(..), maybe)
-import Data.Set (Set)
-import Data.Set as Set
-import Data.String as String
-import Data.Tuple (Tuple(..), snd)
+import Data.Maybe (Maybe(..))
+import Data.Tuple (snd)
 import Data.Tuple.Nested (type (/\), (/\))
 import Effect.Aff (Aff, Error, attempt)
 import FS as FS
-import Foreign.Object as Foreign
 import Node.Encoding (Encoding(..))
 import Node.FS.Aff (writeTextFile)
 import Partial.Unsafe (unsafePartial)
-import Tidy.Codegen (module_, printModule)
+import PureScript.CST.Types (ImportDecl)
+import Tidy.Codegen (declImport, importType, module_, printModule)
 
-generate :: Array Definition -> Array Tag -> IDL -> ExceptT Error Aff Unit
-generate keywordSpec tagSpec ifSpec = do
+generateSpec :: String -> String -> Array ( ImportDecl Void ) -> Specification -> ExceptT Error Aff Unit
+generateSpec path mod imports { keywords, elements, interfaces } = do
     let
-        tags ::Foreign.Object String
-        tags =
-            Foreign.fromFoldable
-                $ Array.mapMaybe validTag tagSpec
+        uniqueValues :: Array Values.Keyword
+        uniqueValues =
+            Array.nub $ map (\{ ctor, value } -> { ctor, value } ) keywords
 
-        interfaces :: Foreign.Object ( Interface /\ Array String ) 
-        interfaces = do
-            let initial = Set.mapMaybe correctionInterfaces ( Set.fromFoldable $ Foreign.values tags )
-            Foreign.fromFoldable
-                $ flip Array.mapMaybe ( crawlInterfaces ifSpec initial initial ) \intfName ->
-                    Tuple intfName <$> resolveInterface ifSpec intfName
-
-        keywords :: Array Keyword
-        keywords =
-            Array.mapMaybe
-                (\( v /\ attribute ) -> (\( name /\ value ) -> { name, value, attribute : unSnake attribute } ) <$> correctionKeyword v )
-                do
-                    dfn <- keywordSpec
-                    text <- dfn.linkingText
-                    for <- Array.nub $ Array.mapMaybe forAttribute dfn.for
-                    pure $ text /\ for
-
-            where
-
-            forAttribute :: String -> Maybe String
-            forAttribute f =
-                case String.split ( String.Pattern "/" ) f of
-                    [ _, attr ] ->
-                        Just attr
-                    
-                    _ ->
-                        Nothing
-        
-        uniqueKeywords :: Array Values.Keyword
-        uniqueKeywords =
-            ( Array.nub $ map (\{ name, value } -> { name, value } ) keywords )
-
-        attributes :: Foreign.Object ( Array Props.AttributeType )
+        attributes :: Array ( Ctor /\ Array Props.AttributeType )
         attributes =
             Props.coalesceAttributes keywords interfaces
 
-    FS.dump "dump.json" $ crawlInterfaces ifSpec ( Set.singleton "GlobalEventHandlers" ) ( Set.singleton "GlobalEventHandlers" )
-
-    FS.createDir "lib/deku-dom-indexed/Deku/DOM/Indexed"
-
     ExceptT $ attempt
-        $ writeTextFile UTF8 "./lib/deku-dom-indexed/Deku/DOM/Indexed.purs"
+        $ writeTextFile UTF8 path
         $ printModule
         $ unsafePartial
-        $ module_ "Deku.DOM.Indexed" []
-            requires
+        $ module_ mod []
+            ( requires <> imports )
             ( Array.concat 
                 [ Interfaces.generate interfaces
-                , Elements.generate tags
+                , Elements.generate elements
                 , Props.generate attributes
-                , Values.generate uniqueKeywords
+                , Values.generate uniqueValues
                 ]
             )
 
+generate :: Specification -> Specification -> Specification -> ExceptT Error Aff Unit
+generate html svg mathml = do
+    FS.createDir "lib/deku-dom-indexed/Deku/DOM/Indexed"
+
     ExceptT $ attempt
-        $ writeTextFile UTF8 "./lib/deku-dom-indexed/Deku/DOM/Indexed/Self.purs"
+        $ writeTextFile UTF8  "./lib/deku-dom-indexed/Deku/DOM/Indexed/Index.purs"
+        $ printModule
+        $ unsafePartial
+        $ module_ "Deku.DOM.Indexed.Index" []
+            Index.imports
+            Index.generate
+
+    ExceptT $ attempt
+        $ writeTextFile UTF8  "./lib/deku-dom-indexed/Deku/DOM/Indexed/Self.purs"
         $ printModule
         $ unsafePartial
         $ module_ "Deku.DOM.Indexed.Self" []
             ( Self.imports webElements )
-            ( Self.generates webElements )
+            ( Self.generate webElements )
 
--- | Crawls through the given set finding all inherited interfaces of a given set of interfaces.
-crawlInterfaces :: IDL -> Set String -> Set String -> Array String
-crawlInterfaces _ seen next | Set.isEmpty next = Set.toUnfoldable seen
-crawlInterfaces spec seen next = do
-    let found :: Set String
-        found = Set.fromFoldable $ Array.foldMap ( maybe [] snd <<< resolveInterface spec ) $ Set.toUnfoldable next
-    
-    crawlInterfaces spec ( Set.union seen found ) ( Set.difference found seen )
+    generateSpec "./lib/deku-dom-indexed/Deku/DOM/Indexed.purs" "Deku.DOM.Indexed"
+        ( typeImports [ TypeEventHandler, TypeString, TypeKeyword "" ] )
+        html
+
+    let
+        globalImport :: Array String -> ImportDecl Void
+        globalImport ctors =
+            unsafePartial $ declImport "Deku.DOM.Indexed" $ map importType ctors
+
+        svgDeps :: String -> Maybe String
+        svgDeps "SvgGlobal" = Nothing
+        svgDeps ctor = Just ctor
+
+    generateSpec "./lib/deku-dom-indexed/Deku/DOM/Indexed/SVG.purs" "Deku.DOM.Indexed.SVG"
+        ( Array.cons ( globalImport $ Array.mapMaybe svgDeps $ namespaceBases SVG )
+            $ typeImports [ TypeEventHandler, TypeString, TypeKeyword "" ] 
+        )
+        svg
+
+    generateSpec "./lib/deku-dom-indexed/Deku/DOM/Indexed/MathML.purs" "Deku.DOM.Indexed.MathML"
+        ( Array.cons ( globalImport $ namespaceBases MathML )
+            $ typeImports [ TypeString ]
+        )
+        mathml

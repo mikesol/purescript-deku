@@ -94,9 +94,6 @@ instance DecodeJson Member where
 instance EncodeJson Member where
     encodeJson = genericEncodeJson
 
-
-
-
 data Mixin 
     = Includes 
         { fragment :: String
@@ -107,7 +104,6 @@ data Mixin
         , members :: Maybe ( Array Member )
         , partial :: Boolean
         }
-
 
 derive instance Eq Mixin
 derive instance Ord Mixin
@@ -181,7 +177,7 @@ type Definition =
     , type :: String
     , definedIn :: String
     , heading ::
-        { id :: String
+        { id :: Maybe String
         , href :: String
         , title :: String
         , number :: Maybe String
