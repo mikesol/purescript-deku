@@ -20,25 +20,24 @@ import Tidy.Codegen.Types (BinaryOp(..))
 
 exports :: Partial => Array ( Ctor /\  Array AttributeType ) -> Array ( Export Void )
 exports attributes =
-    append [ exportValue "self", exportValue "self_" ]
-        $ bind attributes \( index /\ types ) -> do
-            let ctor /\ shortHand = attributeCtor index
-            case types of
-                [] ->
-                    []
+    bind attributes \( index /\ types ) -> do
+        let ctor /\ shortHand = attributeCtor index
+        case types of
+            [] ->
+                []
 
-                [ _ ] ->
-                    [ exportValue ctor
-                    , exportValue shortHand
-                    ]
-            
-                _ -> do
-                    let overloadedHandler /\ overloadedClass = overloaded index
-                    [ exportValue ctor
-                    , exportValue shortHand
-                    , exportClass overloadedClass
-                    , exportValue overloadedHandler
-                    ]
+            [ _ ] ->
+                [ exportValue ctor
+                , exportValue shortHand
+                ]
+        
+            _ -> do
+                let overloadedHandler /\ overloadedClass = overloaded index
+                [ exportValue ctor
+                , exportValue shortHand
+                , exportClass overloadedClass
+                , exportValue overloadedHandler
+                ]
 
 generate :: Partial => Array ( Ctor /\  Array AttributeType ) -> Array ( Declaration Void )
 generate attributes =

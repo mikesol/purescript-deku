@@ -15,8 +15,7 @@ import Tidy.Codegen (declType, exportType, exportTypeAll, typeApp, typeCtor, typ
 exports :: Partial => Array Interface -> Array ( Export Void )
 exports interfaces =
     Array.concat
-        [ [ exportTypeAll "Indexed" ]
-        , map ( exportType <<< _.name ) interfaces 
+        [ map ( exportType <<< _.name ) interfaces 
         ]
 
 generate :: Partial => Array Interface -> Array ( Declaration Void )

@@ -19,11 +19,11 @@ import FS as FS
 import Node.Encoding (Encoding(..))
 import Node.FS.Aff (writeTextFile)
 import Partial.Unsafe (unsafePartial)
-import PureScript.CST.Types (ImportDecl)
-import Tidy.Codegen (declImport, importType, module_, printModule)
+import PureScript.CST.Types (Export, ImportDecl)
+import Tidy.Codegen (declImport, declImportAs, exportModule, importType, importValue, module_, printModule)
 
-generateSpec :: String -> String -> Array ( ImportDecl Void ) -> Specification -> ExceptT Error Aff Unit
-generateSpec path mod imports { keywords, elements, interfaces } = do
+generateSpec :: String -> String -> Array ( ImportDecl Void ) -> Array ( Export Void ) -> Specification -> ExceptT Error Aff Unit
+generateSpec path mod imports exports { keywords, elements, interfaces } = do
     let
         uniqueValues :: Array Values.Keyword
         uniqueValues =
@@ -37,7 +37,15 @@ generateSpec path mod imports { keywords, elements, interfaces } = do
         $ writeTextFile UTF8 path
         $ printModule
         $ unsafePartial
-        $ module_ mod []
+        $ module_ mod
+            ( Array.concat
+                [ Interfaces.exports interfaces
+                , Elements.exports elements
+                , Props.exports attributes
+                , Values.exports uniqueValues
+                , exports
+                ]
+            )
             ( requires <> imports )
             ( Array.concat 
                 [ Interfaces.generate interfaces
@@ -68,7 +76,10 @@ generate html svg mathml = do
             ( Self.generate webElements )
 
     generateSpec "./lib/deku-dom-indexed/Deku/DOM/Indexed.purs" "Deku.DOM.Indexed"
-        ( typeImports [ TypeEventHandler, TypeString, TypeKeyword "" ] )
+        ( typeImports [ TypeEventHandler, TypeString, TypeKeyword "" ]
+            <> [ unsafePartial $ declImportAs "Deku.Control" [ importValue "text", importValue "text_" ] "Deku.Control" ]
+        )
+        [ unsafePartial $ exportModule "Deku.Control" ]
         html
 
     let
@@ -84,10 +95,12 @@ generate html svg mathml = do
         ( Array.cons ( globalImport $ Array.mapMaybe svgDeps $ namespaceBases SVG )
             $ typeImports [ TypeEventHandler, TypeString, TypeKeyword "" ] 
         )
+        []
         svg
 
     generateSpec "./lib/deku-dom-indexed/Deku/DOM/Indexed/MathML.purs" "Deku.DOM.Indexed.MathML"
         ( Array.cons ( globalImport $ namespaceBases MathML )
             $ typeImports [ TypeString ]
         )
+        []
         mathml
