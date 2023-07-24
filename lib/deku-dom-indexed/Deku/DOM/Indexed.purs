@@ -429,104 +429,104 @@ module Deku.DOM.Indexed
   , frame_
   , _crossorigin
   , _crossorigin_
-  , class Iscrossorigin
-  , iscrossorigin
+  , class IsCrossorigin
+  , isCrossorigin
   , _loading
   , _loading_
-  , class Isloading
-  , isloading
+  , class IsLoading
+  , isLoading
   , _fetchpriority
   , _fetchpriority_
-  , class Isfetchpriority
-  , isfetchpriority
+  , class IsFetchpriority
+  , isFetchpriority
   , _dir
   , _dir_
-  , class Isdir
-  , isdir
+  , class IsDir
+  , isDir
   , _name
   , _name_
-  , class Isname
-  , isname
+  , class IsName
+  , isName
   , _httpEquiv
   , _httpEquiv_
-  , class IshttpEquiv
-  , ishttpEquiv
+  , class IsHttpEquiv
+  , isHttpEquiv
   , _type
   , _type_
-  , class Istype
-  , istype
+  , class IsType
+  , isType
   , _rel
   , _rel_
-  , class Isrel
-  , isrel
+  , class IsRel
+  , isRel
   , _decoding
   , _decoding_
-  , class Isdecoding
-  , isdecoding
+  , class IsDecoding
+  , isDecoding
   , _kind
   , _kind_
-  , class Iskind
-  , iskind
+  , class IsKind
+  , isKind
   , _preload
   , _preload_
-  , class Ispreload
-  , ispreload
+  , class IsPreload
+  , isPreload
   , _shape
   , _shape_
-  , class Isshape
-  , isshape
+  , class IsShape
+  , isShape
   , _scope
   , _scope_
-  , class Isscope
-  , isscope
+  , class IsScope
+  , isScope
   , _wrap
   , _wrap_
-  , class Iswrap
-  , iswrap
+  , class IsWrap
+  , isWrap
   , _method
   , _method_
-  , class Ismethod
-  , ismethod
+  , class IsMethod
+  , isMethod
   , _enctype
   , _enctype_
-  , class Isenctype
-  , isenctype
+  , class IsEnctype
+  , isEnctype
   , _autocomplete
   , _autocomplete_
-  , class Isautocomplete
-  , isautocomplete
+  , class IsAutocomplete
+  , isAutocomplete
   , _entry
   , _entry_
-  , class Isentry
-  , isentry
+  , class IsEntry
+  , isEntry
   , _hidden
   , _hidden_
-  , class Ishidden
-  , ishidden
+  , class IsHidden
+  , isHidden
   , _autocapitalize
   , _autocapitalize_
-  , class Isautocapitalize
-  , isautocapitalize
+  , class IsAutocapitalize
+  , isAutocapitalize
   , _inputmode
   , _inputmode_
-  , class Isinputmode
-  , isinputmode
+  , class IsInputmode
+  , isInputmode
   , _enterkeyhint
   , _enterkeyhint_
-  , class Isenterkeyhint
-  , isenterkeyhint
+  , class IsEnterkeyhint
+  , isEnterkeyhint
   , _popover
   , _popover_
-  , class Ispopover
-  , ispopover
+  , class IsPopover
+  , isPopover
   , _popovertargetaction
   , _popovertargetaction_
-  , class Ispopovertargetaction
-  , ispopovertargetaction
+  , class IsPopovertargetaction
+  , isPopovertargetaction
   , _sandbox
   , _sandbox_
-  , class Issandbox
-  , issandbox
+  , class IsSandbox
+  , isSandbox
   , _version
   , _version_
   , _manifest
@@ -3927,1145 +3927,1145 @@ frame = elementify2 {-  -} "frame"
 frame_ :: Array Nut -> Nut
 frame_ = elementify2 {-  -} "frame" []
 
-class Iscrossorigin (v :: Type) (a :: Type) | v -> a where
-  iscrossorigin :: v -> Deku.Attribute.AttributeValue
+class IsCrossorigin (v :: Type) (a :: Type) | v -> a where
+  isCrossorigin :: v -> Deku.Attribute.AttributeValue
 
-instance Iscrossorigin String String where
-  iscrossorigin = Deku.Attribute.prop'
+instance IsCrossorigin String String where
+  isCrossorigin = Deku.Attribute.prop'
 
-instance Iscrossorigin (Index.Keyword "use-credentials") String where
-  iscrossorigin = Deku.Attribute.prop' <<< Data.Newtype.unwrap
+instance IsCrossorigin (Index.Keyword "use-credentials") String where
+  isCrossorigin = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
-instance Iscrossorigin (Index.Keyword "anonymous") String where
-  iscrossorigin = Deku.Attribute.prop' <<< Data.Newtype.unwrap
+instance IsCrossorigin (Index.Keyword "anonymous") String where
+  isCrossorigin = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
 _crossorigin
   :: forall r v a
-   . Iscrossorigin v a
+   . IsCrossorigin v a
   => FRP.Event.Event v
   -> FRP.Event.Event (Deku.Attribute.Attribute (Index.Indexed (crossorigin :: a | r)))
 _crossorigin = Functor.map
-  (Deku.Attribute.unsafeAttribute <<< { key: "crossorigin", value: _ } <<< iscrossorigin)
+  (Deku.Attribute.unsafeAttribute <<< { key: "crossorigin", value: _ } <<< isCrossorigin)
 
 _crossorigin_
   :: forall r v a
-   . Iscrossorigin v a
+   . IsCrossorigin v a
   => v
   -> FRP.Event.Event (Deku.Attribute.Attribute (Index.Indexed (crossorigin :: a | r)))
 _crossorigin_ = _crossorigin <<< Applicative.pure
 
-class Isloading (v :: Type) (a :: Type) | v -> a where
-  isloading :: v -> Deku.Attribute.AttributeValue
+class IsLoading (v :: Type) (a :: Type) | v -> a where
+  isLoading :: v -> Deku.Attribute.AttributeValue
 
-instance Isloading String String where
-  isloading = Deku.Attribute.prop'
+instance IsLoading String String where
+  isLoading = Deku.Attribute.prop'
 
-instance Isloading (Index.Keyword "eager") String where
-  isloading = Deku.Attribute.prop' <<< Data.Newtype.unwrap
+instance IsLoading (Index.Keyword "eager") String where
+  isLoading = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
-instance Isloading (Index.Keyword "lazy") String where
-  isloading = Deku.Attribute.prop' <<< Data.Newtype.unwrap
+instance IsLoading (Index.Keyword "lazy") String where
+  isLoading = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
 _loading
   :: forall r v a
-   . Isloading v a
+   . IsLoading v a
   => FRP.Event.Event v
   -> FRP.Event.Event (Deku.Attribute.Attribute (Index.Indexed (loading :: a | r)))
 _loading = Functor.map
-  (Deku.Attribute.unsafeAttribute <<< { key: "loading", value: _ } <<< isloading)
+  (Deku.Attribute.unsafeAttribute <<< { key: "loading", value: _ } <<< isLoading)
 
 _loading_
   :: forall r v a
-   . Isloading v a
+   . IsLoading v a
   => v
   -> FRP.Event.Event (Deku.Attribute.Attribute (Index.Indexed (loading :: a | r)))
 _loading_ = _loading <<< Applicative.pure
 
-class Isfetchpriority (v :: Type) (a :: Type) | v -> a where
-  isfetchpriority :: v -> Deku.Attribute.AttributeValue
+class IsFetchpriority (v :: Type) (a :: Type) | v -> a where
+  isFetchpriority :: v -> Deku.Attribute.AttributeValue
 
-instance Isfetchpriority String String where
-  isfetchpriority = Deku.Attribute.prop'
+instance IsFetchpriority String String where
+  isFetchpriority = Deku.Attribute.prop'
 
-instance Isfetchpriority (Index.Keyword "auto") String where
-  isfetchpriority = Deku.Attribute.prop' <<< Data.Newtype.unwrap
+instance IsFetchpriority (Index.Keyword "auto") String where
+  isFetchpriority = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
-instance Isfetchpriority (Index.Keyword "low") String where
-  isfetchpriority = Deku.Attribute.prop' <<< Data.Newtype.unwrap
+instance IsFetchpriority (Index.Keyword "low") String where
+  isFetchpriority = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
-instance Isfetchpriority (Index.Keyword "high") String where
-  isfetchpriority = Deku.Attribute.prop' <<< Data.Newtype.unwrap
+instance IsFetchpriority (Index.Keyword "high") String where
+  isFetchpriority = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
 _fetchpriority
   :: forall r v a
-   . Isfetchpriority v a
+   . IsFetchpriority v a
   => FRP.Event.Event v
   -> FRP.Event.Event (Deku.Attribute.Attribute (Index.Indexed (fetchpriority :: a | r)))
 _fetchpriority = Functor.map
-  (Deku.Attribute.unsafeAttribute <<< { key: "fetchpriority", value: _ } <<< isfetchpriority)
+  (Deku.Attribute.unsafeAttribute <<< { key: "fetchpriority", value: _ } <<< isFetchpriority)
 
 _fetchpriority_
   :: forall r v a
-   . Isfetchpriority v a
+   . IsFetchpriority v a
   => v
   -> FRP.Event.Event (Deku.Attribute.Attribute (Index.Indexed (fetchpriority :: a | r)))
 _fetchpriority_ = _fetchpriority <<< Applicative.pure
 
-class Isdir (v :: Type) (a :: Type) | v -> a where
-  isdir :: v -> Deku.Attribute.AttributeValue
+class IsDir (v :: Type) (a :: Type) | v -> a where
+  isDir :: v -> Deku.Attribute.AttributeValue
 
-instance Isdir String String where
-  isdir = Deku.Attribute.prop'
+instance IsDir String String where
+  isDir = Deku.Attribute.prop'
 
-instance Isdir (Index.Keyword "auto") String where
-  isdir = Deku.Attribute.prop' <<< Data.Newtype.unwrap
+instance IsDir (Index.Keyword "auto") String where
+  isDir = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
-instance Isdir (Index.Keyword "rtl") String where
-  isdir = Deku.Attribute.prop' <<< Data.Newtype.unwrap
+instance IsDir (Index.Keyword "rtl") String where
+  isDir = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
-instance Isdir (Index.Keyword "ltr") String where
-  isdir = Deku.Attribute.prop' <<< Data.Newtype.unwrap
+instance IsDir (Index.Keyword "ltr") String where
+  isDir = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
 _dir
   :: forall r v a
-   . Isdir v a
+   . IsDir v a
   => FRP.Event.Event v
   -> FRP.Event.Event (Deku.Attribute.Attribute (Index.Indexed (dir :: a | r)))
-_dir = Functor.map (Deku.Attribute.unsafeAttribute <<< { key: "dir", value: _ } <<< isdir)
+_dir = Functor.map (Deku.Attribute.unsafeAttribute <<< { key: "dir", value: _ } <<< isDir)
 
 _dir_
   :: forall r v a
-   . Isdir v a
+   . IsDir v a
   => v
   -> FRP.Event.Event (Deku.Attribute.Attribute (Index.Indexed (dir :: a | r)))
 _dir_ = _dir <<< Applicative.pure
 
-class Isname (v :: Type) (a :: Type) | v -> a where
-  isname :: v -> Deku.Attribute.AttributeValue
+class IsName (v :: Type) (a :: Type) | v -> a where
+  isName :: v -> Deku.Attribute.AttributeValue
 
-instance Isname String String where
-  isname = Deku.Attribute.prop'
+instance IsName String String where
+  isName = Deku.Attribute.prop'
 
-instance Isname (Index.Keyword "color-scheme") String where
-  isname = Deku.Attribute.prop' <<< Data.Newtype.unwrap
+instance IsName (Index.Keyword "color-scheme") String where
+  isName = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
-instance Isname (Index.Keyword "theme-color") String where
-  isname = Deku.Attribute.prop' <<< Data.Newtype.unwrap
+instance IsName (Index.Keyword "theme-color") String where
+  isName = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
-instance Isname (Index.Keyword "referrer") String where
-  isname = Deku.Attribute.prop' <<< Data.Newtype.unwrap
+instance IsName (Index.Keyword "referrer") String where
+  isName = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
-instance Isname (Index.Keyword "keywords") String where
-  isname = Deku.Attribute.prop' <<< Data.Newtype.unwrap
+instance IsName (Index.Keyword "keywords") String where
+  isName = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
-instance Isname (Index.Keyword "generator") String where
-  isname = Deku.Attribute.prop' <<< Data.Newtype.unwrap
+instance IsName (Index.Keyword "generator") String where
+  isName = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
-instance Isname (Index.Keyword "description") String where
-  isname = Deku.Attribute.prop' <<< Data.Newtype.unwrap
+instance IsName (Index.Keyword "description") String where
+  isName = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
-instance Isname (Index.Keyword "author") String where
-  isname = Deku.Attribute.prop' <<< Data.Newtype.unwrap
+instance IsName (Index.Keyword "author") String where
+  isName = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
-instance Isname (Index.Keyword "application-name") String where
-  isname = Deku.Attribute.prop' <<< Data.Newtype.unwrap
+instance IsName (Index.Keyword "application-name") String where
+  isName = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
 _name
   :: forall r v a
-   . Isname v a
+   . IsName v a
   => FRP.Event.Event v
   -> FRP.Event.Event (Deku.Attribute.Attribute (Index.Indexed (name :: a | r)))
-_name = Functor.map (Deku.Attribute.unsafeAttribute <<< { key: "name", value: _ } <<< isname)
+_name = Functor.map (Deku.Attribute.unsafeAttribute <<< { key: "name", value: _ } <<< isName)
 
 _name_
   :: forall r v a
-   . Isname v a
+   . IsName v a
   => v
   -> FRP.Event.Event (Deku.Attribute.Attribute (Index.Indexed (name :: a | r)))
 _name_ = _name <<< Applicative.pure
 
-class IshttpEquiv (v :: Type) (a :: Type) | v -> a where
-  ishttpEquiv :: v -> Deku.Attribute.AttributeValue
+class IsHttpEquiv (v :: Type) (a :: Type) | v -> a where
+  isHttpEquiv :: v -> Deku.Attribute.AttributeValue
 
-instance IshttpEquiv String String where
-  ishttpEquiv = Deku.Attribute.prop'
+instance IsHttpEquiv String String where
+  isHttpEquiv = Deku.Attribute.prop'
 
-instance IshttpEquiv (Index.Keyword "content-security-policy") String where
-  ishttpEquiv = Deku.Attribute.prop' <<< Data.Newtype.unwrap
+instance IsHttpEquiv (Index.Keyword "content-security-policy") String where
+  isHttpEquiv = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
-instance IshttpEquiv (Index.Keyword "x-ua-compatible") String where
-  ishttpEquiv = Deku.Attribute.prop' <<< Data.Newtype.unwrap
+instance IsHttpEquiv (Index.Keyword "x-ua-compatible") String where
+  isHttpEquiv = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
-instance IshttpEquiv (Index.Keyword "set-cookie") String where
-  ishttpEquiv = Deku.Attribute.prop' <<< Data.Newtype.unwrap
+instance IsHttpEquiv (Index.Keyword "set-cookie") String where
+  isHttpEquiv = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
-instance IshttpEquiv (Index.Keyword "refresh") String where
-  ishttpEquiv = Deku.Attribute.prop' <<< Data.Newtype.unwrap
+instance IsHttpEquiv (Index.Keyword "refresh") String where
+  isHttpEquiv = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
-instance IshttpEquiv (Index.Keyword "default-style") String where
-  ishttpEquiv = Deku.Attribute.prop' <<< Data.Newtype.unwrap
+instance IsHttpEquiv (Index.Keyword "default-style") String where
+  isHttpEquiv = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
-instance IshttpEquiv (Index.Keyword "content-type") String where
-  ishttpEquiv = Deku.Attribute.prop' <<< Data.Newtype.unwrap
+instance IsHttpEquiv (Index.Keyword "content-type") String where
+  isHttpEquiv = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
-instance IshttpEquiv (Index.Keyword "content-language") String where
-  ishttpEquiv = Deku.Attribute.prop' <<< Data.Newtype.unwrap
+instance IsHttpEquiv (Index.Keyword "content-language") String where
+  isHttpEquiv = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
 _httpEquiv
   :: forall r v a
-   . IshttpEquiv v a
+   . IsHttpEquiv v a
   => FRP.Event.Event v
   -> FRP.Event.Event (Deku.Attribute.Attribute (Index.Indexed (httpEquiv :: a | r)))
 _httpEquiv = Functor.map
-  (Deku.Attribute.unsafeAttribute <<< { key: "http-equiv", value: _ } <<< ishttpEquiv)
+  (Deku.Attribute.unsafeAttribute <<< { key: "http-equiv", value: _ } <<< isHttpEquiv)
 
 _httpEquiv_
   :: forall r v a
-   . IshttpEquiv v a
+   . IsHttpEquiv v a
   => v
   -> FRP.Event.Event (Deku.Attribute.Attribute (Index.Indexed (httpEquiv :: a | r)))
 _httpEquiv_ = _httpEquiv <<< Applicative.pure
 
-class Istype (v :: Type) (a :: Type) | v -> a where
-  istype :: v -> Deku.Attribute.AttributeValue
+class IsType (v :: Type) (a :: Type) | v -> a where
+  isType :: v -> Deku.Attribute.AttributeValue
 
-instance Istype String String where
-  istype = Deku.Attribute.prop'
+instance IsType String String where
+  isType = Deku.Attribute.prop'
 
-instance Istype (Index.Keyword "button") String where
-  istype = Deku.Attribute.prop' <<< Data.Newtype.unwrap
+instance IsType (Index.Keyword "button") String where
+  isType = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
-instance Istype (Index.Keyword "reset") String where
-  istype = Deku.Attribute.prop' <<< Data.Newtype.unwrap
+instance IsType (Index.Keyword "reset") String where
+  isType = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
-instance Istype (Index.Keyword "submit") String where
-  istype = Deku.Attribute.prop' <<< Data.Newtype.unwrap
+instance IsType (Index.Keyword "submit") String where
+  isType = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
-instance Istype (Index.Keyword "image") String where
-  istype = Deku.Attribute.prop' <<< Data.Newtype.unwrap
+instance IsType (Index.Keyword "image") String where
+  isType = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
-instance Istype (Index.Keyword "file") String where
-  istype = Deku.Attribute.prop' <<< Data.Newtype.unwrap
+instance IsType (Index.Keyword "file") String where
+  isType = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
-instance Istype (Index.Keyword "radio") String where
-  istype = Deku.Attribute.prop' <<< Data.Newtype.unwrap
+instance IsType (Index.Keyword "radio") String where
+  isType = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
-instance Istype (Index.Keyword "checkbox") String where
-  istype = Deku.Attribute.prop' <<< Data.Newtype.unwrap
+instance IsType (Index.Keyword "checkbox") String where
+  isType = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
-instance Istype (Index.Keyword "color") String where
-  istype = Deku.Attribute.prop' <<< Data.Newtype.unwrap
+instance IsType (Index.Keyword "color") String where
+  isType = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
-instance Istype (Index.Keyword "range") String where
-  istype = Deku.Attribute.prop' <<< Data.Newtype.unwrap
+instance IsType (Index.Keyword "range") String where
+  isType = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
-instance Istype (Index.Keyword "number") String where
-  istype = Deku.Attribute.prop' <<< Data.Newtype.unwrap
+instance IsType (Index.Keyword "number") String where
+  isType = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
-instance Istype (Index.Keyword "datetime-local") String where
-  istype = Deku.Attribute.prop' <<< Data.Newtype.unwrap
+instance IsType (Index.Keyword "datetime-local") String where
+  isType = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
-instance Istype (Index.Keyword "time") String where
-  istype = Deku.Attribute.prop' <<< Data.Newtype.unwrap
+instance IsType (Index.Keyword "time") String where
+  isType = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
-instance Istype (Index.Keyword "week") String where
-  istype = Deku.Attribute.prop' <<< Data.Newtype.unwrap
+instance IsType (Index.Keyword "week") String where
+  isType = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
-instance Istype (Index.Keyword "month") String where
-  istype = Deku.Attribute.prop' <<< Data.Newtype.unwrap
+instance IsType (Index.Keyword "month") String where
+  isType = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
-instance Istype (Index.Keyword "date") String where
-  istype = Deku.Attribute.prop' <<< Data.Newtype.unwrap
+instance IsType (Index.Keyword "date") String where
+  isType = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
-instance Istype (Index.Keyword "password") String where
-  istype = Deku.Attribute.prop' <<< Data.Newtype.unwrap
+instance IsType (Index.Keyword "password") String where
+  isType = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
-instance Istype (Index.Keyword "email") String where
-  istype = Deku.Attribute.prop' <<< Data.Newtype.unwrap
+instance IsType (Index.Keyword "email") String where
+  isType = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
-instance Istype (Index.Keyword "url") String where
-  istype = Deku.Attribute.prop' <<< Data.Newtype.unwrap
+instance IsType (Index.Keyword "url") String where
+  isType = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
-instance Istype (Index.Keyword "tel") String where
-  istype = Deku.Attribute.prop' <<< Data.Newtype.unwrap
+instance IsType (Index.Keyword "tel") String where
+  isType = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
-instance Istype (Index.Keyword "search") String where
-  istype = Deku.Attribute.prop' <<< Data.Newtype.unwrap
+instance IsType (Index.Keyword "search") String where
+  isType = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
-instance Istype (Index.Keyword "text") String where
-  istype = Deku.Attribute.prop' <<< Data.Newtype.unwrap
+instance IsType (Index.Keyword "text") String where
+  isType = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
-instance Istype (Index.Keyword "hidden") String where
-  istype = Deku.Attribute.prop' <<< Data.Newtype.unwrap
+instance IsType (Index.Keyword "hidden") String where
+  isType = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
-instance Istype (Index.Keyword "I") String where
-  istype = Deku.Attribute.prop' <<< Data.Newtype.unwrap
+instance IsType (Index.Keyword "I") String where
+  isType = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
-instance Istype (Index.Keyword "i") String where
-  istype = Deku.Attribute.prop' <<< Data.Newtype.unwrap
+instance IsType (Index.Keyword "i") String where
+  isType = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
-instance Istype (Index.Keyword "A") String where
-  istype = Deku.Attribute.prop' <<< Data.Newtype.unwrap
+instance IsType (Index.Keyword "A") String where
+  isType = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
-instance Istype (Index.Keyword "a") String where
-  istype = Deku.Attribute.prop' <<< Data.Newtype.unwrap
+instance IsType (Index.Keyword "a") String where
+  isType = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
-instance Istype (Index.Keyword "1") String where
-  istype = Deku.Attribute.prop' <<< Data.Newtype.unwrap
+instance IsType (Index.Keyword "1") String where
+  isType = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
 _type
   :: forall r v a
-   . Istype v a
+   . IsType v a
   => FRP.Event.Event v
   -> FRP.Event.Event (Deku.Attribute.Attribute (Index.Indexed (type :: a | r)))
-_type = Functor.map (Deku.Attribute.unsafeAttribute <<< { key: "type", value: _ } <<< istype)
+_type = Functor.map (Deku.Attribute.unsafeAttribute <<< { key: "type", value: _ } <<< isType)
 
 _type_
   :: forall r v a
-   . Istype v a
+   . IsType v a
   => v
   -> FRP.Event.Event (Deku.Attribute.Attribute (Index.Indexed (type :: a | r)))
 _type_ = _type <<< Applicative.pure
 
-class Isrel (v :: Type) (a :: Type) | v -> a where
-  isrel :: v -> Deku.Attribute.AttributeValue
+class IsRel (v :: Type) (a :: Type) | v -> a where
+  isRel :: v -> Deku.Attribute.AttributeValue
 
-instance Isrel String String where
-  isrel = Deku.Attribute.prop'
+instance IsRel String String where
+  isRel = Deku.Attribute.prop'
 
-instance Isrel (Index.Keyword "prev") String where
-  isrel = Deku.Attribute.prop' <<< Data.Newtype.unwrap
+instance IsRel (Index.Keyword "prev") String where
+  isRel = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
-instance Isrel (Index.Keyword "next") String where
-  isrel = Deku.Attribute.prop' <<< Data.Newtype.unwrap
+instance IsRel (Index.Keyword "next") String where
+  isRel = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
-instance Isrel (Index.Keyword "tag") String where
-  isrel = Deku.Attribute.prop' <<< Data.Newtype.unwrap
+instance IsRel (Index.Keyword "tag") String where
+  isRel = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
-instance Isrel (Index.Keyword "stylesheet") String where
-  isrel = Deku.Attribute.prop' <<< Data.Newtype.unwrap
+instance IsRel (Index.Keyword "stylesheet") String where
+  isRel = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
-instance Isrel (Index.Keyword "search") String where
-  isrel = Deku.Attribute.prop' <<< Data.Newtype.unwrap
+instance IsRel (Index.Keyword "search") String where
+  isRel = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
-instance Isrel (Index.Keyword "preload") String where
-  isrel = Deku.Attribute.prop' <<< Data.Newtype.unwrap
+instance IsRel (Index.Keyword "preload") String where
+  isRel = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
-instance Isrel (Index.Keyword "prefetch") String where
-  isrel = Deku.Attribute.prop' <<< Data.Newtype.unwrap
+instance IsRel (Index.Keyword "prefetch") String where
+  isRel = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
-instance Isrel (Index.Keyword "preconnect") String where
-  isrel = Deku.Attribute.prop' <<< Data.Newtype.unwrap
+instance IsRel (Index.Keyword "preconnect") String where
+  isRel = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
-instance Isrel (Index.Keyword "pingback") String where
-  isrel = Deku.Attribute.prop' <<< Data.Newtype.unwrap
+instance IsRel (Index.Keyword "pingback") String where
+  isRel = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
-instance Isrel (Index.Keyword "opener") String where
-  isrel = Deku.Attribute.prop' <<< Data.Newtype.unwrap
+instance IsRel (Index.Keyword "opener") String where
+  isRel = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
-instance Isrel (Index.Keyword "noreferrer") String where
-  isrel = Deku.Attribute.prop' <<< Data.Newtype.unwrap
+instance IsRel (Index.Keyword "noreferrer") String where
+  isRel = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
-instance Isrel (Index.Keyword "noopener") String where
-  isrel = Deku.Attribute.prop' <<< Data.Newtype.unwrap
+instance IsRel (Index.Keyword "noopener") String where
+  isRel = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
-instance Isrel (Index.Keyword "nofollow") String where
-  isrel = Deku.Attribute.prop' <<< Data.Newtype.unwrap
+instance IsRel (Index.Keyword "nofollow") String where
+  isRel = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
-instance Isrel (Index.Keyword "modulepreload") String where
-  isrel = Deku.Attribute.prop' <<< Data.Newtype.unwrap
+instance IsRel (Index.Keyword "modulepreload") String where
+  isRel = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
-instance Isrel (Index.Keyword "manifest") String where
-  isrel = Deku.Attribute.prop' <<< Data.Newtype.unwrap
+instance IsRel (Index.Keyword "manifest") String where
+  isRel = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
-instance Isrel (Index.Keyword "license") String where
-  isrel = Deku.Attribute.prop' <<< Data.Newtype.unwrap
+instance IsRel (Index.Keyword "license") String where
+  isRel = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
-instance Isrel (Index.Keyword "icon") String where
-  isrel = Deku.Attribute.prop' <<< Data.Newtype.unwrap
+instance IsRel (Index.Keyword "icon") String where
+  isRel = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
-instance Isrel (Index.Keyword "help") String where
-  isrel = Deku.Attribute.prop' <<< Data.Newtype.unwrap
+instance IsRel (Index.Keyword "help") String where
+  isRel = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
-instance Isrel (Index.Keyword "external") String where
-  isrel = Deku.Attribute.prop' <<< Data.Newtype.unwrap
+instance IsRel (Index.Keyword "external") String where
+  isRel = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
-instance Isrel (Index.Keyword "dns-prefetch") String where
-  isrel = Deku.Attribute.prop' <<< Data.Newtype.unwrap
+instance IsRel (Index.Keyword "dns-prefetch") String where
+  isRel = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
-instance Isrel (Index.Keyword "canonical") String where
-  isrel = Deku.Attribute.prop' <<< Data.Newtype.unwrap
+instance IsRel (Index.Keyword "canonical") String where
+  isRel = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
-instance Isrel (Index.Keyword "bookmark") String where
-  isrel = Deku.Attribute.prop' <<< Data.Newtype.unwrap
+instance IsRel (Index.Keyword "bookmark") String where
+  isRel = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
-instance Isrel (Index.Keyword "author") String where
-  isrel = Deku.Attribute.prop' <<< Data.Newtype.unwrap
+instance IsRel (Index.Keyword "author") String where
+  isRel = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
-instance Isrel (Index.Keyword "alternate") String where
-  isrel = Deku.Attribute.prop' <<< Data.Newtype.unwrap
+instance IsRel (Index.Keyword "alternate") String where
+  isRel = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
 _rel
   :: forall r v a
-   . Isrel v a
+   . IsRel v a
   => FRP.Event.Event v
   -> FRP.Event.Event (Deku.Attribute.Attribute (Index.Indexed (rel :: a | r)))
-_rel = Functor.map (Deku.Attribute.unsafeAttribute <<< { key: "rel", value: _ } <<< isrel)
+_rel = Functor.map (Deku.Attribute.unsafeAttribute <<< { key: "rel", value: _ } <<< isRel)
 
 _rel_
   :: forall r v a
-   . Isrel v a
+   . IsRel v a
   => v
   -> FRP.Event.Event (Deku.Attribute.Attribute (Index.Indexed (rel :: a | r)))
 _rel_ = _rel <<< Applicative.pure
 
-class Isdecoding (v :: Type) (a :: Type) | v -> a where
-  isdecoding :: v -> Deku.Attribute.AttributeValue
+class IsDecoding (v :: Type) (a :: Type) | v -> a where
+  isDecoding :: v -> Deku.Attribute.AttributeValue
 
-instance Isdecoding String String where
-  isdecoding = Deku.Attribute.prop'
+instance IsDecoding String String where
+  isDecoding = Deku.Attribute.prop'
 
-instance Isdecoding (Index.Keyword "auto") String where
-  isdecoding = Deku.Attribute.prop' <<< Data.Newtype.unwrap
+instance IsDecoding (Index.Keyword "auto") String where
+  isDecoding = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
-instance Isdecoding (Index.Keyword "async") String where
-  isdecoding = Deku.Attribute.prop' <<< Data.Newtype.unwrap
+instance IsDecoding (Index.Keyword "async") String where
+  isDecoding = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
-instance Isdecoding (Index.Keyword "sync") String where
-  isdecoding = Deku.Attribute.prop' <<< Data.Newtype.unwrap
+instance IsDecoding (Index.Keyword "sync") String where
+  isDecoding = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
 _decoding
   :: forall r v a
-   . Isdecoding v a
+   . IsDecoding v a
   => FRP.Event.Event v
   -> FRP.Event.Event (Deku.Attribute.Attribute (Index.Indexed (decoding :: a | r)))
 _decoding = Functor.map
-  (Deku.Attribute.unsafeAttribute <<< { key: "decoding", value: _ } <<< isdecoding)
+  (Deku.Attribute.unsafeAttribute <<< { key: "decoding", value: _ } <<< isDecoding)
 
 _decoding_
   :: forall r v a
-   . Isdecoding v a
+   . IsDecoding v a
   => v
   -> FRP.Event.Event (Deku.Attribute.Attribute (Index.Indexed (decoding :: a | r)))
 _decoding_ = _decoding <<< Applicative.pure
 
-class Iskind (v :: Type) (a :: Type) | v -> a where
-  iskind :: v -> Deku.Attribute.AttributeValue
+class IsKind (v :: Type) (a :: Type) | v -> a where
+  isKind :: v -> Deku.Attribute.AttributeValue
 
-instance Iskind String String where
-  iskind = Deku.Attribute.prop'
+instance IsKind String String where
+  isKind = Deku.Attribute.prop'
 
-instance Iskind (Index.Keyword "metadata") String where
-  iskind = Deku.Attribute.prop' <<< Data.Newtype.unwrap
+instance IsKind (Index.Keyword "metadata") String where
+  isKind = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
-instance Iskind (Index.Keyword "chapters") String where
-  iskind = Deku.Attribute.prop' <<< Data.Newtype.unwrap
+instance IsKind (Index.Keyword "chapters") String where
+  isKind = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
-instance Iskind (Index.Keyword "descriptions") String where
-  iskind = Deku.Attribute.prop' <<< Data.Newtype.unwrap
+instance IsKind (Index.Keyword "descriptions") String where
+  isKind = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
-instance Iskind (Index.Keyword "captions") String where
-  iskind = Deku.Attribute.prop' <<< Data.Newtype.unwrap
+instance IsKind (Index.Keyword "captions") String where
+  isKind = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
-instance Iskind (Index.Keyword "subtitles") String where
-  iskind = Deku.Attribute.prop' <<< Data.Newtype.unwrap
+instance IsKind (Index.Keyword "subtitles") String where
+  isKind = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
 _kind
   :: forall r v a
-   . Iskind v a
+   . IsKind v a
   => FRP.Event.Event v
   -> FRP.Event.Event (Deku.Attribute.Attribute (Index.Indexed (kind :: a | r)))
-_kind = Functor.map (Deku.Attribute.unsafeAttribute <<< { key: "kind", value: _ } <<< iskind)
+_kind = Functor.map (Deku.Attribute.unsafeAttribute <<< { key: "kind", value: _ } <<< isKind)
 
 _kind_
   :: forall r v a
-   . Iskind v a
+   . IsKind v a
   => v
   -> FRP.Event.Event (Deku.Attribute.Attribute (Index.Indexed (kind :: a | r)))
 _kind_ = _kind <<< Applicative.pure
 
-class Ispreload (v :: Type) (a :: Type) | v -> a where
-  ispreload :: v -> Deku.Attribute.AttributeValue
+class IsPreload (v :: Type) (a :: Type) | v -> a where
+  isPreload :: v -> Deku.Attribute.AttributeValue
 
-instance Ispreload String String where
-  ispreload = Deku.Attribute.prop'
+instance IsPreload String String where
+  isPreload = Deku.Attribute.prop'
 
-instance Ispreload (Index.Keyword "auto") String where
-  ispreload = Deku.Attribute.prop' <<< Data.Newtype.unwrap
+instance IsPreload (Index.Keyword "auto") String where
+  isPreload = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
-instance Ispreload (Index.Keyword "metadata") String where
-  ispreload = Deku.Attribute.prop' <<< Data.Newtype.unwrap
+instance IsPreload (Index.Keyword "metadata") String where
+  isPreload = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
-instance Ispreload (Index.Keyword "none") String where
-  ispreload = Deku.Attribute.prop' <<< Data.Newtype.unwrap
+instance IsPreload (Index.Keyword "none") String where
+  isPreload = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
 _preload
   :: forall r v a
-   . Ispreload v a
+   . IsPreload v a
   => FRP.Event.Event v
   -> FRP.Event.Event (Deku.Attribute.Attribute (Index.Indexed (preload :: a | r)))
 _preload = Functor.map
-  (Deku.Attribute.unsafeAttribute <<< { key: "preload", value: _ } <<< ispreload)
+  (Deku.Attribute.unsafeAttribute <<< { key: "preload", value: _ } <<< isPreload)
 
 _preload_
   :: forall r v a
-   . Ispreload v a
+   . IsPreload v a
   => v
   -> FRP.Event.Event (Deku.Attribute.Attribute (Index.Indexed (preload :: a | r)))
 _preload_ = _preload <<< Applicative.pure
 
-class Isshape (v :: Type) (a :: Type) | v -> a where
-  isshape :: v -> Deku.Attribute.AttributeValue
+class IsShape (v :: Type) (a :: Type) | v -> a where
+  isShape :: v -> Deku.Attribute.AttributeValue
 
-instance Isshape String String where
-  isshape = Deku.Attribute.prop'
+instance IsShape String String where
+  isShape = Deku.Attribute.prop'
 
-instance Isshape (Index.Keyword "rectangle state") String where
-  isshape = Deku.Attribute.prop' <<< Data.Newtype.unwrap
+instance IsShape (Index.Keyword "rectangle state") String where
+  isShape = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
-instance Isshape (Index.Keyword "polygon state") String where
-  isshape = Deku.Attribute.prop' <<< Data.Newtype.unwrap
+instance IsShape (Index.Keyword "polygon state") String where
+  isShape = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
-instance Isshape (Index.Keyword "default state") String where
-  isshape = Deku.Attribute.prop' <<< Data.Newtype.unwrap
+instance IsShape (Index.Keyword "default state") String where
+  isShape = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
-instance Isshape (Index.Keyword "circle state") String where
-  isshape = Deku.Attribute.prop' <<< Data.Newtype.unwrap
+instance IsShape (Index.Keyword "circle state") String where
+  isShape = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
 _shape
   :: forall r v a
-   . Isshape v a
+   . IsShape v a
   => FRP.Event.Event v
   -> FRP.Event.Event (Deku.Attribute.Attribute (Index.Indexed (shape :: a | r)))
-_shape = Functor.map (Deku.Attribute.unsafeAttribute <<< { key: "shape", value: _ } <<< isshape)
+_shape = Functor.map (Deku.Attribute.unsafeAttribute <<< { key: "shape", value: _ } <<< isShape)
 
 _shape_
   :: forall r v a
-   . Isshape v a
+   . IsShape v a
   => v
   -> FRP.Event.Event (Deku.Attribute.Attribute (Index.Indexed (shape :: a | r)))
 _shape_ = _shape <<< Applicative.pure
 
-class Isscope (v :: Type) (a :: Type) | v -> a where
-  isscope :: v -> Deku.Attribute.AttributeValue
+class IsScope (v :: Type) (a :: Type) | v -> a where
+  isScope :: v -> Deku.Attribute.AttributeValue
 
-instance Isscope String String where
-  isscope = Deku.Attribute.prop'
+instance IsScope String String where
+  isScope = Deku.Attribute.prop'
 
-instance Isscope (Index.Keyword "auto") String where
-  isscope = Deku.Attribute.prop' <<< Data.Newtype.unwrap
+instance IsScope (Index.Keyword "auto") String where
+  isScope = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
-instance Isscope (Index.Keyword "colgroup") String where
-  isscope = Deku.Attribute.prop' <<< Data.Newtype.unwrap
+instance IsScope (Index.Keyword "colgroup") String where
+  isScope = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
-instance Isscope (Index.Keyword "rowgroup") String where
-  isscope = Deku.Attribute.prop' <<< Data.Newtype.unwrap
+instance IsScope (Index.Keyword "rowgroup") String where
+  isScope = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
-instance Isscope (Index.Keyword "col") String where
-  isscope = Deku.Attribute.prop' <<< Data.Newtype.unwrap
+instance IsScope (Index.Keyword "col") String where
+  isScope = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
-instance Isscope (Index.Keyword "row") String where
-  isscope = Deku.Attribute.prop' <<< Data.Newtype.unwrap
+instance IsScope (Index.Keyword "row") String where
+  isScope = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
 _scope
   :: forall r v a
-   . Isscope v a
+   . IsScope v a
   => FRP.Event.Event v
   -> FRP.Event.Event (Deku.Attribute.Attribute (Index.Indexed (scope :: a | r)))
-_scope = Functor.map (Deku.Attribute.unsafeAttribute <<< { key: "scope", value: _ } <<< isscope)
+_scope = Functor.map (Deku.Attribute.unsafeAttribute <<< { key: "scope", value: _ } <<< isScope)
 
 _scope_
   :: forall r v a
-   . Isscope v a
+   . IsScope v a
   => v
   -> FRP.Event.Event (Deku.Attribute.Attribute (Index.Indexed (scope :: a | r)))
 _scope_ = _scope <<< Applicative.pure
 
-class Iswrap (v :: Type) (a :: Type) | v -> a where
-  iswrap :: v -> Deku.Attribute.AttributeValue
+class IsWrap (v :: Type) (a :: Type) | v -> a where
+  isWrap :: v -> Deku.Attribute.AttributeValue
 
-instance Iswrap String String where
-  iswrap = Deku.Attribute.prop'
+instance IsWrap String String where
+  isWrap = Deku.Attribute.prop'
 
-instance Iswrap (Index.Keyword "hard") String where
-  iswrap = Deku.Attribute.prop' <<< Data.Newtype.unwrap
+instance IsWrap (Index.Keyword "hard") String where
+  isWrap = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
-instance Iswrap (Index.Keyword "soft") String where
-  iswrap = Deku.Attribute.prop' <<< Data.Newtype.unwrap
+instance IsWrap (Index.Keyword "soft") String where
+  isWrap = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
 _wrap
   :: forall r v a
-   . Iswrap v a
+   . IsWrap v a
   => FRP.Event.Event v
   -> FRP.Event.Event (Deku.Attribute.Attribute (Index.Indexed (wrap :: a | r)))
-_wrap = Functor.map (Deku.Attribute.unsafeAttribute <<< { key: "wrap", value: _ } <<< iswrap)
+_wrap = Functor.map (Deku.Attribute.unsafeAttribute <<< { key: "wrap", value: _ } <<< isWrap)
 
 _wrap_
   :: forall r v a
-   . Iswrap v a
+   . IsWrap v a
   => v
   -> FRP.Event.Event (Deku.Attribute.Attribute (Index.Indexed (wrap :: a | r)))
 _wrap_ = _wrap <<< Applicative.pure
 
-class Ismethod (v :: Type) (a :: Type) | v -> a where
-  ismethod :: v -> Deku.Attribute.AttributeValue
+class IsMethod (v :: Type) (a :: Type) | v -> a where
+  isMethod :: v -> Deku.Attribute.AttributeValue
 
-instance Ismethod String String where
-  ismethod = Deku.Attribute.prop'
+instance IsMethod String String where
+  isMethod = Deku.Attribute.prop'
 
-instance Ismethod (Index.Keyword "dialog") String where
-  ismethod = Deku.Attribute.prop' <<< Data.Newtype.unwrap
+instance IsMethod (Index.Keyword "dialog") String where
+  isMethod = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
-instance Ismethod (Index.Keyword "post") String where
-  ismethod = Deku.Attribute.prop' <<< Data.Newtype.unwrap
+instance IsMethod (Index.Keyword "post") String where
+  isMethod = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
-instance Ismethod (Index.Keyword "get") String where
-  ismethod = Deku.Attribute.prop' <<< Data.Newtype.unwrap
+instance IsMethod (Index.Keyword "get") String where
+  isMethod = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
 _method
   :: forall r v a
-   . Ismethod v a
+   . IsMethod v a
   => FRP.Event.Event v
   -> FRP.Event.Event (Deku.Attribute.Attribute (Index.Indexed (method :: a | r)))
-_method = Functor.map (Deku.Attribute.unsafeAttribute <<< { key: "method", value: _ } <<< ismethod)
+_method = Functor.map (Deku.Attribute.unsafeAttribute <<< { key: "method", value: _ } <<< isMethod)
 
 _method_
   :: forall r v a
-   . Ismethod v a
+   . IsMethod v a
   => v
   -> FRP.Event.Event (Deku.Attribute.Attribute (Index.Indexed (method :: a | r)))
 _method_ = _method <<< Applicative.pure
 
-class Isenctype (v :: Type) (a :: Type) | v -> a where
-  isenctype :: v -> Deku.Attribute.AttributeValue
+class IsEnctype (v :: Type) (a :: Type) | v -> a where
+  isEnctype :: v -> Deku.Attribute.AttributeValue
 
-instance Isenctype String String where
-  isenctype = Deku.Attribute.prop'
+instance IsEnctype String String where
+  isEnctype = Deku.Attribute.prop'
 
-instance Isenctype (Index.Keyword "text/plain") String where
-  isenctype = Deku.Attribute.prop' <<< Data.Newtype.unwrap
+instance IsEnctype (Index.Keyword "text/plain") String where
+  isEnctype = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
-instance Isenctype (Index.Keyword "multipart/form-data") String where
-  isenctype = Deku.Attribute.prop' <<< Data.Newtype.unwrap
+instance IsEnctype (Index.Keyword "multipart/form-data") String where
+  isEnctype = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
-instance Isenctype (Index.Keyword "application/x-www-form-urlencoded") String where
-  isenctype = Deku.Attribute.prop' <<< Data.Newtype.unwrap
+instance IsEnctype (Index.Keyword "application/x-www-form-urlencoded") String where
+  isEnctype = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
 _enctype
   :: forall r v a
-   . Isenctype v a
+   . IsEnctype v a
   => FRP.Event.Event v
   -> FRP.Event.Event (Deku.Attribute.Attribute (Index.Indexed (enctype :: a | r)))
 _enctype = Functor.map
-  (Deku.Attribute.unsafeAttribute <<< { key: "enctype", value: _ } <<< isenctype)
+  (Deku.Attribute.unsafeAttribute <<< { key: "enctype", value: _ } <<< isEnctype)
 
 _enctype_
   :: forall r v a
-   . Isenctype v a
+   . IsEnctype v a
   => v
   -> FRP.Event.Event (Deku.Attribute.Attribute (Index.Indexed (enctype :: a | r)))
 _enctype_ = _enctype <<< Applicative.pure
 
-class Isautocomplete (v :: Type) (a :: Type) | v -> a where
-  isautocomplete :: v -> Deku.Attribute.AttributeValue
+class IsAutocomplete (v :: Type) (a :: Type) | v -> a where
+  isAutocomplete :: v -> Deku.Attribute.AttributeValue
 
-instance Isautocomplete String String where
-  isautocomplete = Deku.Attribute.prop'
+instance IsAutocomplete String String where
+  isAutocomplete = Deku.Attribute.prop'
 
-instance Isautocomplete (Index.Keyword "impp") String where
-  isautocomplete = Deku.Attribute.prop' <<< Data.Newtype.unwrap
+instance IsAutocomplete (Index.Keyword "impp") String where
+  isAutocomplete = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
-instance Isautocomplete (Index.Keyword "email") String where
-  isautocomplete = Deku.Attribute.prop' <<< Data.Newtype.unwrap
+instance IsAutocomplete (Index.Keyword "email") String where
+  isAutocomplete = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
-instance Isautocomplete (Index.Keyword "tel-extension") String where
-  isautocomplete = Deku.Attribute.prop' <<< Data.Newtype.unwrap
+instance IsAutocomplete (Index.Keyword "tel-extension") String where
+  isAutocomplete = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
-instance Isautocomplete (Index.Keyword "tel-local-suffix") String where
-  isautocomplete = Deku.Attribute.prop' <<< Data.Newtype.unwrap
+instance IsAutocomplete (Index.Keyword "tel-local-suffix") String where
+  isAutocomplete = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
-instance Isautocomplete (Index.Keyword "tel-local-prefix") String where
-  isautocomplete = Deku.Attribute.prop' <<< Data.Newtype.unwrap
+instance IsAutocomplete (Index.Keyword "tel-local-prefix") String where
+  isAutocomplete = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
-instance Isautocomplete (Index.Keyword "tel-local") String where
-  isautocomplete = Deku.Attribute.prop' <<< Data.Newtype.unwrap
+instance IsAutocomplete (Index.Keyword "tel-local") String where
+  isAutocomplete = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
-instance Isautocomplete (Index.Keyword "tel-area-code") String where
-  isautocomplete = Deku.Attribute.prop' <<< Data.Newtype.unwrap
+instance IsAutocomplete (Index.Keyword "tel-area-code") String where
+  isAutocomplete = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
-instance Isautocomplete (Index.Keyword "tel-national") String where
-  isautocomplete = Deku.Attribute.prop' <<< Data.Newtype.unwrap
+instance IsAutocomplete (Index.Keyword "tel-national") String where
+  isAutocomplete = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
-instance Isautocomplete (Index.Keyword "tel-country-code") String where
-  isautocomplete = Deku.Attribute.prop' <<< Data.Newtype.unwrap
+instance IsAutocomplete (Index.Keyword "tel-country-code") String where
+  isAutocomplete = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
-instance Isautocomplete (Index.Keyword "tel") String where
-  isautocomplete = Deku.Attribute.prop' <<< Data.Newtype.unwrap
+instance IsAutocomplete (Index.Keyword "tel") String where
+  isAutocomplete = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
-instance Isautocomplete (Index.Keyword "photo") String where
-  isautocomplete = Deku.Attribute.prop' <<< Data.Newtype.unwrap
+instance IsAutocomplete (Index.Keyword "photo") String where
+  isAutocomplete = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
-instance Isautocomplete (Index.Keyword "url") String where
-  isautocomplete = Deku.Attribute.prop' <<< Data.Newtype.unwrap
+instance IsAutocomplete (Index.Keyword "url") String where
+  isAutocomplete = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
-instance Isautocomplete (Index.Keyword "sex") String where
-  isautocomplete = Deku.Attribute.prop' <<< Data.Newtype.unwrap
+instance IsAutocomplete (Index.Keyword "sex") String where
+  isAutocomplete = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
-instance Isautocomplete (Index.Keyword "bday-year") String where
-  isautocomplete = Deku.Attribute.prop' <<< Data.Newtype.unwrap
+instance IsAutocomplete (Index.Keyword "bday-year") String where
+  isAutocomplete = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
-instance Isautocomplete (Index.Keyword "bday-month") String where
-  isautocomplete = Deku.Attribute.prop' <<< Data.Newtype.unwrap
+instance IsAutocomplete (Index.Keyword "bday-month") String where
+  isAutocomplete = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
-instance Isautocomplete (Index.Keyword "bday-day") String where
-  isautocomplete = Deku.Attribute.prop' <<< Data.Newtype.unwrap
+instance IsAutocomplete (Index.Keyword "bday-day") String where
+  isAutocomplete = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
-instance Isautocomplete (Index.Keyword "bday") String where
-  isautocomplete = Deku.Attribute.prop' <<< Data.Newtype.unwrap
+instance IsAutocomplete (Index.Keyword "bday") String where
+  isAutocomplete = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
-instance Isautocomplete (Index.Keyword "language") String where
-  isautocomplete = Deku.Attribute.prop' <<< Data.Newtype.unwrap
+instance IsAutocomplete (Index.Keyword "language") String where
+  isAutocomplete = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
-instance Isautocomplete (Index.Keyword "transaction-amount") String where
-  isautocomplete = Deku.Attribute.prop' <<< Data.Newtype.unwrap
+instance IsAutocomplete (Index.Keyword "transaction-amount") String where
+  isAutocomplete = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
-instance Isautocomplete (Index.Keyword "transaction-currency") String where
-  isautocomplete = Deku.Attribute.prop' <<< Data.Newtype.unwrap
+instance IsAutocomplete (Index.Keyword "transaction-currency") String where
+  isAutocomplete = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
-instance Isautocomplete (Index.Keyword "cc-type") String where
-  isautocomplete = Deku.Attribute.prop' <<< Data.Newtype.unwrap
+instance IsAutocomplete (Index.Keyword "cc-type") String where
+  isAutocomplete = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
-instance Isautocomplete (Index.Keyword "cc-csc") String where
-  isautocomplete = Deku.Attribute.prop' <<< Data.Newtype.unwrap
+instance IsAutocomplete (Index.Keyword "cc-csc") String where
+  isAutocomplete = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
-instance Isautocomplete (Index.Keyword "cc-exp-year") String where
-  isautocomplete = Deku.Attribute.prop' <<< Data.Newtype.unwrap
+instance IsAutocomplete (Index.Keyword "cc-exp-year") String where
+  isAutocomplete = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
-instance Isautocomplete (Index.Keyword "cc-exp-month") String where
-  isautocomplete = Deku.Attribute.prop' <<< Data.Newtype.unwrap
+instance IsAutocomplete (Index.Keyword "cc-exp-month") String where
+  isAutocomplete = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
-instance Isautocomplete (Index.Keyword "cc-exp") String where
-  isautocomplete = Deku.Attribute.prop' <<< Data.Newtype.unwrap
+instance IsAutocomplete (Index.Keyword "cc-exp") String where
+  isAutocomplete = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
-instance Isautocomplete (Index.Keyword "cc-number") String where
-  isautocomplete = Deku.Attribute.prop' <<< Data.Newtype.unwrap
+instance IsAutocomplete (Index.Keyword "cc-number") String where
+  isAutocomplete = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
-instance Isautocomplete (Index.Keyword "cc-family-name") String where
-  isautocomplete = Deku.Attribute.prop' <<< Data.Newtype.unwrap
+instance IsAutocomplete (Index.Keyword "cc-family-name") String where
+  isAutocomplete = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
-instance Isautocomplete (Index.Keyword "cc-additional-name") String where
-  isautocomplete = Deku.Attribute.prop' <<< Data.Newtype.unwrap
+instance IsAutocomplete (Index.Keyword "cc-additional-name") String where
+  isAutocomplete = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
-instance Isautocomplete (Index.Keyword "cc-given-name") String where
-  isautocomplete = Deku.Attribute.prop' <<< Data.Newtype.unwrap
+instance IsAutocomplete (Index.Keyword "cc-given-name") String where
+  isAutocomplete = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
-instance Isautocomplete (Index.Keyword "cc-name") String where
-  isautocomplete = Deku.Attribute.prop' <<< Data.Newtype.unwrap
+instance IsAutocomplete (Index.Keyword "cc-name") String where
+  isAutocomplete = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
-instance Isautocomplete (Index.Keyword "postal-code") String where
-  isautocomplete = Deku.Attribute.prop' <<< Data.Newtype.unwrap
+instance IsAutocomplete (Index.Keyword "postal-code") String where
+  isAutocomplete = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
-instance Isautocomplete (Index.Keyword "country-name") String where
-  isautocomplete = Deku.Attribute.prop' <<< Data.Newtype.unwrap
+instance IsAutocomplete (Index.Keyword "country-name") String where
+  isAutocomplete = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
-instance Isautocomplete (Index.Keyword "country") String where
-  isautocomplete = Deku.Attribute.prop' <<< Data.Newtype.unwrap
+instance IsAutocomplete (Index.Keyword "country") String where
+  isAutocomplete = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
-instance Isautocomplete (Index.Keyword "address-level1") String where
-  isautocomplete = Deku.Attribute.prop' <<< Data.Newtype.unwrap
+instance IsAutocomplete (Index.Keyword "address-level1") String where
+  isAutocomplete = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
-instance Isautocomplete (Index.Keyword "address-level2") String where
-  isautocomplete = Deku.Attribute.prop' <<< Data.Newtype.unwrap
+instance IsAutocomplete (Index.Keyword "address-level2") String where
+  isAutocomplete = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
-instance Isautocomplete (Index.Keyword "address-level3") String where
-  isautocomplete = Deku.Attribute.prop' <<< Data.Newtype.unwrap
+instance IsAutocomplete (Index.Keyword "address-level3") String where
+  isAutocomplete = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
-instance Isautocomplete (Index.Keyword "address-level4") String where
-  isautocomplete = Deku.Attribute.prop' <<< Data.Newtype.unwrap
+instance IsAutocomplete (Index.Keyword "address-level4") String where
+  isAutocomplete = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
-instance Isautocomplete (Index.Keyword "address-line3") String where
-  isautocomplete = Deku.Attribute.prop' <<< Data.Newtype.unwrap
+instance IsAutocomplete (Index.Keyword "address-line3") String where
+  isAutocomplete = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
-instance Isautocomplete (Index.Keyword "address-line2") String where
-  isautocomplete = Deku.Attribute.prop' <<< Data.Newtype.unwrap
+instance IsAutocomplete (Index.Keyword "address-line2") String where
+  isAutocomplete = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
-instance Isautocomplete (Index.Keyword "address-line1") String where
-  isautocomplete = Deku.Attribute.prop' <<< Data.Newtype.unwrap
+instance IsAutocomplete (Index.Keyword "address-line1") String where
+  isAutocomplete = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
-instance Isautocomplete (Index.Keyword "street-address") String where
-  isautocomplete = Deku.Attribute.prop' <<< Data.Newtype.unwrap
+instance IsAutocomplete (Index.Keyword "street-address") String where
+  isAutocomplete = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
-instance Isautocomplete (Index.Keyword "organization") String where
-  isautocomplete = Deku.Attribute.prop' <<< Data.Newtype.unwrap
+instance IsAutocomplete (Index.Keyword "organization") String where
+  isAutocomplete = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
-instance Isautocomplete (Index.Keyword "one-time-code") String where
-  isautocomplete = Deku.Attribute.prop' <<< Data.Newtype.unwrap
+instance IsAutocomplete (Index.Keyword "one-time-code") String where
+  isAutocomplete = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
-instance Isautocomplete (Index.Keyword "current-password") String where
-  isautocomplete = Deku.Attribute.prop' <<< Data.Newtype.unwrap
+instance IsAutocomplete (Index.Keyword "current-password") String where
+  isAutocomplete = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
-instance Isautocomplete (Index.Keyword "new-password") String where
-  isautocomplete = Deku.Attribute.prop' <<< Data.Newtype.unwrap
+instance IsAutocomplete (Index.Keyword "new-password") String where
+  isAutocomplete = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
-instance Isautocomplete (Index.Keyword "username") String where
-  isautocomplete = Deku.Attribute.prop' <<< Data.Newtype.unwrap
+instance IsAutocomplete (Index.Keyword "username") String where
+  isAutocomplete = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
-instance Isautocomplete (Index.Keyword "organization-title") String where
-  isautocomplete = Deku.Attribute.prop' <<< Data.Newtype.unwrap
+instance IsAutocomplete (Index.Keyword "organization-title") String where
+  isAutocomplete = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
-instance Isautocomplete (Index.Keyword "nickname") String where
-  isautocomplete = Deku.Attribute.prop' <<< Data.Newtype.unwrap
+instance IsAutocomplete (Index.Keyword "nickname") String where
+  isAutocomplete = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
-instance Isautocomplete (Index.Keyword "honorific-suffix") String where
-  isautocomplete = Deku.Attribute.prop' <<< Data.Newtype.unwrap
+instance IsAutocomplete (Index.Keyword "honorific-suffix") String where
+  isAutocomplete = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
-instance Isautocomplete (Index.Keyword "family-name") String where
-  isautocomplete = Deku.Attribute.prop' <<< Data.Newtype.unwrap
+instance IsAutocomplete (Index.Keyword "family-name") String where
+  isAutocomplete = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
-instance Isautocomplete (Index.Keyword "additional-name") String where
-  isautocomplete = Deku.Attribute.prop' <<< Data.Newtype.unwrap
+instance IsAutocomplete (Index.Keyword "additional-name") String where
+  isAutocomplete = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
-instance Isautocomplete (Index.Keyword "given-name") String where
-  isautocomplete = Deku.Attribute.prop' <<< Data.Newtype.unwrap
+instance IsAutocomplete (Index.Keyword "given-name") String where
+  isAutocomplete = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
-instance Isautocomplete (Index.Keyword "honorific-prefix") String where
-  isautocomplete = Deku.Attribute.prop' <<< Data.Newtype.unwrap
+instance IsAutocomplete (Index.Keyword "honorific-prefix") String where
+  isAutocomplete = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
-instance Isautocomplete (Index.Keyword "name") String where
-  isautocomplete = Deku.Attribute.prop' <<< Data.Newtype.unwrap
+instance IsAutocomplete (Index.Keyword "name") String where
+  isAutocomplete = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
-instance Isautocomplete (Index.Keyword "on") String where
-  isautocomplete = Deku.Attribute.prop' <<< Data.Newtype.unwrap
+instance IsAutocomplete (Index.Keyword "on") String where
+  isAutocomplete = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
-instance Isautocomplete (Index.Keyword "off") String where
-  isautocomplete = Deku.Attribute.prop' <<< Data.Newtype.unwrap
+instance IsAutocomplete (Index.Keyword "off") String where
+  isAutocomplete = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
-instance Isautocomplete (Index.Keyword "pager") String where
-  isautocomplete = Deku.Attribute.prop' <<< Data.Newtype.unwrap
+instance IsAutocomplete (Index.Keyword "pager") String where
+  isAutocomplete = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
-instance Isautocomplete (Index.Keyword "fax") String where
-  isautocomplete = Deku.Attribute.prop' <<< Data.Newtype.unwrap
+instance IsAutocomplete (Index.Keyword "fax") String where
+  isAutocomplete = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
-instance Isautocomplete (Index.Keyword "mobile") String where
-  isautocomplete = Deku.Attribute.prop' <<< Data.Newtype.unwrap
+instance IsAutocomplete (Index.Keyword "mobile") String where
+  isAutocomplete = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
-instance Isautocomplete (Index.Keyword "work") String where
-  isautocomplete = Deku.Attribute.prop' <<< Data.Newtype.unwrap
+instance IsAutocomplete (Index.Keyword "work") String where
+  isAutocomplete = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
-instance Isautocomplete (Index.Keyword "home") String where
-  isautocomplete = Deku.Attribute.prop' <<< Data.Newtype.unwrap
+instance IsAutocomplete (Index.Keyword "home") String where
+  isAutocomplete = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
-instance Isautocomplete (Index.Keyword "billing") String where
-  isautocomplete = Deku.Attribute.prop' <<< Data.Newtype.unwrap
+instance IsAutocomplete (Index.Keyword "billing") String where
+  isAutocomplete = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
-instance Isautocomplete (Index.Keyword "shipping") String where
-  isautocomplete = Deku.Attribute.prop' <<< Data.Newtype.unwrap
+instance IsAutocomplete (Index.Keyword "shipping") String where
+  isAutocomplete = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
 _autocomplete
   :: forall r v a
-   . Isautocomplete v a
+   . IsAutocomplete v a
   => FRP.Event.Event v
   -> FRP.Event.Event (Deku.Attribute.Attribute (Index.Indexed (autocomplete :: a | r)))
 _autocomplete = Functor.map
-  (Deku.Attribute.unsafeAttribute <<< { key: "autocomplete", value: _ } <<< isautocomplete)
+  (Deku.Attribute.unsafeAttribute <<< { key: "autocomplete", value: _ } <<< isAutocomplete)
 
 _autocomplete_
   :: forall r v a
-   . Isautocomplete v a
+   . IsAutocomplete v a
   => v
   -> FRP.Event.Event (Deku.Attribute.Attribute (Index.Indexed (autocomplete :: a | r)))
 _autocomplete_ = _autocomplete <<< Applicative.pure
 
-class Isentry (v :: Type) (a :: Type) | v -> a where
-  isentry :: v -> Deku.Attribute.AttributeValue
+class IsEntry (v :: Type) (a :: Type) | v -> a where
+  isEntry :: v -> Deku.Attribute.AttributeValue
 
-instance Isentry (Index.Keyword "value") String where
-  isentry = Deku.Attribute.prop' <<< Data.Newtype.unwrap
+instance IsEntry (Index.Keyword "value") String where
+  isEntry = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
-instance Isentry (Index.Keyword "name") String where
-  isentry = Deku.Attribute.prop' <<< Data.Newtype.unwrap
+instance IsEntry (Index.Keyword "name") String where
+  isEntry = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
 _entry
   :: forall r v a
-   . Isentry v a
+   . IsEntry v a
   => FRP.Event.Event v
   -> FRP.Event.Event (Deku.Attribute.Attribute (Index.Indexed (entry :: a | r)))
-_entry = Functor.map (Deku.Attribute.unsafeAttribute <<< { key: "entry", value: _ } <<< isentry)
+_entry = Functor.map (Deku.Attribute.unsafeAttribute <<< { key: "entry", value: _ } <<< isEntry)
 
 _entry_
   :: forall r v a
-   . Isentry v a
+   . IsEntry v a
   => v
   -> FRP.Event.Event (Deku.Attribute.Attribute (Index.Indexed (entry :: a | r)))
 _entry_ = _entry <<< Applicative.pure
 
-class Ishidden (v :: Type) (a :: Type) | v -> a where
-  ishidden :: v -> Deku.Attribute.AttributeValue
+class IsHidden (v :: Type) (a :: Type) | v -> a where
+  isHidden :: v -> Deku.Attribute.AttributeValue
 
-instance Ishidden String String where
-  ishidden = Deku.Attribute.prop'
+instance IsHidden String String where
+  isHidden = Deku.Attribute.prop'
 
-instance Ishidden (Index.Keyword "hidden") String where
-  ishidden = Deku.Attribute.prop' <<< Data.Newtype.unwrap
+instance IsHidden (Index.Keyword "hidden") String where
+  isHidden = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
-instance Ishidden (Index.Keyword "until-found") String where
-  ishidden = Deku.Attribute.prop' <<< Data.Newtype.unwrap
+instance IsHidden (Index.Keyword "until-found") String where
+  isHidden = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
 _hidden
   :: forall r v a
-   . Ishidden v a
+   . IsHidden v a
   => FRP.Event.Event v
   -> FRP.Event.Event (Deku.Attribute.Attribute (Index.Indexed (hidden :: a | r)))
-_hidden = Functor.map (Deku.Attribute.unsafeAttribute <<< { key: "hidden", value: _ } <<< ishidden)
+_hidden = Functor.map (Deku.Attribute.unsafeAttribute <<< { key: "hidden", value: _ } <<< isHidden)
 
 _hidden_
   :: forall r v a
-   . Ishidden v a
+   . IsHidden v a
   => v
   -> FRP.Event.Event (Deku.Attribute.Attribute (Index.Indexed (hidden :: a | r)))
 _hidden_ = _hidden <<< Applicative.pure
 
-class Isautocapitalize (v :: Type) (a :: Type) | v -> a where
-  isautocapitalize :: v -> Deku.Attribute.AttributeValue
+class IsAutocapitalize (v :: Type) (a :: Type) | v -> a where
+  isAutocapitalize :: v -> Deku.Attribute.AttributeValue
 
-instance Isautocapitalize String String where
-  isautocapitalize = Deku.Attribute.prop'
+instance IsAutocapitalize String String where
+  isAutocapitalize = Deku.Attribute.prop'
 
-instance Isautocapitalize (Index.Keyword "characters") String where
-  isautocapitalize = Deku.Attribute.prop' <<< Data.Newtype.unwrap
+instance IsAutocapitalize (Index.Keyword "characters") String where
+  isAutocapitalize = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
-instance Isautocapitalize (Index.Keyword "words") String where
-  isautocapitalize = Deku.Attribute.prop' <<< Data.Newtype.unwrap
+instance IsAutocapitalize (Index.Keyword "words") String where
+  isAutocapitalize = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
-instance Isautocapitalize (Index.Keyword "sentences") String where
-  isautocapitalize = Deku.Attribute.prop' <<< Data.Newtype.unwrap
+instance IsAutocapitalize (Index.Keyword "sentences") String where
+  isAutocapitalize = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
-instance Isautocapitalize (Index.Keyword "on") String where
-  isautocapitalize = Deku.Attribute.prop' <<< Data.Newtype.unwrap
+instance IsAutocapitalize (Index.Keyword "on") String where
+  isAutocapitalize = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
-instance Isautocapitalize (Index.Keyword "none") String where
-  isautocapitalize = Deku.Attribute.prop' <<< Data.Newtype.unwrap
+instance IsAutocapitalize (Index.Keyword "none") String where
+  isAutocapitalize = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
-instance Isautocapitalize (Index.Keyword "off") String where
-  isautocapitalize = Deku.Attribute.prop' <<< Data.Newtype.unwrap
+instance IsAutocapitalize (Index.Keyword "off") String where
+  isAutocapitalize = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
 _autocapitalize
   :: forall r v a
-   . Isautocapitalize v a
+   . IsAutocapitalize v a
   => FRP.Event.Event v
   -> FRP.Event.Event (Deku.Attribute.Attribute (Index.Indexed (autocapitalize :: a | r)))
 _autocapitalize = Functor.map
-  (Deku.Attribute.unsafeAttribute <<< { key: "autocapitalize", value: _ } <<< isautocapitalize)
+  (Deku.Attribute.unsafeAttribute <<< { key: "autocapitalize", value: _ } <<< isAutocapitalize)
 
 _autocapitalize_
   :: forall r v a
-   . Isautocapitalize v a
+   . IsAutocapitalize v a
   => v
   -> FRP.Event.Event (Deku.Attribute.Attribute (Index.Indexed (autocapitalize :: a | r)))
 _autocapitalize_ = _autocapitalize <<< Applicative.pure
 
-class Isinputmode (v :: Type) (a :: Type) | v -> a where
-  isinputmode :: v -> Deku.Attribute.AttributeValue
+class IsInputmode (v :: Type) (a :: Type) | v -> a where
+  isInputmode :: v -> Deku.Attribute.AttributeValue
 
-instance Isinputmode String String where
-  isinputmode = Deku.Attribute.prop'
+instance IsInputmode String String where
+  isInputmode = Deku.Attribute.prop'
 
-instance Isinputmode (Index.Keyword "search") String where
-  isinputmode = Deku.Attribute.prop' <<< Data.Newtype.unwrap
+instance IsInputmode (Index.Keyword "search") String where
+  isInputmode = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
-instance Isinputmode (Index.Keyword "decimal") String where
-  isinputmode = Deku.Attribute.prop' <<< Data.Newtype.unwrap
+instance IsInputmode (Index.Keyword "decimal") String where
+  isInputmode = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
-instance Isinputmode (Index.Keyword "numeric") String where
-  isinputmode = Deku.Attribute.prop' <<< Data.Newtype.unwrap
+instance IsInputmode (Index.Keyword "numeric") String where
+  isInputmode = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
-instance Isinputmode (Index.Keyword "email") String where
-  isinputmode = Deku.Attribute.prop' <<< Data.Newtype.unwrap
+instance IsInputmode (Index.Keyword "email") String where
+  isInputmode = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
-instance Isinputmode (Index.Keyword "url") String where
-  isinputmode = Deku.Attribute.prop' <<< Data.Newtype.unwrap
+instance IsInputmode (Index.Keyword "url") String where
+  isInputmode = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
-instance Isinputmode (Index.Keyword "tel") String where
-  isinputmode = Deku.Attribute.prop' <<< Data.Newtype.unwrap
+instance IsInputmode (Index.Keyword "tel") String where
+  isInputmode = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
-instance Isinputmode (Index.Keyword "text") String where
-  isinputmode = Deku.Attribute.prop' <<< Data.Newtype.unwrap
+instance IsInputmode (Index.Keyword "text") String where
+  isInputmode = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
-instance Isinputmode (Index.Keyword "none") String where
-  isinputmode = Deku.Attribute.prop' <<< Data.Newtype.unwrap
+instance IsInputmode (Index.Keyword "none") String where
+  isInputmode = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
 _inputmode
   :: forall r v a
-   . Isinputmode v a
+   . IsInputmode v a
   => FRP.Event.Event v
   -> FRP.Event.Event (Deku.Attribute.Attribute (Index.Indexed (inputmode :: a | r)))
 _inputmode = Functor.map
-  (Deku.Attribute.unsafeAttribute <<< { key: "inputmode", value: _ } <<< isinputmode)
+  (Deku.Attribute.unsafeAttribute <<< { key: "inputmode", value: _ } <<< isInputmode)
 
 _inputmode_
   :: forall r v a
-   . Isinputmode v a
+   . IsInputmode v a
   => v
   -> FRP.Event.Event (Deku.Attribute.Attribute (Index.Indexed (inputmode :: a | r)))
 _inputmode_ = _inputmode <<< Applicative.pure
 
-class Isenterkeyhint (v :: Type) (a :: Type) | v -> a where
-  isenterkeyhint :: v -> Deku.Attribute.AttributeValue
+class IsEnterkeyhint (v :: Type) (a :: Type) | v -> a where
+  isEnterkeyhint :: v -> Deku.Attribute.AttributeValue
 
-instance Isenterkeyhint String String where
-  isenterkeyhint = Deku.Attribute.prop'
+instance IsEnterkeyhint String String where
+  isEnterkeyhint = Deku.Attribute.prop'
 
-instance Isenterkeyhint (Index.Keyword "send") String where
-  isenterkeyhint = Deku.Attribute.prop' <<< Data.Newtype.unwrap
+instance IsEnterkeyhint (Index.Keyword "send") String where
+  isEnterkeyhint = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
-instance Isenterkeyhint (Index.Keyword "search") String where
-  isenterkeyhint = Deku.Attribute.prop' <<< Data.Newtype.unwrap
+instance IsEnterkeyhint (Index.Keyword "search") String where
+  isEnterkeyhint = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
-instance Isenterkeyhint (Index.Keyword "previous") String where
-  isenterkeyhint = Deku.Attribute.prop' <<< Data.Newtype.unwrap
+instance IsEnterkeyhint (Index.Keyword "previous") String where
+  isEnterkeyhint = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
-instance Isenterkeyhint (Index.Keyword "next") String where
-  isenterkeyhint = Deku.Attribute.prop' <<< Data.Newtype.unwrap
+instance IsEnterkeyhint (Index.Keyword "next") String where
+  isEnterkeyhint = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
-instance Isenterkeyhint (Index.Keyword "go") String where
-  isenterkeyhint = Deku.Attribute.prop' <<< Data.Newtype.unwrap
+instance IsEnterkeyhint (Index.Keyword "go") String where
+  isEnterkeyhint = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
-instance Isenterkeyhint (Index.Keyword "done") String where
-  isenterkeyhint = Deku.Attribute.prop' <<< Data.Newtype.unwrap
+instance IsEnterkeyhint (Index.Keyword "done") String where
+  isEnterkeyhint = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
-instance Isenterkeyhint (Index.Keyword "enter") String where
-  isenterkeyhint = Deku.Attribute.prop' <<< Data.Newtype.unwrap
+instance IsEnterkeyhint (Index.Keyword "enter") String where
+  isEnterkeyhint = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
 _enterkeyhint
   :: forall r v a
-   . Isenterkeyhint v a
+   . IsEnterkeyhint v a
   => FRP.Event.Event v
   -> FRP.Event.Event (Deku.Attribute.Attribute (Index.Indexed (enterkeyhint :: a | r)))
 _enterkeyhint = Functor.map
-  (Deku.Attribute.unsafeAttribute <<< { key: "enterkeyhint", value: _ } <<< isenterkeyhint)
+  (Deku.Attribute.unsafeAttribute <<< { key: "enterkeyhint", value: _ } <<< isEnterkeyhint)
 
 _enterkeyhint_
   :: forall r v a
-   . Isenterkeyhint v a
+   . IsEnterkeyhint v a
   => v
   -> FRP.Event.Event (Deku.Attribute.Attribute (Index.Indexed (enterkeyhint :: a | r)))
 _enterkeyhint_ = _enterkeyhint <<< Applicative.pure
 
-class Ispopover (v :: Type) (a :: Type) | v -> a where
-  ispopover :: v -> Deku.Attribute.AttributeValue
+class IsPopover (v :: Type) (a :: Type) | v -> a where
+  isPopover :: v -> Deku.Attribute.AttributeValue
 
-instance Ispopover String String where
-  ispopover = Deku.Attribute.prop'
+instance IsPopover String String where
+  isPopover = Deku.Attribute.prop'
 
-instance Ispopover (Index.Keyword "manual") String where
-  ispopover = Deku.Attribute.prop' <<< Data.Newtype.unwrap
+instance IsPopover (Index.Keyword "manual") String where
+  isPopover = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
-instance Ispopover (Index.Keyword "auto") String where
-  ispopover = Deku.Attribute.prop' <<< Data.Newtype.unwrap
+instance IsPopover (Index.Keyword "auto") String where
+  isPopover = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
 _popover
   :: forall r v a
-   . Ispopover v a
+   . IsPopover v a
   => FRP.Event.Event v
   -> FRP.Event.Event (Deku.Attribute.Attribute (Index.Indexed (popover :: a | r)))
 _popover = Functor.map
-  (Deku.Attribute.unsafeAttribute <<< { key: "popover", value: _ } <<< ispopover)
+  (Deku.Attribute.unsafeAttribute <<< { key: "popover", value: _ } <<< isPopover)
 
 _popover_
   :: forall r v a
-   . Ispopover v a
+   . IsPopover v a
   => v
   -> FRP.Event.Event (Deku.Attribute.Attribute (Index.Indexed (popover :: a | r)))
 _popover_ = _popover <<< Applicative.pure
 
-class Ispopovertargetaction (v :: Type) (a :: Type) | v -> a where
-  ispopovertargetaction :: v -> Deku.Attribute.AttributeValue
+class IsPopovertargetaction (v :: Type) (a :: Type) | v -> a where
+  isPopovertargetaction :: v -> Deku.Attribute.AttributeValue
 
-instance Ispopovertargetaction String String where
-  ispopovertargetaction = Deku.Attribute.prop'
+instance IsPopovertargetaction String String where
+  isPopovertargetaction = Deku.Attribute.prop'
 
-instance Ispopovertargetaction (Index.Keyword "hide") String where
-  ispopovertargetaction = Deku.Attribute.prop' <<< Data.Newtype.unwrap
+instance IsPopovertargetaction (Index.Keyword "hide") String where
+  isPopovertargetaction = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
-instance Ispopovertargetaction (Index.Keyword "show") String where
-  ispopovertargetaction = Deku.Attribute.prop' <<< Data.Newtype.unwrap
+instance IsPopovertargetaction (Index.Keyword "show") String where
+  isPopovertargetaction = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
-instance Ispopovertargetaction (Index.Keyword "toggle") String where
-  ispopovertargetaction = Deku.Attribute.prop' <<< Data.Newtype.unwrap
+instance IsPopovertargetaction (Index.Keyword "toggle") String where
+  isPopovertargetaction = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
 _popovertargetaction
   :: forall r v a
-   . Ispopovertargetaction v a
+   . IsPopovertargetaction v a
   => FRP.Event.Event v
   -> FRP.Event.Event (Deku.Attribute.Attribute (Index.Indexed (popovertargetaction :: a | r)))
 _popovertargetaction = Functor.map
   ( Deku.Attribute.unsafeAttribute <<< { key: "popovertargetaction", value: _ } <<<
-      ispopovertargetaction
+      isPopovertargetaction
   )
 
 _popovertargetaction_
   :: forall r v a
-   . Ispopovertargetaction v a
+   . IsPopovertargetaction v a
   => v
   -> FRP.Event.Event (Deku.Attribute.Attribute (Index.Indexed (popovertargetaction :: a | r)))
 _popovertargetaction_ = _popovertargetaction <<< Applicative.pure
 
-class Issandbox (v :: Type) (a :: Type) | v -> a where
-  issandbox :: v -> Deku.Attribute.AttributeValue
+class IsSandbox (v :: Type) (a :: Type) | v -> a where
+  isSandbox :: v -> Deku.Attribute.AttributeValue
 
-instance Issandbox String String where
-  issandbox = Deku.Attribute.prop'
+instance IsSandbox String String where
+  isSandbox = Deku.Attribute.prop'
 
-instance Issandbox (Index.Keyword "allow-top-navigation-to-custom-protocols") String where
-  issandbox = Deku.Attribute.prop' <<< Data.Newtype.unwrap
+instance IsSandbox (Index.Keyword "allow-top-navigation-to-custom-protocols") String where
+  isSandbox = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
-instance Issandbox (Index.Keyword "allow-downloads") String where
-  issandbox = Deku.Attribute.prop' <<< Data.Newtype.unwrap
+instance IsSandbox (Index.Keyword "allow-downloads") String where
+  isSandbox = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
-instance Issandbox (Index.Keyword "allow-presentation") String where
-  issandbox = Deku.Attribute.prop' <<< Data.Newtype.unwrap
+instance IsSandbox (Index.Keyword "allow-presentation") String where
+  isSandbox = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
-instance Issandbox (Index.Keyword "allow-orientation-lock") String where
-  issandbox = Deku.Attribute.prop' <<< Data.Newtype.unwrap
+instance IsSandbox (Index.Keyword "allow-orientation-lock") String where
+  isSandbox = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
-instance Issandbox (Index.Keyword "allow-modals") String where
-  issandbox = Deku.Attribute.prop' <<< Data.Newtype.unwrap
+instance IsSandbox (Index.Keyword "allow-modals") String where
+  isSandbox = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
-instance Issandbox (Index.Keyword "allow-popups-to-escape-sandbox") String where
-  issandbox = Deku.Attribute.prop' <<< Data.Newtype.unwrap
+instance IsSandbox (Index.Keyword "allow-popups-to-escape-sandbox") String where
+  isSandbox = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
-instance Issandbox (Index.Keyword "allow-scripts") String where
-  issandbox = Deku.Attribute.prop' <<< Data.Newtype.unwrap
+instance IsSandbox (Index.Keyword "allow-scripts") String where
+  isSandbox = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
-instance Issandbox (Index.Keyword "allow-pointer-lock") String where
-  issandbox = Deku.Attribute.prop' <<< Data.Newtype.unwrap
+instance IsSandbox (Index.Keyword "allow-pointer-lock") String where
+  isSandbox = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
-instance Issandbox (Index.Keyword "allow-forms") String where
-  issandbox = Deku.Attribute.prop' <<< Data.Newtype.unwrap
+instance IsSandbox (Index.Keyword "allow-forms") String where
+  isSandbox = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
-instance Issandbox (Index.Keyword "allow-same-origin") String where
-  issandbox = Deku.Attribute.prop' <<< Data.Newtype.unwrap
+instance IsSandbox (Index.Keyword "allow-same-origin") String where
+  isSandbox = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
-instance Issandbox (Index.Keyword "allow-top-navigation-by-user-activation") String where
-  issandbox = Deku.Attribute.prop' <<< Data.Newtype.unwrap
+instance IsSandbox (Index.Keyword "allow-top-navigation-by-user-activation") String where
+  isSandbox = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
-instance Issandbox (Index.Keyword "allow-top-navigation") String where
-  issandbox = Deku.Attribute.prop' <<< Data.Newtype.unwrap
+instance IsSandbox (Index.Keyword "allow-top-navigation") String where
+  isSandbox = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
-instance Issandbox (Index.Keyword "allow-popups") String where
-  issandbox = Deku.Attribute.prop' <<< Data.Newtype.unwrap
+instance IsSandbox (Index.Keyword "allow-popups") String where
+  isSandbox = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
 _sandbox
   :: forall r v a
-   . Issandbox v a
+   . IsSandbox v a
   => FRP.Event.Event v
   -> FRP.Event.Event (Deku.Attribute.Attribute (Index.Indexed (sandbox :: a | r)))
 _sandbox = Functor.map
-  (Deku.Attribute.unsafeAttribute <<< { key: "sandbox", value: _ } <<< issandbox)
+  (Deku.Attribute.unsafeAttribute <<< { key: "sandbox", value: _ } <<< isSandbox)
 
 _sandbox_
   :: forall r v a
-   . Issandbox v a
+   . IsSandbox v a
   => v
   -> FRP.Event.Event (Deku.Attribute.Attribute (Index.Indexed (sandbox :: a | r)))
 _sandbox_ = _sandbox <<< Applicative.pure

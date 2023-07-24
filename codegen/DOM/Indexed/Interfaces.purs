@@ -10,7 +10,7 @@ import Data.Maybe (Maybe(..))
 import Data.Tuple.Nested (type (/\), (/\))
 import PureScript.CST.Types (Declaration, Export, Type)
 import Safe.Coerce (coerce)
-import Tidy.Codegen (declType, exportType, exportTypeAll, typeApp, typeCtor, typeRow, typeString, typeVar, typeVarKinded)
+import Tidy.Codegen (declType, exportType, typeApp, typeCtor, typeRow, typeString, typeVar, typeVarKinded)
 
 exports :: Partial => Array Interface -> Array ( Export Void )
 exports interfaces =

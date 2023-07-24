@@ -196,12 +196,12 @@ module Deku.DOM.Indexed.SVG
   , animateTransform_
   , _operator
   , _operator_
-  , class Isoperator
-  , isoperator
+  , class IsOperator
+  , isOperator
   , _edgeMode
   , _edgeMode_
-  , class IsedgeMode
-  , isedgeMode
+  , class IsEdgeMode
+  , isEdgeMode
   , _preserveAspectRatio
   , _preserveAspectRatio_
   , _viewBox
@@ -1927,71 +1927,71 @@ animateTransform = elementify2 {- http://www.w3.org/2000/svg -} "animateTransfor
 animateTransform_ :: Array Nut -> Nut
 animateTransform_ = elementify2 {- http://www.w3.org/2000/svg -} "animateTransform" []
 
-class Isoperator (v :: Type) (a :: Type) | v -> a where
-  isoperator :: v -> Deku.Attribute.AttributeValue
+class IsOperator (v :: Type) (a :: Type) | v -> a where
+  isOperator :: v -> Deku.Attribute.AttributeValue
 
-instance Isoperator String String where
-  isoperator = Deku.Attribute.prop'
+instance IsOperator String String where
+  isOperator = Deku.Attribute.prop'
 
-instance Isoperator (Index.Keyword "arithmetic") String where
-  isoperator = Deku.Attribute.prop' <<< Data.Newtype.unwrap
+instance IsOperator (Index.Keyword "arithmetic") String where
+  isOperator = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
-instance Isoperator (Index.Keyword "lighter") String where
-  isoperator = Deku.Attribute.prop' <<< Data.Newtype.unwrap
+instance IsOperator (Index.Keyword "lighter") String where
+  isOperator = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
-instance Isoperator (Index.Keyword "xor") String where
-  isoperator = Deku.Attribute.prop' <<< Data.Newtype.unwrap
+instance IsOperator (Index.Keyword "xor") String where
+  isOperator = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
-instance Isoperator (Index.Keyword "atop") String where
-  isoperator = Deku.Attribute.prop' <<< Data.Newtype.unwrap
+instance IsOperator (Index.Keyword "atop") String where
+  isOperator = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
-instance Isoperator (Index.Keyword "out") String where
-  isoperator = Deku.Attribute.prop' <<< Data.Newtype.unwrap
+instance IsOperator (Index.Keyword "out") String where
+  isOperator = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
-instance Isoperator (Index.Keyword "in") String where
-  isoperator = Deku.Attribute.prop' <<< Data.Newtype.unwrap
+instance IsOperator (Index.Keyword "in") String where
+  isOperator = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
-instance Isoperator (Index.Keyword "over") String where
-  isoperator = Deku.Attribute.prop' <<< Data.Newtype.unwrap
+instance IsOperator (Index.Keyword "over") String where
+  isOperator = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
 _operator
   :: forall r v a
-   . Isoperator v a
+   . IsOperator v a
   => FRP.Event.Event v
   -> FRP.Event.Event (Deku.Attribute.Attribute (Index.Indexed (operator :: a | r)))
 _operator = Functor.map
-  (Deku.Attribute.unsafeAttribute <<< { key: "operator", value: _ } <<< isoperator)
+  (Deku.Attribute.unsafeAttribute <<< { key: "operator", value: _ } <<< isOperator)
 
 _operator_
   :: forall r v a
-   . Isoperator v a
+   . IsOperator v a
   => v
   -> FRP.Event.Event (Deku.Attribute.Attribute (Index.Indexed (operator :: a | r)))
 _operator_ = _operator <<< Applicative.pure
 
-class IsedgeMode (v :: Type) (a :: Type) | v -> a where
-  isedgeMode :: v -> Deku.Attribute.AttributeValue
+class IsEdgeMode (v :: Type) (a :: Type) | v -> a where
+  isEdgeMode :: v -> Deku.Attribute.AttributeValue
 
-instance IsedgeMode String String where
-  isedgeMode = Deku.Attribute.prop'
+instance IsEdgeMode String String where
+  isEdgeMode = Deku.Attribute.prop'
 
-instance IsedgeMode (Index.Keyword "wrap") String where
-  isedgeMode = Deku.Attribute.prop' <<< Data.Newtype.unwrap
+instance IsEdgeMode (Index.Keyword "wrap") String where
+  isEdgeMode = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
-instance IsedgeMode (Index.Keyword "duplicate") String where
-  isedgeMode = Deku.Attribute.prop' <<< Data.Newtype.unwrap
+instance IsEdgeMode (Index.Keyword "duplicate") String where
+  isEdgeMode = Deku.Attribute.prop' <<< Data.Newtype.unwrap
 
 _edgeMode
   :: forall r v a
-   . IsedgeMode v a
+   . IsEdgeMode v a
   => FRP.Event.Event v
   -> FRP.Event.Event (Deku.Attribute.Attribute (Index.Indexed (edgeMode :: a | r)))
 _edgeMode = Functor.map
-  (Deku.Attribute.unsafeAttribute <<< { key: "edgeMode", value: _ } <<< isedgeMode)
+  (Deku.Attribute.unsafeAttribute <<< { key: "edgeMode", value: _ } <<< isEdgeMode)
 
 _edgeMode_
   :: forall r v a
-   . IsedgeMode v a
+   . IsEdgeMode v a
   => v
   -> FRP.Event.Event (Deku.Attribute.Attribute (Index.Indexed (edgeMode :: a | r)))
 _edgeMode_ = _edgeMode <<< Applicative.pure

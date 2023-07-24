@@ -3,7 +3,7 @@ module DOM.Indexed.Common where
 import Prelude
 import Prim hiding (Type)
 
-import DOM.Common (Ctor(..))
+import DOM.Common (Ctor(..), capitalize)
 import Data.Maybe (Maybe(..))
 import Data.Tuple.Nested (type (/\), (/\))
 import Partial.Unsafe (unsafePartial)
@@ -50,7 +50,7 @@ valueCtor ( Ctor src ) =
 overloaded :: Ctor -> String /\ String
 overloaded ( Ctor srcName ) = do
     let
-        capName = srcName
+        capName = capitalize srcName
         overloadedHandler = "is" <> capName
         overloadedClass = "Is" <> capName
     overloadedHandler /\ overloadedClass
