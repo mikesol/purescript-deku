@@ -1,29 +1,30 @@
 module Deku.DOM.Attr.OnPointermove where
 
-import Prelude
-import Effect (Effect)
-import Deku.Attribute (class Attr, Attribute, Cb(..), cb', unsafeAttribute, unset')
-import FRP.Event (Event)
+import Control.Semigroupoid ((<<<))
+import Effect as Effect
+import Web.Event.Internal.Types as Web.Event.Internal.Types
+import Data.Unit as Data.Unit
+import Deku.Attribute as Deku.Attribute
+import FRP.Event as FRP.Event
 
 data OnPointermove = OnPointermove
 
-instance Attr anything OnPointermove Cb where
-  attr OnPointermove value = unsafeAttribute
-    { key: "pointermove", value: cb' value }
+instance Deku.Attribute.Attr everything OnPointermove Data.Unit.Unit where
+  attr _ _ = Deku.Attribute.unsafeAttribute { key: "onPointermove", value: Deku.Attribute.unset' }
 
-instance Attr anything OnPointermove (Effect Unit) where
-  attr OnPointermove value = unsafeAttribute
-    { key: "pointermove", value: cb' (Cb (const (value $> true))) }
-
-instance Attr anything OnPointermove (Effect Boolean) where
-  attr OnPointermove value = unsafeAttribute
-    { key: "pointermove", value: cb' (Cb (const value)) }
+instance
+  Deku.Attribute.Attr everything
+    OnPointermove
+    (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit) where
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "onPointermove", value: _ }
+    <<< Deku.Attribute.cb'
+    <<< Deku.Attribute.cb
 
 type OnPointermoveEffect =
   forall element
-   . Attr element OnPointermove (Effect Unit)
-  => Event (Attribute element)
+   . Deku.Attribute.Attr element OnPointermove (Effect.Effect Data.Unit.Unit)
+  => FRP.Event.Event (Deku.Attribute.Attribute element)
 
-instance Attr everything OnPointermove Unit where
-  attr OnPointermove _ = unsafeAttribute
-    { key: "pointermove", value: unset' }
+instance Deku.Attribute.Attr everything OnPointermove Deku.Attribute.Cb where
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "onPointermove", value: _ } <<<
+    Deku.Attribute.cb'

@@ -1,15 +1,14 @@
 module Deku.DOM.Attr.Radius where
 
-import Prelude
-
+import Deku.Attribute as Deku.Attribute
+import Data.Unit as Data.Unit
+import Control.Semigroupoid ((<<<))
 import Deku.DOM.Elt.FeMorphology (FeMorphology_)
-import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 
 data Radius = Radius
 
-instance Attr FeMorphology_ Radius String where
-  attr Radius value = unsafeAttribute { key: "radius", value: prop' value }
+instance Deku.Attribute.Attr everything Radius Data.Unit.Unit where
+  attr _ _ = Deku.Attribute.unsafeAttribute { key: "radius", value: Deku.Attribute.unset' }
 
-instance Attr everything Radius Unit where
-  attr Radius _ = unsafeAttribute
-    { key: "radius", value: unset' }
+instance Deku.Attribute.Attr FeMorphology_ Radius String where
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "radius", value: _ } <<< Deku.Attribute.prop'

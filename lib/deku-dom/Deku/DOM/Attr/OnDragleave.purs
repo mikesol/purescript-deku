@@ -1,29 +1,30 @@
 module Deku.DOM.Attr.OnDragleave where
 
-import Prelude
-import Effect (Effect)
-import Deku.Attribute (class Attr, Attribute, Cb(..), cb', unsafeAttribute, unset')
-import FRP.Event (Event)
+import Control.Semigroupoid ((<<<))
+import Effect as Effect
+import Web.Event.Internal.Types as Web.Event.Internal.Types
+import Data.Unit as Data.Unit
+import Deku.Attribute as Deku.Attribute
+import FRP.Event as FRP.Event
 
 data OnDragleave = OnDragleave
 
-instance Attr anything OnDragleave Cb where
-  attr OnDragleave value = unsafeAttribute
-    { key: "dragleave", value: cb' value }
+instance Deku.Attribute.Attr everything OnDragleave Data.Unit.Unit where
+  attr _ _ = Deku.Attribute.unsafeAttribute { key: "onDragleave", value: Deku.Attribute.unset' }
 
-instance Attr anything OnDragleave (Effect Unit) where
-  attr OnDragleave value = unsafeAttribute
-    { key: "dragleave", value: cb' (Cb (const (value $> true))) }
-
-instance Attr anything OnDragleave (Effect Boolean) where
-  attr OnDragleave value = unsafeAttribute
-    { key: "dragleave", value: cb' (Cb (const value)) }
+instance
+  Deku.Attribute.Attr everything
+    OnDragleave
+    (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit) where
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "onDragleave", value: _ }
+    <<< Deku.Attribute.cb'
+    <<< Deku.Attribute.cb
 
 type OnDragleaveEffect =
   forall element
-   . Attr element OnDragleave (Effect Unit)
-  => Event (Attribute element)
+   . Deku.Attribute.Attr element OnDragleave (Effect.Effect Data.Unit.Unit)
+  => FRP.Event.Event (Deku.Attribute.Attribute element)
 
-instance Attr everything OnDragleave Unit where
-  attr OnDragleave _ = unsafeAttribute
-    { key: "dragleave", value: unset' }
+instance Deku.Attribute.Attr everything OnDragleave Deku.Attribute.Cb where
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "onDragleave", value: _ } <<<
+    Deku.Attribute.cb'

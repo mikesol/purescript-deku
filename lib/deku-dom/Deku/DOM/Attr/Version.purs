@@ -1,15 +1,14 @@
 module Deku.DOM.Attr.Version where
 
-import Prelude
-
-import Deku.DOM.Elt.Svg (Svg_)
-import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
+import Deku.Attribute as Deku.Attribute
+import Data.Unit as Data.Unit
+import Control.Semigroupoid ((<<<))
+import Deku.DOM.Elt.Html (Html_)
 
 data Version = Version
 
-instance Attr Svg_ Version String where
-  attr Version value = unsafeAttribute { key: "version", value: prop' value }
+instance Deku.Attribute.Attr everything Version Data.Unit.Unit where
+  attr _ _ = Deku.Attribute.unsafeAttribute { key: "version", value: Deku.Attribute.unset' }
 
-instance Attr everything Version Unit where
-  attr Version _ = unsafeAttribute
-    { key: "version", value: unset' }
+instance Deku.Attribute.Attr Html_ Version String where
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "version", value: _ } <<< Deku.Attribute.prop'

@@ -1,29 +1,30 @@
 module Deku.DOM.Attr.OnTransitionrun where
 
-import Prelude
-import Effect (Effect)
-import Deku.Attribute (class Attr, Attribute, Cb(..), cb', unsafeAttribute, unset')
-import FRP.Event (Event)
+import Control.Semigroupoid ((<<<))
+import Effect as Effect
+import Web.Event.Internal.Types as Web.Event.Internal.Types
+import Data.Unit as Data.Unit
+import Deku.Attribute as Deku.Attribute
+import FRP.Event as FRP.Event
 
 data OnTransitionrun = OnTransitionrun
 
-instance Attr anything OnTransitionrun Cb where
-  attr OnTransitionrun value = unsafeAttribute
-    { key: "transitionrun", value: cb' value }
+instance Deku.Attribute.Attr everything OnTransitionrun Data.Unit.Unit where
+  attr _ _ = Deku.Attribute.unsafeAttribute { key: "onTransitionrun", value: Deku.Attribute.unset' }
 
-instance Attr anything OnTransitionrun (Effect Unit) where
-  attr OnTransitionrun value = unsafeAttribute
-    { key: "transitionrun", value: cb' (Cb (const (value $> true))) }
-
-instance Attr anything OnTransitionrun (Effect Boolean) where
-  attr OnTransitionrun value = unsafeAttribute
-    { key: "transitionrun", value: cb' (Cb (const value)) }
+instance
+  Deku.Attribute.Attr everything
+    OnTransitionrun
+    (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit) where
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "onTransitionrun", value: _ }
+    <<< Deku.Attribute.cb'
+    <<< Deku.Attribute.cb
 
 type OnTransitionrunEffect =
   forall element
-   . Attr element OnTransitionrun (Effect Unit)
-  => Event (Attribute element)
+   . Deku.Attribute.Attr element OnTransitionrun (Effect.Effect Data.Unit.Unit)
+  => FRP.Event.Event (Deku.Attribute.Attribute element)
 
-instance Attr everything OnTransitionrun Unit where
-  attr OnTransitionrun _ = unsafeAttribute
-    { key: "transitionrun", value: unset' }
+instance Deku.Attribute.Attr everything OnTransitionrun Deku.Attribute.Cb where
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "onTransitionrun", value: _ } <<<
+    Deku.Attribute.cb'

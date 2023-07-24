@@ -1,27 +1,14 @@
 module Deku.DOM.Attr.Slope where
 
-import Prelude
-
-import Deku.DOM.Elt.FeFuncR (FeFuncR_)
-import Deku.DOM.Elt.FeFuncG (FeFuncG_)
-import Deku.DOM.Elt.FeFuncB (FeFuncB_)
-import Deku.DOM.Elt.FeFuncA (FeFuncA_)
-import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
+import Deku.Attribute as Deku.Attribute
+import Data.Unit as Data.Unit
+import Control.Semigroupoid ((<<<))
+import Deku.DOM.Elt.FeComponentTransfer (FeComponentTransfer_)
 
 data Slope = Slope
 
-instance Attr FeFuncA_ Slope String where
-  attr Slope value = unsafeAttribute { key: "slope", value: prop' value }
+instance Deku.Attribute.Attr everything Slope Data.Unit.Unit where
+  attr _ _ = Deku.Attribute.unsafeAttribute { key: "slope", value: Deku.Attribute.unset' }
 
-instance Attr FeFuncB_ Slope String where
-  attr Slope value = unsafeAttribute { key: "slope", value: prop' value }
-
-instance Attr FeFuncG_ Slope String where
-  attr Slope value = unsafeAttribute { key: "slope", value: prop' value }
-
-instance Attr FeFuncR_ Slope String where
-  attr Slope value = unsafeAttribute { key: "slope", value: prop' value }
-
-instance Attr everything Slope Unit where
-  attr Slope _ = unsafeAttribute
-    { key: "slope", value: unset' }
+instance Deku.Attribute.Attr FeComponentTransfer_ Slope String where
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "slope", value: _ } <<< Deku.Attribute.prop'

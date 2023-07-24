@@ -1,16 +1,16 @@
 module Deku.DOM.Attr.SpecularConstant where
 
-import Prelude
-
+import Deku.Attribute as Deku.Attribute
+import Data.Unit as Data.Unit
+import Control.Semigroupoid ((<<<))
 import Deku.DOM.Elt.FeSpecularLighting (FeSpecularLighting_)
-import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 
 data SpecularConstant = SpecularConstant
 
-instance Attr FeSpecularLighting_ SpecularConstant String where
-  attr SpecularConstant value = unsafeAttribute
-    { key: "specularConstant", value: prop' value }
+instance Deku.Attribute.Attr everything SpecularConstant Data.Unit.Unit where
+  attr _ _ = Deku.Attribute.unsafeAttribute
+    { key: "specularConstant", value: Deku.Attribute.unset' }
 
-instance Attr everything SpecularConstant Unit where
-  attr SpecularConstant _ = unsafeAttribute
-    { key: "specularConstant", value: unset' }
+instance Deku.Attribute.Attr FeSpecularLighting_ SpecularConstant String where
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "specularConstant", value: _ } <<<
+    Deku.Attribute.prop'

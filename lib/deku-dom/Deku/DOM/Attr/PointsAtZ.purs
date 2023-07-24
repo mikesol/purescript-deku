@@ -1,16 +1,15 @@
 module Deku.DOM.Attr.PointsAtZ where
 
-import Prelude
-
+import Deku.Attribute as Deku.Attribute
+import Data.Unit as Data.Unit
+import Control.Semigroupoid ((<<<))
 import Deku.DOM.Elt.FeSpotLight (FeSpotLight_)
-import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 
 data PointsAtZ = PointsAtZ
 
-instance Attr FeSpotLight_ PointsAtZ String where
-  attr PointsAtZ value = unsafeAttribute
-    { key: "pointsAtZ", value: prop' value }
+instance Deku.Attribute.Attr everything PointsAtZ Data.Unit.Unit where
+  attr _ _ = Deku.Attribute.unsafeAttribute { key: "pointsAtZ", value: Deku.Attribute.unset' }
 
-instance Attr everything PointsAtZ Unit where
-  attr PointsAtZ _ = unsafeAttribute
-    { key: "pointsAtZ", value: unset' }
+instance Deku.Attribute.Attr FeSpotLight_ PointsAtZ String where
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "pointsAtZ", value: _ } <<<
+    Deku.Attribute.prop'

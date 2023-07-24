@@ -1,28 +1,28 @@
 module Deku.DOM.Attr.OnMouseout where
 
-import Prelude
-import Effect (Effect)
-import Deku.Attribute (class Attr, Attribute, Cb(..), cb', unsafeAttribute, unset')
-import FRP.Event (Event)
+import Control.Semigroupoid ((<<<))
+import Effect as Effect
+import Web.Event.Internal.Types as Web.Event.Internal.Types
+import Data.Unit as Data.Unit
+import Deku.Attribute as Deku.Attribute
+import FRP.Event as FRP.Event
 
 data OnMouseout = OnMouseout
 
-instance Attr anything OnMouseout Cb where
-  attr OnMouseout value = unsafeAttribute { key: "mouseout", value: cb' value }
+instance Deku.Attribute.Attr everything OnMouseout Data.Unit.Unit where
+  attr _ _ = Deku.Attribute.unsafeAttribute { key: "onMouseout", value: Deku.Attribute.unset' }
 
-instance Attr anything OnMouseout (Effect Unit) where
-  attr OnMouseout value = unsafeAttribute
-    { key: "mouseout", value: cb' (Cb (const (value $> true))) }
-
-instance Attr anything OnMouseout (Effect Boolean) where
-  attr OnMouseout value = unsafeAttribute
-    { key: "mouseout", value: cb' (Cb (const value)) }
+instance
+  Deku.Attribute.Attr everything
+    OnMouseout
+    (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit) where
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "onMouseout", value: _ } <<< Deku.Attribute.cb'
+    <<< Deku.Attribute.cb
 
 type OnMouseoutEffect =
   forall element
-   . Attr element OnMouseout (Effect Unit)
-  => Event (Attribute element)
+   . Deku.Attribute.Attr element OnMouseout (Effect.Effect Data.Unit.Unit)
+  => FRP.Event.Event (Deku.Attribute.Attribute element)
 
-instance Attr everything OnMouseout Unit where
-  attr OnMouseout _ = unsafeAttribute
-    { key: "mouseout", value: unset' }
+instance Deku.Attribute.Attr everything OnMouseout Deku.Attribute.Cb where
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "onMouseout", value: _ } <<< Deku.Attribute.cb'

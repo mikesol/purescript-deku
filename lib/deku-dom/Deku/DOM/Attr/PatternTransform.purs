@@ -1,16 +1,16 @@
 module Deku.DOM.Attr.PatternTransform where
 
-import Prelude
-
+import Deku.Attribute as Deku.Attribute
+import Data.Unit as Data.Unit
+import Control.Semigroupoid ((<<<))
 import Deku.DOM.Elt.Pattern (Pattern_)
-import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 
 data PatternTransform = PatternTransform
 
-instance Attr Pattern_ PatternTransform String where
-  attr PatternTransform value = unsafeAttribute
-    { key: "patternTransform", value: prop' value }
+instance Deku.Attribute.Attr everything PatternTransform Data.Unit.Unit where
+  attr _ _ = Deku.Attribute.unsafeAttribute
+    { key: "patternTransform", value: Deku.Attribute.unset' }
 
-instance Attr everything PatternTransform Unit where
-  attr PatternTransform _ = unsafeAttribute
-    { key: "patternTransform", value: unset' }
+instance Deku.Attribute.Attr Pattern_ PatternTransform String where
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "patternTransform", value: _ } <<<
+    Deku.Attribute.prop'

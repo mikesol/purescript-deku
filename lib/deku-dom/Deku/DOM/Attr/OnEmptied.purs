@@ -1,28 +1,28 @@
 module Deku.DOM.Attr.OnEmptied where
 
-import Prelude
-import Effect (Effect)
-import Deku.Attribute (class Attr, Attribute, Cb(..), cb', unsafeAttribute, unset')
-import FRP.Event (Event)
+import Control.Semigroupoid ((<<<))
+import Effect as Effect
+import Web.Event.Internal.Types as Web.Event.Internal.Types
+import Data.Unit as Data.Unit
+import Deku.Attribute as Deku.Attribute
+import FRP.Event as FRP.Event
 
 data OnEmptied = OnEmptied
 
-instance Attr anything OnEmptied Cb where
-  attr OnEmptied value = unsafeAttribute { key: "emptied", value: cb' value }
+instance Deku.Attribute.Attr everything OnEmptied Data.Unit.Unit where
+  attr _ _ = Deku.Attribute.unsafeAttribute { key: "onEmptied", value: Deku.Attribute.unset' }
 
-instance Attr anything OnEmptied (Effect Unit) where
-  attr OnEmptied value = unsafeAttribute
-    { key: "emptied", value: cb' (Cb (const (value $> true))) }
-
-instance Attr anything OnEmptied (Effect Boolean) where
-  attr OnEmptied value = unsafeAttribute
-    { key: "emptied", value: cb' (Cb (const value)) }
+instance
+  Deku.Attribute.Attr everything
+    OnEmptied
+    (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit) where
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "onEmptied", value: _ } <<< Deku.Attribute.cb'
+    <<< Deku.Attribute.cb
 
 type OnEmptiedEffect =
   forall element
-   . Attr element OnEmptied (Effect Unit)
-  => Event (Attribute element)
+   . Deku.Attribute.Attr element OnEmptied (Effect.Effect Data.Unit.Unit)
+  => FRP.Event.Event (Deku.Attribute.Attribute element)
 
-instance Attr everything OnEmptied Unit where
-  attr OnEmptied _ = unsafeAttribute
-    { key: "emptied", value: unset' }
+instance Deku.Attribute.Attr everything OnEmptied Deku.Attribute.Cb where
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "onEmptied", value: _ } <<< Deku.Attribute.cb'

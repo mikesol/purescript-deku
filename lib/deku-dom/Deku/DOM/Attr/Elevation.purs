@@ -1,16 +1,15 @@
 module Deku.DOM.Attr.Elevation where
 
-import Prelude
-
+import Deku.Attribute as Deku.Attribute
+import Data.Unit as Data.Unit
+import Control.Semigroupoid ((<<<))
 import Deku.DOM.Elt.FeDistantLight (FeDistantLight_)
-import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 
 data Elevation = Elevation
 
-instance Attr FeDistantLight_ Elevation String where
-  attr Elevation value = unsafeAttribute
-    { key: "elevation", value: prop' value }
+instance Deku.Attribute.Attr everything Elevation Data.Unit.Unit where
+  attr _ _ = Deku.Attribute.unsafeAttribute { key: "elevation", value: Deku.Attribute.unset' }
 
-instance Attr everything Elevation Unit where
-  attr Elevation _ = unsafeAttribute
-    { key: "elevation", value: unset' }
+instance Deku.Attribute.Attr FeDistantLight_ Elevation String where
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "elevation", value: _ } <<<
+    Deku.Attribute.prop'

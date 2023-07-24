@@ -1,19 +1,18 @@
 module Deku.DOM.Attr.EdgeMode where
 
-import Prelude
-
-import Deku.DOM.Elt.FeGaussianBlur (FeGaussianBlur_)
+import Deku.Attribute as Deku.Attribute
+import Data.Unit as Data.Unit
+import Control.Semigroupoid ((<<<))
 import Deku.DOM.Elt.FeConvolveMatrix (FeConvolveMatrix_)
-import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
+import Deku.DOM.Elt.FeGaussianBlur (FeGaussianBlur_)
 
 data EdgeMode = EdgeMode
 
-instance Attr FeConvolveMatrix_ EdgeMode String where
-  attr EdgeMode value = unsafeAttribute { key: "edgeMode", value: prop' value }
+instance Deku.Attribute.Attr everything EdgeMode Data.Unit.Unit where
+  attr _ _ = Deku.Attribute.unsafeAttribute { key: "edgeMode", value: Deku.Attribute.unset' }
 
-instance Attr FeGaussianBlur_ EdgeMode String where
-  attr EdgeMode value = unsafeAttribute { key: "edgeMode", value: prop' value }
+instance Deku.Attribute.Attr FeConvolveMatrix_ EdgeMode String where
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "edgeMode", value: _ } <<< Deku.Attribute.prop'
 
-instance Attr everything EdgeMode Unit where
-  attr EdgeMode _ = unsafeAttribute
-    { key: "edgeMode", value: unset' }
+instance Deku.Attribute.Attr FeGaussianBlur_ EdgeMode String where
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "edgeMode", value: _ } <<< Deku.Attribute.prop'

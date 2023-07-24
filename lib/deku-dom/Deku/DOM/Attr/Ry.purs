@@ -1,19 +1,13 @@
 module Deku.DOM.Attr.Ry where
 
-import Prelude
-
-import Deku.DOM.Elt.Rect (Rect_)
-import Deku.DOM.Elt.Ellipse (Ellipse_)
-import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
+import Control.Semigroupoid ((<<<))
+import Deku.Attribute as Deku.Attribute
+import Data.Unit as Data.Unit
 
 data Ry = Ry
 
-instance Attr Ellipse_ Ry String where
-  attr Ry value = unsafeAttribute { key: "ry", value: prop' value }
+instance Deku.Attribute.Attr everything Ry Data.Unit.Unit where
+  attr _ _ = Deku.Attribute.unsafeAttribute { key: "ry", value: Deku.Attribute.unset' }
 
-instance Attr Rect_ Ry String where
-  attr Ry value = unsafeAttribute { key: "ry", value: prop' value }
-
-instance Attr everything Ry Unit where
-  attr Ry _ = unsafeAttribute
-    { key: "ry", value: unset' }
+instance Deku.Attribute.Attr everything Ry String where
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "ry", value: _ } <<< Deku.Attribute.prop'

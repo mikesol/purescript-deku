@@ -1,21 +1,20 @@
 module Deku.DOM.Attr.StdDeviation where
 
-import Prelude
-
-import Deku.DOM.Elt.FeGaussianBlur (FeGaussianBlur_)
+import Deku.Attribute as Deku.Attribute
+import Data.Unit as Data.Unit
+import Control.Semigroupoid ((<<<))
 import Deku.DOM.Elt.FeDropShadow (FeDropShadow_)
-import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
+import Deku.DOM.Elt.FeGaussianBlur (FeGaussianBlur_)
 
 data StdDeviation = StdDeviation
 
-instance Attr FeDropShadow_ StdDeviation String where
-  attr StdDeviation value = unsafeAttribute
-    { key: "stdDeviation", value: prop' value }
+instance Deku.Attribute.Attr everything StdDeviation Data.Unit.Unit where
+  attr _ _ = Deku.Attribute.unsafeAttribute { key: "stdDeviation", value: Deku.Attribute.unset' }
 
-instance Attr FeGaussianBlur_ StdDeviation String where
-  attr StdDeviation value = unsafeAttribute
-    { key: "stdDeviation", value: prop' value }
+instance Deku.Attribute.Attr FeDropShadow_ StdDeviation String where
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "stdDeviation", value: _ } <<<
+    Deku.Attribute.prop'
 
-instance Attr everything StdDeviation Unit where
-  attr StdDeviation _ = unsafeAttribute
-    { key: "stdDeviation", value: unset' }
+instance Deku.Attribute.Attr FeGaussianBlur_ StdDeviation String where
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "stdDeviation", value: _ } <<<
+    Deku.Attribute.prop'

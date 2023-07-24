@@ -1,26 +1,26 @@
 module Deku.DOM.Attr.KernelUnitLength where
 
-import Prelude
-
-import Deku.DOM.Elt.FeSpecularLighting (FeSpecularLighting_)
-import Deku.DOM.Elt.FeDiffuseLighting (FeDiffuseLighting_)
+import Deku.Attribute as Deku.Attribute
+import Data.Unit as Data.Unit
+import Control.Semigroupoid ((<<<))
 import Deku.DOM.Elt.FeConvolveMatrix (FeConvolveMatrix_)
-import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
+import Deku.DOM.Elt.FeDiffuseLighting (FeDiffuseLighting_)
+import Deku.DOM.Elt.FeSpecularLighting (FeSpecularLighting_)
 
 data KernelUnitLength = KernelUnitLength
 
-instance Attr FeConvolveMatrix_ KernelUnitLength String where
-  attr KernelUnitLength value = unsafeAttribute
-    { key: "kernelUnitLength", value: prop' value }
+instance Deku.Attribute.Attr everything KernelUnitLength Data.Unit.Unit where
+  attr _ _ = Deku.Attribute.unsafeAttribute
+    { key: "kernelUnitLength", value: Deku.Attribute.unset' }
 
-instance Attr FeDiffuseLighting_ KernelUnitLength String where
-  attr KernelUnitLength value = unsafeAttribute
-    { key: "kernelUnitLength", value: prop' value }
+instance Deku.Attribute.Attr FeConvolveMatrix_ KernelUnitLength String where
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "kernelUnitLength", value: _ } <<<
+    Deku.Attribute.prop'
 
-instance Attr FeSpecularLighting_ KernelUnitLength String where
-  attr KernelUnitLength value = unsafeAttribute
-    { key: "kernelUnitLength", value: prop' value }
+instance Deku.Attribute.Attr FeDiffuseLighting_ KernelUnitLength String where
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "kernelUnitLength", value: _ } <<<
+    Deku.Attribute.prop'
 
-instance Attr everything KernelUnitLength Unit where
-  attr KernelUnitLength _ = unsafeAttribute
-    { key: "kernelUnitLength", value: unset' }
+instance Deku.Attribute.Attr FeSpecularLighting_ KernelUnitLength String where
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "kernelUnitLength", value: _ } <<<
+    Deku.Attribute.prop'

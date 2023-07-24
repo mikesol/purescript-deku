@@ -1,29 +1,31 @@
 module Deku.DOM.Attr.OnLoadedmetadata where
 
-import Prelude
-import Effect (Effect)
-import Deku.Attribute (class Attr, Attribute, Cb(..), cb', unsafeAttribute, unset')
-import FRP.Event (Event)
+import Control.Semigroupoid ((<<<))
+import Effect as Effect
+import Web.Event.Internal.Types as Web.Event.Internal.Types
+import Data.Unit as Data.Unit
+import Deku.Attribute as Deku.Attribute
+import FRP.Event as FRP.Event
 
 data OnLoadedmetadata = OnLoadedmetadata
 
-instance Attr anything OnLoadedmetadata Cb where
-  attr OnLoadedmetadata value = unsafeAttribute
-    { key: "loadedmetadata", value: cb' value }
+instance Deku.Attribute.Attr everything OnLoadedmetadata Data.Unit.Unit where
+  attr _ _ = Deku.Attribute.unsafeAttribute
+    { key: "onLoadedmetadata", value: Deku.Attribute.unset' }
 
-instance Attr anything OnLoadedmetadata (Effect Unit) where
-  attr OnLoadedmetadata value = unsafeAttribute
-    { key: "loadedmetadata", value: cb' (Cb (const (value $> true))) }
-
-instance Attr anything OnLoadedmetadata (Effect Boolean) where
-  attr OnLoadedmetadata value = unsafeAttribute
-    { key: "loadedmetadata", value: cb' (Cb (const value)) }
+instance
+  Deku.Attribute.Attr everything
+    OnLoadedmetadata
+    (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit) where
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "onLoadedmetadata", value: _ }
+    <<< Deku.Attribute.cb'
+    <<< Deku.Attribute.cb
 
 type OnLoadedmetadataEffect =
   forall element
-   . Attr element OnLoadedmetadata (Effect Unit)
-  => Event (Attribute element)
+   . Deku.Attribute.Attr element OnLoadedmetadata (Effect.Effect Data.Unit.Unit)
+  => FRP.Event.Event (Deku.Attribute.Attribute element)
 
-instance Attr everything OnLoadedmetadata Unit where
-  attr OnLoadedmetadata _ = unsafeAttribute
-    { key: "loadedmetadata", value: unset' }
+instance Deku.Attribute.Attr everything OnLoadedmetadata Deku.Attribute.Cb where
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "onLoadedmetadata", value: _ } <<<
+    Deku.Attribute.cb'

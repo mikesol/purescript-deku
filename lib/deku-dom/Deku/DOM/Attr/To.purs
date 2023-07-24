@@ -1,27 +1,14 @@
 module Deku.DOM.Attr.To where
 
-import Prelude
-
+import Deku.Attribute as Deku.Attribute
+import Data.Unit as Data.Unit
+import Control.Semigroupoid ((<<<))
 import Deku.DOM.Elt.Set (Set_)
-import Deku.DOM.Elt.AnimateTransform (AnimateTransform_)
-import Deku.DOM.Elt.AnimateMotion (AnimateMotion_)
-import Deku.DOM.Elt.Animate (Animate_)
-import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 
 data To = To
 
-instance Attr Animate_ To String where
-  attr To value = unsafeAttribute { key: "to", value: prop' value }
+instance Deku.Attribute.Attr everything To Data.Unit.Unit where
+  attr _ _ = Deku.Attribute.unsafeAttribute { key: "to", value: Deku.Attribute.unset' }
 
-instance Attr AnimateMotion_ To String where
-  attr To value = unsafeAttribute { key: "to", value: prop' value }
-
-instance Attr AnimateTransform_ To String where
-  attr To value = unsafeAttribute { key: "to", value: prop' value }
-
-instance Attr Set_ To String where
-  attr To value = unsafeAttribute { key: "to", value: prop' value }
-
-instance Attr everything To Unit where
-  attr To _ = unsafeAttribute
-    { key: "to", value: unset' }
+instance Deku.Attribute.Attr Set_ To String where
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "to", value: _ } <<< Deku.Attribute.prop'

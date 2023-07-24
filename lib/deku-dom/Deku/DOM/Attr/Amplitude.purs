@@ -1,31 +1,15 @@
 module Deku.DOM.Attr.Amplitude where
 
-import Prelude
-
-import Deku.DOM.Elt.FeFuncR (FeFuncR_)
-import Deku.DOM.Elt.FeFuncG (FeFuncG_)
-import Deku.DOM.Elt.FeFuncB (FeFuncB_)
-import Deku.DOM.Elt.FeFuncA (FeFuncA_)
-import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
+import Deku.Attribute as Deku.Attribute
+import Data.Unit as Data.Unit
+import Control.Semigroupoid ((<<<))
+import Deku.DOM.Elt.FeComponentTransfer (FeComponentTransfer_)
 
 data Amplitude = Amplitude
 
-instance Attr FeFuncA_ Amplitude String where
-  attr Amplitude value = unsafeAttribute
-    { key: "amplitude", value: prop' value }
+instance Deku.Attribute.Attr everything Amplitude Data.Unit.Unit where
+  attr _ _ = Deku.Attribute.unsafeAttribute { key: "amplitude", value: Deku.Attribute.unset' }
 
-instance Attr FeFuncB_ Amplitude String where
-  attr Amplitude value = unsafeAttribute
-    { key: "amplitude", value: prop' value }
-
-instance Attr FeFuncG_ Amplitude String where
-  attr Amplitude value = unsafeAttribute
-    { key: "amplitude", value: prop' value }
-
-instance Attr FeFuncR_ Amplitude String where
-  attr Amplitude value = unsafeAttribute
-    { key: "amplitude", value: prop' value }
-
-instance Attr everything Amplitude Unit where
-  attr Amplitude _ = unsafeAttribute
-    { key: "amplitude", value: unset' }
+instance Deku.Attribute.Attr FeComponentTransfer_ Amplitude String where
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "amplitude", value: _ } <<<
+    Deku.Attribute.prop'

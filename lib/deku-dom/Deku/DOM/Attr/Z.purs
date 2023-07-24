@@ -1,19 +1,18 @@
 module Deku.DOM.Attr.Z where
 
-import Prelude
-
-import Deku.DOM.Elt.FeSpotLight (FeSpotLight_)
+import Deku.Attribute as Deku.Attribute
+import Data.Unit as Data.Unit
+import Control.Semigroupoid ((<<<))
 import Deku.DOM.Elt.FePointLight (FePointLight_)
-import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
+import Deku.DOM.Elt.FeSpotLight (FeSpotLight_)
 
 data Z = Z
 
-instance Attr FePointLight_ Z String where
-  attr Z value = unsafeAttribute { key: "z", value: prop' value }
+instance Deku.Attribute.Attr everything Z Data.Unit.Unit where
+  attr _ _ = Deku.Attribute.unsafeAttribute { key: "z", value: Deku.Attribute.unset' }
 
-instance Attr FeSpotLight_ Z String where
-  attr Z value = unsafeAttribute { key: "z", value: prop' value }
+instance Deku.Attribute.Attr FePointLight_ Z String where
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "z", value: _ } <<< Deku.Attribute.prop'
 
-instance Attr everything Z Unit where
-  attr Z _ = unsafeAttribute
-    { key: "z", value: unset' }
+instance Deku.Attribute.Attr FeSpotLight_ Z String where
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "z", value: _ } <<< Deku.Attribute.prop'

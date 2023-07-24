@@ -1,23 +1,22 @@
 module Deku.DOM.Attr.Sizes where
 
-import Prelude
-
-import Deku.DOM.Elt.Link (Link_)
+import Deku.Attribute as Deku.Attribute
+import Data.Unit as Data.Unit
+import Control.Semigroupoid ((<<<))
 import Deku.DOM.Elt.Img (Img_)
+import Deku.DOM.Elt.Link (Link_)
 import Deku.DOM.Elt.Source (Source_)
-import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 
 data Sizes = Sizes
 
-instance Attr Link_ Sizes String where
-  attr Sizes value = unsafeAttribute { key: "sizes", value: prop' value }
+instance Deku.Attribute.Attr everything Sizes Data.Unit.Unit where
+  attr _ _ = Deku.Attribute.unsafeAttribute { key: "sizes", value: Deku.Attribute.unset' }
 
-instance Attr Img_ Sizes String where
-  attr Sizes value = unsafeAttribute { key: "sizes", value: prop' value }
+instance Deku.Attribute.Attr Img_ Sizes String where
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "sizes", value: _ } <<< Deku.Attribute.prop'
 
-instance Attr Source_ Sizes String where
-  attr Sizes value = unsafeAttribute { key: "sizes", value: prop' value }
+instance Deku.Attribute.Attr Link_ Sizes String where
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "sizes", value: _ } <<< Deku.Attribute.prop'
 
-instance Attr everything Sizes Unit where
-  attr Sizes _ = unsafeAttribute
-    { key: "sizes", value: unset' }
+instance Deku.Attribute.Attr Source_ Sizes String where
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "sizes", value: _ } <<< Deku.Attribute.prop'

@@ -1,19 +1,18 @@
 module Deku.DOM.Attr.Accept where
 
-import Prelude
-
+import Deku.Attribute as Deku.Attribute
+import Data.Unit as Data.Unit
+import Control.Semigroupoid ((<<<))
 import Deku.DOM.Elt.Form (Form_)
 import Deku.DOM.Elt.Input (Input_)
-import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 
 data Accept = Accept
 
-instance Attr Form_ Accept String where
-  attr Accept value = unsafeAttribute { key: "accept", value: prop' value }
+instance Deku.Attribute.Attr everything Accept Data.Unit.Unit where
+  attr _ _ = Deku.Attribute.unsafeAttribute { key: "accept", value: Deku.Attribute.unset' }
 
-instance Attr Input_ Accept String where
-  attr Accept value = unsafeAttribute { key: "accept", value: prop' value }
+instance Deku.Attribute.Attr Form_ Accept String where
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "accept", value: _ } <<< Deku.Attribute.prop'
 
-instance Attr everything Accept Unit where
-  attr Accept _ = unsafeAttribute
-    { key: "accept", value: unset' }
+instance Deku.Attribute.Attr Input_ Accept String where
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "accept", value: _ } <<< Deku.Attribute.prop'

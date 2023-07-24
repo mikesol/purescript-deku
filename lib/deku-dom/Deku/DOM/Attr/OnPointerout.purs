@@ -1,29 +1,30 @@
 module Deku.DOM.Attr.OnPointerout where
 
-import Prelude
-import Effect (Effect)
-import Deku.Attribute (class Attr, Attribute, Cb(..), cb', unsafeAttribute, unset')
-import FRP.Event (Event)
+import Control.Semigroupoid ((<<<))
+import Effect as Effect
+import Web.Event.Internal.Types as Web.Event.Internal.Types
+import Data.Unit as Data.Unit
+import Deku.Attribute as Deku.Attribute
+import FRP.Event as FRP.Event
 
 data OnPointerout = OnPointerout
 
-instance Attr anything OnPointerout Cb where
-  attr OnPointerout value = unsafeAttribute
-    { key: "pointerout", value: cb' value }
+instance Deku.Attribute.Attr everything OnPointerout Data.Unit.Unit where
+  attr _ _ = Deku.Attribute.unsafeAttribute { key: "onPointerout", value: Deku.Attribute.unset' }
 
-instance Attr anything OnPointerout (Effect Unit) where
-  attr OnPointerout value = unsafeAttribute
-    { key: "pointerout", value: cb' (Cb (const (value $> true))) }
-
-instance Attr anything OnPointerout (Effect Boolean) where
-  attr OnPointerout value = unsafeAttribute
-    { key: "pointerout", value: cb' (Cb (const value)) }
+instance
+  Deku.Attribute.Attr everything
+    OnPointerout
+    (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit) where
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "onPointerout", value: _ }
+    <<< Deku.Attribute.cb'
+    <<< Deku.Attribute.cb
 
 type OnPointeroutEffect =
   forall element
-   . Attr element OnPointerout (Effect Unit)
-  => Event (Attribute element)
+   . Deku.Attribute.Attr element OnPointerout (Effect.Effect Data.Unit.Unit)
+  => FRP.Event.Event (Deku.Attribute.Attribute element)
 
-instance Attr everything OnPointerout Unit where
-  attr OnPointerout _ = unsafeAttribute
-    { key: "pointerout", value: unset' }
+instance Deku.Attribute.Attr everything OnPointerout Deku.Attribute.Cb where
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "onPointerout", value: _ } <<<
+    Deku.Attribute.cb'

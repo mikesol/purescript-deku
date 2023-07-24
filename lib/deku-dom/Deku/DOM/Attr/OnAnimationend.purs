@@ -1,29 +1,30 @@
 module Deku.DOM.Attr.OnAnimationend where
 
-import Prelude
-import Effect (Effect)
-import Deku.Attribute (class Attr, Attribute, Cb(..), cb', unsafeAttribute, unset')
-import FRP.Event (Event)
+import Control.Semigroupoid ((<<<))
+import Effect as Effect
+import Web.Event.Internal.Types as Web.Event.Internal.Types
+import Data.Unit as Data.Unit
+import Deku.Attribute as Deku.Attribute
+import FRP.Event as FRP.Event
 
 data OnAnimationend = OnAnimationend
 
-instance Attr anything OnAnimationend Cb where
-  attr OnAnimationend value = unsafeAttribute
-    { key: "animationend ", value: cb' value }
+instance Deku.Attribute.Attr everything OnAnimationend Data.Unit.Unit where
+  attr _ _ = Deku.Attribute.unsafeAttribute { key: "onAnimationend", value: Deku.Attribute.unset' }
 
-instance Attr anything OnAnimationend (Effect Unit) where
-  attr OnAnimationend value = unsafeAttribute
-    { key: "animationend ", value: cb' (Cb (const (value $> true))) }
-
-instance Attr anything OnAnimationend (Effect Boolean) where
-  attr OnAnimationend value = unsafeAttribute
-    { key: "animationend ", value: cb' (Cb (const value)) }
+instance
+  Deku.Attribute.Attr everything
+    OnAnimationend
+    (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit) where
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "onAnimationend", value: _ }
+    <<< Deku.Attribute.cb'
+    <<< Deku.Attribute.cb
 
 type OnAnimationendEffect =
   forall element
-   . Attr element OnAnimationend (Effect Unit)
-  => Event (Attribute element)
+   . Deku.Attribute.Attr element OnAnimationend (Effect.Effect Data.Unit.Unit)
+  => FRP.Event.Event (Deku.Attribute.Attribute element)
 
-instance Attr everything OnAnimationend Unit where
-  attr OnAnimationend _ = unsafeAttribute
-    { key: "animationend ", value: unset' }
+instance Deku.Attribute.Attr everything OnAnimationend Deku.Attribute.Cb where
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "onAnimationend", value: _ } <<<
+    Deku.Attribute.cb'

@@ -1,16 +1,15 @@
 module Deku.DOM.Attr.StitchTiles where
 
-import Prelude
-
+import Deku.Attribute as Deku.Attribute
+import Data.Unit as Data.Unit
+import Control.Semigroupoid ((<<<))
 import Deku.DOM.Elt.FeTurbulence (FeTurbulence_)
-import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 
 data StitchTiles = StitchTiles
 
-instance Attr FeTurbulence_ StitchTiles String where
-  attr StitchTiles value = unsafeAttribute
-    { key: "stitchTiles", value: prop' value }
+instance Deku.Attribute.Attr everything StitchTiles Data.Unit.Unit where
+  attr _ _ = Deku.Attribute.unsafeAttribute { key: "stitchTiles", value: Deku.Attribute.unset' }
 
-instance Attr everything StitchTiles Unit where
-  attr StitchTiles _ = unsafeAttribute
-    { key: "stitchTiles", value: unset' }
+instance Deku.Attribute.Attr FeTurbulence_ StitchTiles String where
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "stitchTiles", value: _ } <<<
+    Deku.Attribute.prop'

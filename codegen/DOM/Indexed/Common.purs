@@ -7,41 +7,25 @@ import DOM.Common (Ctor(..))
 import Data.Maybe (Maybe(..))
 import Data.Tuple.Nested (type (/\), (/\))
 import Partial.Unsafe (unsafePartial)
-import PureScript.CST.Types (Declaration, Expr, ImportDecl, Type)
-import Tidy.Codegen (binaryOp, declImport, declImportAs, declValue, exprApp, exprIdent, exprOp, exprRecord, exprSection, exprString, importOp, importType, importTypeAll, importValue, typeApp, typeCtor, typeRow, typeVar)
+import PureScript.CST.Types (ImportDecl, Type)
+import Tidy.Codegen (declImport, declImportAs, importOp, importType, importValue, typeApp, typeCtor, typeRow, typeVar)
 
 requires :: Partial => Array ( ImportDecl Void )
 requires =
     [ declImportAs "Control.Applicative" [ importValue "pure" ] "Applicative"
     , declImport "Control.Category" [ importOp "<<<" ]
     , declImportAs "Data.Functor" [ importValue "map" ] "Functor"
+    , declImportAs "FRP.Event" [] "FRP.Event"
     
-    , declImport "Deku.Attribute"
-        [ importType "Attribute"
-        , importType "AttributeValue"
-        , importValue "unsafeAttribute"
-        ]
     , declImport "Deku.Control" [ importValue "elementify2" ]
     , declImport "Deku.Core" [ importType "Nut" ]
-    , declImport "FRP.Event" [ importType "Event" ]
     , declImport "Type.Proxy" [ importType "Proxy" ]
-    , declImport "Deku.DOM.Indexed.Index" [ importType "Indexed", importTypeAll "Keyword"  ]
+    , declImportAs "Deku.DOM.Indexed.Index" [] "Index"
     ]
-
-declHandler :: String -> String -> Expr Void -> Declaration Void
-declHandler name index handler =
-    unsafePartial
-        $ declValue name []
-        $ exprApp ( exprIdent "Functor.map" )
-        [ exprOp ( exprIdent "unsafeAttribute" )
-            [ binaryOp "<<<" $ exprRecord [ "key" /\ exprString index, "value" /\ exprSection ]
-            , binaryOp "<<<" handler
-            ]
-        ]
 
 typeIndexed :: Type Void -> Type Void
 typeIndexed t =
-    unsafePartial $ typeApp ( typeCtor "Indexed" ) $ pure t
+    unsafePartial $ typeApp ( typeCtor "Index.Indexed" ) $ pure t
 
 typeIndexedAt :: Ctor -> Type Void -> Type Void
 typeIndexedAt n t =

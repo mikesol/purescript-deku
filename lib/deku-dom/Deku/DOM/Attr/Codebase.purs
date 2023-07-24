@@ -1,15 +1,14 @@
 module Deku.DOM.Attr.Codebase where
 
-import Prelude
-
-import Deku.DOM.Elt.Applet (Applet_)
-import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
+import Deku.Attribute as Deku.Attribute
+import Data.Unit as Data.Unit
+import Control.Semigroupoid ((<<<))
+import Deku.DOM.Elt.Object (Object_)
 
 data Codebase = Codebase
 
-instance Attr Applet_ Codebase String where
-  attr Codebase value = unsafeAttribute { key: "codebase", value: prop' value }
+instance Deku.Attribute.Attr everything Codebase Data.Unit.Unit where
+  attr _ _ = Deku.Attribute.unsafeAttribute { key: "codebase", value: Deku.Attribute.unset' }
 
-instance Attr everything Codebase Unit where
-  attr Codebase _ = unsafeAttribute
-    { key: "codebase", value: unset' }
+instance Deku.Attribute.Attr Object_ Codebase String where
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "codebase", value: _ } <<< Deku.Attribute.prop'

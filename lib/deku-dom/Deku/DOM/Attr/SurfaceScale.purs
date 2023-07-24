@@ -1,21 +1,20 @@
 module Deku.DOM.Attr.SurfaceScale where
 
-import Prelude
-
-import Deku.DOM.Elt.FeSpecularLighting (FeSpecularLighting_)
+import Deku.Attribute as Deku.Attribute
+import Data.Unit as Data.Unit
+import Control.Semigroupoid ((<<<))
 import Deku.DOM.Elt.FeDiffuseLighting (FeDiffuseLighting_)
-import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
+import Deku.DOM.Elt.FeSpecularLighting (FeSpecularLighting_)
 
 data SurfaceScale = SurfaceScale
 
-instance Attr FeDiffuseLighting_ SurfaceScale String where
-  attr SurfaceScale value = unsafeAttribute
-    { key: "surfaceScale", value: prop' value }
+instance Deku.Attribute.Attr everything SurfaceScale Data.Unit.Unit where
+  attr _ _ = Deku.Attribute.unsafeAttribute { key: "surfaceScale", value: Deku.Attribute.unset' }
 
-instance Attr FeSpecularLighting_ SurfaceScale String where
-  attr SurfaceScale value = unsafeAttribute
-    { key: "surfaceScale", value: prop' value }
+instance Deku.Attribute.Attr FeDiffuseLighting_ SurfaceScale String where
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "surfaceScale", value: _ } <<<
+    Deku.Attribute.prop'
 
-instance Attr everything SurfaceScale Unit where
-  attr SurfaceScale _ = unsafeAttribute
-    { key: "surfaceScale", value: unset' }
+instance Deku.Attribute.Attr FeSpecularLighting_ SurfaceScale String where
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "surfaceScale", value: _ } <<<
+    Deku.Attribute.prop'

@@ -1,16 +1,15 @@
 module Deku.DOM.Attr.AcceptCharset where
 
-import Prelude
-
+import Deku.Attribute as Deku.Attribute
+import Data.Unit as Data.Unit
+import Control.Semigroupoid ((<<<))
 import Deku.DOM.Elt.Form (Form_)
-import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 
 data AcceptCharset = AcceptCharset
 
-instance Attr Form_ AcceptCharset String where
-  attr AcceptCharset value = unsafeAttribute
-    { key: "accept-charset", value: prop' value }
+instance Deku.Attribute.Attr everything AcceptCharset Data.Unit.Unit where
+  attr _ _ = Deku.Attribute.unsafeAttribute { key: "accept-charset", value: Deku.Attribute.unset' }
 
-instance Attr everything AcceptCharset Unit where
-  attr AcceptCharset _ = unsafeAttribute
-    { key: "accept-charset", value: unset' }
+instance Deku.Attribute.Attr Form_ AcceptCharset String where
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "accept-charset", value: _ } <<<
+    Deku.Attribute.prop'

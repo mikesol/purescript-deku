@@ -1,19 +1,18 @@
 module Deku.DOM.Attr.Srcset where
 
-import Prelude
-
+import Deku.Attribute as Deku.Attribute
+import Data.Unit as Data.Unit
+import Control.Semigroupoid ((<<<))
 import Deku.DOM.Elt.Img (Img_)
 import Deku.DOM.Elt.Source (Source_)
-import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 
 data Srcset = Srcset
 
-instance Attr Img_ Srcset String where
-  attr Srcset value = unsafeAttribute { key: "srcset", value: prop' value }
+instance Deku.Attribute.Attr everything Srcset Data.Unit.Unit where
+  attr _ _ = Deku.Attribute.unsafeAttribute { key: "srcset", value: Deku.Attribute.unset' }
 
-instance Attr Source_ Srcset String where
-  attr Srcset value = unsafeAttribute { key: "srcset", value: prop' value }
+instance Deku.Attribute.Attr Img_ Srcset String where
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "srcset", value: _ } <<< Deku.Attribute.prop'
 
-instance Attr everything Srcset Unit where
-  attr Srcset _ = unsafeAttribute
-    { key: "srcset", value: unset' }
+instance Deku.Attribute.Attr Source_ Srcset String where
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "srcset", value: _ } <<< Deku.Attribute.prop'

@@ -1,21 +1,20 @@
 module Deku.DOM.Attr.Maxlength where
 
-import Prelude
-
+import Deku.Attribute as Deku.Attribute
+import Data.Unit as Data.Unit
+import Control.Semigroupoid ((<<<))
 import Deku.DOM.Elt.Input (Input_)
 import Deku.DOM.Elt.Textarea (Textarea_)
-import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 
 data Maxlength = Maxlength
 
-instance Attr Input_ Maxlength String where
-  attr Maxlength value = unsafeAttribute
-    { key: "maxlength", value: prop' value }
+instance Deku.Attribute.Attr everything Maxlength Data.Unit.Unit where
+  attr _ _ = Deku.Attribute.unsafeAttribute { key: "maxlength", value: Deku.Attribute.unset' }
 
-instance Attr Textarea_ Maxlength String where
-  attr Maxlength value = unsafeAttribute
-    { key: "maxlength", value: prop' value }
+instance Deku.Attribute.Attr Input_ Maxlength String where
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "maxlength", value: _ } <<<
+    Deku.Attribute.prop'
 
-instance Attr everything Maxlength Unit where
-  attr Maxlength _ = unsafeAttribute
-    { key: "maxlength", value: unset' }
+instance Deku.Attribute.Attr Textarea_ Maxlength String where
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "maxlength", value: _ } <<<
+    Deku.Attribute.prop'

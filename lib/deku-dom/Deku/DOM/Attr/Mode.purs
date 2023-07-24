@@ -1,15 +1,14 @@
 module Deku.DOM.Attr.Mode where
 
-import Prelude
-
+import Deku.Attribute as Deku.Attribute
+import Data.Unit as Data.Unit
+import Control.Semigroupoid ((<<<))
 import Deku.DOM.Elt.FeBlend (FeBlend_)
-import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 
 data Mode = Mode
 
-instance Attr FeBlend_ Mode String where
-  attr Mode value = unsafeAttribute { key: "mode", value: prop' value }
+instance Deku.Attribute.Attr everything Mode Data.Unit.Unit where
+  attr _ _ = Deku.Attribute.unsafeAttribute { key: "mode", value: Deku.Attribute.unset' }
 
-instance Attr everything Mode Unit where
-  attr Mode _ = unsafeAttribute
-    { key: "mode", value: unset' }
+instance Deku.Attribute.Attr FeBlend_ Mode String where
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "mode", value: _ } <<< Deku.Attribute.prop'

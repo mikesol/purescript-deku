@@ -1,16 +1,15 @@
 module Deku.DOM.Attr.PatternUnits where
 
-import Prelude
-
+import Deku.Attribute as Deku.Attribute
+import Data.Unit as Data.Unit
+import Control.Semigroupoid ((<<<))
 import Deku.DOM.Elt.Pattern (Pattern_)
-import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 
 data PatternUnits = PatternUnits
 
-instance Attr Pattern_ PatternUnits String where
-  attr PatternUnits value = unsafeAttribute
-    { key: "patternUnits", value: prop' value }
+instance Deku.Attribute.Attr everything PatternUnits Data.Unit.Unit where
+  attr _ _ = Deku.Attribute.unsafeAttribute { key: "patternUnits", value: Deku.Attribute.unset' }
 
-instance Attr everything PatternUnits Unit where
-  attr PatternUnits _ = unsafeAttribute
-    { key: "patternUnits", value: unset' }
+instance Deku.Attribute.Attr Pattern_ PatternUnits String where
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "patternUnits", value: _ } <<<
+    Deku.Attribute.prop'

@@ -1,15 +1,14 @@
 module Deku.DOM.Attr.Capture where
 
-import Prelude
-
+import Deku.Attribute as Deku.Attribute
+import Data.Unit as Data.Unit
+import Control.Semigroupoid ((<<<))
 import Deku.DOM.Elt.Input (Input_)
-import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 
 data Capture = Capture
 
-instance Attr Input_ Capture String where
-  attr Capture value = unsafeAttribute { key: "capture", value: prop' value }
+instance Deku.Attribute.Attr everything Capture Data.Unit.Unit where
+  attr _ _ = Deku.Attribute.unsafeAttribute { key: "capture", value: Deku.Attribute.unset' }
 
-instance Attr everything Capture Unit where
-  attr Capture _ = unsafeAttribute
-    { key: "capture", value: unset' }
+instance Deku.Attribute.Attr Input_ Capture String where
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "capture", value: _ } <<< Deku.Attribute.prop'

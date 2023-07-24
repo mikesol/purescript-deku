@@ -13,40 +13,46 @@ imports :: Array ( ImportDecl Void )
 imports =
     unsafePartial $
         [ declImport "Control.Plus" [ importValue "empty" ]
-        , declImport "Deku.Attribute" [ importType "Attribute" ]
+        , declImportAs "Deku.Attribute" [] "Deku.Attribute"
         , declImportAs "Deku.Control" [] "DC"
         , declImport "Deku.Core" [ importType "Nut" ]
-        , declImport "FRP.Event" [ importType "Event" ] 
+        , declImportAs "FRP.Event" [] "FRP.Event" 
         ]
 
 generate :: Partial => Element -> Array ( Declaration Void )
 generate element = do
-    let
-        typeName :: String
-        typeName = eltType element.ctor
+    let { typeMarker, name, short, shortest } = names element.ctor
         
-    [ declData typeName [] []
+    [ declData typeMarker [] []
         
-    , declSignature element.ctor
+    , declSignature name
         $ typeArrow
-            [ typeArrayed $ typeEvented $ typeAttributed $ typeCtor typeName
+            [ typeArrayed $ typeEvented $ typeAttributed $ typeCtor typeMarker
             , typeArrayed typeNut
             ]
         $ typeNut
-    , declValue element.ctor []
+    , declValue name []
         $ exprApp ( exprIdent "DC.elementify2" ) [ exprString element.tag ]
 
-    , declSignature ( un Ctor element.ctor <> "_" ) 
+    , declSignature short
         $ typeArrow [ typeArrayed typeNut ]
         $ typeNut
-    , declValue ( un Ctor element.ctor <> "_" ) []
+    , declValue short []
         $ exprApp ( exprIdent $ un Ctor element.ctor ) [ exprIdent "empty" ]
     
     
-    , declSignature ( un Ctor element.ctor <> "__" ) 
+    , declSignature shortest
         $ typeArrow [ typeCtor "String" ]
         $ typeNut
-    , declValue ( un Ctor element.ctor <> "__" ) [ binderVar "t" ]
+    , declValue shortest [ binderVar "t" ]
         $ exprApp ( exprIdent $ un Ctor element.ctor <> "_" )
         [ exprArray [ exprApp ( exprIdent "DC.text_" ) [ exprIdent "t" ] ] ]
     ]
+
+names :: Ctor -> { typeMarker :: String, name :: String, short :: String, shortest :: String }
+names ctor =
+    { typeMarker : eltType ctor
+    , name : un Ctor ctor
+    , short : un Ctor ctor <> "_"
+    , shortest : un Ctor ctor <> "__"
+    }

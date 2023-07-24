@@ -1,15 +1,14 @@
 module Deku.DOM.Attr.Bias where
 
-import Prelude
-
+import Deku.Attribute as Deku.Attribute
+import Data.Unit as Data.Unit
+import Control.Semigroupoid ((<<<))
 import Deku.DOM.Elt.FeConvolveMatrix (FeConvolveMatrix_)
-import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 
 data Bias = Bias
 
-instance Attr FeConvolveMatrix_ Bias String where
-  attr Bias value = unsafeAttribute { key: "bias", value: prop' value }
+instance Deku.Attribute.Attr everything Bias Data.Unit.Unit where
+  attr _ _ = Deku.Attribute.unsafeAttribute { key: "bias", value: Deku.Attribute.unset' }
 
-instance Attr everything Bias Unit where
-  attr Bias _ = unsafeAttribute
-    { key: "bias", value: unset' }
+instance Deku.Attribute.Attr FeConvolveMatrix_ Bias String where
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "bias", value: _ } <<< Deku.Attribute.prop'

@@ -1,15 +1,14 @@
 module Deku.DOM.Attr.Srcdoc where
 
-import Prelude
-
+import Deku.Attribute as Deku.Attribute
+import Data.Unit as Data.Unit
+import Control.Semigroupoid ((<<<))
 import Deku.DOM.Elt.Iframe (Iframe_)
-import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 
 data Srcdoc = Srcdoc
 
-instance Attr Iframe_ Srcdoc String where
-  attr Srcdoc value = unsafeAttribute { key: "srcdoc", value: prop' value }
+instance Deku.Attribute.Attr everything Srcdoc Data.Unit.Unit where
+  attr _ _ = Deku.Attribute.unsafeAttribute { key: "srcdoc", value: Deku.Attribute.unset' }
 
-instance Attr everything Srcdoc Unit where
-  attr Srcdoc _ = unsafeAttribute
-    { key: "srcdoc", value: unset' }
+instance Deku.Attribute.Attr Iframe_ Srcdoc String where
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "srcdoc", value: _ } <<< Deku.Attribute.prop'

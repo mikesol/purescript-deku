@@ -1,16 +1,15 @@
 module Deku.DOM.Attr.MarkerUnits where
 
-import Prelude
-
+import Deku.Attribute as Deku.Attribute
+import Data.Unit as Data.Unit
+import Control.Semigroupoid ((<<<))
 import Deku.DOM.Elt.Marker (Marker_)
-import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 
 data MarkerUnits = MarkerUnits
 
-instance Attr Marker_ MarkerUnits String where
-  attr MarkerUnits value = unsafeAttribute
-    { key: "markerUnits", value: prop' value }
+instance Deku.Attribute.Attr everything MarkerUnits Data.Unit.Unit where
+  attr _ _ = Deku.Attribute.unsafeAttribute { key: "markerUnits", value: Deku.Attribute.unset' }
 
-instance Attr everything MarkerUnits Unit where
-  attr MarkerUnits _ = unsafeAttribute
-    { key: "markerUnits", value: unset' }
+instance Deku.Attribute.Attr Marker_ MarkerUnits String where
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "markerUnits", value: _ } <<<
+    Deku.Attribute.prop'

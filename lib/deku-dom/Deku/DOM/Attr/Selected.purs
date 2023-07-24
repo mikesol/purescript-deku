@@ -1,15 +1,14 @@
 module Deku.DOM.Attr.Selected where
 
-import Prelude
-
+import Deku.Attribute as Deku.Attribute
+import Data.Unit as Data.Unit
+import Control.Semigroupoid ((<<<))
 import Deku.DOM.Elt.Option (Option_)
-import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 
 data Selected = Selected
 
-instance Attr Option_ Selected String where
-  attr Selected value = unsafeAttribute { key: "selected", value: prop' value }
+instance Deku.Attribute.Attr everything Selected Data.Unit.Unit where
+  attr _ _ = Deku.Attribute.unsafeAttribute { key: "selected", value: Deku.Attribute.unset' }
 
-instance Attr everything Selected Unit where
-  attr Selected _ = unsafeAttribute
-    { key: "selected", value: unset' }
+instance Deku.Attribute.Attr Option_ Selected String where
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "selected", value: _ } <<< Deku.Attribute.prop'

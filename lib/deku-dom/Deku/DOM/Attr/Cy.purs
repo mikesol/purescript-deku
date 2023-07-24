@@ -1,23 +1,13 @@
 module Deku.DOM.Attr.Cy where
 
-import Prelude
-
-import Deku.DOM.Elt.RadialGradient (RadialGradient_)
-import Deku.DOM.Elt.Ellipse (Ellipse_)
-import Deku.DOM.Elt.Circle (Circle_)
-import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
+import Control.Semigroupoid ((<<<))
+import Deku.Attribute as Deku.Attribute
+import Data.Unit as Data.Unit
 
 data Cy = Cy
 
-instance Attr Circle_ Cy String where
-  attr Cy value = unsafeAttribute { key: "cy", value: prop' value }
+instance Deku.Attribute.Attr everything Cy Data.Unit.Unit where
+  attr _ _ = Deku.Attribute.unsafeAttribute { key: "cy", value: Deku.Attribute.unset' }
 
-instance Attr Ellipse_ Cy String where
-  attr Cy value = unsafeAttribute { key: "cy", value: prop' value }
-
-instance Attr RadialGradient_ Cy String where
-  attr Cy value = unsafeAttribute { key: "cy", value: prop' value }
-
-instance Attr everything Cy Unit where
-  attr Cy _ = unsafeAttribute
-    { key: "cy", value: unset' }
+instance Deku.Attribute.Attr everything Cy String where
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "cy", value: _ } <<< Deku.Attribute.prop'

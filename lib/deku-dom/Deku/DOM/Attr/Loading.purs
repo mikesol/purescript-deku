@@ -1,19 +1,18 @@
 module Deku.DOM.Attr.Loading where
 
-import Prelude
-
-import Deku.DOM.Elt.Img (Img_)
+import Deku.Attribute as Deku.Attribute
+import Data.Unit as Data.Unit
+import Control.Semigroupoid ((<<<))
 import Deku.DOM.Elt.Iframe (Iframe_)
-import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
+import Deku.DOM.Elt.Img (Img_)
 
 data Loading = Loading
 
-instance Attr Img_ Loading String where
-  attr Loading value = unsafeAttribute { key: "loading ", value: prop' value }
+instance Deku.Attribute.Attr everything Loading Data.Unit.Unit where
+  attr _ _ = Deku.Attribute.unsafeAttribute { key: "loading", value: Deku.Attribute.unset' }
 
-instance Attr Iframe_ Loading String where
-  attr Loading value = unsafeAttribute { key: "loading ", value: prop' value }
+instance Deku.Attribute.Attr Iframe_ Loading String where
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "loading", value: _ } <<< Deku.Attribute.prop'
 
-instance Attr everything Loading Unit where
-  attr Loading _ = unsafeAttribute
-    { key: "loading ", value: unset' }
+instance Deku.Attribute.Attr Img_ Loading String where
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "loading", value: _ } <<< Deku.Attribute.prop'

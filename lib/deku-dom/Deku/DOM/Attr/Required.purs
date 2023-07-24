@@ -1,23 +1,22 @@
 module Deku.DOM.Attr.Required where
 
-import Prelude
-
+import Deku.Attribute as Deku.Attribute
+import Data.Unit as Data.Unit
+import Control.Semigroupoid ((<<<))
 import Deku.DOM.Elt.Input (Input_)
 import Deku.DOM.Elt.Select (Select_)
 import Deku.DOM.Elt.Textarea (Textarea_)
-import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 
 data Required = Required
 
-instance Attr Input_ Required String where
-  attr Required value = unsafeAttribute { key: "required", value: prop' value }
+instance Deku.Attribute.Attr everything Required Data.Unit.Unit where
+  attr _ _ = Deku.Attribute.unsafeAttribute { key: "required", value: Deku.Attribute.unset' }
 
-instance Attr Select_ Required String where
-  attr Required value = unsafeAttribute { key: "required", value: prop' value }
+instance Deku.Attribute.Attr Input_ Required String where
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "required", value: _ } <<< Deku.Attribute.prop'
 
-instance Attr Textarea_ Required String where
-  attr Required value = unsafeAttribute { key: "required", value: prop' value }
+instance Deku.Attribute.Attr Select_ Required String where
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "required", value: _ } <<< Deku.Attribute.prop'
 
-instance Attr everything Required Unit where
-  attr Required _ = unsafeAttribute
-    { key: "required", value: unset' }
+instance Deku.Attribute.Attr Textarea_ Required String where
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "required", value: _ } <<< Deku.Attribute.prop'

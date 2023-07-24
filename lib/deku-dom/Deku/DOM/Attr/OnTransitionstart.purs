@@ -1,29 +1,31 @@
 module Deku.DOM.Attr.OnTransitionstart where
 
-import Prelude
-import Effect (Effect)
-import Deku.Attribute (class Attr, Attribute, Cb(..), cb', unsafeAttribute, unset')
-import FRP.Event (Event)
+import Control.Semigroupoid ((<<<))
+import Effect as Effect
+import Web.Event.Internal.Types as Web.Event.Internal.Types
+import Data.Unit as Data.Unit
+import Deku.Attribute as Deku.Attribute
+import FRP.Event as FRP.Event
 
 data OnTransitionstart = OnTransitionstart
 
-instance Attr anything OnTransitionstart Cb where
-  attr OnTransitionstart value = unsafeAttribute
-    { key: "transitionstart", value: cb' value }
+instance Deku.Attribute.Attr everything OnTransitionstart Data.Unit.Unit where
+  attr _ _ = Deku.Attribute.unsafeAttribute
+    { key: "onTransitionstart", value: Deku.Attribute.unset' }
 
-instance Attr anything OnTransitionstart (Effect Unit) where
-  attr OnTransitionstart value = unsafeAttribute
-    { key: "transitionstart", value: cb' (Cb (const (value $> true))) }
-
-instance Attr anything OnTransitionstart (Effect Boolean) where
-  attr OnTransitionstart value = unsafeAttribute
-    { key: "transitionstart", value: cb' (Cb (const value)) }
+instance
+  Deku.Attribute.Attr everything
+    OnTransitionstart
+    (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit) where
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "onTransitionstart", value: _ }
+    <<< Deku.Attribute.cb'
+    <<< Deku.Attribute.cb
 
 type OnTransitionstartEffect =
   forall element
-   . Attr element OnTransitionstart (Effect Unit)
-  => Event (Attribute element)
+   . Deku.Attribute.Attr element OnTransitionstart (Effect.Effect Data.Unit.Unit)
+  => FRP.Event.Event (Deku.Attribute.Attribute element)
 
-instance Attr everything OnTransitionstart Unit where
-  attr OnTransitionstart _ = unsafeAttribute
-    { key: "transitionstart", value: unset' }
+instance Deku.Attribute.Attr everything OnTransitionstart Deku.Attribute.Cb where
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "onTransitionstart", value: _ } <<<
+    Deku.Attribute.cb'

@@ -1,28 +1,28 @@
 module Deku.DOM.Attr.OnKeyup where
 
-import Prelude
-import Effect (Effect)
-import Deku.Attribute (class Attr, Attribute, Cb(..), cb', unsafeAttribute, unset')
-import FRP.Event (Event)
+import Control.Semigroupoid ((<<<))
+import Effect as Effect
+import Web.Event.Internal.Types as Web.Event.Internal.Types
+import Data.Unit as Data.Unit
+import Deku.Attribute as Deku.Attribute
+import FRP.Event as FRP.Event
 
 data OnKeyup = OnKeyup
 
-instance Attr anything OnKeyup Cb where
-  attr OnKeyup value = unsafeAttribute { key: "keyup", value: cb' value }
+instance Deku.Attribute.Attr everything OnKeyup Data.Unit.Unit where
+  attr _ _ = Deku.Attribute.unsafeAttribute { key: "onKeyup", value: Deku.Attribute.unset' }
 
-instance Attr anything OnKeyup (Effect Unit) where
-  attr OnKeyup value = unsafeAttribute
-    { key: "keyup", value: cb' (Cb (const (value $> true))) }
-
-instance Attr anything OnKeyup (Effect Boolean) where
-  attr OnKeyup value = unsafeAttribute
-    { key: "keyup", value: cb' (Cb (const value)) }
+instance
+  Deku.Attribute.Attr everything
+    OnKeyup
+    (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit) where
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "onKeyup", value: _ } <<< Deku.Attribute.cb'
+    <<< Deku.Attribute.cb
 
 type OnKeyupEffect =
   forall element
-   . Attr element OnKeyup (Effect Unit)
-  => Event (Attribute element)
+   . Deku.Attribute.Attr element OnKeyup (Effect.Effect Data.Unit.Unit)
+  => FRP.Event.Event (Deku.Attribute.Attribute element)
 
-instance Attr everything OnKeyup Unit where
-  attr OnKeyup _ = unsafeAttribute
-    { key: "keyup", value: unset' }
+instance Deku.Attribute.Attr everything OnKeyup Deku.Attribute.Cb where
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "onKeyup", value: _ } <<< Deku.Attribute.cb'

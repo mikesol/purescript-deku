@@ -1,16 +1,15 @@
 module Deku.DOM.Attr.MarkerHeight where
 
-import Prelude
-
+import Deku.Attribute as Deku.Attribute
+import Data.Unit as Data.Unit
+import Control.Semigroupoid ((<<<))
 import Deku.DOM.Elt.Marker (Marker_)
-import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 
 data MarkerHeight = MarkerHeight
 
-instance Attr Marker_ MarkerHeight String where
-  attr MarkerHeight value = unsafeAttribute
-    { key: "markerHeight", value: prop' value }
+instance Deku.Attribute.Attr everything MarkerHeight Data.Unit.Unit where
+  attr _ _ = Deku.Attribute.unsafeAttribute { key: "markerHeight", value: Deku.Attribute.unset' }
 
-instance Attr everything MarkerHeight Unit where
-  attr MarkerHeight _ = unsafeAttribute
-    { key: "markerHeight", value: unset' }
+instance Deku.Attribute.Attr Marker_ MarkerHeight String where
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "markerHeight", value: _ } <<<
+    Deku.Attribute.prop'

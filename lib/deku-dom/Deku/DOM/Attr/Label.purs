@@ -1,23 +1,26 @@
 module Deku.DOM.Attr.Label where
 
-import Prelude
-
+import Deku.Attribute as Deku.Attribute
+import Data.Unit as Data.Unit
+import Control.Semigroupoid ((<<<))
+import Deku.DOM.Elt.Menu (Menu_)
 import Deku.DOM.Elt.Optgroup (Optgroup_)
 import Deku.DOM.Elt.Option (Option_)
 import Deku.DOM.Elt.Track (Track_)
-import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 
 data Label = Label
 
-instance Attr Optgroup_ Label String where
-  attr Label value = unsafeAttribute { key: "label", value: prop' value }
+instance Deku.Attribute.Attr everything Label Data.Unit.Unit where
+  attr _ _ = Deku.Attribute.unsafeAttribute { key: "label", value: Deku.Attribute.unset' }
 
-instance Attr Option_ Label String where
-  attr Label value = unsafeAttribute { key: "label", value: prop' value }
+instance Deku.Attribute.Attr Menu_ Label String where
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "label", value: _ } <<< Deku.Attribute.prop'
 
-instance Attr Track_ Label String where
-  attr Label value = unsafeAttribute { key: "label", value: prop' value }
+instance Deku.Attribute.Attr Optgroup_ Label String where
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "label", value: _ } <<< Deku.Attribute.prop'
 
-instance Attr everything Label Unit where
-  attr Label _ = unsafeAttribute
-    { key: "label", value: unset' }
+instance Deku.Attribute.Attr Option_ Label String where
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "label", value: _ } <<< Deku.Attribute.prop'
+
+instance Deku.Attribute.Attr Track_ Label String where
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "label", value: _ } <<< Deku.Attribute.prop'

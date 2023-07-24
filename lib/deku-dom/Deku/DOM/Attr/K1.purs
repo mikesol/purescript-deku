@@ -1,15 +1,14 @@
 module Deku.DOM.Attr.K1 where
 
-import Prelude
-
+import Deku.Attribute as Deku.Attribute
+import Data.Unit as Data.Unit
+import Control.Semigroupoid ((<<<))
 import Deku.DOM.Elt.FeComposite (FeComposite_)
-import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 
 data K1 = K1
 
-instance Attr FeComposite_ K1 String where
-  attr K1 value = unsafeAttribute { key: "k1", value: prop' value }
+instance Deku.Attribute.Attr everything K1 Data.Unit.Unit where
+  attr _ _ = Deku.Attribute.unsafeAttribute { key: "k1", value: Deku.Attribute.unset' }
 
-instance Attr everything K1 Unit where
-  attr K1 _ = unsafeAttribute
-    { key: "k1", value: unset' }
+instance Deku.Attribute.Attr FeComposite_ K1 String where
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "k1", value: _ } <<< Deku.Attribute.prop'

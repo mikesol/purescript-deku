@@ -1,28 +1,28 @@
 module Deku.DOM.Attr.OnFocus where
 
-import Prelude
-import Effect (Effect)
-import Deku.Attribute (class Attr, Attribute, Cb(..), cb', unsafeAttribute, unset')
-import FRP.Event (Event)
+import Control.Semigroupoid ((<<<))
+import Effect as Effect
+import Web.Event.Internal.Types as Web.Event.Internal.Types
+import Data.Unit as Data.Unit
+import Deku.Attribute as Deku.Attribute
+import FRP.Event as FRP.Event
 
 data OnFocus = OnFocus
 
-instance Attr anything OnFocus Cb where
-  attr OnFocus value = unsafeAttribute { key: "focus", value: cb' value }
+instance Deku.Attribute.Attr everything OnFocus Data.Unit.Unit where
+  attr _ _ = Deku.Attribute.unsafeAttribute { key: "onFocus", value: Deku.Attribute.unset' }
 
-instance Attr anything OnFocus (Effect Unit) where
-  attr OnFocus value = unsafeAttribute
-    { key: "focus", value: cb' (Cb (const (value $> true))) }
-
-instance Attr anything OnFocus (Effect Boolean) where
-  attr OnFocus value = unsafeAttribute
-    { key: "focus", value: cb' (Cb (const value)) }
+instance
+  Deku.Attribute.Attr everything
+    OnFocus
+    (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit) where
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "onFocus", value: _ } <<< Deku.Attribute.cb'
+    <<< Deku.Attribute.cb
 
 type OnFocusEffect =
   forall element
-   . Attr element OnFocus (Effect Unit)
-  => Event (Attribute element)
+   . Deku.Attribute.Attr element OnFocus (Effect.Effect Data.Unit.Unit)
+  => FRP.Event.Event (Deku.Attribute.Attribute element)
 
-instance Attr everything OnFocus Unit where
-  attr OnFocus _ = unsafeAttribute
-    { key: "focus", value: unset' }
+instance Deku.Attribute.Attr everything OnFocus Deku.Attribute.Cb where
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "onFocus", value: _ } <<< Deku.Attribute.cb'

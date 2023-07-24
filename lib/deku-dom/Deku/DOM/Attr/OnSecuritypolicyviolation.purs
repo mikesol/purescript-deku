@@ -1,29 +1,31 @@
 module Deku.DOM.Attr.OnSecuritypolicyviolation where
 
-import Prelude
-import Effect (Effect)
-import Deku.Attribute (class Attr, Attribute, Cb(..), cb', unsafeAttribute, unset')
-import FRP.Event (Event)
+import Control.Semigroupoid ((<<<))
+import Effect as Effect
+import Web.Event.Internal.Types as Web.Event.Internal.Types
+import Data.Unit as Data.Unit
+import Deku.Attribute as Deku.Attribute
+import FRP.Event as FRP.Event
 
 data OnSecuritypolicyviolation = OnSecuritypolicyviolation
 
-instance Attr anything OnSecuritypolicyviolation Cb where
-  attr OnSecuritypolicyviolation value = unsafeAttribute
-    { key: "securitypolicyviolation", value: cb' value }
+instance Deku.Attribute.Attr everything OnSecuritypolicyviolation Data.Unit.Unit where
+  attr _ _ = Deku.Attribute.unsafeAttribute
+    { key: "onSecuritypolicyviolation", value: Deku.Attribute.unset' }
 
-instance Attr anything OnSecuritypolicyviolation (Effect Unit) where
-  attr OnSecuritypolicyviolation value = unsafeAttribute
-    { key: "securitypolicyviolation", value: cb' (Cb (const (value $> true))) }
-
-instance Attr anything OnSecuritypolicyviolation (Effect Boolean) where
-  attr OnSecuritypolicyviolation value = unsafeAttribute
-    { key: "securitypolicyviolation", value: cb' (Cb (const value)) }
+instance
+  Deku.Attribute.Attr everything
+    OnSecuritypolicyviolation
+    (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit) where
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "onSecuritypolicyviolation", value: _ }
+    <<< Deku.Attribute.cb'
+    <<< Deku.Attribute.cb
 
 type OnSecuritypolicyviolationEffect =
   forall element
-   . Attr element OnSecuritypolicyviolation (Effect Unit)
-  => Event (Attribute element)
+   . Deku.Attribute.Attr element OnSecuritypolicyviolation (Effect.Effect Data.Unit.Unit)
+  => FRP.Event.Event (Deku.Attribute.Attribute element)
 
-instance Attr everything OnSecuritypolicyviolation Unit where
-  attr OnSecuritypolicyviolation _ = unsafeAttribute
-    { key: "securitypolicyviolation", value: unset' }
+instance Deku.Attribute.Attr everything OnSecuritypolicyviolation Deku.Attribute.Cb where
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "onSecuritypolicyviolation", value: _ } <<<
+    Deku.Attribute.cb'

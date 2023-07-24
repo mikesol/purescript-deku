@@ -1,26 +1,28 @@
 module Deku.DOM.Attr.OnLoad where
 
-import Prelude
-import Effect (Effect)
-import Deku.Attribute (class Attr, Attribute, Cb(..), cb', unsafeAttribute, unset')
-import FRP.Event (Event)
+import Control.Semigroupoid ((<<<))
+import Effect as Effect
+import Web.Event.Internal.Types as Web.Event.Internal.Types
+import Data.Unit as Data.Unit
+import Deku.Attribute as Deku.Attribute
+import FRP.Event as FRP.Event
 
 data OnLoad = OnLoad
 
-instance Attr anything OnLoad Cb where
-  attr OnLoad value = unsafeAttribute { key: "load", value: cb' value }
+instance Deku.Attribute.Attr everything OnLoad Data.Unit.Unit where
+  attr _ _ = Deku.Attribute.unsafeAttribute { key: "onLoad", value: Deku.Attribute.unset' }
 
-instance Attr anything OnLoad (Effect Unit) where
-  attr OnLoad value = unsafeAttribute
-    { key: "load", value: cb' (Cb (const (value $> true))) }
-
-instance Attr anything OnLoad (Effect Boolean) where
-  attr OnLoad value = unsafeAttribute
-    { key: "load", value: cb' (Cb (const value)) }
+instance
+  Deku.Attribute.Attr everything
+    OnLoad
+    (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit) where
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "onLoad", value: _ } <<< Deku.Attribute.cb' <<<
+    Deku.Attribute.cb
 
 type OnLoadEffect =
-  forall element. Attr element OnLoad (Effect Unit) => Event (Attribute element)
+  forall element
+   . Deku.Attribute.Attr element OnLoad (Effect.Effect Data.Unit.Unit)
+  => FRP.Event.Event (Deku.Attribute.Attribute element)
 
-instance Attr everything OnLoad Unit where
-  attr OnLoad _ = unsafeAttribute
-    { key: "load", value: unset' }
+instance Deku.Attribute.Attr everything OnLoad Deku.Attribute.Cb where
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "onLoad", value: _ } <<< Deku.Attribute.cb'

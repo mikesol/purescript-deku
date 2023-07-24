@@ -1,16 +1,15 @@
 module Deku.DOM.Attr.FilterRes where
 
-import Prelude
-
+import Deku.Attribute as Deku.Attribute
+import Data.Unit as Data.Unit
+import Control.Semigroupoid ((<<<))
 import Deku.DOM.Elt.Filter (Filter_)
-import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 
 data FilterRes = FilterRes
 
-instance Attr Filter_ FilterRes String where
-  attr FilterRes value = unsafeAttribute
-    { key: "filterRes", value: prop' value }
+instance Deku.Attribute.Attr everything FilterRes Data.Unit.Unit where
+  attr _ _ = Deku.Attribute.unsafeAttribute { key: "filterRes", value: Deku.Attribute.unset' }
 
-instance Attr everything FilterRes Unit where
-  attr FilterRes _ = unsafeAttribute
-    { key: "filterRes", value: unset' }
+instance Deku.Attribute.Attr Filter_ FilterRes String where
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "filterRes", value: _ } <<<
+    Deku.Attribute.prop'

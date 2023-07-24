@@ -1,28 +1,28 @@
 module Deku.DOM.Attr.OnError where
 
-import Prelude
-import Effect (Effect)
-import Deku.Attribute (class Attr, Attribute, Cb(..), cb', unsafeAttribute, unset')
-import FRP.Event (Event)
+import Control.Semigroupoid ((<<<))
+import Effect as Effect
+import Web.Event.Internal.Types as Web.Event.Internal.Types
+import Data.Unit as Data.Unit
+import Deku.Attribute as Deku.Attribute
+import FRP.Event as FRP.Event
 
 data OnError = OnError
 
-instance Attr anything OnError Cb where
-  attr OnError value = unsafeAttribute { key: "error", value: cb' value }
+instance Deku.Attribute.Attr everything OnError Data.Unit.Unit where
+  attr _ _ = Deku.Attribute.unsafeAttribute { key: "onError", value: Deku.Attribute.unset' }
 
-instance Attr anything OnError (Effect Unit) where
-  attr OnError value = unsafeAttribute
-    { key: "error", value: cb' (Cb (const (value $> true))) }
-
-instance Attr anything OnError (Effect Boolean) where
-  attr OnError value = unsafeAttribute
-    { key: "error", value: cb' (Cb (const value)) }
+instance
+  Deku.Attribute.Attr everything
+    OnError
+    (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit) where
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "onError", value: _ } <<< Deku.Attribute.cb'
+    <<< Deku.Attribute.cb
 
 type OnErrorEffect =
   forall element
-   . Attr element OnError (Effect Unit)
-  => Event (Attribute element)
+   . Deku.Attribute.Attr element OnError (Effect.Effect Data.Unit.Unit)
+  => FRP.Event.Event (Deku.Attribute.Attribute element)
 
-instance Attr everything OnError Unit where
-  attr OnError _ = unsafeAttribute
-    { key: "error", value: unset' }
+instance Deku.Attribute.Attr everything OnError Deku.Attribute.Cb where
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "onError", value: _ } <<< Deku.Attribute.cb'

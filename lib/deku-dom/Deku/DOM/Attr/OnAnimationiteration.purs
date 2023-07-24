@@ -1,29 +1,31 @@
 module Deku.DOM.Attr.OnAnimationiteration where
 
-import Prelude
-import Effect (Effect)
-import Deku.Attribute (class Attr, Attribute, Cb(..), cb', unsafeAttribute, unset')
-import FRP.Event (Event)
+import Control.Semigroupoid ((<<<))
+import Effect as Effect
+import Web.Event.Internal.Types as Web.Event.Internal.Types
+import Data.Unit as Data.Unit
+import Deku.Attribute as Deku.Attribute
+import FRP.Event as FRP.Event
 
 data OnAnimationiteration = OnAnimationiteration
 
-instance Attr anything OnAnimationiteration Cb where
-  attr OnAnimationiteration value = unsafeAttribute
-    { key: "animationiteration ", value: cb' value }
+instance Deku.Attribute.Attr everything OnAnimationiteration Data.Unit.Unit where
+  attr _ _ = Deku.Attribute.unsafeAttribute
+    { key: "onAnimationiteration", value: Deku.Attribute.unset' }
 
-instance Attr anything OnAnimationiteration (Effect Unit) where
-  attr OnAnimationiteration value = unsafeAttribute
-    { key: "animationiteration ", value: cb' (Cb (const (value $> true))) }
-
-instance Attr anything OnAnimationiteration (Effect Boolean) where
-  attr OnAnimationiteration value = unsafeAttribute
-    { key: "animationiteration ", value: cb' (Cb (const value)) }
+instance
+  Deku.Attribute.Attr everything
+    OnAnimationiteration
+    (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit) where
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "onAnimationiteration", value: _ }
+    <<< Deku.Attribute.cb'
+    <<< Deku.Attribute.cb
 
 type OnAnimationiterationEffect =
   forall element
-   . Attr element OnAnimationiteration (Effect Unit)
-  => Event (Attribute element)
+   . Deku.Attribute.Attr element OnAnimationiteration (Effect.Effect Data.Unit.Unit)
+  => FRP.Event.Event (Deku.Attribute.Attribute element)
 
-instance Attr everything OnAnimationiteration Unit where
-  attr OnAnimationiteration _ = unsafeAttribute
-    { key: "animationiteration ", value: unset' }
+instance Deku.Attribute.Attr everything OnAnimationiteration Deku.Attribute.Cb where
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "onAnimationiteration", value: _ } <<<
+    Deku.Attribute.cb'

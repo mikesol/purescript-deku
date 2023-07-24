@@ -1,21 +1,20 @@
 module Deku.DOM.Attr.Minlength where
 
-import Prelude
-
+import Deku.Attribute as Deku.Attribute
+import Data.Unit as Data.Unit
+import Control.Semigroupoid ((<<<))
 import Deku.DOM.Elt.Input (Input_)
 import Deku.DOM.Elt.Textarea (Textarea_)
-import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 
 data Minlength = Minlength
 
-instance Attr Input_ Minlength String where
-  attr Minlength value = unsafeAttribute
-    { key: "minlength", value: prop' value }
+instance Deku.Attribute.Attr everything Minlength Data.Unit.Unit where
+  attr _ _ = Deku.Attribute.unsafeAttribute { key: "minlength", value: Deku.Attribute.unset' }
 
-instance Attr Textarea_ Minlength String where
-  attr Minlength value = unsafeAttribute
-    { key: "minlength", value: prop' value }
+instance Deku.Attribute.Attr Input_ Minlength String where
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "minlength", value: _ } <<<
+    Deku.Attribute.prop'
 
-instance Attr everything Minlength Unit where
-  attr Minlength _ = unsafeAttribute
-    { key: "minlength", value: unset' }
+instance Deku.Attribute.Attr Textarea_ Minlength String where
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "minlength", value: _ } <<<
+    Deku.Attribute.prop'

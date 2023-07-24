@@ -1,19 +1,18 @@
 module Deku.DOM.Attr.Span where
 
-import Prelude
-
+import Deku.Attribute as Deku.Attribute
+import Data.Unit as Data.Unit
+import Control.Semigroupoid ((<<<))
 import Deku.DOM.Elt.Col (Col_)
 import Deku.DOM.Elt.Colgroup (Colgroup_)
-import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 
 data Span = Span
 
-instance Attr Col_ Span String where
-  attr Span value = unsafeAttribute { key: "span", value: prop' value }
+instance Deku.Attribute.Attr everything Span Data.Unit.Unit where
+  attr _ _ = Deku.Attribute.unsafeAttribute { key: "span", value: Deku.Attribute.unset' }
 
-instance Attr Colgroup_ Span String where
-  attr Span value = unsafeAttribute { key: "span", value: prop' value }
+instance Deku.Attribute.Attr Col_ Span String where
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "span", value: _ } <<< Deku.Attribute.prop'
 
-instance Attr everything Span Unit where
-  attr Span _ = unsafeAttribute
-    { key: "span", value: unset' }
+instance Deku.Attribute.Attr Colgroup_ Span String where
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "span", value: _ } <<< Deku.Attribute.prop'

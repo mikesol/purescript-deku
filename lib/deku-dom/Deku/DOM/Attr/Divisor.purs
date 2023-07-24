@@ -1,15 +1,14 @@
 module Deku.DOM.Attr.Divisor where
 
-import Prelude
-
+import Deku.Attribute as Deku.Attribute
+import Data.Unit as Data.Unit
+import Control.Semigroupoid ((<<<))
 import Deku.DOM.Elt.FeConvolveMatrix (FeConvolveMatrix_)
-import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 
 data Divisor = Divisor
 
-instance Attr FeConvolveMatrix_ Divisor String where
-  attr Divisor value = unsafeAttribute { key: "divisor", value: prop' value }
+instance Deku.Attribute.Attr everything Divisor Data.Unit.Unit where
+  attr _ _ = Deku.Attribute.unsafeAttribute { key: "divisor", value: Deku.Attribute.unset' }
 
-instance Attr everything Divisor Unit where
-  attr Divisor _ = unsafeAttribute
-    { key: "divisor", value: unset' }
+instance Deku.Attribute.Attr FeConvolveMatrix_ Divisor String where
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "divisor", value: _ } <<< Deku.Attribute.prop'

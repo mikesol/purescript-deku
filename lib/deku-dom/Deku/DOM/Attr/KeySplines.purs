@@ -1,26 +1,25 @@
 module Deku.DOM.Attr.KeySplines where
 
-import Prelude
-
-import Deku.DOM.Elt.AnimateTransform (AnimateTransform_)
-import Deku.DOM.Elt.AnimateMotion (AnimateMotion_)
+import Deku.Attribute as Deku.Attribute
+import Data.Unit as Data.Unit
+import Control.Semigroupoid ((<<<))
 import Deku.DOM.Elt.Animate (Animate_)
-import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
+import Deku.DOM.Elt.AnimateMotion (AnimateMotion_)
+import Deku.DOM.Elt.AnimateTransform (AnimateTransform_)
 
 data KeySplines = KeySplines
 
-instance Attr Animate_ KeySplines String where
-  attr KeySplines value = unsafeAttribute
-    { key: "keySplines", value: prop' value }
+instance Deku.Attribute.Attr everything KeySplines Data.Unit.Unit where
+  attr _ _ = Deku.Attribute.unsafeAttribute { key: "keySplines", value: Deku.Attribute.unset' }
 
-instance Attr AnimateMotion_ KeySplines String where
-  attr KeySplines value = unsafeAttribute
-    { key: "keySplines", value: prop' value }
+instance Deku.Attribute.Attr Animate_ KeySplines String where
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "keySplines", value: _ } <<<
+    Deku.Attribute.prop'
 
-instance Attr AnimateTransform_ KeySplines String where
-  attr KeySplines value = unsafeAttribute
-    { key: "keySplines", value: prop' value }
+instance Deku.Attribute.Attr AnimateMotion_ KeySplines String where
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "keySplines", value: _ } <<<
+    Deku.Attribute.prop'
 
-instance Attr everything KeySplines Unit where
-  attr KeySplines _ = unsafeAttribute
-    { key: "keySplines", value: unset' }
+instance Deku.Attribute.Attr AnimateTransform_ KeySplines String where
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "keySplines", value: _ } <<<
+    Deku.Attribute.prop'

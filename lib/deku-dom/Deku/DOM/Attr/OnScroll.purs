@@ -1,28 +1,28 @@
 module Deku.DOM.Attr.OnScroll where
 
-import Prelude
-import Effect (Effect)
-import Deku.Attribute (class Attr, Attribute, Cb(..), cb', unsafeAttribute, unset')
-import FRP.Event (Event)
+import Control.Semigroupoid ((<<<))
+import Effect as Effect
+import Web.Event.Internal.Types as Web.Event.Internal.Types
+import Data.Unit as Data.Unit
+import Deku.Attribute as Deku.Attribute
+import FRP.Event as FRP.Event
 
 data OnScroll = OnScroll
 
-instance Attr anything OnScroll Cb where
-  attr OnScroll value = unsafeAttribute { key: "scroll", value: cb' value }
+instance Deku.Attribute.Attr everything OnScroll Data.Unit.Unit where
+  attr _ _ = Deku.Attribute.unsafeAttribute { key: "onScroll", value: Deku.Attribute.unset' }
 
-instance Attr anything OnScroll (Effect Unit) where
-  attr OnScroll value = unsafeAttribute
-    { key: "scroll", value: cb' (Cb (const (value $> true))) }
-
-instance Attr anything OnScroll (Effect Boolean) where
-  attr OnScroll value = unsafeAttribute
-    { key: "scroll", value: cb' (Cb (const value)) }
+instance
+  Deku.Attribute.Attr everything
+    OnScroll
+    (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit) where
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "onScroll", value: _ } <<< Deku.Attribute.cb'
+    <<< Deku.Attribute.cb
 
 type OnScrollEffect =
   forall element
-   . Attr element OnScroll (Effect Unit)
-  => Event (Attribute element)
+   . Deku.Attribute.Attr element OnScroll (Effect.Effect Data.Unit.Unit)
+  => FRP.Event.Event (Deku.Attribute.Attribute element)
 
-instance Attr everything OnScroll Unit where
-  attr OnScroll _ = unsafeAttribute
-    { key: "scroll", value: unset' }
+instance Deku.Attribute.Attr everything OnScroll Deku.Attribute.Cb where
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "onScroll", value: _ } <<< Deku.Attribute.cb'

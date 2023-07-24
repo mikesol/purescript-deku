@@ -1,26 +1,15 @@
 module Deku.DOM.Attr.LengthAdjust where
 
-import Prelude
-
-import Deku.DOM.Elt.Tspan (Tspan_)
-import Deku.DOM.Elt.TextPath (TextPath_)
+import Deku.Attribute as Deku.Attribute
+import Data.Unit as Data.Unit
+import Control.Semigroupoid ((<<<))
 import Deku.DOM.Elt.Text (Text_)
-import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 
 data LengthAdjust = LengthAdjust
 
-instance Attr Text_ LengthAdjust String where
-  attr LengthAdjust value = unsafeAttribute
-    { key: "lengthAdjust", value: prop' value }
+instance Deku.Attribute.Attr everything LengthAdjust Data.Unit.Unit where
+  attr _ _ = Deku.Attribute.unsafeAttribute { key: "lengthAdjust", value: Deku.Attribute.unset' }
 
-instance Attr TextPath_ LengthAdjust String where
-  attr LengthAdjust value = unsafeAttribute
-    { key: "lengthAdjust", value: prop' value }
-
-instance Attr Tspan_ LengthAdjust String where
-  attr LengthAdjust value = unsafeAttribute
-    { key: "lengthAdjust", value: prop' value }
-
-instance Attr everything LengthAdjust Unit where
-  attr LengthAdjust _ = unsafeAttribute
-    { key: "lengthAdjust", value: unset' }
+instance Deku.Attribute.Attr Text_ LengthAdjust String where
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "lengthAdjust", value: _ } <<<
+    Deku.Attribute.prop'

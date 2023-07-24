@@ -1,15 +1,14 @@
 module Deku.DOM.Attr.Decoding where
 
-import Prelude
-
+import Deku.Attribute as Deku.Attribute
+import Data.Unit as Data.Unit
+import Control.Semigroupoid ((<<<))
 import Deku.DOM.Elt.Img (Img_)
-import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 
 data Decoding = Decoding
 
-instance Attr Img_ Decoding String where
-  attr Decoding value = unsafeAttribute { key: "decoding", value: prop' value }
+instance Deku.Attribute.Attr everything Decoding Data.Unit.Unit where
+  attr _ _ = Deku.Attribute.unsafeAttribute { key: "decoding", value: Deku.Attribute.unset' }
 
-instance Attr everything Decoding Unit where
-  attr Decoding _ = unsafeAttribute
-    { key: "decoding", value: unset' }
+instance Deku.Attribute.Attr Img_ Decoding String where
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "decoding", value: _ } <<< Deku.Attribute.prop'

@@ -1,28 +1,28 @@
 module Deku.DOM.Attr.OnSuspend where
 
-import Prelude
-import Effect (Effect)
-import Deku.Attribute (class Attr, Attribute, Cb(..), cb', unsafeAttribute, unset')
-import FRP.Event (Event)
+import Control.Semigroupoid ((<<<))
+import Effect as Effect
+import Web.Event.Internal.Types as Web.Event.Internal.Types
+import Data.Unit as Data.Unit
+import Deku.Attribute as Deku.Attribute
+import FRP.Event as FRP.Event
 
 data OnSuspend = OnSuspend
 
-instance Attr anything OnSuspend Cb where
-  attr OnSuspend value = unsafeAttribute { key: "suspend", value: cb' value }
+instance Deku.Attribute.Attr everything OnSuspend Data.Unit.Unit where
+  attr _ _ = Deku.Attribute.unsafeAttribute { key: "onSuspend", value: Deku.Attribute.unset' }
 
-instance Attr anything OnSuspend (Effect Unit) where
-  attr OnSuspend value = unsafeAttribute
-    { key: "suspend", value: cb' (Cb (const (value $> true))) }
-
-instance Attr anything OnSuspend (Effect Boolean) where
-  attr OnSuspend value = unsafeAttribute
-    { key: "suspend", value: cb' (Cb (const value)) }
+instance
+  Deku.Attribute.Attr everything
+    OnSuspend
+    (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit) where
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "onSuspend", value: _ } <<< Deku.Attribute.cb'
+    <<< Deku.Attribute.cb
 
 type OnSuspendEffect =
   forall element
-   . Attr element OnSuspend (Effect Unit)
-  => Event (Attribute element)
+   . Deku.Attribute.Attr element OnSuspend (Effect.Effect Data.Unit.Unit)
+  => FRP.Event.Event (Deku.Attribute.Attribute element)
 
-instance Attr everything OnSuspend Unit where
-  attr OnSuspend _ = unsafeAttribute
-    { key: "suspend", value: unset' }
+instance Deku.Attribute.Attr everything OnSuspend Deku.Attribute.Cb where
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "onSuspend", value: _ } <<< Deku.Attribute.cb'

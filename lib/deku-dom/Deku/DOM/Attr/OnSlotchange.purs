@@ -1,29 +1,30 @@
 module Deku.DOM.Attr.OnSlotchange where
 
-import Prelude
-import Effect (Effect)
-import Deku.Attribute (class Attr, Attribute, Cb(..), cb', unsafeAttribute, unset')
-import FRP.Event (Event)
+import Control.Semigroupoid ((<<<))
+import Effect as Effect
+import Web.Event.Internal.Types as Web.Event.Internal.Types
+import Data.Unit as Data.Unit
+import Deku.Attribute as Deku.Attribute
+import FRP.Event as FRP.Event
 
 data OnSlotchange = OnSlotchange
 
-instance Attr anything OnSlotchange Cb where
-  attr OnSlotchange value = unsafeAttribute
-    { key: "slotchange", value: cb' value }
+instance Deku.Attribute.Attr everything OnSlotchange Data.Unit.Unit where
+  attr _ _ = Deku.Attribute.unsafeAttribute { key: "onSlotchange", value: Deku.Attribute.unset' }
 
-instance Attr anything OnSlotchange (Effect Unit) where
-  attr OnSlotchange value = unsafeAttribute
-    { key: "slotchange", value: cb' (Cb (const (value $> true))) }
-
-instance Attr anything OnSlotchange (Effect Boolean) where
-  attr OnSlotchange value = unsafeAttribute
-    { key: "slotchange", value: cb' (Cb (const value)) }
+instance
+  Deku.Attribute.Attr everything
+    OnSlotchange
+    (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit) where
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "onSlotchange", value: _ }
+    <<< Deku.Attribute.cb'
+    <<< Deku.Attribute.cb
 
 type OnSlotchangeEffect =
   forall element
-   . Attr element OnSlotchange (Effect Unit)
-  => Event (Attribute element)
+   . Deku.Attribute.Attr element OnSlotchange (Effect.Effect Data.Unit.Unit)
+  => FRP.Event.Event (Deku.Attribute.Attribute element)
 
-instance Attr everything OnSlotchange Unit where
-  attr OnSlotchange _ = unsafeAttribute
-    { key: "slotchange", value: unset' }
+instance Deku.Attribute.Attr everything OnSlotchange Deku.Attribute.Cb where
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "onSlotchange", value: _ } <<<
+    Deku.Attribute.cb'

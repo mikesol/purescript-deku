@@ -1,15 +1,14 @@
 module Deku.DOM.Attr.Azimuth where
 
-import Prelude
-
+import Deku.Attribute as Deku.Attribute
+import Data.Unit as Data.Unit
+import Control.Semigroupoid ((<<<))
 import Deku.DOM.Elt.FeDistantLight (FeDistantLight_)
-import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 
 data Azimuth = Azimuth
 
-instance Attr FeDistantLight_ Azimuth String where
-  attr Azimuth value = unsafeAttribute { key: "azimuth", value: prop' value }
+instance Deku.Attribute.Attr everything Azimuth Data.Unit.Unit where
+  attr _ _ = Deku.Attribute.unsafeAttribute { key: "azimuth", value: Deku.Attribute.unset' }
 
-instance Attr everything Azimuth Unit where
-  attr Azimuth _ = unsafeAttribute
-    { key: "azimuth", value: unset' }
+instance Deku.Attribute.Attr FeDistantLight_ Azimuth String where
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "azimuth", value: _ } <<< Deku.Attribute.prop'

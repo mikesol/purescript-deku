@@ -1,29 +1,30 @@
 module Deku.DOM.Attr.OnSelectstart where
 
-import Prelude
-import Effect (Effect)
-import Deku.Attribute (class Attr, Attribute, Cb(..), cb', unsafeAttribute, unset')
-import FRP.Event (Event)
+import Control.Semigroupoid ((<<<))
+import Effect as Effect
+import Web.Event.Internal.Types as Web.Event.Internal.Types
+import Data.Unit as Data.Unit
+import Deku.Attribute as Deku.Attribute
+import FRP.Event as FRP.Event
 
 data OnSelectstart = OnSelectstart
 
-instance Attr anything OnSelectstart Cb where
-  attr OnSelectstart value = unsafeAttribute
-    { key: "selectstart", value: cb' value }
+instance Deku.Attribute.Attr everything OnSelectstart Data.Unit.Unit where
+  attr _ _ = Deku.Attribute.unsafeAttribute { key: "onSelectstart", value: Deku.Attribute.unset' }
 
-instance Attr anything OnSelectstart (Effect Unit) where
-  attr OnSelectstart value = unsafeAttribute
-    { key: "selectstart", value: cb' (Cb (const (value $> true))) }
-
-instance Attr anything OnSelectstart (Effect Boolean) where
-  attr OnSelectstart value = unsafeAttribute
-    { key: "selectstart", value: cb' (Cb (const value)) }
+instance
+  Deku.Attribute.Attr everything
+    OnSelectstart
+    (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit) where
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "onSelectstart", value: _ }
+    <<< Deku.Attribute.cb'
+    <<< Deku.Attribute.cb
 
 type OnSelectstartEffect =
   forall element
-   . Attr element OnSelectstart (Effect Unit)
-  => Event (Attribute element)
+   . Deku.Attribute.Attr element OnSelectstart (Effect.Effect Data.Unit.Unit)
+  => FRP.Event.Event (Deku.Attribute.Attribute element)
 
-instance Attr everything OnSelectstart Unit where
-  attr OnSelectstart _ = unsafeAttribute
-    { key: "selectstart", value: unset' }
+instance Deku.Attribute.Attr everything OnSelectstart Deku.Attribute.Cb where
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "onSelectstart", value: _ } <<<
+    Deku.Attribute.cb'

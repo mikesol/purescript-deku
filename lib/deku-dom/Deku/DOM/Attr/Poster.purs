@@ -1,15 +1,14 @@
 module Deku.DOM.Attr.Poster where
 
-import Prelude
-
+import Deku.Attribute as Deku.Attribute
+import Data.Unit as Data.Unit
+import Control.Semigroupoid ((<<<))
 import Deku.DOM.Elt.Video (Video_)
-import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 
 data Poster = Poster
 
-instance Attr Video_ Poster String where
-  attr Poster value = unsafeAttribute { key: "poster", value: prop' value }
+instance Deku.Attribute.Attr everything Poster Data.Unit.Unit where
+  attr _ _ = Deku.Attribute.unsafeAttribute { key: "poster", value: Deku.Attribute.unset' }
 
-instance Attr everything Poster Unit where
-  attr Poster _ = unsafeAttribute
-    { key: "poster", value: unset' }
+instance Deku.Attribute.Attr Video_ Poster String where
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "poster", value: _ } <<< Deku.Attribute.prop'

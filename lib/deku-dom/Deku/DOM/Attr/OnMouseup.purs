@@ -1,28 +1,28 @@
 module Deku.DOM.Attr.OnMouseup where
 
-import Prelude
-import Effect (Effect)
-import Deku.Attribute (class Attr, Attribute, Cb(..), cb', unsafeAttribute, unset')
-import FRP.Event (Event)
+import Control.Semigroupoid ((<<<))
+import Effect as Effect
+import Web.Event.Internal.Types as Web.Event.Internal.Types
+import Data.Unit as Data.Unit
+import Deku.Attribute as Deku.Attribute
+import FRP.Event as FRP.Event
 
 data OnMouseup = OnMouseup
 
-instance Attr anything OnMouseup Cb where
-  attr OnMouseup value = unsafeAttribute { key: "mouseup", value: cb' value }
+instance Deku.Attribute.Attr everything OnMouseup Data.Unit.Unit where
+  attr _ _ = Deku.Attribute.unsafeAttribute { key: "onMouseup", value: Deku.Attribute.unset' }
 
-instance Attr anything OnMouseup (Effect Unit) where
-  attr OnMouseup value = unsafeAttribute
-    { key: "mouseup", value: cb' (Cb (const (value $> true))) }
-
-instance Attr anything OnMouseup (Effect Boolean) where
-  attr OnMouseup value = unsafeAttribute
-    { key: "mouseup", value: cb' (Cb (const value)) }
+instance
+  Deku.Attribute.Attr everything
+    OnMouseup
+    (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit) where
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "onMouseup", value: _ } <<< Deku.Attribute.cb'
+    <<< Deku.Attribute.cb
 
 type OnMouseupEffect =
   forall element
-   . Attr element OnMouseup (Effect Unit)
-  => Event (Attribute element)
+   . Deku.Attribute.Attr element OnMouseup (Effect.Effect Data.Unit.Unit)
+  => FRP.Event.Event (Deku.Attribute.Attribute element)
 
-instance Attr everything OnMouseup Unit where
-  attr OnMouseup _ = unsafeAttribute
-    { key: "mouseup", value: unset' }
+instance Deku.Attribute.Attr everything OnMouseup Deku.Attribute.Cb where
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "onMouseup", value: _ } <<< Deku.Attribute.cb'

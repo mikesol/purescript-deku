@@ -1,28 +1,28 @@
 module Deku.DOM.Attr.OnPlaying where
 
-import Prelude
-import Effect (Effect)
-import Deku.Attribute (class Attr, Attribute, Cb(..), cb', unsafeAttribute, unset')
-import FRP.Event (Event)
+import Control.Semigroupoid ((<<<))
+import Effect as Effect
+import Web.Event.Internal.Types as Web.Event.Internal.Types
+import Data.Unit as Data.Unit
+import Deku.Attribute as Deku.Attribute
+import FRP.Event as FRP.Event
 
 data OnPlaying = OnPlaying
 
-instance Attr anything OnPlaying Cb where
-  attr OnPlaying value = unsafeAttribute { key: "playing", value: cb' value }
+instance Deku.Attribute.Attr everything OnPlaying Data.Unit.Unit where
+  attr _ _ = Deku.Attribute.unsafeAttribute { key: "onPlaying", value: Deku.Attribute.unset' }
 
-instance Attr anything OnPlaying (Effect Unit) where
-  attr OnPlaying value = unsafeAttribute
-    { key: "playing", value: cb' (Cb (const (value $> true))) }
-
-instance Attr anything OnPlaying (Effect Boolean) where
-  attr OnPlaying value = unsafeAttribute
-    { key: "playing", value: cb' (Cb (const value)) }
+instance
+  Deku.Attribute.Attr everything
+    OnPlaying
+    (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit) where
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "onPlaying", value: _ } <<< Deku.Attribute.cb'
+    <<< Deku.Attribute.cb
 
 type OnPlayingEffect =
   forall element
-   . Attr element OnPlaying (Effect Unit)
-  => Event (Attribute element)
+   . Deku.Attribute.Attr element OnPlaying (Effect.Effect Data.Unit.Unit)
+  => FRP.Event.Event (Deku.Attribute.Attribute element)
 
-instance Attr everything OnPlaying Unit where
-  attr OnPlaying _ = unsafeAttribute
-    { key: "playing", value: unset' }
+instance Deku.Attribute.Attr everything OnPlaying Deku.Attribute.Cb where
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "onPlaying", value: _ } <<< Deku.Attribute.cb'

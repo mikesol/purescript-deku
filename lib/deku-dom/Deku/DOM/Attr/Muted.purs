@@ -1,19 +1,18 @@
 module Deku.DOM.Attr.Muted where
 
-import Prelude
-
+import Deku.Attribute as Deku.Attribute
+import Data.Unit as Data.Unit
+import Control.Semigroupoid ((<<<))
 import Deku.DOM.Elt.Audio (Audio_)
 import Deku.DOM.Elt.Video (Video_)
-import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 
 data Muted = Muted
 
-instance Attr Audio_ Muted String where
-  attr Muted value = unsafeAttribute { key: "muted", value: prop' value }
+instance Deku.Attribute.Attr everything Muted Data.Unit.Unit where
+  attr _ _ = Deku.Attribute.unsafeAttribute { key: "muted", value: Deku.Attribute.unset' }
 
-instance Attr Video_ Muted String where
-  attr Muted value = unsafeAttribute { key: "muted", value: prop' value }
+instance Deku.Attribute.Attr Audio_ Muted String where
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "muted", value: _ } <<< Deku.Attribute.prop'
 
-instance Attr everything Muted Unit where
-  attr Muted _ = unsafeAttribute
-    { key: "muted", value: unset' }
+instance Deku.Attribute.Attr Video_ Muted String where
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "muted", value: _ } <<< Deku.Attribute.prop'

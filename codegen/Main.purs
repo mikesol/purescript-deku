@@ -101,6 +101,9 @@ missingPresentationProperties = case _ of
     animate@{ name } | Just _ <- String.stripPrefix ( String.Pattern "SVGAnimate" ) name ->
         animate { bases = animate.bases <> [ svgPresentation.ctor, Ctor "SVGAnimateElement" ] }
 
+    clippath@{ name : "SVGClipPathElement" } ->
+        clippath { members = clippath.members <> [ { index : Ctor "clipPathUnits", name : "clipPathUnits", type : TypeString } ]  }
+
     id ->
         id { bases = id.bases <> [ svgPresentation.ctor ] }
 
@@ -141,6 +144,7 @@ svgPresentation =
             , "opacity"
             , "overflow"
             , "clip-path"
+            , "clip-rule"
             , "cursor"
             , "display"
             , "transform"

@@ -1,15 +1,14 @@
 module Deku.DOM.Attr.Language where
 
-import Prelude
-
+import Deku.Attribute as Deku.Attribute
+import Data.Unit as Data.Unit
+import Control.Semigroupoid ((<<<))
 import Deku.DOM.Elt.Script (Script_)
-import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 
 data Language = Language
 
-instance Attr Script_ Language String where
-  attr Language value = unsafeAttribute { key: "language", value: prop' value }
+instance Deku.Attribute.Attr everything Language Data.Unit.Unit where
+  attr _ _ = Deku.Attribute.unsafeAttribute { key: "language", value: Deku.Attribute.unset' }
 
-instance Attr everything Language Unit where
-  attr Language _ = unsafeAttribute
-    { key: "language", value: unset' }
+instance Deku.Attribute.Attr Script_ Language String where
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "language", value: _ } <<< Deku.Attribute.prop'

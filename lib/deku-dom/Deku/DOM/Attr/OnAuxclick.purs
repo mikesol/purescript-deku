@@ -1,28 +1,28 @@
 module Deku.DOM.Attr.OnAuxclick where
 
-import Prelude
-import Effect (Effect)
-import Deku.Attribute (class Attr, Attribute, Cb(..), cb', unsafeAttribute, unset')
-import FRP.Event (Event)
+import Control.Semigroupoid ((<<<))
+import Effect as Effect
+import Web.Event.Internal.Types as Web.Event.Internal.Types
+import Data.Unit as Data.Unit
+import Deku.Attribute as Deku.Attribute
+import FRP.Event as FRP.Event
 
 data OnAuxclick = OnAuxclick
 
-instance Attr anything OnAuxclick Cb where
-  attr OnAuxclick value = unsafeAttribute { key: "auxclick ", value: cb' value }
+instance Deku.Attribute.Attr everything OnAuxclick Data.Unit.Unit where
+  attr _ _ = Deku.Attribute.unsafeAttribute { key: "onAuxclick", value: Deku.Attribute.unset' }
 
-instance Attr anything OnAuxclick (Effect Unit) where
-  attr OnAuxclick value = unsafeAttribute
-    { key: "auxclick ", value: cb' (Cb (const (value $> true))) }
-
-instance Attr anything OnAuxclick (Effect Boolean) where
-  attr OnAuxclick value = unsafeAttribute
-    { key: "auxclick ", value: cb' (Cb (const value)) }
+instance
+  Deku.Attribute.Attr everything
+    OnAuxclick
+    (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit) where
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "onAuxclick", value: _ } <<< Deku.Attribute.cb'
+    <<< Deku.Attribute.cb
 
 type OnAuxclickEffect =
   forall element
-   . Attr element OnAuxclick (Effect Unit)
-  => Event (Attribute element)
+   . Deku.Attribute.Attr element OnAuxclick (Effect.Effect Data.Unit.Unit)
+  => FRP.Event.Event (Deku.Attribute.Attribute element)
 
-instance Attr everything OnAuxclick Unit where
-  attr OnAuxclick _ = unsafeAttribute
-    { key: "auxclick ", value: unset' }
+instance Deku.Attribute.Attr everything OnAuxclick Deku.Attribute.Cb where
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "onAuxclick", value: _ } <<< Deku.Attribute.cb'

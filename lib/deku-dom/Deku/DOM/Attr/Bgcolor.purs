@@ -1,47 +1,30 @@
 module Deku.DOM.Attr.Bgcolor where
 
-import Prelude
-
+import Deku.Attribute as Deku.Attribute
+import Data.Unit as Data.Unit
+import Control.Semigroupoid ((<<<))
 import Deku.DOM.Elt.Body (Body_)
-import Deku.DOM.Elt.Col (Col_)
-import Deku.DOM.Elt.Colgroup (Colgroup_)
 import Deku.DOM.Elt.Table (Table_)
-import Deku.DOM.Elt.Tbody (Tbody_)
-import Deku.DOM.Elt.Tfoot (Tfoot_)
 import Deku.DOM.Elt.Td (Td_)
 import Deku.DOM.Elt.Th (Th_)
 import Deku.DOM.Elt.Tr (Tr_)
-import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 
 data Bgcolor = Bgcolor
 
-instance Attr Body_ Bgcolor String where
-  attr Bgcolor value = unsafeAttribute { key: "bgcolor", value: prop' value }
+instance Deku.Attribute.Attr everything Bgcolor Data.Unit.Unit where
+  attr _ _ = Deku.Attribute.unsafeAttribute { key: "bgcolor", value: Deku.Attribute.unset' }
 
-instance Attr Col_ Bgcolor String where
-  attr Bgcolor value = unsafeAttribute { key: "bgcolor", value: prop' value }
+instance Deku.Attribute.Attr Body_ Bgcolor String where
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "bgcolor", value: _ } <<< Deku.Attribute.prop'
 
-instance Attr Colgroup_ Bgcolor String where
-  attr Bgcolor value = unsafeAttribute { key: "bgcolor", value: prop' value }
+instance Deku.Attribute.Attr Table_ Bgcolor String where
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "bgcolor", value: _ } <<< Deku.Attribute.prop'
 
-instance Attr Table_ Bgcolor String where
-  attr Bgcolor value = unsafeAttribute { key: "bgcolor", value: prop' value }
+instance Deku.Attribute.Attr Td_ Bgcolor String where
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "bgcolor", value: _ } <<< Deku.Attribute.prop'
 
-instance Attr Tbody_ Bgcolor String where
-  attr Bgcolor value = unsafeAttribute { key: "bgcolor", value: prop' value }
+instance Deku.Attribute.Attr Th_ Bgcolor String where
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "bgcolor", value: _ } <<< Deku.Attribute.prop'
 
-instance Attr Tfoot_ Bgcolor String where
-  attr Bgcolor value = unsafeAttribute { key: "bgcolor", value: prop' value }
-
-instance Attr Td_ Bgcolor String where
-  attr Bgcolor value = unsafeAttribute { key: "bgcolor", value: prop' value }
-
-instance Attr Th_ Bgcolor String where
-  attr Bgcolor value = unsafeAttribute { key: "bgcolor", value: prop' value }
-
-instance Attr Tr_ Bgcolor String where
-  attr Bgcolor value = unsafeAttribute { key: "bgcolor", value: prop' value }
-
-instance Attr everything Bgcolor Unit where
-  attr Bgcolor _ = unsafeAttribute
-    { key: "bgcolor", value: unset' }
+instance Deku.Attribute.Attr Tr_ Bgcolor String where
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "bgcolor", value: _ } <<< Deku.Attribute.prop'

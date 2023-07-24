@@ -1,16 +1,15 @@
 module Deku.DOM.Attr.DiffuseConstant where
 
-import Prelude
-
+import Deku.Attribute as Deku.Attribute
+import Data.Unit as Data.Unit
+import Control.Semigroupoid ((<<<))
 import Deku.DOM.Elt.FeDiffuseLighting (FeDiffuseLighting_)
-import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 
 data DiffuseConstant = DiffuseConstant
 
-instance Attr FeDiffuseLighting_ DiffuseConstant String where
-  attr DiffuseConstant value = unsafeAttribute
-    { key: "diffuseConstant", value: prop' value }
+instance Deku.Attribute.Attr everything DiffuseConstant Data.Unit.Unit where
+  attr _ _ = Deku.Attribute.unsafeAttribute { key: "diffuseConstant", value: Deku.Attribute.unset' }
 
-instance Attr everything DiffuseConstant Unit where
-  attr DiffuseConstant _ = unsafeAttribute
-    { key: "diffuseConstant", value: unset' }
+instance Deku.Attribute.Attr FeDiffuseLighting_ DiffuseConstant String where
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "diffuseConstant", value: _ } <<<
+    Deku.Attribute.prop'

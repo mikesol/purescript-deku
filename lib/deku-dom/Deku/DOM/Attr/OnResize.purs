@@ -1,28 +1,28 @@
 module Deku.DOM.Attr.OnResize where
 
-import Prelude
-import Effect (Effect)
-import Deku.Attribute (class Attr, Attribute, Cb(..), cb', unsafeAttribute, unset')
-import FRP.Event (Event)
+import Control.Semigroupoid ((<<<))
+import Effect as Effect
+import Web.Event.Internal.Types as Web.Event.Internal.Types
+import Data.Unit as Data.Unit
+import Deku.Attribute as Deku.Attribute
+import FRP.Event as FRP.Event
 
 data OnResize = OnResize
 
-instance Attr anything OnResize Cb where
-  attr OnResize value = unsafeAttribute { key: "resize", value: cb' value }
+instance Deku.Attribute.Attr everything OnResize Data.Unit.Unit where
+  attr _ _ = Deku.Attribute.unsafeAttribute { key: "onResize", value: Deku.Attribute.unset' }
 
-instance Attr anything OnResize (Effect Unit) where
-  attr OnResize value = unsafeAttribute
-    { key: "resize", value: cb' (Cb (const (value $> true))) }
-
-instance Attr anything OnResize (Effect Boolean) where
-  attr OnResize value = unsafeAttribute
-    { key: "resize", value: cb' (Cb (const value)) }
+instance
+  Deku.Attribute.Attr everything
+    OnResize
+    (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit) where
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "onResize", value: _ } <<< Deku.Attribute.cb'
+    <<< Deku.Attribute.cb
 
 type OnResizeEffect =
   forall element
-   . Attr element OnResize (Effect Unit)
-  => Event (Attribute element)
+   . Deku.Attribute.Attr element OnResize (Effect.Effect Data.Unit.Unit)
+  => FRP.Event.Event (Deku.Attribute.Attribute element)
 
-instance Attr everything OnResize Unit where
-  attr OnResize _ = unsafeAttribute
-    { key: "resize", value: unset' }
+instance Deku.Attribute.Attr everything OnResize Deku.Attribute.Cb where
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "onResize", value: _ } <<< Deku.Attribute.cb'

@@ -1,16 +1,15 @@
 module Deku.DOM.Attr.PrimitiveUnits where
 
-import Prelude
-
+import Deku.Attribute as Deku.Attribute
+import Data.Unit as Data.Unit
+import Control.Semigroupoid ((<<<))
 import Deku.DOM.Elt.Filter (Filter_)
-import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 
 data PrimitiveUnits = PrimitiveUnits
 
-instance Attr Filter_ PrimitiveUnits String where
-  attr PrimitiveUnits value = unsafeAttribute
-    { key: "primitiveUnits", value: prop' value }
+instance Deku.Attribute.Attr everything PrimitiveUnits Data.Unit.Unit where
+  attr _ _ = Deku.Attribute.unsafeAttribute { key: "primitiveUnits", value: Deku.Attribute.unset' }
 
-instance Attr everything PrimitiveUnits Unit where
-  attr PrimitiveUnits _ = unsafeAttribute
-    { key: "primitiveUnits", value: unset' }
+instance Deku.Attribute.Attr Filter_ PrimitiveUnits String where
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "primitiveUnits", value: _ } <<<
+    Deku.Attribute.prop'

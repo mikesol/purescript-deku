@@ -1,15 +1,14 @@
 module Deku.DOM.Attr.Low where
 
-import Prelude
-
+import Deku.Attribute as Deku.Attribute
+import Data.Unit as Data.Unit
+import Control.Semigroupoid ((<<<))
 import Deku.DOM.Elt.Meter (Meter_)
-import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 
 data Low = Low
 
-instance Attr Meter_ Low String where
-  attr Low value = unsafeAttribute { key: "low", value: prop' value }
+instance Deku.Attribute.Attr everything Low Data.Unit.Unit where
+  attr _ _ = Deku.Attribute.unsafeAttribute { key: "low", value: Deku.Attribute.unset' }
 
-instance Attr everything Low Unit where
-  attr Low _ = unsafeAttribute
-    { key: "low", value: unset' }
+instance Deku.Attribute.Attr Meter_ Low String where
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "low", value: _ } <<< Deku.Attribute.prop'

@@ -1,29 +1,30 @@
 module Deku.DOM.Attr.OnMouseleave where
 
-import Prelude
-import Effect (Effect)
-import Deku.Attribute (class Attr, Attribute, Cb(..), cb', unsafeAttribute, unset')
-import FRP.Event (Event)
+import Control.Semigroupoid ((<<<))
+import Effect as Effect
+import Web.Event.Internal.Types as Web.Event.Internal.Types
+import Data.Unit as Data.Unit
+import Deku.Attribute as Deku.Attribute
+import FRP.Event as FRP.Event
 
 data OnMouseleave = OnMouseleave
 
-instance Attr anything OnMouseleave Cb where
-  attr OnMouseleave value = unsafeAttribute
-    { key: "mouseleave", value: cb' value }
+instance Deku.Attribute.Attr everything OnMouseleave Data.Unit.Unit where
+  attr _ _ = Deku.Attribute.unsafeAttribute { key: "onMouseleave", value: Deku.Attribute.unset' }
 
-instance Attr anything OnMouseleave (Effect Unit) where
-  attr OnMouseleave value = unsafeAttribute
-    { key: "mouseleave", value: cb' (Cb (const (value $> true))) }
-
-instance Attr anything OnMouseleave (Effect Boolean) where
-  attr OnMouseleave value = unsafeAttribute
-    { key: "mouseleave", value: cb' (Cb (const value)) }
+instance
+  Deku.Attribute.Attr everything
+    OnMouseleave
+    (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit) where
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "onMouseleave", value: _ }
+    <<< Deku.Attribute.cb'
+    <<< Deku.Attribute.cb
 
 type OnMouseleaveEffect =
   forall element
-   . Attr element OnMouseleave (Effect Unit)
-  => Event (Attribute element)
+   . Deku.Attribute.Attr element OnMouseleave (Effect.Effect Data.Unit.Unit)
+  => FRP.Event.Event (Deku.Attribute.Attribute element)
 
-instance Attr everything OnMouseleave Unit where
-  attr OnMouseleave _ = unsafeAttribute
-    { key: "mouseleave", value: unset' }
+instance Deku.Attribute.Attr everything OnMouseleave Deku.Attribute.Cb where
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "onMouseleave", value: _ } <<<
+    Deku.Attribute.cb'

@@ -1,26 +1,15 @@
 module Deku.DOM.Attr.TextLength where
 
-import Prelude
-
-import Deku.DOM.Elt.Tspan (Tspan_)
-import Deku.DOM.Elt.TextPath (TextPath_)
+import Deku.Attribute as Deku.Attribute
+import Data.Unit as Data.Unit
+import Control.Semigroupoid ((<<<))
 import Deku.DOM.Elt.Text (Text_)
-import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 
 data TextLength = TextLength
 
-instance Attr Text_ TextLength String where
-  attr TextLength value = unsafeAttribute
-    { key: "textLength", value: prop' value }
+instance Deku.Attribute.Attr everything TextLength Data.Unit.Unit where
+  attr _ _ = Deku.Attribute.unsafeAttribute { key: "textLength", value: Deku.Attribute.unset' }
 
-instance Attr TextPath_ TextLength String where
-  attr TextLength value = unsafeAttribute
-    { key: "textLength", value: prop' value }
-
-instance Attr Tspan_ TextLength String where
-  attr TextLength value = unsafeAttribute
-    { key: "textLength", value: prop' value }
-
-instance Attr everything TextLength Unit where
-  attr TextLength _ = unsafeAttribute
-    { key: "textLength", value: unset' }
+instance Deku.Attribute.Attr Text_ TextLength String where
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "textLength", value: _ } <<<
+    Deku.Attribute.prop'

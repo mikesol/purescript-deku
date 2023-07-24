@@ -1,31 +1,18 @@
 module Deku.DOM.Attr.Offset where
 
-import Prelude
-
+import Deku.Attribute as Deku.Attribute
+import Data.Unit as Data.Unit
+import Control.Semigroupoid ((<<<))
+import Deku.DOM.Elt.FeComponentTransfer (FeComponentTransfer_)
 import Deku.DOM.Elt.Stop (Stop_)
-import Deku.DOM.Elt.FeFuncR (FeFuncR_)
-import Deku.DOM.Elt.FeFuncG (FeFuncG_)
-import Deku.DOM.Elt.FeFuncB (FeFuncB_)
-import Deku.DOM.Elt.FeFuncA (FeFuncA_)
-import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 
 data Offset = Offset
 
-instance Attr FeFuncA_ Offset String where
-  attr Offset value = unsafeAttribute { key: "offset", value: prop' value }
+instance Deku.Attribute.Attr everything Offset Data.Unit.Unit where
+  attr _ _ = Deku.Attribute.unsafeAttribute { key: "offset", value: Deku.Attribute.unset' }
 
-instance Attr FeFuncB_ Offset String where
-  attr Offset value = unsafeAttribute { key: "offset", value: prop' value }
+instance Deku.Attribute.Attr FeComponentTransfer_ Offset String where
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "offset", value: _ } <<< Deku.Attribute.prop'
 
-instance Attr FeFuncG_ Offset String where
-  attr Offset value = unsafeAttribute { key: "offset", value: prop' value }
-
-instance Attr FeFuncR_ Offset String where
-  attr Offset value = unsafeAttribute { key: "offset", value: prop' value }
-
-instance Attr Stop_ Offset String where
-  attr Offset value = unsafeAttribute { key: "offset", value: prop' value }
-
-instance Attr everything Offset Unit where
-  attr Offset _ = unsafeAttribute
-    { key: "offset", value: unset' }
+instance Deku.Attribute.Attr Stop_ Offset String where
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "offset", value: _ } <<< Deku.Attribute.prop'

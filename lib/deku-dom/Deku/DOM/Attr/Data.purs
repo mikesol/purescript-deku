@@ -1,15 +1,14 @@
 module Deku.DOM.Attr.Data where
 
-import Prelude
-
+import Deku.Attribute as Deku.Attribute
+import Data.Unit as Data.Unit
+import Control.Semigroupoid ((<<<))
 import Deku.DOM.Elt.Object (Object_)
-import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 
 data Data = Data
 
-instance Attr Object_ Data String where
-  attr Data value = unsafeAttribute { key: "data", value: prop' value }
+instance Deku.Attribute.Attr everything Data Data.Unit.Unit where
+  attr _ _ = Deku.Attribute.unsafeAttribute { key: "data", value: Deku.Attribute.unset' }
 
-instance Attr everything Data Unit where
-  attr Data _ = unsafeAttribute
-    { key: "data", value: unset' }
+instance Deku.Attribute.Attr Object_ Data String where
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "data", value: _ } <<< Deku.Attribute.prop'

@@ -1,23 +1,26 @@
 module Deku.DOM.Attr.Rel where
 
-import Prelude
-
+import Deku.Attribute as Deku.Attribute
+import Data.Unit as Data.Unit
+import Control.Semigroupoid ((<<<))
 import Deku.DOM.Elt.A (A_)
 import Deku.DOM.Elt.Area (Area_)
+import Deku.DOM.Elt.Form (Form_)
 import Deku.DOM.Elt.Link (Link_)
-import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 
 data Rel = Rel
 
-instance Attr A_ Rel String where
-  attr Rel value = unsafeAttribute { key: "rel", value: prop' value }
+instance Deku.Attribute.Attr everything Rel Data.Unit.Unit where
+  attr _ _ = Deku.Attribute.unsafeAttribute { key: "rel", value: Deku.Attribute.unset' }
 
-instance Attr Area_ Rel String where
-  attr Rel value = unsafeAttribute { key: "rel", value: prop' value }
+instance Deku.Attribute.Attr A_ Rel String where
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "rel", value: _ } <<< Deku.Attribute.prop'
 
-instance Attr Link_ Rel String where
-  attr Rel value = unsafeAttribute { key: "rel", value: prop' value }
+instance Deku.Attribute.Attr Area_ Rel String where
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "rel", value: _ } <<< Deku.Attribute.prop'
 
-instance Attr everything Rel Unit where
-  attr Rel _ = unsafeAttribute
-    { key: "rel", value: unset' }
+instance Deku.Attribute.Attr Form_ Rel String where
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "rel", value: _ } <<< Deku.Attribute.prop'
+
+instance Deku.Attribute.Attr Link_ Rel String where
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "rel", value: _ } <<< Deku.Attribute.prop'

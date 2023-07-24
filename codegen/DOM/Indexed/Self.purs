@@ -3,45 +3,39 @@ module DOM.Indexed.Self where
 import Prelude
 import Prim hiding (Type)
 
-import DOM.Common (typeAttributed, typeEvented)
-import DOM.Indexed.Common (declHandler, nominal, typeIndexedAt)
+import DOM.Common (TypeStub(..), declHandler, handler, selfKey, typeAttributed, typeEvented, typeImports)
+import DOM.Indexed.Common (nominal, typeIndexedAt)
+import Data.Array as Array
 import Data.Array.NonEmpty as NEA
+import Data.Map (Map)
+import Data.Map as Map
 import Data.Maybe (Maybe(..))
-import Data.Set (Set)
-import Data.Set as Set
-import Partial.Unsafe (unsafePartial)
+import Data.Tuple.Nested ((/\))
 import PureScript.CST.Types (Type, ClassFundep(..), Declaration, ImportDecl)
-import Tidy.Codegen (binaryOp, declClass, declImport, declImportAs, declInstance, declSignature, declValue, exprCtor, exprIdent, exprOp, importOp, importType, importTypeAll, importValue, typeApp, typeArrow, typeConstrained, typeCtor, typeForall, typeString, typeVar, typeVarKinded)
+import Tidy.Codegen (binaryOp, declClass, declImport, declImportAs, declInstance, declSignature, declValue, exprIdent, exprOp, importOp, importType, importValue, typeApp, typeArrow, typeConstrained, typeCtor, typeForall, typeString, typeVar, typeVarKinded)
 import Tidy.Codegen.Class (toName)
 import Tidy.Codegen.Common (tokRightArrow)
 
-imports :: Set String -> Array ( ImportDecl Void )
+imports :: Partial => Map String String -> Array ( ImportDecl Void )
 imports es =
-    unsafePartial
-        $ append
+    Array.concat
+        [ identity 
             [ declImportAs "Control.Applicative" [ importValue "pure" ] "Applicative"
             , declImport "Control.Category" [ importOp "<<<" ]
             , declImportAs "Data.Functor" [ importValue "map" ] "Functor"
-            , declImport "Data.Unit" [ importType "Unit" ]
-            , declImport "Effect" [ importType "Effect" ]
-            , declImport "Unsafe.Coerce" [ importValue "unsafeCoerce" ]
-            , declImport "Deku.Attribute"
-                [ importTypeAll "Cb"
-                , importType "Attribute"
-                , importValue "unsafeAttribute"
-                , importValue "cb'"
-                ]
-            , declImport "Deku.DOM.Indexed.Index" [ importType "Indexed" ]
-            , declImport "FRP.Event" [ importType "Event" ]
+            , declImportAs "FRP.Event" [] "FRP.Event"
+            , declImportAs "Deku.DOM.Indexed.Index" [] "Index"
             , declImport "Type.Proxy" [ importType "Proxy" ]
             , declImportAs ( "Web.DOM.Element" ) [ importType "Element" ] "Web"
             ]
-        $ flip map ( Set.toUnfoldable es ) \e ->
+        , flip map ( Map.toUnfoldable es ) \( _ /\ e ) ->
             declImportAs ( "Web.HTML." <> e ) [ importType e ] "Web"
+        , typeImports [ TypeSelfHandler ]
+        ]
 
-generate :: Set String -> Array ( Declaration Void )
+generate :: Partial => Map String String -> Array ( Declaration Void )
 generate es =
-    unsafePartial $ append 
+    append 
         [ declClass [] "IsSelf"
             [ typeVarKinded "element" $ typeCtor "Type"
             , typeVarKinded "name" $ typeCtor "Symbol" 
@@ -53,13 +47,9 @@ generate es =
         , declSignature "self"
             $ typeForall [ typeVar "name", typeVar "e", typeVar "r" ]
             $ typeConstrained [ typeApp ( typeCtor "IsSelf" ) [ typeVar "e" , typeVar "name"  ] ]
-            $ typeArrow [ typeApp ( typeCtor "Event" ) [ selfHandler $ typeVar "e" ] ]
+            $ typeArrow [ typeEvented $ selfHandler $ typeVar "e" ]
             $ typeEvented $ typeAttributed $ typeIndexedAt nominal $ typeApp ( typeCtor "Proxy" ) [ typeVar "name" ]
-        , declHandler "self" selfKey $
-            exprOp ( exprIdent "cb'" )
-                [ binaryOp "<<<" $ exprCtor "Cb"
-                , binaryOp "<<<" $ exprIdent "unsafeCoerce" 
-                ]
+        , declHandler "self" selfKey $ handler TypeSelfHandler
 
         , declSignature "self_"
             $ typeForall [ typeVar "name", typeVar "e", typeVar "r" ]
@@ -74,11 +64,11 @@ generate es =
             ]
             []
         ]
-        $ flip map ( Set.toUnfoldable es ) \e ->
+        $ flip map ( Map.toUnfoldable es ) \( ctor /\ e ) ->
             declInstance Nothing []
                 "IsSelf"
                 [ typeCtor ( "Web." <> e )
-                , typeString $ e
+                , typeString ctor
                 ]
                 []
 
@@ -86,8 +76,4 @@ generate es =
 
     selfHandler :: Partial => Type Void -> Type Void
     selfHandler intf =
-        typeArrow [ intf ] $ typeApp ( typeCtor "Effect" ) [ typeCtor "Unit" ]
-
-    selfKey :: String
-    selfKey =
-        "@self@"
+        typeArrow [ intf ] $ typeApp ( typeCtor "Effect.Effect" ) [ typeCtor "Data.Unit.Unit" ]

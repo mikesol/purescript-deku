@@ -2,11 +2,14 @@ module DOM where
 
 import Prelude
 
+import Comment (commentModule)
 import Control.Monad.Except (ExceptT(..))
 import DOM.Attr as Attr
-import DOM.Common (Attribute, Ctor(..), Element, Interface, Specification, TagNS, attrModule, attrType, baseInterfaces, capitalize, eltModule, namespaceBases, typeImports)
+import DOM.Common (Attribute, Ctor(..), Element, Interface, Specification, TagNS, TypeStub(..), attrModule, attrType, baseInterfaces, capitalize, eltModule, namespaceBases, typeImports, webElements)
 import DOM.Elt as Elt
+import DOM.Reexport as Reexport
 import Data.Array as Array
+import Data.Function (on)
 import Data.Map (Map)
 import Data.Map as Map
 import Data.Maybe (Maybe(..))
@@ -21,7 +24,7 @@ import Node.Encoding (Encoding(..))
 import Node.FS.Aff (writeTextFile)
 import Partial.Unsafe (unsafePartial)
 import Safe.Coerce (coerce)
-import Tidy.Codegen (module_, printModule)
+import Tidy.Codegen (declImportAs, module_, printModule)
 
 -- | Crawls through the spec finding all attributes for given interface and all inheriting interfaces. Uses the fact
 -- | currently all interfaces only have a inheritance depth of 1.
@@ -43,8 +46,10 @@ generate html svg = do
     FS.createDir "lib/deku-dom/Deku/DOM/Elt"
 
     let
+        -- TODO: title is actually specified in both HTML and SVG
         elements :: Array Element
-        elements = html.elements <> svg.elements
+        elements =
+            Array.nubBy ( compare `on` _.tag ) $ html.elements <> svg.elements
 
         interfaces :: Map Ctor Interface
         interfaces = Map.fromFoldable $ map (\attr@{ ctor } -> ctor /\ attr )  $ html.interfaces <> svg.interfaces
@@ -91,7 +96,27 @@ generate html svg = do
             $ printModule
             $ unsafePartial
             $ module_ ( attrModule attr.index ) [] 
-                ( Attr.importRequired <> typeImports [ attr.type ] )
+                ( Attr.importRequired
+                    <> typeImports [ attr.type, TypeUnit ]
+                    <> if attr.type == TypeEventHandler then [ declImportAs "FRP.Event" [] "FRP.Event" ] else []
+                )
                 ( Attr.generateEverything attr )
 
-    pure unit
+    let
+        attributes :: Array Ctor
+        attributes =
+            Array.nub $ Array.fromFoldable ( Map.keys elementAttributes ) <> ( _.index <$> globalAttributes )
+
+    ExceptT $ attempt
+        $ writeTextFile UTF8 ( "./lib/deku-dom/Deku/DOM.purs" )
+        $ printModule
+        $ unsafePartial
+        $ commentModule
+            [ "This large, unwieldy module contains reexports of all the DOM elements plus a few extra functions"
+            , "for working with the DOM. It just documents the esoteric bits, namely `Self`, `SelfT`, and `unsafeCustomElement`."
+            ]
+        $ module_ "Deku.DOM"
+            ( Reexport.exports elements attributes )
+            ( Reexport.imports elements attributes webElements )
+            ( Reexport.generate elements webElements )
+            

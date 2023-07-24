@@ -1,15 +1,14 @@
 module Deku.DOM.Attr.Fx where
 
-import Prelude
-
+import Deku.Attribute as Deku.Attribute
+import Data.Unit as Data.Unit
+import Control.Semigroupoid ((<<<))
 import Deku.DOM.Elt.RadialGradient (RadialGradient_)
-import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 
 data Fx = Fx
 
-instance Attr RadialGradient_ Fx String where
-  attr Fx value = unsafeAttribute { key: "fx", value: prop' value }
+instance Deku.Attribute.Attr everything Fx Data.Unit.Unit where
+  attr _ _ = Deku.Attribute.unsafeAttribute { key: "fx", value: Deku.Attribute.unset' }
 
-instance Attr everything Fx Unit where
-  attr Fx _ = unsafeAttribute
-    { key: "fx", value: unset' }
+instance Deku.Attribute.Attr RadialGradient_ Fx String where
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "fx", value: _ } <<< Deku.Attribute.prop'

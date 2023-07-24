@@ -1,23 +1,22 @@
 module Deku.DOM.Attr.In2 where
 
-import Prelude
-
-import Deku.DOM.Elt.FeDisplacementMap (FeDisplacementMap_)
-import Deku.DOM.Elt.FeComposite (FeComposite_)
+import Deku.Attribute as Deku.Attribute
+import Data.Unit as Data.Unit
+import Control.Semigroupoid ((<<<))
 import Deku.DOM.Elt.FeBlend (FeBlend_)
-import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
+import Deku.DOM.Elt.FeComposite (FeComposite_)
+import Deku.DOM.Elt.FeDisplacementMap (FeDisplacementMap_)
 
 data In2 = In2
 
-instance Attr FeBlend_ In2 String where
-  attr In2 value = unsafeAttribute { key: "in2", value: prop' value }
+instance Deku.Attribute.Attr everything In2 Data.Unit.Unit where
+  attr _ _ = Deku.Attribute.unsafeAttribute { key: "in2", value: Deku.Attribute.unset' }
 
-instance Attr FeComposite_ In2 String where
-  attr In2 value = unsafeAttribute { key: "in2", value: prop' value }
+instance Deku.Attribute.Attr FeBlend_ In2 String where
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "in2", value: _ } <<< Deku.Attribute.prop'
 
-instance Attr FeDisplacementMap_ In2 String where
-  attr In2 value = unsafeAttribute { key: "in2", value: prop' value }
+instance Deku.Attribute.Attr FeComposite_ In2 String where
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "in2", value: _ } <<< Deku.Attribute.prop'
 
-instance Attr everything In2 Unit where
-  attr In2 _ = unsafeAttribute
-    { key: "in2", value: unset' }
+instance Deku.Attribute.Attr FeDisplacementMap_ In2 String where
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "in2", value: _ } <<< Deku.Attribute.prop'

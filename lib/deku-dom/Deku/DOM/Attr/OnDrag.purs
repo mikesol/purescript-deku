@@ -1,26 +1,28 @@
 module Deku.DOM.Attr.OnDrag where
 
-import Prelude
-import Effect (Effect)
-import Deku.Attribute (class Attr, Attribute, Cb(..), cb', unsafeAttribute, unset')
-import FRP.Event (Event)
+import Control.Semigroupoid ((<<<))
+import Effect as Effect
+import Web.Event.Internal.Types as Web.Event.Internal.Types
+import Data.Unit as Data.Unit
+import Deku.Attribute as Deku.Attribute
+import FRP.Event as FRP.Event
 
 data OnDrag = OnDrag
 
-instance Attr anything OnDrag Cb where
-  attr OnDrag value = unsafeAttribute { key: "drag", value: cb' value }
+instance Deku.Attribute.Attr everything OnDrag Data.Unit.Unit where
+  attr _ _ = Deku.Attribute.unsafeAttribute { key: "onDrag", value: Deku.Attribute.unset' }
 
-instance Attr anything OnDrag (Effect Unit) where
-  attr OnDrag value = unsafeAttribute
-    { key: "drag", value: cb' (Cb (const (value $> true))) }
-
-instance Attr anything OnDrag (Effect Boolean) where
-  attr OnDrag value = unsafeAttribute
-    { key: "drag", value: cb' (Cb (const value)) }
+instance
+  Deku.Attribute.Attr everything
+    OnDrag
+    (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit) where
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "onDrag", value: _ } <<< Deku.Attribute.cb' <<<
+    Deku.Attribute.cb
 
 type OnDragEffect =
-  forall element. Attr element OnDrag (Effect Unit) => Event (Attribute element)
+  forall element
+   . Deku.Attribute.Attr element OnDrag (Effect.Effect Data.Unit.Unit)
+  => FRP.Event.Event (Deku.Attribute.Attribute element)
 
-instance Attr everything OnDrag Unit where
-  attr OnDrag _ = unsafeAttribute
-    { key: "drag", value: unset' }
+instance Deku.Attribute.Attr everything OnDrag Deku.Attribute.Cb where
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "onDrag", value: _ } <<< Deku.Attribute.cb'

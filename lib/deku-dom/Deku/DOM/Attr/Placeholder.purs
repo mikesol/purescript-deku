@@ -1,21 +1,20 @@
 module Deku.DOM.Attr.Placeholder where
 
-import Prelude
-
+import Deku.Attribute as Deku.Attribute
+import Data.Unit as Data.Unit
+import Control.Semigroupoid ((<<<))
 import Deku.DOM.Elt.Input (Input_)
 import Deku.DOM.Elt.Textarea (Textarea_)
-import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 
 data Placeholder = Placeholder
 
-instance Attr Input_ Placeholder String where
-  attr Placeholder value = unsafeAttribute
-    { key: "placeholder", value: prop' value }
+instance Deku.Attribute.Attr everything Placeholder Data.Unit.Unit where
+  attr _ _ = Deku.Attribute.unsafeAttribute { key: "placeholder", value: Deku.Attribute.unset' }
 
-instance Attr Textarea_ Placeholder String where
-  attr Placeholder value = unsafeAttribute
-    { key: "placeholder", value: prop' value }
+instance Deku.Attribute.Attr Input_ Placeholder String where
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "placeholder", value: _ } <<<
+    Deku.Attribute.prop'
 
-instance Attr everything Placeholder Unit where
-  attr Placeholder _ = unsafeAttribute
-    { key: "placeholder", value: unset' }
+instance Deku.Attribute.Attr Textarea_ Placeholder String where
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "placeholder", value: _ } <<<
+    Deku.Attribute.prop'

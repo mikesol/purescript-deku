@@ -1,27 +1,22 @@
 module Deku.DOM.Attr.Begin where
 
-import Prelude
-
-import Deku.DOM.Elt.Set (Set_)
-import Deku.DOM.Elt.AnimateTransform (AnimateTransform_)
-import Deku.DOM.Elt.AnimateMotion (AnimateMotion_)
+import Deku.Attribute as Deku.Attribute
+import Data.Unit as Data.Unit
+import Control.Semigroupoid ((<<<))
 import Deku.DOM.Elt.Animate (Animate_)
-import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
+import Deku.DOM.Elt.AnimateMotion (AnimateMotion_)
+import Deku.DOM.Elt.AnimateTransform (AnimateTransform_)
 
 data Begin = Begin
 
-instance Attr Animate_ Begin String where
-  attr Begin value = unsafeAttribute { key: "begin", value: prop' value }
+instance Deku.Attribute.Attr everything Begin Data.Unit.Unit where
+  attr _ _ = Deku.Attribute.unsafeAttribute { key: "begin", value: Deku.Attribute.unset' }
 
-instance Attr AnimateMotion_ Begin String where
-  attr Begin value = unsafeAttribute { key: "begin", value: prop' value }
+instance Deku.Attribute.Attr Animate_ Begin String where
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "begin", value: _ } <<< Deku.Attribute.prop'
 
-instance Attr AnimateTransform_ Begin String where
-  attr Begin value = unsafeAttribute { key: "begin", value: prop' value }
+instance Deku.Attribute.Attr AnimateMotion_ Begin String where
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "begin", value: _ } <<< Deku.Attribute.prop'
 
-instance Attr Set_ Begin String where
-  attr Begin value = unsafeAttribute { key: "begin", value: prop' value }
-
-instance Attr everything Begin Unit where
-  attr Begin _ = unsafeAttribute
-    { key: "begin", value: unset' }
+instance Deku.Attribute.Attr AnimateTransform_ Begin String where
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "begin", value: _ } <<< Deku.Attribute.prop'

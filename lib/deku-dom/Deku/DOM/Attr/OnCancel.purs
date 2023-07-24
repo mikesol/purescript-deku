@@ -1,28 +1,28 @@
 module Deku.DOM.Attr.OnCancel where
 
-import Prelude
-import Effect (Effect)
-import Deku.Attribute (class Attr, Attribute, Cb(..), cb', unsafeAttribute, unset')
-import FRP.Event (Event)
+import Control.Semigroupoid ((<<<))
+import Effect as Effect
+import Web.Event.Internal.Types as Web.Event.Internal.Types
+import Data.Unit as Data.Unit
+import Deku.Attribute as Deku.Attribute
+import FRP.Event as FRP.Event
 
 data OnCancel = OnCancel
 
-instance Attr anything OnCancel Cb where
-  attr OnCancel value = unsafeAttribute { key: "cancel", value: cb' value }
+instance Deku.Attribute.Attr everything OnCancel Data.Unit.Unit where
+  attr _ _ = Deku.Attribute.unsafeAttribute { key: "onCancel", value: Deku.Attribute.unset' }
 
-instance Attr anything OnCancel (Effect Unit) where
-  attr OnCancel value = unsafeAttribute
-    { key: "cancel", value: cb' (Cb (const (value $> true))) }
-
-instance Attr anything OnCancel (Effect Boolean) where
-  attr OnCancel value = unsafeAttribute
-    { key: "cancel", value: cb' (Cb (const value)) }
+instance
+  Deku.Attribute.Attr everything
+    OnCancel
+    (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit) where
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "onCancel", value: _ } <<< Deku.Attribute.cb'
+    <<< Deku.Attribute.cb
 
 type OnCancelEffect =
   forall element
-   . Attr element OnCancel (Effect Unit)
-  => Event (Attribute element)
+   . Deku.Attribute.Attr element OnCancel (Effect.Effect Data.Unit.Unit)
+  => FRP.Event.Event (Deku.Attribute.Attribute element)
 
-instance Attr everything OnCancel Unit where
-  attr OnCancel _ = unsafeAttribute
-    { key: "cancel", value: unset' }
+instance Deku.Attribute.Attr everything OnCancel Deku.Attribute.Cb where
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "onCancel", value: _ } <<< Deku.Attribute.cb'

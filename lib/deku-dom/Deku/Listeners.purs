@@ -67,7 +67,7 @@ slider_ = slider <<< pure
 slider
   :: Event (Number -> Effect Unit)
   -> Event (Attribute D.Input_)
-slider = alt (pure $ D.Xtype := "range") <<< map
+slider = alt (pure $ D.Type := "range") <<< map
   ( \push ->
       D.OnInput := cb \e -> for_
         (target e >>= fromEventTarget)
@@ -85,7 +85,7 @@ numeric_ = numeric <<< pure
 numeric
   :: Event (Number -> Effect Unit)
   -> Event (Attribute D.Input_)
-numeric = alt (pure $ D.Xtype := "number") <<< map
+numeric = alt (pure $ D.Type := "number") <<< map
   ( \push ->
       D.OnInput := cb \e -> for_
         (target e >>= fromEventTarget)
@@ -103,7 +103,7 @@ checkbox_ = checkbox <<< pure
 checkbox
   :: Event (Boolean -> Effect Unit)
   -> Event (Attribute D.Input_)
-checkbox = alt (pure $ D.Xtype := "checkbox") <<< map
+checkbox = alt (pure $ D.Type := "checkbox") <<< map
   ( \push ->
       D.OnInput := cb \e -> for_
         (target e >>= fromEventTarget)

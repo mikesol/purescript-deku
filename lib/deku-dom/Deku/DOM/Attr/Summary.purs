@@ -1,15 +1,14 @@
 module Deku.DOM.Attr.Summary where
 
-import Prelude
-
+import Deku.Attribute as Deku.Attribute
+import Data.Unit as Data.Unit
+import Control.Semigroupoid ((<<<))
 import Deku.DOM.Elt.Table (Table_)
-import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 
 data Summary = Summary
 
-instance Attr Table_ Summary String where
-  attr Summary value = unsafeAttribute { key: "summary", value: prop' value }
+instance Deku.Attribute.Attr everything Summary Data.Unit.Unit where
+  attr _ _ = Deku.Attribute.unsafeAttribute { key: "summary", value: Deku.Attribute.unset' }
 
-instance Attr everything Summary Unit where
-  attr Summary _ = unsafeAttribute
-    { key: "summary", value: unset' }
+instance Deku.Attribute.Attr Table_ Summary String where
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "summary", value: _ } <<< Deku.Attribute.prop'

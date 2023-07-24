@@ -1,15 +1,14 @@
 module Deku.DOM.Attr.Order where
 
-import Prelude
-
+import Deku.Attribute as Deku.Attribute
+import Data.Unit as Data.Unit
+import Control.Semigroupoid ((<<<))
 import Deku.DOM.Elt.FeConvolveMatrix (FeConvolveMatrix_)
-import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 
 data Order = Order
 
-instance Attr FeConvolveMatrix_ Order String where
-  attr Order value = unsafeAttribute { key: "order", value: prop' value }
+instance Deku.Attribute.Attr everything Order Data.Unit.Unit where
+  attr _ _ = Deku.Attribute.unsafeAttribute { key: "order", value: Deku.Attribute.unset' }
 
-instance Attr everything Order Unit where
-  attr Order _ = unsafeAttribute
-    { key: "order", value: unset' }
+instance Deku.Attribute.Attr FeConvolveMatrix_ Order String where
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "order", value: _ } <<< Deku.Attribute.prop'

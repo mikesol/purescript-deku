@@ -1,29 +1,30 @@
 module Deku.DOM.Attr.OnPointerleave where
 
-import Prelude
-import Effect (Effect)
-import Deku.Attribute (class Attr, Attribute, Cb(..), cb', unsafeAttribute, unset')
-import FRP.Event (Event)
+import Control.Semigroupoid ((<<<))
+import Effect as Effect
+import Web.Event.Internal.Types as Web.Event.Internal.Types
+import Data.Unit as Data.Unit
+import Deku.Attribute as Deku.Attribute
+import FRP.Event as FRP.Event
 
 data OnPointerleave = OnPointerleave
 
-instance Attr anything OnPointerleave Cb where
-  attr OnPointerleave value = unsafeAttribute
-    { key: "pointerleave", value: cb' value }
+instance Deku.Attribute.Attr everything OnPointerleave Data.Unit.Unit where
+  attr _ _ = Deku.Attribute.unsafeAttribute { key: "onPointerleave", value: Deku.Attribute.unset' }
 
-instance Attr anything OnPointerleave (Effect Unit) where
-  attr OnPointerleave value = unsafeAttribute
-    { key: "pointerleave", value: cb' (Cb (const (value $> true))) }
-
-instance Attr anything OnPointerleave (Effect Boolean) where
-  attr OnPointerleave value = unsafeAttribute
-    { key: "pointerleave", value: cb' (Cb (const value)) }
+instance
+  Deku.Attribute.Attr everything
+    OnPointerleave
+    (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit) where
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "onPointerleave", value: _ }
+    <<< Deku.Attribute.cb'
+    <<< Deku.Attribute.cb
 
 type OnPointerleaveEffect =
   forall element
-   . Attr element OnPointerleave (Effect Unit)
-  => Event (Attribute element)
+   . Deku.Attribute.Attr element OnPointerleave (Effect.Effect Data.Unit.Unit)
+  => FRP.Event.Event (Deku.Attribute.Attribute element)
 
-instance Attr everything OnPointerleave Unit where
-  attr OnPointerleave _ = unsafeAttribute
-    { key: "pointerleave", value: unset' }
+instance Deku.Attribute.Attr everything OnPointerleave Deku.Attribute.Cb where
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "onPointerleave", value: _ } <<<
+    Deku.Attribute.cb'

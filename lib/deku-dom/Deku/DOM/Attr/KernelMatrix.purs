@@ -1,16 +1,15 @@
 module Deku.DOM.Attr.KernelMatrix where
 
-import Prelude
-
+import Deku.Attribute as Deku.Attribute
+import Data.Unit as Data.Unit
+import Control.Semigroupoid ((<<<))
 import Deku.DOM.Elt.FeConvolveMatrix (FeConvolveMatrix_)
-import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 
 data KernelMatrix = KernelMatrix
 
-instance Attr FeConvolveMatrix_ KernelMatrix String where
-  attr KernelMatrix value = unsafeAttribute
-    { key: "kernelMatrix", value: prop' value }
+instance Deku.Attribute.Attr everything KernelMatrix Data.Unit.Unit where
+  attr _ _ = Deku.Attribute.unsafeAttribute { key: "kernelMatrix", value: Deku.Attribute.unset' }
 
-instance Attr everything KernelMatrix Unit where
-  attr KernelMatrix _ = unsafeAttribute
-    { key: "kernelMatrix", value: unset' }
+instance Deku.Attribute.Attr FeConvolveMatrix_ KernelMatrix String where
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "kernelMatrix", value: _ } <<<
+    Deku.Attribute.prop'

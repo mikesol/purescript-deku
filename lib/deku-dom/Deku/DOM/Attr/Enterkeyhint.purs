@@ -1,16 +1,14 @@
 module Deku.DOM.Attr.Enterkeyhint where
 
-import Prelude
-
-import Deku.DOM.Elt.Textarea (Textarea_)
-import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
+import Control.Semigroupoid ((<<<))
+import Deku.Attribute as Deku.Attribute
+import Data.Unit as Data.Unit
 
 data Enterkeyhint = Enterkeyhint
 
-instance Attr Textarea_ Enterkeyhint String where
-  attr Enterkeyhint value = unsafeAttribute
-    { key: "enterkeyhint", value: prop' value }
+instance Deku.Attribute.Attr everything Enterkeyhint Data.Unit.Unit where
+  attr _ _ = Deku.Attribute.unsafeAttribute { key: "enterkeyhint", value: Deku.Attribute.unset' }
 
-instance Attr everything Enterkeyhint Unit where
-  attr Enterkeyhint _ = unsafeAttribute
-    { key: "enterkeyhint", value: unset' }
+instance Deku.Attribute.Attr everything Enterkeyhint String where
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "enterkeyhint", value: _ } <<<
+    Deku.Attribute.prop'

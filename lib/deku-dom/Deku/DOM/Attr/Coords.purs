@@ -1,15 +1,18 @@
 module Deku.DOM.Attr.Coords where
 
-import Prelude
-
+import Deku.Attribute as Deku.Attribute
+import Data.Unit as Data.Unit
+import Control.Semigroupoid ((<<<))
+import Deku.DOM.Elt.A (A_)
 import Deku.DOM.Elt.Area (Area_)
-import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 
 data Coords = Coords
 
-instance Attr Area_ Coords String where
-  attr Coords value = unsafeAttribute { key: "coords", value: prop' value }
+instance Deku.Attribute.Attr everything Coords Data.Unit.Unit where
+  attr _ _ = Deku.Attribute.unsafeAttribute { key: "coords", value: Deku.Attribute.unset' }
 
-instance Attr everything Coords Unit where
-  attr Coords _ = unsafeAttribute
-    { key: "coords", value: unset' }
+instance Deku.Attribute.Attr A_ Coords String where
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "coords", value: _ } <<< Deku.Attribute.prop'
+
+instance Deku.Attribute.Attr Area_ Coords String where
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "coords", value: _ } <<< Deku.Attribute.prop'

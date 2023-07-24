@@ -1,27 +1,26 @@
 module Deku.DOM.Attr.Cite where
 
-import Prelude
-
+import Deku.Attribute as Deku.Attribute
+import Data.Unit as Data.Unit
+import Control.Semigroupoid ((<<<))
 import Deku.DOM.Elt.Blockquote (Blockquote_)
 import Deku.DOM.Elt.Del (Del_)
 import Deku.DOM.Elt.Ins (Ins_)
 import Deku.DOM.Elt.Q (Q_)
-import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 
 data Cite = Cite
 
-instance Attr Blockquote_ Cite String where
-  attr Cite value = unsafeAttribute { key: "cite", value: prop' value }
+instance Deku.Attribute.Attr everything Cite Data.Unit.Unit where
+  attr _ _ = Deku.Attribute.unsafeAttribute { key: "cite", value: Deku.Attribute.unset' }
 
-instance Attr Del_ Cite String where
-  attr Cite value = unsafeAttribute { key: "cite", value: prop' value }
+instance Deku.Attribute.Attr Blockquote_ Cite String where
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "cite", value: _ } <<< Deku.Attribute.prop'
 
-instance Attr Ins_ Cite String where
-  attr Cite value = unsafeAttribute { key: "cite", value: prop' value }
+instance Deku.Attribute.Attr Del_ Cite String where
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "cite", value: _ } <<< Deku.Attribute.prop'
 
-instance Attr Q_ Cite String where
-  attr Cite value = unsafeAttribute { key: "cite", value: prop' value }
+instance Deku.Attribute.Attr Ins_ Cite String where
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "cite", value: _ } <<< Deku.Attribute.prop'
 
-instance Attr everything Cite Unit where
-  attr Cite _ = unsafeAttribute
-    { key: "cite", value: unset' }
+instance Deku.Attribute.Attr Q_ Cite String where
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "cite", value: _ } <<< Deku.Attribute.prop'

@@ -1,26 +1,28 @@
 module Deku.DOM.Attr.OnBlur where
 
-import Prelude
-import Effect (Effect)
-import Deku.Attribute (class Attr, Attribute, Cb(..), cb', unsafeAttribute, unset')
-import FRP.Event (Event)
+import Control.Semigroupoid ((<<<))
+import Effect as Effect
+import Web.Event.Internal.Types as Web.Event.Internal.Types
+import Data.Unit as Data.Unit
+import Deku.Attribute as Deku.Attribute
+import FRP.Event as FRP.Event
 
 data OnBlur = OnBlur
 
-instance Attr anything OnBlur Cb where
-  attr OnBlur value = unsafeAttribute { key: "blur", value: cb' value }
+instance Deku.Attribute.Attr everything OnBlur Data.Unit.Unit where
+  attr _ _ = Deku.Attribute.unsafeAttribute { key: "onBlur", value: Deku.Attribute.unset' }
 
-instance Attr anything OnBlur (Effect Unit) where
-  attr OnBlur value = unsafeAttribute
-    { key: "blur", value: cb' (Cb (const (value $> true))) }
-
-instance Attr anything OnBlur (Effect Boolean) where
-  attr OnBlur value = unsafeAttribute
-    { key: "blur", value: cb' (Cb (const value)) }
+instance
+  Deku.Attribute.Attr everything
+    OnBlur
+    (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit) where
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "onBlur", value: _ } <<< Deku.Attribute.cb' <<<
+    Deku.Attribute.cb
 
 type OnBlurEffect =
-  forall element. Attr element OnBlur (Effect Unit) => Event (Attribute element)
+  forall element
+   . Deku.Attribute.Attr element OnBlur (Effect.Effect Data.Unit.Unit)
+  => FRP.Event.Event (Deku.Attribute.Attribute element)
 
-instance Attr everything OnBlur Unit where
-  attr OnBlur _ = unsafeAttribute
-    { key: "blur", value: unset' }
+instance Deku.Attribute.Attr everything OnBlur Deku.Attribute.Cb where
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "onBlur", value: _ } <<< Deku.Attribute.cb'

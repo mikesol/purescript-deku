@@ -1,35 +1,30 @@
 module Deku.DOM.Attr.Min where
 
-import Prelude
-
-import Deku.DOM.Elt.Set (Set_)
-import Deku.DOM.Elt.AnimateTransform (AnimateTransform_)
-import Deku.DOM.Elt.AnimateMotion (AnimateMotion_)
+import Deku.Attribute as Deku.Attribute
+import Data.Unit as Data.Unit
+import Control.Semigroupoid ((<<<))
 import Deku.DOM.Elt.Animate (Animate_)
+import Deku.DOM.Elt.AnimateMotion (AnimateMotion_)
+import Deku.DOM.Elt.AnimateTransform (AnimateTransform_)
 import Deku.DOM.Elt.Input (Input_)
 import Deku.DOM.Elt.Meter (Meter_)
-import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 
 data Min = Min
 
-instance Attr Input_ Min String where
-  attr Min value = unsafeAttribute { key: "min", value: prop' value }
+instance Deku.Attribute.Attr everything Min Data.Unit.Unit where
+  attr _ _ = Deku.Attribute.unsafeAttribute { key: "min", value: Deku.Attribute.unset' }
 
-instance Attr Meter_ Min String where
-  attr Min value = unsafeAttribute { key: "min", value: prop' value }
+instance Deku.Attribute.Attr Animate_ Min String where
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "min", value: _ } <<< Deku.Attribute.prop'
 
-instance Attr Animate_ Min String where
-  attr Min value = unsafeAttribute { key: "min", value: prop' value }
+instance Deku.Attribute.Attr AnimateMotion_ Min String where
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "min", value: _ } <<< Deku.Attribute.prop'
 
-instance Attr AnimateMotion_ Min String where
-  attr Min value = unsafeAttribute { key: "min", value: prop' value }
+instance Deku.Attribute.Attr AnimateTransform_ Min String where
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "min", value: _ } <<< Deku.Attribute.prop'
 
-instance Attr AnimateTransform_ Min String where
-  attr Min value = unsafeAttribute { key: "min", value: prop' value }
+instance Deku.Attribute.Attr Input_ Min String where
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "min", value: _ } <<< Deku.Attribute.prop'
 
-instance Attr Set_ Min String where
-  attr Min value = unsafeAttribute { key: "min", value: prop' value }
-
-instance Attr everything Min Unit where
-  attr Min _ = unsafeAttribute
-    { key: "min", value: unset' }
+instance Deku.Attribute.Attr Meter_ Min String where
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "min", value: _ } <<< Deku.Attribute.prop'

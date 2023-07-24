@@ -1,19 +1,18 @@
 module Deku.DOM.Attr.Ping where
 
-import Prelude
-
+import Deku.Attribute as Deku.Attribute
+import Data.Unit as Data.Unit
+import Control.Semigroupoid ((<<<))
 import Deku.DOM.Elt.A (A_)
 import Deku.DOM.Elt.Area (Area_)
-import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 
 data Ping = Ping
 
-instance Attr A_ Ping String where
-  attr Ping value = unsafeAttribute { key: "ping", value: prop' value }
+instance Deku.Attribute.Attr everything Ping Data.Unit.Unit where
+  attr _ _ = Deku.Attribute.unsafeAttribute { key: "ping", value: Deku.Attribute.unset' }
 
-instance Attr Area_ Ping String where
-  attr Ping value = unsafeAttribute { key: "ping", value: prop' value }
+instance Deku.Attribute.Attr A_ Ping String where
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "ping", value: _ } <<< Deku.Attribute.prop'
 
-instance Attr everything Ping Unit where
-  attr Ping _ = unsafeAttribute
-    { key: "ping", value: unset' }
+instance Deku.Attribute.Attr Area_ Ping String where
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "ping", value: _ } <<< Deku.Attribute.prop'

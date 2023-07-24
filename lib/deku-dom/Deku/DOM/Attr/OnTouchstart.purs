@@ -1,29 +1,30 @@
 module Deku.DOM.Attr.OnTouchstart where
 
-import Prelude
-import Effect (Effect)
-import Deku.Attribute (class Attr, Attribute, Cb(..), cb', unsafeAttribute, unset')
-import FRP.Event (Event)
+import Control.Semigroupoid ((<<<))
+import Effect as Effect
+import Web.Event.Internal.Types as Web.Event.Internal.Types
+import Data.Unit as Data.Unit
+import Deku.Attribute as Deku.Attribute
+import FRP.Event as FRP.Event
 
 data OnTouchstart = OnTouchstart
 
-instance Attr anything OnTouchstart Cb where
-  attr OnTouchstart value = unsafeAttribute
-    { key: "touchstart", value: cb' value }
+instance Deku.Attribute.Attr everything OnTouchstart Data.Unit.Unit where
+  attr _ _ = Deku.Attribute.unsafeAttribute { key: "onTouchstart", value: Deku.Attribute.unset' }
 
-instance Attr anything OnTouchstart (Effect Unit) where
-  attr OnTouchstart value = unsafeAttribute
-    { key: "touchstart", value: cb' (Cb (const (value $> true))) }
-
-instance Attr anything OnTouchstart (Effect Boolean) where
-  attr OnTouchstart value = unsafeAttribute
-    { key: "touchstart", value: cb' (Cb (const value)) }
+instance
+  Deku.Attribute.Attr everything
+    OnTouchstart
+    (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit) where
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "onTouchstart", value: _ }
+    <<< Deku.Attribute.cb'
+    <<< Deku.Attribute.cb
 
 type OnTouchstartEffect =
   forall element
-   . Attr element OnTouchstart (Effect Unit)
-  => Event (Attribute element)
+   . Deku.Attribute.Attr element OnTouchstart (Effect.Effect Data.Unit.Unit)
+  => FRP.Event.Event (Deku.Attribute.Attribute element)
 
-instance Attr everything OnTouchstart Unit where
-  attr OnTouchstart _ = unsafeAttribute
-    { key: "touchstart", value: unset' }
+instance Deku.Attribute.Attr everything OnTouchstart Deku.Attribute.Cb where
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "onTouchstart", value: _ } <<<
+    Deku.Attribute.cb'

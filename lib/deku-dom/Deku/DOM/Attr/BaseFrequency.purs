@@ -1,16 +1,15 @@
 module Deku.DOM.Attr.BaseFrequency where
 
-import Prelude
-
+import Deku.Attribute as Deku.Attribute
+import Data.Unit as Data.Unit
+import Control.Semigroupoid ((<<<))
 import Deku.DOM.Elt.FeTurbulence (FeTurbulence_)
-import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 
 data BaseFrequency = BaseFrequency
 
-instance Attr FeTurbulence_ BaseFrequency String where
-  attr BaseFrequency value = unsafeAttribute
-    { key: "baseFrequency", value: prop' value }
+instance Deku.Attribute.Attr everything BaseFrequency Data.Unit.Unit where
+  attr _ _ = Deku.Attribute.unsafeAttribute { key: "baseFrequency", value: Deku.Attribute.unset' }
 
-instance Attr everything BaseFrequency Unit where
-  attr BaseFrequency _ = unsafeAttribute
-    { key: "baseFrequency", value: unset' }
+instance Deku.Attribute.Attr FeTurbulence_ BaseFrequency String where
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "baseFrequency", value: _ } <<<
+    Deku.Attribute.prop'

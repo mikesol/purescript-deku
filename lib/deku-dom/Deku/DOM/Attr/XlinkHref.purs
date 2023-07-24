@@ -1,56 +1,45 @@
 module Deku.DOM.Attr.XlinkHref where
 
-import Prelude
-
-import Deku.DOM.Elt.Use (Use_)
-import Deku.DOM.Elt.RadialGradient (RadialGradient_)
-import Deku.DOM.Elt.Pattern (Pattern_)
-import Deku.DOM.Elt.Mpath (Mpath_)
-import Deku.DOM.Elt.LinearGradient (LinearGradient_)
-import Deku.DOM.Elt.Image (Image_)
-import Deku.DOM.Elt.Filter (Filter_)
+import Deku.Attribute as Deku.Attribute
+import Data.Unit as Data.Unit
+import Control.Semigroupoid ((<<<))
 import Deku.DOM.Elt.FeImage (FeImage_)
-import Deku.DOM.Elt.AnimateTransform (AnimateTransform_)
-import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
+import Deku.DOM.Elt.Image (Image_)
+import Deku.DOM.Elt.LinearGradient (LinearGradient_)
+import Deku.DOM.Elt.Pattern (Pattern_)
+import Deku.DOM.Elt.RadialGradient (RadialGradient_)
+import Deku.DOM.Elt.TextPath (TextPath_)
+import Deku.DOM.Elt.Use (Use_)
 
 data XlinkHref = XlinkHref
 
-instance Attr AnimateTransform_ XlinkHref String where
-  attr XlinkHref value = unsafeAttribute
-    { key: "xlink:href", value: prop' value }
+instance Deku.Attribute.Attr everything XlinkHref Data.Unit.Unit where
+  attr _ _ = Deku.Attribute.unsafeAttribute { key: "xlink:href", value: Deku.Attribute.unset' }
 
-instance Attr FeImage_ XlinkHref String where
-  attr XlinkHref value = unsafeAttribute
-    { key: "xlink:href", value: prop' value }
+instance Deku.Attribute.Attr FeImage_ XlinkHref String where
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "xlink:href", value: _ } <<<
+    Deku.Attribute.prop'
 
-instance Attr Filter_ XlinkHref String where
-  attr XlinkHref value = unsafeAttribute
-    { key: "xlink:href", value: prop' value }
+instance Deku.Attribute.Attr Image_ XlinkHref String where
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "xlink:href", value: _ } <<<
+    Deku.Attribute.prop'
 
-instance Attr Image_ XlinkHref String where
-  attr XlinkHref value = unsafeAttribute
-    { key: "xlink:href", value: prop' value }
+instance Deku.Attribute.Attr LinearGradient_ XlinkHref String where
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "xlink:href", value: _ } <<<
+    Deku.Attribute.prop'
 
-instance Attr LinearGradient_ XlinkHref String where
-  attr XlinkHref value = unsafeAttribute
-    { key: "xlink:href", value: prop' value }
+instance Deku.Attribute.Attr Pattern_ XlinkHref String where
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "xlink:href", value: _ } <<<
+    Deku.Attribute.prop'
 
-instance Attr Mpath_ XlinkHref String where
-  attr XlinkHref value = unsafeAttribute
-    { key: "xlink:href", value: prop' value }
+instance Deku.Attribute.Attr RadialGradient_ XlinkHref String where
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "xlink:href", value: _ } <<<
+    Deku.Attribute.prop'
 
-instance Attr Pattern_ XlinkHref String where
-  attr XlinkHref value = unsafeAttribute
-    { key: "xlink:href", value: prop' value }
+instance Deku.Attribute.Attr TextPath_ XlinkHref String where
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "xlink:href", value: _ } <<<
+    Deku.Attribute.prop'
 
-instance Attr RadialGradient_ XlinkHref String where
-  attr XlinkHref value = unsafeAttribute
-    { key: "xlink:href", value: prop' value }
-
-instance Attr Use_ XlinkHref String where
-  attr XlinkHref value = unsafeAttribute
-    { key: "xlink:href", value: prop' value }
-
-instance Attr everything XlinkHref Unit where
-  attr XlinkHref _ = unsafeAttribute
-    { key: "xlink:href", value: unset' }
+instance Deku.Attribute.Attr Use_ XlinkHref String where
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "xlink:href", value: _ } <<<
+    Deku.Attribute.prop'

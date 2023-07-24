@@ -3,7 +3,7 @@ module DOM.Indexed where
 import Prelude
 
 import Control.Monad.Except (ExceptT(..))
-import DOM.Common (Ctor(..), Specification, TagNS(..), TypeStub(..), namespaceBases, typeImports, webElements)
+import DOM.Common (Ctor, Specification, TagNS(..), TypeStub(..), namespaceBases, typeImports, webElements)
 import DOM.Indexed.Common (requires)
 import DOM.Indexed.Elements as Elements
 import DOM.Indexed.Index as Index
@@ -13,8 +13,7 @@ import DOM.Indexed.Self as Self
 import DOM.Indexed.Values as Values
 import Data.Array as Array
 import Data.Maybe (Maybe(..))
-import Data.Tuple (snd)
-import Data.Tuple.Nested (type (/\), (/\))
+import Data.Tuple.Nested (type (/\))
 import Effect.Aff (Aff, Error, attempt)
 import FS as FS
 import Node.Encoding (Encoding(..))

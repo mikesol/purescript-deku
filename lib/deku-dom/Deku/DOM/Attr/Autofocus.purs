@@ -1,31 +1,14 @@
 module Deku.DOM.Attr.Autofocus where
 
-import Prelude
-
-import Deku.DOM.Elt.Button (Button_)
-import Deku.DOM.Elt.Input (Input_)
-import Deku.DOM.Elt.Select (Select_)
-import Deku.DOM.Elt.Textarea (Textarea_)
-import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
+import Control.Semigroupoid ((<<<))
+import Deku.Attribute as Deku.Attribute
+import Data.Unit as Data.Unit
 
 data Autofocus = Autofocus
 
-instance Attr Button_ Autofocus String where
-  attr Autofocus value = unsafeAttribute
-    { key: "autofocus", value: prop' value }
+instance Deku.Attribute.Attr everything Autofocus Data.Unit.Unit where
+  attr _ _ = Deku.Attribute.unsafeAttribute { key: "autofocus", value: Deku.Attribute.unset' }
 
-instance Attr Input_ Autofocus String where
-  attr Autofocus value = unsafeAttribute
-    { key: "autofocus", value: prop' value }
-
-instance Attr Select_ Autofocus String where
-  attr Autofocus value = unsafeAttribute
-    { key: "autofocus", value: prop' value }
-
-instance Attr Textarea_ Autofocus String where
-  attr Autofocus value = unsafeAttribute
-    { key: "autofocus", value: prop' value }
-
-instance Attr everything Autofocus Unit where
-  attr Autofocus _ = unsafeAttribute
-    { key: "autofocus", value: unset' }
+instance Deku.Attribute.Attr everything Autofocus String where
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "autofocus", value: _ } <<<
+    Deku.Attribute.prop'

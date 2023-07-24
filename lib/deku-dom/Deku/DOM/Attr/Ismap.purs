@@ -1,15 +1,18 @@
 module Deku.DOM.Attr.Ismap where
 
-import Prelude
-
+import Deku.Attribute as Deku.Attribute
+import Data.Unit as Data.Unit
+import Control.Semigroupoid ((<<<))
 import Deku.DOM.Elt.Img (Img_)
-import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
+import Deku.DOM.Elt.Input (Input_)
 
 data Ismap = Ismap
 
-instance Attr Img_ Ismap String where
-  attr Ismap value = unsafeAttribute { key: "ismap", value: prop' value }
+instance Deku.Attribute.Attr everything Ismap Data.Unit.Unit where
+  attr _ _ = Deku.Attribute.unsafeAttribute { key: "ismap", value: Deku.Attribute.unset' }
 
-instance Attr everything Ismap Unit where
-  attr Ismap _ = unsafeAttribute
-    { key: "ismap", value: unset' }
+instance Deku.Attribute.Attr Img_ Ismap String where
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "ismap", value: _ } <<< Deku.Attribute.prop'
+
+instance Deku.Attribute.Attr Input_ Ismap String where
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "ismap", value: _ } <<< Deku.Attribute.prop'

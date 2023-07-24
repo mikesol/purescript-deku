@@ -3,8 +3,8 @@ module DOM.Indexed.Props where
 import Prelude
 import Prim hiding (Type)
 
-import DOM.Common (Ctor(..), Interface, Keyword, TypeStub(..), construct, handler, typeAttributed, typeEvented)
-import DOM.Indexed.Common (declHandler, attributeCtor, typeIndexedAt, overloaded)
+import DOM.Common (Ctor(..), Interface, Keyword, TypeStub(..), construct, declHandler, handler, typeAttributed, typeEvented)
+import DOM.Indexed.Common (attributeCtor, typeIndexedAt, overloaded)
 import Data.Array as Array
 import Data.Array.NonEmpty as NEA
 import Data.Bifunctor (lmap)
@@ -13,9 +13,10 @@ import Data.Maybe (Maybe(..))
 import Data.Tuple.Nested (type (/\), (/\))
 import Foreign.Object as Foreign
 import PureScript.CST.Types (ClassFundep(..), Declaration, Export)
-import Tidy.Codegen (binaryOp, classMember, declClass, declInstance, declSignature, declValue, exportClass, exportValue, exprIdent, exprOp, instValue, typeApp, typeArrow, typeConstrained, typeCtor, typeForall, typeVar, typeVarKinded)
+import Tidy.Codegen (binaryOp, binderVar, classMember, declClass, declInstance, declSignature, declValue, exportClass, exportValue, exprIdent, exprLambda, exprOp, instValue, typeApp, typeArrow, typeConstrained, typeCtor, typeForall, typeVar, typeVarKinded)
 import Tidy.Codegen.Class (toName)
 import Tidy.Codegen.Common (tokRightArrow)
+import Tidy.Codegen.Types (BinaryOp(..))
 
 exports :: Partial => Array ( Ctor /\  Array AttributeType ) -> Array ( Export Void )
 exports attributes =
@@ -72,7 +73,7 @@ declAttr attributes =
                     ]
                     [ FundepDetermines ( NEA.singleton ( toName "v") ) tokRightArrow ( NEA.singleton ( toName "a" ) )
                     ]
-                    [ classMember overloadedHandler $ typeArrow [ typeVar "v" ] $ typeCtor "AttributeValue"
+                    [ classMember overloadedHandler $ typeArrow [ typeVar "v" ] $ typeCtor "Deku.Attribute.AttributeValue"
                     ]
                 ]
                     <> map ( declHandlerInstance overloadedClass overloadedHandler ) multiple
@@ -82,7 +83,7 @@ declAttr attributes =
                         $ typeConstrained [ typeApp ( typeCtor overloadedClass ) [ typeVar "v", typeVar "a" ] ]
                         $ typeArrow [ typeEvented $ typeVar "v" ]
                         $ typeEvented $ typeAttributed $ typeIndexedAt index ( typeVar "a" )
-                    , declHandler ctor attribute $ exprIdent overloadedHandler
+                    , declHandler ctor attribute [ binaryOp "<<<" $ exprIdent overloadedHandler ]
 
                     , declSignature shortHand
                         $ typeForall [ typeVar "r", typeVar "v", typeVar "a" ]
@@ -104,7 +105,12 @@ declAttr attributes =
             [ construct t
             , construct original
             ]
-            [ instValue member [] $ handler t ]
+            $ pure $ instValue member [] case Array.uncons $ handler t of
+                Just { head : BinaryOp ( _ /\ expr ), tail : handlers } ->
+                    exprOp expr handlers
+                
+                Nothing ->
+                    exprLambda [ binderVar "a" ] $ exprIdent "a"
 
 declUnset :: Partial => Array ( Declaration Void )
 declUnset =

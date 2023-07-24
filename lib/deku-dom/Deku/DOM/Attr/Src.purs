@@ -1,7 +1,8 @@
 module Deku.DOM.Attr.Src where
 
-import Prelude
-
+import Deku.Attribute as Deku.Attribute
+import Data.Unit as Data.Unit
+import Control.Semigroupoid ((<<<))
 import Deku.DOM.Elt.Audio (Audio_)
 import Deku.DOM.Elt.Embed (Embed_)
 import Deku.DOM.Elt.Iframe (Iframe_)
@@ -11,37 +12,35 @@ import Deku.DOM.Elt.Script (Script_)
 import Deku.DOM.Elt.Source (Source_)
 import Deku.DOM.Elt.Track (Track_)
 import Deku.DOM.Elt.Video (Video_)
-import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 
 data Src = Src
 
-instance Attr Audio_ Src String where
-  attr Src value = unsafeAttribute { key: "src", value: prop' value }
+instance Deku.Attribute.Attr everything Src Data.Unit.Unit where
+  attr _ _ = Deku.Attribute.unsafeAttribute { key: "src", value: Deku.Attribute.unset' }
 
-instance Attr Embed_ Src String where
-  attr Src value = unsafeAttribute { key: "src", value: prop' value }
+instance Deku.Attribute.Attr Audio_ Src String where
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "src", value: _ } <<< Deku.Attribute.prop'
 
-instance Attr Iframe_ Src String where
-  attr Src value = unsafeAttribute { key: "src", value: prop' value }
+instance Deku.Attribute.Attr Embed_ Src String where
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "src", value: _ } <<< Deku.Attribute.prop'
 
-instance Attr Img_ Src String where
-  attr Src value = unsafeAttribute { key: "src", value: prop' value }
+instance Deku.Attribute.Attr Iframe_ Src String where
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "src", value: _ } <<< Deku.Attribute.prop'
 
-instance Attr Input_ Src String where
-  attr Src value = unsafeAttribute { key: "src", value: prop' value }
+instance Deku.Attribute.Attr Img_ Src String where
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "src", value: _ } <<< Deku.Attribute.prop'
 
-instance Attr Script_ Src String where
-  attr Src value = unsafeAttribute { key: "src", value: prop' value }
+instance Deku.Attribute.Attr Input_ Src String where
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "src", value: _ } <<< Deku.Attribute.prop'
 
-instance Attr Source_ Src String where
-  attr Src value = unsafeAttribute { key: "src", value: prop' value }
+instance Deku.Attribute.Attr Script_ Src String where
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "src", value: _ } <<< Deku.Attribute.prop'
 
-instance Attr Track_ Src String where
-  attr Src value = unsafeAttribute { key: "src", value: prop' value }
+instance Deku.Attribute.Attr Source_ Src String where
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "src", value: _ } <<< Deku.Attribute.prop'
 
-instance Attr Video_ Src String where
-  attr Src value = unsafeAttribute { key: "src", value: prop' value }
+instance Deku.Attribute.Attr Track_ Src String where
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "src", value: _ } <<< Deku.Attribute.prop'
 
-instance Attr everything Src Unit where
-  attr Src _ = unsafeAttribute
-    { key: "src", value: unset' }
+instance Deku.Attribute.Attr Video_ Src String where
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "src", value: _ } <<< Deku.Attribute.prop'

@@ -1,21 +1,20 @@
 module Deku.DOM.Attr.GradientUnits where
 
-import Prelude
-
-import Deku.DOM.Elt.RadialGradient (RadialGradient_)
+import Deku.Attribute as Deku.Attribute
+import Data.Unit as Data.Unit
+import Control.Semigroupoid ((<<<))
 import Deku.DOM.Elt.LinearGradient (LinearGradient_)
-import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
+import Deku.DOM.Elt.RadialGradient (RadialGradient_)
 
 data GradientUnits = GradientUnits
 
-instance Attr LinearGradient_ GradientUnits String where
-  attr GradientUnits value = unsafeAttribute
-    { key: "gradientUnits", value: prop' value }
+instance Deku.Attribute.Attr everything GradientUnits Data.Unit.Unit where
+  attr _ _ = Deku.Attribute.unsafeAttribute { key: "gradientUnits", value: Deku.Attribute.unset' }
 
-instance Attr RadialGradient_ GradientUnits String where
-  attr GradientUnits value = unsafeAttribute
-    { key: "gradientUnits", value: prop' value }
+instance Deku.Attribute.Attr LinearGradient_ GradientUnits String where
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "gradientUnits", value: _ } <<<
+    Deku.Attribute.prop'
 
-instance Attr everything GradientUnits Unit where
-  attr GradientUnits _ = unsafeAttribute
-    { key: "gradientUnits", value: unset' }
+instance Deku.Attribute.Attr RadialGradient_ GradientUnits String where
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "gradientUnits", value: _ } <<<
+    Deku.Attribute.prop'

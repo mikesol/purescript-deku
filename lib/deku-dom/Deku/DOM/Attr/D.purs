@@ -1,15 +1,13 @@
 module Deku.DOM.Attr.D where
 
-import Prelude
-
-import Deku.DOM.Elt.Path (Path_)
-import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
+import Control.Semigroupoid ((<<<))
+import Deku.Attribute as Deku.Attribute
+import Data.Unit as Data.Unit
 
 data D = D
 
-instance Attr Path_ D String where
-  attr D value = unsafeAttribute { key: "d", value: prop' value }
+instance Deku.Attribute.Attr everything D Data.Unit.Unit where
+  attr _ _ = Deku.Attribute.unsafeAttribute { key: "d", value: Deku.Attribute.unset' }
 
-instance Attr everything D Unit where
-  attr D _ = unsafeAttribute
-    { key: "d", value: unset' }
+instance Deku.Attribute.Attr everything D String where
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "d", value: _ } <<< Deku.Attribute.prop'

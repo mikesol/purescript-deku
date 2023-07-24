@@ -1,15 +1,14 @@
 module Deku.DOM.Attr.Step where
 
-import Prelude
-
+import Deku.Attribute as Deku.Attribute
+import Data.Unit as Data.Unit
+import Control.Semigroupoid ((<<<))
 import Deku.DOM.Elt.Input (Input_)
-import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 
 data Step = Step
 
-instance Attr Input_ Step String where
-  attr Step value = unsafeAttribute { key: "step", value: prop' value }
+instance Deku.Attribute.Attr everything Step Data.Unit.Unit where
+  attr _ _ = Deku.Attribute.unsafeAttribute { key: "step", value: Deku.Attribute.unset' }
 
-instance Attr everything Step Unit where
-  attr Step _ = unsafeAttribute
-    { key: "step", value: unset' }
+instance Deku.Attribute.Attr Input_ Step String where
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "step", value: _ } <<< Deku.Attribute.prop'

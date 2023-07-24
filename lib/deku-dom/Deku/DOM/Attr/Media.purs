@@ -1,31 +1,26 @@
 module Deku.DOM.Attr.Media where
 
-import Prelude
-
-import Deku.DOM.Elt.A (A_)
-import Deku.DOM.Elt.Area (Area_)
+import Deku.Attribute as Deku.Attribute
+import Data.Unit as Data.Unit
+import Control.Semigroupoid ((<<<))
 import Deku.DOM.Elt.Link (Link_)
+import Deku.DOM.Elt.Meta (Meta_)
 import Deku.DOM.Elt.Source (Source_)
 import Deku.DOM.Elt.Style (Style_)
-import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 
 data Media = Media
 
-instance Attr A_ Media String where
-  attr Media value = unsafeAttribute { key: "media", value: prop' value }
+instance Deku.Attribute.Attr everything Media Data.Unit.Unit where
+  attr _ _ = Deku.Attribute.unsafeAttribute { key: "media", value: Deku.Attribute.unset' }
 
-instance Attr Area_ Media String where
-  attr Media value = unsafeAttribute { key: "media", value: prop' value }
+instance Deku.Attribute.Attr Link_ Media String where
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "media", value: _ } <<< Deku.Attribute.prop'
 
-instance Attr Link_ Media String where
-  attr Media value = unsafeAttribute { key: "media", value: prop' value }
+instance Deku.Attribute.Attr Meta_ Media String where
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "media", value: _ } <<< Deku.Attribute.prop'
 
-instance Attr Source_ Media String where
-  attr Media value = unsafeAttribute { key: "media", value: prop' value }
+instance Deku.Attribute.Attr Source_ Media String where
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "media", value: _ } <<< Deku.Attribute.prop'
 
-instance Attr Style_ Media String where
-  attr Media value = unsafeAttribute { key: "media", value: prop' value }
-
-instance Attr everything Media Unit where
-  attr Media _ = unsafeAttribute
-    { key: "media", value: unset' }
+instance Deku.Attribute.Attr Style_ Media String where
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "media", value: _ } <<< Deku.Attribute.prop'

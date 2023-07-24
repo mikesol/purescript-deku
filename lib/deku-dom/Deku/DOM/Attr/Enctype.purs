@@ -1,15 +1,18 @@
 module Deku.DOM.Attr.Enctype where
 
-import Prelude
-
+import Deku.Attribute as Deku.Attribute
+import Data.Unit as Data.Unit
+import Control.Semigroupoid ((<<<))
+import Deku.DOM.Elt.Button (Button_)
 import Deku.DOM.Elt.Form (Form_)
-import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 
 data Enctype = Enctype
 
-instance Attr Form_ Enctype String where
-  attr Enctype value = unsafeAttribute { key: "enctype", value: prop' value }
+instance Deku.Attribute.Attr everything Enctype Data.Unit.Unit where
+  attr _ _ = Deku.Attribute.unsafeAttribute { key: "enctype", value: Deku.Attribute.unset' }
 
-instance Attr everything Enctype Unit where
-  attr Enctype _ = unsafeAttribute
-    { key: "enctype", value: unset' }
+instance Deku.Attribute.Attr Button_ Enctype String where
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "enctype", value: _ } <<< Deku.Attribute.prop'
+
+instance Deku.Attribute.Attr Form_ Enctype String where
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "enctype", value: _ } <<< Deku.Attribute.prop'

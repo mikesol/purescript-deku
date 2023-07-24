@@ -7,6 +7,8 @@ import DOM.Spec (Definition)
 import Data.Array as Array
 import Data.Foldable (foldl)
 import Data.Generic.Rep (class Generic)
+import Data.Map (Map)
+import Data.Map as Map
 import Data.Maybe (Maybe(..), isJust)
 import Data.Newtype (class Newtype, un)
 import Data.Set (Set)
@@ -17,11 +19,11 @@ import Data.Tuple (uncurry)
 import Data.Tuple.Nested (type (/\), (/\))
 import Foreign.Object as Foreign
 import Partial.Unsafe (unsafePartial)
-import PureScript.CST.Types (Expr, Ident(..), ImportDecl, Label, Proper(..), Type)
+import PureScript.CST.Types (Declaration, Expr, Ident(..), ImportDecl, Label, Proper(..), Type)
 import Safe.Coerce (coerce)
-import Tidy.Codegen (binaryOp, declImportAs, exprIdent, exprOp, typeApp, typeArrow, typeCtor, typeString)
+import Tidy.Codegen (binaryOp, declImportAs, declValue, exprApp, exprCtor, exprIdent, exprOp, exprRecord, exprSection, exprString, typeApp, typeArrow, typeCtor, typeString)
 import Tidy.Codegen.Class (class ToName, class ToQualifiedName, defaultToName, toName, toQualifiedName)
-import Tidy.Codegen.Types (Qualified(..))
+import Tidy.Codegen.Types (BinaryOp, Qualified(..))
 
 newtype Ctor = Ctor String
 derive newtype instance Eq Ctor
@@ -218,7 +220,9 @@ type Specification =
     , elements :: Array Element
     }
 
--- | 
+
+
+-- | Sorts an array of definitions into a specification.
 preprocess :: TagNS -> Array Definition -> Specification
 preprocess ns defs = do
     let
@@ -345,6 +349,7 @@ data TypeStub
     | TypeEventHandler
     | TypeKeyword String
     | TypeUnit
+    | TypeSelfHandler
 derive instance Eq TypeStub
 derive instance Ord TypeStub
 derive instance Generic TypeStub _
@@ -355,24 +360,25 @@ construct = unsafePartial case _ of
     TypeString -> typeCtor "String"
     TypeBoolean -> typeCtor "Boolean"
     TypeNumber -> typeCtor "Number"
+    
     TypeEventHandler ->
         typeArrow
             [ typeCtor "Web.Event.Internal.Types.Event" ]
             $ typeApp ( typeCtor "Effect.Effect" ) [ typeCtor "Data.Unit.Unit" ]
     
-    TypeKeyword ix -> typeApp ( typeCtor "Keyword" ) [ typeString ix ]
+    TypeKeyword ix ->
+        typeApp ( typeCtor "Index.Keyword" ) [ typeString ix ]
+    
     TypeUnit ->
-        typeCtor "Unit"
+        typeCtor "Data.Unit.Unit"
 
 -- | Generates the necessary imports for the given types.
 typeImports :: forall e . Array TypeStub -> Array ( ImportDecl e )
 typeImports stubs =
-    unsafePartial $ flip map ( Set.toUnfoldable imports ) \mod ->
+    unsafePartial $ flip map ( Array.nub $ bind stubs modules ) \mod ->
         declImportAs mod [] mod
 
     where
-
-    imports = Set.fromFoldable $ bind stubs modules
 
     modules = case _ of
         TypeInt -> [ "Deku.Attribute", "Data.Show" ] -- prop', show
@@ -391,25 +397,60 @@ typeImports stubs =
         TypeUnit ->
             [ "Deku.Attribute", "Data.Unit" ] -- unset'
 
-handler :: forall e . TypeStub -> Expr e 
+        TypeSelfHandler ->
+            [ "Effect" -- Effect
+            , "Data.Unit" -- Unit
+            , "Deku.Attribute" -- cb, Cb
+            , "Unsafe.Coerce" -- unsafeCoerce
+            ]
+
+
+handler :: forall e . TypeStub -> Array ( BinaryOp ( Expr e ) ) 
 handler = unsafePartial case _ of
     TypeInt ->
-        exprOp ( exprIdent "Deku.Attribute.prop'" ) [ binaryOp "<<<" $ exprIdent "Data.Show.show" ] 
+        [ binaryOp "<<<" $ exprIdent "Deku.Attribute.prop'"
+        , binaryOp "<<<" $ exprIdent "Data.Show.show"
+        ]
     
     TypeString ->
-        exprIdent "Deku.Attribute.prop'"
-    
+        [ binaryOp "<<<" $ exprIdent "Deku.Attribute.prop'" ]
+
     TypeBoolean ->
-        exprOp ( exprIdent "Deku.Attribute.prop'" ) [ binaryOp "<<<" $ exprIdent "Data.Show.show" ] 
-    
+        [ binaryOp "<<<" $ exprIdent "Deku.Attribute.prop'"
+        , binaryOp "<<<" $ exprIdent "Data.Show.show"
+        ]
+
     TypeNumber ->
-        exprOp ( exprIdent "Deku.Attribute.prop'" ) [ binaryOp "<<<" $ exprIdent "Data.Show.show" ] 
+        [ binaryOp "<<<" $ exprIdent "Deku.Attribute.prop'"
+        , binaryOp "<<<" $ exprIdent "Data.Show.show"
+        ]
     
     TypeEventHandler ->
-        unsafePartial $ exprOp ( exprIdent "Deku.Attribute.cb'" ) [ binaryOp "<<<" $ exprIdent "Deku.Attribute.cb" ]
+        [ binaryOp "<<<" $ exprIdent "Deku.Attribute.cb'"
+        , binaryOp "<<<" $ exprIdent "Deku.Attribute.cb"
+        ]
 
     TypeKeyword _ ->
-        exprOp ( exprIdent "Deku.Attribute.prop'" ) [ binaryOp "<<<" $ exprIdent "Data.Newtype.unwrap" ]
+        [ binaryOp "<<<" $ exprIdent "Deku.Attribute.prop'"
+        , binaryOp "<<<" $ exprIdent "Data.Newtype.unwrap"
+        ]
+
+    TypeSelfHandler ->
+        [ binaryOp "<<<" $ exprIdent "Deku.Attribute.cb'"
+        , binaryOp "<<<" $ exprCtor "Deku.Attribute.Cb"
+        , binaryOp "<<<" $ exprIdent "Unsafe.Coerce.unsafeCoerce" 
+        ]
+
+declHandler :: String -> String -> Array ( BinaryOp ( Expr Void ) ) -> Declaration Void
+declHandler name key ops =
+    unsafePartial
+        $ declValue name []
+        $ exprApp ( exprIdent "Functor.map" ) [ exprHandler key ops ]
+
+exprHandler :: Partial => String -> Array ( BinaryOp ( Expr Void ) ) -> Expr Void
+exprHandler key ops =
+    exprOp ( exprIdent "Deku.Attribute.unsafeAttribute" )
+        $ Array.cons ( binaryOp "<<<" $ exprRecord [ "key" /\ exprString key, "value" /\ exprSection ] ) ops
 
 typeArrayed :: Type Void -> Type Void
 typeArrayed t = 
@@ -417,11 +458,11 @@ typeArrayed t =
 
 typeEvented :: Type Void -> Type Void
 typeEvented t =
-    unsafePartial $ typeApp ( typeCtor "Event" ) $ pure t
+    unsafePartial $ typeApp ( typeCtor "FRP.Event.Event" ) $ pure t
 
 typeAttributed :: Type Void -> Type Void
 typeAttributed t =
-    unsafePartial $ typeApp ( typeCtor "Attribute" ) $ pure t
+    unsafePartial $ typeApp ( typeCtor "Deku.Attribute.Attribute" ) $ pure t
 
 typeNut :: Type Void
 typeNut =
@@ -431,50 +472,53 @@ escapeBaseInterface :: String -> String /\ Ctor
 escapeBaseInterface name =
     name /\ ( Ctor $ capitalize $ unSnake name ) 
 
+selfKey :: String
+selfKey =
+    "@self@"
+    
 -- | Elements that have an implementation in the current web-html package
-webElements :: Set String
+webElements :: Map String String
 webElements =
-    Set.fromFoldable
-        [ "HTMLElement"
-        , "HTMLAnchorElement"
-        , "HTMLAreaElement"
-        , "HTMLAudioElement"
-        , "HTMLBRElement"
-        , "HTMLBaseElement"
-        , "HTMLBodyElement"
-        , "HTMLButtonElement"
-        , "HTMLCanvasElement"
-        , "HTMLDivElement"
-        , "HTMLEmbedElement"
-        , "HTMLFormElement"
-        , "HTMLHRElement"
-        , "HTMLHeadElement"
-        , "HTMLHtmlElement"
-        , "HTMLInputElement"
-        , "HTMLLabelElement"
-        , "HTMLLegendElement"
-        , "HTMLLinkElement"
-        , "HTMLMapElement"
-        , "HTMLMetaElement"
-        , "HTMLMeterElement"
-        , "HTMLObjectElement"
-        , "HTMLOptionElement"
-        , "HTMLOutputElement"
-        , "HTMLParagraphElement"
-        , "HTMLParamElement"
-        , "HTMLPreElement"
-        , "HTMLProgressElement"
-        , "HTMLScriptElement"
-        , "HTMLSelectElement"
-        , "HTMLSourceElement"
-        , "HTMLSpanElement"
-        , "HTMLStyleElement"
-        , "HTMLTableDataCellElement"
-        , "HTMLTableElement"
-        , "HTMLTemplateElement"
-        , "HTMLTextAreaElement"
-        , "HTMLTimeElement"
-        , "HTMLTitleElement"
-        , "HTMLTrackElement"
-        , "HTMLVideoElement"
+    Map.fromFoldable
+        [ "HTMLAElement" /\ "HTMLAnchorElement"
+        , "HTMLAreaElement" /\ "HTMLAreaElement"
+        , "HTMLAudioElement" /\ "HTMLAudioElement"
+        , "HTMLBrElement" /\ "HTMLBRElement"
+        , "HTMLBaseElement" /\ "HTMLBaseElement"
+        , "HTMLBodyElement" /\ "HTMLBodyElement"
+        , "HTMLButtonElement" /\ "HTMLButtonElement"
+        , "HTMLCanvasElement" /\ "HTMLCanvasElement"
+        , "HTMLDivElement" /\ "HTMLDivElement"
+        , "HTMLEmbedElement" /\ "HTMLEmbedElement"
+        , "HTMLFormElement" /\ "HTMLFormElement"
+        , "HTMLHrElement" /\ "HTMLHRElement"
+        , "HTMLHeadElement" /\ "HTMLHeadElement"
+        , "HTMLHtmlElement" /\ "HTMLHtmlElement"
+        , "HTMLInputElement" /\ "HTMLInputElement"
+        , "HTMLLabelElement" /\ "HTMLLabelElement"
+        , "HTMLLegendElement" /\ "HTMLLegendElement"
+        , "HTMLLinkElement" /\ "HTMLLinkElement"
+        , "HTMLMapElement" /\ "HTMLMapElement"
+        , "HTMLMetaElement" /\ "HTMLMetaElement"
+        , "HTMLMeterElement" /\ "HTMLMeterElement"
+        , "HTMLObjectElement" /\ "HTMLObjectElement"
+        , "HTMLOptionElement" /\ "HTMLOptionElement"
+        , "HTMLOutputElement" /\ "HTMLOutputElement"
+        , "HTMLPElement" /\ "HTMLParagraphElement"
+        , "HTMLParamElement" /\ "HTMLParamElement"
+        , "HTMLPreElement" /\ "HTMLPreElement"
+        , "HTMLProgressElement" /\ "HTMLProgressElement"
+        , "HTMLScriptElement" /\ "HTMLScriptElement"
+        , "HTMLSelectElement" /\ "HTMLSelectElement"
+        , "HTMLSourceElement" /\ "HTMLSourceElement"
+        , "HTMLSpanElement" /\ "HTMLSpanElement"
+        , "HTMLStyleElement" /\ "HTMLStyleElement"
+        , "HTMLTdElement" /\ "HTMLTableDataCellElement"
+        , "HTMLTableElement" /\ "HTMLTableElement"
+        , "HTMLTemplateElement" /\ "HTMLTemplateElement"
+        , "HTMLTextareaElement" /\ "HTMLTextAreaElement"
+        , "HTMLTimeElement" /\ "HTMLTimeElement"
+        , "HTMLTitleElement" /\ "HTMLTitleElement"
+        , "HTMLTrackElement" /\ "HTMLTrackElement"
+        , "HTMLVideoElement" /\ "HTMLVideoElement"
         ]

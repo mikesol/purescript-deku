@@ -1,19 +1,18 @@
 module Deku.DOM.Attr.Readonly where
 
-import Prelude
-
+import Deku.Attribute as Deku.Attribute
+import Data.Unit as Data.Unit
+import Control.Semigroupoid ((<<<))
 import Deku.DOM.Elt.Input (Input_)
 import Deku.DOM.Elt.Textarea (Textarea_)
-import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 
 data Readonly = Readonly
 
-instance Attr Input_ Readonly String where
-  attr Readonly value = unsafeAttribute { key: "readonly", value: prop' value }
+instance Deku.Attribute.Attr everything Readonly Data.Unit.Unit where
+  attr _ _ = Deku.Attribute.unsafeAttribute { key: "readonly", value: Deku.Attribute.unset' }
 
-instance Attr Textarea_ Readonly String where
-  attr Readonly value = unsafeAttribute { key: "readonly", value: prop' value }
+instance Deku.Attribute.Attr Input_ Readonly String where
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "readonly", value: _ } <<< Deku.Attribute.prop'
 
-instance Attr everything Readonly Unit where
-  attr Readonly _ = unsafeAttribute
-    { key: "readonly", value: unset' }
+instance Deku.Attribute.Attr Textarea_ Readonly String where
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "readonly", value: _ } <<< Deku.Attribute.prop'

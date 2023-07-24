@@ -1,19 +1,13 @@
 module Deku.DOM.Attr.R where
 
-import Prelude
-
-import Deku.DOM.Elt.RadialGradient (RadialGradient_)
-import Deku.DOM.Elt.Circle (Circle_)
-import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
+import Control.Semigroupoid ((<<<))
+import Deku.Attribute as Deku.Attribute
+import Data.Unit as Data.Unit
 
 data R = R
 
-instance Attr Circle_ R String where
-  attr R value = unsafeAttribute { key: "r", value: prop' value }
+instance Deku.Attribute.Attr everything R Data.Unit.Unit where
+  attr _ _ = Deku.Attribute.unsafeAttribute { key: "r", value: Deku.Attribute.unset' }
 
-instance Attr RadialGradient_ R String where
-  attr R value = unsafeAttribute { key: "r", value: prop' value }
-
-instance Attr everything R Unit where
-  attr R _ = unsafeAttribute
-    { key: "r", value: unset' }
+instance Deku.Attribute.Attr everything R String where
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "r", value: _ } <<< Deku.Attribute.prop'

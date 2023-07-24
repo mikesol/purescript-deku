@@ -1,15 +1,18 @@
 module Deku.DOM.Attr.Scope where
 
-import Prelude
-
+import Deku.Attribute as Deku.Attribute
+import Data.Unit as Data.Unit
+import Control.Semigroupoid ((<<<))
+import Deku.DOM.Elt.Td (Td_)
 import Deku.DOM.Elt.Th (Th_)
-import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 
 data Scope = Scope
 
-instance Attr Th_ Scope String where
-  attr Scope value = unsafeAttribute { key: "scope", value: prop' value }
+instance Deku.Attribute.Attr everything Scope Data.Unit.Unit where
+  attr _ _ = Deku.Attribute.unsafeAttribute { key: "scope", value: Deku.Attribute.unset' }
 
-instance Attr everything Scope Unit where
-  attr Scope _ = unsafeAttribute
-    { key: "scope", value: unset' }
+instance Deku.Attribute.Attr Td_ Scope String where
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "scope", value: _ } <<< Deku.Attribute.prop'
+
+instance Deku.Attribute.Attr Th_ Scope String where
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "scope", value: _ } <<< Deku.Attribute.prop'

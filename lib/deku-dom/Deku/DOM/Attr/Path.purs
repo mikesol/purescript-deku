@@ -1,19 +1,18 @@
 module Deku.DOM.Attr.Path where
 
-import Prelude
-
-import Deku.DOM.Elt.TextPath (TextPath_)
+import Deku.Attribute as Deku.Attribute
+import Data.Unit as Data.Unit
+import Control.Semigroupoid ((<<<))
 import Deku.DOM.Elt.AnimateMotion (AnimateMotion_)
-import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
+import Deku.DOM.Elt.TextPath (TextPath_)
 
 data Path = Path
 
-instance Attr AnimateMotion_ Path String where
-  attr Path value = unsafeAttribute { key: "path", value: prop' value }
+instance Deku.Attribute.Attr everything Path Data.Unit.Unit where
+  attr _ _ = Deku.Attribute.unsafeAttribute { key: "path", value: Deku.Attribute.unset' }
 
-instance Attr TextPath_ Path String where
-  attr Path value = unsafeAttribute { key: "path", value: prop' value }
+instance Deku.Attribute.Attr AnimateMotion_ Path String where
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "path", value: _ } <<< Deku.Attribute.prop'
 
-instance Attr everything Path Unit where
-  attr Path _ = unsafeAttribute
-    { key: "path", value: unset' }
+instance Deku.Attribute.Attr TextPath_ Path String where
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "path", value: _ } <<< Deku.Attribute.prop'

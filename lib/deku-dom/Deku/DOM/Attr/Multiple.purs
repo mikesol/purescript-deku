@@ -1,19 +1,18 @@
 module Deku.DOM.Attr.Multiple where
 
-import Prelude
-
+import Deku.Attribute as Deku.Attribute
+import Data.Unit as Data.Unit
+import Control.Semigroupoid ((<<<))
 import Deku.DOM.Elt.Input (Input_)
 import Deku.DOM.Elt.Select (Select_)
-import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 
 data Multiple = Multiple
 
-instance Attr Input_ Multiple String where
-  attr Multiple value = unsafeAttribute { key: "multiple", value: prop' value }
+instance Deku.Attribute.Attr everything Multiple Data.Unit.Unit where
+  attr _ _ = Deku.Attribute.unsafeAttribute { key: "multiple", value: Deku.Attribute.unset' }
 
-instance Attr Select_ Multiple String where
-  attr Multiple value = unsafeAttribute { key: "multiple", value: prop' value }
+instance Deku.Attribute.Attr Input_ Multiple String where
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "multiple", value: _ } <<< Deku.Attribute.prop'
 
-instance Attr everything Multiple Unit where
-  attr Multiple _ = unsafeAttribute
-    { key: "multiple", value: unset' }
+instance Deku.Attribute.Attr Select_ Multiple String where
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "multiple", value: _ } <<< Deku.Attribute.prop'

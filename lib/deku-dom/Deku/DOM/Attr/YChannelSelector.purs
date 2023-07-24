@@ -1,16 +1,16 @@
 module Deku.DOM.Attr.YChannelSelector where
 
-import Prelude
-
+import Deku.Attribute as Deku.Attribute
+import Data.Unit as Data.Unit
+import Control.Semigroupoid ((<<<))
 import Deku.DOM.Elt.FeDisplacementMap (FeDisplacementMap_)
-import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 
 data YChannelSelector = YChannelSelector
 
-instance Attr FeDisplacementMap_ YChannelSelector String where
-  attr YChannelSelector value = unsafeAttribute
-    { key: "yChannelSelector", value: prop' value }
+instance Deku.Attribute.Attr everything YChannelSelector Data.Unit.Unit where
+  attr _ _ = Deku.Attribute.unsafeAttribute
+    { key: "yChannelSelector", value: Deku.Attribute.unset' }
 
-instance Attr everything YChannelSelector Unit where
-  attr YChannelSelector _ = unsafeAttribute
-    { key: "yChannelSelector", value: unset' }
+instance Deku.Attribute.Attr FeDisplacementMap_ YChannelSelector String where
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "yChannelSelector", value: _ } <<<
+    Deku.Attribute.prop'

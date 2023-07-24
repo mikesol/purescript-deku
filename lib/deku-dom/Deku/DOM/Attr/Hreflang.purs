@@ -1,23 +1,22 @@
 module Deku.DOM.Attr.Hreflang where
 
-import Prelude
-
+import Deku.Attribute as Deku.Attribute
+import Data.Unit as Data.Unit
+import Control.Semigroupoid ((<<<))
 import Deku.DOM.Elt.A (A_)
 import Deku.DOM.Elt.Area (Area_)
 import Deku.DOM.Elt.Link (Link_)
-import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 
 data Hreflang = Hreflang
 
-instance Attr A_ Hreflang String where
-  attr Hreflang value = unsafeAttribute { key: "hreflang", value: prop' value }
+instance Deku.Attribute.Attr everything Hreflang Data.Unit.Unit where
+  attr _ _ = Deku.Attribute.unsafeAttribute { key: "hreflang", value: Deku.Attribute.unset' }
 
-instance Attr Area_ Hreflang String where
-  attr Hreflang value = unsafeAttribute { key: "hreflang", value: prop' value }
+instance Deku.Attribute.Attr A_ Hreflang String where
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "hreflang", value: _ } <<< Deku.Attribute.prop'
 
-instance Attr Link_ Hreflang String where
-  attr Hreflang value = unsafeAttribute { key: "hreflang", value: prop' value }
+instance Deku.Attribute.Attr Area_ Hreflang String where
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "hreflang", value: _ } <<< Deku.Attribute.prop'
 
-instance Attr everything Hreflang Unit where
-  attr Hreflang _ = unsafeAttribute
-    { key: "hreflang", value: unset' }
+instance Deku.Attribute.Attr Link_ Hreflang String where
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "hreflang", value: _ } <<< Deku.Attribute.prop'

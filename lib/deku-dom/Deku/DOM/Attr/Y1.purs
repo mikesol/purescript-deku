@@ -1,19 +1,18 @@
 module Deku.DOM.Attr.Y1 where
 
-import Prelude
-
-import Deku.DOM.Elt.LinearGradient (LinearGradient_)
+import Deku.Attribute as Deku.Attribute
+import Data.Unit as Data.Unit
+import Control.Semigroupoid ((<<<))
 import Deku.DOM.Elt.Line (Line_)
-import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
+import Deku.DOM.Elt.LinearGradient (LinearGradient_)
 
 data Y1 = Y1
 
-instance Attr Line_ Y1 String where
-  attr Y1 value = unsafeAttribute { key: "y1", value: prop' value }
+instance Deku.Attribute.Attr everything Y1 Data.Unit.Unit where
+  attr _ _ = Deku.Attribute.unsafeAttribute { key: "y1", value: Deku.Attribute.unset' }
 
-instance Attr LinearGradient_ Y1 String where
-  attr Y1 value = unsafeAttribute { key: "y1", value: prop' value }
+instance Deku.Attribute.Attr Line_ Y1 String where
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "y1", value: _ } <<< Deku.Attribute.prop'
 
-instance Attr everything Y1 Unit where
-  attr Y1 _ = unsafeAttribute
-    { key: "y1", value: unset' }
+instance Deku.Attribute.Attr LinearGradient_ Y1 String where
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "y1", value: _ } <<< Deku.Attribute.prop'

@@ -1,23 +1,14 @@
 module Deku.DOM.Attr.CalcMode where
 
-import Prelude
-
-import Deku.DOM.Elt.AnimateTransform (AnimateTransform_)
+import Deku.Attribute as Deku.Attribute
+import Data.Unit as Data.Unit
+import Control.Semigroupoid ((<<<))
 import Deku.DOM.Elt.AnimateMotion (AnimateMotion_)
-import Deku.DOM.Elt.Animate (Animate_)
-import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 
 data CalcMode = CalcMode
 
-instance Attr Animate_ CalcMode String where
-  attr CalcMode value = unsafeAttribute { key: "calcMode", value: prop' value }
+instance Deku.Attribute.Attr everything CalcMode Data.Unit.Unit where
+  attr _ _ = Deku.Attribute.unsafeAttribute { key: "calcMode", value: Deku.Attribute.unset' }
 
-instance Attr AnimateMotion_ CalcMode String where
-  attr CalcMode value = unsafeAttribute { key: "calcMode", value: prop' value }
-
-instance Attr AnimateTransform_ CalcMode String where
-  attr CalcMode value = unsafeAttribute { key: "calcMode", value: prop' value }
-
-instance Attr everything CalcMode Unit where
-  attr CalcMode _ = unsafeAttribute
-    { key: "calcMode", value: unset' }
+instance Deku.Attribute.Attr AnimateMotion_ CalcMode String where
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "calcMode", value: _ } <<< Deku.Attribute.prop'

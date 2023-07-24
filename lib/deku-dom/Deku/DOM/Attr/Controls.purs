@@ -1,19 +1,18 @@
 module Deku.DOM.Attr.Controls where
 
-import Prelude
-
+import Deku.Attribute as Deku.Attribute
+import Data.Unit as Data.Unit
+import Control.Semigroupoid ((<<<))
 import Deku.DOM.Elt.Audio (Audio_)
 import Deku.DOM.Elt.Video (Video_)
-import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 
 data Controls = Controls
 
-instance Attr Audio_ Controls String where
-  attr Controls value = unsafeAttribute { key: "controls", value: prop' value }
+instance Deku.Attribute.Attr everything Controls Data.Unit.Unit where
+  attr _ _ = Deku.Attribute.unsafeAttribute { key: "controls", value: Deku.Attribute.unset' }
 
-instance Attr Video_ Controls String where
-  attr Controls value = unsafeAttribute { key: "controls", value: prop' value }
+instance Deku.Attribute.Attr Audio_ Controls String where
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "controls", value: _ } <<< Deku.Attribute.prop'
 
-instance Attr everything Controls Unit where
-  attr Controls _ = unsafeAttribute
-    { key: "controls", value: unset' }
+instance Deku.Attribute.Attr Video_ Controls String where
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "controls", value: _ } <<< Deku.Attribute.prop'

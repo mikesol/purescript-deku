@@ -1,15 +1,14 @@
 module Deku.DOM.Attr.Content where
 
-import Prelude
-
+import Deku.Attribute as Deku.Attribute
+import Data.Unit as Data.Unit
+import Control.Semigroupoid ((<<<))
 import Deku.DOM.Elt.Meta (Meta_)
-import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 
 data Content = Content
 
-instance Attr Meta_ Content String where
-  attr Content value = unsafeAttribute { key: "content", value: prop' value }
+instance Deku.Attribute.Attr everything Content Data.Unit.Unit where
+  attr _ _ = Deku.Attribute.unsafeAttribute { key: "content", value: Deku.Attribute.unset' }
 
-instance Attr everything Content Unit where
-  attr Content _ = unsafeAttribute
-    { key: "content", value: unset' }
+instance Deku.Attribute.Attr Meta_ Content String where
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "content", value: _ } <<< Deku.Attribute.prop'

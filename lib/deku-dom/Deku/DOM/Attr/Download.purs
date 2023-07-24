@@ -1,19 +1,18 @@
 module Deku.DOM.Attr.Download where
 
-import Prelude
-
+import Deku.Attribute as Deku.Attribute
+import Data.Unit as Data.Unit
+import Control.Semigroupoid ((<<<))
 import Deku.DOM.Elt.A (A_)
 import Deku.DOM.Elt.Area (Area_)
-import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 
 data Download = Download
 
-instance Attr A_ Download String where
-  attr Download value = unsafeAttribute { key: "download", value: prop' value }
+instance Deku.Attribute.Attr everything Download Data.Unit.Unit where
+  attr _ _ = Deku.Attribute.unsafeAttribute { key: "download", value: Deku.Attribute.unset' }
 
-instance Attr Area_ Download String where
-  attr Download value = unsafeAttribute { key: "download", value: prop' value }
+instance Deku.Attribute.Attr A_ Download String where
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "download", value: _ } <<< Deku.Attribute.prop'
 
-instance Attr everything Download Unit where
-  attr Download _ = unsafeAttribute
-    { key: "download", value: unset' }
+instance Deku.Attribute.Attr Area_ Download String where
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "download", value: _ } <<< Deku.Attribute.prop'

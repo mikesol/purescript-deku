@@ -1,29 +1,30 @@
 module Deku.DOM.Attr.OnTimeupdate where
 
-import Prelude
-import Effect (Effect)
-import Deku.Attribute (class Attr, Attribute, Cb(..), cb', unsafeAttribute, unset')
-import FRP.Event (Event)
+import Control.Semigroupoid ((<<<))
+import Effect as Effect
+import Web.Event.Internal.Types as Web.Event.Internal.Types
+import Data.Unit as Data.Unit
+import Deku.Attribute as Deku.Attribute
+import FRP.Event as FRP.Event
 
 data OnTimeupdate = OnTimeupdate
 
-instance Attr anything OnTimeupdate Cb where
-  attr OnTimeupdate value = unsafeAttribute
-    { key: "timeupdate", value: cb' value }
+instance Deku.Attribute.Attr everything OnTimeupdate Data.Unit.Unit where
+  attr _ _ = Deku.Attribute.unsafeAttribute { key: "onTimeupdate", value: Deku.Attribute.unset' }
 
-instance Attr anything OnTimeupdate (Effect Unit) where
-  attr OnTimeupdate value = unsafeAttribute
-    { key: "timeupdate", value: cb' (Cb (const (value $> true))) }
-
-instance Attr anything OnTimeupdate (Effect Boolean) where
-  attr OnTimeupdate value = unsafeAttribute
-    { key: "timeupdate", value: cb' (Cb (const value)) }
+instance
+  Deku.Attribute.Attr everything
+    OnTimeupdate
+    (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit) where
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "onTimeupdate", value: _ }
+    <<< Deku.Attribute.cb'
+    <<< Deku.Attribute.cb
 
 type OnTimeupdateEffect =
   forall element
-   . Attr element OnTimeupdate (Effect Unit)
-  => Event (Attribute element)
+   . Deku.Attribute.Attr element OnTimeupdate (Effect.Effect Data.Unit.Unit)
+  => FRP.Event.Event (Deku.Attribute.Attribute element)
 
-instance Attr everything OnTimeupdate Unit where
-  attr OnTimeupdate _ = unsafeAttribute
-    { key: "timeupdate", value: unset' }
+instance Deku.Attribute.Attr everything OnTimeupdate Deku.Attribute.Cb where
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "onTimeupdate", value: _ } <<<
+    Deku.Attribute.cb'

@@ -1,21 +1,20 @@
 module Deku.DOM.Attr.SpreadMethod where
 
-import Prelude
-
-import Deku.DOM.Elt.RadialGradient (RadialGradient_)
+import Deku.Attribute as Deku.Attribute
+import Data.Unit as Data.Unit
+import Control.Semigroupoid ((<<<))
 import Deku.DOM.Elt.LinearGradient (LinearGradient_)
-import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
+import Deku.DOM.Elt.RadialGradient (RadialGradient_)
 
 data SpreadMethod = SpreadMethod
 
-instance Attr LinearGradient_ SpreadMethod String where
-  attr SpreadMethod value = unsafeAttribute
-    { key: "spreadMethod", value: prop' value }
+instance Deku.Attribute.Attr everything SpreadMethod Data.Unit.Unit where
+  attr _ _ = Deku.Attribute.unsafeAttribute { key: "spreadMethod", value: Deku.Attribute.unset' }
 
-instance Attr RadialGradient_ SpreadMethod String where
-  attr SpreadMethod value = unsafeAttribute
-    { key: "spreadMethod", value: prop' value }
+instance Deku.Attribute.Attr LinearGradient_ SpreadMethod String where
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "spreadMethod", value: _ } <<<
+    Deku.Attribute.prop'
 
-instance Attr everything SpreadMethod Unit where
-  attr SpreadMethod _ = unsafeAttribute
-    { key: "spreadMethod", value: unset' }
+instance Deku.Attribute.Attr RadialGradient_ SpreadMethod String where
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "spreadMethod", value: _ } <<<
+    Deku.Attribute.prop'

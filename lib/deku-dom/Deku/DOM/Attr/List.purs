@@ -1,15 +1,14 @@
 module Deku.DOM.Attr.List where
 
-import Prelude
-
+import Deku.Attribute as Deku.Attribute
+import Data.Unit as Data.Unit
+import Control.Semigroupoid ((<<<))
 import Deku.DOM.Elt.Input (Input_)
-import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 
 data List = List
 
-instance Attr Input_ List String where
-  attr List value = unsafeAttribute { key: "list", value: prop' value }
+instance Deku.Attribute.Attr everything List Data.Unit.Unit where
+  attr _ _ = Deku.Attribute.unsafeAttribute { key: "list", value: Deku.Attribute.unset' }
 
-instance Attr everything List Unit where
-  attr List _ = unsafeAttribute
-    { key: "list", value: unset' }
+instance Deku.Attribute.Attr Input_ List String where
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "list", value: _ } <<< Deku.Attribute.prop'

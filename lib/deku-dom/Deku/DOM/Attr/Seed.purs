@@ -1,15 +1,14 @@
 module Deku.DOM.Attr.Seed where
 
-import Prelude
-
+import Deku.Attribute as Deku.Attribute
+import Data.Unit as Data.Unit
+import Control.Semigroupoid ((<<<))
 import Deku.DOM.Elt.FeTurbulence (FeTurbulence_)
-import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 
 data Seed = Seed
 
-instance Attr FeTurbulence_ Seed String where
-  attr Seed value = unsafeAttribute { key: "seed", value: prop' value }
+instance Deku.Attribute.Attr everything Seed Data.Unit.Unit where
+  attr _ _ = Deku.Attribute.unsafeAttribute { key: "seed", value: Deku.Attribute.unset' }
 
-instance Attr everything Seed Unit where
-  attr Seed _ = unsafeAttribute
-    { key: "seed", value: unset' }
+instance Deku.Attribute.Attr FeTurbulence_ Seed String where
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "seed", value: _ } <<< Deku.Attribute.prop'

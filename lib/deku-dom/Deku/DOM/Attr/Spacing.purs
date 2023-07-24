@@ -1,15 +1,14 @@
 module Deku.DOM.Attr.Spacing where
 
-import Prelude
-
+import Deku.Attribute as Deku.Attribute
+import Data.Unit as Data.Unit
+import Control.Semigroupoid ((<<<))
 import Deku.DOM.Elt.TextPath (TextPath_)
-import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 
 data Spacing = Spacing
 
-instance Attr TextPath_ Spacing String where
-  attr Spacing value = unsafeAttribute { key: "spacing", value: prop' value }
+instance Deku.Attribute.Attr everything Spacing Data.Unit.Unit where
+  attr _ _ = Deku.Attribute.unsafeAttribute { key: "spacing", value: Deku.Attribute.unset' }
 
-instance Attr everything Spacing Unit where
-  attr Spacing _ = unsafeAttribute
-    { key: "spacing", value: unset' }
+instance Deku.Attribute.Attr TextPath_ Spacing String where
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "spacing", value: _ } <<< Deku.Attribute.prop'

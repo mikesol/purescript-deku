@@ -1,15 +1,14 @@
 module Deku.DOM.Attr.Cols where
 
-import Prelude
-
+import Deku.Attribute as Deku.Attribute
+import Data.Unit as Data.Unit
+import Control.Semigroupoid ((<<<))
 import Deku.DOM.Elt.Textarea (Textarea_)
-import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 
 data Cols = Cols
 
-instance Attr Textarea_ Cols String where
-  attr Cols value = unsafeAttribute { key: "cols", value: prop' value }
+instance Deku.Attribute.Attr everything Cols Data.Unit.Unit where
+  attr _ _ = Deku.Attribute.unsafeAttribute { key: "cols", value: Deku.Attribute.unset' }
 
-instance Attr everything Cols Unit where
-  attr Cols _ = unsafeAttribute
-    { key: "cols", value: unset' }
+instance Deku.Attribute.Attr Textarea_ Cols String where
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "cols", value: _ } <<< Deku.Attribute.prop'

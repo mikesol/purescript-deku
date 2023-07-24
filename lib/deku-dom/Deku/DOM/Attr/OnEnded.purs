@@ -1,28 +1,28 @@
 module Deku.DOM.Attr.OnEnded where
 
-import Prelude
-import Effect (Effect)
-import Deku.Attribute (class Attr, Attribute, Cb(..), cb', unsafeAttribute, unset')
-import FRP.Event (Event)
+import Control.Semigroupoid ((<<<))
+import Effect as Effect
+import Web.Event.Internal.Types as Web.Event.Internal.Types
+import Data.Unit as Data.Unit
+import Deku.Attribute as Deku.Attribute
+import FRP.Event as FRP.Event
 
 data OnEnded = OnEnded
 
-instance Attr anything OnEnded Cb where
-  attr OnEnded value = unsafeAttribute { key: "ended", value: cb' value }
+instance Deku.Attribute.Attr everything OnEnded Data.Unit.Unit where
+  attr _ _ = Deku.Attribute.unsafeAttribute { key: "onEnded", value: Deku.Attribute.unset' }
 
-instance Attr anything OnEnded (Effect Unit) where
-  attr OnEnded value = unsafeAttribute
-    { key: "ended", value: cb' (Cb (const (value $> true))) }
-
-instance Attr anything OnEnded (Effect Boolean) where
-  attr OnEnded value = unsafeAttribute
-    { key: "ended", value: cb' (Cb (const value)) }
+instance
+  Deku.Attribute.Attr everything
+    OnEnded
+    (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit) where
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "onEnded", value: _ } <<< Deku.Attribute.cb'
+    <<< Deku.Attribute.cb
 
 type OnEndedEffect =
   forall element
-   . Attr element OnEnded (Effect Unit)
-  => Event (Attribute element)
+   . Deku.Attribute.Attr element OnEnded (Effect.Effect Data.Unit.Unit)
+  => FRP.Event.Event (Deku.Attribute.Attribute element)
 
-instance Attr everything OnEnded Unit where
-  attr OnEnded _ = unsafeAttribute
-    { key: "ended", value: unset' }
+instance Deku.Attribute.Attr everything OnEnded Deku.Attribute.Cb where
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "onEnded", value: _ } <<< Deku.Attribute.cb'

@@ -1,15 +1,14 @@
 module Deku.DOM.Attr.Async where
 
-import Prelude
-
+import Deku.Attribute as Deku.Attribute
+import Data.Unit as Data.Unit
+import Control.Semigroupoid ((<<<))
 import Deku.DOM.Elt.Script (Script_)
-import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 
 data Async = Async
 
-instance Attr Script_ Async String where
-  attr Async value = unsafeAttribute { key: "async", value: prop' value }
+instance Deku.Attribute.Attr everything Async Data.Unit.Unit where
+  attr _ _ = Deku.Attribute.unsafeAttribute { key: "async", value: Deku.Attribute.unset' }
 
-instance Attr everything Async Unit where
-  attr Async _ = unsafeAttribute
-    { key: "async", value: unset' }
+instance Deku.Attribute.Attr Script_ Async String where
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "async", value: _ } <<< Deku.Attribute.prop'

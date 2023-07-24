@@ -1,27 +1,22 @@
 module Deku.DOM.Attr.Restart where
 
-import Prelude
-
-import Deku.DOM.Elt.Set (Set_)
-import Deku.DOM.Elt.AnimateTransform (AnimateTransform_)
-import Deku.DOM.Elt.AnimateMotion (AnimateMotion_)
+import Deku.Attribute as Deku.Attribute
+import Data.Unit as Data.Unit
+import Control.Semigroupoid ((<<<))
 import Deku.DOM.Elt.Animate (Animate_)
-import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
+import Deku.DOM.Elt.AnimateMotion (AnimateMotion_)
+import Deku.DOM.Elt.AnimateTransform (AnimateTransform_)
 
 data Restart = Restart
 
-instance Attr Animate_ Restart String where
-  attr Restart value = unsafeAttribute { key: "restart", value: prop' value }
+instance Deku.Attribute.Attr everything Restart Data.Unit.Unit where
+  attr _ _ = Deku.Attribute.unsafeAttribute { key: "restart", value: Deku.Attribute.unset' }
 
-instance Attr AnimateMotion_ Restart String where
-  attr Restart value = unsafeAttribute { key: "restart", value: prop' value }
+instance Deku.Attribute.Attr Animate_ Restart String where
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "restart", value: _ } <<< Deku.Attribute.prop'
 
-instance Attr AnimateTransform_ Restart String where
-  attr Restart value = unsafeAttribute { key: "restart", value: prop' value }
+instance Deku.Attribute.Attr AnimateMotion_ Restart String where
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "restart", value: _ } <<< Deku.Attribute.prop'
 
-instance Attr Set_ Restart String where
-  attr Restart value = unsafeAttribute { key: "restart", value: prop' value }
-
-instance Attr everything Restart Unit where
-  attr Restart _ = unsafeAttribute
-    { key: "restart", value: unset' }
+instance Deku.Attribute.Attr AnimateTransform_ Restart String where
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "restart", value: _ } <<< Deku.Attribute.prop'

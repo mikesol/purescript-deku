@@ -1,15 +1,14 @@
 module Deku.DOM.Attr.Start where
 
-import Prelude
-
+import Deku.Attribute as Deku.Attribute
+import Data.Unit as Data.Unit
+import Control.Semigroupoid ((<<<))
 import Deku.DOM.Elt.Ol (Ol_)
-import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 
 data Start = Start
 
-instance Attr Ol_ Start String where
-  attr Start value = unsafeAttribute { key: "start", value: prop' value }
+instance Deku.Attribute.Attr everything Start Data.Unit.Unit where
+  attr _ _ = Deku.Attribute.unsafeAttribute { key: "start", value: Deku.Attribute.unset' }
 
-instance Attr everything Start Unit where
-  attr Start _ = unsafeAttribute
-    { key: "start", value: unset' }
+instance Deku.Attribute.Attr Ol_ Start String where
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "start", value: _ } <<< Deku.Attribute.prop'

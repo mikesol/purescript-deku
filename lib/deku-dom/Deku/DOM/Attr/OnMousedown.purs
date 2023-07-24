@@ -1,29 +1,30 @@
 module Deku.DOM.Attr.OnMousedown where
 
-import Prelude
-import Effect (Effect)
-import Deku.Attribute (class Attr, Attribute, Cb(..), cb', unsafeAttribute, unset')
-import FRP.Event (Event)
+import Control.Semigroupoid ((<<<))
+import Effect as Effect
+import Web.Event.Internal.Types as Web.Event.Internal.Types
+import Data.Unit as Data.Unit
+import Deku.Attribute as Deku.Attribute
+import FRP.Event as FRP.Event
 
 data OnMousedown = OnMousedown
 
-instance Attr anything OnMousedown Cb where
-  attr OnMousedown value = unsafeAttribute
-    { key: "mousedown", value: cb' value }
+instance Deku.Attribute.Attr everything OnMousedown Data.Unit.Unit where
+  attr _ _ = Deku.Attribute.unsafeAttribute { key: "onMousedown", value: Deku.Attribute.unset' }
 
-instance Attr anything OnMousedown (Effect Unit) where
-  attr OnMousedown value = unsafeAttribute
-    { key: "mousedown", value: cb' (Cb (const (value $> true))) }
-
-instance Attr anything OnMousedown (Effect Boolean) where
-  attr OnMousedown value = unsafeAttribute
-    { key: "mousedown", value: cb' (Cb (const value)) }
+instance
+  Deku.Attribute.Attr everything
+    OnMousedown
+    (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit) where
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "onMousedown", value: _ }
+    <<< Deku.Attribute.cb'
+    <<< Deku.Attribute.cb
 
 type OnMousedownEffect =
   forall element
-   . Attr element OnMousedown (Effect Unit)
-  => Event (Attribute element)
+   . Deku.Attribute.Attr element OnMousedown (Effect.Effect Data.Unit.Unit)
+  => FRP.Event.Event (Deku.Attribute.Attribute element)
 
-instance Attr everything OnMousedown Unit where
-  attr OnMousedown _ = unsafeAttribute
-    { key: "mousedown", value: unset' }
+instance Deku.Attribute.Attr everything OnMousedown Deku.Attribute.Cb where
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "onMousedown", value: _ } <<<
+    Deku.Attribute.cb'

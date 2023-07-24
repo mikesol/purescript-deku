@@ -1,28 +1,28 @@
 module Deku.DOM.Attr.OnInvalid where
 
-import Prelude
-import Effect (Effect)
-import Deku.Attribute (class Attr, Attribute, Cb(..), cb', unsafeAttribute, unset')
-import FRP.Event (Event)
+import Control.Semigroupoid ((<<<))
+import Effect as Effect
+import Web.Event.Internal.Types as Web.Event.Internal.Types
+import Data.Unit as Data.Unit
+import Deku.Attribute as Deku.Attribute
+import FRP.Event as FRP.Event
 
 data OnInvalid = OnInvalid
 
-instance Attr anything OnInvalid Cb where
-  attr OnInvalid value = unsafeAttribute { key: "invalid", value: cb' value }
+instance Deku.Attribute.Attr everything OnInvalid Data.Unit.Unit where
+  attr _ _ = Deku.Attribute.unsafeAttribute { key: "onInvalid", value: Deku.Attribute.unset' }
 
-instance Attr anything OnInvalid (Effect Unit) where
-  attr OnInvalid value = unsafeAttribute
-    { key: "invalid", value: cb' (Cb (const (value $> true))) }
-
-instance Attr anything OnInvalid (Effect Boolean) where
-  attr OnInvalid value = unsafeAttribute
-    { key: "invalid", value: cb' (Cb (const value)) }
+instance
+  Deku.Attribute.Attr everything
+    OnInvalid
+    (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit) where
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "onInvalid", value: _ } <<< Deku.Attribute.cb'
+    <<< Deku.Attribute.cb
 
 type OnInvalidEffect =
   forall element
-   . Attr element OnInvalid (Effect Unit)
-  => Event (Attribute element)
+   . Deku.Attribute.Attr element OnInvalid (Effect.Effect Data.Unit.Unit)
+  => FRP.Event.Event (Deku.Attribute.Attribute element)
 
-instance Attr everything OnInvalid Unit where
-  attr OnInvalid _ = unsafeAttribute
-    { key: "invalid", value: unset' }
+instance Deku.Attribute.Attr everything OnInvalid Deku.Attribute.Cb where
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "onInvalid", value: _ } <<< Deku.Attribute.cb'

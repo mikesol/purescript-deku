@@ -1,29 +1,30 @@
 module Deku.DOM.Attr.OnTouchcancel where
 
-import Prelude
-import Effect (Effect)
-import Deku.Attribute (class Attr, Attribute, Cb(..), cb', unsafeAttribute, unset')
-import FRP.Event (Event)
+import Control.Semigroupoid ((<<<))
+import Effect as Effect
+import Web.Event.Internal.Types as Web.Event.Internal.Types
+import Data.Unit as Data.Unit
+import Deku.Attribute as Deku.Attribute
+import FRP.Event as FRP.Event
 
 data OnTouchcancel = OnTouchcancel
 
-instance Attr anything OnTouchcancel Cb where
-  attr OnTouchcancel value = unsafeAttribute
-    { key: "touchcancel", value: cb' value }
+instance Deku.Attribute.Attr everything OnTouchcancel Data.Unit.Unit where
+  attr _ _ = Deku.Attribute.unsafeAttribute { key: "onTouchcancel", value: Deku.Attribute.unset' }
 
-instance Attr anything OnTouchcancel (Effect Unit) where
-  attr OnTouchcancel value = unsafeAttribute
-    { key: "touchcancel", value: cb' (Cb (const (value $> true))) }
-
-instance Attr anything OnTouchcancel (Effect Boolean) where
-  attr OnTouchcancel value = unsafeAttribute
-    { key: "touchcancel", value: cb' (Cb (const value)) }
+instance
+  Deku.Attribute.Attr everything
+    OnTouchcancel
+    (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit) where
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "onTouchcancel", value: _ }
+    <<< Deku.Attribute.cb'
+    <<< Deku.Attribute.cb
 
 type OnTouchcancelEffect =
   forall element
-   . Attr element OnTouchcancel (Effect Unit)
-  => Event (Attribute element)
+   . Deku.Attribute.Attr element OnTouchcancel (Effect.Effect Data.Unit.Unit)
+  => FRP.Event.Event (Deku.Attribute.Attribute element)
 
-instance Attr everything OnTouchcancel Unit where
-  attr OnTouchcancel _ = unsafeAttribute
-    { key: "touchcancel", value: unset' }
+instance Deku.Attribute.Attr everything OnTouchcancel Deku.Attribute.Cb where
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "onTouchcancel", value: _ } <<<
+    Deku.Attribute.cb'

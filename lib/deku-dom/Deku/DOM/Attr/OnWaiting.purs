@@ -1,28 +1,28 @@
 module Deku.DOM.Attr.OnWaiting where
 
-import Prelude
-import Effect (Effect)
-import Deku.Attribute (class Attr, Attribute, Cb(..), cb', unsafeAttribute, unset')
-import FRP.Event (Event)
+import Control.Semigroupoid ((<<<))
+import Effect as Effect
+import Web.Event.Internal.Types as Web.Event.Internal.Types
+import Data.Unit as Data.Unit
+import Deku.Attribute as Deku.Attribute
+import FRP.Event as FRP.Event
 
 data OnWaiting = OnWaiting
 
-instance Attr anything OnWaiting Cb where
-  attr OnWaiting value = unsafeAttribute { key: "waiting", value: cb' value }
+instance Deku.Attribute.Attr everything OnWaiting Data.Unit.Unit where
+  attr _ _ = Deku.Attribute.unsafeAttribute { key: "onWaiting", value: Deku.Attribute.unset' }
 
-instance Attr anything OnWaiting (Effect Unit) where
-  attr OnWaiting value = unsafeAttribute
-    { key: "waiting", value: cb' (Cb (const (value $> true))) }
-
-instance Attr anything OnWaiting (Effect Boolean) where
-  attr OnWaiting value = unsafeAttribute
-    { key: "waiting", value: cb' (Cb (const value)) }
+instance
+  Deku.Attribute.Attr everything
+    OnWaiting
+    (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit) where
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "onWaiting", value: _ } <<< Deku.Attribute.cb'
+    <<< Deku.Attribute.cb
 
 type OnWaitingEffect =
   forall element
-   . Attr element OnWaiting (Effect Unit)
-  => Event (Attribute element)
+   . Deku.Attribute.Attr element OnWaiting (Effect.Effect Data.Unit.Unit)
+  => FRP.Event.Event (Deku.Attribute.Attribute element)
 
-instance Attr everything OnWaiting Unit where
-  attr OnWaiting _ = unsafeAttribute
-    { key: "waiting", value: unset' }
+instance Deku.Attribute.Attr everything OnWaiting Deku.Attribute.Cb where
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "onWaiting", value: _ } <<< Deku.Attribute.cb'

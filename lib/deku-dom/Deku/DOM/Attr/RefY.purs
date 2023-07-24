@@ -1,19 +1,18 @@
 module Deku.DOM.Attr.RefY where
 
-import Prelude
-
-import Deku.DOM.Elt.Symbol (Symbol_)
+import Deku.Attribute as Deku.Attribute
+import Data.Unit as Data.Unit
+import Control.Semigroupoid ((<<<))
 import Deku.DOM.Elt.Marker (Marker_)
-import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
+import Deku.DOM.Elt.Symbol (Symbol_)
 
 data RefY = RefY
 
-instance Attr Marker_ RefY String where
-  attr RefY value = unsafeAttribute { key: "refY", value: prop' value }
+instance Deku.Attribute.Attr everything RefY Data.Unit.Unit where
+  attr _ _ = Deku.Attribute.unsafeAttribute { key: "refY", value: Deku.Attribute.unset' }
 
-instance Attr Symbol_ RefY String where
-  attr RefY value = unsafeAttribute { key: "refY", value: prop' value }
+instance Deku.Attribute.Attr Marker_ RefY String where
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "refY", value: _ } <<< Deku.Attribute.prop'
 
-instance Attr everything RefY Unit where
-  attr RefY _ = unsafeAttribute
-    { key: "refY", value: unset' }
+instance Deku.Attribute.Attr Symbol_ RefY String where
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "refY", value: _ } <<< Deku.Attribute.prop'

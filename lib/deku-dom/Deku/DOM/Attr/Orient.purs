@@ -1,15 +1,14 @@
 module Deku.DOM.Attr.Orient where
 
-import Prelude
-
+import Deku.Attribute as Deku.Attribute
+import Data.Unit as Data.Unit
+import Control.Semigroupoid ((<<<))
 import Deku.DOM.Elt.Marker (Marker_)
-import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 
 data Orient = Orient
 
-instance Attr Marker_ Orient String where
-  attr Orient value = unsafeAttribute { key: "orient", value: prop' value }
+instance Deku.Attribute.Attr everything Orient Data.Unit.Unit where
+  attr _ _ = Deku.Attribute.unsafeAttribute { key: "orient", value: Deku.Attribute.unset' }
 
-instance Attr everything Orient Unit where
-  attr Orient _ = unsafeAttribute
-    { key: "orient", value: unset' }
+instance Deku.Attribute.Attr Marker_ Orient String where
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "orient", value: _ } <<< Deku.Attribute.prop'

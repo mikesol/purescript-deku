@@ -1,19 +1,18 @@
 module Deku.DOM.Attr.Colspan where
 
-import Prelude
-
+import Deku.Attribute as Deku.Attribute
+import Data.Unit as Data.Unit
+import Control.Semigroupoid ((<<<))
 import Deku.DOM.Elt.Td (Td_)
 import Deku.DOM.Elt.Th (Th_)
-import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 
 data Colspan = Colspan
 
-instance Attr Td_ Colspan String where
-  attr Colspan value = unsafeAttribute { key: "colspan", value: prop' value }
+instance Deku.Attribute.Attr everything Colspan Data.Unit.Unit where
+  attr _ _ = Deku.Attribute.unsafeAttribute { key: "colspan", value: Deku.Attribute.unset' }
 
-instance Attr Th_ Colspan String where
-  attr Colspan value = unsafeAttribute { key: "colspan", value: prop' value }
+instance Deku.Attribute.Attr Td_ Colspan String where
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "colspan", value: _ } <<< Deku.Attribute.prop'
 
-instance Attr everything Colspan Unit where
-  attr Colspan _ = unsafeAttribute
-    { key: "colspan", value: unset' }
+instance Deku.Attribute.Attr Th_ Colspan String where
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "colspan", value: _ } <<< Deku.Attribute.prop'

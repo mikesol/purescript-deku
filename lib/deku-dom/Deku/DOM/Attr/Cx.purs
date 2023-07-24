@@ -1,23 +1,13 @@
 module Deku.DOM.Attr.Cx where
 
-import Prelude
-
-import Deku.DOM.Elt.RadialGradient (RadialGradient_)
-import Deku.DOM.Elt.Ellipse (Ellipse_)
-import Deku.DOM.Elt.Circle (Circle_)
-import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
+import Control.Semigroupoid ((<<<))
+import Deku.Attribute as Deku.Attribute
+import Data.Unit as Data.Unit
 
 data Cx = Cx
 
-instance Attr Circle_ Cx String where
-  attr Cx value = unsafeAttribute { key: "cx", value: prop' value }
+instance Deku.Attribute.Attr everything Cx Data.Unit.Unit where
+  attr _ _ = Deku.Attribute.unsafeAttribute { key: "cx", value: Deku.Attribute.unset' }
 
-instance Attr Ellipse_ Cx String where
-  attr Cx value = unsafeAttribute { key: "cx", value: prop' value }
-
-instance Attr RadialGradient_ Cx String where
-  attr Cx value = unsafeAttribute { key: "cx", value: prop' value }
-
-instance Attr everything Cx Unit where
-  attr Cx _ = unsafeAttribute
-    { key: "cx", value: unset' }
+instance Deku.Attribute.Attr everything Cx String where
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "cx", value: _ } <<< Deku.Attribute.prop'

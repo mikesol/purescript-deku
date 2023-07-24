@@ -1,16 +1,15 @@
 module Deku.DOM.Attr.StartOffset where
 
-import Prelude
-
+import Deku.Attribute as Deku.Attribute
+import Data.Unit as Data.Unit
+import Control.Semigroupoid ((<<<))
 import Deku.DOM.Elt.TextPath (TextPath_)
-import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 
 data StartOffset = StartOffset
 
-instance Attr TextPath_ StartOffset String where
-  attr StartOffset value = unsafeAttribute
-    { key: "startOffset", value: prop' value }
+instance Deku.Attribute.Attr everything StartOffset Data.Unit.Unit where
+  attr _ _ = Deku.Attribute.unsafeAttribute { key: "startOffset", value: Deku.Attribute.unset' }
 
-instance Attr everything StartOffset Unit where
-  attr StartOffset _ = unsafeAttribute
-    { key: "startOffset", value: unset' }
+instance Deku.Attribute.Attr TextPath_ StartOffset String where
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "startOffset", value: _ } <<<
+    Deku.Attribute.prop'

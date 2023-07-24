@@ -1,21 +1,20 @@
 module Deku.DOM.Attr.Formmethod where
 
-import Prelude
-
+import Deku.Attribute as Deku.Attribute
+import Data.Unit as Data.Unit
+import Control.Semigroupoid ((<<<))
 import Deku.DOM.Elt.Button (Button_)
-import Deku.DOM.Elt.Input (Input_)
-import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
+import Deku.DOM.Elt.Form (Form_)
 
 data Formmethod = Formmethod
 
-instance Attr Button_ Formmethod String where
-  attr Formmethod value = unsafeAttribute
-    { key: "formmethod", value: prop' value }
+instance Deku.Attribute.Attr everything Formmethod Data.Unit.Unit where
+  attr _ _ = Deku.Attribute.unsafeAttribute { key: "formmethod", value: Deku.Attribute.unset' }
 
-instance Attr Input_ Formmethod String where
-  attr Formmethod value = unsafeAttribute
-    { key: "formmethod", value: prop' value }
+instance Deku.Attribute.Attr Button_ Formmethod String where
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "formmethod", value: _ } <<<
+    Deku.Attribute.prop'
 
-instance Attr everything Formmethod Unit where
-  attr Formmethod _ = unsafeAttribute
-    { key: "formmethod", value: unset' }
+instance Deku.Attribute.Attr Form_ Formmethod String where
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "formmethod", value: _ } <<<
+    Deku.Attribute.prop'

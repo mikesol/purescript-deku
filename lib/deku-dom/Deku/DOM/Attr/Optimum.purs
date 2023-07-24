@@ -1,15 +1,14 @@
 module Deku.DOM.Attr.Optimum where
 
-import Prelude
-
+import Deku.Attribute as Deku.Attribute
+import Data.Unit as Data.Unit
+import Control.Semigroupoid ((<<<))
 import Deku.DOM.Elt.Meter (Meter_)
-import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 
 data Optimum = Optimum
 
-instance Attr Meter_ Optimum String where
-  attr Optimum value = unsafeAttribute { key: "optimum", value: prop' value }
+instance Deku.Attribute.Attr everything Optimum Data.Unit.Unit where
+  attr _ _ = Deku.Attribute.unsafeAttribute { key: "optimum", value: Deku.Attribute.unset' }
 
-instance Attr everything Optimum Unit where
-  attr Optimum _ = unsafeAttribute
-    { key: "optimum", value: unset' }
+instance Deku.Attribute.Attr Meter_ Optimum String where
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "optimum", value: _ } <<< Deku.Attribute.prop'

@@ -1,27 +1,22 @@
 module Deku.DOM.Attr.Dy where
 
-import Prelude
-
-import Deku.DOM.Elt.Tspan (Tspan_)
-import Deku.DOM.Elt.Text (Text_)
-import Deku.DOM.Elt.FeOffset (FeOffset_)
+import Deku.Attribute as Deku.Attribute
+import Data.Unit as Data.Unit
+import Control.Semigroupoid ((<<<))
 import Deku.DOM.Elt.FeDropShadow (FeDropShadow_)
-import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
+import Deku.DOM.Elt.FeOffset (FeOffset_)
+import Deku.DOM.Elt.Text (Text_)
 
 data Dy = Dy
 
-instance Attr FeDropShadow_ Dy String where
-  attr Dy value = unsafeAttribute { key: "dy", value: prop' value }
+instance Deku.Attribute.Attr everything Dy Data.Unit.Unit where
+  attr _ _ = Deku.Attribute.unsafeAttribute { key: "dy", value: Deku.Attribute.unset' }
 
-instance Attr FeOffset_ Dy String where
-  attr Dy value = unsafeAttribute { key: "dy", value: prop' value }
+instance Deku.Attribute.Attr FeDropShadow_ Dy String where
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "dy", value: _ } <<< Deku.Attribute.prop'
 
-instance Attr Text_ Dy String where
-  attr Dy value = unsafeAttribute { key: "dy", value: prop' value }
+instance Deku.Attribute.Attr FeOffset_ Dy String where
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "dy", value: _ } <<< Deku.Attribute.prop'
 
-instance Attr Tspan_ Dy String where
-  attr Dy value = unsafeAttribute { key: "dy", value: prop' value }
-
-instance Attr everything Dy Unit where
-  attr Dy _ = unsafeAttribute
-    { key: "dy", value: unset' }
+instance Deku.Attribute.Attr Text_ Dy String where
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "dy", value: _ } <<< Deku.Attribute.prop'

@@ -3,12 +3,11 @@ module Deku.DOM.Indexed.MathML where
 import Control.Applicative (pure) as Applicative
 import Control.Category ((<<<))
 import Data.Functor (map) as Functor
-import Deku.Attribute (Attribute, AttributeValue, unsafeAttribute)
+import FRP.Event as FRP.Event
 import Deku.Control (elementify2)
 import Deku.Core (Nut)
-import FRP.Event (Event)
 import Type.Proxy (Proxy)
-import Deku.DOM.Indexed.Index (Indexed, Keyword(..))
+import Deku.DOM.Indexed.Index as Index
 import Deku.DOM.Indexed (Global, GlobalEventHandlers, ARIAMixin)
 import Deku.Attribute as Deku.Attribute
 
@@ -156,334 +155,574 @@ type MathMLAnnotationXmlElement (r :: Row Type) =
   | ARIAMixin (GlobalEventHandlers (Global r))
   )
 
-math :: Array (Event (Attribute (Indexed (MathMLMathElement ())))) -> Array Nut -> Nut
+math
+  :: Array (FRP.Event.Event (Deku.Attribute.Attribute (Index.Indexed (MathMLMathElement ()))))
+  -> Array Nut
+  -> Nut
 math = elementify2 {- http://www.w3.org/1998/Math/MathML -} "math"
 
 math_ :: Array Nut -> Nut
 math_ = elementify2 {- http://www.w3.org/1998/Math/MathML -} "math" []
 
-mtext :: Array (Event (Attribute (Indexed (MathMLMtextElement ())))) -> Array Nut -> Nut
+mtext
+  :: Array (FRP.Event.Event (Deku.Attribute.Attribute (Index.Indexed (MathMLMtextElement ()))))
+  -> Array Nut
+  -> Nut
 mtext = elementify2 {- http://www.w3.org/1998/Math/MathML -} "mtext"
 
 mtext_ :: Array Nut -> Nut
 mtext_ = elementify2 {- http://www.w3.org/1998/Math/MathML -} "mtext" []
 
-mi :: Array (Event (Attribute (Indexed (MathMLMiElement ())))) -> Array Nut -> Nut
+mi
+  :: Array (FRP.Event.Event (Deku.Attribute.Attribute (Index.Indexed (MathMLMiElement ()))))
+  -> Array Nut
+  -> Nut
 mi = elementify2 {- http://www.w3.org/1998/Math/MathML -} "mi"
 
 mi_ :: Array Nut -> Nut
 mi_ = elementify2 {- http://www.w3.org/1998/Math/MathML -} "mi" []
 
-mn :: Array (Event (Attribute (Indexed (MathMLMnElement ())))) -> Array Nut -> Nut
+mn
+  :: Array (FRP.Event.Event (Deku.Attribute.Attribute (Index.Indexed (MathMLMnElement ()))))
+  -> Array Nut
+  -> Nut
 mn = elementify2 {- http://www.w3.org/1998/Math/MathML -} "mn"
 
 mn_ :: Array Nut -> Nut
 mn_ = elementify2 {- http://www.w3.org/1998/Math/MathML -} "mn" []
 
-mo :: Array (Event (Attribute (Indexed (MathMLMoElement ())))) -> Array Nut -> Nut
+mo
+  :: Array (FRP.Event.Event (Deku.Attribute.Attribute (Index.Indexed (MathMLMoElement ()))))
+  -> Array Nut
+  -> Nut
 mo = elementify2 {- http://www.w3.org/1998/Math/MathML -} "mo"
 
 mo_ :: Array Nut -> Nut
 mo_ = elementify2 {- http://www.w3.org/1998/Math/MathML -} "mo" []
 
-mspace :: Array (Event (Attribute (Indexed (MathMLMspaceElement ())))) -> Array Nut -> Nut
+mspace
+  :: Array (FRP.Event.Event (Deku.Attribute.Attribute (Index.Indexed (MathMLMspaceElement ()))))
+  -> Array Nut
+  -> Nut
 mspace = elementify2 {- http://www.w3.org/1998/Math/MathML -} "mspace"
 
 mspace_ :: Array Nut -> Nut
 mspace_ = elementify2 {- http://www.w3.org/1998/Math/MathML -} "mspace" []
 
-ms :: Array (Event (Attribute (Indexed (MathMLMsElement ())))) -> Array Nut -> Nut
+ms
+  :: Array (FRP.Event.Event (Deku.Attribute.Attribute (Index.Indexed (MathMLMsElement ()))))
+  -> Array Nut
+  -> Nut
 ms = elementify2 {- http://www.w3.org/1998/Math/MathML -} "ms"
 
 ms_ :: Array Nut -> Nut
 ms_ = elementify2 {- http://www.w3.org/1998/Math/MathML -} "ms" []
 
-mrow :: Array (Event (Attribute (Indexed (MathMLMrowElement ())))) -> Array Nut -> Nut
+mrow
+  :: Array (FRP.Event.Event (Deku.Attribute.Attribute (Index.Indexed (MathMLMrowElement ()))))
+  -> Array Nut
+  -> Nut
 mrow = elementify2 {- http://www.w3.org/1998/Math/MathML -} "mrow"
 
 mrow_ :: Array Nut -> Nut
 mrow_ = elementify2 {- http://www.w3.org/1998/Math/MathML -} "mrow" []
 
-mfrac :: Array (Event (Attribute (Indexed (MathMLMfracElement ())))) -> Array Nut -> Nut
+mfrac
+  :: Array (FRP.Event.Event (Deku.Attribute.Attribute (Index.Indexed (MathMLMfracElement ()))))
+  -> Array Nut
+  -> Nut
 mfrac = elementify2 {- http://www.w3.org/1998/Math/MathML -} "mfrac"
 
 mfrac_ :: Array Nut -> Nut
 mfrac_ = elementify2 {- http://www.w3.org/1998/Math/MathML -} "mfrac" []
 
-msqrt :: Array (Event (Attribute (Indexed (MathMLMsqrtElement ())))) -> Array Nut -> Nut
+msqrt
+  :: Array (FRP.Event.Event (Deku.Attribute.Attribute (Index.Indexed (MathMLMsqrtElement ()))))
+  -> Array Nut
+  -> Nut
 msqrt = elementify2 {- http://www.w3.org/1998/Math/MathML -} "msqrt"
 
 msqrt_ :: Array Nut -> Nut
 msqrt_ = elementify2 {- http://www.w3.org/1998/Math/MathML -} "msqrt" []
 
-mroot :: Array (Event (Attribute (Indexed (MathMLMrootElement ())))) -> Array Nut -> Nut
+mroot
+  :: Array (FRP.Event.Event (Deku.Attribute.Attribute (Index.Indexed (MathMLMrootElement ()))))
+  -> Array Nut
+  -> Nut
 mroot = elementify2 {- http://www.w3.org/1998/Math/MathML -} "mroot"
 
 mroot_ :: Array Nut -> Nut
 mroot_ = elementify2 {- http://www.w3.org/1998/Math/MathML -} "mroot" []
 
-mstyle :: Array (Event (Attribute (Indexed (MathMLMstyleElement ())))) -> Array Nut -> Nut
+mstyle
+  :: Array (FRP.Event.Event (Deku.Attribute.Attribute (Index.Indexed (MathMLMstyleElement ()))))
+  -> Array Nut
+  -> Nut
 mstyle = elementify2 {- http://www.w3.org/1998/Math/MathML -} "mstyle"
 
 mstyle_ :: Array Nut -> Nut
 mstyle_ = elementify2 {- http://www.w3.org/1998/Math/MathML -} "mstyle" []
 
-merror :: Array (Event (Attribute (Indexed (MathMLMerrorElement ())))) -> Array Nut -> Nut
+merror
+  :: Array (FRP.Event.Event (Deku.Attribute.Attribute (Index.Indexed (MathMLMerrorElement ()))))
+  -> Array Nut
+  -> Nut
 merror = elementify2 {- http://www.w3.org/1998/Math/MathML -} "merror"
 
 merror_ :: Array Nut -> Nut
 merror_ = elementify2 {- http://www.w3.org/1998/Math/MathML -} "merror" []
 
-mpadded :: Array (Event (Attribute (Indexed (MathMLMpaddedElement ())))) -> Array Nut -> Nut
+mpadded
+  :: Array (FRP.Event.Event (Deku.Attribute.Attribute (Index.Indexed (MathMLMpaddedElement ()))))
+  -> Array Nut
+  -> Nut
 mpadded = elementify2 {- http://www.w3.org/1998/Math/MathML -} "mpadded"
 
 mpadded_ :: Array Nut -> Nut
 mpadded_ = elementify2 {- http://www.w3.org/1998/Math/MathML -} "mpadded" []
 
-mphantom :: Array (Event (Attribute (Indexed (MathMLMphantomElement ())))) -> Array Nut -> Nut
+mphantom
+  :: Array (FRP.Event.Event (Deku.Attribute.Attribute (Index.Indexed (MathMLMphantomElement ()))))
+  -> Array Nut
+  -> Nut
 mphantom = elementify2 {- http://www.w3.org/1998/Math/MathML -} "mphantom"
 
 mphantom_ :: Array Nut -> Nut
 mphantom_ = elementify2 {- http://www.w3.org/1998/Math/MathML -} "mphantom" []
 
-msub :: Array (Event (Attribute (Indexed (MathMLMsubElement ())))) -> Array Nut -> Nut
+msub
+  :: Array (FRP.Event.Event (Deku.Attribute.Attribute (Index.Indexed (MathMLMsubElement ()))))
+  -> Array Nut
+  -> Nut
 msub = elementify2 {- http://www.w3.org/1998/Math/MathML -} "msub"
 
 msub_ :: Array Nut -> Nut
 msub_ = elementify2 {- http://www.w3.org/1998/Math/MathML -} "msub" []
 
-msup :: Array (Event (Attribute (Indexed (MathMLMsupElement ())))) -> Array Nut -> Nut
+msup
+  :: Array (FRP.Event.Event (Deku.Attribute.Attribute (Index.Indexed (MathMLMsupElement ()))))
+  -> Array Nut
+  -> Nut
 msup = elementify2 {- http://www.w3.org/1998/Math/MathML -} "msup"
 
 msup_ :: Array Nut -> Nut
 msup_ = elementify2 {- http://www.w3.org/1998/Math/MathML -} "msup" []
 
-msubsup :: Array (Event (Attribute (Indexed (MathMLMsubsupElement ())))) -> Array Nut -> Nut
+msubsup
+  :: Array (FRP.Event.Event (Deku.Attribute.Attribute (Index.Indexed (MathMLMsubsupElement ()))))
+  -> Array Nut
+  -> Nut
 msubsup = elementify2 {- http://www.w3.org/1998/Math/MathML -} "msubsup"
 
 msubsup_ :: Array Nut -> Nut
 msubsup_ = elementify2 {- http://www.w3.org/1998/Math/MathML -} "msubsup" []
 
-munder :: Array (Event (Attribute (Indexed (MathMLMunderElement ())))) -> Array Nut -> Nut
+munder
+  :: Array (FRP.Event.Event (Deku.Attribute.Attribute (Index.Indexed (MathMLMunderElement ()))))
+  -> Array Nut
+  -> Nut
 munder = elementify2 {- http://www.w3.org/1998/Math/MathML -} "munder"
 
 munder_ :: Array Nut -> Nut
 munder_ = elementify2 {- http://www.w3.org/1998/Math/MathML -} "munder" []
 
-mover :: Array (Event (Attribute (Indexed (MathMLMoverElement ())))) -> Array Nut -> Nut
+mover
+  :: Array (FRP.Event.Event (Deku.Attribute.Attribute (Index.Indexed (MathMLMoverElement ()))))
+  -> Array Nut
+  -> Nut
 mover = elementify2 {- http://www.w3.org/1998/Math/MathML -} "mover"
 
 mover_ :: Array Nut -> Nut
 mover_ = elementify2 {- http://www.w3.org/1998/Math/MathML -} "mover" []
 
-munderover :: Array (Event (Attribute (Indexed (MathMLMunderoverElement ())))) -> Array Nut -> Nut
+munderover
+  :: Array (FRP.Event.Event (Deku.Attribute.Attribute (Index.Indexed (MathMLMunderoverElement ()))))
+  -> Array Nut
+  -> Nut
 munderover = elementify2 {- http://www.w3.org/1998/Math/MathML -} "munderover"
 
 munderover_ :: Array Nut -> Nut
 munderover_ = elementify2 {- http://www.w3.org/1998/Math/MathML -} "munderover" []
 
 mmultiscripts
-  :: Array (Event (Attribute (Indexed (MathMLMmultiscriptsElement ())))) -> Array Nut -> Nut
+  :: Array
+       (FRP.Event.Event (Deku.Attribute.Attribute (Index.Indexed (MathMLMmultiscriptsElement ()))))
+  -> Array Nut
+  -> Nut
 mmultiscripts = elementify2 {- http://www.w3.org/1998/Math/MathML -} "mmultiscripts"
 
 mmultiscripts_ :: Array Nut -> Nut
 mmultiscripts_ = elementify2 {- http://www.w3.org/1998/Math/MathML -} "mmultiscripts" []
 
 mprescripts
-  :: Array (Event (Attribute (Indexed (MathMLMprescriptsElement ())))) -> Array Nut -> Nut
+  :: Array
+       (FRP.Event.Event (Deku.Attribute.Attribute (Index.Indexed (MathMLMprescriptsElement ()))))
+  -> Array Nut
+  -> Nut
 mprescripts = elementify2 {- http://www.w3.org/1998/Math/MathML -} "mprescripts"
 
 mprescripts_ :: Array Nut -> Nut
 mprescripts_ = elementify2 {- http://www.w3.org/1998/Math/MathML -} "mprescripts" []
 
-mtable :: Array (Event (Attribute (Indexed (MathMLMtableElement ())))) -> Array Nut -> Nut
+mtable
+  :: Array (FRP.Event.Event (Deku.Attribute.Attribute (Index.Indexed (MathMLMtableElement ()))))
+  -> Array Nut
+  -> Nut
 mtable = elementify2 {- http://www.w3.org/1998/Math/MathML -} "mtable"
 
 mtable_ :: Array Nut -> Nut
 mtable_ = elementify2 {- http://www.w3.org/1998/Math/MathML -} "mtable" []
 
-mtr :: Array (Event (Attribute (Indexed (MathMLMtrElement ())))) -> Array Nut -> Nut
+mtr
+  :: Array (FRP.Event.Event (Deku.Attribute.Attribute (Index.Indexed (MathMLMtrElement ()))))
+  -> Array Nut
+  -> Nut
 mtr = elementify2 {- http://www.w3.org/1998/Math/MathML -} "mtr"
 
 mtr_ :: Array Nut -> Nut
 mtr_ = elementify2 {- http://www.w3.org/1998/Math/MathML -} "mtr" []
 
-mtd :: Array (Event (Attribute (Indexed (MathMLMtdElement ())))) -> Array Nut -> Nut
+mtd
+  :: Array (FRP.Event.Event (Deku.Attribute.Attribute (Index.Indexed (MathMLMtdElement ()))))
+  -> Array Nut
+  -> Nut
 mtd = elementify2 {- http://www.w3.org/1998/Math/MathML -} "mtd"
 
 mtd_ :: Array Nut -> Nut
 mtd_ = elementify2 {- http://www.w3.org/1998/Math/MathML -} "mtd" []
 
-maction :: Array (Event (Attribute (Indexed (MathMLMactionElement ())))) -> Array Nut -> Nut
+maction
+  :: Array (FRP.Event.Event (Deku.Attribute.Attribute (Index.Indexed (MathMLMactionElement ()))))
+  -> Array Nut
+  -> Nut
 maction = elementify2 {- http://www.w3.org/1998/Math/MathML -} "maction"
 
 maction_ :: Array Nut -> Nut
 maction_ = elementify2 {- http://www.w3.org/1998/Math/MathML -} "maction" []
 
-semantics :: Array (Event (Attribute (Indexed (MathMLSemanticsElement ())))) -> Array Nut -> Nut
+semantics
+  :: Array (FRP.Event.Event (Deku.Attribute.Attribute (Index.Indexed (MathMLSemanticsElement ()))))
+  -> Array Nut
+  -> Nut
 semantics = elementify2 {- http://www.w3.org/1998/Math/MathML -} "semantics"
 
 semantics_ :: Array Nut -> Nut
 semantics_ = elementify2 {- http://www.w3.org/1998/Math/MathML -} "semantics" []
 
-annotation :: Array (Event (Attribute (Indexed (MathMLAnnotationElement ())))) -> Array Nut -> Nut
+annotation
+  :: Array (FRP.Event.Event (Deku.Attribute.Attribute (Index.Indexed (MathMLAnnotationElement ()))))
+  -> Array Nut
+  -> Nut
 annotation = elementify2 {- http://www.w3.org/1998/Math/MathML -} "annotation"
 
 annotation_ :: Array Nut -> Nut
 annotation_ = elementify2 {- http://www.w3.org/1998/Math/MathML -} "annotation" []
 
 annotationXml
-  :: Array (Event (Attribute (Indexed (MathMLAnnotationXmlElement ())))) -> Array Nut -> Nut
+  :: Array
+       (FRP.Event.Event (Deku.Attribute.Attribute (Index.Indexed (MathMLAnnotationXmlElement ()))))
+  -> Array Nut
+  -> Nut
 annotationXml = elementify2 {- http://www.w3.org/1998/Math/MathML -} "annotation-xml"
 
 annotationXml_ :: Array Nut -> Nut
 annotationXml_ = elementify2 {- http://www.w3.org/1998/Math/MathML -} "annotation-xml" []
 
-_alttext :: forall r. Event String -> Event (Attribute (Indexed (alttext :: String | r)))
-_alttext = Functor.map (unsafeAttribute <<< { key: "alttext", value: _ } <<< Deku.Attribute.prop')
+_alttext
+  :: forall r
+   . FRP.Event.Event String
+  -> FRP.Event.Event (Deku.Attribute.Attribute (Index.Indexed (alttext :: String | r)))
+_alttext = Functor.map
+  (Deku.Attribute.unsafeAttribute <<< { key: "alttext", value: _ } <<< Deku.Attribute.prop')
 
-_alttext_ :: forall r. String -> Event (Attribute (Indexed (alttext :: String | r)))
+_alttext_
+  :: forall r
+   . String
+  -> FRP.Event.Event (Deku.Attribute.Attribute (Index.Indexed (alttext :: String | r)))
 _alttext_ = _alttext <<< Applicative.pure
 
-_display :: forall r. Event String -> Event (Attribute (Indexed (display :: String | r)))
-_display = Functor.map (unsafeAttribute <<< { key: "display", value: _ } <<< Deku.Attribute.prop')
+_display
+  :: forall r
+   . FRP.Event.Event String
+  -> FRP.Event.Event (Deku.Attribute.Attribute (Index.Indexed (display :: String | r)))
+_display = Functor.map
+  (Deku.Attribute.unsafeAttribute <<< { key: "display", value: _ } <<< Deku.Attribute.prop')
 
-_display_ :: forall r. String -> Event (Attribute (Indexed (display :: String | r)))
+_display_
+  :: forall r
+   . String
+  -> FRP.Event.Event (Deku.Attribute.Attribute (Index.Indexed (display :: String | r)))
 _display_ = _display <<< Applicative.pure
 
-_maxsize :: forall r. Event String -> Event (Attribute (Indexed (maxsize :: String | r)))
-_maxsize = Functor.map (unsafeAttribute <<< { key: "maxsize", value: _ } <<< Deku.Attribute.prop')
+_maxsize
+  :: forall r
+   . FRP.Event.Event String
+  -> FRP.Event.Event (Deku.Attribute.Attribute (Index.Indexed (maxsize :: String | r)))
+_maxsize = Functor.map
+  (Deku.Attribute.unsafeAttribute <<< { key: "maxsize", value: _ } <<< Deku.Attribute.prop')
 
-_maxsize_ :: forall r. String -> Event (Attribute (Indexed (maxsize :: String | r)))
+_maxsize_
+  :: forall r
+   . String
+  -> FRP.Event.Event (Deku.Attribute.Attribute (Index.Indexed (maxsize :: String | r)))
 _maxsize_ = _maxsize <<< Applicative.pure
 
-_minsize :: forall r. Event String -> Event (Attribute (Indexed (minsize :: String | r)))
-_minsize = Functor.map (unsafeAttribute <<< { key: "minsize", value: _ } <<< Deku.Attribute.prop')
+_minsize
+  :: forall r
+   . FRP.Event.Event String
+  -> FRP.Event.Event (Deku.Attribute.Attribute (Index.Indexed (minsize :: String | r)))
+_minsize = Functor.map
+  (Deku.Attribute.unsafeAttribute <<< { key: "minsize", value: _ } <<< Deku.Attribute.prop')
 
-_minsize_ :: forall r. String -> Event (Attribute (Indexed (minsize :: String | r)))
+_minsize_
+  :: forall r
+   . String
+  -> FRP.Event.Event (Deku.Attribute.Attribute (Index.Indexed (minsize :: String | r)))
 _minsize_ = _minsize <<< Applicative.pure
 
-_rspace :: forall r. Event String -> Event (Attribute (Indexed (rspace :: String | r)))
-_rspace = Functor.map (unsafeAttribute <<< { key: "rspace", value: _ } <<< Deku.Attribute.prop')
+_rspace
+  :: forall r
+   . FRP.Event.Event String
+  -> FRP.Event.Event (Deku.Attribute.Attribute (Index.Indexed (rspace :: String | r)))
+_rspace = Functor.map
+  (Deku.Attribute.unsafeAttribute <<< { key: "rspace", value: _ } <<< Deku.Attribute.prop')
 
-_rspace_ :: forall r. String -> Event (Attribute (Indexed (rspace :: String | r)))
+_rspace_
+  :: forall r
+   . String
+  -> FRP.Event.Event (Deku.Attribute.Attribute (Index.Indexed (rspace :: String | r)))
 _rspace_ = _rspace <<< Applicative.pure
 
-_lspace :: forall r. Event String -> Event (Attribute (Indexed (lspace :: String | r)))
-_lspace = Functor.map (unsafeAttribute <<< { key: "lspace", value: _ } <<< Deku.Attribute.prop')
+_lspace
+  :: forall r
+   . FRP.Event.Event String
+  -> FRP.Event.Event (Deku.Attribute.Attribute (Index.Indexed (lspace :: String | r)))
+_lspace = Functor.map
+  (Deku.Attribute.unsafeAttribute <<< { key: "lspace", value: _ } <<< Deku.Attribute.prop')
 
-_lspace_ :: forall r. String -> Event (Attribute (Indexed (lspace :: String | r)))
+_lspace_
+  :: forall r
+   . String
+  -> FRP.Event.Event (Deku.Attribute.Attribute (Index.Indexed (lspace :: String | r)))
 _lspace_ = _lspace <<< Applicative.pure
 
 _movablelimits
-  :: forall r. Event String -> Event (Attribute (Indexed (movablelimits :: String | r)))
+  :: forall r
+   . FRP.Event.Event String
+  -> FRP.Event.Event (Deku.Attribute.Attribute (Index.Indexed (movablelimits :: String | r)))
 _movablelimits = Functor.map
-  (unsafeAttribute <<< { key: "movablelimits", value: _ } <<< Deku.Attribute.prop')
+  (Deku.Attribute.unsafeAttribute <<< { key: "movablelimits", value: _ } <<< Deku.Attribute.prop')
 
-_movablelimits_ :: forall r. String -> Event (Attribute (Indexed (movablelimits :: String | r)))
+_movablelimits_
+  :: forall r
+   . String
+  -> FRP.Event.Event (Deku.Attribute.Attribute (Index.Indexed (movablelimits :: String | r)))
 _movablelimits_ = _movablelimits <<< Applicative.pure
 
-_largeop :: forall r. Event String -> Event (Attribute (Indexed (largeop :: String | r)))
-_largeop = Functor.map (unsafeAttribute <<< { key: "largeop", value: _ } <<< Deku.Attribute.prop')
+_largeop
+  :: forall r
+   . FRP.Event.Event String
+  -> FRP.Event.Event (Deku.Attribute.Attribute (Index.Indexed (largeop :: String | r)))
+_largeop = Functor.map
+  (Deku.Attribute.unsafeAttribute <<< { key: "largeop", value: _ } <<< Deku.Attribute.prop')
 
-_largeop_ :: forall r. String -> Event (Attribute (Indexed (largeop :: String | r)))
+_largeop_
+  :: forall r
+   . String
+  -> FRP.Event.Event (Deku.Attribute.Attribute (Index.Indexed (largeop :: String | r)))
 _largeop_ = _largeop <<< Applicative.pure
 
-_symmetric :: forall r. Event String -> Event (Attribute (Indexed (symmetric :: String | r)))
+_symmetric
+  :: forall r
+   . FRP.Event.Event String
+  -> FRP.Event.Event (Deku.Attribute.Attribute (Index.Indexed (symmetric :: String | r)))
 _symmetric = Functor.map
-  (unsafeAttribute <<< { key: "symmetric", value: _ } <<< Deku.Attribute.prop')
+  (Deku.Attribute.unsafeAttribute <<< { key: "symmetric", value: _ } <<< Deku.Attribute.prop')
 
-_symmetric_ :: forall r. String -> Event (Attribute (Indexed (symmetric :: String | r)))
+_symmetric_
+  :: forall r
+   . String
+  -> FRP.Event.Event (Deku.Attribute.Attribute (Index.Indexed (symmetric :: String | r)))
 _symmetric_ = _symmetric <<< Applicative.pure
 
-_stretchy :: forall r. Event String -> Event (Attribute (Indexed (stretchy :: String | r)))
+_stretchy
+  :: forall r
+   . FRP.Event.Event String
+  -> FRP.Event.Event (Deku.Attribute.Attribute (Index.Indexed (stretchy :: String | r)))
 _stretchy = Functor.map
-  (unsafeAttribute <<< { key: "stretchy", value: _ } <<< Deku.Attribute.prop')
+  (Deku.Attribute.unsafeAttribute <<< { key: "stretchy", value: _ } <<< Deku.Attribute.prop')
 
-_stretchy_ :: forall r. String -> Event (Attribute (Indexed (stretchy :: String | r)))
+_stretchy_
+  :: forall r
+   . String
+  -> FRP.Event.Event (Deku.Attribute.Attribute (Index.Indexed (stretchy :: String | r)))
 _stretchy_ = _stretchy <<< Applicative.pure
 
-_form :: forall r. Event String -> Event (Attribute (Indexed (form :: String | r)))
-_form = Functor.map (unsafeAttribute <<< { key: "form", value: _ } <<< Deku.Attribute.prop')
+_form
+  :: forall r
+   . FRP.Event.Event String
+  -> FRP.Event.Event (Deku.Attribute.Attribute (Index.Indexed (form :: String | r)))
+_form = Functor.map
+  (Deku.Attribute.unsafeAttribute <<< { key: "form", value: _ } <<< Deku.Attribute.prop')
 
-_form_ :: forall r. String -> Event (Attribute (Indexed (form :: String | r)))
+_form_
+  :: forall r
+   . String
+  -> FRP.Event.Event (Deku.Attribute.Attribute (Index.Indexed (form :: String | r)))
 _form_ = _form <<< Applicative.pure
 
-_separator :: forall r. Event String -> Event (Attribute (Indexed (separator :: String | r)))
+_separator
+  :: forall r
+   . FRP.Event.Event String
+  -> FRP.Event.Event (Deku.Attribute.Attribute (Index.Indexed (separator :: String | r)))
 _separator = Functor.map
-  (unsafeAttribute <<< { key: "separator", value: _ } <<< Deku.Attribute.prop')
+  (Deku.Attribute.unsafeAttribute <<< { key: "separator", value: _ } <<< Deku.Attribute.prop')
 
-_separator_ :: forall r. String -> Event (Attribute (Indexed (separator :: String | r)))
+_separator_
+  :: forall r
+   . String
+  -> FRP.Event.Event (Deku.Attribute.Attribute (Index.Indexed (separator :: String | r)))
 _separator_ = _separator <<< Applicative.pure
 
-_fence :: forall r. Event String -> Event (Attribute (Indexed (fence :: String | r)))
-_fence = Functor.map (unsafeAttribute <<< { key: "fence", value: _ } <<< Deku.Attribute.prop')
+_fence
+  :: forall r
+   . FRP.Event.Event String
+  -> FRP.Event.Event (Deku.Attribute.Attribute (Index.Indexed (fence :: String | r)))
+_fence = Functor.map
+  (Deku.Attribute.unsafeAttribute <<< { key: "fence", value: _ } <<< Deku.Attribute.prop')
 
-_fence_ :: forall r. String -> Event (Attribute (Indexed (fence :: String | r)))
+_fence_
+  :: forall r
+   . String
+  -> FRP.Event.Event (Deku.Attribute.Attribute (Index.Indexed (fence :: String | r)))
 _fence_ = _fence <<< Applicative.pure
 
-_depth :: forall r. Event String -> Event (Attribute (Indexed (depth :: String | r)))
-_depth = Functor.map (unsafeAttribute <<< { key: "depth", value: _ } <<< Deku.Attribute.prop')
+_depth
+  :: forall r
+   . FRP.Event.Event String
+  -> FRP.Event.Event (Deku.Attribute.Attribute (Index.Indexed (depth :: String | r)))
+_depth = Functor.map
+  (Deku.Attribute.unsafeAttribute <<< { key: "depth", value: _ } <<< Deku.Attribute.prop')
 
-_depth_ :: forall r. String -> Event (Attribute (Indexed (depth :: String | r)))
+_depth_
+  :: forall r
+   . String
+  -> FRP.Event.Event (Deku.Attribute.Attribute (Index.Indexed (depth :: String | r)))
 _depth_ = _depth <<< Applicative.pure
 
-_height :: forall r. Event String -> Event (Attribute (Indexed (height :: String | r)))
-_height = Functor.map (unsafeAttribute <<< { key: "height", value: _ } <<< Deku.Attribute.prop')
+_height
+  :: forall r
+   . FRP.Event.Event String
+  -> FRP.Event.Event (Deku.Attribute.Attribute (Index.Indexed (height :: String | r)))
+_height = Functor.map
+  (Deku.Attribute.unsafeAttribute <<< { key: "height", value: _ } <<< Deku.Attribute.prop')
 
-_height_ :: forall r. String -> Event (Attribute (Indexed (height :: String | r)))
+_height_
+  :: forall r
+   . String
+  -> FRP.Event.Event (Deku.Attribute.Attribute (Index.Indexed (height :: String | r)))
 _height_ = _height <<< Applicative.pure
 
-_width :: forall r. Event String -> Event (Attribute (Indexed (width :: String | r)))
-_width = Functor.map (unsafeAttribute <<< { key: "width", value: _ } <<< Deku.Attribute.prop')
+_width
+  :: forall r
+   . FRP.Event.Event String
+  -> FRP.Event.Event (Deku.Attribute.Attribute (Index.Indexed (width :: String | r)))
+_width = Functor.map
+  (Deku.Attribute.unsafeAttribute <<< { key: "width", value: _ } <<< Deku.Attribute.prop')
 
-_width_ :: forall r. String -> Event (Attribute (Indexed (width :: String | r)))
+_width_
+  :: forall r
+   . String
+  -> FRP.Event.Event (Deku.Attribute.Attribute (Index.Indexed (width :: String | r)))
 _width_ = _width <<< Applicative.pure
 
 _linethickness
-  :: forall r. Event String -> Event (Attribute (Indexed (linethickness :: String | r)))
+  :: forall r
+   . FRP.Event.Event String
+  -> FRP.Event.Event (Deku.Attribute.Attribute (Index.Indexed (linethickness :: String | r)))
 _linethickness = Functor.map
-  (unsafeAttribute <<< { key: "linethickness", value: _ } <<< Deku.Attribute.prop')
+  (Deku.Attribute.unsafeAttribute <<< { key: "linethickness", value: _ } <<< Deku.Attribute.prop')
 
-_linethickness_ :: forall r. String -> Event (Attribute (Indexed (linethickness :: String | r)))
+_linethickness_
+  :: forall r
+   . String
+  -> FRP.Event.Event (Deku.Attribute.Attribute (Index.Indexed (linethickness :: String | r)))
 _linethickness_ = _linethickness <<< Applicative.pure
 
-_voffset :: forall r. Event String -> Event (Attribute (Indexed (voffset :: String | r)))
-_voffset = Functor.map (unsafeAttribute <<< { key: "voffset", value: _ } <<< Deku.Attribute.prop')
+_voffset
+  :: forall r
+   . FRP.Event.Event String
+  -> FRP.Event.Event (Deku.Attribute.Attribute (Index.Indexed (voffset :: String | r)))
+_voffset = Functor.map
+  (Deku.Attribute.unsafeAttribute <<< { key: "voffset", value: _ } <<< Deku.Attribute.prop')
 
-_voffset_ :: forall r. String -> Event (Attribute (Indexed (voffset :: String | r)))
+_voffset_
+  :: forall r
+   . String
+  -> FRP.Event.Event (Deku.Attribute.Attribute (Index.Indexed (voffset :: String | r)))
 _voffset_ = _voffset <<< Applicative.pure
 
-_accentunder :: forall r. Event String -> Event (Attribute (Indexed (accentunder :: String | r)))
+_accentunder
+  :: forall r
+   . FRP.Event.Event String
+  -> FRP.Event.Event (Deku.Attribute.Attribute (Index.Indexed (accentunder :: String | r)))
 _accentunder = Functor.map
-  (unsafeAttribute <<< { key: "accentunder", value: _ } <<< Deku.Attribute.prop')
+  (Deku.Attribute.unsafeAttribute <<< { key: "accentunder", value: _ } <<< Deku.Attribute.prop')
 
-_accentunder_ :: forall r. String -> Event (Attribute (Indexed (accentunder :: String | r)))
+_accentunder_
+  :: forall r
+   . String
+  -> FRP.Event.Event (Deku.Attribute.Attribute (Index.Indexed (accentunder :: String | r)))
 _accentunder_ = _accentunder <<< Applicative.pure
 
-_accent :: forall r. Event String -> Event (Attribute (Indexed (accent :: String | r)))
-_accent = Functor.map (unsafeAttribute <<< { key: "accent", value: _ } <<< Deku.Attribute.prop')
+_accent
+  :: forall r
+   . FRP.Event.Event String
+  -> FRP.Event.Event (Deku.Attribute.Attribute (Index.Indexed (accent :: String | r)))
+_accent = Functor.map
+  (Deku.Attribute.unsafeAttribute <<< { key: "accent", value: _ } <<< Deku.Attribute.prop')
 
-_accent_ :: forall r. String -> Event (Attribute (Indexed (accent :: String | r)))
+_accent_
+  :: forall r
+   . String
+  -> FRP.Event.Event (Deku.Attribute.Attribute (Index.Indexed (accent :: String | r)))
 _accent_ = _accent <<< Applicative.pure
 
-_selection :: forall r. Event String -> Event (Attribute (Indexed (selection :: String | r)))
+_selection
+  :: forall r
+   . FRP.Event.Event String
+  -> FRP.Event.Event (Deku.Attribute.Attribute (Index.Indexed (selection :: String | r)))
 _selection = Functor.map
-  (unsafeAttribute <<< { key: "selection", value: _ } <<< Deku.Attribute.prop')
+  (Deku.Attribute.unsafeAttribute <<< { key: "selection", value: _ } <<< Deku.Attribute.prop')
 
-_selection_ :: forall r. String -> Event (Attribute (Indexed (selection :: String | r)))
+_selection_
+  :: forall r
+   . String
+  -> FRP.Event.Event (Deku.Attribute.Attribute (Index.Indexed (selection :: String | r)))
 _selection_ = _selection <<< Applicative.pure
 
-_actiontype :: forall r. Event String -> Event (Attribute (Indexed (actiontype :: String | r)))
+_actiontype
+  :: forall r
+   . FRP.Event.Event String
+  -> FRP.Event.Event (Deku.Attribute.Attribute (Index.Indexed (actiontype :: String | r)))
 _actiontype = Functor.map
-  (unsafeAttribute <<< { key: "actiontype", value: _ } <<< Deku.Attribute.prop')
+  (Deku.Attribute.unsafeAttribute <<< { key: "actiontype", value: _ } <<< Deku.Attribute.prop')
 
-_actiontype_ :: forall r. String -> Event (Attribute (Indexed (actiontype :: String | r)))
+_actiontype_
+  :: forall r
+   . String
+  -> FRP.Event.Event (Deku.Attribute.Attribute (Index.Indexed (actiontype :: String | r)))
 _actiontype_ = _actiontype <<< Applicative.pure
 
-_encoding :: forall r. Event String -> Event (Attribute (Indexed (encoding :: String | r)))
+_encoding
+  :: forall r
+   . FRP.Event.Event String
+  -> FRP.Event.Event (Deku.Attribute.Attribute (Index.Indexed (encoding :: String | r)))
 _encoding = Functor.map
-  (unsafeAttribute <<< { key: "encoding", value: _ } <<< Deku.Attribute.prop')
+  (Deku.Attribute.unsafeAttribute <<< { key: "encoding", value: _ } <<< Deku.Attribute.prop')
 
-_encoding_ :: forall r. String -> Event (Attribute (Indexed (encoding :: String | r)))
+_encoding_
+  :: forall r
+   . String
+  -> FRP.Event.Event (Deku.Attribute.Attribute (Index.Indexed (encoding :: String | r)))
 _encoding_ = _encoding <<< Applicative.pure

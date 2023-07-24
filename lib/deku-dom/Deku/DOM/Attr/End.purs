@@ -1,27 +1,22 @@
 module Deku.DOM.Attr.End where
 
-import Prelude
-
-import Deku.DOM.Elt.Set (Set_)
-import Deku.DOM.Elt.AnimateTransform (AnimateTransform_)
-import Deku.DOM.Elt.AnimateMotion (AnimateMotion_)
+import Deku.Attribute as Deku.Attribute
+import Data.Unit as Data.Unit
+import Control.Semigroupoid ((<<<))
 import Deku.DOM.Elt.Animate (Animate_)
-import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
+import Deku.DOM.Elt.AnimateMotion (AnimateMotion_)
+import Deku.DOM.Elt.AnimateTransform (AnimateTransform_)
 
 data End = End
 
-instance Attr Animate_ End String where
-  attr End value = unsafeAttribute { key: "end", value: prop' value }
+instance Deku.Attribute.Attr everything End Data.Unit.Unit where
+  attr _ _ = Deku.Attribute.unsafeAttribute { key: "end", value: Deku.Attribute.unset' }
 
-instance Attr AnimateMotion_ End String where
-  attr End value = unsafeAttribute { key: "end", value: prop' value }
+instance Deku.Attribute.Attr Animate_ End String where
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "end", value: _ } <<< Deku.Attribute.prop'
 
-instance Attr AnimateTransform_ End String where
-  attr End value = unsafeAttribute { key: "end", value: prop' value }
+instance Deku.Attribute.Attr AnimateMotion_ End String where
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "end", value: _ } <<< Deku.Attribute.prop'
 
-instance Attr Set_ End String where
-  attr End value = unsafeAttribute { key: "end", value: prop' value }
-
-instance Attr everything End Unit where
-  attr End _ = unsafeAttribute
-    { key: "end", value: unset' }
+instance Deku.Attribute.Attr AnimateTransform_ End String where
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "end", value: _ } <<< Deku.Attribute.prop'

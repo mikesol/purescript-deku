@@ -1,16 +1,20 @@
 module Deku.DOM.Attr.Novalidate where
 
-import Prelude
-
+import Deku.Attribute as Deku.Attribute
+import Data.Unit as Data.Unit
+import Control.Semigroupoid ((<<<))
+import Deku.DOM.Elt.Button (Button_)
 import Deku.DOM.Elt.Form (Form_)
-import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 
 data Novalidate = Novalidate
 
-instance Attr Form_ Novalidate String where
-  attr Novalidate value = unsafeAttribute
-    { key: "novalidate", value: prop' value }
+instance Deku.Attribute.Attr everything Novalidate Data.Unit.Unit where
+  attr _ _ = Deku.Attribute.unsafeAttribute { key: "novalidate", value: Deku.Attribute.unset' }
 
-instance Attr everything Novalidate Unit where
-  attr Novalidate _ = unsafeAttribute
-    { key: "novalidate", value: unset' }
+instance Deku.Attribute.Attr Button_ Novalidate String where
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "novalidate", value: _ } <<<
+    Deku.Attribute.prop'
+
+instance Deku.Attribute.Attr Form_ Novalidate String where
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "novalidate", value: _ } <<<
+    Deku.Attribute.prop'

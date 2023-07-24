@@ -1,16 +1,15 @@
 module Deku.DOM.Attr.PreserveAlpha where
 
-import Prelude
-
+import Deku.Attribute as Deku.Attribute
+import Data.Unit as Data.Unit
+import Control.Semigroupoid ((<<<))
 import Deku.DOM.Elt.FeConvolveMatrix (FeConvolveMatrix_)
-import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 
 data PreserveAlpha = PreserveAlpha
 
-instance Attr FeConvolveMatrix_ PreserveAlpha String where
-  attr PreserveAlpha value = unsafeAttribute
-    { key: "preserveAlpha", value: prop' value }
+instance Deku.Attribute.Attr everything PreserveAlpha Data.Unit.Unit where
+  attr _ _ = Deku.Attribute.unsafeAttribute { key: "preserveAlpha", value: Deku.Attribute.unset' }
 
-instance Attr everything PreserveAlpha Unit where
-  attr PreserveAlpha _ = unsafeAttribute
-    { key: "preserveAlpha", value: unset' }
+instance Deku.Attribute.Attr FeConvolveMatrix_ PreserveAlpha String where
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "preserveAlpha", value: _ } <<<
+    Deku.Attribute.prop'

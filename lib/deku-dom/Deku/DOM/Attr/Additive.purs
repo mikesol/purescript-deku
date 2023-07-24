@@ -1,23 +1,22 @@
 module Deku.DOM.Attr.Additive where
 
-import Prelude
-
-import Deku.DOM.Elt.AnimateTransform (AnimateTransform_)
-import Deku.DOM.Elt.AnimateMotion (AnimateMotion_)
+import Deku.Attribute as Deku.Attribute
+import Data.Unit as Data.Unit
+import Control.Semigroupoid ((<<<))
 import Deku.DOM.Elt.Animate (Animate_)
-import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
+import Deku.DOM.Elt.AnimateMotion (AnimateMotion_)
+import Deku.DOM.Elt.AnimateTransform (AnimateTransform_)
 
 data Additive = Additive
 
-instance Attr Animate_ Additive String where
-  attr Additive value = unsafeAttribute { key: "additive", value: prop' value }
+instance Deku.Attribute.Attr everything Additive Data.Unit.Unit where
+  attr _ _ = Deku.Attribute.unsafeAttribute { key: "additive", value: Deku.Attribute.unset' }
 
-instance Attr AnimateMotion_ Additive String where
-  attr Additive value = unsafeAttribute { key: "additive", value: prop' value }
+instance Deku.Attribute.Attr Animate_ Additive String where
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "additive", value: _ } <<< Deku.Attribute.prop'
 
-instance Attr AnimateTransform_ Additive String where
-  attr Additive value = unsafeAttribute { key: "additive", value: prop' value }
+instance Deku.Attribute.Attr AnimateMotion_ Additive String where
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "additive", value: _ } <<< Deku.Attribute.prop'
 
-instance Attr everything Additive Unit where
-  attr Additive _ = unsafeAttribute
-    { key: "additive", value: unset' }
+instance Deku.Attribute.Attr AnimateTransform_ Additive String where
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "additive", value: _ } <<< Deku.Attribute.prop'

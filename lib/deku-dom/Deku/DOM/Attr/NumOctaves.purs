@@ -1,16 +1,15 @@
 module Deku.DOM.Attr.NumOctaves where
 
-import Prelude
-
+import Deku.Attribute as Deku.Attribute
+import Data.Unit as Data.Unit
+import Control.Semigroupoid ((<<<))
 import Deku.DOM.Elt.FeTurbulence (FeTurbulence_)
-import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 
 data NumOctaves = NumOctaves
 
-instance Attr FeTurbulence_ NumOctaves String where
-  attr NumOctaves value = unsafeAttribute
-    { key: "numOctaves", value: prop' value }
+instance Deku.Attribute.Attr everything NumOctaves Data.Unit.Unit where
+  attr _ _ = Deku.Attribute.unsafeAttribute { key: "numOctaves", value: Deku.Attribute.unset' }
 
-instance Attr everything NumOctaves Unit where
-  attr NumOctaves _ = unsafeAttribute
-    { key: "numOctaves", value: unset' }
+instance Deku.Attribute.Attr FeTurbulence_ NumOctaves String where
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "numOctaves", value: _ } <<<
+    Deku.Attribute.prop'

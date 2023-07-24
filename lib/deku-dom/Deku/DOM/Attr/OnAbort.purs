@@ -1,28 +1,28 @@
 module Deku.DOM.Attr.OnAbort where
 
-import Prelude
-import Effect (Effect)
-import Deku.Attribute (class Attr, Attribute, Cb(..), cb', unsafeAttribute, unset')
-import FRP.Event (Event)
+import Control.Semigroupoid ((<<<))
+import Effect as Effect
+import Web.Event.Internal.Types as Web.Event.Internal.Types
+import Data.Unit as Data.Unit
+import Deku.Attribute as Deku.Attribute
+import FRP.Event as FRP.Event
 
 data OnAbort = OnAbort
 
-instance Attr anything OnAbort Cb where
-  attr OnAbort value = unsafeAttribute { key: "abort", value: cb' value }
+instance Deku.Attribute.Attr everything OnAbort Data.Unit.Unit where
+  attr _ _ = Deku.Attribute.unsafeAttribute { key: "onAbort", value: Deku.Attribute.unset' }
 
-instance Attr anything OnAbort (Effect Unit) where
-  attr OnAbort value = unsafeAttribute
-    { key: "abort", value: cb' (Cb (const (value $> true))) }
-
-instance Attr anything OnAbort (Effect Boolean) where
-  attr OnAbort value = unsafeAttribute
-    { key: "abort", value: cb' (Cb (const value)) }
+instance
+  Deku.Attribute.Attr everything
+    OnAbort
+    (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit) where
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "onAbort", value: _ } <<< Deku.Attribute.cb'
+    <<< Deku.Attribute.cb
 
 type OnAbortEffect =
   forall element
-   . Attr element OnAbort (Effect Unit)
-  => Event (Attribute element)
+   . Deku.Attribute.Attr element OnAbort (Effect.Effect Data.Unit.Unit)
+  => FRP.Event.Event (Deku.Attribute.Attribute element)
 
-instance Attr everything OnAbort Unit where
-  attr OnAbort _ = unsafeAttribute
-    { key: "abort", value: unset' }
+instance Deku.Attribute.Attr everything OnAbort Deku.Attribute.Cb where
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "onAbort", value: _ } <<< Deku.Attribute.cb'
