@@ -62,38 +62,41 @@ isClass _ _ =
 
 expandClasses :: Array ( Declaration Void ) -> Array ( Declaration Void )
 expandClasses decls = unsafePartial $ bind decls \decl -> case decl of
-        DeclClass head _ | isClass head isSingleWhitespaceClass ->
-            Array.cons decl $ isSingleWhitespace head
+    DeclClass head _ | isClass head isSingleWhitespaceClass ->
+        Array.cons decl $ isSingleWhitespace head
 
-        DeclClass head _ | isClass head pxStartClass ->
-            Array.cons decl $ pxStart head
+    DeclClass head _ | isClass head pxStartClass ->
+        Array.cons decl $ pxStart head
 
-        DeclClass head _ | isClass head pxTagPreNameClass ->
-            Array.cons decl $ pxTagPreName head
+    DeclClass head _ | isClass head pxTagPreNameClass ->
+        Array.cons decl $ pxTagPreName head
 
-        DeclClass head _ | isClass head pxTagNameClass ->
-            Array.cons decl $ pxTagName head
+    DeclClass head _ | isClass head pxTagNameClass ->
+        Array.cons decl $ pxTagName head
 
-        DeclClass head _ | isClass head preEndTagFromTrailingClass ->
-            Array.cons decl $ preEndTagFromTrailing head
+    DeclClass head _ | isClass head endTagFromTrailingClass ->
+        Array.cons decl $ endTagFromTrailing head
+        
+    DeclClass head _ | isClass head preEndTagFromTrailingClass ->
+        Array.cons decl $ preEndTagFromTrailing head
 
-        DeclClass head _ | isClass head pxTagPreAttrNameClass ->
-            Array.cons decl $ pxTagPreAttrName head
+    DeclClass head _ | isClass head pxTagPreAttrNameClass ->
+        Array.cons decl $ pxTagPreAttrName head
 
-        DeclClass head _ | isClass head pxTagAttrNameClass ->
-            Array.cons decl $ pxTagAttrName head
+    DeclClass head _ | isClass head pxTagAttrNameClass ->
+        Array.cons decl $ pxTagAttrName head
 
-        DeclClass head _ | isClass head pxTagPostAttrNameClass ->
-            Array.cons decl $ pxTagPostAttrName head
+    DeclClass head _ | isClass head pxTagPostAttrNameClass ->
+        Array.cons decl $ pxTagPostAttrName head
 
-        DeclClass head _ | isClass head pxTagPreAttrValueClass ->
-            Array.cons decl $ pxTagPreAttrValue head
+    DeclClass head _ | isClass head pxTagPreAttrValueClass ->
+        Array.cons decl $ pxTagPreAttrValue head
 
-        DeclClass head _ | isClass head pxTagAttrValueClass ->
-            Array.cons decl $ pxTagAttrValue head
+    DeclClass head _ | isClass head pxTagAttrValueClass ->
+        Array.cons decl $ pxTagAttrValue head
 
-        _ ->
-            [ decl ]
+    _ ->
+        [ decl ]
 
 isSingleWhitespace :: ClassHead Void -> Array ( Declaration Void )
 isSingleWhitespace { name } =
@@ -169,8 +172,8 @@ preEndTagFromTrailing { name } = Array.concat
             []
     ]
 
-pxEndTagFromTrailing :: ClassHead Void -> Array ( Declaration Void )
-pxEndTagFromTrailing { name } =
+endTagFromTrailing :: ClassHead Void -> Array ( Declaration Void )
+endTagFromTrailing { name } =
     flip map ( lowerCase <> [ typeString  "-" ] <> digits ) \match ->
         declInstance Nothing
             [ cons x y tail

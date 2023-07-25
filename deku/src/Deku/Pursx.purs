@@ -589,6 +589,265 @@ class
     (newTrailing :: Symbol)
   | head tail tagAcc -> tag newTrailing
 
+instance
+  ( Sym.Cons x y tail
+  , Sym.Append tag_ "a" tag
+  , EndTagFromTrailing x y tag otag trailing
+  ) =>
+  EndTagFromTrailing "a" tail tag_ otag trailing
+
+instance
+  ( Sym.Cons x y tail
+  , Sym.Append tag_ "b" tag
+  , EndTagFromTrailing x y tag otag trailing
+  ) =>
+  EndTagFromTrailing "b" tail tag_ otag trailing
+
+instance
+  ( Sym.Cons x y tail
+  , Sym.Append tag_ "c" tag
+  , EndTagFromTrailing x y tag otag trailing
+  ) =>
+  EndTagFromTrailing "c" tail tag_ otag trailing
+
+instance
+  ( Sym.Cons x y tail
+  , Sym.Append tag_ "d" tag
+  , EndTagFromTrailing x y tag otag trailing
+  ) =>
+  EndTagFromTrailing "d" tail tag_ otag trailing
+
+instance
+  ( Sym.Cons x y tail
+  , Sym.Append tag_ "e" tag
+  , EndTagFromTrailing x y tag otag trailing
+  ) =>
+  EndTagFromTrailing "e" tail tag_ otag trailing
+
+instance
+  ( Sym.Cons x y tail
+  , Sym.Append tag_ "f" tag
+  , EndTagFromTrailing x y tag otag trailing
+  ) =>
+  EndTagFromTrailing "f" tail tag_ otag trailing
+
+instance
+  ( Sym.Cons x y tail
+  , Sym.Append tag_ "g" tag
+  , EndTagFromTrailing x y tag otag trailing
+  ) =>
+  EndTagFromTrailing "g" tail tag_ otag trailing
+
+instance
+  ( Sym.Cons x y tail
+  , Sym.Append tag_ "h" tag
+  , EndTagFromTrailing x y tag otag trailing
+  ) =>
+  EndTagFromTrailing "h" tail tag_ otag trailing
+
+instance
+  ( Sym.Cons x y tail
+  , Sym.Append tag_ "i" tag
+  , EndTagFromTrailing x y tag otag trailing
+  ) =>
+  EndTagFromTrailing "i" tail tag_ otag trailing
+
+instance
+  ( Sym.Cons x y tail
+  , Sym.Append tag_ "j" tag
+  , EndTagFromTrailing x y tag otag trailing
+  ) =>
+  EndTagFromTrailing "j" tail tag_ otag trailing
+
+instance
+  ( Sym.Cons x y tail
+  , Sym.Append tag_ "k" tag
+  , EndTagFromTrailing x y tag otag trailing
+  ) =>
+  EndTagFromTrailing "k" tail tag_ otag trailing
+
+instance
+  ( Sym.Cons x y tail
+  , Sym.Append tag_ "l" tag
+  , EndTagFromTrailing x y tag otag trailing
+  ) =>
+  EndTagFromTrailing "l" tail tag_ otag trailing
+
+instance
+  ( Sym.Cons x y tail
+  , Sym.Append tag_ "m" tag
+  , EndTagFromTrailing x y tag otag trailing
+  ) =>
+  EndTagFromTrailing "m" tail tag_ otag trailing
+
+instance
+  ( Sym.Cons x y tail
+  , Sym.Append tag_ "n" tag
+  , EndTagFromTrailing x y tag otag trailing
+  ) =>
+  EndTagFromTrailing "n" tail tag_ otag trailing
+
+instance
+  ( Sym.Cons x y tail
+  , Sym.Append tag_ "o" tag
+  , EndTagFromTrailing x y tag otag trailing
+  ) =>
+  EndTagFromTrailing "o" tail tag_ otag trailing
+
+instance
+  ( Sym.Cons x y tail
+  , Sym.Append tag_ "p" tag
+  , EndTagFromTrailing x y tag otag trailing
+  ) =>
+  EndTagFromTrailing "p" tail tag_ otag trailing
+
+instance
+  ( Sym.Cons x y tail
+  , Sym.Append tag_ "q" tag
+  , EndTagFromTrailing x y tag otag trailing
+  ) =>
+  EndTagFromTrailing "q" tail tag_ otag trailing
+
+instance
+  ( Sym.Cons x y tail
+  , Sym.Append tag_ "r" tag
+  , EndTagFromTrailing x y tag otag trailing
+  ) =>
+  EndTagFromTrailing "r" tail tag_ otag trailing
+
+instance
+  ( Sym.Cons x y tail
+  , Sym.Append tag_ "s" tag
+  , EndTagFromTrailing x y tag otag trailing
+  ) =>
+  EndTagFromTrailing "s" tail tag_ otag trailing
+
+instance
+  ( Sym.Cons x y tail
+  , Sym.Append tag_ "t" tag
+  , EndTagFromTrailing x y tag otag trailing
+  ) =>
+  EndTagFromTrailing "t" tail tag_ otag trailing
+
+instance
+  ( Sym.Cons x y tail
+  , Sym.Append tag_ "u" tag
+  , EndTagFromTrailing x y tag otag trailing
+  ) =>
+  EndTagFromTrailing "u" tail tag_ otag trailing
+
+instance
+  ( Sym.Cons x y tail
+  , Sym.Append tag_ "v" tag
+  , EndTagFromTrailing x y tag otag trailing
+  ) =>
+  EndTagFromTrailing "v" tail tag_ otag trailing
+
+instance
+  ( Sym.Cons x y tail
+  , Sym.Append tag_ "w" tag
+  , EndTagFromTrailing x y tag otag trailing
+  ) =>
+  EndTagFromTrailing "w" tail tag_ otag trailing
+
+instance
+  ( Sym.Cons x y tail
+  , Sym.Append tag_ "x" tag
+  , EndTagFromTrailing x y tag otag trailing
+  ) =>
+  EndTagFromTrailing "x" tail tag_ otag trailing
+
+instance
+  ( Sym.Cons x y tail
+  , Sym.Append tag_ "y" tag
+  , EndTagFromTrailing x y tag otag trailing
+  ) =>
+  EndTagFromTrailing "y" tail tag_ otag trailing
+
+instance
+  ( Sym.Cons x y tail
+  , Sym.Append tag_ "z" tag
+  , EndTagFromTrailing x y tag otag trailing
+  ) =>
+  EndTagFromTrailing "z" tail tag_ otag trailing
+
+instance
+  ( Sym.Cons x y tail
+  , Sym.Append tag_ "-" tag
+  , EndTagFromTrailing x y tag otag trailing
+  ) =>
+  EndTagFromTrailing "-" tail tag_ otag trailing
+
+instance
+  ( Sym.Cons x y tail
+  , Sym.Append tag_ "0" tag
+  , EndTagFromTrailing x y tag otag trailing
+  ) =>
+  EndTagFromTrailing "0" tail tag_ otag trailing
+
+instance
+  ( Sym.Cons x y tail
+  , Sym.Append tag_ "1" tag
+  , EndTagFromTrailing x y tag otag trailing
+  ) =>
+  EndTagFromTrailing "1" tail tag_ otag trailing
+
+instance
+  ( Sym.Cons x y tail
+  , Sym.Append tag_ "2" tag
+  , EndTagFromTrailing x y tag otag trailing
+  ) =>
+  EndTagFromTrailing "2" tail tag_ otag trailing
+
+instance
+  ( Sym.Cons x y tail
+  , Sym.Append tag_ "3" tag
+  , EndTagFromTrailing x y tag otag trailing
+  ) =>
+  EndTagFromTrailing "3" tail tag_ otag trailing
+
+instance
+  ( Sym.Cons x y tail
+  , Sym.Append tag_ "4" tag
+  , EndTagFromTrailing x y tag otag trailing
+  ) =>
+  EndTagFromTrailing "4" tail tag_ otag trailing
+
+instance
+  ( Sym.Cons x y tail
+  , Sym.Append tag_ "5" tag
+  , EndTagFromTrailing x y tag otag trailing
+  ) =>
+  EndTagFromTrailing "5" tail tag_ otag trailing
+
+instance
+  ( Sym.Cons x y tail
+  , Sym.Append tag_ "6" tag
+  , EndTagFromTrailing x y tag otag trailing
+  ) =>
+  EndTagFromTrailing "6" tail tag_ otag trailing
+
+instance
+  ( Sym.Cons x y tail
+  , Sym.Append tag_ "7" tag
+  , EndTagFromTrailing x y tag otag trailing
+  ) =>
+  EndTagFromTrailing "7" tail tag_ otag trailing
+
+instance
+  ( Sym.Cons x y tail
+  , Sym.Append tag_ "8" tag
+  , EndTagFromTrailing x y tag otag trailing
+  ) =>
+  EndTagFromTrailing "8" tail tag_ otag trailing
+
+instance
+  ( Sym.Cons x y tail
+  , Sym.Append tag_ "9" tag
+  , EndTagFromTrailing x y tag otag trailing
+  ) =>
+  EndTagFromTrailing "9" tail tag_ otag trailing
+
 --
 instance EndTagFromTrailing ">" tail tag tag tail
 
