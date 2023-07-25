@@ -1,0 +1,36 @@
+package:
+  name: deku
+  publish:
+    version: 0.9.24
+    license: "Apache-2.0"
+  dependencies:
+  - deku-core
+  - deku-css
+  - deku-dom
+  test:
+    dependencies:
+    - aff-promise
+    - avar
+    - debug
+    - argonaut-codecs
+    - argonaut-core
+    - either
+    - console
+    - halogen
+    - halogen-hooks
+    - integers
+    - node-buffer
+    - node-fs
+    - node-path
+    - nullable
+    - spec
+    - refs
+    - strings
+    - random
+    - aff
+    - halogen-subscriptions
+    - exceptions
+    - partial
+    - tailrec
+    - web-html
+    main: Test.Main
