@@ -3,3 +3,4 @@ package:
   dependencies:
   - deku-core
   - hyrule
+  - css
