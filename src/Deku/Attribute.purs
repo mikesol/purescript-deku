@@ -16,10 +16,10 @@ module Deku.Attribute
   , cb
   , Cb(..)
   , xdata
-  , pureAttr
-  , (!:=)
-  , maybeAttr
-  , (?:=)
+  -- , pureAttr
+  -- , (!:=)
+  -- , maybeAttr
+  -- , (?:=)
   , mapAttr
   , (<:=>)
   ) where
@@ -113,30 +113,30 @@ infixr 5 attr as :=
 xdata :: forall e. String -> String -> Attribute e
 xdata k v = unsafeAttribute { key: "data-" <> k, value: Prop' v }
 
--- | A version of `attr` that creates a `pure` event fired immediately
--- | upon the element's creation. More commonly used in its alias `!:=`,
-pureAttr
-  :: forall a b e
-   . Attr e a b
-  => a
-  -> b
-  -> FRP.Event (Attribute e)
-pureAttr a b = pure (a := b)
+-- -- | A version of `attr` that creates a `pure` event fired immediately
+-- -- | upon the element's creation. More commonly used in its alias `!:=`,
+-- pureAttr
+--   :: forall a b e
+--    . Attr e a b
+--   => a
+--   -> b
+--   -> FRP.Event (Attribute e)
+-- pureAttr a b = pure (a := b)
 
-infixr 5 pureAttr as !:=
+-- infixr 5 pureAttr as !:=
 
--- | A version of `attr` that sets an attribute or listener only if the value is `Just`.
--- | More commonly used in its alias `?:=`.
-maybeAttr
-  :: forall a b e
-   . Attr e a b
-  => a
-  -> Maybe b
-  -> FRP.Event (Attribute e)
-maybeAttr a (Just b) = pure (a := b)
-maybeAttr _ Nothing = empty
+-- -- | A version of `attr` that sets an attribute or listener only if the value is `Just`.
+-- -- | More commonly used in its alias `?:=`.
+-- maybeAttr
+--   :: forall a b e
+--    . Attr e a b
+--   => a
+--   -> Maybe b
+--   -> FRP.Event (Attribute e)
+-- maybeAttr a (Just b) = pure (a := b)
+-- maybeAttr _ Nothing = empty
 
-infix 5 maybeAttr as ?:=
+-- infix 5 maybeAttr as ?:=
 
 -- | A version of `attr` that maps a value to an attribute or listener.
 -- | More commonly used in its alias `<:=>`.
