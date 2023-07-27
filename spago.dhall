@@ -1,5 +1,5 @@
 { name = "deku"
-, sources = [ "deku/**/*.purs", "deku-core/**/*.purs", "deku-dom/**/*.purs", "deku-css/**/*.purs" ]
+, sources = [ "deku/src/**/*.purs", "deku-core/**/*.purs", "deku-dom/**/*.purs", "deku-css/**/*.purs" ]
 , dependencies =
   [ "aff"
   , "arrays"

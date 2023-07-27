@@ -8,7 +8,6 @@ import DOM.Indexed.Common (nominal, typeIndexedAt)
 import Data.Array as Array
 import Data.Array.NonEmpty as NEA
 import Data.Maybe (Maybe(..))
-import Data.Tuple.Nested ((/\))
 import PureScript.CST.Types (Type, ClassFundep(..), Declaration, ImportDecl)
 import Tidy.Codegen (binaryOp, declClass, declImport, declImportAs, declInstance, declSignature, declValue, exprIdent, exprOp, importOp, importType, importValue, typeApp, typeArrow, typeConstrained, typeCtor, typeForall, typeString, typeVar, typeVarKinded)
 import Tidy.Codegen.Class (toName)

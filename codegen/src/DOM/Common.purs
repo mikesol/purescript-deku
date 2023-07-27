@@ -7,8 +7,6 @@ import DOM.Spec (Definition)
 import Data.Array as Array
 import Data.Foldable (foldl)
 import Data.Generic.Rep (class Generic)
-import Data.Map (Map)
-import Data.Map as Map
 import Data.Maybe (Maybe(..))
 import Data.Newtype (class Newtype, un)
 import Data.Set (Set)
