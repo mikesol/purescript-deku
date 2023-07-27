@@ -21,8 +21,8 @@ module Deku.DOM.Indexed
   , HTMLHeaderElement
   , HTMLFooterElement
   , HTMLAddressElement
-  , HTMLPElement
-  , HTMLHrElement
+  , HTMLParagraphElement
+  , HTMLHRElement
   , HTMLPreElement
   , HTMLBlockquoteElement
   , HTMLOlElement
@@ -37,7 +37,7 @@ module Deku.DOM.Indexed
   , HTMLMainElement
   , HTMLSearchElement
   , HTMLDivElement
-  , HTMLAElement
+  , HTMLAnchorElement
   , HTMLEmElement
   , HTMLStrongElement
   , HTMLSmallElement
@@ -64,7 +64,7 @@ module Deku.DOM.Indexed
   , HTMLBdiElement
   , HTMLBdoElement
   , HTMLSpanElement
-  , HTMLBrElement
+  , HTMLBRElement
   , HTMLWbrElement
   , HTMLInsElement
   , HTMLDelElement
@@ -87,7 +87,7 @@ module Deku.DOM.Indexed
   , HTMLTheadElement
   , HTMLTfootElement
   , HTMLTrElement
-  , HTMLTdElement
+  , HTMLTableDataCellElement
   , HTMLThElement
   , HTMLFormElement
   , HTMLLabelElement
@@ -97,7 +97,7 @@ module Deku.DOM.Indexed
   , HTMLDatalistElement
   , HTMLOptgroupElement
   , HTMLOptionElement
-  , HTMLTextareaElement
+  , HTMLTextAreaElement
   , HTMLOutputElement
   , HTMLProgressElement
   , HTMLMeterElement
@@ -1517,14 +1517,14 @@ type HTMLAddressElement (r :: Row Type) =
   | ARIAMixin (GlobalEventHandlers (Global (HtmlGlobal (HtmlsvgGlobal r))))
   )
 
-type HTMLPElement (r :: Row Type) =
-  ( __nominal :: Proxy "HTMLPElement"
+type HTMLParagraphElement (r :: Row Type) =
+  ( __nominal :: Proxy "HTMLParagraphElement"
   , align :: String
   | ARIAMixin (GlobalEventHandlers (Global (HtmlGlobal (HtmlsvgGlobal r))))
   )
 
-type HTMLHrElement (r :: Row Type) =
-  ( __nominal :: Proxy "HTMLHrElement"
+type HTMLHRElement (r :: Row Type) =
+  ( __nominal :: Proxy "HTMLHRElement"
   , width :: String
   , size :: String
   , noshade :: String
@@ -1618,8 +1618,8 @@ type HTMLDivElement (r :: Row Type) =
   | ARIAMixin (GlobalEventHandlers (Global (HtmlGlobal (HtmlsvgGlobal r))))
   )
 
-type HTMLAElement (r :: Row Type) =
-  ( __nominal :: Proxy "HTMLAElement"
+type HTMLAnchorElement (r :: Row Type) =
+  ( __nominal :: Proxy "HTMLAnchorElement"
   , urn :: String
   , rev :: String
   , name :: String
@@ -1773,8 +1773,8 @@ type HTMLSpanElement (r :: Row Type) =
   | ARIAMixin (GlobalEventHandlers (Global (HtmlGlobal (HtmlsvgGlobal r))))
   )
 
-type HTMLBrElement (r :: Row Type) =
-  ( __nominal :: Proxy "HTMLBrElement"
+type HTMLBRElement (r :: Row Type) =
+  ( __nominal :: Proxy "HTMLBRElement"
   , clear :: String
   | ARIAMixin (GlobalEventHandlers (Global (HtmlGlobal (HtmlsvgGlobal r))))
   )
@@ -2037,8 +2037,8 @@ type HTMLTrElement (r :: Row Type) =
   | ARIAMixin (GlobalEventHandlers (Global (HtmlGlobal (HtmlsvgGlobal r))))
   )
 
-type HTMLTdElement (r :: Row Type) =
-  ( __nominal :: Proxy "HTMLTdElement"
+type HTMLTableDataCellElement (r :: Row Type) =
+  ( __nominal :: Proxy "HTMLTableDataCellElement"
   , width :: String
   , valign :: String
   , nowrap :: String
@@ -2194,8 +2194,8 @@ type HTMLOptionElement (r :: Row Type) =
   | ARIAMixin (GlobalEventHandlers (Global (HtmlGlobal (HtmlsvgGlobal r))))
   )
 
-type HTMLTextareaElement (r :: Row Type) =
-  ( __nominal :: Proxy "HTMLTextareaElement"
+type HTMLTextAreaElement (r :: Row Type) =
+  ( __nominal :: Proxy "HTMLTextAreaElement"
   , autocomplete :: String
   , disabled :: String
   , minlength :: String
@@ -2857,7 +2857,7 @@ address_ :: Array Nut -> Nut
 address_ = elementify2 {-  -} "address" []
 
 p
-  :: Array (FRP.Event.Event (Deku.Attribute.Attribute (Index.Indexed (HTMLPElement ()))))
+  :: Array (FRP.Event.Event (Deku.Attribute.Attribute (Index.Indexed (HTMLParagraphElement ()))))
   -> Array Nut
   -> Nut
 p = elementify2 {-  -} "p"
@@ -2866,7 +2866,7 @@ p_ :: Array Nut -> Nut
 p_ = elementify2 {-  -} "p" []
 
 hr
-  :: Array (FRP.Event.Event (Deku.Attribute.Attribute (Index.Indexed (HTMLHrElement ()))))
+  :: Array (FRP.Event.Event (Deku.Attribute.Attribute (Index.Indexed (HTMLHRElement ()))))
   -> Array Nut
   -> Nut
 hr = elementify2 {-  -} "hr"
@@ -3001,7 +3001,7 @@ div_ :: Array Nut -> Nut
 div_ = elementify2 {-  -} "div" []
 
 a
-  :: Array (FRP.Event.Event (Deku.Attribute.Attribute (Index.Indexed (HTMLAElement ()))))
+  :: Array (FRP.Event.Event (Deku.Attribute.Attribute (Index.Indexed (HTMLAnchorElement ()))))
   -> Array Nut
   -> Nut
 a = elementify2 {-  -} "a"
@@ -3244,7 +3244,7 @@ span_ :: Array Nut -> Nut
 span_ = elementify2 {-  -} "span" []
 
 br
-  :: Array (FRP.Event.Event (Deku.Attribute.Attribute (Index.Indexed (HTMLBrElement ()))))
+  :: Array (FRP.Event.Event (Deku.Attribute.Attribute (Index.Indexed (HTMLBRElement ()))))
   -> Array Nut
   -> Nut
 br = elementify2 {-  -} "br"
@@ -3451,7 +3451,8 @@ tr_ :: Array Nut -> Nut
 tr_ = elementify2 {-  -} "tr" []
 
 td
-  :: Array (FRP.Event.Event (Deku.Attribute.Attribute (Index.Indexed (HTMLTdElement ()))))
+  :: Array
+       (FRP.Event.Event (Deku.Attribute.Attribute (Index.Indexed (HTMLTableDataCellElement ()))))
   -> Array Nut
   -> Nut
 td = elementify2 {-  -} "td"
@@ -3541,7 +3542,7 @@ option_ :: Array Nut -> Nut
 option_ = elementify2 {-  -} "option" []
 
 textarea
-  :: Array (FRP.Event.Event (Deku.Attribute.Attribute (Index.Indexed (HTMLTextareaElement ()))))
+  :: Array (FRP.Event.Event (Deku.Attribute.Attribute (Index.Indexed (HTMLTextAreaElement ()))))
   -> Array Nut
   -> Nut
 textarea = elementify2 {-  -} "textarea"

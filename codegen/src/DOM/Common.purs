@@ -158,13 +158,21 @@ reserved =
         ]
         
 tagToInterface :: TagNS -> String -> String
-tagToInterface ns tag = do
-    let formatted = ( capitalize $ unSnake tag )
-    if formatted `Array.elem` baseInterfaces then
-        formatted
-    else
-        prefix <> ( capitalize $ unSnake tag ) <> "Element"
-    
+tagToInterface ns tag = case tag of 
+    "a" -> "HTMLAnchorElement"
+    "textarea" -> "HTMLTextAreaElement"
+    "br" -> "HTMLBRElement"
+    "hr" -> "HTMLHRElement"
+    "td" -> "HTMLTableDataCellElement"
+    "p" -> "HTMLParagraphElement"
+
+    _ -> do
+        let formatted = capitalize $ unSnake tag
+        if formatted `Array.elem` baseInterfaces then
+            formatted
+        else
+            prefix <> formatted <> "Element"
+        
     where
 
     prefix = case ns of
@@ -455,57 +463,52 @@ typeNut :: Type Void
 typeNut =
     unsafePartial $ typeCtor "Nut"
 
-escapeBaseInterface :: String -> String /\ Ctor
-escapeBaseInterface name =
-    name /\ ( Ctor $ capitalize $ unSnake name ) 
-
 selfKey :: String
 selfKey =
     "@self@"
     
 -- | Elements that have an implementation in the current web-html package
-webElements :: Map String String
+webElements :: Array String
 webElements =
-    Map.fromFoldable
-        [ "HTMLAElement" /\ "HTMLAnchorElement"
-        , "HTMLAreaElement" /\ "HTMLAreaElement"
-        , "HTMLAudioElement" /\ "HTMLAudioElement"
-        , "HTMLBrElement" /\ "HTMLBRElement"
-        , "HTMLBaseElement" /\ "HTMLBaseElement"
-        , "HTMLBodyElement" /\ "HTMLBodyElement"
-        , "HTMLButtonElement" /\ "HTMLButtonElement"
-        , "HTMLCanvasElement" /\ "HTMLCanvasElement"
-        , "HTMLDivElement" /\ "HTMLDivElement"
-        , "HTMLEmbedElement" /\ "HTMLEmbedElement"
-        , "HTMLFormElement" /\ "HTMLFormElement"
-        , "HTMLHrElement" /\ "HTMLHRElement"
-        , "HTMLHeadElement" /\ "HTMLHeadElement"
-        , "HTMLHtmlElement" /\ "HTMLHtmlElement"
-        , "HTMLInputElement" /\ "HTMLInputElement"
-        , "HTMLLabelElement" /\ "HTMLLabelElement"
-        , "HTMLLegendElement" /\ "HTMLLegendElement"
-        , "HTMLLinkElement" /\ "HTMLLinkElement"
-        , "HTMLMapElement" /\ "HTMLMapElement"
-        , "HTMLMetaElement" /\ "HTMLMetaElement"
-        , "HTMLMeterElement" /\ "HTMLMeterElement"
-        , "HTMLObjectElement" /\ "HTMLObjectElement"
-        , "HTMLOptionElement" /\ "HTMLOptionElement"
-        , "HTMLOutputElement" /\ "HTMLOutputElement"
-        , "HTMLPElement" /\ "HTMLParagraphElement"
-        , "HTMLParamElement" /\ "HTMLParamElement"
-        , "HTMLPreElement" /\ "HTMLPreElement"
-        , "HTMLProgressElement" /\ "HTMLProgressElement"
-        , "HTMLScriptElement" /\ "HTMLScriptElement"
-        , "HTMLSelectElement" /\ "HTMLSelectElement"
-        , "HTMLSourceElement" /\ "HTMLSourceElement"
-        , "HTMLSpanElement" /\ "HTMLSpanElement"
-        , "HTMLStyleElement" /\ "HTMLStyleElement"
-        , "HTMLTdElement" /\ "HTMLTableDataCellElement"
-        , "HTMLTableElement" /\ "HTMLTableElement"
-        , "HTMLTemplateElement" /\ "HTMLTemplateElement"
-        , "HTMLTextareaElement" /\ "HTMLTextAreaElement"
-        , "HTMLTimeElement" /\ "HTMLTimeElement"
-        , "HTMLTitleElement" /\ "HTMLTitleElement"
-        , "HTMLTrackElement" /\ "HTMLTrackElement"
-        , "HTMLVideoElement" /\ "HTMLVideoElement"
-        ]
+    [ "HTMLAnchorElement"
+    , "HTMLAreaElement"
+    , "HTMLAudioElement"
+    , "HTMLBRElement"
+    , "HTMLBaseElement"
+    , "HTMLBodyElement"
+    , "HTMLButtonElement"
+    , "HTMLCanvasElement"
+    , "HTMLDivElement"
+    , "HTMLEmbedElement"
+    , "HTMLFormElement"
+    , "HTMLHRElement"
+    , "HTMLHeadElement"
+    , "HTMLHtmlElement"
+    , "HTMLInputElement"
+    , "HTMLLabelElement"
+    , "HTMLLegendElement"
+    , "HTMLLinkElement"
+    , "HTMLMapElement"
+    , "HTMLMetaElement"
+    , "HTMLMeterElement"
+    , "HTMLObjectElement"
+    , "HTMLOptionElement"
+    , "HTMLOutputElement"
+    , "HTMLParagraphElement"
+    , "HTMLParamElement"
+    , "HTMLPreElement"
+    , "HTMLProgressElement"
+    , "HTMLScriptElement"
+    , "HTMLSelectElement"
+    , "HTMLSourceElement"
+    , "HTMLSpanElement"
+    , "HTMLStyleElement"
+    , "HTMLTableDataCellElement"
+    , "HTMLTableElement"
+    , "HTMLTemplateElement"
+    , "HTMLTextAreaElement"
+    , "HTMLTimeElement"
+    , "HTMLTitleElement"
+    , "HTMLTrackElement"
+    , "HTMLVideoElement"
+    ]

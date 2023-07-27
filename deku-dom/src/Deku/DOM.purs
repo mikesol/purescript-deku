@@ -251,6 +251,8 @@ module Deku.DOM
   , module Deku.DOM.Attr.Codebase
   , module Deku.DOM.Attr.Codetype
   , module Deku.DOM.Attr.Color
+  , module Deku.DOM.Attr.ColorInterpolation
+  , module Deku.DOM.Attr.ColorInterpolationFilters
   , module Deku.DOM.Attr.Cols
   , module Deku.DOM.Attr.Colspan
   , module Deku.DOM.Attr.Compact
@@ -261,6 +263,7 @@ module Deku.DOM
   , module Deku.DOM.Attr.Cursor
   , module Deku.DOM.Attr.Cx
   , module Deku.DOM.Attr.Cy
+  , module Deku.DOM.Attr.D
   , module Deku.DOM.Attr.Data
   , module Deku.DOM.Attr.Datapagesize
   , module Deku.DOM.Attr.Datetime
@@ -287,8 +290,20 @@ module Deku.DOM
   , module Deku.DOM.Attr.Exponent
   , module Deku.DOM.Attr.Fetchpriority
   , module Deku.DOM.Attr.Fill
+  , module Deku.DOM.Attr.FillBreak
+  , module Deku.DOM.Attr.FillColor
+  , module Deku.DOM.Attr.FillImage
+  , module Deku.DOM.Attr.FillOpacity
+  , module Deku.DOM.Attr.FillOrigin
+  , module Deku.DOM.Attr.FillPosition
+  , module Deku.DOM.Attr.FillRepeat
+  , module Deku.DOM.Attr.FillRule
+  , module Deku.DOM.Attr.FillSize
+  , module Deku.DOM.Attr.Filter
   , module Deku.DOM.Attr.FilterRes
   , module Deku.DOM.Attr.FilterUnits
+  , module Deku.DOM.Attr.FloodColor
+  , module Deku.DOM.Attr.FloodOpacity
   , module Deku.DOM.Attr.FontFamily
   , module Deku.DOM.Attr.FontSize
   , module Deku.DOM.Attr.FontSizeAdjust
@@ -319,10 +334,12 @@ module Deku.DOM
   , module Deku.DOM.Attr.Hreflang
   , module Deku.DOM.Attr.Hspace
   , module Deku.DOM.Attr.HttpEquiv
+  , module Deku.DOM.Attr.ImageRendering
   , module Deku.DOM.Attr.Imagesizes
   , module Deku.DOM.Attr.Imagesrcset
   , module Deku.DOM.Attr.In
   , module Deku.DOM.Attr.In2
+  , module Deku.DOM.Attr.InlineSize
   , module Deku.DOM.Attr.Integrity
   , module Deku.DOM.Attr.Intercept
   , module Deku.DOM.Attr.Ismap
@@ -341,6 +358,7 @@ module Deku.DOM
   , module Deku.DOM.Attr.Leftmargin
   , module Deku.DOM.Attr.LengthAdjust
   , module Deku.DOM.Attr.LetterSpacing
+  , module Deku.DOM.Attr.LightingColor
   , module Deku.DOM.Attr.LimitingConeAngle
   , module Deku.DOM.Attr.Link
   , module Deku.DOM.Attr.List
@@ -352,7 +370,11 @@ module Deku.DOM
   , module Deku.DOM.Attr.Manifest
   , module Deku.DOM.Attr.Marginheight
   , module Deku.DOM.Attr.Marginwidth
+  , module Deku.DOM.Attr.Marker
+  , module Deku.DOM.Attr.MarkerEnd
   , module Deku.DOM.Attr.MarkerHeight
+  , module Deku.DOM.Attr.MarkerMid
+  , module Deku.DOM.Attr.MarkerStart
   , module Deku.DOM.Attr.MarkerUnits
   , module Deku.DOM.Attr.MarkerWidth
   , module Deku.DOM.Attr.Mask
@@ -386,6 +408,7 @@ module Deku.DOM
   , module Deku.DOM.Attr.Orient
   , module Deku.DOM.Attr.Origin
   , module Deku.DOM.Attr.Overflow
+  , module Deku.DOM.Attr.PaintOrder
   , module Deku.DOM.Attr.Path
   , module Deku.DOM.Attr.PathLength
   , module Deku.DOM.Attr.Pattern
@@ -395,6 +418,7 @@ module Deku.DOM
   , module Deku.DOM.Attr.Ping
   , module Deku.DOM.Attr.Placeholder
   , module Deku.DOM.Attr.Playsinline
+  , module Deku.DOM.Attr.PointerEvents
   , module Deku.DOM.Attr.Points
   , module Deku.DOM.Attr.PointsAtX
   , module Deku.DOM.Attr.PointsAtY
@@ -425,6 +449,8 @@ module Deku.DOM
   , module Deku.DOM.Attr.Rows
   , module Deku.DOM.Attr.Rowspan
   , module Deku.DOM.Attr.Rules
+  , module Deku.DOM.Attr.Rx
+  , module Deku.DOM.Attr.Ry
   , module Deku.DOM.Attr.Sandbox
   , module Deku.DOM.Attr.Scale
   , module Deku.DOM.Attr.Scheme
@@ -433,6 +459,10 @@ module Deku.DOM
   , module Deku.DOM.Attr.Seed
   , module Deku.DOM.Attr.Selected
   , module Deku.DOM.Attr.Shape
+  , module Deku.DOM.Attr.ShapeInside
+  , module Deku.DOM.Attr.ShapeMargin
+  , module Deku.DOM.Attr.ShapeRendering
+  , module Deku.DOM.Attr.ShapeSubtract
   , module Deku.DOM.Attr.Side
   , module Deku.DOM.Attr.Size
   , module Deku.DOM.Attr.Sizes
@@ -454,6 +484,24 @@ module Deku.DOM
   , module Deku.DOM.Attr.StitchTiles
   , module Deku.DOM.Attr.StopColor
   , module Deku.DOM.Attr.StopOpacity
+  , module Deku.DOM.Attr.Stroke
+  , module Deku.DOM.Attr.StrokeAlign
+  , module Deku.DOM.Attr.StrokeBreak
+  , module Deku.DOM.Attr.StrokeColor
+  , module Deku.DOM.Attr.StrokeDashCorner
+  , module Deku.DOM.Attr.StrokeDashJustify
+  , module Deku.DOM.Attr.StrokeDasharray
+  , module Deku.DOM.Attr.StrokeDashoffset
+  , module Deku.DOM.Attr.StrokeImage
+  , module Deku.DOM.Attr.StrokeLinecap
+  , module Deku.DOM.Attr.StrokeLinejoin
+  , module Deku.DOM.Attr.StrokeMiterlimit
+  , module Deku.DOM.Attr.StrokeOpacity
+  , module Deku.DOM.Attr.StrokeOrigin
+  , module Deku.DOM.Attr.StrokePosition
+  , module Deku.DOM.Attr.StrokeRepeat
+  , module Deku.DOM.Attr.StrokeSize
+  , module Deku.DOM.Attr.StrokeWidth
   , module Deku.DOM.Attr.Summary
   , module Deku.DOM.Attr.SurfaceScale
   , module Deku.DOM.Attr.SystemLanguage
@@ -462,8 +510,10 @@ module Deku.DOM
   , module Deku.DOM.Attr.TargetX
   , module Deku.DOM.Attr.TargetY
   , module Deku.DOM.Attr.Text
+  , module Deku.DOM.Attr.TextAnchor
   , module Deku.DOM.Attr.TextDecoration
   , module Deku.DOM.Attr.TextLength
+  , module Deku.DOM.Attr.TextRendering
   , module Deku.DOM.Attr.Title
   , module Deku.DOM.Attr.To
   , module Deku.DOM.Attr.Topmargin
@@ -478,6 +528,7 @@ module Deku.DOM
   , module Deku.DOM.Attr.Valign
   , module Deku.DOM.Attr.Value
   , module Deku.DOM.Attr.Values
+  , module Deku.DOM.Attr.VectorEffect
   , module Deku.DOM.Attr.Version
   , module Deku.DOM.Attr.ViewBox
   , module Deku.DOM.Attr.Visibility
@@ -674,57 +725,6 @@ module Deku.DOM
   , module Deku.DOM.Attr.Lang
   , module Deku.DOM.Attr.Tabindex
   , module Deku.DOM.Attr.Nonce
-  , module Deku.DOM.Attr.LightingColor
-  , module Deku.DOM.Attr.ColorInterpolationFilters
-  , module Deku.DOM.Attr.FloodOpacity
-  , module Deku.DOM.Attr.FloodColor
-  , module Deku.DOM.Attr.Filter
-  , module Deku.DOM.Attr.StrokeOpacity
-  , module Deku.DOM.Attr.Stroke
-  , module Deku.DOM.Attr.StrokeRepeat
-  , module Deku.DOM.Attr.StrokeSize
-  , module Deku.DOM.Attr.StrokePosition
-  , module Deku.DOM.Attr.StrokeOrigin
-  , module Deku.DOM.Attr.StrokeImage
-  , module Deku.DOM.Attr.StrokeColor
-  , module Deku.DOM.Attr.StrokeDashJustify
-  , module Deku.DOM.Attr.StrokeDashCorner
-  , module Deku.DOM.Attr.StrokeDashoffset
-  , module Deku.DOM.Attr.StrokeDasharray
-  , module Deku.DOM.Attr.StrokeBreak
-  , module Deku.DOM.Attr.StrokeMiterlimit
-  , module Deku.DOM.Attr.StrokeLinejoin
-  , module Deku.DOM.Attr.StrokeLinecap
-  , module Deku.DOM.Attr.StrokeAlign
-  , module Deku.DOM.Attr.StrokeWidth
-  , module Deku.DOM.Attr.FillOpacity
-  , module Deku.DOM.Attr.FillRepeat
-  , module Deku.DOM.Attr.FillSize
-  , module Deku.DOM.Attr.FillPosition
-  , module Deku.DOM.Attr.FillOrigin
-  , module Deku.DOM.Attr.FillImage
-  , module Deku.DOM.Attr.FillColor
-  , module Deku.DOM.Attr.FillBreak
-  , module Deku.DOM.Attr.FillRule
-  , module Deku.DOM.Attr.PointerEvents
-  , module Deku.DOM.Attr.ImageRendering
-  , module Deku.DOM.Attr.TextRendering
-  , module Deku.DOM.Attr.ShapeRendering
-  , module Deku.DOM.Attr.ColorInterpolation
-  , module Deku.DOM.Attr.PaintOrder
-  , module Deku.DOM.Attr.Marker
-  , module Deku.DOM.Attr.MarkerEnd
-  , module Deku.DOM.Attr.MarkerMid
-  , module Deku.DOM.Attr.MarkerStart
-  , module Deku.DOM.Attr.TextAnchor
-  , module Deku.DOM.Attr.ShapeMargin
-  , module Deku.DOM.Attr.ShapeSubtract
-  , module Deku.DOM.Attr.ShapeInside
-  , module Deku.DOM.Attr.InlineSize
-  , module Deku.DOM.Attr.D
-  , module Deku.DOM.Attr.VectorEffect
-  , module Deku.DOM.Attr.Ry
-  , module Deku.DOM.Attr.Rx
   , Self(..)
   , SelfT(..)
   , class TagToDeku
@@ -981,6 +981,8 @@ import Deku.DOM.Attr.Code (Code(..))
 import Deku.DOM.Attr.Codebase (Codebase(..))
 import Deku.DOM.Attr.Codetype (Codetype(..))
 import Deku.DOM.Attr.Color (Color(..))
+import Deku.DOM.Attr.ColorInterpolation (ColorInterpolation(..))
+import Deku.DOM.Attr.ColorInterpolationFilters (ColorInterpolationFilters(..))
 import Deku.DOM.Attr.Cols (Cols(..))
 import Deku.DOM.Attr.Colspan (Colspan(..))
 import Deku.DOM.Attr.Compact (Compact(..))
@@ -991,6 +993,7 @@ import Deku.DOM.Attr.Crossorigin (Crossorigin(..))
 import Deku.DOM.Attr.Cursor (Cursor(..))
 import Deku.DOM.Attr.Cx (Cx(..))
 import Deku.DOM.Attr.Cy (Cy(..))
+import Deku.DOM.Attr.D (D(..))
 import Deku.DOM.Attr.Data (Data(..))
 import Deku.DOM.Attr.Datapagesize (Datapagesize(..))
 import Deku.DOM.Attr.Datetime (Datetime(..))
@@ -1017,8 +1020,20 @@ import Deku.DOM.Attr.Event (Event(..))
 import Deku.DOM.Attr.Exponent (Exponent(..))
 import Deku.DOM.Attr.Fetchpriority (Fetchpriority(..))
 import Deku.DOM.Attr.Fill (Fill(..))
+import Deku.DOM.Attr.FillBreak (FillBreak(..))
+import Deku.DOM.Attr.FillColor (FillColor(..))
+import Deku.DOM.Attr.FillImage (FillImage(..))
+import Deku.DOM.Attr.FillOpacity (FillOpacity(..))
+import Deku.DOM.Attr.FillOrigin (FillOrigin(..))
+import Deku.DOM.Attr.FillPosition (FillPosition(..))
+import Deku.DOM.Attr.FillRepeat (FillRepeat(..))
+import Deku.DOM.Attr.FillRule (FillRule(..))
+import Deku.DOM.Attr.FillSize (FillSize(..))
+import Deku.DOM.Attr.Filter (Filter(..))
 import Deku.DOM.Attr.FilterRes (FilterRes(..))
 import Deku.DOM.Attr.FilterUnits (FilterUnits(..))
+import Deku.DOM.Attr.FloodColor (FloodColor(..))
+import Deku.DOM.Attr.FloodOpacity (FloodOpacity(..))
 import Deku.DOM.Attr.FontFamily (FontFamily(..))
 import Deku.DOM.Attr.FontSize (FontSize(..))
 import Deku.DOM.Attr.FontSizeAdjust (FontSizeAdjust(..))
@@ -1049,10 +1064,12 @@ import Deku.DOM.Attr.Href (Href(..))
 import Deku.DOM.Attr.Hreflang (Hreflang(..))
 import Deku.DOM.Attr.Hspace (Hspace(..))
 import Deku.DOM.Attr.HttpEquiv (HttpEquiv(..))
+import Deku.DOM.Attr.ImageRendering (ImageRendering(..))
 import Deku.DOM.Attr.Imagesizes (Imagesizes(..))
 import Deku.DOM.Attr.Imagesrcset (Imagesrcset(..))
 import Deku.DOM.Attr.In (In(..))
 import Deku.DOM.Attr.In2 (In2(..))
+import Deku.DOM.Attr.InlineSize (InlineSize(..))
 import Deku.DOM.Attr.Integrity (Integrity(..))
 import Deku.DOM.Attr.Intercept (Intercept(..))
 import Deku.DOM.Attr.Ismap (Ismap(..))
@@ -1071,6 +1088,7 @@ import Deku.DOM.Attr.Language (Language(..))
 import Deku.DOM.Attr.Leftmargin (Leftmargin(..))
 import Deku.DOM.Attr.LengthAdjust (LengthAdjust(..))
 import Deku.DOM.Attr.LetterSpacing (LetterSpacing(..))
+import Deku.DOM.Attr.LightingColor (LightingColor(..))
 import Deku.DOM.Attr.LimitingConeAngle (LimitingConeAngle(..))
 import Deku.DOM.Attr.Link (Link(..))
 import Deku.DOM.Attr.List (List(..))
@@ -1082,7 +1100,11 @@ import Deku.DOM.Attr.Lowsrc (Lowsrc(..))
 import Deku.DOM.Attr.Manifest (Manifest(..))
 import Deku.DOM.Attr.Marginheight (Marginheight(..))
 import Deku.DOM.Attr.Marginwidth (Marginwidth(..))
+import Deku.DOM.Attr.Marker (Marker(..))
+import Deku.DOM.Attr.MarkerEnd (MarkerEnd(..))
 import Deku.DOM.Attr.MarkerHeight (MarkerHeight(..))
+import Deku.DOM.Attr.MarkerMid (MarkerMid(..))
+import Deku.DOM.Attr.MarkerStart (MarkerStart(..))
 import Deku.DOM.Attr.MarkerUnits (MarkerUnits(..))
 import Deku.DOM.Attr.MarkerWidth (MarkerWidth(..))
 import Deku.DOM.Attr.Mask (Mask(..))
@@ -1116,6 +1138,7 @@ import Deku.DOM.Attr.Order (Order(..))
 import Deku.DOM.Attr.Orient (Orient(..))
 import Deku.DOM.Attr.Origin (Origin(..))
 import Deku.DOM.Attr.Overflow (Overflow(..))
+import Deku.DOM.Attr.PaintOrder (PaintOrder(..))
 import Deku.DOM.Attr.Path (Path(..))
 import Deku.DOM.Attr.PathLength (PathLength(..))
 import Deku.DOM.Attr.Pattern (Pattern(..))
@@ -1125,6 +1148,7 @@ import Deku.DOM.Attr.PatternUnits (PatternUnits(..))
 import Deku.DOM.Attr.Ping (Ping(..))
 import Deku.DOM.Attr.Placeholder (Placeholder(..))
 import Deku.DOM.Attr.Playsinline (Playsinline(..))
+import Deku.DOM.Attr.PointerEvents (PointerEvents(..))
 import Deku.DOM.Attr.Points (Points(..))
 import Deku.DOM.Attr.PointsAtX (PointsAtX(..))
 import Deku.DOM.Attr.PointsAtY (PointsAtY(..))
@@ -1155,6 +1179,8 @@ import Deku.DOM.Attr.Rotate (Rotate(..))
 import Deku.DOM.Attr.Rows (Rows(..))
 import Deku.DOM.Attr.Rowspan (Rowspan(..))
 import Deku.DOM.Attr.Rules (Rules(..))
+import Deku.DOM.Attr.Rx (Rx(..))
+import Deku.DOM.Attr.Ry (Ry(..))
 import Deku.DOM.Attr.Sandbox (Sandbox(..))
 import Deku.DOM.Attr.Scale (Scale(..))
 import Deku.DOM.Attr.Scheme (Scheme(..))
@@ -1163,6 +1189,10 @@ import Deku.DOM.Attr.Scrolling (Scrolling(..))
 import Deku.DOM.Attr.Seed (Seed(..))
 import Deku.DOM.Attr.Selected (Selected(..))
 import Deku.DOM.Attr.Shape (Shape(..))
+import Deku.DOM.Attr.ShapeInside (ShapeInside(..))
+import Deku.DOM.Attr.ShapeMargin (ShapeMargin(..))
+import Deku.DOM.Attr.ShapeRendering (ShapeRendering(..))
+import Deku.DOM.Attr.ShapeSubtract (ShapeSubtract(..))
 import Deku.DOM.Attr.Side (Side(..))
 import Deku.DOM.Attr.Size (Size(..))
 import Deku.DOM.Attr.Sizes (Sizes(..))
@@ -1184,6 +1214,24 @@ import Deku.DOM.Attr.Step (Step(..))
 import Deku.DOM.Attr.StitchTiles (StitchTiles(..))
 import Deku.DOM.Attr.StopColor (StopColor(..))
 import Deku.DOM.Attr.StopOpacity (StopOpacity(..))
+import Deku.DOM.Attr.Stroke (Stroke(..))
+import Deku.DOM.Attr.StrokeAlign (StrokeAlign(..))
+import Deku.DOM.Attr.StrokeBreak (StrokeBreak(..))
+import Deku.DOM.Attr.StrokeColor (StrokeColor(..))
+import Deku.DOM.Attr.StrokeDashCorner (StrokeDashCorner(..))
+import Deku.DOM.Attr.StrokeDashJustify (StrokeDashJustify(..))
+import Deku.DOM.Attr.StrokeDasharray (StrokeDasharray(..))
+import Deku.DOM.Attr.StrokeDashoffset (StrokeDashoffset(..))
+import Deku.DOM.Attr.StrokeImage (StrokeImage(..))
+import Deku.DOM.Attr.StrokeLinecap (StrokeLinecap(..))
+import Deku.DOM.Attr.StrokeLinejoin (StrokeLinejoin(..))
+import Deku.DOM.Attr.StrokeMiterlimit (StrokeMiterlimit(..))
+import Deku.DOM.Attr.StrokeOpacity (StrokeOpacity(..))
+import Deku.DOM.Attr.StrokeOrigin (StrokeOrigin(..))
+import Deku.DOM.Attr.StrokePosition (StrokePosition(..))
+import Deku.DOM.Attr.StrokeRepeat (StrokeRepeat(..))
+import Deku.DOM.Attr.StrokeSize (StrokeSize(..))
+import Deku.DOM.Attr.StrokeWidth (StrokeWidth(..))
 import Deku.DOM.Attr.Summary (Summary(..))
 import Deku.DOM.Attr.SurfaceScale (SurfaceScale(..))
 import Deku.DOM.Attr.SystemLanguage (SystemLanguage(..))
@@ -1192,8 +1240,10 @@ import Deku.DOM.Attr.Target (Target(..))
 import Deku.DOM.Attr.TargetX (TargetX(..))
 import Deku.DOM.Attr.TargetY (TargetY(..))
 import Deku.DOM.Attr.Text (Text(..))
+import Deku.DOM.Attr.TextAnchor (TextAnchor(..))
 import Deku.DOM.Attr.TextDecoration (TextDecoration(..))
 import Deku.DOM.Attr.TextLength (TextLength(..))
+import Deku.DOM.Attr.TextRendering (TextRendering(..))
 import Deku.DOM.Attr.Title (Title(..))
 import Deku.DOM.Attr.To (To(..))
 import Deku.DOM.Attr.Topmargin (Topmargin(..))
@@ -1208,6 +1258,7 @@ import Deku.DOM.Attr.Usemap (Usemap(..))
 import Deku.DOM.Attr.Valign (Valign(..))
 import Deku.DOM.Attr.Value (Value(..))
 import Deku.DOM.Attr.Values (Values(..))
+import Deku.DOM.Attr.VectorEffect (VectorEffect(..))
 import Deku.DOM.Attr.Version (Version(..))
 import Deku.DOM.Attr.ViewBox (ViewBox(..))
 import Deku.DOM.Attr.Visibility (Visibility(..))
@@ -1404,57 +1455,6 @@ import Deku.DOM.Attr.Translate (Translate(..))
 import Deku.DOM.Attr.Lang (Lang(..))
 import Deku.DOM.Attr.Tabindex (Tabindex(..))
 import Deku.DOM.Attr.Nonce (Nonce(..))
-import Deku.DOM.Attr.LightingColor (LightingColor(..))
-import Deku.DOM.Attr.ColorInterpolationFilters (ColorInterpolationFilters(..))
-import Deku.DOM.Attr.FloodOpacity (FloodOpacity(..))
-import Deku.DOM.Attr.FloodColor (FloodColor(..))
-import Deku.DOM.Attr.Filter (Filter(..))
-import Deku.DOM.Attr.StrokeOpacity (StrokeOpacity(..))
-import Deku.DOM.Attr.Stroke (Stroke(..))
-import Deku.DOM.Attr.StrokeRepeat (StrokeRepeat(..))
-import Deku.DOM.Attr.StrokeSize (StrokeSize(..))
-import Deku.DOM.Attr.StrokePosition (StrokePosition(..))
-import Deku.DOM.Attr.StrokeOrigin (StrokeOrigin(..))
-import Deku.DOM.Attr.StrokeImage (StrokeImage(..))
-import Deku.DOM.Attr.StrokeColor (StrokeColor(..))
-import Deku.DOM.Attr.StrokeDashJustify (StrokeDashJustify(..))
-import Deku.DOM.Attr.StrokeDashCorner (StrokeDashCorner(..))
-import Deku.DOM.Attr.StrokeDashoffset (StrokeDashoffset(..))
-import Deku.DOM.Attr.StrokeDasharray (StrokeDasharray(..))
-import Deku.DOM.Attr.StrokeBreak (StrokeBreak(..))
-import Deku.DOM.Attr.StrokeMiterlimit (StrokeMiterlimit(..))
-import Deku.DOM.Attr.StrokeLinejoin (StrokeLinejoin(..))
-import Deku.DOM.Attr.StrokeLinecap (StrokeLinecap(..))
-import Deku.DOM.Attr.StrokeAlign (StrokeAlign(..))
-import Deku.DOM.Attr.StrokeWidth (StrokeWidth(..))
-import Deku.DOM.Attr.FillOpacity (FillOpacity(..))
-import Deku.DOM.Attr.FillRepeat (FillRepeat(..))
-import Deku.DOM.Attr.FillSize (FillSize(..))
-import Deku.DOM.Attr.FillPosition (FillPosition(..))
-import Deku.DOM.Attr.FillOrigin (FillOrigin(..))
-import Deku.DOM.Attr.FillImage (FillImage(..))
-import Deku.DOM.Attr.FillColor (FillColor(..))
-import Deku.DOM.Attr.FillBreak (FillBreak(..))
-import Deku.DOM.Attr.FillRule (FillRule(..))
-import Deku.DOM.Attr.PointerEvents (PointerEvents(..))
-import Deku.DOM.Attr.ImageRendering (ImageRendering(..))
-import Deku.DOM.Attr.TextRendering (TextRendering(..))
-import Deku.DOM.Attr.ShapeRendering (ShapeRendering(..))
-import Deku.DOM.Attr.ColorInterpolation (ColorInterpolation(..))
-import Deku.DOM.Attr.PaintOrder (PaintOrder(..))
-import Deku.DOM.Attr.Marker (Marker(..))
-import Deku.DOM.Attr.MarkerEnd (MarkerEnd(..))
-import Deku.DOM.Attr.MarkerMid (MarkerMid(..))
-import Deku.DOM.Attr.MarkerStart (MarkerStart(..))
-import Deku.DOM.Attr.TextAnchor (TextAnchor(..))
-import Deku.DOM.Attr.ShapeMargin (ShapeMargin(..))
-import Deku.DOM.Attr.ShapeSubtract (ShapeSubtract(..))
-import Deku.DOM.Attr.ShapeInside (ShapeInside(..))
-import Deku.DOM.Attr.InlineSize (InlineSize(..))
-import Deku.DOM.Attr.D (D(..))
-import Deku.DOM.Attr.VectorEffect (VectorEffect(..))
-import Deku.DOM.Attr.Ry (Ry(..))
-import Deku.DOM.Attr.Rx (Rx(..))
 import Effect as Effect
 import Data.Unit as Data.Unit
 import Deku.Attribute as Deku.Attribute
@@ -1462,16 +1462,16 @@ import Unsafe.Coerce as Unsafe.Coerce
 import Web.HTML.HTMLAnchorElement (HTMLAnchorElement) as Web
 import Web.HTML.HTMLAreaElement (HTMLAreaElement) as Web
 import Web.HTML.HTMLAudioElement (HTMLAudioElement) as Web
+import Web.HTML.HTMLBRElement (HTMLBRElement) as Web
 import Web.HTML.HTMLBaseElement (HTMLBaseElement) as Web
 import Web.HTML.HTMLBodyElement (HTMLBodyElement) as Web
-import Web.HTML.HTMLBRElement (HTMLBRElement) as Web
 import Web.HTML.HTMLButtonElement (HTMLButtonElement) as Web
 import Web.HTML.HTMLCanvasElement (HTMLCanvasElement) as Web
 import Web.HTML.HTMLDivElement (HTMLDivElement) as Web
 import Web.HTML.HTMLEmbedElement (HTMLEmbedElement) as Web
 import Web.HTML.HTMLFormElement (HTMLFormElement) as Web
-import Web.HTML.HTMLHeadElement (HTMLHeadElement) as Web
 import Web.HTML.HTMLHRElement (HTMLHRElement) as Web
+import Web.HTML.HTMLHeadElement (HTMLHeadElement) as Web
 import Web.HTML.HTMLHtmlElement (HTMLHtmlElement) as Web
 import Web.HTML.HTMLInputElement (HTMLInputElement) as Web
 import Web.HTML.HTMLLabelElement (HTMLLabelElement) as Web
@@ -1492,8 +1492,8 @@ import Web.HTML.HTMLSelectElement (HTMLSelectElement) as Web
 import Web.HTML.HTMLSourceElement (HTMLSourceElement) as Web
 import Web.HTML.HTMLSpanElement (HTMLSpanElement) as Web
 import Web.HTML.HTMLStyleElement (HTMLStyleElement) as Web
-import Web.HTML.HTMLTableElement (HTMLTableElement) as Web
 import Web.HTML.HTMLTableDataCellElement (HTMLTableDataCellElement) as Web
+import Web.HTML.HTMLTableElement (HTMLTableElement) as Web
 import Web.HTML.HTMLTemplateElement (HTMLTemplateElement) as Web
 import Web.HTML.HTMLTextAreaElement (HTMLTextAreaElement) as Web
 import Web.HTML.HTMLTimeElement (HTMLTimeElement) as Web

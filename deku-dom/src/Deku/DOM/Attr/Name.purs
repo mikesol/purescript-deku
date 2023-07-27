@@ -3,7 +3,6 @@ module Deku.DOM.Attr.Name where
 import Deku.Attribute as Deku.Attribute
 import Data.Unit as Data.Unit
 import Control.Semigroupoid ((<<<))
-import Deku.DOM.Elt.A (A_)
 import Deku.DOM.Elt.Button (Button_)
 import Deku.DOM.Elt.Embed (Embed_)
 import Deku.DOM.Elt.Fieldset (Fieldset_)
@@ -24,9 +23,6 @@ data Name = Name
 
 instance Deku.Attribute.Attr everything Name Data.Unit.Unit where
   attr _ _ = Deku.Attribute.unsafeAttribute { key: "name", value: Deku.Attribute.unset' }
-
-instance Deku.Attribute.Attr A_ Name String where
-  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "name", value: _ } <<< Deku.Attribute.prop'
 
 instance Deku.Attribute.Attr Button_ Name String where
   attr _ = Deku.Attribute.unsafeAttribute <<< { key: "name", value: _ } <<< Deku.Attribute.prop'

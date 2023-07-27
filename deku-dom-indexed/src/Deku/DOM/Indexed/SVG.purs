@@ -28,7 +28,7 @@ module Deku.DOM.Indexed.SVG
   , SVGStopElement
   , SVGPatternElement
   , SVGScriptElement
-  , SVGAElement
+  , HTMLAnchorElement
   , SVGViewElement
   , SVGFilterPrimitiveElement
   , SVGFilterElement
@@ -895,8 +895,8 @@ type SVGScriptElement (r :: Row Type) =
   | SvgPresentation (ARIAMixin (GlobalEventHandlers (Global (SvgGlobal (HtmlsvgGlobal r)))))
   )
 
-type SVGAElement (r :: Row Type) =
-  ( __nominal :: Proxy "SVGAElement"
+type HTMLAnchorElement (r :: Row Type) =
+  ( __nominal :: Proxy "HTMLAnchorElement"
   , referrerpolicy :: String
   , type :: String
   , hreflang :: String
@@ -1604,7 +1604,7 @@ script_ :: Array Nut -> Nut
 script_ = elementify2 {- http://www.w3.org/2000/svg -} "script" []
 
 a
-  :: Array (FRP.Event.Event (Deku.Attribute.Attribute (Index.Indexed (SVGAElement ()))))
+  :: Array (FRP.Event.Event (Deku.Attribute.Attribute (Index.Indexed (HTMLAnchorElement ()))))
   -> Array Nut
   -> Nut
 a = elementify2 {- http://www.w3.org/2000/svg -} "a"

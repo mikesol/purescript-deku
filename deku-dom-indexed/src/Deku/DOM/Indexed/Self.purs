@@ -10,16 +10,16 @@ import Web.DOM.Element (Element) as Web
 import Web.HTML.HTMLAnchorElement (HTMLAnchorElement) as Web
 import Web.HTML.HTMLAreaElement (HTMLAreaElement) as Web
 import Web.HTML.HTMLAudioElement (HTMLAudioElement) as Web
+import Web.HTML.HTMLBRElement (HTMLBRElement) as Web
 import Web.HTML.HTMLBaseElement (HTMLBaseElement) as Web
 import Web.HTML.HTMLBodyElement (HTMLBodyElement) as Web
-import Web.HTML.HTMLBRElement (HTMLBRElement) as Web
 import Web.HTML.HTMLButtonElement (HTMLButtonElement) as Web
 import Web.HTML.HTMLCanvasElement (HTMLCanvasElement) as Web
 import Web.HTML.HTMLDivElement (HTMLDivElement) as Web
 import Web.HTML.HTMLEmbedElement (HTMLEmbedElement) as Web
 import Web.HTML.HTMLFormElement (HTMLFormElement) as Web
-import Web.HTML.HTMLHeadElement (HTMLHeadElement) as Web
 import Web.HTML.HTMLHRElement (HTMLHRElement) as Web
+import Web.HTML.HTMLHeadElement (HTMLHeadElement) as Web
 import Web.HTML.HTMLHtmlElement (HTMLHtmlElement) as Web
 import Web.HTML.HTMLInputElement (HTMLInputElement) as Web
 import Web.HTML.HTMLLabelElement (HTMLLabelElement) as Web
@@ -40,8 +40,8 @@ import Web.HTML.HTMLSelectElement (HTMLSelectElement) as Web
 import Web.HTML.HTMLSourceElement (HTMLSourceElement) as Web
 import Web.HTML.HTMLSpanElement (HTMLSpanElement) as Web
 import Web.HTML.HTMLStyleElement (HTMLStyleElement) as Web
-import Web.HTML.HTMLTableElement (HTMLTableElement) as Web
 import Web.HTML.HTMLTableDataCellElement (HTMLTableDataCellElement) as Web
+import Web.HTML.HTMLTableElement (HTMLTableElement) as Web
 import Web.HTML.HTMLTemplateElement (HTMLTemplateElement) as Web
 import Web.HTML.HTMLTextAreaElement (HTMLTextAreaElement) as Web
 import Web.HTML.HTMLTimeElement (HTMLTimeElement) as Web
@@ -74,19 +74,19 @@ self_
 self_ = self <<< Applicative.pure
 
 instance IsSelf Web.Element "global"
-instance IsSelf Web.HTMLAnchorElement "HTMLAElement"
+instance IsSelf Web.HTMLAnchorElement "HTMLAnchorElement"
 instance IsSelf Web.HTMLAreaElement "HTMLAreaElement"
 instance IsSelf Web.HTMLAudioElement "HTMLAudioElement"
+instance IsSelf Web.HTMLBRElement "HTMLBRElement"
 instance IsSelf Web.HTMLBaseElement "HTMLBaseElement"
 instance IsSelf Web.HTMLBodyElement "HTMLBodyElement"
-instance IsSelf Web.HTMLBRElement "HTMLBrElement"
 instance IsSelf Web.HTMLButtonElement "HTMLButtonElement"
 instance IsSelf Web.HTMLCanvasElement "HTMLCanvasElement"
 instance IsSelf Web.HTMLDivElement "HTMLDivElement"
 instance IsSelf Web.HTMLEmbedElement "HTMLEmbedElement"
 instance IsSelf Web.HTMLFormElement "HTMLFormElement"
+instance IsSelf Web.HTMLHRElement "HTMLHRElement"
 instance IsSelf Web.HTMLHeadElement "HTMLHeadElement"
-instance IsSelf Web.HTMLHRElement "HTMLHrElement"
 instance IsSelf Web.HTMLHtmlElement "HTMLHtmlElement"
 instance IsSelf Web.HTMLInputElement "HTMLInputElement"
 instance IsSelf Web.HTMLLabelElement "HTMLLabelElement"
@@ -98,7 +98,7 @@ instance IsSelf Web.HTMLMeterElement "HTMLMeterElement"
 instance IsSelf Web.HTMLObjectElement "HTMLObjectElement"
 instance IsSelf Web.HTMLOptionElement "HTMLOptionElement"
 instance IsSelf Web.HTMLOutputElement "HTMLOutputElement"
-instance IsSelf Web.HTMLParagraphElement "HTMLPElement"
+instance IsSelf Web.HTMLParagraphElement "HTMLParagraphElement"
 instance IsSelf Web.HTMLParamElement "HTMLParamElement"
 instance IsSelf Web.HTMLPreElement "HTMLPreElement"
 instance IsSelf Web.HTMLProgressElement "HTMLProgressElement"
@@ -107,10 +107,10 @@ instance IsSelf Web.HTMLSelectElement "HTMLSelectElement"
 instance IsSelf Web.HTMLSourceElement "HTMLSourceElement"
 instance IsSelf Web.HTMLSpanElement "HTMLSpanElement"
 instance IsSelf Web.HTMLStyleElement "HTMLStyleElement"
+instance IsSelf Web.HTMLTableDataCellElement "HTMLTableDataCellElement"
 instance IsSelf Web.HTMLTableElement "HTMLTableElement"
-instance IsSelf Web.HTMLTableDataCellElement "HTMLTdElement"
 instance IsSelf Web.HTMLTemplateElement "HTMLTemplateElement"
-instance IsSelf Web.HTMLTextAreaElement "HTMLTextareaElement"
+instance IsSelf Web.HTMLTextAreaElement "HTMLTextAreaElement"
 instance IsSelf Web.HTMLTimeElement "HTMLTimeElement"
 instance IsSelf Web.HTMLTitleElement "HTMLTitleElement"
 instance IsSelf Web.HTMLTrackElement "HTMLTrackElement"

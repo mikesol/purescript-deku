@@ -7,11 +7,9 @@ import Comment (commentDecl)
 import DOM.Attr as Attr
 import DOM.Common (Ctor(..), Element, TypeStub(..), attrModule, attrType, eltModule, eltType, exprHandler, handler, selfKey, typeArrayed, typeAttributed, typeEvented, typeImports, typeNut)
 import DOM.Elt as Elt
+import Data.Array as Array
 import Data.Array.NonEmpty as NEA
-import Data.Map (Map)
-import Data.Map as Map
 import Data.Maybe (Maybe(..))
-import Data.Tuple.Nested ((/\))
 import PureScript.CST.Types (ClassFundep(..), Declaration, Export, ImportDecl, Type)
 import Safe.Coerce (coerce)
 import Tidy.Codegen (binderVar, binderWildcard, dataCtor, declClass, declData, declImport, declImportAs, declImportHiding, declInstance, declSignature, declValue, exportClass, exportModule, exportTypeAll, exportValue, exprApp, exprIdent, importOp, importType, importTypeAll, importValue, instValue, typeApp, typeArrow, typeCtor, typeForall, typeString, typeVar, typeVarKinded)
@@ -29,12 +27,12 @@ exports elts attrs =
         , exportValue "unsafeCustomElement"
         ]
 
-imports :: Partial => Array Element -> Array Ctor -> Map String String -> Array ( ImportDecl Void )
+imports :: Partial => Array Element -> Array Ctor -> Array String -> Array ( ImportDecl Void )
 imports elts attrs dom =
     map eltImport elts
         <> map attrImport attrs
         <> typeImports [ TypeSelfHandler ]
-        <> flip map ( Map.toUnfoldable dom ) (\( _ /\ e ) -> declImportAs ( "Web.HTML." <> e ) [ importType e ] "Web" )
+        <> flip map dom (\ e -> declImportAs ( "Web.HTML." <> e ) [ importType e ] "Web" )
         <>
             [ declImportAs ( "Web.DOM.Element" ) [ importType "Element" ] "Web"
             , declImport "Type.Proxy" [ importType "Proxy" ]
@@ -62,7 +60,7 @@ imports elts attrs dom =
         let typeMarker = attrType ctor
         declImport ( attrModule ctor ) [ importTypeAll typeMarker ]
 
-generate :: Partial => Array Element -> Map String String -> Array ( Declaration Void )
+generate :: Partial => Array Element -> Array String -> Array ( Declaration Void )
 generate elts dom =
     [ commentDecl
         [ "Creates a special event where an Deku element can have its raw DOM element"
@@ -116,18 +114,15 @@ generate elts dom =
                 []
             ]
         )
-    <> bind elts
-        (\elt -> case Map.lookup ( coerce elt.interface ) dom of
-            Just web ->
-                [ declInstance Nothing [] Attr.typeAttr
-                    [ typeCtor $ eltType elt.ctor, typeSelfT, selfHandler $ typeCtor $ "Web." <> web ]
-                    [ instValue "attr" [ binderWildcard ] $ exprHandler selfKey $ handler TypeSelfHandler
-                    ]
+    <> bind elts \elt ->
+        if coerce elt.interface `Array.elem` dom then 
+            [ declInstance Nothing [] Attr.typeAttr
+                [ typeCtor $ eltType elt.ctor, typeSelfT, selfHandler $ typeCtor $ "Web." <> coerce elt.interface ]
+                [ instValue "attr" [ binderWildcard ] $ exprHandler selfKey $ handler TypeSelfHandler
                 ]
-
-            Nothing ->
-                []
-        )
+            ]
+        else
+            []
 
 selfHandler :: Partial => Type Void -> Type Void
 selfHandler domType =

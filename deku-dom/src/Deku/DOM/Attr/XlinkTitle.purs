@@ -3,6 +3,7 @@ module Deku.DOM.Attr.XlinkTitle where
 import Deku.Attribute as Deku.Attribute
 import Data.Unit as Data.Unit
 import Control.Semigroupoid ((<<<))
+import Deku.DOM.Elt.A (A_)
 import Deku.DOM.Elt.Image (Image_)
 import Deku.DOM.Elt.LinearGradient (LinearGradient_)
 import Deku.DOM.Elt.Pattern (Pattern_)
@@ -14,6 +15,10 @@ data XlinkTitle = XlinkTitle
 
 instance Deku.Attribute.Attr everything XlinkTitle Data.Unit.Unit where
   attr _ _ = Deku.Attribute.unsafeAttribute { key: "xlink:title", value: Deku.Attribute.unset' }
+
+instance Deku.Attribute.Attr A_ XlinkTitle String where
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "xlink:title", value: _ } <<<
+    Deku.Attribute.prop'
 
 instance Deku.Attribute.Attr Image_ XlinkTitle String where
   attr _ = Deku.Attribute.unsafeAttribute <<< { key: "xlink:title", value: _ } <<<

@@ -7,8 +7,6 @@ import DOM.Common (TypeStub(..), declHandler, handler, selfKey, typeAttributed, 
 import DOM.Indexed.Common (nominal, typeIndexedAt)
 import Data.Array as Array
 import Data.Array.NonEmpty as NEA
-import Data.Map (Map)
-import Data.Map as Map
 import Data.Maybe (Maybe(..))
 import Data.Tuple.Nested ((/\))
 import PureScript.CST.Types (Type, ClassFundep(..), Declaration, ImportDecl)
@@ -16,7 +14,7 @@ import Tidy.Codegen (binaryOp, declClass, declImport, declImportAs, declInstance
 import Tidy.Codegen.Class (toName)
 import Tidy.Codegen.Common (tokRightArrow)
 
-imports :: Partial => Map String String -> Array ( ImportDecl Void )
+imports :: Partial => Array String -> Array ( ImportDecl Void )
 imports es =
     Array.concat
         [ identity 
@@ -28,12 +26,12 @@ imports es =
             , declImport "Type.Proxy" [ importType "Proxy" ]
             , declImportAs ( "Web.DOM.Element" ) [ importType "Element" ] "Web"
             ]
-        , flip map ( Map.toUnfoldable es ) \( _ /\ e ) ->
-            declImportAs ( "Web.HTML." <> e ) [ importType e ] "Web"
+        , bind es \e ->
+            [ declImportAs ( "Web.HTML." <> e ) [ importType e ] "Web" ]
         , typeImports [ TypeSelfHandler ]
         ]
 
-generate :: Partial => Map String String -> Array ( Declaration Void )
+generate :: Partial => Array String -> Array ( Declaration Void )
 generate es =
     append 
         [ declClass [] "IsSelf"
@@ -64,13 +62,14 @@ generate es =
             ]
             []
         ]
-        $ flip map ( Map.toUnfoldable es ) \( ctor /\ e ) ->
-            declInstance Nothing []
+        $ bind es \e ->
+            [ declInstance Nothing []
                 "IsSelf"
                 [ typeCtor ( "Web." <> e )
-                , typeString ctor
+                , typeString e
                 ]
                 []
+            ]
 
     where
 
