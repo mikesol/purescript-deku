@@ -40,26 +40,33 @@ generate es =
             [ FundepDetermines ( NEA.singleton ( toName "element") ) tokRightArrow ( NEA.singleton ( toName "name" ) )
             ]
             []
+
+        , declSignature "_self"
+            $ typeForall [ typeVar "r" ]
+            $ typeArrow [ typeEvented $ selfHandler $ typeCtor "Web.Element" ]
+            $ typeEvented $ typeAttributed $ typeVar "r"
+        , declHandler "_self" selfKey $ handler TypeSelfHandler
+
+        , declSignature "_self_"
+            $ typeForall [ typeVar "r" ]
+            $ typeArrow [ selfHandler $ typeCtor "Web.Element" ]
+            $ typeEvented $ typeAttributed $ typeVar "r"
+        , declValue "_self_" [] $ exprOp ( exprIdent "_self" ) [ binaryOp "<<<" $ exprIdent "Applicative.pure" ]
         
-        , declSignature "self"
+        , declSignature "_selfT"
             $ typeForall [ typeVar "name", typeVar "e", typeVar "r" ]
             $ typeConstrained [ typeApp ( typeCtor "IsSelf" ) [ typeVar "e" , typeVar "name"  ] ]
             $ typeArrow [ typeEvented $ selfHandler $ typeVar "e" ]
             $ typeEvented $ typeAttributed $ typeIndexedAt nominal $ typeApp ( typeCtor "Proxy" ) [ typeVar "name" ]
-        , declHandler "self" selfKey $ handler TypeSelfHandler
+        , declHandler "_selfT" selfKey $ handler TypeSelfHandler
 
-        , declSignature "self_"
+        , declSignature "_selfT_"
             $ typeForall [ typeVar "name", typeVar "e", typeVar "r" ]
             $ typeConstrained [ typeApp ( typeCtor "IsSelf" ) [ typeVar "e" , typeVar "name"  ] ]
             $ typeArrow [ selfHandler $ typeVar "e" ]
             $ typeEvented $ typeAttributed $ typeIndexedAt nominal $ typeApp ( typeCtor "Proxy" ) [ typeVar "name" ]
-        , declValue "self_" [] $ exprOp ( exprIdent "self" ) [ binaryOp "<<<" $ exprIdent "Applicative.pure" ]
+        , declValue "_selfT_" [] $ exprOp ( exprIdent "_selfT" ) [ binaryOp "<<<" $ exprIdent "Applicative.pure" ]
 
-        , declInstance Nothing [] "IsSelf"
-            [ typeCtor ( "Web.Element" )
-            , typeString "global"
-            ]
-            []
         ]
         $ bind es \e ->
             [ declInstance Nothing []

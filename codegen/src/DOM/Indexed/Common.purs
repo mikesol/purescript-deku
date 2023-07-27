@@ -8,7 +8,7 @@ import Data.Maybe (Maybe(..))
 import Data.Tuple.Nested (type (/\), (/\))
 import Partial.Unsafe (unsafePartial)
 import PureScript.CST.Types (ImportDecl, Type)
-import Tidy.Codegen (declImport, declImportAs, importOp, importType, importValue, typeApp, typeCtor, typeRow, typeVar)
+import Tidy.Codegen (declImport, declImportAs, importOp, importType, importTypeAll, importValue, typeApp, typeCtor, typeRow, typeVar)
 
 requires :: Partial => Array ( ImportDecl Void )
 requires =
@@ -20,7 +20,12 @@ requires =
     , declImport "Deku.Control" [ importValue "elementify2" ]
     , declImport "Deku.Core" [ importType "Nut" ]
     , declImport "Type.Proxy" [ importType "Proxy" ]
-    , declImportAs "Deku.DOM.Indexed.Index" [] "Index"
+    , declImportAs "Deku.DOM.Indexed.Index"
+        [ importType "Attribute"
+        , importType "Indexed"
+        , importTypeAll "Keyword"
+        ]
+        "Index"
     ]
 
 typeIndexed :: Type Void -> Type Void

@@ -55,25 +55,40 @@ import Unsafe.Coerce as Unsafe.Coerce
 
 class IsSelf (element :: Type) (name :: Symbol) | element -> name
 
-self
-  :: forall name e r
-   . IsSelf e name
-  => FRP.Event.Event (e -> Effect.Effect Data.Unit.Unit)
-  -> FRP.Event.Event (Deku.Attribute.Attribute (Index.Indexed (__nominal :: Proxy name | r)))
-self = Functor.map
+_self
+  :: forall r
+   . FRP.Event.Event (Web.Element -> Effect.Effect Data.Unit.Unit)
+  -> FRP.Event.Event (Deku.Attribute.Attribute r)
+_self = Functor.map
   ( Deku.Attribute.unsafeAttribute <<< { key: "@self@", value: _ } <<< Deku.Attribute.cb'
       <<< Deku.Attribute.Cb
       <<< Unsafe.Coerce.unsafeCoerce
   )
 
-self_
+_self_
+  :: forall r
+   . (Web.Element -> Effect.Effect Data.Unit.Unit)
+  -> FRP.Event.Event (Deku.Attribute.Attribute r)
+_self_ = _self <<< Applicative.pure
+
+_selfT
+  :: forall name e r
+   . IsSelf e name
+  => FRP.Event.Event (e -> Effect.Effect Data.Unit.Unit)
+  -> FRP.Event.Event (Deku.Attribute.Attribute (Index.Indexed (__nominal :: Proxy name | r)))
+_selfT = Functor.map
+  ( Deku.Attribute.unsafeAttribute <<< { key: "@self@", value: _ } <<< Deku.Attribute.cb'
+      <<< Deku.Attribute.Cb
+      <<< Unsafe.Coerce.unsafeCoerce
+  )
+
+_selfT_
   :: forall name e r
    . IsSelf e name
   => (e -> Effect.Effect Data.Unit.Unit)
   -> FRP.Event.Event (Deku.Attribute.Attribute (Index.Indexed (__nominal :: Proxy name | r)))
-self_ = self <<< Applicative.pure
+_selfT_ = _selfT <<< Applicative.pure
 
-instance IsSelf Web.Element "global"
 instance IsSelf Web.HTMLAnchorElement "HTMLAnchorElement"
 instance IsSelf Web.HTMLAreaElement "HTMLAreaElement"
 instance IsSelf Web.HTMLAudioElement "HTMLAudioElement"

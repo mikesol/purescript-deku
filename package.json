@@ -16,7 +16,7 @@
 		"bundle:examples": "spago -x examples.dhall bundle-app --main Deku.Example.HelloWorld --to examples/hello-world/index.js",
 		"bundle:performance": "spago -x test/test.dhall bundle-app --minify --main Performance.Test.App --to test/test.js",
 		"bundle:optimizer-performance": "spago -x test/test-optimized.dhall build && purs-backend-es bundle-app --main Performance.Test.App --to test/test.js",
-		"generate": "npx spago -x codegen/codegen.dhall run"
+		"generate": "npx spago run -p codegen"
 	},
 	"keywords": [],
 	"author": "",

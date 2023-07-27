@@ -135,6 +135,7 @@ module Deku.DOM.Indexed.MathML
   , _actiontype_
   , _encoding
   , _encoding_
+  , module Index
   ) where
 
 import Control.Applicative (pure) as Applicative
@@ -144,7 +145,7 @@ import FRP.Event as FRP.Event
 import Deku.Control (elementify2)
 import Deku.Core (Nut)
 import Type.Proxy (Proxy)
-import Deku.DOM.Indexed.Index as Index
+import Deku.DOM.Indexed.Index (Attribute, Indexed, Keyword(..)) as Index
 import Deku.DOM.Indexed (Global, GlobalEventHandlers, ARIAMixin)
 import Deku.Attribute as Deku.Attribute
 

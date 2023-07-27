@@ -1336,6 +1336,7 @@ module Deku.DOM.Indexed
   , __allowDownloads
   , __allowTopNavigationToCustomProtocols
   , module Deku.Control
+  , module Index
   ) where
 
 import Control.Applicative (pure) as Applicative
@@ -1345,7 +1346,7 @@ import FRP.Event as FRP.Event
 import Deku.Control (elementify2)
 import Deku.Core (Nut)
 import Type.Proxy (Proxy)
-import Deku.DOM.Indexed.Index as Index
+import Deku.DOM.Indexed.Index (Attribute, Indexed, Keyword(..)) as Index
 import Effect as Effect
 import Web.Event.Internal.Types as Web.Event.Internal.Types
 import Data.Unit as Data.Unit

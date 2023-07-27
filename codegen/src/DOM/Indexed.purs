@@ -79,7 +79,9 @@ generate html svg mathml = do
         ( typeImports [ TypeEventHandler, TypeString, TypeKeyword "" ]
             <> [ unsafePartial $ declImportAs "Deku.Control" [ importValue "text", importValue "text_" ] "Deku.Control" ]
         )
-        [ unsafePartial $ exportModule "Deku.Control" ]
+        [ unsafePartial $ exportModule "Deku.Control"
+        , unsafePartial $ exportModule "Index"
+        ]
         html
 
     let
@@ -95,12 +97,12 @@ generate html svg mathml = do
         ( Array.cons ( globalImport $ Array.mapMaybe svgDeps $ namespaceBases SVG )
             $ typeImports [ TypeEventHandler, TypeString, TypeKeyword "" ] 
         )
-        []
+        [ unsafePartial $ exportModule "Index" ]
         svg
 
     generateSpec "./deku-dom-indexed/src/Deku/DOM/Indexed/MathML.purs" "Deku.DOM.Indexed.MathML"
         ( Array.cons ( globalImport $ namespaceBases MathML )
             $ typeImports [ TypeString ]
         )
-        []
+        [ unsafePartial $ exportModule "Index" ]
         mathml

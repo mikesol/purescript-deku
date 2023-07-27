@@ -617,6 +617,7 @@ module Deku.DOM.Indexed.SVG
   , __arithmetic
   , __duplicate
   , __wrap
+  , module Index
   ) where
 
 import Control.Applicative (pure) as Applicative
@@ -626,7 +627,7 @@ import FRP.Event as FRP.Event
 import Deku.Control (elementify2)
 import Deku.Core (Nut)
 import Type.Proxy (Proxy)
-import Deku.DOM.Indexed.Index as Index
+import Deku.DOM.Indexed.Index (Attribute, Indexed, Keyword(..)) as Index
 import Deku.DOM.Indexed (HtmlsvgGlobal, Global, GlobalEventHandlers, ARIAMixin)
 import Effect as Effect
 import Web.Event.Internal.Types as Web.Event.Internal.Types
