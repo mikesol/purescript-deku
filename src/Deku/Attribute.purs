@@ -5,8 +5,11 @@
 module Deku.Attribute
   ( AttributeValue(..)
   , Attribute
+  , Attribute'
   , class Attr
   , attr
+  , unpureAttr
+  , (<:=>)
   , (:=)
   , unsafeUnAttribute
   , unsafeAttribute
@@ -16,12 +19,10 @@ module Deku.Attribute
   , cb
   , Cb(..)
   , xdata
-  -- , pureAttr
-  -- , (!:=)
-  -- , maybeAttr
-  -- , (?:=)
-  , mapAttr
-  , (<:=>)
+  , pureAttr
+  , (!:=)
+  , maybeAttr
+  , (?:=)
   ) where
 
 import Prelude
@@ -29,6 +30,8 @@ import Prelude
 import Control.Plus (empty)
 import Data.Maybe (Maybe(..))
 import Data.Newtype (class Newtype)
+import Data.These (These(..))
+import Data.Tuple (Tuple)
 import Effect (Effect)
 import FRP.Event as FRP
 import Safe.Coerce (coerce)
@@ -81,22 +84,25 @@ unset' = Unset'
 -- | the `:=` family of operators and helpers like `style` and `klass` instead.
 data AttributeValue = Prop' String | Cb' Cb | Unset'
 
--- | Low level representation of key-value pairs for attributes and listeners.
--- | In general, this type is for internal use only. In practice, you'll use
--- | the `:=` family of operators and helpers like `style` and `klass` instead.
-newtype Attribute (e :: Type) = Attribute
+type Attribute' =
   { key :: String
   , value :: AttributeValue
   }
 
+-- | Low level representation of key-value pairs for attributes and listeners.
+-- | In general, this type is for internal use only. In practice, you'll use
+-- | the `:=` family of operators and helpers like `style` and `klass` instead.
+newtype Attribute (e :: Type) = Attribute
+  (These Attribute' (FRP.Event Attribute'))
+
 -- | For internal use only, exported to be used by other modules. Ignore this.
 unsafeUnAttribute
-  :: forall e. Attribute e -> { key :: String, value :: AttributeValue }
+  :: forall e. Attribute e -> These Attribute' (FRP.Event Attribute')
 unsafeUnAttribute = coerce
 
 -- | For internal use only, exported to be used by other modules. Ignore this.
 unsafeAttribute
-  :: forall e. { key :: String, value :: AttributeValue } -> Attribute e
+  :: forall e. These Attribute' (FRP.Event Attribute') -> Attribute e
 unsafeAttribute = Attribute
 
 -- | Guarantees type-safe creation of attribute `a` with type `b` for element `e`.
@@ -105,43 +111,29 @@ unsafeAttribute = Attribute
 class Attr e a b where
   -- | Construct a type-safe attribute or listener. More commonly used in its alias `:=`,
   -- | aka `D.Style := "color: red;"` is a valid attribute or listener for any element.
-  attr :: a -> b -> Attribute e
-
+  unpureAttr :: a -> FRP.Event b -> Attribute e
+  pureAttr :: a -> b -> Attribute e
+  attr :: a -> (Tuple b (FRP.Event b)) -> Attribute e
+  
 infixr 5 attr as :=
+infixr 5 unpureAttr as <:=>
+infixr 5 pureAttr as !:=
+
 
 -- | Construct a [data attribute](https://developer.mozilla.org/en-US/docs/Learn/HTML/Howto/Use_data_attributes).
 xdata :: forall e. String -> String -> Attribute e
-xdata k v = unsafeAttribute { key: "data-" <> k, value: Prop' v }
+xdata k v = unsafeAttribute $ This { key: "data-" <> k, value: Prop' v }
 
--- -- | A version of `attr` that creates a `pure` event fired immediately
--- -- | upon the element's creation. More commonly used in its alias `!:=`,
--- pureAttr
---   :: forall a b e
---    . Attr e a b
---   => a
---   -> b
---   -> FRP.Event (Attribute e)
--- pureAttr a b = pure (a := b)
 
--- infixr 5 pureAttr as !:=
+-- | A version of `attr` that sets an attribute or listener only if the value is `Just`.
+-- | More commonly used in its alias `?:=`.
+maybeAttr
+  :: forall a b e
+   . Attr e a b
+  => a
+  -> Maybe b
+  -> Attribute e
+maybeAttr a (Just b) = a !:= b
+maybeAttr _ Nothing = Attribute $ That empty
 
--- -- | A version of `attr` that sets an attribute or listener only if the value is `Just`.
--- -- | More commonly used in its alias `?:=`.
--- maybeAttr
---   :: forall a b e
---    . Attr e a b
---   => a
---   -> Maybe b
---   -> FRP.Event (Attribute e)
--- maybeAttr a (Just b) = pure (a := b)
--- maybeAttr _ Nothing = empty
-
--- infix 5 maybeAttr as ?:=
-
--- | A version of `attr` that maps a value to an attribute or listener.
--- | More commonly used in its alias `<:=>`.
-mapAttr
-  :: forall m a b e. Functor m => Attr e a b => a -> m b -> m (Attribute e)
-mapAttr a b = (a := _) <$> b
-
-infix 5 mapAttr as <:=>
+infix 5 maybeAttr as ?:=

@@ -27,6 +27,7 @@ module Deku.Core
   , SetText
   , Nut'
   , Node'
+  , HeadNode'
   , NutF(..)
   , Child(..)
   , insert
@@ -72,6 +73,9 @@ type NutWith env = env -> Nut
 -- | This is the same as using [`Exists`](https://github.com/purescript/purescript-exists)
 -- | twice on `Nut`.
 newtype ANut = ANut Nut
+
+type HeadNode' payload = Bolson.HeadElement' (DOMInterpret payload)
+  payload
 -- | For internal use in the `Nut` type signature. `Nut` uses `Bolson` under the
 -- | hood, and this is used with `Bolson`'s `Entity` type.
 type Node' payload = Bolson.Element' (DOMInterpret payload)

@@ -16,28 +16,28 @@ module Deku.Control
   , switcherFlipped
   , text
   , text_
+  , text'
   ) where
 
 import Prelude
 
 import Bolson.Control as Bolson
-import Bolson.Core (BStage(..), Element(..), Entity(..), PSR, Scope(..))
+import Bolson.Core (BStage(..), Element(..), Entity(..), Scope(..))
 import Bolson.Core as BCore
-import Control.Alt ((<|>))
-import Control.Monad.ST.Uncurried (mkSTFn2, runSTFn1, runSTFn2)
 import Control.Plus (empty)
-import Data.Either (Either)
 import Data.FastVect.FastVect (Vect, singleton, index)
-import Data.Filterable (filter, partitionMap)
+import Data.Filterable (filter)
+import Data.Foldable (foldl)
 import Data.FunctorWithIndex (mapWithIndex)
 import Data.Maybe (Maybe(..), maybe)
 import Data.Newtype (class Newtype, unwrap, wrap)
 import Data.Profunctor (dimap, lcmap)
+import Data.These (These(..))
 import Data.Tuple (Tuple(..), snd)
 import Data.Tuple.Nested ((/\))
-import Deku.Attribute (Attribute, AttributeValue(..), unsafeUnAttribute)
-import Deku.Core (DOMInterpret(..), Node(..), Nut(..), NutF(..), Node', dyn, envy, insert_, remove, unsafeSetPos)
-import FRP.Event (Event, Subscriber(..), keepLatest, mapAccum, memoize, merge, subscribe)
+import Deku.Attribute (Attribute, Attribute', AttributeValue(..), unsafeUnAttribute)
+import Deku.Core (DOMInterpret(..), HeadNode', Node(..), Nut(..), NutF(..), Node', dyn, envy, insert_, remove, unsafeSetPos)
+import FRP.Event (Event, keepLatest, mapAccum, memoize, merge)
 import Prim.Int (class Compare)
 import Prim.Ordering (GT)
 import Record (union)
@@ -54,34 +54,33 @@ unsafeSetText
   :: forall payload
    . DOMInterpret payload
   -> String
-  ->  String
-  ->  payload
+  -> String
+  -> payload
 unsafeSetText (DOMInterpret { setText }) id txt =
   (setText <<< { id, text: _ })
-  txt
+    txt
 
 unsafeSetAttribute
-  :: forall element payload
+  :: forall payload
    . DOMInterpret payload
   -> String
-  -> Attribute element
+  -> Attribute'
   -> payload
-unsafeSetAttribute (DOMInterpret { setProp, setCb, unsetAttribute }) id atts =
-  ( ( \{ key, value } -> case value of
-        Prop' s -> setProp { id, key, value: s }
-        Cb' c -> setCb { id, key, value: c }
-        Unset' -> unsetAttribute { id, key }
-    ) <<<
-      unsafeUnAttribute
-  )
-    (atts)
+unsafeSetAttribute
+  (DOMInterpret { setProp, setCb, unsetAttribute })
+  id
+  { key, value } =
+  case value of
+    Prop' s -> setProp { id, key, value: s }
+    Cb' c -> setCb { id, key, value: c }
+    Unset' -> unsetAttribute { id, key }
 
 -- | Used internally to create new [`Element`-s](https://developer.mozilla.org/en-US/docs/Web/API/Element).
 -- | Do not use this directly. Instead, use `unsafeCustomElement` from `Deku.DOM`.
 elementify2
   :: forall element
    . String
-  -> Array (Event (Attribute element))
+  -> Array (Attribute element)
   -> Array Nut
   -> Nut
 elementify2 en attributes kids = Nut
@@ -90,58 +89,68 @@ elementify2 en attributes kids = Nut
   step1 :: forall payload. Array (NutF payload) -> NutF payload
   step1 arr = NutF
     ( Element'
-        ( elementify en (aa attributes)
+        ( elementify en attributes
             ( NutF (BCore.fixed (coerce arr))
             )
         )
     )
-  aa [] = empty
-  aa [ aaa ] = aaa
-  aa x = merge x
 
 elementify
   :: forall payload element
    . String
-  -> Array (Either (Attribute element) (Event (Attribute element)))
+  -> Array (Attribute element)
   -> NutF payload
   -> Node payload
-elementify tag atts children = Node go
+elementify tag atts children = Node $ Element go
   where
-  { left, right } = partitionMap identity atts
+  { left, right } = foldl
+    ( \b a -> case unsafeUnAttribute a of
+        This l -> b { left = b.left <> [ l ] }
+        That r -> b { right = b.right <> [ r ] }
+        Both l r -> b { left = b.left <> [ l ], right = b.right <> [ r ] }
+    )
+    { left: [], right: [] }
+    atts
+
+  go :: Node' payload
   go
     { parent, scope, raiseId, pos, dynFamily, ez }
     di@(DOMInterpret { ids, deleteFromCache, makeElement, attributeParent }) =
     do
       me <- ids
-      raiseId me
+      raiseId $ show me
       Tuple subs (Tuple unsubs evt) <- __internalDekuFlatten
-        di
         children
-        { parent: Just me
+        { parent: Just $ show me
         , scope
         , ez: true
         , raiseId: \_ -> pure unit
         , pos: Nothing
         , dynFamily: Nothing
         }
+        di
       pure
         $ Tuple
             ( [ makeElement
-                  { id: me, parent, scope, tag, pos, dynFamily }
-              ] <> map (unsafeSetAttribute di me) left
+                  { id: show me, parent, scope, tag, pos, dynFamily }
+              ] <> map (unsafeSetAttribute di $ show me) left
                 <>
-                  [ maybe []
-                      ( \p ->
-                          [ attributeParent
-                              { id: me, parent: p, pos, dynFamily, ez }
-                          ]
-                      )
-                      parent
-                  ]
+                  maybe []
+                    ( \p ->
+                        [ attributeParent
+                            { id: show me, parent: p, pos, dynFamily, ez }
+                        ]
+                    )
+                    parent
                 <> subs
             )
-        $ Tuple ([ deleteFromCache { id: me } ] <> unsubs)
-        $ (merge $ right <> [ evt ])
+        $ Tuple ([ BExecute $ deleteFromCache { id: show me } ] <> unsubs)
+        $
+          ( merge $
+              ( (map <<< map) (BExecute <<< unsafeSetAttribute di (show me))
+                  right
+              ) <> [ evt ]
+          )
 
 -- | Creates a portal.
 -- |
@@ -283,19 +292,14 @@ portal
   -> (Vect n Nut -> Nut)
   -> Nut
 portal v' c' =
-  -- all local portals are wrapped in a `dyn`
-  -- otherwise, they would have no unique scope, which would not
-  -- allow us to determine if they've exacped their scope
-  -- for global portals, this is not needed as they use the global scope
-  dyn
-    ( pure unit <#> \_ -> pure
-        $ insert_
-            ( Nut
-                ( go (map (\(Nut df) -> df) v')
-                    (shouldBeSafe c')
-                )
-            )
+  -- todo: we got rid of dyn wrapping to see
+  -- if it matters in the new setup
+  -- worth monitoring
+  Nut
+    ( go (map (\(Nut df) -> df) v')
+        (shouldBeSafe c')
     )
+
   where
   shouldBeSafe
     :: forall payload
@@ -326,12 +330,11 @@ portal v' c' =
         (dimap (map ((_ $ unit) >>> wrap)) unwrap c)
     )
 
--- | Create a [`Text`](https://developer.mozilla.org/en-US/docs/Web/API/Text) node from
--- | the emitted strings. Each emitted string replaces the previous string.
-text
-  :: Event String
+text_'
+  :: Maybe (String)
+  -> Maybe (Event String)
   -> Nut
-text txt = Nut go'
+text_' t1 t2 = Nut go'
   where
   go' :: forall payload. NutF payload
   go' = NutF (Element' (Node (Element go)))
@@ -346,66 +349,49 @@ text txt = Nut go'
     raiseId $ show me
     pure
       $ Tuple
-          ( [ makeText { id: show me, parent, pos, scope, dynFamily } ] <>
-              maybe []
+          ( [ makeText { id: show me, parent, pos, scope, dynFamily } ]
+              <> maybe []
                 ( \p ->
                     [ attributeParent
                         { id: show me, parent: p, pos, dynFamily, ez }
                     ]
                 )
                 parent
+              <> maybe [] (\t -> [ unsafeSetText di (show me) t ]) t1
 
           )
       $ Tuple [ BExecute $ deleteFromCache { id: show me } ]
-          ((BExecute <<< unsafeSetText di (show me)) <$> txt)
+          (maybe empty (map (BExecute <<< unsafeSetText di (show me))) t2)
+
+-- | Create a [`Text`](https://developer.mozilla.org/en-US/docs/Web/API/Text) node from
+-- | the emitted strings. Each emitted string replaces the previous string.
+text
+  :: Event String
+  -> Nut
+text = text_' Nothing <<< Just
 
 -- | Create a [`Text`](https://developer.mozilla.org/en-US/docs/Web/API/Text) node from
 -- | a string. The node is set immediately with the string and does not change.
 text_ :: String -> Nut
-text_ txt = Nut go'
-  where
-  go' :: forall payload. NutF payload
-  go' = NutF (Element' (Node (Element go)))
+text_ txt = text_' (Just txt) Nothing
 
-  go
-    :: forall payload
-     . Node' payload
-  go
-    { parent, scope, raiseId, dynFamily, pos, ez }
-    di@(DOMInterpret { ids, makeText, deleteFromCache, attributeParent }) = do
-    me <- ids
-    raiseId $ show me
-    pure
-      $ Tuple
-          ( [ makeText { id: show me, parent, pos, scope, dynFamily } ] <>
-              maybe []
-                ( \p ->
-                    [ attributeParent
-                        { id: show me, parent: p, pos, dynFamily, ez }
-                    ]
-                )
-                parent <> [unsafeSetText di (show me) txt]
-
-          )
-      $ Tuple [ BExecute $ deleteFromCache { id: show me } ] empty
-
+-- | Create a [`Text`](https://developer.mozilla.org/en-US/docs/Web/API/Text) node from
+-- | a string. The node is set immediately with the string and then changes based on the event.
+text' :: String -> Event String -> Nut
+text' txt e = text_' (Just txt) (Just e)
 
 -- | A low-level function that creates a Deku application.
 -- | In most situations this should not be used. Instead, use functions from `Deku.Toplevel`.
 deku
   :: Web.DOM.Element
   -> Nut
-  -> ( forall payload
-        . DOMInterpret payload
-       -> Event payload
-     )
+  -> (forall payload. HeadNode' payload)
 deku root (Nut cc) = go cc
   where
   go
     :: forall payload
      . NutF payload
-    -> DOMInterpret payload
-    -> Event payload
+    -> HeadNode' payload
   go children di@(DOMInterpret { makeRoot }) = do
     let me = "deku-root"
     Tuple sub (Tuple unsub evt) <- __internalDekuFlatten
@@ -418,7 +404,7 @@ deku root (Nut cc) = go cc
       , dynFamily: Nothing
       }
       di
-    pure $ Tuple [ makeRoot { id: me, root } ] $ Tuple [] evt
+    pure $ Tuple ([ makeRoot { id: me, root } ] <> sub) $ Tuple unsub evt
 
 data Stage = Begin | Middle | End
 
