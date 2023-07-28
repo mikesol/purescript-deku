@@ -210,14 +210,17 @@ useDyn'
        -> Nut
      )
   -> Event Child
-useDyn' i driver f = keepLatest Deku.do
-  setChildLogic /\ childLogic <- useState
-  merge
-    [ driver $> insert i
-        ( f
-            { remove: setChildLogic remove
-            , sendTo: setChildLogic <<< sendToPos
-            }
-        )
-    , childLogic
-    ]
+useDyn' i driver f = makeEvent \k -> do
+  { event, push } <- create
+  subscribe
+    ( merge
+        [ driver $> insert i
+            ( f
+                { remove: push remove
+                , sendTo: push <<< sendToPos
+                }
+            )
+        , event
+        ]
+    )
+    k
