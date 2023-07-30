@@ -4,12 +4,12 @@ import Control.Plus (empty)
 import Deku.Attribute (Attribute)
 import Deku.Control as DC
 import Deku.Core (Nut)
-import FRP.Event (Event)
+
 
 data FeBlend_
 
 feBlend
-  :: Array (Event (Attribute FeBlend_))
+  :: Array (Attribute FeBlend_)
   -> Array Nut
   -> Nut
 feBlend = DC.elementify2 "feBlend"

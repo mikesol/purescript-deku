@@ -4,12 +4,12 @@ import Control.Plus (empty)
 import Deku.Attribute (Attribute)
 import Deku.Control as DC
 import Deku.Core (Nut)
-import FRP.Event (Event)
+
 
 data Acronym_
 
 acronym
-  :: Array (Event (Attribute Acronym_))
+  :: Array (Attribute Acronym_)
   -> Array Nut
   -> Nut
 acronym = DC.elementify2 "acronym"

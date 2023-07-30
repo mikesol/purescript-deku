@@ -4,12 +4,12 @@ import Control.Plus (empty)
 import Deku.Attribute (Attribute)
 import Deku.Control as DC
 import Deku.Core (Nut)
-import FRP.Event (Event)
+
 
 data FeMorphology_
 
 feMorphology
-  :: Array (Event (Attribute FeMorphology_))
+  :: Array (Attribute FeMorphology_)
   -> Array Nut
   -> Nut
 feMorphology = DC.elementify2 "feMorphology"

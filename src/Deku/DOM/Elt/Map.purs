@@ -4,12 +4,12 @@ import Control.Plus (empty)
 import Deku.Attribute (Attribute)
 import Deku.Control as DC
 import Deku.Core (Nut)
-import FRP.Event (Event)
+
 
 data Map_
 
 map
-  :: Array (Event (Attribute Map_))
+  :: Array (Attribute Map_)
   -> Array Nut
   -> Nut
 map = DC.elementify2 "map"

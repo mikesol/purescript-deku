@@ -4,12 +4,12 @@ import Control.Plus (empty)
 import Deku.Attribute (Attribute)
 import Deku.Control as DC
 import Deku.Core (Nut)
-import FRP.Event (Event)
+
 
 data AnimateTransform_
 
 animateTransform
-  :: Array (Event (Attribute AnimateTransform_))
+  :: Array (Attribute AnimateTransform_)
   -> Array Nut
   -> Nut
 animateTransform = DC.elementify2 "animateTransform"

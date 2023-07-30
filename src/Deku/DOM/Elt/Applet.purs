@@ -4,12 +4,12 @@ import Control.Plus (empty)
 import Deku.Attribute (Attribute)
 import Deku.Control as DC
 import Deku.Core (Nut)
-import FRP.Event (Event)
+
 
 data Applet_
 
 applet
-  :: Array (Event (Attribute Applet_))
+  :: Array (Attribute Applet_)
   -> Array Nut
   -> Nut
 applet = DC.elementify2 "applet"

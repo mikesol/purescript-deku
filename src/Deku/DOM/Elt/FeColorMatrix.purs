@@ -4,12 +4,12 @@ import Control.Plus (empty)
 import Deku.Attribute (Attribute)
 import Deku.Control as DC
 import Deku.Core (Nut)
-import FRP.Event (Event)
+
 
 data FeColorMatrix_
 
 feColorMatrix
-  :: Array (Event (Attribute FeColorMatrix_))
+  :: Array (Attribute FeColorMatrix_)
   -> Array Nut
   -> Nut
 feColorMatrix = DC.elementify2 "feColorMatrix"

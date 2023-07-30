@@ -4,12 +4,12 @@ import Control.Plus (empty)
 import Deku.Attribute (Attribute)
 import Deku.Control as DC
 import Deku.Core (Nut)
-import FRP.Event (Event)
+
 
 data Noframes_
 
 noframes
-  :: Array (Event (Attribute Noframes_))
+  :: Array (Attribute Noframes_)
   -> Array Nut
   -> Nut
 noframes = DC.elementify2 "noframes"

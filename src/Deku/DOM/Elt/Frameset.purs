@@ -4,12 +4,12 @@ import Control.Plus (empty)
 import Deku.Attribute (Attribute)
 import Deku.Control as DC
 import Deku.Core (Nut)
-import FRP.Event (Event)
+
 
 data Frameset_
 
 frameset
-  :: Array (Event (Attribute Frameset_))
+  :: Array (Attribute Frameset_)
   -> Array Nut
   -> Nut
 frameset = DC.elementify2 "frameset"

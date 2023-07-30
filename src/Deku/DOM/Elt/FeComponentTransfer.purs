@@ -4,12 +4,12 @@ import Control.Plus (empty)
 import Deku.Attribute (Attribute)
 import Deku.Control as DC
 import Deku.Core (Nut)
-import FRP.Event (Event)
+
 
 data FeComponentTransfer_
 
 feComponentTransfer
-  :: Array (Event (Attribute FeComponentTransfer_))
+  :: Array (Attribute FeComponentTransfer_)
   -> Array Nut
   -> Nut
 feComponentTransfer = DC.elementify2 "feComponentTransfer"

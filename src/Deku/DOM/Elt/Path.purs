@@ -4,12 +4,12 @@ import Control.Plus (empty)
 import Deku.Attribute (Attribute)
 import Deku.Control as DC
 import Deku.Core (Nut)
-import FRP.Event (Event)
+
 
 data Path_
 
 path
-  :: Array (Event (Attribute Path_))
+  :: Array (Attribute Path_)
   -> Array Nut
   -> Nut
 path = DC.elementify2 "path"

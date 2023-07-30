@@ -4,12 +4,12 @@ import Control.Plus (empty)
 import Deku.Attribute (Attribute)
 import Deku.Control as DC
 import Deku.Core (Nut)
-import FRP.Event (Event)
+
 
 data FeOffset_
 
 feOffset
-  :: Array (Event (Attribute FeOffset_))
+  :: Array (Attribute FeOffset_)
   -> Array Nut
   -> Nut
 feOffset = DC.elementify2 "feOffset"

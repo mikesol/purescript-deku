@@ -4,12 +4,12 @@ import Control.Plus (empty)
 import Deku.Attribute (Attribute)
 import Deku.Control as DC
 import Deku.Core (Nut)
-import FRP.Event (Event)
+
 
 data Ruby_
 
 ruby
-  :: Array (Event (Attribute Ruby_))
+  :: Array (Attribute Ruby_)
   -> Array Nut
   -> Nut
 ruby = DC.elementify2 "ruby"

@@ -4,12 +4,12 @@ import Control.Plus (empty)
 import Deku.Attribute (Attribute)
 import Deku.Control as DC
 import Deku.Core (Nut)
-import FRP.Event (Event)
+
 
 data Dialog_
 
 dialog
-  :: Array (Event (Attribute Dialog_))
+  :: Array (Attribute Dialog_)
   -> Array Nut
   -> Nut
 dialog = DC.elementify2 "dialog"

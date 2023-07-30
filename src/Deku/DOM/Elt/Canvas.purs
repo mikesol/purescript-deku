@@ -4,12 +4,12 @@ import Control.Plus (empty)
 import Deku.Attribute (Attribute)
 import Deku.Control as DC
 import Deku.Core (Nut)
-import FRP.Event (Event)
+
 
 data Canvas_
 
 canvas
-  :: Array (Event (Attribute Canvas_))
+  :: Array (Attribute Canvas_)
   -> Array Nut
   -> Nut
 canvas = DC.elementify2 "canvas"

@@ -4,12 +4,12 @@ import Control.Plus (empty)
 import Deku.Attribute (Attribute)
 import Deku.Control as DC
 import Deku.Core (Nut)
-import FRP.Event (Event)
+
 
 data FeDropShadow_
 
 feDropShadow
-  :: Array (Event (Attribute FeDropShadow_))
+  :: Array (Attribute FeDropShadow_)
   -> Array Nut
   -> Nut
 feDropShadow = DC.elementify2 "feDropShadow"

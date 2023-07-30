@@ -4,12 +4,12 @@ import Control.Plus (empty)
 import Deku.Attribute (Attribute)
 import Deku.Control as DC
 import Deku.Core (Nut)
-import FRP.Event (Event)
+
 
 data Form_
 
 form
-  :: Array (Event (Attribute Form_))
+  :: Array (Attribute Form_)
   -> Array Nut
   -> Nut
 form = DC.elementify2 "form"

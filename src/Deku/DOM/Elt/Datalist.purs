@@ -4,12 +4,12 @@ import Control.Plus (empty)
 import Deku.Attribute (Attribute)
 import Deku.Control as DC
 import Deku.Core (Nut)
-import FRP.Event (Event)
+
 
 data Datalist_
 
 datalist
-  :: Array (Event (Attribute Datalist_))
+  :: Array (Attribute Datalist_)
   -> Array Nut
   -> Nut
 datalist = DC.elementify2 "datalist"

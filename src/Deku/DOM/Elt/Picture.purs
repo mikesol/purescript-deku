@@ -4,12 +4,12 @@ import Control.Plus (empty)
 import Deku.Attribute (Attribute)
 import Deku.Control as DC
 import Deku.Core (Nut)
-import FRP.Event (Event)
+
 
 data Picture_
 
 picture
-  :: Array (Event (Attribute Picture_))
+  :: Array (Attribute Picture_)
   -> Array Nut
   -> Nut
 picture = DC.elementify2 "picture"

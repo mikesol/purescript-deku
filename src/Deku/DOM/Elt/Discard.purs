@@ -4,12 +4,12 @@ import Control.Plus (empty)
 import Deku.Attribute (Attribute)
 import Deku.Control as DC
 import Deku.Core (Nut)
-import FRP.Event (Event)
+
 
 data Discard_
 
 discard
-  :: Array (Event (Attribute Discard_))
+  :: Array (Attribute Discard_)
   -> Array Nut
   -> Nut
 discard = DC.elementify2 "discard"

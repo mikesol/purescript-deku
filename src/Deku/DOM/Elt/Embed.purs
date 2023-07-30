@@ -4,12 +4,12 @@ import Control.Plus (empty)
 import Deku.Attribute (Attribute)
 import Deku.Control as DC
 import Deku.Core (Nut)
-import FRP.Event (Event)
+
 
 data Embed_
 
 embed
-  :: Array (Event (Attribute Embed_))
+  :: Array (Attribute Embed_)
   -> Array Nut
   -> Nut
 embed = DC.elementify2 "embed"

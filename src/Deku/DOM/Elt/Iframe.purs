@@ -4,12 +4,12 @@ import Control.Plus (empty)
 import Deku.Attribute (Attribute)
 import Deku.Control as DC
 import Deku.Core (Nut)
-import FRP.Event (Event)
+
 
 data Iframe_
 
 iframe
-  :: Array (Event (Attribute Iframe_))
+  :: Array (Attribute Iframe_)
   -> Array Nut
   -> Nut
 iframe = DC.elementify2 "iframe"

@@ -4,12 +4,12 @@ import Control.Plus (empty)
 import Deku.Attribute (Attribute)
 import Deku.Control as DC
 import Deku.Core (Nut)
-import FRP.Event (Event)
+
 
 data Nav_
 
 nav
-  :: Array (Event (Attribute Nav_))
+  :: Array (Attribute Nav_)
   -> Array Nut
   -> Nut
 nav = DC.elementify2 "nav"

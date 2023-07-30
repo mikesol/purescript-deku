@@ -4,12 +4,12 @@ import Control.Plus (empty)
 import Deku.Attribute (Attribute)
 import Deku.Control as DC
 import Deku.Core (Nut)
-import FRP.Event (Event)
+
 
 data Cite_
 
 cite
-  :: Array (Event (Attribute Cite_))
+  :: Array (Attribute Cite_)
   -> Array Nut
   -> Nut
 cite = DC.elementify2 "cite"

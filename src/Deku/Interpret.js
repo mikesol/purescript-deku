@@ -4,6 +4,9 @@ export const setHydrating = (state) => () => {
 export const unSetHydrating = (state) => () => {
   state.hydrating = false;
 };
+export const associateWithUnsubscribe_ = (a) => state => () => {
+  state.units[a.id].unsubscribe = a.unsubscribe;
+}
 export const attributeParent_ = (runOnJust) => (a) => (state) => () => {
   // console.log("attributeParent_", a);
   if (state.units[a.id]) {
@@ -876,6 +879,9 @@ export const stateHasKey = (id) => (state) => () => {
 export const deleteFromCache_ = (a) => (state) => () => {
   // console.log("deleteFromCache_", a);
   if (state.units[a.id]) {
+    if (state.units[a.id].unsubscribe) {
+      state.units[a.id].unsubscribe();
+    }
     delete state.units[a.id];
   }
 };

@@ -4,12 +4,12 @@ import Control.Plus (empty)
 import Deku.Attribute (Attribute)
 import Deku.Control as DC
 import Deku.Core (Nut)
-import FRP.Event (Event)
+
 
 data Symbol_
 
 symbol
-  :: Array (Event (Attribute Symbol_))
+  :: Array (Attribute Symbol_)
   -> Array Nut
   -> Nut
 symbol = DC.elementify2 "symbol"

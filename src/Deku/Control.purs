@@ -22,7 +22,7 @@ module Deku.Control
 import Prelude
 
 import Bolson.Control as Bolson
-import Bolson.Core (BStage(..), Element(..), Entity(..), Scope(..))
+import Bolson.Core (Element(..), Entity(..), Scope(..))
 import Bolson.Core as BCore
 import Control.Plus (empty)
 import Data.FastVect.FastVect (Vect, singleton, index)
@@ -30,13 +30,13 @@ import Data.Filterable (filter)
 import Data.Foldable (foldl)
 import Data.FunctorWithIndex (mapWithIndex)
 import Data.Maybe (Maybe(..), maybe)
-import Data.Newtype (class Newtype, unwrap, wrap)
+import Data.Newtype (unwrap, wrap)
 import Data.Profunctor (dimap, lcmap)
 import Data.These (These(..))
 import Data.Tuple (Tuple(..), snd)
 import Data.Tuple.Nested ((/\))
 import Deku.Attribute (Attribute, Attribute', AttributeValue(..), unsafeUnAttribute)
-import Deku.Core (DOMInterpret(..), HeadNode', Node(..), Nut(..), NutF(..), Node', dyn, envy, insert_, remove, unsafeSetPos)
+import Deku.Core (DOMInterpret(..), HeadNode', Node(..), Node', Nut(..), NutF(..), dyn, envy, flattenArgs, insert_, remove, unsafeSetPos)
 import FRP.Event (Event, keepLatest, mapAccum, memoize, merge)
 import Prim.Int (class Compare)
 import Prim.Ordering (GT)
@@ -144,10 +144,10 @@ elementify tag atts children = Node $ Element go
                     parent
                 <> subs
             )
-        $ Tuple ([ BExecute $ deleteFromCache { id: show me } ] <> unsubs)
+        $ Tuple ([ deleteFromCache { id: show me } ] <> unsubs)
         $
           ( merge $
-              ( (map <<< map) (BExecute <<< unsafeSetAttribute di (show me))
+              ( (map <<< map) (unsafeSetAttribute di (show me))
                   right
               ) <> [ evt ]
           )
@@ -198,7 +198,7 @@ globalPortal v' c' =
     -> NutF payload
   go v c = NutF
     ( Bolson.globalPortalComplexComplex
-        portalFlatten
+        flattenArgs
         { fromEltO1: coerce
         , fromEltO2: coerce
         , toElt: coerce
@@ -220,40 +220,6 @@ globalPortal1
   -> Nut
 globalPortal1 i f = globalPortal (singleton i) (lcmap (index (Proxy :: _ 0)) f)
 
--- ugh, this isn't sacred, delete it and regenerate if something changes
-portalFlatten
-  :: forall payload136 b143 d145 t149 t157 t159 payload171
-   . Newtype b143
-       { ids :: d145
-       | t149
-       }
-  => { disconnectElement ::
-         DOMInterpret t157
-         -> { id :: String
-            , parent :: String
-            , scope :: Scope
-            | t159
-            }
-         -> t157
-     , doLogic :: Int -> DOMInterpret payload136 -> String -> payload136
-     , ids :: b143 -> d145
-     , toElt ::
-         Node payload171
-         -> Element (DOMInterpret payload171)
-              ( pos :: Maybe Int
-              , dynFamily :: Maybe String
-              , ez :: Boolean
-              )
-              payload171
-     }
-portalFlatten =
-  { doLogic: \pos (DOMInterpret { sendToPos }) id -> sendToPos { id, pos }
-  , ids: unwrap >>> _.ids
-  , disconnectElement:
-      \(DOMInterpret { disconnectElement }) { id, scope, parent } ->
-        disconnectElement { id, scope, parent, scopeEq: eq }
-  , toElt: \(Node e) -> e
-  }
 
 -- | A variation of portal that takes a single element instead of a vector of elements.
 portal1
@@ -315,7 +281,7 @@ portal v' c' =
     -> NutF payload
   go v c = NutF
     ( Bolson.portalComplexComplex
-        portalFlatten
+        flattenArgs
         { fromEltO1: coerce
         , fromEltO2: coerce
         , toElt: coerce
@@ -360,8 +326,8 @@ text_' t1 t2 = Nut go'
               <> maybe [] (\t -> [ unsafeSetText di (show me) t ]) t1
 
           )
-      $ Tuple [ BExecute $ deleteFromCache { id: show me } ]
-          (maybe empty (map (BExecute <<< unsafeSetText di (show me))) t2)
+      $ Tuple [ deleteFromCache { id: show me } ]
+          (maybe empty (map (unsafeSetText di (show me))) t2)
 
 -- | Create a [`Text`](https://developer.mozilla.org/en-US/docs/Web/API/Text) node from
 -- | the emitted strings. Each emitted string replaces the previous string.
@@ -412,7 +378,7 @@ __internalDekuFlatten
   :: forall payload
    . NutF payload
   -> Node' payload
-__internalDekuFlatten (NutF c) a b = Bolson.flatten portalFlatten a b c
+__internalDekuFlatten (NutF c) a b = Bolson.flatten flattenArgs a b c
 
 -- | Like `bindFlipped`, except instead of working with a monad, it dipts into an `Event`
 -- | and creates a `Nut`. This allows you to use an event to switch between different

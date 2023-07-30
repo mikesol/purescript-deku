@@ -4,12 +4,12 @@ import Control.Plus (empty)
 import Deku.Attribute (Attribute)
 import Deku.Control as DC
 import Deku.Core (Nut)
-import FRP.Event (Event)
+
 
 data Template_
 
 template
-  :: Array (Event (Attribute Template_))
+  :: Array (Attribute Template_)
   -> Array Nut
   -> Nut
 template = DC.elementify2 "template"

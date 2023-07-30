@@ -6,7 +6,9 @@
 module Deku.Core
   ( ANut(..)
   , AttributeParent
+  , AssociateWithUnsubscribe
   , DOMInterpret(..)
+  , DekuExtra
   , DeleteFromCache
   , DisconnectElement
   , GiveNewParent
@@ -30,6 +32,7 @@ module Deku.Core
   , HeadNode'
   , NutF(..)
   , Child(..)
+  , flattenArgs
   , insert
   , insert_
   , remove
@@ -43,14 +46,16 @@ module Deku.Core
 
 import Prelude
 
+import Bolson.Control (Flatten)
 import Bolson.Control as BControl
-import Bolson.Core (BStage(..), Scope)
+import Bolson.Core (Scope)
 import Bolson.Core as Bolson
 import Control.Monad.ST (ST)
 import Control.Monad.ST as ST
 import Control.Monad.ST.Global (Global)
 import Control.Monad.ST.Global as Region
 import Control.Plus (empty)
+import Data.List (List)
 import Data.Maybe (Maybe(..))
 import Data.Newtype (class Newtype, unwrap)
 import Data.Profunctor (lcmap)
@@ -74,13 +79,13 @@ type NutWith env = env -> Nut
 -- | twice on `Nut`.
 newtype ANut = ANut Nut
 
+type DekuExtra = (pos :: Maybe Int, ez :: Boolean, dynFamily :: Maybe String)
+
 type HeadNode' payload = Bolson.HeadElement' (DOMInterpret payload)
   payload
 -- | For internal use in the `Nut` type signature. `Nut` uses `Bolson` under the
 -- | hood, and this is used with `Bolson`'s `Entity` type.
-type Node' payload = Bolson.Element' (DOMInterpret payload)
-  (pos :: Maybe Int, ez :: Boolean, dynFamily :: Maybe String)
-  payload
+type Node' payload = Bolson.Element' (DOMInterpret payload) DekuExtra  payload
 
 -- | For internal use in the `Nut` type signature. `Nut` uses `Bolson` under the
 -- | hood, and this is used with `Bolson`'s `Entity` type.
@@ -276,6 +281,8 @@ type MakeDynBeacon =
   , dynFamily :: Maybe String
   }
 
+type AssociateWithUnsubscribe = { id :: String, unsubscribe :: ST.ST Region.Global Unit }
+
 derive instance Newtype (DOMInterpret payload) _
 
 -- | This is the interpreter that any Deku backend creator needs to impelement.
@@ -284,6 +291,10 @@ derive instance Newtype (DOMInterpret payload) _
 -- | spits out `unit`, you can set everything to `mempty`.
 newtype DOMInterpret payload = DOMInterpret
   { ids :: ST Global Int
+  , deferPayload :: List Int -> payload -> payload
+  , forcePayload :: List Int -> payload
+  , associateWithUnsubscribe :: AssociateWithUnsubscribe -> payload
+  , redecorateDeferredPayload :: List Int -> payload -> payload
   , makeRoot :: MakeRoot -> payload
   , makeElement :: MakeElement -> payload
   , makeDynBeacon :: MakeDynBeacon -> payload
@@ -304,33 +315,13 @@ newtype DOMInterpret payload = DOMInterpret
 newtype ExDOMInterpret = ExDOMInterpret (forall payload. DOMInterpret payload)
 newtype ExEvent = ExEvent (forall payload. Event payload)
 
-portalFlatten
-  :: forall payload136 b143 d145 t149 t157 t159 payload171
-   . Newtype b143
-       { ids :: d145
-       | t149
-       }
-  => { disconnectElement ::
-         DOMInterpret t157
-         -> { id :: String
-            , parent :: String
-            , scope :: Scope
-            | t159
-            }
-         -> t157
-     , doLogic :: Int -> DOMInterpret payload136 -> String -> payload136
-     , ids :: b143 -> d145
-     , toElt ::
-         Node payload171
-         -> Bolson.Element (DOMInterpret payload171)
-              ( pos :: Maybe Int
-              , dynFamily :: Maybe String
-              , ez :: Boolean
-              )
-              payload171
-     }
-portalFlatten =
+flattenArgs
+  :: forall payload. Flatten Int (DOMInterpret payload) Node DekuExtra payload
+flattenArgs =
   { doLogic: \pos (DOMInterpret { sendToPos: stp }) id -> stp { id, pos }
+  , deferPayload: \(DOMInterpret { deferPayload }) -> deferPayload
+  , forcePayload: \(DOMInterpret { forcePayload }) -> forcePayload
+  , redecorateDeferredPayload: \(DOMInterpret { redecorateDeferredPayload }) -> redecorateDeferredPayload
   , ids: unwrap >>> _.ids
   , disconnectElement:
       \(DOMInterpret { disconnectElement }) { id, scope, parent } ->
@@ -342,7 +333,7 @@ __internalDekuFlatten
   :: forall payload
    . NutF payload
   -> Node' payload
-__internalDekuFlatten a b c = BControl.flatten portalFlatten b c
+__internalDekuFlatten a b c = BControl.flatten flattenArgs b c
   ((\(NutF x) -> x) a)
 
 dynify
@@ -414,7 +405,7 @@ dynify f es = Nut (go' ((\(Nut df) -> df) (f es)))
                 ]
               <> sub
           )
-      $ Tuple (unsub <> [ BExecute $ removeDynBeacon { id: show me } ]) evt
+      $ Tuple (unsub <> [ removeDynBeacon { id: show me } ]) evt
 
 -- | This function is used along with `useDyn` to create dynamic collections of elements, like todo items in a todo mvc app.
 -- | See [**Dynamic components**](https://purescript-deku.netlify.app/core-concepts/collections#dynamic-components) in the Deku guide for more information.

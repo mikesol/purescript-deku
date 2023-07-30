@@ -23,55 +23,28 @@ module Deku.Hooks
 
 import Prelude
 
+import Bolson.Control (Flatten)
 import Bolson.Control as Bolson
-import Bolson.Core (Element(..), Element', Entity(..), Scope, envy)
-import Control.Alt ((<|>))
+import Bolson.Core (Element(..), Entity(..), envy)
 import Control.Monad.ST.Class (liftST)
 import Control.Monad.ST.Internal as STRef
-import Control.Monad.ST.Uncurried (mkSTFn1, mkSTFn2, runSTFn1, runSTFn2)
-import Data.Array as Array
-import Data.Either (Either(..))
-import Data.Foldable (for_)
-import Data.Maybe (Maybe(..), fromMaybe)
-import Data.Newtype (class Newtype, unwrap)
-import Data.Tuple (Tuple(..), curry)
+import Data.Newtype (unwrap)
+import Data.Tuple (Tuple(..))
 import Data.Tuple.Nested (type (/\), (/\))
-import Deku.Core (Child, DOMInterpret(..), Node(..), Node', Nut(..), NutF(..), Hook, dyn, insert, remove, sendToPos)
+import Deku.Core (Child, DOMInterpret(..), Hook, Node(..), Node', Nut(..), NutF(..), DekuExtra, dyn, insert, remove, sendToPos)
 import Deku.Do as Deku
-import Effect (Effect, foreachE)
-import Effect.Aff (Aff, Error, error, joinFiber, killFiber, launchAff, launchAff_)
-import Effect.Uncurried (mkEffectFn1, runEffectFn1, runEffectFn2)
-import FRP.Event (Event, Subscriber(..), create, keepLatest, mailbox, makeEvent, mapAccum, memoize, merge, subscribe, subscribeO)
-import Safe.Coerce (coerce)
+import Effect (Effect)
+import FRP.Event (Event, create, mailbox, makeEvent, mapAccum, memoize, merge, subscribe)
 
-portalFlatten
-  :: forall payload136 b143 d145 t149 t157 t159 payload171
-   . Newtype b143
-       { ids :: d145
-       | t149
-       }
-  => { disconnectElement ::
-         DOMInterpret t157
-         -> { id :: String
-            , parent :: String
-            , scope :: Scope
-            | t159
-            }
-         -> t157
-     , doLogic :: Int -> DOMInterpret payload136 -> String -> payload136
-     , ids :: b143 -> d145
-     , toElt ::
-         Node payload171
-         -> Element (DOMInterpret payload171)
-              ( pos :: Maybe Int
-              , dynFamily :: Maybe String
-              , ez :: Boolean
-              )
-              payload171
-     }
-portalFlatten =
+flattenArgs
+  :: forall payload. Flatten Int (DOMInterpret payload) Node DekuExtra payload
+flattenArgs =
   { doLogic: \pos (DOMInterpret { sendToPos }) id -> sendToPos { id, pos }
   , ids: unwrap >>> _.ids
+  , deferPayload: \(DOMInterpret { deferPayload }) -> deferPayload
+  , forcePayload: \(DOMInterpret { forcePayload }) -> forcePayload
+  , redecorateDeferredPayload: \(DOMInterpret { redecorateDeferredPayload }) ->
+      redecorateDeferredPayload
   , disconnectElement:
       \(DOMInterpret { disconnectElement }) { id, scope, parent } ->
         disconnectElement { id, scope, parent, scopeEq: eq }
@@ -82,7 +55,7 @@ __internalDekuFlatten
   :: forall payload
    . NutF payload
   -> Node' payload
-__internalDekuFlatten (NutF c) a b = Bolson.flatten portalFlatten a b c
+__internalDekuFlatten (NutF c) a b = Bolson.flatten flattenArgs a b c
 
 -- | A state hook. See [`useState`](https://purescript-deku.netlify.app/core-concepts/state#the-state-hook) in the Deku guide for example usage.
 useState
@@ -123,8 +96,8 @@ useMemoized'
    . (Event a -> Event b)
   -> Hook ((a -> Effect Unit) /\ Event b)
 useMemoized' f0 makeHook = Deku.do
-  e /\ push <- useState
-  m <- useMemoized e
+  push /\ e <- useState
+  m <- useMemoized (f0 e)
   makeHook (push /\ m)
 
 -- | A hook that takes an initial value and an event and produces
@@ -148,8 +121,8 @@ useRef a e makeHook = Nut go'
     let Nut nf = makeHook (liftST $ STRef.read rf)
     Tuple sub (Tuple unsub evt) <- __internalDekuFlatten nf i di
     pure $ Tuple sub $ Tuple unsub $ makeEvent \k -> do
-      u0 <- subscribe e \a -> do
-        void $ liftST $ STRef.write a rf
+      u0 <- subscribe e \x -> do
+        void $ liftST $ STRef.write x rf
       u1 <- subscribe evt k
       pure do
         u0
