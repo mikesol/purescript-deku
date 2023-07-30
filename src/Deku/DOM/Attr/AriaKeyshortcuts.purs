@@ -26,91 +26,197 @@ import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 data AriaKeyshortcuts = AriaKeyshortcuts
 
 instance Attr Circle_ AriaKeyshortcuts String where
-  attr AriaKeyshortcuts bothValues  = unsafeAttribute $ Both { key: "aria-keyshortcuts", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "aria-keyshortcuts", value:  prop' value  })
-  pureAttr AriaKeyshortcuts value  = unsafeAttribute $ This { key: "aria-keyshortcuts", value:  prop' value  }
-  unpureAttr AriaKeyshortcuts eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "aria-keyshortcuts", value:  prop' value  }
+  attr AriaKeyshortcuts bothValues = unsafeAttribute $ Both
+    { key: "aria-keyshortcuts", value: prop' (fst bothValues) }
+    ( snd bothValues <#> \value ->
+        { key: "aria-keyshortcuts", value: prop' value }
+    )
+  pureAttr AriaKeyshortcuts value = unsafeAttribute $ This
+    { key: "aria-keyshortcuts", value: prop' value }
+  unpureAttr AriaKeyshortcuts eventValue = unsafeAttribute $ That $ eventValue
+    <#> \value -> { key: "aria-keyshortcuts", value: prop' value }
 
 instance Attr Ellipse_ AriaKeyshortcuts String where
-  attr AriaKeyshortcuts bothValues  = unsafeAttribute $ Both { key: "aria-keyshortcuts", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "aria-keyshortcuts", value:  prop' value  })
-  pureAttr AriaKeyshortcuts value  = unsafeAttribute $ This { key: "aria-keyshortcuts", value:  prop' value  }
-  unpureAttr AriaKeyshortcuts eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "aria-keyshortcuts", value:  prop' value  }
+  attr AriaKeyshortcuts bothValues = unsafeAttribute $ Both
+    { key: "aria-keyshortcuts", value: prop' (fst bothValues) }
+    ( snd bothValues <#> \value ->
+        { key: "aria-keyshortcuts", value: prop' value }
+    )
+  pureAttr AriaKeyshortcuts value = unsafeAttribute $ This
+    { key: "aria-keyshortcuts", value: prop' value }
+  unpureAttr AriaKeyshortcuts eventValue = unsafeAttribute $ That $ eventValue
+    <#> \value -> { key: "aria-keyshortcuts", value: prop' value }
 
 instance Attr ForeignObject_ AriaKeyshortcuts String where
-  attr AriaKeyshortcuts bothValues  = unsafeAttribute $ Both { key: "aria-keyshortcuts", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "aria-keyshortcuts", value:  prop' value  })
-  pureAttr AriaKeyshortcuts value  = unsafeAttribute $ This { key: "aria-keyshortcuts", value:  prop' value  }
-  unpureAttr AriaKeyshortcuts eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "aria-keyshortcuts", value:  prop' value  }
+  attr AriaKeyshortcuts bothValues = unsafeAttribute $ Both
+    { key: "aria-keyshortcuts", value: prop' (fst bothValues) }
+    ( snd bothValues <#> \value ->
+        { key: "aria-keyshortcuts", value: prop' value }
+    )
+  pureAttr AriaKeyshortcuts value = unsafeAttribute $ This
+    { key: "aria-keyshortcuts", value: prop' value }
+  unpureAttr AriaKeyshortcuts eventValue = unsafeAttribute $ That $ eventValue
+    <#> \value -> { key: "aria-keyshortcuts", value: prop' value }
 
 instance Attr G_ AriaKeyshortcuts String where
-  attr AriaKeyshortcuts bothValues  = unsafeAttribute $ Both { key: "aria-keyshortcuts", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "aria-keyshortcuts", value:  prop' value  })
-  pureAttr AriaKeyshortcuts value  = unsafeAttribute $ This { key: "aria-keyshortcuts", value:  prop' value  }
-  unpureAttr AriaKeyshortcuts eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "aria-keyshortcuts", value:  prop' value  }
+  attr AriaKeyshortcuts bothValues = unsafeAttribute $ Both
+    { key: "aria-keyshortcuts", value: prop' (fst bothValues) }
+    ( snd bothValues <#> \value ->
+        { key: "aria-keyshortcuts", value: prop' value }
+    )
+  pureAttr AriaKeyshortcuts value = unsafeAttribute $ This
+    { key: "aria-keyshortcuts", value: prop' value }
+  unpureAttr AriaKeyshortcuts eventValue = unsafeAttribute $ That $ eventValue
+    <#> \value -> { key: "aria-keyshortcuts", value: prop' value }
 
 instance Attr Line_ AriaKeyshortcuts String where
-  attr AriaKeyshortcuts bothValues  = unsafeAttribute $ Both { key: "aria-keyshortcuts", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "aria-keyshortcuts", value:  prop' value  })
-  pureAttr AriaKeyshortcuts value  = unsafeAttribute $ This { key: "aria-keyshortcuts", value:  prop' value  }
-  unpureAttr AriaKeyshortcuts eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "aria-keyshortcuts", value:  prop' value  }
+  attr AriaKeyshortcuts bothValues = unsafeAttribute $ Both
+    { key: "aria-keyshortcuts", value: prop' (fst bothValues) }
+    ( snd bothValues <#> \value ->
+        { key: "aria-keyshortcuts", value: prop' value }
+    )
+  pureAttr AriaKeyshortcuts value = unsafeAttribute $ This
+    { key: "aria-keyshortcuts", value: prop' value }
+  unpureAttr AriaKeyshortcuts eventValue = unsafeAttribute $ That $ eventValue
+    <#> \value -> { key: "aria-keyshortcuts", value: prop' value }
 
 instance Attr Marker_ AriaKeyshortcuts String where
-  attr AriaKeyshortcuts bothValues  = unsafeAttribute $ Both { key: "aria-keyshortcuts", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "aria-keyshortcuts", value:  prop' value  })
-  pureAttr AriaKeyshortcuts value  = unsafeAttribute $ This { key: "aria-keyshortcuts", value:  prop' value  }
-  unpureAttr AriaKeyshortcuts eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "aria-keyshortcuts", value:  prop' value  }
+  attr AriaKeyshortcuts bothValues = unsafeAttribute $ Both
+    { key: "aria-keyshortcuts", value: prop' (fst bothValues) }
+    ( snd bothValues <#> \value ->
+        { key: "aria-keyshortcuts", value: prop' value }
+    )
+  pureAttr AriaKeyshortcuts value = unsafeAttribute $ This
+    { key: "aria-keyshortcuts", value: prop' value }
+  unpureAttr AriaKeyshortcuts eventValue = unsafeAttribute $ That $ eventValue
+    <#> \value -> { key: "aria-keyshortcuts", value: prop' value }
 
 instance Attr Path_ AriaKeyshortcuts String where
-  attr AriaKeyshortcuts bothValues  = unsafeAttribute $ Both { key: "aria-keyshortcuts", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "aria-keyshortcuts", value:  prop' value  })
-  pureAttr AriaKeyshortcuts value  = unsafeAttribute $ This { key: "aria-keyshortcuts", value:  prop' value  }
-  unpureAttr AriaKeyshortcuts eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "aria-keyshortcuts", value:  prop' value  }
+  attr AriaKeyshortcuts bothValues = unsafeAttribute $ Both
+    { key: "aria-keyshortcuts", value: prop' (fst bothValues) }
+    ( snd bothValues <#> \value ->
+        { key: "aria-keyshortcuts", value: prop' value }
+    )
+  pureAttr AriaKeyshortcuts value = unsafeAttribute $ This
+    { key: "aria-keyshortcuts", value: prop' value }
+  unpureAttr AriaKeyshortcuts eventValue = unsafeAttribute $ That $ eventValue
+    <#> \value -> { key: "aria-keyshortcuts", value: prop' value }
 
 instance Attr Polygon_ AriaKeyshortcuts String where
-  attr AriaKeyshortcuts bothValues  = unsafeAttribute $ Both { key: "aria-keyshortcuts", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "aria-keyshortcuts", value:  prop' value  })
-  pureAttr AriaKeyshortcuts value  = unsafeAttribute $ This { key: "aria-keyshortcuts", value:  prop' value  }
-  unpureAttr AriaKeyshortcuts eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "aria-keyshortcuts", value:  prop' value  }
+  attr AriaKeyshortcuts bothValues = unsafeAttribute $ Both
+    { key: "aria-keyshortcuts", value: prop' (fst bothValues) }
+    ( snd bothValues <#> \value ->
+        { key: "aria-keyshortcuts", value: prop' value }
+    )
+  pureAttr AriaKeyshortcuts value = unsafeAttribute $ This
+    { key: "aria-keyshortcuts", value: prop' value }
+  unpureAttr AriaKeyshortcuts eventValue = unsafeAttribute $ That $ eventValue
+    <#> \value -> { key: "aria-keyshortcuts", value: prop' value }
 
 instance Attr Polyline_ AriaKeyshortcuts String where
-  attr AriaKeyshortcuts bothValues  = unsafeAttribute $ Both { key: "aria-keyshortcuts", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "aria-keyshortcuts", value:  prop' value  })
-  pureAttr AriaKeyshortcuts value  = unsafeAttribute $ This { key: "aria-keyshortcuts", value:  prop' value  }
-  unpureAttr AriaKeyshortcuts eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "aria-keyshortcuts", value:  prop' value  }
+  attr AriaKeyshortcuts bothValues = unsafeAttribute $ Both
+    { key: "aria-keyshortcuts", value: prop' (fst bothValues) }
+    ( snd bothValues <#> \value ->
+        { key: "aria-keyshortcuts", value: prop' value }
+    )
+  pureAttr AriaKeyshortcuts value = unsafeAttribute $ This
+    { key: "aria-keyshortcuts", value: prop' value }
+  unpureAttr AriaKeyshortcuts eventValue = unsafeAttribute $ That $ eventValue
+    <#> \value -> { key: "aria-keyshortcuts", value: prop' value }
 
 instance Attr Rect_ AriaKeyshortcuts String where
-  attr AriaKeyshortcuts bothValues  = unsafeAttribute $ Both { key: "aria-keyshortcuts", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "aria-keyshortcuts", value:  prop' value  })
-  pureAttr AriaKeyshortcuts value  = unsafeAttribute $ This { key: "aria-keyshortcuts", value:  prop' value  }
-  unpureAttr AriaKeyshortcuts eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "aria-keyshortcuts", value:  prop' value  }
+  attr AriaKeyshortcuts bothValues = unsafeAttribute $ Both
+    { key: "aria-keyshortcuts", value: prop' (fst bothValues) }
+    ( snd bothValues <#> \value ->
+        { key: "aria-keyshortcuts", value: prop' value }
+    )
+  pureAttr AriaKeyshortcuts value = unsafeAttribute $ This
+    { key: "aria-keyshortcuts", value: prop' value }
+  unpureAttr AriaKeyshortcuts eventValue = unsafeAttribute $ That $ eventValue
+    <#> \value -> { key: "aria-keyshortcuts", value: prop' value }
 
 instance Attr Svg_ AriaKeyshortcuts String where
-  attr AriaKeyshortcuts bothValues  = unsafeAttribute $ Both { key: "aria-keyshortcuts", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "aria-keyshortcuts", value:  prop' value  })
-  pureAttr AriaKeyshortcuts value  = unsafeAttribute $ This { key: "aria-keyshortcuts", value:  prop' value  }
-  unpureAttr AriaKeyshortcuts eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "aria-keyshortcuts", value:  prop' value  }
+  attr AriaKeyshortcuts bothValues = unsafeAttribute $ Both
+    { key: "aria-keyshortcuts", value: prop' (fst bothValues) }
+    ( snd bothValues <#> \value ->
+        { key: "aria-keyshortcuts", value: prop' value }
+    )
+  pureAttr AriaKeyshortcuts value = unsafeAttribute $ This
+    { key: "aria-keyshortcuts", value: prop' value }
+  unpureAttr AriaKeyshortcuts eventValue = unsafeAttribute $ That $ eventValue
+    <#> \value -> { key: "aria-keyshortcuts", value: prop' value }
 
 instance Attr Symbol_ AriaKeyshortcuts String where
-  attr AriaKeyshortcuts bothValues  = unsafeAttribute $ Both { key: "aria-keyshortcuts", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "aria-keyshortcuts", value:  prop' value  })
-  pureAttr AriaKeyshortcuts value  = unsafeAttribute $ This { key: "aria-keyshortcuts", value:  prop' value  }
-  unpureAttr AriaKeyshortcuts eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "aria-keyshortcuts", value:  prop' value  }
+  attr AriaKeyshortcuts bothValues = unsafeAttribute $ Both
+    { key: "aria-keyshortcuts", value: prop' (fst bothValues) }
+    ( snd bothValues <#> \value ->
+        { key: "aria-keyshortcuts", value: prop' value }
+    )
+  pureAttr AriaKeyshortcuts value = unsafeAttribute $ This
+    { key: "aria-keyshortcuts", value: prop' value }
+  unpureAttr AriaKeyshortcuts eventValue = unsafeAttribute $ That $ eventValue
+    <#> \value -> { key: "aria-keyshortcuts", value: prop' value }
 
 instance Attr Text_ AriaKeyshortcuts String where
-  attr AriaKeyshortcuts bothValues  = unsafeAttribute $ Both { key: "aria-keyshortcuts", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "aria-keyshortcuts", value:  prop' value  })
-  pureAttr AriaKeyshortcuts value  = unsafeAttribute $ This { key: "aria-keyshortcuts", value:  prop' value  }
-  unpureAttr AriaKeyshortcuts eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "aria-keyshortcuts", value:  prop' value  }
+  attr AriaKeyshortcuts bothValues = unsafeAttribute $ Both
+    { key: "aria-keyshortcuts", value: prop' (fst bothValues) }
+    ( snd bothValues <#> \value ->
+        { key: "aria-keyshortcuts", value: prop' value }
+    )
+  pureAttr AriaKeyshortcuts value = unsafeAttribute $ This
+    { key: "aria-keyshortcuts", value: prop' value }
+  unpureAttr AriaKeyshortcuts eventValue = unsafeAttribute $ That $ eventValue
+    <#> \value -> { key: "aria-keyshortcuts", value: prop' value }
 
 instance Attr TextPath_ AriaKeyshortcuts String where
-  attr AriaKeyshortcuts bothValues  = unsafeAttribute $ Both { key: "aria-keyshortcuts", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "aria-keyshortcuts", value:  prop' value  })
-  pureAttr AriaKeyshortcuts value  = unsafeAttribute $ This { key: "aria-keyshortcuts", value:  prop' value  }
-  unpureAttr AriaKeyshortcuts eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "aria-keyshortcuts", value:  prop' value  }
+  attr AriaKeyshortcuts bothValues = unsafeAttribute $ Both
+    { key: "aria-keyshortcuts", value: prop' (fst bothValues) }
+    ( snd bothValues <#> \value ->
+        { key: "aria-keyshortcuts", value: prop' value }
+    )
+  pureAttr AriaKeyshortcuts value = unsafeAttribute $ This
+    { key: "aria-keyshortcuts", value: prop' value }
+  unpureAttr AriaKeyshortcuts eventValue = unsafeAttribute $ That $ eventValue
+    <#> \value -> { key: "aria-keyshortcuts", value: prop' value }
 
 instance Attr Tspan_ AriaKeyshortcuts String where
-  attr AriaKeyshortcuts bothValues  = unsafeAttribute $ Both { key: "aria-keyshortcuts", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "aria-keyshortcuts", value:  prop' value  })
-  pureAttr AriaKeyshortcuts value  = unsafeAttribute $ This { key: "aria-keyshortcuts", value:  prop' value  }
-  unpureAttr AriaKeyshortcuts eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "aria-keyshortcuts", value:  prop' value  }
+  attr AriaKeyshortcuts bothValues = unsafeAttribute $ Both
+    { key: "aria-keyshortcuts", value: prop' (fst bothValues) }
+    ( snd bothValues <#> \value ->
+        { key: "aria-keyshortcuts", value: prop' value }
+    )
+  pureAttr AriaKeyshortcuts value = unsafeAttribute $ This
+    { key: "aria-keyshortcuts", value: prop' value }
+  unpureAttr AriaKeyshortcuts eventValue = unsafeAttribute $ That $ eventValue
+    <#> \value -> { key: "aria-keyshortcuts", value: prop' value }
 
 instance Attr Use_ AriaKeyshortcuts String where
-  attr AriaKeyshortcuts bothValues  = unsafeAttribute $ Both { key: "aria-keyshortcuts", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "aria-keyshortcuts", value:  prop' value  })
-  pureAttr AriaKeyshortcuts value  = unsafeAttribute $ This { key: "aria-keyshortcuts", value:  prop' value  }
-  unpureAttr AriaKeyshortcuts eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "aria-keyshortcuts", value:  prop' value  }
+  attr AriaKeyshortcuts bothValues = unsafeAttribute $ Both
+    { key: "aria-keyshortcuts", value: prop' (fst bothValues) }
+    ( snd bothValues <#> \value ->
+        { key: "aria-keyshortcuts", value: prop' value }
+    )
+  pureAttr AriaKeyshortcuts value = unsafeAttribute $ This
+    { key: "aria-keyshortcuts", value: prop' value }
+  unpureAttr AriaKeyshortcuts eventValue = unsafeAttribute $ That $ eventValue
+    <#> \value -> { key: "aria-keyshortcuts", value: prop' value }
 
 instance Attr View_ AriaKeyshortcuts String where
-  attr AriaKeyshortcuts bothValues  = unsafeAttribute $ Both { key: "aria-keyshortcuts", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "aria-keyshortcuts", value:  prop' value  })
-  pureAttr AriaKeyshortcuts value  = unsafeAttribute $ This { key: "aria-keyshortcuts", value:  prop' value  }
-  unpureAttr AriaKeyshortcuts eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "aria-keyshortcuts", value:  prop' value  }
+  attr AriaKeyshortcuts bothValues = unsafeAttribute $ Both
+    { key: "aria-keyshortcuts", value: prop' (fst bothValues) }
+    ( snd bothValues <#> \value ->
+        { key: "aria-keyshortcuts", value: prop' value }
+    )
+  pureAttr AriaKeyshortcuts value = unsafeAttribute $ This
+    { key: "aria-keyshortcuts", value: prop' value }
+  unpureAttr AriaKeyshortcuts eventValue = unsafeAttribute $ That $ eventValue
+    <#> \value -> { key: "aria-keyshortcuts", value: prop' value }
 
 instance Attr everything AriaKeyshortcuts Unit where
-  attr AriaKeyshortcuts bothValues  = unsafeAttribute $ Both { key: "aria-keyshortcuts", value:  unset'  } (snd bothValues <#> \_ -> { key: "aria-keyshortcuts", value:  unset'  })
-  pureAttr AriaKeyshortcuts _  = unsafeAttribute $ This { key: "aria-keyshortcuts", value:  unset'  }
-  unpureAttr AriaKeyshortcuts eventValue  = unsafeAttribute $ That $ eventValue <#> \_ -> { key: "aria-keyshortcuts", value:  unset'  }
+  attr AriaKeyshortcuts bothValues = unsafeAttribute $ Both
+    { key: "aria-keyshortcuts", value: unset' }
+    (snd bothValues <#> \_ -> { key: "aria-keyshortcuts", value: unset' })
+  pureAttr AriaKeyshortcuts _ = unsafeAttribute $ This
+    { key: "aria-keyshortcuts", value: unset' }
+  unpureAttr AriaKeyshortcuts eventValue = unsafeAttribute $ That $ eventValue
+    <#> \_ -> { key: "aria-keyshortcuts", value: unset' }

@@ -220,7 +220,6 @@ globalPortal1
   -> Nut
 globalPortal1 i f = globalPortal (singleton i) (lcmap (index (Proxy :: _ 0)) f)
 
-
 -- | A variation of portal that takes a single element instead of a vector of elements.
 portal1
   :: Nut

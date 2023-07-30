@@ -13,26 +13,44 @@ import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 data Cite = Cite
 
 instance Attr Blockquote_ Cite String where
-  attr Cite bothValues  = unsafeAttribute $ Both { key: "cite", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "cite", value:  prop' value  })
-  pureAttr Cite value  = unsafeAttribute $ This { key: "cite", value:  prop' value  }
-  unpureAttr Cite eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "cite", value:  prop' value  }
+  attr Cite bothValues = unsafeAttribute $ Both
+    { key: "cite", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "cite", value: prop' value })
+  pureAttr Cite value = unsafeAttribute $ This
+    { key: "cite", value: prop' value }
+  unpureAttr Cite eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+    { key: "cite", value: prop' value }
 
 instance Attr Del_ Cite String where
-  attr Cite bothValues  = unsafeAttribute $ Both { key: "cite", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "cite", value:  prop' value  })
-  pureAttr Cite value  = unsafeAttribute $ This { key: "cite", value:  prop' value  }
-  unpureAttr Cite eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "cite", value:  prop' value  }
+  attr Cite bothValues = unsafeAttribute $ Both
+    { key: "cite", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "cite", value: prop' value })
+  pureAttr Cite value = unsafeAttribute $ This
+    { key: "cite", value: prop' value }
+  unpureAttr Cite eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+    { key: "cite", value: prop' value }
 
 instance Attr Ins_ Cite String where
-  attr Cite bothValues  = unsafeAttribute $ Both { key: "cite", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "cite", value:  prop' value  })
-  pureAttr Cite value  = unsafeAttribute $ This { key: "cite", value:  prop' value  }
-  unpureAttr Cite eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "cite", value:  prop' value  }
+  attr Cite bothValues = unsafeAttribute $ Both
+    { key: "cite", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "cite", value: prop' value })
+  pureAttr Cite value = unsafeAttribute $ This
+    { key: "cite", value: prop' value }
+  unpureAttr Cite eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+    { key: "cite", value: prop' value }
 
 instance Attr Q_ Cite String where
-  attr Cite bothValues  = unsafeAttribute $ Both { key: "cite", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "cite", value:  prop' value  })
-  pureAttr Cite value  = unsafeAttribute $ This { key: "cite", value:  prop' value  }
-  unpureAttr Cite eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "cite", value:  prop' value  }
+  attr Cite bothValues = unsafeAttribute $ Both
+    { key: "cite", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "cite", value: prop' value })
+  pureAttr Cite value = unsafeAttribute $ This
+    { key: "cite", value: prop' value }
+  unpureAttr Cite eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+    { key: "cite", value: prop' value }
 
 instance Attr everything Cite Unit where
-  attr Cite bothValues  = unsafeAttribute $ Both { key: "cite", value:  unset'  } (snd bothValues <#> \_ -> { key: "cite", value:  unset'  })
-  pureAttr Cite _  = unsafeAttribute $ This { key: "cite", value:  unset'  }
-  unpureAttr Cite eventValue  = unsafeAttribute $ That $ eventValue <#> \_ -> { key: "cite", value:  unset'  }
+  attr Cite bothValues = unsafeAttribute $ Both { key: "cite", value: unset' }
+    (snd bothValues <#> \_ -> { key: "cite", value: unset' })
+  pureAttr Cite _ = unsafeAttribute $ This { key: "cite", value: unset' }
+  unpureAttr Cite eventValue = unsafeAttribute $ That $ eventValue <#> \_ ->
+    { key: "cite", value: unset' }

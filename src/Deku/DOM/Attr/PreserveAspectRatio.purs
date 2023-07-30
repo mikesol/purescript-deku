@@ -16,41 +16,87 @@ import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 data PreserveAspectRatio = PreserveAspectRatio
 
 instance Attr FeImage_ PreserveAspectRatio String where
-  attr PreserveAspectRatio bothValues  = unsafeAttribute $ Both { key: "preserveAspectRatio", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "preserveAspectRatio", value:  prop' value  })
-  pureAttr PreserveAspectRatio value  = unsafeAttribute $ This { key: "preserveAspectRatio", value:  prop' value  }
-  unpureAttr PreserveAspectRatio eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "preserveAspectRatio", value:  prop' value  }
+  attr PreserveAspectRatio bothValues = unsafeAttribute $ Both
+    { key: "preserveAspectRatio", value: prop' (fst bothValues) }
+    ( snd bothValues <#> \value ->
+        { key: "preserveAspectRatio", value: prop' value }
+    )
+  pureAttr PreserveAspectRatio value = unsafeAttribute $ This
+    { key: "preserveAspectRatio", value: prop' value }
+  unpureAttr PreserveAspectRatio eventValue = unsafeAttribute $ That $
+    eventValue <#> \value -> { key: "preserveAspectRatio", value: prop' value }
 
 instance Attr Image_ PreserveAspectRatio String where
-  attr PreserveAspectRatio bothValues  = unsafeAttribute $ Both { key: "preserveAspectRatio", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "preserveAspectRatio", value:  prop' value  })
-  pureAttr PreserveAspectRatio value  = unsafeAttribute $ This { key: "preserveAspectRatio", value:  prop' value  }
-  unpureAttr PreserveAspectRatio eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "preserveAspectRatio", value:  prop' value  }
+  attr PreserveAspectRatio bothValues = unsafeAttribute $ Both
+    { key: "preserveAspectRatio", value: prop' (fst bothValues) }
+    ( snd bothValues <#> \value ->
+        { key: "preserveAspectRatio", value: prop' value }
+    )
+  pureAttr PreserveAspectRatio value = unsafeAttribute $ This
+    { key: "preserveAspectRatio", value: prop' value }
+  unpureAttr PreserveAspectRatio eventValue = unsafeAttribute $ That $
+    eventValue <#> \value -> { key: "preserveAspectRatio", value: prop' value }
 
 instance Attr Marker_ PreserveAspectRatio String where
-  attr PreserveAspectRatio bothValues  = unsafeAttribute $ Both { key: "preserveAspectRatio", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "preserveAspectRatio", value:  prop' value  })
-  pureAttr PreserveAspectRatio value  = unsafeAttribute $ This { key: "preserveAspectRatio", value:  prop' value  }
-  unpureAttr PreserveAspectRatio eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "preserveAspectRatio", value:  prop' value  }
+  attr PreserveAspectRatio bothValues = unsafeAttribute $ Both
+    { key: "preserveAspectRatio", value: prop' (fst bothValues) }
+    ( snd bothValues <#> \value ->
+        { key: "preserveAspectRatio", value: prop' value }
+    )
+  pureAttr PreserveAspectRatio value = unsafeAttribute $ This
+    { key: "preserveAspectRatio", value: prop' value }
+  unpureAttr PreserveAspectRatio eventValue = unsafeAttribute $ That $
+    eventValue <#> \value -> { key: "preserveAspectRatio", value: prop' value }
 
 instance Attr Pattern_ PreserveAspectRatio String where
-  attr PreserveAspectRatio bothValues  = unsafeAttribute $ Both { key: "preserveAspectRatio", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "preserveAspectRatio", value:  prop' value  })
-  pureAttr PreserveAspectRatio value  = unsafeAttribute $ This { key: "preserveAspectRatio", value:  prop' value  }
-  unpureAttr PreserveAspectRatio eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "preserveAspectRatio", value:  prop' value  }
+  attr PreserveAspectRatio bothValues = unsafeAttribute $ Both
+    { key: "preserveAspectRatio", value: prop' (fst bothValues) }
+    ( snd bothValues <#> \value ->
+        { key: "preserveAspectRatio", value: prop' value }
+    )
+  pureAttr PreserveAspectRatio value = unsafeAttribute $ This
+    { key: "preserveAspectRatio", value: prop' value }
+  unpureAttr PreserveAspectRatio eventValue = unsafeAttribute $ That $
+    eventValue <#> \value -> { key: "preserveAspectRatio", value: prop' value }
 
 instance Attr Svg_ PreserveAspectRatio String where
-  attr PreserveAspectRatio bothValues  = unsafeAttribute $ Both { key: "preserveAspectRatio", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "preserveAspectRatio", value:  prop' value  })
-  pureAttr PreserveAspectRatio value  = unsafeAttribute $ This { key: "preserveAspectRatio", value:  prop' value  }
-  unpureAttr PreserveAspectRatio eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "preserveAspectRatio", value:  prop' value  }
+  attr PreserveAspectRatio bothValues = unsafeAttribute $ Both
+    { key: "preserveAspectRatio", value: prop' (fst bothValues) }
+    ( snd bothValues <#> \value ->
+        { key: "preserveAspectRatio", value: prop' value }
+    )
+  pureAttr PreserveAspectRatio value = unsafeAttribute $ This
+    { key: "preserveAspectRatio", value: prop' value }
+  unpureAttr PreserveAspectRatio eventValue = unsafeAttribute $ That $
+    eventValue <#> \value -> { key: "preserveAspectRatio", value: prop' value }
 
 instance Attr Symbol_ PreserveAspectRatio String where
-  attr PreserveAspectRatio bothValues  = unsafeAttribute $ Both { key: "preserveAspectRatio", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "preserveAspectRatio", value:  prop' value  })
-  pureAttr PreserveAspectRatio value  = unsafeAttribute $ This { key: "preserveAspectRatio", value:  prop' value  }
-  unpureAttr PreserveAspectRatio eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "preserveAspectRatio", value:  prop' value  }
+  attr PreserveAspectRatio bothValues = unsafeAttribute $ Both
+    { key: "preserveAspectRatio", value: prop' (fst bothValues) }
+    ( snd bothValues <#> \value ->
+        { key: "preserveAspectRatio", value: prop' value }
+    )
+  pureAttr PreserveAspectRatio value = unsafeAttribute $ This
+    { key: "preserveAspectRatio", value: prop' value }
+  unpureAttr PreserveAspectRatio eventValue = unsafeAttribute $ That $
+    eventValue <#> \value -> { key: "preserveAspectRatio", value: prop' value }
 
 instance Attr View_ PreserveAspectRatio String where
-  attr PreserveAspectRatio bothValues  = unsafeAttribute $ Both { key: "preserveAspectRatio", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "preserveAspectRatio", value:  prop' value  })
-  pureAttr PreserveAspectRatio value  = unsafeAttribute $ This { key: "preserveAspectRatio", value:  prop' value  }
-  unpureAttr PreserveAspectRatio eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "preserveAspectRatio", value:  prop' value  }
+  attr PreserveAspectRatio bothValues = unsafeAttribute $ Both
+    { key: "preserveAspectRatio", value: prop' (fst bothValues) }
+    ( snd bothValues <#> \value ->
+        { key: "preserveAspectRatio", value: prop' value }
+    )
+  pureAttr PreserveAspectRatio value = unsafeAttribute $ This
+    { key: "preserveAspectRatio", value: prop' value }
+  unpureAttr PreserveAspectRatio eventValue = unsafeAttribute $ That $
+    eventValue <#> \value -> { key: "preserveAspectRatio", value: prop' value }
 
 instance Attr everything PreserveAspectRatio Unit where
-  attr PreserveAspectRatio bothValues  = unsafeAttribute $ Both { key: "preserveAspectRatio", value:  unset'  } (snd bothValues <#> \_ -> { key: "preserveAspectRatio", value:  unset'  })
-  pureAttr PreserveAspectRatio _  = unsafeAttribute $ This { key: "preserveAspectRatio", value:  unset'  }
-  unpureAttr PreserveAspectRatio eventValue  = unsafeAttribute $ That $ eventValue <#> \_ -> { key: "preserveAspectRatio", value:  unset'  }
+  attr PreserveAspectRatio bothValues = unsafeAttribute $ Both
+    { key: "preserveAspectRatio", value: unset' }
+    (snd bothValues <#> \_ -> { key: "preserveAspectRatio", value: unset' })
+  pureAttr PreserveAspectRatio _ = unsafeAttribute $ This
+    { key: "preserveAspectRatio", value: unset' }
+  unpureAttr PreserveAspectRatio eventValue = unsafeAttribute $ That $
+    eventValue <#> \_ -> { key: "preserveAspectRatio", value: unset' }

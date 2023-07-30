@@ -28,101 +28,219 @@ import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 data TextDecoration = TextDecoration
 
 instance Attr FeBlend_ TextDecoration String where
-  attr TextDecoration bothValues  = unsafeAttribute $ Both { key: "text-decoration", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "text-decoration", value:  prop' value  })
-  pureAttr TextDecoration value  = unsafeAttribute $ This { key: "text-decoration", value:  prop' value  }
-  unpureAttr TextDecoration eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "text-decoration", value:  prop' value  }
+  attr TextDecoration bothValues = unsafeAttribute $ Both
+    { key: "text-decoration", value: prop' (fst bothValues) }
+    ( snd bothValues <#> \value ->
+        { key: "text-decoration", value: prop' value }
+    )
+  pureAttr TextDecoration value = unsafeAttribute $ This
+    { key: "text-decoration", value: prop' value }
+  unpureAttr TextDecoration eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "text-decoration", value: prop' value }
 
 instance Attr FeColorMatrix_ TextDecoration String where
-  attr TextDecoration bothValues  = unsafeAttribute $ Both { key: "text-decoration", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "text-decoration", value:  prop' value  })
-  pureAttr TextDecoration value  = unsafeAttribute $ This { key: "text-decoration", value:  prop' value  }
-  unpureAttr TextDecoration eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "text-decoration", value:  prop' value  }
+  attr TextDecoration bothValues = unsafeAttribute $ Both
+    { key: "text-decoration", value: prop' (fst bothValues) }
+    ( snd bothValues <#> \value ->
+        { key: "text-decoration", value: prop' value }
+    )
+  pureAttr TextDecoration value = unsafeAttribute $ This
+    { key: "text-decoration", value: prop' value }
+  unpureAttr TextDecoration eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "text-decoration", value: prop' value }
 
 instance Attr FeComponentTransfer_ TextDecoration String where
-  attr TextDecoration bothValues  = unsafeAttribute $ Both { key: "text-decoration", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "text-decoration", value:  prop' value  })
-  pureAttr TextDecoration value  = unsafeAttribute $ This { key: "text-decoration", value:  prop' value  }
-  unpureAttr TextDecoration eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "text-decoration", value:  prop' value  }
+  attr TextDecoration bothValues = unsafeAttribute $ Both
+    { key: "text-decoration", value: prop' (fst bothValues) }
+    ( snd bothValues <#> \value ->
+        { key: "text-decoration", value: prop' value }
+    )
+  pureAttr TextDecoration value = unsafeAttribute $ This
+    { key: "text-decoration", value: prop' value }
+  unpureAttr TextDecoration eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "text-decoration", value: prop' value }
 
 instance Attr FeComposite_ TextDecoration String where
-  attr TextDecoration bothValues  = unsafeAttribute $ Both { key: "text-decoration", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "text-decoration", value:  prop' value  })
-  pureAttr TextDecoration value  = unsafeAttribute $ This { key: "text-decoration", value:  prop' value  }
-  unpureAttr TextDecoration eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "text-decoration", value:  prop' value  }
+  attr TextDecoration bothValues = unsafeAttribute $ Both
+    { key: "text-decoration", value: prop' (fst bothValues) }
+    ( snd bothValues <#> \value ->
+        { key: "text-decoration", value: prop' value }
+    )
+  pureAttr TextDecoration value = unsafeAttribute $ This
+    { key: "text-decoration", value: prop' value }
+  unpureAttr TextDecoration eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "text-decoration", value: prop' value }
 
 instance Attr FeConvolveMatrix_ TextDecoration String where
-  attr TextDecoration bothValues  = unsafeAttribute $ Both { key: "text-decoration", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "text-decoration", value:  prop' value  })
-  pureAttr TextDecoration value  = unsafeAttribute $ This { key: "text-decoration", value:  prop' value  }
-  unpureAttr TextDecoration eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "text-decoration", value:  prop' value  }
+  attr TextDecoration bothValues = unsafeAttribute $ Both
+    { key: "text-decoration", value: prop' (fst bothValues) }
+    ( snd bothValues <#> \value ->
+        { key: "text-decoration", value: prop' value }
+    )
+  pureAttr TextDecoration value = unsafeAttribute $ This
+    { key: "text-decoration", value: prop' value }
+  unpureAttr TextDecoration eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "text-decoration", value: prop' value }
 
 instance Attr FeDiffuseLighting_ TextDecoration String where
-  attr TextDecoration bothValues  = unsafeAttribute $ Both { key: "text-decoration", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "text-decoration", value:  prop' value  })
-  pureAttr TextDecoration value  = unsafeAttribute $ This { key: "text-decoration", value:  prop' value  }
-  unpureAttr TextDecoration eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "text-decoration", value:  prop' value  }
+  attr TextDecoration bothValues = unsafeAttribute $ Both
+    { key: "text-decoration", value: prop' (fst bothValues) }
+    ( snd bothValues <#> \value ->
+        { key: "text-decoration", value: prop' value }
+    )
+  pureAttr TextDecoration value = unsafeAttribute $ This
+    { key: "text-decoration", value: prop' value }
+  unpureAttr TextDecoration eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "text-decoration", value: prop' value }
 
 instance Attr FeDisplacementMap_ TextDecoration String where
-  attr TextDecoration bothValues  = unsafeAttribute $ Both { key: "text-decoration", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "text-decoration", value:  prop' value  })
-  pureAttr TextDecoration value  = unsafeAttribute $ This { key: "text-decoration", value:  prop' value  }
-  unpureAttr TextDecoration eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "text-decoration", value:  prop' value  }
+  attr TextDecoration bothValues = unsafeAttribute $ Both
+    { key: "text-decoration", value: prop' (fst bothValues) }
+    ( snd bothValues <#> \value ->
+        { key: "text-decoration", value: prop' value }
+    )
+  pureAttr TextDecoration value = unsafeAttribute $ This
+    { key: "text-decoration", value: prop' value }
+  unpureAttr TextDecoration eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "text-decoration", value: prop' value }
 
 instance Attr FeFlood_ TextDecoration String where
-  attr TextDecoration bothValues  = unsafeAttribute $ Both { key: "text-decoration", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "text-decoration", value:  prop' value  })
-  pureAttr TextDecoration value  = unsafeAttribute $ This { key: "text-decoration", value:  prop' value  }
-  unpureAttr TextDecoration eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "text-decoration", value:  prop' value  }
+  attr TextDecoration bothValues = unsafeAttribute $ Both
+    { key: "text-decoration", value: prop' (fst bothValues) }
+    ( snd bothValues <#> \value ->
+        { key: "text-decoration", value: prop' value }
+    )
+  pureAttr TextDecoration value = unsafeAttribute $ This
+    { key: "text-decoration", value: prop' value }
+  unpureAttr TextDecoration eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "text-decoration", value: prop' value }
 
 instance Attr FeGaussianBlur_ TextDecoration String where
-  attr TextDecoration bothValues  = unsafeAttribute $ Both { key: "text-decoration", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "text-decoration", value:  prop' value  })
-  pureAttr TextDecoration value  = unsafeAttribute $ This { key: "text-decoration", value:  prop' value  }
-  unpureAttr TextDecoration eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "text-decoration", value:  prop' value  }
+  attr TextDecoration bothValues = unsafeAttribute $ Both
+    { key: "text-decoration", value: prop' (fst bothValues) }
+    ( snd bothValues <#> \value ->
+        { key: "text-decoration", value: prop' value }
+    )
+  pureAttr TextDecoration value = unsafeAttribute $ This
+    { key: "text-decoration", value: prop' value }
+  unpureAttr TextDecoration eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "text-decoration", value: prop' value }
 
 instance Attr FeImage_ TextDecoration String where
-  attr TextDecoration bothValues  = unsafeAttribute $ Both { key: "text-decoration", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "text-decoration", value:  prop' value  })
-  pureAttr TextDecoration value  = unsafeAttribute $ This { key: "text-decoration", value:  prop' value  }
-  unpureAttr TextDecoration eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "text-decoration", value:  prop' value  }
+  attr TextDecoration bothValues = unsafeAttribute $ Both
+    { key: "text-decoration", value: prop' (fst bothValues) }
+    ( snd bothValues <#> \value ->
+        { key: "text-decoration", value: prop' value }
+    )
+  pureAttr TextDecoration value = unsafeAttribute $ This
+    { key: "text-decoration", value: prop' value }
+  unpureAttr TextDecoration eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "text-decoration", value: prop' value }
 
 instance Attr FeMerge_ TextDecoration String where
-  attr TextDecoration bothValues  = unsafeAttribute $ Both { key: "text-decoration", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "text-decoration", value:  prop' value  })
-  pureAttr TextDecoration value  = unsafeAttribute $ This { key: "text-decoration", value:  prop' value  }
-  unpureAttr TextDecoration eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "text-decoration", value:  prop' value  }
+  attr TextDecoration bothValues = unsafeAttribute $ Both
+    { key: "text-decoration", value: prop' (fst bothValues) }
+    ( snd bothValues <#> \value ->
+        { key: "text-decoration", value: prop' value }
+    )
+  pureAttr TextDecoration value = unsafeAttribute $ This
+    { key: "text-decoration", value: prop' value }
+  unpureAttr TextDecoration eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "text-decoration", value: prop' value }
 
 instance Attr FeMorphology_ TextDecoration String where
-  attr TextDecoration bothValues  = unsafeAttribute $ Both { key: "text-decoration", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "text-decoration", value:  prop' value  })
-  pureAttr TextDecoration value  = unsafeAttribute $ This { key: "text-decoration", value:  prop' value  }
-  unpureAttr TextDecoration eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "text-decoration", value:  prop' value  }
+  attr TextDecoration bothValues = unsafeAttribute $ Both
+    { key: "text-decoration", value: prop' (fst bothValues) }
+    ( snd bothValues <#> \value ->
+        { key: "text-decoration", value: prop' value }
+    )
+  pureAttr TextDecoration value = unsafeAttribute $ This
+    { key: "text-decoration", value: prop' value }
+  unpureAttr TextDecoration eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "text-decoration", value: prop' value }
 
 instance Attr FeOffset_ TextDecoration String where
-  attr TextDecoration bothValues  = unsafeAttribute $ Both { key: "text-decoration", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "text-decoration", value:  prop' value  })
-  pureAttr TextDecoration value  = unsafeAttribute $ This { key: "text-decoration", value:  prop' value  }
-  unpureAttr TextDecoration eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "text-decoration", value:  prop' value  }
+  attr TextDecoration bothValues = unsafeAttribute $ Both
+    { key: "text-decoration", value: prop' (fst bothValues) }
+    ( snd bothValues <#> \value ->
+        { key: "text-decoration", value: prop' value }
+    )
+  pureAttr TextDecoration value = unsafeAttribute $ This
+    { key: "text-decoration", value: prop' value }
+  unpureAttr TextDecoration eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "text-decoration", value: prop' value }
 
 instance Attr FeSpecularLighting_ TextDecoration String where
-  attr TextDecoration bothValues  = unsafeAttribute $ Both { key: "text-decoration", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "text-decoration", value:  prop' value  })
-  pureAttr TextDecoration value  = unsafeAttribute $ This { key: "text-decoration", value:  prop' value  }
-  unpureAttr TextDecoration eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "text-decoration", value:  prop' value  }
+  attr TextDecoration bothValues = unsafeAttribute $ Both
+    { key: "text-decoration", value: prop' (fst bothValues) }
+    ( snd bothValues <#> \value ->
+        { key: "text-decoration", value: prop' value }
+    )
+  pureAttr TextDecoration value = unsafeAttribute $ This
+    { key: "text-decoration", value: prop' value }
+  unpureAttr TextDecoration eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "text-decoration", value: prop' value }
 
 instance Attr FeTile_ TextDecoration String where
-  attr TextDecoration bothValues  = unsafeAttribute $ Both { key: "text-decoration", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "text-decoration", value:  prop' value  })
-  pureAttr TextDecoration value  = unsafeAttribute $ This { key: "text-decoration", value:  prop' value  }
-  unpureAttr TextDecoration eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "text-decoration", value:  prop' value  }
+  attr TextDecoration bothValues = unsafeAttribute $ Both
+    { key: "text-decoration", value: prop' (fst bothValues) }
+    ( snd bothValues <#> \value ->
+        { key: "text-decoration", value: prop' value }
+    )
+  pureAttr TextDecoration value = unsafeAttribute $ This
+    { key: "text-decoration", value: prop' value }
+  unpureAttr TextDecoration eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "text-decoration", value: prop' value }
 
 instance Attr FeTurbulence_ TextDecoration String where
-  attr TextDecoration bothValues  = unsafeAttribute $ Both { key: "text-decoration", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "text-decoration", value:  prop' value  })
-  pureAttr TextDecoration value  = unsafeAttribute $ This { key: "text-decoration", value:  prop' value  }
-  unpureAttr TextDecoration eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "text-decoration", value:  prop' value  }
+  attr TextDecoration bothValues = unsafeAttribute $ Both
+    { key: "text-decoration", value: prop' (fst bothValues) }
+    ( snd bothValues <#> \value ->
+        { key: "text-decoration", value: prop' value }
+    )
+  pureAttr TextDecoration value = unsafeAttribute $ This
+    { key: "text-decoration", value: prop' value }
+  unpureAttr TextDecoration eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "text-decoration", value: prop' value }
 
 instance Attr Filter_ TextDecoration String where
-  attr TextDecoration bothValues  = unsafeAttribute $ Both { key: "text-decoration", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "text-decoration", value:  prop' value  })
-  pureAttr TextDecoration value  = unsafeAttribute $ This { key: "text-decoration", value:  prop' value  }
-  unpureAttr TextDecoration eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "text-decoration", value:  prop' value  }
+  attr TextDecoration bothValues = unsafeAttribute $ Both
+    { key: "text-decoration", value: prop' (fst bothValues) }
+    ( snd bothValues <#> \value ->
+        { key: "text-decoration", value: prop' value }
+    )
+  pureAttr TextDecoration value = unsafeAttribute $ This
+    { key: "text-decoration", value: prop' value }
+  unpureAttr TextDecoration eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "text-decoration", value: prop' value }
 
 instance Attr Image_ TextDecoration String where
-  attr TextDecoration bothValues  = unsafeAttribute $ Both { key: "text-decoration", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "text-decoration", value:  prop' value  })
-  pureAttr TextDecoration value  = unsafeAttribute $ This { key: "text-decoration", value:  prop' value  }
-  unpureAttr TextDecoration eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "text-decoration", value:  prop' value  }
+  attr TextDecoration bothValues = unsafeAttribute $ Both
+    { key: "text-decoration", value: prop' (fst bothValues) }
+    ( snd bothValues <#> \value ->
+        { key: "text-decoration", value: prop' value }
+    )
+  pureAttr TextDecoration value = unsafeAttribute $ This
+    { key: "text-decoration", value: prop' value }
+  unpureAttr TextDecoration eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "text-decoration", value: prop' value }
 
 instance Attr Switch_ TextDecoration String where
-  attr TextDecoration bothValues  = unsafeAttribute $ Both { key: "text-decoration", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "text-decoration", value:  prop' value  })
-  pureAttr TextDecoration value  = unsafeAttribute $ This { key: "text-decoration", value:  prop' value  }
-  unpureAttr TextDecoration eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "text-decoration", value:  prop' value  }
+  attr TextDecoration bothValues = unsafeAttribute $ Both
+    { key: "text-decoration", value: prop' (fst bothValues) }
+    ( snd bothValues <#> \value ->
+        { key: "text-decoration", value: prop' value }
+    )
+  pureAttr TextDecoration value = unsafeAttribute $ This
+    { key: "text-decoration", value: prop' value }
+  unpureAttr TextDecoration eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "text-decoration", value: prop' value }
 
 instance Attr everything TextDecoration Unit where
-  attr TextDecoration bothValues  = unsafeAttribute $ Both { key: "text-decoration", value:  unset'  } (snd bothValues <#> \_ -> { key: "text-decoration", value:  unset'  })
-  pureAttr TextDecoration _  = unsafeAttribute $ This { key: "text-decoration", value:  unset'  }
-  unpureAttr TextDecoration eventValue  = unsafeAttribute $ That $ eventValue <#> \_ -> { key: "text-decoration", value:  unset'  }
+  attr TextDecoration bothValues = unsafeAttribute $ Both
+    { key: "text-decoration", value: unset' }
+    (snd bothValues <#> \_ -> { key: "text-decoration", value: unset' })
+  pureAttr TextDecoration _ = unsafeAttribute $ This
+    { key: "text-decoration", value: unset' }
+  unpureAttr TextDecoration eventValue = unsafeAttribute $ That $ eventValue <#>
+    \_ -> { key: "text-decoration", value: unset' }

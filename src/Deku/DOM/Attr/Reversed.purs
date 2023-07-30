@@ -10,11 +10,19 @@ import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 data Reversed = Reversed
 
 instance Attr Ol_ Reversed String where
-  attr Reversed bothValues  = unsafeAttribute $ Both { key: "reversed", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "reversed", value:  prop' value  })
-  pureAttr Reversed value  = unsafeAttribute $ This { key: "reversed", value:  prop' value  }
-  unpureAttr Reversed eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "reversed", value:  prop' value  }
+  attr Reversed bothValues = unsafeAttribute $ Both
+    { key: "reversed", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "reversed", value: prop' value })
+  pureAttr Reversed value = unsafeAttribute $ This
+    { key: "reversed", value: prop' value }
+  unpureAttr Reversed eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "reversed", value: prop' value }
 
 instance Attr everything Reversed Unit where
-  attr Reversed bothValues  = unsafeAttribute $ Both { key: "reversed", value:  unset'  } (snd bothValues <#> \_ -> { key: "reversed", value:  unset'  })
-  pureAttr Reversed _  = unsafeAttribute $ This { key: "reversed", value:  unset'  }
-  unpureAttr Reversed eventValue  = unsafeAttribute $ That $ eventValue <#> \_ -> { key: "reversed", value:  unset'  }
+  attr Reversed bothValues = unsafeAttribute $ Both
+    { key: "reversed", value: unset' }
+    (snd bothValues <#> \_ -> { key: "reversed", value: unset' })
+  pureAttr Reversed _ = unsafeAttribute $ This
+    { key: "reversed", value: unset' }
+  unpureAttr Reversed eventValue = unsafeAttribute $ That $ eventValue <#> \_ ->
+    { key: "reversed", value: unset' }

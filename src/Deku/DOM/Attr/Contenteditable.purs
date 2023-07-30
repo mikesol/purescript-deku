@@ -1,4 +1,3 @@
-
 module Deku.DOM.Attr.Contenteditable where
 
 import Prelude
@@ -132,616 +131,1352 @@ import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 data Contenteditable = Contenteditable
 
 instance Attr A_ Contenteditable String where
-  attr Contenteditable bothValues  = unsafeAttribute $ Both { key: "contenteditable", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "contenteditable", value:  prop' value  })
-  pureAttr Contenteditable value  = unsafeAttribute $ This { key: "contenteditable", value:  prop' value  }
-  unpureAttr Contenteditable eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "contenteditable", value:  prop' value  }
+  attr Contenteditable bothValues = unsafeAttribute $ Both
+    { key: "contenteditable", value: prop' (fst bothValues) }
+    ( snd bothValues <#> \value ->
+        { key: "contenteditable", value: prop' value }
+    )
+  pureAttr Contenteditable value = unsafeAttribute $ This
+    { key: "contenteditable", value: prop' value }
+  unpureAttr Contenteditable eventValue = unsafeAttribute $ That $ eventValue
+    <#> \value -> { key: "contenteditable", value: prop' value }
 
 instance Attr Abbr_ Contenteditable String where
-  attr Contenteditable bothValues  = unsafeAttribute $ Both { key: "contenteditable", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "contenteditable", value:  prop' value  })
-  pureAttr Contenteditable value  = unsafeAttribute $ This { key: "contenteditable", value:  prop' value  }
-  unpureAttr Contenteditable eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "contenteditable", value:  prop' value  }
+  attr Contenteditable bothValues = unsafeAttribute $ Both
+    { key: "contenteditable", value: prop' (fst bothValues) }
+    ( snd bothValues <#> \value ->
+        { key: "contenteditable", value: prop' value }
+    )
+  pureAttr Contenteditable value = unsafeAttribute $ This
+    { key: "contenteditable", value: prop' value }
+  unpureAttr Contenteditable eventValue = unsafeAttribute $ That $ eventValue
+    <#> \value -> { key: "contenteditable", value: prop' value }
 
 instance Attr Acronym_ Contenteditable String where
-  attr Contenteditable bothValues  = unsafeAttribute $ Both { key: "contenteditable", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "contenteditable", value:  prop' value  })
-  pureAttr Contenteditable value  = unsafeAttribute $ This { key: "contenteditable", value:  prop' value  }
-  unpureAttr Contenteditable eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "contenteditable", value:  prop' value  }
+  attr Contenteditable bothValues = unsafeAttribute $ Both
+    { key: "contenteditable", value: prop' (fst bothValues) }
+    ( snd bothValues <#> \value ->
+        { key: "contenteditable", value: prop' value }
+    )
+  pureAttr Contenteditable value = unsafeAttribute $ This
+    { key: "contenteditable", value: prop' value }
+  unpureAttr Contenteditable eventValue = unsafeAttribute $ That $ eventValue
+    <#> \value -> { key: "contenteditable", value: prop' value }
 
 instance Attr Address_ Contenteditable String where
-  attr Contenteditable bothValues  = unsafeAttribute $ Both { key: "contenteditable", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "contenteditable", value:  prop' value  })
-  pureAttr Contenteditable value  = unsafeAttribute $ This { key: "contenteditable", value:  prop' value  }
-  unpureAttr Contenteditable eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "contenteditable", value:  prop' value  }
+  attr Contenteditable bothValues = unsafeAttribute $ Both
+    { key: "contenteditable", value: prop' (fst bothValues) }
+    ( snd bothValues <#> \value ->
+        { key: "contenteditable", value: prop' value }
+    )
+  pureAttr Contenteditable value = unsafeAttribute $ This
+    { key: "contenteditable", value: prop' value }
+  unpureAttr Contenteditable eventValue = unsafeAttribute $ That $ eventValue
+    <#> \value -> { key: "contenteditable", value: prop' value }
 
 instance Attr Applet_ Contenteditable String where
-  attr Contenteditable bothValues  = unsafeAttribute $ Both { key: "contenteditable", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "contenteditable", value:  prop' value  })
-  pureAttr Contenteditable value  = unsafeAttribute $ This { key: "contenteditable", value:  prop' value  }
-  unpureAttr Contenteditable eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "contenteditable", value:  prop' value  }
+  attr Contenteditable bothValues = unsafeAttribute $ Both
+    { key: "contenteditable", value: prop' (fst bothValues) }
+    ( snd bothValues <#> \value ->
+        { key: "contenteditable", value: prop' value }
+    )
+  pureAttr Contenteditable value = unsafeAttribute $ This
+    { key: "contenteditable", value: prop' value }
+  unpureAttr Contenteditable eventValue = unsafeAttribute $ That $ eventValue
+    <#> \value -> { key: "contenteditable", value: prop' value }
 
 instance Attr Area_ Contenteditable String where
-  attr Contenteditable bothValues  = unsafeAttribute $ Both { key: "contenteditable", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "contenteditable", value:  prop' value  })
-  pureAttr Contenteditable value  = unsafeAttribute $ This { key: "contenteditable", value:  prop' value  }
-  unpureAttr Contenteditable eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "contenteditable", value:  prop' value  }
+  attr Contenteditable bothValues = unsafeAttribute $ Both
+    { key: "contenteditable", value: prop' (fst bothValues) }
+    ( snd bothValues <#> \value ->
+        { key: "contenteditable", value: prop' value }
+    )
+  pureAttr Contenteditable value = unsafeAttribute $ This
+    { key: "contenteditable", value: prop' value }
+  unpureAttr Contenteditable eventValue = unsafeAttribute $ That $ eventValue
+    <#> \value -> { key: "contenteditable", value: prop' value }
 
 instance Attr Article_ Contenteditable String where
-  attr Contenteditable bothValues  = unsafeAttribute $ Both { key: "contenteditable", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "contenteditable", value:  prop' value  })
-  pureAttr Contenteditable value  = unsafeAttribute $ This { key: "contenteditable", value:  prop' value  }
-  unpureAttr Contenteditable eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "contenteditable", value:  prop' value  }
+  attr Contenteditable bothValues = unsafeAttribute $ Both
+    { key: "contenteditable", value: prop' (fst bothValues) }
+    ( snd bothValues <#> \value ->
+        { key: "contenteditable", value: prop' value }
+    )
+  pureAttr Contenteditable value = unsafeAttribute $ This
+    { key: "contenteditable", value: prop' value }
+  unpureAttr Contenteditable eventValue = unsafeAttribute $ That $ eventValue
+    <#> \value -> { key: "contenteditable", value: prop' value }
 
 instance Attr Aside_ Contenteditable String where
-  attr Contenteditable bothValues  = unsafeAttribute $ Both { key: "contenteditable", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "contenteditable", value:  prop' value  })
-  pureAttr Contenteditable value  = unsafeAttribute $ This { key: "contenteditable", value:  prop' value  }
-  unpureAttr Contenteditable eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "contenteditable", value:  prop' value  }
+  attr Contenteditable bothValues = unsafeAttribute $ Both
+    { key: "contenteditable", value: prop' (fst bothValues) }
+    ( snd bothValues <#> \value ->
+        { key: "contenteditable", value: prop' value }
+    )
+  pureAttr Contenteditable value = unsafeAttribute $ This
+    { key: "contenteditable", value: prop' value }
+  unpureAttr Contenteditable eventValue = unsafeAttribute $ That $ eventValue
+    <#> \value -> { key: "contenteditable", value: prop' value }
 
 instance Attr Audio_ Contenteditable String where
-  attr Contenteditable bothValues  = unsafeAttribute $ Both { key: "contenteditable", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "contenteditable", value:  prop' value  })
-  pureAttr Contenteditable value  = unsafeAttribute $ This { key: "contenteditable", value:  prop' value  }
-  unpureAttr Contenteditable eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "contenteditable", value:  prop' value  }
+  attr Contenteditable bothValues = unsafeAttribute $ Both
+    { key: "contenteditable", value: prop' (fst bothValues) }
+    ( snd bothValues <#> \value ->
+        { key: "contenteditable", value: prop' value }
+    )
+  pureAttr Contenteditable value = unsafeAttribute $ This
+    { key: "contenteditable", value: prop' value }
+  unpureAttr Contenteditable eventValue = unsafeAttribute $ That $ eventValue
+    <#> \value -> { key: "contenteditable", value: prop' value }
 
 instance Attr B_ Contenteditable String where
-  attr Contenteditable bothValues  = unsafeAttribute $ Both { key: "contenteditable", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "contenteditable", value:  prop' value  })
-  pureAttr Contenteditable value  = unsafeAttribute $ This { key: "contenteditable", value:  prop' value  }
-  unpureAttr Contenteditable eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "contenteditable", value:  prop' value  }
+  attr Contenteditable bothValues = unsafeAttribute $ Both
+    { key: "contenteditable", value: prop' (fst bothValues) }
+    ( snd bothValues <#> \value ->
+        { key: "contenteditable", value: prop' value }
+    )
+  pureAttr Contenteditable value = unsafeAttribute $ This
+    { key: "contenteditable", value: prop' value }
+  unpureAttr Contenteditable eventValue = unsafeAttribute $ That $ eventValue
+    <#> \value -> { key: "contenteditable", value: prop' value }
 
 instance Attr Base_ Contenteditable String where
-  attr Contenteditable bothValues  = unsafeAttribute $ Both { key: "contenteditable", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "contenteditable", value:  prop' value  })
-  pureAttr Contenteditable value  = unsafeAttribute $ This { key: "contenteditable", value:  prop' value  }
-  unpureAttr Contenteditable eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "contenteditable", value:  prop' value  }
+  attr Contenteditable bothValues = unsafeAttribute $ Both
+    { key: "contenteditable", value: prop' (fst bothValues) }
+    ( snd bothValues <#> \value ->
+        { key: "contenteditable", value: prop' value }
+    )
+  pureAttr Contenteditable value = unsafeAttribute $ This
+    { key: "contenteditable", value: prop' value }
+  unpureAttr Contenteditable eventValue = unsafeAttribute $ That $ eventValue
+    <#> \value -> { key: "contenteditable", value: prop' value }
 
 instance Attr Basefont_ Contenteditable String where
-  attr Contenteditable bothValues  = unsafeAttribute $ Both { key: "contenteditable", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "contenteditable", value:  prop' value  })
-  pureAttr Contenteditable value  = unsafeAttribute $ This { key: "contenteditable", value:  prop' value  }
-  unpureAttr Contenteditable eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "contenteditable", value:  prop' value  }
+  attr Contenteditable bothValues = unsafeAttribute $ Both
+    { key: "contenteditable", value: prop' (fst bothValues) }
+    ( snd bothValues <#> \value ->
+        { key: "contenteditable", value: prop' value }
+    )
+  pureAttr Contenteditable value = unsafeAttribute $ This
+    { key: "contenteditable", value: prop' value }
+  unpureAttr Contenteditable eventValue = unsafeAttribute $ That $ eventValue
+    <#> \value -> { key: "contenteditable", value: prop' value }
 
 instance Attr Bdi_ Contenteditable String where
-  attr Contenteditable bothValues  = unsafeAttribute $ Both { key: "contenteditable", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "contenteditable", value:  prop' value  })
-  pureAttr Contenteditable value  = unsafeAttribute $ This { key: "contenteditable", value:  prop' value  }
-  unpureAttr Contenteditable eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "contenteditable", value:  prop' value  }
+  attr Contenteditable bothValues = unsafeAttribute $ Both
+    { key: "contenteditable", value: prop' (fst bothValues) }
+    ( snd bothValues <#> \value ->
+        { key: "contenteditable", value: prop' value }
+    )
+  pureAttr Contenteditable value = unsafeAttribute $ This
+    { key: "contenteditable", value: prop' value }
+  unpureAttr Contenteditable eventValue = unsafeAttribute $ That $ eventValue
+    <#> \value -> { key: "contenteditable", value: prop' value }
 
 instance Attr Bdo_ Contenteditable String where
-  attr Contenteditable bothValues  = unsafeAttribute $ Both { key: "contenteditable", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "contenteditable", value:  prop' value  })
-  pureAttr Contenteditable value  = unsafeAttribute $ This { key: "contenteditable", value:  prop' value  }
-  unpureAttr Contenteditable eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "contenteditable", value:  prop' value  }
+  attr Contenteditable bothValues = unsafeAttribute $ Both
+    { key: "contenteditable", value: prop' (fst bothValues) }
+    ( snd bothValues <#> \value ->
+        { key: "contenteditable", value: prop' value }
+    )
+  pureAttr Contenteditable value = unsafeAttribute $ This
+    { key: "contenteditable", value: prop' value }
+  unpureAttr Contenteditable eventValue = unsafeAttribute $ That $ eventValue
+    <#> \value -> { key: "contenteditable", value: prop' value }
 
 instance Attr Big_ Contenteditable String where
-  attr Contenteditable bothValues  = unsafeAttribute $ Both { key: "contenteditable", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "contenteditable", value:  prop' value  })
-  pureAttr Contenteditable value  = unsafeAttribute $ This { key: "contenteditable", value:  prop' value  }
-  unpureAttr Contenteditable eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "contenteditable", value:  prop' value  }
+  attr Contenteditable bothValues = unsafeAttribute $ Both
+    { key: "contenteditable", value: prop' (fst bothValues) }
+    ( snd bothValues <#> \value ->
+        { key: "contenteditable", value: prop' value }
+    )
+  pureAttr Contenteditable value = unsafeAttribute $ This
+    { key: "contenteditable", value: prop' value }
+  unpureAttr Contenteditable eventValue = unsafeAttribute $ That $ eventValue
+    <#> \value -> { key: "contenteditable", value: prop' value }
 
 instance Attr Blockquote_ Contenteditable String where
-  attr Contenteditable bothValues  = unsafeAttribute $ Both { key: "contenteditable", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "contenteditable", value:  prop' value  })
-  pureAttr Contenteditable value  = unsafeAttribute $ This { key: "contenteditable", value:  prop' value  }
-  unpureAttr Contenteditable eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "contenteditable", value:  prop' value  }
+  attr Contenteditable bothValues = unsafeAttribute $ Both
+    { key: "contenteditable", value: prop' (fst bothValues) }
+    ( snd bothValues <#> \value ->
+        { key: "contenteditable", value: prop' value }
+    )
+  pureAttr Contenteditable value = unsafeAttribute $ This
+    { key: "contenteditable", value: prop' value }
+  unpureAttr Contenteditable eventValue = unsafeAttribute $ That $ eventValue
+    <#> \value -> { key: "contenteditable", value: prop' value }
 
 instance Attr Body_ Contenteditable String where
-  attr Contenteditable bothValues  = unsafeAttribute $ Both { key: "contenteditable", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "contenteditable", value:  prop' value  })
-  pureAttr Contenteditable value  = unsafeAttribute $ This { key: "contenteditable", value:  prop' value  }
-  unpureAttr Contenteditable eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "contenteditable", value:  prop' value  }
+  attr Contenteditable bothValues = unsafeAttribute $ Both
+    { key: "contenteditable", value: prop' (fst bothValues) }
+    ( snd bothValues <#> \value ->
+        { key: "contenteditable", value: prop' value }
+    )
+  pureAttr Contenteditable value = unsafeAttribute $ This
+    { key: "contenteditable", value: prop' value }
+  unpureAttr Contenteditable eventValue = unsafeAttribute $ That $ eventValue
+    <#> \value -> { key: "contenteditable", value: prop' value }
 
 instance Attr Br_ Contenteditable String where
-  attr Contenteditable bothValues  = unsafeAttribute $ Both { key: "contenteditable", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "contenteditable", value:  prop' value  })
-  pureAttr Contenteditable value  = unsafeAttribute $ This { key: "contenteditable", value:  prop' value  }
-  unpureAttr Contenteditable eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "contenteditable", value:  prop' value  }
+  attr Contenteditable bothValues = unsafeAttribute $ Both
+    { key: "contenteditable", value: prop' (fst bothValues) }
+    ( snd bothValues <#> \value ->
+        { key: "contenteditable", value: prop' value }
+    )
+  pureAttr Contenteditable value = unsafeAttribute $ This
+    { key: "contenteditable", value: prop' value }
+  unpureAttr Contenteditable eventValue = unsafeAttribute $ That $ eventValue
+    <#> \value -> { key: "contenteditable", value: prop' value }
 
 instance Attr Button_ Contenteditable String where
-  attr Contenteditable bothValues  = unsafeAttribute $ Both { key: "contenteditable", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "contenteditable", value:  prop' value  })
-  pureAttr Contenteditable value  = unsafeAttribute $ This { key: "contenteditable", value:  prop' value  }
-  unpureAttr Contenteditable eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "contenteditable", value:  prop' value  }
+  attr Contenteditable bothValues = unsafeAttribute $ Both
+    { key: "contenteditable", value: prop' (fst bothValues) }
+    ( snd bothValues <#> \value ->
+        { key: "contenteditable", value: prop' value }
+    )
+  pureAttr Contenteditable value = unsafeAttribute $ This
+    { key: "contenteditable", value: prop' value }
+  unpureAttr Contenteditable eventValue = unsafeAttribute $ That $ eventValue
+    <#> \value -> { key: "contenteditable", value: prop' value }
 
 instance Attr Canvas_ Contenteditable String where
-  attr Contenteditable bothValues  = unsafeAttribute $ Both { key: "contenteditable", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "contenteditable", value:  prop' value  })
-  pureAttr Contenteditable value  = unsafeAttribute $ This { key: "contenteditable", value:  prop' value  }
-  unpureAttr Contenteditable eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "contenteditable", value:  prop' value  }
+  attr Contenteditable bothValues = unsafeAttribute $ Both
+    { key: "contenteditable", value: prop' (fst bothValues) }
+    ( snd bothValues <#> \value ->
+        { key: "contenteditable", value: prop' value }
+    )
+  pureAttr Contenteditable value = unsafeAttribute $ This
+    { key: "contenteditable", value: prop' value }
+  unpureAttr Contenteditable eventValue = unsafeAttribute $ That $ eventValue
+    <#> \value -> { key: "contenteditable", value: prop' value }
 
 instance Attr Caption_ Contenteditable String where
-  attr Contenteditable bothValues  = unsafeAttribute $ Both { key: "contenteditable", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "contenteditable", value:  prop' value  })
-  pureAttr Contenteditable value  = unsafeAttribute $ This { key: "contenteditable", value:  prop' value  }
-  unpureAttr Contenteditable eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "contenteditable", value:  prop' value  }
+  attr Contenteditable bothValues = unsafeAttribute $ Both
+    { key: "contenteditable", value: prop' (fst bothValues) }
+    ( snd bothValues <#> \value ->
+        { key: "contenteditable", value: prop' value }
+    )
+  pureAttr Contenteditable value = unsafeAttribute $ This
+    { key: "contenteditable", value: prop' value }
+  unpureAttr Contenteditable eventValue = unsafeAttribute $ That $ eventValue
+    <#> \value -> { key: "contenteditable", value: prop' value }
 
 instance Attr Center_ Contenteditable String where
-  attr Contenteditable bothValues  = unsafeAttribute $ Both { key: "contenteditable", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "contenteditable", value:  prop' value  })
-  pureAttr Contenteditable value  = unsafeAttribute $ This { key: "contenteditable", value:  prop' value  }
-  unpureAttr Contenteditable eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "contenteditable", value:  prop' value  }
+  attr Contenteditable bothValues = unsafeAttribute $ Both
+    { key: "contenteditable", value: prop' (fst bothValues) }
+    ( snd bothValues <#> \value ->
+        { key: "contenteditable", value: prop' value }
+    )
+  pureAttr Contenteditable value = unsafeAttribute $ This
+    { key: "contenteditable", value: prop' value }
+  unpureAttr Contenteditable eventValue = unsafeAttribute $ That $ eventValue
+    <#> \value -> { key: "contenteditable", value: prop' value }
 
 instance Attr Cite_ Contenteditable String where
-  attr Contenteditable bothValues  = unsafeAttribute $ Both { key: "contenteditable", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "contenteditable", value:  prop' value  })
-  pureAttr Contenteditable value  = unsafeAttribute $ This { key: "contenteditable", value:  prop' value  }
-  unpureAttr Contenteditable eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "contenteditable", value:  prop' value  }
+  attr Contenteditable bothValues = unsafeAttribute $ Both
+    { key: "contenteditable", value: prop' (fst bothValues) }
+    ( snd bothValues <#> \value ->
+        { key: "contenteditable", value: prop' value }
+    )
+  pureAttr Contenteditable value = unsafeAttribute $ This
+    { key: "contenteditable", value: prop' value }
+  unpureAttr Contenteditable eventValue = unsafeAttribute $ That $ eventValue
+    <#> \value -> { key: "contenteditable", value: prop' value }
 
 instance Attr Code_ Contenteditable String where
-  attr Contenteditable bothValues  = unsafeAttribute $ Both { key: "contenteditable", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "contenteditable", value:  prop' value  })
-  pureAttr Contenteditable value  = unsafeAttribute $ This { key: "contenteditable", value:  prop' value  }
-  unpureAttr Contenteditable eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "contenteditable", value:  prop' value  }
+  attr Contenteditable bothValues = unsafeAttribute $ Both
+    { key: "contenteditable", value: prop' (fst bothValues) }
+    ( snd bothValues <#> \value ->
+        { key: "contenteditable", value: prop' value }
+    )
+  pureAttr Contenteditable value = unsafeAttribute $ This
+    { key: "contenteditable", value: prop' value }
+  unpureAttr Contenteditable eventValue = unsafeAttribute $ That $ eventValue
+    <#> \value -> { key: "contenteditable", value: prop' value }
 
 instance Attr Col_ Contenteditable String where
-  attr Contenteditable bothValues  = unsafeAttribute $ Both { key: "contenteditable", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "contenteditable", value:  prop' value  })
-  pureAttr Contenteditable value  = unsafeAttribute $ This { key: "contenteditable", value:  prop' value  }
-  unpureAttr Contenteditable eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "contenteditable", value:  prop' value  }
+  attr Contenteditable bothValues = unsafeAttribute $ Both
+    { key: "contenteditable", value: prop' (fst bothValues) }
+    ( snd bothValues <#> \value ->
+        { key: "contenteditable", value: prop' value }
+    )
+  pureAttr Contenteditable value = unsafeAttribute $ This
+    { key: "contenteditable", value: prop' value }
+  unpureAttr Contenteditable eventValue = unsafeAttribute $ That $ eventValue
+    <#> \value -> { key: "contenteditable", value: prop' value }
 
 instance Attr Colgroup_ Contenteditable String where
-  attr Contenteditable bothValues  = unsafeAttribute $ Both { key: "contenteditable", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "contenteditable", value:  prop' value  })
-  pureAttr Contenteditable value  = unsafeAttribute $ This { key: "contenteditable", value:  prop' value  }
-  unpureAttr Contenteditable eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "contenteditable", value:  prop' value  }
+  attr Contenteditable bothValues = unsafeAttribute $ Both
+    { key: "contenteditable", value: prop' (fst bothValues) }
+    ( snd bothValues <#> \value ->
+        { key: "contenteditable", value: prop' value }
+    )
+  pureAttr Contenteditable value = unsafeAttribute $ This
+    { key: "contenteditable", value: prop' value }
+  unpureAttr Contenteditable eventValue = unsafeAttribute $ That $ eventValue
+    <#> \value -> { key: "contenteditable", value: prop' value }
 
 instance Attr Xdata_ Contenteditable String where
-  attr Contenteditable bothValues  = unsafeAttribute $ Both { key: "contenteditable", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "contenteditable", value:  prop' value  })
-  pureAttr Contenteditable value  = unsafeAttribute $ This { key: "contenteditable", value:  prop' value  }
-  unpureAttr Contenteditable eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "contenteditable", value:  prop' value  }
+  attr Contenteditable bothValues = unsafeAttribute $ Both
+    { key: "contenteditable", value: prop' (fst bothValues) }
+    ( snd bothValues <#> \value ->
+        { key: "contenteditable", value: prop' value }
+    )
+  pureAttr Contenteditable value = unsafeAttribute $ This
+    { key: "contenteditable", value: prop' value }
+  unpureAttr Contenteditable eventValue = unsafeAttribute $ That $ eventValue
+    <#> \value -> { key: "contenteditable", value: prop' value }
 
 instance Attr Datalist_ Contenteditable String where
-  attr Contenteditable bothValues  = unsafeAttribute $ Both { key: "contenteditable", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "contenteditable", value:  prop' value  })
-  pureAttr Contenteditable value  = unsafeAttribute $ This { key: "contenteditable", value:  prop' value  }
-  unpureAttr Contenteditable eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "contenteditable", value:  prop' value  }
+  attr Contenteditable bothValues = unsafeAttribute $ Both
+    { key: "contenteditable", value: prop' (fst bothValues) }
+    ( snd bothValues <#> \value ->
+        { key: "contenteditable", value: prop' value }
+    )
+  pureAttr Contenteditable value = unsafeAttribute $ This
+    { key: "contenteditable", value: prop' value }
+  unpureAttr Contenteditable eventValue = unsafeAttribute $ That $ eventValue
+    <#> \value -> { key: "contenteditable", value: prop' value }
 
 instance Attr Dd_ Contenteditable String where
-  attr Contenteditable bothValues  = unsafeAttribute $ Both { key: "contenteditable", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "contenteditable", value:  prop' value  })
-  pureAttr Contenteditable value  = unsafeAttribute $ This { key: "contenteditable", value:  prop' value  }
-  unpureAttr Contenteditable eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "contenteditable", value:  prop' value  }
+  attr Contenteditable bothValues = unsafeAttribute $ Both
+    { key: "contenteditable", value: prop' (fst bothValues) }
+    ( snd bothValues <#> \value ->
+        { key: "contenteditable", value: prop' value }
+    )
+  pureAttr Contenteditable value = unsafeAttribute $ This
+    { key: "contenteditable", value: prop' value }
+  unpureAttr Contenteditable eventValue = unsafeAttribute $ That $ eventValue
+    <#> \value -> { key: "contenteditable", value: prop' value }
 
 instance Attr Del_ Contenteditable String where
-  attr Contenteditable bothValues  = unsafeAttribute $ Both { key: "contenteditable", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "contenteditable", value:  prop' value  })
-  pureAttr Contenteditable value  = unsafeAttribute $ This { key: "contenteditable", value:  prop' value  }
-  unpureAttr Contenteditable eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "contenteditable", value:  prop' value  }
+  attr Contenteditable bothValues = unsafeAttribute $ Both
+    { key: "contenteditable", value: prop' (fst bothValues) }
+    ( snd bothValues <#> \value ->
+        { key: "contenteditable", value: prop' value }
+    )
+  pureAttr Contenteditable value = unsafeAttribute $ This
+    { key: "contenteditable", value: prop' value }
+  unpureAttr Contenteditable eventValue = unsafeAttribute $ That $ eventValue
+    <#> \value -> { key: "contenteditable", value: prop' value }
 
 instance Attr Details_ Contenteditable String where
-  attr Contenteditable bothValues  = unsafeAttribute $ Both { key: "contenteditable", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "contenteditable", value:  prop' value  })
-  pureAttr Contenteditable value  = unsafeAttribute $ This { key: "contenteditable", value:  prop' value  }
-  unpureAttr Contenteditable eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "contenteditable", value:  prop' value  }
+  attr Contenteditable bothValues = unsafeAttribute $ Both
+    { key: "contenteditable", value: prop' (fst bothValues) }
+    ( snd bothValues <#> \value ->
+        { key: "contenteditable", value: prop' value }
+    )
+  pureAttr Contenteditable value = unsafeAttribute $ This
+    { key: "contenteditable", value: prop' value }
+  unpureAttr Contenteditable eventValue = unsafeAttribute $ That $ eventValue
+    <#> \value -> { key: "contenteditable", value: prop' value }
 
 instance Attr Dfn_ Contenteditable String where
-  attr Contenteditable bothValues  = unsafeAttribute $ Both { key: "contenteditable", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "contenteditable", value:  prop' value  })
-  pureAttr Contenteditable value  = unsafeAttribute $ This { key: "contenteditable", value:  prop' value  }
-  unpureAttr Contenteditable eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "contenteditable", value:  prop' value  }
+  attr Contenteditable bothValues = unsafeAttribute $ Both
+    { key: "contenteditable", value: prop' (fst bothValues) }
+    ( snd bothValues <#> \value ->
+        { key: "contenteditable", value: prop' value }
+    )
+  pureAttr Contenteditable value = unsafeAttribute $ This
+    { key: "contenteditable", value: prop' value }
+  unpureAttr Contenteditable eventValue = unsafeAttribute $ That $ eventValue
+    <#> \value -> { key: "contenteditable", value: prop' value }
 
 instance Attr Dialog_ Contenteditable String where
-  attr Contenteditable bothValues  = unsafeAttribute $ Both { key: "contenteditable", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "contenteditable", value:  prop' value  })
-  pureAttr Contenteditable value  = unsafeAttribute $ This { key: "contenteditable", value:  prop' value  }
-  unpureAttr Contenteditable eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "contenteditable", value:  prop' value  }
+  attr Contenteditable bothValues = unsafeAttribute $ Both
+    { key: "contenteditable", value: prop' (fst bothValues) }
+    ( snd bothValues <#> \value ->
+        { key: "contenteditable", value: prop' value }
+    )
+  pureAttr Contenteditable value = unsafeAttribute $ This
+    { key: "contenteditable", value: prop' value }
+  unpureAttr Contenteditable eventValue = unsafeAttribute $ That $ eventValue
+    <#> \value -> { key: "contenteditable", value: prop' value }
 
 instance Attr Dir_ Contenteditable String where
-  attr Contenteditable bothValues  = unsafeAttribute $ Both { key: "contenteditable", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "contenteditable", value:  prop' value  })
-  pureAttr Contenteditable value  = unsafeAttribute $ This { key: "contenteditable", value:  prop' value  }
-  unpureAttr Contenteditable eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "contenteditable", value:  prop' value  }
+  attr Contenteditable bothValues = unsafeAttribute $ Both
+    { key: "contenteditable", value: prop' (fst bothValues) }
+    ( snd bothValues <#> \value ->
+        { key: "contenteditable", value: prop' value }
+    )
+  pureAttr Contenteditable value = unsafeAttribute $ This
+    { key: "contenteditable", value: prop' value }
+  unpureAttr Contenteditable eventValue = unsafeAttribute $ That $ eventValue
+    <#> \value -> { key: "contenteditable", value: prop' value }
 
 instance Attr Div_ Contenteditable String where
-  attr Contenteditable bothValues  = unsafeAttribute $ Both { key: "contenteditable", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "contenteditable", value:  prop' value  })
-  pureAttr Contenteditable value  = unsafeAttribute $ This { key: "contenteditable", value:  prop' value  }
-  unpureAttr Contenteditable eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "contenteditable", value:  prop' value  }
+  attr Contenteditable bothValues = unsafeAttribute $ Both
+    { key: "contenteditable", value: prop' (fst bothValues) }
+    ( snd bothValues <#> \value ->
+        { key: "contenteditable", value: prop' value }
+    )
+  pureAttr Contenteditable value = unsafeAttribute $ This
+    { key: "contenteditable", value: prop' value }
+  unpureAttr Contenteditable eventValue = unsafeAttribute $ That $ eventValue
+    <#> \value -> { key: "contenteditable", value: prop' value }
 
 instance Attr Dl_ Contenteditable String where
-  attr Contenteditable bothValues  = unsafeAttribute $ Both { key: "contenteditable", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "contenteditable", value:  prop' value  })
-  pureAttr Contenteditable value  = unsafeAttribute $ This { key: "contenteditable", value:  prop' value  }
-  unpureAttr Contenteditable eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "contenteditable", value:  prop' value  }
+  attr Contenteditable bothValues = unsafeAttribute $ Both
+    { key: "contenteditable", value: prop' (fst bothValues) }
+    ( snd bothValues <#> \value ->
+        { key: "contenteditable", value: prop' value }
+    )
+  pureAttr Contenteditable value = unsafeAttribute $ This
+    { key: "contenteditable", value: prop' value }
+  unpureAttr Contenteditable eventValue = unsafeAttribute $ That $ eventValue
+    <#> \value -> { key: "contenteditable", value: prop' value }
 
 instance Attr Dt_ Contenteditable String where
-  attr Contenteditable bothValues  = unsafeAttribute $ Both { key: "contenteditable", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "contenteditable", value:  prop' value  })
-  pureAttr Contenteditable value  = unsafeAttribute $ This { key: "contenteditable", value:  prop' value  }
-  unpureAttr Contenteditable eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "contenteditable", value:  prop' value  }
+  attr Contenteditable bothValues = unsafeAttribute $ Both
+    { key: "contenteditable", value: prop' (fst bothValues) }
+    ( snd bothValues <#> \value ->
+        { key: "contenteditable", value: prop' value }
+    )
+  pureAttr Contenteditable value = unsafeAttribute $ This
+    { key: "contenteditable", value: prop' value }
+  unpureAttr Contenteditable eventValue = unsafeAttribute $ That $ eventValue
+    <#> \value -> { key: "contenteditable", value: prop' value }
 
 instance Attr Em_ Contenteditable String where
-  attr Contenteditable bothValues  = unsafeAttribute $ Both { key: "contenteditable", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "contenteditable", value:  prop' value  })
-  pureAttr Contenteditable value  = unsafeAttribute $ This { key: "contenteditable", value:  prop' value  }
-  unpureAttr Contenteditable eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "contenteditable", value:  prop' value  }
+  attr Contenteditable bothValues = unsafeAttribute $ Both
+    { key: "contenteditable", value: prop' (fst bothValues) }
+    ( snd bothValues <#> \value ->
+        { key: "contenteditable", value: prop' value }
+    )
+  pureAttr Contenteditable value = unsafeAttribute $ This
+    { key: "contenteditable", value: prop' value }
+  unpureAttr Contenteditable eventValue = unsafeAttribute $ That $ eventValue
+    <#> \value -> { key: "contenteditable", value: prop' value }
 
 instance Attr Embed_ Contenteditable String where
-  attr Contenteditable bothValues  = unsafeAttribute $ Both { key: "contenteditable", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "contenteditable", value:  prop' value  })
-  pureAttr Contenteditable value  = unsafeAttribute $ This { key: "contenteditable", value:  prop' value  }
-  unpureAttr Contenteditable eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "contenteditable", value:  prop' value  }
+  attr Contenteditable bothValues = unsafeAttribute $ Both
+    { key: "contenteditable", value: prop' (fst bothValues) }
+    ( snd bothValues <#> \value ->
+        { key: "contenteditable", value: prop' value }
+    )
+  pureAttr Contenteditable value = unsafeAttribute $ This
+    { key: "contenteditable", value: prop' value }
+  unpureAttr Contenteditable eventValue = unsafeAttribute $ That $ eventValue
+    <#> \value -> { key: "contenteditable", value: prop' value }
 
 instance Attr Fieldset_ Contenteditable String where
-  attr Contenteditable bothValues  = unsafeAttribute $ Both { key: "contenteditable", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "contenteditable", value:  prop' value  })
-  pureAttr Contenteditable value  = unsafeAttribute $ This { key: "contenteditable", value:  prop' value  }
-  unpureAttr Contenteditable eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "contenteditable", value:  prop' value  }
+  attr Contenteditable bothValues = unsafeAttribute $ Both
+    { key: "contenteditable", value: prop' (fst bothValues) }
+    ( snd bothValues <#> \value ->
+        { key: "contenteditable", value: prop' value }
+    )
+  pureAttr Contenteditable value = unsafeAttribute $ This
+    { key: "contenteditable", value: prop' value }
+  unpureAttr Contenteditable eventValue = unsafeAttribute $ That $ eventValue
+    <#> \value -> { key: "contenteditable", value: prop' value }
 
 instance Attr Figcaption_ Contenteditable String where
-  attr Contenteditable bothValues  = unsafeAttribute $ Both { key: "contenteditable", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "contenteditable", value:  prop' value  })
-  pureAttr Contenteditable value  = unsafeAttribute $ This { key: "contenteditable", value:  prop' value  }
-  unpureAttr Contenteditable eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "contenteditable", value:  prop' value  }
+  attr Contenteditable bothValues = unsafeAttribute $ Both
+    { key: "contenteditable", value: prop' (fst bothValues) }
+    ( snd bothValues <#> \value ->
+        { key: "contenteditable", value: prop' value }
+    )
+  pureAttr Contenteditable value = unsafeAttribute $ This
+    { key: "contenteditable", value: prop' value }
+  unpureAttr Contenteditable eventValue = unsafeAttribute $ That $ eventValue
+    <#> \value -> { key: "contenteditable", value: prop' value }
 
 instance Attr Figure_ Contenteditable String where
-  attr Contenteditable bothValues  = unsafeAttribute $ Both { key: "contenteditable", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "contenteditable", value:  prop' value  })
-  pureAttr Contenteditable value  = unsafeAttribute $ This { key: "contenteditable", value:  prop' value  }
-  unpureAttr Contenteditable eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "contenteditable", value:  prop' value  }
+  attr Contenteditable bothValues = unsafeAttribute $ Both
+    { key: "contenteditable", value: prop' (fst bothValues) }
+    ( snd bothValues <#> \value ->
+        { key: "contenteditable", value: prop' value }
+    )
+  pureAttr Contenteditable value = unsafeAttribute $ This
+    { key: "contenteditable", value: prop' value }
+  unpureAttr Contenteditable eventValue = unsafeAttribute $ That $ eventValue
+    <#> \value -> { key: "contenteditable", value: prop' value }
 
 instance Attr Font_ Contenteditable String where
-  attr Contenteditable bothValues  = unsafeAttribute $ Both { key: "contenteditable", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "contenteditable", value:  prop' value  })
-  pureAttr Contenteditable value  = unsafeAttribute $ This { key: "contenteditable", value:  prop' value  }
-  unpureAttr Contenteditable eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "contenteditable", value:  prop' value  }
+  attr Contenteditable bothValues = unsafeAttribute $ Both
+    { key: "contenteditable", value: prop' (fst bothValues) }
+    ( snd bothValues <#> \value ->
+        { key: "contenteditable", value: prop' value }
+    )
+  pureAttr Contenteditable value = unsafeAttribute $ This
+    { key: "contenteditable", value: prop' value }
+  unpureAttr Contenteditable eventValue = unsafeAttribute $ That $ eventValue
+    <#> \value -> { key: "contenteditable", value: prop' value }
 
 instance Attr Footer_ Contenteditable String where
-  attr Contenteditable bothValues  = unsafeAttribute $ Both { key: "contenteditable", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "contenteditable", value:  prop' value  })
-  pureAttr Contenteditable value  = unsafeAttribute $ This { key: "contenteditable", value:  prop' value  }
-  unpureAttr Contenteditable eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "contenteditable", value:  prop' value  }
+  attr Contenteditable bothValues = unsafeAttribute $ Both
+    { key: "contenteditable", value: prop' (fst bothValues) }
+    ( snd bothValues <#> \value ->
+        { key: "contenteditable", value: prop' value }
+    )
+  pureAttr Contenteditable value = unsafeAttribute $ This
+    { key: "contenteditable", value: prop' value }
+  unpureAttr Contenteditable eventValue = unsafeAttribute $ That $ eventValue
+    <#> \value -> { key: "contenteditable", value: prop' value }
 
 instance Attr Form_ Contenteditable String where
-  attr Contenteditable bothValues  = unsafeAttribute $ Both { key: "contenteditable", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "contenteditable", value:  prop' value  })
-  pureAttr Contenteditable value  = unsafeAttribute $ This { key: "contenteditable", value:  prop' value  }
-  unpureAttr Contenteditable eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "contenteditable", value:  prop' value  }
+  attr Contenteditable bothValues = unsafeAttribute $ Both
+    { key: "contenteditable", value: prop' (fst bothValues) }
+    ( snd bothValues <#> \value ->
+        { key: "contenteditable", value: prop' value }
+    )
+  pureAttr Contenteditable value = unsafeAttribute $ This
+    { key: "contenteditable", value: prop' value }
+  unpureAttr Contenteditable eventValue = unsafeAttribute $ That $ eventValue
+    <#> \value -> { key: "contenteditable", value: prop' value }
 
 instance Attr Frame_ Contenteditable String where
-  attr Contenteditable bothValues  = unsafeAttribute $ Both { key: "contenteditable", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "contenteditable", value:  prop' value  })
-  pureAttr Contenteditable value  = unsafeAttribute $ This { key: "contenteditable", value:  prop' value  }
-  unpureAttr Contenteditable eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "contenteditable", value:  prop' value  }
+  attr Contenteditable bothValues = unsafeAttribute $ Both
+    { key: "contenteditable", value: prop' (fst bothValues) }
+    ( snd bothValues <#> \value ->
+        { key: "contenteditable", value: prop' value }
+    )
+  pureAttr Contenteditable value = unsafeAttribute $ This
+    { key: "contenteditable", value: prop' value }
+  unpureAttr Contenteditable eventValue = unsafeAttribute $ That $ eventValue
+    <#> \value -> { key: "contenteditable", value: prop' value }
 
 instance Attr Frameset_ Contenteditable String where
-  attr Contenteditable bothValues  = unsafeAttribute $ Both { key: "contenteditable", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "contenteditable", value:  prop' value  })
-  pureAttr Contenteditable value  = unsafeAttribute $ This { key: "contenteditable", value:  prop' value  }
-  unpureAttr Contenteditable eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "contenteditable", value:  prop' value  }
+  attr Contenteditable bothValues = unsafeAttribute $ Both
+    { key: "contenteditable", value: prop' (fst bothValues) }
+    ( snd bothValues <#> \value ->
+        { key: "contenteditable", value: prop' value }
+    )
+  pureAttr Contenteditable value = unsafeAttribute $ This
+    { key: "contenteditable", value: prop' value }
+  unpureAttr Contenteditable eventValue = unsafeAttribute $ That $ eventValue
+    <#> \value -> { key: "contenteditable", value: prop' value }
 
 instance Attr H1_ Contenteditable String where
-  attr Contenteditable bothValues  = unsafeAttribute $ Both { key: "contenteditable", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "contenteditable", value:  prop' value  })
-  pureAttr Contenteditable value  = unsafeAttribute $ This { key: "contenteditable", value:  prop' value  }
-  unpureAttr Contenteditable eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "contenteditable", value:  prop' value  }
+  attr Contenteditable bothValues = unsafeAttribute $ Both
+    { key: "contenteditable", value: prop' (fst bothValues) }
+    ( snd bothValues <#> \value ->
+        { key: "contenteditable", value: prop' value }
+    )
+  pureAttr Contenteditable value = unsafeAttribute $ This
+    { key: "contenteditable", value: prop' value }
+  unpureAttr Contenteditable eventValue = unsafeAttribute $ That $ eventValue
+    <#> \value -> { key: "contenteditable", value: prop' value }
 
 instance Attr H2_ Contenteditable String where
-  attr Contenteditable bothValues  = unsafeAttribute $ Both { key: "contenteditable", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "contenteditable", value:  prop' value  })
-  pureAttr Contenteditable value  = unsafeAttribute $ This { key: "contenteditable", value:  prop' value  }
-  unpureAttr Contenteditable eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "contenteditable", value:  prop' value  }
+  attr Contenteditable bothValues = unsafeAttribute $ Both
+    { key: "contenteditable", value: prop' (fst bothValues) }
+    ( snd bothValues <#> \value ->
+        { key: "contenteditable", value: prop' value }
+    )
+  pureAttr Contenteditable value = unsafeAttribute $ This
+    { key: "contenteditable", value: prop' value }
+  unpureAttr Contenteditable eventValue = unsafeAttribute $ That $ eventValue
+    <#> \value -> { key: "contenteditable", value: prop' value }
 
 instance Attr H3_ Contenteditable String where
-  attr Contenteditable bothValues  = unsafeAttribute $ Both { key: "contenteditable", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "contenteditable", value:  prop' value  })
-  pureAttr Contenteditable value  = unsafeAttribute $ This { key: "contenteditable", value:  prop' value  }
-  unpureAttr Contenteditable eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "contenteditable", value:  prop' value  }
+  attr Contenteditable bothValues = unsafeAttribute $ Both
+    { key: "contenteditable", value: prop' (fst bothValues) }
+    ( snd bothValues <#> \value ->
+        { key: "contenteditable", value: prop' value }
+    )
+  pureAttr Contenteditable value = unsafeAttribute $ This
+    { key: "contenteditable", value: prop' value }
+  unpureAttr Contenteditable eventValue = unsafeAttribute $ That $ eventValue
+    <#> \value -> { key: "contenteditable", value: prop' value }
 
 instance Attr H4_ Contenteditable String where
-  attr Contenteditable bothValues  = unsafeAttribute $ Both { key: "contenteditable", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "contenteditable", value:  prop' value  })
-  pureAttr Contenteditable value  = unsafeAttribute $ This { key: "contenteditable", value:  prop' value  }
-  unpureAttr Contenteditable eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "contenteditable", value:  prop' value  }
+  attr Contenteditable bothValues = unsafeAttribute $ Both
+    { key: "contenteditable", value: prop' (fst bothValues) }
+    ( snd bothValues <#> \value ->
+        { key: "contenteditable", value: prop' value }
+    )
+  pureAttr Contenteditable value = unsafeAttribute $ This
+    { key: "contenteditable", value: prop' value }
+  unpureAttr Contenteditable eventValue = unsafeAttribute $ That $ eventValue
+    <#> \value -> { key: "contenteditable", value: prop' value }
 
 instance Attr H5_ Contenteditable String where
-  attr Contenteditable bothValues  = unsafeAttribute $ Both { key: "contenteditable", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "contenteditable", value:  prop' value  })
-  pureAttr Contenteditable value  = unsafeAttribute $ This { key: "contenteditable", value:  prop' value  }
-  unpureAttr Contenteditable eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "contenteditable", value:  prop' value  }
+  attr Contenteditable bothValues = unsafeAttribute $ Both
+    { key: "contenteditable", value: prop' (fst bothValues) }
+    ( snd bothValues <#> \value ->
+        { key: "contenteditable", value: prop' value }
+    )
+  pureAttr Contenteditable value = unsafeAttribute $ This
+    { key: "contenteditable", value: prop' value }
+  unpureAttr Contenteditable eventValue = unsafeAttribute $ That $ eventValue
+    <#> \value -> { key: "contenteditable", value: prop' value }
 
 instance Attr H6_ Contenteditable String where
-  attr Contenteditable bothValues  = unsafeAttribute $ Both { key: "contenteditable", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "contenteditable", value:  prop' value  })
-  pureAttr Contenteditable value  = unsafeAttribute $ This { key: "contenteditable", value:  prop' value  }
-  unpureAttr Contenteditable eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "contenteditable", value:  prop' value  }
+  attr Contenteditable bothValues = unsafeAttribute $ Both
+    { key: "contenteditable", value: prop' (fst bothValues) }
+    ( snd bothValues <#> \value ->
+        { key: "contenteditable", value: prop' value }
+    )
+  pureAttr Contenteditable value = unsafeAttribute $ This
+    { key: "contenteditable", value: prop' value }
+  unpureAttr Contenteditable eventValue = unsafeAttribute $ That $ eventValue
+    <#> \value -> { key: "contenteditable", value: prop' value }
 
 instance Attr Head_ Contenteditable String where
-  attr Contenteditable bothValues  = unsafeAttribute $ Both { key: "contenteditable", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "contenteditable", value:  prop' value  })
-  pureAttr Contenteditable value  = unsafeAttribute $ This { key: "contenteditable", value:  prop' value  }
-  unpureAttr Contenteditable eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "contenteditable", value:  prop' value  }
+  attr Contenteditable bothValues = unsafeAttribute $ Both
+    { key: "contenteditable", value: prop' (fst bothValues) }
+    ( snd bothValues <#> \value ->
+        { key: "contenteditable", value: prop' value }
+    )
+  pureAttr Contenteditable value = unsafeAttribute $ This
+    { key: "contenteditable", value: prop' value }
+  unpureAttr Contenteditable eventValue = unsafeAttribute $ That $ eventValue
+    <#> \value -> { key: "contenteditable", value: prop' value }
 
 instance Attr Header_ Contenteditable String where
-  attr Contenteditable bothValues  = unsafeAttribute $ Both { key: "contenteditable", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "contenteditable", value:  prop' value  })
-  pureAttr Contenteditable value  = unsafeAttribute $ This { key: "contenteditable", value:  prop' value  }
-  unpureAttr Contenteditable eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "contenteditable", value:  prop' value  }
+  attr Contenteditable bothValues = unsafeAttribute $ Both
+    { key: "contenteditable", value: prop' (fst bothValues) }
+    ( snd bothValues <#> \value ->
+        { key: "contenteditable", value: prop' value }
+    )
+  pureAttr Contenteditable value = unsafeAttribute $ This
+    { key: "contenteditable", value: prop' value }
+  unpureAttr Contenteditable eventValue = unsafeAttribute $ That $ eventValue
+    <#> \value -> { key: "contenteditable", value: prop' value }
 
 instance Attr Hr_ Contenteditable String where
-  attr Contenteditable bothValues  = unsafeAttribute $ Both { key: "contenteditable", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "contenteditable", value:  prop' value  })
-  pureAttr Contenteditable value  = unsafeAttribute $ This { key: "contenteditable", value:  prop' value  }
-  unpureAttr Contenteditable eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "contenteditable", value:  prop' value  }
+  attr Contenteditable bothValues = unsafeAttribute $ Both
+    { key: "contenteditable", value: prop' (fst bothValues) }
+    ( snd bothValues <#> \value ->
+        { key: "contenteditable", value: prop' value }
+    )
+  pureAttr Contenteditable value = unsafeAttribute $ This
+    { key: "contenteditable", value: prop' value }
+  unpureAttr Contenteditable eventValue = unsafeAttribute $ That $ eventValue
+    <#> \value -> { key: "contenteditable", value: prop' value }
 
 instance Attr Html_ Contenteditable String where
-  attr Contenteditable bothValues  = unsafeAttribute $ Both { key: "contenteditable", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "contenteditable", value:  prop' value  })
-  pureAttr Contenteditable value  = unsafeAttribute $ This { key: "contenteditable", value:  prop' value  }
-  unpureAttr Contenteditable eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "contenteditable", value:  prop' value  }
+  attr Contenteditable bothValues = unsafeAttribute $ Both
+    { key: "contenteditable", value: prop' (fst bothValues) }
+    ( snd bothValues <#> \value ->
+        { key: "contenteditable", value: prop' value }
+    )
+  pureAttr Contenteditable value = unsafeAttribute $ This
+    { key: "contenteditable", value: prop' value }
+  unpureAttr Contenteditable eventValue = unsafeAttribute $ That $ eventValue
+    <#> \value -> { key: "contenteditable", value: prop' value }
 
 instance Attr I_ Contenteditable String where
-  attr Contenteditable bothValues  = unsafeAttribute $ Both { key: "contenteditable", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "contenteditable", value:  prop' value  })
-  pureAttr Contenteditable value  = unsafeAttribute $ This { key: "contenteditable", value:  prop' value  }
-  unpureAttr Contenteditable eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "contenteditable", value:  prop' value  }
+  attr Contenteditable bothValues = unsafeAttribute $ Both
+    { key: "contenteditable", value: prop' (fst bothValues) }
+    ( snd bothValues <#> \value ->
+        { key: "contenteditable", value: prop' value }
+    )
+  pureAttr Contenteditable value = unsafeAttribute $ This
+    { key: "contenteditable", value: prop' value }
+  unpureAttr Contenteditable eventValue = unsafeAttribute $ That $ eventValue
+    <#> \value -> { key: "contenteditable", value: prop' value }
 
 instance Attr Iframe_ Contenteditable String where
-  attr Contenteditable bothValues  = unsafeAttribute $ Both { key: "contenteditable", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "contenteditable", value:  prop' value  })
-  pureAttr Contenteditable value  = unsafeAttribute $ This { key: "contenteditable", value:  prop' value  }
-  unpureAttr Contenteditable eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "contenteditable", value:  prop' value  }
+  attr Contenteditable bothValues = unsafeAttribute $ Both
+    { key: "contenteditable", value: prop' (fst bothValues) }
+    ( snd bothValues <#> \value ->
+        { key: "contenteditable", value: prop' value }
+    )
+  pureAttr Contenteditable value = unsafeAttribute $ This
+    { key: "contenteditable", value: prop' value }
+  unpureAttr Contenteditable eventValue = unsafeAttribute $ That $ eventValue
+    <#> \value -> { key: "contenteditable", value: prop' value }
 
 instance Attr Img_ Contenteditable String where
-  attr Contenteditable bothValues  = unsafeAttribute $ Both { key: "contenteditable", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "contenteditable", value:  prop' value  })
-  pureAttr Contenteditable value  = unsafeAttribute $ This { key: "contenteditable", value:  prop' value  }
-  unpureAttr Contenteditable eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "contenteditable", value:  prop' value  }
+  attr Contenteditable bothValues = unsafeAttribute $ Both
+    { key: "contenteditable", value: prop' (fst bothValues) }
+    ( snd bothValues <#> \value ->
+        { key: "contenteditable", value: prop' value }
+    )
+  pureAttr Contenteditable value = unsafeAttribute $ This
+    { key: "contenteditable", value: prop' value }
+  unpureAttr Contenteditable eventValue = unsafeAttribute $ That $ eventValue
+    <#> \value -> { key: "contenteditable", value: prop' value }
 
 instance Attr Input_ Contenteditable String where
-  attr Contenteditable bothValues  = unsafeAttribute $ Both { key: "contenteditable", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "contenteditable", value:  prop' value  })
-  pureAttr Contenteditable value  = unsafeAttribute $ This { key: "contenteditable", value:  prop' value  }
-  unpureAttr Contenteditable eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "contenteditable", value:  prop' value  }
+  attr Contenteditable bothValues = unsafeAttribute $ Both
+    { key: "contenteditable", value: prop' (fst bothValues) }
+    ( snd bothValues <#> \value ->
+        { key: "contenteditable", value: prop' value }
+    )
+  pureAttr Contenteditable value = unsafeAttribute $ This
+    { key: "contenteditable", value: prop' value }
+  unpureAttr Contenteditable eventValue = unsafeAttribute $ That $ eventValue
+    <#> \value -> { key: "contenteditable", value: prop' value }
 
 instance Attr Ins_ Contenteditable String where
-  attr Contenteditable bothValues  = unsafeAttribute $ Both { key: "contenteditable", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "contenteditable", value:  prop' value  })
-  pureAttr Contenteditable value  = unsafeAttribute $ This { key: "contenteditable", value:  prop' value  }
-  unpureAttr Contenteditable eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "contenteditable", value:  prop' value  }
+  attr Contenteditable bothValues = unsafeAttribute $ Both
+    { key: "contenteditable", value: prop' (fst bothValues) }
+    ( snd bothValues <#> \value ->
+        { key: "contenteditable", value: prop' value }
+    )
+  pureAttr Contenteditable value = unsafeAttribute $ This
+    { key: "contenteditable", value: prop' value }
+  unpureAttr Contenteditable eventValue = unsafeAttribute $ That $ eventValue
+    <#> \value -> { key: "contenteditable", value: prop' value }
 
 instance Attr Kbd_ Contenteditable String where
-  attr Contenteditable bothValues  = unsafeAttribute $ Both { key: "contenteditable", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "contenteditable", value:  prop' value  })
-  pureAttr Contenteditable value  = unsafeAttribute $ This { key: "contenteditable", value:  prop' value  }
-  unpureAttr Contenteditable eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "contenteditable", value:  prop' value  }
+  attr Contenteditable bothValues = unsafeAttribute $ Both
+    { key: "contenteditable", value: prop' (fst bothValues) }
+    ( snd bothValues <#> \value ->
+        { key: "contenteditable", value: prop' value }
+    )
+  pureAttr Contenteditable value = unsafeAttribute $ This
+    { key: "contenteditable", value: prop' value }
+  unpureAttr Contenteditable eventValue = unsafeAttribute $ That $ eventValue
+    <#> \value -> { key: "contenteditable", value: prop' value }
 
 instance Attr Label_ Contenteditable String where
-  attr Contenteditable bothValues  = unsafeAttribute $ Both { key: "contenteditable", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "contenteditable", value:  prop' value  })
-  pureAttr Contenteditable value  = unsafeAttribute $ This { key: "contenteditable", value:  prop' value  }
-  unpureAttr Contenteditable eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "contenteditable", value:  prop' value  }
+  attr Contenteditable bothValues = unsafeAttribute $ Both
+    { key: "contenteditable", value: prop' (fst bothValues) }
+    ( snd bothValues <#> \value ->
+        { key: "contenteditable", value: prop' value }
+    )
+  pureAttr Contenteditable value = unsafeAttribute $ This
+    { key: "contenteditable", value: prop' value }
+  unpureAttr Contenteditable eventValue = unsafeAttribute $ That $ eventValue
+    <#> \value -> { key: "contenteditable", value: prop' value }
 
 instance Attr Legend_ Contenteditable String where
-  attr Contenteditable bothValues  = unsafeAttribute $ Both { key: "contenteditable", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "contenteditable", value:  prop' value  })
-  pureAttr Contenteditable value  = unsafeAttribute $ This { key: "contenteditable", value:  prop' value  }
-  unpureAttr Contenteditable eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "contenteditable", value:  prop' value  }
+  attr Contenteditable bothValues = unsafeAttribute $ Both
+    { key: "contenteditable", value: prop' (fst bothValues) }
+    ( snd bothValues <#> \value ->
+        { key: "contenteditable", value: prop' value }
+    )
+  pureAttr Contenteditable value = unsafeAttribute $ This
+    { key: "contenteditable", value: prop' value }
+  unpureAttr Contenteditable eventValue = unsafeAttribute $ That $ eventValue
+    <#> \value -> { key: "contenteditable", value: prop' value }
 
 instance Attr Li_ Contenteditable String where
-  attr Contenteditable bothValues  = unsafeAttribute $ Both { key: "contenteditable", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "contenteditable", value:  prop' value  })
-  pureAttr Contenteditable value  = unsafeAttribute $ This { key: "contenteditable", value:  prop' value  }
-  unpureAttr Contenteditable eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "contenteditable", value:  prop' value  }
+  attr Contenteditable bothValues = unsafeAttribute $ Both
+    { key: "contenteditable", value: prop' (fst bothValues) }
+    ( snd bothValues <#> \value ->
+        { key: "contenteditable", value: prop' value }
+    )
+  pureAttr Contenteditable value = unsafeAttribute $ This
+    { key: "contenteditable", value: prop' value }
+  unpureAttr Contenteditable eventValue = unsafeAttribute $ That $ eventValue
+    <#> \value -> { key: "contenteditable", value: prop' value }
 
 instance Attr Link_ Contenteditable String where
-  attr Contenteditable bothValues  = unsafeAttribute $ Both { key: "contenteditable", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "contenteditable", value:  prop' value  })
-  pureAttr Contenteditable value  = unsafeAttribute $ This { key: "contenteditable", value:  prop' value  }
-  unpureAttr Contenteditable eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "contenteditable", value:  prop' value  }
+  attr Contenteditable bothValues = unsafeAttribute $ Both
+    { key: "contenteditable", value: prop' (fst bothValues) }
+    ( snd bothValues <#> \value ->
+        { key: "contenteditable", value: prop' value }
+    )
+  pureAttr Contenteditable value = unsafeAttribute $ This
+    { key: "contenteditable", value: prop' value }
+  unpureAttr Contenteditable eventValue = unsafeAttribute $ That $ eventValue
+    <#> \value -> { key: "contenteditable", value: prop' value }
 
 instance Attr Main_ Contenteditable String where
-  attr Contenteditable bothValues  = unsafeAttribute $ Both { key: "contenteditable", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "contenteditable", value:  prop' value  })
-  pureAttr Contenteditable value  = unsafeAttribute $ This { key: "contenteditable", value:  prop' value  }
-  unpureAttr Contenteditable eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "contenteditable", value:  prop' value  }
+  attr Contenteditable bothValues = unsafeAttribute $ Both
+    { key: "contenteditable", value: prop' (fst bothValues) }
+    ( snd bothValues <#> \value ->
+        { key: "contenteditable", value: prop' value }
+    )
+  pureAttr Contenteditable value = unsafeAttribute $ This
+    { key: "contenteditable", value: prop' value }
+  unpureAttr Contenteditable eventValue = unsafeAttribute $ That $ eventValue
+    <#> \value -> { key: "contenteditable", value: prop' value }
 
 instance Attr Map_ Contenteditable String where
-  attr Contenteditable bothValues  = unsafeAttribute $ Both { key: "contenteditable", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "contenteditable", value:  prop' value  })
-  pureAttr Contenteditable value  = unsafeAttribute $ This { key: "contenteditable", value:  prop' value  }
-  unpureAttr Contenteditable eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "contenteditable", value:  prop' value  }
+  attr Contenteditable bothValues = unsafeAttribute $ Both
+    { key: "contenteditable", value: prop' (fst bothValues) }
+    ( snd bothValues <#> \value ->
+        { key: "contenteditable", value: prop' value }
+    )
+  pureAttr Contenteditable value = unsafeAttribute $ This
+    { key: "contenteditable", value: prop' value }
+  unpureAttr Contenteditable eventValue = unsafeAttribute $ That $ eventValue
+    <#> \value -> { key: "contenteditable", value: prop' value }
 
 instance Attr Mark_ Contenteditable String where
-  attr Contenteditable bothValues  = unsafeAttribute $ Both { key: "contenteditable", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "contenteditable", value:  prop' value  })
-  pureAttr Contenteditable value  = unsafeAttribute $ This { key: "contenteditable", value:  prop' value  }
-  unpureAttr Contenteditable eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "contenteditable", value:  prop' value  }
+  attr Contenteditable bothValues = unsafeAttribute $ Both
+    { key: "contenteditable", value: prop' (fst bothValues) }
+    ( snd bothValues <#> \value ->
+        { key: "contenteditable", value: prop' value }
+    )
+  pureAttr Contenteditable value = unsafeAttribute $ This
+    { key: "contenteditable", value: prop' value }
+  unpureAttr Contenteditable eventValue = unsafeAttribute $ That $ eventValue
+    <#> \value -> { key: "contenteditable", value: prop' value }
 
 instance Attr Meta_ Contenteditable String where
-  attr Contenteditable bothValues  = unsafeAttribute $ Both { key: "contenteditable", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "contenteditable", value:  prop' value  })
-  pureAttr Contenteditable value  = unsafeAttribute $ This { key: "contenteditable", value:  prop' value  }
-  unpureAttr Contenteditable eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "contenteditable", value:  prop' value  }
+  attr Contenteditable bothValues = unsafeAttribute $ Both
+    { key: "contenteditable", value: prop' (fst bothValues) }
+    ( snd bothValues <#> \value ->
+        { key: "contenteditable", value: prop' value }
+    )
+  pureAttr Contenteditable value = unsafeAttribute $ This
+    { key: "contenteditable", value: prop' value }
+  unpureAttr Contenteditable eventValue = unsafeAttribute $ That $ eventValue
+    <#> \value -> { key: "contenteditable", value: prop' value }
 
 instance Attr Meter_ Contenteditable String where
-  attr Contenteditable bothValues  = unsafeAttribute $ Both { key: "contenteditable", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "contenteditable", value:  prop' value  })
-  pureAttr Contenteditable value  = unsafeAttribute $ This { key: "contenteditable", value:  prop' value  }
-  unpureAttr Contenteditable eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "contenteditable", value:  prop' value  }
+  attr Contenteditable bothValues = unsafeAttribute $ Both
+    { key: "contenteditable", value: prop' (fst bothValues) }
+    ( snd bothValues <#> \value ->
+        { key: "contenteditable", value: prop' value }
+    )
+  pureAttr Contenteditable value = unsafeAttribute $ This
+    { key: "contenteditable", value: prop' value }
+  unpureAttr Contenteditable eventValue = unsafeAttribute $ That $ eventValue
+    <#> \value -> { key: "contenteditable", value: prop' value }
 
 instance Attr Nav_ Contenteditable String where
-  attr Contenteditable bothValues  = unsafeAttribute $ Both { key: "contenteditable", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "contenteditable", value:  prop' value  })
-  pureAttr Contenteditable value  = unsafeAttribute $ This { key: "contenteditable", value:  prop' value  }
-  unpureAttr Contenteditable eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "contenteditable", value:  prop' value  }
+  attr Contenteditable bothValues = unsafeAttribute $ Both
+    { key: "contenteditable", value: prop' (fst bothValues) }
+    ( snd bothValues <#> \value ->
+        { key: "contenteditable", value: prop' value }
+    )
+  pureAttr Contenteditable value = unsafeAttribute $ This
+    { key: "contenteditable", value: prop' value }
+  unpureAttr Contenteditable eventValue = unsafeAttribute $ That $ eventValue
+    <#> \value -> { key: "contenteditable", value: prop' value }
 
 instance Attr Noframes_ Contenteditable String where
-  attr Contenteditable bothValues  = unsafeAttribute $ Both { key: "contenteditable", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "contenteditable", value:  prop' value  })
-  pureAttr Contenteditable value  = unsafeAttribute $ This { key: "contenteditable", value:  prop' value  }
-  unpureAttr Contenteditable eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "contenteditable", value:  prop' value  }
+  attr Contenteditable bothValues = unsafeAttribute $ Both
+    { key: "contenteditable", value: prop' (fst bothValues) }
+    ( snd bothValues <#> \value ->
+        { key: "contenteditable", value: prop' value }
+    )
+  pureAttr Contenteditable value = unsafeAttribute $ This
+    { key: "contenteditable", value: prop' value }
+  unpureAttr Contenteditable eventValue = unsafeAttribute $ That $ eventValue
+    <#> \value -> { key: "contenteditable", value: prop' value }
 
 instance Attr Noscript_ Contenteditable String where
-  attr Contenteditable bothValues  = unsafeAttribute $ Both { key: "contenteditable", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "contenteditable", value:  prop' value  })
-  pureAttr Contenteditable value  = unsafeAttribute $ This { key: "contenteditable", value:  prop' value  }
-  unpureAttr Contenteditable eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "contenteditable", value:  prop' value  }
+  attr Contenteditable bothValues = unsafeAttribute $ Both
+    { key: "contenteditable", value: prop' (fst bothValues) }
+    ( snd bothValues <#> \value ->
+        { key: "contenteditable", value: prop' value }
+    )
+  pureAttr Contenteditable value = unsafeAttribute $ This
+    { key: "contenteditable", value: prop' value }
+  unpureAttr Contenteditable eventValue = unsafeAttribute $ That $ eventValue
+    <#> \value -> { key: "contenteditable", value: prop' value }
 
 instance Attr Object_ Contenteditable String where
-  attr Contenteditable bothValues  = unsafeAttribute $ Both { key: "contenteditable", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "contenteditable", value:  prop' value  })
-  pureAttr Contenteditable value  = unsafeAttribute $ This { key: "contenteditable", value:  prop' value  }
-  unpureAttr Contenteditable eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "contenteditable", value:  prop' value  }
+  attr Contenteditable bothValues = unsafeAttribute $ Both
+    { key: "contenteditable", value: prop' (fst bothValues) }
+    ( snd bothValues <#> \value ->
+        { key: "contenteditable", value: prop' value }
+    )
+  pureAttr Contenteditable value = unsafeAttribute $ This
+    { key: "contenteditable", value: prop' value }
+  unpureAttr Contenteditable eventValue = unsafeAttribute $ That $ eventValue
+    <#> \value -> { key: "contenteditable", value: prop' value }
 
 instance Attr Ol_ Contenteditable String where
-  attr Contenteditable bothValues  = unsafeAttribute $ Both { key: "contenteditable", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "contenteditable", value:  prop' value  })
-  pureAttr Contenteditable value  = unsafeAttribute $ This { key: "contenteditable", value:  prop' value  }
-  unpureAttr Contenteditable eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "contenteditable", value:  prop' value  }
+  attr Contenteditable bothValues = unsafeAttribute $ Both
+    { key: "contenteditable", value: prop' (fst bothValues) }
+    ( snd bothValues <#> \value ->
+        { key: "contenteditable", value: prop' value }
+    )
+  pureAttr Contenteditable value = unsafeAttribute $ This
+    { key: "contenteditable", value: prop' value }
+  unpureAttr Contenteditable eventValue = unsafeAttribute $ That $ eventValue
+    <#> \value -> { key: "contenteditable", value: prop' value }
 
 instance Attr Optgroup_ Contenteditable String where
-  attr Contenteditable bothValues  = unsafeAttribute $ Both { key: "contenteditable", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "contenteditable", value:  prop' value  })
-  pureAttr Contenteditable value  = unsafeAttribute $ This { key: "contenteditable", value:  prop' value  }
-  unpureAttr Contenteditable eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "contenteditable", value:  prop' value  }
+  attr Contenteditable bothValues = unsafeAttribute $ Both
+    { key: "contenteditable", value: prop' (fst bothValues) }
+    ( snd bothValues <#> \value ->
+        { key: "contenteditable", value: prop' value }
+    )
+  pureAttr Contenteditable value = unsafeAttribute $ This
+    { key: "contenteditable", value: prop' value }
+  unpureAttr Contenteditable eventValue = unsafeAttribute $ That $ eventValue
+    <#> \value -> { key: "contenteditable", value: prop' value }
 
 instance Attr Option_ Contenteditable String where
-  attr Contenteditable bothValues  = unsafeAttribute $ Both { key: "contenteditable", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "contenteditable", value:  prop' value  })
-  pureAttr Contenteditable value  = unsafeAttribute $ This { key: "contenteditable", value:  prop' value  }
-  unpureAttr Contenteditable eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "contenteditable", value:  prop' value  }
+  attr Contenteditable bothValues = unsafeAttribute $ Both
+    { key: "contenteditable", value: prop' (fst bothValues) }
+    ( snd bothValues <#> \value ->
+        { key: "contenteditable", value: prop' value }
+    )
+  pureAttr Contenteditable value = unsafeAttribute $ This
+    { key: "contenteditable", value: prop' value }
+  unpureAttr Contenteditable eventValue = unsafeAttribute $ That $ eventValue
+    <#> \value -> { key: "contenteditable", value: prop' value }
 
 instance Attr Output_ Contenteditable String where
-  attr Contenteditable bothValues  = unsafeAttribute $ Both { key: "contenteditable", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "contenteditable", value:  prop' value  })
-  pureAttr Contenteditable value  = unsafeAttribute $ This { key: "contenteditable", value:  prop' value  }
-  unpureAttr Contenteditable eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "contenteditable", value:  prop' value  }
+  attr Contenteditable bothValues = unsafeAttribute $ Both
+    { key: "contenteditable", value: prop' (fst bothValues) }
+    ( snd bothValues <#> \value ->
+        { key: "contenteditable", value: prop' value }
+    )
+  pureAttr Contenteditable value = unsafeAttribute $ This
+    { key: "contenteditable", value: prop' value }
+  unpureAttr Contenteditable eventValue = unsafeAttribute $ That $ eventValue
+    <#> \value -> { key: "contenteditable", value: prop' value }
 
 instance Attr P_ Contenteditable String where
-  attr Contenteditable bothValues  = unsafeAttribute $ Both { key: "contenteditable", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "contenteditable", value:  prop' value  })
-  pureAttr Contenteditable value  = unsafeAttribute $ This { key: "contenteditable", value:  prop' value  }
-  unpureAttr Contenteditable eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "contenteditable", value:  prop' value  }
+  attr Contenteditable bothValues = unsafeAttribute $ Both
+    { key: "contenteditable", value: prop' (fst bothValues) }
+    ( snd bothValues <#> \value ->
+        { key: "contenteditable", value: prop' value }
+    )
+  pureAttr Contenteditable value = unsafeAttribute $ This
+    { key: "contenteditable", value: prop' value }
+  unpureAttr Contenteditable eventValue = unsafeAttribute $ That $ eventValue
+    <#> \value -> { key: "contenteditable", value: prop' value }
 
 instance Attr Param_ Contenteditable String where
-  attr Contenteditable bothValues  = unsafeAttribute $ Both { key: "contenteditable", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "contenteditable", value:  prop' value  })
-  pureAttr Contenteditable value  = unsafeAttribute $ This { key: "contenteditable", value:  prop' value  }
-  unpureAttr Contenteditable eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "contenteditable", value:  prop' value  }
+  attr Contenteditable bothValues = unsafeAttribute $ Both
+    { key: "contenteditable", value: prop' (fst bothValues) }
+    ( snd bothValues <#> \value ->
+        { key: "contenteditable", value: prop' value }
+    )
+  pureAttr Contenteditable value = unsafeAttribute $ This
+    { key: "contenteditable", value: prop' value }
+  unpureAttr Contenteditable eventValue = unsafeAttribute $ That $ eventValue
+    <#> \value -> { key: "contenteditable", value: prop' value }
 
 instance Attr Picture_ Contenteditable String where
-  attr Contenteditable bothValues  = unsafeAttribute $ Both { key: "contenteditable", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "contenteditable", value:  prop' value  })
-  pureAttr Contenteditable value  = unsafeAttribute $ This { key: "contenteditable", value:  prop' value  }
-  unpureAttr Contenteditable eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "contenteditable", value:  prop' value  }
+  attr Contenteditable bothValues = unsafeAttribute $ Both
+    { key: "contenteditable", value: prop' (fst bothValues) }
+    ( snd bothValues <#> \value ->
+        { key: "contenteditable", value: prop' value }
+    )
+  pureAttr Contenteditable value = unsafeAttribute $ This
+    { key: "contenteditable", value: prop' value }
+  unpureAttr Contenteditable eventValue = unsafeAttribute $ That $ eventValue
+    <#> \value -> { key: "contenteditable", value: prop' value }
 
 instance Attr Pre_ Contenteditable String where
-  attr Contenteditable bothValues  = unsafeAttribute $ Both { key: "contenteditable", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "contenteditable", value:  prop' value  })
-  pureAttr Contenteditable value  = unsafeAttribute $ This { key: "contenteditable", value:  prop' value  }
-  unpureAttr Contenteditable eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "contenteditable", value:  prop' value  }
+  attr Contenteditable bothValues = unsafeAttribute $ Both
+    { key: "contenteditable", value: prop' (fst bothValues) }
+    ( snd bothValues <#> \value ->
+        { key: "contenteditable", value: prop' value }
+    )
+  pureAttr Contenteditable value = unsafeAttribute $ This
+    { key: "contenteditable", value: prop' value }
+  unpureAttr Contenteditable eventValue = unsafeAttribute $ That $ eventValue
+    <#> \value -> { key: "contenteditable", value: prop' value }
 
 instance Attr Progress_ Contenteditable String where
-  attr Contenteditable bothValues  = unsafeAttribute $ Both { key: "contenteditable", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "contenteditable", value:  prop' value  })
-  pureAttr Contenteditable value  = unsafeAttribute $ This { key: "contenteditable", value:  prop' value  }
-  unpureAttr Contenteditable eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "contenteditable", value:  prop' value  }
+  attr Contenteditable bothValues = unsafeAttribute $ Both
+    { key: "contenteditable", value: prop' (fst bothValues) }
+    ( snd bothValues <#> \value ->
+        { key: "contenteditable", value: prop' value }
+    )
+  pureAttr Contenteditable value = unsafeAttribute $ This
+    { key: "contenteditable", value: prop' value }
+  unpureAttr Contenteditable eventValue = unsafeAttribute $ That $ eventValue
+    <#> \value -> { key: "contenteditable", value: prop' value }
 
 instance Attr Q_ Contenteditable String where
-  attr Contenteditable bothValues  = unsafeAttribute $ Both { key: "contenteditable", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "contenteditable", value:  prop' value  })
-  pureAttr Contenteditable value  = unsafeAttribute $ This { key: "contenteditable", value:  prop' value  }
-  unpureAttr Contenteditable eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "contenteditable", value:  prop' value  }
+  attr Contenteditable bothValues = unsafeAttribute $ Both
+    { key: "contenteditable", value: prop' (fst bothValues) }
+    ( snd bothValues <#> \value ->
+        { key: "contenteditable", value: prop' value }
+    )
+  pureAttr Contenteditable value = unsafeAttribute $ This
+    { key: "contenteditable", value: prop' value }
+  unpureAttr Contenteditable eventValue = unsafeAttribute $ That $ eventValue
+    <#> \value -> { key: "contenteditable", value: prop' value }
 
 instance Attr Rp_ Contenteditable String where
-  attr Contenteditable bothValues  = unsafeAttribute $ Both { key: "contenteditable", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "contenteditable", value:  prop' value  })
-  pureAttr Contenteditable value  = unsafeAttribute $ This { key: "contenteditable", value:  prop' value  }
-  unpureAttr Contenteditable eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "contenteditable", value:  prop' value  }
+  attr Contenteditable bothValues = unsafeAttribute $ Both
+    { key: "contenteditable", value: prop' (fst bothValues) }
+    ( snd bothValues <#> \value ->
+        { key: "contenteditable", value: prop' value }
+    )
+  pureAttr Contenteditable value = unsafeAttribute $ This
+    { key: "contenteditable", value: prop' value }
+  unpureAttr Contenteditable eventValue = unsafeAttribute $ That $ eventValue
+    <#> \value -> { key: "contenteditable", value: prop' value }
 
 instance Attr Rt_ Contenteditable String where
-  attr Contenteditable bothValues  = unsafeAttribute $ Both { key: "contenteditable", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "contenteditable", value:  prop' value  })
-  pureAttr Contenteditable value  = unsafeAttribute $ This { key: "contenteditable", value:  prop' value  }
-  unpureAttr Contenteditable eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "contenteditable", value:  prop' value  }
+  attr Contenteditable bothValues = unsafeAttribute $ Both
+    { key: "contenteditable", value: prop' (fst bothValues) }
+    ( snd bothValues <#> \value ->
+        { key: "contenteditable", value: prop' value }
+    )
+  pureAttr Contenteditable value = unsafeAttribute $ This
+    { key: "contenteditable", value: prop' value }
+  unpureAttr Contenteditable eventValue = unsafeAttribute $ That $ eventValue
+    <#> \value -> { key: "contenteditable", value: prop' value }
 
 instance Attr Ruby_ Contenteditable String where
-  attr Contenteditable bothValues  = unsafeAttribute $ Both { key: "contenteditable", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "contenteditable", value:  prop' value  })
-  pureAttr Contenteditable value  = unsafeAttribute $ This { key: "contenteditable", value:  prop' value  }
-  unpureAttr Contenteditable eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "contenteditable", value:  prop' value  }
+  attr Contenteditable bothValues = unsafeAttribute $ Both
+    { key: "contenteditable", value: prop' (fst bothValues) }
+    ( snd bothValues <#> \value ->
+        { key: "contenteditable", value: prop' value }
+    )
+  pureAttr Contenteditable value = unsafeAttribute $ This
+    { key: "contenteditable", value: prop' value }
+  unpureAttr Contenteditable eventValue = unsafeAttribute $ That $ eventValue
+    <#> \value -> { key: "contenteditable", value: prop' value }
 
 instance Attr S_ Contenteditable String where
-  attr Contenteditable bothValues  = unsafeAttribute $ Both { key: "contenteditable", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "contenteditable", value:  prop' value  })
-  pureAttr Contenteditable value  = unsafeAttribute $ This { key: "contenteditable", value:  prop' value  }
-  unpureAttr Contenteditable eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "contenteditable", value:  prop' value  }
+  attr Contenteditable bothValues = unsafeAttribute $ Both
+    { key: "contenteditable", value: prop' (fst bothValues) }
+    ( snd bothValues <#> \value ->
+        { key: "contenteditable", value: prop' value }
+    )
+  pureAttr Contenteditable value = unsafeAttribute $ This
+    { key: "contenteditable", value: prop' value }
+  unpureAttr Contenteditable eventValue = unsafeAttribute $ That $ eventValue
+    <#> \value -> { key: "contenteditable", value: prop' value }
 
 instance Attr Samp_ Contenteditable String where
-  attr Contenteditable bothValues  = unsafeAttribute $ Both { key: "contenteditable", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "contenteditable", value:  prop' value  })
-  pureAttr Contenteditable value  = unsafeAttribute $ This { key: "contenteditable", value:  prop' value  }
-  unpureAttr Contenteditable eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "contenteditable", value:  prop' value  }
+  attr Contenteditable bothValues = unsafeAttribute $ Both
+    { key: "contenteditable", value: prop' (fst bothValues) }
+    ( snd bothValues <#> \value ->
+        { key: "contenteditable", value: prop' value }
+    )
+  pureAttr Contenteditable value = unsafeAttribute $ This
+    { key: "contenteditable", value: prop' value }
+  unpureAttr Contenteditable eventValue = unsafeAttribute $ That $ eventValue
+    <#> \value -> { key: "contenteditable", value: prop' value }
 
 instance Attr Script_ Contenteditable String where
-  attr Contenteditable bothValues  = unsafeAttribute $ Both { key: "contenteditable", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "contenteditable", value:  prop' value  })
-  pureAttr Contenteditable value  = unsafeAttribute $ This { key: "contenteditable", value:  prop' value  }
-  unpureAttr Contenteditable eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "contenteditable", value:  prop' value  }
+  attr Contenteditable bothValues = unsafeAttribute $ Both
+    { key: "contenteditable", value: prop' (fst bothValues) }
+    ( snd bothValues <#> \value ->
+        { key: "contenteditable", value: prop' value }
+    )
+  pureAttr Contenteditable value = unsafeAttribute $ This
+    { key: "contenteditable", value: prop' value }
+  unpureAttr Contenteditable eventValue = unsafeAttribute $ That $ eventValue
+    <#> \value -> { key: "contenteditable", value: prop' value }
 
 instance Attr Section_ Contenteditable String where
-  attr Contenteditable bothValues  = unsafeAttribute $ Both { key: "contenteditable", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "contenteditable", value:  prop' value  })
-  pureAttr Contenteditable value  = unsafeAttribute $ This { key: "contenteditable", value:  prop' value  }
-  unpureAttr Contenteditable eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "contenteditable", value:  prop' value  }
+  attr Contenteditable bothValues = unsafeAttribute $ Both
+    { key: "contenteditable", value: prop' (fst bothValues) }
+    ( snd bothValues <#> \value ->
+        { key: "contenteditable", value: prop' value }
+    )
+  pureAttr Contenteditable value = unsafeAttribute $ This
+    { key: "contenteditable", value: prop' value }
+  unpureAttr Contenteditable eventValue = unsafeAttribute $ That $ eventValue
+    <#> \value -> { key: "contenteditable", value: prop' value }
 
 instance Attr Select_ Contenteditable String where
-  attr Contenteditable bothValues  = unsafeAttribute $ Both { key: "contenteditable", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "contenteditable", value:  prop' value  })
-  pureAttr Contenteditable value  = unsafeAttribute $ This { key: "contenteditable", value:  prop' value  }
-  unpureAttr Contenteditable eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "contenteditable", value:  prop' value  }
+  attr Contenteditable bothValues = unsafeAttribute $ Both
+    { key: "contenteditable", value: prop' (fst bothValues) }
+    ( snd bothValues <#> \value ->
+        { key: "contenteditable", value: prop' value }
+    )
+  pureAttr Contenteditable value = unsafeAttribute $ This
+    { key: "contenteditable", value: prop' value }
+  unpureAttr Contenteditable eventValue = unsafeAttribute $ That $ eventValue
+    <#> \value -> { key: "contenteditable", value: prop' value }
 
 instance Attr Small_ Contenteditable String where
-  attr Contenteditable bothValues  = unsafeAttribute $ Both { key: "contenteditable", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "contenteditable", value:  prop' value  })
-  pureAttr Contenteditable value  = unsafeAttribute $ This { key: "contenteditable", value:  prop' value  }
-  unpureAttr Contenteditable eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "contenteditable", value:  prop' value  }
+  attr Contenteditable bothValues = unsafeAttribute $ Both
+    { key: "contenteditable", value: prop' (fst bothValues) }
+    ( snd bothValues <#> \value ->
+        { key: "contenteditable", value: prop' value }
+    )
+  pureAttr Contenteditable value = unsafeAttribute $ This
+    { key: "contenteditable", value: prop' value }
+  unpureAttr Contenteditable eventValue = unsafeAttribute $ That $ eventValue
+    <#> \value -> { key: "contenteditable", value: prop' value }
 
 instance Attr Source_ Contenteditable String where
-  attr Contenteditable bothValues  = unsafeAttribute $ Both { key: "contenteditable", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "contenteditable", value:  prop' value  })
-  pureAttr Contenteditable value  = unsafeAttribute $ This { key: "contenteditable", value:  prop' value  }
-  unpureAttr Contenteditable eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "contenteditable", value:  prop' value  }
+  attr Contenteditable bothValues = unsafeAttribute $ Both
+    { key: "contenteditable", value: prop' (fst bothValues) }
+    ( snd bothValues <#> \value ->
+        { key: "contenteditable", value: prop' value }
+    )
+  pureAttr Contenteditable value = unsafeAttribute $ This
+    { key: "contenteditable", value: prop' value }
+  unpureAttr Contenteditable eventValue = unsafeAttribute $ That $ eventValue
+    <#> \value -> { key: "contenteditable", value: prop' value }
 
 instance Attr Span_ Contenteditable String where
-  attr Contenteditable bothValues  = unsafeAttribute $ Both { key: "contenteditable", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "contenteditable", value:  prop' value  })
-  pureAttr Contenteditable value  = unsafeAttribute $ This { key: "contenteditable", value:  prop' value  }
-  unpureAttr Contenteditable eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "contenteditable", value:  prop' value  }
+  attr Contenteditable bothValues = unsafeAttribute $ Both
+    { key: "contenteditable", value: prop' (fst bothValues) }
+    ( snd bothValues <#> \value ->
+        { key: "contenteditable", value: prop' value }
+    )
+  pureAttr Contenteditable value = unsafeAttribute $ This
+    { key: "contenteditable", value: prop' value }
+  unpureAttr Contenteditable eventValue = unsafeAttribute $ That $ eventValue
+    <#> \value -> { key: "contenteditable", value: prop' value }
 
 instance Attr Strike_ Contenteditable String where
-  attr Contenteditable bothValues  = unsafeAttribute $ Both { key: "contenteditable", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "contenteditable", value:  prop' value  })
-  pureAttr Contenteditable value  = unsafeAttribute $ This { key: "contenteditable", value:  prop' value  }
-  unpureAttr Contenteditable eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "contenteditable", value:  prop' value  }
+  attr Contenteditable bothValues = unsafeAttribute $ Both
+    { key: "contenteditable", value: prop' (fst bothValues) }
+    ( snd bothValues <#> \value ->
+        { key: "contenteditable", value: prop' value }
+    )
+  pureAttr Contenteditable value = unsafeAttribute $ This
+    { key: "contenteditable", value: prop' value }
+  unpureAttr Contenteditable eventValue = unsafeAttribute $ That $ eventValue
+    <#> \value -> { key: "contenteditable", value: prop' value }
 
 instance Attr Strong_ Contenteditable String where
-  attr Contenteditable bothValues  = unsafeAttribute $ Both { key: "contenteditable", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "contenteditable", value:  prop' value  })
-  pureAttr Contenteditable value  = unsafeAttribute $ This { key: "contenteditable", value:  prop' value  }
-  unpureAttr Contenteditable eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "contenteditable", value:  prop' value  }
+  attr Contenteditable bothValues = unsafeAttribute $ Both
+    { key: "contenteditable", value: prop' (fst bothValues) }
+    ( snd bothValues <#> \value ->
+        { key: "contenteditable", value: prop' value }
+    )
+  pureAttr Contenteditable value = unsafeAttribute $ This
+    { key: "contenteditable", value: prop' value }
+  unpureAttr Contenteditable eventValue = unsafeAttribute $ That $ eventValue
+    <#> \value -> { key: "contenteditable", value: prop' value }
 
 instance Attr Style_ Contenteditable String where
-  attr Contenteditable bothValues  = unsafeAttribute $ Both { key: "contenteditable", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "contenteditable", value:  prop' value  })
-  pureAttr Contenteditable value  = unsafeAttribute $ This { key: "contenteditable", value:  prop' value  }
-  unpureAttr Contenteditable eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "contenteditable", value:  prop' value  }
+  attr Contenteditable bothValues = unsafeAttribute $ Both
+    { key: "contenteditable", value: prop' (fst bothValues) }
+    ( snd bothValues <#> \value ->
+        { key: "contenteditable", value: prop' value }
+    )
+  pureAttr Contenteditable value = unsafeAttribute $ This
+    { key: "contenteditable", value: prop' value }
+  unpureAttr Contenteditable eventValue = unsafeAttribute $ That $ eventValue
+    <#> \value -> { key: "contenteditable", value: prop' value }
 
 instance Attr Sub_ Contenteditable String where
-  attr Contenteditable bothValues  = unsafeAttribute $ Both { key: "contenteditable", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "contenteditable", value:  prop' value  })
-  pureAttr Contenteditable value  = unsafeAttribute $ This { key: "contenteditable", value:  prop' value  }
-  unpureAttr Contenteditable eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "contenteditable", value:  prop' value  }
+  attr Contenteditable bothValues = unsafeAttribute $ Both
+    { key: "contenteditable", value: prop' (fst bothValues) }
+    ( snd bothValues <#> \value ->
+        { key: "contenteditable", value: prop' value }
+    )
+  pureAttr Contenteditable value = unsafeAttribute $ This
+    { key: "contenteditable", value: prop' value }
+  unpureAttr Contenteditable eventValue = unsafeAttribute $ That $ eventValue
+    <#> \value -> { key: "contenteditable", value: prop' value }
 
 instance Attr Summary_ Contenteditable String where
-  attr Contenteditable bothValues  = unsafeAttribute $ Both { key: "contenteditable", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "contenteditable", value:  prop' value  })
-  pureAttr Contenteditable value  = unsafeAttribute $ This { key: "contenteditable", value:  prop' value  }
-  unpureAttr Contenteditable eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "contenteditable", value:  prop' value  }
+  attr Contenteditable bothValues = unsafeAttribute $ Both
+    { key: "contenteditable", value: prop' (fst bothValues) }
+    ( snd bothValues <#> \value ->
+        { key: "contenteditable", value: prop' value }
+    )
+  pureAttr Contenteditable value = unsafeAttribute $ This
+    { key: "contenteditable", value: prop' value }
+  unpureAttr Contenteditable eventValue = unsafeAttribute $ That $ eventValue
+    <#> \value -> { key: "contenteditable", value: prop' value }
 
 instance Attr Sup_ Contenteditable String where
-  attr Contenteditable bothValues  = unsafeAttribute $ Both { key: "contenteditable", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "contenteditable", value:  prop' value  })
-  pureAttr Contenteditable value  = unsafeAttribute $ This { key: "contenteditable", value:  prop' value  }
-  unpureAttr Contenteditable eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "contenteditable", value:  prop' value  }
+  attr Contenteditable bothValues = unsafeAttribute $ Both
+    { key: "contenteditable", value: prop' (fst bothValues) }
+    ( snd bothValues <#> \value ->
+        { key: "contenteditable", value: prop' value }
+    )
+  pureAttr Contenteditable value = unsafeAttribute $ This
+    { key: "contenteditable", value: prop' value }
+  unpureAttr Contenteditable eventValue = unsafeAttribute $ That $ eventValue
+    <#> \value -> { key: "contenteditable", value: prop' value }
 
 instance Attr Svg_ Contenteditable String where
-  attr Contenteditable bothValues  = unsafeAttribute $ Both { key: "contenteditable", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "contenteditable", value:  prop' value  })
-  pureAttr Contenteditable value  = unsafeAttribute $ This { key: "contenteditable", value:  prop' value  }
-  unpureAttr Contenteditable eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "contenteditable", value:  prop' value  }
+  attr Contenteditable bothValues = unsafeAttribute $ Both
+    { key: "contenteditable", value: prop' (fst bothValues) }
+    ( snd bothValues <#> \value ->
+        { key: "contenteditable", value: prop' value }
+    )
+  pureAttr Contenteditable value = unsafeAttribute $ This
+    { key: "contenteditable", value: prop' value }
+  unpureAttr Contenteditable eventValue = unsafeAttribute $ That $ eventValue
+    <#> \value -> { key: "contenteditable", value: prop' value }
 
 instance Attr Table_ Contenteditable String where
-  attr Contenteditable bothValues  = unsafeAttribute $ Both { key: "contenteditable", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "contenteditable", value:  prop' value  })
-  pureAttr Contenteditable value  = unsafeAttribute $ This { key: "contenteditable", value:  prop' value  }
-  unpureAttr Contenteditable eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "contenteditable", value:  prop' value  }
+  attr Contenteditable bothValues = unsafeAttribute $ Both
+    { key: "contenteditable", value: prop' (fst bothValues) }
+    ( snd bothValues <#> \value ->
+        { key: "contenteditable", value: prop' value }
+    )
+  pureAttr Contenteditable value = unsafeAttribute $ This
+    { key: "contenteditable", value: prop' value }
+  unpureAttr Contenteditable eventValue = unsafeAttribute $ That $ eventValue
+    <#> \value -> { key: "contenteditable", value: prop' value }
 
 instance Attr Tbody_ Contenteditable String where
-  attr Contenteditable bothValues  = unsafeAttribute $ Both { key: "contenteditable", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "contenteditable", value:  prop' value  })
-  pureAttr Contenteditable value  = unsafeAttribute $ This { key: "contenteditable", value:  prop' value  }
-  unpureAttr Contenteditable eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "contenteditable", value:  prop' value  }
+  attr Contenteditable bothValues = unsafeAttribute $ Both
+    { key: "contenteditable", value: prop' (fst bothValues) }
+    ( snd bothValues <#> \value ->
+        { key: "contenteditable", value: prop' value }
+    )
+  pureAttr Contenteditable value = unsafeAttribute $ This
+    { key: "contenteditable", value: prop' value }
+  unpureAttr Contenteditable eventValue = unsafeAttribute $ That $ eventValue
+    <#> \value -> { key: "contenteditable", value: prop' value }
 
 instance Attr Td_ Contenteditable String where
-  attr Contenteditable bothValues  = unsafeAttribute $ Both { key: "contenteditable", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "contenteditable", value:  prop' value  })
-  pureAttr Contenteditable value  = unsafeAttribute $ This { key: "contenteditable", value:  prop' value  }
-  unpureAttr Contenteditable eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "contenteditable", value:  prop' value  }
+  attr Contenteditable bothValues = unsafeAttribute $ Both
+    { key: "contenteditable", value: prop' (fst bothValues) }
+    ( snd bothValues <#> \value ->
+        { key: "contenteditable", value: prop' value }
+    )
+  pureAttr Contenteditable value = unsafeAttribute $ This
+    { key: "contenteditable", value: prop' value }
+  unpureAttr Contenteditable eventValue = unsafeAttribute $ That $ eventValue
+    <#> \value -> { key: "contenteditable", value: prop' value }
 
 instance Attr Template_ Contenteditable String where
-  attr Contenteditable bothValues  = unsafeAttribute $ Both { key: "contenteditable", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "contenteditable", value:  prop' value  })
-  pureAttr Contenteditable value  = unsafeAttribute $ This { key: "contenteditable", value:  prop' value  }
-  unpureAttr Contenteditable eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "contenteditable", value:  prop' value  }
+  attr Contenteditable bothValues = unsafeAttribute $ Both
+    { key: "contenteditable", value: prop' (fst bothValues) }
+    ( snd bothValues <#> \value ->
+        { key: "contenteditable", value: prop' value }
+    )
+  pureAttr Contenteditable value = unsafeAttribute $ This
+    { key: "contenteditable", value: prop' value }
+  unpureAttr Contenteditable eventValue = unsafeAttribute $ That $ eventValue
+    <#> \value -> { key: "contenteditable", value: prop' value }
 
 instance Attr Textarea_ Contenteditable String where
-  attr Contenteditable bothValues  = unsafeAttribute $ Both { key: "contenteditable", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "contenteditable", value:  prop' value  })
-  pureAttr Contenteditable value  = unsafeAttribute $ This { key: "contenteditable", value:  prop' value  }
-  unpureAttr Contenteditable eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "contenteditable", value:  prop' value  }
+  attr Contenteditable bothValues = unsafeAttribute $ Both
+    { key: "contenteditable", value: prop' (fst bothValues) }
+    ( snd bothValues <#> \value ->
+        { key: "contenteditable", value: prop' value }
+    )
+  pureAttr Contenteditable value = unsafeAttribute $ This
+    { key: "contenteditable", value: prop' value }
+  unpureAttr Contenteditable eventValue = unsafeAttribute $ That $ eventValue
+    <#> \value -> { key: "contenteditable", value: prop' value }
 
 instance Attr Tfoot_ Contenteditable String where
-  attr Contenteditable bothValues  = unsafeAttribute $ Both { key: "contenteditable", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "contenteditable", value:  prop' value  })
-  pureAttr Contenteditable value  = unsafeAttribute $ This { key: "contenteditable", value:  prop' value  }
-  unpureAttr Contenteditable eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "contenteditable", value:  prop' value  }
+  attr Contenteditable bothValues = unsafeAttribute $ Both
+    { key: "contenteditable", value: prop' (fst bothValues) }
+    ( snd bothValues <#> \value ->
+        { key: "contenteditable", value: prop' value }
+    )
+  pureAttr Contenteditable value = unsafeAttribute $ This
+    { key: "contenteditable", value: prop' value }
+  unpureAttr Contenteditable eventValue = unsafeAttribute $ That $ eventValue
+    <#> \value -> { key: "contenteditable", value: prop' value }
 
 instance Attr Th_ Contenteditable String where
-  attr Contenteditable bothValues  = unsafeAttribute $ Both { key: "contenteditable", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "contenteditable", value:  prop' value  })
-  pureAttr Contenteditable value  = unsafeAttribute $ This { key: "contenteditable", value:  prop' value  }
-  unpureAttr Contenteditable eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "contenteditable", value:  prop' value  }
+  attr Contenteditable bothValues = unsafeAttribute $ Both
+    { key: "contenteditable", value: prop' (fst bothValues) }
+    ( snd bothValues <#> \value ->
+        { key: "contenteditable", value: prop' value }
+    )
+  pureAttr Contenteditable value = unsafeAttribute $ This
+    { key: "contenteditable", value: prop' value }
+  unpureAttr Contenteditable eventValue = unsafeAttribute $ That $ eventValue
+    <#> \value -> { key: "contenteditable", value: prop' value }
 
 instance Attr Thead_ Contenteditable String where
-  attr Contenteditable bothValues  = unsafeAttribute $ Both { key: "contenteditable", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "contenteditable", value:  prop' value  })
-  pureAttr Contenteditable value  = unsafeAttribute $ This { key: "contenteditable", value:  prop' value  }
-  unpureAttr Contenteditable eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "contenteditable", value:  prop' value  }
+  attr Contenteditable bothValues = unsafeAttribute $ Both
+    { key: "contenteditable", value: prop' (fst bothValues) }
+    ( snd bothValues <#> \value ->
+        { key: "contenteditable", value: prop' value }
+    )
+  pureAttr Contenteditable value = unsafeAttribute $ This
+    { key: "contenteditable", value: prop' value }
+  unpureAttr Contenteditable eventValue = unsafeAttribute $ That $ eventValue
+    <#> \value -> { key: "contenteditable", value: prop' value }
 
 instance Attr Time_ Contenteditable String where
-  attr Contenteditable bothValues  = unsafeAttribute $ Both { key: "contenteditable", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "contenteditable", value:  prop' value  })
-  pureAttr Contenteditable value  = unsafeAttribute $ This { key: "contenteditable", value:  prop' value  }
-  unpureAttr Contenteditable eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "contenteditable", value:  prop' value  }
+  attr Contenteditable bothValues = unsafeAttribute $ Both
+    { key: "contenteditable", value: prop' (fst bothValues) }
+    ( snd bothValues <#> \value ->
+        { key: "contenteditable", value: prop' value }
+    )
+  pureAttr Contenteditable value = unsafeAttribute $ This
+    { key: "contenteditable", value: prop' value }
+  unpureAttr Contenteditable eventValue = unsafeAttribute $ That $ eventValue
+    <#> \value -> { key: "contenteditable", value: prop' value }
 
 instance Attr Title_ Contenteditable String where
-  attr Contenteditable bothValues  = unsafeAttribute $ Both { key: "contenteditable", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "contenteditable", value:  prop' value  })
-  pureAttr Contenteditable value  = unsafeAttribute $ This { key: "contenteditable", value:  prop' value  }
-  unpureAttr Contenteditable eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "contenteditable", value:  prop' value  }
+  attr Contenteditable bothValues = unsafeAttribute $ Both
+    { key: "contenteditable", value: prop' (fst bothValues) }
+    ( snd bothValues <#> \value ->
+        { key: "contenteditable", value: prop' value }
+    )
+  pureAttr Contenteditable value = unsafeAttribute $ This
+    { key: "contenteditable", value: prop' value }
+  unpureAttr Contenteditable eventValue = unsafeAttribute $ That $ eventValue
+    <#> \value -> { key: "contenteditable", value: prop' value }
 
 instance Attr Tr_ Contenteditable String where
-  attr Contenteditable bothValues  = unsafeAttribute $ Both { key: "contenteditable", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "contenteditable", value:  prop' value  })
-  pureAttr Contenteditable value  = unsafeAttribute $ This { key: "contenteditable", value:  prop' value  }
-  unpureAttr Contenteditable eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "contenteditable", value:  prop' value  }
+  attr Contenteditable bothValues = unsafeAttribute $ Both
+    { key: "contenteditable", value: prop' (fst bothValues) }
+    ( snd bothValues <#> \value ->
+        { key: "contenteditable", value: prop' value }
+    )
+  pureAttr Contenteditable value = unsafeAttribute $ This
+    { key: "contenteditable", value: prop' value }
+  unpureAttr Contenteditable eventValue = unsafeAttribute $ That $ eventValue
+    <#> \value -> { key: "contenteditable", value: prop' value }
 
 instance Attr Track_ Contenteditable String where
-  attr Contenteditable bothValues  = unsafeAttribute $ Both { key: "contenteditable", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "contenteditable", value:  prop' value  })
-  pureAttr Contenteditable value  = unsafeAttribute $ This { key: "contenteditable", value:  prop' value  }
-  unpureAttr Contenteditable eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "contenteditable", value:  prop' value  }
+  attr Contenteditable bothValues = unsafeAttribute $ Both
+    { key: "contenteditable", value: prop' (fst bothValues) }
+    ( snd bothValues <#> \value ->
+        { key: "contenteditable", value: prop' value }
+    )
+  pureAttr Contenteditable value = unsafeAttribute $ This
+    { key: "contenteditable", value: prop' value }
+  unpureAttr Contenteditable eventValue = unsafeAttribute $ That $ eventValue
+    <#> \value -> { key: "contenteditable", value: prop' value }
 
 instance Attr Tt_ Contenteditable String where
-  attr Contenteditable bothValues  = unsafeAttribute $ Both { key: "contenteditable", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "contenteditable", value:  prop' value  })
-  pureAttr Contenteditable value  = unsafeAttribute $ This { key: "contenteditable", value:  prop' value  }
-  unpureAttr Contenteditable eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "contenteditable", value:  prop' value  }
+  attr Contenteditable bothValues = unsafeAttribute $ Both
+    { key: "contenteditable", value: prop' (fst bothValues) }
+    ( snd bothValues <#> \value ->
+        { key: "contenteditable", value: prop' value }
+    )
+  pureAttr Contenteditable value = unsafeAttribute $ This
+    { key: "contenteditable", value: prop' value }
+  unpureAttr Contenteditable eventValue = unsafeAttribute $ That $ eventValue
+    <#> \value -> { key: "contenteditable", value: prop' value }
 
 instance Attr U_ Contenteditable String where
-  attr Contenteditable bothValues  = unsafeAttribute $ Both { key: "contenteditable", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "contenteditable", value:  prop' value  })
-  pureAttr Contenteditable value  = unsafeAttribute $ This { key: "contenteditable", value:  prop' value  }
-  unpureAttr Contenteditable eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "contenteditable", value:  prop' value  }
+  attr Contenteditable bothValues = unsafeAttribute $ Both
+    { key: "contenteditable", value: prop' (fst bothValues) }
+    ( snd bothValues <#> \value ->
+        { key: "contenteditable", value: prop' value }
+    )
+  pureAttr Contenteditable value = unsafeAttribute $ This
+    { key: "contenteditable", value: prop' value }
+  unpureAttr Contenteditable eventValue = unsafeAttribute $ That $ eventValue
+    <#> \value -> { key: "contenteditable", value: prop' value }
 
 instance Attr Ul_ Contenteditable String where
-  attr Contenteditable bothValues  = unsafeAttribute $ Both { key: "contenteditable", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "contenteditable", value:  prop' value  })
-  pureAttr Contenteditable value  = unsafeAttribute $ This { key: "contenteditable", value:  prop' value  }
-  unpureAttr Contenteditable eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "contenteditable", value:  prop' value  }
+  attr Contenteditable bothValues = unsafeAttribute $ Both
+    { key: "contenteditable", value: prop' (fst bothValues) }
+    ( snd bothValues <#> \value ->
+        { key: "contenteditable", value: prop' value }
+    )
+  pureAttr Contenteditable value = unsafeAttribute $ This
+    { key: "contenteditable", value: prop' value }
+  unpureAttr Contenteditable eventValue = unsafeAttribute $ That $ eventValue
+    <#> \value -> { key: "contenteditable", value: prop' value }
 
 instance Attr Var_ Contenteditable String where
-  attr Contenteditable bothValues  = unsafeAttribute $ Both { key: "contenteditable", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "contenteditable", value:  prop' value  })
-  pureAttr Contenteditable value  = unsafeAttribute $ This { key: "contenteditable", value:  prop' value  }
-  unpureAttr Contenteditable eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "contenteditable", value:  prop' value  }
+  attr Contenteditable bothValues = unsafeAttribute $ Both
+    { key: "contenteditable", value: prop' (fst bothValues) }
+    ( snd bothValues <#> \value ->
+        { key: "contenteditable", value: prop' value }
+    )
+  pureAttr Contenteditable value = unsafeAttribute $ This
+    { key: "contenteditable", value: prop' value }
+  unpureAttr Contenteditable eventValue = unsafeAttribute $ That $ eventValue
+    <#> \value -> { key: "contenteditable", value: prop' value }
 
 instance Attr Video_ Contenteditable String where
-  attr Contenteditable bothValues  = unsafeAttribute $ Both { key: "contenteditable", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "contenteditable", value:  prop' value  })
-  pureAttr Contenteditable value  = unsafeAttribute $ This { key: "contenteditable", value:  prop' value  }
-  unpureAttr Contenteditable eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "contenteditable", value:  prop' value  }
+  attr Contenteditable bothValues = unsafeAttribute $ Both
+    { key: "contenteditable", value: prop' (fst bothValues) }
+    ( snd bothValues <#> \value ->
+        { key: "contenteditable", value: prop' value }
+    )
+  pureAttr Contenteditable value = unsafeAttribute $ This
+    { key: "contenteditable", value: prop' value }
+  unpureAttr Contenteditable eventValue = unsafeAttribute $ That $ eventValue
+    <#> \value -> { key: "contenteditable", value: prop' value }
 
 instance Attr Wbr_ Contenteditable String where
-  attr Contenteditable bothValues  = unsafeAttribute $ Both { key: "contenteditable", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "contenteditable", value:  prop' value  })
-  pureAttr Contenteditable value  = unsafeAttribute $ This { key: "contenteditable", value:  prop' value  }
-  unpureAttr Contenteditable eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "contenteditable", value:  prop' value  }
+  attr Contenteditable bothValues = unsafeAttribute $ Both
+    { key: "contenteditable", value: prop' (fst bothValues) }
+    ( snd bothValues <#> \value ->
+        { key: "contenteditable", value: prop' value }
+    )
+  pureAttr Contenteditable value = unsafeAttribute $ This
+    { key: "contenteditable", value: prop' value }
+  unpureAttr Contenteditable eventValue = unsafeAttribute $ That $ eventValue
+    <#> \value -> { key: "contenteditable", value: prop' value }
 
 instance Attr everything Contenteditable Unit where
-  attr Contenteditable bothValues  = unsafeAttribute $ Both { key: "contenteditable", value:  unset'  } (snd bothValues <#> \_ -> { key: "contenteditable", value:  unset'  })
-  pureAttr Contenteditable _  = unsafeAttribute $ This { key: "contenteditable", value:  unset'  }
-  unpureAttr Contenteditable eventValue  = unsafeAttribute $ That $ eventValue <#> \_ -> { key: "contenteditable", value:  unset'  }
+  attr Contenteditable bothValues = unsafeAttribute $ Both
+    { key: "contenteditable", value: unset' }
+    (snd bothValues <#> \_ -> { key: "contenteditable", value: unset' })
+  pureAttr Contenteditable _ = unsafeAttribute $ This
+    { key: "contenteditable", value: unset' }
+  unpureAttr Contenteditable eventValue = unsafeAttribute $ That $ eventValue
+    <#> \_ -> { key: "contenteditable", value: unset' }

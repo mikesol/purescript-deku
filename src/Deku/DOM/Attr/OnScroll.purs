@@ -10,19 +10,35 @@ import FRP.Event (Event)
 data OnScroll = OnScroll
 
 instance Attr anything OnScroll Cb where
-  attr OnScroll bothValues  = unsafeAttribute $ Both { key: "scroll", value:  cb' (fst bothValues)  } (snd bothValues <#> \value -> { key: "scroll", value:  cb' value  })
-  pureAttr OnScroll value  = unsafeAttribute $ This { key: "scroll", value:  cb' value  }
-  unpureAttr OnScroll eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "scroll", value:  cb' value  }
+  attr OnScroll bothValues = unsafeAttribute $ Both
+    { key: "scroll", value: cb' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "scroll", value: cb' value })
+  pureAttr OnScroll value = unsafeAttribute $ This
+    { key: "scroll", value: cb' value }
+  unpureAttr OnScroll eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "scroll", value: cb' value }
 
 instance Attr anything OnScroll (Effect Unit) where
-  attr OnScroll bothValues  = unsafeAttribute $ Both { key: "scroll", value:  cb' (Cb (const ((fst bothValues) $> true)))  } (snd bothValues <#> \value -> { key: "scroll", value:  cb' (Cb (const (value $> true)))  })
-  pureAttr OnScroll value  = unsafeAttribute $ This { key: "scroll", value:  cb' (Cb (const (value $> true)))  }
-  unpureAttr OnScroll eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "scroll", value:  cb' (Cb (const (value $> true)))  }
+  attr OnScroll bothValues = unsafeAttribute $ Both
+    { key: "scroll", value: cb' (Cb (const ((fst bothValues) $> true))) }
+    ( snd bothValues <#> \value ->
+        { key: "scroll", value: cb' (Cb (const (value $> true))) }
+    )
+  pureAttr OnScroll value = unsafeAttribute $ This
+    { key: "scroll", value: cb' (Cb (const (value $> true))) }
+  unpureAttr OnScroll eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "scroll", value: cb' (Cb (const (value $> true))) }
 
 instance Attr anything OnScroll (Effect Boolean) where
-  attr OnScroll bothValues  = unsafeAttribute $ Both { key: "scroll", value:  cb' (Cb (const (fst bothValues)))  } (snd bothValues <#> \value -> { key: "scroll", value:  cb' (Cb (const value))  })
-  pureAttr OnScroll value  = unsafeAttribute $ This { key: "scroll", value:  cb' (Cb (const value))  }
-  unpureAttr OnScroll eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "scroll", value:  cb' (Cb (const value))  }
+  attr OnScroll bothValues = unsafeAttribute $ Both
+    { key: "scroll", value: cb' (Cb (const (fst bothValues))) }
+    ( snd bothValues <#> \value ->
+        { key: "scroll", value: cb' (Cb (const value)) }
+    )
+  pureAttr OnScroll value = unsafeAttribute $ This
+    { key: "scroll", value: cb' (Cb (const value)) }
+  unpureAttr OnScroll eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "scroll", value: cb' (Cb (const value)) }
 
 type OnScrollEffect =
   forall element
@@ -30,6 +46,9 @@ type OnScrollEffect =
   => Event (Attribute element)
 
 instance Attr everything OnScroll Unit where
-  attr OnScroll bothValues  = unsafeAttribute $ Both { key: "scroll", value:  unset'  } (snd bothValues <#> \_ -> { key: "scroll", value:  unset'  })
-  pureAttr OnScroll _  = unsafeAttribute $ This { key: "scroll", value:  unset'  }
-  unpureAttr OnScroll eventValue  = unsafeAttribute $ That $ eventValue <#> \_ -> { key: "scroll", value:  unset'  }
+  attr OnScroll bothValues = unsafeAttribute $ Both
+    { key: "scroll", value: unset' }
+    (snd bothValues <#> \_ -> { key: "scroll", value: unset' })
+  pureAttr OnScroll _ = unsafeAttribute $ This { key: "scroll", value: unset' }
+  unpureAttr OnScroll eventValue = unsafeAttribute $ That $ eventValue <#> \_ ->
+    { key: "scroll", value: unset' }

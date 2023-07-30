@@ -26,91 +26,163 @@ import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 data AriaColcount = AriaColcount
 
 instance Attr Circle_ AriaColcount String where
-  attr AriaColcount bothValues  = unsafeAttribute $ Both { key: "aria-colcount", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "aria-colcount", value:  prop' value  })
-  pureAttr AriaColcount value  = unsafeAttribute $ This { key: "aria-colcount", value:  prop' value  }
-  unpureAttr AriaColcount eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "aria-colcount", value:  prop' value  }
+  attr AriaColcount bothValues = unsafeAttribute $ Both
+    { key: "aria-colcount", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "aria-colcount", value: prop' value })
+  pureAttr AriaColcount value = unsafeAttribute $ This
+    { key: "aria-colcount", value: prop' value }
+  unpureAttr AriaColcount eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "aria-colcount", value: prop' value }
 
 instance Attr Ellipse_ AriaColcount String where
-  attr AriaColcount bothValues  = unsafeAttribute $ Both { key: "aria-colcount", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "aria-colcount", value:  prop' value  })
-  pureAttr AriaColcount value  = unsafeAttribute $ This { key: "aria-colcount", value:  prop' value  }
-  unpureAttr AriaColcount eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "aria-colcount", value:  prop' value  }
+  attr AriaColcount bothValues = unsafeAttribute $ Both
+    { key: "aria-colcount", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "aria-colcount", value: prop' value })
+  pureAttr AriaColcount value = unsafeAttribute $ This
+    { key: "aria-colcount", value: prop' value }
+  unpureAttr AriaColcount eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "aria-colcount", value: prop' value }
 
 instance Attr ForeignObject_ AriaColcount String where
-  attr AriaColcount bothValues  = unsafeAttribute $ Both { key: "aria-colcount", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "aria-colcount", value:  prop' value  })
-  pureAttr AriaColcount value  = unsafeAttribute $ This { key: "aria-colcount", value:  prop' value  }
-  unpureAttr AriaColcount eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "aria-colcount", value:  prop' value  }
+  attr AriaColcount bothValues = unsafeAttribute $ Both
+    { key: "aria-colcount", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "aria-colcount", value: prop' value })
+  pureAttr AriaColcount value = unsafeAttribute $ This
+    { key: "aria-colcount", value: prop' value }
+  unpureAttr AriaColcount eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "aria-colcount", value: prop' value }
 
 instance Attr G_ AriaColcount String where
-  attr AriaColcount bothValues  = unsafeAttribute $ Both { key: "aria-colcount", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "aria-colcount", value:  prop' value  })
-  pureAttr AriaColcount value  = unsafeAttribute $ This { key: "aria-colcount", value:  prop' value  }
-  unpureAttr AriaColcount eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "aria-colcount", value:  prop' value  }
+  attr AriaColcount bothValues = unsafeAttribute $ Both
+    { key: "aria-colcount", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "aria-colcount", value: prop' value })
+  pureAttr AriaColcount value = unsafeAttribute $ This
+    { key: "aria-colcount", value: prop' value }
+  unpureAttr AriaColcount eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "aria-colcount", value: prop' value }
 
 instance Attr Line_ AriaColcount String where
-  attr AriaColcount bothValues  = unsafeAttribute $ Both { key: "aria-colcount", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "aria-colcount", value:  prop' value  })
-  pureAttr AriaColcount value  = unsafeAttribute $ This { key: "aria-colcount", value:  prop' value  }
-  unpureAttr AriaColcount eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "aria-colcount", value:  prop' value  }
+  attr AriaColcount bothValues = unsafeAttribute $ Both
+    { key: "aria-colcount", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "aria-colcount", value: prop' value })
+  pureAttr AriaColcount value = unsafeAttribute $ This
+    { key: "aria-colcount", value: prop' value }
+  unpureAttr AriaColcount eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "aria-colcount", value: prop' value }
 
 instance Attr Marker_ AriaColcount String where
-  attr AriaColcount bothValues  = unsafeAttribute $ Both { key: "aria-colcount", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "aria-colcount", value:  prop' value  })
-  pureAttr AriaColcount value  = unsafeAttribute $ This { key: "aria-colcount", value:  prop' value  }
-  unpureAttr AriaColcount eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "aria-colcount", value:  prop' value  }
+  attr AriaColcount bothValues = unsafeAttribute $ Both
+    { key: "aria-colcount", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "aria-colcount", value: prop' value })
+  pureAttr AriaColcount value = unsafeAttribute $ This
+    { key: "aria-colcount", value: prop' value }
+  unpureAttr AriaColcount eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "aria-colcount", value: prop' value }
 
 instance Attr Path_ AriaColcount String where
-  attr AriaColcount bothValues  = unsafeAttribute $ Both { key: "aria-colcount", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "aria-colcount", value:  prop' value  })
-  pureAttr AriaColcount value  = unsafeAttribute $ This { key: "aria-colcount", value:  prop' value  }
-  unpureAttr AriaColcount eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "aria-colcount", value:  prop' value  }
+  attr AriaColcount bothValues = unsafeAttribute $ Both
+    { key: "aria-colcount", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "aria-colcount", value: prop' value })
+  pureAttr AriaColcount value = unsafeAttribute $ This
+    { key: "aria-colcount", value: prop' value }
+  unpureAttr AriaColcount eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "aria-colcount", value: prop' value }
 
 instance Attr Polygon_ AriaColcount String where
-  attr AriaColcount bothValues  = unsafeAttribute $ Both { key: "aria-colcount", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "aria-colcount", value:  prop' value  })
-  pureAttr AriaColcount value  = unsafeAttribute $ This { key: "aria-colcount", value:  prop' value  }
-  unpureAttr AriaColcount eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "aria-colcount", value:  prop' value  }
+  attr AriaColcount bothValues = unsafeAttribute $ Both
+    { key: "aria-colcount", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "aria-colcount", value: prop' value })
+  pureAttr AriaColcount value = unsafeAttribute $ This
+    { key: "aria-colcount", value: prop' value }
+  unpureAttr AriaColcount eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "aria-colcount", value: prop' value }
 
 instance Attr Polyline_ AriaColcount String where
-  attr AriaColcount bothValues  = unsafeAttribute $ Both { key: "aria-colcount", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "aria-colcount", value:  prop' value  })
-  pureAttr AriaColcount value  = unsafeAttribute $ This { key: "aria-colcount", value:  prop' value  }
-  unpureAttr AriaColcount eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "aria-colcount", value:  prop' value  }
+  attr AriaColcount bothValues = unsafeAttribute $ Both
+    { key: "aria-colcount", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "aria-colcount", value: prop' value })
+  pureAttr AriaColcount value = unsafeAttribute $ This
+    { key: "aria-colcount", value: prop' value }
+  unpureAttr AriaColcount eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "aria-colcount", value: prop' value }
 
 instance Attr Rect_ AriaColcount String where
-  attr AriaColcount bothValues  = unsafeAttribute $ Both { key: "aria-colcount", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "aria-colcount", value:  prop' value  })
-  pureAttr AriaColcount value  = unsafeAttribute $ This { key: "aria-colcount", value:  prop' value  }
-  unpureAttr AriaColcount eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "aria-colcount", value:  prop' value  }
+  attr AriaColcount bothValues = unsafeAttribute $ Both
+    { key: "aria-colcount", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "aria-colcount", value: prop' value })
+  pureAttr AriaColcount value = unsafeAttribute $ This
+    { key: "aria-colcount", value: prop' value }
+  unpureAttr AriaColcount eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "aria-colcount", value: prop' value }
 
 instance Attr Svg_ AriaColcount String where
-  attr AriaColcount bothValues  = unsafeAttribute $ Both { key: "aria-colcount", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "aria-colcount", value:  prop' value  })
-  pureAttr AriaColcount value  = unsafeAttribute $ This { key: "aria-colcount", value:  prop' value  }
-  unpureAttr AriaColcount eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "aria-colcount", value:  prop' value  }
+  attr AriaColcount bothValues = unsafeAttribute $ Both
+    { key: "aria-colcount", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "aria-colcount", value: prop' value })
+  pureAttr AriaColcount value = unsafeAttribute $ This
+    { key: "aria-colcount", value: prop' value }
+  unpureAttr AriaColcount eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "aria-colcount", value: prop' value }
 
 instance Attr Symbol_ AriaColcount String where
-  attr AriaColcount bothValues  = unsafeAttribute $ Both { key: "aria-colcount", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "aria-colcount", value:  prop' value  })
-  pureAttr AriaColcount value  = unsafeAttribute $ This { key: "aria-colcount", value:  prop' value  }
-  unpureAttr AriaColcount eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "aria-colcount", value:  prop' value  }
+  attr AriaColcount bothValues = unsafeAttribute $ Both
+    { key: "aria-colcount", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "aria-colcount", value: prop' value })
+  pureAttr AriaColcount value = unsafeAttribute $ This
+    { key: "aria-colcount", value: prop' value }
+  unpureAttr AriaColcount eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "aria-colcount", value: prop' value }
 
 instance Attr Text_ AriaColcount String where
-  attr AriaColcount bothValues  = unsafeAttribute $ Both { key: "aria-colcount", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "aria-colcount", value:  prop' value  })
-  pureAttr AriaColcount value  = unsafeAttribute $ This { key: "aria-colcount", value:  prop' value  }
-  unpureAttr AriaColcount eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "aria-colcount", value:  prop' value  }
+  attr AriaColcount bothValues = unsafeAttribute $ Both
+    { key: "aria-colcount", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "aria-colcount", value: prop' value })
+  pureAttr AriaColcount value = unsafeAttribute $ This
+    { key: "aria-colcount", value: prop' value }
+  unpureAttr AriaColcount eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "aria-colcount", value: prop' value }
 
 instance Attr TextPath_ AriaColcount String where
-  attr AriaColcount bothValues  = unsafeAttribute $ Both { key: "aria-colcount", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "aria-colcount", value:  prop' value  })
-  pureAttr AriaColcount value  = unsafeAttribute $ This { key: "aria-colcount", value:  prop' value  }
-  unpureAttr AriaColcount eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "aria-colcount", value:  prop' value  }
+  attr AriaColcount bothValues = unsafeAttribute $ Both
+    { key: "aria-colcount", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "aria-colcount", value: prop' value })
+  pureAttr AriaColcount value = unsafeAttribute $ This
+    { key: "aria-colcount", value: prop' value }
+  unpureAttr AriaColcount eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "aria-colcount", value: prop' value }
 
 instance Attr Tspan_ AriaColcount String where
-  attr AriaColcount bothValues  = unsafeAttribute $ Both { key: "aria-colcount", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "aria-colcount", value:  prop' value  })
-  pureAttr AriaColcount value  = unsafeAttribute $ This { key: "aria-colcount", value:  prop' value  }
-  unpureAttr AriaColcount eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "aria-colcount", value:  prop' value  }
+  attr AriaColcount bothValues = unsafeAttribute $ Both
+    { key: "aria-colcount", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "aria-colcount", value: prop' value })
+  pureAttr AriaColcount value = unsafeAttribute $ This
+    { key: "aria-colcount", value: prop' value }
+  unpureAttr AriaColcount eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "aria-colcount", value: prop' value }
 
 instance Attr Use_ AriaColcount String where
-  attr AriaColcount bothValues  = unsafeAttribute $ Both { key: "aria-colcount", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "aria-colcount", value:  prop' value  })
-  pureAttr AriaColcount value  = unsafeAttribute $ This { key: "aria-colcount", value:  prop' value  }
-  unpureAttr AriaColcount eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "aria-colcount", value:  prop' value  }
+  attr AriaColcount bothValues = unsafeAttribute $ Both
+    { key: "aria-colcount", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "aria-colcount", value: prop' value })
+  pureAttr AriaColcount value = unsafeAttribute $ This
+    { key: "aria-colcount", value: prop' value }
+  unpureAttr AriaColcount eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "aria-colcount", value: prop' value }
 
 instance Attr View_ AriaColcount String where
-  attr AriaColcount bothValues  = unsafeAttribute $ Both { key: "aria-colcount", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "aria-colcount", value:  prop' value  })
-  pureAttr AriaColcount value  = unsafeAttribute $ This { key: "aria-colcount", value:  prop' value  }
-  unpureAttr AriaColcount eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "aria-colcount", value:  prop' value  }
+  attr AriaColcount bothValues = unsafeAttribute $ Both
+    { key: "aria-colcount", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "aria-colcount", value: prop' value })
+  pureAttr AriaColcount value = unsafeAttribute $ This
+    { key: "aria-colcount", value: prop' value }
+  unpureAttr AriaColcount eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "aria-colcount", value: prop' value }
 
 instance Attr everything AriaColcount Unit where
-  attr AriaColcount bothValues  = unsafeAttribute $ Both { key: "aria-colcount", value:  unset'  } (snd bothValues <#> \_ -> { key: "aria-colcount", value:  unset'  })
-  pureAttr AriaColcount _  = unsafeAttribute $ This { key: "aria-colcount", value:  unset'  }
-  unpureAttr AriaColcount eventValue  = unsafeAttribute $ That $ eventValue <#> \_ -> { key: "aria-colcount", value:  unset'  }
+  attr AriaColcount bothValues = unsafeAttribute $ Both
+    { key: "aria-colcount", value: unset' }
+    (snd bothValues <#> \_ -> { key: "aria-colcount", value: unset' })
+  pureAttr AriaColcount _ = unsafeAttribute $ This
+    { key: "aria-colcount", value: unset' }
+  unpureAttr AriaColcount eventValue = unsafeAttribute $ That $ eventValue <#>
+    \_ -> { key: "aria-colcount", value: unset' }

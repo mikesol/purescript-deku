@@ -10,24 +10,42 @@ import FRP.Event (Event)
 data OnPlay = OnPlay
 
 instance Attr anything OnPlay Cb where
-  attr OnPlay bothValues  = unsafeAttribute $ Both { key: "play", value:  cb' (fst bothValues)  } (snd bothValues <#> \value -> { key: "play", value:  cb' value  })
-  pureAttr OnPlay value  = unsafeAttribute $ This { key: "play", value:  cb' value  }
-  unpureAttr OnPlay eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "play", value:  cb' value  }
+  attr OnPlay bothValues = unsafeAttribute $ Both
+    { key: "play", value: cb' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "play", value: cb' value })
+  pureAttr OnPlay value = unsafeAttribute $ This
+    { key: "play", value: cb' value }
+  unpureAttr OnPlay eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "play", value: cb' value }
 
 instance Attr anything OnPlay (Effect Unit) where
-  attr OnPlay bothValues  = unsafeAttribute $ Both { key: "play", value:  cb' (Cb (const ((fst bothValues) $> true)))  } (snd bothValues <#> \value -> { key: "play", value:  cb' (Cb (const (value $> true)))  })
-  pureAttr OnPlay value  = unsafeAttribute $ This { key: "play", value:  cb' (Cb (const (value $> true)))  }
-  unpureAttr OnPlay eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "play", value:  cb' (Cb (const (value $> true)))  }
+  attr OnPlay bothValues = unsafeAttribute $ Both
+    { key: "play", value: cb' (Cb (const ((fst bothValues) $> true))) }
+    ( snd bothValues <#> \value ->
+        { key: "play", value: cb' (Cb (const (value $> true))) }
+    )
+  pureAttr OnPlay value = unsafeAttribute $ This
+    { key: "play", value: cb' (Cb (const (value $> true))) }
+  unpureAttr OnPlay eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "play", value: cb' (Cb (const (value $> true))) }
 
 instance Attr anything OnPlay (Effect Boolean) where
-  attr OnPlay bothValues  = unsafeAttribute $ Both { key: "play", value:  cb' (Cb (const (fst bothValues)))  } (snd bothValues <#> \value -> { key: "play", value:  cb' (Cb (const value))  })
-  pureAttr OnPlay value  = unsafeAttribute $ This { key: "play", value:  cb' (Cb (const value))  }
-  unpureAttr OnPlay eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "play", value:  cb' (Cb (const value))  }
+  attr OnPlay bothValues = unsafeAttribute $ Both
+    { key: "play", value: cb' (Cb (const (fst bothValues))) }
+    ( snd bothValues <#> \value ->
+        { key: "play", value: cb' (Cb (const value)) }
+    )
+  pureAttr OnPlay value = unsafeAttribute $ This
+    { key: "play", value: cb' (Cb (const value)) }
+  unpureAttr OnPlay eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "play", value: cb' (Cb (const value)) }
 
 type OnPlayEffect =
   forall element. Attr element OnPlay (Effect Unit) => Event (Attribute element)
 
 instance Attr everything OnPlay Unit where
-  attr OnPlay bothValues  = unsafeAttribute $ Both { key: "play", value:  unset'  } (snd bothValues <#> \_ -> { key: "play", value:  unset'  })
-  pureAttr OnPlay _  = unsafeAttribute $ This { key: "play", value:  unset'  }
-  unpureAttr OnPlay eventValue  = unsafeAttribute $ That $ eventValue <#> \_ -> { key: "play", value:  unset'  }
+  attr OnPlay bothValues = unsafeAttribute $ Both { key: "play", value: unset' }
+    (snd bothValues <#> \_ -> { key: "play", value: unset' })
+  pureAttr OnPlay _ = unsafeAttribute $ This { key: "play", value: unset' }
+  unpureAttr OnPlay eventValue = unsafeAttribute $ That $ eventValue <#> \_ ->
+    { key: "play", value: unset' }

@@ -13,26 +13,44 @@ import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 data Slope = Slope
 
 instance Attr FeFuncA_ Slope String where
-  attr Slope bothValues  = unsafeAttribute $ Both { key: "slope", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "slope", value:  prop' value  })
-  pureAttr Slope value  = unsafeAttribute $ This { key: "slope", value:  prop' value  }
-  unpureAttr Slope eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "slope", value:  prop' value  }
+  attr Slope bothValues = unsafeAttribute $ Both
+    { key: "slope", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "slope", value: prop' value })
+  pureAttr Slope value = unsafeAttribute $ This
+    { key: "slope", value: prop' value }
+  unpureAttr Slope eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "slope", value: prop' value }
 
 instance Attr FeFuncB_ Slope String where
-  attr Slope bothValues  = unsafeAttribute $ Both { key: "slope", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "slope", value:  prop' value  })
-  pureAttr Slope value  = unsafeAttribute $ This { key: "slope", value:  prop' value  }
-  unpureAttr Slope eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "slope", value:  prop' value  }
+  attr Slope bothValues = unsafeAttribute $ Both
+    { key: "slope", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "slope", value: prop' value })
+  pureAttr Slope value = unsafeAttribute $ This
+    { key: "slope", value: prop' value }
+  unpureAttr Slope eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "slope", value: prop' value }
 
 instance Attr FeFuncG_ Slope String where
-  attr Slope bothValues  = unsafeAttribute $ Both { key: "slope", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "slope", value:  prop' value  })
-  pureAttr Slope value  = unsafeAttribute $ This { key: "slope", value:  prop' value  }
-  unpureAttr Slope eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "slope", value:  prop' value  }
+  attr Slope bothValues = unsafeAttribute $ Both
+    { key: "slope", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "slope", value: prop' value })
+  pureAttr Slope value = unsafeAttribute $ This
+    { key: "slope", value: prop' value }
+  unpureAttr Slope eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "slope", value: prop' value }
 
 instance Attr FeFuncR_ Slope String where
-  attr Slope bothValues  = unsafeAttribute $ Both { key: "slope", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "slope", value:  prop' value  })
-  pureAttr Slope value  = unsafeAttribute $ This { key: "slope", value:  prop' value  }
-  unpureAttr Slope eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "slope", value:  prop' value  }
+  attr Slope bothValues = unsafeAttribute $ Both
+    { key: "slope", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "slope", value: prop' value })
+  pureAttr Slope value = unsafeAttribute $ This
+    { key: "slope", value: prop' value }
+  unpureAttr Slope eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "slope", value: prop' value }
 
 instance Attr everything Slope Unit where
-  attr Slope bothValues  = unsafeAttribute $ Both { key: "slope", value:  unset'  } (snd bothValues <#> \_ -> { key: "slope", value:  unset'  })
-  pureAttr Slope _  = unsafeAttribute $ This { key: "slope", value:  unset'  }
-  unpureAttr Slope eventValue  = unsafeAttribute $ That $ eventValue <#> \_ -> { key: "slope", value:  unset'  }
+  attr Slope bothValues = unsafeAttribute $ Both { key: "slope", value: unset' }
+    (snd bothValues <#> \_ -> { key: "slope", value: unset' })
+  pureAttr Slope _ = unsafeAttribute $ This { key: "slope", value: unset' }
+  unpureAttr Slope eventValue = unsafeAttribute $ That $ eventValue <#> \_ ->
+    { key: "slope", value: unset' }

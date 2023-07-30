@@ -10,19 +10,41 @@ import FRP.Event (Event)
 data OnLostpointercapture = OnLostpointercapture
 
 instance Attr anything OnLostpointercapture Cb where
-  attr OnLostpointercapture bothValues  = unsafeAttribute $ Both { key: "lostpointercapture", value:  cb' (fst bothValues)  } (snd bothValues <#> \value -> { key: "lostpointercapture", value:  cb' value  })
-  pureAttr OnLostpointercapture value  = unsafeAttribute $ This { key: "lostpointercapture", value:  cb' value  }
-  unpureAttr OnLostpointercapture eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "lostpointercapture", value:  cb' value  }
+  attr OnLostpointercapture bothValues = unsafeAttribute $ Both
+    { key: "lostpointercapture", value: cb' (fst bothValues) }
+    ( snd bothValues <#> \value ->
+        { key: "lostpointercapture", value: cb' value }
+    )
+  pureAttr OnLostpointercapture value = unsafeAttribute $ This
+    { key: "lostpointercapture", value: cb' value }
+  unpureAttr OnLostpointercapture eventValue = unsafeAttribute $ That $
+    eventValue <#> \value -> { key: "lostpointercapture", value: cb' value }
 
 instance Attr anything OnLostpointercapture (Effect Unit) where
-  attr OnLostpointercapture bothValues  = unsafeAttribute $ Both { key: "lostpointercapture", value:  cb' (Cb (const ((fst bothValues) $> true)))  } (snd bothValues <#> \value -> { key: "lostpointercapture", value:  cb' (Cb (const (value $> true)))  })
-  pureAttr OnLostpointercapture value  = unsafeAttribute $ This { key: "lostpointercapture", value:  cb' (Cb (const (value $> true)))  }
-  unpureAttr OnLostpointercapture eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "lostpointercapture", value:  cb' (Cb (const (value $> true)))  }
+  attr OnLostpointercapture bothValues = unsafeAttribute $ Both
+    { key: "lostpointercapture"
+    , value: cb' (Cb (const ((fst bothValues) $> true)))
+    }
+    ( snd bothValues <#> \value ->
+        { key: "lostpointercapture", value: cb' (Cb (const (value $> true))) }
+    )
+  pureAttr OnLostpointercapture value = unsafeAttribute $ This
+    { key: "lostpointercapture", value: cb' (Cb (const (value $> true))) }
+  unpureAttr OnLostpointercapture eventValue = unsafeAttribute $ That $
+    eventValue <#> \value ->
+      { key: "lostpointercapture", value: cb' (Cb (const (value $> true))) }
 
 instance Attr anything OnLostpointercapture (Effect Boolean) where
-  attr OnLostpointercapture bothValues  = unsafeAttribute $ Both { key: "lostpointercapture", value:  cb' (Cb (const (fst bothValues)))  } (snd bothValues <#> \value -> { key: "lostpointercapture", value:  cb' (Cb (const value))  })
-  pureAttr OnLostpointercapture value  = unsafeAttribute $ This { key: "lostpointercapture", value:  cb' (Cb (const value))  }
-  unpureAttr OnLostpointercapture eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "lostpointercapture", value:  cb' (Cb (const value))  }
+  attr OnLostpointercapture bothValues = unsafeAttribute $ Both
+    { key: "lostpointercapture", value: cb' (Cb (const (fst bothValues))) }
+    ( snd bothValues <#> \value ->
+        { key: "lostpointercapture", value: cb' (Cb (const value)) }
+    )
+  pureAttr OnLostpointercapture value = unsafeAttribute $ This
+    { key: "lostpointercapture", value: cb' (Cb (const value)) }
+  unpureAttr OnLostpointercapture eventValue = unsafeAttribute $ That $
+    eventValue <#> \value ->
+      { key: "lostpointercapture", value: cb' (Cb (const value)) }
 
 type OnLostpointercaptureEffect =
   forall element
@@ -30,6 +52,10 @@ type OnLostpointercaptureEffect =
   => Event (Attribute element)
 
 instance Attr everything OnLostpointercapture Unit where
-  attr OnLostpointercapture bothValues  = unsafeAttribute $ Both { key: "lostpointercapture", value:  unset'  } (snd bothValues <#> \_ -> { key: "lostpointercapture", value:  unset'  })
-  pureAttr OnLostpointercapture _  = unsafeAttribute $ This { key: "lostpointercapture", value:  unset'  }
-  unpureAttr OnLostpointercapture eventValue  = unsafeAttribute $ That $ eventValue <#> \_ -> { key: "lostpointercapture", value:  unset'  }
+  attr OnLostpointercapture bothValues = unsafeAttribute $ Both
+    { key: "lostpointercapture", value: unset' }
+    (snd bothValues <#> \_ -> { key: "lostpointercapture", value: unset' })
+  pureAttr OnLostpointercapture _ = unsafeAttribute $ This
+    { key: "lostpointercapture", value: unset' }
+  unpureAttr OnLostpointercapture eventValue = unsafeAttribute $ That $
+    eventValue <#> \_ -> { key: "lostpointercapture", value: unset' }

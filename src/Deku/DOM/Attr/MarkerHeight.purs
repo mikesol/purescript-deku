@@ -10,11 +10,19 @@ import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 data MarkerHeight = MarkerHeight
 
 instance Attr Marker_ MarkerHeight String where
-  attr MarkerHeight bothValues  = unsafeAttribute $ Both { key: "markerHeight", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "markerHeight", value:  prop' value  })
-  pureAttr MarkerHeight value  = unsafeAttribute $ This { key: "markerHeight", value:  prop' value  }
-  unpureAttr MarkerHeight eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "markerHeight", value:  prop' value  }
+  attr MarkerHeight bothValues = unsafeAttribute $ Both
+    { key: "markerHeight", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "markerHeight", value: prop' value })
+  pureAttr MarkerHeight value = unsafeAttribute $ This
+    { key: "markerHeight", value: prop' value }
+  unpureAttr MarkerHeight eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "markerHeight", value: prop' value }
 
 instance Attr everything MarkerHeight Unit where
-  attr MarkerHeight bothValues  = unsafeAttribute $ Both { key: "markerHeight", value:  unset'  } (snd bothValues <#> \_ -> { key: "markerHeight", value:  unset'  })
-  pureAttr MarkerHeight _  = unsafeAttribute $ This { key: "markerHeight", value:  unset'  }
-  unpureAttr MarkerHeight eventValue  = unsafeAttribute $ That $ eventValue <#> \_ -> { key: "markerHeight", value:  unset'  }
+  attr MarkerHeight bothValues = unsafeAttribute $ Both
+    { key: "markerHeight", value: unset' }
+    (snd bothValues <#> \_ -> { key: "markerHeight", value: unset' })
+  pureAttr MarkerHeight _ = unsafeAttribute $ This
+    { key: "markerHeight", value: unset' }
+  unpureAttr MarkerHeight eventValue = unsafeAttribute $ That $ eventValue <#>
+    \_ -> { key: "markerHeight", value: unset' }

@@ -10,19 +10,35 @@ import FRP.Event (Event)
 data OnSeeked = OnSeeked
 
 instance Attr anything OnSeeked Cb where
-  attr OnSeeked bothValues  = unsafeAttribute $ Both { key: "seeked", value:  cb' (fst bothValues)  } (snd bothValues <#> \value -> { key: "seeked", value:  cb' value  })
-  pureAttr OnSeeked value  = unsafeAttribute $ This { key: "seeked", value:  cb' value  }
-  unpureAttr OnSeeked eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "seeked", value:  cb' value  }
+  attr OnSeeked bothValues = unsafeAttribute $ Both
+    { key: "seeked", value: cb' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "seeked", value: cb' value })
+  pureAttr OnSeeked value = unsafeAttribute $ This
+    { key: "seeked", value: cb' value }
+  unpureAttr OnSeeked eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "seeked", value: cb' value }
 
 instance Attr anything OnSeeked (Effect Unit) where
-  attr OnSeeked bothValues  = unsafeAttribute $ Both { key: "seeked", value:  cb' (Cb (const ((fst bothValues) $> true)))  } (snd bothValues <#> \value -> { key: "seeked", value:  cb' (Cb (const (value $> true)))  })
-  pureAttr OnSeeked value  = unsafeAttribute $ This { key: "seeked", value:  cb' (Cb (const (value $> true)))  }
-  unpureAttr OnSeeked eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "seeked", value:  cb' (Cb (const (value $> true)))  }
+  attr OnSeeked bothValues = unsafeAttribute $ Both
+    { key: "seeked", value: cb' (Cb (const ((fst bothValues) $> true))) }
+    ( snd bothValues <#> \value ->
+        { key: "seeked", value: cb' (Cb (const (value $> true))) }
+    )
+  pureAttr OnSeeked value = unsafeAttribute $ This
+    { key: "seeked", value: cb' (Cb (const (value $> true))) }
+  unpureAttr OnSeeked eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "seeked", value: cb' (Cb (const (value $> true))) }
 
 instance Attr anything OnSeeked (Effect Boolean) where
-  attr OnSeeked bothValues  = unsafeAttribute $ Both { key: "seeked", value:  cb' (Cb (const (fst bothValues)))  } (snd bothValues <#> \value -> { key: "seeked", value:  cb' (Cb (const value))  })
-  pureAttr OnSeeked value  = unsafeAttribute $ This { key: "seeked", value:  cb' (Cb (const value))  }
-  unpureAttr OnSeeked eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "seeked", value:  cb' (Cb (const value))  }
+  attr OnSeeked bothValues = unsafeAttribute $ Both
+    { key: "seeked", value: cb' (Cb (const (fst bothValues))) }
+    ( snd bothValues <#> \value ->
+        { key: "seeked", value: cb' (Cb (const value)) }
+    )
+  pureAttr OnSeeked value = unsafeAttribute $ This
+    { key: "seeked", value: cb' (Cb (const value)) }
+  unpureAttr OnSeeked eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "seeked", value: cb' (Cb (const value)) }
 
 type OnSeekedEffect =
   forall element
@@ -30,6 +46,9 @@ type OnSeekedEffect =
   => Event (Attribute element)
 
 instance Attr everything OnSeeked Unit where
-  attr OnSeeked bothValues  = unsafeAttribute $ Both { key: "seeked", value:  unset'  } (snd bothValues <#> \_ -> { key: "seeked", value:  unset'  })
-  pureAttr OnSeeked _  = unsafeAttribute $ This { key: "seeked", value:  unset'  }
-  unpureAttr OnSeeked eventValue  = unsafeAttribute $ That $ eventValue <#> \_ -> { key: "seeked", value:  unset'  }
+  attr OnSeeked bothValues = unsafeAttribute $ Both
+    { key: "seeked", value: unset' }
+    (snd bothValues <#> \_ -> { key: "seeked", value: unset' })
+  pureAttr OnSeeked _ = unsafeAttribute $ This { key: "seeked", value: unset' }
+  unpureAttr OnSeeked eventValue = unsafeAttribute $ That $ eventValue <#> \_ ->
+    { key: "seeked", value: unset' }

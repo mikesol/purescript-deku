@@ -31,116 +31,252 @@ import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 data RequiredExtensions = RequiredExtensions
 
 instance Attr AnimateTransform_ RequiredExtensions String where
-  attr RequiredExtensions bothValues  = unsafeAttribute $ Both { key: "requiredExtensions", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "requiredExtensions", value:  prop' value  })
-  pureAttr RequiredExtensions value  = unsafeAttribute $ This { key: "requiredExtensions", value:  prop' value  }
-  unpureAttr RequiredExtensions eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "requiredExtensions", value:  prop' value  }
+  attr RequiredExtensions bothValues = unsafeAttribute $ Both
+    { key: "requiredExtensions", value: prop' (fst bothValues) }
+    ( snd bothValues <#> \value ->
+        { key: "requiredExtensions", value: prop' value }
+    )
+  pureAttr RequiredExtensions value = unsafeAttribute $ This
+    { key: "requiredExtensions", value: prop' value }
+  unpureAttr RequiredExtensions eventValue = unsafeAttribute $ That $ eventValue
+    <#> \value -> { key: "requiredExtensions", value: prop' value }
 
 instance Attr Circle_ RequiredExtensions String where
-  attr RequiredExtensions bothValues  = unsafeAttribute $ Both { key: "requiredExtensions", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "requiredExtensions", value:  prop' value  })
-  pureAttr RequiredExtensions value  = unsafeAttribute $ This { key: "requiredExtensions", value:  prop' value  }
-  unpureAttr RequiredExtensions eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "requiredExtensions", value:  prop' value  }
+  attr RequiredExtensions bothValues = unsafeAttribute $ Both
+    { key: "requiredExtensions", value: prop' (fst bothValues) }
+    ( snd bothValues <#> \value ->
+        { key: "requiredExtensions", value: prop' value }
+    )
+  pureAttr RequiredExtensions value = unsafeAttribute $ This
+    { key: "requiredExtensions", value: prop' value }
+  unpureAttr RequiredExtensions eventValue = unsafeAttribute $ That $ eventValue
+    <#> \value -> { key: "requiredExtensions", value: prop' value }
 
 instance Attr ClipPath_ RequiredExtensions String where
-  attr RequiredExtensions bothValues  = unsafeAttribute $ Both { key: "requiredExtensions", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "requiredExtensions", value:  prop' value  })
-  pureAttr RequiredExtensions value  = unsafeAttribute $ This { key: "requiredExtensions", value:  prop' value  }
-  unpureAttr RequiredExtensions eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "requiredExtensions", value:  prop' value  }
+  attr RequiredExtensions bothValues = unsafeAttribute $ Both
+    { key: "requiredExtensions", value: prop' (fst bothValues) }
+    ( snd bothValues <#> \value ->
+        { key: "requiredExtensions", value: prop' value }
+    )
+  pureAttr RequiredExtensions value = unsafeAttribute $ This
+    { key: "requiredExtensions", value: prop' value }
+  unpureAttr RequiredExtensions eventValue = unsafeAttribute $ That $ eventValue
+    <#> \value -> { key: "requiredExtensions", value: prop' value }
 
 instance Attr Discard_ RequiredExtensions String where
-  attr RequiredExtensions bothValues  = unsafeAttribute $ Both { key: "requiredExtensions", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "requiredExtensions", value:  prop' value  })
-  pureAttr RequiredExtensions value  = unsafeAttribute $ This { key: "requiredExtensions", value:  prop' value  }
-  unpureAttr RequiredExtensions eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "requiredExtensions", value:  prop' value  }
+  attr RequiredExtensions bothValues = unsafeAttribute $ Both
+    { key: "requiredExtensions", value: prop' (fst bothValues) }
+    ( snd bothValues <#> \value ->
+        { key: "requiredExtensions", value: prop' value }
+    )
+  pureAttr RequiredExtensions value = unsafeAttribute $ This
+    { key: "requiredExtensions", value: prop' value }
+  unpureAttr RequiredExtensions eventValue = unsafeAttribute $ That $ eventValue
+    <#> \value -> { key: "requiredExtensions", value: prop' value }
 
 instance Attr Ellipse_ RequiredExtensions String where
-  attr RequiredExtensions bothValues  = unsafeAttribute $ Both { key: "requiredExtensions", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "requiredExtensions", value:  prop' value  })
-  pureAttr RequiredExtensions value  = unsafeAttribute $ This { key: "requiredExtensions", value:  prop' value  }
-  unpureAttr RequiredExtensions eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "requiredExtensions", value:  prop' value  }
+  attr RequiredExtensions bothValues = unsafeAttribute $ Both
+    { key: "requiredExtensions", value: prop' (fst bothValues) }
+    ( snd bothValues <#> \value ->
+        { key: "requiredExtensions", value: prop' value }
+    )
+  pureAttr RequiredExtensions value = unsafeAttribute $ This
+    { key: "requiredExtensions", value: prop' value }
+  unpureAttr RequiredExtensions eventValue = unsafeAttribute $ That $ eventValue
+    <#> \value -> { key: "requiredExtensions", value: prop' value }
 
 instance Attr ForeignObject_ RequiredExtensions String where
-  attr RequiredExtensions bothValues  = unsafeAttribute $ Both { key: "requiredExtensions", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "requiredExtensions", value:  prop' value  })
-  pureAttr RequiredExtensions value  = unsafeAttribute $ This { key: "requiredExtensions", value:  prop' value  }
-  unpureAttr RequiredExtensions eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "requiredExtensions", value:  prop' value  }
+  attr RequiredExtensions bothValues = unsafeAttribute $ Both
+    { key: "requiredExtensions", value: prop' (fst bothValues) }
+    ( snd bothValues <#> \value ->
+        { key: "requiredExtensions", value: prop' value }
+    )
+  pureAttr RequiredExtensions value = unsafeAttribute $ This
+    { key: "requiredExtensions", value: prop' value }
+  unpureAttr RequiredExtensions eventValue = unsafeAttribute $ That $ eventValue
+    <#> \value -> { key: "requiredExtensions", value: prop' value }
 
 instance Attr G_ RequiredExtensions String where
-  attr RequiredExtensions bothValues  = unsafeAttribute $ Both { key: "requiredExtensions", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "requiredExtensions", value:  prop' value  })
-  pureAttr RequiredExtensions value  = unsafeAttribute $ This { key: "requiredExtensions", value:  prop' value  }
-  unpureAttr RequiredExtensions eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "requiredExtensions", value:  prop' value  }
+  attr RequiredExtensions bothValues = unsafeAttribute $ Both
+    { key: "requiredExtensions", value: prop' (fst bothValues) }
+    ( snd bothValues <#> \value ->
+        { key: "requiredExtensions", value: prop' value }
+    )
+  pureAttr RequiredExtensions value = unsafeAttribute $ This
+    { key: "requiredExtensions", value: prop' value }
+  unpureAttr RequiredExtensions eventValue = unsafeAttribute $ That $ eventValue
+    <#> \value -> { key: "requiredExtensions", value: prop' value }
 
 instance Attr Image_ RequiredExtensions String where
-  attr RequiredExtensions bothValues  = unsafeAttribute $ Both { key: "requiredExtensions", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "requiredExtensions", value:  prop' value  })
-  pureAttr RequiredExtensions value  = unsafeAttribute $ This { key: "requiredExtensions", value:  prop' value  }
-  unpureAttr RequiredExtensions eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "requiredExtensions", value:  prop' value  }
+  attr RequiredExtensions bothValues = unsafeAttribute $ Both
+    { key: "requiredExtensions", value: prop' (fst bothValues) }
+    ( snd bothValues <#> \value ->
+        { key: "requiredExtensions", value: prop' value }
+    )
+  pureAttr RequiredExtensions value = unsafeAttribute $ This
+    { key: "requiredExtensions", value: prop' value }
+  unpureAttr RequiredExtensions eventValue = unsafeAttribute $ That $ eventValue
+    <#> \value -> { key: "requiredExtensions", value: prop' value }
 
 instance Attr Line_ RequiredExtensions String where
-  attr RequiredExtensions bothValues  = unsafeAttribute $ Both { key: "requiredExtensions", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "requiredExtensions", value:  prop' value  })
-  pureAttr RequiredExtensions value  = unsafeAttribute $ This { key: "requiredExtensions", value:  prop' value  }
-  unpureAttr RequiredExtensions eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "requiredExtensions", value:  prop' value  }
+  attr RequiredExtensions bothValues = unsafeAttribute $ Both
+    { key: "requiredExtensions", value: prop' (fst bothValues) }
+    ( snd bothValues <#> \value ->
+        { key: "requiredExtensions", value: prop' value }
+    )
+  pureAttr RequiredExtensions value = unsafeAttribute $ This
+    { key: "requiredExtensions", value: prop' value }
+  unpureAttr RequiredExtensions eventValue = unsafeAttribute $ That $ eventValue
+    <#> \value -> { key: "requiredExtensions", value: prop' value }
 
 instance Attr Marker_ RequiredExtensions String where
-  attr RequiredExtensions bothValues  = unsafeAttribute $ Both { key: "requiredExtensions", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "requiredExtensions", value:  prop' value  })
-  pureAttr RequiredExtensions value  = unsafeAttribute $ This { key: "requiredExtensions", value:  prop' value  }
-  unpureAttr RequiredExtensions eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "requiredExtensions", value:  prop' value  }
+  attr RequiredExtensions bothValues = unsafeAttribute $ Both
+    { key: "requiredExtensions", value: prop' (fst bothValues) }
+    ( snd bothValues <#> \value ->
+        { key: "requiredExtensions", value: prop' value }
+    )
+  pureAttr RequiredExtensions value = unsafeAttribute $ This
+    { key: "requiredExtensions", value: prop' value }
+  unpureAttr RequiredExtensions eventValue = unsafeAttribute $ That $ eventValue
+    <#> \value -> { key: "requiredExtensions", value: prop' value }
 
 instance Attr Mask_ RequiredExtensions String where
-  attr RequiredExtensions bothValues  = unsafeAttribute $ Both { key: "requiredExtensions", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "requiredExtensions", value:  prop' value  })
-  pureAttr RequiredExtensions value  = unsafeAttribute $ This { key: "requiredExtensions", value:  prop' value  }
-  unpureAttr RequiredExtensions eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "requiredExtensions", value:  prop' value  }
+  attr RequiredExtensions bothValues = unsafeAttribute $ Both
+    { key: "requiredExtensions", value: prop' (fst bothValues) }
+    ( snd bothValues <#> \value ->
+        { key: "requiredExtensions", value: prop' value }
+    )
+  pureAttr RequiredExtensions value = unsafeAttribute $ This
+    { key: "requiredExtensions", value: prop' value }
+  unpureAttr RequiredExtensions eventValue = unsafeAttribute $ That $ eventValue
+    <#> \value -> { key: "requiredExtensions", value: prop' value }
 
 instance Attr Path_ RequiredExtensions String where
-  attr RequiredExtensions bothValues  = unsafeAttribute $ Both { key: "requiredExtensions", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "requiredExtensions", value:  prop' value  })
-  pureAttr RequiredExtensions value  = unsafeAttribute $ This { key: "requiredExtensions", value:  prop' value  }
-  unpureAttr RequiredExtensions eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "requiredExtensions", value:  prop' value  }
+  attr RequiredExtensions bothValues = unsafeAttribute $ Both
+    { key: "requiredExtensions", value: prop' (fst bothValues) }
+    ( snd bothValues <#> \value ->
+        { key: "requiredExtensions", value: prop' value }
+    )
+  pureAttr RequiredExtensions value = unsafeAttribute $ This
+    { key: "requiredExtensions", value: prop' value }
+  unpureAttr RequiredExtensions eventValue = unsafeAttribute $ That $ eventValue
+    <#> \value -> { key: "requiredExtensions", value: prop' value }
 
 instance Attr Pattern_ RequiredExtensions String where
-  attr RequiredExtensions bothValues  = unsafeAttribute $ Both { key: "requiredExtensions", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "requiredExtensions", value:  prop' value  })
-  pureAttr RequiredExtensions value  = unsafeAttribute $ This { key: "requiredExtensions", value:  prop' value  }
-  unpureAttr RequiredExtensions eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "requiredExtensions", value:  prop' value  }
+  attr RequiredExtensions bothValues = unsafeAttribute $ Both
+    { key: "requiredExtensions", value: prop' (fst bothValues) }
+    ( snd bothValues <#> \value ->
+        { key: "requiredExtensions", value: prop' value }
+    )
+  pureAttr RequiredExtensions value = unsafeAttribute $ This
+    { key: "requiredExtensions", value: prop' value }
+  unpureAttr RequiredExtensions eventValue = unsafeAttribute $ That $ eventValue
+    <#> \value -> { key: "requiredExtensions", value: prop' value }
 
 instance Attr Polygon_ RequiredExtensions String where
-  attr RequiredExtensions bothValues  = unsafeAttribute $ Both { key: "requiredExtensions", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "requiredExtensions", value:  prop' value  })
-  pureAttr RequiredExtensions value  = unsafeAttribute $ This { key: "requiredExtensions", value:  prop' value  }
-  unpureAttr RequiredExtensions eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "requiredExtensions", value:  prop' value  }
+  attr RequiredExtensions bothValues = unsafeAttribute $ Both
+    { key: "requiredExtensions", value: prop' (fst bothValues) }
+    ( snd bothValues <#> \value ->
+        { key: "requiredExtensions", value: prop' value }
+    )
+  pureAttr RequiredExtensions value = unsafeAttribute $ This
+    { key: "requiredExtensions", value: prop' value }
+  unpureAttr RequiredExtensions eventValue = unsafeAttribute $ That $ eventValue
+    <#> \value -> { key: "requiredExtensions", value: prop' value }
 
 instance Attr Polyline_ RequiredExtensions String where
-  attr RequiredExtensions bothValues  = unsafeAttribute $ Both { key: "requiredExtensions", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "requiredExtensions", value:  prop' value  })
-  pureAttr RequiredExtensions value  = unsafeAttribute $ This { key: "requiredExtensions", value:  prop' value  }
-  unpureAttr RequiredExtensions eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "requiredExtensions", value:  prop' value  }
+  attr RequiredExtensions bothValues = unsafeAttribute $ Both
+    { key: "requiredExtensions", value: prop' (fst bothValues) }
+    ( snd bothValues <#> \value ->
+        { key: "requiredExtensions", value: prop' value }
+    )
+  pureAttr RequiredExtensions value = unsafeAttribute $ This
+    { key: "requiredExtensions", value: prop' value }
+  unpureAttr RequiredExtensions eventValue = unsafeAttribute $ That $ eventValue
+    <#> \value -> { key: "requiredExtensions", value: prop' value }
 
 instance Attr Rect_ RequiredExtensions String where
-  attr RequiredExtensions bothValues  = unsafeAttribute $ Both { key: "requiredExtensions", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "requiredExtensions", value:  prop' value  })
-  pureAttr RequiredExtensions value  = unsafeAttribute $ This { key: "requiredExtensions", value:  prop' value  }
-  unpureAttr RequiredExtensions eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "requiredExtensions", value:  prop' value  }
+  attr RequiredExtensions bothValues = unsafeAttribute $ Both
+    { key: "requiredExtensions", value: prop' (fst bothValues) }
+    ( snd bothValues <#> \value ->
+        { key: "requiredExtensions", value: prop' value }
+    )
+  pureAttr RequiredExtensions value = unsafeAttribute $ This
+    { key: "requiredExtensions", value: prop' value }
+  unpureAttr RequiredExtensions eventValue = unsafeAttribute $ That $ eventValue
+    <#> \value -> { key: "requiredExtensions", value: prop' value }
 
 instance Attr Svg_ RequiredExtensions String where
-  attr RequiredExtensions bothValues  = unsafeAttribute $ Both { key: "requiredExtensions", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "requiredExtensions", value:  prop' value  })
-  pureAttr RequiredExtensions value  = unsafeAttribute $ This { key: "requiredExtensions", value:  prop' value  }
-  unpureAttr RequiredExtensions eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "requiredExtensions", value:  prop' value  }
+  attr RequiredExtensions bothValues = unsafeAttribute $ Both
+    { key: "requiredExtensions", value: prop' (fst bothValues) }
+    ( snd bothValues <#> \value ->
+        { key: "requiredExtensions", value: prop' value }
+    )
+  pureAttr RequiredExtensions value = unsafeAttribute $ This
+    { key: "requiredExtensions", value: prop' value }
+  unpureAttr RequiredExtensions eventValue = unsafeAttribute $ That $ eventValue
+    <#> \value -> { key: "requiredExtensions", value: prop' value }
 
 instance Attr Switch_ RequiredExtensions String where
-  attr RequiredExtensions bothValues  = unsafeAttribute $ Both { key: "requiredExtensions", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "requiredExtensions", value:  prop' value  })
-  pureAttr RequiredExtensions value  = unsafeAttribute $ This { key: "requiredExtensions", value:  prop' value  }
-  unpureAttr RequiredExtensions eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "requiredExtensions", value:  prop' value  }
+  attr RequiredExtensions bothValues = unsafeAttribute $ Both
+    { key: "requiredExtensions", value: prop' (fst bothValues) }
+    ( snd bothValues <#> \value ->
+        { key: "requiredExtensions", value: prop' value }
+    )
+  pureAttr RequiredExtensions value = unsafeAttribute $ This
+    { key: "requiredExtensions", value: prop' value }
+  unpureAttr RequiredExtensions eventValue = unsafeAttribute $ That $ eventValue
+    <#> \value -> { key: "requiredExtensions", value: prop' value }
 
 instance Attr Text_ RequiredExtensions String where
-  attr RequiredExtensions bothValues  = unsafeAttribute $ Both { key: "requiredExtensions", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "requiredExtensions", value:  prop' value  })
-  pureAttr RequiredExtensions value  = unsafeAttribute $ This { key: "requiredExtensions", value:  prop' value  }
-  unpureAttr RequiredExtensions eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "requiredExtensions", value:  prop' value  }
+  attr RequiredExtensions bothValues = unsafeAttribute $ Both
+    { key: "requiredExtensions", value: prop' (fst bothValues) }
+    ( snd bothValues <#> \value ->
+        { key: "requiredExtensions", value: prop' value }
+    )
+  pureAttr RequiredExtensions value = unsafeAttribute $ This
+    { key: "requiredExtensions", value: prop' value }
+  unpureAttr RequiredExtensions eventValue = unsafeAttribute $ That $ eventValue
+    <#> \value -> { key: "requiredExtensions", value: prop' value }
 
 instance Attr TextPath_ RequiredExtensions String where
-  attr RequiredExtensions bothValues  = unsafeAttribute $ Both { key: "requiredExtensions", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "requiredExtensions", value:  prop' value  })
-  pureAttr RequiredExtensions value  = unsafeAttribute $ This { key: "requiredExtensions", value:  prop' value  }
-  unpureAttr RequiredExtensions eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "requiredExtensions", value:  prop' value  }
+  attr RequiredExtensions bothValues = unsafeAttribute $ Both
+    { key: "requiredExtensions", value: prop' (fst bothValues) }
+    ( snd bothValues <#> \value ->
+        { key: "requiredExtensions", value: prop' value }
+    )
+  pureAttr RequiredExtensions value = unsafeAttribute $ This
+    { key: "requiredExtensions", value: prop' value }
+  unpureAttr RequiredExtensions eventValue = unsafeAttribute $ That $ eventValue
+    <#> \value -> { key: "requiredExtensions", value: prop' value }
 
 instance Attr Tspan_ RequiredExtensions String where
-  attr RequiredExtensions bothValues  = unsafeAttribute $ Both { key: "requiredExtensions", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "requiredExtensions", value:  prop' value  })
-  pureAttr RequiredExtensions value  = unsafeAttribute $ This { key: "requiredExtensions", value:  prop' value  }
-  unpureAttr RequiredExtensions eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "requiredExtensions", value:  prop' value  }
+  attr RequiredExtensions bothValues = unsafeAttribute $ Both
+    { key: "requiredExtensions", value: prop' (fst bothValues) }
+    ( snd bothValues <#> \value ->
+        { key: "requiredExtensions", value: prop' value }
+    )
+  pureAttr RequiredExtensions value = unsafeAttribute $ This
+    { key: "requiredExtensions", value: prop' value }
+  unpureAttr RequiredExtensions eventValue = unsafeAttribute $ That $ eventValue
+    <#> \value -> { key: "requiredExtensions", value: prop' value }
 
 instance Attr Use_ RequiredExtensions String where
-  attr RequiredExtensions bothValues  = unsafeAttribute $ Both { key: "requiredExtensions", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "requiredExtensions", value:  prop' value  })
-  pureAttr RequiredExtensions value  = unsafeAttribute $ This { key: "requiredExtensions", value:  prop' value  }
-  unpureAttr RequiredExtensions eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "requiredExtensions", value:  prop' value  }
+  attr RequiredExtensions bothValues = unsafeAttribute $ Both
+    { key: "requiredExtensions", value: prop' (fst bothValues) }
+    ( snd bothValues <#> \value ->
+        { key: "requiredExtensions", value: prop' value }
+    )
+  pureAttr RequiredExtensions value = unsafeAttribute $ This
+    { key: "requiredExtensions", value: prop' value }
+  unpureAttr RequiredExtensions eventValue = unsafeAttribute $ That $ eventValue
+    <#> \value -> { key: "requiredExtensions", value: prop' value }
 
 instance Attr everything RequiredExtensions Unit where
-  attr RequiredExtensions bothValues  = unsafeAttribute $ Both { key: "requiredExtensions", value:  unset'  } (snd bothValues <#> \_ -> { key: "requiredExtensions", value:  unset'  })
-  pureAttr RequiredExtensions _  = unsafeAttribute $ This { key: "requiredExtensions", value:  unset'  }
-  unpureAttr RequiredExtensions eventValue  = unsafeAttribute $ That $ eventValue <#> \_ -> { key: "requiredExtensions", value:  unset'  }
+  attr RequiredExtensions bothValues = unsafeAttribute $ Both
+    { key: "requiredExtensions", value: unset' }
+    (snd bothValues <#> \_ -> { key: "requiredExtensions", value: unset' })
+  pureAttr RequiredExtensions _ = unsafeAttribute $ This
+    { key: "requiredExtensions", value: unset' }
+  unpureAttr RequiredExtensions eventValue = unsafeAttribute $ That $ eventValue
+    <#> \_ -> { key: "requiredExtensions", value: unset' }

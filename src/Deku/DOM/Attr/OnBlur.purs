@@ -10,24 +10,42 @@ import FRP.Event (Event)
 data OnBlur = OnBlur
 
 instance Attr anything OnBlur Cb where
-  attr OnBlur bothValues  = unsafeAttribute $ Both { key: "blur", value:  cb' (fst bothValues)  } (snd bothValues <#> \value -> { key: "blur", value:  cb' value  })
-  pureAttr OnBlur value  = unsafeAttribute $ This { key: "blur", value:  cb' value  }
-  unpureAttr OnBlur eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "blur", value:  cb' value  }
+  attr OnBlur bothValues = unsafeAttribute $ Both
+    { key: "blur", value: cb' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "blur", value: cb' value })
+  pureAttr OnBlur value = unsafeAttribute $ This
+    { key: "blur", value: cb' value }
+  unpureAttr OnBlur eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "blur", value: cb' value }
 
 instance Attr anything OnBlur (Effect Unit) where
-  attr OnBlur bothValues  = unsafeAttribute $ Both { key: "blur", value:  cb' (Cb (const ((fst bothValues) $> true)))  } (snd bothValues <#> \value -> { key: "blur", value:  cb' (Cb (const (value $> true)))  })
-  pureAttr OnBlur value  = unsafeAttribute $ This { key: "blur", value:  cb' (Cb (const (value $> true)))  }
-  unpureAttr OnBlur eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "blur", value:  cb' (Cb (const (value $> true)))  }
+  attr OnBlur bothValues = unsafeAttribute $ Both
+    { key: "blur", value: cb' (Cb (const ((fst bothValues) $> true))) }
+    ( snd bothValues <#> \value ->
+        { key: "blur", value: cb' (Cb (const (value $> true))) }
+    )
+  pureAttr OnBlur value = unsafeAttribute $ This
+    { key: "blur", value: cb' (Cb (const (value $> true))) }
+  unpureAttr OnBlur eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "blur", value: cb' (Cb (const (value $> true))) }
 
 instance Attr anything OnBlur (Effect Boolean) where
-  attr OnBlur bothValues  = unsafeAttribute $ Both { key: "blur", value:  cb' (Cb (const (fst bothValues)))  } (snd bothValues <#> \value -> { key: "blur", value:  cb' (Cb (const value))  })
-  pureAttr OnBlur value  = unsafeAttribute $ This { key: "blur", value:  cb' (Cb (const value))  }
-  unpureAttr OnBlur eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "blur", value:  cb' (Cb (const value))  }
+  attr OnBlur bothValues = unsafeAttribute $ Both
+    { key: "blur", value: cb' (Cb (const (fst bothValues))) }
+    ( snd bothValues <#> \value ->
+        { key: "blur", value: cb' (Cb (const value)) }
+    )
+  pureAttr OnBlur value = unsafeAttribute $ This
+    { key: "blur", value: cb' (Cb (const value)) }
+  unpureAttr OnBlur eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "blur", value: cb' (Cb (const value)) }
 
 type OnBlurEffect =
   forall element. Attr element OnBlur (Effect Unit) => Event (Attribute element)
 
 instance Attr everything OnBlur Unit where
-  attr OnBlur bothValues  = unsafeAttribute $ Both { key: "blur", value:  unset'  } (snd bothValues <#> \_ -> { key: "blur", value:  unset'  })
-  pureAttr OnBlur _  = unsafeAttribute $ This { key: "blur", value:  unset'  }
-  unpureAttr OnBlur eventValue  = unsafeAttribute $ That $ eventValue <#> \_ -> { key: "blur", value:  unset'  }
+  attr OnBlur bothValues = unsafeAttribute $ Both { key: "blur", value: unset' }
+    (snd bothValues <#> \_ -> { key: "blur", value: unset' })
+  pureAttr OnBlur _ = unsafeAttribute $ This { key: "blur", value: unset' }
+  unpureAttr OnBlur eventValue = unsafeAttribute $ That $ eventValue <#> \_ ->
+    { key: "blur", value: unset' }

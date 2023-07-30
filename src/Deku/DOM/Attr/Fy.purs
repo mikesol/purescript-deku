@@ -10,11 +10,16 @@ import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 data Fy = Fy
 
 instance Attr RadialGradient_ Fy String where
-  attr Fy bothValues  = unsafeAttribute $ Both { key: "fy", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "fy", value:  prop' value  })
-  pureAttr Fy value  = unsafeAttribute $ This { key: "fy", value:  prop' value  }
-  unpureAttr Fy eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "fy", value:  prop' value  }
+  attr Fy bothValues = unsafeAttribute $ Both
+    { key: "fy", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "fy", value: prop' value })
+  pureAttr Fy value = unsafeAttribute $ This { key: "fy", value: prop' value }
+  unpureAttr Fy eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+    { key: "fy", value: prop' value }
 
 instance Attr everything Fy Unit where
-  attr Fy bothValues  = unsafeAttribute $ Both { key: "fy", value:  unset'  } (snd bothValues <#> \_ -> { key: "fy", value:  unset'  })
-  pureAttr Fy _  = unsafeAttribute $ This { key: "fy", value:  unset'  }
-  unpureAttr Fy eventValue  = unsafeAttribute $ That $ eventValue <#> \_ -> { key: "fy", value:  unset'  }
+  attr Fy bothValues = unsafeAttribute $ Both { key: "fy", value: unset' }
+    (snd bothValues <#> \_ -> { key: "fy", value: unset' })
+  pureAttr Fy _ = unsafeAttribute $ This { key: "fy", value: unset' }
+  unpureAttr Fy eventValue = unsafeAttribute $ That $ eventValue <#> \_ ->
+    { key: "fy", value: unset' }

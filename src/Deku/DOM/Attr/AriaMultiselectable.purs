@@ -26,91 +26,197 @@ import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 data AriaMultiselectable = AriaMultiselectable
 
 instance Attr Circle_ AriaMultiselectable String where
-  attr AriaMultiselectable bothValues  = unsafeAttribute $ Both { key: "aria-multiselectable", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "aria-multiselectable", value:  prop' value  })
-  pureAttr AriaMultiselectable value  = unsafeAttribute $ This { key: "aria-multiselectable", value:  prop' value  }
-  unpureAttr AriaMultiselectable eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "aria-multiselectable", value:  prop' value  }
+  attr AriaMultiselectable bothValues = unsafeAttribute $ Both
+    { key: "aria-multiselectable", value: prop' (fst bothValues) }
+    ( snd bothValues <#> \value ->
+        { key: "aria-multiselectable", value: prop' value }
+    )
+  pureAttr AriaMultiselectable value = unsafeAttribute $ This
+    { key: "aria-multiselectable", value: prop' value }
+  unpureAttr AriaMultiselectable eventValue = unsafeAttribute $ That $
+    eventValue <#> \value -> { key: "aria-multiselectable", value: prop' value }
 
 instance Attr Ellipse_ AriaMultiselectable String where
-  attr AriaMultiselectable bothValues  = unsafeAttribute $ Both { key: "aria-multiselectable", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "aria-multiselectable", value:  prop' value  })
-  pureAttr AriaMultiselectable value  = unsafeAttribute $ This { key: "aria-multiselectable", value:  prop' value  }
-  unpureAttr AriaMultiselectable eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "aria-multiselectable", value:  prop' value  }
+  attr AriaMultiselectable bothValues = unsafeAttribute $ Both
+    { key: "aria-multiselectable", value: prop' (fst bothValues) }
+    ( snd bothValues <#> \value ->
+        { key: "aria-multiselectable", value: prop' value }
+    )
+  pureAttr AriaMultiselectable value = unsafeAttribute $ This
+    { key: "aria-multiselectable", value: prop' value }
+  unpureAttr AriaMultiselectable eventValue = unsafeAttribute $ That $
+    eventValue <#> \value -> { key: "aria-multiselectable", value: prop' value }
 
 instance Attr ForeignObject_ AriaMultiselectable String where
-  attr AriaMultiselectable bothValues  = unsafeAttribute $ Both { key: "aria-multiselectable", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "aria-multiselectable", value:  prop' value  })
-  pureAttr AriaMultiselectable value  = unsafeAttribute $ This { key: "aria-multiselectable", value:  prop' value  }
-  unpureAttr AriaMultiselectable eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "aria-multiselectable", value:  prop' value  }
+  attr AriaMultiselectable bothValues = unsafeAttribute $ Both
+    { key: "aria-multiselectable", value: prop' (fst bothValues) }
+    ( snd bothValues <#> \value ->
+        { key: "aria-multiselectable", value: prop' value }
+    )
+  pureAttr AriaMultiselectable value = unsafeAttribute $ This
+    { key: "aria-multiselectable", value: prop' value }
+  unpureAttr AriaMultiselectable eventValue = unsafeAttribute $ That $
+    eventValue <#> \value -> { key: "aria-multiselectable", value: prop' value }
 
 instance Attr G_ AriaMultiselectable String where
-  attr AriaMultiselectable bothValues  = unsafeAttribute $ Both { key: "aria-multiselectable", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "aria-multiselectable", value:  prop' value  })
-  pureAttr AriaMultiselectable value  = unsafeAttribute $ This { key: "aria-multiselectable", value:  prop' value  }
-  unpureAttr AriaMultiselectable eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "aria-multiselectable", value:  prop' value  }
+  attr AriaMultiselectable bothValues = unsafeAttribute $ Both
+    { key: "aria-multiselectable", value: prop' (fst bothValues) }
+    ( snd bothValues <#> \value ->
+        { key: "aria-multiselectable", value: prop' value }
+    )
+  pureAttr AriaMultiselectable value = unsafeAttribute $ This
+    { key: "aria-multiselectable", value: prop' value }
+  unpureAttr AriaMultiselectable eventValue = unsafeAttribute $ That $
+    eventValue <#> \value -> { key: "aria-multiselectable", value: prop' value }
 
 instance Attr Line_ AriaMultiselectable String where
-  attr AriaMultiselectable bothValues  = unsafeAttribute $ Both { key: "aria-multiselectable", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "aria-multiselectable", value:  prop' value  })
-  pureAttr AriaMultiselectable value  = unsafeAttribute $ This { key: "aria-multiselectable", value:  prop' value  }
-  unpureAttr AriaMultiselectable eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "aria-multiselectable", value:  prop' value  }
+  attr AriaMultiselectable bothValues = unsafeAttribute $ Both
+    { key: "aria-multiselectable", value: prop' (fst bothValues) }
+    ( snd bothValues <#> \value ->
+        { key: "aria-multiselectable", value: prop' value }
+    )
+  pureAttr AriaMultiselectable value = unsafeAttribute $ This
+    { key: "aria-multiselectable", value: prop' value }
+  unpureAttr AriaMultiselectable eventValue = unsafeAttribute $ That $
+    eventValue <#> \value -> { key: "aria-multiselectable", value: prop' value }
 
 instance Attr Marker_ AriaMultiselectable String where
-  attr AriaMultiselectable bothValues  = unsafeAttribute $ Both { key: "aria-multiselectable", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "aria-multiselectable", value:  prop' value  })
-  pureAttr AriaMultiselectable value  = unsafeAttribute $ This { key: "aria-multiselectable", value:  prop' value  }
-  unpureAttr AriaMultiselectable eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "aria-multiselectable", value:  prop' value  }
+  attr AriaMultiselectable bothValues = unsafeAttribute $ Both
+    { key: "aria-multiselectable", value: prop' (fst bothValues) }
+    ( snd bothValues <#> \value ->
+        { key: "aria-multiselectable", value: prop' value }
+    )
+  pureAttr AriaMultiselectable value = unsafeAttribute $ This
+    { key: "aria-multiselectable", value: prop' value }
+  unpureAttr AriaMultiselectable eventValue = unsafeAttribute $ That $
+    eventValue <#> \value -> { key: "aria-multiselectable", value: prop' value }
 
 instance Attr Path_ AriaMultiselectable String where
-  attr AriaMultiselectable bothValues  = unsafeAttribute $ Both { key: "aria-multiselectable", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "aria-multiselectable", value:  prop' value  })
-  pureAttr AriaMultiselectable value  = unsafeAttribute $ This { key: "aria-multiselectable", value:  prop' value  }
-  unpureAttr AriaMultiselectable eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "aria-multiselectable", value:  prop' value  }
+  attr AriaMultiselectable bothValues = unsafeAttribute $ Both
+    { key: "aria-multiselectable", value: prop' (fst bothValues) }
+    ( snd bothValues <#> \value ->
+        { key: "aria-multiselectable", value: prop' value }
+    )
+  pureAttr AriaMultiselectable value = unsafeAttribute $ This
+    { key: "aria-multiselectable", value: prop' value }
+  unpureAttr AriaMultiselectable eventValue = unsafeAttribute $ That $
+    eventValue <#> \value -> { key: "aria-multiselectable", value: prop' value }
 
 instance Attr Polygon_ AriaMultiselectable String where
-  attr AriaMultiselectable bothValues  = unsafeAttribute $ Both { key: "aria-multiselectable", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "aria-multiselectable", value:  prop' value  })
-  pureAttr AriaMultiselectable value  = unsafeAttribute $ This { key: "aria-multiselectable", value:  prop' value  }
-  unpureAttr AriaMultiselectable eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "aria-multiselectable", value:  prop' value  }
+  attr AriaMultiselectable bothValues = unsafeAttribute $ Both
+    { key: "aria-multiselectable", value: prop' (fst bothValues) }
+    ( snd bothValues <#> \value ->
+        { key: "aria-multiselectable", value: prop' value }
+    )
+  pureAttr AriaMultiselectable value = unsafeAttribute $ This
+    { key: "aria-multiselectable", value: prop' value }
+  unpureAttr AriaMultiselectable eventValue = unsafeAttribute $ That $
+    eventValue <#> \value -> { key: "aria-multiselectable", value: prop' value }
 
 instance Attr Polyline_ AriaMultiselectable String where
-  attr AriaMultiselectable bothValues  = unsafeAttribute $ Both { key: "aria-multiselectable", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "aria-multiselectable", value:  prop' value  })
-  pureAttr AriaMultiselectable value  = unsafeAttribute $ This { key: "aria-multiselectable", value:  prop' value  }
-  unpureAttr AriaMultiselectable eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "aria-multiselectable", value:  prop' value  }
+  attr AriaMultiselectable bothValues = unsafeAttribute $ Both
+    { key: "aria-multiselectable", value: prop' (fst bothValues) }
+    ( snd bothValues <#> \value ->
+        { key: "aria-multiselectable", value: prop' value }
+    )
+  pureAttr AriaMultiselectable value = unsafeAttribute $ This
+    { key: "aria-multiselectable", value: prop' value }
+  unpureAttr AriaMultiselectable eventValue = unsafeAttribute $ That $
+    eventValue <#> \value -> { key: "aria-multiselectable", value: prop' value }
 
 instance Attr Rect_ AriaMultiselectable String where
-  attr AriaMultiselectable bothValues  = unsafeAttribute $ Both { key: "aria-multiselectable", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "aria-multiselectable", value:  prop' value  })
-  pureAttr AriaMultiselectable value  = unsafeAttribute $ This { key: "aria-multiselectable", value:  prop' value  }
-  unpureAttr AriaMultiselectable eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "aria-multiselectable", value:  prop' value  }
+  attr AriaMultiselectable bothValues = unsafeAttribute $ Both
+    { key: "aria-multiselectable", value: prop' (fst bothValues) }
+    ( snd bothValues <#> \value ->
+        { key: "aria-multiselectable", value: prop' value }
+    )
+  pureAttr AriaMultiselectable value = unsafeAttribute $ This
+    { key: "aria-multiselectable", value: prop' value }
+  unpureAttr AriaMultiselectable eventValue = unsafeAttribute $ That $
+    eventValue <#> \value -> { key: "aria-multiselectable", value: prop' value }
 
 instance Attr Svg_ AriaMultiselectable String where
-  attr AriaMultiselectable bothValues  = unsafeAttribute $ Both { key: "aria-multiselectable", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "aria-multiselectable", value:  prop' value  })
-  pureAttr AriaMultiselectable value  = unsafeAttribute $ This { key: "aria-multiselectable", value:  prop' value  }
-  unpureAttr AriaMultiselectable eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "aria-multiselectable", value:  prop' value  }
+  attr AriaMultiselectable bothValues = unsafeAttribute $ Both
+    { key: "aria-multiselectable", value: prop' (fst bothValues) }
+    ( snd bothValues <#> \value ->
+        { key: "aria-multiselectable", value: prop' value }
+    )
+  pureAttr AriaMultiselectable value = unsafeAttribute $ This
+    { key: "aria-multiselectable", value: prop' value }
+  unpureAttr AriaMultiselectable eventValue = unsafeAttribute $ That $
+    eventValue <#> \value -> { key: "aria-multiselectable", value: prop' value }
 
 instance Attr Symbol_ AriaMultiselectable String where
-  attr AriaMultiselectable bothValues  = unsafeAttribute $ Both { key: "aria-multiselectable", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "aria-multiselectable", value:  prop' value  })
-  pureAttr AriaMultiselectable value  = unsafeAttribute $ This { key: "aria-multiselectable", value:  prop' value  }
-  unpureAttr AriaMultiselectable eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "aria-multiselectable", value:  prop' value  }
+  attr AriaMultiselectable bothValues = unsafeAttribute $ Both
+    { key: "aria-multiselectable", value: prop' (fst bothValues) }
+    ( snd bothValues <#> \value ->
+        { key: "aria-multiselectable", value: prop' value }
+    )
+  pureAttr AriaMultiselectable value = unsafeAttribute $ This
+    { key: "aria-multiselectable", value: prop' value }
+  unpureAttr AriaMultiselectable eventValue = unsafeAttribute $ That $
+    eventValue <#> \value -> { key: "aria-multiselectable", value: prop' value }
 
 instance Attr Text_ AriaMultiselectable String where
-  attr AriaMultiselectable bothValues  = unsafeAttribute $ Both { key: "aria-multiselectable", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "aria-multiselectable", value:  prop' value  })
-  pureAttr AriaMultiselectable value  = unsafeAttribute $ This { key: "aria-multiselectable", value:  prop' value  }
-  unpureAttr AriaMultiselectable eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "aria-multiselectable", value:  prop' value  }
+  attr AriaMultiselectable bothValues = unsafeAttribute $ Both
+    { key: "aria-multiselectable", value: prop' (fst bothValues) }
+    ( snd bothValues <#> \value ->
+        { key: "aria-multiselectable", value: prop' value }
+    )
+  pureAttr AriaMultiselectable value = unsafeAttribute $ This
+    { key: "aria-multiselectable", value: prop' value }
+  unpureAttr AriaMultiselectable eventValue = unsafeAttribute $ That $
+    eventValue <#> \value -> { key: "aria-multiselectable", value: prop' value }
 
 instance Attr TextPath_ AriaMultiselectable String where
-  attr AriaMultiselectable bothValues  = unsafeAttribute $ Both { key: "aria-multiselectable", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "aria-multiselectable", value:  prop' value  })
-  pureAttr AriaMultiselectable value  = unsafeAttribute $ This { key: "aria-multiselectable", value:  prop' value  }
-  unpureAttr AriaMultiselectable eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "aria-multiselectable", value:  prop' value  }
+  attr AriaMultiselectable bothValues = unsafeAttribute $ Both
+    { key: "aria-multiselectable", value: prop' (fst bothValues) }
+    ( snd bothValues <#> \value ->
+        { key: "aria-multiselectable", value: prop' value }
+    )
+  pureAttr AriaMultiselectable value = unsafeAttribute $ This
+    { key: "aria-multiselectable", value: prop' value }
+  unpureAttr AriaMultiselectable eventValue = unsafeAttribute $ That $
+    eventValue <#> \value -> { key: "aria-multiselectable", value: prop' value }
 
 instance Attr Tspan_ AriaMultiselectable String where
-  attr AriaMultiselectable bothValues  = unsafeAttribute $ Both { key: "aria-multiselectable", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "aria-multiselectable", value:  prop' value  })
-  pureAttr AriaMultiselectable value  = unsafeAttribute $ This { key: "aria-multiselectable", value:  prop' value  }
-  unpureAttr AriaMultiselectable eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "aria-multiselectable", value:  prop' value  }
+  attr AriaMultiselectable bothValues = unsafeAttribute $ Both
+    { key: "aria-multiselectable", value: prop' (fst bothValues) }
+    ( snd bothValues <#> \value ->
+        { key: "aria-multiselectable", value: prop' value }
+    )
+  pureAttr AriaMultiselectable value = unsafeAttribute $ This
+    { key: "aria-multiselectable", value: prop' value }
+  unpureAttr AriaMultiselectable eventValue = unsafeAttribute $ That $
+    eventValue <#> \value -> { key: "aria-multiselectable", value: prop' value }
 
 instance Attr Use_ AriaMultiselectable String where
-  attr AriaMultiselectable bothValues  = unsafeAttribute $ Both { key: "aria-multiselectable", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "aria-multiselectable", value:  prop' value  })
-  pureAttr AriaMultiselectable value  = unsafeAttribute $ This { key: "aria-multiselectable", value:  prop' value  }
-  unpureAttr AriaMultiselectable eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "aria-multiselectable", value:  prop' value  }
+  attr AriaMultiselectable bothValues = unsafeAttribute $ Both
+    { key: "aria-multiselectable", value: prop' (fst bothValues) }
+    ( snd bothValues <#> \value ->
+        { key: "aria-multiselectable", value: prop' value }
+    )
+  pureAttr AriaMultiselectable value = unsafeAttribute $ This
+    { key: "aria-multiselectable", value: prop' value }
+  unpureAttr AriaMultiselectable eventValue = unsafeAttribute $ That $
+    eventValue <#> \value -> { key: "aria-multiselectable", value: prop' value }
 
 instance Attr View_ AriaMultiselectable String where
-  attr AriaMultiselectable bothValues  = unsafeAttribute $ Both { key: "aria-multiselectable", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "aria-multiselectable", value:  prop' value  })
-  pureAttr AriaMultiselectable value  = unsafeAttribute $ This { key: "aria-multiselectable", value:  prop' value  }
-  unpureAttr AriaMultiselectable eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "aria-multiselectable", value:  prop' value  }
+  attr AriaMultiselectable bothValues = unsafeAttribute $ Both
+    { key: "aria-multiselectable", value: prop' (fst bothValues) }
+    ( snd bothValues <#> \value ->
+        { key: "aria-multiselectable", value: prop' value }
+    )
+  pureAttr AriaMultiselectable value = unsafeAttribute $ This
+    { key: "aria-multiselectable", value: prop' value }
+  unpureAttr AriaMultiselectable eventValue = unsafeAttribute $ That $
+    eventValue <#> \value -> { key: "aria-multiselectable", value: prop' value }
 
 instance Attr everything AriaMultiselectable Unit where
-  attr AriaMultiselectable bothValues  = unsafeAttribute $ Both { key: "aria-multiselectable", value:  unset'  } (snd bothValues <#> \_ -> { key: "aria-multiselectable", value:  unset'  })
-  pureAttr AriaMultiselectable _  = unsafeAttribute $ This { key: "aria-multiselectable", value:  unset'  }
-  unpureAttr AriaMultiselectable eventValue  = unsafeAttribute $ That $ eventValue <#> \_ -> { key: "aria-multiselectable", value:  unset'  }
+  attr AriaMultiselectable bothValues = unsafeAttribute $ Both
+    { key: "aria-multiselectable", value: unset' }
+    (snd bothValues <#> \_ -> { key: "aria-multiselectable", value: unset' })
+  pureAttr AriaMultiselectable _ = unsafeAttribute $ This
+    { key: "aria-multiselectable", value: unset' }
+  unpureAttr AriaMultiselectable eventValue = unsafeAttribute $ That $
+    eventValue <#> \_ -> { key: "aria-multiselectable", value: unset' }

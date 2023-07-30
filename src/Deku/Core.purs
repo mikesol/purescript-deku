@@ -83,9 +83,10 @@ type DekuExtra = (pos :: Maybe Int, ez :: Boolean, dynFamily :: Maybe String)
 
 type HeadNode' payload = Bolson.HeadElement' (DOMInterpret payload)
   payload
+
 -- | For internal use in the `Nut` type signature. `Nut` uses `Bolson` under the
 -- | hood, and this is used with `Bolson`'s `Entity` type.
-type Node' payload = Bolson.Element' (DOMInterpret payload) DekuExtra  payload
+type Node' payload = Bolson.Element' (DOMInterpret payload) DekuExtra payload
 
 -- | For internal use in the `Nut` type signature. `Nut` uses `Bolson` under the
 -- | hood, and this is used with `Bolson`'s `Entity` type.
@@ -281,7 +282,8 @@ type MakeDynBeacon =
   , dynFamily :: Maybe String
   }
 
-type AssociateWithUnsubscribe = { id :: String, unsubscribe :: ST.ST Region.Global Unit }
+type AssociateWithUnsubscribe =
+  { id :: String, unsubscribe :: ST.ST Region.Global Unit }
 
 derive instance Newtype (DOMInterpret payload) _
 
@@ -321,7 +323,8 @@ flattenArgs =
   { doLogic: \pos (DOMInterpret { sendToPos: stp }) id -> stp { id, pos }
   , deferPayload: \(DOMInterpret { deferPayload }) -> deferPayload
   , forcePayload: \(DOMInterpret { forcePayload }) -> forcePayload
-  , redecorateDeferredPayload: \(DOMInterpret { redecorateDeferredPayload }) -> redecorateDeferredPayload
+  , redecorateDeferredPayload: \(DOMInterpret { redecorateDeferredPayload }) ->
+      redecorateDeferredPayload
   , ids: unwrap >>> _.ids
   , disconnectElement:
       \(DOMInterpret { disconnectElement }) { id, scope, parent } ->
@@ -399,7 +402,12 @@ dynify f es = Nut (go' ((\(Nut df) -> df) (f es)))
           ( parentEvent
               <>
                 [ makeDynBeacon
-                    { id: show me, parent: Just parentId, scope, dynFamily, pos }
+                    { id: show me
+                    , parent: Just parentId
+                    , scope
+                    , dynFamily
+                    , pos
+                    }
                 , attributeParent
                     { id: show me, parent: parentId, pos, dynFamily, ez }
                 ]

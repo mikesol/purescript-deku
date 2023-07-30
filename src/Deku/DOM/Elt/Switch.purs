@@ -5,7 +5,6 @@ import Deku.Attribute (Attribute)
 import Deku.Control as DC
 import Deku.Core (Nut)
 
-
 data Switch_
 
 switch

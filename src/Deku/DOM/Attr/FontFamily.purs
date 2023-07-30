@@ -30,111 +30,199 @@ import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 data FontFamily = FontFamily
 
 instance Attr FeBlend_ FontFamily String where
-  attr FontFamily bothValues  = unsafeAttribute $ Both { key: "font-family", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "font-family", value:  prop' value  })
-  pureAttr FontFamily value  = unsafeAttribute $ This { key: "font-family", value:  prop' value  }
-  unpureAttr FontFamily eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "font-family", value:  prop' value  }
+  attr FontFamily bothValues = unsafeAttribute $ Both
+    { key: "font-family", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "font-family", value: prop' value })
+  pureAttr FontFamily value = unsafeAttribute $ This
+    { key: "font-family", value: prop' value }
+  unpureAttr FontFamily eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "font-family", value: prop' value }
 
 instance Attr FeColorMatrix_ FontFamily String where
-  attr FontFamily bothValues  = unsafeAttribute $ Both { key: "font-family", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "font-family", value:  prop' value  })
-  pureAttr FontFamily value  = unsafeAttribute $ This { key: "font-family", value:  prop' value  }
-  unpureAttr FontFamily eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "font-family", value:  prop' value  }
+  attr FontFamily bothValues = unsafeAttribute $ Both
+    { key: "font-family", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "font-family", value: prop' value })
+  pureAttr FontFamily value = unsafeAttribute $ This
+    { key: "font-family", value: prop' value }
+  unpureAttr FontFamily eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "font-family", value: prop' value }
 
 instance Attr FeComponentTransfer_ FontFamily String where
-  attr FontFamily bothValues  = unsafeAttribute $ Both { key: "font-family", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "font-family", value:  prop' value  })
-  pureAttr FontFamily value  = unsafeAttribute $ This { key: "font-family", value:  prop' value  }
-  unpureAttr FontFamily eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "font-family", value:  prop' value  }
+  attr FontFamily bothValues = unsafeAttribute $ Both
+    { key: "font-family", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "font-family", value: prop' value })
+  pureAttr FontFamily value = unsafeAttribute $ This
+    { key: "font-family", value: prop' value }
+  unpureAttr FontFamily eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "font-family", value: prop' value }
 
 instance Attr FeComposite_ FontFamily String where
-  attr FontFamily bothValues  = unsafeAttribute $ Both { key: "font-family", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "font-family", value:  prop' value  })
-  pureAttr FontFamily value  = unsafeAttribute $ This { key: "font-family", value:  prop' value  }
-  unpureAttr FontFamily eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "font-family", value:  prop' value  }
+  attr FontFamily bothValues = unsafeAttribute $ Both
+    { key: "font-family", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "font-family", value: prop' value })
+  pureAttr FontFamily value = unsafeAttribute $ This
+    { key: "font-family", value: prop' value }
+  unpureAttr FontFamily eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "font-family", value: prop' value }
 
 instance Attr FeConvolveMatrix_ FontFamily String where
-  attr FontFamily bothValues  = unsafeAttribute $ Both { key: "font-family", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "font-family", value:  prop' value  })
-  pureAttr FontFamily value  = unsafeAttribute $ This { key: "font-family", value:  prop' value  }
-  unpureAttr FontFamily eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "font-family", value:  prop' value  }
+  attr FontFamily bothValues = unsafeAttribute $ Both
+    { key: "font-family", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "font-family", value: prop' value })
+  pureAttr FontFamily value = unsafeAttribute $ This
+    { key: "font-family", value: prop' value }
+  unpureAttr FontFamily eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "font-family", value: prop' value }
 
 instance Attr FeDiffuseLighting_ FontFamily String where
-  attr FontFamily bothValues  = unsafeAttribute $ Both { key: "font-family", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "font-family", value:  prop' value  })
-  pureAttr FontFamily value  = unsafeAttribute $ This { key: "font-family", value:  prop' value  }
-  unpureAttr FontFamily eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "font-family", value:  prop' value  }
+  attr FontFamily bothValues = unsafeAttribute $ Both
+    { key: "font-family", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "font-family", value: prop' value })
+  pureAttr FontFamily value = unsafeAttribute $ This
+    { key: "font-family", value: prop' value }
+  unpureAttr FontFamily eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "font-family", value: prop' value }
 
 instance Attr FeDisplacementMap_ FontFamily String where
-  attr FontFamily bothValues  = unsafeAttribute $ Both { key: "font-family", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "font-family", value:  prop' value  })
-  pureAttr FontFamily value  = unsafeAttribute $ This { key: "font-family", value:  prop' value  }
-  unpureAttr FontFamily eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "font-family", value:  prop' value  }
+  attr FontFamily bothValues = unsafeAttribute $ Both
+    { key: "font-family", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "font-family", value: prop' value })
+  pureAttr FontFamily value = unsafeAttribute $ This
+    { key: "font-family", value: prop' value }
+  unpureAttr FontFamily eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "font-family", value: prop' value }
 
 instance Attr FeFlood_ FontFamily String where
-  attr FontFamily bothValues  = unsafeAttribute $ Both { key: "font-family", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "font-family", value:  prop' value  })
-  pureAttr FontFamily value  = unsafeAttribute $ This { key: "font-family", value:  prop' value  }
-  unpureAttr FontFamily eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "font-family", value:  prop' value  }
+  attr FontFamily bothValues = unsafeAttribute $ Both
+    { key: "font-family", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "font-family", value: prop' value })
+  pureAttr FontFamily value = unsafeAttribute $ This
+    { key: "font-family", value: prop' value }
+  unpureAttr FontFamily eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "font-family", value: prop' value }
 
 instance Attr FeGaussianBlur_ FontFamily String where
-  attr FontFamily bothValues  = unsafeAttribute $ Both { key: "font-family", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "font-family", value:  prop' value  })
-  pureAttr FontFamily value  = unsafeAttribute $ This { key: "font-family", value:  prop' value  }
-  unpureAttr FontFamily eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "font-family", value:  prop' value  }
+  attr FontFamily bothValues = unsafeAttribute $ Both
+    { key: "font-family", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "font-family", value: prop' value })
+  pureAttr FontFamily value = unsafeAttribute $ This
+    { key: "font-family", value: prop' value }
+  unpureAttr FontFamily eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "font-family", value: prop' value }
 
 instance Attr FeImage_ FontFamily String where
-  attr FontFamily bothValues  = unsafeAttribute $ Both { key: "font-family", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "font-family", value:  prop' value  })
-  pureAttr FontFamily value  = unsafeAttribute $ This { key: "font-family", value:  prop' value  }
-  unpureAttr FontFamily eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "font-family", value:  prop' value  }
+  attr FontFamily bothValues = unsafeAttribute $ Both
+    { key: "font-family", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "font-family", value: prop' value })
+  pureAttr FontFamily value = unsafeAttribute $ This
+    { key: "font-family", value: prop' value }
+  unpureAttr FontFamily eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "font-family", value: prop' value }
 
 instance Attr FeMerge_ FontFamily String where
-  attr FontFamily bothValues  = unsafeAttribute $ Both { key: "font-family", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "font-family", value:  prop' value  })
-  pureAttr FontFamily value  = unsafeAttribute $ This { key: "font-family", value:  prop' value  }
-  unpureAttr FontFamily eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "font-family", value:  prop' value  }
+  attr FontFamily bothValues = unsafeAttribute $ Both
+    { key: "font-family", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "font-family", value: prop' value })
+  pureAttr FontFamily value = unsafeAttribute $ This
+    { key: "font-family", value: prop' value }
+  unpureAttr FontFamily eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "font-family", value: prop' value }
 
 instance Attr FeMorphology_ FontFamily String where
-  attr FontFamily bothValues  = unsafeAttribute $ Both { key: "font-family", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "font-family", value:  prop' value  })
-  pureAttr FontFamily value  = unsafeAttribute $ This { key: "font-family", value:  prop' value  }
-  unpureAttr FontFamily eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "font-family", value:  prop' value  }
+  attr FontFamily bothValues = unsafeAttribute $ Both
+    { key: "font-family", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "font-family", value: prop' value })
+  pureAttr FontFamily value = unsafeAttribute $ This
+    { key: "font-family", value: prop' value }
+  unpureAttr FontFamily eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "font-family", value: prop' value }
 
 instance Attr FeOffset_ FontFamily String where
-  attr FontFamily bothValues  = unsafeAttribute $ Both { key: "font-family", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "font-family", value:  prop' value  })
-  pureAttr FontFamily value  = unsafeAttribute $ This { key: "font-family", value:  prop' value  }
-  unpureAttr FontFamily eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "font-family", value:  prop' value  }
+  attr FontFamily bothValues = unsafeAttribute $ Both
+    { key: "font-family", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "font-family", value: prop' value })
+  pureAttr FontFamily value = unsafeAttribute $ This
+    { key: "font-family", value: prop' value }
+  unpureAttr FontFamily eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "font-family", value: prop' value }
 
 instance Attr FeSpecularLighting_ FontFamily String where
-  attr FontFamily bothValues  = unsafeAttribute $ Both { key: "font-family", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "font-family", value:  prop' value  })
-  pureAttr FontFamily value  = unsafeAttribute $ This { key: "font-family", value:  prop' value  }
-  unpureAttr FontFamily eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "font-family", value:  prop' value  }
+  attr FontFamily bothValues = unsafeAttribute $ Both
+    { key: "font-family", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "font-family", value: prop' value })
+  pureAttr FontFamily value = unsafeAttribute $ This
+    { key: "font-family", value: prop' value }
+  unpureAttr FontFamily eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "font-family", value: prop' value }
 
 instance Attr FeTile_ FontFamily String where
-  attr FontFamily bothValues  = unsafeAttribute $ Both { key: "font-family", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "font-family", value:  prop' value  })
-  pureAttr FontFamily value  = unsafeAttribute $ This { key: "font-family", value:  prop' value  }
-  unpureAttr FontFamily eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "font-family", value:  prop' value  }
+  attr FontFamily bothValues = unsafeAttribute $ Both
+    { key: "font-family", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "font-family", value: prop' value })
+  pureAttr FontFamily value = unsafeAttribute $ This
+    { key: "font-family", value: prop' value }
+  unpureAttr FontFamily eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "font-family", value: prop' value }
 
 instance Attr FeTurbulence_ FontFamily String where
-  attr FontFamily bothValues  = unsafeAttribute $ Both { key: "font-family", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "font-family", value:  prop' value  })
-  pureAttr FontFamily value  = unsafeAttribute $ This { key: "font-family", value:  prop' value  }
-  unpureAttr FontFamily eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "font-family", value:  prop' value  }
+  attr FontFamily bothValues = unsafeAttribute $ Both
+    { key: "font-family", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "font-family", value: prop' value })
+  pureAttr FontFamily value = unsafeAttribute $ This
+    { key: "font-family", value: prop' value }
+  unpureAttr FontFamily eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "font-family", value: prop' value }
 
 instance Attr Filter_ FontFamily String where
-  attr FontFamily bothValues  = unsafeAttribute $ Both { key: "font-family", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "font-family", value:  prop' value  })
-  pureAttr FontFamily value  = unsafeAttribute $ This { key: "font-family", value:  prop' value  }
-  unpureAttr FontFamily eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "font-family", value:  prop' value  }
+  attr FontFamily bothValues = unsafeAttribute $ Both
+    { key: "font-family", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "font-family", value: prop' value })
+  pureAttr FontFamily value = unsafeAttribute $ This
+    { key: "font-family", value: prop' value }
+  unpureAttr FontFamily eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "font-family", value: prop' value }
 
 instance Attr Image_ FontFamily String where
-  attr FontFamily bothValues  = unsafeAttribute $ Both { key: "font-family", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "font-family", value:  prop' value  })
-  pureAttr FontFamily value  = unsafeAttribute $ This { key: "font-family", value:  prop' value  }
-  unpureAttr FontFamily eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "font-family", value:  prop' value  }
+  attr FontFamily bothValues = unsafeAttribute $ Both
+    { key: "font-family", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "font-family", value: prop' value })
+  pureAttr FontFamily value = unsafeAttribute $ This
+    { key: "font-family", value: prop' value }
+  unpureAttr FontFamily eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "font-family", value: prop' value }
 
 instance Attr Switch_ FontFamily String where
-  attr FontFamily bothValues  = unsafeAttribute $ Both { key: "font-family", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "font-family", value:  prop' value  })
-  pureAttr FontFamily value  = unsafeAttribute $ This { key: "font-family", value:  prop' value  }
-  unpureAttr FontFamily eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "font-family", value:  prop' value  }
+  attr FontFamily bothValues = unsafeAttribute $ Both
+    { key: "font-family", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "font-family", value: prop' value })
+  pureAttr FontFamily value = unsafeAttribute $ This
+    { key: "font-family", value: prop' value }
+  unpureAttr FontFamily eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "font-family", value: prop' value }
 
 instance Attr Text_ FontFamily String where
-  attr FontFamily bothValues  = unsafeAttribute $ Both { key: "font-family", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "font-family", value:  prop' value  })
-  pureAttr FontFamily value  = unsafeAttribute $ This { key: "font-family", value:  prop' value  }
-  unpureAttr FontFamily eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "font-family", value:  prop' value  }
+  attr FontFamily bothValues = unsafeAttribute $ Both
+    { key: "font-family", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "font-family", value: prop' value })
+  pureAttr FontFamily value = unsafeAttribute $ This
+    { key: "font-family", value: prop' value }
+  unpureAttr FontFamily eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "font-family", value: prop' value }
 
 instance Attr Tspan_ FontFamily String where
-  attr FontFamily bothValues  = unsafeAttribute $ Both { key: "font-family", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "font-family", value:  prop' value  })
-  pureAttr FontFamily value  = unsafeAttribute $ This { key: "font-family", value:  prop' value  }
-  unpureAttr FontFamily eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "font-family", value:  prop' value  }
+  attr FontFamily bothValues = unsafeAttribute $ Both
+    { key: "font-family", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "font-family", value: prop' value })
+  pureAttr FontFamily value = unsafeAttribute $ This
+    { key: "font-family", value: prop' value }
+  unpureAttr FontFamily eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "font-family", value: prop' value }
 
 instance Attr everything FontFamily Unit where
-  attr FontFamily bothValues  = unsafeAttribute $ Both { key: "font-family", value:  unset'  } (snd bothValues <#> \_ -> { key: "font-family", value:  unset'  })
-  pureAttr FontFamily _  = unsafeAttribute $ This { key: "font-family", value:  unset'  }
-  unpureAttr FontFamily eventValue  = unsafeAttribute $ That $ eventValue <#> \_ -> { key: "font-family", value:  unset'  }
+  attr FontFamily bothValues = unsafeAttribute $ Both
+    { key: "font-family", value: unset' }
+    (snd bothValues <#> \_ -> { key: "font-family", value: unset' })
+  pureAttr FontFamily _ = unsafeAttribute $ This
+    { key: "font-family", value: unset' }
+  unpureAttr FontFamily eventValue = unsafeAttribute $ That $ eventValue <#>
+    \_ -> { key: "font-family", value: unset' }

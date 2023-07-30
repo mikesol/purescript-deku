@@ -10,11 +10,19 @@ import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 data StartOffset = StartOffset
 
 instance Attr TextPath_ StartOffset String where
-  attr StartOffset bothValues  = unsafeAttribute $ Both { key: "startOffset", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "startOffset", value:  prop' value  })
-  pureAttr StartOffset value  = unsafeAttribute $ This { key: "startOffset", value:  prop' value  }
-  unpureAttr StartOffset eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "startOffset", value:  prop' value  }
+  attr StartOffset bothValues = unsafeAttribute $ Both
+    { key: "startOffset", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "startOffset", value: prop' value })
+  pureAttr StartOffset value = unsafeAttribute $ This
+    { key: "startOffset", value: prop' value }
+  unpureAttr StartOffset eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "startOffset", value: prop' value }
 
 instance Attr everything StartOffset Unit where
-  attr StartOffset bothValues  = unsafeAttribute $ Both { key: "startOffset", value:  unset'  } (snd bothValues <#> \_ -> { key: "startOffset", value:  unset'  })
-  pureAttr StartOffset _  = unsafeAttribute $ This { key: "startOffset", value:  unset'  }
-  unpureAttr StartOffset eventValue  = unsafeAttribute $ That $ eventValue <#> \_ -> { key: "startOffset", value:  unset'  }
+  attr StartOffset bothValues = unsafeAttribute $ Both
+    { key: "startOffset", value: unset' }
+    (snd bothValues <#> \_ -> { key: "startOffset", value: unset' })
+  pureAttr StartOffset _ = unsafeAttribute $ This
+    { key: "startOffset", value: unset' }
+  unpureAttr StartOffset eventValue = unsafeAttribute $ That $ eventValue <#>
+    \_ -> { key: "startOffset", value: unset' }

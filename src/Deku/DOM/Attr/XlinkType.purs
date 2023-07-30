@@ -14,31 +14,55 @@ import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 data XlinkType = XlinkType
 
 instance Attr AnimateTransform_ XlinkType String where
-  attr XlinkType bothValues  = unsafeAttribute $ Both { key: "xlink:type", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "xlink:type", value:  prop' value  })
-  pureAttr XlinkType value  = unsafeAttribute $ This { key: "xlink:type", value:  prop' value  }
-  unpureAttr XlinkType eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "xlink:type", value:  prop' value  }
+  attr XlinkType bothValues = unsafeAttribute $ Both
+    { key: "xlink:type", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "xlink:type", value: prop' value })
+  pureAttr XlinkType value = unsafeAttribute $ This
+    { key: "xlink:type", value: prop' value }
+  unpureAttr XlinkType eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "xlink:type", value: prop' value }
 
 instance Attr FeImage_ XlinkType String where
-  attr XlinkType bothValues  = unsafeAttribute $ Both { key: "xlink:type", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "xlink:type", value:  prop' value  })
-  pureAttr XlinkType value  = unsafeAttribute $ This { key: "xlink:type", value:  prop' value  }
-  unpureAttr XlinkType eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "xlink:type", value:  prop' value  }
+  attr XlinkType bothValues = unsafeAttribute $ Both
+    { key: "xlink:type", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "xlink:type", value: prop' value })
+  pureAttr XlinkType value = unsafeAttribute $ This
+    { key: "xlink:type", value: prop' value }
+  unpureAttr XlinkType eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "xlink:type", value: prop' value }
 
 instance Attr Filter_ XlinkType String where
-  attr XlinkType bothValues  = unsafeAttribute $ Both { key: "xlink:type", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "xlink:type", value:  prop' value  })
-  pureAttr XlinkType value  = unsafeAttribute $ This { key: "xlink:type", value:  prop' value  }
-  unpureAttr XlinkType eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "xlink:type", value:  prop' value  }
+  attr XlinkType bothValues = unsafeAttribute $ Both
+    { key: "xlink:type", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "xlink:type", value: prop' value })
+  pureAttr XlinkType value = unsafeAttribute $ This
+    { key: "xlink:type", value: prop' value }
+  unpureAttr XlinkType eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "xlink:type", value: prop' value }
 
 instance Attr Image_ XlinkType String where
-  attr XlinkType bothValues  = unsafeAttribute $ Both { key: "xlink:type", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "xlink:type", value:  prop' value  })
-  pureAttr XlinkType value  = unsafeAttribute $ This { key: "xlink:type", value:  prop' value  }
-  unpureAttr XlinkType eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "xlink:type", value:  prop' value  }
+  attr XlinkType bothValues = unsafeAttribute $ Both
+    { key: "xlink:type", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "xlink:type", value: prop' value })
+  pureAttr XlinkType value = unsafeAttribute $ This
+    { key: "xlink:type", value: prop' value }
+  unpureAttr XlinkType eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "xlink:type", value: prop' value }
 
 instance Attr Mpath_ XlinkType String where
-  attr XlinkType bothValues  = unsafeAttribute $ Both { key: "xlink:type", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "xlink:type", value:  prop' value  })
-  pureAttr XlinkType value  = unsafeAttribute $ This { key: "xlink:type", value:  prop' value  }
-  unpureAttr XlinkType eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "xlink:type", value:  prop' value  }
+  attr XlinkType bothValues = unsafeAttribute $ Both
+    { key: "xlink:type", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "xlink:type", value: prop' value })
+  pureAttr XlinkType value = unsafeAttribute $ This
+    { key: "xlink:type", value: prop' value }
+  unpureAttr XlinkType eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "xlink:type", value: prop' value }
 
 instance Attr everything XlinkType Unit where
-  attr XlinkType bothValues  = unsafeAttribute $ Both { key: "xlink:type", value:  unset'  } (snd bothValues <#> \_ -> { key: "xlink:type", value:  unset'  })
-  pureAttr XlinkType _  = unsafeAttribute $ This { key: "xlink:type", value:  unset'  }
-  unpureAttr XlinkType eventValue  = unsafeAttribute $ That $ eventValue <#> \_ -> { key: "xlink:type", value:  unset'  }
+  attr XlinkType bothValues = unsafeAttribute $ Both
+    { key: "xlink:type", value: unset' }
+    (snd bothValues <#> \_ -> { key: "xlink:type", value: unset' })
+  pureAttr XlinkType _ = unsafeAttribute $ This
+    { key: "xlink:type", value: unset' }
+  unpureAttr XlinkType eventValue = unsafeAttribute $ That $ eventValue <#>
+    \_ -> { key: "xlink:type", value: unset' }

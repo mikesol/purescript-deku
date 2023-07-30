@@ -10,11 +10,19 @@ import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 data PointsAtZ = PointsAtZ
 
 instance Attr FeSpotLight_ PointsAtZ String where
-  attr PointsAtZ bothValues  = unsafeAttribute $ Both { key: "pointsAtZ", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "pointsAtZ", value:  prop' value  })
-  pureAttr PointsAtZ value  = unsafeAttribute $ This { key: "pointsAtZ", value:  prop' value  }
-  unpureAttr PointsAtZ eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "pointsAtZ", value:  prop' value  }
+  attr PointsAtZ bothValues = unsafeAttribute $ Both
+    { key: "pointsAtZ", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "pointsAtZ", value: prop' value })
+  pureAttr PointsAtZ value = unsafeAttribute $ This
+    { key: "pointsAtZ", value: prop' value }
+  unpureAttr PointsAtZ eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "pointsAtZ", value: prop' value }
 
 instance Attr everything PointsAtZ Unit where
-  attr PointsAtZ bothValues  = unsafeAttribute $ Both { key: "pointsAtZ", value:  unset'  } (snd bothValues <#> \_ -> { key: "pointsAtZ", value:  unset'  })
-  pureAttr PointsAtZ _  = unsafeAttribute $ This { key: "pointsAtZ", value:  unset'  }
-  unpureAttr PointsAtZ eventValue  = unsafeAttribute $ That $ eventValue <#> \_ -> { key: "pointsAtZ", value:  unset'  }
+  attr PointsAtZ bothValues = unsafeAttribute $ Both
+    { key: "pointsAtZ", value: unset' }
+    (snd bothValues <#> \_ -> { key: "pointsAtZ", value: unset' })
+  pureAttr PointsAtZ _ = unsafeAttribute $ This
+    { key: "pointsAtZ", value: unset' }
+  unpureAttr PointsAtZ eventValue = unsafeAttribute $ That $ eventValue <#>
+    \_ -> { key: "pointsAtZ", value: unset' }

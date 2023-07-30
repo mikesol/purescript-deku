@@ -39,156 +39,248 @@ import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 data X = X
 
 instance Attr FeBlend_ X String where
-  attr X bothValues  = unsafeAttribute $ Both { key: "x", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "x", value:  prop' value  })
-  pureAttr X value  = unsafeAttribute $ This { key: "x", value:  prop' value  }
-  unpureAttr X eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "x", value:  prop' value  }
+  attr X bothValues = unsafeAttribute $ Both
+    { key: "x", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "x", value: prop' value })
+  pureAttr X value = unsafeAttribute $ This { key: "x", value: prop' value }
+  unpureAttr X eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+    { key: "x", value: prop' value }
 
 instance Attr FeColorMatrix_ X String where
-  attr X bothValues  = unsafeAttribute $ Both { key: "x", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "x", value:  prop' value  })
-  pureAttr X value  = unsafeAttribute $ This { key: "x", value:  prop' value  }
-  unpureAttr X eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "x", value:  prop' value  }
+  attr X bothValues = unsafeAttribute $ Both
+    { key: "x", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "x", value: prop' value })
+  pureAttr X value = unsafeAttribute $ This { key: "x", value: prop' value }
+  unpureAttr X eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+    { key: "x", value: prop' value }
 
 instance Attr FeComponentTransfer_ X String where
-  attr X bothValues  = unsafeAttribute $ Both { key: "x", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "x", value:  prop' value  })
-  pureAttr X value  = unsafeAttribute $ This { key: "x", value:  prop' value  }
-  unpureAttr X eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "x", value:  prop' value  }
+  attr X bothValues = unsafeAttribute $ Both
+    { key: "x", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "x", value: prop' value })
+  pureAttr X value = unsafeAttribute $ This { key: "x", value: prop' value }
+  unpureAttr X eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+    { key: "x", value: prop' value }
 
 instance Attr FeComposite_ X String where
-  attr X bothValues  = unsafeAttribute $ Both { key: "x", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "x", value:  prop' value  })
-  pureAttr X value  = unsafeAttribute $ This { key: "x", value:  prop' value  }
-  unpureAttr X eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "x", value:  prop' value  }
+  attr X bothValues = unsafeAttribute $ Both
+    { key: "x", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "x", value: prop' value })
+  pureAttr X value = unsafeAttribute $ This { key: "x", value: prop' value }
+  unpureAttr X eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+    { key: "x", value: prop' value }
 
 instance Attr FeConvolveMatrix_ X String where
-  attr X bothValues  = unsafeAttribute $ Both { key: "x", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "x", value:  prop' value  })
-  pureAttr X value  = unsafeAttribute $ This { key: "x", value:  prop' value  }
-  unpureAttr X eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "x", value:  prop' value  }
+  attr X bothValues = unsafeAttribute $ Both
+    { key: "x", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "x", value: prop' value })
+  pureAttr X value = unsafeAttribute $ This { key: "x", value: prop' value }
+  unpureAttr X eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+    { key: "x", value: prop' value }
 
 instance Attr FeDiffuseLighting_ X String where
-  attr X bothValues  = unsafeAttribute $ Both { key: "x", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "x", value:  prop' value  })
-  pureAttr X value  = unsafeAttribute $ This { key: "x", value:  prop' value  }
-  unpureAttr X eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "x", value:  prop' value  }
+  attr X bothValues = unsafeAttribute $ Both
+    { key: "x", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "x", value: prop' value })
+  pureAttr X value = unsafeAttribute $ This { key: "x", value: prop' value }
+  unpureAttr X eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+    { key: "x", value: prop' value }
 
 instance Attr FeDisplacementMap_ X String where
-  attr X bothValues  = unsafeAttribute $ Both { key: "x", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "x", value:  prop' value  })
-  pureAttr X value  = unsafeAttribute $ This { key: "x", value:  prop' value  }
-  unpureAttr X eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "x", value:  prop' value  }
+  attr X bothValues = unsafeAttribute $ Both
+    { key: "x", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "x", value: prop' value })
+  pureAttr X value = unsafeAttribute $ This { key: "x", value: prop' value }
+  unpureAttr X eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+    { key: "x", value: prop' value }
 
 instance Attr FeDropShadow_ X String where
-  attr X bothValues  = unsafeAttribute $ Both { key: "x", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "x", value:  prop' value  })
-  pureAttr X value  = unsafeAttribute $ This { key: "x", value:  prop' value  }
-  unpureAttr X eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "x", value:  prop' value  }
+  attr X bothValues = unsafeAttribute $ Both
+    { key: "x", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "x", value: prop' value })
+  pureAttr X value = unsafeAttribute $ This { key: "x", value: prop' value }
+  unpureAttr X eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+    { key: "x", value: prop' value }
 
 instance Attr FeFlood_ X String where
-  attr X bothValues  = unsafeAttribute $ Both { key: "x", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "x", value:  prop' value  })
-  pureAttr X value  = unsafeAttribute $ This { key: "x", value:  prop' value  }
-  unpureAttr X eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "x", value:  prop' value  }
+  attr X bothValues = unsafeAttribute $ Both
+    { key: "x", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "x", value: prop' value })
+  pureAttr X value = unsafeAttribute $ This { key: "x", value: prop' value }
+  unpureAttr X eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+    { key: "x", value: prop' value }
 
 instance Attr FeGaussianBlur_ X String where
-  attr X bothValues  = unsafeAttribute $ Both { key: "x", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "x", value:  prop' value  })
-  pureAttr X value  = unsafeAttribute $ This { key: "x", value:  prop' value  }
-  unpureAttr X eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "x", value:  prop' value  }
+  attr X bothValues = unsafeAttribute $ Both
+    { key: "x", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "x", value: prop' value })
+  pureAttr X value = unsafeAttribute $ This { key: "x", value: prop' value }
+  unpureAttr X eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+    { key: "x", value: prop' value }
 
 instance Attr FeImage_ X String where
-  attr X bothValues  = unsafeAttribute $ Both { key: "x", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "x", value:  prop' value  })
-  pureAttr X value  = unsafeAttribute $ This { key: "x", value:  prop' value  }
-  unpureAttr X eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "x", value:  prop' value  }
+  attr X bothValues = unsafeAttribute $ Both
+    { key: "x", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "x", value: prop' value })
+  pureAttr X value = unsafeAttribute $ This { key: "x", value: prop' value }
+  unpureAttr X eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+    { key: "x", value: prop' value }
 
 instance Attr FeMerge_ X String where
-  attr X bothValues  = unsafeAttribute $ Both { key: "x", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "x", value:  prop' value  })
-  pureAttr X value  = unsafeAttribute $ This { key: "x", value:  prop' value  }
-  unpureAttr X eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "x", value:  prop' value  }
+  attr X bothValues = unsafeAttribute $ Both
+    { key: "x", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "x", value: prop' value })
+  pureAttr X value = unsafeAttribute $ This { key: "x", value: prop' value }
+  unpureAttr X eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+    { key: "x", value: prop' value }
 
 instance Attr FeMorphology_ X String where
-  attr X bothValues  = unsafeAttribute $ Both { key: "x", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "x", value:  prop' value  })
-  pureAttr X value  = unsafeAttribute $ This { key: "x", value:  prop' value  }
-  unpureAttr X eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "x", value:  prop' value  }
+  attr X bothValues = unsafeAttribute $ Both
+    { key: "x", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "x", value: prop' value })
+  pureAttr X value = unsafeAttribute $ This { key: "x", value: prop' value }
+  unpureAttr X eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+    { key: "x", value: prop' value }
 
 instance Attr FeOffset_ X String where
-  attr X bothValues  = unsafeAttribute $ Both { key: "x", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "x", value:  prop' value  })
-  pureAttr X value  = unsafeAttribute $ This { key: "x", value:  prop' value  }
-  unpureAttr X eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "x", value:  prop' value  }
+  attr X bothValues = unsafeAttribute $ Both
+    { key: "x", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "x", value: prop' value })
+  pureAttr X value = unsafeAttribute $ This { key: "x", value: prop' value }
+  unpureAttr X eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+    { key: "x", value: prop' value }
 
 instance Attr FePointLight_ X String where
-  attr X bothValues  = unsafeAttribute $ Both { key: "x", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "x", value:  prop' value  })
-  pureAttr X value  = unsafeAttribute $ This { key: "x", value:  prop' value  }
-  unpureAttr X eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "x", value:  prop' value  }
+  attr X bothValues = unsafeAttribute $ Both
+    { key: "x", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "x", value: prop' value })
+  pureAttr X value = unsafeAttribute $ This { key: "x", value: prop' value }
+  unpureAttr X eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+    { key: "x", value: prop' value }
 
 instance Attr FeSpecularLighting_ X String where
-  attr X bothValues  = unsafeAttribute $ Both { key: "x", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "x", value:  prop' value  })
-  pureAttr X value  = unsafeAttribute $ This { key: "x", value:  prop' value  }
-  unpureAttr X eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "x", value:  prop' value  }
+  attr X bothValues = unsafeAttribute $ Both
+    { key: "x", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "x", value: prop' value })
+  pureAttr X value = unsafeAttribute $ This { key: "x", value: prop' value }
+  unpureAttr X eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+    { key: "x", value: prop' value }
 
 instance Attr FeSpotLight_ X String where
-  attr X bothValues  = unsafeAttribute $ Both { key: "x", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "x", value:  prop' value  })
-  pureAttr X value  = unsafeAttribute $ This { key: "x", value:  prop' value  }
-  unpureAttr X eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "x", value:  prop' value  }
+  attr X bothValues = unsafeAttribute $ Both
+    { key: "x", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "x", value: prop' value })
+  pureAttr X value = unsafeAttribute $ This { key: "x", value: prop' value }
+  unpureAttr X eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+    { key: "x", value: prop' value }
 
 instance Attr FeTile_ X String where
-  attr X bothValues  = unsafeAttribute $ Both { key: "x", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "x", value:  prop' value  })
-  pureAttr X value  = unsafeAttribute $ This { key: "x", value:  prop' value  }
-  unpureAttr X eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "x", value:  prop' value  }
+  attr X bothValues = unsafeAttribute $ Both
+    { key: "x", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "x", value: prop' value })
+  pureAttr X value = unsafeAttribute $ This { key: "x", value: prop' value }
+  unpureAttr X eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+    { key: "x", value: prop' value }
 
 instance Attr FeTurbulence_ X String where
-  attr X bothValues  = unsafeAttribute $ Both { key: "x", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "x", value:  prop' value  })
-  pureAttr X value  = unsafeAttribute $ This { key: "x", value:  prop' value  }
-  unpureAttr X eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "x", value:  prop' value  }
+  attr X bothValues = unsafeAttribute $ Both
+    { key: "x", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "x", value: prop' value })
+  pureAttr X value = unsafeAttribute $ This { key: "x", value: prop' value }
+  unpureAttr X eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+    { key: "x", value: prop' value }
 
 instance Attr Filter_ X String where
-  attr X bothValues  = unsafeAttribute $ Both { key: "x", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "x", value:  prop' value  })
-  pureAttr X value  = unsafeAttribute $ This { key: "x", value:  prop' value  }
-  unpureAttr X eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "x", value:  prop' value  }
+  attr X bothValues = unsafeAttribute $ Both
+    { key: "x", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "x", value: prop' value })
+  pureAttr X value = unsafeAttribute $ This { key: "x", value: prop' value }
+  unpureAttr X eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+    { key: "x", value: prop' value }
 
 instance Attr ForeignObject_ X String where
-  attr X bothValues  = unsafeAttribute $ Both { key: "x", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "x", value:  prop' value  })
-  pureAttr X value  = unsafeAttribute $ This { key: "x", value:  prop' value  }
-  unpureAttr X eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "x", value:  prop' value  }
+  attr X bothValues = unsafeAttribute $ Both
+    { key: "x", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "x", value: prop' value })
+  pureAttr X value = unsafeAttribute $ This { key: "x", value: prop' value }
+  unpureAttr X eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+    { key: "x", value: prop' value }
 
 instance Attr Image_ X String where
-  attr X bothValues  = unsafeAttribute $ Both { key: "x", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "x", value:  prop' value  })
-  pureAttr X value  = unsafeAttribute $ This { key: "x", value:  prop' value  }
-  unpureAttr X eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "x", value:  prop' value  }
+  attr X bothValues = unsafeAttribute $ Both
+    { key: "x", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "x", value: prop' value })
+  pureAttr X value = unsafeAttribute $ This { key: "x", value: prop' value }
+  unpureAttr X eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+    { key: "x", value: prop' value }
 
 instance Attr Mask_ X String where
-  attr X bothValues  = unsafeAttribute $ Both { key: "x", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "x", value:  prop' value  })
-  pureAttr X value  = unsafeAttribute $ This { key: "x", value:  prop' value  }
-  unpureAttr X eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "x", value:  prop' value  }
+  attr X bothValues = unsafeAttribute $ Both
+    { key: "x", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "x", value: prop' value })
+  pureAttr X value = unsafeAttribute $ This { key: "x", value: prop' value }
+  unpureAttr X eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+    { key: "x", value: prop' value }
 
 instance Attr Pattern_ X String where
-  attr X bothValues  = unsafeAttribute $ Both { key: "x", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "x", value:  prop' value  })
-  pureAttr X value  = unsafeAttribute $ This { key: "x", value:  prop' value  }
-  unpureAttr X eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "x", value:  prop' value  }
+  attr X bothValues = unsafeAttribute $ Both
+    { key: "x", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "x", value: prop' value })
+  pureAttr X value = unsafeAttribute $ This { key: "x", value: prop' value }
+  unpureAttr X eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+    { key: "x", value: prop' value }
 
 instance Attr Rect_ X String where
-  attr X bothValues  = unsafeAttribute $ Both { key: "x", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "x", value:  prop' value  })
-  pureAttr X value  = unsafeAttribute $ This { key: "x", value:  prop' value  }
-  unpureAttr X eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "x", value:  prop' value  }
+  attr X bothValues = unsafeAttribute $ Both
+    { key: "x", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "x", value: prop' value })
+  pureAttr X value = unsafeAttribute $ This { key: "x", value: prop' value }
+  unpureAttr X eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+    { key: "x", value: prop' value }
 
 instance Attr Svg_ X String where
-  attr X bothValues  = unsafeAttribute $ Both { key: "x", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "x", value:  prop' value  })
-  pureAttr X value  = unsafeAttribute $ This { key: "x", value:  prop' value  }
-  unpureAttr X eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "x", value:  prop' value  }
+  attr X bothValues = unsafeAttribute $ Both
+    { key: "x", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "x", value: prop' value })
+  pureAttr X value = unsafeAttribute $ This { key: "x", value: prop' value }
+  unpureAttr X eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+    { key: "x", value: prop' value }
 
 instance Attr Symbol_ X String where
-  attr X bothValues  = unsafeAttribute $ Both { key: "x", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "x", value:  prop' value  })
-  pureAttr X value  = unsafeAttribute $ This { key: "x", value:  prop' value  }
-  unpureAttr X eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "x", value:  prop' value  }
+  attr X bothValues = unsafeAttribute $ Both
+    { key: "x", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "x", value: prop' value })
+  pureAttr X value = unsafeAttribute $ This { key: "x", value: prop' value }
+  unpureAttr X eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+    { key: "x", value: prop' value }
 
 instance Attr Text_ X String where
-  attr X bothValues  = unsafeAttribute $ Both { key: "x", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "x", value:  prop' value  })
-  pureAttr X value  = unsafeAttribute $ This { key: "x", value:  prop' value  }
-  unpureAttr X eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "x", value:  prop' value  }
+  attr X bothValues = unsafeAttribute $ Both
+    { key: "x", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "x", value: prop' value })
+  pureAttr X value = unsafeAttribute $ This { key: "x", value: prop' value }
+  unpureAttr X eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+    { key: "x", value: prop' value }
 
 instance Attr Tspan_ X String where
-  attr X bothValues  = unsafeAttribute $ Both { key: "x", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "x", value:  prop' value  })
-  pureAttr X value  = unsafeAttribute $ This { key: "x", value:  prop' value  }
-  unpureAttr X eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "x", value:  prop' value  }
+  attr X bothValues = unsafeAttribute $ Both
+    { key: "x", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "x", value: prop' value })
+  pureAttr X value = unsafeAttribute $ This { key: "x", value: prop' value }
+  unpureAttr X eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+    { key: "x", value: prop' value }
 
 instance Attr Use_ X String where
-  attr X bothValues  = unsafeAttribute $ Both { key: "x", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "x", value:  prop' value  })
-  pureAttr X value  = unsafeAttribute $ This { key: "x", value:  prop' value  }
-  unpureAttr X eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "x", value:  prop' value  }
+  attr X bothValues = unsafeAttribute $ Both
+    { key: "x", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "x", value: prop' value })
+  pureAttr X value = unsafeAttribute $ This { key: "x", value: prop' value }
+  unpureAttr X eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+    { key: "x", value: prop' value }
 
 instance Attr everything X Unit where
-  attr X bothValues  = unsafeAttribute $ Both { key: "x", value:  unset'  } (snd bothValues <#> \_ -> { key: "x", value:  unset'  })
-  pureAttr X _  = unsafeAttribute $ This { key: "x", value:  unset'  }
-  unpureAttr X eventValue  = unsafeAttribute $ That $ eventValue <#> \_ -> { key: "x", value:  unset'  }
+  attr X bothValues = unsafeAttribute $ Both { key: "x", value: unset' }
+    (snd bothValues <#> \_ -> { key: "x", value: unset' })
+  pureAttr X _ = unsafeAttribute $ This { key: "x", value: unset' }
+  unpureAttr X eventValue = unsafeAttribute $ That $ eventValue <#> \_ ->
+    { key: "x", value: unset' }

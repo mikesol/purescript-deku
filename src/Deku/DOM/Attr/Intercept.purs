@@ -13,26 +13,46 @@ import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 data Intercept = Intercept
 
 instance Attr FeFuncA_ Intercept String where
-  attr Intercept bothValues  = unsafeAttribute $ Both { key: "intercept", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "intercept", value:  prop' value  })
-  pureAttr Intercept value  = unsafeAttribute $ This { key: "intercept", value:  prop' value  }
-  unpureAttr Intercept eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "intercept", value:  prop' value  }
+  attr Intercept bothValues = unsafeAttribute $ Both
+    { key: "intercept", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "intercept", value: prop' value })
+  pureAttr Intercept value = unsafeAttribute $ This
+    { key: "intercept", value: prop' value }
+  unpureAttr Intercept eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "intercept", value: prop' value }
 
 instance Attr FeFuncB_ Intercept String where
-  attr Intercept bothValues  = unsafeAttribute $ Both { key: "intercept", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "intercept", value:  prop' value  })
-  pureAttr Intercept value  = unsafeAttribute $ This { key: "intercept", value:  prop' value  }
-  unpureAttr Intercept eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "intercept", value:  prop' value  }
+  attr Intercept bothValues = unsafeAttribute $ Both
+    { key: "intercept", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "intercept", value: prop' value })
+  pureAttr Intercept value = unsafeAttribute $ This
+    { key: "intercept", value: prop' value }
+  unpureAttr Intercept eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "intercept", value: prop' value }
 
 instance Attr FeFuncG_ Intercept String where
-  attr Intercept bothValues  = unsafeAttribute $ Both { key: "intercept", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "intercept", value:  prop' value  })
-  pureAttr Intercept value  = unsafeAttribute $ This { key: "intercept", value:  prop' value  }
-  unpureAttr Intercept eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "intercept", value:  prop' value  }
+  attr Intercept bothValues = unsafeAttribute $ Both
+    { key: "intercept", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "intercept", value: prop' value })
+  pureAttr Intercept value = unsafeAttribute $ This
+    { key: "intercept", value: prop' value }
+  unpureAttr Intercept eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "intercept", value: prop' value }
 
 instance Attr FeFuncR_ Intercept String where
-  attr Intercept bothValues  = unsafeAttribute $ Both { key: "intercept", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "intercept", value:  prop' value  })
-  pureAttr Intercept value  = unsafeAttribute $ This { key: "intercept", value:  prop' value  }
-  unpureAttr Intercept eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "intercept", value:  prop' value  }
+  attr Intercept bothValues = unsafeAttribute $ Both
+    { key: "intercept", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "intercept", value: prop' value })
+  pureAttr Intercept value = unsafeAttribute $ This
+    { key: "intercept", value: prop' value }
+  unpureAttr Intercept eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "intercept", value: prop' value }
 
 instance Attr everything Intercept Unit where
-  attr Intercept bothValues  = unsafeAttribute $ Both { key: "intercept", value:  unset'  } (snd bothValues <#> \_ -> { key: "intercept", value:  unset'  })
-  pureAttr Intercept _  = unsafeAttribute $ This { key: "intercept", value:  unset'  }
-  unpureAttr Intercept eventValue  = unsafeAttribute $ That $ eventValue <#> \_ -> { key: "intercept", value:  unset'  }
+  attr Intercept bothValues = unsafeAttribute $ Both
+    { key: "intercept", value: unset' }
+    (snd bothValues <#> \_ -> { key: "intercept", value: unset' })
+  pureAttr Intercept _ = unsafeAttribute $ This
+    { key: "intercept", value: unset' }
+  unpureAttr Intercept eventValue = unsafeAttribute $ That $ eventValue <#>
+    \_ -> { key: "intercept", value: unset' }

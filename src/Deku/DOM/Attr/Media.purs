@@ -14,31 +14,53 @@ import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 data Media = Media
 
 instance Attr A_ Media String where
-  attr Media bothValues  = unsafeAttribute $ Both { key: "media", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "media", value:  prop' value  })
-  pureAttr Media value  = unsafeAttribute $ This { key: "media", value:  prop' value  }
-  unpureAttr Media eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "media", value:  prop' value  }
+  attr Media bothValues = unsafeAttribute $ Both
+    { key: "media", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "media", value: prop' value })
+  pureAttr Media value = unsafeAttribute $ This
+    { key: "media", value: prop' value }
+  unpureAttr Media eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "media", value: prop' value }
 
 instance Attr Area_ Media String where
-  attr Media bothValues  = unsafeAttribute $ Both { key: "media", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "media", value:  prop' value  })
-  pureAttr Media value  = unsafeAttribute $ This { key: "media", value:  prop' value  }
-  unpureAttr Media eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "media", value:  prop' value  }
+  attr Media bothValues = unsafeAttribute $ Both
+    { key: "media", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "media", value: prop' value })
+  pureAttr Media value = unsafeAttribute $ This
+    { key: "media", value: prop' value }
+  unpureAttr Media eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "media", value: prop' value }
 
 instance Attr Link_ Media String where
-  attr Media bothValues  = unsafeAttribute $ Both { key: "media", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "media", value:  prop' value  })
-  pureAttr Media value  = unsafeAttribute $ This { key: "media", value:  prop' value  }
-  unpureAttr Media eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "media", value:  prop' value  }
+  attr Media bothValues = unsafeAttribute $ Both
+    { key: "media", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "media", value: prop' value })
+  pureAttr Media value = unsafeAttribute $ This
+    { key: "media", value: prop' value }
+  unpureAttr Media eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "media", value: prop' value }
 
 instance Attr Source_ Media String where
-  attr Media bothValues  = unsafeAttribute $ Both { key: "media", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "media", value:  prop' value  })
-  pureAttr Media value  = unsafeAttribute $ This { key: "media", value:  prop' value  }
-  unpureAttr Media eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "media", value:  prop' value  }
+  attr Media bothValues = unsafeAttribute $ Both
+    { key: "media", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "media", value: prop' value })
+  pureAttr Media value = unsafeAttribute $ This
+    { key: "media", value: prop' value }
+  unpureAttr Media eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "media", value: prop' value }
 
 instance Attr Style_ Media String where
-  attr Media bothValues  = unsafeAttribute $ Both { key: "media", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "media", value:  prop' value  })
-  pureAttr Media value  = unsafeAttribute $ This { key: "media", value:  prop' value  }
-  unpureAttr Media eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "media", value:  prop' value  }
+  attr Media bothValues = unsafeAttribute $ Both
+    { key: "media", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "media", value: prop' value })
+  pureAttr Media value = unsafeAttribute $ This
+    { key: "media", value: prop' value }
+  unpureAttr Media eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "media", value: prop' value }
 
 instance Attr everything Media Unit where
-  attr Media bothValues  = unsafeAttribute $ Both { key: "media", value:  unset'  } (snd bothValues <#> \_ -> { key: "media", value:  unset'  })
-  pureAttr Media _  = unsafeAttribute $ This { key: "media", value:  unset'  }
-  unpureAttr Media eventValue  = unsafeAttribute $ That $ eventValue <#> \_ -> { key: "media", value:  unset'  }
+  attr Media bothValues = unsafeAttribute $ Both { key: "media", value: unset' }
+    (snd bothValues <#> \_ -> { key: "media", value: unset' })
+  pureAttr Media _ = unsafeAttribute $ This { key: "media", value: unset' }
+  unpureAttr Media eventValue = unsafeAttribute $ That $ eventValue <#> \_ ->
+    { key: "media", value: unset' }

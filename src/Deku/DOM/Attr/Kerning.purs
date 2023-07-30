@@ -28,101 +28,180 @@ import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 data Kerning = Kerning
 
 instance Attr FeBlend_ Kerning String where
-  attr Kerning bothValues  = unsafeAttribute $ Both { key: "kerning", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "kerning", value:  prop' value  })
-  pureAttr Kerning value  = unsafeAttribute $ This { key: "kerning", value:  prop' value  }
-  unpureAttr Kerning eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "kerning", value:  prop' value  }
+  attr Kerning bothValues = unsafeAttribute $ Both
+    { key: "kerning", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "kerning", value: prop' value })
+  pureAttr Kerning value = unsafeAttribute $ This
+    { key: "kerning", value: prop' value }
+  unpureAttr Kerning eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "kerning", value: prop' value }
 
 instance Attr FeColorMatrix_ Kerning String where
-  attr Kerning bothValues  = unsafeAttribute $ Both { key: "kerning", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "kerning", value:  prop' value  })
-  pureAttr Kerning value  = unsafeAttribute $ This { key: "kerning", value:  prop' value  }
-  unpureAttr Kerning eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "kerning", value:  prop' value  }
+  attr Kerning bothValues = unsafeAttribute $ Both
+    { key: "kerning", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "kerning", value: prop' value })
+  pureAttr Kerning value = unsafeAttribute $ This
+    { key: "kerning", value: prop' value }
+  unpureAttr Kerning eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "kerning", value: prop' value }
 
 instance Attr FeComponentTransfer_ Kerning String where
-  attr Kerning bothValues  = unsafeAttribute $ Both { key: "kerning", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "kerning", value:  prop' value  })
-  pureAttr Kerning value  = unsafeAttribute $ This { key: "kerning", value:  prop' value  }
-  unpureAttr Kerning eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "kerning", value:  prop' value  }
+  attr Kerning bothValues = unsafeAttribute $ Both
+    { key: "kerning", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "kerning", value: prop' value })
+  pureAttr Kerning value = unsafeAttribute $ This
+    { key: "kerning", value: prop' value }
+  unpureAttr Kerning eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "kerning", value: prop' value }
 
 instance Attr FeComposite_ Kerning String where
-  attr Kerning bothValues  = unsafeAttribute $ Both { key: "kerning", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "kerning", value:  prop' value  })
-  pureAttr Kerning value  = unsafeAttribute $ This { key: "kerning", value:  prop' value  }
-  unpureAttr Kerning eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "kerning", value:  prop' value  }
+  attr Kerning bothValues = unsafeAttribute $ Both
+    { key: "kerning", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "kerning", value: prop' value })
+  pureAttr Kerning value = unsafeAttribute $ This
+    { key: "kerning", value: prop' value }
+  unpureAttr Kerning eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "kerning", value: prop' value }
 
 instance Attr FeConvolveMatrix_ Kerning String where
-  attr Kerning bothValues  = unsafeAttribute $ Both { key: "kerning", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "kerning", value:  prop' value  })
-  pureAttr Kerning value  = unsafeAttribute $ This { key: "kerning", value:  prop' value  }
-  unpureAttr Kerning eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "kerning", value:  prop' value  }
+  attr Kerning bothValues = unsafeAttribute $ Both
+    { key: "kerning", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "kerning", value: prop' value })
+  pureAttr Kerning value = unsafeAttribute $ This
+    { key: "kerning", value: prop' value }
+  unpureAttr Kerning eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "kerning", value: prop' value }
 
 instance Attr FeDiffuseLighting_ Kerning String where
-  attr Kerning bothValues  = unsafeAttribute $ Both { key: "kerning", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "kerning", value:  prop' value  })
-  pureAttr Kerning value  = unsafeAttribute $ This { key: "kerning", value:  prop' value  }
-  unpureAttr Kerning eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "kerning", value:  prop' value  }
+  attr Kerning bothValues = unsafeAttribute $ Both
+    { key: "kerning", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "kerning", value: prop' value })
+  pureAttr Kerning value = unsafeAttribute $ This
+    { key: "kerning", value: prop' value }
+  unpureAttr Kerning eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "kerning", value: prop' value }
 
 instance Attr FeDisplacementMap_ Kerning String where
-  attr Kerning bothValues  = unsafeAttribute $ Both { key: "kerning", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "kerning", value:  prop' value  })
-  pureAttr Kerning value  = unsafeAttribute $ This { key: "kerning", value:  prop' value  }
-  unpureAttr Kerning eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "kerning", value:  prop' value  }
+  attr Kerning bothValues = unsafeAttribute $ Both
+    { key: "kerning", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "kerning", value: prop' value })
+  pureAttr Kerning value = unsafeAttribute $ This
+    { key: "kerning", value: prop' value }
+  unpureAttr Kerning eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "kerning", value: prop' value }
 
 instance Attr FeFlood_ Kerning String where
-  attr Kerning bothValues  = unsafeAttribute $ Both { key: "kerning", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "kerning", value:  prop' value  })
-  pureAttr Kerning value  = unsafeAttribute $ This { key: "kerning", value:  prop' value  }
-  unpureAttr Kerning eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "kerning", value:  prop' value  }
+  attr Kerning bothValues = unsafeAttribute $ Both
+    { key: "kerning", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "kerning", value: prop' value })
+  pureAttr Kerning value = unsafeAttribute $ This
+    { key: "kerning", value: prop' value }
+  unpureAttr Kerning eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "kerning", value: prop' value }
 
 instance Attr FeGaussianBlur_ Kerning String where
-  attr Kerning bothValues  = unsafeAttribute $ Both { key: "kerning", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "kerning", value:  prop' value  })
-  pureAttr Kerning value  = unsafeAttribute $ This { key: "kerning", value:  prop' value  }
-  unpureAttr Kerning eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "kerning", value:  prop' value  }
+  attr Kerning bothValues = unsafeAttribute $ Both
+    { key: "kerning", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "kerning", value: prop' value })
+  pureAttr Kerning value = unsafeAttribute $ This
+    { key: "kerning", value: prop' value }
+  unpureAttr Kerning eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "kerning", value: prop' value }
 
 instance Attr FeImage_ Kerning String where
-  attr Kerning bothValues  = unsafeAttribute $ Both { key: "kerning", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "kerning", value:  prop' value  })
-  pureAttr Kerning value  = unsafeAttribute $ This { key: "kerning", value:  prop' value  }
-  unpureAttr Kerning eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "kerning", value:  prop' value  }
+  attr Kerning bothValues = unsafeAttribute $ Both
+    { key: "kerning", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "kerning", value: prop' value })
+  pureAttr Kerning value = unsafeAttribute $ This
+    { key: "kerning", value: prop' value }
+  unpureAttr Kerning eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "kerning", value: prop' value }
 
 instance Attr FeMerge_ Kerning String where
-  attr Kerning bothValues  = unsafeAttribute $ Both { key: "kerning", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "kerning", value:  prop' value  })
-  pureAttr Kerning value  = unsafeAttribute $ This { key: "kerning", value:  prop' value  }
-  unpureAttr Kerning eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "kerning", value:  prop' value  }
+  attr Kerning bothValues = unsafeAttribute $ Both
+    { key: "kerning", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "kerning", value: prop' value })
+  pureAttr Kerning value = unsafeAttribute $ This
+    { key: "kerning", value: prop' value }
+  unpureAttr Kerning eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "kerning", value: prop' value }
 
 instance Attr FeMorphology_ Kerning String where
-  attr Kerning bothValues  = unsafeAttribute $ Both { key: "kerning", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "kerning", value:  prop' value  })
-  pureAttr Kerning value  = unsafeAttribute $ This { key: "kerning", value:  prop' value  }
-  unpureAttr Kerning eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "kerning", value:  prop' value  }
+  attr Kerning bothValues = unsafeAttribute $ Both
+    { key: "kerning", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "kerning", value: prop' value })
+  pureAttr Kerning value = unsafeAttribute $ This
+    { key: "kerning", value: prop' value }
+  unpureAttr Kerning eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "kerning", value: prop' value }
 
 instance Attr FeOffset_ Kerning String where
-  attr Kerning bothValues  = unsafeAttribute $ Both { key: "kerning", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "kerning", value:  prop' value  })
-  pureAttr Kerning value  = unsafeAttribute $ This { key: "kerning", value:  prop' value  }
-  unpureAttr Kerning eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "kerning", value:  prop' value  }
+  attr Kerning bothValues = unsafeAttribute $ Both
+    { key: "kerning", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "kerning", value: prop' value })
+  pureAttr Kerning value = unsafeAttribute $ This
+    { key: "kerning", value: prop' value }
+  unpureAttr Kerning eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "kerning", value: prop' value }
 
 instance Attr FeSpecularLighting_ Kerning String where
-  attr Kerning bothValues  = unsafeAttribute $ Both { key: "kerning", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "kerning", value:  prop' value  })
-  pureAttr Kerning value  = unsafeAttribute $ This { key: "kerning", value:  prop' value  }
-  unpureAttr Kerning eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "kerning", value:  prop' value  }
+  attr Kerning bothValues = unsafeAttribute $ Both
+    { key: "kerning", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "kerning", value: prop' value })
+  pureAttr Kerning value = unsafeAttribute $ This
+    { key: "kerning", value: prop' value }
+  unpureAttr Kerning eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "kerning", value: prop' value }
 
 instance Attr FeTile_ Kerning String where
-  attr Kerning bothValues  = unsafeAttribute $ Both { key: "kerning", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "kerning", value:  prop' value  })
-  pureAttr Kerning value  = unsafeAttribute $ This { key: "kerning", value:  prop' value  }
-  unpureAttr Kerning eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "kerning", value:  prop' value  }
+  attr Kerning bothValues = unsafeAttribute $ Both
+    { key: "kerning", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "kerning", value: prop' value })
+  pureAttr Kerning value = unsafeAttribute $ This
+    { key: "kerning", value: prop' value }
+  unpureAttr Kerning eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "kerning", value: prop' value }
 
 instance Attr FeTurbulence_ Kerning String where
-  attr Kerning bothValues  = unsafeAttribute $ Both { key: "kerning", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "kerning", value:  prop' value  })
-  pureAttr Kerning value  = unsafeAttribute $ This { key: "kerning", value:  prop' value  }
-  unpureAttr Kerning eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "kerning", value:  prop' value  }
+  attr Kerning bothValues = unsafeAttribute $ Both
+    { key: "kerning", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "kerning", value: prop' value })
+  pureAttr Kerning value = unsafeAttribute $ This
+    { key: "kerning", value: prop' value }
+  unpureAttr Kerning eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "kerning", value: prop' value }
 
 instance Attr Filter_ Kerning String where
-  attr Kerning bothValues  = unsafeAttribute $ Both { key: "kerning", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "kerning", value:  prop' value  })
-  pureAttr Kerning value  = unsafeAttribute $ This { key: "kerning", value:  prop' value  }
-  unpureAttr Kerning eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "kerning", value:  prop' value  }
+  attr Kerning bothValues = unsafeAttribute $ Both
+    { key: "kerning", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "kerning", value: prop' value })
+  pureAttr Kerning value = unsafeAttribute $ This
+    { key: "kerning", value: prop' value }
+  unpureAttr Kerning eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "kerning", value: prop' value }
 
 instance Attr Image_ Kerning String where
-  attr Kerning bothValues  = unsafeAttribute $ Both { key: "kerning", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "kerning", value:  prop' value  })
-  pureAttr Kerning value  = unsafeAttribute $ This { key: "kerning", value:  prop' value  }
-  unpureAttr Kerning eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "kerning", value:  prop' value  }
+  attr Kerning bothValues = unsafeAttribute $ Both
+    { key: "kerning", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "kerning", value: prop' value })
+  pureAttr Kerning value = unsafeAttribute $ This
+    { key: "kerning", value: prop' value }
+  unpureAttr Kerning eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "kerning", value: prop' value }
 
 instance Attr Switch_ Kerning String where
-  attr Kerning bothValues  = unsafeAttribute $ Both { key: "kerning", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "kerning", value:  prop' value  })
-  pureAttr Kerning value  = unsafeAttribute $ This { key: "kerning", value:  prop' value  }
-  unpureAttr Kerning eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "kerning", value:  prop' value  }
+  attr Kerning bothValues = unsafeAttribute $ Both
+    { key: "kerning", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "kerning", value: prop' value })
+  pureAttr Kerning value = unsafeAttribute $ This
+    { key: "kerning", value: prop' value }
+  unpureAttr Kerning eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "kerning", value: prop' value }
 
 instance Attr everything Kerning Unit where
-  attr Kerning bothValues  = unsafeAttribute $ Both { key: "kerning", value:  unset'  } (snd bothValues <#> \_ -> { key: "kerning", value:  unset'  })
-  pureAttr Kerning _  = unsafeAttribute $ This { key: "kerning", value:  unset'  }
-  unpureAttr Kerning eventValue  = unsafeAttribute $ That $ eventValue <#> \_ -> { key: "kerning", value:  unset'  }
+  attr Kerning bothValues = unsafeAttribute $ Both
+    { key: "kerning", value: unset' }
+    (snd bothValues <#> \_ -> { key: "kerning", value: unset' })
+  pureAttr Kerning _ = unsafeAttribute $ This { key: "kerning", value: unset' }
+  unpureAttr Kerning eventValue = unsafeAttribute $ That $ eventValue <#> \_ ->
+    { key: "kerning", value: unset' }

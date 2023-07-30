@@ -13,26 +13,40 @@ import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 data To = To
 
 instance Attr Animate_ To String where
-  attr To bothValues  = unsafeAttribute $ Both { key: "to", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "to", value:  prop' value  })
-  pureAttr To value  = unsafeAttribute $ This { key: "to", value:  prop' value  }
-  unpureAttr To eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "to", value:  prop' value  }
+  attr To bothValues = unsafeAttribute $ Both
+    { key: "to", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "to", value: prop' value })
+  pureAttr To value = unsafeAttribute $ This { key: "to", value: prop' value }
+  unpureAttr To eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+    { key: "to", value: prop' value }
 
 instance Attr AnimateMotion_ To String where
-  attr To bothValues  = unsafeAttribute $ Both { key: "to", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "to", value:  prop' value  })
-  pureAttr To value  = unsafeAttribute $ This { key: "to", value:  prop' value  }
-  unpureAttr To eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "to", value:  prop' value  }
+  attr To bothValues = unsafeAttribute $ Both
+    { key: "to", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "to", value: prop' value })
+  pureAttr To value = unsafeAttribute $ This { key: "to", value: prop' value }
+  unpureAttr To eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+    { key: "to", value: prop' value }
 
 instance Attr AnimateTransform_ To String where
-  attr To bothValues  = unsafeAttribute $ Both { key: "to", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "to", value:  prop' value  })
-  pureAttr To value  = unsafeAttribute $ This { key: "to", value:  prop' value  }
-  unpureAttr To eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "to", value:  prop' value  }
+  attr To bothValues = unsafeAttribute $ Both
+    { key: "to", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "to", value: prop' value })
+  pureAttr To value = unsafeAttribute $ This { key: "to", value: prop' value }
+  unpureAttr To eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+    { key: "to", value: prop' value }
 
 instance Attr Set_ To String where
-  attr To bothValues  = unsafeAttribute $ Both { key: "to", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "to", value:  prop' value  })
-  pureAttr To value  = unsafeAttribute $ This { key: "to", value:  prop' value  }
-  unpureAttr To eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "to", value:  prop' value  }
+  attr To bothValues = unsafeAttribute $ Both
+    { key: "to", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "to", value: prop' value })
+  pureAttr To value = unsafeAttribute $ This { key: "to", value: prop' value }
+  unpureAttr To eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+    { key: "to", value: prop' value }
 
 instance Attr everything To Unit where
-  attr To bothValues  = unsafeAttribute $ Both { key: "to", value:  unset'  } (snd bothValues <#> \_ -> { key: "to", value:  unset'  })
-  pureAttr To _  = unsafeAttribute $ This { key: "to", value:  unset'  }
-  unpureAttr To eventValue  = unsafeAttribute $ That $ eventValue <#> \_ -> { key: "to", value:  unset'  }
+  attr To bothValues = unsafeAttribute $ Both { key: "to", value: unset' }
+    (snd bothValues <#> \_ -> { key: "to", value: unset' })
+  pureAttr To _ = unsafeAttribute $ This { key: "to", value: unset' }
+  unpureAttr To eventValue = unsafeAttribute $ That $ eventValue <#> \_ ->
+    { key: "to", value: unset' }

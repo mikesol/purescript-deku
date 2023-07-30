@@ -10,19 +10,38 @@ import FRP.Event (Event)
 data OnPointerlockerror = OnPointerlockerror
 
 instance Attr anything OnPointerlockerror Cb where
-  attr OnPointerlockerror bothValues  = unsafeAttribute $ Both { key: "pointerlockerror", value:  cb' (fst bothValues)  } (snd bothValues <#> \value -> { key: "pointerlockerror", value:  cb' value  })
-  pureAttr OnPointerlockerror value  = unsafeAttribute $ This { key: "pointerlockerror", value:  cb' value  }
-  unpureAttr OnPointerlockerror eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "pointerlockerror", value:  cb' value  }
+  attr OnPointerlockerror bothValues = unsafeAttribute $ Both
+    { key: "pointerlockerror", value: cb' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "pointerlockerror", value: cb' value })
+  pureAttr OnPointerlockerror value = unsafeAttribute $ This
+    { key: "pointerlockerror", value: cb' value }
+  unpureAttr OnPointerlockerror eventValue = unsafeAttribute $ That $ eventValue
+    <#> \value -> { key: "pointerlockerror", value: cb' value }
 
 instance Attr anything OnPointerlockerror (Effect Unit) where
-  attr OnPointerlockerror bothValues  = unsafeAttribute $ Both { key: "pointerlockerror", value:  cb' (Cb (const ((fst bothValues) $> true)))  } (snd bothValues <#> \value -> { key: "pointerlockerror", value:  cb' (Cb (const (value $> true)))  })
-  pureAttr OnPointerlockerror value  = unsafeAttribute $ This { key: "pointerlockerror", value:  cb' (Cb (const (value $> true)))  }
-  unpureAttr OnPointerlockerror eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "pointerlockerror", value:  cb' (Cb (const (value $> true)))  }
+  attr OnPointerlockerror bothValues = unsafeAttribute $ Both
+    { key: "pointerlockerror"
+    , value: cb' (Cb (const ((fst bothValues) $> true)))
+    }
+    ( snd bothValues <#> \value ->
+        { key: "pointerlockerror", value: cb' (Cb (const (value $> true))) }
+    )
+  pureAttr OnPointerlockerror value = unsafeAttribute $ This
+    { key: "pointerlockerror", value: cb' (Cb (const (value $> true))) }
+  unpureAttr OnPointerlockerror eventValue = unsafeAttribute $ That $ eventValue
+    <#> \value ->
+      { key: "pointerlockerror", value: cb' (Cb (const (value $> true))) }
 
 instance Attr anything OnPointerlockerror (Effect Boolean) where
-  attr OnPointerlockerror bothValues  = unsafeAttribute $ Both { key: "pointerlockerror", value:  cb' (Cb (const (fst bothValues)))  } (snd bothValues <#> \value -> { key: "pointerlockerror", value:  cb' (Cb (const value))  })
-  pureAttr OnPointerlockerror value  = unsafeAttribute $ This { key: "pointerlockerror", value:  cb' (Cb (const value))  }
-  unpureAttr OnPointerlockerror eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "pointerlockerror", value:  cb' (Cb (const value))  }
+  attr OnPointerlockerror bothValues = unsafeAttribute $ Both
+    { key: "pointerlockerror", value: cb' (Cb (const (fst bothValues))) }
+    ( snd bothValues <#> \value ->
+        { key: "pointerlockerror", value: cb' (Cb (const value)) }
+    )
+  pureAttr OnPointerlockerror value = unsafeAttribute $ This
+    { key: "pointerlockerror", value: cb' (Cb (const value)) }
+  unpureAttr OnPointerlockerror eventValue = unsafeAttribute $ That $ eventValue
+    <#> \value -> { key: "pointerlockerror", value: cb' (Cb (const value)) }
 
 type OnPointerlockerrorEffect =
   forall element
@@ -30,6 +49,10 @@ type OnPointerlockerrorEffect =
   => Event (Attribute element)
 
 instance Attr everything OnPointerlockerror Unit where
-  attr OnPointerlockerror bothValues  = unsafeAttribute $ Both { key: "pointerlockerror", value:  unset'  } (snd bothValues <#> \_ -> { key: "pointerlockerror", value:  unset'  })
-  pureAttr OnPointerlockerror _  = unsafeAttribute $ This { key: "pointerlockerror", value:  unset'  }
-  unpureAttr OnPointerlockerror eventValue  = unsafeAttribute $ That $ eventValue <#> \_ -> { key: "pointerlockerror", value:  unset'  }
+  attr OnPointerlockerror bothValues = unsafeAttribute $ Both
+    { key: "pointerlockerror", value: unset' }
+    (snd bothValues <#> \_ -> { key: "pointerlockerror", value: unset' })
+  pureAttr OnPointerlockerror _ = unsafeAttribute $ This
+    { key: "pointerlockerror", value: unset' }
+  unpureAttr OnPointerlockerror eventValue = unsafeAttribute $ That $ eventValue
+    <#> \_ -> { key: "pointerlockerror", value: unset' }

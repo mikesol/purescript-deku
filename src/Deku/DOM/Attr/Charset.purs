@@ -11,16 +11,27 @@ import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 data Charset = Charset
 
 instance Attr Meta_ Charset String where
-  attr Charset bothValues  = unsafeAttribute $ Both { key: "charset", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "charset", value:  prop' value  })
-  pureAttr Charset value  = unsafeAttribute $ This { key: "charset", value:  prop' value  }
-  unpureAttr Charset eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "charset", value:  prop' value  }
+  attr Charset bothValues = unsafeAttribute $ Both
+    { key: "charset", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "charset", value: prop' value })
+  pureAttr Charset value = unsafeAttribute $ This
+    { key: "charset", value: prop' value }
+  unpureAttr Charset eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "charset", value: prop' value }
 
 instance Attr Script_ Charset String where
-  attr Charset bothValues  = unsafeAttribute $ Both { key: "charset", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "charset", value:  prop' value  })
-  pureAttr Charset value  = unsafeAttribute $ This { key: "charset", value:  prop' value  }
-  unpureAttr Charset eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "charset", value:  prop' value  }
+  attr Charset bothValues = unsafeAttribute $ Both
+    { key: "charset", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "charset", value: prop' value })
+  pureAttr Charset value = unsafeAttribute $ This
+    { key: "charset", value: prop' value }
+  unpureAttr Charset eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "charset", value: prop' value }
 
 instance Attr everything Charset Unit where
-  attr Charset bothValues  = unsafeAttribute $ Both { key: "charset", value:  unset'  } (snd bothValues <#> \_ -> { key: "charset", value:  unset'  })
-  pureAttr Charset _  = unsafeAttribute $ This { key: "charset", value:  unset'  }
-  unpureAttr Charset eventValue  = unsafeAttribute $ That $ eventValue <#> \_ -> { key: "charset", value:  unset'  }
+  attr Charset bothValues = unsafeAttribute $ Both
+    { key: "charset", value: unset' }
+    (snd bothValues <#> \_ -> { key: "charset", value: unset' })
+  pureAttr Charset _ = unsafeAttribute $ This { key: "charset", value: unset' }
+  unpureAttr Charset eventValue = unsafeAttribute $ That $ eventValue <#> \_ ->
+    { key: "charset", value: unset' }

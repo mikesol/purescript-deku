@@ -12,21 +12,37 @@ import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 data Required = Required
 
 instance Attr Input_ Required String where
-  attr Required bothValues  = unsafeAttribute $ Both { key: "required", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "required", value:  prop' value  })
-  pureAttr Required value  = unsafeAttribute $ This { key: "required", value:  prop' value  }
-  unpureAttr Required eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "required", value:  prop' value  }
+  attr Required bothValues = unsafeAttribute $ Both
+    { key: "required", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "required", value: prop' value })
+  pureAttr Required value = unsafeAttribute $ This
+    { key: "required", value: prop' value }
+  unpureAttr Required eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "required", value: prop' value }
 
 instance Attr Select_ Required String where
-  attr Required bothValues  = unsafeAttribute $ Both { key: "required", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "required", value:  prop' value  })
-  pureAttr Required value  = unsafeAttribute $ This { key: "required", value:  prop' value  }
-  unpureAttr Required eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "required", value:  prop' value  }
+  attr Required bothValues = unsafeAttribute $ Both
+    { key: "required", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "required", value: prop' value })
+  pureAttr Required value = unsafeAttribute $ This
+    { key: "required", value: prop' value }
+  unpureAttr Required eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "required", value: prop' value }
 
 instance Attr Textarea_ Required String where
-  attr Required bothValues  = unsafeAttribute $ Both { key: "required", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "required", value:  prop' value  })
-  pureAttr Required value  = unsafeAttribute $ This { key: "required", value:  prop' value  }
-  unpureAttr Required eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "required", value:  prop' value  }
+  attr Required bothValues = unsafeAttribute $ Both
+    { key: "required", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "required", value: prop' value })
+  pureAttr Required value = unsafeAttribute $ This
+    { key: "required", value: prop' value }
+  unpureAttr Required eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "required", value: prop' value }
 
 instance Attr everything Required Unit where
-  attr Required bothValues  = unsafeAttribute $ Both { key: "required", value:  unset'  } (snd bothValues <#> \_ -> { key: "required", value:  unset'  })
-  pureAttr Required _  = unsafeAttribute $ This { key: "required", value:  unset'  }
-  unpureAttr Required eventValue  = unsafeAttribute $ That $ eventValue <#> \_ -> { key: "required", value:  unset'  }
+  attr Required bothValues = unsafeAttribute $ Both
+    { key: "required", value: unset' }
+    (snd bothValues <#> \_ -> { key: "required", value: unset' })
+  pureAttr Required _ = unsafeAttribute $ This
+    { key: "required", value: unset' }
+  unpureAttr Required eventValue = unsafeAttribute $ That $ eventValue <#> \_ ->
+    { key: "required", value: unset' }

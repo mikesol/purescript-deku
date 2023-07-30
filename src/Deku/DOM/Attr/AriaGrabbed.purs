@@ -26,91 +26,163 @@ import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 data AriaGrabbed = AriaGrabbed
 
 instance Attr Circle_ AriaGrabbed String where
-  attr AriaGrabbed bothValues  = unsafeAttribute $ Both { key: "aria-grabbed", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "aria-grabbed", value:  prop' value  })
-  pureAttr AriaGrabbed value  = unsafeAttribute $ This { key: "aria-grabbed", value:  prop' value  }
-  unpureAttr AriaGrabbed eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "aria-grabbed", value:  prop' value  }
+  attr AriaGrabbed bothValues = unsafeAttribute $ Both
+    { key: "aria-grabbed", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "aria-grabbed", value: prop' value })
+  pureAttr AriaGrabbed value = unsafeAttribute $ This
+    { key: "aria-grabbed", value: prop' value }
+  unpureAttr AriaGrabbed eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "aria-grabbed", value: prop' value }
 
 instance Attr Ellipse_ AriaGrabbed String where
-  attr AriaGrabbed bothValues  = unsafeAttribute $ Both { key: "aria-grabbed", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "aria-grabbed", value:  prop' value  })
-  pureAttr AriaGrabbed value  = unsafeAttribute $ This { key: "aria-grabbed", value:  prop' value  }
-  unpureAttr AriaGrabbed eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "aria-grabbed", value:  prop' value  }
+  attr AriaGrabbed bothValues = unsafeAttribute $ Both
+    { key: "aria-grabbed", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "aria-grabbed", value: prop' value })
+  pureAttr AriaGrabbed value = unsafeAttribute $ This
+    { key: "aria-grabbed", value: prop' value }
+  unpureAttr AriaGrabbed eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "aria-grabbed", value: prop' value }
 
 instance Attr ForeignObject_ AriaGrabbed String where
-  attr AriaGrabbed bothValues  = unsafeAttribute $ Both { key: "aria-grabbed", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "aria-grabbed", value:  prop' value  })
-  pureAttr AriaGrabbed value  = unsafeAttribute $ This { key: "aria-grabbed", value:  prop' value  }
-  unpureAttr AriaGrabbed eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "aria-grabbed", value:  prop' value  }
+  attr AriaGrabbed bothValues = unsafeAttribute $ Both
+    { key: "aria-grabbed", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "aria-grabbed", value: prop' value })
+  pureAttr AriaGrabbed value = unsafeAttribute $ This
+    { key: "aria-grabbed", value: prop' value }
+  unpureAttr AriaGrabbed eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "aria-grabbed", value: prop' value }
 
 instance Attr G_ AriaGrabbed String where
-  attr AriaGrabbed bothValues  = unsafeAttribute $ Both { key: "aria-grabbed", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "aria-grabbed", value:  prop' value  })
-  pureAttr AriaGrabbed value  = unsafeAttribute $ This { key: "aria-grabbed", value:  prop' value  }
-  unpureAttr AriaGrabbed eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "aria-grabbed", value:  prop' value  }
+  attr AriaGrabbed bothValues = unsafeAttribute $ Both
+    { key: "aria-grabbed", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "aria-grabbed", value: prop' value })
+  pureAttr AriaGrabbed value = unsafeAttribute $ This
+    { key: "aria-grabbed", value: prop' value }
+  unpureAttr AriaGrabbed eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "aria-grabbed", value: prop' value }
 
 instance Attr Line_ AriaGrabbed String where
-  attr AriaGrabbed bothValues  = unsafeAttribute $ Both { key: "aria-grabbed", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "aria-grabbed", value:  prop' value  })
-  pureAttr AriaGrabbed value  = unsafeAttribute $ This { key: "aria-grabbed", value:  prop' value  }
-  unpureAttr AriaGrabbed eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "aria-grabbed", value:  prop' value  }
+  attr AriaGrabbed bothValues = unsafeAttribute $ Both
+    { key: "aria-grabbed", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "aria-grabbed", value: prop' value })
+  pureAttr AriaGrabbed value = unsafeAttribute $ This
+    { key: "aria-grabbed", value: prop' value }
+  unpureAttr AriaGrabbed eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "aria-grabbed", value: prop' value }
 
 instance Attr Marker_ AriaGrabbed String where
-  attr AriaGrabbed bothValues  = unsafeAttribute $ Both { key: "aria-grabbed", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "aria-grabbed", value:  prop' value  })
-  pureAttr AriaGrabbed value  = unsafeAttribute $ This { key: "aria-grabbed", value:  prop' value  }
-  unpureAttr AriaGrabbed eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "aria-grabbed", value:  prop' value  }
+  attr AriaGrabbed bothValues = unsafeAttribute $ Both
+    { key: "aria-grabbed", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "aria-grabbed", value: prop' value })
+  pureAttr AriaGrabbed value = unsafeAttribute $ This
+    { key: "aria-grabbed", value: prop' value }
+  unpureAttr AriaGrabbed eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "aria-grabbed", value: prop' value }
 
 instance Attr Path_ AriaGrabbed String where
-  attr AriaGrabbed bothValues  = unsafeAttribute $ Both { key: "aria-grabbed", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "aria-grabbed", value:  prop' value  })
-  pureAttr AriaGrabbed value  = unsafeAttribute $ This { key: "aria-grabbed", value:  prop' value  }
-  unpureAttr AriaGrabbed eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "aria-grabbed", value:  prop' value  }
+  attr AriaGrabbed bothValues = unsafeAttribute $ Both
+    { key: "aria-grabbed", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "aria-grabbed", value: prop' value })
+  pureAttr AriaGrabbed value = unsafeAttribute $ This
+    { key: "aria-grabbed", value: prop' value }
+  unpureAttr AriaGrabbed eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "aria-grabbed", value: prop' value }
 
 instance Attr Polygon_ AriaGrabbed String where
-  attr AriaGrabbed bothValues  = unsafeAttribute $ Both { key: "aria-grabbed", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "aria-grabbed", value:  prop' value  })
-  pureAttr AriaGrabbed value  = unsafeAttribute $ This { key: "aria-grabbed", value:  prop' value  }
-  unpureAttr AriaGrabbed eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "aria-grabbed", value:  prop' value  }
+  attr AriaGrabbed bothValues = unsafeAttribute $ Both
+    { key: "aria-grabbed", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "aria-grabbed", value: prop' value })
+  pureAttr AriaGrabbed value = unsafeAttribute $ This
+    { key: "aria-grabbed", value: prop' value }
+  unpureAttr AriaGrabbed eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "aria-grabbed", value: prop' value }
 
 instance Attr Polyline_ AriaGrabbed String where
-  attr AriaGrabbed bothValues  = unsafeAttribute $ Both { key: "aria-grabbed", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "aria-grabbed", value:  prop' value  })
-  pureAttr AriaGrabbed value  = unsafeAttribute $ This { key: "aria-grabbed", value:  prop' value  }
-  unpureAttr AriaGrabbed eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "aria-grabbed", value:  prop' value  }
+  attr AriaGrabbed bothValues = unsafeAttribute $ Both
+    { key: "aria-grabbed", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "aria-grabbed", value: prop' value })
+  pureAttr AriaGrabbed value = unsafeAttribute $ This
+    { key: "aria-grabbed", value: prop' value }
+  unpureAttr AriaGrabbed eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "aria-grabbed", value: prop' value }
 
 instance Attr Rect_ AriaGrabbed String where
-  attr AriaGrabbed bothValues  = unsafeAttribute $ Both { key: "aria-grabbed", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "aria-grabbed", value:  prop' value  })
-  pureAttr AriaGrabbed value  = unsafeAttribute $ This { key: "aria-grabbed", value:  prop' value  }
-  unpureAttr AriaGrabbed eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "aria-grabbed", value:  prop' value  }
+  attr AriaGrabbed bothValues = unsafeAttribute $ Both
+    { key: "aria-grabbed", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "aria-grabbed", value: prop' value })
+  pureAttr AriaGrabbed value = unsafeAttribute $ This
+    { key: "aria-grabbed", value: prop' value }
+  unpureAttr AriaGrabbed eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "aria-grabbed", value: prop' value }
 
 instance Attr Svg_ AriaGrabbed String where
-  attr AriaGrabbed bothValues  = unsafeAttribute $ Both { key: "aria-grabbed", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "aria-grabbed", value:  prop' value  })
-  pureAttr AriaGrabbed value  = unsafeAttribute $ This { key: "aria-grabbed", value:  prop' value  }
-  unpureAttr AriaGrabbed eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "aria-grabbed", value:  prop' value  }
+  attr AriaGrabbed bothValues = unsafeAttribute $ Both
+    { key: "aria-grabbed", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "aria-grabbed", value: prop' value })
+  pureAttr AriaGrabbed value = unsafeAttribute $ This
+    { key: "aria-grabbed", value: prop' value }
+  unpureAttr AriaGrabbed eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "aria-grabbed", value: prop' value }
 
 instance Attr Symbol_ AriaGrabbed String where
-  attr AriaGrabbed bothValues  = unsafeAttribute $ Both { key: "aria-grabbed", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "aria-grabbed", value:  prop' value  })
-  pureAttr AriaGrabbed value  = unsafeAttribute $ This { key: "aria-grabbed", value:  prop' value  }
-  unpureAttr AriaGrabbed eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "aria-grabbed", value:  prop' value  }
+  attr AriaGrabbed bothValues = unsafeAttribute $ Both
+    { key: "aria-grabbed", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "aria-grabbed", value: prop' value })
+  pureAttr AriaGrabbed value = unsafeAttribute $ This
+    { key: "aria-grabbed", value: prop' value }
+  unpureAttr AriaGrabbed eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "aria-grabbed", value: prop' value }
 
 instance Attr Text_ AriaGrabbed String where
-  attr AriaGrabbed bothValues  = unsafeAttribute $ Both { key: "aria-grabbed", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "aria-grabbed", value:  prop' value  })
-  pureAttr AriaGrabbed value  = unsafeAttribute $ This { key: "aria-grabbed", value:  prop' value  }
-  unpureAttr AriaGrabbed eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "aria-grabbed", value:  prop' value  }
+  attr AriaGrabbed bothValues = unsafeAttribute $ Both
+    { key: "aria-grabbed", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "aria-grabbed", value: prop' value })
+  pureAttr AriaGrabbed value = unsafeAttribute $ This
+    { key: "aria-grabbed", value: prop' value }
+  unpureAttr AriaGrabbed eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "aria-grabbed", value: prop' value }
 
 instance Attr TextPath_ AriaGrabbed String where
-  attr AriaGrabbed bothValues  = unsafeAttribute $ Both { key: "aria-grabbed", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "aria-grabbed", value:  prop' value  })
-  pureAttr AriaGrabbed value  = unsafeAttribute $ This { key: "aria-grabbed", value:  prop' value  }
-  unpureAttr AriaGrabbed eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "aria-grabbed", value:  prop' value  }
+  attr AriaGrabbed bothValues = unsafeAttribute $ Both
+    { key: "aria-grabbed", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "aria-grabbed", value: prop' value })
+  pureAttr AriaGrabbed value = unsafeAttribute $ This
+    { key: "aria-grabbed", value: prop' value }
+  unpureAttr AriaGrabbed eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "aria-grabbed", value: prop' value }
 
 instance Attr Tspan_ AriaGrabbed String where
-  attr AriaGrabbed bothValues  = unsafeAttribute $ Both { key: "aria-grabbed", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "aria-grabbed", value:  prop' value  })
-  pureAttr AriaGrabbed value  = unsafeAttribute $ This { key: "aria-grabbed", value:  prop' value  }
-  unpureAttr AriaGrabbed eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "aria-grabbed", value:  prop' value  }
+  attr AriaGrabbed bothValues = unsafeAttribute $ Both
+    { key: "aria-grabbed", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "aria-grabbed", value: prop' value })
+  pureAttr AriaGrabbed value = unsafeAttribute $ This
+    { key: "aria-grabbed", value: prop' value }
+  unpureAttr AriaGrabbed eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "aria-grabbed", value: prop' value }
 
 instance Attr Use_ AriaGrabbed String where
-  attr AriaGrabbed bothValues  = unsafeAttribute $ Both { key: "aria-grabbed", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "aria-grabbed", value:  prop' value  })
-  pureAttr AriaGrabbed value  = unsafeAttribute $ This { key: "aria-grabbed", value:  prop' value  }
-  unpureAttr AriaGrabbed eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "aria-grabbed", value:  prop' value  }
+  attr AriaGrabbed bothValues = unsafeAttribute $ Both
+    { key: "aria-grabbed", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "aria-grabbed", value: prop' value })
+  pureAttr AriaGrabbed value = unsafeAttribute $ This
+    { key: "aria-grabbed", value: prop' value }
+  unpureAttr AriaGrabbed eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "aria-grabbed", value: prop' value }
 
 instance Attr View_ AriaGrabbed String where
-  attr AriaGrabbed bothValues  = unsafeAttribute $ Both { key: "aria-grabbed", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "aria-grabbed", value:  prop' value  })
-  pureAttr AriaGrabbed value  = unsafeAttribute $ This { key: "aria-grabbed", value:  prop' value  }
-  unpureAttr AriaGrabbed eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "aria-grabbed", value:  prop' value  }
+  attr AriaGrabbed bothValues = unsafeAttribute $ Both
+    { key: "aria-grabbed", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "aria-grabbed", value: prop' value })
+  pureAttr AriaGrabbed value = unsafeAttribute $ This
+    { key: "aria-grabbed", value: prop' value }
+  unpureAttr AriaGrabbed eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "aria-grabbed", value: prop' value }
 
 instance Attr everything AriaGrabbed Unit where
-  attr AriaGrabbed bothValues  = unsafeAttribute $ Both { key: "aria-grabbed", value:  unset'  } (snd bothValues <#> \_ -> { key: "aria-grabbed", value:  unset'  })
-  pureAttr AriaGrabbed _  = unsafeAttribute $ This { key: "aria-grabbed", value:  unset'  }
-  unpureAttr AriaGrabbed eventValue  = unsafeAttribute $ That $ eventValue <#> \_ -> { key: "aria-grabbed", value:  unset'  }
+  attr AriaGrabbed bothValues = unsafeAttribute $ Both
+    { key: "aria-grabbed", value: unset' }
+    (snd bothValues <#> \_ -> { key: "aria-grabbed", value: unset' })
+  pureAttr AriaGrabbed _ = unsafeAttribute $ This
+    { key: "aria-grabbed", value: unset' }
+  unpureAttr AriaGrabbed eventValue = unsafeAttribute $ That $ eventValue <#>
+    \_ -> { key: "aria-grabbed", value: unset' }

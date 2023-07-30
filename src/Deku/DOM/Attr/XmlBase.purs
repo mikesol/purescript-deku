@@ -41,166 +41,297 @@ import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 data XmlBase = XmlBase
 
 instance Attr AnimateTransform_ XmlBase String where
-  attr XmlBase bothValues  = unsafeAttribute $ Both { key: "xml:base", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "xml:base", value:  prop' value  })
-  pureAttr XmlBase value  = unsafeAttribute $ This { key: "xml:base", value:  prop' value  }
-  unpureAttr XmlBase eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "xml:base", value:  prop' value  }
+  attr XmlBase bothValues = unsafeAttribute $ Both
+    { key: "xml:base", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "xml:base", value: prop' value })
+  pureAttr XmlBase value = unsafeAttribute $ This
+    { key: "xml:base", value: prop' value }
+  unpureAttr XmlBase eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "xml:base", value: prop' value }
 
 instance Attr Discard_ XmlBase String where
-  attr XmlBase bothValues  = unsafeAttribute $ Both { key: "xml:base", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "xml:base", value:  prop' value  })
-  pureAttr XmlBase value  = unsafeAttribute $ This { key: "xml:base", value:  prop' value  }
-  unpureAttr XmlBase eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "xml:base", value:  prop' value  }
+  attr XmlBase bothValues = unsafeAttribute $ Both
+    { key: "xml:base", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "xml:base", value: prop' value })
+  pureAttr XmlBase value = unsafeAttribute $ This
+    { key: "xml:base", value: prop' value }
+  unpureAttr XmlBase eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "xml:base", value: prop' value }
 
 instance Attr FeBlend_ XmlBase String where
-  attr XmlBase bothValues  = unsafeAttribute $ Both { key: "xml:base", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "xml:base", value:  prop' value  })
-  pureAttr XmlBase value  = unsafeAttribute $ This { key: "xml:base", value:  prop' value  }
-  unpureAttr XmlBase eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "xml:base", value:  prop' value  }
+  attr XmlBase bothValues = unsafeAttribute $ Both
+    { key: "xml:base", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "xml:base", value: prop' value })
+  pureAttr XmlBase value = unsafeAttribute $ This
+    { key: "xml:base", value: prop' value }
+  unpureAttr XmlBase eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "xml:base", value: prop' value }
 
 instance Attr FeColorMatrix_ XmlBase String where
-  attr XmlBase bothValues  = unsafeAttribute $ Both { key: "xml:base", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "xml:base", value:  prop' value  })
-  pureAttr XmlBase value  = unsafeAttribute $ This { key: "xml:base", value:  prop' value  }
-  unpureAttr XmlBase eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "xml:base", value:  prop' value  }
+  attr XmlBase bothValues = unsafeAttribute $ Both
+    { key: "xml:base", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "xml:base", value: prop' value })
+  pureAttr XmlBase value = unsafeAttribute $ This
+    { key: "xml:base", value: prop' value }
+  unpureAttr XmlBase eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "xml:base", value: prop' value }
 
 instance Attr FeComponentTransfer_ XmlBase String where
-  attr XmlBase bothValues  = unsafeAttribute $ Both { key: "xml:base", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "xml:base", value:  prop' value  })
-  pureAttr XmlBase value  = unsafeAttribute $ This { key: "xml:base", value:  prop' value  }
-  unpureAttr XmlBase eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "xml:base", value:  prop' value  }
+  attr XmlBase bothValues = unsafeAttribute $ Both
+    { key: "xml:base", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "xml:base", value: prop' value })
+  pureAttr XmlBase value = unsafeAttribute $ This
+    { key: "xml:base", value: prop' value }
+  unpureAttr XmlBase eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "xml:base", value: prop' value }
 
 instance Attr FeComposite_ XmlBase String where
-  attr XmlBase bothValues  = unsafeAttribute $ Both { key: "xml:base", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "xml:base", value:  prop' value  })
-  pureAttr XmlBase value  = unsafeAttribute $ This { key: "xml:base", value:  prop' value  }
-  unpureAttr XmlBase eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "xml:base", value:  prop' value  }
+  attr XmlBase bothValues = unsafeAttribute $ Both
+    { key: "xml:base", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "xml:base", value: prop' value })
+  pureAttr XmlBase value = unsafeAttribute $ This
+    { key: "xml:base", value: prop' value }
+  unpureAttr XmlBase eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "xml:base", value: prop' value }
 
 instance Attr FeConvolveMatrix_ XmlBase String where
-  attr XmlBase bothValues  = unsafeAttribute $ Both { key: "xml:base", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "xml:base", value:  prop' value  })
-  pureAttr XmlBase value  = unsafeAttribute $ This { key: "xml:base", value:  prop' value  }
-  unpureAttr XmlBase eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "xml:base", value:  prop' value  }
+  attr XmlBase bothValues = unsafeAttribute $ Both
+    { key: "xml:base", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "xml:base", value: prop' value })
+  pureAttr XmlBase value = unsafeAttribute $ This
+    { key: "xml:base", value: prop' value }
+  unpureAttr XmlBase eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "xml:base", value: prop' value }
 
 instance Attr FeDiffuseLighting_ XmlBase String where
-  attr XmlBase bothValues  = unsafeAttribute $ Both { key: "xml:base", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "xml:base", value:  prop' value  })
-  pureAttr XmlBase value  = unsafeAttribute $ This { key: "xml:base", value:  prop' value  }
-  unpureAttr XmlBase eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "xml:base", value:  prop' value  }
+  attr XmlBase bothValues = unsafeAttribute $ Both
+    { key: "xml:base", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "xml:base", value: prop' value })
+  pureAttr XmlBase value = unsafeAttribute $ This
+    { key: "xml:base", value: prop' value }
+  unpureAttr XmlBase eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "xml:base", value: prop' value }
 
 instance Attr FeDisplacementMap_ XmlBase String where
-  attr XmlBase bothValues  = unsafeAttribute $ Both { key: "xml:base", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "xml:base", value:  prop' value  })
-  pureAttr XmlBase value  = unsafeAttribute $ This { key: "xml:base", value:  prop' value  }
-  unpureAttr XmlBase eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "xml:base", value:  prop' value  }
+  attr XmlBase bothValues = unsafeAttribute $ Both
+    { key: "xml:base", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "xml:base", value: prop' value })
+  pureAttr XmlBase value = unsafeAttribute $ This
+    { key: "xml:base", value: prop' value }
+  unpureAttr XmlBase eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "xml:base", value: prop' value }
 
 instance Attr FeDistantLight_ XmlBase String where
-  attr XmlBase bothValues  = unsafeAttribute $ Both { key: "xml:base", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "xml:base", value:  prop' value  })
-  pureAttr XmlBase value  = unsafeAttribute $ This { key: "xml:base", value:  prop' value  }
-  unpureAttr XmlBase eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "xml:base", value:  prop' value  }
+  attr XmlBase bothValues = unsafeAttribute $ Both
+    { key: "xml:base", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "xml:base", value: prop' value })
+  pureAttr XmlBase value = unsafeAttribute $ This
+    { key: "xml:base", value: prop' value }
+  unpureAttr XmlBase eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "xml:base", value: prop' value }
 
 instance Attr FeFlood_ XmlBase String where
-  attr XmlBase bothValues  = unsafeAttribute $ Both { key: "xml:base", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "xml:base", value:  prop' value  })
-  pureAttr XmlBase value  = unsafeAttribute $ This { key: "xml:base", value:  prop' value  }
-  unpureAttr XmlBase eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "xml:base", value:  prop' value  }
+  attr XmlBase bothValues = unsafeAttribute $ Both
+    { key: "xml:base", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "xml:base", value: prop' value })
+  pureAttr XmlBase value = unsafeAttribute $ This
+    { key: "xml:base", value: prop' value }
+  unpureAttr XmlBase eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "xml:base", value: prop' value }
 
 instance Attr FeFuncA_ XmlBase String where
-  attr XmlBase bothValues  = unsafeAttribute $ Both { key: "xml:base", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "xml:base", value:  prop' value  })
-  pureAttr XmlBase value  = unsafeAttribute $ This { key: "xml:base", value:  prop' value  }
-  unpureAttr XmlBase eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "xml:base", value:  prop' value  }
+  attr XmlBase bothValues = unsafeAttribute $ Both
+    { key: "xml:base", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "xml:base", value: prop' value })
+  pureAttr XmlBase value = unsafeAttribute $ This
+    { key: "xml:base", value: prop' value }
+  unpureAttr XmlBase eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "xml:base", value: prop' value }
 
 instance Attr FeFuncB_ XmlBase String where
-  attr XmlBase bothValues  = unsafeAttribute $ Both { key: "xml:base", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "xml:base", value:  prop' value  })
-  pureAttr XmlBase value  = unsafeAttribute $ This { key: "xml:base", value:  prop' value  }
-  unpureAttr XmlBase eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "xml:base", value:  prop' value  }
+  attr XmlBase bothValues = unsafeAttribute $ Both
+    { key: "xml:base", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "xml:base", value: prop' value })
+  pureAttr XmlBase value = unsafeAttribute $ This
+    { key: "xml:base", value: prop' value }
+  unpureAttr XmlBase eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "xml:base", value: prop' value }
 
 instance Attr FeFuncG_ XmlBase String where
-  attr XmlBase bothValues  = unsafeAttribute $ Both { key: "xml:base", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "xml:base", value:  prop' value  })
-  pureAttr XmlBase value  = unsafeAttribute $ This { key: "xml:base", value:  prop' value  }
-  unpureAttr XmlBase eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "xml:base", value:  prop' value  }
+  attr XmlBase bothValues = unsafeAttribute $ Both
+    { key: "xml:base", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "xml:base", value: prop' value })
+  pureAttr XmlBase value = unsafeAttribute $ This
+    { key: "xml:base", value: prop' value }
+  unpureAttr XmlBase eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "xml:base", value: prop' value }
 
 instance Attr FeFuncR_ XmlBase String where
-  attr XmlBase bothValues  = unsafeAttribute $ Both { key: "xml:base", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "xml:base", value:  prop' value  })
-  pureAttr XmlBase value  = unsafeAttribute $ This { key: "xml:base", value:  prop' value  }
-  unpureAttr XmlBase eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "xml:base", value:  prop' value  }
+  attr XmlBase bothValues = unsafeAttribute $ Both
+    { key: "xml:base", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "xml:base", value: prop' value })
+  pureAttr XmlBase value = unsafeAttribute $ This
+    { key: "xml:base", value: prop' value }
+  unpureAttr XmlBase eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "xml:base", value: prop' value }
 
 instance Attr FeGaussianBlur_ XmlBase String where
-  attr XmlBase bothValues  = unsafeAttribute $ Both { key: "xml:base", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "xml:base", value:  prop' value  })
-  pureAttr XmlBase value  = unsafeAttribute $ This { key: "xml:base", value:  prop' value  }
-  unpureAttr XmlBase eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "xml:base", value:  prop' value  }
+  attr XmlBase bothValues = unsafeAttribute $ Both
+    { key: "xml:base", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "xml:base", value: prop' value })
+  pureAttr XmlBase value = unsafeAttribute $ This
+    { key: "xml:base", value: prop' value }
+  unpureAttr XmlBase eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "xml:base", value: prop' value }
 
 instance Attr FeImage_ XmlBase String where
-  attr XmlBase bothValues  = unsafeAttribute $ Both { key: "xml:base", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "xml:base", value:  prop' value  })
-  pureAttr XmlBase value  = unsafeAttribute $ This { key: "xml:base", value:  prop' value  }
-  unpureAttr XmlBase eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "xml:base", value:  prop' value  }
+  attr XmlBase bothValues = unsafeAttribute $ Both
+    { key: "xml:base", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "xml:base", value: prop' value })
+  pureAttr XmlBase value = unsafeAttribute $ This
+    { key: "xml:base", value: prop' value }
+  unpureAttr XmlBase eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "xml:base", value: prop' value }
 
 instance Attr FeMerge_ XmlBase String where
-  attr XmlBase bothValues  = unsafeAttribute $ Both { key: "xml:base", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "xml:base", value:  prop' value  })
-  pureAttr XmlBase value  = unsafeAttribute $ This { key: "xml:base", value:  prop' value  }
-  unpureAttr XmlBase eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "xml:base", value:  prop' value  }
+  attr XmlBase bothValues = unsafeAttribute $ Both
+    { key: "xml:base", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "xml:base", value: prop' value })
+  pureAttr XmlBase value = unsafeAttribute $ This
+    { key: "xml:base", value: prop' value }
+  unpureAttr XmlBase eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "xml:base", value: prop' value }
 
 instance Attr FeMergeNode_ XmlBase String where
-  attr XmlBase bothValues  = unsafeAttribute $ Both { key: "xml:base", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "xml:base", value:  prop' value  })
-  pureAttr XmlBase value  = unsafeAttribute $ This { key: "xml:base", value:  prop' value  }
-  unpureAttr XmlBase eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "xml:base", value:  prop' value  }
+  attr XmlBase bothValues = unsafeAttribute $ Both
+    { key: "xml:base", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "xml:base", value: prop' value })
+  pureAttr XmlBase value = unsafeAttribute $ This
+    { key: "xml:base", value: prop' value }
+  unpureAttr XmlBase eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "xml:base", value: prop' value }
 
 instance Attr FeMorphology_ XmlBase String where
-  attr XmlBase bothValues  = unsafeAttribute $ Both { key: "xml:base", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "xml:base", value:  prop' value  })
-  pureAttr XmlBase value  = unsafeAttribute $ This { key: "xml:base", value:  prop' value  }
-  unpureAttr XmlBase eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "xml:base", value:  prop' value  }
+  attr XmlBase bothValues = unsafeAttribute $ Both
+    { key: "xml:base", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "xml:base", value: prop' value })
+  pureAttr XmlBase value = unsafeAttribute $ This
+    { key: "xml:base", value: prop' value }
+  unpureAttr XmlBase eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "xml:base", value: prop' value }
 
 instance Attr FeOffset_ XmlBase String where
-  attr XmlBase bothValues  = unsafeAttribute $ Both { key: "xml:base", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "xml:base", value:  prop' value  })
-  pureAttr XmlBase value  = unsafeAttribute $ This { key: "xml:base", value:  prop' value  }
-  unpureAttr XmlBase eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "xml:base", value:  prop' value  }
+  attr XmlBase bothValues = unsafeAttribute $ Both
+    { key: "xml:base", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "xml:base", value: prop' value })
+  pureAttr XmlBase value = unsafeAttribute $ This
+    { key: "xml:base", value: prop' value }
+  unpureAttr XmlBase eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "xml:base", value: prop' value }
 
 instance Attr FePointLight_ XmlBase String where
-  attr XmlBase bothValues  = unsafeAttribute $ Both { key: "xml:base", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "xml:base", value:  prop' value  })
-  pureAttr XmlBase value  = unsafeAttribute $ This { key: "xml:base", value:  prop' value  }
-  unpureAttr XmlBase eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "xml:base", value:  prop' value  }
+  attr XmlBase bothValues = unsafeAttribute $ Both
+    { key: "xml:base", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "xml:base", value: prop' value })
+  pureAttr XmlBase value = unsafeAttribute $ This
+    { key: "xml:base", value: prop' value }
+  unpureAttr XmlBase eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "xml:base", value: prop' value }
 
 instance Attr FeSpecularLighting_ XmlBase String where
-  attr XmlBase bothValues  = unsafeAttribute $ Both { key: "xml:base", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "xml:base", value:  prop' value  })
-  pureAttr XmlBase value  = unsafeAttribute $ This { key: "xml:base", value:  prop' value  }
-  unpureAttr XmlBase eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "xml:base", value:  prop' value  }
+  attr XmlBase bothValues = unsafeAttribute $ Both
+    { key: "xml:base", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "xml:base", value: prop' value })
+  pureAttr XmlBase value = unsafeAttribute $ This
+    { key: "xml:base", value: prop' value }
+  unpureAttr XmlBase eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "xml:base", value: prop' value }
 
 instance Attr FeSpotLight_ XmlBase String where
-  attr XmlBase bothValues  = unsafeAttribute $ Both { key: "xml:base", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "xml:base", value:  prop' value  })
-  pureAttr XmlBase value  = unsafeAttribute $ This { key: "xml:base", value:  prop' value  }
-  unpureAttr XmlBase eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "xml:base", value:  prop' value  }
+  attr XmlBase bothValues = unsafeAttribute $ Both
+    { key: "xml:base", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "xml:base", value: prop' value })
+  pureAttr XmlBase value = unsafeAttribute $ This
+    { key: "xml:base", value: prop' value }
+  unpureAttr XmlBase eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "xml:base", value: prop' value }
 
 instance Attr FeTile_ XmlBase String where
-  attr XmlBase bothValues  = unsafeAttribute $ Both { key: "xml:base", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "xml:base", value:  prop' value  })
-  pureAttr XmlBase value  = unsafeAttribute $ This { key: "xml:base", value:  prop' value  }
-  unpureAttr XmlBase eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "xml:base", value:  prop' value  }
+  attr XmlBase bothValues = unsafeAttribute $ Both
+    { key: "xml:base", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "xml:base", value: prop' value })
+  pureAttr XmlBase value = unsafeAttribute $ This
+    { key: "xml:base", value: prop' value }
+  unpureAttr XmlBase eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "xml:base", value: prop' value }
 
 instance Attr FeTurbulence_ XmlBase String where
-  attr XmlBase bothValues  = unsafeAttribute $ Both { key: "xml:base", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "xml:base", value:  prop' value  })
-  pureAttr XmlBase value  = unsafeAttribute $ This { key: "xml:base", value:  prop' value  }
-  unpureAttr XmlBase eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "xml:base", value:  prop' value  }
+  attr XmlBase bothValues = unsafeAttribute $ Both
+    { key: "xml:base", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "xml:base", value: prop' value })
+  pureAttr XmlBase value = unsafeAttribute $ This
+    { key: "xml:base", value: prop' value }
+  unpureAttr XmlBase eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "xml:base", value: prop' value }
 
 instance Attr Filter_ XmlBase String where
-  attr XmlBase bothValues  = unsafeAttribute $ Both { key: "xml:base", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "xml:base", value:  prop' value  })
-  pureAttr XmlBase value  = unsafeAttribute $ This { key: "xml:base", value:  prop' value  }
-  unpureAttr XmlBase eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "xml:base", value:  prop' value  }
+  attr XmlBase bothValues = unsafeAttribute $ Both
+    { key: "xml:base", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "xml:base", value: prop' value })
+  pureAttr XmlBase value = unsafeAttribute $ This
+    { key: "xml:base", value: prop' value }
+  unpureAttr XmlBase eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "xml:base", value: prop' value }
 
 instance Attr Image_ XmlBase String where
-  attr XmlBase bothValues  = unsafeAttribute $ Both { key: "xml:base", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "xml:base", value:  prop' value  })
-  pureAttr XmlBase value  = unsafeAttribute $ This { key: "xml:base", value:  prop' value  }
-  unpureAttr XmlBase eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "xml:base", value:  prop' value  }
+  attr XmlBase bothValues = unsafeAttribute $ Both
+    { key: "xml:base", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "xml:base", value: prop' value })
+  pureAttr XmlBase value = unsafeAttribute $ This
+    { key: "xml:base", value: prop' value }
+  unpureAttr XmlBase eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "xml:base", value: prop' value }
 
 instance Attr Metadata_ XmlBase String where
-  attr XmlBase bothValues  = unsafeAttribute $ Both { key: "xml:base", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "xml:base", value:  prop' value  })
-  pureAttr XmlBase value  = unsafeAttribute $ This { key: "xml:base", value:  prop' value  }
-  unpureAttr XmlBase eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "xml:base", value:  prop' value  }
+  attr XmlBase bothValues = unsafeAttribute $ Both
+    { key: "xml:base", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "xml:base", value: prop' value })
+  pureAttr XmlBase value = unsafeAttribute $ This
+    { key: "xml:base", value: prop' value }
+  unpureAttr XmlBase eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "xml:base", value: prop' value }
 
 instance Attr Mpath_ XmlBase String where
-  attr XmlBase bothValues  = unsafeAttribute $ Both { key: "xml:base", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "xml:base", value:  prop' value  })
-  pureAttr XmlBase value  = unsafeAttribute $ This { key: "xml:base", value:  prop' value  }
-  unpureAttr XmlBase eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "xml:base", value:  prop' value  }
+  attr XmlBase bothValues = unsafeAttribute $ Both
+    { key: "xml:base", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "xml:base", value: prop' value })
+  pureAttr XmlBase value = unsafeAttribute $ This
+    { key: "xml:base", value: prop' value }
+  unpureAttr XmlBase eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "xml:base", value: prop' value }
 
 instance Attr Switch_ XmlBase String where
-  attr XmlBase bothValues  = unsafeAttribute $ Both { key: "xml:base", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "xml:base", value:  prop' value  })
-  pureAttr XmlBase value  = unsafeAttribute $ This { key: "xml:base", value:  prop' value  }
-  unpureAttr XmlBase eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "xml:base", value:  prop' value  }
+  attr XmlBase bothValues = unsafeAttribute $ Both
+    { key: "xml:base", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "xml:base", value: prop' value })
+  pureAttr XmlBase value = unsafeAttribute $ This
+    { key: "xml:base", value: prop' value }
+  unpureAttr XmlBase eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "xml:base", value: prop' value }
 
 instance Attr View_ XmlBase String where
-  attr XmlBase bothValues  = unsafeAttribute $ Both { key: "xml:base", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "xml:base", value:  prop' value  })
-  pureAttr XmlBase value  = unsafeAttribute $ This { key: "xml:base", value:  prop' value  }
-  unpureAttr XmlBase eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "xml:base", value:  prop' value  }
+  attr XmlBase bothValues = unsafeAttribute $ Both
+    { key: "xml:base", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "xml:base", value: prop' value })
+  pureAttr XmlBase value = unsafeAttribute $ This
+    { key: "xml:base", value: prop' value }
+  unpureAttr XmlBase eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "xml:base", value: prop' value }
 
 instance Attr everything XmlBase Unit where
-  attr XmlBase bothValues  = unsafeAttribute $ Both { key: "xml:base", value:  unset'  } (snd bothValues <#> \_ -> { key: "xml:base", value:  unset'  })
-  pureAttr XmlBase _  = unsafeAttribute $ This { key: "xml:base", value:  unset'  }
-  unpureAttr XmlBase eventValue  = unsafeAttribute $ That $ eventValue <#> \_ -> { key: "xml:base", value:  unset'  }
+  attr XmlBase bothValues = unsafeAttribute $ Both
+    { key: "xml:base", value: unset' }
+    (snd bothValues <#> \_ -> { key: "xml:base", value: unset' })
+  pureAttr XmlBase _ = unsafeAttribute $ This { key: "xml:base", value: unset' }
+  unpureAttr XmlBase eventValue = unsafeAttribute $ That $ eventValue <#> \_ ->
+    { key: "xml:base", value: unset' }

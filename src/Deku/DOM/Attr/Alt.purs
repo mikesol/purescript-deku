@@ -13,26 +13,40 @@ import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 data Alt = Alt
 
 instance Attr Applet_ Alt String where
-  attr Alt bothValues  = unsafeAttribute $ Both { key: "alt", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "alt", value:  prop' value  })
-  pureAttr Alt value  = unsafeAttribute $ This { key: "alt", value:  prop' value  }
-  unpureAttr Alt eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "alt", value:  prop' value  }
+  attr Alt bothValues = unsafeAttribute $ Both
+    { key: "alt", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "alt", value: prop' value })
+  pureAttr Alt value = unsafeAttribute $ This { key: "alt", value: prop' value }
+  unpureAttr Alt eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+    { key: "alt", value: prop' value }
 
 instance Attr Area_ Alt String where
-  attr Alt bothValues  = unsafeAttribute $ Both { key: "alt", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "alt", value:  prop' value  })
-  pureAttr Alt value  = unsafeAttribute $ This { key: "alt", value:  prop' value  }
-  unpureAttr Alt eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "alt", value:  prop' value  }
+  attr Alt bothValues = unsafeAttribute $ Both
+    { key: "alt", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "alt", value: prop' value })
+  pureAttr Alt value = unsafeAttribute $ This { key: "alt", value: prop' value }
+  unpureAttr Alt eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+    { key: "alt", value: prop' value }
 
 instance Attr Img_ Alt String where
-  attr Alt bothValues  = unsafeAttribute $ Both { key: "alt", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "alt", value:  prop' value  })
-  pureAttr Alt value  = unsafeAttribute $ This { key: "alt", value:  prop' value  }
-  unpureAttr Alt eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "alt", value:  prop' value  }
+  attr Alt bothValues = unsafeAttribute $ Both
+    { key: "alt", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "alt", value: prop' value })
+  pureAttr Alt value = unsafeAttribute $ This { key: "alt", value: prop' value }
+  unpureAttr Alt eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+    { key: "alt", value: prop' value }
 
 instance Attr Input_ Alt String where
-  attr Alt bothValues  = unsafeAttribute $ Both { key: "alt", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "alt", value:  prop' value  })
-  pureAttr Alt value  = unsafeAttribute $ This { key: "alt", value:  prop' value  }
-  unpureAttr Alt eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "alt", value:  prop' value  }
+  attr Alt bothValues = unsafeAttribute $ Both
+    { key: "alt", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "alt", value: prop' value })
+  pureAttr Alt value = unsafeAttribute $ This { key: "alt", value: prop' value }
+  unpureAttr Alt eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+    { key: "alt", value: prop' value }
 
 instance Attr everything Alt Unit where
-  attr Alt bothValues  = unsafeAttribute $ Both { key: "alt", value:  unset'  } (snd bothValues <#> \_ -> { key: "alt", value:  unset'  })
-  pureAttr Alt _  = unsafeAttribute $ This { key: "alt", value:  unset'  }
-  unpureAttr Alt eventValue  = unsafeAttribute $ That $ eventValue <#> \_ -> { key: "alt", value:  unset'  }
+  attr Alt bothValues = unsafeAttribute $ Both { key: "alt", value: unset' }
+    (snd bothValues <#> \_ -> { key: "alt", value: unset' })
+  pureAttr Alt _ = unsafeAttribute $ This { key: "alt", value: unset' }
+  unpureAttr Alt eventValue = unsafeAttribute $ That $ eventValue <#> \_ ->
+    { key: "alt", value: unset' }

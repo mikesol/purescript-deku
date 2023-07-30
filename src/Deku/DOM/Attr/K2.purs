@@ -10,11 +10,16 @@ import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 data K2 = K2
 
 instance Attr FeComposite_ K2 String where
-  attr K2 bothValues  = unsafeAttribute $ Both { key: "k2", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "k2", value:  prop' value  })
-  pureAttr K2 value  = unsafeAttribute $ This { key: "k2", value:  prop' value  }
-  unpureAttr K2 eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "k2", value:  prop' value  }
+  attr K2 bothValues = unsafeAttribute $ Both
+    { key: "k2", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "k2", value: prop' value })
+  pureAttr K2 value = unsafeAttribute $ This { key: "k2", value: prop' value }
+  unpureAttr K2 eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+    { key: "k2", value: prop' value }
 
 instance Attr everything K2 Unit where
-  attr K2 bothValues  = unsafeAttribute $ Both { key: "k2", value:  unset'  } (snd bothValues <#> \_ -> { key: "k2", value:  unset'  })
-  pureAttr K2 _  = unsafeAttribute $ This { key: "k2", value:  unset'  }
-  unpureAttr K2 eventValue  = unsafeAttribute $ That $ eventValue <#> \_ -> { key: "k2", value:  unset'  }
+  attr K2 bothValues = unsafeAttribute $ Both { key: "k2", value: unset' }
+    (snd bothValues <#> \_ -> { key: "k2", value: unset' })
+  pureAttr K2 _ = unsafeAttribute $ This { key: "k2", value: unset' }
+  unpureAttr K2 eventValue = unsafeAttribute $ That $ eventValue <#> \_ ->
+    { key: "k2", value: unset' }

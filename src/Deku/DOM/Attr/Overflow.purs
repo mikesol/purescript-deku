@@ -28,101 +28,181 @@ import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 data Overflow = Overflow
 
 instance Attr FeBlend_ Overflow String where
-  attr Overflow bothValues  = unsafeAttribute $ Both { key: "overflow", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "overflow", value:  prop' value  })
-  pureAttr Overflow value  = unsafeAttribute $ This { key: "overflow", value:  prop' value  }
-  unpureAttr Overflow eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "overflow", value:  prop' value  }
+  attr Overflow bothValues = unsafeAttribute $ Both
+    { key: "overflow", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "overflow", value: prop' value })
+  pureAttr Overflow value = unsafeAttribute $ This
+    { key: "overflow", value: prop' value }
+  unpureAttr Overflow eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "overflow", value: prop' value }
 
 instance Attr FeColorMatrix_ Overflow String where
-  attr Overflow bothValues  = unsafeAttribute $ Both { key: "overflow", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "overflow", value:  prop' value  })
-  pureAttr Overflow value  = unsafeAttribute $ This { key: "overflow", value:  prop' value  }
-  unpureAttr Overflow eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "overflow", value:  prop' value  }
+  attr Overflow bothValues = unsafeAttribute $ Both
+    { key: "overflow", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "overflow", value: prop' value })
+  pureAttr Overflow value = unsafeAttribute $ This
+    { key: "overflow", value: prop' value }
+  unpureAttr Overflow eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "overflow", value: prop' value }
 
 instance Attr FeComponentTransfer_ Overflow String where
-  attr Overflow bothValues  = unsafeAttribute $ Both { key: "overflow", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "overflow", value:  prop' value  })
-  pureAttr Overflow value  = unsafeAttribute $ This { key: "overflow", value:  prop' value  }
-  unpureAttr Overflow eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "overflow", value:  prop' value  }
+  attr Overflow bothValues = unsafeAttribute $ Both
+    { key: "overflow", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "overflow", value: prop' value })
+  pureAttr Overflow value = unsafeAttribute $ This
+    { key: "overflow", value: prop' value }
+  unpureAttr Overflow eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "overflow", value: prop' value }
 
 instance Attr FeComposite_ Overflow String where
-  attr Overflow bothValues  = unsafeAttribute $ Both { key: "overflow", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "overflow", value:  prop' value  })
-  pureAttr Overflow value  = unsafeAttribute $ This { key: "overflow", value:  prop' value  }
-  unpureAttr Overflow eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "overflow", value:  prop' value  }
+  attr Overflow bothValues = unsafeAttribute $ Both
+    { key: "overflow", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "overflow", value: prop' value })
+  pureAttr Overflow value = unsafeAttribute $ This
+    { key: "overflow", value: prop' value }
+  unpureAttr Overflow eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "overflow", value: prop' value }
 
 instance Attr FeConvolveMatrix_ Overflow String where
-  attr Overflow bothValues  = unsafeAttribute $ Both { key: "overflow", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "overflow", value:  prop' value  })
-  pureAttr Overflow value  = unsafeAttribute $ This { key: "overflow", value:  prop' value  }
-  unpureAttr Overflow eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "overflow", value:  prop' value  }
+  attr Overflow bothValues = unsafeAttribute $ Both
+    { key: "overflow", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "overflow", value: prop' value })
+  pureAttr Overflow value = unsafeAttribute $ This
+    { key: "overflow", value: prop' value }
+  unpureAttr Overflow eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "overflow", value: prop' value }
 
 instance Attr FeDiffuseLighting_ Overflow String where
-  attr Overflow bothValues  = unsafeAttribute $ Both { key: "overflow", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "overflow", value:  prop' value  })
-  pureAttr Overflow value  = unsafeAttribute $ This { key: "overflow", value:  prop' value  }
-  unpureAttr Overflow eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "overflow", value:  prop' value  }
+  attr Overflow bothValues = unsafeAttribute $ Both
+    { key: "overflow", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "overflow", value: prop' value })
+  pureAttr Overflow value = unsafeAttribute $ This
+    { key: "overflow", value: prop' value }
+  unpureAttr Overflow eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "overflow", value: prop' value }
 
 instance Attr FeDisplacementMap_ Overflow String where
-  attr Overflow bothValues  = unsafeAttribute $ Both { key: "overflow", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "overflow", value:  prop' value  })
-  pureAttr Overflow value  = unsafeAttribute $ This { key: "overflow", value:  prop' value  }
-  unpureAttr Overflow eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "overflow", value:  prop' value  }
+  attr Overflow bothValues = unsafeAttribute $ Both
+    { key: "overflow", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "overflow", value: prop' value })
+  pureAttr Overflow value = unsafeAttribute $ This
+    { key: "overflow", value: prop' value }
+  unpureAttr Overflow eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "overflow", value: prop' value }
 
 instance Attr FeFlood_ Overflow String where
-  attr Overflow bothValues  = unsafeAttribute $ Both { key: "overflow", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "overflow", value:  prop' value  })
-  pureAttr Overflow value  = unsafeAttribute $ This { key: "overflow", value:  prop' value  }
-  unpureAttr Overflow eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "overflow", value:  prop' value  }
+  attr Overflow bothValues = unsafeAttribute $ Both
+    { key: "overflow", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "overflow", value: prop' value })
+  pureAttr Overflow value = unsafeAttribute $ This
+    { key: "overflow", value: prop' value }
+  unpureAttr Overflow eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "overflow", value: prop' value }
 
 instance Attr FeGaussianBlur_ Overflow String where
-  attr Overflow bothValues  = unsafeAttribute $ Both { key: "overflow", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "overflow", value:  prop' value  })
-  pureAttr Overflow value  = unsafeAttribute $ This { key: "overflow", value:  prop' value  }
-  unpureAttr Overflow eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "overflow", value:  prop' value  }
+  attr Overflow bothValues = unsafeAttribute $ Both
+    { key: "overflow", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "overflow", value: prop' value })
+  pureAttr Overflow value = unsafeAttribute $ This
+    { key: "overflow", value: prop' value }
+  unpureAttr Overflow eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "overflow", value: prop' value }
 
 instance Attr FeImage_ Overflow String where
-  attr Overflow bothValues  = unsafeAttribute $ Both { key: "overflow", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "overflow", value:  prop' value  })
-  pureAttr Overflow value  = unsafeAttribute $ This { key: "overflow", value:  prop' value  }
-  unpureAttr Overflow eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "overflow", value:  prop' value  }
+  attr Overflow bothValues = unsafeAttribute $ Both
+    { key: "overflow", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "overflow", value: prop' value })
+  pureAttr Overflow value = unsafeAttribute $ This
+    { key: "overflow", value: prop' value }
+  unpureAttr Overflow eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "overflow", value: prop' value }
 
 instance Attr FeMerge_ Overflow String where
-  attr Overflow bothValues  = unsafeAttribute $ Both { key: "overflow", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "overflow", value:  prop' value  })
-  pureAttr Overflow value  = unsafeAttribute $ This { key: "overflow", value:  prop' value  }
-  unpureAttr Overflow eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "overflow", value:  prop' value  }
+  attr Overflow bothValues = unsafeAttribute $ Both
+    { key: "overflow", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "overflow", value: prop' value })
+  pureAttr Overflow value = unsafeAttribute $ This
+    { key: "overflow", value: prop' value }
+  unpureAttr Overflow eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "overflow", value: prop' value }
 
 instance Attr FeMorphology_ Overflow String where
-  attr Overflow bothValues  = unsafeAttribute $ Both { key: "overflow", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "overflow", value:  prop' value  })
-  pureAttr Overflow value  = unsafeAttribute $ This { key: "overflow", value:  prop' value  }
-  unpureAttr Overflow eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "overflow", value:  prop' value  }
+  attr Overflow bothValues = unsafeAttribute $ Both
+    { key: "overflow", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "overflow", value: prop' value })
+  pureAttr Overflow value = unsafeAttribute $ This
+    { key: "overflow", value: prop' value }
+  unpureAttr Overflow eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "overflow", value: prop' value }
 
 instance Attr FeOffset_ Overflow String where
-  attr Overflow bothValues  = unsafeAttribute $ Both { key: "overflow", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "overflow", value:  prop' value  })
-  pureAttr Overflow value  = unsafeAttribute $ This { key: "overflow", value:  prop' value  }
-  unpureAttr Overflow eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "overflow", value:  prop' value  }
+  attr Overflow bothValues = unsafeAttribute $ Both
+    { key: "overflow", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "overflow", value: prop' value })
+  pureAttr Overflow value = unsafeAttribute $ This
+    { key: "overflow", value: prop' value }
+  unpureAttr Overflow eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "overflow", value: prop' value }
 
 instance Attr FeSpecularLighting_ Overflow String where
-  attr Overflow bothValues  = unsafeAttribute $ Both { key: "overflow", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "overflow", value:  prop' value  })
-  pureAttr Overflow value  = unsafeAttribute $ This { key: "overflow", value:  prop' value  }
-  unpureAttr Overflow eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "overflow", value:  prop' value  }
+  attr Overflow bothValues = unsafeAttribute $ Both
+    { key: "overflow", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "overflow", value: prop' value })
+  pureAttr Overflow value = unsafeAttribute $ This
+    { key: "overflow", value: prop' value }
+  unpureAttr Overflow eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "overflow", value: prop' value }
 
 instance Attr FeTile_ Overflow String where
-  attr Overflow bothValues  = unsafeAttribute $ Both { key: "overflow", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "overflow", value:  prop' value  })
-  pureAttr Overflow value  = unsafeAttribute $ This { key: "overflow", value:  prop' value  }
-  unpureAttr Overflow eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "overflow", value:  prop' value  }
+  attr Overflow bothValues = unsafeAttribute $ Both
+    { key: "overflow", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "overflow", value: prop' value })
+  pureAttr Overflow value = unsafeAttribute $ This
+    { key: "overflow", value: prop' value }
+  unpureAttr Overflow eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "overflow", value: prop' value }
 
 instance Attr FeTurbulence_ Overflow String where
-  attr Overflow bothValues  = unsafeAttribute $ Both { key: "overflow", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "overflow", value:  prop' value  })
-  pureAttr Overflow value  = unsafeAttribute $ This { key: "overflow", value:  prop' value  }
-  unpureAttr Overflow eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "overflow", value:  prop' value  }
+  attr Overflow bothValues = unsafeAttribute $ Both
+    { key: "overflow", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "overflow", value: prop' value })
+  pureAttr Overflow value = unsafeAttribute $ This
+    { key: "overflow", value: prop' value }
+  unpureAttr Overflow eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "overflow", value: prop' value }
 
 instance Attr Filter_ Overflow String where
-  attr Overflow bothValues  = unsafeAttribute $ Both { key: "overflow", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "overflow", value:  prop' value  })
-  pureAttr Overflow value  = unsafeAttribute $ This { key: "overflow", value:  prop' value  }
-  unpureAttr Overflow eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "overflow", value:  prop' value  }
+  attr Overflow bothValues = unsafeAttribute $ Both
+    { key: "overflow", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "overflow", value: prop' value })
+  pureAttr Overflow value = unsafeAttribute $ This
+    { key: "overflow", value: prop' value }
+  unpureAttr Overflow eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "overflow", value: prop' value }
 
 instance Attr Image_ Overflow String where
-  attr Overflow bothValues  = unsafeAttribute $ Both { key: "overflow", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "overflow", value:  prop' value  })
-  pureAttr Overflow value  = unsafeAttribute $ This { key: "overflow", value:  prop' value  }
-  unpureAttr Overflow eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "overflow", value:  prop' value  }
+  attr Overflow bothValues = unsafeAttribute $ Both
+    { key: "overflow", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "overflow", value: prop' value })
+  pureAttr Overflow value = unsafeAttribute $ This
+    { key: "overflow", value: prop' value }
+  unpureAttr Overflow eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "overflow", value: prop' value }
 
 instance Attr Switch_ Overflow String where
-  attr Overflow bothValues  = unsafeAttribute $ Both { key: "overflow", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "overflow", value:  prop' value  })
-  pureAttr Overflow value  = unsafeAttribute $ This { key: "overflow", value:  prop' value  }
-  unpureAttr Overflow eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "overflow", value:  prop' value  }
+  attr Overflow bothValues = unsafeAttribute $ Both
+    { key: "overflow", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "overflow", value: prop' value })
+  pureAttr Overflow value = unsafeAttribute $ This
+    { key: "overflow", value: prop' value }
+  unpureAttr Overflow eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "overflow", value: prop' value }
 
 instance Attr everything Overflow Unit where
-  attr Overflow bothValues  = unsafeAttribute $ Both { key: "overflow", value:  unset'  } (snd bothValues <#> \_ -> { key: "overflow", value:  unset'  })
-  pureAttr Overflow _  = unsafeAttribute $ This { key: "overflow", value:  unset'  }
-  unpureAttr Overflow eventValue  = unsafeAttribute $ That $ eventValue <#> \_ -> { key: "overflow", value:  unset'  }
+  attr Overflow bothValues = unsafeAttribute $ Both
+    { key: "overflow", value: unset' }
+    (snd bothValues <#> \_ -> { key: "overflow", value: unset' })
+  pureAttr Overflow _ = unsafeAttribute $ This
+    { key: "overflow", value: unset' }
+  unpureAttr Overflow eventValue = unsafeAttribute $ That $ eventValue <#> \_ ->
+    { key: "overflow", value: unset' }

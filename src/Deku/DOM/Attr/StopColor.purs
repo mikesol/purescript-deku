@@ -29,106 +29,190 @@ import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 data StopColor = StopColor
 
 instance Attr FeBlend_ StopColor String where
-  attr StopColor bothValues  = unsafeAttribute $ Both { key: "stop-color", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "stop-color", value:  prop' value  })
-  pureAttr StopColor value  = unsafeAttribute $ This { key: "stop-color", value:  prop' value  }
-  unpureAttr StopColor eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "stop-color", value:  prop' value  }
+  attr StopColor bothValues = unsafeAttribute $ Both
+    { key: "stop-color", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "stop-color", value: prop' value })
+  pureAttr StopColor value = unsafeAttribute $ This
+    { key: "stop-color", value: prop' value }
+  unpureAttr StopColor eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "stop-color", value: prop' value }
 
 instance Attr FeColorMatrix_ StopColor String where
-  attr StopColor bothValues  = unsafeAttribute $ Both { key: "stop-color", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "stop-color", value:  prop' value  })
-  pureAttr StopColor value  = unsafeAttribute $ This { key: "stop-color", value:  prop' value  }
-  unpureAttr StopColor eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "stop-color", value:  prop' value  }
+  attr StopColor bothValues = unsafeAttribute $ Both
+    { key: "stop-color", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "stop-color", value: prop' value })
+  pureAttr StopColor value = unsafeAttribute $ This
+    { key: "stop-color", value: prop' value }
+  unpureAttr StopColor eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "stop-color", value: prop' value }
 
 instance Attr FeComponentTransfer_ StopColor String where
-  attr StopColor bothValues  = unsafeAttribute $ Both { key: "stop-color", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "stop-color", value:  prop' value  })
-  pureAttr StopColor value  = unsafeAttribute $ This { key: "stop-color", value:  prop' value  }
-  unpureAttr StopColor eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "stop-color", value:  prop' value  }
+  attr StopColor bothValues = unsafeAttribute $ Both
+    { key: "stop-color", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "stop-color", value: prop' value })
+  pureAttr StopColor value = unsafeAttribute $ This
+    { key: "stop-color", value: prop' value }
+  unpureAttr StopColor eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "stop-color", value: prop' value }
 
 instance Attr FeComposite_ StopColor String where
-  attr StopColor bothValues  = unsafeAttribute $ Both { key: "stop-color", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "stop-color", value:  prop' value  })
-  pureAttr StopColor value  = unsafeAttribute $ This { key: "stop-color", value:  prop' value  }
-  unpureAttr StopColor eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "stop-color", value:  prop' value  }
+  attr StopColor bothValues = unsafeAttribute $ Both
+    { key: "stop-color", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "stop-color", value: prop' value })
+  pureAttr StopColor value = unsafeAttribute $ This
+    { key: "stop-color", value: prop' value }
+  unpureAttr StopColor eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "stop-color", value: prop' value }
 
 instance Attr FeConvolveMatrix_ StopColor String where
-  attr StopColor bothValues  = unsafeAttribute $ Both { key: "stop-color", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "stop-color", value:  prop' value  })
-  pureAttr StopColor value  = unsafeAttribute $ This { key: "stop-color", value:  prop' value  }
-  unpureAttr StopColor eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "stop-color", value:  prop' value  }
+  attr StopColor bothValues = unsafeAttribute $ Both
+    { key: "stop-color", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "stop-color", value: prop' value })
+  pureAttr StopColor value = unsafeAttribute $ This
+    { key: "stop-color", value: prop' value }
+  unpureAttr StopColor eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "stop-color", value: prop' value }
 
 instance Attr FeDiffuseLighting_ StopColor String where
-  attr StopColor bothValues  = unsafeAttribute $ Both { key: "stop-color", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "stop-color", value:  prop' value  })
-  pureAttr StopColor value  = unsafeAttribute $ This { key: "stop-color", value:  prop' value  }
-  unpureAttr StopColor eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "stop-color", value:  prop' value  }
+  attr StopColor bothValues = unsafeAttribute $ Both
+    { key: "stop-color", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "stop-color", value: prop' value })
+  pureAttr StopColor value = unsafeAttribute $ This
+    { key: "stop-color", value: prop' value }
+  unpureAttr StopColor eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "stop-color", value: prop' value }
 
 instance Attr FeDisplacementMap_ StopColor String where
-  attr StopColor bothValues  = unsafeAttribute $ Both { key: "stop-color", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "stop-color", value:  prop' value  })
-  pureAttr StopColor value  = unsafeAttribute $ This { key: "stop-color", value:  prop' value  }
-  unpureAttr StopColor eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "stop-color", value:  prop' value  }
+  attr StopColor bothValues = unsafeAttribute $ Both
+    { key: "stop-color", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "stop-color", value: prop' value })
+  pureAttr StopColor value = unsafeAttribute $ This
+    { key: "stop-color", value: prop' value }
+  unpureAttr StopColor eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "stop-color", value: prop' value }
 
 instance Attr FeFlood_ StopColor String where
-  attr StopColor bothValues  = unsafeAttribute $ Both { key: "stop-color", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "stop-color", value:  prop' value  })
-  pureAttr StopColor value  = unsafeAttribute $ This { key: "stop-color", value:  prop' value  }
-  unpureAttr StopColor eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "stop-color", value:  prop' value  }
+  attr StopColor bothValues = unsafeAttribute $ Both
+    { key: "stop-color", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "stop-color", value: prop' value })
+  pureAttr StopColor value = unsafeAttribute $ This
+    { key: "stop-color", value: prop' value }
+  unpureAttr StopColor eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "stop-color", value: prop' value }
 
 instance Attr FeGaussianBlur_ StopColor String where
-  attr StopColor bothValues  = unsafeAttribute $ Both { key: "stop-color", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "stop-color", value:  prop' value  })
-  pureAttr StopColor value  = unsafeAttribute $ This { key: "stop-color", value:  prop' value  }
-  unpureAttr StopColor eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "stop-color", value:  prop' value  }
+  attr StopColor bothValues = unsafeAttribute $ Both
+    { key: "stop-color", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "stop-color", value: prop' value })
+  pureAttr StopColor value = unsafeAttribute $ This
+    { key: "stop-color", value: prop' value }
+  unpureAttr StopColor eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "stop-color", value: prop' value }
 
 instance Attr FeImage_ StopColor String where
-  attr StopColor bothValues  = unsafeAttribute $ Both { key: "stop-color", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "stop-color", value:  prop' value  })
-  pureAttr StopColor value  = unsafeAttribute $ This { key: "stop-color", value:  prop' value  }
-  unpureAttr StopColor eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "stop-color", value:  prop' value  }
+  attr StopColor bothValues = unsafeAttribute $ Both
+    { key: "stop-color", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "stop-color", value: prop' value })
+  pureAttr StopColor value = unsafeAttribute $ This
+    { key: "stop-color", value: prop' value }
+  unpureAttr StopColor eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "stop-color", value: prop' value }
 
 instance Attr FeMerge_ StopColor String where
-  attr StopColor bothValues  = unsafeAttribute $ Both { key: "stop-color", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "stop-color", value:  prop' value  })
-  pureAttr StopColor value  = unsafeAttribute $ This { key: "stop-color", value:  prop' value  }
-  unpureAttr StopColor eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "stop-color", value:  prop' value  }
+  attr StopColor bothValues = unsafeAttribute $ Both
+    { key: "stop-color", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "stop-color", value: prop' value })
+  pureAttr StopColor value = unsafeAttribute $ This
+    { key: "stop-color", value: prop' value }
+  unpureAttr StopColor eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "stop-color", value: prop' value }
 
 instance Attr FeMorphology_ StopColor String where
-  attr StopColor bothValues  = unsafeAttribute $ Both { key: "stop-color", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "stop-color", value:  prop' value  })
-  pureAttr StopColor value  = unsafeAttribute $ This { key: "stop-color", value:  prop' value  }
-  unpureAttr StopColor eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "stop-color", value:  prop' value  }
+  attr StopColor bothValues = unsafeAttribute $ Both
+    { key: "stop-color", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "stop-color", value: prop' value })
+  pureAttr StopColor value = unsafeAttribute $ This
+    { key: "stop-color", value: prop' value }
+  unpureAttr StopColor eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "stop-color", value: prop' value }
 
 instance Attr FeOffset_ StopColor String where
-  attr StopColor bothValues  = unsafeAttribute $ Both { key: "stop-color", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "stop-color", value:  prop' value  })
-  pureAttr StopColor value  = unsafeAttribute $ This { key: "stop-color", value:  prop' value  }
-  unpureAttr StopColor eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "stop-color", value:  prop' value  }
+  attr StopColor bothValues = unsafeAttribute $ Both
+    { key: "stop-color", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "stop-color", value: prop' value })
+  pureAttr StopColor value = unsafeAttribute $ This
+    { key: "stop-color", value: prop' value }
+  unpureAttr StopColor eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "stop-color", value: prop' value }
 
 instance Attr FeSpecularLighting_ StopColor String where
-  attr StopColor bothValues  = unsafeAttribute $ Both { key: "stop-color", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "stop-color", value:  prop' value  })
-  pureAttr StopColor value  = unsafeAttribute $ This { key: "stop-color", value:  prop' value  }
-  unpureAttr StopColor eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "stop-color", value:  prop' value  }
+  attr StopColor bothValues = unsafeAttribute $ Both
+    { key: "stop-color", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "stop-color", value: prop' value })
+  pureAttr StopColor value = unsafeAttribute $ This
+    { key: "stop-color", value: prop' value }
+  unpureAttr StopColor eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "stop-color", value: prop' value }
 
 instance Attr FeTile_ StopColor String where
-  attr StopColor bothValues  = unsafeAttribute $ Both { key: "stop-color", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "stop-color", value:  prop' value  })
-  pureAttr StopColor value  = unsafeAttribute $ This { key: "stop-color", value:  prop' value  }
-  unpureAttr StopColor eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "stop-color", value:  prop' value  }
+  attr StopColor bothValues = unsafeAttribute $ Both
+    { key: "stop-color", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "stop-color", value: prop' value })
+  pureAttr StopColor value = unsafeAttribute $ This
+    { key: "stop-color", value: prop' value }
+  unpureAttr StopColor eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "stop-color", value: prop' value }
 
 instance Attr FeTurbulence_ StopColor String where
-  attr StopColor bothValues  = unsafeAttribute $ Both { key: "stop-color", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "stop-color", value:  prop' value  })
-  pureAttr StopColor value  = unsafeAttribute $ This { key: "stop-color", value:  prop' value  }
-  unpureAttr StopColor eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "stop-color", value:  prop' value  }
+  attr StopColor bothValues = unsafeAttribute $ Both
+    { key: "stop-color", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "stop-color", value: prop' value })
+  pureAttr StopColor value = unsafeAttribute $ This
+    { key: "stop-color", value: prop' value }
+  unpureAttr StopColor eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "stop-color", value: prop' value }
 
 instance Attr Filter_ StopColor String where
-  attr StopColor bothValues  = unsafeAttribute $ Both { key: "stop-color", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "stop-color", value:  prop' value  })
-  pureAttr StopColor value  = unsafeAttribute $ This { key: "stop-color", value:  prop' value  }
-  unpureAttr StopColor eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "stop-color", value:  prop' value  }
+  attr StopColor bothValues = unsafeAttribute $ Both
+    { key: "stop-color", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "stop-color", value: prop' value })
+  pureAttr StopColor value = unsafeAttribute $ This
+    { key: "stop-color", value: prop' value }
+  unpureAttr StopColor eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "stop-color", value: prop' value }
 
 instance Attr Image_ StopColor String where
-  attr StopColor bothValues  = unsafeAttribute $ Both { key: "stop-color", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "stop-color", value:  prop' value  })
-  pureAttr StopColor value  = unsafeAttribute $ This { key: "stop-color", value:  prop' value  }
-  unpureAttr StopColor eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "stop-color", value:  prop' value  }
+  attr StopColor bothValues = unsafeAttribute $ Both
+    { key: "stop-color", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "stop-color", value: prop' value })
+  pureAttr StopColor value = unsafeAttribute $ This
+    { key: "stop-color", value: prop' value }
+  unpureAttr StopColor eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "stop-color", value: prop' value }
 
 instance Attr Stop_ StopColor String where
-  attr StopColor bothValues  = unsafeAttribute $ Both { key: "stop-color", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "stop-color", value:  prop' value  })
-  pureAttr StopColor value  = unsafeAttribute $ This { key: "stop-color", value:  prop' value  }
-  unpureAttr StopColor eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "stop-color", value:  prop' value  }
+  attr StopColor bothValues = unsafeAttribute $ Both
+    { key: "stop-color", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "stop-color", value: prop' value })
+  pureAttr StopColor value = unsafeAttribute $ This
+    { key: "stop-color", value: prop' value }
+  unpureAttr StopColor eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "stop-color", value: prop' value }
 
 instance Attr Switch_ StopColor String where
-  attr StopColor bothValues  = unsafeAttribute $ Both { key: "stop-color", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "stop-color", value:  prop' value  })
-  pureAttr StopColor value  = unsafeAttribute $ This { key: "stop-color", value:  prop' value  }
-  unpureAttr StopColor eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "stop-color", value:  prop' value  }
+  attr StopColor bothValues = unsafeAttribute $ Both
+    { key: "stop-color", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "stop-color", value: prop' value })
+  pureAttr StopColor value = unsafeAttribute $ This
+    { key: "stop-color", value: prop' value }
+  unpureAttr StopColor eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "stop-color", value: prop' value }
 
 instance Attr everything StopColor Unit where
-  attr StopColor bothValues  = unsafeAttribute $ Both { key: "stop-color", value:  unset'  } (snd bothValues <#> \_ -> { key: "stop-color", value:  unset'  })
-  pureAttr StopColor _  = unsafeAttribute $ This { key: "stop-color", value:  unset'  }
-  unpureAttr StopColor eventValue  = unsafeAttribute $ That $ eventValue <#> \_ -> { key: "stop-color", value:  unset'  }
+  attr StopColor bothValues = unsafeAttribute $ Both
+    { key: "stop-color", value: unset' }
+    (snd bothValues <#> \_ -> { key: "stop-color", value: unset' })
+  pureAttr StopColor _ = unsafeAttribute $ This
+    { key: "stop-color", value: unset' }
+  unpureAttr StopColor eventValue = unsafeAttribute $ That $ eventValue <#>
+    \_ -> { key: "stop-color", value: unset' }

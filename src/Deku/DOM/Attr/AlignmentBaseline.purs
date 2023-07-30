@@ -28,101 +28,219 @@ import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 data AlignmentBaseline = AlignmentBaseline
 
 instance Attr FeBlend_ AlignmentBaseline String where
-  attr AlignmentBaseline bothValues  = unsafeAttribute $ Both { key: "alignment-baseline", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "alignment-baseline", value:  prop' value  })
-  pureAttr AlignmentBaseline value  = unsafeAttribute $ This { key: "alignment-baseline", value:  prop' value  }
-  unpureAttr AlignmentBaseline eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "alignment-baseline", value:  prop' value  }
+  attr AlignmentBaseline bothValues = unsafeAttribute $ Both
+    { key: "alignment-baseline", value: prop' (fst bothValues) }
+    ( snd bothValues <#> \value ->
+        { key: "alignment-baseline", value: prop' value }
+    )
+  pureAttr AlignmentBaseline value = unsafeAttribute $ This
+    { key: "alignment-baseline", value: prop' value }
+  unpureAttr AlignmentBaseline eventValue = unsafeAttribute $ That $ eventValue
+    <#> \value -> { key: "alignment-baseline", value: prop' value }
 
 instance Attr FeColorMatrix_ AlignmentBaseline String where
-  attr AlignmentBaseline bothValues  = unsafeAttribute $ Both { key: "alignment-baseline", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "alignment-baseline", value:  prop' value  })
-  pureAttr AlignmentBaseline value  = unsafeAttribute $ This { key: "alignment-baseline", value:  prop' value  }
-  unpureAttr AlignmentBaseline eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "alignment-baseline", value:  prop' value  }
+  attr AlignmentBaseline bothValues = unsafeAttribute $ Both
+    { key: "alignment-baseline", value: prop' (fst bothValues) }
+    ( snd bothValues <#> \value ->
+        { key: "alignment-baseline", value: prop' value }
+    )
+  pureAttr AlignmentBaseline value = unsafeAttribute $ This
+    { key: "alignment-baseline", value: prop' value }
+  unpureAttr AlignmentBaseline eventValue = unsafeAttribute $ That $ eventValue
+    <#> \value -> { key: "alignment-baseline", value: prop' value }
 
 instance Attr FeComponentTransfer_ AlignmentBaseline String where
-  attr AlignmentBaseline bothValues  = unsafeAttribute $ Both { key: "alignment-baseline", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "alignment-baseline", value:  prop' value  })
-  pureAttr AlignmentBaseline value  = unsafeAttribute $ This { key: "alignment-baseline", value:  prop' value  }
-  unpureAttr AlignmentBaseline eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "alignment-baseline", value:  prop' value  }
+  attr AlignmentBaseline bothValues = unsafeAttribute $ Both
+    { key: "alignment-baseline", value: prop' (fst bothValues) }
+    ( snd bothValues <#> \value ->
+        { key: "alignment-baseline", value: prop' value }
+    )
+  pureAttr AlignmentBaseline value = unsafeAttribute $ This
+    { key: "alignment-baseline", value: prop' value }
+  unpureAttr AlignmentBaseline eventValue = unsafeAttribute $ That $ eventValue
+    <#> \value -> { key: "alignment-baseline", value: prop' value }
 
 instance Attr FeComposite_ AlignmentBaseline String where
-  attr AlignmentBaseline bothValues  = unsafeAttribute $ Both { key: "alignment-baseline", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "alignment-baseline", value:  prop' value  })
-  pureAttr AlignmentBaseline value  = unsafeAttribute $ This { key: "alignment-baseline", value:  prop' value  }
-  unpureAttr AlignmentBaseline eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "alignment-baseline", value:  prop' value  }
+  attr AlignmentBaseline bothValues = unsafeAttribute $ Both
+    { key: "alignment-baseline", value: prop' (fst bothValues) }
+    ( snd bothValues <#> \value ->
+        { key: "alignment-baseline", value: prop' value }
+    )
+  pureAttr AlignmentBaseline value = unsafeAttribute $ This
+    { key: "alignment-baseline", value: prop' value }
+  unpureAttr AlignmentBaseline eventValue = unsafeAttribute $ That $ eventValue
+    <#> \value -> { key: "alignment-baseline", value: prop' value }
 
 instance Attr FeConvolveMatrix_ AlignmentBaseline String where
-  attr AlignmentBaseline bothValues  = unsafeAttribute $ Both { key: "alignment-baseline", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "alignment-baseline", value:  prop' value  })
-  pureAttr AlignmentBaseline value  = unsafeAttribute $ This { key: "alignment-baseline", value:  prop' value  }
-  unpureAttr AlignmentBaseline eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "alignment-baseline", value:  prop' value  }
+  attr AlignmentBaseline bothValues = unsafeAttribute $ Both
+    { key: "alignment-baseline", value: prop' (fst bothValues) }
+    ( snd bothValues <#> \value ->
+        { key: "alignment-baseline", value: prop' value }
+    )
+  pureAttr AlignmentBaseline value = unsafeAttribute $ This
+    { key: "alignment-baseline", value: prop' value }
+  unpureAttr AlignmentBaseline eventValue = unsafeAttribute $ That $ eventValue
+    <#> \value -> { key: "alignment-baseline", value: prop' value }
 
 instance Attr FeDiffuseLighting_ AlignmentBaseline String where
-  attr AlignmentBaseline bothValues  = unsafeAttribute $ Both { key: "alignment-baseline", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "alignment-baseline", value:  prop' value  })
-  pureAttr AlignmentBaseline value  = unsafeAttribute $ This { key: "alignment-baseline", value:  prop' value  }
-  unpureAttr AlignmentBaseline eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "alignment-baseline", value:  prop' value  }
+  attr AlignmentBaseline bothValues = unsafeAttribute $ Both
+    { key: "alignment-baseline", value: prop' (fst bothValues) }
+    ( snd bothValues <#> \value ->
+        { key: "alignment-baseline", value: prop' value }
+    )
+  pureAttr AlignmentBaseline value = unsafeAttribute $ This
+    { key: "alignment-baseline", value: prop' value }
+  unpureAttr AlignmentBaseline eventValue = unsafeAttribute $ That $ eventValue
+    <#> \value -> { key: "alignment-baseline", value: prop' value }
 
 instance Attr FeDisplacementMap_ AlignmentBaseline String where
-  attr AlignmentBaseline bothValues  = unsafeAttribute $ Both { key: "alignment-baseline", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "alignment-baseline", value:  prop' value  })
-  pureAttr AlignmentBaseline value  = unsafeAttribute $ This { key: "alignment-baseline", value:  prop' value  }
-  unpureAttr AlignmentBaseline eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "alignment-baseline", value:  prop' value  }
+  attr AlignmentBaseline bothValues = unsafeAttribute $ Both
+    { key: "alignment-baseline", value: prop' (fst bothValues) }
+    ( snd bothValues <#> \value ->
+        { key: "alignment-baseline", value: prop' value }
+    )
+  pureAttr AlignmentBaseline value = unsafeAttribute $ This
+    { key: "alignment-baseline", value: prop' value }
+  unpureAttr AlignmentBaseline eventValue = unsafeAttribute $ That $ eventValue
+    <#> \value -> { key: "alignment-baseline", value: prop' value }
 
 instance Attr FeFlood_ AlignmentBaseline String where
-  attr AlignmentBaseline bothValues  = unsafeAttribute $ Both { key: "alignment-baseline", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "alignment-baseline", value:  prop' value  })
-  pureAttr AlignmentBaseline value  = unsafeAttribute $ This { key: "alignment-baseline", value:  prop' value  }
-  unpureAttr AlignmentBaseline eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "alignment-baseline", value:  prop' value  }
+  attr AlignmentBaseline bothValues = unsafeAttribute $ Both
+    { key: "alignment-baseline", value: prop' (fst bothValues) }
+    ( snd bothValues <#> \value ->
+        { key: "alignment-baseline", value: prop' value }
+    )
+  pureAttr AlignmentBaseline value = unsafeAttribute $ This
+    { key: "alignment-baseline", value: prop' value }
+  unpureAttr AlignmentBaseline eventValue = unsafeAttribute $ That $ eventValue
+    <#> \value -> { key: "alignment-baseline", value: prop' value }
 
 instance Attr FeGaussianBlur_ AlignmentBaseline String where
-  attr AlignmentBaseline bothValues  = unsafeAttribute $ Both { key: "alignment-baseline", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "alignment-baseline", value:  prop' value  })
-  pureAttr AlignmentBaseline value  = unsafeAttribute $ This { key: "alignment-baseline", value:  prop' value  }
-  unpureAttr AlignmentBaseline eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "alignment-baseline", value:  prop' value  }
+  attr AlignmentBaseline bothValues = unsafeAttribute $ Both
+    { key: "alignment-baseline", value: prop' (fst bothValues) }
+    ( snd bothValues <#> \value ->
+        { key: "alignment-baseline", value: prop' value }
+    )
+  pureAttr AlignmentBaseline value = unsafeAttribute $ This
+    { key: "alignment-baseline", value: prop' value }
+  unpureAttr AlignmentBaseline eventValue = unsafeAttribute $ That $ eventValue
+    <#> \value -> { key: "alignment-baseline", value: prop' value }
 
 instance Attr FeImage_ AlignmentBaseline String where
-  attr AlignmentBaseline bothValues  = unsafeAttribute $ Both { key: "alignment-baseline", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "alignment-baseline", value:  prop' value  })
-  pureAttr AlignmentBaseline value  = unsafeAttribute $ This { key: "alignment-baseline", value:  prop' value  }
-  unpureAttr AlignmentBaseline eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "alignment-baseline", value:  prop' value  }
+  attr AlignmentBaseline bothValues = unsafeAttribute $ Both
+    { key: "alignment-baseline", value: prop' (fst bothValues) }
+    ( snd bothValues <#> \value ->
+        { key: "alignment-baseline", value: prop' value }
+    )
+  pureAttr AlignmentBaseline value = unsafeAttribute $ This
+    { key: "alignment-baseline", value: prop' value }
+  unpureAttr AlignmentBaseline eventValue = unsafeAttribute $ That $ eventValue
+    <#> \value -> { key: "alignment-baseline", value: prop' value }
 
 instance Attr FeMerge_ AlignmentBaseline String where
-  attr AlignmentBaseline bothValues  = unsafeAttribute $ Both { key: "alignment-baseline", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "alignment-baseline", value:  prop' value  })
-  pureAttr AlignmentBaseline value  = unsafeAttribute $ This { key: "alignment-baseline", value:  prop' value  }
-  unpureAttr AlignmentBaseline eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "alignment-baseline", value:  prop' value  }
+  attr AlignmentBaseline bothValues = unsafeAttribute $ Both
+    { key: "alignment-baseline", value: prop' (fst bothValues) }
+    ( snd bothValues <#> \value ->
+        { key: "alignment-baseline", value: prop' value }
+    )
+  pureAttr AlignmentBaseline value = unsafeAttribute $ This
+    { key: "alignment-baseline", value: prop' value }
+  unpureAttr AlignmentBaseline eventValue = unsafeAttribute $ That $ eventValue
+    <#> \value -> { key: "alignment-baseline", value: prop' value }
 
 instance Attr FeMorphology_ AlignmentBaseline String where
-  attr AlignmentBaseline bothValues  = unsafeAttribute $ Both { key: "alignment-baseline", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "alignment-baseline", value:  prop' value  })
-  pureAttr AlignmentBaseline value  = unsafeAttribute $ This { key: "alignment-baseline", value:  prop' value  }
-  unpureAttr AlignmentBaseline eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "alignment-baseline", value:  prop' value  }
+  attr AlignmentBaseline bothValues = unsafeAttribute $ Both
+    { key: "alignment-baseline", value: prop' (fst bothValues) }
+    ( snd bothValues <#> \value ->
+        { key: "alignment-baseline", value: prop' value }
+    )
+  pureAttr AlignmentBaseline value = unsafeAttribute $ This
+    { key: "alignment-baseline", value: prop' value }
+  unpureAttr AlignmentBaseline eventValue = unsafeAttribute $ That $ eventValue
+    <#> \value -> { key: "alignment-baseline", value: prop' value }
 
 instance Attr FeOffset_ AlignmentBaseline String where
-  attr AlignmentBaseline bothValues  = unsafeAttribute $ Both { key: "alignment-baseline", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "alignment-baseline", value:  prop' value  })
-  pureAttr AlignmentBaseline value  = unsafeAttribute $ This { key: "alignment-baseline", value:  prop' value  }
-  unpureAttr AlignmentBaseline eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "alignment-baseline", value:  prop' value  }
+  attr AlignmentBaseline bothValues = unsafeAttribute $ Both
+    { key: "alignment-baseline", value: prop' (fst bothValues) }
+    ( snd bothValues <#> \value ->
+        { key: "alignment-baseline", value: prop' value }
+    )
+  pureAttr AlignmentBaseline value = unsafeAttribute $ This
+    { key: "alignment-baseline", value: prop' value }
+  unpureAttr AlignmentBaseline eventValue = unsafeAttribute $ That $ eventValue
+    <#> \value -> { key: "alignment-baseline", value: prop' value }
 
 instance Attr FeSpecularLighting_ AlignmentBaseline String where
-  attr AlignmentBaseline bothValues  = unsafeAttribute $ Both { key: "alignment-baseline", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "alignment-baseline", value:  prop' value  })
-  pureAttr AlignmentBaseline value  = unsafeAttribute $ This { key: "alignment-baseline", value:  prop' value  }
-  unpureAttr AlignmentBaseline eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "alignment-baseline", value:  prop' value  }
+  attr AlignmentBaseline bothValues = unsafeAttribute $ Both
+    { key: "alignment-baseline", value: prop' (fst bothValues) }
+    ( snd bothValues <#> \value ->
+        { key: "alignment-baseline", value: prop' value }
+    )
+  pureAttr AlignmentBaseline value = unsafeAttribute $ This
+    { key: "alignment-baseline", value: prop' value }
+  unpureAttr AlignmentBaseline eventValue = unsafeAttribute $ That $ eventValue
+    <#> \value -> { key: "alignment-baseline", value: prop' value }
 
 instance Attr FeTile_ AlignmentBaseline String where
-  attr AlignmentBaseline bothValues  = unsafeAttribute $ Both { key: "alignment-baseline", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "alignment-baseline", value:  prop' value  })
-  pureAttr AlignmentBaseline value  = unsafeAttribute $ This { key: "alignment-baseline", value:  prop' value  }
-  unpureAttr AlignmentBaseline eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "alignment-baseline", value:  prop' value  }
+  attr AlignmentBaseline bothValues = unsafeAttribute $ Both
+    { key: "alignment-baseline", value: prop' (fst bothValues) }
+    ( snd bothValues <#> \value ->
+        { key: "alignment-baseline", value: prop' value }
+    )
+  pureAttr AlignmentBaseline value = unsafeAttribute $ This
+    { key: "alignment-baseline", value: prop' value }
+  unpureAttr AlignmentBaseline eventValue = unsafeAttribute $ That $ eventValue
+    <#> \value -> { key: "alignment-baseline", value: prop' value }
 
 instance Attr FeTurbulence_ AlignmentBaseline String where
-  attr AlignmentBaseline bothValues  = unsafeAttribute $ Both { key: "alignment-baseline", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "alignment-baseline", value:  prop' value  })
-  pureAttr AlignmentBaseline value  = unsafeAttribute $ This { key: "alignment-baseline", value:  prop' value  }
-  unpureAttr AlignmentBaseline eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "alignment-baseline", value:  prop' value  }
+  attr AlignmentBaseline bothValues = unsafeAttribute $ Both
+    { key: "alignment-baseline", value: prop' (fst bothValues) }
+    ( snd bothValues <#> \value ->
+        { key: "alignment-baseline", value: prop' value }
+    )
+  pureAttr AlignmentBaseline value = unsafeAttribute $ This
+    { key: "alignment-baseline", value: prop' value }
+  unpureAttr AlignmentBaseline eventValue = unsafeAttribute $ That $ eventValue
+    <#> \value -> { key: "alignment-baseline", value: prop' value }
 
 instance Attr Filter_ AlignmentBaseline String where
-  attr AlignmentBaseline bothValues  = unsafeAttribute $ Both { key: "alignment-baseline", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "alignment-baseline", value:  prop' value  })
-  pureAttr AlignmentBaseline value  = unsafeAttribute $ This { key: "alignment-baseline", value:  prop' value  }
-  unpureAttr AlignmentBaseline eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "alignment-baseline", value:  prop' value  }
+  attr AlignmentBaseline bothValues = unsafeAttribute $ Both
+    { key: "alignment-baseline", value: prop' (fst bothValues) }
+    ( snd bothValues <#> \value ->
+        { key: "alignment-baseline", value: prop' value }
+    )
+  pureAttr AlignmentBaseline value = unsafeAttribute $ This
+    { key: "alignment-baseline", value: prop' value }
+  unpureAttr AlignmentBaseline eventValue = unsafeAttribute $ That $ eventValue
+    <#> \value -> { key: "alignment-baseline", value: prop' value }
 
 instance Attr Image_ AlignmentBaseline String where
-  attr AlignmentBaseline bothValues  = unsafeAttribute $ Both { key: "alignment-baseline", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "alignment-baseline", value:  prop' value  })
-  pureAttr AlignmentBaseline value  = unsafeAttribute $ This { key: "alignment-baseline", value:  prop' value  }
-  unpureAttr AlignmentBaseline eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "alignment-baseline", value:  prop' value  }
+  attr AlignmentBaseline bothValues = unsafeAttribute $ Both
+    { key: "alignment-baseline", value: prop' (fst bothValues) }
+    ( snd bothValues <#> \value ->
+        { key: "alignment-baseline", value: prop' value }
+    )
+  pureAttr AlignmentBaseline value = unsafeAttribute $ This
+    { key: "alignment-baseline", value: prop' value }
+  unpureAttr AlignmentBaseline eventValue = unsafeAttribute $ That $ eventValue
+    <#> \value -> { key: "alignment-baseline", value: prop' value }
 
 instance Attr Switch_ AlignmentBaseline String where
-  attr AlignmentBaseline bothValues  = unsafeAttribute $ Both { key: "alignment-baseline", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "alignment-baseline", value:  prop' value  })
-  pureAttr AlignmentBaseline value  = unsafeAttribute $ This { key: "alignment-baseline", value:  prop' value  }
-  unpureAttr AlignmentBaseline eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "alignment-baseline", value:  prop' value  }
+  attr AlignmentBaseline bothValues = unsafeAttribute $ Both
+    { key: "alignment-baseline", value: prop' (fst bothValues) }
+    ( snd bothValues <#> \value ->
+        { key: "alignment-baseline", value: prop' value }
+    )
+  pureAttr AlignmentBaseline value = unsafeAttribute $ This
+    { key: "alignment-baseline", value: prop' value }
+  unpureAttr AlignmentBaseline eventValue = unsafeAttribute $ That $ eventValue
+    <#> \value -> { key: "alignment-baseline", value: prop' value }
 
 instance Attr everything AlignmentBaseline Unit where
-  attr AlignmentBaseline bothValues  = unsafeAttribute $ Both { key: "alignment-baseline", value:  unset'  } (snd bothValues <#> \_ -> { key: "alignment-baseline", value:  unset'  })
-  pureAttr AlignmentBaseline _  = unsafeAttribute $ This { key: "alignment-baseline", value:  unset'  }
-  unpureAttr AlignmentBaseline eventValue  = unsafeAttribute $ That $ eventValue <#> \_ -> { key: "alignment-baseline", value:  unset'  }
+  attr AlignmentBaseline bothValues = unsafeAttribute $ Both
+    { key: "alignment-baseline", value: unset' }
+    (snd bothValues <#> \_ -> { key: "alignment-baseline", value: unset' })
+  pureAttr AlignmentBaseline _ = unsafeAttribute $ This
+    { key: "alignment-baseline", value: unset' }
+  unpureAttr AlignmentBaseline eventValue = unsafeAttribute $ That $ eventValue
+    <#> \_ -> { key: "alignment-baseline", value: unset' }

@@ -219,7 +219,8 @@ __internalDekuFlatten c a b = BC.flatten flattenArgs a b
 foreign import disconnectElement_
   :: Core.DisconnectElement -> FunctionOfFFIDOMSnapshotU
 
-foreign import associateWithUnsubscribe_ :: Core.AssociateWithUnsubscribe -> FunctionOfFFIDOMSnapshotU
+foreign import associateWithUnsubscribe_
+  :: Core.AssociateWithUnsubscribe -> FunctionOfFFIDOMSnapshotU
 
 foreign import setHydrating :: FunctionOfFFIDOMSnapshotU
 foreign import unSetHydrating :: FunctionOfFFIDOMSnapshotU
@@ -260,7 +261,9 @@ fullDOMInterpret seed deferredCache executor =
           removeDynBeacon_
       , deleteFromCache: execute $
           deleteFromCache_
-      , giveNewParent: \gnp -> giveNewParentOrReconstruct l executor Just runOnJust gnp
+      , giveNewParent: \gnp -> giveNewParentOrReconstruct l executor Just
+          runOnJust
+          gnp
       , disconnectElement: execute $
           disconnectElement_
       }
@@ -483,9 +486,9 @@ ssrDOMInterpret
   -> Core.DOMInterpret STPayload
 ssrDOMInterpret seed = Core.DOMInterpret
   { ids: do
-          s <- Ref.read seed
-          void $ Ref.modify (add 1) seed
-          pure s
+      s <- Ref.read seed
+      void $ Ref.modify (add 1) seed
+      pure s
   , associateWithUnsubscribe: execute \_ _ -> pure unit
   , deferPayload: deferPayloadSSR
   , redecorateDeferredPayload: redecorateDeferredPayloadSSR
@@ -569,7 +572,9 @@ hydratingDOMInterpret seed deferredCache executor =
           deleteFromCache_
       , removeDynBeacon: execute $
           removeDynBeacon_
-      , giveNewParent: \gnp -> giveNewParentOrReconstruct l executor Just runOnJust gnp
+      , giveNewParent: \gnp -> giveNewParentOrReconstruct l executor Just
+          runOnJust
+          gnp
       , disconnectElement: execute $
           disconnectElement_
       }

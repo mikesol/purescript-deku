@@ -10,24 +10,42 @@ import FRP.Event (Event)
 data OnDrop = OnDrop
 
 instance Attr anything OnDrop Cb where
-  attr OnDrop bothValues  = unsafeAttribute $ Both { key: "drop", value:  cb' (fst bothValues)  } (snd bothValues <#> \value -> { key: "drop", value:  cb' value  })
-  pureAttr OnDrop value  = unsafeAttribute $ This { key: "drop", value:  cb' value  }
-  unpureAttr OnDrop eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "drop", value:  cb' value  }
+  attr OnDrop bothValues = unsafeAttribute $ Both
+    { key: "drop", value: cb' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "drop", value: cb' value })
+  pureAttr OnDrop value = unsafeAttribute $ This
+    { key: "drop", value: cb' value }
+  unpureAttr OnDrop eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "drop", value: cb' value }
 
 instance Attr anything OnDrop (Effect Unit) where
-  attr OnDrop bothValues  = unsafeAttribute $ Both { key: "drop", value:  cb' (Cb (const ((fst bothValues) $> true)))  } (snd bothValues <#> \value -> { key: "drop", value:  cb' (Cb (const (value $> true)))  })
-  pureAttr OnDrop value  = unsafeAttribute $ This { key: "drop", value:  cb' (Cb (const (value $> true)))  }
-  unpureAttr OnDrop eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "drop", value:  cb' (Cb (const (value $> true)))  }
+  attr OnDrop bothValues = unsafeAttribute $ Both
+    { key: "drop", value: cb' (Cb (const ((fst bothValues) $> true))) }
+    ( snd bothValues <#> \value ->
+        { key: "drop", value: cb' (Cb (const (value $> true))) }
+    )
+  pureAttr OnDrop value = unsafeAttribute $ This
+    { key: "drop", value: cb' (Cb (const (value $> true))) }
+  unpureAttr OnDrop eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "drop", value: cb' (Cb (const (value $> true))) }
 
 instance Attr anything OnDrop (Effect Boolean) where
-  attr OnDrop bothValues  = unsafeAttribute $ Both { key: "drop", value:  cb' (Cb (const (fst bothValues)))  } (snd bothValues <#> \value -> { key: "drop", value:  cb' (Cb (const value))  })
-  pureAttr OnDrop value  = unsafeAttribute $ This { key: "drop", value:  cb' (Cb (const value))  }
-  unpureAttr OnDrop eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "drop", value:  cb' (Cb (const value))  }
+  attr OnDrop bothValues = unsafeAttribute $ Both
+    { key: "drop", value: cb' (Cb (const (fst bothValues))) }
+    ( snd bothValues <#> \value ->
+        { key: "drop", value: cb' (Cb (const value)) }
+    )
+  pureAttr OnDrop value = unsafeAttribute $ This
+    { key: "drop", value: cb' (Cb (const value)) }
+  unpureAttr OnDrop eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "drop", value: cb' (Cb (const value)) }
 
 type OnDropEffect =
   forall element. Attr element OnDrop (Effect Unit) => Event (Attribute element)
 
 instance Attr everything OnDrop Unit where
-  attr OnDrop bothValues  = unsafeAttribute $ Both { key: "drop", value:  unset'  } (snd bothValues <#> \_ -> { key: "drop", value:  unset'  })
-  pureAttr OnDrop _  = unsafeAttribute $ This { key: "drop", value:  unset'  }
-  unpureAttr OnDrop eventValue  = unsafeAttribute $ That $ eventValue <#> \_ -> { key: "drop", value:  unset'  }
+  attr OnDrop bothValues = unsafeAttribute $ Both { key: "drop", value: unset' }
+    (snd bothValues <#> \_ -> { key: "drop", value: unset' })
+  pureAttr OnDrop _ = unsafeAttribute $ This { key: "drop", value: unset' }
+  unpureAttr OnDrop eventValue = unsafeAttribute $ That $ eventValue <#> \_ ->
+    { key: "drop", value: unset' }

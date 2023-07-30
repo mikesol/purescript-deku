@@ -10,19 +10,35 @@ import FRP.Event (Event)
 data OnKeyup = OnKeyup
 
 instance Attr anything OnKeyup Cb where
-  attr OnKeyup bothValues  = unsafeAttribute $ Both { key: "keyup", value:  cb' (fst bothValues)  } (snd bothValues <#> \value -> { key: "keyup", value:  cb' value  })
-  pureAttr OnKeyup value  = unsafeAttribute $ This { key: "keyup", value:  cb' value  }
-  unpureAttr OnKeyup eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "keyup", value:  cb' value  }
+  attr OnKeyup bothValues = unsafeAttribute $ Both
+    { key: "keyup", value: cb' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "keyup", value: cb' value })
+  pureAttr OnKeyup value = unsafeAttribute $ This
+    { key: "keyup", value: cb' value }
+  unpureAttr OnKeyup eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "keyup", value: cb' value }
 
 instance Attr anything OnKeyup (Effect Unit) where
-  attr OnKeyup bothValues  = unsafeAttribute $ Both { key: "keyup", value:  cb' (Cb (const ((fst bothValues) $> true)))  } (snd bothValues <#> \value -> { key: "keyup", value:  cb' (Cb (const (value $> true)))  })
-  pureAttr OnKeyup value  = unsafeAttribute $ This { key: "keyup", value:  cb' (Cb (const (value $> true)))  }
-  unpureAttr OnKeyup eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "keyup", value:  cb' (Cb (const (value $> true)))  }
+  attr OnKeyup bothValues = unsafeAttribute $ Both
+    { key: "keyup", value: cb' (Cb (const ((fst bothValues) $> true))) }
+    ( snd bothValues <#> \value ->
+        { key: "keyup", value: cb' (Cb (const (value $> true))) }
+    )
+  pureAttr OnKeyup value = unsafeAttribute $ This
+    { key: "keyup", value: cb' (Cb (const (value $> true))) }
+  unpureAttr OnKeyup eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "keyup", value: cb' (Cb (const (value $> true))) }
 
 instance Attr anything OnKeyup (Effect Boolean) where
-  attr OnKeyup bothValues  = unsafeAttribute $ Both { key: "keyup", value:  cb' (Cb (const (fst bothValues)))  } (snd bothValues <#> \value -> { key: "keyup", value:  cb' (Cb (const value))  })
-  pureAttr OnKeyup value  = unsafeAttribute $ This { key: "keyup", value:  cb' (Cb (const value))  }
-  unpureAttr OnKeyup eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "keyup", value:  cb' (Cb (const value))  }
+  attr OnKeyup bothValues = unsafeAttribute $ Both
+    { key: "keyup", value: cb' (Cb (const (fst bothValues))) }
+    ( snd bothValues <#> \value ->
+        { key: "keyup", value: cb' (Cb (const value)) }
+    )
+  pureAttr OnKeyup value = unsafeAttribute $ This
+    { key: "keyup", value: cb' (Cb (const value)) }
+  unpureAttr OnKeyup eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "keyup", value: cb' (Cb (const value)) }
 
 type OnKeyupEffect =
   forall element
@@ -30,6 +46,9 @@ type OnKeyupEffect =
   => Event (Attribute element)
 
 instance Attr everything OnKeyup Unit where
-  attr OnKeyup bothValues  = unsafeAttribute $ Both { key: "keyup", value:  unset'  } (snd bothValues <#> \_ -> { key: "keyup", value:  unset'  })
-  pureAttr OnKeyup _  = unsafeAttribute $ This { key: "keyup", value:  unset'  }
-  unpureAttr OnKeyup eventValue  = unsafeAttribute $ That $ eventValue <#> \_ -> { key: "keyup", value:  unset'  }
+  attr OnKeyup bothValues = unsafeAttribute $ Both
+    { key: "keyup", value: unset' }
+    (snd bothValues <#> \_ -> { key: "keyup", value: unset' })
+  pureAttr OnKeyup _ = unsafeAttribute $ This { key: "keyup", value: unset' }
+  unpureAttr OnKeyup eventValue = unsafeAttribute $ That $ eventValue <#> \_ ->
+    { key: "keyup", value: unset' }

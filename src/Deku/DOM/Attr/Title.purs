@@ -131,616 +131,1106 @@ import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 data Title = Title
 
 instance Attr A_ Title String where
-  attr Title bothValues  = unsafeAttribute $ Both { key: "title", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "title", value:  prop' value  })
-  pureAttr Title value  = unsafeAttribute $ This { key: "title", value:  prop' value  }
-  unpureAttr Title eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "title", value:  prop' value  }
+  attr Title bothValues = unsafeAttribute $ Both
+    { key: "title", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "title", value: prop' value })
+  pureAttr Title value = unsafeAttribute $ This
+    { key: "title", value: prop' value }
+  unpureAttr Title eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "title", value: prop' value }
 
 instance Attr Abbr_ Title String where
-  attr Title bothValues  = unsafeAttribute $ Both { key: "title", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "title", value:  prop' value  })
-  pureAttr Title value  = unsafeAttribute $ This { key: "title", value:  prop' value  }
-  unpureAttr Title eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "title", value:  prop' value  }
+  attr Title bothValues = unsafeAttribute $ Both
+    { key: "title", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "title", value: prop' value })
+  pureAttr Title value = unsafeAttribute $ This
+    { key: "title", value: prop' value }
+  unpureAttr Title eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "title", value: prop' value }
 
 instance Attr Acronym_ Title String where
-  attr Title bothValues  = unsafeAttribute $ Both { key: "title", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "title", value:  prop' value  })
-  pureAttr Title value  = unsafeAttribute $ This { key: "title", value:  prop' value  }
-  unpureAttr Title eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "title", value:  prop' value  }
+  attr Title bothValues = unsafeAttribute $ Both
+    { key: "title", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "title", value: prop' value })
+  pureAttr Title value = unsafeAttribute $ This
+    { key: "title", value: prop' value }
+  unpureAttr Title eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "title", value: prop' value }
 
 instance Attr Address_ Title String where
-  attr Title bothValues  = unsafeAttribute $ Both { key: "title", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "title", value:  prop' value  })
-  pureAttr Title value  = unsafeAttribute $ This { key: "title", value:  prop' value  }
-  unpureAttr Title eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "title", value:  prop' value  }
+  attr Title bothValues = unsafeAttribute $ Both
+    { key: "title", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "title", value: prop' value })
+  pureAttr Title value = unsafeAttribute $ This
+    { key: "title", value: prop' value }
+  unpureAttr Title eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "title", value: prop' value }
 
 instance Attr Applet_ Title String where
-  attr Title bothValues  = unsafeAttribute $ Both { key: "title", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "title", value:  prop' value  })
-  pureAttr Title value  = unsafeAttribute $ This { key: "title", value:  prop' value  }
-  unpureAttr Title eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "title", value:  prop' value  }
+  attr Title bothValues = unsafeAttribute $ Both
+    { key: "title", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "title", value: prop' value })
+  pureAttr Title value = unsafeAttribute $ This
+    { key: "title", value: prop' value }
+  unpureAttr Title eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "title", value: prop' value }
 
 instance Attr Area_ Title String where
-  attr Title bothValues  = unsafeAttribute $ Both { key: "title", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "title", value:  prop' value  })
-  pureAttr Title value  = unsafeAttribute $ This { key: "title", value:  prop' value  }
-  unpureAttr Title eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "title", value:  prop' value  }
+  attr Title bothValues = unsafeAttribute $ Both
+    { key: "title", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "title", value: prop' value })
+  pureAttr Title value = unsafeAttribute $ This
+    { key: "title", value: prop' value }
+  unpureAttr Title eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "title", value: prop' value }
 
 instance Attr Article_ Title String where
-  attr Title bothValues  = unsafeAttribute $ Both { key: "title", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "title", value:  prop' value  })
-  pureAttr Title value  = unsafeAttribute $ This { key: "title", value:  prop' value  }
-  unpureAttr Title eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "title", value:  prop' value  }
+  attr Title bothValues = unsafeAttribute $ Both
+    { key: "title", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "title", value: prop' value })
+  pureAttr Title value = unsafeAttribute $ This
+    { key: "title", value: prop' value }
+  unpureAttr Title eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "title", value: prop' value }
 
 instance Attr Aside_ Title String where
-  attr Title bothValues  = unsafeAttribute $ Both { key: "title", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "title", value:  prop' value  })
-  pureAttr Title value  = unsafeAttribute $ This { key: "title", value:  prop' value  }
-  unpureAttr Title eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "title", value:  prop' value  }
+  attr Title bothValues = unsafeAttribute $ Both
+    { key: "title", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "title", value: prop' value })
+  pureAttr Title value = unsafeAttribute $ This
+    { key: "title", value: prop' value }
+  unpureAttr Title eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "title", value: prop' value }
 
 instance Attr Audio_ Title String where
-  attr Title bothValues  = unsafeAttribute $ Both { key: "title", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "title", value:  prop' value  })
-  pureAttr Title value  = unsafeAttribute $ This { key: "title", value:  prop' value  }
-  unpureAttr Title eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "title", value:  prop' value  }
+  attr Title bothValues = unsafeAttribute $ Both
+    { key: "title", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "title", value: prop' value })
+  pureAttr Title value = unsafeAttribute $ This
+    { key: "title", value: prop' value }
+  unpureAttr Title eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "title", value: prop' value }
 
 instance Attr B_ Title String where
-  attr Title bothValues  = unsafeAttribute $ Both { key: "title", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "title", value:  prop' value  })
-  pureAttr Title value  = unsafeAttribute $ This { key: "title", value:  prop' value  }
-  unpureAttr Title eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "title", value:  prop' value  }
+  attr Title bothValues = unsafeAttribute $ Both
+    { key: "title", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "title", value: prop' value })
+  pureAttr Title value = unsafeAttribute $ This
+    { key: "title", value: prop' value }
+  unpureAttr Title eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "title", value: prop' value }
 
 instance Attr Base_ Title String where
-  attr Title bothValues  = unsafeAttribute $ Both { key: "title", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "title", value:  prop' value  })
-  pureAttr Title value  = unsafeAttribute $ This { key: "title", value:  prop' value  }
-  unpureAttr Title eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "title", value:  prop' value  }
+  attr Title bothValues = unsafeAttribute $ Both
+    { key: "title", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "title", value: prop' value })
+  pureAttr Title value = unsafeAttribute $ This
+    { key: "title", value: prop' value }
+  unpureAttr Title eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "title", value: prop' value }
 
 instance Attr Basefont_ Title String where
-  attr Title bothValues  = unsafeAttribute $ Both { key: "title", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "title", value:  prop' value  })
-  pureAttr Title value  = unsafeAttribute $ This { key: "title", value:  prop' value  }
-  unpureAttr Title eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "title", value:  prop' value  }
+  attr Title bothValues = unsafeAttribute $ Both
+    { key: "title", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "title", value: prop' value })
+  pureAttr Title value = unsafeAttribute $ This
+    { key: "title", value: prop' value }
+  unpureAttr Title eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "title", value: prop' value }
 
 instance Attr Bdi_ Title String where
-  attr Title bothValues  = unsafeAttribute $ Both { key: "title", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "title", value:  prop' value  })
-  pureAttr Title value  = unsafeAttribute $ This { key: "title", value:  prop' value  }
-  unpureAttr Title eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "title", value:  prop' value  }
+  attr Title bothValues = unsafeAttribute $ Both
+    { key: "title", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "title", value: prop' value })
+  pureAttr Title value = unsafeAttribute $ This
+    { key: "title", value: prop' value }
+  unpureAttr Title eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "title", value: prop' value }
 
 instance Attr Bdo_ Title String where
-  attr Title bothValues  = unsafeAttribute $ Both { key: "title", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "title", value:  prop' value  })
-  pureAttr Title value  = unsafeAttribute $ This { key: "title", value:  prop' value  }
-  unpureAttr Title eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "title", value:  prop' value  }
+  attr Title bothValues = unsafeAttribute $ Both
+    { key: "title", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "title", value: prop' value })
+  pureAttr Title value = unsafeAttribute $ This
+    { key: "title", value: prop' value }
+  unpureAttr Title eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "title", value: prop' value }
 
 instance Attr Big_ Title String where
-  attr Title bothValues  = unsafeAttribute $ Both { key: "title", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "title", value:  prop' value  })
-  pureAttr Title value  = unsafeAttribute $ This { key: "title", value:  prop' value  }
-  unpureAttr Title eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "title", value:  prop' value  }
+  attr Title bothValues = unsafeAttribute $ Both
+    { key: "title", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "title", value: prop' value })
+  pureAttr Title value = unsafeAttribute $ This
+    { key: "title", value: prop' value }
+  unpureAttr Title eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "title", value: prop' value }
 
 instance Attr Blockquote_ Title String where
-  attr Title bothValues  = unsafeAttribute $ Both { key: "title", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "title", value:  prop' value  })
-  pureAttr Title value  = unsafeAttribute $ This { key: "title", value:  prop' value  }
-  unpureAttr Title eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "title", value:  prop' value  }
+  attr Title bothValues = unsafeAttribute $ Both
+    { key: "title", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "title", value: prop' value })
+  pureAttr Title value = unsafeAttribute $ This
+    { key: "title", value: prop' value }
+  unpureAttr Title eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "title", value: prop' value }
 
 instance Attr Body_ Title String where
-  attr Title bothValues  = unsafeAttribute $ Both { key: "title", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "title", value:  prop' value  })
-  pureAttr Title value  = unsafeAttribute $ This { key: "title", value:  prop' value  }
-  unpureAttr Title eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "title", value:  prop' value  }
+  attr Title bothValues = unsafeAttribute $ Both
+    { key: "title", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "title", value: prop' value })
+  pureAttr Title value = unsafeAttribute $ This
+    { key: "title", value: prop' value }
+  unpureAttr Title eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "title", value: prop' value }
 
 instance Attr Br_ Title String where
-  attr Title bothValues  = unsafeAttribute $ Both { key: "title", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "title", value:  prop' value  })
-  pureAttr Title value  = unsafeAttribute $ This { key: "title", value:  prop' value  }
-  unpureAttr Title eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "title", value:  prop' value  }
+  attr Title bothValues = unsafeAttribute $ Both
+    { key: "title", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "title", value: prop' value })
+  pureAttr Title value = unsafeAttribute $ This
+    { key: "title", value: prop' value }
+  unpureAttr Title eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "title", value: prop' value }
 
 instance Attr Button_ Title String where
-  attr Title bothValues  = unsafeAttribute $ Both { key: "title", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "title", value:  prop' value  })
-  pureAttr Title value  = unsafeAttribute $ This { key: "title", value:  prop' value  }
-  unpureAttr Title eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "title", value:  prop' value  }
+  attr Title bothValues = unsafeAttribute $ Both
+    { key: "title", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "title", value: prop' value })
+  pureAttr Title value = unsafeAttribute $ This
+    { key: "title", value: prop' value }
+  unpureAttr Title eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "title", value: prop' value }
 
 instance Attr Canvas_ Title String where
-  attr Title bothValues  = unsafeAttribute $ Both { key: "title", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "title", value:  prop' value  })
-  pureAttr Title value  = unsafeAttribute $ This { key: "title", value:  prop' value  }
-  unpureAttr Title eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "title", value:  prop' value  }
+  attr Title bothValues = unsafeAttribute $ Both
+    { key: "title", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "title", value: prop' value })
+  pureAttr Title value = unsafeAttribute $ This
+    { key: "title", value: prop' value }
+  unpureAttr Title eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "title", value: prop' value }
 
 instance Attr Caption_ Title String where
-  attr Title bothValues  = unsafeAttribute $ Both { key: "title", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "title", value:  prop' value  })
-  pureAttr Title value  = unsafeAttribute $ This { key: "title", value:  prop' value  }
-  unpureAttr Title eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "title", value:  prop' value  }
+  attr Title bothValues = unsafeAttribute $ Both
+    { key: "title", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "title", value: prop' value })
+  pureAttr Title value = unsafeAttribute $ This
+    { key: "title", value: prop' value }
+  unpureAttr Title eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "title", value: prop' value }
 
 instance Attr Center_ Title String where
-  attr Title bothValues  = unsafeAttribute $ Both { key: "title", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "title", value:  prop' value  })
-  pureAttr Title value  = unsafeAttribute $ This { key: "title", value:  prop' value  }
-  unpureAttr Title eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "title", value:  prop' value  }
+  attr Title bothValues = unsafeAttribute $ Both
+    { key: "title", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "title", value: prop' value })
+  pureAttr Title value = unsafeAttribute $ This
+    { key: "title", value: prop' value }
+  unpureAttr Title eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "title", value: prop' value }
 
 instance Attr Cite_ Title String where
-  attr Title bothValues  = unsafeAttribute $ Both { key: "title", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "title", value:  prop' value  })
-  pureAttr Title value  = unsafeAttribute $ This { key: "title", value:  prop' value  }
-  unpureAttr Title eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "title", value:  prop' value  }
+  attr Title bothValues = unsafeAttribute $ Both
+    { key: "title", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "title", value: prop' value })
+  pureAttr Title value = unsafeAttribute $ This
+    { key: "title", value: prop' value }
+  unpureAttr Title eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "title", value: prop' value }
 
 instance Attr Code_ Title String where
-  attr Title bothValues  = unsafeAttribute $ Both { key: "title", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "title", value:  prop' value  })
-  pureAttr Title value  = unsafeAttribute $ This { key: "title", value:  prop' value  }
-  unpureAttr Title eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "title", value:  prop' value  }
+  attr Title bothValues = unsafeAttribute $ Both
+    { key: "title", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "title", value: prop' value })
+  pureAttr Title value = unsafeAttribute $ This
+    { key: "title", value: prop' value }
+  unpureAttr Title eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "title", value: prop' value }
 
 instance Attr Col_ Title String where
-  attr Title bothValues  = unsafeAttribute $ Both { key: "title", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "title", value:  prop' value  })
-  pureAttr Title value  = unsafeAttribute $ This { key: "title", value:  prop' value  }
-  unpureAttr Title eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "title", value:  prop' value  }
+  attr Title bothValues = unsafeAttribute $ Both
+    { key: "title", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "title", value: prop' value })
+  pureAttr Title value = unsafeAttribute $ This
+    { key: "title", value: prop' value }
+  unpureAttr Title eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "title", value: prop' value }
 
 instance Attr Colgroup_ Title String where
-  attr Title bothValues  = unsafeAttribute $ Both { key: "title", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "title", value:  prop' value  })
-  pureAttr Title value  = unsafeAttribute $ This { key: "title", value:  prop' value  }
-  unpureAttr Title eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "title", value:  prop' value  }
+  attr Title bothValues = unsafeAttribute $ Both
+    { key: "title", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "title", value: prop' value })
+  pureAttr Title value = unsafeAttribute $ This
+    { key: "title", value: prop' value }
+  unpureAttr Title eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "title", value: prop' value }
 
 instance Attr Xdata_ Title String where
-  attr Title bothValues  = unsafeAttribute $ Both { key: "title", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "title", value:  prop' value  })
-  pureAttr Title value  = unsafeAttribute $ This { key: "title", value:  prop' value  }
-  unpureAttr Title eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "title", value:  prop' value  }
+  attr Title bothValues = unsafeAttribute $ Both
+    { key: "title", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "title", value: prop' value })
+  pureAttr Title value = unsafeAttribute $ This
+    { key: "title", value: prop' value }
+  unpureAttr Title eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "title", value: prop' value }
 
 instance Attr Datalist_ Title String where
-  attr Title bothValues  = unsafeAttribute $ Both { key: "title", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "title", value:  prop' value  })
-  pureAttr Title value  = unsafeAttribute $ This { key: "title", value:  prop' value  }
-  unpureAttr Title eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "title", value:  prop' value  }
+  attr Title bothValues = unsafeAttribute $ Both
+    { key: "title", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "title", value: prop' value })
+  pureAttr Title value = unsafeAttribute $ This
+    { key: "title", value: prop' value }
+  unpureAttr Title eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "title", value: prop' value }
 
 instance Attr Dd_ Title String where
-  attr Title bothValues  = unsafeAttribute $ Both { key: "title", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "title", value:  prop' value  })
-  pureAttr Title value  = unsafeAttribute $ This { key: "title", value:  prop' value  }
-  unpureAttr Title eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "title", value:  prop' value  }
+  attr Title bothValues = unsafeAttribute $ Both
+    { key: "title", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "title", value: prop' value })
+  pureAttr Title value = unsafeAttribute $ This
+    { key: "title", value: prop' value }
+  unpureAttr Title eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "title", value: prop' value }
 
 instance Attr Del_ Title String where
-  attr Title bothValues  = unsafeAttribute $ Both { key: "title", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "title", value:  prop' value  })
-  pureAttr Title value  = unsafeAttribute $ This { key: "title", value:  prop' value  }
-  unpureAttr Title eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "title", value:  prop' value  }
+  attr Title bothValues = unsafeAttribute $ Both
+    { key: "title", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "title", value: prop' value })
+  pureAttr Title value = unsafeAttribute $ This
+    { key: "title", value: prop' value }
+  unpureAttr Title eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "title", value: prop' value }
 
 instance Attr Details_ Title String where
-  attr Title bothValues  = unsafeAttribute $ Both { key: "title", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "title", value:  prop' value  })
-  pureAttr Title value  = unsafeAttribute $ This { key: "title", value:  prop' value  }
-  unpureAttr Title eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "title", value:  prop' value  }
+  attr Title bothValues = unsafeAttribute $ Both
+    { key: "title", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "title", value: prop' value })
+  pureAttr Title value = unsafeAttribute $ This
+    { key: "title", value: prop' value }
+  unpureAttr Title eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "title", value: prop' value }
 
 instance Attr Dfn_ Title String where
-  attr Title bothValues  = unsafeAttribute $ Both { key: "title", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "title", value:  prop' value  })
-  pureAttr Title value  = unsafeAttribute $ This { key: "title", value:  prop' value  }
-  unpureAttr Title eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "title", value:  prop' value  }
+  attr Title bothValues = unsafeAttribute $ Both
+    { key: "title", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "title", value: prop' value })
+  pureAttr Title value = unsafeAttribute $ This
+    { key: "title", value: prop' value }
+  unpureAttr Title eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "title", value: prop' value }
 
 instance Attr Dialog_ Title String where
-  attr Title bothValues  = unsafeAttribute $ Both { key: "title", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "title", value:  prop' value  })
-  pureAttr Title value  = unsafeAttribute $ This { key: "title", value:  prop' value  }
-  unpureAttr Title eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "title", value:  prop' value  }
+  attr Title bothValues = unsafeAttribute $ Both
+    { key: "title", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "title", value: prop' value })
+  pureAttr Title value = unsafeAttribute $ This
+    { key: "title", value: prop' value }
+  unpureAttr Title eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "title", value: prop' value }
 
 instance Attr Dir_ Title String where
-  attr Title bothValues  = unsafeAttribute $ Both { key: "title", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "title", value:  prop' value  })
-  pureAttr Title value  = unsafeAttribute $ This { key: "title", value:  prop' value  }
-  unpureAttr Title eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "title", value:  prop' value  }
+  attr Title bothValues = unsafeAttribute $ Both
+    { key: "title", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "title", value: prop' value })
+  pureAttr Title value = unsafeAttribute $ This
+    { key: "title", value: prop' value }
+  unpureAttr Title eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "title", value: prop' value }
 
 instance Attr Div_ Title String where
-  attr Title bothValues  = unsafeAttribute $ Both { key: "title", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "title", value:  prop' value  })
-  pureAttr Title value  = unsafeAttribute $ This { key: "title", value:  prop' value  }
-  unpureAttr Title eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "title", value:  prop' value  }
+  attr Title bothValues = unsafeAttribute $ Both
+    { key: "title", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "title", value: prop' value })
+  pureAttr Title value = unsafeAttribute $ This
+    { key: "title", value: prop' value }
+  unpureAttr Title eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "title", value: prop' value }
 
 instance Attr Dl_ Title String where
-  attr Title bothValues  = unsafeAttribute $ Both { key: "title", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "title", value:  prop' value  })
-  pureAttr Title value  = unsafeAttribute $ This { key: "title", value:  prop' value  }
-  unpureAttr Title eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "title", value:  prop' value  }
+  attr Title bothValues = unsafeAttribute $ Both
+    { key: "title", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "title", value: prop' value })
+  pureAttr Title value = unsafeAttribute $ This
+    { key: "title", value: prop' value }
+  unpureAttr Title eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "title", value: prop' value }
 
 instance Attr Dt_ Title String where
-  attr Title bothValues  = unsafeAttribute $ Both { key: "title", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "title", value:  prop' value  })
-  pureAttr Title value  = unsafeAttribute $ This { key: "title", value:  prop' value  }
-  unpureAttr Title eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "title", value:  prop' value  }
+  attr Title bothValues = unsafeAttribute $ Both
+    { key: "title", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "title", value: prop' value })
+  pureAttr Title value = unsafeAttribute $ This
+    { key: "title", value: prop' value }
+  unpureAttr Title eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "title", value: prop' value }
 
 instance Attr Em_ Title String where
-  attr Title bothValues  = unsafeAttribute $ Both { key: "title", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "title", value:  prop' value  })
-  pureAttr Title value  = unsafeAttribute $ This { key: "title", value:  prop' value  }
-  unpureAttr Title eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "title", value:  prop' value  }
+  attr Title bothValues = unsafeAttribute $ Both
+    { key: "title", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "title", value: prop' value })
+  pureAttr Title value = unsafeAttribute $ This
+    { key: "title", value: prop' value }
+  unpureAttr Title eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "title", value: prop' value }
 
 instance Attr Embed_ Title String where
-  attr Title bothValues  = unsafeAttribute $ Both { key: "title", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "title", value:  prop' value  })
-  pureAttr Title value  = unsafeAttribute $ This { key: "title", value:  prop' value  }
-  unpureAttr Title eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "title", value:  prop' value  }
+  attr Title bothValues = unsafeAttribute $ Both
+    { key: "title", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "title", value: prop' value })
+  pureAttr Title value = unsafeAttribute $ This
+    { key: "title", value: prop' value }
+  unpureAttr Title eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "title", value: prop' value }
 
 instance Attr Fieldset_ Title String where
-  attr Title bothValues  = unsafeAttribute $ Both { key: "title", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "title", value:  prop' value  })
-  pureAttr Title value  = unsafeAttribute $ This { key: "title", value:  prop' value  }
-  unpureAttr Title eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "title", value:  prop' value  }
+  attr Title bothValues = unsafeAttribute $ Both
+    { key: "title", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "title", value: prop' value })
+  pureAttr Title value = unsafeAttribute $ This
+    { key: "title", value: prop' value }
+  unpureAttr Title eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "title", value: prop' value }
 
 instance Attr Figcaption_ Title String where
-  attr Title bothValues  = unsafeAttribute $ Both { key: "title", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "title", value:  prop' value  })
-  pureAttr Title value  = unsafeAttribute $ This { key: "title", value:  prop' value  }
-  unpureAttr Title eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "title", value:  prop' value  }
+  attr Title bothValues = unsafeAttribute $ Both
+    { key: "title", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "title", value: prop' value })
+  pureAttr Title value = unsafeAttribute $ This
+    { key: "title", value: prop' value }
+  unpureAttr Title eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "title", value: prop' value }
 
 instance Attr Figure_ Title String where
-  attr Title bothValues  = unsafeAttribute $ Both { key: "title", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "title", value:  prop' value  })
-  pureAttr Title value  = unsafeAttribute $ This { key: "title", value:  prop' value  }
-  unpureAttr Title eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "title", value:  prop' value  }
+  attr Title bothValues = unsafeAttribute $ Both
+    { key: "title", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "title", value: prop' value })
+  pureAttr Title value = unsafeAttribute $ This
+    { key: "title", value: prop' value }
+  unpureAttr Title eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "title", value: prop' value }
 
 instance Attr Font_ Title String where
-  attr Title bothValues  = unsafeAttribute $ Both { key: "title", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "title", value:  prop' value  })
-  pureAttr Title value  = unsafeAttribute $ This { key: "title", value:  prop' value  }
-  unpureAttr Title eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "title", value:  prop' value  }
+  attr Title bothValues = unsafeAttribute $ Both
+    { key: "title", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "title", value: prop' value })
+  pureAttr Title value = unsafeAttribute $ This
+    { key: "title", value: prop' value }
+  unpureAttr Title eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "title", value: prop' value }
 
 instance Attr Footer_ Title String where
-  attr Title bothValues  = unsafeAttribute $ Both { key: "title", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "title", value:  prop' value  })
-  pureAttr Title value  = unsafeAttribute $ This { key: "title", value:  prop' value  }
-  unpureAttr Title eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "title", value:  prop' value  }
+  attr Title bothValues = unsafeAttribute $ Both
+    { key: "title", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "title", value: prop' value })
+  pureAttr Title value = unsafeAttribute $ This
+    { key: "title", value: prop' value }
+  unpureAttr Title eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "title", value: prop' value }
 
 instance Attr Form_ Title String where
-  attr Title bothValues  = unsafeAttribute $ Both { key: "title", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "title", value:  prop' value  })
-  pureAttr Title value  = unsafeAttribute $ This { key: "title", value:  prop' value  }
-  unpureAttr Title eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "title", value:  prop' value  }
+  attr Title bothValues = unsafeAttribute $ Both
+    { key: "title", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "title", value: prop' value })
+  pureAttr Title value = unsafeAttribute $ This
+    { key: "title", value: prop' value }
+  unpureAttr Title eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "title", value: prop' value }
 
 instance Attr Frame_ Title String where
-  attr Title bothValues  = unsafeAttribute $ Both { key: "title", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "title", value:  prop' value  })
-  pureAttr Title value  = unsafeAttribute $ This { key: "title", value:  prop' value  }
-  unpureAttr Title eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "title", value:  prop' value  }
+  attr Title bothValues = unsafeAttribute $ Both
+    { key: "title", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "title", value: prop' value })
+  pureAttr Title value = unsafeAttribute $ This
+    { key: "title", value: prop' value }
+  unpureAttr Title eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "title", value: prop' value }
 
 instance Attr Frameset_ Title String where
-  attr Title bothValues  = unsafeAttribute $ Both { key: "title", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "title", value:  prop' value  })
-  pureAttr Title value  = unsafeAttribute $ This { key: "title", value:  prop' value  }
-  unpureAttr Title eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "title", value:  prop' value  }
+  attr Title bothValues = unsafeAttribute $ Both
+    { key: "title", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "title", value: prop' value })
+  pureAttr Title value = unsafeAttribute $ This
+    { key: "title", value: prop' value }
+  unpureAttr Title eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "title", value: prop' value }
 
 instance Attr H1_ Title String where
-  attr Title bothValues  = unsafeAttribute $ Both { key: "title", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "title", value:  prop' value  })
-  pureAttr Title value  = unsafeAttribute $ This { key: "title", value:  prop' value  }
-  unpureAttr Title eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "title", value:  prop' value  }
+  attr Title bothValues = unsafeAttribute $ Both
+    { key: "title", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "title", value: prop' value })
+  pureAttr Title value = unsafeAttribute $ This
+    { key: "title", value: prop' value }
+  unpureAttr Title eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "title", value: prop' value }
 
 instance Attr H2_ Title String where
-  attr Title bothValues  = unsafeAttribute $ Both { key: "title", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "title", value:  prop' value  })
-  pureAttr Title value  = unsafeAttribute $ This { key: "title", value:  prop' value  }
-  unpureAttr Title eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "title", value:  prop' value  }
+  attr Title bothValues = unsafeAttribute $ Both
+    { key: "title", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "title", value: prop' value })
+  pureAttr Title value = unsafeAttribute $ This
+    { key: "title", value: prop' value }
+  unpureAttr Title eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "title", value: prop' value }
 
 instance Attr H3_ Title String where
-  attr Title bothValues  = unsafeAttribute $ Both { key: "title", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "title", value:  prop' value  })
-  pureAttr Title value  = unsafeAttribute $ This { key: "title", value:  prop' value  }
-  unpureAttr Title eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "title", value:  prop' value  }
+  attr Title bothValues = unsafeAttribute $ Both
+    { key: "title", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "title", value: prop' value })
+  pureAttr Title value = unsafeAttribute $ This
+    { key: "title", value: prop' value }
+  unpureAttr Title eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "title", value: prop' value }
 
 instance Attr H4_ Title String where
-  attr Title bothValues  = unsafeAttribute $ Both { key: "title", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "title", value:  prop' value  })
-  pureAttr Title value  = unsafeAttribute $ This { key: "title", value:  prop' value  }
-  unpureAttr Title eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "title", value:  prop' value  }
+  attr Title bothValues = unsafeAttribute $ Both
+    { key: "title", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "title", value: prop' value })
+  pureAttr Title value = unsafeAttribute $ This
+    { key: "title", value: prop' value }
+  unpureAttr Title eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "title", value: prop' value }
 
 instance Attr H5_ Title String where
-  attr Title bothValues  = unsafeAttribute $ Both { key: "title", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "title", value:  prop' value  })
-  pureAttr Title value  = unsafeAttribute $ This { key: "title", value:  prop' value  }
-  unpureAttr Title eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "title", value:  prop' value  }
+  attr Title bothValues = unsafeAttribute $ Both
+    { key: "title", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "title", value: prop' value })
+  pureAttr Title value = unsafeAttribute $ This
+    { key: "title", value: prop' value }
+  unpureAttr Title eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "title", value: prop' value }
 
 instance Attr H6_ Title String where
-  attr Title bothValues  = unsafeAttribute $ Both { key: "title", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "title", value:  prop' value  })
-  pureAttr Title value  = unsafeAttribute $ This { key: "title", value:  prop' value  }
-  unpureAttr Title eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "title", value:  prop' value  }
+  attr Title bothValues = unsafeAttribute $ Both
+    { key: "title", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "title", value: prop' value })
+  pureAttr Title value = unsafeAttribute $ This
+    { key: "title", value: prop' value }
+  unpureAttr Title eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "title", value: prop' value }
 
 instance Attr Head_ Title String where
-  attr Title bothValues  = unsafeAttribute $ Both { key: "title", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "title", value:  prop' value  })
-  pureAttr Title value  = unsafeAttribute $ This { key: "title", value:  prop' value  }
-  unpureAttr Title eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "title", value:  prop' value  }
+  attr Title bothValues = unsafeAttribute $ Both
+    { key: "title", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "title", value: prop' value })
+  pureAttr Title value = unsafeAttribute $ This
+    { key: "title", value: prop' value }
+  unpureAttr Title eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "title", value: prop' value }
 
 instance Attr Header_ Title String where
-  attr Title bothValues  = unsafeAttribute $ Both { key: "title", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "title", value:  prop' value  })
-  pureAttr Title value  = unsafeAttribute $ This { key: "title", value:  prop' value  }
-  unpureAttr Title eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "title", value:  prop' value  }
+  attr Title bothValues = unsafeAttribute $ Both
+    { key: "title", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "title", value: prop' value })
+  pureAttr Title value = unsafeAttribute $ This
+    { key: "title", value: prop' value }
+  unpureAttr Title eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "title", value: prop' value }
 
 instance Attr Hr_ Title String where
-  attr Title bothValues  = unsafeAttribute $ Both { key: "title", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "title", value:  prop' value  })
-  pureAttr Title value  = unsafeAttribute $ This { key: "title", value:  prop' value  }
-  unpureAttr Title eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "title", value:  prop' value  }
+  attr Title bothValues = unsafeAttribute $ Both
+    { key: "title", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "title", value: prop' value })
+  pureAttr Title value = unsafeAttribute $ This
+    { key: "title", value: prop' value }
+  unpureAttr Title eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "title", value: prop' value }
 
 instance Attr Html_ Title String where
-  attr Title bothValues  = unsafeAttribute $ Both { key: "title", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "title", value:  prop' value  })
-  pureAttr Title value  = unsafeAttribute $ This { key: "title", value:  prop' value  }
-  unpureAttr Title eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "title", value:  prop' value  }
+  attr Title bothValues = unsafeAttribute $ Both
+    { key: "title", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "title", value: prop' value })
+  pureAttr Title value = unsafeAttribute $ This
+    { key: "title", value: prop' value }
+  unpureAttr Title eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "title", value: prop' value }
 
 instance Attr I_ Title String where
-  attr Title bothValues  = unsafeAttribute $ Both { key: "title", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "title", value:  prop' value  })
-  pureAttr Title value  = unsafeAttribute $ This { key: "title", value:  prop' value  }
-  unpureAttr Title eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "title", value:  prop' value  }
+  attr Title bothValues = unsafeAttribute $ Both
+    { key: "title", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "title", value: prop' value })
+  pureAttr Title value = unsafeAttribute $ This
+    { key: "title", value: prop' value }
+  unpureAttr Title eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "title", value: prop' value }
 
 instance Attr Iframe_ Title String where
-  attr Title bothValues  = unsafeAttribute $ Both { key: "title", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "title", value:  prop' value  })
-  pureAttr Title value  = unsafeAttribute $ This { key: "title", value:  prop' value  }
-  unpureAttr Title eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "title", value:  prop' value  }
+  attr Title bothValues = unsafeAttribute $ Both
+    { key: "title", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "title", value: prop' value })
+  pureAttr Title value = unsafeAttribute $ This
+    { key: "title", value: prop' value }
+  unpureAttr Title eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "title", value: prop' value }
 
 instance Attr Img_ Title String where
-  attr Title bothValues  = unsafeAttribute $ Both { key: "title", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "title", value:  prop' value  })
-  pureAttr Title value  = unsafeAttribute $ This { key: "title", value:  prop' value  }
-  unpureAttr Title eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "title", value:  prop' value  }
+  attr Title bothValues = unsafeAttribute $ Both
+    { key: "title", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "title", value: prop' value })
+  pureAttr Title value = unsafeAttribute $ This
+    { key: "title", value: prop' value }
+  unpureAttr Title eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "title", value: prop' value }
 
 instance Attr Input_ Title String where
-  attr Title bothValues  = unsafeAttribute $ Both { key: "title", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "title", value:  prop' value  })
-  pureAttr Title value  = unsafeAttribute $ This { key: "title", value:  prop' value  }
-  unpureAttr Title eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "title", value:  prop' value  }
+  attr Title bothValues = unsafeAttribute $ Both
+    { key: "title", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "title", value: prop' value })
+  pureAttr Title value = unsafeAttribute $ This
+    { key: "title", value: prop' value }
+  unpureAttr Title eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "title", value: prop' value }
 
 instance Attr Ins_ Title String where
-  attr Title bothValues  = unsafeAttribute $ Both { key: "title", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "title", value:  prop' value  })
-  pureAttr Title value  = unsafeAttribute $ This { key: "title", value:  prop' value  }
-  unpureAttr Title eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "title", value:  prop' value  }
+  attr Title bothValues = unsafeAttribute $ Both
+    { key: "title", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "title", value: prop' value })
+  pureAttr Title value = unsafeAttribute $ This
+    { key: "title", value: prop' value }
+  unpureAttr Title eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "title", value: prop' value }
 
 instance Attr Kbd_ Title String where
-  attr Title bothValues  = unsafeAttribute $ Both { key: "title", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "title", value:  prop' value  })
-  pureAttr Title value  = unsafeAttribute $ This { key: "title", value:  prop' value  }
-  unpureAttr Title eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "title", value:  prop' value  }
+  attr Title bothValues = unsafeAttribute $ Both
+    { key: "title", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "title", value: prop' value })
+  pureAttr Title value = unsafeAttribute $ This
+    { key: "title", value: prop' value }
+  unpureAttr Title eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "title", value: prop' value }
 
 instance Attr Label_ Title String where
-  attr Title bothValues  = unsafeAttribute $ Both { key: "title", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "title", value:  prop' value  })
-  pureAttr Title value  = unsafeAttribute $ This { key: "title", value:  prop' value  }
-  unpureAttr Title eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "title", value:  prop' value  }
+  attr Title bothValues = unsafeAttribute $ Both
+    { key: "title", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "title", value: prop' value })
+  pureAttr Title value = unsafeAttribute $ This
+    { key: "title", value: prop' value }
+  unpureAttr Title eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "title", value: prop' value }
 
 instance Attr Legend_ Title String where
-  attr Title bothValues  = unsafeAttribute $ Both { key: "title", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "title", value:  prop' value  })
-  pureAttr Title value  = unsafeAttribute $ This { key: "title", value:  prop' value  }
-  unpureAttr Title eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "title", value:  prop' value  }
+  attr Title bothValues = unsafeAttribute $ Both
+    { key: "title", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "title", value: prop' value })
+  pureAttr Title value = unsafeAttribute $ This
+    { key: "title", value: prop' value }
+  unpureAttr Title eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "title", value: prop' value }
 
 instance Attr Li_ Title String where
-  attr Title bothValues  = unsafeAttribute $ Both { key: "title", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "title", value:  prop' value  })
-  pureAttr Title value  = unsafeAttribute $ This { key: "title", value:  prop' value  }
-  unpureAttr Title eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "title", value:  prop' value  }
+  attr Title bothValues = unsafeAttribute $ Both
+    { key: "title", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "title", value: prop' value })
+  pureAttr Title value = unsafeAttribute $ This
+    { key: "title", value: prop' value }
+  unpureAttr Title eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "title", value: prop' value }
 
 instance Attr Link_ Title String where
-  attr Title bothValues  = unsafeAttribute $ Both { key: "title", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "title", value:  prop' value  })
-  pureAttr Title value  = unsafeAttribute $ This { key: "title", value:  prop' value  }
-  unpureAttr Title eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "title", value:  prop' value  }
+  attr Title bothValues = unsafeAttribute $ Both
+    { key: "title", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "title", value: prop' value })
+  pureAttr Title value = unsafeAttribute $ This
+    { key: "title", value: prop' value }
+  unpureAttr Title eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "title", value: prop' value }
 
 instance Attr Main_ Title String where
-  attr Title bothValues  = unsafeAttribute $ Both { key: "title", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "title", value:  prop' value  })
-  pureAttr Title value  = unsafeAttribute $ This { key: "title", value:  prop' value  }
-  unpureAttr Title eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "title", value:  prop' value  }
+  attr Title bothValues = unsafeAttribute $ Both
+    { key: "title", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "title", value: prop' value })
+  pureAttr Title value = unsafeAttribute $ This
+    { key: "title", value: prop' value }
+  unpureAttr Title eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "title", value: prop' value }
 
 instance Attr Map_ Title String where
-  attr Title bothValues  = unsafeAttribute $ Both { key: "title", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "title", value:  prop' value  })
-  pureAttr Title value  = unsafeAttribute $ This { key: "title", value:  prop' value  }
-  unpureAttr Title eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "title", value:  prop' value  }
+  attr Title bothValues = unsafeAttribute $ Both
+    { key: "title", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "title", value: prop' value })
+  pureAttr Title value = unsafeAttribute $ This
+    { key: "title", value: prop' value }
+  unpureAttr Title eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "title", value: prop' value }
 
 instance Attr Mark_ Title String where
-  attr Title bothValues  = unsafeAttribute $ Both { key: "title", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "title", value:  prop' value  })
-  pureAttr Title value  = unsafeAttribute $ This { key: "title", value:  prop' value  }
-  unpureAttr Title eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "title", value:  prop' value  }
+  attr Title bothValues = unsafeAttribute $ Both
+    { key: "title", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "title", value: prop' value })
+  pureAttr Title value = unsafeAttribute $ This
+    { key: "title", value: prop' value }
+  unpureAttr Title eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "title", value: prop' value }
 
 instance Attr Meta_ Title String where
-  attr Title bothValues  = unsafeAttribute $ Both { key: "title", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "title", value:  prop' value  })
-  pureAttr Title value  = unsafeAttribute $ This { key: "title", value:  prop' value  }
-  unpureAttr Title eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "title", value:  prop' value  }
+  attr Title bothValues = unsafeAttribute $ Both
+    { key: "title", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "title", value: prop' value })
+  pureAttr Title value = unsafeAttribute $ This
+    { key: "title", value: prop' value }
+  unpureAttr Title eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "title", value: prop' value }
 
 instance Attr Meter_ Title String where
-  attr Title bothValues  = unsafeAttribute $ Both { key: "title", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "title", value:  prop' value  })
-  pureAttr Title value  = unsafeAttribute $ This { key: "title", value:  prop' value  }
-  unpureAttr Title eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "title", value:  prop' value  }
+  attr Title bothValues = unsafeAttribute $ Both
+    { key: "title", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "title", value: prop' value })
+  pureAttr Title value = unsafeAttribute $ This
+    { key: "title", value: prop' value }
+  unpureAttr Title eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "title", value: prop' value }
 
 instance Attr Nav_ Title String where
-  attr Title bothValues  = unsafeAttribute $ Both { key: "title", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "title", value:  prop' value  })
-  pureAttr Title value  = unsafeAttribute $ This { key: "title", value:  prop' value  }
-  unpureAttr Title eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "title", value:  prop' value  }
+  attr Title bothValues = unsafeAttribute $ Both
+    { key: "title", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "title", value: prop' value })
+  pureAttr Title value = unsafeAttribute $ This
+    { key: "title", value: prop' value }
+  unpureAttr Title eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "title", value: prop' value }
 
 instance Attr Noframes_ Title String where
-  attr Title bothValues  = unsafeAttribute $ Both { key: "title", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "title", value:  prop' value  })
-  pureAttr Title value  = unsafeAttribute $ This { key: "title", value:  prop' value  }
-  unpureAttr Title eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "title", value:  prop' value  }
+  attr Title bothValues = unsafeAttribute $ Both
+    { key: "title", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "title", value: prop' value })
+  pureAttr Title value = unsafeAttribute $ This
+    { key: "title", value: prop' value }
+  unpureAttr Title eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "title", value: prop' value }
 
 instance Attr Noscript_ Title String where
-  attr Title bothValues  = unsafeAttribute $ Both { key: "title", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "title", value:  prop' value  })
-  pureAttr Title value  = unsafeAttribute $ This { key: "title", value:  prop' value  }
-  unpureAttr Title eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "title", value:  prop' value  }
+  attr Title bothValues = unsafeAttribute $ Both
+    { key: "title", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "title", value: prop' value })
+  pureAttr Title value = unsafeAttribute $ This
+    { key: "title", value: prop' value }
+  unpureAttr Title eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "title", value: prop' value }
 
 instance Attr Object_ Title String where
-  attr Title bothValues  = unsafeAttribute $ Both { key: "title", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "title", value:  prop' value  })
-  pureAttr Title value  = unsafeAttribute $ This { key: "title", value:  prop' value  }
-  unpureAttr Title eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "title", value:  prop' value  }
+  attr Title bothValues = unsafeAttribute $ Both
+    { key: "title", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "title", value: prop' value })
+  pureAttr Title value = unsafeAttribute $ This
+    { key: "title", value: prop' value }
+  unpureAttr Title eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "title", value: prop' value }
 
 instance Attr Ol_ Title String where
-  attr Title bothValues  = unsafeAttribute $ Both { key: "title", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "title", value:  prop' value  })
-  pureAttr Title value  = unsafeAttribute $ This { key: "title", value:  prop' value  }
-  unpureAttr Title eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "title", value:  prop' value  }
+  attr Title bothValues = unsafeAttribute $ Both
+    { key: "title", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "title", value: prop' value })
+  pureAttr Title value = unsafeAttribute $ This
+    { key: "title", value: prop' value }
+  unpureAttr Title eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "title", value: prop' value }
 
 instance Attr Optgroup_ Title String where
-  attr Title bothValues  = unsafeAttribute $ Both { key: "title", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "title", value:  prop' value  })
-  pureAttr Title value  = unsafeAttribute $ This { key: "title", value:  prop' value  }
-  unpureAttr Title eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "title", value:  prop' value  }
+  attr Title bothValues = unsafeAttribute $ Both
+    { key: "title", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "title", value: prop' value })
+  pureAttr Title value = unsafeAttribute $ This
+    { key: "title", value: prop' value }
+  unpureAttr Title eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "title", value: prop' value }
 
 instance Attr Option_ Title String where
-  attr Title bothValues  = unsafeAttribute $ Both { key: "title", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "title", value:  prop' value  })
-  pureAttr Title value  = unsafeAttribute $ This { key: "title", value:  prop' value  }
-  unpureAttr Title eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "title", value:  prop' value  }
+  attr Title bothValues = unsafeAttribute $ Both
+    { key: "title", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "title", value: prop' value })
+  pureAttr Title value = unsafeAttribute $ This
+    { key: "title", value: prop' value }
+  unpureAttr Title eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "title", value: prop' value }
 
 instance Attr Output_ Title String where
-  attr Title bothValues  = unsafeAttribute $ Both { key: "title", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "title", value:  prop' value  })
-  pureAttr Title value  = unsafeAttribute $ This { key: "title", value:  prop' value  }
-  unpureAttr Title eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "title", value:  prop' value  }
+  attr Title bothValues = unsafeAttribute $ Both
+    { key: "title", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "title", value: prop' value })
+  pureAttr Title value = unsafeAttribute $ This
+    { key: "title", value: prop' value }
+  unpureAttr Title eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "title", value: prop' value }
 
 instance Attr P_ Title String where
-  attr Title bothValues  = unsafeAttribute $ Both { key: "title", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "title", value:  prop' value  })
-  pureAttr Title value  = unsafeAttribute $ This { key: "title", value:  prop' value  }
-  unpureAttr Title eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "title", value:  prop' value  }
+  attr Title bothValues = unsafeAttribute $ Both
+    { key: "title", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "title", value: prop' value })
+  pureAttr Title value = unsafeAttribute $ This
+    { key: "title", value: prop' value }
+  unpureAttr Title eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "title", value: prop' value }
 
 instance Attr Param_ Title String where
-  attr Title bothValues  = unsafeAttribute $ Both { key: "title", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "title", value:  prop' value  })
-  pureAttr Title value  = unsafeAttribute $ This { key: "title", value:  prop' value  }
-  unpureAttr Title eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "title", value:  prop' value  }
+  attr Title bothValues = unsafeAttribute $ Both
+    { key: "title", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "title", value: prop' value })
+  pureAttr Title value = unsafeAttribute $ This
+    { key: "title", value: prop' value }
+  unpureAttr Title eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "title", value: prop' value }
 
 instance Attr Picture_ Title String where
-  attr Title bothValues  = unsafeAttribute $ Both { key: "title", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "title", value:  prop' value  })
-  pureAttr Title value  = unsafeAttribute $ This { key: "title", value:  prop' value  }
-  unpureAttr Title eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "title", value:  prop' value  }
+  attr Title bothValues = unsafeAttribute $ Both
+    { key: "title", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "title", value: prop' value })
+  pureAttr Title value = unsafeAttribute $ This
+    { key: "title", value: prop' value }
+  unpureAttr Title eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "title", value: prop' value }
 
 instance Attr Pre_ Title String where
-  attr Title bothValues  = unsafeAttribute $ Both { key: "title", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "title", value:  prop' value  })
-  pureAttr Title value  = unsafeAttribute $ This { key: "title", value:  prop' value  }
-  unpureAttr Title eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "title", value:  prop' value  }
+  attr Title bothValues = unsafeAttribute $ Both
+    { key: "title", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "title", value: prop' value })
+  pureAttr Title value = unsafeAttribute $ This
+    { key: "title", value: prop' value }
+  unpureAttr Title eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "title", value: prop' value }
 
 instance Attr Progress_ Title String where
-  attr Title bothValues  = unsafeAttribute $ Both { key: "title", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "title", value:  prop' value  })
-  pureAttr Title value  = unsafeAttribute $ This { key: "title", value:  prop' value  }
-  unpureAttr Title eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "title", value:  prop' value  }
+  attr Title bothValues = unsafeAttribute $ Both
+    { key: "title", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "title", value: prop' value })
+  pureAttr Title value = unsafeAttribute $ This
+    { key: "title", value: prop' value }
+  unpureAttr Title eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "title", value: prop' value }
 
 instance Attr Q_ Title String where
-  attr Title bothValues  = unsafeAttribute $ Both { key: "title", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "title", value:  prop' value  })
-  pureAttr Title value  = unsafeAttribute $ This { key: "title", value:  prop' value  }
-  unpureAttr Title eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "title", value:  prop' value  }
+  attr Title bothValues = unsafeAttribute $ Both
+    { key: "title", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "title", value: prop' value })
+  pureAttr Title value = unsafeAttribute $ This
+    { key: "title", value: prop' value }
+  unpureAttr Title eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "title", value: prop' value }
 
 instance Attr Rp_ Title String where
-  attr Title bothValues  = unsafeAttribute $ Both { key: "title", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "title", value:  prop' value  })
-  pureAttr Title value  = unsafeAttribute $ This { key: "title", value:  prop' value  }
-  unpureAttr Title eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "title", value:  prop' value  }
+  attr Title bothValues = unsafeAttribute $ Both
+    { key: "title", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "title", value: prop' value })
+  pureAttr Title value = unsafeAttribute $ This
+    { key: "title", value: prop' value }
+  unpureAttr Title eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "title", value: prop' value }
 
 instance Attr Rt_ Title String where
-  attr Title bothValues  = unsafeAttribute $ Both { key: "title", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "title", value:  prop' value  })
-  pureAttr Title value  = unsafeAttribute $ This { key: "title", value:  prop' value  }
-  unpureAttr Title eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "title", value:  prop' value  }
+  attr Title bothValues = unsafeAttribute $ Both
+    { key: "title", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "title", value: prop' value })
+  pureAttr Title value = unsafeAttribute $ This
+    { key: "title", value: prop' value }
+  unpureAttr Title eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "title", value: prop' value }
 
 instance Attr Ruby_ Title String where
-  attr Title bothValues  = unsafeAttribute $ Both { key: "title", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "title", value:  prop' value  })
-  pureAttr Title value  = unsafeAttribute $ This { key: "title", value:  prop' value  }
-  unpureAttr Title eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "title", value:  prop' value  }
+  attr Title bothValues = unsafeAttribute $ Both
+    { key: "title", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "title", value: prop' value })
+  pureAttr Title value = unsafeAttribute $ This
+    { key: "title", value: prop' value }
+  unpureAttr Title eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "title", value: prop' value }
 
 instance Attr S_ Title String where
-  attr Title bothValues  = unsafeAttribute $ Both { key: "title", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "title", value:  prop' value  })
-  pureAttr Title value  = unsafeAttribute $ This { key: "title", value:  prop' value  }
-  unpureAttr Title eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "title", value:  prop' value  }
+  attr Title bothValues = unsafeAttribute $ Both
+    { key: "title", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "title", value: prop' value })
+  pureAttr Title value = unsafeAttribute $ This
+    { key: "title", value: prop' value }
+  unpureAttr Title eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "title", value: prop' value }
 
 instance Attr Samp_ Title String where
-  attr Title bothValues  = unsafeAttribute $ Both { key: "title", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "title", value:  prop' value  })
-  pureAttr Title value  = unsafeAttribute $ This { key: "title", value:  prop' value  }
-  unpureAttr Title eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "title", value:  prop' value  }
+  attr Title bothValues = unsafeAttribute $ Both
+    { key: "title", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "title", value: prop' value })
+  pureAttr Title value = unsafeAttribute $ This
+    { key: "title", value: prop' value }
+  unpureAttr Title eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "title", value: prop' value }
 
 instance Attr Script_ Title String where
-  attr Title bothValues  = unsafeAttribute $ Both { key: "title", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "title", value:  prop' value  })
-  pureAttr Title value  = unsafeAttribute $ This { key: "title", value:  prop' value  }
-  unpureAttr Title eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "title", value:  prop' value  }
+  attr Title bothValues = unsafeAttribute $ Both
+    { key: "title", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "title", value: prop' value })
+  pureAttr Title value = unsafeAttribute $ This
+    { key: "title", value: prop' value }
+  unpureAttr Title eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "title", value: prop' value }
 
 instance Attr Section_ Title String where
-  attr Title bothValues  = unsafeAttribute $ Both { key: "title", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "title", value:  prop' value  })
-  pureAttr Title value  = unsafeAttribute $ This { key: "title", value:  prop' value  }
-  unpureAttr Title eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "title", value:  prop' value  }
+  attr Title bothValues = unsafeAttribute $ Both
+    { key: "title", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "title", value: prop' value })
+  pureAttr Title value = unsafeAttribute $ This
+    { key: "title", value: prop' value }
+  unpureAttr Title eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "title", value: prop' value }
 
 instance Attr Select_ Title String where
-  attr Title bothValues  = unsafeAttribute $ Both { key: "title", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "title", value:  prop' value  })
-  pureAttr Title value  = unsafeAttribute $ This { key: "title", value:  prop' value  }
-  unpureAttr Title eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "title", value:  prop' value  }
+  attr Title bothValues = unsafeAttribute $ Both
+    { key: "title", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "title", value: prop' value })
+  pureAttr Title value = unsafeAttribute $ This
+    { key: "title", value: prop' value }
+  unpureAttr Title eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "title", value: prop' value }
 
 instance Attr Small_ Title String where
-  attr Title bothValues  = unsafeAttribute $ Both { key: "title", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "title", value:  prop' value  })
-  pureAttr Title value  = unsafeAttribute $ This { key: "title", value:  prop' value  }
-  unpureAttr Title eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "title", value:  prop' value  }
+  attr Title bothValues = unsafeAttribute $ Both
+    { key: "title", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "title", value: prop' value })
+  pureAttr Title value = unsafeAttribute $ This
+    { key: "title", value: prop' value }
+  unpureAttr Title eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "title", value: prop' value }
 
 instance Attr Source_ Title String where
-  attr Title bothValues  = unsafeAttribute $ Both { key: "title", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "title", value:  prop' value  })
-  pureAttr Title value  = unsafeAttribute $ This { key: "title", value:  prop' value  }
-  unpureAttr Title eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "title", value:  prop' value  }
+  attr Title bothValues = unsafeAttribute $ Both
+    { key: "title", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "title", value: prop' value })
+  pureAttr Title value = unsafeAttribute $ This
+    { key: "title", value: prop' value }
+  unpureAttr Title eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "title", value: prop' value }
 
 instance Attr Span_ Title String where
-  attr Title bothValues  = unsafeAttribute $ Both { key: "title", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "title", value:  prop' value  })
-  pureAttr Title value  = unsafeAttribute $ This { key: "title", value:  prop' value  }
-  unpureAttr Title eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "title", value:  prop' value  }
+  attr Title bothValues = unsafeAttribute $ Both
+    { key: "title", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "title", value: prop' value })
+  pureAttr Title value = unsafeAttribute $ This
+    { key: "title", value: prop' value }
+  unpureAttr Title eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "title", value: prop' value }
 
 instance Attr Strike_ Title String where
-  attr Title bothValues  = unsafeAttribute $ Both { key: "title", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "title", value:  prop' value  })
-  pureAttr Title value  = unsafeAttribute $ This { key: "title", value:  prop' value  }
-  unpureAttr Title eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "title", value:  prop' value  }
+  attr Title bothValues = unsafeAttribute $ Both
+    { key: "title", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "title", value: prop' value })
+  pureAttr Title value = unsafeAttribute $ This
+    { key: "title", value: prop' value }
+  unpureAttr Title eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "title", value: prop' value }
 
 instance Attr Strong_ Title String where
-  attr Title bothValues  = unsafeAttribute $ Both { key: "title", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "title", value:  prop' value  })
-  pureAttr Title value  = unsafeAttribute $ This { key: "title", value:  prop' value  }
-  unpureAttr Title eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "title", value:  prop' value  }
+  attr Title bothValues = unsafeAttribute $ Both
+    { key: "title", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "title", value: prop' value })
+  pureAttr Title value = unsafeAttribute $ This
+    { key: "title", value: prop' value }
+  unpureAttr Title eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "title", value: prop' value }
 
 instance Attr Style_ Title String where
-  attr Title bothValues  = unsafeAttribute $ Both { key: "title", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "title", value:  prop' value  })
-  pureAttr Title value  = unsafeAttribute $ This { key: "title", value:  prop' value  }
-  unpureAttr Title eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "title", value:  prop' value  }
+  attr Title bothValues = unsafeAttribute $ Both
+    { key: "title", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "title", value: prop' value })
+  pureAttr Title value = unsafeAttribute $ This
+    { key: "title", value: prop' value }
+  unpureAttr Title eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "title", value: prop' value }
 
 instance Attr Sub_ Title String where
-  attr Title bothValues  = unsafeAttribute $ Both { key: "title", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "title", value:  prop' value  })
-  pureAttr Title value  = unsafeAttribute $ This { key: "title", value:  prop' value  }
-  unpureAttr Title eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "title", value:  prop' value  }
+  attr Title bothValues = unsafeAttribute $ Both
+    { key: "title", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "title", value: prop' value })
+  pureAttr Title value = unsafeAttribute $ This
+    { key: "title", value: prop' value }
+  unpureAttr Title eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "title", value: prop' value }
 
 instance Attr Summary_ Title String where
-  attr Title bothValues  = unsafeAttribute $ Both { key: "title", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "title", value:  prop' value  })
-  pureAttr Title value  = unsafeAttribute $ This { key: "title", value:  prop' value  }
-  unpureAttr Title eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "title", value:  prop' value  }
+  attr Title bothValues = unsafeAttribute $ Both
+    { key: "title", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "title", value: prop' value })
+  pureAttr Title value = unsafeAttribute $ This
+    { key: "title", value: prop' value }
+  unpureAttr Title eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "title", value: prop' value }
 
 instance Attr Sup_ Title String where
-  attr Title bothValues  = unsafeAttribute $ Both { key: "title", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "title", value:  prop' value  })
-  pureAttr Title value  = unsafeAttribute $ This { key: "title", value:  prop' value  }
-  unpureAttr Title eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "title", value:  prop' value  }
+  attr Title bothValues = unsafeAttribute $ Both
+    { key: "title", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "title", value: prop' value })
+  pureAttr Title value = unsafeAttribute $ This
+    { key: "title", value: prop' value }
+  unpureAttr Title eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "title", value: prop' value }
 
 instance Attr Svg_ Title String where
-  attr Title bothValues  = unsafeAttribute $ Both { key: "title", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "title", value:  prop' value  })
-  pureAttr Title value  = unsafeAttribute $ This { key: "title", value:  prop' value  }
-  unpureAttr Title eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "title", value:  prop' value  }
+  attr Title bothValues = unsafeAttribute $ Both
+    { key: "title", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "title", value: prop' value })
+  pureAttr Title value = unsafeAttribute $ This
+    { key: "title", value: prop' value }
+  unpureAttr Title eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "title", value: prop' value }
 
 instance Attr Table_ Title String where
-  attr Title bothValues  = unsafeAttribute $ Both { key: "title", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "title", value:  prop' value  })
-  pureAttr Title value  = unsafeAttribute $ This { key: "title", value:  prop' value  }
-  unpureAttr Title eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "title", value:  prop' value  }
+  attr Title bothValues = unsafeAttribute $ Both
+    { key: "title", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "title", value: prop' value })
+  pureAttr Title value = unsafeAttribute $ This
+    { key: "title", value: prop' value }
+  unpureAttr Title eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "title", value: prop' value }
 
 instance Attr Tbody_ Title String where
-  attr Title bothValues  = unsafeAttribute $ Both { key: "title", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "title", value:  prop' value  })
-  pureAttr Title value  = unsafeAttribute $ This { key: "title", value:  prop' value  }
-  unpureAttr Title eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "title", value:  prop' value  }
+  attr Title bothValues = unsafeAttribute $ Both
+    { key: "title", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "title", value: prop' value })
+  pureAttr Title value = unsafeAttribute $ This
+    { key: "title", value: prop' value }
+  unpureAttr Title eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "title", value: prop' value }
 
 instance Attr Td_ Title String where
-  attr Title bothValues  = unsafeAttribute $ Both { key: "title", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "title", value:  prop' value  })
-  pureAttr Title value  = unsafeAttribute $ This { key: "title", value:  prop' value  }
-  unpureAttr Title eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "title", value:  prop' value  }
+  attr Title bothValues = unsafeAttribute $ Both
+    { key: "title", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "title", value: prop' value })
+  pureAttr Title value = unsafeAttribute $ This
+    { key: "title", value: prop' value }
+  unpureAttr Title eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "title", value: prop' value }
 
 instance Attr Template_ Title String where
-  attr Title bothValues  = unsafeAttribute $ Both { key: "title", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "title", value:  prop' value  })
-  pureAttr Title value  = unsafeAttribute $ This { key: "title", value:  prop' value  }
-  unpureAttr Title eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "title", value:  prop' value  }
+  attr Title bothValues = unsafeAttribute $ Both
+    { key: "title", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "title", value: prop' value })
+  pureAttr Title value = unsafeAttribute $ This
+    { key: "title", value: prop' value }
+  unpureAttr Title eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "title", value: prop' value }
 
 instance Attr Textarea_ Title String where
-  attr Title bothValues  = unsafeAttribute $ Both { key: "title", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "title", value:  prop' value  })
-  pureAttr Title value  = unsafeAttribute $ This { key: "title", value:  prop' value  }
-  unpureAttr Title eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "title", value:  prop' value  }
+  attr Title bothValues = unsafeAttribute $ Both
+    { key: "title", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "title", value: prop' value })
+  pureAttr Title value = unsafeAttribute $ This
+    { key: "title", value: prop' value }
+  unpureAttr Title eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "title", value: prop' value }
 
 instance Attr Tfoot_ Title String where
-  attr Title bothValues  = unsafeAttribute $ Both { key: "title", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "title", value:  prop' value  })
-  pureAttr Title value  = unsafeAttribute $ This { key: "title", value:  prop' value  }
-  unpureAttr Title eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "title", value:  prop' value  }
+  attr Title bothValues = unsafeAttribute $ Both
+    { key: "title", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "title", value: prop' value })
+  pureAttr Title value = unsafeAttribute $ This
+    { key: "title", value: prop' value }
+  unpureAttr Title eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "title", value: prop' value }
 
 instance Attr Th_ Title String where
-  attr Title bothValues  = unsafeAttribute $ Both { key: "title", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "title", value:  prop' value  })
-  pureAttr Title value  = unsafeAttribute $ This { key: "title", value:  prop' value  }
-  unpureAttr Title eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "title", value:  prop' value  }
+  attr Title bothValues = unsafeAttribute $ Both
+    { key: "title", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "title", value: prop' value })
+  pureAttr Title value = unsafeAttribute $ This
+    { key: "title", value: prop' value }
+  unpureAttr Title eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "title", value: prop' value }
 
 instance Attr Thead_ Title String where
-  attr Title bothValues  = unsafeAttribute $ Both { key: "title", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "title", value:  prop' value  })
-  pureAttr Title value  = unsafeAttribute $ This { key: "title", value:  prop' value  }
-  unpureAttr Title eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "title", value:  prop' value  }
+  attr Title bothValues = unsafeAttribute $ Both
+    { key: "title", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "title", value: prop' value })
+  pureAttr Title value = unsafeAttribute $ This
+    { key: "title", value: prop' value }
+  unpureAttr Title eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "title", value: prop' value }
 
 instance Attr Time_ Title String where
-  attr Title bothValues  = unsafeAttribute $ Both { key: "title", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "title", value:  prop' value  })
-  pureAttr Title value  = unsafeAttribute $ This { key: "title", value:  prop' value  }
-  unpureAttr Title eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "title", value:  prop' value  }
+  attr Title bothValues = unsafeAttribute $ Both
+    { key: "title", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "title", value: prop' value })
+  pureAttr Title value = unsafeAttribute $ This
+    { key: "title", value: prop' value }
+  unpureAttr Title eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "title", value: prop' value }
 
 instance Attr Title_ Title String where
-  attr Title bothValues  = unsafeAttribute $ Both { key: "title", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "title", value:  prop' value  })
-  pureAttr Title value  = unsafeAttribute $ This { key: "title", value:  prop' value  }
-  unpureAttr Title eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "title", value:  prop' value  }
+  attr Title bothValues = unsafeAttribute $ Both
+    { key: "title", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "title", value: prop' value })
+  pureAttr Title value = unsafeAttribute $ This
+    { key: "title", value: prop' value }
+  unpureAttr Title eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "title", value: prop' value }
 
 instance Attr Tr_ Title String where
-  attr Title bothValues  = unsafeAttribute $ Both { key: "title", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "title", value:  prop' value  })
-  pureAttr Title value  = unsafeAttribute $ This { key: "title", value:  prop' value  }
-  unpureAttr Title eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "title", value:  prop' value  }
+  attr Title bothValues = unsafeAttribute $ Both
+    { key: "title", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "title", value: prop' value })
+  pureAttr Title value = unsafeAttribute $ This
+    { key: "title", value: prop' value }
+  unpureAttr Title eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "title", value: prop' value }
 
 instance Attr Track_ Title String where
-  attr Title bothValues  = unsafeAttribute $ Both { key: "title", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "title", value:  prop' value  })
-  pureAttr Title value  = unsafeAttribute $ This { key: "title", value:  prop' value  }
-  unpureAttr Title eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "title", value:  prop' value  }
+  attr Title bothValues = unsafeAttribute $ Both
+    { key: "title", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "title", value: prop' value })
+  pureAttr Title value = unsafeAttribute $ This
+    { key: "title", value: prop' value }
+  unpureAttr Title eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "title", value: prop' value }
 
 instance Attr Tt_ Title String where
-  attr Title bothValues  = unsafeAttribute $ Both { key: "title", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "title", value:  prop' value  })
-  pureAttr Title value  = unsafeAttribute $ This { key: "title", value:  prop' value  }
-  unpureAttr Title eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "title", value:  prop' value  }
+  attr Title bothValues = unsafeAttribute $ Both
+    { key: "title", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "title", value: prop' value })
+  pureAttr Title value = unsafeAttribute $ This
+    { key: "title", value: prop' value }
+  unpureAttr Title eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "title", value: prop' value }
 
 instance Attr U_ Title String where
-  attr Title bothValues  = unsafeAttribute $ Both { key: "title", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "title", value:  prop' value  })
-  pureAttr Title value  = unsafeAttribute $ This { key: "title", value:  prop' value  }
-  unpureAttr Title eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "title", value:  prop' value  }
+  attr Title bothValues = unsafeAttribute $ Both
+    { key: "title", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "title", value: prop' value })
+  pureAttr Title value = unsafeAttribute $ This
+    { key: "title", value: prop' value }
+  unpureAttr Title eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "title", value: prop' value }
 
 instance Attr Ul_ Title String where
-  attr Title bothValues  = unsafeAttribute $ Both { key: "title", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "title", value:  prop' value  })
-  pureAttr Title value  = unsafeAttribute $ This { key: "title", value:  prop' value  }
-  unpureAttr Title eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "title", value:  prop' value  }
+  attr Title bothValues = unsafeAttribute $ Both
+    { key: "title", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "title", value: prop' value })
+  pureAttr Title value = unsafeAttribute $ This
+    { key: "title", value: prop' value }
+  unpureAttr Title eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "title", value: prop' value }
 
 instance Attr Var_ Title String where
-  attr Title bothValues  = unsafeAttribute $ Both { key: "title", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "title", value:  prop' value  })
-  pureAttr Title value  = unsafeAttribute $ This { key: "title", value:  prop' value  }
-  unpureAttr Title eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "title", value:  prop' value  }
+  attr Title bothValues = unsafeAttribute $ Both
+    { key: "title", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "title", value: prop' value })
+  pureAttr Title value = unsafeAttribute $ This
+    { key: "title", value: prop' value }
+  unpureAttr Title eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "title", value: prop' value }
 
 instance Attr Video_ Title String where
-  attr Title bothValues  = unsafeAttribute $ Both { key: "title", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "title", value:  prop' value  })
-  pureAttr Title value  = unsafeAttribute $ This { key: "title", value:  prop' value  }
-  unpureAttr Title eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "title", value:  prop' value  }
+  attr Title bothValues = unsafeAttribute $ Both
+    { key: "title", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "title", value: prop' value })
+  pureAttr Title value = unsafeAttribute $ This
+    { key: "title", value: prop' value }
+  unpureAttr Title eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "title", value: prop' value }
 
 instance Attr Wbr_ Title String where
-  attr Title bothValues  = unsafeAttribute $ Both { key: "title", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "title", value:  prop' value  })
-  pureAttr Title value  = unsafeAttribute $ This { key: "title", value:  prop' value  }
-  unpureAttr Title eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "title", value:  prop' value  }
+  attr Title bothValues = unsafeAttribute $ Both
+    { key: "title", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "title", value: prop' value })
+  pureAttr Title value = unsafeAttribute $ This
+    { key: "title", value: prop' value }
+  unpureAttr Title eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "title", value: prop' value }
 
 instance Attr everything Title Unit where
-  attr Title bothValues  = unsafeAttribute $ Both { key: "title", value:  unset'  } (snd bothValues <#> \_ -> { key: "title", value:  unset'  })
-  pureAttr Title _  = unsafeAttribute $ This { key: "title", value:  unset'  }
-  unpureAttr Title eventValue  = unsafeAttribute $ That $ eventValue <#> \_ -> { key: "title", value:  unset'  }
+  attr Title bothValues = unsafeAttribute $ Both { key: "title", value: unset' }
+    (snd bothValues <#> \_ -> { key: "title", value: unset' })
+  pureAttr Title _ = unsafeAttribute $ This { key: "title", value: unset' }
+  unpureAttr Title eventValue = unsafeAttribute $ That $ eventValue <#> \_ ->
+    { key: "title", value: unset' }

@@ -131,616 +131,1108 @@ import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 data Contextmenu = Contextmenu
 
 instance Attr A_ Contextmenu String where
-  attr Contextmenu bothValues  = unsafeAttribute $ Both { key: "contextmenu", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "contextmenu", value:  prop' value  })
-  pureAttr Contextmenu value  = unsafeAttribute $ This { key: "contextmenu", value:  prop' value  }
-  unpureAttr Contextmenu eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "contextmenu", value:  prop' value  }
+  attr Contextmenu bothValues = unsafeAttribute $ Both
+    { key: "contextmenu", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "contextmenu", value: prop' value })
+  pureAttr Contextmenu value = unsafeAttribute $ This
+    { key: "contextmenu", value: prop' value }
+  unpureAttr Contextmenu eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "contextmenu", value: prop' value }
 
 instance Attr Abbr_ Contextmenu String where
-  attr Contextmenu bothValues  = unsafeAttribute $ Both { key: "contextmenu", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "contextmenu", value:  prop' value  })
-  pureAttr Contextmenu value  = unsafeAttribute $ This { key: "contextmenu", value:  prop' value  }
-  unpureAttr Contextmenu eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "contextmenu", value:  prop' value  }
+  attr Contextmenu bothValues = unsafeAttribute $ Both
+    { key: "contextmenu", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "contextmenu", value: prop' value })
+  pureAttr Contextmenu value = unsafeAttribute $ This
+    { key: "contextmenu", value: prop' value }
+  unpureAttr Contextmenu eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "contextmenu", value: prop' value }
 
 instance Attr Acronym_ Contextmenu String where
-  attr Contextmenu bothValues  = unsafeAttribute $ Both { key: "contextmenu", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "contextmenu", value:  prop' value  })
-  pureAttr Contextmenu value  = unsafeAttribute $ This { key: "contextmenu", value:  prop' value  }
-  unpureAttr Contextmenu eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "contextmenu", value:  prop' value  }
+  attr Contextmenu bothValues = unsafeAttribute $ Both
+    { key: "contextmenu", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "contextmenu", value: prop' value })
+  pureAttr Contextmenu value = unsafeAttribute $ This
+    { key: "contextmenu", value: prop' value }
+  unpureAttr Contextmenu eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "contextmenu", value: prop' value }
 
 instance Attr Address_ Contextmenu String where
-  attr Contextmenu bothValues  = unsafeAttribute $ Both { key: "contextmenu", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "contextmenu", value:  prop' value  })
-  pureAttr Contextmenu value  = unsafeAttribute $ This { key: "contextmenu", value:  prop' value  }
-  unpureAttr Contextmenu eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "contextmenu", value:  prop' value  }
+  attr Contextmenu bothValues = unsafeAttribute $ Both
+    { key: "contextmenu", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "contextmenu", value: prop' value })
+  pureAttr Contextmenu value = unsafeAttribute $ This
+    { key: "contextmenu", value: prop' value }
+  unpureAttr Contextmenu eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "contextmenu", value: prop' value }
 
 instance Attr Applet_ Contextmenu String where
-  attr Contextmenu bothValues  = unsafeAttribute $ Both { key: "contextmenu", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "contextmenu", value:  prop' value  })
-  pureAttr Contextmenu value  = unsafeAttribute $ This { key: "contextmenu", value:  prop' value  }
-  unpureAttr Contextmenu eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "contextmenu", value:  prop' value  }
+  attr Contextmenu bothValues = unsafeAttribute $ Both
+    { key: "contextmenu", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "contextmenu", value: prop' value })
+  pureAttr Contextmenu value = unsafeAttribute $ This
+    { key: "contextmenu", value: prop' value }
+  unpureAttr Contextmenu eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "contextmenu", value: prop' value }
 
 instance Attr Area_ Contextmenu String where
-  attr Contextmenu bothValues  = unsafeAttribute $ Both { key: "contextmenu", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "contextmenu", value:  prop' value  })
-  pureAttr Contextmenu value  = unsafeAttribute $ This { key: "contextmenu", value:  prop' value  }
-  unpureAttr Contextmenu eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "contextmenu", value:  prop' value  }
+  attr Contextmenu bothValues = unsafeAttribute $ Both
+    { key: "contextmenu", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "contextmenu", value: prop' value })
+  pureAttr Contextmenu value = unsafeAttribute $ This
+    { key: "contextmenu", value: prop' value }
+  unpureAttr Contextmenu eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "contextmenu", value: prop' value }
 
 instance Attr Article_ Contextmenu String where
-  attr Contextmenu bothValues  = unsafeAttribute $ Both { key: "contextmenu", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "contextmenu", value:  prop' value  })
-  pureAttr Contextmenu value  = unsafeAttribute $ This { key: "contextmenu", value:  prop' value  }
-  unpureAttr Contextmenu eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "contextmenu", value:  prop' value  }
+  attr Contextmenu bothValues = unsafeAttribute $ Both
+    { key: "contextmenu", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "contextmenu", value: prop' value })
+  pureAttr Contextmenu value = unsafeAttribute $ This
+    { key: "contextmenu", value: prop' value }
+  unpureAttr Contextmenu eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "contextmenu", value: prop' value }
 
 instance Attr Aside_ Contextmenu String where
-  attr Contextmenu bothValues  = unsafeAttribute $ Both { key: "contextmenu", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "contextmenu", value:  prop' value  })
-  pureAttr Contextmenu value  = unsafeAttribute $ This { key: "contextmenu", value:  prop' value  }
-  unpureAttr Contextmenu eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "contextmenu", value:  prop' value  }
+  attr Contextmenu bothValues = unsafeAttribute $ Both
+    { key: "contextmenu", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "contextmenu", value: prop' value })
+  pureAttr Contextmenu value = unsafeAttribute $ This
+    { key: "contextmenu", value: prop' value }
+  unpureAttr Contextmenu eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "contextmenu", value: prop' value }
 
 instance Attr Audio_ Contextmenu String where
-  attr Contextmenu bothValues  = unsafeAttribute $ Both { key: "contextmenu", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "contextmenu", value:  prop' value  })
-  pureAttr Contextmenu value  = unsafeAttribute $ This { key: "contextmenu", value:  prop' value  }
-  unpureAttr Contextmenu eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "contextmenu", value:  prop' value  }
+  attr Contextmenu bothValues = unsafeAttribute $ Both
+    { key: "contextmenu", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "contextmenu", value: prop' value })
+  pureAttr Contextmenu value = unsafeAttribute $ This
+    { key: "contextmenu", value: prop' value }
+  unpureAttr Contextmenu eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "contextmenu", value: prop' value }
 
 instance Attr B_ Contextmenu String where
-  attr Contextmenu bothValues  = unsafeAttribute $ Both { key: "contextmenu", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "contextmenu", value:  prop' value  })
-  pureAttr Contextmenu value  = unsafeAttribute $ This { key: "contextmenu", value:  prop' value  }
-  unpureAttr Contextmenu eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "contextmenu", value:  prop' value  }
+  attr Contextmenu bothValues = unsafeAttribute $ Both
+    { key: "contextmenu", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "contextmenu", value: prop' value })
+  pureAttr Contextmenu value = unsafeAttribute $ This
+    { key: "contextmenu", value: prop' value }
+  unpureAttr Contextmenu eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "contextmenu", value: prop' value }
 
 instance Attr Base_ Contextmenu String where
-  attr Contextmenu bothValues  = unsafeAttribute $ Both { key: "contextmenu", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "contextmenu", value:  prop' value  })
-  pureAttr Contextmenu value  = unsafeAttribute $ This { key: "contextmenu", value:  prop' value  }
-  unpureAttr Contextmenu eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "contextmenu", value:  prop' value  }
+  attr Contextmenu bothValues = unsafeAttribute $ Both
+    { key: "contextmenu", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "contextmenu", value: prop' value })
+  pureAttr Contextmenu value = unsafeAttribute $ This
+    { key: "contextmenu", value: prop' value }
+  unpureAttr Contextmenu eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "contextmenu", value: prop' value }
 
 instance Attr Basefont_ Contextmenu String where
-  attr Contextmenu bothValues  = unsafeAttribute $ Both { key: "contextmenu", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "contextmenu", value:  prop' value  })
-  pureAttr Contextmenu value  = unsafeAttribute $ This { key: "contextmenu", value:  prop' value  }
-  unpureAttr Contextmenu eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "contextmenu", value:  prop' value  }
+  attr Contextmenu bothValues = unsafeAttribute $ Both
+    { key: "contextmenu", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "contextmenu", value: prop' value })
+  pureAttr Contextmenu value = unsafeAttribute $ This
+    { key: "contextmenu", value: prop' value }
+  unpureAttr Contextmenu eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "contextmenu", value: prop' value }
 
 instance Attr Bdi_ Contextmenu String where
-  attr Contextmenu bothValues  = unsafeAttribute $ Both { key: "contextmenu", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "contextmenu", value:  prop' value  })
-  pureAttr Contextmenu value  = unsafeAttribute $ This { key: "contextmenu", value:  prop' value  }
-  unpureAttr Contextmenu eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "contextmenu", value:  prop' value  }
+  attr Contextmenu bothValues = unsafeAttribute $ Both
+    { key: "contextmenu", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "contextmenu", value: prop' value })
+  pureAttr Contextmenu value = unsafeAttribute $ This
+    { key: "contextmenu", value: prop' value }
+  unpureAttr Contextmenu eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "contextmenu", value: prop' value }
 
 instance Attr Bdo_ Contextmenu String where
-  attr Contextmenu bothValues  = unsafeAttribute $ Both { key: "contextmenu", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "contextmenu", value:  prop' value  })
-  pureAttr Contextmenu value  = unsafeAttribute $ This { key: "contextmenu", value:  prop' value  }
-  unpureAttr Contextmenu eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "contextmenu", value:  prop' value  }
+  attr Contextmenu bothValues = unsafeAttribute $ Both
+    { key: "contextmenu", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "contextmenu", value: prop' value })
+  pureAttr Contextmenu value = unsafeAttribute $ This
+    { key: "contextmenu", value: prop' value }
+  unpureAttr Contextmenu eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "contextmenu", value: prop' value }
 
 instance Attr Big_ Contextmenu String where
-  attr Contextmenu bothValues  = unsafeAttribute $ Both { key: "contextmenu", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "contextmenu", value:  prop' value  })
-  pureAttr Contextmenu value  = unsafeAttribute $ This { key: "contextmenu", value:  prop' value  }
-  unpureAttr Contextmenu eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "contextmenu", value:  prop' value  }
+  attr Contextmenu bothValues = unsafeAttribute $ Both
+    { key: "contextmenu", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "contextmenu", value: prop' value })
+  pureAttr Contextmenu value = unsafeAttribute $ This
+    { key: "contextmenu", value: prop' value }
+  unpureAttr Contextmenu eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "contextmenu", value: prop' value }
 
 instance Attr Blockquote_ Contextmenu String where
-  attr Contextmenu bothValues  = unsafeAttribute $ Both { key: "contextmenu", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "contextmenu", value:  prop' value  })
-  pureAttr Contextmenu value  = unsafeAttribute $ This { key: "contextmenu", value:  prop' value  }
-  unpureAttr Contextmenu eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "contextmenu", value:  prop' value  }
+  attr Contextmenu bothValues = unsafeAttribute $ Both
+    { key: "contextmenu", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "contextmenu", value: prop' value })
+  pureAttr Contextmenu value = unsafeAttribute $ This
+    { key: "contextmenu", value: prop' value }
+  unpureAttr Contextmenu eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "contextmenu", value: prop' value }
 
 instance Attr Body_ Contextmenu String where
-  attr Contextmenu bothValues  = unsafeAttribute $ Both { key: "contextmenu", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "contextmenu", value:  prop' value  })
-  pureAttr Contextmenu value  = unsafeAttribute $ This { key: "contextmenu", value:  prop' value  }
-  unpureAttr Contextmenu eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "contextmenu", value:  prop' value  }
+  attr Contextmenu bothValues = unsafeAttribute $ Both
+    { key: "contextmenu", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "contextmenu", value: prop' value })
+  pureAttr Contextmenu value = unsafeAttribute $ This
+    { key: "contextmenu", value: prop' value }
+  unpureAttr Contextmenu eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "contextmenu", value: prop' value }
 
 instance Attr Br_ Contextmenu String where
-  attr Contextmenu bothValues  = unsafeAttribute $ Both { key: "contextmenu", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "contextmenu", value:  prop' value  })
-  pureAttr Contextmenu value  = unsafeAttribute $ This { key: "contextmenu", value:  prop' value  }
-  unpureAttr Contextmenu eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "contextmenu", value:  prop' value  }
+  attr Contextmenu bothValues = unsafeAttribute $ Both
+    { key: "contextmenu", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "contextmenu", value: prop' value })
+  pureAttr Contextmenu value = unsafeAttribute $ This
+    { key: "contextmenu", value: prop' value }
+  unpureAttr Contextmenu eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "contextmenu", value: prop' value }
 
 instance Attr Button_ Contextmenu String where
-  attr Contextmenu bothValues  = unsafeAttribute $ Both { key: "contextmenu", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "contextmenu", value:  prop' value  })
-  pureAttr Contextmenu value  = unsafeAttribute $ This { key: "contextmenu", value:  prop' value  }
-  unpureAttr Contextmenu eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "contextmenu", value:  prop' value  }
+  attr Contextmenu bothValues = unsafeAttribute $ Both
+    { key: "contextmenu", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "contextmenu", value: prop' value })
+  pureAttr Contextmenu value = unsafeAttribute $ This
+    { key: "contextmenu", value: prop' value }
+  unpureAttr Contextmenu eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "contextmenu", value: prop' value }
 
 instance Attr Canvas_ Contextmenu String where
-  attr Contextmenu bothValues  = unsafeAttribute $ Both { key: "contextmenu", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "contextmenu", value:  prop' value  })
-  pureAttr Contextmenu value  = unsafeAttribute $ This { key: "contextmenu", value:  prop' value  }
-  unpureAttr Contextmenu eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "contextmenu", value:  prop' value  }
+  attr Contextmenu bothValues = unsafeAttribute $ Both
+    { key: "contextmenu", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "contextmenu", value: prop' value })
+  pureAttr Contextmenu value = unsafeAttribute $ This
+    { key: "contextmenu", value: prop' value }
+  unpureAttr Contextmenu eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "contextmenu", value: prop' value }
 
 instance Attr Caption_ Contextmenu String where
-  attr Contextmenu bothValues  = unsafeAttribute $ Both { key: "contextmenu", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "contextmenu", value:  prop' value  })
-  pureAttr Contextmenu value  = unsafeAttribute $ This { key: "contextmenu", value:  prop' value  }
-  unpureAttr Contextmenu eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "contextmenu", value:  prop' value  }
+  attr Contextmenu bothValues = unsafeAttribute $ Both
+    { key: "contextmenu", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "contextmenu", value: prop' value })
+  pureAttr Contextmenu value = unsafeAttribute $ This
+    { key: "contextmenu", value: prop' value }
+  unpureAttr Contextmenu eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "contextmenu", value: prop' value }
 
 instance Attr Center_ Contextmenu String where
-  attr Contextmenu bothValues  = unsafeAttribute $ Both { key: "contextmenu", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "contextmenu", value:  prop' value  })
-  pureAttr Contextmenu value  = unsafeAttribute $ This { key: "contextmenu", value:  prop' value  }
-  unpureAttr Contextmenu eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "contextmenu", value:  prop' value  }
+  attr Contextmenu bothValues = unsafeAttribute $ Both
+    { key: "contextmenu", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "contextmenu", value: prop' value })
+  pureAttr Contextmenu value = unsafeAttribute $ This
+    { key: "contextmenu", value: prop' value }
+  unpureAttr Contextmenu eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "contextmenu", value: prop' value }
 
 instance Attr Cite_ Contextmenu String where
-  attr Contextmenu bothValues  = unsafeAttribute $ Both { key: "contextmenu", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "contextmenu", value:  prop' value  })
-  pureAttr Contextmenu value  = unsafeAttribute $ This { key: "contextmenu", value:  prop' value  }
-  unpureAttr Contextmenu eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "contextmenu", value:  prop' value  }
+  attr Contextmenu bothValues = unsafeAttribute $ Both
+    { key: "contextmenu", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "contextmenu", value: prop' value })
+  pureAttr Contextmenu value = unsafeAttribute $ This
+    { key: "contextmenu", value: prop' value }
+  unpureAttr Contextmenu eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "contextmenu", value: prop' value }
 
 instance Attr Code_ Contextmenu String where
-  attr Contextmenu bothValues  = unsafeAttribute $ Both { key: "contextmenu", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "contextmenu", value:  prop' value  })
-  pureAttr Contextmenu value  = unsafeAttribute $ This { key: "contextmenu", value:  prop' value  }
-  unpureAttr Contextmenu eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "contextmenu", value:  prop' value  }
+  attr Contextmenu bothValues = unsafeAttribute $ Both
+    { key: "contextmenu", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "contextmenu", value: prop' value })
+  pureAttr Contextmenu value = unsafeAttribute $ This
+    { key: "contextmenu", value: prop' value }
+  unpureAttr Contextmenu eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "contextmenu", value: prop' value }
 
 instance Attr Col_ Contextmenu String where
-  attr Contextmenu bothValues  = unsafeAttribute $ Both { key: "contextmenu", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "contextmenu", value:  prop' value  })
-  pureAttr Contextmenu value  = unsafeAttribute $ This { key: "contextmenu", value:  prop' value  }
-  unpureAttr Contextmenu eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "contextmenu", value:  prop' value  }
+  attr Contextmenu bothValues = unsafeAttribute $ Both
+    { key: "contextmenu", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "contextmenu", value: prop' value })
+  pureAttr Contextmenu value = unsafeAttribute $ This
+    { key: "contextmenu", value: prop' value }
+  unpureAttr Contextmenu eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "contextmenu", value: prop' value }
 
 instance Attr Colgroup_ Contextmenu String where
-  attr Contextmenu bothValues  = unsafeAttribute $ Both { key: "contextmenu", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "contextmenu", value:  prop' value  })
-  pureAttr Contextmenu value  = unsafeAttribute $ This { key: "contextmenu", value:  prop' value  }
-  unpureAttr Contextmenu eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "contextmenu", value:  prop' value  }
+  attr Contextmenu bothValues = unsafeAttribute $ Both
+    { key: "contextmenu", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "contextmenu", value: prop' value })
+  pureAttr Contextmenu value = unsafeAttribute $ This
+    { key: "contextmenu", value: prop' value }
+  unpureAttr Contextmenu eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "contextmenu", value: prop' value }
 
 instance Attr Xdata_ Contextmenu String where
-  attr Contextmenu bothValues  = unsafeAttribute $ Both { key: "contextmenu", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "contextmenu", value:  prop' value  })
-  pureAttr Contextmenu value  = unsafeAttribute $ This { key: "contextmenu", value:  prop' value  }
-  unpureAttr Contextmenu eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "contextmenu", value:  prop' value  }
+  attr Contextmenu bothValues = unsafeAttribute $ Both
+    { key: "contextmenu", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "contextmenu", value: prop' value })
+  pureAttr Contextmenu value = unsafeAttribute $ This
+    { key: "contextmenu", value: prop' value }
+  unpureAttr Contextmenu eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "contextmenu", value: prop' value }
 
 instance Attr Datalist_ Contextmenu String where
-  attr Contextmenu bothValues  = unsafeAttribute $ Both { key: "contextmenu", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "contextmenu", value:  prop' value  })
-  pureAttr Contextmenu value  = unsafeAttribute $ This { key: "contextmenu", value:  prop' value  }
-  unpureAttr Contextmenu eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "contextmenu", value:  prop' value  }
+  attr Contextmenu bothValues = unsafeAttribute $ Both
+    { key: "contextmenu", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "contextmenu", value: prop' value })
+  pureAttr Contextmenu value = unsafeAttribute $ This
+    { key: "contextmenu", value: prop' value }
+  unpureAttr Contextmenu eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "contextmenu", value: prop' value }
 
 instance Attr Dd_ Contextmenu String where
-  attr Contextmenu bothValues  = unsafeAttribute $ Both { key: "contextmenu", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "contextmenu", value:  prop' value  })
-  pureAttr Contextmenu value  = unsafeAttribute $ This { key: "contextmenu", value:  prop' value  }
-  unpureAttr Contextmenu eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "contextmenu", value:  prop' value  }
+  attr Contextmenu bothValues = unsafeAttribute $ Both
+    { key: "contextmenu", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "contextmenu", value: prop' value })
+  pureAttr Contextmenu value = unsafeAttribute $ This
+    { key: "contextmenu", value: prop' value }
+  unpureAttr Contextmenu eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "contextmenu", value: prop' value }
 
 instance Attr Del_ Contextmenu String where
-  attr Contextmenu bothValues  = unsafeAttribute $ Both { key: "contextmenu", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "contextmenu", value:  prop' value  })
-  pureAttr Contextmenu value  = unsafeAttribute $ This { key: "contextmenu", value:  prop' value  }
-  unpureAttr Contextmenu eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "contextmenu", value:  prop' value  }
+  attr Contextmenu bothValues = unsafeAttribute $ Both
+    { key: "contextmenu", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "contextmenu", value: prop' value })
+  pureAttr Contextmenu value = unsafeAttribute $ This
+    { key: "contextmenu", value: prop' value }
+  unpureAttr Contextmenu eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "contextmenu", value: prop' value }
 
 instance Attr Details_ Contextmenu String where
-  attr Contextmenu bothValues  = unsafeAttribute $ Both { key: "contextmenu", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "contextmenu", value:  prop' value  })
-  pureAttr Contextmenu value  = unsafeAttribute $ This { key: "contextmenu", value:  prop' value  }
-  unpureAttr Contextmenu eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "contextmenu", value:  prop' value  }
+  attr Contextmenu bothValues = unsafeAttribute $ Both
+    { key: "contextmenu", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "contextmenu", value: prop' value })
+  pureAttr Contextmenu value = unsafeAttribute $ This
+    { key: "contextmenu", value: prop' value }
+  unpureAttr Contextmenu eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "contextmenu", value: prop' value }
 
 instance Attr Dfn_ Contextmenu String where
-  attr Contextmenu bothValues  = unsafeAttribute $ Both { key: "contextmenu", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "contextmenu", value:  prop' value  })
-  pureAttr Contextmenu value  = unsafeAttribute $ This { key: "contextmenu", value:  prop' value  }
-  unpureAttr Contextmenu eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "contextmenu", value:  prop' value  }
+  attr Contextmenu bothValues = unsafeAttribute $ Both
+    { key: "contextmenu", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "contextmenu", value: prop' value })
+  pureAttr Contextmenu value = unsafeAttribute $ This
+    { key: "contextmenu", value: prop' value }
+  unpureAttr Contextmenu eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "contextmenu", value: prop' value }
 
 instance Attr Dialog_ Contextmenu String where
-  attr Contextmenu bothValues  = unsafeAttribute $ Both { key: "contextmenu", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "contextmenu", value:  prop' value  })
-  pureAttr Contextmenu value  = unsafeAttribute $ This { key: "contextmenu", value:  prop' value  }
-  unpureAttr Contextmenu eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "contextmenu", value:  prop' value  }
+  attr Contextmenu bothValues = unsafeAttribute $ Both
+    { key: "contextmenu", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "contextmenu", value: prop' value })
+  pureAttr Contextmenu value = unsafeAttribute $ This
+    { key: "contextmenu", value: prop' value }
+  unpureAttr Contextmenu eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "contextmenu", value: prop' value }
 
 instance Attr Dir_ Contextmenu String where
-  attr Contextmenu bothValues  = unsafeAttribute $ Both { key: "contextmenu", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "contextmenu", value:  prop' value  })
-  pureAttr Contextmenu value  = unsafeAttribute $ This { key: "contextmenu", value:  prop' value  }
-  unpureAttr Contextmenu eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "contextmenu", value:  prop' value  }
+  attr Contextmenu bothValues = unsafeAttribute $ Both
+    { key: "contextmenu", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "contextmenu", value: prop' value })
+  pureAttr Contextmenu value = unsafeAttribute $ This
+    { key: "contextmenu", value: prop' value }
+  unpureAttr Contextmenu eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "contextmenu", value: prop' value }
 
 instance Attr Div_ Contextmenu String where
-  attr Contextmenu bothValues  = unsafeAttribute $ Both { key: "contextmenu", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "contextmenu", value:  prop' value  })
-  pureAttr Contextmenu value  = unsafeAttribute $ This { key: "contextmenu", value:  prop' value  }
-  unpureAttr Contextmenu eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "contextmenu", value:  prop' value  }
+  attr Contextmenu bothValues = unsafeAttribute $ Both
+    { key: "contextmenu", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "contextmenu", value: prop' value })
+  pureAttr Contextmenu value = unsafeAttribute $ This
+    { key: "contextmenu", value: prop' value }
+  unpureAttr Contextmenu eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "contextmenu", value: prop' value }
 
 instance Attr Dl_ Contextmenu String where
-  attr Contextmenu bothValues  = unsafeAttribute $ Both { key: "contextmenu", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "contextmenu", value:  prop' value  })
-  pureAttr Contextmenu value  = unsafeAttribute $ This { key: "contextmenu", value:  prop' value  }
-  unpureAttr Contextmenu eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "contextmenu", value:  prop' value  }
+  attr Contextmenu bothValues = unsafeAttribute $ Both
+    { key: "contextmenu", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "contextmenu", value: prop' value })
+  pureAttr Contextmenu value = unsafeAttribute $ This
+    { key: "contextmenu", value: prop' value }
+  unpureAttr Contextmenu eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "contextmenu", value: prop' value }
 
 instance Attr Dt_ Contextmenu String where
-  attr Contextmenu bothValues  = unsafeAttribute $ Both { key: "contextmenu", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "contextmenu", value:  prop' value  })
-  pureAttr Contextmenu value  = unsafeAttribute $ This { key: "contextmenu", value:  prop' value  }
-  unpureAttr Contextmenu eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "contextmenu", value:  prop' value  }
+  attr Contextmenu bothValues = unsafeAttribute $ Both
+    { key: "contextmenu", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "contextmenu", value: prop' value })
+  pureAttr Contextmenu value = unsafeAttribute $ This
+    { key: "contextmenu", value: prop' value }
+  unpureAttr Contextmenu eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "contextmenu", value: prop' value }
 
 instance Attr Em_ Contextmenu String where
-  attr Contextmenu bothValues  = unsafeAttribute $ Both { key: "contextmenu", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "contextmenu", value:  prop' value  })
-  pureAttr Contextmenu value  = unsafeAttribute $ This { key: "contextmenu", value:  prop' value  }
-  unpureAttr Contextmenu eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "contextmenu", value:  prop' value  }
+  attr Contextmenu bothValues = unsafeAttribute $ Both
+    { key: "contextmenu", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "contextmenu", value: prop' value })
+  pureAttr Contextmenu value = unsafeAttribute $ This
+    { key: "contextmenu", value: prop' value }
+  unpureAttr Contextmenu eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "contextmenu", value: prop' value }
 
 instance Attr Embed_ Contextmenu String where
-  attr Contextmenu bothValues  = unsafeAttribute $ Both { key: "contextmenu", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "contextmenu", value:  prop' value  })
-  pureAttr Contextmenu value  = unsafeAttribute $ This { key: "contextmenu", value:  prop' value  }
-  unpureAttr Contextmenu eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "contextmenu", value:  prop' value  }
+  attr Contextmenu bothValues = unsafeAttribute $ Both
+    { key: "contextmenu", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "contextmenu", value: prop' value })
+  pureAttr Contextmenu value = unsafeAttribute $ This
+    { key: "contextmenu", value: prop' value }
+  unpureAttr Contextmenu eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "contextmenu", value: prop' value }
 
 instance Attr Fieldset_ Contextmenu String where
-  attr Contextmenu bothValues  = unsafeAttribute $ Both { key: "contextmenu", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "contextmenu", value:  prop' value  })
-  pureAttr Contextmenu value  = unsafeAttribute $ This { key: "contextmenu", value:  prop' value  }
-  unpureAttr Contextmenu eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "contextmenu", value:  prop' value  }
+  attr Contextmenu bothValues = unsafeAttribute $ Both
+    { key: "contextmenu", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "contextmenu", value: prop' value })
+  pureAttr Contextmenu value = unsafeAttribute $ This
+    { key: "contextmenu", value: prop' value }
+  unpureAttr Contextmenu eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "contextmenu", value: prop' value }
 
 instance Attr Figcaption_ Contextmenu String where
-  attr Contextmenu bothValues  = unsafeAttribute $ Both { key: "contextmenu", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "contextmenu", value:  prop' value  })
-  pureAttr Contextmenu value  = unsafeAttribute $ This { key: "contextmenu", value:  prop' value  }
-  unpureAttr Contextmenu eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "contextmenu", value:  prop' value  }
+  attr Contextmenu bothValues = unsafeAttribute $ Both
+    { key: "contextmenu", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "contextmenu", value: prop' value })
+  pureAttr Contextmenu value = unsafeAttribute $ This
+    { key: "contextmenu", value: prop' value }
+  unpureAttr Contextmenu eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "contextmenu", value: prop' value }
 
 instance Attr Figure_ Contextmenu String where
-  attr Contextmenu bothValues  = unsafeAttribute $ Both { key: "contextmenu", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "contextmenu", value:  prop' value  })
-  pureAttr Contextmenu value  = unsafeAttribute $ This { key: "contextmenu", value:  prop' value  }
-  unpureAttr Contextmenu eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "contextmenu", value:  prop' value  }
+  attr Contextmenu bothValues = unsafeAttribute $ Both
+    { key: "contextmenu", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "contextmenu", value: prop' value })
+  pureAttr Contextmenu value = unsafeAttribute $ This
+    { key: "contextmenu", value: prop' value }
+  unpureAttr Contextmenu eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "contextmenu", value: prop' value }
 
 instance Attr Font_ Contextmenu String where
-  attr Contextmenu bothValues  = unsafeAttribute $ Both { key: "contextmenu", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "contextmenu", value:  prop' value  })
-  pureAttr Contextmenu value  = unsafeAttribute $ This { key: "contextmenu", value:  prop' value  }
-  unpureAttr Contextmenu eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "contextmenu", value:  prop' value  }
+  attr Contextmenu bothValues = unsafeAttribute $ Both
+    { key: "contextmenu", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "contextmenu", value: prop' value })
+  pureAttr Contextmenu value = unsafeAttribute $ This
+    { key: "contextmenu", value: prop' value }
+  unpureAttr Contextmenu eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "contextmenu", value: prop' value }
 
 instance Attr Footer_ Contextmenu String where
-  attr Contextmenu bothValues  = unsafeAttribute $ Both { key: "contextmenu", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "contextmenu", value:  prop' value  })
-  pureAttr Contextmenu value  = unsafeAttribute $ This { key: "contextmenu", value:  prop' value  }
-  unpureAttr Contextmenu eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "contextmenu", value:  prop' value  }
+  attr Contextmenu bothValues = unsafeAttribute $ Both
+    { key: "contextmenu", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "contextmenu", value: prop' value })
+  pureAttr Contextmenu value = unsafeAttribute $ This
+    { key: "contextmenu", value: prop' value }
+  unpureAttr Contextmenu eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "contextmenu", value: prop' value }
 
 instance Attr Form_ Contextmenu String where
-  attr Contextmenu bothValues  = unsafeAttribute $ Both { key: "contextmenu", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "contextmenu", value:  prop' value  })
-  pureAttr Contextmenu value  = unsafeAttribute $ This { key: "contextmenu", value:  prop' value  }
-  unpureAttr Contextmenu eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "contextmenu", value:  prop' value  }
+  attr Contextmenu bothValues = unsafeAttribute $ Both
+    { key: "contextmenu", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "contextmenu", value: prop' value })
+  pureAttr Contextmenu value = unsafeAttribute $ This
+    { key: "contextmenu", value: prop' value }
+  unpureAttr Contextmenu eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "contextmenu", value: prop' value }
 
 instance Attr Frame_ Contextmenu String where
-  attr Contextmenu bothValues  = unsafeAttribute $ Both { key: "contextmenu", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "contextmenu", value:  prop' value  })
-  pureAttr Contextmenu value  = unsafeAttribute $ This { key: "contextmenu", value:  prop' value  }
-  unpureAttr Contextmenu eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "contextmenu", value:  prop' value  }
+  attr Contextmenu bothValues = unsafeAttribute $ Both
+    { key: "contextmenu", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "contextmenu", value: prop' value })
+  pureAttr Contextmenu value = unsafeAttribute $ This
+    { key: "contextmenu", value: prop' value }
+  unpureAttr Contextmenu eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "contextmenu", value: prop' value }
 
 instance Attr Frameset_ Contextmenu String where
-  attr Contextmenu bothValues  = unsafeAttribute $ Both { key: "contextmenu", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "contextmenu", value:  prop' value  })
-  pureAttr Contextmenu value  = unsafeAttribute $ This { key: "contextmenu", value:  prop' value  }
-  unpureAttr Contextmenu eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "contextmenu", value:  prop' value  }
+  attr Contextmenu bothValues = unsafeAttribute $ Both
+    { key: "contextmenu", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "contextmenu", value: prop' value })
+  pureAttr Contextmenu value = unsafeAttribute $ This
+    { key: "contextmenu", value: prop' value }
+  unpureAttr Contextmenu eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "contextmenu", value: prop' value }
 
 instance Attr H1_ Contextmenu String where
-  attr Contextmenu bothValues  = unsafeAttribute $ Both { key: "contextmenu", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "contextmenu", value:  prop' value  })
-  pureAttr Contextmenu value  = unsafeAttribute $ This { key: "contextmenu", value:  prop' value  }
-  unpureAttr Contextmenu eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "contextmenu", value:  prop' value  }
+  attr Contextmenu bothValues = unsafeAttribute $ Both
+    { key: "contextmenu", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "contextmenu", value: prop' value })
+  pureAttr Contextmenu value = unsafeAttribute $ This
+    { key: "contextmenu", value: prop' value }
+  unpureAttr Contextmenu eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "contextmenu", value: prop' value }
 
 instance Attr H2_ Contextmenu String where
-  attr Contextmenu bothValues  = unsafeAttribute $ Both { key: "contextmenu", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "contextmenu", value:  prop' value  })
-  pureAttr Contextmenu value  = unsafeAttribute $ This { key: "contextmenu", value:  prop' value  }
-  unpureAttr Contextmenu eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "contextmenu", value:  prop' value  }
+  attr Contextmenu bothValues = unsafeAttribute $ Both
+    { key: "contextmenu", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "contextmenu", value: prop' value })
+  pureAttr Contextmenu value = unsafeAttribute $ This
+    { key: "contextmenu", value: prop' value }
+  unpureAttr Contextmenu eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "contextmenu", value: prop' value }
 
 instance Attr H3_ Contextmenu String where
-  attr Contextmenu bothValues  = unsafeAttribute $ Both { key: "contextmenu", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "contextmenu", value:  prop' value  })
-  pureAttr Contextmenu value  = unsafeAttribute $ This { key: "contextmenu", value:  prop' value  }
-  unpureAttr Contextmenu eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "contextmenu", value:  prop' value  }
+  attr Contextmenu bothValues = unsafeAttribute $ Both
+    { key: "contextmenu", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "contextmenu", value: prop' value })
+  pureAttr Contextmenu value = unsafeAttribute $ This
+    { key: "contextmenu", value: prop' value }
+  unpureAttr Contextmenu eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "contextmenu", value: prop' value }
 
 instance Attr H4_ Contextmenu String where
-  attr Contextmenu bothValues  = unsafeAttribute $ Both { key: "contextmenu", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "contextmenu", value:  prop' value  })
-  pureAttr Contextmenu value  = unsafeAttribute $ This { key: "contextmenu", value:  prop' value  }
-  unpureAttr Contextmenu eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "contextmenu", value:  prop' value  }
+  attr Contextmenu bothValues = unsafeAttribute $ Both
+    { key: "contextmenu", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "contextmenu", value: prop' value })
+  pureAttr Contextmenu value = unsafeAttribute $ This
+    { key: "contextmenu", value: prop' value }
+  unpureAttr Contextmenu eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "contextmenu", value: prop' value }
 
 instance Attr H5_ Contextmenu String where
-  attr Contextmenu bothValues  = unsafeAttribute $ Both { key: "contextmenu", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "contextmenu", value:  prop' value  })
-  pureAttr Contextmenu value  = unsafeAttribute $ This { key: "contextmenu", value:  prop' value  }
-  unpureAttr Contextmenu eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "contextmenu", value:  prop' value  }
+  attr Contextmenu bothValues = unsafeAttribute $ Both
+    { key: "contextmenu", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "contextmenu", value: prop' value })
+  pureAttr Contextmenu value = unsafeAttribute $ This
+    { key: "contextmenu", value: prop' value }
+  unpureAttr Contextmenu eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "contextmenu", value: prop' value }
 
 instance Attr H6_ Contextmenu String where
-  attr Contextmenu bothValues  = unsafeAttribute $ Both { key: "contextmenu", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "contextmenu", value:  prop' value  })
-  pureAttr Contextmenu value  = unsafeAttribute $ This { key: "contextmenu", value:  prop' value  }
-  unpureAttr Contextmenu eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "contextmenu", value:  prop' value  }
+  attr Contextmenu bothValues = unsafeAttribute $ Both
+    { key: "contextmenu", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "contextmenu", value: prop' value })
+  pureAttr Contextmenu value = unsafeAttribute $ This
+    { key: "contextmenu", value: prop' value }
+  unpureAttr Contextmenu eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "contextmenu", value: prop' value }
 
 instance Attr Head_ Contextmenu String where
-  attr Contextmenu bothValues  = unsafeAttribute $ Both { key: "contextmenu", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "contextmenu", value:  prop' value  })
-  pureAttr Contextmenu value  = unsafeAttribute $ This { key: "contextmenu", value:  prop' value  }
-  unpureAttr Contextmenu eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "contextmenu", value:  prop' value  }
+  attr Contextmenu bothValues = unsafeAttribute $ Both
+    { key: "contextmenu", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "contextmenu", value: prop' value })
+  pureAttr Contextmenu value = unsafeAttribute $ This
+    { key: "contextmenu", value: prop' value }
+  unpureAttr Contextmenu eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "contextmenu", value: prop' value }
 
 instance Attr Header_ Contextmenu String where
-  attr Contextmenu bothValues  = unsafeAttribute $ Both { key: "contextmenu", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "contextmenu", value:  prop' value  })
-  pureAttr Contextmenu value  = unsafeAttribute $ This { key: "contextmenu", value:  prop' value  }
-  unpureAttr Contextmenu eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "contextmenu", value:  prop' value  }
+  attr Contextmenu bothValues = unsafeAttribute $ Both
+    { key: "contextmenu", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "contextmenu", value: prop' value })
+  pureAttr Contextmenu value = unsafeAttribute $ This
+    { key: "contextmenu", value: prop' value }
+  unpureAttr Contextmenu eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "contextmenu", value: prop' value }
 
 instance Attr Hr_ Contextmenu String where
-  attr Contextmenu bothValues  = unsafeAttribute $ Both { key: "contextmenu", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "contextmenu", value:  prop' value  })
-  pureAttr Contextmenu value  = unsafeAttribute $ This { key: "contextmenu", value:  prop' value  }
-  unpureAttr Contextmenu eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "contextmenu", value:  prop' value  }
+  attr Contextmenu bothValues = unsafeAttribute $ Both
+    { key: "contextmenu", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "contextmenu", value: prop' value })
+  pureAttr Contextmenu value = unsafeAttribute $ This
+    { key: "contextmenu", value: prop' value }
+  unpureAttr Contextmenu eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "contextmenu", value: prop' value }
 
 instance Attr Html_ Contextmenu String where
-  attr Contextmenu bothValues  = unsafeAttribute $ Both { key: "contextmenu", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "contextmenu", value:  prop' value  })
-  pureAttr Contextmenu value  = unsafeAttribute $ This { key: "contextmenu", value:  prop' value  }
-  unpureAttr Contextmenu eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "contextmenu", value:  prop' value  }
+  attr Contextmenu bothValues = unsafeAttribute $ Both
+    { key: "contextmenu", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "contextmenu", value: prop' value })
+  pureAttr Contextmenu value = unsafeAttribute $ This
+    { key: "contextmenu", value: prop' value }
+  unpureAttr Contextmenu eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "contextmenu", value: prop' value }
 
 instance Attr I_ Contextmenu String where
-  attr Contextmenu bothValues  = unsafeAttribute $ Both { key: "contextmenu", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "contextmenu", value:  prop' value  })
-  pureAttr Contextmenu value  = unsafeAttribute $ This { key: "contextmenu", value:  prop' value  }
-  unpureAttr Contextmenu eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "contextmenu", value:  prop' value  }
+  attr Contextmenu bothValues = unsafeAttribute $ Both
+    { key: "contextmenu", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "contextmenu", value: prop' value })
+  pureAttr Contextmenu value = unsafeAttribute $ This
+    { key: "contextmenu", value: prop' value }
+  unpureAttr Contextmenu eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "contextmenu", value: prop' value }
 
 instance Attr Iframe_ Contextmenu String where
-  attr Contextmenu bothValues  = unsafeAttribute $ Both { key: "contextmenu", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "contextmenu", value:  prop' value  })
-  pureAttr Contextmenu value  = unsafeAttribute $ This { key: "contextmenu", value:  prop' value  }
-  unpureAttr Contextmenu eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "contextmenu", value:  prop' value  }
+  attr Contextmenu bothValues = unsafeAttribute $ Both
+    { key: "contextmenu", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "contextmenu", value: prop' value })
+  pureAttr Contextmenu value = unsafeAttribute $ This
+    { key: "contextmenu", value: prop' value }
+  unpureAttr Contextmenu eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "contextmenu", value: prop' value }
 
 instance Attr Img_ Contextmenu String where
-  attr Contextmenu bothValues  = unsafeAttribute $ Both { key: "contextmenu", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "contextmenu", value:  prop' value  })
-  pureAttr Contextmenu value  = unsafeAttribute $ This { key: "contextmenu", value:  prop' value  }
-  unpureAttr Contextmenu eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "contextmenu", value:  prop' value  }
+  attr Contextmenu bothValues = unsafeAttribute $ Both
+    { key: "contextmenu", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "contextmenu", value: prop' value })
+  pureAttr Contextmenu value = unsafeAttribute $ This
+    { key: "contextmenu", value: prop' value }
+  unpureAttr Contextmenu eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "contextmenu", value: prop' value }
 
 instance Attr Input_ Contextmenu String where
-  attr Contextmenu bothValues  = unsafeAttribute $ Both { key: "contextmenu", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "contextmenu", value:  prop' value  })
-  pureAttr Contextmenu value  = unsafeAttribute $ This { key: "contextmenu", value:  prop' value  }
-  unpureAttr Contextmenu eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "contextmenu", value:  prop' value  }
+  attr Contextmenu bothValues = unsafeAttribute $ Both
+    { key: "contextmenu", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "contextmenu", value: prop' value })
+  pureAttr Contextmenu value = unsafeAttribute $ This
+    { key: "contextmenu", value: prop' value }
+  unpureAttr Contextmenu eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "contextmenu", value: prop' value }
 
 instance Attr Ins_ Contextmenu String where
-  attr Contextmenu bothValues  = unsafeAttribute $ Both { key: "contextmenu", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "contextmenu", value:  prop' value  })
-  pureAttr Contextmenu value  = unsafeAttribute $ This { key: "contextmenu", value:  prop' value  }
-  unpureAttr Contextmenu eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "contextmenu", value:  prop' value  }
+  attr Contextmenu bothValues = unsafeAttribute $ Both
+    { key: "contextmenu", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "contextmenu", value: prop' value })
+  pureAttr Contextmenu value = unsafeAttribute $ This
+    { key: "contextmenu", value: prop' value }
+  unpureAttr Contextmenu eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "contextmenu", value: prop' value }
 
 instance Attr Kbd_ Contextmenu String where
-  attr Contextmenu bothValues  = unsafeAttribute $ Both { key: "contextmenu", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "contextmenu", value:  prop' value  })
-  pureAttr Contextmenu value  = unsafeAttribute $ This { key: "contextmenu", value:  prop' value  }
-  unpureAttr Contextmenu eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "contextmenu", value:  prop' value  }
+  attr Contextmenu bothValues = unsafeAttribute $ Both
+    { key: "contextmenu", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "contextmenu", value: prop' value })
+  pureAttr Contextmenu value = unsafeAttribute $ This
+    { key: "contextmenu", value: prop' value }
+  unpureAttr Contextmenu eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "contextmenu", value: prop' value }
 
 instance Attr Label_ Contextmenu String where
-  attr Contextmenu bothValues  = unsafeAttribute $ Both { key: "contextmenu", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "contextmenu", value:  prop' value  })
-  pureAttr Contextmenu value  = unsafeAttribute $ This { key: "contextmenu", value:  prop' value  }
-  unpureAttr Contextmenu eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "contextmenu", value:  prop' value  }
+  attr Contextmenu bothValues = unsafeAttribute $ Both
+    { key: "contextmenu", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "contextmenu", value: prop' value })
+  pureAttr Contextmenu value = unsafeAttribute $ This
+    { key: "contextmenu", value: prop' value }
+  unpureAttr Contextmenu eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "contextmenu", value: prop' value }
 
 instance Attr Legend_ Contextmenu String where
-  attr Contextmenu bothValues  = unsafeAttribute $ Both { key: "contextmenu", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "contextmenu", value:  prop' value  })
-  pureAttr Contextmenu value  = unsafeAttribute $ This { key: "contextmenu", value:  prop' value  }
-  unpureAttr Contextmenu eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "contextmenu", value:  prop' value  }
+  attr Contextmenu bothValues = unsafeAttribute $ Both
+    { key: "contextmenu", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "contextmenu", value: prop' value })
+  pureAttr Contextmenu value = unsafeAttribute $ This
+    { key: "contextmenu", value: prop' value }
+  unpureAttr Contextmenu eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "contextmenu", value: prop' value }
 
 instance Attr Li_ Contextmenu String where
-  attr Contextmenu bothValues  = unsafeAttribute $ Both { key: "contextmenu", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "contextmenu", value:  prop' value  })
-  pureAttr Contextmenu value  = unsafeAttribute $ This { key: "contextmenu", value:  prop' value  }
-  unpureAttr Contextmenu eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "contextmenu", value:  prop' value  }
+  attr Contextmenu bothValues = unsafeAttribute $ Both
+    { key: "contextmenu", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "contextmenu", value: prop' value })
+  pureAttr Contextmenu value = unsafeAttribute $ This
+    { key: "contextmenu", value: prop' value }
+  unpureAttr Contextmenu eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "contextmenu", value: prop' value }
 
 instance Attr Link_ Contextmenu String where
-  attr Contextmenu bothValues  = unsafeAttribute $ Both { key: "contextmenu", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "contextmenu", value:  prop' value  })
-  pureAttr Contextmenu value  = unsafeAttribute $ This { key: "contextmenu", value:  prop' value  }
-  unpureAttr Contextmenu eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "contextmenu", value:  prop' value  }
+  attr Contextmenu bothValues = unsafeAttribute $ Both
+    { key: "contextmenu", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "contextmenu", value: prop' value })
+  pureAttr Contextmenu value = unsafeAttribute $ This
+    { key: "contextmenu", value: prop' value }
+  unpureAttr Contextmenu eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "contextmenu", value: prop' value }
 
 instance Attr Main_ Contextmenu String where
-  attr Contextmenu bothValues  = unsafeAttribute $ Both { key: "contextmenu", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "contextmenu", value:  prop' value  })
-  pureAttr Contextmenu value  = unsafeAttribute $ This { key: "contextmenu", value:  prop' value  }
-  unpureAttr Contextmenu eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "contextmenu", value:  prop' value  }
+  attr Contextmenu bothValues = unsafeAttribute $ Both
+    { key: "contextmenu", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "contextmenu", value: prop' value })
+  pureAttr Contextmenu value = unsafeAttribute $ This
+    { key: "contextmenu", value: prop' value }
+  unpureAttr Contextmenu eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "contextmenu", value: prop' value }
 
 instance Attr Map_ Contextmenu String where
-  attr Contextmenu bothValues  = unsafeAttribute $ Both { key: "contextmenu", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "contextmenu", value:  prop' value  })
-  pureAttr Contextmenu value  = unsafeAttribute $ This { key: "contextmenu", value:  prop' value  }
-  unpureAttr Contextmenu eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "contextmenu", value:  prop' value  }
+  attr Contextmenu bothValues = unsafeAttribute $ Both
+    { key: "contextmenu", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "contextmenu", value: prop' value })
+  pureAttr Contextmenu value = unsafeAttribute $ This
+    { key: "contextmenu", value: prop' value }
+  unpureAttr Contextmenu eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "contextmenu", value: prop' value }
 
 instance Attr Mark_ Contextmenu String where
-  attr Contextmenu bothValues  = unsafeAttribute $ Both { key: "contextmenu", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "contextmenu", value:  prop' value  })
-  pureAttr Contextmenu value  = unsafeAttribute $ This { key: "contextmenu", value:  prop' value  }
-  unpureAttr Contextmenu eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "contextmenu", value:  prop' value  }
+  attr Contextmenu bothValues = unsafeAttribute $ Both
+    { key: "contextmenu", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "contextmenu", value: prop' value })
+  pureAttr Contextmenu value = unsafeAttribute $ This
+    { key: "contextmenu", value: prop' value }
+  unpureAttr Contextmenu eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "contextmenu", value: prop' value }
 
 instance Attr Meta_ Contextmenu String where
-  attr Contextmenu bothValues  = unsafeAttribute $ Both { key: "contextmenu", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "contextmenu", value:  prop' value  })
-  pureAttr Contextmenu value  = unsafeAttribute $ This { key: "contextmenu", value:  prop' value  }
-  unpureAttr Contextmenu eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "contextmenu", value:  prop' value  }
+  attr Contextmenu bothValues = unsafeAttribute $ Both
+    { key: "contextmenu", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "contextmenu", value: prop' value })
+  pureAttr Contextmenu value = unsafeAttribute $ This
+    { key: "contextmenu", value: prop' value }
+  unpureAttr Contextmenu eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "contextmenu", value: prop' value }
 
 instance Attr Meter_ Contextmenu String where
-  attr Contextmenu bothValues  = unsafeAttribute $ Both { key: "contextmenu", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "contextmenu", value:  prop' value  })
-  pureAttr Contextmenu value  = unsafeAttribute $ This { key: "contextmenu", value:  prop' value  }
-  unpureAttr Contextmenu eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "contextmenu", value:  prop' value  }
+  attr Contextmenu bothValues = unsafeAttribute $ Both
+    { key: "contextmenu", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "contextmenu", value: prop' value })
+  pureAttr Contextmenu value = unsafeAttribute $ This
+    { key: "contextmenu", value: prop' value }
+  unpureAttr Contextmenu eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "contextmenu", value: prop' value }
 
 instance Attr Nav_ Contextmenu String where
-  attr Contextmenu bothValues  = unsafeAttribute $ Both { key: "contextmenu", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "contextmenu", value:  prop' value  })
-  pureAttr Contextmenu value  = unsafeAttribute $ This { key: "contextmenu", value:  prop' value  }
-  unpureAttr Contextmenu eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "contextmenu", value:  prop' value  }
+  attr Contextmenu bothValues = unsafeAttribute $ Both
+    { key: "contextmenu", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "contextmenu", value: prop' value })
+  pureAttr Contextmenu value = unsafeAttribute $ This
+    { key: "contextmenu", value: prop' value }
+  unpureAttr Contextmenu eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "contextmenu", value: prop' value }
 
 instance Attr Noframes_ Contextmenu String where
-  attr Contextmenu bothValues  = unsafeAttribute $ Both { key: "contextmenu", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "contextmenu", value:  prop' value  })
-  pureAttr Contextmenu value  = unsafeAttribute $ This { key: "contextmenu", value:  prop' value  }
-  unpureAttr Contextmenu eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "contextmenu", value:  prop' value  }
+  attr Contextmenu bothValues = unsafeAttribute $ Both
+    { key: "contextmenu", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "contextmenu", value: prop' value })
+  pureAttr Contextmenu value = unsafeAttribute $ This
+    { key: "contextmenu", value: prop' value }
+  unpureAttr Contextmenu eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "contextmenu", value: prop' value }
 
 instance Attr Noscript_ Contextmenu String where
-  attr Contextmenu bothValues  = unsafeAttribute $ Both { key: "contextmenu", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "contextmenu", value:  prop' value  })
-  pureAttr Contextmenu value  = unsafeAttribute $ This { key: "contextmenu", value:  prop' value  }
-  unpureAttr Contextmenu eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "contextmenu", value:  prop' value  }
+  attr Contextmenu bothValues = unsafeAttribute $ Both
+    { key: "contextmenu", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "contextmenu", value: prop' value })
+  pureAttr Contextmenu value = unsafeAttribute $ This
+    { key: "contextmenu", value: prop' value }
+  unpureAttr Contextmenu eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "contextmenu", value: prop' value }
 
 instance Attr Object_ Contextmenu String where
-  attr Contextmenu bothValues  = unsafeAttribute $ Both { key: "contextmenu", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "contextmenu", value:  prop' value  })
-  pureAttr Contextmenu value  = unsafeAttribute $ This { key: "contextmenu", value:  prop' value  }
-  unpureAttr Contextmenu eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "contextmenu", value:  prop' value  }
+  attr Contextmenu bothValues = unsafeAttribute $ Both
+    { key: "contextmenu", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "contextmenu", value: prop' value })
+  pureAttr Contextmenu value = unsafeAttribute $ This
+    { key: "contextmenu", value: prop' value }
+  unpureAttr Contextmenu eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "contextmenu", value: prop' value }
 
 instance Attr Ol_ Contextmenu String where
-  attr Contextmenu bothValues  = unsafeAttribute $ Both { key: "contextmenu", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "contextmenu", value:  prop' value  })
-  pureAttr Contextmenu value  = unsafeAttribute $ This { key: "contextmenu", value:  prop' value  }
-  unpureAttr Contextmenu eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "contextmenu", value:  prop' value  }
+  attr Contextmenu bothValues = unsafeAttribute $ Both
+    { key: "contextmenu", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "contextmenu", value: prop' value })
+  pureAttr Contextmenu value = unsafeAttribute $ This
+    { key: "contextmenu", value: prop' value }
+  unpureAttr Contextmenu eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "contextmenu", value: prop' value }
 
 instance Attr Optgroup_ Contextmenu String where
-  attr Contextmenu bothValues  = unsafeAttribute $ Both { key: "contextmenu", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "contextmenu", value:  prop' value  })
-  pureAttr Contextmenu value  = unsafeAttribute $ This { key: "contextmenu", value:  prop' value  }
-  unpureAttr Contextmenu eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "contextmenu", value:  prop' value  }
+  attr Contextmenu bothValues = unsafeAttribute $ Both
+    { key: "contextmenu", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "contextmenu", value: prop' value })
+  pureAttr Contextmenu value = unsafeAttribute $ This
+    { key: "contextmenu", value: prop' value }
+  unpureAttr Contextmenu eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "contextmenu", value: prop' value }
 
 instance Attr Option_ Contextmenu String where
-  attr Contextmenu bothValues  = unsafeAttribute $ Both { key: "contextmenu", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "contextmenu", value:  prop' value  })
-  pureAttr Contextmenu value  = unsafeAttribute $ This { key: "contextmenu", value:  prop' value  }
-  unpureAttr Contextmenu eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "contextmenu", value:  prop' value  }
+  attr Contextmenu bothValues = unsafeAttribute $ Both
+    { key: "contextmenu", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "contextmenu", value: prop' value })
+  pureAttr Contextmenu value = unsafeAttribute $ This
+    { key: "contextmenu", value: prop' value }
+  unpureAttr Contextmenu eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "contextmenu", value: prop' value }
 
 instance Attr Output_ Contextmenu String where
-  attr Contextmenu bothValues  = unsafeAttribute $ Both { key: "contextmenu", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "contextmenu", value:  prop' value  })
-  pureAttr Contextmenu value  = unsafeAttribute $ This { key: "contextmenu", value:  prop' value  }
-  unpureAttr Contextmenu eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "contextmenu", value:  prop' value  }
+  attr Contextmenu bothValues = unsafeAttribute $ Both
+    { key: "contextmenu", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "contextmenu", value: prop' value })
+  pureAttr Contextmenu value = unsafeAttribute $ This
+    { key: "contextmenu", value: prop' value }
+  unpureAttr Contextmenu eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "contextmenu", value: prop' value }
 
 instance Attr P_ Contextmenu String where
-  attr Contextmenu bothValues  = unsafeAttribute $ Both { key: "contextmenu", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "contextmenu", value:  prop' value  })
-  pureAttr Contextmenu value  = unsafeAttribute $ This { key: "contextmenu", value:  prop' value  }
-  unpureAttr Contextmenu eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "contextmenu", value:  prop' value  }
+  attr Contextmenu bothValues = unsafeAttribute $ Both
+    { key: "contextmenu", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "contextmenu", value: prop' value })
+  pureAttr Contextmenu value = unsafeAttribute $ This
+    { key: "contextmenu", value: prop' value }
+  unpureAttr Contextmenu eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "contextmenu", value: prop' value }
 
 instance Attr Param_ Contextmenu String where
-  attr Contextmenu bothValues  = unsafeAttribute $ Both { key: "contextmenu", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "contextmenu", value:  prop' value  })
-  pureAttr Contextmenu value  = unsafeAttribute $ This { key: "contextmenu", value:  prop' value  }
-  unpureAttr Contextmenu eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "contextmenu", value:  prop' value  }
+  attr Contextmenu bothValues = unsafeAttribute $ Both
+    { key: "contextmenu", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "contextmenu", value: prop' value })
+  pureAttr Contextmenu value = unsafeAttribute $ This
+    { key: "contextmenu", value: prop' value }
+  unpureAttr Contextmenu eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "contextmenu", value: prop' value }
 
 instance Attr Picture_ Contextmenu String where
-  attr Contextmenu bothValues  = unsafeAttribute $ Both { key: "contextmenu", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "contextmenu", value:  prop' value  })
-  pureAttr Contextmenu value  = unsafeAttribute $ This { key: "contextmenu", value:  prop' value  }
-  unpureAttr Contextmenu eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "contextmenu", value:  prop' value  }
+  attr Contextmenu bothValues = unsafeAttribute $ Both
+    { key: "contextmenu", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "contextmenu", value: prop' value })
+  pureAttr Contextmenu value = unsafeAttribute $ This
+    { key: "contextmenu", value: prop' value }
+  unpureAttr Contextmenu eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "contextmenu", value: prop' value }
 
 instance Attr Pre_ Contextmenu String where
-  attr Contextmenu bothValues  = unsafeAttribute $ Both { key: "contextmenu", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "contextmenu", value:  prop' value  })
-  pureAttr Contextmenu value  = unsafeAttribute $ This { key: "contextmenu", value:  prop' value  }
-  unpureAttr Contextmenu eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "contextmenu", value:  prop' value  }
+  attr Contextmenu bothValues = unsafeAttribute $ Both
+    { key: "contextmenu", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "contextmenu", value: prop' value })
+  pureAttr Contextmenu value = unsafeAttribute $ This
+    { key: "contextmenu", value: prop' value }
+  unpureAttr Contextmenu eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "contextmenu", value: prop' value }
 
 instance Attr Progress_ Contextmenu String where
-  attr Contextmenu bothValues  = unsafeAttribute $ Both { key: "contextmenu", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "contextmenu", value:  prop' value  })
-  pureAttr Contextmenu value  = unsafeAttribute $ This { key: "contextmenu", value:  prop' value  }
-  unpureAttr Contextmenu eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "contextmenu", value:  prop' value  }
+  attr Contextmenu bothValues = unsafeAttribute $ Both
+    { key: "contextmenu", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "contextmenu", value: prop' value })
+  pureAttr Contextmenu value = unsafeAttribute $ This
+    { key: "contextmenu", value: prop' value }
+  unpureAttr Contextmenu eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "contextmenu", value: prop' value }
 
 instance Attr Q_ Contextmenu String where
-  attr Contextmenu bothValues  = unsafeAttribute $ Both { key: "contextmenu", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "contextmenu", value:  prop' value  })
-  pureAttr Contextmenu value  = unsafeAttribute $ This { key: "contextmenu", value:  prop' value  }
-  unpureAttr Contextmenu eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "contextmenu", value:  prop' value  }
+  attr Contextmenu bothValues = unsafeAttribute $ Both
+    { key: "contextmenu", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "contextmenu", value: prop' value })
+  pureAttr Contextmenu value = unsafeAttribute $ This
+    { key: "contextmenu", value: prop' value }
+  unpureAttr Contextmenu eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "contextmenu", value: prop' value }
 
 instance Attr Rp_ Contextmenu String where
-  attr Contextmenu bothValues  = unsafeAttribute $ Both { key: "contextmenu", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "contextmenu", value:  prop' value  })
-  pureAttr Contextmenu value  = unsafeAttribute $ This { key: "contextmenu", value:  prop' value  }
-  unpureAttr Contextmenu eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "contextmenu", value:  prop' value  }
+  attr Contextmenu bothValues = unsafeAttribute $ Both
+    { key: "contextmenu", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "contextmenu", value: prop' value })
+  pureAttr Contextmenu value = unsafeAttribute $ This
+    { key: "contextmenu", value: prop' value }
+  unpureAttr Contextmenu eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "contextmenu", value: prop' value }
 
 instance Attr Rt_ Contextmenu String where
-  attr Contextmenu bothValues  = unsafeAttribute $ Both { key: "contextmenu", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "contextmenu", value:  prop' value  })
-  pureAttr Contextmenu value  = unsafeAttribute $ This { key: "contextmenu", value:  prop' value  }
-  unpureAttr Contextmenu eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "contextmenu", value:  prop' value  }
+  attr Contextmenu bothValues = unsafeAttribute $ Both
+    { key: "contextmenu", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "contextmenu", value: prop' value })
+  pureAttr Contextmenu value = unsafeAttribute $ This
+    { key: "contextmenu", value: prop' value }
+  unpureAttr Contextmenu eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "contextmenu", value: prop' value }
 
 instance Attr Ruby_ Contextmenu String where
-  attr Contextmenu bothValues  = unsafeAttribute $ Both { key: "contextmenu", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "contextmenu", value:  prop' value  })
-  pureAttr Contextmenu value  = unsafeAttribute $ This { key: "contextmenu", value:  prop' value  }
-  unpureAttr Contextmenu eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "contextmenu", value:  prop' value  }
+  attr Contextmenu bothValues = unsafeAttribute $ Both
+    { key: "contextmenu", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "contextmenu", value: prop' value })
+  pureAttr Contextmenu value = unsafeAttribute $ This
+    { key: "contextmenu", value: prop' value }
+  unpureAttr Contextmenu eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "contextmenu", value: prop' value }
 
 instance Attr S_ Contextmenu String where
-  attr Contextmenu bothValues  = unsafeAttribute $ Both { key: "contextmenu", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "contextmenu", value:  prop' value  })
-  pureAttr Contextmenu value  = unsafeAttribute $ This { key: "contextmenu", value:  prop' value  }
-  unpureAttr Contextmenu eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "contextmenu", value:  prop' value  }
+  attr Contextmenu bothValues = unsafeAttribute $ Both
+    { key: "contextmenu", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "contextmenu", value: prop' value })
+  pureAttr Contextmenu value = unsafeAttribute $ This
+    { key: "contextmenu", value: prop' value }
+  unpureAttr Contextmenu eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "contextmenu", value: prop' value }
 
 instance Attr Samp_ Contextmenu String where
-  attr Contextmenu bothValues  = unsafeAttribute $ Both { key: "contextmenu", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "contextmenu", value:  prop' value  })
-  pureAttr Contextmenu value  = unsafeAttribute $ This { key: "contextmenu", value:  prop' value  }
-  unpureAttr Contextmenu eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "contextmenu", value:  prop' value  }
+  attr Contextmenu bothValues = unsafeAttribute $ Both
+    { key: "contextmenu", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "contextmenu", value: prop' value })
+  pureAttr Contextmenu value = unsafeAttribute $ This
+    { key: "contextmenu", value: prop' value }
+  unpureAttr Contextmenu eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "contextmenu", value: prop' value }
 
 instance Attr Script_ Contextmenu String where
-  attr Contextmenu bothValues  = unsafeAttribute $ Both { key: "contextmenu", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "contextmenu", value:  prop' value  })
-  pureAttr Contextmenu value  = unsafeAttribute $ This { key: "contextmenu", value:  prop' value  }
-  unpureAttr Contextmenu eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "contextmenu", value:  prop' value  }
+  attr Contextmenu bothValues = unsafeAttribute $ Both
+    { key: "contextmenu", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "contextmenu", value: prop' value })
+  pureAttr Contextmenu value = unsafeAttribute $ This
+    { key: "contextmenu", value: prop' value }
+  unpureAttr Contextmenu eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "contextmenu", value: prop' value }
 
 instance Attr Section_ Contextmenu String where
-  attr Contextmenu bothValues  = unsafeAttribute $ Both { key: "contextmenu", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "contextmenu", value:  prop' value  })
-  pureAttr Contextmenu value  = unsafeAttribute $ This { key: "contextmenu", value:  prop' value  }
-  unpureAttr Contextmenu eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "contextmenu", value:  prop' value  }
+  attr Contextmenu bothValues = unsafeAttribute $ Both
+    { key: "contextmenu", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "contextmenu", value: prop' value })
+  pureAttr Contextmenu value = unsafeAttribute $ This
+    { key: "contextmenu", value: prop' value }
+  unpureAttr Contextmenu eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "contextmenu", value: prop' value }
 
 instance Attr Select_ Contextmenu String where
-  attr Contextmenu bothValues  = unsafeAttribute $ Both { key: "contextmenu", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "contextmenu", value:  prop' value  })
-  pureAttr Contextmenu value  = unsafeAttribute $ This { key: "contextmenu", value:  prop' value  }
-  unpureAttr Contextmenu eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "contextmenu", value:  prop' value  }
+  attr Contextmenu bothValues = unsafeAttribute $ Both
+    { key: "contextmenu", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "contextmenu", value: prop' value })
+  pureAttr Contextmenu value = unsafeAttribute $ This
+    { key: "contextmenu", value: prop' value }
+  unpureAttr Contextmenu eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "contextmenu", value: prop' value }
 
 instance Attr Small_ Contextmenu String where
-  attr Contextmenu bothValues  = unsafeAttribute $ Both { key: "contextmenu", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "contextmenu", value:  prop' value  })
-  pureAttr Contextmenu value  = unsafeAttribute $ This { key: "contextmenu", value:  prop' value  }
-  unpureAttr Contextmenu eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "contextmenu", value:  prop' value  }
+  attr Contextmenu bothValues = unsafeAttribute $ Both
+    { key: "contextmenu", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "contextmenu", value: prop' value })
+  pureAttr Contextmenu value = unsafeAttribute $ This
+    { key: "contextmenu", value: prop' value }
+  unpureAttr Contextmenu eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "contextmenu", value: prop' value }
 
 instance Attr Source_ Contextmenu String where
-  attr Contextmenu bothValues  = unsafeAttribute $ Both { key: "contextmenu", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "contextmenu", value:  prop' value  })
-  pureAttr Contextmenu value  = unsafeAttribute $ This { key: "contextmenu", value:  prop' value  }
-  unpureAttr Contextmenu eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "contextmenu", value:  prop' value  }
+  attr Contextmenu bothValues = unsafeAttribute $ Both
+    { key: "contextmenu", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "contextmenu", value: prop' value })
+  pureAttr Contextmenu value = unsafeAttribute $ This
+    { key: "contextmenu", value: prop' value }
+  unpureAttr Contextmenu eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "contextmenu", value: prop' value }
 
 instance Attr Span_ Contextmenu String where
-  attr Contextmenu bothValues  = unsafeAttribute $ Both { key: "contextmenu", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "contextmenu", value:  prop' value  })
-  pureAttr Contextmenu value  = unsafeAttribute $ This { key: "contextmenu", value:  prop' value  }
-  unpureAttr Contextmenu eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "contextmenu", value:  prop' value  }
+  attr Contextmenu bothValues = unsafeAttribute $ Both
+    { key: "contextmenu", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "contextmenu", value: prop' value })
+  pureAttr Contextmenu value = unsafeAttribute $ This
+    { key: "contextmenu", value: prop' value }
+  unpureAttr Contextmenu eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "contextmenu", value: prop' value }
 
 instance Attr Strike_ Contextmenu String where
-  attr Contextmenu bothValues  = unsafeAttribute $ Both { key: "contextmenu", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "contextmenu", value:  prop' value  })
-  pureAttr Contextmenu value  = unsafeAttribute $ This { key: "contextmenu", value:  prop' value  }
-  unpureAttr Contextmenu eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "contextmenu", value:  prop' value  }
+  attr Contextmenu bothValues = unsafeAttribute $ Both
+    { key: "contextmenu", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "contextmenu", value: prop' value })
+  pureAttr Contextmenu value = unsafeAttribute $ This
+    { key: "contextmenu", value: prop' value }
+  unpureAttr Contextmenu eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "contextmenu", value: prop' value }
 
 instance Attr Strong_ Contextmenu String where
-  attr Contextmenu bothValues  = unsafeAttribute $ Both { key: "contextmenu", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "contextmenu", value:  prop' value  })
-  pureAttr Contextmenu value  = unsafeAttribute $ This { key: "contextmenu", value:  prop' value  }
-  unpureAttr Contextmenu eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "contextmenu", value:  prop' value  }
+  attr Contextmenu bothValues = unsafeAttribute $ Both
+    { key: "contextmenu", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "contextmenu", value: prop' value })
+  pureAttr Contextmenu value = unsafeAttribute $ This
+    { key: "contextmenu", value: prop' value }
+  unpureAttr Contextmenu eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "contextmenu", value: prop' value }
 
 instance Attr Style_ Contextmenu String where
-  attr Contextmenu bothValues  = unsafeAttribute $ Both { key: "contextmenu", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "contextmenu", value:  prop' value  })
-  pureAttr Contextmenu value  = unsafeAttribute $ This { key: "contextmenu", value:  prop' value  }
-  unpureAttr Contextmenu eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "contextmenu", value:  prop' value  }
+  attr Contextmenu bothValues = unsafeAttribute $ Both
+    { key: "contextmenu", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "contextmenu", value: prop' value })
+  pureAttr Contextmenu value = unsafeAttribute $ This
+    { key: "contextmenu", value: prop' value }
+  unpureAttr Contextmenu eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "contextmenu", value: prop' value }
 
 instance Attr Sub_ Contextmenu String where
-  attr Contextmenu bothValues  = unsafeAttribute $ Both { key: "contextmenu", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "contextmenu", value:  prop' value  })
-  pureAttr Contextmenu value  = unsafeAttribute $ This { key: "contextmenu", value:  prop' value  }
-  unpureAttr Contextmenu eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "contextmenu", value:  prop' value  }
+  attr Contextmenu bothValues = unsafeAttribute $ Both
+    { key: "contextmenu", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "contextmenu", value: prop' value })
+  pureAttr Contextmenu value = unsafeAttribute $ This
+    { key: "contextmenu", value: prop' value }
+  unpureAttr Contextmenu eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "contextmenu", value: prop' value }
 
 instance Attr Summary_ Contextmenu String where
-  attr Contextmenu bothValues  = unsafeAttribute $ Both { key: "contextmenu", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "contextmenu", value:  prop' value  })
-  pureAttr Contextmenu value  = unsafeAttribute $ This { key: "contextmenu", value:  prop' value  }
-  unpureAttr Contextmenu eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "contextmenu", value:  prop' value  }
+  attr Contextmenu bothValues = unsafeAttribute $ Both
+    { key: "contextmenu", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "contextmenu", value: prop' value })
+  pureAttr Contextmenu value = unsafeAttribute $ This
+    { key: "contextmenu", value: prop' value }
+  unpureAttr Contextmenu eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "contextmenu", value: prop' value }
 
 instance Attr Sup_ Contextmenu String where
-  attr Contextmenu bothValues  = unsafeAttribute $ Both { key: "contextmenu", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "contextmenu", value:  prop' value  })
-  pureAttr Contextmenu value  = unsafeAttribute $ This { key: "contextmenu", value:  prop' value  }
-  unpureAttr Contextmenu eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "contextmenu", value:  prop' value  }
+  attr Contextmenu bothValues = unsafeAttribute $ Both
+    { key: "contextmenu", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "contextmenu", value: prop' value })
+  pureAttr Contextmenu value = unsafeAttribute $ This
+    { key: "contextmenu", value: prop' value }
+  unpureAttr Contextmenu eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "contextmenu", value: prop' value }
 
 instance Attr Svg_ Contextmenu String where
-  attr Contextmenu bothValues  = unsafeAttribute $ Both { key: "contextmenu", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "contextmenu", value:  prop' value  })
-  pureAttr Contextmenu value  = unsafeAttribute $ This { key: "contextmenu", value:  prop' value  }
-  unpureAttr Contextmenu eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "contextmenu", value:  prop' value  }
+  attr Contextmenu bothValues = unsafeAttribute $ Both
+    { key: "contextmenu", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "contextmenu", value: prop' value })
+  pureAttr Contextmenu value = unsafeAttribute $ This
+    { key: "contextmenu", value: prop' value }
+  unpureAttr Contextmenu eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "contextmenu", value: prop' value }
 
 instance Attr Table_ Contextmenu String where
-  attr Contextmenu bothValues  = unsafeAttribute $ Both { key: "contextmenu", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "contextmenu", value:  prop' value  })
-  pureAttr Contextmenu value  = unsafeAttribute $ This { key: "contextmenu", value:  prop' value  }
-  unpureAttr Contextmenu eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "contextmenu", value:  prop' value  }
+  attr Contextmenu bothValues = unsafeAttribute $ Both
+    { key: "contextmenu", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "contextmenu", value: prop' value })
+  pureAttr Contextmenu value = unsafeAttribute $ This
+    { key: "contextmenu", value: prop' value }
+  unpureAttr Contextmenu eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "contextmenu", value: prop' value }
 
 instance Attr Tbody_ Contextmenu String where
-  attr Contextmenu bothValues  = unsafeAttribute $ Both { key: "contextmenu", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "contextmenu", value:  prop' value  })
-  pureAttr Contextmenu value  = unsafeAttribute $ This { key: "contextmenu", value:  prop' value  }
-  unpureAttr Contextmenu eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "contextmenu", value:  prop' value  }
+  attr Contextmenu bothValues = unsafeAttribute $ Both
+    { key: "contextmenu", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "contextmenu", value: prop' value })
+  pureAttr Contextmenu value = unsafeAttribute $ This
+    { key: "contextmenu", value: prop' value }
+  unpureAttr Contextmenu eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "contextmenu", value: prop' value }
 
 instance Attr Td_ Contextmenu String where
-  attr Contextmenu bothValues  = unsafeAttribute $ Both { key: "contextmenu", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "contextmenu", value:  prop' value  })
-  pureAttr Contextmenu value  = unsafeAttribute $ This { key: "contextmenu", value:  prop' value  }
-  unpureAttr Contextmenu eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "contextmenu", value:  prop' value  }
+  attr Contextmenu bothValues = unsafeAttribute $ Both
+    { key: "contextmenu", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "contextmenu", value: prop' value })
+  pureAttr Contextmenu value = unsafeAttribute $ This
+    { key: "contextmenu", value: prop' value }
+  unpureAttr Contextmenu eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "contextmenu", value: prop' value }
 
 instance Attr Template_ Contextmenu String where
-  attr Contextmenu bothValues  = unsafeAttribute $ Both { key: "contextmenu", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "contextmenu", value:  prop' value  })
-  pureAttr Contextmenu value  = unsafeAttribute $ This { key: "contextmenu", value:  prop' value  }
-  unpureAttr Contextmenu eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "contextmenu", value:  prop' value  }
+  attr Contextmenu bothValues = unsafeAttribute $ Both
+    { key: "contextmenu", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "contextmenu", value: prop' value })
+  pureAttr Contextmenu value = unsafeAttribute $ This
+    { key: "contextmenu", value: prop' value }
+  unpureAttr Contextmenu eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "contextmenu", value: prop' value }
 
 instance Attr Textarea_ Contextmenu String where
-  attr Contextmenu bothValues  = unsafeAttribute $ Both { key: "contextmenu", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "contextmenu", value:  prop' value  })
-  pureAttr Contextmenu value  = unsafeAttribute $ This { key: "contextmenu", value:  prop' value  }
-  unpureAttr Contextmenu eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "contextmenu", value:  prop' value  }
+  attr Contextmenu bothValues = unsafeAttribute $ Both
+    { key: "contextmenu", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "contextmenu", value: prop' value })
+  pureAttr Contextmenu value = unsafeAttribute $ This
+    { key: "contextmenu", value: prop' value }
+  unpureAttr Contextmenu eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "contextmenu", value: prop' value }
 
 instance Attr Tfoot_ Contextmenu String where
-  attr Contextmenu bothValues  = unsafeAttribute $ Both { key: "contextmenu", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "contextmenu", value:  prop' value  })
-  pureAttr Contextmenu value  = unsafeAttribute $ This { key: "contextmenu", value:  prop' value  }
-  unpureAttr Contextmenu eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "contextmenu", value:  prop' value  }
+  attr Contextmenu bothValues = unsafeAttribute $ Both
+    { key: "contextmenu", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "contextmenu", value: prop' value })
+  pureAttr Contextmenu value = unsafeAttribute $ This
+    { key: "contextmenu", value: prop' value }
+  unpureAttr Contextmenu eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "contextmenu", value: prop' value }
 
 instance Attr Th_ Contextmenu String where
-  attr Contextmenu bothValues  = unsafeAttribute $ Both { key: "contextmenu", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "contextmenu", value:  prop' value  })
-  pureAttr Contextmenu value  = unsafeAttribute $ This { key: "contextmenu", value:  prop' value  }
-  unpureAttr Contextmenu eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "contextmenu", value:  prop' value  }
+  attr Contextmenu bothValues = unsafeAttribute $ Both
+    { key: "contextmenu", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "contextmenu", value: prop' value })
+  pureAttr Contextmenu value = unsafeAttribute $ This
+    { key: "contextmenu", value: prop' value }
+  unpureAttr Contextmenu eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "contextmenu", value: prop' value }
 
 instance Attr Thead_ Contextmenu String where
-  attr Contextmenu bothValues  = unsafeAttribute $ Both { key: "contextmenu", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "contextmenu", value:  prop' value  })
-  pureAttr Contextmenu value  = unsafeAttribute $ This { key: "contextmenu", value:  prop' value  }
-  unpureAttr Contextmenu eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "contextmenu", value:  prop' value  }
+  attr Contextmenu bothValues = unsafeAttribute $ Both
+    { key: "contextmenu", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "contextmenu", value: prop' value })
+  pureAttr Contextmenu value = unsafeAttribute $ This
+    { key: "contextmenu", value: prop' value }
+  unpureAttr Contextmenu eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "contextmenu", value: prop' value }
 
 instance Attr Time_ Contextmenu String where
-  attr Contextmenu bothValues  = unsafeAttribute $ Both { key: "contextmenu", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "contextmenu", value:  prop' value  })
-  pureAttr Contextmenu value  = unsafeAttribute $ This { key: "contextmenu", value:  prop' value  }
-  unpureAttr Contextmenu eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "contextmenu", value:  prop' value  }
+  attr Contextmenu bothValues = unsafeAttribute $ Both
+    { key: "contextmenu", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "contextmenu", value: prop' value })
+  pureAttr Contextmenu value = unsafeAttribute $ This
+    { key: "contextmenu", value: prop' value }
+  unpureAttr Contextmenu eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "contextmenu", value: prop' value }
 
 instance Attr Title_ Contextmenu String where
-  attr Contextmenu bothValues  = unsafeAttribute $ Both { key: "contextmenu", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "contextmenu", value:  prop' value  })
-  pureAttr Contextmenu value  = unsafeAttribute $ This { key: "contextmenu", value:  prop' value  }
-  unpureAttr Contextmenu eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "contextmenu", value:  prop' value  }
+  attr Contextmenu bothValues = unsafeAttribute $ Both
+    { key: "contextmenu", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "contextmenu", value: prop' value })
+  pureAttr Contextmenu value = unsafeAttribute $ This
+    { key: "contextmenu", value: prop' value }
+  unpureAttr Contextmenu eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "contextmenu", value: prop' value }
 
 instance Attr Tr_ Contextmenu String where
-  attr Contextmenu bothValues  = unsafeAttribute $ Both { key: "contextmenu", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "contextmenu", value:  prop' value  })
-  pureAttr Contextmenu value  = unsafeAttribute $ This { key: "contextmenu", value:  prop' value  }
-  unpureAttr Contextmenu eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "contextmenu", value:  prop' value  }
+  attr Contextmenu bothValues = unsafeAttribute $ Both
+    { key: "contextmenu", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "contextmenu", value: prop' value })
+  pureAttr Contextmenu value = unsafeAttribute $ This
+    { key: "contextmenu", value: prop' value }
+  unpureAttr Contextmenu eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "contextmenu", value: prop' value }
 
 instance Attr Track_ Contextmenu String where
-  attr Contextmenu bothValues  = unsafeAttribute $ Both { key: "contextmenu", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "contextmenu", value:  prop' value  })
-  pureAttr Contextmenu value  = unsafeAttribute $ This { key: "contextmenu", value:  prop' value  }
-  unpureAttr Contextmenu eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "contextmenu", value:  prop' value  }
+  attr Contextmenu bothValues = unsafeAttribute $ Both
+    { key: "contextmenu", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "contextmenu", value: prop' value })
+  pureAttr Contextmenu value = unsafeAttribute $ This
+    { key: "contextmenu", value: prop' value }
+  unpureAttr Contextmenu eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "contextmenu", value: prop' value }
 
 instance Attr Tt_ Contextmenu String where
-  attr Contextmenu bothValues  = unsafeAttribute $ Both { key: "contextmenu", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "contextmenu", value:  prop' value  })
-  pureAttr Contextmenu value  = unsafeAttribute $ This { key: "contextmenu", value:  prop' value  }
-  unpureAttr Contextmenu eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "contextmenu", value:  prop' value  }
+  attr Contextmenu bothValues = unsafeAttribute $ Both
+    { key: "contextmenu", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "contextmenu", value: prop' value })
+  pureAttr Contextmenu value = unsafeAttribute $ This
+    { key: "contextmenu", value: prop' value }
+  unpureAttr Contextmenu eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "contextmenu", value: prop' value }
 
 instance Attr U_ Contextmenu String where
-  attr Contextmenu bothValues  = unsafeAttribute $ Both { key: "contextmenu", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "contextmenu", value:  prop' value  })
-  pureAttr Contextmenu value  = unsafeAttribute $ This { key: "contextmenu", value:  prop' value  }
-  unpureAttr Contextmenu eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "contextmenu", value:  prop' value  }
+  attr Contextmenu bothValues = unsafeAttribute $ Both
+    { key: "contextmenu", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "contextmenu", value: prop' value })
+  pureAttr Contextmenu value = unsafeAttribute $ This
+    { key: "contextmenu", value: prop' value }
+  unpureAttr Contextmenu eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "contextmenu", value: prop' value }
 
 instance Attr Ul_ Contextmenu String where
-  attr Contextmenu bothValues  = unsafeAttribute $ Both { key: "contextmenu", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "contextmenu", value:  prop' value  })
-  pureAttr Contextmenu value  = unsafeAttribute $ This { key: "contextmenu", value:  prop' value  }
-  unpureAttr Contextmenu eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "contextmenu", value:  prop' value  }
+  attr Contextmenu bothValues = unsafeAttribute $ Both
+    { key: "contextmenu", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "contextmenu", value: prop' value })
+  pureAttr Contextmenu value = unsafeAttribute $ This
+    { key: "contextmenu", value: prop' value }
+  unpureAttr Contextmenu eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "contextmenu", value: prop' value }
 
 instance Attr Var_ Contextmenu String where
-  attr Contextmenu bothValues  = unsafeAttribute $ Both { key: "contextmenu", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "contextmenu", value:  prop' value  })
-  pureAttr Contextmenu value  = unsafeAttribute $ This { key: "contextmenu", value:  prop' value  }
-  unpureAttr Contextmenu eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "contextmenu", value:  prop' value  }
+  attr Contextmenu bothValues = unsafeAttribute $ Both
+    { key: "contextmenu", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "contextmenu", value: prop' value })
+  pureAttr Contextmenu value = unsafeAttribute $ This
+    { key: "contextmenu", value: prop' value }
+  unpureAttr Contextmenu eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "contextmenu", value: prop' value }
 
 instance Attr Video_ Contextmenu String where
-  attr Contextmenu bothValues  = unsafeAttribute $ Both { key: "contextmenu", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "contextmenu", value:  prop' value  })
-  pureAttr Contextmenu value  = unsafeAttribute $ This { key: "contextmenu", value:  prop' value  }
-  unpureAttr Contextmenu eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "contextmenu", value:  prop' value  }
+  attr Contextmenu bothValues = unsafeAttribute $ Both
+    { key: "contextmenu", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "contextmenu", value: prop' value })
+  pureAttr Contextmenu value = unsafeAttribute $ This
+    { key: "contextmenu", value: prop' value }
+  unpureAttr Contextmenu eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "contextmenu", value: prop' value }
 
 instance Attr Wbr_ Contextmenu String where
-  attr Contextmenu bothValues  = unsafeAttribute $ Both { key: "contextmenu", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "contextmenu", value:  prop' value  })
-  pureAttr Contextmenu value  = unsafeAttribute $ This { key: "contextmenu", value:  prop' value  }
-  unpureAttr Contextmenu eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "contextmenu", value:  prop' value  }
+  attr Contextmenu bothValues = unsafeAttribute $ Both
+    { key: "contextmenu", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "contextmenu", value: prop' value })
+  pureAttr Contextmenu value = unsafeAttribute $ This
+    { key: "contextmenu", value: prop' value }
+  unpureAttr Contextmenu eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "contextmenu", value: prop' value }
 
 instance Attr everything Contextmenu Unit where
-  attr Contextmenu bothValues  = unsafeAttribute $ Both { key: "contextmenu", value:  unset'  } (snd bothValues <#> \_ -> { key: "contextmenu", value:  unset'  })
-  pureAttr Contextmenu _  = unsafeAttribute $ This { key: "contextmenu", value:  unset'  }
-  unpureAttr Contextmenu eventValue  = unsafeAttribute $ That $ eventValue <#> \_ -> { key: "contextmenu", value:  unset'  }
+  attr Contextmenu bothValues = unsafeAttribute $ Both
+    { key: "contextmenu", value: unset' }
+    (snd bothValues <#> \_ -> { key: "contextmenu", value: unset' })
+  pureAttr Contextmenu _ = unsafeAttribute $ This
+    { key: "contextmenu", value: unset' }
+  unpureAttr Contextmenu eventValue = unsafeAttribute $ That $ eventValue <#>
+    \_ -> { key: "contextmenu", value: unset' }

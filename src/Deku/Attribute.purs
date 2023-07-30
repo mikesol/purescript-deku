@@ -114,16 +114,14 @@ class Attr e a b where
   unpureAttr :: a -> FRP.Event b -> Attribute e
   pureAttr :: a -> b -> Attribute e
   attr :: a -> (Tuple b (FRP.Event b)) -> Attribute e
-  
+
 infixr 5 attr as :=
 infixr 5 unpureAttr as <:=>
 infixr 5 pureAttr as !:=
 
-
 -- | Construct a [data attribute](https://developer.mozilla.org/en-US/docs/Learn/HTML/Howto/Use_data_attributes).
 xdata :: forall e. String -> String -> Attribute e
 xdata k v = unsafeAttribute $ This { key: "data-" <> k, value: Prop' v }
-
 
 -- | A version of `attr` that sets an attribute or listener only if the value is `Just`.
 -- | More commonly used in its alias `?:=`.

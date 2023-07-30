@@ -26,91 +26,163 @@ import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 data AriaFlowto = AriaFlowto
 
 instance Attr Circle_ AriaFlowto String where
-  attr AriaFlowto bothValues  = unsafeAttribute $ Both { key: "aria-flowto", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "aria-flowto", value:  prop' value  })
-  pureAttr AriaFlowto value  = unsafeAttribute $ This { key: "aria-flowto", value:  prop' value  }
-  unpureAttr AriaFlowto eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "aria-flowto", value:  prop' value  }
+  attr AriaFlowto bothValues = unsafeAttribute $ Both
+    { key: "aria-flowto", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "aria-flowto", value: prop' value })
+  pureAttr AriaFlowto value = unsafeAttribute $ This
+    { key: "aria-flowto", value: prop' value }
+  unpureAttr AriaFlowto eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "aria-flowto", value: prop' value }
 
 instance Attr Ellipse_ AriaFlowto String where
-  attr AriaFlowto bothValues  = unsafeAttribute $ Both { key: "aria-flowto", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "aria-flowto", value:  prop' value  })
-  pureAttr AriaFlowto value  = unsafeAttribute $ This { key: "aria-flowto", value:  prop' value  }
-  unpureAttr AriaFlowto eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "aria-flowto", value:  prop' value  }
+  attr AriaFlowto bothValues = unsafeAttribute $ Both
+    { key: "aria-flowto", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "aria-flowto", value: prop' value })
+  pureAttr AriaFlowto value = unsafeAttribute $ This
+    { key: "aria-flowto", value: prop' value }
+  unpureAttr AriaFlowto eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "aria-flowto", value: prop' value }
 
 instance Attr ForeignObject_ AriaFlowto String where
-  attr AriaFlowto bothValues  = unsafeAttribute $ Both { key: "aria-flowto", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "aria-flowto", value:  prop' value  })
-  pureAttr AriaFlowto value  = unsafeAttribute $ This { key: "aria-flowto", value:  prop' value  }
-  unpureAttr AriaFlowto eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "aria-flowto", value:  prop' value  }
+  attr AriaFlowto bothValues = unsafeAttribute $ Both
+    { key: "aria-flowto", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "aria-flowto", value: prop' value })
+  pureAttr AriaFlowto value = unsafeAttribute $ This
+    { key: "aria-flowto", value: prop' value }
+  unpureAttr AriaFlowto eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "aria-flowto", value: prop' value }
 
 instance Attr G_ AriaFlowto String where
-  attr AriaFlowto bothValues  = unsafeAttribute $ Both { key: "aria-flowto", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "aria-flowto", value:  prop' value  })
-  pureAttr AriaFlowto value  = unsafeAttribute $ This { key: "aria-flowto", value:  prop' value  }
-  unpureAttr AriaFlowto eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "aria-flowto", value:  prop' value  }
+  attr AriaFlowto bothValues = unsafeAttribute $ Both
+    { key: "aria-flowto", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "aria-flowto", value: prop' value })
+  pureAttr AriaFlowto value = unsafeAttribute $ This
+    { key: "aria-flowto", value: prop' value }
+  unpureAttr AriaFlowto eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "aria-flowto", value: prop' value }
 
 instance Attr Line_ AriaFlowto String where
-  attr AriaFlowto bothValues  = unsafeAttribute $ Both { key: "aria-flowto", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "aria-flowto", value:  prop' value  })
-  pureAttr AriaFlowto value  = unsafeAttribute $ This { key: "aria-flowto", value:  prop' value  }
-  unpureAttr AriaFlowto eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "aria-flowto", value:  prop' value  }
+  attr AriaFlowto bothValues = unsafeAttribute $ Both
+    { key: "aria-flowto", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "aria-flowto", value: prop' value })
+  pureAttr AriaFlowto value = unsafeAttribute $ This
+    { key: "aria-flowto", value: prop' value }
+  unpureAttr AriaFlowto eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "aria-flowto", value: prop' value }
 
 instance Attr Marker_ AriaFlowto String where
-  attr AriaFlowto bothValues  = unsafeAttribute $ Both { key: "aria-flowto", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "aria-flowto", value:  prop' value  })
-  pureAttr AriaFlowto value  = unsafeAttribute $ This { key: "aria-flowto", value:  prop' value  }
-  unpureAttr AriaFlowto eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "aria-flowto", value:  prop' value  }
+  attr AriaFlowto bothValues = unsafeAttribute $ Both
+    { key: "aria-flowto", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "aria-flowto", value: prop' value })
+  pureAttr AriaFlowto value = unsafeAttribute $ This
+    { key: "aria-flowto", value: prop' value }
+  unpureAttr AriaFlowto eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "aria-flowto", value: prop' value }
 
 instance Attr Path_ AriaFlowto String where
-  attr AriaFlowto bothValues  = unsafeAttribute $ Both { key: "aria-flowto", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "aria-flowto", value:  prop' value  })
-  pureAttr AriaFlowto value  = unsafeAttribute $ This { key: "aria-flowto", value:  prop' value  }
-  unpureAttr AriaFlowto eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "aria-flowto", value:  prop' value  }
+  attr AriaFlowto bothValues = unsafeAttribute $ Both
+    { key: "aria-flowto", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "aria-flowto", value: prop' value })
+  pureAttr AriaFlowto value = unsafeAttribute $ This
+    { key: "aria-flowto", value: prop' value }
+  unpureAttr AriaFlowto eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "aria-flowto", value: prop' value }
 
 instance Attr Polygon_ AriaFlowto String where
-  attr AriaFlowto bothValues  = unsafeAttribute $ Both { key: "aria-flowto", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "aria-flowto", value:  prop' value  })
-  pureAttr AriaFlowto value  = unsafeAttribute $ This { key: "aria-flowto", value:  prop' value  }
-  unpureAttr AriaFlowto eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "aria-flowto", value:  prop' value  }
+  attr AriaFlowto bothValues = unsafeAttribute $ Both
+    { key: "aria-flowto", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "aria-flowto", value: prop' value })
+  pureAttr AriaFlowto value = unsafeAttribute $ This
+    { key: "aria-flowto", value: prop' value }
+  unpureAttr AriaFlowto eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "aria-flowto", value: prop' value }
 
 instance Attr Polyline_ AriaFlowto String where
-  attr AriaFlowto bothValues  = unsafeAttribute $ Both { key: "aria-flowto", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "aria-flowto", value:  prop' value  })
-  pureAttr AriaFlowto value  = unsafeAttribute $ This { key: "aria-flowto", value:  prop' value  }
-  unpureAttr AriaFlowto eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "aria-flowto", value:  prop' value  }
+  attr AriaFlowto bothValues = unsafeAttribute $ Both
+    { key: "aria-flowto", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "aria-flowto", value: prop' value })
+  pureAttr AriaFlowto value = unsafeAttribute $ This
+    { key: "aria-flowto", value: prop' value }
+  unpureAttr AriaFlowto eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "aria-flowto", value: prop' value }
 
 instance Attr Rect_ AriaFlowto String where
-  attr AriaFlowto bothValues  = unsafeAttribute $ Both { key: "aria-flowto", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "aria-flowto", value:  prop' value  })
-  pureAttr AriaFlowto value  = unsafeAttribute $ This { key: "aria-flowto", value:  prop' value  }
-  unpureAttr AriaFlowto eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "aria-flowto", value:  prop' value  }
+  attr AriaFlowto bothValues = unsafeAttribute $ Both
+    { key: "aria-flowto", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "aria-flowto", value: prop' value })
+  pureAttr AriaFlowto value = unsafeAttribute $ This
+    { key: "aria-flowto", value: prop' value }
+  unpureAttr AriaFlowto eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "aria-flowto", value: prop' value }
 
 instance Attr Svg_ AriaFlowto String where
-  attr AriaFlowto bothValues  = unsafeAttribute $ Both { key: "aria-flowto", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "aria-flowto", value:  prop' value  })
-  pureAttr AriaFlowto value  = unsafeAttribute $ This { key: "aria-flowto", value:  prop' value  }
-  unpureAttr AriaFlowto eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "aria-flowto", value:  prop' value  }
+  attr AriaFlowto bothValues = unsafeAttribute $ Both
+    { key: "aria-flowto", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "aria-flowto", value: prop' value })
+  pureAttr AriaFlowto value = unsafeAttribute $ This
+    { key: "aria-flowto", value: prop' value }
+  unpureAttr AriaFlowto eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "aria-flowto", value: prop' value }
 
 instance Attr Symbol_ AriaFlowto String where
-  attr AriaFlowto bothValues  = unsafeAttribute $ Both { key: "aria-flowto", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "aria-flowto", value:  prop' value  })
-  pureAttr AriaFlowto value  = unsafeAttribute $ This { key: "aria-flowto", value:  prop' value  }
-  unpureAttr AriaFlowto eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "aria-flowto", value:  prop' value  }
+  attr AriaFlowto bothValues = unsafeAttribute $ Both
+    { key: "aria-flowto", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "aria-flowto", value: prop' value })
+  pureAttr AriaFlowto value = unsafeAttribute $ This
+    { key: "aria-flowto", value: prop' value }
+  unpureAttr AriaFlowto eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "aria-flowto", value: prop' value }
 
 instance Attr Text_ AriaFlowto String where
-  attr AriaFlowto bothValues  = unsafeAttribute $ Both { key: "aria-flowto", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "aria-flowto", value:  prop' value  })
-  pureAttr AriaFlowto value  = unsafeAttribute $ This { key: "aria-flowto", value:  prop' value  }
-  unpureAttr AriaFlowto eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "aria-flowto", value:  prop' value  }
+  attr AriaFlowto bothValues = unsafeAttribute $ Both
+    { key: "aria-flowto", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "aria-flowto", value: prop' value })
+  pureAttr AriaFlowto value = unsafeAttribute $ This
+    { key: "aria-flowto", value: prop' value }
+  unpureAttr AriaFlowto eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "aria-flowto", value: prop' value }
 
 instance Attr TextPath_ AriaFlowto String where
-  attr AriaFlowto bothValues  = unsafeAttribute $ Both { key: "aria-flowto", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "aria-flowto", value:  prop' value  })
-  pureAttr AriaFlowto value  = unsafeAttribute $ This { key: "aria-flowto", value:  prop' value  }
-  unpureAttr AriaFlowto eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "aria-flowto", value:  prop' value  }
+  attr AriaFlowto bothValues = unsafeAttribute $ Both
+    { key: "aria-flowto", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "aria-flowto", value: prop' value })
+  pureAttr AriaFlowto value = unsafeAttribute $ This
+    { key: "aria-flowto", value: prop' value }
+  unpureAttr AriaFlowto eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "aria-flowto", value: prop' value }
 
 instance Attr Tspan_ AriaFlowto String where
-  attr AriaFlowto bothValues  = unsafeAttribute $ Both { key: "aria-flowto", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "aria-flowto", value:  prop' value  })
-  pureAttr AriaFlowto value  = unsafeAttribute $ This { key: "aria-flowto", value:  prop' value  }
-  unpureAttr AriaFlowto eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "aria-flowto", value:  prop' value  }
+  attr AriaFlowto bothValues = unsafeAttribute $ Both
+    { key: "aria-flowto", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "aria-flowto", value: prop' value })
+  pureAttr AriaFlowto value = unsafeAttribute $ This
+    { key: "aria-flowto", value: prop' value }
+  unpureAttr AriaFlowto eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "aria-flowto", value: prop' value }
 
 instance Attr Use_ AriaFlowto String where
-  attr AriaFlowto bothValues  = unsafeAttribute $ Both { key: "aria-flowto", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "aria-flowto", value:  prop' value  })
-  pureAttr AriaFlowto value  = unsafeAttribute $ This { key: "aria-flowto", value:  prop' value  }
-  unpureAttr AriaFlowto eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "aria-flowto", value:  prop' value  }
+  attr AriaFlowto bothValues = unsafeAttribute $ Both
+    { key: "aria-flowto", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "aria-flowto", value: prop' value })
+  pureAttr AriaFlowto value = unsafeAttribute $ This
+    { key: "aria-flowto", value: prop' value }
+  unpureAttr AriaFlowto eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "aria-flowto", value: prop' value }
 
 instance Attr View_ AriaFlowto String where
-  attr AriaFlowto bothValues  = unsafeAttribute $ Both { key: "aria-flowto", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "aria-flowto", value:  prop' value  })
-  pureAttr AriaFlowto value  = unsafeAttribute $ This { key: "aria-flowto", value:  prop' value  }
-  unpureAttr AriaFlowto eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "aria-flowto", value:  prop' value  }
+  attr AriaFlowto bothValues = unsafeAttribute $ Both
+    { key: "aria-flowto", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "aria-flowto", value: prop' value })
+  pureAttr AriaFlowto value = unsafeAttribute $ This
+    { key: "aria-flowto", value: prop' value }
+  unpureAttr AriaFlowto eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "aria-flowto", value: prop' value }
 
 instance Attr everything AriaFlowto Unit where
-  attr AriaFlowto bothValues  = unsafeAttribute $ Both { key: "aria-flowto", value:  unset'  } (snd bothValues <#> \_ -> { key: "aria-flowto", value:  unset'  })
-  pureAttr AriaFlowto _  = unsafeAttribute $ This { key: "aria-flowto", value:  unset'  }
-  unpureAttr AriaFlowto eventValue  = unsafeAttribute $ That $ eventValue <#> \_ -> { key: "aria-flowto", value:  unset'  }
+  attr AriaFlowto bothValues = unsafeAttribute $ Both
+    { key: "aria-flowto", value: unset' }
+    (snd bothValues <#> \_ -> { key: "aria-flowto", value: unset' })
+  pureAttr AriaFlowto _ = unsafeAttribute $ This
+    { key: "aria-flowto", value: unset' }
+  unpureAttr AriaFlowto eventValue = unsafeAttribute $ That $ eventValue <#>
+    \_ -> { key: "aria-flowto", value: unset' }

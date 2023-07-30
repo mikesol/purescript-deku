@@ -13,26 +13,46 @@ import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 data Importance = Importance
 
 instance Attr Iframe_ Importance String where
-  attr Importance bothValues  = unsafeAttribute $ Both { key: "importance", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "importance", value:  prop' value  })
-  pureAttr Importance value  = unsafeAttribute $ This { key: "importance", value:  prop' value  }
-  unpureAttr Importance eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "importance", value:  prop' value  }
+  attr Importance bothValues = unsafeAttribute $ Both
+    { key: "importance", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "importance", value: prop' value })
+  pureAttr Importance value = unsafeAttribute $ This
+    { key: "importance", value: prop' value }
+  unpureAttr Importance eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "importance", value: prop' value }
 
 instance Attr Img_ Importance String where
-  attr Importance bothValues  = unsafeAttribute $ Both { key: "importance", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "importance", value:  prop' value  })
-  pureAttr Importance value  = unsafeAttribute $ This { key: "importance", value:  prop' value  }
-  unpureAttr Importance eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "importance", value:  prop' value  }
+  attr Importance bothValues = unsafeAttribute $ Both
+    { key: "importance", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "importance", value: prop' value })
+  pureAttr Importance value = unsafeAttribute $ This
+    { key: "importance", value: prop' value }
+  unpureAttr Importance eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "importance", value: prop' value }
 
 instance Attr Link_ Importance String where
-  attr Importance bothValues  = unsafeAttribute $ Both { key: "importance", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "importance", value:  prop' value  })
-  pureAttr Importance value  = unsafeAttribute $ This { key: "importance", value:  prop' value  }
-  unpureAttr Importance eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "importance", value:  prop' value  }
+  attr Importance bothValues = unsafeAttribute $ Both
+    { key: "importance", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "importance", value: prop' value })
+  pureAttr Importance value = unsafeAttribute $ This
+    { key: "importance", value: prop' value }
+  unpureAttr Importance eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "importance", value: prop' value }
 
 instance Attr Script_ Importance String where
-  attr Importance bothValues  = unsafeAttribute $ Both { key: "importance", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "importance", value:  prop' value  })
-  pureAttr Importance value  = unsafeAttribute $ This { key: "importance", value:  prop' value  }
-  unpureAttr Importance eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "importance", value:  prop' value  }
+  attr Importance bothValues = unsafeAttribute $ Both
+    { key: "importance", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "importance", value: prop' value })
+  pureAttr Importance value = unsafeAttribute $ This
+    { key: "importance", value: prop' value }
+  unpureAttr Importance eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "importance", value: prop' value }
 
 instance Attr everything Importance Unit where
-  attr Importance bothValues  = unsafeAttribute $ Both { key: "importance", value:  unset'  } (snd bothValues <#> \_ -> { key: "importance", value:  unset'  })
-  pureAttr Importance _  = unsafeAttribute $ This { key: "importance", value:  unset'  }
-  unpureAttr Importance eventValue  = unsafeAttribute $ That $ eventValue <#> \_ -> { key: "importance", value:  unset'  }
+  attr Importance bothValues = unsafeAttribute $ Both
+    { key: "importance", value: unset' }
+    (snd bothValues <#> \_ -> { key: "importance", value: unset' })
+  pureAttr Importance _ = unsafeAttribute $ This
+    { key: "importance", value: unset' }
+  unpureAttr Importance eventValue = unsafeAttribute $ That $ eventValue <#>
+    \_ -> { key: "importance", value: unset' }

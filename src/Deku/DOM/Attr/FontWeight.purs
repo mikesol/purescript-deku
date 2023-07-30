@@ -30,111 +30,199 @@ import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 data FontWeight = FontWeight
 
 instance Attr FeBlend_ FontWeight String where
-  attr FontWeight bothValues  = unsafeAttribute $ Both { key: "font-weight", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "font-weight", value:  prop' value  })
-  pureAttr FontWeight value  = unsafeAttribute $ This { key: "font-weight", value:  prop' value  }
-  unpureAttr FontWeight eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "font-weight", value:  prop' value  }
+  attr FontWeight bothValues = unsafeAttribute $ Both
+    { key: "font-weight", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "font-weight", value: prop' value })
+  pureAttr FontWeight value = unsafeAttribute $ This
+    { key: "font-weight", value: prop' value }
+  unpureAttr FontWeight eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "font-weight", value: prop' value }
 
 instance Attr FeColorMatrix_ FontWeight String where
-  attr FontWeight bothValues  = unsafeAttribute $ Both { key: "font-weight", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "font-weight", value:  prop' value  })
-  pureAttr FontWeight value  = unsafeAttribute $ This { key: "font-weight", value:  prop' value  }
-  unpureAttr FontWeight eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "font-weight", value:  prop' value  }
+  attr FontWeight bothValues = unsafeAttribute $ Both
+    { key: "font-weight", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "font-weight", value: prop' value })
+  pureAttr FontWeight value = unsafeAttribute $ This
+    { key: "font-weight", value: prop' value }
+  unpureAttr FontWeight eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "font-weight", value: prop' value }
 
 instance Attr FeComponentTransfer_ FontWeight String where
-  attr FontWeight bothValues  = unsafeAttribute $ Both { key: "font-weight", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "font-weight", value:  prop' value  })
-  pureAttr FontWeight value  = unsafeAttribute $ This { key: "font-weight", value:  prop' value  }
-  unpureAttr FontWeight eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "font-weight", value:  prop' value  }
+  attr FontWeight bothValues = unsafeAttribute $ Both
+    { key: "font-weight", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "font-weight", value: prop' value })
+  pureAttr FontWeight value = unsafeAttribute $ This
+    { key: "font-weight", value: prop' value }
+  unpureAttr FontWeight eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "font-weight", value: prop' value }
 
 instance Attr FeComposite_ FontWeight String where
-  attr FontWeight bothValues  = unsafeAttribute $ Both { key: "font-weight", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "font-weight", value:  prop' value  })
-  pureAttr FontWeight value  = unsafeAttribute $ This { key: "font-weight", value:  prop' value  }
-  unpureAttr FontWeight eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "font-weight", value:  prop' value  }
+  attr FontWeight bothValues = unsafeAttribute $ Both
+    { key: "font-weight", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "font-weight", value: prop' value })
+  pureAttr FontWeight value = unsafeAttribute $ This
+    { key: "font-weight", value: prop' value }
+  unpureAttr FontWeight eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "font-weight", value: prop' value }
 
 instance Attr FeConvolveMatrix_ FontWeight String where
-  attr FontWeight bothValues  = unsafeAttribute $ Both { key: "font-weight", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "font-weight", value:  prop' value  })
-  pureAttr FontWeight value  = unsafeAttribute $ This { key: "font-weight", value:  prop' value  }
-  unpureAttr FontWeight eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "font-weight", value:  prop' value  }
+  attr FontWeight bothValues = unsafeAttribute $ Both
+    { key: "font-weight", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "font-weight", value: prop' value })
+  pureAttr FontWeight value = unsafeAttribute $ This
+    { key: "font-weight", value: prop' value }
+  unpureAttr FontWeight eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "font-weight", value: prop' value }
 
 instance Attr FeDiffuseLighting_ FontWeight String where
-  attr FontWeight bothValues  = unsafeAttribute $ Both { key: "font-weight", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "font-weight", value:  prop' value  })
-  pureAttr FontWeight value  = unsafeAttribute $ This { key: "font-weight", value:  prop' value  }
-  unpureAttr FontWeight eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "font-weight", value:  prop' value  }
+  attr FontWeight bothValues = unsafeAttribute $ Both
+    { key: "font-weight", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "font-weight", value: prop' value })
+  pureAttr FontWeight value = unsafeAttribute $ This
+    { key: "font-weight", value: prop' value }
+  unpureAttr FontWeight eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "font-weight", value: prop' value }
 
 instance Attr FeDisplacementMap_ FontWeight String where
-  attr FontWeight bothValues  = unsafeAttribute $ Both { key: "font-weight", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "font-weight", value:  prop' value  })
-  pureAttr FontWeight value  = unsafeAttribute $ This { key: "font-weight", value:  prop' value  }
-  unpureAttr FontWeight eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "font-weight", value:  prop' value  }
+  attr FontWeight bothValues = unsafeAttribute $ Both
+    { key: "font-weight", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "font-weight", value: prop' value })
+  pureAttr FontWeight value = unsafeAttribute $ This
+    { key: "font-weight", value: prop' value }
+  unpureAttr FontWeight eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "font-weight", value: prop' value }
 
 instance Attr FeFlood_ FontWeight String where
-  attr FontWeight bothValues  = unsafeAttribute $ Both { key: "font-weight", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "font-weight", value:  prop' value  })
-  pureAttr FontWeight value  = unsafeAttribute $ This { key: "font-weight", value:  prop' value  }
-  unpureAttr FontWeight eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "font-weight", value:  prop' value  }
+  attr FontWeight bothValues = unsafeAttribute $ Both
+    { key: "font-weight", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "font-weight", value: prop' value })
+  pureAttr FontWeight value = unsafeAttribute $ This
+    { key: "font-weight", value: prop' value }
+  unpureAttr FontWeight eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "font-weight", value: prop' value }
 
 instance Attr FeGaussianBlur_ FontWeight String where
-  attr FontWeight bothValues  = unsafeAttribute $ Both { key: "font-weight", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "font-weight", value:  prop' value  })
-  pureAttr FontWeight value  = unsafeAttribute $ This { key: "font-weight", value:  prop' value  }
-  unpureAttr FontWeight eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "font-weight", value:  prop' value  }
+  attr FontWeight bothValues = unsafeAttribute $ Both
+    { key: "font-weight", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "font-weight", value: prop' value })
+  pureAttr FontWeight value = unsafeAttribute $ This
+    { key: "font-weight", value: prop' value }
+  unpureAttr FontWeight eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "font-weight", value: prop' value }
 
 instance Attr FeImage_ FontWeight String where
-  attr FontWeight bothValues  = unsafeAttribute $ Both { key: "font-weight", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "font-weight", value:  prop' value  })
-  pureAttr FontWeight value  = unsafeAttribute $ This { key: "font-weight", value:  prop' value  }
-  unpureAttr FontWeight eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "font-weight", value:  prop' value  }
+  attr FontWeight bothValues = unsafeAttribute $ Both
+    { key: "font-weight", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "font-weight", value: prop' value })
+  pureAttr FontWeight value = unsafeAttribute $ This
+    { key: "font-weight", value: prop' value }
+  unpureAttr FontWeight eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "font-weight", value: prop' value }
 
 instance Attr FeMerge_ FontWeight String where
-  attr FontWeight bothValues  = unsafeAttribute $ Both { key: "font-weight", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "font-weight", value:  prop' value  })
-  pureAttr FontWeight value  = unsafeAttribute $ This { key: "font-weight", value:  prop' value  }
-  unpureAttr FontWeight eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "font-weight", value:  prop' value  }
+  attr FontWeight bothValues = unsafeAttribute $ Both
+    { key: "font-weight", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "font-weight", value: prop' value })
+  pureAttr FontWeight value = unsafeAttribute $ This
+    { key: "font-weight", value: prop' value }
+  unpureAttr FontWeight eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "font-weight", value: prop' value }
 
 instance Attr FeMorphology_ FontWeight String where
-  attr FontWeight bothValues  = unsafeAttribute $ Both { key: "font-weight", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "font-weight", value:  prop' value  })
-  pureAttr FontWeight value  = unsafeAttribute $ This { key: "font-weight", value:  prop' value  }
-  unpureAttr FontWeight eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "font-weight", value:  prop' value  }
+  attr FontWeight bothValues = unsafeAttribute $ Both
+    { key: "font-weight", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "font-weight", value: prop' value })
+  pureAttr FontWeight value = unsafeAttribute $ This
+    { key: "font-weight", value: prop' value }
+  unpureAttr FontWeight eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "font-weight", value: prop' value }
 
 instance Attr FeOffset_ FontWeight String where
-  attr FontWeight bothValues  = unsafeAttribute $ Both { key: "font-weight", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "font-weight", value:  prop' value  })
-  pureAttr FontWeight value  = unsafeAttribute $ This { key: "font-weight", value:  prop' value  }
-  unpureAttr FontWeight eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "font-weight", value:  prop' value  }
+  attr FontWeight bothValues = unsafeAttribute $ Both
+    { key: "font-weight", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "font-weight", value: prop' value })
+  pureAttr FontWeight value = unsafeAttribute $ This
+    { key: "font-weight", value: prop' value }
+  unpureAttr FontWeight eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "font-weight", value: prop' value }
 
 instance Attr FeSpecularLighting_ FontWeight String where
-  attr FontWeight bothValues  = unsafeAttribute $ Both { key: "font-weight", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "font-weight", value:  prop' value  })
-  pureAttr FontWeight value  = unsafeAttribute $ This { key: "font-weight", value:  prop' value  }
-  unpureAttr FontWeight eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "font-weight", value:  prop' value  }
+  attr FontWeight bothValues = unsafeAttribute $ Both
+    { key: "font-weight", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "font-weight", value: prop' value })
+  pureAttr FontWeight value = unsafeAttribute $ This
+    { key: "font-weight", value: prop' value }
+  unpureAttr FontWeight eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "font-weight", value: prop' value }
 
 instance Attr FeTile_ FontWeight String where
-  attr FontWeight bothValues  = unsafeAttribute $ Both { key: "font-weight", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "font-weight", value:  prop' value  })
-  pureAttr FontWeight value  = unsafeAttribute $ This { key: "font-weight", value:  prop' value  }
-  unpureAttr FontWeight eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "font-weight", value:  prop' value  }
+  attr FontWeight bothValues = unsafeAttribute $ Both
+    { key: "font-weight", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "font-weight", value: prop' value })
+  pureAttr FontWeight value = unsafeAttribute $ This
+    { key: "font-weight", value: prop' value }
+  unpureAttr FontWeight eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "font-weight", value: prop' value }
 
 instance Attr FeTurbulence_ FontWeight String where
-  attr FontWeight bothValues  = unsafeAttribute $ Both { key: "font-weight", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "font-weight", value:  prop' value  })
-  pureAttr FontWeight value  = unsafeAttribute $ This { key: "font-weight", value:  prop' value  }
-  unpureAttr FontWeight eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "font-weight", value:  prop' value  }
+  attr FontWeight bothValues = unsafeAttribute $ Both
+    { key: "font-weight", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "font-weight", value: prop' value })
+  pureAttr FontWeight value = unsafeAttribute $ This
+    { key: "font-weight", value: prop' value }
+  unpureAttr FontWeight eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "font-weight", value: prop' value }
 
 instance Attr Filter_ FontWeight String where
-  attr FontWeight bothValues  = unsafeAttribute $ Both { key: "font-weight", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "font-weight", value:  prop' value  })
-  pureAttr FontWeight value  = unsafeAttribute $ This { key: "font-weight", value:  prop' value  }
-  unpureAttr FontWeight eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "font-weight", value:  prop' value  }
+  attr FontWeight bothValues = unsafeAttribute $ Both
+    { key: "font-weight", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "font-weight", value: prop' value })
+  pureAttr FontWeight value = unsafeAttribute $ This
+    { key: "font-weight", value: prop' value }
+  unpureAttr FontWeight eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "font-weight", value: prop' value }
 
 instance Attr Image_ FontWeight String where
-  attr FontWeight bothValues  = unsafeAttribute $ Both { key: "font-weight", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "font-weight", value:  prop' value  })
-  pureAttr FontWeight value  = unsafeAttribute $ This { key: "font-weight", value:  prop' value  }
-  unpureAttr FontWeight eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "font-weight", value:  prop' value  }
+  attr FontWeight bothValues = unsafeAttribute $ Both
+    { key: "font-weight", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "font-weight", value: prop' value })
+  pureAttr FontWeight value = unsafeAttribute $ This
+    { key: "font-weight", value: prop' value }
+  unpureAttr FontWeight eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "font-weight", value: prop' value }
 
 instance Attr Switch_ FontWeight String where
-  attr FontWeight bothValues  = unsafeAttribute $ Both { key: "font-weight", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "font-weight", value:  prop' value  })
-  pureAttr FontWeight value  = unsafeAttribute $ This { key: "font-weight", value:  prop' value  }
-  unpureAttr FontWeight eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "font-weight", value:  prop' value  }
+  attr FontWeight bothValues = unsafeAttribute $ Both
+    { key: "font-weight", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "font-weight", value: prop' value })
+  pureAttr FontWeight value = unsafeAttribute $ This
+    { key: "font-weight", value: prop' value }
+  unpureAttr FontWeight eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "font-weight", value: prop' value }
 
 instance Attr Text_ FontWeight String where
-  attr FontWeight bothValues  = unsafeAttribute $ Both { key: "font-weight", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "font-weight", value:  prop' value  })
-  pureAttr FontWeight value  = unsafeAttribute $ This { key: "font-weight", value:  prop' value  }
-  unpureAttr FontWeight eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "font-weight", value:  prop' value  }
+  attr FontWeight bothValues = unsafeAttribute $ Both
+    { key: "font-weight", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "font-weight", value: prop' value })
+  pureAttr FontWeight value = unsafeAttribute $ This
+    { key: "font-weight", value: prop' value }
+  unpureAttr FontWeight eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "font-weight", value: prop' value }
 
 instance Attr Tspan_ FontWeight String where
-  attr FontWeight bothValues  = unsafeAttribute $ Both { key: "font-weight", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "font-weight", value:  prop' value  })
-  pureAttr FontWeight value  = unsafeAttribute $ This { key: "font-weight", value:  prop' value  }
-  unpureAttr FontWeight eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "font-weight", value:  prop' value  }
+  attr FontWeight bothValues = unsafeAttribute $ Both
+    { key: "font-weight", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "font-weight", value: prop' value })
+  pureAttr FontWeight value = unsafeAttribute $ This
+    { key: "font-weight", value: prop' value }
+  unpureAttr FontWeight eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "font-weight", value: prop' value }
 
 instance Attr everything FontWeight Unit where
-  attr FontWeight bothValues  = unsafeAttribute $ Both { key: "font-weight", value:  unset'  } (snd bothValues <#> \_ -> { key: "font-weight", value:  unset'  })
-  pureAttr FontWeight _  = unsafeAttribute $ This { key: "font-weight", value:  unset'  }
-  unpureAttr FontWeight eventValue  = unsafeAttribute $ That $ eventValue <#> \_ -> { key: "font-weight", value:  unset'  }
+  attr FontWeight bothValues = unsafeAttribute $ Both
+    { key: "font-weight", value: unset' }
+    (snd bothValues <#> \_ -> { key: "font-weight", value: unset' })
+  pureAttr FontWeight _ = unsafeAttribute $ This
+    { key: "font-weight", value: unset' }
+  unpureAttr FontWeight eventValue = unsafeAttribute $ That $ eventValue <#>
+    \_ -> { key: "font-weight", value: unset' }

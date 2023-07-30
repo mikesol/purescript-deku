@@ -16,41 +16,71 @@ import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 data Type = Type
 
 instance Attr AnimateTransform_ Type String where
-  attr Type bothValues  = unsafeAttribute $ Both { key: "type", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "type", value:  prop' value  })
-  pureAttr Type value  = unsafeAttribute $ This { key: "type", value:  prop' value  }
-  unpureAttr Type eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "type", value:  prop' value  }
+  attr Type bothValues = unsafeAttribute $ Both
+    { key: "type", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "type", value: prop' value })
+  pureAttr Type value = unsafeAttribute $ This
+    { key: "type", value: prop' value }
+  unpureAttr Type eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+    { key: "type", value: prop' value }
 
 instance Attr FeColorMatrix_ Type String where
-  attr Type bothValues  = unsafeAttribute $ Both { key: "type", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "type", value:  prop' value  })
-  pureAttr Type value  = unsafeAttribute $ This { key: "type", value:  prop' value  }
-  unpureAttr Type eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "type", value:  prop' value  }
+  attr Type bothValues = unsafeAttribute $ Both
+    { key: "type", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "type", value: prop' value })
+  pureAttr Type value = unsafeAttribute $ This
+    { key: "type", value: prop' value }
+  unpureAttr Type eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+    { key: "type", value: prop' value }
 
 instance Attr FeFuncA_ Type String where
-  attr Type bothValues  = unsafeAttribute $ Both { key: "type", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "type", value:  prop' value  })
-  pureAttr Type value  = unsafeAttribute $ This { key: "type", value:  prop' value  }
-  unpureAttr Type eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "type", value:  prop' value  }
+  attr Type bothValues = unsafeAttribute $ Both
+    { key: "type", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "type", value: prop' value })
+  pureAttr Type value = unsafeAttribute $ This
+    { key: "type", value: prop' value }
+  unpureAttr Type eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+    { key: "type", value: prop' value }
 
 instance Attr FeFuncB_ Type String where
-  attr Type bothValues  = unsafeAttribute $ Both { key: "type", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "type", value:  prop' value  })
-  pureAttr Type value  = unsafeAttribute $ This { key: "type", value:  prop' value  }
-  unpureAttr Type eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "type", value:  prop' value  }
+  attr Type bothValues = unsafeAttribute $ Both
+    { key: "type", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "type", value: prop' value })
+  pureAttr Type value = unsafeAttribute $ This
+    { key: "type", value: prop' value }
+  unpureAttr Type eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+    { key: "type", value: prop' value }
 
 instance Attr FeFuncG_ Type String where
-  attr Type bothValues  = unsafeAttribute $ Both { key: "type", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "type", value:  prop' value  })
-  pureAttr Type value  = unsafeAttribute $ This { key: "type", value:  prop' value  }
-  unpureAttr Type eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "type", value:  prop' value  }
+  attr Type bothValues = unsafeAttribute $ Both
+    { key: "type", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "type", value: prop' value })
+  pureAttr Type value = unsafeAttribute $ This
+    { key: "type", value: prop' value }
+  unpureAttr Type eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+    { key: "type", value: prop' value }
 
 instance Attr FeFuncR_ Type String where
-  attr Type bothValues  = unsafeAttribute $ Both { key: "type", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "type", value:  prop' value  })
-  pureAttr Type value  = unsafeAttribute $ This { key: "type", value:  prop' value  }
-  unpureAttr Type eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "type", value:  prop' value  }
+  attr Type bothValues = unsafeAttribute $ Both
+    { key: "type", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "type", value: prop' value })
+  pureAttr Type value = unsafeAttribute $ This
+    { key: "type", value: prop' value }
+  unpureAttr Type eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+    { key: "type", value: prop' value }
 
 instance Attr FeTurbulence_ Type String where
-  attr Type bothValues  = unsafeAttribute $ Both { key: "type", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "type", value:  prop' value  })
-  pureAttr Type value  = unsafeAttribute $ This { key: "type", value:  prop' value  }
-  unpureAttr Type eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "type", value:  prop' value  }
+  attr Type bothValues = unsafeAttribute $ Both
+    { key: "type", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "type", value: prop' value })
+  pureAttr Type value = unsafeAttribute $ This
+    { key: "type", value: prop' value }
+  unpureAttr Type eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+    { key: "type", value: prop' value }
 
 instance Attr everything Type Unit where
-  attr Type bothValues  = unsafeAttribute $ Both { key: "type", value:  unset'  } (snd bothValues <#> \_ -> { key: "type", value:  unset'  })
-  pureAttr Type _  = unsafeAttribute $ This { key: "type", value:  unset'  }
-  unpureAttr Type eventValue  = unsafeAttribute $ That $ eventValue <#> \_ -> { key: "type", value:  unset'  }
+  attr Type bothValues = unsafeAttribute $ Both { key: "type", value: unset' }
+    (snd bothValues <#> \_ -> { key: "type", value: unset' })
+  pureAttr Type _ = unsafeAttribute $ This { key: "type", value: unset' }
+  unpureAttr Type eventValue = unsafeAttribute $ That $ eventValue <#> \_ ->
+    { key: "type", value: unset' }

@@ -11,16 +11,26 @@ import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 data Loop = Loop
 
 instance Attr Audio_ Loop String where
-  attr Loop bothValues  = unsafeAttribute $ Both { key: "loop", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "loop", value:  prop' value  })
-  pureAttr Loop value  = unsafeAttribute $ This { key: "loop", value:  prop' value  }
-  unpureAttr Loop eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "loop", value:  prop' value  }
+  attr Loop bothValues = unsafeAttribute $ Both
+    { key: "loop", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "loop", value: prop' value })
+  pureAttr Loop value = unsafeAttribute $ This
+    { key: "loop", value: prop' value }
+  unpureAttr Loop eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+    { key: "loop", value: prop' value }
 
 instance Attr Video_ Loop String where
-  attr Loop bothValues  = unsafeAttribute $ Both { key: "loop", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "loop", value:  prop' value  })
-  pureAttr Loop value  = unsafeAttribute $ This { key: "loop", value:  prop' value  }
-  unpureAttr Loop eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "loop", value:  prop' value  }
+  attr Loop bothValues = unsafeAttribute $ Both
+    { key: "loop", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "loop", value: prop' value })
+  pureAttr Loop value = unsafeAttribute $ This
+    { key: "loop", value: prop' value }
+  unpureAttr Loop eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+    { key: "loop", value: prop' value }
 
 instance Attr everything Loop Unit where
-  attr Loop bothValues  = unsafeAttribute $ Both { key: "loop", value:  unset'  } (snd bothValues <#> \_ -> { key: "loop", value:  unset'  })
-  pureAttr Loop _  = unsafeAttribute $ This { key: "loop", value:  unset'  }
-  unpureAttr Loop eventValue  = unsafeAttribute $ That $ eventValue <#> \_ -> { key: "loop", value:  unset'  }
+  attr Loop bothValues = unsafeAttribute $ Both { key: "loop", value: unset' }
+    (snd bothValues <#> \_ -> { key: "loop", value: unset' })
+  pureAttr Loop _ = unsafeAttribute $ This { key: "loop", value: unset' }
+  unpureAttr Loop eventValue = unsafeAttribute $ That $ eventValue <#> \_ ->
+    { key: "loop", value: unset' }

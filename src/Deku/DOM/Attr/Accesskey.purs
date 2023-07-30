@@ -131,616 +131,1108 @@ import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 data Accesskey = Accesskey
 
 instance Attr A_ Accesskey String where
-  attr Accesskey bothValues  = unsafeAttribute $ Both { key: "accesskey", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "accesskey", value:  prop' value  })
-  pureAttr Accesskey value  = unsafeAttribute $ This { key: "accesskey", value:  prop' value  }
-  unpureAttr Accesskey eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "accesskey", value:  prop' value  }
+  attr Accesskey bothValues = unsafeAttribute $ Both
+    { key: "accesskey", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "accesskey", value: prop' value })
+  pureAttr Accesskey value = unsafeAttribute $ This
+    { key: "accesskey", value: prop' value }
+  unpureAttr Accesskey eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "accesskey", value: prop' value }
 
 instance Attr Abbr_ Accesskey String where
-  attr Accesskey bothValues  = unsafeAttribute $ Both { key: "accesskey", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "accesskey", value:  prop' value  })
-  pureAttr Accesskey value  = unsafeAttribute $ This { key: "accesskey", value:  prop' value  }
-  unpureAttr Accesskey eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "accesskey", value:  prop' value  }
+  attr Accesskey bothValues = unsafeAttribute $ Both
+    { key: "accesskey", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "accesskey", value: prop' value })
+  pureAttr Accesskey value = unsafeAttribute $ This
+    { key: "accesskey", value: prop' value }
+  unpureAttr Accesskey eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "accesskey", value: prop' value }
 
 instance Attr Acronym_ Accesskey String where
-  attr Accesskey bothValues  = unsafeAttribute $ Both { key: "accesskey", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "accesskey", value:  prop' value  })
-  pureAttr Accesskey value  = unsafeAttribute $ This { key: "accesskey", value:  prop' value  }
-  unpureAttr Accesskey eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "accesskey", value:  prop' value  }
+  attr Accesskey bothValues = unsafeAttribute $ Both
+    { key: "accesskey", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "accesskey", value: prop' value })
+  pureAttr Accesskey value = unsafeAttribute $ This
+    { key: "accesskey", value: prop' value }
+  unpureAttr Accesskey eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "accesskey", value: prop' value }
 
 instance Attr Address_ Accesskey String where
-  attr Accesskey bothValues  = unsafeAttribute $ Both { key: "accesskey", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "accesskey", value:  prop' value  })
-  pureAttr Accesskey value  = unsafeAttribute $ This { key: "accesskey", value:  prop' value  }
-  unpureAttr Accesskey eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "accesskey", value:  prop' value  }
+  attr Accesskey bothValues = unsafeAttribute $ Both
+    { key: "accesskey", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "accesskey", value: prop' value })
+  pureAttr Accesskey value = unsafeAttribute $ This
+    { key: "accesskey", value: prop' value }
+  unpureAttr Accesskey eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "accesskey", value: prop' value }
 
 instance Attr Applet_ Accesskey String where
-  attr Accesskey bothValues  = unsafeAttribute $ Both { key: "accesskey", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "accesskey", value:  prop' value  })
-  pureAttr Accesskey value  = unsafeAttribute $ This { key: "accesskey", value:  prop' value  }
-  unpureAttr Accesskey eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "accesskey", value:  prop' value  }
+  attr Accesskey bothValues = unsafeAttribute $ Both
+    { key: "accesskey", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "accesskey", value: prop' value })
+  pureAttr Accesskey value = unsafeAttribute $ This
+    { key: "accesskey", value: prop' value }
+  unpureAttr Accesskey eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "accesskey", value: prop' value }
 
 instance Attr Area_ Accesskey String where
-  attr Accesskey bothValues  = unsafeAttribute $ Both { key: "accesskey", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "accesskey", value:  prop' value  })
-  pureAttr Accesskey value  = unsafeAttribute $ This { key: "accesskey", value:  prop' value  }
-  unpureAttr Accesskey eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "accesskey", value:  prop' value  }
+  attr Accesskey bothValues = unsafeAttribute $ Both
+    { key: "accesskey", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "accesskey", value: prop' value })
+  pureAttr Accesskey value = unsafeAttribute $ This
+    { key: "accesskey", value: prop' value }
+  unpureAttr Accesskey eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "accesskey", value: prop' value }
 
 instance Attr Article_ Accesskey String where
-  attr Accesskey bothValues  = unsafeAttribute $ Both { key: "accesskey", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "accesskey", value:  prop' value  })
-  pureAttr Accesskey value  = unsafeAttribute $ This { key: "accesskey", value:  prop' value  }
-  unpureAttr Accesskey eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "accesskey", value:  prop' value  }
+  attr Accesskey bothValues = unsafeAttribute $ Both
+    { key: "accesskey", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "accesskey", value: prop' value })
+  pureAttr Accesskey value = unsafeAttribute $ This
+    { key: "accesskey", value: prop' value }
+  unpureAttr Accesskey eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "accesskey", value: prop' value }
 
 instance Attr Aside_ Accesskey String where
-  attr Accesskey bothValues  = unsafeAttribute $ Both { key: "accesskey", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "accesskey", value:  prop' value  })
-  pureAttr Accesskey value  = unsafeAttribute $ This { key: "accesskey", value:  prop' value  }
-  unpureAttr Accesskey eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "accesskey", value:  prop' value  }
+  attr Accesskey bothValues = unsafeAttribute $ Both
+    { key: "accesskey", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "accesskey", value: prop' value })
+  pureAttr Accesskey value = unsafeAttribute $ This
+    { key: "accesskey", value: prop' value }
+  unpureAttr Accesskey eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "accesskey", value: prop' value }
 
 instance Attr Audio_ Accesskey String where
-  attr Accesskey bothValues  = unsafeAttribute $ Both { key: "accesskey", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "accesskey", value:  prop' value  })
-  pureAttr Accesskey value  = unsafeAttribute $ This { key: "accesskey", value:  prop' value  }
-  unpureAttr Accesskey eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "accesskey", value:  prop' value  }
+  attr Accesskey bothValues = unsafeAttribute $ Both
+    { key: "accesskey", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "accesskey", value: prop' value })
+  pureAttr Accesskey value = unsafeAttribute $ This
+    { key: "accesskey", value: prop' value }
+  unpureAttr Accesskey eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "accesskey", value: prop' value }
 
 instance Attr B_ Accesskey String where
-  attr Accesskey bothValues  = unsafeAttribute $ Both { key: "accesskey", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "accesskey", value:  prop' value  })
-  pureAttr Accesskey value  = unsafeAttribute $ This { key: "accesskey", value:  prop' value  }
-  unpureAttr Accesskey eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "accesskey", value:  prop' value  }
+  attr Accesskey bothValues = unsafeAttribute $ Both
+    { key: "accesskey", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "accesskey", value: prop' value })
+  pureAttr Accesskey value = unsafeAttribute $ This
+    { key: "accesskey", value: prop' value }
+  unpureAttr Accesskey eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "accesskey", value: prop' value }
 
 instance Attr Base_ Accesskey String where
-  attr Accesskey bothValues  = unsafeAttribute $ Both { key: "accesskey", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "accesskey", value:  prop' value  })
-  pureAttr Accesskey value  = unsafeAttribute $ This { key: "accesskey", value:  prop' value  }
-  unpureAttr Accesskey eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "accesskey", value:  prop' value  }
+  attr Accesskey bothValues = unsafeAttribute $ Both
+    { key: "accesskey", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "accesskey", value: prop' value })
+  pureAttr Accesskey value = unsafeAttribute $ This
+    { key: "accesskey", value: prop' value }
+  unpureAttr Accesskey eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "accesskey", value: prop' value }
 
 instance Attr Basefont_ Accesskey String where
-  attr Accesskey bothValues  = unsafeAttribute $ Both { key: "accesskey", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "accesskey", value:  prop' value  })
-  pureAttr Accesskey value  = unsafeAttribute $ This { key: "accesskey", value:  prop' value  }
-  unpureAttr Accesskey eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "accesskey", value:  prop' value  }
+  attr Accesskey bothValues = unsafeAttribute $ Both
+    { key: "accesskey", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "accesskey", value: prop' value })
+  pureAttr Accesskey value = unsafeAttribute $ This
+    { key: "accesskey", value: prop' value }
+  unpureAttr Accesskey eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "accesskey", value: prop' value }
 
 instance Attr Bdi_ Accesskey String where
-  attr Accesskey bothValues  = unsafeAttribute $ Both { key: "accesskey", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "accesskey", value:  prop' value  })
-  pureAttr Accesskey value  = unsafeAttribute $ This { key: "accesskey", value:  prop' value  }
-  unpureAttr Accesskey eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "accesskey", value:  prop' value  }
+  attr Accesskey bothValues = unsafeAttribute $ Both
+    { key: "accesskey", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "accesskey", value: prop' value })
+  pureAttr Accesskey value = unsafeAttribute $ This
+    { key: "accesskey", value: prop' value }
+  unpureAttr Accesskey eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "accesskey", value: prop' value }
 
 instance Attr Bdo_ Accesskey String where
-  attr Accesskey bothValues  = unsafeAttribute $ Both { key: "accesskey", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "accesskey", value:  prop' value  })
-  pureAttr Accesskey value  = unsafeAttribute $ This { key: "accesskey", value:  prop' value  }
-  unpureAttr Accesskey eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "accesskey", value:  prop' value  }
+  attr Accesskey bothValues = unsafeAttribute $ Both
+    { key: "accesskey", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "accesskey", value: prop' value })
+  pureAttr Accesskey value = unsafeAttribute $ This
+    { key: "accesskey", value: prop' value }
+  unpureAttr Accesskey eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "accesskey", value: prop' value }
 
 instance Attr Big_ Accesskey String where
-  attr Accesskey bothValues  = unsafeAttribute $ Both { key: "accesskey", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "accesskey", value:  prop' value  })
-  pureAttr Accesskey value  = unsafeAttribute $ This { key: "accesskey", value:  prop' value  }
-  unpureAttr Accesskey eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "accesskey", value:  prop' value  }
+  attr Accesskey bothValues = unsafeAttribute $ Both
+    { key: "accesskey", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "accesskey", value: prop' value })
+  pureAttr Accesskey value = unsafeAttribute $ This
+    { key: "accesskey", value: prop' value }
+  unpureAttr Accesskey eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "accesskey", value: prop' value }
 
 instance Attr Blockquote_ Accesskey String where
-  attr Accesskey bothValues  = unsafeAttribute $ Both { key: "accesskey", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "accesskey", value:  prop' value  })
-  pureAttr Accesskey value  = unsafeAttribute $ This { key: "accesskey", value:  prop' value  }
-  unpureAttr Accesskey eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "accesskey", value:  prop' value  }
+  attr Accesskey bothValues = unsafeAttribute $ Both
+    { key: "accesskey", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "accesskey", value: prop' value })
+  pureAttr Accesskey value = unsafeAttribute $ This
+    { key: "accesskey", value: prop' value }
+  unpureAttr Accesskey eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "accesskey", value: prop' value }
 
 instance Attr Body_ Accesskey String where
-  attr Accesskey bothValues  = unsafeAttribute $ Both { key: "accesskey", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "accesskey", value:  prop' value  })
-  pureAttr Accesskey value  = unsafeAttribute $ This { key: "accesskey", value:  prop' value  }
-  unpureAttr Accesskey eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "accesskey", value:  prop' value  }
+  attr Accesskey bothValues = unsafeAttribute $ Both
+    { key: "accesskey", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "accesskey", value: prop' value })
+  pureAttr Accesskey value = unsafeAttribute $ This
+    { key: "accesskey", value: prop' value }
+  unpureAttr Accesskey eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "accesskey", value: prop' value }
 
 instance Attr Br_ Accesskey String where
-  attr Accesskey bothValues  = unsafeAttribute $ Both { key: "accesskey", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "accesskey", value:  prop' value  })
-  pureAttr Accesskey value  = unsafeAttribute $ This { key: "accesskey", value:  prop' value  }
-  unpureAttr Accesskey eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "accesskey", value:  prop' value  }
+  attr Accesskey bothValues = unsafeAttribute $ Both
+    { key: "accesskey", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "accesskey", value: prop' value })
+  pureAttr Accesskey value = unsafeAttribute $ This
+    { key: "accesskey", value: prop' value }
+  unpureAttr Accesskey eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "accesskey", value: prop' value }
 
 instance Attr Button_ Accesskey String where
-  attr Accesskey bothValues  = unsafeAttribute $ Both { key: "accesskey", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "accesskey", value:  prop' value  })
-  pureAttr Accesskey value  = unsafeAttribute $ This { key: "accesskey", value:  prop' value  }
-  unpureAttr Accesskey eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "accesskey", value:  prop' value  }
+  attr Accesskey bothValues = unsafeAttribute $ Both
+    { key: "accesskey", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "accesskey", value: prop' value })
+  pureAttr Accesskey value = unsafeAttribute $ This
+    { key: "accesskey", value: prop' value }
+  unpureAttr Accesskey eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "accesskey", value: prop' value }
 
 instance Attr Canvas_ Accesskey String where
-  attr Accesskey bothValues  = unsafeAttribute $ Both { key: "accesskey", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "accesskey", value:  prop' value  })
-  pureAttr Accesskey value  = unsafeAttribute $ This { key: "accesskey", value:  prop' value  }
-  unpureAttr Accesskey eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "accesskey", value:  prop' value  }
+  attr Accesskey bothValues = unsafeAttribute $ Both
+    { key: "accesskey", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "accesskey", value: prop' value })
+  pureAttr Accesskey value = unsafeAttribute $ This
+    { key: "accesskey", value: prop' value }
+  unpureAttr Accesskey eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "accesskey", value: prop' value }
 
 instance Attr Caption_ Accesskey String where
-  attr Accesskey bothValues  = unsafeAttribute $ Both { key: "accesskey", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "accesskey", value:  prop' value  })
-  pureAttr Accesskey value  = unsafeAttribute $ This { key: "accesskey", value:  prop' value  }
-  unpureAttr Accesskey eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "accesskey", value:  prop' value  }
+  attr Accesskey bothValues = unsafeAttribute $ Both
+    { key: "accesskey", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "accesskey", value: prop' value })
+  pureAttr Accesskey value = unsafeAttribute $ This
+    { key: "accesskey", value: prop' value }
+  unpureAttr Accesskey eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "accesskey", value: prop' value }
 
 instance Attr Center_ Accesskey String where
-  attr Accesskey bothValues  = unsafeAttribute $ Both { key: "accesskey", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "accesskey", value:  prop' value  })
-  pureAttr Accesskey value  = unsafeAttribute $ This { key: "accesskey", value:  prop' value  }
-  unpureAttr Accesskey eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "accesskey", value:  prop' value  }
+  attr Accesskey bothValues = unsafeAttribute $ Both
+    { key: "accesskey", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "accesskey", value: prop' value })
+  pureAttr Accesskey value = unsafeAttribute $ This
+    { key: "accesskey", value: prop' value }
+  unpureAttr Accesskey eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "accesskey", value: prop' value }
 
 instance Attr Cite_ Accesskey String where
-  attr Accesskey bothValues  = unsafeAttribute $ Both { key: "accesskey", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "accesskey", value:  prop' value  })
-  pureAttr Accesskey value  = unsafeAttribute $ This { key: "accesskey", value:  prop' value  }
-  unpureAttr Accesskey eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "accesskey", value:  prop' value  }
+  attr Accesskey bothValues = unsafeAttribute $ Both
+    { key: "accesskey", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "accesskey", value: prop' value })
+  pureAttr Accesskey value = unsafeAttribute $ This
+    { key: "accesskey", value: prop' value }
+  unpureAttr Accesskey eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "accesskey", value: prop' value }
 
 instance Attr Code_ Accesskey String where
-  attr Accesskey bothValues  = unsafeAttribute $ Both { key: "accesskey", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "accesskey", value:  prop' value  })
-  pureAttr Accesskey value  = unsafeAttribute $ This { key: "accesskey", value:  prop' value  }
-  unpureAttr Accesskey eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "accesskey", value:  prop' value  }
+  attr Accesskey bothValues = unsafeAttribute $ Both
+    { key: "accesskey", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "accesskey", value: prop' value })
+  pureAttr Accesskey value = unsafeAttribute $ This
+    { key: "accesskey", value: prop' value }
+  unpureAttr Accesskey eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "accesskey", value: prop' value }
 
 instance Attr Col_ Accesskey String where
-  attr Accesskey bothValues  = unsafeAttribute $ Both { key: "accesskey", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "accesskey", value:  prop' value  })
-  pureAttr Accesskey value  = unsafeAttribute $ This { key: "accesskey", value:  prop' value  }
-  unpureAttr Accesskey eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "accesskey", value:  prop' value  }
+  attr Accesskey bothValues = unsafeAttribute $ Both
+    { key: "accesskey", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "accesskey", value: prop' value })
+  pureAttr Accesskey value = unsafeAttribute $ This
+    { key: "accesskey", value: prop' value }
+  unpureAttr Accesskey eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "accesskey", value: prop' value }
 
 instance Attr Colgroup_ Accesskey String where
-  attr Accesskey bothValues  = unsafeAttribute $ Both { key: "accesskey", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "accesskey", value:  prop' value  })
-  pureAttr Accesskey value  = unsafeAttribute $ This { key: "accesskey", value:  prop' value  }
-  unpureAttr Accesskey eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "accesskey", value:  prop' value  }
+  attr Accesskey bothValues = unsafeAttribute $ Both
+    { key: "accesskey", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "accesskey", value: prop' value })
+  pureAttr Accesskey value = unsafeAttribute $ This
+    { key: "accesskey", value: prop' value }
+  unpureAttr Accesskey eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "accesskey", value: prop' value }
 
 instance Attr Xdata_ Accesskey String where
-  attr Accesskey bothValues  = unsafeAttribute $ Both { key: "accesskey", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "accesskey", value:  prop' value  })
-  pureAttr Accesskey value  = unsafeAttribute $ This { key: "accesskey", value:  prop' value  }
-  unpureAttr Accesskey eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "accesskey", value:  prop' value  }
+  attr Accesskey bothValues = unsafeAttribute $ Both
+    { key: "accesskey", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "accesskey", value: prop' value })
+  pureAttr Accesskey value = unsafeAttribute $ This
+    { key: "accesskey", value: prop' value }
+  unpureAttr Accesskey eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "accesskey", value: prop' value }
 
 instance Attr Datalist_ Accesskey String where
-  attr Accesskey bothValues  = unsafeAttribute $ Both { key: "accesskey", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "accesskey", value:  prop' value  })
-  pureAttr Accesskey value  = unsafeAttribute $ This { key: "accesskey", value:  prop' value  }
-  unpureAttr Accesskey eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "accesskey", value:  prop' value  }
+  attr Accesskey bothValues = unsafeAttribute $ Both
+    { key: "accesskey", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "accesskey", value: prop' value })
+  pureAttr Accesskey value = unsafeAttribute $ This
+    { key: "accesskey", value: prop' value }
+  unpureAttr Accesskey eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "accesskey", value: prop' value }
 
 instance Attr Dd_ Accesskey String where
-  attr Accesskey bothValues  = unsafeAttribute $ Both { key: "accesskey", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "accesskey", value:  prop' value  })
-  pureAttr Accesskey value  = unsafeAttribute $ This { key: "accesskey", value:  prop' value  }
-  unpureAttr Accesskey eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "accesskey", value:  prop' value  }
+  attr Accesskey bothValues = unsafeAttribute $ Both
+    { key: "accesskey", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "accesskey", value: prop' value })
+  pureAttr Accesskey value = unsafeAttribute $ This
+    { key: "accesskey", value: prop' value }
+  unpureAttr Accesskey eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "accesskey", value: prop' value }
 
 instance Attr Del_ Accesskey String where
-  attr Accesskey bothValues  = unsafeAttribute $ Both { key: "accesskey", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "accesskey", value:  prop' value  })
-  pureAttr Accesskey value  = unsafeAttribute $ This { key: "accesskey", value:  prop' value  }
-  unpureAttr Accesskey eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "accesskey", value:  prop' value  }
+  attr Accesskey bothValues = unsafeAttribute $ Both
+    { key: "accesskey", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "accesskey", value: prop' value })
+  pureAttr Accesskey value = unsafeAttribute $ This
+    { key: "accesskey", value: prop' value }
+  unpureAttr Accesskey eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "accesskey", value: prop' value }
 
 instance Attr Details_ Accesskey String where
-  attr Accesskey bothValues  = unsafeAttribute $ Both { key: "accesskey", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "accesskey", value:  prop' value  })
-  pureAttr Accesskey value  = unsafeAttribute $ This { key: "accesskey", value:  prop' value  }
-  unpureAttr Accesskey eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "accesskey", value:  prop' value  }
+  attr Accesskey bothValues = unsafeAttribute $ Both
+    { key: "accesskey", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "accesskey", value: prop' value })
+  pureAttr Accesskey value = unsafeAttribute $ This
+    { key: "accesskey", value: prop' value }
+  unpureAttr Accesskey eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "accesskey", value: prop' value }
 
 instance Attr Dfn_ Accesskey String where
-  attr Accesskey bothValues  = unsafeAttribute $ Both { key: "accesskey", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "accesskey", value:  prop' value  })
-  pureAttr Accesskey value  = unsafeAttribute $ This { key: "accesskey", value:  prop' value  }
-  unpureAttr Accesskey eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "accesskey", value:  prop' value  }
+  attr Accesskey bothValues = unsafeAttribute $ Both
+    { key: "accesskey", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "accesskey", value: prop' value })
+  pureAttr Accesskey value = unsafeAttribute $ This
+    { key: "accesskey", value: prop' value }
+  unpureAttr Accesskey eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "accesskey", value: prop' value }
 
 instance Attr Dialog_ Accesskey String where
-  attr Accesskey bothValues  = unsafeAttribute $ Both { key: "accesskey", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "accesskey", value:  prop' value  })
-  pureAttr Accesskey value  = unsafeAttribute $ This { key: "accesskey", value:  prop' value  }
-  unpureAttr Accesskey eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "accesskey", value:  prop' value  }
+  attr Accesskey bothValues = unsafeAttribute $ Both
+    { key: "accesskey", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "accesskey", value: prop' value })
+  pureAttr Accesskey value = unsafeAttribute $ This
+    { key: "accesskey", value: prop' value }
+  unpureAttr Accesskey eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "accesskey", value: prop' value }
 
 instance Attr Dir_ Accesskey String where
-  attr Accesskey bothValues  = unsafeAttribute $ Both { key: "accesskey", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "accesskey", value:  prop' value  })
-  pureAttr Accesskey value  = unsafeAttribute $ This { key: "accesskey", value:  prop' value  }
-  unpureAttr Accesskey eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "accesskey", value:  prop' value  }
+  attr Accesskey bothValues = unsafeAttribute $ Both
+    { key: "accesskey", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "accesskey", value: prop' value })
+  pureAttr Accesskey value = unsafeAttribute $ This
+    { key: "accesskey", value: prop' value }
+  unpureAttr Accesskey eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "accesskey", value: prop' value }
 
 instance Attr Div_ Accesskey String where
-  attr Accesskey bothValues  = unsafeAttribute $ Both { key: "accesskey", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "accesskey", value:  prop' value  })
-  pureAttr Accesskey value  = unsafeAttribute $ This { key: "accesskey", value:  prop' value  }
-  unpureAttr Accesskey eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "accesskey", value:  prop' value  }
+  attr Accesskey bothValues = unsafeAttribute $ Both
+    { key: "accesskey", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "accesskey", value: prop' value })
+  pureAttr Accesskey value = unsafeAttribute $ This
+    { key: "accesskey", value: prop' value }
+  unpureAttr Accesskey eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "accesskey", value: prop' value }
 
 instance Attr Dl_ Accesskey String where
-  attr Accesskey bothValues  = unsafeAttribute $ Both { key: "accesskey", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "accesskey", value:  prop' value  })
-  pureAttr Accesskey value  = unsafeAttribute $ This { key: "accesskey", value:  prop' value  }
-  unpureAttr Accesskey eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "accesskey", value:  prop' value  }
+  attr Accesskey bothValues = unsafeAttribute $ Both
+    { key: "accesskey", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "accesskey", value: prop' value })
+  pureAttr Accesskey value = unsafeAttribute $ This
+    { key: "accesskey", value: prop' value }
+  unpureAttr Accesskey eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "accesskey", value: prop' value }
 
 instance Attr Dt_ Accesskey String where
-  attr Accesskey bothValues  = unsafeAttribute $ Both { key: "accesskey", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "accesskey", value:  prop' value  })
-  pureAttr Accesskey value  = unsafeAttribute $ This { key: "accesskey", value:  prop' value  }
-  unpureAttr Accesskey eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "accesskey", value:  prop' value  }
+  attr Accesskey bothValues = unsafeAttribute $ Both
+    { key: "accesskey", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "accesskey", value: prop' value })
+  pureAttr Accesskey value = unsafeAttribute $ This
+    { key: "accesskey", value: prop' value }
+  unpureAttr Accesskey eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "accesskey", value: prop' value }
 
 instance Attr Em_ Accesskey String where
-  attr Accesskey bothValues  = unsafeAttribute $ Both { key: "accesskey", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "accesskey", value:  prop' value  })
-  pureAttr Accesskey value  = unsafeAttribute $ This { key: "accesskey", value:  prop' value  }
-  unpureAttr Accesskey eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "accesskey", value:  prop' value  }
+  attr Accesskey bothValues = unsafeAttribute $ Both
+    { key: "accesskey", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "accesskey", value: prop' value })
+  pureAttr Accesskey value = unsafeAttribute $ This
+    { key: "accesskey", value: prop' value }
+  unpureAttr Accesskey eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "accesskey", value: prop' value }
 
 instance Attr Embed_ Accesskey String where
-  attr Accesskey bothValues  = unsafeAttribute $ Both { key: "accesskey", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "accesskey", value:  prop' value  })
-  pureAttr Accesskey value  = unsafeAttribute $ This { key: "accesskey", value:  prop' value  }
-  unpureAttr Accesskey eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "accesskey", value:  prop' value  }
+  attr Accesskey bothValues = unsafeAttribute $ Both
+    { key: "accesskey", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "accesskey", value: prop' value })
+  pureAttr Accesskey value = unsafeAttribute $ This
+    { key: "accesskey", value: prop' value }
+  unpureAttr Accesskey eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "accesskey", value: prop' value }
 
 instance Attr Fieldset_ Accesskey String where
-  attr Accesskey bothValues  = unsafeAttribute $ Both { key: "accesskey", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "accesskey", value:  prop' value  })
-  pureAttr Accesskey value  = unsafeAttribute $ This { key: "accesskey", value:  prop' value  }
-  unpureAttr Accesskey eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "accesskey", value:  prop' value  }
+  attr Accesskey bothValues = unsafeAttribute $ Both
+    { key: "accesskey", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "accesskey", value: prop' value })
+  pureAttr Accesskey value = unsafeAttribute $ This
+    { key: "accesskey", value: prop' value }
+  unpureAttr Accesskey eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "accesskey", value: prop' value }
 
 instance Attr Figcaption_ Accesskey String where
-  attr Accesskey bothValues  = unsafeAttribute $ Both { key: "accesskey", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "accesskey", value:  prop' value  })
-  pureAttr Accesskey value  = unsafeAttribute $ This { key: "accesskey", value:  prop' value  }
-  unpureAttr Accesskey eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "accesskey", value:  prop' value  }
+  attr Accesskey bothValues = unsafeAttribute $ Both
+    { key: "accesskey", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "accesskey", value: prop' value })
+  pureAttr Accesskey value = unsafeAttribute $ This
+    { key: "accesskey", value: prop' value }
+  unpureAttr Accesskey eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "accesskey", value: prop' value }
 
 instance Attr Figure_ Accesskey String where
-  attr Accesskey bothValues  = unsafeAttribute $ Both { key: "accesskey", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "accesskey", value:  prop' value  })
-  pureAttr Accesskey value  = unsafeAttribute $ This { key: "accesskey", value:  prop' value  }
-  unpureAttr Accesskey eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "accesskey", value:  prop' value  }
+  attr Accesskey bothValues = unsafeAttribute $ Both
+    { key: "accesskey", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "accesskey", value: prop' value })
+  pureAttr Accesskey value = unsafeAttribute $ This
+    { key: "accesskey", value: prop' value }
+  unpureAttr Accesskey eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "accesskey", value: prop' value }
 
 instance Attr Font_ Accesskey String where
-  attr Accesskey bothValues  = unsafeAttribute $ Both { key: "accesskey", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "accesskey", value:  prop' value  })
-  pureAttr Accesskey value  = unsafeAttribute $ This { key: "accesskey", value:  prop' value  }
-  unpureAttr Accesskey eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "accesskey", value:  prop' value  }
+  attr Accesskey bothValues = unsafeAttribute $ Both
+    { key: "accesskey", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "accesskey", value: prop' value })
+  pureAttr Accesskey value = unsafeAttribute $ This
+    { key: "accesskey", value: prop' value }
+  unpureAttr Accesskey eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "accesskey", value: prop' value }
 
 instance Attr Footer_ Accesskey String where
-  attr Accesskey bothValues  = unsafeAttribute $ Both { key: "accesskey", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "accesskey", value:  prop' value  })
-  pureAttr Accesskey value  = unsafeAttribute $ This { key: "accesskey", value:  prop' value  }
-  unpureAttr Accesskey eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "accesskey", value:  prop' value  }
+  attr Accesskey bothValues = unsafeAttribute $ Both
+    { key: "accesskey", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "accesskey", value: prop' value })
+  pureAttr Accesskey value = unsafeAttribute $ This
+    { key: "accesskey", value: prop' value }
+  unpureAttr Accesskey eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "accesskey", value: prop' value }
 
 instance Attr Form_ Accesskey String where
-  attr Accesskey bothValues  = unsafeAttribute $ Both { key: "accesskey", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "accesskey", value:  prop' value  })
-  pureAttr Accesskey value  = unsafeAttribute $ This { key: "accesskey", value:  prop' value  }
-  unpureAttr Accesskey eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "accesskey", value:  prop' value  }
+  attr Accesskey bothValues = unsafeAttribute $ Both
+    { key: "accesskey", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "accesskey", value: prop' value })
+  pureAttr Accesskey value = unsafeAttribute $ This
+    { key: "accesskey", value: prop' value }
+  unpureAttr Accesskey eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "accesskey", value: prop' value }
 
 instance Attr Frame_ Accesskey String where
-  attr Accesskey bothValues  = unsafeAttribute $ Both { key: "accesskey", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "accesskey", value:  prop' value  })
-  pureAttr Accesskey value  = unsafeAttribute $ This { key: "accesskey", value:  prop' value  }
-  unpureAttr Accesskey eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "accesskey", value:  prop' value  }
+  attr Accesskey bothValues = unsafeAttribute $ Both
+    { key: "accesskey", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "accesskey", value: prop' value })
+  pureAttr Accesskey value = unsafeAttribute $ This
+    { key: "accesskey", value: prop' value }
+  unpureAttr Accesskey eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "accesskey", value: prop' value }
 
 instance Attr Frameset_ Accesskey String where
-  attr Accesskey bothValues  = unsafeAttribute $ Both { key: "accesskey", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "accesskey", value:  prop' value  })
-  pureAttr Accesskey value  = unsafeAttribute $ This { key: "accesskey", value:  prop' value  }
-  unpureAttr Accesskey eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "accesskey", value:  prop' value  }
+  attr Accesskey bothValues = unsafeAttribute $ Both
+    { key: "accesskey", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "accesskey", value: prop' value })
+  pureAttr Accesskey value = unsafeAttribute $ This
+    { key: "accesskey", value: prop' value }
+  unpureAttr Accesskey eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "accesskey", value: prop' value }
 
 instance Attr H1_ Accesskey String where
-  attr Accesskey bothValues  = unsafeAttribute $ Both { key: "accesskey", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "accesskey", value:  prop' value  })
-  pureAttr Accesskey value  = unsafeAttribute $ This { key: "accesskey", value:  prop' value  }
-  unpureAttr Accesskey eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "accesskey", value:  prop' value  }
+  attr Accesskey bothValues = unsafeAttribute $ Both
+    { key: "accesskey", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "accesskey", value: prop' value })
+  pureAttr Accesskey value = unsafeAttribute $ This
+    { key: "accesskey", value: prop' value }
+  unpureAttr Accesskey eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "accesskey", value: prop' value }
 
 instance Attr H2_ Accesskey String where
-  attr Accesskey bothValues  = unsafeAttribute $ Both { key: "accesskey", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "accesskey", value:  prop' value  })
-  pureAttr Accesskey value  = unsafeAttribute $ This { key: "accesskey", value:  prop' value  }
-  unpureAttr Accesskey eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "accesskey", value:  prop' value  }
+  attr Accesskey bothValues = unsafeAttribute $ Both
+    { key: "accesskey", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "accesskey", value: prop' value })
+  pureAttr Accesskey value = unsafeAttribute $ This
+    { key: "accesskey", value: prop' value }
+  unpureAttr Accesskey eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "accesskey", value: prop' value }
 
 instance Attr H3_ Accesskey String where
-  attr Accesskey bothValues  = unsafeAttribute $ Both { key: "accesskey", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "accesskey", value:  prop' value  })
-  pureAttr Accesskey value  = unsafeAttribute $ This { key: "accesskey", value:  prop' value  }
-  unpureAttr Accesskey eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "accesskey", value:  prop' value  }
+  attr Accesskey bothValues = unsafeAttribute $ Both
+    { key: "accesskey", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "accesskey", value: prop' value })
+  pureAttr Accesskey value = unsafeAttribute $ This
+    { key: "accesskey", value: prop' value }
+  unpureAttr Accesskey eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "accesskey", value: prop' value }
 
 instance Attr H4_ Accesskey String where
-  attr Accesskey bothValues  = unsafeAttribute $ Both { key: "accesskey", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "accesskey", value:  prop' value  })
-  pureAttr Accesskey value  = unsafeAttribute $ This { key: "accesskey", value:  prop' value  }
-  unpureAttr Accesskey eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "accesskey", value:  prop' value  }
+  attr Accesskey bothValues = unsafeAttribute $ Both
+    { key: "accesskey", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "accesskey", value: prop' value })
+  pureAttr Accesskey value = unsafeAttribute $ This
+    { key: "accesskey", value: prop' value }
+  unpureAttr Accesskey eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "accesskey", value: prop' value }
 
 instance Attr H5_ Accesskey String where
-  attr Accesskey bothValues  = unsafeAttribute $ Both { key: "accesskey", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "accesskey", value:  prop' value  })
-  pureAttr Accesskey value  = unsafeAttribute $ This { key: "accesskey", value:  prop' value  }
-  unpureAttr Accesskey eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "accesskey", value:  prop' value  }
+  attr Accesskey bothValues = unsafeAttribute $ Both
+    { key: "accesskey", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "accesskey", value: prop' value })
+  pureAttr Accesskey value = unsafeAttribute $ This
+    { key: "accesskey", value: prop' value }
+  unpureAttr Accesskey eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "accesskey", value: prop' value }
 
 instance Attr H6_ Accesskey String where
-  attr Accesskey bothValues  = unsafeAttribute $ Both { key: "accesskey", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "accesskey", value:  prop' value  })
-  pureAttr Accesskey value  = unsafeAttribute $ This { key: "accesskey", value:  prop' value  }
-  unpureAttr Accesskey eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "accesskey", value:  prop' value  }
+  attr Accesskey bothValues = unsafeAttribute $ Both
+    { key: "accesskey", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "accesskey", value: prop' value })
+  pureAttr Accesskey value = unsafeAttribute $ This
+    { key: "accesskey", value: prop' value }
+  unpureAttr Accesskey eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "accesskey", value: prop' value }
 
 instance Attr Head_ Accesskey String where
-  attr Accesskey bothValues  = unsafeAttribute $ Both { key: "accesskey", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "accesskey", value:  prop' value  })
-  pureAttr Accesskey value  = unsafeAttribute $ This { key: "accesskey", value:  prop' value  }
-  unpureAttr Accesskey eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "accesskey", value:  prop' value  }
+  attr Accesskey bothValues = unsafeAttribute $ Both
+    { key: "accesskey", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "accesskey", value: prop' value })
+  pureAttr Accesskey value = unsafeAttribute $ This
+    { key: "accesskey", value: prop' value }
+  unpureAttr Accesskey eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "accesskey", value: prop' value }
 
 instance Attr Header_ Accesskey String where
-  attr Accesskey bothValues  = unsafeAttribute $ Both { key: "accesskey", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "accesskey", value:  prop' value  })
-  pureAttr Accesskey value  = unsafeAttribute $ This { key: "accesskey", value:  prop' value  }
-  unpureAttr Accesskey eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "accesskey", value:  prop' value  }
+  attr Accesskey bothValues = unsafeAttribute $ Both
+    { key: "accesskey", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "accesskey", value: prop' value })
+  pureAttr Accesskey value = unsafeAttribute $ This
+    { key: "accesskey", value: prop' value }
+  unpureAttr Accesskey eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "accesskey", value: prop' value }
 
 instance Attr Hr_ Accesskey String where
-  attr Accesskey bothValues  = unsafeAttribute $ Both { key: "accesskey", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "accesskey", value:  prop' value  })
-  pureAttr Accesskey value  = unsafeAttribute $ This { key: "accesskey", value:  prop' value  }
-  unpureAttr Accesskey eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "accesskey", value:  prop' value  }
+  attr Accesskey bothValues = unsafeAttribute $ Both
+    { key: "accesskey", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "accesskey", value: prop' value })
+  pureAttr Accesskey value = unsafeAttribute $ This
+    { key: "accesskey", value: prop' value }
+  unpureAttr Accesskey eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "accesskey", value: prop' value }
 
 instance Attr Html_ Accesskey String where
-  attr Accesskey bothValues  = unsafeAttribute $ Both { key: "accesskey", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "accesskey", value:  prop' value  })
-  pureAttr Accesskey value  = unsafeAttribute $ This { key: "accesskey", value:  prop' value  }
-  unpureAttr Accesskey eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "accesskey", value:  prop' value  }
+  attr Accesskey bothValues = unsafeAttribute $ Both
+    { key: "accesskey", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "accesskey", value: prop' value })
+  pureAttr Accesskey value = unsafeAttribute $ This
+    { key: "accesskey", value: prop' value }
+  unpureAttr Accesskey eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "accesskey", value: prop' value }
 
 instance Attr I_ Accesskey String where
-  attr Accesskey bothValues  = unsafeAttribute $ Both { key: "accesskey", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "accesskey", value:  prop' value  })
-  pureAttr Accesskey value  = unsafeAttribute $ This { key: "accesskey", value:  prop' value  }
-  unpureAttr Accesskey eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "accesskey", value:  prop' value  }
+  attr Accesskey bothValues = unsafeAttribute $ Both
+    { key: "accesskey", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "accesskey", value: prop' value })
+  pureAttr Accesskey value = unsafeAttribute $ This
+    { key: "accesskey", value: prop' value }
+  unpureAttr Accesskey eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "accesskey", value: prop' value }
 
 instance Attr Iframe_ Accesskey String where
-  attr Accesskey bothValues  = unsafeAttribute $ Both { key: "accesskey", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "accesskey", value:  prop' value  })
-  pureAttr Accesskey value  = unsafeAttribute $ This { key: "accesskey", value:  prop' value  }
-  unpureAttr Accesskey eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "accesskey", value:  prop' value  }
+  attr Accesskey bothValues = unsafeAttribute $ Both
+    { key: "accesskey", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "accesskey", value: prop' value })
+  pureAttr Accesskey value = unsafeAttribute $ This
+    { key: "accesskey", value: prop' value }
+  unpureAttr Accesskey eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "accesskey", value: prop' value }
 
 instance Attr Img_ Accesskey String where
-  attr Accesskey bothValues  = unsafeAttribute $ Both { key: "accesskey", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "accesskey", value:  prop' value  })
-  pureAttr Accesskey value  = unsafeAttribute $ This { key: "accesskey", value:  prop' value  }
-  unpureAttr Accesskey eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "accesskey", value:  prop' value  }
+  attr Accesskey bothValues = unsafeAttribute $ Both
+    { key: "accesskey", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "accesskey", value: prop' value })
+  pureAttr Accesskey value = unsafeAttribute $ This
+    { key: "accesskey", value: prop' value }
+  unpureAttr Accesskey eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "accesskey", value: prop' value }
 
 instance Attr Input_ Accesskey String where
-  attr Accesskey bothValues  = unsafeAttribute $ Both { key: "accesskey", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "accesskey", value:  prop' value  })
-  pureAttr Accesskey value  = unsafeAttribute $ This { key: "accesskey", value:  prop' value  }
-  unpureAttr Accesskey eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "accesskey", value:  prop' value  }
+  attr Accesskey bothValues = unsafeAttribute $ Both
+    { key: "accesskey", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "accesskey", value: prop' value })
+  pureAttr Accesskey value = unsafeAttribute $ This
+    { key: "accesskey", value: prop' value }
+  unpureAttr Accesskey eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "accesskey", value: prop' value }
 
 instance Attr Ins_ Accesskey String where
-  attr Accesskey bothValues  = unsafeAttribute $ Both { key: "accesskey", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "accesskey", value:  prop' value  })
-  pureAttr Accesskey value  = unsafeAttribute $ This { key: "accesskey", value:  prop' value  }
-  unpureAttr Accesskey eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "accesskey", value:  prop' value  }
+  attr Accesskey bothValues = unsafeAttribute $ Both
+    { key: "accesskey", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "accesskey", value: prop' value })
+  pureAttr Accesskey value = unsafeAttribute $ This
+    { key: "accesskey", value: prop' value }
+  unpureAttr Accesskey eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "accesskey", value: prop' value }
 
 instance Attr Kbd_ Accesskey String where
-  attr Accesskey bothValues  = unsafeAttribute $ Both { key: "accesskey", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "accesskey", value:  prop' value  })
-  pureAttr Accesskey value  = unsafeAttribute $ This { key: "accesskey", value:  prop' value  }
-  unpureAttr Accesskey eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "accesskey", value:  prop' value  }
+  attr Accesskey bothValues = unsafeAttribute $ Both
+    { key: "accesskey", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "accesskey", value: prop' value })
+  pureAttr Accesskey value = unsafeAttribute $ This
+    { key: "accesskey", value: prop' value }
+  unpureAttr Accesskey eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "accesskey", value: prop' value }
 
 instance Attr Label_ Accesskey String where
-  attr Accesskey bothValues  = unsafeAttribute $ Both { key: "accesskey", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "accesskey", value:  prop' value  })
-  pureAttr Accesskey value  = unsafeAttribute $ This { key: "accesskey", value:  prop' value  }
-  unpureAttr Accesskey eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "accesskey", value:  prop' value  }
+  attr Accesskey bothValues = unsafeAttribute $ Both
+    { key: "accesskey", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "accesskey", value: prop' value })
+  pureAttr Accesskey value = unsafeAttribute $ This
+    { key: "accesskey", value: prop' value }
+  unpureAttr Accesskey eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "accesskey", value: prop' value }
 
 instance Attr Legend_ Accesskey String where
-  attr Accesskey bothValues  = unsafeAttribute $ Both { key: "accesskey", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "accesskey", value:  prop' value  })
-  pureAttr Accesskey value  = unsafeAttribute $ This { key: "accesskey", value:  prop' value  }
-  unpureAttr Accesskey eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "accesskey", value:  prop' value  }
+  attr Accesskey bothValues = unsafeAttribute $ Both
+    { key: "accesskey", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "accesskey", value: prop' value })
+  pureAttr Accesskey value = unsafeAttribute $ This
+    { key: "accesskey", value: prop' value }
+  unpureAttr Accesskey eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "accesskey", value: prop' value }
 
 instance Attr Li_ Accesskey String where
-  attr Accesskey bothValues  = unsafeAttribute $ Both { key: "accesskey", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "accesskey", value:  prop' value  })
-  pureAttr Accesskey value  = unsafeAttribute $ This { key: "accesskey", value:  prop' value  }
-  unpureAttr Accesskey eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "accesskey", value:  prop' value  }
+  attr Accesskey bothValues = unsafeAttribute $ Both
+    { key: "accesskey", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "accesskey", value: prop' value })
+  pureAttr Accesskey value = unsafeAttribute $ This
+    { key: "accesskey", value: prop' value }
+  unpureAttr Accesskey eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "accesskey", value: prop' value }
 
 instance Attr Link_ Accesskey String where
-  attr Accesskey bothValues  = unsafeAttribute $ Both { key: "accesskey", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "accesskey", value:  prop' value  })
-  pureAttr Accesskey value  = unsafeAttribute $ This { key: "accesskey", value:  prop' value  }
-  unpureAttr Accesskey eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "accesskey", value:  prop' value  }
+  attr Accesskey bothValues = unsafeAttribute $ Both
+    { key: "accesskey", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "accesskey", value: prop' value })
+  pureAttr Accesskey value = unsafeAttribute $ This
+    { key: "accesskey", value: prop' value }
+  unpureAttr Accesskey eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "accesskey", value: prop' value }
 
 instance Attr Main_ Accesskey String where
-  attr Accesskey bothValues  = unsafeAttribute $ Both { key: "accesskey", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "accesskey", value:  prop' value  })
-  pureAttr Accesskey value  = unsafeAttribute $ This { key: "accesskey", value:  prop' value  }
-  unpureAttr Accesskey eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "accesskey", value:  prop' value  }
+  attr Accesskey bothValues = unsafeAttribute $ Both
+    { key: "accesskey", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "accesskey", value: prop' value })
+  pureAttr Accesskey value = unsafeAttribute $ This
+    { key: "accesskey", value: prop' value }
+  unpureAttr Accesskey eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "accesskey", value: prop' value }
 
 instance Attr Map_ Accesskey String where
-  attr Accesskey bothValues  = unsafeAttribute $ Both { key: "accesskey", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "accesskey", value:  prop' value  })
-  pureAttr Accesskey value  = unsafeAttribute $ This { key: "accesskey", value:  prop' value  }
-  unpureAttr Accesskey eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "accesskey", value:  prop' value  }
+  attr Accesskey bothValues = unsafeAttribute $ Both
+    { key: "accesskey", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "accesskey", value: prop' value })
+  pureAttr Accesskey value = unsafeAttribute $ This
+    { key: "accesskey", value: prop' value }
+  unpureAttr Accesskey eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "accesskey", value: prop' value }
 
 instance Attr Mark_ Accesskey String where
-  attr Accesskey bothValues  = unsafeAttribute $ Both { key: "accesskey", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "accesskey", value:  prop' value  })
-  pureAttr Accesskey value  = unsafeAttribute $ This { key: "accesskey", value:  prop' value  }
-  unpureAttr Accesskey eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "accesskey", value:  prop' value  }
+  attr Accesskey bothValues = unsafeAttribute $ Both
+    { key: "accesskey", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "accesskey", value: prop' value })
+  pureAttr Accesskey value = unsafeAttribute $ This
+    { key: "accesskey", value: prop' value }
+  unpureAttr Accesskey eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "accesskey", value: prop' value }
 
 instance Attr Meta_ Accesskey String where
-  attr Accesskey bothValues  = unsafeAttribute $ Both { key: "accesskey", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "accesskey", value:  prop' value  })
-  pureAttr Accesskey value  = unsafeAttribute $ This { key: "accesskey", value:  prop' value  }
-  unpureAttr Accesskey eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "accesskey", value:  prop' value  }
+  attr Accesskey bothValues = unsafeAttribute $ Both
+    { key: "accesskey", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "accesskey", value: prop' value })
+  pureAttr Accesskey value = unsafeAttribute $ This
+    { key: "accesskey", value: prop' value }
+  unpureAttr Accesskey eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "accesskey", value: prop' value }
 
 instance Attr Meter_ Accesskey String where
-  attr Accesskey bothValues  = unsafeAttribute $ Both { key: "accesskey", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "accesskey", value:  prop' value  })
-  pureAttr Accesskey value  = unsafeAttribute $ This { key: "accesskey", value:  prop' value  }
-  unpureAttr Accesskey eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "accesskey", value:  prop' value  }
+  attr Accesskey bothValues = unsafeAttribute $ Both
+    { key: "accesskey", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "accesskey", value: prop' value })
+  pureAttr Accesskey value = unsafeAttribute $ This
+    { key: "accesskey", value: prop' value }
+  unpureAttr Accesskey eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "accesskey", value: prop' value }
 
 instance Attr Nav_ Accesskey String where
-  attr Accesskey bothValues  = unsafeAttribute $ Both { key: "accesskey", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "accesskey", value:  prop' value  })
-  pureAttr Accesskey value  = unsafeAttribute $ This { key: "accesskey", value:  prop' value  }
-  unpureAttr Accesskey eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "accesskey", value:  prop' value  }
+  attr Accesskey bothValues = unsafeAttribute $ Both
+    { key: "accesskey", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "accesskey", value: prop' value })
+  pureAttr Accesskey value = unsafeAttribute $ This
+    { key: "accesskey", value: prop' value }
+  unpureAttr Accesskey eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "accesskey", value: prop' value }
 
 instance Attr Noframes_ Accesskey String where
-  attr Accesskey bothValues  = unsafeAttribute $ Both { key: "accesskey", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "accesskey", value:  prop' value  })
-  pureAttr Accesskey value  = unsafeAttribute $ This { key: "accesskey", value:  prop' value  }
-  unpureAttr Accesskey eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "accesskey", value:  prop' value  }
+  attr Accesskey bothValues = unsafeAttribute $ Both
+    { key: "accesskey", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "accesskey", value: prop' value })
+  pureAttr Accesskey value = unsafeAttribute $ This
+    { key: "accesskey", value: prop' value }
+  unpureAttr Accesskey eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "accesskey", value: prop' value }
 
 instance Attr Noscript_ Accesskey String where
-  attr Accesskey bothValues  = unsafeAttribute $ Both { key: "accesskey", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "accesskey", value:  prop' value  })
-  pureAttr Accesskey value  = unsafeAttribute $ This { key: "accesskey", value:  prop' value  }
-  unpureAttr Accesskey eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "accesskey", value:  prop' value  }
+  attr Accesskey bothValues = unsafeAttribute $ Both
+    { key: "accesskey", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "accesskey", value: prop' value })
+  pureAttr Accesskey value = unsafeAttribute $ This
+    { key: "accesskey", value: prop' value }
+  unpureAttr Accesskey eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "accesskey", value: prop' value }
 
 instance Attr Object_ Accesskey String where
-  attr Accesskey bothValues  = unsafeAttribute $ Both { key: "accesskey", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "accesskey", value:  prop' value  })
-  pureAttr Accesskey value  = unsafeAttribute $ This { key: "accesskey", value:  prop' value  }
-  unpureAttr Accesskey eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "accesskey", value:  prop' value  }
+  attr Accesskey bothValues = unsafeAttribute $ Both
+    { key: "accesskey", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "accesskey", value: prop' value })
+  pureAttr Accesskey value = unsafeAttribute $ This
+    { key: "accesskey", value: prop' value }
+  unpureAttr Accesskey eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "accesskey", value: prop' value }
 
 instance Attr Ol_ Accesskey String where
-  attr Accesskey bothValues  = unsafeAttribute $ Both { key: "accesskey", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "accesskey", value:  prop' value  })
-  pureAttr Accesskey value  = unsafeAttribute $ This { key: "accesskey", value:  prop' value  }
-  unpureAttr Accesskey eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "accesskey", value:  prop' value  }
+  attr Accesskey bothValues = unsafeAttribute $ Both
+    { key: "accesskey", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "accesskey", value: prop' value })
+  pureAttr Accesskey value = unsafeAttribute $ This
+    { key: "accesskey", value: prop' value }
+  unpureAttr Accesskey eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "accesskey", value: prop' value }
 
 instance Attr Optgroup_ Accesskey String where
-  attr Accesskey bothValues  = unsafeAttribute $ Both { key: "accesskey", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "accesskey", value:  prop' value  })
-  pureAttr Accesskey value  = unsafeAttribute $ This { key: "accesskey", value:  prop' value  }
-  unpureAttr Accesskey eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "accesskey", value:  prop' value  }
+  attr Accesskey bothValues = unsafeAttribute $ Both
+    { key: "accesskey", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "accesskey", value: prop' value })
+  pureAttr Accesskey value = unsafeAttribute $ This
+    { key: "accesskey", value: prop' value }
+  unpureAttr Accesskey eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "accesskey", value: prop' value }
 
 instance Attr Option_ Accesskey String where
-  attr Accesskey bothValues  = unsafeAttribute $ Both { key: "accesskey", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "accesskey", value:  prop' value  })
-  pureAttr Accesskey value  = unsafeAttribute $ This { key: "accesskey", value:  prop' value  }
-  unpureAttr Accesskey eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "accesskey", value:  prop' value  }
+  attr Accesskey bothValues = unsafeAttribute $ Both
+    { key: "accesskey", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "accesskey", value: prop' value })
+  pureAttr Accesskey value = unsafeAttribute $ This
+    { key: "accesskey", value: prop' value }
+  unpureAttr Accesskey eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "accesskey", value: prop' value }
 
 instance Attr Output_ Accesskey String where
-  attr Accesskey bothValues  = unsafeAttribute $ Both { key: "accesskey", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "accesskey", value:  prop' value  })
-  pureAttr Accesskey value  = unsafeAttribute $ This { key: "accesskey", value:  prop' value  }
-  unpureAttr Accesskey eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "accesskey", value:  prop' value  }
+  attr Accesskey bothValues = unsafeAttribute $ Both
+    { key: "accesskey", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "accesskey", value: prop' value })
+  pureAttr Accesskey value = unsafeAttribute $ This
+    { key: "accesskey", value: prop' value }
+  unpureAttr Accesskey eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "accesskey", value: prop' value }
 
 instance Attr P_ Accesskey String where
-  attr Accesskey bothValues  = unsafeAttribute $ Both { key: "accesskey", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "accesskey", value:  prop' value  })
-  pureAttr Accesskey value  = unsafeAttribute $ This { key: "accesskey", value:  prop' value  }
-  unpureAttr Accesskey eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "accesskey", value:  prop' value  }
+  attr Accesskey bothValues = unsafeAttribute $ Both
+    { key: "accesskey", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "accesskey", value: prop' value })
+  pureAttr Accesskey value = unsafeAttribute $ This
+    { key: "accesskey", value: prop' value }
+  unpureAttr Accesskey eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "accesskey", value: prop' value }
 
 instance Attr Param_ Accesskey String where
-  attr Accesskey bothValues  = unsafeAttribute $ Both { key: "accesskey", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "accesskey", value:  prop' value  })
-  pureAttr Accesskey value  = unsafeAttribute $ This { key: "accesskey", value:  prop' value  }
-  unpureAttr Accesskey eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "accesskey", value:  prop' value  }
+  attr Accesskey bothValues = unsafeAttribute $ Both
+    { key: "accesskey", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "accesskey", value: prop' value })
+  pureAttr Accesskey value = unsafeAttribute $ This
+    { key: "accesskey", value: prop' value }
+  unpureAttr Accesskey eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "accesskey", value: prop' value }
 
 instance Attr Picture_ Accesskey String where
-  attr Accesskey bothValues  = unsafeAttribute $ Both { key: "accesskey", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "accesskey", value:  prop' value  })
-  pureAttr Accesskey value  = unsafeAttribute $ This { key: "accesskey", value:  prop' value  }
-  unpureAttr Accesskey eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "accesskey", value:  prop' value  }
+  attr Accesskey bothValues = unsafeAttribute $ Both
+    { key: "accesskey", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "accesskey", value: prop' value })
+  pureAttr Accesskey value = unsafeAttribute $ This
+    { key: "accesskey", value: prop' value }
+  unpureAttr Accesskey eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "accesskey", value: prop' value }
 
 instance Attr Pre_ Accesskey String where
-  attr Accesskey bothValues  = unsafeAttribute $ Both { key: "accesskey", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "accesskey", value:  prop' value  })
-  pureAttr Accesskey value  = unsafeAttribute $ This { key: "accesskey", value:  prop' value  }
-  unpureAttr Accesskey eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "accesskey", value:  prop' value  }
+  attr Accesskey bothValues = unsafeAttribute $ Both
+    { key: "accesskey", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "accesskey", value: prop' value })
+  pureAttr Accesskey value = unsafeAttribute $ This
+    { key: "accesskey", value: prop' value }
+  unpureAttr Accesskey eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "accesskey", value: prop' value }
 
 instance Attr Progress_ Accesskey String where
-  attr Accesskey bothValues  = unsafeAttribute $ Both { key: "accesskey", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "accesskey", value:  prop' value  })
-  pureAttr Accesskey value  = unsafeAttribute $ This { key: "accesskey", value:  prop' value  }
-  unpureAttr Accesskey eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "accesskey", value:  prop' value  }
+  attr Accesskey bothValues = unsafeAttribute $ Both
+    { key: "accesskey", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "accesskey", value: prop' value })
+  pureAttr Accesskey value = unsafeAttribute $ This
+    { key: "accesskey", value: prop' value }
+  unpureAttr Accesskey eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "accesskey", value: prop' value }
 
 instance Attr Q_ Accesskey String where
-  attr Accesskey bothValues  = unsafeAttribute $ Both { key: "accesskey", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "accesskey", value:  prop' value  })
-  pureAttr Accesskey value  = unsafeAttribute $ This { key: "accesskey", value:  prop' value  }
-  unpureAttr Accesskey eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "accesskey", value:  prop' value  }
+  attr Accesskey bothValues = unsafeAttribute $ Both
+    { key: "accesskey", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "accesskey", value: prop' value })
+  pureAttr Accesskey value = unsafeAttribute $ This
+    { key: "accesskey", value: prop' value }
+  unpureAttr Accesskey eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "accesskey", value: prop' value }
 
 instance Attr Rp_ Accesskey String where
-  attr Accesskey bothValues  = unsafeAttribute $ Both { key: "accesskey", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "accesskey", value:  prop' value  })
-  pureAttr Accesskey value  = unsafeAttribute $ This { key: "accesskey", value:  prop' value  }
-  unpureAttr Accesskey eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "accesskey", value:  prop' value  }
+  attr Accesskey bothValues = unsafeAttribute $ Both
+    { key: "accesskey", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "accesskey", value: prop' value })
+  pureAttr Accesskey value = unsafeAttribute $ This
+    { key: "accesskey", value: prop' value }
+  unpureAttr Accesskey eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "accesskey", value: prop' value }
 
 instance Attr Rt_ Accesskey String where
-  attr Accesskey bothValues  = unsafeAttribute $ Both { key: "accesskey", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "accesskey", value:  prop' value  })
-  pureAttr Accesskey value  = unsafeAttribute $ This { key: "accesskey", value:  prop' value  }
-  unpureAttr Accesskey eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "accesskey", value:  prop' value  }
+  attr Accesskey bothValues = unsafeAttribute $ Both
+    { key: "accesskey", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "accesskey", value: prop' value })
+  pureAttr Accesskey value = unsafeAttribute $ This
+    { key: "accesskey", value: prop' value }
+  unpureAttr Accesskey eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "accesskey", value: prop' value }
 
 instance Attr Ruby_ Accesskey String where
-  attr Accesskey bothValues  = unsafeAttribute $ Both { key: "accesskey", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "accesskey", value:  prop' value  })
-  pureAttr Accesskey value  = unsafeAttribute $ This { key: "accesskey", value:  prop' value  }
-  unpureAttr Accesskey eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "accesskey", value:  prop' value  }
+  attr Accesskey bothValues = unsafeAttribute $ Both
+    { key: "accesskey", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "accesskey", value: prop' value })
+  pureAttr Accesskey value = unsafeAttribute $ This
+    { key: "accesskey", value: prop' value }
+  unpureAttr Accesskey eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "accesskey", value: prop' value }
 
 instance Attr S_ Accesskey String where
-  attr Accesskey bothValues  = unsafeAttribute $ Both { key: "accesskey", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "accesskey", value:  prop' value  })
-  pureAttr Accesskey value  = unsafeAttribute $ This { key: "accesskey", value:  prop' value  }
-  unpureAttr Accesskey eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "accesskey", value:  prop' value  }
+  attr Accesskey bothValues = unsafeAttribute $ Both
+    { key: "accesskey", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "accesskey", value: prop' value })
+  pureAttr Accesskey value = unsafeAttribute $ This
+    { key: "accesskey", value: prop' value }
+  unpureAttr Accesskey eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "accesskey", value: prop' value }
 
 instance Attr Samp_ Accesskey String where
-  attr Accesskey bothValues  = unsafeAttribute $ Both { key: "accesskey", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "accesskey", value:  prop' value  })
-  pureAttr Accesskey value  = unsafeAttribute $ This { key: "accesskey", value:  prop' value  }
-  unpureAttr Accesskey eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "accesskey", value:  prop' value  }
+  attr Accesskey bothValues = unsafeAttribute $ Both
+    { key: "accesskey", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "accesskey", value: prop' value })
+  pureAttr Accesskey value = unsafeAttribute $ This
+    { key: "accesskey", value: prop' value }
+  unpureAttr Accesskey eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "accesskey", value: prop' value }
 
 instance Attr Script_ Accesskey String where
-  attr Accesskey bothValues  = unsafeAttribute $ Both { key: "accesskey", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "accesskey", value:  prop' value  })
-  pureAttr Accesskey value  = unsafeAttribute $ This { key: "accesskey", value:  prop' value  }
-  unpureAttr Accesskey eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "accesskey", value:  prop' value  }
+  attr Accesskey bothValues = unsafeAttribute $ Both
+    { key: "accesskey", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "accesskey", value: prop' value })
+  pureAttr Accesskey value = unsafeAttribute $ This
+    { key: "accesskey", value: prop' value }
+  unpureAttr Accesskey eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "accesskey", value: prop' value }
 
 instance Attr Section_ Accesskey String where
-  attr Accesskey bothValues  = unsafeAttribute $ Both { key: "accesskey", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "accesskey", value:  prop' value  })
-  pureAttr Accesskey value  = unsafeAttribute $ This { key: "accesskey", value:  prop' value  }
-  unpureAttr Accesskey eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "accesskey", value:  prop' value  }
+  attr Accesskey bothValues = unsafeAttribute $ Both
+    { key: "accesskey", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "accesskey", value: prop' value })
+  pureAttr Accesskey value = unsafeAttribute $ This
+    { key: "accesskey", value: prop' value }
+  unpureAttr Accesskey eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "accesskey", value: prop' value }
 
 instance Attr Select_ Accesskey String where
-  attr Accesskey bothValues  = unsafeAttribute $ Both { key: "accesskey", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "accesskey", value:  prop' value  })
-  pureAttr Accesskey value  = unsafeAttribute $ This { key: "accesskey", value:  prop' value  }
-  unpureAttr Accesskey eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "accesskey", value:  prop' value  }
+  attr Accesskey bothValues = unsafeAttribute $ Both
+    { key: "accesskey", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "accesskey", value: prop' value })
+  pureAttr Accesskey value = unsafeAttribute $ This
+    { key: "accesskey", value: prop' value }
+  unpureAttr Accesskey eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "accesskey", value: prop' value }
 
 instance Attr Small_ Accesskey String where
-  attr Accesskey bothValues  = unsafeAttribute $ Both { key: "accesskey", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "accesskey", value:  prop' value  })
-  pureAttr Accesskey value  = unsafeAttribute $ This { key: "accesskey", value:  prop' value  }
-  unpureAttr Accesskey eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "accesskey", value:  prop' value  }
+  attr Accesskey bothValues = unsafeAttribute $ Both
+    { key: "accesskey", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "accesskey", value: prop' value })
+  pureAttr Accesskey value = unsafeAttribute $ This
+    { key: "accesskey", value: prop' value }
+  unpureAttr Accesskey eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "accesskey", value: prop' value }
 
 instance Attr Source_ Accesskey String where
-  attr Accesskey bothValues  = unsafeAttribute $ Both { key: "accesskey", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "accesskey", value:  prop' value  })
-  pureAttr Accesskey value  = unsafeAttribute $ This { key: "accesskey", value:  prop' value  }
-  unpureAttr Accesskey eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "accesskey", value:  prop' value  }
+  attr Accesskey bothValues = unsafeAttribute $ Both
+    { key: "accesskey", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "accesskey", value: prop' value })
+  pureAttr Accesskey value = unsafeAttribute $ This
+    { key: "accesskey", value: prop' value }
+  unpureAttr Accesskey eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "accesskey", value: prop' value }
 
 instance Attr Span_ Accesskey String where
-  attr Accesskey bothValues  = unsafeAttribute $ Both { key: "accesskey", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "accesskey", value:  prop' value  })
-  pureAttr Accesskey value  = unsafeAttribute $ This { key: "accesskey", value:  prop' value  }
-  unpureAttr Accesskey eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "accesskey", value:  prop' value  }
+  attr Accesskey bothValues = unsafeAttribute $ Both
+    { key: "accesskey", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "accesskey", value: prop' value })
+  pureAttr Accesskey value = unsafeAttribute $ This
+    { key: "accesskey", value: prop' value }
+  unpureAttr Accesskey eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "accesskey", value: prop' value }
 
 instance Attr Strike_ Accesskey String where
-  attr Accesskey bothValues  = unsafeAttribute $ Both { key: "accesskey", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "accesskey", value:  prop' value  })
-  pureAttr Accesskey value  = unsafeAttribute $ This { key: "accesskey", value:  prop' value  }
-  unpureAttr Accesskey eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "accesskey", value:  prop' value  }
+  attr Accesskey bothValues = unsafeAttribute $ Both
+    { key: "accesskey", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "accesskey", value: prop' value })
+  pureAttr Accesskey value = unsafeAttribute $ This
+    { key: "accesskey", value: prop' value }
+  unpureAttr Accesskey eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "accesskey", value: prop' value }
 
 instance Attr Strong_ Accesskey String where
-  attr Accesskey bothValues  = unsafeAttribute $ Both { key: "accesskey", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "accesskey", value:  prop' value  })
-  pureAttr Accesskey value  = unsafeAttribute $ This { key: "accesskey", value:  prop' value  }
-  unpureAttr Accesskey eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "accesskey", value:  prop' value  }
+  attr Accesskey bothValues = unsafeAttribute $ Both
+    { key: "accesskey", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "accesskey", value: prop' value })
+  pureAttr Accesskey value = unsafeAttribute $ This
+    { key: "accesskey", value: prop' value }
+  unpureAttr Accesskey eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "accesskey", value: prop' value }
 
 instance Attr Style_ Accesskey String where
-  attr Accesskey bothValues  = unsafeAttribute $ Both { key: "accesskey", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "accesskey", value:  prop' value  })
-  pureAttr Accesskey value  = unsafeAttribute $ This { key: "accesskey", value:  prop' value  }
-  unpureAttr Accesskey eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "accesskey", value:  prop' value  }
+  attr Accesskey bothValues = unsafeAttribute $ Both
+    { key: "accesskey", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "accesskey", value: prop' value })
+  pureAttr Accesskey value = unsafeAttribute $ This
+    { key: "accesskey", value: prop' value }
+  unpureAttr Accesskey eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "accesskey", value: prop' value }
 
 instance Attr Sub_ Accesskey String where
-  attr Accesskey bothValues  = unsafeAttribute $ Both { key: "accesskey", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "accesskey", value:  prop' value  })
-  pureAttr Accesskey value  = unsafeAttribute $ This { key: "accesskey", value:  prop' value  }
-  unpureAttr Accesskey eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "accesskey", value:  prop' value  }
+  attr Accesskey bothValues = unsafeAttribute $ Both
+    { key: "accesskey", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "accesskey", value: prop' value })
+  pureAttr Accesskey value = unsafeAttribute $ This
+    { key: "accesskey", value: prop' value }
+  unpureAttr Accesskey eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "accesskey", value: prop' value }
 
 instance Attr Summary_ Accesskey String where
-  attr Accesskey bothValues  = unsafeAttribute $ Both { key: "accesskey", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "accesskey", value:  prop' value  })
-  pureAttr Accesskey value  = unsafeAttribute $ This { key: "accesskey", value:  prop' value  }
-  unpureAttr Accesskey eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "accesskey", value:  prop' value  }
+  attr Accesskey bothValues = unsafeAttribute $ Both
+    { key: "accesskey", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "accesskey", value: prop' value })
+  pureAttr Accesskey value = unsafeAttribute $ This
+    { key: "accesskey", value: prop' value }
+  unpureAttr Accesskey eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "accesskey", value: prop' value }
 
 instance Attr Sup_ Accesskey String where
-  attr Accesskey bothValues  = unsafeAttribute $ Both { key: "accesskey", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "accesskey", value:  prop' value  })
-  pureAttr Accesskey value  = unsafeAttribute $ This { key: "accesskey", value:  prop' value  }
-  unpureAttr Accesskey eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "accesskey", value:  prop' value  }
+  attr Accesskey bothValues = unsafeAttribute $ Both
+    { key: "accesskey", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "accesskey", value: prop' value })
+  pureAttr Accesskey value = unsafeAttribute $ This
+    { key: "accesskey", value: prop' value }
+  unpureAttr Accesskey eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "accesskey", value: prop' value }
 
 instance Attr Svg_ Accesskey String where
-  attr Accesskey bothValues  = unsafeAttribute $ Both { key: "accesskey", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "accesskey", value:  prop' value  })
-  pureAttr Accesskey value  = unsafeAttribute $ This { key: "accesskey", value:  prop' value  }
-  unpureAttr Accesskey eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "accesskey", value:  prop' value  }
+  attr Accesskey bothValues = unsafeAttribute $ Both
+    { key: "accesskey", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "accesskey", value: prop' value })
+  pureAttr Accesskey value = unsafeAttribute $ This
+    { key: "accesskey", value: prop' value }
+  unpureAttr Accesskey eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "accesskey", value: prop' value }
 
 instance Attr Table_ Accesskey String where
-  attr Accesskey bothValues  = unsafeAttribute $ Both { key: "accesskey", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "accesskey", value:  prop' value  })
-  pureAttr Accesskey value  = unsafeAttribute $ This { key: "accesskey", value:  prop' value  }
-  unpureAttr Accesskey eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "accesskey", value:  prop' value  }
+  attr Accesskey bothValues = unsafeAttribute $ Both
+    { key: "accesskey", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "accesskey", value: prop' value })
+  pureAttr Accesskey value = unsafeAttribute $ This
+    { key: "accesskey", value: prop' value }
+  unpureAttr Accesskey eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "accesskey", value: prop' value }
 
 instance Attr Tbody_ Accesskey String where
-  attr Accesskey bothValues  = unsafeAttribute $ Both { key: "accesskey", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "accesskey", value:  prop' value  })
-  pureAttr Accesskey value  = unsafeAttribute $ This { key: "accesskey", value:  prop' value  }
-  unpureAttr Accesskey eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "accesskey", value:  prop' value  }
+  attr Accesskey bothValues = unsafeAttribute $ Both
+    { key: "accesskey", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "accesskey", value: prop' value })
+  pureAttr Accesskey value = unsafeAttribute $ This
+    { key: "accesskey", value: prop' value }
+  unpureAttr Accesskey eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "accesskey", value: prop' value }
 
 instance Attr Td_ Accesskey String where
-  attr Accesskey bothValues  = unsafeAttribute $ Both { key: "accesskey", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "accesskey", value:  prop' value  })
-  pureAttr Accesskey value  = unsafeAttribute $ This { key: "accesskey", value:  prop' value  }
-  unpureAttr Accesskey eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "accesskey", value:  prop' value  }
+  attr Accesskey bothValues = unsafeAttribute $ Both
+    { key: "accesskey", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "accesskey", value: prop' value })
+  pureAttr Accesskey value = unsafeAttribute $ This
+    { key: "accesskey", value: prop' value }
+  unpureAttr Accesskey eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "accesskey", value: prop' value }
 
 instance Attr Template_ Accesskey String where
-  attr Accesskey bothValues  = unsafeAttribute $ Both { key: "accesskey", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "accesskey", value:  prop' value  })
-  pureAttr Accesskey value  = unsafeAttribute $ This { key: "accesskey", value:  prop' value  }
-  unpureAttr Accesskey eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "accesskey", value:  prop' value  }
+  attr Accesskey bothValues = unsafeAttribute $ Both
+    { key: "accesskey", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "accesskey", value: prop' value })
+  pureAttr Accesskey value = unsafeAttribute $ This
+    { key: "accesskey", value: prop' value }
+  unpureAttr Accesskey eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "accesskey", value: prop' value }
 
 instance Attr Textarea_ Accesskey String where
-  attr Accesskey bothValues  = unsafeAttribute $ Both { key: "accesskey", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "accesskey", value:  prop' value  })
-  pureAttr Accesskey value  = unsafeAttribute $ This { key: "accesskey", value:  prop' value  }
-  unpureAttr Accesskey eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "accesskey", value:  prop' value  }
+  attr Accesskey bothValues = unsafeAttribute $ Both
+    { key: "accesskey", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "accesskey", value: prop' value })
+  pureAttr Accesskey value = unsafeAttribute $ This
+    { key: "accesskey", value: prop' value }
+  unpureAttr Accesskey eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "accesskey", value: prop' value }
 
 instance Attr Tfoot_ Accesskey String where
-  attr Accesskey bothValues  = unsafeAttribute $ Both { key: "accesskey", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "accesskey", value:  prop' value  })
-  pureAttr Accesskey value  = unsafeAttribute $ This { key: "accesskey", value:  prop' value  }
-  unpureAttr Accesskey eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "accesskey", value:  prop' value  }
+  attr Accesskey bothValues = unsafeAttribute $ Both
+    { key: "accesskey", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "accesskey", value: prop' value })
+  pureAttr Accesskey value = unsafeAttribute $ This
+    { key: "accesskey", value: prop' value }
+  unpureAttr Accesskey eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "accesskey", value: prop' value }
 
 instance Attr Th_ Accesskey String where
-  attr Accesskey bothValues  = unsafeAttribute $ Both { key: "accesskey", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "accesskey", value:  prop' value  })
-  pureAttr Accesskey value  = unsafeAttribute $ This { key: "accesskey", value:  prop' value  }
-  unpureAttr Accesskey eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "accesskey", value:  prop' value  }
+  attr Accesskey bothValues = unsafeAttribute $ Both
+    { key: "accesskey", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "accesskey", value: prop' value })
+  pureAttr Accesskey value = unsafeAttribute $ This
+    { key: "accesskey", value: prop' value }
+  unpureAttr Accesskey eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "accesskey", value: prop' value }
 
 instance Attr Thead_ Accesskey String where
-  attr Accesskey bothValues  = unsafeAttribute $ Both { key: "accesskey", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "accesskey", value:  prop' value  })
-  pureAttr Accesskey value  = unsafeAttribute $ This { key: "accesskey", value:  prop' value  }
-  unpureAttr Accesskey eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "accesskey", value:  prop' value  }
+  attr Accesskey bothValues = unsafeAttribute $ Both
+    { key: "accesskey", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "accesskey", value: prop' value })
+  pureAttr Accesskey value = unsafeAttribute $ This
+    { key: "accesskey", value: prop' value }
+  unpureAttr Accesskey eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "accesskey", value: prop' value }
 
 instance Attr Time_ Accesskey String where
-  attr Accesskey bothValues  = unsafeAttribute $ Both { key: "accesskey", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "accesskey", value:  prop' value  })
-  pureAttr Accesskey value  = unsafeAttribute $ This { key: "accesskey", value:  prop' value  }
-  unpureAttr Accesskey eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "accesskey", value:  prop' value  }
+  attr Accesskey bothValues = unsafeAttribute $ Both
+    { key: "accesskey", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "accesskey", value: prop' value })
+  pureAttr Accesskey value = unsafeAttribute $ This
+    { key: "accesskey", value: prop' value }
+  unpureAttr Accesskey eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "accesskey", value: prop' value }
 
 instance Attr Title_ Accesskey String where
-  attr Accesskey bothValues  = unsafeAttribute $ Both { key: "accesskey", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "accesskey", value:  prop' value  })
-  pureAttr Accesskey value  = unsafeAttribute $ This { key: "accesskey", value:  prop' value  }
-  unpureAttr Accesskey eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "accesskey", value:  prop' value  }
+  attr Accesskey bothValues = unsafeAttribute $ Both
+    { key: "accesskey", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "accesskey", value: prop' value })
+  pureAttr Accesskey value = unsafeAttribute $ This
+    { key: "accesskey", value: prop' value }
+  unpureAttr Accesskey eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "accesskey", value: prop' value }
 
 instance Attr Tr_ Accesskey String where
-  attr Accesskey bothValues  = unsafeAttribute $ Both { key: "accesskey", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "accesskey", value:  prop' value  })
-  pureAttr Accesskey value  = unsafeAttribute $ This { key: "accesskey", value:  prop' value  }
-  unpureAttr Accesskey eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "accesskey", value:  prop' value  }
+  attr Accesskey bothValues = unsafeAttribute $ Both
+    { key: "accesskey", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "accesskey", value: prop' value })
+  pureAttr Accesskey value = unsafeAttribute $ This
+    { key: "accesskey", value: prop' value }
+  unpureAttr Accesskey eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "accesskey", value: prop' value }
 
 instance Attr Track_ Accesskey String where
-  attr Accesskey bothValues  = unsafeAttribute $ Both { key: "accesskey", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "accesskey", value:  prop' value  })
-  pureAttr Accesskey value  = unsafeAttribute $ This { key: "accesskey", value:  prop' value  }
-  unpureAttr Accesskey eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "accesskey", value:  prop' value  }
+  attr Accesskey bothValues = unsafeAttribute $ Both
+    { key: "accesskey", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "accesskey", value: prop' value })
+  pureAttr Accesskey value = unsafeAttribute $ This
+    { key: "accesskey", value: prop' value }
+  unpureAttr Accesskey eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "accesskey", value: prop' value }
 
 instance Attr Tt_ Accesskey String where
-  attr Accesskey bothValues  = unsafeAttribute $ Both { key: "accesskey", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "accesskey", value:  prop' value  })
-  pureAttr Accesskey value  = unsafeAttribute $ This { key: "accesskey", value:  prop' value  }
-  unpureAttr Accesskey eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "accesskey", value:  prop' value  }
+  attr Accesskey bothValues = unsafeAttribute $ Both
+    { key: "accesskey", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "accesskey", value: prop' value })
+  pureAttr Accesskey value = unsafeAttribute $ This
+    { key: "accesskey", value: prop' value }
+  unpureAttr Accesskey eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "accesskey", value: prop' value }
 
 instance Attr U_ Accesskey String where
-  attr Accesskey bothValues  = unsafeAttribute $ Both { key: "accesskey", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "accesskey", value:  prop' value  })
-  pureAttr Accesskey value  = unsafeAttribute $ This { key: "accesskey", value:  prop' value  }
-  unpureAttr Accesskey eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "accesskey", value:  prop' value  }
+  attr Accesskey bothValues = unsafeAttribute $ Both
+    { key: "accesskey", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "accesskey", value: prop' value })
+  pureAttr Accesskey value = unsafeAttribute $ This
+    { key: "accesskey", value: prop' value }
+  unpureAttr Accesskey eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "accesskey", value: prop' value }
 
 instance Attr Ul_ Accesskey String where
-  attr Accesskey bothValues  = unsafeAttribute $ Both { key: "accesskey", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "accesskey", value:  prop' value  })
-  pureAttr Accesskey value  = unsafeAttribute $ This { key: "accesskey", value:  prop' value  }
-  unpureAttr Accesskey eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "accesskey", value:  prop' value  }
+  attr Accesskey bothValues = unsafeAttribute $ Both
+    { key: "accesskey", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "accesskey", value: prop' value })
+  pureAttr Accesskey value = unsafeAttribute $ This
+    { key: "accesskey", value: prop' value }
+  unpureAttr Accesskey eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "accesskey", value: prop' value }
 
 instance Attr Var_ Accesskey String where
-  attr Accesskey bothValues  = unsafeAttribute $ Both { key: "accesskey", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "accesskey", value:  prop' value  })
-  pureAttr Accesskey value  = unsafeAttribute $ This { key: "accesskey", value:  prop' value  }
-  unpureAttr Accesskey eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "accesskey", value:  prop' value  }
+  attr Accesskey bothValues = unsafeAttribute $ Both
+    { key: "accesskey", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "accesskey", value: prop' value })
+  pureAttr Accesskey value = unsafeAttribute $ This
+    { key: "accesskey", value: prop' value }
+  unpureAttr Accesskey eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "accesskey", value: prop' value }
 
 instance Attr Video_ Accesskey String where
-  attr Accesskey bothValues  = unsafeAttribute $ Both { key: "accesskey", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "accesskey", value:  prop' value  })
-  pureAttr Accesskey value  = unsafeAttribute $ This { key: "accesskey", value:  prop' value  }
-  unpureAttr Accesskey eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "accesskey", value:  prop' value  }
+  attr Accesskey bothValues = unsafeAttribute $ Both
+    { key: "accesskey", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "accesskey", value: prop' value })
+  pureAttr Accesskey value = unsafeAttribute $ This
+    { key: "accesskey", value: prop' value }
+  unpureAttr Accesskey eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "accesskey", value: prop' value }
 
 instance Attr Wbr_ Accesskey String where
-  attr Accesskey bothValues  = unsafeAttribute $ Both { key: "accesskey", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "accesskey", value:  prop' value  })
-  pureAttr Accesskey value  = unsafeAttribute $ This { key: "accesskey", value:  prop' value  }
-  unpureAttr Accesskey eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "accesskey", value:  prop' value  }
+  attr Accesskey bothValues = unsafeAttribute $ Both
+    { key: "accesskey", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "accesskey", value: prop' value })
+  pureAttr Accesskey value = unsafeAttribute $ This
+    { key: "accesskey", value: prop' value }
+  unpureAttr Accesskey eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "accesskey", value: prop' value }
 
 instance Attr everything Accesskey Unit where
-  attr Accesskey bothValues  = unsafeAttribute $ Both { key: "accesskey", value:  unset'  } (snd bothValues <#> \_ -> { key: "accesskey", value:  unset'  })
-  pureAttr Accesskey _  = unsafeAttribute $ This { key: "accesskey", value:  unset'  }
-  unpureAttr Accesskey eventValue  = unsafeAttribute $ That $ eventValue <#> \_ -> { key: "accesskey", value:  unset'  }
+  attr Accesskey bothValues = unsafeAttribute $ Both
+    { key: "accesskey", value: unset' }
+    (snd bothValues <#> \_ -> { key: "accesskey", value: unset' })
+  pureAttr Accesskey _ = unsafeAttribute $ This
+    { key: "accesskey", value: unset' }
+  unpureAttr Accesskey eventValue = unsafeAttribute $ That $ eventValue <#>
+    \_ -> { key: "accesskey", value: unset' }

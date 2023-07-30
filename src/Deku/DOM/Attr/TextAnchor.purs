@@ -30,111 +30,199 @@ import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 data TextAnchor = TextAnchor
 
 instance Attr FeBlend_ TextAnchor String where
-  attr TextAnchor bothValues  = unsafeAttribute $ Both { key: "text-anchor", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "text-anchor", value:  prop' value  })
-  pureAttr TextAnchor value  = unsafeAttribute $ This { key: "text-anchor", value:  prop' value  }
-  unpureAttr TextAnchor eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "text-anchor", value:  prop' value  }
+  attr TextAnchor bothValues = unsafeAttribute $ Both
+    { key: "text-anchor", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "text-anchor", value: prop' value })
+  pureAttr TextAnchor value = unsafeAttribute $ This
+    { key: "text-anchor", value: prop' value }
+  unpureAttr TextAnchor eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "text-anchor", value: prop' value }
 
 instance Attr FeColorMatrix_ TextAnchor String where
-  attr TextAnchor bothValues  = unsafeAttribute $ Both { key: "text-anchor", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "text-anchor", value:  prop' value  })
-  pureAttr TextAnchor value  = unsafeAttribute $ This { key: "text-anchor", value:  prop' value  }
-  unpureAttr TextAnchor eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "text-anchor", value:  prop' value  }
+  attr TextAnchor bothValues = unsafeAttribute $ Both
+    { key: "text-anchor", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "text-anchor", value: prop' value })
+  pureAttr TextAnchor value = unsafeAttribute $ This
+    { key: "text-anchor", value: prop' value }
+  unpureAttr TextAnchor eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "text-anchor", value: prop' value }
 
 instance Attr FeComponentTransfer_ TextAnchor String where
-  attr TextAnchor bothValues  = unsafeAttribute $ Both { key: "text-anchor", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "text-anchor", value:  prop' value  })
-  pureAttr TextAnchor value  = unsafeAttribute $ This { key: "text-anchor", value:  prop' value  }
-  unpureAttr TextAnchor eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "text-anchor", value:  prop' value  }
+  attr TextAnchor bothValues = unsafeAttribute $ Both
+    { key: "text-anchor", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "text-anchor", value: prop' value })
+  pureAttr TextAnchor value = unsafeAttribute $ This
+    { key: "text-anchor", value: prop' value }
+  unpureAttr TextAnchor eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "text-anchor", value: prop' value }
 
 instance Attr FeComposite_ TextAnchor String where
-  attr TextAnchor bothValues  = unsafeAttribute $ Both { key: "text-anchor", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "text-anchor", value:  prop' value  })
-  pureAttr TextAnchor value  = unsafeAttribute $ This { key: "text-anchor", value:  prop' value  }
-  unpureAttr TextAnchor eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "text-anchor", value:  prop' value  }
+  attr TextAnchor bothValues = unsafeAttribute $ Both
+    { key: "text-anchor", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "text-anchor", value: prop' value })
+  pureAttr TextAnchor value = unsafeAttribute $ This
+    { key: "text-anchor", value: prop' value }
+  unpureAttr TextAnchor eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "text-anchor", value: prop' value }
 
 instance Attr FeConvolveMatrix_ TextAnchor String where
-  attr TextAnchor bothValues  = unsafeAttribute $ Both { key: "text-anchor", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "text-anchor", value:  prop' value  })
-  pureAttr TextAnchor value  = unsafeAttribute $ This { key: "text-anchor", value:  prop' value  }
-  unpureAttr TextAnchor eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "text-anchor", value:  prop' value  }
+  attr TextAnchor bothValues = unsafeAttribute $ Both
+    { key: "text-anchor", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "text-anchor", value: prop' value })
+  pureAttr TextAnchor value = unsafeAttribute $ This
+    { key: "text-anchor", value: prop' value }
+  unpureAttr TextAnchor eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "text-anchor", value: prop' value }
 
 instance Attr FeDiffuseLighting_ TextAnchor String where
-  attr TextAnchor bothValues  = unsafeAttribute $ Both { key: "text-anchor", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "text-anchor", value:  prop' value  })
-  pureAttr TextAnchor value  = unsafeAttribute $ This { key: "text-anchor", value:  prop' value  }
-  unpureAttr TextAnchor eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "text-anchor", value:  prop' value  }
+  attr TextAnchor bothValues = unsafeAttribute $ Both
+    { key: "text-anchor", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "text-anchor", value: prop' value })
+  pureAttr TextAnchor value = unsafeAttribute $ This
+    { key: "text-anchor", value: prop' value }
+  unpureAttr TextAnchor eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "text-anchor", value: prop' value }
 
 instance Attr FeDisplacementMap_ TextAnchor String where
-  attr TextAnchor bothValues  = unsafeAttribute $ Both { key: "text-anchor", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "text-anchor", value:  prop' value  })
-  pureAttr TextAnchor value  = unsafeAttribute $ This { key: "text-anchor", value:  prop' value  }
-  unpureAttr TextAnchor eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "text-anchor", value:  prop' value  }
+  attr TextAnchor bothValues = unsafeAttribute $ Both
+    { key: "text-anchor", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "text-anchor", value: prop' value })
+  pureAttr TextAnchor value = unsafeAttribute $ This
+    { key: "text-anchor", value: prop' value }
+  unpureAttr TextAnchor eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "text-anchor", value: prop' value }
 
 instance Attr FeFlood_ TextAnchor String where
-  attr TextAnchor bothValues  = unsafeAttribute $ Both { key: "text-anchor", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "text-anchor", value:  prop' value  })
-  pureAttr TextAnchor value  = unsafeAttribute $ This { key: "text-anchor", value:  prop' value  }
-  unpureAttr TextAnchor eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "text-anchor", value:  prop' value  }
+  attr TextAnchor bothValues = unsafeAttribute $ Both
+    { key: "text-anchor", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "text-anchor", value: prop' value })
+  pureAttr TextAnchor value = unsafeAttribute $ This
+    { key: "text-anchor", value: prop' value }
+  unpureAttr TextAnchor eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "text-anchor", value: prop' value }
 
 instance Attr FeGaussianBlur_ TextAnchor String where
-  attr TextAnchor bothValues  = unsafeAttribute $ Both { key: "text-anchor", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "text-anchor", value:  prop' value  })
-  pureAttr TextAnchor value  = unsafeAttribute $ This { key: "text-anchor", value:  prop' value  }
-  unpureAttr TextAnchor eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "text-anchor", value:  prop' value  }
+  attr TextAnchor bothValues = unsafeAttribute $ Both
+    { key: "text-anchor", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "text-anchor", value: prop' value })
+  pureAttr TextAnchor value = unsafeAttribute $ This
+    { key: "text-anchor", value: prop' value }
+  unpureAttr TextAnchor eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "text-anchor", value: prop' value }
 
 instance Attr FeImage_ TextAnchor String where
-  attr TextAnchor bothValues  = unsafeAttribute $ Both { key: "text-anchor", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "text-anchor", value:  prop' value  })
-  pureAttr TextAnchor value  = unsafeAttribute $ This { key: "text-anchor", value:  prop' value  }
-  unpureAttr TextAnchor eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "text-anchor", value:  prop' value  }
+  attr TextAnchor bothValues = unsafeAttribute $ Both
+    { key: "text-anchor", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "text-anchor", value: prop' value })
+  pureAttr TextAnchor value = unsafeAttribute $ This
+    { key: "text-anchor", value: prop' value }
+  unpureAttr TextAnchor eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "text-anchor", value: prop' value }
 
 instance Attr FeMerge_ TextAnchor String where
-  attr TextAnchor bothValues  = unsafeAttribute $ Both { key: "text-anchor", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "text-anchor", value:  prop' value  })
-  pureAttr TextAnchor value  = unsafeAttribute $ This { key: "text-anchor", value:  prop' value  }
-  unpureAttr TextAnchor eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "text-anchor", value:  prop' value  }
+  attr TextAnchor bothValues = unsafeAttribute $ Both
+    { key: "text-anchor", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "text-anchor", value: prop' value })
+  pureAttr TextAnchor value = unsafeAttribute $ This
+    { key: "text-anchor", value: prop' value }
+  unpureAttr TextAnchor eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "text-anchor", value: prop' value }
 
 instance Attr FeMorphology_ TextAnchor String where
-  attr TextAnchor bothValues  = unsafeAttribute $ Both { key: "text-anchor", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "text-anchor", value:  prop' value  })
-  pureAttr TextAnchor value  = unsafeAttribute $ This { key: "text-anchor", value:  prop' value  }
-  unpureAttr TextAnchor eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "text-anchor", value:  prop' value  }
+  attr TextAnchor bothValues = unsafeAttribute $ Both
+    { key: "text-anchor", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "text-anchor", value: prop' value })
+  pureAttr TextAnchor value = unsafeAttribute $ This
+    { key: "text-anchor", value: prop' value }
+  unpureAttr TextAnchor eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "text-anchor", value: prop' value }
 
 instance Attr FeOffset_ TextAnchor String where
-  attr TextAnchor bothValues  = unsafeAttribute $ Both { key: "text-anchor", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "text-anchor", value:  prop' value  })
-  pureAttr TextAnchor value  = unsafeAttribute $ This { key: "text-anchor", value:  prop' value  }
-  unpureAttr TextAnchor eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "text-anchor", value:  prop' value  }
+  attr TextAnchor bothValues = unsafeAttribute $ Both
+    { key: "text-anchor", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "text-anchor", value: prop' value })
+  pureAttr TextAnchor value = unsafeAttribute $ This
+    { key: "text-anchor", value: prop' value }
+  unpureAttr TextAnchor eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "text-anchor", value: prop' value }
 
 instance Attr FeSpecularLighting_ TextAnchor String where
-  attr TextAnchor bothValues  = unsafeAttribute $ Both { key: "text-anchor", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "text-anchor", value:  prop' value  })
-  pureAttr TextAnchor value  = unsafeAttribute $ This { key: "text-anchor", value:  prop' value  }
-  unpureAttr TextAnchor eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "text-anchor", value:  prop' value  }
+  attr TextAnchor bothValues = unsafeAttribute $ Both
+    { key: "text-anchor", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "text-anchor", value: prop' value })
+  pureAttr TextAnchor value = unsafeAttribute $ This
+    { key: "text-anchor", value: prop' value }
+  unpureAttr TextAnchor eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "text-anchor", value: prop' value }
 
 instance Attr FeTile_ TextAnchor String where
-  attr TextAnchor bothValues  = unsafeAttribute $ Both { key: "text-anchor", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "text-anchor", value:  prop' value  })
-  pureAttr TextAnchor value  = unsafeAttribute $ This { key: "text-anchor", value:  prop' value  }
-  unpureAttr TextAnchor eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "text-anchor", value:  prop' value  }
+  attr TextAnchor bothValues = unsafeAttribute $ Both
+    { key: "text-anchor", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "text-anchor", value: prop' value })
+  pureAttr TextAnchor value = unsafeAttribute $ This
+    { key: "text-anchor", value: prop' value }
+  unpureAttr TextAnchor eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "text-anchor", value: prop' value }
 
 instance Attr FeTurbulence_ TextAnchor String where
-  attr TextAnchor bothValues  = unsafeAttribute $ Both { key: "text-anchor", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "text-anchor", value:  prop' value  })
-  pureAttr TextAnchor value  = unsafeAttribute $ This { key: "text-anchor", value:  prop' value  }
-  unpureAttr TextAnchor eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "text-anchor", value:  prop' value  }
+  attr TextAnchor bothValues = unsafeAttribute $ Both
+    { key: "text-anchor", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "text-anchor", value: prop' value })
+  pureAttr TextAnchor value = unsafeAttribute $ This
+    { key: "text-anchor", value: prop' value }
+  unpureAttr TextAnchor eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "text-anchor", value: prop' value }
 
 instance Attr Filter_ TextAnchor String where
-  attr TextAnchor bothValues  = unsafeAttribute $ Both { key: "text-anchor", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "text-anchor", value:  prop' value  })
-  pureAttr TextAnchor value  = unsafeAttribute $ This { key: "text-anchor", value:  prop' value  }
-  unpureAttr TextAnchor eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "text-anchor", value:  prop' value  }
+  attr TextAnchor bothValues = unsafeAttribute $ Both
+    { key: "text-anchor", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "text-anchor", value: prop' value })
+  pureAttr TextAnchor value = unsafeAttribute $ This
+    { key: "text-anchor", value: prop' value }
+  unpureAttr TextAnchor eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "text-anchor", value: prop' value }
 
 instance Attr Image_ TextAnchor String where
-  attr TextAnchor bothValues  = unsafeAttribute $ Both { key: "text-anchor", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "text-anchor", value:  prop' value  })
-  pureAttr TextAnchor value  = unsafeAttribute $ This { key: "text-anchor", value:  prop' value  }
-  unpureAttr TextAnchor eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "text-anchor", value:  prop' value  }
+  attr TextAnchor bothValues = unsafeAttribute $ Both
+    { key: "text-anchor", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "text-anchor", value: prop' value })
+  pureAttr TextAnchor value = unsafeAttribute $ This
+    { key: "text-anchor", value: prop' value }
+  unpureAttr TextAnchor eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "text-anchor", value: prop' value }
 
 instance Attr Switch_ TextAnchor String where
-  attr TextAnchor bothValues  = unsafeAttribute $ Both { key: "text-anchor", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "text-anchor", value:  prop' value  })
-  pureAttr TextAnchor value  = unsafeAttribute $ This { key: "text-anchor", value:  prop' value  }
-  unpureAttr TextAnchor eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "text-anchor", value:  prop' value  }
+  attr TextAnchor bothValues = unsafeAttribute $ Both
+    { key: "text-anchor", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "text-anchor", value: prop' value })
+  pureAttr TextAnchor value = unsafeAttribute $ This
+    { key: "text-anchor", value: prop' value }
+  unpureAttr TextAnchor eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "text-anchor", value: prop' value }
 
 instance Attr Text_ TextAnchor String where
-  attr TextAnchor bothValues  = unsafeAttribute $ Both { key: "text-anchor", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "text-anchor", value:  prop' value  })
-  pureAttr TextAnchor value  = unsafeAttribute $ This { key: "text-anchor", value:  prop' value  }
-  unpureAttr TextAnchor eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "text-anchor", value:  prop' value  }
+  attr TextAnchor bothValues = unsafeAttribute $ Both
+    { key: "text-anchor", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "text-anchor", value: prop' value })
+  pureAttr TextAnchor value = unsafeAttribute $ This
+    { key: "text-anchor", value: prop' value }
+  unpureAttr TextAnchor eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "text-anchor", value: prop' value }
 
 instance Attr Tspan_ TextAnchor String where
-  attr TextAnchor bothValues  = unsafeAttribute $ Both { key: "text-anchor", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "text-anchor", value:  prop' value  })
-  pureAttr TextAnchor value  = unsafeAttribute $ This { key: "text-anchor", value:  prop' value  }
-  unpureAttr TextAnchor eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "text-anchor", value:  prop' value  }
+  attr TextAnchor bothValues = unsafeAttribute $ Both
+    { key: "text-anchor", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "text-anchor", value: prop' value })
+  pureAttr TextAnchor value = unsafeAttribute $ This
+    { key: "text-anchor", value: prop' value }
+  unpureAttr TextAnchor eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "text-anchor", value: prop' value }
 
 instance Attr everything TextAnchor Unit where
-  attr TextAnchor bothValues  = unsafeAttribute $ Both { key: "text-anchor", value:  unset'  } (snd bothValues <#> \_ -> { key: "text-anchor", value:  unset'  })
-  pureAttr TextAnchor _  = unsafeAttribute $ This { key: "text-anchor", value:  unset'  }
-  unpureAttr TextAnchor eventValue  = unsafeAttribute $ That $ eventValue <#> \_ -> { key: "text-anchor", value:  unset'  }
+  attr TextAnchor bothValues = unsafeAttribute $ Both
+    { key: "text-anchor", value: unset' }
+    (snd bothValues <#> \_ -> { key: "text-anchor", value: unset' })
+  pureAttr TextAnchor _ = unsafeAttribute $ This
+    { key: "text-anchor", value: unset' }
+  unpureAttr TextAnchor eventValue = unsafeAttribute $ That $ eventValue <#>
+    \_ -> { key: "text-anchor", value: unset' }

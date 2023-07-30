@@ -10,19 +10,36 @@ import FRP.Event (Event)
 data OnTransitionend = OnTransitionend
 
 instance Attr anything OnTransitionend Cb where
-  attr OnTransitionend bothValues  = unsafeAttribute $ Both { key: "transitionend", value:  cb' (fst bothValues)  } (snd bothValues <#> \value -> { key: "transitionend", value:  cb' value  })
-  pureAttr OnTransitionend value  = unsafeAttribute $ This { key: "transitionend", value:  cb' value  }
-  unpureAttr OnTransitionend eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "transitionend", value:  cb' value  }
+  attr OnTransitionend bothValues = unsafeAttribute $ Both
+    { key: "transitionend", value: cb' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "transitionend", value: cb' value })
+  pureAttr OnTransitionend value = unsafeAttribute $ This
+    { key: "transitionend", value: cb' value }
+  unpureAttr OnTransitionend eventValue = unsafeAttribute $ That $ eventValue
+    <#> \value -> { key: "transitionend", value: cb' value }
 
 instance Attr anything OnTransitionend (Effect Unit) where
-  attr OnTransitionend bothValues  = unsafeAttribute $ Both { key: "transitionend", value:  cb' (Cb (const ((fst bothValues) $> true)))  } (snd bothValues <#> \value -> { key: "transitionend", value:  cb' (Cb (const (value $> true)))  })
-  pureAttr OnTransitionend value  = unsafeAttribute $ This { key: "transitionend", value:  cb' (Cb (const (value $> true)))  }
-  unpureAttr OnTransitionend eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "transitionend", value:  cb' (Cb (const (value $> true)))  }
+  attr OnTransitionend bothValues = unsafeAttribute $ Both
+    { key: "transitionend", value: cb' (Cb (const ((fst bothValues) $> true))) }
+    ( snd bothValues <#> \value ->
+        { key: "transitionend", value: cb' (Cb (const (value $> true))) }
+    )
+  pureAttr OnTransitionend value = unsafeAttribute $ This
+    { key: "transitionend", value: cb' (Cb (const (value $> true))) }
+  unpureAttr OnTransitionend eventValue = unsafeAttribute $ That $ eventValue
+    <#> \value ->
+      { key: "transitionend", value: cb' (Cb (const (value $> true))) }
 
 instance Attr anything OnTransitionend (Effect Boolean) where
-  attr OnTransitionend bothValues  = unsafeAttribute $ Both { key: "transitionend", value:  cb' (Cb (const (fst bothValues)))  } (snd bothValues <#> \value -> { key: "transitionend", value:  cb' (Cb (const value))  })
-  pureAttr OnTransitionend value  = unsafeAttribute $ This { key: "transitionend", value:  cb' (Cb (const value))  }
-  unpureAttr OnTransitionend eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "transitionend", value:  cb' (Cb (const value))  }
+  attr OnTransitionend bothValues = unsafeAttribute $ Both
+    { key: "transitionend", value: cb' (Cb (const (fst bothValues))) }
+    ( snd bothValues <#> \value ->
+        { key: "transitionend", value: cb' (Cb (const value)) }
+    )
+  pureAttr OnTransitionend value = unsafeAttribute $ This
+    { key: "transitionend", value: cb' (Cb (const value)) }
+  unpureAttr OnTransitionend eventValue = unsafeAttribute $ That $ eventValue
+    <#> \value -> { key: "transitionend", value: cb' (Cb (const value)) }
 
 type OnTransitionendEffect =
   forall element
@@ -30,6 +47,10 @@ type OnTransitionendEffect =
   => Event (Attribute element)
 
 instance Attr everything OnTransitionend Unit where
-  attr OnTransitionend bothValues  = unsafeAttribute $ Both { key: "transitionend", value:  unset'  } (snd bothValues <#> \_ -> { key: "transitionend", value:  unset'  })
-  pureAttr OnTransitionend _  = unsafeAttribute $ This { key: "transitionend", value:  unset'  }
-  unpureAttr OnTransitionend eventValue  = unsafeAttribute $ That $ eventValue <#> \_ -> { key: "transitionend", value:  unset'  }
+  attr OnTransitionend bothValues = unsafeAttribute $ Both
+    { key: "transitionend", value: unset' }
+    (snd bothValues <#> \_ -> { key: "transitionend", value: unset' })
+  pureAttr OnTransitionend _ = unsafeAttribute $ This
+    { key: "transitionend", value: unset' }
+  unpureAttr OnTransitionend eventValue = unsafeAttribute $ That $ eventValue
+    <#> \_ -> { key: "transitionend", value: unset' }

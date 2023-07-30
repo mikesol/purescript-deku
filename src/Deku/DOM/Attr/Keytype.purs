@@ -131,616 +131,1107 @@ import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 data Keytype = Keytype
 
 instance Attr A_ Keytype String where
-  attr Keytype bothValues  = unsafeAttribute $ Both { key: "keytype", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "keytype", value:  prop' value  })
-  pureAttr Keytype value  = unsafeAttribute $ This { key: "keytype", value:  prop' value  }
-  unpureAttr Keytype eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "keytype", value:  prop' value  }
+  attr Keytype bothValues = unsafeAttribute $ Both
+    { key: "keytype", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "keytype", value: prop' value })
+  pureAttr Keytype value = unsafeAttribute $ This
+    { key: "keytype", value: prop' value }
+  unpureAttr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "keytype", value: prop' value }
 
 instance Attr Abbr_ Keytype String where
-  attr Keytype bothValues  = unsafeAttribute $ Both { key: "keytype", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "keytype", value:  prop' value  })
-  pureAttr Keytype value  = unsafeAttribute $ This { key: "keytype", value:  prop' value  }
-  unpureAttr Keytype eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "keytype", value:  prop' value  }
+  attr Keytype bothValues = unsafeAttribute $ Both
+    { key: "keytype", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "keytype", value: prop' value })
+  pureAttr Keytype value = unsafeAttribute $ This
+    { key: "keytype", value: prop' value }
+  unpureAttr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "keytype", value: prop' value }
 
 instance Attr Acronym_ Keytype String where
-  attr Keytype bothValues  = unsafeAttribute $ Both { key: "keytype", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "keytype", value:  prop' value  })
-  pureAttr Keytype value  = unsafeAttribute $ This { key: "keytype", value:  prop' value  }
-  unpureAttr Keytype eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "keytype", value:  prop' value  }
+  attr Keytype bothValues = unsafeAttribute $ Both
+    { key: "keytype", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "keytype", value: prop' value })
+  pureAttr Keytype value = unsafeAttribute $ This
+    { key: "keytype", value: prop' value }
+  unpureAttr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "keytype", value: prop' value }
 
 instance Attr Address_ Keytype String where
-  attr Keytype bothValues  = unsafeAttribute $ Both { key: "keytype", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "keytype", value:  prop' value  })
-  pureAttr Keytype value  = unsafeAttribute $ This { key: "keytype", value:  prop' value  }
-  unpureAttr Keytype eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "keytype", value:  prop' value  }
+  attr Keytype bothValues = unsafeAttribute $ Both
+    { key: "keytype", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "keytype", value: prop' value })
+  pureAttr Keytype value = unsafeAttribute $ This
+    { key: "keytype", value: prop' value }
+  unpureAttr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "keytype", value: prop' value }
 
 instance Attr Applet_ Keytype String where
-  attr Keytype bothValues  = unsafeAttribute $ Both { key: "keytype", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "keytype", value:  prop' value  })
-  pureAttr Keytype value  = unsafeAttribute $ This { key: "keytype", value:  prop' value  }
-  unpureAttr Keytype eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "keytype", value:  prop' value  }
+  attr Keytype bothValues = unsafeAttribute $ Both
+    { key: "keytype", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "keytype", value: prop' value })
+  pureAttr Keytype value = unsafeAttribute $ This
+    { key: "keytype", value: prop' value }
+  unpureAttr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "keytype", value: prop' value }
 
 instance Attr Area_ Keytype String where
-  attr Keytype bothValues  = unsafeAttribute $ Both { key: "keytype", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "keytype", value:  prop' value  })
-  pureAttr Keytype value  = unsafeAttribute $ This { key: "keytype", value:  prop' value  }
-  unpureAttr Keytype eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "keytype", value:  prop' value  }
+  attr Keytype bothValues = unsafeAttribute $ Both
+    { key: "keytype", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "keytype", value: prop' value })
+  pureAttr Keytype value = unsafeAttribute $ This
+    { key: "keytype", value: prop' value }
+  unpureAttr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "keytype", value: prop' value }
 
 instance Attr Article_ Keytype String where
-  attr Keytype bothValues  = unsafeAttribute $ Both { key: "keytype", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "keytype", value:  prop' value  })
-  pureAttr Keytype value  = unsafeAttribute $ This { key: "keytype", value:  prop' value  }
-  unpureAttr Keytype eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "keytype", value:  prop' value  }
+  attr Keytype bothValues = unsafeAttribute $ Both
+    { key: "keytype", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "keytype", value: prop' value })
+  pureAttr Keytype value = unsafeAttribute $ This
+    { key: "keytype", value: prop' value }
+  unpureAttr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "keytype", value: prop' value }
 
 instance Attr Aside_ Keytype String where
-  attr Keytype bothValues  = unsafeAttribute $ Both { key: "keytype", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "keytype", value:  prop' value  })
-  pureAttr Keytype value  = unsafeAttribute $ This { key: "keytype", value:  prop' value  }
-  unpureAttr Keytype eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "keytype", value:  prop' value  }
+  attr Keytype bothValues = unsafeAttribute $ Both
+    { key: "keytype", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "keytype", value: prop' value })
+  pureAttr Keytype value = unsafeAttribute $ This
+    { key: "keytype", value: prop' value }
+  unpureAttr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "keytype", value: prop' value }
 
 instance Attr Audio_ Keytype String where
-  attr Keytype bothValues  = unsafeAttribute $ Both { key: "keytype", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "keytype", value:  prop' value  })
-  pureAttr Keytype value  = unsafeAttribute $ This { key: "keytype", value:  prop' value  }
-  unpureAttr Keytype eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "keytype", value:  prop' value  }
+  attr Keytype bothValues = unsafeAttribute $ Both
+    { key: "keytype", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "keytype", value: prop' value })
+  pureAttr Keytype value = unsafeAttribute $ This
+    { key: "keytype", value: prop' value }
+  unpureAttr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "keytype", value: prop' value }
 
 instance Attr B_ Keytype String where
-  attr Keytype bothValues  = unsafeAttribute $ Both { key: "keytype", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "keytype", value:  prop' value  })
-  pureAttr Keytype value  = unsafeAttribute $ This { key: "keytype", value:  prop' value  }
-  unpureAttr Keytype eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "keytype", value:  prop' value  }
+  attr Keytype bothValues = unsafeAttribute $ Both
+    { key: "keytype", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "keytype", value: prop' value })
+  pureAttr Keytype value = unsafeAttribute $ This
+    { key: "keytype", value: prop' value }
+  unpureAttr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "keytype", value: prop' value }
 
 instance Attr Base_ Keytype String where
-  attr Keytype bothValues  = unsafeAttribute $ Both { key: "keytype", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "keytype", value:  prop' value  })
-  pureAttr Keytype value  = unsafeAttribute $ This { key: "keytype", value:  prop' value  }
-  unpureAttr Keytype eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "keytype", value:  prop' value  }
+  attr Keytype bothValues = unsafeAttribute $ Both
+    { key: "keytype", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "keytype", value: prop' value })
+  pureAttr Keytype value = unsafeAttribute $ This
+    { key: "keytype", value: prop' value }
+  unpureAttr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "keytype", value: prop' value }
 
 instance Attr Basefont_ Keytype String where
-  attr Keytype bothValues  = unsafeAttribute $ Both { key: "keytype", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "keytype", value:  prop' value  })
-  pureAttr Keytype value  = unsafeAttribute $ This { key: "keytype", value:  prop' value  }
-  unpureAttr Keytype eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "keytype", value:  prop' value  }
+  attr Keytype bothValues = unsafeAttribute $ Both
+    { key: "keytype", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "keytype", value: prop' value })
+  pureAttr Keytype value = unsafeAttribute $ This
+    { key: "keytype", value: prop' value }
+  unpureAttr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "keytype", value: prop' value }
 
 instance Attr Bdi_ Keytype String where
-  attr Keytype bothValues  = unsafeAttribute $ Both { key: "keytype", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "keytype", value:  prop' value  })
-  pureAttr Keytype value  = unsafeAttribute $ This { key: "keytype", value:  prop' value  }
-  unpureAttr Keytype eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "keytype", value:  prop' value  }
+  attr Keytype bothValues = unsafeAttribute $ Both
+    { key: "keytype", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "keytype", value: prop' value })
+  pureAttr Keytype value = unsafeAttribute $ This
+    { key: "keytype", value: prop' value }
+  unpureAttr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "keytype", value: prop' value }
 
 instance Attr Bdo_ Keytype String where
-  attr Keytype bothValues  = unsafeAttribute $ Both { key: "keytype", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "keytype", value:  prop' value  })
-  pureAttr Keytype value  = unsafeAttribute $ This { key: "keytype", value:  prop' value  }
-  unpureAttr Keytype eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "keytype", value:  prop' value  }
+  attr Keytype bothValues = unsafeAttribute $ Both
+    { key: "keytype", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "keytype", value: prop' value })
+  pureAttr Keytype value = unsafeAttribute $ This
+    { key: "keytype", value: prop' value }
+  unpureAttr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "keytype", value: prop' value }
 
 instance Attr Big_ Keytype String where
-  attr Keytype bothValues  = unsafeAttribute $ Both { key: "keytype", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "keytype", value:  prop' value  })
-  pureAttr Keytype value  = unsafeAttribute $ This { key: "keytype", value:  prop' value  }
-  unpureAttr Keytype eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "keytype", value:  prop' value  }
+  attr Keytype bothValues = unsafeAttribute $ Both
+    { key: "keytype", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "keytype", value: prop' value })
+  pureAttr Keytype value = unsafeAttribute $ This
+    { key: "keytype", value: prop' value }
+  unpureAttr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "keytype", value: prop' value }
 
 instance Attr Blockquote_ Keytype String where
-  attr Keytype bothValues  = unsafeAttribute $ Both { key: "keytype", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "keytype", value:  prop' value  })
-  pureAttr Keytype value  = unsafeAttribute $ This { key: "keytype", value:  prop' value  }
-  unpureAttr Keytype eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "keytype", value:  prop' value  }
+  attr Keytype bothValues = unsafeAttribute $ Both
+    { key: "keytype", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "keytype", value: prop' value })
+  pureAttr Keytype value = unsafeAttribute $ This
+    { key: "keytype", value: prop' value }
+  unpureAttr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "keytype", value: prop' value }
 
 instance Attr Body_ Keytype String where
-  attr Keytype bothValues  = unsafeAttribute $ Both { key: "keytype", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "keytype", value:  prop' value  })
-  pureAttr Keytype value  = unsafeAttribute $ This { key: "keytype", value:  prop' value  }
-  unpureAttr Keytype eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "keytype", value:  prop' value  }
+  attr Keytype bothValues = unsafeAttribute $ Both
+    { key: "keytype", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "keytype", value: prop' value })
+  pureAttr Keytype value = unsafeAttribute $ This
+    { key: "keytype", value: prop' value }
+  unpureAttr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "keytype", value: prop' value }
 
 instance Attr Br_ Keytype String where
-  attr Keytype bothValues  = unsafeAttribute $ Both { key: "keytype", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "keytype", value:  prop' value  })
-  pureAttr Keytype value  = unsafeAttribute $ This { key: "keytype", value:  prop' value  }
-  unpureAttr Keytype eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "keytype", value:  prop' value  }
+  attr Keytype bothValues = unsafeAttribute $ Both
+    { key: "keytype", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "keytype", value: prop' value })
+  pureAttr Keytype value = unsafeAttribute $ This
+    { key: "keytype", value: prop' value }
+  unpureAttr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "keytype", value: prop' value }
 
 instance Attr Button_ Keytype String where
-  attr Keytype bothValues  = unsafeAttribute $ Both { key: "keytype", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "keytype", value:  prop' value  })
-  pureAttr Keytype value  = unsafeAttribute $ This { key: "keytype", value:  prop' value  }
-  unpureAttr Keytype eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "keytype", value:  prop' value  }
+  attr Keytype bothValues = unsafeAttribute $ Both
+    { key: "keytype", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "keytype", value: prop' value })
+  pureAttr Keytype value = unsafeAttribute $ This
+    { key: "keytype", value: prop' value }
+  unpureAttr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "keytype", value: prop' value }
 
 instance Attr Canvas_ Keytype String where
-  attr Keytype bothValues  = unsafeAttribute $ Both { key: "keytype", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "keytype", value:  prop' value  })
-  pureAttr Keytype value  = unsafeAttribute $ This { key: "keytype", value:  prop' value  }
-  unpureAttr Keytype eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "keytype", value:  prop' value  }
+  attr Keytype bothValues = unsafeAttribute $ Both
+    { key: "keytype", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "keytype", value: prop' value })
+  pureAttr Keytype value = unsafeAttribute $ This
+    { key: "keytype", value: prop' value }
+  unpureAttr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "keytype", value: prop' value }
 
 instance Attr Caption_ Keytype String where
-  attr Keytype bothValues  = unsafeAttribute $ Both { key: "keytype", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "keytype", value:  prop' value  })
-  pureAttr Keytype value  = unsafeAttribute $ This { key: "keytype", value:  prop' value  }
-  unpureAttr Keytype eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "keytype", value:  prop' value  }
+  attr Keytype bothValues = unsafeAttribute $ Both
+    { key: "keytype", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "keytype", value: prop' value })
+  pureAttr Keytype value = unsafeAttribute $ This
+    { key: "keytype", value: prop' value }
+  unpureAttr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "keytype", value: prop' value }
 
 instance Attr Center_ Keytype String where
-  attr Keytype bothValues  = unsafeAttribute $ Both { key: "keytype", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "keytype", value:  prop' value  })
-  pureAttr Keytype value  = unsafeAttribute $ This { key: "keytype", value:  prop' value  }
-  unpureAttr Keytype eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "keytype", value:  prop' value  }
+  attr Keytype bothValues = unsafeAttribute $ Both
+    { key: "keytype", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "keytype", value: prop' value })
+  pureAttr Keytype value = unsafeAttribute $ This
+    { key: "keytype", value: prop' value }
+  unpureAttr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "keytype", value: prop' value }
 
 instance Attr Cite_ Keytype String where
-  attr Keytype bothValues  = unsafeAttribute $ Both { key: "keytype", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "keytype", value:  prop' value  })
-  pureAttr Keytype value  = unsafeAttribute $ This { key: "keytype", value:  prop' value  }
-  unpureAttr Keytype eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "keytype", value:  prop' value  }
+  attr Keytype bothValues = unsafeAttribute $ Both
+    { key: "keytype", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "keytype", value: prop' value })
+  pureAttr Keytype value = unsafeAttribute $ This
+    { key: "keytype", value: prop' value }
+  unpureAttr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "keytype", value: prop' value }
 
 instance Attr Code_ Keytype String where
-  attr Keytype bothValues  = unsafeAttribute $ Both { key: "keytype", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "keytype", value:  prop' value  })
-  pureAttr Keytype value  = unsafeAttribute $ This { key: "keytype", value:  prop' value  }
-  unpureAttr Keytype eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "keytype", value:  prop' value  }
+  attr Keytype bothValues = unsafeAttribute $ Both
+    { key: "keytype", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "keytype", value: prop' value })
+  pureAttr Keytype value = unsafeAttribute $ This
+    { key: "keytype", value: prop' value }
+  unpureAttr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "keytype", value: prop' value }
 
 instance Attr Col_ Keytype String where
-  attr Keytype bothValues  = unsafeAttribute $ Both { key: "keytype", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "keytype", value:  prop' value  })
-  pureAttr Keytype value  = unsafeAttribute $ This { key: "keytype", value:  prop' value  }
-  unpureAttr Keytype eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "keytype", value:  prop' value  }
+  attr Keytype bothValues = unsafeAttribute $ Both
+    { key: "keytype", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "keytype", value: prop' value })
+  pureAttr Keytype value = unsafeAttribute $ This
+    { key: "keytype", value: prop' value }
+  unpureAttr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "keytype", value: prop' value }
 
 instance Attr Colgroup_ Keytype String where
-  attr Keytype bothValues  = unsafeAttribute $ Both { key: "keytype", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "keytype", value:  prop' value  })
-  pureAttr Keytype value  = unsafeAttribute $ This { key: "keytype", value:  prop' value  }
-  unpureAttr Keytype eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "keytype", value:  prop' value  }
+  attr Keytype bothValues = unsafeAttribute $ Both
+    { key: "keytype", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "keytype", value: prop' value })
+  pureAttr Keytype value = unsafeAttribute $ This
+    { key: "keytype", value: prop' value }
+  unpureAttr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "keytype", value: prop' value }
 
 instance Attr Xdata_ Keytype String where
-  attr Keytype bothValues  = unsafeAttribute $ Both { key: "keytype", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "keytype", value:  prop' value  })
-  pureAttr Keytype value  = unsafeAttribute $ This { key: "keytype", value:  prop' value  }
-  unpureAttr Keytype eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "keytype", value:  prop' value  }
+  attr Keytype bothValues = unsafeAttribute $ Both
+    { key: "keytype", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "keytype", value: prop' value })
+  pureAttr Keytype value = unsafeAttribute $ This
+    { key: "keytype", value: prop' value }
+  unpureAttr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "keytype", value: prop' value }
 
 instance Attr Datalist_ Keytype String where
-  attr Keytype bothValues  = unsafeAttribute $ Both { key: "keytype", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "keytype", value:  prop' value  })
-  pureAttr Keytype value  = unsafeAttribute $ This { key: "keytype", value:  prop' value  }
-  unpureAttr Keytype eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "keytype", value:  prop' value  }
+  attr Keytype bothValues = unsafeAttribute $ Both
+    { key: "keytype", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "keytype", value: prop' value })
+  pureAttr Keytype value = unsafeAttribute $ This
+    { key: "keytype", value: prop' value }
+  unpureAttr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "keytype", value: prop' value }
 
 instance Attr Dd_ Keytype String where
-  attr Keytype bothValues  = unsafeAttribute $ Both { key: "keytype", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "keytype", value:  prop' value  })
-  pureAttr Keytype value  = unsafeAttribute $ This { key: "keytype", value:  prop' value  }
-  unpureAttr Keytype eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "keytype", value:  prop' value  }
+  attr Keytype bothValues = unsafeAttribute $ Both
+    { key: "keytype", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "keytype", value: prop' value })
+  pureAttr Keytype value = unsafeAttribute $ This
+    { key: "keytype", value: prop' value }
+  unpureAttr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "keytype", value: prop' value }
 
 instance Attr Del_ Keytype String where
-  attr Keytype bothValues  = unsafeAttribute $ Both { key: "keytype", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "keytype", value:  prop' value  })
-  pureAttr Keytype value  = unsafeAttribute $ This { key: "keytype", value:  prop' value  }
-  unpureAttr Keytype eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "keytype", value:  prop' value  }
+  attr Keytype bothValues = unsafeAttribute $ Both
+    { key: "keytype", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "keytype", value: prop' value })
+  pureAttr Keytype value = unsafeAttribute $ This
+    { key: "keytype", value: prop' value }
+  unpureAttr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "keytype", value: prop' value }
 
 instance Attr Details_ Keytype String where
-  attr Keytype bothValues  = unsafeAttribute $ Both { key: "keytype", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "keytype", value:  prop' value  })
-  pureAttr Keytype value  = unsafeAttribute $ This { key: "keytype", value:  prop' value  }
-  unpureAttr Keytype eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "keytype", value:  prop' value  }
+  attr Keytype bothValues = unsafeAttribute $ Both
+    { key: "keytype", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "keytype", value: prop' value })
+  pureAttr Keytype value = unsafeAttribute $ This
+    { key: "keytype", value: prop' value }
+  unpureAttr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "keytype", value: prop' value }
 
 instance Attr Dfn_ Keytype String where
-  attr Keytype bothValues  = unsafeAttribute $ Both { key: "keytype", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "keytype", value:  prop' value  })
-  pureAttr Keytype value  = unsafeAttribute $ This { key: "keytype", value:  prop' value  }
-  unpureAttr Keytype eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "keytype", value:  prop' value  }
+  attr Keytype bothValues = unsafeAttribute $ Both
+    { key: "keytype", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "keytype", value: prop' value })
+  pureAttr Keytype value = unsafeAttribute $ This
+    { key: "keytype", value: prop' value }
+  unpureAttr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "keytype", value: prop' value }
 
 instance Attr Dialog_ Keytype String where
-  attr Keytype bothValues  = unsafeAttribute $ Both { key: "keytype", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "keytype", value:  prop' value  })
-  pureAttr Keytype value  = unsafeAttribute $ This { key: "keytype", value:  prop' value  }
-  unpureAttr Keytype eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "keytype", value:  prop' value  }
+  attr Keytype bothValues = unsafeAttribute $ Both
+    { key: "keytype", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "keytype", value: prop' value })
+  pureAttr Keytype value = unsafeAttribute $ This
+    { key: "keytype", value: prop' value }
+  unpureAttr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "keytype", value: prop' value }
 
 instance Attr Dir_ Keytype String where
-  attr Keytype bothValues  = unsafeAttribute $ Both { key: "keytype", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "keytype", value:  prop' value  })
-  pureAttr Keytype value  = unsafeAttribute $ This { key: "keytype", value:  prop' value  }
-  unpureAttr Keytype eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "keytype", value:  prop' value  }
+  attr Keytype bothValues = unsafeAttribute $ Both
+    { key: "keytype", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "keytype", value: prop' value })
+  pureAttr Keytype value = unsafeAttribute $ This
+    { key: "keytype", value: prop' value }
+  unpureAttr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "keytype", value: prop' value }
 
 instance Attr Div_ Keytype String where
-  attr Keytype bothValues  = unsafeAttribute $ Both { key: "keytype", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "keytype", value:  prop' value  })
-  pureAttr Keytype value  = unsafeAttribute $ This { key: "keytype", value:  prop' value  }
-  unpureAttr Keytype eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "keytype", value:  prop' value  }
+  attr Keytype bothValues = unsafeAttribute $ Both
+    { key: "keytype", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "keytype", value: prop' value })
+  pureAttr Keytype value = unsafeAttribute $ This
+    { key: "keytype", value: prop' value }
+  unpureAttr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "keytype", value: prop' value }
 
 instance Attr Dl_ Keytype String where
-  attr Keytype bothValues  = unsafeAttribute $ Both { key: "keytype", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "keytype", value:  prop' value  })
-  pureAttr Keytype value  = unsafeAttribute $ This { key: "keytype", value:  prop' value  }
-  unpureAttr Keytype eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "keytype", value:  prop' value  }
+  attr Keytype bothValues = unsafeAttribute $ Both
+    { key: "keytype", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "keytype", value: prop' value })
+  pureAttr Keytype value = unsafeAttribute $ This
+    { key: "keytype", value: prop' value }
+  unpureAttr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "keytype", value: prop' value }
 
 instance Attr Dt_ Keytype String where
-  attr Keytype bothValues  = unsafeAttribute $ Both { key: "keytype", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "keytype", value:  prop' value  })
-  pureAttr Keytype value  = unsafeAttribute $ This { key: "keytype", value:  prop' value  }
-  unpureAttr Keytype eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "keytype", value:  prop' value  }
+  attr Keytype bothValues = unsafeAttribute $ Both
+    { key: "keytype", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "keytype", value: prop' value })
+  pureAttr Keytype value = unsafeAttribute $ This
+    { key: "keytype", value: prop' value }
+  unpureAttr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "keytype", value: prop' value }
 
 instance Attr Em_ Keytype String where
-  attr Keytype bothValues  = unsafeAttribute $ Both { key: "keytype", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "keytype", value:  prop' value  })
-  pureAttr Keytype value  = unsafeAttribute $ This { key: "keytype", value:  prop' value  }
-  unpureAttr Keytype eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "keytype", value:  prop' value  }
+  attr Keytype bothValues = unsafeAttribute $ Both
+    { key: "keytype", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "keytype", value: prop' value })
+  pureAttr Keytype value = unsafeAttribute $ This
+    { key: "keytype", value: prop' value }
+  unpureAttr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "keytype", value: prop' value }
 
 instance Attr Embed_ Keytype String where
-  attr Keytype bothValues  = unsafeAttribute $ Both { key: "keytype", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "keytype", value:  prop' value  })
-  pureAttr Keytype value  = unsafeAttribute $ This { key: "keytype", value:  prop' value  }
-  unpureAttr Keytype eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "keytype", value:  prop' value  }
+  attr Keytype bothValues = unsafeAttribute $ Both
+    { key: "keytype", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "keytype", value: prop' value })
+  pureAttr Keytype value = unsafeAttribute $ This
+    { key: "keytype", value: prop' value }
+  unpureAttr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "keytype", value: prop' value }
 
 instance Attr Fieldset_ Keytype String where
-  attr Keytype bothValues  = unsafeAttribute $ Both { key: "keytype", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "keytype", value:  prop' value  })
-  pureAttr Keytype value  = unsafeAttribute $ This { key: "keytype", value:  prop' value  }
-  unpureAttr Keytype eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "keytype", value:  prop' value  }
+  attr Keytype bothValues = unsafeAttribute $ Both
+    { key: "keytype", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "keytype", value: prop' value })
+  pureAttr Keytype value = unsafeAttribute $ This
+    { key: "keytype", value: prop' value }
+  unpureAttr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "keytype", value: prop' value }
 
 instance Attr Figcaption_ Keytype String where
-  attr Keytype bothValues  = unsafeAttribute $ Both { key: "keytype", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "keytype", value:  prop' value  })
-  pureAttr Keytype value  = unsafeAttribute $ This { key: "keytype", value:  prop' value  }
-  unpureAttr Keytype eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "keytype", value:  prop' value  }
+  attr Keytype bothValues = unsafeAttribute $ Both
+    { key: "keytype", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "keytype", value: prop' value })
+  pureAttr Keytype value = unsafeAttribute $ This
+    { key: "keytype", value: prop' value }
+  unpureAttr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "keytype", value: prop' value }
 
 instance Attr Figure_ Keytype String where
-  attr Keytype bothValues  = unsafeAttribute $ Both { key: "keytype", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "keytype", value:  prop' value  })
-  pureAttr Keytype value  = unsafeAttribute $ This { key: "keytype", value:  prop' value  }
-  unpureAttr Keytype eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "keytype", value:  prop' value  }
+  attr Keytype bothValues = unsafeAttribute $ Both
+    { key: "keytype", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "keytype", value: prop' value })
+  pureAttr Keytype value = unsafeAttribute $ This
+    { key: "keytype", value: prop' value }
+  unpureAttr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "keytype", value: prop' value }
 
 instance Attr Font_ Keytype String where
-  attr Keytype bothValues  = unsafeAttribute $ Both { key: "keytype", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "keytype", value:  prop' value  })
-  pureAttr Keytype value  = unsafeAttribute $ This { key: "keytype", value:  prop' value  }
-  unpureAttr Keytype eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "keytype", value:  prop' value  }
+  attr Keytype bothValues = unsafeAttribute $ Both
+    { key: "keytype", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "keytype", value: prop' value })
+  pureAttr Keytype value = unsafeAttribute $ This
+    { key: "keytype", value: prop' value }
+  unpureAttr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "keytype", value: prop' value }
 
 instance Attr Footer_ Keytype String where
-  attr Keytype bothValues  = unsafeAttribute $ Both { key: "keytype", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "keytype", value:  prop' value  })
-  pureAttr Keytype value  = unsafeAttribute $ This { key: "keytype", value:  prop' value  }
-  unpureAttr Keytype eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "keytype", value:  prop' value  }
+  attr Keytype bothValues = unsafeAttribute $ Both
+    { key: "keytype", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "keytype", value: prop' value })
+  pureAttr Keytype value = unsafeAttribute $ This
+    { key: "keytype", value: prop' value }
+  unpureAttr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "keytype", value: prop' value }
 
 instance Attr Form_ Keytype String where
-  attr Keytype bothValues  = unsafeAttribute $ Both { key: "keytype", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "keytype", value:  prop' value  })
-  pureAttr Keytype value  = unsafeAttribute $ This { key: "keytype", value:  prop' value  }
-  unpureAttr Keytype eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "keytype", value:  prop' value  }
+  attr Keytype bothValues = unsafeAttribute $ Both
+    { key: "keytype", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "keytype", value: prop' value })
+  pureAttr Keytype value = unsafeAttribute $ This
+    { key: "keytype", value: prop' value }
+  unpureAttr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "keytype", value: prop' value }
 
 instance Attr Frame_ Keytype String where
-  attr Keytype bothValues  = unsafeAttribute $ Both { key: "keytype", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "keytype", value:  prop' value  })
-  pureAttr Keytype value  = unsafeAttribute $ This { key: "keytype", value:  prop' value  }
-  unpureAttr Keytype eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "keytype", value:  prop' value  }
+  attr Keytype bothValues = unsafeAttribute $ Both
+    { key: "keytype", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "keytype", value: prop' value })
+  pureAttr Keytype value = unsafeAttribute $ This
+    { key: "keytype", value: prop' value }
+  unpureAttr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "keytype", value: prop' value }
 
 instance Attr Frameset_ Keytype String where
-  attr Keytype bothValues  = unsafeAttribute $ Both { key: "keytype", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "keytype", value:  prop' value  })
-  pureAttr Keytype value  = unsafeAttribute $ This { key: "keytype", value:  prop' value  }
-  unpureAttr Keytype eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "keytype", value:  prop' value  }
+  attr Keytype bothValues = unsafeAttribute $ Both
+    { key: "keytype", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "keytype", value: prop' value })
+  pureAttr Keytype value = unsafeAttribute $ This
+    { key: "keytype", value: prop' value }
+  unpureAttr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "keytype", value: prop' value }
 
 instance Attr H1_ Keytype String where
-  attr Keytype bothValues  = unsafeAttribute $ Both { key: "keytype", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "keytype", value:  prop' value  })
-  pureAttr Keytype value  = unsafeAttribute $ This { key: "keytype", value:  prop' value  }
-  unpureAttr Keytype eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "keytype", value:  prop' value  }
+  attr Keytype bothValues = unsafeAttribute $ Both
+    { key: "keytype", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "keytype", value: prop' value })
+  pureAttr Keytype value = unsafeAttribute $ This
+    { key: "keytype", value: prop' value }
+  unpureAttr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "keytype", value: prop' value }
 
 instance Attr H2_ Keytype String where
-  attr Keytype bothValues  = unsafeAttribute $ Both { key: "keytype", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "keytype", value:  prop' value  })
-  pureAttr Keytype value  = unsafeAttribute $ This { key: "keytype", value:  prop' value  }
-  unpureAttr Keytype eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "keytype", value:  prop' value  }
+  attr Keytype bothValues = unsafeAttribute $ Both
+    { key: "keytype", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "keytype", value: prop' value })
+  pureAttr Keytype value = unsafeAttribute $ This
+    { key: "keytype", value: prop' value }
+  unpureAttr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "keytype", value: prop' value }
 
 instance Attr H3_ Keytype String where
-  attr Keytype bothValues  = unsafeAttribute $ Both { key: "keytype", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "keytype", value:  prop' value  })
-  pureAttr Keytype value  = unsafeAttribute $ This { key: "keytype", value:  prop' value  }
-  unpureAttr Keytype eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "keytype", value:  prop' value  }
+  attr Keytype bothValues = unsafeAttribute $ Both
+    { key: "keytype", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "keytype", value: prop' value })
+  pureAttr Keytype value = unsafeAttribute $ This
+    { key: "keytype", value: prop' value }
+  unpureAttr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "keytype", value: prop' value }
 
 instance Attr H4_ Keytype String where
-  attr Keytype bothValues  = unsafeAttribute $ Both { key: "keytype", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "keytype", value:  prop' value  })
-  pureAttr Keytype value  = unsafeAttribute $ This { key: "keytype", value:  prop' value  }
-  unpureAttr Keytype eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "keytype", value:  prop' value  }
+  attr Keytype bothValues = unsafeAttribute $ Both
+    { key: "keytype", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "keytype", value: prop' value })
+  pureAttr Keytype value = unsafeAttribute $ This
+    { key: "keytype", value: prop' value }
+  unpureAttr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "keytype", value: prop' value }
 
 instance Attr H5_ Keytype String where
-  attr Keytype bothValues  = unsafeAttribute $ Both { key: "keytype", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "keytype", value:  prop' value  })
-  pureAttr Keytype value  = unsafeAttribute $ This { key: "keytype", value:  prop' value  }
-  unpureAttr Keytype eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "keytype", value:  prop' value  }
+  attr Keytype bothValues = unsafeAttribute $ Both
+    { key: "keytype", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "keytype", value: prop' value })
+  pureAttr Keytype value = unsafeAttribute $ This
+    { key: "keytype", value: prop' value }
+  unpureAttr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "keytype", value: prop' value }
 
 instance Attr H6_ Keytype String where
-  attr Keytype bothValues  = unsafeAttribute $ Both { key: "keytype", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "keytype", value:  prop' value  })
-  pureAttr Keytype value  = unsafeAttribute $ This { key: "keytype", value:  prop' value  }
-  unpureAttr Keytype eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "keytype", value:  prop' value  }
+  attr Keytype bothValues = unsafeAttribute $ Both
+    { key: "keytype", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "keytype", value: prop' value })
+  pureAttr Keytype value = unsafeAttribute $ This
+    { key: "keytype", value: prop' value }
+  unpureAttr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "keytype", value: prop' value }
 
 instance Attr Head_ Keytype String where
-  attr Keytype bothValues  = unsafeAttribute $ Both { key: "keytype", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "keytype", value:  prop' value  })
-  pureAttr Keytype value  = unsafeAttribute $ This { key: "keytype", value:  prop' value  }
-  unpureAttr Keytype eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "keytype", value:  prop' value  }
+  attr Keytype bothValues = unsafeAttribute $ Both
+    { key: "keytype", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "keytype", value: prop' value })
+  pureAttr Keytype value = unsafeAttribute $ This
+    { key: "keytype", value: prop' value }
+  unpureAttr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "keytype", value: prop' value }
 
 instance Attr Header_ Keytype String where
-  attr Keytype bothValues  = unsafeAttribute $ Both { key: "keytype", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "keytype", value:  prop' value  })
-  pureAttr Keytype value  = unsafeAttribute $ This { key: "keytype", value:  prop' value  }
-  unpureAttr Keytype eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "keytype", value:  prop' value  }
+  attr Keytype bothValues = unsafeAttribute $ Both
+    { key: "keytype", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "keytype", value: prop' value })
+  pureAttr Keytype value = unsafeAttribute $ This
+    { key: "keytype", value: prop' value }
+  unpureAttr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "keytype", value: prop' value }
 
 instance Attr Hr_ Keytype String where
-  attr Keytype bothValues  = unsafeAttribute $ Both { key: "keytype", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "keytype", value:  prop' value  })
-  pureAttr Keytype value  = unsafeAttribute $ This { key: "keytype", value:  prop' value  }
-  unpureAttr Keytype eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "keytype", value:  prop' value  }
+  attr Keytype bothValues = unsafeAttribute $ Both
+    { key: "keytype", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "keytype", value: prop' value })
+  pureAttr Keytype value = unsafeAttribute $ This
+    { key: "keytype", value: prop' value }
+  unpureAttr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "keytype", value: prop' value }
 
 instance Attr Html_ Keytype String where
-  attr Keytype bothValues  = unsafeAttribute $ Both { key: "keytype", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "keytype", value:  prop' value  })
-  pureAttr Keytype value  = unsafeAttribute $ This { key: "keytype", value:  prop' value  }
-  unpureAttr Keytype eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "keytype", value:  prop' value  }
+  attr Keytype bothValues = unsafeAttribute $ Both
+    { key: "keytype", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "keytype", value: prop' value })
+  pureAttr Keytype value = unsafeAttribute $ This
+    { key: "keytype", value: prop' value }
+  unpureAttr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "keytype", value: prop' value }
 
 instance Attr I_ Keytype String where
-  attr Keytype bothValues  = unsafeAttribute $ Both { key: "keytype", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "keytype", value:  prop' value  })
-  pureAttr Keytype value  = unsafeAttribute $ This { key: "keytype", value:  prop' value  }
-  unpureAttr Keytype eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "keytype", value:  prop' value  }
+  attr Keytype bothValues = unsafeAttribute $ Both
+    { key: "keytype", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "keytype", value: prop' value })
+  pureAttr Keytype value = unsafeAttribute $ This
+    { key: "keytype", value: prop' value }
+  unpureAttr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "keytype", value: prop' value }
 
 instance Attr Iframe_ Keytype String where
-  attr Keytype bothValues  = unsafeAttribute $ Both { key: "keytype", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "keytype", value:  prop' value  })
-  pureAttr Keytype value  = unsafeAttribute $ This { key: "keytype", value:  prop' value  }
-  unpureAttr Keytype eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "keytype", value:  prop' value  }
+  attr Keytype bothValues = unsafeAttribute $ Both
+    { key: "keytype", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "keytype", value: prop' value })
+  pureAttr Keytype value = unsafeAttribute $ This
+    { key: "keytype", value: prop' value }
+  unpureAttr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "keytype", value: prop' value }
 
 instance Attr Img_ Keytype String where
-  attr Keytype bothValues  = unsafeAttribute $ Both { key: "keytype", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "keytype", value:  prop' value  })
-  pureAttr Keytype value  = unsafeAttribute $ This { key: "keytype", value:  prop' value  }
-  unpureAttr Keytype eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "keytype", value:  prop' value  }
+  attr Keytype bothValues = unsafeAttribute $ Both
+    { key: "keytype", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "keytype", value: prop' value })
+  pureAttr Keytype value = unsafeAttribute $ This
+    { key: "keytype", value: prop' value }
+  unpureAttr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "keytype", value: prop' value }
 
 instance Attr Input_ Keytype String where
-  attr Keytype bothValues  = unsafeAttribute $ Both { key: "keytype", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "keytype", value:  prop' value  })
-  pureAttr Keytype value  = unsafeAttribute $ This { key: "keytype", value:  prop' value  }
-  unpureAttr Keytype eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "keytype", value:  prop' value  }
+  attr Keytype bothValues = unsafeAttribute $ Both
+    { key: "keytype", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "keytype", value: prop' value })
+  pureAttr Keytype value = unsafeAttribute $ This
+    { key: "keytype", value: prop' value }
+  unpureAttr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "keytype", value: prop' value }
 
 instance Attr Ins_ Keytype String where
-  attr Keytype bothValues  = unsafeAttribute $ Both { key: "keytype", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "keytype", value:  prop' value  })
-  pureAttr Keytype value  = unsafeAttribute $ This { key: "keytype", value:  prop' value  }
-  unpureAttr Keytype eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "keytype", value:  prop' value  }
+  attr Keytype bothValues = unsafeAttribute $ Both
+    { key: "keytype", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "keytype", value: prop' value })
+  pureAttr Keytype value = unsafeAttribute $ This
+    { key: "keytype", value: prop' value }
+  unpureAttr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "keytype", value: prop' value }
 
 instance Attr Kbd_ Keytype String where
-  attr Keytype bothValues  = unsafeAttribute $ Both { key: "keytype", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "keytype", value:  prop' value  })
-  pureAttr Keytype value  = unsafeAttribute $ This { key: "keytype", value:  prop' value  }
-  unpureAttr Keytype eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "keytype", value:  prop' value  }
+  attr Keytype bothValues = unsafeAttribute $ Both
+    { key: "keytype", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "keytype", value: prop' value })
+  pureAttr Keytype value = unsafeAttribute $ This
+    { key: "keytype", value: prop' value }
+  unpureAttr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "keytype", value: prop' value }
 
 instance Attr Label_ Keytype String where
-  attr Keytype bothValues  = unsafeAttribute $ Both { key: "keytype", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "keytype", value:  prop' value  })
-  pureAttr Keytype value  = unsafeAttribute $ This { key: "keytype", value:  prop' value  }
-  unpureAttr Keytype eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "keytype", value:  prop' value  }
+  attr Keytype bothValues = unsafeAttribute $ Both
+    { key: "keytype", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "keytype", value: prop' value })
+  pureAttr Keytype value = unsafeAttribute $ This
+    { key: "keytype", value: prop' value }
+  unpureAttr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "keytype", value: prop' value }
 
 instance Attr Legend_ Keytype String where
-  attr Keytype bothValues  = unsafeAttribute $ Both { key: "keytype", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "keytype", value:  prop' value  })
-  pureAttr Keytype value  = unsafeAttribute $ This { key: "keytype", value:  prop' value  }
-  unpureAttr Keytype eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "keytype", value:  prop' value  }
+  attr Keytype bothValues = unsafeAttribute $ Both
+    { key: "keytype", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "keytype", value: prop' value })
+  pureAttr Keytype value = unsafeAttribute $ This
+    { key: "keytype", value: prop' value }
+  unpureAttr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "keytype", value: prop' value }
 
 instance Attr Li_ Keytype String where
-  attr Keytype bothValues  = unsafeAttribute $ Both { key: "keytype", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "keytype", value:  prop' value  })
-  pureAttr Keytype value  = unsafeAttribute $ This { key: "keytype", value:  prop' value  }
-  unpureAttr Keytype eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "keytype", value:  prop' value  }
+  attr Keytype bothValues = unsafeAttribute $ Both
+    { key: "keytype", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "keytype", value: prop' value })
+  pureAttr Keytype value = unsafeAttribute $ This
+    { key: "keytype", value: prop' value }
+  unpureAttr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "keytype", value: prop' value }
 
 instance Attr Link_ Keytype String where
-  attr Keytype bothValues  = unsafeAttribute $ Both { key: "keytype", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "keytype", value:  prop' value  })
-  pureAttr Keytype value  = unsafeAttribute $ This { key: "keytype", value:  prop' value  }
-  unpureAttr Keytype eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "keytype", value:  prop' value  }
+  attr Keytype bothValues = unsafeAttribute $ Both
+    { key: "keytype", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "keytype", value: prop' value })
+  pureAttr Keytype value = unsafeAttribute $ This
+    { key: "keytype", value: prop' value }
+  unpureAttr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "keytype", value: prop' value }
 
 instance Attr Main_ Keytype String where
-  attr Keytype bothValues  = unsafeAttribute $ Both { key: "keytype", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "keytype", value:  prop' value  })
-  pureAttr Keytype value  = unsafeAttribute $ This { key: "keytype", value:  prop' value  }
-  unpureAttr Keytype eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "keytype", value:  prop' value  }
+  attr Keytype bothValues = unsafeAttribute $ Both
+    { key: "keytype", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "keytype", value: prop' value })
+  pureAttr Keytype value = unsafeAttribute $ This
+    { key: "keytype", value: prop' value }
+  unpureAttr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "keytype", value: prop' value }
 
 instance Attr Map_ Keytype String where
-  attr Keytype bothValues  = unsafeAttribute $ Both { key: "keytype", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "keytype", value:  prop' value  })
-  pureAttr Keytype value  = unsafeAttribute $ This { key: "keytype", value:  prop' value  }
-  unpureAttr Keytype eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "keytype", value:  prop' value  }
+  attr Keytype bothValues = unsafeAttribute $ Both
+    { key: "keytype", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "keytype", value: prop' value })
+  pureAttr Keytype value = unsafeAttribute $ This
+    { key: "keytype", value: prop' value }
+  unpureAttr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "keytype", value: prop' value }
 
 instance Attr Mark_ Keytype String where
-  attr Keytype bothValues  = unsafeAttribute $ Both { key: "keytype", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "keytype", value:  prop' value  })
-  pureAttr Keytype value  = unsafeAttribute $ This { key: "keytype", value:  prop' value  }
-  unpureAttr Keytype eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "keytype", value:  prop' value  }
+  attr Keytype bothValues = unsafeAttribute $ Both
+    { key: "keytype", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "keytype", value: prop' value })
+  pureAttr Keytype value = unsafeAttribute $ This
+    { key: "keytype", value: prop' value }
+  unpureAttr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "keytype", value: prop' value }
 
 instance Attr Meta_ Keytype String where
-  attr Keytype bothValues  = unsafeAttribute $ Both { key: "keytype", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "keytype", value:  prop' value  })
-  pureAttr Keytype value  = unsafeAttribute $ This { key: "keytype", value:  prop' value  }
-  unpureAttr Keytype eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "keytype", value:  prop' value  }
+  attr Keytype bothValues = unsafeAttribute $ Both
+    { key: "keytype", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "keytype", value: prop' value })
+  pureAttr Keytype value = unsafeAttribute $ This
+    { key: "keytype", value: prop' value }
+  unpureAttr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "keytype", value: prop' value }
 
 instance Attr Meter_ Keytype String where
-  attr Keytype bothValues  = unsafeAttribute $ Both { key: "keytype", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "keytype", value:  prop' value  })
-  pureAttr Keytype value  = unsafeAttribute $ This { key: "keytype", value:  prop' value  }
-  unpureAttr Keytype eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "keytype", value:  prop' value  }
+  attr Keytype bothValues = unsafeAttribute $ Both
+    { key: "keytype", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "keytype", value: prop' value })
+  pureAttr Keytype value = unsafeAttribute $ This
+    { key: "keytype", value: prop' value }
+  unpureAttr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "keytype", value: prop' value }
 
 instance Attr Nav_ Keytype String where
-  attr Keytype bothValues  = unsafeAttribute $ Both { key: "keytype", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "keytype", value:  prop' value  })
-  pureAttr Keytype value  = unsafeAttribute $ This { key: "keytype", value:  prop' value  }
-  unpureAttr Keytype eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "keytype", value:  prop' value  }
+  attr Keytype bothValues = unsafeAttribute $ Both
+    { key: "keytype", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "keytype", value: prop' value })
+  pureAttr Keytype value = unsafeAttribute $ This
+    { key: "keytype", value: prop' value }
+  unpureAttr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "keytype", value: prop' value }
 
 instance Attr Noframes_ Keytype String where
-  attr Keytype bothValues  = unsafeAttribute $ Both { key: "keytype", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "keytype", value:  prop' value  })
-  pureAttr Keytype value  = unsafeAttribute $ This { key: "keytype", value:  prop' value  }
-  unpureAttr Keytype eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "keytype", value:  prop' value  }
+  attr Keytype bothValues = unsafeAttribute $ Both
+    { key: "keytype", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "keytype", value: prop' value })
+  pureAttr Keytype value = unsafeAttribute $ This
+    { key: "keytype", value: prop' value }
+  unpureAttr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "keytype", value: prop' value }
 
 instance Attr Noscript_ Keytype String where
-  attr Keytype bothValues  = unsafeAttribute $ Both { key: "keytype", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "keytype", value:  prop' value  })
-  pureAttr Keytype value  = unsafeAttribute $ This { key: "keytype", value:  prop' value  }
-  unpureAttr Keytype eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "keytype", value:  prop' value  }
+  attr Keytype bothValues = unsafeAttribute $ Both
+    { key: "keytype", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "keytype", value: prop' value })
+  pureAttr Keytype value = unsafeAttribute $ This
+    { key: "keytype", value: prop' value }
+  unpureAttr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "keytype", value: prop' value }
 
 instance Attr Object_ Keytype String where
-  attr Keytype bothValues  = unsafeAttribute $ Both { key: "keytype", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "keytype", value:  prop' value  })
-  pureAttr Keytype value  = unsafeAttribute $ This { key: "keytype", value:  prop' value  }
-  unpureAttr Keytype eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "keytype", value:  prop' value  }
+  attr Keytype bothValues = unsafeAttribute $ Both
+    { key: "keytype", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "keytype", value: prop' value })
+  pureAttr Keytype value = unsafeAttribute $ This
+    { key: "keytype", value: prop' value }
+  unpureAttr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "keytype", value: prop' value }
 
 instance Attr Ol_ Keytype String where
-  attr Keytype bothValues  = unsafeAttribute $ Both { key: "keytype", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "keytype", value:  prop' value  })
-  pureAttr Keytype value  = unsafeAttribute $ This { key: "keytype", value:  prop' value  }
-  unpureAttr Keytype eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "keytype", value:  prop' value  }
+  attr Keytype bothValues = unsafeAttribute $ Both
+    { key: "keytype", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "keytype", value: prop' value })
+  pureAttr Keytype value = unsafeAttribute $ This
+    { key: "keytype", value: prop' value }
+  unpureAttr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "keytype", value: prop' value }
 
 instance Attr Optgroup_ Keytype String where
-  attr Keytype bothValues  = unsafeAttribute $ Both { key: "keytype", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "keytype", value:  prop' value  })
-  pureAttr Keytype value  = unsafeAttribute $ This { key: "keytype", value:  prop' value  }
-  unpureAttr Keytype eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "keytype", value:  prop' value  }
+  attr Keytype bothValues = unsafeAttribute $ Both
+    { key: "keytype", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "keytype", value: prop' value })
+  pureAttr Keytype value = unsafeAttribute $ This
+    { key: "keytype", value: prop' value }
+  unpureAttr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "keytype", value: prop' value }
 
 instance Attr Option_ Keytype String where
-  attr Keytype bothValues  = unsafeAttribute $ Both { key: "keytype", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "keytype", value:  prop' value  })
-  pureAttr Keytype value  = unsafeAttribute $ This { key: "keytype", value:  prop' value  }
-  unpureAttr Keytype eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "keytype", value:  prop' value  }
+  attr Keytype bothValues = unsafeAttribute $ Both
+    { key: "keytype", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "keytype", value: prop' value })
+  pureAttr Keytype value = unsafeAttribute $ This
+    { key: "keytype", value: prop' value }
+  unpureAttr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "keytype", value: prop' value }
 
 instance Attr Output_ Keytype String where
-  attr Keytype bothValues  = unsafeAttribute $ Both { key: "keytype", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "keytype", value:  prop' value  })
-  pureAttr Keytype value  = unsafeAttribute $ This { key: "keytype", value:  prop' value  }
-  unpureAttr Keytype eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "keytype", value:  prop' value  }
+  attr Keytype bothValues = unsafeAttribute $ Both
+    { key: "keytype", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "keytype", value: prop' value })
+  pureAttr Keytype value = unsafeAttribute $ This
+    { key: "keytype", value: prop' value }
+  unpureAttr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "keytype", value: prop' value }
 
 instance Attr P_ Keytype String where
-  attr Keytype bothValues  = unsafeAttribute $ Both { key: "keytype", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "keytype", value:  prop' value  })
-  pureAttr Keytype value  = unsafeAttribute $ This { key: "keytype", value:  prop' value  }
-  unpureAttr Keytype eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "keytype", value:  prop' value  }
+  attr Keytype bothValues = unsafeAttribute $ Both
+    { key: "keytype", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "keytype", value: prop' value })
+  pureAttr Keytype value = unsafeAttribute $ This
+    { key: "keytype", value: prop' value }
+  unpureAttr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "keytype", value: prop' value }
 
 instance Attr Param_ Keytype String where
-  attr Keytype bothValues  = unsafeAttribute $ Both { key: "keytype", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "keytype", value:  prop' value  })
-  pureAttr Keytype value  = unsafeAttribute $ This { key: "keytype", value:  prop' value  }
-  unpureAttr Keytype eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "keytype", value:  prop' value  }
+  attr Keytype bothValues = unsafeAttribute $ Both
+    { key: "keytype", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "keytype", value: prop' value })
+  pureAttr Keytype value = unsafeAttribute $ This
+    { key: "keytype", value: prop' value }
+  unpureAttr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "keytype", value: prop' value }
 
 instance Attr Picture_ Keytype String where
-  attr Keytype bothValues  = unsafeAttribute $ Both { key: "keytype", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "keytype", value:  prop' value  })
-  pureAttr Keytype value  = unsafeAttribute $ This { key: "keytype", value:  prop' value  }
-  unpureAttr Keytype eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "keytype", value:  prop' value  }
+  attr Keytype bothValues = unsafeAttribute $ Both
+    { key: "keytype", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "keytype", value: prop' value })
+  pureAttr Keytype value = unsafeAttribute $ This
+    { key: "keytype", value: prop' value }
+  unpureAttr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "keytype", value: prop' value }
 
 instance Attr Pre_ Keytype String where
-  attr Keytype bothValues  = unsafeAttribute $ Both { key: "keytype", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "keytype", value:  prop' value  })
-  pureAttr Keytype value  = unsafeAttribute $ This { key: "keytype", value:  prop' value  }
-  unpureAttr Keytype eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "keytype", value:  prop' value  }
+  attr Keytype bothValues = unsafeAttribute $ Both
+    { key: "keytype", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "keytype", value: prop' value })
+  pureAttr Keytype value = unsafeAttribute $ This
+    { key: "keytype", value: prop' value }
+  unpureAttr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "keytype", value: prop' value }
 
 instance Attr Progress_ Keytype String where
-  attr Keytype bothValues  = unsafeAttribute $ Both { key: "keytype", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "keytype", value:  prop' value  })
-  pureAttr Keytype value  = unsafeAttribute $ This { key: "keytype", value:  prop' value  }
-  unpureAttr Keytype eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "keytype", value:  prop' value  }
+  attr Keytype bothValues = unsafeAttribute $ Both
+    { key: "keytype", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "keytype", value: prop' value })
+  pureAttr Keytype value = unsafeAttribute $ This
+    { key: "keytype", value: prop' value }
+  unpureAttr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "keytype", value: prop' value }
 
 instance Attr Q_ Keytype String where
-  attr Keytype bothValues  = unsafeAttribute $ Both { key: "keytype", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "keytype", value:  prop' value  })
-  pureAttr Keytype value  = unsafeAttribute $ This { key: "keytype", value:  prop' value  }
-  unpureAttr Keytype eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "keytype", value:  prop' value  }
+  attr Keytype bothValues = unsafeAttribute $ Both
+    { key: "keytype", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "keytype", value: prop' value })
+  pureAttr Keytype value = unsafeAttribute $ This
+    { key: "keytype", value: prop' value }
+  unpureAttr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "keytype", value: prop' value }
 
 instance Attr Rp_ Keytype String where
-  attr Keytype bothValues  = unsafeAttribute $ Both { key: "keytype", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "keytype", value:  prop' value  })
-  pureAttr Keytype value  = unsafeAttribute $ This { key: "keytype", value:  prop' value  }
-  unpureAttr Keytype eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "keytype", value:  prop' value  }
+  attr Keytype bothValues = unsafeAttribute $ Both
+    { key: "keytype", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "keytype", value: prop' value })
+  pureAttr Keytype value = unsafeAttribute $ This
+    { key: "keytype", value: prop' value }
+  unpureAttr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "keytype", value: prop' value }
 
 instance Attr Rt_ Keytype String where
-  attr Keytype bothValues  = unsafeAttribute $ Both { key: "keytype", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "keytype", value:  prop' value  })
-  pureAttr Keytype value  = unsafeAttribute $ This { key: "keytype", value:  prop' value  }
-  unpureAttr Keytype eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "keytype", value:  prop' value  }
+  attr Keytype bothValues = unsafeAttribute $ Both
+    { key: "keytype", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "keytype", value: prop' value })
+  pureAttr Keytype value = unsafeAttribute $ This
+    { key: "keytype", value: prop' value }
+  unpureAttr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "keytype", value: prop' value }
 
 instance Attr Ruby_ Keytype String where
-  attr Keytype bothValues  = unsafeAttribute $ Both { key: "keytype", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "keytype", value:  prop' value  })
-  pureAttr Keytype value  = unsafeAttribute $ This { key: "keytype", value:  prop' value  }
-  unpureAttr Keytype eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "keytype", value:  prop' value  }
+  attr Keytype bothValues = unsafeAttribute $ Both
+    { key: "keytype", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "keytype", value: prop' value })
+  pureAttr Keytype value = unsafeAttribute $ This
+    { key: "keytype", value: prop' value }
+  unpureAttr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "keytype", value: prop' value }
 
 instance Attr S_ Keytype String where
-  attr Keytype bothValues  = unsafeAttribute $ Both { key: "keytype", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "keytype", value:  prop' value  })
-  pureAttr Keytype value  = unsafeAttribute $ This { key: "keytype", value:  prop' value  }
-  unpureAttr Keytype eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "keytype", value:  prop' value  }
+  attr Keytype bothValues = unsafeAttribute $ Both
+    { key: "keytype", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "keytype", value: prop' value })
+  pureAttr Keytype value = unsafeAttribute $ This
+    { key: "keytype", value: prop' value }
+  unpureAttr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "keytype", value: prop' value }
 
 instance Attr Samp_ Keytype String where
-  attr Keytype bothValues  = unsafeAttribute $ Both { key: "keytype", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "keytype", value:  prop' value  })
-  pureAttr Keytype value  = unsafeAttribute $ This { key: "keytype", value:  prop' value  }
-  unpureAttr Keytype eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "keytype", value:  prop' value  }
+  attr Keytype bothValues = unsafeAttribute $ Both
+    { key: "keytype", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "keytype", value: prop' value })
+  pureAttr Keytype value = unsafeAttribute $ This
+    { key: "keytype", value: prop' value }
+  unpureAttr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "keytype", value: prop' value }
 
 instance Attr Script_ Keytype String where
-  attr Keytype bothValues  = unsafeAttribute $ Both { key: "keytype", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "keytype", value:  prop' value  })
-  pureAttr Keytype value  = unsafeAttribute $ This { key: "keytype", value:  prop' value  }
-  unpureAttr Keytype eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "keytype", value:  prop' value  }
+  attr Keytype bothValues = unsafeAttribute $ Both
+    { key: "keytype", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "keytype", value: prop' value })
+  pureAttr Keytype value = unsafeAttribute $ This
+    { key: "keytype", value: prop' value }
+  unpureAttr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "keytype", value: prop' value }
 
 instance Attr Section_ Keytype String where
-  attr Keytype bothValues  = unsafeAttribute $ Both { key: "keytype", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "keytype", value:  prop' value  })
-  pureAttr Keytype value  = unsafeAttribute $ This { key: "keytype", value:  prop' value  }
-  unpureAttr Keytype eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "keytype", value:  prop' value  }
+  attr Keytype bothValues = unsafeAttribute $ Both
+    { key: "keytype", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "keytype", value: prop' value })
+  pureAttr Keytype value = unsafeAttribute $ This
+    { key: "keytype", value: prop' value }
+  unpureAttr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "keytype", value: prop' value }
 
 instance Attr Select_ Keytype String where
-  attr Keytype bothValues  = unsafeAttribute $ Both { key: "keytype", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "keytype", value:  prop' value  })
-  pureAttr Keytype value  = unsafeAttribute $ This { key: "keytype", value:  prop' value  }
-  unpureAttr Keytype eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "keytype", value:  prop' value  }
+  attr Keytype bothValues = unsafeAttribute $ Both
+    { key: "keytype", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "keytype", value: prop' value })
+  pureAttr Keytype value = unsafeAttribute $ This
+    { key: "keytype", value: prop' value }
+  unpureAttr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "keytype", value: prop' value }
 
 instance Attr Small_ Keytype String where
-  attr Keytype bothValues  = unsafeAttribute $ Both { key: "keytype", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "keytype", value:  prop' value  })
-  pureAttr Keytype value  = unsafeAttribute $ This { key: "keytype", value:  prop' value  }
-  unpureAttr Keytype eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "keytype", value:  prop' value  }
+  attr Keytype bothValues = unsafeAttribute $ Both
+    { key: "keytype", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "keytype", value: prop' value })
+  pureAttr Keytype value = unsafeAttribute $ This
+    { key: "keytype", value: prop' value }
+  unpureAttr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "keytype", value: prop' value }
 
 instance Attr Source_ Keytype String where
-  attr Keytype bothValues  = unsafeAttribute $ Both { key: "keytype", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "keytype", value:  prop' value  })
-  pureAttr Keytype value  = unsafeAttribute $ This { key: "keytype", value:  prop' value  }
-  unpureAttr Keytype eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "keytype", value:  prop' value  }
+  attr Keytype bothValues = unsafeAttribute $ Both
+    { key: "keytype", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "keytype", value: prop' value })
+  pureAttr Keytype value = unsafeAttribute $ This
+    { key: "keytype", value: prop' value }
+  unpureAttr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "keytype", value: prop' value }
 
 instance Attr Span_ Keytype String where
-  attr Keytype bothValues  = unsafeAttribute $ Both { key: "keytype", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "keytype", value:  prop' value  })
-  pureAttr Keytype value  = unsafeAttribute $ This { key: "keytype", value:  prop' value  }
-  unpureAttr Keytype eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "keytype", value:  prop' value  }
+  attr Keytype bothValues = unsafeAttribute $ Both
+    { key: "keytype", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "keytype", value: prop' value })
+  pureAttr Keytype value = unsafeAttribute $ This
+    { key: "keytype", value: prop' value }
+  unpureAttr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "keytype", value: prop' value }
 
 instance Attr Strike_ Keytype String where
-  attr Keytype bothValues  = unsafeAttribute $ Both { key: "keytype", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "keytype", value:  prop' value  })
-  pureAttr Keytype value  = unsafeAttribute $ This { key: "keytype", value:  prop' value  }
-  unpureAttr Keytype eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "keytype", value:  prop' value  }
+  attr Keytype bothValues = unsafeAttribute $ Both
+    { key: "keytype", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "keytype", value: prop' value })
+  pureAttr Keytype value = unsafeAttribute $ This
+    { key: "keytype", value: prop' value }
+  unpureAttr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "keytype", value: prop' value }
 
 instance Attr Strong_ Keytype String where
-  attr Keytype bothValues  = unsafeAttribute $ Both { key: "keytype", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "keytype", value:  prop' value  })
-  pureAttr Keytype value  = unsafeAttribute $ This { key: "keytype", value:  prop' value  }
-  unpureAttr Keytype eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "keytype", value:  prop' value  }
+  attr Keytype bothValues = unsafeAttribute $ Both
+    { key: "keytype", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "keytype", value: prop' value })
+  pureAttr Keytype value = unsafeAttribute $ This
+    { key: "keytype", value: prop' value }
+  unpureAttr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "keytype", value: prop' value }
 
 instance Attr Style_ Keytype String where
-  attr Keytype bothValues  = unsafeAttribute $ Both { key: "keytype", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "keytype", value:  prop' value  })
-  pureAttr Keytype value  = unsafeAttribute $ This { key: "keytype", value:  prop' value  }
-  unpureAttr Keytype eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "keytype", value:  prop' value  }
+  attr Keytype bothValues = unsafeAttribute $ Both
+    { key: "keytype", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "keytype", value: prop' value })
+  pureAttr Keytype value = unsafeAttribute $ This
+    { key: "keytype", value: prop' value }
+  unpureAttr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "keytype", value: prop' value }
 
 instance Attr Sub_ Keytype String where
-  attr Keytype bothValues  = unsafeAttribute $ Both { key: "keytype", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "keytype", value:  prop' value  })
-  pureAttr Keytype value  = unsafeAttribute $ This { key: "keytype", value:  prop' value  }
-  unpureAttr Keytype eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "keytype", value:  prop' value  }
+  attr Keytype bothValues = unsafeAttribute $ Both
+    { key: "keytype", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "keytype", value: prop' value })
+  pureAttr Keytype value = unsafeAttribute $ This
+    { key: "keytype", value: prop' value }
+  unpureAttr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "keytype", value: prop' value }
 
 instance Attr Summary_ Keytype String where
-  attr Keytype bothValues  = unsafeAttribute $ Both { key: "keytype", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "keytype", value:  prop' value  })
-  pureAttr Keytype value  = unsafeAttribute $ This { key: "keytype", value:  prop' value  }
-  unpureAttr Keytype eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "keytype", value:  prop' value  }
+  attr Keytype bothValues = unsafeAttribute $ Both
+    { key: "keytype", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "keytype", value: prop' value })
+  pureAttr Keytype value = unsafeAttribute $ This
+    { key: "keytype", value: prop' value }
+  unpureAttr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "keytype", value: prop' value }
 
 instance Attr Sup_ Keytype String where
-  attr Keytype bothValues  = unsafeAttribute $ Both { key: "keytype", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "keytype", value:  prop' value  })
-  pureAttr Keytype value  = unsafeAttribute $ This { key: "keytype", value:  prop' value  }
-  unpureAttr Keytype eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "keytype", value:  prop' value  }
+  attr Keytype bothValues = unsafeAttribute $ Both
+    { key: "keytype", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "keytype", value: prop' value })
+  pureAttr Keytype value = unsafeAttribute $ This
+    { key: "keytype", value: prop' value }
+  unpureAttr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "keytype", value: prop' value }
 
 instance Attr Svg_ Keytype String where
-  attr Keytype bothValues  = unsafeAttribute $ Both { key: "keytype", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "keytype", value:  prop' value  })
-  pureAttr Keytype value  = unsafeAttribute $ This { key: "keytype", value:  prop' value  }
-  unpureAttr Keytype eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "keytype", value:  prop' value  }
+  attr Keytype bothValues = unsafeAttribute $ Both
+    { key: "keytype", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "keytype", value: prop' value })
+  pureAttr Keytype value = unsafeAttribute $ This
+    { key: "keytype", value: prop' value }
+  unpureAttr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "keytype", value: prop' value }
 
 instance Attr Table_ Keytype String where
-  attr Keytype bothValues  = unsafeAttribute $ Both { key: "keytype", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "keytype", value:  prop' value  })
-  pureAttr Keytype value  = unsafeAttribute $ This { key: "keytype", value:  prop' value  }
-  unpureAttr Keytype eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "keytype", value:  prop' value  }
+  attr Keytype bothValues = unsafeAttribute $ Both
+    { key: "keytype", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "keytype", value: prop' value })
+  pureAttr Keytype value = unsafeAttribute $ This
+    { key: "keytype", value: prop' value }
+  unpureAttr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "keytype", value: prop' value }
 
 instance Attr Tbody_ Keytype String where
-  attr Keytype bothValues  = unsafeAttribute $ Both { key: "keytype", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "keytype", value:  prop' value  })
-  pureAttr Keytype value  = unsafeAttribute $ This { key: "keytype", value:  prop' value  }
-  unpureAttr Keytype eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "keytype", value:  prop' value  }
+  attr Keytype bothValues = unsafeAttribute $ Both
+    { key: "keytype", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "keytype", value: prop' value })
+  pureAttr Keytype value = unsafeAttribute $ This
+    { key: "keytype", value: prop' value }
+  unpureAttr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "keytype", value: prop' value }
 
 instance Attr Td_ Keytype String where
-  attr Keytype bothValues  = unsafeAttribute $ Both { key: "keytype", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "keytype", value:  prop' value  })
-  pureAttr Keytype value  = unsafeAttribute $ This { key: "keytype", value:  prop' value  }
-  unpureAttr Keytype eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "keytype", value:  prop' value  }
+  attr Keytype bothValues = unsafeAttribute $ Both
+    { key: "keytype", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "keytype", value: prop' value })
+  pureAttr Keytype value = unsafeAttribute $ This
+    { key: "keytype", value: prop' value }
+  unpureAttr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "keytype", value: prop' value }
 
 instance Attr Template_ Keytype String where
-  attr Keytype bothValues  = unsafeAttribute $ Both { key: "keytype", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "keytype", value:  prop' value  })
-  pureAttr Keytype value  = unsafeAttribute $ This { key: "keytype", value:  prop' value  }
-  unpureAttr Keytype eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "keytype", value:  prop' value  }
+  attr Keytype bothValues = unsafeAttribute $ Both
+    { key: "keytype", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "keytype", value: prop' value })
+  pureAttr Keytype value = unsafeAttribute $ This
+    { key: "keytype", value: prop' value }
+  unpureAttr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "keytype", value: prop' value }
 
 instance Attr Textarea_ Keytype String where
-  attr Keytype bothValues  = unsafeAttribute $ Both { key: "keytype", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "keytype", value:  prop' value  })
-  pureAttr Keytype value  = unsafeAttribute $ This { key: "keytype", value:  prop' value  }
-  unpureAttr Keytype eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "keytype", value:  prop' value  }
+  attr Keytype bothValues = unsafeAttribute $ Both
+    { key: "keytype", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "keytype", value: prop' value })
+  pureAttr Keytype value = unsafeAttribute $ This
+    { key: "keytype", value: prop' value }
+  unpureAttr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "keytype", value: prop' value }
 
 instance Attr Tfoot_ Keytype String where
-  attr Keytype bothValues  = unsafeAttribute $ Both { key: "keytype", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "keytype", value:  prop' value  })
-  pureAttr Keytype value  = unsafeAttribute $ This { key: "keytype", value:  prop' value  }
-  unpureAttr Keytype eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "keytype", value:  prop' value  }
+  attr Keytype bothValues = unsafeAttribute $ Both
+    { key: "keytype", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "keytype", value: prop' value })
+  pureAttr Keytype value = unsafeAttribute $ This
+    { key: "keytype", value: prop' value }
+  unpureAttr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "keytype", value: prop' value }
 
 instance Attr Th_ Keytype String where
-  attr Keytype bothValues  = unsafeAttribute $ Both { key: "keytype", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "keytype", value:  prop' value  })
-  pureAttr Keytype value  = unsafeAttribute $ This { key: "keytype", value:  prop' value  }
-  unpureAttr Keytype eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "keytype", value:  prop' value  }
+  attr Keytype bothValues = unsafeAttribute $ Both
+    { key: "keytype", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "keytype", value: prop' value })
+  pureAttr Keytype value = unsafeAttribute $ This
+    { key: "keytype", value: prop' value }
+  unpureAttr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "keytype", value: prop' value }
 
 instance Attr Thead_ Keytype String where
-  attr Keytype bothValues  = unsafeAttribute $ Both { key: "keytype", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "keytype", value:  prop' value  })
-  pureAttr Keytype value  = unsafeAttribute $ This { key: "keytype", value:  prop' value  }
-  unpureAttr Keytype eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "keytype", value:  prop' value  }
+  attr Keytype bothValues = unsafeAttribute $ Both
+    { key: "keytype", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "keytype", value: prop' value })
+  pureAttr Keytype value = unsafeAttribute $ This
+    { key: "keytype", value: prop' value }
+  unpureAttr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "keytype", value: prop' value }
 
 instance Attr Time_ Keytype String where
-  attr Keytype bothValues  = unsafeAttribute $ Both { key: "keytype", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "keytype", value:  prop' value  })
-  pureAttr Keytype value  = unsafeAttribute $ This { key: "keytype", value:  prop' value  }
-  unpureAttr Keytype eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "keytype", value:  prop' value  }
+  attr Keytype bothValues = unsafeAttribute $ Both
+    { key: "keytype", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "keytype", value: prop' value })
+  pureAttr Keytype value = unsafeAttribute $ This
+    { key: "keytype", value: prop' value }
+  unpureAttr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "keytype", value: prop' value }
 
 instance Attr Title_ Keytype String where
-  attr Keytype bothValues  = unsafeAttribute $ Both { key: "keytype", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "keytype", value:  prop' value  })
-  pureAttr Keytype value  = unsafeAttribute $ This { key: "keytype", value:  prop' value  }
-  unpureAttr Keytype eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "keytype", value:  prop' value  }
+  attr Keytype bothValues = unsafeAttribute $ Both
+    { key: "keytype", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "keytype", value: prop' value })
+  pureAttr Keytype value = unsafeAttribute $ This
+    { key: "keytype", value: prop' value }
+  unpureAttr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "keytype", value: prop' value }
 
 instance Attr Tr_ Keytype String where
-  attr Keytype bothValues  = unsafeAttribute $ Both { key: "keytype", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "keytype", value:  prop' value  })
-  pureAttr Keytype value  = unsafeAttribute $ This { key: "keytype", value:  prop' value  }
-  unpureAttr Keytype eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "keytype", value:  prop' value  }
+  attr Keytype bothValues = unsafeAttribute $ Both
+    { key: "keytype", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "keytype", value: prop' value })
+  pureAttr Keytype value = unsafeAttribute $ This
+    { key: "keytype", value: prop' value }
+  unpureAttr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "keytype", value: prop' value }
 
 instance Attr Track_ Keytype String where
-  attr Keytype bothValues  = unsafeAttribute $ Both { key: "keytype", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "keytype", value:  prop' value  })
-  pureAttr Keytype value  = unsafeAttribute $ This { key: "keytype", value:  prop' value  }
-  unpureAttr Keytype eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "keytype", value:  prop' value  }
+  attr Keytype bothValues = unsafeAttribute $ Both
+    { key: "keytype", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "keytype", value: prop' value })
+  pureAttr Keytype value = unsafeAttribute $ This
+    { key: "keytype", value: prop' value }
+  unpureAttr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "keytype", value: prop' value }
 
 instance Attr Tt_ Keytype String where
-  attr Keytype bothValues  = unsafeAttribute $ Both { key: "keytype", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "keytype", value:  prop' value  })
-  pureAttr Keytype value  = unsafeAttribute $ This { key: "keytype", value:  prop' value  }
-  unpureAttr Keytype eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "keytype", value:  prop' value  }
+  attr Keytype bothValues = unsafeAttribute $ Both
+    { key: "keytype", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "keytype", value: prop' value })
+  pureAttr Keytype value = unsafeAttribute $ This
+    { key: "keytype", value: prop' value }
+  unpureAttr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "keytype", value: prop' value }
 
 instance Attr U_ Keytype String where
-  attr Keytype bothValues  = unsafeAttribute $ Both { key: "keytype", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "keytype", value:  prop' value  })
-  pureAttr Keytype value  = unsafeAttribute $ This { key: "keytype", value:  prop' value  }
-  unpureAttr Keytype eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "keytype", value:  prop' value  }
+  attr Keytype bothValues = unsafeAttribute $ Both
+    { key: "keytype", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "keytype", value: prop' value })
+  pureAttr Keytype value = unsafeAttribute $ This
+    { key: "keytype", value: prop' value }
+  unpureAttr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "keytype", value: prop' value }
 
 instance Attr Ul_ Keytype String where
-  attr Keytype bothValues  = unsafeAttribute $ Both { key: "keytype", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "keytype", value:  prop' value  })
-  pureAttr Keytype value  = unsafeAttribute $ This { key: "keytype", value:  prop' value  }
-  unpureAttr Keytype eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "keytype", value:  prop' value  }
+  attr Keytype bothValues = unsafeAttribute $ Both
+    { key: "keytype", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "keytype", value: prop' value })
+  pureAttr Keytype value = unsafeAttribute $ This
+    { key: "keytype", value: prop' value }
+  unpureAttr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "keytype", value: prop' value }
 
 instance Attr Var_ Keytype String where
-  attr Keytype bothValues  = unsafeAttribute $ Both { key: "keytype", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "keytype", value:  prop' value  })
-  pureAttr Keytype value  = unsafeAttribute $ This { key: "keytype", value:  prop' value  }
-  unpureAttr Keytype eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "keytype", value:  prop' value  }
+  attr Keytype bothValues = unsafeAttribute $ Both
+    { key: "keytype", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "keytype", value: prop' value })
+  pureAttr Keytype value = unsafeAttribute $ This
+    { key: "keytype", value: prop' value }
+  unpureAttr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "keytype", value: prop' value }
 
 instance Attr Video_ Keytype String where
-  attr Keytype bothValues  = unsafeAttribute $ Both { key: "keytype", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "keytype", value:  prop' value  })
-  pureAttr Keytype value  = unsafeAttribute $ This { key: "keytype", value:  prop' value  }
-  unpureAttr Keytype eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "keytype", value:  prop' value  }
+  attr Keytype bothValues = unsafeAttribute $ Both
+    { key: "keytype", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "keytype", value: prop' value })
+  pureAttr Keytype value = unsafeAttribute $ This
+    { key: "keytype", value: prop' value }
+  unpureAttr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "keytype", value: prop' value }
 
 instance Attr Wbr_ Keytype String where
-  attr Keytype bothValues  = unsafeAttribute $ Both { key: "keytype", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "keytype", value:  prop' value  })
-  pureAttr Keytype value  = unsafeAttribute $ This { key: "keytype", value:  prop' value  }
-  unpureAttr Keytype eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "keytype", value:  prop' value  }
+  attr Keytype bothValues = unsafeAttribute $ Both
+    { key: "keytype", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "keytype", value: prop' value })
+  pureAttr Keytype value = unsafeAttribute $ This
+    { key: "keytype", value: prop' value }
+  unpureAttr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "keytype", value: prop' value }
 
 instance Attr everything Keytype Unit where
-  attr Keytype bothValues  = unsafeAttribute $ Both { key: "keytype", value:  unset'  } (snd bothValues <#> \_ -> { key: "keytype", value:  unset'  })
-  pureAttr Keytype _  = unsafeAttribute $ This { key: "keytype", value:  unset'  }
-  unpureAttr Keytype eventValue  = unsafeAttribute $ That $ eventValue <#> \_ -> { key: "keytype", value:  unset'  }
+  attr Keytype bothValues = unsafeAttribute $ Both
+    { key: "keytype", value: unset' }
+    (snd bothValues <#> \_ -> { key: "keytype", value: unset' })
+  pureAttr Keytype _ = unsafeAttribute $ This { key: "keytype", value: unset' }
+  unpureAttr Keytype eventValue = unsafeAttribute $ That $ eventValue <#> \_ ->
+    { key: "keytype", value: unset' }

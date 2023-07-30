@@ -10,19 +10,35 @@ import FRP.Event (Event)
 data OnDragend = OnDragend
 
 instance Attr anything OnDragend Cb where
-  attr OnDragend bothValues  = unsafeAttribute $ Both { key: "dragend", value:  cb' (fst bothValues)  } (snd bothValues <#> \value -> { key: "dragend", value:  cb' value  })
-  pureAttr OnDragend value  = unsafeAttribute $ This { key: "dragend", value:  cb' value  }
-  unpureAttr OnDragend eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "dragend", value:  cb' value  }
+  attr OnDragend bothValues = unsafeAttribute $ Both
+    { key: "dragend", value: cb' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "dragend", value: cb' value })
+  pureAttr OnDragend value = unsafeAttribute $ This
+    { key: "dragend", value: cb' value }
+  unpureAttr OnDragend eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "dragend", value: cb' value }
 
 instance Attr anything OnDragend (Effect Unit) where
-  attr OnDragend bothValues  = unsafeAttribute $ Both { key: "dragend", value:  cb' (Cb (const ((fst bothValues) $> true)))  } (snd bothValues <#> \value -> { key: "dragend", value:  cb' (Cb (const (value $> true)))  })
-  pureAttr OnDragend value  = unsafeAttribute $ This { key: "dragend", value:  cb' (Cb (const (value $> true)))  }
-  unpureAttr OnDragend eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "dragend", value:  cb' (Cb (const (value $> true)))  }
+  attr OnDragend bothValues = unsafeAttribute $ Both
+    { key: "dragend", value: cb' (Cb (const ((fst bothValues) $> true))) }
+    ( snd bothValues <#> \value ->
+        { key: "dragend", value: cb' (Cb (const (value $> true))) }
+    )
+  pureAttr OnDragend value = unsafeAttribute $ This
+    { key: "dragend", value: cb' (Cb (const (value $> true))) }
+  unpureAttr OnDragend eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "dragend", value: cb' (Cb (const (value $> true))) }
 
 instance Attr anything OnDragend (Effect Boolean) where
-  attr OnDragend bothValues  = unsafeAttribute $ Both { key: "dragend", value:  cb' (Cb (const (fst bothValues)))  } (snd bothValues <#> \value -> { key: "dragend", value:  cb' (Cb (const value))  })
-  pureAttr OnDragend value  = unsafeAttribute $ This { key: "dragend", value:  cb' (Cb (const value))  }
-  unpureAttr OnDragend eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "dragend", value:  cb' (Cb (const value))  }
+  attr OnDragend bothValues = unsafeAttribute $ Both
+    { key: "dragend", value: cb' (Cb (const (fst bothValues))) }
+    ( snd bothValues <#> \value ->
+        { key: "dragend", value: cb' (Cb (const value)) }
+    )
+  pureAttr OnDragend value = unsafeAttribute $ This
+    { key: "dragend", value: cb' (Cb (const value)) }
+  unpureAttr OnDragend eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "dragend", value: cb' (Cb (const value)) }
 
 type OnDragendEffect =
   forall element
@@ -30,6 +46,10 @@ type OnDragendEffect =
   => Event (Attribute element)
 
 instance Attr everything OnDragend Unit where
-  attr OnDragend bothValues  = unsafeAttribute $ Both { key: "dragend", value:  unset'  } (snd bothValues <#> \_ -> { key: "dragend", value:  unset'  })
-  pureAttr OnDragend _  = unsafeAttribute $ This { key: "dragend", value:  unset'  }
-  unpureAttr OnDragend eventValue  = unsafeAttribute $ That $ eventValue <#> \_ -> { key: "dragend", value:  unset'  }
+  attr OnDragend bothValues = unsafeAttribute $ Both
+    { key: "dragend", value: unset' }
+    (snd bothValues <#> \_ -> { key: "dragend", value: unset' })
+  pureAttr OnDragend _ = unsafeAttribute $ This
+    { key: "dragend", value: unset' }
+  unpureAttr OnDragend eventValue = unsafeAttribute $ That $ eventValue <#>
+    \_ -> { key: "dragend", value: unset' }

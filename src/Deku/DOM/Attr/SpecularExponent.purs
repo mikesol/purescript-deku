@@ -11,16 +11,32 @@ import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 data SpecularExponent = SpecularExponent
 
 instance Attr FeSpecularLighting_ SpecularExponent String where
-  attr SpecularExponent bothValues  = unsafeAttribute $ Both { key: "specularExponent", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "specularExponent", value:  prop' value  })
-  pureAttr SpecularExponent value  = unsafeAttribute $ This { key: "specularExponent", value:  prop' value  }
-  unpureAttr SpecularExponent eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "specularExponent", value:  prop' value  }
+  attr SpecularExponent bothValues = unsafeAttribute $ Both
+    { key: "specularExponent", value: prop' (fst bothValues) }
+    ( snd bothValues <#> \value ->
+        { key: "specularExponent", value: prop' value }
+    )
+  pureAttr SpecularExponent value = unsafeAttribute $ This
+    { key: "specularExponent", value: prop' value }
+  unpureAttr SpecularExponent eventValue = unsafeAttribute $ That $ eventValue
+    <#> \value -> { key: "specularExponent", value: prop' value }
 
 instance Attr FeSpotLight_ SpecularExponent String where
-  attr SpecularExponent bothValues  = unsafeAttribute $ Both { key: "specularExponent", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "specularExponent", value:  prop' value  })
-  pureAttr SpecularExponent value  = unsafeAttribute $ This { key: "specularExponent", value:  prop' value  }
-  unpureAttr SpecularExponent eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "specularExponent", value:  prop' value  }
+  attr SpecularExponent bothValues = unsafeAttribute $ Both
+    { key: "specularExponent", value: prop' (fst bothValues) }
+    ( snd bothValues <#> \value ->
+        { key: "specularExponent", value: prop' value }
+    )
+  pureAttr SpecularExponent value = unsafeAttribute $ This
+    { key: "specularExponent", value: prop' value }
+  unpureAttr SpecularExponent eventValue = unsafeAttribute $ That $ eventValue
+    <#> \value -> { key: "specularExponent", value: prop' value }
 
 instance Attr everything SpecularExponent Unit where
-  attr SpecularExponent bothValues  = unsafeAttribute $ Both { key: "specularExponent", value:  unset'  } (snd bothValues <#> \_ -> { key: "specularExponent", value:  unset'  })
-  pureAttr SpecularExponent _  = unsafeAttribute $ This { key: "specularExponent", value:  unset'  }
-  unpureAttr SpecularExponent eventValue  = unsafeAttribute $ That $ eventValue <#> \_ -> { key: "specularExponent", value:  unset'  }
+  attr SpecularExponent bothValues = unsafeAttribute $ Both
+    { key: "specularExponent", value: unset' }
+    (snd bothValues <#> \_ -> { key: "specularExponent", value: unset' })
+  pureAttr SpecularExponent _ = unsafeAttribute $ This
+    { key: "specularExponent", value: unset' }
+  unpureAttr SpecularExponent eventValue = unsafeAttribute $ That $ eventValue
+    <#> \_ -> { key: "specularExponent", value: unset' }

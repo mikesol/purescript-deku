@@ -131,616 +131,1108 @@ import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 data Radiogroup = Radiogroup
 
 instance Attr A_ Radiogroup String where
-  attr Radiogroup bothValues  = unsafeAttribute $ Both { key: "radiogroup", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "radiogroup", value:  prop' value  })
-  pureAttr Radiogroup value  = unsafeAttribute $ This { key: "radiogroup", value:  prop' value  }
-  unpureAttr Radiogroup eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "radiogroup", value:  prop' value  }
+  attr Radiogroup bothValues = unsafeAttribute $ Both
+    { key: "radiogroup", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "radiogroup", value: prop' value })
+  pureAttr Radiogroup value = unsafeAttribute $ This
+    { key: "radiogroup", value: prop' value }
+  unpureAttr Radiogroup eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "radiogroup", value: prop' value }
 
 instance Attr Abbr_ Radiogroup String where
-  attr Radiogroup bothValues  = unsafeAttribute $ Both { key: "radiogroup", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "radiogroup", value:  prop' value  })
-  pureAttr Radiogroup value  = unsafeAttribute $ This { key: "radiogroup", value:  prop' value  }
-  unpureAttr Radiogroup eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "radiogroup", value:  prop' value  }
+  attr Radiogroup bothValues = unsafeAttribute $ Both
+    { key: "radiogroup", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "radiogroup", value: prop' value })
+  pureAttr Radiogroup value = unsafeAttribute $ This
+    { key: "radiogroup", value: prop' value }
+  unpureAttr Radiogroup eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "radiogroup", value: prop' value }
 
 instance Attr Acronym_ Radiogroup String where
-  attr Radiogroup bothValues  = unsafeAttribute $ Both { key: "radiogroup", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "radiogroup", value:  prop' value  })
-  pureAttr Radiogroup value  = unsafeAttribute $ This { key: "radiogroup", value:  prop' value  }
-  unpureAttr Radiogroup eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "radiogroup", value:  prop' value  }
+  attr Radiogroup bothValues = unsafeAttribute $ Both
+    { key: "radiogroup", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "radiogroup", value: prop' value })
+  pureAttr Radiogroup value = unsafeAttribute $ This
+    { key: "radiogroup", value: prop' value }
+  unpureAttr Radiogroup eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "radiogroup", value: prop' value }
 
 instance Attr Address_ Radiogroup String where
-  attr Radiogroup bothValues  = unsafeAttribute $ Both { key: "radiogroup", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "radiogroup", value:  prop' value  })
-  pureAttr Radiogroup value  = unsafeAttribute $ This { key: "radiogroup", value:  prop' value  }
-  unpureAttr Radiogroup eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "radiogroup", value:  prop' value  }
+  attr Radiogroup bothValues = unsafeAttribute $ Both
+    { key: "radiogroup", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "radiogroup", value: prop' value })
+  pureAttr Radiogroup value = unsafeAttribute $ This
+    { key: "radiogroup", value: prop' value }
+  unpureAttr Radiogroup eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "radiogroup", value: prop' value }
 
 instance Attr Applet_ Radiogroup String where
-  attr Radiogroup bothValues  = unsafeAttribute $ Both { key: "radiogroup", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "radiogroup", value:  prop' value  })
-  pureAttr Radiogroup value  = unsafeAttribute $ This { key: "radiogroup", value:  prop' value  }
-  unpureAttr Radiogroup eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "radiogroup", value:  prop' value  }
+  attr Radiogroup bothValues = unsafeAttribute $ Both
+    { key: "radiogroup", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "radiogroup", value: prop' value })
+  pureAttr Radiogroup value = unsafeAttribute $ This
+    { key: "radiogroup", value: prop' value }
+  unpureAttr Radiogroup eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "radiogroup", value: prop' value }
 
 instance Attr Area_ Radiogroup String where
-  attr Radiogroup bothValues  = unsafeAttribute $ Both { key: "radiogroup", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "radiogroup", value:  prop' value  })
-  pureAttr Radiogroup value  = unsafeAttribute $ This { key: "radiogroup", value:  prop' value  }
-  unpureAttr Radiogroup eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "radiogroup", value:  prop' value  }
+  attr Radiogroup bothValues = unsafeAttribute $ Both
+    { key: "radiogroup", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "radiogroup", value: prop' value })
+  pureAttr Radiogroup value = unsafeAttribute $ This
+    { key: "radiogroup", value: prop' value }
+  unpureAttr Radiogroup eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "radiogroup", value: prop' value }
 
 instance Attr Article_ Radiogroup String where
-  attr Radiogroup bothValues  = unsafeAttribute $ Both { key: "radiogroup", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "radiogroup", value:  prop' value  })
-  pureAttr Radiogroup value  = unsafeAttribute $ This { key: "radiogroup", value:  prop' value  }
-  unpureAttr Radiogroup eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "radiogroup", value:  prop' value  }
+  attr Radiogroup bothValues = unsafeAttribute $ Both
+    { key: "radiogroup", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "radiogroup", value: prop' value })
+  pureAttr Radiogroup value = unsafeAttribute $ This
+    { key: "radiogroup", value: prop' value }
+  unpureAttr Radiogroup eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "radiogroup", value: prop' value }
 
 instance Attr Aside_ Radiogroup String where
-  attr Radiogroup bothValues  = unsafeAttribute $ Both { key: "radiogroup", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "radiogroup", value:  prop' value  })
-  pureAttr Radiogroup value  = unsafeAttribute $ This { key: "radiogroup", value:  prop' value  }
-  unpureAttr Radiogroup eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "radiogroup", value:  prop' value  }
+  attr Radiogroup bothValues = unsafeAttribute $ Both
+    { key: "radiogroup", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "radiogroup", value: prop' value })
+  pureAttr Radiogroup value = unsafeAttribute $ This
+    { key: "radiogroup", value: prop' value }
+  unpureAttr Radiogroup eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "radiogroup", value: prop' value }
 
 instance Attr Audio_ Radiogroup String where
-  attr Radiogroup bothValues  = unsafeAttribute $ Both { key: "radiogroup", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "radiogroup", value:  prop' value  })
-  pureAttr Radiogroup value  = unsafeAttribute $ This { key: "radiogroup", value:  prop' value  }
-  unpureAttr Radiogroup eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "radiogroup", value:  prop' value  }
+  attr Radiogroup bothValues = unsafeAttribute $ Both
+    { key: "radiogroup", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "radiogroup", value: prop' value })
+  pureAttr Radiogroup value = unsafeAttribute $ This
+    { key: "radiogroup", value: prop' value }
+  unpureAttr Radiogroup eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "radiogroup", value: prop' value }
 
 instance Attr B_ Radiogroup String where
-  attr Radiogroup bothValues  = unsafeAttribute $ Both { key: "radiogroup", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "radiogroup", value:  prop' value  })
-  pureAttr Radiogroup value  = unsafeAttribute $ This { key: "radiogroup", value:  prop' value  }
-  unpureAttr Radiogroup eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "radiogroup", value:  prop' value  }
+  attr Radiogroup bothValues = unsafeAttribute $ Both
+    { key: "radiogroup", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "radiogroup", value: prop' value })
+  pureAttr Radiogroup value = unsafeAttribute $ This
+    { key: "radiogroup", value: prop' value }
+  unpureAttr Radiogroup eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "radiogroup", value: prop' value }
 
 instance Attr Base_ Radiogroup String where
-  attr Radiogroup bothValues  = unsafeAttribute $ Both { key: "radiogroup", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "radiogroup", value:  prop' value  })
-  pureAttr Radiogroup value  = unsafeAttribute $ This { key: "radiogroup", value:  prop' value  }
-  unpureAttr Radiogroup eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "radiogroup", value:  prop' value  }
+  attr Radiogroup bothValues = unsafeAttribute $ Both
+    { key: "radiogroup", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "radiogroup", value: prop' value })
+  pureAttr Radiogroup value = unsafeAttribute $ This
+    { key: "radiogroup", value: prop' value }
+  unpureAttr Radiogroup eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "radiogroup", value: prop' value }
 
 instance Attr Basefont_ Radiogroup String where
-  attr Radiogroup bothValues  = unsafeAttribute $ Both { key: "radiogroup", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "radiogroup", value:  prop' value  })
-  pureAttr Radiogroup value  = unsafeAttribute $ This { key: "radiogroup", value:  prop' value  }
-  unpureAttr Radiogroup eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "radiogroup", value:  prop' value  }
+  attr Radiogroup bothValues = unsafeAttribute $ Both
+    { key: "radiogroup", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "radiogroup", value: prop' value })
+  pureAttr Radiogroup value = unsafeAttribute $ This
+    { key: "radiogroup", value: prop' value }
+  unpureAttr Radiogroup eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "radiogroup", value: prop' value }
 
 instance Attr Bdi_ Radiogroup String where
-  attr Radiogroup bothValues  = unsafeAttribute $ Both { key: "radiogroup", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "radiogroup", value:  prop' value  })
-  pureAttr Radiogroup value  = unsafeAttribute $ This { key: "radiogroup", value:  prop' value  }
-  unpureAttr Radiogroup eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "radiogroup", value:  prop' value  }
+  attr Radiogroup bothValues = unsafeAttribute $ Both
+    { key: "radiogroup", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "radiogroup", value: prop' value })
+  pureAttr Radiogroup value = unsafeAttribute $ This
+    { key: "radiogroup", value: prop' value }
+  unpureAttr Radiogroup eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "radiogroup", value: prop' value }
 
 instance Attr Bdo_ Radiogroup String where
-  attr Radiogroup bothValues  = unsafeAttribute $ Both { key: "radiogroup", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "radiogroup", value:  prop' value  })
-  pureAttr Radiogroup value  = unsafeAttribute $ This { key: "radiogroup", value:  prop' value  }
-  unpureAttr Radiogroup eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "radiogroup", value:  prop' value  }
+  attr Radiogroup bothValues = unsafeAttribute $ Both
+    { key: "radiogroup", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "radiogroup", value: prop' value })
+  pureAttr Radiogroup value = unsafeAttribute $ This
+    { key: "radiogroup", value: prop' value }
+  unpureAttr Radiogroup eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "radiogroup", value: prop' value }
 
 instance Attr Big_ Radiogroup String where
-  attr Radiogroup bothValues  = unsafeAttribute $ Both { key: "radiogroup", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "radiogroup", value:  prop' value  })
-  pureAttr Radiogroup value  = unsafeAttribute $ This { key: "radiogroup", value:  prop' value  }
-  unpureAttr Radiogroup eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "radiogroup", value:  prop' value  }
+  attr Radiogroup bothValues = unsafeAttribute $ Both
+    { key: "radiogroup", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "radiogroup", value: prop' value })
+  pureAttr Radiogroup value = unsafeAttribute $ This
+    { key: "radiogroup", value: prop' value }
+  unpureAttr Radiogroup eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "radiogroup", value: prop' value }
 
 instance Attr Blockquote_ Radiogroup String where
-  attr Radiogroup bothValues  = unsafeAttribute $ Both { key: "radiogroup", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "radiogroup", value:  prop' value  })
-  pureAttr Radiogroup value  = unsafeAttribute $ This { key: "radiogroup", value:  prop' value  }
-  unpureAttr Radiogroup eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "radiogroup", value:  prop' value  }
+  attr Radiogroup bothValues = unsafeAttribute $ Both
+    { key: "radiogroup", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "radiogroup", value: prop' value })
+  pureAttr Radiogroup value = unsafeAttribute $ This
+    { key: "radiogroup", value: prop' value }
+  unpureAttr Radiogroup eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "radiogroup", value: prop' value }
 
 instance Attr Body_ Radiogroup String where
-  attr Radiogroup bothValues  = unsafeAttribute $ Both { key: "radiogroup", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "radiogroup", value:  prop' value  })
-  pureAttr Radiogroup value  = unsafeAttribute $ This { key: "radiogroup", value:  prop' value  }
-  unpureAttr Radiogroup eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "radiogroup", value:  prop' value  }
+  attr Radiogroup bothValues = unsafeAttribute $ Both
+    { key: "radiogroup", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "radiogroup", value: prop' value })
+  pureAttr Radiogroup value = unsafeAttribute $ This
+    { key: "radiogroup", value: prop' value }
+  unpureAttr Radiogroup eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "radiogroup", value: prop' value }
 
 instance Attr Br_ Radiogroup String where
-  attr Radiogroup bothValues  = unsafeAttribute $ Both { key: "radiogroup", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "radiogroup", value:  prop' value  })
-  pureAttr Radiogroup value  = unsafeAttribute $ This { key: "radiogroup", value:  prop' value  }
-  unpureAttr Radiogroup eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "radiogroup", value:  prop' value  }
+  attr Radiogroup bothValues = unsafeAttribute $ Both
+    { key: "radiogroup", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "radiogroup", value: prop' value })
+  pureAttr Radiogroup value = unsafeAttribute $ This
+    { key: "radiogroup", value: prop' value }
+  unpureAttr Radiogroup eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "radiogroup", value: prop' value }
 
 instance Attr Button_ Radiogroup String where
-  attr Radiogroup bothValues  = unsafeAttribute $ Both { key: "radiogroup", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "radiogroup", value:  prop' value  })
-  pureAttr Radiogroup value  = unsafeAttribute $ This { key: "radiogroup", value:  prop' value  }
-  unpureAttr Radiogroup eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "radiogroup", value:  prop' value  }
+  attr Radiogroup bothValues = unsafeAttribute $ Both
+    { key: "radiogroup", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "radiogroup", value: prop' value })
+  pureAttr Radiogroup value = unsafeAttribute $ This
+    { key: "radiogroup", value: prop' value }
+  unpureAttr Radiogroup eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "radiogroup", value: prop' value }
 
 instance Attr Canvas_ Radiogroup String where
-  attr Radiogroup bothValues  = unsafeAttribute $ Both { key: "radiogroup", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "radiogroup", value:  prop' value  })
-  pureAttr Radiogroup value  = unsafeAttribute $ This { key: "radiogroup", value:  prop' value  }
-  unpureAttr Radiogroup eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "radiogroup", value:  prop' value  }
+  attr Radiogroup bothValues = unsafeAttribute $ Both
+    { key: "radiogroup", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "radiogroup", value: prop' value })
+  pureAttr Radiogroup value = unsafeAttribute $ This
+    { key: "radiogroup", value: prop' value }
+  unpureAttr Radiogroup eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "radiogroup", value: prop' value }
 
 instance Attr Caption_ Radiogroup String where
-  attr Radiogroup bothValues  = unsafeAttribute $ Both { key: "radiogroup", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "radiogroup", value:  prop' value  })
-  pureAttr Radiogroup value  = unsafeAttribute $ This { key: "radiogroup", value:  prop' value  }
-  unpureAttr Radiogroup eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "radiogroup", value:  prop' value  }
+  attr Radiogroup bothValues = unsafeAttribute $ Both
+    { key: "radiogroup", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "radiogroup", value: prop' value })
+  pureAttr Radiogroup value = unsafeAttribute $ This
+    { key: "radiogroup", value: prop' value }
+  unpureAttr Radiogroup eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "radiogroup", value: prop' value }
 
 instance Attr Center_ Radiogroup String where
-  attr Radiogroup bothValues  = unsafeAttribute $ Both { key: "radiogroup", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "radiogroup", value:  prop' value  })
-  pureAttr Radiogroup value  = unsafeAttribute $ This { key: "radiogroup", value:  prop' value  }
-  unpureAttr Radiogroup eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "radiogroup", value:  prop' value  }
+  attr Radiogroup bothValues = unsafeAttribute $ Both
+    { key: "radiogroup", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "radiogroup", value: prop' value })
+  pureAttr Radiogroup value = unsafeAttribute $ This
+    { key: "radiogroup", value: prop' value }
+  unpureAttr Radiogroup eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "radiogroup", value: prop' value }
 
 instance Attr Cite_ Radiogroup String where
-  attr Radiogroup bothValues  = unsafeAttribute $ Both { key: "radiogroup", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "radiogroup", value:  prop' value  })
-  pureAttr Radiogroup value  = unsafeAttribute $ This { key: "radiogroup", value:  prop' value  }
-  unpureAttr Radiogroup eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "radiogroup", value:  prop' value  }
+  attr Radiogroup bothValues = unsafeAttribute $ Both
+    { key: "radiogroup", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "radiogroup", value: prop' value })
+  pureAttr Radiogroup value = unsafeAttribute $ This
+    { key: "radiogroup", value: prop' value }
+  unpureAttr Radiogroup eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "radiogroup", value: prop' value }
 
 instance Attr Code_ Radiogroup String where
-  attr Radiogroup bothValues  = unsafeAttribute $ Both { key: "radiogroup", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "radiogroup", value:  prop' value  })
-  pureAttr Radiogroup value  = unsafeAttribute $ This { key: "radiogroup", value:  prop' value  }
-  unpureAttr Radiogroup eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "radiogroup", value:  prop' value  }
+  attr Radiogroup bothValues = unsafeAttribute $ Both
+    { key: "radiogroup", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "radiogroup", value: prop' value })
+  pureAttr Radiogroup value = unsafeAttribute $ This
+    { key: "radiogroup", value: prop' value }
+  unpureAttr Radiogroup eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "radiogroup", value: prop' value }
 
 instance Attr Col_ Radiogroup String where
-  attr Radiogroup bothValues  = unsafeAttribute $ Both { key: "radiogroup", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "radiogroup", value:  prop' value  })
-  pureAttr Radiogroup value  = unsafeAttribute $ This { key: "radiogroup", value:  prop' value  }
-  unpureAttr Radiogroup eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "radiogroup", value:  prop' value  }
+  attr Radiogroup bothValues = unsafeAttribute $ Both
+    { key: "radiogroup", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "radiogroup", value: prop' value })
+  pureAttr Radiogroup value = unsafeAttribute $ This
+    { key: "radiogroup", value: prop' value }
+  unpureAttr Radiogroup eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "radiogroup", value: prop' value }
 
 instance Attr Colgroup_ Radiogroup String where
-  attr Radiogroup bothValues  = unsafeAttribute $ Both { key: "radiogroup", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "radiogroup", value:  prop' value  })
-  pureAttr Radiogroup value  = unsafeAttribute $ This { key: "radiogroup", value:  prop' value  }
-  unpureAttr Radiogroup eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "radiogroup", value:  prop' value  }
+  attr Radiogroup bothValues = unsafeAttribute $ Both
+    { key: "radiogroup", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "radiogroup", value: prop' value })
+  pureAttr Radiogroup value = unsafeAttribute $ This
+    { key: "radiogroup", value: prop' value }
+  unpureAttr Radiogroup eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "radiogroup", value: prop' value }
 
 instance Attr Xdata_ Radiogroup String where
-  attr Radiogroup bothValues  = unsafeAttribute $ Both { key: "radiogroup", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "radiogroup", value:  prop' value  })
-  pureAttr Radiogroup value  = unsafeAttribute $ This { key: "radiogroup", value:  prop' value  }
-  unpureAttr Radiogroup eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "radiogroup", value:  prop' value  }
+  attr Radiogroup bothValues = unsafeAttribute $ Both
+    { key: "radiogroup", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "radiogroup", value: prop' value })
+  pureAttr Radiogroup value = unsafeAttribute $ This
+    { key: "radiogroup", value: prop' value }
+  unpureAttr Radiogroup eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "radiogroup", value: prop' value }
 
 instance Attr Datalist_ Radiogroup String where
-  attr Radiogroup bothValues  = unsafeAttribute $ Both { key: "radiogroup", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "radiogroup", value:  prop' value  })
-  pureAttr Radiogroup value  = unsafeAttribute $ This { key: "radiogroup", value:  prop' value  }
-  unpureAttr Radiogroup eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "radiogroup", value:  prop' value  }
+  attr Radiogroup bothValues = unsafeAttribute $ Both
+    { key: "radiogroup", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "radiogroup", value: prop' value })
+  pureAttr Radiogroup value = unsafeAttribute $ This
+    { key: "radiogroup", value: prop' value }
+  unpureAttr Radiogroup eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "radiogroup", value: prop' value }
 
 instance Attr Dd_ Radiogroup String where
-  attr Radiogroup bothValues  = unsafeAttribute $ Both { key: "radiogroup", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "radiogroup", value:  prop' value  })
-  pureAttr Radiogroup value  = unsafeAttribute $ This { key: "radiogroup", value:  prop' value  }
-  unpureAttr Radiogroup eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "radiogroup", value:  prop' value  }
+  attr Radiogroup bothValues = unsafeAttribute $ Both
+    { key: "radiogroup", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "radiogroup", value: prop' value })
+  pureAttr Radiogroup value = unsafeAttribute $ This
+    { key: "radiogroup", value: prop' value }
+  unpureAttr Radiogroup eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "radiogroup", value: prop' value }
 
 instance Attr Del_ Radiogroup String where
-  attr Radiogroup bothValues  = unsafeAttribute $ Both { key: "radiogroup", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "radiogroup", value:  prop' value  })
-  pureAttr Radiogroup value  = unsafeAttribute $ This { key: "radiogroup", value:  prop' value  }
-  unpureAttr Radiogroup eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "radiogroup", value:  prop' value  }
+  attr Radiogroup bothValues = unsafeAttribute $ Both
+    { key: "radiogroup", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "radiogroup", value: prop' value })
+  pureAttr Radiogroup value = unsafeAttribute $ This
+    { key: "radiogroup", value: prop' value }
+  unpureAttr Radiogroup eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "radiogroup", value: prop' value }
 
 instance Attr Details_ Radiogroup String where
-  attr Radiogroup bothValues  = unsafeAttribute $ Both { key: "radiogroup", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "radiogroup", value:  prop' value  })
-  pureAttr Radiogroup value  = unsafeAttribute $ This { key: "radiogroup", value:  prop' value  }
-  unpureAttr Radiogroup eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "radiogroup", value:  prop' value  }
+  attr Radiogroup bothValues = unsafeAttribute $ Both
+    { key: "radiogroup", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "radiogroup", value: prop' value })
+  pureAttr Radiogroup value = unsafeAttribute $ This
+    { key: "radiogroup", value: prop' value }
+  unpureAttr Radiogroup eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "radiogroup", value: prop' value }
 
 instance Attr Dfn_ Radiogroup String where
-  attr Radiogroup bothValues  = unsafeAttribute $ Both { key: "radiogroup", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "radiogroup", value:  prop' value  })
-  pureAttr Radiogroup value  = unsafeAttribute $ This { key: "radiogroup", value:  prop' value  }
-  unpureAttr Radiogroup eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "radiogroup", value:  prop' value  }
+  attr Radiogroup bothValues = unsafeAttribute $ Both
+    { key: "radiogroup", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "radiogroup", value: prop' value })
+  pureAttr Radiogroup value = unsafeAttribute $ This
+    { key: "radiogroup", value: prop' value }
+  unpureAttr Radiogroup eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "radiogroup", value: prop' value }
 
 instance Attr Dialog_ Radiogroup String where
-  attr Radiogroup bothValues  = unsafeAttribute $ Both { key: "radiogroup", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "radiogroup", value:  prop' value  })
-  pureAttr Radiogroup value  = unsafeAttribute $ This { key: "radiogroup", value:  prop' value  }
-  unpureAttr Radiogroup eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "radiogroup", value:  prop' value  }
+  attr Radiogroup bothValues = unsafeAttribute $ Both
+    { key: "radiogroup", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "radiogroup", value: prop' value })
+  pureAttr Radiogroup value = unsafeAttribute $ This
+    { key: "radiogroup", value: prop' value }
+  unpureAttr Radiogroup eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "radiogroup", value: prop' value }
 
 instance Attr Dir_ Radiogroup String where
-  attr Radiogroup bothValues  = unsafeAttribute $ Both { key: "radiogroup", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "radiogroup", value:  prop' value  })
-  pureAttr Radiogroup value  = unsafeAttribute $ This { key: "radiogroup", value:  prop' value  }
-  unpureAttr Radiogroup eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "radiogroup", value:  prop' value  }
+  attr Radiogroup bothValues = unsafeAttribute $ Both
+    { key: "radiogroup", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "radiogroup", value: prop' value })
+  pureAttr Radiogroup value = unsafeAttribute $ This
+    { key: "radiogroup", value: prop' value }
+  unpureAttr Radiogroup eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "radiogroup", value: prop' value }
 
 instance Attr Div_ Radiogroup String where
-  attr Radiogroup bothValues  = unsafeAttribute $ Both { key: "radiogroup", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "radiogroup", value:  prop' value  })
-  pureAttr Radiogroup value  = unsafeAttribute $ This { key: "radiogroup", value:  prop' value  }
-  unpureAttr Radiogroup eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "radiogroup", value:  prop' value  }
+  attr Radiogroup bothValues = unsafeAttribute $ Both
+    { key: "radiogroup", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "radiogroup", value: prop' value })
+  pureAttr Radiogroup value = unsafeAttribute $ This
+    { key: "radiogroup", value: prop' value }
+  unpureAttr Radiogroup eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "radiogroup", value: prop' value }
 
 instance Attr Dl_ Radiogroup String where
-  attr Radiogroup bothValues  = unsafeAttribute $ Both { key: "radiogroup", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "radiogroup", value:  prop' value  })
-  pureAttr Radiogroup value  = unsafeAttribute $ This { key: "radiogroup", value:  prop' value  }
-  unpureAttr Radiogroup eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "radiogroup", value:  prop' value  }
+  attr Radiogroup bothValues = unsafeAttribute $ Both
+    { key: "radiogroup", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "radiogroup", value: prop' value })
+  pureAttr Radiogroup value = unsafeAttribute $ This
+    { key: "radiogroup", value: prop' value }
+  unpureAttr Radiogroup eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "radiogroup", value: prop' value }
 
 instance Attr Dt_ Radiogroup String where
-  attr Radiogroup bothValues  = unsafeAttribute $ Both { key: "radiogroup", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "radiogroup", value:  prop' value  })
-  pureAttr Radiogroup value  = unsafeAttribute $ This { key: "radiogroup", value:  prop' value  }
-  unpureAttr Radiogroup eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "radiogroup", value:  prop' value  }
+  attr Radiogroup bothValues = unsafeAttribute $ Both
+    { key: "radiogroup", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "radiogroup", value: prop' value })
+  pureAttr Radiogroup value = unsafeAttribute $ This
+    { key: "radiogroup", value: prop' value }
+  unpureAttr Radiogroup eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "radiogroup", value: prop' value }
 
 instance Attr Em_ Radiogroup String where
-  attr Radiogroup bothValues  = unsafeAttribute $ Both { key: "radiogroup", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "radiogroup", value:  prop' value  })
-  pureAttr Radiogroup value  = unsafeAttribute $ This { key: "radiogroup", value:  prop' value  }
-  unpureAttr Radiogroup eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "radiogroup", value:  prop' value  }
+  attr Radiogroup bothValues = unsafeAttribute $ Both
+    { key: "radiogroup", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "radiogroup", value: prop' value })
+  pureAttr Radiogroup value = unsafeAttribute $ This
+    { key: "radiogroup", value: prop' value }
+  unpureAttr Radiogroup eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "radiogroup", value: prop' value }
 
 instance Attr Embed_ Radiogroup String where
-  attr Radiogroup bothValues  = unsafeAttribute $ Both { key: "radiogroup", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "radiogroup", value:  prop' value  })
-  pureAttr Radiogroup value  = unsafeAttribute $ This { key: "radiogroup", value:  prop' value  }
-  unpureAttr Radiogroup eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "radiogroup", value:  prop' value  }
+  attr Radiogroup bothValues = unsafeAttribute $ Both
+    { key: "radiogroup", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "radiogroup", value: prop' value })
+  pureAttr Radiogroup value = unsafeAttribute $ This
+    { key: "radiogroup", value: prop' value }
+  unpureAttr Radiogroup eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "radiogroup", value: prop' value }
 
 instance Attr Fieldset_ Radiogroup String where
-  attr Radiogroup bothValues  = unsafeAttribute $ Both { key: "radiogroup", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "radiogroup", value:  prop' value  })
-  pureAttr Radiogroup value  = unsafeAttribute $ This { key: "radiogroup", value:  prop' value  }
-  unpureAttr Radiogroup eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "radiogroup", value:  prop' value  }
+  attr Radiogroup bothValues = unsafeAttribute $ Both
+    { key: "radiogroup", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "radiogroup", value: prop' value })
+  pureAttr Radiogroup value = unsafeAttribute $ This
+    { key: "radiogroup", value: prop' value }
+  unpureAttr Radiogroup eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "radiogroup", value: prop' value }
 
 instance Attr Figcaption_ Radiogroup String where
-  attr Radiogroup bothValues  = unsafeAttribute $ Both { key: "radiogroup", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "radiogroup", value:  prop' value  })
-  pureAttr Radiogroup value  = unsafeAttribute $ This { key: "radiogroup", value:  prop' value  }
-  unpureAttr Radiogroup eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "radiogroup", value:  prop' value  }
+  attr Radiogroup bothValues = unsafeAttribute $ Both
+    { key: "radiogroup", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "radiogroup", value: prop' value })
+  pureAttr Radiogroup value = unsafeAttribute $ This
+    { key: "radiogroup", value: prop' value }
+  unpureAttr Radiogroup eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "radiogroup", value: prop' value }
 
 instance Attr Figure_ Radiogroup String where
-  attr Radiogroup bothValues  = unsafeAttribute $ Both { key: "radiogroup", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "radiogroup", value:  prop' value  })
-  pureAttr Radiogroup value  = unsafeAttribute $ This { key: "radiogroup", value:  prop' value  }
-  unpureAttr Radiogroup eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "radiogroup", value:  prop' value  }
+  attr Radiogroup bothValues = unsafeAttribute $ Both
+    { key: "radiogroup", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "radiogroup", value: prop' value })
+  pureAttr Radiogroup value = unsafeAttribute $ This
+    { key: "radiogroup", value: prop' value }
+  unpureAttr Radiogroup eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "radiogroup", value: prop' value }
 
 instance Attr Font_ Radiogroup String where
-  attr Radiogroup bothValues  = unsafeAttribute $ Both { key: "radiogroup", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "radiogroup", value:  prop' value  })
-  pureAttr Radiogroup value  = unsafeAttribute $ This { key: "radiogroup", value:  prop' value  }
-  unpureAttr Radiogroup eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "radiogroup", value:  prop' value  }
+  attr Radiogroup bothValues = unsafeAttribute $ Both
+    { key: "radiogroup", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "radiogroup", value: prop' value })
+  pureAttr Radiogroup value = unsafeAttribute $ This
+    { key: "radiogroup", value: prop' value }
+  unpureAttr Radiogroup eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "radiogroup", value: prop' value }
 
 instance Attr Footer_ Radiogroup String where
-  attr Radiogroup bothValues  = unsafeAttribute $ Both { key: "radiogroup", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "radiogroup", value:  prop' value  })
-  pureAttr Radiogroup value  = unsafeAttribute $ This { key: "radiogroup", value:  prop' value  }
-  unpureAttr Radiogroup eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "radiogroup", value:  prop' value  }
+  attr Radiogroup bothValues = unsafeAttribute $ Both
+    { key: "radiogroup", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "radiogroup", value: prop' value })
+  pureAttr Radiogroup value = unsafeAttribute $ This
+    { key: "radiogroup", value: prop' value }
+  unpureAttr Radiogroup eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "radiogroup", value: prop' value }
 
 instance Attr Form_ Radiogroup String where
-  attr Radiogroup bothValues  = unsafeAttribute $ Both { key: "radiogroup", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "radiogroup", value:  prop' value  })
-  pureAttr Radiogroup value  = unsafeAttribute $ This { key: "radiogroup", value:  prop' value  }
-  unpureAttr Radiogroup eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "radiogroup", value:  prop' value  }
+  attr Radiogroup bothValues = unsafeAttribute $ Both
+    { key: "radiogroup", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "radiogroup", value: prop' value })
+  pureAttr Radiogroup value = unsafeAttribute $ This
+    { key: "radiogroup", value: prop' value }
+  unpureAttr Radiogroup eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "radiogroup", value: prop' value }
 
 instance Attr Frame_ Radiogroup String where
-  attr Radiogroup bothValues  = unsafeAttribute $ Both { key: "radiogroup", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "radiogroup", value:  prop' value  })
-  pureAttr Radiogroup value  = unsafeAttribute $ This { key: "radiogroup", value:  prop' value  }
-  unpureAttr Radiogroup eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "radiogroup", value:  prop' value  }
+  attr Radiogroup bothValues = unsafeAttribute $ Both
+    { key: "radiogroup", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "radiogroup", value: prop' value })
+  pureAttr Radiogroup value = unsafeAttribute $ This
+    { key: "radiogroup", value: prop' value }
+  unpureAttr Radiogroup eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "radiogroup", value: prop' value }
 
 instance Attr Frameset_ Radiogroup String where
-  attr Radiogroup bothValues  = unsafeAttribute $ Both { key: "radiogroup", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "radiogroup", value:  prop' value  })
-  pureAttr Radiogroup value  = unsafeAttribute $ This { key: "radiogroup", value:  prop' value  }
-  unpureAttr Radiogroup eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "radiogroup", value:  prop' value  }
+  attr Radiogroup bothValues = unsafeAttribute $ Both
+    { key: "radiogroup", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "radiogroup", value: prop' value })
+  pureAttr Radiogroup value = unsafeAttribute $ This
+    { key: "radiogroup", value: prop' value }
+  unpureAttr Radiogroup eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "radiogroup", value: prop' value }
 
 instance Attr H1_ Radiogroup String where
-  attr Radiogroup bothValues  = unsafeAttribute $ Both { key: "radiogroup", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "radiogroup", value:  prop' value  })
-  pureAttr Radiogroup value  = unsafeAttribute $ This { key: "radiogroup", value:  prop' value  }
-  unpureAttr Radiogroup eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "radiogroup", value:  prop' value  }
+  attr Radiogroup bothValues = unsafeAttribute $ Both
+    { key: "radiogroup", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "radiogroup", value: prop' value })
+  pureAttr Radiogroup value = unsafeAttribute $ This
+    { key: "radiogroup", value: prop' value }
+  unpureAttr Radiogroup eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "radiogroup", value: prop' value }
 
 instance Attr H2_ Radiogroup String where
-  attr Radiogroup bothValues  = unsafeAttribute $ Both { key: "radiogroup", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "radiogroup", value:  prop' value  })
-  pureAttr Radiogroup value  = unsafeAttribute $ This { key: "radiogroup", value:  prop' value  }
-  unpureAttr Radiogroup eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "radiogroup", value:  prop' value  }
+  attr Radiogroup bothValues = unsafeAttribute $ Both
+    { key: "radiogroup", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "radiogroup", value: prop' value })
+  pureAttr Radiogroup value = unsafeAttribute $ This
+    { key: "radiogroup", value: prop' value }
+  unpureAttr Radiogroup eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "radiogroup", value: prop' value }
 
 instance Attr H3_ Radiogroup String where
-  attr Radiogroup bothValues  = unsafeAttribute $ Both { key: "radiogroup", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "radiogroup", value:  prop' value  })
-  pureAttr Radiogroup value  = unsafeAttribute $ This { key: "radiogroup", value:  prop' value  }
-  unpureAttr Radiogroup eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "radiogroup", value:  prop' value  }
+  attr Radiogroup bothValues = unsafeAttribute $ Both
+    { key: "radiogroup", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "radiogroup", value: prop' value })
+  pureAttr Radiogroup value = unsafeAttribute $ This
+    { key: "radiogroup", value: prop' value }
+  unpureAttr Radiogroup eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "radiogroup", value: prop' value }
 
 instance Attr H4_ Radiogroup String where
-  attr Radiogroup bothValues  = unsafeAttribute $ Both { key: "radiogroup", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "radiogroup", value:  prop' value  })
-  pureAttr Radiogroup value  = unsafeAttribute $ This { key: "radiogroup", value:  prop' value  }
-  unpureAttr Radiogroup eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "radiogroup", value:  prop' value  }
+  attr Radiogroup bothValues = unsafeAttribute $ Both
+    { key: "radiogroup", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "radiogroup", value: prop' value })
+  pureAttr Radiogroup value = unsafeAttribute $ This
+    { key: "radiogroup", value: prop' value }
+  unpureAttr Radiogroup eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "radiogroup", value: prop' value }
 
 instance Attr H5_ Radiogroup String where
-  attr Radiogroup bothValues  = unsafeAttribute $ Both { key: "radiogroup", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "radiogroup", value:  prop' value  })
-  pureAttr Radiogroup value  = unsafeAttribute $ This { key: "radiogroup", value:  prop' value  }
-  unpureAttr Radiogroup eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "radiogroup", value:  prop' value  }
+  attr Radiogroup bothValues = unsafeAttribute $ Both
+    { key: "radiogroup", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "radiogroup", value: prop' value })
+  pureAttr Radiogroup value = unsafeAttribute $ This
+    { key: "radiogroup", value: prop' value }
+  unpureAttr Radiogroup eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "radiogroup", value: prop' value }
 
 instance Attr H6_ Radiogroup String where
-  attr Radiogroup bothValues  = unsafeAttribute $ Both { key: "radiogroup", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "radiogroup", value:  prop' value  })
-  pureAttr Radiogroup value  = unsafeAttribute $ This { key: "radiogroup", value:  prop' value  }
-  unpureAttr Radiogroup eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "radiogroup", value:  prop' value  }
+  attr Radiogroup bothValues = unsafeAttribute $ Both
+    { key: "radiogroup", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "radiogroup", value: prop' value })
+  pureAttr Radiogroup value = unsafeAttribute $ This
+    { key: "radiogroup", value: prop' value }
+  unpureAttr Radiogroup eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "radiogroup", value: prop' value }
 
 instance Attr Head_ Radiogroup String where
-  attr Radiogroup bothValues  = unsafeAttribute $ Both { key: "radiogroup", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "radiogroup", value:  prop' value  })
-  pureAttr Radiogroup value  = unsafeAttribute $ This { key: "radiogroup", value:  prop' value  }
-  unpureAttr Radiogroup eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "radiogroup", value:  prop' value  }
+  attr Radiogroup bothValues = unsafeAttribute $ Both
+    { key: "radiogroup", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "radiogroup", value: prop' value })
+  pureAttr Radiogroup value = unsafeAttribute $ This
+    { key: "radiogroup", value: prop' value }
+  unpureAttr Radiogroup eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "radiogroup", value: prop' value }
 
 instance Attr Header_ Radiogroup String where
-  attr Radiogroup bothValues  = unsafeAttribute $ Both { key: "radiogroup", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "radiogroup", value:  prop' value  })
-  pureAttr Radiogroup value  = unsafeAttribute $ This { key: "radiogroup", value:  prop' value  }
-  unpureAttr Radiogroup eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "radiogroup", value:  prop' value  }
+  attr Radiogroup bothValues = unsafeAttribute $ Both
+    { key: "radiogroup", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "radiogroup", value: prop' value })
+  pureAttr Radiogroup value = unsafeAttribute $ This
+    { key: "radiogroup", value: prop' value }
+  unpureAttr Radiogroup eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "radiogroup", value: prop' value }
 
 instance Attr Hr_ Radiogroup String where
-  attr Radiogroup bothValues  = unsafeAttribute $ Both { key: "radiogroup", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "radiogroup", value:  prop' value  })
-  pureAttr Radiogroup value  = unsafeAttribute $ This { key: "radiogroup", value:  prop' value  }
-  unpureAttr Radiogroup eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "radiogroup", value:  prop' value  }
+  attr Radiogroup bothValues = unsafeAttribute $ Both
+    { key: "radiogroup", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "radiogroup", value: prop' value })
+  pureAttr Radiogroup value = unsafeAttribute $ This
+    { key: "radiogroup", value: prop' value }
+  unpureAttr Radiogroup eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "radiogroup", value: prop' value }
 
 instance Attr Html_ Radiogroup String where
-  attr Radiogroup bothValues  = unsafeAttribute $ Both { key: "radiogroup", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "radiogroup", value:  prop' value  })
-  pureAttr Radiogroup value  = unsafeAttribute $ This { key: "radiogroup", value:  prop' value  }
-  unpureAttr Radiogroup eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "radiogroup", value:  prop' value  }
+  attr Radiogroup bothValues = unsafeAttribute $ Both
+    { key: "radiogroup", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "radiogroup", value: prop' value })
+  pureAttr Radiogroup value = unsafeAttribute $ This
+    { key: "radiogroup", value: prop' value }
+  unpureAttr Radiogroup eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "radiogroup", value: prop' value }
 
 instance Attr I_ Radiogroup String where
-  attr Radiogroup bothValues  = unsafeAttribute $ Both { key: "radiogroup", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "radiogroup", value:  prop' value  })
-  pureAttr Radiogroup value  = unsafeAttribute $ This { key: "radiogroup", value:  prop' value  }
-  unpureAttr Radiogroup eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "radiogroup", value:  prop' value  }
+  attr Radiogroup bothValues = unsafeAttribute $ Both
+    { key: "radiogroup", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "radiogroup", value: prop' value })
+  pureAttr Radiogroup value = unsafeAttribute $ This
+    { key: "radiogroup", value: prop' value }
+  unpureAttr Radiogroup eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "radiogroup", value: prop' value }
 
 instance Attr Iframe_ Radiogroup String where
-  attr Radiogroup bothValues  = unsafeAttribute $ Both { key: "radiogroup", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "radiogroup", value:  prop' value  })
-  pureAttr Radiogroup value  = unsafeAttribute $ This { key: "radiogroup", value:  prop' value  }
-  unpureAttr Radiogroup eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "radiogroup", value:  prop' value  }
+  attr Radiogroup bothValues = unsafeAttribute $ Both
+    { key: "radiogroup", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "radiogroup", value: prop' value })
+  pureAttr Radiogroup value = unsafeAttribute $ This
+    { key: "radiogroup", value: prop' value }
+  unpureAttr Radiogroup eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "radiogroup", value: prop' value }
 
 instance Attr Img_ Radiogroup String where
-  attr Radiogroup bothValues  = unsafeAttribute $ Both { key: "radiogroup", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "radiogroup", value:  prop' value  })
-  pureAttr Radiogroup value  = unsafeAttribute $ This { key: "radiogroup", value:  prop' value  }
-  unpureAttr Radiogroup eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "radiogroup", value:  prop' value  }
+  attr Radiogroup bothValues = unsafeAttribute $ Both
+    { key: "radiogroup", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "radiogroup", value: prop' value })
+  pureAttr Radiogroup value = unsafeAttribute $ This
+    { key: "radiogroup", value: prop' value }
+  unpureAttr Radiogroup eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "radiogroup", value: prop' value }
 
 instance Attr Input_ Radiogroup String where
-  attr Radiogroup bothValues  = unsafeAttribute $ Both { key: "radiogroup", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "radiogroup", value:  prop' value  })
-  pureAttr Radiogroup value  = unsafeAttribute $ This { key: "radiogroup", value:  prop' value  }
-  unpureAttr Radiogroup eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "radiogroup", value:  prop' value  }
+  attr Radiogroup bothValues = unsafeAttribute $ Both
+    { key: "radiogroup", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "radiogroup", value: prop' value })
+  pureAttr Radiogroup value = unsafeAttribute $ This
+    { key: "radiogroup", value: prop' value }
+  unpureAttr Radiogroup eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "radiogroup", value: prop' value }
 
 instance Attr Ins_ Radiogroup String where
-  attr Radiogroup bothValues  = unsafeAttribute $ Both { key: "radiogroup", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "radiogroup", value:  prop' value  })
-  pureAttr Radiogroup value  = unsafeAttribute $ This { key: "radiogroup", value:  prop' value  }
-  unpureAttr Radiogroup eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "radiogroup", value:  prop' value  }
+  attr Radiogroup bothValues = unsafeAttribute $ Both
+    { key: "radiogroup", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "radiogroup", value: prop' value })
+  pureAttr Radiogroup value = unsafeAttribute $ This
+    { key: "radiogroup", value: prop' value }
+  unpureAttr Radiogroup eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "radiogroup", value: prop' value }
 
 instance Attr Kbd_ Radiogroup String where
-  attr Radiogroup bothValues  = unsafeAttribute $ Both { key: "radiogroup", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "radiogroup", value:  prop' value  })
-  pureAttr Radiogroup value  = unsafeAttribute $ This { key: "radiogroup", value:  prop' value  }
-  unpureAttr Radiogroup eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "radiogroup", value:  prop' value  }
+  attr Radiogroup bothValues = unsafeAttribute $ Both
+    { key: "radiogroup", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "radiogroup", value: prop' value })
+  pureAttr Radiogroup value = unsafeAttribute $ This
+    { key: "radiogroup", value: prop' value }
+  unpureAttr Radiogroup eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "radiogroup", value: prop' value }
 
 instance Attr Label_ Radiogroup String where
-  attr Radiogroup bothValues  = unsafeAttribute $ Both { key: "radiogroup", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "radiogroup", value:  prop' value  })
-  pureAttr Radiogroup value  = unsafeAttribute $ This { key: "radiogroup", value:  prop' value  }
-  unpureAttr Radiogroup eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "radiogroup", value:  prop' value  }
+  attr Radiogroup bothValues = unsafeAttribute $ Both
+    { key: "radiogroup", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "radiogroup", value: prop' value })
+  pureAttr Radiogroup value = unsafeAttribute $ This
+    { key: "radiogroup", value: prop' value }
+  unpureAttr Radiogroup eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "radiogroup", value: prop' value }
 
 instance Attr Legend_ Radiogroup String where
-  attr Radiogroup bothValues  = unsafeAttribute $ Both { key: "radiogroup", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "radiogroup", value:  prop' value  })
-  pureAttr Radiogroup value  = unsafeAttribute $ This { key: "radiogroup", value:  prop' value  }
-  unpureAttr Radiogroup eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "radiogroup", value:  prop' value  }
+  attr Radiogroup bothValues = unsafeAttribute $ Both
+    { key: "radiogroup", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "radiogroup", value: prop' value })
+  pureAttr Radiogroup value = unsafeAttribute $ This
+    { key: "radiogroup", value: prop' value }
+  unpureAttr Radiogroup eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "radiogroup", value: prop' value }
 
 instance Attr Li_ Radiogroup String where
-  attr Radiogroup bothValues  = unsafeAttribute $ Both { key: "radiogroup", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "radiogroup", value:  prop' value  })
-  pureAttr Radiogroup value  = unsafeAttribute $ This { key: "radiogroup", value:  prop' value  }
-  unpureAttr Radiogroup eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "radiogroup", value:  prop' value  }
+  attr Radiogroup bothValues = unsafeAttribute $ Both
+    { key: "radiogroup", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "radiogroup", value: prop' value })
+  pureAttr Radiogroup value = unsafeAttribute $ This
+    { key: "radiogroup", value: prop' value }
+  unpureAttr Radiogroup eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "radiogroup", value: prop' value }
 
 instance Attr Link_ Radiogroup String where
-  attr Radiogroup bothValues  = unsafeAttribute $ Both { key: "radiogroup", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "radiogroup", value:  prop' value  })
-  pureAttr Radiogroup value  = unsafeAttribute $ This { key: "radiogroup", value:  prop' value  }
-  unpureAttr Radiogroup eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "radiogroup", value:  prop' value  }
+  attr Radiogroup bothValues = unsafeAttribute $ Both
+    { key: "radiogroup", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "radiogroup", value: prop' value })
+  pureAttr Radiogroup value = unsafeAttribute $ This
+    { key: "radiogroup", value: prop' value }
+  unpureAttr Radiogroup eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "radiogroup", value: prop' value }
 
 instance Attr Main_ Radiogroup String where
-  attr Radiogroup bothValues  = unsafeAttribute $ Both { key: "radiogroup", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "radiogroup", value:  prop' value  })
-  pureAttr Radiogroup value  = unsafeAttribute $ This { key: "radiogroup", value:  prop' value  }
-  unpureAttr Radiogroup eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "radiogroup", value:  prop' value  }
+  attr Radiogroup bothValues = unsafeAttribute $ Both
+    { key: "radiogroup", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "radiogroup", value: prop' value })
+  pureAttr Radiogroup value = unsafeAttribute $ This
+    { key: "radiogroup", value: prop' value }
+  unpureAttr Radiogroup eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "radiogroup", value: prop' value }
 
 instance Attr Map_ Radiogroup String where
-  attr Radiogroup bothValues  = unsafeAttribute $ Both { key: "radiogroup", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "radiogroup", value:  prop' value  })
-  pureAttr Radiogroup value  = unsafeAttribute $ This { key: "radiogroup", value:  prop' value  }
-  unpureAttr Radiogroup eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "radiogroup", value:  prop' value  }
+  attr Radiogroup bothValues = unsafeAttribute $ Both
+    { key: "radiogroup", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "radiogroup", value: prop' value })
+  pureAttr Radiogroup value = unsafeAttribute $ This
+    { key: "radiogroup", value: prop' value }
+  unpureAttr Radiogroup eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "radiogroup", value: prop' value }
 
 instance Attr Mark_ Radiogroup String where
-  attr Radiogroup bothValues  = unsafeAttribute $ Both { key: "radiogroup", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "radiogroup", value:  prop' value  })
-  pureAttr Radiogroup value  = unsafeAttribute $ This { key: "radiogroup", value:  prop' value  }
-  unpureAttr Radiogroup eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "radiogroup", value:  prop' value  }
+  attr Radiogroup bothValues = unsafeAttribute $ Both
+    { key: "radiogroup", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "radiogroup", value: prop' value })
+  pureAttr Radiogroup value = unsafeAttribute $ This
+    { key: "radiogroup", value: prop' value }
+  unpureAttr Radiogroup eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "radiogroup", value: prop' value }
 
 instance Attr Meta_ Radiogroup String where
-  attr Radiogroup bothValues  = unsafeAttribute $ Both { key: "radiogroup", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "radiogroup", value:  prop' value  })
-  pureAttr Radiogroup value  = unsafeAttribute $ This { key: "radiogroup", value:  prop' value  }
-  unpureAttr Radiogroup eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "radiogroup", value:  prop' value  }
+  attr Radiogroup bothValues = unsafeAttribute $ Both
+    { key: "radiogroup", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "radiogroup", value: prop' value })
+  pureAttr Radiogroup value = unsafeAttribute $ This
+    { key: "radiogroup", value: prop' value }
+  unpureAttr Radiogroup eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "radiogroup", value: prop' value }
 
 instance Attr Meter_ Radiogroup String where
-  attr Radiogroup bothValues  = unsafeAttribute $ Both { key: "radiogroup", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "radiogroup", value:  prop' value  })
-  pureAttr Radiogroup value  = unsafeAttribute $ This { key: "radiogroup", value:  prop' value  }
-  unpureAttr Radiogroup eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "radiogroup", value:  prop' value  }
+  attr Radiogroup bothValues = unsafeAttribute $ Both
+    { key: "radiogroup", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "radiogroup", value: prop' value })
+  pureAttr Radiogroup value = unsafeAttribute $ This
+    { key: "radiogroup", value: prop' value }
+  unpureAttr Radiogroup eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "radiogroup", value: prop' value }
 
 instance Attr Nav_ Radiogroup String where
-  attr Radiogroup bothValues  = unsafeAttribute $ Both { key: "radiogroup", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "radiogroup", value:  prop' value  })
-  pureAttr Radiogroup value  = unsafeAttribute $ This { key: "radiogroup", value:  prop' value  }
-  unpureAttr Radiogroup eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "radiogroup", value:  prop' value  }
+  attr Radiogroup bothValues = unsafeAttribute $ Both
+    { key: "radiogroup", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "radiogroup", value: prop' value })
+  pureAttr Radiogroup value = unsafeAttribute $ This
+    { key: "radiogroup", value: prop' value }
+  unpureAttr Radiogroup eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "radiogroup", value: prop' value }
 
 instance Attr Noframes_ Radiogroup String where
-  attr Radiogroup bothValues  = unsafeAttribute $ Both { key: "radiogroup", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "radiogroup", value:  prop' value  })
-  pureAttr Radiogroup value  = unsafeAttribute $ This { key: "radiogroup", value:  prop' value  }
-  unpureAttr Radiogroup eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "radiogroup", value:  prop' value  }
+  attr Radiogroup bothValues = unsafeAttribute $ Both
+    { key: "radiogroup", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "radiogroup", value: prop' value })
+  pureAttr Radiogroup value = unsafeAttribute $ This
+    { key: "radiogroup", value: prop' value }
+  unpureAttr Radiogroup eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "radiogroup", value: prop' value }
 
 instance Attr Noscript_ Radiogroup String where
-  attr Radiogroup bothValues  = unsafeAttribute $ Both { key: "radiogroup", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "radiogroup", value:  prop' value  })
-  pureAttr Radiogroup value  = unsafeAttribute $ This { key: "radiogroup", value:  prop' value  }
-  unpureAttr Radiogroup eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "radiogroup", value:  prop' value  }
+  attr Radiogroup bothValues = unsafeAttribute $ Both
+    { key: "radiogroup", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "radiogroup", value: prop' value })
+  pureAttr Radiogroup value = unsafeAttribute $ This
+    { key: "radiogroup", value: prop' value }
+  unpureAttr Radiogroup eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "radiogroup", value: prop' value }
 
 instance Attr Object_ Radiogroup String where
-  attr Radiogroup bothValues  = unsafeAttribute $ Both { key: "radiogroup", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "radiogroup", value:  prop' value  })
-  pureAttr Radiogroup value  = unsafeAttribute $ This { key: "radiogroup", value:  prop' value  }
-  unpureAttr Radiogroup eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "radiogroup", value:  prop' value  }
+  attr Radiogroup bothValues = unsafeAttribute $ Both
+    { key: "radiogroup", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "radiogroup", value: prop' value })
+  pureAttr Radiogroup value = unsafeAttribute $ This
+    { key: "radiogroup", value: prop' value }
+  unpureAttr Radiogroup eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "radiogroup", value: prop' value }
 
 instance Attr Ol_ Radiogroup String where
-  attr Radiogroup bothValues  = unsafeAttribute $ Both { key: "radiogroup", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "radiogroup", value:  prop' value  })
-  pureAttr Radiogroup value  = unsafeAttribute $ This { key: "radiogroup", value:  prop' value  }
-  unpureAttr Radiogroup eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "radiogroup", value:  prop' value  }
+  attr Radiogroup bothValues = unsafeAttribute $ Both
+    { key: "radiogroup", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "radiogroup", value: prop' value })
+  pureAttr Radiogroup value = unsafeAttribute $ This
+    { key: "radiogroup", value: prop' value }
+  unpureAttr Radiogroup eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "radiogroup", value: prop' value }
 
 instance Attr Optgroup_ Radiogroup String where
-  attr Radiogroup bothValues  = unsafeAttribute $ Both { key: "radiogroup", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "radiogroup", value:  prop' value  })
-  pureAttr Radiogroup value  = unsafeAttribute $ This { key: "radiogroup", value:  prop' value  }
-  unpureAttr Radiogroup eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "radiogroup", value:  prop' value  }
+  attr Radiogroup bothValues = unsafeAttribute $ Both
+    { key: "radiogroup", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "radiogroup", value: prop' value })
+  pureAttr Radiogroup value = unsafeAttribute $ This
+    { key: "radiogroup", value: prop' value }
+  unpureAttr Radiogroup eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "radiogroup", value: prop' value }
 
 instance Attr Option_ Radiogroup String where
-  attr Radiogroup bothValues  = unsafeAttribute $ Both { key: "radiogroup", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "radiogroup", value:  prop' value  })
-  pureAttr Radiogroup value  = unsafeAttribute $ This { key: "radiogroup", value:  prop' value  }
-  unpureAttr Radiogroup eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "radiogroup", value:  prop' value  }
+  attr Radiogroup bothValues = unsafeAttribute $ Both
+    { key: "radiogroup", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "radiogroup", value: prop' value })
+  pureAttr Radiogroup value = unsafeAttribute $ This
+    { key: "radiogroup", value: prop' value }
+  unpureAttr Radiogroup eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "radiogroup", value: prop' value }
 
 instance Attr Output_ Radiogroup String where
-  attr Radiogroup bothValues  = unsafeAttribute $ Both { key: "radiogroup", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "radiogroup", value:  prop' value  })
-  pureAttr Radiogroup value  = unsafeAttribute $ This { key: "radiogroup", value:  prop' value  }
-  unpureAttr Radiogroup eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "radiogroup", value:  prop' value  }
+  attr Radiogroup bothValues = unsafeAttribute $ Both
+    { key: "radiogroup", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "radiogroup", value: prop' value })
+  pureAttr Radiogroup value = unsafeAttribute $ This
+    { key: "radiogroup", value: prop' value }
+  unpureAttr Radiogroup eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "radiogroup", value: prop' value }
 
 instance Attr P_ Radiogroup String where
-  attr Radiogroup bothValues  = unsafeAttribute $ Both { key: "radiogroup", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "radiogroup", value:  prop' value  })
-  pureAttr Radiogroup value  = unsafeAttribute $ This { key: "radiogroup", value:  prop' value  }
-  unpureAttr Radiogroup eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "radiogroup", value:  prop' value  }
+  attr Radiogroup bothValues = unsafeAttribute $ Both
+    { key: "radiogroup", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "radiogroup", value: prop' value })
+  pureAttr Radiogroup value = unsafeAttribute $ This
+    { key: "radiogroup", value: prop' value }
+  unpureAttr Radiogroup eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "radiogroup", value: prop' value }
 
 instance Attr Param_ Radiogroup String where
-  attr Radiogroup bothValues  = unsafeAttribute $ Both { key: "radiogroup", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "radiogroup", value:  prop' value  })
-  pureAttr Radiogroup value  = unsafeAttribute $ This { key: "radiogroup", value:  prop' value  }
-  unpureAttr Radiogroup eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "radiogroup", value:  prop' value  }
+  attr Radiogroup bothValues = unsafeAttribute $ Both
+    { key: "radiogroup", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "radiogroup", value: prop' value })
+  pureAttr Radiogroup value = unsafeAttribute $ This
+    { key: "radiogroup", value: prop' value }
+  unpureAttr Radiogroup eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "radiogroup", value: prop' value }
 
 instance Attr Picture_ Radiogroup String where
-  attr Radiogroup bothValues  = unsafeAttribute $ Both { key: "radiogroup", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "radiogroup", value:  prop' value  })
-  pureAttr Radiogroup value  = unsafeAttribute $ This { key: "radiogroup", value:  prop' value  }
-  unpureAttr Radiogroup eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "radiogroup", value:  prop' value  }
+  attr Radiogroup bothValues = unsafeAttribute $ Both
+    { key: "radiogroup", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "radiogroup", value: prop' value })
+  pureAttr Radiogroup value = unsafeAttribute $ This
+    { key: "radiogroup", value: prop' value }
+  unpureAttr Radiogroup eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "radiogroup", value: prop' value }
 
 instance Attr Pre_ Radiogroup String where
-  attr Radiogroup bothValues  = unsafeAttribute $ Both { key: "radiogroup", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "radiogroup", value:  prop' value  })
-  pureAttr Radiogroup value  = unsafeAttribute $ This { key: "radiogroup", value:  prop' value  }
-  unpureAttr Radiogroup eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "radiogroup", value:  prop' value  }
+  attr Radiogroup bothValues = unsafeAttribute $ Both
+    { key: "radiogroup", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "radiogroup", value: prop' value })
+  pureAttr Radiogroup value = unsafeAttribute $ This
+    { key: "radiogroup", value: prop' value }
+  unpureAttr Radiogroup eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "radiogroup", value: prop' value }
 
 instance Attr Progress_ Radiogroup String where
-  attr Radiogroup bothValues  = unsafeAttribute $ Both { key: "radiogroup", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "radiogroup", value:  prop' value  })
-  pureAttr Radiogroup value  = unsafeAttribute $ This { key: "radiogroup", value:  prop' value  }
-  unpureAttr Radiogroup eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "radiogroup", value:  prop' value  }
+  attr Radiogroup bothValues = unsafeAttribute $ Both
+    { key: "radiogroup", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "radiogroup", value: prop' value })
+  pureAttr Radiogroup value = unsafeAttribute $ This
+    { key: "radiogroup", value: prop' value }
+  unpureAttr Radiogroup eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "radiogroup", value: prop' value }
 
 instance Attr Q_ Radiogroup String where
-  attr Radiogroup bothValues  = unsafeAttribute $ Both { key: "radiogroup", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "radiogroup", value:  prop' value  })
-  pureAttr Radiogroup value  = unsafeAttribute $ This { key: "radiogroup", value:  prop' value  }
-  unpureAttr Radiogroup eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "radiogroup", value:  prop' value  }
+  attr Radiogroup bothValues = unsafeAttribute $ Both
+    { key: "radiogroup", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "radiogroup", value: prop' value })
+  pureAttr Radiogroup value = unsafeAttribute $ This
+    { key: "radiogroup", value: prop' value }
+  unpureAttr Radiogroup eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "radiogroup", value: prop' value }
 
 instance Attr Rp_ Radiogroup String where
-  attr Radiogroup bothValues  = unsafeAttribute $ Both { key: "radiogroup", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "radiogroup", value:  prop' value  })
-  pureAttr Radiogroup value  = unsafeAttribute $ This { key: "radiogroup", value:  prop' value  }
-  unpureAttr Radiogroup eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "radiogroup", value:  prop' value  }
+  attr Radiogroup bothValues = unsafeAttribute $ Both
+    { key: "radiogroup", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "radiogroup", value: prop' value })
+  pureAttr Radiogroup value = unsafeAttribute $ This
+    { key: "radiogroup", value: prop' value }
+  unpureAttr Radiogroup eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "radiogroup", value: prop' value }
 
 instance Attr Rt_ Radiogroup String where
-  attr Radiogroup bothValues  = unsafeAttribute $ Both { key: "radiogroup", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "radiogroup", value:  prop' value  })
-  pureAttr Radiogroup value  = unsafeAttribute $ This { key: "radiogroup", value:  prop' value  }
-  unpureAttr Radiogroup eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "radiogroup", value:  prop' value  }
+  attr Radiogroup bothValues = unsafeAttribute $ Both
+    { key: "radiogroup", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "radiogroup", value: prop' value })
+  pureAttr Radiogroup value = unsafeAttribute $ This
+    { key: "radiogroup", value: prop' value }
+  unpureAttr Radiogroup eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "radiogroup", value: prop' value }
 
 instance Attr Ruby_ Radiogroup String where
-  attr Radiogroup bothValues  = unsafeAttribute $ Both { key: "radiogroup", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "radiogroup", value:  prop' value  })
-  pureAttr Radiogroup value  = unsafeAttribute $ This { key: "radiogroup", value:  prop' value  }
-  unpureAttr Radiogroup eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "radiogroup", value:  prop' value  }
+  attr Radiogroup bothValues = unsafeAttribute $ Both
+    { key: "radiogroup", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "radiogroup", value: prop' value })
+  pureAttr Radiogroup value = unsafeAttribute $ This
+    { key: "radiogroup", value: prop' value }
+  unpureAttr Radiogroup eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "radiogroup", value: prop' value }
 
 instance Attr S_ Radiogroup String where
-  attr Radiogroup bothValues  = unsafeAttribute $ Both { key: "radiogroup", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "radiogroup", value:  prop' value  })
-  pureAttr Radiogroup value  = unsafeAttribute $ This { key: "radiogroup", value:  prop' value  }
-  unpureAttr Radiogroup eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "radiogroup", value:  prop' value  }
+  attr Radiogroup bothValues = unsafeAttribute $ Both
+    { key: "radiogroup", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "radiogroup", value: prop' value })
+  pureAttr Radiogroup value = unsafeAttribute $ This
+    { key: "radiogroup", value: prop' value }
+  unpureAttr Radiogroup eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "radiogroup", value: prop' value }
 
 instance Attr Samp_ Radiogroup String where
-  attr Radiogroup bothValues  = unsafeAttribute $ Both { key: "radiogroup", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "radiogroup", value:  prop' value  })
-  pureAttr Radiogroup value  = unsafeAttribute $ This { key: "radiogroup", value:  prop' value  }
-  unpureAttr Radiogroup eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "radiogroup", value:  prop' value  }
+  attr Radiogroup bothValues = unsafeAttribute $ Both
+    { key: "radiogroup", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "radiogroup", value: prop' value })
+  pureAttr Radiogroup value = unsafeAttribute $ This
+    { key: "radiogroup", value: prop' value }
+  unpureAttr Radiogroup eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "radiogroup", value: prop' value }
 
 instance Attr Script_ Radiogroup String where
-  attr Radiogroup bothValues  = unsafeAttribute $ Both { key: "radiogroup", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "radiogroup", value:  prop' value  })
-  pureAttr Radiogroup value  = unsafeAttribute $ This { key: "radiogroup", value:  prop' value  }
-  unpureAttr Radiogroup eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "radiogroup", value:  prop' value  }
+  attr Radiogroup bothValues = unsafeAttribute $ Both
+    { key: "radiogroup", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "radiogroup", value: prop' value })
+  pureAttr Radiogroup value = unsafeAttribute $ This
+    { key: "radiogroup", value: prop' value }
+  unpureAttr Radiogroup eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "radiogroup", value: prop' value }
 
 instance Attr Section_ Radiogroup String where
-  attr Radiogroup bothValues  = unsafeAttribute $ Both { key: "radiogroup", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "radiogroup", value:  prop' value  })
-  pureAttr Radiogroup value  = unsafeAttribute $ This { key: "radiogroup", value:  prop' value  }
-  unpureAttr Radiogroup eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "radiogroup", value:  prop' value  }
+  attr Radiogroup bothValues = unsafeAttribute $ Both
+    { key: "radiogroup", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "radiogroup", value: prop' value })
+  pureAttr Radiogroup value = unsafeAttribute $ This
+    { key: "radiogroup", value: prop' value }
+  unpureAttr Radiogroup eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "radiogroup", value: prop' value }
 
 instance Attr Select_ Radiogroup String where
-  attr Radiogroup bothValues  = unsafeAttribute $ Both { key: "radiogroup", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "radiogroup", value:  prop' value  })
-  pureAttr Radiogroup value  = unsafeAttribute $ This { key: "radiogroup", value:  prop' value  }
-  unpureAttr Radiogroup eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "radiogroup", value:  prop' value  }
+  attr Radiogroup bothValues = unsafeAttribute $ Both
+    { key: "radiogroup", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "radiogroup", value: prop' value })
+  pureAttr Radiogroup value = unsafeAttribute $ This
+    { key: "radiogroup", value: prop' value }
+  unpureAttr Radiogroup eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "radiogroup", value: prop' value }
 
 instance Attr Small_ Radiogroup String where
-  attr Radiogroup bothValues  = unsafeAttribute $ Both { key: "radiogroup", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "radiogroup", value:  prop' value  })
-  pureAttr Radiogroup value  = unsafeAttribute $ This { key: "radiogroup", value:  prop' value  }
-  unpureAttr Radiogroup eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "radiogroup", value:  prop' value  }
+  attr Radiogroup bothValues = unsafeAttribute $ Both
+    { key: "radiogroup", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "radiogroup", value: prop' value })
+  pureAttr Radiogroup value = unsafeAttribute $ This
+    { key: "radiogroup", value: prop' value }
+  unpureAttr Radiogroup eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "radiogroup", value: prop' value }
 
 instance Attr Source_ Radiogroup String where
-  attr Radiogroup bothValues  = unsafeAttribute $ Both { key: "radiogroup", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "radiogroup", value:  prop' value  })
-  pureAttr Radiogroup value  = unsafeAttribute $ This { key: "radiogroup", value:  prop' value  }
-  unpureAttr Radiogroup eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "radiogroup", value:  prop' value  }
+  attr Radiogroup bothValues = unsafeAttribute $ Both
+    { key: "radiogroup", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "radiogroup", value: prop' value })
+  pureAttr Radiogroup value = unsafeAttribute $ This
+    { key: "radiogroup", value: prop' value }
+  unpureAttr Radiogroup eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "radiogroup", value: prop' value }
 
 instance Attr Span_ Radiogroup String where
-  attr Radiogroup bothValues  = unsafeAttribute $ Both { key: "radiogroup", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "radiogroup", value:  prop' value  })
-  pureAttr Radiogroup value  = unsafeAttribute $ This { key: "radiogroup", value:  prop' value  }
-  unpureAttr Radiogroup eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "radiogroup", value:  prop' value  }
+  attr Radiogroup bothValues = unsafeAttribute $ Both
+    { key: "radiogroup", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "radiogroup", value: prop' value })
+  pureAttr Radiogroup value = unsafeAttribute $ This
+    { key: "radiogroup", value: prop' value }
+  unpureAttr Radiogroup eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "radiogroup", value: prop' value }
 
 instance Attr Strike_ Radiogroup String where
-  attr Radiogroup bothValues  = unsafeAttribute $ Both { key: "radiogroup", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "radiogroup", value:  prop' value  })
-  pureAttr Radiogroup value  = unsafeAttribute $ This { key: "radiogroup", value:  prop' value  }
-  unpureAttr Radiogroup eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "radiogroup", value:  prop' value  }
+  attr Radiogroup bothValues = unsafeAttribute $ Both
+    { key: "radiogroup", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "radiogroup", value: prop' value })
+  pureAttr Radiogroup value = unsafeAttribute $ This
+    { key: "radiogroup", value: prop' value }
+  unpureAttr Radiogroup eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "radiogroup", value: prop' value }
 
 instance Attr Strong_ Radiogroup String where
-  attr Radiogroup bothValues  = unsafeAttribute $ Both { key: "radiogroup", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "radiogroup", value:  prop' value  })
-  pureAttr Radiogroup value  = unsafeAttribute $ This { key: "radiogroup", value:  prop' value  }
-  unpureAttr Radiogroup eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "radiogroup", value:  prop' value  }
+  attr Radiogroup bothValues = unsafeAttribute $ Both
+    { key: "radiogroup", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "radiogroup", value: prop' value })
+  pureAttr Radiogroup value = unsafeAttribute $ This
+    { key: "radiogroup", value: prop' value }
+  unpureAttr Radiogroup eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "radiogroup", value: prop' value }
 
 instance Attr Style_ Radiogroup String where
-  attr Radiogroup bothValues  = unsafeAttribute $ Both { key: "radiogroup", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "radiogroup", value:  prop' value  })
-  pureAttr Radiogroup value  = unsafeAttribute $ This { key: "radiogroup", value:  prop' value  }
-  unpureAttr Radiogroup eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "radiogroup", value:  prop' value  }
+  attr Radiogroup bothValues = unsafeAttribute $ Both
+    { key: "radiogroup", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "radiogroup", value: prop' value })
+  pureAttr Radiogroup value = unsafeAttribute $ This
+    { key: "radiogroup", value: prop' value }
+  unpureAttr Radiogroup eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "radiogroup", value: prop' value }
 
 instance Attr Sub_ Radiogroup String where
-  attr Radiogroup bothValues  = unsafeAttribute $ Both { key: "radiogroup", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "radiogroup", value:  prop' value  })
-  pureAttr Radiogroup value  = unsafeAttribute $ This { key: "radiogroup", value:  prop' value  }
-  unpureAttr Radiogroup eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "radiogroup", value:  prop' value  }
+  attr Radiogroup bothValues = unsafeAttribute $ Both
+    { key: "radiogroup", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "radiogroup", value: prop' value })
+  pureAttr Radiogroup value = unsafeAttribute $ This
+    { key: "radiogroup", value: prop' value }
+  unpureAttr Radiogroup eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "radiogroup", value: prop' value }
 
 instance Attr Summary_ Radiogroup String where
-  attr Radiogroup bothValues  = unsafeAttribute $ Both { key: "radiogroup", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "radiogroup", value:  prop' value  })
-  pureAttr Radiogroup value  = unsafeAttribute $ This { key: "radiogroup", value:  prop' value  }
-  unpureAttr Radiogroup eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "radiogroup", value:  prop' value  }
+  attr Radiogroup bothValues = unsafeAttribute $ Both
+    { key: "radiogroup", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "radiogroup", value: prop' value })
+  pureAttr Radiogroup value = unsafeAttribute $ This
+    { key: "radiogroup", value: prop' value }
+  unpureAttr Radiogroup eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "radiogroup", value: prop' value }
 
 instance Attr Sup_ Radiogroup String where
-  attr Radiogroup bothValues  = unsafeAttribute $ Both { key: "radiogroup", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "radiogroup", value:  prop' value  })
-  pureAttr Radiogroup value  = unsafeAttribute $ This { key: "radiogroup", value:  prop' value  }
-  unpureAttr Radiogroup eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "radiogroup", value:  prop' value  }
+  attr Radiogroup bothValues = unsafeAttribute $ Both
+    { key: "radiogroup", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "radiogroup", value: prop' value })
+  pureAttr Radiogroup value = unsafeAttribute $ This
+    { key: "radiogroup", value: prop' value }
+  unpureAttr Radiogroup eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "radiogroup", value: prop' value }
 
 instance Attr Svg_ Radiogroup String where
-  attr Radiogroup bothValues  = unsafeAttribute $ Both { key: "radiogroup", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "radiogroup", value:  prop' value  })
-  pureAttr Radiogroup value  = unsafeAttribute $ This { key: "radiogroup", value:  prop' value  }
-  unpureAttr Radiogroup eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "radiogroup", value:  prop' value  }
+  attr Radiogroup bothValues = unsafeAttribute $ Both
+    { key: "radiogroup", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "radiogroup", value: prop' value })
+  pureAttr Radiogroup value = unsafeAttribute $ This
+    { key: "radiogroup", value: prop' value }
+  unpureAttr Radiogroup eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "radiogroup", value: prop' value }
 
 instance Attr Table_ Radiogroup String where
-  attr Radiogroup bothValues  = unsafeAttribute $ Both { key: "radiogroup", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "radiogroup", value:  prop' value  })
-  pureAttr Radiogroup value  = unsafeAttribute $ This { key: "radiogroup", value:  prop' value  }
-  unpureAttr Radiogroup eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "radiogroup", value:  prop' value  }
+  attr Radiogroup bothValues = unsafeAttribute $ Both
+    { key: "radiogroup", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "radiogroup", value: prop' value })
+  pureAttr Radiogroup value = unsafeAttribute $ This
+    { key: "radiogroup", value: prop' value }
+  unpureAttr Radiogroup eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "radiogroup", value: prop' value }
 
 instance Attr Tbody_ Radiogroup String where
-  attr Radiogroup bothValues  = unsafeAttribute $ Both { key: "radiogroup", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "radiogroup", value:  prop' value  })
-  pureAttr Radiogroup value  = unsafeAttribute $ This { key: "radiogroup", value:  prop' value  }
-  unpureAttr Radiogroup eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "radiogroup", value:  prop' value  }
+  attr Radiogroup bothValues = unsafeAttribute $ Both
+    { key: "radiogroup", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "radiogroup", value: prop' value })
+  pureAttr Radiogroup value = unsafeAttribute $ This
+    { key: "radiogroup", value: prop' value }
+  unpureAttr Radiogroup eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "radiogroup", value: prop' value }
 
 instance Attr Td_ Radiogroup String where
-  attr Radiogroup bothValues  = unsafeAttribute $ Both { key: "radiogroup", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "radiogroup", value:  prop' value  })
-  pureAttr Radiogroup value  = unsafeAttribute $ This { key: "radiogroup", value:  prop' value  }
-  unpureAttr Radiogroup eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "radiogroup", value:  prop' value  }
+  attr Radiogroup bothValues = unsafeAttribute $ Both
+    { key: "radiogroup", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "radiogroup", value: prop' value })
+  pureAttr Radiogroup value = unsafeAttribute $ This
+    { key: "radiogroup", value: prop' value }
+  unpureAttr Radiogroup eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "radiogroup", value: prop' value }
 
 instance Attr Template_ Radiogroup String where
-  attr Radiogroup bothValues  = unsafeAttribute $ Both { key: "radiogroup", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "radiogroup", value:  prop' value  })
-  pureAttr Radiogroup value  = unsafeAttribute $ This { key: "radiogroup", value:  prop' value  }
-  unpureAttr Radiogroup eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "radiogroup", value:  prop' value  }
+  attr Radiogroup bothValues = unsafeAttribute $ Both
+    { key: "radiogroup", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "radiogroup", value: prop' value })
+  pureAttr Radiogroup value = unsafeAttribute $ This
+    { key: "radiogroup", value: prop' value }
+  unpureAttr Radiogroup eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "radiogroup", value: prop' value }
 
 instance Attr Textarea_ Radiogroup String where
-  attr Radiogroup bothValues  = unsafeAttribute $ Both { key: "radiogroup", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "radiogroup", value:  prop' value  })
-  pureAttr Radiogroup value  = unsafeAttribute $ This { key: "radiogroup", value:  prop' value  }
-  unpureAttr Radiogroup eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "radiogroup", value:  prop' value  }
+  attr Radiogroup bothValues = unsafeAttribute $ Both
+    { key: "radiogroup", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "radiogroup", value: prop' value })
+  pureAttr Radiogroup value = unsafeAttribute $ This
+    { key: "radiogroup", value: prop' value }
+  unpureAttr Radiogroup eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "radiogroup", value: prop' value }
 
 instance Attr Tfoot_ Radiogroup String where
-  attr Radiogroup bothValues  = unsafeAttribute $ Both { key: "radiogroup", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "radiogroup", value:  prop' value  })
-  pureAttr Radiogroup value  = unsafeAttribute $ This { key: "radiogroup", value:  prop' value  }
-  unpureAttr Radiogroup eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "radiogroup", value:  prop' value  }
+  attr Radiogroup bothValues = unsafeAttribute $ Both
+    { key: "radiogroup", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "radiogroup", value: prop' value })
+  pureAttr Radiogroup value = unsafeAttribute $ This
+    { key: "radiogroup", value: prop' value }
+  unpureAttr Radiogroup eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "radiogroup", value: prop' value }
 
 instance Attr Th_ Radiogroup String where
-  attr Radiogroup bothValues  = unsafeAttribute $ Both { key: "radiogroup", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "radiogroup", value:  prop' value  })
-  pureAttr Radiogroup value  = unsafeAttribute $ This { key: "radiogroup", value:  prop' value  }
-  unpureAttr Radiogroup eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "radiogroup", value:  prop' value  }
+  attr Radiogroup bothValues = unsafeAttribute $ Both
+    { key: "radiogroup", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "radiogroup", value: prop' value })
+  pureAttr Radiogroup value = unsafeAttribute $ This
+    { key: "radiogroup", value: prop' value }
+  unpureAttr Radiogroup eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "radiogroup", value: prop' value }
 
 instance Attr Thead_ Radiogroup String where
-  attr Radiogroup bothValues  = unsafeAttribute $ Both { key: "radiogroup", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "radiogroup", value:  prop' value  })
-  pureAttr Radiogroup value  = unsafeAttribute $ This { key: "radiogroup", value:  prop' value  }
-  unpureAttr Radiogroup eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "radiogroup", value:  prop' value  }
+  attr Radiogroup bothValues = unsafeAttribute $ Both
+    { key: "radiogroup", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "radiogroup", value: prop' value })
+  pureAttr Radiogroup value = unsafeAttribute $ This
+    { key: "radiogroup", value: prop' value }
+  unpureAttr Radiogroup eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "radiogroup", value: prop' value }
 
 instance Attr Time_ Radiogroup String where
-  attr Radiogroup bothValues  = unsafeAttribute $ Both { key: "radiogroup", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "radiogroup", value:  prop' value  })
-  pureAttr Radiogroup value  = unsafeAttribute $ This { key: "radiogroup", value:  prop' value  }
-  unpureAttr Radiogroup eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "radiogroup", value:  prop' value  }
+  attr Radiogroup bothValues = unsafeAttribute $ Both
+    { key: "radiogroup", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "radiogroup", value: prop' value })
+  pureAttr Radiogroup value = unsafeAttribute $ This
+    { key: "radiogroup", value: prop' value }
+  unpureAttr Radiogroup eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "radiogroup", value: prop' value }
 
 instance Attr Title_ Radiogroup String where
-  attr Radiogroup bothValues  = unsafeAttribute $ Both { key: "radiogroup", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "radiogroup", value:  prop' value  })
-  pureAttr Radiogroup value  = unsafeAttribute $ This { key: "radiogroup", value:  prop' value  }
-  unpureAttr Radiogroup eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "radiogroup", value:  prop' value  }
+  attr Radiogroup bothValues = unsafeAttribute $ Both
+    { key: "radiogroup", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "radiogroup", value: prop' value })
+  pureAttr Radiogroup value = unsafeAttribute $ This
+    { key: "radiogroup", value: prop' value }
+  unpureAttr Radiogroup eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "radiogroup", value: prop' value }
 
 instance Attr Tr_ Radiogroup String where
-  attr Radiogroup bothValues  = unsafeAttribute $ Both { key: "radiogroup", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "radiogroup", value:  prop' value  })
-  pureAttr Radiogroup value  = unsafeAttribute $ This { key: "radiogroup", value:  prop' value  }
-  unpureAttr Radiogroup eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "radiogroup", value:  prop' value  }
+  attr Radiogroup bothValues = unsafeAttribute $ Both
+    { key: "radiogroup", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "radiogroup", value: prop' value })
+  pureAttr Radiogroup value = unsafeAttribute $ This
+    { key: "radiogroup", value: prop' value }
+  unpureAttr Radiogroup eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "radiogroup", value: prop' value }
 
 instance Attr Track_ Radiogroup String where
-  attr Radiogroup bothValues  = unsafeAttribute $ Both { key: "radiogroup", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "radiogroup", value:  prop' value  })
-  pureAttr Radiogroup value  = unsafeAttribute $ This { key: "radiogroup", value:  prop' value  }
-  unpureAttr Radiogroup eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "radiogroup", value:  prop' value  }
+  attr Radiogroup bothValues = unsafeAttribute $ Both
+    { key: "radiogroup", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "radiogroup", value: prop' value })
+  pureAttr Radiogroup value = unsafeAttribute $ This
+    { key: "radiogroup", value: prop' value }
+  unpureAttr Radiogroup eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "radiogroup", value: prop' value }
 
 instance Attr Tt_ Radiogroup String where
-  attr Radiogroup bothValues  = unsafeAttribute $ Both { key: "radiogroup", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "radiogroup", value:  prop' value  })
-  pureAttr Radiogroup value  = unsafeAttribute $ This { key: "radiogroup", value:  prop' value  }
-  unpureAttr Radiogroup eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "radiogroup", value:  prop' value  }
+  attr Radiogroup bothValues = unsafeAttribute $ Both
+    { key: "radiogroup", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "radiogroup", value: prop' value })
+  pureAttr Radiogroup value = unsafeAttribute $ This
+    { key: "radiogroup", value: prop' value }
+  unpureAttr Radiogroup eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "radiogroup", value: prop' value }
 
 instance Attr U_ Radiogroup String where
-  attr Radiogroup bothValues  = unsafeAttribute $ Both { key: "radiogroup", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "radiogroup", value:  prop' value  })
-  pureAttr Radiogroup value  = unsafeAttribute $ This { key: "radiogroup", value:  prop' value  }
-  unpureAttr Radiogroup eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "radiogroup", value:  prop' value  }
+  attr Radiogroup bothValues = unsafeAttribute $ Both
+    { key: "radiogroup", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "radiogroup", value: prop' value })
+  pureAttr Radiogroup value = unsafeAttribute $ This
+    { key: "radiogroup", value: prop' value }
+  unpureAttr Radiogroup eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "radiogroup", value: prop' value }
 
 instance Attr Ul_ Radiogroup String where
-  attr Radiogroup bothValues  = unsafeAttribute $ Both { key: "radiogroup", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "radiogroup", value:  prop' value  })
-  pureAttr Radiogroup value  = unsafeAttribute $ This { key: "radiogroup", value:  prop' value  }
-  unpureAttr Radiogroup eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "radiogroup", value:  prop' value  }
+  attr Radiogroup bothValues = unsafeAttribute $ Both
+    { key: "radiogroup", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "radiogroup", value: prop' value })
+  pureAttr Radiogroup value = unsafeAttribute $ This
+    { key: "radiogroup", value: prop' value }
+  unpureAttr Radiogroup eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "radiogroup", value: prop' value }
 
 instance Attr Var_ Radiogroup String where
-  attr Radiogroup bothValues  = unsafeAttribute $ Both { key: "radiogroup", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "radiogroup", value:  prop' value  })
-  pureAttr Radiogroup value  = unsafeAttribute $ This { key: "radiogroup", value:  prop' value  }
-  unpureAttr Radiogroup eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "radiogroup", value:  prop' value  }
+  attr Radiogroup bothValues = unsafeAttribute $ Both
+    { key: "radiogroup", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "radiogroup", value: prop' value })
+  pureAttr Radiogroup value = unsafeAttribute $ This
+    { key: "radiogroup", value: prop' value }
+  unpureAttr Radiogroup eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "radiogroup", value: prop' value }
 
 instance Attr Video_ Radiogroup String where
-  attr Radiogroup bothValues  = unsafeAttribute $ Both { key: "radiogroup", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "radiogroup", value:  prop' value  })
-  pureAttr Radiogroup value  = unsafeAttribute $ This { key: "radiogroup", value:  prop' value  }
-  unpureAttr Radiogroup eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "radiogroup", value:  prop' value  }
+  attr Radiogroup bothValues = unsafeAttribute $ Both
+    { key: "radiogroup", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "radiogroup", value: prop' value })
+  pureAttr Radiogroup value = unsafeAttribute $ This
+    { key: "radiogroup", value: prop' value }
+  unpureAttr Radiogroup eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "radiogroup", value: prop' value }
 
 instance Attr Wbr_ Radiogroup String where
-  attr Radiogroup bothValues  = unsafeAttribute $ Both { key: "radiogroup", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "radiogroup", value:  prop' value  })
-  pureAttr Radiogroup value  = unsafeAttribute $ This { key: "radiogroup", value:  prop' value  }
-  unpureAttr Radiogroup eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "radiogroup", value:  prop' value  }
+  attr Radiogroup bothValues = unsafeAttribute $ Both
+    { key: "radiogroup", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "radiogroup", value: prop' value })
+  pureAttr Radiogroup value = unsafeAttribute $ This
+    { key: "radiogroup", value: prop' value }
+  unpureAttr Radiogroup eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "radiogroup", value: prop' value }
 
 instance Attr everything Radiogroup Unit where
-  attr Radiogroup bothValues  = unsafeAttribute $ Both { key: "radiogroup", value:  unset'  } (snd bothValues <#> \_ -> { key: "radiogroup", value:  unset'  })
-  pureAttr Radiogroup _  = unsafeAttribute $ This { key: "radiogroup", value:  unset'  }
-  unpureAttr Radiogroup eventValue  = unsafeAttribute $ That $ eventValue <#> \_ -> { key: "radiogroup", value:  unset'  }
+  attr Radiogroup bothValues = unsafeAttribute $ Both
+    { key: "radiogroup", value: unset' }
+    (snd bothValues <#> \_ -> { key: "radiogroup", value: unset' })
+  pureAttr Radiogroup _ = unsafeAttribute $ This
+    { key: "radiogroup", value: unset' }
+  unpureAttr Radiogroup eventValue = unsafeAttribute $ That $ eventValue <#>
+    \_ -> { key: "radiogroup", value: unset' }

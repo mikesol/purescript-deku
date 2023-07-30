@@ -26,91 +26,163 @@ import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 data AriaAtomic = AriaAtomic
 
 instance Attr Circle_ AriaAtomic String where
-  attr AriaAtomic bothValues  = unsafeAttribute $ Both { key: "aria-atomic", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "aria-atomic", value:  prop' value  })
-  pureAttr AriaAtomic value  = unsafeAttribute $ This { key: "aria-atomic", value:  prop' value  }
-  unpureAttr AriaAtomic eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "aria-atomic", value:  prop' value  }
+  attr AriaAtomic bothValues = unsafeAttribute $ Both
+    { key: "aria-atomic", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "aria-atomic", value: prop' value })
+  pureAttr AriaAtomic value = unsafeAttribute $ This
+    { key: "aria-atomic", value: prop' value }
+  unpureAttr AriaAtomic eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "aria-atomic", value: prop' value }
 
 instance Attr Ellipse_ AriaAtomic String where
-  attr AriaAtomic bothValues  = unsafeAttribute $ Both { key: "aria-atomic", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "aria-atomic", value:  prop' value  })
-  pureAttr AriaAtomic value  = unsafeAttribute $ This { key: "aria-atomic", value:  prop' value  }
-  unpureAttr AriaAtomic eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "aria-atomic", value:  prop' value  }
+  attr AriaAtomic bothValues = unsafeAttribute $ Both
+    { key: "aria-atomic", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "aria-atomic", value: prop' value })
+  pureAttr AriaAtomic value = unsafeAttribute $ This
+    { key: "aria-atomic", value: prop' value }
+  unpureAttr AriaAtomic eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "aria-atomic", value: prop' value }
 
 instance Attr ForeignObject_ AriaAtomic String where
-  attr AriaAtomic bothValues  = unsafeAttribute $ Both { key: "aria-atomic", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "aria-atomic", value:  prop' value  })
-  pureAttr AriaAtomic value  = unsafeAttribute $ This { key: "aria-atomic", value:  prop' value  }
-  unpureAttr AriaAtomic eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "aria-atomic", value:  prop' value  }
+  attr AriaAtomic bothValues = unsafeAttribute $ Both
+    { key: "aria-atomic", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "aria-atomic", value: prop' value })
+  pureAttr AriaAtomic value = unsafeAttribute $ This
+    { key: "aria-atomic", value: prop' value }
+  unpureAttr AriaAtomic eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "aria-atomic", value: prop' value }
 
 instance Attr G_ AriaAtomic String where
-  attr AriaAtomic bothValues  = unsafeAttribute $ Both { key: "aria-atomic", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "aria-atomic", value:  prop' value  })
-  pureAttr AriaAtomic value  = unsafeAttribute $ This { key: "aria-atomic", value:  prop' value  }
-  unpureAttr AriaAtomic eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "aria-atomic", value:  prop' value  }
+  attr AriaAtomic bothValues = unsafeAttribute $ Both
+    { key: "aria-atomic", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "aria-atomic", value: prop' value })
+  pureAttr AriaAtomic value = unsafeAttribute $ This
+    { key: "aria-atomic", value: prop' value }
+  unpureAttr AriaAtomic eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "aria-atomic", value: prop' value }
 
 instance Attr Line_ AriaAtomic String where
-  attr AriaAtomic bothValues  = unsafeAttribute $ Both { key: "aria-atomic", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "aria-atomic", value:  prop' value  })
-  pureAttr AriaAtomic value  = unsafeAttribute $ This { key: "aria-atomic", value:  prop' value  }
-  unpureAttr AriaAtomic eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "aria-atomic", value:  prop' value  }
+  attr AriaAtomic bothValues = unsafeAttribute $ Both
+    { key: "aria-atomic", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "aria-atomic", value: prop' value })
+  pureAttr AriaAtomic value = unsafeAttribute $ This
+    { key: "aria-atomic", value: prop' value }
+  unpureAttr AriaAtomic eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "aria-atomic", value: prop' value }
 
 instance Attr Marker_ AriaAtomic String where
-  attr AriaAtomic bothValues  = unsafeAttribute $ Both { key: "aria-atomic", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "aria-atomic", value:  prop' value  })
-  pureAttr AriaAtomic value  = unsafeAttribute $ This { key: "aria-atomic", value:  prop' value  }
-  unpureAttr AriaAtomic eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "aria-atomic", value:  prop' value  }
+  attr AriaAtomic bothValues = unsafeAttribute $ Both
+    { key: "aria-atomic", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "aria-atomic", value: prop' value })
+  pureAttr AriaAtomic value = unsafeAttribute $ This
+    { key: "aria-atomic", value: prop' value }
+  unpureAttr AriaAtomic eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "aria-atomic", value: prop' value }
 
 instance Attr Path_ AriaAtomic String where
-  attr AriaAtomic bothValues  = unsafeAttribute $ Both { key: "aria-atomic", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "aria-atomic", value:  prop' value  })
-  pureAttr AriaAtomic value  = unsafeAttribute $ This { key: "aria-atomic", value:  prop' value  }
-  unpureAttr AriaAtomic eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "aria-atomic", value:  prop' value  }
+  attr AriaAtomic bothValues = unsafeAttribute $ Both
+    { key: "aria-atomic", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "aria-atomic", value: prop' value })
+  pureAttr AriaAtomic value = unsafeAttribute $ This
+    { key: "aria-atomic", value: prop' value }
+  unpureAttr AriaAtomic eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "aria-atomic", value: prop' value }
 
 instance Attr Polygon_ AriaAtomic String where
-  attr AriaAtomic bothValues  = unsafeAttribute $ Both { key: "aria-atomic", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "aria-atomic", value:  prop' value  })
-  pureAttr AriaAtomic value  = unsafeAttribute $ This { key: "aria-atomic", value:  prop' value  }
-  unpureAttr AriaAtomic eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "aria-atomic", value:  prop' value  }
+  attr AriaAtomic bothValues = unsafeAttribute $ Both
+    { key: "aria-atomic", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "aria-atomic", value: prop' value })
+  pureAttr AriaAtomic value = unsafeAttribute $ This
+    { key: "aria-atomic", value: prop' value }
+  unpureAttr AriaAtomic eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "aria-atomic", value: prop' value }
 
 instance Attr Polyline_ AriaAtomic String where
-  attr AriaAtomic bothValues  = unsafeAttribute $ Both { key: "aria-atomic", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "aria-atomic", value:  prop' value  })
-  pureAttr AriaAtomic value  = unsafeAttribute $ This { key: "aria-atomic", value:  prop' value  }
-  unpureAttr AriaAtomic eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "aria-atomic", value:  prop' value  }
+  attr AriaAtomic bothValues = unsafeAttribute $ Both
+    { key: "aria-atomic", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "aria-atomic", value: prop' value })
+  pureAttr AriaAtomic value = unsafeAttribute $ This
+    { key: "aria-atomic", value: prop' value }
+  unpureAttr AriaAtomic eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "aria-atomic", value: prop' value }
 
 instance Attr Rect_ AriaAtomic String where
-  attr AriaAtomic bothValues  = unsafeAttribute $ Both { key: "aria-atomic", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "aria-atomic", value:  prop' value  })
-  pureAttr AriaAtomic value  = unsafeAttribute $ This { key: "aria-atomic", value:  prop' value  }
-  unpureAttr AriaAtomic eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "aria-atomic", value:  prop' value  }
+  attr AriaAtomic bothValues = unsafeAttribute $ Both
+    { key: "aria-atomic", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "aria-atomic", value: prop' value })
+  pureAttr AriaAtomic value = unsafeAttribute $ This
+    { key: "aria-atomic", value: prop' value }
+  unpureAttr AriaAtomic eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "aria-atomic", value: prop' value }
 
 instance Attr Svg_ AriaAtomic String where
-  attr AriaAtomic bothValues  = unsafeAttribute $ Both { key: "aria-atomic", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "aria-atomic", value:  prop' value  })
-  pureAttr AriaAtomic value  = unsafeAttribute $ This { key: "aria-atomic", value:  prop' value  }
-  unpureAttr AriaAtomic eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "aria-atomic", value:  prop' value  }
+  attr AriaAtomic bothValues = unsafeAttribute $ Both
+    { key: "aria-atomic", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "aria-atomic", value: prop' value })
+  pureAttr AriaAtomic value = unsafeAttribute $ This
+    { key: "aria-atomic", value: prop' value }
+  unpureAttr AriaAtomic eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "aria-atomic", value: prop' value }
 
 instance Attr Symbol_ AriaAtomic String where
-  attr AriaAtomic bothValues  = unsafeAttribute $ Both { key: "aria-atomic", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "aria-atomic", value:  prop' value  })
-  pureAttr AriaAtomic value  = unsafeAttribute $ This { key: "aria-atomic", value:  prop' value  }
-  unpureAttr AriaAtomic eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "aria-atomic", value:  prop' value  }
+  attr AriaAtomic bothValues = unsafeAttribute $ Both
+    { key: "aria-atomic", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "aria-atomic", value: prop' value })
+  pureAttr AriaAtomic value = unsafeAttribute $ This
+    { key: "aria-atomic", value: prop' value }
+  unpureAttr AriaAtomic eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "aria-atomic", value: prop' value }
 
 instance Attr Text_ AriaAtomic String where
-  attr AriaAtomic bothValues  = unsafeAttribute $ Both { key: "aria-atomic", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "aria-atomic", value:  prop' value  })
-  pureAttr AriaAtomic value  = unsafeAttribute $ This { key: "aria-atomic", value:  prop' value  }
-  unpureAttr AriaAtomic eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "aria-atomic", value:  prop' value  }
+  attr AriaAtomic bothValues = unsafeAttribute $ Both
+    { key: "aria-atomic", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "aria-atomic", value: prop' value })
+  pureAttr AriaAtomic value = unsafeAttribute $ This
+    { key: "aria-atomic", value: prop' value }
+  unpureAttr AriaAtomic eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "aria-atomic", value: prop' value }
 
 instance Attr TextPath_ AriaAtomic String where
-  attr AriaAtomic bothValues  = unsafeAttribute $ Both { key: "aria-atomic", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "aria-atomic", value:  prop' value  })
-  pureAttr AriaAtomic value  = unsafeAttribute $ This { key: "aria-atomic", value:  prop' value  }
-  unpureAttr AriaAtomic eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "aria-atomic", value:  prop' value  }
+  attr AriaAtomic bothValues = unsafeAttribute $ Both
+    { key: "aria-atomic", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "aria-atomic", value: prop' value })
+  pureAttr AriaAtomic value = unsafeAttribute $ This
+    { key: "aria-atomic", value: prop' value }
+  unpureAttr AriaAtomic eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "aria-atomic", value: prop' value }
 
 instance Attr Tspan_ AriaAtomic String where
-  attr AriaAtomic bothValues  = unsafeAttribute $ Both { key: "aria-atomic", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "aria-atomic", value:  prop' value  })
-  pureAttr AriaAtomic value  = unsafeAttribute $ This { key: "aria-atomic", value:  prop' value  }
-  unpureAttr AriaAtomic eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "aria-atomic", value:  prop' value  }
+  attr AriaAtomic bothValues = unsafeAttribute $ Both
+    { key: "aria-atomic", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "aria-atomic", value: prop' value })
+  pureAttr AriaAtomic value = unsafeAttribute $ This
+    { key: "aria-atomic", value: prop' value }
+  unpureAttr AriaAtomic eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "aria-atomic", value: prop' value }
 
 instance Attr Use_ AriaAtomic String where
-  attr AriaAtomic bothValues  = unsafeAttribute $ Both { key: "aria-atomic", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "aria-atomic", value:  prop' value  })
-  pureAttr AriaAtomic value  = unsafeAttribute $ This { key: "aria-atomic", value:  prop' value  }
-  unpureAttr AriaAtomic eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "aria-atomic", value:  prop' value  }
+  attr AriaAtomic bothValues = unsafeAttribute $ Both
+    { key: "aria-atomic", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "aria-atomic", value: prop' value })
+  pureAttr AriaAtomic value = unsafeAttribute $ This
+    { key: "aria-atomic", value: prop' value }
+  unpureAttr AriaAtomic eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "aria-atomic", value: prop' value }
 
 instance Attr View_ AriaAtomic String where
-  attr AriaAtomic bothValues  = unsafeAttribute $ Both { key: "aria-atomic", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "aria-atomic", value:  prop' value  })
-  pureAttr AriaAtomic value  = unsafeAttribute $ This { key: "aria-atomic", value:  prop' value  }
-  unpureAttr AriaAtomic eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "aria-atomic", value:  prop' value  }
+  attr AriaAtomic bothValues = unsafeAttribute $ Both
+    { key: "aria-atomic", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "aria-atomic", value: prop' value })
+  pureAttr AriaAtomic value = unsafeAttribute $ This
+    { key: "aria-atomic", value: prop' value }
+  unpureAttr AriaAtomic eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "aria-atomic", value: prop' value }
 
 instance Attr everything AriaAtomic Unit where
-  attr AriaAtomic bothValues  = unsafeAttribute $ Both { key: "aria-atomic", value:  unset'  } (snd bothValues <#> \_ -> { key: "aria-atomic", value:  unset'  })
-  pureAttr AriaAtomic _  = unsafeAttribute $ This { key: "aria-atomic", value:  unset'  }
-  unpureAttr AriaAtomic eventValue  = unsafeAttribute $ That $ eventValue <#> \_ -> { key: "aria-atomic", value:  unset'  }
+  attr AriaAtomic bothValues = unsafeAttribute $ Both
+    { key: "aria-atomic", value: unset' }
+    (snd bothValues <#> \_ -> { key: "aria-atomic", value: unset' })
+  pureAttr AriaAtomic _ = unsafeAttribute $ This
+    { key: "aria-atomic", value: unset' }
+  unpureAttr AriaAtomic eventValue = unsafeAttribute $ That $ eventValue <#>
+    \_ -> { key: "aria-atomic", value: unset' }

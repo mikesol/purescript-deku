@@ -28,101 +28,181 @@ import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 data WordSpacing = WordSpacing
 
 instance Attr FeBlend_ WordSpacing String where
-  attr WordSpacing bothValues  = unsafeAttribute $ Both { key: "word-spacing", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "word-spacing", value:  prop' value  })
-  pureAttr WordSpacing value  = unsafeAttribute $ This { key: "word-spacing", value:  prop' value  }
-  unpureAttr WordSpacing eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "word-spacing", value:  prop' value  }
+  attr WordSpacing bothValues = unsafeAttribute $ Both
+    { key: "word-spacing", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "word-spacing", value: prop' value })
+  pureAttr WordSpacing value = unsafeAttribute $ This
+    { key: "word-spacing", value: prop' value }
+  unpureAttr WordSpacing eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "word-spacing", value: prop' value }
 
 instance Attr FeColorMatrix_ WordSpacing String where
-  attr WordSpacing bothValues  = unsafeAttribute $ Both { key: "word-spacing", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "word-spacing", value:  prop' value  })
-  pureAttr WordSpacing value  = unsafeAttribute $ This { key: "word-spacing", value:  prop' value  }
-  unpureAttr WordSpacing eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "word-spacing", value:  prop' value  }
+  attr WordSpacing bothValues = unsafeAttribute $ Both
+    { key: "word-spacing", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "word-spacing", value: prop' value })
+  pureAttr WordSpacing value = unsafeAttribute $ This
+    { key: "word-spacing", value: prop' value }
+  unpureAttr WordSpacing eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "word-spacing", value: prop' value }
 
 instance Attr FeComponentTransfer_ WordSpacing String where
-  attr WordSpacing bothValues  = unsafeAttribute $ Both { key: "word-spacing", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "word-spacing", value:  prop' value  })
-  pureAttr WordSpacing value  = unsafeAttribute $ This { key: "word-spacing", value:  prop' value  }
-  unpureAttr WordSpacing eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "word-spacing", value:  prop' value  }
+  attr WordSpacing bothValues = unsafeAttribute $ Both
+    { key: "word-spacing", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "word-spacing", value: prop' value })
+  pureAttr WordSpacing value = unsafeAttribute $ This
+    { key: "word-spacing", value: prop' value }
+  unpureAttr WordSpacing eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "word-spacing", value: prop' value }
 
 instance Attr FeComposite_ WordSpacing String where
-  attr WordSpacing bothValues  = unsafeAttribute $ Both { key: "word-spacing", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "word-spacing", value:  prop' value  })
-  pureAttr WordSpacing value  = unsafeAttribute $ This { key: "word-spacing", value:  prop' value  }
-  unpureAttr WordSpacing eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "word-spacing", value:  prop' value  }
+  attr WordSpacing bothValues = unsafeAttribute $ Both
+    { key: "word-spacing", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "word-spacing", value: prop' value })
+  pureAttr WordSpacing value = unsafeAttribute $ This
+    { key: "word-spacing", value: prop' value }
+  unpureAttr WordSpacing eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "word-spacing", value: prop' value }
 
 instance Attr FeConvolveMatrix_ WordSpacing String where
-  attr WordSpacing bothValues  = unsafeAttribute $ Both { key: "word-spacing", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "word-spacing", value:  prop' value  })
-  pureAttr WordSpacing value  = unsafeAttribute $ This { key: "word-spacing", value:  prop' value  }
-  unpureAttr WordSpacing eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "word-spacing", value:  prop' value  }
+  attr WordSpacing bothValues = unsafeAttribute $ Both
+    { key: "word-spacing", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "word-spacing", value: prop' value })
+  pureAttr WordSpacing value = unsafeAttribute $ This
+    { key: "word-spacing", value: prop' value }
+  unpureAttr WordSpacing eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "word-spacing", value: prop' value }
 
 instance Attr FeDiffuseLighting_ WordSpacing String where
-  attr WordSpacing bothValues  = unsafeAttribute $ Both { key: "word-spacing", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "word-spacing", value:  prop' value  })
-  pureAttr WordSpacing value  = unsafeAttribute $ This { key: "word-spacing", value:  prop' value  }
-  unpureAttr WordSpacing eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "word-spacing", value:  prop' value  }
+  attr WordSpacing bothValues = unsafeAttribute $ Both
+    { key: "word-spacing", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "word-spacing", value: prop' value })
+  pureAttr WordSpacing value = unsafeAttribute $ This
+    { key: "word-spacing", value: prop' value }
+  unpureAttr WordSpacing eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "word-spacing", value: prop' value }
 
 instance Attr FeDisplacementMap_ WordSpacing String where
-  attr WordSpacing bothValues  = unsafeAttribute $ Both { key: "word-spacing", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "word-spacing", value:  prop' value  })
-  pureAttr WordSpacing value  = unsafeAttribute $ This { key: "word-spacing", value:  prop' value  }
-  unpureAttr WordSpacing eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "word-spacing", value:  prop' value  }
+  attr WordSpacing bothValues = unsafeAttribute $ Both
+    { key: "word-spacing", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "word-spacing", value: prop' value })
+  pureAttr WordSpacing value = unsafeAttribute $ This
+    { key: "word-spacing", value: prop' value }
+  unpureAttr WordSpacing eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "word-spacing", value: prop' value }
 
 instance Attr FeFlood_ WordSpacing String where
-  attr WordSpacing bothValues  = unsafeAttribute $ Both { key: "word-spacing", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "word-spacing", value:  prop' value  })
-  pureAttr WordSpacing value  = unsafeAttribute $ This { key: "word-spacing", value:  prop' value  }
-  unpureAttr WordSpacing eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "word-spacing", value:  prop' value  }
+  attr WordSpacing bothValues = unsafeAttribute $ Both
+    { key: "word-spacing", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "word-spacing", value: prop' value })
+  pureAttr WordSpacing value = unsafeAttribute $ This
+    { key: "word-spacing", value: prop' value }
+  unpureAttr WordSpacing eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "word-spacing", value: prop' value }
 
 instance Attr FeGaussianBlur_ WordSpacing String where
-  attr WordSpacing bothValues  = unsafeAttribute $ Both { key: "word-spacing", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "word-spacing", value:  prop' value  })
-  pureAttr WordSpacing value  = unsafeAttribute $ This { key: "word-spacing", value:  prop' value  }
-  unpureAttr WordSpacing eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "word-spacing", value:  prop' value  }
+  attr WordSpacing bothValues = unsafeAttribute $ Both
+    { key: "word-spacing", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "word-spacing", value: prop' value })
+  pureAttr WordSpacing value = unsafeAttribute $ This
+    { key: "word-spacing", value: prop' value }
+  unpureAttr WordSpacing eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "word-spacing", value: prop' value }
 
 instance Attr FeImage_ WordSpacing String where
-  attr WordSpacing bothValues  = unsafeAttribute $ Both { key: "word-spacing", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "word-spacing", value:  prop' value  })
-  pureAttr WordSpacing value  = unsafeAttribute $ This { key: "word-spacing", value:  prop' value  }
-  unpureAttr WordSpacing eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "word-spacing", value:  prop' value  }
+  attr WordSpacing bothValues = unsafeAttribute $ Both
+    { key: "word-spacing", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "word-spacing", value: prop' value })
+  pureAttr WordSpacing value = unsafeAttribute $ This
+    { key: "word-spacing", value: prop' value }
+  unpureAttr WordSpacing eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "word-spacing", value: prop' value }
 
 instance Attr FeMerge_ WordSpacing String where
-  attr WordSpacing bothValues  = unsafeAttribute $ Both { key: "word-spacing", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "word-spacing", value:  prop' value  })
-  pureAttr WordSpacing value  = unsafeAttribute $ This { key: "word-spacing", value:  prop' value  }
-  unpureAttr WordSpacing eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "word-spacing", value:  prop' value  }
+  attr WordSpacing bothValues = unsafeAttribute $ Both
+    { key: "word-spacing", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "word-spacing", value: prop' value })
+  pureAttr WordSpacing value = unsafeAttribute $ This
+    { key: "word-spacing", value: prop' value }
+  unpureAttr WordSpacing eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "word-spacing", value: prop' value }
 
 instance Attr FeMorphology_ WordSpacing String where
-  attr WordSpacing bothValues  = unsafeAttribute $ Both { key: "word-spacing", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "word-spacing", value:  prop' value  })
-  pureAttr WordSpacing value  = unsafeAttribute $ This { key: "word-spacing", value:  prop' value  }
-  unpureAttr WordSpacing eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "word-spacing", value:  prop' value  }
+  attr WordSpacing bothValues = unsafeAttribute $ Both
+    { key: "word-spacing", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "word-spacing", value: prop' value })
+  pureAttr WordSpacing value = unsafeAttribute $ This
+    { key: "word-spacing", value: prop' value }
+  unpureAttr WordSpacing eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "word-spacing", value: prop' value }
 
 instance Attr FeOffset_ WordSpacing String where
-  attr WordSpacing bothValues  = unsafeAttribute $ Both { key: "word-spacing", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "word-spacing", value:  prop' value  })
-  pureAttr WordSpacing value  = unsafeAttribute $ This { key: "word-spacing", value:  prop' value  }
-  unpureAttr WordSpacing eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "word-spacing", value:  prop' value  }
+  attr WordSpacing bothValues = unsafeAttribute $ Both
+    { key: "word-spacing", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "word-spacing", value: prop' value })
+  pureAttr WordSpacing value = unsafeAttribute $ This
+    { key: "word-spacing", value: prop' value }
+  unpureAttr WordSpacing eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "word-spacing", value: prop' value }
 
 instance Attr FeSpecularLighting_ WordSpacing String where
-  attr WordSpacing bothValues  = unsafeAttribute $ Both { key: "word-spacing", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "word-spacing", value:  prop' value  })
-  pureAttr WordSpacing value  = unsafeAttribute $ This { key: "word-spacing", value:  prop' value  }
-  unpureAttr WordSpacing eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "word-spacing", value:  prop' value  }
+  attr WordSpacing bothValues = unsafeAttribute $ Both
+    { key: "word-spacing", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "word-spacing", value: prop' value })
+  pureAttr WordSpacing value = unsafeAttribute $ This
+    { key: "word-spacing", value: prop' value }
+  unpureAttr WordSpacing eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "word-spacing", value: prop' value }
 
 instance Attr FeTile_ WordSpacing String where
-  attr WordSpacing bothValues  = unsafeAttribute $ Both { key: "word-spacing", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "word-spacing", value:  prop' value  })
-  pureAttr WordSpacing value  = unsafeAttribute $ This { key: "word-spacing", value:  prop' value  }
-  unpureAttr WordSpacing eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "word-spacing", value:  prop' value  }
+  attr WordSpacing bothValues = unsafeAttribute $ Both
+    { key: "word-spacing", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "word-spacing", value: prop' value })
+  pureAttr WordSpacing value = unsafeAttribute $ This
+    { key: "word-spacing", value: prop' value }
+  unpureAttr WordSpacing eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "word-spacing", value: prop' value }
 
 instance Attr FeTurbulence_ WordSpacing String where
-  attr WordSpacing bothValues  = unsafeAttribute $ Both { key: "word-spacing", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "word-spacing", value:  prop' value  })
-  pureAttr WordSpacing value  = unsafeAttribute $ This { key: "word-spacing", value:  prop' value  }
-  unpureAttr WordSpacing eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "word-spacing", value:  prop' value  }
+  attr WordSpacing bothValues = unsafeAttribute $ Both
+    { key: "word-spacing", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "word-spacing", value: prop' value })
+  pureAttr WordSpacing value = unsafeAttribute $ This
+    { key: "word-spacing", value: prop' value }
+  unpureAttr WordSpacing eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "word-spacing", value: prop' value }
 
 instance Attr Filter_ WordSpacing String where
-  attr WordSpacing bothValues  = unsafeAttribute $ Both { key: "word-spacing", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "word-spacing", value:  prop' value  })
-  pureAttr WordSpacing value  = unsafeAttribute $ This { key: "word-spacing", value:  prop' value  }
-  unpureAttr WordSpacing eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "word-spacing", value:  prop' value  }
+  attr WordSpacing bothValues = unsafeAttribute $ Both
+    { key: "word-spacing", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "word-spacing", value: prop' value })
+  pureAttr WordSpacing value = unsafeAttribute $ This
+    { key: "word-spacing", value: prop' value }
+  unpureAttr WordSpacing eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "word-spacing", value: prop' value }
 
 instance Attr Image_ WordSpacing String where
-  attr WordSpacing bothValues  = unsafeAttribute $ Both { key: "word-spacing", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "word-spacing", value:  prop' value  })
-  pureAttr WordSpacing value  = unsafeAttribute $ This { key: "word-spacing", value:  prop' value  }
-  unpureAttr WordSpacing eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "word-spacing", value:  prop' value  }
+  attr WordSpacing bothValues = unsafeAttribute $ Both
+    { key: "word-spacing", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "word-spacing", value: prop' value })
+  pureAttr WordSpacing value = unsafeAttribute $ This
+    { key: "word-spacing", value: prop' value }
+  unpureAttr WordSpacing eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "word-spacing", value: prop' value }
 
 instance Attr Switch_ WordSpacing String where
-  attr WordSpacing bothValues  = unsafeAttribute $ Both { key: "word-spacing", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "word-spacing", value:  prop' value  })
-  pureAttr WordSpacing value  = unsafeAttribute $ This { key: "word-spacing", value:  prop' value  }
-  unpureAttr WordSpacing eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "word-spacing", value:  prop' value  }
+  attr WordSpacing bothValues = unsafeAttribute $ Both
+    { key: "word-spacing", value: prop' (fst bothValues) }
+    (snd bothValues <#> \value -> { key: "word-spacing", value: prop' value })
+  pureAttr WordSpacing value = unsafeAttribute $ This
+    { key: "word-spacing", value: prop' value }
+  unpureAttr WordSpacing eventValue = unsafeAttribute $ That $ eventValue <#>
+    \value -> { key: "word-spacing", value: prop' value }
 
 instance Attr everything WordSpacing Unit where
-  attr WordSpacing bothValues  = unsafeAttribute $ Both { key: "word-spacing", value:  unset'  } (snd bothValues <#> \_ -> { key: "word-spacing", value:  unset'  })
-  pureAttr WordSpacing _  = unsafeAttribute $ This { key: "word-spacing", value:  unset'  }
-  unpureAttr WordSpacing eventValue  = unsafeAttribute $ That $ eventValue <#> \_ -> { key: "word-spacing", value:  unset'  }
+  attr WordSpacing bothValues = unsafeAttribute $ Both
+    { key: "word-spacing", value: unset' }
+    (snd bothValues <#> \_ -> { key: "word-spacing", value: unset' })
+  pureAttr WordSpacing _ = unsafeAttribute $ This
+    { key: "word-spacing", value: unset' }
+  unpureAttr WordSpacing eventValue = unsafeAttribute $ That $ eventValue <#>
+    \_ -> { key: "word-spacing", value: unset' }
