@@ -1,6 +1,8 @@
 module Deku.DOM.Attr.Scale where
 
 import Prelude
+import Data.These (These(..))
+import Data.Tuple (fst, snd)
 
 import Deku.DOM.Elt.FeDisplacementMap (FeDisplacementMap_)
 import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
@@ -8,8 +10,11 @@ import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 data Scale = Scale
 
 instance Attr FeDisplacementMap_ Scale String where
-  attr Scale value = unsafeAttribute { key: "scale", value: prop' value }
+  attr Scale bothValues  = unsafeAttribute $ Both { key: "scale", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "scale", value:  prop' value  })
+  pureAttr Scale value  = unsafeAttribute $ This { key: "scale", value:  prop' value  }
+  unpureAttr Scale eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "scale", value:  prop' value  }
 
 instance Attr everything Scale Unit where
-  attr Scale _ = unsafeAttribute
-    { key: "scale", value: unset' }
+  attr Scale bothValues  = unsafeAttribute $ Both { key: "scale", value:  unset'  } (snd bothValues <#> \_ -> { key: "scale", value:  unset'  })
+  pureAttr Scale _  = unsafeAttribute $ This { key: "scale", value:  unset'  }
+  unpureAttr Scale eventValue  = unsafeAttribute $ That $ eventValue <#> \_ -> { key: "scale", value:  unset'  }

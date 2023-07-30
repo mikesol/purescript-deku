@@ -1,6 +1,8 @@
 module Deku.DOM.Attr.OnSubmit where
 
 import Prelude
+import Data.These (These(..))
+import Data.Tuple (fst, snd)
 import Effect (Effect)
 import Deku.Attribute (class Attr, Attribute, Cb(..), cb', unsafeAttribute, unset')
 import FRP.Event (Event)
@@ -8,15 +10,19 @@ import FRP.Event (Event)
 data OnSubmit = OnSubmit
 
 instance Attr anything OnSubmit Cb where
-  attr OnSubmit value = unsafeAttribute { key: "submit", value: cb' value }
+  attr OnSubmit bothValues  = unsafeAttribute $ Both { key: "submit", value:  cb' (fst bothValues)  } (snd bothValues <#> \value -> { key: "submit", value:  cb' value  })
+  pureAttr OnSubmit value  = unsafeAttribute $ This { key: "submit", value:  cb' value  }
+  unpureAttr OnSubmit eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "submit", value:  cb' value  }
 
 instance Attr anything OnSubmit (Effect Unit) where
-  attr OnSubmit value = unsafeAttribute
-    { key: "submit", value: cb' (Cb (const (value $> true))) }
+  attr OnSubmit bothValues  = unsafeAttribute $ Both { key: "submit", value:  cb' (Cb (const ((fst bothValues) $> true)))  } (snd bothValues <#> \value -> { key: "submit", value:  cb' (Cb (const (value $> true)))  })
+  pureAttr OnSubmit value  = unsafeAttribute $ This { key: "submit", value:  cb' (Cb (const (value $> true)))  }
+  unpureAttr OnSubmit eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "submit", value:  cb' (Cb (const (value $> true)))  }
 
 instance Attr anything OnSubmit (Effect Boolean) where
-  attr OnSubmit value = unsafeAttribute
-    { key: "submit", value: cb' (Cb (const value)) }
+  attr OnSubmit bothValues  = unsafeAttribute $ Both { key: "submit", value:  cb' (Cb (const (fst bothValues)))  } (snd bothValues <#> \value -> { key: "submit", value:  cb' (Cb (const value))  })
+  pureAttr OnSubmit value  = unsafeAttribute $ This { key: "submit", value:  cb' (Cb (const value))  }
+  unpureAttr OnSubmit eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "submit", value:  cb' (Cb (const value))  }
 
 type OnSubmitEffect =
   forall element
@@ -24,5 +30,6 @@ type OnSubmitEffect =
   => Event (Attribute element)
 
 instance Attr everything OnSubmit Unit where
-  attr OnSubmit _ = unsafeAttribute
-    { key: "submit", value: unset' }
+  attr OnSubmit bothValues  = unsafeAttribute $ Both { key: "submit", value:  unset'  } (snd bothValues <#> \_ -> { key: "submit", value:  unset'  })
+  pureAttr OnSubmit _  = unsafeAttribute $ This { key: "submit", value:  unset'  }
+  unpureAttr OnSubmit eventValue  = unsafeAttribute $ That $ eventValue <#> \_ -> { key: "submit", value:  unset'  }

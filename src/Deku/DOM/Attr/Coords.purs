@@ -1,6 +1,8 @@
 module Deku.DOM.Attr.Coords where
 
 import Prelude
+import Data.These (These(..))
+import Data.Tuple (fst, snd)
 
 import Deku.DOM.Elt.Area (Area_)
 import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
@@ -8,8 +10,11 @@ import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 data Coords = Coords
 
 instance Attr Area_ Coords String where
-  attr Coords value = unsafeAttribute { key: "coords", value: prop' value }
+  attr Coords bothValues  = unsafeAttribute $ Both { key: "coords", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "coords", value:  prop' value  })
+  pureAttr Coords value  = unsafeAttribute $ This { key: "coords", value:  prop' value  }
+  unpureAttr Coords eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "coords", value:  prop' value  }
 
 instance Attr everything Coords Unit where
-  attr Coords _ = unsafeAttribute
-    { key: "coords", value: unset' }
+  attr Coords bothValues  = unsafeAttribute $ Both { key: "coords", value:  unset'  } (snd bothValues <#> \_ -> { key: "coords", value:  unset'  })
+  pureAttr Coords _  = unsafeAttribute $ This { key: "coords", value:  unset'  }
+  unpureAttr Coords eventValue  = unsafeAttribute $ That $ eventValue <#> \_ -> { key: "coords", value:  unset'  }

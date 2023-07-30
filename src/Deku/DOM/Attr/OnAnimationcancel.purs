@@ -1,6 +1,8 @@
 module Deku.DOM.Attr.OnAnimationcancel where
 
 import Prelude
+import Data.These (These(..))
+import Data.Tuple (fst, snd)
 import Effect (Effect)
 import Deku.Attribute (class Attr, Attribute, Cb(..), cb', unsafeAttribute, unset')
 import FRP.Event (Event)
@@ -8,16 +10,19 @@ import FRP.Event (Event)
 data OnAnimationcancel = OnAnimationcancel
 
 instance Attr anything OnAnimationcancel Cb where
-  attr OnAnimationcancel value = unsafeAttribute
-    { key: "animationcancel ", value: cb' value }
+  attr OnAnimationcancel bothValues  = unsafeAttribute $ Both { key: "animationcancel", value:  cb' (fst bothValues)  } (snd bothValues <#> \value -> { key: "animationcancel", value:  cb' value  })
+  pureAttr OnAnimationcancel value  = unsafeAttribute $ This { key: "animationcancel", value:  cb' value  }
+  unpureAttr OnAnimationcancel eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "animationcancel", value:  cb' value  }
 
 instance Attr anything OnAnimationcancel (Effect Unit) where
-  attr OnAnimationcancel value = unsafeAttribute
-    { key: "animationcancel ", value: cb' (Cb (const (value $> true))) }
+  attr OnAnimationcancel bothValues  = unsafeAttribute $ Both { key: "animationcancel", value:  cb' (Cb (const ((fst bothValues) $> true)))  } (snd bothValues <#> \value -> { key: "animationcancel", value:  cb' (Cb (const (value $> true)))  })
+  pureAttr OnAnimationcancel value  = unsafeAttribute $ This { key: "animationcancel", value:  cb' (Cb (const (value $> true)))  }
+  unpureAttr OnAnimationcancel eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "animationcancel", value:  cb' (Cb (const (value $> true)))  }
 
 instance Attr anything OnAnimationcancel (Effect Boolean) where
-  attr OnAnimationcancel value = unsafeAttribute
-    { key: "animationcancel ", value: cb' (Cb (const value)) }
+  attr OnAnimationcancel bothValues  = unsafeAttribute $ Both { key: "animationcancel", value:  cb' (Cb (const (fst bothValues)))  } (snd bothValues <#> \value -> { key: "animationcancel", value:  cb' (Cb (const value))  })
+  pureAttr OnAnimationcancel value  = unsafeAttribute $ This { key: "animationcancel", value:  cb' (Cb (const value))  }
+  unpureAttr OnAnimationcancel eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "animationcancel", value:  cb' (Cb (const value))  }
 
 type OnAnimationcancelEffect =
   forall element
@@ -25,5 +30,6 @@ type OnAnimationcancelEffect =
   => Event (Attribute element)
 
 instance Attr everything OnAnimationcancel Unit where
-  attr OnAnimationcancel _ = unsafeAttribute
-    { key: "animationcancel ", value: unset' }
+  attr OnAnimationcancel bothValues  = unsafeAttribute $ Both { key: "animationcancel", value:  unset'  } (snd bothValues <#> \_ -> { key: "animationcancel", value:  unset'  })
+  pureAttr OnAnimationcancel _  = unsafeAttribute $ This { key: "animationcancel", value:  unset'  }
+  unpureAttr OnAnimationcancel eventValue  = unsafeAttribute $ That $ eventValue <#> \_ -> { key: "animationcancel", value:  unset'  }

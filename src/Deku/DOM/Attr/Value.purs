@@ -1,6 +1,8 @@
 module Deku.DOM.Attr.Value where
 
 import Prelude
+import Data.These (These(..))
+import Data.Tuple (fst, snd)
 
 import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 import Deku.DOM.Elt.Textarea (Textarea_)
@@ -15,29 +17,46 @@ import Deku.DOM.Elt.Progress (Progress_)
 data Value = Value
 
 instance Attr Textarea_ Value String where
-  attr Value value = unsafeAttribute { key: "value", value: prop' value }
+  attr Value bothValues  = unsafeAttribute $ Both { key: "value", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "value", value:  prop' value  })
+  pureAttr Value value  = unsafeAttribute $ This { key: "value", value:  prop' value  }
+  unpureAttr Value eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "value", value:  prop' value  }
 
 instance Attr Button_ Value String where
-  attr Value value = unsafeAttribute { key: "value", value: prop' value }
+  attr Value bothValues  = unsafeAttribute $ Both { key: "value", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "value", value:  prop' value  })
+  pureAttr Value value  = unsafeAttribute $ This { key: "value", value:  prop' value  }
+  unpureAttr Value eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "value", value:  prop' value  }
 
 instance Attr Input_ Value String where
-  attr Value value = unsafeAttribute { key: "value", value: prop' value }
+  attr Value bothValues  = unsafeAttribute $ Both { key: "value", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "value", value:  prop' value  })
+  pureAttr Value value  = unsafeAttribute $ This { key: "value", value:  prop' value  }
+  unpureAttr Value eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "value", value:  prop' value  }
 
 instance Attr Li_ Value String where
-  attr Value value = unsafeAttribute { key: "value", value: prop' value }
+  attr Value bothValues  = unsafeAttribute $ Both { key: "value", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "value", value:  prop' value  })
+  pureAttr Value value  = unsafeAttribute $ This { key: "value", value:  prop' value  }
+  unpureAttr Value eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "value", value:  prop' value  }
 
 instance Attr Meter_ Value String where
-  attr Value value = unsafeAttribute { key: "value", value: prop' value }
+  attr Value bothValues  = unsafeAttribute $ Both { key: "value", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "value", value:  prop' value  })
+  pureAttr Value value  = unsafeAttribute $ This { key: "value", value:  prop' value  }
+  unpureAttr Value eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "value", value:  prop' value  }
 
 instance Attr Option_ Value String where
-  attr Value value = unsafeAttribute { key: "value", value: prop' value }
+  attr Value bothValues  = unsafeAttribute $ Both { key: "value", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "value", value:  prop' value  })
+  pureAttr Value value  = unsafeAttribute $ This { key: "value", value:  prop' value  }
+  unpureAttr Value eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "value", value:  prop' value  }
 
 instance Attr Progress_ Value String where
-  attr Value value = unsafeAttribute { key: "value", value: prop' value }
+  attr Value bothValues  = unsafeAttribute $ Both { key: "value", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "value", value:  prop' value  })
+  pureAttr Value value  = unsafeAttribute $ This { key: "value", value:  prop' value  }
+  unpureAttr Value eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "value", value:  prop' value  }
 
 instance Attr Param_ Value String where
-  attr Value value = unsafeAttribute { key: "value", value: prop' value }
+  attr Value bothValues  = unsafeAttribute $ Both { key: "value", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "value", value:  prop' value  })
+  pureAttr Value value  = unsafeAttribute $ This { key: "value", value:  prop' value  }
+  unpureAttr Value eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "value", value:  prop' value  }
 
 instance Attr everything Value Unit where
-  attr Value _ = unsafeAttribute
-    { key: "value", value: unset' }
+  attr Value bothValues  = unsafeAttribute $ Both { key: "value", value:  unset'  } (snd bothValues <#> \_ -> { key: "value", value:  unset'  })
+  pureAttr Value _  = unsafeAttribute $ This { key: "value", value:  unset'  }
+  unpureAttr Value eventValue  = unsafeAttribute $ That $ eventValue <#> \_ -> { key: "value", value:  unset'  }

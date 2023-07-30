@@ -1,6 +1,8 @@
 module Deku.DOM.Attr.Stroke where
 
 import Prelude
+import Data.These (These(..))
+import Data.Tuple (fst, snd)
 
 import Deku.DOM.Elt.Use (Use_)
 import Deku.DOM.Elt.Tspan (Tspan_)
@@ -48,128 +50,211 @@ import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 data Stroke = Stroke
 
 instance Attr Circle_ Stroke String where
-  attr Stroke value = unsafeAttribute { key: "stroke", value: prop' value }
+  attr Stroke bothValues  = unsafeAttribute $ Both { key: "stroke", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "stroke", value:  prop' value  })
+  pureAttr Stroke value  = unsafeAttribute $ This { key: "stroke", value:  prop' value  }
+  unpureAttr Stroke eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "stroke", value:  prop' value  }
 
 instance Attr ClipPath_ Stroke String where
-  attr Stroke value = unsafeAttribute { key: "stroke", value: prop' value }
+  attr Stroke bothValues  = unsafeAttribute $ Both { key: "stroke", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "stroke", value:  prop' value  })
+  pureAttr Stroke value  = unsafeAttribute $ This { key: "stroke", value:  prop' value  }
+  unpureAttr Stroke eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "stroke", value:  prop' value  }
 
 instance Attr Defs_ Stroke String where
-  attr Stroke value = unsafeAttribute { key: "stroke", value: prop' value }
+  attr Stroke bothValues  = unsafeAttribute $ Both { key: "stroke", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "stroke", value:  prop' value  })
+  pureAttr Stroke value  = unsafeAttribute $ This { key: "stroke", value:  prop' value  }
+  unpureAttr Stroke eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "stroke", value:  prop' value  }
 
 instance Attr Ellipse_ Stroke String where
-  attr Stroke value = unsafeAttribute { key: "stroke", value: prop' value }
+  attr Stroke bothValues  = unsafeAttribute $ Both { key: "stroke", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "stroke", value:  prop' value  })
+  pureAttr Stroke value  = unsafeAttribute $ This { key: "stroke", value:  prop' value  }
+  unpureAttr Stroke eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "stroke", value:  prop' value  }
 
 instance Attr FeBlend_ Stroke String where
-  attr Stroke value = unsafeAttribute { key: "stroke", value: prop' value }
+  attr Stroke bothValues  = unsafeAttribute $ Both { key: "stroke", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "stroke", value:  prop' value  })
+  pureAttr Stroke value  = unsafeAttribute $ This { key: "stroke", value:  prop' value  }
+  unpureAttr Stroke eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "stroke", value:  prop' value  }
 
 instance Attr FeColorMatrix_ Stroke String where
-  attr Stroke value = unsafeAttribute { key: "stroke", value: prop' value }
+  attr Stroke bothValues  = unsafeAttribute $ Both { key: "stroke", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "stroke", value:  prop' value  })
+  pureAttr Stroke value  = unsafeAttribute $ This { key: "stroke", value:  prop' value  }
+  unpureAttr Stroke eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "stroke", value:  prop' value  }
 
 instance Attr FeComponentTransfer_ Stroke String where
-  attr Stroke value = unsafeAttribute { key: "stroke", value: prop' value }
+  attr Stroke bothValues  = unsafeAttribute $ Both { key: "stroke", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "stroke", value:  prop' value  })
+  pureAttr Stroke value  = unsafeAttribute $ This { key: "stroke", value:  prop' value  }
+  unpureAttr Stroke eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "stroke", value:  prop' value  }
 
 instance Attr FeComposite_ Stroke String where
-  attr Stroke value = unsafeAttribute { key: "stroke", value: prop' value }
+  attr Stroke bothValues  = unsafeAttribute $ Both { key: "stroke", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "stroke", value:  prop' value  })
+  pureAttr Stroke value  = unsafeAttribute $ This { key: "stroke", value:  prop' value  }
+  unpureAttr Stroke eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "stroke", value:  prop' value  }
 
 instance Attr FeConvolveMatrix_ Stroke String where
-  attr Stroke value = unsafeAttribute { key: "stroke", value: prop' value }
+  attr Stroke bothValues  = unsafeAttribute $ Both { key: "stroke", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "stroke", value:  prop' value  })
+  pureAttr Stroke value  = unsafeAttribute $ This { key: "stroke", value:  prop' value  }
+  unpureAttr Stroke eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "stroke", value:  prop' value  }
 
 instance Attr FeDiffuseLighting_ Stroke String where
-  attr Stroke value = unsafeAttribute { key: "stroke", value: prop' value }
+  attr Stroke bothValues  = unsafeAttribute $ Both { key: "stroke", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "stroke", value:  prop' value  })
+  pureAttr Stroke value  = unsafeAttribute $ This { key: "stroke", value:  prop' value  }
+  unpureAttr Stroke eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "stroke", value:  prop' value  }
 
 instance Attr FeDisplacementMap_ Stroke String where
-  attr Stroke value = unsafeAttribute { key: "stroke", value: prop' value }
+  attr Stroke bothValues  = unsafeAttribute $ Both { key: "stroke", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "stroke", value:  prop' value  })
+  pureAttr Stroke value  = unsafeAttribute $ This { key: "stroke", value:  prop' value  }
+  unpureAttr Stroke eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "stroke", value:  prop' value  }
 
 instance Attr FeFlood_ Stroke String where
-  attr Stroke value = unsafeAttribute { key: "stroke", value: prop' value }
+  attr Stroke bothValues  = unsafeAttribute $ Both { key: "stroke", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "stroke", value:  prop' value  })
+  pureAttr Stroke value  = unsafeAttribute $ This { key: "stroke", value:  prop' value  }
+  unpureAttr Stroke eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "stroke", value:  prop' value  }
 
 instance Attr FeGaussianBlur_ Stroke String where
-  attr Stroke value = unsafeAttribute { key: "stroke", value: prop' value }
+  attr Stroke bothValues  = unsafeAttribute $ Both { key: "stroke", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "stroke", value:  prop' value  })
+  pureAttr Stroke value  = unsafeAttribute $ This { key: "stroke", value:  prop' value  }
+  unpureAttr Stroke eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "stroke", value:  prop' value  }
 
 instance Attr FeImage_ Stroke String where
-  attr Stroke value = unsafeAttribute { key: "stroke", value: prop' value }
+  attr Stroke bothValues  = unsafeAttribute $ Both { key: "stroke", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "stroke", value:  prop' value  })
+  pureAttr Stroke value  = unsafeAttribute $ This { key: "stroke", value:  prop' value  }
+  unpureAttr Stroke eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "stroke", value:  prop' value  }
 
 instance Attr FeMerge_ Stroke String where
-  attr Stroke value = unsafeAttribute { key: "stroke", value: prop' value }
+  attr Stroke bothValues  = unsafeAttribute $ Both { key: "stroke", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "stroke", value:  prop' value  })
+  pureAttr Stroke value  = unsafeAttribute $ This { key: "stroke", value:  prop' value  }
+  unpureAttr Stroke eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "stroke", value:  prop' value  }
 
 instance Attr FeMorphology_ Stroke String where
-  attr Stroke value = unsafeAttribute { key: "stroke", value: prop' value }
+  attr Stroke bothValues  = unsafeAttribute $ Both { key: "stroke", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "stroke", value:  prop' value  })
+  pureAttr Stroke value  = unsafeAttribute $ This { key: "stroke", value:  prop' value  }
+  unpureAttr Stroke eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "stroke", value:  prop' value  }
 
 instance Attr FeOffset_ Stroke String where
-  attr Stroke value = unsafeAttribute { key: "stroke", value: prop' value }
+  attr Stroke bothValues  = unsafeAttribute $ Both { key: "stroke", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "stroke", value:  prop' value  })
+  pureAttr Stroke value  = unsafeAttribute $ This { key: "stroke", value:  prop' value  }
+  unpureAttr Stroke eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "stroke", value:  prop' value  }
 
 instance Attr FeSpecularLighting_ Stroke String where
-  attr Stroke value = unsafeAttribute { key: "stroke", value: prop' value }
+  attr Stroke bothValues  = unsafeAttribute $ Both { key: "stroke", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "stroke", value:  prop' value  })
+  pureAttr Stroke value  = unsafeAttribute $ This { key: "stroke", value:  prop' value  }
+  unpureAttr Stroke eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "stroke", value:  prop' value  }
 
 instance Attr FeTile_ Stroke String where
-  attr Stroke value = unsafeAttribute { key: "stroke", value: prop' value }
+  attr Stroke bothValues  = unsafeAttribute $ Both { key: "stroke", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "stroke", value:  prop' value  })
+  pureAttr Stroke value  = unsafeAttribute $ This { key: "stroke", value:  prop' value  }
+  unpureAttr Stroke eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "stroke", value:  prop' value  }
 
 instance Attr FeTurbulence_ Stroke String where
-  attr Stroke value = unsafeAttribute { key: "stroke", value: prop' value }
+  attr Stroke bothValues  = unsafeAttribute $ Both { key: "stroke", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "stroke", value:  prop' value  })
+  pureAttr Stroke value  = unsafeAttribute $ This { key: "stroke", value:  prop' value  }
+  unpureAttr Stroke eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "stroke", value:  prop' value  }
 
 instance Attr Filter_ Stroke String where
-  attr Stroke value = unsafeAttribute { key: "stroke", value: prop' value }
+  attr Stroke bothValues  = unsafeAttribute $ Both { key: "stroke", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "stroke", value:  prop' value  })
+  pureAttr Stroke value  = unsafeAttribute $ This { key: "stroke", value:  prop' value  }
+  unpureAttr Stroke eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "stroke", value:  prop' value  }
 
 instance Attr ForeignObject_ Stroke String where
-  attr Stroke value = unsafeAttribute { key: "stroke", value: prop' value }
+  attr Stroke bothValues  = unsafeAttribute $ Both { key: "stroke", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "stroke", value:  prop' value  })
+  pureAttr Stroke value  = unsafeAttribute $ This { key: "stroke", value:  prop' value  }
+  unpureAttr Stroke eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "stroke", value:  prop' value  }
 
 instance Attr G_ Stroke String where
-  attr Stroke value = unsafeAttribute { key: "stroke", value: prop' value }
+  attr Stroke bothValues  = unsafeAttribute $ Both { key: "stroke", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "stroke", value:  prop' value  })
+  pureAttr Stroke value  = unsafeAttribute $ This { key: "stroke", value:  prop' value  }
+  unpureAttr Stroke eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "stroke", value:  prop' value  }
 
 instance Attr Image_ Stroke String where
-  attr Stroke value = unsafeAttribute { key: "stroke", value: prop' value }
+  attr Stroke bothValues  = unsafeAttribute $ Both { key: "stroke", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "stroke", value:  prop' value  })
+  pureAttr Stroke value  = unsafeAttribute $ This { key: "stroke", value:  prop' value  }
+  unpureAttr Stroke eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "stroke", value:  prop' value  }
 
 instance Attr Line_ Stroke String where
-  attr Stroke value = unsafeAttribute { key: "stroke", value: prop' value }
+  attr Stroke bothValues  = unsafeAttribute $ Both { key: "stroke", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "stroke", value:  prop' value  })
+  pureAttr Stroke value  = unsafeAttribute $ This { key: "stroke", value:  prop' value  }
+  unpureAttr Stroke eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "stroke", value:  prop' value  }
 
 instance Attr LinearGradient_ Stroke String where
-  attr Stroke value = unsafeAttribute { key: "stroke", value: prop' value }
+  attr Stroke bothValues  = unsafeAttribute $ Both { key: "stroke", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "stroke", value:  prop' value  })
+  pureAttr Stroke value  = unsafeAttribute $ This { key: "stroke", value:  prop' value  }
+  unpureAttr Stroke eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "stroke", value:  prop' value  }
 
 instance Attr Marker_ Stroke String where
-  attr Stroke value = unsafeAttribute { key: "stroke", value: prop' value }
+  attr Stroke bothValues  = unsafeAttribute $ Both { key: "stroke", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "stroke", value:  prop' value  })
+  pureAttr Stroke value  = unsafeAttribute $ This { key: "stroke", value:  prop' value  }
+  unpureAttr Stroke eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "stroke", value:  prop' value  }
 
 instance Attr Mask_ Stroke String where
-  attr Stroke value = unsafeAttribute { key: "stroke", value: prop' value }
+  attr Stroke bothValues  = unsafeAttribute $ Both { key: "stroke", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "stroke", value:  prop' value  })
+  pureAttr Stroke value  = unsafeAttribute $ This { key: "stroke", value:  prop' value  }
+  unpureAttr Stroke eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "stroke", value:  prop' value  }
 
 instance Attr Path_ Stroke String where
-  attr Stroke value = unsafeAttribute { key: "stroke", value: prop' value }
+  attr Stroke bothValues  = unsafeAttribute $ Both { key: "stroke", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "stroke", value:  prop' value  })
+  pureAttr Stroke value  = unsafeAttribute $ This { key: "stroke", value:  prop' value  }
+  unpureAttr Stroke eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "stroke", value:  prop' value  }
 
 instance Attr Pattern_ Stroke String where
-  attr Stroke value = unsafeAttribute { key: "stroke", value: prop' value }
+  attr Stroke bothValues  = unsafeAttribute $ Both { key: "stroke", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "stroke", value:  prop' value  })
+  pureAttr Stroke value  = unsafeAttribute $ This { key: "stroke", value:  prop' value  }
+  unpureAttr Stroke eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "stroke", value:  prop' value  }
 
 instance Attr Polygon_ Stroke String where
-  attr Stroke value = unsafeAttribute { key: "stroke", value: prop' value }
+  attr Stroke bothValues  = unsafeAttribute $ Both { key: "stroke", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "stroke", value:  prop' value  })
+  pureAttr Stroke value  = unsafeAttribute $ This { key: "stroke", value:  prop' value  }
+  unpureAttr Stroke eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "stroke", value:  prop' value  }
 
 instance Attr Polyline_ Stroke String where
-  attr Stroke value = unsafeAttribute { key: "stroke", value: prop' value }
+  attr Stroke bothValues  = unsafeAttribute $ Both { key: "stroke", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "stroke", value:  prop' value  })
+  pureAttr Stroke value  = unsafeAttribute $ This { key: "stroke", value:  prop' value  }
+  unpureAttr Stroke eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "stroke", value:  prop' value  }
 
 instance Attr RadialGradient_ Stroke String where
-  attr Stroke value = unsafeAttribute { key: "stroke", value: prop' value }
+  attr Stroke bothValues  = unsafeAttribute $ Both { key: "stroke", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "stroke", value:  prop' value  })
+  pureAttr Stroke value  = unsafeAttribute $ This { key: "stroke", value:  prop' value  }
+  unpureAttr Stroke eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "stroke", value:  prop' value  }
 
 instance Attr Rect_ Stroke String where
-  attr Stroke value = unsafeAttribute { key: "stroke", value: prop' value }
+  attr Stroke bothValues  = unsafeAttribute $ Both { key: "stroke", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "stroke", value:  prop' value  })
+  pureAttr Stroke value  = unsafeAttribute $ This { key: "stroke", value:  prop' value  }
+  unpureAttr Stroke eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "stroke", value:  prop' value  }
 
 instance Attr Svg_ Stroke String where
-  attr Stroke value = unsafeAttribute { key: "stroke", value: prop' value }
+  attr Stroke bothValues  = unsafeAttribute $ Both { key: "stroke", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "stroke", value:  prop' value  })
+  pureAttr Stroke value  = unsafeAttribute $ This { key: "stroke", value:  prop' value  }
+  unpureAttr Stroke eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "stroke", value:  prop' value  }
 
 instance Attr Switch_ Stroke String where
-  attr Stroke value = unsafeAttribute { key: "stroke", value: prop' value }
+  attr Stroke bothValues  = unsafeAttribute $ Both { key: "stroke", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "stroke", value:  prop' value  })
+  pureAttr Stroke value  = unsafeAttribute $ This { key: "stroke", value:  prop' value  }
+  unpureAttr Stroke eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "stroke", value:  prop' value  }
 
 instance Attr Symbol_ Stroke String where
-  attr Stroke value = unsafeAttribute { key: "stroke", value: prop' value }
+  attr Stroke bothValues  = unsafeAttribute $ Both { key: "stroke", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "stroke", value:  prop' value  })
+  pureAttr Stroke value  = unsafeAttribute $ This { key: "stroke", value:  prop' value  }
+  unpureAttr Stroke eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "stroke", value:  prop' value  }
 
 instance Attr Text_ Stroke String where
-  attr Stroke value = unsafeAttribute { key: "stroke", value: prop' value }
+  attr Stroke bothValues  = unsafeAttribute $ Both { key: "stroke", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "stroke", value:  prop' value  })
+  pureAttr Stroke value  = unsafeAttribute $ This { key: "stroke", value:  prop' value  }
+  unpureAttr Stroke eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "stroke", value:  prop' value  }
 
 instance Attr TextPath_ Stroke String where
-  attr Stroke value = unsafeAttribute { key: "stroke", value: prop' value }
+  attr Stroke bothValues  = unsafeAttribute $ Both { key: "stroke", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "stroke", value:  prop' value  })
+  pureAttr Stroke value  = unsafeAttribute $ This { key: "stroke", value:  prop' value  }
+  unpureAttr Stroke eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "stroke", value:  prop' value  }
 
 instance Attr Tspan_ Stroke String where
-  attr Stroke value = unsafeAttribute { key: "stroke", value: prop' value }
+  attr Stroke bothValues  = unsafeAttribute $ Both { key: "stroke", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "stroke", value:  prop' value  })
+  pureAttr Stroke value  = unsafeAttribute $ This { key: "stroke", value:  prop' value  }
+  unpureAttr Stroke eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "stroke", value:  prop' value  }
 
 instance Attr Use_ Stroke String where
-  attr Stroke value = unsafeAttribute { key: "stroke", value: prop' value }
+  attr Stroke bothValues  = unsafeAttribute $ Both { key: "stroke", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "stroke", value:  prop' value  })
+  pureAttr Stroke value  = unsafeAttribute $ This { key: "stroke", value:  prop' value  }
+  unpureAttr Stroke eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "stroke", value:  prop' value  }
 
 instance Attr everything Stroke Unit where
-  attr Stroke _ = unsafeAttribute
-    { key: "stroke", value: unset' }
+  attr Stroke bothValues  = unsafeAttribute $ Both { key: "stroke", value:  unset'  } (snd bothValues <#> \_ -> { key: "stroke", value:  unset'  })
+  pureAttr Stroke _  = unsafeAttribute $ This { key: "stroke", value:  unset'  }
+  unpureAttr Stroke eventValue  = unsafeAttribute $ That $ eventValue <#> \_ -> { key: "stroke", value:  unset'  }

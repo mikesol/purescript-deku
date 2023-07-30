@@ -1,6 +1,8 @@
 module Deku.DOM.Attr.ColorInterpolationFilters where
 
 import Prelude
+import Data.These (These(..))
+import Data.Tuple (fst, snd)
 
 import Deku.DOM.Elt.Switch (Switch_)
 import Deku.DOM.Elt.Image (Image_)
@@ -26,81 +28,101 @@ import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 data ColorInterpolationFilters = ColorInterpolationFilters
 
 instance Attr FeBlend_ ColorInterpolationFilters String where
-  attr ColorInterpolationFilters value = unsafeAttribute
-    { key: "color-interpolation-filters", value: prop' value }
+  attr ColorInterpolationFilters bothValues  = unsafeAttribute $ Both { key: "color-interpolation-filters", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "color-interpolation-filters", value:  prop' value  })
+  pureAttr ColorInterpolationFilters value  = unsafeAttribute $ This { key: "color-interpolation-filters", value:  prop' value  }
+  unpureAttr ColorInterpolationFilters eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "color-interpolation-filters", value:  prop' value  }
 
 instance Attr FeColorMatrix_ ColorInterpolationFilters String where
-  attr ColorInterpolationFilters value = unsafeAttribute
-    { key: "color-interpolation-filters", value: prop' value }
+  attr ColorInterpolationFilters bothValues  = unsafeAttribute $ Both { key: "color-interpolation-filters", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "color-interpolation-filters", value:  prop' value  })
+  pureAttr ColorInterpolationFilters value  = unsafeAttribute $ This { key: "color-interpolation-filters", value:  prop' value  }
+  unpureAttr ColorInterpolationFilters eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "color-interpolation-filters", value:  prop' value  }
 
 instance Attr FeComponentTransfer_ ColorInterpolationFilters String where
-  attr ColorInterpolationFilters value = unsafeAttribute
-    { key: "color-interpolation-filters", value: prop' value }
+  attr ColorInterpolationFilters bothValues  = unsafeAttribute $ Both { key: "color-interpolation-filters", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "color-interpolation-filters", value:  prop' value  })
+  pureAttr ColorInterpolationFilters value  = unsafeAttribute $ This { key: "color-interpolation-filters", value:  prop' value  }
+  unpureAttr ColorInterpolationFilters eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "color-interpolation-filters", value:  prop' value  }
 
 instance Attr FeComposite_ ColorInterpolationFilters String where
-  attr ColorInterpolationFilters value = unsafeAttribute
-    { key: "color-interpolation-filters", value: prop' value }
+  attr ColorInterpolationFilters bothValues  = unsafeAttribute $ Both { key: "color-interpolation-filters", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "color-interpolation-filters", value:  prop' value  })
+  pureAttr ColorInterpolationFilters value  = unsafeAttribute $ This { key: "color-interpolation-filters", value:  prop' value  }
+  unpureAttr ColorInterpolationFilters eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "color-interpolation-filters", value:  prop' value  }
 
 instance Attr FeConvolveMatrix_ ColorInterpolationFilters String where
-  attr ColorInterpolationFilters value = unsafeAttribute
-    { key: "color-interpolation-filters", value: prop' value }
+  attr ColorInterpolationFilters bothValues  = unsafeAttribute $ Both { key: "color-interpolation-filters", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "color-interpolation-filters", value:  prop' value  })
+  pureAttr ColorInterpolationFilters value  = unsafeAttribute $ This { key: "color-interpolation-filters", value:  prop' value  }
+  unpureAttr ColorInterpolationFilters eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "color-interpolation-filters", value:  prop' value  }
 
 instance Attr FeDiffuseLighting_ ColorInterpolationFilters String where
-  attr ColorInterpolationFilters value = unsafeAttribute
-    { key: "color-interpolation-filters", value: prop' value }
+  attr ColorInterpolationFilters bothValues  = unsafeAttribute $ Both { key: "color-interpolation-filters", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "color-interpolation-filters", value:  prop' value  })
+  pureAttr ColorInterpolationFilters value  = unsafeAttribute $ This { key: "color-interpolation-filters", value:  prop' value  }
+  unpureAttr ColorInterpolationFilters eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "color-interpolation-filters", value:  prop' value  }
 
 instance Attr FeDisplacementMap_ ColorInterpolationFilters String where
-  attr ColorInterpolationFilters value = unsafeAttribute
-    { key: "color-interpolation-filters", value: prop' value }
+  attr ColorInterpolationFilters bothValues  = unsafeAttribute $ Both { key: "color-interpolation-filters", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "color-interpolation-filters", value:  prop' value  })
+  pureAttr ColorInterpolationFilters value  = unsafeAttribute $ This { key: "color-interpolation-filters", value:  prop' value  }
+  unpureAttr ColorInterpolationFilters eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "color-interpolation-filters", value:  prop' value  }
 
 instance Attr FeFlood_ ColorInterpolationFilters String where
-  attr ColorInterpolationFilters value = unsafeAttribute
-    { key: "color-interpolation-filters", value: prop' value }
+  attr ColorInterpolationFilters bothValues  = unsafeAttribute $ Both { key: "color-interpolation-filters", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "color-interpolation-filters", value:  prop' value  })
+  pureAttr ColorInterpolationFilters value  = unsafeAttribute $ This { key: "color-interpolation-filters", value:  prop' value  }
+  unpureAttr ColorInterpolationFilters eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "color-interpolation-filters", value:  prop' value  }
 
 instance Attr FeGaussianBlur_ ColorInterpolationFilters String where
-  attr ColorInterpolationFilters value = unsafeAttribute
-    { key: "color-interpolation-filters", value: prop' value }
+  attr ColorInterpolationFilters bothValues  = unsafeAttribute $ Both { key: "color-interpolation-filters", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "color-interpolation-filters", value:  prop' value  })
+  pureAttr ColorInterpolationFilters value  = unsafeAttribute $ This { key: "color-interpolation-filters", value:  prop' value  }
+  unpureAttr ColorInterpolationFilters eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "color-interpolation-filters", value:  prop' value  }
 
 instance Attr FeImage_ ColorInterpolationFilters String where
-  attr ColorInterpolationFilters value = unsafeAttribute
-    { key: "color-interpolation-filters", value: prop' value }
+  attr ColorInterpolationFilters bothValues  = unsafeAttribute $ Both { key: "color-interpolation-filters", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "color-interpolation-filters", value:  prop' value  })
+  pureAttr ColorInterpolationFilters value  = unsafeAttribute $ This { key: "color-interpolation-filters", value:  prop' value  }
+  unpureAttr ColorInterpolationFilters eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "color-interpolation-filters", value:  prop' value  }
 
 instance Attr FeMerge_ ColorInterpolationFilters String where
-  attr ColorInterpolationFilters value = unsafeAttribute
-    { key: "color-interpolation-filters", value: prop' value }
+  attr ColorInterpolationFilters bothValues  = unsafeAttribute $ Both { key: "color-interpolation-filters", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "color-interpolation-filters", value:  prop' value  })
+  pureAttr ColorInterpolationFilters value  = unsafeAttribute $ This { key: "color-interpolation-filters", value:  prop' value  }
+  unpureAttr ColorInterpolationFilters eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "color-interpolation-filters", value:  prop' value  }
 
 instance Attr FeMorphology_ ColorInterpolationFilters String where
-  attr ColorInterpolationFilters value = unsafeAttribute
-    { key: "color-interpolation-filters", value: prop' value }
+  attr ColorInterpolationFilters bothValues  = unsafeAttribute $ Both { key: "color-interpolation-filters", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "color-interpolation-filters", value:  prop' value  })
+  pureAttr ColorInterpolationFilters value  = unsafeAttribute $ This { key: "color-interpolation-filters", value:  prop' value  }
+  unpureAttr ColorInterpolationFilters eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "color-interpolation-filters", value:  prop' value  }
 
 instance Attr FeOffset_ ColorInterpolationFilters String where
-  attr ColorInterpolationFilters value = unsafeAttribute
-    { key: "color-interpolation-filters", value: prop' value }
+  attr ColorInterpolationFilters bothValues  = unsafeAttribute $ Both { key: "color-interpolation-filters", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "color-interpolation-filters", value:  prop' value  })
+  pureAttr ColorInterpolationFilters value  = unsafeAttribute $ This { key: "color-interpolation-filters", value:  prop' value  }
+  unpureAttr ColorInterpolationFilters eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "color-interpolation-filters", value:  prop' value  }
 
 instance Attr FeSpecularLighting_ ColorInterpolationFilters String where
-  attr ColorInterpolationFilters value = unsafeAttribute
-    { key: "color-interpolation-filters", value: prop' value }
+  attr ColorInterpolationFilters bothValues  = unsafeAttribute $ Both { key: "color-interpolation-filters", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "color-interpolation-filters", value:  prop' value  })
+  pureAttr ColorInterpolationFilters value  = unsafeAttribute $ This { key: "color-interpolation-filters", value:  prop' value  }
+  unpureAttr ColorInterpolationFilters eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "color-interpolation-filters", value:  prop' value  }
 
 instance Attr FeTile_ ColorInterpolationFilters String where
-  attr ColorInterpolationFilters value = unsafeAttribute
-    { key: "color-interpolation-filters", value: prop' value }
+  attr ColorInterpolationFilters bothValues  = unsafeAttribute $ Both { key: "color-interpolation-filters", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "color-interpolation-filters", value:  prop' value  })
+  pureAttr ColorInterpolationFilters value  = unsafeAttribute $ This { key: "color-interpolation-filters", value:  prop' value  }
+  unpureAttr ColorInterpolationFilters eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "color-interpolation-filters", value:  prop' value  }
 
 instance Attr FeTurbulence_ ColorInterpolationFilters String where
-  attr ColorInterpolationFilters value = unsafeAttribute
-    { key: "color-interpolation-filters", value: prop' value }
+  attr ColorInterpolationFilters bothValues  = unsafeAttribute $ Both { key: "color-interpolation-filters", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "color-interpolation-filters", value:  prop' value  })
+  pureAttr ColorInterpolationFilters value  = unsafeAttribute $ This { key: "color-interpolation-filters", value:  prop' value  }
+  unpureAttr ColorInterpolationFilters eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "color-interpolation-filters", value:  prop' value  }
 
 instance Attr Filter_ ColorInterpolationFilters String where
-  attr ColorInterpolationFilters value = unsafeAttribute
-    { key: "color-interpolation-filters", value: prop' value }
+  attr ColorInterpolationFilters bothValues  = unsafeAttribute $ Both { key: "color-interpolation-filters", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "color-interpolation-filters", value:  prop' value  })
+  pureAttr ColorInterpolationFilters value  = unsafeAttribute $ This { key: "color-interpolation-filters", value:  prop' value  }
+  unpureAttr ColorInterpolationFilters eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "color-interpolation-filters", value:  prop' value  }
 
 instance Attr Image_ ColorInterpolationFilters String where
-  attr ColorInterpolationFilters value = unsafeAttribute
-    { key: "color-interpolation-filters", value: prop' value }
+  attr ColorInterpolationFilters bothValues  = unsafeAttribute $ Both { key: "color-interpolation-filters", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "color-interpolation-filters", value:  prop' value  })
+  pureAttr ColorInterpolationFilters value  = unsafeAttribute $ This { key: "color-interpolation-filters", value:  prop' value  }
+  unpureAttr ColorInterpolationFilters eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "color-interpolation-filters", value:  prop' value  }
 
 instance Attr Switch_ ColorInterpolationFilters String where
-  attr ColorInterpolationFilters value = unsafeAttribute
-    { key: "color-interpolation-filters", value: prop' value }
+  attr ColorInterpolationFilters bothValues  = unsafeAttribute $ Both { key: "color-interpolation-filters", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "color-interpolation-filters", value:  prop' value  })
+  pureAttr ColorInterpolationFilters value  = unsafeAttribute $ This { key: "color-interpolation-filters", value:  prop' value  }
+  unpureAttr ColorInterpolationFilters eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "color-interpolation-filters", value:  prop' value  }
 
 instance Attr everything ColorInterpolationFilters Unit where
-  attr ColorInterpolationFilters _ = unsafeAttribute
-    { key: "color-interpolation-filters", value: unset' }
+  attr ColorInterpolationFilters bothValues  = unsafeAttribute $ Both { key: "color-interpolation-filters", value:  unset'  } (snd bothValues <#> \_ -> { key: "color-interpolation-filters", value:  unset'  })
+  pureAttr ColorInterpolationFilters _  = unsafeAttribute $ This { key: "color-interpolation-filters", value:  unset'  }
+  unpureAttr ColorInterpolationFilters eventValue  = unsafeAttribute $ That $ eventValue <#> \_ -> { key: "color-interpolation-filters", value:  unset'  }

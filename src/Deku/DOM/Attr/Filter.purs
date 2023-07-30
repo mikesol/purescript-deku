@@ -1,6 +1,8 @@
 module Deku.DOM.Attr.Filter where
 
 import Prelude
+import Data.These (These(..))
+import Data.Tuple (fst, snd)
 
 import Deku.DOM.Elt.Use (Use_)
 import Deku.DOM.Elt.Tspan (Tspan_)
@@ -48,128 +50,211 @@ import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 data Filter = Filter
 
 instance Attr Circle_ Filter String where
-  attr Filter value = unsafeAttribute { key: "filter", value: prop' value }
+  attr Filter bothValues  = unsafeAttribute $ Both { key: "filter", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "filter", value:  prop' value  })
+  pureAttr Filter value  = unsafeAttribute $ This { key: "filter", value:  prop' value  }
+  unpureAttr Filter eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "filter", value:  prop' value  }
 
 instance Attr ClipPath_ Filter String where
-  attr Filter value = unsafeAttribute { key: "filter", value: prop' value }
+  attr Filter bothValues  = unsafeAttribute $ Both { key: "filter", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "filter", value:  prop' value  })
+  pureAttr Filter value  = unsafeAttribute $ This { key: "filter", value:  prop' value  }
+  unpureAttr Filter eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "filter", value:  prop' value  }
 
 instance Attr Defs_ Filter String where
-  attr Filter value = unsafeAttribute { key: "filter", value: prop' value }
+  attr Filter bothValues  = unsafeAttribute $ Both { key: "filter", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "filter", value:  prop' value  })
+  pureAttr Filter value  = unsafeAttribute $ This { key: "filter", value:  prop' value  }
+  unpureAttr Filter eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "filter", value:  prop' value  }
 
 instance Attr Ellipse_ Filter String where
-  attr Filter value = unsafeAttribute { key: "filter", value: prop' value }
+  attr Filter bothValues  = unsafeAttribute $ Both { key: "filter", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "filter", value:  prop' value  })
+  pureAttr Filter value  = unsafeAttribute $ This { key: "filter", value:  prop' value  }
+  unpureAttr Filter eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "filter", value:  prop' value  }
 
 instance Attr FeBlend_ Filter String where
-  attr Filter value = unsafeAttribute { key: "filter", value: prop' value }
+  attr Filter bothValues  = unsafeAttribute $ Both { key: "filter", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "filter", value:  prop' value  })
+  pureAttr Filter value  = unsafeAttribute $ This { key: "filter", value:  prop' value  }
+  unpureAttr Filter eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "filter", value:  prop' value  }
 
 instance Attr FeColorMatrix_ Filter String where
-  attr Filter value = unsafeAttribute { key: "filter", value: prop' value }
+  attr Filter bothValues  = unsafeAttribute $ Both { key: "filter", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "filter", value:  prop' value  })
+  pureAttr Filter value  = unsafeAttribute $ This { key: "filter", value:  prop' value  }
+  unpureAttr Filter eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "filter", value:  prop' value  }
 
 instance Attr FeComponentTransfer_ Filter String where
-  attr Filter value = unsafeAttribute { key: "filter", value: prop' value }
+  attr Filter bothValues  = unsafeAttribute $ Both { key: "filter", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "filter", value:  prop' value  })
+  pureAttr Filter value  = unsafeAttribute $ This { key: "filter", value:  prop' value  }
+  unpureAttr Filter eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "filter", value:  prop' value  }
 
 instance Attr FeComposite_ Filter String where
-  attr Filter value = unsafeAttribute { key: "filter", value: prop' value }
+  attr Filter bothValues  = unsafeAttribute $ Both { key: "filter", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "filter", value:  prop' value  })
+  pureAttr Filter value  = unsafeAttribute $ This { key: "filter", value:  prop' value  }
+  unpureAttr Filter eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "filter", value:  prop' value  }
 
 instance Attr FeConvolveMatrix_ Filter String where
-  attr Filter value = unsafeAttribute { key: "filter", value: prop' value }
+  attr Filter bothValues  = unsafeAttribute $ Both { key: "filter", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "filter", value:  prop' value  })
+  pureAttr Filter value  = unsafeAttribute $ This { key: "filter", value:  prop' value  }
+  unpureAttr Filter eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "filter", value:  prop' value  }
 
 instance Attr FeDiffuseLighting_ Filter String where
-  attr Filter value = unsafeAttribute { key: "filter", value: prop' value }
+  attr Filter bothValues  = unsafeAttribute $ Both { key: "filter", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "filter", value:  prop' value  })
+  pureAttr Filter value  = unsafeAttribute $ This { key: "filter", value:  prop' value  }
+  unpureAttr Filter eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "filter", value:  prop' value  }
 
 instance Attr FeDisplacementMap_ Filter String where
-  attr Filter value = unsafeAttribute { key: "filter", value: prop' value }
+  attr Filter bothValues  = unsafeAttribute $ Both { key: "filter", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "filter", value:  prop' value  })
+  pureAttr Filter value  = unsafeAttribute $ This { key: "filter", value:  prop' value  }
+  unpureAttr Filter eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "filter", value:  prop' value  }
 
 instance Attr FeFlood_ Filter String where
-  attr Filter value = unsafeAttribute { key: "filter", value: prop' value }
+  attr Filter bothValues  = unsafeAttribute $ Both { key: "filter", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "filter", value:  prop' value  })
+  pureAttr Filter value  = unsafeAttribute $ This { key: "filter", value:  prop' value  }
+  unpureAttr Filter eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "filter", value:  prop' value  }
 
 instance Attr FeGaussianBlur_ Filter String where
-  attr Filter value = unsafeAttribute { key: "filter", value: prop' value }
+  attr Filter bothValues  = unsafeAttribute $ Both { key: "filter", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "filter", value:  prop' value  })
+  pureAttr Filter value  = unsafeAttribute $ This { key: "filter", value:  prop' value  }
+  unpureAttr Filter eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "filter", value:  prop' value  }
 
 instance Attr FeImage_ Filter String where
-  attr Filter value = unsafeAttribute { key: "filter", value: prop' value }
+  attr Filter bothValues  = unsafeAttribute $ Both { key: "filter", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "filter", value:  prop' value  })
+  pureAttr Filter value  = unsafeAttribute $ This { key: "filter", value:  prop' value  }
+  unpureAttr Filter eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "filter", value:  prop' value  }
 
 instance Attr FeMerge_ Filter String where
-  attr Filter value = unsafeAttribute { key: "filter", value: prop' value }
+  attr Filter bothValues  = unsafeAttribute $ Both { key: "filter", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "filter", value:  prop' value  })
+  pureAttr Filter value  = unsafeAttribute $ This { key: "filter", value:  prop' value  }
+  unpureAttr Filter eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "filter", value:  prop' value  }
 
 instance Attr FeMorphology_ Filter String where
-  attr Filter value = unsafeAttribute { key: "filter", value: prop' value }
+  attr Filter bothValues  = unsafeAttribute $ Both { key: "filter", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "filter", value:  prop' value  })
+  pureAttr Filter value  = unsafeAttribute $ This { key: "filter", value:  prop' value  }
+  unpureAttr Filter eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "filter", value:  prop' value  }
 
 instance Attr FeOffset_ Filter String where
-  attr Filter value = unsafeAttribute { key: "filter", value: prop' value }
+  attr Filter bothValues  = unsafeAttribute $ Both { key: "filter", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "filter", value:  prop' value  })
+  pureAttr Filter value  = unsafeAttribute $ This { key: "filter", value:  prop' value  }
+  unpureAttr Filter eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "filter", value:  prop' value  }
 
 instance Attr FeSpecularLighting_ Filter String where
-  attr Filter value = unsafeAttribute { key: "filter", value: prop' value }
+  attr Filter bothValues  = unsafeAttribute $ Both { key: "filter", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "filter", value:  prop' value  })
+  pureAttr Filter value  = unsafeAttribute $ This { key: "filter", value:  prop' value  }
+  unpureAttr Filter eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "filter", value:  prop' value  }
 
 instance Attr FeTile_ Filter String where
-  attr Filter value = unsafeAttribute { key: "filter", value: prop' value }
+  attr Filter bothValues  = unsafeAttribute $ Both { key: "filter", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "filter", value:  prop' value  })
+  pureAttr Filter value  = unsafeAttribute $ This { key: "filter", value:  prop' value  }
+  unpureAttr Filter eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "filter", value:  prop' value  }
 
 instance Attr FeTurbulence_ Filter String where
-  attr Filter value = unsafeAttribute { key: "filter", value: prop' value }
+  attr Filter bothValues  = unsafeAttribute $ Both { key: "filter", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "filter", value:  prop' value  })
+  pureAttr Filter value  = unsafeAttribute $ This { key: "filter", value:  prop' value  }
+  unpureAttr Filter eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "filter", value:  prop' value  }
 
 instance Attr Filter_ Filter String where
-  attr Filter value = unsafeAttribute { key: "filter", value: prop' value }
+  attr Filter bothValues  = unsafeAttribute $ Both { key: "filter", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "filter", value:  prop' value  })
+  pureAttr Filter value  = unsafeAttribute $ This { key: "filter", value:  prop' value  }
+  unpureAttr Filter eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "filter", value:  prop' value  }
 
 instance Attr ForeignObject_ Filter String where
-  attr Filter value = unsafeAttribute { key: "filter", value: prop' value }
+  attr Filter bothValues  = unsafeAttribute $ Both { key: "filter", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "filter", value:  prop' value  })
+  pureAttr Filter value  = unsafeAttribute $ This { key: "filter", value:  prop' value  }
+  unpureAttr Filter eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "filter", value:  prop' value  }
 
 instance Attr G_ Filter String where
-  attr Filter value = unsafeAttribute { key: "filter", value: prop' value }
+  attr Filter bothValues  = unsafeAttribute $ Both { key: "filter", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "filter", value:  prop' value  })
+  pureAttr Filter value  = unsafeAttribute $ This { key: "filter", value:  prop' value  }
+  unpureAttr Filter eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "filter", value:  prop' value  }
 
 instance Attr Image_ Filter String where
-  attr Filter value = unsafeAttribute { key: "filter", value: prop' value }
+  attr Filter bothValues  = unsafeAttribute $ Both { key: "filter", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "filter", value:  prop' value  })
+  pureAttr Filter value  = unsafeAttribute $ This { key: "filter", value:  prop' value  }
+  unpureAttr Filter eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "filter", value:  prop' value  }
 
 instance Attr Line_ Filter String where
-  attr Filter value = unsafeAttribute { key: "filter", value: prop' value }
+  attr Filter bothValues  = unsafeAttribute $ Both { key: "filter", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "filter", value:  prop' value  })
+  pureAttr Filter value  = unsafeAttribute $ This { key: "filter", value:  prop' value  }
+  unpureAttr Filter eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "filter", value:  prop' value  }
 
 instance Attr LinearGradient_ Filter String where
-  attr Filter value = unsafeAttribute { key: "filter", value: prop' value }
+  attr Filter bothValues  = unsafeAttribute $ Both { key: "filter", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "filter", value:  prop' value  })
+  pureAttr Filter value  = unsafeAttribute $ This { key: "filter", value:  prop' value  }
+  unpureAttr Filter eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "filter", value:  prop' value  }
 
 instance Attr Marker_ Filter String where
-  attr Filter value = unsafeAttribute { key: "filter", value: prop' value }
+  attr Filter bothValues  = unsafeAttribute $ Both { key: "filter", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "filter", value:  prop' value  })
+  pureAttr Filter value  = unsafeAttribute $ This { key: "filter", value:  prop' value  }
+  unpureAttr Filter eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "filter", value:  prop' value  }
 
 instance Attr Mask_ Filter String where
-  attr Filter value = unsafeAttribute { key: "filter", value: prop' value }
+  attr Filter bothValues  = unsafeAttribute $ Both { key: "filter", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "filter", value:  prop' value  })
+  pureAttr Filter value  = unsafeAttribute $ This { key: "filter", value:  prop' value  }
+  unpureAttr Filter eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "filter", value:  prop' value  }
 
 instance Attr Path_ Filter String where
-  attr Filter value = unsafeAttribute { key: "filter", value: prop' value }
+  attr Filter bothValues  = unsafeAttribute $ Both { key: "filter", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "filter", value:  prop' value  })
+  pureAttr Filter value  = unsafeAttribute $ This { key: "filter", value:  prop' value  }
+  unpureAttr Filter eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "filter", value:  prop' value  }
 
 instance Attr Pattern_ Filter String where
-  attr Filter value = unsafeAttribute { key: "filter", value: prop' value }
+  attr Filter bothValues  = unsafeAttribute $ Both { key: "filter", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "filter", value:  prop' value  })
+  pureAttr Filter value  = unsafeAttribute $ This { key: "filter", value:  prop' value  }
+  unpureAttr Filter eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "filter", value:  prop' value  }
 
 instance Attr Polygon_ Filter String where
-  attr Filter value = unsafeAttribute { key: "filter", value: prop' value }
+  attr Filter bothValues  = unsafeAttribute $ Both { key: "filter", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "filter", value:  prop' value  })
+  pureAttr Filter value  = unsafeAttribute $ This { key: "filter", value:  prop' value  }
+  unpureAttr Filter eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "filter", value:  prop' value  }
 
 instance Attr Polyline_ Filter String where
-  attr Filter value = unsafeAttribute { key: "filter", value: prop' value }
+  attr Filter bothValues  = unsafeAttribute $ Both { key: "filter", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "filter", value:  prop' value  })
+  pureAttr Filter value  = unsafeAttribute $ This { key: "filter", value:  prop' value  }
+  unpureAttr Filter eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "filter", value:  prop' value  }
 
 instance Attr RadialGradient_ Filter String where
-  attr Filter value = unsafeAttribute { key: "filter", value: prop' value }
+  attr Filter bothValues  = unsafeAttribute $ Both { key: "filter", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "filter", value:  prop' value  })
+  pureAttr Filter value  = unsafeAttribute $ This { key: "filter", value:  prop' value  }
+  unpureAttr Filter eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "filter", value:  prop' value  }
 
 instance Attr Rect_ Filter String where
-  attr Filter value = unsafeAttribute { key: "filter", value: prop' value }
+  attr Filter bothValues  = unsafeAttribute $ Both { key: "filter", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "filter", value:  prop' value  })
+  pureAttr Filter value  = unsafeAttribute $ This { key: "filter", value:  prop' value  }
+  unpureAttr Filter eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "filter", value:  prop' value  }
 
 instance Attr Svg_ Filter String where
-  attr Filter value = unsafeAttribute { key: "filter", value: prop' value }
+  attr Filter bothValues  = unsafeAttribute $ Both { key: "filter", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "filter", value:  prop' value  })
+  pureAttr Filter value  = unsafeAttribute $ This { key: "filter", value:  prop' value  }
+  unpureAttr Filter eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "filter", value:  prop' value  }
 
 instance Attr Switch_ Filter String where
-  attr Filter value = unsafeAttribute { key: "filter", value: prop' value }
+  attr Filter bothValues  = unsafeAttribute $ Both { key: "filter", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "filter", value:  prop' value  })
+  pureAttr Filter value  = unsafeAttribute $ This { key: "filter", value:  prop' value  }
+  unpureAttr Filter eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "filter", value:  prop' value  }
 
 instance Attr Symbol_ Filter String where
-  attr Filter value = unsafeAttribute { key: "filter", value: prop' value }
+  attr Filter bothValues  = unsafeAttribute $ Both { key: "filter", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "filter", value:  prop' value  })
+  pureAttr Filter value  = unsafeAttribute $ This { key: "filter", value:  prop' value  }
+  unpureAttr Filter eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "filter", value:  prop' value  }
 
 instance Attr Text_ Filter String where
-  attr Filter value = unsafeAttribute { key: "filter", value: prop' value }
+  attr Filter bothValues  = unsafeAttribute $ Both { key: "filter", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "filter", value:  prop' value  })
+  pureAttr Filter value  = unsafeAttribute $ This { key: "filter", value:  prop' value  }
+  unpureAttr Filter eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "filter", value:  prop' value  }
 
 instance Attr TextPath_ Filter String where
-  attr Filter value = unsafeAttribute { key: "filter", value: prop' value }
+  attr Filter bothValues  = unsafeAttribute $ Both { key: "filter", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "filter", value:  prop' value  })
+  pureAttr Filter value  = unsafeAttribute $ This { key: "filter", value:  prop' value  }
+  unpureAttr Filter eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "filter", value:  prop' value  }
 
 instance Attr Tspan_ Filter String where
-  attr Filter value = unsafeAttribute { key: "filter", value: prop' value }
+  attr Filter bothValues  = unsafeAttribute $ Both { key: "filter", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "filter", value:  prop' value  })
+  pureAttr Filter value  = unsafeAttribute $ This { key: "filter", value:  prop' value  }
+  unpureAttr Filter eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "filter", value:  prop' value  }
 
 instance Attr Use_ Filter String where
-  attr Filter value = unsafeAttribute { key: "filter", value: prop' value }
+  attr Filter bothValues  = unsafeAttribute $ Both { key: "filter", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "filter", value:  prop' value  })
+  pureAttr Filter value  = unsafeAttribute $ This { key: "filter", value:  prop' value  }
+  unpureAttr Filter eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "filter", value:  prop' value  }
 
 instance Attr everything Filter Unit where
-  attr Filter _ = unsafeAttribute
-    { key: "filter", value: unset' }
+  attr Filter bothValues  = unsafeAttribute $ Both { key: "filter", value:  unset'  } (snd bothValues <#> \_ -> { key: "filter", value:  unset'  })
+  pureAttr Filter _  = unsafeAttribute $ This { key: "filter", value:  unset'  }
+  unpureAttr Filter eventValue  = unsafeAttribute $ That $ eventValue <#> \_ -> { key: "filter", value:  unset'  }

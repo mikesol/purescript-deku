@@ -1,6 +1,8 @@
 module Deku.DOM.Attr.Clip where
 
 import Prelude
+import Data.These (These(..))
+import Data.Tuple (fst, snd)
 
 import Deku.DOM.Elt.Switch (Switch_)
 import Deku.DOM.Elt.Image (Image_)
@@ -26,62 +28,101 @@ import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 data Clip = Clip
 
 instance Attr FeBlend_ Clip String where
-  attr Clip value = unsafeAttribute { key: "clip", value: prop' value }
+  attr Clip bothValues  = unsafeAttribute $ Both { key: "clip", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "clip", value:  prop' value  })
+  pureAttr Clip value  = unsafeAttribute $ This { key: "clip", value:  prop' value  }
+  unpureAttr Clip eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "clip", value:  prop' value  }
 
 instance Attr FeColorMatrix_ Clip String where
-  attr Clip value = unsafeAttribute { key: "clip", value: prop' value }
+  attr Clip bothValues  = unsafeAttribute $ Both { key: "clip", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "clip", value:  prop' value  })
+  pureAttr Clip value  = unsafeAttribute $ This { key: "clip", value:  prop' value  }
+  unpureAttr Clip eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "clip", value:  prop' value  }
 
 instance Attr FeComponentTransfer_ Clip String where
-  attr Clip value = unsafeAttribute { key: "clip", value: prop' value }
+  attr Clip bothValues  = unsafeAttribute $ Both { key: "clip", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "clip", value:  prop' value  })
+  pureAttr Clip value  = unsafeAttribute $ This { key: "clip", value:  prop' value  }
+  unpureAttr Clip eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "clip", value:  prop' value  }
 
 instance Attr FeComposite_ Clip String where
-  attr Clip value = unsafeAttribute { key: "clip", value: prop' value }
+  attr Clip bothValues  = unsafeAttribute $ Both { key: "clip", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "clip", value:  prop' value  })
+  pureAttr Clip value  = unsafeAttribute $ This { key: "clip", value:  prop' value  }
+  unpureAttr Clip eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "clip", value:  prop' value  }
 
 instance Attr FeConvolveMatrix_ Clip String where
-  attr Clip value = unsafeAttribute { key: "clip", value: prop' value }
+  attr Clip bothValues  = unsafeAttribute $ Both { key: "clip", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "clip", value:  prop' value  })
+  pureAttr Clip value  = unsafeAttribute $ This { key: "clip", value:  prop' value  }
+  unpureAttr Clip eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "clip", value:  prop' value  }
 
 instance Attr FeDiffuseLighting_ Clip String where
-  attr Clip value = unsafeAttribute { key: "clip", value: prop' value }
+  attr Clip bothValues  = unsafeAttribute $ Both { key: "clip", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "clip", value:  prop' value  })
+  pureAttr Clip value  = unsafeAttribute $ This { key: "clip", value:  prop' value  }
+  unpureAttr Clip eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "clip", value:  prop' value  }
 
 instance Attr FeDisplacementMap_ Clip String where
-  attr Clip value = unsafeAttribute { key: "clip", value: prop' value }
+  attr Clip bothValues  = unsafeAttribute $ Both { key: "clip", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "clip", value:  prop' value  })
+  pureAttr Clip value  = unsafeAttribute $ This { key: "clip", value:  prop' value  }
+  unpureAttr Clip eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "clip", value:  prop' value  }
 
 instance Attr FeFlood_ Clip String where
-  attr Clip value = unsafeAttribute { key: "clip", value: prop' value }
+  attr Clip bothValues  = unsafeAttribute $ Both { key: "clip", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "clip", value:  prop' value  })
+  pureAttr Clip value  = unsafeAttribute $ This { key: "clip", value:  prop' value  }
+  unpureAttr Clip eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "clip", value:  prop' value  }
 
 instance Attr FeGaussianBlur_ Clip String where
-  attr Clip value = unsafeAttribute { key: "clip", value: prop' value }
+  attr Clip bothValues  = unsafeAttribute $ Both { key: "clip", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "clip", value:  prop' value  })
+  pureAttr Clip value  = unsafeAttribute $ This { key: "clip", value:  prop' value  }
+  unpureAttr Clip eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "clip", value:  prop' value  }
 
 instance Attr FeImage_ Clip String where
-  attr Clip value = unsafeAttribute { key: "clip", value: prop' value }
+  attr Clip bothValues  = unsafeAttribute $ Both { key: "clip", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "clip", value:  prop' value  })
+  pureAttr Clip value  = unsafeAttribute $ This { key: "clip", value:  prop' value  }
+  unpureAttr Clip eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "clip", value:  prop' value  }
 
 instance Attr FeMerge_ Clip String where
-  attr Clip value = unsafeAttribute { key: "clip", value: prop' value }
+  attr Clip bothValues  = unsafeAttribute $ Both { key: "clip", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "clip", value:  prop' value  })
+  pureAttr Clip value  = unsafeAttribute $ This { key: "clip", value:  prop' value  }
+  unpureAttr Clip eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "clip", value:  prop' value  }
 
 instance Attr FeMorphology_ Clip String where
-  attr Clip value = unsafeAttribute { key: "clip", value: prop' value }
+  attr Clip bothValues  = unsafeAttribute $ Both { key: "clip", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "clip", value:  prop' value  })
+  pureAttr Clip value  = unsafeAttribute $ This { key: "clip", value:  prop' value  }
+  unpureAttr Clip eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "clip", value:  prop' value  }
 
 instance Attr FeOffset_ Clip String where
-  attr Clip value = unsafeAttribute { key: "clip", value: prop' value }
+  attr Clip bothValues  = unsafeAttribute $ Both { key: "clip", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "clip", value:  prop' value  })
+  pureAttr Clip value  = unsafeAttribute $ This { key: "clip", value:  prop' value  }
+  unpureAttr Clip eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "clip", value:  prop' value  }
 
 instance Attr FeSpecularLighting_ Clip String where
-  attr Clip value = unsafeAttribute { key: "clip", value: prop' value }
+  attr Clip bothValues  = unsafeAttribute $ Both { key: "clip", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "clip", value:  prop' value  })
+  pureAttr Clip value  = unsafeAttribute $ This { key: "clip", value:  prop' value  }
+  unpureAttr Clip eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "clip", value:  prop' value  }
 
 instance Attr FeTile_ Clip String where
-  attr Clip value = unsafeAttribute { key: "clip", value: prop' value }
+  attr Clip bothValues  = unsafeAttribute $ Both { key: "clip", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "clip", value:  prop' value  })
+  pureAttr Clip value  = unsafeAttribute $ This { key: "clip", value:  prop' value  }
+  unpureAttr Clip eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "clip", value:  prop' value  }
 
 instance Attr FeTurbulence_ Clip String where
-  attr Clip value = unsafeAttribute { key: "clip", value: prop' value }
+  attr Clip bothValues  = unsafeAttribute $ Both { key: "clip", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "clip", value:  prop' value  })
+  pureAttr Clip value  = unsafeAttribute $ This { key: "clip", value:  prop' value  }
+  unpureAttr Clip eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "clip", value:  prop' value  }
 
 instance Attr Filter_ Clip String where
-  attr Clip value = unsafeAttribute { key: "clip", value: prop' value }
+  attr Clip bothValues  = unsafeAttribute $ Both { key: "clip", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "clip", value:  prop' value  })
+  pureAttr Clip value  = unsafeAttribute $ This { key: "clip", value:  prop' value  }
+  unpureAttr Clip eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "clip", value:  prop' value  }
 
 instance Attr Image_ Clip String where
-  attr Clip value = unsafeAttribute { key: "clip", value: prop' value }
+  attr Clip bothValues  = unsafeAttribute $ Both { key: "clip", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "clip", value:  prop' value  })
+  pureAttr Clip value  = unsafeAttribute $ This { key: "clip", value:  prop' value  }
+  unpureAttr Clip eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "clip", value:  prop' value  }
 
 instance Attr Switch_ Clip String where
-  attr Clip value = unsafeAttribute { key: "clip", value: prop' value }
+  attr Clip bothValues  = unsafeAttribute $ Both { key: "clip", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "clip", value:  prop' value  })
+  pureAttr Clip value  = unsafeAttribute $ This { key: "clip", value:  prop' value  }
+  unpureAttr Clip eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "clip", value:  prop' value  }
 
 instance Attr everything Clip Unit where
-  attr Clip _ = unsafeAttribute
-    { key: "clip", value: unset' }
+  attr Clip bothValues  = unsafeAttribute $ Both { key: "clip", value:  unset'  } (snd bothValues <#> \_ -> { key: "clip", value:  unset'  })
+  pureAttr Clip _  = unsafeAttribute $ This { key: "clip", value:  unset'  }
+  unpureAttr Clip eventValue  = unsafeAttribute $ That $ eventValue <#> \_ -> { key: "clip", value:  unset'  }

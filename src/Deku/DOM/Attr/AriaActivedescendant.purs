@@ -1,6 +1,8 @@
 module Deku.DOM.Attr.AriaActivedescendant where
 
 import Prelude
+import Data.These (These(..))
+import Data.Tuple (fst, snd)
 
 import Deku.DOM.Elt.View (View_)
 import Deku.DOM.Elt.Use (Use_)
@@ -24,73 +26,91 @@ import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 data AriaActivedescendant = AriaActivedescendant
 
 instance Attr Circle_ AriaActivedescendant String where
-  attr AriaActivedescendant value = unsafeAttribute
-    { key: "aria-activedescendant", value: prop' value }
+  attr AriaActivedescendant bothValues  = unsafeAttribute $ Both { key: "aria-activedescendant", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "aria-activedescendant", value:  prop' value  })
+  pureAttr AriaActivedescendant value  = unsafeAttribute $ This { key: "aria-activedescendant", value:  prop' value  }
+  unpureAttr AriaActivedescendant eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "aria-activedescendant", value:  prop' value  }
 
 instance Attr Ellipse_ AriaActivedescendant String where
-  attr AriaActivedescendant value = unsafeAttribute
-    { key: "aria-activedescendant", value: prop' value }
+  attr AriaActivedescendant bothValues  = unsafeAttribute $ Both { key: "aria-activedescendant", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "aria-activedescendant", value:  prop' value  })
+  pureAttr AriaActivedescendant value  = unsafeAttribute $ This { key: "aria-activedescendant", value:  prop' value  }
+  unpureAttr AriaActivedescendant eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "aria-activedescendant", value:  prop' value  }
 
 instance Attr ForeignObject_ AriaActivedescendant String where
-  attr AriaActivedescendant value = unsafeAttribute
-    { key: "aria-activedescendant", value: prop' value }
+  attr AriaActivedescendant bothValues  = unsafeAttribute $ Both { key: "aria-activedescendant", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "aria-activedescendant", value:  prop' value  })
+  pureAttr AriaActivedescendant value  = unsafeAttribute $ This { key: "aria-activedescendant", value:  prop' value  }
+  unpureAttr AriaActivedescendant eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "aria-activedescendant", value:  prop' value  }
 
 instance Attr G_ AriaActivedescendant String where
-  attr AriaActivedescendant value = unsafeAttribute
-    { key: "aria-activedescendant", value: prop' value }
+  attr AriaActivedescendant bothValues  = unsafeAttribute $ Both { key: "aria-activedescendant", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "aria-activedescendant", value:  prop' value  })
+  pureAttr AriaActivedescendant value  = unsafeAttribute $ This { key: "aria-activedescendant", value:  prop' value  }
+  unpureAttr AriaActivedescendant eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "aria-activedescendant", value:  prop' value  }
 
 instance Attr Line_ AriaActivedescendant String where
-  attr AriaActivedescendant value = unsafeAttribute
-    { key: "aria-activedescendant", value: prop' value }
+  attr AriaActivedescendant bothValues  = unsafeAttribute $ Both { key: "aria-activedescendant", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "aria-activedescendant", value:  prop' value  })
+  pureAttr AriaActivedescendant value  = unsafeAttribute $ This { key: "aria-activedescendant", value:  prop' value  }
+  unpureAttr AriaActivedescendant eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "aria-activedescendant", value:  prop' value  }
 
 instance Attr Marker_ AriaActivedescendant String where
-  attr AriaActivedescendant value = unsafeAttribute
-    { key: "aria-activedescendant", value: prop' value }
+  attr AriaActivedescendant bothValues  = unsafeAttribute $ Both { key: "aria-activedescendant", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "aria-activedescendant", value:  prop' value  })
+  pureAttr AriaActivedescendant value  = unsafeAttribute $ This { key: "aria-activedescendant", value:  prop' value  }
+  unpureAttr AriaActivedescendant eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "aria-activedescendant", value:  prop' value  }
 
 instance Attr Path_ AriaActivedescendant String where
-  attr AriaActivedescendant value = unsafeAttribute
-    { key: "aria-activedescendant", value: prop' value }
+  attr AriaActivedescendant bothValues  = unsafeAttribute $ Both { key: "aria-activedescendant", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "aria-activedescendant", value:  prop' value  })
+  pureAttr AriaActivedescendant value  = unsafeAttribute $ This { key: "aria-activedescendant", value:  prop' value  }
+  unpureAttr AriaActivedescendant eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "aria-activedescendant", value:  prop' value  }
 
 instance Attr Polygon_ AriaActivedescendant String where
-  attr AriaActivedescendant value = unsafeAttribute
-    { key: "aria-activedescendant", value: prop' value }
+  attr AriaActivedescendant bothValues  = unsafeAttribute $ Both { key: "aria-activedescendant", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "aria-activedescendant", value:  prop' value  })
+  pureAttr AriaActivedescendant value  = unsafeAttribute $ This { key: "aria-activedescendant", value:  prop' value  }
+  unpureAttr AriaActivedescendant eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "aria-activedescendant", value:  prop' value  }
 
 instance Attr Polyline_ AriaActivedescendant String where
-  attr AriaActivedescendant value = unsafeAttribute
-    { key: "aria-activedescendant", value: prop' value }
+  attr AriaActivedescendant bothValues  = unsafeAttribute $ Both { key: "aria-activedescendant", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "aria-activedescendant", value:  prop' value  })
+  pureAttr AriaActivedescendant value  = unsafeAttribute $ This { key: "aria-activedescendant", value:  prop' value  }
+  unpureAttr AriaActivedescendant eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "aria-activedescendant", value:  prop' value  }
 
 instance Attr Rect_ AriaActivedescendant String where
-  attr AriaActivedescendant value = unsafeAttribute
-    { key: "aria-activedescendant", value: prop' value }
+  attr AriaActivedescendant bothValues  = unsafeAttribute $ Both { key: "aria-activedescendant", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "aria-activedescendant", value:  prop' value  })
+  pureAttr AriaActivedescendant value  = unsafeAttribute $ This { key: "aria-activedescendant", value:  prop' value  }
+  unpureAttr AriaActivedescendant eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "aria-activedescendant", value:  prop' value  }
 
 instance Attr Svg_ AriaActivedescendant String where
-  attr AriaActivedescendant value = unsafeAttribute
-    { key: "aria-activedescendant", value: prop' value }
+  attr AriaActivedescendant bothValues  = unsafeAttribute $ Both { key: "aria-activedescendant", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "aria-activedescendant", value:  prop' value  })
+  pureAttr AriaActivedescendant value  = unsafeAttribute $ This { key: "aria-activedescendant", value:  prop' value  }
+  unpureAttr AriaActivedescendant eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "aria-activedescendant", value:  prop' value  }
 
 instance Attr Symbol_ AriaActivedescendant String where
-  attr AriaActivedescendant value = unsafeAttribute
-    { key: "aria-activedescendant", value: prop' value }
+  attr AriaActivedescendant bothValues  = unsafeAttribute $ Both { key: "aria-activedescendant", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "aria-activedescendant", value:  prop' value  })
+  pureAttr AriaActivedescendant value  = unsafeAttribute $ This { key: "aria-activedescendant", value:  prop' value  }
+  unpureAttr AriaActivedescendant eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "aria-activedescendant", value:  prop' value  }
 
 instance Attr Text_ AriaActivedescendant String where
-  attr AriaActivedescendant value = unsafeAttribute
-    { key: "aria-activedescendant", value: prop' value }
+  attr AriaActivedescendant bothValues  = unsafeAttribute $ Both { key: "aria-activedescendant", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "aria-activedescendant", value:  prop' value  })
+  pureAttr AriaActivedescendant value  = unsafeAttribute $ This { key: "aria-activedescendant", value:  prop' value  }
+  unpureAttr AriaActivedescendant eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "aria-activedescendant", value:  prop' value  }
 
 instance Attr TextPath_ AriaActivedescendant String where
-  attr AriaActivedescendant value = unsafeAttribute
-    { key: "aria-activedescendant", value: prop' value }
+  attr AriaActivedescendant bothValues  = unsafeAttribute $ Both { key: "aria-activedescendant", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "aria-activedescendant", value:  prop' value  })
+  pureAttr AriaActivedescendant value  = unsafeAttribute $ This { key: "aria-activedescendant", value:  prop' value  }
+  unpureAttr AriaActivedescendant eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "aria-activedescendant", value:  prop' value  }
 
 instance Attr Tspan_ AriaActivedescendant String where
-  attr AriaActivedescendant value = unsafeAttribute
-    { key: "aria-activedescendant", value: prop' value }
+  attr AriaActivedescendant bothValues  = unsafeAttribute $ Both { key: "aria-activedescendant", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "aria-activedescendant", value:  prop' value  })
+  pureAttr AriaActivedescendant value  = unsafeAttribute $ This { key: "aria-activedescendant", value:  prop' value  }
+  unpureAttr AriaActivedescendant eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "aria-activedescendant", value:  prop' value  }
 
 instance Attr Use_ AriaActivedescendant String where
-  attr AriaActivedescendant value = unsafeAttribute
-    { key: "aria-activedescendant", value: prop' value }
+  attr AriaActivedescendant bothValues  = unsafeAttribute $ Both { key: "aria-activedescendant", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "aria-activedescendant", value:  prop' value  })
+  pureAttr AriaActivedescendant value  = unsafeAttribute $ This { key: "aria-activedescendant", value:  prop' value  }
+  unpureAttr AriaActivedescendant eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "aria-activedescendant", value:  prop' value  }
 
 instance Attr View_ AriaActivedescendant String where
-  attr AriaActivedescendant value = unsafeAttribute
-    { key: "aria-activedescendant", value: prop' value }
+  attr AriaActivedescendant bothValues  = unsafeAttribute $ Both { key: "aria-activedescendant", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "aria-activedescendant", value:  prop' value  })
+  pureAttr AriaActivedescendant value  = unsafeAttribute $ This { key: "aria-activedescendant", value:  prop' value  }
+  unpureAttr AriaActivedescendant eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "aria-activedescendant", value:  prop' value  }
 
 instance Attr everything AriaActivedescendant Unit where
-  attr AriaActivedescendant _ = unsafeAttribute
-    { key: "aria-activedescendant", value: unset' }
+  attr AriaActivedescendant bothValues  = unsafeAttribute $ Both { key: "aria-activedescendant", value:  unset'  } (snd bothValues <#> \_ -> { key: "aria-activedescendant", value:  unset'  })
+  pureAttr AriaActivedescendant _  = unsafeAttribute $ This { key: "aria-activedescendant", value:  unset'  }
+  unpureAttr AriaActivedescendant eventValue  = unsafeAttribute $ That $ eventValue <#> \_ -> { key: "aria-activedescendant", value:  unset'  }

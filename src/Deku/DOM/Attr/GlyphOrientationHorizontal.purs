@@ -1,6 +1,8 @@
 module Deku.DOM.Attr.GlyphOrientationHorizontal where
 
 import Prelude
+import Data.These (These(..))
+import Data.Tuple (fst, snd)
 
 import Deku.DOM.Elt.Switch (Switch_)
 import Deku.DOM.Elt.Image (Image_)
@@ -26,81 +28,101 @@ import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 data GlyphOrientationHorizontal = GlyphOrientationHorizontal
 
 instance Attr FeBlend_ GlyphOrientationHorizontal String where
-  attr GlyphOrientationHorizontal value = unsafeAttribute
-    { key: "glyph-orientation-horizontal", value: prop' value }
+  attr GlyphOrientationHorizontal bothValues  = unsafeAttribute $ Both { key: "glyph-orientation-horizontal", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "glyph-orientation-horizontal", value:  prop' value  })
+  pureAttr GlyphOrientationHorizontal value  = unsafeAttribute $ This { key: "glyph-orientation-horizontal", value:  prop' value  }
+  unpureAttr GlyphOrientationHorizontal eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "glyph-orientation-horizontal", value:  prop' value  }
 
 instance Attr FeColorMatrix_ GlyphOrientationHorizontal String where
-  attr GlyphOrientationHorizontal value = unsafeAttribute
-    { key: "glyph-orientation-horizontal", value: prop' value }
+  attr GlyphOrientationHorizontal bothValues  = unsafeAttribute $ Both { key: "glyph-orientation-horizontal", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "glyph-orientation-horizontal", value:  prop' value  })
+  pureAttr GlyphOrientationHorizontal value  = unsafeAttribute $ This { key: "glyph-orientation-horizontal", value:  prop' value  }
+  unpureAttr GlyphOrientationHorizontal eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "glyph-orientation-horizontal", value:  prop' value  }
 
 instance Attr FeComponentTransfer_ GlyphOrientationHorizontal String where
-  attr GlyphOrientationHorizontal value = unsafeAttribute
-    { key: "glyph-orientation-horizontal", value: prop' value }
+  attr GlyphOrientationHorizontal bothValues  = unsafeAttribute $ Both { key: "glyph-orientation-horizontal", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "glyph-orientation-horizontal", value:  prop' value  })
+  pureAttr GlyphOrientationHorizontal value  = unsafeAttribute $ This { key: "glyph-orientation-horizontal", value:  prop' value  }
+  unpureAttr GlyphOrientationHorizontal eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "glyph-orientation-horizontal", value:  prop' value  }
 
 instance Attr FeComposite_ GlyphOrientationHorizontal String where
-  attr GlyphOrientationHorizontal value = unsafeAttribute
-    { key: "glyph-orientation-horizontal", value: prop' value }
+  attr GlyphOrientationHorizontal bothValues  = unsafeAttribute $ Both { key: "glyph-orientation-horizontal", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "glyph-orientation-horizontal", value:  prop' value  })
+  pureAttr GlyphOrientationHorizontal value  = unsafeAttribute $ This { key: "glyph-orientation-horizontal", value:  prop' value  }
+  unpureAttr GlyphOrientationHorizontal eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "glyph-orientation-horizontal", value:  prop' value  }
 
 instance Attr FeConvolveMatrix_ GlyphOrientationHorizontal String where
-  attr GlyphOrientationHorizontal value = unsafeAttribute
-    { key: "glyph-orientation-horizontal", value: prop' value }
+  attr GlyphOrientationHorizontal bothValues  = unsafeAttribute $ Both { key: "glyph-orientation-horizontal", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "glyph-orientation-horizontal", value:  prop' value  })
+  pureAttr GlyphOrientationHorizontal value  = unsafeAttribute $ This { key: "glyph-orientation-horizontal", value:  prop' value  }
+  unpureAttr GlyphOrientationHorizontal eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "glyph-orientation-horizontal", value:  prop' value  }
 
 instance Attr FeDiffuseLighting_ GlyphOrientationHorizontal String where
-  attr GlyphOrientationHorizontal value = unsafeAttribute
-    { key: "glyph-orientation-horizontal", value: prop' value }
+  attr GlyphOrientationHorizontal bothValues  = unsafeAttribute $ Both { key: "glyph-orientation-horizontal", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "glyph-orientation-horizontal", value:  prop' value  })
+  pureAttr GlyphOrientationHorizontal value  = unsafeAttribute $ This { key: "glyph-orientation-horizontal", value:  prop' value  }
+  unpureAttr GlyphOrientationHorizontal eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "glyph-orientation-horizontal", value:  prop' value  }
 
 instance Attr FeDisplacementMap_ GlyphOrientationHorizontal String where
-  attr GlyphOrientationHorizontal value = unsafeAttribute
-    { key: "glyph-orientation-horizontal", value: prop' value }
+  attr GlyphOrientationHorizontal bothValues  = unsafeAttribute $ Both { key: "glyph-orientation-horizontal", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "glyph-orientation-horizontal", value:  prop' value  })
+  pureAttr GlyphOrientationHorizontal value  = unsafeAttribute $ This { key: "glyph-orientation-horizontal", value:  prop' value  }
+  unpureAttr GlyphOrientationHorizontal eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "glyph-orientation-horizontal", value:  prop' value  }
 
 instance Attr FeFlood_ GlyphOrientationHorizontal String where
-  attr GlyphOrientationHorizontal value = unsafeAttribute
-    { key: "glyph-orientation-horizontal", value: prop' value }
+  attr GlyphOrientationHorizontal bothValues  = unsafeAttribute $ Both { key: "glyph-orientation-horizontal", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "glyph-orientation-horizontal", value:  prop' value  })
+  pureAttr GlyphOrientationHorizontal value  = unsafeAttribute $ This { key: "glyph-orientation-horizontal", value:  prop' value  }
+  unpureAttr GlyphOrientationHorizontal eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "glyph-orientation-horizontal", value:  prop' value  }
 
 instance Attr FeGaussianBlur_ GlyphOrientationHorizontal String where
-  attr GlyphOrientationHorizontal value = unsafeAttribute
-    { key: "glyph-orientation-horizontal", value: prop' value }
+  attr GlyphOrientationHorizontal bothValues  = unsafeAttribute $ Both { key: "glyph-orientation-horizontal", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "glyph-orientation-horizontal", value:  prop' value  })
+  pureAttr GlyphOrientationHorizontal value  = unsafeAttribute $ This { key: "glyph-orientation-horizontal", value:  prop' value  }
+  unpureAttr GlyphOrientationHorizontal eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "glyph-orientation-horizontal", value:  prop' value  }
 
 instance Attr FeImage_ GlyphOrientationHorizontal String where
-  attr GlyphOrientationHorizontal value = unsafeAttribute
-    { key: "glyph-orientation-horizontal", value: prop' value }
+  attr GlyphOrientationHorizontal bothValues  = unsafeAttribute $ Both { key: "glyph-orientation-horizontal", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "glyph-orientation-horizontal", value:  prop' value  })
+  pureAttr GlyphOrientationHorizontal value  = unsafeAttribute $ This { key: "glyph-orientation-horizontal", value:  prop' value  }
+  unpureAttr GlyphOrientationHorizontal eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "glyph-orientation-horizontal", value:  prop' value  }
 
 instance Attr FeMerge_ GlyphOrientationHorizontal String where
-  attr GlyphOrientationHorizontal value = unsafeAttribute
-    { key: "glyph-orientation-horizontal", value: prop' value }
+  attr GlyphOrientationHorizontal bothValues  = unsafeAttribute $ Both { key: "glyph-orientation-horizontal", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "glyph-orientation-horizontal", value:  prop' value  })
+  pureAttr GlyphOrientationHorizontal value  = unsafeAttribute $ This { key: "glyph-orientation-horizontal", value:  prop' value  }
+  unpureAttr GlyphOrientationHorizontal eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "glyph-orientation-horizontal", value:  prop' value  }
 
 instance Attr FeMorphology_ GlyphOrientationHorizontal String where
-  attr GlyphOrientationHorizontal value = unsafeAttribute
-    { key: "glyph-orientation-horizontal", value: prop' value }
+  attr GlyphOrientationHorizontal bothValues  = unsafeAttribute $ Both { key: "glyph-orientation-horizontal", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "glyph-orientation-horizontal", value:  prop' value  })
+  pureAttr GlyphOrientationHorizontal value  = unsafeAttribute $ This { key: "glyph-orientation-horizontal", value:  prop' value  }
+  unpureAttr GlyphOrientationHorizontal eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "glyph-orientation-horizontal", value:  prop' value  }
 
 instance Attr FeOffset_ GlyphOrientationHorizontal String where
-  attr GlyphOrientationHorizontal value = unsafeAttribute
-    { key: "glyph-orientation-horizontal", value: prop' value }
+  attr GlyphOrientationHorizontal bothValues  = unsafeAttribute $ Both { key: "glyph-orientation-horizontal", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "glyph-orientation-horizontal", value:  prop' value  })
+  pureAttr GlyphOrientationHorizontal value  = unsafeAttribute $ This { key: "glyph-orientation-horizontal", value:  prop' value  }
+  unpureAttr GlyphOrientationHorizontal eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "glyph-orientation-horizontal", value:  prop' value  }
 
 instance Attr FeSpecularLighting_ GlyphOrientationHorizontal String where
-  attr GlyphOrientationHorizontal value = unsafeAttribute
-    { key: "glyph-orientation-horizontal", value: prop' value }
+  attr GlyphOrientationHorizontal bothValues  = unsafeAttribute $ Both { key: "glyph-orientation-horizontal", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "glyph-orientation-horizontal", value:  prop' value  })
+  pureAttr GlyphOrientationHorizontal value  = unsafeAttribute $ This { key: "glyph-orientation-horizontal", value:  prop' value  }
+  unpureAttr GlyphOrientationHorizontal eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "glyph-orientation-horizontal", value:  prop' value  }
 
 instance Attr FeTile_ GlyphOrientationHorizontal String where
-  attr GlyphOrientationHorizontal value = unsafeAttribute
-    { key: "glyph-orientation-horizontal", value: prop' value }
+  attr GlyphOrientationHorizontal bothValues  = unsafeAttribute $ Both { key: "glyph-orientation-horizontal", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "glyph-orientation-horizontal", value:  prop' value  })
+  pureAttr GlyphOrientationHorizontal value  = unsafeAttribute $ This { key: "glyph-orientation-horizontal", value:  prop' value  }
+  unpureAttr GlyphOrientationHorizontal eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "glyph-orientation-horizontal", value:  prop' value  }
 
 instance Attr FeTurbulence_ GlyphOrientationHorizontal String where
-  attr GlyphOrientationHorizontal value = unsafeAttribute
-    { key: "glyph-orientation-horizontal", value: prop' value }
+  attr GlyphOrientationHorizontal bothValues  = unsafeAttribute $ Both { key: "glyph-orientation-horizontal", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "glyph-orientation-horizontal", value:  prop' value  })
+  pureAttr GlyphOrientationHorizontal value  = unsafeAttribute $ This { key: "glyph-orientation-horizontal", value:  prop' value  }
+  unpureAttr GlyphOrientationHorizontal eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "glyph-orientation-horizontal", value:  prop' value  }
 
 instance Attr Filter_ GlyphOrientationHorizontal String where
-  attr GlyphOrientationHorizontal value = unsafeAttribute
-    { key: "glyph-orientation-horizontal", value: prop' value }
+  attr GlyphOrientationHorizontal bothValues  = unsafeAttribute $ Both { key: "glyph-orientation-horizontal", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "glyph-orientation-horizontal", value:  prop' value  })
+  pureAttr GlyphOrientationHorizontal value  = unsafeAttribute $ This { key: "glyph-orientation-horizontal", value:  prop' value  }
+  unpureAttr GlyphOrientationHorizontal eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "glyph-orientation-horizontal", value:  prop' value  }
 
 instance Attr Image_ GlyphOrientationHorizontal String where
-  attr GlyphOrientationHorizontal value = unsafeAttribute
-    { key: "glyph-orientation-horizontal", value: prop' value }
+  attr GlyphOrientationHorizontal bothValues  = unsafeAttribute $ Both { key: "glyph-orientation-horizontal", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "glyph-orientation-horizontal", value:  prop' value  })
+  pureAttr GlyphOrientationHorizontal value  = unsafeAttribute $ This { key: "glyph-orientation-horizontal", value:  prop' value  }
+  unpureAttr GlyphOrientationHorizontal eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "glyph-orientation-horizontal", value:  prop' value  }
 
 instance Attr Switch_ GlyphOrientationHorizontal String where
-  attr GlyphOrientationHorizontal value = unsafeAttribute
-    { key: "glyph-orientation-horizontal", value: prop' value }
+  attr GlyphOrientationHorizontal bothValues  = unsafeAttribute $ Both { key: "glyph-orientation-horizontal", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "glyph-orientation-horizontal", value:  prop' value  })
+  pureAttr GlyphOrientationHorizontal value  = unsafeAttribute $ This { key: "glyph-orientation-horizontal", value:  prop' value  }
+  unpureAttr GlyphOrientationHorizontal eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "glyph-orientation-horizontal", value:  prop' value  }
 
 instance Attr everything GlyphOrientationHorizontal Unit where
-  attr GlyphOrientationHorizontal _ = unsafeAttribute
-    { key: "glyph-orientation-horizontal", value: unset' }
+  attr GlyphOrientationHorizontal bothValues  = unsafeAttribute $ Both { key: "glyph-orientation-horizontal", value:  unset'  } (snd bothValues <#> \_ -> { key: "glyph-orientation-horizontal", value:  unset'  })
+  pureAttr GlyphOrientationHorizontal _  = unsafeAttribute $ This { key: "glyph-orientation-horizontal", value:  unset'  }
+  unpureAttr GlyphOrientationHorizontal eventValue  = unsafeAttribute $ That $ eventValue <#> \_ -> { key: "glyph-orientation-horizontal", value:  unset'  }

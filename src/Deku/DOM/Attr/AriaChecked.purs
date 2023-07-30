@@ -1,6 +1,8 @@
 module Deku.DOM.Attr.AriaChecked where
 
 import Prelude
+import Data.These (These(..))
+import Data.Tuple (fst, snd)
 
 import Deku.DOM.Elt.View (View_)
 import Deku.DOM.Elt.Use (Use_)
@@ -24,73 +26,91 @@ import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 data AriaChecked = AriaChecked
 
 instance Attr Circle_ AriaChecked String where
-  attr AriaChecked value = unsafeAttribute
-    { key: "aria-checked", value: prop' value }
+  attr AriaChecked bothValues  = unsafeAttribute $ Both { key: "aria-checked", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "aria-checked", value:  prop' value  })
+  pureAttr AriaChecked value  = unsafeAttribute $ This { key: "aria-checked", value:  prop' value  }
+  unpureAttr AriaChecked eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "aria-checked", value:  prop' value  }
 
 instance Attr Ellipse_ AriaChecked String where
-  attr AriaChecked value = unsafeAttribute
-    { key: "aria-checked", value: prop' value }
+  attr AriaChecked bothValues  = unsafeAttribute $ Both { key: "aria-checked", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "aria-checked", value:  prop' value  })
+  pureAttr AriaChecked value  = unsafeAttribute $ This { key: "aria-checked", value:  prop' value  }
+  unpureAttr AriaChecked eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "aria-checked", value:  prop' value  }
 
 instance Attr ForeignObject_ AriaChecked String where
-  attr AriaChecked value = unsafeAttribute
-    { key: "aria-checked", value: prop' value }
+  attr AriaChecked bothValues  = unsafeAttribute $ Both { key: "aria-checked", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "aria-checked", value:  prop' value  })
+  pureAttr AriaChecked value  = unsafeAttribute $ This { key: "aria-checked", value:  prop' value  }
+  unpureAttr AriaChecked eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "aria-checked", value:  prop' value  }
 
 instance Attr G_ AriaChecked String where
-  attr AriaChecked value = unsafeAttribute
-    { key: "aria-checked", value: prop' value }
+  attr AriaChecked bothValues  = unsafeAttribute $ Both { key: "aria-checked", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "aria-checked", value:  prop' value  })
+  pureAttr AriaChecked value  = unsafeAttribute $ This { key: "aria-checked", value:  prop' value  }
+  unpureAttr AriaChecked eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "aria-checked", value:  prop' value  }
 
 instance Attr Line_ AriaChecked String where
-  attr AriaChecked value = unsafeAttribute
-    { key: "aria-checked", value: prop' value }
+  attr AriaChecked bothValues  = unsafeAttribute $ Both { key: "aria-checked", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "aria-checked", value:  prop' value  })
+  pureAttr AriaChecked value  = unsafeAttribute $ This { key: "aria-checked", value:  prop' value  }
+  unpureAttr AriaChecked eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "aria-checked", value:  prop' value  }
 
 instance Attr Marker_ AriaChecked String where
-  attr AriaChecked value = unsafeAttribute
-    { key: "aria-checked", value: prop' value }
+  attr AriaChecked bothValues  = unsafeAttribute $ Both { key: "aria-checked", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "aria-checked", value:  prop' value  })
+  pureAttr AriaChecked value  = unsafeAttribute $ This { key: "aria-checked", value:  prop' value  }
+  unpureAttr AriaChecked eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "aria-checked", value:  prop' value  }
 
 instance Attr Path_ AriaChecked String where
-  attr AriaChecked value = unsafeAttribute
-    { key: "aria-checked", value: prop' value }
+  attr AriaChecked bothValues  = unsafeAttribute $ Both { key: "aria-checked", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "aria-checked", value:  prop' value  })
+  pureAttr AriaChecked value  = unsafeAttribute $ This { key: "aria-checked", value:  prop' value  }
+  unpureAttr AriaChecked eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "aria-checked", value:  prop' value  }
 
 instance Attr Polygon_ AriaChecked String where
-  attr AriaChecked value = unsafeAttribute
-    { key: "aria-checked", value: prop' value }
+  attr AriaChecked bothValues  = unsafeAttribute $ Both { key: "aria-checked", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "aria-checked", value:  prop' value  })
+  pureAttr AriaChecked value  = unsafeAttribute $ This { key: "aria-checked", value:  prop' value  }
+  unpureAttr AriaChecked eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "aria-checked", value:  prop' value  }
 
 instance Attr Polyline_ AriaChecked String where
-  attr AriaChecked value = unsafeAttribute
-    { key: "aria-checked", value: prop' value }
+  attr AriaChecked bothValues  = unsafeAttribute $ Both { key: "aria-checked", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "aria-checked", value:  prop' value  })
+  pureAttr AriaChecked value  = unsafeAttribute $ This { key: "aria-checked", value:  prop' value  }
+  unpureAttr AriaChecked eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "aria-checked", value:  prop' value  }
 
 instance Attr Rect_ AriaChecked String where
-  attr AriaChecked value = unsafeAttribute
-    { key: "aria-checked", value: prop' value }
+  attr AriaChecked bothValues  = unsafeAttribute $ Both { key: "aria-checked", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "aria-checked", value:  prop' value  })
+  pureAttr AriaChecked value  = unsafeAttribute $ This { key: "aria-checked", value:  prop' value  }
+  unpureAttr AriaChecked eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "aria-checked", value:  prop' value  }
 
 instance Attr Svg_ AriaChecked String where
-  attr AriaChecked value = unsafeAttribute
-    { key: "aria-checked", value: prop' value }
+  attr AriaChecked bothValues  = unsafeAttribute $ Both { key: "aria-checked", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "aria-checked", value:  prop' value  })
+  pureAttr AriaChecked value  = unsafeAttribute $ This { key: "aria-checked", value:  prop' value  }
+  unpureAttr AriaChecked eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "aria-checked", value:  prop' value  }
 
 instance Attr Symbol_ AriaChecked String where
-  attr AriaChecked value = unsafeAttribute
-    { key: "aria-checked", value: prop' value }
+  attr AriaChecked bothValues  = unsafeAttribute $ Both { key: "aria-checked", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "aria-checked", value:  prop' value  })
+  pureAttr AriaChecked value  = unsafeAttribute $ This { key: "aria-checked", value:  prop' value  }
+  unpureAttr AriaChecked eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "aria-checked", value:  prop' value  }
 
 instance Attr Text_ AriaChecked String where
-  attr AriaChecked value = unsafeAttribute
-    { key: "aria-checked", value: prop' value }
+  attr AriaChecked bothValues  = unsafeAttribute $ Both { key: "aria-checked", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "aria-checked", value:  prop' value  })
+  pureAttr AriaChecked value  = unsafeAttribute $ This { key: "aria-checked", value:  prop' value  }
+  unpureAttr AriaChecked eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "aria-checked", value:  prop' value  }
 
 instance Attr TextPath_ AriaChecked String where
-  attr AriaChecked value = unsafeAttribute
-    { key: "aria-checked", value: prop' value }
+  attr AriaChecked bothValues  = unsafeAttribute $ Both { key: "aria-checked", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "aria-checked", value:  prop' value  })
+  pureAttr AriaChecked value  = unsafeAttribute $ This { key: "aria-checked", value:  prop' value  }
+  unpureAttr AriaChecked eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "aria-checked", value:  prop' value  }
 
 instance Attr Tspan_ AriaChecked String where
-  attr AriaChecked value = unsafeAttribute
-    { key: "aria-checked", value: prop' value }
+  attr AriaChecked bothValues  = unsafeAttribute $ Both { key: "aria-checked", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "aria-checked", value:  prop' value  })
+  pureAttr AriaChecked value  = unsafeAttribute $ This { key: "aria-checked", value:  prop' value  }
+  unpureAttr AriaChecked eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "aria-checked", value:  prop' value  }
 
 instance Attr Use_ AriaChecked String where
-  attr AriaChecked value = unsafeAttribute
-    { key: "aria-checked", value: prop' value }
+  attr AriaChecked bothValues  = unsafeAttribute $ Both { key: "aria-checked", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "aria-checked", value:  prop' value  })
+  pureAttr AriaChecked value  = unsafeAttribute $ This { key: "aria-checked", value:  prop' value  }
+  unpureAttr AriaChecked eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "aria-checked", value:  prop' value  }
 
 instance Attr View_ AriaChecked String where
-  attr AriaChecked value = unsafeAttribute
-    { key: "aria-checked", value: prop' value }
+  attr AriaChecked bothValues  = unsafeAttribute $ Both { key: "aria-checked", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "aria-checked", value:  prop' value  })
+  pureAttr AriaChecked value  = unsafeAttribute $ This { key: "aria-checked", value:  prop' value  }
+  unpureAttr AriaChecked eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "aria-checked", value:  prop' value  }
 
 instance Attr everything AriaChecked Unit where
-  attr AriaChecked _ = unsafeAttribute
-    { key: "aria-checked", value: unset' }
+  attr AriaChecked bothValues  = unsafeAttribute $ Both { key: "aria-checked", value:  unset'  } (snd bothValues <#> \_ -> { key: "aria-checked", value:  unset'  })
+  pureAttr AriaChecked _  = unsafeAttribute $ This { key: "aria-checked", value:  unset'  }
+  unpureAttr AriaChecked eventValue  = unsafeAttribute $ That $ eventValue <#> \_ -> { key: "aria-checked", value:  unset'  }

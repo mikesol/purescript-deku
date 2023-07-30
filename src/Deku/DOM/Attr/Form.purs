@@ -1,6 +1,8 @@
 module Deku.DOM.Attr.Form where
 
 import Prelude
+import Data.These (These(..))
+import Data.Tuple (fst, snd)
 
 import Deku.DOM.Elt.Button (Button_)
 import Deku.DOM.Elt.Fieldset (Fieldset_)
@@ -17,35 +19,56 @@ import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 data Form = Form
 
 instance Attr Button_ Form String where
-  attr Form value = unsafeAttribute { key: "form", value: prop' value }
+  attr Form bothValues  = unsafeAttribute $ Both { key: "form", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "form", value:  prop' value  })
+  pureAttr Form value  = unsafeAttribute $ This { key: "form", value:  prop' value  }
+  unpureAttr Form eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "form", value:  prop' value  }
 
 instance Attr Fieldset_ Form String where
-  attr Form value = unsafeAttribute { key: "form", value: prop' value }
+  attr Form bothValues  = unsafeAttribute $ Both { key: "form", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "form", value:  prop' value  })
+  pureAttr Form value  = unsafeAttribute $ This { key: "form", value:  prop' value  }
+  unpureAttr Form eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "form", value:  prop' value  }
 
 instance Attr Input_ Form String where
-  attr Form value = unsafeAttribute { key: "form", value: prop' value }
+  attr Form bothValues  = unsafeAttribute $ Both { key: "form", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "form", value:  prop' value  })
+  pureAttr Form value  = unsafeAttribute $ This { key: "form", value:  prop' value  }
+  unpureAttr Form eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "form", value:  prop' value  }
 
 instance Attr Label_ Form String where
-  attr Form value = unsafeAttribute { key: "form", value: prop' value }
+  attr Form bothValues  = unsafeAttribute $ Both { key: "form", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "form", value:  prop' value  })
+  pureAttr Form value  = unsafeAttribute $ This { key: "form", value:  prop' value  }
+  unpureAttr Form eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "form", value:  prop' value  }
 
 instance Attr Meter_ Form String where
-  attr Form value = unsafeAttribute { key: "form", value: prop' value }
+  attr Form bothValues  = unsafeAttribute $ Both { key: "form", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "form", value:  prop' value  })
+  pureAttr Form value  = unsafeAttribute $ This { key: "form", value:  prop' value  }
+  unpureAttr Form eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "form", value:  prop' value  }
 
 instance Attr Object_ Form String where
-  attr Form value = unsafeAttribute { key: "form", value: prop' value }
+  attr Form bothValues  = unsafeAttribute $ Both { key: "form", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "form", value:  prop' value  })
+  pureAttr Form value  = unsafeAttribute $ This { key: "form", value:  prop' value  }
+  unpureAttr Form eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "form", value:  prop' value  }
 
 instance Attr Output_ Form String where
-  attr Form value = unsafeAttribute { key: "form", value: prop' value }
+  attr Form bothValues  = unsafeAttribute $ Both { key: "form", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "form", value:  prop' value  })
+  pureAttr Form value  = unsafeAttribute $ This { key: "form", value:  prop' value  }
+  unpureAttr Form eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "form", value:  prop' value  }
 
 instance Attr Progress_ Form String where
-  attr Form value = unsafeAttribute { key: "form", value: prop' value }
+  attr Form bothValues  = unsafeAttribute $ Both { key: "form", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "form", value:  prop' value  })
+  pureAttr Form value  = unsafeAttribute $ This { key: "form", value:  prop' value  }
+  unpureAttr Form eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "form", value:  prop' value  }
 
 instance Attr Select_ Form String where
-  attr Form value = unsafeAttribute { key: "form", value: prop' value }
+  attr Form bothValues  = unsafeAttribute $ Both { key: "form", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "form", value:  prop' value  })
+  pureAttr Form value  = unsafeAttribute $ This { key: "form", value:  prop' value  }
+  unpureAttr Form eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "form", value:  prop' value  }
 
 instance Attr Textarea_ Form String where
-  attr Form value = unsafeAttribute { key: "form", value: prop' value }
+  attr Form bothValues  = unsafeAttribute $ Both { key: "form", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "form", value:  prop' value  })
+  pureAttr Form value  = unsafeAttribute $ This { key: "form", value:  prop' value  }
+  unpureAttr Form eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "form", value:  prop' value  }
 
 instance Attr everything Form Unit where
-  attr Form _ = unsafeAttribute
-    { key: "form", value: unset' }
+  attr Form bothValues  = unsafeAttribute $ Both { key: "form", value:  unset'  } (snd bothValues <#> \_ -> { key: "form", value:  unset'  })
+  pureAttr Form _  = unsafeAttribute $ This { key: "form", value:  unset'  }
+  unpureAttr Form eventValue  = unsafeAttribute $ That $ eventValue <#> \_ -> { key: "form", value:  unset'  }

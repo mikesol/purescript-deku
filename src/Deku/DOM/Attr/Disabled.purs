@@ -1,6 +1,8 @@
 module Deku.DOM.Attr.Disabled where
 
 import Prelude
+import Data.These (These(..))
+import Data.Tuple (fst, snd)
 
 import Deku.DOM.Elt.Button (Button_)
 import Deku.DOM.Elt.Fieldset (Fieldset_)
@@ -14,26 +16,41 @@ import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 data Disabled = Disabled
 
 instance Attr Button_ Disabled String where
-  attr Disabled value = unsafeAttribute { key: "disabled", value: prop' value }
+  attr Disabled bothValues  = unsafeAttribute $ Both { key: "disabled", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "disabled", value:  prop' value  })
+  pureAttr Disabled value  = unsafeAttribute $ This { key: "disabled", value:  prop' value  }
+  unpureAttr Disabled eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "disabled", value:  prop' value  }
 
 instance Attr Fieldset_ Disabled String where
-  attr Disabled value = unsafeAttribute { key: "disabled", value: prop' value }
+  attr Disabled bothValues  = unsafeAttribute $ Both { key: "disabled", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "disabled", value:  prop' value  })
+  pureAttr Disabled value  = unsafeAttribute $ This { key: "disabled", value:  prop' value  }
+  unpureAttr Disabled eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "disabled", value:  prop' value  }
 
 instance Attr Input_ Disabled String where
-  attr Disabled value = unsafeAttribute { key: "disabled", value: prop' value }
+  attr Disabled bothValues  = unsafeAttribute $ Both { key: "disabled", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "disabled", value:  prop' value  })
+  pureAttr Disabled value  = unsafeAttribute $ This { key: "disabled", value:  prop' value  }
+  unpureAttr Disabled eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "disabled", value:  prop' value  }
 
 instance Attr Optgroup_ Disabled String where
-  attr Disabled value = unsafeAttribute { key: "disabled", value: prop' value }
+  attr Disabled bothValues  = unsafeAttribute $ Both { key: "disabled", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "disabled", value:  prop' value  })
+  pureAttr Disabled value  = unsafeAttribute $ This { key: "disabled", value:  prop' value  }
+  unpureAttr Disabled eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "disabled", value:  prop' value  }
 
 instance Attr Option_ Disabled String where
-  attr Disabled value = unsafeAttribute { key: "disabled", value: prop' value }
+  attr Disabled bothValues  = unsafeAttribute $ Both { key: "disabled", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "disabled", value:  prop' value  })
+  pureAttr Disabled value  = unsafeAttribute $ This { key: "disabled", value:  prop' value  }
+  unpureAttr Disabled eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "disabled", value:  prop' value  }
 
 instance Attr Select_ Disabled String where
-  attr Disabled value = unsafeAttribute { key: "disabled", value: prop' value }
+  attr Disabled bothValues  = unsafeAttribute $ Both { key: "disabled", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "disabled", value:  prop' value  })
+  pureAttr Disabled value  = unsafeAttribute $ This { key: "disabled", value:  prop' value  }
+  unpureAttr Disabled eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "disabled", value:  prop' value  }
 
 instance Attr Textarea_ Disabled String where
-  attr Disabled value = unsafeAttribute { key: "disabled", value: prop' value }
+  attr Disabled bothValues  = unsafeAttribute $ Both { key: "disabled", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "disabled", value:  prop' value  })
+  pureAttr Disabled value  = unsafeAttribute $ This { key: "disabled", value:  prop' value  }
+  unpureAttr Disabled eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "disabled", value:  prop' value  }
 
 instance Attr everything Disabled Unit where
-  attr Disabled _ = unsafeAttribute
-    { key: "disabled", value: unset' }
+  attr Disabled bothValues  = unsafeAttribute $ Both { key: "disabled", value:  unset'  } (snd bothValues <#> \_ -> { key: "disabled", value:  unset'  })
+  pureAttr Disabled _  = unsafeAttribute $ This { key: "disabled", value:  unset'  }
+  unpureAttr Disabled eventValue  = unsafeAttribute $ That $ eventValue <#> \_ -> { key: "disabled", value:  unset'  }

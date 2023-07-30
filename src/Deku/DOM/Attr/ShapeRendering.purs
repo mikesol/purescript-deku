@@ -1,6 +1,8 @@
 module Deku.DOM.Attr.ShapeRendering where
 
 import Prelude
+import Data.These (These(..))
+import Data.Tuple (fst, snd)
 
 import Deku.DOM.Elt.Use (Use_)
 import Deku.DOM.Elt.Tspan (Tspan_)
@@ -48,169 +50,211 @@ import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 data ShapeRendering = ShapeRendering
 
 instance Attr Circle_ ShapeRendering String where
-  attr ShapeRendering value = unsafeAttribute
-    { key: "shape-rendering", value: prop' value }
+  attr ShapeRendering bothValues  = unsafeAttribute $ Both { key: "shape-rendering", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "shape-rendering", value:  prop' value  })
+  pureAttr ShapeRendering value  = unsafeAttribute $ This { key: "shape-rendering", value:  prop' value  }
+  unpureAttr ShapeRendering eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "shape-rendering", value:  prop' value  }
 
 instance Attr ClipPath_ ShapeRendering String where
-  attr ShapeRendering value = unsafeAttribute
-    { key: "shape-rendering", value: prop' value }
+  attr ShapeRendering bothValues  = unsafeAttribute $ Both { key: "shape-rendering", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "shape-rendering", value:  prop' value  })
+  pureAttr ShapeRendering value  = unsafeAttribute $ This { key: "shape-rendering", value:  prop' value  }
+  unpureAttr ShapeRendering eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "shape-rendering", value:  prop' value  }
 
 instance Attr Defs_ ShapeRendering String where
-  attr ShapeRendering value = unsafeAttribute
-    { key: "shape-rendering", value: prop' value }
+  attr ShapeRendering bothValues  = unsafeAttribute $ Both { key: "shape-rendering", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "shape-rendering", value:  prop' value  })
+  pureAttr ShapeRendering value  = unsafeAttribute $ This { key: "shape-rendering", value:  prop' value  }
+  unpureAttr ShapeRendering eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "shape-rendering", value:  prop' value  }
 
 instance Attr Ellipse_ ShapeRendering String where
-  attr ShapeRendering value = unsafeAttribute
-    { key: "shape-rendering", value: prop' value }
+  attr ShapeRendering bothValues  = unsafeAttribute $ Both { key: "shape-rendering", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "shape-rendering", value:  prop' value  })
+  pureAttr ShapeRendering value  = unsafeAttribute $ This { key: "shape-rendering", value:  prop' value  }
+  unpureAttr ShapeRendering eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "shape-rendering", value:  prop' value  }
 
 instance Attr FeBlend_ ShapeRendering String where
-  attr ShapeRendering value = unsafeAttribute
-    { key: "shape-rendering", value: prop' value }
+  attr ShapeRendering bothValues  = unsafeAttribute $ Both { key: "shape-rendering", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "shape-rendering", value:  prop' value  })
+  pureAttr ShapeRendering value  = unsafeAttribute $ This { key: "shape-rendering", value:  prop' value  }
+  unpureAttr ShapeRendering eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "shape-rendering", value:  prop' value  }
 
 instance Attr FeColorMatrix_ ShapeRendering String where
-  attr ShapeRendering value = unsafeAttribute
-    { key: "shape-rendering", value: prop' value }
+  attr ShapeRendering bothValues  = unsafeAttribute $ Both { key: "shape-rendering", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "shape-rendering", value:  prop' value  })
+  pureAttr ShapeRendering value  = unsafeAttribute $ This { key: "shape-rendering", value:  prop' value  }
+  unpureAttr ShapeRendering eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "shape-rendering", value:  prop' value  }
 
 instance Attr FeComponentTransfer_ ShapeRendering String where
-  attr ShapeRendering value = unsafeAttribute
-    { key: "shape-rendering", value: prop' value }
+  attr ShapeRendering bothValues  = unsafeAttribute $ Both { key: "shape-rendering", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "shape-rendering", value:  prop' value  })
+  pureAttr ShapeRendering value  = unsafeAttribute $ This { key: "shape-rendering", value:  prop' value  }
+  unpureAttr ShapeRendering eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "shape-rendering", value:  prop' value  }
 
 instance Attr FeComposite_ ShapeRendering String where
-  attr ShapeRendering value = unsafeAttribute
-    { key: "shape-rendering", value: prop' value }
+  attr ShapeRendering bothValues  = unsafeAttribute $ Both { key: "shape-rendering", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "shape-rendering", value:  prop' value  })
+  pureAttr ShapeRendering value  = unsafeAttribute $ This { key: "shape-rendering", value:  prop' value  }
+  unpureAttr ShapeRendering eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "shape-rendering", value:  prop' value  }
 
 instance Attr FeConvolveMatrix_ ShapeRendering String where
-  attr ShapeRendering value = unsafeAttribute
-    { key: "shape-rendering", value: prop' value }
+  attr ShapeRendering bothValues  = unsafeAttribute $ Both { key: "shape-rendering", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "shape-rendering", value:  prop' value  })
+  pureAttr ShapeRendering value  = unsafeAttribute $ This { key: "shape-rendering", value:  prop' value  }
+  unpureAttr ShapeRendering eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "shape-rendering", value:  prop' value  }
 
 instance Attr FeDiffuseLighting_ ShapeRendering String where
-  attr ShapeRendering value = unsafeAttribute
-    { key: "shape-rendering", value: prop' value }
+  attr ShapeRendering bothValues  = unsafeAttribute $ Both { key: "shape-rendering", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "shape-rendering", value:  prop' value  })
+  pureAttr ShapeRendering value  = unsafeAttribute $ This { key: "shape-rendering", value:  prop' value  }
+  unpureAttr ShapeRendering eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "shape-rendering", value:  prop' value  }
 
 instance Attr FeDisplacementMap_ ShapeRendering String where
-  attr ShapeRendering value = unsafeAttribute
-    { key: "shape-rendering", value: prop' value }
+  attr ShapeRendering bothValues  = unsafeAttribute $ Both { key: "shape-rendering", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "shape-rendering", value:  prop' value  })
+  pureAttr ShapeRendering value  = unsafeAttribute $ This { key: "shape-rendering", value:  prop' value  }
+  unpureAttr ShapeRendering eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "shape-rendering", value:  prop' value  }
 
 instance Attr FeFlood_ ShapeRendering String where
-  attr ShapeRendering value = unsafeAttribute
-    { key: "shape-rendering", value: prop' value }
+  attr ShapeRendering bothValues  = unsafeAttribute $ Both { key: "shape-rendering", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "shape-rendering", value:  prop' value  })
+  pureAttr ShapeRendering value  = unsafeAttribute $ This { key: "shape-rendering", value:  prop' value  }
+  unpureAttr ShapeRendering eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "shape-rendering", value:  prop' value  }
 
 instance Attr FeGaussianBlur_ ShapeRendering String where
-  attr ShapeRendering value = unsafeAttribute
-    { key: "shape-rendering", value: prop' value }
+  attr ShapeRendering bothValues  = unsafeAttribute $ Both { key: "shape-rendering", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "shape-rendering", value:  prop' value  })
+  pureAttr ShapeRendering value  = unsafeAttribute $ This { key: "shape-rendering", value:  prop' value  }
+  unpureAttr ShapeRendering eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "shape-rendering", value:  prop' value  }
 
 instance Attr FeImage_ ShapeRendering String where
-  attr ShapeRendering value = unsafeAttribute
-    { key: "shape-rendering", value: prop' value }
+  attr ShapeRendering bothValues  = unsafeAttribute $ Both { key: "shape-rendering", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "shape-rendering", value:  prop' value  })
+  pureAttr ShapeRendering value  = unsafeAttribute $ This { key: "shape-rendering", value:  prop' value  }
+  unpureAttr ShapeRendering eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "shape-rendering", value:  prop' value  }
 
 instance Attr FeMerge_ ShapeRendering String where
-  attr ShapeRendering value = unsafeAttribute
-    { key: "shape-rendering", value: prop' value }
+  attr ShapeRendering bothValues  = unsafeAttribute $ Both { key: "shape-rendering", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "shape-rendering", value:  prop' value  })
+  pureAttr ShapeRendering value  = unsafeAttribute $ This { key: "shape-rendering", value:  prop' value  }
+  unpureAttr ShapeRendering eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "shape-rendering", value:  prop' value  }
 
 instance Attr FeMorphology_ ShapeRendering String where
-  attr ShapeRendering value = unsafeAttribute
-    { key: "shape-rendering", value: prop' value }
+  attr ShapeRendering bothValues  = unsafeAttribute $ Both { key: "shape-rendering", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "shape-rendering", value:  prop' value  })
+  pureAttr ShapeRendering value  = unsafeAttribute $ This { key: "shape-rendering", value:  prop' value  }
+  unpureAttr ShapeRendering eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "shape-rendering", value:  prop' value  }
 
 instance Attr FeOffset_ ShapeRendering String where
-  attr ShapeRendering value = unsafeAttribute
-    { key: "shape-rendering", value: prop' value }
+  attr ShapeRendering bothValues  = unsafeAttribute $ Both { key: "shape-rendering", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "shape-rendering", value:  prop' value  })
+  pureAttr ShapeRendering value  = unsafeAttribute $ This { key: "shape-rendering", value:  prop' value  }
+  unpureAttr ShapeRendering eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "shape-rendering", value:  prop' value  }
 
 instance Attr FeSpecularLighting_ ShapeRendering String where
-  attr ShapeRendering value = unsafeAttribute
-    { key: "shape-rendering", value: prop' value }
+  attr ShapeRendering bothValues  = unsafeAttribute $ Both { key: "shape-rendering", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "shape-rendering", value:  prop' value  })
+  pureAttr ShapeRendering value  = unsafeAttribute $ This { key: "shape-rendering", value:  prop' value  }
+  unpureAttr ShapeRendering eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "shape-rendering", value:  prop' value  }
 
 instance Attr FeTile_ ShapeRendering String where
-  attr ShapeRendering value = unsafeAttribute
-    { key: "shape-rendering", value: prop' value }
+  attr ShapeRendering bothValues  = unsafeAttribute $ Both { key: "shape-rendering", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "shape-rendering", value:  prop' value  })
+  pureAttr ShapeRendering value  = unsafeAttribute $ This { key: "shape-rendering", value:  prop' value  }
+  unpureAttr ShapeRendering eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "shape-rendering", value:  prop' value  }
 
 instance Attr FeTurbulence_ ShapeRendering String where
-  attr ShapeRendering value = unsafeAttribute
-    { key: "shape-rendering", value: prop' value }
+  attr ShapeRendering bothValues  = unsafeAttribute $ Both { key: "shape-rendering", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "shape-rendering", value:  prop' value  })
+  pureAttr ShapeRendering value  = unsafeAttribute $ This { key: "shape-rendering", value:  prop' value  }
+  unpureAttr ShapeRendering eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "shape-rendering", value:  prop' value  }
 
 instance Attr Filter_ ShapeRendering String where
-  attr ShapeRendering value = unsafeAttribute
-    { key: "shape-rendering", value: prop' value }
+  attr ShapeRendering bothValues  = unsafeAttribute $ Both { key: "shape-rendering", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "shape-rendering", value:  prop' value  })
+  pureAttr ShapeRendering value  = unsafeAttribute $ This { key: "shape-rendering", value:  prop' value  }
+  unpureAttr ShapeRendering eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "shape-rendering", value:  prop' value  }
 
 instance Attr ForeignObject_ ShapeRendering String where
-  attr ShapeRendering value = unsafeAttribute
-    { key: "shape-rendering", value: prop' value }
+  attr ShapeRendering bothValues  = unsafeAttribute $ Both { key: "shape-rendering", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "shape-rendering", value:  prop' value  })
+  pureAttr ShapeRendering value  = unsafeAttribute $ This { key: "shape-rendering", value:  prop' value  }
+  unpureAttr ShapeRendering eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "shape-rendering", value:  prop' value  }
 
 instance Attr G_ ShapeRendering String where
-  attr ShapeRendering value = unsafeAttribute
-    { key: "shape-rendering", value: prop' value }
+  attr ShapeRendering bothValues  = unsafeAttribute $ Both { key: "shape-rendering", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "shape-rendering", value:  prop' value  })
+  pureAttr ShapeRendering value  = unsafeAttribute $ This { key: "shape-rendering", value:  prop' value  }
+  unpureAttr ShapeRendering eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "shape-rendering", value:  prop' value  }
 
 instance Attr Image_ ShapeRendering String where
-  attr ShapeRendering value = unsafeAttribute
-    { key: "shape-rendering", value: prop' value }
+  attr ShapeRendering bothValues  = unsafeAttribute $ Both { key: "shape-rendering", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "shape-rendering", value:  prop' value  })
+  pureAttr ShapeRendering value  = unsafeAttribute $ This { key: "shape-rendering", value:  prop' value  }
+  unpureAttr ShapeRendering eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "shape-rendering", value:  prop' value  }
 
 instance Attr Line_ ShapeRendering String where
-  attr ShapeRendering value = unsafeAttribute
-    { key: "shape-rendering", value: prop' value }
+  attr ShapeRendering bothValues  = unsafeAttribute $ Both { key: "shape-rendering", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "shape-rendering", value:  prop' value  })
+  pureAttr ShapeRendering value  = unsafeAttribute $ This { key: "shape-rendering", value:  prop' value  }
+  unpureAttr ShapeRendering eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "shape-rendering", value:  prop' value  }
 
 instance Attr LinearGradient_ ShapeRendering String where
-  attr ShapeRendering value = unsafeAttribute
-    { key: "shape-rendering", value: prop' value }
+  attr ShapeRendering bothValues  = unsafeAttribute $ Both { key: "shape-rendering", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "shape-rendering", value:  prop' value  })
+  pureAttr ShapeRendering value  = unsafeAttribute $ This { key: "shape-rendering", value:  prop' value  }
+  unpureAttr ShapeRendering eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "shape-rendering", value:  prop' value  }
 
 instance Attr Marker_ ShapeRendering String where
-  attr ShapeRendering value = unsafeAttribute
-    { key: "shape-rendering", value: prop' value }
+  attr ShapeRendering bothValues  = unsafeAttribute $ Both { key: "shape-rendering", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "shape-rendering", value:  prop' value  })
+  pureAttr ShapeRendering value  = unsafeAttribute $ This { key: "shape-rendering", value:  prop' value  }
+  unpureAttr ShapeRendering eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "shape-rendering", value:  prop' value  }
 
 instance Attr Mask_ ShapeRendering String where
-  attr ShapeRendering value = unsafeAttribute
-    { key: "shape-rendering", value: prop' value }
+  attr ShapeRendering bothValues  = unsafeAttribute $ Both { key: "shape-rendering", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "shape-rendering", value:  prop' value  })
+  pureAttr ShapeRendering value  = unsafeAttribute $ This { key: "shape-rendering", value:  prop' value  }
+  unpureAttr ShapeRendering eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "shape-rendering", value:  prop' value  }
 
 instance Attr Path_ ShapeRendering String where
-  attr ShapeRendering value = unsafeAttribute
-    { key: "shape-rendering", value: prop' value }
+  attr ShapeRendering bothValues  = unsafeAttribute $ Both { key: "shape-rendering", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "shape-rendering", value:  prop' value  })
+  pureAttr ShapeRendering value  = unsafeAttribute $ This { key: "shape-rendering", value:  prop' value  }
+  unpureAttr ShapeRendering eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "shape-rendering", value:  prop' value  }
 
 instance Attr Pattern_ ShapeRendering String where
-  attr ShapeRendering value = unsafeAttribute
-    { key: "shape-rendering", value: prop' value }
+  attr ShapeRendering bothValues  = unsafeAttribute $ Both { key: "shape-rendering", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "shape-rendering", value:  prop' value  })
+  pureAttr ShapeRendering value  = unsafeAttribute $ This { key: "shape-rendering", value:  prop' value  }
+  unpureAttr ShapeRendering eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "shape-rendering", value:  prop' value  }
 
 instance Attr Polygon_ ShapeRendering String where
-  attr ShapeRendering value = unsafeAttribute
-    { key: "shape-rendering", value: prop' value }
+  attr ShapeRendering bothValues  = unsafeAttribute $ Both { key: "shape-rendering", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "shape-rendering", value:  prop' value  })
+  pureAttr ShapeRendering value  = unsafeAttribute $ This { key: "shape-rendering", value:  prop' value  }
+  unpureAttr ShapeRendering eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "shape-rendering", value:  prop' value  }
 
 instance Attr Polyline_ ShapeRendering String where
-  attr ShapeRendering value = unsafeAttribute
-    { key: "shape-rendering", value: prop' value }
+  attr ShapeRendering bothValues  = unsafeAttribute $ Both { key: "shape-rendering", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "shape-rendering", value:  prop' value  })
+  pureAttr ShapeRendering value  = unsafeAttribute $ This { key: "shape-rendering", value:  prop' value  }
+  unpureAttr ShapeRendering eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "shape-rendering", value:  prop' value  }
 
 instance Attr RadialGradient_ ShapeRendering String where
-  attr ShapeRendering value = unsafeAttribute
-    { key: "shape-rendering", value: prop' value }
+  attr ShapeRendering bothValues  = unsafeAttribute $ Both { key: "shape-rendering", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "shape-rendering", value:  prop' value  })
+  pureAttr ShapeRendering value  = unsafeAttribute $ This { key: "shape-rendering", value:  prop' value  }
+  unpureAttr ShapeRendering eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "shape-rendering", value:  prop' value  }
 
 instance Attr Rect_ ShapeRendering String where
-  attr ShapeRendering value = unsafeAttribute
-    { key: "shape-rendering", value: prop' value }
+  attr ShapeRendering bothValues  = unsafeAttribute $ Both { key: "shape-rendering", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "shape-rendering", value:  prop' value  })
+  pureAttr ShapeRendering value  = unsafeAttribute $ This { key: "shape-rendering", value:  prop' value  }
+  unpureAttr ShapeRendering eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "shape-rendering", value:  prop' value  }
 
 instance Attr Svg_ ShapeRendering String where
-  attr ShapeRendering value = unsafeAttribute
-    { key: "shape-rendering", value: prop' value }
+  attr ShapeRendering bothValues  = unsafeAttribute $ Both { key: "shape-rendering", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "shape-rendering", value:  prop' value  })
+  pureAttr ShapeRendering value  = unsafeAttribute $ This { key: "shape-rendering", value:  prop' value  }
+  unpureAttr ShapeRendering eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "shape-rendering", value:  prop' value  }
 
 instance Attr Switch_ ShapeRendering String where
-  attr ShapeRendering value = unsafeAttribute
-    { key: "shape-rendering", value: prop' value }
+  attr ShapeRendering bothValues  = unsafeAttribute $ Both { key: "shape-rendering", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "shape-rendering", value:  prop' value  })
+  pureAttr ShapeRendering value  = unsafeAttribute $ This { key: "shape-rendering", value:  prop' value  }
+  unpureAttr ShapeRendering eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "shape-rendering", value:  prop' value  }
 
 instance Attr Symbol_ ShapeRendering String where
-  attr ShapeRendering value = unsafeAttribute
-    { key: "shape-rendering", value: prop' value }
+  attr ShapeRendering bothValues  = unsafeAttribute $ Both { key: "shape-rendering", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "shape-rendering", value:  prop' value  })
+  pureAttr ShapeRendering value  = unsafeAttribute $ This { key: "shape-rendering", value:  prop' value  }
+  unpureAttr ShapeRendering eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "shape-rendering", value:  prop' value  }
 
 instance Attr Text_ ShapeRendering String where
-  attr ShapeRendering value = unsafeAttribute
-    { key: "shape-rendering", value: prop' value }
+  attr ShapeRendering bothValues  = unsafeAttribute $ Both { key: "shape-rendering", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "shape-rendering", value:  prop' value  })
+  pureAttr ShapeRendering value  = unsafeAttribute $ This { key: "shape-rendering", value:  prop' value  }
+  unpureAttr ShapeRendering eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "shape-rendering", value:  prop' value  }
 
 instance Attr TextPath_ ShapeRendering String where
-  attr ShapeRendering value = unsafeAttribute
-    { key: "shape-rendering", value: prop' value }
+  attr ShapeRendering bothValues  = unsafeAttribute $ Both { key: "shape-rendering", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "shape-rendering", value:  prop' value  })
+  pureAttr ShapeRendering value  = unsafeAttribute $ This { key: "shape-rendering", value:  prop' value  }
+  unpureAttr ShapeRendering eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "shape-rendering", value:  prop' value  }
 
 instance Attr Tspan_ ShapeRendering String where
-  attr ShapeRendering value = unsafeAttribute
-    { key: "shape-rendering", value: prop' value }
+  attr ShapeRendering bothValues  = unsafeAttribute $ Both { key: "shape-rendering", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "shape-rendering", value:  prop' value  })
+  pureAttr ShapeRendering value  = unsafeAttribute $ This { key: "shape-rendering", value:  prop' value  }
+  unpureAttr ShapeRendering eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "shape-rendering", value:  prop' value  }
 
 instance Attr Use_ ShapeRendering String where
-  attr ShapeRendering value = unsafeAttribute
-    { key: "shape-rendering", value: prop' value }
+  attr ShapeRendering bothValues  = unsafeAttribute $ Both { key: "shape-rendering", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "shape-rendering", value:  prop' value  })
+  pureAttr ShapeRendering value  = unsafeAttribute $ This { key: "shape-rendering", value:  prop' value  }
+  unpureAttr ShapeRendering eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "shape-rendering", value:  prop' value  }
 
 instance Attr everything ShapeRendering Unit where
-  attr ShapeRendering _ = unsafeAttribute
-    { key: "shape-rendering", value: unset' }
+  attr ShapeRendering bothValues  = unsafeAttribute $ Both { key: "shape-rendering", value:  unset'  } (snd bothValues <#> \_ -> { key: "shape-rendering", value:  unset'  })
+  pureAttr ShapeRendering _  = unsafeAttribute $ This { key: "shape-rendering", value:  unset'  }
+  unpureAttr ShapeRendering eventValue  = unsafeAttribute $ That $ eventValue <#> \_ -> { key: "shape-rendering", value:  unset'  }

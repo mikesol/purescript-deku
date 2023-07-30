@@ -1,6 +1,8 @@
 module Deku.DOM.Attr.OnClose where
 
 import Prelude
+import Data.These (These(..))
+import Data.Tuple (fst, snd)
 import Effect (Effect)
 import Deku.Attribute (class Attr, Attribute, Cb(..), cb', unsafeAttribute, unset')
 import FRP.Event (Event)
@@ -8,15 +10,19 @@ import FRP.Event (Event)
 data OnClose = OnClose
 
 instance Attr anything OnClose Cb where
-  attr OnClose value = unsafeAttribute { key: "close", value: cb' value }
+  attr OnClose bothValues  = unsafeAttribute $ Both { key: "close", value:  cb' (fst bothValues)  } (snd bothValues <#> \value -> { key: "close", value:  cb' value  })
+  pureAttr OnClose value  = unsafeAttribute $ This { key: "close", value:  cb' value  }
+  unpureAttr OnClose eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "close", value:  cb' value  }
 
 instance Attr anything OnClose (Effect Unit) where
-  attr OnClose value = unsafeAttribute
-    { key: "close", value: cb' (Cb (const (value $> true))) }
+  attr OnClose bothValues  = unsafeAttribute $ Both { key: "close", value:  cb' (Cb (const ((fst bothValues) $> true)))  } (snd bothValues <#> \value -> { key: "close", value:  cb' (Cb (const (value $> true)))  })
+  pureAttr OnClose value  = unsafeAttribute $ This { key: "close", value:  cb' (Cb (const (value $> true)))  }
+  unpureAttr OnClose eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "close", value:  cb' (Cb (const (value $> true)))  }
 
 instance Attr anything OnClose (Effect Boolean) where
-  attr OnClose value = unsafeAttribute
-    { key: "close", value: cb' (Cb (const value)) }
+  attr OnClose bothValues  = unsafeAttribute $ Both { key: "close", value:  cb' (Cb (const (fst bothValues)))  } (snd bothValues <#> \value -> { key: "close", value:  cb' (Cb (const value))  })
+  pureAttr OnClose value  = unsafeAttribute $ This { key: "close", value:  cb' (Cb (const value))  }
+  unpureAttr OnClose eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "close", value:  cb' (Cb (const value))  }
 
 type OnCloseEffect =
   forall element
@@ -24,5 +30,6 @@ type OnCloseEffect =
   => Event (Attribute element)
 
 instance Attr everything OnClose Unit where
-  attr OnClose _ = unsafeAttribute
-    { key: "close", value: unset' }
+  attr OnClose bothValues  = unsafeAttribute $ Both { key: "close", value:  unset'  } (snd bothValues <#> \_ -> { key: "close", value:  unset'  })
+  pureAttr OnClose _  = unsafeAttribute $ This { key: "close", value:  unset'  }
+  unpureAttr OnClose eventValue  = unsafeAttribute $ That $ eventValue <#> \_ -> { key: "close", value:  unset'  }

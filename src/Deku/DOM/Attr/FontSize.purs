@@ -1,6 +1,8 @@
 module Deku.DOM.Attr.FontSize where
 
 import Prelude
+import Data.These (These(..))
+import Data.Tuple (fst, snd)
 
 import Deku.DOM.Elt.Tspan (Tspan_)
 import Deku.DOM.Elt.Text (Text_)
@@ -28,68 +30,111 @@ import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 data FontSize = FontSize
 
 instance Attr FeBlend_ FontSize String where
-  attr FontSize value = unsafeAttribute { key: "font-size", value: prop' value }
+  attr FontSize bothValues  = unsafeAttribute $ Both { key: "font-size", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "font-size", value:  prop' value  })
+  pureAttr FontSize value  = unsafeAttribute $ This { key: "font-size", value:  prop' value  }
+  unpureAttr FontSize eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "font-size", value:  prop' value  }
 
 instance Attr FeColorMatrix_ FontSize String where
-  attr FontSize value = unsafeAttribute { key: "font-size", value: prop' value }
+  attr FontSize bothValues  = unsafeAttribute $ Both { key: "font-size", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "font-size", value:  prop' value  })
+  pureAttr FontSize value  = unsafeAttribute $ This { key: "font-size", value:  prop' value  }
+  unpureAttr FontSize eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "font-size", value:  prop' value  }
 
 instance Attr FeComponentTransfer_ FontSize String where
-  attr FontSize value = unsafeAttribute { key: "font-size", value: prop' value }
+  attr FontSize bothValues  = unsafeAttribute $ Both { key: "font-size", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "font-size", value:  prop' value  })
+  pureAttr FontSize value  = unsafeAttribute $ This { key: "font-size", value:  prop' value  }
+  unpureAttr FontSize eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "font-size", value:  prop' value  }
 
 instance Attr FeComposite_ FontSize String where
-  attr FontSize value = unsafeAttribute { key: "font-size", value: prop' value }
+  attr FontSize bothValues  = unsafeAttribute $ Both { key: "font-size", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "font-size", value:  prop' value  })
+  pureAttr FontSize value  = unsafeAttribute $ This { key: "font-size", value:  prop' value  }
+  unpureAttr FontSize eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "font-size", value:  prop' value  }
 
 instance Attr FeConvolveMatrix_ FontSize String where
-  attr FontSize value = unsafeAttribute { key: "font-size", value: prop' value }
+  attr FontSize bothValues  = unsafeAttribute $ Both { key: "font-size", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "font-size", value:  prop' value  })
+  pureAttr FontSize value  = unsafeAttribute $ This { key: "font-size", value:  prop' value  }
+  unpureAttr FontSize eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "font-size", value:  prop' value  }
 
 instance Attr FeDiffuseLighting_ FontSize String where
-  attr FontSize value = unsafeAttribute { key: "font-size", value: prop' value }
+  attr FontSize bothValues  = unsafeAttribute $ Both { key: "font-size", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "font-size", value:  prop' value  })
+  pureAttr FontSize value  = unsafeAttribute $ This { key: "font-size", value:  prop' value  }
+  unpureAttr FontSize eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "font-size", value:  prop' value  }
 
 instance Attr FeDisplacementMap_ FontSize String where
-  attr FontSize value = unsafeAttribute { key: "font-size", value: prop' value }
+  attr FontSize bothValues  = unsafeAttribute $ Both { key: "font-size", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "font-size", value:  prop' value  })
+  pureAttr FontSize value  = unsafeAttribute $ This { key: "font-size", value:  prop' value  }
+  unpureAttr FontSize eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "font-size", value:  prop' value  }
 
 instance Attr FeFlood_ FontSize String where
-  attr FontSize value = unsafeAttribute { key: "font-size", value: prop' value }
+  attr FontSize bothValues  = unsafeAttribute $ Both { key: "font-size", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "font-size", value:  prop' value  })
+  pureAttr FontSize value  = unsafeAttribute $ This { key: "font-size", value:  prop' value  }
+  unpureAttr FontSize eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "font-size", value:  prop' value  }
 
 instance Attr FeGaussianBlur_ FontSize String where
-  attr FontSize value = unsafeAttribute { key: "font-size", value: prop' value }
+  attr FontSize bothValues  = unsafeAttribute $ Both { key: "font-size", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "font-size", value:  prop' value  })
+  pureAttr FontSize value  = unsafeAttribute $ This { key: "font-size", value:  prop' value  }
+  unpureAttr FontSize eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "font-size", value:  prop' value  }
 
 instance Attr FeImage_ FontSize String where
-  attr FontSize value = unsafeAttribute { key: "font-size", value: prop' value }
+  attr FontSize bothValues  = unsafeAttribute $ Both { key: "font-size", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "font-size", value:  prop' value  })
+  pureAttr FontSize value  = unsafeAttribute $ This { key: "font-size", value:  prop' value  }
+  unpureAttr FontSize eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "font-size", value:  prop' value  }
 
 instance Attr FeMerge_ FontSize String where
-  attr FontSize value = unsafeAttribute { key: "font-size", value: prop' value }
+  attr FontSize bothValues  = unsafeAttribute $ Both { key: "font-size", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "font-size", value:  prop' value  })
+  pureAttr FontSize value  = unsafeAttribute $ This { key: "font-size", value:  prop' value  }
+  unpureAttr FontSize eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "font-size", value:  prop' value  }
 
 instance Attr FeMorphology_ FontSize String where
-  attr FontSize value = unsafeAttribute { key: "font-size", value: prop' value }
+  attr FontSize bothValues  = unsafeAttribute $ Both { key: "font-size", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "font-size", value:  prop' value  })
+  pureAttr FontSize value  = unsafeAttribute $ This { key: "font-size", value:  prop' value  }
+  unpureAttr FontSize eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "font-size", value:  prop' value  }
 
 instance Attr FeOffset_ FontSize String where
-  attr FontSize value = unsafeAttribute { key: "font-size", value: prop' value }
+  attr FontSize bothValues  = unsafeAttribute $ Both { key: "font-size", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "font-size", value:  prop' value  })
+  pureAttr FontSize value  = unsafeAttribute $ This { key: "font-size", value:  prop' value  }
+  unpureAttr FontSize eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "font-size", value:  prop' value  }
 
 instance Attr FeSpecularLighting_ FontSize String where
-  attr FontSize value = unsafeAttribute { key: "font-size", value: prop' value }
+  attr FontSize bothValues  = unsafeAttribute $ Both { key: "font-size", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "font-size", value:  prop' value  })
+  pureAttr FontSize value  = unsafeAttribute $ This { key: "font-size", value:  prop' value  }
+  unpureAttr FontSize eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "font-size", value:  prop' value  }
 
 instance Attr FeTile_ FontSize String where
-  attr FontSize value = unsafeAttribute { key: "font-size", value: prop' value }
+  attr FontSize bothValues  = unsafeAttribute $ Both { key: "font-size", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "font-size", value:  prop' value  })
+  pureAttr FontSize value  = unsafeAttribute $ This { key: "font-size", value:  prop' value  }
+  unpureAttr FontSize eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "font-size", value:  prop' value  }
 
 instance Attr FeTurbulence_ FontSize String where
-  attr FontSize value = unsafeAttribute { key: "font-size", value: prop' value }
+  attr FontSize bothValues  = unsafeAttribute $ Both { key: "font-size", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "font-size", value:  prop' value  })
+  pureAttr FontSize value  = unsafeAttribute $ This { key: "font-size", value:  prop' value  }
+  unpureAttr FontSize eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "font-size", value:  prop' value  }
 
 instance Attr Filter_ FontSize String where
-  attr FontSize value = unsafeAttribute { key: "font-size", value: prop' value }
+  attr FontSize bothValues  = unsafeAttribute $ Both { key: "font-size", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "font-size", value:  prop' value  })
+  pureAttr FontSize value  = unsafeAttribute $ This { key: "font-size", value:  prop' value  }
+  unpureAttr FontSize eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "font-size", value:  prop' value  }
 
 instance Attr Image_ FontSize String where
-  attr FontSize value = unsafeAttribute { key: "font-size", value: prop' value }
+  attr FontSize bothValues  = unsafeAttribute $ Both { key: "font-size", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "font-size", value:  prop' value  })
+  pureAttr FontSize value  = unsafeAttribute $ This { key: "font-size", value:  prop' value  }
+  unpureAttr FontSize eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "font-size", value:  prop' value  }
 
 instance Attr Switch_ FontSize String where
-  attr FontSize value = unsafeAttribute { key: "font-size", value: prop' value }
+  attr FontSize bothValues  = unsafeAttribute $ Both { key: "font-size", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "font-size", value:  prop' value  })
+  pureAttr FontSize value  = unsafeAttribute $ This { key: "font-size", value:  prop' value  }
+  unpureAttr FontSize eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "font-size", value:  prop' value  }
 
 instance Attr Text_ FontSize String where
-  attr FontSize value = unsafeAttribute { key: "font-size", value: prop' value }
+  attr FontSize bothValues  = unsafeAttribute $ Both { key: "font-size", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "font-size", value:  prop' value  })
+  pureAttr FontSize value  = unsafeAttribute $ This { key: "font-size", value:  prop' value  }
+  unpureAttr FontSize eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "font-size", value:  prop' value  }
 
 instance Attr Tspan_ FontSize String where
-  attr FontSize value = unsafeAttribute { key: "font-size", value: prop' value }
+  attr FontSize bothValues  = unsafeAttribute $ Both { key: "font-size", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "font-size", value:  prop' value  })
+  pureAttr FontSize value  = unsafeAttribute $ This { key: "font-size", value:  prop' value  }
+  unpureAttr FontSize eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "font-size", value:  prop' value  }
 
 instance Attr everything FontSize Unit where
-  attr FontSize _ = unsafeAttribute
-    { key: "font-size", value: unset' }
+  attr FontSize bothValues  = unsafeAttribute $ Both { key: "font-size", value:  unset'  } (snd bothValues <#> \_ -> { key: "font-size", value:  unset'  })
+  pureAttr FontSize _  = unsafeAttribute $ This { key: "font-size", value:  unset'  }
+  unpureAttr FontSize eventValue  = unsafeAttribute $ That $ eventValue <#> \_ -> { key: "font-size", value:  unset'  }

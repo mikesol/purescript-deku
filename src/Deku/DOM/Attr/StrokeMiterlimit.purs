@@ -1,6 +1,8 @@
 module Deku.DOM.Attr.StrokeMiterlimit where
 
 import Prelude
+import Data.These (These(..))
+import Data.Tuple (fst, snd)
 
 import Deku.DOM.Elt.Use (Use_)
 import Deku.DOM.Elt.Tspan (Tspan_)
@@ -48,169 +50,211 @@ import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 data StrokeMiterlimit = StrokeMiterlimit
 
 instance Attr Circle_ StrokeMiterlimit String where
-  attr StrokeMiterlimit value = unsafeAttribute
-    { key: "stroke-miterlimit", value: prop' value }
+  attr StrokeMiterlimit bothValues  = unsafeAttribute $ Both { key: "stroke-miterlimit", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "stroke-miterlimit", value:  prop' value  })
+  pureAttr StrokeMiterlimit value  = unsafeAttribute $ This { key: "stroke-miterlimit", value:  prop' value  }
+  unpureAttr StrokeMiterlimit eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "stroke-miterlimit", value:  prop' value  }
 
 instance Attr ClipPath_ StrokeMiterlimit String where
-  attr StrokeMiterlimit value = unsafeAttribute
-    { key: "stroke-miterlimit", value: prop' value }
+  attr StrokeMiterlimit bothValues  = unsafeAttribute $ Both { key: "stroke-miterlimit", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "stroke-miterlimit", value:  prop' value  })
+  pureAttr StrokeMiterlimit value  = unsafeAttribute $ This { key: "stroke-miterlimit", value:  prop' value  }
+  unpureAttr StrokeMiterlimit eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "stroke-miterlimit", value:  prop' value  }
 
 instance Attr Defs_ StrokeMiterlimit String where
-  attr StrokeMiterlimit value = unsafeAttribute
-    { key: "stroke-miterlimit", value: prop' value }
+  attr StrokeMiterlimit bothValues  = unsafeAttribute $ Both { key: "stroke-miterlimit", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "stroke-miterlimit", value:  prop' value  })
+  pureAttr StrokeMiterlimit value  = unsafeAttribute $ This { key: "stroke-miterlimit", value:  prop' value  }
+  unpureAttr StrokeMiterlimit eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "stroke-miterlimit", value:  prop' value  }
 
 instance Attr Ellipse_ StrokeMiterlimit String where
-  attr StrokeMiterlimit value = unsafeAttribute
-    { key: "stroke-miterlimit", value: prop' value }
+  attr StrokeMiterlimit bothValues  = unsafeAttribute $ Both { key: "stroke-miterlimit", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "stroke-miterlimit", value:  prop' value  })
+  pureAttr StrokeMiterlimit value  = unsafeAttribute $ This { key: "stroke-miterlimit", value:  prop' value  }
+  unpureAttr StrokeMiterlimit eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "stroke-miterlimit", value:  prop' value  }
 
 instance Attr FeBlend_ StrokeMiterlimit String where
-  attr StrokeMiterlimit value = unsafeAttribute
-    { key: "stroke-miterlimit", value: prop' value }
+  attr StrokeMiterlimit bothValues  = unsafeAttribute $ Both { key: "stroke-miterlimit", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "stroke-miterlimit", value:  prop' value  })
+  pureAttr StrokeMiterlimit value  = unsafeAttribute $ This { key: "stroke-miterlimit", value:  prop' value  }
+  unpureAttr StrokeMiterlimit eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "stroke-miterlimit", value:  prop' value  }
 
 instance Attr FeColorMatrix_ StrokeMiterlimit String where
-  attr StrokeMiterlimit value = unsafeAttribute
-    { key: "stroke-miterlimit", value: prop' value }
+  attr StrokeMiterlimit bothValues  = unsafeAttribute $ Both { key: "stroke-miterlimit", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "stroke-miterlimit", value:  prop' value  })
+  pureAttr StrokeMiterlimit value  = unsafeAttribute $ This { key: "stroke-miterlimit", value:  prop' value  }
+  unpureAttr StrokeMiterlimit eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "stroke-miterlimit", value:  prop' value  }
 
 instance Attr FeComponentTransfer_ StrokeMiterlimit String where
-  attr StrokeMiterlimit value = unsafeAttribute
-    { key: "stroke-miterlimit", value: prop' value }
+  attr StrokeMiterlimit bothValues  = unsafeAttribute $ Both { key: "stroke-miterlimit", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "stroke-miterlimit", value:  prop' value  })
+  pureAttr StrokeMiterlimit value  = unsafeAttribute $ This { key: "stroke-miterlimit", value:  prop' value  }
+  unpureAttr StrokeMiterlimit eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "stroke-miterlimit", value:  prop' value  }
 
 instance Attr FeComposite_ StrokeMiterlimit String where
-  attr StrokeMiterlimit value = unsafeAttribute
-    { key: "stroke-miterlimit", value: prop' value }
+  attr StrokeMiterlimit bothValues  = unsafeAttribute $ Both { key: "stroke-miterlimit", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "stroke-miterlimit", value:  prop' value  })
+  pureAttr StrokeMiterlimit value  = unsafeAttribute $ This { key: "stroke-miterlimit", value:  prop' value  }
+  unpureAttr StrokeMiterlimit eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "stroke-miterlimit", value:  prop' value  }
 
 instance Attr FeConvolveMatrix_ StrokeMiterlimit String where
-  attr StrokeMiterlimit value = unsafeAttribute
-    { key: "stroke-miterlimit", value: prop' value }
+  attr StrokeMiterlimit bothValues  = unsafeAttribute $ Both { key: "stroke-miterlimit", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "stroke-miterlimit", value:  prop' value  })
+  pureAttr StrokeMiterlimit value  = unsafeAttribute $ This { key: "stroke-miterlimit", value:  prop' value  }
+  unpureAttr StrokeMiterlimit eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "stroke-miterlimit", value:  prop' value  }
 
 instance Attr FeDiffuseLighting_ StrokeMiterlimit String where
-  attr StrokeMiterlimit value = unsafeAttribute
-    { key: "stroke-miterlimit", value: prop' value }
+  attr StrokeMiterlimit bothValues  = unsafeAttribute $ Both { key: "stroke-miterlimit", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "stroke-miterlimit", value:  prop' value  })
+  pureAttr StrokeMiterlimit value  = unsafeAttribute $ This { key: "stroke-miterlimit", value:  prop' value  }
+  unpureAttr StrokeMiterlimit eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "stroke-miterlimit", value:  prop' value  }
 
 instance Attr FeDisplacementMap_ StrokeMiterlimit String where
-  attr StrokeMiterlimit value = unsafeAttribute
-    { key: "stroke-miterlimit", value: prop' value }
+  attr StrokeMiterlimit bothValues  = unsafeAttribute $ Both { key: "stroke-miterlimit", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "stroke-miterlimit", value:  prop' value  })
+  pureAttr StrokeMiterlimit value  = unsafeAttribute $ This { key: "stroke-miterlimit", value:  prop' value  }
+  unpureAttr StrokeMiterlimit eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "stroke-miterlimit", value:  prop' value  }
 
 instance Attr FeFlood_ StrokeMiterlimit String where
-  attr StrokeMiterlimit value = unsafeAttribute
-    { key: "stroke-miterlimit", value: prop' value }
+  attr StrokeMiterlimit bothValues  = unsafeAttribute $ Both { key: "stroke-miterlimit", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "stroke-miterlimit", value:  prop' value  })
+  pureAttr StrokeMiterlimit value  = unsafeAttribute $ This { key: "stroke-miterlimit", value:  prop' value  }
+  unpureAttr StrokeMiterlimit eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "stroke-miterlimit", value:  prop' value  }
 
 instance Attr FeGaussianBlur_ StrokeMiterlimit String where
-  attr StrokeMiterlimit value = unsafeAttribute
-    { key: "stroke-miterlimit", value: prop' value }
+  attr StrokeMiterlimit bothValues  = unsafeAttribute $ Both { key: "stroke-miterlimit", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "stroke-miterlimit", value:  prop' value  })
+  pureAttr StrokeMiterlimit value  = unsafeAttribute $ This { key: "stroke-miterlimit", value:  prop' value  }
+  unpureAttr StrokeMiterlimit eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "stroke-miterlimit", value:  prop' value  }
 
 instance Attr FeImage_ StrokeMiterlimit String where
-  attr StrokeMiterlimit value = unsafeAttribute
-    { key: "stroke-miterlimit", value: prop' value }
+  attr StrokeMiterlimit bothValues  = unsafeAttribute $ Both { key: "stroke-miterlimit", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "stroke-miterlimit", value:  prop' value  })
+  pureAttr StrokeMiterlimit value  = unsafeAttribute $ This { key: "stroke-miterlimit", value:  prop' value  }
+  unpureAttr StrokeMiterlimit eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "stroke-miterlimit", value:  prop' value  }
 
 instance Attr FeMerge_ StrokeMiterlimit String where
-  attr StrokeMiterlimit value = unsafeAttribute
-    { key: "stroke-miterlimit", value: prop' value }
+  attr StrokeMiterlimit bothValues  = unsafeAttribute $ Both { key: "stroke-miterlimit", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "stroke-miterlimit", value:  prop' value  })
+  pureAttr StrokeMiterlimit value  = unsafeAttribute $ This { key: "stroke-miterlimit", value:  prop' value  }
+  unpureAttr StrokeMiterlimit eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "stroke-miterlimit", value:  prop' value  }
 
 instance Attr FeMorphology_ StrokeMiterlimit String where
-  attr StrokeMiterlimit value = unsafeAttribute
-    { key: "stroke-miterlimit", value: prop' value }
+  attr StrokeMiterlimit bothValues  = unsafeAttribute $ Both { key: "stroke-miterlimit", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "stroke-miterlimit", value:  prop' value  })
+  pureAttr StrokeMiterlimit value  = unsafeAttribute $ This { key: "stroke-miterlimit", value:  prop' value  }
+  unpureAttr StrokeMiterlimit eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "stroke-miterlimit", value:  prop' value  }
 
 instance Attr FeOffset_ StrokeMiterlimit String where
-  attr StrokeMiterlimit value = unsafeAttribute
-    { key: "stroke-miterlimit", value: prop' value }
+  attr StrokeMiterlimit bothValues  = unsafeAttribute $ Both { key: "stroke-miterlimit", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "stroke-miterlimit", value:  prop' value  })
+  pureAttr StrokeMiterlimit value  = unsafeAttribute $ This { key: "stroke-miterlimit", value:  prop' value  }
+  unpureAttr StrokeMiterlimit eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "stroke-miterlimit", value:  prop' value  }
 
 instance Attr FeSpecularLighting_ StrokeMiterlimit String where
-  attr StrokeMiterlimit value = unsafeAttribute
-    { key: "stroke-miterlimit", value: prop' value }
+  attr StrokeMiterlimit bothValues  = unsafeAttribute $ Both { key: "stroke-miterlimit", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "stroke-miterlimit", value:  prop' value  })
+  pureAttr StrokeMiterlimit value  = unsafeAttribute $ This { key: "stroke-miterlimit", value:  prop' value  }
+  unpureAttr StrokeMiterlimit eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "stroke-miterlimit", value:  prop' value  }
 
 instance Attr FeTile_ StrokeMiterlimit String where
-  attr StrokeMiterlimit value = unsafeAttribute
-    { key: "stroke-miterlimit", value: prop' value }
+  attr StrokeMiterlimit bothValues  = unsafeAttribute $ Both { key: "stroke-miterlimit", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "stroke-miterlimit", value:  prop' value  })
+  pureAttr StrokeMiterlimit value  = unsafeAttribute $ This { key: "stroke-miterlimit", value:  prop' value  }
+  unpureAttr StrokeMiterlimit eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "stroke-miterlimit", value:  prop' value  }
 
 instance Attr FeTurbulence_ StrokeMiterlimit String where
-  attr StrokeMiterlimit value = unsafeAttribute
-    { key: "stroke-miterlimit", value: prop' value }
+  attr StrokeMiterlimit bothValues  = unsafeAttribute $ Both { key: "stroke-miterlimit", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "stroke-miterlimit", value:  prop' value  })
+  pureAttr StrokeMiterlimit value  = unsafeAttribute $ This { key: "stroke-miterlimit", value:  prop' value  }
+  unpureAttr StrokeMiterlimit eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "stroke-miterlimit", value:  prop' value  }
 
 instance Attr Filter_ StrokeMiterlimit String where
-  attr StrokeMiterlimit value = unsafeAttribute
-    { key: "stroke-miterlimit", value: prop' value }
+  attr StrokeMiterlimit bothValues  = unsafeAttribute $ Both { key: "stroke-miterlimit", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "stroke-miterlimit", value:  prop' value  })
+  pureAttr StrokeMiterlimit value  = unsafeAttribute $ This { key: "stroke-miterlimit", value:  prop' value  }
+  unpureAttr StrokeMiterlimit eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "stroke-miterlimit", value:  prop' value  }
 
 instance Attr ForeignObject_ StrokeMiterlimit String where
-  attr StrokeMiterlimit value = unsafeAttribute
-    { key: "stroke-miterlimit", value: prop' value }
+  attr StrokeMiterlimit bothValues  = unsafeAttribute $ Both { key: "stroke-miterlimit", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "stroke-miterlimit", value:  prop' value  })
+  pureAttr StrokeMiterlimit value  = unsafeAttribute $ This { key: "stroke-miterlimit", value:  prop' value  }
+  unpureAttr StrokeMiterlimit eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "stroke-miterlimit", value:  prop' value  }
 
 instance Attr G_ StrokeMiterlimit String where
-  attr StrokeMiterlimit value = unsafeAttribute
-    { key: "stroke-miterlimit", value: prop' value }
+  attr StrokeMiterlimit bothValues  = unsafeAttribute $ Both { key: "stroke-miterlimit", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "stroke-miterlimit", value:  prop' value  })
+  pureAttr StrokeMiterlimit value  = unsafeAttribute $ This { key: "stroke-miterlimit", value:  prop' value  }
+  unpureAttr StrokeMiterlimit eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "stroke-miterlimit", value:  prop' value  }
 
 instance Attr Image_ StrokeMiterlimit String where
-  attr StrokeMiterlimit value = unsafeAttribute
-    { key: "stroke-miterlimit", value: prop' value }
+  attr StrokeMiterlimit bothValues  = unsafeAttribute $ Both { key: "stroke-miterlimit", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "stroke-miterlimit", value:  prop' value  })
+  pureAttr StrokeMiterlimit value  = unsafeAttribute $ This { key: "stroke-miterlimit", value:  prop' value  }
+  unpureAttr StrokeMiterlimit eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "stroke-miterlimit", value:  prop' value  }
 
 instance Attr Line_ StrokeMiterlimit String where
-  attr StrokeMiterlimit value = unsafeAttribute
-    { key: "stroke-miterlimit", value: prop' value }
+  attr StrokeMiterlimit bothValues  = unsafeAttribute $ Both { key: "stroke-miterlimit", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "stroke-miterlimit", value:  prop' value  })
+  pureAttr StrokeMiterlimit value  = unsafeAttribute $ This { key: "stroke-miterlimit", value:  prop' value  }
+  unpureAttr StrokeMiterlimit eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "stroke-miterlimit", value:  prop' value  }
 
 instance Attr LinearGradient_ StrokeMiterlimit String where
-  attr StrokeMiterlimit value = unsafeAttribute
-    { key: "stroke-miterlimit", value: prop' value }
+  attr StrokeMiterlimit bothValues  = unsafeAttribute $ Both { key: "stroke-miterlimit", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "stroke-miterlimit", value:  prop' value  })
+  pureAttr StrokeMiterlimit value  = unsafeAttribute $ This { key: "stroke-miterlimit", value:  prop' value  }
+  unpureAttr StrokeMiterlimit eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "stroke-miterlimit", value:  prop' value  }
 
 instance Attr Marker_ StrokeMiterlimit String where
-  attr StrokeMiterlimit value = unsafeAttribute
-    { key: "stroke-miterlimit", value: prop' value }
+  attr StrokeMiterlimit bothValues  = unsafeAttribute $ Both { key: "stroke-miterlimit", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "stroke-miterlimit", value:  prop' value  })
+  pureAttr StrokeMiterlimit value  = unsafeAttribute $ This { key: "stroke-miterlimit", value:  prop' value  }
+  unpureAttr StrokeMiterlimit eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "stroke-miterlimit", value:  prop' value  }
 
 instance Attr Mask_ StrokeMiterlimit String where
-  attr StrokeMiterlimit value = unsafeAttribute
-    { key: "stroke-miterlimit", value: prop' value }
+  attr StrokeMiterlimit bothValues  = unsafeAttribute $ Both { key: "stroke-miterlimit", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "stroke-miterlimit", value:  prop' value  })
+  pureAttr StrokeMiterlimit value  = unsafeAttribute $ This { key: "stroke-miterlimit", value:  prop' value  }
+  unpureAttr StrokeMiterlimit eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "stroke-miterlimit", value:  prop' value  }
 
 instance Attr Path_ StrokeMiterlimit String where
-  attr StrokeMiterlimit value = unsafeAttribute
-    { key: "stroke-miterlimit", value: prop' value }
+  attr StrokeMiterlimit bothValues  = unsafeAttribute $ Both { key: "stroke-miterlimit", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "stroke-miterlimit", value:  prop' value  })
+  pureAttr StrokeMiterlimit value  = unsafeAttribute $ This { key: "stroke-miterlimit", value:  prop' value  }
+  unpureAttr StrokeMiterlimit eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "stroke-miterlimit", value:  prop' value  }
 
 instance Attr Pattern_ StrokeMiterlimit String where
-  attr StrokeMiterlimit value = unsafeAttribute
-    { key: "stroke-miterlimit", value: prop' value }
+  attr StrokeMiterlimit bothValues  = unsafeAttribute $ Both { key: "stroke-miterlimit", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "stroke-miterlimit", value:  prop' value  })
+  pureAttr StrokeMiterlimit value  = unsafeAttribute $ This { key: "stroke-miterlimit", value:  prop' value  }
+  unpureAttr StrokeMiterlimit eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "stroke-miterlimit", value:  prop' value  }
 
 instance Attr Polygon_ StrokeMiterlimit String where
-  attr StrokeMiterlimit value = unsafeAttribute
-    { key: "stroke-miterlimit", value: prop' value }
+  attr StrokeMiterlimit bothValues  = unsafeAttribute $ Both { key: "stroke-miterlimit", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "stroke-miterlimit", value:  prop' value  })
+  pureAttr StrokeMiterlimit value  = unsafeAttribute $ This { key: "stroke-miterlimit", value:  prop' value  }
+  unpureAttr StrokeMiterlimit eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "stroke-miterlimit", value:  prop' value  }
 
 instance Attr Polyline_ StrokeMiterlimit String where
-  attr StrokeMiterlimit value = unsafeAttribute
-    { key: "stroke-miterlimit", value: prop' value }
+  attr StrokeMiterlimit bothValues  = unsafeAttribute $ Both { key: "stroke-miterlimit", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "stroke-miterlimit", value:  prop' value  })
+  pureAttr StrokeMiterlimit value  = unsafeAttribute $ This { key: "stroke-miterlimit", value:  prop' value  }
+  unpureAttr StrokeMiterlimit eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "stroke-miterlimit", value:  prop' value  }
 
 instance Attr RadialGradient_ StrokeMiterlimit String where
-  attr StrokeMiterlimit value = unsafeAttribute
-    { key: "stroke-miterlimit", value: prop' value }
+  attr StrokeMiterlimit bothValues  = unsafeAttribute $ Both { key: "stroke-miterlimit", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "stroke-miterlimit", value:  prop' value  })
+  pureAttr StrokeMiterlimit value  = unsafeAttribute $ This { key: "stroke-miterlimit", value:  prop' value  }
+  unpureAttr StrokeMiterlimit eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "stroke-miterlimit", value:  prop' value  }
 
 instance Attr Rect_ StrokeMiterlimit String where
-  attr StrokeMiterlimit value = unsafeAttribute
-    { key: "stroke-miterlimit", value: prop' value }
+  attr StrokeMiterlimit bothValues  = unsafeAttribute $ Both { key: "stroke-miterlimit", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "stroke-miterlimit", value:  prop' value  })
+  pureAttr StrokeMiterlimit value  = unsafeAttribute $ This { key: "stroke-miterlimit", value:  prop' value  }
+  unpureAttr StrokeMiterlimit eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "stroke-miterlimit", value:  prop' value  }
 
 instance Attr Svg_ StrokeMiterlimit String where
-  attr StrokeMiterlimit value = unsafeAttribute
-    { key: "stroke-miterlimit", value: prop' value }
+  attr StrokeMiterlimit bothValues  = unsafeAttribute $ Both { key: "stroke-miterlimit", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "stroke-miterlimit", value:  prop' value  })
+  pureAttr StrokeMiterlimit value  = unsafeAttribute $ This { key: "stroke-miterlimit", value:  prop' value  }
+  unpureAttr StrokeMiterlimit eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "stroke-miterlimit", value:  prop' value  }
 
 instance Attr Switch_ StrokeMiterlimit String where
-  attr StrokeMiterlimit value = unsafeAttribute
-    { key: "stroke-miterlimit", value: prop' value }
+  attr StrokeMiterlimit bothValues  = unsafeAttribute $ Both { key: "stroke-miterlimit", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "stroke-miterlimit", value:  prop' value  })
+  pureAttr StrokeMiterlimit value  = unsafeAttribute $ This { key: "stroke-miterlimit", value:  prop' value  }
+  unpureAttr StrokeMiterlimit eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "stroke-miterlimit", value:  prop' value  }
 
 instance Attr Symbol_ StrokeMiterlimit String where
-  attr StrokeMiterlimit value = unsafeAttribute
-    { key: "stroke-miterlimit", value: prop' value }
+  attr StrokeMiterlimit bothValues  = unsafeAttribute $ Both { key: "stroke-miterlimit", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "stroke-miterlimit", value:  prop' value  })
+  pureAttr StrokeMiterlimit value  = unsafeAttribute $ This { key: "stroke-miterlimit", value:  prop' value  }
+  unpureAttr StrokeMiterlimit eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "stroke-miterlimit", value:  prop' value  }
 
 instance Attr Text_ StrokeMiterlimit String where
-  attr StrokeMiterlimit value = unsafeAttribute
-    { key: "stroke-miterlimit", value: prop' value }
+  attr StrokeMiterlimit bothValues  = unsafeAttribute $ Both { key: "stroke-miterlimit", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "stroke-miterlimit", value:  prop' value  })
+  pureAttr StrokeMiterlimit value  = unsafeAttribute $ This { key: "stroke-miterlimit", value:  prop' value  }
+  unpureAttr StrokeMiterlimit eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "stroke-miterlimit", value:  prop' value  }
 
 instance Attr TextPath_ StrokeMiterlimit String where
-  attr StrokeMiterlimit value = unsafeAttribute
-    { key: "stroke-miterlimit", value: prop' value }
+  attr StrokeMiterlimit bothValues  = unsafeAttribute $ Both { key: "stroke-miterlimit", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "stroke-miterlimit", value:  prop' value  })
+  pureAttr StrokeMiterlimit value  = unsafeAttribute $ This { key: "stroke-miterlimit", value:  prop' value  }
+  unpureAttr StrokeMiterlimit eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "stroke-miterlimit", value:  prop' value  }
 
 instance Attr Tspan_ StrokeMiterlimit String where
-  attr StrokeMiterlimit value = unsafeAttribute
-    { key: "stroke-miterlimit", value: prop' value }
+  attr StrokeMiterlimit bothValues  = unsafeAttribute $ Both { key: "stroke-miterlimit", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "stroke-miterlimit", value:  prop' value  })
+  pureAttr StrokeMiterlimit value  = unsafeAttribute $ This { key: "stroke-miterlimit", value:  prop' value  }
+  unpureAttr StrokeMiterlimit eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "stroke-miterlimit", value:  prop' value  }
 
 instance Attr Use_ StrokeMiterlimit String where
-  attr StrokeMiterlimit value = unsafeAttribute
-    { key: "stroke-miterlimit", value: prop' value }
+  attr StrokeMiterlimit bothValues  = unsafeAttribute $ Both { key: "stroke-miterlimit", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "stroke-miterlimit", value:  prop' value  })
+  pureAttr StrokeMiterlimit value  = unsafeAttribute $ This { key: "stroke-miterlimit", value:  prop' value  }
+  unpureAttr StrokeMiterlimit eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "stroke-miterlimit", value:  prop' value  }
 
 instance Attr everything StrokeMiterlimit Unit where
-  attr StrokeMiterlimit _ = unsafeAttribute
-    { key: "stroke-miterlimit", value: unset' }
+  attr StrokeMiterlimit bothValues  = unsafeAttribute $ Both { key: "stroke-miterlimit", value:  unset'  } (snd bothValues <#> \_ -> { key: "stroke-miterlimit", value:  unset'  })
+  pureAttr StrokeMiterlimit _  = unsafeAttribute $ This { key: "stroke-miterlimit", value:  unset'  }
+  unpureAttr StrokeMiterlimit eventValue  = unsafeAttribute $ That $ eventValue <#> \_ -> { key: "stroke-miterlimit", value:  unset'  }

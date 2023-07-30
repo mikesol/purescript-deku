@@ -1,6 +1,8 @@
 module Deku.DOM.Attr.Draggable where
 
 import Prelude
+import Data.These (These(..))
+import Data.Tuple (fst, snd)
 
 import Deku.DOM.Elt.A (A_)
 import Deku.DOM.Elt.Abbr (Abbr_)
@@ -129,493 +131,616 @@ import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 data Draggable = Draggable
 
 instance Attr A_ Draggable String where
-  attr Draggable value = unsafeAttribute
-    { key: "draggable", value: prop' value }
+  attr Draggable bothValues  = unsafeAttribute $ Both { key: "draggable", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "draggable", value:  prop' value  })
+  pureAttr Draggable value  = unsafeAttribute $ This { key: "draggable", value:  prop' value  }
+  unpureAttr Draggable eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "draggable", value:  prop' value  }
 
 instance Attr Abbr_ Draggable String where
-  attr Draggable value = unsafeAttribute
-    { key: "draggable", value: prop' value }
+  attr Draggable bothValues  = unsafeAttribute $ Both { key: "draggable", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "draggable", value:  prop' value  })
+  pureAttr Draggable value  = unsafeAttribute $ This { key: "draggable", value:  prop' value  }
+  unpureAttr Draggable eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "draggable", value:  prop' value  }
 
 instance Attr Acronym_ Draggable String where
-  attr Draggable value = unsafeAttribute
-    { key: "draggable", value: prop' value }
+  attr Draggable bothValues  = unsafeAttribute $ Both { key: "draggable", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "draggable", value:  prop' value  })
+  pureAttr Draggable value  = unsafeAttribute $ This { key: "draggable", value:  prop' value  }
+  unpureAttr Draggable eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "draggable", value:  prop' value  }
 
 instance Attr Address_ Draggable String where
-  attr Draggable value = unsafeAttribute
-    { key: "draggable", value: prop' value }
+  attr Draggable bothValues  = unsafeAttribute $ Both { key: "draggable", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "draggable", value:  prop' value  })
+  pureAttr Draggable value  = unsafeAttribute $ This { key: "draggable", value:  prop' value  }
+  unpureAttr Draggable eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "draggable", value:  prop' value  }
 
 instance Attr Applet_ Draggable String where
-  attr Draggable value = unsafeAttribute
-    { key: "draggable", value: prop' value }
+  attr Draggable bothValues  = unsafeAttribute $ Both { key: "draggable", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "draggable", value:  prop' value  })
+  pureAttr Draggable value  = unsafeAttribute $ This { key: "draggable", value:  prop' value  }
+  unpureAttr Draggable eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "draggable", value:  prop' value  }
 
 instance Attr Area_ Draggable String where
-  attr Draggable value = unsafeAttribute
-    { key: "draggable", value: prop' value }
+  attr Draggable bothValues  = unsafeAttribute $ Both { key: "draggable", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "draggable", value:  prop' value  })
+  pureAttr Draggable value  = unsafeAttribute $ This { key: "draggable", value:  prop' value  }
+  unpureAttr Draggable eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "draggable", value:  prop' value  }
 
 instance Attr Article_ Draggable String where
-  attr Draggable value = unsafeAttribute
-    { key: "draggable", value: prop' value }
+  attr Draggable bothValues  = unsafeAttribute $ Both { key: "draggable", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "draggable", value:  prop' value  })
+  pureAttr Draggable value  = unsafeAttribute $ This { key: "draggable", value:  prop' value  }
+  unpureAttr Draggable eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "draggable", value:  prop' value  }
 
 instance Attr Aside_ Draggable String where
-  attr Draggable value = unsafeAttribute
-    { key: "draggable", value: prop' value }
+  attr Draggable bothValues  = unsafeAttribute $ Both { key: "draggable", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "draggable", value:  prop' value  })
+  pureAttr Draggable value  = unsafeAttribute $ This { key: "draggable", value:  prop' value  }
+  unpureAttr Draggable eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "draggable", value:  prop' value  }
 
 instance Attr Audio_ Draggable String where
-  attr Draggable value = unsafeAttribute
-    { key: "draggable", value: prop' value }
+  attr Draggable bothValues  = unsafeAttribute $ Both { key: "draggable", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "draggable", value:  prop' value  })
+  pureAttr Draggable value  = unsafeAttribute $ This { key: "draggable", value:  prop' value  }
+  unpureAttr Draggable eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "draggable", value:  prop' value  }
 
 instance Attr B_ Draggable String where
-  attr Draggable value = unsafeAttribute
-    { key: "draggable", value: prop' value }
+  attr Draggable bothValues  = unsafeAttribute $ Both { key: "draggable", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "draggable", value:  prop' value  })
+  pureAttr Draggable value  = unsafeAttribute $ This { key: "draggable", value:  prop' value  }
+  unpureAttr Draggable eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "draggable", value:  prop' value  }
 
 instance Attr Base_ Draggable String where
-  attr Draggable value = unsafeAttribute
-    { key: "draggable", value: prop' value }
+  attr Draggable bothValues  = unsafeAttribute $ Both { key: "draggable", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "draggable", value:  prop' value  })
+  pureAttr Draggable value  = unsafeAttribute $ This { key: "draggable", value:  prop' value  }
+  unpureAttr Draggable eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "draggable", value:  prop' value  }
 
 instance Attr Basefont_ Draggable String where
-  attr Draggable value = unsafeAttribute
-    { key: "draggable", value: prop' value }
+  attr Draggable bothValues  = unsafeAttribute $ Both { key: "draggable", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "draggable", value:  prop' value  })
+  pureAttr Draggable value  = unsafeAttribute $ This { key: "draggable", value:  prop' value  }
+  unpureAttr Draggable eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "draggable", value:  prop' value  }
 
 instance Attr Bdi_ Draggable String where
-  attr Draggable value = unsafeAttribute
-    { key: "draggable", value: prop' value }
+  attr Draggable bothValues  = unsafeAttribute $ Both { key: "draggable", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "draggable", value:  prop' value  })
+  pureAttr Draggable value  = unsafeAttribute $ This { key: "draggable", value:  prop' value  }
+  unpureAttr Draggable eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "draggable", value:  prop' value  }
 
 instance Attr Bdo_ Draggable String where
-  attr Draggable value = unsafeAttribute
-    { key: "draggable", value: prop' value }
+  attr Draggable bothValues  = unsafeAttribute $ Both { key: "draggable", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "draggable", value:  prop' value  })
+  pureAttr Draggable value  = unsafeAttribute $ This { key: "draggable", value:  prop' value  }
+  unpureAttr Draggable eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "draggable", value:  prop' value  }
 
 instance Attr Big_ Draggable String where
-  attr Draggable value = unsafeAttribute
-    { key: "draggable", value: prop' value }
+  attr Draggable bothValues  = unsafeAttribute $ Both { key: "draggable", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "draggable", value:  prop' value  })
+  pureAttr Draggable value  = unsafeAttribute $ This { key: "draggable", value:  prop' value  }
+  unpureAttr Draggable eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "draggable", value:  prop' value  }
 
 instance Attr Blockquote_ Draggable String where
-  attr Draggable value = unsafeAttribute
-    { key: "draggable", value: prop' value }
+  attr Draggable bothValues  = unsafeAttribute $ Both { key: "draggable", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "draggable", value:  prop' value  })
+  pureAttr Draggable value  = unsafeAttribute $ This { key: "draggable", value:  prop' value  }
+  unpureAttr Draggable eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "draggable", value:  prop' value  }
 
 instance Attr Body_ Draggable String where
-  attr Draggable value = unsafeAttribute
-    { key: "draggable", value: prop' value }
+  attr Draggable bothValues  = unsafeAttribute $ Both { key: "draggable", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "draggable", value:  prop' value  })
+  pureAttr Draggable value  = unsafeAttribute $ This { key: "draggable", value:  prop' value  }
+  unpureAttr Draggable eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "draggable", value:  prop' value  }
 
 instance Attr Br_ Draggable String where
-  attr Draggable value = unsafeAttribute
-    { key: "draggable", value: prop' value }
+  attr Draggable bothValues  = unsafeAttribute $ Both { key: "draggable", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "draggable", value:  prop' value  })
+  pureAttr Draggable value  = unsafeAttribute $ This { key: "draggable", value:  prop' value  }
+  unpureAttr Draggable eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "draggable", value:  prop' value  }
 
 instance Attr Button_ Draggable String where
-  attr Draggable value = unsafeAttribute
-    { key: "draggable", value: prop' value }
+  attr Draggable bothValues  = unsafeAttribute $ Both { key: "draggable", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "draggable", value:  prop' value  })
+  pureAttr Draggable value  = unsafeAttribute $ This { key: "draggable", value:  prop' value  }
+  unpureAttr Draggable eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "draggable", value:  prop' value  }
 
 instance Attr Canvas_ Draggable String where
-  attr Draggable value = unsafeAttribute
-    { key: "draggable", value: prop' value }
+  attr Draggable bothValues  = unsafeAttribute $ Both { key: "draggable", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "draggable", value:  prop' value  })
+  pureAttr Draggable value  = unsafeAttribute $ This { key: "draggable", value:  prop' value  }
+  unpureAttr Draggable eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "draggable", value:  prop' value  }
 
 instance Attr Caption_ Draggable String where
-  attr Draggable value = unsafeAttribute
-    { key: "draggable", value: prop' value }
+  attr Draggable bothValues  = unsafeAttribute $ Both { key: "draggable", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "draggable", value:  prop' value  })
+  pureAttr Draggable value  = unsafeAttribute $ This { key: "draggable", value:  prop' value  }
+  unpureAttr Draggable eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "draggable", value:  prop' value  }
 
 instance Attr Center_ Draggable String where
-  attr Draggable value = unsafeAttribute
-    { key: "draggable", value: prop' value }
+  attr Draggable bothValues  = unsafeAttribute $ Both { key: "draggable", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "draggable", value:  prop' value  })
+  pureAttr Draggable value  = unsafeAttribute $ This { key: "draggable", value:  prop' value  }
+  unpureAttr Draggable eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "draggable", value:  prop' value  }
 
 instance Attr Cite_ Draggable String where
-  attr Draggable value = unsafeAttribute
-    { key: "draggable", value: prop' value }
+  attr Draggable bothValues  = unsafeAttribute $ Both { key: "draggable", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "draggable", value:  prop' value  })
+  pureAttr Draggable value  = unsafeAttribute $ This { key: "draggable", value:  prop' value  }
+  unpureAttr Draggable eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "draggable", value:  prop' value  }
 
 instance Attr Code_ Draggable String where
-  attr Draggable value = unsafeAttribute
-    { key: "draggable", value: prop' value }
+  attr Draggable bothValues  = unsafeAttribute $ Both { key: "draggable", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "draggable", value:  prop' value  })
+  pureAttr Draggable value  = unsafeAttribute $ This { key: "draggable", value:  prop' value  }
+  unpureAttr Draggable eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "draggable", value:  prop' value  }
 
 instance Attr Col_ Draggable String where
-  attr Draggable value = unsafeAttribute
-    { key: "draggable", value: prop' value }
+  attr Draggable bothValues  = unsafeAttribute $ Both { key: "draggable", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "draggable", value:  prop' value  })
+  pureAttr Draggable value  = unsafeAttribute $ This { key: "draggable", value:  prop' value  }
+  unpureAttr Draggable eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "draggable", value:  prop' value  }
 
 instance Attr Colgroup_ Draggable String where
-  attr Draggable value = unsafeAttribute
-    { key: "draggable", value: prop' value }
+  attr Draggable bothValues  = unsafeAttribute $ Both { key: "draggable", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "draggable", value:  prop' value  })
+  pureAttr Draggable value  = unsafeAttribute $ This { key: "draggable", value:  prop' value  }
+  unpureAttr Draggable eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "draggable", value:  prop' value  }
 
 instance Attr Xdata_ Draggable String where
-  attr Draggable value = unsafeAttribute
-    { key: "draggable", value: prop' value }
+  attr Draggable bothValues  = unsafeAttribute $ Both { key: "draggable", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "draggable", value:  prop' value  })
+  pureAttr Draggable value  = unsafeAttribute $ This { key: "draggable", value:  prop' value  }
+  unpureAttr Draggable eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "draggable", value:  prop' value  }
 
 instance Attr Datalist_ Draggable String where
-  attr Draggable value = unsafeAttribute
-    { key: "draggable", value: prop' value }
+  attr Draggable bothValues  = unsafeAttribute $ Both { key: "draggable", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "draggable", value:  prop' value  })
+  pureAttr Draggable value  = unsafeAttribute $ This { key: "draggable", value:  prop' value  }
+  unpureAttr Draggable eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "draggable", value:  prop' value  }
 
 instance Attr Dd_ Draggable String where
-  attr Draggable value = unsafeAttribute
-    { key: "draggable", value: prop' value }
+  attr Draggable bothValues  = unsafeAttribute $ Both { key: "draggable", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "draggable", value:  prop' value  })
+  pureAttr Draggable value  = unsafeAttribute $ This { key: "draggable", value:  prop' value  }
+  unpureAttr Draggable eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "draggable", value:  prop' value  }
 
 instance Attr Del_ Draggable String where
-  attr Draggable value = unsafeAttribute
-    { key: "draggable", value: prop' value }
+  attr Draggable bothValues  = unsafeAttribute $ Both { key: "draggable", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "draggable", value:  prop' value  })
+  pureAttr Draggable value  = unsafeAttribute $ This { key: "draggable", value:  prop' value  }
+  unpureAttr Draggable eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "draggable", value:  prop' value  }
 
 instance Attr Details_ Draggable String where
-  attr Draggable value = unsafeAttribute
-    { key: "draggable", value: prop' value }
+  attr Draggable bothValues  = unsafeAttribute $ Both { key: "draggable", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "draggable", value:  prop' value  })
+  pureAttr Draggable value  = unsafeAttribute $ This { key: "draggable", value:  prop' value  }
+  unpureAttr Draggable eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "draggable", value:  prop' value  }
 
 instance Attr Dfn_ Draggable String where
-  attr Draggable value = unsafeAttribute
-    { key: "draggable", value: prop' value }
+  attr Draggable bothValues  = unsafeAttribute $ Both { key: "draggable", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "draggable", value:  prop' value  })
+  pureAttr Draggable value  = unsafeAttribute $ This { key: "draggable", value:  prop' value  }
+  unpureAttr Draggable eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "draggable", value:  prop' value  }
 
 instance Attr Dialog_ Draggable String where
-  attr Draggable value = unsafeAttribute
-    { key: "draggable", value: prop' value }
+  attr Draggable bothValues  = unsafeAttribute $ Both { key: "draggable", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "draggable", value:  prop' value  })
+  pureAttr Draggable value  = unsafeAttribute $ This { key: "draggable", value:  prop' value  }
+  unpureAttr Draggable eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "draggable", value:  prop' value  }
 
 instance Attr Dir_ Draggable String where
-  attr Draggable value = unsafeAttribute
-    { key: "draggable", value: prop' value }
+  attr Draggable bothValues  = unsafeAttribute $ Both { key: "draggable", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "draggable", value:  prop' value  })
+  pureAttr Draggable value  = unsafeAttribute $ This { key: "draggable", value:  prop' value  }
+  unpureAttr Draggable eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "draggable", value:  prop' value  }
 
 instance Attr Div_ Draggable String where
-  attr Draggable value = unsafeAttribute
-    { key: "draggable", value: prop' value }
+  attr Draggable bothValues  = unsafeAttribute $ Both { key: "draggable", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "draggable", value:  prop' value  })
+  pureAttr Draggable value  = unsafeAttribute $ This { key: "draggable", value:  prop' value  }
+  unpureAttr Draggable eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "draggable", value:  prop' value  }
 
 instance Attr Dl_ Draggable String where
-  attr Draggable value = unsafeAttribute
-    { key: "draggable", value: prop' value }
+  attr Draggable bothValues  = unsafeAttribute $ Both { key: "draggable", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "draggable", value:  prop' value  })
+  pureAttr Draggable value  = unsafeAttribute $ This { key: "draggable", value:  prop' value  }
+  unpureAttr Draggable eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "draggable", value:  prop' value  }
 
 instance Attr Dt_ Draggable String where
-  attr Draggable value = unsafeAttribute
-    { key: "draggable", value: prop' value }
+  attr Draggable bothValues  = unsafeAttribute $ Both { key: "draggable", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "draggable", value:  prop' value  })
+  pureAttr Draggable value  = unsafeAttribute $ This { key: "draggable", value:  prop' value  }
+  unpureAttr Draggable eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "draggable", value:  prop' value  }
 
 instance Attr Em_ Draggable String where
-  attr Draggable value = unsafeAttribute
-    { key: "draggable", value: prop' value }
+  attr Draggable bothValues  = unsafeAttribute $ Both { key: "draggable", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "draggable", value:  prop' value  })
+  pureAttr Draggable value  = unsafeAttribute $ This { key: "draggable", value:  prop' value  }
+  unpureAttr Draggable eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "draggable", value:  prop' value  }
 
 instance Attr Embed_ Draggable String where
-  attr Draggable value = unsafeAttribute
-    { key: "draggable", value: prop' value }
+  attr Draggable bothValues  = unsafeAttribute $ Both { key: "draggable", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "draggable", value:  prop' value  })
+  pureAttr Draggable value  = unsafeAttribute $ This { key: "draggable", value:  prop' value  }
+  unpureAttr Draggable eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "draggable", value:  prop' value  }
 
 instance Attr Fieldset_ Draggable String where
-  attr Draggable value = unsafeAttribute
-    { key: "draggable", value: prop' value }
+  attr Draggable bothValues  = unsafeAttribute $ Both { key: "draggable", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "draggable", value:  prop' value  })
+  pureAttr Draggable value  = unsafeAttribute $ This { key: "draggable", value:  prop' value  }
+  unpureAttr Draggable eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "draggable", value:  prop' value  }
 
 instance Attr Figcaption_ Draggable String where
-  attr Draggable value = unsafeAttribute
-    { key: "draggable", value: prop' value }
+  attr Draggable bothValues  = unsafeAttribute $ Both { key: "draggable", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "draggable", value:  prop' value  })
+  pureAttr Draggable value  = unsafeAttribute $ This { key: "draggable", value:  prop' value  }
+  unpureAttr Draggable eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "draggable", value:  prop' value  }
 
 instance Attr Figure_ Draggable String where
-  attr Draggable value = unsafeAttribute
-    { key: "draggable", value: prop' value }
+  attr Draggable bothValues  = unsafeAttribute $ Both { key: "draggable", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "draggable", value:  prop' value  })
+  pureAttr Draggable value  = unsafeAttribute $ This { key: "draggable", value:  prop' value  }
+  unpureAttr Draggable eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "draggable", value:  prop' value  }
 
 instance Attr Font_ Draggable String where
-  attr Draggable value = unsafeAttribute
-    { key: "draggable", value: prop' value }
+  attr Draggable bothValues  = unsafeAttribute $ Both { key: "draggable", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "draggable", value:  prop' value  })
+  pureAttr Draggable value  = unsafeAttribute $ This { key: "draggable", value:  prop' value  }
+  unpureAttr Draggable eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "draggable", value:  prop' value  }
 
 instance Attr Footer_ Draggable String where
-  attr Draggable value = unsafeAttribute
-    { key: "draggable", value: prop' value }
+  attr Draggable bothValues  = unsafeAttribute $ Both { key: "draggable", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "draggable", value:  prop' value  })
+  pureAttr Draggable value  = unsafeAttribute $ This { key: "draggable", value:  prop' value  }
+  unpureAttr Draggable eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "draggable", value:  prop' value  }
 
 instance Attr Form_ Draggable String where
-  attr Draggable value = unsafeAttribute
-    { key: "draggable", value: prop' value }
+  attr Draggable bothValues  = unsafeAttribute $ Both { key: "draggable", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "draggable", value:  prop' value  })
+  pureAttr Draggable value  = unsafeAttribute $ This { key: "draggable", value:  prop' value  }
+  unpureAttr Draggable eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "draggable", value:  prop' value  }
 
 instance Attr Frame_ Draggable String where
-  attr Draggable value = unsafeAttribute
-    { key: "draggable", value: prop' value }
+  attr Draggable bothValues  = unsafeAttribute $ Both { key: "draggable", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "draggable", value:  prop' value  })
+  pureAttr Draggable value  = unsafeAttribute $ This { key: "draggable", value:  prop' value  }
+  unpureAttr Draggable eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "draggable", value:  prop' value  }
 
 instance Attr Frameset_ Draggable String where
-  attr Draggable value = unsafeAttribute
-    { key: "draggable", value: prop' value }
+  attr Draggable bothValues  = unsafeAttribute $ Both { key: "draggable", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "draggable", value:  prop' value  })
+  pureAttr Draggable value  = unsafeAttribute $ This { key: "draggable", value:  prop' value  }
+  unpureAttr Draggable eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "draggable", value:  prop' value  }
 
 instance Attr H1_ Draggable String where
-  attr Draggable value = unsafeAttribute
-    { key: "draggable", value: prop' value }
+  attr Draggable bothValues  = unsafeAttribute $ Both { key: "draggable", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "draggable", value:  prop' value  })
+  pureAttr Draggable value  = unsafeAttribute $ This { key: "draggable", value:  prop' value  }
+  unpureAttr Draggable eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "draggable", value:  prop' value  }
 
 instance Attr H2_ Draggable String where
-  attr Draggable value = unsafeAttribute
-    { key: "draggable", value: prop' value }
+  attr Draggable bothValues  = unsafeAttribute $ Both { key: "draggable", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "draggable", value:  prop' value  })
+  pureAttr Draggable value  = unsafeAttribute $ This { key: "draggable", value:  prop' value  }
+  unpureAttr Draggable eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "draggable", value:  prop' value  }
 
 instance Attr H3_ Draggable String where
-  attr Draggable value = unsafeAttribute
-    { key: "draggable", value: prop' value }
+  attr Draggable bothValues  = unsafeAttribute $ Both { key: "draggable", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "draggable", value:  prop' value  })
+  pureAttr Draggable value  = unsafeAttribute $ This { key: "draggable", value:  prop' value  }
+  unpureAttr Draggable eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "draggable", value:  prop' value  }
 
 instance Attr H4_ Draggable String where
-  attr Draggable value = unsafeAttribute
-    { key: "draggable", value: prop' value }
+  attr Draggable bothValues  = unsafeAttribute $ Both { key: "draggable", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "draggable", value:  prop' value  })
+  pureAttr Draggable value  = unsafeAttribute $ This { key: "draggable", value:  prop' value  }
+  unpureAttr Draggable eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "draggable", value:  prop' value  }
 
 instance Attr H5_ Draggable String where
-  attr Draggable value = unsafeAttribute
-    { key: "draggable", value: prop' value }
+  attr Draggable bothValues  = unsafeAttribute $ Both { key: "draggable", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "draggable", value:  prop' value  })
+  pureAttr Draggable value  = unsafeAttribute $ This { key: "draggable", value:  prop' value  }
+  unpureAttr Draggable eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "draggable", value:  prop' value  }
 
 instance Attr H6_ Draggable String where
-  attr Draggable value = unsafeAttribute
-    { key: "draggable", value: prop' value }
+  attr Draggable bothValues  = unsafeAttribute $ Both { key: "draggable", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "draggable", value:  prop' value  })
+  pureAttr Draggable value  = unsafeAttribute $ This { key: "draggable", value:  prop' value  }
+  unpureAttr Draggable eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "draggable", value:  prop' value  }
 
 instance Attr Head_ Draggable String where
-  attr Draggable value = unsafeAttribute
-    { key: "draggable", value: prop' value }
+  attr Draggable bothValues  = unsafeAttribute $ Both { key: "draggable", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "draggable", value:  prop' value  })
+  pureAttr Draggable value  = unsafeAttribute $ This { key: "draggable", value:  prop' value  }
+  unpureAttr Draggable eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "draggable", value:  prop' value  }
 
 instance Attr Header_ Draggable String where
-  attr Draggable value = unsafeAttribute
-    { key: "draggable", value: prop' value }
+  attr Draggable bothValues  = unsafeAttribute $ Both { key: "draggable", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "draggable", value:  prop' value  })
+  pureAttr Draggable value  = unsafeAttribute $ This { key: "draggable", value:  prop' value  }
+  unpureAttr Draggable eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "draggable", value:  prop' value  }
 
 instance Attr Hr_ Draggable String where
-  attr Draggable value = unsafeAttribute
-    { key: "draggable", value: prop' value }
+  attr Draggable bothValues  = unsafeAttribute $ Both { key: "draggable", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "draggable", value:  prop' value  })
+  pureAttr Draggable value  = unsafeAttribute $ This { key: "draggable", value:  prop' value  }
+  unpureAttr Draggable eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "draggable", value:  prop' value  }
 
 instance Attr Html_ Draggable String where
-  attr Draggable value = unsafeAttribute
-    { key: "draggable", value: prop' value }
+  attr Draggable bothValues  = unsafeAttribute $ Both { key: "draggable", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "draggable", value:  prop' value  })
+  pureAttr Draggable value  = unsafeAttribute $ This { key: "draggable", value:  prop' value  }
+  unpureAttr Draggable eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "draggable", value:  prop' value  }
 
 instance Attr I_ Draggable String where
-  attr Draggable value = unsafeAttribute
-    { key: "draggable", value: prop' value }
+  attr Draggable bothValues  = unsafeAttribute $ Both { key: "draggable", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "draggable", value:  prop' value  })
+  pureAttr Draggable value  = unsafeAttribute $ This { key: "draggable", value:  prop' value  }
+  unpureAttr Draggable eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "draggable", value:  prop' value  }
 
 instance Attr Iframe_ Draggable String where
-  attr Draggable value = unsafeAttribute
-    { key: "draggable", value: prop' value }
+  attr Draggable bothValues  = unsafeAttribute $ Both { key: "draggable", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "draggable", value:  prop' value  })
+  pureAttr Draggable value  = unsafeAttribute $ This { key: "draggable", value:  prop' value  }
+  unpureAttr Draggable eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "draggable", value:  prop' value  }
 
 instance Attr Img_ Draggable String where
-  attr Draggable value = unsafeAttribute
-    { key: "draggable", value: prop' value }
+  attr Draggable bothValues  = unsafeAttribute $ Both { key: "draggable", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "draggable", value:  prop' value  })
+  pureAttr Draggable value  = unsafeAttribute $ This { key: "draggable", value:  prop' value  }
+  unpureAttr Draggable eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "draggable", value:  prop' value  }
 
 instance Attr Input_ Draggable String where
-  attr Draggable value = unsafeAttribute
-    { key: "draggable", value: prop' value }
+  attr Draggable bothValues  = unsafeAttribute $ Both { key: "draggable", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "draggable", value:  prop' value  })
+  pureAttr Draggable value  = unsafeAttribute $ This { key: "draggable", value:  prop' value  }
+  unpureAttr Draggable eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "draggable", value:  prop' value  }
 
 instance Attr Ins_ Draggable String where
-  attr Draggable value = unsafeAttribute
-    { key: "draggable", value: prop' value }
+  attr Draggable bothValues  = unsafeAttribute $ Both { key: "draggable", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "draggable", value:  prop' value  })
+  pureAttr Draggable value  = unsafeAttribute $ This { key: "draggable", value:  prop' value  }
+  unpureAttr Draggable eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "draggable", value:  prop' value  }
 
 instance Attr Kbd_ Draggable String where
-  attr Draggable value = unsafeAttribute
-    { key: "draggable", value: prop' value }
+  attr Draggable bothValues  = unsafeAttribute $ Both { key: "draggable", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "draggable", value:  prop' value  })
+  pureAttr Draggable value  = unsafeAttribute $ This { key: "draggable", value:  prop' value  }
+  unpureAttr Draggable eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "draggable", value:  prop' value  }
 
 instance Attr Label_ Draggable String where
-  attr Draggable value = unsafeAttribute
-    { key: "draggable", value: prop' value }
+  attr Draggable bothValues  = unsafeAttribute $ Both { key: "draggable", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "draggable", value:  prop' value  })
+  pureAttr Draggable value  = unsafeAttribute $ This { key: "draggable", value:  prop' value  }
+  unpureAttr Draggable eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "draggable", value:  prop' value  }
 
 instance Attr Legend_ Draggable String where
-  attr Draggable value = unsafeAttribute
-    { key: "draggable", value: prop' value }
+  attr Draggable bothValues  = unsafeAttribute $ Both { key: "draggable", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "draggable", value:  prop' value  })
+  pureAttr Draggable value  = unsafeAttribute $ This { key: "draggable", value:  prop' value  }
+  unpureAttr Draggable eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "draggable", value:  prop' value  }
 
 instance Attr Li_ Draggable String where
-  attr Draggable value = unsafeAttribute
-    { key: "draggable", value: prop' value }
+  attr Draggable bothValues  = unsafeAttribute $ Both { key: "draggable", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "draggable", value:  prop' value  })
+  pureAttr Draggable value  = unsafeAttribute $ This { key: "draggable", value:  prop' value  }
+  unpureAttr Draggable eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "draggable", value:  prop' value  }
 
 instance Attr Link_ Draggable String where
-  attr Draggable value = unsafeAttribute
-    { key: "draggable", value: prop' value }
+  attr Draggable bothValues  = unsafeAttribute $ Both { key: "draggable", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "draggable", value:  prop' value  })
+  pureAttr Draggable value  = unsafeAttribute $ This { key: "draggable", value:  prop' value  }
+  unpureAttr Draggable eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "draggable", value:  prop' value  }
 
 instance Attr Main_ Draggable String where
-  attr Draggable value = unsafeAttribute
-    { key: "draggable", value: prop' value }
+  attr Draggable bothValues  = unsafeAttribute $ Both { key: "draggable", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "draggable", value:  prop' value  })
+  pureAttr Draggable value  = unsafeAttribute $ This { key: "draggable", value:  prop' value  }
+  unpureAttr Draggable eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "draggable", value:  prop' value  }
 
 instance Attr Map_ Draggable String where
-  attr Draggable value = unsafeAttribute
-    { key: "draggable", value: prop' value }
+  attr Draggable bothValues  = unsafeAttribute $ Both { key: "draggable", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "draggable", value:  prop' value  })
+  pureAttr Draggable value  = unsafeAttribute $ This { key: "draggable", value:  prop' value  }
+  unpureAttr Draggable eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "draggable", value:  prop' value  }
 
 instance Attr Mark_ Draggable String where
-  attr Draggable value = unsafeAttribute
-    { key: "draggable", value: prop' value }
+  attr Draggable bothValues  = unsafeAttribute $ Both { key: "draggable", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "draggable", value:  prop' value  })
+  pureAttr Draggable value  = unsafeAttribute $ This { key: "draggable", value:  prop' value  }
+  unpureAttr Draggable eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "draggable", value:  prop' value  }
 
 instance Attr Meta_ Draggable String where
-  attr Draggable value = unsafeAttribute
-    { key: "draggable", value: prop' value }
+  attr Draggable bothValues  = unsafeAttribute $ Both { key: "draggable", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "draggable", value:  prop' value  })
+  pureAttr Draggable value  = unsafeAttribute $ This { key: "draggable", value:  prop' value  }
+  unpureAttr Draggable eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "draggable", value:  prop' value  }
 
 instance Attr Meter_ Draggable String where
-  attr Draggable value = unsafeAttribute
-    { key: "draggable", value: prop' value }
+  attr Draggable bothValues  = unsafeAttribute $ Both { key: "draggable", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "draggable", value:  prop' value  })
+  pureAttr Draggable value  = unsafeAttribute $ This { key: "draggable", value:  prop' value  }
+  unpureAttr Draggable eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "draggable", value:  prop' value  }
 
 instance Attr Nav_ Draggable String where
-  attr Draggable value = unsafeAttribute
-    { key: "draggable", value: prop' value }
+  attr Draggable bothValues  = unsafeAttribute $ Both { key: "draggable", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "draggable", value:  prop' value  })
+  pureAttr Draggable value  = unsafeAttribute $ This { key: "draggable", value:  prop' value  }
+  unpureAttr Draggable eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "draggable", value:  prop' value  }
 
 instance Attr Noframes_ Draggable String where
-  attr Draggable value = unsafeAttribute
-    { key: "draggable", value: prop' value }
+  attr Draggable bothValues  = unsafeAttribute $ Both { key: "draggable", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "draggable", value:  prop' value  })
+  pureAttr Draggable value  = unsafeAttribute $ This { key: "draggable", value:  prop' value  }
+  unpureAttr Draggable eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "draggable", value:  prop' value  }
 
 instance Attr Noscript_ Draggable String where
-  attr Draggable value = unsafeAttribute
-    { key: "draggable", value: prop' value }
+  attr Draggable bothValues  = unsafeAttribute $ Both { key: "draggable", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "draggable", value:  prop' value  })
+  pureAttr Draggable value  = unsafeAttribute $ This { key: "draggable", value:  prop' value  }
+  unpureAttr Draggable eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "draggable", value:  prop' value  }
 
 instance Attr Object_ Draggable String where
-  attr Draggable value = unsafeAttribute
-    { key: "draggable", value: prop' value }
+  attr Draggable bothValues  = unsafeAttribute $ Both { key: "draggable", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "draggable", value:  prop' value  })
+  pureAttr Draggable value  = unsafeAttribute $ This { key: "draggable", value:  prop' value  }
+  unpureAttr Draggable eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "draggable", value:  prop' value  }
 
 instance Attr Ol_ Draggable String where
-  attr Draggable value = unsafeAttribute
-    { key: "draggable", value: prop' value }
+  attr Draggable bothValues  = unsafeAttribute $ Both { key: "draggable", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "draggable", value:  prop' value  })
+  pureAttr Draggable value  = unsafeAttribute $ This { key: "draggable", value:  prop' value  }
+  unpureAttr Draggable eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "draggable", value:  prop' value  }
 
 instance Attr Optgroup_ Draggable String where
-  attr Draggable value = unsafeAttribute
-    { key: "draggable", value: prop' value }
+  attr Draggable bothValues  = unsafeAttribute $ Both { key: "draggable", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "draggable", value:  prop' value  })
+  pureAttr Draggable value  = unsafeAttribute $ This { key: "draggable", value:  prop' value  }
+  unpureAttr Draggable eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "draggable", value:  prop' value  }
 
 instance Attr Option_ Draggable String where
-  attr Draggable value = unsafeAttribute
-    { key: "draggable", value: prop' value }
+  attr Draggable bothValues  = unsafeAttribute $ Both { key: "draggable", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "draggable", value:  prop' value  })
+  pureAttr Draggable value  = unsafeAttribute $ This { key: "draggable", value:  prop' value  }
+  unpureAttr Draggable eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "draggable", value:  prop' value  }
 
 instance Attr Output_ Draggable String where
-  attr Draggable value = unsafeAttribute
-    { key: "draggable", value: prop' value }
+  attr Draggable bothValues  = unsafeAttribute $ Both { key: "draggable", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "draggable", value:  prop' value  })
+  pureAttr Draggable value  = unsafeAttribute $ This { key: "draggable", value:  prop' value  }
+  unpureAttr Draggable eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "draggable", value:  prop' value  }
 
 instance Attr P_ Draggable String where
-  attr Draggable value = unsafeAttribute
-    { key: "draggable", value: prop' value }
+  attr Draggable bothValues  = unsafeAttribute $ Both { key: "draggable", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "draggable", value:  prop' value  })
+  pureAttr Draggable value  = unsafeAttribute $ This { key: "draggable", value:  prop' value  }
+  unpureAttr Draggable eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "draggable", value:  prop' value  }
 
 instance Attr Param_ Draggable String where
-  attr Draggable value = unsafeAttribute
-    { key: "draggable", value: prop' value }
+  attr Draggable bothValues  = unsafeAttribute $ Both { key: "draggable", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "draggable", value:  prop' value  })
+  pureAttr Draggable value  = unsafeAttribute $ This { key: "draggable", value:  prop' value  }
+  unpureAttr Draggable eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "draggable", value:  prop' value  }
 
 instance Attr Picture_ Draggable String where
-  attr Draggable value = unsafeAttribute
-    { key: "draggable", value: prop' value }
+  attr Draggable bothValues  = unsafeAttribute $ Both { key: "draggable", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "draggable", value:  prop' value  })
+  pureAttr Draggable value  = unsafeAttribute $ This { key: "draggable", value:  prop' value  }
+  unpureAttr Draggable eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "draggable", value:  prop' value  }
 
 instance Attr Pre_ Draggable String where
-  attr Draggable value = unsafeAttribute
-    { key: "draggable", value: prop' value }
+  attr Draggable bothValues  = unsafeAttribute $ Both { key: "draggable", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "draggable", value:  prop' value  })
+  pureAttr Draggable value  = unsafeAttribute $ This { key: "draggable", value:  prop' value  }
+  unpureAttr Draggable eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "draggable", value:  prop' value  }
 
 instance Attr Progress_ Draggable String where
-  attr Draggable value = unsafeAttribute
-    { key: "draggable", value: prop' value }
+  attr Draggable bothValues  = unsafeAttribute $ Both { key: "draggable", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "draggable", value:  prop' value  })
+  pureAttr Draggable value  = unsafeAttribute $ This { key: "draggable", value:  prop' value  }
+  unpureAttr Draggable eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "draggable", value:  prop' value  }
 
 instance Attr Q_ Draggable String where
-  attr Draggable value = unsafeAttribute
-    { key: "draggable", value: prop' value }
+  attr Draggable bothValues  = unsafeAttribute $ Both { key: "draggable", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "draggable", value:  prop' value  })
+  pureAttr Draggable value  = unsafeAttribute $ This { key: "draggable", value:  prop' value  }
+  unpureAttr Draggable eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "draggable", value:  prop' value  }
 
 instance Attr Rp_ Draggable String where
-  attr Draggable value = unsafeAttribute
-    { key: "draggable", value: prop' value }
+  attr Draggable bothValues  = unsafeAttribute $ Both { key: "draggable", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "draggable", value:  prop' value  })
+  pureAttr Draggable value  = unsafeAttribute $ This { key: "draggable", value:  prop' value  }
+  unpureAttr Draggable eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "draggable", value:  prop' value  }
 
 instance Attr Rt_ Draggable String where
-  attr Draggable value = unsafeAttribute
-    { key: "draggable", value: prop' value }
+  attr Draggable bothValues  = unsafeAttribute $ Both { key: "draggable", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "draggable", value:  prop' value  })
+  pureAttr Draggable value  = unsafeAttribute $ This { key: "draggable", value:  prop' value  }
+  unpureAttr Draggable eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "draggable", value:  prop' value  }
 
 instance Attr Ruby_ Draggable String where
-  attr Draggable value = unsafeAttribute
-    { key: "draggable", value: prop' value }
+  attr Draggable bothValues  = unsafeAttribute $ Both { key: "draggable", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "draggable", value:  prop' value  })
+  pureAttr Draggable value  = unsafeAttribute $ This { key: "draggable", value:  prop' value  }
+  unpureAttr Draggable eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "draggable", value:  prop' value  }
 
 instance Attr S_ Draggable String where
-  attr Draggable value = unsafeAttribute
-    { key: "draggable", value: prop' value }
+  attr Draggable bothValues  = unsafeAttribute $ Both { key: "draggable", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "draggable", value:  prop' value  })
+  pureAttr Draggable value  = unsafeAttribute $ This { key: "draggable", value:  prop' value  }
+  unpureAttr Draggable eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "draggable", value:  prop' value  }
 
 instance Attr Samp_ Draggable String where
-  attr Draggable value = unsafeAttribute
-    { key: "draggable", value: prop' value }
+  attr Draggable bothValues  = unsafeAttribute $ Both { key: "draggable", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "draggable", value:  prop' value  })
+  pureAttr Draggable value  = unsafeAttribute $ This { key: "draggable", value:  prop' value  }
+  unpureAttr Draggable eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "draggable", value:  prop' value  }
 
 instance Attr Script_ Draggable String where
-  attr Draggable value = unsafeAttribute
-    { key: "draggable", value: prop' value }
+  attr Draggable bothValues  = unsafeAttribute $ Both { key: "draggable", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "draggable", value:  prop' value  })
+  pureAttr Draggable value  = unsafeAttribute $ This { key: "draggable", value:  prop' value  }
+  unpureAttr Draggable eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "draggable", value:  prop' value  }
 
 instance Attr Section_ Draggable String where
-  attr Draggable value = unsafeAttribute
-    { key: "draggable", value: prop' value }
+  attr Draggable bothValues  = unsafeAttribute $ Both { key: "draggable", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "draggable", value:  prop' value  })
+  pureAttr Draggable value  = unsafeAttribute $ This { key: "draggable", value:  prop' value  }
+  unpureAttr Draggable eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "draggable", value:  prop' value  }
 
 instance Attr Select_ Draggable String where
-  attr Draggable value = unsafeAttribute
-    { key: "draggable", value: prop' value }
+  attr Draggable bothValues  = unsafeAttribute $ Both { key: "draggable", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "draggable", value:  prop' value  })
+  pureAttr Draggable value  = unsafeAttribute $ This { key: "draggable", value:  prop' value  }
+  unpureAttr Draggable eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "draggable", value:  prop' value  }
 
 instance Attr Small_ Draggable String where
-  attr Draggable value = unsafeAttribute
-    { key: "draggable", value: prop' value }
+  attr Draggable bothValues  = unsafeAttribute $ Both { key: "draggable", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "draggable", value:  prop' value  })
+  pureAttr Draggable value  = unsafeAttribute $ This { key: "draggable", value:  prop' value  }
+  unpureAttr Draggable eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "draggable", value:  prop' value  }
 
 instance Attr Source_ Draggable String where
-  attr Draggable value = unsafeAttribute
-    { key: "draggable", value: prop' value }
+  attr Draggable bothValues  = unsafeAttribute $ Both { key: "draggable", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "draggable", value:  prop' value  })
+  pureAttr Draggable value  = unsafeAttribute $ This { key: "draggable", value:  prop' value  }
+  unpureAttr Draggable eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "draggable", value:  prop' value  }
 
 instance Attr Span_ Draggable String where
-  attr Draggable value = unsafeAttribute
-    { key: "draggable", value: prop' value }
+  attr Draggable bothValues  = unsafeAttribute $ Both { key: "draggable", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "draggable", value:  prop' value  })
+  pureAttr Draggable value  = unsafeAttribute $ This { key: "draggable", value:  prop' value  }
+  unpureAttr Draggable eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "draggable", value:  prop' value  }
 
 instance Attr Strike_ Draggable String where
-  attr Draggable value = unsafeAttribute
-    { key: "draggable", value: prop' value }
+  attr Draggable bothValues  = unsafeAttribute $ Both { key: "draggable", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "draggable", value:  prop' value  })
+  pureAttr Draggable value  = unsafeAttribute $ This { key: "draggable", value:  prop' value  }
+  unpureAttr Draggable eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "draggable", value:  prop' value  }
 
 instance Attr Strong_ Draggable String where
-  attr Draggable value = unsafeAttribute
-    { key: "draggable", value: prop' value }
+  attr Draggable bothValues  = unsafeAttribute $ Both { key: "draggable", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "draggable", value:  prop' value  })
+  pureAttr Draggable value  = unsafeAttribute $ This { key: "draggable", value:  prop' value  }
+  unpureAttr Draggable eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "draggable", value:  prop' value  }
 
 instance Attr Style_ Draggable String where
-  attr Draggable value = unsafeAttribute
-    { key: "draggable", value: prop' value }
+  attr Draggable bothValues  = unsafeAttribute $ Both { key: "draggable", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "draggable", value:  prop' value  })
+  pureAttr Draggable value  = unsafeAttribute $ This { key: "draggable", value:  prop' value  }
+  unpureAttr Draggable eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "draggable", value:  prop' value  }
 
 instance Attr Sub_ Draggable String where
-  attr Draggable value = unsafeAttribute
-    { key: "draggable", value: prop' value }
+  attr Draggable bothValues  = unsafeAttribute $ Both { key: "draggable", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "draggable", value:  prop' value  })
+  pureAttr Draggable value  = unsafeAttribute $ This { key: "draggable", value:  prop' value  }
+  unpureAttr Draggable eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "draggable", value:  prop' value  }
 
 instance Attr Summary_ Draggable String where
-  attr Draggable value = unsafeAttribute
-    { key: "draggable", value: prop' value }
+  attr Draggable bothValues  = unsafeAttribute $ Both { key: "draggable", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "draggable", value:  prop' value  })
+  pureAttr Draggable value  = unsafeAttribute $ This { key: "draggable", value:  prop' value  }
+  unpureAttr Draggable eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "draggable", value:  prop' value  }
 
 instance Attr Sup_ Draggable String where
-  attr Draggable value = unsafeAttribute
-    { key: "draggable", value: prop' value }
+  attr Draggable bothValues  = unsafeAttribute $ Both { key: "draggable", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "draggable", value:  prop' value  })
+  pureAttr Draggable value  = unsafeAttribute $ This { key: "draggable", value:  prop' value  }
+  unpureAttr Draggable eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "draggable", value:  prop' value  }
 
 instance Attr Svg_ Draggable String where
-  attr Draggable value = unsafeAttribute
-    { key: "draggable", value: prop' value }
+  attr Draggable bothValues  = unsafeAttribute $ Both { key: "draggable", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "draggable", value:  prop' value  })
+  pureAttr Draggable value  = unsafeAttribute $ This { key: "draggable", value:  prop' value  }
+  unpureAttr Draggable eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "draggable", value:  prop' value  }
 
 instance Attr Table_ Draggable String where
-  attr Draggable value = unsafeAttribute
-    { key: "draggable", value: prop' value }
+  attr Draggable bothValues  = unsafeAttribute $ Both { key: "draggable", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "draggable", value:  prop' value  })
+  pureAttr Draggable value  = unsafeAttribute $ This { key: "draggable", value:  prop' value  }
+  unpureAttr Draggable eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "draggable", value:  prop' value  }
 
 instance Attr Tbody_ Draggable String where
-  attr Draggable value = unsafeAttribute
-    { key: "draggable", value: prop' value }
+  attr Draggable bothValues  = unsafeAttribute $ Both { key: "draggable", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "draggable", value:  prop' value  })
+  pureAttr Draggable value  = unsafeAttribute $ This { key: "draggable", value:  prop' value  }
+  unpureAttr Draggable eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "draggable", value:  prop' value  }
 
 instance Attr Td_ Draggable String where
-  attr Draggable value = unsafeAttribute
-    { key: "draggable", value: prop' value }
+  attr Draggable bothValues  = unsafeAttribute $ Both { key: "draggable", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "draggable", value:  prop' value  })
+  pureAttr Draggable value  = unsafeAttribute $ This { key: "draggable", value:  prop' value  }
+  unpureAttr Draggable eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "draggable", value:  prop' value  }
 
 instance Attr Template_ Draggable String where
-  attr Draggable value = unsafeAttribute
-    { key: "draggable", value: prop' value }
+  attr Draggable bothValues  = unsafeAttribute $ Both { key: "draggable", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "draggable", value:  prop' value  })
+  pureAttr Draggable value  = unsafeAttribute $ This { key: "draggable", value:  prop' value  }
+  unpureAttr Draggable eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "draggable", value:  prop' value  }
 
 instance Attr Textarea_ Draggable String where
-  attr Draggable value = unsafeAttribute
-    { key: "draggable", value: prop' value }
+  attr Draggable bothValues  = unsafeAttribute $ Both { key: "draggable", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "draggable", value:  prop' value  })
+  pureAttr Draggable value  = unsafeAttribute $ This { key: "draggable", value:  prop' value  }
+  unpureAttr Draggable eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "draggable", value:  prop' value  }
 
 instance Attr Tfoot_ Draggable String where
-  attr Draggable value = unsafeAttribute
-    { key: "draggable", value: prop' value }
+  attr Draggable bothValues  = unsafeAttribute $ Both { key: "draggable", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "draggable", value:  prop' value  })
+  pureAttr Draggable value  = unsafeAttribute $ This { key: "draggable", value:  prop' value  }
+  unpureAttr Draggable eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "draggable", value:  prop' value  }
 
 instance Attr Th_ Draggable String where
-  attr Draggable value = unsafeAttribute
-    { key: "draggable", value: prop' value }
+  attr Draggable bothValues  = unsafeAttribute $ Both { key: "draggable", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "draggable", value:  prop' value  })
+  pureAttr Draggable value  = unsafeAttribute $ This { key: "draggable", value:  prop' value  }
+  unpureAttr Draggable eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "draggable", value:  prop' value  }
 
 instance Attr Thead_ Draggable String where
-  attr Draggable value = unsafeAttribute
-    { key: "draggable", value: prop' value }
+  attr Draggable bothValues  = unsafeAttribute $ Both { key: "draggable", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "draggable", value:  prop' value  })
+  pureAttr Draggable value  = unsafeAttribute $ This { key: "draggable", value:  prop' value  }
+  unpureAttr Draggable eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "draggable", value:  prop' value  }
 
 instance Attr Time_ Draggable String where
-  attr Draggable value = unsafeAttribute
-    { key: "draggable", value: prop' value }
+  attr Draggable bothValues  = unsafeAttribute $ Both { key: "draggable", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "draggable", value:  prop' value  })
+  pureAttr Draggable value  = unsafeAttribute $ This { key: "draggable", value:  prop' value  }
+  unpureAttr Draggable eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "draggable", value:  prop' value  }
 
 instance Attr Title_ Draggable String where
-  attr Draggable value = unsafeAttribute
-    { key: "draggable", value: prop' value }
+  attr Draggable bothValues  = unsafeAttribute $ Both { key: "draggable", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "draggable", value:  prop' value  })
+  pureAttr Draggable value  = unsafeAttribute $ This { key: "draggable", value:  prop' value  }
+  unpureAttr Draggable eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "draggable", value:  prop' value  }
 
 instance Attr Tr_ Draggable String where
-  attr Draggable value = unsafeAttribute
-    { key: "draggable", value: prop' value }
+  attr Draggable bothValues  = unsafeAttribute $ Both { key: "draggable", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "draggable", value:  prop' value  })
+  pureAttr Draggable value  = unsafeAttribute $ This { key: "draggable", value:  prop' value  }
+  unpureAttr Draggable eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "draggable", value:  prop' value  }
 
 instance Attr Track_ Draggable String where
-  attr Draggable value = unsafeAttribute
-    { key: "draggable", value: prop' value }
+  attr Draggable bothValues  = unsafeAttribute $ Both { key: "draggable", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "draggable", value:  prop' value  })
+  pureAttr Draggable value  = unsafeAttribute $ This { key: "draggable", value:  prop' value  }
+  unpureAttr Draggable eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "draggable", value:  prop' value  }
 
 instance Attr Tt_ Draggable String where
-  attr Draggable value = unsafeAttribute
-    { key: "draggable", value: prop' value }
+  attr Draggable bothValues  = unsafeAttribute $ Both { key: "draggable", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "draggable", value:  prop' value  })
+  pureAttr Draggable value  = unsafeAttribute $ This { key: "draggable", value:  prop' value  }
+  unpureAttr Draggable eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "draggable", value:  prop' value  }
 
 instance Attr U_ Draggable String where
-  attr Draggable value = unsafeAttribute
-    { key: "draggable", value: prop' value }
+  attr Draggable bothValues  = unsafeAttribute $ Both { key: "draggable", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "draggable", value:  prop' value  })
+  pureAttr Draggable value  = unsafeAttribute $ This { key: "draggable", value:  prop' value  }
+  unpureAttr Draggable eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "draggable", value:  prop' value  }
 
 instance Attr Ul_ Draggable String where
-  attr Draggable value = unsafeAttribute
-    { key: "draggable", value: prop' value }
+  attr Draggable bothValues  = unsafeAttribute $ Both { key: "draggable", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "draggable", value:  prop' value  })
+  pureAttr Draggable value  = unsafeAttribute $ This { key: "draggable", value:  prop' value  }
+  unpureAttr Draggable eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "draggable", value:  prop' value  }
 
 instance Attr Var_ Draggable String where
-  attr Draggable value = unsafeAttribute
-    { key: "draggable", value: prop' value }
+  attr Draggable bothValues  = unsafeAttribute $ Both { key: "draggable", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "draggable", value:  prop' value  })
+  pureAttr Draggable value  = unsafeAttribute $ This { key: "draggable", value:  prop' value  }
+  unpureAttr Draggable eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "draggable", value:  prop' value  }
 
 instance Attr Video_ Draggable String where
-  attr Draggable value = unsafeAttribute
-    { key: "draggable", value: prop' value }
+  attr Draggable bothValues  = unsafeAttribute $ Both { key: "draggable", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "draggable", value:  prop' value  })
+  pureAttr Draggable value  = unsafeAttribute $ This { key: "draggable", value:  prop' value  }
+  unpureAttr Draggable eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "draggable", value:  prop' value  }
 
 instance Attr Wbr_ Draggable String where
-  attr Draggable value = unsafeAttribute
-    { key: "draggable", value: prop' value }
+  attr Draggable bothValues  = unsafeAttribute $ Both { key: "draggable", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "draggable", value:  prop' value  })
+  pureAttr Draggable value  = unsafeAttribute $ This { key: "draggable", value:  prop' value  }
+  unpureAttr Draggable eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "draggable", value:  prop' value  }
 
 instance Attr everything Draggable Unit where
-  attr Draggable _ = unsafeAttribute
-    { key: "draggable", value: unset' }
+  attr Draggable bothValues  = unsafeAttribute $ Both { key: "draggable", value:  unset'  } (snd bothValues <#> \_ -> { key: "draggable", value:  unset'  })
+  pureAttr Draggable _  = unsafeAttribute $ This { key: "draggable", value:  unset'  }
+  unpureAttr Draggable eventValue  = unsafeAttribute $ That $ eventValue <#> \_ -> { key: "draggable", value:  unset'  }

@@ -1,6 +1,8 @@
 module Deku.DOM.Attr.StrokeLinejoin where
 
 import Prelude
+import Data.These (These(..))
+import Data.Tuple (fst, snd)
 
 import Deku.DOM.Elt.Use (Use_)
 import Deku.DOM.Elt.Tspan (Tspan_)
@@ -48,169 +50,211 @@ import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 data StrokeLinejoin = StrokeLinejoin
 
 instance Attr Circle_ StrokeLinejoin String where
-  attr StrokeLinejoin value = unsafeAttribute
-    { key: "stroke-linejoin", value: prop' value }
+  attr StrokeLinejoin bothValues  = unsafeAttribute $ Both { key: "stroke-linejoin", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "stroke-linejoin", value:  prop' value  })
+  pureAttr StrokeLinejoin value  = unsafeAttribute $ This { key: "stroke-linejoin", value:  prop' value  }
+  unpureAttr StrokeLinejoin eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "stroke-linejoin", value:  prop' value  }
 
 instance Attr ClipPath_ StrokeLinejoin String where
-  attr StrokeLinejoin value = unsafeAttribute
-    { key: "stroke-linejoin", value: prop' value }
+  attr StrokeLinejoin bothValues  = unsafeAttribute $ Both { key: "stroke-linejoin", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "stroke-linejoin", value:  prop' value  })
+  pureAttr StrokeLinejoin value  = unsafeAttribute $ This { key: "stroke-linejoin", value:  prop' value  }
+  unpureAttr StrokeLinejoin eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "stroke-linejoin", value:  prop' value  }
 
 instance Attr Defs_ StrokeLinejoin String where
-  attr StrokeLinejoin value = unsafeAttribute
-    { key: "stroke-linejoin", value: prop' value }
+  attr StrokeLinejoin bothValues  = unsafeAttribute $ Both { key: "stroke-linejoin", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "stroke-linejoin", value:  prop' value  })
+  pureAttr StrokeLinejoin value  = unsafeAttribute $ This { key: "stroke-linejoin", value:  prop' value  }
+  unpureAttr StrokeLinejoin eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "stroke-linejoin", value:  prop' value  }
 
 instance Attr Ellipse_ StrokeLinejoin String where
-  attr StrokeLinejoin value = unsafeAttribute
-    { key: "stroke-linejoin", value: prop' value }
+  attr StrokeLinejoin bothValues  = unsafeAttribute $ Both { key: "stroke-linejoin", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "stroke-linejoin", value:  prop' value  })
+  pureAttr StrokeLinejoin value  = unsafeAttribute $ This { key: "stroke-linejoin", value:  prop' value  }
+  unpureAttr StrokeLinejoin eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "stroke-linejoin", value:  prop' value  }
 
 instance Attr FeBlend_ StrokeLinejoin String where
-  attr StrokeLinejoin value = unsafeAttribute
-    { key: "stroke-linejoin", value: prop' value }
+  attr StrokeLinejoin bothValues  = unsafeAttribute $ Both { key: "stroke-linejoin", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "stroke-linejoin", value:  prop' value  })
+  pureAttr StrokeLinejoin value  = unsafeAttribute $ This { key: "stroke-linejoin", value:  prop' value  }
+  unpureAttr StrokeLinejoin eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "stroke-linejoin", value:  prop' value  }
 
 instance Attr FeColorMatrix_ StrokeLinejoin String where
-  attr StrokeLinejoin value = unsafeAttribute
-    { key: "stroke-linejoin", value: prop' value }
+  attr StrokeLinejoin bothValues  = unsafeAttribute $ Both { key: "stroke-linejoin", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "stroke-linejoin", value:  prop' value  })
+  pureAttr StrokeLinejoin value  = unsafeAttribute $ This { key: "stroke-linejoin", value:  prop' value  }
+  unpureAttr StrokeLinejoin eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "stroke-linejoin", value:  prop' value  }
 
 instance Attr FeComponentTransfer_ StrokeLinejoin String where
-  attr StrokeLinejoin value = unsafeAttribute
-    { key: "stroke-linejoin", value: prop' value }
+  attr StrokeLinejoin bothValues  = unsafeAttribute $ Both { key: "stroke-linejoin", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "stroke-linejoin", value:  prop' value  })
+  pureAttr StrokeLinejoin value  = unsafeAttribute $ This { key: "stroke-linejoin", value:  prop' value  }
+  unpureAttr StrokeLinejoin eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "stroke-linejoin", value:  prop' value  }
 
 instance Attr FeComposite_ StrokeLinejoin String where
-  attr StrokeLinejoin value = unsafeAttribute
-    { key: "stroke-linejoin", value: prop' value }
+  attr StrokeLinejoin bothValues  = unsafeAttribute $ Both { key: "stroke-linejoin", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "stroke-linejoin", value:  prop' value  })
+  pureAttr StrokeLinejoin value  = unsafeAttribute $ This { key: "stroke-linejoin", value:  prop' value  }
+  unpureAttr StrokeLinejoin eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "stroke-linejoin", value:  prop' value  }
 
 instance Attr FeConvolveMatrix_ StrokeLinejoin String where
-  attr StrokeLinejoin value = unsafeAttribute
-    { key: "stroke-linejoin", value: prop' value }
+  attr StrokeLinejoin bothValues  = unsafeAttribute $ Both { key: "stroke-linejoin", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "stroke-linejoin", value:  prop' value  })
+  pureAttr StrokeLinejoin value  = unsafeAttribute $ This { key: "stroke-linejoin", value:  prop' value  }
+  unpureAttr StrokeLinejoin eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "stroke-linejoin", value:  prop' value  }
 
 instance Attr FeDiffuseLighting_ StrokeLinejoin String where
-  attr StrokeLinejoin value = unsafeAttribute
-    { key: "stroke-linejoin", value: prop' value }
+  attr StrokeLinejoin bothValues  = unsafeAttribute $ Both { key: "stroke-linejoin", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "stroke-linejoin", value:  prop' value  })
+  pureAttr StrokeLinejoin value  = unsafeAttribute $ This { key: "stroke-linejoin", value:  prop' value  }
+  unpureAttr StrokeLinejoin eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "stroke-linejoin", value:  prop' value  }
 
 instance Attr FeDisplacementMap_ StrokeLinejoin String where
-  attr StrokeLinejoin value = unsafeAttribute
-    { key: "stroke-linejoin", value: prop' value }
+  attr StrokeLinejoin bothValues  = unsafeAttribute $ Both { key: "stroke-linejoin", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "stroke-linejoin", value:  prop' value  })
+  pureAttr StrokeLinejoin value  = unsafeAttribute $ This { key: "stroke-linejoin", value:  prop' value  }
+  unpureAttr StrokeLinejoin eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "stroke-linejoin", value:  prop' value  }
 
 instance Attr FeFlood_ StrokeLinejoin String where
-  attr StrokeLinejoin value = unsafeAttribute
-    { key: "stroke-linejoin", value: prop' value }
+  attr StrokeLinejoin bothValues  = unsafeAttribute $ Both { key: "stroke-linejoin", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "stroke-linejoin", value:  prop' value  })
+  pureAttr StrokeLinejoin value  = unsafeAttribute $ This { key: "stroke-linejoin", value:  prop' value  }
+  unpureAttr StrokeLinejoin eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "stroke-linejoin", value:  prop' value  }
 
 instance Attr FeGaussianBlur_ StrokeLinejoin String where
-  attr StrokeLinejoin value = unsafeAttribute
-    { key: "stroke-linejoin", value: prop' value }
+  attr StrokeLinejoin bothValues  = unsafeAttribute $ Both { key: "stroke-linejoin", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "stroke-linejoin", value:  prop' value  })
+  pureAttr StrokeLinejoin value  = unsafeAttribute $ This { key: "stroke-linejoin", value:  prop' value  }
+  unpureAttr StrokeLinejoin eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "stroke-linejoin", value:  prop' value  }
 
 instance Attr FeImage_ StrokeLinejoin String where
-  attr StrokeLinejoin value = unsafeAttribute
-    { key: "stroke-linejoin", value: prop' value }
+  attr StrokeLinejoin bothValues  = unsafeAttribute $ Both { key: "stroke-linejoin", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "stroke-linejoin", value:  prop' value  })
+  pureAttr StrokeLinejoin value  = unsafeAttribute $ This { key: "stroke-linejoin", value:  prop' value  }
+  unpureAttr StrokeLinejoin eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "stroke-linejoin", value:  prop' value  }
 
 instance Attr FeMerge_ StrokeLinejoin String where
-  attr StrokeLinejoin value = unsafeAttribute
-    { key: "stroke-linejoin", value: prop' value }
+  attr StrokeLinejoin bothValues  = unsafeAttribute $ Both { key: "stroke-linejoin", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "stroke-linejoin", value:  prop' value  })
+  pureAttr StrokeLinejoin value  = unsafeAttribute $ This { key: "stroke-linejoin", value:  prop' value  }
+  unpureAttr StrokeLinejoin eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "stroke-linejoin", value:  prop' value  }
 
 instance Attr FeMorphology_ StrokeLinejoin String where
-  attr StrokeLinejoin value = unsafeAttribute
-    { key: "stroke-linejoin", value: prop' value }
+  attr StrokeLinejoin bothValues  = unsafeAttribute $ Both { key: "stroke-linejoin", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "stroke-linejoin", value:  prop' value  })
+  pureAttr StrokeLinejoin value  = unsafeAttribute $ This { key: "stroke-linejoin", value:  prop' value  }
+  unpureAttr StrokeLinejoin eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "stroke-linejoin", value:  prop' value  }
 
 instance Attr FeOffset_ StrokeLinejoin String where
-  attr StrokeLinejoin value = unsafeAttribute
-    { key: "stroke-linejoin", value: prop' value }
+  attr StrokeLinejoin bothValues  = unsafeAttribute $ Both { key: "stroke-linejoin", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "stroke-linejoin", value:  prop' value  })
+  pureAttr StrokeLinejoin value  = unsafeAttribute $ This { key: "stroke-linejoin", value:  prop' value  }
+  unpureAttr StrokeLinejoin eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "stroke-linejoin", value:  prop' value  }
 
 instance Attr FeSpecularLighting_ StrokeLinejoin String where
-  attr StrokeLinejoin value = unsafeAttribute
-    { key: "stroke-linejoin", value: prop' value }
+  attr StrokeLinejoin bothValues  = unsafeAttribute $ Both { key: "stroke-linejoin", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "stroke-linejoin", value:  prop' value  })
+  pureAttr StrokeLinejoin value  = unsafeAttribute $ This { key: "stroke-linejoin", value:  prop' value  }
+  unpureAttr StrokeLinejoin eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "stroke-linejoin", value:  prop' value  }
 
 instance Attr FeTile_ StrokeLinejoin String where
-  attr StrokeLinejoin value = unsafeAttribute
-    { key: "stroke-linejoin", value: prop' value }
+  attr StrokeLinejoin bothValues  = unsafeAttribute $ Both { key: "stroke-linejoin", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "stroke-linejoin", value:  prop' value  })
+  pureAttr StrokeLinejoin value  = unsafeAttribute $ This { key: "stroke-linejoin", value:  prop' value  }
+  unpureAttr StrokeLinejoin eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "stroke-linejoin", value:  prop' value  }
 
 instance Attr FeTurbulence_ StrokeLinejoin String where
-  attr StrokeLinejoin value = unsafeAttribute
-    { key: "stroke-linejoin", value: prop' value }
+  attr StrokeLinejoin bothValues  = unsafeAttribute $ Both { key: "stroke-linejoin", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "stroke-linejoin", value:  prop' value  })
+  pureAttr StrokeLinejoin value  = unsafeAttribute $ This { key: "stroke-linejoin", value:  prop' value  }
+  unpureAttr StrokeLinejoin eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "stroke-linejoin", value:  prop' value  }
 
 instance Attr Filter_ StrokeLinejoin String where
-  attr StrokeLinejoin value = unsafeAttribute
-    { key: "stroke-linejoin", value: prop' value }
+  attr StrokeLinejoin bothValues  = unsafeAttribute $ Both { key: "stroke-linejoin", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "stroke-linejoin", value:  prop' value  })
+  pureAttr StrokeLinejoin value  = unsafeAttribute $ This { key: "stroke-linejoin", value:  prop' value  }
+  unpureAttr StrokeLinejoin eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "stroke-linejoin", value:  prop' value  }
 
 instance Attr ForeignObject_ StrokeLinejoin String where
-  attr StrokeLinejoin value = unsafeAttribute
-    { key: "stroke-linejoin", value: prop' value }
+  attr StrokeLinejoin bothValues  = unsafeAttribute $ Both { key: "stroke-linejoin", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "stroke-linejoin", value:  prop' value  })
+  pureAttr StrokeLinejoin value  = unsafeAttribute $ This { key: "stroke-linejoin", value:  prop' value  }
+  unpureAttr StrokeLinejoin eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "stroke-linejoin", value:  prop' value  }
 
 instance Attr G_ StrokeLinejoin String where
-  attr StrokeLinejoin value = unsafeAttribute
-    { key: "stroke-linejoin", value: prop' value }
+  attr StrokeLinejoin bothValues  = unsafeAttribute $ Both { key: "stroke-linejoin", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "stroke-linejoin", value:  prop' value  })
+  pureAttr StrokeLinejoin value  = unsafeAttribute $ This { key: "stroke-linejoin", value:  prop' value  }
+  unpureAttr StrokeLinejoin eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "stroke-linejoin", value:  prop' value  }
 
 instance Attr Image_ StrokeLinejoin String where
-  attr StrokeLinejoin value = unsafeAttribute
-    { key: "stroke-linejoin", value: prop' value }
+  attr StrokeLinejoin bothValues  = unsafeAttribute $ Both { key: "stroke-linejoin", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "stroke-linejoin", value:  prop' value  })
+  pureAttr StrokeLinejoin value  = unsafeAttribute $ This { key: "stroke-linejoin", value:  prop' value  }
+  unpureAttr StrokeLinejoin eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "stroke-linejoin", value:  prop' value  }
 
 instance Attr Line_ StrokeLinejoin String where
-  attr StrokeLinejoin value = unsafeAttribute
-    { key: "stroke-linejoin", value: prop' value }
+  attr StrokeLinejoin bothValues  = unsafeAttribute $ Both { key: "stroke-linejoin", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "stroke-linejoin", value:  prop' value  })
+  pureAttr StrokeLinejoin value  = unsafeAttribute $ This { key: "stroke-linejoin", value:  prop' value  }
+  unpureAttr StrokeLinejoin eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "stroke-linejoin", value:  prop' value  }
 
 instance Attr LinearGradient_ StrokeLinejoin String where
-  attr StrokeLinejoin value = unsafeAttribute
-    { key: "stroke-linejoin", value: prop' value }
+  attr StrokeLinejoin bothValues  = unsafeAttribute $ Both { key: "stroke-linejoin", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "stroke-linejoin", value:  prop' value  })
+  pureAttr StrokeLinejoin value  = unsafeAttribute $ This { key: "stroke-linejoin", value:  prop' value  }
+  unpureAttr StrokeLinejoin eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "stroke-linejoin", value:  prop' value  }
 
 instance Attr Marker_ StrokeLinejoin String where
-  attr StrokeLinejoin value = unsafeAttribute
-    { key: "stroke-linejoin", value: prop' value }
+  attr StrokeLinejoin bothValues  = unsafeAttribute $ Both { key: "stroke-linejoin", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "stroke-linejoin", value:  prop' value  })
+  pureAttr StrokeLinejoin value  = unsafeAttribute $ This { key: "stroke-linejoin", value:  prop' value  }
+  unpureAttr StrokeLinejoin eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "stroke-linejoin", value:  prop' value  }
 
 instance Attr Mask_ StrokeLinejoin String where
-  attr StrokeLinejoin value = unsafeAttribute
-    { key: "stroke-linejoin", value: prop' value }
+  attr StrokeLinejoin bothValues  = unsafeAttribute $ Both { key: "stroke-linejoin", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "stroke-linejoin", value:  prop' value  })
+  pureAttr StrokeLinejoin value  = unsafeAttribute $ This { key: "stroke-linejoin", value:  prop' value  }
+  unpureAttr StrokeLinejoin eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "stroke-linejoin", value:  prop' value  }
 
 instance Attr Path_ StrokeLinejoin String where
-  attr StrokeLinejoin value = unsafeAttribute
-    { key: "stroke-linejoin", value: prop' value }
+  attr StrokeLinejoin bothValues  = unsafeAttribute $ Both { key: "stroke-linejoin", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "stroke-linejoin", value:  prop' value  })
+  pureAttr StrokeLinejoin value  = unsafeAttribute $ This { key: "stroke-linejoin", value:  prop' value  }
+  unpureAttr StrokeLinejoin eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "stroke-linejoin", value:  prop' value  }
 
 instance Attr Pattern_ StrokeLinejoin String where
-  attr StrokeLinejoin value = unsafeAttribute
-    { key: "stroke-linejoin", value: prop' value }
+  attr StrokeLinejoin bothValues  = unsafeAttribute $ Both { key: "stroke-linejoin", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "stroke-linejoin", value:  prop' value  })
+  pureAttr StrokeLinejoin value  = unsafeAttribute $ This { key: "stroke-linejoin", value:  prop' value  }
+  unpureAttr StrokeLinejoin eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "stroke-linejoin", value:  prop' value  }
 
 instance Attr Polygon_ StrokeLinejoin String where
-  attr StrokeLinejoin value = unsafeAttribute
-    { key: "stroke-linejoin", value: prop' value }
+  attr StrokeLinejoin bothValues  = unsafeAttribute $ Both { key: "stroke-linejoin", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "stroke-linejoin", value:  prop' value  })
+  pureAttr StrokeLinejoin value  = unsafeAttribute $ This { key: "stroke-linejoin", value:  prop' value  }
+  unpureAttr StrokeLinejoin eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "stroke-linejoin", value:  prop' value  }
 
 instance Attr Polyline_ StrokeLinejoin String where
-  attr StrokeLinejoin value = unsafeAttribute
-    { key: "stroke-linejoin", value: prop' value }
+  attr StrokeLinejoin bothValues  = unsafeAttribute $ Both { key: "stroke-linejoin", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "stroke-linejoin", value:  prop' value  })
+  pureAttr StrokeLinejoin value  = unsafeAttribute $ This { key: "stroke-linejoin", value:  prop' value  }
+  unpureAttr StrokeLinejoin eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "stroke-linejoin", value:  prop' value  }
 
 instance Attr RadialGradient_ StrokeLinejoin String where
-  attr StrokeLinejoin value = unsafeAttribute
-    { key: "stroke-linejoin", value: prop' value }
+  attr StrokeLinejoin bothValues  = unsafeAttribute $ Both { key: "stroke-linejoin", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "stroke-linejoin", value:  prop' value  })
+  pureAttr StrokeLinejoin value  = unsafeAttribute $ This { key: "stroke-linejoin", value:  prop' value  }
+  unpureAttr StrokeLinejoin eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "stroke-linejoin", value:  prop' value  }
 
 instance Attr Rect_ StrokeLinejoin String where
-  attr StrokeLinejoin value = unsafeAttribute
-    { key: "stroke-linejoin", value: prop' value }
+  attr StrokeLinejoin bothValues  = unsafeAttribute $ Both { key: "stroke-linejoin", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "stroke-linejoin", value:  prop' value  })
+  pureAttr StrokeLinejoin value  = unsafeAttribute $ This { key: "stroke-linejoin", value:  prop' value  }
+  unpureAttr StrokeLinejoin eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "stroke-linejoin", value:  prop' value  }
 
 instance Attr Svg_ StrokeLinejoin String where
-  attr StrokeLinejoin value = unsafeAttribute
-    { key: "stroke-linejoin", value: prop' value }
+  attr StrokeLinejoin bothValues  = unsafeAttribute $ Both { key: "stroke-linejoin", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "stroke-linejoin", value:  prop' value  })
+  pureAttr StrokeLinejoin value  = unsafeAttribute $ This { key: "stroke-linejoin", value:  prop' value  }
+  unpureAttr StrokeLinejoin eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "stroke-linejoin", value:  prop' value  }
 
 instance Attr Switch_ StrokeLinejoin String where
-  attr StrokeLinejoin value = unsafeAttribute
-    { key: "stroke-linejoin", value: prop' value }
+  attr StrokeLinejoin bothValues  = unsafeAttribute $ Both { key: "stroke-linejoin", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "stroke-linejoin", value:  prop' value  })
+  pureAttr StrokeLinejoin value  = unsafeAttribute $ This { key: "stroke-linejoin", value:  prop' value  }
+  unpureAttr StrokeLinejoin eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "stroke-linejoin", value:  prop' value  }
 
 instance Attr Symbol_ StrokeLinejoin String where
-  attr StrokeLinejoin value = unsafeAttribute
-    { key: "stroke-linejoin", value: prop' value }
+  attr StrokeLinejoin bothValues  = unsafeAttribute $ Both { key: "stroke-linejoin", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "stroke-linejoin", value:  prop' value  })
+  pureAttr StrokeLinejoin value  = unsafeAttribute $ This { key: "stroke-linejoin", value:  prop' value  }
+  unpureAttr StrokeLinejoin eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "stroke-linejoin", value:  prop' value  }
 
 instance Attr Text_ StrokeLinejoin String where
-  attr StrokeLinejoin value = unsafeAttribute
-    { key: "stroke-linejoin", value: prop' value }
+  attr StrokeLinejoin bothValues  = unsafeAttribute $ Both { key: "stroke-linejoin", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "stroke-linejoin", value:  prop' value  })
+  pureAttr StrokeLinejoin value  = unsafeAttribute $ This { key: "stroke-linejoin", value:  prop' value  }
+  unpureAttr StrokeLinejoin eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "stroke-linejoin", value:  prop' value  }
 
 instance Attr TextPath_ StrokeLinejoin String where
-  attr StrokeLinejoin value = unsafeAttribute
-    { key: "stroke-linejoin", value: prop' value }
+  attr StrokeLinejoin bothValues  = unsafeAttribute $ Both { key: "stroke-linejoin", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "stroke-linejoin", value:  prop' value  })
+  pureAttr StrokeLinejoin value  = unsafeAttribute $ This { key: "stroke-linejoin", value:  prop' value  }
+  unpureAttr StrokeLinejoin eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "stroke-linejoin", value:  prop' value  }
 
 instance Attr Tspan_ StrokeLinejoin String where
-  attr StrokeLinejoin value = unsafeAttribute
-    { key: "stroke-linejoin", value: prop' value }
+  attr StrokeLinejoin bothValues  = unsafeAttribute $ Both { key: "stroke-linejoin", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "stroke-linejoin", value:  prop' value  })
+  pureAttr StrokeLinejoin value  = unsafeAttribute $ This { key: "stroke-linejoin", value:  prop' value  }
+  unpureAttr StrokeLinejoin eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "stroke-linejoin", value:  prop' value  }
 
 instance Attr Use_ StrokeLinejoin String where
-  attr StrokeLinejoin value = unsafeAttribute
-    { key: "stroke-linejoin", value: prop' value }
+  attr StrokeLinejoin bothValues  = unsafeAttribute $ Both { key: "stroke-linejoin", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "stroke-linejoin", value:  prop' value  })
+  pureAttr StrokeLinejoin value  = unsafeAttribute $ This { key: "stroke-linejoin", value:  prop' value  }
+  unpureAttr StrokeLinejoin eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "stroke-linejoin", value:  prop' value  }
 
 instance Attr everything StrokeLinejoin Unit where
-  attr StrokeLinejoin _ = unsafeAttribute
-    { key: "stroke-linejoin", value: unset' }
+  attr StrokeLinejoin bothValues  = unsafeAttribute $ Both { key: "stroke-linejoin", value:  unset'  } (snd bothValues <#> \_ -> { key: "stroke-linejoin", value:  unset'  })
+  pureAttr StrokeLinejoin _  = unsafeAttribute $ This { key: "stroke-linejoin", value:  unset'  }
+  unpureAttr StrokeLinejoin eventValue  = unsafeAttribute $ That $ eventValue <#> \_ -> { key: "stroke-linejoin", value:  unset'  }

@@ -1,6 +1,8 @@
 module Deku.DOM.Attr.EnableBackground where
 
 import Prelude
+import Data.These (These(..))
+import Data.Tuple (fst, snd)
 
 import Deku.DOM.Elt.Switch (Switch_)
 import Deku.DOM.Elt.Image (Image_)
@@ -26,81 +28,101 @@ import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 data EnableBackground = EnableBackground
 
 instance Attr FeBlend_ EnableBackground String where
-  attr EnableBackground value = unsafeAttribute
-    { key: "enable-background", value: prop' value }
+  attr EnableBackground bothValues  = unsafeAttribute $ Both { key: "enable-background", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "enable-background", value:  prop' value  })
+  pureAttr EnableBackground value  = unsafeAttribute $ This { key: "enable-background", value:  prop' value  }
+  unpureAttr EnableBackground eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "enable-background", value:  prop' value  }
 
 instance Attr FeColorMatrix_ EnableBackground String where
-  attr EnableBackground value = unsafeAttribute
-    { key: "enable-background", value: prop' value }
+  attr EnableBackground bothValues  = unsafeAttribute $ Both { key: "enable-background", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "enable-background", value:  prop' value  })
+  pureAttr EnableBackground value  = unsafeAttribute $ This { key: "enable-background", value:  prop' value  }
+  unpureAttr EnableBackground eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "enable-background", value:  prop' value  }
 
 instance Attr FeComponentTransfer_ EnableBackground String where
-  attr EnableBackground value = unsafeAttribute
-    { key: "enable-background", value: prop' value }
+  attr EnableBackground bothValues  = unsafeAttribute $ Both { key: "enable-background", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "enable-background", value:  prop' value  })
+  pureAttr EnableBackground value  = unsafeAttribute $ This { key: "enable-background", value:  prop' value  }
+  unpureAttr EnableBackground eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "enable-background", value:  prop' value  }
 
 instance Attr FeComposite_ EnableBackground String where
-  attr EnableBackground value = unsafeAttribute
-    { key: "enable-background", value: prop' value }
+  attr EnableBackground bothValues  = unsafeAttribute $ Both { key: "enable-background", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "enable-background", value:  prop' value  })
+  pureAttr EnableBackground value  = unsafeAttribute $ This { key: "enable-background", value:  prop' value  }
+  unpureAttr EnableBackground eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "enable-background", value:  prop' value  }
 
 instance Attr FeConvolveMatrix_ EnableBackground String where
-  attr EnableBackground value = unsafeAttribute
-    { key: "enable-background", value: prop' value }
+  attr EnableBackground bothValues  = unsafeAttribute $ Both { key: "enable-background", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "enable-background", value:  prop' value  })
+  pureAttr EnableBackground value  = unsafeAttribute $ This { key: "enable-background", value:  prop' value  }
+  unpureAttr EnableBackground eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "enable-background", value:  prop' value  }
 
 instance Attr FeDiffuseLighting_ EnableBackground String where
-  attr EnableBackground value = unsafeAttribute
-    { key: "enable-background", value: prop' value }
+  attr EnableBackground bothValues  = unsafeAttribute $ Both { key: "enable-background", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "enable-background", value:  prop' value  })
+  pureAttr EnableBackground value  = unsafeAttribute $ This { key: "enable-background", value:  prop' value  }
+  unpureAttr EnableBackground eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "enable-background", value:  prop' value  }
 
 instance Attr FeDisplacementMap_ EnableBackground String where
-  attr EnableBackground value = unsafeAttribute
-    { key: "enable-background", value: prop' value }
+  attr EnableBackground bothValues  = unsafeAttribute $ Both { key: "enable-background", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "enable-background", value:  prop' value  })
+  pureAttr EnableBackground value  = unsafeAttribute $ This { key: "enable-background", value:  prop' value  }
+  unpureAttr EnableBackground eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "enable-background", value:  prop' value  }
 
 instance Attr FeFlood_ EnableBackground String where
-  attr EnableBackground value = unsafeAttribute
-    { key: "enable-background", value: prop' value }
+  attr EnableBackground bothValues  = unsafeAttribute $ Both { key: "enable-background", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "enable-background", value:  prop' value  })
+  pureAttr EnableBackground value  = unsafeAttribute $ This { key: "enable-background", value:  prop' value  }
+  unpureAttr EnableBackground eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "enable-background", value:  prop' value  }
 
 instance Attr FeGaussianBlur_ EnableBackground String where
-  attr EnableBackground value = unsafeAttribute
-    { key: "enable-background", value: prop' value }
+  attr EnableBackground bothValues  = unsafeAttribute $ Both { key: "enable-background", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "enable-background", value:  prop' value  })
+  pureAttr EnableBackground value  = unsafeAttribute $ This { key: "enable-background", value:  prop' value  }
+  unpureAttr EnableBackground eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "enable-background", value:  prop' value  }
 
 instance Attr FeImage_ EnableBackground String where
-  attr EnableBackground value = unsafeAttribute
-    { key: "enable-background", value: prop' value }
+  attr EnableBackground bothValues  = unsafeAttribute $ Both { key: "enable-background", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "enable-background", value:  prop' value  })
+  pureAttr EnableBackground value  = unsafeAttribute $ This { key: "enable-background", value:  prop' value  }
+  unpureAttr EnableBackground eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "enable-background", value:  prop' value  }
 
 instance Attr FeMerge_ EnableBackground String where
-  attr EnableBackground value = unsafeAttribute
-    { key: "enable-background", value: prop' value }
+  attr EnableBackground bothValues  = unsafeAttribute $ Both { key: "enable-background", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "enable-background", value:  prop' value  })
+  pureAttr EnableBackground value  = unsafeAttribute $ This { key: "enable-background", value:  prop' value  }
+  unpureAttr EnableBackground eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "enable-background", value:  prop' value  }
 
 instance Attr FeMorphology_ EnableBackground String where
-  attr EnableBackground value = unsafeAttribute
-    { key: "enable-background", value: prop' value }
+  attr EnableBackground bothValues  = unsafeAttribute $ Both { key: "enable-background", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "enable-background", value:  prop' value  })
+  pureAttr EnableBackground value  = unsafeAttribute $ This { key: "enable-background", value:  prop' value  }
+  unpureAttr EnableBackground eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "enable-background", value:  prop' value  }
 
 instance Attr FeOffset_ EnableBackground String where
-  attr EnableBackground value = unsafeAttribute
-    { key: "enable-background", value: prop' value }
+  attr EnableBackground bothValues  = unsafeAttribute $ Both { key: "enable-background", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "enable-background", value:  prop' value  })
+  pureAttr EnableBackground value  = unsafeAttribute $ This { key: "enable-background", value:  prop' value  }
+  unpureAttr EnableBackground eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "enable-background", value:  prop' value  }
 
 instance Attr FeSpecularLighting_ EnableBackground String where
-  attr EnableBackground value = unsafeAttribute
-    { key: "enable-background", value: prop' value }
+  attr EnableBackground bothValues  = unsafeAttribute $ Both { key: "enable-background", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "enable-background", value:  prop' value  })
+  pureAttr EnableBackground value  = unsafeAttribute $ This { key: "enable-background", value:  prop' value  }
+  unpureAttr EnableBackground eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "enable-background", value:  prop' value  }
 
 instance Attr FeTile_ EnableBackground String where
-  attr EnableBackground value = unsafeAttribute
-    { key: "enable-background", value: prop' value }
+  attr EnableBackground bothValues  = unsafeAttribute $ Both { key: "enable-background", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "enable-background", value:  prop' value  })
+  pureAttr EnableBackground value  = unsafeAttribute $ This { key: "enable-background", value:  prop' value  }
+  unpureAttr EnableBackground eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "enable-background", value:  prop' value  }
 
 instance Attr FeTurbulence_ EnableBackground String where
-  attr EnableBackground value = unsafeAttribute
-    { key: "enable-background", value: prop' value }
+  attr EnableBackground bothValues  = unsafeAttribute $ Both { key: "enable-background", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "enable-background", value:  prop' value  })
+  pureAttr EnableBackground value  = unsafeAttribute $ This { key: "enable-background", value:  prop' value  }
+  unpureAttr EnableBackground eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "enable-background", value:  prop' value  }
 
 instance Attr Filter_ EnableBackground String where
-  attr EnableBackground value = unsafeAttribute
-    { key: "enable-background", value: prop' value }
+  attr EnableBackground bothValues  = unsafeAttribute $ Both { key: "enable-background", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "enable-background", value:  prop' value  })
+  pureAttr EnableBackground value  = unsafeAttribute $ This { key: "enable-background", value:  prop' value  }
+  unpureAttr EnableBackground eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "enable-background", value:  prop' value  }
 
 instance Attr Image_ EnableBackground String where
-  attr EnableBackground value = unsafeAttribute
-    { key: "enable-background", value: prop' value }
+  attr EnableBackground bothValues  = unsafeAttribute $ Both { key: "enable-background", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "enable-background", value:  prop' value  })
+  pureAttr EnableBackground value  = unsafeAttribute $ This { key: "enable-background", value:  prop' value  }
+  unpureAttr EnableBackground eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "enable-background", value:  prop' value  }
 
 instance Attr Switch_ EnableBackground String where
-  attr EnableBackground value = unsafeAttribute
-    { key: "enable-background", value: prop' value }
+  attr EnableBackground bothValues  = unsafeAttribute $ Both { key: "enable-background", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "enable-background", value:  prop' value  })
+  pureAttr EnableBackground value  = unsafeAttribute $ This { key: "enable-background", value:  prop' value  }
+  unpureAttr EnableBackground eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "enable-background", value:  prop' value  }
 
 instance Attr everything EnableBackground Unit where
-  attr EnableBackground _ = unsafeAttribute
-    { key: "enable-background", value: unset' }
+  attr EnableBackground bothValues  = unsafeAttribute $ Both { key: "enable-background", value:  unset'  } (snd bothValues <#> \_ -> { key: "enable-background", value:  unset'  })
+  pureAttr EnableBackground _  = unsafeAttribute $ This { key: "enable-background", value:  unset'  }
+  unpureAttr EnableBackground eventValue  = unsafeAttribute $ That $ eventValue <#> \_ -> { key: "enable-background", value:  unset'  }

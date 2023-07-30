@@ -1,6 +1,8 @@
 module Deku.DOM.Attr.Role where
 
 import Prelude
+import Data.These (These(..))
+import Data.Tuple (fst, snd)
 
 import Deku.DOM.Elt.View (View_)
 import Deku.DOM.Elt.Use (Use_)
@@ -145,419 +147,696 @@ import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 data Role = Role
 
 instance Attr A_ Role String where
-  attr Role value = unsafeAttribute { key: "role", value: prop' value }
+  attr Role bothValues  = unsafeAttribute $ Both { key: "role", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "role", value:  prop' value  })
+  pureAttr Role value  = unsafeAttribute $ This { key: "role", value:  prop' value  }
+  unpureAttr Role eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "role", value:  prop' value  }
 
 instance Attr Abbr_ Role String where
-  attr Role value = unsafeAttribute { key: "role", value: prop' value }
+  attr Role bothValues  = unsafeAttribute $ Both { key: "role", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "role", value:  prop' value  })
+  pureAttr Role value  = unsafeAttribute $ This { key: "role", value:  prop' value  }
+  unpureAttr Role eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "role", value:  prop' value  }
 
 instance Attr Acronym_ Role String where
-  attr Role value = unsafeAttribute { key: "role", value: prop' value }
+  attr Role bothValues  = unsafeAttribute $ Both { key: "role", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "role", value:  prop' value  })
+  pureAttr Role value  = unsafeAttribute $ This { key: "role", value:  prop' value  }
+  unpureAttr Role eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "role", value:  prop' value  }
 
 instance Attr Address_ Role String where
-  attr Role value = unsafeAttribute { key: "role", value: prop' value }
+  attr Role bothValues  = unsafeAttribute $ Both { key: "role", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "role", value:  prop' value  })
+  pureAttr Role value  = unsafeAttribute $ This { key: "role", value:  prop' value  }
+  unpureAttr Role eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "role", value:  prop' value  }
 
 instance Attr Applet_ Role String where
-  attr Role value = unsafeAttribute { key: "role", value: prop' value }
+  attr Role bothValues  = unsafeAttribute $ Both { key: "role", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "role", value:  prop' value  })
+  pureAttr Role value  = unsafeAttribute $ This { key: "role", value:  prop' value  }
+  unpureAttr Role eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "role", value:  prop' value  }
 
 instance Attr Area_ Role String where
-  attr Role value = unsafeAttribute { key: "role", value: prop' value }
+  attr Role bothValues  = unsafeAttribute $ Both { key: "role", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "role", value:  prop' value  })
+  pureAttr Role value  = unsafeAttribute $ This { key: "role", value:  prop' value  }
+  unpureAttr Role eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "role", value:  prop' value  }
 
 instance Attr Article_ Role String where
-  attr Role value = unsafeAttribute { key: "role", value: prop' value }
+  attr Role bothValues  = unsafeAttribute $ Both { key: "role", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "role", value:  prop' value  })
+  pureAttr Role value  = unsafeAttribute $ This { key: "role", value:  prop' value  }
+  unpureAttr Role eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "role", value:  prop' value  }
 
 instance Attr Aside_ Role String where
-  attr Role value = unsafeAttribute { key: "role", value: prop' value }
+  attr Role bothValues  = unsafeAttribute $ Both { key: "role", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "role", value:  prop' value  })
+  pureAttr Role value  = unsafeAttribute $ This { key: "role", value:  prop' value  }
+  unpureAttr Role eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "role", value:  prop' value  }
 
 instance Attr Audio_ Role String where
-  attr Role value = unsafeAttribute { key: "role", value: prop' value }
+  attr Role bothValues  = unsafeAttribute $ Both { key: "role", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "role", value:  prop' value  })
+  pureAttr Role value  = unsafeAttribute $ This { key: "role", value:  prop' value  }
+  unpureAttr Role eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "role", value:  prop' value  }
 
 instance Attr B_ Role String where
-  attr Role value = unsafeAttribute { key: "role", value: prop' value }
+  attr Role bothValues  = unsafeAttribute $ Both { key: "role", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "role", value:  prop' value  })
+  pureAttr Role value  = unsafeAttribute $ This { key: "role", value:  prop' value  }
+  unpureAttr Role eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "role", value:  prop' value  }
 
 instance Attr Base_ Role String where
-  attr Role value = unsafeAttribute { key: "role", value: prop' value }
+  attr Role bothValues  = unsafeAttribute $ Both { key: "role", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "role", value:  prop' value  })
+  pureAttr Role value  = unsafeAttribute $ This { key: "role", value:  prop' value  }
+  unpureAttr Role eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "role", value:  prop' value  }
 
 instance Attr Basefont_ Role String where
-  attr Role value = unsafeAttribute { key: "role", value: prop' value }
+  attr Role bothValues  = unsafeAttribute $ Both { key: "role", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "role", value:  prop' value  })
+  pureAttr Role value  = unsafeAttribute $ This { key: "role", value:  prop' value  }
+  unpureAttr Role eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "role", value:  prop' value  }
 
 instance Attr Bdi_ Role String where
-  attr Role value = unsafeAttribute { key: "role", value: prop' value }
+  attr Role bothValues  = unsafeAttribute $ Both { key: "role", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "role", value:  prop' value  })
+  pureAttr Role value  = unsafeAttribute $ This { key: "role", value:  prop' value  }
+  unpureAttr Role eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "role", value:  prop' value  }
 
 instance Attr Bdo_ Role String where
-  attr Role value = unsafeAttribute { key: "role", value: prop' value }
+  attr Role bothValues  = unsafeAttribute $ Both { key: "role", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "role", value:  prop' value  })
+  pureAttr Role value  = unsafeAttribute $ This { key: "role", value:  prop' value  }
+  unpureAttr Role eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "role", value:  prop' value  }
 
 instance Attr Big_ Role String where
-  attr Role value = unsafeAttribute { key: "role", value: prop' value }
+  attr Role bothValues  = unsafeAttribute $ Both { key: "role", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "role", value:  prop' value  })
+  pureAttr Role value  = unsafeAttribute $ This { key: "role", value:  prop' value  }
+  unpureAttr Role eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "role", value:  prop' value  }
 
 instance Attr Blockquote_ Role String where
-  attr Role value = unsafeAttribute { key: "role", value: prop' value }
+  attr Role bothValues  = unsafeAttribute $ Both { key: "role", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "role", value:  prop' value  })
+  pureAttr Role value  = unsafeAttribute $ This { key: "role", value:  prop' value  }
+  unpureAttr Role eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "role", value:  prop' value  }
 
 instance Attr Body_ Role String where
-  attr Role value = unsafeAttribute { key: "role", value: prop' value }
+  attr Role bothValues  = unsafeAttribute $ Both { key: "role", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "role", value:  prop' value  })
+  pureAttr Role value  = unsafeAttribute $ This { key: "role", value:  prop' value  }
+  unpureAttr Role eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "role", value:  prop' value  }
 
 instance Attr Br_ Role String where
-  attr Role value = unsafeAttribute { key: "role", value: prop' value }
+  attr Role bothValues  = unsafeAttribute $ Both { key: "role", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "role", value:  prop' value  })
+  pureAttr Role value  = unsafeAttribute $ This { key: "role", value:  prop' value  }
+  unpureAttr Role eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "role", value:  prop' value  }
 
 instance Attr Button_ Role String where
-  attr Role value = unsafeAttribute { key: "role", value: prop' value }
+  attr Role bothValues  = unsafeAttribute $ Both { key: "role", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "role", value:  prop' value  })
+  pureAttr Role value  = unsafeAttribute $ This { key: "role", value:  prop' value  }
+  unpureAttr Role eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "role", value:  prop' value  }
 
 instance Attr Canvas_ Role String where
-  attr Role value = unsafeAttribute { key: "role", value: prop' value }
+  attr Role bothValues  = unsafeAttribute $ Both { key: "role", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "role", value:  prop' value  })
+  pureAttr Role value  = unsafeAttribute $ This { key: "role", value:  prop' value  }
+  unpureAttr Role eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "role", value:  prop' value  }
 
 instance Attr Caption_ Role String where
-  attr Role value = unsafeAttribute { key: "role", value: prop' value }
+  attr Role bothValues  = unsafeAttribute $ Both { key: "role", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "role", value:  prop' value  })
+  pureAttr Role value  = unsafeAttribute $ This { key: "role", value:  prop' value  }
+  unpureAttr Role eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "role", value:  prop' value  }
 
 instance Attr Center_ Role String where
-  attr Role value = unsafeAttribute { key: "role", value: prop' value }
+  attr Role bothValues  = unsafeAttribute $ Both { key: "role", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "role", value:  prop' value  })
+  pureAttr Role value  = unsafeAttribute $ This { key: "role", value:  prop' value  }
+  unpureAttr Role eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "role", value:  prop' value  }
 
 instance Attr Cite_ Role String where
-  attr Role value = unsafeAttribute { key: "role", value: prop' value }
+  attr Role bothValues  = unsafeAttribute $ Both { key: "role", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "role", value:  prop' value  })
+  pureAttr Role value  = unsafeAttribute $ This { key: "role", value:  prop' value  }
+  unpureAttr Role eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "role", value:  prop' value  }
 
 instance Attr Code_ Role String where
-  attr Role value = unsafeAttribute { key: "role", value: prop' value }
+  attr Role bothValues  = unsafeAttribute $ Both { key: "role", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "role", value:  prop' value  })
+  pureAttr Role value  = unsafeAttribute $ This { key: "role", value:  prop' value  }
+  unpureAttr Role eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "role", value:  prop' value  }
 
 instance Attr Col_ Role String where
-  attr Role value = unsafeAttribute { key: "role", value: prop' value }
+  attr Role bothValues  = unsafeAttribute $ Both { key: "role", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "role", value:  prop' value  })
+  pureAttr Role value  = unsafeAttribute $ This { key: "role", value:  prop' value  }
+  unpureAttr Role eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "role", value:  prop' value  }
 
 instance Attr Colgroup_ Role String where
-  attr Role value = unsafeAttribute { key: "role", value: prop' value }
+  attr Role bothValues  = unsafeAttribute $ Both { key: "role", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "role", value:  prop' value  })
+  pureAttr Role value  = unsafeAttribute $ This { key: "role", value:  prop' value  }
+  unpureAttr Role eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "role", value:  prop' value  }
 
 instance Attr Xdata_ Role String where
-  attr Role value = unsafeAttribute { key: "role", value: prop' value }
+  attr Role bothValues  = unsafeAttribute $ Both { key: "role", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "role", value:  prop' value  })
+  pureAttr Role value  = unsafeAttribute $ This { key: "role", value:  prop' value  }
+  unpureAttr Role eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "role", value:  prop' value  }
 
 instance Attr Datalist_ Role String where
-  attr Role value = unsafeAttribute { key: "role", value: prop' value }
+  attr Role bothValues  = unsafeAttribute $ Both { key: "role", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "role", value:  prop' value  })
+  pureAttr Role value  = unsafeAttribute $ This { key: "role", value:  prop' value  }
+  unpureAttr Role eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "role", value:  prop' value  }
 
 instance Attr Dd_ Role String where
-  attr Role value = unsafeAttribute { key: "role", value: prop' value }
+  attr Role bothValues  = unsafeAttribute $ Both { key: "role", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "role", value:  prop' value  })
+  pureAttr Role value  = unsafeAttribute $ This { key: "role", value:  prop' value  }
+  unpureAttr Role eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "role", value:  prop' value  }
 
 instance Attr Del_ Role String where
-  attr Role value = unsafeAttribute { key: "role", value: prop' value }
+  attr Role bothValues  = unsafeAttribute $ Both { key: "role", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "role", value:  prop' value  })
+  pureAttr Role value  = unsafeAttribute $ This { key: "role", value:  prop' value  }
+  unpureAttr Role eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "role", value:  prop' value  }
 
 instance Attr Details_ Role String where
-  attr Role value = unsafeAttribute { key: "role", value: prop' value }
+  attr Role bothValues  = unsafeAttribute $ Both { key: "role", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "role", value:  prop' value  })
+  pureAttr Role value  = unsafeAttribute $ This { key: "role", value:  prop' value  }
+  unpureAttr Role eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "role", value:  prop' value  }
 
 instance Attr Dfn_ Role String where
-  attr Role value = unsafeAttribute { key: "role", value: prop' value }
+  attr Role bothValues  = unsafeAttribute $ Both { key: "role", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "role", value:  prop' value  })
+  pureAttr Role value  = unsafeAttribute $ This { key: "role", value:  prop' value  }
+  unpureAttr Role eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "role", value:  prop' value  }
 
 instance Attr Dialog_ Role String where
-  attr Role value = unsafeAttribute { key: "role", value: prop' value }
+  attr Role bothValues  = unsafeAttribute $ Both { key: "role", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "role", value:  prop' value  })
+  pureAttr Role value  = unsafeAttribute $ This { key: "role", value:  prop' value  }
+  unpureAttr Role eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "role", value:  prop' value  }
 
 instance Attr Dir_ Role String where
-  attr Role value = unsafeAttribute { key: "role", value: prop' value }
+  attr Role bothValues  = unsafeAttribute $ Both { key: "role", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "role", value:  prop' value  })
+  pureAttr Role value  = unsafeAttribute $ This { key: "role", value:  prop' value  }
+  unpureAttr Role eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "role", value:  prop' value  }
 
 instance Attr Div_ Role String where
-  attr Role value = unsafeAttribute { key: "role", value: prop' value }
+  attr Role bothValues  = unsafeAttribute $ Both { key: "role", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "role", value:  prop' value  })
+  pureAttr Role value  = unsafeAttribute $ This { key: "role", value:  prop' value  }
+  unpureAttr Role eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "role", value:  prop' value  }
 
 instance Attr Dl_ Role String where
-  attr Role value = unsafeAttribute { key: "role", value: prop' value }
+  attr Role bothValues  = unsafeAttribute $ Both { key: "role", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "role", value:  prop' value  })
+  pureAttr Role value  = unsafeAttribute $ This { key: "role", value:  prop' value  }
+  unpureAttr Role eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "role", value:  prop' value  }
 
 instance Attr Dt_ Role String where
-  attr Role value = unsafeAttribute { key: "role", value: prop' value }
+  attr Role bothValues  = unsafeAttribute $ Both { key: "role", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "role", value:  prop' value  })
+  pureAttr Role value  = unsafeAttribute $ This { key: "role", value:  prop' value  }
+  unpureAttr Role eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "role", value:  prop' value  }
 
 instance Attr Em_ Role String where
-  attr Role value = unsafeAttribute { key: "role", value: prop' value }
+  attr Role bothValues  = unsafeAttribute $ Both { key: "role", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "role", value:  prop' value  })
+  pureAttr Role value  = unsafeAttribute $ This { key: "role", value:  prop' value  }
+  unpureAttr Role eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "role", value:  prop' value  }
 
 instance Attr Embed_ Role String where
-  attr Role value = unsafeAttribute { key: "role", value: prop' value }
+  attr Role bothValues  = unsafeAttribute $ Both { key: "role", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "role", value:  prop' value  })
+  pureAttr Role value  = unsafeAttribute $ This { key: "role", value:  prop' value  }
+  unpureAttr Role eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "role", value:  prop' value  }
 
 instance Attr Fieldset_ Role String where
-  attr Role value = unsafeAttribute { key: "role", value: prop' value }
+  attr Role bothValues  = unsafeAttribute $ Both { key: "role", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "role", value:  prop' value  })
+  pureAttr Role value  = unsafeAttribute $ This { key: "role", value:  prop' value  }
+  unpureAttr Role eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "role", value:  prop' value  }
 
 instance Attr Figcaption_ Role String where
-  attr Role value = unsafeAttribute { key: "role", value: prop' value }
+  attr Role bothValues  = unsafeAttribute $ Both { key: "role", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "role", value:  prop' value  })
+  pureAttr Role value  = unsafeAttribute $ This { key: "role", value:  prop' value  }
+  unpureAttr Role eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "role", value:  prop' value  }
 
 instance Attr Figure_ Role String where
-  attr Role value = unsafeAttribute { key: "role", value: prop' value }
+  attr Role bothValues  = unsafeAttribute $ Both { key: "role", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "role", value:  prop' value  })
+  pureAttr Role value  = unsafeAttribute $ This { key: "role", value:  prop' value  }
+  unpureAttr Role eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "role", value:  prop' value  }
 
 instance Attr Font_ Role String where
-  attr Role value = unsafeAttribute { key: "role", value: prop' value }
+  attr Role bothValues  = unsafeAttribute $ Both { key: "role", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "role", value:  prop' value  })
+  pureAttr Role value  = unsafeAttribute $ This { key: "role", value:  prop' value  }
+  unpureAttr Role eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "role", value:  prop' value  }
 
 instance Attr Footer_ Role String where
-  attr Role value = unsafeAttribute { key: "role", value: prop' value }
+  attr Role bothValues  = unsafeAttribute $ Both { key: "role", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "role", value:  prop' value  })
+  pureAttr Role value  = unsafeAttribute $ This { key: "role", value:  prop' value  }
+  unpureAttr Role eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "role", value:  prop' value  }
 
 instance Attr Form_ Role String where
-  attr Role value = unsafeAttribute { key: "role", value: prop' value }
+  attr Role bothValues  = unsafeAttribute $ Both { key: "role", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "role", value:  prop' value  })
+  pureAttr Role value  = unsafeAttribute $ This { key: "role", value:  prop' value  }
+  unpureAttr Role eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "role", value:  prop' value  }
 
 instance Attr Frame_ Role String where
-  attr Role value = unsafeAttribute { key: "role", value: prop' value }
+  attr Role bothValues  = unsafeAttribute $ Both { key: "role", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "role", value:  prop' value  })
+  pureAttr Role value  = unsafeAttribute $ This { key: "role", value:  prop' value  }
+  unpureAttr Role eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "role", value:  prop' value  }
 
 instance Attr Frameset_ Role String where
-  attr Role value = unsafeAttribute { key: "role", value: prop' value }
+  attr Role bothValues  = unsafeAttribute $ Both { key: "role", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "role", value:  prop' value  })
+  pureAttr Role value  = unsafeAttribute $ This { key: "role", value:  prop' value  }
+  unpureAttr Role eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "role", value:  prop' value  }
 
 instance Attr H1_ Role String where
-  attr Role value = unsafeAttribute { key: "role", value: prop' value }
+  attr Role bothValues  = unsafeAttribute $ Both { key: "role", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "role", value:  prop' value  })
+  pureAttr Role value  = unsafeAttribute $ This { key: "role", value:  prop' value  }
+  unpureAttr Role eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "role", value:  prop' value  }
 
 instance Attr H2_ Role String where
-  attr Role value = unsafeAttribute { key: "role", value: prop' value }
+  attr Role bothValues  = unsafeAttribute $ Both { key: "role", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "role", value:  prop' value  })
+  pureAttr Role value  = unsafeAttribute $ This { key: "role", value:  prop' value  }
+  unpureAttr Role eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "role", value:  prop' value  }
 
 instance Attr H3_ Role String where
-  attr Role value = unsafeAttribute { key: "role", value: prop' value }
+  attr Role bothValues  = unsafeAttribute $ Both { key: "role", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "role", value:  prop' value  })
+  pureAttr Role value  = unsafeAttribute $ This { key: "role", value:  prop' value  }
+  unpureAttr Role eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "role", value:  prop' value  }
 
 instance Attr H4_ Role String where
-  attr Role value = unsafeAttribute { key: "role", value: prop' value }
+  attr Role bothValues  = unsafeAttribute $ Both { key: "role", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "role", value:  prop' value  })
+  pureAttr Role value  = unsafeAttribute $ This { key: "role", value:  prop' value  }
+  unpureAttr Role eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "role", value:  prop' value  }
 
 instance Attr H5_ Role String where
-  attr Role value = unsafeAttribute { key: "role", value: prop' value }
+  attr Role bothValues  = unsafeAttribute $ Both { key: "role", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "role", value:  prop' value  })
+  pureAttr Role value  = unsafeAttribute $ This { key: "role", value:  prop' value  }
+  unpureAttr Role eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "role", value:  prop' value  }
 
 instance Attr H6_ Role String where
-  attr Role value = unsafeAttribute { key: "role", value: prop' value }
+  attr Role bothValues  = unsafeAttribute $ Both { key: "role", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "role", value:  prop' value  })
+  pureAttr Role value  = unsafeAttribute $ This { key: "role", value:  prop' value  }
+  unpureAttr Role eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "role", value:  prop' value  }
 
 instance Attr Head_ Role String where
-  attr Role value = unsafeAttribute { key: "role", value: prop' value }
+  attr Role bothValues  = unsafeAttribute $ Both { key: "role", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "role", value:  prop' value  })
+  pureAttr Role value  = unsafeAttribute $ This { key: "role", value:  prop' value  }
+  unpureAttr Role eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "role", value:  prop' value  }
 
 instance Attr Header_ Role String where
-  attr Role value = unsafeAttribute { key: "role", value: prop' value }
+  attr Role bothValues  = unsafeAttribute $ Both { key: "role", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "role", value:  prop' value  })
+  pureAttr Role value  = unsafeAttribute $ This { key: "role", value:  prop' value  }
+  unpureAttr Role eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "role", value:  prop' value  }
 
 instance Attr Hr_ Role String where
-  attr Role value = unsafeAttribute { key: "role", value: prop' value }
+  attr Role bothValues  = unsafeAttribute $ Both { key: "role", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "role", value:  prop' value  })
+  pureAttr Role value  = unsafeAttribute $ This { key: "role", value:  prop' value  }
+  unpureAttr Role eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "role", value:  prop' value  }
 
 instance Attr Html_ Role String where
-  attr Role value = unsafeAttribute { key: "role", value: prop' value }
+  attr Role bothValues  = unsafeAttribute $ Both { key: "role", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "role", value:  prop' value  })
+  pureAttr Role value  = unsafeAttribute $ This { key: "role", value:  prop' value  }
+  unpureAttr Role eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "role", value:  prop' value  }
 
 instance Attr I_ Role String where
-  attr Role value = unsafeAttribute { key: "role", value: prop' value }
+  attr Role bothValues  = unsafeAttribute $ Both { key: "role", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "role", value:  prop' value  })
+  pureAttr Role value  = unsafeAttribute $ This { key: "role", value:  prop' value  }
+  unpureAttr Role eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "role", value:  prop' value  }
 
 instance Attr Iframe_ Role String where
-  attr Role value = unsafeAttribute { key: "role", value: prop' value }
+  attr Role bothValues  = unsafeAttribute $ Both { key: "role", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "role", value:  prop' value  })
+  pureAttr Role value  = unsafeAttribute $ This { key: "role", value:  prop' value  }
+  unpureAttr Role eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "role", value:  prop' value  }
 
 instance Attr Img_ Role String where
-  attr Role value = unsafeAttribute { key: "role", value: prop' value }
+  attr Role bothValues  = unsafeAttribute $ Both { key: "role", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "role", value:  prop' value  })
+  pureAttr Role value  = unsafeAttribute $ This { key: "role", value:  prop' value  }
+  unpureAttr Role eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "role", value:  prop' value  }
 
 instance Attr Input_ Role String where
-  attr Role value = unsafeAttribute { key: "role", value: prop' value }
+  attr Role bothValues  = unsafeAttribute $ Both { key: "role", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "role", value:  prop' value  })
+  pureAttr Role value  = unsafeAttribute $ This { key: "role", value:  prop' value  }
+  unpureAttr Role eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "role", value:  prop' value  }
 
 instance Attr Ins_ Role String where
-  attr Role value = unsafeAttribute { key: "role", value: prop' value }
+  attr Role bothValues  = unsafeAttribute $ Both { key: "role", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "role", value:  prop' value  })
+  pureAttr Role value  = unsafeAttribute $ This { key: "role", value:  prop' value  }
+  unpureAttr Role eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "role", value:  prop' value  }
 
 instance Attr Kbd_ Role String where
-  attr Role value = unsafeAttribute { key: "role", value: prop' value }
+  attr Role bothValues  = unsafeAttribute $ Both { key: "role", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "role", value:  prop' value  })
+  pureAttr Role value  = unsafeAttribute $ This { key: "role", value:  prop' value  }
+  unpureAttr Role eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "role", value:  prop' value  }
 
 instance Attr Label_ Role String where
-  attr Role value = unsafeAttribute { key: "role", value: prop' value }
+  attr Role bothValues  = unsafeAttribute $ Both { key: "role", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "role", value:  prop' value  })
+  pureAttr Role value  = unsafeAttribute $ This { key: "role", value:  prop' value  }
+  unpureAttr Role eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "role", value:  prop' value  }
 
 instance Attr Legend_ Role String where
-  attr Role value = unsafeAttribute { key: "role", value: prop' value }
+  attr Role bothValues  = unsafeAttribute $ Both { key: "role", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "role", value:  prop' value  })
+  pureAttr Role value  = unsafeAttribute $ This { key: "role", value:  prop' value  }
+  unpureAttr Role eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "role", value:  prop' value  }
 
 instance Attr Li_ Role String where
-  attr Role value = unsafeAttribute { key: "role", value: prop' value }
+  attr Role bothValues  = unsafeAttribute $ Both { key: "role", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "role", value:  prop' value  })
+  pureAttr Role value  = unsafeAttribute $ This { key: "role", value:  prop' value  }
+  unpureAttr Role eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "role", value:  prop' value  }
 
 instance Attr Link_ Role String where
-  attr Role value = unsafeAttribute { key: "role", value: prop' value }
+  attr Role bothValues  = unsafeAttribute $ Both { key: "role", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "role", value:  prop' value  })
+  pureAttr Role value  = unsafeAttribute $ This { key: "role", value:  prop' value  }
+  unpureAttr Role eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "role", value:  prop' value  }
 
 instance Attr Main_ Role String where
-  attr Role value = unsafeAttribute { key: "role", value: prop' value }
+  attr Role bothValues  = unsafeAttribute $ Both { key: "role", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "role", value:  prop' value  })
+  pureAttr Role value  = unsafeAttribute $ This { key: "role", value:  prop' value  }
+  unpureAttr Role eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "role", value:  prop' value  }
 
 instance Attr Map_ Role String where
-  attr Role value = unsafeAttribute { key: "role", value: prop' value }
+  attr Role bothValues  = unsafeAttribute $ Both { key: "role", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "role", value:  prop' value  })
+  pureAttr Role value  = unsafeAttribute $ This { key: "role", value:  prop' value  }
+  unpureAttr Role eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "role", value:  prop' value  }
 
 instance Attr Mark_ Role String where
-  attr Role value = unsafeAttribute { key: "role", value: prop' value }
+  attr Role bothValues  = unsafeAttribute $ Both { key: "role", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "role", value:  prop' value  })
+  pureAttr Role value  = unsafeAttribute $ This { key: "role", value:  prop' value  }
+  unpureAttr Role eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "role", value:  prop' value  }
 
 instance Attr Meta_ Role String where
-  attr Role value = unsafeAttribute { key: "role", value: prop' value }
+  attr Role bothValues  = unsafeAttribute $ Both { key: "role", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "role", value:  prop' value  })
+  pureAttr Role value  = unsafeAttribute $ This { key: "role", value:  prop' value  }
+  unpureAttr Role eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "role", value:  prop' value  }
 
 instance Attr Meter_ Role String where
-  attr Role value = unsafeAttribute { key: "role", value: prop' value }
+  attr Role bothValues  = unsafeAttribute $ Both { key: "role", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "role", value:  prop' value  })
+  pureAttr Role value  = unsafeAttribute $ This { key: "role", value:  prop' value  }
+  unpureAttr Role eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "role", value:  prop' value  }
 
 instance Attr Nav_ Role String where
-  attr Role value = unsafeAttribute { key: "role", value: prop' value }
+  attr Role bothValues  = unsafeAttribute $ Both { key: "role", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "role", value:  prop' value  })
+  pureAttr Role value  = unsafeAttribute $ This { key: "role", value:  prop' value  }
+  unpureAttr Role eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "role", value:  prop' value  }
 
 instance Attr Noframes_ Role String where
-  attr Role value = unsafeAttribute { key: "role", value: prop' value }
+  attr Role bothValues  = unsafeAttribute $ Both { key: "role", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "role", value:  prop' value  })
+  pureAttr Role value  = unsafeAttribute $ This { key: "role", value:  prop' value  }
+  unpureAttr Role eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "role", value:  prop' value  }
 
 instance Attr Noscript_ Role String where
-  attr Role value = unsafeAttribute { key: "role", value: prop' value }
+  attr Role bothValues  = unsafeAttribute $ Both { key: "role", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "role", value:  prop' value  })
+  pureAttr Role value  = unsafeAttribute $ This { key: "role", value:  prop' value  }
+  unpureAttr Role eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "role", value:  prop' value  }
 
 instance Attr Object_ Role String where
-  attr Role value = unsafeAttribute { key: "role", value: prop' value }
+  attr Role bothValues  = unsafeAttribute $ Both { key: "role", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "role", value:  prop' value  })
+  pureAttr Role value  = unsafeAttribute $ This { key: "role", value:  prop' value  }
+  unpureAttr Role eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "role", value:  prop' value  }
 
 instance Attr Ol_ Role String where
-  attr Role value = unsafeAttribute { key: "role", value: prop' value }
+  attr Role bothValues  = unsafeAttribute $ Both { key: "role", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "role", value:  prop' value  })
+  pureAttr Role value  = unsafeAttribute $ This { key: "role", value:  prop' value  }
+  unpureAttr Role eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "role", value:  prop' value  }
 
 instance Attr Optgroup_ Role String where
-  attr Role value = unsafeAttribute { key: "role", value: prop' value }
+  attr Role bothValues  = unsafeAttribute $ Both { key: "role", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "role", value:  prop' value  })
+  pureAttr Role value  = unsafeAttribute $ This { key: "role", value:  prop' value  }
+  unpureAttr Role eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "role", value:  prop' value  }
 
 instance Attr Option_ Role String where
-  attr Role value = unsafeAttribute { key: "role", value: prop' value }
+  attr Role bothValues  = unsafeAttribute $ Both { key: "role", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "role", value:  prop' value  })
+  pureAttr Role value  = unsafeAttribute $ This { key: "role", value:  prop' value  }
+  unpureAttr Role eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "role", value:  prop' value  }
 
 instance Attr Output_ Role String where
-  attr Role value = unsafeAttribute { key: "role", value: prop' value }
+  attr Role bothValues  = unsafeAttribute $ Both { key: "role", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "role", value:  prop' value  })
+  pureAttr Role value  = unsafeAttribute $ This { key: "role", value:  prop' value  }
+  unpureAttr Role eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "role", value:  prop' value  }
 
 instance Attr P_ Role String where
-  attr Role value = unsafeAttribute { key: "role", value: prop' value }
+  attr Role bothValues  = unsafeAttribute $ Both { key: "role", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "role", value:  prop' value  })
+  pureAttr Role value  = unsafeAttribute $ This { key: "role", value:  prop' value  }
+  unpureAttr Role eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "role", value:  prop' value  }
 
 instance Attr Param_ Role String where
-  attr Role value = unsafeAttribute { key: "role", value: prop' value }
+  attr Role bothValues  = unsafeAttribute $ Both { key: "role", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "role", value:  prop' value  })
+  pureAttr Role value  = unsafeAttribute $ This { key: "role", value:  prop' value  }
+  unpureAttr Role eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "role", value:  prop' value  }
 
 instance Attr Picture_ Role String where
-  attr Role value = unsafeAttribute { key: "role", value: prop' value }
+  attr Role bothValues  = unsafeAttribute $ Both { key: "role", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "role", value:  prop' value  })
+  pureAttr Role value  = unsafeAttribute $ This { key: "role", value:  prop' value  }
+  unpureAttr Role eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "role", value:  prop' value  }
 
 instance Attr Pre_ Role String where
-  attr Role value = unsafeAttribute { key: "role", value: prop' value }
+  attr Role bothValues  = unsafeAttribute $ Both { key: "role", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "role", value:  prop' value  })
+  pureAttr Role value  = unsafeAttribute $ This { key: "role", value:  prop' value  }
+  unpureAttr Role eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "role", value:  prop' value  }
 
 instance Attr Progress_ Role String where
-  attr Role value = unsafeAttribute { key: "role", value: prop' value }
+  attr Role bothValues  = unsafeAttribute $ Both { key: "role", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "role", value:  prop' value  })
+  pureAttr Role value  = unsafeAttribute $ This { key: "role", value:  prop' value  }
+  unpureAttr Role eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "role", value:  prop' value  }
 
 instance Attr Q_ Role String where
-  attr Role value = unsafeAttribute { key: "role", value: prop' value }
+  attr Role bothValues  = unsafeAttribute $ Both { key: "role", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "role", value:  prop' value  })
+  pureAttr Role value  = unsafeAttribute $ This { key: "role", value:  prop' value  }
+  unpureAttr Role eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "role", value:  prop' value  }
 
 instance Attr Rp_ Role String where
-  attr Role value = unsafeAttribute { key: "role", value: prop' value }
+  attr Role bothValues  = unsafeAttribute $ Both { key: "role", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "role", value:  prop' value  })
+  pureAttr Role value  = unsafeAttribute $ This { key: "role", value:  prop' value  }
+  unpureAttr Role eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "role", value:  prop' value  }
 
 instance Attr Rt_ Role String where
-  attr Role value = unsafeAttribute { key: "role", value: prop' value }
+  attr Role bothValues  = unsafeAttribute $ Both { key: "role", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "role", value:  prop' value  })
+  pureAttr Role value  = unsafeAttribute $ This { key: "role", value:  prop' value  }
+  unpureAttr Role eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "role", value:  prop' value  }
 
 instance Attr Ruby_ Role String where
-  attr Role value = unsafeAttribute { key: "role", value: prop' value }
+  attr Role bothValues  = unsafeAttribute $ Both { key: "role", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "role", value:  prop' value  })
+  pureAttr Role value  = unsafeAttribute $ This { key: "role", value:  prop' value  }
+  unpureAttr Role eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "role", value:  prop' value  }
 
 instance Attr S_ Role String where
-  attr Role value = unsafeAttribute { key: "role", value: prop' value }
+  attr Role bothValues  = unsafeAttribute $ Both { key: "role", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "role", value:  prop' value  })
+  pureAttr Role value  = unsafeAttribute $ This { key: "role", value:  prop' value  }
+  unpureAttr Role eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "role", value:  prop' value  }
 
 instance Attr Samp_ Role String where
-  attr Role value = unsafeAttribute { key: "role", value: prop' value }
+  attr Role bothValues  = unsafeAttribute $ Both { key: "role", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "role", value:  prop' value  })
+  pureAttr Role value  = unsafeAttribute $ This { key: "role", value:  prop' value  }
+  unpureAttr Role eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "role", value:  prop' value  }
 
 instance Attr Script_ Role String where
-  attr Role value = unsafeAttribute { key: "role", value: prop' value }
+  attr Role bothValues  = unsafeAttribute $ Both { key: "role", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "role", value:  prop' value  })
+  pureAttr Role value  = unsafeAttribute $ This { key: "role", value:  prop' value  }
+  unpureAttr Role eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "role", value:  prop' value  }
 
 instance Attr Section_ Role String where
-  attr Role value = unsafeAttribute { key: "role", value: prop' value }
+  attr Role bothValues  = unsafeAttribute $ Both { key: "role", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "role", value:  prop' value  })
+  pureAttr Role value  = unsafeAttribute $ This { key: "role", value:  prop' value  }
+  unpureAttr Role eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "role", value:  prop' value  }
 
 instance Attr Select_ Role String where
-  attr Role value = unsafeAttribute { key: "role", value: prop' value }
+  attr Role bothValues  = unsafeAttribute $ Both { key: "role", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "role", value:  prop' value  })
+  pureAttr Role value  = unsafeAttribute $ This { key: "role", value:  prop' value  }
+  unpureAttr Role eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "role", value:  prop' value  }
 
 instance Attr Small_ Role String where
-  attr Role value = unsafeAttribute { key: "role", value: prop' value }
+  attr Role bothValues  = unsafeAttribute $ Both { key: "role", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "role", value:  prop' value  })
+  pureAttr Role value  = unsafeAttribute $ This { key: "role", value:  prop' value  }
+  unpureAttr Role eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "role", value:  prop' value  }
 
 instance Attr Source_ Role String where
-  attr Role value = unsafeAttribute { key: "role", value: prop' value }
+  attr Role bothValues  = unsafeAttribute $ Both { key: "role", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "role", value:  prop' value  })
+  pureAttr Role value  = unsafeAttribute $ This { key: "role", value:  prop' value  }
+  unpureAttr Role eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "role", value:  prop' value  }
 
 instance Attr Span_ Role String where
-  attr Role value = unsafeAttribute { key: "role", value: prop' value }
+  attr Role bothValues  = unsafeAttribute $ Both { key: "role", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "role", value:  prop' value  })
+  pureAttr Role value  = unsafeAttribute $ This { key: "role", value:  prop' value  }
+  unpureAttr Role eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "role", value:  prop' value  }
 
 instance Attr Strike_ Role String where
-  attr Role value = unsafeAttribute { key: "role", value: prop' value }
+  attr Role bothValues  = unsafeAttribute $ Both { key: "role", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "role", value:  prop' value  })
+  pureAttr Role value  = unsafeAttribute $ This { key: "role", value:  prop' value  }
+  unpureAttr Role eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "role", value:  prop' value  }
 
 instance Attr Strong_ Role String where
-  attr Role value = unsafeAttribute { key: "role", value: prop' value }
+  attr Role bothValues  = unsafeAttribute $ Both { key: "role", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "role", value:  prop' value  })
+  pureAttr Role value  = unsafeAttribute $ This { key: "role", value:  prop' value  }
+  unpureAttr Role eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "role", value:  prop' value  }
 
 instance Attr Style_ Role String where
-  attr Role value = unsafeAttribute { key: "role", value: prop' value }
+  attr Role bothValues  = unsafeAttribute $ Both { key: "role", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "role", value:  prop' value  })
+  pureAttr Role value  = unsafeAttribute $ This { key: "role", value:  prop' value  }
+  unpureAttr Role eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "role", value:  prop' value  }
 
 instance Attr Sub_ Role String where
-  attr Role value = unsafeAttribute { key: "role", value: prop' value }
+  attr Role bothValues  = unsafeAttribute $ Both { key: "role", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "role", value:  prop' value  })
+  pureAttr Role value  = unsafeAttribute $ This { key: "role", value:  prop' value  }
+  unpureAttr Role eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "role", value:  prop' value  }
 
 instance Attr Summary_ Role String where
-  attr Role value = unsafeAttribute { key: "role", value: prop' value }
+  attr Role bothValues  = unsafeAttribute $ Both { key: "role", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "role", value:  prop' value  })
+  pureAttr Role value  = unsafeAttribute $ This { key: "role", value:  prop' value  }
+  unpureAttr Role eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "role", value:  prop' value  }
 
 instance Attr Sup_ Role String where
-  attr Role value = unsafeAttribute { key: "role", value: prop' value }
+  attr Role bothValues  = unsafeAttribute $ Both { key: "role", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "role", value:  prop' value  })
+  pureAttr Role value  = unsafeAttribute $ This { key: "role", value:  prop' value  }
+  unpureAttr Role eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "role", value:  prop' value  }
 
 instance Attr Svg_ Role String where
-  attr Role value = unsafeAttribute { key: "role", value: prop' value }
+  attr Role bothValues  = unsafeAttribute $ Both { key: "role", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "role", value:  prop' value  })
+  pureAttr Role value  = unsafeAttribute $ This { key: "role", value:  prop' value  }
+  unpureAttr Role eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "role", value:  prop' value  }
 
 instance Attr Table_ Role String where
-  attr Role value = unsafeAttribute { key: "role", value: prop' value }
+  attr Role bothValues  = unsafeAttribute $ Both { key: "role", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "role", value:  prop' value  })
+  pureAttr Role value  = unsafeAttribute $ This { key: "role", value:  prop' value  }
+  unpureAttr Role eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "role", value:  prop' value  }
 
 instance Attr Tbody_ Role String where
-  attr Role value = unsafeAttribute { key: "role", value: prop' value }
+  attr Role bothValues  = unsafeAttribute $ Both { key: "role", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "role", value:  prop' value  })
+  pureAttr Role value  = unsafeAttribute $ This { key: "role", value:  prop' value  }
+  unpureAttr Role eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "role", value:  prop' value  }
 
 instance Attr Td_ Role String where
-  attr Role value = unsafeAttribute { key: "role", value: prop' value }
+  attr Role bothValues  = unsafeAttribute $ Both { key: "role", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "role", value:  prop' value  })
+  pureAttr Role value  = unsafeAttribute $ This { key: "role", value:  prop' value  }
+  unpureAttr Role eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "role", value:  prop' value  }
 
 instance Attr Template_ Role String where
-  attr Role value = unsafeAttribute { key: "role", value: prop' value }
+  attr Role bothValues  = unsafeAttribute $ Both { key: "role", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "role", value:  prop' value  })
+  pureAttr Role value  = unsafeAttribute $ This { key: "role", value:  prop' value  }
+  unpureAttr Role eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "role", value:  prop' value  }
 
 instance Attr Textarea_ Role String where
-  attr Role value = unsafeAttribute { key: "role", value: prop' value }
+  attr Role bothValues  = unsafeAttribute $ Both { key: "role", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "role", value:  prop' value  })
+  pureAttr Role value  = unsafeAttribute $ This { key: "role", value:  prop' value  }
+  unpureAttr Role eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "role", value:  prop' value  }
 
 instance Attr Tfoot_ Role String where
-  attr Role value = unsafeAttribute { key: "role", value: prop' value }
+  attr Role bothValues  = unsafeAttribute $ Both { key: "role", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "role", value:  prop' value  })
+  pureAttr Role value  = unsafeAttribute $ This { key: "role", value:  prop' value  }
+  unpureAttr Role eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "role", value:  prop' value  }
 
 instance Attr Th_ Role String where
-  attr Role value = unsafeAttribute { key: "role", value: prop' value }
+  attr Role bothValues  = unsafeAttribute $ Both { key: "role", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "role", value:  prop' value  })
+  pureAttr Role value  = unsafeAttribute $ This { key: "role", value:  prop' value  }
+  unpureAttr Role eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "role", value:  prop' value  }
 
 instance Attr Thead_ Role String where
-  attr Role value = unsafeAttribute { key: "role", value: prop' value }
+  attr Role bothValues  = unsafeAttribute $ Both { key: "role", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "role", value:  prop' value  })
+  pureAttr Role value  = unsafeAttribute $ This { key: "role", value:  prop' value  }
+  unpureAttr Role eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "role", value:  prop' value  }
 
 instance Attr Time_ Role String where
-  attr Role value = unsafeAttribute { key: "role", value: prop' value }
+  attr Role bothValues  = unsafeAttribute $ Both { key: "role", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "role", value:  prop' value  })
+  pureAttr Role value  = unsafeAttribute $ This { key: "role", value:  prop' value  }
+  unpureAttr Role eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "role", value:  prop' value  }
 
 instance Attr Title_ Role String where
-  attr Role value = unsafeAttribute { key: "role", value: prop' value }
+  attr Role bothValues  = unsafeAttribute $ Both { key: "role", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "role", value:  prop' value  })
+  pureAttr Role value  = unsafeAttribute $ This { key: "role", value:  prop' value  }
+  unpureAttr Role eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "role", value:  prop' value  }
 
 instance Attr Tr_ Role String where
-  attr Role value = unsafeAttribute { key: "role", value: prop' value }
+  attr Role bothValues  = unsafeAttribute $ Both { key: "role", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "role", value:  prop' value  })
+  pureAttr Role value  = unsafeAttribute $ This { key: "role", value:  prop' value  }
+  unpureAttr Role eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "role", value:  prop' value  }
 
 instance Attr Track_ Role String where
-  attr Role value = unsafeAttribute { key: "role", value: prop' value }
+  attr Role bothValues  = unsafeAttribute $ Both { key: "role", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "role", value:  prop' value  })
+  pureAttr Role value  = unsafeAttribute $ This { key: "role", value:  prop' value  }
+  unpureAttr Role eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "role", value:  prop' value  }
 
 instance Attr Tt_ Role String where
-  attr Role value = unsafeAttribute { key: "role", value: prop' value }
+  attr Role bothValues  = unsafeAttribute $ Both { key: "role", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "role", value:  prop' value  })
+  pureAttr Role value  = unsafeAttribute $ This { key: "role", value:  prop' value  }
+  unpureAttr Role eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "role", value:  prop' value  }
 
 instance Attr U_ Role String where
-  attr Role value = unsafeAttribute { key: "role", value: prop' value }
+  attr Role bothValues  = unsafeAttribute $ Both { key: "role", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "role", value:  prop' value  })
+  pureAttr Role value  = unsafeAttribute $ This { key: "role", value:  prop' value  }
+  unpureAttr Role eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "role", value:  prop' value  }
 
 instance Attr Ul_ Role String where
-  attr Role value = unsafeAttribute { key: "role", value: prop' value }
+  attr Role bothValues  = unsafeAttribute $ Both { key: "role", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "role", value:  prop' value  })
+  pureAttr Role value  = unsafeAttribute $ This { key: "role", value:  prop' value  }
+  unpureAttr Role eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "role", value:  prop' value  }
 
 instance Attr Var_ Role String where
-  attr Role value = unsafeAttribute { key: "role", value: prop' value }
+  attr Role bothValues  = unsafeAttribute $ Both { key: "role", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "role", value:  prop' value  })
+  pureAttr Role value  = unsafeAttribute $ This { key: "role", value:  prop' value  }
+  unpureAttr Role eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "role", value:  prop' value  }
 
 instance Attr Video_ Role String where
-  attr Role value = unsafeAttribute { key: "role", value: prop' value }
+  attr Role bothValues  = unsafeAttribute $ Both { key: "role", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "role", value:  prop' value  })
+  pureAttr Role value  = unsafeAttribute $ This { key: "role", value:  prop' value  }
+  unpureAttr Role eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "role", value:  prop' value  }
 
 instance Attr Wbr_ Role String where
-  attr Role value = unsafeAttribute { key: "role", value: prop' value }
+  attr Role bothValues  = unsafeAttribute $ Both { key: "role", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "role", value:  prop' value  })
+  pureAttr Role value  = unsafeAttribute $ This { key: "role", value:  prop' value  }
+  unpureAttr Role eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "role", value:  prop' value  }
 
 instance Attr Circle_ Role String where
-  attr Role value = unsafeAttribute { key: "role", value: prop' value }
+  attr Role bothValues  = unsafeAttribute $ Both { key: "role", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "role", value:  prop' value  })
+  pureAttr Role value  = unsafeAttribute $ This { key: "role", value:  prop' value  }
+  unpureAttr Role eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "role", value:  prop' value  }
 
 instance Attr Ellipse_ Role String where
-  attr Role value = unsafeAttribute { key: "role", value: prop' value }
+  attr Role bothValues  = unsafeAttribute $ Both { key: "role", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "role", value:  prop' value  })
+  pureAttr Role value  = unsafeAttribute $ This { key: "role", value:  prop' value  }
+  unpureAttr Role eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "role", value:  prop' value  }
 
 instance Attr ForeignObject_ Role String where
-  attr Role value = unsafeAttribute { key: "role", value: prop' value }
+  attr Role bothValues  = unsafeAttribute $ Both { key: "role", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "role", value:  prop' value  })
+  pureAttr Role value  = unsafeAttribute $ This { key: "role", value:  prop' value  }
+  unpureAttr Role eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "role", value:  prop' value  }
 
 instance Attr G_ Role String where
-  attr Role value = unsafeAttribute { key: "role", value: prop' value }
+  attr Role bothValues  = unsafeAttribute $ Both { key: "role", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "role", value:  prop' value  })
+  pureAttr Role value  = unsafeAttribute $ This { key: "role", value:  prop' value  }
+  unpureAttr Role eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "role", value:  prop' value  }
 
 instance Attr Line_ Role String where
-  attr Role value = unsafeAttribute { key: "role", value: prop' value }
+  attr Role bothValues  = unsafeAttribute $ Both { key: "role", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "role", value:  prop' value  })
+  pureAttr Role value  = unsafeAttribute $ This { key: "role", value:  prop' value  }
+  unpureAttr Role eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "role", value:  prop' value  }
 
 instance Attr Marker_ Role String where
-  attr Role value = unsafeAttribute { key: "role", value: prop' value }
+  attr Role bothValues  = unsafeAttribute $ Both { key: "role", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "role", value:  prop' value  })
+  pureAttr Role value  = unsafeAttribute $ This { key: "role", value:  prop' value  }
+  unpureAttr Role eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "role", value:  prop' value  }
 
 instance Attr Path_ Role String where
-  attr Role value = unsafeAttribute { key: "role", value: prop' value }
+  attr Role bothValues  = unsafeAttribute $ Both { key: "role", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "role", value:  prop' value  })
+  pureAttr Role value  = unsafeAttribute $ This { key: "role", value:  prop' value  }
+  unpureAttr Role eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "role", value:  prop' value  }
 
 instance Attr Polygon_ Role String where
-  attr Role value = unsafeAttribute { key: "role", value: prop' value }
+  attr Role bothValues  = unsafeAttribute $ Both { key: "role", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "role", value:  prop' value  })
+  pureAttr Role value  = unsafeAttribute $ This { key: "role", value:  prop' value  }
+  unpureAttr Role eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "role", value:  prop' value  }
 
 instance Attr Polyline_ Role String where
-  attr Role value = unsafeAttribute { key: "role", value: prop' value }
+  attr Role bothValues  = unsafeAttribute $ Both { key: "role", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "role", value:  prop' value  })
+  pureAttr Role value  = unsafeAttribute $ This { key: "role", value:  prop' value  }
+  unpureAttr Role eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "role", value:  prop' value  }
 
 instance Attr Rect_ Role String where
-  attr Role value = unsafeAttribute { key: "role", value: prop' value }
+  attr Role bothValues  = unsafeAttribute $ Both { key: "role", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "role", value:  prop' value  })
+  pureAttr Role value  = unsafeAttribute $ This { key: "role", value:  prop' value  }
+  unpureAttr Role eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "role", value:  prop' value  }
 
 instance Attr Symbol_ Role String where
-  attr Role value = unsafeAttribute { key: "role", value: prop' value }
+  attr Role bothValues  = unsafeAttribute $ Both { key: "role", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "role", value:  prop' value  })
+  pureAttr Role value  = unsafeAttribute $ This { key: "role", value:  prop' value  }
+  unpureAttr Role eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "role", value:  prop' value  }
 
 instance Attr Text_ Role String where
-  attr Role value = unsafeAttribute { key: "role", value: prop' value }
+  attr Role bothValues  = unsafeAttribute $ Both { key: "role", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "role", value:  prop' value  })
+  pureAttr Role value  = unsafeAttribute $ This { key: "role", value:  prop' value  }
+  unpureAttr Role eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "role", value:  prop' value  }
 
 instance Attr TextPath_ Role String where
-  attr Role value = unsafeAttribute { key: "role", value: prop' value }
+  attr Role bothValues  = unsafeAttribute $ Both { key: "role", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "role", value:  prop' value  })
+  pureAttr Role value  = unsafeAttribute $ This { key: "role", value:  prop' value  }
+  unpureAttr Role eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "role", value:  prop' value  }
 
 instance Attr Tspan_ Role String where
-  attr Role value = unsafeAttribute { key: "role", value: prop' value }
+  attr Role bothValues  = unsafeAttribute $ Both { key: "role", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "role", value:  prop' value  })
+  pureAttr Role value  = unsafeAttribute $ This { key: "role", value:  prop' value  }
+  unpureAttr Role eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "role", value:  prop' value  }
 
 instance Attr Use_ Role String where
-  attr Role value = unsafeAttribute { key: "role", value: prop' value }
+  attr Role bothValues  = unsafeAttribute $ Both { key: "role", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "role", value:  prop' value  })
+  pureAttr Role value  = unsafeAttribute $ This { key: "role", value:  prop' value  }
+  unpureAttr Role eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "role", value:  prop' value  }
 
 instance Attr View_ Role String where
-  attr Role value = unsafeAttribute { key: "role", value: prop' value }
+  attr Role bothValues  = unsafeAttribute $ Both { key: "role", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "role", value:  prop' value  })
+  pureAttr Role value  = unsafeAttribute $ This { key: "role", value:  prop' value  }
+  unpureAttr Role eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "role", value:  prop' value  }
 
 instance Attr everything Role Unit where
-  attr Role _ = unsafeAttribute
-    { key: "role", value: unset' }
+  attr Role bothValues  = unsafeAttribute $ Both { key: "role", value:  unset'  } (snd bothValues <#> \_ -> { key: "role", value:  unset'  })
+  pureAttr Role _  = unsafeAttribute $ This { key: "role", value:  unset'  }
+  unpureAttr Role eventValue  = unsafeAttribute $ That $ eventValue <#> \_ -> { key: "role", value:  unset'  }

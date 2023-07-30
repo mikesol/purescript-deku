@@ -1,6 +1,8 @@
 module Deku.DOM.Attr.Label where
 
 import Prelude
+import Data.These (These(..))
+import Data.Tuple (fst, snd)
 
 import Deku.DOM.Elt.Optgroup (Optgroup_)
 import Deku.DOM.Elt.Option (Option_)
@@ -10,14 +12,21 @@ import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 data Label = Label
 
 instance Attr Optgroup_ Label String where
-  attr Label value = unsafeAttribute { key: "label", value: prop' value }
+  attr Label bothValues  = unsafeAttribute $ Both { key: "label", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "label", value:  prop' value  })
+  pureAttr Label value  = unsafeAttribute $ This { key: "label", value:  prop' value  }
+  unpureAttr Label eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "label", value:  prop' value  }
 
 instance Attr Option_ Label String where
-  attr Label value = unsafeAttribute { key: "label", value: prop' value }
+  attr Label bothValues  = unsafeAttribute $ Both { key: "label", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "label", value:  prop' value  })
+  pureAttr Label value  = unsafeAttribute $ This { key: "label", value:  prop' value  }
+  unpureAttr Label eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "label", value:  prop' value  }
 
 instance Attr Track_ Label String where
-  attr Label value = unsafeAttribute { key: "label", value: prop' value }
+  attr Label bothValues  = unsafeAttribute $ Both { key: "label", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "label", value:  prop' value  })
+  pureAttr Label value  = unsafeAttribute $ This { key: "label", value:  prop' value  }
+  unpureAttr Label eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "label", value:  prop' value  }
 
 instance Attr everything Label Unit where
-  attr Label _ = unsafeAttribute
-    { key: "label", value: unset' }
+  attr Label bothValues  = unsafeAttribute $ Both { key: "label", value:  unset'  } (snd bothValues <#> \_ -> { key: "label", value:  unset'  })
+  pureAttr Label _  = unsafeAttribute $ This { key: "label", value:  unset'  }
+  unpureAttr Label eventValue  = unsafeAttribute $ That $ eventValue <#> \_ -> { key: "label", value:  unset'  }

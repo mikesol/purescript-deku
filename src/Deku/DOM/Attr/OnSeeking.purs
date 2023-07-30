@@ -1,6 +1,8 @@
 module Deku.DOM.Attr.OnSeeking where
 
 import Prelude
+import Data.These (These(..))
+import Data.Tuple (fst, snd)
 import Effect (Effect)
 import Deku.Attribute (class Attr, Attribute, Cb(..), cb', unsafeAttribute, unset')
 import FRP.Event (Event)
@@ -8,15 +10,19 @@ import FRP.Event (Event)
 data OnSeeking = OnSeeking
 
 instance Attr anything OnSeeking Cb where
-  attr OnSeeking value = unsafeAttribute { key: "seeking", value: cb' value }
+  attr OnSeeking bothValues  = unsafeAttribute $ Both { key: "seeking", value:  cb' (fst bothValues)  } (snd bothValues <#> \value -> { key: "seeking", value:  cb' value  })
+  pureAttr OnSeeking value  = unsafeAttribute $ This { key: "seeking", value:  cb' value  }
+  unpureAttr OnSeeking eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "seeking", value:  cb' value  }
 
 instance Attr anything OnSeeking (Effect Unit) where
-  attr OnSeeking value = unsafeAttribute
-    { key: "seeking", value: cb' (Cb (const (value $> true))) }
+  attr OnSeeking bothValues  = unsafeAttribute $ Both { key: "seeking", value:  cb' (Cb (const ((fst bothValues) $> true)))  } (snd bothValues <#> \value -> { key: "seeking", value:  cb' (Cb (const (value $> true)))  })
+  pureAttr OnSeeking value  = unsafeAttribute $ This { key: "seeking", value:  cb' (Cb (const (value $> true)))  }
+  unpureAttr OnSeeking eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "seeking", value:  cb' (Cb (const (value $> true)))  }
 
 instance Attr anything OnSeeking (Effect Boolean) where
-  attr OnSeeking value = unsafeAttribute
-    { key: "seeking", value: cb' (Cb (const value)) }
+  attr OnSeeking bothValues  = unsafeAttribute $ Both { key: "seeking", value:  cb' (Cb (const (fst bothValues)))  } (snd bothValues <#> \value -> { key: "seeking", value:  cb' (Cb (const value))  })
+  pureAttr OnSeeking value  = unsafeAttribute $ This { key: "seeking", value:  cb' (Cb (const value))  }
+  unpureAttr OnSeeking eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "seeking", value:  cb' (Cb (const value))  }
 
 type OnSeekingEffect =
   forall element
@@ -24,5 +30,6 @@ type OnSeekingEffect =
   => Event (Attribute element)
 
 instance Attr everything OnSeeking Unit where
-  attr OnSeeking _ = unsafeAttribute
-    { key: "seeking", value: unset' }
+  attr OnSeeking bothValues  = unsafeAttribute $ Both { key: "seeking", value:  unset'  } (snd bothValues <#> \_ -> { key: "seeking", value:  unset'  })
+  pureAttr OnSeeking _  = unsafeAttribute $ This { key: "seeking", value:  unset'  }
+  unpureAttr OnSeeking eventValue  = unsafeAttribute $ That $ eventValue <#> \_ -> { key: "seeking", value:  unset'  }

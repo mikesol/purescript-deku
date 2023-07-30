@@ -1,6 +1,8 @@
 module Deku.DOM.Attr.OnPointerover where
 
 import Prelude
+import Data.These (These(..))
+import Data.Tuple (fst, snd)
 import Effect (Effect)
 import Deku.Attribute (class Attr, Attribute, Cb(..), cb', unsafeAttribute, unset')
 import FRP.Event (Event)
@@ -8,16 +10,19 @@ import FRP.Event (Event)
 data OnPointerover = OnPointerover
 
 instance Attr anything OnPointerover Cb where
-  attr OnPointerover value = unsafeAttribute
-    { key: "pointerover", value: cb' value }
+  attr OnPointerover bothValues  = unsafeAttribute $ Both { key: "pointerover", value:  cb' (fst bothValues)  } (snd bothValues <#> \value -> { key: "pointerover", value:  cb' value  })
+  pureAttr OnPointerover value  = unsafeAttribute $ This { key: "pointerover", value:  cb' value  }
+  unpureAttr OnPointerover eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "pointerover", value:  cb' value  }
 
 instance Attr anything OnPointerover (Effect Unit) where
-  attr OnPointerover value = unsafeAttribute
-    { key: "pointerover", value: cb' (Cb (const (value $> true))) }
+  attr OnPointerover bothValues  = unsafeAttribute $ Both { key: "pointerover", value:  cb' (Cb (const ((fst bothValues) $> true)))  } (snd bothValues <#> \value -> { key: "pointerover", value:  cb' (Cb (const (value $> true)))  })
+  pureAttr OnPointerover value  = unsafeAttribute $ This { key: "pointerover", value:  cb' (Cb (const (value $> true)))  }
+  unpureAttr OnPointerover eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "pointerover", value:  cb' (Cb (const (value $> true)))  }
 
 instance Attr anything OnPointerover (Effect Boolean) where
-  attr OnPointerover value = unsafeAttribute
-    { key: "pointerover", value: cb' (Cb (const value)) }
+  attr OnPointerover bothValues  = unsafeAttribute $ Both { key: "pointerover", value:  cb' (Cb (const (fst bothValues)))  } (snd bothValues <#> \value -> { key: "pointerover", value:  cb' (Cb (const value))  })
+  pureAttr OnPointerover value  = unsafeAttribute $ This { key: "pointerover", value:  cb' (Cb (const value))  }
+  unpureAttr OnPointerover eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "pointerover", value:  cb' (Cb (const value))  }
 
 type OnPointeroverEffect =
   forall element
@@ -25,5 +30,6 @@ type OnPointeroverEffect =
   => Event (Attribute element)
 
 instance Attr everything OnPointerover Unit where
-  attr OnPointerover _ = unsafeAttribute
-    { key: "pointerover", value: unset' }
+  attr OnPointerover bothValues  = unsafeAttribute $ Both { key: "pointerover", value:  unset'  } (snd bothValues <#> \_ -> { key: "pointerover", value:  unset'  })
+  pureAttr OnPointerover _  = unsafeAttribute $ This { key: "pointerover", value:  unset'  }
+  unpureAttr OnPointerover eventValue  = unsafeAttribute $ That $ eventValue <#> \_ -> { key: "pointerover", value:  unset'  }

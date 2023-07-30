@@ -1,6 +1,8 @@
 module Deku.DOM.Attr.In2 where
 
 import Prelude
+import Data.These (These(..))
+import Data.Tuple (fst, snd)
 
 import Deku.DOM.Elt.FeDisplacementMap (FeDisplacementMap_)
 import Deku.DOM.Elt.FeComposite (FeComposite_)
@@ -10,14 +12,21 @@ import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 data In2 = In2
 
 instance Attr FeBlend_ In2 String where
-  attr In2 value = unsafeAttribute { key: "in2", value: prop' value }
+  attr In2 bothValues  = unsafeAttribute $ Both { key: "in2", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "in2", value:  prop' value  })
+  pureAttr In2 value  = unsafeAttribute $ This { key: "in2", value:  prop' value  }
+  unpureAttr In2 eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "in2", value:  prop' value  }
 
 instance Attr FeComposite_ In2 String where
-  attr In2 value = unsafeAttribute { key: "in2", value: prop' value }
+  attr In2 bothValues  = unsafeAttribute $ Both { key: "in2", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "in2", value:  prop' value  })
+  pureAttr In2 value  = unsafeAttribute $ This { key: "in2", value:  prop' value  }
+  unpureAttr In2 eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "in2", value:  prop' value  }
 
 instance Attr FeDisplacementMap_ In2 String where
-  attr In2 value = unsafeAttribute { key: "in2", value: prop' value }
+  attr In2 bothValues  = unsafeAttribute $ Both { key: "in2", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "in2", value:  prop' value  })
+  pureAttr In2 value  = unsafeAttribute $ This { key: "in2", value:  prop' value  }
+  unpureAttr In2 eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "in2", value:  prop' value  }
 
 instance Attr everything In2 Unit where
-  attr In2 _ = unsafeAttribute
-    { key: "in2", value: unset' }
+  attr In2 bothValues  = unsafeAttribute $ Both { key: "in2", value:  unset'  } (snd bothValues <#> \_ -> { key: "in2", value:  unset'  })
+  pureAttr In2 _  = unsafeAttribute $ This { key: "in2", value:  unset'  }
+  unpureAttr In2 eventValue  = unsafeAttribute $ That $ eventValue <#> \_ -> { key: "in2", value:  unset'  }

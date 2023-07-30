@@ -1,6 +1,8 @@
 module Deku.DOM.Attr.Divisor where
 
 import Prelude
+import Data.These (These(..))
+import Data.Tuple (fst, snd)
 
 import Deku.DOM.Elt.FeConvolveMatrix (FeConvolveMatrix_)
 import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
@@ -8,8 +10,11 @@ import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 data Divisor = Divisor
 
 instance Attr FeConvolveMatrix_ Divisor String where
-  attr Divisor value = unsafeAttribute { key: "divisor", value: prop' value }
+  attr Divisor bothValues  = unsafeAttribute $ Both { key: "divisor", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "divisor", value:  prop' value  })
+  pureAttr Divisor value  = unsafeAttribute $ This { key: "divisor", value:  prop' value  }
+  unpureAttr Divisor eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "divisor", value:  prop' value  }
 
 instance Attr everything Divisor Unit where
-  attr Divisor _ = unsafeAttribute
-    { key: "divisor", value: unset' }
+  attr Divisor bothValues  = unsafeAttribute $ Both { key: "divisor", value:  unset'  } (snd bothValues <#> \_ -> { key: "divisor", value:  unset'  })
+  pureAttr Divisor _  = unsafeAttribute $ This { key: "divisor", value:  unset'  }
+  unpureAttr Divisor eventValue  = unsafeAttribute $ That $ eventValue <#> \_ -> { key: "divisor", value:  unset'  }

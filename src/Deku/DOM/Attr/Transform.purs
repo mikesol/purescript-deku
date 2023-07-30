@@ -1,6 +1,8 @@
 module Deku.DOM.Attr.Transform where
 
 import Prelude
+import Data.These (These(..))
+import Data.Tuple (fst, snd)
 
 import Deku.DOM.Elt.Use (Use_)
 import Deku.DOM.Elt.Tspan (Tspan_)
@@ -48,169 +50,211 @@ import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 data Transform = Transform
 
 instance Attr Circle_ Transform String where
-  attr Transform value = unsafeAttribute
-    { key: "transform", value: prop' value }
+  attr Transform bothValues  = unsafeAttribute $ Both { key: "transform", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "transform", value:  prop' value  })
+  pureAttr Transform value  = unsafeAttribute $ This { key: "transform", value:  prop' value  }
+  unpureAttr Transform eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "transform", value:  prop' value  }
 
 instance Attr ClipPath_ Transform String where
-  attr Transform value = unsafeAttribute
-    { key: "transform", value: prop' value }
+  attr Transform bothValues  = unsafeAttribute $ Both { key: "transform", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "transform", value:  prop' value  })
+  pureAttr Transform value  = unsafeAttribute $ This { key: "transform", value:  prop' value  }
+  unpureAttr Transform eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "transform", value:  prop' value  }
 
 instance Attr Defs_ Transform String where
-  attr Transform value = unsafeAttribute
-    { key: "transform", value: prop' value }
+  attr Transform bothValues  = unsafeAttribute $ Both { key: "transform", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "transform", value:  prop' value  })
+  pureAttr Transform value  = unsafeAttribute $ This { key: "transform", value:  prop' value  }
+  unpureAttr Transform eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "transform", value:  prop' value  }
 
 instance Attr Ellipse_ Transform String where
-  attr Transform value = unsafeAttribute
-    { key: "transform", value: prop' value }
+  attr Transform bothValues  = unsafeAttribute $ Both { key: "transform", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "transform", value:  prop' value  })
+  pureAttr Transform value  = unsafeAttribute $ This { key: "transform", value:  prop' value  }
+  unpureAttr Transform eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "transform", value:  prop' value  }
 
 instance Attr FeBlend_ Transform String where
-  attr Transform value = unsafeAttribute
-    { key: "transform", value: prop' value }
+  attr Transform bothValues  = unsafeAttribute $ Both { key: "transform", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "transform", value:  prop' value  })
+  pureAttr Transform value  = unsafeAttribute $ This { key: "transform", value:  prop' value  }
+  unpureAttr Transform eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "transform", value:  prop' value  }
 
 instance Attr FeColorMatrix_ Transform String where
-  attr Transform value = unsafeAttribute
-    { key: "transform", value: prop' value }
+  attr Transform bothValues  = unsafeAttribute $ Both { key: "transform", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "transform", value:  prop' value  })
+  pureAttr Transform value  = unsafeAttribute $ This { key: "transform", value:  prop' value  }
+  unpureAttr Transform eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "transform", value:  prop' value  }
 
 instance Attr FeComponentTransfer_ Transform String where
-  attr Transform value = unsafeAttribute
-    { key: "transform", value: prop' value }
+  attr Transform bothValues  = unsafeAttribute $ Both { key: "transform", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "transform", value:  prop' value  })
+  pureAttr Transform value  = unsafeAttribute $ This { key: "transform", value:  prop' value  }
+  unpureAttr Transform eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "transform", value:  prop' value  }
 
 instance Attr FeComposite_ Transform String where
-  attr Transform value = unsafeAttribute
-    { key: "transform", value: prop' value }
+  attr Transform bothValues  = unsafeAttribute $ Both { key: "transform", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "transform", value:  prop' value  })
+  pureAttr Transform value  = unsafeAttribute $ This { key: "transform", value:  prop' value  }
+  unpureAttr Transform eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "transform", value:  prop' value  }
 
 instance Attr FeConvolveMatrix_ Transform String where
-  attr Transform value = unsafeAttribute
-    { key: "transform", value: prop' value }
+  attr Transform bothValues  = unsafeAttribute $ Both { key: "transform", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "transform", value:  prop' value  })
+  pureAttr Transform value  = unsafeAttribute $ This { key: "transform", value:  prop' value  }
+  unpureAttr Transform eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "transform", value:  prop' value  }
 
 instance Attr FeDiffuseLighting_ Transform String where
-  attr Transform value = unsafeAttribute
-    { key: "transform", value: prop' value }
+  attr Transform bothValues  = unsafeAttribute $ Both { key: "transform", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "transform", value:  prop' value  })
+  pureAttr Transform value  = unsafeAttribute $ This { key: "transform", value:  prop' value  }
+  unpureAttr Transform eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "transform", value:  prop' value  }
 
 instance Attr FeDisplacementMap_ Transform String where
-  attr Transform value = unsafeAttribute
-    { key: "transform", value: prop' value }
+  attr Transform bothValues  = unsafeAttribute $ Both { key: "transform", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "transform", value:  prop' value  })
+  pureAttr Transform value  = unsafeAttribute $ This { key: "transform", value:  prop' value  }
+  unpureAttr Transform eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "transform", value:  prop' value  }
 
 instance Attr FeFlood_ Transform String where
-  attr Transform value = unsafeAttribute
-    { key: "transform", value: prop' value }
+  attr Transform bothValues  = unsafeAttribute $ Both { key: "transform", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "transform", value:  prop' value  })
+  pureAttr Transform value  = unsafeAttribute $ This { key: "transform", value:  prop' value  }
+  unpureAttr Transform eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "transform", value:  prop' value  }
 
 instance Attr FeGaussianBlur_ Transform String where
-  attr Transform value = unsafeAttribute
-    { key: "transform", value: prop' value }
+  attr Transform bothValues  = unsafeAttribute $ Both { key: "transform", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "transform", value:  prop' value  })
+  pureAttr Transform value  = unsafeAttribute $ This { key: "transform", value:  prop' value  }
+  unpureAttr Transform eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "transform", value:  prop' value  }
 
 instance Attr FeImage_ Transform String where
-  attr Transform value = unsafeAttribute
-    { key: "transform", value: prop' value }
+  attr Transform bothValues  = unsafeAttribute $ Both { key: "transform", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "transform", value:  prop' value  })
+  pureAttr Transform value  = unsafeAttribute $ This { key: "transform", value:  prop' value  }
+  unpureAttr Transform eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "transform", value:  prop' value  }
 
 instance Attr FeMerge_ Transform String where
-  attr Transform value = unsafeAttribute
-    { key: "transform", value: prop' value }
+  attr Transform bothValues  = unsafeAttribute $ Both { key: "transform", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "transform", value:  prop' value  })
+  pureAttr Transform value  = unsafeAttribute $ This { key: "transform", value:  prop' value  }
+  unpureAttr Transform eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "transform", value:  prop' value  }
 
 instance Attr FeMorphology_ Transform String where
-  attr Transform value = unsafeAttribute
-    { key: "transform", value: prop' value }
+  attr Transform bothValues  = unsafeAttribute $ Both { key: "transform", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "transform", value:  prop' value  })
+  pureAttr Transform value  = unsafeAttribute $ This { key: "transform", value:  prop' value  }
+  unpureAttr Transform eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "transform", value:  prop' value  }
 
 instance Attr FeOffset_ Transform String where
-  attr Transform value = unsafeAttribute
-    { key: "transform", value: prop' value }
+  attr Transform bothValues  = unsafeAttribute $ Both { key: "transform", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "transform", value:  prop' value  })
+  pureAttr Transform value  = unsafeAttribute $ This { key: "transform", value:  prop' value  }
+  unpureAttr Transform eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "transform", value:  prop' value  }
 
 instance Attr FeSpecularLighting_ Transform String where
-  attr Transform value = unsafeAttribute
-    { key: "transform", value: prop' value }
+  attr Transform bothValues  = unsafeAttribute $ Both { key: "transform", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "transform", value:  prop' value  })
+  pureAttr Transform value  = unsafeAttribute $ This { key: "transform", value:  prop' value  }
+  unpureAttr Transform eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "transform", value:  prop' value  }
 
 instance Attr FeTile_ Transform String where
-  attr Transform value = unsafeAttribute
-    { key: "transform", value: prop' value }
+  attr Transform bothValues  = unsafeAttribute $ Both { key: "transform", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "transform", value:  prop' value  })
+  pureAttr Transform value  = unsafeAttribute $ This { key: "transform", value:  prop' value  }
+  unpureAttr Transform eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "transform", value:  prop' value  }
 
 instance Attr FeTurbulence_ Transform String where
-  attr Transform value = unsafeAttribute
-    { key: "transform", value: prop' value }
+  attr Transform bothValues  = unsafeAttribute $ Both { key: "transform", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "transform", value:  prop' value  })
+  pureAttr Transform value  = unsafeAttribute $ This { key: "transform", value:  prop' value  }
+  unpureAttr Transform eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "transform", value:  prop' value  }
 
 instance Attr Filter_ Transform String where
-  attr Transform value = unsafeAttribute
-    { key: "transform", value: prop' value }
+  attr Transform bothValues  = unsafeAttribute $ Both { key: "transform", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "transform", value:  prop' value  })
+  pureAttr Transform value  = unsafeAttribute $ This { key: "transform", value:  prop' value  }
+  unpureAttr Transform eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "transform", value:  prop' value  }
 
 instance Attr ForeignObject_ Transform String where
-  attr Transform value = unsafeAttribute
-    { key: "transform", value: prop' value }
+  attr Transform bothValues  = unsafeAttribute $ Both { key: "transform", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "transform", value:  prop' value  })
+  pureAttr Transform value  = unsafeAttribute $ This { key: "transform", value:  prop' value  }
+  unpureAttr Transform eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "transform", value:  prop' value  }
 
 instance Attr G_ Transform String where
-  attr Transform value = unsafeAttribute
-    { key: "transform", value: prop' value }
+  attr Transform bothValues  = unsafeAttribute $ Both { key: "transform", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "transform", value:  prop' value  })
+  pureAttr Transform value  = unsafeAttribute $ This { key: "transform", value:  prop' value  }
+  unpureAttr Transform eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "transform", value:  prop' value  }
 
 instance Attr Image_ Transform String where
-  attr Transform value = unsafeAttribute
-    { key: "transform", value: prop' value }
+  attr Transform bothValues  = unsafeAttribute $ Both { key: "transform", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "transform", value:  prop' value  })
+  pureAttr Transform value  = unsafeAttribute $ This { key: "transform", value:  prop' value  }
+  unpureAttr Transform eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "transform", value:  prop' value  }
 
 instance Attr Line_ Transform String where
-  attr Transform value = unsafeAttribute
-    { key: "transform", value: prop' value }
+  attr Transform bothValues  = unsafeAttribute $ Both { key: "transform", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "transform", value:  prop' value  })
+  pureAttr Transform value  = unsafeAttribute $ This { key: "transform", value:  prop' value  }
+  unpureAttr Transform eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "transform", value:  prop' value  }
 
 instance Attr LinearGradient_ Transform String where
-  attr Transform value = unsafeAttribute
-    { key: "transform", value: prop' value }
+  attr Transform bothValues  = unsafeAttribute $ Both { key: "transform", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "transform", value:  prop' value  })
+  pureAttr Transform value  = unsafeAttribute $ This { key: "transform", value:  prop' value  }
+  unpureAttr Transform eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "transform", value:  prop' value  }
 
 instance Attr Marker_ Transform String where
-  attr Transform value = unsafeAttribute
-    { key: "transform", value: prop' value }
+  attr Transform bothValues  = unsafeAttribute $ Both { key: "transform", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "transform", value:  prop' value  })
+  pureAttr Transform value  = unsafeAttribute $ This { key: "transform", value:  prop' value  }
+  unpureAttr Transform eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "transform", value:  prop' value  }
 
 instance Attr Mask_ Transform String where
-  attr Transform value = unsafeAttribute
-    { key: "transform", value: prop' value }
+  attr Transform bothValues  = unsafeAttribute $ Both { key: "transform", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "transform", value:  prop' value  })
+  pureAttr Transform value  = unsafeAttribute $ This { key: "transform", value:  prop' value  }
+  unpureAttr Transform eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "transform", value:  prop' value  }
 
 instance Attr Path_ Transform String where
-  attr Transform value = unsafeAttribute
-    { key: "transform", value: prop' value }
+  attr Transform bothValues  = unsafeAttribute $ Both { key: "transform", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "transform", value:  prop' value  })
+  pureAttr Transform value  = unsafeAttribute $ This { key: "transform", value:  prop' value  }
+  unpureAttr Transform eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "transform", value:  prop' value  }
 
 instance Attr Pattern_ Transform String where
-  attr Transform value = unsafeAttribute
-    { key: "transform", value: prop' value }
+  attr Transform bothValues  = unsafeAttribute $ Both { key: "transform", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "transform", value:  prop' value  })
+  pureAttr Transform value  = unsafeAttribute $ This { key: "transform", value:  prop' value  }
+  unpureAttr Transform eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "transform", value:  prop' value  }
 
 instance Attr Polygon_ Transform String where
-  attr Transform value = unsafeAttribute
-    { key: "transform", value: prop' value }
+  attr Transform bothValues  = unsafeAttribute $ Both { key: "transform", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "transform", value:  prop' value  })
+  pureAttr Transform value  = unsafeAttribute $ This { key: "transform", value:  prop' value  }
+  unpureAttr Transform eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "transform", value:  prop' value  }
 
 instance Attr Polyline_ Transform String where
-  attr Transform value = unsafeAttribute
-    { key: "transform", value: prop' value }
+  attr Transform bothValues  = unsafeAttribute $ Both { key: "transform", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "transform", value:  prop' value  })
+  pureAttr Transform value  = unsafeAttribute $ This { key: "transform", value:  prop' value  }
+  unpureAttr Transform eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "transform", value:  prop' value  }
 
 instance Attr RadialGradient_ Transform String where
-  attr Transform value = unsafeAttribute
-    { key: "transform", value: prop' value }
+  attr Transform bothValues  = unsafeAttribute $ Both { key: "transform", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "transform", value:  prop' value  })
+  pureAttr Transform value  = unsafeAttribute $ This { key: "transform", value:  prop' value  }
+  unpureAttr Transform eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "transform", value:  prop' value  }
 
 instance Attr Rect_ Transform String where
-  attr Transform value = unsafeAttribute
-    { key: "transform", value: prop' value }
+  attr Transform bothValues  = unsafeAttribute $ Both { key: "transform", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "transform", value:  prop' value  })
+  pureAttr Transform value  = unsafeAttribute $ This { key: "transform", value:  prop' value  }
+  unpureAttr Transform eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "transform", value:  prop' value  }
 
 instance Attr Svg_ Transform String where
-  attr Transform value = unsafeAttribute
-    { key: "transform", value: prop' value }
+  attr Transform bothValues  = unsafeAttribute $ Both { key: "transform", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "transform", value:  prop' value  })
+  pureAttr Transform value  = unsafeAttribute $ This { key: "transform", value:  prop' value  }
+  unpureAttr Transform eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "transform", value:  prop' value  }
 
 instance Attr Switch_ Transform String where
-  attr Transform value = unsafeAttribute
-    { key: "transform", value: prop' value }
+  attr Transform bothValues  = unsafeAttribute $ Both { key: "transform", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "transform", value:  prop' value  })
+  pureAttr Transform value  = unsafeAttribute $ This { key: "transform", value:  prop' value  }
+  unpureAttr Transform eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "transform", value:  prop' value  }
 
 instance Attr Symbol_ Transform String where
-  attr Transform value = unsafeAttribute
-    { key: "transform", value: prop' value }
+  attr Transform bothValues  = unsafeAttribute $ Both { key: "transform", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "transform", value:  prop' value  })
+  pureAttr Transform value  = unsafeAttribute $ This { key: "transform", value:  prop' value  }
+  unpureAttr Transform eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "transform", value:  prop' value  }
 
 instance Attr Text_ Transform String where
-  attr Transform value = unsafeAttribute
-    { key: "transform", value: prop' value }
+  attr Transform bothValues  = unsafeAttribute $ Both { key: "transform", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "transform", value:  prop' value  })
+  pureAttr Transform value  = unsafeAttribute $ This { key: "transform", value:  prop' value  }
+  unpureAttr Transform eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "transform", value:  prop' value  }
 
 instance Attr TextPath_ Transform String where
-  attr Transform value = unsafeAttribute
-    { key: "transform", value: prop' value }
+  attr Transform bothValues  = unsafeAttribute $ Both { key: "transform", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "transform", value:  prop' value  })
+  pureAttr Transform value  = unsafeAttribute $ This { key: "transform", value:  prop' value  }
+  unpureAttr Transform eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "transform", value:  prop' value  }
 
 instance Attr Tspan_ Transform String where
-  attr Transform value = unsafeAttribute
-    { key: "transform", value: prop' value }
+  attr Transform bothValues  = unsafeAttribute $ Both { key: "transform", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "transform", value:  prop' value  })
+  pureAttr Transform value  = unsafeAttribute $ This { key: "transform", value:  prop' value  }
+  unpureAttr Transform eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "transform", value:  prop' value  }
 
 instance Attr Use_ Transform String where
-  attr Transform value = unsafeAttribute
-    { key: "transform", value: prop' value }
+  attr Transform bothValues  = unsafeAttribute $ Both { key: "transform", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "transform", value:  prop' value  })
+  pureAttr Transform value  = unsafeAttribute $ This { key: "transform", value:  prop' value  }
+  unpureAttr Transform eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "transform", value:  prop' value  }
 
 instance Attr everything Transform Unit where
-  attr Transform _ = unsafeAttribute
-    { key: "transform", value: unset' }
+  attr Transform bothValues  = unsafeAttribute $ Both { key: "transform", value:  unset'  } (snd bothValues <#> \_ -> { key: "transform", value:  unset'  })
+  pureAttr Transform _  = unsafeAttribute $ This { key: "transform", value:  unset'  }
+  unpureAttr Transform eventValue  = unsafeAttribute $ That $ eventValue <#> \_ -> { key: "transform", value:  unset'  }

@@ -1,6 +1,8 @@
 module Deku.DOM.Attr.AriaAutocomplete where
 
 import Prelude
+import Data.These (These(..))
+import Data.Tuple (fst, snd)
 
 import Deku.DOM.Elt.View (View_)
 import Deku.DOM.Elt.Use (Use_)
@@ -24,73 +26,91 @@ import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 data AriaAutocomplete = AriaAutocomplete
 
 instance Attr Circle_ AriaAutocomplete String where
-  attr AriaAutocomplete value = unsafeAttribute
-    { key: "aria-autocomplete", value: prop' value }
+  attr AriaAutocomplete bothValues  = unsafeAttribute $ Both { key: "aria-autocomplete", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "aria-autocomplete", value:  prop' value  })
+  pureAttr AriaAutocomplete value  = unsafeAttribute $ This { key: "aria-autocomplete", value:  prop' value  }
+  unpureAttr AriaAutocomplete eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "aria-autocomplete", value:  prop' value  }
 
 instance Attr Ellipse_ AriaAutocomplete String where
-  attr AriaAutocomplete value = unsafeAttribute
-    { key: "aria-autocomplete", value: prop' value }
+  attr AriaAutocomplete bothValues  = unsafeAttribute $ Both { key: "aria-autocomplete", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "aria-autocomplete", value:  prop' value  })
+  pureAttr AriaAutocomplete value  = unsafeAttribute $ This { key: "aria-autocomplete", value:  prop' value  }
+  unpureAttr AriaAutocomplete eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "aria-autocomplete", value:  prop' value  }
 
 instance Attr ForeignObject_ AriaAutocomplete String where
-  attr AriaAutocomplete value = unsafeAttribute
-    { key: "aria-autocomplete", value: prop' value }
+  attr AriaAutocomplete bothValues  = unsafeAttribute $ Both { key: "aria-autocomplete", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "aria-autocomplete", value:  prop' value  })
+  pureAttr AriaAutocomplete value  = unsafeAttribute $ This { key: "aria-autocomplete", value:  prop' value  }
+  unpureAttr AriaAutocomplete eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "aria-autocomplete", value:  prop' value  }
 
 instance Attr G_ AriaAutocomplete String where
-  attr AriaAutocomplete value = unsafeAttribute
-    { key: "aria-autocomplete", value: prop' value }
+  attr AriaAutocomplete bothValues  = unsafeAttribute $ Both { key: "aria-autocomplete", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "aria-autocomplete", value:  prop' value  })
+  pureAttr AriaAutocomplete value  = unsafeAttribute $ This { key: "aria-autocomplete", value:  prop' value  }
+  unpureAttr AriaAutocomplete eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "aria-autocomplete", value:  prop' value  }
 
 instance Attr Line_ AriaAutocomplete String where
-  attr AriaAutocomplete value = unsafeAttribute
-    { key: "aria-autocomplete", value: prop' value }
+  attr AriaAutocomplete bothValues  = unsafeAttribute $ Both { key: "aria-autocomplete", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "aria-autocomplete", value:  prop' value  })
+  pureAttr AriaAutocomplete value  = unsafeAttribute $ This { key: "aria-autocomplete", value:  prop' value  }
+  unpureAttr AriaAutocomplete eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "aria-autocomplete", value:  prop' value  }
 
 instance Attr Marker_ AriaAutocomplete String where
-  attr AriaAutocomplete value = unsafeAttribute
-    { key: "aria-autocomplete", value: prop' value }
+  attr AriaAutocomplete bothValues  = unsafeAttribute $ Both { key: "aria-autocomplete", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "aria-autocomplete", value:  prop' value  })
+  pureAttr AriaAutocomplete value  = unsafeAttribute $ This { key: "aria-autocomplete", value:  prop' value  }
+  unpureAttr AriaAutocomplete eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "aria-autocomplete", value:  prop' value  }
 
 instance Attr Path_ AriaAutocomplete String where
-  attr AriaAutocomplete value = unsafeAttribute
-    { key: "aria-autocomplete", value: prop' value }
+  attr AriaAutocomplete bothValues  = unsafeAttribute $ Both { key: "aria-autocomplete", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "aria-autocomplete", value:  prop' value  })
+  pureAttr AriaAutocomplete value  = unsafeAttribute $ This { key: "aria-autocomplete", value:  prop' value  }
+  unpureAttr AriaAutocomplete eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "aria-autocomplete", value:  prop' value  }
 
 instance Attr Polygon_ AriaAutocomplete String where
-  attr AriaAutocomplete value = unsafeAttribute
-    { key: "aria-autocomplete", value: prop' value }
+  attr AriaAutocomplete bothValues  = unsafeAttribute $ Both { key: "aria-autocomplete", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "aria-autocomplete", value:  prop' value  })
+  pureAttr AriaAutocomplete value  = unsafeAttribute $ This { key: "aria-autocomplete", value:  prop' value  }
+  unpureAttr AriaAutocomplete eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "aria-autocomplete", value:  prop' value  }
 
 instance Attr Polyline_ AriaAutocomplete String where
-  attr AriaAutocomplete value = unsafeAttribute
-    { key: "aria-autocomplete", value: prop' value }
+  attr AriaAutocomplete bothValues  = unsafeAttribute $ Both { key: "aria-autocomplete", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "aria-autocomplete", value:  prop' value  })
+  pureAttr AriaAutocomplete value  = unsafeAttribute $ This { key: "aria-autocomplete", value:  prop' value  }
+  unpureAttr AriaAutocomplete eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "aria-autocomplete", value:  prop' value  }
 
 instance Attr Rect_ AriaAutocomplete String where
-  attr AriaAutocomplete value = unsafeAttribute
-    { key: "aria-autocomplete", value: prop' value }
+  attr AriaAutocomplete bothValues  = unsafeAttribute $ Both { key: "aria-autocomplete", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "aria-autocomplete", value:  prop' value  })
+  pureAttr AriaAutocomplete value  = unsafeAttribute $ This { key: "aria-autocomplete", value:  prop' value  }
+  unpureAttr AriaAutocomplete eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "aria-autocomplete", value:  prop' value  }
 
 instance Attr Svg_ AriaAutocomplete String where
-  attr AriaAutocomplete value = unsafeAttribute
-    { key: "aria-autocomplete", value: prop' value }
+  attr AriaAutocomplete bothValues  = unsafeAttribute $ Both { key: "aria-autocomplete", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "aria-autocomplete", value:  prop' value  })
+  pureAttr AriaAutocomplete value  = unsafeAttribute $ This { key: "aria-autocomplete", value:  prop' value  }
+  unpureAttr AriaAutocomplete eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "aria-autocomplete", value:  prop' value  }
 
 instance Attr Symbol_ AriaAutocomplete String where
-  attr AriaAutocomplete value = unsafeAttribute
-    { key: "aria-autocomplete", value: prop' value }
+  attr AriaAutocomplete bothValues  = unsafeAttribute $ Both { key: "aria-autocomplete", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "aria-autocomplete", value:  prop' value  })
+  pureAttr AriaAutocomplete value  = unsafeAttribute $ This { key: "aria-autocomplete", value:  prop' value  }
+  unpureAttr AriaAutocomplete eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "aria-autocomplete", value:  prop' value  }
 
 instance Attr Text_ AriaAutocomplete String where
-  attr AriaAutocomplete value = unsafeAttribute
-    { key: "aria-autocomplete", value: prop' value }
+  attr AriaAutocomplete bothValues  = unsafeAttribute $ Both { key: "aria-autocomplete", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "aria-autocomplete", value:  prop' value  })
+  pureAttr AriaAutocomplete value  = unsafeAttribute $ This { key: "aria-autocomplete", value:  prop' value  }
+  unpureAttr AriaAutocomplete eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "aria-autocomplete", value:  prop' value  }
 
 instance Attr TextPath_ AriaAutocomplete String where
-  attr AriaAutocomplete value = unsafeAttribute
-    { key: "aria-autocomplete", value: prop' value }
+  attr AriaAutocomplete bothValues  = unsafeAttribute $ Both { key: "aria-autocomplete", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "aria-autocomplete", value:  prop' value  })
+  pureAttr AriaAutocomplete value  = unsafeAttribute $ This { key: "aria-autocomplete", value:  prop' value  }
+  unpureAttr AriaAutocomplete eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "aria-autocomplete", value:  prop' value  }
 
 instance Attr Tspan_ AriaAutocomplete String where
-  attr AriaAutocomplete value = unsafeAttribute
-    { key: "aria-autocomplete", value: prop' value }
+  attr AriaAutocomplete bothValues  = unsafeAttribute $ Both { key: "aria-autocomplete", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "aria-autocomplete", value:  prop' value  })
+  pureAttr AriaAutocomplete value  = unsafeAttribute $ This { key: "aria-autocomplete", value:  prop' value  }
+  unpureAttr AriaAutocomplete eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "aria-autocomplete", value:  prop' value  }
 
 instance Attr Use_ AriaAutocomplete String where
-  attr AriaAutocomplete value = unsafeAttribute
-    { key: "aria-autocomplete", value: prop' value }
+  attr AriaAutocomplete bothValues  = unsafeAttribute $ Both { key: "aria-autocomplete", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "aria-autocomplete", value:  prop' value  })
+  pureAttr AriaAutocomplete value  = unsafeAttribute $ This { key: "aria-autocomplete", value:  prop' value  }
+  unpureAttr AriaAutocomplete eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "aria-autocomplete", value:  prop' value  }
 
 instance Attr View_ AriaAutocomplete String where
-  attr AriaAutocomplete value = unsafeAttribute
-    { key: "aria-autocomplete", value: prop' value }
+  attr AriaAutocomplete bothValues  = unsafeAttribute $ Both { key: "aria-autocomplete", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "aria-autocomplete", value:  prop' value  })
+  pureAttr AriaAutocomplete value  = unsafeAttribute $ This { key: "aria-autocomplete", value:  prop' value  }
+  unpureAttr AriaAutocomplete eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "aria-autocomplete", value:  prop' value  }
 
 instance Attr everything AriaAutocomplete Unit where
-  attr AriaAutocomplete _ = unsafeAttribute
-    { key: "aria-autocomplete", value: unset' }
+  attr AriaAutocomplete bothValues  = unsafeAttribute $ Both { key: "aria-autocomplete", value:  unset'  } (snd bothValues <#> \_ -> { key: "aria-autocomplete", value:  unset'  })
+  pureAttr AriaAutocomplete _  = unsafeAttribute $ This { key: "aria-autocomplete", value:  unset'  }
+  unpureAttr AriaAutocomplete eventValue  = unsafeAttribute $ That $ eventValue <#> \_ -> { key: "aria-autocomplete", value:  unset'  }

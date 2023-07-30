@@ -1,6 +1,8 @@
 module Deku.DOM.Attr.RepeatDur where
 
 import Prelude
+import Data.These (These(..))
+import Data.Tuple (fst, snd)
 
 import Deku.DOM.Elt.Set (Set_)
 import Deku.DOM.Elt.AnimateTransform (AnimateTransform_)
@@ -11,21 +13,26 @@ import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 data RepeatDur = RepeatDur
 
 instance Attr Animate_ RepeatDur String where
-  attr RepeatDur value = unsafeAttribute
-    { key: "repeatDur", value: prop' value }
+  attr RepeatDur bothValues  = unsafeAttribute $ Both { key: "repeatDur", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "repeatDur", value:  prop' value  })
+  pureAttr RepeatDur value  = unsafeAttribute $ This { key: "repeatDur", value:  prop' value  }
+  unpureAttr RepeatDur eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "repeatDur", value:  prop' value  }
 
 instance Attr AnimateMotion_ RepeatDur String where
-  attr RepeatDur value = unsafeAttribute
-    { key: "repeatDur", value: prop' value }
+  attr RepeatDur bothValues  = unsafeAttribute $ Both { key: "repeatDur", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "repeatDur", value:  prop' value  })
+  pureAttr RepeatDur value  = unsafeAttribute $ This { key: "repeatDur", value:  prop' value  }
+  unpureAttr RepeatDur eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "repeatDur", value:  prop' value  }
 
 instance Attr AnimateTransform_ RepeatDur String where
-  attr RepeatDur value = unsafeAttribute
-    { key: "repeatDur", value: prop' value }
+  attr RepeatDur bothValues  = unsafeAttribute $ Both { key: "repeatDur", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "repeatDur", value:  prop' value  })
+  pureAttr RepeatDur value  = unsafeAttribute $ This { key: "repeatDur", value:  prop' value  }
+  unpureAttr RepeatDur eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "repeatDur", value:  prop' value  }
 
 instance Attr Set_ RepeatDur String where
-  attr RepeatDur value = unsafeAttribute
-    { key: "repeatDur", value: prop' value }
+  attr RepeatDur bothValues  = unsafeAttribute $ Both { key: "repeatDur", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "repeatDur", value:  prop' value  })
+  pureAttr RepeatDur value  = unsafeAttribute $ This { key: "repeatDur", value:  prop' value  }
+  unpureAttr RepeatDur eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "repeatDur", value:  prop' value  }
 
 instance Attr everything RepeatDur Unit where
-  attr RepeatDur _ = unsafeAttribute
-    { key: "repeatDur", value: unset' }
+  attr RepeatDur bothValues  = unsafeAttribute $ Both { key: "repeatDur", value:  unset'  } (snd bothValues <#> \_ -> { key: "repeatDur", value:  unset'  })
+  pureAttr RepeatDur _  = unsafeAttribute $ This { key: "repeatDur", value:  unset'  }
+  unpureAttr RepeatDur eventValue  = unsafeAttribute $ That $ eventValue <#> \_ -> { key: "repeatDur", value:  unset'  }

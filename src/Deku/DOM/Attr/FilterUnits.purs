@@ -1,6 +1,8 @@
 module Deku.DOM.Attr.FilterUnits where
 
 import Prelude
+import Data.These (These(..))
+import Data.Tuple (fst, snd)
 
 import Deku.DOM.Elt.Filter (Filter_)
 import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
@@ -8,9 +10,11 @@ import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 data FilterUnits = FilterUnits
 
 instance Attr Filter_ FilterUnits String where
-  attr FilterUnits value = unsafeAttribute
-    { key: "filterUnits", value: prop' value }
+  attr FilterUnits bothValues  = unsafeAttribute $ Both { key: "filterUnits", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "filterUnits", value:  prop' value  })
+  pureAttr FilterUnits value  = unsafeAttribute $ This { key: "filterUnits", value:  prop' value  }
+  unpureAttr FilterUnits eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "filterUnits", value:  prop' value  }
 
 instance Attr everything FilterUnits Unit where
-  attr FilterUnits _ = unsafeAttribute
-    { key: "filterUnits", value: unset' }
+  attr FilterUnits bothValues  = unsafeAttribute $ Both { key: "filterUnits", value:  unset'  } (snd bothValues <#> \_ -> { key: "filterUnits", value:  unset'  })
+  pureAttr FilterUnits _  = unsafeAttribute $ This { key: "filterUnits", value:  unset'  }
+  unpureAttr FilterUnits eventValue  = unsafeAttribute $ That $ eventValue <#> \_ -> { key: "filterUnits", value:  unset'  }

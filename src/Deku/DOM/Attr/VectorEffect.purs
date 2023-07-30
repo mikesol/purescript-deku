@@ -1,6 +1,8 @@
 module Deku.DOM.Attr.VectorEffect where
 
 import Prelude
+import Data.These (These(..))
+import Data.Tuple (fst, snd)
 
 import Deku.DOM.Elt.Use (Use_)
 import Deku.DOM.Elt.Tspan (Tspan_)
@@ -48,169 +50,211 @@ import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 data VectorEffect = VectorEffect
 
 instance Attr Circle_ VectorEffect String where
-  attr VectorEffect value = unsafeAttribute
-    { key: "vector-effect", value: prop' value }
+  attr VectorEffect bothValues  = unsafeAttribute $ Both { key: "vector-effect", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "vector-effect", value:  prop' value  })
+  pureAttr VectorEffect value  = unsafeAttribute $ This { key: "vector-effect", value:  prop' value  }
+  unpureAttr VectorEffect eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "vector-effect", value:  prop' value  }
 
 instance Attr ClipPath_ VectorEffect String where
-  attr VectorEffect value = unsafeAttribute
-    { key: "vector-effect", value: prop' value }
+  attr VectorEffect bothValues  = unsafeAttribute $ Both { key: "vector-effect", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "vector-effect", value:  prop' value  })
+  pureAttr VectorEffect value  = unsafeAttribute $ This { key: "vector-effect", value:  prop' value  }
+  unpureAttr VectorEffect eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "vector-effect", value:  prop' value  }
 
 instance Attr Defs_ VectorEffect String where
-  attr VectorEffect value = unsafeAttribute
-    { key: "vector-effect", value: prop' value }
+  attr VectorEffect bothValues  = unsafeAttribute $ Both { key: "vector-effect", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "vector-effect", value:  prop' value  })
+  pureAttr VectorEffect value  = unsafeAttribute $ This { key: "vector-effect", value:  prop' value  }
+  unpureAttr VectorEffect eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "vector-effect", value:  prop' value  }
 
 instance Attr Ellipse_ VectorEffect String where
-  attr VectorEffect value = unsafeAttribute
-    { key: "vector-effect", value: prop' value }
+  attr VectorEffect bothValues  = unsafeAttribute $ Both { key: "vector-effect", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "vector-effect", value:  prop' value  })
+  pureAttr VectorEffect value  = unsafeAttribute $ This { key: "vector-effect", value:  prop' value  }
+  unpureAttr VectorEffect eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "vector-effect", value:  prop' value  }
 
 instance Attr FeBlend_ VectorEffect String where
-  attr VectorEffect value = unsafeAttribute
-    { key: "vector-effect", value: prop' value }
+  attr VectorEffect bothValues  = unsafeAttribute $ Both { key: "vector-effect", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "vector-effect", value:  prop' value  })
+  pureAttr VectorEffect value  = unsafeAttribute $ This { key: "vector-effect", value:  prop' value  }
+  unpureAttr VectorEffect eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "vector-effect", value:  prop' value  }
 
 instance Attr FeColorMatrix_ VectorEffect String where
-  attr VectorEffect value = unsafeAttribute
-    { key: "vector-effect", value: prop' value }
+  attr VectorEffect bothValues  = unsafeAttribute $ Both { key: "vector-effect", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "vector-effect", value:  prop' value  })
+  pureAttr VectorEffect value  = unsafeAttribute $ This { key: "vector-effect", value:  prop' value  }
+  unpureAttr VectorEffect eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "vector-effect", value:  prop' value  }
 
 instance Attr FeComponentTransfer_ VectorEffect String where
-  attr VectorEffect value = unsafeAttribute
-    { key: "vector-effect", value: prop' value }
+  attr VectorEffect bothValues  = unsafeAttribute $ Both { key: "vector-effect", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "vector-effect", value:  prop' value  })
+  pureAttr VectorEffect value  = unsafeAttribute $ This { key: "vector-effect", value:  prop' value  }
+  unpureAttr VectorEffect eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "vector-effect", value:  prop' value  }
 
 instance Attr FeComposite_ VectorEffect String where
-  attr VectorEffect value = unsafeAttribute
-    { key: "vector-effect", value: prop' value }
+  attr VectorEffect bothValues  = unsafeAttribute $ Both { key: "vector-effect", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "vector-effect", value:  prop' value  })
+  pureAttr VectorEffect value  = unsafeAttribute $ This { key: "vector-effect", value:  prop' value  }
+  unpureAttr VectorEffect eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "vector-effect", value:  prop' value  }
 
 instance Attr FeConvolveMatrix_ VectorEffect String where
-  attr VectorEffect value = unsafeAttribute
-    { key: "vector-effect", value: prop' value }
+  attr VectorEffect bothValues  = unsafeAttribute $ Both { key: "vector-effect", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "vector-effect", value:  prop' value  })
+  pureAttr VectorEffect value  = unsafeAttribute $ This { key: "vector-effect", value:  prop' value  }
+  unpureAttr VectorEffect eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "vector-effect", value:  prop' value  }
 
 instance Attr FeDiffuseLighting_ VectorEffect String where
-  attr VectorEffect value = unsafeAttribute
-    { key: "vector-effect", value: prop' value }
+  attr VectorEffect bothValues  = unsafeAttribute $ Both { key: "vector-effect", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "vector-effect", value:  prop' value  })
+  pureAttr VectorEffect value  = unsafeAttribute $ This { key: "vector-effect", value:  prop' value  }
+  unpureAttr VectorEffect eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "vector-effect", value:  prop' value  }
 
 instance Attr FeDisplacementMap_ VectorEffect String where
-  attr VectorEffect value = unsafeAttribute
-    { key: "vector-effect", value: prop' value }
+  attr VectorEffect bothValues  = unsafeAttribute $ Both { key: "vector-effect", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "vector-effect", value:  prop' value  })
+  pureAttr VectorEffect value  = unsafeAttribute $ This { key: "vector-effect", value:  prop' value  }
+  unpureAttr VectorEffect eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "vector-effect", value:  prop' value  }
 
 instance Attr FeFlood_ VectorEffect String where
-  attr VectorEffect value = unsafeAttribute
-    { key: "vector-effect", value: prop' value }
+  attr VectorEffect bothValues  = unsafeAttribute $ Both { key: "vector-effect", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "vector-effect", value:  prop' value  })
+  pureAttr VectorEffect value  = unsafeAttribute $ This { key: "vector-effect", value:  prop' value  }
+  unpureAttr VectorEffect eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "vector-effect", value:  prop' value  }
 
 instance Attr FeGaussianBlur_ VectorEffect String where
-  attr VectorEffect value = unsafeAttribute
-    { key: "vector-effect", value: prop' value }
+  attr VectorEffect bothValues  = unsafeAttribute $ Both { key: "vector-effect", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "vector-effect", value:  prop' value  })
+  pureAttr VectorEffect value  = unsafeAttribute $ This { key: "vector-effect", value:  prop' value  }
+  unpureAttr VectorEffect eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "vector-effect", value:  prop' value  }
 
 instance Attr FeImage_ VectorEffect String where
-  attr VectorEffect value = unsafeAttribute
-    { key: "vector-effect", value: prop' value }
+  attr VectorEffect bothValues  = unsafeAttribute $ Both { key: "vector-effect", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "vector-effect", value:  prop' value  })
+  pureAttr VectorEffect value  = unsafeAttribute $ This { key: "vector-effect", value:  prop' value  }
+  unpureAttr VectorEffect eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "vector-effect", value:  prop' value  }
 
 instance Attr FeMerge_ VectorEffect String where
-  attr VectorEffect value = unsafeAttribute
-    { key: "vector-effect", value: prop' value }
+  attr VectorEffect bothValues  = unsafeAttribute $ Both { key: "vector-effect", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "vector-effect", value:  prop' value  })
+  pureAttr VectorEffect value  = unsafeAttribute $ This { key: "vector-effect", value:  prop' value  }
+  unpureAttr VectorEffect eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "vector-effect", value:  prop' value  }
 
 instance Attr FeMorphology_ VectorEffect String where
-  attr VectorEffect value = unsafeAttribute
-    { key: "vector-effect", value: prop' value }
+  attr VectorEffect bothValues  = unsafeAttribute $ Both { key: "vector-effect", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "vector-effect", value:  prop' value  })
+  pureAttr VectorEffect value  = unsafeAttribute $ This { key: "vector-effect", value:  prop' value  }
+  unpureAttr VectorEffect eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "vector-effect", value:  prop' value  }
 
 instance Attr FeOffset_ VectorEffect String where
-  attr VectorEffect value = unsafeAttribute
-    { key: "vector-effect", value: prop' value }
+  attr VectorEffect bothValues  = unsafeAttribute $ Both { key: "vector-effect", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "vector-effect", value:  prop' value  })
+  pureAttr VectorEffect value  = unsafeAttribute $ This { key: "vector-effect", value:  prop' value  }
+  unpureAttr VectorEffect eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "vector-effect", value:  prop' value  }
 
 instance Attr FeSpecularLighting_ VectorEffect String where
-  attr VectorEffect value = unsafeAttribute
-    { key: "vector-effect", value: prop' value }
+  attr VectorEffect bothValues  = unsafeAttribute $ Both { key: "vector-effect", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "vector-effect", value:  prop' value  })
+  pureAttr VectorEffect value  = unsafeAttribute $ This { key: "vector-effect", value:  prop' value  }
+  unpureAttr VectorEffect eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "vector-effect", value:  prop' value  }
 
 instance Attr FeTile_ VectorEffect String where
-  attr VectorEffect value = unsafeAttribute
-    { key: "vector-effect", value: prop' value }
+  attr VectorEffect bothValues  = unsafeAttribute $ Both { key: "vector-effect", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "vector-effect", value:  prop' value  })
+  pureAttr VectorEffect value  = unsafeAttribute $ This { key: "vector-effect", value:  prop' value  }
+  unpureAttr VectorEffect eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "vector-effect", value:  prop' value  }
 
 instance Attr FeTurbulence_ VectorEffect String where
-  attr VectorEffect value = unsafeAttribute
-    { key: "vector-effect", value: prop' value }
+  attr VectorEffect bothValues  = unsafeAttribute $ Both { key: "vector-effect", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "vector-effect", value:  prop' value  })
+  pureAttr VectorEffect value  = unsafeAttribute $ This { key: "vector-effect", value:  prop' value  }
+  unpureAttr VectorEffect eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "vector-effect", value:  prop' value  }
 
 instance Attr Filter_ VectorEffect String where
-  attr VectorEffect value = unsafeAttribute
-    { key: "vector-effect", value: prop' value }
+  attr VectorEffect bothValues  = unsafeAttribute $ Both { key: "vector-effect", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "vector-effect", value:  prop' value  })
+  pureAttr VectorEffect value  = unsafeAttribute $ This { key: "vector-effect", value:  prop' value  }
+  unpureAttr VectorEffect eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "vector-effect", value:  prop' value  }
 
 instance Attr ForeignObject_ VectorEffect String where
-  attr VectorEffect value = unsafeAttribute
-    { key: "vector-effect", value: prop' value }
+  attr VectorEffect bothValues  = unsafeAttribute $ Both { key: "vector-effect", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "vector-effect", value:  prop' value  })
+  pureAttr VectorEffect value  = unsafeAttribute $ This { key: "vector-effect", value:  prop' value  }
+  unpureAttr VectorEffect eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "vector-effect", value:  prop' value  }
 
 instance Attr G_ VectorEffect String where
-  attr VectorEffect value = unsafeAttribute
-    { key: "vector-effect", value: prop' value }
+  attr VectorEffect bothValues  = unsafeAttribute $ Both { key: "vector-effect", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "vector-effect", value:  prop' value  })
+  pureAttr VectorEffect value  = unsafeAttribute $ This { key: "vector-effect", value:  prop' value  }
+  unpureAttr VectorEffect eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "vector-effect", value:  prop' value  }
 
 instance Attr Image_ VectorEffect String where
-  attr VectorEffect value = unsafeAttribute
-    { key: "vector-effect", value: prop' value }
+  attr VectorEffect bothValues  = unsafeAttribute $ Both { key: "vector-effect", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "vector-effect", value:  prop' value  })
+  pureAttr VectorEffect value  = unsafeAttribute $ This { key: "vector-effect", value:  prop' value  }
+  unpureAttr VectorEffect eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "vector-effect", value:  prop' value  }
 
 instance Attr Line_ VectorEffect String where
-  attr VectorEffect value = unsafeAttribute
-    { key: "vector-effect", value: prop' value }
+  attr VectorEffect bothValues  = unsafeAttribute $ Both { key: "vector-effect", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "vector-effect", value:  prop' value  })
+  pureAttr VectorEffect value  = unsafeAttribute $ This { key: "vector-effect", value:  prop' value  }
+  unpureAttr VectorEffect eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "vector-effect", value:  prop' value  }
 
 instance Attr LinearGradient_ VectorEffect String where
-  attr VectorEffect value = unsafeAttribute
-    { key: "vector-effect", value: prop' value }
+  attr VectorEffect bothValues  = unsafeAttribute $ Both { key: "vector-effect", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "vector-effect", value:  prop' value  })
+  pureAttr VectorEffect value  = unsafeAttribute $ This { key: "vector-effect", value:  prop' value  }
+  unpureAttr VectorEffect eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "vector-effect", value:  prop' value  }
 
 instance Attr Marker_ VectorEffect String where
-  attr VectorEffect value = unsafeAttribute
-    { key: "vector-effect", value: prop' value }
+  attr VectorEffect bothValues  = unsafeAttribute $ Both { key: "vector-effect", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "vector-effect", value:  prop' value  })
+  pureAttr VectorEffect value  = unsafeAttribute $ This { key: "vector-effect", value:  prop' value  }
+  unpureAttr VectorEffect eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "vector-effect", value:  prop' value  }
 
 instance Attr Mask_ VectorEffect String where
-  attr VectorEffect value = unsafeAttribute
-    { key: "vector-effect", value: prop' value }
+  attr VectorEffect bothValues  = unsafeAttribute $ Both { key: "vector-effect", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "vector-effect", value:  prop' value  })
+  pureAttr VectorEffect value  = unsafeAttribute $ This { key: "vector-effect", value:  prop' value  }
+  unpureAttr VectorEffect eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "vector-effect", value:  prop' value  }
 
 instance Attr Path_ VectorEffect String where
-  attr VectorEffect value = unsafeAttribute
-    { key: "vector-effect", value: prop' value }
+  attr VectorEffect bothValues  = unsafeAttribute $ Both { key: "vector-effect", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "vector-effect", value:  prop' value  })
+  pureAttr VectorEffect value  = unsafeAttribute $ This { key: "vector-effect", value:  prop' value  }
+  unpureAttr VectorEffect eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "vector-effect", value:  prop' value  }
 
 instance Attr Pattern_ VectorEffect String where
-  attr VectorEffect value = unsafeAttribute
-    { key: "vector-effect", value: prop' value }
+  attr VectorEffect bothValues  = unsafeAttribute $ Both { key: "vector-effect", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "vector-effect", value:  prop' value  })
+  pureAttr VectorEffect value  = unsafeAttribute $ This { key: "vector-effect", value:  prop' value  }
+  unpureAttr VectorEffect eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "vector-effect", value:  prop' value  }
 
 instance Attr Polygon_ VectorEffect String where
-  attr VectorEffect value = unsafeAttribute
-    { key: "vector-effect", value: prop' value }
+  attr VectorEffect bothValues  = unsafeAttribute $ Both { key: "vector-effect", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "vector-effect", value:  prop' value  })
+  pureAttr VectorEffect value  = unsafeAttribute $ This { key: "vector-effect", value:  prop' value  }
+  unpureAttr VectorEffect eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "vector-effect", value:  prop' value  }
 
 instance Attr Polyline_ VectorEffect String where
-  attr VectorEffect value = unsafeAttribute
-    { key: "vector-effect", value: prop' value }
+  attr VectorEffect bothValues  = unsafeAttribute $ Both { key: "vector-effect", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "vector-effect", value:  prop' value  })
+  pureAttr VectorEffect value  = unsafeAttribute $ This { key: "vector-effect", value:  prop' value  }
+  unpureAttr VectorEffect eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "vector-effect", value:  prop' value  }
 
 instance Attr RadialGradient_ VectorEffect String where
-  attr VectorEffect value = unsafeAttribute
-    { key: "vector-effect", value: prop' value }
+  attr VectorEffect bothValues  = unsafeAttribute $ Both { key: "vector-effect", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "vector-effect", value:  prop' value  })
+  pureAttr VectorEffect value  = unsafeAttribute $ This { key: "vector-effect", value:  prop' value  }
+  unpureAttr VectorEffect eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "vector-effect", value:  prop' value  }
 
 instance Attr Rect_ VectorEffect String where
-  attr VectorEffect value = unsafeAttribute
-    { key: "vector-effect", value: prop' value }
+  attr VectorEffect bothValues  = unsafeAttribute $ Both { key: "vector-effect", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "vector-effect", value:  prop' value  })
+  pureAttr VectorEffect value  = unsafeAttribute $ This { key: "vector-effect", value:  prop' value  }
+  unpureAttr VectorEffect eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "vector-effect", value:  prop' value  }
 
 instance Attr Svg_ VectorEffect String where
-  attr VectorEffect value = unsafeAttribute
-    { key: "vector-effect", value: prop' value }
+  attr VectorEffect bothValues  = unsafeAttribute $ Both { key: "vector-effect", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "vector-effect", value:  prop' value  })
+  pureAttr VectorEffect value  = unsafeAttribute $ This { key: "vector-effect", value:  prop' value  }
+  unpureAttr VectorEffect eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "vector-effect", value:  prop' value  }
 
 instance Attr Switch_ VectorEffect String where
-  attr VectorEffect value = unsafeAttribute
-    { key: "vector-effect", value: prop' value }
+  attr VectorEffect bothValues  = unsafeAttribute $ Both { key: "vector-effect", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "vector-effect", value:  prop' value  })
+  pureAttr VectorEffect value  = unsafeAttribute $ This { key: "vector-effect", value:  prop' value  }
+  unpureAttr VectorEffect eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "vector-effect", value:  prop' value  }
 
 instance Attr Symbol_ VectorEffect String where
-  attr VectorEffect value = unsafeAttribute
-    { key: "vector-effect", value: prop' value }
+  attr VectorEffect bothValues  = unsafeAttribute $ Both { key: "vector-effect", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "vector-effect", value:  prop' value  })
+  pureAttr VectorEffect value  = unsafeAttribute $ This { key: "vector-effect", value:  prop' value  }
+  unpureAttr VectorEffect eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "vector-effect", value:  prop' value  }
 
 instance Attr Text_ VectorEffect String where
-  attr VectorEffect value = unsafeAttribute
-    { key: "vector-effect", value: prop' value }
+  attr VectorEffect bothValues  = unsafeAttribute $ Both { key: "vector-effect", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "vector-effect", value:  prop' value  })
+  pureAttr VectorEffect value  = unsafeAttribute $ This { key: "vector-effect", value:  prop' value  }
+  unpureAttr VectorEffect eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "vector-effect", value:  prop' value  }
 
 instance Attr TextPath_ VectorEffect String where
-  attr VectorEffect value = unsafeAttribute
-    { key: "vector-effect", value: prop' value }
+  attr VectorEffect bothValues  = unsafeAttribute $ Both { key: "vector-effect", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "vector-effect", value:  prop' value  })
+  pureAttr VectorEffect value  = unsafeAttribute $ This { key: "vector-effect", value:  prop' value  }
+  unpureAttr VectorEffect eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "vector-effect", value:  prop' value  }
 
 instance Attr Tspan_ VectorEffect String where
-  attr VectorEffect value = unsafeAttribute
-    { key: "vector-effect", value: prop' value }
+  attr VectorEffect bothValues  = unsafeAttribute $ Both { key: "vector-effect", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "vector-effect", value:  prop' value  })
+  pureAttr VectorEffect value  = unsafeAttribute $ This { key: "vector-effect", value:  prop' value  }
+  unpureAttr VectorEffect eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "vector-effect", value:  prop' value  }
 
 instance Attr Use_ VectorEffect String where
-  attr VectorEffect value = unsafeAttribute
-    { key: "vector-effect", value: prop' value }
+  attr VectorEffect bothValues  = unsafeAttribute $ Both { key: "vector-effect", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "vector-effect", value:  prop' value  })
+  pureAttr VectorEffect value  = unsafeAttribute $ This { key: "vector-effect", value:  prop' value  }
+  unpureAttr VectorEffect eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "vector-effect", value:  prop' value  }
 
 instance Attr everything VectorEffect Unit where
-  attr VectorEffect _ = unsafeAttribute
-    { key: "vector-effect", value: unset' }
+  attr VectorEffect bothValues  = unsafeAttribute $ Both { key: "vector-effect", value:  unset'  } (snd bothValues <#> \_ -> { key: "vector-effect", value:  unset'  })
+  pureAttr VectorEffect _  = unsafeAttribute $ This { key: "vector-effect", value:  unset'  }
+  unpureAttr VectorEffect eventValue  = unsafeAttribute $ That $ eventValue <#> \_ -> { key: "vector-effect", value:  unset'  }

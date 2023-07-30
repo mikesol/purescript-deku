@@ -1,6 +1,8 @@
 module Deku.DOM.Attr.Operator where
 
 import Prelude
+import Data.These (These(..))
+import Data.Tuple (fst, snd)
 
 import Deku.DOM.Elt.FeMorphology (FeMorphology_)
 import Deku.DOM.Elt.FeComposite (FeComposite_)
@@ -9,11 +11,16 @@ import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 data Operator = Operator
 
 instance Attr FeComposite_ Operator String where
-  attr Operator value = unsafeAttribute { key: "operator", value: prop' value }
+  attr Operator bothValues  = unsafeAttribute $ Both { key: "operator", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "operator", value:  prop' value  })
+  pureAttr Operator value  = unsafeAttribute $ This { key: "operator", value:  prop' value  }
+  unpureAttr Operator eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "operator", value:  prop' value  }
 
 instance Attr FeMorphology_ Operator String where
-  attr Operator value = unsafeAttribute { key: "operator", value: prop' value }
+  attr Operator bothValues  = unsafeAttribute $ Both { key: "operator", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "operator", value:  prop' value  })
+  pureAttr Operator value  = unsafeAttribute $ This { key: "operator", value:  prop' value  }
+  unpureAttr Operator eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "operator", value:  prop' value  }
 
 instance Attr everything Operator Unit where
-  attr Operator _ = unsafeAttribute
-    { key: "operator", value: unset' }
+  attr Operator bothValues  = unsafeAttribute $ Both { key: "operator", value:  unset'  } (snd bothValues <#> \_ -> { key: "operator", value:  unset'  })
+  pureAttr Operator _  = unsafeAttribute $ This { key: "operator", value:  unset'  }
+  unpureAttr Operator eventValue  = unsafeAttribute $ That $ eventValue <#> \_ -> { key: "operator", value:  unset'  }

@@ -1,6 +1,8 @@
 module Deku.DOM.Attr.FontStyle where
 
 import Prelude
+import Data.These (These(..))
+import Data.Tuple (fst, snd)
 
 import Deku.DOM.Elt.Tspan (Tspan_)
 import Deku.DOM.Elt.Text (Text_)
@@ -28,89 +30,111 @@ import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 data FontStyle = FontStyle
 
 instance Attr FeBlend_ FontStyle String where
-  attr FontStyle value = unsafeAttribute
-    { key: "font-style", value: prop' value }
+  attr FontStyle bothValues  = unsafeAttribute $ Both { key: "font-style", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "font-style", value:  prop' value  })
+  pureAttr FontStyle value  = unsafeAttribute $ This { key: "font-style", value:  prop' value  }
+  unpureAttr FontStyle eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "font-style", value:  prop' value  }
 
 instance Attr FeColorMatrix_ FontStyle String where
-  attr FontStyle value = unsafeAttribute
-    { key: "font-style", value: prop' value }
+  attr FontStyle bothValues  = unsafeAttribute $ Both { key: "font-style", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "font-style", value:  prop' value  })
+  pureAttr FontStyle value  = unsafeAttribute $ This { key: "font-style", value:  prop' value  }
+  unpureAttr FontStyle eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "font-style", value:  prop' value  }
 
 instance Attr FeComponentTransfer_ FontStyle String where
-  attr FontStyle value = unsafeAttribute
-    { key: "font-style", value: prop' value }
+  attr FontStyle bothValues  = unsafeAttribute $ Both { key: "font-style", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "font-style", value:  prop' value  })
+  pureAttr FontStyle value  = unsafeAttribute $ This { key: "font-style", value:  prop' value  }
+  unpureAttr FontStyle eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "font-style", value:  prop' value  }
 
 instance Attr FeComposite_ FontStyle String where
-  attr FontStyle value = unsafeAttribute
-    { key: "font-style", value: prop' value }
+  attr FontStyle bothValues  = unsafeAttribute $ Both { key: "font-style", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "font-style", value:  prop' value  })
+  pureAttr FontStyle value  = unsafeAttribute $ This { key: "font-style", value:  prop' value  }
+  unpureAttr FontStyle eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "font-style", value:  prop' value  }
 
 instance Attr FeConvolveMatrix_ FontStyle String where
-  attr FontStyle value = unsafeAttribute
-    { key: "font-style", value: prop' value }
+  attr FontStyle bothValues  = unsafeAttribute $ Both { key: "font-style", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "font-style", value:  prop' value  })
+  pureAttr FontStyle value  = unsafeAttribute $ This { key: "font-style", value:  prop' value  }
+  unpureAttr FontStyle eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "font-style", value:  prop' value  }
 
 instance Attr FeDiffuseLighting_ FontStyle String where
-  attr FontStyle value = unsafeAttribute
-    { key: "font-style", value: prop' value }
+  attr FontStyle bothValues  = unsafeAttribute $ Both { key: "font-style", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "font-style", value:  prop' value  })
+  pureAttr FontStyle value  = unsafeAttribute $ This { key: "font-style", value:  prop' value  }
+  unpureAttr FontStyle eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "font-style", value:  prop' value  }
 
 instance Attr FeDisplacementMap_ FontStyle String where
-  attr FontStyle value = unsafeAttribute
-    { key: "font-style", value: prop' value }
+  attr FontStyle bothValues  = unsafeAttribute $ Both { key: "font-style", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "font-style", value:  prop' value  })
+  pureAttr FontStyle value  = unsafeAttribute $ This { key: "font-style", value:  prop' value  }
+  unpureAttr FontStyle eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "font-style", value:  prop' value  }
 
 instance Attr FeFlood_ FontStyle String where
-  attr FontStyle value = unsafeAttribute
-    { key: "font-style", value: prop' value }
+  attr FontStyle bothValues  = unsafeAttribute $ Both { key: "font-style", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "font-style", value:  prop' value  })
+  pureAttr FontStyle value  = unsafeAttribute $ This { key: "font-style", value:  prop' value  }
+  unpureAttr FontStyle eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "font-style", value:  prop' value  }
 
 instance Attr FeGaussianBlur_ FontStyle String where
-  attr FontStyle value = unsafeAttribute
-    { key: "font-style", value: prop' value }
+  attr FontStyle bothValues  = unsafeAttribute $ Both { key: "font-style", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "font-style", value:  prop' value  })
+  pureAttr FontStyle value  = unsafeAttribute $ This { key: "font-style", value:  prop' value  }
+  unpureAttr FontStyle eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "font-style", value:  prop' value  }
 
 instance Attr FeImage_ FontStyle String where
-  attr FontStyle value = unsafeAttribute
-    { key: "font-style", value: prop' value }
+  attr FontStyle bothValues  = unsafeAttribute $ Both { key: "font-style", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "font-style", value:  prop' value  })
+  pureAttr FontStyle value  = unsafeAttribute $ This { key: "font-style", value:  prop' value  }
+  unpureAttr FontStyle eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "font-style", value:  prop' value  }
 
 instance Attr FeMerge_ FontStyle String where
-  attr FontStyle value = unsafeAttribute
-    { key: "font-style", value: prop' value }
+  attr FontStyle bothValues  = unsafeAttribute $ Both { key: "font-style", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "font-style", value:  prop' value  })
+  pureAttr FontStyle value  = unsafeAttribute $ This { key: "font-style", value:  prop' value  }
+  unpureAttr FontStyle eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "font-style", value:  prop' value  }
 
 instance Attr FeMorphology_ FontStyle String where
-  attr FontStyle value = unsafeAttribute
-    { key: "font-style", value: prop' value }
+  attr FontStyle bothValues  = unsafeAttribute $ Both { key: "font-style", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "font-style", value:  prop' value  })
+  pureAttr FontStyle value  = unsafeAttribute $ This { key: "font-style", value:  prop' value  }
+  unpureAttr FontStyle eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "font-style", value:  prop' value  }
 
 instance Attr FeOffset_ FontStyle String where
-  attr FontStyle value = unsafeAttribute
-    { key: "font-style", value: prop' value }
+  attr FontStyle bothValues  = unsafeAttribute $ Both { key: "font-style", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "font-style", value:  prop' value  })
+  pureAttr FontStyle value  = unsafeAttribute $ This { key: "font-style", value:  prop' value  }
+  unpureAttr FontStyle eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "font-style", value:  prop' value  }
 
 instance Attr FeSpecularLighting_ FontStyle String where
-  attr FontStyle value = unsafeAttribute
-    { key: "font-style", value: prop' value }
+  attr FontStyle bothValues  = unsafeAttribute $ Both { key: "font-style", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "font-style", value:  prop' value  })
+  pureAttr FontStyle value  = unsafeAttribute $ This { key: "font-style", value:  prop' value  }
+  unpureAttr FontStyle eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "font-style", value:  prop' value  }
 
 instance Attr FeTile_ FontStyle String where
-  attr FontStyle value = unsafeAttribute
-    { key: "font-style", value: prop' value }
+  attr FontStyle bothValues  = unsafeAttribute $ Both { key: "font-style", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "font-style", value:  prop' value  })
+  pureAttr FontStyle value  = unsafeAttribute $ This { key: "font-style", value:  prop' value  }
+  unpureAttr FontStyle eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "font-style", value:  prop' value  }
 
 instance Attr FeTurbulence_ FontStyle String where
-  attr FontStyle value = unsafeAttribute
-    { key: "font-style", value: prop' value }
+  attr FontStyle bothValues  = unsafeAttribute $ Both { key: "font-style", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "font-style", value:  prop' value  })
+  pureAttr FontStyle value  = unsafeAttribute $ This { key: "font-style", value:  prop' value  }
+  unpureAttr FontStyle eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "font-style", value:  prop' value  }
 
 instance Attr Filter_ FontStyle String where
-  attr FontStyle value = unsafeAttribute
-    { key: "font-style", value: prop' value }
+  attr FontStyle bothValues  = unsafeAttribute $ Both { key: "font-style", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "font-style", value:  prop' value  })
+  pureAttr FontStyle value  = unsafeAttribute $ This { key: "font-style", value:  prop' value  }
+  unpureAttr FontStyle eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "font-style", value:  prop' value  }
 
 instance Attr Image_ FontStyle String where
-  attr FontStyle value = unsafeAttribute
-    { key: "font-style", value: prop' value }
+  attr FontStyle bothValues  = unsafeAttribute $ Both { key: "font-style", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "font-style", value:  prop' value  })
+  pureAttr FontStyle value  = unsafeAttribute $ This { key: "font-style", value:  prop' value  }
+  unpureAttr FontStyle eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "font-style", value:  prop' value  }
 
 instance Attr Switch_ FontStyle String where
-  attr FontStyle value = unsafeAttribute
-    { key: "font-style", value: prop' value }
+  attr FontStyle bothValues  = unsafeAttribute $ Both { key: "font-style", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "font-style", value:  prop' value  })
+  pureAttr FontStyle value  = unsafeAttribute $ This { key: "font-style", value:  prop' value  }
+  unpureAttr FontStyle eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "font-style", value:  prop' value  }
 
 instance Attr Text_ FontStyle String where
-  attr FontStyle value = unsafeAttribute
-    { key: "font-style", value: prop' value }
+  attr FontStyle bothValues  = unsafeAttribute $ Both { key: "font-style", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "font-style", value:  prop' value  })
+  pureAttr FontStyle value  = unsafeAttribute $ This { key: "font-style", value:  prop' value  }
+  unpureAttr FontStyle eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "font-style", value:  prop' value  }
 
 instance Attr Tspan_ FontStyle String where
-  attr FontStyle value = unsafeAttribute
-    { key: "font-style", value: prop' value }
+  attr FontStyle bothValues  = unsafeAttribute $ Both { key: "font-style", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "font-style", value:  prop' value  })
+  pureAttr FontStyle value  = unsafeAttribute $ This { key: "font-style", value:  prop' value  }
+  unpureAttr FontStyle eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "font-style", value:  prop' value  }
 
 instance Attr everything FontStyle Unit where
-  attr FontStyle _ = unsafeAttribute
-    { key: "font-style", value: unset' }
+  attr FontStyle bothValues  = unsafeAttribute $ Both { key: "font-style", value:  unset'  } (snd bothValues <#> \_ -> { key: "font-style", value:  unset'  })
+  pureAttr FontStyle _  = unsafeAttribute $ This { key: "font-style", value:  unset'  }
+  unpureAttr FontStyle eventValue  = unsafeAttribute $ That $ eventValue <#> \_ -> { key: "font-style", value:  unset'  }

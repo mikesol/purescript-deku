@@ -1,6 +1,8 @@
 module Deku.DOM.Attr.Xtype where
 
 import Prelude
+import Data.These (These(..))
+import Data.Tuple (fst, snd)
 
 import Deku.DOM.Elt.Button (Button_)
 import Deku.DOM.Elt.Input (Input_)
@@ -23,50 +25,81 @@ import Deku.DOM.Elt.AnimateTransform (AnimateTransform_)
 data Xtype = Xtype
 
 instance Attr Button_ Xtype String where
-  attr Xtype value = unsafeAttribute { key: "type", value: prop' value }
+  attr Xtype bothValues  = unsafeAttribute $ Both { key: "type", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "type", value:  prop' value  })
+  pureAttr Xtype value  = unsafeAttribute $ This { key: "type", value:  prop' value  }
+  unpureAttr Xtype eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "type", value:  prop' value  }
 
 instance Attr Input_ Xtype String where
-  attr Xtype value = unsafeAttribute { key: "type", value: prop' value }
+  attr Xtype bothValues  = unsafeAttribute $ Both { key: "type", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "type", value:  prop' value  })
+  pureAttr Xtype value  = unsafeAttribute $ This { key: "type", value:  prop' value  }
+  unpureAttr Xtype eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "type", value:  prop' value  }
 
 instance Attr Embed_ Xtype String where
-  attr Xtype value = unsafeAttribute { key: "type", value: prop' value }
+  attr Xtype bothValues  = unsafeAttribute $ Both { key: "type", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "type", value:  prop' value  })
+  pureAttr Xtype value  = unsafeAttribute $ This { key: "type", value:  prop' value  }
+  unpureAttr Xtype eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "type", value:  prop' value  }
 
 instance Attr Object_ Xtype String where
-  attr Xtype value = unsafeAttribute { key: "type", value: prop' value }
+  attr Xtype bothValues  = unsafeAttribute $ Both { key: "type", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "type", value:  prop' value  })
+  pureAttr Xtype value  = unsafeAttribute $ This { key: "type", value:  prop' value  }
+  unpureAttr Xtype eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "type", value:  prop' value  }
 
 instance Attr Script_ Xtype String where
-  attr Xtype value = unsafeAttribute { key: "type", value: prop' value }
+  attr Xtype bothValues  = unsafeAttribute $ Both { key: "type", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "type", value:  prop' value  })
+  pureAttr Xtype value  = unsafeAttribute $ This { key: "type", value:  prop' value  }
+  unpureAttr Xtype eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "type", value:  prop' value  }
 
 instance Attr Source_ Xtype String where
-  attr Xtype value = unsafeAttribute { key: "type", value: prop' value }
+  attr Xtype bothValues  = unsafeAttribute $ Both { key: "type", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "type", value:  prop' value  })
+  pureAttr Xtype value  = unsafeAttribute $ This { key: "type", value:  prop' value  }
+  unpureAttr Xtype eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "type", value:  prop' value  }
 
 instance Attr Style_ Xtype String where
-  attr Xtype value = unsafeAttribute { key: "type", value: prop' value }
+  attr Xtype bothValues  = unsafeAttribute $ Both { key: "type", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "type", value:  prop' value  })
+  pureAttr Xtype value  = unsafeAttribute $ This { key: "type", value:  prop' value  }
+  unpureAttr Xtype eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "type", value:  prop' value  }
 
 instance Attr Link_ Xtype String where
-  attr Xtype value = unsafeAttribute { key: "type", value: prop' value }
+  attr Xtype bothValues  = unsafeAttribute $ Both { key: "type", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "type", value:  prop' value  })
+  pureAttr Xtype value  = unsafeAttribute $ This { key: "type", value:  prop' value  }
+  unpureAttr Xtype eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "type", value:  prop' value  }
 
 instance Attr AnimateTransform_ Xtype String where
-  attr Xtype value = unsafeAttribute { key: "type", value: prop' value }
+  attr Xtype bothValues  = unsafeAttribute $ Both { key: "type", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "type", value:  prop' value  })
+  pureAttr Xtype value  = unsafeAttribute $ This { key: "type", value:  prop' value  }
+  unpureAttr Xtype eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "type", value:  prop' value  }
 
 instance Attr FeColorMatrix_ Xtype String where
-  attr Xtype value = unsafeAttribute { key: "type", value: prop' value }
+  attr Xtype bothValues  = unsafeAttribute $ Both { key: "type", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "type", value:  prop' value  })
+  pureAttr Xtype value  = unsafeAttribute $ This { key: "type", value:  prop' value  }
+  unpureAttr Xtype eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "type", value:  prop' value  }
 
 instance Attr FeFuncA_ Xtype String where
-  attr Xtype value = unsafeAttribute { key: "type", value: prop' value }
+  attr Xtype bothValues  = unsafeAttribute $ Both { key: "type", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "type", value:  prop' value  })
+  pureAttr Xtype value  = unsafeAttribute $ This { key: "type", value:  prop' value  }
+  unpureAttr Xtype eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "type", value:  prop' value  }
 
 instance Attr FeFuncB_ Xtype String where
-  attr Xtype value = unsafeAttribute { key: "type", value: prop' value }
+  attr Xtype bothValues  = unsafeAttribute $ Both { key: "type", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "type", value:  prop' value  })
+  pureAttr Xtype value  = unsafeAttribute $ This { key: "type", value:  prop' value  }
+  unpureAttr Xtype eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "type", value:  prop' value  }
 
 instance Attr FeFuncG_ Xtype String where
-  attr Xtype value = unsafeAttribute { key: "type", value: prop' value }
+  attr Xtype bothValues  = unsafeAttribute $ Both { key: "type", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "type", value:  prop' value  })
+  pureAttr Xtype value  = unsafeAttribute $ This { key: "type", value:  prop' value  }
+  unpureAttr Xtype eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "type", value:  prop' value  }
 
 instance Attr FeFuncR_ Xtype String where
-  attr Xtype value = unsafeAttribute { key: "type", value: prop' value }
+  attr Xtype bothValues  = unsafeAttribute $ Both { key: "type", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "type", value:  prop' value  })
+  pureAttr Xtype value  = unsafeAttribute $ This { key: "type", value:  prop' value  }
+  unpureAttr Xtype eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "type", value:  prop' value  }
 
 instance Attr FeTurbulence_ Xtype String where
-  attr Xtype value = unsafeAttribute { key: "type", value: prop' value }
+  attr Xtype bothValues  = unsafeAttribute $ Both { key: "type", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "type", value:  prop' value  })
+  pureAttr Xtype value  = unsafeAttribute $ This { key: "type", value:  prop' value  }
+  unpureAttr Xtype eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "type", value:  prop' value  }
 
 instance Attr everything Xtype Unit where
-  attr Xtype _ = unsafeAttribute
-    { key: "type", value: unset' }
+  attr Xtype bothValues  = unsafeAttribute $ Both { key: "type", value:  unset'  } (snd bothValues <#> \_ -> { key: "type", value:  unset'  })
+  pureAttr Xtype _  = unsafeAttribute $ This { key: "type", value:  unset'  }
+  unpureAttr Xtype eventValue  = unsafeAttribute $ That $ eventValue <#> \_ -> { key: "type", value:  unset'  }

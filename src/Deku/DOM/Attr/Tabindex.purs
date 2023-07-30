@@ -1,6 +1,8 @@
 module Deku.DOM.Attr.Tabindex where
 
 import Prelude
+import Data.These (These(..))
+import Data.Tuple (fst, snd)
 
 import Deku.DOM.Elt.View (View_)
 import Deku.DOM.Elt.Tspan (Tspan_)
@@ -174,506 +176,841 @@ import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 data Tabindex = Tabindex
 
 instance Attr A_ Tabindex String where
-  attr Tabindex value = unsafeAttribute { key: "tabindex", value: prop' value }
+  attr Tabindex bothValues  = unsafeAttribute $ Both { key: "tabindex", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "tabindex", value:  prop' value  })
+  pureAttr Tabindex value  = unsafeAttribute $ This { key: "tabindex", value:  prop' value  }
+  unpureAttr Tabindex eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "tabindex", value:  prop' value  }
 
 instance Attr Abbr_ Tabindex String where
-  attr Tabindex value = unsafeAttribute { key: "tabindex", value: prop' value }
+  attr Tabindex bothValues  = unsafeAttribute $ Both { key: "tabindex", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "tabindex", value:  prop' value  })
+  pureAttr Tabindex value  = unsafeAttribute $ This { key: "tabindex", value:  prop' value  }
+  unpureAttr Tabindex eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "tabindex", value:  prop' value  }
 
 instance Attr Acronym_ Tabindex String where
-  attr Tabindex value = unsafeAttribute { key: "tabindex", value: prop' value }
+  attr Tabindex bothValues  = unsafeAttribute $ Both { key: "tabindex", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "tabindex", value:  prop' value  })
+  pureAttr Tabindex value  = unsafeAttribute $ This { key: "tabindex", value:  prop' value  }
+  unpureAttr Tabindex eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "tabindex", value:  prop' value  }
 
 instance Attr Address_ Tabindex String where
-  attr Tabindex value = unsafeAttribute { key: "tabindex", value: prop' value }
+  attr Tabindex bothValues  = unsafeAttribute $ Both { key: "tabindex", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "tabindex", value:  prop' value  })
+  pureAttr Tabindex value  = unsafeAttribute $ This { key: "tabindex", value:  prop' value  }
+  unpureAttr Tabindex eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "tabindex", value:  prop' value  }
 
 instance Attr Applet_ Tabindex String where
-  attr Tabindex value = unsafeAttribute { key: "tabindex", value: prop' value }
+  attr Tabindex bothValues  = unsafeAttribute $ Both { key: "tabindex", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "tabindex", value:  prop' value  })
+  pureAttr Tabindex value  = unsafeAttribute $ This { key: "tabindex", value:  prop' value  }
+  unpureAttr Tabindex eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "tabindex", value:  prop' value  }
 
 instance Attr Area_ Tabindex String where
-  attr Tabindex value = unsafeAttribute { key: "tabindex", value: prop' value }
+  attr Tabindex bothValues  = unsafeAttribute $ Both { key: "tabindex", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "tabindex", value:  prop' value  })
+  pureAttr Tabindex value  = unsafeAttribute $ This { key: "tabindex", value:  prop' value  }
+  unpureAttr Tabindex eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "tabindex", value:  prop' value  }
 
 instance Attr Article_ Tabindex String where
-  attr Tabindex value = unsafeAttribute { key: "tabindex", value: prop' value }
+  attr Tabindex bothValues  = unsafeAttribute $ Both { key: "tabindex", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "tabindex", value:  prop' value  })
+  pureAttr Tabindex value  = unsafeAttribute $ This { key: "tabindex", value:  prop' value  }
+  unpureAttr Tabindex eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "tabindex", value:  prop' value  }
 
 instance Attr Aside_ Tabindex String where
-  attr Tabindex value = unsafeAttribute { key: "tabindex", value: prop' value }
+  attr Tabindex bothValues  = unsafeAttribute $ Both { key: "tabindex", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "tabindex", value:  prop' value  })
+  pureAttr Tabindex value  = unsafeAttribute $ This { key: "tabindex", value:  prop' value  }
+  unpureAttr Tabindex eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "tabindex", value:  prop' value  }
 
 instance Attr Audio_ Tabindex String where
-  attr Tabindex value = unsafeAttribute { key: "tabindex", value: prop' value }
+  attr Tabindex bothValues  = unsafeAttribute $ Both { key: "tabindex", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "tabindex", value:  prop' value  })
+  pureAttr Tabindex value  = unsafeAttribute $ This { key: "tabindex", value:  prop' value  }
+  unpureAttr Tabindex eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "tabindex", value:  prop' value  }
 
 instance Attr B_ Tabindex String where
-  attr Tabindex value = unsafeAttribute { key: "tabindex", value: prop' value }
+  attr Tabindex bothValues  = unsafeAttribute $ Both { key: "tabindex", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "tabindex", value:  prop' value  })
+  pureAttr Tabindex value  = unsafeAttribute $ This { key: "tabindex", value:  prop' value  }
+  unpureAttr Tabindex eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "tabindex", value:  prop' value  }
 
 instance Attr Base_ Tabindex String where
-  attr Tabindex value = unsafeAttribute { key: "tabindex", value: prop' value }
+  attr Tabindex bothValues  = unsafeAttribute $ Both { key: "tabindex", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "tabindex", value:  prop' value  })
+  pureAttr Tabindex value  = unsafeAttribute $ This { key: "tabindex", value:  prop' value  }
+  unpureAttr Tabindex eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "tabindex", value:  prop' value  }
 
 instance Attr Basefont_ Tabindex String where
-  attr Tabindex value = unsafeAttribute { key: "tabindex", value: prop' value }
+  attr Tabindex bothValues  = unsafeAttribute $ Both { key: "tabindex", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "tabindex", value:  prop' value  })
+  pureAttr Tabindex value  = unsafeAttribute $ This { key: "tabindex", value:  prop' value  }
+  unpureAttr Tabindex eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "tabindex", value:  prop' value  }
 
 instance Attr Bdi_ Tabindex String where
-  attr Tabindex value = unsafeAttribute { key: "tabindex", value: prop' value }
+  attr Tabindex bothValues  = unsafeAttribute $ Both { key: "tabindex", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "tabindex", value:  prop' value  })
+  pureAttr Tabindex value  = unsafeAttribute $ This { key: "tabindex", value:  prop' value  }
+  unpureAttr Tabindex eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "tabindex", value:  prop' value  }
 
 instance Attr Bdo_ Tabindex String where
-  attr Tabindex value = unsafeAttribute { key: "tabindex", value: prop' value }
+  attr Tabindex bothValues  = unsafeAttribute $ Both { key: "tabindex", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "tabindex", value:  prop' value  })
+  pureAttr Tabindex value  = unsafeAttribute $ This { key: "tabindex", value:  prop' value  }
+  unpureAttr Tabindex eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "tabindex", value:  prop' value  }
 
 instance Attr Big_ Tabindex String where
-  attr Tabindex value = unsafeAttribute { key: "tabindex", value: prop' value }
+  attr Tabindex bothValues  = unsafeAttribute $ Both { key: "tabindex", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "tabindex", value:  prop' value  })
+  pureAttr Tabindex value  = unsafeAttribute $ This { key: "tabindex", value:  prop' value  }
+  unpureAttr Tabindex eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "tabindex", value:  prop' value  }
 
 instance Attr Blockquote_ Tabindex String where
-  attr Tabindex value = unsafeAttribute { key: "tabindex", value: prop' value }
+  attr Tabindex bothValues  = unsafeAttribute $ Both { key: "tabindex", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "tabindex", value:  prop' value  })
+  pureAttr Tabindex value  = unsafeAttribute $ This { key: "tabindex", value:  prop' value  }
+  unpureAttr Tabindex eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "tabindex", value:  prop' value  }
 
 instance Attr Body_ Tabindex String where
-  attr Tabindex value = unsafeAttribute { key: "tabindex", value: prop' value }
+  attr Tabindex bothValues  = unsafeAttribute $ Both { key: "tabindex", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "tabindex", value:  prop' value  })
+  pureAttr Tabindex value  = unsafeAttribute $ This { key: "tabindex", value:  prop' value  }
+  unpureAttr Tabindex eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "tabindex", value:  prop' value  }
 
 instance Attr Br_ Tabindex String where
-  attr Tabindex value = unsafeAttribute { key: "tabindex", value: prop' value }
+  attr Tabindex bothValues  = unsafeAttribute $ Both { key: "tabindex", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "tabindex", value:  prop' value  })
+  pureAttr Tabindex value  = unsafeAttribute $ This { key: "tabindex", value:  prop' value  }
+  unpureAttr Tabindex eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "tabindex", value:  prop' value  }
 
 instance Attr Button_ Tabindex String where
-  attr Tabindex value = unsafeAttribute { key: "tabindex", value: prop' value }
+  attr Tabindex bothValues  = unsafeAttribute $ Both { key: "tabindex", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "tabindex", value:  prop' value  })
+  pureAttr Tabindex value  = unsafeAttribute $ This { key: "tabindex", value:  prop' value  }
+  unpureAttr Tabindex eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "tabindex", value:  prop' value  }
 
 instance Attr Canvas_ Tabindex String where
-  attr Tabindex value = unsafeAttribute { key: "tabindex", value: prop' value }
+  attr Tabindex bothValues  = unsafeAttribute $ Both { key: "tabindex", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "tabindex", value:  prop' value  })
+  pureAttr Tabindex value  = unsafeAttribute $ This { key: "tabindex", value:  prop' value  }
+  unpureAttr Tabindex eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "tabindex", value:  prop' value  }
 
 instance Attr Caption_ Tabindex String where
-  attr Tabindex value = unsafeAttribute { key: "tabindex", value: prop' value }
+  attr Tabindex bothValues  = unsafeAttribute $ Both { key: "tabindex", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "tabindex", value:  prop' value  })
+  pureAttr Tabindex value  = unsafeAttribute $ This { key: "tabindex", value:  prop' value  }
+  unpureAttr Tabindex eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "tabindex", value:  prop' value  }
 
 instance Attr Center_ Tabindex String where
-  attr Tabindex value = unsafeAttribute { key: "tabindex", value: prop' value }
+  attr Tabindex bothValues  = unsafeAttribute $ Both { key: "tabindex", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "tabindex", value:  prop' value  })
+  pureAttr Tabindex value  = unsafeAttribute $ This { key: "tabindex", value:  prop' value  }
+  unpureAttr Tabindex eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "tabindex", value:  prop' value  }
 
 instance Attr Cite_ Tabindex String where
-  attr Tabindex value = unsafeAttribute { key: "tabindex", value: prop' value }
+  attr Tabindex bothValues  = unsafeAttribute $ Both { key: "tabindex", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "tabindex", value:  prop' value  })
+  pureAttr Tabindex value  = unsafeAttribute $ This { key: "tabindex", value:  prop' value  }
+  unpureAttr Tabindex eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "tabindex", value:  prop' value  }
 
 instance Attr Code_ Tabindex String where
-  attr Tabindex value = unsafeAttribute { key: "tabindex", value: prop' value }
+  attr Tabindex bothValues  = unsafeAttribute $ Both { key: "tabindex", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "tabindex", value:  prop' value  })
+  pureAttr Tabindex value  = unsafeAttribute $ This { key: "tabindex", value:  prop' value  }
+  unpureAttr Tabindex eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "tabindex", value:  prop' value  }
 
 instance Attr Col_ Tabindex String where
-  attr Tabindex value = unsafeAttribute { key: "tabindex", value: prop' value }
+  attr Tabindex bothValues  = unsafeAttribute $ Both { key: "tabindex", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "tabindex", value:  prop' value  })
+  pureAttr Tabindex value  = unsafeAttribute $ This { key: "tabindex", value:  prop' value  }
+  unpureAttr Tabindex eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "tabindex", value:  prop' value  }
 
 instance Attr Colgroup_ Tabindex String where
-  attr Tabindex value = unsafeAttribute { key: "tabindex", value: prop' value }
+  attr Tabindex bothValues  = unsafeAttribute $ Both { key: "tabindex", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "tabindex", value:  prop' value  })
+  pureAttr Tabindex value  = unsafeAttribute $ This { key: "tabindex", value:  prop' value  }
+  unpureAttr Tabindex eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "tabindex", value:  prop' value  }
 
 instance Attr Xdata_ Tabindex String where
-  attr Tabindex value = unsafeAttribute { key: "tabindex", value: prop' value }
+  attr Tabindex bothValues  = unsafeAttribute $ Both { key: "tabindex", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "tabindex", value:  prop' value  })
+  pureAttr Tabindex value  = unsafeAttribute $ This { key: "tabindex", value:  prop' value  }
+  unpureAttr Tabindex eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "tabindex", value:  prop' value  }
 
 instance Attr Datalist_ Tabindex String where
-  attr Tabindex value = unsafeAttribute { key: "tabindex", value: prop' value }
+  attr Tabindex bothValues  = unsafeAttribute $ Both { key: "tabindex", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "tabindex", value:  prop' value  })
+  pureAttr Tabindex value  = unsafeAttribute $ This { key: "tabindex", value:  prop' value  }
+  unpureAttr Tabindex eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "tabindex", value:  prop' value  }
 
 instance Attr Dd_ Tabindex String where
-  attr Tabindex value = unsafeAttribute { key: "tabindex", value: prop' value }
+  attr Tabindex bothValues  = unsafeAttribute $ Both { key: "tabindex", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "tabindex", value:  prop' value  })
+  pureAttr Tabindex value  = unsafeAttribute $ This { key: "tabindex", value:  prop' value  }
+  unpureAttr Tabindex eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "tabindex", value:  prop' value  }
 
 instance Attr Del_ Tabindex String where
-  attr Tabindex value = unsafeAttribute { key: "tabindex", value: prop' value }
+  attr Tabindex bothValues  = unsafeAttribute $ Both { key: "tabindex", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "tabindex", value:  prop' value  })
+  pureAttr Tabindex value  = unsafeAttribute $ This { key: "tabindex", value:  prop' value  }
+  unpureAttr Tabindex eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "tabindex", value:  prop' value  }
 
 instance Attr Details_ Tabindex String where
-  attr Tabindex value = unsafeAttribute { key: "tabindex", value: prop' value }
+  attr Tabindex bothValues  = unsafeAttribute $ Both { key: "tabindex", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "tabindex", value:  prop' value  })
+  pureAttr Tabindex value  = unsafeAttribute $ This { key: "tabindex", value:  prop' value  }
+  unpureAttr Tabindex eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "tabindex", value:  prop' value  }
 
 instance Attr Dfn_ Tabindex String where
-  attr Tabindex value = unsafeAttribute { key: "tabindex", value: prop' value }
+  attr Tabindex bothValues  = unsafeAttribute $ Both { key: "tabindex", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "tabindex", value:  prop' value  })
+  pureAttr Tabindex value  = unsafeAttribute $ This { key: "tabindex", value:  prop' value  }
+  unpureAttr Tabindex eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "tabindex", value:  prop' value  }
 
 instance Attr Dialog_ Tabindex String where
-  attr Tabindex value = unsafeAttribute { key: "tabindex", value: prop' value }
+  attr Tabindex bothValues  = unsafeAttribute $ Both { key: "tabindex", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "tabindex", value:  prop' value  })
+  pureAttr Tabindex value  = unsafeAttribute $ This { key: "tabindex", value:  prop' value  }
+  unpureAttr Tabindex eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "tabindex", value:  prop' value  }
 
 instance Attr Dir_ Tabindex String where
-  attr Tabindex value = unsafeAttribute { key: "tabindex", value: prop' value }
+  attr Tabindex bothValues  = unsafeAttribute $ Both { key: "tabindex", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "tabindex", value:  prop' value  })
+  pureAttr Tabindex value  = unsafeAttribute $ This { key: "tabindex", value:  prop' value  }
+  unpureAttr Tabindex eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "tabindex", value:  prop' value  }
 
 instance Attr Div_ Tabindex String where
-  attr Tabindex value = unsafeAttribute { key: "tabindex", value: prop' value }
+  attr Tabindex bothValues  = unsafeAttribute $ Both { key: "tabindex", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "tabindex", value:  prop' value  })
+  pureAttr Tabindex value  = unsafeAttribute $ This { key: "tabindex", value:  prop' value  }
+  unpureAttr Tabindex eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "tabindex", value:  prop' value  }
 
 instance Attr Dl_ Tabindex String where
-  attr Tabindex value = unsafeAttribute { key: "tabindex", value: prop' value }
+  attr Tabindex bothValues  = unsafeAttribute $ Both { key: "tabindex", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "tabindex", value:  prop' value  })
+  pureAttr Tabindex value  = unsafeAttribute $ This { key: "tabindex", value:  prop' value  }
+  unpureAttr Tabindex eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "tabindex", value:  prop' value  }
 
 instance Attr Dt_ Tabindex String where
-  attr Tabindex value = unsafeAttribute { key: "tabindex", value: prop' value }
+  attr Tabindex bothValues  = unsafeAttribute $ Both { key: "tabindex", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "tabindex", value:  prop' value  })
+  pureAttr Tabindex value  = unsafeAttribute $ This { key: "tabindex", value:  prop' value  }
+  unpureAttr Tabindex eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "tabindex", value:  prop' value  }
 
 instance Attr Em_ Tabindex String where
-  attr Tabindex value = unsafeAttribute { key: "tabindex", value: prop' value }
+  attr Tabindex bothValues  = unsafeAttribute $ Both { key: "tabindex", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "tabindex", value:  prop' value  })
+  pureAttr Tabindex value  = unsafeAttribute $ This { key: "tabindex", value:  prop' value  }
+  unpureAttr Tabindex eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "tabindex", value:  prop' value  }
 
 instance Attr Embed_ Tabindex String where
-  attr Tabindex value = unsafeAttribute { key: "tabindex", value: prop' value }
+  attr Tabindex bothValues  = unsafeAttribute $ Both { key: "tabindex", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "tabindex", value:  prop' value  })
+  pureAttr Tabindex value  = unsafeAttribute $ This { key: "tabindex", value:  prop' value  }
+  unpureAttr Tabindex eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "tabindex", value:  prop' value  }
 
 instance Attr Fieldset_ Tabindex String where
-  attr Tabindex value = unsafeAttribute { key: "tabindex", value: prop' value }
+  attr Tabindex bothValues  = unsafeAttribute $ Both { key: "tabindex", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "tabindex", value:  prop' value  })
+  pureAttr Tabindex value  = unsafeAttribute $ This { key: "tabindex", value:  prop' value  }
+  unpureAttr Tabindex eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "tabindex", value:  prop' value  }
 
 instance Attr Figcaption_ Tabindex String where
-  attr Tabindex value = unsafeAttribute { key: "tabindex", value: prop' value }
+  attr Tabindex bothValues  = unsafeAttribute $ Both { key: "tabindex", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "tabindex", value:  prop' value  })
+  pureAttr Tabindex value  = unsafeAttribute $ This { key: "tabindex", value:  prop' value  }
+  unpureAttr Tabindex eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "tabindex", value:  prop' value  }
 
 instance Attr Figure_ Tabindex String where
-  attr Tabindex value = unsafeAttribute { key: "tabindex", value: prop' value }
+  attr Tabindex bothValues  = unsafeAttribute $ Both { key: "tabindex", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "tabindex", value:  prop' value  })
+  pureAttr Tabindex value  = unsafeAttribute $ This { key: "tabindex", value:  prop' value  }
+  unpureAttr Tabindex eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "tabindex", value:  prop' value  }
 
 instance Attr Font_ Tabindex String where
-  attr Tabindex value = unsafeAttribute { key: "tabindex", value: prop' value }
+  attr Tabindex bothValues  = unsafeAttribute $ Both { key: "tabindex", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "tabindex", value:  prop' value  })
+  pureAttr Tabindex value  = unsafeAttribute $ This { key: "tabindex", value:  prop' value  }
+  unpureAttr Tabindex eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "tabindex", value:  prop' value  }
 
 instance Attr Footer_ Tabindex String where
-  attr Tabindex value = unsafeAttribute { key: "tabindex", value: prop' value }
+  attr Tabindex bothValues  = unsafeAttribute $ Both { key: "tabindex", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "tabindex", value:  prop' value  })
+  pureAttr Tabindex value  = unsafeAttribute $ This { key: "tabindex", value:  prop' value  }
+  unpureAttr Tabindex eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "tabindex", value:  prop' value  }
 
 instance Attr Form_ Tabindex String where
-  attr Tabindex value = unsafeAttribute { key: "tabindex", value: prop' value }
+  attr Tabindex bothValues  = unsafeAttribute $ Both { key: "tabindex", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "tabindex", value:  prop' value  })
+  pureAttr Tabindex value  = unsafeAttribute $ This { key: "tabindex", value:  prop' value  }
+  unpureAttr Tabindex eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "tabindex", value:  prop' value  }
 
 instance Attr Frame_ Tabindex String where
-  attr Tabindex value = unsafeAttribute { key: "tabindex", value: prop' value }
+  attr Tabindex bothValues  = unsafeAttribute $ Both { key: "tabindex", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "tabindex", value:  prop' value  })
+  pureAttr Tabindex value  = unsafeAttribute $ This { key: "tabindex", value:  prop' value  }
+  unpureAttr Tabindex eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "tabindex", value:  prop' value  }
 
 instance Attr Frameset_ Tabindex String where
-  attr Tabindex value = unsafeAttribute { key: "tabindex", value: prop' value }
+  attr Tabindex bothValues  = unsafeAttribute $ Both { key: "tabindex", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "tabindex", value:  prop' value  })
+  pureAttr Tabindex value  = unsafeAttribute $ This { key: "tabindex", value:  prop' value  }
+  unpureAttr Tabindex eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "tabindex", value:  prop' value  }
 
 instance Attr H1_ Tabindex String where
-  attr Tabindex value = unsafeAttribute { key: "tabindex", value: prop' value }
+  attr Tabindex bothValues  = unsafeAttribute $ Both { key: "tabindex", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "tabindex", value:  prop' value  })
+  pureAttr Tabindex value  = unsafeAttribute $ This { key: "tabindex", value:  prop' value  }
+  unpureAttr Tabindex eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "tabindex", value:  prop' value  }
 
 instance Attr H2_ Tabindex String where
-  attr Tabindex value = unsafeAttribute { key: "tabindex", value: prop' value }
+  attr Tabindex bothValues  = unsafeAttribute $ Both { key: "tabindex", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "tabindex", value:  prop' value  })
+  pureAttr Tabindex value  = unsafeAttribute $ This { key: "tabindex", value:  prop' value  }
+  unpureAttr Tabindex eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "tabindex", value:  prop' value  }
 
 instance Attr H3_ Tabindex String where
-  attr Tabindex value = unsafeAttribute { key: "tabindex", value: prop' value }
+  attr Tabindex bothValues  = unsafeAttribute $ Both { key: "tabindex", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "tabindex", value:  prop' value  })
+  pureAttr Tabindex value  = unsafeAttribute $ This { key: "tabindex", value:  prop' value  }
+  unpureAttr Tabindex eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "tabindex", value:  prop' value  }
 
 instance Attr H4_ Tabindex String where
-  attr Tabindex value = unsafeAttribute { key: "tabindex", value: prop' value }
+  attr Tabindex bothValues  = unsafeAttribute $ Both { key: "tabindex", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "tabindex", value:  prop' value  })
+  pureAttr Tabindex value  = unsafeAttribute $ This { key: "tabindex", value:  prop' value  }
+  unpureAttr Tabindex eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "tabindex", value:  prop' value  }
 
 instance Attr H5_ Tabindex String where
-  attr Tabindex value = unsafeAttribute { key: "tabindex", value: prop' value }
+  attr Tabindex bothValues  = unsafeAttribute $ Both { key: "tabindex", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "tabindex", value:  prop' value  })
+  pureAttr Tabindex value  = unsafeAttribute $ This { key: "tabindex", value:  prop' value  }
+  unpureAttr Tabindex eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "tabindex", value:  prop' value  }
 
 instance Attr H6_ Tabindex String where
-  attr Tabindex value = unsafeAttribute { key: "tabindex", value: prop' value }
+  attr Tabindex bothValues  = unsafeAttribute $ Both { key: "tabindex", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "tabindex", value:  prop' value  })
+  pureAttr Tabindex value  = unsafeAttribute $ This { key: "tabindex", value:  prop' value  }
+  unpureAttr Tabindex eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "tabindex", value:  prop' value  }
 
 instance Attr Head_ Tabindex String where
-  attr Tabindex value = unsafeAttribute { key: "tabindex", value: prop' value }
+  attr Tabindex bothValues  = unsafeAttribute $ Both { key: "tabindex", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "tabindex", value:  prop' value  })
+  pureAttr Tabindex value  = unsafeAttribute $ This { key: "tabindex", value:  prop' value  }
+  unpureAttr Tabindex eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "tabindex", value:  prop' value  }
 
 instance Attr Header_ Tabindex String where
-  attr Tabindex value = unsafeAttribute { key: "tabindex", value: prop' value }
+  attr Tabindex bothValues  = unsafeAttribute $ Both { key: "tabindex", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "tabindex", value:  prop' value  })
+  pureAttr Tabindex value  = unsafeAttribute $ This { key: "tabindex", value:  prop' value  }
+  unpureAttr Tabindex eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "tabindex", value:  prop' value  }
 
 instance Attr Hr_ Tabindex String where
-  attr Tabindex value = unsafeAttribute { key: "tabindex", value: prop' value }
+  attr Tabindex bothValues  = unsafeAttribute $ Both { key: "tabindex", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "tabindex", value:  prop' value  })
+  pureAttr Tabindex value  = unsafeAttribute $ This { key: "tabindex", value:  prop' value  }
+  unpureAttr Tabindex eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "tabindex", value:  prop' value  }
 
 instance Attr Html_ Tabindex String where
-  attr Tabindex value = unsafeAttribute { key: "tabindex", value: prop' value }
+  attr Tabindex bothValues  = unsafeAttribute $ Both { key: "tabindex", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "tabindex", value:  prop' value  })
+  pureAttr Tabindex value  = unsafeAttribute $ This { key: "tabindex", value:  prop' value  }
+  unpureAttr Tabindex eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "tabindex", value:  prop' value  }
 
 instance Attr I_ Tabindex String where
-  attr Tabindex value = unsafeAttribute { key: "tabindex", value: prop' value }
+  attr Tabindex bothValues  = unsafeAttribute $ Both { key: "tabindex", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "tabindex", value:  prop' value  })
+  pureAttr Tabindex value  = unsafeAttribute $ This { key: "tabindex", value:  prop' value  }
+  unpureAttr Tabindex eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "tabindex", value:  prop' value  }
 
 instance Attr Iframe_ Tabindex String where
-  attr Tabindex value = unsafeAttribute { key: "tabindex", value: prop' value }
+  attr Tabindex bothValues  = unsafeAttribute $ Both { key: "tabindex", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "tabindex", value:  prop' value  })
+  pureAttr Tabindex value  = unsafeAttribute $ This { key: "tabindex", value:  prop' value  }
+  unpureAttr Tabindex eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "tabindex", value:  prop' value  }
 
 instance Attr Img_ Tabindex String where
-  attr Tabindex value = unsafeAttribute { key: "tabindex", value: prop' value }
+  attr Tabindex bothValues  = unsafeAttribute $ Both { key: "tabindex", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "tabindex", value:  prop' value  })
+  pureAttr Tabindex value  = unsafeAttribute $ This { key: "tabindex", value:  prop' value  }
+  unpureAttr Tabindex eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "tabindex", value:  prop' value  }
 
 instance Attr Input_ Tabindex String where
-  attr Tabindex value = unsafeAttribute { key: "tabindex", value: prop' value }
+  attr Tabindex bothValues  = unsafeAttribute $ Both { key: "tabindex", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "tabindex", value:  prop' value  })
+  pureAttr Tabindex value  = unsafeAttribute $ This { key: "tabindex", value:  prop' value  }
+  unpureAttr Tabindex eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "tabindex", value:  prop' value  }
 
 instance Attr Ins_ Tabindex String where
-  attr Tabindex value = unsafeAttribute { key: "tabindex", value: prop' value }
+  attr Tabindex bothValues  = unsafeAttribute $ Both { key: "tabindex", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "tabindex", value:  prop' value  })
+  pureAttr Tabindex value  = unsafeAttribute $ This { key: "tabindex", value:  prop' value  }
+  unpureAttr Tabindex eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "tabindex", value:  prop' value  }
 
 instance Attr Kbd_ Tabindex String where
-  attr Tabindex value = unsafeAttribute { key: "tabindex", value: prop' value }
+  attr Tabindex bothValues  = unsafeAttribute $ Both { key: "tabindex", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "tabindex", value:  prop' value  })
+  pureAttr Tabindex value  = unsafeAttribute $ This { key: "tabindex", value:  prop' value  }
+  unpureAttr Tabindex eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "tabindex", value:  prop' value  }
 
 instance Attr Label_ Tabindex String where
-  attr Tabindex value = unsafeAttribute { key: "tabindex", value: prop' value }
+  attr Tabindex bothValues  = unsafeAttribute $ Both { key: "tabindex", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "tabindex", value:  prop' value  })
+  pureAttr Tabindex value  = unsafeAttribute $ This { key: "tabindex", value:  prop' value  }
+  unpureAttr Tabindex eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "tabindex", value:  prop' value  }
 
 instance Attr Legend_ Tabindex String where
-  attr Tabindex value = unsafeAttribute { key: "tabindex", value: prop' value }
+  attr Tabindex bothValues  = unsafeAttribute $ Both { key: "tabindex", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "tabindex", value:  prop' value  })
+  pureAttr Tabindex value  = unsafeAttribute $ This { key: "tabindex", value:  prop' value  }
+  unpureAttr Tabindex eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "tabindex", value:  prop' value  }
 
 instance Attr Li_ Tabindex String where
-  attr Tabindex value = unsafeAttribute { key: "tabindex", value: prop' value }
+  attr Tabindex bothValues  = unsafeAttribute $ Both { key: "tabindex", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "tabindex", value:  prop' value  })
+  pureAttr Tabindex value  = unsafeAttribute $ This { key: "tabindex", value:  prop' value  }
+  unpureAttr Tabindex eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "tabindex", value:  prop' value  }
 
 instance Attr Link_ Tabindex String where
-  attr Tabindex value = unsafeAttribute { key: "tabindex", value: prop' value }
+  attr Tabindex bothValues  = unsafeAttribute $ Both { key: "tabindex", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "tabindex", value:  prop' value  })
+  pureAttr Tabindex value  = unsafeAttribute $ This { key: "tabindex", value:  prop' value  }
+  unpureAttr Tabindex eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "tabindex", value:  prop' value  }
 
 instance Attr Main_ Tabindex String where
-  attr Tabindex value = unsafeAttribute { key: "tabindex", value: prop' value }
+  attr Tabindex bothValues  = unsafeAttribute $ Both { key: "tabindex", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "tabindex", value:  prop' value  })
+  pureAttr Tabindex value  = unsafeAttribute $ This { key: "tabindex", value:  prop' value  }
+  unpureAttr Tabindex eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "tabindex", value:  prop' value  }
 
 instance Attr Map_ Tabindex String where
-  attr Tabindex value = unsafeAttribute { key: "tabindex", value: prop' value }
+  attr Tabindex bothValues  = unsafeAttribute $ Both { key: "tabindex", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "tabindex", value:  prop' value  })
+  pureAttr Tabindex value  = unsafeAttribute $ This { key: "tabindex", value:  prop' value  }
+  unpureAttr Tabindex eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "tabindex", value:  prop' value  }
 
 instance Attr Mark_ Tabindex String where
-  attr Tabindex value = unsafeAttribute { key: "tabindex", value: prop' value }
+  attr Tabindex bothValues  = unsafeAttribute $ Both { key: "tabindex", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "tabindex", value:  prop' value  })
+  pureAttr Tabindex value  = unsafeAttribute $ This { key: "tabindex", value:  prop' value  }
+  unpureAttr Tabindex eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "tabindex", value:  prop' value  }
 
 instance Attr Meta_ Tabindex String where
-  attr Tabindex value = unsafeAttribute { key: "tabindex", value: prop' value }
+  attr Tabindex bothValues  = unsafeAttribute $ Both { key: "tabindex", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "tabindex", value:  prop' value  })
+  pureAttr Tabindex value  = unsafeAttribute $ This { key: "tabindex", value:  prop' value  }
+  unpureAttr Tabindex eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "tabindex", value:  prop' value  }
 
 instance Attr Meter_ Tabindex String where
-  attr Tabindex value = unsafeAttribute { key: "tabindex", value: prop' value }
+  attr Tabindex bothValues  = unsafeAttribute $ Both { key: "tabindex", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "tabindex", value:  prop' value  })
+  pureAttr Tabindex value  = unsafeAttribute $ This { key: "tabindex", value:  prop' value  }
+  unpureAttr Tabindex eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "tabindex", value:  prop' value  }
 
 instance Attr Nav_ Tabindex String where
-  attr Tabindex value = unsafeAttribute { key: "tabindex", value: prop' value }
+  attr Tabindex bothValues  = unsafeAttribute $ Both { key: "tabindex", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "tabindex", value:  prop' value  })
+  pureAttr Tabindex value  = unsafeAttribute $ This { key: "tabindex", value:  prop' value  }
+  unpureAttr Tabindex eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "tabindex", value:  prop' value  }
 
 instance Attr Noframes_ Tabindex String where
-  attr Tabindex value = unsafeAttribute { key: "tabindex", value: prop' value }
+  attr Tabindex bothValues  = unsafeAttribute $ Both { key: "tabindex", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "tabindex", value:  prop' value  })
+  pureAttr Tabindex value  = unsafeAttribute $ This { key: "tabindex", value:  prop' value  }
+  unpureAttr Tabindex eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "tabindex", value:  prop' value  }
 
 instance Attr Noscript_ Tabindex String where
-  attr Tabindex value = unsafeAttribute { key: "tabindex", value: prop' value }
+  attr Tabindex bothValues  = unsafeAttribute $ Both { key: "tabindex", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "tabindex", value:  prop' value  })
+  pureAttr Tabindex value  = unsafeAttribute $ This { key: "tabindex", value:  prop' value  }
+  unpureAttr Tabindex eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "tabindex", value:  prop' value  }
 
 instance Attr Object_ Tabindex String where
-  attr Tabindex value = unsafeAttribute { key: "tabindex", value: prop' value }
+  attr Tabindex bothValues  = unsafeAttribute $ Both { key: "tabindex", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "tabindex", value:  prop' value  })
+  pureAttr Tabindex value  = unsafeAttribute $ This { key: "tabindex", value:  prop' value  }
+  unpureAttr Tabindex eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "tabindex", value:  prop' value  }
 
 instance Attr Ol_ Tabindex String where
-  attr Tabindex value = unsafeAttribute { key: "tabindex", value: prop' value }
+  attr Tabindex bothValues  = unsafeAttribute $ Both { key: "tabindex", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "tabindex", value:  prop' value  })
+  pureAttr Tabindex value  = unsafeAttribute $ This { key: "tabindex", value:  prop' value  }
+  unpureAttr Tabindex eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "tabindex", value:  prop' value  }
 
 instance Attr Optgroup_ Tabindex String where
-  attr Tabindex value = unsafeAttribute { key: "tabindex", value: prop' value }
+  attr Tabindex bothValues  = unsafeAttribute $ Both { key: "tabindex", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "tabindex", value:  prop' value  })
+  pureAttr Tabindex value  = unsafeAttribute $ This { key: "tabindex", value:  prop' value  }
+  unpureAttr Tabindex eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "tabindex", value:  prop' value  }
 
 instance Attr Option_ Tabindex String where
-  attr Tabindex value = unsafeAttribute { key: "tabindex", value: prop' value }
+  attr Tabindex bothValues  = unsafeAttribute $ Both { key: "tabindex", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "tabindex", value:  prop' value  })
+  pureAttr Tabindex value  = unsafeAttribute $ This { key: "tabindex", value:  prop' value  }
+  unpureAttr Tabindex eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "tabindex", value:  prop' value  }
 
 instance Attr Output_ Tabindex String where
-  attr Tabindex value = unsafeAttribute { key: "tabindex", value: prop' value }
+  attr Tabindex bothValues  = unsafeAttribute $ Both { key: "tabindex", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "tabindex", value:  prop' value  })
+  pureAttr Tabindex value  = unsafeAttribute $ This { key: "tabindex", value:  prop' value  }
+  unpureAttr Tabindex eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "tabindex", value:  prop' value  }
 
 instance Attr P_ Tabindex String where
-  attr Tabindex value = unsafeAttribute { key: "tabindex", value: prop' value }
+  attr Tabindex bothValues  = unsafeAttribute $ Both { key: "tabindex", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "tabindex", value:  prop' value  })
+  pureAttr Tabindex value  = unsafeAttribute $ This { key: "tabindex", value:  prop' value  }
+  unpureAttr Tabindex eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "tabindex", value:  prop' value  }
 
 instance Attr Param_ Tabindex String where
-  attr Tabindex value = unsafeAttribute { key: "tabindex", value: prop' value }
+  attr Tabindex bothValues  = unsafeAttribute $ Both { key: "tabindex", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "tabindex", value:  prop' value  })
+  pureAttr Tabindex value  = unsafeAttribute $ This { key: "tabindex", value:  prop' value  }
+  unpureAttr Tabindex eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "tabindex", value:  prop' value  }
 
 instance Attr Picture_ Tabindex String where
-  attr Tabindex value = unsafeAttribute { key: "tabindex", value: prop' value }
+  attr Tabindex bothValues  = unsafeAttribute $ Both { key: "tabindex", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "tabindex", value:  prop' value  })
+  pureAttr Tabindex value  = unsafeAttribute $ This { key: "tabindex", value:  prop' value  }
+  unpureAttr Tabindex eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "tabindex", value:  prop' value  }
 
 instance Attr Pre_ Tabindex String where
-  attr Tabindex value = unsafeAttribute { key: "tabindex", value: prop' value }
+  attr Tabindex bothValues  = unsafeAttribute $ Both { key: "tabindex", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "tabindex", value:  prop' value  })
+  pureAttr Tabindex value  = unsafeAttribute $ This { key: "tabindex", value:  prop' value  }
+  unpureAttr Tabindex eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "tabindex", value:  prop' value  }
 
 instance Attr Progress_ Tabindex String where
-  attr Tabindex value = unsafeAttribute { key: "tabindex", value: prop' value }
+  attr Tabindex bothValues  = unsafeAttribute $ Both { key: "tabindex", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "tabindex", value:  prop' value  })
+  pureAttr Tabindex value  = unsafeAttribute $ This { key: "tabindex", value:  prop' value  }
+  unpureAttr Tabindex eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "tabindex", value:  prop' value  }
 
 instance Attr Q_ Tabindex String where
-  attr Tabindex value = unsafeAttribute { key: "tabindex", value: prop' value }
+  attr Tabindex bothValues  = unsafeAttribute $ Both { key: "tabindex", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "tabindex", value:  prop' value  })
+  pureAttr Tabindex value  = unsafeAttribute $ This { key: "tabindex", value:  prop' value  }
+  unpureAttr Tabindex eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "tabindex", value:  prop' value  }
 
 instance Attr Rp_ Tabindex String where
-  attr Tabindex value = unsafeAttribute { key: "tabindex", value: prop' value }
+  attr Tabindex bothValues  = unsafeAttribute $ Both { key: "tabindex", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "tabindex", value:  prop' value  })
+  pureAttr Tabindex value  = unsafeAttribute $ This { key: "tabindex", value:  prop' value  }
+  unpureAttr Tabindex eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "tabindex", value:  prop' value  }
 
 instance Attr Rt_ Tabindex String where
-  attr Tabindex value = unsafeAttribute { key: "tabindex", value: prop' value }
+  attr Tabindex bothValues  = unsafeAttribute $ Both { key: "tabindex", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "tabindex", value:  prop' value  })
+  pureAttr Tabindex value  = unsafeAttribute $ This { key: "tabindex", value:  prop' value  }
+  unpureAttr Tabindex eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "tabindex", value:  prop' value  }
 
 instance Attr Ruby_ Tabindex String where
-  attr Tabindex value = unsafeAttribute { key: "tabindex", value: prop' value }
+  attr Tabindex bothValues  = unsafeAttribute $ Both { key: "tabindex", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "tabindex", value:  prop' value  })
+  pureAttr Tabindex value  = unsafeAttribute $ This { key: "tabindex", value:  prop' value  }
+  unpureAttr Tabindex eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "tabindex", value:  prop' value  }
 
 instance Attr S_ Tabindex String where
-  attr Tabindex value = unsafeAttribute { key: "tabindex", value: prop' value }
+  attr Tabindex bothValues  = unsafeAttribute $ Both { key: "tabindex", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "tabindex", value:  prop' value  })
+  pureAttr Tabindex value  = unsafeAttribute $ This { key: "tabindex", value:  prop' value  }
+  unpureAttr Tabindex eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "tabindex", value:  prop' value  }
 
 instance Attr Samp_ Tabindex String where
-  attr Tabindex value = unsafeAttribute { key: "tabindex", value: prop' value }
+  attr Tabindex bothValues  = unsafeAttribute $ Both { key: "tabindex", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "tabindex", value:  prop' value  })
+  pureAttr Tabindex value  = unsafeAttribute $ This { key: "tabindex", value:  prop' value  }
+  unpureAttr Tabindex eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "tabindex", value:  prop' value  }
 
 instance Attr Script_ Tabindex String where
-  attr Tabindex value = unsafeAttribute { key: "tabindex", value: prop' value }
+  attr Tabindex bothValues  = unsafeAttribute $ Both { key: "tabindex", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "tabindex", value:  prop' value  })
+  pureAttr Tabindex value  = unsafeAttribute $ This { key: "tabindex", value:  prop' value  }
+  unpureAttr Tabindex eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "tabindex", value:  prop' value  }
 
 instance Attr Section_ Tabindex String where
-  attr Tabindex value = unsafeAttribute { key: "tabindex", value: prop' value }
+  attr Tabindex bothValues  = unsafeAttribute $ Both { key: "tabindex", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "tabindex", value:  prop' value  })
+  pureAttr Tabindex value  = unsafeAttribute $ This { key: "tabindex", value:  prop' value  }
+  unpureAttr Tabindex eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "tabindex", value:  prop' value  }
 
 instance Attr Select_ Tabindex String where
-  attr Tabindex value = unsafeAttribute { key: "tabindex", value: prop' value }
+  attr Tabindex bothValues  = unsafeAttribute $ Both { key: "tabindex", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "tabindex", value:  prop' value  })
+  pureAttr Tabindex value  = unsafeAttribute $ This { key: "tabindex", value:  prop' value  }
+  unpureAttr Tabindex eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "tabindex", value:  prop' value  }
 
 instance Attr Small_ Tabindex String where
-  attr Tabindex value = unsafeAttribute { key: "tabindex", value: prop' value }
+  attr Tabindex bothValues  = unsafeAttribute $ Both { key: "tabindex", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "tabindex", value:  prop' value  })
+  pureAttr Tabindex value  = unsafeAttribute $ This { key: "tabindex", value:  prop' value  }
+  unpureAttr Tabindex eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "tabindex", value:  prop' value  }
 
 instance Attr Source_ Tabindex String where
-  attr Tabindex value = unsafeAttribute { key: "tabindex", value: prop' value }
+  attr Tabindex bothValues  = unsafeAttribute $ Both { key: "tabindex", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "tabindex", value:  prop' value  })
+  pureAttr Tabindex value  = unsafeAttribute $ This { key: "tabindex", value:  prop' value  }
+  unpureAttr Tabindex eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "tabindex", value:  prop' value  }
 
 instance Attr Span_ Tabindex String where
-  attr Tabindex value = unsafeAttribute { key: "tabindex", value: prop' value }
+  attr Tabindex bothValues  = unsafeAttribute $ Both { key: "tabindex", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "tabindex", value:  prop' value  })
+  pureAttr Tabindex value  = unsafeAttribute $ This { key: "tabindex", value:  prop' value  }
+  unpureAttr Tabindex eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "tabindex", value:  prop' value  }
 
 instance Attr Strike_ Tabindex String where
-  attr Tabindex value = unsafeAttribute { key: "tabindex", value: prop' value }
+  attr Tabindex bothValues  = unsafeAttribute $ Both { key: "tabindex", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "tabindex", value:  prop' value  })
+  pureAttr Tabindex value  = unsafeAttribute $ This { key: "tabindex", value:  prop' value  }
+  unpureAttr Tabindex eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "tabindex", value:  prop' value  }
 
 instance Attr Strong_ Tabindex String where
-  attr Tabindex value = unsafeAttribute { key: "tabindex", value: prop' value }
+  attr Tabindex bothValues  = unsafeAttribute $ Both { key: "tabindex", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "tabindex", value:  prop' value  })
+  pureAttr Tabindex value  = unsafeAttribute $ This { key: "tabindex", value:  prop' value  }
+  unpureAttr Tabindex eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "tabindex", value:  prop' value  }
 
 instance Attr Style_ Tabindex String where
-  attr Tabindex value = unsafeAttribute { key: "tabindex", value: prop' value }
+  attr Tabindex bothValues  = unsafeAttribute $ Both { key: "tabindex", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "tabindex", value:  prop' value  })
+  pureAttr Tabindex value  = unsafeAttribute $ This { key: "tabindex", value:  prop' value  }
+  unpureAttr Tabindex eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "tabindex", value:  prop' value  }
 
 instance Attr Sub_ Tabindex String where
-  attr Tabindex value = unsafeAttribute { key: "tabindex", value: prop' value }
+  attr Tabindex bothValues  = unsafeAttribute $ Both { key: "tabindex", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "tabindex", value:  prop' value  })
+  pureAttr Tabindex value  = unsafeAttribute $ This { key: "tabindex", value:  prop' value  }
+  unpureAttr Tabindex eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "tabindex", value:  prop' value  }
 
 instance Attr Summary_ Tabindex String where
-  attr Tabindex value = unsafeAttribute { key: "tabindex", value: prop' value }
+  attr Tabindex bothValues  = unsafeAttribute $ Both { key: "tabindex", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "tabindex", value:  prop' value  })
+  pureAttr Tabindex value  = unsafeAttribute $ This { key: "tabindex", value:  prop' value  }
+  unpureAttr Tabindex eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "tabindex", value:  prop' value  }
 
 instance Attr Sup_ Tabindex String where
-  attr Tabindex value = unsafeAttribute { key: "tabindex", value: prop' value }
+  attr Tabindex bothValues  = unsafeAttribute $ Both { key: "tabindex", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "tabindex", value:  prop' value  })
+  pureAttr Tabindex value  = unsafeAttribute $ This { key: "tabindex", value:  prop' value  }
+  unpureAttr Tabindex eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "tabindex", value:  prop' value  }
 
 instance Attr Svg_ Tabindex String where
-  attr Tabindex value = unsafeAttribute { key: "tabindex", value: prop' value }
+  attr Tabindex bothValues  = unsafeAttribute $ Both { key: "tabindex", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "tabindex", value:  prop' value  })
+  pureAttr Tabindex value  = unsafeAttribute $ This { key: "tabindex", value:  prop' value  }
+  unpureAttr Tabindex eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "tabindex", value:  prop' value  }
 
 instance Attr Table_ Tabindex String where
-  attr Tabindex value = unsafeAttribute { key: "tabindex", value: prop' value }
+  attr Tabindex bothValues  = unsafeAttribute $ Both { key: "tabindex", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "tabindex", value:  prop' value  })
+  pureAttr Tabindex value  = unsafeAttribute $ This { key: "tabindex", value:  prop' value  }
+  unpureAttr Tabindex eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "tabindex", value:  prop' value  }
 
 instance Attr Tbody_ Tabindex String where
-  attr Tabindex value = unsafeAttribute { key: "tabindex", value: prop' value }
+  attr Tabindex bothValues  = unsafeAttribute $ Both { key: "tabindex", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "tabindex", value:  prop' value  })
+  pureAttr Tabindex value  = unsafeAttribute $ This { key: "tabindex", value:  prop' value  }
+  unpureAttr Tabindex eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "tabindex", value:  prop' value  }
 
 instance Attr Td_ Tabindex String where
-  attr Tabindex value = unsafeAttribute { key: "tabindex", value: prop' value }
+  attr Tabindex bothValues  = unsafeAttribute $ Both { key: "tabindex", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "tabindex", value:  prop' value  })
+  pureAttr Tabindex value  = unsafeAttribute $ This { key: "tabindex", value:  prop' value  }
+  unpureAttr Tabindex eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "tabindex", value:  prop' value  }
 
 instance Attr Template_ Tabindex String where
-  attr Tabindex value = unsafeAttribute { key: "tabindex", value: prop' value }
+  attr Tabindex bothValues  = unsafeAttribute $ Both { key: "tabindex", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "tabindex", value:  prop' value  })
+  pureAttr Tabindex value  = unsafeAttribute $ This { key: "tabindex", value:  prop' value  }
+  unpureAttr Tabindex eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "tabindex", value:  prop' value  }
 
 instance Attr Textarea_ Tabindex String where
-  attr Tabindex value = unsafeAttribute { key: "tabindex", value: prop' value }
+  attr Tabindex bothValues  = unsafeAttribute $ Both { key: "tabindex", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "tabindex", value:  prop' value  })
+  pureAttr Tabindex value  = unsafeAttribute $ This { key: "tabindex", value:  prop' value  }
+  unpureAttr Tabindex eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "tabindex", value:  prop' value  }
 
 instance Attr Tfoot_ Tabindex String where
-  attr Tabindex value = unsafeAttribute { key: "tabindex", value: prop' value }
+  attr Tabindex bothValues  = unsafeAttribute $ Both { key: "tabindex", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "tabindex", value:  prop' value  })
+  pureAttr Tabindex value  = unsafeAttribute $ This { key: "tabindex", value:  prop' value  }
+  unpureAttr Tabindex eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "tabindex", value:  prop' value  }
 
 instance Attr Th_ Tabindex String where
-  attr Tabindex value = unsafeAttribute { key: "tabindex", value: prop' value }
+  attr Tabindex bothValues  = unsafeAttribute $ Both { key: "tabindex", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "tabindex", value:  prop' value  })
+  pureAttr Tabindex value  = unsafeAttribute $ This { key: "tabindex", value:  prop' value  }
+  unpureAttr Tabindex eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "tabindex", value:  prop' value  }
 
 instance Attr Thead_ Tabindex String where
-  attr Tabindex value = unsafeAttribute { key: "tabindex", value: prop' value }
+  attr Tabindex bothValues  = unsafeAttribute $ Both { key: "tabindex", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "tabindex", value:  prop' value  })
+  pureAttr Tabindex value  = unsafeAttribute $ This { key: "tabindex", value:  prop' value  }
+  unpureAttr Tabindex eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "tabindex", value:  prop' value  }
 
 instance Attr Time_ Tabindex String where
-  attr Tabindex value = unsafeAttribute { key: "tabindex", value: prop' value }
+  attr Tabindex bothValues  = unsafeAttribute $ Both { key: "tabindex", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "tabindex", value:  prop' value  })
+  pureAttr Tabindex value  = unsafeAttribute $ This { key: "tabindex", value:  prop' value  }
+  unpureAttr Tabindex eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "tabindex", value:  prop' value  }
 
 instance Attr Title_ Tabindex String where
-  attr Tabindex value = unsafeAttribute { key: "tabindex", value: prop' value }
+  attr Tabindex bothValues  = unsafeAttribute $ Both { key: "tabindex", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "tabindex", value:  prop' value  })
+  pureAttr Tabindex value  = unsafeAttribute $ This { key: "tabindex", value:  prop' value  }
+  unpureAttr Tabindex eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "tabindex", value:  prop' value  }
 
 instance Attr Tr_ Tabindex String where
-  attr Tabindex value = unsafeAttribute { key: "tabindex", value: prop' value }
+  attr Tabindex bothValues  = unsafeAttribute $ Both { key: "tabindex", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "tabindex", value:  prop' value  })
+  pureAttr Tabindex value  = unsafeAttribute $ This { key: "tabindex", value:  prop' value  }
+  unpureAttr Tabindex eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "tabindex", value:  prop' value  }
 
 instance Attr Track_ Tabindex String where
-  attr Tabindex value = unsafeAttribute { key: "tabindex", value: prop' value }
+  attr Tabindex bothValues  = unsafeAttribute $ Both { key: "tabindex", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "tabindex", value:  prop' value  })
+  pureAttr Tabindex value  = unsafeAttribute $ This { key: "tabindex", value:  prop' value  }
+  unpureAttr Tabindex eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "tabindex", value:  prop' value  }
 
 instance Attr Tt_ Tabindex String where
-  attr Tabindex value = unsafeAttribute { key: "tabindex", value: prop' value }
+  attr Tabindex bothValues  = unsafeAttribute $ Both { key: "tabindex", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "tabindex", value:  prop' value  })
+  pureAttr Tabindex value  = unsafeAttribute $ This { key: "tabindex", value:  prop' value  }
+  unpureAttr Tabindex eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "tabindex", value:  prop' value  }
 
 instance Attr U_ Tabindex String where
-  attr Tabindex value = unsafeAttribute { key: "tabindex", value: prop' value }
+  attr Tabindex bothValues  = unsafeAttribute $ Both { key: "tabindex", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "tabindex", value:  prop' value  })
+  pureAttr Tabindex value  = unsafeAttribute $ This { key: "tabindex", value:  prop' value  }
+  unpureAttr Tabindex eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "tabindex", value:  prop' value  }
 
 instance Attr Ul_ Tabindex String where
-  attr Tabindex value = unsafeAttribute { key: "tabindex", value: prop' value }
+  attr Tabindex bothValues  = unsafeAttribute $ Both { key: "tabindex", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "tabindex", value:  prop' value  })
+  pureAttr Tabindex value  = unsafeAttribute $ This { key: "tabindex", value:  prop' value  }
+  unpureAttr Tabindex eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "tabindex", value:  prop' value  }
 
 instance Attr Var_ Tabindex String where
-  attr Tabindex value = unsafeAttribute { key: "tabindex", value: prop' value }
+  attr Tabindex bothValues  = unsafeAttribute $ Both { key: "tabindex", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "tabindex", value:  prop' value  })
+  pureAttr Tabindex value  = unsafeAttribute $ This { key: "tabindex", value:  prop' value  }
+  unpureAttr Tabindex eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "tabindex", value:  prop' value  }
 
 instance Attr Video_ Tabindex String where
-  attr Tabindex value = unsafeAttribute { key: "tabindex", value: prop' value }
+  attr Tabindex bothValues  = unsafeAttribute $ Both { key: "tabindex", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "tabindex", value:  prop' value  })
+  pureAttr Tabindex value  = unsafeAttribute $ This { key: "tabindex", value:  prop' value  }
+  unpureAttr Tabindex eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "tabindex", value:  prop' value  }
 
 instance Attr Wbr_ Tabindex String where
-  attr Tabindex value = unsafeAttribute { key: "tabindex", value: prop' value }
+  attr Tabindex bothValues  = unsafeAttribute $ Both { key: "tabindex", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "tabindex", value:  prop' value  })
+  pureAttr Tabindex value  = unsafeAttribute $ This { key: "tabindex", value:  prop' value  }
+  unpureAttr Tabindex eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "tabindex", value:  prop' value  }
 
 instance Attr Animate_ Tabindex String where
-  attr Tabindex value = unsafeAttribute { key: "tabindex", value: prop' value }
+  attr Tabindex bothValues  = unsafeAttribute $ Both { key: "tabindex", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "tabindex", value:  prop' value  })
+  pureAttr Tabindex value  = unsafeAttribute $ This { key: "tabindex", value:  prop' value  }
+  unpureAttr Tabindex eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "tabindex", value:  prop' value  }
 
 instance Attr AnimateMotion_ Tabindex String where
-  attr Tabindex value = unsafeAttribute { key: "tabindex", value: prop' value }
+  attr Tabindex bothValues  = unsafeAttribute $ Both { key: "tabindex", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "tabindex", value:  prop' value  })
+  pureAttr Tabindex value  = unsafeAttribute $ This { key: "tabindex", value:  prop' value  }
+  unpureAttr Tabindex eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "tabindex", value:  prop' value  }
 
 instance Attr AnimateTransform_ Tabindex String where
-  attr Tabindex value = unsafeAttribute { key: "tabindex", value: prop' value }
+  attr Tabindex bothValues  = unsafeAttribute $ Both { key: "tabindex", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "tabindex", value:  prop' value  })
+  pureAttr Tabindex value  = unsafeAttribute $ This { key: "tabindex", value:  prop' value  }
+  unpureAttr Tabindex eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "tabindex", value:  prop' value  }
 
 instance Attr ClipPath_ Tabindex String where
-  attr Tabindex value = unsafeAttribute { key: "tabindex", value: prop' value }
+  attr Tabindex bothValues  = unsafeAttribute $ Both { key: "tabindex", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "tabindex", value:  prop' value  })
+  pureAttr Tabindex value  = unsafeAttribute $ This { key: "tabindex", value:  prop' value  }
+  unpureAttr Tabindex eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "tabindex", value:  prop' value  }
 
 instance Attr Desc_ Tabindex String where
-  attr Tabindex value = unsafeAttribute { key: "tabindex", value: prop' value }
+  attr Tabindex bothValues  = unsafeAttribute $ Both { key: "tabindex", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "tabindex", value:  prop' value  })
+  pureAttr Tabindex value  = unsafeAttribute $ This { key: "tabindex", value:  prop' value  }
+  unpureAttr Tabindex eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "tabindex", value:  prop' value  }
 
 instance Attr Discard_ Tabindex String where
-  attr Tabindex value = unsafeAttribute { key: "tabindex", value: prop' value }
+  attr Tabindex bothValues  = unsafeAttribute $ Both { key: "tabindex", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "tabindex", value:  prop' value  })
+  pureAttr Tabindex value  = unsafeAttribute $ This { key: "tabindex", value:  prop' value  }
+  unpureAttr Tabindex eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "tabindex", value:  prop' value  }
 
 instance Attr FeBlend_ Tabindex String where
-  attr Tabindex value = unsafeAttribute { key: "tabindex", value: prop' value }
+  attr Tabindex bothValues  = unsafeAttribute $ Both { key: "tabindex", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "tabindex", value:  prop' value  })
+  pureAttr Tabindex value  = unsafeAttribute $ This { key: "tabindex", value:  prop' value  }
+  unpureAttr Tabindex eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "tabindex", value:  prop' value  }
 
 instance Attr FeColorMatrix_ Tabindex String where
-  attr Tabindex value = unsafeAttribute { key: "tabindex", value: prop' value }
+  attr Tabindex bothValues  = unsafeAttribute $ Both { key: "tabindex", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "tabindex", value:  prop' value  })
+  pureAttr Tabindex value  = unsafeAttribute $ This { key: "tabindex", value:  prop' value  }
+  unpureAttr Tabindex eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "tabindex", value:  prop' value  }
 
 instance Attr FeComponentTransfer_ Tabindex String where
-  attr Tabindex value = unsafeAttribute { key: "tabindex", value: prop' value }
+  attr Tabindex bothValues  = unsafeAttribute $ Both { key: "tabindex", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "tabindex", value:  prop' value  })
+  pureAttr Tabindex value  = unsafeAttribute $ This { key: "tabindex", value:  prop' value  }
+  unpureAttr Tabindex eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "tabindex", value:  prop' value  }
 
 instance Attr FeComposite_ Tabindex String where
-  attr Tabindex value = unsafeAttribute { key: "tabindex", value: prop' value }
+  attr Tabindex bothValues  = unsafeAttribute $ Both { key: "tabindex", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "tabindex", value:  prop' value  })
+  pureAttr Tabindex value  = unsafeAttribute $ This { key: "tabindex", value:  prop' value  }
+  unpureAttr Tabindex eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "tabindex", value:  prop' value  }
 
 instance Attr FeConvolveMatrix_ Tabindex String where
-  attr Tabindex value = unsafeAttribute { key: "tabindex", value: prop' value }
+  attr Tabindex bothValues  = unsafeAttribute $ Both { key: "tabindex", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "tabindex", value:  prop' value  })
+  pureAttr Tabindex value  = unsafeAttribute $ This { key: "tabindex", value:  prop' value  }
+  unpureAttr Tabindex eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "tabindex", value:  prop' value  }
 
 instance Attr FeDiffuseLighting_ Tabindex String where
-  attr Tabindex value = unsafeAttribute { key: "tabindex", value: prop' value }
+  attr Tabindex bothValues  = unsafeAttribute $ Both { key: "tabindex", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "tabindex", value:  prop' value  })
+  pureAttr Tabindex value  = unsafeAttribute $ This { key: "tabindex", value:  prop' value  }
+  unpureAttr Tabindex eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "tabindex", value:  prop' value  }
 
 instance Attr FeDisplacementMap_ Tabindex String where
-  attr Tabindex value = unsafeAttribute { key: "tabindex", value: prop' value }
+  attr Tabindex bothValues  = unsafeAttribute $ Both { key: "tabindex", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "tabindex", value:  prop' value  })
+  pureAttr Tabindex value  = unsafeAttribute $ This { key: "tabindex", value:  prop' value  }
+  unpureAttr Tabindex eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "tabindex", value:  prop' value  }
 
 instance Attr FeDistantLight_ Tabindex String where
-  attr Tabindex value = unsafeAttribute { key: "tabindex", value: prop' value }
+  attr Tabindex bothValues  = unsafeAttribute $ Both { key: "tabindex", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "tabindex", value:  prop' value  })
+  pureAttr Tabindex value  = unsafeAttribute $ This { key: "tabindex", value:  prop' value  }
+  unpureAttr Tabindex eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "tabindex", value:  prop' value  }
 
 instance Attr FeDropShadow_ Tabindex String where
-  attr Tabindex value = unsafeAttribute { key: "tabindex", value: prop' value }
+  attr Tabindex bothValues  = unsafeAttribute $ Both { key: "tabindex", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "tabindex", value:  prop' value  })
+  pureAttr Tabindex value  = unsafeAttribute $ This { key: "tabindex", value:  prop' value  }
+  unpureAttr Tabindex eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "tabindex", value:  prop' value  }
 
 instance Attr FeFlood_ Tabindex String where
-  attr Tabindex value = unsafeAttribute { key: "tabindex", value: prop' value }
+  attr Tabindex bothValues  = unsafeAttribute $ Both { key: "tabindex", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "tabindex", value:  prop' value  })
+  pureAttr Tabindex value  = unsafeAttribute $ This { key: "tabindex", value:  prop' value  }
+  unpureAttr Tabindex eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "tabindex", value:  prop' value  }
 
 instance Attr FeFuncA_ Tabindex String where
-  attr Tabindex value = unsafeAttribute { key: "tabindex", value: prop' value }
+  attr Tabindex bothValues  = unsafeAttribute $ Both { key: "tabindex", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "tabindex", value:  prop' value  })
+  pureAttr Tabindex value  = unsafeAttribute $ This { key: "tabindex", value:  prop' value  }
+  unpureAttr Tabindex eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "tabindex", value:  prop' value  }
 
 instance Attr FeFuncB_ Tabindex String where
-  attr Tabindex value = unsafeAttribute { key: "tabindex", value: prop' value }
+  attr Tabindex bothValues  = unsafeAttribute $ Both { key: "tabindex", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "tabindex", value:  prop' value  })
+  pureAttr Tabindex value  = unsafeAttribute $ This { key: "tabindex", value:  prop' value  }
+  unpureAttr Tabindex eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "tabindex", value:  prop' value  }
 
 instance Attr FeFuncG_ Tabindex String where
-  attr Tabindex value = unsafeAttribute { key: "tabindex", value: prop' value }
+  attr Tabindex bothValues  = unsafeAttribute $ Both { key: "tabindex", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "tabindex", value:  prop' value  })
+  pureAttr Tabindex value  = unsafeAttribute $ This { key: "tabindex", value:  prop' value  }
+  unpureAttr Tabindex eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "tabindex", value:  prop' value  }
 
 instance Attr FeFuncR_ Tabindex String where
-  attr Tabindex value = unsafeAttribute { key: "tabindex", value: prop' value }
+  attr Tabindex bothValues  = unsafeAttribute $ Both { key: "tabindex", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "tabindex", value:  prop' value  })
+  pureAttr Tabindex value  = unsafeAttribute $ This { key: "tabindex", value:  prop' value  }
+  unpureAttr Tabindex eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "tabindex", value:  prop' value  }
 
 instance Attr FeGaussianBlur_ Tabindex String where
-  attr Tabindex value = unsafeAttribute { key: "tabindex", value: prop' value }
+  attr Tabindex bothValues  = unsafeAttribute $ Both { key: "tabindex", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "tabindex", value:  prop' value  })
+  pureAttr Tabindex value  = unsafeAttribute $ This { key: "tabindex", value:  prop' value  }
+  unpureAttr Tabindex eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "tabindex", value:  prop' value  }
 
 instance Attr FeImage_ Tabindex String where
-  attr Tabindex value = unsafeAttribute { key: "tabindex", value: prop' value }
+  attr Tabindex bothValues  = unsafeAttribute $ Both { key: "tabindex", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "tabindex", value:  prop' value  })
+  pureAttr Tabindex value  = unsafeAttribute $ This { key: "tabindex", value:  prop' value  }
+  unpureAttr Tabindex eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "tabindex", value:  prop' value  }
 
 instance Attr FeMerge_ Tabindex String where
-  attr Tabindex value = unsafeAttribute { key: "tabindex", value: prop' value }
+  attr Tabindex bothValues  = unsafeAttribute $ Both { key: "tabindex", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "tabindex", value:  prop' value  })
+  pureAttr Tabindex value  = unsafeAttribute $ This { key: "tabindex", value:  prop' value  }
+  unpureAttr Tabindex eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "tabindex", value:  prop' value  }
 
 instance Attr FeMergeNode_ Tabindex String where
-  attr Tabindex value = unsafeAttribute { key: "tabindex", value: prop' value }
+  attr Tabindex bothValues  = unsafeAttribute $ Both { key: "tabindex", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "tabindex", value:  prop' value  })
+  pureAttr Tabindex value  = unsafeAttribute $ This { key: "tabindex", value:  prop' value  }
+  unpureAttr Tabindex eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "tabindex", value:  prop' value  }
 
 instance Attr FeMorphology_ Tabindex String where
-  attr Tabindex value = unsafeAttribute { key: "tabindex", value: prop' value }
+  attr Tabindex bothValues  = unsafeAttribute $ Both { key: "tabindex", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "tabindex", value:  prop' value  })
+  pureAttr Tabindex value  = unsafeAttribute $ This { key: "tabindex", value:  prop' value  }
+  unpureAttr Tabindex eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "tabindex", value:  prop' value  }
 
 instance Attr FeOffset_ Tabindex String where
-  attr Tabindex value = unsafeAttribute { key: "tabindex", value: prop' value }
+  attr Tabindex bothValues  = unsafeAttribute $ Both { key: "tabindex", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "tabindex", value:  prop' value  })
+  pureAttr Tabindex value  = unsafeAttribute $ This { key: "tabindex", value:  prop' value  }
+  unpureAttr Tabindex eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "tabindex", value:  prop' value  }
 
 instance Attr FePointLight_ Tabindex String where
-  attr Tabindex value = unsafeAttribute { key: "tabindex", value: prop' value }
+  attr Tabindex bothValues  = unsafeAttribute $ Both { key: "tabindex", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "tabindex", value:  prop' value  })
+  pureAttr Tabindex value  = unsafeAttribute $ This { key: "tabindex", value:  prop' value  }
+  unpureAttr Tabindex eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "tabindex", value:  prop' value  }
 
 instance Attr FeSpecularLighting_ Tabindex String where
-  attr Tabindex value = unsafeAttribute { key: "tabindex", value: prop' value }
+  attr Tabindex bothValues  = unsafeAttribute $ Both { key: "tabindex", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "tabindex", value:  prop' value  })
+  pureAttr Tabindex value  = unsafeAttribute $ This { key: "tabindex", value:  prop' value  }
+  unpureAttr Tabindex eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "tabindex", value:  prop' value  }
 
 instance Attr FeSpotLight_ Tabindex String where
-  attr Tabindex value = unsafeAttribute { key: "tabindex", value: prop' value }
+  attr Tabindex bothValues  = unsafeAttribute $ Both { key: "tabindex", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "tabindex", value:  prop' value  })
+  pureAttr Tabindex value  = unsafeAttribute $ This { key: "tabindex", value:  prop' value  }
+  unpureAttr Tabindex eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "tabindex", value:  prop' value  }
 
 instance Attr FeTile_ Tabindex String where
-  attr Tabindex value = unsafeAttribute { key: "tabindex", value: prop' value }
+  attr Tabindex bothValues  = unsafeAttribute $ Both { key: "tabindex", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "tabindex", value:  prop' value  })
+  pureAttr Tabindex value  = unsafeAttribute $ This { key: "tabindex", value:  prop' value  }
+  unpureAttr Tabindex eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "tabindex", value:  prop' value  }
 
 instance Attr FeTurbulence_ Tabindex String where
-  attr Tabindex value = unsafeAttribute { key: "tabindex", value: prop' value }
+  attr Tabindex bothValues  = unsafeAttribute $ Both { key: "tabindex", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "tabindex", value:  prop' value  })
+  pureAttr Tabindex value  = unsafeAttribute $ This { key: "tabindex", value:  prop' value  }
+  unpureAttr Tabindex eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "tabindex", value:  prop' value  }
 
 instance Attr Filter_ Tabindex String where
-  attr Tabindex value = unsafeAttribute { key: "tabindex", value: prop' value }
+  attr Tabindex bothValues  = unsafeAttribute $ Both { key: "tabindex", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "tabindex", value:  prop' value  })
+  pureAttr Tabindex value  = unsafeAttribute $ This { key: "tabindex", value:  prop' value  }
+  unpureAttr Tabindex eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "tabindex", value:  prop' value  }
 
 instance Attr Image_ Tabindex String where
-  attr Tabindex value = unsafeAttribute { key: "tabindex", value: prop' value }
+  attr Tabindex bothValues  = unsafeAttribute $ Both { key: "tabindex", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "tabindex", value:  prop' value  })
+  pureAttr Tabindex value  = unsafeAttribute $ This { key: "tabindex", value:  prop' value  }
+  unpureAttr Tabindex eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "tabindex", value:  prop' value  }
 
 instance Attr LinearGradient_ Tabindex String where
-  attr Tabindex value = unsafeAttribute { key: "tabindex", value: prop' value }
+  attr Tabindex bothValues  = unsafeAttribute $ Both { key: "tabindex", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "tabindex", value:  prop' value  })
+  pureAttr Tabindex value  = unsafeAttribute $ This { key: "tabindex", value:  prop' value  }
+  unpureAttr Tabindex eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "tabindex", value:  prop' value  }
 
 instance Attr Mask_ Tabindex String where
-  attr Tabindex value = unsafeAttribute { key: "tabindex", value: prop' value }
+  attr Tabindex bothValues  = unsafeAttribute $ Both { key: "tabindex", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "tabindex", value:  prop' value  })
+  pureAttr Tabindex value  = unsafeAttribute $ This { key: "tabindex", value:  prop' value  }
+  unpureAttr Tabindex eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "tabindex", value:  prop' value  }
 
 instance Attr Metadata_ Tabindex String where
-  attr Tabindex value = unsafeAttribute { key: "tabindex", value: prop' value }
+  attr Tabindex bothValues  = unsafeAttribute $ Both { key: "tabindex", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "tabindex", value:  prop' value  })
+  pureAttr Tabindex value  = unsafeAttribute $ This { key: "tabindex", value:  prop' value  }
+  unpureAttr Tabindex eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "tabindex", value:  prop' value  }
 
 instance Attr Mpath_ Tabindex String where
-  attr Tabindex value = unsafeAttribute { key: "tabindex", value: prop' value }
+  attr Tabindex bothValues  = unsafeAttribute $ Both { key: "tabindex", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "tabindex", value:  prop' value  })
+  pureAttr Tabindex value  = unsafeAttribute $ This { key: "tabindex", value:  prop' value  }
+  unpureAttr Tabindex eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "tabindex", value:  prop' value  }
 
 instance Attr RadialGradient_ Tabindex String where
-  attr Tabindex value = unsafeAttribute { key: "tabindex", value: prop' value }
+  attr Tabindex bothValues  = unsafeAttribute $ Both { key: "tabindex", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "tabindex", value:  prop' value  })
+  pureAttr Tabindex value  = unsafeAttribute $ This { key: "tabindex", value:  prop' value  }
+  unpureAttr Tabindex eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "tabindex", value:  prop' value  }
 
 instance Attr Set_ Tabindex String where
-  attr Tabindex value = unsafeAttribute { key: "tabindex", value: prop' value }
+  attr Tabindex bothValues  = unsafeAttribute $ Both { key: "tabindex", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "tabindex", value:  prop' value  })
+  pureAttr Tabindex value  = unsafeAttribute $ This { key: "tabindex", value:  prop' value  }
+  unpureAttr Tabindex eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "tabindex", value:  prop' value  }
 
 instance Attr Stop_ Tabindex String where
-  attr Tabindex value = unsafeAttribute { key: "tabindex", value: prop' value }
+  attr Tabindex bothValues  = unsafeAttribute $ Both { key: "tabindex", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "tabindex", value:  prop' value  })
+  pureAttr Tabindex value  = unsafeAttribute $ This { key: "tabindex", value:  prop' value  }
+  unpureAttr Tabindex eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "tabindex", value:  prop' value  }
 
 instance Attr Switch_ Tabindex String where
-  attr Tabindex value = unsafeAttribute { key: "tabindex", value: prop' value }
+  attr Tabindex bothValues  = unsafeAttribute $ Both { key: "tabindex", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "tabindex", value:  prop' value  })
+  pureAttr Tabindex value  = unsafeAttribute $ This { key: "tabindex", value:  prop' value  }
+  unpureAttr Tabindex eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "tabindex", value:  prop' value  }
 
 instance Attr Symbol_ Tabindex String where
-  attr Tabindex value = unsafeAttribute { key: "tabindex", value: prop' value }
+  attr Tabindex bothValues  = unsafeAttribute $ Both { key: "tabindex", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "tabindex", value:  prop' value  })
+  pureAttr Tabindex value  = unsafeAttribute $ This { key: "tabindex", value:  prop' value  }
+  unpureAttr Tabindex eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "tabindex", value:  prop' value  }
 
 instance Attr Text_ Tabindex String where
-  attr Tabindex value = unsafeAttribute { key: "tabindex", value: prop' value }
+  attr Tabindex bothValues  = unsafeAttribute $ Both { key: "tabindex", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "tabindex", value:  prop' value  })
+  pureAttr Tabindex value  = unsafeAttribute $ This { key: "tabindex", value:  prop' value  }
+  unpureAttr Tabindex eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "tabindex", value:  prop' value  }
 
 instance Attr Tspan_ Tabindex String where
-  attr Tabindex value = unsafeAttribute { key: "tabindex", value: prop' value }
+  attr Tabindex bothValues  = unsafeAttribute $ Both { key: "tabindex", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "tabindex", value:  prop' value  })
+  pureAttr Tabindex value  = unsafeAttribute $ This { key: "tabindex", value:  prop' value  }
+  unpureAttr Tabindex eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "tabindex", value:  prop' value  }
 
 instance Attr View_ Tabindex String where
-  attr Tabindex value = unsafeAttribute { key: "tabindex", value: prop' value }
+  attr Tabindex bothValues  = unsafeAttribute $ Both { key: "tabindex", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "tabindex", value:  prop' value  })
+  pureAttr Tabindex value  = unsafeAttribute $ This { key: "tabindex", value:  prop' value  }
+  unpureAttr Tabindex eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "tabindex", value:  prop' value  }
 
 instance Attr everything Tabindex Unit where
-  attr Tabindex _ = unsafeAttribute
-    { key: "tabindex", value: unset' }
+  attr Tabindex bothValues  = unsafeAttribute $ Both { key: "tabindex", value:  unset'  } (snd bothValues <#> \_ -> { key: "tabindex", value:  unset'  })
+  pureAttr Tabindex _  = unsafeAttribute $ This { key: "tabindex", value:  unset'  }
+  unpureAttr Tabindex eventValue  = unsafeAttribute $ That $ eventValue <#> \_ -> { key: "tabindex", value:  unset'  }

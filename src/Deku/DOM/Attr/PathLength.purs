@@ -1,6 +1,8 @@
 module Deku.DOM.Attr.PathLength where
 
 import Prelude
+import Data.These (These(..))
+import Data.Tuple (fst, snd)
 
 import Deku.DOM.Elt.Rect (Rect_)
 import Deku.DOM.Elt.Polyline (Polyline_)
@@ -14,33 +16,41 @@ import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 data PathLength = PathLength
 
 instance Attr Circle_ PathLength String where
-  attr PathLength value = unsafeAttribute
-    { key: "pathLength", value: prop' value }
+  attr PathLength bothValues  = unsafeAttribute $ Both { key: "pathLength", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "pathLength", value:  prop' value  })
+  pureAttr PathLength value  = unsafeAttribute $ This { key: "pathLength", value:  prop' value  }
+  unpureAttr PathLength eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "pathLength", value:  prop' value  }
 
 instance Attr Ellipse_ PathLength String where
-  attr PathLength value = unsafeAttribute
-    { key: "pathLength", value: prop' value }
+  attr PathLength bothValues  = unsafeAttribute $ Both { key: "pathLength", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "pathLength", value:  prop' value  })
+  pureAttr PathLength value  = unsafeAttribute $ This { key: "pathLength", value:  prop' value  }
+  unpureAttr PathLength eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "pathLength", value:  prop' value  }
 
 instance Attr Line_ PathLength String where
-  attr PathLength value = unsafeAttribute
-    { key: "pathLength", value: prop' value }
+  attr PathLength bothValues  = unsafeAttribute $ Both { key: "pathLength", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "pathLength", value:  prop' value  })
+  pureAttr PathLength value  = unsafeAttribute $ This { key: "pathLength", value:  prop' value  }
+  unpureAttr PathLength eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "pathLength", value:  prop' value  }
 
 instance Attr Path_ PathLength String where
-  attr PathLength value = unsafeAttribute
-    { key: "pathLength", value: prop' value }
+  attr PathLength bothValues  = unsafeAttribute $ Both { key: "pathLength", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "pathLength", value:  prop' value  })
+  pureAttr PathLength value  = unsafeAttribute $ This { key: "pathLength", value:  prop' value  }
+  unpureAttr PathLength eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "pathLength", value:  prop' value  }
 
 instance Attr Polygon_ PathLength String where
-  attr PathLength value = unsafeAttribute
-    { key: "pathLength", value: prop' value }
+  attr PathLength bothValues  = unsafeAttribute $ Both { key: "pathLength", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "pathLength", value:  prop' value  })
+  pureAttr PathLength value  = unsafeAttribute $ This { key: "pathLength", value:  prop' value  }
+  unpureAttr PathLength eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "pathLength", value:  prop' value  }
 
 instance Attr Polyline_ PathLength String where
-  attr PathLength value = unsafeAttribute
-    { key: "pathLength", value: prop' value }
+  attr PathLength bothValues  = unsafeAttribute $ Both { key: "pathLength", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "pathLength", value:  prop' value  })
+  pureAttr PathLength value  = unsafeAttribute $ This { key: "pathLength", value:  prop' value  }
+  unpureAttr PathLength eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "pathLength", value:  prop' value  }
 
 instance Attr Rect_ PathLength String where
-  attr PathLength value = unsafeAttribute
-    { key: "pathLength", value: prop' value }
+  attr PathLength bothValues  = unsafeAttribute $ Both { key: "pathLength", value:  prop' (fst bothValues)  } (snd bothValues <#> \value -> { key: "pathLength", value:  prop' value  })
+  pureAttr PathLength value  = unsafeAttribute $ This { key: "pathLength", value:  prop' value  }
+  unpureAttr PathLength eventValue  = unsafeAttribute $ That $ eventValue <#> \value -> { key: "pathLength", value:  prop' value  }
 
 instance Attr everything PathLength Unit where
-  attr PathLength _ = unsafeAttribute
-    { key: "pathLength", value: unset' }
+  attr PathLength bothValues  = unsafeAttribute $ Both { key: "pathLength", value:  unset'  } (snd bothValues <#> \_ -> { key: "pathLength", value:  unset'  })
+  pureAttr PathLength _  = unsafeAttribute $ This { key: "pathLength", value:  unset'  }
+  unpureAttr PathLength eventValue  = unsafeAttribute $ That $ eventValue <#> \_ -> { key: "pathLength", value:  unset'  }
