@@ -8,9 +8,13 @@ module Deku.Interpret
   , EliminatableInstruction(..)
   , FFIDOMSnapshot(..)
   , FunctionOfFFIDOMSnapshotU
+  , EffectfulExecutor
+  , EffectfulPayload
   , Instruction(..)
   , RenderableInstruction(..)
   , STPayload
+  , forcePayloadE
+  , deferPayloadE
   , __internalDekuFlatten
   , fullDOMInterpret
   , getAllComments
@@ -28,7 +32,7 @@ import Bolson.Core (Scope(..))
 import Bolson.Core as Bolson
 import Control.Lazy (fix)
 import Control.Monad.ST (ST)
-import Control.Monad.ST.Class (liftST)
+import Control.Monad.ST.Class (class MonadST, liftST)
 import Control.Monad.ST.Global (Global)
 import Control.Monad.ST.Global as Region
 import Control.Monad.ST.Internal as Ref
@@ -54,6 +58,8 @@ data DeferredInterpretation a
   = DeferPayload (List Int) a
   | ForcePayload (List Int)
   | ExecutePayload a
+
+derive instance Functor DeferredInterpretation
 
 execute :: forall a b c. (a -> b -> c) -> a -> DeferredInterpretation (b -> c)
 execute f a = ExecutePayload $ f a
@@ -243,9 +249,9 @@ fullDOMInterpret seed deferredCache executor =
           void $ Ref.modify (add 1) seed
           pure s
       , associateWithUnsubscribe: execute $ associateWithUnsubscribe_
-      , redecorateDeferredPayload: redecorateDeferredPayloadE
-      , deferPayload: deferPayloadE deferredCache
-      , forcePayload: forcePayloadE deferredCache executor
+      , redecorateDeferredPayload: redecorateDeferredPayloadE deferredCache
+      , deferPayload: execute <<< deferPayloadE deferredCache
+      , forcePayload: execute $ forcePayloadE deferredCache executor
       , makeElement: execute $ makeElement_ runOnJust false
       , makeDynBeacon: execute $ makeDynBeacon_ runOnJust false
       , attributeParent: execute $ attributeParent_ runOnJust
@@ -287,9 +293,6 @@ data EliminatableInstruction
   | DisconnectElement Core.DisconnectElement
   | RemoveDynBeacon Core.RemoveDynBeacon
   | DeleteFromCache Core.DeleteFromCache
-  | Defer (List.List Int) STPayload
-  | Force (List.List Int)
-  | Redecorate (List.List Int) STPayload
 
 data Instruction
   = RenderableInstruction RenderableInstruction
@@ -393,51 +396,48 @@ ssrDisconnectElement a i = void $ Ref.modify
   (_ <> [ EliminatableInstruction $ DisconnectElement a ])
   i
 
-deferPayloadSSR
-  :: List.List Int
-  -> STPayload
-  -> STPayload
-deferPayloadSSR l p = ExecutePayload \i -> do
-  void $ Ref.modify (_ <> [ EliminatableInstruction $ Defer l p ]) i
-
-redecorateDeferredPayloadSSR
-  :: List.List Int
-  -> STPayload
-  -> STPayload
-redecorateDeferredPayloadSSR l p = ExecutePayload \i -> do
-  void $ Ref.modify (_ <> [ EliminatableInstruction $ Redecorate l p ]) i
-
-forcePayloadSSR
-  :: List.List Int
-  -> STPayload
-forcePayloadSSR l = ExecutePayload \i -> do
-  void $ Ref.modify (_ <> [ EliminatableInstruction $ Force l ]) i
-
 deferPayloadE
-  :: Ref.STRef Global (Map.Map (List.List Int) EffectfulPayload)
+  :: forall i o
+   . Functor o
+  => MonadST Global o
+  => Ref.STRef Global
+       (Map.Map (List.List Int) (DeferredInterpretation (i -> o Unit)))
   -> List.List Int
-  -> EffectfulPayload
-  -> EffectfulPayload
-deferPayloadE deferredCache l p = ExecutePayload \_ -> do
+  -> DeferredInterpretation (i -> o Unit)
+  -> i
+  -> o Unit
+deferPayloadE deferredCache l p _ = do
   void $ liftST $ Ref.modify (Map.insert l p) deferredCache
 
 redecorateDeferredPayloadE
-  :: List.List Int
-  -> EffectfulPayload
-  -> EffectfulPayload
-redecorateDeferredPayloadE l1 p = case p of
-  DeferPayload l2 e -> DeferPayload (l1 <> l2) e
+  :: forall i o
+   . Functor o
+  => MonadST Global o
+  => Ref.STRef Global
+       (Map.Map (List.List Int) (DeferredInterpretation (i -> o Unit)))
+  -> List.List Int
+  -> DeferredInterpretation (i -> o Unit)
+  -> DeferredInterpretation (i -> o Unit)
+redecorateDeferredPayloadE deferredCache l1 p = case p of
   ForcePayload l2 -> ForcePayload (l1 <> l2)
   ExecutePayload e -> ExecutePayload e
+  DeferPayload l2 e -> ExecutePayload \_ -> do
+    void $ liftST $ flip Ref.modify deferredCache \m -> do
+      let deleted = Map.delete l2 m
+      Map.insert (l1 <> l2) (ExecutePayload e) deleted
 
 forcePayloadE
-  :: Ref.STRef Global (Map.Map (List.List Int) EffectfulPayload)
-  -> EffectfulExecutor
+  :: forall i o
+   . Functor o
+  => MonadST Global o
+  => Ref.STRef Global
+       (Map.Map (List.List Int) (DeferredInterpretation (i -> o Unit)))
+  -> ((DeferredInterpretation (i -> o Unit)) -> o Unit)
   -> List.List Int
-  -> EffectfulPayload
-forcePayloadE deferredCache executor l = ExecutePayload fn
+  -> i
+  -> o Unit
+forcePayloadE deferredCache executor l = fn
   where
-  fn :: FunctionOfFFIDOMSnapshotU
   fn _ = do
     o <- liftST $ Ref.read deferredCache
     let
@@ -480,19 +480,22 @@ type STPayload =
 type EffectfulPayload = DeferredInterpretation FunctionOfFFIDOMSnapshotU
 
 type EffectfulExecutor = EffectfulPayload -> Effect Unit
+type STExecutor = STPayload -> ST Global Unit
 
 ssrDOMInterpret
   :: Ref.STRef Global Int
+  -> Ref.STRef Global (Map.Map (List.List Int) STPayload)
+  -> STExecutor
   -> Core.DOMInterpret STPayload
-ssrDOMInterpret seed = Core.DOMInterpret
+ssrDOMInterpret seed deferredCache executor = Core.DOMInterpret
   { ids: do
       s <- Ref.read seed
       void $ Ref.modify (add 1) seed
       pure s
   , associateWithUnsubscribe: execute \_ _ -> pure unit
-  , deferPayload: deferPayloadSSR
-  , redecorateDeferredPayload: redecorateDeferredPayloadSSR
-  , forcePayload: forcePayloadSSR
+  , deferPayload: execute <<< deferPayloadE deferredCache
+  , redecorateDeferredPayload: redecorateDeferredPayloadE deferredCache
+  , forcePayload: execute $ forcePayloadE deferredCache executor
   , makeElement: execute ssrMakeElement
   , attributeParent: execute \_ _ -> pure unit
   , makeRoot: execute ssrMakeRoot
@@ -542,9 +545,9 @@ hydratingDOMInterpret seed deferredCache executor =
           void $ Ref.modify (add 1) seed
           pure s
       , associateWithUnsubscribe: execute $ associateWithUnsubscribe_
-      , redecorateDeferredPayload: redecorateDeferredPayloadE
-      , deferPayload: deferPayloadE deferredCache
-      , forcePayload: forcePayloadE deferredCache executor
+      , redecorateDeferredPayload: redecorateDeferredPayloadE deferredCache
+      , deferPayload: execute <<< deferPayloadE deferredCache
+      , forcePayload: execute $ forcePayloadE deferredCache executor
       , makeElement: execute $
           makeElement_
             runOnJust
