@@ -4,9 +4,11 @@ import Prelude
 
 import Control.Monad.Except (ExceptT, runExceptT)
 import DOM as DOM
-import DOM.Common (Ctor(..), Interface, Specification, TagNS(..), TypeStub(..), mkAttribute, preprocess)
+import DOM.Common (Ctor(..), Interface, TagNS(..), mkAttribute)
 import DOM.Indexed as Indexed
+import DOM.Parse as Parse
 import DOM.Spec (Definition, KeywordSpec)
+import DOM.TypeStub (TypeStub(..))
 import Data.Array as Array
 import Data.Either (blush)
 import Data.Foldable (for_)
@@ -41,7 +43,7 @@ generate = do
 
     FS.createDir cachePath
 
-    html <- preprocess HTML <<< mergeSpec <$> traverse keywordFetch
+    html <- Parse.parse HTML <<< mergeSpec <$> traverse keywordFetch
         [ "https://raw.githubusercontent.com/w3c/webref/curated/ed/dfns/html.json"
         , "https://raw.githubusercontent.com/w3c/webref/curated/ed/dfns/html-media-capture.json"
 
@@ -57,7 +59,7 @@ generate = do
         , "https://raw.githubusercontent.com/w3c/webref/curated/ed/dfns/wai-aria-1.2.json" 
         ]
     
-    svg <- fixSVG <<< preprocess SVG <<< mergeSpec <$> traverse keywordFetch
+    svg <- fixSVG <<< Parse.parse SVG <<< mergeSpec <$> traverse keywordFetch
         [ "https://raw.githubusercontent.com/w3c/webref/curated/ed/dfns/SVG2.json"
         , "https://raw.githubusercontent.com/w3c/webref/curated/ed/dfns/svg-integration.json"
         , "https://raw.githubusercontent.com/w3c/webref/curated/ed/dfns/svg-strokes.json"
@@ -67,7 +69,7 @@ generate = do
         , "https://raw.githubusercontent.com/w3c/webref/curated/ed/dfns/svg-animations.json"
         ]
 
-    mathml <- preprocess MathML <<< mergeSpec <$> traverse keywordFetch
+    mathml <- Parse.parse MathML <<< mergeSpec <$> traverse keywordFetch
         [ "https://raw.githubusercontent.com/w3c/webref/curated/ed/dfns/mathml-core.json"
         , "https://raw.githubusercontent.com/w3c/webref/curated/ed/dfns/mathml-aam.json"
         ]
@@ -79,7 +81,7 @@ generate = do
 
 
 -- SVG spec is barely useful
-fixSVG :: Specification -> Specification 
+fixSVG :: Parse.Specification -> Parse.Specification 
 fixSVG svgBase =
     svgBase
         { interfaces =
@@ -111,7 +113,10 @@ missingPresentationProperties = case _ of
         animate { bases = animate.bases <> [ svgPresentation.ctor, Ctor "SVGAnimateElement" ] }
 
     clippath@{ name : "SVGClipPathElement" } ->
-        clippath { members = clippath.members <> [ { index : Ctor "clipPathUnits", name : "clipPathUnits", type : TypeString } ]  }
+        clippath
+            { members = clippath.members <>
+                [ { index : Ctor "clipPathUnits", name : "clipPathUnits", type : TypeString } ] 
+            }
 
     id ->
         id { bases = id.bases <> [ svgPresentation.ctor ] }

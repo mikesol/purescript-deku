@@ -5,8 +5,9 @@ import Prelude
 import Comment (commentModule)
 import Control.Monad.Except (ExceptT(..))
 import DOM.Attr as Attr
-import DOM.Common (Attribute, Ctor(..), Element, Interface, Specification, TagNS, attrModule, attrType, baseInterfaces, capitalize, eltModule, namespaceBases, webElements)
+import DOM.Common (Attribute, Ctor(..), Element, Interface, TagNS, attrModule, attrType, baseInterfaces, capitalize, eltModule, namespaceBases, webElements)
 import DOM.Elt as Elt
+import DOM.Parse (Specification)
 import DOM.Reexport as Reexport
 import Data.Array as Array
 import Data.Function (on)

@@ -3,8 +3,9 @@ module DOM.Indexed.Self where
 import Prelude
 import Prim hiding (Type)
 
-import DOM.Common (TypeStub(..), declHandler, handler, selfKey, typeAttributed, typeEvented, typeImports)
+import DOM.Common (declHandler, selfKey, typeAttributed, typeEvented)
 import DOM.Indexed.Common (nominal, typeIndexedAt)
+import DOM.TypeStub (TypeStub(..), handler, typeImports)
 import Data.Array as Array
 import Data.Array.NonEmpty as NEA
 import Data.Maybe (Maybe(..))

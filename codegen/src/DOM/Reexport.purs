@@ -5,8 +5,9 @@ import Prim hiding (Type)
 
 import Comment (commentDecl)
 import DOM.Attr as Attr
-import DOM.Common (Ctor(..), Element, TypeStub(..), attrModule, attrType, eltModule, eltType, exprHandler, handler, selfKey, typeArrayed, typeAttributed, typeEvented, typeImports, typeNut)
+import DOM.Common (Ctor(..), Element, attrModule, attrType, eltModule, eltType, exprHandler, selfKey, typeArrayed, typeAttributed, typeEvented, typeNut)
 import DOM.Elt as Elt
+import DOM.TypeStub (TypeStub(..), handler, typeImports)
 import Data.Array as Array
 import Data.Array.NonEmpty as NEA
 import Data.Maybe (Maybe(..))

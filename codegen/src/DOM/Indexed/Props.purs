@@ -3,8 +3,9 @@ module DOM.Indexed.Props where
 import Prelude
 import Prim hiding (Type)
 
-import DOM.Common (Ctor(..), Interface, Keyword, TypeStub(..), construct, declHandler, handler, typeAttributed, typeEvented)
+import DOM.Common (Ctor(..), Interface, Keyword, declHandler, typeAttributed, typeEvented)
 import DOM.Indexed.Common (attributeCtor, typeIndexedAt, overloaded)
+import DOM.TypeStub (TypeStub(..), construct, handler)
 import Data.Array as Array
 import Data.Array.NonEmpty as NEA
 import Data.Bifunctor (lmap)

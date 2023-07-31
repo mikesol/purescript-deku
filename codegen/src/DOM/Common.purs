@@ -3,23 +3,20 @@ module DOM.Common where
 import Prelude
 import Prim hiding (Type)
 
-import DOM.Spec (Definition)
 import Data.Array as Array
 import Data.Foldable (foldl)
-import Data.Generic.Rep (class Generic)
 import Data.Maybe (Maybe(..))
 import Data.Newtype (class Newtype, un)
 import Data.Set (Set)
 import Data.Set as Set
 import Data.String as String
 import Data.String.CodeUnits as CU
-import Data.Tuple (uncurry)
-import Data.Tuple.Nested (type (/\), (/\))
-import Foreign.Object as Foreign
+import Data.Tuple.Nested ((/\))
+import DOM.TypeStub(TypeStub(..))
 import Partial.Unsafe (unsafePartial)
-import PureScript.CST.Types (Declaration, Expr, Ident(..), ImportDecl, Label, Proper(..), Type)
+import PureScript.CST.Types (Declaration, Expr, Ident(..), Label, Proper(..), Type)
 import Safe.Coerce (coerce)
-import Tidy.Codegen (binaryOp, declImportAs, declValue, exprApp, exprCtor, exprIdent, exprOp, exprRecord, exprSection, exprString, typeApp, typeArrow, typeCtor, typeString)
+import Tidy.Codegen (binaryOp, declValue, exprApp, exprIdent, exprOp, exprRecord, exprSection, exprString, typeApp, typeCtor)
 import Tidy.Codegen.Class (class ToName, class ToQualifiedName, defaultToName, toName, toQualifiedName)
 import Tidy.Codegen.Types (BinaryOp, Qualified(..))
 
@@ -212,227 +209,6 @@ attrModule ( Ctor name ) =
 attrType :: Ctor -> String
 attrType ( Ctor name ) =
     capitalize name
-
-type Specification =
-    { keywords :: Array Keyword
-    , interfaces :: Array Interface
-    , elements :: Array Element
-    }
-
--- | Sorts an array of definitions into a specification.
-preprocess :: TagNS -> Array Definition -> Specification
-preprocess ns defs = do
-    let
-        keywords :: Array Keyword
-        keywords =
-            Array.mapMaybe ( uncurry mkKeyword ) do
-                dfn <- Array.filter ( not <<< eq "argument" <<< _.type ) defs
-                text <- dfn.linkingText
-                for <- Array.nub $ Array.mapMaybe forAttribute dfn.for
-                pure $ for /\ text
-
-            where
-
-            forAttribute :: String -> Maybe String
-            forAttribute f =
-                case String.split ( String.Pattern "/" ) f of
-                    [ _, attr ] | attr /= "" ->
-                        Just attr
-                    
-                    _ ->
-                        Nothing
-
-        elements :: Array Element
-        elements =
-            bind defs case _ of
-                { type : "element", linkingText } ->  
-                    Array.mapMaybe ( mkElement ns ) linkingText
-                
-                _ ->
-                    []
-
-        interfaceMembers :: Foreign.Object ( Array Attribute )
-        interfaceMembers =
-            Foreign.fromFoldableWith append do
-                bind defs case _ of
-                    -- basic attributes
-                    { type : "element-attr", for, linkingText } -> do
-                        let
-                            filtered = flip Array.mapMaybe linkingText \attr ->
-                                    case String.stripPrefix ( String.Pattern "on" ) attr of
-                                        Just eventName ->
-                                            mkHandler eventName
-                                        Nothing ->
-                                            mkAttribute attr
-                        
-                        map ( ( _ /\  filtered ) <<< tagToInterface ns ) for
-
-                    -- could not find a definition for aria attributes so we translate the properties instead
-                    { type : "attribute", for : [ "ARIAMixin" ], linkingText } -> do
-                        [ "ARIAMixin" /\ Array.mapMaybe ( mkAttribute <<< unAria ) linkingText ]
-                    
-                    -- detect event handler attributes
-                    { type : "attribute", for, linkingText } -> do
-                        let filtered =
-                                flip Array.mapMaybe linkingText
-                                    $ mkHandler <=< String.stripPrefix ( String.Pattern "on" )
-                        
-                        if filtered == [] then [] else map ( _ /\ filtered ) for
-
-                    -- css styling properties for svg
-                    { type : "property", for :[], linkingText } | ns == SVG -> do
-                        let members = Array.mapMaybe mkAttribute linkingText
-                        [ "SvgGlobal" /\ members ]
-
-                    { type : "property", for, linkingText } | ns == SVG -> do
-                        let members = Array.mapMaybe mkAttribute linkingText
-                        map ( ( _ /\ members ) <<< tagToInterface ns ) for
-
-                    _ ->
-                        []
-            where
-
-            -- | Converts the property name of the ARIAMixin interface to the corresponding attribute name
-            unAria :: String -> String
-            unAria prop = case String.stripPrefix ( String.Pattern "aria" ) prop of
-                Nothing -> 
-                    prop -- role is not prefixed with aria
-
-                Just rawAttr -> case rawAttr of
-                    _ | Just elementStripped <- String.stripSuffix ( String.Pattern "Element" ) rawAttr ->
-                        "aria-" <> String.toLower elementStripped
-
-                    _ | Just elementsStripped <- String.stripSuffix ( String.Pattern "Elements" ) rawAttr ->
-                        "aria-" <> String.toLower elementsStripped
-
-                    _ ->
-                        "aria-" <> String.toLower rawAttr
-        
-        elementInterfaces :: Foreign.Object ( Array Attribute )
-        elementInterfaces =
-            Foreign.fromFoldable $ map (\{ interface : Ctor intf } -> intf /\ [] ) elements
-
-        interfaces :: Array Interface
-        interfaces = do
-            let
-                referenced :: Array String
-                referenced =
-                    Foreign.keys elementInterfaces <> namespaceBases ns
-
-                filtered :: Array ( String /\ Array Attribute )    
-                filtered =
-                    Foreign.toUnfoldable
-                        $ Foreign.filterKeys ( _ `Array.elem` referenced )
-                        $ Foreign.union interfaceMembers elementInterfaces
-            
-            flip Array.mapMaybe filtered \( name /\ members ) ->
-                mkInterface ns name members
-                
-    { keywords
-    , elements
-    , interfaces
-    }
-
--- | Intermediate type between `IDLType` and `Type Void` so we can generate an `Ord` and `Eq` instance for deduping. 
-data TypeStub 
-    = TypeInt
-    | TypeString
-    | TypeBoolean
-    | TypeNumber
-    | TypeEventHandler
-    | TypeKeyword String
-    | TypeUnit
-    | TypeSelfHandler
-derive instance Eq TypeStub
-derive instance Ord TypeStub
-derive instance Generic TypeStub _
-
-construct :: forall e . TypeStub -> Type e
-construct = unsafePartial case _ of
-    TypeInt -> typeCtor "Int"
-    TypeString -> typeCtor "String"
-    TypeBoolean -> typeCtor "Boolean"
-    TypeNumber -> typeCtor "Number"
-    
-    TypeEventHandler ->
-        typeArrow
-            [ typeCtor "Web.Event.Internal.Types.Event" ]
-            $ typeApp ( typeCtor "Effect.Effect" ) [ typeCtor "Data.Unit.Unit" ]
-    
-    TypeKeyword ix ->
-        typeApp ( typeCtor "Index.Keyword" ) [ typeString ix ]
-    
-    TypeUnit ->
-        typeCtor "Data.Unit.Unit"
-
--- | Generates the necessary imports for the given types.
-typeImports :: forall e . Array TypeStub -> Array ( ImportDecl e )
-typeImports stubs =
-    unsafePartial $ flip map ( Array.nub $ bind stubs modules ) \mod ->
-        declImportAs mod [] mod
-
-    where
-
-    modules = case _ of
-        TypeInt -> [ "Deku.Attribute", "Data.Show" ] -- prop', show
-        TypeString -> [ "Deku.Attribute" ] -- prop'
-        TypeBoolean -> [ "Deku.Attribute", "Data.Show" ] -- prop', show
-        TypeNumber -> [ "Deku.Attribute", "Data.Show" ] -- prop', show
-        TypeEventHandler ->
-            [ "Effect" -- Effect
-            , "Web.Event.Internal.Types" -- Event
-            , "Data.Unit" -- Unit
-            , "Deku.Attribute" -- cb, cb'
-            ]
-        TypeKeyword _ ->
-            [ "Deku.Attribute", "Data.Newtype" ] -- unwrap
-        
-        TypeUnit ->
-            [ "Deku.Attribute", "Data.Unit" ] -- unset'
-
-        TypeSelfHandler ->
-            [ "Effect" -- Effect
-            , "Data.Unit" -- Unit
-            , "Deku.Attribute" -- cb, Cb
-            , "Unsafe.Coerce" -- unsafeCoerce
-            ]
-
-
-handler :: forall e . TypeStub -> Array ( BinaryOp ( Expr e ) ) 
-handler = unsafePartial case _ of
-    TypeInt ->
-        [ binaryOp "<<<" $ exprIdent "Deku.Attribute.prop'"
-        , binaryOp "<<<" $ exprIdent "Data.Show.show"
-        ]
-    
-    TypeString ->
-        [ binaryOp "<<<" $ exprIdent "Deku.Attribute.prop'" ]
-
-    TypeBoolean ->
-        [ binaryOp "<<<" $ exprIdent "Deku.Attribute.prop'"
-        , binaryOp "<<<" $ exprIdent "Data.Show.show"
-        ]
-
-    TypeNumber ->
-        [ binaryOp "<<<" $ exprIdent "Deku.Attribute.prop'"
-        , binaryOp "<<<" $ exprIdent "Data.Show.show"
-        ]
-    
-    TypeEventHandler ->
-        [ binaryOp "<<<" $ exprIdent "Deku.Attribute.cb'"
-        , binaryOp "<<<" $ exprIdent "Deku.Attribute.cb"
-        ]
-
-    TypeKeyword _ ->
-        [ binaryOp "<<<" $ exprIdent "Deku.Attribute.prop'"
-        , binaryOp "<<<" $ exprIdent "Data.Newtype.unwrap"
-        ]
-
-    TypeSelfHandler ->
-        [ binaryOp "<<<" $ exprIdent "Deku.Attribute.cb'"
-        , binaryOp "<<<" $ exprCtor "Deku.Attribute.Cb"
-        , binaryOp "<<<" $ exprIdent "Unsafe.Coerce.unsafeCoerce" 
-        ]
 
 declHandler :: String -> String -> Array ( BinaryOp ( Expr Void ) ) -> Declaration Void
 declHandler name key ops =

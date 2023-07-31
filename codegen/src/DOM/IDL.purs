@@ -4,8 +4,8 @@ module DOM.IDL where
 import Prelude
 import Prim hiding (Type)
 
-import DOM.Common (TypeStub(..) )
 import DOM.Spec (IDL, IDLType(..), Interface, Member(..), Mixin(..), Tag)
+import DOM.TypeStub(TypeStub(..))
 import Data.Array as Array
 import Data.Maybe (Maybe(..), fromMaybe, maybe)
 import Data.Tuple.Nested (type (/\), (/\))

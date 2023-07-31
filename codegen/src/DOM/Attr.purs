@@ -3,7 +3,8 @@ module DOM.Attr where
 import Prelude
 import Prim hiding (Type)
 
-import DOM.Common (Attribute, Element, TypeStub(..), attrType, construct, eltModule, eltType, exprHandler, handler, typeAttributed, typeEvented, typeImports)
+import DOM.Common (Attribute, Element, attrType, eltModule, eltType, exprHandler, typeAttributed, typeEvented)
+import DOM.TypeStub (TypeStub(..), construct, handler, typeImports)
 import Data.Array as Array
 import Data.Maybe (Maybe(..))
 import Data.Set (Set)

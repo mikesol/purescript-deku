@@ -3,8 +3,9 @@ module DOM.Indexed.Interfaces where
 import Prelude
 import Prim hiding (Type)
 
-import DOM.Common (Ctor(..), Interface, construct)
+import DOM.Common (Ctor(..), Interface)
 import DOM.Indexed.Common (nominal)
+import DOM.TypeStub (construct)
 import Data.Array as Array
 import Data.Maybe (Maybe(..))
 import Data.Tuple.Nested (type (/\), (/\))
