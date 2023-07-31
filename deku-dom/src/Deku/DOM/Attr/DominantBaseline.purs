@@ -3,6 +3,7 @@ module Deku.DOM.Attr.DominantBaseline where
 import Deku.Attribute as Deku.Attribute
 import Data.Unit as Data.Unit
 import Control.Semigroupoid ((<<<))
+import Prim hiding (Char, Type)
 import Deku.DOM.Elt.Text (Text_)
 import Deku.DOM.Elt.TextPath (TextPath_)
 import Deku.DOM.Elt.Tspan (Tspan_)

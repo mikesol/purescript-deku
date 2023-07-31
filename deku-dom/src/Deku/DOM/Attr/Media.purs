@@ -3,6 +3,7 @@ module Deku.DOM.Attr.Media where
 import Deku.Attribute as Deku.Attribute
 import Data.Unit as Data.Unit
 import Control.Semigroupoid ((<<<))
+import Prim hiding (Char, Type)
 import Deku.DOM.Elt.Link (Link_)
 import Deku.DOM.Elt.Meta (Meta_)
 import Deku.DOM.Elt.Source (Source_)

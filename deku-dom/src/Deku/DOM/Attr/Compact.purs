@@ -3,6 +3,7 @@ module Deku.DOM.Attr.Compact where
 import Deku.Attribute as Deku.Attribute
 import Data.Unit as Data.Unit
 import Control.Semigroupoid ((<<<))
+import Prim hiding (Char, Type)
 import Deku.DOM.Elt.Dl (Dl_)
 import Deku.DOM.Elt.Menu (Menu_)
 import Deku.DOM.Elt.Ol (Ol_)

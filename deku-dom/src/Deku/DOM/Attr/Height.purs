@@ -3,6 +3,7 @@ module Deku.DOM.Attr.Height where
 import Deku.Attribute as Deku.Attribute
 import Data.Unit as Data.Unit
 import Control.Semigroupoid ((<<<))
+import Prim hiding (Char, Type)
 import Deku.DOM.Elt.Canvas (Canvas_)
 import Deku.DOM.Elt.Embed (Embed_)
 import Deku.DOM.Elt.FeBlend (FeBlend_)
@@ -37,6 +38,7 @@ import Deku.DOM.Elt.Img (Img_)
 import Deku.DOM.Elt.Object (Object_)
 import Deku.DOM.Elt.Pattern (Pattern_)
 import Deku.DOM.Elt.Source (Source_)
+import Deku.DOM.Elt.Svg (Svg_)
 import Deku.DOM.Elt.Table (Table_)
 import Deku.DOM.Elt.Tbody (Tbody_)
 import Deku.DOM.Elt.Td (Td_)
@@ -149,6 +151,9 @@ instance Deku.Attribute.Attr Pattern_ Height String where
   attr _ = Deku.Attribute.unsafeAttribute <<< { key: "height", value: _ } <<< Deku.Attribute.prop'
 
 instance Deku.Attribute.Attr Source_ Height String where
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "height", value: _ } <<< Deku.Attribute.prop'
+
+instance Deku.Attribute.Attr Svg_ Height String where
   attr _ = Deku.Attribute.unsafeAttribute <<< { key: "height", value: _ } <<< Deku.Attribute.prop'
 
 instance Deku.Attribute.Attr Table_ Height String where

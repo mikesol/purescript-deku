@@ -3,6 +3,7 @@ module Deku.DOM.Attr.Truespeed where
 import Deku.Attribute as Deku.Attribute
 import Data.Unit as Data.Unit
 import Control.Semigroupoid ((<<<))
+import Prim hiding (Char, Type)
 import Deku.DOM.Elt.Marquee (Marquee_)
 
 data Truespeed = Truespeed

@@ -3,6 +3,7 @@ module Deku.DOM.Attr.Autoplay where
 import Deku.Attribute as Deku.Attribute
 import Data.Unit as Data.Unit
 import Control.Semigroupoid ((<<<))
+import Prim hiding (Char, Type)
 import Deku.DOM.Elt.Audio (Audio_)
 import Deku.DOM.Elt.Video (Video_)
 

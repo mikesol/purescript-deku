@@ -3,6 +3,7 @@ module Deku.DOM.Attr.Href where
 import Deku.Attribute as Deku.Attribute
 import Data.Unit as Data.Unit
 import Control.Semigroupoid ((<<<))
+import Prim hiding (Char, Type)
 import Deku.DOM.Elt.A (A_)
 import Deku.DOM.Elt.Animate (Animate_)
 import Deku.DOM.Elt.AnimateMotion (AnimateMotion_)

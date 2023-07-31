@@ -3,6 +3,7 @@ module Deku.DOM.Attr.Scale where
 import Deku.Attribute as Deku.Attribute
 import Data.Unit as Data.Unit
 import Control.Semigroupoid ((<<<))
+import Prim hiding (Char, Type)
 import Deku.DOM.Elt.FeDisplacementMap (FeDisplacementMap_)
 
 data Scale = Scale

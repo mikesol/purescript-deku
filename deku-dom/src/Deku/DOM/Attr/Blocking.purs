@@ -3,6 +3,7 @@ module Deku.DOM.Attr.Blocking where
 import Deku.Attribute as Deku.Attribute
 import Data.Unit as Data.Unit
 import Control.Semigroupoid ((<<<))
+import Prim hiding (Char, Type)
 import Deku.DOM.Elt.Link (Link_)
 import Deku.DOM.Elt.Script (Script_)
 import Deku.DOM.Elt.Style (Style_)

@@ -11,11 +11,12 @@ import Data.Set as Set
 import Data.Tuple (fst, snd)
 import Data.Tuple.Nested (type (/\), (/\))
 import PureScript.CST.Types (Declaration, Expr, ImportDecl, Proper(..), Type)
-import Tidy.Codegen (binaryOp, binderWildcard, dataCtor, declData, declImport, declImportAs, declInstance, declType, exprApp, exprIdent, exprRecord, exprString, importOp, importType, importValue, instValue, typeApp, typeConstrained, typeCtor, typeForall, typeVar)
+import Tidy.Codegen (binaryOp, binderWildcard, dataCtor, declData, declImport, declImportAs, declImportHiding, declInstance, declType, exprApp, exprIdent, exprRecord, exprString, importOp, importType, importValue, instValue, typeApp, typeConstrained, typeCtor, typeForall, typeVar)
 
 importRequired :: Partial => Array ( ImportDecl Void )
 importRequired =
-    [ declImport "Control.Semigroupoid" [ importOp "<<<" ] 
+    [ declImport "Control.Semigroupoid" [ importOp "<<<" ]
+    , declImportHiding "Prim" [ importType "Char", importType "Type" ] 
     ]
 
 importsEventHandler :: Partial => Array ( ImportDecl Void )

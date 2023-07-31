@@ -3,6 +3,7 @@ module Deku.DOM.Attr.XlinkTitle where
 import Deku.Attribute as Deku.Attribute
 import Data.Unit as Data.Unit
 import Control.Semigroupoid ((<<<))
+import Prim hiding (Char, Type)
 import Deku.DOM.Elt.A (A_)
 import Deku.DOM.Elt.Image (Image_)
 import Deku.DOM.Elt.LinearGradient (LinearGradient_)

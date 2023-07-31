@@ -60,7 +60,7 @@ scene =
                   [pure
                       ( D.Src :=
                           "https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.webm"
-                      ) <|> pure (D.Xtype := "video/webm")
+                      ) <|> pure (D.Type := "video/webm")
                   ]
                   []
               ]

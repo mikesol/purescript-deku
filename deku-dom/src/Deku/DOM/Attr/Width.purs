@@ -3,6 +3,7 @@ module Deku.DOM.Attr.Width where
 import Deku.Attribute as Deku.Attribute
 import Data.Unit as Data.Unit
 import Control.Semigroupoid ((<<<))
+import Prim hiding (Char, Type)
 import Deku.DOM.Elt.Canvas (Canvas_)
 import Deku.DOM.Elt.Col (Col_)
 import Deku.DOM.Elt.Embed (Embed_)
@@ -40,6 +41,7 @@ import Deku.DOM.Elt.Object (Object_)
 import Deku.DOM.Elt.Pattern (Pattern_)
 import Deku.DOM.Elt.Pre (Pre_)
 import Deku.DOM.Elt.Source (Source_)
+import Deku.DOM.Elt.Svg (Svg_)
 import Deku.DOM.Elt.Table (Table_)
 import Deku.DOM.Elt.Td (Td_)
 import Deku.DOM.Elt.Th (Th_)
@@ -159,6 +161,9 @@ instance Deku.Attribute.Attr Pre_ Width String where
   attr _ = Deku.Attribute.unsafeAttribute <<< { key: "width", value: _ } <<< Deku.Attribute.prop'
 
 instance Deku.Attribute.Attr Source_ Width String where
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "width", value: _ } <<< Deku.Attribute.prop'
+
+instance Deku.Attribute.Attr Svg_ Width String where
   attr _ = Deku.Attribute.unsafeAttribute <<< { key: "width", value: _ } <<< Deku.Attribute.prop'
 
 instance Deku.Attribute.Attr Table_ Width String where

@@ -1,0 +1,31 @@
+package:
+  name: examples
+  dependencies:
+  - deku
+  - web-html
+  - canvas
+  - exceptions
+  - node-process
+  - filterable
+  - node-fs
+  - datetime
+  - affjax-web
+  - node-buffer
+  - argonaut
+  - codec-argonaut
+  - console
+  - tuples
+  - affjax
+  - either
+  - integers
+  - random
+  - aff
+  - argonaut-core
+  - web-uievents
+  - http-methods
+  - maybe
+  - typelevel-prelude
+  bundle:
+    module: Deku.Example.HelloWorld
+    outfile: hello-world/src/index.js
+    type: app

@@ -210,6 +210,10 @@ module Deku.DOM.Indexed.SVG
   , _systemLanguage_
   , _requiredExtensions
   , _requiredExtensions_
+  , _height
+  , _height_
+  , _width
+  , _width_
   , _refY
   , _refY_
   , _refX
@@ -294,10 +298,6 @@ module Deku.DOM.Indexed.SVG
   , _stopColor_
   , _offset
   , _offset_
-  , _height
-  , _height_
-  , _width
-  , _width_
   , _patternTransform
   , _patternTransform_
   , _patternContentUnits
@@ -641,6 +641,8 @@ type SVGSvgElement (r :: Row Type) =
   , viewBox :: String
   , systemLanguage :: String
   , requiredExtensions :: String
+  , height :: String
+  , width :: String
   | SvgPresentation (ARIAMixin (GlobalEventHandlers (Global (SvgGlobal (HtmlsvgGlobal r)))))
   )
 
@@ -2053,6 +2055,32 @@ _requiredExtensions_
   -> FRP.Event.Event (Deku.Attribute.Attribute (Index.Indexed (requiredExtensions :: String | r)))
 _requiredExtensions_ = _requiredExtensions <<< Applicative.pure
 
+_height
+  :: forall r
+   . FRP.Event.Event String
+  -> FRP.Event.Event (Deku.Attribute.Attribute (Index.Indexed (height :: String | r)))
+_height = Functor.map
+  (Deku.Attribute.unsafeAttribute <<< { key: "height", value: _ } <<< Deku.Attribute.prop')
+
+_height_
+  :: forall r
+   . String
+  -> FRP.Event.Event (Deku.Attribute.Attribute (Index.Indexed (height :: String | r)))
+_height_ = _height <<< Applicative.pure
+
+_width
+  :: forall r
+   . FRP.Event.Event String
+  -> FRP.Event.Event (Deku.Attribute.Attribute (Index.Indexed (width :: String | r)))
+_width = Functor.map
+  (Deku.Attribute.unsafeAttribute <<< { key: "width", value: _ } <<< Deku.Attribute.prop')
+
+_width_
+  :: forall r
+   . String
+  -> FRP.Event.Event (Deku.Attribute.Attribute (Index.Indexed (width :: String | r)))
+_width_ = _width <<< Applicative.pure
+
 _refY
   :: forall r
    . FRP.Event.Event String
@@ -2600,32 +2628,6 @@ _offset_
    . String
   -> FRP.Event.Event (Deku.Attribute.Attribute (Index.Indexed (offset :: String | r)))
 _offset_ = _offset <<< Applicative.pure
-
-_height
-  :: forall r
-   . FRP.Event.Event String
-  -> FRP.Event.Event (Deku.Attribute.Attribute (Index.Indexed (height :: String | r)))
-_height = Functor.map
-  (Deku.Attribute.unsafeAttribute <<< { key: "height", value: _ } <<< Deku.Attribute.prop')
-
-_height_
-  :: forall r
-   . String
-  -> FRP.Event.Event (Deku.Attribute.Attribute (Index.Indexed (height :: String | r)))
-_height_ = _height <<< Applicative.pure
-
-_width
-  :: forall r
-   . FRP.Event.Event String
-  -> FRP.Event.Event (Deku.Attribute.Attribute (Index.Indexed (width :: String | r)))
-_width = Functor.map
-  (Deku.Attribute.unsafeAttribute <<< { key: "width", value: _ } <<< Deku.Attribute.prop')
-
-_width_
-  :: forall r
-   . String
-  -> FRP.Event.Event (Deku.Attribute.Attribute (Index.Indexed (width :: String | r)))
-_width_ = _width <<< Applicative.pure
 
 _patternTransform
   :: forall r

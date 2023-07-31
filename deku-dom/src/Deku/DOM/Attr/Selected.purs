@@ -3,6 +3,7 @@ module Deku.DOM.Attr.Selected where
 import Deku.Attribute as Deku.Attribute
 import Data.Unit as Data.Unit
 import Control.Semigroupoid ((<<<))
+import Prim hiding (Char, Type)
 import Deku.DOM.Elt.Option (Option_)
 
 data Selected = Selected

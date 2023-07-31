@@ -1,6 +1,7 @@
 module Deku.DOM.Attr.OnAbort where
 
 import Control.Semigroupoid ((<<<))
+import Prim hiding (Char, Type)
 import Effect as Effect
 import Web.Event.Internal.Types as Web.Event.Internal.Types
 import Data.Unit as Data.Unit

@@ -3,6 +3,7 @@ module Deku.DOM.Attr.KernelUnitLength where
 import Deku.Attribute as Deku.Attribute
 import Data.Unit as Data.Unit
 import Control.Semigroupoid ((<<<))
+import Prim hiding (Char, Type)
 import Deku.DOM.Elt.FeConvolveMatrix (FeConvolveMatrix_)
 import Deku.DOM.Elt.FeDiffuseLighting (FeDiffuseLighting_)
 import Deku.DOM.Elt.FeSpecularLighting (FeSpecularLighting_)

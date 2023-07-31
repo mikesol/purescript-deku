@@ -3,6 +3,7 @@ module Deku.DOM.Attr.FilterUnits where
 import Deku.Attribute as Deku.Attribute
 import Data.Unit as Data.Unit
 import Control.Semigroupoid ((<<<))
+import Prim hiding (Char, Type)
 import Deku.DOM.Elt.Filter (Filter_)
 
 data FilterUnits = FilterUnits

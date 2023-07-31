@@ -34,7 +34,7 @@ main = runInBody
                               ]
                               [ D.source
                                   [oneOfMap pure
-                                      [ D.Src := i, D.Xtype := "video/mp4" ]
+                                      [ D.Src := i, D.Type := "video/mp4" ]
                                   ]
                                   []
                               ]
@@ -75,7 +75,7 @@ main = runInBody
                               ]
                               [ D.source
                                   [oneOfMap pure
-                                      [ D.Src := i, D.Xtype := "video/mp4" ]
+                                      [ D.Src := i, D.Type := "video/mp4" ]
                                   ]
                                   []
                               ]
@@ -115,7 +115,7 @@ main = runInBody
                               ]
                               [ D.source
                                   [oneOfMap pure
-                                      [ D.Src := i, D.Xtype := "video/mp4" ]
+                                      [ D.Src := i, D.Type := "video/mp4" ]
                                   ]
                                   []
                               ]

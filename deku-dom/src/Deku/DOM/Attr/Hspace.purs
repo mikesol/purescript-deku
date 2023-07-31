@@ -3,6 +3,7 @@ module Deku.DOM.Attr.Hspace where
 import Deku.Attribute as Deku.Attribute
 import Data.Unit as Data.Unit
 import Control.Semigroupoid ((<<<))
+import Prim hiding (Char, Type)
 import Deku.DOM.Elt.Embed (Embed_)
 import Deku.DOM.Elt.Iframe (Iframe_)
 import Deku.DOM.Elt.Img (Img_)

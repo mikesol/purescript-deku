@@ -3,6 +3,7 @@ module Deku.DOM.Attr.CalcMode where
 import Deku.Attribute as Deku.Attribute
 import Data.Unit as Data.Unit
 import Control.Semigroupoid ((<<<))
+import Prim hiding (Char, Type)
 import Deku.DOM.Elt.AnimateMotion (AnimateMotion_)
 
 data CalcMode = CalcMode

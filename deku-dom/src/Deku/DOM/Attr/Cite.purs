@@ -3,6 +3,7 @@ module Deku.DOM.Attr.Cite where
 import Deku.Attribute as Deku.Attribute
 import Data.Unit as Data.Unit
 import Control.Semigroupoid ((<<<))
+import Prim hiding (Char, Type)
 import Deku.DOM.Elt.Blockquote (Blockquote_)
 import Deku.DOM.Elt.Del (Del_)
 import Deku.DOM.Elt.Ins (Ins_)

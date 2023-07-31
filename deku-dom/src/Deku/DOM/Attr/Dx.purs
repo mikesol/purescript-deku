@@ -3,6 +3,7 @@ module Deku.DOM.Attr.Dx where
 import Deku.Attribute as Deku.Attribute
 import Data.Unit as Data.Unit
 import Control.Semigroupoid ((<<<))
+import Prim hiding (Char, Type)
 import Deku.DOM.Elt.FeDropShadow (FeDropShadow_)
 import Deku.DOM.Elt.FeOffset (FeOffset_)
 import Deku.DOM.Elt.Text (Text_)

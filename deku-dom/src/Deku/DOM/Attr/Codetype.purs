@@ -3,6 +3,7 @@ module Deku.DOM.Attr.Codetype where
 import Deku.Attribute as Deku.Attribute
 import Data.Unit as Data.Unit
 import Control.Semigroupoid ((<<<))
+import Prim hiding (Char, Type)
 import Deku.DOM.Elt.Object (Object_)
 
 data Codetype = Codetype

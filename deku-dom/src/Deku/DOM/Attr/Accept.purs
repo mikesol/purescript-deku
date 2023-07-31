@@ -3,6 +3,7 @@ module Deku.DOM.Attr.Accept where
 import Deku.Attribute as Deku.Attribute
 import Data.Unit as Data.Unit
 import Control.Semigroupoid ((<<<))
+import Prim hiding (Char, Type)
 import Deku.DOM.Elt.Form (Form_)
 import Deku.DOM.Elt.Input (Input_)
 

@@ -3,6 +3,7 @@ module Deku.DOM.Attr.ViewBox where
 import Deku.Attribute as Deku.Attribute
 import Data.Unit as Data.Unit
 import Control.Semigroupoid ((<<<))
+import Prim hiding (Char, Type)
 import Deku.DOM.Elt.Svg (Svg_)
 
 data ViewBox = ViewBox

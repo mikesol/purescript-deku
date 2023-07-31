@@ -3,6 +3,7 @@ module Deku.DOM.Attr.Valign where
 import Deku.Attribute as Deku.Attribute
 import Data.Unit as Data.Unit
 import Control.Semigroupoid ((<<<))
+import Prim hiding (Char, Type)
 import Deku.DOM.Elt.Col (Col_)
 import Deku.DOM.Elt.Tbody (Tbody_)
 import Deku.DOM.Elt.Td (Td_)

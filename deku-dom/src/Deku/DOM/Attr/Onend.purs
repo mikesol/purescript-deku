@@ -5,6 +5,7 @@ import Data.Unit as Data.Unit
 import Effect as Effect
 import Web.Event.Internal.Types as Web.Event.Internal.Types
 import Control.Semigroupoid ((<<<))
+import Prim hiding (Char, Type)
 import Deku.DOM.Elt.Animate (Animate_)
 import Deku.DOM.Elt.AnimateMotion (AnimateMotion_)
 import Deku.DOM.Elt.AnimateTransform (AnimateTransform_)

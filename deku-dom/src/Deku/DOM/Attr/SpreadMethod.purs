@@ -3,6 +3,7 @@ module Deku.DOM.Attr.SpreadMethod where
 import Deku.Attribute as Deku.Attribute
 import Data.Unit as Data.Unit
 import Control.Semigroupoid ((<<<))
+import Prim hiding (Char, Type)
 import Deku.DOM.Elt.LinearGradient (LinearGradient_)
 import Deku.DOM.Elt.RadialGradient (RadialGradient_)
 

@@ -98,6 +98,15 @@ missingPresentationProperties = case _ of
     animate@{ name : "SVGAnimateElement" } ->
         animate { members = animate.members <> [ { index : Ctor "by", name : "by", type : TypeString } ] }
 
+    svg@{ name : "SVGSvgElement" } ->
+        svg
+            { members = svg.members <>
+                [ { index : Ctor "height", name : "height", type : TypeString }
+                , { index : Ctor "width", name : "width", type : TypeString }
+                ]
+            , bases = svg.bases <> [ svgPresentation.ctor ]
+            }
+
     animate@{ name } | Just _ <- String.stripPrefix ( String.Pattern "SVGAnimate" ) name ->
         animate { bases = animate.bases <> [ svgPresentation.ctor, Ctor "SVGAnimateElement" ] }
 

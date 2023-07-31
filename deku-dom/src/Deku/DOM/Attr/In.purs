@@ -3,6 +3,7 @@ module Deku.DOM.Attr.In where
 import Deku.Attribute as Deku.Attribute
 import Data.Unit as Data.Unit
 import Control.Semigroupoid ((<<<))
+import Prim hiding (Char, Type)
 import Deku.DOM.Elt.FeBlend (FeBlend_)
 import Deku.DOM.Elt.FeColorMatrix (FeColorMatrix_)
 import Deku.DOM.Elt.FeComponentTransfer (FeComponentTransfer_)
