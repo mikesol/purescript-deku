@@ -9,6 +9,7 @@ module Deku.Toplevel where
 
 import Prelude
 
+import Bolson.Control as BControl
 import Bolson.Control as Bolson
 import Bolson.Core (Element(..), PSR, Scope(..))
 import Control.Alt ((<|>))
@@ -18,12 +19,14 @@ import Control.Monad.ST.Class (liftST)
 import Control.Monad.ST.Global (Global)
 import Control.Monad.ST.Internal as RRef
 import Data.Either (Either(..))
+import Data.Foldable (for_)
 import Data.List as List
 import Data.Map as Map
 import Data.Maybe (Maybe(..), maybe)
 import Data.Newtype (unwrap)
+import Data.Tuple (Tuple(..))
 import Deku.Control (deku)
-import Deku.Core (DOMInterpret(..), Nut(..), Nut', NutF(..), Node(..))
+import Deku.Core (DOMInterpret(..), Node(..), Nut(..), Nut', NutF(..), Node', flattenArgs)
 import Deku.Interpret (EffectfulPayload, FFIDOMSnapshot, EffectfulExecutor, deferPayloadE, forcePayloadE, fullDOMInterpret, getAllComments, hydratingDOMInterpret, makeFFIDOMSnapshot, setHydrating, ssrDOMInterpret, unSetHydrating)
 import Deku.SSR (ssr')
 import Effect (Effect)
@@ -49,8 +52,12 @@ runInElement' elt eee = do
   cache <- liftST $ RRef.new Map.empty
   let
     executor f = f List.Nil ffi
-  evt <- deku elt eee (fullDOMInterpret seed cache executor)
-  subscribe evt executor
+  Tuple sub (Tuple unsub evt) <- liftST $ deku elt eee (fullDOMInterpret seed cache executor)
+  u <- liftST $ subscribe evt executor
+  for_ sub executor
+  pure do
+    for_ unsub executor
+    liftST u
 
 -- | Runs a deku application in the body of a document, returning a canceler that can
 -- | be used to cancel the application.
@@ -77,12 +84,16 @@ hydrate' :: Nut -> Effect (Effect Unit)
 hydrate' children = do
   ffi <- makeFFIDOMSnapshot
   getAllComments ffi
-  di <- liftST (RRef.new 0) <#> hydratingDOMInterpret
+  seed <- liftST $ RRef.new 0
+  cache <- liftST $ RRef.new Map.empty
+  let
+    executor f = f List.Nil ffi
+  di <- hydratingDOMInterpret seed cache executor
   (coerce setHydrating :: _ -> _ Unit) ffi
   let me = "deku-root"
   root <- dekuRoot
-  u <- subscribe
-    ( pure ((unwrap di).makeRoot { id: me, root }) <|> __internalDekuFlatten
+  Tuple sub (Tuple unsub evt) <- __internalDekuFlatten
+        (unsafeCoerce children)
         { parent: Just "deku-root"
         , scope: Local "rootScope"
         , raiseId: \_ -> pure unit
@@ -91,11 +102,13 @@ hydrate' children = do
         , dynFamily: Nothing
         }
         di
-        (unsafeCoerce children)
-    )
-    \i -> i ffi
+  (unwrap di).makeRoot { id: me, root } ffi
+  for_ sub executor
+  u <- subscribe evt executor
   (coerce unSetHydrating :: _ -> _ Unit) ffi
-  pure u
+  pure do
+    for_ unsub executor
+    u
 
 -- | Hydrates an application created using `runSSR`.
 hydrate :: Nut -> Effect Unit
@@ -131,6 +144,7 @@ runSSR' topTag = go
                 let di = ssrDOMInterpret seed
                 void $ subscribePure
                   ( ( __internalDekuFlatten
+                        children
                         { parent: Just "deku-root"
                         , scope: Local "rootScope"
                         , raiseId: \_ -> pure unit
@@ -139,7 +153,6 @@ runSSR' topTag = go
                         , dynFamily: Nothing
                         }
                         di
-                        children
                     )
                   )
                   \i -> i instr
@@ -149,18 +162,7 @@ runSSR' topTag = go
 
 __internalDekuFlatten
   :: forall payload
-   . PSR (pos :: Maybe Int, dynFamily :: Maybe String, ez :: Boolean)
-  -> DOMInterpret payload
-  -> NutF payload
-  -> Event payload
-__internalDekuFlatten a b c = Bolson.flatten
-  { doLogic: \pos (DOMInterpret { sendToPos }) id -> sendToPos { id, pos }
-  , ids: unwrap >>> _.ids
-  , disconnectElement:
-      \(DOMInterpret { disconnectElement }) { id, scope, parent } ->
-        disconnectElement { id, scope, parent, scopeEq: eq }
-  , toElt: \(Node e) -> Element e
-  }
-  a
-  b
-  ((coerce :: NutF payload -> Nut' payload) c)
+   . NutF payload
+  -> Node' payload
+__internalDekuFlatten a b c = BControl.flatten flattenArgs b c
+  ((\(NutF x) -> x) a)
