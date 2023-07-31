@@ -5,36 +5,36 @@ WHITESPACE = [" ","\\t","\\n"]
 
 print_('''module Deku.Pursx where
 
+
 import Prelude
 
 import Bolson.Control as Bolson
-import Bolson.Core (Element(..), Entity(..), PSR)
-import Control.Alt ((<|>))
-import Control.Monad.ST.Uncurried (mkSTFn2, runSTFn1, runSTFn2)
+import Bolson.Core (Element(..), Entity(..))
 import Control.Plus (empty)
+import Data.Foldable (foldl)
 import Data.Maybe (Maybe(..), maybe)
-import Data.Newtype (unwrap)
-import Data.Profunctor (lcmap)
 import Data.Reflectable (class Reflectable, reflectType)
 import Data.Symbol (class IsSymbol)
-import Deku.Attribute (Attribute, AttributeValue(..), unsafeUnAttribute)
-import Deku.Core (DOMInterpret(..), Nut(..), Nut', NutF(..), Node(..))
+import Data.These (These(..))
+import Data.Tuple (Tuple(..))
+import Deku.Attribute (Attribute, unsafeUnAttribute)
+import Deku.Control (unsafeSetAttribute)
+import Deku.Core (DOMInterpret(..), Node(..), Node', Nut(..), NutF(..), flattenArgs)
 import Deku.DOM (class TagToDeku)
-import FRP.Event (Event, Subscriber(..), merge, makeLemmingEventO)
+import FRP.Event (merge)
 import Foreign.Object as Object
 import Prim.Boolean (False, True)
 import Prim.Row as Row
 import Prim.RowList as RL
 import Prim.Symbol as Sym
 import Record (get)
-import Safe.Coerce (coerce)
 import Type.Proxy (Proxy(..))
 ''')
 
 print_('pursx :: forall s. Proxy s')
 print_('pursx = Proxy')
 print_('class DoVerbForAttr (verb :: Symbol) (tag :: Symbol) (acc :: Symbol) (head :: Symbol) (tail :: Symbol) (pursi :: Row Type) (purso :: Row Type) (newTail :: Symbol) | verb acc head tail pursi -> purso newTail')
-print_('instance (TagToDeku tag deku,  Row.Cons acc (Event (Attribute deku)) pursi purso) => DoVerbForAttr verb tag acc verb tail pursi purso tail')
+print_('instance (TagToDeku tag deku,  Row.Cons acc (Array (Attribute deku)) pursi purso) => DoVerbForAttr verb tag acc verb tail pursi purso tail')
 print_('else instance (Sym.Append acc anything acc2, Sym.Cons x y tail, DoVerbForAttr verb tag acc2 x y pursi purso newTail) => DoVerbForAttr verb tag acc anything tail pursi purso newTail')
 print_('--')
 print_('class DoVerbForDOM (verb :: Symbol) (acc :: Symbol) (head :: Symbol) (tail :: Symbol) (pursi :: Row Type) (purso :: Row Type) (newTail :: Symbol) |  verb acc head tail pursi -> purso newTail')
@@ -156,7 +156,7 @@ domableToNode (Nut df) = step1 df
   where
   step1 :: forall payload. NutF payload -> Node payload
   step1 (NutF (Element' n)) = n
-  step1 _ = Node \_ _ -> empty
+  step1 _ = Node $ Element $ \_ _ -> pure $ Tuple [] $ Tuple [] empty
 
 instance pursxToElementConsInsert ::
   ( Row.Cons key (Nut) r' r
@@ -172,71 +172,77 @@ instance pursxToElementConsInsert ::
       { cache, element } = pursxToElement pxScope (Proxy :: Proxy rest) r
     in
       { cache: Object.insert (reflectType pxk) false cache
-      , element: Nut (NutF (Element' $ Node \info di ->
-          __internalDekuFlatten
-            { parent: Just (reflectType pxk <> "@!%" <> pxScope)
-            , scope: info.scope
-            , raiseId: \_ -> pure unit
-            , pos: info.pos
-            , ez: false
-            , dynFamily: Nothing
-            }
-            di
-            ((\(Nut df) -> df) (get pxk r))
-            <|> (let Node y = (domableToNode element) in y) info di))
+      , element: Nut
+          ( NutF
+              ( Element' $ Node $ Element \info di -> do
+                  let Node (Element rest) = domableToNode element
+                  Tuple subscr1 (Tuple unsub1 evt1) <- rest info di
+                  Tuple subscr0 (Tuple unsub0 evt0) <- __internalDekuFlatten
+                    ((\(Nut df) -> df) (get pxk r))
+                    { parent: Just (reflectType pxk <> "@!%" <> pxScope)
+                    , scope: info.scope
+                    , raiseId: \_ -> pure unit
+                    , pos: info.pos
+                    , ez: false
+                    , dynFamily: Nothing
+                    }
+                    di
+                  pure $ Tuple (subscr0 <> subscr1) $ Tuple (unsub0 <> unsub1)
+                    (merge [ evt0, evt1 ])
+              )
+          )
       }
     where
     pxk = Proxy :: _ key
 
 else instance pursxToElementConsAttr ::
-  ( Row.Cons key (Event (Attribute deku)) r' r
+  ( Row.Cons key (Array (Attribute deku)) r' r
   , PursxToElement rest r
   , Reflectable key String
   , IsSymbol key
   ) =>
   PursxToElement
-    (RL.Cons key (Event (Attribute deku)) rest)
+    (RL.Cons key (Array (Attribute deku)) rest)
     r where
-  pursxToElement pxScope _ r =
+  pursxToElement pxScope _ r = do
     let
       { cache, element } = pursxToElement pxScope (Proxy :: Proxy rest) r
-    in
-      { cache: Object.insert (reflectType pxk) true cache
-      , element: Nut
-          ( NutF
-              ( Element'
-                  ( Node
-                      \parent
-                       di@(DOMInterpret { setProp, setCb, unsetAttribute }) ->
-                        map
-                          ( lcmap unsafeUnAttribute
-                              ( \{ key, value } -> case value of
-                                  Prop' p -> setProp
-                                    { id:
-                                        ((reflectType pxk) <> "@!%" <> pxScope)
-                                    , key
-                                    , value: p
-                                    }
-                                  Cb' c -> setCb
-                                    { id:
-                                        ((reflectType pxk) <> "@!%" <> pxScope)
-                                    , key
-                                    , value: c
-                                    }
-                                  Unset' -> unsetAttribute
-                                    { id:
-                                        ((reflectType pxk) <> "@!%" <> pxScope)
-                                    , key
-                                    }
-                              )
-                          )
-                          (get pxk r)
-                          <|> (let Node y = (domableToNode element) in y) parent
-                            di
+      Node (Element rest) = domableToNode element
+
+      elt :: forall payload. Node' payload
+      elt parent di = do
+        let
+          { left, right } = foldl
+            ( \\b a -> case unsafeUnAttribute a of
+                This l -> b { left = b.left <> [ l ] }
+                That r -> b { right = b.right <> [ r ] }
+                Both l r -> b
+                  { left = b.left <> [ l ], right = b.right <> [ r ] }
+            )
+            { left: [], right: [] }
+            (get pxk r)
+        Tuple subscr (Tuple unsub evt) <- rest parent di
+        pure
+          $ Tuple
+              ( subscr <> map
+                  ( unsafeSetAttribute di
+                      (reflectType pxk <> "@!%" <> pxScope)
+                  )
+                  left
+              )
+          $ Tuple unsub
+          $ merge
+              ( [ evt ] <>
+                  ( (map <<< map)
+                      ( unsafeSetAttribute di
+                          (reflectType pxk <> "@!%" <> pxScope)
+                      )
+                      right
                   )
               )
-          )
-      }
+    { cache: Object.insert (reflectType pxk) true cache
+    , element: Nut (NutF (Element' (Node (Element elt))))
+    }
     where
     pxk = Proxy :: _ key
 
@@ -244,7 +250,10 @@ instance pursxToElementNil ::
   PursxToElement RL.Nil r where
   pursxToElement _ _ _ =
     { cache: Object.empty
-    , element: Nut (NutF $ Element' $ Node \_ _ -> empty)
+    , element: Nut
+        ( NutF $ Element' $ Node $ Element \_ _ -> pure $ Tuple [] $ Tuple []
+            empty
+        )
     }
 
 psx
@@ -281,30 +290,26 @@ makePursx'
 makePursx' verb html r = Nut ee
   where
   ee :: forall payload. NutF payload
-  ee = NutF (Element' (Node go))
+  ee = NutF (Element' (Node (Element go)))
 
-  go
-    :: forall payload
-     . PSR (pos :: Maybe Int, ez :: Boolean, dynFamily :: Maybe String)
-    -> DOMInterpret payload
-    -> Event payload
+  go :: forall payload. Node' payload
   go
     z@{ parent, scope, raiseId, dynFamily, pos }
     di@(DOMInterpret { makePursx: mpx, ids, deleteFromCache, attributeParent }) =
-    makeLemmingEventO $ mkSTFn2 \(Subscriber mySub) k1 -> do
-      me <- ids
-      pxScope <- ids
+    do
+      me <- show <$> ids
+      pxScope <- show <$> ids
       raiseId me
       let
         { cache, element: element' } = pursxToElement
           pxScope
           (Proxy :: _ rl)
           r
-      let Node element = domableToNode element'
-      unsub <- runSTFn2 mySub
-        ( merge
-            [ pure $
-                mpx
+      let Node (Element element) = domableToNode element'
+      Tuple subsc (Tuple unsub evt) <- element z di
+      pure
+        $ Tuple
+            ( [ mpx
                   { id: me
                   , parent
                   , cache
@@ -315,19 +320,15 @@ makePursx' verb html r = Nut ee
                   , html: reflectType html
                   , verb: reflectType verb
                   }
-            , element z di
-            , maybe empty
+              ] <> subsc <> maybe []
                 ( \p ->
-                    pure $ attributeParent
-                      { id: me, parent: p, pos, dynFamily, ez: false }
+                    [ attributeParent
+                        { id: me, parent: p, pos, dynFamily, ez: false }
+                    ]
                 )
                 parent
-            ]
-        )
-        k1
-      pure do
-        runSTFn1 k1 (deleteFromCache { id: me })
-        unsub
+            )
+        $ Tuple ([ deleteFromCache { id: me } ] <> unsub) evt
 
 unsafeMakePursx
   :: forall r rl
@@ -349,30 +350,26 @@ unsafeMakePursx'
 unsafeMakePursx' verb html r = Nut ee
   where
   ee :: forall payload. NutF payload
-  ee = NutF (Element' (Node go))
+  ee = NutF (Element' (Node (Element go)))
 
-  go
-    :: forall payload
-     . PSR (pos :: Maybe Int, ez :: Boolean, dynFamily :: Maybe String)
-    -> DOMInterpret payload
-    -> Event payload
+  go :: forall payload. Node' payload
   go
     z@{ parent, scope, raiseId, dynFamily, pos }
     di@(DOMInterpret { makePursx: mpx, ids, deleteFromCache, attributeParent }) =
-    makeLemmingEventO $ mkSTFn2 \(Subscriber mySub) k1 -> do
-      me <- ids
-      pxScope <- ids
+    do
+      me <- show <$> ids
+      pxScope <- show <$> ids
       raiseId me
       let
         { cache, element: element' } = pursxToElement
           pxScope
           (Proxy :: _ rl)
           r
-      let Node element = domableToNode element'
-      unsub <- runSTFn2 mySub
-        ( merge
-            [ pure $
-                mpx
+      let Node (Element element) = domableToNode element'
+      Tuple subsc (Tuple unsub evt) <- element z di
+      pure
+        $ Tuple
+            ( [ mpx
                   { id: me
                   , parent
                   , cache
@@ -383,37 +380,21 @@ unsafeMakePursx' verb html r = Nut ee
                   , html
                   , verb
                   }
-            , element z di
-            , maybe empty
+              ] <> subsc <> maybe []
                 ( \p ->
-                    pure $ attributeParent
-                      { id: me, parent: p, pos, dynFamily, ez: false }
+                    [ attributeParent
+                        { id: me, parent: p, pos, dynFamily, ez: false }
+                    ]
                 )
                 parent
-            ]
-        )
-        k1
-      pure do
-        runSTFn1 k1 (deleteFromCache { id: me })
-        unsub
+            )
+        $ Tuple ([ deleteFromCache { id: me } ] <> unsub) evt
 
 __internalDekuFlatten
   :: forall payload
-   . PSR (pos :: Maybe Int, dynFamily :: Maybe String, ez :: Boolean)
-  -> DOMInterpret payload
-  -> NutF payload
-  -> Event payload
-__internalDekuFlatten a b c = Bolson.flatten
-  { doLogic: \pos (DOMInterpret { sendToPos }) id -> sendToPos { id, pos }
-  , ids: unwrap >>> _.ids
-  , disconnectElement:
-      \(DOMInterpret { disconnectElement }) { id, scope, parent } ->
-        disconnectElement { id, scope, parent, scopeEq: eq }
-  , toElt: \(Node e) -> Element e
-  }
-  a
-  b
-  ((coerce :: NutF payload -> Nut' payload) c)
+   . NutF payload
+  -> Node' payload
+__internalDekuFlatten (NutF c) a b = Bolson.flatten flattenArgs a b c
 
 infixr 5 makePursx as ~~
 infixr 5 unsafeMakePursx as ~!~
