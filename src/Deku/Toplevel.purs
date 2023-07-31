@@ -10,15 +10,11 @@ module Deku.Toplevel where
 import Prelude
 
 import Bolson.Control as BControl
-import Bolson.Control as Bolson
-import Bolson.Core (Element(..), PSR, Scope(..))
-import Control.Alt ((<|>))
-import Control.Monad.Free (resume)
+import Bolson.Core (Scope(..))
 import Control.Monad.ST (ST)
 import Control.Monad.ST.Class (liftST)
 import Control.Monad.ST.Global (Global)
 import Control.Monad.ST.Internal as RRef
-import Data.Either (Either(..))
 import Data.Foldable (for_)
 import Data.List as List
 import Data.Map as Map
@@ -26,11 +22,11 @@ import Data.Maybe (Maybe(..), maybe)
 import Data.Newtype (unwrap)
 import Data.Tuple (Tuple(..))
 import Deku.Control (deku)
-import Deku.Core (DOMInterpret(..), Node(..), Nut(..), Nut', NutF(..), Node', flattenArgs)
-import Deku.Interpret (EffectfulPayload, FFIDOMSnapshot, EffectfulExecutor, deferPayloadE, forcePayloadE, fullDOMInterpret, getAllComments, hydratingDOMInterpret, makeFFIDOMSnapshot, setHydrating, ssrDOMInterpret, unSetHydrating)
+import Deku.Core (Node', Nut(..), NutF(..), flattenArgs)
+import Deku.Interpret (fullDOMInterpret, getAllComments, hydratingDOMInterpret, makeFFIDOMSnapshot, setHydrating, ssrDOMInterpret, unSetHydrating)
 import Deku.SSR (ssr')
 import Effect (Effect)
-import FRP.Event (Event, keepLatest, makeEvent, subscribe, subscribePure)
+import FRP.Event (subscribe)
 import Safe.Coerce (coerce)
 import Unsafe.Coerce (unsafeCoerce)
 import Web.DOM.Element as DOM
@@ -52,7 +48,8 @@ runInElement' elt eee = do
   cache <- liftST $ RRef.new Map.empty
   let
     executor f = f List.Nil ffi
-  Tuple sub (Tuple unsub evt) <- liftST $ deku elt eee (fullDOMInterpret seed cache executor)
+  Tuple sub (Tuple unsub evt) <- liftST $ deku elt eee
+    (fullDOMInterpret seed cache executor)
   u <- liftST $ subscribe evt executor
   for_ sub executor
   pure do
@@ -88,27 +85,27 @@ hydrate' children = do
   cache <- liftST $ RRef.new Map.empty
   let
     executor f = f List.Nil ffi
-  di <- hydratingDOMInterpret seed cache executor
+    di = hydratingDOMInterpret seed cache executor
   (coerce setHydrating :: _ -> _ Unit) ffi
   let me = "deku-root"
   root <- dekuRoot
-  Tuple sub (Tuple unsub evt) <- __internalDekuFlatten
-        (unsafeCoerce children)
-        { parent: Just "deku-root"
-        , scope: Local "rootScope"
-        , raiseId: \_ -> pure unit
-        , ez: true
-        , pos: Nothing
-        , dynFamily: Nothing
-        }
-        di
-  (unwrap di).makeRoot { id: me, root } ffi
+  Tuple sub (Tuple unsub evt) <- liftST $ __internalDekuFlatten
+    (unsafeCoerce children)
+    { parent: Just "deku-root"
+    , scope: Local "rootScope"
+    , raiseId: \_ -> pure unit
+    , ez: true
+    , pos: Nothing
+    , dynFamily: Nothing
+    }
+    di
+  (unwrap di).makeRoot { id: me, root } List.Nil ffi
   for_ sub executor
-  u <- subscribe evt executor
+  u <- liftST $ subscribe evt executor
   (coerce unSetHydrating :: _ -> _ Unit) ffi
   pure do
     for_ unsub executor
-    u
+    liftST $ u
 
 -- | Hydrates an application created using `runSSR`.
 hydrate :: Nut -> Effect Unit
@@ -116,9 +113,8 @@ hydrate a = void (hydrate' a)
 
 -- | Creates a static site from a deku application. The top-level element for this site is `body`.
 runSSR
-  :: forall r
-   . Nut
-  -> ST r String
+  :: Nut
+  -> ST Global String
 
 runSSR = runSSR' "body"
 
@@ -126,39 +122,29 @@ runSSR = runSSR' "body"
 -- | passed to this function as a first argument.
 runSSR'
   :: String
-  -> (forall r. Nut -> ST r String)
+  -> Nut
+  -> ST Global String
 runSSR' topTag = go
   where
   go
-    :: forall r. Nut -> ST r String
-  go (Nut children) = do
-    let
-      unglobal = unsafeCoerce :: ST Global String -> ST r String
-
-    unglobal
-      ( ssr' topTag
-          <$>
-            ( do
-                seed <- RRef.new 0
-                instr <- RRef.new []
-                let di = ssrDOMInterpret seed
-                void $ subscribePure
-                  ( ( __internalDekuFlatten
-                        children
-                        { parent: Just "deku-root"
-                        , scope: Local "rootScope"
-                        , raiseId: \_ -> pure unit
-                        , ez: true
-                        , pos: Nothing
-                        , dynFamily: Nothing
-                        }
-                        di
-                    )
-                  )
-                  \i -> i instr
-                RRef.read instr
-            )
-      )
+    :: Nut -> ST Global String
+  go (Nut children) = ssr' topTag <$> do
+    seed <- RRef.new 0
+    instr <- RRef.new []
+    cache <- liftST $ RRef.new Map.empty
+    let di = ssrDOMInterpret seed cache mempty
+    Tuple subscr _ <- __internalDekuFlatten
+      children
+      { parent: Just "deku-root"
+      , scope: Local "rootScope"
+      , raiseId: \_ -> pure unit
+      , ez: true
+      , pos: Nothing
+      , dynFamily: Nothing
+      }
+      di
+    for_ subscr (\f -> f List.Nil instr)
+    RRef.read instr
 
 __internalDekuFlatten
   :: forall payload

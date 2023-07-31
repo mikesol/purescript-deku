@@ -6,6 +6,7 @@ module Deku.Control
   ( (<#~>)
   , (<$~>)
   , deku
+  , unsafeSetAttribute
   , elementify2
   , toDeku
   , globalPortal
