@@ -4,10 +4,10 @@
 -- | the #frp channel of the PureScript Discord. If enough people are implementing
 -- | Deku backends, someone may document this stuff at some point.
 module Deku.Interpret
-  ( DeferredInterpretation(..)
-  , EliminatableInstruction(..)
+  ( EliminatableInstruction(..)
   , FFIDOMSnapshot(..)
   , FunctionOfFFIDOMSnapshotU
+  , FunctionOfArrayInstructionsU
   , EffectfulExecutor
   , EffectfulPayload
   , Instruction(..)
@@ -30,7 +30,6 @@ import Prelude
 import Bolson.Control as BC
 import Bolson.Core (Scope(..))
 import Bolson.Core as Bolson
-import Control.Lazy (fix)
 import Control.Monad.ST (ST)
 import Control.Monad.ST.Class (class MonadST, liftST)
 import Control.Monad.ST.Global (Global)
@@ -39,13 +38,13 @@ import Control.Monad.ST.Internal as Ref
 import Control.Plus (empty)
 import Data.Array as Array
 import Data.Foldable (for_)
-import Data.List (List, (:))
+import Data.List ((:))
 import Data.List as List
-import Data.Map (foldSubmap)
 import Data.Map as Map
 import Data.Maybe (Maybe(..), maybe)
 import Data.Monoid.Endo (Endo(..))
 import Data.Newtype (unwrap)
+import Data.Profunctor (lcmap)
 import Data.String.Utils (includes)
 import Data.Tuple (Tuple(..))
 import Deku.Core (DOMInterpret(..), Node', Nut', NutF(..), flattenArgs)
@@ -54,15 +53,8 @@ import Effect (Effect)
 import FRP.Event (subscribe)
 import Safe.Coerce (coerce)
 
-data DeferredInterpretation a
-  = DeferPayload (List Int) a
-  | ForcePayload (List Int)
-  | ExecutePayload a
-
-derive instance Functor DeferredInterpretation
-
-execute :: forall a b c. (a -> b -> c) -> a -> DeferredInterpretation (b -> c)
-execute f a = ExecutePayload $ f a
+execute :: forall ignore a b c. (a -> b -> c) -> a -> ignore -> b -> c
+execute f a _ = f a
 
 -- foreign
 data FFIDOMSnapshot
@@ -162,58 +154,59 @@ giveNewParentOrReconstruct
   executor
   just
   roj
-  gnp =
-  ExecutePayload \ffi -> do
-    let
-      hasIdAndInScope = giveNewParent_ just roj gnp ffi
-      needsFreshNut =
-        do
-          let
-            { dynFamily
-            , ez
-            , parent
-            , pos
-            , raiseId
-            , scope
-            } = gnp
-          myId <- liftST $ Ref.new Nothing
-          let
-            newRaiseId = raiseId *> void <<< liftST <<< flip Ref.write myId <<<
-              Just
-          Tuple sub (Tuple unsub evt) <- liftST $ __internalDekuFlatten
-            gnp.ctor
-            { dynFamily
-            , ez
-            , parent: Just parent
-            , pos
-            , raiseId: newRaiseId
-            , scope
-            }
-            di
-          for_ sub executor
-          deferId <- liftST ids
-          let deferredPath = pure deferId
-          for_ unsub (executor <<< deferPayload deferredPath)
-          unsubscribe <- liftST $ subscribe
-            (redecorateDeferredPayload deferredPath <$> evt)
-            executor
-          fetchedId <- liftST $ Ref.read myId
-          for_ fetchedId $ executor <<< associateWithUnsubscribe <<<
-            { unsubscribe, id: _ }
-    hasId <- stateHasKey gnp.id ffi
-    if hasId then do
-      scope <- getScope gnp.id ffi
-      case scope, gnp.scope of
-        Global, _ -> hasIdAndInScope
-        Local x, Local y ->
-          -- the free thing won't work
-          -- that's fine, though
-          -- we can issue `associateWithUnsubscribe`
-          -- add an `unsubscribe` field in the ffi
-          -- and then thunk this on delete from cache
-          if includes x y then hasIdAndInScope else needsFreshNut
-        _, _ -> needsFreshNut
-    else needsFreshNut
+  gnp
+  cl
+  ffi = do
+  let
+    hasIdAndInScope = giveNewParent_ just roj gnp ffi
+    needsFreshNut =
+      do
+        let
+          { dynFamily
+          , ez
+          , parent
+          , pos
+          , raiseId
+          , scope
+          } = gnp
+        myId <- liftST $ Ref.new Nothing
+        let
+          newRaiseId = raiseId *> void <<< liftST <<< flip Ref.write myId <<<
+            Just
+        Tuple sub (Tuple unsub evt) <- liftST $ __internalDekuFlatten
+          gnp.ctor
+          { dynFamily
+          , ez
+          , parent: Just parent
+          , pos
+          , raiseId: newRaiseId
+          , scope
+          }
+          di
+        for_ sub $ executor <<< (_ $ cl)
+        deferId <- liftST ids
+        let deferredPath = pure deferId
+        for_ unsub (executor <<< (_ $ cl) <<< deferPayload deferredPath)
+        unsubscribe <- liftST $ subscribe
+          (redecorateDeferredPayload deferredPath <$> evt)
+          ((_ $ cl) >>> executor)
+        fetchedId <- liftST $ Ref.read myId
+        for_ fetchedId $ executor <<< (_ $ cl) <<< associateWithUnsubscribe <<<
+          { unsubscribe, id: _ }
+  hasId <- stateHasKey gnp.id ffi
+  if hasId then do
+    scope <- getScope gnp.id ffi
+    case scope, gnp.scope of
+      Global, _ -> hasIdAndInScope
+      Local x, Local y ->
+        -- the free thing won't work
+        -- that's fine, though
+        -- we can issue `associateWithUnsubscribe`
+        -- add an `unsubscribe` field in the ffi
+        -- and then thunk this on delete from cache
+        if includes x y then hasIdAndInScope else needsFreshNut
+      _, _ -> needsFreshNut
+  else needsFreshNut
 
 __internalDekuFlatten
   :: forall payload
@@ -238,7 +231,7 @@ foreign import getScope :: String -> FFIDOMSnapshot -> Effect Scope
 
 fullDOMInterpret
   :: Ref.STRef Region.Global Int
-  -> Ref.STRef Global (Map.Map (List.List Int) EffectfulPayload)
+  -> Ref.STRef Global (Map.Map (List.List Int) FunctionOfFFIDOMSnapshotU)
   -> EffectfulExecutor
   -> Core.DOMInterpret EffectfulPayload
 fullDOMInterpret seed deferredCache executor =
@@ -249,8 +242,8 @@ fullDOMInterpret seed deferredCache executor =
           void $ Ref.modify (add 1) seed
           pure s
       , associateWithUnsubscribe: execute $ associateWithUnsubscribe_
-      , redecorateDeferredPayload: redecorateDeferredPayloadE deferredCache
-      , deferPayload: execute <<< deferPayloadE deferredCache
+      , redecorateDeferredPayload: redecorateDeferredPayloadE
+      , deferPayload: deferPayloadE deferredCache
       , forcePayload: execute $ forcePayloadE deferredCache executor
       , makeElement: execute $ makeElement_ runOnJust false
       , makeDynBeacon: execute $ makeDynBeacon_ runOnJust false
@@ -400,39 +393,32 @@ deferPayloadE
   :: forall i o
    . Functor o
   => MonadST Global o
-  => Ref.STRef Global
-       (Map.Map (List.List Int) (DeferredInterpretation (i -> o Unit)))
+  => Ref.STRef Global (Map.Map (List.List Int) (i -> o Unit))
   -> List.List Int
-  -> DeferredInterpretation (i -> o Unit)
+  -> (List.List Int -> i -> o Unit)
+  -> List.List Int
   -> i
   -> o Unit
-deferPayloadE deferredCache l p _ = do
-  void $ liftST $ Ref.modify (Map.insert l p) deferredCache
+deferPayloadE deferredCache l p i _ = do
+  void $ liftST $ Ref.modify (Map.insert l (p i)) deferredCache
 
 redecorateDeferredPayloadE
   :: forall i o
    . Functor o
   => MonadST Global o
-  => Ref.STRef Global
-       (Map.Map (List.List Int) (DeferredInterpretation (i -> o Unit)))
+  => List.List Int
+  -> (List.List Int -> i -> o Unit)
   -> List.List Int
-  -> DeferredInterpretation (i -> o Unit)
-  -> DeferredInterpretation (i -> o Unit)
-redecorateDeferredPayloadE deferredCache l1 p = case p of
-  ForcePayload l2 -> ForcePayload (l1 <> l2)
-  ExecutePayload e -> ExecutePayload e
-  DeferPayload l2 e -> ExecutePayload \_ -> do
-    void $ liftST $ flip Ref.modify deferredCache \m -> do
-      let deleted = Map.delete l2 m
-      Map.insert (l1 <> l2) (ExecutePayload e) deleted
+  -> i
+  -> o Unit
+redecorateDeferredPayloadE l1 p = lcmap (l1 <> _) p
 
 forcePayloadE
   :: forall i o
    . Functor o
   => MonadST Global o
-  => Ref.STRef Global
-       (Map.Map (List.List Int) (DeferredInterpretation (i -> o Unit)))
-  -> ((DeferredInterpretation (i -> o Unit)) -> o Unit)
+  => Ref.STRef Global (Map.Map (List.List Int) (i -> o Unit))
+  -> ((i -> o Unit) -> o Unit)
   -> List.List Int
   -> i
   -> o Unit
@@ -441,50 +427,33 @@ forcePayloadE deferredCache executor l = fn
   fn _ = do
     o <- liftST $ Ref.read deferredCache
     let
-      tail (n : List.Nil) = ((n + 1) : List.Nil)
-      tail (a : b) = a : tail b
-      tail x = x
-      { toAdd, toRemove, instructions } = l # fix \go n -> do
-        let leftBound = Just n
-        let rightBound = Just $ tail n
-        flip (foldSubmap leftBound rightBound) o \k v -> case v of
-          ExecutePayload x ->
-            { toAdd: mempty
-            , toRemove: Endo (Map.insert k unit)
-            , instructions: Endo $ Array.cons (ExecutePayload x)
-            }
-          ForcePayload y -> go y
-          DeferPayload y x
-            | Just y >= leftBound && Just y <= rightBound ->
-                { toAdd: mempty
-                , toRemove: Endo (Map.insert k unit)
-                , instructions: Endo $ Array.cons (ExecutePayload x)
-                }
-            | otherwise ->
-                { toRemove: mempty
-                , toAdd: Endo (Map.insert y (ExecutePayload x))
-                , instructions: mempty
-                }
+      tail = case _ of
+        n : List.Nil -> (n + 1) : List.Nil
+        a : b -> a : tail b
+        x -> x
+      leftBound = Just l
+      rightBound = Just $ tail l
+      { newMap, instructions } = flip (Map.foldSubmap leftBound rightBound) o
+        \k v ->
+          { newMap: Endo (Map.delete k)
+          , instructions: Endo $ Array.cons v
+          }
     for_ (unwrap instructions []) executor
-    void $ liftST $ Ref.modify
-      ( \x -> Map.union (unwrap toAdd Map.empty) $ Map.difference x
-          (unwrap toRemove Map.empty)
-      )
+    void $ liftST $ Ref.modify (unwrap newMap)
       deferredCache
 
-type STPayload =
-  ( DeferredInterpretation
-      (Ref.STRef Global (Array Instruction) -> ST Global Unit)
-  )
+type FunctionOfArrayInstructionsU = Ref.STRef Global (Array Instruction) -> ST Global Unit
 
-type EffectfulPayload = DeferredInterpretation FunctionOfFFIDOMSnapshotU
+type STPayload = List.List Int -> FunctionOfArrayInstructionsU
 
-type EffectfulExecutor = EffectfulPayload -> Effect Unit
-type STExecutor = STPayload -> ST Global Unit
+type EffectfulPayload = List.List Int -> FunctionOfFFIDOMSnapshotU
+
+type EffectfulExecutor = FunctionOfFFIDOMSnapshotU -> Effect Unit
+type STExecutor = FunctionOfArrayInstructionsU -> ST Global Unit
 
 ssrDOMInterpret
   :: Ref.STRef Global Int
-  -> Ref.STRef Global (Map.Map (List.List Int) STPayload)
+  -> Ref.STRef Global (Map.Map (List.List Int) FunctionOfArrayInstructionsU)
   -> STExecutor
   -> Core.DOMInterpret STPayload
 ssrDOMInterpret seed deferredCache executor = Core.DOMInterpret
@@ -493,8 +462,8 @@ ssrDOMInterpret seed deferredCache executor = Core.DOMInterpret
       void $ Ref.modify (add 1) seed
       pure s
   , associateWithUnsubscribe: execute \_ _ -> pure unit
-  , deferPayload: execute <<< deferPayloadE deferredCache
-  , redecorateDeferredPayload: redecorateDeferredPayloadE deferredCache
+  , deferPayload: deferPayloadE deferredCache
+  , redecorateDeferredPayload: redecorateDeferredPayloadE
   , forcePayload: execute $ forcePayloadE deferredCache executor
   , makeElement: execute ssrMakeElement
   , attributeParent: execute \_ _ -> pure unit
@@ -534,7 +503,7 @@ sendToPos a = \state -> do
 
 hydratingDOMInterpret
   :: Ref.STRef Region.Global Int
-  -> Ref.STRef Global (Map.Map (List.List Int) EffectfulPayload)
+  -> Ref.STRef Global (Map.Map (List.List Int) FunctionOfFFIDOMSnapshotU)
   -> EffectfulExecutor
   -> Core.DOMInterpret EffectfulPayload
 hydratingDOMInterpret seed deferredCache executor =
@@ -545,8 +514,8 @@ hydratingDOMInterpret seed deferredCache executor =
           void $ Ref.modify (add 1) seed
           pure s
       , associateWithUnsubscribe: execute $ associateWithUnsubscribe_
-      , redecorateDeferredPayload: redecorateDeferredPayloadE deferredCache
-      , deferPayload: execute <<< deferPayloadE deferredCache
+      , redecorateDeferredPayload: redecorateDeferredPayloadE
+      , deferPayload: deferPayloadE deferredCache
       , forcePayload: execute $ forcePayloadE deferredCache executor
       , makeElement: execute $
           makeElement_

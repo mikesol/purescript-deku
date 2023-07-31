@@ -24,7 +24,7 @@ import Data.Maybe (Maybe(..), maybe)
 import Data.Newtype (unwrap)
 import Deku.Control (deku)
 import Deku.Core (DOMInterpret(..), Nut(..), Nut', NutF(..), Node(..))
-import Deku.Interpret (DeferredInterpretation(..), EffectfulPayload, FFIDOMSnapshot, EffectfulExecutor, deferPayloadE, forcePayloadE, fullDOMInterpret, getAllComments, hydratingDOMInterpret, makeFFIDOMSnapshot, setHydrating, ssrDOMInterpret, unSetHydrating)
+import Deku.Interpret (EffectfulPayload, FFIDOMSnapshot, EffectfulExecutor, deferPayloadE, forcePayloadE, fullDOMInterpret, getAllComments, hydratingDOMInterpret, makeFFIDOMSnapshot, setHydrating, ssrDOMInterpret, unSetHydrating)
 import Deku.SSR (ssr')
 import Effect (Effect)
 import FRP.Event (Event, keepLatest, makeEvent, subscribe, subscribePure)
@@ -46,12 +46,9 @@ runInElement'
 runInElement' elt eee = do
   ffi <- makeFFIDOMSnapshot
   seed <- liftST $ RRef.new 0
-  cache <- liftST $ RRef.new (Map.empty :: Map.Map (List.List Int) EffectfulPayload)
+  cache <- liftST $ RRef.new Map.empty
   let
-    executor :: EffectfulExecutor
-    executor (DeferPayload l p) = deferPayloadE cache l p ffi
-    executor (ForcePayload l) = forcePayloadE cache executor l ffi
-    executor (ExecutePayload f) = f ffi
+    executor f = f List.Nil ffi
   evt <- deku elt eee (fullDOMInterpret seed cache executor)
   subscribe evt executor
 
