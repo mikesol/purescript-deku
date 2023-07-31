@@ -12,13 +12,13 @@ import Data.Function (const)
 data OnBlur = OnBlur
 
 instance Deku.Attribute.Attr everything OnBlur Data.Unit.Unit where
-  attr _ _ = Deku.Attribute.unsafeAttribute { key: "onblur", value: Deku.Attribute.unset' }
+  attr _ _ = Deku.Attribute.unsafeAttribute { key: "blur", value: Deku.Attribute.unset' }
 
 instance
   Deku.Attribute.Attr everything
     OnBlur
     (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit) where
-  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "onblur", value: _ } <<< Deku.Attribute.cb' <<<
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "blur", value: _ } <<< Deku.Attribute.cb' <<<
     Deku.Attribute.cb
 
 type OnBlurEffect =
@@ -27,9 +27,9 @@ type OnBlurEffect =
   => FRP.Event.Event (Deku.Attribute.Attribute element)
 
 instance Deku.Attribute.Attr everything OnBlur Deku.Attribute.Cb where
-  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "onblur", value: _ } <<< Deku.Attribute.cb'
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "blur", value: _ } <<< Deku.Attribute.cb'
 
 instance Deku.Attribute.Attr everything OnBlur (Effect.Effect Data.Unit.Unit) where
-  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "onblur", value: _ } <<< Deku.Attribute.cb'
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "blur", value: _ } <<< Deku.Attribute.cb'
     <<< Deku.Attribute.cb
     <<< const

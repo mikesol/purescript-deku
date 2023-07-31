@@ -13,13 +13,13 @@ data OnAnimationiteration = OnAnimationiteration
 
 instance Deku.Attribute.Attr everything OnAnimationiteration Data.Unit.Unit where
   attr _ _ = Deku.Attribute.unsafeAttribute
-    { key: "onanimationiteration", value: Deku.Attribute.unset' }
+    { key: "animationiteration", value: Deku.Attribute.unset' }
 
 instance
   Deku.Attribute.Attr everything
     OnAnimationiteration
     (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit) where
-  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "onanimationiteration", value: _ }
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "animationiteration", value: _ }
     <<< Deku.Attribute.cb'
     <<< Deku.Attribute.cb
 
@@ -29,11 +29,11 @@ type OnAnimationiterationEffect =
   => FRP.Event.Event (Deku.Attribute.Attribute element)
 
 instance Deku.Attribute.Attr everything OnAnimationiteration Deku.Attribute.Cb where
-  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "onanimationiteration", value: _ } <<<
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "animationiteration", value: _ } <<<
     Deku.Attribute.cb'
 
 instance Deku.Attribute.Attr everything OnAnimationiteration (Effect.Effect Data.Unit.Unit) where
-  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "onanimationiteration", value: _ }
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "animationiteration", value: _ }
     <<< Deku.Attribute.cb'
     <<< Deku.Attribute.cb
     <<< const

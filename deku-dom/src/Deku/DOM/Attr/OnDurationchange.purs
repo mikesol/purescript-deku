@@ -12,14 +12,13 @@ import Data.Function (const)
 data OnDurationchange = OnDurationchange
 
 instance Deku.Attribute.Attr everything OnDurationchange Data.Unit.Unit where
-  attr _ _ = Deku.Attribute.unsafeAttribute
-    { key: "ondurationchange", value: Deku.Attribute.unset' }
+  attr _ _ = Deku.Attribute.unsafeAttribute { key: "durationchange", value: Deku.Attribute.unset' }
 
 instance
   Deku.Attribute.Attr everything
     OnDurationchange
     (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit) where
-  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "ondurationchange", value: _ }
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "durationchange", value: _ }
     <<< Deku.Attribute.cb'
     <<< Deku.Attribute.cb
 
@@ -29,11 +28,11 @@ type OnDurationchangeEffect =
   => FRP.Event.Event (Deku.Attribute.Attribute element)
 
 instance Deku.Attribute.Attr everything OnDurationchange Deku.Attribute.Cb where
-  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "ondurationchange", value: _ } <<<
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "durationchange", value: _ } <<<
     Deku.Attribute.cb'
 
 instance Deku.Attribute.Attr everything OnDurationchange (Effect.Effect Data.Unit.Unit) where
-  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "ondurationchange", value: _ }
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "durationchange", value: _ }
     <<< Deku.Attribute.cb'
     <<< Deku.Attribute.cb
     <<< const

@@ -12,13 +12,13 @@ import Data.Function (const)
 data OnKeydown = OnKeydown
 
 instance Deku.Attribute.Attr everything OnKeydown Data.Unit.Unit where
-  attr _ _ = Deku.Attribute.unsafeAttribute { key: "onkeydown", value: Deku.Attribute.unset' }
+  attr _ _ = Deku.Attribute.unsafeAttribute { key: "keydown", value: Deku.Attribute.unset' }
 
 instance
   Deku.Attribute.Attr everything
     OnKeydown
     (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit) where
-  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "onkeydown", value: _ } <<< Deku.Attribute.cb'
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "keydown", value: _ } <<< Deku.Attribute.cb'
     <<< Deku.Attribute.cb
 
 type OnKeydownEffect =
@@ -27,9 +27,9 @@ type OnKeydownEffect =
   => FRP.Event.Event (Deku.Attribute.Attribute element)
 
 instance Deku.Attribute.Attr everything OnKeydown Deku.Attribute.Cb where
-  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "onkeydown", value: _ } <<< Deku.Attribute.cb'
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "keydown", value: _ } <<< Deku.Attribute.cb'
 
 instance Deku.Attribute.Attr everything OnKeydown (Effect.Effect Data.Unit.Unit) where
-  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "onkeydown", value: _ } <<< Deku.Attribute.cb'
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "keydown", value: _ } <<< Deku.Attribute.cb'
     <<< Deku.Attribute.cb
     <<< const

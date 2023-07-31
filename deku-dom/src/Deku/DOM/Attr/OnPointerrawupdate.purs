@@ -13,13 +13,13 @@ data OnPointerrawupdate = OnPointerrawupdate
 
 instance Deku.Attribute.Attr everything OnPointerrawupdate Data.Unit.Unit where
   attr _ _ = Deku.Attribute.unsafeAttribute
-    { key: "onpointerrawupdate", value: Deku.Attribute.unset' }
+    { key: "pointerrawupdate", value: Deku.Attribute.unset' }
 
 instance
   Deku.Attribute.Attr everything
     OnPointerrawupdate
     (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit) where
-  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "onpointerrawupdate", value: _ }
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "pointerrawupdate", value: _ }
     <<< Deku.Attribute.cb'
     <<< Deku.Attribute.cb
 
@@ -29,11 +29,11 @@ type OnPointerrawupdateEffect =
   => FRP.Event.Event (Deku.Attribute.Attribute element)
 
 instance Deku.Attribute.Attr everything OnPointerrawupdate Deku.Attribute.Cb where
-  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "onpointerrawupdate", value: _ } <<<
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "pointerrawupdate", value: _ } <<<
     Deku.Attribute.cb'
 
 instance Deku.Attribute.Attr everything OnPointerrawupdate (Effect.Effect Data.Unit.Unit) where
-  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "onpointerrawupdate", value: _ }
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "pointerrawupdate", value: _ }
     <<< Deku.Attribute.cb'
     <<< Deku.Attribute.cb
     <<< const

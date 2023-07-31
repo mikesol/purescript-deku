@@ -12,14 +12,14 @@ import Data.Function (const)
 data OnChange = OnChange
 
 instance Deku.Attribute.Attr everything OnChange Data.Unit.Unit where
-  attr _ _ = Deku.Attribute.unsafeAttribute { key: "onchange", value: Deku.Attribute.unset' }
+  attr _ _ = Deku.Attribute.unsafeAttribute { key: "change", value: Deku.Attribute.unset' }
 
 instance
   Deku.Attribute.Attr everything
     OnChange
     (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit) where
-  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "onchange", value: _ } <<< Deku.Attribute.cb'
-    <<< Deku.Attribute.cb
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "change", value: _ } <<< Deku.Attribute.cb' <<<
+    Deku.Attribute.cb
 
 type OnChangeEffect =
   forall element
@@ -27,9 +27,9 @@ type OnChangeEffect =
   => FRP.Event.Event (Deku.Attribute.Attribute element)
 
 instance Deku.Attribute.Attr everything OnChange Deku.Attribute.Cb where
-  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "onchange", value: _ } <<< Deku.Attribute.cb'
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "change", value: _ } <<< Deku.Attribute.cb'
 
 instance Deku.Attribute.Attr everything OnChange (Effect.Effect Data.Unit.Unit) where
-  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "onchange", value: _ } <<< Deku.Attribute.cb'
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "change", value: _ } <<< Deku.Attribute.cb'
     <<< Deku.Attribute.cb
     <<< const

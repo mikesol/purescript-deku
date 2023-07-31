@@ -12,14 +12,14 @@ import Data.Function (const)
 data OnResize = OnResize
 
 instance Deku.Attribute.Attr everything OnResize Data.Unit.Unit where
-  attr _ _ = Deku.Attribute.unsafeAttribute { key: "onresize", value: Deku.Attribute.unset' }
+  attr _ _ = Deku.Attribute.unsafeAttribute { key: "resize", value: Deku.Attribute.unset' }
 
 instance
   Deku.Attribute.Attr everything
     OnResize
     (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit) where
-  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "onresize", value: _ } <<< Deku.Attribute.cb'
-    <<< Deku.Attribute.cb
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "resize", value: _ } <<< Deku.Attribute.cb' <<<
+    Deku.Attribute.cb
 
 type OnResizeEffect =
   forall element
@@ -27,9 +27,9 @@ type OnResizeEffect =
   => FRP.Event.Event (Deku.Attribute.Attribute element)
 
 instance Deku.Attribute.Attr everything OnResize Deku.Attribute.Cb where
-  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "onresize", value: _ } <<< Deku.Attribute.cb'
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "resize", value: _ } <<< Deku.Attribute.cb'
 
 instance Deku.Attribute.Attr everything OnResize (Effect.Effect Data.Unit.Unit) where
-  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "onresize", value: _ } <<< Deku.Attribute.cb'
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "resize", value: _ } <<< Deku.Attribute.cb'
     <<< Deku.Attribute.cb
     <<< const

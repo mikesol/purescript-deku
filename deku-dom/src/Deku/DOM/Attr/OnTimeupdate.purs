@@ -12,14 +12,13 @@ import Data.Function (const)
 data OnTimeupdate = OnTimeupdate
 
 instance Deku.Attribute.Attr everything OnTimeupdate Data.Unit.Unit where
-  attr _ _ = Deku.Attribute.unsafeAttribute { key: "ontimeupdate", value: Deku.Attribute.unset' }
+  attr _ _ = Deku.Attribute.unsafeAttribute { key: "timeupdate", value: Deku.Attribute.unset' }
 
 instance
   Deku.Attribute.Attr everything
     OnTimeupdate
     (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit) where
-  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "ontimeupdate", value: _ }
-    <<< Deku.Attribute.cb'
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "timeupdate", value: _ } <<< Deku.Attribute.cb'
     <<< Deku.Attribute.cb
 
 type OnTimeupdateEffect =
@@ -28,11 +27,9 @@ type OnTimeupdateEffect =
   => FRP.Event.Event (Deku.Attribute.Attribute element)
 
 instance Deku.Attribute.Attr everything OnTimeupdate Deku.Attribute.Cb where
-  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "ontimeupdate", value: _ } <<<
-    Deku.Attribute.cb'
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "timeupdate", value: _ } <<< Deku.Attribute.cb'
 
 instance Deku.Attribute.Attr everything OnTimeupdate (Effect.Effect Data.Unit.Unit) where
-  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "ontimeupdate", value: _ }
-    <<< Deku.Attribute.cb'
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "timeupdate", value: _ } <<< Deku.Attribute.cb'
     <<< Deku.Attribute.cb
     <<< const

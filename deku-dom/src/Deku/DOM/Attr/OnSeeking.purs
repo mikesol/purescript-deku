@@ -12,13 +12,13 @@ import Data.Function (const)
 data OnSeeking = OnSeeking
 
 instance Deku.Attribute.Attr everything OnSeeking Data.Unit.Unit where
-  attr _ _ = Deku.Attribute.unsafeAttribute { key: "onseeking", value: Deku.Attribute.unset' }
+  attr _ _ = Deku.Attribute.unsafeAttribute { key: "seeking", value: Deku.Attribute.unset' }
 
 instance
   Deku.Attribute.Attr everything
     OnSeeking
     (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit) where
-  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "onseeking", value: _ } <<< Deku.Attribute.cb'
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "seeking", value: _ } <<< Deku.Attribute.cb'
     <<< Deku.Attribute.cb
 
 type OnSeekingEffect =
@@ -27,9 +27,9 @@ type OnSeekingEffect =
   => FRP.Event.Event (Deku.Attribute.Attribute element)
 
 instance Deku.Attribute.Attr everything OnSeeking Deku.Attribute.Cb where
-  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "onseeking", value: _ } <<< Deku.Attribute.cb'
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "seeking", value: _ } <<< Deku.Attribute.cb'
 
 instance Deku.Attribute.Attr everything OnSeeking (Effect.Effect Data.Unit.Unit) where
-  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "onseeking", value: _ } <<< Deku.Attribute.cb'
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "seeking", value: _ } <<< Deku.Attribute.cb'
     <<< Deku.Attribute.cb
     <<< const

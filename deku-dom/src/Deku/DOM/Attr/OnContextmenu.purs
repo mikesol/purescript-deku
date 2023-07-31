@@ -12,13 +12,13 @@ import Data.Function (const)
 data OnContextmenu = OnContextmenu
 
 instance Deku.Attribute.Attr everything OnContextmenu Data.Unit.Unit where
-  attr _ _ = Deku.Attribute.unsafeAttribute { key: "oncontextmenu", value: Deku.Attribute.unset' }
+  attr _ _ = Deku.Attribute.unsafeAttribute { key: "contextmenu", value: Deku.Attribute.unset' }
 
 instance
   Deku.Attribute.Attr everything
     OnContextmenu
     (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit) where
-  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "oncontextmenu", value: _ }
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "contextmenu", value: _ }
     <<< Deku.Attribute.cb'
     <<< Deku.Attribute.cb
 
@@ -28,11 +28,11 @@ type OnContextmenuEffect =
   => FRP.Event.Event (Deku.Attribute.Attribute element)
 
 instance Deku.Attribute.Attr everything OnContextmenu Deku.Attribute.Cb where
-  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "oncontextmenu", value: _ } <<<
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "contextmenu", value: _ } <<<
     Deku.Attribute.cb'
 
 instance Deku.Attribute.Attr everything OnContextmenu (Effect.Effect Data.Unit.Unit) where
-  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "oncontextmenu", value: _ }
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "contextmenu", value: _ }
     <<< Deku.Attribute.cb'
     <<< Deku.Attribute.cb
     <<< const

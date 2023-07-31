@@ -12,14 +12,13 @@ import Data.Function (const)
 data OnAnimationstart = OnAnimationstart
 
 instance Deku.Attribute.Attr everything OnAnimationstart Data.Unit.Unit where
-  attr _ _ = Deku.Attribute.unsafeAttribute
-    { key: "onanimationstart", value: Deku.Attribute.unset' }
+  attr _ _ = Deku.Attribute.unsafeAttribute { key: "animationstart", value: Deku.Attribute.unset' }
 
 instance
   Deku.Attribute.Attr everything
     OnAnimationstart
     (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit) where
-  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "onanimationstart", value: _ }
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "animationstart", value: _ }
     <<< Deku.Attribute.cb'
     <<< Deku.Attribute.cb
 
@@ -29,11 +28,11 @@ type OnAnimationstartEffect =
   => FRP.Event.Event (Deku.Attribute.Attribute element)
 
 instance Deku.Attribute.Attr everything OnAnimationstart Deku.Attribute.Cb where
-  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "onanimationstart", value: _ } <<<
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "animationstart", value: _ } <<<
     Deku.Attribute.cb'
 
 instance Deku.Attribute.Attr everything OnAnimationstart (Effect.Effect Data.Unit.Unit) where
-  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "onanimationstart", value: _ }
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "animationstart", value: _ }
     <<< Deku.Attribute.cb'
     <<< Deku.Attribute.cb
     <<< const

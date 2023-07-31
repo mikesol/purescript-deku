@@ -7190,7 +7190,7 @@ _onAnimationcancel
            )
        )
 _onAnimationcancel = Functor.map
-  ( Deku.Attribute.unsafeAttribute <<< { key: "onanimationcancel", value: _ } <<< Deku.Attribute.cb'
+  ( Deku.Attribute.unsafeAttribute <<< { key: "animationcancel", value: _ } <<< Deku.Attribute.cb'
       <<< Deku.Attribute.cb
   )
 
@@ -7215,8 +7215,8 @@ _onAnimationend
            )
        )
 _onAnimationend = Functor.map
-  ( Deku.Attribute.unsafeAttribute <<< { key: "onanimationend", value: _ } <<< Deku.Attribute.cb'
-      <<< Deku.Attribute.cb
+  ( Deku.Attribute.unsafeAttribute <<< { key: "animationend", value: _ } <<< Deku.Attribute.cb' <<<
+      Deku.Attribute.cb
   )
 
 _onAnimationend_
@@ -7242,7 +7242,7 @@ _onAnimationiteration
            )
        )
 _onAnimationiteration = Functor.map
-  ( Deku.Attribute.unsafeAttribute <<< { key: "onanimationiteration", value: _ }
+  ( Deku.Attribute.unsafeAttribute <<< { key: "animationiteration", value: _ }
       <<< Deku.Attribute.cb'
       <<< Deku.Attribute.cb
   )
@@ -7270,7 +7270,7 @@ _onAnimationstart
            )
        )
 _onAnimationstart = Functor.map
-  ( Deku.Attribute.unsafeAttribute <<< { key: "onanimationstart", value: _ } <<< Deku.Attribute.cb'
+  ( Deku.Attribute.unsafeAttribute <<< { key: "animationstart", value: _ } <<< Deku.Attribute.cb'
       <<< Deku.Attribute.cb
   )
 
@@ -7295,8 +7295,7 @@ _onTransitioncancel
            )
        )
 _onTransitioncancel = Functor.map
-  ( Deku.Attribute.unsafeAttribute <<< { key: "ontransitioncancel", value: _ }
-      <<< Deku.Attribute.cb'
+  ( Deku.Attribute.unsafeAttribute <<< { key: "transitioncancel", value: _ } <<< Deku.Attribute.cb'
       <<< Deku.Attribute.cb
   )
 
@@ -7321,8 +7320,8 @@ _onTransitionend
            )
        )
 _onTransitionend = Functor.map
-  ( Deku.Attribute.unsafeAttribute <<< { key: "ontransitionend", value: _ } <<< Deku.Attribute.cb'
-      <<< Deku.Attribute.cb
+  ( Deku.Attribute.unsafeAttribute <<< { key: "transitionend", value: _ } <<< Deku.Attribute.cb' <<<
+      Deku.Attribute.cb
   )
 
 _onTransitionend_
@@ -7346,7 +7345,7 @@ _onTransitionstart
            )
        )
 _onTransitionstart = Functor.map
-  ( Deku.Attribute.unsafeAttribute <<< { key: "ontransitionstart", value: _ } <<< Deku.Attribute.cb'
+  ( Deku.Attribute.unsafeAttribute <<< { key: "transitionstart", value: _ } <<< Deku.Attribute.cb'
       <<< Deku.Attribute.cb
   )
 
@@ -7371,8 +7370,8 @@ _onTransitionrun
            )
        )
 _onTransitionrun = Functor.map
-  ( Deku.Attribute.unsafeAttribute <<< { key: "ontransitionrun", value: _ } <<< Deku.Attribute.cb'
-      <<< Deku.Attribute.cb
+  ( Deku.Attribute.unsafeAttribute <<< { key: "transitionrun", value: _ } <<< Deku.Attribute.cb' <<<
+      Deku.Attribute.cb
   )
 
 _onTransitionrun_
@@ -7396,7 +7395,7 @@ _onSelectionchange
            )
        )
 _onSelectionchange = Functor.map
-  ( Deku.Attribute.unsafeAttribute <<< { key: "onselectionchange", value: _ } <<< Deku.Attribute.cb'
+  ( Deku.Attribute.unsafeAttribute <<< { key: "selectionchange", value: _ } <<< Deku.Attribute.cb'
       <<< Deku.Attribute.cb
   )
 
@@ -7421,7 +7420,7 @@ _onSelectstart
            )
        )
 _onSelectstart = Functor.map
-  ( Deku.Attribute.unsafeAttribute <<< { key: "onselectstart", value: _ } <<< Deku.Attribute.cb' <<<
+  ( Deku.Attribute.unsafeAttribute <<< { key: "selectstart", value: _ } <<< Deku.Attribute.cb' <<<
       Deku.Attribute.cb
   )
 
@@ -7446,7 +7445,7 @@ _onTouchcancel
            )
        )
 _onTouchcancel = Functor.map
-  ( Deku.Attribute.unsafeAttribute <<< { key: "ontouchcancel", value: _ } <<< Deku.Attribute.cb' <<<
+  ( Deku.Attribute.unsafeAttribute <<< { key: "touchcancel", value: _ } <<< Deku.Attribute.cb' <<<
       Deku.Attribute.cb
   )
 
@@ -7471,7 +7470,7 @@ _onTouchmove
            )
        )
 _onTouchmove = Functor.map
-  ( Deku.Attribute.unsafeAttribute <<< { key: "ontouchmove", value: _ } <<< Deku.Attribute.cb' <<<
+  ( Deku.Attribute.unsafeAttribute <<< { key: "touchmove", value: _ } <<< Deku.Attribute.cb' <<<
       Deku.Attribute.cb
   )
 
@@ -7496,7 +7495,7 @@ _onTouchend
            )
        )
 _onTouchend = Functor.map
-  ( Deku.Attribute.unsafeAttribute <<< { key: "ontouchend", value: _ } <<< Deku.Attribute.cb' <<<
+  ( Deku.Attribute.unsafeAttribute <<< { key: "touchend", value: _ } <<< Deku.Attribute.cb' <<<
       Deku.Attribute.cb
   )
 
@@ -7521,7 +7520,7 @@ _onTouchstart
            )
        )
 _onTouchstart = Functor.map
-  ( Deku.Attribute.unsafeAttribute <<< { key: "ontouchstart", value: _ } <<< Deku.Attribute.cb' <<<
+  ( Deku.Attribute.unsafeAttribute <<< { key: "touchstart", value: _ } <<< Deku.Attribute.cb' <<<
       Deku.Attribute.cb
   )
 
@@ -7548,7 +7547,7 @@ _onLostpointercapture
            )
        )
 _onLostpointercapture = Functor.map
-  ( Deku.Attribute.unsafeAttribute <<< { key: "onlostpointercapture", value: _ }
+  ( Deku.Attribute.unsafeAttribute <<< { key: "lostpointercapture", value: _ }
       <<< Deku.Attribute.cb'
       <<< Deku.Attribute.cb
   )
@@ -7578,8 +7577,7 @@ _onGotpointercapture
            )
        )
 _onGotpointercapture = Functor.map
-  ( Deku.Attribute.unsafeAttribute <<< { key: "ongotpointercapture", value: _ }
-      <<< Deku.Attribute.cb'
+  ( Deku.Attribute.unsafeAttribute <<< { key: "gotpointercapture", value: _ } <<< Deku.Attribute.cb'
       <<< Deku.Attribute.cb
   )
 
@@ -7606,8 +7604,8 @@ _onPointerleave
            )
        )
 _onPointerleave = Functor.map
-  ( Deku.Attribute.unsafeAttribute <<< { key: "onpointerleave", value: _ } <<< Deku.Attribute.cb'
-      <<< Deku.Attribute.cb
+  ( Deku.Attribute.unsafeAttribute <<< { key: "pointerleave", value: _ } <<< Deku.Attribute.cb' <<<
+      Deku.Attribute.cb
   )
 
 _onPointerleave_
@@ -7631,7 +7629,7 @@ _onPointerout
            )
        )
 _onPointerout = Functor.map
-  ( Deku.Attribute.unsafeAttribute <<< { key: "onpointerout", value: _ } <<< Deku.Attribute.cb' <<<
+  ( Deku.Attribute.unsafeAttribute <<< { key: "pointerout", value: _ } <<< Deku.Attribute.cb' <<<
       Deku.Attribute.cb
   )
 
@@ -7656,8 +7654,8 @@ _onPointercancel
            )
        )
 _onPointercancel = Functor.map
-  ( Deku.Attribute.unsafeAttribute <<< { key: "onpointercancel", value: _ } <<< Deku.Attribute.cb'
-      <<< Deku.Attribute.cb
+  ( Deku.Attribute.unsafeAttribute <<< { key: "pointercancel", value: _ } <<< Deku.Attribute.cb' <<<
+      Deku.Attribute.cb
   )
 
 _onPointercancel_
@@ -7681,7 +7679,7 @@ _onPointerup
            )
        )
 _onPointerup = Functor.map
-  ( Deku.Attribute.unsafeAttribute <<< { key: "onpointerup", value: _ } <<< Deku.Attribute.cb' <<<
+  ( Deku.Attribute.unsafeAttribute <<< { key: "pointerup", value: _ } <<< Deku.Attribute.cb' <<<
       Deku.Attribute.cb
   )
 
@@ -7706,8 +7704,7 @@ _onPointerrawupdate
            )
        )
 _onPointerrawupdate = Functor.map
-  ( Deku.Attribute.unsafeAttribute <<< { key: "onpointerrawupdate", value: _ }
-      <<< Deku.Attribute.cb'
+  ( Deku.Attribute.unsafeAttribute <<< { key: "pointerrawupdate", value: _ } <<< Deku.Attribute.cb'
       <<< Deku.Attribute.cb
   )
 
@@ -7732,7 +7729,7 @@ _onPointermove
            )
        )
 _onPointermove = Functor.map
-  ( Deku.Attribute.unsafeAttribute <<< { key: "onpointermove", value: _ } <<< Deku.Attribute.cb' <<<
+  ( Deku.Attribute.unsafeAttribute <<< { key: "pointermove", value: _ } <<< Deku.Attribute.cb' <<<
       Deku.Attribute.cb
   )
 
@@ -7757,7 +7754,7 @@ _onPointerdown
            )
        )
 _onPointerdown = Functor.map
-  ( Deku.Attribute.unsafeAttribute <<< { key: "onpointerdown", value: _ } <<< Deku.Attribute.cb' <<<
+  ( Deku.Attribute.unsafeAttribute <<< { key: "pointerdown", value: _ } <<< Deku.Attribute.cb' <<<
       Deku.Attribute.cb
   )
 
@@ -7782,8 +7779,8 @@ _onPointerenter
            )
        )
 _onPointerenter = Functor.map
-  ( Deku.Attribute.unsafeAttribute <<< { key: "onpointerenter", value: _ } <<< Deku.Attribute.cb'
-      <<< Deku.Attribute.cb
+  ( Deku.Attribute.unsafeAttribute <<< { key: "pointerenter", value: _ } <<< Deku.Attribute.cb' <<<
+      Deku.Attribute.cb
   )
 
 _onPointerenter_
@@ -7807,7 +7804,7 @@ _onPointerover
            )
        )
 _onPointerover = Functor.map
-  ( Deku.Attribute.unsafeAttribute <<< { key: "onpointerover", value: _ } <<< Deku.Attribute.cb' <<<
+  ( Deku.Attribute.unsafeAttribute <<< { key: "pointerover", value: _ } <<< Deku.Attribute.cb' <<<
       Deku.Attribute.cb
   )
 
@@ -7832,7 +7829,7 @@ _onScrollend
            )
        )
 _onScrollend = Functor.map
-  ( Deku.Attribute.unsafeAttribute <<< { key: "onscrollend", value: _ } <<< Deku.Attribute.cb' <<<
+  ( Deku.Attribute.unsafeAttribute <<< { key: "scrollend", value: _ } <<< Deku.Attribute.cb' <<<
       Deku.Attribute.cb
   )
 
@@ -7857,7 +7854,7 @@ _onScroll
            )
        )
 _onScroll = Functor.map
-  ( Deku.Attribute.unsafeAttribute <<< { key: "onscroll", value: _ } <<< Deku.Attribute.cb' <<<
+  ( Deku.Attribute.unsafeAttribute <<< { key: "scroll", value: _ } <<< Deku.Attribute.cb' <<<
       Deku.Attribute.cb
   )
 
@@ -7882,7 +7879,7 @@ _onResize
            )
        )
 _onResize = Functor.map
-  ( Deku.Attribute.unsafeAttribute <<< { key: "onresize", value: _ } <<< Deku.Attribute.cb' <<<
+  ( Deku.Attribute.unsafeAttribute <<< { key: "resize", value: _ } <<< Deku.Attribute.cb' <<<
       Deku.Attribute.cb
   )
 
@@ -7907,7 +7904,7 @@ _onLoad
            )
        )
 _onLoad = Functor.map
-  ( Deku.Attribute.unsafeAttribute <<< { key: "onload", value: _ } <<< Deku.Attribute.cb' <<<
+  ( Deku.Attribute.unsafeAttribute <<< { key: "load", value: _ } <<< Deku.Attribute.cb' <<<
       Deku.Attribute.cb
   )
 
@@ -7932,7 +7929,7 @@ _onFocus
            )
        )
 _onFocus = Functor.map
-  ( Deku.Attribute.unsafeAttribute <<< { key: "onfocus", value: _ } <<< Deku.Attribute.cb' <<<
+  ( Deku.Attribute.unsafeAttribute <<< { key: "focus", value: _ } <<< Deku.Attribute.cb' <<<
       Deku.Attribute.cb
   )
 
@@ -7957,7 +7954,7 @@ _onError
            )
        )
 _onError = Functor.map
-  ( Deku.Attribute.unsafeAttribute <<< { key: "onerror", value: _ } <<< Deku.Attribute.cb' <<<
+  ( Deku.Attribute.unsafeAttribute <<< { key: "error", value: _ } <<< Deku.Attribute.cb' <<<
       Deku.Attribute.cb
   )
 
@@ -7982,7 +7979,7 @@ _onBlur
            )
        )
 _onBlur = Functor.map
-  ( Deku.Attribute.unsafeAttribute <<< { key: "onblur", value: _ } <<< Deku.Attribute.cb' <<<
+  ( Deku.Attribute.unsafeAttribute <<< { key: "blur", value: _ } <<< Deku.Attribute.cb' <<<
       Deku.Attribute.cb
   )
 
@@ -8007,7 +8004,7 @@ _onWheel
            )
        )
 _onWheel = Functor.map
-  ( Deku.Attribute.unsafeAttribute <<< { key: "onwheel", value: _ } <<< Deku.Attribute.cb' <<<
+  ( Deku.Attribute.unsafeAttribute <<< { key: "wheel", value: _ } <<< Deku.Attribute.cb' <<<
       Deku.Attribute.cb
   )
 
@@ -8034,7 +8031,7 @@ _onWebkittransitionend
            )
        )
 _onWebkittransitionend = Functor.map
-  ( Deku.Attribute.unsafeAttribute <<< { key: "onwebkittransitionend", value: _ }
+  ( Deku.Attribute.unsafeAttribute <<< { key: "webkittransitionend", value: _ }
       <<< Deku.Attribute.cb'
       <<< Deku.Attribute.cb
   )
@@ -8064,7 +8061,7 @@ _onWebkitanimationstart
            )
        )
 _onWebkitanimationstart = Functor.map
-  ( Deku.Attribute.unsafeAttribute <<< { key: "onwebkitanimationstart", value: _ }
+  ( Deku.Attribute.unsafeAttribute <<< { key: "webkitanimationstart", value: _ }
       <<< Deku.Attribute.cb'
       <<< Deku.Attribute.cb
   )
@@ -8095,7 +8092,7 @@ _onWebkitanimationiteration
            )
        )
 _onWebkitanimationiteration = Functor.map
-  ( Deku.Attribute.unsafeAttribute <<< { key: "onwebkitanimationiteration", value: _ }
+  ( Deku.Attribute.unsafeAttribute <<< { key: "webkitanimationiteration", value: _ }
       <<< Deku.Attribute.cb'
       <<< Deku.Attribute.cb
   )
@@ -8126,7 +8123,7 @@ _onWebkitanimationend
            )
        )
 _onWebkitanimationend = Functor.map
-  ( Deku.Attribute.unsafeAttribute <<< { key: "onwebkitanimationend", value: _ }
+  ( Deku.Attribute.unsafeAttribute <<< { key: "webkitanimationend", value: _ }
       <<< Deku.Attribute.cb'
       <<< Deku.Attribute.cb
   )
@@ -8154,7 +8151,7 @@ _onWaiting
            )
        )
 _onWaiting = Functor.map
-  ( Deku.Attribute.unsafeAttribute <<< { key: "onwaiting", value: _ } <<< Deku.Attribute.cb' <<<
+  ( Deku.Attribute.unsafeAttribute <<< { key: "waiting", value: _ } <<< Deku.Attribute.cb' <<<
       Deku.Attribute.cb
   )
 
@@ -8179,8 +8176,8 @@ _onVolumechange
            )
        )
 _onVolumechange = Functor.map
-  ( Deku.Attribute.unsafeAttribute <<< { key: "onvolumechange", value: _ } <<< Deku.Attribute.cb'
-      <<< Deku.Attribute.cb
+  ( Deku.Attribute.unsafeAttribute <<< { key: "volumechange", value: _ } <<< Deku.Attribute.cb' <<<
+      Deku.Attribute.cb
   )
 
 _onVolumechange_
@@ -8204,7 +8201,7 @@ _onToggle
            )
        )
 _onToggle = Functor.map
-  ( Deku.Attribute.unsafeAttribute <<< { key: "ontoggle", value: _ } <<< Deku.Attribute.cb' <<<
+  ( Deku.Attribute.unsafeAttribute <<< { key: "toggle", value: _ } <<< Deku.Attribute.cb' <<<
       Deku.Attribute.cb
   )
 
@@ -8229,7 +8226,7 @@ _onTimeupdate
            )
        )
 _onTimeupdate = Functor.map
-  ( Deku.Attribute.unsafeAttribute <<< { key: "ontimeupdate", value: _ } <<< Deku.Attribute.cb' <<<
+  ( Deku.Attribute.unsafeAttribute <<< { key: "timeupdate", value: _ } <<< Deku.Attribute.cb' <<<
       Deku.Attribute.cb
   )
 
@@ -8254,7 +8251,7 @@ _onSuspend
            )
        )
 _onSuspend = Functor.map
-  ( Deku.Attribute.unsafeAttribute <<< { key: "onsuspend", value: _ } <<< Deku.Attribute.cb' <<<
+  ( Deku.Attribute.unsafeAttribute <<< { key: "suspend", value: _ } <<< Deku.Attribute.cb' <<<
       Deku.Attribute.cb
   )
 
@@ -8279,7 +8276,7 @@ _onSubmit
            )
        )
 _onSubmit = Functor.map
-  ( Deku.Attribute.unsafeAttribute <<< { key: "onsubmit", value: _ } <<< Deku.Attribute.cb' <<<
+  ( Deku.Attribute.unsafeAttribute <<< { key: "submit", value: _ } <<< Deku.Attribute.cb' <<<
       Deku.Attribute.cb
   )
 
@@ -8304,7 +8301,7 @@ _onStalled
            )
        )
 _onStalled = Functor.map
-  ( Deku.Attribute.unsafeAttribute <<< { key: "onstalled", value: _ } <<< Deku.Attribute.cb' <<<
+  ( Deku.Attribute.unsafeAttribute <<< { key: "stalled", value: _ } <<< Deku.Attribute.cb' <<<
       Deku.Attribute.cb
   )
 
@@ -8329,7 +8326,7 @@ _onSlotchange
            )
        )
 _onSlotchange = Functor.map
-  ( Deku.Attribute.unsafeAttribute <<< { key: "onslotchange", value: _ } <<< Deku.Attribute.cb' <<<
+  ( Deku.Attribute.unsafeAttribute <<< { key: "slotchange", value: _ } <<< Deku.Attribute.cb' <<<
       Deku.Attribute.cb
   )
 
@@ -8354,7 +8351,7 @@ _onSelect
            )
        )
 _onSelect = Functor.map
-  ( Deku.Attribute.unsafeAttribute <<< { key: "onselect", value: _ } <<< Deku.Attribute.cb' <<<
+  ( Deku.Attribute.unsafeAttribute <<< { key: "select", value: _ } <<< Deku.Attribute.cb' <<<
       Deku.Attribute.cb
   )
 
@@ -8379,7 +8376,7 @@ _onSeeking
            )
        )
 _onSeeking = Functor.map
-  ( Deku.Attribute.unsafeAttribute <<< { key: "onseeking", value: _ } <<< Deku.Attribute.cb' <<<
+  ( Deku.Attribute.unsafeAttribute <<< { key: "seeking", value: _ } <<< Deku.Attribute.cb' <<<
       Deku.Attribute.cb
   )
 
@@ -8404,7 +8401,7 @@ _onSeeked
            )
        )
 _onSeeked = Functor.map
-  ( Deku.Attribute.unsafeAttribute <<< { key: "onseeked", value: _ } <<< Deku.Attribute.cb' <<<
+  ( Deku.Attribute.unsafeAttribute <<< { key: "seeked", value: _ } <<< Deku.Attribute.cb' <<<
       Deku.Attribute.cb
   )
 
@@ -8432,7 +8429,7 @@ _onSecuritypolicyviolation
            )
        )
 _onSecuritypolicyviolation = Functor.map
-  ( Deku.Attribute.unsafeAttribute <<< { key: "onsecuritypolicyviolation", value: _ }
+  ( Deku.Attribute.unsafeAttribute <<< { key: "securitypolicyviolation", value: _ }
       <<< Deku.Attribute.cb'
       <<< Deku.Attribute.cb
   )
@@ -8461,7 +8458,7 @@ _onReset
            )
        )
 _onReset = Functor.map
-  ( Deku.Attribute.unsafeAttribute <<< { key: "onreset", value: _ } <<< Deku.Attribute.cb' <<<
+  ( Deku.Attribute.unsafeAttribute <<< { key: "reset", value: _ } <<< Deku.Attribute.cb' <<<
       Deku.Attribute.cb
   )
 
@@ -8486,7 +8483,7 @@ _onRatechange
            )
        )
 _onRatechange = Functor.map
-  ( Deku.Attribute.unsafeAttribute <<< { key: "onratechange", value: _ } <<< Deku.Attribute.cb' <<<
+  ( Deku.Attribute.unsafeAttribute <<< { key: "ratechange", value: _ } <<< Deku.Attribute.cb' <<<
       Deku.Attribute.cb
   )
 
@@ -8511,7 +8508,7 @@ _onProgress
            )
        )
 _onProgress = Functor.map
-  ( Deku.Attribute.unsafeAttribute <<< { key: "onprogress", value: _ } <<< Deku.Attribute.cb' <<<
+  ( Deku.Attribute.unsafeAttribute <<< { key: "progress", value: _ } <<< Deku.Attribute.cb' <<<
       Deku.Attribute.cb
   )
 
@@ -8536,7 +8533,7 @@ _onPlaying
            )
        )
 _onPlaying = Functor.map
-  ( Deku.Attribute.unsafeAttribute <<< { key: "onplaying", value: _ } <<< Deku.Attribute.cb' <<<
+  ( Deku.Attribute.unsafeAttribute <<< { key: "playing", value: _ } <<< Deku.Attribute.cb' <<<
       Deku.Attribute.cb
   )
 
@@ -8561,7 +8558,7 @@ _onPlay
            )
        )
 _onPlay = Functor.map
-  ( Deku.Attribute.unsafeAttribute <<< { key: "onplay", value: _ } <<< Deku.Attribute.cb' <<<
+  ( Deku.Attribute.unsafeAttribute <<< { key: "play", value: _ } <<< Deku.Attribute.cb' <<<
       Deku.Attribute.cb
   )
 
@@ -8586,7 +8583,7 @@ _onPause
            )
        )
 _onPause = Functor.map
-  ( Deku.Attribute.unsafeAttribute <<< { key: "onpause", value: _ } <<< Deku.Attribute.cb' <<<
+  ( Deku.Attribute.unsafeAttribute <<< { key: "pause", value: _ } <<< Deku.Attribute.cb' <<<
       Deku.Attribute.cb
   )
 
@@ -8611,7 +8608,7 @@ _onPaste
            )
        )
 _onPaste = Functor.map
-  ( Deku.Attribute.unsafeAttribute <<< { key: "onpaste", value: _ } <<< Deku.Attribute.cb' <<<
+  ( Deku.Attribute.unsafeAttribute <<< { key: "paste", value: _ } <<< Deku.Attribute.cb' <<<
       Deku.Attribute.cb
   )
 
@@ -8636,7 +8633,7 @@ _onMouseup
            )
        )
 _onMouseup = Functor.map
-  ( Deku.Attribute.unsafeAttribute <<< { key: "onmouseup", value: _ } <<< Deku.Attribute.cb' <<<
+  ( Deku.Attribute.unsafeAttribute <<< { key: "mouseup", value: _ } <<< Deku.Attribute.cb' <<<
       Deku.Attribute.cb
   )
 
@@ -8661,7 +8658,7 @@ _onMouseover
            )
        )
 _onMouseover = Functor.map
-  ( Deku.Attribute.unsafeAttribute <<< { key: "onmouseover", value: _ } <<< Deku.Attribute.cb' <<<
+  ( Deku.Attribute.unsafeAttribute <<< { key: "mouseover", value: _ } <<< Deku.Attribute.cb' <<<
       Deku.Attribute.cb
   )
 
@@ -8686,7 +8683,7 @@ _onMouseout
            )
        )
 _onMouseout = Functor.map
-  ( Deku.Attribute.unsafeAttribute <<< { key: "onmouseout", value: _ } <<< Deku.Attribute.cb' <<<
+  ( Deku.Attribute.unsafeAttribute <<< { key: "mouseout", value: _ } <<< Deku.Attribute.cb' <<<
       Deku.Attribute.cb
   )
 
@@ -8711,7 +8708,7 @@ _onMousemove
            )
        )
 _onMousemove = Functor.map
-  ( Deku.Attribute.unsafeAttribute <<< { key: "onmousemove", value: _ } <<< Deku.Attribute.cb' <<<
+  ( Deku.Attribute.unsafeAttribute <<< { key: "mousemove", value: _ } <<< Deku.Attribute.cb' <<<
       Deku.Attribute.cb
   )
 
@@ -8736,7 +8733,7 @@ _onMouseleave
            )
        )
 _onMouseleave = Functor.map
-  ( Deku.Attribute.unsafeAttribute <<< { key: "onmouseleave", value: _ } <<< Deku.Attribute.cb' <<<
+  ( Deku.Attribute.unsafeAttribute <<< { key: "mouseleave", value: _ } <<< Deku.Attribute.cb' <<<
       Deku.Attribute.cb
   )
 
@@ -8761,7 +8758,7 @@ _onMouseenter
            )
        )
 _onMouseenter = Functor.map
-  ( Deku.Attribute.unsafeAttribute <<< { key: "onmouseenter", value: _ } <<< Deku.Attribute.cb' <<<
+  ( Deku.Attribute.unsafeAttribute <<< { key: "mouseenter", value: _ } <<< Deku.Attribute.cb' <<<
       Deku.Attribute.cb
   )
 
@@ -8786,7 +8783,7 @@ _onMousedown
            )
        )
 _onMousedown = Functor.map
-  ( Deku.Attribute.unsafeAttribute <<< { key: "onmousedown", value: _ } <<< Deku.Attribute.cb' <<<
+  ( Deku.Attribute.unsafeAttribute <<< { key: "mousedown", value: _ } <<< Deku.Attribute.cb' <<<
       Deku.Attribute.cb
   )
 
@@ -8811,7 +8808,7 @@ _onLoadstart
            )
        )
 _onLoadstart = Functor.map
-  ( Deku.Attribute.unsafeAttribute <<< { key: "onloadstart", value: _ } <<< Deku.Attribute.cb' <<<
+  ( Deku.Attribute.unsafeAttribute <<< { key: "loadstart", value: _ } <<< Deku.Attribute.cb' <<<
       Deku.Attribute.cb
   )
 
@@ -8836,7 +8833,7 @@ _onLoadedmetadata
            )
        )
 _onLoadedmetadata = Functor.map
-  ( Deku.Attribute.unsafeAttribute <<< { key: "onloadedmetadata", value: _ } <<< Deku.Attribute.cb'
+  ( Deku.Attribute.unsafeAttribute <<< { key: "loadedmetadata", value: _ } <<< Deku.Attribute.cb'
       <<< Deku.Attribute.cb
   )
 
@@ -8861,7 +8858,7 @@ _onLoadeddata
            )
        )
 _onLoadeddata = Functor.map
-  ( Deku.Attribute.unsafeAttribute <<< { key: "onloadeddata", value: _ } <<< Deku.Attribute.cb' <<<
+  ( Deku.Attribute.unsafeAttribute <<< { key: "loadeddata", value: _ } <<< Deku.Attribute.cb' <<<
       Deku.Attribute.cb
   )
 
@@ -8886,7 +8883,7 @@ _onKeyup
            )
        )
 _onKeyup = Functor.map
-  ( Deku.Attribute.unsafeAttribute <<< { key: "onkeyup", value: _ } <<< Deku.Attribute.cb' <<<
+  ( Deku.Attribute.unsafeAttribute <<< { key: "keyup", value: _ } <<< Deku.Attribute.cb' <<<
       Deku.Attribute.cb
   )
 
@@ -8911,7 +8908,7 @@ _onKeypress
            )
        )
 _onKeypress = Functor.map
-  ( Deku.Attribute.unsafeAttribute <<< { key: "onkeypress", value: _ } <<< Deku.Attribute.cb' <<<
+  ( Deku.Attribute.unsafeAttribute <<< { key: "keypress", value: _ } <<< Deku.Attribute.cb' <<<
       Deku.Attribute.cb
   )
 
@@ -8936,7 +8933,7 @@ _onKeydown
            )
        )
 _onKeydown = Functor.map
-  ( Deku.Attribute.unsafeAttribute <<< { key: "onkeydown", value: _ } <<< Deku.Attribute.cb' <<<
+  ( Deku.Attribute.unsafeAttribute <<< { key: "keydown", value: _ } <<< Deku.Attribute.cb' <<<
       Deku.Attribute.cb
   )
 
@@ -8961,7 +8958,7 @@ _onInvalid
            )
        )
 _onInvalid = Functor.map
-  ( Deku.Attribute.unsafeAttribute <<< { key: "oninvalid", value: _ } <<< Deku.Attribute.cb' <<<
+  ( Deku.Attribute.unsafeAttribute <<< { key: "invalid", value: _ } <<< Deku.Attribute.cb' <<<
       Deku.Attribute.cb
   )
 
@@ -8986,7 +8983,7 @@ _onInput
            )
        )
 _onInput = Functor.map
-  ( Deku.Attribute.unsafeAttribute <<< { key: "oninput", value: _ } <<< Deku.Attribute.cb' <<<
+  ( Deku.Attribute.unsafeAttribute <<< { key: "input", value: _ } <<< Deku.Attribute.cb' <<<
       Deku.Attribute.cb
   )
 
@@ -9011,7 +9008,7 @@ _onFormdata
            )
        )
 _onFormdata = Functor.map
-  ( Deku.Attribute.unsafeAttribute <<< { key: "onformdata", value: _ } <<< Deku.Attribute.cb' <<<
+  ( Deku.Attribute.unsafeAttribute <<< { key: "formdata", value: _ } <<< Deku.Attribute.cb' <<<
       Deku.Attribute.cb
   )
 
@@ -9036,7 +9033,7 @@ _onEnded
            )
        )
 _onEnded = Functor.map
-  ( Deku.Attribute.unsafeAttribute <<< { key: "onended", value: _ } <<< Deku.Attribute.cb' <<<
+  ( Deku.Attribute.unsafeAttribute <<< { key: "ended", value: _ } <<< Deku.Attribute.cb' <<<
       Deku.Attribute.cb
   )
 
@@ -9061,7 +9058,7 @@ _onEmptied
            )
        )
 _onEmptied = Functor.map
-  ( Deku.Attribute.unsafeAttribute <<< { key: "onemptied", value: _ } <<< Deku.Attribute.cb' <<<
+  ( Deku.Attribute.unsafeAttribute <<< { key: "emptied", value: _ } <<< Deku.Attribute.cb' <<<
       Deku.Attribute.cb
   )
 
@@ -9086,7 +9083,7 @@ _onDurationchange
            )
        )
 _onDurationchange = Functor.map
-  ( Deku.Attribute.unsafeAttribute <<< { key: "ondurationchange", value: _ } <<< Deku.Attribute.cb'
+  ( Deku.Attribute.unsafeAttribute <<< { key: "durationchange", value: _ } <<< Deku.Attribute.cb'
       <<< Deku.Attribute.cb
   )
 
@@ -9111,7 +9108,7 @@ _onDrop
            )
        )
 _onDrop = Functor.map
-  ( Deku.Attribute.unsafeAttribute <<< { key: "ondrop", value: _ } <<< Deku.Attribute.cb' <<<
+  ( Deku.Attribute.unsafeAttribute <<< { key: "drop", value: _ } <<< Deku.Attribute.cb' <<<
       Deku.Attribute.cb
   )
 
@@ -9136,7 +9133,7 @@ _onDragstart
            )
        )
 _onDragstart = Functor.map
-  ( Deku.Attribute.unsafeAttribute <<< { key: "ondragstart", value: _ } <<< Deku.Attribute.cb' <<<
+  ( Deku.Attribute.unsafeAttribute <<< { key: "dragstart", value: _ } <<< Deku.Attribute.cb' <<<
       Deku.Attribute.cb
   )
 
@@ -9161,7 +9158,7 @@ _onDragover
            )
        )
 _onDragover = Functor.map
-  ( Deku.Attribute.unsafeAttribute <<< { key: "ondragover", value: _ } <<< Deku.Attribute.cb' <<<
+  ( Deku.Attribute.unsafeAttribute <<< { key: "dragover", value: _ } <<< Deku.Attribute.cb' <<<
       Deku.Attribute.cb
   )
 
@@ -9186,7 +9183,7 @@ _onDragleave
            )
        )
 _onDragleave = Functor.map
-  ( Deku.Attribute.unsafeAttribute <<< { key: "ondragleave", value: _ } <<< Deku.Attribute.cb' <<<
+  ( Deku.Attribute.unsafeAttribute <<< { key: "dragleave", value: _ } <<< Deku.Attribute.cb' <<<
       Deku.Attribute.cb
   )
 
@@ -9211,7 +9208,7 @@ _onDragenter
            )
        )
 _onDragenter = Functor.map
-  ( Deku.Attribute.unsafeAttribute <<< { key: "ondragenter", value: _ } <<< Deku.Attribute.cb' <<<
+  ( Deku.Attribute.unsafeAttribute <<< { key: "dragenter", value: _ } <<< Deku.Attribute.cb' <<<
       Deku.Attribute.cb
   )
 
@@ -9236,7 +9233,7 @@ _onDragend
            )
        )
 _onDragend = Functor.map
-  ( Deku.Attribute.unsafeAttribute <<< { key: "ondragend", value: _ } <<< Deku.Attribute.cb' <<<
+  ( Deku.Attribute.unsafeAttribute <<< { key: "dragend", value: _ } <<< Deku.Attribute.cb' <<<
       Deku.Attribute.cb
   )
 
@@ -9261,7 +9258,7 @@ _onDrag
            )
        )
 _onDrag = Functor.map
-  ( Deku.Attribute.unsafeAttribute <<< { key: "ondrag", value: _ } <<< Deku.Attribute.cb' <<<
+  ( Deku.Attribute.unsafeAttribute <<< { key: "drag", value: _ } <<< Deku.Attribute.cb' <<<
       Deku.Attribute.cb
   )
 
@@ -9286,7 +9283,7 @@ _onDblclick
            )
        )
 _onDblclick = Functor.map
-  ( Deku.Attribute.unsafeAttribute <<< { key: "ondblclick", value: _ } <<< Deku.Attribute.cb' <<<
+  ( Deku.Attribute.unsafeAttribute <<< { key: "dblclick", value: _ } <<< Deku.Attribute.cb' <<<
       Deku.Attribute.cb
   )
 
@@ -9309,7 +9306,7 @@ _onCut
            (Index.Indexed (onCut :: Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit | r))
        )
 _onCut = Functor.map
-  ( Deku.Attribute.unsafeAttribute <<< { key: "oncut", value: _ } <<< Deku.Attribute.cb' <<<
+  ( Deku.Attribute.unsafeAttribute <<< { key: "cut", value: _ } <<< Deku.Attribute.cb' <<<
       Deku.Attribute.cb
   )
 
@@ -9332,7 +9329,7 @@ _onCuechange
            )
        )
 _onCuechange = Functor.map
-  ( Deku.Attribute.unsafeAttribute <<< { key: "oncuechange", value: _ } <<< Deku.Attribute.cb' <<<
+  ( Deku.Attribute.unsafeAttribute <<< { key: "cuechange", value: _ } <<< Deku.Attribute.cb' <<<
       Deku.Attribute.cb
   )
 
@@ -9357,7 +9354,7 @@ _onCopy
            )
        )
 _onCopy = Functor.map
-  ( Deku.Attribute.unsafeAttribute <<< { key: "oncopy", value: _ } <<< Deku.Attribute.cb' <<<
+  ( Deku.Attribute.unsafeAttribute <<< { key: "copy", value: _ } <<< Deku.Attribute.cb' <<<
       Deku.Attribute.cb
   )
 
@@ -9382,7 +9379,7 @@ _onContextrestored
            )
        )
 _onContextrestored = Functor.map
-  ( Deku.Attribute.unsafeAttribute <<< { key: "oncontextrestored", value: _ } <<< Deku.Attribute.cb'
+  ( Deku.Attribute.unsafeAttribute <<< { key: "contextrestored", value: _ } <<< Deku.Attribute.cb'
       <<< Deku.Attribute.cb
   )
 
@@ -9407,7 +9404,7 @@ _onContextmenu
            )
        )
 _onContextmenu = Functor.map
-  ( Deku.Attribute.unsafeAttribute <<< { key: "oncontextmenu", value: _ } <<< Deku.Attribute.cb' <<<
+  ( Deku.Attribute.unsafeAttribute <<< { key: "contextmenu", value: _ } <<< Deku.Attribute.cb' <<<
       Deku.Attribute.cb
   )
 
@@ -9432,7 +9429,7 @@ _onContextlost
            )
        )
 _onContextlost = Functor.map
-  ( Deku.Attribute.unsafeAttribute <<< { key: "oncontextlost", value: _ } <<< Deku.Attribute.cb' <<<
+  ( Deku.Attribute.unsafeAttribute <<< { key: "contextlost", value: _ } <<< Deku.Attribute.cb' <<<
       Deku.Attribute.cb
   )
 
@@ -9457,7 +9454,7 @@ _onClose
            )
        )
 _onClose = Functor.map
-  ( Deku.Attribute.unsafeAttribute <<< { key: "onclose", value: _ } <<< Deku.Attribute.cb' <<<
+  ( Deku.Attribute.unsafeAttribute <<< { key: "close", value: _ } <<< Deku.Attribute.cb' <<<
       Deku.Attribute.cb
   )
 
@@ -9482,7 +9479,7 @@ _onClick
            )
        )
 _onClick = Functor.map
-  ( Deku.Attribute.unsafeAttribute <<< { key: "onclick", value: _ } <<< Deku.Attribute.cb' <<<
+  ( Deku.Attribute.unsafeAttribute <<< { key: "click", value: _ } <<< Deku.Attribute.cb' <<<
       Deku.Attribute.cb
   )
 
@@ -9507,7 +9504,7 @@ _onChange
            )
        )
 _onChange = Functor.map
-  ( Deku.Attribute.unsafeAttribute <<< { key: "onchange", value: _ } <<< Deku.Attribute.cb' <<<
+  ( Deku.Attribute.unsafeAttribute <<< { key: "change", value: _ } <<< Deku.Attribute.cb' <<<
       Deku.Attribute.cb
   )
 
@@ -9532,7 +9529,7 @@ _onCanplaythrough
            )
        )
 _onCanplaythrough = Functor.map
-  ( Deku.Attribute.unsafeAttribute <<< { key: "oncanplaythrough", value: _ } <<< Deku.Attribute.cb'
+  ( Deku.Attribute.unsafeAttribute <<< { key: "canplaythrough", value: _ } <<< Deku.Attribute.cb'
       <<< Deku.Attribute.cb
   )
 
@@ -9557,7 +9554,7 @@ _onCanplay
            )
        )
 _onCanplay = Functor.map
-  ( Deku.Attribute.unsafeAttribute <<< { key: "oncanplay", value: _ } <<< Deku.Attribute.cb' <<<
+  ( Deku.Attribute.unsafeAttribute <<< { key: "canplay", value: _ } <<< Deku.Attribute.cb' <<<
       Deku.Attribute.cb
   )
 
@@ -9582,7 +9579,7 @@ _onCancel
            )
        )
 _onCancel = Functor.map
-  ( Deku.Attribute.unsafeAttribute <<< { key: "oncancel", value: _ } <<< Deku.Attribute.cb' <<<
+  ( Deku.Attribute.unsafeAttribute <<< { key: "cancel", value: _ } <<< Deku.Attribute.cb' <<<
       Deku.Attribute.cb
   )
 
@@ -9607,8 +9604,8 @@ _onBeforetoggle
            )
        )
 _onBeforetoggle = Functor.map
-  ( Deku.Attribute.unsafeAttribute <<< { key: "onbeforetoggle", value: _ } <<< Deku.Attribute.cb'
-      <<< Deku.Attribute.cb
+  ( Deku.Attribute.unsafeAttribute <<< { key: "beforetoggle", value: _ } <<< Deku.Attribute.cb' <<<
+      Deku.Attribute.cb
   )
 
 _onBeforetoggle_
@@ -9632,7 +9629,7 @@ _onBeforematch
            )
        )
 _onBeforematch = Functor.map
-  ( Deku.Attribute.unsafeAttribute <<< { key: "onbeforematch", value: _ } <<< Deku.Attribute.cb' <<<
+  ( Deku.Attribute.unsafeAttribute <<< { key: "beforematch", value: _ } <<< Deku.Attribute.cb' <<<
       Deku.Attribute.cb
   )
 
@@ -9657,7 +9654,7 @@ _onBeforeinput
            )
        )
 _onBeforeinput = Functor.map
-  ( Deku.Attribute.unsafeAttribute <<< { key: "onbeforeinput", value: _ } <<< Deku.Attribute.cb' <<<
+  ( Deku.Attribute.unsafeAttribute <<< { key: "beforeinput", value: _ } <<< Deku.Attribute.cb' <<<
       Deku.Attribute.cb
   )
 
@@ -9682,7 +9679,7 @@ _onAuxclick
            )
        )
 _onAuxclick = Functor.map
-  ( Deku.Attribute.unsafeAttribute <<< { key: "onauxclick", value: _ } <<< Deku.Attribute.cb' <<<
+  ( Deku.Attribute.unsafeAttribute <<< { key: "auxclick", value: _ } <<< Deku.Attribute.cb' <<<
       Deku.Attribute.cb
   )
 
@@ -9707,7 +9704,7 @@ _onAbort
            )
        )
 _onAbort = Functor.map
-  ( Deku.Attribute.unsafeAttribute <<< { key: "onabort", value: _ } <<< Deku.Attribute.cb' <<<
+  ( Deku.Attribute.unsafeAttribute <<< { key: "abort", value: _ } <<< Deku.Attribute.cb' <<<
       Deku.Attribute.cb
   )
 

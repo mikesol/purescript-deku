@@ -12,13 +12,13 @@ import Data.Function (const)
 data OnCopy = OnCopy
 
 instance Deku.Attribute.Attr everything OnCopy Data.Unit.Unit where
-  attr _ _ = Deku.Attribute.unsafeAttribute { key: "oncopy", value: Deku.Attribute.unset' }
+  attr _ _ = Deku.Attribute.unsafeAttribute { key: "copy", value: Deku.Attribute.unset' }
 
 instance
   Deku.Attribute.Attr everything
     OnCopy
     (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit) where
-  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "oncopy", value: _ } <<< Deku.Attribute.cb' <<<
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "copy", value: _ } <<< Deku.Attribute.cb' <<<
     Deku.Attribute.cb
 
 type OnCopyEffect =
@@ -27,9 +27,9 @@ type OnCopyEffect =
   => FRP.Event.Event (Deku.Attribute.Attribute element)
 
 instance Deku.Attribute.Attr everything OnCopy Deku.Attribute.Cb where
-  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "oncopy", value: _ } <<< Deku.Attribute.cb'
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "copy", value: _ } <<< Deku.Attribute.cb'
 
 instance Deku.Attribute.Attr everything OnCopy (Effect.Effect Data.Unit.Unit) where
-  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "oncopy", value: _ } <<< Deku.Attribute.cb'
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "copy", value: _ } <<< Deku.Attribute.cb'
     <<< Deku.Attribute.cb
     <<< const

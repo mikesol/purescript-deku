@@ -3591,7 +3591,7 @@ _onRepeat
            )
        )
 _onRepeat = Functor.map
-  ( Deku.Attribute.unsafeAttribute <<< { key: "onrepeat", value: _ } <<< Deku.Attribute.cb' <<<
+  ( Deku.Attribute.unsafeAttribute <<< { key: "repeat", value: _ } <<< Deku.Attribute.cb' <<<
       Deku.Attribute.cb
   )
 
@@ -3614,7 +3614,7 @@ _onEnd
            (Index.Indexed (onEnd :: Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit | r))
        )
 _onEnd = Functor.map
-  ( Deku.Attribute.unsafeAttribute <<< { key: "onend", value: _ } <<< Deku.Attribute.cb' <<<
+  ( Deku.Attribute.unsafeAttribute <<< { key: "end", value: _ } <<< Deku.Attribute.cb' <<<
       Deku.Attribute.cb
   )
 
@@ -3637,7 +3637,7 @@ _onBegin
            )
        )
 _onBegin = Functor.map
-  ( Deku.Attribute.unsafeAttribute <<< { key: "onbegin", value: _ } <<< Deku.Attribute.cb' <<<
+  ( Deku.Attribute.unsafeAttribute <<< { key: "begin", value: _ } <<< Deku.Attribute.cb' <<<
       Deku.Attribute.cb
   )
 

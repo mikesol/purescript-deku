@@ -13,13 +13,13 @@ data OnGotpointercapture = OnGotpointercapture
 
 instance Deku.Attribute.Attr everything OnGotpointercapture Data.Unit.Unit where
   attr _ _ = Deku.Attribute.unsafeAttribute
-    { key: "ongotpointercapture", value: Deku.Attribute.unset' }
+    { key: "gotpointercapture", value: Deku.Attribute.unset' }
 
 instance
   Deku.Attribute.Attr everything
     OnGotpointercapture
     (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit) where
-  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "ongotpointercapture", value: _ }
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "gotpointercapture", value: _ }
     <<< Deku.Attribute.cb'
     <<< Deku.Attribute.cb
 
@@ -29,11 +29,11 @@ type OnGotpointercaptureEffect =
   => FRP.Event.Event (Deku.Attribute.Attribute element)
 
 instance Deku.Attribute.Attr everything OnGotpointercapture Deku.Attribute.Cb where
-  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "ongotpointercapture", value: _ } <<<
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "gotpointercapture", value: _ } <<<
     Deku.Attribute.cb'
 
 instance Deku.Attribute.Attr everything OnGotpointercapture (Effect.Effect Data.Unit.Unit) where
-  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "ongotpointercapture", value: _ }
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "gotpointercapture", value: _ }
     <<< Deku.Attribute.cb'
     <<< Deku.Attribute.cb
     <<< const

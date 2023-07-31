@@ -12,14 +12,13 @@ import Data.Function (const)
 data OnTouchstart = OnTouchstart
 
 instance Deku.Attribute.Attr everything OnTouchstart Data.Unit.Unit where
-  attr _ _ = Deku.Attribute.unsafeAttribute { key: "ontouchstart", value: Deku.Attribute.unset' }
+  attr _ _ = Deku.Attribute.unsafeAttribute { key: "touchstart", value: Deku.Attribute.unset' }
 
 instance
   Deku.Attribute.Attr everything
     OnTouchstart
     (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit) where
-  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "ontouchstart", value: _ }
-    <<< Deku.Attribute.cb'
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "touchstart", value: _ } <<< Deku.Attribute.cb'
     <<< Deku.Attribute.cb
 
 type OnTouchstartEffect =
@@ -28,11 +27,9 @@ type OnTouchstartEffect =
   => FRP.Event.Event (Deku.Attribute.Attribute element)
 
 instance Deku.Attribute.Attr everything OnTouchstart Deku.Attribute.Cb where
-  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "ontouchstart", value: _ } <<<
-    Deku.Attribute.cb'
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "touchstart", value: _ } <<< Deku.Attribute.cb'
 
 instance Deku.Attribute.Attr everything OnTouchstart (Effect.Effect Data.Unit.Unit) where
-  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "ontouchstart", value: _ }
-    <<< Deku.Attribute.cb'
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "touchstart", value: _ } <<< Deku.Attribute.cb'
     <<< Deku.Attribute.cb
     <<< const

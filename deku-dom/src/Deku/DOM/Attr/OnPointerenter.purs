@@ -12,13 +12,13 @@ import Data.Function (const)
 data OnPointerenter = OnPointerenter
 
 instance Deku.Attribute.Attr everything OnPointerenter Data.Unit.Unit where
-  attr _ _ = Deku.Attribute.unsafeAttribute { key: "onpointerenter", value: Deku.Attribute.unset' }
+  attr _ _ = Deku.Attribute.unsafeAttribute { key: "pointerenter", value: Deku.Attribute.unset' }
 
 instance
   Deku.Attribute.Attr everything
     OnPointerenter
     (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit) where
-  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "onpointerenter", value: _ }
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "pointerenter", value: _ }
     <<< Deku.Attribute.cb'
     <<< Deku.Attribute.cb
 
@@ -28,11 +28,11 @@ type OnPointerenterEffect =
   => FRP.Event.Event (Deku.Attribute.Attribute element)
 
 instance Deku.Attribute.Attr everything OnPointerenter Deku.Attribute.Cb where
-  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "onpointerenter", value: _ } <<<
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "pointerenter", value: _ } <<<
     Deku.Attribute.cb'
 
 instance Deku.Attribute.Attr everything OnPointerenter (Effect.Effect Data.Unit.Unit) where
-  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "onpointerenter", value: _ }
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "pointerenter", value: _ }
     <<< Deku.Attribute.cb'
     <<< Deku.Attribute.cb
     <<< const

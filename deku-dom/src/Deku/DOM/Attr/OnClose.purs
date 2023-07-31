@@ -12,14 +12,14 @@ import Data.Function (const)
 data OnClose = OnClose
 
 instance Deku.Attribute.Attr everything OnClose Data.Unit.Unit where
-  attr _ _ = Deku.Attribute.unsafeAttribute { key: "onclose", value: Deku.Attribute.unset' }
+  attr _ _ = Deku.Attribute.unsafeAttribute { key: "close", value: Deku.Attribute.unset' }
 
 instance
   Deku.Attribute.Attr everything
     OnClose
     (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit) where
-  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "onclose", value: _ } <<< Deku.Attribute.cb'
-    <<< Deku.Attribute.cb
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "close", value: _ } <<< Deku.Attribute.cb' <<<
+    Deku.Attribute.cb
 
 type OnCloseEffect =
   forall element
@@ -27,9 +27,9 @@ type OnCloseEffect =
   => FRP.Event.Event (Deku.Attribute.Attribute element)
 
 instance Deku.Attribute.Attr everything OnClose Deku.Attribute.Cb where
-  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "onclose", value: _ } <<< Deku.Attribute.cb'
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "close", value: _ } <<< Deku.Attribute.cb'
 
 instance Deku.Attribute.Attr everything OnClose (Effect.Effect Data.Unit.Unit) where
-  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "onclose", value: _ } <<< Deku.Attribute.cb'
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "close", value: _ } <<< Deku.Attribute.cb'
     <<< Deku.Attribute.cb
     <<< const

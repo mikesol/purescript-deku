@@ -12,13 +12,13 @@ import Data.Function (const)
 data OnBeforematch = OnBeforematch
 
 instance Deku.Attribute.Attr everything OnBeforematch Data.Unit.Unit where
-  attr _ _ = Deku.Attribute.unsafeAttribute { key: "onbeforematch", value: Deku.Attribute.unset' }
+  attr _ _ = Deku.Attribute.unsafeAttribute { key: "beforematch", value: Deku.Attribute.unset' }
 
 instance
   Deku.Attribute.Attr everything
     OnBeforematch
     (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit) where
-  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "onbeforematch", value: _ }
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "beforematch", value: _ }
     <<< Deku.Attribute.cb'
     <<< Deku.Attribute.cb
 
@@ -28,11 +28,11 @@ type OnBeforematchEffect =
   => FRP.Event.Event (Deku.Attribute.Attribute element)
 
 instance Deku.Attribute.Attr everything OnBeforematch Deku.Attribute.Cb where
-  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "onbeforematch", value: _ } <<<
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "beforematch", value: _ } <<<
     Deku.Attribute.cb'
 
 instance Deku.Attribute.Attr everything OnBeforematch (Effect.Effect Data.Unit.Unit) where
-  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "onbeforematch", value: _ }
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "beforematch", value: _ }
     <<< Deku.Attribute.cb'
     <<< Deku.Attribute.cb
     <<< const

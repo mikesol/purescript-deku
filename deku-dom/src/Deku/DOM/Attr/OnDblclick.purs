@@ -12,13 +12,13 @@ import Data.Function (const)
 data OnDblclick = OnDblclick
 
 instance Deku.Attribute.Attr everything OnDblclick Data.Unit.Unit where
-  attr _ _ = Deku.Attribute.unsafeAttribute { key: "ondblclick", value: Deku.Attribute.unset' }
+  attr _ _ = Deku.Attribute.unsafeAttribute { key: "dblclick", value: Deku.Attribute.unset' }
 
 instance
   Deku.Attribute.Attr everything
     OnDblclick
     (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit) where
-  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "ondblclick", value: _ } <<< Deku.Attribute.cb'
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "dblclick", value: _ } <<< Deku.Attribute.cb'
     <<< Deku.Attribute.cb
 
 type OnDblclickEffect =
@@ -27,9 +27,9 @@ type OnDblclickEffect =
   => FRP.Event.Event (Deku.Attribute.Attribute element)
 
 instance Deku.Attribute.Attr everything OnDblclick Deku.Attribute.Cb where
-  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "ondblclick", value: _ } <<< Deku.Attribute.cb'
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "dblclick", value: _ } <<< Deku.Attribute.cb'
 
 instance Deku.Attribute.Attr everything OnDblclick (Effect.Effect Data.Unit.Unit) where
-  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "ondblclick", value: _ } <<< Deku.Attribute.cb'
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "dblclick", value: _ } <<< Deku.Attribute.cb'
     <<< Deku.Attribute.cb
     <<< const

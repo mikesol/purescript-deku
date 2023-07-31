@@ -12,14 +12,14 @@ import Data.Function (const)
 data OnSelect = OnSelect
 
 instance Deku.Attribute.Attr everything OnSelect Data.Unit.Unit where
-  attr _ _ = Deku.Attribute.unsafeAttribute { key: "onselect", value: Deku.Attribute.unset' }
+  attr _ _ = Deku.Attribute.unsafeAttribute { key: "select", value: Deku.Attribute.unset' }
 
 instance
   Deku.Attribute.Attr everything
     OnSelect
     (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit) where
-  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "onselect", value: _ } <<< Deku.Attribute.cb'
-    <<< Deku.Attribute.cb
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "select", value: _ } <<< Deku.Attribute.cb' <<<
+    Deku.Attribute.cb
 
 type OnSelectEffect =
   forall element
@@ -27,9 +27,9 @@ type OnSelectEffect =
   => FRP.Event.Event (Deku.Attribute.Attribute element)
 
 instance Deku.Attribute.Attr everything OnSelect Deku.Attribute.Cb where
-  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "onselect", value: _ } <<< Deku.Attribute.cb'
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "select", value: _ } <<< Deku.Attribute.cb'
 
 instance Deku.Attribute.Attr everything OnSelect (Effect.Effect Data.Unit.Unit) where
-  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "onselect", value: _ } <<< Deku.Attribute.cb'
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "select", value: _ } <<< Deku.Attribute.cb'
     <<< Deku.Attribute.cb
     <<< const

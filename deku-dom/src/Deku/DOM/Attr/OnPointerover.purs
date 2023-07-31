@@ -12,13 +12,13 @@ import Data.Function (const)
 data OnPointerover = OnPointerover
 
 instance Deku.Attribute.Attr everything OnPointerover Data.Unit.Unit where
-  attr _ _ = Deku.Attribute.unsafeAttribute { key: "onpointerover", value: Deku.Attribute.unset' }
+  attr _ _ = Deku.Attribute.unsafeAttribute { key: "pointerover", value: Deku.Attribute.unset' }
 
 instance
   Deku.Attribute.Attr everything
     OnPointerover
     (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit) where
-  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "onpointerover", value: _ }
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "pointerover", value: _ }
     <<< Deku.Attribute.cb'
     <<< Deku.Attribute.cb
 
@@ -28,11 +28,11 @@ type OnPointeroverEffect =
   => FRP.Event.Event (Deku.Attribute.Attribute element)
 
 instance Deku.Attribute.Attr everything OnPointerover Deku.Attribute.Cb where
-  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "onpointerover", value: _ } <<<
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "pointerover", value: _ } <<<
     Deku.Attribute.cb'
 
 instance Deku.Attribute.Attr everything OnPointerover (Effect.Effect Data.Unit.Unit) where
-  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "onpointerover", value: _ }
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "pointerover", value: _ }
     <<< Deku.Attribute.cb'
     <<< Deku.Attribute.cb
     <<< const

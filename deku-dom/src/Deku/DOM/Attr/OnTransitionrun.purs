@@ -12,13 +12,13 @@ import Data.Function (const)
 data OnTransitionrun = OnTransitionrun
 
 instance Deku.Attribute.Attr everything OnTransitionrun Data.Unit.Unit where
-  attr _ _ = Deku.Attribute.unsafeAttribute { key: "ontransitionrun", value: Deku.Attribute.unset' }
+  attr _ _ = Deku.Attribute.unsafeAttribute { key: "transitionrun", value: Deku.Attribute.unset' }
 
 instance
   Deku.Attribute.Attr everything
     OnTransitionrun
     (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit) where
-  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "ontransitionrun", value: _ }
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "transitionrun", value: _ }
     <<< Deku.Attribute.cb'
     <<< Deku.Attribute.cb
 
@@ -28,11 +28,11 @@ type OnTransitionrunEffect =
   => FRP.Event.Event (Deku.Attribute.Attribute element)
 
 instance Deku.Attribute.Attr everything OnTransitionrun Deku.Attribute.Cb where
-  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "ontransitionrun", value: _ } <<<
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "transitionrun", value: _ } <<<
     Deku.Attribute.cb'
 
 instance Deku.Attribute.Attr everything OnTransitionrun (Effect.Effect Data.Unit.Unit) where
-  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "ontransitionrun", value: _ }
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "transitionrun", value: _ }
     <<< Deku.Attribute.cb'
     <<< Deku.Attribute.cb
     <<< const

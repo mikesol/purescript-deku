@@ -17,7 +17,7 @@ import Data.Function (const)
 data OnEnd = OnEnd
 
 instance Deku.Attribute.Attr everything OnEnd Data.Unit.Unit where
-  attr _ _ = Deku.Attribute.unsafeAttribute { key: "onend", value: Deku.Attribute.unset' }
+  attr _ _ = Deku.Attribute.unsafeAttribute { key: "end", value: Deku.Attribute.unset' }
 
 type OnEndEffect =
   forall element
@@ -28,14 +28,14 @@ instance
   Deku.Attribute.Attr Animate_
     OnEnd
     (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit) where
-  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "onend", value: _ } <<< Deku.Attribute.cb' <<<
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "end", value: _ } <<< Deku.Attribute.cb' <<<
     Deku.Attribute.cb
 
 instance Deku.Attribute.Attr Animate_ OnEnd Deku.Attribute.Cb where
-  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "onend", value: _ } <<< Deku.Attribute.cb'
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "end", value: _ } <<< Deku.Attribute.cb'
 
 instance Deku.Attribute.Attr Animate_ OnEnd (Effect.Effect Data.Unit.Unit) where
-  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "onend", value: _ } <<< Deku.Attribute.cb'
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "end", value: _ } <<< Deku.Attribute.cb'
     <<< Deku.Attribute.cb
     <<< const
 
@@ -43,14 +43,14 @@ instance
   Deku.Attribute.Attr AnimateMotion_
     OnEnd
     (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit) where
-  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "onend", value: _ } <<< Deku.Attribute.cb' <<<
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "end", value: _ } <<< Deku.Attribute.cb' <<<
     Deku.Attribute.cb
 
 instance Deku.Attribute.Attr AnimateMotion_ OnEnd Deku.Attribute.Cb where
-  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "onend", value: _ } <<< Deku.Attribute.cb'
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "end", value: _ } <<< Deku.Attribute.cb'
 
 instance Deku.Attribute.Attr AnimateMotion_ OnEnd (Effect.Effect Data.Unit.Unit) where
-  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "onend", value: _ } <<< Deku.Attribute.cb'
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "end", value: _ } <<< Deku.Attribute.cb'
     <<< Deku.Attribute.cb
     <<< const
 
@@ -58,14 +58,14 @@ instance
   Deku.Attribute.Attr AnimateTransform_
     OnEnd
     (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit) where
-  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "onend", value: _ } <<< Deku.Attribute.cb' <<<
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "end", value: _ } <<< Deku.Attribute.cb' <<<
     Deku.Attribute.cb
 
 instance Deku.Attribute.Attr AnimateTransform_ OnEnd Deku.Attribute.Cb where
-  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "onend", value: _ } <<< Deku.Attribute.cb'
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "end", value: _ } <<< Deku.Attribute.cb'
 
 instance Deku.Attribute.Attr AnimateTransform_ OnEnd (Effect.Effect Data.Unit.Unit) where
-  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "onend", value: _ } <<< Deku.Attribute.cb'
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "end", value: _ } <<< Deku.Attribute.cb'
     <<< Deku.Attribute.cb
     <<< const
 
@@ -73,26 +73,26 @@ instance
   Deku.Attribute.Attr Discard_
     OnEnd
     (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit) where
-  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "onend", value: _ } <<< Deku.Attribute.cb' <<<
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "end", value: _ } <<< Deku.Attribute.cb' <<<
     Deku.Attribute.cb
 
 instance Deku.Attribute.Attr Discard_ OnEnd Deku.Attribute.Cb where
-  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "onend", value: _ } <<< Deku.Attribute.cb'
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "end", value: _ } <<< Deku.Attribute.cb'
 
 instance Deku.Attribute.Attr Discard_ OnEnd (Effect.Effect Data.Unit.Unit) where
-  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "onend", value: _ } <<< Deku.Attribute.cb'
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "end", value: _ } <<< Deku.Attribute.cb'
     <<< Deku.Attribute.cb
     <<< const
 
 instance
   Deku.Attribute.Attr Set_ OnEnd (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit) where
-  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "onend", value: _ } <<< Deku.Attribute.cb' <<<
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "end", value: _ } <<< Deku.Attribute.cb' <<<
     Deku.Attribute.cb
 
 instance Deku.Attribute.Attr Set_ OnEnd Deku.Attribute.Cb where
-  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "onend", value: _ } <<< Deku.Attribute.cb'
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "end", value: _ } <<< Deku.Attribute.cb'
 
 instance Deku.Attribute.Attr Set_ OnEnd (Effect.Effect Data.Unit.Unit) where
-  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "onend", value: _ } <<< Deku.Attribute.cb'
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "end", value: _ } <<< Deku.Attribute.cb'
     <<< Deku.Attribute.cb
     <<< const

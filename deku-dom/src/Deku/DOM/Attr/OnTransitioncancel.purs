@@ -13,13 +13,13 @@ data OnTransitioncancel = OnTransitioncancel
 
 instance Deku.Attribute.Attr everything OnTransitioncancel Data.Unit.Unit where
   attr _ _ = Deku.Attribute.unsafeAttribute
-    { key: "ontransitioncancel", value: Deku.Attribute.unset' }
+    { key: "transitioncancel", value: Deku.Attribute.unset' }
 
 instance
   Deku.Attribute.Attr everything
     OnTransitioncancel
     (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit) where
-  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "ontransitioncancel", value: _ }
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "transitioncancel", value: _ }
     <<< Deku.Attribute.cb'
     <<< Deku.Attribute.cb
 
@@ -29,11 +29,11 @@ type OnTransitioncancelEffect =
   => FRP.Event.Event (Deku.Attribute.Attribute element)
 
 instance Deku.Attribute.Attr everything OnTransitioncancel Deku.Attribute.Cb where
-  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "ontransitioncancel", value: _ } <<<
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "transitioncancel", value: _ } <<<
     Deku.Attribute.cb'
 
 instance Deku.Attribute.Attr everything OnTransitioncancel (Effect.Effect Data.Unit.Unit) where
-  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "ontransitioncancel", value: _ }
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "transitioncancel", value: _ }
     <<< Deku.Attribute.cb'
     <<< Deku.Attribute.cb
     <<< const

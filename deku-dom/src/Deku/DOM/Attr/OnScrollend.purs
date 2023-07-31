@@ -12,14 +12,13 @@ import Data.Function (const)
 data OnScrollend = OnScrollend
 
 instance Deku.Attribute.Attr everything OnScrollend Data.Unit.Unit where
-  attr _ _ = Deku.Attribute.unsafeAttribute { key: "onscrollend", value: Deku.Attribute.unset' }
+  attr _ _ = Deku.Attribute.unsafeAttribute { key: "scrollend", value: Deku.Attribute.unset' }
 
 instance
   Deku.Attribute.Attr everything
     OnScrollend
     (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit) where
-  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "onscrollend", value: _ }
-    <<< Deku.Attribute.cb'
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "scrollend", value: _ } <<< Deku.Attribute.cb'
     <<< Deku.Attribute.cb
 
 type OnScrollendEffect =
@@ -28,11 +27,9 @@ type OnScrollendEffect =
   => FRP.Event.Event (Deku.Attribute.Attribute element)
 
 instance Deku.Attribute.Attr everything OnScrollend Deku.Attribute.Cb where
-  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "onscrollend", value: _ } <<<
-    Deku.Attribute.cb'
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "scrollend", value: _ } <<< Deku.Attribute.cb'
 
 instance Deku.Attribute.Attr everything OnScrollend (Effect.Effect Data.Unit.Unit) where
-  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "onscrollend", value: _ }
-    <<< Deku.Attribute.cb'
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "scrollend", value: _ } <<< Deku.Attribute.cb'
     <<< Deku.Attribute.cb
     <<< const

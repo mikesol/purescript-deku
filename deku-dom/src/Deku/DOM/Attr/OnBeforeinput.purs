@@ -12,13 +12,13 @@ import Data.Function (const)
 data OnBeforeinput = OnBeforeinput
 
 instance Deku.Attribute.Attr everything OnBeforeinput Data.Unit.Unit where
-  attr _ _ = Deku.Attribute.unsafeAttribute { key: "onbeforeinput", value: Deku.Attribute.unset' }
+  attr _ _ = Deku.Attribute.unsafeAttribute { key: "beforeinput", value: Deku.Attribute.unset' }
 
 instance
   Deku.Attribute.Attr everything
     OnBeforeinput
     (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit) where
-  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "onbeforeinput", value: _ }
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "beforeinput", value: _ }
     <<< Deku.Attribute.cb'
     <<< Deku.Attribute.cb
 
@@ -28,11 +28,11 @@ type OnBeforeinputEffect =
   => FRP.Event.Event (Deku.Attribute.Attribute element)
 
 instance Deku.Attribute.Attr everything OnBeforeinput Deku.Attribute.Cb where
-  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "onbeforeinput", value: _ } <<<
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "beforeinput", value: _ } <<<
     Deku.Attribute.cb'
 
 instance Deku.Attribute.Attr everything OnBeforeinput (Effect.Effect Data.Unit.Unit) where
-  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "onbeforeinput", value: _ }
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "beforeinput", value: _ }
     <<< Deku.Attribute.cb'
     <<< Deku.Attribute.cb
     <<< const

@@ -12,13 +12,13 @@ import Data.Function (const)
 data OnPointercancel = OnPointercancel
 
 instance Deku.Attribute.Attr everything OnPointercancel Data.Unit.Unit where
-  attr _ _ = Deku.Attribute.unsafeAttribute { key: "onpointercancel", value: Deku.Attribute.unset' }
+  attr _ _ = Deku.Attribute.unsafeAttribute { key: "pointercancel", value: Deku.Attribute.unset' }
 
 instance
   Deku.Attribute.Attr everything
     OnPointercancel
     (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit) where
-  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "onpointercancel", value: _ }
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "pointercancel", value: _ }
     <<< Deku.Attribute.cb'
     <<< Deku.Attribute.cb
 
@@ -28,11 +28,11 @@ type OnPointercancelEffect =
   => FRP.Event.Event (Deku.Attribute.Attribute element)
 
 instance Deku.Attribute.Attr everything OnPointercancel Deku.Attribute.Cb where
-  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "onpointercancel", value: _ } <<<
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "pointercancel", value: _ } <<<
     Deku.Attribute.cb'
 
 instance Deku.Attribute.Attr everything OnPointercancel (Effect.Effect Data.Unit.Unit) where
-  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "onpointercancel", value: _ }
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "pointercancel", value: _ }
     <<< Deku.Attribute.cb'
     <<< Deku.Attribute.cb
     <<< const

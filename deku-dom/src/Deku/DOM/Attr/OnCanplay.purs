@@ -12,13 +12,13 @@ import Data.Function (const)
 data OnCanplay = OnCanplay
 
 instance Deku.Attribute.Attr everything OnCanplay Data.Unit.Unit where
-  attr _ _ = Deku.Attribute.unsafeAttribute { key: "oncanplay", value: Deku.Attribute.unset' }
+  attr _ _ = Deku.Attribute.unsafeAttribute { key: "canplay", value: Deku.Attribute.unset' }
 
 instance
   Deku.Attribute.Attr everything
     OnCanplay
     (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit) where
-  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "oncanplay", value: _ } <<< Deku.Attribute.cb'
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "canplay", value: _ } <<< Deku.Attribute.cb'
     <<< Deku.Attribute.cb
 
 type OnCanplayEffect =
@@ -27,9 +27,9 @@ type OnCanplayEffect =
   => FRP.Event.Event (Deku.Attribute.Attribute element)
 
 instance Deku.Attribute.Attr everything OnCanplay Deku.Attribute.Cb where
-  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "oncanplay", value: _ } <<< Deku.Attribute.cb'
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "canplay", value: _ } <<< Deku.Attribute.cb'
 
 instance Deku.Attribute.Attr everything OnCanplay (Effect.Effect Data.Unit.Unit) where
-  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "oncanplay", value: _ } <<< Deku.Attribute.cb'
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "canplay", value: _ } <<< Deku.Attribute.cb'
     <<< Deku.Attribute.cb
     <<< const

@@ -12,14 +12,14 @@ import Data.Function (const)
 data OnWheel = OnWheel
 
 instance Deku.Attribute.Attr everything OnWheel Data.Unit.Unit where
-  attr _ _ = Deku.Attribute.unsafeAttribute { key: "onwheel", value: Deku.Attribute.unset' }
+  attr _ _ = Deku.Attribute.unsafeAttribute { key: "wheel", value: Deku.Attribute.unset' }
 
 instance
   Deku.Attribute.Attr everything
     OnWheel
     (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit) where
-  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "onwheel", value: _ } <<< Deku.Attribute.cb'
-    <<< Deku.Attribute.cb
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "wheel", value: _ } <<< Deku.Attribute.cb' <<<
+    Deku.Attribute.cb
 
 type OnWheelEffect =
   forall element
@@ -27,9 +27,9 @@ type OnWheelEffect =
   => FRP.Event.Event (Deku.Attribute.Attribute element)
 
 instance Deku.Attribute.Attr everything OnWheel Deku.Attribute.Cb where
-  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "onwheel", value: _ } <<< Deku.Attribute.cb'
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "wheel", value: _ } <<< Deku.Attribute.cb'
 
 instance Deku.Attribute.Attr everything OnWheel (Effect.Effect Data.Unit.Unit) where
-  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "onwheel", value: _ } <<< Deku.Attribute.cb'
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "wheel", value: _ } <<< Deku.Attribute.cb'
     <<< Deku.Attribute.cb
     <<< const

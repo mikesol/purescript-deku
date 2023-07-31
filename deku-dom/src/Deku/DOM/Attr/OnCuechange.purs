@@ -12,14 +12,13 @@ import Data.Function (const)
 data OnCuechange = OnCuechange
 
 instance Deku.Attribute.Attr everything OnCuechange Data.Unit.Unit where
-  attr _ _ = Deku.Attribute.unsafeAttribute { key: "oncuechange", value: Deku.Attribute.unset' }
+  attr _ _ = Deku.Attribute.unsafeAttribute { key: "cuechange", value: Deku.Attribute.unset' }
 
 instance
   Deku.Attribute.Attr everything
     OnCuechange
     (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit) where
-  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "oncuechange", value: _ }
-    <<< Deku.Attribute.cb'
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "cuechange", value: _ } <<< Deku.Attribute.cb'
     <<< Deku.Attribute.cb
 
 type OnCuechangeEffect =
@@ -28,11 +27,9 @@ type OnCuechangeEffect =
   => FRP.Event.Event (Deku.Attribute.Attribute element)
 
 instance Deku.Attribute.Attr everything OnCuechange Deku.Attribute.Cb where
-  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "oncuechange", value: _ } <<<
-    Deku.Attribute.cb'
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "cuechange", value: _ } <<< Deku.Attribute.cb'
 
 instance Deku.Attribute.Attr everything OnCuechange (Effect.Effect Data.Unit.Unit) where
-  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "oncuechange", value: _ }
-    <<< Deku.Attribute.cb'
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "cuechange", value: _ } <<< Deku.Attribute.cb'
     <<< Deku.Attribute.cb
     <<< const

@@ -13,13 +13,13 @@ data OnWebkitanimationstart = OnWebkitanimationstart
 
 instance Deku.Attribute.Attr everything OnWebkitanimationstart Data.Unit.Unit where
   attr _ _ = Deku.Attribute.unsafeAttribute
-    { key: "onwebkitanimationstart", value: Deku.Attribute.unset' }
+    { key: "webkitanimationstart", value: Deku.Attribute.unset' }
 
 instance
   Deku.Attribute.Attr everything
     OnWebkitanimationstart
     (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit) where
-  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "onwebkitanimationstart", value: _ }
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "webkitanimationstart", value: _ }
     <<< Deku.Attribute.cb'
     <<< Deku.Attribute.cb
 
@@ -29,11 +29,11 @@ type OnWebkitanimationstartEffect =
   => FRP.Event.Event (Deku.Attribute.Attribute element)
 
 instance Deku.Attribute.Attr everything OnWebkitanimationstart Deku.Attribute.Cb where
-  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "onwebkitanimationstart", value: _ } <<<
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "webkitanimationstart", value: _ } <<<
     Deku.Attribute.cb'
 
 instance Deku.Attribute.Attr everything OnWebkitanimationstart (Effect.Effect Data.Unit.Unit) where
-  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "onwebkitanimationstart", value: _ }
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "webkitanimationstart", value: _ }
     <<< Deku.Attribute.cb'
     <<< Deku.Attribute.cb
     <<< const

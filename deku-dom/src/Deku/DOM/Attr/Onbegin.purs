@@ -17,7 +17,7 @@ import Data.Function (const)
 data OnBegin = OnBegin
 
 instance Deku.Attribute.Attr everything OnBegin Data.Unit.Unit where
-  attr _ _ = Deku.Attribute.unsafeAttribute { key: "onbegin", value: Deku.Attribute.unset' }
+  attr _ _ = Deku.Attribute.unsafeAttribute { key: "begin", value: Deku.Attribute.unset' }
 
 type OnBeginEffect =
   forall element
@@ -28,14 +28,14 @@ instance
   Deku.Attribute.Attr Animate_
     OnBegin
     (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit) where
-  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "onbegin", value: _ } <<< Deku.Attribute.cb'
-    <<< Deku.Attribute.cb
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "begin", value: _ } <<< Deku.Attribute.cb' <<<
+    Deku.Attribute.cb
 
 instance Deku.Attribute.Attr Animate_ OnBegin Deku.Attribute.Cb where
-  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "onbegin", value: _ } <<< Deku.Attribute.cb'
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "begin", value: _ } <<< Deku.Attribute.cb'
 
 instance Deku.Attribute.Attr Animate_ OnBegin (Effect.Effect Data.Unit.Unit) where
-  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "onbegin", value: _ } <<< Deku.Attribute.cb'
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "begin", value: _ } <<< Deku.Attribute.cb'
     <<< Deku.Attribute.cb
     <<< const
 
@@ -43,14 +43,14 @@ instance
   Deku.Attribute.Attr AnimateMotion_
     OnBegin
     (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit) where
-  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "onbegin", value: _ } <<< Deku.Attribute.cb'
-    <<< Deku.Attribute.cb
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "begin", value: _ } <<< Deku.Attribute.cb' <<<
+    Deku.Attribute.cb
 
 instance Deku.Attribute.Attr AnimateMotion_ OnBegin Deku.Attribute.Cb where
-  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "onbegin", value: _ } <<< Deku.Attribute.cb'
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "begin", value: _ } <<< Deku.Attribute.cb'
 
 instance Deku.Attribute.Attr AnimateMotion_ OnBegin (Effect.Effect Data.Unit.Unit) where
-  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "onbegin", value: _ } <<< Deku.Attribute.cb'
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "begin", value: _ } <<< Deku.Attribute.cb'
     <<< Deku.Attribute.cb
     <<< const
 
@@ -58,14 +58,14 @@ instance
   Deku.Attribute.Attr AnimateTransform_
     OnBegin
     (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit) where
-  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "onbegin", value: _ } <<< Deku.Attribute.cb'
-    <<< Deku.Attribute.cb
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "begin", value: _ } <<< Deku.Attribute.cb' <<<
+    Deku.Attribute.cb
 
 instance Deku.Attribute.Attr AnimateTransform_ OnBegin Deku.Attribute.Cb where
-  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "onbegin", value: _ } <<< Deku.Attribute.cb'
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "begin", value: _ } <<< Deku.Attribute.cb'
 
 instance Deku.Attribute.Attr AnimateTransform_ OnBegin (Effect.Effect Data.Unit.Unit) where
-  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "onbegin", value: _ } <<< Deku.Attribute.cb'
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "begin", value: _ } <<< Deku.Attribute.cb'
     <<< Deku.Attribute.cb
     <<< const
 
@@ -73,26 +73,26 @@ instance
   Deku.Attribute.Attr Discard_
     OnBegin
     (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit) where
-  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "onbegin", value: _ } <<< Deku.Attribute.cb'
-    <<< Deku.Attribute.cb
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "begin", value: _ } <<< Deku.Attribute.cb' <<<
+    Deku.Attribute.cb
 
 instance Deku.Attribute.Attr Discard_ OnBegin Deku.Attribute.Cb where
-  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "onbegin", value: _ } <<< Deku.Attribute.cb'
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "begin", value: _ } <<< Deku.Attribute.cb'
 
 instance Deku.Attribute.Attr Discard_ OnBegin (Effect.Effect Data.Unit.Unit) where
-  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "onbegin", value: _ } <<< Deku.Attribute.cb'
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "begin", value: _ } <<< Deku.Attribute.cb'
     <<< Deku.Attribute.cb
     <<< const
 
 instance
   Deku.Attribute.Attr Set_ OnBegin (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit) where
-  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "onbegin", value: _ } <<< Deku.Attribute.cb'
-    <<< Deku.Attribute.cb
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "begin", value: _ } <<< Deku.Attribute.cb' <<<
+    Deku.Attribute.cb
 
 instance Deku.Attribute.Attr Set_ OnBegin Deku.Attribute.Cb where
-  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "onbegin", value: _ } <<< Deku.Attribute.cb'
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "begin", value: _ } <<< Deku.Attribute.cb'
 
 instance Deku.Attribute.Attr Set_ OnBegin (Effect.Effect Data.Unit.Unit) where
-  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "onbegin", value: _ } <<< Deku.Attribute.cb'
+  attr _ = Deku.Attribute.unsafeAttribute <<< { key: "begin", value: _ } <<< Deku.Attribute.cb'
     <<< Deku.Attribute.cb
     <<< const
