@@ -198,7 +198,7 @@ describe('deku', () => {
     $('#incr').trigger("click");
     // shifts the portal
     expect($('#maindiv').text()).toBe('d0d1d2abcincr');
-  }));
+  }), false);
 
   doTest('global portals retain portalness when sent out of scope', (f) => f(tests.globalPortalsRetainPortalnessWhenSentOutOfScope, () => {
     const $ = require('jquery');
@@ -330,4 +330,3 @@ describe('deku', () => {
     expect($('#mydiv2').text()).toBe('49');
   }));
 });
-
